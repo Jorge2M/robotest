@@ -3,6 +3,9 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 
 public class ModalDirecFactura extends ModalDireccion {
 
@@ -20,14 +23,14 @@ public class ModalDirecFactura extends ModalDireccion {
     public static void selectProvincia(String provincia, WebDriver driver) {
         selectProvincia(provincia, XPathFormModal, driver);
     } 
-    
-    public static boolean isVisibleFormUntil(int maxSecondsToWait, WebDriver driver) {
-        return isElementVisibleUntil(driver, By.xpath(XPathFormModal), maxSecondsToWait); 
-    }
-    
-    public static boolean isVisibleButtonActualizar(WebDriver driver) {
-        return isElementVisible(driver, By.xpath(XPathButtonUpdate));
-    }
+
+	public static boolean isVisibleFormUntil(int maxSeconds, WebDriver driver) {
+		return (state(Visible, By.xpath(XPathFormModal), driver).wait(maxSeconds).check());
+	}
+
+	public static boolean isVisibleButtonActualizar(WebDriver driver) {
+		return (state(Visible, By.xpath(XPathButtonUpdate), driver).check());
+	}
 
 	public static void clickActualizar(WebDriver driver) throws Exception {
 		clickAndWaitLoad(driver, By.xpath(XPathButtonUpdate));

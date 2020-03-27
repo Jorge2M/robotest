@@ -16,7 +16,8 @@ import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
@@ -27,7 +28,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper
  * @author jorge.munoz
  *
  */
-public class PageFavoritos extends WebdrvWrapp {
+public class PageFavoritos {
   
     private final WebDriver driver;
 	private final ModalFichaFavoritos modalFichaFavoritos;
@@ -95,39 +96,42 @@ public class PageFavoritos extends WebdrvWrapp {
     }
     
     public void closeShareModal() throws Exception {
-    	WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(xPathCloseShareModalButton), TypeOfClick.javascript);
+    	clickAndWaitLoad(driver, By.xpath(xPathCloseShareModalButton), TypeOfClick.javascript);
     }
     
     public boolean checkShareModalUntill(int maxSeconds) {
-    	return (isElementVisibleUntil(driver, By.xpath(xPathCloseShareModalButton), maxSeconds));
+    	return (state(Visible, By.xpath(xPathCloseShareModalButton), driver)
+    			.wait(maxSeconds).check());
     }
     
     public boolean isShareFavoritesVisible() {
-    	return (isElementVisible(driver, By.xpath(xPathShareModalButton)));
+    	return (state(Visible, By.xpath(xPathShareModalButton), driver).check());
     }
     
     public boolean isShareWhatsappFavoritesVisible() {
-    	return (isElementVisible(driver, By.xpath(xPathWhatsAppShareButton)));
+    	return (state(Visible, By.xpath(xPathWhatsAppShareButton), driver).check());
     }
     
     public boolean isShareTelegramFavoritesVisible() {
-    	return (isElementVisible(driver, By.xpath(xPathTelegramShareButton)));
+    	return (state(Visible, By.xpath(xPathTelegramShareButton), driver).check());
     }
     
     public boolean isShareUrlFavoritesVisible() {
-    	return (isElementVisible(driver, By.xpath(xPathUrlShareLabel)));
+    	return (state(Visible, By.xpath(xPathUrlShareLabel), driver).check());
     }
     
-    public boolean checkShareModalInvisible(int secondsToWait) {
-    	return (isElementInvisibleUntil(driver, By.xpath(xPathCloseShareModalButton), secondsToWait));
+    public boolean checkShareModalInvisible(int maxSeconds) {
+    	return (state(Invisible, By.xpath(xPathCloseShareModalButton), driver)
+    			.wait(maxSeconds).check());
     }
 
     public boolean isSectionVisible() {
-        return (isElementVisible(driver, By.xpath(XPathBlockFavoritos)));
+    	return (state(Visible, By.xpath(XPathBlockFavoritos), driver).check());
     }
     
-    public boolean isSectionArticlesVisibleUntil(int maxSecondsToWait) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathBlockFavWithArt), maxSecondsToWait));
+    public boolean isSectionArticlesVisibleUntil(int maxSeconds) {
+    	return (state(Visible, By.xpath(XPathBlockFavWithArt), driver)
+    			.wait(maxSeconds).check());
     }
     
     public void clearArticuloAndWait(String refArticulo, String codColorArticulo) throws Exception {
@@ -137,9 +141,10 @@ public class PageFavoritos extends WebdrvWrapp {
         clickAndWaitLoad(driver, By.xpath(xpathBorrar), TypeOfClick.javascript);
     }
     
-    public boolean isInvisibleArticleUntil(String referencia, String codColor, int maxSecondsToWait) {
+    public boolean isInvisibleArticleUntil(String referencia, String codColor, int maxSeconds) {
         String xpathArticulo = getXPathArticle(referencia, codColor);
-        return (isElementInvisibleUntil(driver, By.xpath(xpathArticulo), maxSecondsToWait));
+        return (state(Invisible, By.xpath(xpathArticulo), driver)
+        		.wait(maxSeconds).check());
     }
     
     @SuppressWarnings("static-access")
@@ -157,7 +162,7 @@ public class PageFavoritos extends WebdrvWrapp {
     }
     
     public boolean hayArticulos() {
-        return (isElementPresent(driver, By.xpath(XPathArticulo)));
+    	return (state(Present, By.xpath(XPathArticulo), driver).check());
     }
     
     public boolean areVisibleArticlesUntil(DataFavoritos dataFavoritos, int maxSecondsToWait) {
@@ -176,9 +181,10 @@ public class PageFavoritos extends WebdrvWrapp {
         return true;
     }
     
-    public boolean isVisibleArticleUntil(String refArticulo, String codigoColor, int maxSecondsToWait) {
+    public boolean isVisibleArticleUntil(String refArticulo, String codigoColor, int maxSeconds) {
         String xpathArt = getXPathArticle(refArticulo, codigoColor);
-        return (isElementVisibleUntil(driver, By.xpath(xpathArt), maxSecondsToWait));
+        return (state(Visible, By.xpath(xpathArt), driver)
+        		.wait(maxSeconds).check());
     }
     
     public void clear1rstArticuloAndWait() throws Exception {
@@ -233,7 +239,7 @@ public class PageFavoritos extends WebdrvWrapp {
         List<WebElement> listTallas = getListaTallas(refProducto, codigoColor);
         List<WebElement> listTallasAvailable = new ArrayList<>();
         for (WebElement talla : listTallas) {
-            if (!isElementPresent(talla, By.xpath("./span"))) {
+        	if (!state(Present, By.xpath("./span"), driver).check()) {
                 listTallasAvailable.add(talla);
             }
         }
@@ -250,6 +256,6 @@ public class PageFavoritos extends WebdrvWrapp {
     }
     
     public boolean isVisibleButtonEmpty() {
-        return (isElementVisible(driver, By.xpath(XPathButtonEmpty)));
+    	return (state(Visible, By.xpath(XPathButtonEmpty), driver).check());
     }
 }

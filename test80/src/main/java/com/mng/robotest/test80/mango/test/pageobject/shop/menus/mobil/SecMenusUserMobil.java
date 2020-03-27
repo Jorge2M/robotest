@@ -3,6 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -47,12 +48,12 @@ public class SecMenusUserMobil extends WebdrvWrapp {
 		}
 	}
     
-    public boolean isMenuInState(MenuUserMobil menu, StateElem state) throws Exception {
+    public boolean isMenuInState(MenuUserMobil menu, State state) throws Exception {
     	secCabecera.clickIconoMenuHamburguerMobil(true);
     	return (isElementInState(menu, state, driver));
     }
     
-    public boolean isMenuInStateUntil(MenuUserMobil menu, StateElem state, int maxSecondsWait) throws Exception {
+    public boolean isMenuInStateUntil(MenuUserMobil menu, State state, int maxSecondsWait) throws Exception {
     	secCabecera.clickIconoMenuHamburguerMobil(true);
     	return (isElementInStateUntil(menu, state, maxSecondsWait, driver));
     }
@@ -62,7 +63,7 @@ public class SecMenusUserMobil extends WebdrvWrapp {
     	clickAndWait(menu, driver);
     }
 
-    public boolean clickMenuIfinState(MenuUserMobil menu, StateElem stateExpected) throws Exception {
+    public boolean clickMenuIfinState(MenuUserMobil menu, State stateExpected) throws Exception {
     	secCabecera.clickIconoMenuHamburguerMobil(true);
         if (isMenuInState(menu, stateExpected)) {
         	moveToElementPage(menu, driver);

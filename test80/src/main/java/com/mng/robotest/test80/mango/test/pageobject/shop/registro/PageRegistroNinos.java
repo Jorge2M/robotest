@@ -6,10 +6,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageRegistroNinos extends WebdrvWrapp {
+public class PageRegistroNinos {
     
     private static final String xpathInputNombre = "//input[@id[contains(.,'cfNameKid')]]";
     private static final String xpathSelectDiaNacimiento = "//select[@id[contains(.,'naciDia')]]";
@@ -19,7 +20,8 @@ public class PageRegistroNinos extends WebdrvWrapp {
     	"//div[@class[contains(.,'registerStepsModal')]]//div[@class='submitContent']//input[@type='submit']";
     
     public static boolean isPageUntil(WebDriver driver, int maxSeconds) {
-        return (isElementPresentUntil(driver, By.xpath("//form[@id[contains(.,'cfKids')]]"), maxSeconds));
+    	String xpath = "//form[@id[contains(.,'cfKids')]]";
+    	return (state(Present, By.xpath(xpath), driver).wait(maxSeconds).check());
     }
     
     public static int getNumInputsNameNino(WebDriver driver) {

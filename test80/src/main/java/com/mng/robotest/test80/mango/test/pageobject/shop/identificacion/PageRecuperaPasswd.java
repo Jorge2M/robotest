@@ -3,11 +3,12 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.identificacion;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.AllPages;
 
 
-public class PageRecuperaPasswd extends WebdrvWrapp {
+public class PageRecuperaPasswd {
     
     static String xpathInputCorreo = "//input[@type='text' and @id[contains(.,'RPemail')]]";
     static String xpathButtonEnviar = "//input[@type='submit' and @id[contains(.,'ResetPassword')]]";
@@ -19,7 +20,7 @@ public class PageRecuperaPasswd extends WebdrvWrapp {
     }
     
     public static boolean isPresentInputCorreo(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(xpathInputCorreo)));
+    	return (state(Present, By.xpath(xpathInputCorreo), driver).check());
     }
     
     public static void inputEmail(String email, WebDriver driver) {
@@ -31,12 +32,13 @@ public class PageRecuperaPasswd extends WebdrvWrapp {
         clickAndWaitLoad(driver, By.xpath(xpathButtonEnviar));
     }
     
-    public static boolean isVisibleRevisaTuEmailUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementVisibleUntil(driver, By.xpath(xpathMsgRevisaTuEmail), maxSecondsToWait));
+    public static boolean isVisibleRevisaTuEmailUntil(int maxSeconds, WebDriver driver) {
+    	return (state(Visible, By.xpath(xpathMsgRevisaTuEmail), driver)
+    			.wait(maxSeconds).check());
     }
 
     public static boolean isVisibleButtonIrDeShopping(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(xpathButtonIrDeShopping)));
+    	return (state(Visible, By.xpath(xpathButtonIrDeShopping), driver).check());
     }
         
 }

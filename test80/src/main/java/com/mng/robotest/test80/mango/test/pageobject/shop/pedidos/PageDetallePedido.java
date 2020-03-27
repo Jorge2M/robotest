@@ -10,26 +10,26 @@ public interface PageDetallePedido {
     	Old, 
     	New;
     	
-        public PageDetallePedido getPageObject() {
+        public PageDetallePedido getPageObject(WebDriver driver) {
         	switch (this) {
         	case Old:
-        		return (new PageDetallePedidoOld());
+        		return (new PageDetallePedidoOld(driver));
         	case New:
         	default:
-        		return (new PageDetallePedidoNew());	
+        		return (new PageDetallePedidoNew(driver));	
         	}	
         } 
     };
     
     public DetallePedido getTypeDetalle();
 	
-    public boolean isPage(WebDriver driver);
+    public boolean isPage();
     
-    public boolean isPresentImporteTotal(String importeTotal, String codPais, WebDriver driver);
+    public boolean isPresentImporteTotal(String importeTotal, String codPais);
     
-    public boolean isVisiblePrendaUntil(int maxSecondsToWait, WebDriver driver) throws Exception;
+    public boolean isVisiblePrendaUntil(int maxSecondsToWait) throws Exception;
     
-    public int getNumPrendas(WebDriver driver);
+    public int getNumPrendas();
     
-    public void clickBackButton(Channel channel, WebDriver driver) throws Exception;
+    public void clickBackButton(Channel channel) throws Exception;
 }

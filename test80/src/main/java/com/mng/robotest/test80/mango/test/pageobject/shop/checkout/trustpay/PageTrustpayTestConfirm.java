@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.trustpay;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageTrustpayTestConfirm extends WebdrvWrapp {
+public class PageTrustpayTestConfirm {
     
     public enum typeButtons {OK, ANNOUNCED, FAIL, PENDING}
     static String XPathButtonOK = "//input[@id='btnOK']";
@@ -31,7 +32,7 @@ public class PageTrustpayTestConfirm extends WebdrvWrapp {
     
     public static boolean isPresentButton(typeButtons typeButton, WebDriver driver) {
         String xpathButton = getXPathButton(typeButton);
-        return (isElementPresent(driver, By.xpath(xpathButton)));
+        return (state(Present, By.xpath(xpathButton), driver).check());
     }
     
     public static void clickButton(typeButtons typeButton, WebDriver driver) throws Exception {

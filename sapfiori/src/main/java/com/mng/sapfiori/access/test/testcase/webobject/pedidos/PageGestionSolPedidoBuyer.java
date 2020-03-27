@@ -9,6 +9,7 @@ import com.mng.sapfiori.access.test.testcase.generic.webobject.elements.inputs.s
 import com.mng.sapfiori.access.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForDefineConditions;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.pages.PageFilter;
 import com.mng.sapfiori.access.test.testcase.webobject.iconsmenu.OptionMenu;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageGestionSolPedidoBuyer extends PageFilter {
 
@@ -43,6 +44,6 @@ public class PageGestionSolPedidoBuyer extends PageFilter {
 	}
 	
 	public boolean checkSolicitudesVisible(int maxSeconds) {
-		return (isElementVisibleUntil(driver, By.xpath(XPathLineaPedido), maxSeconds));
+		return (state(Visible, By.xpath(XPathLineaPedido)).wait(maxSeconds).check());
 	}
 }

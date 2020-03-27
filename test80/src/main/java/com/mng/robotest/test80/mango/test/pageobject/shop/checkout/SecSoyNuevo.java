@@ -5,9 +5,11 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class SecSoyNuevo extends WebdrvWrapp {
+public class SecSoyNuevo {
+	
     public enum ActionNewsL {activate, deactivate}
 
     static String XPathFormIdent = "//form[@id='SVLoginCheck:FRegLogChk']";
@@ -38,16 +40,16 @@ public class SecSoyNuevo extends WebdrvWrapp {
         }
         return XPathBotonContinueDesktop;
     }
-    
-    public static boolean isFormIdentUntil(WebDriver driver, int secondsWait) { 
-        return (isElementPresentUntil(driver, By.xpath(XPathFormIdent), secondsWait));
-    }
-    
-    public static boolean isCheckedPubliNewsletter(WebDriver driver, Channel channel) {
-        String xpathCheckActive = getXPath_checkPubliNewsletter(channel, true/*active*/);
-        return (isElementPresent(driver, By.xpath(xpathCheckActive)));
-    }
-    
+
+	public static boolean isFormIdentUntil(WebDriver driver, int maxSeconds) { 
+		return (state(Present, By.xpath(XPathFormIdent), driver).wait(maxSeconds).check());
+	}
+
+	public static boolean isCheckedPubliNewsletter(WebDriver driver, Channel channel) {
+		String xpathCheckActive = getXPath_checkPubliNewsletter(channel, true/*active*/);
+		return (state(Present, By.xpath(xpathCheckActive), driver).check());
+	}
+
     /**
      * Marca/desmarca el check de la publicidad (Newsletter)
      */
@@ -81,10 +83,10 @@ public class SecSoyNuevo extends WebdrvWrapp {
     }   
     
 	public static boolean isTextoRGPDVisible(WebDriver driver) {
-		return isElementVisible(driver, By.xpath(XPathTextRGPD));
+		return (state(Visible, By.xpath(XPathTextRGPD), driver).check());
 	}
 
 	public static boolean isTextoLegalRGPDVisible(WebDriver driver) {
-		return isElementVisible(driver, By.xpath(XPathLegalRGPD));
+		return (state(Visible, By.xpath(XPathLegalRGPD), driver).check());
 	}
 }

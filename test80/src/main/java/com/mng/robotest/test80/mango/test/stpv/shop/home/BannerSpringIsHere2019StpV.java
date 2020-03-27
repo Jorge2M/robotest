@@ -9,9 +9,11 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.DataBanner;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.ManagerBannersScreen;
 import com.mng.robotest.test80.mango.test.stpv.shop.banner.SecBannersStpV;
@@ -62,7 +64,7 @@ public class BannerSpringIsHere2019StpV {
 			throw new IllegalArgumentException("The circle associated to a campaign must be > 0");
 		}
 		
-	    if (WebdrvWrapp.isElementVisible(driver, By.cssSelector(csselectorSwipperCircle))) {
+		if (state(Visible, By.cssSelector(csselectorSwipperCircle), driver).check()) {
 	    	int firstCircleToClick = 1;
 	    	if (circleAssociatedToCampaign==1) {
 	    		firstCircleToClick=2;

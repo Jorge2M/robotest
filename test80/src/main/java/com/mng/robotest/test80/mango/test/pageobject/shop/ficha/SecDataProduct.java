@@ -18,6 +18,9 @@ import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha.TypeFicha;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
@@ -170,7 +173,7 @@ public class SecDataProduct extends WebdrvWrapp {
     public static String getNombreColorSelected(Channel channel, WebDriver driver) {
         switch (channel) {
         case desktop:
-            if (isElementPresent(driver, By.xpath(XPathNombreColorSelectedDesktop))) {
+        	if (state(Present, By.xpath(XPathNombreColorSelectedDesktop), driver).check()) {
                 return (driver.findElement(By.xpath(XPathNombreColorSelectedDesktop)).getAttribute("alt"));
             }
             return Constantes.colorDesconocido;
@@ -181,7 +184,7 @@ public class SecDataProduct extends WebdrvWrapp {
     }
 
     public static boolean checkPotatoe (WebDriver driver) {
-        return isElementPresent(driver, By.xpath(XPathNombreColorSelectedDesktop));
+    	return (state(Present, By.xpath(XPathNombreColorSelectedDesktop), driver).check());
     }
     
     public static void selectColorWaitingForAvailability(String codigoColor, WebDriver driver) 
@@ -197,7 +200,7 @@ public class SecDataProduct extends WebdrvWrapp {
      */
     public static boolean isClickableColor(String codigoColor, WebDriver driver) {
     	String xpathColor = getXPathPastillaColorClick(codigoColor);
-        return (isElementClickable(driver, By.xpath(xpathColor)));
+    	return (state(Clickable, By.xpath(xpathColor), driver).check());
     }
     
 //Funciones referentes a los precios
@@ -215,12 +218,12 @@ public class SecDataProduct extends WebdrvWrapp {
      * Extrae (si existe) el precio rebajado de la página de ficha de producto. Si no existe devuelve ""
      */
     public static String getPrecioTachadoFromFichaArt(WebDriver driver) {
-        if (isElementPresent(driver, By.xpath(XPathItemsPrecioSinDesc))) {
+    	if (state(Present, By.xpath(XPathItemsPrecioSinDesc), driver).check()) {
             // Entero
             String precioSinDesc = driver.findElement(By.xpath(XPathItemsPrecioSinDesc + "[1]")).getText();
     
             // Decimales
-            if (isElementPresent(driver, By.xpath(XPathItemsPrecioSinDesc + "[2]"))) {
+            if (state(Present, By.xpath(XPathItemsPrecioSinDesc + "[2]"), driver).check()) {
                 precioSinDesc += driver.findElement(By.xpath(XPathItemsPrecioSinDesc + "[2]")).getText();
             }
             return (ImporteScreen.normalizeImportFromScreen(precioSinDesc));
@@ -231,11 +234,11 @@ public class SecDataProduct extends WebdrvWrapp {
     
 //Funciones referentes a las tallas (en algunas se actúa a modo de Wrapper)
     public static boolean isVisibleCapaAvisame(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathCapaAvisame)));
+    	return (state(Visible, By.xpath(XPathCapaAvisame), driver).check());
     }
     
     public static boolean isVisibleAvisoSeleccionTalla(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathMsgAvisoTalla)));
+    	return (state(Visible, By.xpath(XPathMsgAvisoTalla), driver).check());
     }
     
     public static void selectGuiaDeTallasLink(WebDriver driver) throws Exception {
@@ -243,7 +246,7 @@ public class SecDataProduct extends WebdrvWrapp {
     }
     
     public static boolean selectGuiaDeTallasIfVisible(WebDriver driver) throws Exception {
-    	boolean isVisible = isElementVisible(driver, By.xpath(XPathGuiaDeTallasLink)); 
+    	boolean isVisible = state(Visible, By.xpath(XPathGuiaDeTallasLink), driver).check();
     	if (isVisible) {
     		selectGuiaDeTallasLink(driver);
     	}
@@ -343,9 +346,10 @@ public class SecDataProduct extends WebdrvWrapp {
     }    
     
 //Funciones referentes al prev/next
-    public static boolean isVisiblePrevNextUntil(ProductNav productNav, int maxSecondsToWait, WebDriver driver) {
+    public static boolean isVisiblePrevNextUntil(ProductNav productNav, int maxSeconds, WebDriver driver) {
         String xpathLink = getXPathLinkProductNav(productNav);
-        return (isElementVisibleUntil(driver, By.xpath(xpathLink), maxSecondsToWait)); 
+        return (state(Visible, By.xpath(xpathLink), driver)
+        		.wait(maxSeconds).check());
     }
     
     public static void selectLinkNavigation(ProductNav productNav, WebDriver driver) throws Exception {

@@ -6,11 +6,15 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.PageFromFooter;
 
-public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFooter {
+public class PageChequeRegaloInputData extends PageObjTM implements PageFromFooter {
+	
     public enum Importe {euro25, euro50, euro100, euro150, euro200, euro250}
 
     public enum ConsultaSaldo implements ElementPage {
@@ -87,6 +91,10 @@ public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFo
         }
     }
     
+    public PageChequeRegaloInputData(WebDriver driver) {
+    	super(driver);
+    }
+    
     public static String getXPathRadioImporte(Importe importe) {
         return ("//span[text()[contains(.,'" + importe.name().replace("euro", "") + "')]]");
     }
@@ -97,26 +105,25 @@ public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFo
 	}
 	
 	@Override
-	public boolean isPageCorrectUntil(int maxSecondsWait, WebDriver driver) {
-		return (isElementInStateUntil(ElementCheque.paginaForm, StateElem.Present, maxSecondsWait, driver));
+	public boolean isPageCorrectUntil(int maxSecondsWait) {
+		return (isElementInStateUntil(ElementCheque.paginaForm, Present, maxSecondsWait, driver));
 	}
-    
-    public static boolean isPresentInputImportes(WebDriver driver) {
-        for (Importe importe : Importe.values()) {
-            String xpathRadio = getXPathRadioImporte(importe);
-            if (!isElementPresent(driver, By.xpath(xpathRadio))) {
-                return false;
-            }
-        }
-        
-        return true;
-    }
 
-    public static void clickImporteCheque(Importe importeToClick, WebDriver driver) throws  Exception {
+	public boolean isPresentInputImportes() {
+		for (Importe importe : Importe.values()) {
+			String xpathRadio = getXPathRadioImporte(importe);
+			if (!state(Present, By.xpath(xpathRadio)).check()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+    public void clickImporteCheque(Importe importeToClick) throws  Exception {
         clickAndWaitLoad(driver, By.xpath(getXPathRadioImporte(importeToClick)));
     }
 
-    public static void introducirTarjetaConsultaSaldo(WebDriver driver, String numTarjeta) throws Exception {
+    public void introducirTarjetaConsultaSaldo(String numTarjeta) throws Exception {
     	WebElement inputNumTarjeta = driver.findElement(By.xpath(ConsultaSaldo.numeroTarjeta.getXPath()));
     	inputNumTarjeta.clear();
     	inputNumTarjeta.sendKeys(numTarjeta);
@@ -124,21 +131,22 @@ public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFo
         clickAndWait(ConsultaSaldo.validar, driver);
     }
     
-	public static void introducirCvc(String cvvNumber, WebDriver driver) throws Exception {
+	public void introducirCvc(String cvvNumber) throws Exception {
 		WebElement cvvTarjeta = driver.findElement(By.xpath(ConsultaSaldo.cvvTarjeta.getXPath()));
 		cvvTarjeta.clear();
 		cvvTarjeta.sendKeys(cvvNumber);
-		PageChequeRegaloInputData.clickAndWait(ConsultaSaldo.validar, 3, driver);
+		clickAndWait(ConsultaSaldo.validar, 3, driver);
 	}
 
-    public static void clickButtonComprar(ChequeRegalo chequeRegalo, WebDriver driver) throws Exception {
+    public void clickButtonComprar(ChequeRegalo chequeRegalo) throws Exception {
         clickAndWait(ElementCheque.compraAhora, driver);
         
-        //Existe un problema en Firefox-Gecko muy extraño: a veces, después de seleccionar el botón "comprar ahora" te muestra error en todos
-        //los campos de input y no avanza a la siguiente página
+        //Existe un problema en Firefox-Gecko muy extraño: a veces, después de seleccionar el botón "comprar ahora" 
+        //te muestra error en todos los campos de input y no avanza a la siguiente página
         for (int i=0; i<10; i++) {
-        	if (!WebdrvWrapp.isElementInvisibleUntil(driver, By.xpath(ElementCheque.compraAhora.getXPath()), 3)) {
-	        	inputDataCheque(chequeRegalo, driver);
+        	if (!PageObjTM.state(Invisible, By.xpath(ElementCheque.compraAhora.getXPath()), driver)
+        		.wait(3).check()) {
+	        	inputDataCheque(chequeRegalo);
         		clickAndWait(ElementCheque.compraAhora, driver);
 	        } else {
 	        	break;
@@ -146,7 +154,7 @@ public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFo
         }
     }
     
-    public static void inputDataCheque(ChequeRegalo chequeRegalo, WebDriver driver) throws Exception {
+    public void inputDataCheque(ChequeRegalo chequeRegalo) throws Exception {
         inputDataInElement(InputCheque.nombre, chequeRegalo.getNombre(), driver);
         inputDataInElement(InputCheque.apellidos, chequeRegalo.getApellidos(), driver);
         inputDataInElement(InputCheque.email, chequeRegalo.getEmail(), driver);

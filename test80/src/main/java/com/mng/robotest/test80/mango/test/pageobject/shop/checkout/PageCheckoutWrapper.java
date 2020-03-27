@@ -13,6 +13,8 @@ import com.mng.robotest.test80.mango.test.data.Descuento;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.SecMetodoEnvioDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
@@ -24,7 +26,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
  * Clase que define la automatización de las diferentes funcionalidades de la página de "CHECKOUT"
  * @author jorge.munoz 
  */
-public class PageCheckoutWrapper extends WebdrvWrapp {
+public class PageCheckoutWrapper {
  
     public static Page1DktopCheckout page1DktopCheckout;
     public static Page1EnvioCheckoutMobil page1MobilCheckout;
@@ -128,12 +130,12 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
             page1DktopCheckout.inputApellidoPromoEmpl(apellido, driver);
         }
     }    
-    
-    final static String XpathButtonForApplyLoyaltyPoints = "//button[@class[contains(.,'redeem-likes')] and @type='button']";
-    public static boolean isVisibleButtonForApplyLoyaltyPoints(WebDriver driver) {
-    	return WebdrvWrapp.isElementVisible(driver, By.xpath(XpathButtonForApplyLoyaltyPoints));
-    }
-    
+
+	final static String XpathButtonForApplyLoyaltyPoints = "//button[@class[contains(.,'redeem-likes')] and @type='button']";
+	public static boolean isVisibleButtonForApplyLoyaltyPoints(WebDriver driver) {
+		return (state(Visible, By.xpath(XpathButtonForApplyLoyaltyPoints), driver).check());
+	}
+
     public static float applyAndGetLoyaltyPoints(WebDriver driver) throws Exception {
     	By byApplyButton = By.xpath(XpathButtonForApplyLoyaltyPoints);
     	WebElement buttonLoyalty = WebdrvWrapp.getElementsVisible(driver, byApplyButton).get(0);
@@ -143,18 +145,17 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
 		PageCheckoutWrapper.isNoDivLoadingUntil(1, driver);
 		return (ImporteScreen.getFloatFromImporteMangoScreen(importeButton));
     }
-    
-    final static String XPathDiscountLoyaltyAppliedMobil = "//span[@class='redeem-likes__discount']";
-    public static float getDiscountLoyaltyAppliedMobil(WebDriver driver) {
-    	By byDiscountApplied = By.xpath(XPathDiscountLoyaltyAppliedMobil);
-    	if (WebdrvWrapp.isElementVisible(driver, byDiscountApplied)) {
-	    	String discountApplied = driver.findElement(byDiscountApplied).getAttribute("innerHTML");
-	    	return (ImporteScreen.getFloatFromImporteMangoScreen(discountApplied));
-    	}
-    	
-    	return 0;
-    }
-    
+
+	final static String XPathDiscountLoyaltyAppliedMobil = "//span[@class='redeem-likes__discount']";
+	public static float getDiscountLoyaltyAppliedMobil(WebDriver driver) {
+		By byDiscountApplied = By.xpath(XPathDiscountLoyaltyAppliedMobil);
+		if (state(Visible, byDiscountApplied, driver).check()) {
+			String discountApplied = driver.findElement(byDiscountApplied).getAttribute("innerHTML");
+			return (ImporteScreen.getFloatFromImporteMangoScreen(discountApplied));
+		}	
+		return 0;
+	}
+
     /**
      * @param fechaNaci en formato "dd-mm-aaaa"
      */
@@ -256,17 +257,16 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
         return (page1DktopCheckout.getAlmacenFromNoProdEntorn(driver)); 
     }
 
-    /**
-     * Espera hasta que no esté visible ninguna capa de loading
-     */
-    public static boolean waitUntilNoDivLoading(WebDriver driver, int seconds) {
-        return isElementInvisibleUntil(driver, By.xpath(XPathDivLoading), seconds);
-    }
-    
-    public static boolean isNoDivLoadingUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementInvisibleUntil(driver, By.xpath(XPathDivLoading), maxSecondsToWait));
-    }
-    
+	public static boolean waitUntilNoDivLoading(WebDriver driver, int seconds) {
+		return (state(Invisible, By.xpath(XPathDivLoading), driver)
+				.wait(seconds).check());
+	}
+
+	public static boolean isNoDivLoadingUntil(int seconds, WebDriver driver) {
+		return (state(Invisible, By.xpath(XPathDivLoading), driver)
+				.wait(seconds).check());
+	}
+
     /**
      * @return el valor del input value del método de pago (en casos concretos no se corresponde con el nombre del método de pago) 
      */

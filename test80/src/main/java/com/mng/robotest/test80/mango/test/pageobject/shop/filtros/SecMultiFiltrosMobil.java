@@ -12,7 +12,8 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Color;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 
 
@@ -21,7 +22,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
  * @author jorge.munoz
  *
  */
-public class SecMultiFiltrosMobil extends WebdrvWrapp implements SecFiltros {
+public class SecMultiFiltrosMobil implements SecFiltros {
     
 	private final static String XPathFiltrarYOrdenarButton = "//button[@class[contains(.,'-filters-btn')]]";
 	private final static String XPathButtonAplicarFiltros = "//button[@class[contains(.,'filters-apply')]]";
@@ -55,7 +56,8 @@ public class SecMultiFiltrosMobil extends WebdrvWrapp implements SecFiltros {
     
     @Override
     public boolean isCollectionFilterPresent() throws Exception {
-    	return (WebdrvWrapp.isElementPresent(driver, By.xpath(FiltroMobil.Coleccion.getXPathLineaFiltroMulti())));
+    	String xpath = FiltroMobil.Coleccion.getXPathLineaFiltroMulti();
+    	return (state(Present, By.xpath(xpath), driver).check());
     }
     
     /** 
@@ -84,7 +86,8 @@ public class SecMultiFiltrosMobil extends WebdrvWrapp implements SecFiltros {
     
     @Override
     public boolean isClickableFiltroUntil(int seconds) {
-        return (isElementClickableUntil(driver, By.xpath(XPathFiltrarYOrdenarButton), seconds));
+    	return (state(Clickable, By.xpath(XPathFiltrarYOrdenarButton), driver)
+    			.wait(seconds).check());
     }    
     
     /**
@@ -111,7 +114,7 @@ public class SecMultiFiltrosMobil extends WebdrvWrapp implements SecFiltros {
         filtroLinea.click();
         waitForPageLoaded(driver);
         By byFiltroOption = By.xpath(".//*[text()[contains(.,'" + textFiltro + "')]]");
-        isElementClickableUntil(driver, byFiltroOption, 1);
+        state(Clickable, byFiltroOption, driver).wait(1).check();
         filtroLinea.findElement(byFiltroOption).click();
         waitForPageLoaded(driver);
     }
@@ -121,7 +124,7 @@ public class SecMultiFiltrosMobil extends WebdrvWrapp implements SecFiltros {
     }
     
     private void goAndClickFiltroButton(WebDriver driver) throws Exception {
-        if (isElementVisible(driver, By.xpath(XPathFiltrarYOrdenarButton))) {
+    	if (state(Visible, By.xpath(XPathFiltrarYOrdenarButton), driver).check()) {
         	moveToElement(By.xpath(XPathFiltrarYOrdenarButton), driver);
             Thread.sleep(500);
             
@@ -133,16 +136,16 @@ public class SecMultiFiltrosMobil extends WebdrvWrapp implements SecFiltros {
         waitAndClickFiltroButton(maxSecondsWait, driver);
     }
     
-    private void waitAndClickFiltroButton(int maxSecondsToWait, WebDriver driver) throws Exception {
-        if (!isOpenFiltrosUntil(0/*maxSecondsToWait*/, driver)) {
-            isElementClickableUntil(driver, By.xpath(XPathFiltrarYOrdenarButton), maxSecondsToWait);
-            WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(XPathFiltrarYOrdenarButton), TypeOfClick.javascript);
-            isOpenFiltrosUntil(maxSecondsToWait, driver);
+    private void waitAndClickFiltroButton(int maxSeconds, WebDriver driver) throws Exception {
+        if (!isOpenFiltrosUntil(0, driver)) {
+        	state(Clickable, By.xpath(XPathFiltrarYOrdenarButton), driver).wait(maxSeconds).check();
+            clickAndWaitLoad(driver, By.xpath(XPathFiltrarYOrdenarButton), TypeOfClick.javascript);
+            isOpenFiltrosUntil(maxSeconds, driver);
         }        
     }
     
-    private boolean isOpenFiltrosUntil(int maxSecondsToWait, WebDriver driver) {
+    private boolean isOpenFiltrosUntil(int maxSeconds, WebDriver driver) {
     	String xpathLineaOrdenar = FiltroMobil.Ordenar.getXPathLineaFiltroMulti();
-        return (isElementVisibleUntil(driver, By.xpath(xpathLineaOrdenar), maxSecondsToWait));
+    	return (state(Visible, By.xpath(xpathLineaOrdenar), driver).wait(maxSeconds).check());
     }
 }

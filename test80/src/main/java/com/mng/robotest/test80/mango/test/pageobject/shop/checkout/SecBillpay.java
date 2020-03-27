@@ -5,10 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecBillpay extends WebdrvWrapp {
+public class SecBillpay {
+	
     static String XPathBlockBillpayDesktop = "//div[@class[contains(.,'billpayFormulario')]]";
     static String XPathBlockRechnungMobil = "//div[@class[contains(.,'billpayinvoice')] and @class[contains(.,'show')]]";
     static String XPathBlockLastschriftMobil = "//div[@class[contains(.,'billpaydirectdebit')] and @class[contains(.,'show')]]";
@@ -31,13 +34,14 @@ public class SecBillpay extends WebdrvWrapp {
         return XPathRadioAceptoDesktop;
     }
 
-    public static boolean isVisibleUntil(Channel channel, int maxSecondsToWait, WebDriver driver) {
-        if (channel==Channel.movil_web) {
-            return (isElementVisibleUntil(driver, By.xpath(XPathBlockRechnungMobil + " | " + XPathBlockLastschriftMobil), maxSecondsToWait));
-        }
-        return (isElementVisibleUntil(driver, By.xpath(XPathBlockBillpayDesktop), maxSecondsToWait));
-    }
-    
+	public static boolean isVisibleUntil(Channel channel, int maxSeconds, WebDriver driver) {
+		if (channel==Channel.movil_web) {
+			String xpath = XPathBlockRechnungMobil + " | " + XPathBlockLastschriftMobil;
+			return (state(Visible, By.xpath(xpath), driver).wait(maxSeconds).check());
+		}
+		return (state(Visible, By.xpath(XPathBlockBillpayDesktop), driver).wait(maxSeconds).check());
+	}
+
     /**
      * Informa la fecha de nacimiento en los 3 desplegables de Billpay
      * @param datNac fecha en formato DD-MM-YYYY
@@ -61,33 +65,34 @@ public class SecBillpay extends WebdrvWrapp {
     }
     
     public static boolean isPresentSelectBirthDay(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathSelectBirthDay)));
+    	return (state(Present, By.xpath(XPathSelectBirthDay), driver).check());
     }
     
     public static boolean isPresentSelectBirthMonth(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathSelectBirthMonth)));
+    	return (state(Present, By.xpath(XPathSelectBirthMonth), driver).check());
     }
     
     public static boolean isPresentSelectBirthBirthYear(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathSelectBirthYear)));
-    }
-    
-    public static boolean isPresentRadioAcepto(Channel channel, WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(getXPath_radioAcepto(channel))));
-    }
-    
-    public static boolean isPresentInputTitular(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathInputTitular)));
+    	return (state(Present, By.xpath(XPathSelectBirthYear), driver).check());
     }
 
-    public static boolean isPresentInputIBAN(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathInputIBAN)));
-    }
-    
-    public static boolean isPresentInputBIC(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathInputBIC)));
-    }
-    
+	public static boolean isPresentRadioAcepto(Channel channel, WebDriver driver) {
+		String xpath = getXPath_radioAcepto(channel);
+		return (state(Present, By.xpath(xpath), driver).check());
+	}
+
+	public static boolean isPresentInputTitular(WebDriver driver) {
+		return (state(Present, By.xpath(XPathInputTitular), driver).check());
+	}
+
+	public static boolean isPresentInputIBAN(WebDriver driver) {
+		return (state(Present, By.xpath(XPathInputIBAN), driver).check());
+	}
+
+	public static boolean isPresentInputBIC(WebDriver driver) {
+		return (state(Present, By.xpath(XPathInputBIC), driver).check());
+	}
+
     public static void sendDataInputTitular(String titular, WebDriver driver) {
         driver.findElement(By.xpath(XPathInputTitular)).sendKeys(titular);    
     }

@@ -13,7 +13,7 @@ import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticleDesktop;
 
 /**
@@ -152,7 +152,7 @@ public class PageGaleriaMobil extends PageGaleria {
     @Override
     public WebElement getImagenArticulo(WebElement articulo) throws Exception {
     	By byImg = By.xpath("." + XPathImgRelativeArticle);
-    	isElementClickableUntil(driver, byImg, 1);
+    	state(Clickable, byImg).wait(1).check();
     	return (articulo.findElement(byImg));
     }
     
@@ -209,7 +209,8 @@ public class PageGaleriaMobil extends PageGaleria {
     
     @Override
     public boolean isArticleRebajado(WebElement articulo) {
-    	return (isElementPresent(articulo, By.xpath("." + XPathPrecioRebajadoRelativeArticle)));
+    	return (state(Present, articulo)
+    			.by(By.xpath("." + XPathPrecioRebajadoRelativeArticle)).check());
     }
     
     @Override
@@ -222,7 +223,7 @@ public class PageGaleriaMobil extends PageGaleria {
     @Override
     public String getNameColorFromCodigo(String codigoColor) {
     	String xpathImgColor = getXPathImgCodigoColor(codigoColor);
-    	if (!isElementPresent(driver, By.xpath(xpathImgColor))) {
+    	if (!state(Present, By.xpath(xpathImgColor)).check()) {
     		return Constantes.colorDesconocido;
     	}
     	WebElement imgColorWeb = driver.findElement(By.xpath(xpathImgColor));
@@ -244,9 +245,9 @@ public class PageGaleriaMobil extends PageGaleria {
     }
     
     @Override
-    public boolean isArticleWithHearthIconPresentUntil(int posArticle, int maxSecondsToWait) {
+    public boolean isArticleWithHearthIconPresentUntil(int posArticle, int maxSeconds) {
     	String XPathIcon = getXPathArticleHearthIcon(posArticle);
-    	return (isElementPresentUntil(driver, By.xpath(XPathIcon), maxSecondsToWait));
+    	return (state(Present, By.xpath(XPathIcon)).wait(maxSeconds).check());
     }
     
     @Override
@@ -289,10 +290,9 @@ public class PageGaleriaMobil extends PageGaleria {
     @Override
     public boolean isHeaderArticlesVisible(String textHeader) {
     	By byHeader = By.xpath(XPathHeaderArticles);
-    	if (WebdrvWrapp.isElementVisible(driver, byHeader)) {
+    	if (state(Visible, byHeader).check()) {
     		return (driver.findElement(byHeader).getText().contains(textHeader));
     	}
-    	
     	return false;
     }
     
@@ -300,13 +300,13 @@ public class PageGaleriaMobil extends PageGaleria {
     public void showTallasArticulo(int posArticulo) throws Exception {
         moveToArticleAndGetObject(posArticulo);
         String xpathButtonAnyadir = getXPathButtonAnyadirArticle(posArticulo);
-        WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(xpathButtonAnyadir));
+        clickAndWaitLoad(driver, By.xpath(xpathButtonAnyadir));
     }
     
     @Override
-    public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSecondsToWait) {
+    public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSeconds) {
         String xpathCapa = getXPathArticleCapaTallas(posArticulo);
-        return (isElementVisibleUntil(driver, By.xpath(xpathCapa), maxSecondsToWait));
+        return (state(Visible, By.xpath(xpathCapa), driver).wait(maxSeconds).check());
     }
     
     private String getXPathTallaAvailableArticle(int posArticulo, int posTalla) {
@@ -392,8 +392,8 @@ public class PageGaleriaMobil extends PageGaleria {
     
     private String getRefColorArticuloMethod1(WebElement articulo) {
     	String xpathDivRelativeArticle = "//div[@id and @class='product-container-image']";
-    	if (WebdrvWrapp.isElementPresent(articulo, By.xpath("." + xpathDivRelativeArticle))) {
-	    	return (articulo.findElement(By.xpath(xpathDivRelativeArticle)).getAttribute("id"));
+    	if (state(Present, articulo).by(By.xpath("." + xpathDivRelativeArticle)).check()) {
+			return (articulo.findElement(By.xpath(xpathDivRelativeArticle)).getAttribute("id"));
     	}
     	return "";
     }

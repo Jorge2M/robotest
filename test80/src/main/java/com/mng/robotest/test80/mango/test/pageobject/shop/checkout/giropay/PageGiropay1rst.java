@@ -1,14 +1,14 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.giropay;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageGiropay1rst extends WebdrvWrapp {
+public class PageGiropay1rst {
     static String XPathListOfPayments = "//ul[@id='paymentMethods']";
     static String XPathCabeceraStep = "//h2[@id[contains(.,'stageheader')]]";
     static String XPathButtonPagoDesktop = "//input[@class[contains(.,'paySubmit')] and @type='submit']";
@@ -30,15 +30,16 @@ public class PageGiropay1rst extends WebdrvWrapp {
     
     public static boolean isPresentIconoGiropay(Channel channel, WebDriver driver) {
         String xpathPago = getXPathIconoGiropay(channel);
-        return (isElementPresent(driver, By.xpath(xpathPago)));
+        return (state(Present, By.xpath(xpathPago), driver).check());
     }
     
     public static boolean isPresentCabeceraStep(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathCabeceraStep)));
+        return (state(Present, By.xpath(XPathCabeceraStep), driver).check());
     }
     
     public static boolean isPresentButtonPagoDesktopUntil(int maxSeconds, WebDriver driver) {
-        return (isElementPresentUntil(driver, By.xpath(XPathButtonPagoDesktop), maxSeconds));
+    	return (state(Present, By.xpath(XPathButtonPagoDesktop), driver)
+    			.wait(maxSeconds).check());
     }
 
 //    public static boolean isVisibleInputBankUntil(int maxSecondsToWait, WebDriver driver) {

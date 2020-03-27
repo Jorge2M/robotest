@@ -14,8 +14,8 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
+import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
@@ -32,7 +32,7 @@ import static com.mng.robotest.test80.mango.conftestmaker.AppEcom.votf;
 
 public class MenusUserWrapper {
 
-    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
+	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
 	final Channel channel;
 	final AppEcom app;
@@ -76,11 +76,11 @@ public class MenusUserWrapper {
 		return (new MenusUserWrapper(channel, app, driver));
 	}
 	
-	public boolean isMenuInState(UserMenu menu, StateElem state) throws Exception {
+	public boolean isMenuInState(UserMenu menu, State state) throws Exception {
 		return (isMenuInStateUntil(menu, state, 0));
 	}
 	
-	public boolean isMenuInStateUntil(UserMenu menu, StateElem state, int maxSecondsWait) throws Exception {
+	public boolean isMenuInStateUntil(UserMenu menu, State state, int maxSecondsWait) throws Exception {
 		if (menu==UserMenu.bolsa) {
 			return (secCabecera.isInStateIconoBolsa(state));
 		} else {
@@ -99,7 +99,7 @@ public class MenusUserWrapper {
 		}
 	}
 	
-	public boolean clickMenuIfInState(UserMenu menu, StateElem state) throws Exception {
+	public boolean clickMenuIfInState(UserMenu menu, State state) throws Exception {
 		if (isMenuInStateUntil(menu, state, 0)) {
 			clickMenuAndWait(menu);
 			return true;
@@ -164,7 +164,7 @@ public class MenusUserWrapper {
 		}
 	}
 
-	private boolean isMenuInStateUntil(ElementPage menu, StateElem state, int maxSecondsWait) throws Exception {
+	private boolean isMenuInStateUntil(ElementPage menu, State state, int maxSecondsWait) throws Exception {
 		if (menu instanceof IconoCabeceraShop) {
 			return (secCabecera.getShop().isIconoInStateUntil((IconoCabeceraShop)menu, state, maxSecondsWait));
 		}

@@ -13,16 +13,16 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.utils.checkmenus.DataScreenMenu;
 
-public class SecMenuLateralMobil extends WebdrvWrapp {
+public class SecMenuLateralMobil extends PageObjTM {
 	
 	private final AppEcom app;
-	private final WebDriver driver;
 	private final SecMenusUserMobil secUserMenu;
     
     public enum TypeLocator {dataGaLabelPortion, hrefPortion}
@@ -90,8 +90,8 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     	"/a[@class='menu-item-label' and @href]";
     
     private SecMenuLateralMobil(AppEcom app, WebDriver driver) {
+    	super(driver);
     	this.app = app;
-    	this.driver = driver;
     	this.secUserMenu = SecMenusUserMobil.getNew(app, driver);
     }
     
@@ -260,17 +260,17 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     
     public boolean isLineaPresent(LineaType lineaType) {
         String xpathLinea = getXPathLineaLink(lineaType);
-        return (isElementPresent(driver, By.xpath(xpathLinea)));
+        return (state(Present, By.xpath(xpathLinea)).check());
     }
     
     public boolean isLineaPresentUntil(LineaType lineaType, int maxSeconds) {
         String xpathLinea = getXPathLineaLink(lineaType);
-        return (isElementPresentUntil(driver, By.xpath(xpathLinea), maxSeconds));
+        return (state(Present, By.xpath(xpathLinea)).wait(maxSeconds).check());
     }    
     
     public boolean isSelectedLinea(LineaType lineaType) {
         String xpathLinea = getXPathLiLinea(lineaType);
-        if (isElementPresent(driver, By.xpath(xpathLinea))) {
+        if (state(Present, By.xpath(xpathLinea)).check()) {
             return (driver.findElement(By.xpath(xpathLinea)).getAttribute("class").contains("selected"));
         }
         return false;
@@ -290,7 +290,7 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     
     public boolean isSelectedSublineaNinos(SublineaNinosType sublineaNinosType) {
         String xpathSublinea = getXPathLiSublineaNinos(sublineaNinosType);
-        if (isElementPresent(driver, By.xpath(xpathSublinea))) {
+        if (state(Present, By.xpath(xpathSublinea)).check()) {
             return (driver.findElement(By.xpath(xpathSublinea)).getAttribute("class").contains("open"));
         }
         return false;
@@ -307,13 +307,12 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
             xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaNinosType.nino);
             break;        
         }
-        
-        return (isElementVisible(driver, By.xpath(xpathBlockSublineas)));
+        return (state(Visible, By.xpath(xpathBlockSublineas)).check());
     }
 
     public boolean isCarruselNuevoVisible(LineaType lineaType) {
         String xpathCarrusel = getXPathCarruselNuevo(lineaType);
-        return (isElementVisible(driver, By.xpath(xpathCarrusel)));
+        return (state(Visible, By.xpath(xpathCarrusel)).check());
     }
     
     public void clickCarruselNuevo(Linea lineaNuevo, LineaType lineaType) throws Exception {
@@ -326,7 +325,7 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     
     public boolean isSublineaRebajasVisible(LineaType lineaType) {
         String xpathSublinea = getXPathSublineaRebajasLink(lineaType);
-        return (isElementVisible(driver, By.xpath(xpathSublinea)));
+        return (state(Visible, By.xpath(xpathSublinea)).check());
     }
     
     public void clickSublineaRebajas(Linea lineaRebajas, LineaType lineaType) throws Exception {
@@ -339,10 +338,10 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     
     public boolean isVisibleMenuSublineaRebajas(LineaType lineaType) {
         String xpathMenus = getXPathBlockMenusSublineaRebajas(lineaType);
-        if (isElementVisible(driver, By.xpath(xpathMenus))) {
+        if (state(Visible, By.xpath(xpathMenus)).check()) {
             return (driver.findElement(By.xpath(xpathMenus)).getAttribute("class").contains("open"));
         }
-        return false;    
+        return false;
     }
     
     /**
@@ -380,9 +379,9 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     
     public String getLiteralMenuVisible(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel) throws Exception {
         By byMenu = By.xpath(getXPathMenuByTypeLocator(typeLocator, menu1rstLevel));
-    	isElementVisibleUntil(driver, byMenu, 1);
+        state(Visible, byMenu).wait(1).check();
         moveToElement(byMenu, driver);
-        if (isElementVisible(driver, byMenu)) {
+        if (state(Visible, byMenu).check()) {
             return driver.findElement(byMenu).getAttribute("innerHTML");
         }
         return "";
@@ -391,15 +390,15 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     /**
      * @return indicador de si el menú lateral de móvil está visible
      */
-    public boolean isMenuInStateUntil(boolean open, int maxSecondsToWait) {
+    public boolean isMenuInStateUntil(boolean open, int maxSeconds) {
         try {
             String xpathLineaShe = getXPathLineaLink(LineaType.she);
             String xpathLineaNuevo = getXPathLineaLink(LineaType.nuevo);
             String xpathValidation = xpathLineaShe + " | " + xpathLineaNuevo;
             if (open) {
-                return (isElementVisibleUntil(driver, By.xpath(xpathValidation), maxSecondsToWait));
+            	return (state(Visible, By.xpath(xpathValidation)).wait(maxSeconds).check());
             }
-            return (isElementInvisibleUntil(driver, By.xpath(xpathValidation), maxSecondsToWait));
+            return (state(Invisible, By.xpath(xpathValidation)).wait(maxSeconds).check());
         }
         catch (Exception e) {
             //Si se produce una excepción continuamos porque existe la posibilidad que el menú se encuentre en el estado que necesitamos

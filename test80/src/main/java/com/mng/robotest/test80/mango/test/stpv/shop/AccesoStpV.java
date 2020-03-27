@@ -14,6 +14,8 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.domain.suitetree.StepTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.NodoStatus;
@@ -22,7 +24,6 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIdentificacion;
@@ -99,23 +100,23 @@ public class AccesoStpV {
         MenusUserWrapper userMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver).getMenusUser();
     	validations.add(
     		"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		userMenus.isMenuInStateUntil(UserMenu.miCuenta, StateElem.Present, maxSecondsWait), State.Defect);
+    		userMenus.isMenuInStateUntil(UserMenu.miCuenta, Present, maxSecondsWait), State.Defect);
 		
-		boolean isVisibleMenuFav = userMenus.isMenuInStateUntil(UserMenu.favoritos, StateElem.Present, 0);
+		boolean isVisibleMenuFav = userMenus.isMenuInStateUntil(UserMenu.favoritos, Present, 0);
 		if (dCtxSh.appE==AppEcom.outlet) { 
 	    	validations.add(
 	    		"NO aparece el link \"Favoritos\"",
 	    		!isVisibleMenuFav, State.Defect);
 	    	validations.add(
 	    		"Aparece el link \"Mis Pedidos\"",
-	    		userMenus.isMenuInState(UserMenu.pedidos, StateElem.Present), State.Defect);
+	    		userMenus.isMenuInState(UserMenu.pedidos, Present), State.Defect);
 		} else {
 	    	validations.add(
 	    		"Aparece el link \"Favoritos\"",
 	    		isVisibleMenuFav, State.Defect);
 	    	
 	    	if (dCtxSh.channel!=Channel.desktop) {
-		    	boolean isPresentLinkMisCompras = userMenus.isMenuInState(UserMenu.misCompras, StateElem.Present);
+		    	boolean isPresentLinkMisCompras = userMenus.isMenuInState(UserMenu.misCompras, Present);
 		    	if (dCtxSh.pais.isMisCompras()) {
 			    	validations.add(
 			    		"Aparece el link \"Mis Compras\"",
@@ -131,10 +132,10 @@ public class AccesoStpV {
 		if (dCtxSh.channel!=Channel.desktop || dCtxSh.appE!=AppEcom.shop) {
 	    	validations.add(
 	    		"Aparece el link \"Ayuda\"",
-	    		userMenus.isMenuInState(UserMenu.ayuda, StateElem.Visible), State.Defect);
+	    		userMenus.isMenuInState(UserMenu.ayuda, Visible), State.Defect);
 	    	validations.add(
 	    		"Aparece el link \"Cerrar sesión\"",
-	    		userMenus.isMenuInState(UserMenu.cerrarSesion, StateElem.Present), State.Defect);
+	    		userMenus.isMenuInState(UserMenu.cerrarSesion, Present), State.Defect);
 		}
     	
         if (dCtxSh.channel==Channel.desktop) {
@@ -168,7 +169,7 @@ public class AccesoStpV {
     
     public static void identificacionEnMango(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
     	MenusUserWrapper userMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver).getMenusUser();
-        if (!userMenus.isMenuInState(UserMenu.cerrarSesion, StateElem.Present)) {
+        if (!userMenus.isMenuInState(UserMenu.cerrarSesion, Present)) {
         	iniciarSesion(dCtxSh, driver);
         }
     }

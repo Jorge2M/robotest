@@ -6,14 +6,19 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class PageTrabajaConNosotros extends WebdrvWrapp implements PageFromFooter {
+public class PageTrabajaConNosotros extends PageObjTM implements PageFromFooter {
 	
     static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
 	final String XPathIdFrame = "//iframe[@id='bodyFrame']";
 	final String XPathForIdPage = "//section[@id='all-jobs-link-section']";
+	
+	public PageTrabajaConNosotros(WebDriver driver) {
+		super(driver);
+	}
 	
 	@Override
 	public String getName() {
@@ -21,12 +26,12 @@ public class PageTrabajaConNosotros extends WebdrvWrapp implements PageFromFoote
 	}
 	
 	@Override
-	public boolean isPageCorrectUntil(int maxSecondsWait, WebDriver driver) {
+	public boolean isPageCorrectUntil(int maxSeconds) {
 		try {
-			boolean isFramePresent = isElementPresentUntil(driver, By.xpath(XPathIdFrame), maxSecondsWait);
+			boolean isFramePresent = state(Present, By.xpath(XPathIdFrame)).wait(maxSeconds).check();
 			if (isFramePresent) {
 				driver.switchTo().frame(driver.findElement(By.xpath(XPathIdFrame)));
-				return (isElementPresentUntil(driver, By.xpath(XPathForIdPage), maxSecondsWait));
+				return (state(Present, By.xpath(XPathForIdPage)).wait(maxSeconds).check());
 			}
 			return false;
 		}

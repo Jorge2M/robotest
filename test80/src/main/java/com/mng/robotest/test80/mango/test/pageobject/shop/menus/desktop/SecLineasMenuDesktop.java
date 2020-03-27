@@ -16,14 +16,14 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 
-public class SecLineasMenuDesktop extends WebdrvWrapp {
+public class SecLineasMenuDesktop extends PageObjTM {
 	
 	private final AppEcom app;
-	private final WebDriver driver;
 	
 	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
@@ -45,8 +45,8 @@ public class SecLineasMenuDesktop extends WebdrvWrapp {
 	static String XPathSublineaLinkWithTag = "//div[@class[contains(.,'nav-item')] and @data-brand='" + TagIdSublinea + "']";
 
 	private SecLineasMenuDesktop(AppEcom app, WebDriver driver) {
+		super(driver);
 		this.app = app;
-		this.driver = driver;
 	}
 	
 	public static SecLineasMenuDesktop getNew(AppEcom app, WebDriver driver) {
@@ -78,19 +78,19 @@ public class SecLineasMenuDesktop extends WebdrvWrapp {
     }
 
     public boolean isPresentLineasMenuWrapp() {
-        return (isElementPresent(driver, By.xpath(XPathLineasMenuWrapper)));
+    	return (state(Present, By.xpath(XPathLineasMenuWrapper)).check());
     }
     
     public boolean isVisibleMenuSup() {
-        return (isElementVisible(driver, By.xpath(XPathLineasMenuWrapper)));
+    	return (state(Present, By.xpath(XPathLineasMenuWrapper)).check());
     }
     
-    public boolean isVisibleMenuSupUntil(int maxSecondsToWait) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathLineasMenuWrapper), maxSecondsToWait));
+    public boolean isVisibleMenuSupUntil(int maxSeconds) {
+    	return (state(Visible, By.xpath(XPathLineasMenuWrapper)).wait(maxSeconds).check());
     }    
     
-    public boolean isInvisibleMenuSupUntil(int maxSecondsToWait) {
-        return (isElementInvisibleUntil(driver, By.xpath(XPathLineasMenuWrapper), maxSecondsToWait));
+    public boolean isInvisibleMenuSupUntil(int maxSeconds) {
+    	return (state(Invisible, By.xpath(XPathLineasMenuWrapper)).wait(maxSeconds).check());
     }
     
     public void bringMenuBackground() throws Exception {
@@ -107,7 +107,7 @@ public class SecLineasMenuDesktop extends WebdrvWrapp {
     	WebElement menuWrapp = driver.findElement(By.xpath(xpathToBringBack));
     	((JavascriptExecutor) driver).executeScript("arguments[0].style.position='relative';", menuWrapp);
     	((JavascriptExecutor) driver).executeScript("arguments[0].style.zIndex=1;", menuWrapp);
-    	isElementInvisibleUntil(driver, By.xpath(xpathToBringBack), 1);
+    	state(Invisible, By.xpath(xpathToBringBack)).wait(1).check();
     }    
     
     public List<WebElement> getListaLineas() {
@@ -116,22 +116,22 @@ public class SecLineasMenuDesktop extends WebdrvWrapp {
     
     public boolean isLineaPresent(LineaType lineaType) {
         String xpathLinea = getXPathLineaLink(lineaType);
-        return (isElementPresent(driver, By.xpath(xpathLinea)));
+        return (state(Present, By.xpath(xpathLinea)).check());
     }
     
-    public boolean isLineaPresentUntil(LineaType lineaType, int maxSecondsToWait) {
+    public boolean isLineaPresentUntil(LineaType lineaType, int maxSeconds) {
         String xpathLinea = getXPathLineaLink(lineaType);
-        return (isElementPresentUntil(driver, By.xpath(xpathLinea), maxSecondsToWait));
+        return (state(Present, By.xpath(xpathLinea)).wait(maxSeconds).check());
     }    
     
     public boolean isLineaVisible(LineaType lineaType) {
     	String xpathLinea = getXPathLineaLink(lineaType);
-    	return (isElementPresent(driver, By.xpath(xpathLinea)));
+    	return (state(Present, By.xpath(xpathLinea)).check());
     }
     
     public boolean isLineaSelected(LineaType lineaType) {
         String xpathLinea = getXPathLineaSelected(lineaType);
-        return (isElementPresent(driver, By.xpath(xpathLinea))); 
+        return (state(Present, By.xpath(xpathLinea)).check()); 
     }
     
     public void selecLinea(Pais pais, LineaType lineaType) throws Exception {
@@ -151,9 +151,9 @@ public class SecLineasMenuDesktop extends WebdrvWrapp {
     	);
     }
 
-    public boolean isVisibleImgSublineaUntil(LineaType lineaType, SublineaNinosType sublineaType, int maxSecondsWait) {
+    public boolean isVisibleImgSublineaUntil(LineaType lineaType, SublineaNinosType sublineaType, int maxSeconds) {
     	String xpathImg = getXPathImgSublinea(lineaType, sublineaType);
-    	return (isElementVisibleUntil(driver, By.xpath(xpathImg), maxSecondsWait));
+    	return (state(Visible, By.xpath(xpathImg)).wait(maxSeconds).check());
     }
     
     public void clickImgSublineaIfVisible(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
@@ -161,7 +161,7 @@ public class SecLineasMenuDesktop extends WebdrvWrapp {
         if (isVisibleImgSublineaUntil(lineaType, sublineaType, maxSecondsToWait)) {
         	String xpathImg = getXPathImgSublinea(lineaType, sublineaType);
         	clickAndWaitLoad(driver, By.xpath(xpathImg));
-        	isElementInvisibleUntil(driver, By.xpath(xpathImg), 1/*seconds*/);
+        	state(Invisible, By.xpath(xpathImg)).wait(1).check();
         }
     }
 
@@ -194,7 +194,7 @@ public class SecLineasMenuDesktop extends WebdrvWrapp {
     public void hoverLinea(LineaType lineaType) throws Exception {
         //Hover sobre la pestaña -> Hacemos visibles los menús/subimágenes
         String xpathLinkLinea = getXPathLineaLink(lineaType);
-        isElementVisibleUntil(driver, By.xpath(xpathLinkLinea), 1);
+        state(Visible, By.xpath(xpathLinkLinea)).wait(1).check();
         moveToElement(By.xpath(xpathLinkLinea), driver);
     }
 
@@ -204,7 +204,7 @@ public class SecLineasMenuDesktop extends WebdrvWrapp {
         String xpathLinkSublinea = getXPathSublineaLink(sublineaType);
         
         //Esperamos que esté visible la sublínea y realizamos un Hover
-        isElementVisibleUntil(driver, By.xpath(xpathLinkSublinea), 2);
+        state(Visible, By.xpath(xpathLinkSublinea)).wait(2).check();
         moveToElement(By.xpath(xpathLinkSublinea), driver);
     }
 }

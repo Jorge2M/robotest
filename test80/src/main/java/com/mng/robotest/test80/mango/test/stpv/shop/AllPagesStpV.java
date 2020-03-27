@@ -11,6 +11,9 @@ import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.testmaker.service.webdriver.utils.WebUtils;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
@@ -91,7 +94,7 @@ public class AllPagesStpV {
 		if (pais!=null) {
 			validations.add(
 				"Aparece el div de contenido asociado al país " + pais.getCodigo_pais(),
-				WebdrvWrapp.isElementPresent(driver, By.xpath("//div[@class[contains(.,'main-content')] and @data-pais='" + pais.getCodigo_pais() + "']")), 
+				state(Present, By.xpath("//div[@class[contains(.,'main-content')] and @data-pais='" + pais.getCodigo_pais() + "']"), driver).check(),
 				State.Warn);
 		}
 		return validations;

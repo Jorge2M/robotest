@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.manto;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageGestorEstadisticasPedido extends WebdrvWrapp {
+public class PageGestorEstadisticasPedido {
 
 	public static String titulo = "ESTADISTICAS PEDIDOS";
 	private final static String iniXPathTitulo = "//td[@class='txt11B' and text()[contains(.,'";
@@ -33,15 +34,16 @@ public class PageGestorEstadisticasPedido extends WebdrvWrapp {
 	}
 
 	public static boolean isPage(WebDriver driver) {
-		return (isElementPresent(driver, By.xpath(getXPathTitulo(titulo))));
+		String xpath = getXPathTitulo(titulo);
+		return (state(Present, By.xpath(xpath), driver).check());
 	}
 
 	public static boolean isVisibleStartDateInput(WebDriver driver) {
-		return (isElementVisible(driver, By.xpath(XPathStartDate)));
+		return (state(Visible, By.xpath(XPathStartDate), driver).check());
 	}
 	
 	public static boolean isVisibleEndDateInput(WebDriver driver) {
-		return (isElementVisible(driver, By.xpath(XPathEndDate)));
+		return (state(Visible, By.xpath(XPathEndDate), driver).check());
 	}
 
 	public static void selectZalandoAndClickShowOrdersButton(WebDriver driver) throws Exception {
@@ -56,20 +58,22 @@ public class PageGestorEstadisticasPedido extends WebdrvWrapp {
 	
 	private static void clickMostrarPedidosButton(WebDriver driver) throws Exception {
 		clickAndWaitLoad(driver, By.xpath(XPathMostrarPedidosButton), 60);
-		isElementInvisibleUntil(driver, By.xpath(XPathLoadPopupImage), 60);
-		
+		state(Invisible, By.xpath(XPathLoadPopupImage), driver)
+				.wait(60).check();
 	}
 
 	public static boolean isTablaInformacionVisible(WebDriver driver) {
-		return isElementVisible(driver, By.xpath(XPathTablaInformacion));
+		return (state(Visible, By.xpath(XPathTablaInformacion), driver).check());
 	}
 
 	public static boolean isColumnaCompararVerdeZero(WebDriver driver) {
-		return isElementPresent(driver, By.xpath(getXPathColumnaCompararVerde(XPathTablaInformacion)));
+		String xpath = getXPathColumnaCompararVerde(XPathTablaInformacion);
+		return (state(Present, By.xpath(xpath), driver).check());
 	}
 	
 	public static boolean isColumnaCompararRojoZero(WebDriver driver) {
-		return isElementPresent(driver, By.xpath(getXPathColumnaCompararRoja(XPathTablaInformacion)));
+		String xpath = getXPathColumnaCompararRoja(XPathTablaInformacion);
+		return (state(Present, By.xpath(xpath), driver).check());
 	}
 
 	public static void selectDiaAnteriorAndClickCompararButton(WebDriver driver) throws Exception {
@@ -83,14 +87,17 @@ public class PageGestorEstadisticasPedido extends WebdrvWrapp {
 	
 	private static void clickCompararButton(WebDriver driver) throws Exception {
 		clickAndWaitLoad(driver, By.xpath(XPathCompararButton), 60);
-		isElementInvisibleUntil(driver, By.xpath(XPathLoadPopupImage), 60);
+		state(Invisible, By.xpath(XPathLoadPopupImage), driver)
+			.wait(60).check();
 	}
 
 	public static boolean isColumnaCompararVerdeNoZero(WebDriver driver) {
-		return (!isElementPresent(driver, By.xpath(getXPathColumnaCompararVerde(XPathTablaInformacion))));
+		String xpath = getXPathColumnaCompararVerde(XPathTablaInformacion);
+		return (!state(Present, By.xpath(xpath), driver).check());
 	}
 
 	public static boolean isColumnaCompararRojaNoZero(WebDriver driver) {
-		return (!isElementPresent(driver, By.xpath(getXPathColumnaCompararRoja(XPathTablaInformacion))));
+		String xpath = getXPathColumnaCompararRoja(XPathTablaInformacion);
+		return (!state(Present, By.xpath(xpath), driver).check());
 	}
 }

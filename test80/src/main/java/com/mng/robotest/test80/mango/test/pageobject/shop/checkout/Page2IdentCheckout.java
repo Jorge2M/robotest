@@ -19,11 +19,13 @@ import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PopupFindAddress;
 
-public class Page2IdentCheckout extends WebdrvWrapp {
+public class Page2IdentCheckout {
+	
     static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
     final static String XPathMainForm = "//form[@action[contains(.,'/expressregister')]]";
@@ -54,18 +56,18 @@ public class Page2IdentCheckout extends WebdrvWrapp {
     
     //Con el substring simulamos un ends-with (que no está disponible en xpath 1.0)
     static String XPathSelectLocalidades = "//select[substring(@id, string-length(@id) - string-length('localidades') +1) = 'localidades']";
-    
-    public static boolean isPageUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementPresentUntil(driver, By.xpath(XPathMainForm), maxSecondsToWait));
-    }
-        
-    public static boolean isInputPasswordAccordingEmail(boolean emailYetExists, WebDriver driver) {
-        boolean isVisiblePassword = isElementVisible(driver, By.xpath(XPathInputPassword));
-        if (emailYetExists==isVisiblePassword) {
-            return false;
-        }
-        return true;
-    }
+
+	public static boolean isPageUntil(int maxSeconds, WebDriver driver) {
+		return (state(Present, By.xpath(XPathMainForm), driver).wait(maxSeconds).check());
+	}
+
+	public static boolean isInputPasswordAccordingEmail(boolean emailYetExists, WebDriver driver) {
+		boolean isVisiblePassword = state(Visible, By.xpath(XPathInputPassword), driver).check();
+		if (emailYetExists==isVisiblePassword) {
+			return false;
+		}
+		return true;
+	}
 
     private static boolean setInputIfVisible(String xpathInput, String valueToSet, WebDriver driver) {
         boolean datoSeteado = false;
@@ -131,7 +133,7 @@ public class Page2IdentCheckout extends WebdrvWrapp {
 	public static void setInputPoblacionIfVisible(String cfCity, HashMap<String,String> datosRegistro, WebDriver driver) 
 	throws Exception {
 		waitForPageLoaded(driver);
-		WebdrvWrapp.isElementClickableUntil(driver, By.xpath(XPathInputPoblacionActive), 1);
+		state(Clickable, By.xpath(XPathInputPoblacionActive), driver).wait(1).check();
 		boolean datoSeteado = setInputIfVisible(XPathInputPoblacionActive, cfCity, driver);
 		if (datoSeteado) {
 			datosRegistro.put("cfCity", cfCity);
@@ -168,26 +170,26 @@ public class Page2IdentCheckout extends WebdrvWrapp {
             datosRegistro.put("cfDni", dni);
         }
     }
-    
-    /**
-     * Se introduce el código postal y si se detectan un 'onkeyup' se espera un máximo de 2 segundos a que esté disponible la lista de poblaciones
-     */
-    public static boolean setCodPostalIfExistsAndWait(String codPostal, WebDriver driver) {
-        boolean datoSeteado = setInputIfVisible(XPathInputCodPost, codPostal, driver);
-        if (datoSeteado) {            
-            List<WebElement> cfCodpostalList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathInputCodPost));
-            if (cfCodpostalList.size() > 0) {
-                //Si existe el tag 'onkeyup' (se desencadena petición Ajax) tenemos que esperaremos un máximo de 2 segundos hasta que aparezca el desplegable con las poblaciones
-                if (cfCodpostalList.get(0).getAttribute("onkeyup")!=null && 
-                    cfCodpostalList.get(0).getAttribute("onkeyup").compareTo("")!=0) {
-                    isElementVisibleUntil(driver, By.xpath(XPathSelectLocalidades), 2);
-                }
-            }
-        }        
-        
-        return datoSeteado;        
-    }
-    
+
+	/**
+	 * Se introduce el código postal y si se detectan un 'onkeyup' se espera un máximo de 2 segundos a que esté disponible la lista de poblaciones
+	 */
+	public static boolean setCodPostalIfExistsAndWait(String codPostal, WebDriver driver) {
+		boolean datoSeteado = setInputIfVisible(XPathInputCodPost, codPostal, driver);
+		if (datoSeteado) {            
+			List<WebElement> cfCodpostalList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathInputCodPost));
+			if (cfCodpostalList.size() > 0) {
+				//Si existe el tag 'onkeyup' (se desencadena petición Ajax) tenemos que esperaremos un máximo de 2 segundos hasta que aparezca el desplegable con las poblaciones
+				if (cfCodpostalList.get(0).getAttribute("onkeyup")!=null && 
+					cfCodpostalList.get(0).getAttribute("onkeyup").compareTo("")!=0) {
+					state(Visible, By.xpath(XPathSelectLocalidades), driver).wait(2).check();
+				}
+			}
+		}
+
+		return datoSeteado;
+	}
+
     public static void setCodPostalIfExistsAndWait(String codigoPostal, HashMap<String,String> datosRegistro, WebDriver driver) {
         boolean datoSeteado = setCodPostalIfExistsAndWait(codigoPostal, driver);
         if (datoSeteado) {
@@ -225,21 +227,21 @@ public class Page2IdentCheckout extends WebdrvWrapp {
     public static void setEmailIfExists(String email, HashMap<String,String> datosRegistro, WebDriver driver) {
         datosRegistro.put("cfEmail", setEmailIfExists(email, driver));
     }
-    
-    public static boolean setPaisIfVisibleAndNotSelected(String codigoPais, WebDriver driver) {
-        boolean datoSeteado = false;
-        List<WebElement> paisCf = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathSelectPais));
-        if (paisCf.size() > 0) {
-            String xpathSelectedPais = XPathSelectPais + "/option[@selected='selected' and @value='" + codigoPais + "']";
-            if (isElementPresent(driver, By.xpath(xpathSelectedPais))) {
-                new Select(paisCf.get(0)).selectByValue(codigoPais);
-                datoSeteado = true;
-            }
-        }        
-        
-        return datoSeteado;
-    }
-    
+
+	public static boolean setPaisIfVisibleAndNotSelected(String codigoPais, WebDriver driver) {
+		boolean datoSeteado = false;
+		List<WebElement> paisCf = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathSelectPais));
+		if (paisCf.size() > 0) {
+			String xpathSelectedPais = XPathSelectPais + "/option[@selected='selected' and @value='" + codigoPais + "']";
+			if (state(Present, By.xpath(xpathSelectedPais), driver).check()) {
+				new Select(paisCf.get(0)).selectByValue(codigoPais);
+				datoSeteado = true;
+			}
+		}
+
+		return datoSeteado;
+	}
+
     public static void setPaisIfVisibleAndNotSelected(String codigoPais, HashMap<String,String> datosRegistro, WebDriver driver) {
         boolean datoSeteado = setPaisIfVisibleAndNotSelected(codigoPais, driver);
         if (datoSeteado) {
@@ -251,55 +253,54 @@ public class Page2IdentCheckout extends WebdrvWrapp {
         driver.findElement(By.xpath(XPathBotonFindAddress)).click();
         Thread.sleep(3000);
     }
-    
-    /**
-     * Si existe, utiliza el botón "Find Address" para establecer la dirección (actualmente sólo existe en Corea del Sur)
-     */
-    public static void setDireccionWithFindAddressIfExists(String codPostalPais, WebDriver driver) throws Exception {
-        String codPostalSeteado = getCodigoPostal(driver);
-        if (codPostalPais.compareTo(codPostalSeteado)!=0 &&
-            isElementVisible(driver, By.xpath(XPathBotonFindAddress))) {
-            clickBotonFindAddress(driver);
-            String mainWindowHandle = driver.getWindowHandle();
-            try {
-                String popupBuscador = PopupFindAddress.goToPopupAndWait(mainWindowHandle, 5/*maxSecondsToWait*/, driver);
-                if ("".compareTo(popupBuscador)!=0 && PopupFindAddress.isIFrameUntil(0, driver)) {
-                    PopupFindAddress.switchToIFrame(driver);
-                    if (PopupFindAddress.isBuscadorClickableUntil(2/*maxSecondsToWait*/, driver)) {
-                        PopupFindAddress.setDataBuscador(driver, codPostalPais);
-                        PopupFindAddress.clickButtonLupa(driver);
-                        PopupFindAddress.clickFirstDirecc(driver);
-                    }
-                }
-            }
-            catch (Exception e) {
-                pLogger.warn("Exception clicking Find Address button", e);
-            }
-            finally { driver.switchTo().window(mainWindowHandle); }
-        }
-    }
-    
-    public static String getCodigoPostal(WebDriver driver) {
-        if (isElementPresent(driver, By.xpath(XPathInputCodPost))) {
-            return (driver.findElement(By.xpath(XPathInputCodPost)).getAttribute("value"));
-        }
-        return "";
-    }
-    
-    public static void clickPublicidadIfVisible(HashMap<String,String> datosRegistro, WebDriver driver) {
-    	By byCheckPublic = By.xpath(XPathCheckPublicidad);
-    	if (isElementPresent(driver, byCheckPublic)) {
-    		moveToElement(byCheckPublic, driver);
-    		if (isElementVisible(driver, byCheckPublic)) {
-    			driver.findElement(byCheckPublic).click();
-    			datosRegistro.put("cfPubli", "true");
-    			return;
-    		}
-        }
 
-        datosRegistro.put("cfPubli", "false");
-    }
-    
+	/**
+	 * Si existe, utiliza el botón "Find Address" para establecer la dirección (actualmente sólo existe en Corea del Sur)
+	 */
+	public static void setDireccionWithFindAddressIfExists(String codPostalPais, WebDriver driver) throws Exception {
+		String codPostalSeteado = getCodigoPostal(driver);
+		if (codPostalPais.compareTo(codPostalSeteado)!=0 &&
+				state(Visible, By.xpath(XPathBotonFindAddress), driver).check()) {
+			clickBotonFindAddress(driver);
+			String mainWindowHandle = driver.getWindowHandle();
+			try {
+				String popupBuscador = PopupFindAddress.goToPopupAndWait(mainWindowHandle, 5/*maxSecondsToWait*/, driver);
+				if ("".compareTo(popupBuscador)!=0 && PopupFindAddress.isIFrameUntil(0, driver)) {
+					PopupFindAddress.switchToIFrame(driver);
+					if (PopupFindAddress.isBuscadorClickableUntil(2/*maxSecondsToWait*/, driver)) {
+						PopupFindAddress.setDataBuscador(driver, codPostalPais);
+						PopupFindAddress.clickButtonLupa(driver);
+						PopupFindAddress.clickFirstDirecc(driver);
+					}
+				}
+			}
+			catch (Exception e) {
+				pLogger.warn("Exception clicking Find Address button", e);
+			}
+			finally { driver.switchTo().window(mainWindowHandle); }
+		}
+	}
+
+	public static String getCodigoPostal(WebDriver driver) {
+		if (state(Present, By.xpath(XPathInputCodPost), driver).check()) {
+			return (driver.findElement(By.xpath(XPathInputCodPost)).getAttribute("value"));
+		}
+		return "";
+	}
+
+	public static void clickPublicidadIfVisible(HashMap<String,String> datosRegistro, WebDriver driver) {
+		By byCheckPublic = By.xpath(XPathCheckPublicidad);
+		if (state(Present, byCheckPublic, driver).check()) {
+			moveToElement(byCheckPublic, driver);
+			if (state(Visible, byCheckPublic, driver).check()) {
+				driver.findElement(byCheckPublic).click();
+				datosRegistro.put("cfPubli", "true");
+				return;
+			}
+		}
+		datosRegistro.put("cfPubli", "false");
+	}
+
     /**
      * @param posInSelect: elemento del desplegable que queremos desplegar (comenzando desde el 1)
      */
@@ -549,34 +550,32 @@ public class Page2IdentCheckout extends WebdrvWrapp {
         
         return datosSeteados;
     }
-    
-    public static boolean isContinuarClickableUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementClickableUntil(driver, By.xpath(XPathBotonContinuar), maxSecondsToWait));
-    }
-    
-    public static void clickBotonContinuarAndWait(int maxSecondsToWait, WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathBotonContinuar), maxSecondsToWait);
+
+	public static boolean isContinuarClickableUntil(int maxSeconds, WebDriver driver) {
+		return (state(Clickable, By.xpath(XPathBotonContinuar), driver)
+				.wait(maxSeconds).check());
+	}
+
+	public static void clickBotonContinuarAndWait(int maxSecondsToWait, WebDriver driver) throws Exception {
+		clickAndWaitLoad(driver, By.xpath(XPathBotonContinuar), maxSecondsToWait);
  
-        //Hay una especie de bug (p.e. en el caso de Turquía) que hace que en ocasiones el click no tenga efecto
-        if (isElementPresent(driver, By.xpath(XPathBotonContinuar))) {
-            Thread.sleep(1500);
-            clickAndWaitLoad(driver, By.xpath(XPathBotonContinuar), TypeOfClick.javascript);
-        }
-    }
-    
-    public static boolean isDisplayedAvisoAduanas(WebDriver driver) {
-        return (
-        	isElementVisibleUntil(driver, By.xpath(XPathMsgAduanas), 1)
-        	//isElementPresent(driver, By.xpath(XPathMsgAduanas)) && 
-            //driver.findElement(By.xpath(XPathMsgAduanas)).isDisplayed()
-        );
-    }
-    
-    public static boolean isTextoRGPDVisible(WebDriver driver) {
-		return isElementVisible(driver, By.xpath(XPathTextRGPD));
+		//Hay una especie de bug (p.e. en el caso de Turquía) que hace que en ocasiones el click no tenga efecto
+		if (state(Present, By.xpath(XPathBotonContinuar), driver).check()) {
+			Thread.sleep(1500);
+			clickAndWaitLoad(driver, By.xpath(XPathBotonContinuar), TypeOfClick.javascript);
+		}
+	}
+
+	public static boolean isDisplayedAvisoAduanas(WebDriver driver) {
+		return (state(Visible, By.xpath(XPathMsgAduanas), driver)
+				.wait(1).check());
+	}
+
+	public static boolean isTextoRGPDVisible(WebDriver driver) {
+		return (state(Visible, By.xpath(XPathTextRGPD), driver).check());
 	}
 
 	public static boolean isTextoLegalRGPDVisible(WebDriver driver) {
-		return isElementVisible(driver, By.xpath(XPathLegalRGPD));
+		return (state(Visible, By.xpath(XPathLegalRGPD), driver).check());
 	}
 }

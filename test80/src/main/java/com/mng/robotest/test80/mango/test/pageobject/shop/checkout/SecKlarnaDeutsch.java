@@ -7,10 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecKlarnaDeutsch extends WebdrvWrapp {
+public class SecKlarnaDeutsch {
 
     static String XPathCapaKlarnaMobil = "//div[@class[contains(.,'klarna')] and @class[contains(.,'show')]]";
     static String XPathCapaKlarnaDesktop = "//div[@class[contains(.,'klarnaInput')]]";
@@ -33,15 +34,17 @@ public class SecKlarnaDeutsch extends WebdrvWrapp {
         }
         return XPathRadioAceptoDesktop;
     }
-    
-    public static boolean isVisibleUntil(Channel channel, int maxSecondsToWait, WebDriver driver) {
-        return (isElementVisibleUntil(driver, By.xpath(getXPath_capaKlarna(channel)), maxSecondsToWait));
-    }
-    
-    public static boolean isVisibleSelectDiaNacimientoUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathDiaNacimiento), maxSecondsToWait));
-    }
-    
+
+	public static boolean isVisibleUntil(Channel channel, int maxSeconds, WebDriver driver) {
+		String xpath = getXPath_capaKlarna(channel);
+		return (state(Visible, By.xpath(xpath), driver).wait(maxSeconds).check());
+	}
+
+	public static boolean isVisibleSelectDiaNacimientoUntil(int maxSeconds, WebDriver driver) {
+		return (state(Visible, By.xpath(XPathDiaNacimiento), driver)
+				.wait(maxSeconds).check());
+	}
+
     /**
      * @param fechaNaci en formato "dd-mm-aaaa"
      */

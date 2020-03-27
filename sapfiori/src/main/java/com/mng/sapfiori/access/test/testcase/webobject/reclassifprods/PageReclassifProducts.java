@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.sapfiori.access.test.testcase.generic.webobject.utils.PageObject;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageReclassifProducts extends PageObject {
 	
@@ -20,7 +21,7 @@ public class PageReclassifProducts extends PageObject {
 	}
 	
 	public boolean checkIsPageUntil(int maxSeconds) {
-		return (isElementVisibleUntil(driver, By.xpath(XPathPageHeader), maxSeconds));
+		return (state(Visible, By.xpath(XPathPageHeader)).wait(maxSeconds).check());
 	}
 	
 	public void writeInputCodEstadMerc(String newCodEstadMerc) throws Exception {
@@ -30,7 +31,7 @@ public class PageReclassifProducts extends PageObject {
 	
 	public PageSelProdsToReclassify clickGrabarButton() throws Exception {
 		clickAndWaitLoad(driver, By.xpath(XPathGrabarButton));
-		if (!isElementInvisibleUntil(driver, By.xpath(XPathGrabarButton), 3)) {
+		if (!state(Invisible, By.xpath(XPathGrabarButton)).wait(3).check()) {
 			waitForPageFinished();
 			clickAndWaitLoad(driver, By.xpath(XPathGrabarButton));
 		}

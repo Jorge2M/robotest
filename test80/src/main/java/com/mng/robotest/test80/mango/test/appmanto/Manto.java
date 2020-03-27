@@ -159,13 +159,13 @@ public class Manto {
 
 		String mail = "esther.esteve@mango.com";
 		String cheque = "204028046151";
-		PageGestorChequesStpV.inputMailAndClickCorreoCliente(mail, driver);
-		
-		PageGestorChequesStpV.clickPedido(10, mail, driver);
-		PageGestorChequesStpV.volverCheques(driver);
-		PageGestorChequesStpV.inputCheque(cheque, driver);
-		PageGestorChequesStpV.chequeDetails(driver);
-		PageGestorChequesStpV.volverCheques(driver);
+		PageGestorChequesStpV pageGestChecksStpV = new PageGestorChequesStpV(driver);
+		pageGestChecksStpV.inputMailAndClickCorreoCliente(mail);
+		pageGestChecksStpV.clickPedido(10, mail);
+		pageGestChecksStpV.volverCheques();
+		pageGestChecksStpV.inputCheque(cheque);
+		pageGestChecksStpV.chequeDetails();
+		pageGestChecksStpV.volverCheques();
 	}
 	
 	@Test(

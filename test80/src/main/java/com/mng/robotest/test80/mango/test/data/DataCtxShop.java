@@ -3,8 +3,6 @@ package com.mng.robotest.test80.mango.test.data;
 import com.mng.testmaker.conf.Channel;
 
 import java.io.Serializable;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;

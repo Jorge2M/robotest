@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.sapfiori.access.test.testcase.generic.webobject.utils.PageObject;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class InputBase extends PageObject {
 	
@@ -32,7 +33,7 @@ public class InputBase extends PageObject {
 	
 	public void clear() {
 		By byItemCrossIcon = By.xpath(xpathItemInInputCrossIcon);
-		if (isElementClickable(driver, byItemCrossIcon)) {
+		if (state(Clickable, byItemCrossIcon).check()) {
 			driver.findElement(byItemCrossIcon).click();
 		}
 		WebElement inputElem = getInputElement();
@@ -49,6 +50,6 @@ public class InputBase extends PageObject {
 	}
 	
 	public boolean isVisible() {
-		return isElementVisible(driver, By.xpath(xpathInput));
+		return (state(Visible, By.xpath(xpathInput), driver).check());
 	}
 }

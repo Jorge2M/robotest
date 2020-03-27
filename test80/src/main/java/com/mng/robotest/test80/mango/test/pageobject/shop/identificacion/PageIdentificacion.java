@@ -7,7 +7,8 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper.UserMenu;
@@ -21,7 +22,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAf
  * @author jorge.munoz
  *
  */
-public class PageIdentificacion extends WebdrvWrapp {
+public class PageIdentificacion {
 	
 	private static String avisoCredencialesKO = "Tu e-mail o contraseña no son correctos";
 	static String XPathErrorCredencialesKO = "//div[@class='formErrors']//li[text()[contains(.,'" + avisoCredencialesKO + "')]]";
@@ -30,8 +31,9 @@ public class PageIdentificacion extends WebdrvWrapp {
 	static String XPathInputPassword = "//input[@id[contains(.,'chkPwd')]]";
 	static String XPathSubmitButton = "//div[@class='submitContent']/input[@type='submit']";
 
-	public static boolean isVisibleUserUntil(int maxSecondsToWait, WebDriver driver) {
-		return isElementVisibleUntil(driver, By.xpath(XPathInputUser), maxSecondsToWait);
+	public static boolean isVisibleUserUntil(int maxSeconds, WebDriver driver) {
+		return (state(Visible, By.xpath(XPathInputUser), driver)
+				.wait(maxSeconds).check());
 	}
 
 	public static String getLiteralAvisiCredencialesKO() {
@@ -88,7 +90,7 @@ public class PageIdentificacion extends WebdrvWrapp {
     }
     
     public static boolean isButtonEntrarVisible(WebDriver driver) {
-    	return (isElementVisible(driver, By.xpath(XPathSubmitButton)));
+    	return (state(Visible, By.xpath(XPathSubmitButton), driver).check());
     }
 
     /**
@@ -105,7 +107,7 @@ public class PageIdentificacion extends WebdrvWrapp {
             // Si existe, nos posicionamos y seleccionamos el link \"CERRAR SESIÓN\" 
             // En el caso de iPhone parece que mantiene la sesión abierta después de un caso de prueba 
         	SecMenusWrap secMenus = SecMenusWrap.getNew(channel, app, driver);
-        	boolean menuClicado = secMenus.getMenusUser().clickMenuIfInState(UserMenu.cerrarSesion, StateElem.Clickable);
+        	boolean menuClicado = secMenus.getMenusUser().clickMenuIfInState(UserMenu.cerrarSesion, Clickable);
             
             //Si hemos clicado el menú 'Cerrar Sesión' volvemos a abrir los menús
             if (menuClicado) {
@@ -118,7 +120,7 @@ public class PageIdentificacion extends WebdrvWrapp {
     }
     
     public static boolean isErrorEmailoPasswordKO(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathErrorCredencialesKO))); 
+    	return (state(Present, By.xpath(XPathErrorCredencialesKO), driver).check());
     }
     
     public static void clickHasOlvidadoContrasenya(WebDriver driver) throws Exception {

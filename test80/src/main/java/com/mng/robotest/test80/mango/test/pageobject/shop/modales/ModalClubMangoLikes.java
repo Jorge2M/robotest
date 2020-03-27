@@ -3,7 +3,8 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.modales;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class ModalClubMangoLikes {
 
@@ -12,11 +13,11 @@ public class ModalClubMangoLikes {
 	private static final String xpathLinkForClose = xpathModal + "//span[@class='modal-close-icon']";
 	
 	public static boolean isVisible(WebDriver driver) {
-		return WebdrvWrapp.isElementVisible(driver, By.xpath(xpathModal));
+		return (state(Visible, By.xpath(xpathModal), driver).check());
 	}
 	
 	public static void clickDescubreTusVentajas(WebDriver driver) throws Exception {
-		WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(xpathDescubreTusVentajas));
+		clickAndWaitLoad(driver, By.xpath(xpathDescubreTusVentajas));
 	}
 	
 	public static void closeModalIfVisible(WebDriver driver) throws Exception {
@@ -26,6 +27,6 @@ public class ModalClubMangoLikes {
 	}
 	
 	private static void closeModal(WebDriver driver) throws Exception {
-		WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(xpathLinkForClose));
+		clickAndWaitLoad(driver, By.xpath(xpathLinkForClose));
 	}
 }

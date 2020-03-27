@@ -3,7 +3,8 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.ficha;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 /**
  * Modal para compartir el enlace que aparece al seleccionar el link "Compartir" de la nueva Ficha
@@ -11,7 +12,7 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
  *
  */
 
-public class ModCompartirNew extends WebdrvWrapp {
+public class ModCompartirNew {
 
     //El valor es el que figura en el data-ga del ancor
     public enum IconSocial {
@@ -43,12 +44,13 @@ public class ModCompartirNew extends WebdrvWrapp {
         return (XPathIcon + "//self::*[@data-ga='" + icon + "']");
     }
     
-    public static boolean isVisibleUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathWrapper), maxSecondsToWait));
+    public static boolean isVisibleUntil(int maxSeconds, WebDriver driver) {
+    	return (state(Visible, By.xpath(XPathWrapper), driver)
+    			.wait(maxSeconds).check());
     }
     
     public static boolean isVisibleIcon(IconSocial icon, WebDriver driver) {
         String xpathIcon = getXPathIcon(icon);
-        return (isElementVisible(driver, By.xpath(xpathIcon)));
+        return (state(Visible, By.xpath(xpathIcon), driver).check());
     }
 }

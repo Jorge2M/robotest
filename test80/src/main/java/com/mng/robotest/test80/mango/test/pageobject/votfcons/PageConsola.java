@@ -4,10 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageConsola extends WebdrvWrapp {
+public class PageConsola {
 
     /**
      * Mensaje que aparece en el caso de una consulta de tipos de envío OK 
@@ -112,14 +113,16 @@ public class PageConsola extends WebdrvWrapp {
      * @return si existe el apartado de "Test servicios VOTF"
      */
     public static boolean existTestServVOTF(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath("//span[text()[contains(.,'Test servicios VOTF')]]")));
+    	String xpath = "//span[text()[contains(.,'Test servicios VOTF')]]";
+    	return (state(Present, By.xpath(xpath), driver).check());
     }
     
     /**
      * @return si existe el apartado de "Consola comandos VOTF"
      */
     public static boolean existConsolaComVOTF(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath("//span[text()[contains(.,'Consola comandos VOTF')]]")));
+    	String xpath = "//span[text()[contains(.,'Consola comandos VOTF')]]";
+    	return (state(Present, By.xpath(xpath), driver).check());
     }
     
     /**
@@ -231,8 +234,9 @@ public class PageConsola extends WebdrvWrapp {
     /**
      * Esperamos hasta que existen valores (options) en el desplegable (select) de "Código transporte" (tardan un poco en cargarse)
      */
-    public static boolean isDataSelectCodigoTransporte(int maxSecondsToWait, WebDriver driver) {
-        return (isElementPresentUntil(driver, By.xpath(XPathSelectCodTransporte + "/option"), maxSecondsToWait));
+    public static boolean isDataSelectCodigoTransporte(int maxSeconds, WebDriver driver) {
+    	String xpath = XPathSelectCodTransporte + "/option";
+    	return (state(Present, By.xpath(xpath), driver).wait(maxSeconds).check());
     }
     
         

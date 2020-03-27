@@ -6,8 +6,10 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecSearch;
@@ -15,9 +17,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper.UserMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
 
-public abstract class SecCabecera extends WebdrvWrapp {
+public abstract class SecCabecera extends PageObjTM {
 	
-	protected final WebDriver driver;
 	protected final Channel channel;
 	protected final AppEcom app;
 	protected final SecSearch secSearch;
@@ -25,15 +26,15 @@ public abstract class SecCabecera extends WebdrvWrapp {
 	private final static String XPathLinkLogoMango = "//a[@class='logo-link' or @class[contains(.,'logo_')]]";
 
 	abstract String getXPathNumberArtIcono();
-	public abstract boolean isInStateIconoBolsa(StateElem state);
+	public abstract boolean isInStateIconoBolsa(State state);
 	public abstract void clickIconoBolsa() throws Exception;
 	public abstract void clickIconoBolsaWhenDisp(int maxSecondsToWait) throws Exception;
 	public abstract void hoverIconoBolsa();
 	
 	protected SecCabecera(Channel channel, AppEcom app, WebDriver driver) {
+		super(driver);
 		this.channel = channel;
 		this.app = app;
-		this.driver = driver;
 		this.secSearch = SecSearch.getNew(channel, app, driver);
 
 	}
@@ -61,32 +62,32 @@ public abstract class SecCabecera extends WebdrvWrapp {
 		return (SecCabeceraOutletMobil)this;
 	}
 	
-    public static void buscarTexto(String referencia, Channel channel, AppEcom app, WebDriver driver) throws Exception {
-    	MenusUserWrapper menusUser = MenusUserWrapper.getNew(channel, app, driver);
-    	menusUser.clickMenuAndWait(UserMenu.lupa);
-    	SecSearch secSearch = SecSearch.getNew(channel, app, driver);
-    	secSearch.search(referencia);
-    }
+	public static void buscarTexto(String referencia, Channel channel, AppEcom app, WebDriver driver) throws Exception {
+		MenusUserWrapper menusUser = MenusUserWrapper.getNew(channel, app, driver);
+		menusUser.clickMenuAndWait(UserMenu.lupa);
+		SecSearch secSearch = SecSearch.getNew(channel, app, driver);
+		secSearch.search(referencia);
+	}
 	
-    public boolean clickLogoMango() throws Exception {
-        if (isElementPresentUntil(driver, By.xpath(XPathLinkLogoMango), 2)) {
-            clickAndWaitLoad(driver, By.xpath(XPathLinkLogoMango));
-            return true;
-        }
-        return false;
-    }
-    
-    public void hoverLogoMango() throws Exception {
-        if (isElementPresent(driver, By.xpath(XPathLinkLogoMango))) {
-        	moveToElement(By.xpath(XPathLinkLogoMango), driver);
-        }
-    }
-    
-    public boolean validaLogoMangoGoesToIdioma(IdiomaPais idioma) {
-        String xpathLogoIdiom = XPathLinkLogoMango + "[@href[contains(.,'/" + idioma.getAcceso() + "')]]";
-        return (isElementPresent(driver, By.xpath(xpathLogoIdiom)));
-    }
-    
+	public boolean clickLogoMango() throws Exception {
+		if (state(Present, By.xpath(XPathLinkLogoMango)).wait(2).check()) {
+			clickAndWaitLoad(driver, By.xpath(XPathLinkLogoMango));
+			return true;
+		}
+		return false;
+	}
+
+	public void hoverLogoMango() throws Exception {
+		if (state(Present, By.xpath(XPathLinkLogoMango)).check()) {
+			moveToElement(By.xpath(XPathLinkLogoMango), driver);
+		}
+	}
+
+	public boolean validaLogoMangoGoesToIdioma(IdiomaPais idioma) {
+		String xpathLogoIdiom = XPathLinkLogoMango + "[@href[contains(.,'/" + idioma.getAcceso() + "')]]";
+		return (state(Present, By.xpath(xpathLogoIdiom)).check());
+	}
+
     public int getNumArticulosBolsa() throws Exception {
         int numArticulos = 0;
         String numArtStr = getNumberArtIcono();
@@ -99,33 +100,33 @@ public abstract class SecCabecera extends WebdrvWrapp {
     public boolean hayArticulosBolsa() throws Exception {
         return (getNumArticulosBolsa() > 0);
     }
-    
-    public String getNumberArtIcono() throws Exception {
-        String articulos = "0";
-        waitForPageLoaded(driver); //Para evitar staleElement en la línea posterior
-        String xpathNumberArtIcono = getXPathNumberArtIcono();
-        if (isElementVisible(driver, By.xpath(xpathNumberArtIcono))) {
-            articulos = driver.findElement(By.xpath(xpathNumberArtIcono)).getText();
-        }
-        return articulos;
-    }
-    
+
+	public String getNumberArtIcono() throws Exception {
+		String articulos = "0";
+		waitForPageLoaded(driver); //Para evitar staleElement en la línea posterior
+		String xpathNumberArtIcono = getXPathNumberArtIcono();
+		if (state(Visible, By.xpath(xpathNumberArtIcono)).check()) {
+			articulos = driver.findElement(By.xpath(xpathNumberArtIcono)).getText();
+		}
+		return articulos;
+	}
+
     //-- Específic functions for movil_web (Shop & Outlet)
     
 	private final static String XPathHeader = "//header";
     private final static String XPathSmartBanner = XPathHeader + "/div[@id='smartbanner']";
     private final static String XPathLinkCloseSmartBanner = XPathSmartBanner + "//a[@class='sb-close']";    
     private final static String XPathIconoMenuHamburguesa = XPathHeader + "//div[@class[contains(.,'menu-open-button')]]";
-    
-    /**
-     * Si existe, cierra el banner de aviso en móvil (p.e. el que sale proponiendo la descarga de la App)
-     */
-    public void closeSmartBannerIfExistsMobil() throws Exception {
-        if (isElementVisible(driver, By.xpath(XPathLinkCloseSmartBanner))) {
-            clickAndWaitLoad(driver, By.xpath(XPathLinkCloseSmartBanner));
-        }
-    }
-    
+
+	/**
+	 * Si existe, cierra el banner de aviso en móvil (p.e. el que sale proponiendo la descarga de la App)
+	 */
+	public void closeSmartBannerIfExistsMobil() throws Exception {
+		if (state(Visible, By.xpath(XPathLinkCloseSmartBanner)).check()) {
+			clickAndWaitLoad(driver, By.xpath(XPathLinkCloseSmartBanner));
+		}
+	}
+
     /**
      * Función que abre/cierra el menú lateral de móvil según le indiquemos en el parámetro 'open'
      * @param open: 'true'  queremos que el menú lateral de móvil se abra
@@ -151,10 +152,11 @@ public abstract class SecCabecera extends WebdrvWrapp {
         }
     }
 
-    public boolean isVisibleIconoMenuHamburguesaUntil(int maxSecondsToWait) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathIconoMenuHamburguesa), maxSecondsToWait));
-    }
-    
+	public boolean isVisibleIconoMenuHamburguesaUntil(int maxSeconds) {
+		return (state(Visible, By.xpath(XPathIconoMenuHamburguesa))
+				.wait(maxSeconds).check());
+	}
+
     public void clickIconoMenuHamburguesaWhenReady(TypeOfClick typeOfClick, WebDriver driver) throws Exception {
         clickAndWaitLoad(driver, By.xpath(XPathIconoMenuHamburguesa), typeOfClick);
     }

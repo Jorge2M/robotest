@@ -4,12 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class PageRegalarMisLikes extends WebdrvWrapp {
-
-	private final WebDriver driver;
+public class PageRegalarMisLikes extends PageObjTM {
 	
 	private final static String XPathWrapperPage = "//div[@id='loyaltyTransferLikes']";
 	private final static String XPathInputMensaje = "//input[@name='name']";
@@ -21,11 +20,11 @@ public class PageRegalarMisLikes extends WebdrvWrapp {
 	private final static String XPathBotonEnviarRegalo = "//button[@class[contains(.,'step2-form')]]";
 	
 	public PageRegalarMisLikes(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 	}
 	
 	public boolean checkIsPage() {
-		return isElementVisible(driver, By.xpath(XPathWrapperPage));
+		return (state(Visible, By.xpath(XPathWrapperPage)).check());
 	}
 	
 	public void inputMensaje(String mensaje) {
@@ -43,7 +42,7 @@ public class PageRegalarMisLikes extends WebdrvWrapp {
 	}
 	
 	public boolean checkIsVisibleBlockCuantosLikes() {
-		return isElementVisible(driver, By.xpath(XPathBlockCuantosLikes));
+		return (state(Visible, By.xpath(XPathBlockCuantosLikes)).check());
 	}
 	
 	public void inputLikesToRegalar(int numLikesToRegalar) throws Exception {

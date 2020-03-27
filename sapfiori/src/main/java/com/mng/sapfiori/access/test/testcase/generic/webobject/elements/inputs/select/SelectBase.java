@@ -4,16 +4,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public abstract class SelectBase extends WebdrvWrapp {
-
-	final WebDriver driver;
+public abstract class SelectBase extends PageObjTM {
 	
 	private static final String XPathArrowRelative = "//span[@id[contains(.,'-arrow')]]";
 
 	SelectBase(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 	}
 	
 	abstract String getXPathOption();
@@ -71,7 +70,7 @@ public abstract class SelectBase extends WebdrvWrapp {
 	public void selectByPosition(int positionToSelect) {
 		clickArrowToUnfold();
 		By byOption = By.xpath("(" + getXPathOption() + ")[" + positionToSelect + "]");
-		WebdrvWrapp.isElementVisibleUntil(driver, byOption, 1);
+		state(Visible, byOption, driver).wait(1).check();
 		WebElement optionElem = getElementVisible(driver, byOption);
 		optionElem.click();
 	}

@@ -19,7 +19,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 
 /**getArticuloConVariedadColoresAndHover
@@ -27,6 +27,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenus
  * @author jorge.munoz
  */
 public class PageGaleriaDesktop extends PageGaleria {
+	
 	public static SecBannerHeadGallery secBannerHead;
 	public static SecSelectorPrecios secSelectorPrecios;
 	public static SecCrossSelling secCrossSelling;
@@ -95,7 +96,8 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 
 	public boolean isPage() {
-		return (isElementPresent(driver, By.xpath("//div[@class[contains(.,'container-fluid catalog')]]")));
+		String xpath = "//div[@class[contains(.,'container-fluid catalog')]]";
+		return (state(Present, By.xpath(xpath)).check());
 	}
 	
 	private String getXPathLabel(LabelArticle label) {
@@ -203,9 +205,9 @@ public class PageGaleriaDesktop extends PageGaleria {
 		String lastCharUpper = idLinCarrusel.substring(idLinCarrusel.length()-1,idLinCarrusel.length()).toUpperCase();
 		String lineaLastCharCapital = idLinCarrusel.substring(0,idLinCarrusel.length()-1) + lastCharUpper;
 		if (article!=null) {
-			if (isElementPresent(article, By.xpath(".//a[@href[contains(.,'" + idLinCarrusel + "')]]")) ||
-				isElementPresent(article, By.xpath(".//a[@href[contains(.,'s=" + linea1rstCharCapital + "')]]")) ||
-				isElementPresent(article, By.xpath(".//a[@href[contains(.,'_" + lineaLastCharCapital + "')]]"))) {
+			if (state(Present, article).by(By.xpath(".//a[@href[contains(.,'" + idLinCarrusel + "')]]")).check() ||
+				state(Present, article).by(By.xpath(".//a[@href[contains(.,'s=" + linea1rstCharCapital + "')]]")).check() ||
+				state(Present, article).by(By.xpath(".//a[@href[contains(.,'_" + lineaLastCharCapital + "')]]")).check()) {
 				return true;
 			}
 			
@@ -213,7 +215,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 			LineaType lineaType = LineaType.getLineaType(idLinCarrusel);
 			if (lineaType!=null && 
 			   (lineaType==LineaType.nina || lineaType==LineaType.nino)) {
-				if (isElementPresent(article, By.xpath(".//a[@href[contains(.,'" + lineaType.getId2() + "')]]"))) {
+				if (state(Present, By.xpath(".//a[@href[contains(.,'" + lineaType.getId2() + "')]]")).check()) {
 					return true;
 				}
 			}
@@ -282,12 +284,12 @@ public class PageGaleriaDesktop extends PageGaleria {
  
     public boolean isArticuloWithStringInName(String string) {
         String xpathArtWithString = getXPATH_nombreArticuloWithString(string);
-        return (isElementPresent(driver, By.xpath(xpathArtWithString)));
+        return (state(Present, By.xpath(xpathArtWithString)).check());
     }    
  
     @Override
     public int getLayoutNumColumnas() {
-        if (isElementPresent(driver, By.xpath(XPathArticulo))) {
+    	if (state(Present, By.xpath(XPathArticulo)).check()) {
             String classArt = driver.findElement(By.xpath(XPathArticulo)).getAttribute("class");
             if (classArt.contains("layout-3-columns")) {
                 return 3;
@@ -392,7 +394,7 @@ public class PageGaleriaDesktop extends PageGaleria {
     private int getWidthFromAtricleSrcImg(WebElement article) {
     	int widthImg = 0;
     	By byImgArticle = By.xpath("." + XPathImgRelativeArticle);
-    	if (WebdrvWrapp.isElementPresent(article, byImgArticle)) {
+    	if (state(Present, article).by(byImgArticle).check()) {
     		WebElement imgArticle = article.findElement(byImgArticle);
 	    	String srcImgArticle = imgArticle.getAttribute("data-original");
 	    	if (srcImgArticle!=null) {
@@ -544,7 +546,7 @@ public class PageGaleriaDesktop extends PageGaleria {
     }
     
     public boolean isVisibleAnyArticle() {
-    	return (isElementVisible(driver, By.xpath(XPathArticulo)));
+    	return (state(Visible, By.xpath(XPathArticulo)).check());
     }
 
     public void clickArticulo(int numArticulo) throws Exception {
@@ -552,7 +554,7 @@ public class PageGaleriaDesktop extends PageGaleria {
         clickAndWaitLoad(driver, byArticulo);
         
         //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
-        if (isElementVisible(driver, byArticulo)) {
+        if (state(Visible, byArticulo).check()) {
         	try {
         		clickAndWaitLoad(driver, byArticulo, TypeOfClick.javascript);
         	}
@@ -586,14 +588,14 @@ public class PageGaleriaDesktop extends PageGaleria {
     
     public boolean isPresentSliderInArticle(TypeSlider typeSlider, WebElement article) {
     	String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
-    	return (isElementPresent(article, By.xpath("." + xpathSlider)));
+    	return (state(Present, article).by(By.xpath("." + xpathSlider)).check());
     }
     
     public WebElement hoverSliderUntilClickable(TypeSlider typeSlider, WebElement article) {
     	String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
     	for (int i=0; i<5; i++) {
         	hoverArticle(article);
-	    	if (isElementClickableUntil(driver, By.xpath(xpathSlider), 2)) {
+        	if (state(Clickable, By.xpath(xpathSlider)).wait(2).check()) {
 	    		break;
 	    	}
 	    	moveToElement(article.findElement(By.xpath("//a")), driver);
@@ -643,7 +645,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 
 		//Si existe algún elemento que no pertenece al grupo de nombres válidos -> devolvemos el 1ero que no coincide
 		ArrayList<String> listTxtArtNoValidos = new ArrayList<>();
-		if (isElementPresent(driver, By.xpath(xpathLitArticulos))) {
+		if (state(Present, By.xpath(xpathLitArticulos)).check()) {
 			for (int i=0; i<3; i++) {
 				try {
 					waitForPageLoaded(driver);
@@ -694,7 +696,7 @@ public class PageGaleriaDesktop extends PageGaleria {
     @Override
     public String getNameColorFromCodigo(String codigoColor) {
     	String xpathImgColor = secColores.getXPathImgCodigoColor(codigoColor);
-    	if (!isElementPresent(driver, By.xpath(xpathImgColor))) {
+    	if (!state(Present, By.xpath(xpathImgColor)).check()) {
     		return Constantes.colorDesconocido;
     	}
     	
@@ -717,9 +719,9 @@ public class PageGaleriaDesktop extends PageGaleria {
     }
     
     @Override
-    public boolean isArticleWithHearthIconPresentUntil(int posArticle, int maxSecondsToWait) {
+    public boolean isArticleWithHearthIconPresentUntil(int posArticle, int maxSeconds) {
     	String XPathIcon = getXPathArticleHearthIcon(posArticle);
-    	return (isElementPresentUntil(driver, By.xpath(XPathIcon), maxSecondsToWait));
+    	return (state(Present, By.xpath(XPathIcon)).wait(maxSeconds).check());
     }
     
     @SuppressWarnings("static-access")
@@ -754,10 +756,9 @@ public class PageGaleriaDesktop extends PageGaleria {
 	@Override
 	public boolean isHeaderArticlesVisible(String textHeader) {
 		By byHeader = By.xpath(XPathHeaderArticles);
-		if (WebdrvWrapp.isElementVisible(driver, byHeader)) {
+		if (state(Visible, byHeader).check()) {
 			return (driver.findElement(byHeader).getText().toLowerCase().contains(textHeader.toLowerCase()));
 		}
-		
 		return false;
 	}
 
@@ -776,6 +777,6 @@ public class PageGaleriaDesktop extends PageGaleria {
 
 	public boolean isPresentAnyArticle(TypeArticleDesktop typeArticle) {
 		String xpathVideo = getXPathArticulo(typeArticle);
-		return (isElementPresent(driver, By.xpath(xpathVideo)));
+		return (state(Present, By.xpath(xpathVideo)).check());
 	}
 }

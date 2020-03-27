@@ -5,12 +5,13 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.domain.suitetree.StepTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
@@ -89,7 +90,7 @@ public class SecMenusUserStpV {
 		description="Aparece el link superior de \"Iniciar sesión\" (lo esperamos hasta #{maxSecondsWait} segundos)",
 		level=State.Defect)
 	private boolean checkIsVisibleIniciarSesionLink(int maxSecondsWait) throws Exception {
-        return (userMenus.isMenuInStateUntil(UserMenu.iniciarSesion, StateElem.Present, maxSecondsWait));
+        return (userMenus.isMenuInStateUntil(UserMenu.iniciarSesion, Present, maxSecondsWait));
 	}
 	
 	public void logoffLogin(String userConnect, String userPassword) throws Exception {
@@ -118,7 +119,7 @@ public class SecMenusUserStpV {
 		if (channel==Channel.desktop && app==AppEcom.shop) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
-	    return (userMenus.isMenuInStateUntil(UserMenu.cerrarSesion, StateElem.Present, 1));
+	    return (userMenus.isMenuInStateUntil(UserMenu.cerrarSesion, Present, 1));
 	}
 
     @Step (
@@ -161,7 +162,7 @@ public class SecMenusUserStpV {
 		if (channel==Channel.desktop && app==AppEcom.shop) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
-		boolean visibilityMLY = userMenus.isMenuInStateUntil(UserMenu.mangoLikesYou, StateElem.Present, 1);
+		boolean visibilityMLY = userMenus.isMenuInStateUntil(UserMenu.mangoLikesYou, Present, 1);
 		switch (app) {
 		case shop:
 			checks.add(

@@ -7,7 +7,8 @@ import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
@@ -36,7 +37,7 @@ public class SecCabeceraStpV {
 	@Validation
 	public ChecksTM validateIconoBolsa() {
 		ChecksTM validations = ChecksTM.getNew();
-		boolean isVisibleIconoBolsa = secCabecera.isInStateIconoBolsa(StateElem.Visible);
+		boolean isVisibleIconoBolsa = secCabecera.isInStateIconoBolsa(Visible);
 		if (pais.isVentaOnline()) {
 			validations.add(
 				"<b>Sí</b> es posible comprar (aparece la capa relacionada con la bolsa)",

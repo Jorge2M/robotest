@@ -3,10 +3,12 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.micuenta;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageMisDatos extends WebdrvWrapp {
+public class PageMisDatos {
+	
     static String XPathIsPage = "//div[@class='myDetails']";
     static String XPathTitleOk = "//h2[text()[contains(.,'Mis datos')]]";
     static String XPathInputEmail = "//input[@id[contains(.,'cfEmail')]]";
@@ -49,21 +51,21 @@ public class PageMisDatos extends WebdrvWrapp {
     }
     
     public static String getCodPaisSelected(WebDriver driver) {
-        if (isElementPresent(driver, By.xpath(XPathOptionPaisSelected))) {
+    	if (state(Present, By.xpath(XPathOptionPaisSelected), driver).check()) {
             return (driver.findElement(By.xpath(XPathOptionPaisSelected)).getAttribute("value"));
         }
         return "";
     }
     
     public static String getProvinciaSelected(WebDriver driver) {
-        if (isElementPresent(driver, By.xpath(XPathOptionProvinciaSelected))) {
+    	if (state(Present, By.xpath(XPathOptionProvinciaSelected), driver).check()) {
             return (driver.findElement(By.xpath(XPathOptionProvinciaSelected)).getText());
         }
         return "";
     }    
     
     public static boolean isVisiblePasswordTypePassword(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathInputPasswordTypePassword)));
+    	return (state(Visible, By.xpath(XPathInputPasswordTypePassword), driver).check());
     }
     
     public static int getNumInputContentVoid(WebDriver driver) {
@@ -71,11 +73,11 @@ public class PageMisDatos extends WebdrvWrapp {
     }
     
     public static boolean isPage(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathIsPage)));
+    	return (state(Present, By.xpath(XPathIsPage), driver).check());
     }
     
     public static boolean titleOk(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathTitleOk)));
+    	return (state(Present, By.xpath(XPathTitleOk), driver).check());
     }
     
     public static boolean emailIsDisabled(WebDriver driver) {
@@ -102,6 +104,6 @@ public class PageMisDatos extends WebdrvWrapp {
     }
     
     public static boolean pageResOK(WebDriver driver) { 
-        return (isElementPresent(driver, By.xpath(XPathPageResOK)));
+    	return (state(Present, By.xpath(XPathPageResOK), driver).check());
     }
 }

@@ -3,8 +3,8 @@ package com.mng.robotest.test80.mango.test.stpv.manto.pedido;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageGenerarPedido;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageGenerarPedido.EstadoPedido;
 import static com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageGenerarPedido.GestionPostCompra.*;
@@ -33,6 +33,6 @@ public class PageGenerarPedidoStpV {
 		description="Aparece el mensaje de <b>Fichero creado correctamente</b>",
 		level=State.Warn)
 	private static boolean checkMsgFileCreatedCorrectly(WebDriver driver) {
-		return (PageGenerarPedido.isElementInState(MessageOkFicheroCreado, StateElem.Visible, driver));
+		return (PageGenerarPedido.isElementInState(MessageOkFicheroCreado, Visible, driver));
 	}
 }

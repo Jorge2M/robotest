@@ -18,8 +18,18 @@ public class PageKoCardAdyenStpV {
 	
     static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
+    private final WebDriver driver;
+    private final Channel channel;
+    private final PageKoCardAdyen pageKoCardAdyen;
+    
+    public PageKoCardAdyenStpV(Channel channel, WebDriver driver) {
+    	this.driver = driver;
+    	this.channel = channel;
+    	this.pageKoCardAdyen = new PageKoCardAdyen(driver);
+    }
+    
     @Validation
-    public static ChecksTM validateIsPage(String importeTotal, Pais pais, Channel channel, WebDriver driver) {
+    public ChecksTM validateIsPage(String importeTotal, Pais pais) {
     	ChecksTM validations = ChecksTM.getNew();
     	if (channel==Channel.desktop) {
 	      	validations.add(
@@ -31,15 +41,15 @@ public class PageKoCardAdyenStpV {
     		!PageCheckoutWrapper.isPresentMetodosPago(channel, driver), State.Defect);
       	validations.add(
     		"Aparece la página de Adyen / Korean Kredit Cards",
-    		PageKoCardAdyen.isPage(driver), State.Defect);
+    		pageKoCardAdyen.isPage(), State.Defect);
       	return validations;
     }
 
     @Step (
     	description="Seleccionar el icono de Korean Credit Card para continuar",
         expected="Aparece la páinga de INIpay")
-    public static void clickIconForContinue (Channel channel, WebDriver driver) throws Exception {
-        PageKoCardAdyen.clickForContinue(channel, driver);
+    public void clickIconForContinue () throws Exception {
+        pageKoCardAdyen.clickForContinue(channel);
         
         //Validations
         switch (channel) {

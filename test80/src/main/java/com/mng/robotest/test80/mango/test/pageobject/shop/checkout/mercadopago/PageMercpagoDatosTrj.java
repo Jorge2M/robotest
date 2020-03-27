@@ -4,9 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public abstract class PageMercpagoDatosTrj extends WebdrvWrapp {
+public abstract class PageMercpagoDatosTrj {
 	
 	final WebDriver driver; 
 	
@@ -40,7 +41,7 @@ public abstract class PageMercpagoDatosTrj extends WebdrvWrapp {
     }
     
     public TypePant getTypeInput() {
-    	if (WebdrvWrapp.isElementVisible(driver, By.xpath(XPathInputNumTarj))) {
+    	if (state(Visible, By.xpath(XPathInputNumTarj), driver).check()) {
     		return TypePant.inputDataTrjNew;
     	}
     	

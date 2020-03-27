@@ -9,17 +9,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalDetalleMisCompras;
 
 
-public class PageMisCompras extends WebdrvWrapp {
+public class PageMisCompras extends PageObjTM {
     
     private final SecDetalleCompraTienda secDetalleCompraTienda;
     private final SecQuickViewArticulo secQuickViewArticulo;
     private final ModalDetalleMisCompras modalDetalleMisCompras;
     
-    private final WebDriver driver;
     private final Channel channel;
     
     public enum TypeCompra {Tienda, Online}
@@ -35,7 +35,7 @@ public class PageMisCompras extends WebdrvWrapp {
     static String XPathReferenciaArticulo = XPathArticuloMasInfo + "//div[@class='reference']";
     
     private PageMisCompras(Channel channel, WebDriver driver) {
-    	this.driver = driver;
+    	super(driver);
     	this.channel = channel;
         this.secDetalleCompraTienda = SecDetalleCompraTienda.getNew(driver);
         this.secQuickViewArticulo = SecQuickViewArticulo.getNew(driver);
@@ -55,8 +55,8 @@ public class PageMisCompras extends WebdrvWrapp {
     	return this.modalDetalleMisCompras;
     }
     
-    public boolean isPageUntil(int maxSecondsToWait) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathCapaContenedora), maxSecondsToWait));
+    public boolean isPageUntil(int maxSeconds) {
+    	return (state(Visible, By.xpath(XPathCapaContenedora)).wait(maxSeconds).check());
     }
     
     private String getXPathBlock(TypeCompra typeCompra) {
@@ -131,19 +131,19 @@ public class PageMisCompras extends WebdrvWrapp {
         return (getXPathCompra(posInLista) + "//div[@class='shop']/p[2]");
     }
     
-    public boolean isPresentBlockUntil(int maxSecondsToWait, TypeCompra typeCompra) {
+    public boolean isPresentBlockUntil(int maxSeconds, TypeCompra typeCompra) {
         String xpathBlock = getXPathBlock(typeCompra);
-        return (isElementPresentUntil(driver, By.xpath(xpathBlock), maxSecondsToWait));
+        return (state(Present, By.xpath(xpathBlock)).wait(maxSeconds).check());
     }    
     
-    public boolean isSelectedBlockUntil(int maxSecondsToWait, TypeCompra typeCompra) {
+    public boolean isSelectedBlockUntil(int maxSeconds, TypeCompra typeCompra) {
         String xpathBlock = getXPathBlock(typeCompra, true);
-        return (isElementVisibleUntil(driver, By.xpath(xpathBlock), maxSecondsToWait));
+        return (state(Visible, By.xpath(xpathBlock)).wait(maxSeconds).check());
     }
     
     public boolean isVisibleEmptyListImage(TypeCompra typeCompra) {
         String xpathImage = getXPathEmptyListImage(typeCompra);
-        return isElementVisible(driver, By.xpath(xpathImage));
+        return (state(Visible, By.xpath(xpathImage)).check());
     }
     
     public void clickBlock(TypeCompra typeCompra) {
@@ -155,8 +155,8 @@ public class PageMisCompras extends WebdrvWrapp {
         driver.findElement(By.xpath(XPathBlockTienda)).click();
     }    
     
-    public boolean isVisibleAnyCompraUntil(int maxSecondsToWait) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathCompra), maxSecondsToWait));
+    public boolean isVisibleAnyCompraUntil(int maxSeconds) {
+    	return (state(Visible, By.xpath(XPathCompra)).wait(maxSeconds).check());
     }
     
     public TypeCompra getTypeCompra(int posInLista) {

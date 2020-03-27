@@ -6,12 +6,11 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.sapfiori.access.test.testcase.generic.webobject.makers.StandarElementsMaker;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.modals.ModalLoading;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.utils.PageObject;
 import com.mng.sapfiori.access.test.testcase.webobject.pedidos.PageGestionSolPedidoBuyer;
 import com.mng.sapfiori.access.test.testcase.webobject.reclassifprods.PageSelProdsToReclassify;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageIconsMenu extends PageObject {
 	
@@ -40,8 +39,8 @@ public class PageIconsMenu extends PageObject {
 	}
 	
 	public boolean checkIsInitialPageSpanish(int maxSeconds) {
-		return (
-			WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(XPathLabelInitialPageSpanish), maxSeconds));
+		return (state(Visible, By.xpath(XPathLabelInitialPageSpanish))
+				.wait(maxSeconds).check());
 	}
 	
 	public PageSelProdsToReclassify clickClasificarProductos() throws Exception {

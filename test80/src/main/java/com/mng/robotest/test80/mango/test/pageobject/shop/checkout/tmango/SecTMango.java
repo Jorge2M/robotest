@@ -4,10 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecTMango extends WebdrvWrapp {
+public class SecTMango {
 
     public enum TipoPago {pagoHabitual, tresMeses, seisMeses, pagoUnico}
     
@@ -73,15 +74,18 @@ public class SecTMango extends WebdrvWrapp {
         return (xpathLabelMod + "/../../input");
     }
     
-    public static boolean isVisibleUntil(Channel channel, int maxSecondsToWait, WebDriver driver) {
-        return (isElementVisibleUntil(driver, By.xpath(getXPath_section(channel)), maxSecondsToWait));
+    public static boolean isVisibleUntil(Channel channel, int maxSeconds, WebDriver driver) {
+    	String xpath = getXPath_section(channel);
+    	return (state(Visible, By.xpath(xpath), driver).wait(maxSeconds)
+    			.check());
     }
     
     /**
      * @return si una determinada modalidad está disponible
      */
     public static boolean isModalidadDisponible(WebDriver driver, TipoPago tipoPago, Channel channel) {
-        return (isElementPresent(driver, By.xpath(getXPATH_labelModalidad(tipoPago, channel))));    
+    	String xpath = getXPATH_labelModalidad(tipoPago, channel);
+    	return (state(Present, By.xpath(xpath), driver).check());
     }
     
     /**

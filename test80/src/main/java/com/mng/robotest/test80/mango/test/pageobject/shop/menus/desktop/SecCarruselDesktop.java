@@ -7,20 +7,20 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class SecCarruselDesktop extends WebdrvWrapp {
+public class SecCarruselDesktop extends PageObjTM {
 	
 	private final AppEcom app;
-	private final WebDriver driver;
 	
 	private static String TagIdCarrusel = "@CarruselId";
 	private static String XPathLinkCarrGenRelToLinea = "//div[@class[contains(.,'carousel-block')]]/a[@data-label]";
     private static String XPathLinkCarruselRelToGenWithTag = "//self::*[@data-label[contains(.,'-" + TagIdCarrusel + "')]]";
     
     private SecCarruselDesktop(AppEcom app, WebDriver driver) {
+    	super(driver);
     	this.app = app;
-    	this.driver = driver;
     }
     
     public static SecCarruselDesktop getNew(AppEcom app, WebDriver driver) {
@@ -59,12 +59,12 @@ public class SecCarruselDesktop extends WebdrvWrapp {
      */
     public boolean isVisibleCarrusel(Linea linea, String idCarrusel) {
         String xpathCarrousel = getXPathLinkCarruselLinea(linea.getType(), idCarrusel);
-        return (isElementVisible(driver, By.xpath(xpathCarrousel)));
+        return (state(Visible, By.xpath(xpathCarrousel)).check());
     }
     
     public boolean isPresentCarrusel(Linea linea, String idCarrusel) {
         String xpathCarrousel = getXPathLinkCarruselLinea(linea.getType(), idCarrusel);
-        return (isElementPresent(driver, By.xpath(xpathCarrousel)));
+        return (state(Present, By.xpath(xpathCarrousel)).check());
     }    
     
     /**
@@ -85,6 +85,6 @@ public class SecCarruselDesktop extends WebdrvWrapp {
     
     public boolean isPresentCarrousel(LineaType lineaType) {
         String xpathBanner = getXPathCarrouselLink(lineaType);
-        return isElementPresent(driver, By.xpath(xpathBanner)); 
+        return (state(Present, By.xpath(xpathBanner)).check());
     }
 }

@@ -4,7 +4,6 @@ import java.lang.reflect.Method;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestNGMethod;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.access.InputParamsMango;

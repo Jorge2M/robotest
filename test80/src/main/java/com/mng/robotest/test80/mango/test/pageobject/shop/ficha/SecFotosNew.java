@@ -6,7 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 /**
  * SectionObject de la ficha nueva correspondiente a la Foto central y líneas inferiores
@@ -14,7 +15,7 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
  *
  */
 
-public class SecFotosNew extends WebdrvWrapp {
+public class SecFotosNew {
 
 	private final static String XPathCapa = "//div[@class[contains(.,'product-images')]]";
 	private final static String XPathLineFoto = XPathCapa + "//*[@class[contains(.,'columns')]]";
@@ -43,7 +44,7 @@ public class SecFotosNew extends WebdrvWrapp {
     }
 
     public static int getNumLinesFotos(WebDriver driver) {
-        if (!isElementPresent(driver, By.xpath(XPathLineFoto))) {
+    	if (!state(Present, By.xpath(XPathLineFoto), driver).check()) {
             return 0;
         }
         return (driver.findElements(By.xpath(XPathLineFoto)).size());
@@ -51,7 +52,7 @@ public class SecFotosNew extends WebdrvWrapp {
         
     public static int getNumFotosLine(int line, WebDriver driver) {
         String xpathFotoLine = getXPathFoto(line);
-        if (!isElementPresent(driver, By.xpath(xpathFotoLine))) {
+        if (!state(Present, By.xpath(xpathFotoLine), driver).check()) {
             return 0;
         }
         return (driver.findElements(By.xpath(xpathFotoLine)).size());

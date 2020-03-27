@@ -5,11 +5,10 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class SecDetalleCompraTienda extends WebdrvWrapp {
-
-	private final WebDriver driver;
+public class SecDetalleCompraTienda extends PageObjTM {
 	
     private static String XPathDataTicket = "//div[@class[contains(.,'ticket-container')]]";
     private static String XPathNumTicket = XPathDataTicket + "//div[@class='info']/p[1]";  
@@ -19,7 +18,7 @@ public class SecDetalleCompraTienda extends WebdrvWrapp {
     private static String XPathArticulo = "//div[@onclick[contains(.,'openProductDetails')]]";
     
     private SecDetalleCompraTienda(WebDriver driver) {
-    	this.driver = driver;
+    	super(driver);
     }
     public static SecDetalleCompraTienda getNew(WebDriver driver) {
     	return new SecDetalleCompraTienda(driver);
@@ -44,8 +43,8 @@ public class SecDetalleCompraTienda extends WebdrvWrapp {
         return (xpathArticulo + "//div[@class='price' or @class[contains(.,'box-price')]]");
     }
     
-    public boolean isVisibleSectionUntil(int maxSecondsToWait) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathDataTicket), maxSecondsToWait));
+    public boolean isVisibleSectionUntil(int maxSeconds) {
+    	return (state(Visible, By.xpath(XPathDataTicket)).wait(maxSeconds).check());
     }
     
     public String getNumTicket() {
@@ -71,7 +70,7 @@ public class SecDetalleCompraTienda extends WebdrvWrapp {
     }
     
     public boolean isVisibleCodigoBarrasImg() {
-        if (isElementVisible(driver, By.xpath(XPathCodigoBarrasImg))) {
+    	if (state(Visible, By.xpath(XPathCodigoBarrasImg)).check()) {
             //Consideramos que la imagen ha de tener unas dimensiones mínimas de 30x50 para ser visible
             int width=driver.findElement(By.xpath(XPathCodigoBarrasImg)).getSize().getWidth();
             int height=driver.findElement(By.xpath(XPathCodigoBarrasImg)).getSize().getHeight();

@@ -47,17 +47,17 @@ public class SecFooterStpV {
     }
 	 
 	@Validation
-	private static ChecksTM checkPageCorrectAfterSelectLinkFooter(String windowFatherHandle, FooterLink typeFooter, boolean closeAtEnd, 
-																	  Channel channel, WebDriver driver) {
-    	ChecksTM validations = ChecksTM.getNew();
-	    PageFromFooter pageObject = FactoryPageFromFooter.make(typeFooter, channel);
+	private static ChecksTM checkPageCorrectAfterSelectLinkFooter(
+			String windowFatherHandle, FooterLink typeFooter, boolean closeAtEnd, Channel channel, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
+		PageFromFooter pageObject = FactoryPageFromFooter.make(typeFooter, channel, driver);
 		String windowActualHandle = driver.getWindowHandle();
 		boolean newWindowInNewTab = (windowActualHandle.compareTo(windowFatherHandle)!=0);
 		int maxSecondsWait = 5;
 		try {
 	    	validations.add(
 	    		"Aparece la página <b>" + pageObject.getName() + "</b> (la esperamos hasta " + maxSecondsWait + " segundos)",
-	    		pageObject.isPageCorrectUntil(maxSecondsWait, driver), State.Warn);
+	    		pageObject.isPageCorrectUntil(maxSecondsWait), State.Warn);
 		    if (typeFooter.pageInNewTab()) {
 		    	validations.add(
 	        		"Aparece la página en una ventana aparte",
@@ -106,8 +106,9 @@ public class SecFooterStpV {
     	description="Seleccionar el botón con fondo negro \"¡La quiero ahora!\"",
         expected="La página hace scroll hasta el formulario previo de solicitud de la tarjeta")
      public static void selectLoQuieroAhoraButton (Channel channel, WebDriver driver) throws Exception {
+    	 PageMangoCard pageMangoCard = new PageMangoCard(driver);
          String ventanaOriginal = driver.getWindowHandle();
-         PageMangoCard.clickOnWantMangoCardNow(driver, channel);
+         pageMangoCard.clickOnWantMangoCardNow(channel);
          if(!driver.getCurrentUrl().contains("shop-ci")) {
         	 checkAfterClickLoQuieroAhoraButton(driver);
         	 selectLoQuieroAhoraUnderForm(driver);
@@ -117,25 +118,26 @@ public class SecFooterStpV {
      
      @Validation
      private static ChecksTM checkAfterClickLoQuieroAhoraButton(WebDriver driver) throws Exception {
- 		ChecksTM validations = ChecksTM.getNew();
-     	validations.add(
-     		"Aparece el campo <b>Nombre</b>",
-     		PageMangoCard.isPresentNameField(driver), State.Warn);	
-     	validations.add(
+    	 PageMangoCard pageMangoCard = new PageMangoCard(driver);
+    	 ChecksTM validations = ChecksTM.getNew();
+    	 validations.add(
+    		"Aparece el campo <b>Nombre</b>",
+     		pageMangoCard.isPresentNameField(), State.Warn);	
+    	 validations.add(
      		"Aparece el campo <b>Primer Apellido</b>",
-     		PageMangoCard.isPresentFirstSurnameField(driver), State.Warn);	
-     	validations.add(
+     		pageMangoCard.isPresentFirstSurnameField(), State.Warn);	
+    	 validations.add(
      		"Aparece el campo <b>Segundo Apellido</b>",
-     		PageMangoCard.isPresentSecondSurnameField(driver), State.Warn);	
-     	validations.add(
+     		pageMangoCard.isPresentSecondSurnameField(), State.Warn);	
+    	 validations.add(
      		"Aparece el campo <b>Movil</b>",
-     		PageMangoCard.isPresentMobileField(driver), State.Warn);
-     	validations.add(
+     		pageMangoCard.isPresentMobileField(), State.Warn);
+    	 validations.add(
      		"Aparece el campo <b>Mail</b>",
-     		PageMangoCard.isPresentMailField(driver), State.Warn);
-     	validations.add(
+     		pageMangoCard.isPresentMailField(), State.Warn);
+    	 validations.add(
      		"Aparece el botón <b>¡Lo quiero ahora!</b>",
-     		PageMangoCard.isPresentButtonSolMangoCardNow(driver), State.Warn);
+     		pageMangoCard.isPresentButtonSolMangoCardNow(), State.Warn);
      	return validations;
      }
      
@@ -143,7 +145,8 @@ public class SecFooterStpV {
     	description="Seleccionamos el botón \"¡Lo quiero ahora!\" que aparece debajo del formulario",
     	expected="Se abre una nueva pestaña del Banc Sabadell con un modal y texto \"Solicitud de tu MANGO Card\"")
      public static void selectLoQuieroAhoraUnderForm(WebDriver driver) throws Exception {
-    	 PageMangoCard.clickToGoSecondMangoCardPage(driver);    
+    	 PageMangoCard pageMangoCard = new PageMangoCard(driver);
+    	 pageMangoCard.clickToGoSecondMangoCardPage();
          Thread.sleep(1000);
          checkAfterClickLoQuieroAhoraUnderForm(driver);
      }

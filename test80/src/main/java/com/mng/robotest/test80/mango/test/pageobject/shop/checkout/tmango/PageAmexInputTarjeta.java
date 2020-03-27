@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageAmexInputTarjeta extends WebdrvWrapp {
+public class PageAmexInputTarjeta {
 
     static String XPathIconoBancoSabadell = "//div[@class='logoEntidad']/img[@src[contains(.,'entidad/81.png')]]";
     static String XPathInputNumTarj = "//input[@id[contains(.,'inputCard')]]";
@@ -15,8 +16,9 @@ public class PageAmexInputTarjeta extends WebdrvWrapp {
     static String XPathInputCvc = "//input[@id[contains(.,'codseg')] and @maxlength=4]";
     static String XPathPagarButton = "//button[@id[contains(.,'divImgAceptar')]]";
     
-    public static boolean isPasarelaBancoSabadellUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementPresentUntil(driver, By.xpath(XPathIconoBancoSabadell), maxSecondsToWait));
+    public static boolean isPasarelaBancoSabadellUntil(int maxSeconds, WebDriver driver) {
+    	return (state(Present, By.xpath(XPathIconoBancoSabadell), driver)
+    			.wait(maxSeconds).check());
     }
     
     public static void inputDataTarjeta(String numTarj, String mesCad, String anyCad, String Cvc, WebDriver driver) {
@@ -27,23 +29,23 @@ public class PageAmexInputTarjeta extends WebdrvWrapp {
     }
 
     public static boolean isPresentNumTarj(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathInputNumTarj)));
+    	return (state(Present, By.xpath(XPathInputNumTarj), driver).check());
     }
     
     public static boolean isPresentInputMesCad(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathInputMesCad)));
+    	return (state(Present, By.xpath(XPathInputMesCad), driver).check());
     }
     
     public static boolean isPresentInputAnyCad(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathInputAnyCad)));
+    	return (state(Present, By.xpath(XPathInputAnyCad), driver).check());
     }
     
     public static boolean isPresentInputCvc(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathInputCvc)));
+    	return (state(Present, By.xpath(XPathInputCvc), driver).check());
     }
 
     public static boolean isPresentPagarButton(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathPagarButton)));
+    	return (state(Present, By.xpath(XPathPagarButton), driver).check());
     }
     
     public static void clickPagarButton(WebDriver driver) throws Exception {

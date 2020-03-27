@@ -9,12 +9,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalClubMangoLikes;
 
 
-public class SecFooter extends WebdrvWrapp {
+public class SecFooter {
 
     public static String XPathCapaShop = "//div[@id='nav-footer']";
     public static String XPathCapaOutlet = "//div[@class[contains(.,'footer__column footer__column')]]";
@@ -118,18 +119,18 @@ public class SecFooter extends WebdrvWrapp {
     
     public static boolean isPresent(AppEcom app, WebDriver driver) {
         String xpath = getXPathCapaFooter(app);
-        return (isElementPresent(driver, By.xpath(xpath)));
+        return (state(Present, By.xpath(xpath), driver).check());
     }
     
     public static boolean isVisible(AppEcom app, WebDriver driver) throws Exception {
         String xpath = getXPathCapaFooter(app);
         waitForPageLoaded(driver);
-        return (isElementVisible(driver, By.xpath(xpath)));
+        return (state(Present, By.xpath(xpath), driver).check());
     }    
     
     public static void clickLink(FooterLink footerType, WebDriver driver) throws Exception {
     	ModalClubMangoLikes.closeModalIfVisible(driver);
-    	WebdrvWrapp.moveToElement(By.xpath(footerType.getXPathRelativeCapa()), driver);
+    	moveToElement(By.xpath(footerType.getXPathRelativeCapa()), driver);
     	clickAndWaitLoad(driver, By.xpath(footerType.getXPathRelativeCapa()));
     }
     
@@ -152,11 +153,10 @@ public class SecFooter extends WebdrvWrapp {
     public static boolean checkFooters(List<FooterLink> listFooterLinksToValidate, AppEcom app, WebDriver driver) {
         for (FooterLink footerLink : listFooterLinksToValidate) {
         	String xpathLink = getXPathLink(footerLink, app);
-            if (!isElementPresent(driver, By.xpath(xpathLink))) {
+        	if (!state(Present, By.xpath(xpathLink), driver).check()) {
                 return false;
             }
         }
-        
         return true;
     }
     
@@ -184,18 +184,18 @@ public class SecFooter extends WebdrvWrapp {
 	}
 
 	public static boolean isTextoRGPDPresent(WebDriver driver) {
-		return isElementPresent(driver, By.xpath(XPathTextRGPD));
+		return (state(Present, By.xpath(XPathTextRGPD), driver).check());
 	}
 
 	public static boolean isTextoLegalRGPDPresent(WebDriver driver) {
-		return isElementPresent(driver, By.xpath(XPathLegalRGPD));
+		return (state(Present, By.xpath(XPathLegalRGPD), driver).check());
 	}
 	
 	public static void moveTo(AppEcom app, WebDriver driver) {
 		String xpath = getXPathCapaFooter(app);
 		By footer = By.xpath(xpath);
-		if (isElementVisible(driver, footer)) {
-			WebdrvWrapp.moveToElement(footer, driver);
+		if (state(Visible, footer, driver).check()) {
+			moveToElement(footer, driver);
 		}
 	}
 }

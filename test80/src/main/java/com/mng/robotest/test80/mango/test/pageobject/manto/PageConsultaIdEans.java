@@ -6,10 +6,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageConsultaIdEans extends WebdrvWrapp {
+public class PageConsultaIdEans {
     
 	static String XPathTituloPagina = "//form[@id='formTempl']//td[text()[contains(.,'s / EANS')]]";
     static String XPathDivBusquedaExcel = "//div[@id='ExcelContent']";
@@ -32,21 +33,22 @@ public class PageConsultaIdEans extends WebdrvWrapp {
     public static String getXPathLineaPedido(String pedido) {
         return (XPathLineaPedidoTablaID + "/td//self::*[text()[contains(.,'" + pedido + "')]]");
     }
-    
-    public static boolean isVisibleTituloPagina(WebDriver driver) {
-		return (isElementVisible(driver, By.xpath(XPathTituloPagina)));
+
+	public static boolean isVisibleTituloPagina(WebDriver driver) {
+		return (state(Visible, By.xpath(XPathTituloPagina), driver).check());
 	}
 
 	public static boolean isVisibleDivBusquedaExcel(WebDriver driver) {	
-		return (isElementVisible(driver, By.xpath(XPathDivBusquedaExcel)));
+		return (state(Visible, By.xpath(XPathDivBusquedaExcel), driver).check());
 	}
 
 	public static boolean isVisibleDivBusquedaRapida(WebDriver driver) {
-		return (isElementVisible(driver, By.xpath(XPathDivBusquedaRapida)));
+		return (state(Visible, By.xpath(XPathDivBusquedaRapida), driver).check());
 	}
 
-	public static boolean isVisibleTablaInformacionUntil(int maxSecondsToWait, WebDriver driver) {
-	    return (isElementVisibleUntil(driver, By.xpath(XPathHeaderTablaID), maxSecondsToWait));
+	public static boolean isVisibleTablaInformacionUntil(int maxSeconds, WebDriver driver) {
+		return (state(Visible, By.xpath(XPathHeaderTablaID), driver)
+				.wait(maxSeconds).check());
 	}
 
 	public static void inputPedidosAndClickBuscarDatos(List<String> pedidosPrueba, WebDriver driver) {
@@ -71,14 +73,13 @@ public class PageConsultaIdEans extends WebdrvWrapp {
 	}
 
 	public static boolean isPedidosTablaCorrecto(List<String> pedidosPrueba, WebDriver driver) {
-	    for (String pedido : pedidosPrueba) {
-        	String xpathLineaPedido = getXPathLineaPedido(pedido);
-        	if (!isElementVisible(driver, By.xpath(xpathLineaPedido))) {
-        	    return false;
-        	}
-	    }
-	    
-	    return true;
+		for (String pedido : pedidosPrueba) {
+			String xpathLineaPedido = getXPathLineaPedido(pedido);
+			if (!state(Visible, By.xpath(xpathLineaPedido), driver).check()) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	
@@ -110,7 +111,7 @@ public class PageConsultaIdEans extends WebdrvWrapp {
 	
 	public static void inputArticulosAndClickBuscarDatosEan(List<String> articulosPrueba, WebDriver driver) {
 		inputPedidos(articulosPrueba, driver);
-	    clickBuscarDatosEanButton(driver);
+		clickBuscarDatosEanButton(driver);
 	}
 
 	private static void clickBuscarDatosEanButton(WebDriver driver) {
@@ -119,14 +120,12 @@ public class PageConsultaIdEans extends WebdrvWrapp {
 
 	public static boolean isArticulosTablaCorrecto(List<String> articulosPrueba, WebDriver driver) {
 		for (String articulo : articulosPrueba) {
-        	String xpathLineaPedido = getXPathLineaPedido(articulo);
-        	if (!isElementVisible(driver, By.xpath(xpathLineaPedido))) {
-        	    return false;
-        	}
-	    }
-	    
-	    return true;
+			String xpathLineaPedido = getXPathLineaPedido(articulo);
+			if (!state(Visible, By.xpath(xpathLineaPedido), driver).check()) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
-
 }

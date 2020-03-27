@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.dotpay;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageDotpayAcceptSimulation extends WebdrvWrapp {
+public class PageDotpayAcceptSimulation {
     
     static String XPathRedButtonAceptar = "//input[@id='submit_success' and @type='submit']";
     static String title = "Dotpay payment simulation";
@@ -16,7 +17,7 @@ public class PageDotpayAcceptSimulation extends WebdrvWrapp {
     }
     
     public static boolean isPresentRedButtonAceptar(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathRedButtonAceptar)));
+    	return (state(Present, By.xpath(XPathRedButtonAceptar), driver).check());
     }
     
     public static void clickRedButtonAceptar(WebDriver driver) throws Exception {

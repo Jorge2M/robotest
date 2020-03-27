@@ -1,24 +1,32 @@
 package com.mng.robotest.test80.mango.test.pageobject.ayuda;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import java.io.Reader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
-public class PageAyuda extends WebdrvWrapp {
-
-    public final static String xPathCloseBuscar = "//div[@class[contains(.,'close-modal')]]";
+public class PageAyuda extends PageObjTM {
+	
+	public final static String xPathCloseBuscar = "//div[@class[contains(.,'close-modal')]]";
 
     private static JSONParser parser = new JSONParser();
     private static JSONObject fileHAR = null;
 
-    public static JSONObject getFileJSON () throws Exception{
+	public PageAyuda(WebDriver driver) {
+		super(driver);
+	}
+    
+    private JSONObject getFileJSON () throws Exception {
         Reader reader = new InputStreamReader(PageAyuda.class.getResourceAsStream("/helpFooter.json"), "utf-8");
         Object JSONFile = parser.parse(reader);
         fileHAR = (JSONObject)JSONFile;
@@ -27,11 +35,12 @@ public class PageAyuda extends WebdrvWrapp {
         return fileHAR;
     }
 
-    public static JSONArray getSectionFromJSON(String section) throws Exception{
+    public JSONArray getSectionFromJSON(String section) throws Exception{
         return (JSONArray)getFileJSON().get(section);
     }
 
-    public static ArrayList<String> getKeysFromJSON (JSONObject jsonObject) {
+    public List<String> getKeysFromJSON () throws Exception {
+    	JSONObject jsonObject = getFileJSON();
         ArrayList<String> keysFromJSON = new ArrayList<>();
         for (Object key : jsonObject.keySet()) {
             keysFromJSON.add((String) key);
@@ -39,18 +48,20 @@ public class PageAyuda extends WebdrvWrapp {
         return keysFromJSON;
     }
 
-    public static String getXPath(String apartado) {
+    public String getXPath(String apartado) {
         return ("//*[text()='" + apartado + "']");
     }
     
-    public enum StateApartado {	collapsed, expanded};
+    public enum StateApartado {	collapsed, expanded };
     
-    private static String getXPathApartado(String apartado, StateApartado stateApartado) {
+    private String getXPathApartado(String apartado, StateApartado stateApartado) {
     	return ("//article[@class[contains(.,'" + stateApartado + "')]]" + getXPath(apartado));
     }
-    
-    public static boolean isApartadoInStateUntil(String apartado, StateApartado stateApartado, int maxSecondsWait, WebDriver driver) {
-    	String xpathApartado = getXPathApartado(apartado, stateApartado);
-    	return (WebdrvWrapp.isElementPresentUntil(driver, By.xpath(xpathApartado), maxSecondsWait));
-    }
+
+	public boolean isApartadoInStateUntil(String apartado, StateApartado stateApartado, int maxSeconds) {
+		String xpathApartado = getXPathApartado(apartado, stateApartado);
+		return (state(Present, By.xpath(xpathApartado), driver)
+				.wait(maxSeconds)
+				.check());
+	}
 }

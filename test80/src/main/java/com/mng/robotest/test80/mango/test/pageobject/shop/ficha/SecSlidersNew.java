@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.ficha;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecSlidersNew extends WebdrvWrapp {
+public class SecSlidersNew {
 
     static String XPathCompletaTuLook = "//div[@id='lookTotal']";
     static String XPathElegidoParaTi = "//div[@id='recommendations']";
@@ -37,7 +38,7 @@ public class SecSlidersNew extends WebdrvWrapp {
     
     public static boolean isVisible(Slider sliderType, WebDriver driver) {
         String xpathSlider = getXPath(sliderType);
-        return (isElementVisible(driver, By.xpath(xpathSlider))); 
+        return (state(Visible, By.xpath(xpathSlider), driver).check());
     }
     
     public static int getNumVisibleArticles(Slider sliderType, WebDriver driver) {

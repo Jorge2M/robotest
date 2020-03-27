@@ -15,42 +15,53 @@ import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageDetallePedidoStp
 
 public class PageAccesoMisComprasStpV {
 
+	private final WebDriver driver;
+	private final PageAccesoMisCompras pageAccesoMisCompras;
+	
+	private PageAccesoMisComprasStpV(WebDriver driver) {
+		this.driver = driver;
+		this.pageAccesoMisCompras = new PageAccesoMisCompras(driver);
+	}
+	public static PageAccesoMisComprasStpV getNew(WebDriver driver) {
+		return new PageAccesoMisComprasStpV(driver);
+	}
+	
 	@Validation
-    public static ChecksTM validateIsPage(WebDriver driver) {
+    public ChecksTM validateIsPage() {
         ChecksTM validations = ChecksTM.getNew();
         validations.add(
         	"Aparece la página de \"Acceso a Mis Compras\"",
-        	PageAccesoMisCompras.isPage(driver), State.Warn);
+        	pageAccesoMisCompras.isPage(), State.Warn);
         validations.add(
         	"Aparecen el bloque \"Ya estoy registrado\"",
-        	PageAccesoMisCompras.isPresentBlock(TypeBlock.SiRegistrado, driver), State.Warn);
+        	pageAccesoMisCompras.isPresentBlock(TypeBlock.SiRegistrado), State.Warn);
         validations.add(
         	"Aparece el bloque de \"No estoy registrado\"",
-        	PageAccesoMisCompras.isPresentBlock(TypeBlock.NoRegistrado, driver), State.Warn);
+        	pageAccesoMisCompras.isPresentBlock(TypeBlock.NoRegistrado), State.Warn);
         return validations;
     }
     
 	@Step (
 		description="Seleccionar el bloque \"#{typeBlock}\"", 
         expected="Se hace visible el bloque de #{typeBlock}")
-    public static void clickBlock(TypeBlock typeBlock, WebDriver driver) {
-        PageAccesoMisCompras.clickBlock(typeBlock, driver);
-        checkIsVisibleBlock(typeBlock, 1, driver);
+    public void clickBlock(TypeBlock typeBlock) {
+        pageAccesoMisCompras.clickBlock(typeBlock);
+        checkIsVisibleBlock(typeBlock, 1);
     }
 	
 	@Validation (
 		description="Se hace visible el bloque de \"#{typeBlock}\" (lo esperamos hasta #{maxSecondsWait} segundos)",
 		level=State.Warn)
-	private static boolean checkIsVisibleBlock(TypeBlock typeBlock, int maxSecondsWait, WebDriver driver) {
-	    return (PageAccesoMisCompras.isVisibleBlockUntil(typeBlock, maxSecondsWait, driver));
+	private boolean checkIsVisibleBlock(TypeBlock typeBlock, int maxSecondsWait) {
+		return (pageAccesoMisCompras.isVisibleBlockUntil(typeBlock, maxSecondsWait));
 	}
     
 	@Step (
 		description="En el bloque de \"Si Registrado\", introducir el usuario/password (#{usuario}/#{password}) y pulsar \"Entrar\"", 
         expected="Aparece la página de \"Mis compras\"")
-    public static void enterForSiRegistrado(String usuario, String password, Channel channel, WebDriver driver) throws Exception {
-        PageAccesoMisCompras.inputUserPasswordBlockSi(usuario, password, driver); 
-        PageAccesoMisCompras.clickEntrarBlockSi(driver);   
+    public void enterForSiRegistrado(String usuario, String password, Channel channel) throws Exception {
+        pageAccesoMisCompras.inputUserPasswordBlockSi(usuario, password); 
+        pageAccesoMisCompras.clickEntrarBlockSi();
         PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(channel, driver);
         pageMisComprasStpV.validateIsPage();
     }
@@ -62,14 +73,14 @@ public class PageAccesoMisComprasStpV {
 			"(" + tagUsuario + " / <b style=\"color:blue;\">#{dataPedido.getCodpedido()}</b>)" + 
 			" y pulsar \"Buscar pedido\"", 
 		expected="Aparece la página de detalle del pedido")
-	public static void buscarPedidoForNoRegistrado(DataPedido dataPedido, WebDriver driver) throws Exception {
+	public void buscarPedidoForNoRegistrado(DataPedido dataPedido) throws Exception {
 		String usuario = dataPedido.getEmailCheckout();
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagUsuario, usuario);
 
-		PageAccesoMisCompras.inputUserAndNumPedidoBlockNo(usuario, dataPedido.getCodpedido(), driver); 
-		PageAccesoMisCompras.clickBuscarPedidoBlockNo(driver); 
+		pageAccesoMisCompras.inputUserAndNumPedidoBlockNo(usuario, dataPedido.getCodpedido()); 
+		pageAccesoMisCompras.clickBuscarPedidoBlockNo(); 
 
 		PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(driver);
-		pageDetPedidoStpV.validateIsPageOk(dataPedido, driver);      
+		pageDetPedidoStpV.validateIsPageOk(dataPedido);
 	}
 }

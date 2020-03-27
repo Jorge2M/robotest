@@ -106,7 +106,8 @@ public class PageMenusMantoStpV {
      */
 	public static void goToGestorCheques(WebDriver driver) throws Exception {
         goToMainMenusAndClickMenu("Gestor de Cheques", driver);
-        PageGestorChequesStpV.validateIsPage(driver);
+        PageGestorChequesStpV pageGestorStpV = new PageGestorChequesStpV(driver);
+        pageGestorStpV.validateIsPage();
 	}
 	
 	/**

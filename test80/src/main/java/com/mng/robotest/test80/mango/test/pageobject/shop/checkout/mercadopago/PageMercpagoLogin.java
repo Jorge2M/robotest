@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageMercpagoLogin extends WebdrvWrapp {
+public class PageMercpagoLogin {
     
     static String XPathInputUser = "//input[@id='user_id']";
     static String XPathInputPassword = "//input[@id='password']";
@@ -38,14 +39,14 @@ public class PageMercpagoLogin extends WebdrvWrapp {
      * @return si es visible el input para la introducción del usuario
      */
     public static boolean isInputUserVisible(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathInputUser)));
+    	return (state(Visible, By.xpath(XPathInputUser), driver).check());
     }
     
     /**
      * @return si es visible el input para la introducción del password del usuario
      */
     public static boolean isInputPasswordVisible(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathInputPassword)));
+    	return (state(Visible, By.xpath(XPathInputPassword), driver).check());
     }    
     
 //    /**
@@ -75,7 +76,7 @@ public class PageMercpagoLogin extends WebdrvWrapp {
 //    }    
     
     public static boolean isVisibleBotonContinuarPageId(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathBotonContinuar)));
+    	return (state(Visible, By.xpath(XPathBotonContinuar), driver).check());
     }
     
     public static void clickBotonContinuar(WebDriver driver) throws Exception {

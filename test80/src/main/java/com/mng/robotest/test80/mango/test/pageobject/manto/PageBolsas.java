@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.manto;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageBolsas extends WebdrvWrapp {
+public class PageBolsas {
 
     static String XPathLinea = "//table[@width='100%']/tbody/tr[5]/td/input[@class='botones']";
     static String XPathMainForm = "//form[@action='/bolsas.faces']";
@@ -35,15 +36,11 @@ public class PageBolsas extends WebdrvWrapp {
     public static String getXpath_correoInBolsa(String correo) {
         return ("//table//tr/td[7]/span[text()[contains(.,'" + correo.toLowerCase() + "')] or text()[contains(.,'" + correo.toUpperCase() + "')]]");
     }
-    
-    /**
-     * @param driver
-     * @return si se trata de la página de bolsas de manto
-     */
-    public static boolean isPage(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathMainForm)));
-    }
-    
+
+	public static boolean isPage(WebDriver driver) {
+		return (state(Present, By.xpath(XPathMainForm), driver).check());
+	}
+
     /**
      * @return el número de líneas de bolsa que aparecen en pantalla
      */
@@ -51,43 +48,28 @@ public class PageBolsas extends WebdrvWrapp {
         return (driver.findElements(By.xpath(XPathLinea)).size());
     }
     
-    /**
-     * @param driver
-     * @param codigoPedido
-     * @return si en la lista de bolsas existe el link a un determinado pedido
-     */
-    public static boolean presentLinkPedidoInBolsaUntil(String codigoPedido, int maxSecondsToWait, WebDriver driver) {
-        String xpath = getXpath_linkPedidoInBolsa(codigoPedido);
-        return (isElementPresentUntil(driver, By.xpath(xpath), maxSecondsToWait));    
-    }
-    
-    /**
-     * @param driver
-     * @param idTpv
-     * @return si en la lista de bolsas existe un determinado idTpv
-     */
-    public static boolean presentIdTpvInBolsa(WebDriver driver, String idTpv) {
-        String xpath = getXpath_idTpvInBolsa(idTpv);
-        return (isElementPresent(driver, By.xpath(xpath)));    
-    }
-    
-    /**
-     * @param driver
-     * @param correo
-     * @return si en la lista de bolsas existe un determinado correo
-     */
-    public static boolean presentCorreoInBolsa(WebDriver driver, String correo) {
-        String xpath = getXpath_correoInBolsa(correo);
-        return (isElementPresent(driver, By.xpath(xpath)));    
-    }    
-    
-    public static String getIdCompra(String idPedido, WebDriver driver) {
-        String xpathIdCompra = getXpath_linkIdCompraInBolsa(idPedido);
-        if (isElementPresent(driver, By.xpath(xpathIdCompra))) {
-            String textIdCompra = driver.findElement(By.xpath(xpathIdCompra)).getText();
-            return (textIdCompra.substring(0, textIdCompra.indexOf(" ")));
-        }
-            
-        return "";
-    }
+	public static boolean presentLinkPedidoInBolsaUntil(String codigoPedido, int maxSecondsToWait, WebDriver driver) {
+		String xpath = getXpath_linkPedidoInBolsa(codigoPedido);
+		return (state(Present, By.xpath(xpath), driver)
+				.wait(maxSecondsToWait).check());
+	}
+
+	public static boolean presentIdTpvInBolsa(WebDriver driver, String idTpv) {
+		String xpath = getXpath_idTpvInBolsa(idTpv);
+		return (state(Present, By.xpath(xpath), driver).check());
+	}
+
+	public static boolean presentCorreoInBolsa(WebDriver driver, String correo) {
+		String xpath = getXpath_correoInBolsa(correo);
+		return (state(Present, By.xpath(xpath), driver).check());
+	}
+
+	public static String getIdCompra(String idPedido, WebDriver driver) {
+		String xpathIdCompra = getXpath_linkIdCompraInBolsa(idPedido);
+		if (state(Present, By.xpath(xpathIdCompra), driver).check()) {
+			String textIdCompra = driver.findElement(By.xpath(xpathIdCompra)).getText();
+			return (textIdCompra.substring(0, textIdCompra.indexOf(" ")));
+		}
+		return "";
+	}
 }

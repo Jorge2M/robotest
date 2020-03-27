@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -45,7 +47,7 @@ public class SecCabeceraOutletMobil extends SecCabeceraOutlet {
     }
     
     @Override
-    public boolean isInStateIconoBolsa(StateElem state) {
+    public boolean isInStateIconoBolsa(State state) {
     	return (isElementInStateUntil(IconoCabOutletMobil.bolsa, state, 0));
     }
     
@@ -64,14 +66,15 @@ public class SecCabeceraOutletMobil extends SecCabeceraOutlet {
     	hoverIcono(IconoCabOutletMobil.bolsa);
     }
     
-    public boolean isElementInStateUntil(IconoCabOutletMobil icono, StateElem state, int maxSecondsWait) {
+    public boolean isElementInStateUntil(IconoCabOutletMobil icono, State state, int maxSecondsWait) {
     	return (isElementInStateUntil(icono, state, maxSecondsWait, driver));
     }
-    
-    public boolean isClickableUntil(IconoCabOutletMobil icono, int maxSeconds) {
-    	return (isElementClickableUntil(driver, By.xpath(icono.getXPath()), maxSeconds));
-    }
-    
+
+	 public boolean isClickableUntil(IconoCabOutletMobil icono, int maxSeconds) {
+		return (state(Clickable, By.xpath(icono.getXPath()), driver)
+				.wait(maxSeconds).check());
+	}
+
     public void clickIfClickableUntil(IconoCabOutletMobil icono, int maxSecondsToWait) 
     throws Exception {
     	if (isClickableUntil(icono, maxSecondsToWait)) {

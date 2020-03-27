@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard;
 
 import org.openqa.selenium.WebDriver;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions;
@@ -25,10 +26,10 @@ public class PageKoCardINIpay4Mobil extends ElementPageFunctions {
     }
     
     public static boolean isPage(WebDriver driver) {
-    	return (isElementInStateUntil(BodyPageKoCardINIpay4.nextButton, StateElem.Visible, 0, driver));
+    	return (isElementInStateUntil(BodyPageKoCardINIpay4.nextButton, Visible, 0, driver));
     }
     
     public static boolean isVisibleMessagePaymentOk(WebDriver driver) {
-    	return (isElementInStateUntil(BodyPageKoCardINIpay4.messagePagoOk, StateElem.Visible, 0, driver));
+    	return (isElementInStateUntil(BodyPageKoCardINIpay4.messagePagoOk, Visible, 0, driver));
     }
 }

@@ -129,15 +129,16 @@ public class Compra {
 		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
 		secMenusStpV.seleccionLinea(LineaType.she, null, dCtxSh);
 		SecFooterStpV.clickLinkFooter(FooterLink.cheque_regalo, false, dCtxSh.channel, driver);
+		PageChequeRegaloInputDataStpV pageChequeRegaloInputDataStpV = new PageChequeRegaloInputDataStpV(driver);
 		if(dCtxSh.channel != Channel.movil_web){
 			nTarjeta = "100000040043";
 			cvvTarjeta = "618";
-			PageChequeRegaloInputDataStpV.paginaConsultarSaldo(nTarjeta, driver);
-			PageChequeRegaloInputDataStpV.insertCVVConsultaSaldo(cvvTarjeta, driver);
+			pageChequeRegaloInputDataStpV.paginaConsultarSaldo(nTarjeta);
+			pageChequeRegaloInputDataStpV.insertCVVConsultaSaldo(cvvTarjeta);
 		}
 
-		PageChequeRegaloInputDataStpV.seleccionarCantidades(Importe.euro50, driver);
-		PageChequeRegaloInputDataStpV.clickQuieroComprarChequeRegalo(driver);
+		pageChequeRegaloInputDataStpV.seleccionarCantidades(Importe.euro50);
+		pageChequeRegaloInputDataStpV.clickQuieroComprarChequeRegalo();
 
 		ChequeRegalo chequeRegalo = new ChequeRegalo();
 		chequeRegalo.setNombre("Jorge");
@@ -145,7 +146,7 @@ public class Compra {
 		chequeRegalo.setEmail(Constantes.mail_standard);
 		chequeRegalo.setImporte(Importe.euro50);
 		chequeRegalo.setMensaje("Ya sólo queda por determinar si el universo partió de cero o del infinito");
-		PageChequeRegaloInputDataStpV.inputDataAndClickComprar(chequeRegalo, driver);
+		pageChequeRegaloInputDataStpV.inputDataAndClickComprar(chequeRegalo);
 
 		//Ejecutar el pago
 		FlagsTestCkout fTCkout = new FlagsTestCkout();

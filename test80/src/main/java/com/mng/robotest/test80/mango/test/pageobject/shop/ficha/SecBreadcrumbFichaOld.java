@@ -3,10 +3,12 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.ficha;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecBreadcrumbFichaOld extends WebdrvWrapp {
+public class SecBreadcrumbFichaOld {
+	
     public enum ItemBCrumb {Line, Group, Galery}
     
     static String XPathLinea = "//nav[@class='nav-product']";
@@ -31,12 +33,12 @@ public class SecBreadcrumbFichaOld extends WebdrvWrapp {
     }
     
     public static boolean isVisibleBreadCrumb(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathBreadCrumb))); 
+    	return (state(Visible, By.xpath(XPathBreadCrumb), driver).check());
     }
     
     public static String getUrlItemBreadCrumb(ItemBCrumb itemBCrumb, WebDriver driver) {
         String xpathItem = getXPathBreadCrumbItem(itemBCrumb) + "//a";
-        if (isElementVisible(driver, By.xpath(xpathItem))) {
+        if (state(Visible, By.xpath(xpathItem), driver).check()) {
             return driver.findElement(By.xpath(xpathItem)).getAttribute("href");
         }
         return "";
@@ -44,9 +46,9 @@ public class SecBreadcrumbFichaOld extends WebdrvWrapp {
     
     public static String getNameItemBreadCrumb(ItemBCrumb itemBCrumb, WebDriver driver) {
         String xpathItem = getXPathBreadCrumbItem(itemBCrumb) + "//span";
-        if (isElementVisible(driver, By.xpath(xpathItem))) {
+        if (state(Visible, By.xpath(xpathItem), driver).check()) {
             return driver.findElement(By.xpath(xpathItem)).getAttribute("innerHTML");
         }
-        return "";        
+        return "";
     }
 }

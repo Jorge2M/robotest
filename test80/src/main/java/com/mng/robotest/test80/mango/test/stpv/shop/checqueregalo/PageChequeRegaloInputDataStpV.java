@@ -1,49 +1,54 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checqueregalo;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRegaloInputData;
 import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRegaloInputData.*;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class PageChequeRegaloInputDataStpV{
+public class PageChequeRegaloInputDataStpV {
 
-	public static void paginaConsultarSaldo(String numTarjeta, WebDriver driver) throws Exception {
-		clickConsultaSaldo(driver);
-		inputDataTarjetaRegalo(numTarjeta, driver);
+	private final WebDriver driver;
+	private final PageChequeRegaloInputData pageChequeRegaloInputData;
+	
+	public PageChequeRegaloInputDataStpV(WebDriver driver) {
+		this.driver = driver;
+		this.pageChequeRegaloInputData = new PageChequeRegaloInputData(driver);
+	}
+	
+	public void paginaConsultarSaldo(String numTarjeta) throws Exception {
+		clickConsultaSaldo();
+		inputDataTarjetaRegalo(numTarjeta);
 	}
 	
 	@Step (
 		description="Accedemos a la página de consultar saldo de cheque regalo con sus respectivos campos",
         expected="Aparecen todos los campos y volvemos a la operativa normal")
-    public static void clickConsultaSaldo(WebDriver driver) throws Exception {
+    public void clickConsultaSaldo() throws Exception {
         PageChequeRegaloInputData.clickAndWait(ConsultaSaldo.ir, driver);
-        checkInputDataTarjeta(driver);
+        checkInputDataTarjeta();
 	}
 
 	@Validation
-	private static ChecksTM checkInputDataTarjeta(WebDriver driver) {
+	private ChecksTM checkInputDataTarjeta() {
 		ChecksTM validations = ChecksTM.getNew();
-    	int maxSecondsWait = 2;
     	validations.add(
-    		"Aparece el cuadro de introduccion de datos determinado (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		PageChequeRegaloInputData.isElementInStateUntil(ConsultaSaldo.numeroTarjeta, StateElem.Present, maxSecondsWait, driver), 
+    		"Aparece el cuadro de introduccion de datos determinado (lo esperamos hasta " + 2 + " segundos)",
+    		PageChequeRegaloInputData.isElementInStateUntil(ConsultaSaldo.numeroTarjeta, Present, 2, driver), 
     		State.Defect);
     	validations.add(
     		"Podemos validar la tarjeta",
-    		PageChequeRegaloInputData.isElementInState(ConsultaSaldo.validar, StateElem.Present, driver), 
+    		PageChequeRegaloInputData.isElementInState(ConsultaSaldo.validar, Present, driver), 
     		State.Defect);
     	validations.add(
     		"Podemos volver atrás",
-    		PageChequeRegaloInputData.isElementInState(ConsultaSaldo.volver, StateElem.Present, driver), 
+    		PageChequeRegaloInputData.isElementInState(ConsultaSaldo.volver, Present, driver), 
     		State.Defect);
 		return validations;
 	}
@@ -51,55 +56,55 @@ public class PageChequeRegaloInputDataStpV{
 	@Step (
 		description="Introducimos en el campo de <b>tarjeta regalo</b>#{numTarjeta} para consultar el saldo",
         expected="Se carga la página donde salen nuevos campos visibles como el de <b>cvv</b>")
-	public static void inputDataTarjetaRegalo(String numTarjeta, WebDriver driver) throws Exception {
-        PageChequeRegaloInputData.introducirTarjetaConsultaSaldo(driver, numTarjeta);
+	public void inputDataTarjetaRegalo(String numTarjeta) throws Exception {
+        pageChequeRegaloInputData.introducirTarjetaConsultaSaldo(numTarjeta);
         PageChequeRegaloInputData.clickAndWait(ConsultaSaldo.validar, driver);
-        checkInputOtherData(driver);
+        checkInputOtherData();
     }
 	
 	@Validation
-	private static ChecksTM checkInputOtherData(WebDriver driver) {
+	private ChecksTM checkInputOtherData() {
 		ChecksTM validations = ChecksTM.getNew();
     	int maxSecondsWait = 2;
     	validations.add(
     		"Es visible el campo de <b>cvv</b> (lo esperamos hasta " + maxSecondsWait + " segundos)</br>",
-    		PageChequeRegaloInputData.isElementInStateUntil(ConsultaSaldo.validar, StateElem.Present, maxSecondsWait, driver), 
+    		PageChequeRegaloInputData.isElementInStateUntil(ConsultaSaldo.validar, Present, maxSecondsWait, driver), 
     		State.Defect);
     	validations.add(
     		"Es visible el botón de <b>validar</b>",
-    		PageChequeRegaloInputData.isElementInState(ConsultaSaldo.validar, StateElem.Present, driver), 
+    		PageChequeRegaloInputData.isElementInState(ConsultaSaldo.validar, Present, driver), 
     		State.Defect);
     	return validations;
 	}
 
-	public static void insertCVVConsultaSaldo(String cvvNumber, WebDriver driver) throws Exception {
-		consultarSaldoTarjeta(cvvNumber, driver);
-		backToInitPageChequeRegalo(driver);
+	public void insertCVVConsultaSaldo(String cvvNumber) throws Exception {
+		consultarSaldoTarjeta(cvvNumber);
+		backToInitPageChequeRegalo();
 	}
 	
 	/*TODO A la espera del cvv para completar esta parte*/
 	@Step (
 		description="Introducimos el CVV <b>#{cvvNumber}</b> de la tarjeta",
 		expected="Se vuelve a la página inicial del cheque regalo"/*Temporal*/)
-	private static void consultarSaldoTarjeta(String cvvNumber, WebDriver driver) throws Exception {
-		PageChequeRegaloInputData.introducirCvc(cvvNumber, driver);
-		checkConsultaSaldoTarjeta(driver);
+	private void consultarSaldoTarjeta(String cvvNumber) throws Exception {
+		pageChequeRegaloInputData.introducirCvc(cvvNumber);
+		checkConsultaSaldoTarjeta();
 	}
 	
 	@Validation
-	private static ChecksTM checkConsultaSaldoTarjeta(WebDriver driver) {
+	private ChecksTM checkConsultaSaldoTarjeta() {
 		ChecksTM validations = ChecksTM.getNew();
     	int maxSecondsWait = 2;
     	validations.add(
     		"Se pueden validar los datos (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		PageChequeRegaloInputData.isElementInStateUntil(ConsultaSaldo.validar, StateElem.Present, maxSecondsWait, driver), 
+    		PageChequeRegaloInputData.isElementInStateUntil(ConsultaSaldo.validar, Present, maxSecondsWait, driver), 
     		State.Defect);
     	validations.add(
     		"Se puede volver atrás",
-    		PageChequeRegaloInputData.isElementInState(ConsultaSaldo.volver, StateElem.Present, driver), State.Defect);
+    		PageChequeRegaloInputData.isElementInState(ConsultaSaldo.volver, Present, driver), State.Defect);
     	validations.add(
     		"La tarjeta introducida no tiene saldo disponible",
-    		PageChequeRegaloInputData.isElementInStateUntil(ConsultaSaldo.mensajeTarjetaSinSaldo, StateElem.Present, maxSecondsWait+2, driver), 
+    		PageChequeRegaloInputData.isElementInStateUntil(ConsultaSaldo.mensajeTarjetaSinSaldo, Present, maxSecondsWait+2, driver), 
     		State.Warn);
     	return validations;
 	}
@@ -107,60 +112,60 @@ public class PageChequeRegaloInputDataStpV{
 	@Step (
 		description="Usamos el boton de volver",
 	    expected="Estamos en la página inicial de <b>Cheque Regalo</b>")
-	private static void backToInitPageChequeRegalo(WebDriver driver) throws Exception {
+	private void backToInitPageChequeRegalo() throws Exception {
 		PageChequeRegaloInputData.clickAndWait(ConsultaSaldo.volver, driver);
 		int maxSecondsWait = 2;
-		checkBackToInitPageChequeRegalo(maxSecondsWait, driver);
+		checkBackToInitPageChequeRegalo(maxSecondsWait);
 	}
 
 	@Validation (
 		description="Estamos en la página inicial (la esperamos hasta #{maxSecondsWait} segundos)",
 		level=State.Defect)
-	private static boolean checkBackToInitPageChequeRegalo(int maxSecondsWait, WebDriver driver) {
-	    return (PageChequeRegaloInputData.isElementInStateUntil(ElementCheque.paginaForm, StateElem.Present, maxSecondsWait, driver));
+	private boolean checkBackToInitPageChequeRegalo(int maxSecondsWait) {
+	    return (PageChequeRegaloInputData.isElementInStateUntil(ElementCheque.paginaForm, Present, maxSecondsWait, driver));
 	}
 
 	@Step (
 		description="Seleccionamos la cantidad de <b>#{importeToClick}</b>",
         expected="Se comprueba que existen el resto de botones y está seleccionado el de <b>#{importeToClick}</b>")
-    public static void seleccionarCantidades(Importe importeToClick, WebDriver driver) throws Exception {
-        PageChequeRegaloInputData.clickImporteCheque(importeToClick, driver);
-        checkImporteSelected(driver);
+    public void seleccionarCantidades(Importe importeToClick) throws Exception {
+        pageChequeRegaloInputData.clickImporteCheque(importeToClick);
+        checkImporteSelected();
     }
 	
 	@Validation
-	private static ChecksTM checkImporteSelected(WebDriver driver) {
+	private ChecksTM checkImporteSelected() {
 		ChecksTM validations = ChecksTM.getNew();
 	    int maxSecondsWait = 2;
     	validations.add(
     		"Aparece el titulo de la página correctamente (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		PageChequeRegaloInputData.isElementInStateUntil(ElementCheque.titulo, StateElem.Present, maxSecondsWait, driver), 
+    		PageChequeRegaloInputData.isElementInStateUntil(ElementCheque.titulo, Present, maxSecondsWait, driver), 
     		State.Warn);
     	
 	    String importesStr = java.util.Arrays.asList(PageChequeRegaloInputData.Importe.values()).toString();
     	validations.add(
     		"Es posible seleccionar cheques de " + importesStr,
-    		PageChequeRegaloInputData.isPresentInputImportes(driver), State.Defect);
+    		pageChequeRegaloInputData.isPresentInputImportes(), State.Defect);
     	validations.add(
     		"Es visible el link de <b>Consultar saldo</b>",
-    		PageChequeRegaloInputData.isElementInState(ConsultaSaldo.ir, StateElem.Present, driver), State.Defect);
+    		PageChequeRegaloInputData.isElementInState(ConsultaSaldo.ir, Present, driver), State.Defect);
     	return validations;
 	}
 
 	@Step (
 		description="Seleccionar link \"Comprar ahora\"",
         expected="Aparece la capa para introducir los datos de la operación")
-    public static void clickQuieroComprarChequeRegalo(WebDriver driver) throws Exception {
+    public void clickQuieroComprarChequeRegalo() throws Exception {
         PageChequeRegaloInputData.clickAndWait(ElementCheque.compraAhora, driver);
         int maxSecondsWait = 3;
-        checkIsVisibleCapaInputCheque(maxSecondsWait, driver);
+        checkIsVisibleCapaInputCheque(maxSecondsWait);
     }
 	
 	@Validation (
 		description="Aparece la capa para introducir los datos del cheque regalo (la esperamos hasta #{maxSecondsWait} segundos)",
 		level=State.Defect)
-	private static boolean checkIsVisibleCapaInputCheque(int maxSecondsWait, WebDriver driver) {
-		return (PageChequeRegaloInputData.isElementInStateUntil(InputCheque.dataProof, StateElem.Present, maxSecondsWait, driver));
+	private boolean checkIsVisibleCapaInputCheque(int maxSecondsWait) {
+		return (PageChequeRegaloInputData.isElementInStateUntil(InputCheque.dataProof, Present, maxSecondsWait, driver));
 	}
     
 	@Step (
@@ -172,9 +177,9 @@ public class PageChequeRegaloInputDataStpV{
 			"Importe: <b>#{chequeRegalo.getImporte()}</b><br>" +
 	        "Mensaje: <b>#{chequeRegalo.getMensaje()}</b>",
 	    expected="Aparece la página de identificación del usuario")
-    public static void inputDataAndClickComprar(ChequeRegalo chequeRegalo, WebDriver driver) throws Exception {
-        PageChequeRegaloInputData.inputDataCheque(chequeRegalo, driver);
-        PageChequeRegaloInputData.clickButtonComprar(chequeRegalo, driver);           
+    public void inputDataAndClickComprar(ChequeRegalo chequeRegalo) throws Exception {
+        pageChequeRegaloInputData.inputDataCheque(chequeRegalo);
+        pageChequeRegaloInputData.clickButtonComprar(chequeRegalo);
         PageCheckoutWrapperStpV.validaIsVersionChequeRegalo(chequeRegalo, driver);
     }    
 }

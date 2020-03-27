@@ -7,6 +7,8 @@ import com.mng.sapfiori.access.test.testcase.generic.webobject.inputs.withmodal.
 import com.mng.sapfiori.access.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForSelectItem;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.utils.PageObject;
 
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 public class PagePosSolicitudPedido extends PageObject {
 
 	public enum SectionPageSolPedido {
@@ -35,8 +37,7 @@ public class PagePosSolicitudPedido extends PageObject {
 	}
 	
 	public boolean checkIsPage(int maxSeconds) throws Exception {
-		boolean check = isElementVisibleUntil(driver, By.xpath(XPathTitle), maxSeconds);
-		return check;
+		return (state(Visible, By.xpath(XPathTitle)).wait(maxSeconds).check());
 	}
 	
 	public void selectSection(SectionPageSolPedido section) throws Exception {

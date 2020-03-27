@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.eps;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageEpsSimulador extends WebdrvWrapp {
+public class PageEpsSimulador {
 
 	public enum TypeDelay {
 		OneMinutes(1), 
@@ -28,8 +29,8 @@ public class PageEpsSimulador extends WebdrvWrapp {
     }
     
     public static boolean isPage(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathLogoEps)));
-    }    
+    	return (state(Visible, By.xpath(XPathLogoEps), driver).check());
+    }
     
     public static void selectDelayAuthorised(TypeDelay typeDelay, WebDriver driver) {
     	String xpathOption = getXPathOptionDelayAuthorised(typeDelay);

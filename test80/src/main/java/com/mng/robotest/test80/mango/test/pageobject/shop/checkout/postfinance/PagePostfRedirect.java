@@ -5,10 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PagePostfRedirect extends WebdrvWrapp {
+public class PagePostfRedirect {
 
     static String XPathButtonOK = "//form/input[@type='button' and @value[contains(.,'OK')]]"; 
     
@@ -16,7 +17,7 @@ public class PagePostfRedirect extends WebdrvWrapp {
      * @return si estamos en la página de redirección con el botón OK que aparece después de introducir el código de seguridad y pulsar "Continuar"
      */
     public static boolean isPresentButtonOk(WebDriver driver) throws Exception {
-        return (isElementPresent(driver, By.xpath(XPathButtonOK)));
+    	return (state(Present, By.xpath(XPathButtonOK), driver).check());
     }
     
     /**

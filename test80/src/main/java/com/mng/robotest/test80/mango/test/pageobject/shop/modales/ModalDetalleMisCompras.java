@@ -4,13 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class ModalDetalleMisCompras extends WebdrvWrapp {
+public class ModalDetalleMisCompras extends PageObjTM {
 
 	private final Channel channel;
-	private final WebDriver driver;
 	
     private static String XPathModalInfoArticulo = "//div[@id='productDetailsContent']";
     private static String XPathAspaForClose = "//button[@class[contains(.,'icofav-cerrar')]]";
@@ -20,8 +21,8 @@ public class ModalDetalleMisCompras extends WebdrvWrapp {
     private static String XPathLinkToMisComprasMobil = "//div[@class[contains(.,'iconBack')]]";
     
     private ModalDetalleMisCompras(Channel channel, WebDriver driver) {
+    	super(driver);
     	this.channel = channel;
-    	this.driver = driver;
     }
     public static ModalDetalleMisCompras getNew(Channel channel, WebDriver driver) {
     	return new ModalDetalleMisCompras(channel, driver);
@@ -38,7 +39,7 @@ public class ModalDetalleMisCompras extends WebdrvWrapp {
 	}
     
     public boolean isVisible() {
-        return (isElementVisible(driver, By.xpath(XPathModalInfoArticulo))); 
+    	return (state(Visible, By.xpath(XPathModalInfoArticulo)).check());
     }
     
     public void clickAspaForClose() {

@@ -4,10 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageResultPago extends WebdrvWrapp {
+public class PageResultPago {
 
     static String XPathTextoConfirmacionPagoMobil = "//div[@class='confirmation']"; 
     static String XPathTextoConfirmacionPagoDesktop = "//*[@class[contains(.,'textoConfirmacion')] or @class[contains(.,'confirmation-header-title')] or @id[contains(.,'confirmacionContrareembolso')] or @class[contains(.,'titulos pasos')]]";
@@ -50,60 +51,47 @@ public class PageResultPago extends WebdrvWrapp {
         }
         return XPathTextPedidoDesktop;
     }
-    
-    /**
-     * @return si figura un texto de confirmación del pago (se espera un máximo de segundos)
-     */
-    public static boolean isVisibleTextoConfirmacionPago(WebDriver driver, Channel channel, int seconds) {
-        return (isElementVisibleUntil(driver, By.xpath(getXPathTextoConfirmacionPago(channel)), seconds));
-    }
-    
-    /**
-     * Click elemento lincable de "Seguir de shopping"
-     */
-    public static void clickSeguirDeShopping(WebDriver driver, Channel channel) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(getXPathLinkSeguirDeShopping(channel)));
-    }
-    
-    /**
-     * @return si es clicable el elemento para "Seguir de shopping"
-     */
-    public static boolean isClickableSeguirDeShopping(WebDriver driver, Channel channel) {
-        return (isElementClickable(driver, By.xpath(getXPathLinkSeguirDeShopping(channel))));
-    }
-    
-    /**
-     * @return el texto correspondiente al id del pedido (si no lo encuenta devuelve "")
-     */
-    public static String getCodigoPedido(WebDriver driver, Channel channel, int secondsWait) throws Exception {
-        String codPedido = "";
-        String xpathPedido = getXPathTextPedido(channel);
-        if (isElementPresentUntil(driver, By.xpath(xpathPedido), secondsWait)) {
-            codPedido = driver.findElements(By.xpath(xpathPedido)).get(0).getText();
-        }
-        return codPedido;
-    }
-    
-    /**
-     * @return si está presente el link hacia los pedidos (sólo aparece en la versión Desktop de la página)
-     */
-    public static boolean isLinkPedidosDesktop(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathLinkPedidosDesktop)));
-    }
-    
-    public static void clickMisPedidos(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathLinkPedidosDesktop));
-    }
-    
-    public static boolean isLinkMisComprasDesktop(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathLinkMisComprasDesktop)));
-    }
-    
-    public static void clickMisCompras(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathLinkMisComprasDesktop));
-    }
-    
+
+	public static boolean isVisibleTextoConfirmacionPago(WebDriver driver, Channel channel, int seconds) {
+		String xpath = getXPathTextoConfirmacionPago(channel);
+		return (state(Visible, By.xpath(xpath), driver).wait(seconds).check());
+	}
+
+	public static void clickSeguirDeShopping(WebDriver driver, Channel channel) throws Exception {
+		clickAndWaitLoad(driver, By.xpath(getXPathLinkSeguirDeShopping(channel)));
+	}
+
+	public static boolean isClickableSeguirDeShopping(WebDriver driver, Channel channel) {
+		String xpath = getXPathLinkSeguirDeShopping(channel);
+		return (state(Clickable, By.xpath(xpath), driver).check());
+	}
+
+	public static String getCodigoPedido(WebDriver driver, Channel channel, int seconds) throws Exception {
+		String codPedido = "";
+		String xpathPedido = getXPathTextPedido(channel);
+		if (state(Present, By.xpath(xpathPedido), driver).wait(seconds).check()) {
+			codPedido = driver.findElements(By.xpath(xpathPedido)).get(0).getText();
+		}
+		return codPedido;
+	}
+
+	public static boolean isLinkPedidosDesktop(WebDriver driver) {
+		return (state(Present, By.xpath(XPathLinkPedidosDesktop), driver).check());
+	}
+
+	public static void clickMisPedidos(WebDriver driver) throws Exception {
+		clickAndWaitLoad(driver, By.xpath(XPathLinkPedidosDesktop));
+	}
+
+	public static boolean isLinkMisComprasDesktop(WebDriver driver) {
+		return (state(Present, By.xpath(XPathLinkMisComprasDesktop), driver).check());
+	}
+
+	public static void clickMisCompras(WebDriver driver) throws Exception {
+		clickAndWaitLoad(driver, By.xpath(XPathLinkMisComprasDesktop));
+	}
+
 	public static boolean isVisibleBlockNewLoyaltyPoints(WebDriver driver) {
-		return (WebdrvWrapp.isElementVisible(driver, By.xpath(xpathBlockNewLoyaltyPoints)));
+		return (state(Visible, By.xpath(xpathBlockNewLoyaltyPoints), driver).check());
 	}
 }

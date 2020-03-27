@@ -5,7 +5,7 @@ import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardAdyen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardINIpay1Mobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardINIpay1Mobil.BodyPageKoCardINIpay1;
@@ -24,15 +24,16 @@ public class PageKoCardINIpay1MobilStpV2 {
     		PageKoCardINIpay1Mobil.isPage(driver), State.Warn);
       	validations.add(
     		"Existe el botón <b>SamsungPay</b>",
-    		PageKoCardINIpay1Mobil.isElementInStateUntil(BodyPageKoCardINIpay1.terms, StateElem.Present, 2, driver), 
+    		PageKoCardINIpay1Mobil.isElementInStateUntil(BodyPageKoCardINIpay1.terms, Present, 2, driver), 
     		State.Warn);
       	validations.add(
     		"Existe el checkbox para los <b>terminos</b> del pago",
-    		PageKoCardINIpay1Mobil.isElementInStateUntil(BodyPageKoCardINIpay1.terms, StateElem.Present, 2, driver), 
+    		PageKoCardINIpay1Mobil.isElementInStateUntil(BodyPageKoCardINIpay1.terms, Present, 2, driver), 
     		State.Warn);
+      	
       	validations.add(
     		"Existe el titulo de los terminos",
-    		PageKoCardAdyen.isElementInStateUntil(BodyPageKoCardINIpay1.termsTitle, StateElem.Present, 2, driver), 
+    		PageKoCardAdyen.isElementInStateUntil(BodyPageKoCardINIpay1.termsTitle, Present, 2, driver), 
     		State.Defect);
       	return validations;
     }
@@ -51,7 +52,7 @@ public class PageKoCardINIpay1MobilStpV2 {
     	description="Desaparece el apartado de los términos",
     	level=State.Defect)
     private static boolean checkDesapareceApartadoTerminos(WebDriver driver) {
-    	return (!PageKoCardINIpay1Mobil.isElementInStateUntil(BodyPageKoCardINIpay1.termsTitle, StateElem.Visible, 1, driver));
+    	return (!PageKoCardINIpay1Mobil.isElementInStateUntil(BodyPageKoCardINIpay1.termsTitle, Visible, 1, driver));
     }
 
 	final static String litButtonTypeCard = "케이뱅크";
@@ -60,8 +61,6 @@ public class PageKoCardINIpay1MobilStpV2 {
         expected="Aparece información varia y el boton de continuar")
     public static void continuarConPagoCoreaMobile(WebDriver driver) throws Exception {
     	BodyPageKoCardINIpay1.clickTypeCardButton(litButtonTypeCard, driver);
-        
-        //Validations
         PageKoCardINIpay2MobilStpV.validateIsPage(driver);
     }
 }

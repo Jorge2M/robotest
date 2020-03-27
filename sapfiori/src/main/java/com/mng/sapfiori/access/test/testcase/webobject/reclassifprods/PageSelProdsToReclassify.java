@@ -12,7 +12,7 @@ import com.mng.sapfiori.access.test.testcase.generic.webobject.inputs.withmodal.
 import com.mng.sapfiori.access.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForSelectMultiItem;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.pages.PageFilter;
 import com.mng.sapfiori.access.test.testcase.webobject.iconsmenu.OptionMenu;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageSelProdsToReclassify extends PageFilter {
 	
@@ -84,7 +84,7 @@ public class PageSelProdsToReclassify extends PageFilter {
 	 */
 	private int getNumRowWithIdProduct(String idProduct) {
 		By byTd = By.xpath(getXPathCellWithIdProduct(idProduct));
-		boolean isVisibleRow = isElementVisibleUntil(driver, byTd, 5);
+		boolean isVisibleRow = state(Visible, byTd).wait(5).check();
 		if (isVisibleRow) {
 			String idTd = driver.findElement(byTd).getAttribute("id");
 			Pattern rowNumberPattern = Pattern.compile(".*row(\\d*).*");

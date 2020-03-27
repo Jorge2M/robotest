@@ -6,9 +6,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class SecTarjetaPciInIframe extends WebdrvWrapp implements SecTarjetaPci {
+public class SecTarjetaPciInIframe implements SecTarjetaPci {
 
 	final protected WebDriver driver;
 	
@@ -43,9 +44,9 @@ public class SecTarjetaPciInIframe extends WebdrvWrapp implements SecTarjetaPci 
     }
     
     @Override
-    public boolean isPresentInputNumberUntil(int maxSecondsToWait) {
+    public boolean isPresentInputNumberUntil(int maxSeconds) {
     	goToIframe();
-        boolean present = isElementPresentUntil(driver, By.xpath(XPathInputNumber), maxSecondsToWait);
+    	boolean present = state(Present, By.xpath(XPathInputNumber), driver).wait(maxSeconds).check();
         leaveIframe();
         return present;
     }
@@ -53,7 +54,7 @@ public class SecTarjetaPciInIframe extends WebdrvWrapp implements SecTarjetaPci 
     @Override
     public boolean isPresentInputTitular() {
     	goToIframe();
-        boolean present = isElementPresent(driver, By.xpath(XPathInputTitular));
+    	boolean present = state(Present, By.xpath(XPathInputTitular), driver).check();
         leaveIframe();
         return present;
     }
@@ -61,7 +62,7 @@ public class SecTarjetaPciInIframe extends WebdrvWrapp implements SecTarjetaPci 
     @Override
     public boolean isPresentSelectMes() {
     	goToIframe();
-        boolean present = isElementPresent(driver, By.xpath(XPathSelectMes));
+    	boolean present = state(Present, By.xpath(XPathSelectMes), driver).check();
         leaveIframe();
         return present;
     }
@@ -69,7 +70,7 @@ public class SecTarjetaPciInIframe extends WebdrvWrapp implements SecTarjetaPci 
     @Override
     public boolean isPresentSelectAny() {
     	goToIframe();
-        boolean present = isElementPresent(driver, By.xpath(XPathSelectAny));
+    	boolean present = state(Present, By.xpath(XPathSelectAny), driver).check();
         leaveIframe();
         return present;
     }
@@ -77,7 +78,7 @@ public class SecTarjetaPciInIframe extends WebdrvWrapp implements SecTarjetaPci 
     @Override
     public boolean isPresentInputCvc() {
     	goToIframe();
-        boolean present = isElementPresent(driver, By.xpath(XPathInputCvc));
+    	boolean present = state(Present, By.xpath(XPathInputCvc), driver).check();
         leaveIframe();
         return present;
     }
@@ -85,7 +86,7 @@ public class SecTarjetaPciInIframe extends WebdrvWrapp implements SecTarjetaPci 
     @Override
     public boolean isPresentInputDni() {
     	goToIframe();
-        boolean present = isElementPresent(driver, By.xpath(XPathInputDni));
+    	boolean present = state(Present, By.xpath(XPathInputDni), driver).check();
         leaveIframe();
         return present;
     }    

@@ -9,7 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 /**
@@ -17,7 +18,7 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
  * @author jorge.munoz
  *
  */
-public class PageAssist1rst extends WebdrvWrapp {
+public class PageAssist1rst {
 
     static String XPathLogoAssistDesktop = "//div[@id[contains(.,'AssistLogo')]]";
     static String XPathLogoAssistMobil = "//div[@class='Logo']/img";
@@ -50,27 +51,29 @@ public class PageAssist1rst extends WebdrvWrapp {
     
     public static boolean isPresentLogoAssist(Channel channel, WebDriver driver) {
         String xpathLogo = getXPath_LogoAssist(channel);
-        return (isElementPresent(driver, By.xpath(xpathLogo)));
+        return (state(Present, By.xpath(xpathLogo), driver).check());
     }
     
     public static boolean isPresentInputsForTrjData(Channel channel, WebDriver driver) {
         boolean inputsOk = true;
         if (channel==Channel.movil_web) {
-            if (!isElementPresent(driver, By.xpath(XPathInputNumTrjMovil)) ||
-                !isElementPresent(driver, By.xpath(XPathSelectMMCaducMovil)) ||
-                !isElementPresent(driver, By.xpath(XPathSelectAACaducMovil)))
+        	if (!state(Present, By.xpath(XPathInputNumTrjMovil), driver).check() ||
+        		!state(Present, By.xpath(XPathSelectMMCaducMovil), driver).check() ||
+        		!state(Present, By.xpath(XPathSelectAACaducMovil), driver).check()) {
                 inputsOk = false;
+        	}
         } else {
-            if (!isElementPresent(driver, By.xpath(XPathInputNumTrjDesktop)) ||
-                !isElementPresent(driver, By.xpath(XPathInputMMCaducDesktop)) ||
-                !isElementPresent(driver, By.xpath(XPathInputAACaducDesktop))) {
-                inputsOk = false;
+        	if (!state(Present, By.xpath(XPathInputNumTrjDesktop), driver).check() ||
+        		!state(Present, By.xpath(XPathInputMMCaducDesktop), driver).check() ||
+        		!state(Present, By.xpath(XPathInputAACaducDesktop), driver).check()) {
+        		inputsOk = false;
             }
         }
         
-        if (!isElementPresent(driver, By.xpath(XPathInputTitular)) ||
-            !isElementPresent(driver, By.xpath(XPathInputCvc)))
+        if (!state(Present, By.xpath(XPathInputTitular), driver).check() ||
+        	!state(Present, By.xpath(XPathInputCvc), driver).check()) {
             inputsOk = false;
+        }
         
         return inputsOk;
     }
@@ -110,9 +113,10 @@ public class PageAssist1rst extends WebdrvWrapp {
         new WebDriverWait(driver, maxSecondsToWait).until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathBoton)));
     }
     
-    public static boolean invisibilityBotonPagoUntil(int maxSecondsWait, Channel channel, WebDriver driver) {
+    public static boolean invisibilityBotonPagoUntil(int maxSeconds, Channel channel, WebDriver driver) {
         String xpathBoton = getXPath_buttonPago(channel);
-        return (isElementInvisibleUntil(driver, By.xpath(xpathBoton), maxSecondsWait)); 
+        return (state(Invisible, By.xpath(xpathBoton), driver)
+        		.wait(maxSeconds).check());
      }
 }
 

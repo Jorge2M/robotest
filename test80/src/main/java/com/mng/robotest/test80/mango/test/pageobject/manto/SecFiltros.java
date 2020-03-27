@@ -6,10 +6,11 @@ import java.time.format.DateTimeFormatter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecFiltros extends WebdrvWrapp {
+public class SecFiltros {
 
     final static String XPathFiltroCodPedido = "//input[@id[contains(.,':id')]]";
     final static String XPathFiltroCodPais = "//input[@id[contains(.,'pais')]]";
@@ -40,13 +41,13 @@ public class SecFiltros extends WebdrvWrapp {
         driver.findElement(By.xpath(XPathFiltroFHasta)).clear();
         driver.findElement(By.xpath(XPathFiltroFHasta)).sendKeys(fechaHasta);
     }
-    
-    public static void setFiltroCodPaisIfExists(WebDriver driver, String codigoPais) {
-        if (isElementPresent(driver, By.xpath(XPathFiltroCodPais))) {
-            driver.findElement(By.xpath(XPathFiltroCodPais)).clear();
-            driver.findElement(By.xpath(XPathFiltroCodPais)).sendKeys(codigoPais);
-        }
-    }
+
+	public static void setFiltroCodPaisIfExists(WebDriver driver, String codigoPais) {
+		if (state(Present, By.xpath(XPathFiltroCodPais), driver).check()) {
+			driver.findElement(By.xpath(XPathFiltroCodPais)).clear();
+			driver.findElement(By.xpath(XPathFiltroCodPais)).sendKeys(codigoPais);
+		}
+	}
     
     public static String getFechaDesdeValue(WebDriver driver) {
         return (driver.findElement(By.xpath(XPathFiltroFDesde)).getAttribute("value"));

@@ -29,6 +29,8 @@ import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.TestMaker;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
@@ -50,14 +52,14 @@ public class UtilsMangoTest {
 
         return codigoPostal;
     }
-    
-    public static String getPageSource(WebDriver driver) {
-        String idWebKit = "webkit-xml-viewer-source-xml";
-        if (WebdrvWrapp.isElementPresent(driver, By.id(idWebKit))) {
-            return driver.findElement(By.id(idWebKit)).getAttribute("innerHTML");
-        }
-        return driver.getPageSource();
-    }
+
+	public static String getPageSource(WebDriver driver) {
+		String idWebKit = "webkit-xml-viewer-source-xml";
+		if (PageObjTM.state(Present, By.id(idWebKit), driver).check()) {
+			return driver.findElement(By.id(idWebKit)).getAttribute("innerHTML");
+		}
+		return driver.getPageSource();
+	}
 
     /**
      * Usa diferentes métodos para posicionarse en la página inicial
@@ -72,7 +74,7 @@ public class UtilsMangoTest {
             if (urlPaginaPostAcceso!=null) {
                 driver.get(urlPaginaPostAcceso);
             } else {
-                if (WebdrvWrapp.isElementPresent(driver, By.xpath("//base"))) {
+            	if (PageObjTM.state(Present, By.xpath("//base"), driver).check()) {
                     String urlBase = driver.findElement(By.xpath("//base")).getAttribute("href");
                     driver.get(urlBase);
                 }

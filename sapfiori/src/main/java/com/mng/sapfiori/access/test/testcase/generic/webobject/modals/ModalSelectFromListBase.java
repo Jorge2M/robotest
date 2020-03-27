@@ -12,7 +12,7 @@ import com.mng.sapfiori.access.test.testcase.generic.webobject.inputs.withmodal.
 import com.mng.sapfiori.access.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForDefineConditions;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.makers.StandarElementsMaker;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.utils.PageObject;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public abstract class ModalSelectFromListBase extends PageObject {
 
@@ -55,7 +55,7 @@ public abstract class ModalSelectFromListBase extends PageObject {
 	
 	public boolean isModalVisible() {
 		String xpathTitle = getXPathTitleModal();
-		return WebdrvWrapp.isElementVisible(driver, By.xpath(xpathTitle));
+		return (state(Visible, By.xpath(xpathTitle)).check());
 	}
 
 	public void clickEnterToShowInitialElements() throws Exception {
@@ -67,12 +67,12 @@ public abstract class ModalSelectFromListBase extends PageObject {
 	}
 
 	public boolean isElementListPresent(int maxSeconds) {
-		return (WebdrvWrapp.isElementPresentUntil(driver, By.xpath(XPathElementLine), maxSeconds));
+		return (state(Present, By.xpath(XPathElementLine)).wait(maxSeconds).check());
 	}
 	
 	public void selectElementByPosition(int posElement) throws Exception {
 		By byElem = By.xpath(getXPathForSelectElementByIndex(posElement));
-		WebdrvWrapp.clickAndWaitLoad(driver, byElem);
+		clickAndWaitLoad(driver, byElem);
 	}
 	
 	public boolean findAndSelectElement(String valueToSearch, String valueToSelectInTable) throws Exception {
@@ -120,7 +120,7 @@ public abstract class ModalSelectFromListBase extends PageObject {
 	
 	public boolean selectElementInTable(String valueToSelect) throws Exception {
 		String xpath = getXPathForSelectElementByValue(valueToSelect);
-		if (isElementVisibleUntil(driver, By.xpath(xpath), 3)) {
+		if (state(Visible, By.xpath(xpath)).wait(3).check()) {
 			clickAndWaitLoad(driver, By.xpath(xpath));
 			return true;
 		}
@@ -128,6 +128,6 @@ public abstract class ModalSelectFromListBase extends PageObject {
 	}
 	
 	public void clickOkButton() throws Exception {
-		WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(XPathOkButton));
+		clickAndWaitLoad(driver, By.xpath(XPathOkButton));
 	}
 }

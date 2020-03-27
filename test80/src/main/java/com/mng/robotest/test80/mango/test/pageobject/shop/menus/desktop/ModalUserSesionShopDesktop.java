@@ -2,12 +2,14 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
+
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
-public class ModalUserSesionShopDesktop extends WebdrvWrapp { 
-
-	private final WebDriver driver;
+public class ModalUserSesionShopDesktop extends PageObjTM { 
 	
     final static String XPathCapaMenus = "//div[@class='user-icon-submenu']";
     
@@ -31,7 +33,7 @@ public class ModalUserSesionShopDesktop extends WebdrvWrapp {
     }
     
     private	ModalUserSesionShopDesktop(WebDriver driver) {
-    	this.driver = driver;
+    	super(driver);
     }
     
     public static ModalUserSesionShopDesktop getNew(WebDriver driver) {
@@ -39,19 +41,19 @@ public class ModalUserSesionShopDesktop extends WebdrvWrapp {
     }
     
     public boolean isVisible() {
-    	return (WebdrvWrapp.isElementVisible(driver, By.xpath(XPathCapaMenus)));
+    	return (state(Visible, By.xpath(XPathCapaMenus)).check());
     }
     
-    public boolean isMenuInState(MenuUserDesktop menu, StateElem state) {
+    public boolean isMenuInState(MenuUserDesktop menu, State state) {
     	return (isElementInState(menu, state, driver));
     }
     
-    public boolean isMenuInStateUntil(MenuUserDesktop menu, StateElem state, int maxSecondsWait) {
+    public boolean isMenuInStateUntil(MenuUserDesktop menu, State state, int maxSecondsWait) {
     	return (isElementInStateUntil(menu, state, maxSecondsWait, driver));
     }
     
     public void wait1sForItAndclickMenu(MenuUserDesktop menu) throws Exception {
-    	isMenuInStateUntil(menu, StateElem.Clickable, 1);
+    	isMenuInStateUntil(menu, Clickable, 1);
     	clickAndWait(menu, driver);
     }
     
@@ -59,7 +61,7 @@ public class ModalUserSesionShopDesktop extends WebdrvWrapp {
     	clickAndWait(menu, driver);
     }
 
-    public boolean clickMenuIfinState(MenuUserDesktop menu, StateElem stateExpected) throws Exception {
+    public boolean clickMenuIfinState(MenuUserDesktop menu, State stateExpected) throws Exception {
         if (isMenuInState(menu, stateExpected)) {
         	moveToElementPage(menu, driver);
             clickMenu(menu);

@@ -7,11 +7,12 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 
-public class SecBannerHeadGallery extends WebdrvWrapp {
+public class SecBannerHeadGallery {
 	public enum TypeLinkInfo {more, less};
     static String XPathBanner = "//div[@class='bannerHead' or @class='firstBanner' or @class='innerBanner']";
     static String XPathBannerWithVideo = XPathBanner + "//div[@data-video]";
@@ -33,7 +34,7 @@ public class SecBannerHeadGallery extends WebdrvWrapp {
     }
     
     public static boolean isVisible(WebDriver driver) {
-    	if (isElementVisible(driver, By.xpath(XPathBanner))) {
+    	if (state(Visible, By.xpath(XPathBanner), driver).check()) {
     		Dimension bannerSize = driver.findElement(By.xpath(XPathBanner)).getSize(); 
     		if (bannerSize.height>0 && bannerSize.width>0) {
     			return true;
@@ -56,13 +57,15 @@ public class SecBannerHeadGallery extends WebdrvWrapp {
     }
     
     public static boolean isBannerWithoutTextAccesible(WebDriver driver) {
-    	return (isElementVisible(driver, By.xpath(XPathBannerWithVideo + " | " + XPathBannerWithBackgroundImage)));
+    	String xpath = XPathBannerWithVideo + " | " + XPathBannerWithBackgroundImage;
+    	return (state(Visible, By.xpath(xpath), driver).check());
     }
     
     public static boolean isLinkable(WebDriver driver) {
-        if (isElementPresent(driver, By.xpath(XPathBanner))) {
+    	if (state(Present, By.xpath(XPathBanner), driver).check()) {
             WebElement banner = driver.findElement(By.xpath(XPathBanner));
-            return (isElementClickable(banner, By.xpath(".//a[@href]")));
+            return (state(Clickable, banner, driver)
+            		.by(By.xpath(".//a[@href]")).check());
         }
         
         return false;
@@ -75,14 +78,14 @@ public class SecBannerHeadGallery extends WebdrvWrapp {
     }
     
     public static String getText(WebDriver driver) {
-        if (isElementPresent(driver, By.xpath(XPathText))) {
+    	if (state(Present, By.xpath(XPathText), driver).check()) {
             return (driver.findElement(By.xpath(XPathBanner)).getText());
         }
-        return "";    
+        return "";
     }
     
     public static boolean isVisibleLinkInfoRebajas(WebDriver driver) {
-    	return (isElementVisible(driver, By.xpath(XPathTextLinkInfoRebajas)));
+    	return (state(Visible, By.xpath(XPathTextLinkInfoRebajas), driver).check());
     }
     
     public static void clickLinkInfoRebajas(WebDriver driver) throws Exception {
@@ -91,10 +94,11 @@ public class SecBannerHeadGallery extends WebdrvWrapp {
     
     public static boolean isVisibleLinkTextInfoRebajas(TypeLinkInfo typeLink, WebDriver driver) throws Exception {
     	String xpathText = getXPathTextInfoRebajas(typeLink);
-    	return (isElementVisible(driver, By.xpath(xpathText))); 
+    	return (state(Visible, By.xpath(xpathText), driver).check());
     }
     
-    public static boolean isVisibleInfoRebajasUntil(int maxSecondsToWait, WebDriver driver) {
-    	return (isElementVisibleUntil(driver, By.xpath(XPathTextInfoRebajas), maxSecondsToWait));
+    public static boolean isVisibleInfoRebajasUntil(int maxSeconds, WebDriver driver) {
+    	return (state(Visible, By.xpath(XPathTextInfoRebajas), driver)
+    			.wait(maxSeconds).check());
     }
 }

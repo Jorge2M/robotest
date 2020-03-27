@@ -5,10 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecCrossSelling extends WebdrvWrapp {
+public class SecCrossSelling {
 	
 	private final Channel channel;
 	private final WebDriver driver;
@@ -35,7 +36,7 @@ public class SecCrossSelling extends WebdrvWrapp {
 	}
 
 	public boolean isSectionVisible() {
-		return (isElementVisible(driver, By.xpath(getXPathSection())));
+		return (state(Visible, By.xpath(getXPathSection()), driver).check());
 	}
 
 	/**

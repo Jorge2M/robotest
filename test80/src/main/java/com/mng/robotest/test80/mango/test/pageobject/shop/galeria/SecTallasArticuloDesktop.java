@@ -6,18 +6,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class SecTallasArticuloDesktop extends WebdrvWrapp {
+public class SecTallasArticuloDesktop extends PageObjTM {
 	
-	private final AppEcom app;
-	private final WebDriver driver;
+	//private final AppEcom app;
 	private final String xpathArticulo;
 //	private OutletGalery outputGalery;
 	
 	public SecTallasArticuloDesktop(AppEcom app, String xpathArticulo, WebDriver driver) {
-		this.app = app;
-		this.driver = driver;
+		super(driver);
+		//this.app = app;
 		this.xpathArticulo = xpathArticulo;
 	}
 
@@ -102,9 +102,9 @@ public class SecTallasArticuloDesktop extends WebdrvWrapp {
 //		}
 		return XpathTallaNoDisponibleArticuloShop;
 	}
-	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSecondsToWait) {
+	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSeconds) {
 		String xpathCapa = getXPathCapaTallas(posArticulo, true);
-		return (isElementVisibleUntil(driver, By.xpath(xpathCapa), maxSecondsToWait));
+		return (state(Visible, By.xpath(xpathCapa)).wait(maxSeconds).check());
 	}
 	
     public void selectLinkAñadirOutlet(int posArticulo) throws Exception {

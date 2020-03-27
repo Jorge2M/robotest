@@ -122,7 +122,7 @@ public class PageResultPagoStpV {
         if (PageListPedidos.isPage(driver)) {
         	PageListPedidosStpV.validateIsPage(dataPedido.getCodpedido(), driver);
         } else {
-        	PageInputPedidoStpV.validateIsPage(driver);
+        	PageInputPedidoStpV.getNew(driver).validateIsPage();
         }
     }    
     
@@ -141,7 +141,7 @@ public class PageResultPagoStpV {
             flagsVal.validaImgBroken = false;
             AllPagesStpV.validacionesEstandar(flagsVal, driver);
         } else {
-            PageAccesoMisComprasStpV.validateIsPage(driver);
+            PageAccesoMisComprasStpV.getNew(driver).validateIsPage();
         }
     }    
     
@@ -165,7 +165,7 @@ public class PageResultPagoStpV {
             if (PageListPedidos.isPage(driver)) {
                 PageListPedidosStpV.selectPedido(dataPedido.getCodpedido(), driver);
             } else {
-                PageInputPedidoStpV.inputPedidoAndSubmit(dataPedido, driver);
+                PageInputPedidoStpV.getNew(driver).inputPedidoAndSubmit(dataPedido);
             }
         }
     }
@@ -179,8 +179,9 @@ public class PageResultPagoStpV {
         	pageMisComprasStpV.selectBlock(TypeCompra.Online, true);
         	pageMisComprasStpV.validateIsCompraOnlineVisible(dataPedido.getCodpedido(), dCtxPago.getFTCkout().isChequeRegalo);
         } else {
-            PageAccesoMisComprasStpV.clickBlock(TypeBlock.NoRegistrado, driver);
-            PageAccesoMisComprasStpV.buscarPedidoForNoRegistrado(dCtxPago.getDataPedido(), driver);
+        	PageAccesoMisComprasStpV pageAccesoMisComprasStpV = PageAccesoMisComprasStpV.getNew(driver);
+            pageAccesoMisComprasStpV.clickBlock(TypeBlock.NoRegistrado);
+            pageAccesoMisComprasStpV.buscarPedidoForNoRegistrado(dCtxPago.getDataPedido());
         }
     }
 }

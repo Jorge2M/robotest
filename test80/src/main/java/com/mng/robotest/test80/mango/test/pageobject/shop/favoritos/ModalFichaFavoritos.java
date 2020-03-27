@@ -10,14 +10,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen.Color;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 
 
-public class ModalFichaFavoritos extends WebdrvWrapp {
+public class ModalFichaFavoritos {
     
 	private final WebDriver driver;
 	
@@ -64,14 +65,14 @@ public class ModalFichaFavoritos extends WebdrvWrapp {
     }
     
     public String getNombreColorSelectedFicha() {
-        if (isElementVisible(driver, By.xpath(XPathImgColorSelectedFicha))) {
+    	if (state(Visible, By.xpath(XPathImgColorSelectedFicha), driver).check()) {
             return (driver.findElement(By.xpath(XPathImgColorSelectedFicha)).getAttribute("title"));
         }
         return "";
     }
     
     public String getCodigoColorSelectedFicha() {
-        if (isElementVisible(driver, By.xpath(XPathColorSelectedFicha))) {
+    	if (state(Visible, By.xpath(XPathColorSelectedFicha), driver).check()) {
         	String id = driver.findElement(By.xpath(XPathColorSelectedFicha)).getAttribute("id");
         	if (!id.isEmpty()) {
         		return (id.replace("color_", ""));
@@ -80,14 +81,15 @@ public class ModalFichaFavoritos extends WebdrvWrapp {
         return "";
     }
     
-    public boolean isVisibleFichaUntil(String refProducto, int maxSecondsToWait) {
+    public boolean isVisibleFichaUntil(String refProducto, int maxSeconds) {
         String xpathFicha = getXPathFichaProducto(refProducto);
-        return (isElementVisibleUntil(driver, By.xpath(xpathFicha), maxSecondsToWait));
+        return (state(Visible, By.xpath(xpathFicha), driver).wait(maxSeconds).check());
     }
     
-    public boolean isInvisibleFichaUntil(String refProducto, int maxSecondsToWait) {
+    public boolean isInvisibleFichaUntil(String refProducto, int maxSeconds) {
         String xpathFicha = getXPathFichaProducto(refProducto);
-        return (isElementInvisibleUntil(driver, By.xpath(xpathFicha), maxSecondsToWait));
+        return (state(Invisible, By.xpath(xpathFicha), driver)
+        		.wait(maxSeconds).check());
     }
     
     public boolean isColorSelectedInFicha(Color color) {
@@ -125,7 +127,7 @@ public class ModalFichaFavoritos extends WebdrvWrapp {
         //Filtramos y nos quedamos sólo con las tallas disponibles
         List<WebElement> listTallasAvailable = new ArrayList<>();
         for (WebElement talla : listTallas) {
-            if (!isElementPresent(talla, By.xpath("./span"))) {
+        	if (!state(Present, By.xpath("./span"), driver).check()) {
                 listTallasAvailable.add(talla);
             }
         }

@@ -14,7 +14,6 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -28,6 +27,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
 
 public class WebdrvWrapp extends ElementPageFunctions { 
 
@@ -41,54 +43,54 @@ public class WebdrvWrapp extends ElementPageFunctions {
         }
     }    
     
-    public static boolean isElementPresent(final WebDriver driver, final By by) {
-        try {
-            driver.findElement(by);
-            return true;
-        } 
-        catch (NoSuchElementException e) {
-            return false;
-        }
-    }
-    
-    public static boolean isElementPresent(final WebElement element, final By by) {
-        try {
-            element.findElement(by);
-            return true;
-        } 
-        catch (NoSuchElementException e) {
-            return false;
-        }
-    }
-    
-    public static boolean isElementPresentUntil(final WebDriver driver, final By by, int seconds) {
-        try {
-            new WebDriverWait(driver,seconds).until(ExpectedConditions.presenceOfElementLocated(by));
-            return true;
-        } 
-        catch (org.openqa.selenium.TimeoutException e) {
-            return false;
-        }
-    }
-    
-    public static boolean isElementVisible(final WebDriver driver, final By by) {
-        try {
-            return (driver.findElement(by)!=null &&  driver.findElement(by).isDisplayed());
-        } 
-        catch (NoSuchElementException e) {
-            return false;
-        }
-    }
-    
-    public static boolean isElementVisible(final WebElement element, final By by) {
-        try {
-            element.findElement(by);
-            return (element.findElement(by).isDisplayed());
-        } 
-        catch (NoSuchElementException e) {
-            return false;
-        }
-    }
+//    public static boolean isElementPresent(final WebDriver driver, final By by) {
+//        try {
+//            driver.findElement(by);
+//            return true;
+//        } 
+//        catch (NoSuchElementException e) {
+//            return false;
+//        }
+//    }
+//    
+//    public static boolean isElementPresent(final WebElement element, final By by) {
+//        try {
+//            element.findElement(by);
+//            return true;
+//        } 
+//        catch (NoSuchElementException e) {
+//            return false;
+//        }
+//    }
+//    
+//    public static boolean isElementPresentUntil(final WebDriver driver, final By by, int seconds) {
+//        try {
+//            new WebDriverWait(driver,seconds).until(ExpectedConditions.presenceOfElementLocated(by));
+//            return true;
+//        } 
+//        catch (org.openqa.selenium.TimeoutException e) {
+//            return false;
+//        }
+//    }
+//    
+//    public static boolean isElementVisible(final WebDriver driver, final By by) {
+//        try {
+//            return (driver.findElement(by)!=null &&  driver.findElement(by).isDisplayed());
+//        } 
+//        catch (NoSuchElementException e) {
+//            return false;
+//        }
+//    }
+//    
+//    public static boolean isElementVisible(final WebElement element, final By by) {
+//        try {
+//            element.findElement(by);
+//            return (element.findElement(by).isDisplayed());
+//        } 
+//        catch (NoSuchElementException e) {
+//            return false;
+//        }
+//    }
     
     public static int getNumElementsVisible(WebDriver driver, By by) {
         int numberOfElements = 0;
@@ -142,79 +144,78 @@ public class WebdrvWrapp extends ElementPageFunctions {
         return listaReturn;
     }
     
-    public static WebElement getElementClickable(WebDriver driver, By by) {
-        for (WebElement element : driver.findElements(by)) {
-            if (isElementClickable(driver, by)) {
-                return element;
-            }
-        }
-        
-        return null;
-    }    
+	public static WebElement getElementClickable(WebDriver driver, By by) {
+		for (WebElement element : driver.findElements(by)) {
+			if (PageObjTM.state(Clickable, element, driver).check()) {
+				return element;
+			}
+		}
+		return null;
+	}
     
-    public static boolean isElementVisibleUntil(final WebDriver driver, final By by, int seconds) {
-        try {
-            new WebDriverWait(driver,seconds).until(ExpectedConditions.visibilityOfElementLocated(by));
-            return true;
-        } 
-        catch (org.openqa.selenium.TimeoutException e) {
-            return false;
-        }
-    }
+//    public static boolean isElementVisibleUntil(final WebDriver driver, final By by, int seconds) {
+//        try {
+//            new WebDriverWait(driver,seconds).until(ExpectedConditions.visibilityOfElementLocated(by));
+//            return true;
+//        } 
+//        catch (org.openqa.selenium.TimeoutException e) {
+//            return false;
+//        }
+//    }
     
-    public static boolean isElementClickable(final WebDriver driver, final By by) {
-        return isElementClickableUntil(driver, by, 0);
-    }    
+//    public static boolean isElementClickable(final WebDriver driver, final By by) {
+//        return isElementClickableUntil(driver, by, 0);
+//    }    
+//    
+//    public static boolean isElementClickableUntil(final WebDriver driver, final By by, int seconds) {
+//        try {
+//            new WebDriverWait(driver,seconds).until(ExpectedConditions.presenceOfElementLocated(by));
+//            return true;
+//        } 
+//        catch (org.openqa.selenium.TimeoutException e) {
+//            return false;
+//        }
+//    }    
+//    
+//    public static boolean isElementClickableUntil(WebDriver driver, WebElement element, int seconds) {
+//        try {
+//            new WebDriverWait(driver, seconds).until(ExpectedConditions.elementToBeClickable(element));
+//            return true;
+//        } 
+//        catch (org.openqa.selenium.TimeoutException e) {
+//            return false;
+//        }
+//    }    
+//    
+//    public static boolean isElementClickable(final WebElement element, final By by) {
+//        try {
+//            element.findElement(by);
+//            return (element.findElement(by).isDisplayed() && element.findElement(by).isEnabled());
+//        } 
+//        catch (NoSuchElementException e) {
+//            return false;
+//        }
+//    }
+//    
+//    public static boolean isElementInvisibleUntil(final WebDriver driver, final By by, int seconds) {
+//        try {
+//            new WebDriverWait(driver, seconds).until(ExpectedConditions.invisibilityOfElementLocated(by));
+//            return true; 
+//        } 
+//        catch (org.openqa.selenium.TimeoutException e) {
+//            return false;
+//        }
+//    }    
     
-    public static boolean isElementClickableUntil(final WebDriver driver, final By by, int seconds) {
-        try {
-            new WebDriverWait(driver,seconds).until(ExpectedConditions.elementToBeClickable(by));
-            return true;
-        } 
-        catch (org.openqa.selenium.TimeoutException e) {
-            return false;
-        }
-    }    
-    
-    public static boolean isElementClickableUntil(WebDriver driver, WebElement element, int seconds) {
-        try {
-            new WebDriverWait(driver, seconds).until(ExpectedConditions.elementToBeClickable(element));
-            return true;
-        } 
-        catch (org.openqa.selenium.TimeoutException e) {
-            return false;
-        }
-    }    
-    
-    public static boolean isElementClickable(final WebElement element, final By by) {
-        try {
-            element.findElement(by);
-            return (element.findElement(by).isDisplayed() && element.findElement(by).isEnabled());
-        } 
-        catch (NoSuchElementException e) {
-            return false;
-        }
-    }
-    
-    public static boolean isElementInvisibleUntil(final WebDriver driver, final By by, int seconds) {
-        try {
-            new WebDriverWait(driver, seconds).until(ExpectedConditions.invisibilityOfElementLocated(by));
-            return true; 
-        } 
-        catch (org.openqa.selenium.TimeoutException e) {
-            return false;
-        }
-    }    
-    
-    public static boolean isElementNoClickableUntil(final WebDriver driver, final By by, int seconds) {
-        try {
-            new WebDriverWait(driver,seconds).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(by)));
-            return true;
-        } 
-        catch (org.openqa.selenium.TimeoutException e) {
-            return false;
-        }
-    }    
+//    public static boolean isElementNoClickableUntil(final WebDriver driver, final By by, int seconds) {
+//        try {
+//            new WebDriverWait(driver,seconds).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(by)));
+//            return true;
+//        } 
+//        catch (org.openqa.selenium.TimeoutException e) {
+//            return false;
+//        }
+//    }    
     
     public static boolean currentURLContains(final String literal, int seconds, WebDriver driver) {
         ExpectedCondition<Boolean> currentURLContains = new ExpectedCondition<Boolean>() {

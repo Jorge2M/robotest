@@ -1,14 +1,13 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.loyalty;
 
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class PageHomeDonateLikes extends WebdrvWrapp {
-
-	WebDriver driver;
+public class PageHomeDonateLikes extends PageObjTM {
 
 	public enum ButtonLikes implements ElementPage {
 		Button50likes(50), 
@@ -33,7 +32,7 @@ public class PageHomeDonateLikes extends WebdrvWrapp {
 	final static String xpathIconOperationDone = "//span[@class='icon-outline-done']";
 
 	private PageHomeDonateLikes(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 	}
 	
 	public static PageHomeDonateLikes getNew(WebDriver driver) {
@@ -41,18 +40,18 @@ public class PageHomeDonateLikes extends WebdrvWrapp {
 	}
 	
 	public boolean checkIsPage() {
-		return (WebdrvWrapp.isElementVisible(driver, By.id(idBlockLoyalty)));
+		return (state(Visible, By.id(idBlockLoyalty)).check());
 	}
 	
 	public boolean isVisible(ButtonLikes buttonLikes) {
-		return WebdrvWrapp.isElementInState(buttonLikes, StateElem.Visible, driver);
+		return isElementInState(buttonLikes, Visible, driver);
 	}
 	
 	public void clickButton(ButtonLikes buttonLikes) throws Exception {
-		WebdrvWrapp.clickAndWait(buttonLikes, driver);
+		clickAndWait(buttonLikes, driver);
 	}
 	
-	public boolean isVisibleIconOperationDoneUntil(int maxSecondsWait) {
-		return WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(xpathIconOperationDone), maxSecondsWait);
+	public boolean isVisibleIconOperationDoneUntil(int maxSeconds) {
+		return (state(Visible, By.xpath(xpathIconOperationDone)).wait(maxSeconds).check());
 	}
 }

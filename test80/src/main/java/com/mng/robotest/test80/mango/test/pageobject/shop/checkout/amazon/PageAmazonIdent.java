@@ -3,24 +3,26 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.amazon;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageAmazonIdent extends WebdrvWrapp {
+public class PageAmazonIdent {
+	
     static String XPathImgLogoAmazon = "//div/img[@src[contains(.,'logo_payments')]]";
     static String XPathInputEmail = "//input[@id='ap_email']";
     static String XPathInputPassword = "//input[@id='ap_password']";
     
     public static boolean isLogoAmazon(WebDriver driver) { 
-        if (isElementVisible(driver, By.xpath(XPathImgLogoAmazon))) {
+    	if (state(Visible, By.xpath(XPathImgLogoAmazon), driver).check()) {
             return true;
         }
         return false;
     }
     
     public static boolean isPageIdent(WebDriver driver) {
-        if (isElementVisible(driver, By.xpath(XPathInputEmail)) &&
-            isElementVisible(driver, By.xpath(XPathInputPassword))) {
+    	if (state(Visible, By.xpath(XPathInputEmail), driver).check() &&
+    		state(Visible, By.xpath(XPathInputPassword), driver).check()) {
             return true;
         }
         return false;

@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.pci;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecTarjetaPciNotInIframeDesktop extends WebdrvWrapp implements SecTarjetaPci {
+public class SecTarjetaPciNotInIframeDesktop implements SecTarjetaPci {
 
 	private final WebDriver driver;
 	
@@ -33,37 +34,38 @@ public class SecTarjetaPciNotInIframeDesktop extends WebdrvWrapp implements SecT
     @Override
     public boolean isVisiblePanelPagoUntil(String nombrePago, int maxSeconds) {
         String xpathPanelPago = getXPath_PanelPago(nombrePago);
-        return (isElementVisibleUntil(driver, By.xpath(xpathPanelPago), maxSeconds));
+        return (state(Visible, By.xpath(xpathPanelPago), driver).wait(maxSeconds).check());
     }
     
     @Override
-    public boolean isPresentInputNumberUntil(int maxSecondsToWait) {
-        return (isElementPresentUntil(driver, By.xpath(XPathInputNumber), maxSecondsToWait));
+    public boolean isPresentInputNumberUntil(int maxSeconds) {
+    	return (state(Present, By.xpath(XPathInputNumber), driver)
+    			.wait(maxSeconds).check());
     }
     
     @Override
     public boolean isPresentInputTitular() {
-        return (isElementPresent(driver, By.xpath(XPathInputTitular)));
+    	return (state(Present, By.xpath(XPathInputTitular), driver).check());
     }
     
     @Override
     public boolean isPresentSelectMes() {
-        return (isElementPresent(driver, By.xpath(XPathSelectMes)));
+    	return (state(Present, By.xpath(XPathSelectMes), driver).check());
     }
      
     @Override
     public boolean isPresentSelectAny() {
-        return (isElementPresent(driver, By.xpath(XPathSelectAny)));
+    	return (state(Present, By.xpath(XPathSelectAny), driver).check());
     }
     
     @Override
     public boolean isPresentInputCvc() {
-        return (isElementPresent(driver, By.xpath(XPathInputCvc)));
+    	return (state(Present, By.xpath(XPathInputCvc), driver).check());
     }
     
     @Override
     public boolean isPresentInputDni() {
-        return (isElementPresent(driver, By.xpath(XPathInputDni)));
+    	return (state(Present, By.xpath(XPathInputDni), driver).check());
     }    
     
     @Override

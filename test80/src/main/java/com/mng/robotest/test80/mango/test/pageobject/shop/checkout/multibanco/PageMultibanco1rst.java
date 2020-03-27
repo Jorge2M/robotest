@@ -4,10 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageMultibanco1rst extends WebdrvWrapp {
+public class PageMultibanco1rst {
+	
 	final static String TagEmail = "@TagEmail";
     final static String XPathListOfPayments = "//ul[@id='paymentMethods']";
     final static String XPathCabeceraStep = "//h2[@id[contains(.,'stageheader')]]";
@@ -36,27 +38,27 @@ public class PageMultibanco1rst extends WebdrvWrapp {
     
     public static boolean isPresentEntradaPago(String nombrePago, Channel channel, WebDriver driver) {
         String xpathPago = getXPathEntradaPago(nombrePago, channel);
-        return (isElementPresent(driver, By.xpath(xpathPago)));
+        return (state(Present, By.xpath(xpathPago), driver).check());
     }
     
     public static boolean isPresentCabeceraStep(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathCabeceraStep)));
+    	return (state(Present, By.xpath(XPathCabeceraStep), driver).check());
     }
     
     public static boolean isPresentButtonPagoDesktop(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathButtonPagoDesktop)));
+    	return (state(Present, By.xpath(XPathButtonPagoDesktop), driver).check());
     }
     
     public static boolean isPresentEmailUsr(String emailUsr, WebDriver driver) {
         String xpathEmail = getXPathInputEmail(emailUsr);
-        return (isElementPresent(driver, By.xpath(xpathEmail)));
+        return (state(Present, By.xpath(xpathEmail), driver).check());
     }
 
     public static void continueToNextPage(Channel channel, WebDriver driver) throws Exception {
         //En el caso de móvil hemos de seleccionar el icono de banco para visualizar el botón de continue
         if (channel==Channel.movil_web) {
             String xpathButton = getXPathButtonContinuePay(channel);
-            if (!isElementVisible(driver, By.xpath(xpathButton))) {
+            if (!state(Visible, By.xpath(xpathButton), driver).check()) {
                 clickIconoBanco(driver);
             }
         }

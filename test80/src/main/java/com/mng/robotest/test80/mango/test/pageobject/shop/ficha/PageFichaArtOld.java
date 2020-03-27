@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
 import com.mng.testmaker.conf.Channel;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 @SuppressWarnings({"static-access"})
 /**
@@ -39,7 +40,7 @@ public class PageFichaArtOld extends PageFicha {
     private static final String XPathImagenCarruselIzq = "//div[@class='carousel-img-container']//img[@class[contains(.,'carousel-img')]]";
     
     private PageFichaArtOld(Channel channel, WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         this.channel = channel;
         this.typeFicha = TypeFicha.Old;
     }
@@ -54,18 +55,18 @@ public class PageFichaArtOld extends PageFicha {
     }
     
     @Override
-    public boolean isPageUntil(int maxSecondsWait) {
+    public boolean isPageUntil(int maxSeconds) {
         return (
-        	isElementPresentUntil(driver, By.xpath(XPathContainerFicha), maxSecondsWait) &&
-            secDataProduct.secSelTallasOld.isVisibleSelectorTallasUntil(maxSecondsWait, driver)
+        	state(Present, By.xpath(XPathContainerFicha)).wait(maxSeconds).check() &&
+            secDataProduct.secSelTallasOld.isVisibleSelectorTallasUntil(maxSeconds, driver)
         );
     }
     
     @Override
-    public boolean isFichaArticuloUntil(String refArticulo, int maxSecondsToWait) {
+    public boolean isFichaArticuloUntil(String refArticulo, int maxSeconds) {
         String refSinColor = refArticulo.substring(0,8); 
         String xpathFichaRef = getXPathIsPage(refSinColor, channel);
-        return (isElementPresentUntil(driver, By.xpath(xpathFichaRef), maxSecondsToWait));
+        return (state(Present, By.xpath(xpathFichaRef)).wait(maxSeconds).check());
     }
     
     @Override
@@ -84,23 +85,24 @@ public class PageFichaArtOld extends PageFicha {
     }
     
     @Override
-    public boolean isVisibleDivAnadiendoAFavoritosUntil(int maxSecondsToWait) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathDivAnadiendoFavoritos), maxSecondsToWait));
+    public boolean isVisibleDivAnadiendoAFavoritosUntil(int maxSeconds) {
+    	return (state(Visible, By.xpath(XPathDivAnadiendoFavoritos)).wait(maxSeconds).check());
     }
     
     @Override
-    public boolean isInvisibleDivAnadiendoAFavoritosUntil(int maxSecondsToWait) {
-        return (isElementInvisibleUntil(driver, By.xpath(XPathDivAnadiendoFavoritos), maxSecondsToWait));
+    public boolean isInvisibleDivAnadiendoAFavoritosUntil(int maxSeconds) {
+    	return (state(Invisible, By.xpath(XPathDivAnadiendoFavoritos))
+    			.wait(maxSeconds).check());
     }    
     
     @Override
     public boolean isVisibleButtonElimFavoritos() {
-        return isElementVisible(driver, By.xpath(XPathEliminarDeFavoritosButton));
+    	return (state(Visible, By.xpath(XPathEliminarDeFavoritosButton)).check());
     }
     
     @Override
     public boolean isVisibleButtonAnadirFavoritos() {
-        return isElementVisible(driver, By.xpath(XPathAnadirAFavoritosButton));
+    	return (state(Visible, By.xpath(XPathAnadirAFavoritosButton)).check());
     } 
     
     @Override
@@ -124,12 +126,12 @@ public class PageFichaArtOld extends PageFicha {
     }
     
     @Override
-	public boolean isModalNoStockVisible(int maxSecondsToWait) {
-		return (isElementVisibleUntil(driver, By.xpath(XPathModalNoStock), maxSecondsToWait));
+	public boolean isModalNoStockVisible(int maxSeconds) {
+    	return (state(Visible, By.xpath(XPathModalNoStock)).wait(maxSeconds).check());
 	}
 
     public boolean isVisibleUltimosProductosSection() {
-        return (isElementVisible(driver, By.xpath(XPathUltimosProductosSection)));
+    	return (state(Visible, By.xpath(XPathUltimosProductosSection)).check());
     }
     
     public void clickImagenFichaCentral() throws Exception {
@@ -144,31 +146,28 @@ public class PageFichaArtOld extends PageFicha {
     public String getSrcImgCarruselIzq(int numImagen) {
         String srcImagen = "";
         String xpathImagenX = "(" + XPathImagenCarruselIzq + ")[" + numImagen + "]";
-        if (isElementPresent(driver, By.xpath(xpathImagenX))) {
+        if (state(Present, By.xpath(xpathImagenX)).check()) {
             String srcImagenO = driver.findElement(By.xpath(xpathImagenX)).getAttribute("src"); 
             srcImagen = srcImagenO.substring(srcImagenO.lastIndexOf("/"));            
         }
-        
         return srcImagen;
     }
     
     public String getSrcImagenCentral() {
         String srcImagen = "";
-        if (isElementPresent(driver, By.xpath(XPathImagenCentral))) {
+        if (state(Present, By.xpath(XPathImagenCentral)).check()) {
             String srcImagenO = driver.findElement(By.xpath(XPathImagenCentral)).getAttribute("src");
             srcImagen = srcImagenO.substring(srcImagenO.lastIndexOf("/"));
         }
-        
         return srcImagen;
     }
     
     public String getSrcImagenCentralConZoom() {
         String srcImagen = "";
-        if (isElementPresent(driver, By.xpath(XPathImagenCentralConZoom))) {
+        if (state(Present, By.xpath(XPathImagenCentralConZoom)).check()) {
             String srcImagenO = driver.findElement(By.xpath(XPathImagenCentralConZoom)).getAttribute("src");
             srcImagen = srcImagenO.substring(srcImagenO.lastIndexOf("/"));
         }
-        
         return srcImagen;
     }    
     
@@ -203,14 +202,14 @@ public class PageFichaArtOld extends PageFicha {
     }    
     
     public boolean isVisibleFichaConZoom() {
-        return (isElementVisible(driver, By.xpath(XPathFichaConZoom)));
+    	return (state(Visible, By.xpath(XPathFichaConZoom)).check());
     }
     
     public void selectGuiaDeTallasLink() throws Exception {
         clickAndWaitLoad(driver, By.xpath(XPathGuiaDeTallasLink));
     }
     
-    public boolean isPresentPageUntil(int seconds) {
-        return (isElementPresentUntil(driver, By.xpath(XPathContainerFicha), seconds));
+    public boolean isPresentPageUntil(int maxSeconds) {
+    	return (state(Present, By.xpath(XPathContainerFicha)).wait(maxSeconds).check());
     }
 }

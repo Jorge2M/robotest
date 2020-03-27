@@ -1,20 +1,19 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.buscador;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class SecSearchDesktopShop extends WebdrvWrapp implements SecSearch {
-	
-	private final WebDriver driver;
+public class SecSearchDesktopShop extends PageObjTM implements SecSearch {
 	
 	private final static String XPathInputBuscador = "//input[@class[contains(.,'search-input')]]";
 	private final static String XPathCloseAspa = "//span[@class[contains(.,'icon-outline-close')]]";
 
 	private SecSearchDesktopShop(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 	}
 
 	public static SecSearchDesktopShop getNew(WebDriver driver) {
@@ -23,8 +22,7 @@ public class SecSearchDesktopShop extends WebdrvWrapp implements SecSearch {
 
 	@Override
 	public void search(String referencia) throws Exception {
-		//new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(Mensajes.getXPathCapaCargando())));
-		isElementVisibleUntil(driver, By.xpath(XPathInputBuscador), 2);
+		state(Visible, By.xpath(XPathInputBuscador)).wait(2).check();
 		setTextAndReturn(referencia);
 	}
 

@@ -7,7 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,15 +16,14 @@ import org.openqa.selenium.support.ui.Select;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page2IdentCheckout;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro.DataRegType;
 
 
-public class PageRegistroIni extends WebdrvWrapp {
-	
-	private final WebDriver driver;
+public class PageRegistroIni extends PageObjTM {
 	
 	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
@@ -72,7 +70,7 @@ public class PageRegistroIni extends WebdrvWrapp {
     private static String msgUsrDuplicadoPostClick = "Email ya registrado";
     
     private PageRegistroIni(WebDriver driver) {
-    	this.driver = driver;
+    	super(driver);
     }
     
     public static PageRegistroIni getNew(WebDriver driver) {
@@ -108,12 +106,12 @@ public class PageRegistroIni extends WebdrvWrapp {
     	driver.findElement(By.xpath(XPathPestanyaRegistro)).click();
     }
     
-    public boolean isPageUntil(int maxSecondsToWait) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathPestanyaRegistro), maxSecondsToWait));
+    public boolean isPageUntil(int maxSeconds) {
+    	return (state(Visible, By.xpath(XPathPestanyaRegistro)).wait(maxSeconds).check());
     }
     
-    public boolean isCapaLoadingInvisibleUntil(int maxSecondsToWait) {
-    	return (isElementInvisibleUntil(driver, By.xpath(XPathCapaLoading), maxSecondsToWait));
+    public boolean isCapaLoadingInvisibleUntil(int maxSeconds) {
+    	return (state(Invisible, By.xpath(XPathCapaLoading)).wait(maxSeconds).check());
     }
     
     public String getNewsLetterTitleText() {
@@ -177,23 +175,24 @@ public class PageRegistroIni extends WebdrvWrapp {
     }
     
     public boolean isVisibleMsgInputInvalid(DataRegType inputType) {
-        return (isElementPresent(driver, By.xpath(getXPathDataInput(inputType).getXPathDivError())));
+    	String xpath = getXPathDataInput(inputType).getXPathDivError();
+    	return (state(Present, By.xpath(xpath)).check());
     }
     
     public int getNumberMsgInputInvalid(DataRegType inputType) {
         String xpathError = getXPathDataInput(inputType).getXPathDivError() + "//span";
-        if (isElementPresent(driver, By.xpath(xpathError))) {
+        if (state(Present, By.xpath(xpathError)).check()) {
             return (getNumElementsVisible(driver, By.xpath(xpathError)));
         }
         return 0;
     }
     
     public boolean isVisibleAnyInputErrorMessage() {
-        return (isElementVisible(driver, By.xpath(XPathDivErrorName)));
+    	return (state(Visible, By.xpath(XPathDivErrorName)).check());
     }
 
     public boolean isButtonRegistrateVisible() {
-    	return (isElementVisible(driver, By.xpath(XPathButtonRegistrate)));
+    	return (state(Visible, By.xpath(XPathButtonRegistrate)).check());
     }
     
     public void clickButtonRegistrate() throws Exception {
@@ -210,9 +209,9 @@ public class PageRegistroIni extends WebdrvWrapp {
         }
     }
     
-    public boolean isVisibleErrorUsrDuplicadoUntil(int maxSecondsToWait) {
+    public boolean isVisibleErrorUsrDuplicadoUntil(int maxSeconds) {
         String xpathError = getXPath_mensajeErrorFormulario(msgUsrDuplicadoPostClick);
-        return (isElementPresentUntil(driver, By.xpath(xpathError), maxSecondsToWait));
+        return (state(Present, By.xpath(xpathError)).wait(maxSeconds).check());
     }    
     
     public int getNumberMsgCampoObligatorio() {
@@ -225,12 +224,12 @@ public class PageRegistroIni extends WebdrvWrapp {
     }
     
     public boolean isVisibleSelectPais() {
-        return (isElementVisible(driver, By.xpath(XPathSelectPais)));
+    	return (state(Visible, By.xpath(XPathSelectPais)).check());
     }
     
     public boolean isSelectedOptionPais(String codigoPais) {
         String xpathOption = XPathSelectPais + "/option[@selected='selected' and @value='" + codigoPais + "']"; 
-        return (isElementPresent(driver, By.xpath(xpathOption)));
+        return (state(Present, By.xpath(xpathOption)).check());
     }
 
 	public boolean isTextoRGPDVisible() {
@@ -253,7 +252,7 @@ public class PageRegistroIni extends WebdrvWrapp {
 		return (textoElem!=null);
 	}
 
-	public boolean isCheckboxRecibirInfoPresentUntil(int maxSecondsToWait) {
-		return isElementPresentUntil(driver, By.xpath(XPathCheckBoxPubli), maxSecondsToWait);
+	public boolean isCheckboxRecibirInfoPresentUntil(int maxSeconds) {
+		return (state(Present, By.xpath(XPathCheckBoxPubli)).wait(maxSeconds).check());
 	}
 }

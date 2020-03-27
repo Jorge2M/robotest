@@ -4,7 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.data.TiendaMantoEnum.TiendaManto;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 /**
@@ -12,7 +13,7 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
  * @author jorge.munoz
  *
  */
-public class PageSelTda extends WebdrvWrapp {
+public class PageSelTda {
 
     static String XPathCeldaTextSelectEntorno = "//td[text()[contains(.,'Seleccion de Entorno')]]";
     
@@ -23,14 +24,11 @@ public class PageSelTda extends WebdrvWrapp {
     public static String getXpath_linkTienda(TiendaManto tienda) {
         return ("//a[text()[contains(.,'" + tienda.litPantManto + "')]]");
     }
-    
-    /**
-     * @return si realmente estamos en la página
-     */
-    public static boolean isPage(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathCeldaTextSelectEntorno)));
-    }
-    
+
+	public static boolean isPage(WebDriver driver) {
+		return (state(Present, By.xpath(XPathCeldaTextSelectEntorno), driver).check());
+	}
+
     /**
      * Seleccionamos una tienda/almacén concreta de entre las disponibles (Alemania, Europa Palau...)
      * @param tienda

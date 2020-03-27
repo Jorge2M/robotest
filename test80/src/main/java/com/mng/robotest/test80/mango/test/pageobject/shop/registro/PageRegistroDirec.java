@@ -10,11 +10,12 @@ import org.openqa.selenium.support.ui.Select;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page2IdentCheckout;
 
 
-public class PageRegistroDirec extends WebdrvWrapp {
+public class PageRegistroDirec {
 
     private static String XPathDivError = "//div[@class='errorValidation']";
     private static String XPathInputDirec = "//input[@id[contains(.,':cfDir1')]]";
@@ -70,7 +71,7 @@ public class PageRegistroDirec extends WebdrvWrapp {
     
     public static void sendDataToPaisIfNotExist(String codigoPais, WebDriver driver) {
         String xpathSelectedPais = XPathSelectPais + "/option[@selected='selected' and @value='" + codigoPais + "']";
-        if (isElementPresent(driver, By.xpath(xpathSelectedPais))) {
+        if (state(Present, By.xpath(xpathSelectedPais), driver).check()) {
             new Select(driver.findElement(By.xpath(XPathSelectPais))).selectByValue(codigoPais);
         }
     }    
@@ -89,7 +90,7 @@ public class PageRegistroDirec extends WebdrvWrapp {
     }
     
     public static boolean isVisibleFinalizarButton(WebDriver driver) {
-    	return (isElementVisible(driver, By.xpath(XPathFinalizarButton)));
+    	return (state(Visible, By.xpath(XPathFinalizarButton), driver).check());
     }
     
     public static void clickFinalizarButton(WebDriver driver) throws Exception {

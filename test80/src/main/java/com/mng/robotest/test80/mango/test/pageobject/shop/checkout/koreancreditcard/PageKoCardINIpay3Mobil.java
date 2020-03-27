@@ -4,8 +4,10 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageKoCardINIpay3Mobil extends ElementPageFunctions {
+	
     public enum BodyPageKoCardINIpay3 implements ElementPage {
     	buttonInstallISP("//div[@class[contains(.,'btn')]]//div[text()[contains(.,'모바일 ISP 설치하기')]]"),
         nextButton("//span[@id='cardNext2Btn']");
@@ -22,6 +24,6 @@ public class PageKoCardINIpay3Mobil extends ElementPageFunctions {
     }
     
     public static boolean isPage(WebDriver driver) {
-    	return (isElementInStateUntil(BodyPageKoCardINIpay3.buttonInstallISP, StateElem.Visible, 0, driver));
+    	return (isElementInStateUntil(BodyPageKoCardINIpay3.buttonInstallISP, Visible, 0, driver));
     }
 }

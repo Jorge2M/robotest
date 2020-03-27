@@ -9,7 +9,8 @@ import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.Talla;
@@ -84,7 +85,7 @@ public class PageFichaArtStpV {
 			pageFicha.isFichaArticuloUntil(refArticulo, 0), State.Defect); 
 	 	validations.add(
 			"Aparece algún color no disponible",
-			pageFicha.secDataProduct.isElementInState(ColorType.Unavailable, StateElem.Present, driver), State.Defect); 
+			pageFicha.secDataProduct.isElementInState(ColorType.Unavailable, Present, driver), State.Defect); 
 	 	return validations;
     }
     

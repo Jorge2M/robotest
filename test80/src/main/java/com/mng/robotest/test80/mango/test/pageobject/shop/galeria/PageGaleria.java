@@ -19,8 +19,9 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterOrdenacion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter;
@@ -33,12 +34,11 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.LocationArticle;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV.TypeActionFav;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
-public abstract class PageGaleria extends WebdrvWrapp {
+public abstract class PageGaleria extends PageObjTM {
 	
 	public enum From {menu, buscador}
 	
 	public static int maxPageToScroll = 20; 
-	final WebDriver driver;
 	final Channel channel;
 	final AppEcom app;
 	final From from;
@@ -49,8 +49,8 @@ public abstract class PageGaleria extends WebdrvWrapp {
 	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 
 	public PageGaleria(From from, Channel channel, AppEcom app, WebDriver driver) {
+		super(driver);
 		this.from = from;
-		this.driver = driver;
 		this.channel = channel;
 		this.app = app;
 		this.XPathArticulo = getXPathArticulo();
@@ -184,12 +184,12 @@ public abstract class PageGaleria extends WebdrvWrapp {
 
 	public boolean isVisibleArticuloUntil(int numArticulo, int seconds) {
 		String xpathArticulo = XPathArticulo + "[" + numArticulo + "]"; 
-		return (isElementVisibleUntil(driver, By.xpath(xpathArticulo), seconds));
+		return (state(Visible, By.xpath(xpathArticulo)).wait(seconds).check());
 	}
 
 	public boolean isClickableArticuloUntil(int numArticulo, int seconds) {
 		String xpathArticulo = XPathArticulo + "[" + numArticulo + "]"; 
-		return (isElementClickableUntil(driver, By.xpath(xpathArticulo), seconds));
+		return (state(Clickable, By.xpath(xpathArticulo)).wait(seconds).check());
 	}
 	
 	public List<WebElement> getListaArticulos() {
@@ -235,15 +235,15 @@ public abstract class PageGaleria extends WebdrvWrapp {
     public boolean isVisibleArticleUntil(int numArticulo, int seconds) {
         //Esperamos a que esté la imagen del 1er artículo pintada
         String xpathArtGaleria = "(" + XPathArticulo + ")[" + numArticulo + "]";
-        return (isElementVisibleUntil(driver, By.xpath(xpathArtGaleria), seconds));
+        return (state(Visible, By.xpath(xpathArtGaleria)).wait(seconds).check());
     }
     
     public boolean isFirstArticleOfType(LineaType lineaType) {
 	    List<WebElement> listaArticulos = driver.findElements(By.xpath(XPathArticulo));
 	    return (
 	    	listaArticulos.size() > 0 &&
-	    	isElementPresent(listaArticulos.get(0), By.xpath("//a[@href[contains(.,'" + lineaType + "')]]"))
-	    );
+	    	state(Present, listaArticulos.get(0))
+	    		.by(By.xpath("//a[@href[contains(.,'" + lineaType + "')]]")).check());
     }
     
     public void moveToArticleAndGetObject(int posArticulo) {
@@ -409,7 +409,7 @@ public abstract class PageGaleria extends WebdrvWrapp {
 	//Equivalent to Mobil
 	void clickHearthIcon(WebElement hearthIcon) throws Exception {
 		moveToElement(hearthIcon, driver);
-		isElementClickableUntil(driver, hearthIcon, 1/*seconds*/);
+		state(Clickable, hearthIcon).wait(1).check();
 		hearthIcon.click();
 	}
 
@@ -465,8 +465,7 @@ public abstract class PageGaleria extends WebdrvWrapp {
     }
     
     public void clickIconoUpToGaleryIfVisible(String xpathIconoUpGalery) {
-    	int maxSecondsToWait = 1;
-        if (isElementVisibleUntil(driver, By.xpath(xpathIconoUpGalery), maxSecondsToWait)) {
+    	if (state(Visible, By.xpath(xpathIconoUpGalery)).wait(1).check()) {
             driver.findElement(By.xpath(xpathIconoUpGalery)).click();
         }
     }
@@ -498,7 +497,7 @@ public abstract class PageGaleria extends WebdrvWrapp {
 				XPathArticulo + 
 				XPathNombreRelativeToArticle + 
 				"//self::*[text()[contains(.,'" + literal + "')]]");
-		if (isElementPresentUntil(driver, byArticleName, maxSeconds)) {
+		if (state(Present, byArticleName).wait(maxSeconds).check()) {
 			return driver.findElement(By.xpath(XPathArticulo));
 		}
 		return null;
@@ -609,7 +608,7 @@ public abstract class PageGaleria extends WebdrvWrapp {
 		int paginaActual = 1;
 		while (!lastPageReached && paginaActual<numPageToGo) {
 			By byPagina = By.xpath(getXPathPagina(paginaActual));
-			if (WebdrvWrapp.isElementVisible(driver, byPagina)) {
+			if (state(Visible, byPagina).check()) {
 				moveToElement(byPagina, driver);
 				((JavascriptExecutor) driver).executeScript("window.scrollBy(0,+50)", "");
 				paginaActual+=1;
@@ -650,7 +649,7 @@ public abstract class PageGaleria extends WebdrvWrapp {
     
     public boolean isPresentPagina(int pagina) {
     	String xpathPagina = getXPathPagina(pagina);
-    	return (isElementVisible(driver, By.xpath(xpathPagina)));
+    	return (state(Visible, By.xpath(xpathPagina)).check());
     }
 
     

@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.manto;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageGestorSaldosTPV extends WebdrvWrapp {
+public class PageGestorSaldosTPV {
 
     public static String titulo = "Gestor de Saldos de TPV";
     static String iniXPathTitulo = "//td[@class='txt11B' and text()[contains(.,'";
@@ -26,11 +27,12 @@ public class PageGestorSaldosTPV extends WebdrvWrapp {
     }
     
 	public static boolean isPage(WebDriver driver) {
-		return (isElementPresent(driver, By.xpath(getXPathTitulo(titulo))));
+		String xpath = getXPathTitulo(titulo);
+		return (state(Present, By.xpath(xpath), driver).check());
 	}
 
 	public static boolean isVisibleTPVInput(WebDriver driver) {
-		return isElementVisible(driver, By.xpath(XPathInputTPV));
+		return (state(Visible, By.xpath(XPathInputTPV), driver).check());
 	}
 
 	public static void insertTPVAndClickConsultarSaldos(String tpv, WebDriver driver) {
@@ -47,21 +49,23 @@ public class PageGestorSaldosTPV extends WebdrvWrapp {
 	
 	private static void clickConsultarSaldos(WebDriver driver) {
 		driver.findElement(By.xpath(XPathConsultarSaldosButton)).click();
-		isElementInvisibleUntil(driver, By.xpath(XPathLoadPopupImage), 120);
+		state(Invisible, By.xpath(XPathLoadPopupImage), driver)
+			.wait(120).check();
 	}
 
 	public static boolean isTablaSaldosVisible(WebDriver driver) throws Exception {
 		waitForPageLoaded(driver);
-		return isElementVisible(driver, By.xpath(XPathTablaSaldos));
+		return (state(Visible, By.xpath(XPathTablaSaldos), driver).check());
 	}
 
 	public static boolean isTPVIDVisible(String tpv, WebDriver driver) {
-		return isElementVisible(driver, By.xpath(getXPathIdTPVTablaSaldos(tpv)));
+		String xpath = getXPathIdTPVTablaSaldos(tpv);
+		return (state(Visible, By.xpath(xpath), driver).check());
 	}
 
 	public static boolean isUnvalidTPVMessageVisible(WebDriver driver) throws Exception {
 		waitForPageLoaded(driver);
-		return isElementVisible(driver, By.xpath(XPathWidgetError));
+		return (state(Visible, By.xpath(XPathWidgetError), driver).check());
 	}
 	
 }

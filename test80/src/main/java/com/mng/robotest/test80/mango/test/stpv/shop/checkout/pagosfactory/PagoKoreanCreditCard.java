@@ -25,8 +25,9 @@ public class PagoKoreanCreditCard extends PagoStpV {
     public void testPagoFromCheckout(boolean execPay) throws Exception {
         PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, driver);
         PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, driver);
-        PageKoCardAdyenStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais, dCtxSh.channel, driver);
-    	PageKoCardAdyenStpV.clickIconForContinue(dCtxSh.channel, driver);
+        PageKoCardAdyenStpV pageKoCardAdyenStpV = new PageKoCardAdyenStpV(dCtxSh.channel, driver);
+        pageKoCardAdyenStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais);
+        pageKoCardAdyenStpV.clickIconForContinue();
     	if (execPay) {
 	        if (dCtxSh.channel == Channel.movil_web) {
 	        	PageKoCardINIpay1MobilStpV2.checkTerminosBox(driver);

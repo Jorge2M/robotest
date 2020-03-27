@@ -3,15 +3,20 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.pedidos;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.PageFromFooter;
 
 
-public class PageInputPedido extends WebdrvWrapp implements PageFromFooter {
+public class PageInputPedido extends PageObjTM implements PageFromFooter {
     
     private static final String XPathInputPedido = "//input[@id[contains(.,'pedidoId')]]";
     private static final String XPathInputEmailUsr = "//input[@id[contains(.,'mailPedido')]]";
     private static final String XPathLinkRecuperarDatos = "//*[@onclick[contains(.,'FPedidoMail')]]";
+    
+    public PageInputPedido(WebDriver driver) {
+    	super(driver);
+    }
     
 	@Override
 	public String getName() {
@@ -19,25 +24,25 @@ public class PageInputPedido extends WebdrvWrapp implements PageFromFooter {
 	}
 	
 	@Override
-	public boolean isPageCorrectUntil(int maxSecondsWait, WebDriver driver) {
-		return (isElementPresentUntil(driver, By.xpath(XPathInputPedido), maxSecondsWait));
+	public boolean isPageCorrectUntil(int maxSeconds) {
+		return (state(Present, By.xpath(XPathInputPedido)).wait(maxSeconds).check());
 	}
     
-    public static boolean isVisibleInputPedido(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathInputPedido)));
+    public boolean isVisibleInputPedido() {
+    	return (state(Visible, By.xpath(XPathInputPedido)).check());
     }
     
-    public static void inputPedido(String codPedido, WebDriver driver) {
+    public void inputPedido(String codPedido) {
         driver.findElement(By.xpath(XPathInputPedido)).clear();
         driver.findElement(By.xpath(XPathInputPedido)).sendKeys(codPedido);
     }
     
-    public static void inputEmailUsr(String emailUsr, WebDriver driver) {
+    public void inputEmailUsr(String emailUsr) {
         driver.findElement(By.xpath(XPathInputEmailUsr)).clear();
         driver.findElement(By.xpath(XPathInputEmailUsr)).sendKeys(emailUsr);
     }
     
-    public static void clickRecuperarDatos(WebDriver driver) throws Exception {
+    public void clickRecuperarDatos() throws Exception {
         clickAndWaitLoad(driver, By.xpath(XPathLinkRecuperarDatos));
     }
 }

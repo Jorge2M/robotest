@@ -14,9 +14,11 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterOrdenaci
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticle;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 
-public class SecPreciosArticulo extends WebdrvWrapp {
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+public class SecPreciosArticulo extends PageObjTM {
 	
 	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
@@ -85,12 +87,11 @@ public class SecPreciosArticulo extends WebdrvWrapp {
 
 	private final Channel channel;
 	private final AppEcom app;
-	private final WebDriver driver;
 
 	public SecPreciosArticulo(Channel channel, AppEcom app, WebDriver driver) {
+		super(driver);
 		this.channel = channel;
 		this.app = app;
-		this.driver = driver;
 	}
 	
 	public String getXPathPrecioArticulo(TypeArticle typeArticle) {
@@ -119,7 +120,7 @@ public class SecPreciosArticulo extends WebdrvWrapp {
 	
 	public boolean isArticleRebajado(WebElement articulo) {
 		By byPrecioRebajado = By.xpath("." + TipoPrecio.precio_rebajado_definitivo.getXPath(channel, app));
-		return (isElementPresent(articulo, byPrecioRebajado));
+		return (state(Present, byPrecioRebajado).check());
 	}
 
     public List<WebElement> getListaPreciosPrendas(List<WebElement> listArticles) throws Exception {

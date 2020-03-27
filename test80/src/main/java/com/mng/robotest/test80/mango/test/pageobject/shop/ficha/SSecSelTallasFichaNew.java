@@ -3,10 +3,12 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.ficha;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SSecSelTallasFichaNew extends WebdrvWrapp {
+public class SSecSelTallasFichaNew {
+	
 	static String XPathCapaTallas = "//form/div[@class='sizes']";
 	static String XPathSelectorTallas = XPathCapaTallas + "/div[@class='selector']";
     static String XPathListTallsForSelect = XPathSelectorTallas + "//div[@class[contains(.,'selector-list')]]";
@@ -24,12 +26,13 @@ public class SSecSelTallasFichaNew extends WebdrvWrapp {
     	return (XPathTallaAvailable + "//::*[text()[contains(.,'" + talla + "')]]");
     }
 
-    public static boolean isVisibleSelectorTallasUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathSelectorTallas), maxSecondsToWait));
+    public static boolean isVisibleSelectorTallasUntil(int maxSeconds, WebDriver driver) {
+    	return (state(Visible, By.xpath(XPathSelectorTallas), driver)
+    			.wait(maxSeconds).check());
     }
     
     public static String getTallaAlfSelected(WebDriver driver) {
-        if (isElementPresent(driver, By.xpath(XPathTallaSelected))) {
+    	if (state(Present, By.xpath(XPathTallaSelected), driver).check()) {
             if (isTallaUnica(driver)) {
                return "unitalla";
             }
@@ -44,7 +47,7 @@ public class SSecSelTallasFichaNew extends WebdrvWrapp {
     
     public static String getTallaAlf(int posicion, WebDriver driver) {
     	String xpathTalla = "(" + XPathTallaItem + ")[" + posicion + "]";
-    	if (isElementPresent(driver, By.xpath(xpathTalla))) {
+    	if (state(Present, By.xpath(xpathTalla), driver).check()) {
     		return (driver.findElement(By.xpath(xpathTalla)).getAttribute("innerHTML"));
     	}
     	return "";
@@ -52,24 +55,24 @@ public class SSecSelTallasFichaNew extends WebdrvWrapp {
     
     public static String getTallaCodNum(int posicion, WebDriver driver) {
     	String xpathTalla = "(" + XPathTallaItem + ")[" + posicion + "]";
-    	if (isElementPresent(driver, By.xpath(xpathTalla))) {
+    	if (state(Present, By.xpath(xpathTalla), driver).check()) {
     		return (driver.findElement(By.xpath(xpathTalla)).getAttribute("data-value"));
     	}
     	return "";
     }
 
     public static boolean isTallaUnica(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathTallaUnica)));
+    	return (state(Present, By.xpath(XPathTallaUnica), driver).check());
     }
     
     public static boolean isTallaSelected(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathTallaSelected)));
+    	return (state(Present, By.xpath(XPathTallaSelected), driver).check());
     }
     
     public static boolean unfoldListTallasIfNotYet(WebDriver driver) {
-        if (!isElementVisible(driver, By.xpath(XPathListTallsForSelect))) {
+    	if (!state(Visible, By.xpath(XPathListTallsForSelect), driver).check()) {
             //En el caso de talla única no existe XPathSelectorTallas
-            if (isElementVisible(driver, By.xpath(XPathSelectorTallas))) {
+    		if (state(Visible, By.xpath(XPathSelectorTallas), driver).check()) {
                 driver.findElement(By.xpath(XPathSelectorTallas)).click();
             } else {
                 return true;
@@ -80,14 +83,15 @@ public class SSecSelTallasFichaNew extends WebdrvWrapp {
         return true;
     }
     
-    public static boolean isVisibleListTallasForSelectUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathListTallsForSelect), maxSecondsToWait));
+    public static boolean isVisibleListTallasForSelectUntil(int maxSeconds, WebDriver driver) {
+    	return (state(Visible, By.xpath(XPathListTallsForSelect), driver)
+    			.wait(maxSeconds).check());
     }
     
     public static void selectTallaByValue(int codigoNumericoTalla, WebDriver driver) {
         unfoldListTallasIfNotYet(driver);
         String xpathTalla = getXPathTallaByCodigo(codigoNumericoTalla);
-        if (isElementClickable(driver, By.xpath(xpathTalla))) {
+        if (state(Clickable, By.xpath(xpathTalla), driver).check()) {
             driver.findElement(By.xpath(xpathTalla)).click();
         }
     }
@@ -95,14 +99,14 @@ public class SSecSelTallasFichaNew extends WebdrvWrapp {
     public static void selectTallaByIndex(int posicion, WebDriver driver) {
         unfoldListTallasIfNotYet(driver);
         String xpathTallaByPos = "(" + XPathTallaItem + ")[" + posicion + "]";
-        if (isElementClickable(driver, By.xpath(xpathTallaByPos))) {
+        if (state(Clickable, By.xpath(xpathTallaByPos), driver).check()) {
             driver.findElement(By.xpath(xpathTallaByPos)).click();
         }
     }
     
     public static void selectFirstTallaAvailable(WebDriver driver) {
         unfoldListTallasIfNotYet(driver);
-        if (isElementClickable(driver, By.xpath(XPathTallaAvailable))) {
+        if (state(Clickable, By.xpath(XPathTallaAvailable), driver).check()) {
             driver.findElement(By.xpath(XPathTallaAvailable)).click();
         }
     }
@@ -113,7 +117,7 @@ public class SSecSelTallasFichaNew extends WebdrvWrapp {
     
     public static boolean isTallaAvailable(String talla, WebDriver driver) {
     	String xpathTalla = getXPathTallaAvailable(talla);
-    	return (isElementPresent(driver, By.xpath(xpathTalla)));
+    	return (state(Present, By.xpath(xpathTalla), driver).check());
     }
     
     public static int getNumOptionsTallas(WebDriver driver) {

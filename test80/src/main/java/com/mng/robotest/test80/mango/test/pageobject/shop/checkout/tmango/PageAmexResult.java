@@ -3,20 +3,22 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageAmexResult extends WebdrvWrapp {
+public class PageAmexResult {
 
     static String XPathSectionOK = "//div[@class[contains(.,'code ok')]]";
     static String XPathContinueButton = "//input[@class[contains(.,'btn-continue')]]";
     
-    public static boolean isResultOkUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementPresentUntil(driver, By.xpath(XPathSectionOK), maxSecondsToWait));
+    public static boolean isResultOkUntil(int maxSeconds, WebDriver driver) {
+    	return (state(Present, By.xpath(XPathSectionOK), driver)
+    			.wait(maxSeconds).check());
     }
     
     public static boolean isPresentContinueButton(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathContinueButton)));
+    	return (state(Present, By.xpath(XPathContinueButton), driver).check());
     }
     
     public static void clickContinuarButton(WebDriver driver) throws Exception {

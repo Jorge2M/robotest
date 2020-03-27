@@ -7,11 +7,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 
-public class SecProductDescrOld extends WebdrvWrapp {
+public class SecProductDescrOld {
 
     public enum TypeStatePanel {folded, unfolded, missing}
     public enum TypePanel {
@@ -80,7 +81,7 @@ public class SecProductDescrOld extends WebdrvWrapp {
     public static TypeStatePanel getStatePanel(TypePanel typePanel, WebDriver driver) throws Exception {
         Thread.sleep(200);
         String xpathPanel = getXPathPanel(typePanel);
-        if (!isElementVisible(driver, By.xpath(xpathPanel))) {
+        if (!state(Present, By.xpath(xpathPanel), driver).check()) {
             return TypeStatePanel.missing;
         }
         

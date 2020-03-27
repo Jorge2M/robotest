@@ -3,9 +3,10 @@ package com.mng.robotest.test80.mango.test.pageobject.manto;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class PageGestionarClientes extends WebdrvWrapp {
+public class PageGestionarClientes {
 
     public enum TypeThirdButton {
         Alta("alta"), Baja("baja");
@@ -62,24 +63,24 @@ public class PageGestionarClientes extends WebdrvWrapp {
 	private static String getXPathDetallesClienteDni(String dni) {
 		return "//span[text()='" + dni + "']";
 	}
-    
-    public static boolean isPage(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathTitulo)));
-    }
-    
-    public static boolean isVisibleFormBuscarClientes(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathFormBuscarClientes)));
-    }
-    
-    public static boolean isVisibleFormTratarClientes(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathFormBuscarClientes)));
-    }
-    
-    public static void inputDniAndClickBuscarButton(String dni, int waitSeconds, WebDriver driver) throws Exception{
+
+	public static boolean isPage(WebDriver driver) {
+		return (state(Visible, By.xpath(XPathTitulo), driver).check());
+	}
+
+	public static boolean isVisibleFormBuscarClientes(WebDriver driver) {
+		return (state(Visible, By.xpath(XPathFormBuscarClientes), driver).check());
+	}
+
+	public static boolean isVisibleFormTratarClientes(WebDriver driver) {
+		return (state(Visible, By.xpath(XPathFormTratarClientes), driver).check());
+	}
+
+	public static void inputDniAndClickBuscarButton(String dni, int waitSeconds, WebDriver driver) throws Exception{
 		inputDni(dni, driver);
 		clickBuscarButtonAndWaitSeconds(waitSeconds, driver);
-    }
-    
+	}
+
     public static void inputDni(String dni, WebDriver driver) throws Exception {
         driver.findElement(By.xpath(XPathInputDNI)).sendKeys(dni);
     }
@@ -89,11 +90,13 @@ public class PageGestionarClientes extends WebdrvWrapp {
     }
 
 	public static boolean isVisibleTablaInformacion(WebDriver driver) {
-		return (isElementVisibleUntil(driver, By.xpath(XPathFormTabla), 20));
+		return (state(Visible, By.xpath(XPathFormTabla), driver)
+				.wait(20).check());
 	}
 
 	public static boolean getDniTabla(String dni, WebDriver driver) {
-		return (isElementVisibleUntil(driver, By.xpath(getXPathDniTabla(dni)), 20));
+		return (state(Visible, By.xpath(getXPathDniTabla(dni)), driver)
+				.wait(20).check());
 	}
 
 	public static TypeThirdButton getTypeThirdButton(WebDriver driver) {
@@ -107,9 +110,10 @@ public class PageGestionarClientes extends WebdrvWrapp {
 		return driver.findElement(By.xpath(getXPathIdClienteFromXPathDni(dni))).getText();
 	}
 	
-	public static boolean isVisibleThirdButtonUntil(TypeThirdButton typeButton, int maxSecondsToWait, WebDriver driver) {
-	    String xpathButton = getXPathThirdButton(typeButton); 
-	    return (isElementVisibleUntil(driver, By.xpath(xpathButton), maxSecondsToWait));
+	public static boolean isVisibleThirdButtonUntil(TypeThirdButton typeButton, int maxSeconds, WebDriver driver) {
+		String xpathButton = getXPathThirdButton(typeButton); 
+		return (state(Visible, By.xpath(xpathButton), driver)
+				.wait(maxSeconds).check());
 	}
 	
 	public static void clickThirdButtonAndWaitSeconds(TypeThirdButton typeButton, int waitSeconds, WebDriver driver) throws Exception {
@@ -122,17 +126,18 @@ public class PageGestionarClientes extends WebdrvWrapp {
 	}
 	
 	public static boolean isVisibleMensajeClickThirdButton(TypeThirdButton typeButton, WebDriver driver) {
-	    String mensaje = typeButton.getMensaje();
-	    return (isElementVisible(driver, By.xpath(getXPathSpanMensajeThirdButton(mensaje))));
+		String mensaje = typeButton.getMensaje();
+		return (state(Visible, By.xpath(getXPathSpanMensajeThirdButton(mensaje)), driver).check());
 	}
 
 	public static boolean isVisibleIdClienteClickDetallesButton(String idCliente, WebDriver driver) {
-		return isElementVisible(driver, By.xpath(getXPathDetallesClienteIdCliente(idCliente)));
+		String xpath = getXPathDetallesClienteIdCliente(idCliente);
+		return (state(Visible, By.xpath(xpath), driver).check());
 	}
 
 	public static boolean isVisibleDniClickDetallesButton(String dni, WebDriver driver) {
-		return isElementVisible(driver, By.xpath(getXPathDetallesClienteDni(dni)));
+		String xpath = getXPathDetallesClienteDni(dni);
+		return (state(Visible, By.xpath(xpath), driver).check());
 	}
-
 
 }

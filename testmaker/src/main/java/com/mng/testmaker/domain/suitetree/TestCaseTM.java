@@ -117,10 +117,6 @@ public class TestCaseTM  {
 		}
 		return -1;
 	}
-	
-	public WebDriver getWebDriver() {
-		return this.driver;
-	}
 
 	public State getStateResult() {
 		return this.state;

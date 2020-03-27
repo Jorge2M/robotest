@@ -1,6 +1,5 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.mng.testmaker.boundary.aspects.step.Step;

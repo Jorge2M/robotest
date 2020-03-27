@@ -6,10 +6,10 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 
 @SuppressWarnings({"static-access"})
-public abstract class PageFicha extends WebdrvWrapp {
+public abstract class PageFicha extends PageObjTM {
 
     public enum TypeFicha {Old, New}
     
@@ -30,12 +30,13 @@ public abstract class PageFicha extends WebdrvWrapp {
     
     public static SecDataProduct secDataProduct; //Name, color, talla section
     public static SecFitFinder secFitFinder; //Guía de tallas v.Fit Finder
-    WebDriver driver;
     Channel channel;
     AppEcom appE;
     TypeFicha typeFicha;
     
-    public PageFicha() {};
+    public PageFicha(WebDriver driver) {
+    	super(driver);
+    };
     
     //Constructor estático
     public static PageFicha newInstance(Channel channel, AppEcom appE, WebDriver driver) {

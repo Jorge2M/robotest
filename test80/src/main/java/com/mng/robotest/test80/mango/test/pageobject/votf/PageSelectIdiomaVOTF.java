@@ -5,10 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.test80.mango.test.data.CodIdioma;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageSelectIdiomaVOTF extends WebdrvWrapp {
+public class PageSelectIdiomaVOTF {
 
     private static final String XPathSelectIdioma = "//select[@name[contains(.,'country')]]";
     private static final String XPathButtonAceptar = "//span[@class[contains(.,'button submit')]]";
@@ -27,6 +28,6 @@ public class PageSelectIdiomaVOTF extends WebdrvWrapp {
     }
     
     public static boolean isVisibleButtonAceptar(WebDriver driver) {
-    	return (isElementVisible(driver, By.xpath(XPathButtonAceptar)));
+    	return (state(Visible, By.xpath(XPathButtonAceptar), driver).check());
     }
 }

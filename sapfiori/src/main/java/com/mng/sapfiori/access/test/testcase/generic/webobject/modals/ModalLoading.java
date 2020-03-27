@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.sapfiori.access.test.testcase.generic.webobject.utils.PageObject;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class ModalLoading extends PageObject {
 
@@ -17,9 +18,9 @@ public class ModalLoading extends PageObject {
 	}
 
 	public boolean isVisibleUntil(int maxSeconds) {
-		return isElementVisibleUntil(driver, By.xpath(XPathDivLoading), maxSeconds);
+		return (state(Visible, By.xpath(XPathDivLoading)).wait(maxSeconds).check());
 	}
 	public boolean isInvisibleUntil(int maxSeconds) {
-		return isElementInvisibleUntil(driver, By.xpath(XPathDivLoading), maxSeconds);
+		return (state(Present, By.xpath(XPathDivLoading)).wait(maxSeconds).check());
 	}
 }

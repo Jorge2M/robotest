@@ -2,11 +2,12 @@ package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecModalPersonalizacion;
@@ -34,7 +35,7 @@ public class SecModalPersonalizacionStpV {
 		description="El artículo es personalizable (aparece el link \"Añadir bordado\")",
 		level=State.Defect)
 	public boolean checkAreArticleCustomizable() {
-		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.AñadirBordadoLink, StateElem.Present, 1, dCtxSh.channel, driver));
+		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.AñadirBordadoLink, Present, 1, dCtxSh.channel, driver));
 	}
 
 	@Step(
@@ -49,7 +50,7 @@ public class SecModalPersonalizacionStpV {
 		description="Aparece el modal de personalización con el botón <b>Siguiente</b> (lo esperamos hasta #{maxSecondsWait} segundos)",
 		level=State.Warn)
 	private boolean validateModal(int maxSecondsWait) {
-		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Siguiente, StateElem.Visible, maxSecondsWait, driver));
+		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Siguiente, Visible, maxSecondsWait, driver));
 	}
 
 //	@Step(
@@ -68,7 +69,7 @@ public class SecModalPersonalizacionStpV {
 		description="1) Aparece la cabecera correspondiente a la personalizacion de la prenda",
 		level=State.Warn)
 	private boolean validationInitMblCustomization(int maxSecondsWait, ModalElement element) {
-		return (SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Visible, maxSecondsWait, dCtxSh.channel, driver));
+		return (SecModalPersonalizacion.isElementInStateUntil(element, Visible, maxSecondsWait, dCtxSh.channel, driver));
 	}
 
 	@Step(
@@ -83,7 +84,7 @@ public class SecModalPersonalizacionStpV {
 		description="1) Aparece la lista de iconos seleccionables",
 		level=State.Warn)
 	public boolean validationIconSelection(int maxSecondsWait) {
-		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.IconSelecction, StateElem.Visible, maxSecondsWait, dCtxSh.channel, driver));
+		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.IconSelecction, Visible, maxSecondsWait, dCtxSh.channel, driver));
 	}
 
 	@Step(
@@ -103,10 +104,10 @@ public class SecModalPersonalizacionStpV {
 		int maxSecondsWait = 3;
 		validations.add(
 			"Aparece seleccionado el primer icono",
-			SecModalPersonalizacion.isElementInStateUntil(ModalElement.IconSelecction, StateElem.Visible, maxSecondsWait, driver), State.Warn);
+			SecModalPersonalizacion.isElementInStateUntil(ModalElement.IconSelecction, Visible, maxSecondsWait, driver), State.Warn);
 		validations.add(
 			"Podemos confirmar nuestra seleccion",
-			SecModalPersonalizacion.isElementInStateUntil(ModalElement.Siguiente, StateElem.Visible, maxSecondsWait, driver), State.Warn);
+			SecModalPersonalizacion.isElementInStateUntil(ModalElement.Siguiente, Visible, maxSecondsWait, driver), State.Warn);
 		return validations;
 	}
 
@@ -123,10 +124,10 @@ public class SecModalPersonalizacionStpV {
 		int maxSecondsWait = 3;
 		validations.add(
 			"Aparecen las opciones correspondientes a la ubicación del bordado",
-			SecModalPersonalizacion.isElementInStateUntil(ModalElement.PositionButton, StateElem.Visible, maxSecondsWait, driver), State.Warn);
+			SecModalPersonalizacion.isElementInStateUntil(ModalElement.PositionButton, Visible, maxSecondsWait, driver), State.Warn);
 		validations.add(
 			"Podemos confirmar nuestra seleccion",
-			SecModalPersonalizacion.isElementInStateUntil(ModalElement.Siguiente, StateElem.Visible, maxSecondsWait, driver), State.Warn);
+			SecModalPersonalizacion.isElementInStateUntil(ModalElement.Siguiente, Visible, maxSecondsWait, driver), State.Warn);
 		return validations;
 	}
 
@@ -136,10 +137,10 @@ public class SecModalPersonalizacionStpV {
 		int maxSecondsWait = 3;
 		validations.add(
 			"Aparecen los botones correspondientes a los colores",
-			SecModalPersonalizacion.isElementInStateUntil(ModalElement.ColorsContainer, StateElem.Visible, maxSecondsWait, driver), State.Warn);
+			SecModalPersonalizacion.isElementInStateUntil(ModalElement.ColorsContainer, Visible, maxSecondsWait, driver), State.Warn);
 		validations.add(
 			"Aparece el botón de \"Confirmar\"",
-			SecModalPersonalizacion.isElementInStateUntil(ModalElement.Siguiente, StateElem.Visible, maxSecondsWait, driver), State.Warn);
+			SecModalPersonalizacion.isElementInStateUntil(ModalElement.Siguiente, Visible, maxSecondsWait, driver), State.Warn);
 		return validations;
 	}
 
@@ -155,7 +156,7 @@ public class SecModalPersonalizacionStpV {
 		description="1) Aparecen los botones con los posibles tamaños del bordado",
 		level=State.Warn)
 	private boolean validateSizeList(int maxSecondsWait) {
-		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.SizeContainer, StateElem.Visible, maxSecondsWait, dCtxSh.channel, driver));
+		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.SizeContainer, Visible, maxSecondsWait, dCtxSh.channel, driver));
 	}
 
 	@Step(
@@ -170,7 +171,7 @@ public class SecModalPersonalizacionStpV {
 		description="1) Aparece el botón para añadir a la bolsa",
 		level=State.Warn)
 	private boolean validateAddBag(int maxSecondsWait) {
-		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Siguiente, StateElem.Visible, maxSecondsWait, dCtxSh.channel, driver));
+		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Siguiente, Visible, maxSecondsWait, dCtxSh.channel, driver));
 	}
 
 	@Step(
@@ -189,9 +190,9 @@ public class SecModalPersonalizacionStpV {
 		level=State.Defect)
 	private boolean validateCustomizationProof(int maxSecondsWait) {
 		if (dCtxSh.channel==Channel.movil_web) {
-			return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.BolsaProof, StateElem.Present, maxSecondsWait, dCtxSh.channel, driver));
+			return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.BolsaProof, Present, maxSecondsWait, dCtxSh.channel, driver));
 		} else {
-			return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.BolsaProof, StateElem.Visible, maxSecondsWait, dCtxSh.channel, driver));
+			return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.BolsaProof, Visible, maxSecondsWait, dCtxSh.channel, driver));
 		}
 	}
 
@@ -201,13 +202,13 @@ public class SecModalPersonalizacionStpV {
 	public boolean validateCabeceraStep(int level) {
 		switch (level) {
 		case 1:
-			return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Step1Proof, StateElem.Visible, 4, driver));
+			return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Step1Proof, Visible, 4, driver));
 		case 2:
-			return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Step2Proof, StateElem.Visible, 4, driver));
+			return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Step2Proof, Visible, 4, driver));
 		case 3:
-			return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Step3Proof, StateElem.Visible, 4, driver));
+			return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Step3Proof, Visible, 4, driver));
 		case 4:
-			return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Step4Proof, StateElem.Visible, 4, driver));
+			return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Step4Proof, Visible, 4, driver));
 		default:
 			return false;
 		}

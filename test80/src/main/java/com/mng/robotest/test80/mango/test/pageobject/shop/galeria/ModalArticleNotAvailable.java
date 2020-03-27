@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.galeria;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class ModalArticleNotAvailable extends WebdrvWrapp {
+public class ModalArticleNotAvailable {
 
     public enum StateModal {visible, notvisible}    
     static String XPathModal = "//div[@id='bocataAvisame']";
@@ -23,12 +24,13 @@ public class ModalArticleNotAvailable extends WebdrvWrapp {
         }
     }
     
-    public static boolean isVisibleUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathModal), maxSecondsToWait));
+    public static boolean isVisibleUntil(int maxSeconds, WebDriver driver) {
+    	return (state(Visible, By.xpath(XPathModal), driver).wait(maxSeconds).check());
     }
     
-    public static boolean isNotVisibleUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementInvisibleUntil(driver, By.xpath(XPathModal), maxSecondsToWait));
+    public static boolean isNotVisibleUntil(int maxSeconds, WebDriver driver) {
+    	return (state(Invisible, By.xpath(XPathModal), driver)
+    			.wait(maxSeconds).check());
 //    	By byAvisame = By.xpath(XPathModal);
 //    	for (int i=0; i<maxSecondsToWait; i++) {
 //    		if (isElementPresent(driver, byAvisame)) {
@@ -41,8 +43,8 @@ public class ModalArticleNotAvailable extends WebdrvWrapp {
 //    	return false;
     }
 
-	public static boolean isVisibleRPGD(int maxSecondsToWait, WebDriver driver) {
-		return (isElementVisibleUntil(driver, By.xpath(XPathModal), maxSecondsToWait));
+	public static boolean isVisibleRPGD(int maxSeconds, WebDriver driver) {
+		return (state(Visible, By.xpath(XPathModal), driver).wait(maxSeconds).check());
 	}
 
 	public static void clickAspaForClose(WebDriver driver) {

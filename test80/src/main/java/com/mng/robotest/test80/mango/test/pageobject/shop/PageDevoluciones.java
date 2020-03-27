@@ -3,10 +3,12 @@ package com.mng.robotest.test80.mango.test.pageobject.shop;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
-public class PageDevoluciones extends WebdrvWrapp {
+public class PageDevoluciones {
+	
 	public enum Devolucion {
 		EnTienda("DEVOLUCIÓN GRATUITA EN TIENDA"),
 		EnDomicilio("RECOGIDA GRATUITA A DOMICILIO"),
@@ -37,33 +39,27 @@ public class PageDevoluciones extends WebdrvWrapp {
 			return this.literal;
 		}
 		
-	    public boolean isPresentLink(WebDriver driver) {
-	        return (isElementPresent(driver, By.xpath(this.xpathLink)));
-	    }
-	    
-	    public void click(WebDriver driver) throws Exception {
-	        clickAndWaitLoad(driver, By.xpath(xpathLink));
-	    }
-	    
-	    public void waitForInState(boolean plegada, int maxSeconds, WebDriver driver) {
-	    	By byLink = By.xpath(getXPath(plegada));
-	    	isElementPresentUntil(driver, byLink, maxSeconds);
-	    }
+		public boolean isPresentLink(WebDriver driver) {
+			return (state(Present, By.xpath(this.xpathLink), driver).check());
+		}
+
+		public void click(WebDriver driver) throws Exception {
+			clickAndWaitLoad(driver, By.xpath(xpathLink));
+		}
+		
+		public void waitForInState(boolean plegada, int maxSeconds, WebDriver driver) {
+			By byLink = By.xpath(getXPath(plegada));
+			state(Present, byLink, driver).wait(maxSeconds).check();
+		}
 	}
 	
     private static String XPathIsPageDevoluciones = "//div[@class='devoluciones']";
     private static String XPathButtonSolicitarRecogida = "//div[@class[contains(.,'devoluciones_button_container')]]/span";
-    
-    /**
-     * @return si realmente se trata de la página de devoluciones
-     */
-    public static boolean isPage(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathIsPageDevoluciones)));
-    }  
-    
-    /**
-     * Click del botón "Solicitar Recogida" que aparece dentro del apartado "Recogida gratuíta a domicilio"
-     */
+
+	public static boolean isPage(WebDriver driver) {
+		return (state(Present, By.xpath(XPathIsPageDevoluciones), driver).check());
+	}
+
     public static void clickSolicitarRecogida(WebDriver driver) throws Exception {
         clickAndWaitLoad(driver, By.xpath(XPathButtonSolicitarRecogida));
         
@@ -74,8 +70,8 @@ public class PageDevoluciones extends WebdrvWrapp {
 	        }
         }
     }
-    
-    public static boolean isVisibleSolicitarRecogidaButton(WebDriver driver) throws Exception {
-    	return (isElementVisible(driver, By.xpath(XPathButtonSolicitarRecogida)));
-    }
+
+	public static boolean isVisibleSolicitarRecogidaButton(WebDriver driver) throws Exception {
+		return (state(Visible, By.xpath(XPathButtonSolicitarRecogida), driver).check());
+	}
 }

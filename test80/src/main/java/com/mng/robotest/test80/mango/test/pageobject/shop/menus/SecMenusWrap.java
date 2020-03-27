@@ -6,8 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -90,7 +90,7 @@ public class SecMenusWrap {
     }
 
 	public void closeSessionIfUserLogged() throws Exception {
-		secMenusUser.clickMenuIfInState(UserMenu.cerrarSesion, StateElem.Clickable);
+		secMenusUser.clickMenuIfInState(UserMenu.cerrarSesion, State.Clickable);
     }
     
     public List<DataScreenMenu> getListDataScreenMenus(Linea linea, SublineaNinosType sublineaType) throws Exception {

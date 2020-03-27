@@ -6,22 +6,33 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
 import com.mng.robotest.test80.mango.test.pageobject.ayuda.PageAyuda;
 import com.mng.robotest.test80.mango.test.pageobject.ayuda.PageAyuda.StateApartado;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import org.json.simple.JSONArray;
 import org.openqa.selenium.WebDriver;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class AyudaStpV {
 	
-    public static void selectTypeValidaciones (Channel channel, WebDriver driver) throws Exception {
-        ArrayList<String> sections = PageAyuda.getKeysFromJSON(PageAyuda.getFileJSON());
+	private final WebDriver driver;
+	private final PageAyuda pageAyuda; 
+	
+	private AyudaStpV(WebDriver driver) {
+		this.driver = driver;
+		this.pageAyuda = new PageAyuda(driver);
+	}
+	public static AyudaStpV getNew(WebDriver driver) {
+		return new AyudaStpV(driver);
+	}
+	
+    public void selectTypeValidaciones (Channel channel) throws Exception {
+        List<String> sections = pageAyuda.getKeysFromJSON();
         for(String section : sections){
              if (section.equals("Buscar una tienda") && channel!=Channel.movil_web) {
-                helpToBuscarTienda(section, driver);
+                helpToBuscarTienda(section);
              } else {
-                 accesAndValidationSection(section, driver);
+                 accesAndValidationSection(section);
              }
         }
     }
@@ -29,13 +40,13 @@ public class AyudaStpV {
     @Step(
     	description = "Seleccionamos la seccion de <b>#{section}</b>",
         expected = "Aparecen sus secciones internas")
-    private static void accesAndValidationSection (String section, WebDriver driver) throws Exception {
-        JSONArray sectionToValidate = PageAyuda.getSectionFromJSON(section);
-        PageAyuda.selectElement(PageAyuda.getXPath(section), driver);
+    private void accesAndValidationSection (String section) throws Exception {
+        JSONArray sectionToValidate = pageAyuda.getSectionFromJSON(section);
+        PageAyuda.selectElement(pageAyuda.getXPath(section), driver);
         for (Object textToCheck : sectionToValidate) {
-            validateSectionsAyuda(textToCheck.toString(), driver);
+            validateSectionsAyuda(textToCheck.toString());
             if (textToCheck.toString().equals("Tarjeta Regalo Mango")) {
-                helpToChequeRegalo(textToCheck.toString(), driver);
+                helpToChequeRegalo(textToCheck.toString());
             }
         }
     }
@@ -43,48 +54,48 @@ public class AyudaStpV {
     @Validation(
     	description="Está presente el apartado de <b>#{validation}</b>",
         level= State.Defect)
-    private static boolean validateSectionsAyuda(String validation, WebDriver driver) {
-        return (PageAyuda.isElementInStateUntil(PageAyuda.getXPath(validation), ElementPageFunctions.StateElem.Visible, 2, driver));
+    private boolean validateSectionsAyuda(String validation) {
+        return (PageAyuda.isElementInStateUntil(pageAyuda.getXPath(validation), Visible, 2, driver));
     }
 
     @Step(
         description="Seleccionamos el enlace a la tarjeta regalo",
         expected="Aparece una nueva página que contiene la información de cheque regalo")
-    private static void helpToChequeRegalo(String textToCheck, WebDriver driver) throws Exception {
-        PageAyuda.selectElement(PageAyuda.getXPath(textToCheck), driver);
-        checkIsApartadoInState(textToCheck, StateApartado.expanded, driver);	
-        PageAyuda.selectElement(PageAyuda.getXPath("COMPRAR TARJETA REGALO"), driver);
-        validatePageTarjetaRegalo(driver);
+    private void helpToChequeRegalo(String textToCheck) throws Exception {
+        PageAyuda.selectElement(pageAyuda.getXPath(textToCheck), driver);
+        checkIsApartadoInState(textToCheck, StateApartado.expanded);	
+        PageAyuda.selectElement(pageAyuda.getXPath("COMPRAR TARJETA REGALO"), driver);
+        validatePageTarjetaRegalo();
         driver.navigate().back();
     }
 
     @Validation(
     	description="Se despliega el bloque asociado a <b>#{textSection}</b>",
     	level=State.Warn)
-    private static boolean checkIsApartadoInState(String textSection, StateApartado stateApartado, WebDriver driver) {
-    	return (PageAyuda.isApartadoInStateUntil(textSection, stateApartado, 1, driver));
+    private boolean checkIsApartadoInState(String textSection, StateApartado stateApartado) {
+    	return (pageAyuda.isApartadoInStateUntil(textSection, stateApartado, 1));
     }
     
     @Validation(
         description = "1) Estamos en la página de <b>Tarjeta Regalo</b>",
         level = State.Defect)
-    private static boolean validatePageTarjetaRegalo(WebDriver driver) {
+    private boolean validatePageTarjetaRegalo() {
         return (PageAyuda.currentURLContains("giftVoucher", 5, driver));
     }
 
     @Step(
         description = "Seleccionamos el enlace de \"Buscar tu Tienda\"",
         expected = "Aparece el modal de busqueda de tiendas")
-    private static void helpToBuscarTienda(String textToCheck, WebDriver driver) throws Exception {
-        PageAyuda.selectElement(PageAyuda.getXPath(textToCheck), driver);
-        validateBuscarTienda(driver);
+    private void helpToBuscarTienda(String textToCheck) throws Exception {
+        PageAyuda.selectElement(pageAyuda.getXPath(textToCheck), driver);
+        validateBuscarTienda();
         PageAyuda.selectElement(PageAyuda.xPathCloseBuscar, driver);
     }
 
     @Validation(
         description = "1) Es visible la cabecera de <b>Encuentra tu tienda</b>",
         level = State.Defect)
-    private static boolean validateBuscarTienda(WebDriver driver) {
-        return (PageAyuda.isElementInStateUntil(PageAyuda.getXPath("Encuentra tu tienda"), ElementPageFunctions.StateElem.Visible, 4, driver));
+    private boolean validateBuscarTienda() {
+        return (PageAyuda.isElementInStateUntil(pageAyuda.getXPath("Encuentra tu tienda"), Visible, 4, driver));
     }
 }

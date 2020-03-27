@@ -3,15 +3,17 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.modales;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class ModalLoyaltyAfterLogin extends WebdrvWrapp {
+public class ModalLoyaltyAfterLogin {
 
 	final static String XPathCapaContainer = "//div[@class[contains(.,'modal-content')]]";
 	final static String XPathIrDeShoppingLink = XPathCapaContainer + "//a[@class[contains(.,'loyalty-irdeshopping')]]";
 	
-	public static boolean isModalVisibleUntil(int maxSecondsToWait, WebDriver driver) {
-		return (isElementVisibleUntil(driver, By.xpath(XPathIrDeShoppingLink), maxSecondsToWait));
+	public static boolean isModalVisibleUntil(int maxSeconds, WebDriver driver) {
+		return (state(Visible, By.xpath(XPathIrDeShoppingLink), driver)
+				.wait(maxSeconds).check());
 	}
 	
 	public static void closeModal(WebDriver driver) throws Exception {

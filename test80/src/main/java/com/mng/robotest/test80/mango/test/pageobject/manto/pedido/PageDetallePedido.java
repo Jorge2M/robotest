@@ -11,11 +11,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 
-public class PageDetallePedido extends WebdrvWrapp {
+public class PageDetallePedido {
 
 	private final static String tagIdPedido = "@tagIdPedido";
     public final static String XPathImporteTotal = "//span[text()[contains(.,'TOTAL:')]]/../following-sibling::*[1]";
@@ -48,47 +49,37 @@ public class PageDetallePedido extends WebdrvWrapp {
     private static String getXPathLabelIdPedido(String idPedido) {
     	return (XPathLabelIdPedido.replace(tagIdPedido, idPedido));
     }
-    
-    /**
-     * @param driver
-     * @return si se trata de la página de detalle de un pedido
-     */
-    public static boolean isPage(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath("//td[text()[contains(.,'DETALLES PEDIDOS')]]")));
-    }
-    
-    public static boolean isPage(String idPedido, WebDriver driver) {
-    	if (isPage(driver)) {
-    		String xpathLabelIdPedido = getXPathLabelIdPedido(idPedido);
-    		return (WebdrvWrapp.isElementVisible(driver, By.xpath(xpathLabelIdPedido)));
-    	}
-    	
-    	return false;
-    }
-    
-    /**
-     * @return el string que contiene el código de país
-     */
+
+	public static boolean isPage(WebDriver driver) {
+		String xpath = "//td[text()[contains(.,'DETALLES PEDIDOS')]]";
+		return (state(Present, By.xpath(xpath), driver).check());
+	}
+
+	public static boolean isPage(String idPedido, WebDriver driver) {
+		if (isPage(driver)) {
+			String xpathLabelIdPedido = getXPathLabelIdPedido(idPedido);
+			return (state(Visible, By.xpath(xpathLabelIdPedido), driver).check());
+		}
+		
+		return false;
+	}
+
     public static String getCodigoPais(WebDriver driver) {
         return (driver.findElement(By.xpath(XPathCodigoPais)).getText());
     }
-    
-    public static String getTiendaIfExists(WebDriver driver) {
-    	if (WebdrvWrapp.isElementPresent(driver, By.xpath(XPathLinkEnvioTienda))) {
-    		String lineaTexto = driver.findElement(By.xpath(XPathLinkEnvioTienda)).getText();
-            Pattern pattern = Pattern.compile("(.*?)ENVIO A TIENDA(.*?)(\\d+)");//(^[0-9])
-            Matcher matcher = pattern.matcher(lineaTexto);
-            if (matcher.find()) {
-                return matcher.group(3);
-            }
-    	}
-    	
-    	return "";
-    }
-    
-    /**
-     * @return el string que contiene el estado del pedido
-     */
+
+	public static String getTiendaIfExists(WebDriver driver) {
+		if (state(Present, By.xpath(XPathLinkEnvioTienda), driver).check()) {
+			String lineaTexto = driver.findElement(By.xpath(XPathLinkEnvioTienda)).getText();
+			Pattern pattern = Pattern.compile("(.*?)ENVIO A TIENDA(.*?)(\\d+)");//(^[0-9])
+			Matcher matcher = pattern.matcher(lineaTexto);
+			if (matcher.find()) {
+				return matcher.group(3);
+			}
+		}
+		return "";
+	}
+
     public static String getEstadoPedido(WebDriver driver) {
         return (driver.findElement(By.xpath(XPathEstadoPedido)).getText());
     }
@@ -162,16 +153,12 @@ public class PageDetallePedido extends WebdrvWrapp {
         
         return estadoEncontrado;
     }
-    
-    
-    /**
-     * Se vuelve a la lista de pedidos mediante selección del link "Volver a pedidos" (si existe)
-     */
-    public static void gotoListaPedidos(WebDriver driver) throws Exception {
-        if (isElementPresent(driver, By.xpath(XPathLinkVolverPedidos))) {
-            clickAndWaitLoad(driver, By.xpath(XPathLinkVolverPedidos));
-        }
-    }
+
+	public static void gotoListaPedidos(WebDriver driver) throws Exception {
+		if (state(Present, By.xpath(XPathLinkVolverPedidos), driver).check()) {
+			clickAndWaitLoad(driver, By.xpath(XPathLinkVolverPedidos));
+		}
+	}
 
 	/**
 	 * @param driver

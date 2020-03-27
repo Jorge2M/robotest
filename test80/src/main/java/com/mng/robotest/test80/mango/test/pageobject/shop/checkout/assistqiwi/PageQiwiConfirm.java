@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.assistqiwi;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageQiwiConfirm extends WebdrvWrapp {
+public class PageQiwiConfirm {
 
     static String XPathButtonConfirmar = "//input[@name[contains(.,'Submit_Success')]]"; 
     
@@ -14,7 +15,7 @@ public class PageQiwiConfirm extends WebdrvWrapp {
      * @return si estamos en la página de confirmación de Qiwi (aparece a veces después de la introducción del teléfono + botón continuar)
      */
     public static boolean isPage(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathButtonConfirmar)));
+    	return (state(Present, By.xpath(XPathButtonConfirmar), driver).check());
     }
     
     public static void clickConfirmar(WebDriver driver) throws Exception {

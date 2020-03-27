@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop;
@@ -62,7 +63,7 @@ public class SecCabeceraShop extends SecCabecera {
     }
     
     @Override
-    public boolean isInStateIconoBolsa(StateElem state) {
+    public boolean isInStateIconoBolsa(State state) {
     	return (isIconoInState(IconoCabeceraShop.bolsa, state));
     }
     
@@ -73,7 +74,7 @@ public class SecCabeceraShop extends SecCabecera {
 
     @Override
     public void clickIconoBolsaWhenDisp(int maxSecondsWait) throws Exception {
-    	boolean isIconoClickable = isElementInStateUntil(IconoCabeceraShop.bolsa, StateElem.Clickable, maxSecondsWait, driver);
+    	boolean isIconoClickable = isElementInStateUntil(IconoCabeceraShop.bolsa, State.Clickable, maxSecondsWait, driver);
         if (isIconoClickable) {
         	clickIconoBolsa(); 
         }
@@ -83,11 +84,11 @@ public class SecCabeceraShop extends SecCabecera {
     	clickAndWait(icono, driver);
     }
     
-    public boolean isIconoInState(IconoCabeceraShop icono, StateElem state) {
+    public boolean isIconoInState(IconoCabeceraShop icono, State state) {
     	return (isElementInState(icono, state, driver));
     }
     
-    public boolean isIconoInStateUntil(IconoCabeceraShop icono, StateElem state, int maxSecondsWait) {
+    public boolean isIconoInStateUntil(IconoCabeceraShop icono, State state, int maxSecondsWait) {
     	return (isElementInStateUntil(icono, state, maxSecondsWait, driver));
     }
     
@@ -104,7 +105,7 @@ public class SecCabeceraShop extends SecCabecera {
 	public void hoverIconForShowUserMenuDesktop() throws Exception {
 		int i=0;
 		while (!modalUserSesionShopDesktop.isVisible() && i<3) {
-			if (isIconoInState(IconoCabeceraShop.iniciarsesion, StateElem.Visible)) {
+			if (isIconoInState(IconoCabeceraShop.iniciarsesion, State.Visible)) {
 				hoverIcono(IconoCabeceraShop.iniciarsesion); 
 			} else {
 				hoverIcono(IconoCabeceraShop.micuenta);

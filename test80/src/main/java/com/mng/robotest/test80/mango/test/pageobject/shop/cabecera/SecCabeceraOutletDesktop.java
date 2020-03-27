@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
@@ -51,7 +52,7 @@ public class SecCabeceraOutletDesktop extends SecCabeceraOutlet {
     }
     
     @Override
-    public boolean isInStateIconoBolsa(StateElem state) {
+    public boolean isInStateIconoBolsa(State state) {
     	return (isElementInState(LinkCabeceraOutletDesktop.bolsa, state));
     }
 
@@ -63,7 +64,7 @@ public class SecCabeceraOutletDesktop extends SecCabeceraOutlet {
     
     @Override
     public void clickIconoBolsaWhenDisp(int maxSecondsWait) throws Exception {
-    	boolean isIconoClickable = isElementInStateUntil(LinkCabeceraOutletDesktop.bolsa, StateElem.Clickable, maxSecondsWait, driver);
+    	boolean isIconoClickable = isElementInStateUntil(LinkCabeceraOutletDesktop.bolsa, State.Clickable, maxSecondsWait, driver);
         if (isIconoClickable) {
         	clickIconoBolsa();
         }
@@ -74,11 +75,11 @@ public class SecCabeceraOutletDesktop extends SecCabeceraOutlet {
     	hoverElement(LinkCabeceraOutletDesktop.bolsa);
     }
     
-    public boolean isElementInState(LinkCabeceraOutletDesktop element, StateElem state) {
+    public boolean isElementInState(LinkCabeceraOutletDesktop element, State state) {
     	return (isElementInState(element, state, driver));
     }
     
-    public boolean isElementInStateUntil(LinkCabeceraOutletDesktop element, StateElem state, int maxSecondsWait) {
+    public boolean isElementInStateUntil(LinkCabeceraOutletDesktop element, State state, int maxSecondsWait) {
     	return (isElementInStateUntil(element, state, maxSecondsWait, driver));
     }
     

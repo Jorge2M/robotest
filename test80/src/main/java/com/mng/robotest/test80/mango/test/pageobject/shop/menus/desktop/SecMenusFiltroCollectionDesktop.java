@@ -3,14 +3,14 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusFiltroCollection;
 
 
-public class SecMenusFiltroCollectionDesktop extends WebdrvWrapp implements SecMenusFiltroCollection {
+public class SecMenusFiltroCollectionDesktop extends PageObjTM implements SecMenusFiltroCollection {
 
-	private WebDriver driver;
     private static String XPathDivMenusDesktop = "//div[@id='nuevaTemporadaFilter']";
     
     private static String getXPathMenu(FilterCollection typeMenu) {
@@ -18,18 +18,18 @@ public class SecMenusFiltroCollectionDesktop extends WebdrvWrapp implements SecM
     }
     
     public SecMenusFiltroCollectionDesktop(WebDriver driver) {
-    	this.driver = driver;
+    	super(driver);
     }
     
     @Override
     public boolean isVisible() {
-        return (isElementVisible(driver, By.xpath(XPathDivMenusDesktop)));
+    	return (state(Visible, By.xpath(XPathDivMenusDesktop)).check());
     }
     
     @Override
     public boolean isVisibleMenu(FilterCollection typeMenu) {
         String xpathMenu = getXPathMenu(typeMenu);
-        return (isElementVisible(driver, By.xpath(xpathMenu)));
+        return (state(Visible, By.xpath(xpathMenu)).check());
     }
     
     @Override

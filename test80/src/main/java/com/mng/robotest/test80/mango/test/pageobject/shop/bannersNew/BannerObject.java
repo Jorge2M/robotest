@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
@@ -95,14 +97,14 @@ public abstract class BannerObject {
         WebdrvWrapp.orderElementsByPositionInScreen(listBanners);
         return listBanners;
     }
-    
-    protected String getUrlDestinoSearchingForAnchor(WebElement banner) {
-        if (WebdrvWrapp.isElementPresent(banner, By.xpath(".//a"))) {
-            return (banner.findElement(By.xpath(".//a")).getAttribute("href"));
-        }
-        return "";
-    }
-    
+
+	protected String getUrlDestinoSearchingForAnchor(WebElement banner, WebDriver driver) {
+		if (state(Present, banner, driver).by(By.xpath(".//a")).check()) {
+			return (banner.findElement(By.xpath(".//a")).getAttribute("href"));
+		}
+		return "";
+	}
+
     public BannerType getBannerType() {
     	return this.bannerType;
     }

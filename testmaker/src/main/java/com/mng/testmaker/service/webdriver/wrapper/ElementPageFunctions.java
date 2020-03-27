@@ -7,54 +7,58 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp.OptionSelect;
 
 public class ElementPageFunctions {
-
-	public enum StateElem {Present, Visible, Clickable}
 	
-    public static boolean isElementInState(ElementPage element, StateElem state, WebDriver driver) {
+    public static boolean isElementInState(ElementPage element, State state, WebDriver driver) {
     	int maxSecondsWait = 0;
     	return (isElementInStateUntil(element, state, maxSecondsWait, driver));
     }
 	
-    public static boolean isElementInStateUntil(ElementPage element, StateElem state, int maxSecondsWait, WebDriver driver) {
+    public static boolean isElementInStateUntil(ElementPage element, State state, int maxSecondsWait, WebDriver driver) {
     	By elemBy = By.xpath(element.getXPath());
     	return (isElementInStateUntil(elemBy, state, maxSecondsWait, driver));
     }
     
-    public static boolean isElementInState(ElementPage element, StateElem state, Channel channel, WebDriver driver) {
+    public static boolean isElementInState(ElementPage element, State state, Channel channel, WebDriver driver) {
        	int maxSecondsWait = 0;
     	return (isElementInStateUntil(element, state, maxSecondsWait, channel, driver));
     }
 
-    public static boolean isElementInStateUntil(ElementPage element, StateElem state, int maxSecondsWait, Channel channel, WebDriver driver) {
+    public static boolean isElementInStateUntil(ElementPage element, State state, int maxSecondsWait, Channel channel, WebDriver driver) {
     	By elemBy = By.xpath(element.getXPath(channel));
     	return (isElementInStateUntil(elemBy, state, maxSecondsWait, driver));
     }
 
-    private static boolean isElementInStateUntil(By elemBy, StateElem state, int maxSecondsWait, WebDriver driver) {
-    	switch (state) {
-    	case Visible:
-    		return WebdrvWrapp.isElementVisibleUntil(driver, elemBy, maxSecondsWait);
-    	case Clickable:
-    		return WebdrvWrapp.isElementClickableUntil(driver, elemBy, maxSecondsWait);
-    	case Present:
-    	default:
-        	return WebdrvWrapp.isElementPresentUntil(driver, elemBy, maxSecondsWait);
-    	}
+    private static boolean isElementInStateUntil(By elemBy, State state, int maxSeconds, WebDriver driver) {
+    	return (PageObjTM.state(state, elemBy, driver)
+    			.wait(maxSeconds).check());
+//    	switch (state) {
+//    	case Visible:
+//    		return WebdrvWrapp.isElementVisibleUntil(driver, elemBy, maxSecondsWait);
+//    	case Clickable:
+//    		return WebdrvWrapp.isElementClickableUntil(driver, elemBy, maxSecondsWait);
+//    	case Present:
+//    	default:
+//        	return WebdrvWrapp.isElementPresentUntil(driver, elemBy, maxSecondsWait);
+//    	}
     }
 
-    public static boolean isElementInStateUntil(String xPath, StateElem state, int maxSecondsWait, WebDriver driver) {
-	    switch (state) {
-        case Visible:
-            return WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(xPath), maxSecondsWait);
-        case Clickable:
-            return WebdrvWrapp.isElementClickableUntil(driver, By.xpath(xPath), maxSecondsWait);
-        case Present:
-        default:
-                return WebdrvWrapp.isElementPresentUntil(driver, By.xpath(xPath), maxSecondsWait);
-        }
+    public static boolean isElementInStateUntil(String xPath, State state, int maxSeconds, WebDriver driver) {
+    	return (PageObjTM.state(state, By.xpath(xPath), driver)
+    			.wait(maxSeconds).check());
+//	    switch (state) {
+//        case Visible:
+//            return WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(xPath), maxSecondsWait);
+//        case Clickable:
+//            return WebdrvWrapp.isElementClickableUntil(driver, By.xpath(xPath), maxSecondsWait);
+//        case Present:
+//        default:
+//                return WebdrvWrapp.isElementPresentUntil(driver, By.xpath(xPath), maxSecondsWait);
+//        }
     }
 
     public static void selectInDropDown(ElementPage dropDown, String value, WebDriver driver) {
@@ -89,14 +93,14 @@ public class ElementPageFunctions {
     }
 
     public static void clickIfPossibleAndWait(ElementPage element, WebDriver driver) throws Exception {
-    	if (isElementInState(element, StateElem.Clickable, driver))
+    	if (isElementInState(element, State.Clickable, driver))
     		clickAndWait(element, driver);
     }
 
     public static void clickAndRetry(ElementPage element, WebDriver driver) throws Exception {
         clickAndWait(element, driver);
         int maxSecondsToWait = 2;
-        if (isElementInStateUntil(element, StateElem.Present, maxSecondsToWait, driver)) {
+        if (isElementInStateUntil(element, State.Present, maxSecondsToWait, driver)) {
             clickAndWait(element, driver);
         }
     }
@@ -104,7 +108,7 @@ public class ElementPageFunctions {
     public static void clickAndRetry(Channel channel, ElementPage element, WebDriver driver) throws Exception {
         clickAndWait(channel, element, driver);
         int maxSecondsToWait = 2;
-        if (isElementInStateUntil(element, StateElem.Present, maxSecondsToWait, channel, driver)) {
+        if (isElementInStateUntil(element, State.Present, maxSecondsToWait, channel, driver)) {
             clickAndWait(channel, element, driver);
         }
     }
@@ -139,7 +143,7 @@ public class ElementPageFunctions {
     	WebdrvWrapp.sendKeysWithRetry(2, dataToInput, By.xpath(element.getXPath()), driver);
     }
     
-    protected static WebElement getElementWeb(ElementPage element, WebDriver driver) {
+    public static WebElement getElementWeb(ElementPage element, WebDriver driver) {
     	try {
     		return (driver.findElement(By.xpath(element.getXPath())));
     	}

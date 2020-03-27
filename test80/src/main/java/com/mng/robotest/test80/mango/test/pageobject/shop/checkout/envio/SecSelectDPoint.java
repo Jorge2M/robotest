@@ -10,12 +10,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio.DataDeliveryPoint;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio.DataSearchDeliveryPoint;
 
 
-public class SecSelectDPoint extends WebdrvWrapp {
+public class SecSelectDPoint {
 
 	public static enum TypeDeliveryPoint {tienda, droppoint, any}
 
@@ -41,7 +42,7 @@ public class SecSelectDPoint extends WebdrvWrapp {
 	}
 
 	private static boolean isInputProvinciaVisible(WebDriver driver) {
-		return (WebdrvWrapp.isElementVisible(driver, By.xpath(XPathInputProvincia)));
+		return (state(Visible, By.xpath(XPathInputProvincia), driver).check());
 	}
  
 	private static void sendProvinciaToInput(String provincia, WebDriver driver) {
@@ -68,9 +69,10 @@ public class SecSelectDPoint extends WebdrvWrapp {
 		return (dpElem.getAttribute("class")!=null && dpElem.getAttribute("class").contains("selected"));
 	}
 
-	public static boolean isDroppointVisibleUntil(int position, int maxSecondsToWait, WebDriver driver) {
+	public static boolean isDroppointVisibleUntil(int position, int maxSeconds, WebDriver driver) {
 		String xpathDeliveryPoint = "(" + XPathDeliveryPoint + ")[" + position + "]";  
-		return (isElementVisibleUntil(driver, By.xpath(xpathDeliveryPoint), maxSecondsToWait));  
+		return (state(Visible, By.xpath(xpathDeliveryPoint), driver)
+				.wait(maxSeconds).check()); 
 	}
 
 	public static TypeDeliveryPoint getTypeDeliveryPoint(int position, WebDriver driver) {
@@ -104,19 +106,19 @@ public class SecSelectDPoint extends WebdrvWrapp {
 		dataDp.setCodigo(dpSelected.getAttribute("data-shopid"));
 
 		//Recuperamos los datos del DeliveryPoint mirando de evitar excepciones de "StaleElement"
-		if (isElementPresent(driver, By.xpath(XPathDeliveryPointSelected + XPathNameDPoint))) {
+		if (state(Present, By.xpath(XPathDeliveryPointSelected + XPathNameDPoint), driver).check()) {
 			dataDp.setName(driver.findElement(By.xpath(XPathDeliveryPointSelected + XPathNameDPoint)).getText());
 		}
-		if (isElementPresent(driver, By.xpath(XPathDeliveryPointSelected + XPathColeccionesDPoint))) {
+		if (state(Present, By.xpath(XPathDeliveryPointSelected + XPathColeccionesDPoint), driver).check()) {
 			dataDp.setColecciones(driver.findElement(By.xpath(XPathDeliveryPointSelected + XPathColeccionesDPoint)).getText());
 		}
-		if (isElementPresent(driver, By.xpath(XPathDeliveryPointSelected + XPathAddressDPoint))) {
+		if (state(Present, By.xpath(XPathDeliveryPointSelected + XPathAddressDPoint), driver).check()) {
 			dataDp.setDireccion(driver.findElement(By.xpath(XPathDeliveryPointSelected + XPathAddressDPoint)).getText());
 		}
-		if (isElementPresent(driver, By.xpath(XPathDeliveryPointSelected + XPathPostalcodeDPoint))) {
+		if (state(Present, By.xpath(XPathDeliveryPointSelected + XPathPostalcodeDPoint), driver).check()) {
 			dataDp.setCodPostal(driver.findElement(By.xpath(XPathDeliveryPointSelected + XPathPostalcodeDPoint)).getText());
 		}
-		if (isElementPresent(driver, By.xpath(XPathTelefonoDPoint))) {
+		if (state(Present, By.xpath(XPathTelefonoDPoint), driver).check()) {
 			dataDp.setTelefono(driver.findElement(By.xpath(XPathTelefonoDPoint)).getText());
 		}
 		return dataDp;

@@ -5,17 +5,16 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class SecSearchMobilOutlet extends WebdrvWrapp implements SecSearch {
-	
-	private final WebDriver driver;
+public class SecSearchMobilOutlet extends PageObjTM implements SecSearch {
 	
     private final static String XPathInputBuscador = "//form[not(@class)]/input[@class='search-input']";
     private final static String XPathCancelarLink = "//div[@class='search-cancel']";
     
     private SecSearchMobilOutlet(WebDriver driver) {
-    	this.driver = driver;
+    	super(driver);
     }
     
     public static SecSearchMobilOutlet getNew(WebDriver driver) {
@@ -31,12 +30,13 @@ public class SecSearchMobilOutlet extends WebdrvWrapp implements SecSearch {
         input.sendKeys(Keys.RETURN);
 	}
 	
-    @Override
+	@Override
 	public void close() throws Exception {
 		clickAndWaitLoad(driver, By.xpath(XPathCancelarLink));
 	}
-    
-    public boolean isBuscadorVisibleUntil(int maxSeconds) {
-    	return (isElementVisibleUntil(driver, By.xpath(XPathInputBuscador), maxSeconds));
-    }
+
+	public boolean isBuscadorVisibleUntil(int maxSeconds) {
+		return (state(Visible, By.xpath(XPathInputBuscador))
+				.wait(maxSeconds).check());
+	}
 }

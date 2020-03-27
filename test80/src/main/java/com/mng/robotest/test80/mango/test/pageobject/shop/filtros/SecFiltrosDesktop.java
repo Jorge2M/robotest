@@ -8,7 +8,8 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Color;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 
 
@@ -17,7 +18,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
  * @author jorge.munoz
  *
  */
-public class SecFiltrosDesktop extends WebdrvWrapp implements SecFiltros {
+public class SecFiltrosDesktop implements SecFiltros {
     
 	final static String TagOrdenacion = "@TagOrden";
 	final static String TagColor = "@TagColor";
@@ -93,6 +94,7 @@ public class SecFiltrosDesktop extends WebdrvWrapp implements SecFiltros {
 	
     @Override
     public boolean isClickableFiltroUntil(int seconds) {
-        return (isElementClickableUntil(driver, By.xpath(XPathLinkOrdenWithTag), seconds));
+    	return (state(Clickable, By.xpath(XPathLinkOrdenWithTag), driver)
+    			.wait(seconds).check());
     }    
 }

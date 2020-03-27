@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.dotpay;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageDotpayPaymentChannel extends WebdrvWrapp {
+public class PageDotpayPaymentChannel {
 
     static String XPathSectionPaymentChannels = "//section[@id='payment-channels']";
     static String XPathBlockInputData = "//div[@id='personal-data-form']";
@@ -19,7 +20,7 @@ public class PageDotpayPaymentChannel extends WebdrvWrapp {
     }
     
     public static boolean isPage(WebDriver driver) {
-        return isElementPresent(driver, By.xpath(XPathSectionPaymentChannels));
+    	return (state(Present, By.xpath(XPathSectionPaymentChannels), driver).check());
     }
     
     public static void clickPayment(int numPayment, WebDriver driver) throws Exception {
@@ -36,7 +37,8 @@ public class PageDotpayPaymentChannel extends WebdrvWrapp {
         clickAndWaitLoad(driver, By.xpath(XPathButtonConfirmar));
     }
     
-    public static boolean isVisibleBlockInputDataUntil(int maxSecondsToWait, WebDriver driver) {
-        return isElementVisibleUntil(driver, By.xpath(XPathBlockInputData), maxSecondsToWait);
+    public static boolean isVisibleBlockInputDataUntil(int maxSeconds, WebDriver driver) {
+    	return (state(Visible, By.xpath(XPathBlockInputData), driver)
+    			.wait(maxSeconds).check());
     }
 }
