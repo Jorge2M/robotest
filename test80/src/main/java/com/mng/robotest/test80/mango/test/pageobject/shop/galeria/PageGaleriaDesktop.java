@@ -40,9 +40,9 @@ public class PageGaleriaDesktop extends PageGaleria {
 	public enum TypeColor {codigo, nombre}
 	public enum TypeArticleDesktop {
 		Simple (
-			"//self::*[@class[contains(.,'_2zQ2a')]]"),
+			"//self::*[@data-imgsize='A1']"),
 		Doble (
-			"//self::*[@class[contains(.,'_3QWF')]]"),
+			"//self::*[@data-imgsize='A2']"),
 		Video (
 			"//video");
 		
@@ -60,7 +60,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		"//img[@src and (" + 
 			   "@class[contains(.,'productListImg')] or " + 
 			   "@class[contains(.,'product-list-image')] or " +
-			   "@class[contains(.,'TaqRk')] or " + 
+			   "@class[contains(.,'product-image')] or " + 
 			   "@class[contains(.,'product-list-im')])]";
 	private final static String XPathImgSliderActiveRelativeArticleDesktop = 
 		"//div[@class[contains(.,'swiper-slide-active')]]" + XPathImgRelativeArticle;
@@ -87,7 +87,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 			getXPathAncestorArticulo());
 	}
 
-	private final static String XPpathIconoUpGalery = "//div[@id='scroll-top-step' or @class[contains(.,'_1VVRv')]]";
+	private final static String XPpathIconoUpGalery = "//div[@id='scroll-top-step' or @id='iconFillUp']";
 	private final static String XPathHeaderArticles = "//div[@id[contains(.,'title')]]/h1";
 
 	@Override
@@ -156,7 +156,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		return ((XPathArticulo + sizeArticle.getXPathRelativeArticle()));
 	}
 
-	private final static String iniXPathPaginaGaleria = "//ul[@id='page";
+	private final static String iniXPathPaginaGaleria = "//*[@id='page";
 
 	@Override
 	String getXPathPagina(int pagina) {

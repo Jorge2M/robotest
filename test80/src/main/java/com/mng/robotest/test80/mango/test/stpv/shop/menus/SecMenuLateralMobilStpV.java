@@ -121,22 +121,22 @@ public class SecMenuLateralMobilStpV {
     	secMenuLateral.clickCarruselNuevo(lineaNuevo, lineaType);
         checkGaleriaAfterSelectNuevo();
     }
-    
-    @Validation
-    private ChecksTM checkGaleriaAfterSelectNuevo() throws Exception {
-    	ChecksTM validations = ChecksTM.getNew();
-	    PageGaleria pageGaleria = PageGaleria.getNew(Channel.movil_web, app, driver);
-	    int maxSecondsWait = 3;
-	 	validations.add(
+
+	@Validation
+	private ChecksTM checkGaleriaAfterSelectNuevo() throws Exception {
+		ChecksTM validations = ChecksTM.getNew();
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.movil_web, app, driver);
+		int maxSecondsWait = 3;
+		validations.add(
 			"Aparece algún artículo (esperamos " + maxSecondsWait + " segundos)",
 			pageGaleria.isVisibleArticleUntil(1, maxSecondsWait), State.Warn);
-//	 	validations.add(
+//		validations.add(
 //			"El 1er artículo es de tipo " + LineaType.nuevo,
 //			pageGaleria.isFirstArticleOfType(LineaType.nuevo), State.Warn);
-	 	
-    	return validations;   
-    }
-    
+
+		return validations;   
+	}
+
     @Step (
     	description="Seleccionar la sublínea de \"rebajas\" <b>#{lineaType}</b>",
         expected="Aparece la capa de menús asociada a la sublínea #{lineaType}")

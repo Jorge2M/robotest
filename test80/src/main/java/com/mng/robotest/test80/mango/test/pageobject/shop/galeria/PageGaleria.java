@@ -94,7 +94,6 @@ public abstract class PageGaleria extends PageObjTM {
         	"@class[contains(.,'productList__name')] or " + 
         	"@class[contains(.,'product-list-name')] or " + 
         	"@class='product-list-info-name' or " +
-   		 	"@class[contains(.,'_1P8s4')] or " +
         	"@class='product-name'";
     final static String XPathNombreRelativeToArticle = "//*[" + classProductItem + "]";
     final static String XPathLinkRelativeToArticle = ".//a[@class='product-link']";
@@ -141,7 +140,7 @@ public abstract class PageGaleria extends PageObjTM {
 		}
 	}
 	
-	String XPathHearthIconRelativeArticleDesktop = "//span[@class[contains(.,'_1lfLH')]]";
+	String XPathHearthIconRelativeArticleDesktop = "//span[@class[contains(.,'icon-favorite')]]";
 	String XPathHearthIconRelativeArticleMovil = "//span[@class[contains(.,'product-favorite')]]";
 	String getXPathHearthIconRelativeArticle() {
 		switch (channel) {

@@ -15,7 +15,7 @@ public class SecCrossSelling {
 	private final WebDriver driver;
 	
 	private static String XPathSectionMovil = "//section[@class='cross-selling']";
-	private static String XPathSectionDesktop = "//section[@class='_1dwXN']";
+	private static String XPathSectionDesktop = "//section[@id='crossSelling']";
 
 	public SecCrossSelling(Channel channel, WebDriver driver) {
 		this.channel = channel;

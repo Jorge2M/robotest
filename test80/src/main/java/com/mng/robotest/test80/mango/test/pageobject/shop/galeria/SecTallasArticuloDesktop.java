@@ -34,7 +34,7 @@ public class SecTallasArticuloDesktop extends PageObjTM {
 	
 	//final String XPathCapaTallasArticuloOutletOld = "//div[@class[contains(.,'add-cart')] and @data-stock]";
 	//final String XPathCapaTallasArticuloOutletNew = "//div[@class[contains(.,'sizes__container')]]";
-	final String XPathCapaTallasArticuloShop = "//div[@class[contains(.,'_1BBIV')]]";
+	final String XPathCapaTallasArticuloShop = "//div[@class[contains(.,'sizes-container')]]";
 	private String getXPathArticleCapaInferiorDesktop(int posArticulo) {
 		String xpathArticuloX = "(" + xpathArticulo + ")[" + posArticulo + "]";
 //		if (app==AppEcom.outlet) {
@@ -56,7 +56,7 @@ public class SecTallasArticuloDesktop extends PageObjTM {
 	}
 
 	//final String classCapaActiveOutlet = "@class[contains(.,'active')]";
-	final String classCapaActiveShop = "@class[contains(.,'_2yZ7h')]";
+	final String classCapaActiveShop = "@class[contains(.,'active')]";
 	private String getClassCapaTallasActive() {
 //		if (app==AppEcom.outlet) {
 //			return classCapaActiveOutlet;
@@ -75,7 +75,7 @@ public class SecTallasArticuloDesktop extends PageObjTM {
 
 //	private final String XPathTallaAvailableOutletOld = "//span[@data-id and not(@class[contains(.,'no-stock')])]";
 //	private final String XPathTallaAvailableOutletNew = "//button[not(@class[contains(.,'no-stock')])]";
-	private final String XPathTallaAvailableShop = "//button[not(@class[contains(.,'mQ11o')])]";
+	private final String XPathTallaAvailableShop = "//button[@class[contains(.,'si-stock')]]";
 	private String getXPathTallaAvailable() {
 //		if (app==AppEcom.outlet) {
 //			if (getOutletGalery()==OutletGalery.old) {
@@ -92,7 +92,7 @@ public class SecTallasArticuloDesktop extends PageObjTM {
 
 //	private final static String XpathTallaNoDisponibleArticuloOutletOld = "//span[@data-id and (@class[contains(.,'no-stock')])]";
 //	private final static String XpathTallaNoDisponibleArticuloOutletNew = "//button[@class[contains(.,'no-stock')]]";
-	private final static String XpathTallaNoDisponibleArticuloShop = "//button[@class[contains(.,'mQ11o')]]";
+	private final static String XpathTallaNoDisponibleArticuloShop = "//button[@class[contains(.,'no-stock')]]";
 	public String getXPathArticleTallaNotAvailable() {
 //		if (app==AppEcom.outlet) {
 //			if (getOutletGalery()==OutletGalery.old) {
