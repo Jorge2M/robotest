@@ -43,21 +43,21 @@ public class PageIconsMenu extends PageObject {
 				.wait(maxSeconds).check());
 	}
 	
-	public PageSelProdsToReclassify clickClasificarProductos() throws Exception {
+	public PageSelProdsToReclassify clickClasificarProductos() {
 		List<String> textsInIcon = PageSelProdsToReclassify.option.getTextsInIcon();
 		clickOption(textsInIcon);
 		return PageSelProdsToReclassify.getNew(driver);
 	}
 	
-	public PageGestionSolPedidoBuyer clickManagePurchaseRequisitionsBuyer() throws Exception {
+	public PageGestionSolPedidoBuyer clickManagePurchaseRequisitionsBuyer() {
 		List<String> textsInIcon = PageGestionSolPedidoBuyer.option.getTextsInIcon();
 		clickOption(textsInIcon);
 		return PageGestionSolPedidoBuyer.getNew(driver);
 	}
 
-	private void clickOption(List<String> textsInIcon) throws Exception {
+	private void clickOption(List<String> textsInIcon) {
 		String xpath = getXPathOption(textsInIcon);
-		clickAndWaitLoad(driver, By.xpath(xpath));
+		click(By.xpath(xpath)).exec();
 		ModalLoading modalLoading = elementsMaker.getModalLoading();
 		modalLoading.isVisibleUntil(3);
 		modalLoading.isInvisibleUntil(10);

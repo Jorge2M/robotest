@@ -40,9 +40,9 @@ public class PagePosSolicitudPedido extends PageObject {
 		return (state(Visible, By.xpath(XPathTitle)).wait(maxSeconds).check());
 	}
 	
-	public void selectSection(SectionPageSolPedido section) throws Exception {
+	public void selectSection(SectionPageSolPedido section) {
 		if (!isSectionSelected(section)) {
-			clickAndWaitLoad(driver, By.xpath(section.xpath));
+			click(By.xpath(section.xpath)).exec();
 		}
 	}
 	
@@ -75,8 +75,8 @@ public class PagePosSolicitudPedido extends PageObject {
 		return getInputWithoutIcon(inputType);
 	}
 	
-	public PageSolicitudPedido clickAplicar() throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathAplicarButotn));
+	public PageSolicitudPedido clickAplicar() {
+		click(By.xpath(XPathAplicarButotn)).exec();
 		return PageSolicitudPedido.getNew(driver);
 	}
 }

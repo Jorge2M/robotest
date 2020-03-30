@@ -94,7 +94,7 @@ public class PageSolicitudPedido extends PageObject {
 	}
 	
 	private final static String XPathButtonGuardar = "//button[@id[contains(.,'-activate')]]";
-	public void clickButtonGuardar() throws Exception {
+	public void clickButtonGuardar() {
 		clickAndWaitLoad(By.xpath(XPathButtonGuardar));
 	}
 }

@@ -27,8 +27,8 @@ public abstract class PageFilter extends PageObject {
 		return (state(Visible, byTitle).wait(maxSeconds).check());
 	}
 	
-	public void clickIrButton() throws Exception {
+	public void clickIrButton() {
 		waitForPageFinished();
-		clickAndWaitLoad(driver, By.xpath(XPathIrButton));
+		click(By.xpath(XPathIrButton)).exec();
 	}
 }

@@ -30,10 +30,10 @@ public class PageReclassifProducts extends PageObject {
 	}
 	
 	public PageSelProdsToReclassify clickGrabarButton() throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathGrabarButton));
+		click(By.xpath(XPathGrabarButton)).exec();
 		if (!state(Invisible, By.xpath(XPathGrabarButton)).wait(3).check()) {
 			waitForPageFinished();
-			clickAndWaitLoad(driver, By.xpath(XPathGrabarButton));
+			click(By.xpath(XPathGrabarButton)).exec();
 		}
 		return PageSelProdsToReclassify.getNew(driver);
 	}

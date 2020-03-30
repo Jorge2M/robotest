@@ -118,8 +118,8 @@ public class ModalSelectConditions extends PageObject {
 		driver.findElement(byInput).sendKeys(text);
 	}
 	
-	public void clickOk() throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathButtonOk));
+	public void clickOk() {
+		click(By.xpath(XPathButtonOk)).exec();
 	}
 	
 	private void unfold(Block block) {

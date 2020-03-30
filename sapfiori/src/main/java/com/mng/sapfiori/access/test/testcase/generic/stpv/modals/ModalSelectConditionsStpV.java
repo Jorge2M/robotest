@@ -34,7 +34,7 @@ public class ModalSelectConditionsStpV {
 	@Step (
 		description="Seleccionar el botón <b>OK</b>",
 		expected="Desaparece el modal de definición de condiciones")
-	public void clickOk() throws Exception {
+	public void clickOk() {
 		modalSelectConditions.clickOk();
 	}
 	

@@ -20,7 +20,7 @@ public class GoogleMainPageStpV {
 	@Step (
 		description="Introducimos en el buscador un texto #{textToSearch} (<b>con</b> varias páginas de resultados)",
 		expected="")
-	public ResultsGooglePageStpV searchTextWithManyResultPages(String textToSearch, WebDriver driver) throws Exception {
+	public ResultsGooglePageStpV searchTextWithManyResultPages(String textToSearch, WebDriver driver) {
 		googlePage.inputText(textToSearch);
 		ResultsGooglePage pageResults = googlePage.clickBuscarConGoogleButton();
 		
@@ -32,7 +32,7 @@ public class GoogleMainPageStpV {
 	@Step (
 		description="Introducimos en el buscador un texto #{textToSearch} <b>sin</b> varias páginas de resultados",
 		expected="")
-	public ResultsGooglePageStpV searchTextWithoutManyResultPages(String textToSearch, WebDriver driver) throws Exception {
+	public ResultsGooglePageStpV searchTextWithoutManyResultPages(String textToSearch, WebDriver driver) {
 		googlePage.inputText(textToSearch);
 		googlePage.clickBuscarConGoogleButton();
 		

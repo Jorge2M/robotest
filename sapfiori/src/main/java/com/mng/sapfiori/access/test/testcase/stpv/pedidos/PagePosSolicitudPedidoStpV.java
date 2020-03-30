@@ -35,14 +35,14 @@ public class PagePosSolicitudPedidoStpV {
 	@Step (
 		description = "Seleccionar el icono asociado al input de <b>#{inputType.getLabel()}</b>",
 		expected = "Aparece el modal para seleccionar el dato")
-	public ModalSelectItemStpV clickIconInput(InputFieldPedido inputType) throws Exception {
+	public ModalSelectItemStpV clickIconInput(InputFieldPedido inputType) {
 		ModalSelectMultiItem modal = pageObject.getInputWithIcon(inputType).clickIconSetFilter();
 		return (ModalSelectItemStpV.getNew(modal));
 	}
 	
 	@Step (
 		description = "Introducir el valor <b>#{valueToInput}</b> en el input <b>#{inputType.getLabel()}</b>")
-	public void inputText(InputFieldPedido inputType, String valueToInput) throws Exception {
+	public void inputText(InputFieldPedido inputType, String valueToInput) {
 		InputLabel input = pageObject.getInput(inputType);
 		input.clearAndSendText(valueToInput);
 	}
@@ -50,14 +50,14 @@ public class PagePosSolicitudPedidoStpV {
 	@Step (
 		description = "Seleccionamos el botón <b>Aplicar</b>",
 		expected = "Aparece la página de \"Solicitud de pedido\"")
-	public PageSolicitudPedidoStpV clickAplicar() throws Exception {
+	public PageSolicitudPedidoStpV clickAplicar() {
 		PageSolicitudPedidoStpV pageSolPedidoStpV = PageSolicitudPedidoStpV.getNew(
 			pageObject.clickAplicar());
 		pageSolPedidoStpV.checkIsPage(5);
 		return pageSolPedidoStpV;
 	}
 	
-	public void inputData(List<InputDataSolPedido> listInputData) throws Exception {
+	public void inputData(List<InputDataSolPedido> listInputData) {
 		for (InputDataSolPedido inputData : listInputData) {
 			pageObject.selectSection(inputData.getInputPage().section);
 			

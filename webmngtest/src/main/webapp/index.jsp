@@ -223,11 +223,11 @@ for (SuiteTestData suiteTest : listTestSuites) {
 						<%
 							for (TestMethod testMethod : CmdRunTests.getDataTestAnnotationsToExec(getParamsFromSuiteToGetTCases(suiteTest))) {
 																				String selected = "";
-																				if (TestNameUtils.isMethodNameInTestCaseList(testMethod.getMethod().getName(), suiteTest.getListTCasesArray())) {
+																				if (TestNameUtils.isMethodNameInTestCaseList(testMethod.getData().getTestCaseName(), suiteTest.getListTCasesArray())) {
 																					selected = "selected";
 																				}
 						%>
-								<option value="<%=testMethod.getMethod().getName()%>" <%=selected%> title="<%=testMethod.getDescription()%>"><%=testMethod.getMethod().getName()%></option>
+								<option value="<%=testMethod.getData().getTestCaseName()%>" <%=selected%> title="<%=testMethod.getDescription()%>"><%=testMethod.getData().getTestCaseName()%></option>
 						<%
 							}
 						%>

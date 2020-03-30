@@ -103,8 +103,8 @@ public class PageSelProdsToReclassify extends PageFilter {
 		}
 	}
 	
-	public PageReclassifProducts clickVolverAclasificar() throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathVolverClasificarButton));
+	public PageReclassifProducts clickVolverAclasificar() {
+		click(By.xpath(XPathVolverClasificarButton)).exec();
 		return (PageReclassifProducts.getNew(driver));
 	}
 	

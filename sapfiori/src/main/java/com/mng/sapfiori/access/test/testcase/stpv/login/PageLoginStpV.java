@@ -25,7 +25,7 @@ public class PageLoginStpV {
     		"Pulsar el botón <b>Acceder al sistema</b>", 
         expected=
     		"Se accede a la aplicación SAP")
-    public PageIconsMenuStpV inputCredentialsAndEnter(String login, String password) throws Exception {
+    public PageIconsMenuStpV inputCredentialsAndEnter(String login, String password) {
     	pageLogin.inputCredentials(login, password);
     	String codeSpanish = "ES";
     	pageLogin.selectIdioma(codeSpanish);

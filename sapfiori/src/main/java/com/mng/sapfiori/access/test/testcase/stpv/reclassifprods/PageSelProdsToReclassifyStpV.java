@@ -62,7 +62,7 @@ public class PageSelProdsToReclassifyStpV {
 	@Step (
 		description = "Clickar Botón <b>Ir</b>",
 		expected = "Aparece una lista de Productos")
-	public void clickIrButton() throws Exception {
+	public void clickIrButton() {
 		pageSelProductsToReclassify.clickIrButton();
 	}
 

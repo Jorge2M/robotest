@@ -19,7 +19,7 @@ public class InputBuscador extends InputBase {
 		return new InputBuscador(driver);
 	}
 	
-	public void clickLupaForSearch() throws Exception {
+	public void clickLupaForSearch() {
 		clickAndWaitLoad(By.xpath(XPathLupa));
 	}
 }

@@ -23,15 +23,14 @@ public class PageObject extends PageObjTM {
 		return this.elementsMaker;
 	}
 	
-	public void waitForPageFinished() throws Exception {
+	public void waitForPageFinished() {
 		waitForPageLoaded(driver);
 		StandarElementsMaker standarMaker = StandarElementsMaker.getNew(driver);
 		standarMaker.getModalLoading().isInvisibleUntil(20);
 	}
 	
-	public boolean clickAndWaitLoad(By byElem) throws Exception {
-		boolean ok = clickAndWaitLoad(driver, byElem);
+	public void clickAndWaitLoad(By byElem) {
+		click(byElem).exec();
 		waitForPageFinished();
-		return ok;
 	}
 }

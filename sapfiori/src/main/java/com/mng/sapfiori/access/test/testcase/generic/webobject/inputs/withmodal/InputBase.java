@@ -19,7 +19,7 @@ public class InputBase extends PageObject {
 				xpathInput + "/..//div[@class='sapMTokenizer']//span[@id[contains(.,'-icon')]]"; 
 	}
 
-	public void clearAndSendText(CharSequence... message) throws Exception {
+	public void clearAndSendText(CharSequence... message) {
 		waitForPageFinished();
 		clear();
 		waitMillis(200);
@@ -40,7 +40,7 @@ public class InputBase extends PageObject {
 		inputElem.clear();
 	}
 	
-	public void sendText(CharSequence... message) throws Exception {
+	public void sendText(CharSequence... message) {
 		waitForPageFinished();
 		getInputElement().sendKeys(message);
 	}

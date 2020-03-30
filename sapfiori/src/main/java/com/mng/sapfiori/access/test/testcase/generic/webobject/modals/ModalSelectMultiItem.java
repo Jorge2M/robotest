@@ -14,7 +14,7 @@ public class ModalSelectMultiItem extends ModalSelectFromListBase {
 		return new ModalSelectMultiItem(label, driver);
 	}
 	
-	public void selectElementsByPosition(List<Integer> listPosElementsToSelect) throws Exception {
+	public void selectElementsByPosition(List<Integer> listPosElementsToSelect) {
 		for (int posElement : listPosElementsToSelect) {
 			selectElementByPosition(posElement);
 		}

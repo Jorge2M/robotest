@@ -2,12 +2,12 @@ package ${package}.test.testcase.pageobject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class ResultsGooglePage extends PageObject {
 
 	private final static String XPathLinkSiguiente = "//a[@id='pnnext']";
-	private final WebDriver driver;
 	
 	private ResultsGooglePage(WebDriver driver) {
 		super(driver);

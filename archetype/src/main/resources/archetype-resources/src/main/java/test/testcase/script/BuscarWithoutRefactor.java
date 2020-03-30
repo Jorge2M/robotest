@@ -8,14 +8,15 @@ import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.TestCaseTM;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class BuscarWithoutRefactor {
 
 	@Test (
 		groups={"Buscador", "Canal:desktop_App:google"}, alwaysRun=true, 
 		description="Buscar un literal que devuelva algún resultado")
-	public void BUS001_Buscar_literal_con_resultados() throws Exception {
+	public void BUS001_Buscar_literal_con_resultados() {
 		TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
 		WebDriver driver = testCase.getDriver();
 		inputTextAndClickBuscarConGoogle("Wikipedia", driver);
@@ -24,14 +25,14 @@ public class BuscarWithoutRefactor {
 	@Step (
 		description="Introducimos el texto <b>#{textToInput}</b> y clickamos el botón \"Buscar con Google\"",
 		expected="Aparecen resultados de búsqueda")
-	public void inputTextAndClickBuscarConGoogle(String textToInput, WebDriver driver) throws Exception {
+	public void inputTextAndClickBuscarConGoogle(String textToInput, WebDriver driver) {
 		By byInputInicio = By.xpath("//input[@title='Buscar']");
 		driver
 			.findElement(byInputInicio)
 			.sendKeys(textToInput);
 		
 		By byButtonBuscarConGoogle = By.xpath("//input[@class='gNO89b']");
-		WebdrvWrapp.clickAndWaitLoad(driver, byButtonBuscarConGoogle);
+		click(byButtonBuscarConGoogle, driver).exec();
 		
 		checkAreResults(driver);
 	}
@@ -41,8 +42,7 @@ public class BuscarWithoutRefactor {
 		level=State.Defect)
 	public boolean checkAreResults(WebDriver driver) {
 		By byEntradaResultado = By.xpath("//h3[@class[contains(.,'LC20lb')]]");
-		return (
-			WebdrvWrapp.isElementVisible(driver, byEntradaResultado));
+		return (state(Visible, byEntradaResultado, driver).check());
 	}
 	
 }

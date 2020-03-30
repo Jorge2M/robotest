@@ -37,9 +37,9 @@ public class PageGestionSolPedidoBuyer extends PageFilter {
 		return new PageGestionSolPedidoBuyer(driver);
 	}
 
-	public PageSolicitudPedido clickIconAñadirPedido() throws Exception {
+	public PageSolicitudPedido clickIconAñadirPedido() {
 		waitForPageFinished();
-		clickAndWaitLoad(driver, By.xpath(XPathIconSolPedido));
+		click(By.xpath(XPathIconSolPedido)).exec();
 		return PageSolicitudPedido.getNew(driver);
 	}
 	
