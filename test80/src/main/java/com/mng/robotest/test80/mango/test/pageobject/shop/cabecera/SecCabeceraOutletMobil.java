@@ -4,10 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
+import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 /**
@@ -52,7 +53,7 @@ public class SecCabeceraOutletMobil extends SecCabeceraOutlet {
     }
     
     @Override
-    public void clickIconoBolsa() throws Exception {
+    public void clickIconoBolsa() {
     	click(IconoCabOutletMobil.bolsa);
     }
     
@@ -82,12 +83,12 @@ public class SecCabeceraOutletMobil extends SecCabeceraOutlet {
     	}
     }
     
-    public void click(IconoCabOutletMobil icono) throws Exception {
-    	click(icono, app, driver);
+    public void click(IconoCabOutletMobil icono) {
+    	click(icono, app);
     }
     
-    public static void click(IconoCabOutletMobil icono, AppEcom app, WebDriver driver) throws Exception {
-    	clickAndWaitLoad(driver, By.xpath(icono.getXPath()), TypeOfClick.javascript);
+    public void click(IconoCabOutletMobil icono, AppEcom app) {
+    	click(By.xpath(icono.getXPath())).type(TypeClick.javascript).exec();
     }
     
     public void hoverIcono(IconoCabOutletMobil icono) {

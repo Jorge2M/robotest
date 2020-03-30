@@ -18,7 +18,7 @@ public class PageInfoNewMisComprasMovilStpV {
     @Step(
         description = "Seleccionar el botón \"Ver mis compras\"",
         expected = "Aparece la página de \"Mis Compras\"")
-    public static void clickButtonToMisComprasAndNoValidate(WebDriver driver) throws Exception {
+    public static void clickButtonToMisComprasAndNoValidate(WebDriver driver) {
         PageInfoNewMisComprasMovil.clickButtonToMisCompras(driver);
     }
 }

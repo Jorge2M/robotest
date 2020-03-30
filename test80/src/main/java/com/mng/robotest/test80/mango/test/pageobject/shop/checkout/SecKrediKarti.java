@@ -3,9 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.pci.SecTarjetaPciInIframe;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class SecKrediKarti extends SecTarjetaPciInIframe {
@@ -58,11 +56,11 @@ public class SecKrediKarti extends SecTarjetaPciInIframe {
 		return result;
 	}
 
-    public void clickRadioPagoAPlazo(int numRadio) throws Exception {
-    	goToIframe();
-    	By radioBy = By.xpath(getXPathRadioPagoAPlazo(numRadio));
-    	WebdrvWrapp.clickAndWaitLoad(driver, radioBy);
-    	WebdrvWrapp.clickAndWaitLoad(driver, radioBy);
-        leaveIframe();
-    }
+	public void clickRadioPagoAPlazo(int numRadio) throws Exception {
+		goToIframe();
+		By radioBy = By.xpath(getXPathRadioPagoAPlazo(numRadio));
+		click(radioBy).exec();
+		click(radioBy).exec();
+		leaveIframe();
+	}
 }

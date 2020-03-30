@@ -35,31 +35,30 @@ public class SecMetodoEnvioDesktop {
         return getXPathBlockMetodo(tipoTransporte) + XPathRadioInput;
     }
     
-    public static void selectMetodoIfNotSelected(TipoTransporte tipoTransporte, WebDriver driver) throws Exception {
+    public static void selectMetodoIfNotSelected(TipoTransporte tipoTransporte, WebDriver driver) {
     	int zeroSecondsToWait = 0;
         if (!isBlockSelectedUntil(tipoTransporte, zeroSecondsToWait, driver)) {
         	selectMetodo(tipoTransporte, driver);
         }
     }
-    
-    public static void selectMetodo(TipoTransporte tipoTransporte, WebDriver driver) throws Exception {
-        String xpathMethodRadio = getXPathRadioMetodo(tipoTransporte);
-        if (state(Visible, By.xpath(xpathMethodRadio), driver).check() &&
-        	tipoTransporte != TipoTransporte.POSTNORD) {
-        	clickAndWaitLoad(driver, By.xpath(xpathMethodRadio), 5/*waitSeconds*/);
-        } else {
-        	String xpathBlock = getXPathBlockMetodo(tipoTransporte);
-        	clickAndWaitLoad(driver, By.xpath(xpathBlock), 5/*waitSeconds*/);
-        }
-    }
-    
-    
+
+	public static void selectMetodo(TipoTransporte tipoTransporte, WebDriver driver) {
+		String xpathMethodRadio = getXPathRadioMetodo(tipoTransporte);
+		if (state(Visible, By.xpath(xpathMethodRadio), driver).check() &&
+				tipoTransporte != TipoTransporte.POSTNORD) {
+			click(By.xpath(xpathMethodRadio), driver).waitLoadPage(5).exec();
+		} else {
+			String xpathBlock = getXPathBlockMetodo(tipoTransporte);
+			click(By.xpath(xpathBlock), driver).waitLoadPage(5).exec();
+		}
+	}
+
     public static boolean isPresentBlockMetodo(TipoTransporte tipoTransporte, WebDriver driver) {
         String xpathBLock = getXPathBlockMetodo(tipoTransporte);
         return (state(Present, By.xpath(xpathBLock), driver).check());
     }
     
-    public static boolean isBlockSelectedUntil(TipoTransporte tipoTransporte, int maxSeconds, WebDriver driver) throws Exception {
+    public static boolean isBlockSelectedUntil(TipoTransporte tipoTransporte, int maxSeconds, WebDriver driver) {
         String xpathBlockSelected = getXPathBlockMetodoSelected(tipoTransporte);
     	waitForPageLoaded(driver);
     	return (state(Visible, By.xpath(xpathBlockSelected), driver)

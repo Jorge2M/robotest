@@ -6,10 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
+import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 
 public class SecBannerHeadGallery {
@@ -71,9 +72,9 @@ public class SecBannerHeadGallery {
         return false;
     }
     
-    public static void clickBannerIfClickable(WebDriver driver) throws Exception {
+    public static void clickBannerIfClickable(WebDriver driver) {
     	if (isLinkable(driver)) {
-    		clickAndWaitLoad(driver, By.xpath(XPathBanner));
+    		click(By.xpath(XPathBanner), driver).exec();
     	}
     }
     
@@ -87,12 +88,12 @@ public class SecBannerHeadGallery {
     public static boolean isVisibleLinkInfoRebajas(WebDriver driver) {
     	return (state(Visible, By.xpath(XPathTextLinkInfoRebajas), driver).check());
     }
-    
-    public static void clickLinkInfoRebajas(WebDriver driver) throws Exception {
-    	clickAndWaitLoad(driver, By.xpath(XPathTextLinkInfoRebajas), TypeOfClick.javascript);
-    }
-    
-    public static boolean isVisibleLinkTextInfoRebajas(TypeLinkInfo typeLink, WebDriver driver) throws Exception {
+
+	public static void clickLinkInfoRebajas(WebDriver driver) {
+		click(By.xpath(XPathTextLinkInfoRebajas), driver).type(javascript).exec();
+	}
+
+    public static boolean isVisibleLinkTextInfoRebajas(TypeLinkInfo typeLink, WebDriver driver) {
     	String xpathText = getXPathTextInfoRebajas(typeLink);
     	return (state(Visible, By.xpath(xpathText), driver).check());
     }

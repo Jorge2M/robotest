@@ -21,17 +21,17 @@ public class SecSearchDesktopShop extends PageObjTM implements SecSearch {
 	}
 
 	@Override
-	public void search(String referencia) throws Exception {
+	public void search(String referencia) {
 		state(Visible, By.xpath(XPathInputBuscador)).wait(2).check();
 		setTextAndReturn(referencia);
 	}
 
 	@Override
-	public void close() throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathCloseAspa));
+	public void close() {
+		click(By.xpath(XPathCloseAspa)).exec();
 	}
 
-	private void setTextAndReturn(String referencia) throws Exception {
+	private void setTextAndReturn(String referencia) {
 		WebElement input = getElementVisible(driver, By.xpath(XPathInputBuscador));
 		//sendKeysWithRetry(5, input, referencia); 
 		input.clear();

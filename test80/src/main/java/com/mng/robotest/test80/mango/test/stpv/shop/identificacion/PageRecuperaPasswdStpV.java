@@ -13,7 +13,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 public class PageRecuperaPasswdStpV {
     
 	@Validation
-    public static ChecksTM isPage(WebDriver driver) throws Exception {
+    public static ChecksTM isPage(WebDriver driver) {
     	ChecksTM validations = ChecksTM.getNew();
     	int maxSecondsToWait = 2;
     	validations.add(
@@ -28,11 +28,9 @@ public class PageRecuperaPasswdStpV {
     @Step (
 		description="Introducir el email <b>#{email}</b> y pulsar el botón \"Enviar\"", 
         expected="Aparece la página de cambio de contraseña")
-    public static void inputMailAndClickEnviar(String email, WebDriver driver) throws Exception {
+    public static void inputMailAndClickEnviar(String email, WebDriver driver) {
         PageRecuperaPasswd.inputEmail(email, driver);
         PageRecuperaPasswd.clickEnviar(driver);
-        
-        //Validaciones
         isPageCambioPassword(driver);
         
         StdValidationFlags flagsVal = StdValidationFlags.newOne();

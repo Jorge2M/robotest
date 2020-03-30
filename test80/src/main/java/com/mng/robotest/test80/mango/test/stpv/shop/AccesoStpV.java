@@ -24,7 +24,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIdentificacion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper;
@@ -344,13 +344,13 @@ public class AccesoStpV {
     @Step (
     	description="Confirmamos la propuesta de país del modal <b>" + tagPaisBotonCambio + "</b>", 
         expected="Se redirige a la URL " + tagHrefBotonCambio)
-    public static void selectConfirmPaisModal(WebDriver driver) throws Exception {
+    public static void selectConfirmPaisModal(WebDriver driver) {
         String paisBotonCambio = ModalCambioPais.getTextPaisButtonChagePais(driver);
         String hrefBotonCambioPais = ModalCambioPais.getHRefPaisButtonChagePais(driver);
         TestMaker.getCurrentStepInExecution().replaceInDescription(tagPaisBotonCambio, paisBotonCambio);
         TestMaker.getCurrentStepInExecution().replaceInExpected(tagHrefBotonCambio, hrefBotonCambioPais);
         
-        ModalCambioPais.clickButtonChangePais(driver);       
+        ModalCambioPais.clickButtonChangePais(driver);
         checkIsDoneRedirectToCountry(paisBotonCambio, hrefBotonCambioPais, driver);
     }
     

@@ -32,7 +32,7 @@ public class SecSimpleFiltrosMobil extends PageObjTM implements SecFiltros {
 		this.pageGaleria = pageGaleria;
 	}
 	
-	public static SecSimpleFiltrosMobil getInstance(AppEcom app, WebDriver driver) throws Exception {
+	public static SecSimpleFiltrosMobil getInstance(AppEcom app, WebDriver driver) {
 		PageGaleria pageGaleria = PageGaleria.getNew(Channel.movil_web, app, driver);
 		return (new SecSimpleFiltrosMobil(driver, pageGaleria));
 	}
@@ -51,8 +51,8 @@ public class SecSimpleFiltrosMobil extends PageObjTM implements SecFiltros {
     }
     
     @Override
-    public void selectCollection(FilterCollection collection) throws Exception {
-        selectFiltroAndWaitLoad(FiltroMobil.Coleccion, collection.getValueMobil(), driver);        
+    public void selectCollection(FilterCollection collection) {
+        selectFiltroAndWaitLoad(FiltroMobil.Coleccion, collection.getValueMobil(), driver);
     }
     
     @Override
@@ -78,7 +78,7 @@ public class SecSimpleFiltrosMobil extends PageObjTM implements SecFiltros {
      * @return el número de artículos que aparecen en la galería después de seleccionar el filtro
      */
     @Override
-    public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToFilter) throws Exception {
+    public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToFilter) {
     	String valueFiltro = colorsToFilter.get(0).getCodigoColor();
         selectFiltroAndWaitLoad(FiltroMobil.Colores, valueFiltro, driver);
         int maxSecondsToWait = 10;
@@ -95,8 +95,7 @@ public class SecSimpleFiltrosMobil extends PageObjTM implements SecFiltros {
      * Selecciona un determinado filtro de la galería de móvil
      * @param valor atributo 'value' a nivel de la option del filtro (select)
      */
-    private void selectFiltroAndWaitLoad(FiltroMobil typeFiltro, String valorFiltro, WebDriver driver) 
-    throws Exception {
+    private void selectFiltroAndWaitLoad(FiltroMobil typeFiltro, String valorFiltro, WebDriver driver) {
         goAndClickFiltroButton(driver);
         By byLineaFiltro = By.xpath(typeFiltro.getXPathLineaFiltroSimple());
         state(Visible, byLineaFiltro).wait(1).check();
@@ -106,10 +105,10 @@ public class SecSimpleFiltrosMobil extends PageObjTM implements SecFiltros {
         waitForPageLoaded(driver);
     }
     
-    private void goAndClickFiltroButton(WebDriver driver) throws Exception {
+    private void goAndClickFiltroButton(WebDriver driver) {
     	if (state(Visible, By.xpath(XPathFiltrarYOrdenarButton)).check()) {
         	moveToElement(By.xpath(XPathFiltrarYOrdenarButton), driver);
-            Thread.sleep(500);
+            waitMillis(500);
             
             //Scrollamos un poquito hacia arriba para asegurar
             ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-50)", "");

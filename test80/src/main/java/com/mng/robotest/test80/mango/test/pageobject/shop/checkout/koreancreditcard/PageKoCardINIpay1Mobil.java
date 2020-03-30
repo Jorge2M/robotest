@@ -3,11 +3,13 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancredit
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
+import com.mng.testmaker.service.webdriver.pageobject.ElementPageFunctions;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+
 
 public class PageKoCardINIpay1Mobil extends ElementPageFunctions {
+	
 	private final static String tagTitleButtonTypeCard = "@TagLitTypeCard";
     public enum BodyPageKoCardINIpay1 implements ElementPage {
         terms("//label[@for='allAgree']"),
@@ -25,11 +27,10 @@ public class PageKoCardINIpay1Mobil extends ElementPageFunctions {
         public String getXPath() {
             return this.xPath;
         }
-        
-        public static void clickTypeCardButton(String litButton, WebDriver driver) throws Exception {
+
+        public static void clickTypeCardButton(String litButton, WebDriver driver) {
         	String xpatyButtonTypeCard = typecardbutton_withtag.getXPath().replace(tagTitleButtonTypeCard, litButton);
-        	WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(xpatyButtonTypeCard));
-        	
+        	click(By.xpath(xpatyButtonTypeCard), driver).exec();
         }
     }
     

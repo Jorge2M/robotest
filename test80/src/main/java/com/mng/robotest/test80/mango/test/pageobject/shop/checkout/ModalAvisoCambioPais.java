@@ -22,9 +22,9 @@ public class ModalAvisoCambioPais {
 				.wait(maxSeconds).check());
 	}
 
-	public static void clickConfirmarCambio(WebDriver driver) throws Exception {
+	public static void clickConfirmarCambio(WebDriver driver) {
 		waitForPageLoaded(driver);
 		moveToElement(By.xpath(XPathButtonConfCambio), driver);
-		clickAndWaitLoad(driver, By.xpath(XPathButtonConfCambio));
+		click(By.xpath(XPathButtonConfCambio), driver).exec();
 	}
 }

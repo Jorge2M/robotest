@@ -99,8 +99,8 @@ public class PageMisDatos {
         driver.findElement(By.xpath(XPathInputNombre)).sendKeys(nombre);
     }
     
-    public static void clickGuardarCambios(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathBotonGuardarCambios));
+    public static void clickGuardarCambios(WebDriver driver) {
+    	click(By.xpath(XPathBotonGuardarCambios), driver).exec();
     }
     
     public static boolean pageResOK(WebDriver driver) { 

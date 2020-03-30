@@ -31,8 +31,7 @@ public class PageDetallePedidoStpV {
     	return this.pageDetalle;
     }
     
-    public void validateIsPageOk(CompraOnline compraOnline, String codPais, WebDriver driver) 
-    throws Exception {
+    public void validateIsPageOk(CompraOnline compraOnline, String codPais, WebDriver driver) {
         String codPedido = compraOnline.numPedido;
         String importeTotal = compraOnline.importe.replaceAll("[^\\d.,]", "");  //Eliminamos la divisa;
         validateIsPageOk(codPedido, importeTotal, codPais);
@@ -40,7 +39,7 @@ public class PageDetallePedidoStpV {
     }
     
     @Validation
-    public ChecksTM areOkPrendasOnline(int numPrendasCompraOnline) throws Exception {
+    public ChecksTM areOkPrendasOnline(int numPrendasCompraOnline) {
     	ChecksTM validations = ChecksTM.getNew();
 	    int maxSecondsWait = 2;
       	validations.add(
@@ -81,7 +80,7 @@ public class PageDetallePedidoStpV {
     @Step (
     	description="Seleccionar el link necesario para volver a la página inicial de \"Mis Compras\"",
     	expected="Se vuelve a la página inicial de \"Mis Compras\"")
-    public void clickBackButton(Channel channel) throws Exception {
+    public void clickBackButton(Channel channel) {
         pageDetalle.clickBackButton(channel);
     }
 }

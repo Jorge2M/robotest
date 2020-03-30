@@ -48,7 +48,7 @@ public class PageTrustpaySelectBank {
     	return (state(Present, By.xpath(XPathSelectBancos), driver).check());
     }
     
-    public static void selectBankThatContains(ArrayList<String> strContains, Channel channel, WebDriver driver) throws Exception {
+    public static void selectBankThatContains(ArrayList<String> strContains, Channel channel, WebDriver driver) {
         //En el caso de móvil para que aparezca el desplegable se ha de seleccionar el icono del banco
         if (channel==Channel.movil_web) {
         	if (!state(Visible, By.xpath(XPathSelectBancos), driver).check()) {
@@ -81,16 +81,16 @@ public class PageTrustpaySelectBank {
         
         return false;
     }
-    
-    public static void clickIconoBanco(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathInputIconoTrustpay));
-    }
-    
-    public static void clickButtonToContinuePay(Channel channel, WebDriver driver) throws Exception {
+
+	public static void clickIconoBanco(WebDriver driver) {
+		click(By.xpath(XPathInputIconoTrustpay), driver).exec();
+	}
+
+    public static void clickButtonToContinuePay(Channel channel, WebDriver driver) {
         if (channel==Channel.movil_web) {
-            clickAndWaitLoad(driver, By.xpath(XPathButtonContinueMobil));
+        	click(By.xpath(XPathButtonContinueMobil), driver).exec();
         } else {
-            clickAndWaitLoad(driver, By.xpath(XPathButtonPayDesktop));
+        	click(By.xpath(XPathButtonPayDesktop), driver).exec();
         }
     }
 }

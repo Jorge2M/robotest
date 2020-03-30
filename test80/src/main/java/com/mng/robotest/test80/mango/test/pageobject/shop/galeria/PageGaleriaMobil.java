@@ -150,7 +150,7 @@ public class PageGaleriaMobil extends PageGaleria {
     }
     
     @Override
-    public WebElement getImagenArticulo(WebElement articulo) throws Exception {
+    public WebElement getImagenArticulo(WebElement articulo) {
     	By byImg = By.xpath("." + XPathImgRelativeArticle);
     	state(Clickable, byImg).wait(1).check();
     	return (articulo.findElement(byImg));
@@ -181,7 +181,7 @@ public class PageGaleriaMobil extends PageGaleria {
     }         
     
     @Override
-    public ArticuloScreen getArticuloObject(int numArticulo) throws Exception {
+    public ArticuloScreen getArticuloObject(int numArticulo) {
         WebElement artWElem = driver.findElements(By.xpath(XPathArticulo)).get(numArticulo-1);
         ArticuloScreen articulo = new ArticuloScreen(app);
         articulo.setReferencia(getRefArticulo(artWElem));
@@ -214,7 +214,7 @@ public class PageGaleriaMobil extends PageGaleria {
     }
     
     @Override
-    public String getCodColorArticulo(int numArticulo) throws Exception {
+    public String getCodColorArticulo(int numArticulo) {
         String xpathArticulo = "(" + XPathArticulo + ")[" + numArticulo + "]";
         WebElement imgArticle = getImagenArticulo(driver.findElement(By.xpath(xpathArticulo)));
         return (UtilsPageGaleria.getCodColorFromSrcImg(imgArticle.getAttribute("src")));
@@ -295,14 +295,14 @@ public class PageGaleriaMobil extends PageGaleria {
     	}
     	return false;
     }
-    
-    @Override
-    public void showTallasArticulo(int posArticulo) throws Exception {
-        moveToArticleAndGetObject(posArticulo);
-        String xpathButtonAnyadir = getXPathButtonAnyadirArticle(posArticulo);
-        clickAndWaitLoad(driver, By.xpath(xpathButtonAnyadir));
-    }
-    
+
+	@Override
+	public void showTallasArticulo(int posArticulo) {
+		moveToArticleAndGetObject(posArticulo);
+		String xpathButtonAnyadir = getXPathButtonAnyadirArticle(posArticulo);
+		click(By.xpath(xpathButtonAnyadir)).exec();
+	}
+
     @Override
     public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSeconds) {
         String xpathCapa = getXPathArticleCapaTallas(posArticulo);
@@ -315,7 +315,7 @@ public class PageGaleriaMobil extends PageGaleria {
     }
     
     @Override
-    public ArticuloScreen selectTallaArticle(int posArticulo, int posTalla) throws Exception {
+    public ArticuloScreen selectTallaArticle(int posArticulo, int posTalla) {
         //Si no está visible la capa de tallas ejecutamos los pasos necesarios para hacer la visible 
         if (!isVisibleArticleCapaTallasUntil(posArticulo, 0/*maxSecondsToWait*/)) {
             showTallasArticulo(posArticulo);

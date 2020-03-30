@@ -20,8 +20,8 @@ public class PageAmexInputCip {
     public static void inputCIP(String CIP, WebDriver driver) {
         driver.findElement(By.xpath(XPathInputCIP)).sendKeys(CIP);
     }
-    
-    public static void clickAceptarButton(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathAcceptButton));
-    }
+
+	public static void clickAceptarButton(WebDriver driver) {
+		click(By.xpath(XPathAcceptButton), driver).exec();
+	}
 }

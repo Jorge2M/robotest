@@ -19,7 +19,7 @@ public class PagePaypalLogin {
     			.wait(maxSeconds).check());
     }
     
-    public static void inputUserAndPassword(String userMail, String password, WebDriver driver) throws Exception {
+    public static void inputUserAndPassword(String userMail, String password, WebDriver driver) {
     	waitForPageLoaded(driver); //For avoid StaleElementReferenceException
     	sendKeysWithRetry(2, userMail, By.xpath(XPathInputLogin), driver);
     	if (state(Visible, By.xpath(XPathInputPassword), driver).check()) {
@@ -32,7 +32,7 @@ public class PagePaypalLogin {
         }
     }
 
-    public static void clickIniciarSesion(WebDriver driver) throws Exception {
-    	clickAndWaitLoad(driver, By.xpath(XPathIniciarSesionButton));
+	public static void clickIniciarSesion(WebDriver driver) {
+		click(By.xpath(XPathIniciarSesionButton), driver).exec();
     }
 }

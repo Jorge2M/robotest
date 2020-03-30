@@ -83,12 +83,12 @@ public class SecKlarna {
         return isError;
     }
     
-    /**
-     * Selección del botón "Search Address" (se trata de un botón que aparece en algunos tipos de Klarna como p.e. el de Sweden)
-     */
-    public static void clickSearchAddress(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonSearchAddress));
-    }
+	/**
+	 * Selección del botón "Search Address" (se trata de un botón que aparece en algunos tipos de Klarna como p.e. el de Sweden)
+	 */
+	public static void clickSearchAddress(WebDriver driver) {
+		click(By.xpath(XPathButtonSearchAddress), driver).exec();
+	}
 
 	/**
 	 * @return indicador de si existe o no el modal de la confirmación de la dirección (aparece sólo en algunos tipos de Klarna como p.e. el de Sweden)
@@ -103,19 +103,20 @@ public class SecKlarna {
 				.wait(maxSeconds).check());
 	}
 
-    public static String getTextNombreAddress(WebDriver driver) {
-        return driver.findElement(By.xpath(XPathNombreAddress)).getText();
-    }
-    
-    public static String getTextDireccionAddress(WebDriver driver) {
-        return driver.findElement(By.xpath(XPathDireccionAddress)).getText();
-    }
-    
-    public static String getTextProvinciaAddress(WebDriver driver) {
-        return driver.findElement(By.xpath(XPathProvinciaAddress)).getText();
-    }
-    
-    public static void clickConfirmAddress(WebDriver driver, Channel channel) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(getXPATH_buttonConfirmAddress(channel)));
-    }
+	public static String getTextNombreAddress(WebDriver driver) {
+		return driver.findElement(By.xpath(XPathNombreAddress)).getText();
+	}
+
+	public static String getTextDireccionAddress(WebDriver driver) {
+		return driver.findElement(By.xpath(XPathDireccionAddress)).getText();
+	}
+
+	public static String getTextProvinciaAddress(WebDriver driver) {
+		return driver.findElement(By.xpath(XPathProvinciaAddress)).getText();
+	}
+
+	public static void clickConfirmAddress(WebDriver driver, Channel channel) {
+		By byElem = By.xpath(getXPATH_buttonConfirmAddress(channel));
+		click(byElem, driver).exec();
+	}
 }

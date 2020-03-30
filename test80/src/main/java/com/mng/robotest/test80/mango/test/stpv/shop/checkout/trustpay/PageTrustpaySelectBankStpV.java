@@ -48,7 +48,7 @@ public class PageTrustpaySelectBankStpV {
 	@Step (
 		description="Seleccionamos un banco de test (contiene alguno de los textos " + tagPosibleBanks + ") y pulsamos <b>Pay</b>", 
         expected="Aparece la página de test para la confirmación")
-    public static void selectTestBankAndPay(String importeTotal, String codPais, Channel channel, WebDriver driver) throws Exception {
+    public static void selectTestBankAndPay(String importeTotal, String codPais, Channel channel, WebDriver driver) {
         ArrayList<String> listOfPosibleValues = new ArrayList<>();
         listOfPosibleValues.addAll(Arrays.asList("TestPay", "Fio banka"));
         TestMaker.getCurrentStepInExecution().replaceInDescription(tagPosibleBanks, String.join(",", listOfPosibleValues));

@@ -8,14 +8,14 @@ import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.
 
 
 public class PageAssistLast {
-    
-    static String XPathButtonSubmit = "//button[@type='submit']";
-    
-    public static boolean isPage(WebDriver driver) {
-    	return (state(Present, By.xpath(XPathButtonSubmit), driver).check());
-    }
-    
-    public static void clickButtonSubmit(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonSubmit));
-    }
+
+	static String XPathButtonSubmit = "//button[@type='submit']";
+
+	public static boolean isPage(WebDriver driver) {
+		return (state(Present, By.xpath(XPathButtonSubmit), driver).check());
+	}
+
+	public static void clickButtonSubmit(WebDriver driver) {
+		click(By.xpath(XPathButtonSubmit), driver).exec();
+	}
 }

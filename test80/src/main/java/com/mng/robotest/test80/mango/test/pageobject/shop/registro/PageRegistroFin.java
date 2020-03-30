@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.registro;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -17,11 +17,11 @@ public class PageRegistroFin {
     			.wait(maxSeconds).check());
     }
     
-    public static void clickIrDeShopping(WebDriver driver) throws Exception {
+    public static void clickIrDeShopping(WebDriver driver) {
     	waitForPageLoaded(driver); //Para evitar StaleElement Exception
-        clickAndWaitLoad(driver, By.xpath(xpathButtonIrShopping), TypeOfClick.javascript);
+    	click(By.xpath(xpathButtonIrShopping), driver).type(javascript).exec();
         if (isVisibleButtonIrDeShopping(driver)) {
-        	clickAndWaitLoad(driver, By.xpath(xpathButtonIrShopping), TypeOfClick.javascript);
+        	click(By.xpath(xpathButtonIrShopping), driver).exec();
         }
     }
     

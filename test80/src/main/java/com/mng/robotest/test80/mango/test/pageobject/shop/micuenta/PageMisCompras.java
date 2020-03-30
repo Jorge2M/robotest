@@ -167,9 +167,9 @@ public class PageMisCompras extends PageObjTM {
         return TypeCompra.Online;
     }
     
-    public void clickCompra(int posInLista) throws Exception {
+    public void clickCompra(int posInLista) {
         String xpathCompra = getXPathCompra(posInLista);
-        clickAndWaitLoad(driver, By.xpath(xpathCompra));
+        click(By.xpath(xpathCompra)).exec();
     }
     
     public CompraOnline getDataCompraOnline(int posInLista) {

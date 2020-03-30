@@ -13,11 +13,11 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
+import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
+import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -186,14 +186,15 @@ public class SecDataProduct extends WebdrvWrapp {
     public static boolean checkPotatoe (WebDriver driver) {
     	return (state(Present, By.xpath(XPathNombreColorSelectedDesktop), driver).check());
     }
-    
-    public static void selectColorWaitingForAvailability(String codigoColor, WebDriver driver) 
-    throws Exception {
-    	By byColor = By.xpath(getXPathPastillaColorClick(codigoColor));
-    	int maxSecondsToWaitColor = 3;
-    	int maxSecondsToWaitLoadPage = 5;
-    	waitClickAndWaitLoad(driver, maxSecondsToWaitColor, byColor, maxSecondsToWaitLoadPage, TypeOfClick.javascript);
-    }
+
+	public static void selectColorWaitingForAvailability(String codigoColor, WebDriver driver) {
+		By byColor = By.xpath(getXPathPastillaColorClick(codigoColor));
+		int maxSecondsToWaitColor = 3;
+		int maxSecondsToWaitLoadPage = 5;
+		click(byColor, driver)
+			.type(TypeClick.javascript)
+			.waitLink(maxSecondsToWaitColor).waitLoadPage(maxSecondsToWaitLoadPage).exec();
+	}
     
     /**
      * @return si la pastilla de color es o no visible
@@ -240,12 +241,12 @@ public class SecDataProduct extends WebdrvWrapp {
     public static boolean isVisibleAvisoSeleccionTalla(WebDriver driver) {
     	return (state(Visible, By.xpath(XPathMsgAvisoTalla), driver).check());
     }
-    
-    public static void selectGuiaDeTallasLink(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathGuiaDeTallasLink));
-    }
-    
-    public static boolean selectGuiaDeTallasIfVisible(WebDriver driver) throws Exception {
+
+	public static void selectGuiaDeTallasLink(WebDriver driver) {
+		click(By.xpath(XPathGuiaDeTallasLink), driver).exec();
+	}
+
+    public static boolean selectGuiaDeTallasIfVisible(WebDriver driver) {
     	boolean isVisible = state(Visible, By.xpath(XPathGuiaDeTallasLink), driver).check();
     	if (isVisible) {
     		selectGuiaDeTallasLink(driver);
@@ -351,13 +352,13 @@ public class SecDataProduct extends WebdrvWrapp {
         return (state(Visible, By.xpath(xpathLink), driver)
         		.wait(maxSeconds).check());
     }
-    
-    public static void selectLinkNavigation(ProductNav productNav, WebDriver driver) throws Exception {
-        String xpathLink = getXPathLinkProductNav(productNav);
-        waitClickAndWaitLoad(driver, 2/*waitForLinkToClick*/, By.xpath(xpathLink));
-    }
 
-    //zona de colores dentro de la ficha
+	public static void selectLinkNavigation(ProductNav productNav, WebDriver driver) {
+		String xpathLink = getXPathLinkProductNav(productNav);
+		click(By.xpath(xpathLink), driver).waitLink(2).exec();
+	}
+
+	//zona de colores dentro de la ficha
 
     public static ArrayList<String> getColorsGarment(WebDriver driver) {
         ArrayList<String> colors = new ArrayList<>();
@@ -367,8 +368,8 @@ public class SecDataProduct extends WebdrvWrapp {
         return colors;
     }
 
-    public static void selectColor(String codeColor, WebDriver driver) throws Exception {
-        String path = getXPathPastillaColorClick(codeColor);
-        clickAndWaitLoad(driver, By.xpath(path));
-    }
+	public static void selectColor(String codeColor, WebDriver driver) {
+		String path = getXPathPastillaColorClick(codeColor);
+		click(By.xpath(path), driver).exec();
+	}
 }

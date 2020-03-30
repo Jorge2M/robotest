@@ -84,10 +84,10 @@ public class SecMenuLateralDesktop extends PageObjTM {
 		return (state(Visible, By.xpath(linkMenuSel)).wait(maxSeconds).check());
 	}
 
-	public void clickMenu(MenuLateralDesktop menu) throws Exception {
+	public void clickMenu(MenuLateralDesktop menu) {
 		String xpathMenu1erNivel = getXPathLinkMenu(menu);
 		moveToElement(By.xpath(xpathMenu1erNivel), driver);
-		clickAndWaitLoad(driver, By.xpath(xpathMenu1erNivel));
+		click(By.xpath(xpathMenu1erNivel)).exec();
 	}
 
 	/**

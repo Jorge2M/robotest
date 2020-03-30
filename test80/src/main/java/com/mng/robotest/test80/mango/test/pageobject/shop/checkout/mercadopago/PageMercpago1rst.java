@@ -10,14 +10,14 @@ import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.
 public class PageMercpago1rst {
 
 	static String XPathInputNumTarjeta = "//input[@id='cardNumber']";
-    static String XPathLinkRegistro = "//a[@href[contains(.,'changeGuestMail')]]";
-    
-    public static boolean isPageUntil(int maxSeconds, WebDriver driver) {
-    	return (state(Visible, By.xpath(XPathInputNumTarjeta), driver)
-    			.wait(maxSeconds).check());
-    }
-    
-    public static void clickLinkRegistro(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathLinkRegistro));
-    }
+	static String XPathLinkRegistro = "//a[@href[contains(.,'changeGuestMail')]]";
+
+	public static boolean isPageUntil(int maxSeconds, WebDriver driver) {
+		return (state(Visible, By.xpath(XPathInputNumTarjeta), driver)
+				.wait(maxSeconds).check());
+	}
+
+	public static void clickLinkRegistro(WebDriver driver) {
+		click(By.xpath(XPathLinkRegistro), driver).exec();
+	}
 }

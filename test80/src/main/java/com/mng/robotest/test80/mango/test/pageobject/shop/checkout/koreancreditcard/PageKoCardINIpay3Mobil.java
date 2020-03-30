@@ -2,8 +2,9 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancredit
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions;
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
+import com.mng.testmaker.service.webdriver.pageobject.ElementPageFunctions;
+
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageKoCardINIpay3Mobil extends ElementPageFunctions {

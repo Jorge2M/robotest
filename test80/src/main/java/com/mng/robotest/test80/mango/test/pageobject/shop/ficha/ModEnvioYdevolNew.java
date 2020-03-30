@@ -22,7 +22,7 @@ public class ModEnvioYdevolNew {
 				.wait(maxSeconds).check());
 	}
 
-	public static void clickAspaForClose(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathAspaForClose));
+	public static void clickAspaForClose(WebDriver driver) {
+		click(By.xpath(XPathAspaForClose), driver).exec();
 	}
 }

@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.ficha;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -54,8 +54,8 @@ public class SecBolsaButtonAndLinksNew {
 		}
 	}
 	
-	public static void clickAnadirBolsaButtonAndWait(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathButtonAddBolsa), TypeOfClick.javascript);
+	public static void clickAnadirBolsaButtonAndWait(WebDriver driver) {
+		click(By.xpath(XPathButtonAddBolsa), driver).type(javascript).exec();
 	}
 
 	public static boolean isVisibleButtonFavoritos(WebDriver driver) {
@@ -67,9 +67,9 @@ public class SecBolsaButtonAndLinksNew {
 		return (state(Visible, By.xpath(xpathButtonFav), driver).wait(1).check());
 	}
 
-	public static void selectFavoritosButton(ActionFavButton actionButton, WebDriver driver) throws Exception {
+	public static void selectFavoritosButton(ActionFavButton actionButton, WebDriver driver) {
 		String xpathButtonFav = getXPathButtonFavoritos(actionButton);
-		clickAndWaitLoad(driver, By.xpath(xpathButtonFav));
+		click(By.xpath(xpathButtonFav), driver).exec();
 	}
 
 	public static boolean isVisibleDivAnadiendoAFavoritosUntil(int maxSeconds, WebDriver driver) {
@@ -82,9 +82,8 @@ public class SecBolsaButtonAndLinksNew {
 				.wait(maxSeconds).check());
 	}
 
-	public static void clickLinkAndWaitLoad(LinksAfterBolsa linkType, WebDriver driver) 
-	throws Exception {
+	public static void clickLinkAndWaitLoad(LinksAfterBolsa linkType, WebDriver driver) {
 		String xpathLink = getXPathLink(linkType);
-		clickAndWaitLoad(driver, By.xpath(xpathLink));
+		click(By.xpath(xpathLink), driver).exec();
 	}
 }

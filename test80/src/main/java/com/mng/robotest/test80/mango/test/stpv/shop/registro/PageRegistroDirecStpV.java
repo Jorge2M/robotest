@@ -48,8 +48,7 @@ public class PageRegistroDirecStpV {
     @Step (
     	description= "Seleccionar el botón \"<b>Finalizar</b>\"", 
         expected="Aparece la página final del proceso de registro")
-    public static void clickFinalizarButton(WebDriver driver) 
-    throws Exception {
+    public static void clickFinalizarButton(WebDriver driver) {
         PageRegistroDirec.clickFinalizarButton(driver);
         int maxSecondsWait = 5;
         PageRegistroFinStpV.isPageUntil(maxSecondsWait, driver);

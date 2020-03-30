@@ -34,9 +34,9 @@ public class PageInputDataSolMangoCard {
 				.wait(maxSecondsToWait).check());
 	}
 
-    public static void clickBotonCerrarModal(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathbotonContinuarModal));
-    }
+	public static void clickBotonCerrarModal(WebDriver driver) {
+		click(By.xpath(XPathbotonContinuarModal), driver).exec();
+	}
 
 	public static boolean isPage2(WebDriver driver) {
 		return (state(Present, By.xpath(XPathIsPage2), driver).check());

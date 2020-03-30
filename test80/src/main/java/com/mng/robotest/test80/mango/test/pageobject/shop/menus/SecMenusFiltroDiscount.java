@@ -71,12 +71,12 @@ public class SecMenusFiltroDiscount extends PageObjTM {
     	return numberMenusVisibles;
     }
     
-    public void click(String typeMenu) throws Exception {
+    public void click(String typeMenu) {
     	click(TypeMenuDiscount.valueOf(typeMenu));
     }
-    
-    public void click(TypeMenuDiscount typeMenu) throws Exception {
-    	String xpathMenu = getXPathMenu(typeMenu);
-    	clickAndWaitLoad(driver, By.xpath(xpathMenu));
-    }
+
+	public void click(TypeMenuDiscount typeMenu) {
+		String xpathMenu = getXPathMenu(typeMenu);
+		click(By.xpath(xpathMenu)).exec();
+	}
 }

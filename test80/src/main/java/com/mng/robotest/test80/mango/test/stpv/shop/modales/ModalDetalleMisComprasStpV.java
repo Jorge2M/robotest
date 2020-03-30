@@ -38,7 +38,7 @@ public class ModalDetalleMisComprasStpV {
 	@Step (
 		description="Damos click al botón de \"Buscar talla en tienda\"",
         expected="Aparece el modal de busqueda en tienda")
-    public void clickBuscarTiendaButton() throws Exception {
+    public void clickBuscarTiendaButton() {
 		modalDetalleMisCompras.clickBuscarTallaTiendaButton();
 		checkAppearsModalSearchTallaTienda();
     }
@@ -68,7 +68,7 @@ public class ModalDetalleMisComprasStpV {
 	@Step (
 		description="Clickamos el link para volver a la lista de \"Mis compras\"",
 		expected="Volvemos a la página de Mis Compras")
-	public void gotoListaMisCompras() throws Exception {
+	public void gotoListaMisCompras() {
 		modalDetalleMisCompras.gotoListaMisCompras();
 	}
 }

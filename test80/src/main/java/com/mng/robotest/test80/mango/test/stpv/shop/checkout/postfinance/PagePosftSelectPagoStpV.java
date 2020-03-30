@@ -31,12 +31,9 @@ public class PagePosftSelectPagoStpV {
 	
 	@Step(
 		description="Seleccionar el icono del pago <b>#{nombrePago}</b>", 
-        expected="Aparece una página de redirección")
-	public static void clickIconoPago(String nombrePago, String importeTotal, String codigoPais, WebDriver driver) 
-	throws Exception {
+		expected="Aparece una página de redirección")
+	public static void clickIconoPago(String nombrePago, String importeTotal, String codigoPais, WebDriver driver) {
 		PagePostfSelectPago.clickIconoPago(nombrePago, driver);
-		
-        //Validation
 		PagePostfCodSegStpV.postfinanceValidate1rstPage(nombrePago, importeTotal, codigoPais, driver);
 	}
 }

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions;
+import com.mng.testmaker.service.webdriver.pageobject.ElementPageFunctions;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardINIpay4Mobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardINIpay4Mobil.BodyPageKoCardINIpay4;
 

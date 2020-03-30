@@ -14,11 +14,12 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.testmaker.conf.Channel;
+import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 
@@ -70,7 +71,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		secColores = new SecColoresArticuloDesktop(app);
 		secTallas = new SecTallasArticuloDesktop(app, XPathArticulo, driver);
 	}
-	public static PageGaleriaDesktop getNew(From from, AppEcom app, WebDriver driver) throws Exception {
+	public static PageGaleriaDesktop getNew(From from, AppEcom app, WebDriver driver) {
 		return (new PageGaleriaDesktop(from, app, driver));
 	}
 
@@ -509,7 +510,7 @@ public class PageGaleriaDesktop extends PageGaleria {
     }
 
 	@Override
-	public void showTallasArticulo(int posArticulo) throws Exception {
+	public void showTallasArticulo(int posArticulo) {
 		//Nos posicionamos en el artículo y clicamos la capa. 
 		//Es un click muy extraño porque cuando lo ejecutas automáticamente posiciona la capa en el top del navegador y queda oculta por el menú
 		moveToArticleAndGetObject(posArticulo);
@@ -539,24 +540,24 @@ public class PageGaleriaDesktop extends PageGaleria {
         return articulo;
     }
 
-    public void selectTallaArticleNotAvalaible() throws Exception {
-        String xpathTallaNoDipo = secTallas.getXPathArticleTallaNotAvailable();
-        By byTallaToSelect = By.xpath(xpathTallaNoDipo);
-        clickAndWaitLoad(driver, byTallaToSelect);
-    }
-    
+	public void selectTallaArticleNotAvalaible() {
+		String xpathTallaNoDipo = secTallas.getXPathArticleTallaNotAvailable();
+		By byTallaToSelect = By.xpath(xpathTallaNoDipo);
+		click(byTallaToSelect).exec();
+	}
+
     public boolean isVisibleAnyArticle() {
     	return (state(Visible, By.xpath(XPathArticulo)).check());
     }
 
-    public void clickArticulo(int numArticulo) throws Exception {
+    public void clickArticulo(int numArticulo) {
     	By byArticulo = By.xpath(getXPathLinkArticulo(numArticulo));
-        clickAndWaitLoad(driver, byArticulo);
+    	click(byArticulo).exec();
         
         //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
         if (state(Visible, byArticulo).check()) {
         	try {
-        		clickAndWaitLoad(driver, byArticulo, TypeOfClick.javascript);
+        		click(byArticulo).type(javascript).exec();
         	}
         	catch (Exception e) {
         		//Hay un caso en el que el artículo justo desaparece y se clicka -> 
@@ -770,9 +771,9 @@ public class PageGaleriaDesktop extends PageGaleria {
 		return StateFavorito.Desmarcado;
 	}
 
-	public void clickLinkColumnas(NumColumnas numColumnas) throws Exception {
+	public void clickLinkColumnas(NumColumnas numColumnas) {
 		String xpathLink = getXPathLinkNumColumnas(numColumnas);
-		clickAndWaitLoad(driver, By.xpath(xpathLink));
+		click(By.xpath(xpathLink)).exec();
 	}
 
 	public boolean isPresentAnyArticle(TypeArticleDesktop typeArticle) {

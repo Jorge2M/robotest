@@ -24,7 +24,7 @@ public class AllPagesSEO {
     /**
      * Validaciones que determinan si una página generada en MANGO es o no correcta
      */
-    public static ResultadoErrores validacionesGenericasSEO(WebDriver driver) throws Exception {
+    public static ResultadoErrores validacionesGenericasSEO(WebDriver driver) {
 
         ResultadoErrores resultado = new ResultadoErrores();
         resultado.setResultado(ResultadoErrores.Resultado.OK);

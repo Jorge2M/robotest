@@ -17,8 +17,8 @@ public class PagePostfSelectPago {
 		return (state(Visible, By.xpath(xpathIconoPago), driver).wait(maxSeconds).check());
 	}
 	
-	public static void clickIconoPago(String nombrePago, WebDriver driver) throws Exception {
+	public static void clickIconoPago(String nombrePago, WebDriver driver) {
 		String xpathIconoPago = getXPathIconoMetodoPago(nombrePago);
-		clickAndWaitLoad(driver, By.xpath(xpathIconoPago));
+		click(By.xpath(xpathIconoPago), driver).exec();
 	}
 }

@@ -17,8 +17,10 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
 import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+
+import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 
 public class SecLineasMenuDesktop extends PageObjTM {
@@ -133,15 +135,15 @@ public class SecLineasMenuDesktop extends PageObjTM {
         String xpathLinea = getXPathLineaSelected(lineaType);
         return (state(Present, By.xpath(xpathLinea)).check()); 
     }
-    
-    public void selecLinea(Pais pais, LineaType lineaType) throws Exception {
-        Linea linea = pais.getShoponline().getLinea(lineaType);
-        if (isLineActiveToSelect(pais, linea)) {
-           String XPathLinkLinea = getXPathLineaLink(lineaType);
-     	   clickAndWaitLoad(driver, By.xpath(XPathLinkLinea), TypeOfClick.javascript);
-        }
-    }
-     
+
+	public void selecLinea(Pais pais, LineaType lineaType) {
+		Linea linea = pais.getShoponline().getLinea(lineaType);
+		if (isLineActiveToSelect(pais, linea)) {
+			String XPathLinkLinea = getXPathLineaLink(lineaType);
+			click(By.xpath(XPathLinkLinea)).type(javascript).exec();
+		}
+	}
+
     private boolean isLineActiveToSelect(Pais pais, Linea linea) {
     	//En el caso concreto de los países con únicamente la línea She -> Aparecen otras pestañas
     	return (
@@ -155,17 +157,17 @@ public class SecLineasMenuDesktop extends PageObjTM {
     	String xpathImg = getXPathImgSublinea(lineaType, sublineaType);
     	return (state(Visible, By.xpath(xpathImg)).wait(maxSeconds).check());
     }
-    
-    public void clickImgSublineaIfVisible(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
-    	int maxSecondsToWait = 1;
-        if (isVisibleImgSublineaUntil(lineaType, sublineaType, maxSecondsToWait)) {
-        	String xpathImg = getXPathImgSublinea(lineaType, sublineaType);
-        	clickAndWaitLoad(driver, By.xpath(xpathImg));
-        	state(Invisible, By.xpath(xpathImg)).wait(1).check();
-        }
-    }
 
-    public void hoverLineaAndWaitForMenus(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
+	public void clickImgSublineaIfVisible(LineaType lineaType, SublineaNinosType sublineaType) {
+		int maxSecondsToWait = 1;
+		if (isVisibleImgSublineaUntil(lineaType, sublineaType, maxSecondsToWait)) {
+			String xpathImg = getXPathImgSublinea(lineaType, sublineaType);
+			click(By.xpath(xpathImg)).exec();
+			state(Invisible, By.xpath(xpathImg)).wait(1).check();
+		}
+	}
+
+    public void hoverLineaAndWaitForMenus(LineaType lineaType, SublineaNinosType sublineaType) {
     	//Existe un problema aleatorio en Firefox que provoca que el Hover sobre la línea (mientras se está cargando la galería) 
     	//ejecute realmente un hover contra la línea de la izquerda
     	boolean isCapaMenusVisible = false;
@@ -183,7 +185,7 @@ public class SecLineasMenuDesktop extends PageObjTM {
     	while (!isCapaMenusVisible && i<2);
     }
     
-    public void hoverLinea(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
+    public void hoverLinea(LineaType lineaType, SublineaNinosType sublineaType) {
     	if (sublineaType==null) {
     		hoverLinea(lineaType);
     	} else {
@@ -191,14 +193,14 @@ public class SecLineasMenuDesktop extends PageObjTM {
     	}
     }
     
-    public void hoverLinea(LineaType lineaType) throws Exception {
+    public void hoverLinea(LineaType lineaType) {
         //Hover sobre la pestaña -> Hacemos visibles los menús/subimágenes
         String xpathLinkLinea = getXPathLineaLink(lineaType);
         state(Visible, By.xpath(xpathLinkLinea)).wait(1).check();
         moveToElement(By.xpath(xpathLinkLinea), driver);
     }
 
-    public void selectSublinea(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
+    public void selectSublinea(LineaType lineaType, SublineaNinosType sublineaType) {
     	hoverLinea(lineaType);
        	clickImgSublineaIfVisible(lineaType, sublineaType);
         String xpathLinkSublinea = getXPathSublineaLink(sublineaType);

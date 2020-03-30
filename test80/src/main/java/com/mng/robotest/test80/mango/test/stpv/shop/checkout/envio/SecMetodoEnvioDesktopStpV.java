@@ -21,8 +21,7 @@ public class SecMetodoEnvioDesktopStpV {
     @Step (
     	description="<b style=\"color:blue;\">#{nombrePago}</b>:Seleccionamos el método de envío <b>#{tipoTransporte}</b>", 
         expected="Se selecciona el método de envío correctamente")
-    public static void selectMetodoEnvio(TipoTransporte tipoTransporte, String nombrePago, DataCtxPago dCtxPago, WebDriver driver) 
-    throws Exception {
+    public static void selectMetodoEnvio(TipoTransporte tipoTransporte, String nombrePago, DataCtxPago dCtxPago, WebDriver driver) {
         SecMetodoEnvioDesktop.selectMetodo(tipoTransporte, driver);
         if (!tipoTransporte.isEntregaDomicilio()) {
         	if (ModalDroppoints.isErrorMessageVisibleUntil(driver)) {
@@ -39,7 +38,7 @@ public class SecMetodoEnvioDesktopStpV {
     }
     
     @Validation
-    public static ChecksTM validaBlockSelectedDesktop(TipoTransporte tipoTransporte, WebDriver driver) throws Exception {
+    public static ChecksTM validaBlockSelectedDesktop(TipoTransporte tipoTransporte, WebDriver driver) {
     	ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 5;
       	validations.add(

@@ -10,7 +10,7 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.service.testab.TestABOptimize;
 import com.mng.testmaker.service.testab.TestABactData;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
 
 public class TestABOptimizeManager implements TestABmanager {
 	

@@ -24,7 +24,7 @@ public class PageSofort4thStpV {
 	@Step (
 		description="Introducir el usuario/password de DEMO: #{usrSofort} / #{passSofort}", 
         expected="Aparece la página de selección de cuenta")
-    public static void inputCredencialesUsr(String usrSofort, String passSofort, WebDriver driver) throws Exception {
+    public static void inputCredencialesUsr(String usrSofort, String passSofort, WebDriver driver) {
         PageSofort4th.inputUserPass(driver, usrSofort, passSofort);
         PageSofort4th.clickSubmitButton(driver);
         validateAppearsCtaForm(driver);
@@ -40,7 +40,7 @@ public class PageSofort4thStpV {
 	@Step (
 		description="Seleccionamos la 1a cuenta y pulsamos aceptar", 
         expected="Aparece la página de confirmación de la transacción")
-    public static void select1rstCtaAndAccept(WebDriver driver) throws Exception { 
+    public static void select1rstCtaAndAccept(WebDriver driver) { 
         PageSofort4th.selectRadioCta(driver, 1);
         PageSofort4th.clickSubmitButton(driver);
         validateAppearsInputTAN(driver);
@@ -52,12 +52,12 @@ public class PageSofort4thStpV {
 	public static boolean validateAppearsInputTAN(WebDriver driver) {
 		return (PageSofort4th.isVisibleInputTAN(driver));
 	}
-    
+
 	@Step (
 		description="Introducción del TAN: #{TANSofort} y pulsamos aceptar", 
-        expected="El pago se realiza correctamente")
-    public static void inputTANandAccept(String TANSofort, WebDriver driver) throws Exception {
+		expected="El pago se realiza correctamente")
+	public static void inputTANandAccept(String TANSofort, WebDriver driver) {
 		PageSofort4th.inputTAN(driver, TANSofort);
 		PageSofort4th.clickSubmitButton(driver);
-    }
+	}
 }

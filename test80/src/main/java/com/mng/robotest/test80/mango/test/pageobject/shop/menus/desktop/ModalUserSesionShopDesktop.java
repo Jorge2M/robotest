@@ -3,11 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
 
 public class ModalUserSesionShopDesktop extends PageObjTM { 
 	
@@ -52,7 +52,7 @@ public class ModalUserSesionShopDesktop extends PageObjTM {
     	return (isElementInStateUntil(menu, state, maxSecondsWait, driver));
     }
     
-    public void wait1sForItAndclickMenu(MenuUserDesktop menu) throws Exception {
+    public void wait1sForItAndclickMenu(MenuUserDesktop menu) {
     	isMenuInStateUntil(menu, Clickable, 1);
     	clickAndWait(menu, driver);
     }

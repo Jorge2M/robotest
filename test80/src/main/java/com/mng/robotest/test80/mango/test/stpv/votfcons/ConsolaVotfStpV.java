@@ -56,8 +56,8 @@ public class ConsolaVotfStpV {
 		description="Selección botón \"Consultar tipos de envío\"",
 		expected="Aparecen datos correspondientes a " + PageConsola.msgConsTiposEnvioOK,
 		saveErrorData=SaveWhen.Never)
-    public static void consultarTiposEnvio(WebDriver driver) throws Exception {
-		PageConsola.clickButtonConsTiposEnvios(driver);           
+    public static void consultarTiposEnvio(WebDriver driver) {
+		PageConsola.clickButtonConsTiposEnvios(driver);
         String paginaPadre = driver.getWindowHandle();
         checkAfterConsultarTiposEnvio(paginaPadre, driver);
     }
@@ -87,7 +87,7 @@ public class ConsolaVotfStpV {
 		expected=
 			"Aparece la tabla de transportes con los tipos",
 		saveErrorData=SaveWhen.Never)
-	public static boolean consultarDispEnvDomic(String articulo, WebDriver driver) throws Exception {
+	public static boolean consultarDispEnvDomic(String articulo, WebDriver driver) {
 		PageConsola.inputArticDispYCompra(driver, articulo);
 		PageConsola.clickButtonConsultarDispEnvioDomicilio(driver);
 		return checkAfterClickConsultDispEnvioDomicilio(driver);
@@ -141,7 +141,7 @@ public class ConsolaVotfStpV {
 		description="Introducimos el artículo #{articulo} (a nivel de  artículo disponible y de compra) + Seleccionar el botón \"Consultar Disponibilidad Envío Tienda\"",
 		expected="Aparece el bloque de transportes y el tipo de stock",
 		saveErrorData=SaveWhen.Never)
-    public static void consultarDispEnvTienda(String articulo, WebDriver driver) throws Exception {
+    public static void consultarDispEnvTienda(String articulo, WebDriver driver) {
         PageConsola.inputArticDispYCompra(driver, articulo);
         PageConsola.consDispEnvioTienda(driver);
         String paginaPadre = driver.getWindowHandle();
@@ -172,7 +172,7 @@ public class ConsolaVotfStpV {
 		description="Seleccionar el botón \"Realizar Solicitud A Domicilio\"",
 		expected="El pedido se crea correctamente",
 		saveErrorData=SaveWhen.Never)
-    public static String realizarSolicitudTienda(String articulo, WebDriver driver) throws Exception {
+    public static String realizarSolicitudTienda(String articulo, WebDriver driver) {
         PageConsola.inputArticDispYCompra(driver, articulo);
         PageConsola.clickButtonSolADomicilio(driver);
         String codigoPedido = switchToIframeAndCheckAfterSolicitudAdomicilio(driver);
@@ -211,13 +211,13 @@ public class ConsolaVotfStpV {
 		description="Seleccionar el botón \"Obtener Pedidos\"",
 		expected="Aparece la lista de pedidos",
 		saveErrorData=SaveWhen.Never)
-	public static String obtenerPedidos(String codigoPedido, WebDriver driver) throws Exception {
+	public static String obtenerPedidos(String codigoPedido, WebDriver driver) {
 		PageConsola.clickButtonObtenerPedidos(driver);
 		String codigoPedidoFull = switchToIframeAndCheckAfterObtenerPedidos(codigoPedido, driver);
 		return codigoPedidoFull;
 	}
 	
-	private static String switchToIframeAndCheckAfterObtenerPedidos(String codigoPedido, WebDriver driver) throws Exception {
+	private static String switchToIframeAndCheckAfterObtenerPedidos(String codigoPedido, WebDriver driver) {
 		String paginaPadre = driver.getWindowHandle();
 		PageConsola.switchToResultIFrame(driver);
 
@@ -227,7 +227,7 @@ public class ConsolaVotfStpV {
 		return codigoPedidoFull;
 	}
 	
-	private static String checkAfterObtenerPedidosInIframe(String codigoPedido, WebDriver driver) throws Exception {
+	private static String checkAfterObtenerPedidosInIframe(String codigoPedido, WebDriver driver) {
 		checkIsLineaPedidos(5, driver);
 		if ("".compareTo(codigoPedido)==0) {
 			return codigoPedido;
@@ -247,7 +247,7 @@ public class ConsolaVotfStpV {
 	@Validation (
 		description = "En la lista de pedidos aparece el generado anteriormente: #{codigoPedido} (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-	private static boolean checkIsPresentPedidoInList(String codigoPedido, int maxSeconds, WebDriver driver) throws Exception {
+	private static boolean checkIsPresentPedidoInList(String codigoPedido, int maxSeconds, WebDriver driver) {
 		String codigoPedidoFull = IframeResult.getPedidoFromListaPedidosUntil(codigoPedido, maxSeconds, driver);
 	 	return "".compareTo(codigoPedidoFull)!=0;
 	}
@@ -256,7 +256,7 @@ public class ConsolaVotfStpV {
 		description="Seleccionar el pedido #{codigoPedidoFull} en el desplegable \"Pedido\" y pulsar \"Seleccionar pedido\"",
 		expected="Aparece el pedido seleccionado",
 		saveErrorData=SaveWhen.Never)
-	public static void seleccionarPedido(String codigoPedidoFull, WebDriver driver) throws Exception {
+	public static void seleccionarPedido(String codigoPedidoFull, WebDriver driver) {
 		PageConsola.selectPedido(driver, codigoPedidoFull);
 		PageConsola.clickButtonSelectPedido(driver);
 		checkAfterSelectPedido(codigoPedidoFull, driver);
@@ -285,7 +285,7 @@ public class ConsolaVotfStpV {
 		description="Pulsar el botón \"Preconfirmar Pedido\"",
 		expected="Aparece el pedido como preconfirmado",
 		saveErrorData=SaveWhen.Never)
-	public static void selectPreconfPedido(String codigoPedidoFull, WebDriver driver) throws Exception {
+	public static void selectPreconfPedido(String codigoPedidoFull, WebDriver driver) {
 		PageConsola.clickButtonPreconfPedido(driver);
 		checkAfterPreconfirmarPedido(codigoPedidoFull, driver);
 	}

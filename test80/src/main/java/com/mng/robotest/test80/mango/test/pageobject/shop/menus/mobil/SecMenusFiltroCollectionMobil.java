@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.SecFiltros;
@@ -14,7 +14,7 @@ public class SecMenusFiltroCollectionMobil extends WebdrvWrapp implements SecMen
 
 	private final SecFiltros secFiltros;
     
-    public SecMenusFiltroCollectionMobil(AppEcom app, WebDriver driver) throws Exception {
+    public SecMenusFiltroCollectionMobil(AppEcom app, WebDriver driver) {
     	this.secFiltros = SecFiltros.newInstance(Channel.movil_web, app, driver);
     }
     
@@ -34,7 +34,7 @@ public class SecMenusFiltroCollectionMobil extends WebdrvWrapp implements SecMen
     }
     
     @Override
-    public void click(FilterCollection collection) throws Exception {
+    public void click(FilterCollection collection) {
     	secFiltros.selectCollection(collection);
     }
 }

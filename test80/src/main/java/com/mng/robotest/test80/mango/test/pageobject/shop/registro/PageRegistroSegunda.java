@@ -55,7 +55,7 @@ public class PageRegistroSegunda {
         return ("//div[@class='radiobuttonBtn']/input[@value='" + numNinos + "']");
     }
     
-    public static boolean isPageUntil(WebDriver driver, int maxSeconds) throws Exception {
+    public static boolean isPageUntil(WebDriver driver, int maxSeconds) {
     	return (state(Present, By.xpath(XPathFormStep2), driver).wait(maxSeconds).check());
     }
     
@@ -123,7 +123,7 @@ public class PageRegistroSegunda {
      * Desmarca una serie de líneas al azar (de entre las contenidas en lineasComaSeparated)
      * @return las líneas desmarcadas separadas por comas
      */
-    public static String desmarcarLineasRandom(WebDriver driver, String lineasComaSeparated) throws Exception {
+    public static String desmarcarLineasRandom(WebDriver driver, String lineasComaSeparated) {
         StringTokenizer tokensLin = new StringTokenizer(lineasComaSeparated, ",");
         String lineasDesmarcadas = "";
         int i=0;
@@ -132,7 +132,7 @@ public class PageRegistroSegunda {
             if (Math.random() < 0.5) {
                 String xpathLineaClick = getXPath_checkboxLineaClickable(lineaStr);
                 if (state(Present, By.xpath(xpathLineaClick), driver).check()) {
-                    clickAndWaitLoad(driver, By.xpath(xpathLineaClick));
+                	click(By.xpath(xpathLineaClick), driver).exec();
                 }
                         
                 //Las líneas que desmarcamos las guardamos
@@ -147,7 +147,7 @@ public class PageRegistroSegunda {
         return lineasDesmarcadas;
     }
     
-    public static void clickButtonContinuar(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonContinuar));
+    public static void clickButtonContinuar(WebDriver driver) {
+    	click(By.xpath(XPathButtonContinuar), driver).exec();
     }
 }

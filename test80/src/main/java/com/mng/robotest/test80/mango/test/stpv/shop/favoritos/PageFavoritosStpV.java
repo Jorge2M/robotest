@@ -96,7 +96,7 @@ public class PageFavoritosStpV {
     @Step (
         description="Cerramos el modal de favoritos compartidos",
         expected="El modal de favoritos compartidos desaparece correctamente")
-    public void closeShareModal() throws Exception {
+    public void closeShareModal() {
     	pageFavoritos.closeShareModal();
     	int maxSecondsWait = 2;
     	checkShareIsClosedUntil(maxSecondsWait);
@@ -112,7 +112,7 @@ public class PageFavoritosStpV {
     @Step (
         description="Eliminamos de Favoritos el artículo con referencia <b>#{refArticulo}</b> y código de color <b>#{codColor}</b>",
         expected="El artículo desaparece de Favoritos")
-    public void clear(String refArticulo, String codColor) throws Exception {
+    public void clear(String refArticulo, String codColor) {
     	pageFavoritos.clearArticuloAndWait(refArticulo, codColor);
         int maxSecondsWait = 5;
         checkArticleDisappearsFromFavoritesUntil(refArticulo, codColor, maxSecondsWait);

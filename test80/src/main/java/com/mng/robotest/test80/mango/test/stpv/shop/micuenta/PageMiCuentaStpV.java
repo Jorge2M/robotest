@@ -48,7 +48,7 @@ public class PageMiCuentaStpV {
     @Step(
         description = "Seleccionar el link \"Mis datos\"",
         expected = "Aparece la página de \"Mis datos\"")
-    private void clickLinkMisDatos (String usuarioReg) throws Exception {
+    private void clickLinkMisDatos (String usuarioReg) {
         pageMiCuenta.clickMisDatos();
         PageMisDatosStpV.validaIsPage(usuarioReg, driver);
     }
@@ -88,7 +88,7 @@ public class PageMiCuentaStpV {
     @Step(
         description = "Seleccionar el link \"Suscripciones\"",
         expected = "Aparece la página de \"Suscripciones\"")
-    private void clickLinkSuscripciones() throws Exception {
+    private void clickLinkSuscripciones() {
         pageMiCuenta.clickSuscripciones();
         PageSuscripcionesStpV.validaIsPage(driver);
         
@@ -113,7 +113,7 @@ public class PageMiCuentaStpV {
     @Step(
         description = "Seleccionar el link \"Mis pedidos\"",
         expected = "Aparece la página de \"Mis pedidos\" sin pedidos")
-    private void clickLinkMisPedidos(String usrRegistrado) throws Exception {
+    private void clickLinkMisPedidos(String usrRegistrado) {
         pageMiCuenta.clickMisPedidos();
         PagePedidosStpV.validaIsPageSinPedidos(usrRegistrado, driver);
     }
@@ -127,7 +127,7 @@ public class PageMiCuentaStpV {
     @Step(
         description = "Seleccionar el link \"Devoluciones\"",
         expected = "Aparece la página de \"Devoluciones\"")
-    private void clickLinkDevoluciones() throws Exception {
+    private void clickLinkDevoluciones() {
         pageMiCuenta.clickDevoluciones();
         PageDevolucionesStpV.validaIsPage(driver);
     }
@@ -141,7 +141,7 @@ public class PageMiCuentaStpV {
     @Step(
         description = "Seleccionar el link \"Reembolsos\"",
         expected = "Aparece la página de \"Reembolsos\"")
-	private void clickLinkReembolsos() throws Exception {
+	private void clickLinkReembolsos() {
         pageMiCuenta.clickReembolsos();
         PageReembolsosStpV.validateIsPage(driver);
     }

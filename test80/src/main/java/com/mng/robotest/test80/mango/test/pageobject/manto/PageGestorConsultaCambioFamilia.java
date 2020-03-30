@@ -52,12 +52,12 @@ public class PageGestorConsultaCambioFamilia {
 		driver.findElement(By.xpath(XPathSelectFamiliaOptionAccesorios)).click();
 	}
 
-	private static void clickConsultaPorFamiliaButton(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathConsultarPorFamiliaButton), 30);
+	private static void clickConsultaPorFamiliaButton(WebDriver driver) {
+		click(By.xpath(XPathConsultarPorFamiliaButton), driver).waitLoadPage(30).exec();
 	}
 
-	public static void clickCambioFamiliaButton(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver,By.xpath(XPathCambioFamiliaButton) ,30);
+	public static void clickCambioFamiliaButton(WebDriver driver) {
+		click(By.xpath(XPathCambioFamiliaButton), driver).exec();
 	}
 
 	public static boolean isTablaProductosVisible(WebDriver driver) {

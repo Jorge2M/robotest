@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.mng.testmaker.service.webdriver.pageobject.ClickElement.BuilderClick;
 //import com.mng.testmaker.domain.suitetree.TestCaseTM;
-import com.mng.testmaker.service.webdriver.pageobject.StateElement.Builder;
+import com.mng.testmaker.service.webdriver.pageobject.StateElement.BuilderState;
 import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 public class PageObjTM extends WebdrvWrapp {
 
@@ -16,22 +16,31 @@ public class PageObjTM extends WebdrvWrapp {
 	public PageObjTM(WebDriver driver) {
 		this.driver = driver;
 	}
-//	public PageObjTM() {
-//		this.driver = TestCaseTM.getTestCaseInExecution().getDriver();
-//	}
 
-	public Builder state(State state, By by) {
-		return new Builder(state, by, driver);
+	public BuilderClick click(By by) {
+		return new BuilderClick(by, driver);
 	}
-	public Builder state(State state, WebElement webelement) {
-		return new Builder(state, webelement, driver);
+	public BuilderClick click(WebElement webelement) {
+		return new BuilderClick(webelement, driver);
+	}
+	public static BuilderClick click(By by, WebDriver driver) {
+		return new BuilderClick(by, driver);
+	}
+	public static BuilderClick click(WebElement webelement, WebDriver driver) {
+		return new BuilderClick(webelement, driver);
 	}
 	
-	public static Builder state(State state, By by, WebDriver driver) {
-		return new Builder(state, by, driver);
+	public BuilderState state(State state, By by) {
+		return new BuilderState(state, by, driver);
 	}
-	public static Builder state(State state, WebElement webelement, WebDriver driver) {
-		return new Builder(state, webelement, driver);
+	public BuilderState state(State state, WebElement webelement) {
+		return new BuilderState(state, webelement, driver);
+	}
+	public static BuilderState state(State state, By by, WebDriver driver) {
+		return new BuilderState(state, by, driver);
+	}
+	public static BuilderState state(State state, WebElement webelement, WebDriver driver) {
+		return new BuilderState(state, webelement, driver);
 	}
 	
 }

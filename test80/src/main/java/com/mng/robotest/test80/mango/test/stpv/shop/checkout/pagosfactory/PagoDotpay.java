@@ -32,7 +32,7 @@ public class PagoDotpay extends PagoStpV {
             PageDotpayPaymentChannelStpV.selectPayment(1, driver);
             PageDotpayPaymentChannelStpV.inputNameAndConfirm("Jorge", "Muñoz", driver);
             PageDotpayAcceptSimulationStpV.clickRedButtonAceptar(driver);
-            PageDotpayResultadoStpV.clickNext(driver);
+            (new PageDotpayResultadoStpV(driver)).clickNext();
             dataPedido.setCodtipopago("F");
         }
     }

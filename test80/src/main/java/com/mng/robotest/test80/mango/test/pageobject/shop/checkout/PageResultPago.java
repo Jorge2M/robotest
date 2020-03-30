@@ -57,8 +57,8 @@ public class PageResultPago {
 		return (state(Visible, By.xpath(xpath), driver).wait(seconds).check());
 	}
 
-	public static void clickSeguirDeShopping(WebDriver driver, Channel channel) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(getXPathLinkSeguirDeShopping(channel)));
+	public static void clickSeguirDeShopping(WebDriver driver, Channel channel) {
+		click(By.xpath(getXPathLinkSeguirDeShopping(channel)), driver).exec();
 	}
 
 	public static boolean isClickableSeguirDeShopping(WebDriver driver, Channel channel) {
@@ -79,16 +79,16 @@ public class PageResultPago {
 		return (state(Present, By.xpath(XPathLinkPedidosDesktop), driver).check());
 	}
 
-	public static void clickMisPedidos(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathLinkPedidosDesktop));
+	public static void clickMisPedidos(WebDriver driver) {
+		click(By.xpath(XPathLinkPedidosDesktop), driver).exec();
 	}
 
 	public static boolean isLinkMisComprasDesktop(WebDriver driver) {
 		return (state(Present, By.xpath(XPathLinkMisComprasDesktop), driver).check());
 	}
 
-	public static void clickMisCompras(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathLinkMisComprasDesktop));
+	public static void clickMisCompras(WebDriver driver) {
+		click(By.xpath(XPathLinkMisComprasDesktop), driver).exec();
 	}
 
 	public static boolean isVisibleBlockNewLoyaltyPoints(WebDriver driver) {

@@ -1,7 +1,8 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.loyalty;
 
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
+
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import org.openqa.selenium.By;

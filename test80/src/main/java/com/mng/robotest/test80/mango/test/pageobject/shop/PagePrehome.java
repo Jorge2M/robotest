@@ -13,15 +13,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
+import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
 import com.mng.robotest.test80.mango.test.pageobject.utils.LocalStorage;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
 //import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
 import com.mng.robotest.test80.mango.test.utils.testab.TestABactive;
 
@@ -128,16 +130,13 @@ public class PagePrehome {
             //Seleccionamos la provincia 8 (Barcelona)
             driver.findElement(By.xpath("//select[@id[contains(.,'province')]]/option[@value='" + "8" + "']")).click();
     }    
-    
-    /**
-     * Selecciona un idioma concreto de entre los que aparecen por pantalla
-     */
-    public static void seleccionaIdioma(WebDriver driver, String nombrePais, String nombreIdioma) throws Exception {
-        String codigoPais = getCodigoPais(driver, nombrePais);
-        String xpathButtonIdioma = getXPathButtonIdioma(codigoPais, nombreIdioma);
-        clickAndWaitLoad(driver, By.xpath(xpathButtonIdioma), TypeOfClick.javascript);
-    }
-    
+
+	public static void seleccionaIdioma(WebDriver driver, String nombrePais, String nombreIdioma) {
+		String codigoPais = getCodigoPais(driver, nombrePais);
+		String xpathButtonIdioma = getXPathButtonIdioma(codigoPais, nombreIdioma);
+		click(By.xpath(xpathButtonIdioma), driver).type(TypeClick.javascript).exec();
+	}
+
     /**
      * Introducimos el nombre del país en el campo de input de "Busca tu país..." y lo seleccionamos
      */
@@ -171,12 +170,12 @@ public class PagePrehome {
         }
     }
 
-	public static boolean clickButtonForEnterIfExists(ButtonEnter buttonEnter, String codigoPais, WebDriver driver) throws Exception {
+	public static boolean clickButtonForEnterIfExists(ButtonEnter buttonEnter, String codigoPais, WebDriver driver) {
 		String xpathButton = getXPathButtonForEnter(buttonEnter, codigoPais);
 		if (state(Present, By.xpath(xpathButton), driver).check() && 
 			driver.findElement(By.xpath(xpathButton)).isDisplayed()) {
 			moveToElement(By.xpath(xpathButton), driver);
-			clickAndWaitLoad(driver, By.xpath(xpathButton + "/a"), TypeOfClick.javascript);
+			click(By.xpath(xpathButton + "/a"), driver).type(TypeClick.javascript).exec();
 			return true;
 		}
 		return false;
@@ -234,10 +233,10 @@ public class PagePrehome {
         selecionProvIdiomAndEnter(dCtxSh.pais, dCtxSh.idioma, dCtxSh.channel, driver);
     }
     
-    public static void identJCASifExists(/*String urlPreHome, */WebDriver driver) throws Exception {
+    public static void identJCASifExists(/*String urlPreHome, */WebDriver driver) {
     	//Temporal para test Canary!!!
     	//AccesoNavigations.goToInitURL(urlPreHome + "?canary=true", driver);
-    	//AccesoNavigations.goToInitURL(/*urlPreHome,*/ driver);
+    	AccesoNavigations.goToInitURL(/*urlPreHome,*/ driver);
         waitForPageLoaded(driver);
         if (PageJCAS.thisPageIsShown(driver)) {
             PageJCAS.identication(driver, "jorge.munoz", "2010martina");

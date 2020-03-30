@@ -107,7 +107,7 @@ public class SecTallasArticuloDesktop extends PageObjTM {
 		return (state(Visible, By.xpath(xpathCapa)).wait(maxSeconds).check());
 	}
 	
-    public void selectLinkAñadirOutlet(int posArticulo) throws Exception {
+    public void selectLinkAñadirOutlet(int posArticulo) {
         String xpathCapaAlta = getXPathFirstCapaAñadirOutlet(posArticulo, true);
         int i=0;
         while (i<5) {
@@ -118,7 +118,7 @@ public class SecTallasArticuloDesktop extends PageObjTM {
             catch (WebDriverException e) {
                 //Scrollamos un poquito hacia arriba para asegurar
                 ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-100)", "");
-                Thread.sleep(200);
+                waitMillis(200);
                 i+=1;
             }
         }

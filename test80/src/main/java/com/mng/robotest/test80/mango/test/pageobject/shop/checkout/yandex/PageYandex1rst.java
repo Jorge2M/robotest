@@ -27,11 +27,11 @@ public class PageYandex1rst {
     public static String getValueInputEmail(WebDriver driver) {
         return (driver.findElement(By.xpath(XPathInputEmail)).getAttribute("value"));
     }
-    
-    public static void clickContinue(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonContinue));
-    }
-    
+
+	public static void clickContinue(WebDriver driver) {
+		click(By.xpath(XPathButtonContinue), driver).exec();
+	}
+
     public static void inputTelefono(String telefono, WebDriver driver) {
         driver.findElement(By.xpath(XPathInputTelefono)).clear();
         sendKeysWithRetry(2, telefono, By.xpath(XPathInputTelefono), driver);
@@ -41,7 +41,7 @@ public class PageYandex1rst {
     	return (state(Present, By.xpath(XPathRetryButton), driver).check());
     }
 
-    public static void clickOnRetry(WebDriver driver) throws Exception{
-        clickAndWaitLoad(driver, By.xpath(XPathRetryButton), 2);
-    }
+	public static void clickOnRetry(WebDriver driver) {
+		click(By.xpath(XPathRetryButton), driver).waitLoadPage(2).exec();
+	}
 }

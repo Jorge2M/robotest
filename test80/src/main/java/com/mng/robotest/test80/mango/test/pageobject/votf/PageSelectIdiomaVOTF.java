@@ -18,12 +18,12 @@ public class PageSelectIdiomaVOTF {
         new Select(driver.findElement(By.xpath(XPathSelectIdioma))).selectByValue(codigoIdioma.toString());
     }
 
-    public static void clickButtonAceptar(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonAceptar));
+    public static void clickButtonAceptar(WebDriver driver) {
+    	click(By.xpath(XPathButtonAceptar), driver).exec();
     	
         //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
         if (isVisibleButtonAceptar(driver)) {
-        	clickAndWaitLoad(driver, By.xpath(XPathButtonAceptar));
+        	click(By.xpath(XPathButtonAceptar), driver).exec();
         }
     }
     

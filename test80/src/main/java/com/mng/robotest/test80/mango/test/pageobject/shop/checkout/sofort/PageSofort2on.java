@@ -29,8 +29,8 @@ public class PageSofort2on {
     public static void inputBankcode(String bankCode, WebDriver driver) {
         driver.findElement(By.xpath(XPathInputBankCode)).sendKeys(bankCode);
     }
-    
-    public static void clickSubmitButtonPage3(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathSubmitButton));
-    }   
+
+	public static void clickSubmitButtonPage3(WebDriver driver) {
+		click(By.xpath(XPathSubmitButton), driver).exec();
+	}
 }

@@ -16,15 +16,15 @@ public class ModalLoyaltyAfterLogin {
 				.wait(maxSeconds).check());
 	}
 	
-	public static void closeModal(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathIrDeShoppingLink));
+	public static void closeModal(WebDriver driver) {
+		click(By.xpath(XPathIrDeShoppingLink), driver).exec();
 	}
 	
-	public static void closeModalIfVisible(WebDriver driver) throws Exception {
+	public static void closeModalIfVisible(WebDriver driver) {
 		closeModalIfVisibleUntil(0, driver);
 	}
 	
-	public static void closeModalIfVisibleUntil(int maxSecondsToWait, WebDriver driver) throws Exception {
+	public static void closeModalIfVisibleUntil(int maxSecondsToWait, WebDriver driver) {
 		if (isModalVisibleUntil(maxSecondsToWait, driver)) {
 			closeModal(driver);
 		}

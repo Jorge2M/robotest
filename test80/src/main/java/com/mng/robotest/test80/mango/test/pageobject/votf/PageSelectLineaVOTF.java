@@ -34,13 +34,13 @@ public class PageSelectLineaVOTF {
         return (state(Present, By.xpath(xpathBanner), driver).check());
     }
     
-    public static void clickBanner(LineaType linea, WebDriver driver) throws Exception {
+    public static void clickBanner(LineaType linea, WebDriver driver) {
         String xpathLinkBanner = getXPathLineaLink(linea);
-        clickAndWaitLoad(driver, By.xpath(xpathLinkBanner)); 
+        click(By.xpath(xpathLinkBanner), driver).exec();
     }
     
-    public static void clickMenu(LineaType linea, int numMenu, WebDriver driver) throws Exception {
+    public static void clickMenu(LineaType linea, int numMenu, WebDriver driver) {
         String xpathMenu = getXPathMenu(linea, numMenu);
-        clickAndWaitLoad(driver, By.xpath(xpathMenu));
+        click(By.xpath(xpathMenu), driver).exec();
     }
 }

@@ -6,8 +6,8 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
 
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -119,18 +119,19 @@ public class PageChequeRegaloInputData extends PageObjTM implements PageFromFoot
 		return true;
 	}
 
-    public void clickImporteCheque(Importe importeToClick) throws  Exception {
-        clickAndWaitLoad(driver, By.xpath(getXPathRadioImporte(importeToClick)));
-    }
+	public void clickImporteCheque(Importe importeToClick) {
+		By byElem = By.xpath(getXPathRadioImporte(importeToClick));
+		click(byElem).exec();
+	}
 
-    public void introducirTarjetaConsultaSaldo(String numTarjeta) throws Exception {
-    	WebElement inputNumTarjeta = driver.findElement(By.xpath(ConsultaSaldo.numeroTarjeta.getXPath()));
-    	inputNumTarjeta.clear();
-    	inputNumTarjeta.sendKeys(numTarjeta);
-        //inputDataInElement(ConsultaSaldo.numeroTarjeta, numTarjeta, driver);
-        clickAndWait(ConsultaSaldo.validar, driver);
-    }
-    
+	public void introducirTarjetaConsultaSaldo(String numTarjeta) {
+		WebElement inputNumTarjeta = driver.findElement(By.xpath(ConsultaSaldo.numeroTarjeta.getXPath()));
+		inputNumTarjeta.clear();
+		inputNumTarjeta.sendKeys(numTarjeta);
+		//inputDataInElement(ConsultaSaldo.numeroTarjeta, numTarjeta, driver);
+		clickAndWait(ConsultaSaldo.validar, driver);
+	}
+
 	public void introducirCvc(String cvvNumber) throws Exception {
 		WebElement cvvTarjeta = driver.findElement(By.xpath(ConsultaSaldo.cvvTarjeta.getXPath()));
 		cvvTarjeta.clear();
@@ -138,27 +139,27 @@ public class PageChequeRegaloInputData extends PageObjTM implements PageFromFoot
 		clickAndWait(ConsultaSaldo.validar, 3, driver);
 	}
 
-    public void clickButtonComprar(ChequeRegalo chequeRegalo) throws Exception {
-        clickAndWait(ElementCheque.compraAhora, driver);
-        
-        //Existe un problema en Firefox-Gecko muy extraño: a veces, después de seleccionar el botón "comprar ahora" 
-        //te muestra error en todos los campos de input y no avanza a la siguiente página
-        for (int i=0; i<10; i++) {
-        	if (!PageObjTM.state(Invisible, By.xpath(ElementCheque.compraAhora.getXPath()), driver)
-        		.wait(3).check()) {
-	        	inputDataCheque(chequeRegalo);
-        		clickAndWait(ElementCheque.compraAhora, driver);
-	        } else {
-	        	break;
-	        }
-        }
-    }
-    
-    public void inputDataCheque(ChequeRegalo chequeRegalo) throws Exception {
-        inputDataInElement(InputCheque.nombre, chequeRegalo.getNombre(), driver);
-        inputDataInElement(InputCheque.apellidos, chequeRegalo.getApellidos(), driver);
-        inputDataInElement(InputCheque.email, chequeRegalo.getEmail(), driver);
-        inputDataInElement(InputCheque.repetirEmail, chequeRegalo.getEmail(), driver);
-        inputDataInElement(InputCheque.mensaje, chequeRegalo.getMensaje(), driver);
-    }
+	public void clickButtonComprar(ChequeRegalo chequeRegalo) throws Exception {
+		clickAndWait(ElementCheque.compraAhora, driver);
+
+		//Existe un problema en Firefox-Gecko muy extraño: a veces, después de seleccionar el botón "comprar ahora" 
+		//te muestra error en todos los campos de input y no avanza a la siguiente página
+		for (int i=0; i<10; i++) {
+			if (!state(Invisible, By.xpath(ElementCheque.compraAhora.getXPath()))
+				.wait(3).check()) {
+				inputDataCheque(chequeRegalo);
+				clickAndWait(ElementCheque.compraAhora, driver);
+			} else {
+				break;
+			}
+		}
+	}
+
+	public void inputDataCheque(ChequeRegalo chequeRegalo) throws Exception {
+		inputDataInElement(InputCheque.nombre, chequeRegalo.getNombre(), driver);
+		inputDataInElement(InputCheque.apellidos, chequeRegalo.getApellidos(), driver);
+		inputDataInElement(InputCheque.email, chequeRegalo.getEmail(), driver);
+		inputDataInElement(InputCheque.repetirEmail, chequeRegalo.getEmail(), driver);
+		inputDataInElement(InputCheque.mensaje, chequeRegalo.getMensaje(), driver);
+	}
 }

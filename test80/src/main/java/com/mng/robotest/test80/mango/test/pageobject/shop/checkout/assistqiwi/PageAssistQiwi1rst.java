@@ -72,10 +72,9 @@ public class PageAssistQiwi1rst {
     	String xpath = getXPATH_iconPasarelas(channel);
     	return (state(Present, By.xpath(xpath), driver).check());
     }
-    
-    public static void clickIconPasarela(WebDriver driver, Channel channel, pasarelasAssist pasarela) throws Exception {
-        
-        String xpath = getXPATH_iconPasarela(channel, pasarela);
-        clickAndWaitLoad(driver, By.xpath(xpath));
-    }
+
+	public static void clickIconPasarela(WebDriver driver, Channel channel, pasarelasAssist pasarela) {
+		String xpath = getXPATH_iconPasarela(channel, pasarela);
+		click(By.xpath(xpath), driver).exec();
+	}
 }

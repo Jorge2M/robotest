@@ -59,7 +59,7 @@ public class PageAccesoMisComprasStpV {
 	@Step (
 		description="En el bloque de \"Si Registrado\", introducir el usuario/password (#{usuario}/#{password}) y pulsar \"Entrar\"", 
         expected="Aparece la página de \"Mis compras\"")
-    public void enterForSiRegistrado(String usuario, String password, Channel channel) throws Exception {
+    public void enterForSiRegistrado(String usuario, String password, Channel channel) {
         pageAccesoMisCompras.inputUserPasswordBlockSi(usuario, password); 
         pageAccesoMisCompras.clickEntrarBlockSi();
         PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(channel, driver);
@@ -73,7 +73,7 @@ public class PageAccesoMisComprasStpV {
 			"(" + tagUsuario + " / <b style=\"color:blue;\">#{dataPedido.getCodpedido()}</b>)" + 
 			" y pulsar \"Buscar pedido\"", 
 		expected="Aparece la página de detalle del pedido")
-	public void buscarPedidoForNoRegistrado(DataPedido dataPedido) throws Exception {
+	public void buscarPedidoForNoRegistrado(DataPedido dataPedido) {
 		String usuario = dataPedido.getEmailCheckout();
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagUsuario, usuario);
 

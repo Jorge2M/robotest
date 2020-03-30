@@ -56,8 +56,7 @@ public class PageSepa1rstStpV {
 	        "  - Cuenta: <b>#{iban}</b></br>" +
 	        "Y pulsamos el botón <b>Pay</b>",
 	    expected="Aparece la página de resultado de pago OK de Mango")
-    public static void inputDataAndclickPay(String iban, String titular, String importeTotal, String codPais, Channel channel, WebDriver driver) 
-    throws Exception {
+    public static void inputDataAndclickPay(String iban, String titular, String importeTotal, String codPais, Channel channel, WebDriver driver) {
         if (channel==Channel.movil_web) {
         	StepTM step = TestMaker.getCurrentStepInExecution();
         	step.setDescripcion("Seleccionamos el icono de SEPA. " + step.getDescripcion());

@@ -53,10 +53,10 @@ public class PagePostfCodSeg {
     public static boolean isPresentButtonAceptar(WebDriver driver) {
     	return (state(Present, By.xpath(XPathAceptarButton), driver).check());
     }
-    
-    public static void clickAceptarButton(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathAceptarButton));
-    }
+
+	public static void clickAceptarButton(WebDriver driver) {
+		click(By.xpath(XPathAceptarButton), driver).exec();
+	}
     
     /**
      * @return si existe o no el input del código de seguridad (en "e-finance" no existe y en "card" sí)
@@ -73,8 +73,8 @@ public class PagePostfCodSeg {
         driver.findElement(By.xpath(XPathInputCodSeg)).sendKeys(codigoSeg);
     }
 
-	public static void waitLoadPage() throws Exception {
-		Thread.sleep(5000);
+	public static void waitLoadPage() {
+		waitMillis(5000);
 	}
 	
 }

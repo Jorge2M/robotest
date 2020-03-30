@@ -6,11 +6,12 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageAyuda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageInputDataSolMangoCard;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
@@ -105,7 +106,7 @@ public class SecFooterStpV {
      @Step (
     	description="Seleccionar el botón con fondo negro \"¡La quiero ahora!\"",
         expected="La página hace scroll hasta el formulario previo de solicitud de la tarjeta")
-     public static void selectLoQuieroAhoraButton (Channel channel, WebDriver driver) throws Exception {
+     public static void selectLoQuieroAhoraButton (Channel channel, WebDriver driver) {
     	 PageMangoCard pageMangoCard = new PageMangoCard(driver);
          String ventanaOriginal = driver.getWindowHandle();
          pageMangoCard.clickOnWantMangoCardNow(channel);
@@ -117,7 +118,7 @@ public class SecFooterStpV {
      }
      
      @Validation
-     private static ChecksTM checkAfterClickLoQuieroAhoraButton(WebDriver driver) throws Exception {
+     private static ChecksTM checkAfterClickLoQuieroAhoraButton(WebDriver driver) {
     	 PageMangoCard pageMangoCard = new PageMangoCard(driver);
     	 ChecksTM validations = ChecksTM.getNew();
     	 validations.add(
@@ -144,19 +145,19 @@ public class SecFooterStpV {
      @Step (
     	description="Seleccionamos el botón \"¡Lo quiero ahora!\" que aparece debajo del formulario",
     	expected="Se abre una nueva pestaña del Banc Sabadell con un modal y texto \"Solicitud de tu MANGO Card\"")
-     public static void selectLoQuieroAhoraUnderForm(WebDriver driver) throws Exception {
+     public static void selectLoQuieroAhoraUnderForm(WebDriver driver) {
     	 PageMangoCard pageMangoCard = new PageMangoCard(driver);
     	 pageMangoCard.clickToGoSecondMangoCardPage();
-         Thread.sleep(1000);
+         waitMillis(1000);
          checkAfterClickLoQuieroAhoraUnderForm(driver);
      }
      
      @Validation
-     private static ChecksTM checkAfterClickLoQuieroAhoraUnderForm(WebDriver driver) throws Exception {
+     private static ChecksTM checkAfterClickLoQuieroAhoraUnderForm(WebDriver driver) {
   		ChecksTM validations = ChecksTM.getNew();
         String ventanaPadre = driver.getWindowHandle();
         WebdrvWrapp.switchToAnotherWindow(driver, ventanaPadre);    
-        Thread.sleep(1000); //El javascript lanzado por "waitForPageLoaded" rompe la carga de la página -> hemos de aplicar wait explícito previo
+        waitMillis(1000); //El javascript lanzado por "waitForPageLoaded" rompe la carga de la página -> hemos de aplicar wait explícito previo
         WebdrvWrapp.waitForPageLoaded(driver, 10);
      	validations.add(
      		"Aparece una nueva ventana",
@@ -172,8 +173,8 @@ public class SecFooterStpV {
      @Step (
     	description="Seleccionar el botón \"Continuar\"", 
         expected="Aparece la página del formulario de solicitud de la tarjeta")
-     private static void selectContinueButton(String ventanaOriginal, WebDriver driver) throws Exception {
-         PageInputDataSolMangoCard.clickBotonCerrarModal(driver);                     
+     private static void selectContinueButton(String ventanaOriginal, WebDriver driver) {
+         PageInputDataSolMangoCard.clickBotonCerrarModal(driver);
          checkValidPageTarjetaMango(ventanaOriginal, driver);
      }
      
@@ -217,7 +218,7 @@ public class SecFooterStpV {
      @Step (
     	description="Se selecciona el link para el cambio de país", 
         expected="Aparece el modal para el cambio de país")
-     public static void cambioPais(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+     public static void cambioPais(DataCtxShop dCtxSh, WebDriver driver) {
     	 SecFooter.clickLinkCambioPais(driver, dCtxSh.appE);
     	 if (!ModalCambioPaisStpV.validateIsVisible(3, driver)) {
     		 //Hay un problema según el cuál en ocasiones no funciona el click así que lo repetimos

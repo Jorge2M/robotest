@@ -21,8 +21,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 public class PageRegistroSegundaStpV {
     
 	@Validation
-    public static ChecksTM validaIsPageRegistroOK(Pais paisRegistro, AppEcom app, Map<String,String> dataRegistro, WebDriver driver) 
-    throws Exception {
+    public static ChecksTM validaIsPageRegistroOK(Pais paisRegistro, AppEcom app, Map<String,String> dataRegistro, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
         String lineasComaSeparated = "";
         int numLineas = 0;

@@ -14,9 +14,9 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
+import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
 import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletDesktop.LinkCabeceraOutletDesktop;
@@ -80,7 +80,7 @@ public class MenusUserWrapper {
 		return (isMenuInStateUntil(menu, state, 0));
 	}
 	
-	public boolean isMenuInStateUntil(UserMenu menu, State state, int maxSecondsWait) throws Exception {
+	public boolean isMenuInStateUntil(UserMenu menu, State state, int maxSecondsWait) {
 		if (menu==UserMenu.bolsa) {
 			return (secCabecera.isInStateIconoBolsa(state));
 		} else {
@@ -89,7 +89,7 @@ public class MenusUserWrapper {
 		}
 	}
 	
-	public void clickMenuAndWait(UserMenu menu) throws Exception {
+	public void clickMenuAndWait(UserMenu menu) {
 		checkAppSupported(app, menu);
 		if (menu==UserMenu.bolsa) {
 			secCabecera.clickIconoBolsa();
@@ -99,7 +99,7 @@ public class MenusUserWrapper {
 		}
 	}
 	
-	public boolean clickMenuIfInState(UserMenu menu, State state) throws Exception {
+	public boolean clickMenuIfInState(UserMenu menu, State state) {
 		if (isMenuInStateUntil(menu, state, 0)) {
 			clickMenuAndWait(menu);
 			return true;
@@ -107,7 +107,7 @@ public class MenusUserWrapper {
 		return false;
 	}
 	
-	public void moveToMenu(UserMenu menu) throws Exception {
+	public void moveToMenu(UserMenu menu) {
 		if (menu==UserMenu.bolsa) {
 			secCabecera.hoverIconoBolsa();
 		} else {
@@ -116,12 +116,12 @@ public class MenusUserWrapper {
 		}
 	}
 	
-	public void moveAndClick(UserMenu menu) throws Exception {
+	public void moveAndClick(UserMenu menu) {
 		moveToMenu(menu);
 		clickMenuAndWait(menu);
 	}
 	
-	public void hoverIconForShowUserMenuDesktopShop() throws Exception {
+	public void hoverIconForShowUserMenuDesktopShop() {
 		if (channel!=Channel.desktop && app!=AppEcom.shop) {
 			throw new IllegalArgumentException(
 				"This function doesn't support the channel " + channel + " and the application " + app);
@@ -164,7 +164,7 @@ public class MenusUserWrapper {
 		}
 	}
 
-	private boolean isMenuInStateUntil(ElementPage menu, State state, int maxSecondsWait) throws Exception {
+	private boolean isMenuInStateUntil(ElementPage menu, State state, int maxSecondsWait) {
 		if (menu instanceof IconoCabeceraShop) {
 			return (secCabecera.getShop().isIconoInStateUntil((IconoCabeceraShop)menu, state, maxSecondsWait));
 		}
@@ -183,7 +183,7 @@ public class MenusUserWrapper {
 		return false;
 	}
 	
-	private void clickMenuAndWait(ElementPage menu) throws Exception {
+	private void clickMenuAndWait(ElementPage menu) {
 		if (menu instanceof IconoCabeceraShop) {
 			secCabecera.getShop().clickIconoAndWait((IconoCabeceraShop)menu);
 		}

@@ -25,18 +25,18 @@ public class SecSearchDesktopOutlet extends PageObjTM implements SecSearch {
     }
     
     @Override
-    public void search(String referencia) throws Exception {
+    public void search(String referencia) {
         new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(Mensajes.getXPathCapaCargando())));
         selectBuscador();
         setTextAndReturn(referencia);
     }
     
-    @Override
-	public void close() throws Exception {
-    	clickAndWaitLoad(driver, By.xpath(XPathCloseAspa));
+	@Override
+	public void close() {
+		click(By.xpath(XPathCloseAspa)).exec();
 	}
 
-	private void selectBuscador() throws Exception {
+	private void selectBuscador() {
 		driver.findElement(By.xpath(XPathIconoLupa)).click(); 
 		if (!state(Visible, By.xpath(XPathInputBuscador)).wait(1).check()) {
 			driver.findElement(By.xpath(XPathIconoLupa)).click();
@@ -44,13 +44,13 @@ public class SecSearchDesktopOutlet extends PageObjTM implements SecSearch {
 		}
 
 		//No nos queda más remedio que incluir un delay puesto que el input_subrayado toma su tiempo para expandirse hacia la derecha
-		Thread.sleep(700);
+		waitMillis(700);
 	}
 
     /**
      * Introducimos la referencia en el buscador y seleccionamos RETURN
      */
-    private void setTextAndReturn(String referencia) throws Exception {
+    private void setTextAndReturn(String referencia) {
         WebElement input = getElementVisible(driver, By.xpath(XPathInputBuscador));
         //sendKeysWithRetry(5, input, referencia);
         input.clear();

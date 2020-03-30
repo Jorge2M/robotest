@@ -8,10 +8,11 @@ import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
+import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
+
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 public class PageMenusManto {
 
@@ -138,20 +139,26 @@ public class PageMenusManto {
     	return "";
     }
 
-	public static void clickMenu(String textoMenu, WebDriver driver) throws Exception {
+	public static void clickMenu(String textoMenu, WebDriver driver) {
 		int maxTimeToWait = 60;
 		int timeWaited = 0;
 		if (textoMenu.contains("'")) {
 			int positionDelete = textoMenu.indexOf("'");
 			String textoMenuRecortado = textoMenu.substring(positionDelete+1, textoMenu.length());
-			waitClickAndWaitLoad(driver, 60, By.xpath(getXpath_linkMenu(textoMenuRecortado)), 60, TypeOfClick.javascript);
+			By byElem = By.xpath(getXpath_linkMenu(textoMenuRecortado));
+			click(byElem, driver)
+				.waitLink(60).waitLoadPage(60)
+				.type(TypeClick.javascript).exec();
 		}else {
-			waitClickAndWaitLoad(driver, 60,By.xpath(getXpath_linkMenu(textoMenu)), 60, TypeOfClick.javascript);
+			By byElem = By.xpath(getXpath_linkMenu(textoMenu));
+			click(byElem, driver)
+				.waitLink(60).waitLoadPage(60)
+				.type(TypeClick.javascript).exec();
 		}
 		
 		while (!state(Present, By.xpath(XPathTitulo), driver).check() && 
 				timeWaited != maxTimeToWait) {
-			Thread.sleep(1000);
+			waitMillis(1000);
 			timeWaited++;
 		}
 		

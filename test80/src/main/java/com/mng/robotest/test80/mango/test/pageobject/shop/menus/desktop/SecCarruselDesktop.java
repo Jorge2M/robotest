@@ -75,14 +75,14 @@ public class SecCarruselDesktop extends PageObjTM {
         return (driver.findElements(By.xpath(xpathCarrousels)).size());
     }    
     
-    /**
-     * Se clicka unos de los bloques (carrouseles) que aparecen cuando se realiza un 'Hover' sobre la línea Nuevo en Desktop
-     */
-    public void clickCarrousel(Pais pais, LineaType lineaType, String idCarrusel) throws Exception {
-        String xpathCarrousel = getXPathLinkCarruselLinea(lineaType, idCarrusel);
-        waitClickAndWaitLoad(driver, 1, By.xpath(xpathCarrousel));
-    }
-    
+	/**
+	 * Se clicka unos de los bloques (carrouseles) que aparecen cuando se realiza un 'Hover' sobre la línea Nuevo en Desktop
+	 */
+	public void clickCarrousel(Pais pais, LineaType lineaType, String idCarrusel) {
+		String xpathCarrousel = getXPathLinkCarruselLinea(lineaType, idCarrusel);
+		click(By.xpath(xpathCarrousel)).waitLoadPage(1).exec();
+	}
+
     public boolean isPresentCarrousel(LineaType lineaType) {
         String xpathBanner = getXPathCarrouselLink(lineaType);
         return (state(Present, By.xpath(xpathBanner)).check());

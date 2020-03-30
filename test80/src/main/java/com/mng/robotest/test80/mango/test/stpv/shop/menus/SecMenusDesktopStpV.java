@@ -285,7 +285,7 @@ public class SecMenusDesktopStpV {
     @Step (
     	description="Seleccionar el carrusel de la línea #{lineaType} correspondiente a <b>#{idCarrusel}</b>",
         expected="Aparece la página asociada al carrusel #{lineaType} / #{idCarrusel}")
-    public void stepSeleccionaCarrusel(LineaType lineaType, String idCarrusel) throws Exception {
+    public void stepSeleccionaCarrusel(LineaType lineaType, String idCarrusel) {
         Linea linea = pais.getShoponline().getLinea(lineaType);
         secMenus.secMenuSuperior.secLineas.hoverLinea(lineaType, null);
         secMenus.secMenuSuperior.secCarrusel.clickCarrousel(pais, lineaType, idCarrusel);
@@ -293,7 +293,7 @@ public class SecMenusDesktopStpV {
     }
 
 	@Validation
-	private ChecksTM checkAfterSelectCarrusel(Linea linea, String idCarrusel) throws Exception {
+	private ChecksTM checkAfterSelectCarrusel(Linea linea, String idCarrusel) {
 		ChecksTM validations = ChecksTM.getNew();
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
 

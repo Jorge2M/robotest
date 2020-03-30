@@ -16,7 +16,7 @@ public class PageAlertaVOTF {
     	return (state(Present, By.xpath(XPathCapaAlerta), driver).check());
     }
      
-    public static void clickButtonContinuar(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonContinuar));
+    public static void clickButtonContinuar(WebDriver driver) {
+    	click(By.xpath(XPathButtonContinuar), driver).exec();
     }
 }

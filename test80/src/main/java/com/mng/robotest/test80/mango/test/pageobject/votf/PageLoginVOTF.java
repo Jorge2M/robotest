@@ -4,13 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-//import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
 import com.mng.robotest.test80.mango.test.utils.testab.TestABactive;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 
-public class PageLoginVOTF extends WebdrvWrapp {
+public class PageLoginVOTF {
 
     private static final String XPathInputUsuario = "//input[@class='username']";
     private static final String XPathInputPassword = "//input[@class='pwd']";
@@ -35,7 +34,7 @@ public class PageLoginVOTF extends WebdrvWrapp {
         driver.findElement(By.xpath(XPathInputPassword)).sendKeys(password);
     }
 
-    public static void clickButtonContinue(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonContinue));
+    public static void clickButtonContinue(WebDriver driver) {
+    	click(By.xpath(XPathButtonContinue), driver).exec();
     }
 }

@@ -24,21 +24,20 @@ public class PageRegistroFinStpV {
 	@Step (
 		description="Seleccionar el botón \"Ir de shopping\" y finalmente el icono de Mango", 
         expected="Se accede a la shop correctamente")
-    public static void clickIrDeShoppingButton(DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
+    public static void clickIrDeShoppingButton(DataCtxShop dCtxSh, WebDriver driver) {
         PageRegistroFin.clickIrDeShopping(driver);
         SecCabecera.getNew(dCtxSh.channel, dCtxSh.appE, driver).clickLogoMango();
         validateWeAreLogged(dCtxSh, driver);
     }
 	
-	public static void validateWeAreLogged(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+	public static void validateWeAreLogged(DataCtxShop dCtxSh, WebDriver driver) {
 		validateLogoGoesToPaisIdioma(dCtxSh, driver);
     	SecMenusUserStpV secMenusUserStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
     	secMenusUserStpV.checkIsVisibleLinkCerrarSesion();
 	}
 	
 	@Validation
-	public static ChecksTM validateLogoGoesToPaisIdioma(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+	public static ChecksTM validateLogoGoesToPaisIdioma(DataCtxShop dCtxSh, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
     	validations.add(
     		"El logo de Mango redirige al país/idioma origen: " + dCtxSh.idioma.getAcceso(),

@@ -99,8 +99,7 @@ public class WebUtils {
      * Detecta el caso en que no se había superado el máximo de errores en todos los errores detectados -> No mostraremos warning
      * Nota: No funciona con GeckoDriver porque no están implementados los servicios al no formar parte del protocolo W3C https://github.com/w3c/webdriver/issues/406
      */
-    public static ResultadoErrores getLogErrors(Level levelFrom, WebDriver webdriver, int maxErrors) 
-    throws Exception {
+    public static ResultadoErrores getLogErrors(Level levelFrom, WebDriver webdriver, int maxErrors) {
         ResultadoErrores resultado = new ResultadoErrores();
         resultado.setResultado(ResultadoErrores.Resultado.OK);
         ITestContext ctx = TestMaker.getTestCase().getTestRunContext();

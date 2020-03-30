@@ -124,8 +124,8 @@ public class SecSelectDPoint {
 		return dataDp;
 	}
 
-	public static void clickSelectButtonAndWait(int maxSecondsToWait, WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathSeleccionarButton), maxSecondsToWait);
+	public static void clickSelectButtonAndWait(int maxSeconds, WebDriver driver) {
+		click(By.xpath(XPathSeleccionarButton), driver).waitLoadPage(maxSeconds).exec();
 	}
 
 	public static boolean deliveryPointSelectedContainsPoblacionUntil(DataSearchDeliveryPoint dataSearchDp, int maxSecondsToWait, WebDriver driver) 

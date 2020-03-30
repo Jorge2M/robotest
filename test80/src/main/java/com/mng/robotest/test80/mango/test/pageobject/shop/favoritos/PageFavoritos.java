@@ -11,12 +11,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
@@ -28,9 +29,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper
  * @author jorge.munoz
  *
  */
-public class PageFavoritos {
+public class PageFavoritos extends PageObjTM {
   
-    private final WebDriver driver;
 	private final ModalFichaFavoritos modalFichaFavoritos;
     
     private final static String XPathBlockFavoritos = "//div[@data-pais and @class[contains(.,'favorites')]]";
@@ -44,7 +44,7 @@ public class PageFavoritos {
     private final static String xPathUrlShareLabel = "//div[@id='linkShareButton']";
     
     private PageFavoritos(WebDriver driver) {
-    	this.driver = driver;
+    	super(driver);
     	this.modalFichaFavoritos = ModalFichaFavoritos.getNew(driver);
     }
     
@@ -94,11 +94,11 @@ public class PageFavoritos {
     public void openShareModal() {
     	driver.findElement(By.xpath(xPathShareModalButton)).click();
     }
-    
-    public void closeShareModal() throws Exception {
-    	clickAndWaitLoad(driver, By.xpath(xPathCloseShareModalButton), TypeOfClick.javascript);
-    }
-    
+
+	public void closeShareModal() {
+		click(By.xpath(xPathCloseShareModalButton)).type(javascript).exec();
+	}
+
     public boolean checkShareModalUntill(int maxSeconds) {
     	return (state(Visible, By.xpath(xPathCloseShareModalButton), driver)
     			.wait(maxSeconds).check());
@@ -134,11 +134,11 @@ public class PageFavoritos {
     			.wait(maxSeconds).check());
     }
     
-    public void clearArticuloAndWait(String refArticulo, String codColorArticulo) throws Exception {
+    public void clearArticuloAndWait(String refArticulo, String codColorArticulo) {
         String xpathBorrar = getXPathAspaBorrar(refArticulo, codColorArticulo);
         
         //Ejecutamos el click mediante JavaScript porque en el caso de móvil en ocasiones el aspa de cerrado queda por debajo de la cabecera
-        clickAndWaitLoad(driver, By.xpath(xpathBorrar), TypeOfClick.javascript);
+        click(By.xpath(xpathBorrar)).type(javascript).exec();
     }
     
     public boolean isInvisibleArticleUntil(String referencia, String codColor, int maxSeconds) {
@@ -148,7 +148,7 @@ public class PageFavoritos {
     }
     
     @SuppressWarnings("static-access")
-    public void clearAllArticulos(Channel channel, AppEcom appE) throws Exception {
+    public void clearAllArticulos(Channel channel, AppEcom appE) {
         //Si la sección no es visible clickamos en favoritos
         if (!isSectionVisible()) {
         	SecMenusWrap secMenus = SecMenusWrap.getNew(channel, appE, driver);
@@ -187,14 +187,13 @@ public class PageFavoritos {
         		.wait(maxSeconds).check());
     }
     
-    public void clear1rstArticuloAndWait() throws Exception {
+    public void clear1rstArticuloAndWait() {
         if (hayArticulos()) {
             String xpathArtWithIdItem = getXPathWithIdItem(1);
             
             //Ejecutamos el click mediante JavaScript porque en el caso de móvil en ocasiones el aspa de cerrado queda por debajo de la cabecera
-            clickAndWaitLoad(driver, By.xpath(xpathArtWithIdItem + "//span[@class[contains(.,'icofav-eliminar')]]"), TypeOfClick.javascript);
-            //driver.findElement(By.xpath(xpathArtWithIdItem + "//span[@class[contains(.,'icofav-eliminar')]]")).click();
-            
+            By byElem = By.xpath(xpathArtWithIdItem + "//span[@class[contains(.,'icofav-eliminar')]]");
+            click(byElem).type(javascript).exec();
             new WebDriverWait(driver, 3).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpathArtWithIdItem)));
         }
     }

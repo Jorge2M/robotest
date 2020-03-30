@@ -115,11 +115,11 @@ public class SecMenusUserStpV {
 	@Validation (
 		description="Aparece el link superior de \"Cerrar Sesión\" (estamos loginados)",
 		level=State.Defect)
-	public boolean checkIsVisibleLinkCerrarSesion() throws Exception {	
+	public boolean checkIsVisibleLinkCerrarSesion() {	
 		if (channel==Channel.desktop && app==AppEcom.shop) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
-	    return (userMenus.isMenuInStateUntil(UserMenu.cerrarSesion, Present, 1));
+		return (userMenus.isMenuInStateUntil(UserMenu.cerrarSesion, Present, 1));
 	}
 
     @Step (

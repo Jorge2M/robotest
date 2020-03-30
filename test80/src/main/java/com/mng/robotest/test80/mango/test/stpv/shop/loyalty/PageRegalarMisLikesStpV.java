@@ -30,7 +30,7 @@ public class PageRegalarMisLikesStpV {
 	@Step (
 		description="Introducir mensaje y usuario receptor #{emailReceptor}",
 		expected="Aparece el bloque para introducir los likes a enviar")
-	public void inputReceptorAndClickContinuar(String mensaje, String emailReceptor) throws Exception {
+	public void inputReceptorAndClickContinuar(String mensaje, String emailReceptor) {
 		pageRegalarMisLikes.inputMensaje(mensaje);
 		pageRegalarMisLikes.inputEmailReceptor(emailReceptor);
 		pageRegalarMisLikes.clickContinuar();
@@ -47,7 +47,7 @@ public class PageRegalarMisLikesStpV {
 	@Step (
 		description="Introducir <b>#{numLikesToRegalar}</b> Likes para regalar y pulsar \"Enviar regalo\"",
 		expected="Aparece la página de resultado Ok")
-	public PageResultadoRegaloLikesStpV inputNumLikesAndClickEnviarRegalo(int numLikesToRegalar) throws Exception {
+	public PageResultadoRegaloLikesStpV inputNumLikesAndClickEnviarRegalo(int numLikesToRegalar) {
 		pageRegalarMisLikes.inputLikesToRegalar(numLikesToRegalar);
 		pageRegalarMisLikes.clickEnviarRegalo();
 		

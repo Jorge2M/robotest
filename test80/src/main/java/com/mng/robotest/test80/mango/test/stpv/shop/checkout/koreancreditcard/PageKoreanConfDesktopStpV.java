@@ -23,7 +23,7 @@ public class PageKoreanConfDesktopStpV {
     @Step (
     	description="Seleccionar el botón para Confirmar", 
         expected="Aparece la página de Mango de resultado OK del pago")
-    public static void clickConfirmarButton(WebDriver driver) throws Exception {    
+    public static void clickConfirmarButton(WebDriver driver) {
     	PageKoreanConfDesktop.clickButtonSubmit(driver);
     }
 }

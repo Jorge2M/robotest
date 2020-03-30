@@ -21,16 +21,12 @@ public class SecCabecera {
 		return litTienda;
 	}
 
-    public static void clickButtonSelTienda(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonSelTienda));
-    }
-    
-    /**
-     * Selección del link "Volver al menú" y esperar los segundos especificados
-     */
-    public static void clickLinkVolverMenuAndWait(WebDriver driver, int seconds) throws Exception {
-        //clickAndWaitLoad(driver, By.xpath(XPathLinkVolverMenu));
-        waitClickAndWaitLoad(driver, seconds, By.xpath(XPathLinkVolverMenu));
-        waitForPageLoaded(driver, seconds);
-    }
+	public static void clickButtonSelTienda(WebDriver driver) {
+		click(By.xpath(XPathButtonSelTienda), driver).exec();
+	}
+
+	public static void clickLinkVolverMenuAndWait(WebDriver driver, int seconds) {
+		click(By.xpath(XPathLinkVolverMenu), driver).waitLink(seconds).exec();
+		waitForPageLoaded(driver, seconds);
+	}
 }

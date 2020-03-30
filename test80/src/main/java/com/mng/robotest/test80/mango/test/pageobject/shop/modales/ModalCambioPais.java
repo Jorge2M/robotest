@@ -101,10 +101,10 @@ public class ModalCambioPais {
     /**
      * Selecciona el botón de confirmación de cambio de país
      */
-    public static void clickButtonChangePais(WebDriver driver) throws Exception {
+    public static void clickButtonChangePais(WebDriver driver) {
         //Obtenemos el xpath del botón y lo seleccionamos
         String xpath = getXPath_buttonToChangePais(""/*urlAccesoPais*/);
-        clickAndWaitLoad(driver, By.xpath(xpath));
+        click(By.xpath(xpath), driver).exec();
     }
     
     /**

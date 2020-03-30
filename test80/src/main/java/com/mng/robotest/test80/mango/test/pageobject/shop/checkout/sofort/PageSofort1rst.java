@@ -30,9 +30,9 @@ public class PageSofort1rst {
     	return (state(Visible, By.xpath(xpPathClickFollowing), driver)
     			.wait(maxSeconds).check());
     }
-    
-    public static void clickGoToSofort(WebDriver driver, Channel channel) throws Exception {
-        String xpPathClickFollowing = getXPathClickToFollow(channel);
-        clickAndWaitLoad(driver, By.xpath(xpPathClickFollowing));
-    }
+
+	public static void clickGoToSofort(WebDriver driver, Channel channel) {
+		String xpPathClickFollowing = getXPathClickToFollow(channel);
+		click(By.xpath(xpPathClickFollowing), driver).exec();
+	}
 }

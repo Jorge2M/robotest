@@ -137,13 +137,14 @@ public class PagePedidosMantoStpV {
 		saveErrorData=SaveWhen.Never)
 	public static DataPedido getDataCliente(DataPedido dPedidoPrueba, WebDriver driver) throws Exception {
 		PageDetallePedido.clickLinkDetallesCliente(driver);
-		dPedidoPrueba.getPago().setDni(PageDetalleCliente.getUserDniText(driver));
+		PageDetalleCliente pageDetalleCliente = new PageDetalleCliente(driver);
+		dPedidoPrueba.getPago().setDni(pageDetalleCliente.getUserDniText());
 		if (dPedidoPrueba.getPago().getDni().equals("")) {
 			dPedidoPrueba.getPago().setDni("41507612h");
 		}
 		
-		dPedidoPrueba.getPago().setUseremail(PageDetalleCliente.getUserEmailText(driver));
-		PageDetalleCliente.clickLinkVolverPedidos(driver);
+		dPedidoPrueba.getPago().setUseremail(pageDetalleCliente.getUserEmailText());
+		pageDetalleCliente.clickLinkVolverPedidos();
 		checkAfterSearchPedidosWithIdRegister(dPedidoPrueba);
 
 		return dPedidoPrueba;

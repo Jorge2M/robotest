@@ -11,9 +11,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
+
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
 
 
 public class PageDetallePedido {
@@ -154,16 +155,12 @@ public class PageDetallePedido {
         return estadoEncontrado;
     }
 
-	public static void gotoListaPedidos(WebDriver driver) throws Exception {
+	public static void gotoListaPedidos(WebDriver driver) {
 		if (state(Present, By.xpath(XPathLinkVolverPedidos), driver).check()) {
-			clickAndWaitLoad(driver, By.xpath(XPathLinkVolverPedidos));
+			click(By.xpath(XPathLinkVolverPedidos), driver).exec();
 		}
 	}
 
-	/**
-	 * @param driver
-	 * @return referencias del pedido
-	 */
 	public static List<String> getReferenciasArticulosDetallePedido(WebDriver driver) {
 		List <String> referenciasText = new ArrayList<>();
 		List<WebElement> referencias = driver.findElements(By.xpath(XPathRefereciaArticulo));
@@ -174,13 +171,8 @@ public class PageDetallePedido {
 		return referenciasText;
 	}
 
-	/**
-	 * @param driver
-	 * @throws Exception
-	 */
-	public static void clickLinkDetallesCliente(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathLinkDetallesCliente));
+	public static void clickLinkDetallesCliente(WebDriver driver) {
+		click(By.xpath(XPathLinkDetallesCliente), driver).exec();
 	}
 
-	
 }

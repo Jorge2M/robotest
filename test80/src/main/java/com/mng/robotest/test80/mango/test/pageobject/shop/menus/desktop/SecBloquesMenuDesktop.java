@@ -164,15 +164,14 @@ public class SecBloquesMenuDesktop extends PageObjTM {
         return (driver.findElements(By.xpath(xpathMenuLinea + xpathEntradaMenu)));
     }
 
-    public void clickMenuAndGetName(Menu1rstLevel menu1rstLevel) throws Exception {
+    public void clickMenuAndGetName(Menu1rstLevel menu1rstLevel) {
     	LineaType lineaMenu = menu1rstLevel.getLinea();
     	SublineaNinosType sublineaMenu = menu1rstLevel.getSublinea();
     	secLineasMenu.hoverLineaAndWaitForMenus(lineaMenu, sublineaMenu);
         String xpathMenu = getXPathMenuSuperiorLinkVisible(menu1rstLevel);
         state(Visible, By.xpath(xpathMenu)).wait(1).check();
-        //menu1rstLevel.setNombre(driver.findElement(By.xpath(xpathMenu)).getText().replace("New!", "").trim());
         moveToElement(By.xpath(xpathMenu), driver);
-        clickAndWaitLoad(driver, By.xpath(xpathMenu));
+        click(By.xpath(xpathMenu)).exec();
     }    
     
     public boolean isPresentMenuFirstLevel(Menu1rstLevel menu1rstLevel) throws Exception {
@@ -193,10 +192,10 @@ public class SecBloquesMenuDesktop extends PageObjTM {
     	String xpathMenuLinea = getXPathMenusSuperiorLinkVisibles(lineaType, sublineaType, TypeMenuDesktop.Banner);
     	return (state(Present, By.xpath(xpathMenuLinea)).check());
     }
-    
-    public void clickRightBanner(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
-    	secLineasMenu.hoverLineaAndWaitForMenus(lineaType, sublineaType);
-        String xpathMenuLinea = getXPathMenusSuperiorLinkVisibles(lineaType, sublineaType, TypeMenuDesktop.Banner);
-        clickAndWaitLoad(driver, By.xpath(xpathMenuLinea));
-    }
+
+	public void clickRightBanner(LineaType lineaType, SublineaNinosType sublineaType) {
+		secLineasMenu.hoverLineaAndWaitForMenus(lineaType, sublineaType);
+		String xpathMenuLinea = getXPathMenusSuperiorLinkVisibles(lineaType, sublineaType, TypeMenuDesktop.Banner);
+		click(By.xpath(xpathMenuLinea)).exec();
+	}
 }

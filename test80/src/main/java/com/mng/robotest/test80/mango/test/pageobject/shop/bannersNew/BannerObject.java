@@ -9,10 +9,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
+import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
+import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
+
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 public abstract class BannerObject {
 
@@ -108,9 +109,9 @@ public abstract class BannerObject {
     public BannerType getBannerType() {
     	return this.bannerType;
     }
-    
-    public void clickBannerAndWaitLoad(DataBanner dataBanner, WebDriver driver) throws Exception {
-    	WebElement bannerWeb = dataBanner.getBannerWeb();
-    	WebdrvWrapp.clickAndWaitLoad(driver, bannerWeb, 10, TypeOfClick.javascript);
-    }
+
+	public void clickBannerAndWaitLoad(DataBanner dataBanner, WebDriver driver) throws Exception {
+		WebElement bannerWeb = dataBanner.getBannerWeb();
+		click(bannerWeb, driver).type(TypeClick.javascript).waitLoadPage(10).exec();
+	}
 }

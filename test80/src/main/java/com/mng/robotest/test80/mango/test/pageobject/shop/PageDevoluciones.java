@@ -3,9 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
+
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
 
 public class PageDevoluciones {
 	
@@ -43,8 +45,8 @@ public class PageDevoluciones {
 			return (state(Present, By.xpath(this.xpathLink), driver).check());
 		}
 
-		public void click(WebDriver driver) throws Exception {
-			clickAndWaitLoad(driver, By.xpath(xpathLink));
+		public void click(WebDriver driver) {
+			PageObjTM.click(By.xpath(xpathLink), driver).exec();
 		}
 		
 		public void waitForInState(boolean plegada, int maxSeconds, WebDriver driver) {
@@ -60,18 +62,18 @@ public class PageDevoluciones {
 		return (state(Present, By.xpath(XPathIsPageDevoluciones), driver).check());
 	}
 
-    public static void clickSolicitarRecogida(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonSolicitarRecogida));
+    public static void clickSolicitarRecogida(WebDriver driver) {
+    	click(By.xpath(XPathButtonSolicitarRecogida), driver).exec();
         
         //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un par de veces
         for (int i=0; i<2; i++) {
 	        if (isVisibleSolicitarRecogidaButton(driver)) {
-	        	clickAndWaitLoad(driver, By.xpath(XPathButtonSolicitarRecogida), TypeOfClick.javascript);
+	        	click(By.xpath(XPathButtonSolicitarRecogida), driver).type(TypeClick.javascript).exec();
 	        }
         }
     }
 
-	public static boolean isVisibleSolicitarRecogidaButton(WebDriver driver) throws Exception {
+	public static boolean isVisibleSolicitarRecogidaButton(WebDriver driver) {
 		return (state(Visible, By.xpath(XPathButtonSolicitarRecogida), driver).check());
 	}
 }

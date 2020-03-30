@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Descuento;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -18,7 +19,7 @@ import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
@@ -211,18 +212,18 @@ public class Page1DktopCheckout {
     public static void selectAnyNacPromoEmpl(String value, WebDriver driver) {
         new Select(driver.findElement(By.xpath(XPathAnyNaciPromoEmpl))).selectByValue(value);
     }
-    
-    public static void clickAplicarPromo(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonAplicarPromo));
-    }
-    
-    public static void clickGuardarPromo(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonGuardarPromo));
-    }    
-    
-    public static void clickConfirmarPago(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathConfPagoButtonDesktop));
-    }
+
+	public static void clickAplicarPromo(WebDriver driver) {
+		click(By.xpath(XPathButtonAplicarPromo), driver).exec();
+	}
+
+	public static void clickGuardarPromo(WebDriver driver) {
+		click(By.xpath(XPathButtonGuardarPromo), driver).exec();
+	}
+
+	public static void clickConfirmarPago(WebDriver driver) {
+		click(By.xpath(XPathConfPagoButtonDesktop), driver).exec();
+	}
 
 	public static boolean isPresentButtonConfPago(WebDriver driver) {
 		return (state(Present, By.xpath(XPathConfPagoButtonDesktop), driver).check());
@@ -233,8 +234,8 @@ public class Page1DktopCheckout {
 				.wait(maxSeconds).check());
 	}
 
-	public static void clickLinkToViewBlockPromo(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.id(XPathLinkToViewBlockPromo));
+	public static void clickLinkToViewBlockPromo(WebDriver driver) {
+		click(By.id(XPathLinkToViewBlockPromo), driver).exec();
 	}
 
 	public static void showInputCodigoPromoAndAccept(String codigoPromo, WebDriver driver) throws Exception {
@@ -253,10 +254,10 @@ public class Page1DktopCheckout {
 				.wait(maxSeconds).check());
 	}
 
-	public static void clickEliminarValeIfExists(WebDriver driver) throws Exception {
+	public static void clickEliminarValeIfExists(WebDriver driver) {
 		By byEliminar = By.xpath(XPathLinkEliminarPromo);
 		if (state(Visible, byEliminar, driver).check()) {
-			clickAndWaitLoad(driver, byEliminar);
+			click(byEliminar, driver).exec();
 		}
 	}
 
@@ -365,11 +366,12 @@ public class Page1DktopCheckout {
         }
         while (!inStateOk && i<seconds);
     }    
-    
-    public static void clickMetodoPago(Pais pais, String metodoPago, WebDriver driver) throws Exception {
-        String xpathClickMetodoPago = getXPathClickMetodoPago(metodoPago);
-        waitClickAndWaitLoad(driver, 2, By.xpath(xpathClickMetodoPago), 1, TypeOfClick.webdriver);
-    }
+
+	public static void clickMetodoPago(Pais pais, String metodoPago, WebDriver driver) {
+		String xpathClickMetodoPago = getXPathClickMetodoPago(metodoPago);
+		click(By.xpath(xpathClickMetodoPago), driver)
+			.type(TypeClick.webdriver).waitLink(2).waitLoadPage(1).exec();
+	}
 
 	public static boolean isRedErrorVisible(WebDriver driver) {
 		return (state(Visible, By.xpath(XPathRedError), driver).check());
@@ -391,7 +393,7 @@ public class Page1DktopCheckout {
         return (driver.findElement(By.xpath(XPathPoblacionEnvio)).getText());
     }    
 
-	public static String getTextDireccionEnvioCompleta(WebDriver driver) throws Exception {
+	public static String getTextDireccionEnvioCompleta(WebDriver driver) {
 		waitForPageLoaded(driver); //For avoid StaleElementReferenceException
 		if (state(Present, By.xpath(XPathDirecionEnvio), driver).check()) {
 			return (
@@ -528,8 +530,8 @@ public class Page1DktopCheckout {
 		return (state(Visible, By.xpath(xpathRadioTrjGuardada), driver).check());
 	}
 
-	public static void clickRadioTrjGuardada(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathRadioTrjGuardada));
+	public static void clickRadioTrjGuardada(WebDriver driver) {
+		click(By.xpath(XPathRadioTrjGuardada), driver).exec();
 	}
 
 	public static void inputCvcTrjGuardadaIfVisible(String cvc, WebDriver driver) {
@@ -574,14 +576,14 @@ public class Page1DktopCheckout {
 				driver.findElement(By.xpath(XPathErrorPromo)).getAttribute("style").contains("color: red"));
 	}
 
-    public static void inputVendedorVOTF(String codigoVendedor, WebDriver driver) {
-        driver.findElement(By.xpath(XPathInputVendedorVOTF)).clear();
-        driver.findElement(By.xpath(XPathInputVendedorVOTF)).sendKeys(codigoVendedor);
-    }
-    
-    public static void acceptInputVendedorVOTF(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonAcceptVendedorVOTF));
-    }
+	public static void inputVendedorVOTF(String codigoVendedor, WebDriver driver) {
+		driver.findElement(By.xpath(XPathInputVendedorVOTF)).clear();
+		driver.findElement(By.xpath(XPathInputVendedorVOTF)).sendKeys(codigoVendedor);
+	}
+
+	public static void acceptInputVendedorVOTF(WebDriver driver) {
+		click(By.xpath(XPathButtonAcceptVendedorVOTF), driver).exec();
+	}
 
 	public static boolean isVisibleInputVendedorVOTF(WebDriver driver) {
 		return (state(Visible, By.xpath(XPathInputVendedorVOTF), driver).check());
@@ -592,13 +594,13 @@ public class Page1DktopCheckout {
 		return (state(Visible, By.xpath(xpathVendedor), driver).check());
 	}
 
-    public static boolean isDataChequeRegalo(ChequeRegalo chequeRegalo, WebDriver driver) {
-        if (!driver.findElement(By.xpath(XPathNombreChequeRegalo)).getText().contains(chequeRegalo.getNombre()) ||
-            !driver.findElement(By.xpath(XPathNombreChequeRegalo)).getText().contains(chequeRegalo.getApellidos()) ||
-            !driver.findElement(By.xpath(XPathPrecioChequeRegalo)).getText().contains(chequeRegalo.getImporte().toString().replace("euro", "")) ||
-            !driver.findElement(By.xpath(XPathMensajeChequeRegalo)).getText().contains(chequeRegalo.getMensaje()))
-            return false;
-        
-        return true;
-    }
+	public static boolean isDataChequeRegalo(ChequeRegalo chequeRegalo, WebDriver driver) {
+		if (!driver.findElement(By.xpath(XPathNombreChequeRegalo)).getText().contains(chequeRegalo.getNombre()) ||
+			!driver.findElement(By.xpath(XPathNombreChequeRegalo)).getText().contains(chequeRegalo.getApellidos()) ||
+			!driver.findElement(By.xpath(XPathPrecioChequeRegalo)).getText().contains(chequeRegalo.getImporte().toString().replace("euro", "")) ||
+			!driver.findElement(By.xpath(XPathMensajeChequeRegalo)).getText().contains(chequeRegalo.getMensaje())) {
+			return false;
+		}
+		return true;
+	}
 }

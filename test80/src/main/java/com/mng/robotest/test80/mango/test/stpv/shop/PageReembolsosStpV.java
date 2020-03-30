@@ -34,7 +34,7 @@ public class PageReembolsosStpV {
     @Step (
     	description="Seleccionar la opción \"Reembolsos\"", 
         expected="Aparece la página de reembolsos")
-    public static void selectReembolsos(boolean paisConSaldoCta, WebDriver driver) throws Exception {
+    public static void selectReembolsos(boolean paisConSaldoCta, WebDriver driver) {
     	PageMiCuenta pageMiCuenta = PageMiCuenta.getNew(driver);
     	pageMiCuenta.clickReembolsos();
         checkClickReembolsos(paisConSaldoCta, driver);

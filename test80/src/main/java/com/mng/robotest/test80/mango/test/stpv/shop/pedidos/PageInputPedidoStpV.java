@@ -33,8 +33,7 @@ public class PageInputPedidoStpV {
 			"Buscar el pedido <b style=\"color:brown;\">#{dataPedido.getCodpedido()}</b> introduciendo email + nº pedido</b>",
 		expected=
 			"Apareca la página con los datos correctos del pedido")
-	public void inputPedidoAndSubmit(DataPedido dataPedido) 
-	throws Exception {
+	public void inputPedidoAndSubmit(DataPedido dataPedido) {
 		String usuarioAcceso = dataPedido.getEmailCheckout();
 		String codPedido = dataPedido.getCodpedido();
 		pageInputPedido.inputEmailUsr(usuarioAcceso);

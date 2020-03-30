@@ -36,7 +36,7 @@ public class PageDetallePedidoOld extends PageObjTM implements PageDetallePedido
     }
     
     @Override
-    public boolean isVisiblePrendaUntil(int maxSeconds) throws Exception {
+    public boolean isVisiblePrendaUntil(int maxSeconds) {
     	return (state(Visible, By.xpath(XPathLineaPrenda)).wait(maxSeconds).check());
     }
     
@@ -46,11 +46,11 @@ public class PageDetallePedidoOld extends PageObjTM implements PageDetallePedido
     }
     
     @Override
-    public void clickBackButton(Channel channel) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathBackButton));
+    public void clickBackButton(Channel channel) {
+    	click(By.xpath(XPathBackButton)).exec();
     }
     
-    public void clickIrATiendaButton() throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathIrATiendaButton));
+    public void clickIrATiendaButton() {
+    	click(By.xpath(XPathIrATiendaButton)).exec();
     }    
 }

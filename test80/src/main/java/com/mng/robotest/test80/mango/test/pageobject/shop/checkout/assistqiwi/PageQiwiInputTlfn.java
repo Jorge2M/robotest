@@ -25,7 +25,7 @@ public class PageQiwiInputTlfn {
     			.wait(maxSeconds).check());
     }
     
-    public static void clickLinkAceptar(WebDriver driver) throws Exception {
-    	clickAndWaitLoad(driver, By.xpath(XPathLinkAceptar));
-    }
+	public static void clickLinkAceptar(WebDriver driver) {
+		click(By.xpath(XPathLinkAceptar), driver).exec();
+	}
 }

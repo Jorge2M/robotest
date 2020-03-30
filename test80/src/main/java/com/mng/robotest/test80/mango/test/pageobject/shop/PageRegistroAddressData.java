@@ -37,8 +37,8 @@ public class PageRegistroAddressData {
 		return (state(Present, By.xpath(xpathOptionPaisSelected), driver).check());
 	}
 
-	public static void clickButtonFinalizar(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathButtonFinalizar));
+	public static void clickButtonFinalizar(WebDriver driver) {
+		click(By.xpath(XPathButtonFinalizar), driver).exec();
 	}
 
 	public static boolean isVisibleErrorInputDireccion(WebDriver driver) {

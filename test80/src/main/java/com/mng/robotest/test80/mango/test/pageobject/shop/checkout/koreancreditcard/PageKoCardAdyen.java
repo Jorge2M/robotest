@@ -25,7 +25,7 @@ public class PageKoCardAdyen extends PageObjTM {
 		return (state(Visible, By.xpath(XPathIconKoreanCreditCard), driver).check());
 	}
 
-	public void clickForContinue(Channel channel) throws Exception {
+	public void clickForContinue(Channel channel) {
 		switch (channel) {
 		case movil_web:
 			clickIcon();
@@ -35,11 +35,11 @@ public class PageKoCardAdyen extends PageObjTM {
 		}
 	}
 	
-	private void clickIcon() throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathIconKoreanCreditCard));
+	private void clickIcon() {
+		click(By.xpath(XPathIconKoreanCreditCard)).exec();
 	}
 	
-	private void clickGreenButton() throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathGreenButton));
+	private void clickGreenButton() {
+		click(By.xpath(XPathGreenButton)).exec();
 	}
 }

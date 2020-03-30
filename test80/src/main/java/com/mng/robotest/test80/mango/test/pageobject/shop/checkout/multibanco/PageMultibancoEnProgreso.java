@@ -20,8 +20,8 @@ public class PageMultibancoEnProgreso {
     public static boolean isButonNextStep(WebDriver driver) {
     	return (state(Present, By.xpath(XPathButtonNextStep), driver).check());
     }
-    
-    public static void clickButtonNextStep(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonNextStep));
-    }
+
+	public static void clickButtonNextStep(WebDriver driver) {
+		click(By.xpath(XPathButtonNextStep), driver).exec();
+	}
 }

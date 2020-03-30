@@ -6,8 +6,9 @@ import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
 import com.mng.testmaker.conf.Channel;
+import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
+
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 @SuppressWarnings({"static-access"})
@@ -68,20 +69,20 @@ public class PageFichaArtOld extends PageFicha {
         String xpathFichaRef = getXPathIsPage(refSinColor, channel);
         return (state(Present, By.xpath(xpathFichaRef)).wait(maxSeconds).check());
     }
-    
+
+	@Override
+	public void clickAnadirBolsaButtonAndWait() {
+		click(By.xpath(XPathAltaBolsaButton)).type(javascript).exec();
+	}
+
+	@Override
+	public void selectAnadirAFavoritosButton() {
+		click(By.xpath(XPathAnadirAFavoritosButton)).exec();
+	}
+
     @Override
-    public void clickAnadirBolsaButtonAndWait() throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathAltaBolsaButton), TypeOfClick.javascript);
-    }
-    
-    @Override
-    public void selectAnadirAFavoritosButton() throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathAnadirAFavoritosButton));
-    }
-    
-    @Override
-    public void selectRemoveFromFavoritosButton() throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathEliminarDeFavoritosButton));
+    public void selectRemoveFromFavoritosButton() {
+    	click(By.xpath(XPathEliminarDeFavoritosButton)).exec();
     }
     
     @Override
@@ -109,12 +110,12 @@ public class PageFichaArtOld extends PageFicha {
     public String getNameLinkBuscarEnTienda() {
     	return "Botón Buscar en tienda";
     }
-    
-    @Override
-    public void selectBuscarEnTiendaLink() throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathBuscarEnTiendaButton));
-    }
-    
+
+	@Override
+	public void selectBuscarEnTiendaLink() {
+		click(By.xpath(XPathBuscarEnTiendaButton)).exec();
+	}
+
     @Override
     public boolean isVisibleSlider(Slider typeSlider) {
     	return (secSliders.isVisible(typeSlider, this.driver));
@@ -133,11 +134,10 @@ public class PageFichaArtOld extends PageFicha {
     public boolean isVisibleUltimosProductosSection() {
     	return (state(Visible, By.xpath(XPathUltimosProductosSection)).check());
     }
-    
-    public void clickImagenFichaCentral() throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathDivImgCentralDiv));
-    }
 
+	public void clickImagenFichaCentral() {
+		click(By.xpath(XPathDivImgCentralDiv)).exec();
+	}
 
     public int getNumImgsCarruselIzq() {
         return (driver.findElements(By.xpath(XPathImagenCarruselIzq)).size());
@@ -171,10 +171,10 @@ public class PageFichaArtOld extends PageFicha {
         return srcImagen;
     }    
     
-    public void clickImgCarruselIzq(int numImagen) throws Exception {
+    public void clickImgCarruselIzq(int numImagen) {
         String xpathImagenX = "(" + XPathImagenCarruselIzq + ")[" + numImagen + "]";
         moveToElement(By.xpath(xpathImagenX), driver);
-        clickAndWaitLoad(driver, By.xpath(xpathImagenX));
+    	click(By.xpath(xpathImagenX)).exec();
     }
     
     public boolean srcImagenCentralCorrespondsToImgCarrusel(String srcImgCarrusel) {
@@ -204,12 +204,12 @@ public class PageFichaArtOld extends PageFicha {
     public boolean isVisibleFichaConZoom() {
     	return (state(Visible, By.xpath(XPathFichaConZoom)).check());
     }
-    
-    public void selectGuiaDeTallasLink() throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathGuiaDeTallasLink));
-    }
-    
-    public boolean isPresentPageUntil(int maxSeconds) {
-    	return (state(Present, By.xpath(XPathContainerFicha)).wait(maxSeconds).check());
-    }
+
+	public void selectGuiaDeTallasLink() {
+		click(By.xpath(XPathGuiaDeTallasLink)).exec();
+	}
+
+	public boolean isPresentPageUntil(int maxSeconds) {
+		return (state(Present, By.xpath(XPathContainerFicha)).wait(maxSeconds).check());
+	}
 }

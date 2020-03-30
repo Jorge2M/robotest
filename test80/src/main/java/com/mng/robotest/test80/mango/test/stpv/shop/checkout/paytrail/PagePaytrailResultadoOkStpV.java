@@ -26,7 +26,7 @@ public class PagePaytrailResultadoOkStpV {
 	@Step (
 		description="Click el botón para volver a Mango", 
         expected="Aparece la página de resultado Ok de Mango")
-    public static void clickVolverAMangoButton(WebDriver driver) throws Exception {
+    public static void clickVolverAMangoButton(WebDriver driver) {
 		PagePaytrailResultadoOk.clickVolverAMangoButton(driver);
     }
 }

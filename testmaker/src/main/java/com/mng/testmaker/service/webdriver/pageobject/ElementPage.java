@@ -1,4 +1,4 @@
-package com.mng.testmaker.service.webdriver.wrapper;
+package com.mng.testmaker.service.webdriver.pageobject;
 
 import com.mng.testmaker.conf.Channel;
 

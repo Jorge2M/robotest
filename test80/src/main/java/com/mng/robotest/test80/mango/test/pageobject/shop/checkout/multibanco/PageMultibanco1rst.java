@@ -54,7 +54,7 @@ public class PageMultibanco1rst {
         return (state(Present, By.xpath(xpathEmail), driver).check());
     }
 
-    public static void continueToNextPage(Channel channel, WebDriver driver) throws Exception {
+    public static void continueToNextPage(Channel channel, WebDriver driver) {
         //En el caso de móvil hemos de seleccionar el icono de banco para visualizar el botón de continue
         if (channel==Channel.movil_web) {
             String xpathButton = getXPathButtonContinuePay(channel);
@@ -65,15 +65,14 @@ public class PageMultibanco1rst {
         
         clickButtonContinuePay(channel, driver);
     }
-    
-    public static void clickIconoBanco(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathInputIconoMultibanco));
-    }
-    
-    public static void clickButtonContinuePay(Channel channel, WebDriver driver) throws Exception {
-        String xpathButton = getXPathButtonContinuePay(channel);
-        clickAndWaitLoad(driver, By.xpath(xpathButton));
-    }
-    
+
+	public static void clickIconoBanco(WebDriver driver) {
+		click(By.xpath(XPathInputIconoMultibanco), driver).exec();
+	}
+
+	public static void clickButtonContinuePay(Channel channel, WebDriver driver) {
+		String xpathButton = getXPathButtonContinuePay(channel);
+		click(By.xpath(xpathButton), driver).exec();
+	}
 
 }

@@ -55,17 +55,17 @@ public class PageFichaArtNew extends PageFicha {
     }
     
     @Override
-    public void clickAnadirBolsaButtonAndWait() throws Exception {
+    public void clickAnadirBolsaButtonAndWait() {
     	secBolsaButtonAndLinks.clickAnadirBolsaButtonAndWait(this.driver);
     }
     
     @Override
-    public void selectAnadirAFavoritosButton() throws Exception {
+    public void selectAnadirAFavoritosButton() {
         secBolsaButtonAndLinks.selectFavoritosButton(ActionFavButton.Add, driver);
     }
     
     @Override
-    public void selectRemoveFromFavoritosButton() throws Exception {
+    public void selectRemoveFromFavoritosButton() {
         secBolsaButtonAndLinks.selectFavoritosButton(ActionFavButton.Remove, driver);
     }    
     
@@ -95,7 +95,7 @@ public class PageFichaArtNew extends PageFicha {
     }
     
     @Override
-    public void selectBuscarEnTiendaLink() throws Exception {
+    public void selectBuscarEnTiendaLink() {
     	secBolsaButtonAndLinks.clickLinkAndWaitLoad(LinksAfterBolsa.DisponibilidadTienda, this.driver);
     }
     

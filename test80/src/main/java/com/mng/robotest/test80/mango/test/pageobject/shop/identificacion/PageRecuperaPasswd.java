@@ -27,11 +27,11 @@ public class PageRecuperaPasswd {
         driver.findElement(By.xpath(xpathInputCorreo)).clear();
         driver.findElement(By.xpath(xpathInputCorreo)).sendKeys(email);
     }
-    
-    public static void clickEnviar(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(xpathButtonEnviar));
-    }
-    
+
+	public static void clickEnviar(WebDriver driver) {
+		click(By.xpath(xpathButtonEnviar), driver).exec();
+	}
+
     public static boolean isVisibleRevisaTuEmailUntil(int maxSeconds, WebDriver driver) {
     	return (state(Visible, By.xpath(xpathMsgRevisaTuEmail), driver)
     			.wait(maxSeconds).check());

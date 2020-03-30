@@ -23,12 +23,12 @@ public class PageD3DJPTestSelectOption {
     public static void selectOption(OptionD3D option, WebDriver driver) {
         new Select(driver.findElement(By.xpath(XPathSelectOption))).selectByVisibleText(option.toString().replace("_", ""));
     }
-    
-    public static void clickSubmitButton(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonSubmit));
-    }
-    
-    public static void clickResetButton(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonReset));
-    }
+
+	public static void clickSubmitButton(WebDriver driver) {
+		click(By.xpath(XPathButtonSubmit), driver).exec();
+	}
+
+	public static void clickResetButton(WebDriver driver) {
+		click(By.xpath(XPathButtonReset), driver).exec();
+	}
 }

@@ -11,12 +11,12 @@ import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.
 
 public class PagePostfRedirect {
 
-    static String XPathButtonOK = "//form/input[@type='button' and @value[contains(.,'OK')]]"; 
+    static String XPathButtonOK = "//form/input[@type='button' and @value[contains(.,'OK')]]";
     
     /**
      * @return si estamos en la página de redirección con el botón OK que aparece después de introducir el código de seguridad y pulsar "Continuar"
      */
-    public static boolean isPresentButtonOk(WebDriver driver) throws Exception {
+    public static boolean isPresentButtonOk(WebDriver driver) {
     	return (state(Present, By.xpath(XPathButtonOK), driver).check());
     }
     

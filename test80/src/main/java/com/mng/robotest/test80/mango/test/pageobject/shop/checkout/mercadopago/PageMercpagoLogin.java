@@ -75,11 +75,11 @@ public class PageMercpagoLogin {
 //        }
 //    }    
     
-    public static boolean isVisibleBotonContinuarPageId(WebDriver driver) {
-    	return (state(Visible, By.xpath(XPathBotonContinuar), driver).check());
-    }
-    
-    public static void clickBotonContinuar(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathBotonContinuar));
-    }
+	public static boolean isVisibleBotonContinuarPageId(WebDriver driver) {
+		return (state(Visible, By.xpath(XPathBotonContinuar), driver).check());
+	}
+
+	public static void clickBotonContinuar(WebDriver driver) {
+		click(By.xpath(XPathBotonContinuar), driver).exec();
+	}
 }

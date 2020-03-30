@@ -17,8 +17,10 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+
+import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page2IdentCheckout;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro.DataRegType;
 
@@ -195,13 +197,13 @@ public class PageRegistroIni extends PageObjTM {
     	return (state(Visible, By.xpath(XPathButtonRegistrate)).check());
     }
     
-    public void clickButtonRegistrate() throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonRegistrate));
+    public void clickButtonRegistrate() {
+    	click(By.xpath(XPathButtonRegistrate)).exec();
         
         //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
         if (isButtonRegistrateVisible()) {
         	try {
-        		clickAndWaitLoad(driver, By.xpath(XPathButtonRegistrate), TypeOfClick.javascript);
+        		click(By.xpath(XPathButtonRegistrate)).type(javascript).exec();
         	}
         	catch (Exception e) {
         		pLogger.info("Problem in second click to Registrate Button", e);

@@ -96,8 +96,8 @@ public class PageAccesoMisCompras extends PageObjTM implements PageFromFooter {
         inputPasswordBlockSi(password);
     }
     
-    public void clickEntrarBlockSi() throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonEntrarBlockSi));
+    public void clickEntrarBlockSi() {
+    	click(By.xpath(XPathButtonEntrarBlockSi)).exec();
     }
     
     public void inputUserBlockNo(String usuario) {
@@ -114,7 +114,7 @@ public class PageAccesoMisCompras extends PageObjTM implements PageFromFooter {
         inputNumPedidoBlockNo(numPedido);
     }
     
-    public void clickBuscarPedidoBlockNo() throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonBuscarPedidoBlockNo));
+    public void clickBuscarPedidoBlockNo() {
+    	click(By.xpath(XPathButtonBuscarPedidoBlockNo)).exec();
     }
 }

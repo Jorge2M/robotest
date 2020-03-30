@@ -19,10 +19,10 @@ public class ModalDirecFactura extends ModalDireccion {
     public static void selectPoblacion(String poblacion, WebDriver driver) throws Exception {
         selectPoblacion(poblacion, XPathFormModal, driver);
     }
-    
-    public static void selectProvincia(String provincia, WebDriver driver) {
-        selectProvincia(provincia, XPathFormModal, driver);
-    } 
+
+	public static void selectProvincia(String provincia, WebDriver driver) {
+		selectProvincia(provincia, XPathFormModal, driver);
+	} 
 
 	public static boolean isVisibleFormUntil(int maxSeconds, WebDriver driver) {
 		return (state(Visible, By.xpath(XPathFormModal), driver).wait(maxSeconds).check());
@@ -32,12 +32,12 @@ public class ModalDirecFactura extends ModalDireccion {
 		return (state(Visible, By.xpath(XPathButtonUpdate), driver).check());
 	}
 
-	public static void clickActualizar(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathButtonUpdate));
+	public static void clickActualizar(WebDriver driver) {
+		click(By.xpath(XPathButtonUpdate), driver).exec();
 
 		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
 		if (isVisibleButtonActualizar(driver)) {
-			clickAndWaitLoad(driver, By.xpath(XPathButtonUpdate));
+			click(By.xpath(XPathButtonUpdate), driver).exec();
 		}
 	}
 }

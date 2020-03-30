@@ -27,8 +27,8 @@ public class PageMercpagoConf {
         String xpathSection = getXPathSectionReview(channel);
         return (state(Present, By.xpath(xpathSection), driver).wait(maxSeconds).check());
     }
-    
-    public static void clickPagar(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonPagar));
-    }
+
+	public static void clickPagar(WebDriver driver) {
+		click(By.xpath(XPathButtonPagar), driver).exec();
+	}
 }

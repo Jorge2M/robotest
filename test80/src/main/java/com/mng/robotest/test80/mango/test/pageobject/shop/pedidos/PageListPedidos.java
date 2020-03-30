@@ -24,8 +24,8 @@ public class PageListPedidos {
         return (state(Visible, By.xpath(xpathPedido), driver).check());
     }
     
-    public static void selectLineaPedido(String codPedido, WebDriver driver) throws Exception {
+    public static void selectLineaPedido(String codPedido, WebDriver driver) {
         String xpathPedido = getXPath_LinkPedido(codPedido);
-        clickAndWaitLoad(driver, By.xpath(xpathPedido));
+        click(By.xpath(xpathPedido), driver).exec();
     }
 }

@@ -4,8 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop;
 
@@ -68,7 +68,7 @@ public class SecCabeceraShop extends SecCabecera {
     }
     
     @Override
-    public void clickIconoBolsa() throws Exception {
+    public void clickIconoBolsa() {
     	clickIconoAndWait(IconoCabeceraShop.bolsa);
     }
 
@@ -80,7 +80,7 @@ public class SecCabeceraShop extends SecCabecera {
         }
     }
 
-    public void clickIconoAndWait(IconoCabeceraShop icono) throws Exception {
+    public void clickIconoAndWait(IconoCabeceraShop icono) {
     	clickAndWait(icono, driver);
     }
     
@@ -102,7 +102,7 @@ public class SecCabeceraShop extends SecCabecera {
     	driver.findElement(By.xpath(XPathDivNavTools)).click();
     }
     
-	public void hoverIconForShowUserMenuDesktop() throws Exception {
+	public void hoverIconForShowUserMenuDesktop() {
 		int i=0;
 		while (!modalUserSesionShopDesktop.isVisible() && i<3) {
 			if (isIconoInState(IconoCabeceraShop.iniciarsesion, State.Visible)) {
@@ -113,7 +113,7 @@ public class SecCabeceraShop extends SecCabecera {
 			if (modalUserSesionShopDesktop.isVisible()) {
 				break;
 			}
-			Thread.sleep(1000);
+			waitMillis(1000);
 			i+=1;
 		}
 	}

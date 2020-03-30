@@ -25,6 +25,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDeskt
  *
  */
 public class PageLanding {
+	
     static String XPathMainContentPais = "//div[@class[contains(.,'main-content')] and @data-pais]";
     static String XPathContenido = "//div[@class[contains(.,'container-fluid home')]]";
     static String XPathSlider = "//section[@class='entitieswrapper']//div[@class[contains(.,'vsv-slide')]]";

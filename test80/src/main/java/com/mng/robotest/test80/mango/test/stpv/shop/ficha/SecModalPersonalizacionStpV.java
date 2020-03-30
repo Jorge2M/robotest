@@ -2,10 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
+
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -42,7 +43,7 @@ public class SecModalPersonalizacionStpV {
 		description="Seleccionamos el link <b>Añadir bordado</b>",
 		expected="Aparece el modal para la personalización de la prenda")
 	public void selectLinkPersonalizacion () throws Exception {
-		SecModalPersonalizacion.selectElement(ModalElement.AñadirBordadoLink, dCtxSh.channel, driver, TypeOfClick.javascript);
+		SecModalPersonalizacion.selectElement(ModalElement.AñadirBordadoLink, dCtxSh.channel, driver, TypeClick.javascript);
 		validateModal(3);
 	}
 
@@ -76,7 +77,7 @@ public class SecModalPersonalizacionStpV {
 		description="Seleccionamos la opción <b>Un icono</b>",
 		expected="Aparece la lista de iconos")
 	public void selectIconCustomization() throws Exception {
-		SecModalPersonalizacion.selectElement(ModalElement.ButtonUnIcono, dCtxSh.channel, driver, TypeOfClick.javascript);
+		SecModalPersonalizacion.selectElement(ModalElement.ButtonUnIcono, dCtxSh.channel, driver, TypeClick.javascript);
 	    validationIconSelection(2);
 	}
 
@@ -94,7 +95,7 @@ public class SecModalPersonalizacionStpV {
 		if (dCtxSh.channel == Channel.desktop) {
 			SecModalPersonalizacion.selectElement(ModalElement.IconSelecction, dCtxSh.channel, driver);
 		} else {
-			SecModalPersonalizacion.selectElement(ModalElement.IconSelecction, dCtxSh.channel, driver, TypeOfClick.javascript);
+			SecModalPersonalizacion.selectElement(ModalElement.IconSelecction, dCtxSh.channel, driver, TypeClick.javascript);
 		}
 	}
 

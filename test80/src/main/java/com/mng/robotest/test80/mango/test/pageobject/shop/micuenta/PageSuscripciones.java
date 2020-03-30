@@ -36,8 +36,8 @@ public class PageSuscripciones {
         driver.findElement(By.xpath(getXPATH_radioNewsletterClickable(idRadio))).click();
     }
     
-    public static void clickGuardarCambios(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonGuardarCambios));
+    public static void clickGuardarCambios(WebDriver driver) {
+    	click(By.xpath(XPathButtonGuardarCambios), driver).exec();
     }
     
     public static boolean isPageResOKUntil(int maxSeconds, WebDriver driver) { 

@@ -13,8 +13,8 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
+
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
@@ -96,23 +96,20 @@ public class Page2DatosPagoCheckoutMobil {
     public static boolean isPageUntil(int maxSecondsToWait, WebDriver driver) {
         return isClickableButtonFinalizarCompraUntil(maxSecondsToWait, driver);
     }
-    
-    /**
-     * Selección del apartado "2. Datos de pago"
-     */
-    public static void clickLink2DatosPagoAndWait(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathLink2DatosPago));
-        isPageUntil(2, driver);
-    }
 
-	public static void clickLink2DatosPagoIfVisible(WebDriver driver) throws Exception {
+	public static void clickLink2DatosPagoAndWait(WebDriver driver) {
+		click(By.xpath(XPathLink2DatosPago), driver).exec();
+		isPageUntil(2, driver);
+	}
+
+	public static void clickLink2DatosPagoIfVisible(WebDriver driver) {
 		if (state(Visible, By.xpath(XPathLink2DatosPago), driver).check()) {
 			clickLink2DatosPagoAndWait(driver);
 		}
 	}
 
 	public static void clickButtonFinalizarCompra(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathButtonFinalizarCompra), TypeOfClick.javascript);    
+		click(By.xpath(XPathButtonFinalizarCompra), driver).type(javascript).exec();
 	}
 
 	public static boolean isClickableButtonFinalizarCompraUntil(int maxSeconds, WebDriver driver) {
@@ -203,12 +200,12 @@ public class Page2DatosPagoCheckoutMobil {
         PageCheckoutWrapper.waitUntilNoDivLoading(driver, 10);
         waitForPageLoaded(driver); //For avoid StaleElementReferenceException
     }
-    
-    public static void clickLinkFormasPagoFor(TypeActionLinkFP typeAction, WebDriver driver) throws Exception {
-    	By formasPagosBy = By.xpath(getXPathLinkFormasPagoFor(typeAction));
-    	WebdrvWrapp.clickAndWaitLoad(driver, formasPagosBy, TypeOfClick.javascript);
-    }
-    
+
+	public static void clickLinkFormasPagoFor(TypeActionLinkFP typeAction, WebDriver driver) throws Exception {
+		By formasPagosBy = By.xpath(getXPathLinkFormasPagoFor(typeAction));
+		click(formasPagosBy, driver).type(javascript).exec();
+	}
+
     public static void moveToFirstMetodoPagoLine(WebDriver driver) {
     	moveToElement(By.xpath(XPathLineaPagoLayoutLinea), driver);
     }
@@ -264,8 +261,7 @@ public class Page2DatosPagoCheckoutMobil {
         if (!driver.findElement(By.xpath(xpathClickMetodoPago)).isDisplayed()) {
         	searchMetPagoLayoutLineaInSections(nombrePago, driver);
         }
-        
-        clickAndWaitLoad(driver, By.xpath(xpathClickMetodoPago));
+        click(By.xpath(xpathClickMetodoPago), driver).exec();
     }
 
 	/**
@@ -316,8 +312,8 @@ public class Page2DatosPagoCheckoutMobil {
 		return (state(Visible, By.xpath(xpathRadioTrjGuardada), driver).check());
 	}
 
-	public static void clickRadioTrjGuardada(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathRadioTrjGuardada));
+	public static void clickRadioTrjGuardada(WebDriver driver) {
+		click(By.xpath(XPathRadioTrjGuardada), driver).exec();
 	}
 
 	public static void inputCvcTrjGuardadaIfVisible(String cvc, WebDriver driver) {

@@ -16,7 +16,7 @@ public class PagePaypalSelectPago {
     	return (state(Visible, By.xpath(XPathMetPagos), driver).wait(maxSeconds).check());
     }
 
-    public static void clickContinuarButton(WebDriver driver) throws Exception {
-    	clickAndWaitLoad(driver, By.xpath(XPathContinueButton));
-    }
+	public static void clickContinuarButton(WebDriver driver) {
+		click(By.xpath(XPathContinueButton), driver).exec();
+	}
 }

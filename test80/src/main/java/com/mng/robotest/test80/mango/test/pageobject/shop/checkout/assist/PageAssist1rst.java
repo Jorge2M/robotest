@@ -100,14 +100,14 @@ public class PageAssist1rst {
         waitForBotonAvailable(channel, 1/*maxSecondsToWait*/, driver);
     }
     
-    public static void clickBotonPago(Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web) {
-            clickAndWaitLoad(driver, By.xpath(XPathBotonPagoMobil));
-        } else {
-            clickAndWaitLoad(driver, By.xpath(XPathBotonPagoDesktop));
-        }
-    }
-    
+	public static void clickBotonPago(Channel channel, WebDriver driver) {
+		if (channel==Channel.movil_web) {
+			click(By.xpath(XPathBotonPagoMobil), driver).exec();
+		} else {
+			click(By.xpath(XPathBotonPagoDesktop), driver).exec();
+		}
+	}
+
     public static void waitForBotonAvailable(Channel channel, int maxSecondsToWait, WebDriver driver) {
         String xpathBoton = getXPath_buttonPago(channel);
         new WebDriverWait(driver, maxSecondsToWait).until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathBoton)));

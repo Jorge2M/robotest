@@ -9,10 +9,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+
+import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Color;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 
@@ -22,20 +24,19 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
  * @author jorge.munoz
  *
  */
-public class SecMultiFiltrosMobil implements SecFiltros {
+public class SecMultiFiltrosMobil extends PageObjTM implements SecFiltros {
     
 	private final static String XPathFiltrarYOrdenarButton = "//button[@class[contains(.,'-filters-btn')]]";
 	private final static String XPathButtonAplicarFiltros = "//button[@class[contains(.,'filters-apply')]]";
 	
-	WebDriver driver;
 	PageGaleria pageGaleria = null;
 	
 	private SecMultiFiltrosMobil(WebDriver driver, PageGaleria pageGaleria) {
-		this.driver = driver;
+		super(driver);
 		this.pageGaleria = pageGaleria;
 	}
 	
-	public static SecMultiFiltrosMobil getInstance(AppEcom app, WebDriver driver) throws Exception {
+	public static SecMultiFiltrosMobil getInstance(AppEcom app, WebDriver driver) {
 		PageGaleria pageGaleria = PageGaleria.getNew(Channel.movil_web, app, driver);
 		return (new SecMultiFiltrosMobil(driver, pageGaleria));
 	}
@@ -46,12 +47,12 @@ public class SecMultiFiltrosMobil implements SecFiltros {
     
     @Override
     public void selectOrdenacion(FilterOrdenacion ordenacion) throws Exception {
-        selectFiltroAndWaitLoad(FiltroMobil.Ordenar, ordenacion.getValueForMobil(), driver);        
+        selectFiltroAndWaitLoad(FiltroMobil.Ordenar, ordenacion.getValueForMobil(), driver);
     }
     
     @Override
-    public void selectCollection(FilterCollection collection) throws Exception {
-        selectFiltroAndWaitLoad(FiltroMobil.Coleccion, collection.getValueMobil(), driver);        
+    public void selectCollection(FilterCollection collection) {
+        selectFiltroAndWaitLoad(FiltroMobil.Coleccion, collection.getValueMobil(), driver);
     }
     
     @Override
@@ -77,7 +78,7 @@ public class SecMultiFiltrosMobil implements SecFiltros {
      * @return el número de artículos que aparecen en la galería después de seleccionar el filtro
      */
     @Override
-    public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToFilter) throws Exception {
+    public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToFilter) {
         selectFiltrosAndWaitLoad(FiltroMobil.Colores, Color.getListNamesFiltros(colorsToFilter), driver);
         int maxSecondsToWait = 10;
         int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(maxSecondsToWait);
@@ -94,22 +95,21 @@ public class SecMultiFiltrosMobil implements SecFiltros {
      * Selecciona un determinado filtro de la galería de móvil
      * @param valor atributo 'value' a nivel de la option del filtro (select)
      */
-    private void selectFiltroAndWaitLoad(FiltroMobil typeFiltro, String textFiltro, WebDriver driver) 
-    throws Exception {
+    private void selectFiltroAndWaitLoad(FiltroMobil typeFiltro, String textFiltro, WebDriver driver) {
     	List<String> listTextFiltros = Arrays.asList(textFiltro);
     	selectFiltrosAndWaitLoad(typeFiltro, listTextFiltros, driver);
     }
     
-    private void selectFiltrosAndWaitLoad(FiltroMobil typeFiltro, List<String> listTextFiltros, WebDriver driver) 
-    throws Exception {
+    private void selectFiltrosAndWaitLoad(FiltroMobil typeFiltro, List<String> listTextFiltros, WebDriver driver) {
         goAndClickFiltroButton(driver);
-    	for (String textFiltro : listTextFiltros)
+    	for (String textFiltro : listTextFiltros) {
     		clickFiltroOption(typeFiltro, textFiltro, driver);
+    	}
         clickApplicarFiltrosButton(driver);
         pageGaleria.isVisibleArticuloUntil(1, 2);
     }
     
-    private void clickFiltroOption(FiltroMobil typeFiltro, String textFiltro, WebDriver driver) throws Exception {
+    private void clickFiltroOption(FiltroMobil typeFiltro, String textFiltro, WebDriver driver) {
         WebElement filtroLinea = driver.findElement(By.xpath(typeFiltro.getXPathLineaFiltroMulti()));
         filtroLinea.click();
         waitForPageLoaded(driver);
@@ -119,14 +119,14 @@ public class SecMultiFiltrosMobil implements SecFiltros {
         waitForPageLoaded(driver);
     }
     
-    private void clickApplicarFiltrosButton(WebDriver driver) throws Exception {
-    	clickAndWaitLoad(driver, By.xpath(XPathButtonAplicarFiltros));
+    private void clickApplicarFiltrosButton(WebDriver driver) {
+    	click(By.xpath(XPathButtonAplicarFiltros)).exec();
     }
     
-    private void goAndClickFiltroButton(WebDriver driver) throws Exception {
+    private void goAndClickFiltroButton(WebDriver driver) {
     	if (state(Visible, By.xpath(XPathFiltrarYOrdenarButton), driver).check()) {
         	moveToElement(By.xpath(XPathFiltrarYOrdenarButton), driver);
-            Thread.sleep(500);
+            waitMillis(500);
             
             //Scrollamos un poquito hacia arriba para asegurar
             ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-50)", "");
@@ -136,10 +136,10 @@ public class SecMultiFiltrosMobil implements SecFiltros {
         waitAndClickFiltroButton(maxSecondsWait, driver);
     }
     
-    private void waitAndClickFiltroButton(int maxSeconds, WebDriver driver) throws Exception {
+    private void waitAndClickFiltroButton(int maxSeconds, WebDriver driver) {
         if (!isOpenFiltrosUntil(0, driver)) {
         	state(Clickable, By.xpath(XPathFiltrarYOrdenarButton), driver).wait(maxSeconds).check();
-            clickAndWaitLoad(driver, By.xpath(XPathFiltrarYOrdenarButton), TypeOfClick.javascript);
+        	click(By.xpath(XPathFiltrarYOrdenarButton)).type(javascript).exec();
             isOpenFiltrosUntil(maxSeconds, driver);
         }        
     }

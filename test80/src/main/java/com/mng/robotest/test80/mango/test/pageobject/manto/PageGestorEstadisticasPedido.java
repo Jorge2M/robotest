@@ -56,8 +56,8 @@ public class PageGestorEstadisticasPedido {
 		driver.findElement(By.xpath(XPathTodosLosZalandosOption)).click();
 	}
 	
-	private static void clickMostrarPedidosButton(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathMostrarPedidosButton), 60);
+	private static void clickMostrarPedidosButton(WebDriver driver) {
+		click(By.xpath(XPathMostrarPedidosButton), driver).waitLoadPage(60).exec();
 		state(Invisible, By.xpath(XPathLoadPopupImage), driver)
 				.wait(60).check();
 	}
@@ -85,8 +85,8 @@ public class PageGestorEstadisticasPedido {
 		driver.findElement(By.xpath(XPathRadiusButtonDiaAnterior)).click();
 	}
 	
-	private static void clickCompararButton(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathCompararButton), 60);
+	private static void clickCompararButton(WebDriver driver) {
+		click(By.xpath(XPathCompararButton), driver).waitLoadPage(60).exec();
 		state(Invisible, By.xpath(XPathLoadPopupImage), driver)
 			.wait(60).check();
 	}

@@ -6,9 +6,8 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.conf.Channel;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 
 public class PageGestorCheques extends PageObjTM {
@@ -151,9 +150,8 @@ public class PageGestorCheques extends PageObjTM {
 		driver.findElement(By.xpath(XPathTextArea)).sendKeys(mail);
 	}
 	
-	private void clickCorreoReceptorButtonAndWaitLoad() throws Exception {
-		WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(XPathCorreoReceptorButton));
-		
+	private void clickCorreoReceptorButtonAndWaitLoad() {
+		click(By.xpath(XPathCorreoReceptorButton)).exec();
 	}
 
 	public boolean comprobarNumeroPedidos(int numPedidosEsther) {
@@ -166,10 +164,11 @@ public class PageGestorCheques extends PageObjTM {
 		return (state(Visible, By.xpath(xpath)).wait(20).check());
 	}
 
-	public String clickPedido(int numFila, String mail) throws Exception {
-	    String pedido = getTextPedidoFromXPath(numFila, mail);
-		WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(getXPathLinkPedido(numFila, mail)));
-	    return pedido; 
+	public String clickPedido(int numFila, String mail) {
+		String pedido = getTextPedidoFromXPath(numFila, mail);
+		By byElem = By.xpath(getXPathLinkPedido(numFila, mail));
+		click(byElem).exec();
+		return pedido; 
 	}
 
 	public boolean comprobarMailDetallesCheque(String mail) {

@@ -8,10 +8,10 @@ import org.openqa.selenium.support.ui.Select;
 
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
+
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
-import com.mng.robotest.test80.mango.test.utils.ImporteScreen; 
+import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 public class Page1EnvioCheckoutMobil {
 	
@@ -120,9 +120,9 @@ public class Page1EnvioCheckoutMobil {
 		return (state(Visible, By.xpath(XPathAceptarPromoEmpl), driver).check());
 	}
 
-	public static void clickButtonAceptarPromoEmpl(WebDriver driver) throws Exception {
+	public static void clickButtonAceptarPromoEmpl(WebDriver driver) {
 		waitForPageLoaded(driver); //For avoid StaleElement exception
-		clickAndWaitLoad(driver, By.xpath(XPathAceptarPromoEmpl));
+		click(By.xpath(XPathAceptarPromoEmpl), driver).exec();
 
 		// Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no
 		// funciona así que ejecutamos un 2o
@@ -147,8 +147,8 @@ public class Page1EnvioCheckoutMobil {
 		driver.findElement(By.xpath(XPathInputPromo)).sendKeys(codigoPromo);
 	}
 
-	public static void clickAceptarPromo(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathButtonAplicarPromo));
+	public static void clickAceptarPromo(WebDriver driver) {
+		click(By.xpath(XPathButtonAplicarPromo), driver).exec();
 		
 //		// Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no
 //		// funciona así que ejecutamos un 2o
@@ -157,10 +157,10 @@ public class Page1EnvioCheckoutMobil {
 //		}
 	}
 	
-	public static void clickEliminarValeIfExists(WebDriver driver) throws Exception {
+	public static void clickEliminarValeIfExists(WebDriver driver) {
 		By byEliminar = By.xpath(XPathLinkCancelarCodigo);
 		if (state(Visible, byEliminar, driver).check()) {
-			clickAndWaitLoad(driver, byEliminar);
+			click(byEliminar, driver).exec();
 		}
 	}
 	public static String getImporteDescuentoEmpleado(WebDriver driver) {
@@ -193,11 +193,10 @@ public class Page1EnvioCheckoutMobil {
 		selectMetodoEnvioAfterLinkOtrosIfNeeded(tipoTransporte, driver);
 	}
 
-	public static void selectMetodoEnvioAfterLinkOtrosIfNeeded(TipoTransporte tipoTransporte, WebDriver driver)
-	throws Exception {
+	public static void selectMetodoEnvioAfterLinkOtrosIfNeeded(TipoTransporte tipoTransporte, WebDriver driver) {
 		openOtrosMetodosDeEnvio(driver);
 		String xpathLink = getXPathRadioMetodo(tipoTransporte);
-		clickAndWaitLoad(driver, By.xpath(xpathLink), TypeOfClick.javascript);
+		click(By.xpath(xpathLink), driver).type(javascript).exec();
 	}
 
 	public static boolean isPresentBlockMetodo(TipoTransporte tipoTransporte, WebDriver driver) {
@@ -205,9 +204,9 @@ public class Page1EnvioCheckoutMobil {
 		return (state(Present, By.xpath(xpathBLock), driver).check());
 	}
 
-	public static void openOtrosMetodosDeEnvio(WebDriver driver) throws Exception {
+	public static void openOtrosMetodosDeEnvio(WebDriver driver) {
 		if (isClosedOtrosMetodos(driver)) {
-			clickAndWaitLoad(driver, By.xpath(XPathLinkOtrosMetEnvioClosed), TypeOfClick.javascript);
+			click(By.xpath(XPathLinkOtrosMetEnvioClosed), driver).type(javascript).exec();
 		}
 	}
 
@@ -250,17 +249,17 @@ public class Page1EnvioCheckoutMobil {
 		driver.findElement(By.xpath(XPathLinkEditDirecEnvio)).click();
 	}
 
-	public static void clickContinuar(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathBotonContinuar));
+	public static void clickContinuar(WebDriver driver) {
+		click(By.xpath(XPathBotonContinuar), driver).exec();
 
 		// Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no
 		// funciona así que ejecutamos un 2o
 		if (isVisibleButtonContinuarUntil(2, driver)) {
-			clickAndWaitLoad(driver, By.xpath(XPathBotonContinuar), TypeOfClick.javascript);
+			click(By.xpath(XPathBotonContinuar), driver).type(javascript).exec();
 		}
 	}
 
-	public static void clickContinuarAndWaitPage2(WebDriver driver) throws Exception {
+	public static void clickContinuarAndWaitPage2(WebDriver driver) {
 		clickContinuar(driver);
 		Page2DatosPagoCheckoutMobil.isPageUntil(2/* maxSecondsToWait */, driver);
 	}

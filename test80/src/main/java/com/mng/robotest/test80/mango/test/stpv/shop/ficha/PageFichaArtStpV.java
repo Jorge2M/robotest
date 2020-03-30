@@ -125,7 +125,7 @@ public class PageFichaArtStpV {
     @Step (
     	description="Seleccionar el color con código <b>#{codigoColor}</b>", 
         expected="Se muestra la ficha correspondiente al color seleccionado")
-    public void selectColor(String codigoColor) throws Exception {
+    public void selectColor(String codigoColor) {
         if (pageFicha.secDataProduct.isClickableColor(codigoColor, driver)) {
             pageFicha.secDataProduct.selectColorWaitingForAvailability(codigoColor, driver);
         }
@@ -191,7 +191,7 @@ public class PageFichaArtStpV {
     @Step (
     	description="Seleccionar el botón <b>\"Añadir a la bolsa\"</b>", 
         expected="El comportamiento es el esperado... :-)")
-    public void selectAnadirALaBolsaStep() throws Exception {
+    public void selectAnadirALaBolsaStep() {
     	pageFicha.clickAnadirBolsaButtonAndWait();
     }
     
@@ -265,7 +265,7 @@ public class PageFichaArtStpV {
     @Step (
     	description="Cambiar de color dentro de la misma ficha volviendo al color/talla originales",
         expected="El articulo es cambiado de color.")
-    public void changeColorGarment() throws Exception {
+    public void changeColorGarment() {
         ArticuloScreen articulo = pageFicha.getArticuloObject();
         ArrayList<String> colors = SecDataProduct.getColorsGarment(driver);
         String codeColor = colors.get(0);
@@ -308,7 +308,7 @@ public class PageFichaArtStpV {
 	@Step (
 		description="Seleccionar el botón <b>\"Eliminar de Favoritos\"</b>", 
 		expected="El artículo se elimina de Favoritos")
-	public void selectRemoveFromFavoritos() throws Exception {
+	public void selectRemoveFromFavoritos() {
 		pageFicha.selectRemoveFromFavoritosButton();
 		validateVisibleButtonFavoritos(ActionFavButton.Add);
 	}
@@ -330,9 +330,9 @@ public class PageFichaArtStpV {
     @Step (
     	description="Seleccionar <b>" + tagNameLink + "</b>", 
         expected="Aparece un resultado de la búsqueda correcta")
-    public void selectBuscarEnTiendaButton() throws Exception {
+    public void selectBuscarEnTiendaButton() {
     	TestMaker.getCurrentStepInExecution().replaceInDescription(tagNameLink, pageFicha.getNameLinkBuscarEnTienda());
-        pageFicha.selectBuscarEnTiendaLink();             
+        pageFicha.selectBuscarEnTiendaLink();
         ModalBuscadorTiendasStpV.validaBusquedaConResultados(driver);
     }
     
@@ -402,8 +402,7 @@ public class PageFichaArtStpV {
     @Step (
 		description="Seleccionamos el link #{productNav}</b>", 
         expected="Aparece una página de ficha correcta")
-    public void selectLinkNavigation(ProductNav productNav, DataCtxShop dCtxSh, String refProductOrigin) 
-    throws Exception {
+    public void selectLinkNavigation(ProductNav productNav, DataCtxShop dCtxSh, String refProductOrigin) {
     	pageFicha.secDataProduct.selectLinkNavigation(productNav, driver);
         if (productNav==ProductNav.Prev) {
             validateIsFichaArtDisponible(refProductOrigin, 3);
@@ -446,9 +445,9 @@ public class PageFichaArtStpV {
     @Step (
     	description="Seleccionar la imagen/ficha central", 
     	expected="Se produce un zoom sobre la imagen")
-    public void selectImagenCentralFichaOld() throws Exception {
+    public void selectImagenCentralFichaOld() {
         String pngImgCentralOriginal = ((PageFichaArtOld)pageFicha).getSrcImagenCentral();
-        ((PageFichaArtOld)pageFicha).clickImagenFichaCentral();       
+        ((PageFichaArtOld)pageFicha).clickImagenFichaCentral();
                     
         //Validaciones
         checkImgCentralAfterZoom(pngImgCentralOriginal);

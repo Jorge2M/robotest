@@ -42,8 +42,8 @@ public class PageYandexMoney {
     public static boolean isVisibleInputImport(WebDriver driver) {
     	return (state(Visible, By.xpath(XPathInputImport), driver).check());
     }
-    
-    public static void clickPayButton(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathPayButton));
-    }
+
+	public static void clickPayButton(WebDriver driver) {
+		click(By.xpath(XPathPayButton), driver).exec();
+	}
 }

@@ -4,9 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
+import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
@@ -40,7 +41,7 @@ public class PageIdentificacion {
 		return avisoCredencialesKO;
 	}
 
-	public static void inputUserPassword(String usuario, String password, WebDriver driver) throws Exception {
+	public static void inputUserPassword(String usuario, String password, WebDriver driver) {
 		By byInput = By.xpath(XPathInputUser);
 		driver.findElement(byInput).clear();
 		waitMillis(250);
@@ -68,8 +69,7 @@ public class PageIdentificacion {
         iniciarSesion(dCtxSh.userConnected, dCtxSh.passwordUser, dCtxSh.channel, dCtxSh.appE, driver);
     }
      
-    public static void iniciarSesion(String user, String password, Channel channel, AppEcom appE, WebDriver driver) 
-    throws Exception {
+    public static void iniciarSesion(String user, String password, Channel channel, AppEcom appE, WebDriver driver) {
         clickIniciarSesionAndWait(channel, appE, driver);
         int maxSecondsToWait = 10;
         isVisibleUserUntil(maxSecondsToWait, driver);
@@ -80,12 +80,12 @@ public class PageIdentificacion {
         ModalLoyaltyAfterLogin.closeModalIfVisible(driver);
     }    
     
-    public static void clickButtonEntrar(WebDriver driver) throws Exception {
-    	clickAndWaitLoad(driver, By.xpath(XPathSubmitButton));
+    public static void clickButtonEntrar(WebDriver driver) {
+    	click(By.xpath(XPathSubmitButton), driver).exec();
 
     	//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
         if (isButtonEntrarVisible(driver)) {
-        	clickAndWaitLoad(driver, By.xpath(XPathSubmitButton), TypeOfClick.javascript);
+        	click(By.xpath(XPathSubmitButton), driver).type(javascript).exec();
         }
     }
     
@@ -97,7 +97,7 @@ public class PageIdentificacion {
      * Seleccionamos el link "Iniciar Sesión" y esperamos a que los campos de input estén disponibles
      */
     @SuppressWarnings("static-access")
-    public static void clickIniciarSesionAndWait(Channel channel, AppEcom app, WebDriver driver) throws Exception {
+    public static void clickIniciarSesionAndWait(Channel channel, AppEcom app, WebDriver driver) {
         if (channel==Channel.movil_web) {
             //En el caso de mobile nos tenemos que asegurar que están desplegados los menús
         	SecCabecera secCabeceraMobil = SecCabecera.getNew(Channel.movil_web, app, driver);
@@ -122,8 +122,8 @@ public class PageIdentificacion {
     public static boolean isErrorEmailoPasswordKO(WebDriver driver) {
     	return (state(Present, By.xpath(XPathErrorCredencialesKO), driver).check());
     }
-    
-    public static void clickHasOlvidadoContrasenya(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathHasOlvidadoContrasenya));
-    }
+
+	public static void clickHasOlvidadoContrasenya(WebDriver driver) {
+		click(By.xpath(XPathHasOlvidadoContrasenya), driver).exec();
+	}
 }

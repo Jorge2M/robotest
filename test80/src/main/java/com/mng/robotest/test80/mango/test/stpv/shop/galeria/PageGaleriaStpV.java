@@ -25,7 +25,8 @@ import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha.TypeFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollection;
@@ -69,7 +70,7 @@ public class PageGaleriaStpV {
     final Channel channel;
     final AppEcom app;
     
-    private PageGaleriaStpV(Channel channel, AppEcom app, WebDriver driver) throws Exception {
+    private PageGaleriaStpV(Channel channel, AppEcom app, WebDriver driver) {
     	this.driver = driver;
     	this.channel = channel;
     	this.app = app;
@@ -79,7 +80,7 @@ public class PageGaleriaStpV {
     	this.pageGaleria = PageGaleria.getNew(channel, app, driver);
     }
     
-    public static PageGaleriaStpV getInstance(Channel channel, AppEcom app, WebDriver driver) throws Exception {
+    public static PageGaleriaStpV getInstance(Channel channel, AppEcom app, WebDriver driver) {
         return (new PageGaleriaStpV(channel, app, driver));
     }
     
@@ -114,8 +115,7 @@ public class PageGaleriaStpV {
     @Step (
     	description="Seleccionar el artículo #{locationArt}", 
         expected="Aparece la ficha del artículo seleccionado")
-    public DataFichaArt selectArticulo(LocationArticle locationArt, DataCtxShop dCtxSh) 
-    throws Exception {
+    public DataFichaArt selectArticulo(LocationArticle locationArt, DataCtxShop dCtxSh) {
         DataFichaArt datosArticulo = new DataFichaArt();
         String urlGaleria = driver.getCurrentUrl();
         
@@ -150,7 +150,7 @@ public class PageGaleriaStpV {
 	@Step (
 		description="Posicionarse sobre el artículo en la posición <b>#{posArticulo}</b>, esperar que aparezca el link \"Añadir\" y seleccionarlo", 
 		expected="Aparece la capa con la información de las tallas")
-	private void showTallasOutletAndMovil(int posArticulo) throws Exception {
+	private void showTallasOutletAndMovil(int posArticulo) {
 		pageGaleria.showTallasArticulo(posArticulo);
 		checkIsVisibleCapaInfoTallas(posArticulo, 1);
 	}
@@ -158,7 +158,7 @@ public class PageGaleriaStpV {
 	@Step (
 		description="Posicionarse sobre el artículo en la posición <b>#{posArticulo}</b>", 
 		expected="Aparece la capa con la información de las tallas")
-	private void showTallasShopDesktop(int posArticulo) throws Exception {
+	private void showTallasShopDesktop(int posArticulo) {
 		pageGaleria.showTallasArticulo(posArticulo);
 		checkIsVisibleCapaInfoTallas(posArticulo, 1);
 	}
@@ -191,8 +191,7 @@ public class PageGaleriaStpV {
     	description="Seleccionamos la primera talla no disponible del listado",
         expected="Se abre el modal de avimase de la prenda",
         saveHtmlPage=SaveWhen.Always)
-    public void selectTallaNoDisponibleArticulo()
-            throws Exception {
+    public void selectTallaNoDisponibleArticulo() {
         PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
         pageGaleriaDesktop.selectTallaArticleNotAvalaible();
     }
@@ -399,7 +398,7 @@ public class PageGaleriaStpV {
         String srcImg1erArt = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
         step.replaceInDescription(tagSrcPng2oColor, colorToClick.getAttribute("src"));
        
-        WebdrvWrapp.forceClick(driver, colorToClick, null);
+        click(colorToClick, driver).exec();
         Thread.sleep(100);
         
         String srcImgAfterClickColor = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
@@ -610,8 +609,7 @@ public class PageGaleriaStpV {
     @Step (
     	description="Seleccionar el link del listado a <b>#{numColumnas.name()} columnas</b>", 
         expected="Aparece un listado de artículos a #{numColumnas.name()} columnas")
-    public NombreYRefList selectListadoXColumnasDesktop(NumColumnas numColumnas, NombreYRefList listArticlesGaleriaAnt) 
-    throws Exception {
+    public NombreYRefList selectListadoXColumnasDesktop(NumColumnas numColumnas, NombreYRefList listArticlesGaleriaAnt) {
 	    ((PageGaleriaDesktop)pageGaleria).clickLinkColumnas(numColumnas);
 	    checkIsVisibleLayoutListadoXcolumns(numColumnas);
        
@@ -890,14 +888,14 @@ public class PageGaleriaStpV {
     @Step (
     	description="Seleccionamos el link <b>Más Info</b>", 
         expected="Se hace visible el aviso legal")
-    public static void clickMoreInfoBannerRebajasJun2018(WebDriver driver) throws Exception {
-    	PageGaleriaDesktop.secBannerHead.clickLinkInfoRebajas(driver);     
+    public static void clickMoreInfoBannerRebajasJun2018(WebDriver driver) {
+    	PageGaleriaDesktop.secBannerHead.clickLinkInfoRebajas(driver);
     	checkAfterClickInfoRebajas(driver);
     }
     
     @SuppressWarnings("static-access")
     @Validation
-    private static ChecksTM checkAfterClickInfoRebajas(WebDriver driver) throws Exception {
+    private static ChecksTM checkAfterClickInfoRebajas(WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
 	    int maxSecondsToWait = 1;
     	validations.add(
@@ -911,7 +909,7 @@ public class PageGaleriaStpV {
     }
     
 	@Validation
-    public ChecksTM validateGaleriaAfeterSelectMenu(DataCtxShop dCtxSh) throws Exception {
+    public ChecksTM validateGaleriaAfeterSelectMenu(DataCtxShop dCtxSh) {
 		ChecksTM validations = ChecksTM.getNew();
 		int maxSecondsToWaitArticle = 3;
 		int maxSecondsToWaitIcon = 2;

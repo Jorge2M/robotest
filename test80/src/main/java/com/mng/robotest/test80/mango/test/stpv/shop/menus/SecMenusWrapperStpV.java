@@ -245,9 +245,9 @@ public class SecMenusWrapperStpV {
     @Step (
     	description="Seleccionar filtro de colecciones <b>#{typeMenu}</b>", 
         expected="Aparece una galería con artículos de temporadas#{typeMenu.getListTempArticles()}")
-    public void selectFiltroCollection(FilterCollection typeMenu) throws Exception {
+    public void selectFiltroCollection(FilterCollection typeMenu) {
     	SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(channel, app, driver);
-    	filtrosCollection.click(typeMenu);        
+    	filtrosCollection.click(typeMenu);
         if (channel==Channel.desktop) {
 	        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app, driver);
 	        if (typeMenu == FilterCollection.sale) {

@@ -46,8 +46,8 @@ public class ModalDetalleMisCompras extends PageObjTM {
         driver.findElement(By.xpath(XPathAspaForClose)).click();
     }
     
-    public void clickBuscarTallaTiendaButton() throws Exception {
-    	clickAndWaitLoad(driver, By.xpath(XPathBuscarTallaTiendaButton), 3);
+    public void clickBuscarTallaTiendaButton() {
+    	click(By.xpath(XPathBuscarTallaTiendaButton)).waitLoadPage(3).exec();
     }
 
 	public boolean isReferenciaValidaModal(String idArticulo) {
@@ -56,8 +56,8 @@ public class ModalDetalleMisCompras extends PageObjTM {
 		return idArticulo.replace(" ", "").equals(idArticuloModal);
 	}
 
-	public void gotoListaMisCompras() throws Exception {
+	public void gotoListaMisCompras() {
 		String xpath = getXPathLinkToMisCompras();
-		clickAndWaitLoad(driver, By.xpath(xpath));
+		click(By.xpath(xpath)).exec();
 	}
 }

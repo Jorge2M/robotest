@@ -26,7 +26,7 @@ public class PageDotpayPaymentChannelStpV {
 	@Step (
 		description="Seleccionar el <b>#{numPayment}o</b> de los Canales de Pago", 
         expected="Se scrolla y se hace visible el bloque de introducción del nombre")
-    public static void selectPayment(int numPayment, WebDriver driver) throws Exception {
+    public static void selectPayment(int numPayment, WebDriver driver) {
 		PageDotpayPaymentChannel.clickPayment(numPayment, driver);
 		isVisibleBlockInputNombre(1, driver);
     }
@@ -40,10 +40,10 @@ public class PageDotpayPaymentChannelStpV {
     
 	@Step (
 		description="Introducir el nombre <b>#{nameFirst} / #{nameSecond}</b> y seleccionar el botón para Confirmar", 
-        expected="Aparece la página de pago")
-    public static void inputNameAndConfirm(String nameFirst, String nameSecond, WebDriver driver) throws Exception {
-        PageDotpayPaymentChannel.sendInputNombre(nameFirst, nameSecond, driver);
-        PageDotpayPaymentChannel.clickButtonConfirm(driver);
-        PageDotpayAcceptSimulationStpV.validateIsPage(driver);
-    }    
+		expected="Aparece la página de pago")
+	public static void inputNameAndConfirm(String nameFirst, String nameSecond, WebDriver driver) {
+		PageDotpayPaymentChannel.sendInputNombre(nameFirst, nameSecond, driver);
+		PageDotpayPaymentChannel.clickButtonConfirm(driver);
+		PageDotpayAcceptSimulationStpV.validateIsPage(driver);
+	}
 }

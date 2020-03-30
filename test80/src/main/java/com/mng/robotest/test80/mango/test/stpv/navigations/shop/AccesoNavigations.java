@@ -3,6 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.navigations.shop;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -24,12 +25,13 @@ import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 @SuppressWarnings({"static-access"})
 public class AccesoNavigations {
 
-//	public static void goToInitURL(String urlInit, WebDriver driver) throws Exception {
-//    	String currentUrl = driver.getCurrentUrl();
-//    	if (currentUrl.compareTo(urlInit)!=0) {
-//    		driver.get(urlInit);
-//    	}
-//	}
+	public static void goToInitURL(WebDriver driver) {
+		String urlInitial = TestCaseTM.getTestCaseInExecution().getInputParamsSuite().getUrlBase();
+    	String currentUrl = driver.getCurrentUrl();
+    	if (currentUrl.compareTo(urlInitial)!=0) {
+    		driver.get(urlInitial);
+    	}
+	}
 	
     /**
     /* Acceso a la página inicial (home) de la APP Web (shop o VOTF)
@@ -44,7 +46,7 @@ public class AccesoNavigations {
         }
     }
     
-    public static void goFromLineasToMultimarcaVOTF(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    public static void goFromLineasToMultimarcaVOTF(DataCtxShop dCtxSh, WebDriver driver) {
         PageSelectLineaVOTF.clickBanner(LineaType.she, driver);
         PageSelectLineaVOTF.clickMenu(LineaType.she, 1/*numMenu*/, driver);
         
@@ -55,8 +57,7 @@ public class AccesoNavigations {
     /**
      * Acceso a VOTF (login + selección de idioma)
      */
-    public static void accesoVOTF(DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
+    public static void accesoVOTF(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         PageLoginVOTF.goToFromUrlAndSetTestABs(/*dCtxSh.urlAcceso,*/ dCtxSh, driver);
         PageLoginVOTF.inputUsuario(dCtxSh.pais.getAccesoVOTF().getUsuario(), driver);
         PageLoginVOTF.inputPassword(dCtxSh.pais.getAccesoVOTF().getPassword(), driver);

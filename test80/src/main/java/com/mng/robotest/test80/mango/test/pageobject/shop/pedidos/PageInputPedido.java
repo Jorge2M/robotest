@@ -42,7 +42,7 @@ public class PageInputPedido extends PageObjTM implements PageFromFooter {
         driver.findElement(By.xpath(XPathInputEmailUsr)).sendKeys(emailUsr);
     }
     
-    public void clickRecuperarDatos() throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathLinkRecuperarDatos));
+    public void clickRecuperarDatos() {
+    	click(By.xpath(XPathLinkRecuperarDatos)).exec();
     }
 }

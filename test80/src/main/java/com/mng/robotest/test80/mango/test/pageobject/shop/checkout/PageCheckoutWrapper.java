@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Descuento;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -15,7 +16,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.SecMetodoEnvioDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.pci.SecTarjetaPci;
@@ -136,15 +137,15 @@ public class PageCheckoutWrapper {
 		return (state(Visible, By.xpath(XpathButtonForApplyLoyaltyPoints), driver).check());
 	}
 
-    public static float applyAndGetLoyaltyPoints(WebDriver driver) throws Exception {
-    	By byApplyButton = By.xpath(XpathButtonForApplyLoyaltyPoints);
-    	WebElement buttonLoyalty = WebdrvWrapp.getElementsVisible(driver, byApplyButton).get(0);
-    	String textButtonApply = buttonLoyalty.getAttribute("innerHTML");
-    	String importeButton = ImporteScreen.normalizeImportFromScreen(textButtonApply);
-    	clickAndWaitLoad(driver, By.xpath(XpathButtonForApplyLoyaltyPoints));
+	public static float applyAndGetLoyaltyPoints(WebDriver driver) {
+		By byApplyButton = By.xpath(XpathButtonForApplyLoyaltyPoints);
+		WebElement buttonLoyalty = WebdrvWrapp.getElementsVisible(driver, byApplyButton).get(0);
+		String textButtonApply = buttonLoyalty.getAttribute("innerHTML");
+		String importeButton = ImporteScreen.normalizeImportFromScreen(textButtonApply);
+		click(By.xpath(XpathButtonForApplyLoyaltyPoints), driver).exec();
 		PageCheckoutWrapper.isNoDivLoadingUntil(1, driver);
 		return (ImporteScreen.getFloatFromImporteMangoScreen(importeButton));
-    }
+	}
 
 	final static String XPathDiscountLoyaltyAppliedMobil = "//span[@class='redeem-likes__discount']";
 	public static float getDiscountLoyaltyAppliedMobil(WebDriver driver) {
@@ -384,7 +385,7 @@ public class PageCheckoutWrapper {
         return (page1DktopCheckout.isVisibleBloquePagoNoTRJIntegradaUntil(pago, maxSecondsToWait, driver));
     }
     
-    public static String getTextDireccionEnvioCompleta(Channel channel, WebDriver driver) throws Exception {
+    public static String getTextDireccionEnvioCompleta(Channel channel, WebDriver driver) {
         if (channel==Channel.movil_web) {
             if (Page1EnvioCheckoutMobil.isPageUntil(0, driver)) {
                 return (page1MobilCheckout.getTextDireccionEnvioCompleta(driver));

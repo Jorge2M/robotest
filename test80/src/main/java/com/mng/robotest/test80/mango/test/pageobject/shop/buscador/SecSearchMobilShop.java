@@ -22,7 +22,7 @@ public class SecSearchMobilShop extends PageObjTM implements SecSearch {
 	}
 	
 	@Override
-	public void search(String text) throws Exception {
+	public void search(String text) {
 		state(Visible, By.xpath(XPathInputBuscador)).wait(2).check();
 		WebElement input = driver.findElement(By.xpath(XPathInputBuscador));
 		input.clear();
@@ -31,7 +31,7 @@ public class SecSearchMobilShop extends PageObjTM implements SecSearch {
 	}
 	
 	@Override
-	public void close() throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathCancelarLink));
+	public void close() {
+		click(By.xpath(XPathCancelarLink)).exec();
 	}
 }

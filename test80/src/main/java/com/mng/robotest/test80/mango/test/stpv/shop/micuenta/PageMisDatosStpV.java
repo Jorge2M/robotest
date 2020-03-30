@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 public class PageMisDatosStpV {
 
     @Validation
-    public static ChecksTM validaIsPage (String usuarioReg, WebDriver driver) throws Exception {
+    public static ChecksTM validaIsPage (String usuarioReg, WebDriver driver) {
         ChecksTM validations = ChecksTM.getNew();
         validations.add(
             "Aparece una página con el la cabecera \"Mis datos\"",

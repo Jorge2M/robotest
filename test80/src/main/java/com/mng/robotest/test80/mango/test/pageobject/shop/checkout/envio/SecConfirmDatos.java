@@ -38,8 +38,8 @@ public class SecConfirmDatos {
     public static void sendDataInputPostNumberIdDeutschland(String data, WebDriver driver) throws Exception {
     	sendKeysWithRetry(2, data, By.xpath(XPathInputPostNumberIdDeutschland), driver);
     }
-    
-    public static void clickConfirmarDatosButtonAndWait(int maxSecondsToWait, WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathConfirmDatosButton), maxSecondsToWait);
-    }
+
+	public static void clickConfirmarDatosButtonAndWait(int maxSeconds, WebDriver driver) {
+		click(By.xpath(XPathConfirmDatosButton), driver).waitLoadPage(maxSeconds).exec();
+	}
 }

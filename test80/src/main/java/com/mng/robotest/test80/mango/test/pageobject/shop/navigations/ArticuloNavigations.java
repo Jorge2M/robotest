@@ -17,8 +17,7 @@ public class ArticuloNavigations {
 	/**
 	 * Selecciona un artículo disponible a partir de su referencia (selecciona una talla/color que esté disponible)
 	 */
-	public static ArticuloScreen selectArticuloTallaColorByRef(Garment productStock, AppEcom app, Channel channel, WebDriver driver) 
-	throws Exception {
+	public static ArticuloScreen selectArticuloTallaColorByRef(Garment productStock, AppEcom app, Channel channel, WebDriver driver) {
 		ArticuloScreen articulo = new ArticuloScreen(app);
 		
 		Article articleStock = productStock.getArticleWithMoreStock();
@@ -69,8 +68,7 @@ public class ArticuloNavigations {
 		return articulo;
 	}
 
-	public static void buscarArticulo(Article article, Channel channel, AppEcom app, WebDriver driver) 
-	throws Exception {
+	public static void buscarArticulo(Article article, Channel channel, AppEcom app, WebDriver driver) {
 		SecCabecera.buscarTexto(article.getGarmentId(), channel, app, driver);
 		if (article.getColor()!=null) {
 			selectColorIfExists(article.getColor().getId(), app, driver);
@@ -78,7 +76,7 @@ public class ArticuloNavigations {
 	}
 
 	@SuppressWarnings("static-access")
-	private static void selectColorIfExists(String colourCode, AppEcom app, WebDriver driver) throws Exception {
+	private static void selectColorIfExists(String colourCode, AppEcom app, WebDriver driver) {
 		if (colourCode!=null && "".compareTo(colourCode)!=0) {
 			PageFicha pageFicha = PageFicha.newInstance(Channel.desktop, app, driver);
 			if (pageFicha.secDataProduct.isClickableColor(colourCode, driver)) {

@@ -146,33 +146,33 @@ public class StateElement {
 	}
 
 	
-	public static class Builder {
+	public static class BuilderState {
 		private final State state;
 		private final WebDriver driver;
 		private WebElement webelement;
 		private By by;
 		private int seconds;
 		
-		public Builder(State state, By by, WebDriver driver) {
+		public BuilderState(State state, By by, WebDriver driver) {
 			this.state = state;
 			this.driver = driver;
 			this.by = by;
 		}
-		public Builder(State state, WebElement webelement, WebDriver driver) {
+		public BuilderState(State state, WebElement webelement, WebDriver driver) {
 			this.state = state;
 			this.driver = driver;
 			this.webelement = webelement;
 		}
 		
-		public Builder webelement(WebElement webelement) {
+		public BuilderState webelement(WebElement webelement) {
 			this.webelement = webelement;
 			return this;
 		}
-		public Builder by(By by) {
+		public BuilderState by(By by) {
 			this.by = by;
 			return this;
 		}
-		public Builder wait(int seconds) {
+		public BuilderState wait(int seconds) {
 			this.seconds = seconds;
 			return this;
 		}

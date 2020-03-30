@@ -9,25 +9,25 @@ import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 
 public class ModalDirecEnvio extends ModalDireccion {
 
-    static String XPathFormModal = "//form[@class[contains(.,'customFormIdENVIO')]]";
-    static String XPathButtonUpdate = XPathFormModal + "//div[@class[contains(.,'updateButton')]]/*[@class[contains(.,'modalConfirmar')]]";
-    
-    public static void sendDataToInputsNTimesAndWait(DataDireccion dataToSend, int nTimes, WebDriver driver) throws Exception {
-        sendDataToInputsNTimes(dataToSend, nTimes, XPathFormModal, driver);
-        waitForPageLoaded(driver);
-    }
-    
-    public static void sendDataToInputs(DataDireccion dataToSend, WebDriver driver) throws Exception {
-        sendDataToInputs(dataToSend, XPathFormModal, driver);
-    }
-    
-    public static void selectPoblacion(String poblacion, WebDriver driver) throws Exception {
-        selectPoblacion(poblacion, XPathFormModal, driver);
-    }
-    
-    public static void selectProvincia(String provincia, WebDriver driver) {
-        selectProvincia(provincia, XPathFormModal, driver);
-    } 
+	static String XPathFormModal = "//form[@class[contains(.,'customFormIdENVIO')]]";
+	static String XPathButtonUpdate = XPathFormModal + "//div[@class[contains(.,'updateButton')]]/*[@class[contains(.,'modalConfirmar')]]";
+
+	public static void sendDataToInputsNTimesAndWait(DataDireccion dataToSend, int nTimes, WebDriver driver) throws Exception {
+		sendDataToInputsNTimes(dataToSend, nTimes, XPathFormModal, driver);
+		waitForPageLoaded(driver);
+	}
+
+	public static void sendDataToInputs(DataDireccion dataToSend, WebDriver driver) throws Exception {
+		sendDataToInputs(dataToSend, XPathFormModal, driver);
+	}
+
+	public static void selectPoblacion(String poblacion, WebDriver driver) throws Exception {
+		selectPoblacion(poblacion, XPathFormModal, driver);
+	}
+
+	public static void selectProvincia(String provincia, WebDriver driver) {
+		selectProvincia(provincia, XPathFormModal, driver);
+	} 
 
 	public static boolean isVisibleFormUntil(int maxSeconds, WebDriver driver) {
 		return (state(Visible, By.xpath(XPathFormModal), driver)
@@ -43,14 +43,14 @@ public class ModalDirecEnvio extends ModalDireccion {
 		return (state(Visible, By.xpath(XPathButtonUpdate), driver).check());
 	}
 
-	public static void moveToAndDoubleClickActualizar(WebDriver driver) throws Exception {
+	public static void moveToAndDoubleClickActualizar(WebDriver driver) {
 		moveToElement(By.xpath(XPathButtonUpdate), driver);
 		waitForPageLoaded(driver);
-		clickAndWaitLoad(driver, By.xpath(XPathButtonUpdate));
+		click(By.xpath(XPathButtonUpdate), driver).exec();
 
 		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
 		if (isVisibleButtonActualizar(driver)) {
-			clickAndWaitLoad(driver, By.xpath(XPathButtonUpdate));
+			click(By.xpath(XPathButtonUpdate), driver).exec();
 		}
 	}
 }

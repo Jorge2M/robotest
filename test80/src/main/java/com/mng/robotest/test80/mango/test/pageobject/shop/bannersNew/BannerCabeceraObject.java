@@ -8,8 +8,7 @@ import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.testmaker.domain.suitetree.TestCaseTM;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
 
 public class BannerCabeceraObject extends BannerObject {
 
@@ -53,6 +52,6 @@ public class BannerCabeceraObject extends BannerObject {
 		} else {
 			bannerLink = bannerWeb;
 		}
-		WebdrvWrapp.clickAndWaitLoad(driver, bannerLink, 10, TypeOfClick.javascript);
+		click(bannerLink, driver).waitLoadPage(10).type(TypeClick.javascript).exec();
 	}
 }

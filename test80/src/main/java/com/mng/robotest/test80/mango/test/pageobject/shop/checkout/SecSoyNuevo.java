@@ -4,7 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
+
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -76,12 +77,12 @@ public class SecSoyNuevo {
     public static void inputEmail(String email, WebDriver driver) {
         sendKeysWithRetry(3, email, By.xpath(XPathInputEmail), driver);
     }
-    
-    public static void clickContinue(Channel channel, WebDriver driver) throws Exception {
-        String xpathButton = getXPath_BotonContinue(channel);
-        clickAndWaitLoad(driver, By.xpath(xpathButton), TypeOfClick.javascript);
-    }   
-    
+
+	public static void clickContinue(Channel channel, WebDriver driver) {
+		String xpathButton = getXPath_BotonContinue(channel);
+		click(By.xpath(xpathButton), driver).type(TypeClick.javascript).exec();
+	}
+
 	public static boolean isTextoRGPDVisible(WebDriver driver) {
 		return (state(Visible, By.xpath(XPathTextRGPD), driver).check());
 	}

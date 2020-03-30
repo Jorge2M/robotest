@@ -85,7 +85,7 @@ public class PageMisComprasStpV {
     }
 
     @Validation
-    public ChecksTM validateIsPage() throws Exception {
+    public ChecksTM validateIsPage() {
     	ChecksTM validations = ChecksTM.getNew();
     	int maxSecondsWait = 2;
       	validations.add(
@@ -169,7 +169,7 @@ public class PageMisComprasStpV {
     	description="Seleccionamos la #{posInLista}a compra (tipo Online) de la lista", 
         expected="Aparece la página con los detalles del pedido",
         saveHtmlPage=SaveWhen.IfProblem)
-    public void selectCompraOnline(int posInLista, String codPais) throws Exception {
+    public void selectCompraOnline(int posInLista, String codPais) {
     	CompraOnline compraOnline = pageMisCompras.getDataCompraOnline(posInLista);
     	pageMisCompras.clickCompra(posInLista);       
         PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(driver);
@@ -180,7 +180,7 @@ public class PageMisComprasStpV {
     @Step (
     	description="Seleccionamos la #{posInLista}a compra (tipo Tienda) de la lista", 
         expected="Aparece una sección con los detalles de la Compra")
-    public void selectCompraTienda(int posInLista) throws Exception {
+    public void selectCompraTienda(int posInLista) {
     	CompraTienda compraTienda = pageMisCompras.getDataCompraTienda(posInLista);
     	pageMisCompras.clickCompra(posInLista);       
     	secDetalleCompraTiendaStpV.validateIsOk(compraTienda);      

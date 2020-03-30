@@ -19,8 +19,8 @@ public class PagePaypalLoginStpV {
 	@Step (
 		description="Introducimos las credenciales (#{userMail} - #{password}) y pulsamos el botón \"Iniciar sesión\"", 
         expected="Aparece la página de inicio de sesión en Paypal")
-    public static void loginPaypal(String userMail, String password, WebDriver driver) throws Exception {  
-        String paginaPadre = driver.getWindowHandle();                                                  
+    public static void loginPaypal(String userMail, String password, WebDriver driver) {  
+        String paginaPadre = driver.getWindowHandle();
         PagePaypalLogin.inputUserAndPassword(userMail, password, driver);
         PagePaypalLogin.clickIniciarSesion(driver);
         driver.switchTo().window(paginaPadre); //Salimos del iframe

@@ -4,12 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public abstract class PageMercpagoDatosTrj {
-	
-	final WebDriver driver; 
+public abstract class PageMercpagoDatosTrj extends PageObjTM {
 	
     final static String XPathInputNumTarj = "//input[@name='cardNumber']";
     final static String XPathInputFecCaducidad = "//input[@name='cardExpiration']";
@@ -23,7 +22,7 @@ public abstract class PageMercpagoDatosTrj {
     abstract public void sendCaducidadTarj(String fechaVencimiento);
     
     PageMercpagoDatosTrj(WebDriver driver) {
-    	this.driver = driver;
+    	super(driver);
     }
     
     public static PageMercpagoDatosTrj newInstance(Channel channel, WebDriver driver) {

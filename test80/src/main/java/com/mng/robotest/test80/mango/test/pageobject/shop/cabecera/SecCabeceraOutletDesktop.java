@@ -4,8 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 /**
@@ -57,7 +57,7 @@ public class SecCabeceraOutletDesktop extends SecCabeceraOutlet {
     }
 
     @Override
-    public void clickIconoBolsa() throws Exception {
+    public void clickIconoBolsa() {
     	clickElement(LinkCabeceraOutletDesktop.bolsa);
     }
 
@@ -83,7 +83,7 @@ public class SecCabeceraOutletDesktop extends SecCabeceraOutlet {
     	return (isElementInStateUntil(element, state, maxSecondsWait, driver));
     }
     
-    public void clickElement(LinkCabeceraOutletDesktop element) throws Exception {
+    public void clickElement(LinkCabeceraOutletDesktop element) {
     	clickAndWait(element, driver);
     }
     

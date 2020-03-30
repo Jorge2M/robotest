@@ -19,7 +19,7 @@ public class PageMercpago1rstStpV {
 	@Step (
 		description="Accedemos a la página de identificación", 
         expected="Aparece la página de identificación")
-    public static void clickLinkRegistration(WebDriver driver) throws Exception {
+    public static void clickLinkRegistration(WebDriver driver) {
         PageMercpago1rst.clickLinkRegistro(driver);
         PageMercpagoLoginStpV.validateIsPage(driver);
     }

@@ -126,10 +126,9 @@ public class PagePedidos {
         return (driver.findElements(By.xpath(XPathLineaPedido)).size());
     }
     
-    public static void clickLinkPedidoInLineas(WebDriver driver, String codigoPedidoManto, TypeDetalle typeDetalle) throws Exception {
+    public static void clickLinkPedidoInLineas(WebDriver driver, String codigoPedidoManto, TypeDetalle typeDetalle) {
     	String xpath = getXPathDataPedidoInLineas(IdColumn.idpedido, codigoPedidoManto, typeDetalle, driver);
-        //String xpath = getXpath_linkPedidoInLineas(codigoPedidoManto);
-        clickAndWaitLoad(driver, By.xpath(xpath));
+    	click(By.xpath(xpath), driver).exec();
     }
 
 	public static boolean isPresentDataInPedido(
@@ -184,20 +183,16 @@ public class PagePedidos {
 		return iterator;
 	}
 
-	/**
-	 * @param driver
-	 * @throws Exception
-	 */
-	public static void clickPaginaSiguientePedidos(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathLinkPaginaSiguientePedidos));
+	public static void clickPaginaSiguientePedidos(WebDriver driver) {
+		click(By.xpath(XPathLinkPaginaSiguientePedidos), driver).exec();
 	}
 
 	
-    public static void clickPedidoWithTypeEnvio(Envio envio, WebDriver driver) {
-    	String xpathLineaEnvTienda = getXPathLineaPedidoWithTypeEnvio(envio, driver);
-    	int posIdPedido = getPosicionColumn(IdColumn.idpedido, TypeDetalle.pedido, driver);
-    	driver.findElement(By.xpath(xpathLineaEnvTienda + "/td[" + posIdPedido + "]/a")).click();
-    }
+	public static void clickPedidoWithTypeEnvio(Envio envio, WebDriver driver) {
+		String xpathLineaEnvTienda = getXPathLineaPedidoWithTypeEnvio(envio, driver);
+		int posIdPedido = getPosicionColumn(IdColumn.idpedido, TypeDetalle.pedido, driver);
+		driver.findElement(By.xpath(xpathLineaEnvTienda + "/td[" + posIdPedido + "]/a")).click();
+	}
 	
 	public static String getTiendaFisicaFromListaPedidos(WebDriver driver) throws Exception {
 		clickPedidoWithTypeEnvio(Envio.TIENDA, driver);

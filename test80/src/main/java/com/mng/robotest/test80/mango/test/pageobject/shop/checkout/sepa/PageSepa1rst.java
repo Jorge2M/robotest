@@ -31,12 +31,12 @@ public class PageSepa1rst {
         String xpathPago = getXPathIconoSepa(channel);
         return (state(Present, By.xpath(xpathPago), driver).check());
     }
-    
-    public static void clickIconoSepa(Channel channel, WebDriver driver) throws Exception {
-        String xpathPago = getXPathIconoSepa(channel);
-        clickAndWaitLoad(driver, By.xpath(xpathPago));
-    }
-    
+
+	public static void clickIconoSepa(Channel channel, WebDriver driver) {
+		String xpathPago = getXPathIconoSepa(channel);
+		click(By.xpath(xpathPago), driver).exec();
+	}
+
     public static boolean isPresentCabeceraStep(WebDriver driver) {
     	return (state(Present, By.xpath(XPathCabeceraStep), driver).check());
     }
@@ -45,13 +45,13 @@ public class PageSepa1rst {
     	return (state(Present, By.xpath(XPathButtonPagoDesktop), driver).check());
     }
 
-    public static void clickButtonContinuePago(Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web) {
-            clickAndWaitLoad(driver, By.xpath(XPathButtonContinueMobil));
-        } else {
-            clickAndWaitLoad(driver, By.xpath(XPathButtonPagoDesktop));
-        }
-    }
+	public static void clickButtonContinuePago(Channel channel, WebDriver driver) {
+		if (channel==Channel.movil_web) {
+			click(By.xpath(XPathButtonContinueMobil), driver).exec();
+		} else {
+			click(By.xpath(XPathButtonPagoDesktop), driver).exec();
+		}
+	}
     
     public static boolean isPresentInputTitular(WebDriver driver) { 
     	return (state(Present, By.xpath(XPathInputTitular), driver).check());

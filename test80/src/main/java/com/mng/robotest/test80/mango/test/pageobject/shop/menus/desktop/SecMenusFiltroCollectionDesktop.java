@@ -31,10 +31,10 @@ public class SecMenusFiltroCollectionDesktop extends PageObjTM implements SecMen
         String xpathMenu = getXPathMenu(typeMenu);
         return (state(Visible, By.xpath(xpathMenu)).check());
     }
-    
-    @Override
-    public void click(FilterCollection typeMenu) throws Exception {
-    	String xpathMenu = getXPathMenu(typeMenu);
-    	clickAndWaitLoad(driver, By.xpath(xpathMenu));
-    }
+
+	@Override
+	public void click(FilterCollection typeMenu) {
+		String xpathMenu = getXPathMenu(typeMenu);
+		click(By.xpath(xpathMenu)).exec();
+	}
 }

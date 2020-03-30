@@ -7,9 +7,10 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecSearch;
@@ -27,7 +28,7 @@ public abstract class SecCabecera extends PageObjTM {
 
 	abstract String getXPathNumberArtIcono();
 	public abstract boolean isInStateIconoBolsa(State state);
-	public abstract void clickIconoBolsa() throws Exception;
+	public abstract void clickIconoBolsa();
 	public abstract void clickIconoBolsaWhenDisp(int maxSecondsToWait) throws Exception;
 	public abstract void hoverIconoBolsa();
 	
@@ -36,7 +37,6 @@ public abstract class SecCabecera extends PageObjTM {
 		this.channel = channel;
 		this.app = app;
 		this.secSearch = SecSearch.getNew(channel, app, driver);
-
 	}
 	
 	public static SecCabecera getNew(Channel channel, AppEcom app, WebDriver driver) {
@@ -62,16 +62,16 @@ public abstract class SecCabecera extends PageObjTM {
 		return (SecCabeceraOutletMobil)this;
 	}
 	
-	public static void buscarTexto(String referencia, Channel channel, AppEcom app, WebDriver driver) throws Exception {
+	public static void buscarTexto(String referencia, Channel channel, AppEcom app, WebDriver driver) {
 		MenusUserWrapper menusUser = MenusUserWrapper.getNew(channel, app, driver);
 		menusUser.clickMenuAndWait(UserMenu.lupa);
 		SecSearch secSearch = SecSearch.getNew(channel, app, driver);
 		secSearch.search(referencia);
 	}
 	
-	public boolean clickLogoMango() throws Exception {
+	public boolean clickLogoMango() {
 		if (state(Present, By.xpath(XPathLinkLogoMango)).wait(2).check()) {
-			clickAndWaitLoad(driver, By.xpath(XPathLinkLogoMango));
+			click(By.xpath(XPathLinkLogoMango)).exec();
 			return true;
 		}
 		return false;
@@ -121,9 +121,9 @@ public abstract class SecCabecera extends PageObjTM {
 	/**
 	 * Si existe, cierra el banner de aviso en móvil (p.e. el que sale proponiendo la descarga de la App)
 	 */
-	public void closeSmartBannerIfExistsMobil() throws Exception {
+	public void closeSmartBannerIfExistsMobil() {
 		if (state(Visible, By.xpath(XPathLinkCloseSmartBanner)).check()) {
-			clickAndWaitLoad(driver, By.xpath(XPathLinkCloseSmartBanner));
+			click(By.xpath(XPathLinkCloseSmartBanner)).exec();
 		}
 	}
 
@@ -132,16 +132,16 @@ public abstract class SecCabecera extends PageObjTM {
      * @param open: 'true'  queremos que el menú lateral de móvil se abra
      *              'false' queremos que el menú lateral de móvil se cierre
      */
-    public void clickIconoMenuHamburguerMobil(boolean toOpenMenus) throws Exception {
+    public void clickIconoMenuHamburguerMobil(boolean toOpenMenus) {
     	SecMenuLateralMobil secMenuLateral = SecMenuLateralMobil.getNew(app, driver);
         boolean menuVisible = secMenuLateral.isMenuInStateUntil(toOpenMenus, 1);
         int i=0;
-        TypeOfClick typeClick = TypeOfClick.webdriver;
+        TypeClick typeClick = TypeClick.webdriver;
         while ((menuVisible!=toOpenMenus) && i<5) {
             try {
                 isVisibleIconoMenuHamburguesaUntil(5);
-                clickIconoMenuHamburguesaWhenReady(typeClick, driver);
-                typeClick = TypeOfClick.next(typeClick);
+                clickIconoMenuHamburguesaWhenReady(typeClick);
+                typeClick = TypeClick.next(typeClick);
                 menuVisible = secMenuLateral.isMenuInStateUntil(toOpenMenus, 2);
             }
             catch (Exception e) {
@@ -157,7 +157,7 @@ public abstract class SecCabecera extends PageObjTM {
 				.wait(maxSeconds).check());
 	}
 
-    public void clickIconoMenuHamburguesaWhenReady(TypeOfClick typeOfClick, WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathIconoMenuHamburguesa), typeOfClick);
-    }
+	public void clickIconoMenuHamburguesaWhenReady(TypeClick typeOfClick) {
+		click(By.xpath(XPathIconoMenuHamburguesa)).exec();
+	}
 }

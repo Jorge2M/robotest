@@ -17,7 +17,7 @@ public class PagePaypalConfirmacion {
     			.wait(maxSeconds).check());
     }
 
-    public static void clickContinuarButton(WebDriver driver) throws Exception {
-    	clickAndWaitLoad(driver, By.xpath(XPathContinueButton));
-    }
+	public static void clickContinuarButton(WebDriver driver) {
+		click(By.xpath(XPathContinueButton), driver).exec();
+	}
 }

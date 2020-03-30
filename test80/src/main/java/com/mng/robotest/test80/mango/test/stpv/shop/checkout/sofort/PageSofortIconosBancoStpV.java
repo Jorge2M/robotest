@@ -25,12 +25,10 @@ public class PageSofortIconosBancoStpV {
 	
 	@Step (
 		description="Seleccionar el link hacia la siguiente página de Sofort", 
-        expected="Aparece la página de selección del Banco")
-    public static void clickIconoSofort(Channel channel, WebDriver driver) throws Exception { 
+		expected="Aparece la página de selección del Banco")
+	public static void clickIconoSofort(Channel channel, WebDriver driver) { 
 		PageSofort1rst.clickGoToSofort(driver, channel);
-
-        //Validaciones
 		int maxSecondsWait = 3;
-        PageSofort2onStpV.validaIsPageUntil(maxSecondsWait, driver);
-    }
+		PageSofort2onStpV.validaIsPageUntil(maxSecondsWait, driver);
+	}
 }

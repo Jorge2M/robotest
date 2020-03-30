@@ -9,7 +9,7 @@ import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.domain.suitetree.StepTM;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.ModalDroppoints;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.SecSelectDPoint.TypeDeliveryPoint;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio.DataSearchDeliveryPoint.DataSearchDp;
@@ -84,7 +84,7 @@ public class SecSelectDPointStpV {
     @Step (
     	description="Clickamos el botón de \"Select\" de la capa de Droppoints", 
         expected="Desaparece al capa de droppoint")
-    public static void clickSelectButton(Channel channel, WebDriver driver) throws Exception {
+    public static void clickSelectButton(Channel channel, WebDriver driver) {
     	int maxSecondsWait = 5;
         ModalDroppoints.secSelectDPoint.clickSelectButtonAndWait(maxSecondsWait, driver);
         ModalDroppointsStpV.secConfirmDatos.validateIsVisible(3, channel, driver);

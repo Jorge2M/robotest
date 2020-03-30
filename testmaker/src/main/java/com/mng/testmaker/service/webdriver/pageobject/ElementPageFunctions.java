@@ -1,4 +1,4 @@
-package com.mng.testmaker.service.webdriver.wrapper;
+package com.mng.testmaker.service.webdriver.pageobject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -7,9 +7,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp.OptionSelect;
+import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp.OptionSelect;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 public class ElementPageFunctions {
 	
@@ -36,65 +38,50 @@ public class ElementPageFunctions {
     private static boolean isElementInStateUntil(By elemBy, State state, int maxSeconds, WebDriver driver) {
     	return (PageObjTM.state(state, elemBy, driver)
     			.wait(maxSeconds).check());
-//    	switch (state) {
-//    	case Visible:
-//    		return WebdrvWrapp.isElementVisibleUntil(driver, elemBy, maxSecondsWait);
-//    	case Clickable:
-//    		return WebdrvWrapp.isElementClickableUntil(driver, elemBy, maxSecondsWait);
-//    	case Present:
-//    	default:
-//        	return WebdrvWrapp.isElementPresentUntil(driver, elemBy, maxSecondsWait);
-//    	}
     }
 
     public static boolean isElementInStateUntil(String xPath, State state, int maxSeconds, WebDriver driver) {
     	return (PageObjTM.state(state, By.xpath(xPath), driver)
     			.wait(maxSeconds).check());
-//	    switch (state) {
-//        case Visible:
-//            return WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(xPath), maxSecondsWait);
-//        case Clickable:
-//            return WebdrvWrapp.isElementClickableUntil(driver, By.xpath(xPath), maxSecondsWait);
-//        case Present:
-//        default:
-//                return WebdrvWrapp.isElementPresentUntil(driver, By.xpath(xPath), maxSecondsWait);
-//        }
     }
 
     public static void selectInDropDown(ElementPage dropDown, String value, WebDriver driver) {
         new Select(driver.findElement(By.xpath(dropDown.getXPath()))).selectByValue(value);
     }
 
-    public static void selectElementWaitingForAvailability(ElementPage element, int secondsWaitForElement, WebDriver driver)
-            throws Exception {
+    public static void selectElementWaitingForAvailability(ElementPage element, int waitElement, WebDriver driver)
+    throws Exception {
         Thread.sleep(100);
-        WebdrvWrapp.waitClickAndWaitLoad(driver, secondsWaitForElement, By.xpath(element.getXPath()));
+        click(By.xpath(element.getXPath()), driver).waitLink(waitElement).exec();
     }
 
-    public static void clickAndWait(ElementPage element, WebDriver driver) throws Exception {
-    	WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(element.getXPath()));
+    public static void clickAndWait(ElementPage element, WebDriver driver) {
+    	click(By.xpath(element.getXPath()), driver).exec();
     }
 
-    public static void clickAndWait(ElementPage element, int maxSecondsToWait, WebDriver driver) throws Exception {
-        WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(element.getXPath()), maxSecondsToWait);
+    public static void clickAndWait(ElementPage element, int maxSecondsLoadPage, WebDriver driver) {
+    	click(By.xpath(element.getXPath()), driver).waitLoadPage(maxSecondsLoadPage).exec();
     }
     
-    public static void clickAndWait(ElementPage element, TypeOfClick typeOfClick, WebDriver driver) throws Exception {
+    public static void clickAndWait(ElementPage element, TypeClick typeOfClick, WebDriver driver) {
     	By by = By.xpath(element.getXPath());
-    	WebdrvWrapp.clickAndWaitLoad(driver, by, typeOfClick);
+    	click(by, driver).exec();
     }
     
-    protected static void clickElementVisibleAndWaitLoad(ElementPage element, int maxSecondsToWait, WebDriver driver) throws Exception {
-        WebdrvWrapp.clickElementVisibleAndWaitLoad(driver, By.xpath(element.getXPath()), maxSecondsToWait);
+    protected static void clickElementVisibleAndWaitLoad(ElementPage element, int maxSeconds, WebDriver driver) {
+    	By by = By.xpath(element.getXPath());
+    	click(by, driver).state(Visible).waitLoadPage(maxSeconds).exec();
     }
 
-    public static void clickAndWait(Channel channel, ElementPage element, WebDriver driver) throws Exception {
-        WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(element.getXPath(channel)));
+    public static void clickAndWait(Channel channel, ElementPage element, WebDriver driver) {
+    	By by = By.xpath(element.getXPath(channel));
+    	click(by, driver).exec();
     }
 
     public static void clickIfPossibleAndWait(ElementPage element, WebDriver driver) throws Exception {
-    	if (isElementInState(element, State.Clickable, driver))
+    	if (isElementInState(element, State.Clickable, driver)) {
     		clickAndWait(element, driver);
+    	}
     }
 
     public static void clickAndRetry(ElementPage element, WebDriver driver) throws Exception {
@@ -113,21 +100,23 @@ public class ElementPageFunctions {
         }
     }
 
-    public static void selectElement(ElementPage element, WebDriver driver) throws Exception {
-    	WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(element.getXPath()), 3);
+    public static void selectElement(ElementPage element, WebDriver driver) {
+    	By by = By.xpath(element.getXPath());
+    	click(by, driver).waitLoadPage(3).exec();
     }
 
-    public static void selectElement(String xPath, WebDriver driver) throws Exception {
-	    WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(xPath), TypeOfClick.javascript);
+    public static void selectElement(String xPath, WebDriver driver) {
+    	click(By.xpath(xPath), driver).type(javascript).exec();
     }
 
-    public static void selectElement(ElementPage element, Channel channel, WebDriver driver, TypeOfClick typeOfClick) 
-    throws Exception {
-        WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(element.getXPath(channel)), typeOfClick);
+    public static void selectElement(ElementPage element, Channel channel, WebDriver driver, TypeClick typeOfClick) {
+    	By byElement = By.xpath(element.getXPath(channel));
+    	click(byElement, driver).type(typeOfClick).exec();
 	}
 
-    public static void selectElement(ElementPage element, Channel channel, WebDriver driver) throws Exception {
-    	WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(element.getXPath(channel)));
+    public static void selectElement(ElementPage element, Channel channel, WebDriver driver) {
+    	By by = By.xpath(element.getXPath(channel));
+    	click(by, driver).exec();
     }
 
     public static void moveToElement(ElementPage element, WebDriver driver) {

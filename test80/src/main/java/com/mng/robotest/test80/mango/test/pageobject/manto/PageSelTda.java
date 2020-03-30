@@ -15,26 +15,18 @@ import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.
  */
 public class PageSelTda {
 
-    static String XPathCeldaTextSelectEntorno = "//td[text()[contains(.,'Seleccion de Entorno')]]";
-    
-    /**
-     * @param tienda
-     * @return el xpath correspondiente al link de una tienda/almacén concreto (Alemania, Europa Palau...)
-     */
-    public static String getXpath_linkTienda(TiendaManto tienda) {
-        return ("//a[text()[contains(.,'" + tienda.litPantManto + "')]]");
-    }
+	static String XPathCeldaTextSelectEntorno = "//td[text()[contains(.,'Seleccion de Entorno')]]";
+
+	public static String getXpath_linkTienda(TiendaManto tienda) {
+		return ("//a[text()[contains(.,'" + tienda.litPantManto + "')]]");
+	}
 
 	public static boolean isPage(WebDriver driver) {
 		return (state(Present, By.xpath(XPathCeldaTextSelectEntorno), driver).check());
 	}
 
-    /**
-     * Seleccionamos una tienda/almacén concreta de entre las disponibles (Alemania, Europa Palau...)
-     * @param tienda
-     */
-    public static void selectTienda(TiendaManto tienda, WebDriver driver) throws Exception {
-        String xpath = getXpath_linkTienda(tienda);
-        clickAndWaitLoad(driver, By.xpath(xpath));
-    }
+	public static void selectTienda(TiendaManto tienda, WebDriver driver) {
+		String xpath = getXpath_linkTienda(tienda);
+		click(By.xpath(xpath), driver).exec();
+	}
 }

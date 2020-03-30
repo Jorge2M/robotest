@@ -28,8 +28,8 @@ public class PageTrustPayResult {
     public static boolean isPresentButtonContinue(WebDriver driver) {
     	return (state(Present, By.xpath(XPathButtonContinue), driver).check());
     }
-    
-    public static void clickButtonContinue(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonContinue));
-    }
+
+	public static void clickButtonContinue(WebDriver driver) {
+		click(By.xpath(XPathButtonContinue), driver).exec();
+	}
 }

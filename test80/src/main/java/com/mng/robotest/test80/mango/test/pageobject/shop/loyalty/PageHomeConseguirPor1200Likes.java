@@ -23,8 +23,8 @@ public class PageHomeConseguirPor1200Likes extends PageObjTM {
 		return (state(Visible, By.xpath(XPathButton1200Likes)).check());
 	}
 	
-	public void selectConseguirButton() throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathButton1200Likes));
+	public void selectConseguirButton() {
+		click(By.xpath(XPathButton1200Likes)).exec();
 	}
 	
 	public boolean isVisibleIconOperationDoneUntil(int maxSeconds) {

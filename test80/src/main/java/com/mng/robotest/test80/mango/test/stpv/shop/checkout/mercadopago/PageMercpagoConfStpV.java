@@ -21,7 +21,7 @@ public class PageMercpagoConfStpV {
 	@Step (
 		description="Seleccionar el botón \"Pagar\"", 
         expected="Aparece la página de resultado")
-    public static void clickPagar(Channel channel, WebDriver driver) throws Exception {
+    public static void clickPagar(Channel channel, WebDriver driver) {
         PageMercpagoConf.clickPagar(driver);
         PageResultPagoStpV.validaIsPageUntil(30, channel, driver);
     }

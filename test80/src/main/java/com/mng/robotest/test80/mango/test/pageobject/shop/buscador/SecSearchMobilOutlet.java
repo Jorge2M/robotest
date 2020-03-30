@@ -31,8 +31,8 @@ public class SecSearchMobilOutlet extends PageObjTM implements SecSearch {
 	}
 	
 	@Override
-	public void close() throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathCancelarLink));
+	public void close() {
+		click(By.xpath(XPathCancelarLink)).exec();
 	}
 
 	public boolean isBuscadorVisibleUntil(int maxSeconds) {

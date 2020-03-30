@@ -31,16 +31,16 @@ public class PageDotpay1rst {
         String xpathCab = getXPathEntradaPago(nombrePago, channel);
         return (state(Present, By.xpath(xpathCab), driver).check());
     }
-    
-    public static boolean isPresentButtonPago(WebDriver driver) {
-    	return (state(Present, By.xpath(XPathButtonPago), driver).check());
-    }
-    
-    public static void clickToPay(Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web) {
-            clickAndWaitLoad(driver, By.xpath(XPathInputIconoDotpay));
-        } else {
-            clickAndWaitLoad(driver, By.xpath(XPathButtonPago));
-        }
-    }
+
+	public static boolean isPresentButtonPago(WebDriver driver) {
+		return (state(Present, By.xpath(XPathButtonPago), driver).check());
+	}
+
+	public static void clickToPay(Channel channel, WebDriver driver) {
+		if (channel==Channel.movil_web) {
+			click(By.xpath(XPathInputIconoDotpay), driver).exec();
+		} else {
+			click(By.xpath(XPathButtonPago), driver).exec();
+		}
+	}
 }

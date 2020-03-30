@@ -10,13 +10,13 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
+import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
 import com.mng.testmaker.service.webdriver.utils.WebUtils;
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.testmaker.testreports.html.ResultadoErrores;
 import com.mng.robotest.test80.mango.test.pageobject.shop.AllPages;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter;
@@ -24,8 +24,7 @@ import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
 
 public class AllPagesStpV {
     
-    public static void validacionesEstandar(StdValidationFlags flagsVal, WebDriver driver) 
-    throws Exception {
+    public static void validacionesEstandar(StdValidationFlags flagsVal, WebDriver driver) {
     	flagsVal.stateValidaSEO = State.Info;
     	flagsVal.stateValidaJS = State.Info;
     	flagsVal.stateValidaImgBroken = State.Warn;
@@ -33,8 +32,7 @@ public class AllPagesStpV {
     }
     
     @Validation
-    public static ChecksTM checksStandar(StdValidationFlags flagsVal, WebDriver driver) 
-    throws Exception {
+    public static ChecksTM checksStandar(StdValidationFlags flagsVal, WebDriver driver) {
     	ChecksTM validations = ChecksTM.getNew();
     	if (flagsVal.validaSEO) {
     		ResultadoErrores resValidac = AllPagesSEO.validacionesGenericasSEO(driver);

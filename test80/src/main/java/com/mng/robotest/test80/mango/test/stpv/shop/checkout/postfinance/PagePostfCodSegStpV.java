@@ -30,8 +30,7 @@ public class PagePostfCodSegStpV {
      *   PRO-PostFinance -> https://epayment.postfinance.ch/pfef/authentication/v2
      * @throws Exception 
      */
-    public static void postfinanceValidate1rstPage(String nombrePago, String importeTotal, String codPais, WebDriver driver) 
-    throws Exception {
+    public static void postfinanceValidate1rstPage(String nombrePago, String importeTotal, String codPais, WebDriver driver) {
     	PagePostfCodSeg.waitLoadPage();
     	if (PagePostfCodSeg.isPasarelaTest(driver)) {
             PagePostfCodSegStpV.validateIsPageTest(nombrePago, importeTotal, driver);
@@ -83,8 +82,7 @@ public class PagePostfCodSegStpV {
     @Step (
     	description="Seleccionar el botón Aceptar", 
         expected="Aparece una página de redirección")
-    public static void inputCodigoSeguridadAndAccept(String codSeguridad, String nombreMetodo, WebDriver driver) 
-    throws Exception {
+    public static void inputCodigoSeguridadAndAccept(String codSeguridad, String nombreMetodo, WebDriver driver) {
     	try {
 	        if (isPostfinanceEcard(nombreMetodo)) {
 	            //El código de seguridad sólo lo pide en el caso de "PostFinance Card" no en el de "PostFinance e-finance"
@@ -98,8 +96,7 @@ public class PagePostfCodSegStpV {
         finally {
             driver.switchTo().defaultContent(); 
         }
-            
-        //Validaciones
+    	
         PagePostfRedirectStpV.isPageAndFinallyDisappears(driver);
     }
     

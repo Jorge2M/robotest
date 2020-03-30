@@ -38,15 +38,15 @@ public class PagePaytrail1rst {
     	return (state(Visible, By.xpath(XPathSelectBancos), driver).wait(maxSeconds).check());
     }    
     
-    public static void clickButtonContinue(Channel channel, WebDriver driver) throws Exception {
+    public static void clickButtonContinue(Channel channel, WebDriver driver) {
         if (channel==Channel.movil_web) {
-            clickAndWaitLoad(driver, By.xpath(XPathButtonContinueMobil));
+        	click(By.xpath(XPathButtonContinueMobil), driver).exec();
         } else {
-            clickAndWaitLoad(driver, By.xpath(XPathButtonPagoDesktop));
+        	click(By.xpath(XPathButtonPagoDesktop), driver).exec();
         }
     }
     
-    public static void selectBanco(String visibleText, Channel channel, WebDriver driver) throws Exception {
+    public static void selectBanco(String visibleText, Channel channel, WebDriver driver) {
         //En el caso de móvil hemos de seleccionar el icono del banco para visualizar el desplegable
         if (channel==Channel.movil_web) {
         	if (state(Visible, By.xpath(XPathSelectBancos), driver).check()) {
@@ -56,8 +56,8 @@ public class PagePaytrail1rst {
             
         new Select(driver.findElement(By.xpath(XPathSelectBancos))).selectByVisibleText(visibleText);
     }
-    
-    public static void clickIconoBanco(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathInputIconoPaytrail));
-    }    
+
+	public static void clickIconoBanco(WebDriver driver) {
+		click(By.xpath(XPathInputIconoPaytrail), driver).exec();
+	}
 }

@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 
 /**
@@ -34,7 +33,7 @@ public class PageJCAS {
 	/**
 	 * Realiza el proceso de identificación en la página de Jasig CAS
 	 */
-	public static void identication(WebDriver driver, String usuario, String password) throws Exception {
+	public static void identication(WebDriver driver, String usuario, String password) {
 		inputCredenciales(usuario, password, driver);
 		clickCaptchaIfPresent(driver);
 		clickButtonLogin(driver);
@@ -45,12 +44,12 @@ public class PageJCAS {
 		driver.findElement(By.xpath(XPathInputPass)).sendKeys(password);
 	}
 	
-	public static void clickCaptchaIfPresent(WebDriver driver) throws Exception {
+	public static void clickCaptchaIfPresent(WebDriver driver) {
 		By byIframe = By.xpath(XPathIframeCaptcha);
 		if (state(Present, byIframe, driver).check()) {
 			try {
 				driver.switchTo().frame(driver.findElement(byIframe));
-				WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(XPathRadioCaptchaWithinIframe));
+				click(By.xpath(XPathRadioCaptchaWithinIframe), driver).exec();
 				state(Visible, By.xpath(XPathRecaptchaCheckedWithinIframe), driver).wait(5).check();
 			}
 			finally {
@@ -59,7 +58,7 @@ public class PageJCAS {
 		}
 	}
 
-	public static void clickButtonLogin(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathButtonLogin));
+	public static void clickButtonLogin(WebDriver driver) {
+		click(By.xpath(XPathButtonLogin), driver).exec();
 	}
 }

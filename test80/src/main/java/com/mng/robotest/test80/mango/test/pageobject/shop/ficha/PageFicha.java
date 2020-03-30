@@ -15,15 +15,15 @@ public abstract class PageFicha extends PageObjTM {
     
     abstract public boolean isPageUntil(int maxSecondsWait);
     abstract public boolean isFichaArticuloUntil(String refArticulo, int maxSecondsToWait);
-    abstract public void clickAnadirBolsaButtonAndWait() throws Exception;
-    abstract public void selectAnadirAFavoritosButton() throws Exception;
-    abstract public void selectRemoveFromFavoritosButton() throws Exception;
+    abstract public void clickAnadirBolsaButtonAndWait();
+    abstract public void selectAnadirAFavoritosButton();
+    abstract public void selectRemoveFromFavoritosButton();
     abstract public boolean isVisibleDivAnadiendoAFavoritosUntil(int maxSecondsToWait);
     abstract public boolean isInvisibleDivAnadiendoAFavoritosUntil(int maxSecondsToWait);
     abstract public boolean isVisibleButtonElimFavoritos();
     abstract public boolean isVisibleButtonAnadirFavoritos();
     abstract public String getNameLinkBuscarEnTienda();
-    abstract public void selectBuscarEnTiendaLink() throws Exception;
+    abstract public void selectBuscarEnTiendaLink();
     abstract public boolean isVisibleSlider(Slider typeSlider);
     abstract public int getNumArtVisiblesSlider(Slider typeSlider);
     abstract public boolean isModalNoStockVisible(int maxSecondsToWait);

@@ -5,7 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
+
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageRegalarMisLikes extends PageObjTM {
@@ -37,22 +38,22 @@ public class PageRegalarMisLikes extends PageObjTM {
 		input.clear();
 		input.sendKeys(emailReceptor);
 	}
-	public void clickContinuar() throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathBotonContinuar));
+	public void clickContinuar() {
+		click(By.xpath(XPathBotonContinuar)).exec();
 	}
 	
 	public boolean checkIsVisibleBlockCuantosLikes() {
 		return (state(Visible, By.xpath(XPathBlockCuantosLikes)).check());
 	}
 	
-	public void inputLikesToRegalar(int numLikesToRegalar) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathRadioInputNumLikes), TypeOfClick.javascript);
+	public void inputLikesToRegalar(int numLikesToRegalar) {
+		click(By.xpath(XPathRadioInputNumLikes)).type(javascript).exec();
 		WebElement input = driver.findElement(By.xpath(XPathInputNumLikes));
 		input.clear();
 		input.sendKeys(String.valueOf(numLikesToRegalar));
 	}
 	
-	public void clickEnviarRegalo() throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathBotonEnviarRegalo));
+	public void clickEnviarRegalo() {
+		click(By.xpath(XPathBotonEnviarRegalo)).exec();
 	}
 }

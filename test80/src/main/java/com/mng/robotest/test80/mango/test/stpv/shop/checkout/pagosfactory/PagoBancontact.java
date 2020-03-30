@@ -30,11 +30,12 @@ public class PagoBancontact extends PagoStpV {
             Pago pago = dataPedido.getPago();
             //En el caso de Bancontact siempre saltará el D3D
             if (dataPedido.getPago().getTipotarjEnum()==TypeTarj.VISAD3D) {
-                isD3D = PageD3DLoginStpV.validateIsD3D(1, driver);
-                PageD3DLoginStpV.isImporteVisible(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), driver);
+            	PageD3DLoginStpV pageD3DLoginStpV = new PageD3DLoginStpV(driver);
+                isD3D = pageD3DLoginStpV.validateIsD3D(1);
+                pageD3DLoginStpV.isImporteVisible(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais());
                 if (isD3D) {
                     dataPedido.setCodtipopago("Y");
-                    PageD3DLoginStpV.loginAndClickSubmit(pago.getUsrd3d(), pago.getPassd3d(), driver);
+                    pageD3DLoginStpV.loginAndClickSubmit(pago.getUsrd3d(), pago.getPassd3d());
                 }
             }
         }

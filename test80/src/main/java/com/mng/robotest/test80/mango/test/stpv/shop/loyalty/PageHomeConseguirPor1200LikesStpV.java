@@ -32,7 +32,7 @@ public class PageHomeConseguirPor1200LikesStpV {
 	@Step (
 		description="Seleccionar el botón de \"Conseguir por 1200 Likes\"",
 		expected="Aparece el icono de operación Ok")
-	public void selectConseguirButton() throws Exception {
+	public void selectConseguirButton() {
 		pageHomeConseguirPor1200Likes.selectConseguirButton();
 		checkAfterConseguirButton();
 	}

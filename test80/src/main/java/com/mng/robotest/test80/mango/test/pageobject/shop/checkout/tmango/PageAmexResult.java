@@ -20,8 +20,8 @@ public class PageAmexResult {
     public static boolean isPresentContinueButton(WebDriver driver) {
     	return (state(Present, By.xpath(XPathContinueButton), driver).check());
     }
-    
-    public static void clickContinuarButton(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathContinueButton));
-    }
+
+	public static void clickContinuarButton(WebDriver driver) {
+		click(By.xpath(XPathContinueButton), driver).exec();
+	}
 }

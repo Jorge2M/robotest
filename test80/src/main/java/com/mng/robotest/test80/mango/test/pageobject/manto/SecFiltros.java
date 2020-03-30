@@ -48,17 +48,17 @@ public class SecFiltros {
 			driver.findElement(By.xpath(XPathFiltroCodPais)).sendKeys(codigoPais);
 		}
 	}
-    
-    public static String getFechaDesdeValue(WebDriver driver) {
-        return (driver.findElement(By.xpath(XPathFiltroFDesde)).getAttribute("value"));
-    }
-    
-    public static LocalDate getFechaHastaValue(WebDriver driver) {
-    	String fechaHastaScreen = driver.findElement(By.xpath(XPathFiltroFHasta)).getAttribute("value");
-    	return LocalDate.parse(fechaHastaScreen, formatDate);
-    }
-    
-    public static void clickButtonBuscar(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonBuscar));
-    }
+
+	public static String getFechaDesdeValue(WebDriver driver) {
+		return (driver.findElement(By.xpath(XPathFiltroFDesde)).getAttribute("value"));
+	}
+
+	public static LocalDate getFechaHastaValue(WebDriver driver) {
+		String fechaHastaScreen = driver.findElement(By.xpath(XPathFiltroFHasta)).getAttribute("value");
+		return LocalDate.parse(fechaHastaScreen, formatDate);
+	}
+
+	public static void clickButtonBuscar(WebDriver driver) {
+		click(By.xpath(XPathButtonBuscar), driver).exec();
+	}
 }

@@ -12,18 +12,14 @@ import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.
 
 public class SecStoreCredit {
 
-    static String XPathStoreCreditBlock = "//div[@class='customer-balance']";
-    static String XPathStoreCreditOption = XPathStoreCreditBlock + "/div[@class[contains(.,'customer-balance-option')]]";
-    static String XPathImporteStoreCredit = "//p[@class='customer-balance-title']"; 
-    
-    /**
-     * Clickamos el bloque de Saldo en Cuenta
-     * @param driver
-     */
-    public static void selectSaldoEnCuenta(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathStoreCreditOption));
-    }
-    
+	static String XPathStoreCreditBlock = "//div[@class='customer-balance']";
+	static String XPathStoreCreditOption = XPathStoreCreditBlock + "/div[@class[contains(.,'customer-balance-option')]]";
+	static String XPathImporteStoreCredit = "//p[@class='customer-balance-title']"; 
+
+	public static void selectSaldoEnCuenta(WebDriver driver) {
+		click(By.xpath(XPathStoreCreditOption), driver).exec();
+	}
+
     /**
      * @param driver
      * @return si es visible el bloque correspondiente al pago mediante Store Credit (Saldo en Cuenta)

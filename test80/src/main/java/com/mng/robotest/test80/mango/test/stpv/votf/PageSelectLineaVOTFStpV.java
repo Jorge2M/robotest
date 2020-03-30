@@ -7,7 +7,6 @@ import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.service.testab.manager.TestABmanager;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -42,7 +41,7 @@ public class PageSelectLineaVOTFStpV {
 	@Step (
 		description="Seleccionar el #{umMenu}o menu de Mujer y finalmente seleccionar el logo de Mango",
         expected="Aparece la página inicial de SHE")
-    public static void selectMenuAndLogoMango(int numMenu, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    public static void selectMenuAndLogoMango(int numMenu, DataCtxShop dCtxSh, WebDriver driver) {
         PageSelectLineaVOTF.clickBanner(LineaType.she, driver);
         PageSelectLineaVOTF.clickMenu(LineaType.she, numMenu, driver);
         SecCabecera.getNew(Channel.desktop, AppEcom.votf, driver).clickLogoMango();

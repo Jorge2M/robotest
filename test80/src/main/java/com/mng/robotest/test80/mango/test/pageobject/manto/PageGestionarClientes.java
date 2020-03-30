@@ -116,13 +116,14 @@ public class PageGestionarClientes {
 				.wait(maxSeconds).check());
 	}
 	
-	public static void clickThirdButtonAndWaitSeconds(TypeThirdButton typeButton, int waitSeconds, WebDriver driver) throws Exception {
-	    String xpathButton = getXPathThirdButton(typeButton);
-	    clickAndWaitLoad(driver, By.xpath(xpathButton), waitSeconds);
+	public static void clickThirdButtonAndWaitSeconds(TypeThirdButton typeButton, int maxSeconds, WebDriver driver) {
+		By byElem = By.xpath(getXPathThirdButton(typeButton));
+		click(byElem, driver).waitLoadPage(maxSeconds).exec();
 	}
 	
-	public static void clickDetallesButtonAndWaitSeconds(int waitSeconds, WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathFormTablaDetallesButton), waitSeconds);
+	public static void clickDetallesButtonAndWaitSeconds(int maxSeconds, WebDriver driver) {
+		By byElem = By.xpath(XPathFormTablaDetallesButton);
+		click(byElem, driver).waitLoadPage(maxSeconds).exec();
 	}
 	
 	public static boolean isVisibleMensajeClickThirdButton(TypeThirdButton typeButton, WebDriver driver) {

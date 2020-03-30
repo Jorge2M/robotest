@@ -3,7 +3,8 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paypal;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
+
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -17,8 +18,8 @@ public class PagePaypalCreacionCuenta {
     	String xpath = "(" + XPathButtonAceptarYPagar + ") | (" + XPathButtonPagarAhora + ") | (" + XPathButtonIniciarSesion + ")";
     	return (state(Present, By.xpath(xpath), driver).wait(maxSeconds).check());
     }
-    
-    public static void clickButtonIniciarSesion(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonIniciarSesion), TypeOfClick.javascript);
-    }
+
+	public static void clickButtonIniciarSesion(WebDriver driver) {
+		click(By.xpath(XPathButtonIniciarSesion), driver).type(TypeClick.javascript).exec();
+	}
 }

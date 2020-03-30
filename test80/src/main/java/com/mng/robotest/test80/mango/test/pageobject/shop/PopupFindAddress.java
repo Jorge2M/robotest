@@ -45,11 +45,11 @@ public class PopupFindAddress {
     public static void setDataBuscador(WebDriver driver, String data) {
         driver.findElement(By.xpath(XPathInputBuscador)).sendKeys(data);
     }
-    
-    public static void clickButtonLupa(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonLupa));
-    }
-    
+
+	public static void clickButtonLupa(WebDriver driver) {
+		click(By.xpath(XPathButtonLupa), driver).exec();
+	}
+
     public static void clickFirstDirecc(WebDriver driver) {
         driver.findElement(By.xpath(XPathLinkDirecc)).click();
     }

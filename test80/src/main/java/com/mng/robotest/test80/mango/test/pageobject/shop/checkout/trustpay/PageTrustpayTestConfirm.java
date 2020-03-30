@@ -34,9 +34,9 @@ public class PageTrustpayTestConfirm {
         String xpathButton = getXPathButton(typeButton);
         return (state(Present, By.xpath(xpathButton), driver).check());
     }
-    
-    public static void clickButton(typeButtons typeButton, WebDriver driver) throws Exception {
-        String xpathButton = getXPathButton(typeButton);
-        clickAndWaitLoad(driver, By.xpath(xpathButton));
-    }
+
+	public static void clickButton(typeButtons typeButton, WebDriver driver) {
+		String xpathButton = getXPathButton(typeButton);
+		click(By.xpath(xpathButton), driver).exec();
+	}
 }

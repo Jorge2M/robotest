@@ -43,11 +43,11 @@ public class PageYandexPayingByCode {
         String xpathEmail = getXPathDataUnitThatContains(emailUsr);
         return (state(Present, By.xpath(xpathEmail), driver).check());
     }    
-    
-    public static void clickBackToMango(Channel channel, WebDriver driver) throws Exception {
-        String xpathBackToMango = getXPathBackToMangoLink(channel);
-        clickAndWaitLoad(driver, By.xpath(xpathBackToMango));
-    }
+
+	public static void clickBackToMango(Channel channel, WebDriver driver) {
+		String xpathBackToMango = getXPathBackToMangoLink(channel);
+		click(By.xpath(xpathBackToMango), driver).exec();
+	}
 
     public static boolean isVisiblePaymentCode(WebDriver driver) {
     	return (state(Visible, By.xpath(XPathPaymentCode), driver).check());

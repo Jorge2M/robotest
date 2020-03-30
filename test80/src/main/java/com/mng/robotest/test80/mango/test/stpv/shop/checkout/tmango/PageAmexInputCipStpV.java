@@ -28,8 +28,7 @@ public class PageAmexInputCipStpV {
 	@Step (
 		description="Introducimos el CIP #{CIP} y pulsamos el botón \"Aceptar\"", 
         expected="Aparece una página de la pasarela de resultado OK")
-    public static void inputCipAndAcceptButton(String CIP, String importeTotal, String codigoPais, WebDriver driver) 
-    throws Exception {
+    public static void inputCipAndAcceptButton(String CIP, String importeTotal, String codigoPais, WebDriver driver) {
         PageAmexInputCip.inputCIP(CIP, driver);
         PageAmexInputCip.clickAceptarButton(driver);
                     

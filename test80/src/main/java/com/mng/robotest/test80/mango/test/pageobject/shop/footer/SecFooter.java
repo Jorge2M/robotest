@@ -128,10 +128,10 @@ public class SecFooter {
         return (state(Present, By.xpath(xpath), driver).check());
     }    
     
-    public static void clickLink(FooterLink footerType, WebDriver driver) throws Exception {
+    public static void clickLink(FooterLink footerType, WebDriver driver) {
     	ModalClubMangoLikes.closeModalIfVisible(driver);
     	moveToElement(By.xpath(footerType.getXPathRelativeCapa()), driver);
-    	clickAndWaitLoad(driver, By.xpath(footerType.getXPathRelativeCapa()));
+    	click(By.xpath(footerType.getXPathRelativeCapa()), driver).exec();
     }
     
     public static String clickLinkAndGetWindowFatherHandle(FooterLink footerType, WebDriver driver) throws Exception {
@@ -144,12 +144,12 @@ public class SecFooter {
 	    
 	    return windowFatherHandle;
     }
-    
-    public static void clickLinkCambioPais(WebDriver driver, AppEcom app) throws Exception {
-        String xpathLink = getXPathLinkCambioPais(app);
-        clickAndWaitLoad(driver, By.xpath(xpathLink));
-    }
-    
+
+	public static void clickLinkCambioPais(WebDriver driver, AppEcom app) {
+		String xpathLink = getXPathLinkCambioPais(app);
+		click(By.xpath(xpathLink), driver).exec();
+	}
+
     public static boolean checkFooters(List<FooterLink> listFooterLinksToValidate, AppEcom app, WebDriver driver) {
         for (FooterLink footerLink : listFooterLinksToValidate) {
         	String xpathLink = getXPathLink(footerLink, app);

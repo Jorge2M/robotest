@@ -20,8 +20,8 @@ public class PagePaytrailIdConfirm {
         driver.findElement(By.xpath(XPathInputId)).clear();
         driver.findElement(By.xpath(XPathInputId)).sendKeys(idConfirm);
     }
-    
-    public static void clickConfirmar(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonConfirmar));
-    }
+
+	public static void clickConfirmar(WebDriver driver) {
+		click(By.xpath(XPathButtonConfirmar), driver).exec();
+	}
 }

@@ -47,8 +47,8 @@ public class PageAmexInputTarjeta {
     public static boolean isPresentPagarButton(WebDriver driver) {
     	return (state(Present, By.xpath(XPathPagarButton), driver).check());
     }
-    
-    public static void clickPagarButton(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathPagarButton));
-    }
+
+	public static void clickPagarButton(WebDriver driver) {
+		click(By.xpath(XPathPagarButton), driver).exec();
+	}
 }

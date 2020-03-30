@@ -15,11 +15,11 @@ public class ModalActPoliticaPrivacidad {
 		return (state(Visible, By.xpath(XPathModal), driver).check());
 	}
 	
-	public static void clickOk(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathButtonOk));
+	public static void clickOk(WebDriver driver) {
+		click(By.xpath(XPathButtonOk), driver).exec();
 	}
 	
-	public static void clickOkIfVisible(WebDriver driver) throws Exception {
+	public static void clickOkIfVisible(WebDriver driver) {
 		if (isVisible(driver)) {
 			clickOk(driver);
 		}

@@ -27,9 +27,9 @@ public interface PageDetallePedido {
     
     public boolean isPresentImporteTotal(String importeTotal, String codPais);
     
-    public boolean isVisiblePrendaUntil(int maxSecondsToWait) throws Exception;
+    public boolean isVisiblePrendaUntil(int maxSecondsToWait);
     
     public int getNumPrendas();
     
-    public void clickBackButton(Channel channel) throws Exception;
+    public void clickBackButton(Channel channel);
 }

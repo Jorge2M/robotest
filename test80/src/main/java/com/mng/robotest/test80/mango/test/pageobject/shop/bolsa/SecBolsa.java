@@ -13,11 +13,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
+import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
@@ -27,6 +28,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
  *
  */
 public class SecBolsa {
+	
 	public enum StateBolsa {Open, Closed}
     static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     public static LineasArticuloBolsa lineasArticuloBolsa;
@@ -142,14 +144,11 @@ public class SecBolsa {
 		return (state(Visible, By.xpath(xpathBoton), driver).wait(maxSeconds).check());
 	}
 
-    /**
-     * Esperamos a que esté disponible y seleccionamos el botón "COMPRAR" de la bolsa
-     */
-    public static void clickBotonComprar(WebDriver driver, Channel channel, int secondsWait) throws Exception {
-        String xpathComprarBt = SecBolsa.getXPATH_BotonComprar(channel);
-        new WebDriverWait(driver, secondsWait).until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathComprarBt)));
-        clickAndWaitLoad(driver, By.xpath(xpathComprarBt), TypeOfClick.javascript);
-    }
+	public static void clickBotonComprar(WebDriver driver, Channel channel, int secondsWait) {
+		String xpathComprarBt = SecBolsa.getXPATH_BotonComprar(channel);
+		new WebDriverWait(driver, secondsWait).until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathComprarBt)));
+		click(By.xpath(xpathComprarBt), driver).type(TypeClick.javascript).exec();
+	}
     
     /**
      * @return el número que aparece en el icono de la bolsa y que se corresponde con el número de artículos que contiene
@@ -261,11 +260,11 @@ public class SecBolsa {
             return false;
         }
     }
-    
-    public static void clickAspaMobil(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathAspaMobil));
-    }
-    
+
+	public static void clickAspaMobil(WebDriver driver) {
+		click(By.xpath(XPathAspaMobil), driver).exec();
+	}
+
     public static void clearArticuloAndWait(Channel channel, String refArticulo, WebDriver driver) throws Exception {
         //Seleccionar el link de la papelera para eliminar de la bolsa
         String xpathClearArt = getXPATH_LinkBorrarArt(channel, refArticulo);
@@ -312,10 +311,10 @@ public class SecBolsa {
 		setBolsaToStateIfNotYet(StateBolsa.Closed, dCtxSh.channel, dCtxSh.appE, driver);
 	}
 
-	private static void clickIconoCloseMobil(WebDriver driver, Channel channel) throws Exception {
+	private static void clickIconoCloseMobil(WebDriver driver, Channel channel) {
 		String xpathAspa =  "//div[@id='close_mobile']";
 		if (state(Visible, By.xpath(xpathAspa), driver).check()) {
-			clickAndWaitLoad(driver, By.xpath(xpathAspa));
+			click(By.xpath(xpathAspa), driver).exec();
 		}
 	}
 

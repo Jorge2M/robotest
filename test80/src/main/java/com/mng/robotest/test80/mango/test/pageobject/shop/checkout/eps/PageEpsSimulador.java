@@ -36,8 +36,8 @@ public class PageEpsSimulador {
     	String xpathOption = getXPathOptionDelayAuthorised(typeDelay);
     	driver.findElement(By.xpath(xpathOption)).click();
     }
-    
-    public static void clickButtonContinue(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathContinueButton));
-    }
+
+	public static void clickButtonContinue(WebDriver driver) {
+		click(By.xpath(XPathContinueButton), driver).exec();
+	}
 }

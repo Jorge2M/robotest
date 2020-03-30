@@ -19,8 +19,8 @@ public class PageDotpayAcceptSimulation {
     public static boolean isPresentRedButtonAceptar(WebDriver driver) {
     	return (state(Present, By.xpath(XPathRedButtonAceptar), driver).check());
     }
-    
-    public static void clickRedButtonAceptar(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathRedButtonAceptar));
-    }
+
+	public static void clickRedButtonAceptar(WebDriver driver) {
+		click(By.xpath(XPathRedButtonAceptar), driver).exec();
+	}
 }

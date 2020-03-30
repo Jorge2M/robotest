@@ -185,15 +185,15 @@ public class PageReembolsos {
 	 * En ocasiones un sólo click en el botón "Save" no tiene efecto. 
 	 * Forzamos a que funcione mediante la siguiente estrategia: lo pulsamos, esperamos a que desaparezca y en caso negativo lo volvemos a pulsar
 	 */
-	public static void clickButtonSaveTransfForce(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathButtonSaveTransf));
+	public static void clickButtonSaveTransfForce(WebDriver driver) {
+		click(By.xpath(XPathButtonSaveTransf), driver).exec();
 		if (state(Present, By.xpath(XPathButtonSaveTransf), driver).check()) {
-			clickAndWaitLoad(driver, By.xpath(XPathButtonSaveTransf));
+			click(By.xpath(XPathButtonSaveTransf), driver).exec();
 		}
 	}
 
-	public static void clickButtonSaveTransf(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathButtonSaveTransf));
+	public static void clickButtonSaveTransf(WebDriver driver) {
+		click(By.xpath(XPathButtonSaveTransf), driver).exec();
 	}
 
 	public static boolean isVisibleModalConfTransf(WebDriver driver, Channel channel, int seconds) throws Exception {
@@ -249,12 +249,12 @@ public class PageReembolsos {
 				.wait(maxSeconds).check());
 	}
 
-	public static void clickSaveButtonStoreCredit(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathSaveButtonStoreCredit));
+	public static void clickSaveButtonStoreCredit(WebDriver driver) {
+		click(By.xpath(XPathSaveButtonStoreCredit), driver).exec();
 
 		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
 		if (isVisibleSaveButtonStoreCredit(driver)) {
-			clickAndWaitLoad(driver, By.xpath(XPathSaveButtonStoreCredit));       
+			click(By.xpath(XPathSaveButtonStoreCredit), driver).exec();
 		}
 	}
 }

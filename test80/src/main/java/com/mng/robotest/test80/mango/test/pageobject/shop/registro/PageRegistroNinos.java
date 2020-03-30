@@ -74,7 +74,7 @@ public class PageRegistroNinos {
         }
     }
     
-    public static void clickContinuar(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(xpathBotonContinuar));
+    public static void clickContinuar(WebDriver driver) {
+    	click(By.xpath(xpathBotonContinuar), driver).exec();
     }
 }

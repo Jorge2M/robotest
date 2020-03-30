@@ -2,7 +2,6 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageMercpagoDatosTrjMobil extends PageMercpagoDatosTrj {
@@ -67,8 +66,9 @@ public class PageMercpagoDatosTrjMobil extends PageMercpagoDatosTrj {
     	return (state(Clickable, By.xpath(XPathButtonNextPay), driver)
     			.wait(maxSeconds).check());
     }
-    
-    public void clickButtonForPay() throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonNextPay + " | " + XPathBotonPagar));
-    }
+
+	public void clickButtonForPay() {
+		By byElem = By.xpath(XPathButtonNextPay + " | " + XPathBotonPagar);
+		click(byElem).exec();
+	}
 }

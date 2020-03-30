@@ -19,7 +19,7 @@ public class PagePaypalSelectPagoStpV {
     @Step (
     	description="Seleccionar el botón \"Continuar\"", 
         expected="Aparece la página de Mango de resultado OK del pago")
-    public static void clickContinuarButton(WebDriver driver) throws Exception {     
+    public static void clickContinuarButton(WebDriver driver) {
         PagePaypalSelectPago.clickContinuarButton(driver);
 
         //Validations

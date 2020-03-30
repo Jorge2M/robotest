@@ -25,10 +25,8 @@ public class PageDotpayAcceptSimulationStpV {
 	@Step (
 		description="Seleccionar el botón rojo para aceptar", 
         expected="Aparece la página resultado")
-    public static void clickRedButtonAceptar(WebDriver driver) throws Exception {
+    public static void clickRedButtonAceptar(WebDriver driver) {
         PageDotpayAcceptSimulation.clickRedButtonAceptar(driver);
-        
-        //Validation
-        PageDotpayResultadoStpV.validateIsPage(driver);
+        (new PageDotpayResultadoStpV(driver)).validateIsPage();
     }
 }

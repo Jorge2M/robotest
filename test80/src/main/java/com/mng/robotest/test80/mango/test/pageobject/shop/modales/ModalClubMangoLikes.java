@@ -16,17 +16,17 @@ public class ModalClubMangoLikes {
 		return (state(Visible, By.xpath(xpathModal), driver).check());
 	}
 	
-	public static void clickDescubreTusVentajas(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(xpathDescubreTusVentajas));
+	public static void clickDescubreTusVentajas(WebDriver driver) {
+		click(By.xpath(xpathDescubreTusVentajas), driver).exec();
 	}
 	
-	public static void closeModalIfVisible(WebDriver driver) throws Exception {
+	public static void closeModalIfVisible(WebDriver driver) {
 		if (isVisible(driver)) {
 			closeModal(driver);
 		}
 	}
 	
-	private static void closeModal(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(xpathLinkForClose));
+	private static void closeModal(WebDriver driver) {
+		click(By.xpath(xpathLinkForClose), driver).exec();
 	}
 }

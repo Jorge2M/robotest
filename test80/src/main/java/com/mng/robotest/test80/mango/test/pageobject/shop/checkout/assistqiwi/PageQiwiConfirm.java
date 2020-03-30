@@ -17,8 +17,8 @@ public class PageQiwiConfirm {
     public static boolean isPage(WebDriver driver) {
     	return (state(Present, By.xpath(XPathButtonConfirmar), driver).check());
     }
-    
-    public static void clickConfirmar(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonConfirmar));
-    }
+
+	public static void clickConfirmar(WebDriver driver) {
+		click(By.xpath(XPathButtonConfirmar), driver).exec();
+	}
 }

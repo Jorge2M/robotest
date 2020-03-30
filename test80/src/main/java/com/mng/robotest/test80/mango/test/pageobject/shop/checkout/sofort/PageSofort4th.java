@@ -34,10 +34,10 @@ public class PageSofort4th {
         driver.findElement(By.xpath(XPathInputPass)).sendKeys(password);        
     }
 
-    public static void clickSubmitButton(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathSubmitButton));
-    }
-    
+	public static void clickSubmitButton(WebDriver driver) {
+		click(By.xpath(XPathSubmitButton), driver).exec();
+	}
+
     public static boolean isVisibleFormSelCta(WebDriver driver) {
     	return (state(Visible, By.xpath(XPathFormSelCta), driver).check());
     }

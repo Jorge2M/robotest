@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -96,10 +97,9 @@ public class PageRegistroIniStpV {
 
 	@Step (
 		description="Seleccionar el botón <b>Regístrate</b>")
-    public void clickRegistrateButton(Pais paisRegistro, boolean usrExists, AppEcom app, Map<String,String> dataRegistro) 
-    throws Exception {
+    public void clickRegistrateButton(Pais paisRegistro, boolean usrExists, AppEcom app, Map<String,String> dataRegistro) {
 		pageRegistroIni.clickButtonRegistrate();
-        Thread.sleep(1000);
+        PageObjTM.waitMillis(1000);
 
         //Validaciones
         int maxSecondsWait = 3;
@@ -132,7 +132,7 @@ public class PageRegistroIniStpV {
 	}
 	
 	@Validation (
-		description="Aparece un error <b>Email ya registrado<\b> (lo esperamos hasta #{maxSecondsWait} segundos)",
+		description="Aparece un error <b>Email ya registrado</b> (lo esperamos hasta #{maxSecondsWait} segundos)",
 		level=State.Defect)
     private boolean validaEmailYaRegistradoShown(int maxSecondsWait) {
 		return(pageRegistroIni.isVisibleErrorUsrDuplicadoUntil(maxSecondsWait));

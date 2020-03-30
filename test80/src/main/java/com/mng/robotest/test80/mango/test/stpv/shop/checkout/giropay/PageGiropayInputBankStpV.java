@@ -20,7 +20,7 @@ public class PageGiropayInputBankStpV {
 	@Step (
 		description="Introducimos el banco \"#{bankToInput}\" y pulsamos el botón de confirmación", 
 		expected="Aparece la página Mango de resultado del pago")
-	public static void inputBankAndConfirm(String bankToInput, Channel channel, WebDriver driver) throws Exception {
+	public static void inputBankAndConfirm(String bankToInput, Channel channel, WebDriver driver) {
 		PageGiropayInputBank.inputBank(bankToInput, driver);
 		PageGiropayInputBank.confirm(driver);
 	}

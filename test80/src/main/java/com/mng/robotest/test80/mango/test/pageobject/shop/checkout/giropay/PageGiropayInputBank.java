@@ -17,15 +17,15 @@ public class PageGiropayInputBank {
 		return (state(Visible, By.xpath(XPathInputBank), driver).check());
 	}
 	
-	public static void inputBank(String idBank, WebDriver driver) throws Exception {
+	public static void inputBank(String idBank, WebDriver driver) {
 		WebElement input = driver.findElement(By.xpath(XPathInputBank));
 		input.clear();
 		input.sendKeys(idBank);
 		state(Visible, By.xpath(XPathLinkBakOption), driver).wait(1).check();
-		clickAndWaitLoad(driver, By.xpath(XPathLinkBakOption));
+		click(By.xpath(XPathLinkBakOption), driver).exec();
 	}
 	
-	public static void confirm(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathButtonConfirm));
+	public static void confirm(WebDriver driver) {
+		click(By.xpath(XPathButtonConfirm), driver).exec();
 	}
 }

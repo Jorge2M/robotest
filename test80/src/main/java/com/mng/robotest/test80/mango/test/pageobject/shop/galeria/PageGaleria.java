@@ -20,7 +20,8 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
+
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterOrdenacion;
@@ -79,7 +80,7 @@ public abstract class PageGaleria extends PageObjTM {
 	abstract int getNumArticulosFromPagina(int pagina, TypeArticleDesktop sizeArticle);
 	abstract public WebElement getArticleFromPagina(int numPagina, int numArticle);
 	abstract public boolean isHeaderArticlesVisible(String textHeader);
-	abstract public void showTallasArticulo(int posArticulo) throws Exception;
+	abstract public void showTallasArticulo(int posArticulo);
 	abstract public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSecondsToWait);
 	abstract public ArticuloScreen selectTallaArticle(int posArticulo, int posTalla) throws Exception;
 	abstract public StateFavorito getStateHearthIcon(WebElement hearthIcon);
@@ -94,14 +95,14 @@ public abstract class PageGaleria extends PageObjTM {
         	"@class[contains(.,'productList__name')] or " + 
         	"@class[contains(.,'product-list-name')] or " + 
         	"@class='product-list-info-name' or " +
-        	"@class='product-name'";
+        	"@class[contains(.,'product-name')]";
     final static String XPathNombreRelativeToArticle = "//*[" + classProductItem + "]";
     final static String XPathLinkRelativeToArticle = ".//a[@class='product-link']";
 
-	public static PageGaleria getNew(Channel channel, AppEcom app, WebDriver driver) throws Exception {
+	public static PageGaleria getNew(Channel channel, AppEcom app, WebDriver driver) {
 		return PageGaleria.getNew(From.menu, channel, app, driver);
 	}
-	public static PageGaleria getNew(From from, Channel channel, AppEcom app, WebDriver driver) throws Exception {
+	public static PageGaleria getNew(From from, Channel channel, AppEcom app, WebDriver driver) {
 		switch (channel) {
 		case desktop:
 			return (PageGaleriaDesktop.getNew(from, app, driver));
@@ -651,13 +652,12 @@ public abstract class PageGaleria extends PageObjTM {
     	return (state(Visible, By.xpath(xpathPagina)).check());
     }
 
-    
-    public void clickArticulo(WebElement articulo) throws Exception {
-    	moveToElement(articulo, driver);
-    	clickAndWaitLoad(driver, articulo, 30, TypeOfClick.webdriver);
-    }
-    
-    @SuppressWarnings("static-access")
+	public void clickArticulo(WebElement articulo) {
+		moveToElement(articulo, driver);
+		click(articulo).waitLoadPage(30).type(webdriver).exec();
+	}
+
+	@SuppressWarnings("static-access")
 	public String openArticuloPestanyaAndGo(WebElement article, AppEcom app) 
 	throws Exception {
         String galeryWindowHandle = driver.getWindowHandle();

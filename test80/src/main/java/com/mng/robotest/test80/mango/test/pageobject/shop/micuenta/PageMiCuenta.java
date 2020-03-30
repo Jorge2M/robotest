@@ -4,7 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+
+import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
@@ -28,27 +29,27 @@ public class PageMiCuenta extends PageObjTM {
     	return (state(Visible, By.xpath(XPathLinkMisDatos)).wait(maxSeconds).check());
     }
     
-    public void clickMisPedidos() throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathLinkMisPedidos));
+    public void clickMisPedidos() {
+    	click(By.xpath(XPathLinkMisPedidos)).exec();
     }
     
     public void clickMisCompras() throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathLinkMisCompras));
+    	click(By.xpath(XPathLinkMisCompras)).exec();
     }
     
-    public void clickSuscripciones() throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathLinkSuscripciones));
+    public void clickSuscripciones() {
+    	click(By.xpath(XPathLinkSuscripciones)).exec();
     }
     
-    public void clickDevoluciones() throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathLinkDevoluciones));
+    public void clickDevoluciones() {
+    	click(By.xpath(XPathLinkDevoluciones)).exec();
     }
     
-    public void clickReembolsos() throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathLinkReembolsos), TypeOfClick.javascript);
+    public void clickReembolsos() {
+    	click(By.xpath(XPathLinkReembolsos)).type(javascript).exec();
     }
     
-    public void clickMisDatos() throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathLinkMisDatos));
+    public void clickMisDatos() {
+    	click(By.xpath(XPathLinkMisDatos)).exec();
     }    
 }

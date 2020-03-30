@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
+import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
 import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 
@@ -53,12 +53,12 @@ public class SecMenusUserMobil extends WebdrvWrapp {
     	return (isElementInState(menu, state, driver));
     }
     
-    public boolean isMenuInStateUntil(MenuUserMobil menu, State state, int maxSecondsWait) throws Exception {
+    public boolean isMenuInStateUntil(MenuUserMobil menu, State state, int maxSecondsWait) {
     	secCabecera.clickIconoMenuHamburguerMobil(true);
     	return (isElementInStateUntil(menu, state, maxSecondsWait, driver));
     }
     
-    public void clickMenu(MenuUserMobil menu) throws Exception {
+    public void clickMenu(MenuUserMobil menu) {
     	secCabecera.clickIconoMenuHamburguerMobil(true);
     	clickAndWait(menu, driver);
     }

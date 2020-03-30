@@ -23,7 +23,7 @@ public class PageDetallePedidoNew extends PageObjTM implements PageDetallePedido
     	case movil_web:
     	default:
     		return XPathBackButtonMobil;
-    	}    	
+    	}
     }
 
     public PageDetallePedidoNew(WebDriver driver) {
@@ -46,7 +46,7 @@ public class PageDetallePedidoNew extends PageObjTM implements PageDetallePedido
     }
     
     @Override
-    public boolean isVisiblePrendaUntil(int maxSeconds) throws Exception {
+    public boolean isVisiblePrendaUntil(int maxSeconds) {
     	return (state(Visible, By.xpath(XPathLineaPrenda)).wait(maxSeconds).check());
     }
     
@@ -56,8 +56,8 @@ public class PageDetallePedidoNew extends PageObjTM implements PageDetallePedido
     }
     
     @Override
-    public void clickBackButton(Channel channel) throws Exception {
+    public void clickBackButton(Channel channel) {
     	By byLinkBack = By.xpath(getXPathBackButton(channel));
-    	clickAndWaitLoad(driver, byLinkBack);
+    	click(byLinkBack).exec();
     }
 }

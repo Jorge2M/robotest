@@ -55,7 +55,7 @@ public class PageHomeLikesStpV {
 	@Step(
 		description="Seleccionar el 1er botón \"Donar mis Likes\"",
 		expected="Aparece una página para donar mis Likes")
-	public void clickButtonDonarLikes() throws Exception {
+	public void clickButtonDonarLikes() {
 		pageHomeLikes.clickButton(ButtonUseLikes.DonarMisLikes);
 		PageHomeDonateLikesStpV.getNew(driver).checkIsPage();
 	}
@@ -63,7 +63,7 @@ public class PageHomeLikesStpV {
 	@Step(
 		description="Seleccionar el 1er botón \"Conseguir por 1200 Likes\"",
 		expected="Aparece una página para conseguir por 1200 Likes")
-	public void clickButtonConseguirPor1200Likes() throws Exception {
+	public void clickButtonConseguirPor1200Likes() {
 		pageHomeLikes.clickButton(ButtonUseLikes.Conseguir);
 		PageHomeConseguirPor1200LikesStpV.getNew(driver).checkIsPage();
 	}
@@ -71,7 +71,7 @@ public class PageHomeLikesStpV {
 	@Step(
 		description="Seleccionar el 1er botón \"Regalar mis Likes\"",
 		expected="Aparece la página para regalar mis Likes")
-	public PageRegalarMisLikesStpV clickButtonRegalarMisLikes() throws Exception {
+	public PageRegalarMisLikesStpV clickButtonRegalarMisLikes() {
 		pageHomeLikes.clickButton(ButtonUseLikes.RegalarMisLikes);
 		PageRegalarMisLikesStpV pageRegalarStpV = PageRegalarMisLikesStpV.getNew(driver);
 		pageRegalarStpV.checkIsPage();

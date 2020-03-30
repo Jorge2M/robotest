@@ -68,8 +68,9 @@ public class Otras {
         description="Verificar en google la existencia de referencia Mango")
     public void OTR002_check_Busqueda_Google() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
-        GoogleStpV.accessGoogleAndSearchMango(driver);
-        GoogleStpV.selectFirstLinkSinPublicidad(driver);
+    	GoogleStpV googleStpV = new GoogleStpV(driver);
+        googleStpV.accessGoogleAndSearchMango();
+        googleStpV.selectFirstLinkSinPublicidad();
     }
     
     @Test (

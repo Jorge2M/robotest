@@ -62,7 +62,7 @@ public class PageHomeLikes extends PageObjTM {
 		return (state(Visible, By.xpath(xpathBlockExchange)).wait(2).check());
 	}
 
-	public void clickButton(ButtonUseLikes button) throws Exception {
-		clickAndWaitLoad(driver, button.getBy());
+	public void clickButton(ButtonUseLikes button) {
+		click(button.getBy()).exec();
 	}
 }

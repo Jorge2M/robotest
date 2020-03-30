@@ -38,39 +38,39 @@ public class PageMangoCard extends PageObjTM implements PageFromFooter {
 	/**
      * Selecciona el botón "Solicitar Tarjeta Mango" de la página 1
      */
-    public void clickOnWantMangoCardNow(Channel channel) throws Exception {
+    public void clickOnWantMangoCardNow(Channel channel) {
     	if (channel==Channel.movil_web) {
-    		clickAndWaitLoad(driver, By.xpath(XPathGoMangoCardButtonMobile));
+    		click(By.xpath(XPathGoMangoCardButtonMobile)).exec();
     	} else {
-    		clickAndWaitLoad(driver, By.xpath(XPathGoMangoCardButton));
+    		click(By.xpath(XPathGoMangoCardButton)).exec();
     	}
     }
     
-    public void clickToGoSecondMangoCardPage() throws Exception {
-    	clickAndWaitLoad(driver, By.xpath(XPathLinkSolMangoCardPage1));
+    public void clickToGoSecondMangoCardPage() {
+    	click(By.xpath(XPathLinkSolMangoCardPage1)).exec();
     }
 
-    public boolean isPresentNameField() throws Exception {
+    public boolean isPresentNameField() {
     	return (state(Present, By.xpath(XPathNameField)).check());
     }
     
-    public boolean isPresentFirstSurnameField() throws Exception {
+    public boolean isPresentFirstSurnameField() {
     	return (state(Present, By.xpath(XPathFirstSurnameField)).check());
     }
     
-    public boolean isPresentSecondSurnameField() throws Exception {
+    public boolean isPresentSecondSurnameField() {
     	return (state(Present, By.xpath(XPathSecondSurnameField)).check());
     }
     
-    public boolean isPresentMobileField() throws Exception {
+    public boolean isPresentMobileField() {
     	return (state(Present, By.xpath(XPathMobileField)).check());
     }
     
-    public boolean isPresentMailField() throws Exception {
+    public boolean isPresentMailField() {
     	return (state(Present, By.xpath(XPathMailField)).check());
     }
     
-    public boolean isPresentButtonSolMangoCardNow() throws Exception {
+    public boolean isPresentButtonSolMangoCardNow() {
     	return (state(Present, By.xpath(XPathLinkSolMangoCardPage1)).check());
     }
 }

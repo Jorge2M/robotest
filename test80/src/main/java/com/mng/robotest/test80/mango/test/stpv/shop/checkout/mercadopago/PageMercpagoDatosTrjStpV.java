@@ -146,7 +146,7 @@ public class PageMercpagoDatosTrjStpV {
     @Step (
     	description="Seleccionar el botón \"Next\" para pagar", 
         expected="Aparece la página de resultado")
-    public void clickButtonForPayMobil(boolean afterTrjGuardada) throws Exception {
+    public void clickButtonForPayMobil(boolean afterTrjGuardada) {
     	((PageMercpagoDatosTrjMobil)pageMercpagoDatosTrj).clickButtonForPay();
     	if (afterTrjGuardada) {
     		PageResultPagoStpV.validaIsPageUntil(30, channel, driver);
@@ -175,8 +175,7 @@ public class PageMercpagoDatosTrjStpV {
     @Step (
     	description= "Pulsar el botón Continuar/Pagar para efectuar el pago", 
         expected= "Aparece la página de resultado")
-    public void clickButtonForPayDesktop(boolean afterTrjGuardada) 
-    throws Exception {  
+    public void clickButtonForPayDesktop(boolean afterTrjGuardada) {  
         PageMercpagoDatosTrjDesktop pageDesktop = (PageMercpagoDatosTrjDesktop)pageMercpagoDatosTrj;
         pageDesktop.clickBotonForContinue();
         if (afterTrjGuardada) {

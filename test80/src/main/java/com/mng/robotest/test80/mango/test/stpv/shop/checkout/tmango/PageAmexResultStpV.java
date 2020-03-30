@@ -30,7 +30,7 @@ public class PageAmexResultStpV {
     @Step (
     	description="Seleccionamos el botón \"Continuar\"", 
         expected="Aparece la página de Mango de resultado OK del pago")
-    public static void clickContinuarButton(WebDriver driver) throws Exception {
+    public static void clickContinuarButton(WebDriver driver) {
     	PageAmexResult.clickContinuarButton(driver);
     }
 }

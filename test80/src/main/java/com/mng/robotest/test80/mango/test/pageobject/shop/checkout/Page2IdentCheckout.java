@@ -15,13 +15,14 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
+import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+
 import com.mng.robotest.test80.mango.test.pageobject.shop.PopupFindAddress;
 
 public class Page2IdentCheckout {
@@ -556,13 +557,13 @@ public class Page2IdentCheckout {
 				.wait(maxSeconds).check());
 	}
 
-	public static void clickBotonContinuarAndWait(int maxSecondsToWait, WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathBotonContinuar), maxSecondsToWait);
+	public static void clickBotonContinuarAndWait(int maxSeconds, WebDriver driver) {
+		click(By.xpath(XPathBotonContinuar), driver).waitLoadPage(maxSeconds).exec();
  
 		//Hay una especie de bug (p.e. en el caso de Turquía) que hace que en ocasiones el click no tenga efecto
 		if (state(Present, By.xpath(XPathBotonContinuar), driver).check()) {
-			Thread.sleep(1500);
-			clickAndWaitLoad(driver, By.xpath(XPathBotonContinuar), TypeOfClick.javascript);
+			waitMillis(1500);
+			click(By.xpath(XPathBotonContinuar), driver).type(TypeClick.javascript).exec();
 		}
 	}
 

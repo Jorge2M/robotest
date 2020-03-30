@@ -25,8 +25,8 @@ public class PageMultibancoEnProgresoStpv {
     
 	@Step (
 		description="Seleccionar el botón \"Continuar\"", 
-        expected="El pago se ejecuta correctamente y aparece la correspondiente página de resultado de Mango")
-    public static void clickButtonNextStep(WebDriver driver) throws Exception {
+		expected="El pago se ejecuta correctamente y aparece la correspondiente página de resultado de Mango")
+	public static void clickButtonNextStep(WebDriver driver) {
 		PageMultibancoEnProgreso.clickButtonNextStep(driver);
-    }
+	}
 }

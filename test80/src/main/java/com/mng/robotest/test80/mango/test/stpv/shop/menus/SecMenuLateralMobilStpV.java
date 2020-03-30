@@ -117,22 +117,19 @@ public class SecMenuLateralMobilStpV {
     @Step (
     	description="Seleccionar el carrusel \"nuevo\" asociado a la línea #{lineaType}",
         expected="Aparece la página de nuevo asociada a la línea #{lineaType}")
-    public void selectCarruselNuevo(Linea lineaNuevo, LineaType lineaType) throws Exception {
+    public void selectCarruselNuevo(Linea lineaNuevo, LineaType lineaType) {
     	secMenuLateral.clickCarruselNuevo(lineaNuevo, lineaType);
         checkGaleriaAfterSelectNuevo();
     }
 
 	@Validation
-	private ChecksTM checkGaleriaAfterSelectNuevo() throws Exception {
+	private ChecksTM checkGaleriaAfterSelectNuevo() {
 		ChecksTM validations = ChecksTM.getNew();
 		PageGaleria pageGaleria = PageGaleria.getNew(Channel.movil_web, app, driver);
 		int maxSecondsWait = 3;
 		validations.add(
 			"Aparece algún artículo (esperamos " + maxSecondsWait + " segundos)",
 			pageGaleria.isVisibleArticleUntil(1, maxSecondsWait), State.Warn);
-//		validations.add(
-//			"El 1er artículo es de tipo " + LineaType.nuevo,
-//			pageGaleria.isFirstArticleOfType(LineaType.nuevo), State.Warn);
 
 		return validations;   
 	}

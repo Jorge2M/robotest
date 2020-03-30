@@ -9,17 +9,23 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.dotpay.PageDo
 
 public class PageDotpayResultadoStpV {
     
+	private final PageDotpayResultado pageDotpayResultado;
+	
+	public PageDotpayResultadoStpV(WebDriver driver) {
+		this.pageDotpayResultado = new PageDotpayResultado(driver);
+	}
+	
 	@Validation (
 		description="Aparece la página de resultado del pago OK de Dotpay",
 		level=State.Warn)
-    public static boolean validateIsPage(WebDriver driver) {
-        return (PageDotpayResultado.isPageResultadoOk(driver));
+    public boolean validateIsPage() {
+        return (pageDotpayResultado.isPageResultadoOk());
     }
     
 	@Step (
 		description="Seleccionar el botón <b>Next</b>", 
         expected="Aparece la página de pago OK de Mango")
-    public static void clickNext(WebDriver driver) throws Exception {
-		PageDotpayResultado.clickButtonNext(driver);
+    public void clickNext() throws Exception {
+		pageDotpayResultado.clickButtonNext();
     }
 }
