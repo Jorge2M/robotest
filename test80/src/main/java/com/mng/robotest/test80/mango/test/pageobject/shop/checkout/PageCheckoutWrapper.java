@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Descuento;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -139,7 +139,7 @@ public class PageCheckoutWrapper {
 
 	public static float applyAndGetLoyaltyPoints(WebDriver driver) {
 		By byApplyButton = By.xpath(XpathButtonForApplyLoyaltyPoints);
-		WebElement buttonLoyalty = WebdrvWrapp.getElementsVisible(driver, byApplyButton).get(0);
+		WebElement buttonLoyalty = SeleniumUtils.getElementsVisible(driver, byApplyButton).get(0);
 		String textButtonApply = buttonLoyalty.getAttribute("innerHTML");
 		String importeButton = ImporteScreen.normalizeImportFromScreen(textButtonApply);
 		click(By.xpath(XpathButtonForApplyLoyaltyPoints), driver).exec();

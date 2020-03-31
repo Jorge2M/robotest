@@ -48,16 +48,16 @@ public class PageResultPagoStpV {
     @Validation
     public static ChecksTM validateTextConfirmacionPago(Channel channel, WebDriver driver) {
     	ChecksTM validations = ChecksTM.getNew();
-	    int maxSecondsWait1 = 10;
-	    boolean isVisibleTextConfirmacion = PageResultPago.isVisibleTextoConfirmacionPago(driver, channel, maxSecondsWait1);
+	    int maxSeconds1 = 10;
+	    boolean isVisibleTextConfirmacion = PageResultPago.isVisibleTextoConfirmacionPago(driver, channel, maxSeconds1);
        	validations.add(
-    		"Aparece un texto de confirmación del pago (lo esperamos hasta " + maxSecondsWait1 + " segundos)",
+    		"Aparece un texto de confirmación del pago (lo esperamos hasta " + maxSeconds1 + " segundos)",
     		isVisibleTextConfirmacion, State.Warn);
        	if (!isVisibleTextConfirmacion) {
-   		    int maxSecondsWait2 = 20;
+   		    int maxSeconds2 = 20;
            	validations.add(
-        		"Si no aparece lo esperamos " + maxSecondsWait2 + " segundos",
-        		PageResultPago.isVisibleTextoConfirmacionPago(driver, channel, maxSecondsWait2), State.Defect);
+        		"Si no aparece lo esperamos " + maxSeconds2 + " segundos",
+        		PageResultPago.isVisibleTextoConfirmacionPago(driver, channel, maxSeconds2), State.Defect);
        	}
        	
        	return validations;
@@ -89,11 +89,11 @@ public class PageResultPagoStpV {
 	        }
 	    }
 	    
-	    int maxSecondsWait = 5;
-        String codigoPed = PageResultPago.getCodigoPedido(driver, dCtxSh.channel, maxSecondsWait);
+	    int maxSeconds = 5;
+        String codigoPed = PageResultPago.getCodigoPedido(driver, dCtxSh.channel, maxSeconds);
         boolean isCodPedidoVisible = "".compareTo(codigoPed)!=0;
     	validations.add(
-      		"Aparece el código de pedido (" + codigoPed + ") (lo esperamos hasta " + maxSecondsWait + " segundos)",
+      		"Aparece el código de pedido (" + codigoPed + ") (lo esperamos hasta " + maxSeconds + " segundos)",
       		isCodPedidoVisible, State.Defect);
 	    
 		DataPedido dataPedido = dCtxPago.getDataPedido();

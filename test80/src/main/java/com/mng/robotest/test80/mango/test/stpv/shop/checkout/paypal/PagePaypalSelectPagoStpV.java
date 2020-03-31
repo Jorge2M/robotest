@@ -10,10 +10,10 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paypal.PagePa
 public class PagePaypalSelectPagoStpV {
     
 	@Validation (
-		description="Aparece la página de Selección del Pago (la esperamos hasta #{maxSecondsWait} segundos)",
+		description="Aparece la página de Selección del Pago (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-    public static boolean validateIsPageUntil(int maxSecondsWait, WebDriver driver) {
-        return (PagePaypalSelectPago.isPageUntil(maxSecondsWait, driver));
+    public static boolean validateIsPageUntil(int maxSeconds, WebDriver driver) {
+        return (PagePaypalSelectPago.isPageUntil(maxSeconds, driver));
     }
     
     @Step (

@@ -50,10 +50,10 @@ public class PageAccesoMisComprasStpV {
     }
 	
 	@Validation (
-		description="Se hace visible el bloque de \"#{typeBlock}\" (lo esperamos hasta #{maxSecondsWait} segundos)",
+		description="Se hace visible el bloque de \"#{typeBlock}\" (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
-	private boolean checkIsVisibleBlock(TypeBlock typeBlock, int maxSecondsWait) {
-		return (pageAccesoMisCompras.isVisibleBlockUntil(typeBlock, maxSecondsWait));
+	private boolean checkIsVisibleBlock(TypeBlock typeBlock, int maxSeconds) {
+		return (pageAccesoMisCompras.isVisibleBlockUntil(typeBlock, maxSeconds));
 	}
     
 	@Step (

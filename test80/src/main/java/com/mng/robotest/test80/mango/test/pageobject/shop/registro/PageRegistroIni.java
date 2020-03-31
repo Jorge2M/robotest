@@ -144,7 +144,7 @@ public class PageRegistroIni extends PageObjTM {
 		for (int i=0; i<2; i++) {
 			try {
 				String xpathInput = getXPathDataInput(inputType).getXPah();
-				sendKeysWithRetry(2, dataToSend, By.xpath(xpathInput), driver);
+				sendKeysWithRetry(dataToSend, By.xpath(xpathInput), 2, driver);
 				break;
 			}
 			catch (ElementNotInteractableException e) {

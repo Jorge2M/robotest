@@ -34,8 +34,8 @@ public class PageGiropay1rstStpV {
 
 		if (channel==Channel.desktop) {
 //			validations.add(
-//				"Aparece un input para la introducción del Banco (lo esperamos hasta " + maxSecondsWait + " segundos)",
-//				PageGiropay1rst.isVisibleInputBankUntil(maxSecondsWait, driver), State.Warn);
+//				"Aparece un input para la introducción del Banco (lo esperamos hasta " + maxSeconds + " segundos)",
+//				PageGiropay1rst.isVisibleInputBankUntil(maxSeconds, driver), State.Warn);
 			int maxSeconds = 2;
 			validations.add(
 				"Figura un botón de pago (lo esperamos hasta " + maxSeconds + " segundos)",

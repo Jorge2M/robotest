@@ -39,13 +39,13 @@ public class PageConsultaIdEansStpV {
     @Validation
     private static ChecksTM checkAfterConsultContact(List<String> pedidosPrueba, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
-	    int maxSecondsWait = 2;
+	    int maxSeconds = 2;
     	validations.add(
-    		"Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsWait + " segundos)",
-    		PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsWait, driver), State.Defect);
+    		"Se muestra la tabla de información (la esperamos un máximo de " + maxSeconds + " segundos)",
+    		PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSeconds, driver), State.Defect);
     	validations.add(
     		"El número de líneas de pedido es " + pedidosPrueba.size(),
-    		PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsWait, driver), State.Defect);
+    		PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSeconds, driver), State.Defect);
     	validations.add(
     		"Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.size(),
     		PageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba, driver), State.Defect);
@@ -87,10 +87,10 @@ public class PageConsultaIdEansStpV {
 	}
 	
 	@Validation (
-		description="Se muestra la tabla de información (la esperamos un máximo de #{maxSecondsWait} segundos)",
+		description="Se muestra la tabla de información (la esperamos un máximo de #{maxSeconds} segundos)",
 		level=State.Defect)
-	private static boolean checkIsTableTrackingsInformation(int maxSecondsWait, WebDriver driver) {
-		return (PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsWait, driver));
+	private static boolean checkIsTableTrackingsInformation(int maxSeconds, WebDriver driver) {
+		return (PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSeconds, driver));
 	}
 
 	@Step (

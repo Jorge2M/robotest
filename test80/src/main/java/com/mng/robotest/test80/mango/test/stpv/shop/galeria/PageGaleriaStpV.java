@@ -26,7 +26,7 @@ import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
 import com.mng.testmaker.service.TestMaker;
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha.TypeFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollection;
@@ -164,10 +164,10 @@ public class PageGaleriaStpV {
 	}
     
     @Validation (
-    	description="Aparece la capa con la información de las tallas (la esperamos hasta #{maxSecondsWait} segundos",
+    	description="Aparece la capa con la información de las tallas (la esperamos hasta #{maxSeconds} segundos",
     	level=State.Warn)
-    private boolean checkIsVisibleCapaInfoTallas(int posArticulo, int maxSecondsWait) {
-        return pageGaleria.isVisibleArticleCapaTallasUntil(posArticulo, maxSecondsWait);
+    private boolean checkIsVisibleCapaInfoTallas(int posArticulo, int maxSeconds) {
+        return pageGaleria.isVisibleArticleCapaTallasUntil(posArticulo, maxSeconds);
     }
 
 	@Step (
@@ -361,10 +361,10 @@ public class PageGaleriaStpV {
     		pageGaleria.isClickableArticuloUntil(1, 0), State.Warn);
       	
         SecFiltros secFiltros = SecFiltros.newInstance(dCtxSh.channel, dCtxSh.appE, driver);
-        int maxSecondsWait = 2;
+        int maxSeconds = 2;
       	validations.add(
-    		"Es clickable el bloque de filtros (esperamos hasta " + maxSecondsWait + " segundos)",
-    		secFiltros.isClickableFiltroUntil(maxSecondsWait), State.Warn);
+    		"Es clickable el bloque de filtros (esperamos hasta " + maxSeconds + " segundos)",
+    		secFiltros.isClickableFiltroUntil(maxSeconds), State.Warn);
       	
       	return validations;
     }
@@ -386,7 +386,7 @@ public class PageGaleriaStpV {
     public String selecColorFromArtGaleriaStep(int numArtConColores, int posColor) 
     throws Exception {
         //En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax. En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
-        WebdrvWrapp.waitForPageLoaded(driver, 2);
+        SeleniumUtils.waitForPageLoaded(driver, 2);
        
         StepTM step = TestMaker.getCurrentStepInExecution();
         WebElement articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
@@ -444,7 +444,7 @@ public class PageGaleriaStpV {
        
        //En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax. 
 	   //En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
-       WebdrvWrapp.waitForPageLoaded(driver, 2);
+       SeleniumUtils.waitForPageLoaded(driver, 2);
        PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
        WebElement articuloColores = pageGaleriaDesktop.getArticuloConVariedadColoresAndHoverNoDoble(numArtConColores);
        stepTM.replaceInDescription(tagNombreArt, pageGaleria.getNombreArticulo(articuloColores));
@@ -506,8 +506,8 @@ public class PageGaleriaStpV {
 	    step.replaceInDescription(tagPrecio1erArt, precio1erArt);
 	    
         pageGaleria.clickArticulo(articuloColores);
-        int maxSecondsWait = 3;
-        checkIsFichaArticle(nombre1erArt, precio1erArt, maxSecondsWait);
+        int maxSeconds = 3;
+        checkIsFichaArticle(nombre1erArt, precio1erArt, maxSeconds);
 
         //Validaciones estándar. 
         StdValidationFlags flagsVal = StdValidationFlags.newOne();
@@ -520,13 +520,13 @@ public class PageGaleriaStpV {
    
    	@SuppressWarnings("static-access")
     @Validation
-    private ChecksTM checkIsFichaArticle(String nombre1erArt, String precio1erArt, int maxSecondsWait) {
+    private ChecksTM checkIsFichaArticle(String nombre1erArt, String precio1erArt, int maxSeconds) {
     	ChecksTM validations = ChecksTM.getNew();
     	
     	PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
       	validations.add(
-    		"Aparece la página de ficha (la esperamos hasta " + maxSecondsWait + " segundos)",
-    		pageFicha.isPageUntil(maxSecondsWait), State.Warn);
+    		"Aparece la página de ficha (la esperamos hasta " + maxSeconds + " segundos)",
+    		pageFicha.isPageUntil(maxSeconds), State.Warn);
       	
         String nombreArtFicha = pageFicha.secDataProduct.getTituloArt(channel, driver);
         String precioArtFicha = pageFicha.secDataProduct.getPrecioFinalArticulo(driver);
@@ -568,10 +568,10 @@ public class PageGaleriaStpV {
     }
    
     @Validation (
-    	description="Aparece una página con artículos (la esperamos #{maxSecondsWait} segundos)",
+    	description="Aparece una página con artículos (la esperamos #{maxSeconds} segundos)",
     	level=State.Warn)
-    public boolean validaArtEnContenido(int maxSecondsWait) {
-    	return (pageGaleria.isVisibleArticleUntil(1, maxSecondsWait));
+    public boolean validaArtEnContenido(int maxSeconds) {
+    	return (pageGaleria.isVisibleArticleUntil(1, maxSeconds));
     }   
    
     final static String tagEstadoFinal = "@TagEstadoFinal";

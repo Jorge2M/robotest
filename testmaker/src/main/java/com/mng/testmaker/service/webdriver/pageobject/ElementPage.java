@@ -1,12 +1,20 @@
 package com.mng.testmaker.service.webdriver.pageobject;
 
+import org.openqa.selenium.By;
+
 import com.mng.testmaker.conf.Channel;
 
 public interface ElementPage {
 
-	String getXPath();
+	By getBy();
 	
-	default String getXPath(Channel channel) {
-		return getXPath();
+	default By getBy(Channel channel) {
+		return getBy();
+	}
+	default By getBy(Enum<?> app) {
+		return getBy();
+	}
+	default By getBy(Channel channel, Enum<?> app) {
+		return getBy();
 	}
 }

@@ -1,30 +1,31 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
-import com.mng.testmaker.service.webdriver.pageobject.ElementPageFunctions;
 
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class PageKoCardINIpay2Mobil extends ElementPageFunctions {
+public class PageKoCardINIpay2Mobil {
 	
-    public enum BodyPageKoCardINIpay2 implements ElementPage {
-        inputEmail("//input[@type='email' and @name='email']"),
-    	nextButton("//span[@id='cardNext2Btn']");
+	public enum BodyPageKoCardINIpay2 implements ElementPage {
+		inputEmail("//input[@type='email' and @name='email']"),
+		nextButton("//span[@id='cardNext2Btn']");
 
-        private String xPath;
-        BodyPageKoCardINIpay2 (String xPath) {
-            this.xPath = xPath;
-        }
+		private By by;
+		BodyPageKoCardINIpay2 (String xPath) {
+			by = By.xpath(xPath);
+		}
 
-        @Override
-        public String getXPath() {
-            return this.xPath;
-        }
-    }
-    
-    public static boolean isPage(WebDriver driver) {
-    	return (isElementInStateUntil(BodyPageKoCardINIpay2.inputEmail, Visible, 0, driver));
-    }
+		@Override
+		public By getBy() {
+			return by;
+		}
+	}
+
+	public static boolean isPage(WebDriver driver) {
+		return (state(Visible, BodyPageKoCardINIpay2.inputEmail.getBy(), driver).wait(0).check());
+	}
 }

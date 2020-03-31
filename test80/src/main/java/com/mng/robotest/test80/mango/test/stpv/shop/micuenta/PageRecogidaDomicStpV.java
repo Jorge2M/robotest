@@ -11,7 +11,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 public class PageRecogidaDomicStpV {
 
     @Validation
-    public static ChecksTM vaidaIsPageSinDevoluciones (WebDriver driver) throws Exception {
+    public static ChecksTM vaidaIsPageSinDevoluciones (WebDriver driver) {
         ChecksTM validations = ChecksTM.getNew();
         validations.add(
         	"Aparece la página de Recogida a Domicilio",

@@ -12,10 +12,10 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageResultPagoStpV;
 public class PageMercpagoConfStpV {
 
 	@Validation (
-		description="Estamos en la página de confirmación del pago (la esperamos hasta #{maxSecondsWait} segundos)",
+		description="Estamos en la página de confirmación del pago (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-    public static boolean validaIsPageUntil(int maxSecondsWait, Channel channel, WebDriver driver) {  
-		return (PageMercpagoConf.isPageUntil(channel, maxSecondsWait, driver));
+    public static boolean validaIsPageUntil(int maxSeconds, Channel channel, WebDriver driver) {  
+		return (PageMercpagoConf.isPageUntil(channel, maxSeconds, driver));
     }
     
 	@Step (

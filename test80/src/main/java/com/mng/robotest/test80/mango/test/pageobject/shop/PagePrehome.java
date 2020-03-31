@@ -121,7 +121,7 @@ public class PagePrehome {
             driver.findElement(By.xpath(xpathListaProv)).click();
             
             //Introducimos la provincia Barcelona
-            sendKeysWithRetry(3, "Barcelona", By.xpath(xpathListaProv + "//div[@class[contains(.,'chosen-search')]]/input"), driver);
+            sendKeysWithRetry("Barcelona", By.xpath(xpathListaProv + "//div[@class[contains(.,'chosen-search')]]/input"), 3, driver);
             
             //Seleccionamos la provincia encontrada
             driver.findElement(By.xpath(xpathListaProv + "//div[@class='chosen-drop']/ul/li")).click();

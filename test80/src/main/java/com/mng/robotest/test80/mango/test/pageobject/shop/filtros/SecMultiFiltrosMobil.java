@@ -132,8 +132,8 @@ public class SecMultiFiltrosMobil extends PageObjTM implements SecFiltros {
             ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-50)", "");
         }
         
-        int maxSecondsWait = 2;
-        waitAndClickFiltroButton(maxSecondsWait, driver);
+        int maxSeconds = 2;
+        waitAndClickFiltroButton(maxSeconds, driver);
     }
     
     private void waitAndClickFiltroButton(int maxSeconds, WebDriver driver) {

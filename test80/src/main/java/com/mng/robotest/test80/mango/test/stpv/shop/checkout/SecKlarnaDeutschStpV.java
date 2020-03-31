@@ -13,8 +13,8 @@ public class SecKlarnaDeutschStpV {
 	@Validation (
 		description="Aparece el selector de la fecha de nacimiento (lo esperamos hasta un máximo de #{maxSecondsToWait} segundos)",
 		level=State.Warn)
-    public static boolean validateIsSection(int maxSecondsWait, WebDriver driver) {
-        return (SecKlarnaDeutsch.isVisibleSelectDiaNacimientoUntil(maxSecondsWait, driver));
+    public static boolean validateIsSection(int maxSeconds, WebDriver driver) {
+        return (SecKlarnaDeutsch.isVisibleSelectDiaNacimientoUntil(maxSeconds, driver));
     }
     
     /**

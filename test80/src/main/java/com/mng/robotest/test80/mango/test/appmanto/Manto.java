@@ -220,9 +220,11 @@ public class Manto {
 		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
 		PageMenusMantoStpV.goToOrdenadorDePrendas(driver);
-		PageOrdenacionDePrendasStpV.mantoOrdenacionInicio(driver);
-		PageOrdenacionDePrendasStpV.mantoSeccionPrendas(driver);
-		PageOrdenacionDePrendasStpV.ordenacionModal(driver);		
+		
+		PageOrdenacionDePrendasStpV pageOrdenacionDePrendasStpV = new PageOrdenacionDePrendasStpV(driver);
+		pageOrdenacionDePrendasStpV.mantoOrdenacionInicio();
+		pageOrdenacionDePrendasStpV.mantoSeccionPrendas();
+		pageOrdenacionDePrendasStpV.ordenacionModal();		
 	}
 }
 

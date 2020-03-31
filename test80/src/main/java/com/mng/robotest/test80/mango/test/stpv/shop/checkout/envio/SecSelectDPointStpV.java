@@ -9,7 +9,7 @@ import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.domain.suitetree.StepTM;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.ModalDroppoints;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.SecSelectDPoint.TypeDeliveryPoint;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio.DataSearchDeliveryPoint.DataSearchDp;
@@ -29,7 +29,7 @@ public class SecSelectDPointStpV {
 		
     	TypeDeliveryPoint typeDp = dataSearchDp.tipoTransporte.getTypeDeliveryPoint();
         ModalDroppoints.secSelectDPoint.sendProvincia(dataSearchDp.data, driver);
-        WebdrvWrapp.waitForPageLoaded(driver, 5);   
+        SeleniumUtils.waitForPageLoaded(driver, 5);   
 
         checkDroppointSelectedContainsDirecc(dataSearchDp, driver);
         validaDeliveryPointOfType(typeDp, driver);
@@ -39,26 +39,26 @@ public class SecSelectDPointStpV {
 	private static ChecksTM checkDroppointSelectedContainsDirecc(DataSearchDeliveryPoint dataSearchDp, WebDriver driver) 
 	throws Exception {
     	ChecksTM validations = ChecksTM.getNew();
-	    int maxSecondsWait = 5;
+	    int maxSeconds = 5;
 	    State stateVal = State.Warn;
 	    if (dataSearchDp.typeData==DataSearchDp.CodigoPostal) {
 	    	stateVal = State.Info;
     	}
 	 	validations.add(
 			"La dirección del droppoint seleccionado contiene <b>" + dataSearchDp.data + 
-			"</b> (lo esperamos hasta " + maxSecondsWait + " segundos)",
+			"</b> (lo esperamos hasta " + maxSeconds + " segundos)",
 			ModalDroppoints.secSelectDPoint.
-				deliveryPointSelectedContainsPoblacionUntil(dataSearchDp, maxSecondsWait, driver), stateVal);
+				deliveryPointSelectedContainsPoblacionUntil(dataSearchDp, maxSeconds, driver), stateVal);
 		return validations;
 	}
     
     @Validation
     public static ChecksTM validaDeliveryPointOfType(TypeDeliveryPoint typeDp, WebDriver driver) {
     	ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 3;
+        int maxSeconds = 3;
 	 	validations.add(
-			"Es visible el 1er delivery point de la lista (lo esperamos hasta " + maxSecondsWait + " segundos)",
-			ModalDroppoints.secSelectDPoint.isDroppointVisibleUntil(1, maxSecondsWait, driver), State.Defect);
+			"Es visible el 1er delivery point de la lista (lo esperamos hasta " + maxSeconds + " segundos)",
+			ModalDroppoints.secSelectDPoint.isDroppointVisibleUntil(1, maxSeconds, driver), State.Defect);
 	 	validations.add(
 			"El 1er delivery point de la lista es de tipo <b>" + typeDp + "</b>",
 			ModalDroppoints.secSelectDPoint.getTypeDeliveryPoint(1, driver)==typeDp, State.Defect);
@@ -85,8 +85,8 @@ public class SecSelectDPointStpV {
     	description="Clickamos el botón de \"Select\" de la capa de Droppoints", 
         expected="Desaparece al capa de droppoint")
     public static void clickSelectButton(Channel channel, WebDriver driver) {
-    	int maxSecondsWait = 5;
-        ModalDroppoints.secSelectDPoint.clickSelectButtonAndWait(maxSecondsWait, driver);
+    	int maxSeconds = 5;
+        ModalDroppoints.secSelectDPoint.clickSelectButtonAndWait(maxSeconds, driver);
         ModalDroppointsStpV.secConfirmDatos.validateIsVisible(3, channel, driver);
     }
 }

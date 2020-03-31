@@ -35,15 +35,14 @@ public class PageDetallePedido {
         DetallesCliente("//input[@value='Detalles Cliente']"),
         Devoluciones("//input[@value='Devoluciones']");
 
-        private String xPath;
-        
+        private By by;
         RightButtons(String xPath) {
-            this.xPath = xPath;
+            by = By.xpath(xPath);
         }
-
+        
         @Override
-        public String getXPath() {
-            return this.xPath;
+        public By getBy() {
+        	return by;
         }
     }
     

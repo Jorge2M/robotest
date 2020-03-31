@@ -13,7 +13,7 @@ public abstract class PageFicha extends PageObjTM {
 
     public enum TypeFicha {Old, New}
     
-    abstract public boolean isPageUntil(int maxSecondsWait);
+    abstract public boolean isPageUntil(int maxSeconds);
     abstract public boolean isFichaArticuloUntil(String refArticulo, int maxSecondsToWait);
     abstract public void clickAnadirBolsaButtonAndWait();
     abstract public void selectAnadirAFavoritosButton();

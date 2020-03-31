@@ -146,7 +146,7 @@ public class PageMenusMantoStpV {
 	
 	public static void goToOrdenadorDePrendas(WebDriver driver) throws Exception {
 		goToMainMenusAndClickMenu("Ordenador de Prendas", driver);
-		PageOrdenacionDePrendasStpV.validateIsPage(driver);
+		new PageOrdenacionDePrendasStpV(driver).validateIsPage();
 	}
 	
 	public static void comprobarMenusManto(String cabeceraName, String cabeceraNameNext, WebDriver driver) 

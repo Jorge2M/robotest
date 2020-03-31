@@ -3,14 +3,14 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.SecFiltros;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusFiltroCollection;
 
 
-public class SecMenusFiltroCollectionMobil extends WebdrvWrapp implements SecMenusFiltroCollection {
+public class SecMenusFiltroCollectionMobil extends SeleniumUtils implements SecMenusFiltroCollection {
 
 	private final SecFiltros secFiltros;
     

@@ -15,10 +15,10 @@ import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
 public class PageRegistroFinStpV {
     
 	@Validation(
-		description="Aparece la página final del proceso de registro (la esperamos hasta #{maxSecondsWait} segundos)",
+		description="Aparece la página final del proceso de registro (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
-    public static boolean isPageUntil(int maxSecondsWait, WebDriver driver) {
-		return (PageRegistroFin.isPageUntil(maxSecondsWait, driver));
+    public static boolean isPageUntil(int maxSeconds, WebDriver driver) {
+		return (PageRegistroFin.isPageUntil(maxSeconds, driver));
     }
     
 	@Step (

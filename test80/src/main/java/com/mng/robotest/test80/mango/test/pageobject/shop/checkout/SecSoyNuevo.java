@@ -73,10 +73,10 @@ public class SecSoyNuevo {
             break;
         }
     }
-    
-    public static void inputEmail(String email, WebDriver driver) {
-        sendKeysWithRetry(3, email, By.xpath(XPathInputEmail), driver);
-    }
+
+	public static void inputEmail(String email, WebDriver driver) {
+		sendKeysWithRetry(email, By.xpath(XPathInputEmail), 3, driver);
+	}
 
 	public static void clickContinue(Channel channel, WebDriver driver) {
 		String xpathButton = getXPath_BotonContinue(channel);

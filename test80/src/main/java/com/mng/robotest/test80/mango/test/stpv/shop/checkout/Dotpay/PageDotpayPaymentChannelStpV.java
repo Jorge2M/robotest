@@ -32,10 +32,10 @@ public class PageDotpayPaymentChannelStpV {
     }
 	
 	@Validation (
-		description="Es visible el bloque de introducción del nombre (lo esperamos hasta #{maxSecondsWait} segundos)",
+		description="Es visible el bloque de introducción del nombre (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
-	private static boolean isVisibleBlockInputNombre(int maxSecondsWait, WebDriver driver) {
-		return (PageDotpayPaymentChannel.isVisibleBlockInputDataUntil(maxSecondsWait, driver));
+	private static boolean isVisibleBlockInputNombre(int maxSeconds, WebDriver driver) {
+		return (PageDotpayPaymentChannel.isVisibleBlockInputDataUntil(maxSeconds, driver));
 	}
     
 	@Step (

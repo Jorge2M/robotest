@@ -10,7 +10,7 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
-import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.testmaker.service.webdriver.utils.WebUtils;
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -47,8 +47,8 @@ public class AllPagesStpV {
     	
     	if (flagsVal.validaJS) {
         	//Nota: No funciona con GeckoDriver porque no están implementados los servicios al no formar parte del protocolo W3C https://github.com/w3c/webdriver/issues/406
-        	if (WebdrvWrapp.getTypeDriver(driver)!=WebDriverType.firefox &&
-        		WebdrvWrapp.getTypeDriver(driver)!=WebDriverType.firefoxhless) {
+        	if (SeleniumUtils.getTypeDriver(driver)!=WebDriverType.firefox &&
+        		SeleniumUtils.getTypeDriver(driver)!=WebDriverType.firefoxhless) {
         		int maxErrors = 1;
         		ResultadoErrores resultadoLogs = WebUtils.getLogErrors(Level.WARNING, driver, maxErrors);
         		String descripValidac = "No hay errores JavaScript";
@@ -110,7 +110,7 @@ public class AllPagesStpV {
         expected="Se vuelve a la página anterior")
     public static void backNagegador(WebDriver driver) throws Exception {
         driver.navigate().back();
-        int maxSecondsWait = 10;
-        WebdrvWrapp.waitForPageLoaded(driver, maxSecondsWait);
+        int maxSeconds = 10;
+        SeleniumUtils.waitForPageLoaded(driver, maxSeconds);
     }
 }

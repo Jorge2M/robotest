@@ -72,9 +72,9 @@ public class SecMenusUserStpV {
         saveHtmlPage=SaveWhen.Always)
     public void selectRegistrate(DataCtxShop dCtxSh) throws Exception {
 		userMenus.clickMenuAndWait(UserMenu.registrate);    
-        int maxSecondsWait = 5;
+        int maxSeconds = 5;
         PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(driver);
-        pageRegistroIniStpV.validaIsPageUntil(maxSecondsWait);
+        pageRegistroIniStpV.validaIsPageUntil(maxSeconds);
         pageRegistroIniStpV.validaIsRGPDVisible(dCtxSh);
     }
     
@@ -87,10 +87,10 @@ public class SecMenusUserStpV {
     }
 	
 	@Validation (
-		description="Aparece el link superior de \"Iniciar sesión\" (lo esperamos hasta #{maxSecondsWait} segundos)",
+		description="Aparece el link superior de \"Iniciar sesión\" (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-	private boolean checkIsVisibleIniciarSesionLink(int maxSecondsWait) throws Exception {
-        return (userMenus.isMenuInStateUntil(UserMenu.iniciarSesion, Present, maxSecondsWait));
+	private boolean checkIsVisibleIniciarSesionLink(int maxSeconds) throws Exception {
+        return (userMenus.isMenuInStateUntil(UserMenu.iniciarSesion, Present, maxSeconds));
 	}
 	
 	public void logoffLogin(String userConnect, String userPassword) throws Exception {
@@ -125,7 +125,7 @@ public class SecMenusUserStpV {
     @Step (
     	description="Seleccionar el link \"Mi cuenta\"", 
         expected="Aparece la página de \"Mi cuenta\"")
-	public void clickMenuMiCuenta() throws Exception {
+	public void clickMenuMiCuenta() {
         userMenus.clickMenuAndWait(UserMenu.miCuenta);	
         PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(channel, app, driver);
         pageMiCuentaStpV.validateIsPage(2);
@@ -179,15 +179,15 @@ public class SecMenusUserStpV {
 	}
 
 	@Validation
-	public ChecksResultWithNumberPoints checkAngGetLoyaltyPoints(int maxSecondsWait) throws Exception {
+	public ChecksResultWithNumberPoints checkAngGetLoyaltyPoints(int maxSeconds) throws Exception {
 		ChecksResultWithNumberPoints checks = ChecksResultWithNumberPoints.getNew();
 		if (channel==Channel.desktop) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
-		LoyaltyData loyaltyData = userMenus.checkAndGetLoyaltyPointsUntil(maxSecondsWait);
+		LoyaltyData loyaltyData = userMenus.checkAndGetLoyaltyPointsUntil(maxSeconds);
 		checks.setNumberPoints(loyaltyData.numberPoints);
 	 	checks.add(
-			"Aparecen Loyalty Points en el menú de usuario (lo esperamos hasta " + maxSecondsWait + " segundos)",
+			"Aparecen Loyalty Points en el menú de usuario (lo esperamos hasta " + maxSeconds + " segundos)",
 			loyaltyData.isPresent, State.Defect);
 	 	
 		return checks;

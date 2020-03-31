@@ -34,10 +34,10 @@ public class SecDetalleCompraTiendaStpV {
     @Validation
     private ChecksTM checkData(CompraTienda compraTienda) {
         ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 1;
+        int maxSeconds = 1;
         validations.add(
-        	"Es visible la capa correspondiente al detalle del tícket de compra (la esperamos hasta " + maxSecondsWait + " segundos)",
-        	secDetalleCompraTienda.isVisibleSectionUntil(maxSecondsWait), State.Warn);
+        	"Es visible la capa correspondiente al detalle del tícket de compra (la esperamos hasta " + maxSeconds + " segundos)",
+        	secDetalleCompraTienda.isVisibleSectionUntil(maxSeconds), State.Warn);
         validations.add(
         	"Figura un número de tícket " + compraTienda.idCompra,
         	secDetalleCompraTienda.getNumTicket().compareTo(compraTienda.idCompra)==0, State.Warn);

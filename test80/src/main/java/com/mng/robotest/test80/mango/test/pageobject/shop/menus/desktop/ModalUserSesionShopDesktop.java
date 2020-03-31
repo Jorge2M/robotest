@@ -22,13 +22,14 @@ public class ModalUserSesionShopDesktop extends PageObjTM {
         ayuda (XPathCapaMenus + "//div[@class[contains(.,'ayuda')]]"),   
         cerrarSesion(XPathCapaMenus + "//div[@class[contains(.,'logout')]]");
         
-        String xpath;
-        private MenuUserDesktop(String xpath) {
-        	this.xpath = xpath;
+        By by;
+        private MenuUserDesktop(String xPath) {
+        	by = By.xpath(xPath);
         }
         
-        public String getXPath() {
-        	return this.xpath;
+        @Override
+        public By getBy() {
+        	return by;
         }
     }
     
@@ -45,25 +46,25 @@ public class ModalUserSesionShopDesktop extends PageObjTM {
     }
     
     public boolean isMenuInState(MenuUserDesktop menu, State state) {
-    	return (isElementInState(menu, state, driver));
+    	return (state(state, menu.getBy()).check());
     }
     
-    public boolean isMenuInStateUntil(MenuUserDesktop menu, State state, int maxSecondsWait) {
-    	return (isElementInStateUntil(menu, state, maxSecondsWait, driver));
+    public boolean isMenuInStateUntil(MenuUserDesktop menu, State state, int maxSeconds) {
+    	return (state(state, menu.getBy()).wait(maxSeconds).check());
     }
     
     public void wait1sForItAndclickMenu(MenuUserDesktop menu) {
     	isMenuInStateUntil(menu, Clickable, 1);
-    	clickAndWait(menu, driver);
+    	click(menu.getBy()).exec();
     }
     
-    public void clickMenu(MenuUserDesktop menu) throws Exception {
-    	clickAndWait(menu, driver);
+    public void clickMenu(MenuUserDesktop menu) {
+    	click(menu.getBy()).exec();
     }
 
     public boolean clickMenuIfinState(MenuUserDesktop menu, State stateExpected) throws Exception {
         if (isMenuInState(menu, stateExpected)) {
-        	moveToElementPage(menu, driver);
+        	moveToElement(menu.getBy(), driver);
             clickMenu(menu);
             return true;
         }
@@ -71,7 +72,7 @@ public class ModalUserSesionShopDesktop extends PageObjTM {
     }    
     
     public void MoveAndclickMenu(MenuUserDesktop menu) throws Exception {
-    	moveToElementPage(menu, driver);
+    	moveToElement(menu.getBy(), driver);
         clickMenu(menu);
     }
 }

@@ -28,9 +28,9 @@ public class PageHomeLikesStpV {
 	public ChecksResultWithNumberPoints checkIsPageOk() {
 		ChecksResultWithNumberPoints checks = ChecksResultWithNumberPoints.getNew();
 		PageHomeLikes pageLikes = PageHomeLikes.getNew(driver);
-		int maxSecondsWait = 5;
+		int maxSeconds = 5;
 		checks.add(
-			"Aparece la página de <b>Mango likes you</b> (la esperamos hasta " + maxSecondsWait + " segundos)",
+			"Aparece la página de <b>Mango likes you</b> (la esperamos hasta " + maxSeconds + " segundos)",
 			pageLikes.checkIsPageUntil(4), State.Defect);
 		checks.add(
 			"Aparecen bloques para el canjeo de Likes",

@@ -33,7 +33,7 @@ public class PageMiCuenta extends PageObjTM {
     	click(By.xpath(XPathLinkMisPedidos)).exec();
     }
     
-    public void clickMisCompras() throws Exception {
+    public void clickMisCompras() {
     	click(By.xpath(XPathLinkMisCompras)).exec();
     }
     

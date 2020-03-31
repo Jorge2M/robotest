@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
-import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -129,7 +129,7 @@ public class PageMenusManto {
     	try {
     		clickMenu(textoMenu, driver);
 		} catch (UnhandledAlertException f) {
-	        String textAlert = WebdrvWrapp.acceptAlertIfExists(driver);
+	        String textAlert = SeleniumUtils.acceptAlertIfExists(driver);
 	        if ("".compareTo(textAlert)==0) {
 	        	return "Unknown or Empty";
 	        }

@@ -101,7 +101,7 @@ public class PageAccesoMisCompras extends PageObjTM implements PageFromFooter {
     }
     
     public void inputUserBlockNo(String usuario) {
-    	sendKeysWithRetry(2, usuario, By.xpath(XPathInputUserBlockNo), driver);
+    	sendKeysWithRetry(usuario, By.xpath(XPathInputUserBlockNo), 2, driver);
     }
     
     public void inputNumPedidoBlockNo(String numPedido) {

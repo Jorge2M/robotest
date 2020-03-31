@@ -3,14 +3,13 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.pci;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.testmaker.service.webdriver.pageobject.SelectElement.TypeSelect.*;
 
 
-public class SecTarjetaPciNotInIframeDesktop implements SecTarjetaPci {
+public class SecTarjetaPciNotInIframeDesktop extends PageObjTM implements SecTarjetaPci {
 
-	private final WebDriver driver;
-	
     static String XPathBlock = "//span[@id[contains(.,'panelTarjetasForm')]]";
     static String XPathInputNumber = XPathBlock + "//input[@id[contains(.,'cardNumber')] or @id[contains(.,'cardnumber')] or @id[contains(.,'msu_cardpan')]]";
     static String XPathInputTitular = XPathBlock + "//input[@data-encrypted-name[contains(.,'holderName')] or @class[contains(.,'holdername')] or @class[contains(.,'holderName')] or @class[contains(.,'msu_nameoncard')]]";
@@ -20,7 +19,7 @@ public class SecTarjetaPciNotInIframeDesktop implements SecTarjetaPci {
     static String XPathInputDni = XPathBlock + "//input[@class[contains(.,'falcon_dni')]]"; //Specific for Codensa (Colombia)
     
     private SecTarjetaPciNotInIframeDesktop(WebDriver driver) {
-    	this.driver = driver;
+    	super(driver);
     }
     
     public static SecTarjetaPciNotInIframeDesktop getNew(WebDriver driver) {
@@ -94,11 +93,11 @@ public class SecTarjetaPciNotInIframeDesktop implements SecTarjetaPci {
     
     @Override
     public void selectMesByVisibleText(String mes) {
-        selectOption(By.xpath(XPathSelectMes), mes, OptionSelect.ByVisibleText, driver);
+		select(By.xpath(XPathSelectMes), mes).type(VisibleText).exec();
     }
     
     @Override
     public void selectAnyByVisibleText(String any) {
-        selectOption(By.xpath(XPathSelectAny), any, OptionSelect.ByVisibleText, driver);
+    	select(By.xpath(XPathSelectAny), any).type(VisibleText).exec();
     }
 }

@@ -168,14 +168,14 @@ public class PageReembolsosStpV {
         PageReembolsos.clickSaveButtonStoreCredit(driver); 
         
         //Validaciones
-        int maxSecondsWait = 2;
-        checkButtonSaveDisappears(maxSecondsWait, driver);
+        int maxSeconds = 2;
+        checkButtonSaveDisappears(maxSeconds, driver);
     }
     
     @Validation (
-    	description="Desaparece el botón \"Save\" de Store Credit (lo esperamos hasta #{maxSecondsWait} segundos)",
+    	description="Desaparece el botón \"Save\" de Store Credit (lo esperamos hasta #{maxSeconds} segundos)",
     	level=State.Warn)
-    private static boolean checkButtonSaveDisappears(int maxSecondsWait, WebDriver driver) {
-    	return (!PageReembolsos.isVisibleSaveButtonStoreCreditUntil(maxSecondsWait, driver));
+    private static boolean checkButtonSaveDisappears(int maxSeconds, WebDriver driver) {
+    	return (!PageReembolsos.isVisibleSaveButtonStoreCreditUntil(maxSeconds, driver));
     }
 }

@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
-import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 
@@ -30,7 +30,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
  *
  */
 @SuppressWarnings({"static-access"})
-public class SecDataProduct extends WebdrvWrapp {
+public class SecDataProduct extends SeleniumUtils {
     
     public enum ProductNav {Prev, Next}
     public static SSecSelTallasFichaOld secSelTallasOld;
@@ -65,20 +65,21 @@ public class SecDataProduct extends WebdrvWrapp {
     	Unavailable(XPathColor + "/img[" + ClassColorNoDisp + "]/..");
 
     	String xpath;
-    	private ColorType(String xpath) {
-    		this.xpath = xpath;
+    	By by;
+    	private ColorType(String xPath) {
+    		xpath = xPath;
+    		by = By.xpath(xpath);
     	}
     	
+    	@Override
+    	public By getBy() {
+    		return by;
+    	}
     	public String getXPath() {
     		return xpath;
     	}
-    	
-		public String getXPath(Channel channel) {
-			return xpath;
-		}
-    	
-    	public String getXPathIcon() {
-    		return xpath + "/img";
+    	public By getByIcon() {
+    		return By.xpath(xpath + "/img");
     	}
     }
     
@@ -158,12 +159,12 @@ public class SecDataProduct extends WebdrvWrapp {
 //Funciones referentes a los colores
     
     public static String getCodeColor(ColorType colorType, WebDriver driver) {
-    	WebElement color = getElementWeb(colorType, driver);
+    	WebElement color = getElementWeb(colorType.getBy(), driver);
         return (color.getAttribute("id"));
     }
     
     public static String getNombreColorMobil(ColorType colorType, WebDriver driver) {
-    	WebElement color = getElementWeb(colorType, driver);
+    	WebElement color = getElementWeb(colorType.getBy(), driver);
     	if (color!=null) {
     		return (color.getAttribute("title"));
     	}

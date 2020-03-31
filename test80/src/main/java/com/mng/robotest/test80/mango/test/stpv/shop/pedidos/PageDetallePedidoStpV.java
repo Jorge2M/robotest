@@ -41,10 +41,10 @@ public class PageDetallePedidoStpV {
     @Validation
     public ChecksTM areOkPrendasOnline(int numPrendasCompraOnline) {
     	ChecksTM validations = ChecksTM.getNew();
-	    int maxSecondsWait = 2;
+	    int maxSeconds = 2;
       	validations.add(
-      		"Es visible alguna prenda (la esperamos hasta " + maxSecondsWait + " segundos)",
-      		pageDetalle.isVisiblePrendaUntil(maxSecondsWait), State.Info);	
+      		"Es visible alguna prenda (la esperamos hasta " + maxSeconds + " segundos)",
+      		pageDetalle.isVisiblePrendaUntil(maxSeconds), State.Info);	
       	validations.add(
       		"Aparecen " + numPrendasCompraOnline + " prendas",
       		pageDetalle.getNumPrendas()==numPrendasCompraOnline, State.Warn);	

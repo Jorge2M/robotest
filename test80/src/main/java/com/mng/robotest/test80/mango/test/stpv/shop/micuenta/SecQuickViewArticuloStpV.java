@@ -21,10 +21,10 @@ public class SecQuickViewArticuloStpV {
     @Validation
     public ChecksTM validateIsOk(ArticuloScreen articulo) {
         ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 2;
+        int maxSeconds = 2;
         validations.add(
-        	"Aparece el quickview correspondiente al artículo (la esperamos hasta " + maxSecondsWait + " segundos)",
-        	secQuickViewArticulo.isVisibleUntil(maxSecondsWait), State.Warn);
+        	"Aparece el quickview correspondiente al artículo (la esperamos hasta " + maxSeconds + " segundos)",
+        	secQuickViewArticulo.isVisibleUntil(maxSeconds), State.Warn);
         validations.add(
         	"Se muestra la referencia " + articulo.getReferencia(),
         	secQuickViewArticulo.getReferencia().compareTo(articulo.getReferencia())==0, State.Warn);

@@ -559,8 +559,8 @@ public abstract class PageGaleria extends PageObjTM {
 				backTo1erArticulo();
 			}
 		}
-		int maxSecondsWait = 2;
-		isVisibleArticleUntil(1, maxSecondsWait);
+		int maxSeconds = 2;
+		isVisibleArticleUntil(1, maxSeconds);
 	}
     
     private void initializeDataNumArticles(List<Integer> numArticlesXpage, List<Integer> numArticlesDoubleXpage, int maxPages) {
@@ -623,8 +623,8 @@ public abstract class PageGaleria extends PageObjTM {
     
     private void waitAndGotoLastArticle() {
     	List<WebElement> listaArticulos = getListaArticulos();
-    	int maxSecondsWait = 5;
-    	waitArticleAndGoTo(listaArticulos.size(), maxSecondsWait);
+    	int maxSeconds = 5;
+    	waitArticleAndGoTo(listaArticulos.size(), maxSeconds);
     }
     
     public int getNumLastPage() {
@@ -674,7 +674,7 @@ public abstract class PageGaleria extends PageObjTM {
         String detailWindowHandle = switchToAnotherWindow(driver, galeryWindowHandle);
         
         PageFicha pageFicha = PageFicha.newInstance(Channel.desktop, app, driver);
-        pageFicha.isPageUntil(10/*maxSecondsWait*/);
+        pageFicha.isPageUntil(10/*maxSeconds*/);
         
         return detailWindowHandle;
     }    

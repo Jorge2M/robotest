@@ -42,7 +42,7 @@ public class AyudaStpV {
         expected = "Aparecen sus secciones internas")
     private void accesAndValidationSection (String section) throws Exception {
         JSONArray sectionToValidate = pageAyuda.getSectionFromJSON(section);
-        PageAyuda.selectElement(pageAyuda.getXPath(section), driver);
+        pageAyuda.selectSection(section);
         for (Object textToCheck : sectionToValidate) {
             validateSectionsAyuda(textToCheck.toString());
             if (textToCheck.toString().equals("Tarjeta Regalo Mango")) {
@@ -55,16 +55,16 @@ public class AyudaStpV {
     	description="Está presente el apartado de <b>#{validation}</b>",
         level= State.Defect)
     private boolean validateSectionsAyuda(String validation) {
-        return (PageAyuda.isElementInStateUntil(pageAyuda.getXPath(validation), Visible, 2, driver));
+    	return pageAyuda.sectionInState(validation, Visible);
     }
 
     @Step(
         description="Seleccionamos el enlace a la tarjeta regalo",
         expected="Aparece una nueva página que contiene la información de cheque regalo")
     private void helpToChequeRegalo(String textToCheck) throws Exception {
-        PageAyuda.selectElement(pageAyuda.getXPath(textToCheck), driver);
+        pageAyuda.selectSection(textToCheck);
         checkIsApartadoInState(textToCheck, StateApartado.expanded);	
-        PageAyuda.selectElement(pageAyuda.getXPath("COMPRAR TARJETA REGALO"), driver);
+        pageAyuda.selectSection("COMPRAR TARJETA REGALO");
         validatePageTarjetaRegalo();
         driver.navigate().back();
     }
@@ -87,15 +87,15 @@ public class AyudaStpV {
         description = "Seleccionamos el enlace de \"Buscar tu Tienda\"",
         expected = "Aparece el modal de busqueda de tiendas")
     private void helpToBuscarTienda(String textToCheck) throws Exception {
-        PageAyuda.selectElement(pageAyuda.getXPath(textToCheck), driver);
+        pageAyuda.selectSection(textToCheck);
         validateBuscarTienda();
-        PageAyuda.selectElement(PageAyuda.xPathCloseBuscar, driver);
+        pageAyuda.selectCloseBuscar();
     }
 
     @Validation(
         description = "1) Es visible la cabecera de <b>Encuentra tu tienda</b>",
         level = State.Defect)
     private boolean validateBuscarTienda() {
-        return (PageAyuda.isElementInStateUntil(pageAyuda.getXPath("Encuentra tu tienda"), Visible, 4, driver));
+        return (pageAyuda.sectionInState("Encuentra tu tienda", Visible));
     }
 }

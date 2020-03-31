@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 /**
@@ -25,13 +26,14 @@ public class SecCabeceraOutletDesktop extends SecCabeceraOutlet {
 		ayuda("//a[@class[contains(.,'_pedidos')]]"),
 		bolsa("//div[@class[contains(.,'shoppingCart')]]");
 		
-		private String xpath;
+		private By by;
 		private LinkCabeceraOutletDesktop(String xpath) {
-			this.xpath = xpath;
+			by = By.xpath(xpath);
 		}
 		
-		public String getXPath() {
-			return xpath;
+		@Override
+		public By getBy() {
+			return by;
 		}
 	}
 
@@ -63,8 +65,8 @@ public class SecCabeceraOutletDesktop extends SecCabeceraOutlet {
 
     
     @Override
-    public void clickIconoBolsaWhenDisp(int maxSecondsWait) throws Exception {
-    	boolean isIconoClickable = isElementInStateUntil(LinkCabeceraOutletDesktop.bolsa, State.Clickable, maxSecondsWait, driver);
+    public void clickIconoBolsaWhenDisp(int maxSeconds) {
+    	boolean isIconoClickable = state(Clickable, LinkCabeceraOutletDesktop.bolsa.getBy()).wait(maxSeconds).check();
         if (isIconoClickable) {
         	clickIconoBolsa();
         }
@@ -76,19 +78,18 @@ public class SecCabeceraOutletDesktop extends SecCabeceraOutlet {
     }
     
     public boolean isElementInState(LinkCabeceraOutletDesktop element, State state) {
-    	return (isElementInState(element, state, driver));
+    	return (state(state, element.getBy()).check());
     }
     
-    public boolean isElementInStateUntil(LinkCabeceraOutletDesktop element, State state, int maxSecondsWait) {
-    	return (isElementInStateUntil(element, state, maxSecondsWait, driver));
+    public boolean isElementInStateUntil(LinkCabeceraOutletDesktop element, State state, int maxSeconds) {
+    	return (state(state, element.getBy()).wait(maxSeconds).check());
     }
     
     public void clickElement(LinkCabeceraOutletDesktop element) {
-    	clickAndWait(element, driver);
+    	click(element.getBy()).exec();
     }
     
     public void hoverElement(LinkCabeceraOutletDesktop element) {
-        By elementBy = By.xpath(element.getXPath());
-        moveToElement(elementBy, driver);
+        moveToElement(element.getBy(), driver);
     }
 }

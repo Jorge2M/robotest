@@ -27,12 +27,12 @@ public class PageYandexMoney {
     }
     
     public static void inputPaymentCode(String inputValue, WebDriver driver) {
-        sendKeysWithRetry(3, inputValue, By.xpath(XPathInputPaymentCode), driver);
+        sendKeysWithRetry(inputValue, By.xpath(XPathInputPaymentCode), 2, driver);
     }
     
     public static void inputImport(String inputValue, WebDriver driver) {
         driver.findElement(By.xpath(XPathInputImport)).clear();
-        sendKeysWithRetry(2, inputValue, By.xpath(XPathInputImport), driver);
+        sendKeysWithRetry(inputValue, By.xpath(XPathInputImport), 2, driver);
     }
     
     public static boolean isVisibleInputPaymentCode(WebDriver driver) {

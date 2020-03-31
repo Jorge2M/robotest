@@ -30,7 +30,7 @@ import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -215,9 +215,9 @@ public class UtilsMangoTest {
     
     public static void openLinkInNewTab(WebDriver driver, WebElement element) throws Exception {
         Actions a = new Actions(driver);
-        WebdrvWrapp.moveToElement(element, driver);
+        SeleniumUtils.moveToElement(element, driver);
         Thread.sleep(500);
-        WebdrvWrapp.moveToElement(element, driver);
+        SeleniumUtils.moveToElement(element, driver);
         Thread.sleep(500);
         a.moveToElement(element)
         	.keyDown(Keys.CONTROL)
@@ -277,7 +277,7 @@ public class UtilsMangoTest {
             }
         }
         
-        WebdrvWrapp.waitForPageLoaded(driver, 5);
+        SeleniumUtils.waitForPageLoaded(driver, 5);
     }
     
     /**

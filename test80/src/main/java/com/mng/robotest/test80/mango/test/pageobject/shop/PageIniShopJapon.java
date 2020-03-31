@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
 
 /**
@@ -10,7 +10,7 @@ import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
  * @author jorge.munoz
  *
  */
-public class PageIniShopJapon extends WebdrvWrapp {
+public class PageIniShopJapon extends SeleniumUtils {
 
     public static String URL = "japan.mango.com";
     public static String Title = "MANGO - マンゴ公式オンラインストア";

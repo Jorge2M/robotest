@@ -1,9 +1,11 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.ficha;
+import org.openqa.selenium.By;
+
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
-import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
-public class SecModalPersonalizacion extends WebdrvWrapp {
+public class SecModalPersonalizacion extends SeleniumUtils {
 
 	public enum ModalElement implements ElementPage {
 		Seccion("//div[@class='customization-form']"),
@@ -30,27 +32,28 @@ public class SecModalPersonalizacion extends WebdrvWrapp {
 		SizeContainer("//div[@role='button' and @class[contains(.,'size')]]"),
 		GoToBag("//span[@class[contains(.,'cart-button')]]");
 		
-		String element = null;
-		String mobile_element = null;
-		
-		ModalElement(String element) {
-			this.element = element;
+		By by = null;
+		By byMobil = null;
+		ModalElement(String xPath) {
+			by = By.xpath(xPath);
 		}
 		
-		ModalElement(String element, String mobile_element) {
-			this.element = element;
-			this.mobile_element = mobile_element;
+		ModalElement(String xPath, String xPathMobil) {
+			this.by = By.xpath(xPath);
+			this.byMobil = By.xpath(xPathMobil);
 		}
 		
-		public String getXPath(Channel channel) {
-			if (channel == Channel.movil_web && this.mobile_element != null) {
-				return this.mobile_element;
+		@Override
+		public By getBy() {
+			return by;
+		}
+		
+		@Override
+		public By getBy(Channel channel) {
+			if (channel == Channel.movil_web && this.byMobil != null) {
+				return this.byMobil;
 			}
-			return this.element;
-		}
-
-		public String getXPath() {
-			return element;
+			return this.by;
 		}
 	}
 }

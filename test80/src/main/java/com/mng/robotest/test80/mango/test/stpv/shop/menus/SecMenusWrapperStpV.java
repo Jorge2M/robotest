@@ -186,12 +186,12 @@ public class SecMenusWrapperStpV {
     }
     
     @Validation (
-    	description="Como mínimo se obtiene 1 artículo (lo esperamos un máximo de #{maxSecondsWait} segundos)",
+    	description="Como mínimo se obtiene 1 artículo (lo esperamos un máximo de #{maxSeconds} segundos)",
     	level=State.Warn,
     	avoidEvidences=true)
-    private boolean checkIsVisibleAarticle(DataCtxShop dCtxSh, int maxSecondsWait) throws Exception {
+    private boolean checkIsVisibleAarticle(DataCtxShop dCtxSh, int maxSeconds) throws Exception {
         PageGaleria pageGaleria = PageGaleria.getNew(dCtxSh.channel, dCtxSh.appE, driver);
-        return (pageGaleria.isVisibleArticuloUntil(1, maxSecondsWait));
+        return (pageGaleria.isVisibleArticuloUntil(1, maxSeconds));
     }
     
     public void selectMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {

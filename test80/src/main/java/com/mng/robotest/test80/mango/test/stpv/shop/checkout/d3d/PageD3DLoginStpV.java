@@ -19,11 +19,11 @@ public class PageD3DLoginStpV {
 	}
 	
 	@Validation (
-		description="Aparece la página de identificación D3D (la esperamos hasta #{maxSecondsWait} segundos)",
+		description="Aparece la página de identificación D3D (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Info,
 		avoidEvidences=true)
-	public boolean validateIsD3D(int maxSecondsWait) {
-		return (pageD3DLogin.isPageUntil(maxSecondsWait));
+	public boolean validateIsD3D(int maxSeconds) {
+		return (pageD3DLogin.isPageUntil(maxSeconds));
 	}
 	
 	@Validation (

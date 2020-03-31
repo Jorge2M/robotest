@@ -57,7 +57,7 @@ public class AllPages {
 		return (state(Present, By.xpath(xpath), driver).check());
 	}
 
-    public static boolean validateUrlNotMatchUntil(String url, int maxSecondsWait, WebDriver driver) throws Exception {
+    public static boolean validateUrlNotMatchUntil(String url, int maxSeconds, WebDriver driver) throws Exception {
     	int seconds = 0;
     	do {
     		if (url.compareTo(driver.getCurrentUrl())!=0) {
@@ -66,11 +66,11 @@ public class AllPages {
     		Thread.sleep(1000);
     		seconds+=1;
     	}
-    	while (seconds<maxSecondsWait);
+    	while (seconds<maxSeconds);
     	return false;
     }
     
-    public static boolean validateElementsNotEqualsUntil(int elementosPagina, int margin, int maxSecondsWait, WebDriver driver) 
+    public static boolean validateElementsNotEqualsUntil(int elementosPagina, int margin, int maxSeconds, WebDriver driver) 
     throws Exception {
     	int seconds = 0;
     	do {
@@ -80,7 +80,7 @@ public class AllPages {
     		Thread.sleep(1000);
     		seconds+=1;
     	}
-    	while (seconds<maxSecondsWait);
+    	while (seconds<maxSeconds);
     	return false;
     }
 

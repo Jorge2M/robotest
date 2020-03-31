@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop;
@@ -20,22 +21,27 @@ public class SecCabeceraShop extends SecCabecera {
     private final static String XPathDivNavTools = "//div[@id='navTools']";
     private final static String XPathNumArticlesBolsa = "//span[@class='icon-button-items']";
 	
-    public enum IconoCabeceraShop implements ElementPage {
-    	lupa("//span[@class[contains(.,'-search')]]/.."),
-    	//lupa("//self::*[@id='search_icon_button']"),
+	public enum IconoCabeceraShop implements ElementPage {
+		lupa("//span[@class[contains(.,'-search')]]/.."),
 		iniciarsesion("//self::*[@id='login_any' or @id='login_mobile_any']/span[@class[contains(.,'-account')]]/.."),
-    	micuenta("//self::*[@id='login' or @id='login_mobile']/span[@class[contains(.,'-account')]]/.."),
+		micuenta("//self::*[@id='login' or @id='login_mobile']/span[@class[contains(.,'-account')]]/.."),
 		favoritos("//span[@class[contains(.,'-favorites')]]/.."),
 		bolsa("//span[@class[contains(.,'-bag')]]/..");
 
-		private String xPath;
+		private By by;
+		private String xpath;
 		final static String XPathIcon = "//div[@class[contains(.,'user-icon-button')]]";
 		IconoCabeceraShop(String xPath) {
-			this.xPath = XPathIcon + xPath;
+			xpath = XPathIcon + xPath;
+			by = By.xpath(XPathIcon + xPath);
 		}
 
+		@Override
+		public By getBy() {
+			return by;
+		}
 		public String getXPath() {
-			return this.xPath;
+			return xpath;
 		}
 	}
     
@@ -73,28 +79,28 @@ public class SecCabeceraShop extends SecCabecera {
     }
 
     @Override
-    public void clickIconoBolsaWhenDisp(int maxSecondsWait) throws Exception {
-    	boolean isIconoClickable = isElementInStateUntil(IconoCabeceraShop.bolsa, State.Clickable, maxSecondsWait, driver);
+    public void clickIconoBolsaWhenDisp(int maxSeconds) {
+    	boolean isIconoClickable = state(Clickable, IconoCabeceraShop.bolsa.getBy()).wait(maxSeconds).check();
         if (isIconoClickable) {
         	clickIconoBolsa(); 
         }
     }
 
     public void clickIconoAndWait(IconoCabeceraShop icono) {
-    	clickAndWait(icono, driver);
+    	click(icono.getBy()).exec();
     }
     
     public boolean isIconoInState(IconoCabeceraShop icono, State state) {
-    	return (isElementInState(icono, state, driver));
+    	return (state(state, icono.getBy()).check());
     }
     
-    public boolean isIconoInStateUntil(IconoCabeceraShop icono, State state, int maxSecondsWait) {
-    	return (isElementInStateUntil(icono, state, maxSecondsWait, driver));
+    public boolean isIconoInStateUntil(IconoCabeceraShop icono, State state, int maxSeconds) {
+    	return (state(state, icono.getBy()).wait(maxSeconds).check());
     }
     
     public void hoverIcono(IconoCabeceraShop icono) {
     	moveToElement(By.xpath(icono.getXPath() + "/*"), driver); //Workaround problema hover en Firefox
-        moveToElement(icono, driver);
+        moveToElement(icono.getBy(), driver);
     }
     
     public void focusAwayBolsa(WebDriver driver) {

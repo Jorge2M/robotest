@@ -37,8 +37,7 @@ public class PageMisDatosStpV {
     }
 
     @Validation
-    public static ChecksTM validaIsDataAssociatedToRegister (Map<String,String> datosRegOk, String codpais, WebDriver driver) 
-    throws Exception {
+    public static ChecksTM validaIsDataAssociatedToRegister (Map<String,String> datosRegOk, String codpais, WebDriver driver) {
         String nombre = datosRegOk.get("cfName");
         String apellidos = datosRegOk.get("cfSname");
         String email = datosRegOk.get("cfEmail");
@@ -93,7 +92,7 @@ public class PageMisDatosStpV {
     @Step(
         description = "Modificar el nombre (cambio de mayúsculas<->minúsculas) + Botón \"Modificar Datos\"",
         expected = "Aparece la confirmación que los datos se han modificados")
-    public static String modificaNombreYGuarda (WebDriver driver) throws Exception {
+    public static String modificaNombreYGuarda (WebDriver driver) {
         String nombreActual = PageMisDatos.getValueNombreInput(driver);
         if (nombreActual.compareTo(nombreActual.toUpperCase()) == 0) {
             nombreActual = nombreActual.toLowerCase();

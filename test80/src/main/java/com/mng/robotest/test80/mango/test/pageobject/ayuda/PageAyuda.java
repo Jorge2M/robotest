@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.pageobject.ayuda;
 
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -9,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import java.io.Reader;
 import java.io.InputStreamReader;
@@ -48,8 +50,22 @@ public class PageAyuda extends PageObjTM {
         return keysFromJSON;
     }
 
-    public String getXPath(String apartado) {
+    private String getXPath(String apartado) {
         return ("//*[text()='" + apartado + "']");
+    }
+    
+    public void selectSection(String apartado) {
+    	By byElem = By.xpath(getXPath(apartado));
+    	click(byElem).type(javascript).exec();
+    }
+    
+    public boolean sectionInState(String apartado, State state) {
+    	By byElem = By.xpath(getXPath(apartado));
+    	return (state(state, byElem).wait(2).check());
+    }
+    
+    public void selectCloseBuscar() {
+    	click(By.xpath(xPathCloseBuscar)).exec();
     }
     
     public enum StateApartado {	collapsed, expanded };

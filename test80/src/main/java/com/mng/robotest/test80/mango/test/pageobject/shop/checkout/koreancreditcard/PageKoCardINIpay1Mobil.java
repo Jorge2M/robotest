@@ -4,11 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
-import com.mng.testmaker.service.webdriver.pageobject.ElementPageFunctions;
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 
 
-public class PageKoCardINIpay1Mobil extends ElementPageFunctions {
+public class PageKoCardINIpay1Mobil {
 	
 	private final static String tagTitleButtonTypeCard = "@TagLitTypeCard";
     public enum BodyPageKoCardINIpay1 implements ElementPage {
@@ -18,14 +17,19 @@ public class PageKoCardINIpay1Mobil extends ElementPageFunctions {
         typecardbutton_withtag("//li[text()[contains(.,'" + tagTitleButtonTypeCard + "')]]"),
     	submitButton("//input[@type='submit']");
 
-        private String xPath;
+        private By by;
+        private String xpath;
         BodyPageKoCardINIpay1 (String xPath) {
-            this.xPath = xPath;
+        	xpath = xPath;
+            by = By.xpath(xPath);
         }
 
         @Override
+        public By getBy() {
+            return by;
+        }
         public String getXPath() {
-            return this.xPath;
+        	return xpath;
         }
 
         public static void clickTypeCardButton(String litButton, WebDriver driver) {

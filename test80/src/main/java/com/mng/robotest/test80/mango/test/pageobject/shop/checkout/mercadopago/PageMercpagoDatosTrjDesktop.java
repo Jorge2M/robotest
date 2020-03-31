@@ -35,7 +35,7 @@ public class PageMercpagoDatosTrjDesktop extends PageMercpagoDatosTrj {
     
     @Override
     public void sendCvc(String cvc) {
-        sendKeysWithRetry(3, cvc, By.xpath(XPathInputCvc), driver);
+        sendKeysWithRetry(cvc, By.xpath(XPathInputCvc), 3, driver);
     }
     
     public boolean isVisibleVisaIconUntil(int maxSeconds) {

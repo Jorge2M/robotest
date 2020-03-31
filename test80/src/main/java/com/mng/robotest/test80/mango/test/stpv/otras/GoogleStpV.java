@@ -34,10 +34,10 @@ public class GoogleStpV {
 	@Validation
 	private ChecksTM checkLinksMango() {
 		ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 3;
+        int maxSeconds = 3;
     	validations.add(
-    		"El 1er link no-anuncio contiene \"MANGO\" (lo esperamos " + maxSecondsWait + " segundos)",
-    		pageGoogle.validaFirstLinkContainsUntil("Mango", maxSecondsWait), State.Defect);		
+    		"El 1er link no-anuncio contiene \"MANGO\" (lo esperamos " + maxSeconds + " segundos)",
+    		pageGoogle.validaFirstLinkContainsUntil("Mango", maxSeconds), State.Defect);		
     	validations.add(
     		"El 1er link no-anuncion no contiene \"robots.txt\"",
     		!pageGoogle.validaFirstLinkContainsUntil("robots.txt", 0), State.Warn);

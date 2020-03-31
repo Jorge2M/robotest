@@ -68,11 +68,11 @@ public class PageCheckoutWrapperStpV {
     } 
     
     @Validation (
-    	description="Acaba desapareciendo la capa de \"Cargando...\" (lo esperamos hasta #{maxSecondsWait} segundos)",
+    	description="Acaba desapareciendo la capa de \"Cargando...\" (lo esperamos hasta #{maxSeconds} segundos)",
     	level=State.Warn)
-    public static boolean validateLoadingDisappears(int maxSecondsWait, WebDriver driver) throws Exception {
+    public static boolean validateLoadingDisappears(int maxSeconds, WebDriver driver) throws Exception {
         Thread.sleep(200); //Damos tiempo a que aparezca la capa de "Cargando"
-        return (PageCheckoutWrapper.isNoDivLoadingUntil(maxSecondsWait, driver));
+        return (PageCheckoutWrapper.isNoDivLoadingUntil(maxSeconds, driver));
     }
     
     @Step (
@@ -287,10 +287,10 @@ public class PageCheckoutWrapperStpV {
     }
     
     @Validation (
-    	description="Se hace visible el texto bajo el método de pago: #{nombrePago} (lo esperamos hasta #{maxSecondsWait} segundos)",
+    	description="Se hace visible el texto bajo el método de pago: #{nombrePago} (lo esperamos hasta #{maxSeconds} segundos)",
     	level=State.Warn)
-    private static boolean checkIsVisibleTextUnderPayment(@SuppressWarnings("unused") String nombrePago, Pago pago, int maxSecondsWait, Channel channel, WebDriver driver) {
-        return (PageCheckoutWrapper.isVisibleBloquePagoNoTRJIntegradaUntil(pago, channel, maxSecondsWait, driver));
+    private static boolean checkIsVisibleTextUnderPayment(@SuppressWarnings("unused") String nombrePago, Pago pago, int maxSeconds, Channel channel, WebDriver driver) {
+        return (PageCheckoutWrapper.isVisibleBloquePagoNoTRJIntegradaUntil(pago, channel, maxSeconds, driver));
     }
     
     @Validation (
@@ -386,10 +386,10 @@ public class PageCheckoutWrapperStpV {
 //    }       
     
     @Validation (
-    	description="Aparece el botón de \"Confirmar Pago\" (esperamos hasta #{maxSecondsWait} segundos)",
+    	description="Aparece el botón de \"Confirmar Pago\" (esperamos hasta #{maxSeconds} segundos)",
     	level=State.Warn)
-    private static boolean checkAfterClickVerResumen(int maxSecondsWait, WebDriver driver) {
-        return (PageCheckoutWrapper.page2MobilCheckout.isClickableButtonFinalizarCompraUntil(maxSecondsWait, driver));
+    private static boolean checkAfterClickVerResumen(int maxSeconds, WebDriver driver) {
+        return (PageCheckoutWrapper.page2MobilCheckout.isClickableButtonFinalizarCompraUntil(maxSeconds, driver));
     }
             
     @Step (
@@ -421,10 +421,10 @@ public class PageCheckoutWrapperStpV {
     @Validation
     private static ChecksTM checkAfterInputTarjetaEmpleado(Pais pais, Channel channel, WebDriver driver) {
     	ChecksTM validations = ChecksTM.getNew();
-	    int maxSecondsWait = 5;
+	    int maxSeconds = 5;
 	 	validations.add(
-			"Aparece el campo de introducción del primer apellido (lo esperamos hasta " + maxSecondsWait + " segundos)",
-			PageCheckoutWrapper.isPresentInputApellidoPromoEmplUntil(channel, maxSecondsWait, driver), State.Defect);
+			"Aparece el campo de introducción del primer apellido (lo esperamos hasta " + maxSeconds + " segundos)",
+			PageCheckoutWrapper.isPresentInputApellidoPromoEmplUntil(channel, maxSeconds, driver), State.Defect);
     	
     	boolean isPresentInputDni = PageCheckoutWrapper.isPresentInputDNIPromoEmpl(channel, driver);
     	if (pais.getAccesoEmpl().getNif()!=null) {
@@ -541,11 +541,11 @@ public class PageCheckoutWrapperStpV {
 	@Validation (
 		description=
 			"Se aplica el descuento de <b>#{descuento}</b> al subtotal inicial de #{subtotalInicial} " + 
-			"(lo esperamos hasta #{maxSecondsWait})",
+			"(lo esperamos hasta #{maxSeconds})",
 		level=State.Defect)
-	public static boolean validateLoyaltyPointsDiscountDesktopUntil(float descuento, float subtotalInicial, int maxSecondsWait, WebDriver driver) 
+	public static boolean validateLoyaltyPointsDiscountDesktopUntil(float descuento, float subtotalInicial, int maxSeconds, WebDriver driver) 
 	throws Exception {
-		for (int i=0; i<maxSecondsWait; i++) {
+		for (int i=0; i<maxSeconds; i++) {
 			float subTotalActual = PageCheckoutWrapper.getImportSubtotalDesktop(driver);
 			float estimado = UtilsMangoTest.round(subtotalInicial - descuento, 2);
 			if (estimado == subTotalActual) {
@@ -564,11 +564,11 @@ public class PageCheckoutWrapperStpV {
 	}
 	
 	@Validation (
-		description="Aparece un descuento aplicado de #{descuento} (lo esperamos hasta #{maxSecondsWait})",
+		description="Aparece un descuento aplicado de #{descuento} (lo esperamos hasta #{maxSeconds})",
 		level=State.Defect)
-	public static boolean validateLoyaltyPointsDiscountMobilUntil(float descuento, int maxSecondsWait, WebDriver driver) 
+	public static boolean validateLoyaltyPointsDiscountMobilUntil(float descuento, int maxSeconds, WebDriver driver) 
 	throws Exception {
-		for (int i=0; i<maxSecondsWait; i++) {
+		for (int i=0; i<maxSeconds; i++) {
 			float discountApplied = UtilsMangoTest.round(PageCheckoutWrapper.getDiscountLoyaltyAppliedMobil(driver), 2);
 			if (discountApplied == descuento) {
 				return true;

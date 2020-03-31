@@ -6,7 +6,6 @@ import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
-import com.mng.testmaker.service.webdriver.pageobject.ElementPageFunctions;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -17,6 +16,7 @@ import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageDetallePed
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PagePedidos.TypeDetalle;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 
 /**
  * Clase que implementa los diferentes steps/validations asociados asociados a la página de Pedidos/Bolsas en Manto
@@ -24,7 +24,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
  *
  */
 
-public class PageConsultaPedidoBolsaStpV extends ElementPageFunctions {
+public class PageConsultaPedidoBolsaStpV {
 
     /**
      * Se accede al detalle de un pedido desde la lista de pedidos o bolsas
@@ -107,8 +107,8 @@ public class PageConsultaPedidoBolsaStpV extends ElementPageFunctions {
         expected="Aparece la página de generación del pedido",
         saveImagePage=SaveWhen.Always,
 	    saveErrorData=SaveWhen.Never)
-    public static void clickButtonIrAGenerar(String idPedido, WebDriver driver) throws Exception {
-        clickAndWait(RightButtons.IrAGenerar, driver);
+    public static void clickButtonIrAGenerar(String idPedido, WebDriver driver) {
+    	click(RightButtons.IrAGenerar.getBy(), driver).exec();
         PageGenerarPedidoStpV.validateIsPage(idPedido, driver);
     }
 }

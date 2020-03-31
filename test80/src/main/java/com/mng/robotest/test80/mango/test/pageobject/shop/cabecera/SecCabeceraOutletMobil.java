@@ -22,13 +22,14 @@ public class SecCabeceraOutletMobil extends SecCabeceraOutlet {
 		bolsa("//a[@class[contains(.,'cartLink')]]"),
 		lupa("//div[@class='menu-search-button']");
 		
-		private String xpath;
+		private By by;
 		private IconoCabOutletMobil(String xpath) {
-			this.xpath = xpath;
+			by = By.xpath(xpath);
 		}
 		
-		public String getXPath() {
-			return xpath;
+		@Override
+		public By getBy() {
+			return by;
 		}
 	}
 		
@@ -58,7 +59,7 @@ public class SecCabeceraOutletMobil extends SecCabeceraOutlet {
     }
     
     @Override
-    public void clickIconoBolsaWhenDisp(int maxSecondsToWait) throws Exception {
+    public void clickIconoBolsaWhenDisp(int maxSecondsToWait) {
     	clickIfClickableUntil(IconoCabOutletMobil.bolsa, maxSecondsToWait);
     }
     
@@ -67,31 +68,29 @@ public class SecCabeceraOutletMobil extends SecCabeceraOutlet {
     	hoverIcono(IconoCabOutletMobil.bolsa);
     }
     
-    public boolean isElementInStateUntil(IconoCabOutletMobil icono, State state, int maxSecondsWait) {
-    	return (isElementInStateUntil(icono, state, maxSecondsWait, driver));
+    public boolean isElementInStateUntil(IconoCabOutletMobil icono, State state, int maxSeconds) {
+    	return (state(state, icono.getBy()).wait(maxSeconds).check());
     }
 
 	 public boolean isClickableUntil(IconoCabOutletMobil icono, int maxSeconds) {
-		return (state(Clickable, By.xpath(icono.getXPath()), driver)
-				.wait(maxSeconds).check());
+		return (state(Clickable, icono.getBy()).wait(maxSeconds).check());
 	}
 
-    public void clickIfClickableUntil(IconoCabOutletMobil icono, int maxSecondsToWait) 
-    throws Exception {
-    	if (isClickableUntil(icono, maxSecondsToWait)) {
-    		click(icono);
-    	}
-    }
-    
-    public void click(IconoCabOutletMobil icono) {
-    	click(icono, app);
-    }
-    
-    public void click(IconoCabOutletMobil icono, AppEcom app) {
-    	click(By.xpath(icono.getXPath())).type(TypeClick.javascript).exec();
-    }
-    
-    public void hoverIcono(IconoCabOutletMobil icono) {
-    	moveToElement(icono, driver);
-    }
+	public void clickIfClickableUntil(IconoCabOutletMobil icono, int maxSecondsToWait) {
+		if (isClickableUntil(icono, maxSecondsToWait)) {
+			click(icono);
+		}
+	}
+
+	public void click(IconoCabOutletMobil icono) {
+		click(icono, app);
+	}
+
+	public void click(IconoCabOutletMobil icono, AppEcom app) {
+		click(icono.getBy()).type(TypeClick.javascript).exec();
+	}
+
+	public void hoverIcono(IconoCabOutletMobil icono) {
+		moveToElement(icono.getBy(), driver);
+	}
 }

@@ -27,8 +27,8 @@ public class PagoMercadopago extends PagoStpV {
         DataPedido dataPedido = this.dCtxPago.getDataPedido();
         PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, driver);
         PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, driver);
-        int maxSecondsWait = 5;
-        PageMercpago1rstStpV.validateIsPageUntil(maxSecondsWait, driver);
+        int maxSeconds = 5;
+        PageMercpago1rstStpV.validateIsPageUntil(maxSeconds, driver);
         PageMercpago1rstStpV.clickLinkRegistration(driver);
         if (execPay) {
             PageMercpagoLoginStpV.loginMercadopago(dataPedido.getPago(), dCtxSh.channel, driver);

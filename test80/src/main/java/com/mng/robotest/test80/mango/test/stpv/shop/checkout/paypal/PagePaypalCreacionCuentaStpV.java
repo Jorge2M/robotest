@@ -13,7 +13,7 @@ public class PagePaypalCreacionCuentaStpV {
         PagePaypalCreacionCuenta.clickButtonIniciarSesion(driver);
         
         //Validaciones
-        int maxSecondsWait = 10;
-        PagePaypalLoginStpV.validateIsPageUntil(maxSecondsWait, driver);
+        int maxSeconds = 10;
+        PagePaypalLoginStpV.validateIsPageUntil(maxSeconds, driver);
     }
 }

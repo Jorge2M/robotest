@@ -68,11 +68,11 @@ public class Page1EnvioCheckoutMobilStpV {
 	}
     
     @Validation (
-    	description="Queda seleccionado el bloque correspondiete a <b>#{tipoTransporte}</b> (lo esperamos hasta #{maxSecondsWait} segundos)",
+    	description="Queda seleccionado el bloque correspondiete a <b>#{tipoTransporte}</b> (lo esperamos hasta #{maxSeconds} segundos)",
     	level=State.Warn)
-    public static boolean validaBlockSelected(TipoTransporte tipoTransporte, int maxSecondsWait, WebDriver driver) 
+    public static boolean validaBlockSelected(TipoTransporte tipoTransporte, int maxSeconds, WebDriver driver) 
     throws Exception {
-        return (Page1EnvioCheckoutMobil.isBlockSelectedUntil(tipoTransporte, maxSecondsWait, driver));
+        return (Page1EnvioCheckoutMobil.isBlockSelectedUntil(tipoTransporte, maxSeconds, driver));
     }
     
     @Step (
@@ -105,10 +105,10 @@ public class Page1EnvioCheckoutMobilStpV {
     @Validation
     public static ChecksTM validaResultImputPromoEmpl(WebDriver driver) throws Exception {
     	ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 2;
+        int maxSeconds = 2;
 	 	validations.add(
-			"Aparece el descuento total aplicado al empleado (en menos de " + maxSecondsWait + " segundos)",
-			Page1EnvioCheckoutMobil.isVisibleDescuentoEmpleadoUntil(driver, maxSecondsWait), State.Warn);
+			"Aparece el descuento total aplicado al empleado (en menos de " + maxSeconds + " segundos)",
+			Page1EnvioCheckoutMobil.isVisibleDescuentoEmpleadoUntil(driver, maxSeconds), State.Warn);
 	 	validations.add(
 			"Aparece un descuento de empleado mayor que 0",
 			Page1EnvioCheckoutMobil.validateDiscountEmpleadoNotNull(driver), State.Warn);

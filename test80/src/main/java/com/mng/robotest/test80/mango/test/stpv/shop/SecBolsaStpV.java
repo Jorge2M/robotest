@@ -61,10 +61,10 @@ public class SecBolsaStpV {
 	}
 
 	@Validation (
-		description="Desaparece la bolsa (lo esperamos hasta #{maxSecondsWait} segundos)",
+		description="Desaparece la bolsa (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-	private static boolean checkBolsaDisappears(int maxSecondsWait, WebDriver driver) {
-		return (SecBolsa.isInStateUntil(StateBolsa.Closed, Channel.movil_web, maxSecondsWait, driver));
+	private static boolean checkBolsaDisappears(int maxSeconds, WebDriver driver) {
+		return (SecBolsa.isInStateUntil(StateBolsa.Closed, Channel.movil_web, maxSeconds, driver));
 	}
 
 	/**
@@ -83,8 +83,8 @@ public class SecBolsaStpV {
 	@Validation (
 		description="La bolsa queda en estado #{stateBolsaExpected} (lo esperamos hasta #{maxSecondsToWait} segundos)",
 		level=State.Defect)
-	private static boolean validateBolsaInState(StateBolsa stateBolsaExpected, int maxSecondsWait, Channel channel, WebDriver driver) {
-		return (SecBolsa.isInStateUntil(stateBolsaExpected, channel, maxSecondsWait, driver));
+	private static boolean validateBolsaInState(StateBolsa stateBolsaExpected, int maxSeconds, Channel channel, WebDriver driver) {
+		return (SecBolsa.isInStateUntil(stateBolsaExpected, channel, maxSeconds, driver));
 	}
 
 	public static void altaArticlosConColores(int numArticulos, DataBag dataBag, DataCtxShop dCtxSh, WebDriver driver) 
@@ -177,13 +177,13 @@ public class SecBolsaStpV {
 	@Validation
 	private static ChecksTM checkIsBolsaVisibleInDesktop(WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
-		int maxSecondsWait = 1;
+		int maxSeconds = 1;
 	 	validations.add(
-			"Es visible la capa/página correspondiente a la bolsa (la esperamos hasta " + maxSecondsWait + " segundos)",
-			SecBolsa.isInStateUntil(StateBolsa.Open, Channel.desktop, maxSecondsWait, driver), State.Defect);
+			"Es visible la capa/página correspondiente a la bolsa (la esperamos hasta " + maxSeconds + " segundos)",
+			SecBolsa.isInStateUntil(StateBolsa.Open, Channel.desktop, maxSeconds, driver), State.Defect);
 	 	validations.add(
-			"Aparece el botón \"Comprar\" (lo esperamos hasta " + maxSecondsWait + " segundos)",
-			SecBolsa.isVisibleBotonComprarUntil(driver, Channel.desktop, maxSecondsWait), State.Defect);
+			"Aparece el botón \"Comprar\" (lo esperamos hasta " + maxSeconds + " segundos)",
+			SecBolsa.isVisibleBotonComprarUntil(driver, Channel.desktop, maxSeconds), State.Defect);
 		return validations;
 	}
 
@@ -191,11 +191,11 @@ public class SecBolsaStpV {
 	public static ChecksTM validaNumArtEnBolsa(DataBag dataBag, Channel channel, AppEcom app, WebDriver driver) 
 	throws Exception {
 		ChecksTM validations = ChecksTM.getNew();
-		int maxSecondsWait = 2;
+		int maxSeconds = 2;
 		String itemsSaved = String.valueOf(dataBag.getListArticulos().size());
 	 	validations.add(
-			"Existen " + dataBag.getListArticulos().size() + " elementos dados de alta en la bolsa (los esperamos hasta " + maxSecondsWait + " segundos)",
-			SecBolsa.numberItemsIsUntil(itemsSaved, channel, app, maxSecondsWait, driver), State.Warn);
+			"Existen " + dataBag.getListArticulos().size() + " elementos dados de alta en la bolsa (los esperamos hasta " + maxSeconds + " segundos)",
+			SecBolsa.numberItemsIsUntil(itemsSaved, channel, app, maxSeconds, driver), State.Warn);
 	 	return validations;
 	}
 
@@ -264,11 +264,11 @@ public class SecBolsaStpV {
 	}
 
 	@Validation (
-		description="El importe total se acaba modificando (lo esperamos hasta #{maxSecondsWait} segundos)",
+		description="El importe total se acaba modificando (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
-	private static boolean checkImporteIsModified(String importeTotalOrig, int maxSecondsWait, Channel channel, WebDriver driver) 
+	private static boolean checkImporteIsModified(String importeTotalOrig, int maxSeconds, Channel channel, WebDriver driver) 
 	throws Exception {
-		return (SecBolsa.isNotThisImporteTotalUntil(importeTotalOrig, channel, maxSecondsWait, driver));
+		return (SecBolsa.isNotThisImporteTotalUntil(importeTotalOrig, channel, maxSeconds, driver));
 	}
 
 	@SuppressWarnings("static-access")
@@ -293,8 +293,8 @@ public class SecBolsaStpV {
 		if (dCtxSh.userRegistered) {
 			PageCheckoutWrapperStpV.validateIsFirstPage(dCtxSh.userRegistered, dataBag, dCtxSh.channel, driver);
 		} else {
-			int maxSecondsWait = 5;
-			Page1IdentCheckoutStpV.validateIsPage(maxSecondsWait, driver);
+			int maxSeconds = 5;
+			Page1IdentCheckoutStpV.validateIsPage(maxSeconds, driver);
 		}
 	}
 

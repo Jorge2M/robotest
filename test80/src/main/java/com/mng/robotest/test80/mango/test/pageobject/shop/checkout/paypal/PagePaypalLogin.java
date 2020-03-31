@@ -21,7 +21,7 @@ public class PagePaypalLogin {
     
     public static void inputUserAndPassword(String userMail, String password, WebDriver driver) {
     	waitForPageLoaded(driver); //For avoid StaleElementReferenceException
-    	sendKeysWithRetry(2, userMail, By.xpath(XPathInputLogin), driver);
+    	sendKeysWithRetry(userMail, By.xpath(XPathInputLogin), 2, driver);
     	if (state(Visible, By.xpath(XPathInputPassword), driver).check()) {
             driver.findElement(By.xpath(XPathInputPassword)).sendKeys(password);
         } else {

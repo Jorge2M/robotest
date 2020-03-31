@@ -55,7 +55,7 @@ public class PageMisComprasStpV {
     	return this.modalDetalleMisComprasStpV;
     }
     
-    public void validateIsPage(Pais pais) throws Exception {
+    public void validateIsPage(Pais pais) {
         if (pais.isTicketStoreEnabled()) {
             validateIsPage();
         } else {
@@ -69,7 +69,7 @@ public class PageMisComprasStpV {
     }
 
     @Validation
-    private ChecksTM validateIsPageWhenNotExistTabs() throws Exception {
+    private ChecksTM validateIsPageWhenNotExistTabs() {
     	ChecksTM validations = ChecksTM.getNew();
         int maxSecondsToWait = 2;
       	validations.add(
@@ -87,10 +87,10 @@ public class PageMisComprasStpV {
     @Validation
     public ChecksTM validateIsPage() {
     	ChecksTM validations = ChecksTM.getNew();
-    	int maxSecondsWait = 2;
+    	int maxSeconds = 2;
       	validations.add(
-    		"Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsWait + " segundos)",
-    		pageMisCompras.isPageUntil(maxSecondsWait), State.Warn);
+    		"Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSeconds + " segundos)",
+    		pageMisCompras.isPageUntil(maxSeconds), State.Warn);
       	validations.add(
     		"Aparece el bloque de \"Tienda\"",
     		pageMisCompras.isPresentBlockUntil(0, TypeCompra.Tienda), State.Warn);
@@ -105,8 +105,8 @@ public class PageMisComprasStpV {
         expected="Se hace visible el bloque #{typeCompra}")
     public void selectBlock(TypeCompra typeCompra, boolean ordersExpected) {
     	pageMisCompras.clickBlock(typeCompra);
-        int maxSecondsWait = 2;
-    	checkBlockSelected(typeCompra, maxSecondsWait);
+        int maxSeconds = 2;
+    	checkBlockSelected(typeCompra, maxSeconds);
         if (ordersExpected) {
         	checkArticlesInList(typeCompra);
         } else {
@@ -115,19 +115,19 @@ public class PageMisComprasStpV {
     }
 
 	@Validation (
-		description="Queda seleccionado el bloque de <b>#{typeCompra}</b> (lo esperamos hasta #{maxSecondsWait} segundos)",
+		description="Queda seleccionado el bloque de <b>#{typeCompra}</b> (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
-	private boolean checkBlockSelected(TypeCompra typeCompra, int maxSecondsWait) {
-		return (pageMisCompras.isSelectedBlockUntil(maxSecondsWait, typeCompra));
+	private boolean checkBlockSelected(TypeCompra typeCompra, int maxSeconds) {
+		return (pageMisCompras.isSelectedBlockUntil(maxSeconds, typeCompra));
 	}
 	
 	@Validation
 	private ChecksTM checkArticlesInList(TypeCompra typeCompra) {
     	ChecksTM validations = ChecksTM.getNew();
-    	int maxSecondsWait = 2;
-    	boolean isVisibleAnyCompra = pageMisCompras.isVisibleAnyCompraUntil(maxSecondsWait); 
+    	int maxSeconds = 2;
+    	boolean isVisibleAnyCompra = pageMisCompras.isVisibleAnyCompraUntil(maxSeconds); 
       	validations.add(
-    		"Aparece una lista con algún artículo (lo esperamos hasta " + maxSecondsWait + " segundos)",
+    		"Aparece una lista con algún artículo (lo esperamos hasta " + maxSeconds + " segundos)",
     		isVisibleAnyCompra, State.Warn);
       	if (isVisibleAnyCompra) {
           	validations.add(

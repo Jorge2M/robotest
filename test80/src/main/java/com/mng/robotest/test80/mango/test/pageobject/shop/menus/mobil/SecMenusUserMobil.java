@@ -1,23 +1,23 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
-import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 
-public class SecMenusUserMobil extends WebdrvWrapp {
+public class SecMenusUserMobil extends PageObjTM {
 
 	final AppEcom app;
-	final WebDriver driver;
 	final SecCabecera secCabecera;
 	
 	private SecMenusUserMobil(AppEcom app, WebDriver driver) {
+		super(driver);
 		this.app = app;
-		this.driver = driver;
 		this.secCabecera = SecCabecera.getNew(Channel.movil_web, app, driver);
 	}
 	
@@ -25,10 +25,10 @@ public class SecMenusUserMobil extends WebdrvWrapp {
 		return (new SecMenusUserMobil(app, driver));
 	}
 	
-    public enum MenuUserMobil implements ElementPage {
-    	ayuda("//a[@href[contains(.,'/help/')]]"),
+	public enum MenuUserMobil implements ElementPage {
+		ayuda("//a[@href[contains(.,'/help/')]]"),
 		miscompras("//a[@href[contains(.,'/mypurchases')]]"),
-    	pedidos("//a[@href[contains(.,'account/orders')]]"),
+		pedidos("//a[@href[contains(.,'account/orders')]]"),
 		cerrarsesion("//a[@href[contains(.,'/logout')]]"),
 		favoritos("//a[@href[contains(.,'/favorites')]]"),
 		iniciarsesion("//a[@href[contains(.,'/login?')]]"),
@@ -37,36 +37,37 @@ public class SecMenusUserMobil extends WebdrvWrapp {
 		mangolikesyou("//a[@href[contains(.,'/mangolikesyou')]]"),
 		cambiopais("//a[@href[contains(.,'/preHome.faces')]]");
 
-        private String XPathCapaMenus = "//ul[@class[contains(.,'menu-section-links')]]";
-		private String xPath;
+		private String XPathCapaMenus = "//ul[@class[contains(.,'menu-section-links')]]";
+		private By by;
 		MenuUserMobil(String xPath) {
-			this.xPath = XPathCapaMenus + xPath;
+			by = By.xpath(XPathCapaMenus + xPath);
 		}
 
-		public String getXPath() {
-			return this.xPath;
+		@Override
+		public By getBy() {
+			return by;
 		}
 	}
     
     public boolean isMenuInState(MenuUserMobil menu, State state) throws Exception {
     	secCabecera.clickIconoMenuHamburguerMobil(true);
-    	return (isElementInState(menu, state, driver));
+    	return (state(state, menu.getBy()).check());
     }
     
-    public boolean isMenuInStateUntil(MenuUserMobil menu, State state, int maxSecondsWait) {
+    public boolean isMenuInStateUntil(MenuUserMobil menu, State state, int maxSeconds) {
     	secCabecera.clickIconoMenuHamburguerMobil(true);
-    	return (isElementInStateUntil(menu, state, maxSecondsWait, driver));
+    	return (state(state, menu.getBy()).wait(maxSeconds).check());
     }
     
     public void clickMenu(MenuUserMobil menu) {
     	secCabecera.clickIconoMenuHamburguerMobil(true);
-    	clickAndWait(menu, driver);
+    	click(menu.getBy()).exec();
     }
 
     public boolean clickMenuIfinState(MenuUserMobil menu, State stateExpected) throws Exception {
     	secCabecera.clickIconoMenuHamburguerMobil(true);
         if (isMenuInState(menu, stateExpected)) {
-        	moveToElementPage(menu, driver);
+        	moveToElement(menu.getBy(), driver);
             clickMenu(menu);
             return true;
         }
@@ -75,7 +76,7 @@ public class SecMenusUserMobil extends WebdrvWrapp {
     
     public void MoveAndclickMenu(MenuUserMobil menu) throws Exception {
     	secCabecera.clickIconoMenuHamburguerMobil(true);
-    	moveToElementPage(menu, driver);
+    	moveToElement(menu.getBy(), driver);
         clickMenu(menu);
     }
 

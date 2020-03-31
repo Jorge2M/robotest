@@ -4,6 +4,8 @@ import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import org.openqa.selenium.WebDriver;
@@ -14,13 +16,12 @@ import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques.But
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques.TablaCheque;
 
 
-public class PageGestorChequesStpV {
+public class PageGestorChequesStpV extends PageObjTM {
 	
-	private final WebDriver driver;
 	private final PageGestorCheques pageGestorCheques;
 	
 	public PageGestorChequesStpV(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 		this.pageGestorCheques = new PageGestorCheques(driver);
 	}
 
@@ -87,42 +88,40 @@ public class PageGestorChequesStpV {
 		expected="Muestra la página de información sobre los cheques",
 		saveErrorData=SaveWhen.Never)
 	public void volverCheques () throws Exception {
-		PageGestorCheques.clickAndWait(ButtonsCheque.volverCheques, driver);
+		click(ButtonsCheque.volverCheques.getBy()).exec();
 		validateButtons();
 	}
 
 	@Validation
 	public ChecksTM validateButtons() {
 		ChecksTM validations = ChecksTM.getNew();
-		int maxSecondsWait = 3;
 		validations.add(
 			"Existe el botón de <b>Id del pedido</b>",
-			PageGestorCheques.isElementInStateUntil(ButtonsCheque.idPedido, Present, maxSecondsWait, driver), State.Defect);
+			state(Present, ButtonsCheque.idPedido.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"Existe el botón de <b>Numero de cheque</b>",
-			PageGestorCheques.isElementInStateUntil(ButtonsCheque.numCheque, Present, maxSecondsWait, driver), State.Defect);
+			state(Present, ButtonsCheque.numCheque.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"Existe el botón de <b>Id de compra</b>",
-			PageGestorCheques.isElementInStateUntil(ButtonsCheque.idCompra, Clickable, 3, driver), State.Defect);
+			state(Clickable, ButtonsCheque.idCompra.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"Existe el botón de <b>Correo del receptor</b>",
-			PageGestorCheques.isElementInStateUntil(ButtonsCheque.correoReceptor, Clickable, 3, driver), State.Defect);
+			state(Clickable, ButtonsCheque.correoReceptor.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"Existe el botón de <b>Correo del comprador</b>",
-			PageGestorCheques.isElementInStateUntil(ButtonsCheque.correoComprador, Clickable, 3, driver), State.Defect);
+			state(Clickable, ButtonsCheque.correoComprador.getBy()).wait(3).check(), State.Defect);
 		return validations;
 	}
 
 	@Validation
 	public ChecksTM validateSecondDataCheque() {
 		ChecksTM validations = ChecksTM.getNew();
-		int maxSecondsWait = 3;
 		validations.add(
 			"En la tabla activo existe un apartado para <b>ACTIVO</b>",
-			PageGestorCheques.isElementInStateUntil(TablaCheque.activo, Present, maxSecondsWait, driver), State.Defect);
+			state(Present, TablaCheque.activo.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"En la tabla activo existe un apartado para <b>CHARGEBACK</b>",
-			PageGestorCheques.isElementInStateUntil(TablaCheque.chargeBack, Present, maxSecondsWait, driver), State.Defect);
+			state(Present, TablaCheque.chargeBack.getBy()).wait(3).check(), State.Defect);
 		return validations;
 	}
 
@@ -130,72 +129,69 @@ public class PageGestorChequesStpV {
 		description="1) Aparece el botón para <b>Volver a cheques</b>",
 		level=State.Defect)
 	public boolean validateReturnCheques() {
-		return (PageGestorCheques.isElementInStateUntil(ButtonsCheque.volverCheques, Present, 3, driver));
+		return (state(Present, ButtonsCheque.volverCheques.getBy()).wait(3).check());
 	}
 
 	@Validation
 	public ChecksTM validateThirdDataCheque() {
 		ChecksTM validations = ChecksTM.getNew();
-		int maxSecondsWait = 3;
 		validations.add(
 			"En la tabla divisa existe un apartado para <b>DIVISA</b>",
-			PageGestorCheques.isElementInStateUntil(TablaCheque.divisa, Present, maxSecondsWait, driver), State.Defect);
+			state(Present, TablaCheque.divisa.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"En la tabla divisa existe un apartado para <b>VALOR TOTAL</b>",
-			PageGestorCheques.isElementInStateUntil(TablaCheque.valorTotal, Present, maxSecondsWait, driver), State.Defect);
+			state(Present, TablaCheque.valorTotal.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"En la tabla divisa existe un apartado para <b>SALDO</b>",
-			PageGestorCheques.isElementInStateUntil(TablaCheque.saldo, Clickable, maxSecondsWait, driver), State.Defect);
+			state(Clickable, TablaCheque.saldo.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"En la tabla divisa existe un apartado para <b>FECHA DE COMPRA</b>",
-			PageGestorCheques.isElementInStateUntil(TablaCheque.fechaCompra, Clickable, maxSecondsWait, driver), State.Defect);
+			state(Clickable, TablaCheque.fechaCompra.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"En la tabla divisa existe un apartado para <b>VALIDEZ</b>",
-			PageGestorCheques.isElementInStateUntil(TablaCheque.validez, Clickable, maxSecondsWait, driver), State.Defect);
+			state(Clickable, TablaCheque.validez.getBy()).wait(3).check(), State.Defect);
 		return validations;
 	}
 
 	@Validation
 	public ChecksTM validatePedidosData() {
 		ChecksTM validations = ChecksTM.getNew();
-		int maxSecondsWait = 3;
 		validations.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Id</b>",
-			PageGestorCheques.isElementInStateUntil(TablaCheque.idPedidos, Present, maxSecondsWait, driver), State.Defect);
+			state(Present, TablaCheque.idPedidos.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Fecha</b>",
-			PageGestorCheques.isElementInStateUntil(TablaCheque.fechaPedidos, Present, maxSecondsWait, driver), State.Defect);
+			state(Present, TablaCheque.fechaPedidos.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Total</b>",
-			PageGestorCheques.isElementInStateUntil(TablaCheque.totalPedidos, Present, maxSecondsWait, driver), State.Defect);
+			state(Present, TablaCheque.totalPedidos.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Usuario</b>",
-			PageGestorCheques.isElementInStateUntil(TablaCheque.usuarioPedidos, Present, maxSecondsWait, driver), State.Defect);
+			state(Present, TablaCheque.usuarioPedidos.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Accion</b>",
-			PageGestorCheques.isElementInStateUntil(TablaCheque.activoPedidos, Present, maxSecondsWait, driver), State.Defect);
+			state(Present, TablaCheque.activoPedidos.getBy()).wait(3).check(), State.Defect);
 		return validations;
 	}
 
 	@Validation
 	public ChecksTM validateButtonsDataCheque() {
 		ChecksTM validations = ChecksTM.getNew();
-		int maxSecondsWait = 3;
 		validations.add(
 			"Existe el boton para <b>Modificar</b>",
-			PageGestorCheques.isElementInStateUntil(ButtonsCheque.modificar, Present, maxSecondsWait, driver), State.Defect);
+			state(Present, ButtonsCheque.modificar.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"Existe el boton para <b>Añadir</b>",
-			PageGestorCheques.isElementInStateUntil(ButtonsCheque.add, Present, maxSecondsWait, driver), State.Defect);
+			state(Present, ButtonsCheque.add.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"Existe el boton para <b>Reenviar</b>",
-			PageGestorCheques.isElementInStateUntil(ButtonsCheque.reenviar, Present, maxSecondsWait, driver), State.Defect);
+			state(Present, ButtonsCheque.reenviar.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"Existe el boton para <b>Editar</b>",
-			PageGestorCheques.isElementInStateUntil(ButtonsCheque.editar, Present, maxSecondsWait, driver), State.Defect);
+			state(Present, ButtonsCheque.editar.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"Existe el boton para <b>Desactivar</b>",
-			PageGestorCheques.isElementInStateUntil(ButtonsCheque.desactivar, Present, maxSecondsWait, driver), State.Defect);
+			state(Present, ButtonsCheque.desactivar.getBy()).wait(3).check(), State.Defect);
 		return validations;
 	}
 
@@ -212,7 +208,7 @@ public class PageGestorChequesStpV {
 		description="Introducimos el numero de cheque con valor: <b>#{cheque}</b>",
 		expected="Muestra los cheques asociados al mail correctamente",
 		saveErrorData=SaveWhen.Never)
-	public void inputCheque (String cheque) throws Exception {
+	public void inputCheque (String cheque) {
 		pageGestorCheques.inputChequeAndConfirm(cheque);
 		validateDataCheque(cheque);
 	}
@@ -221,7 +217,7 @@ public class PageGestorChequesStpV {
 		description="1) Aparece el numero de cheque <b>#{cheque}</b> en la tabla de datos",
 		level=State.Defect)
 	public boolean validateDataCheque(String cheque) {
-		return (!PageGestorCheques.isElementInStateUntil(ButtonsCheque.volverCheques, Present, 3, driver));
+		return (!state(Present, ButtonsCheque.volverCheques.getBy()).wait(3).check());
 	}
 
 	@Step(
@@ -229,7 +225,7 @@ public class PageGestorChequesStpV {
 		expected="Aparece toda la información de dicho cheque pero no un email",
 		saveErrorData=SaveWhen.Never)
 	public void chequeDetails () throws Exception {
-		PageGestorCheques.clickAndWait(ButtonsCheque.chequeData, driver);
+		click(ButtonsCheque.chequeData.getBy()).exec();
 		validateEmptyMail();
 		validateDataFromCheque();
 	}
@@ -244,19 +240,18 @@ public class PageGestorChequesStpV {
 	@Validation
 	public ChecksTM validateInitDataCheque() {
 		ChecksTM validations = ChecksTM.getNew();
-		int maxSecondsWait = 3;
 		validations.add(
 			"Existe la tabla que contiene <b>Activo</b>",
-			PageGestorCheques.isElementInStateUntil(TablaCheque.activo, Present, maxSecondsWait, driver), State.Defect);
+			state(Present, TablaCheque.activo.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"Existe la tabla que contiene <b>Divisa</b>",
-			PageGestorCheques.isElementInStateUntil(TablaCheque.divisa, Present, maxSecondsWait, driver), State.Defect);
+			state(Present, TablaCheque.divisa.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"Existe la tabla que contiene <b>Pedidos Realizados</b>",
-			PageGestorCheques.isElementInStateUntil(TablaCheque.pedidosRealizados, Present, maxSecondsWait, driver), State.Defect);
+			state(Present, TablaCheque.pedidosRealizados.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"Existe la tabla que contiene <b>Pedidos Eliminados</b>",
-			PageGestorCheques.isElementInStateUntil(TablaCheque.pedidosEliminados, Present, maxSecondsWait, driver), State.Defect);
+			state(Present, TablaCheque.pedidosEliminados.getBy()).wait(3).check(), State.Defect);
 		return validations;
 	}
 }

@@ -38,10 +38,10 @@ public class PageRegistroIniStpV {
 	}
 
 	@Validation (
-		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{maxSecondsWait} segundos)",
+		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-	public boolean validaIsPageUntil(int maxSecondsWait) {
-		return (pageRegistroIni.isPageUntil(maxSecondsWait));
+	public boolean validaIsPageUntil(int maxSeconds) {
+		return (pageRegistroIni.isPageUntil(maxSeconds));
 	}
 
 	@Step (
@@ -102,12 +102,12 @@ public class PageRegistroIniStpV {
         PageObjTM.waitMillis(1000);
 
         //Validaciones
-        int maxSecondsWait = 3;
-        validaIsInvisibleCapaLoading(maxSecondsWait);
+        int maxSeconds = 3;
+        validaIsInvisibleCapaLoading(maxSeconds);
         if (usrExists || pageRegistroIni.getNumInputsObligatoriosNoInformados() > 0) {
         	if (usrExists) {
-	        	maxSecondsWait=5;
-	        	validaEmailYaRegistradoShown(maxSecondsWait);
+	        	maxSeconds=5;
+	        	validaEmailYaRegistradoShown(maxSeconds);
         	}
             int numInputsObligatoriosNoInf = pageRegistroIni.getNumInputsObligatoriosNoInformados();
             if (numInputsObligatoriosNoInf > 0) {
@@ -125,17 +125,17 @@ public class PageRegistroIniStpV {
     }
     
 	@Validation (
-		description="Desaparece la capa de loading (lo esperamos hasta #{maxSecondsWait} segundos)",
+		description="Desaparece la capa de loading (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
-	public boolean validaIsInvisibleCapaLoading(int maxSecondsWait) {
-		return (pageRegistroIni.isCapaLoadingInvisibleUntil(maxSecondsWait));
+	public boolean validaIsInvisibleCapaLoading(int maxSeconds) {
+		return (pageRegistroIni.isCapaLoadingInvisibleUntil(maxSeconds));
 	}
 	
 	@Validation (
-		description="Aparece un error <b>Email ya registrado</b> (lo esperamos hasta #{maxSecondsWait} segundos)",
+		description="Aparece un error <b>Email ya registrado</b> (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-    private boolean validaEmailYaRegistradoShown(int maxSecondsWait) {
-		return(pageRegistroIni.isVisibleErrorUsrDuplicadoUntil(maxSecondsWait));
+    private boolean validaEmailYaRegistradoShown(int maxSeconds) {
+		return(pageRegistroIni.isVisibleErrorUsrDuplicadoUntil(maxSeconds));
     }
 	
 	@Validation

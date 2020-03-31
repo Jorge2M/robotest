@@ -39,7 +39,7 @@ public class ClickElement {
 		}
 		click(typeOfClick, elementLink);
 		if (waitLoadPage > 0) {
-			WebdrvWrapp.waitForPageLoaded(driver, waitLoadPage);
+			SeleniumUtils.waitForPageLoaded(driver, waitLoadPage);
 		}
 	}
 	
@@ -73,9 +73,9 @@ public class ClickElement {
 			return null;
 		}
 		if (webelement==null) {
-			return WebdrvWrapp.getElementVisible(driver, by);
+			return SeleniumUtils.getElementVisible(driver, by);
 		}
-		return WebdrvWrapp.getElementVisible(webelement, by);
+		return SeleniumUtils.getElementVisible(webelement, by);
 	}
 	private WebElement getElementClickable() {
 		if (by==null) {
@@ -85,9 +85,9 @@ public class ClickElement {
 			return null;
 		}
 		if (webelement==null) {
-			return WebdrvWrapp.getElementClickable(driver, by);
+			return SeleniumUtils.getElementClickable(driver, by);
 		}
-		return WebdrvWrapp.getElementClickable(webelement, by, driver);
+		return SeleniumUtils.getElementClickable(webelement, by, driver);
 	}
 	
 	private void click(TypeClick typeOfClick, WebElement link) {
@@ -131,10 +131,6 @@ public class ClickElement {
 			this.webelement = webelement;
 		}
 		
-		public BuilderClick webelement(WebElement webelement) {
-			this.webelement = webelement;
-			return this;
-		}
 		public BuilderClick by(By by) {
 			this.by = by;
 			return this;

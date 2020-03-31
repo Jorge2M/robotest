@@ -66,10 +66,10 @@ public class PagePostfCodSegStpV {
     @Validation
     public static ChecksTM validateIsPagePro(String importeTotal, String codPais, WebDriver driver) {
     	ChecksTM validations = ChecksTM.getNew();
-    	int maxSecondsWait = 5;
+    	int maxSeconds = 5;
 	   	validations.add(
-    		"Aparece la pasarela de pagos de PostFinance E-Payment (la esperamos hasta " + maxSecondsWait + " segundos)",
-    		PagePostfCodSeg.isPasarelaPostfinanceProUntil(maxSecondsWait, driver), State.Defect);    	
+    		"Aparece la pasarela de pagos de PostFinance E-Payment (la esperamos hasta " + maxSeconds + " segundos)",
+    		PagePostfCodSeg.isPasarelaPostfinanceProUntil(maxSeconds, driver), State.Defect);    	
 	   	validations.add(
     		"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
     		ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);    		  

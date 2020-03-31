@@ -176,7 +176,7 @@ public class Page1DktopCheckout {
 	}
 
 	public static void inputDNIPromoEmpl(String dni, WebDriver driver) {
-		sendKeysWithRetry(2, dni, By.xpath(XPathInputDNIPromoEmpl), driver);
+		sendKeysWithRetry(dni, By.xpath(XPathInputDNIPromoEmpl), 2, driver);
 	}
 
 	public static boolean isPresentDiaNaciPromoEmpl(WebDriver driver) {
@@ -242,8 +242,7 @@ public class Page1DktopCheckout {
 		if (!isVisibleBlockCodigoPromoUntil(0, driver)) {
 			clickLinkToViewBlockPromo(driver);
 		}
-		int maxSecondsWait = 5;
-		if (isVisibleBlockCodigoPromoUntil(maxSecondsWait, driver)) {
+		if (isVisibleBlockCodigoPromoUntil(5, driver)) {
 			inputCodigoPromo(codigoPromo, driver);
 			clickAplicarPromo(driver);
 		}
@@ -262,7 +261,7 @@ public class Page1DktopCheckout {
 	}
 
 	public static void inputCodigoPromo(String codigoPromo, WebDriver driver) {
-		sendKeysWithRetry(2, codigoPromo, By.xpath(xpathInputPromo), driver);
+		sendKeysWithRetry(codigoPromo, By.xpath(xpathInputPromo), 2, driver);
 	}
 
 	final static String xpathTextValeCampaign = "//span[@class='texto_banner_promociones']";

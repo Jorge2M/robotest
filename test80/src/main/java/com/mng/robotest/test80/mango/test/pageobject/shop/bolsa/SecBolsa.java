@@ -116,15 +116,13 @@ public class SecBolsa {
 		return false;
 	}
 
-    public static void setBolsaToStateIfNotYet(StateBolsa stateBolsaExpected, Channel channel, AppEcom app, WebDriver driver) 
-    throws Exception {
-        if (!isInStateUntil(stateBolsaExpected, channel, 1, driver)) {
-        	setBolsaToState(stateBolsaExpected, channel, app, driver);
-        }
-    }
-    
-    static void setBolsaToState(StateBolsa stateBolsaExpected, Channel channel, AppEcom app, WebDriver driver) 
-    throws Exception {
+	public static void setBolsaToStateIfNotYet(StateBolsa stateBolsaExpected, Channel channel, AppEcom app, WebDriver driver) {
+		if (!isInStateUntil(stateBolsaExpected, channel, 1, driver)) {
+			setBolsaToState(stateBolsaExpected, channel, app, driver);
+		}
+	}
+
+	static void setBolsaToState(StateBolsa stateBolsaExpected, Channel channel, AppEcom app, WebDriver driver) {
 		SecCabecera secCabecera = SecCabecera.getNew(channel, app, driver);
 		if (stateBolsaExpected==StateBolsa.Open || channel==Channel.desktop) {
 			secCabecera.clickIconoBolsaWhenDisp(2);

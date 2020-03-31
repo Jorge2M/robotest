@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import org.openqa.selenium.Alert;
@@ -21,7 +22,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.testmaker.conf.Log4jConfig;
@@ -29,7 +29,7 @@ import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriver
 
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class WebdrvWrapp extends ElementPageFunctions { 
+public class SeleniumUtils { 
 
     public static boolean titleContainsUntil(final WebDriver driver, final String title, int seconds) {
         try {
@@ -93,6 +93,15 @@ public class WebdrvWrapp extends ElementPageFunctions {
         return listaReturn;
     }
     
+    public static WebElement getElementWeb(By byElem, WebDriver driver) {
+    	try {
+    		return (driver.findElement(byElem));
+    	}
+    	catch (NoSuchElementException e) {
+    		return null;
+    	}
+    }
+    
 	public static WebElement getElementClickable(WebDriver driver, By by) {
 		for (WebElement element : driver.findElements(by)) {
 			if (PageObjTM.state(Clickable, element, driver).check()) {
@@ -138,125 +147,12 @@ public class WebdrvWrapp extends ElementPageFunctions {
         }
     }
 
-//    /**
-//     * Fuerza un click para que funcione SIEMPRE correctamente con WebDriver. Si se produce un timeout en la carga de la página retorna false
-//     */
-//    public static boolean clickAndWaitLoad(WebDriver driver, By by, TypeOfClick typeOfClick) throws Exception {
-//        return waitClickAndWaitLoad(driver, 0, by, 30, typeOfClick);
-//    }
-//    
-//    public static boolean clickAndWaitLoad(WebDriver driver, By by) throws Exception {
-//        return waitClickAndWaitLoad(driver, 0, by, 30, TypeOfClick.webdriver);
-//    }
-//    
-//    public static boolean clickAndWaitLoad(WebDriver driver, int waitForLinkToClick, By by) throws Exception {
-//        return waitClickAndWaitLoad(driver, waitForLinkToClick, by, 30, TypeOfClick.webdriver);
-//    }
-//    
-//    public static boolean clickAndWaitLoad(WebDriver driver, By by, int waitSeconds) throws Exception {
-//        return waitClickAndWaitLoad(driver, 0, by, waitSeconds, TypeOfClick.webdriver);
-//    }
-//    
-//    public static boolean clickElementVisibleAndWaitLoad(WebDriver driver, By by, int waitSeconds, TypeOfClick typeOfClick) 
-//    throws Exception {
-//    	WebElement elemVisible = getElementVisible(driver, by);
-//        return clickAndWaitLoad(driver, elemVisible, waitSeconds, typeOfClick);
-//    }
-//    
-//    public static boolean clickElementVisibleAndWaitLoad(WebDriver driver, By by, int waitSeconds) throws Exception {
-//    	return (clickElementVisibleAndWaitLoad(driver, by, waitSeconds, TypeOfClick.webdriver));
-//    }
-//
-//    public static boolean waitClickAndWaitLoad(WebDriver driver, int waitForLinkToClick, By by) throws Exception {
-//        return (waitClickAndWaitLoad(driver, waitForLinkToClick, by, 30/*waitSeconds*/, TypeOfClick.webdriver));
-//    }
-//    
-//    public static boolean waitClickAndWaitLoad(WebDriver driver, int waitForLinkToClick, By by, int waitSeconds, TypeOfClick typeOfClick) 
-//    throws Exception {
-//        if (waitForLinkToClick > 0) {
-//            new WebDriverWait(driver,waitForLinkToClick).until(ExpectedConditions.elementToBeClickable(by));
-//        }
-//        WebElement webElem = driver.findElement(by);
-//        return(
-//        clickAndWaitLoad(driver, webElem, waitSeconds, typeOfClick));
-//    }
-//    
-//    public static boolean clickAndWaitLoad(WebDriver driver, WebElement webElem) throws Exception {
-//    	return(
-//    	clickAndWaitLoad(driver, webElem, 30, TypeOfClick.webdriver));
-//    }
-//    
-//    public static boolean clickAndWaitLoad(WebDriver driver, WebElement webElem, int waitSeconds, TypeOfClick typeOfClick) 
-//    throws Exception {
-//        boolean timeout = false;
-//        click(typeOfClick, webElem, driver);
-//        try {
-//            waitForPageLoaded(driver, waitSeconds);
-//        } 
-//        catch (TimeoutException e) {
-//            timeout = true;
-//            Log4jConfig.pLogger.warn("Problem waiting for page Loaded", e);
-//        }
-//
-//        return timeout;
-//    }
-//
-//    /**
-//     * Fuerza un click para que funcione SIEMPRE correctamente con WebDriver + Explorer 9 (partiendo de un WebElement)
-//     */
-//    public static void forceClick(WebDriver driver, WebElement element, By by) throws Exception {
-//        forceClick(driver, element, by, 30);
-//    }
-//
-//    public static void forceClick(WebDriver driver, WebElement element, By by, int waitSeconds) throws Exception {
-//        forceClick(driver, element, by, waitSeconds, TypeOfClick.webdriver);
-//    }
-//        
-//    // Fuerza un click para que funcione SIEMPRE correctamente con WebDriver + Explorer 9 (partiendo de un WebElement)
-//    public static void forceClick(WebDriver driver, WebElement element, By by, int waitSeconds, TypeOfClick typeOfClick) throws Exception {
-//        WebElement link;
-//        if (by != null) {
-//            link = element.findElement(by);
-//        } else {
-//            link = element;
-//        }
-//
-//        click(typeOfClick, link, driver);
-//        waitForPageLoaded(driver, waitSeconds);
-//    }
-//    
-//    private static void click(TypeOfClick typeOfClick, WebElement link, WebDriver driver) {
-//        switch (typeOfClick) {
-//        case javascript:
-//            clickJavaScript(link, driver);
-//            break;
-//        case webdriver:
-//        default:
-//            clickWebdriverFirst(link, driver);
-//        }        
-//    }
-//    
-//    private static void clickWebdriverFirst(WebElement link, WebDriver driver) {
-//        try {
-//            link.click();
-//        }
-//        catch (WebDriverException e) {
-//          JavascriptExecutor executor = (JavascriptExecutor) driver;
-//          executor.executeScript("arguments[0].click();", link);
-//        }
-//    }
-    
-//    private static void clickJavaScript(WebElement link, WebDriver driver) {
-//        JavascriptExecutor executor = (JavascriptExecutor) driver;
-//        executor.executeScript("arguments[0].click();", link);
-//    }
-    
     /**
      * Función que reintenta la introducción de un texto en un campo de input n veces hasta que el texto introducido es correcto (es para paliar un bug de selenium según el cual en
      * ocasiones se introducen carácteres extraños en los campos de input)
      * @param numRetry  Número máximo de reintentos
      */
-    public static void sendKeysWithRetry(int numRetry, String keys, By by, WebDriver driver) {
+    public static void sendKeysWithRetry(String keys, By by, int numRetry, WebDriver driver) {
         sendKeysWithRetry(numRetry, driver.findElement(by), keys);
     }
     
@@ -514,30 +410,6 @@ public class WebdrvWrapp extends ElementPageFunctions {
     
     private static void moveToElementViaJavaScript(WebElement webElem, WebDriver driver) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", webElem);
-    }
-   
-    public enum OptionSelect {ByVisibleText, ByValue, ByValueJavaScript}
-    public static void selectOption(By selectBy, String value, OptionSelect typeSelect, WebDriver driver) {
-        WebElement selectElem = driver.findElement(selectBy); 
-        switch (typeSelect) {
-        case ByVisibleText:
-        	new Select(selectElem).selectByVisibleText(value);
-        	break;
-        case ByValue:
-        	if (selectElem.getAttribute("value").compareTo(value)!=0) {
-                selectElem.sendKeys(value);
-        	}
-        	break;
-        case ByValueJavaScript:
-        	if (selectElem.getAttribute("value").compareTo(value)!=0) {
-                JavascriptExecutor executor = (JavascriptExecutor) driver;
-                executor.executeScript(
-                    "const textToFind = '" + value + "';" +
-                    "const dd = arguments[0];" +
-                    "dd.selectedIndex = [...dd.options].findIndex (option => option.text === textToFind);", selectElem
-                );
-        	}
-        }
     }
     
     public static WebDriverType getTypeDriver(WebDriver driver) {

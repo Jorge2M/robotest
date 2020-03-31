@@ -28,8 +28,8 @@ public class PagoSofort extends PagoStpV {
         //En ocasiones se salta desde la página de Checkout-Mango hasta la página de selección del banco
         //saltándose la página de selección del icono de sofort
         if (isPageIconoSofort) {
-        	int maxSecondsWait = 3;
-            PageSofortIconosBancoStpV.validateIsPageUntil(maxSecondsWait, dCtxSh.channel, driver);
+        	int maxSeconds = 3;
+            PageSofortIconosBancoStpV.validateIsPageUntil(maxSeconds, dCtxSh.channel, driver);
             PageSofortIconosBancoStpV.clickIconoSofort(dCtxSh.channel, driver);
         }
 

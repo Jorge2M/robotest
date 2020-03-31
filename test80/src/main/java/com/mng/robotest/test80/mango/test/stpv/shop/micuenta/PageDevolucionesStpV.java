@@ -31,7 +31,7 @@ public class PageDevolucionesStpV {
     @Step(
     	description = "Pulsar \"Recogida gratuíta a domicilio\" + \"Solicitar Recogida\"",
         expected = "Aparece la tabla devoluciones sin ningún pedido")
-    public static void solicitarRegogidaGratuitaADomicilio(WebDriver driver) throws Exception {
+    public static void solicitarRegogidaGratuitaADomicilio(WebDriver driver) {
         boolean desplegada = true;
         Devolucion.EnDomicilio.click(driver);
         Devolucion.EnDomicilio.waitForInState(desplegada, 2, driver);

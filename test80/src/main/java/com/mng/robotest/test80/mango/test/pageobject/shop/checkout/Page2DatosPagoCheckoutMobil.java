@@ -146,8 +146,8 @@ public class Page2DatosPagoCheckoutMobil {
     }
     
     public static boolean isMethodInStateUntil(
-    		String nombrePago, StateMethod stateExpected, int maxSecondsWait, WebDriver driver) throws Exception {
-    	for (int i=0; i<maxSecondsWait; i++) {
+    		String nombrePago, StateMethod stateExpected, int maxSeconds, WebDriver driver) throws Exception {
+    	for (int i=0; i<maxSeconds; i++) {
     		StateMethod actualState = getStateMethod(nombrePago, driver);
     		if (actualState==stateExpected) {
     			return true;

@@ -34,7 +34,7 @@ public class PageYandex1rst {
 
     public static void inputTelefono(String telefono, WebDriver driver) {
         driver.findElement(By.xpath(XPathInputTelefono)).clear();
-        sendKeysWithRetry(2, telefono, By.xpath(XPathInputTelefono), driver);
+        sendKeysWithRetry(telefono, By.xpath(XPathInputTelefono), 2, driver);
     }
 
     public static boolean retryButtonExists(WebDriver driver) {

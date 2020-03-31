@@ -5,11 +5,12 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.service.webdriver.pageobject.ElementPageFunctions;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardINIpay2Mobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardINIpay2Mobil.BodyPageKoCardINIpay2;
 
-public class PageKoCardINIpay2MobilStpV extends ElementPageFunctions {
+public class PageKoCardINIpay2MobilStpV {
 	
 	@Validation (
 		description="Aparece la 2a página de INIpay (con el input del email)",
@@ -20,11 +21,10 @@ public class PageKoCardINIpay2MobilStpV extends ElementPageFunctions {
 
 	@Step (
 		description="Seleccionamos el botón para Continuar",
-	    expected="Aparece la 3a y última página de INIpay")
-	public static void confirmMainPaymentCorea(WebDriver driver) throws Exception {
-	    clickAndWait(BodyPageKoCardINIpay2.nextButton, 2, driver);
-	
-	    //Validation
-	    PageKoCardINIpay3MobilStpV.validateIsPage(driver);
+		expected="Aparece la 3a y última página de INIpay")
+	public static void confirmMainPaymentCorea(WebDriver driver) {
+		click(BodyPageKoCardINIpay2.nextButton.getBy(), driver)
+			.waitLoadPage(2).exec();
+		PageKoCardINIpay3MobilStpV.validateIsPage(driver);
 	}
 }

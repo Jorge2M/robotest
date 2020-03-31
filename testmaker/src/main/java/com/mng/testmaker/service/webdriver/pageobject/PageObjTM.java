@@ -5,11 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.service.webdriver.pageobject.ClickElement.BuilderClick;
+import com.mng.testmaker.service.webdriver.pageobject.SelectElement.BuilderSelect;
 //import com.mng.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.testmaker.service.webdriver.pageobject.StateElement.BuilderState;
 import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
 
-public class PageObjTM extends WebdrvWrapp {
+public class PageObjTM extends SeleniumUtils {
 
 	public final WebDriver driver;
 	
@@ -17,6 +18,7 @@ public class PageObjTM extends WebdrvWrapp {
 		this.driver = driver;
 	}
 
+	//Click
 	public BuilderClick click(By by) {
 		return new BuilderClick(by, driver);
 	}
@@ -30,6 +32,7 @@ public class PageObjTM extends WebdrvWrapp {
 		return new BuilderClick(webelement, driver);
 	}
 	
+	//State
 	public BuilderState state(State state, By by) {
 		return new BuilderState(state, by, driver);
 	}
@@ -41,6 +44,20 @@ public class PageObjTM extends WebdrvWrapp {
 	}
 	public static BuilderState state(State state, WebElement webelement, WebDriver driver) {
 		return new BuilderState(state, webelement, driver);
+	}
+	
+	//Select
+	public BuilderSelect select(By by, String value) {
+		return new BuilderSelect(by, value, driver);
+	}
+	public BuilderSelect select(WebElement webelement, String value) {
+		return new BuilderSelect(webelement, value, driver);
+	}
+	public static BuilderSelect select(By by, String value, WebDriver driver) {
+		return new BuilderSelect(by, value, driver);
+	}
+	public static BuilderSelect select(WebElement webelement, String value, WebDriver driver) {
+		return new BuilderSelect(webelement, value, driver);
 	}
 	
 }

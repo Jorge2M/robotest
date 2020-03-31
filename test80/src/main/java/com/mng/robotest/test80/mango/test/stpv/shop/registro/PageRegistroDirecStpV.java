@@ -18,10 +18,10 @@ public class PageRegistroDirecStpV {
 	@Validation
     public static ChecksTM isPageFromPais(Pais pais, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
-    	int maxSecondsWait = 3;
+    	int maxSeconds = 3;
     	validations.add(
-    		"Aparece la página de introducción de datos de la dirección (la esperamos un máximo de " + maxSecondsWait + " segundos)",
-    		PageRegistroAddressData.isPageUntil(driver, maxSecondsWait), State.Warn);
+    		"Aparece la página de introducción de datos de la dirección (la esperamos un máximo de " + maxSeconds + " segundos)",
+    		PageRegistroAddressData.isPageUntil(driver, maxSeconds), State.Warn);
     	validations.add(
     		"Si existe el desplebagle de países, en él aparece el país con código " + pais.getCodigo_pais() + " (" + pais.getNombre_pais() + ")",
     		!PageRegistroAddressData.existsDesplegablePaises(driver) || 
@@ -50,7 +50,7 @@ public class PageRegistroDirecStpV {
         expected="Aparece la página final del proceso de registro")
     public static void clickFinalizarButton(WebDriver driver) {
         PageRegistroDirec.clickFinalizarButton(driver);
-        int maxSecondsWait = 5;
-        PageRegistroFinStpV.isPageUntil(maxSecondsWait, driver);
+        int maxSeconds = 5;
+        PageRegistroFinStpV.isPageUntil(maxSeconds, driver);
     }
 }

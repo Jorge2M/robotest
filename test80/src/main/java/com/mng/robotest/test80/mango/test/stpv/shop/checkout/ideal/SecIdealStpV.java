@@ -15,8 +15,8 @@ public class SecIdealStpV {
 		description="Aparece el bloque de selección del banco",
 		level=State.Defect)
     public static boolean validateIsSectionOk(Channel channel, WebDriver driver) {
-		int maxSecondsWait = 1;
-		return (SecIdeal.isVisibleSelectorOfBank(channel, maxSecondsWait, driver));
+		int maxSeconds = 1;
+		return (SecIdeal.isVisibleSelectorOfBank(channel, maxSeconds, driver));
     }
     
     /**

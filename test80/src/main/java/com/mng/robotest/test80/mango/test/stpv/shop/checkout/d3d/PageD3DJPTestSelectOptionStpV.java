@@ -13,10 +13,10 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PageD3DJPTestSelectOptionStpV {
     
 	@Validation (
-		description="Aparece la página de Test correspondiente al D3D de JPMorgan (la esperamos hasta #{maxSecondsWait} segundos)",
+		description="Aparece la página de Test correspondiente al D3D de JPMorgan (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
-    public static boolean validateIsD3D(int maxSecondsWait, WebDriver driver) {
-		return (PageD3DJPTestSelectOption.isPageUntil(maxSecondsWait, driver));
+    public static boolean validateIsD3D(int maxSeconds, WebDriver driver) {
+		return (PageD3DJPTestSelectOption.isPageUntil(maxSeconds, driver));
     }	
 	
 	@Validation (

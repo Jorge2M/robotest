@@ -43,14 +43,14 @@ public class SecProductDescrOldStpV {
         step.replaceInExpected(tagFinalStateExpected, stateExpectedAfterClick.toString());
         
         SecProductDescrOld.clickPanel(typePanel, driver);
-        int maxSecondsWait = 1;
-        checkPanelInState(typePanel, stateExpectedAfterClick, maxSecondsWait, driver);
+        int maxSeconds = 1;
+        checkPanelInState(typePanel, stateExpectedAfterClick, maxSeconds, driver);
     }
 	
 	@Validation (
-		description="La sección ha de quedar en estado <b>#{stateExpectedAfterClick}</b> (lo esperamos hasta #{maxSecondsWait} segundos)",
+		description="La sección ha de quedar en estado <b>#{stateExpectedAfterClick}</b> (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-	private static boolean checkPanelInState(TypePanel typePanel, TypeStatePanel stateExpectedAfterClick, int maxSecondsWait, WebDriver driver) {
-	    return (SecProductDescrOld.isPanelInStateUntil(typePanel, stateExpectedAfterClick, maxSecondsWait, driver));
+	private static boolean checkPanelInState(TypePanel typePanel, TypeStatePanel stateExpectedAfterClick, int maxSeconds, WebDriver driver) {
+	    return (SecProductDescrOld.isPanelInStateUntil(typePanel, stateExpectedAfterClick, maxSeconds, driver));
 	}
 }

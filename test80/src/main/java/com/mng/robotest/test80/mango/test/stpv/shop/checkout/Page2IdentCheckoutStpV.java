@@ -18,11 +18,11 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page2IdentChe
 public class Page2IdentCheckoutStpV {
     
 	@Validation
-    public static ChecksTM validateIsPage(boolean emailYetExists, int maxSecondsWait, WebDriver driver) {
+    public static ChecksTM validateIsPage(boolean emailYetExists, int maxSeconds, WebDriver driver) {
     	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
-			"Aparece la página-2 de introducción de datos de la dirección del cliente (la esperamos hasta " + maxSecondsWait + " segundos)",
-			Page2IdentCheckout.isPageUntil(maxSecondsWait, driver), State.Defect);
+			"Aparece la página-2 de introducción de datos de la dirección del cliente (la esperamos hasta " + maxSeconds + " segundos)",
+			Page2IdentCheckout.isPageUntil(maxSeconds, driver), State.Defect);
 	 	validations.add(
 			"Es <b>" + !emailYetExists + "</b> que aparece el input para la introducción de la contraseña",
 			Page2IdentCheckout.isInputPasswordAccordingEmail(emailYetExists, driver), State.Defect);
@@ -43,10 +43,10 @@ public class Page2IdentCheckoutStpV {
     }
 	
 	@Validation (
-		description="Se hace clickable el botón \"Continuar\" (lo esperamos hasta #{maxSecondsWait})",
+		description="Se hace clickable el botón \"Continuar\" (lo esperamos hasta #{maxSeconds})",
 		level=State.Defect)
-	private static boolean checkIsVisibleContiueButton(int maxSecondsWait, WebDriver driver) {
-	    return (Page2IdentCheckout.isContinuarClickableUntil(maxSecondsWait, driver));
+	private static boolean checkIsVisibleContiueButton(int maxSeconds, WebDriver driver) {
+	    return (Page2IdentCheckout.isContinuarClickableUntil(maxSeconds, driver));
 	}
     
 	@Step (

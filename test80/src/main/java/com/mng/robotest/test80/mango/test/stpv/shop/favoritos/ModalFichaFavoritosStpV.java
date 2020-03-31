@@ -38,10 +38,10 @@ public class ModalFichaFavoritosStpV {
     @Validation
     public ChecksTM validaIsVisibleFicha(ArticuloScreen articulo) { 
     	ChecksTM validations = ChecksTM.getNew();
-    	int maxSecondsWait = 2;
+    	int maxSeconds = 2;
     	validations.add(
-    		"En Favoritos es visible el modal de la ficha del producto " + articulo.getRefProducto() + " (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		modalFichaFavoritos.isVisibleFichaUntil(articulo.getRefProducto(), maxSecondsWait), State.Warn);
+    		"En Favoritos es visible el modal de la ficha del producto " + articulo.getRefProducto() + " (lo esperamos hasta " + maxSeconds + " segundos)",
+    		modalFichaFavoritos.isVisibleFichaUntil(articulo.getRefProducto(), maxSeconds), State.Warn);
     	validations.add(
             "Aparece seleccionado el color <b>" + articulo.getColor() + "</b>",
             modalFichaFavoritos.isColorSelectedInFicha(articulo.getColor()), State.Warn);
@@ -79,14 +79,14 @@ public class ModalFichaFavoritosStpV {
         modalFichaFavoritos.closeFicha(refProductoToClose);
         
         //Validaciones
-        int maxSecondsWait = 2;
-        checkFichaDisappearsFromFavorites(articulo.getRefProducto(), maxSecondsWait);
+        int maxSeconds = 2;
+        checkFichaDisappearsFromFavorites(articulo.getRefProducto(), maxSeconds);
     }
     
     @Validation (
-        description="Desaparece de Favoritos la ficha del producto #{refProducto} (lo esperamos hasta #{maxSecondsWait} segundos)",
+        description="Desaparece de Favoritos la ficha del producto #{refProducto} (lo esperamos hasta #{maxSeconds} segundos)",
         level=State.Warn)
-    public boolean checkFichaDisappearsFromFavorites(String refProducto, int maxSecondsWait) {
-    	return (modalFichaFavoritos.isInvisibleFichaUntil(refProducto, maxSecondsWait));
+    public boolean checkFichaDisappearsFromFavorites(String refProducto, int maxSeconds) {
+    	return (modalFichaFavoritos.isInvisibleFichaUntil(refProducto, maxSeconds));
     }
 }

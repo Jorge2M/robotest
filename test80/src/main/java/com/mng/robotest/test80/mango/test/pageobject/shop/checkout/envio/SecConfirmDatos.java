@@ -36,7 +36,7 @@ public class SecConfirmDatos {
     }
     
     public static void sendDataInputPostNumberIdDeutschland(String data, WebDriver driver) throws Exception {
-    	sendKeysWithRetry(2, data, By.xpath(XPathInputPostNumberIdDeutschland), driver);
+    	sendKeysWithRetry(data, By.xpath(XPathInputPostNumberIdDeutschland), 2, driver);
     }
 
 	public static void clickConfirmarDatosButtonAndWait(int maxSeconds, WebDriver driver) {

@@ -3,7 +3,6 @@ package com.mng.robotest.test80.mango.test.pageobject.manto;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
@@ -21,67 +20,55 @@ public class PageGestorCheques extends PageObjTM {
     static String XPathTabla = "//table[@class[contains(.,'grupotalla-table')]]";
     static String XPathDetallesTablaChequeNumero = "//table//td[text()[contains(.,'CHEQUE NUMERO')]]";
 
-    public enum ButtonsCheque implements ElementPage {
-    	editar("//input[@value='EDITAR']"),
-    	modificar("//input[@value='Modificar']"),
+	public enum ButtonsCheque implements ElementPage {
+		editar("//input[@value='EDITAR']"),
+		modificar("//input[@value='Modificar']"),
 		add("//input[@value='Añadir']"),
 		desactivar("//input[@value='Desactivar']"),
-    	reenviar("//input[@value='Reenviar']"),
+		reenviar("//input[@value='Reenviar']"),
 		idPedido("//input[@value[contains(.,'pedido')]]"),
 		numCheque("//input[@value[contains(.,'Número')]]"),
 		idCompra("//input[@value[contains(.,'de compra')]]"),
 		correoReceptor("//input[@value[contains(.,'del receptor')]]"),
 		correoComprador("//input[@value[contains(.,'del comprador')]]"),
-
 		chequeData("//a[text()[contains(.,'204028046151')]]"),
-    	volverCheques("//a[text()[contains(.,'Volver a cheque')]]");
+		volverCheques("//a[text()[contains(.,'Volver a cheque')]]");
 
-		private String xPath;
-
+		private By by;
 		ButtonsCheque(String xPath) {
-			this.xPath = xPath;
+			by = By.xpath(xPath);
 		}
 
-		public String getXPath() {
-			return this.xPath;
-		}
-
-		public String getXPath(Channel channel) {
-			return this.xPath;
+		@Override
+		public By getBy() {
+			return by;
 		}
 	}
 
 	public enum TablaCheque implements ElementPage {
-    	activo( "//td[text()[contains(.,'ACTIVO')]]"),
+		activo( "//td[text()[contains(.,'ACTIVO')]]"),
 		chargeBack("//td[text()[contains(.,'CHARGEBACK')]]"),
-
-    	divisa("//td[text()[contains(.,'DIVISA')]]"),
+		divisa("//td[text()[contains(.,'DIVISA')]]"),
 		valorTotal("//td[text()[contains(.,'VALOR')]]"),
 		saldo("//td[text()[contains(.,'SALDO')]]"),
 		fechaCompra("//td[text()[contains(.,'DE COMPRA')]]"),
 		validez("//td[text()[contains(.,'VALIDEZ')]]"),
-
 		pedidosRealizados("//td[text()[contains(.,'REALIZADOS')]]"),
 		idPedidos("//th[text()[contains(.,'Id')]]"),
 		fechaPedidos("//th[text()[contains(.,'Fecha')]]"),
 		totalPedidos("//th[text()[contains(.,'Total')]]"),
 		usuarioPedidos("//th[text()[contains(.,'Usuario')]]"),
 		activoPedidos("//th[text()[contains(.,'Accion')]]"),
-
 		pedidosEliminados("//td[text()[contains(.,'ELIMINADOS')]]");
 
-		private String xPath;
-
+		private By by;
 		TablaCheque(String xPath) {
-			this.xPath = xPath;
+			by = By.xpath(xPath);
 		}
 
-		public String getXPath() {
-			return this.xPath;
-		}
-
-		public String getXPath(Channel channel) {
-			return this.xPath;
+		@Override
+		public By getBy() {
+			return by;
 		}
 	}
 	
@@ -139,9 +126,9 @@ public class PageGestorCheques extends PageObjTM {
 		clickCorreoReceptorButtonAndWaitLoad();
 	}
 
-	public void inputChequeAndConfirm(String cheque) throws  Exception {
-    	inputMail(cheque);
-    	clickAndWait(ButtonsCheque.numCheque, driver);
+	public void inputChequeAndConfirm(String cheque) {
+		inputMail(cheque);
+		click(ButtonsCheque.numCheque.getBy()).exec();
 	}
 
 	private void inputMail(String mail) {

@@ -10,6 +10,7 @@ import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.TestMaker;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -72,9 +73,9 @@ public class PageFichaArtStpV {
     @Validation (
     	description=
     		"Aparece la página correspondiente a la ficha del artículo #{refArticulo}" + 
-    		" (La esperamos hasta #{maxSecondsWait} segundos)")
-    public boolean validateIsFichaArtDisponible(String refArticulo, int maxSecondsWait) { 
-    	return (pageFicha.isFichaArticuloUntil(refArticulo, maxSecondsWait));
+    		" (La esperamos hasta #{maxSeconds} segundos)")
+    public boolean validateIsFichaArtDisponible(String refArticulo, int maxSeconds) { 
+    	return (pageFicha.isFichaArticuloUntil(refArticulo, maxSeconds));
     }
     
     @Validation
@@ -85,7 +86,7 @@ public class PageFichaArtStpV {
 			pageFicha.isFichaArticuloUntil(refArticulo, 0), State.Defect); 
 	 	validations.add(
 			"Aparece algún color no disponible",
-			pageFicha.secDataProduct.isElementInState(ColorType.Unavailable, Present, driver), State.Defect); 
+			state(Present, ColorType.Unavailable.getBy(), driver).check(), State.Defect); 
 	 	return validations;
     }
     
@@ -100,11 +101,11 @@ public class PageFichaArtStpV {
     public ChecksTM validaDetallesProducto(DataFichaArt datosArticulo) {
     	ChecksTM validations = ChecksTM.getNew();
         if (datosArticulo.availableReferencia()) {
-            int maxSecondsWait = 3;
+            int maxSeconds = 3;
 		 	validations.add(
 				"Aparece la página con los datos de la ficha del producto " + datosArticulo.getReferencia() +
-				"(la esperamos hasta " + maxSecondsWait + " segundos)",
-				pageFicha.isFichaArticuloUntil(datosArticulo.getReferencia(), maxSecondsWait), State.Defect);
+				"(la esperamos hasta " + maxSeconds + " segundos)",
+				pageFicha.isFichaArticuloUntil(datosArticulo.getReferencia(), maxSeconds), State.Defect);
         }
             
         if (datosArticulo.availableNombre()) {
@@ -117,7 +118,7 @@ public class PageFichaArtStpV {
         return validations;
     }
 
-    public void selectColorAndSaveData(ArticuloScreen articulo) throws Exception {
+    public void selectColorAndSaveData(ArticuloScreen articulo) {
         selectColor(articulo.getCodigoColor());
         articulo.setColorName(pageFicha.secDataProduct.getNombreColorSelected(channel, driver));
     }
@@ -141,19 +142,19 @@ public class PageFichaArtStpV {
         return (codigoColorPage.contains(codigoColor));
     }
     
-    public void selectTallaAndSaveData(ArticuloScreen articulo) throws Exception {
+    public void selectTallaAndSaveData(ArticuloScreen articulo) {
         selectTalla(articulo.getTalla());
         articulo.setTalla(pageFicha.getTallaSelected());
     }
     
-    public void selectFirstTallaAvailable() throws Exception {
+    public void selectFirstTallaAvailable() {
     	pageFicha.selectFirstTallaAvailable();
 	}
     
     @Step (
     	description="Seleccionar la talla con código <b>#{talla.name()}</b> (previamente, si está abierta, cerramos la capa de la bolsa)", 
         expected="Se cambia la talla correctamente")
-    public void selectTalla(Talla talla) throws Exception {
+    public void selectTalla(Talla talla) {
     	SecBolsa.setBolsaToStateIfNotYet(StateBolsa.Closed, channel, app, driver);
         pageFicha.selectTallaByValue(talla);
         checkTallaSelected(talla);
@@ -294,14 +295,14 @@ public class PageFichaArtStpV {
     @Validation
     private ChecksTM checkCapaAltaFavoritos() {
     	ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait1 = 3;
+        int maxSeconds1 = 3;
 	 	validations.add(
-			"Aparece una capa superior de \"Añadiendo artículo a favoritos...\" (lo esperamos hasta " + maxSecondsWait1 + " segundos)",
-			pageFicha.isVisibleDivAnadiendoAFavoritosUntil(maxSecondsWait1), State.Info);
-        int maxSecondsWait2 = 3;
+			"Aparece una capa superior de \"Añadiendo artículo a favoritos...\" (lo esperamos hasta " + maxSeconds1 + " segundos)",
+			pageFicha.isVisibleDivAnadiendoAFavoritosUntil(maxSeconds1), State.Info);
+        int maxSeconds2 = 3;
 	 	validations.add(
-			"La capa superior acaba desapareciendo (lo esperamos hasta " + maxSecondsWait2 + " segundos)",
-			pageFicha.isInvisibleDivAnadiendoAFavoritosUntil(maxSecondsWait2), State.Warn);
+			"La capa superior acaba desapareciendo (lo esperamos hasta " + maxSeconds2 + " segundos)",
+			pageFicha.isInvisibleDivAnadiendoAFavoritosUntil(maxSeconds2), State.Warn);
     	return validations;
     }
 
@@ -379,15 +380,15 @@ public class PageFichaArtStpV {
     @Validation
     public ChecksTM validaPrevNext(LocationArticle locationArt, DataCtxShop dCtxSh) {
     	ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 5;
-    	boolean isVisiblePrevLink = pageFicha.secDataProduct.isVisiblePrevNextUntil(ProductNav.Prev, maxSecondsWait, driver);
+        int maxSeconds = 5;
+    	boolean isVisiblePrevLink = pageFicha.secDataProduct.isVisiblePrevNextUntil(ProductNav.Prev, maxSeconds, driver);
         if (locationArt.isFirstInGalery()) {
 		 	validations.add(
-		 		"No es visible el link <b>Prev</b> (lo esperamos hasta " + maxSecondsWait + " segundos)",
+		 		"No es visible el link <b>Prev</b> (lo esperamos hasta " + maxSeconds + " segundos)",
 		 		!isVisiblePrevLink, State.Warn);
         } else {
 		 	validations.add(
-		 		"Sí es visible el link <b>Prev</b> (lo esperamos hasta " + maxSecondsWait + " segundos)",
+		 		"Sí es visible el link <b>Prev</b> (lo esperamos hasta " + maxSeconds + " segundos)",
 		 		isVisiblePrevLink, State.Warn);
         }
         if (dCtxSh.appE==AppEcom.outlet || dCtxSh.channel==Channel.desktop) {

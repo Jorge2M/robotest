@@ -126,10 +126,10 @@ public class SecMenuLateralMobilStpV {
 	private ChecksTM checkGaleriaAfterSelectNuevo() {
 		ChecksTM validations = ChecksTM.getNew();
 		PageGaleria pageGaleria = PageGaleria.getNew(Channel.movil_web, app, driver);
-		int maxSecondsWait = 3;
+		int maxSeconds = 3;
 		validations.add(
-			"Aparece algún artículo (esperamos " + maxSecondsWait + " segundos)",
-			pageGaleria.isVisibleArticleUntil(1, maxSecondsWait), State.Warn);
+			"Aparece algún artículo (esperamos " + maxSeconds + " segundos)",
+			pageGaleria.isVisibleArticleUntil(1, maxSeconds), State.Warn);
 
 		return validations;   
 	}
@@ -194,8 +194,8 @@ public class SecMenuLateralMobilStpV {
             break;
         case articulos:
             PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.movil_web, app, driver);
-            int maxSecondsWait = 3;
-            pageGaleriaStpV.validaArtEnContenido(maxSecondsWait);
+            int maxSeconds = 3;
+            pageGaleriaStpV.validaArtEnContenido(maxSeconds);
             break;
         default:
             break;

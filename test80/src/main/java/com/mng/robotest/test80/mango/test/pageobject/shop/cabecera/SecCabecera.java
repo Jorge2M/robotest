@@ -29,7 +29,7 @@ public abstract class SecCabecera extends PageObjTM {
 	abstract String getXPathNumberArtIcono();
 	public abstract boolean isInStateIconoBolsa(State state);
 	public abstract void clickIconoBolsa();
-	public abstract void clickIconoBolsaWhenDisp(int maxSecondsToWait) throws Exception;
+	public abstract void clickIconoBolsaWhenDisp(int maxSecondsToWait);
 	public abstract void hoverIconoBolsa();
 	
 	protected SecCabecera(Channel channel, AppEcom app, WebDriver driver) {

@@ -7,7 +7,7 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -54,11 +54,11 @@ public class SecFooterStpV {
 		PageFromFooter pageObject = FactoryPageFromFooter.make(typeFooter, channel, driver);
 		String windowActualHandle = driver.getWindowHandle();
 		boolean newWindowInNewTab = (windowActualHandle.compareTo(windowFatherHandle)!=0);
-		int maxSecondsWait = 5;
+		int maxSeconds = 5;
 		try {
 	    	validations.add(
-	    		"Aparece la página <b>" + pageObject.getName() + "</b> (la esperamos hasta " + maxSecondsWait + " segundos)",
-	    		pageObject.isPageCorrectUntil(maxSecondsWait), State.Warn);
+	    		"Aparece la página <b>" + pageObject.getName() + "</b> (la esperamos hasta " + maxSeconds + " segundos)",
+	    		pageObject.isPageCorrectUntil(maxSeconds), State.Warn);
 		    if (typeFooter.pageInNewTab()) {
 		    	validations.add(
 	        		"Aparece la página en una ventana aparte",
@@ -156,17 +156,17 @@ public class SecFooterStpV {
      private static ChecksTM checkAfterClickLoQuieroAhoraUnderForm(WebDriver driver) {
   		ChecksTM validations = ChecksTM.getNew();
         String ventanaPadre = driver.getWindowHandle();
-        WebdrvWrapp.switchToAnotherWindow(driver, ventanaPadre);    
+        SeleniumUtils.switchToAnotherWindow(driver, ventanaPadre);    
         waitMillis(1000); //El javascript lanzado por "waitForPageLoaded" rompe la carga de la página -> hemos de aplicar wait explícito previo
-        WebdrvWrapp.waitForPageLoaded(driver, 10);
+        SeleniumUtils.waitForPageLoaded(driver, 10);
      	validations.add(
      		"Aparece una nueva ventana",
      		true, State.Warn);	
      	
-        int maxSecondsWait = 3;
+        int maxSeconds = 3;
      	validations.add(
-     		"Aparece un modal de aviso de trámite de la solicitud con un botón \"Continuar\" (la esperamos hasta " + maxSecondsWait + " segundos)",
-     		PageInputDataSolMangoCard.isPresentBotonContinuarModalUntil(maxSecondsWait, driver), State.Warn);
+     		"Aparece un modal de aviso de trámite de la solicitud con un botón \"Continuar\" (la esperamos hasta " + maxSeconds + " segundos)",
+     		PageInputDataSolMangoCard.isPresentBotonContinuarModalUntil(maxSeconds, driver), State.Warn);
      	return validations;
      }
      

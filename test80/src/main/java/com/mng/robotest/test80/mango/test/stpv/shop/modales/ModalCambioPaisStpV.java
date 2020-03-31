@@ -15,10 +15,10 @@ import com.mng.robotest.test80.mango.test.stpv.shop.home.PageHomeMarcasStpV;
 public class ModalCambioPaisStpV {
     
 	@Validation (
-		description="Aparece el modal de selección de país (lo esperamos hasta #{maxSecondsWait} segundos)",
+		description="Aparece el modal de selección de país (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-    public static boolean validateIsVisible(int maxSecondsWait, WebDriver driver) {
-        return (ModalCambioPais.isVisibleModalUntil(driver, maxSecondsWait));
+    public static boolean validateIsVisible(int maxSeconds, WebDriver driver) {
+        return (ModalCambioPais.isVisibleModalUntil(driver, maxSeconds));
     }
     
 	final static String tagNombrePais = "@TagNombrePais";

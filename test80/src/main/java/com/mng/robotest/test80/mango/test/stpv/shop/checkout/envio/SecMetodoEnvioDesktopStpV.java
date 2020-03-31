@@ -40,13 +40,13 @@ public class SecMetodoEnvioDesktopStpV {
     @Validation
     public static ChecksTM validaBlockSelectedDesktop(TipoTransporte tipoTransporte, WebDriver driver) {
     	ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 5;
+        int maxSeconds = 5;
       	validations.add(
-    		"Desaparece la capa de Loading  (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		PageCheckoutWrapper.waitUntilNoDivLoading(driver, maxSecondsWait), State.Warn);
+    		"Desaparece la capa de Loading  (lo esperamos hasta " + maxSeconds + " segundos)",
+    		PageCheckoutWrapper.waitUntilNoDivLoading(driver, maxSeconds), State.Warn);
       	validations.add(
     		"Queda seleccionado el bloque correspondiete a <b>" + tipoTransporte + "</b>",
-    		SecMetodoEnvioDesktop.isBlockSelectedUntil(tipoTransporte, maxSecondsWait, driver), State.Warn);
+    		SecMetodoEnvioDesktop.isBlockSelectedUntil(tipoTransporte, maxSeconds, driver), State.Warn);
       	return validations;
     }
     

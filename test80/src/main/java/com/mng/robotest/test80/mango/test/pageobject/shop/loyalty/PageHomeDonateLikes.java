@@ -24,8 +24,8 @@ public class PageHomeDonateLikes extends PageObjTM {
     		return numLikes;
     	}
     	
-    	public String getXPath() {
-    		return "//button[contains(.,'" + numLikes + "')]";
+    	public By getBy() {
+    		return By.xpath("//button[contains(.,'" + numLikes + "')]");
     	}
 	}
 	
@@ -45,11 +45,11 @@ public class PageHomeDonateLikes extends PageObjTM {
 	}
 	
 	public boolean isVisible(ButtonLikes buttonLikes) {
-		return isElementInState(buttonLikes, Visible, driver);
+		return (state(Visible, buttonLikes.getBy()).check());
 	}
 	
-	public void clickButton(ButtonLikes buttonLikes) throws Exception {
-		clickAndWait(buttonLikes, driver);
+	public void clickButton(ButtonLikes buttonLikes) {
+		click(buttonLikes.getBy()).exec();
 	}
 	
 	public boolean isVisibleIconOperationDoneUntil(int maxSeconds) {

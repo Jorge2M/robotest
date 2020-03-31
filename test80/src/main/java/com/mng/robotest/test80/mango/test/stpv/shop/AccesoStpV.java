@@ -24,7 +24,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIdentificacion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper;
@@ -96,11 +96,11 @@ public class AccesoStpV {
 	@Validation
 	private static ChecksTM checkLinksAfterLogin(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 5;
+        int maxSeconds = 5;
         MenusUserWrapper userMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver).getMenusUser();
     	validations.add(
-    		"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		userMenus.isMenuInStateUntil(UserMenu.miCuenta, Present, maxSecondsWait), State.Defect);
+    		"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + maxSeconds + " segundos)",
+    		userMenus.isMenuInStateUntil(UserMenu.miCuenta, Present, maxSeconds), State.Defect);
 		
 		boolean isVisibleMenuFav = userMenus.isMenuInStateUntil(UserMenu.favoritos, Present, 0);
 		if (dCtxSh.appE==AppEcom.outlet) { 
@@ -261,7 +261,7 @@ public class AccesoStpV {
         TestMaker.getCurrentStepInExecution().replaceInDescription(tagLiteralIdiomaOrigen, idiomaOrigen.getLiteral());
         
         driver.get(urlAccesoPaisNoIp);
-        WebdrvWrapp.waitForPageLoaded(driver);
+        SeleniumUtils.waitForPageLoaded(driver);
         if (vecesPaisConfPrev < 2) {
             //Si se ha confirmado el país < 2 veces debería aparecer el modal del cambio de país
         	ResultValWithPais resultVal = validacAccesoSiApareceModal(urlBaseTest, paisAccesoNoIP, paisAccesoPrevio, paisPrevConf, listPaisAsocIP, driver);

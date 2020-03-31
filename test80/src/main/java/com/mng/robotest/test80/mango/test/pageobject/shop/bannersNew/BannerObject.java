@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
-import com.mng.testmaker.service.webdriver.pageobject.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
 import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -51,9 +51,9 @@ public abstract class BannerObject {
     	return listDataBannersReturn;
     }
     
-    public List<DataBanner> getListBannersDataUntil(int maxBannersToLoad, int maxSecondsWait, WebDriver driver) {
+    public List<DataBanner> getListBannersDataUntil(int maxBannersToLoad, int maxSeconds, WebDriver driver) {
     	List<DataBanner> listBanners = new ArrayList<>();
-    	for (int i=0; i<maxSecondsWait; i++) {
+    	for (int i=0; i<maxSeconds; i++) {
     		listBanners = getListBannersData(maxBannersToLoad, driver);
     		if (listBanners.size()>0) {
     			break;
@@ -95,7 +95,7 @@ public abstract class BannerObject {
 	
     protected List<WebElement> getDisplayedBannersInOrder(WebDriver driver) {
         List<WebElement> listBanners = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathBanner));
-        WebdrvWrapp.orderElementsByPositionInScreen(listBanners);
+        SeleniumUtils.orderElementsByPositionInScreen(listBanners);
         return listBanners;
     }
 

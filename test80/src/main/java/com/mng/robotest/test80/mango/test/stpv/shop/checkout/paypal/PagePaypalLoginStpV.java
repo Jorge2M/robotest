@@ -10,10 +10,10 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paypal.PagePa
 public class PagePaypalLoginStpV {
 
 	@Validation (
-		description="Aparece la página de login (la esperamos hasta un máximo de #{maxSecondsWait} segundos)",
+		description="Aparece la página de login (la esperamos hasta un máximo de #{maxSeconds} segundos)",
 		level=State.Defect)
-    public static boolean validateIsPageUntil(int maxSecondsWait, WebDriver driver) {
-        return (PagePaypalLogin.isPageUntil(maxSecondsWait, driver));
+    public static boolean validateIsPageUntil(int maxSeconds, WebDriver driver) {
+        return (PagePaypalLogin.isPageUntil(maxSeconds, driver));
     }
     
 	@Step (
@@ -26,7 +26,7 @@ public class PagePaypalLoginStpV {
         driver.switchTo().window(paginaPadre); //Salimos del iframe
         
         //Validaciones
-        int maxSecondsWait = 20;
-        PagePaypalSelectPagoStpV.validateIsPageUntil(maxSecondsWait, driver);
+        int maxSeconds = 20;
+        PagePaypalSelectPagoStpV.validateIsPageUntil(maxSeconds, driver);
     }
 }
