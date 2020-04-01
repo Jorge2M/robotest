@@ -22,7 +22,7 @@ public class Ayuda {
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 
 		dCtxSh.pais = PaisGetter.get(PaisShop.España);
 		dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
@@ -39,6 +39,7 @@ public class Ayuda {
 
 		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
 		SecFooterStpV.clickLinkFooter(SecFooter.FooterLink.ayuda, false, dCtxSh.channel, driver);
-		AyudaStpV.selectTypeValidaciones(dCtxSh.channel, driver);
+		AyudaStpV ayudaStpV = AyudaStpV.getNew(driver);
+		ayudaStpV.selectTypeValidaciones(dCtxSh.channel);
 	}
 }

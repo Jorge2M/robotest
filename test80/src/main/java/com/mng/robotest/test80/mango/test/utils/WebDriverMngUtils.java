@@ -18,6 +18,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.ITestContext;
 
 import com.mng.testmaker.service.TestMaker;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.testmaker.testreports.html.ResultadoErrores;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
@@ -106,7 +107,7 @@ public class WebDriverMngUtils {
      * @param maxErrors máximo de errores a partir del cual ya no hemos de mostrar warning
      * @return recopilación de todos los problemas detectados
      */
-    public static ResultadoErrores imagesBroken(WebDriver driver, Channel channel, int maxErrors) throws Exception {
+    public static ResultadoErrores imagesBroken(WebDriver driver, Channel channel, int maxErrors) {
         int maxImages = 500;
         ITestContext ctx = TestMaker.getTestCase().getTestRunParent().getTestNgContext();
         		
@@ -124,7 +125,7 @@ public class WebDriverMngUtils {
      * @param maxErrors máximo de errores a partir del cual ya no hemos de mostrar warning
      * @return recopilación de todos los problemas detectados
      */
-    public static ResultadoErrores imagesBroken(WebDriver driver, int maxImages, int maxErrors, ITestContext ctx) throws Exception {
+    public static ResultadoErrores imagesBroken(WebDriver driver, int maxImages, int maxErrors, ITestContext ctx) {
         ResultadoErrores resultado = new ResultadoErrores();
         resultado.setResultado(ResultadoErrores.Resultado.OK);
         ArrayList<String> listaImgBroken = new ArrayList<>();
@@ -155,7 +156,7 @@ public class WebDriverMngUtils {
                     imgStatus = eventFiringWebDriver.executeScript(script, image); 
                 } catch (StaleElementReferenceException e) {
                     excep_stale = true;
-                    Thread.sleep(2000);
+                    PageObjTM.waitMillis(2000);
                 }
             } while (excep_stale && intentos < 5);
 

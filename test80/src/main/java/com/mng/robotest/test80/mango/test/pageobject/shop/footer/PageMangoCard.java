@@ -4,9 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class PageMangoCard extends WebdrvWrapp implements PageFromFooter {
+public class PageMangoCard extends PageObjTM implements PageFromFooter {
 	
 	static String XPathGoMangoCardButton = "//span[@class='menu-link-button']";
 	static String XPathGoMangoCardButtonMobile = "//a[@id='formLink']";
@@ -20,52 +21,56 @@ public class PageMangoCard extends WebdrvWrapp implements PageFromFooter {
 	
 	final String XPathForIdPage = "//h2[@class='section-title']";
 	
+	public PageMangoCard(WebDriver driver) {
+		super(driver);
+	}
+	
 	@Override
 	public String getName() {
 		return "Nueva Mango Card";
 	}
 	
 	@Override
-	public boolean isPageCorrectUntil(int maxSecondsWait, WebDriver driver) {
-		return (isElementPresentUntil(driver, By.xpath(XPathForIdPage), maxSecondsWait));
+	public boolean isPageCorrectUntil(int maxSeconds) {
+		return (state(Present, By.xpath(XPathForIdPage)).wait(maxSeconds).check());
 	}
 	
 	/**
      * Selecciona el botón "Solicitar Tarjeta Mango" de la página 1
      */
-    public static void clickOnWantMangoCardNow(WebDriver driver, Channel channel) throws Exception {
+    public void clickOnWantMangoCardNow(Channel channel) {
     	if (channel==Channel.movil_web) {
-    		clickAndWaitLoad(driver, By.xpath(XPathGoMangoCardButtonMobile));
+    		click(By.xpath(XPathGoMangoCardButtonMobile)).exec();
     	} else {
-    		clickAndWaitLoad(driver, By.xpath(XPathGoMangoCardButton));
+    		click(By.xpath(XPathGoMangoCardButton)).exec();
     	}
     }
     
-    public static void clickToGoSecondMangoCardPage(WebDriver driver) throws Exception {
-    	clickAndWaitLoad(driver, By.xpath(XPathLinkSolMangoCardPage1));
+    public void clickToGoSecondMangoCardPage() {
+    	click(By.xpath(XPathLinkSolMangoCardPage1)).exec();
     }
 
-    public static boolean isPresentNameField(WebDriver driver) throws Exception {
-    	return  (isElementPresent(driver, By.xpath(XPathNameField)));
+    public boolean isPresentNameField() {
+    	return (state(Present, By.xpath(XPathNameField)).check());
     }
     
-    public static boolean isPresentFirstSurnameField(WebDriver driver) throws Exception {
-    	return  (isElementPresent(driver, By.xpath(XPathFirstSurnameField)));
+    public boolean isPresentFirstSurnameField() {
+    	return (state(Present, By.xpath(XPathFirstSurnameField)).check());
     }
     
-    public static boolean isPresentSecondSurnameField(WebDriver driver) throws Exception {
-    	return  (isElementPresent(driver, By.xpath(XPathSecondSurnameField)));
+    public boolean isPresentSecondSurnameField() {
+    	return (state(Present, By.xpath(XPathSecondSurnameField)).check());
     }
     
-    public static boolean isPresentMobileField(WebDriver driver) throws Exception {
-    	return  (isElementPresent(driver, By.xpath(XPathMobileField)));
+    public boolean isPresentMobileField() {
+    	return (state(Present, By.xpath(XPathMobileField)).check());
     }
     
-    public static boolean isPresentMailField(WebDriver driver) throws Exception {
-    	return  (isElementPresent(driver, By.xpath(XPathMailField)));
+    public boolean isPresentMailField() {
+    	return (state(Present, By.xpath(XPathMailField)).check());
     }
     
-    public static boolean isPresentButtonSolMangoCardNow(WebDriver driver) throws Exception {
-    	return  (isElementPresent(driver, By.xpath(XPathLinkSolMangoCardPage1)));
+    public boolean isPresentButtonSolMangoCardNow() {
+    	return (state(Present, By.xpath(XPathLinkSolMangoCardPage1)).check());
     }
 }

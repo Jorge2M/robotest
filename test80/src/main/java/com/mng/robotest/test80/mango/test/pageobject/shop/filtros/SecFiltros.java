@@ -15,14 +15,14 @@ import com.mng.robotest.test80.mango.test.data.Color;
 public interface SecFiltros {
 	
     public void selectOrdenacion(FilterOrdenacion ordenacion) throws Exception;
-    public void selectCollection(FilterCollection coleccion) throws Exception;
+    public void selectCollection(FilterCollection coleccion);
     public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception;
-    public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToSelect) throws Exception;
+    public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToSelect);
     public boolean isClickableFiltroUntil(int seconds);
     public boolean isCollectionFilterPresent() throws Exception;
     
     //Static factory
-	public static SecFiltros newInstance(Channel channel, AppEcom app, WebDriver driver) throws Exception {
+	public static SecFiltros newInstance(Channel channel, AppEcom app, WebDriver driver) {
 		switch (channel) {
 		case desktop:
 			return (SecFiltrosDesktop.getInstance(app, driver));
@@ -30,10 +30,11 @@ public interface SecFiltros {
 		default:
 			if (app==AppEcom.outlet) {
 				//TODO unificar con Shop cuando suba a PRO (eliminar los filtros simples)
-				if (!SecSimpleFiltrosMobil.isPresent(driver)) {
+				SecSimpleFiltrosMobil secSimple = SecSimpleFiltrosMobil.getInstance(app, driver);
+				if (!secSimple.isPresent(driver)) {
 					return (SecMultiFiltrosMobil.getInstance(app, driver));
 				}
-				return (SecSimpleFiltrosMobil.getInstance(app, driver));
+				return (secSimple);
 			}
 			return (SecMultiFiltrosMobil.getInstance(app, driver));
 		}

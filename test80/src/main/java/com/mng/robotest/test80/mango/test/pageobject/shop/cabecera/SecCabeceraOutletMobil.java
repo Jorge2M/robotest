@@ -4,8 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
+import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
+import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 /**
@@ -19,13 +22,14 @@ public class SecCabeceraOutletMobil extends SecCabeceraOutlet {
 		bolsa("//a[@class[contains(.,'cartLink')]]"),
 		lupa("//div[@class='menu-search-button']");
 		
-		private String xpath;
+		private By by;
 		private IconoCabOutletMobil(String xpath) {
-			this.xpath = xpath;
+			by = By.xpath(xpath);
 		}
 		
-		public String getXPath() {
-			return xpath;
+		@Override
+		public By getBy() {
+			return by;
 		}
 	}
 		
@@ -45,17 +49,17 @@ public class SecCabeceraOutletMobil extends SecCabeceraOutlet {
     }
     
     @Override
-    public boolean isInStateIconoBolsa(StateElem state) {
+    public boolean isInStateIconoBolsa(State state) {
     	return (isElementInStateUntil(IconoCabOutletMobil.bolsa, state, 0));
     }
     
     @Override
-    public void clickIconoBolsa() throws Exception {
+    public void clickIconoBolsa() {
     	click(IconoCabOutletMobil.bolsa);
     }
     
     @Override
-    public void clickIconoBolsaWhenDisp(int maxSecondsToWait) throws Exception {
+    public void clickIconoBolsaWhenDisp(int maxSecondsToWait) {
     	clickIfClickableUntil(IconoCabOutletMobil.bolsa, maxSecondsToWait);
     }
     
@@ -64,30 +68,29 @@ public class SecCabeceraOutletMobil extends SecCabeceraOutlet {
     	hoverIcono(IconoCabOutletMobil.bolsa);
     }
     
-    public boolean isElementInStateUntil(IconoCabOutletMobil icono, StateElem state, int maxSecondsWait) {
-    	return (isElementInStateUntil(icono, state, maxSecondsWait, driver));
+    public boolean isElementInStateUntil(IconoCabOutletMobil icono, State state, int maxSeconds) {
+    	return (state(state, icono.getBy()).wait(maxSeconds).check());
     }
-    
-    public boolean isClickableUntil(IconoCabOutletMobil icono, int maxSeconds) {
-    	return (isElementClickableUntil(driver, By.xpath(icono.getXPath()), maxSeconds));
-    }
-    
-    public void clickIfClickableUntil(IconoCabOutletMobil icono, int maxSecondsToWait) 
-    throws Exception {
-    	if (isClickableUntil(icono, maxSecondsToWait)) {
-    		click(icono);
-    	}
-    }
-    
-    public void click(IconoCabOutletMobil icono) throws Exception {
-    	click(icono, app, driver);
-    }
-    
-    public static void click(IconoCabOutletMobil icono, AppEcom app, WebDriver driver) throws Exception {
-    	clickAndWaitLoad(driver, By.xpath(icono.getXPath()), TypeOfClick.javascript);
-    }
-    
-    public void hoverIcono(IconoCabOutletMobil icono) {
-    	moveToElement(icono, driver);
-    }
+
+	 public boolean isClickableUntil(IconoCabOutletMobil icono, int maxSeconds) {
+		return (state(Clickable, icono.getBy()).wait(maxSeconds).check());
+	}
+
+	public void clickIfClickableUntil(IconoCabOutletMobil icono, int maxSecondsToWait) {
+		if (isClickableUntil(icono, maxSecondsToWait)) {
+			click(icono);
+		}
+	}
+
+	public void click(IconoCabOutletMobil icono) {
+		click(icono, app);
+	}
+
+	public void click(IconoCabOutletMobil icono, AppEcom app) {
+		click(icono.getBy()).type(TypeClick.javascript).exec();
+	}
+
+	public void hoverIcono(IconoCabOutletMobil icono) {
+		moveToElement(icono.getBy(), driver);
+	}
 }

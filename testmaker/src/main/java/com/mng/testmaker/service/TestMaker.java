@@ -138,7 +138,7 @@ public class TestMaker {
 	}
 	
 	public static WebDriver getDriverTestCase() {
-		return (getTestCase().getWebDriver());
+		return (getTestCase().getDriver());
 	}
 
 	public static StepTM getCurrentStepInExecution() {

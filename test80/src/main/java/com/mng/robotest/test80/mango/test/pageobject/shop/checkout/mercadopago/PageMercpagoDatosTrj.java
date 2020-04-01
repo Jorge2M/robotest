@@ -4,11 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 
-public abstract class PageMercpagoDatosTrj extends WebdrvWrapp {
-	
-	final WebDriver driver; 
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+public abstract class PageMercpagoDatosTrj extends PageObjTM {
 	
     final static String XPathInputNumTarj = "//input[@name='cardNumber']";
     final static String XPathInputFecCaducidad = "//input[@name='cardExpiration']";
@@ -22,7 +22,7 @@ public abstract class PageMercpagoDatosTrj extends WebdrvWrapp {
     abstract public void sendCaducidadTarj(String fechaVencimiento);
     
     PageMercpagoDatosTrj(WebDriver driver) {
-    	this.driver = driver;
+    	super(driver);
     }
     
     public static PageMercpagoDatosTrj newInstance(Channel channel, WebDriver driver) {
@@ -40,7 +40,7 @@ public abstract class PageMercpagoDatosTrj extends WebdrvWrapp {
     }
     
     public TypePant getTypeInput() {
-    	if (WebdrvWrapp.isElementVisible(driver, By.xpath(XPathInputNumTarj))) {
+    	if (state(Visible, By.xpath(XPathInputNumTarj), driver).check()) {
     		return TypePant.inputDataTrjNew;
     	}
     	

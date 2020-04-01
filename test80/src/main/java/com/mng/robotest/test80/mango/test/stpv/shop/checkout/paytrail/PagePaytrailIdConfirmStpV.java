@@ -26,8 +26,7 @@ public class PagePaytrailIdConfirmStpV {
 	@Step (
 		description="Introducir el ID <b>idConfirm</b> y seleccionar el botón \"Confirmar\"", 
         expected="Aparece la página de introducción del <b>ID de confirmación</b>")
-    public static void inputIDAndClickConfirmar(String idConfirm, String importeTotal, String codPais, WebDriver driver) 
-    throws Exception {
+    public static void inputIDAndClickConfirmar(String idConfirm, String importeTotal, String codPais, WebDriver driver) {
         PagePaytrailIdConfirm.inputIdConfirm(idConfirm, driver);
         PagePaytrailIdConfirm.clickConfirmar(driver);
         

@@ -14,9 +14,9 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletDesktop.LinkCabeceraOutletDesktop;
@@ -30,13 +30,12 @@ import static com.mng.robotest.test80.mango.conftestmaker.AppEcom.shop;
 import static com.mng.robotest.test80.mango.conftestmaker.AppEcom.outlet;
 import static com.mng.robotest.test80.mango.conftestmaker.AppEcom.votf;
 
-public class MenusUserWrapper {
+public class MenusUserWrapper extends PageObjTM {
 
-    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
+	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
 	final Channel channel;
 	final AppEcom app;
-	final WebDriver driver;
 	final SecCabecera secCabecera;
 	final SecMenuLateralMobil secMenuLateralMobil;
 	
@@ -65,9 +64,9 @@ public class MenusUserWrapper {
 	}
 	
 	private MenusUserWrapper(Channel channel, AppEcom app, WebDriver driver) {
+		super(driver);
 		this.channel = channel;
 		this.app = app;
-		this.driver = driver;
 		this.secCabecera = SecCabecera.getNew(channel, app, driver);
 		this.secMenuLateralMobil = SecMenuLateralMobil.getNew(app, driver);
 	}
@@ -76,20 +75,20 @@ public class MenusUserWrapper {
 		return (new MenusUserWrapper(channel, app, driver));
 	}
 	
-	public boolean isMenuInState(UserMenu menu, StateElem state) throws Exception {
+	public boolean isMenuInState(UserMenu menu, State state) throws Exception {
 		return (isMenuInStateUntil(menu, state, 0));
 	}
 	
-	public boolean isMenuInStateUntil(UserMenu menu, StateElem state, int maxSecondsWait) throws Exception {
+	public boolean isMenuInStateUntil(UserMenu menu, State state, int maxSeconds) {
 		if (menu==UserMenu.bolsa) {
 			return (secCabecera.isInStateIconoBolsa(state));
 		} else {
 			ElementPage menuElement = getMenu(menu);
-			return (isMenuInStateUntil(menuElement, state, maxSecondsWait));
+			return (isMenuInStateUntil(menuElement, state, maxSeconds));
 		}
 	}
 	
-	public void clickMenuAndWait(UserMenu menu) throws Exception {
+	public void clickMenuAndWait(UserMenu menu) {
 		checkAppSupported(app, menu);
 		if (menu==UserMenu.bolsa) {
 			secCabecera.clickIconoBolsa();
@@ -99,7 +98,7 @@ public class MenusUserWrapper {
 		}
 	}
 	
-	public boolean clickMenuIfInState(UserMenu menu, StateElem state) throws Exception {
+	public boolean clickMenuIfInState(UserMenu menu, State state) {
 		if (isMenuInStateUntil(menu, state, 0)) {
 			clickMenuAndWait(menu);
 			return true;
@@ -107,21 +106,21 @@ public class MenusUserWrapper {
 		return false;
 	}
 	
-	public void moveToMenu(UserMenu menu) throws Exception {
+	public void moveToMenu(UserMenu menu) {
 		if (menu==UserMenu.bolsa) {
 			secCabecera.hoverIconoBolsa();
 		} else {
 			ElementPage menuElement = getMenu(menu);
-			WebdrvWrapp.moveToElement(menuElement, driver);
+			moveToElement(menuElement.getBy(), driver);
 		}
 	}
 	
-	public void moveAndClick(UserMenu menu) throws Exception {
+	public void moveAndClick(UserMenu menu) {
 		moveToMenu(menu);
 		clickMenuAndWait(menu);
 	}
 	
-	public void hoverIconForShowUserMenuDesktopShop() throws Exception {
+	public void hoverIconForShowUserMenuDesktopShop() {
 		if (channel!=Channel.desktop && app!=AppEcom.shop) {
 			throw new IllegalArgumentException(
 				"This function doesn't support the channel " + channel + " and the application " + app);
@@ -164,26 +163,26 @@ public class MenusUserWrapper {
 		}
 	}
 
-	private boolean isMenuInStateUntil(ElementPage menu, StateElem state, int maxSecondsWait) throws Exception {
+	private boolean isMenuInStateUntil(ElementPage menu, State state, int maxSeconds) {
 		if (menu instanceof IconoCabeceraShop) {
-			return (secCabecera.getShop().isIconoInStateUntil((IconoCabeceraShop)menu, state, maxSecondsWait));
+			return (secCabecera.getShop().isIconoInStateUntil((IconoCabeceraShop)menu, state, maxSeconds));
 		}
 		if (menu instanceof LinkCabeceraOutletDesktop) {
-			return (secCabecera.getOutletDesktop().isElementInStateUntil((LinkCabeceraOutletDesktop) menu, state, maxSecondsWait));
+			return (secCabecera.getOutletDesktop().isElementInStateUntil((LinkCabeceraOutletDesktop) menu, state, maxSeconds));
 		}
 		if (menu instanceof MenuUserDesktop) {
-			return (secCabecera.getShop().getModalUserSesionDesktop().isMenuInStateUntil((MenuUserDesktop)menu, state, maxSecondsWait));
+			return (secCabecera.getShop().getModalUserSesionDesktop().isMenuInStateUntil((MenuUserDesktop)menu, state, maxSeconds));
 		}
 		if (menu instanceof MenuUserMobil) {
-			return (secMenuLateralMobil.getUserMenu().isMenuInStateUntil((MenuUserMobil)menu, state, maxSecondsWait));
+			return (secMenuLateralMobil.getUserMenu().isMenuInStateUntil((MenuUserMobil)menu, state, maxSeconds));
 		}
 		if (menu instanceof IconoCabOutletMobil) {
-			return (secCabecera.getOutletMobil().isElementInStateUntil((IconoCabOutletMobil)menu, state, maxSecondsWait));
+			return (secCabecera.getOutletMobil().isElementInStateUntil((IconoCabOutletMobil)menu, state, maxSeconds));
 		}
 		return false;
 	}
 	
-	private void clickMenuAndWait(ElementPage menu) throws Exception {
+	private void clickMenuAndWait(ElementPage menu) {
 		if (menu instanceof IconoCabeceraShop) {
 			secCabecera.getShop().clickIconoAndWait((IconoCabeceraShop)menu);
 		}
@@ -342,12 +341,12 @@ public class MenusUserWrapper {
 		return null;
 	}
 	
-	public LoyaltyData checkAndGetLoyaltyPointsUntil(int maxSecondsWait) throws Exception {
+	public LoyaltyData checkAndGetLoyaltyPointsUntil(int maxSeconds) throws Exception {
     	//TODO Workarround for manage shadow-dom Elements. Remove when WebDriver supports shadow-dom
 		LoyaltyData loyaltyData = new LoyaltyData(false, 0);
 		By byLoyaltyUserMenu = By.tagName("loyalty-user-menu");
-		for (int i=0; i<maxSecondsWait; i++) {
-			WebElement blockLoyalty = WebdrvWrapp.getElementVisible(driver, byLoyaltyUserMenu);
+		for (int i=0; i<maxSeconds; i++) {
+			WebElement blockLoyalty = getElementVisible(driver, byLoyaltyUserMenu);
 			if (blockLoyalty!=null) {
 				//if (WebdrvWrapp.isElementPresent(driver, byLoyaltyUserMenu)) {
 				//WebElement shadowHost = driver.findElement(byLoyaltyUserMenu);

@@ -18,10 +18,10 @@ public class PageAmexInputTarjetaStpV {
     @Validation
     public static ChecksTM validateIsPageOk(String importeTotal, String codPais, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 5;
+        int maxSeconds = 5;
 	 	validations.add(
-			"Aparece la pasarela de pagos de Banco Sabadell (la esperamos hasta " + maxSecondsWait + " segundos)",
-			PageAmexInputTarjeta.isPasarelaBancoSabadellUntil(maxSecondsWait, driver), State.Defect); 
+			"Aparece la pasarela de pagos de Banco Sabadell (la esperamos hasta " + maxSeconds + " segundos)",
+			PageAmexInputTarjeta.isPasarelaBancoSabadellUntil(maxSeconds, driver), State.Defect); 
 	 	validations.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn); 

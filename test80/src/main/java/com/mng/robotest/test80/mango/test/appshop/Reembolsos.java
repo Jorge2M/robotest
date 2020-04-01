@@ -4,7 +4,6 @@ import org.testng.annotations.*;
 
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -53,7 +52,7 @@ public class Reembolsos {
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());
-        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+        //dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
         dCtxSh.pais = arabia;
         dCtxSh.idioma = arabia_arabe;
         return dCtxSh;

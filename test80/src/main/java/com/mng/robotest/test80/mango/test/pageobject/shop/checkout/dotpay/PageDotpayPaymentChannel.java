@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.dotpay;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageDotpayPaymentChannel extends WebdrvWrapp {
+public class PageDotpayPaymentChannel {
 
     static String XPathSectionPaymentChannels = "//section[@id='payment-channels']";
     static String XPathBlockInputData = "//div[@id='personal-data-form']";
@@ -19,24 +20,25 @@ public class PageDotpayPaymentChannel extends WebdrvWrapp {
     }
     
     public static boolean isPage(WebDriver driver) {
-        return isElementPresent(driver, By.xpath(XPathSectionPaymentChannels));
+    	return (state(Present, By.xpath(XPathSectionPaymentChannels), driver).check());
     }
-    
-    public static void clickPayment(int numPayment, WebDriver driver) throws Exception {
-        String xpathPayment = getXPathPaymentChannelLink(numPayment);
-        clickAndWaitLoad(driver, By.xpath(xpathPayment));
-    }
-    
+
+	public static void clickPayment(int numPayment, WebDriver driver) {
+		String xpathPayment = getXPathPaymentChannelLink(numPayment);
+		click(By.xpath(xpathPayment), driver).exec();
+	}
+
     public static void sendInputNombre(String firstName, String lastName, WebDriver driver) {
         driver.findElement(By.xpath(XPathInputFirstName)).sendKeys(firstName);
         driver.findElement(By.xpath(XPathInputLastName)).sendKeys(lastName);
     }
-    
-    public static void clickButtonConfirm(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonConfirmar));
-    }
-    
-    public static boolean isVisibleBlockInputDataUntil(int maxSecondsToWait, WebDriver driver) {
-        return isElementVisibleUntil(driver, By.xpath(XPathBlockInputData), maxSecondsToWait);
+
+	public static void clickButtonConfirm(WebDriver driver) {
+		click(By.xpath(XPathButtonConfirmar), driver).exec();
+	}
+
+    public static boolean isVisibleBlockInputDataUntil(int maxSeconds, WebDriver driver) {
+    	return (state(Visible, By.xpath(XPathBlockInputData), driver)
+    			.wait(maxSeconds).check());
     }
 }

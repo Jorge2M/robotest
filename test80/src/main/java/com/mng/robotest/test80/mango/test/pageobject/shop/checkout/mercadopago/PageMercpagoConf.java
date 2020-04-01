@@ -4,10 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageMercpagoConf extends WebdrvWrapp {
+public class PageMercpagoConf {
     
     static String XPathSectionReviewDesktop = "//section[@class='review-step']";
     static String XPathButtonPagar = "//button[@class[contains(.,'ch-btn')] and @type='submit']";
@@ -22,12 +23,12 @@ public class PageMercpagoConf extends WebdrvWrapp {
         }
     }
     
-    public static boolean isPageUntil(Channel channel, int maxSecondsToWait, WebDriver driver) {
+    public static boolean isPageUntil(Channel channel, int maxSeconds, WebDriver driver) {
         String xpathSection = getXPathSectionReview(channel);
-        return (isElementPresentUntil(driver, By.xpath(xpathSection), maxSecondsToWait));
+        return (state(Present, By.xpath(xpathSection), driver).wait(maxSeconds).check());
     }
-    
-    public static void clickPagar(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonPagar));
-    }
+
+	public static void clickPagar(WebDriver driver) {
+		click(By.xpath(XPathButtonPagar), driver).exec();
+	}
 }

@@ -29,8 +29,8 @@ public class PageTrustPayResultStpV {
     
 	@Step (
 		description="Seleccionar el botón para continuar con el pago", 
-        expected="El pago se completa correctamente")
-    public static void clickButtonContinue(WebDriver driver) throws Exception {
+		expected="El pago se completa correctamente")
+	public static void clickButtonContinue(WebDriver driver) {
 		PageTrustPayResult.clickButtonContinue(driver);
-    }
+	}
 }

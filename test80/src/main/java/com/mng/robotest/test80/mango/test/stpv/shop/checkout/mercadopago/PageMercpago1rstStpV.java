@@ -10,16 +10,16 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.P
 public class PageMercpago1rstStpV {
 	
 	@Validation (
-		description="Aparece la página inicial de Mercado para la introducción de datos (la esperamos hasta #{maxSecondsWait} segundos)",
+		description="Aparece la página inicial de Mercado para la introducción de datos (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
-    public static boolean validateIsPageUntil(int maxSecondsWait, WebDriver driver) {
-       return (PageMercpago1rst.isPageUntil(maxSecondsWait, driver));
+    public static boolean validateIsPageUntil(int maxSeconds, WebDriver driver) {
+       return (PageMercpago1rst.isPageUntil(maxSeconds, driver));
     }
 	
 	@Step (
 		description="Accedemos a la página de identificación", 
         expected="Aparece la página de identificación")
-    public static void clickLinkRegistration(WebDriver driver) throws Exception {
+    public static void clickLinkRegistration(WebDriver driver) {
         PageMercpago1rst.clickLinkRegistro(driver);
         PageMercpagoLoginStpV.validateIsPage(driver);
     }

@@ -4,10 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageSepa1rst extends WebdrvWrapp {
+public class PageSepa1rst {
     
     static String XPathListOfPayments = "//ul[@id='paymentMethods']";
     static String XPathCabeceraStep = "//h2[@id[contains(.,'stageheader')]]";
@@ -28,36 +29,36 @@ public class PageSepa1rst extends WebdrvWrapp {
     
     public static boolean isPresentIconoSepa(Channel channel, WebDriver driver) {
         String xpathPago = getXPathIconoSepa(channel);
-        return (isElementPresent(driver, By.xpath(xpathPago)));
+        return (state(Present, By.xpath(xpathPago), driver).check());
     }
-    
-    public static void clickIconoSepa(Channel channel, WebDriver driver) throws Exception {
-        String xpathPago = getXPathIconoSepa(channel);
-        clickAndWaitLoad(driver, By.xpath(xpathPago));
-    }
-    
+
+	public static void clickIconoSepa(Channel channel, WebDriver driver) {
+		String xpathPago = getXPathIconoSepa(channel);
+		click(By.xpath(xpathPago), driver).exec();
+	}
+
     public static boolean isPresentCabeceraStep(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathCabeceraStep)));
+    	return (state(Present, By.xpath(XPathCabeceraStep), driver).check());
     }
     
     public static boolean isPresentButtonPagoDesktop(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathButtonPagoDesktop)));
+    	return (state(Present, By.xpath(XPathButtonPagoDesktop), driver).check());
     }
 
-    public static void clickButtonContinuePago(Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web) {
-            clickAndWaitLoad(driver, By.xpath(XPathButtonContinueMobil));
-        } else {
-            clickAndWaitLoad(driver, By.xpath(XPathButtonPagoDesktop));
-        }
-    }
+	public static void clickButtonContinuePago(Channel channel, WebDriver driver) {
+		if (channel==Channel.movil_web) {
+			click(By.xpath(XPathButtonContinueMobil), driver).exec();
+		} else {
+			click(By.xpath(XPathButtonPagoDesktop), driver).exec();
+		}
+	}
     
     public static boolean isPresentInputTitular(WebDriver driver) { 
-        return (isElementPresent(driver, By.xpath(XPathInputTitular)));
+    	return (state(Present, By.xpath(XPathInputTitular), driver).check());
     }
 
     public static boolean isPresentInputCuenta(WebDriver driver) { 
-        return (isElementPresent(driver, By.xpath(XPathInputCuenta)));
+    	return (state(Present, By.xpath(XPathInputCuenta), driver).check());
     }
     
     public static void inputTitular(String titular, WebDriver driver) {

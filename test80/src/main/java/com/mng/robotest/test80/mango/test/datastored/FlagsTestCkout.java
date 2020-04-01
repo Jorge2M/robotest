@@ -1,10 +1,15 @@
 package com.mng.robotest.test80.mango.test.datastored;
 
+import java.io.Serializable;
+
 import com.mng.robotest.test80.mango.test.suites.PagosPaisesSuite.VersionPagosSuite;
 import com.mng.robotest.test80.mango.test.suites.ValesPaisesSuite.VersionValesSuite;
 
-public class FlagsTestCkout implements Cloneable {
-    public boolean validaPasarelas = false;
+public class FlagsTestCkout implements Cloneable, Serializable {
+	
+	private static final long serialVersionUID = 914173092359264587L;
+	
+	public boolean validaPasarelas = false;
     public boolean validaPagos = false;
     public boolean validaPedidosEnManto = false;
     public boolean forceTestMisCompras = false;

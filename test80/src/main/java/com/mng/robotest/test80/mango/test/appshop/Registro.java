@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,9 +39,11 @@ import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroSegunda
 import com.mng.robotest.test80.mango.test.suites.RegistrosSuite.VersionRegistroSuite;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
-public class Registro {
+public class Registro implements Serializable {
     
-    private final static Pais españa = PaisGetter.get(PaisShop.España);
+	private static final long serialVersionUID = 9220128375933995114L;
+	
+	private final static Pais españa = PaisGetter.get(PaisShop.España);
     private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
     
     private String index_fact = "";
@@ -64,7 +67,7 @@ public class Registro {
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());
-        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+        //dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 
         //Si el acceso es normal (no es desde una @Factory) utilizaremos el España/Castellano
         if (this.paisFactory==null) {
@@ -84,7 +87,7 @@ public class Registro {
     public void REG001_RegistroNOK() throws Exception {
     	DataCtxShop dCtxSh = getCtxShForTest();
     	WebDriver driver = TestMaker.getDriverTestCase();
-    	TestMaker.getTestCase().setRefineDataName(index_fact);
+    	TestMaker.getTestCase().setSpecificInputData(index_fact);
         dCtxSh.userRegistered = false;
         if (dCtxSh.appE==AppEcom.votf) {
             return;
@@ -130,7 +133,7 @@ public class Registro {
     public void REG002_RegistroOK_publi() throws Exception {
     	DataCtxShop dCtxSh = getCtxShForTest();
     	WebDriver driver = TestMaker.getDriverTestCase();
-    	TestMaker.getTestCase().setRefineDataName(index_fact);
+    	TestMaker.getTestCase().setSpecificInputData(index_fact);
     	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
         if (inputParamsSuite.getTypeAccess()==TypeAccess.Bat) {
             return;
@@ -149,7 +152,7 @@ public class Registro {
         groups={"Registro", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
         description="Alta/Registro de un usuario (sin seleccionar el link de publicidad)")
     public void REG003_RegistroOK_NoPubli() throws Exception {
-    	TestMaker.getTestCase().setRefineDataName(index_fact);
+    	TestMaker.getTestCase().setSpecificInputData(index_fact);
     	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
         if (inputParamsSuite.getTypeAccess()==TypeAccess.Bat) {
             return; 

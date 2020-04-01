@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.manto;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageGestorConsultaCambioFamilia extends WebdrvWrapp {
+public class PageGestorConsultaCambioFamilia {
 
     public static String titulo = "Consulta y cambio de familia";
     static String iniXPathTitulo = "//td[@class='txt11B' and text()[contains(.,'";
@@ -28,15 +29,17 @@ public class PageGestorConsultaCambioFamilia extends WebdrvWrapp {
     }
     
 	public static boolean isPage(WebDriver driver) {
-		return (isElementPresent(driver, By.xpath(getXPathTitulo(titulo))));
+		String xpath = getXPathTitulo(titulo);
+		return (state(Present, By.xpath(xpath), driver).check());
 	}
 
 	public static boolean isVisibleConsultaTable(WebDriver driver) {
-		return isElementVisible(driver, By.xpath(XPathConsultaTable));
+		return (state(Visible, By.xpath(XPathConsultaTable), driver).check());
 	}
 
 	public static boolean isDisabledConsultaButton(WebDriver driver) {
-		return isElementPresent(driver, By.xpath(getXPathConsultaButtonDisabled()));
+		String xpath = getXPathConsultaButtonDisabled();
+		return (state(Present, By.xpath(xpath), driver).check());
 	}
 
 	public static void selectAccesoriosAndClickConsultaPorFamiliaButton(WebDriver driver) throws Exception {
@@ -49,16 +52,16 @@ public class PageGestorConsultaCambioFamilia extends WebdrvWrapp {
 		driver.findElement(By.xpath(XPathSelectFamiliaOptionAccesorios)).click();
 	}
 
-	private static void clickConsultaPorFamiliaButton(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathConsultarPorFamiliaButton), 30);
+	private static void clickConsultaPorFamiliaButton(WebDriver driver) {
+		click(By.xpath(XPathConsultarPorFamiliaButton), driver).waitLoadPage(30).exec();
 	}
 
-	public static void clickCambioFamiliaButton(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver,By.xpath(XPathCambioFamiliaButton) ,30);
+	public static void clickCambioFamiliaButton(WebDriver driver) {
+		click(By.xpath(XPathCambioFamiliaButton), driver).exec();
 	}
 
 	public static boolean isTablaProductosVisible(WebDriver driver) {
-		return isElementVisible(driver, By.xpath(XPathTablaProductos));
+		return (state(Visible, By.xpath(XPathTablaProductos), driver).check());
 	}
 
 	public static boolean checkFirstRowProductIsRight(WebDriver driver) {
@@ -66,9 +69,7 @@ public class PageGestorConsultaCambioFamilia extends WebdrvWrapp {
 	}
 
 	public static boolean isTablaCambioFamiliaVisible(WebDriver driver) {
-		return isElementVisible(driver, By.xpath(XPathCambioFamiliaTable));
+		return (state(Visible, By.xpath(XPathCambioFamiliaTable), driver).check());
 	}
 
-	
-	
 }

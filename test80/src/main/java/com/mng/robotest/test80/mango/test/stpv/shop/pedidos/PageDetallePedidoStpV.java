@@ -13,14 +13,17 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.PageDetallePedido.DetallePedido;
 
 public class PageDetallePedidoStpV {
-	PageDetallePedido pageDetalle;
+	
+	private final WebDriver driver;
+	private final PageDetallePedido pageDetalle;
 	
     public PageDetallePedidoStpV(WebDriver driver) {
-		PageDetallePedido pageDetalle = DetallePedido.New.getPageObject();
-		if (pageDetalle.isPage(driver)) {
+    	this.driver = driver;
+		PageDetallePedido pageDetalle = DetallePedido.New.getPageObject(driver);
+		if (pageDetalle.isPage()) {
 			this.pageDetalle = pageDetalle;
 		} else {
-			this.pageDetalle = DetallePedido.Old.getPageObject();
+			this.pageDetalle = DetallePedido.Old.getPageObject(driver);
 		}
     }
     
@@ -28,28 +31,27 @@ public class PageDetallePedidoStpV {
     	return this.pageDetalle;
     }
     
-    public void validateIsPageOk(CompraOnline compraOnline, String codPais, WebDriver driver) 
-    throws Exception {
+    public void validateIsPageOk(CompraOnline compraOnline, String codPais, WebDriver driver) {
         String codPedido = compraOnline.numPedido;
         String importeTotal = compraOnline.importe.replaceAll("[^\\d.,]", "");  //Eliminamos la divisa;
-        validateIsPageOk(codPedido, importeTotal, codPais, driver);
-        areOkPrendasOnline(compraOnline.numPrendas, driver);
+        validateIsPageOk(codPedido, importeTotal, codPais);
+        areOkPrendasOnline(compraOnline.numPrendas);
     }
     
     @Validation
-    public ChecksTM areOkPrendasOnline(int numPrendasCompraOnline, WebDriver driver) throws Exception {
+    public ChecksTM areOkPrendasOnline(int numPrendasCompraOnline) {
     	ChecksTM validations = ChecksTM.getNew();
-	    int maxSecondsWait = 2;
+	    int maxSeconds = 2;
       	validations.add(
-      		"Es visible alguna prenda (la esperamos hasta " + maxSecondsWait + " segundos)",
-      		pageDetalle.isVisiblePrendaUntil(maxSecondsWait, driver), State.Info);	
+      		"Es visible alguna prenda (la esperamos hasta " + maxSeconds + " segundos)",
+      		pageDetalle.isVisiblePrendaUntil(maxSeconds), State.Info);	
       	validations.add(
       		"Aparecen " + numPrendasCompraOnline + " prendas",
-      		pageDetalle.getNumPrendas(driver)==numPrendasCompraOnline, State.Warn);	
+      		pageDetalle.getNumPrendas()==numPrendasCompraOnline, State.Warn);	
     	return validations;
     }
     
-    public void validateIsPageOk(DataPedido dataPedido, WebDriver driver) {
+    public void validateIsPageOk(DataPedido dataPedido) {
         String codPedido = dataPedido.getCodpedido();
         String importeTotalManto = dataPedido.getImporteTotalManto();
         String codPais = dataPedido.getCodigoPais();
@@ -57,28 +59,28 @@ public class PageDetallePedidoStpV {
 //    	//TODO tratamiento específico temporal para el entorno de CI con Adyen -> Level.Info 
 //    	//(hasta que dispongamos de la CI que despliega Adyen y el resto de artefactos satelitales)
 //        boolean isAdyenAndCI = (dataPedido.getPago().isAdyen() && UtilsMangoTest.isEntornoCI(app, dFTest));
-        validateIsPageOk(codPedido, importeTotalManto, codPais, driver);
+        validateIsPageOk(codPedido, importeTotalManto, codPais);
     }
     
     @Validation
-    private ChecksTM validateIsPageOk(String codPedido, String importeTotalWithoutCurrency, String codPais, WebDriver driver) {
+    private ChecksTM validateIsPageOk(String codPedido, String importeTotalWithoutCurrency, String codPais) {
     	ChecksTM validations = ChecksTM.getNew();
       	validations.add(
       		"Aparece la página de detalle del pedido",
-      		pageDetalle.isPage(driver), State.Warn);	   
+      		pageDetalle.isPage(), State.Warn);	   
       	validations.add(
       		"En la página figura el Nº de pedido: " + codPedido,
       		driver.getPageSource().contains(codPedido), State.Info);	
       	validations.add(
       		"Como total figura el importe: " + importeTotalWithoutCurrency,
-      		pageDetalle.isPresentImporteTotal(importeTotalWithoutCurrency, codPais, driver), State.Info);
+      		pageDetalle.isPresentImporteTotal(importeTotalWithoutCurrency, codPais), State.Info);
       	return validations;
     }
     
     @Step (
     	description="Seleccionar el link necesario para volver a la página inicial de \"Mis Compras\"",
     	expected="Se vuelve a la página inicial de \"Mis Compras\"")
-    public void clickBackButton(Channel channel, WebDriver driver) throws Exception {
-        pageDetalle.clickBackButton(channel, driver);
+    public void clickBackButton(Channel channel) {
+        pageDetalle.clickBackButton(channel);
     }
 }

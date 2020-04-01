@@ -31,10 +31,10 @@ public class PagePedidosMantoStpV {
     public static ChecksResultWithFlagLinkCodPed validaLineaPedido(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
         ChecksResultWithFlagLinkCodPed validations = ChecksResultWithFlagLinkCodPed.getNew();
     	
-        int maxSecondsWait = 30;
+        int maxSeconds = 30;
 	 	validations.add(
-			"Desaparece la capa de Loading de \"Consultando\"" + " (lo esperamos hasta " + maxSecondsWait + " segundos)",
-			PagePedidos.isInvisibleCapaLoadingUntil(maxSecondsWait, driver), State.Defect);
+			"Desaparece la capa de Loading de \"Consultando\"" + " (lo esperamos hasta " + maxSeconds + " segundos)",
+			PagePedidos.isInvisibleCapaLoadingUntil(maxSeconds, driver), State.Defect);
 	 	
 	 	validations.setExistsLinkCodPed(PagePedidos.isPresentDataInPedido(IdColumn.idpedido, dataPedido.getCodigoPedidoManto(), TypeDetalle.pedido, 0, driver));
 	 	validations.add(
@@ -132,12 +132,14 @@ public class PagePedidosMantoStpV {
 		saveErrorData=SaveWhen.Never)
 	public static DataPedido getDataCliente(DataPedido dPedidoPrueba, WebDriver driver) throws Exception {
 		PageDetallePedido.clickLinkDetallesCliente(driver);
-		dPedidoPrueba.getPago().setDni(PageDetalleCliente.getUserDniText(driver));
+		PageDetalleCliente pageDetalleCliente = new PageDetalleCliente(driver);
+		dPedidoPrueba.getPago().setDni(pageDetalleCliente.getUserDniText());
 		if (dPedidoPrueba.getPago().getDni().equals("")) {
 			dPedidoPrueba.getPago().setDni("41507612h");
 		}
-		dPedidoPrueba.getPago().setUseremail(PageDetalleCliente.getUserEmailText(driver));
-		PageDetalleCliente.clickLinkVolverPedidos(driver);
+		
+		dPedidoPrueba.getPago().setUseremail(pageDetalleCliente.getUserEmailText());
+		pageDetalleCliente.clickLinkVolverPedidos();
 		checkAfterSearchPedido(dPedidoPrueba, driver);
 		
 		return dPedidoPrueba;

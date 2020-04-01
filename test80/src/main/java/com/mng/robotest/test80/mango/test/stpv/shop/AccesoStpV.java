@@ -14,6 +14,8 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.domain.suitetree.StepTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.NodoStatus;
@@ -22,8 +24,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIdentificacion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper;
@@ -95,27 +96,27 @@ public class AccesoStpV {
 	@Validation
 	private static ChecksTM checkLinksAfterLogin(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 5;
+        int maxSeconds = 5;
         MenusUserWrapper userMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver).getMenusUser();
     	validations.add(
-    		"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		userMenus.isMenuInStateUntil(UserMenu.miCuenta, StateElem.Present, maxSecondsWait), State.Defect);
+    		"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + maxSeconds + " segundos)",
+    		userMenus.isMenuInStateUntil(UserMenu.miCuenta, Present, maxSeconds), State.Defect);
 		
-		boolean isVisibleMenuFav = userMenus.isMenuInStateUntil(UserMenu.favoritos, StateElem.Present, 0);
+		boolean isVisibleMenuFav = userMenus.isMenuInStateUntil(UserMenu.favoritos, Present, 0);
 		if (dCtxSh.appE==AppEcom.outlet) { 
 	    	validations.add(
 	    		"NO aparece el link \"Favoritos\"",
 	    		!isVisibleMenuFav, State.Defect);
 	    	validations.add(
 	    		"Aparece el link \"Mis Pedidos\"",
-	    		userMenus.isMenuInState(UserMenu.pedidos, StateElem.Present), State.Defect);
+	    		userMenus.isMenuInState(UserMenu.pedidos, Present), State.Defect);
 		} else {
 	    	validations.add(
 	    		"Aparece el link \"Favoritos\"",
 	    		isVisibleMenuFav, State.Defect);
 	    	
 	    	if (dCtxSh.channel!=Channel.desktop) {
-		    	boolean isPresentLinkMisCompras = userMenus.isMenuInState(UserMenu.misCompras, StateElem.Present);
+		    	boolean isPresentLinkMisCompras = userMenus.isMenuInState(UserMenu.misCompras, Present);
 		    	if (dCtxSh.pais.isMisCompras()) {
 			    	validations.add(
 			    		"Aparece el link \"Mis Compras\"",
@@ -131,10 +132,10 @@ public class AccesoStpV {
 		if (dCtxSh.channel!=Channel.desktop || dCtxSh.appE!=AppEcom.shop) {
 	    	validations.add(
 	    		"Aparece el link \"Ayuda\"",
-	    		userMenus.isMenuInState(UserMenu.ayuda, StateElem.Visible), State.Defect);
+	    		userMenus.isMenuInState(UserMenu.ayuda, Visible), State.Defect);
 	    	validations.add(
 	    		"Aparece el link \"Cerrar sesión\"",
-	    		userMenus.isMenuInState(UserMenu.cerrarSesion, StateElem.Present), State.Defect);
+	    		userMenus.isMenuInState(UserMenu.cerrarSesion, Present), State.Defect);
 		}
     	
         if (dCtxSh.channel==Channel.desktop) {
@@ -168,7 +169,7 @@ public class AccesoStpV {
     
     public static void identificacionEnMango(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
     	MenusUserWrapper userMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver).getMenusUser();
-        if (!userMenus.isMenuInState(UserMenu.cerrarSesion, StateElem.Present)) {
+        if (!userMenus.isMenuInState(UserMenu.cerrarSesion, Present)) {
         	iniciarSesion(dCtxSh, driver);
         }
     }
@@ -260,7 +261,7 @@ public class AccesoStpV {
         TestMaker.getCurrentStepInExecution().replaceInDescription(tagLiteralIdiomaOrigen, idiomaOrigen.getLiteral());
         
         driver.get(urlAccesoPaisNoIp);
-        WebdrvWrapp.waitForPageLoaded(driver);
+        SeleniumUtils.waitForPageLoaded(driver);
         if (vecesPaisConfPrev < 2) {
             //Si se ha confirmado el país < 2 veces debería aparecer el modal del cambio de país
         	ResultValWithPais resultVal = validacAccesoSiApareceModal(urlBaseTest, paisAccesoNoIP, paisAccesoPrevio, paisPrevConf, listPaisAsocIP, driver);
@@ -343,13 +344,13 @@ public class AccesoStpV {
     @Step (
     	description="Confirmamos la propuesta de país del modal <b>" + tagPaisBotonCambio + "</b>", 
         expected="Se redirige a la URL " + tagHrefBotonCambio)
-    public static void selectConfirmPaisModal(WebDriver driver) throws Exception {
+    public static void selectConfirmPaisModal(WebDriver driver) {
         String paisBotonCambio = ModalCambioPais.getTextPaisButtonChagePais(driver);
         String hrefBotonCambioPais = ModalCambioPais.getHRefPaisButtonChagePais(driver);
         TestMaker.getCurrentStepInExecution().replaceInDescription(tagPaisBotonCambio, paisBotonCambio);
         TestMaker.getCurrentStepInExecution().replaceInExpected(tagHrefBotonCambio, hrefBotonCambioPais);
         
-        ModalCambioPais.clickButtonChangePais(driver);       
+        ModalCambioPais.clickButtonChangePais(driver);
         checkIsDoneRedirectToCountry(paisBotonCambio, hrefBotonCambioPais, driver);
     }
     

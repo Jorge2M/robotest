@@ -13,22 +13,25 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
+import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
 import com.mng.robotest.test80.mango.test.pageobject.utils.LocalStorage;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
+//import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
 import com.mng.robotest.test80.mango.test.utils.testab.TestABactive;
 
 /**
  * Clase que define la automatización de las diferentes funcionalidades de la página de "GALERÍA DE PRODUCTOS"
  * @author jorge.munoz
  */
-public class PagePrehome extends WebdrvWrapp {
+public class PagePrehome {
 	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     enum ButtonEnter {Enter, Continuar};
 	
@@ -67,15 +70,16 @@ public class PagePrehome extends WebdrvWrapp {
     		return("//div[@id='lang_" + codigoPais + "']/div[@class[contains(.,'modalFormEnter')]]");
     	}
     }
-    
-    public static boolean isPage(WebDriver driver) {
-        return isElementPresent(driver, By.xpath(XPathDivPaisSeleccionado));
-    }
-    
-    public static boolean isNotPageUntil(int maxSecondsToWait, WebDriver driver) {
-    	return isElementInvisibleUntil(driver, By.xpath(XPathDivPaisSeleccionado), maxSecondsToWait);
-    }
-    
+
+	public static boolean isPage(WebDriver driver) {
+		return (state(Present, By.xpath(XPathDivPaisSeleccionado), driver).check());
+	}
+
+	public static boolean isNotPageUntil(int maxSeconds, WebDriver driver) {
+		return (state(Invisible, By.xpath(XPathDivPaisSeleccionado), driver)
+				.wait(maxSeconds).check());
+	}
+
     /**
      * @return el código de país que existe en pantalla en base a su nombre
      */
@@ -84,33 +88,21 @@ public class PagePrehome extends WebdrvWrapp {
         String codigoPais = driver.findElement(By.xpath(xpathOptionPais)).getAttribute("value");
         return codigoPais;
     }
-    
-    /**
-     * @return si el país seleccionado tiene asociada la marca de compra online (indicada con el icono de la bolsa)
-     */
-    public static boolean isPaisSelectedWithMarcaCompra(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathIconSalePaisSeleccionado)));        
-    }    
-    
-    /**
-     * @return indica si está seleccionado el país indicado en 'nombrePais'
-     */
-    public static boolean isPaisSelectedDesktop(WebDriver driver, String nombrePais) {
-        return (driver.findElement(By.xpath(XPathDivPaisSeleccionado)).getText().contains(nombrePais));
-    }
-    
-    /**
-     * Averigua si existe el desplegable de provincias
-     */
-    public static boolean existeDesplProvincias(WebDriver driver) {
-        return (
-        	isElementPresent(driver, By.xpath(XPathDivProvincias)) && 
-            driver.findElement(By.xpath(XPathDivProvincias)).isDisplayed());
-    }    
-    
-    /**
-     * Despliega la lista de países
-     */
+
+	public static boolean isPaisSelectedWithMarcaCompra(WebDriver driver) {
+		return (state(Visible, By.xpath(XPathIconSalePaisSeleccionado), driver).check());
+	}
+
+	public static boolean isPaisSelectedDesktop(WebDriver driver, String nombrePais) {
+		return (driver.findElement(By.xpath(XPathDivPaisSeleccionado)).getText().contains(nombrePais));
+	}
+
+	public static boolean existeDesplProvincias(WebDriver driver) {
+		return (
+			state(Present, By.xpath(XPathDivProvincias), driver).check() &&
+			driver.findElement(By.xpath(XPathDivProvincias)).isDisplayed());
+	}
+
     public static void desplieguaListaPaises(WebDriver driver) {
     	moveToElement(By.xpath(XPathDivPaisSeleccionado), driver);
         driver.findElement(By.xpath(XPathDivPaisSeleccionado + "/a")).click();
@@ -129,7 +121,7 @@ public class PagePrehome extends WebdrvWrapp {
             driver.findElement(By.xpath(xpathListaProv)).click();
             
             //Introducimos la provincia Barcelona
-            sendKeysWithRetry(3, "Barcelona", By.xpath(xpathListaProv + "//div[@class[contains(.,'chosen-search')]]/input"), driver);
+            sendKeysWithRetry("Barcelona", By.xpath(xpathListaProv + "//div[@class[contains(.,'chosen-search')]]/input"), 3, driver);
             
             //Seleccionamos la provincia encontrada
             driver.findElement(By.xpath(xpathListaProv + "//div[@class='chosen-drop']/ul/li")).click();
@@ -138,16 +130,13 @@ public class PagePrehome extends WebdrvWrapp {
             //Seleccionamos la provincia 8 (Barcelona)
             driver.findElement(By.xpath("//select[@id[contains(.,'province')]]/option[@value='" + "8" + "']")).click();
     }    
-    
-    /**
-     * Selecciona un idioma concreto de entre los que aparecen por pantalla
-     */
-    public static void seleccionaIdioma(WebDriver driver, String nombrePais, String nombreIdioma) throws Exception {
-        String codigoPais = getCodigoPais(driver, nombrePais);
-        String xpathButtonIdioma = getXPathButtonIdioma(codigoPais, nombreIdioma);
-        clickAndWaitLoad(driver, By.xpath(xpathButtonIdioma), TypeOfClick.javascript);
-    }
-    
+
+	public static void seleccionaIdioma(WebDriver driver, String nombrePais, String nombreIdioma) {
+		String codigoPais = getCodigoPais(driver, nombrePais);
+		String xpathButtonIdioma = getXPathButtonIdioma(codigoPais, nombreIdioma);
+		click(By.xpath(xpathButtonIdioma), driver).type(TypeClick.javascript).exec();
+	}
+
     /**
      * Introducimos el nombre del país en el campo de input de "Busca tu país..." y lo seleccionamos
      */
@@ -180,40 +169,37 @@ public class PagePrehome extends WebdrvWrapp {
         	pLogger.warn("Exception clicking button for Enter. But perhaps the click have work fine", e);
         }
     }
-    
-    public static boolean clickButtonForEnterIfExists(ButtonEnter buttonEnter, String codigoPais, WebDriver driver) throws Exception {
-    	String xpathButton = getXPathButtonForEnter(buttonEnter, codigoPais);
-        if (isElementPresent(driver, By.xpath(xpathButton)) && driver.findElement(By.xpath(xpathButton)).isDisplayed()) {
-        	moveToElement(By.xpath(xpathButton), driver);
-        	clickAndWaitLoad(driver, By.xpath(xpathButton + "/a"), TypeOfClick.javascript);
-            return true;
-        }    	
-        
-        return false;
-    }
-    
-    /**
-     * En caso de existir el modal de NewsLetter lo cerramos
-     */
-    @SuppressWarnings("unchecked")
-    public static void closeModalNewsLetterIfExists(WebDriver driver) {
-        //Capturamos la variable JavaScript "sessionObjectJson"
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        Object result = js.executeScript("return sessionObjectsJson");
-        if (result!=null) {
-            Map<String,Object> resultMap = (Map<String,Object>)result;
-          
-            //Si figura para lanzar la llamada JSON de NewsLetter
-            if (resultMap.entrySet().toString().contains("modalRegistroNewsletter")) {
-                String xpathDivModal = "//div[@id='modalNewsletter']";
-                if (isElementVisibleUntil(driver, By.xpath(xpathDivModal), 5/*seconds*/)) {
-                    //Clickamos al aspa para cerrar el modal
-                    driver.findElement(By.xpath(xpathDivModal + "//div[@id='modalClose']")).click();
-                }
-            }
-        }
-    }
-    
+
+	public static boolean clickButtonForEnterIfExists(ButtonEnter buttonEnter, String codigoPais, WebDriver driver) {
+		String xpathButton = getXPathButtonForEnter(buttonEnter, codigoPais);
+		if (state(Present, By.xpath(xpathButton), driver).check() && 
+			driver.findElement(By.xpath(xpathButton)).isDisplayed()) {
+			moveToElement(By.xpath(xpathButton), driver);
+			click(By.xpath(xpathButton + "/a"), driver).type(TypeClick.javascript).exec();
+			return true;
+		}
+		return false;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static void closeModalNewsLetterIfExists(WebDriver driver) {
+		//Capturamos la variable JavaScript "sessionObjectJson"
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		Object result = js.executeScript("return sessionObjectsJson");
+		if (result!=null) {
+			Map<String,Object> resultMap = (Map<String,Object>)result;
+
+			//Si figura para lanzar la llamada JSON de NewsLetter
+			if (resultMap.entrySet().toString().contains("modalRegistroNewsletter")) {
+				String xpathDivModal = "//div[@id='modalNewsletter']";
+				if (state(Visible, By.xpath(xpathDivModal), driver).wait(5).check()) {
+					//Clickamos al aspa para cerrar el modal
+					driver.findElement(By.xpath(xpathDivModal + "//div[@id='modalClose']")).click();
+				}
+			}
+		}
+	}
+
     public static void setInitialModalsOff(WebDriver driver) {
         Cookie ck = new Cookie("modalRegistroNewsletter", "0");
         driver.manage().addCookie(ck);
@@ -228,7 +214,7 @@ public class PagePrehome extends WebdrvWrapp {
      * Ejecuta una acceso a la shop vía la páinga de prehome
      */
     public static void accesoShopViaPrehome(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-        goToPagePrehome(dCtxSh.urlAcceso, driver);
+    	identJCASifExists(/*dCtxSh.urlAcceso,*/ driver);
         TestABactive.currentTestABsToActivate(dCtxSh.channel, dCtxSh.appE, driver);
         PagePrehome.selecPaisIdiomaYAccede(dCtxSh, driver);
         ModalLoyaltyAfterAccess.closeModalIfVisible(driver);
@@ -247,13 +233,10 @@ public class PagePrehome extends WebdrvWrapp {
         selecionProvIdiomAndEnter(dCtxSh.pais, dCtxSh.idioma, dCtxSh.channel, driver);
     }
     
-    /**
-     * Nos posiconamos en la página de Prehome desde una URL (sorteando la página de JCAS si aparece)
-     */
-    public static void goToPagePrehome(String urlPreHome, WebDriver driver) throws Exception {
+    public static void identJCASifExists(/*String urlPreHome, */WebDriver driver) {
     	//Temporal para test Canary!!!
     	//AccesoNavigations.goToInitURL(urlPreHome + "?canary=true", driver);
-    	AccesoNavigations.goToInitURL(urlPreHome, driver);
+    	AccesoNavigations.goToInitURL(/*urlPreHome,*/ driver);
         waitForPageLoaded(driver);
         if (PageJCAS.thisPageIsShown(driver)) {
             PageJCAS.identication(driver, "jorge.munoz", "2010martina");

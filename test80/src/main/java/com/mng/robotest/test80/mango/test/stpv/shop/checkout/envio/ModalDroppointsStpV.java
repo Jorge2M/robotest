@@ -20,13 +20,13 @@ public class ModalDroppointsStpV {
     @Validation
     public static ChecksTM validaIsVisible(Channel channel, WebDriver driver) {
     	ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 3;
+        int maxSeconds = 3;
       	validations.add(
-    		"Desaparece el mensaje de \"Cargando...\" (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		ModalDroppoints.isInvisibleCargandoMsgUntil(maxSecondsWait, driver), State.Warn);
+    		"Desaparece el mensaje de \"Cargando...\" (lo esperamos hasta " + maxSeconds + " segundos)",
+    		ModalDroppoints.isInvisibleCargandoMsgUntil(maxSeconds, driver), State.Warn);
       	validations.add(
-    		"Aparece un 1er Droppoint visible (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		ModalDroppoints.secSelectDPoint.isDroppointVisibleUntil(1, maxSecondsWait, driver), State.Info);
+    		"Aparece un 1er Droppoint visible (lo esperamos hasta " + maxSeconds + " segundos)",
+    		ModalDroppoints.secSelectDPoint.isDroppointVisibleUntil(1, maxSeconds, driver), State.Info);
       	validations.add(
     		"Sí aparece el modal con el mapa de Droppoints",
     		ModalDroppoints.isVisible(channel, driver), State.Defect);

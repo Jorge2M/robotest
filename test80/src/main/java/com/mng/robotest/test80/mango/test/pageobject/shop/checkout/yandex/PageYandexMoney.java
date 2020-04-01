@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.yandex;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageYandexMoney extends WebdrvWrapp {
+public class PageYandexMoney {
 
     public static String urlAccess = "https://demomoney.yandex.ru/shop.xml?scid=50215";
     static String XPathInputPaymentCode = "//input[@id='dstAccount']";
@@ -26,23 +27,23 @@ public class PageYandexMoney extends WebdrvWrapp {
     }
     
     public static void inputPaymentCode(String inputValue, WebDriver driver) {
-        sendKeysWithRetry(3, inputValue, By.xpath(XPathInputPaymentCode), driver);
+        sendKeysWithRetry(inputValue, By.xpath(XPathInputPaymentCode), 2, driver);
     }
     
     public static void inputImport(String inputValue, WebDriver driver) {
         driver.findElement(By.xpath(XPathInputImport)).clear();
-        sendKeysWithRetry(2, inputValue, By.xpath(XPathInputImport), driver);
+        sendKeysWithRetry(inputValue, By.xpath(XPathInputImport), 2, driver);
     }
     
     public static boolean isVisibleInputPaymentCode(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathInputPaymentCode)));
+    	return (state(Visible, By.xpath(XPathInputPaymentCode), driver).check());
     }
     
     public static boolean isVisibleInputImport(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathInputImport)));
+    	return (state(Visible, By.xpath(XPathInputImport), driver).check());
     }
-    
-    public static void clickPayButton(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathPayButton));
-    }
+
+	public static void clickPayButton(WebDriver driver) {
+		click(By.xpath(XPathPayButton), driver).exec();
+	}
 }

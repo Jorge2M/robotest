@@ -28,7 +28,7 @@ public class PagoPaytrail extends PagoStpV {
         if (execPay) {
             this.dCtxPago.getDataPedido().setCodtipopago("F");
             String codigoPais = this.dCtxPago.getDataPedido().getCodigoPais();
-            PagePaytrailEpaymentStpV.clickCodeCardOK(dCtxPago.getDataPedido().getImporteTotal(), codigoPais, driver);            
+            new PagePaytrailEpaymentStpV(driver).clickCodeCardOK(dCtxPago.getDataPedido().getImporteTotal(), codigoPais);
             PagePaytrailIdConfirmStpV.inputIDAndClickConfirmar("V2360A71", dCtxPago.getDataPedido().getImporteTotal(), codigoPais, driver);
             PagePaytrailResultadoOkStpV.clickVolverAMangoButton(driver);
         }

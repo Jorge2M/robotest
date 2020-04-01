@@ -1,18 +1,17 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.loyalty;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class PageHomePurchaseWithDiscount extends WebdrvWrapp {
-
-	WebDriver driver;
+public class PageHomePurchaseWithDiscount extends PageObjTM {
 
 	String idBlockLoyalty = "loyaltyLoyaltySpace";
 	String xpathButtonPurchaseNow = "//a[text()='Comprar ahora']";
 
 	private PageHomePurchaseWithDiscount(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 	}
 	
 	public static PageHomePurchaseWithDiscount getNewInstance(WebDriver driver) {
@@ -20,10 +19,10 @@ public class PageHomePurchaseWithDiscount extends WebdrvWrapp {
 	}
 	
 	public boolean checkIsPage() {
-		return (WebdrvWrapp.isElementVisible(driver, By.id(idBlockLoyalty)));
+		return (state(Visible, By.id(idBlockLoyalty)).check());
 	}
 
 	public boolean areVisibleButtonPurchaseNow() {
-		return (WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(xpathButtonPurchaseNow), 2));
+		return (state(Visible, By.xpath(xpathButtonPurchaseNow)).wait(2).check());
 	}
 }

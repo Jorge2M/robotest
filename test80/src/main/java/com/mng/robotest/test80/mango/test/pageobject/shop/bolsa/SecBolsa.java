@@ -13,10 +13,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
+import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
@@ -25,7 +27,8 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
  * @author jorge.munoz
  *
  */
-public class SecBolsa extends WebdrvWrapp {
+public class SecBolsa {
+	
 	public enum StateBolsa {Open, Closed}
     static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     public static LineasArticuloBolsa lineasArticuloBolsa;
@@ -94,60 +97,56 @@ public class SecBolsa extends WebdrvWrapp {
         return xpathCapaBolsa + "//*[@class='contenedor_precio_transporte']"; 
     }
 
-    public static boolean isInStateUntil(StateBolsa stateBolsaExpected, Channel channel, int maxSecondsWait, WebDriver driver) {
-    	switch (stateBolsaExpected) {
-    	case Open:
-    		if (isElementVisibleUntil(driver, By.xpath(SecBolsa.getXPathPanelBolsa(channel)), maxSecondsWait)) {
-    			return true;
-    		}
-    		break;
-    	case Closed:
-    		if (isElementInvisibleUntil(driver, By.xpath(SecBolsa.getXPathPanelBolsa(channel)), maxSecondsWait)) {
-    			return true;
-    		}
-    		break;
-    	}
-    	
-    	return false;
-    }  
-    
-    
-    public static void setBolsaToStateIfNotYet(StateBolsa stateBolsaExpected, Channel channel, AppEcom app, WebDriver driver) 
-    throws Exception {
-        if (!isInStateUntil(stateBolsaExpected, channel, 1, driver)) {
-        	setBolsaToState(stateBolsaExpected, channel, app, driver);
-        }
-    }
-    
-    static void setBolsaToState(StateBolsa stateBolsaExpected, Channel channel, AppEcom app, WebDriver driver) 
-    throws Exception {
+	public static boolean isInStateUntil(StateBolsa stateBolsaExpected, Channel channel, int maxSeconds, WebDriver driver) {
+		switch (stateBolsaExpected) {
+		case Open:
+			String xpath = SecBolsa.getXPathPanelBolsa(channel);
+			if (state(Visible, By.xpath(xpath), driver).wait(maxSeconds).check()) {
+				return true;
+			}
+			break;
+		case Closed:
+			String xpath2 = SecBolsa.getXPathPanelBolsa(channel);
+			if (state(Invisible, By.xpath(xpath2), driver).wait(maxSeconds).check()) {
+				return true;
+			}
+			break;
+		}
+		
+		return false;
+	}
+
+	public static void setBolsaToStateIfNotYet(StateBolsa stateBolsaExpected, Channel channel, AppEcom app, WebDriver driver) {
+		if (!isInStateUntil(stateBolsaExpected, channel, 1, driver)) {
+			setBolsaToState(stateBolsaExpected, channel, app, driver);
+		}
+	}
+
+	static void setBolsaToState(StateBolsa stateBolsaExpected, Channel channel, AppEcom app, WebDriver driver) {
 		SecCabecera secCabecera = SecCabecera.getNew(channel, app, driver);
 		if (stateBolsaExpected==StateBolsa.Open || channel==Channel.desktop) {
 			secCabecera.clickIconoBolsaWhenDisp(2);
 		} else {
 			clickIconoCloseMobil(driver, channel);
 		}
-        isInStateUntil(stateBolsaExpected, channel, 2, driver);
-    }
-    
-    public static boolean isVisibleBotonComprar(Channel channel, WebDriver driver) {
-        String xpathComprarBt = SecBolsa.getXPATH_BotonComprar(channel);
-        return (isElementVisible(driver, By.xpath(xpathComprarBt)));
-    }
+		isInStateUntil(stateBolsaExpected, channel, 2, driver);
+	}
 
-    public static boolean isVisibleBotonComprarUntil(WebDriver driver, Channel channel, int maxSecondsToWait) {
-        String xpathBoton = getXPATH_BotonComprar(channel);
-        return (isElementVisibleUntil(driver, By.xpath(xpathBoton), maxSecondsToWait));
-    }
-    
-    /**
-     * Esperamos a que esté disponible y seleccionamos el botón "COMPRAR" de la bolsa
-     */
-    public static void clickBotonComprar(WebDriver driver, Channel channel, int secondsWait) throws Exception {
-        String xpathComprarBt = SecBolsa.getXPATH_BotonComprar(channel);
-        new WebDriverWait(driver, secondsWait).until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathComprarBt)));
-        clickAndWaitLoad(driver, By.xpath(xpathComprarBt), TypeOfClick.javascript);
-    }
+	public static boolean isVisibleBotonComprar(Channel channel, WebDriver driver) {
+		String xpathComprarBt = SecBolsa.getXPATH_BotonComprar(channel);
+		return (state(Visible, By.xpath(xpathComprarBt), driver).check());
+	}
+
+	public static boolean isVisibleBotonComprarUntil(WebDriver driver, Channel channel, int maxSeconds) {
+		String xpathBoton = getXPATH_BotonComprar(channel);
+		return (state(Visible, By.xpath(xpathBoton), driver).wait(maxSeconds).check());
+	}
+
+	public static void clickBotonComprar(WebDriver driver, Channel channel, int secondsWait) {
+		String xpathComprarBt = SecBolsa.getXPATH_BotonComprar(channel);
+		new WebDriverWait(driver, secondsWait).until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathComprarBt)));
+		click(By.xpath(xpathComprarBt), driver).type(TypeClick.javascript).exec();
+	}
     
     /**
      * @return el número que aparece en el icono de la bolsa y que se corresponde con el número de artículos que contiene
@@ -210,36 +209,33 @@ public class SecBolsa extends WebdrvWrapp {
         String precioTotal = SecBolsa.getPrecioSubTotal(channel, driver);
         return (ImporteScreen.getFloatFromImporteMangoScreen(precioTotal));
     }
-    
-    /**
-     * Obtenemos el precio del transporte
-     */
-    public static String getPrecioTransporte(WebDriver driver, Channel channel) {
-        String precioTotal = "0";
-        ListIterator<WebElement> itTotalEntero = null;
-        ListIterator<WebElement> itTotalDecimal = null;
-        String xpathImpTransp = getXPATH_precioTransporte(channel);
-        if (isElementPresent(driver, By.xpath(xpathImpTransp))) {
-            if (channel==Channel.movil_web) {
-                itTotalEntero = driver.findElements(By.xpath("(" + xpathImpTransp + ")[1]" + "//span[1]")).listIterator();
-                itTotalDecimal = driver.findElements(By.xpath("(" + xpathImpTransp + ")[1]" + "//span[2]")).listIterator();
-            } else {
-                itTotalEntero = driver.findElements(By.xpath(xpathImpTransp + "//*[@class='bolsa_price_big']")).listIterator();
-                itTotalDecimal = driver.findElements(By.xpath(xpathImpTransp + "//*[@class='bolsa_price_small']")).listIterator();
-            }
-            
-            while (itTotalEntero != null && itTotalEntero.hasNext())
-                precioTotal += itTotalEntero.next().getText();
-    
-            while (itTotalDecimal != null && itTotalDecimal.hasNext())
-                precioTotal += itTotalDecimal.next().getText();
-    
-            precioTotal = ImporteScreen.normalizeImportFromScreen(precioTotal);
-        }
-        
-        return precioTotal;
-    }
-    
+
+	public static String getPrecioTransporte(WebDriver driver, Channel channel) {
+		String precioTotal = "0";
+		ListIterator<WebElement> itTotalEntero = null;
+		ListIterator<WebElement> itTotalDecimal = null;
+		String xpathImpTransp = getXPATH_precioTransporte(channel);
+		if (state(Present, By.xpath(xpathImpTransp), driver).check()) {
+			if (channel==Channel.movil_web) {
+				itTotalEntero = driver.findElements(By.xpath("(" + xpathImpTransp + ")[1]" + "//span[1]")).listIterator();
+				itTotalDecimal = driver.findElements(By.xpath("(" + xpathImpTransp + ")[1]" + "//span[2]")).listIterator();
+			} else {
+				itTotalEntero = driver.findElements(By.xpath(xpathImpTransp + "//*[@class='bolsa_price_big']")).listIterator();
+				itTotalDecimal = driver.findElements(By.xpath(xpathImpTransp + "//*[@class='bolsa_price_small']")).listIterator();
+			}
+
+			while (itTotalEntero != null && itTotalEntero.hasNext()) {
+				precioTotal += itTotalEntero.next().getText();
+			}
+			while (itTotalDecimal != null && itTotalDecimal.hasNext()) {
+				precioTotal += itTotalDecimal.next().getText();
+			}
+			precioTotal = ImporteScreen.normalizeImportFromScreen(precioTotal);
+		}
+
+		return precioTotal;
+	}
+
     /**
      * @return el precio de transporte de la bolsa en formato float
      */
@@ -262,71 +258,63 @@ public class SecBolsa extends WebdrvWrapp {
             return false;
         }
     }
-    
-    public static void clickAspaMobil(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathAspaMobil));
-    }
-    
+
+	public static void clickAspaMobil(WebDriver driver) {
+		click(By.xpath(XPathAspaMobil), driver).exec();
+	}
+
     public static void clearArticuloAndWait(Channel channel, String refArticulo, WebDriver driver) throws Exception {
         //Seleccionar el link de la papelera para eliminar de la bolsa
         String xpathClearArt = getXPATH_LinkBorrarArt(channel, refArticulo);
         driver.findElement(By.xpath(xpathClearArt)).click();
         waitForPageLoaded(driver); 
     }
-    
-    /**
-     * Borrar todos los artículos existentes en la Bolsa. Selecciona los iconos de papelera que encuentra hasta que no encuentra más
-     */
-    @SuppressWarnings("static-access")
+
+	@SuppressWarnings("static-access")
 	public static void clearArticulos(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	setBolsaToStateIfNotYet(StateBolsa.Open, dCtxSh.channel, dCtxSh.appE, driver);
-        String xpathDeleteArt = SecBolsa.getXPATH_LinkBorrarArt(dCtxSh.channel);
-        int ii = 0;
-        do {
-            // Se comprueba si la bolsa tiene artículos
-            int numArticulos = lineasArticuloBolsa.getNumLinesArticles(dCtxSh.channel, driver);
-            int i = 0;
-            while (numArticulos > 0 && i < 50) { // 50 para evitar bucles infinitos
-                // Seleccionamos el link de borrar asociado a cada uno de los artículos
-                try {
-                    if (isElementPresent(driver, By.xpath(xpathDeleteArt))) {
-                        driver.findElement(By.xpath(xpathDeleteArt)).click();
-                    }
-                } catch (Exception e) {
-                    if (i==49) {
-                        pLogger.warn("Problem clearing articles from Bag. " + e.getClass().getName() + ". " + e.getMessage());
-                    }
-                }
+		setBolsaToStateIfNotYet(StateBolsa.Open, dCtxSh.channel, dCtxSh.appE, driver);
+		String xpathDeleteArt = SecBolsa.getXPATH_LinkBorrarArt(dCtxSh.channel);
+		int ii = 0;
+		do {
+			// Se comprueba si la bolsa tiene artículos
+			int numArticulos = lineasArticuloBolsa.getNumLinesArticles(dCtxSh.channel, driver);
+			int i = 0;
+			while (numArticulos > 0 && i < 50) { // 50 para evitar bucles infinitos
+				// Seleccionamos el link de borrar asociado a cada uno de los artículos
+				try {
+					if (state(Present, By.xpath(xpathDeleteArt), driver).check()) {
+						driver.findElement(By.xpath(xpathDeleteArt)).click();
+					}
+				} catch (Exception e) {
+					if (i==49) {
+						pLogger.warn("Problem clearing articles from Bag. " + e.getClass().getName() + ". " + e.getMessage());
+					}
+				}
 
-                try {
-                    new WebDriverWait(driver, 3).until(ExpectedConditions.presenceOfElementLocated(By.className("bagItem")));
-                    numArticulos = lineasArticuloBolsa.getNumLinesArticles(dCtxSh.channel, driver);
-                } 
-                catch (Exception e) {
-                    pLogger.debug("Problem getting num articles in Bag. " + e.getClass().getName() + ". " + e.getMessage());
-                    numArticulos = 0;
-                }
+				try {
+					new WebDriverWait(driver, 3).until(ExpectedConditions.presenceOfElementLocated(By.className("bagItem")));
+					numArticulos = lineasArticuloBolsa.getNumLinesArticles(dCtxSh.channel, driver);
+				} 
+				catch (Exception e) {
+					pLogger.debug("Problem getting num articles in Bag. " + e.getClass().getName() + ". " + e.getMessage());
+					numArticulos = 0;
+				}
+				i += 1;
+			}
+			ii += 1;
+		}
+		while (!numberItemsIsUntil("0"/*itemsMightHave*/, dCtxSh.channel, dCtxSh.appE, 0/*maxSecodsToWait*/, driver) && 
+				ii<10/* evitar bucles infinitos */);
 
-                i += 1;
-            }
+		setBolsaToStateIfNotYet(StateBolsa.Closed, dCtxSh.channel, dCtxSh.appE, driver);
+	}
 
-            //Cerramos la bolsa medialnte selección de la aspa de close
-            //SecBolsa.clickIconoClose(driver, dCtxSh.channel);
-                
-            ii += 1;
-        }
-        while (!numberItemsIsUntil("0"/*itemsMightHave*/, dCtxSh.channel, dCtxSh.appE, 0/*maxSecodsToWait*/, driver) && 
-               ii<10/* evitar bucles infinitos */);
-        
-        setBolsaToStateIfNotYet(StateBolsa.Closed, dCtxSh.channel, dCtxSh.appE, driver);
-    }
-    
-    private static void clickIconoCloseMobil(WebDriver driver, Channel channel) throws Exception {
-    	String xpathAspa =  "//div[@id='close_mobile']";
-        if (isElementVisible(driver, By.xpath(xpathAspa))) {
-            clickAndWaitLoad(driver, By.xpath(xpathAspa));
-        }
-    }    
+	private static void clickIconoCloseMobil(WebDriver driver, Channel channel) {
+		String xpathAspa =  "//div[@id='close_mobile']";
+		if (state(Visible, By.xpath(xpathAspa), driver).check()) {
+			click(By.xpath(xpathAspa), driver).exec();
+		}
+	}
 
     static boolean isUnitalla(String talla) {
         if (talla.toLowerCase().compareTo("u")==0 ||

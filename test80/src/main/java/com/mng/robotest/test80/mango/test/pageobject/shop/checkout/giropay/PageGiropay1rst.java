@@ -1,19 +1,19 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.giropay;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageGiropay1rst extends WebdrvWrapp {
+public class PageGiropay1rst {
+	
     static String XPathListOfPayments = "//ul[@id='paymentMethods']";
     static String XPathCabeceraStep = "//h2[@id[contains(.,'stageheader')]]";
     static String XPathButtonPagoDesktop = "//input[@class[contains(.,'paySubmit')] and @type='submit']";
     static String XPathButtonContinueMobil = "//input[@type='submit' and @id='mainSubmit']";
-    //static String XPathInputBank = "//input[@id[contains(.,'giropay.bic-selection')]]";
     static String XPathIconoGiropayMobil = XPathListOfPayments + "//input[@class[contains(.,'giropay')]]";
     static String XPathIconoGiropayDesktop = XPathListOfPayments + "/li[@data-variant[contains(.,'giropay')]]";
     
@@ -30,15 +30,16 @@ public class PageGiropay1rst extends WebdrvWrapp {
     
     public static boolean isPresentIconoGiropay(Channel channel, WebDriver driver) {
         String xpathPago = getXPathIconoGiropay(channel);
-        return (isElementPresent(driver, By.xpath(xpathPago)));
+        return (state(Present, By.xpath(xpathPago), driver).check());
     }
     
     public static boolean isPresentCabeceraStep(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathCabeceraStep)));
+        return (state(Present, By.xpath(XPathCabeceraStep), driver).check());
     }
     
     public static boolean isPresentButtonPagoDesktopUntil(int maxSeconds, WebDriver driver) {
-        return (isElementPresentUntil(driver, By.xpath(XPathButtonPagoDesktop), maxSeconds));
+    	return (state(Present, By.xpath(XPathButtonPagoDesktop), driver)
+    			.wait(maxSeconds).check());
     }
 
 //    public static boolean isVisibleInputBankUntil(int maxSecondsToWait, WebDriver driver) {
@@ -60,27 +61,27 @@ public class PageGiropay1rst extends WebdrvWrapp {
 //        driver.findElement(By.xpath(XPathInputBank)).sendKeys(Keys.TAB);
 //        waitForPageLoaded(driver, 1/*waitSeconds*/);        
 //    }
-    
-    public static void clickIconoGiropay(Channel channel, WebDriver driver) throws Exception {
-        String xpathPago = getXPathIconoGiropay(channel);
-        clickAndWaitLoad(driver, By.xpath(xpathPago));
-    }
-    
-    public static void clickButtonContinuePay(Channel channel, WebDriver driver) throws Exception {
+
+	public static void clickIconoGiropay(Channel channel, WebDriver driver) {
+		String xpathPago = getXPathIconoGiropay(channel);
+		click(By.xpath(xpathPago), driver).exec();
+	}
+
+    public static void clickButtonContinuePay(Channel channel, WebDriver driver) {
         if (channel==Channel.movil_web) {
             clickButtonContinueMobil(driver);
         } else {
             clickButtonPagoDesktop(driver);
         }
     }
-    
-    public static void clickButtonPagoDesktop(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonPagoDesktop));
-    }
-    
-    public static void clickButtonContinueMobil(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonContinueMobil));
-    }
+
+	public static void clickButtonPagoDesktop(WebDriver driver) {
+		click(By.xpath(XPathButtonPagoDesktop), driver).exec();
+	}
+
+	public static void clickButtonContinueMobil(WebDriver driver) {
+		click(By.xpath(XPathButtonContinueMobil), driver).exec();
+	}
 //    
 //    public static boolean isVisibleBankInListUntil(String bank, int maxSecondsToWait, WebDriver driver) {
 //        String xpathRow = getXPath_rowListWithBank(bank);

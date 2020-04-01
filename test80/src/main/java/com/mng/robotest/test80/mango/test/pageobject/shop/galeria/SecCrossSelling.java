@@ -5,16 +5,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecCrossSelling extends WebdrvWrapp {
+public class SecCrossSelling {
 	
 	private final Channel channel;
 	private final WebDriver driver;
 	
 	private static String XPathSectionMovil = "//section[@class='cross-selling']";
-	private static String XPathSectionDesktop = "//section[@class='_1dwXN']";
+	private static String XPathSectionDesktop = "//section[@id='crossSelling']";
 
 	public SecCrossSelling(Channel channel, WebDriver driver) {
 		this.channel = channel;
@@ -35,7 +36,7 @@ public class SecCrossSelling extends WebdrvWrapp {
 	}
 
 	public boolean isSectionVisible() {
-		return (isElementVisible(driver, By.xpath(getXPathSection())));
+		return (state(Visible, By.xpath(getXPathSection()), driver).check());
 	}
 
 	/**

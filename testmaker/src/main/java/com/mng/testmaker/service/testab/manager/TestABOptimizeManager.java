@@ -10,7 +10,7 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.service.testab.TestABOptimize;
 import com.mng.testmaker.service.testab.TestABactData;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
 public class TestABOptimizeManager implements TestABmanager {
 	
@@ -129,9 +129,9 @@ public class TestABOptimizeManager implements TestABmanager {
 		String windowHandlerToReturn = driver.getWindowHandle();
 		try {
 			String titleTab = "SetCookie " + cookie.getName() + "_" + cookie.getValue();
-			WebdrvWrapp.loadUrlInAnotherMinimumTab("https://" + cookie.getDomain() + cookie.getPath(), titleTab, driver);
+			SeleniumUtils.loadUrlInAnotherMinimumTab("https://" + cookie.getDomain() + cookie.getPath(), titleTab, driver);
 			driver.manage().addCookie(cookie);
-			WebdrvWrapp.closeTabByTitleAndReturnToWidow(titleTab, windowHandlerToReturn, driver);
+			SeleniumUtils.closeTabByTitleAndReturnToWidow(titleTab, windowHandlerToReturn, driver);
 		}
 		catch (Exception e) {
 			Log4jConfig.pLogger.warn("Problem activating TestAB via add of Cookie " + cookie.getName(), e);

@@ -1,12 +1,15 @@
 package com.mng.robotest.test80.mango.test.pageobject.manto.pedido;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
 
-public class PageGenerarPedido extends WebdrvWrapp {
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.SelectElement.TypeSelect.*;
+
+public class PageGenerarPedido {
 
 	public static enum GestionPostCompra implements ElementPage {
         EstadoPedidoSelect("//span[text()[contains(.,'Estado Pedido')]]/../..//select"),
@@ -14,14 +17,14 @@ public class PageGenerarPedido extends WebdrvWrapp {
         GenerarFicheroButton("//input[@value='Generar Fichero Pedido']"),
         MessageOkFicheroCreado("//span[text()[contains(.,'Fichero creado correctamente')]]");
 
-        private String xPath;
+        private By by;
         GestionPostCompra(String xPath) {
-            this.xPath = xPath;
+            by = By.xpath(xPath);
         }
 
         @Override
-        public String getXPath() {
-            return this.xPath;
+        public By getBy() {
+            return by;
         }
     }
 	
@@ -46,7 +49,7 @@ public class PageGenerarPedido extends WebdrvWrapp {
 	}
 	
 	public static boolean isPage(String idPedido, WebDriver driver) {
-		WebElement inputIdPedido = getElementWeb(GestionPostCompra.InputPurchorderNum, driver);
+		WebElement inputIdPedido = getElementWeb(GestionPostCompra.InputPurchorderNum.getBy(), driver);
 		if (inputIdPedido!=null) {
 			String valueInput = inputIdPedido.getAttribute("value");
 			if (valueInput!=null) {
@@ -57,11 +60,9 @@ public class PageGenerarPedido extends WebdrvWrapp {
 		return false;
 	}
 	
-	public static void selectEstado(EstadoPedido estado, WebDriver driver) throws Exception {
-		selectByValue(
-			GestionPostCompra.EstadoPedidoSelect, 
-			String.valueOf(estado.value), 
-			OptionSelect.ByValue, driver);
-		WebdrvWrapp.waitForPageLoaded(driver);
+	public static void selectEstado(EstadoPedido estado, WebDriver driver) {
+		String value = String.valueOf(estado.value);
+		select(GestionPostCompra.EstadoPedidoSelect.getBy(), value, driver)
+			.type(Value).wait(30).exec();
 	}
 }

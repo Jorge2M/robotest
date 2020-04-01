@@ -4,21 +4,22 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageYandexMoneyResult extends WebdrvWrapp {
+public class PageYandexMoneyResult {
     
     public static String msgTransferOk = "Обработка завершена. Запрос выполнен успешно. Зачисление перевода проведено успешно";
     static String XPathDivResultMsg = "//div[@class='docbook-para']";
     
-    public static boolean isPage(WebDriver webdriver) {
-        return (isElementVisible(webdriver, By.xpath(XPathDivResultMsg)));
+    public static boolean isPage(WebDriver driver) {
+    	return (state(Visible, By.xpath(XPathDivResultMsg), driver).check());
     }
         
     public static boolean isVisibleMsgTransferOk(WebDriver driver) {
         WebElement divResult = driver.findElement(By.xpath(XPathDivResultMsg));
-        return (isElementVisible(driver, By.xpath(XPathDivResultMsg)) &&
+        return (state(Visible, By.xpath(XPathDivResultMsg), driver).check() &&
                 divResult.getText().contains(msgTransferOk));
     }
 }

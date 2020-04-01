@@ -5,12 +5,13 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.domain.suitetree.StepTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
@@ -71,9 +72,9 @@ public class SecMenusUserStpV {
         saveHtmlPage=SaveWhen.Always)
     public void selectRegistrate(DataCtxShop dCtxSh) throws Exception {
 		userMenus.clickMenuAndWait(UserMenu.registrate);    
-        int maxSecondsWait = 5;
+        int maxSeconds = 5;
         PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(driver);
-        pageRegistroIniStpV.validaIsPageUntil(maxSecondsWait);
+        pageRegistroIniStpV.validaIsPageUntil(maxSeconds);
         pageRegistroIniStpV.validaIsRGPDVisible(dCtxSh);
     }
     
@@ -86,10 +87,10 @@ public class SecMenusUserStpV {
     }
 	
 	@Validation (
-		description="Aparece el link superior de \"Iniciar sesión\" (lo esperamos hasta #{maxSecondsWait} segundos)",
+		description="Aparece el link superior de \"Iniciar sesión\" (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-	private boolean checkIsVisibleIniciarSesionLink(int maxSecondsWait) throws Exception {
-        return (userMenus.isMenuInStateUntil(UserMenu.iniciarSesion, StateElem.Present, maxSecondsWait));
+	private boolean checkIsVisibleIniciarSesionLink(int maxSeconds) throws Exception {
+        return (userMenus.isMenuInStateUntil(UserMenu.iniciarSesion, Present, maxSeconds));
 	}
 	
 	public void logoffLogin(String userConnect, String userPassword) throws Exception {
@@ -114,17 +115,17 @@ public class SecMenusUserStpV {
 	@Validation (
 		description="Aparece el link superior de \"Cerrar Sesión\" (estamos loginados)",
 		level=State.Defect)
-	public boolean checkIsVisibleLinkCerrarSesion() throws Exception {	
+	public boolean checkIsVisibleLinkCerrarSesion() {	
 		if (channel==Channel.desktop && app==AppEcom.shop) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
-	    return (userMenus.isMenuInStateUntil(UserMenu.cerrarSesion, StateElem.Present, 1));
+		return (userMenus.isMenuInStateUntil(UserMenu.cerrarSesion, Present, 1));
 	}
 
     @Step (
     	description="Seleccionar el link \"Mi cuenta\"", 
         expected="Aparece la página de \"Mi cuenta\"")
-	public void clickMenuMiCuenta() throws Exception {
+	public void clickMenuMiCuenta() {
         userMenus.clickMenuAndWait(UserMenu.miCuenta);	
         PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(channel, app, driver);
         pageMiCuentaStpV.validateIsPage(2);
@@ -161,7 +162,7 @@ public class SecMenusUserStpV {
 		if (channel==Channel.desktop && app==AppEcom.shop) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
-		boolean visibilityMLY = userMenus.isMenuInStateUntil(UserMenu.mangoLikesYou, StateElem.Present, 1);
+		boolean visibilityMLY = userMenus.isMenuInStateUntil(UserMenu.mangoLikesYou, Present, 1);
 		switch (app) {
 		case shop:
 			checks.add(
@@ -178,15 +179,15 @@ public class SecMenusUserStpV {
 	}
 
 	@Validation
-	public ChecksResultWithNumberPoints checkAngGetLoyaltyPoints(int maxSecondsWait) throws Exception {
+	public ChecksResultWithNumberPoints checkAngGetLoyaltyPoints(int maxSeconds) throws Exception {
 		ChecksResultWithNumberPoints checks = ChecksResultWithNumberPoints.getNew();
 		if (channel==Channel.desktop) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
-		LoyaltyData loyaltyData = userMenus.checkAndGetLoyaltyPointsUntil(maxSecondsWait);
+		LoyaltyData loyaltyData = userMenus.checkAndGetLoyaltyPointsUntil(maxSeconds);
 		checks.setNumberPoints(loyaltyData.numberPoints);
 	 	checks.add(
-			"Aparecen Loyalty Points en el menú de usuario (lo esperamos hasta " + maxSecondsWait + " segundos)",
+			"Aparecen Loyalty Points en el menú de usuario (lo esperamos hasta " + maxSeconds + " segundos)",
 			loyaltyData.isPresent, State.Defect);
 	 	
 		return checks;

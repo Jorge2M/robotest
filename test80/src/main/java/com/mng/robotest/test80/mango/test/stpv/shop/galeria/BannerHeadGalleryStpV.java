@@ -62,8 +62,8 @@ public class BannerHeadGalleryStpV {
 	@Step (
 		description="Seleccionar el banner superior de la Galería", 
 		expected="Aparece una galería de artículos")
-	public void clickBannerSuperiorIfLinkableDesktop() throws Exception {
-		PageGaleriaDesktop.secBannerHead.clickBannerIfClickable(driver);     
+	public void clickBannerSuperiorIfLinkableDesktop() {
+		PageGaleriaDesktop.secBannerHead.clickBannerIfClickable(driver);
 		pageGaleriaParent.validaArtEnContenido(3);
 	}
 

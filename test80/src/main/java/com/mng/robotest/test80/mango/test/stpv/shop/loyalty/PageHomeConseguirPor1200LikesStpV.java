@@ -32,7 +32,7 @@ public class PageHomeConseguirPor1200LikesStpV {
 	@Step (
 		description="Seleccionar el botón de \"Conseguir por 1200 Likes\"",
 		expected="Aparece el icono de operación Ok")
-	public void selectConseguirButton() throws Exception {
+	public void selectConseguirButton() {
 		pageHomeConseguirPor1200Likes.selectConseguirButton();
 		checkAfterConseguirButton();
 	}
@@ -40,10 +40,10 @@ public class PageHomeConseguirPor1200LikesStpV {
 	@Validation
 	public ChecksTM checkAfterConseguirButton() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSecondsWait = 5;
+		int maxSeconds = 5;
 		checks.add(
-			"Aparece el icono correspondiente a la operación realizada (lo esperamos hasta " + maxSecondsWait + " segundos)",
-			pageHomeConseguirPor1200Likes.isVisibleIconOperationDoneUntil(maxSecondsWait), State.Defect);
+			"Aparece el icono correspondiente a la operación realizada (lo esperamos hasta " + maxSeconds + " segundos)",
+			pageHomeConseguirPor1200Likes.isVisibleIconOperationDoneUntil(maxSeconds), State.Defect);
 
 		return checks;
 	}	

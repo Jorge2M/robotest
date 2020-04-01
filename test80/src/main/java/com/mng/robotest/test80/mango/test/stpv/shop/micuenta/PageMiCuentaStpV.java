@@ -1,6 +1,5 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
@@ -42,7 +41,7 @@ public class PageMiCuentaStpV {
         return (pageMiCuenta.isPageUntil(maxSecondsToWait));
     }
 
-    public void goToMisDatos(String usuarioReg) throws Exception {
+    public void goToMisDatos(String usuarioReg) {
     	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
     	userMenusStpV.clickMenuMiCuenta();
     	clickLinkMisDatos(usuarioReg);
@@ -51,12 +50,12 @@ public class PageMiCuentaStpV {
     @Step(
         description = "Seleccionar el link \"Mis datos\"",
         expected = "Aparece la página de \"Mis datos\"")
-    private void clickLinkMisDatos (String usuarioReg) throws Exception {
+    private void clickLinkMisDatos (String usuarioReg) {
         pageMiCuenta.clickMisDatos();
         PageMisDatosStpV.validaIsPage(usuarioReg, driver);
     }
 
-    public void goToMisComprasFromMenu(Pais pais) throws Exception {
+    public void goToMisComprasFromMenu(Pais pais) {
     	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
     	userMenusStpV.clickMenuMiCuenta();
         goToMisComprasFromMenuAndValidate(pais);
@@ -65,7 +64,7 @@ public class PageMiCuentaStpV {
     @Step(
         description = "Seleccionar el link \"Mis Compras\"",
         expected = "Aparece la página de \"Mis Compras\"")
-    private void goToMisComprasFromMenuAndValidate(Pais pais) throws Exception {
+    private void goToMisComprasFromMenuAndValidate(Pais pais) {
         pageMiCuenta.clickMisCompras();
         if (channel == Channel.movil_web &&
         	PageInfoNewMisComprasMovil.isPage(driver)) {
@@ -77,12 +76,12 @@ public class PageMiCuentaStpV {
         pageMisComprasStpV.validateIsPage(pais);
     }
  
-    public void goToMisDatosAndValidateData(Map<String,String> dataRegistro, String codPais) throws Exception {
+    public void goToMisDatosAndValidateData(Map<String,String> dataRegistro, String codPais) {
         goToMisDatos(dataRegistro.get("cfEmail"));
         PageMisDatosStpV.validaIsDataAssociatedToRegister(dataRegistro, codPais, driver);
     }
 
-    public void goToSuscripciones() throws Exception {
+    public void goToSuscripciones() {
     	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
     	userMenusStpV.clickMenuMiCuenta();
     	clickLinkSuscripciones();
@@ -91,7 +90,7 @@ public class PageMiCuentaStpV {
     @Step(
         description = "Seleccionar el link \"Suscripciones\"",
         expected = "Aparece la página de \"Suscripciones\"")
-    private void clickLinkSuscripciones() throws Exception {
+    private void clickLinkSuscripciones() {
         pageMiCuenta.clickSuscripciones();
         PageSuscripcionesStpV.validaIsPage(driver);
         
@@ -102,12 +101,12 @@ public class PageMiCuentaStpV {
         AllPagesStpV.validacionesEstandar(flagsVal, driver);
     }
     
-    public void goToSuscripcionesAndValidateData(Map<String,String> datosRegOk) throws Exception {
+    public void goToSuscripcionesAndValidateData(Map<String,String> datosRegOk) {
         goToSuscripciones();
         PageSuscripcionesStpV.validaIsDataAssociatedToRegister(datosRegOk, driver);
     }
 
-    public void goToMisPedidos (String usrRegistrado) throws Exception {
+    public void goToMisPedidos (String usrRegistrado) {
     	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
     	userMenusStpV.clickMenuMiCuenta();
     	clickLinkMisPedidos(usrRegistrado);
@@ -116,12 +115,12 @@ public class PageMiCuentaStpV {
     @Step(
         description = "Seleccionar el link \"Mis pedidos\"",
         expected = "Aparece la página de \"Mis pedidos\" sin pedidos")
-    private void clickLinkMisPedidos(String usrRegistrado) throws Exception {
+    private void clickLinkMisPedidos(String usrRegistrado) {
         pageMiCuenta.clickMisPedidos();
         PagePedidosStpV.validaIsPageSinPedidos(usrRegistrado, driver);
     }
 
-    public void goToDevoluciones() throws Exception {
+    public void goToDevoluciones() {
     	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
     	userMenusStpV.clickMenuMiCuenta();
     	clickLinkDevoluciones();
@@ -130,12 +129,12 @@ public class PageMiCuentaStpV {
     @Step(
         description = "Seleccionar el link \"Devoluciones\"",
         expected = "Aparece la página de \"Devoluciones\"")
-    private void clickLinkDevoluciones() throws Exception {
+    private void clickLinkDevoluciones() {
         pageMiCuenta.clickDevoluciones();
         PageDevolucionesStpV.validaIsPage(driver);
     }
 
-    public void goToReembolsos() throws Exception {
+    public void goToReembolsos() {
     	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
     	userMenusStpV.clickMenuMiCuenta();
     	clickLinkReembolsos();
@@ -144,7 +143,7 @@ public class PageMiCuentaStpV {
     @Step(
         description = "Seleccionar el link \"Reembolsos\"",
         expected = "Aparece la página de \"Reembolsos\"")
-	private void clickLinkReembolsos() throws Exception {
+	private void clickLinkReembolsos() {
         pageMiCuenta.clickReembolsos();
         PageReembolsosStpV.validateIsPage(driver);
     }

@@ -5,11 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.sapfiori.access.test.testcase.webobject.iconsmenu.PageIconsMenu;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 
-public class PageLogin extends WebdrvWrapp {
-	
-	private final WebDriver driver;
+public class PageLogin extends PageObjTM {
 	
 	private final static String IdInputUser = "USERNAME_FIELD-inner"; 
 	private final static String IdInputPassword = "PASSWORD_FIELD-inner"; 
@@ -17,7 +15,7 @@ public class PageLogin extends WebdrvWrapp {
 	private final static String IdSelectIdioma = "LANGUAGE_SELECT";
 	
 	private PageLogin(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 	}
 	
 	public static PageLogin getNew(WebDriver driver) {
@@ -37,8 +35,8 @@ public class PageLogin extends WebdrvWrapp {
 		driver.findElement(By.id(IdInputPassword)).sendKeys(password);
 	}
 	
-	public PageIconsMenu clickAccederAlSistema() throws Exception {
-		clickAndWaitLoad(driver, By.id(IdButtonAccessSystem));
+	public PageIconsMenu clickAccederAlSistema() {
+		click(By.id(IdButtonAccessSystem)).exec();
 		return PageIconsMenu.getNew(driver);
 	}
 }

@@ -8,7 +8,8 @@ import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.TestCaseTM;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class BuscarWithoutRefactor {
 
@@ -18,8 +19,6 @@ public class BuscarWithoutRefactor {
 	public void BUS001_Buscar_literal_con_resultados() throws Exception {
 		TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
 		WebDriver driver = testCase.getDriver();
-		driver.get(testCase.getInputParamsSuite().getUrlBase());
-		
 		inputTextAndClickBuscarConGoogle("Wikipedia", driver);
 	}
 	
@@ -33,7 +32,7 @@ public class BuscarWithoutRefactor {
 			.sendKeys(textToInput);
 		
 		By byButtonBuscarConGoogle = By.xpath("//input[@class='gNO89b']");
-		WebdrvWrapp.clickAndWaitLoad(driver, byButtonBuscarConGoogle);
+		click(byButtonBuscarConGoogle, driver).exec();
 		
 		checkAreResults(driver);
 	}
@@ -43,8 +42,7 @@ public class BuscarWithoutRefactor {
 		level=State.Defect)
 	public boolean checkAreResults(WebDriver driver) {
 		By byEntradaResultado = By.xpath("//h3[@class='LC20lb']");
-		return (
-			WebdrvWrapp.isElementVisible(driver, byEntradaResultado));
+		return (state(Visible, byEntradaResultado, driver).check());
 	}
 	
 }

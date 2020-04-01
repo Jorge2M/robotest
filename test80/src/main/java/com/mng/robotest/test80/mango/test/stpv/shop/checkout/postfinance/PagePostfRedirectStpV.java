@@ -10,15 +10,15 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.postfinance.P
 public class PagePostfRedirectStpV {
 
 	@Validation
-    public static ChecksTM isPageAndFinallyDisappears(WebDriver driver) throws Exception {
+    public static ChecksTM isPageAndFinallyDisappears(WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 10;
+        int maxSeconds = 10;
 	   	validations.add(
     		"Aparece una página de redirección con un botón OK",
-    		PagePostfRedirect.isPresentButtonOk(driver), State.Defect);    
+    		PagePostfRedirect.isPresentButtonOk(driver), State.Defect);
 	   	validations.add(
-    		"La página de redirección acaba desapareciendo (esperamos hasta " + maxSecondsWait + " segundos)",
-    		PagePostfRedirect.isInvisibleButtonOkUntil(driver, maxSecondsWait), State.Defect);  	   	
+    		"La página de redirección acaba desapareciendo (esperamos hasta " + maxSeconds + " segundos)",
+    		PagePostfRedirect.isInvisibleButtonOkUntil(driver, maxSeconds), State.Defect);
 		return validations;
     }
 }

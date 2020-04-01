@@ -3,23 +3,29 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.epayment;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageEpaymentIdent extends WebdrvWrapp {
+public class PageEpaymentIdent extends PageObjTM {
 
     static String XPathInputUser = "//input[@name[contains(.,'USERID')] and @type='password']";
     static String XPathInputCode = "//input[@name[contains(.,'IDNBR')] and @type='password']";
     
-    public static boolean isPage(WebDriver driver) {
+    public PageEpaymentIdent(WebDriver driver) {
+    	super(driver);
+    }
+    
+    public boolean isPage() {
         return (driver.getTitle().contains("E-payment"));
     }
     
-    public static boolean isPresentInputUserTypePassword(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathInputUser)));
+    public boolean isPresentInputUserTypePassword() {
+    	return (state(Present, By.xpath(XPathInputUser), driver).check());
     }
     
-    public static boolean isPresentCodeUserTypePassword(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathInputCode)));
+    public boolean isPresentCodeUserTypePassword() {
+    	return (state(Present, By.xpath(XPathInputCode), driver).check());
     }
 }

@@ -48,16 +48,16 @@ public class PageResultPagoStpV {
     @Validation
     public static ChecksTM validateTextConfirmacionPago(Channel channel, WebDriver driver) {
     	ChecksTM validations = ChecksTM.getNew();
-	    int maxSecondsWait1 = 10;
-	    boolean isVisibleTextConfirmacion = PageResultPago.isVisibleTextoConfirmacionPago(driver, channel, maxSecondsWait1);
+	    int maxSeconds1 = 10;
+	    boolean isVisibleTextConfirmacion = PageResultPago.isVisibleTextoConfirmacionPago(driver, channel, maxSeconds1);
        	validations.add(
-    		"Aparece un texto de confirmación del pago (lo esperamos hasta " + maxSecondsWait1 + " segundos)",
+    		"Aparece un texto de confirmación del pago (lo esperamos hasta " + maxSeconds1 + " segundos)",
     		isVisibleTextConfirmacion, State.Warn);
        	if (!isVisibleTextConfirmacion) {
-   		    int maxSecondsWait2 = 20;
+   		    int maxSeconds2 = 20;
            	validations.add(
-        		"Si no aparece lo esperamos " + maxSecondsWait2 + " segundos",
-        		PageResultPago.isVisibleTextoConfirmacionPago(driver, channel, maxSecondsWait2), State.Defect);
+        		"Si no aparece lo esperamos " + maxSeconds2 + " segundos",
+        		PageResultPago.isVisibleTextoConfirmacionPago(driver, channel, maxSeconds2), State.Defect);
        	}
        	
        	return validations;
@@ -89,11 +89,11 @@ public class PageResultPagoStpV {
 	        }
 	    }
 	    
-	    int maxSecondsWait = 5;
-        String codigoPed = PageResultPago.getCodigoPedido(driver, dCtxSh.channel, maxSecondsWait);
+	    int maxSeconds = 5;
+        String codigoPed = PageResultPago.getCodigoPedido(driver, dCtxSh.channel, maxSeconds);
         boolean isCodPedidoVisible = "".compareTo(codigoPed)!=0;
     	validations.add(
-      		"Aparece el código de pedido (" + codigoPed + ") (lo esperamos hasta " + maxSecondsWait + " segundos)",
+      		"Aparece el código de pedido (" + codigoPed + ") (lo esperamos hasta " + maxSeconds + " segundos)",
       		isCodPedidoVisible, State.Defect);
 	    
 		DataPedido dataPedido = dCtxPago.getDataPedido();
@@ -122,7 +122,7 @@ public class PageResultPagoStpV {
         if (PageListPedidos.isPage(driver)) {
         	PageListPedidosStpV.validateIsPage(dataPedido.getCodpedido(), driver);
         } else {
-        	PageInputPedidoStpV.validateIsPage(driver);
+        	PageInputPedidoStpV.getNew(driver).validateIsPage();
         }
     }    
     
@@ -141,7 +141,7 @@ public class PageResultPagoStpV {
             flagsVal.validaImgBroken = false;
             AllPagesStpV.validacionesEstandar(flagsVal, driver);
         } else {
-            PageAccesoMisComprasStpV.validateIsPage(driver);
+            PageAccesoMisComprasStpV.getNew(driver).validateIsPage();
         }
     }    
     
@@ -165,7 +165,7 @@ public class PageResultPagoStpV {
             if (PageListPedidos.isPage(driver)) {
                 PageListPedidosStpV.selectPedido(dataPedido.getCodpedido(), driver);
             } else {
-                PageInputPedidoStpV.inputPedidoAndSubmit(dataPedido, driver);
+                PageInputPedidoStpV.getNew(driver).inputPedidoAndSubmit(dataPedido);
             }
         }
     }
@@ -179,8 +179,9 @@ public class PageResultPagoStpV {
         	pageMisComprasStpV.selectBlock(TypeCompra.Online, true);
         	pageMisComprasStpV.validateIsCompraOnlineVisible(dataPedido.getCodpedido(), dCtxPago.getFTCkout().isChequeRegalo);
         } else {
-            PageAccesoMisComprasStpV.clickBlock(TypeBlock.NoRegistrado, driver);
-            PageAccesoMisComprasStpV.buscarPedidoForNoRegistrado(dCtxPago.getDataPedido(), driver);
+        	PageAccesoMisComprasStpV pageAccesoMisComprasStpV = PageAccesoMisComprasStpV.getNew(driver);
+            pageAccesoMisComprasStpV.clickBlock(TypeBlock.NoRegistrado);
+            pageAccesoMisComprasStpV.buscarPedidoForNoRegistrado(dCtxPago.getDataPedido());
         }
     }
 }

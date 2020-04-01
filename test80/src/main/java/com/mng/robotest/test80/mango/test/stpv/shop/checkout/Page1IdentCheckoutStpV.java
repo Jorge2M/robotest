@@ -11,9 +11,9 @@ public class Page1IdentCheckoutStpV {
     
     @SuppressWarnings("static-access")
     @Validation (
-    	description="Aparece el formulario correspondiente a la identificación (lo esperamos hasta #{maxSecondsWait} segs)",
+    	description="Aparece el formulario correspondiente a la identificación (lo esperamos hasta #{maxSeconds} segs)",
     	level=State.Defect)
-    public static boolean validateIsPage(int maxSecondsWait, WebDriver driver) {
-        return (Page1IdentCheckout.secSoyNuevo.isFormIdentUntil(driver, maxSecondsWait));
+    public static boolean validateIsPage(int maxSeconds, WebDriver driver) {
+        return (Page1IdentCheckout.secSoyNuevo.isFormIdentUntil(driver, maxSeconds));
     }
 }

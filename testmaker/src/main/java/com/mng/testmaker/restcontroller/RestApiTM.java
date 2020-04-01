@@ -1,6 +1,8 @@
 package com.mng.testmaker.restcontroller;
 
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -28,6 +30,8 @@ import com.mng.testmaker.domain.CreatorSuiteRun;
 import com.mng.testmaker.domain.InputParamsBasic;
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
+import com.mng.testmaker.domain.ServerSubscribers;
+import com.mng.testmaker.domain.ServerSubscribers.ServerSubscriber;
 import com.mng.testmaker.domain.suitetree.SuiteBean;
 import com.mng.testmaker.domain.suitetree.SuiteTM;
 import com.mng.testmaker.domain.testfilter.TestMethodData;
@@ -146,6 +150,42 @@ public class RestApiTM {
 		if (suite!=null) {
 			TestMaker.stopSuite(suite);
 		}
+	}
+	
+	@GET
+	@Path("/subscription")
+	public Response addSubscriber(@QueryParam("urlslave") String urlslave) {
+		try {
+			URL urlSubscriber = new URL(urlslave);
+			ServerSubscriber subscriber = new ServerSubscriber(urlSubscriber);
+			ServerSubscribers.add(subscriber);
+		}
+		catch (MalformedURLException e) {
+			return Response
+				.status(Response.Status.BAD_REQUEST)
+				.entity("urlslave param with malformed value " + urlslave)
+				.build();
+		}
+
+		return Response.ok().build();
+	}
+	
+	@DELETE
+	@Path("/subscription")
+	public Response removeSubscriber(@QueryParam("urlslave") String url) {
+		try {
+			URL urlSubscriber = new URL(url);
+			ServerSubscriber subscriber = new ServerSubscriber(urlSubscriber);
+			ServerSubscribers.remove(subscriber);
+		}
+		catch (MalformedURLException e) {
+			return Response
+					.status(Response.Status.BAD_REQUEST)
+					.entity("urlslave param with malformed value " + url)
+					.build();
+		}
+
+		return Response.ok().build();
 	}
 	
 	@POST

@@ -21,8 +21,7 @@ public class SecMetodoEnvioDesktopStpV {
     @Step (
     	description="<b style=\"color:blue;\">#{nombrePago}</b>:Seleccionamos el método de envío <b>#{tipoTransporte}</b>", 
         expected="Se selecciona el método de envío correctamente")
-    public static void selectMetodoEnvio(TipoTransporte tipoTransporte, String nombrePago, DataCtxPago dCtxPago, WebDriver driver) 
-    throws Exception {
+    public static void selectMetodoEnvio(TipoTransporte tipoTransporte, String nombrePago, DataCtxPago dCtxPago, WebDriver driver) {
         SecMetodoEnvioDesktop.selectMetodo(tipoTransporte, driver);
         if (!tipoTransporte.isEntregaDomicilio()) {
         	if (ModalDroppoints.isErrorMessageVisibleUntil(driver)) {
@@ -39,15 +38,15 @@ public class SecMetodoEnvioDesktopStpV {
     }
     
     @Validation
-    public static ChecksTM validaBlockSelectedDesktop(TipoTransporte tipoTransporte, WebDriver driver) throws Exception {
+    public static ChecksTM validaBlockSelectedDesktop(TipoTransporte tipoTransporte, WebDriver driver) {
     	ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 5;
+        int maxSeconds = 5;
       	validations.add(
-    		"Desaparece la capa de Loading  (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		PageCheckoutWrapper.waitUntilNoDivLoading(driver, maxSecondsWait), State.Warn);
+    		"Desaparece la capa de Loading  (lo esperamos hasta " + maxSeconds + " segundos)",
+    		PageCheckoutWrapper.waitUntilNoDivLoading(driver, maxSeconds), State.Warn);
       	validations.add(
     		"Queda seleccionado el bloque correspondiete a <b>" + tipoTransporte + "</b>",
-    		SecMetodoEnvioDesktop.isBlockSelectedUntil(tipoTransporte, maxSecondsWait, driver), State.Warn);
+    		SecMetodoEnvioDesktop.isBlockSelectedUntil(tipoTransporte, maxSeconds, driver), State.Warn);
       	return validations;
     }
     

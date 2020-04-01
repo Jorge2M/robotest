@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.factoryes.jaxb;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -12,9 +13,11 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 
 
-public class Shoponline {
+public class Shoponline implements Serializable {
     
-    //Líneas correspondientes a las 5 básicas ("kids" sigue apareciendo en algunos países sin venta como Bolivia) 
+	private static final long serialVersionUID = -8214276147980655399L;
+
+	//Líneas correspondientes a las 5 básicas ("kids" sigue apareciendo en algunos países sin venta como Bolivia) 
     public enum LineaBasica { she, he, nina, nino, kids, violeta }    
 
     @XmlElement(name="linea") 

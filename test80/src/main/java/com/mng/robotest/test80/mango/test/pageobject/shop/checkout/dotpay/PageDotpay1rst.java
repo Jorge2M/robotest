@@ -4,10 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageDotpay1rst extends WebdrvWrapp {
+public class PageDotpay1rst {
+	
     static String XPathListOfPayments = "//ul[@id='paymentMethods']";
     static String XPathCabeceraStep = "//h2[@id[contains(.,'stageheader')]]";
     static String XPathInputIconoDotpay = "//input[@type='submit' and @name='brandName']";
@@ -22,23 +24,23 @@ public class PageDotpay1rst extends WebdrvWrapp {
     
     public static boolean isPresentEntradaPago(String nombrePago, Channel channel, WebDriver driver) {
         String xpathPago = getXPathEntradaPago(nombrePago, channel);
-        return (isElementPresent(driver, By.xpath(xpathPago)));
+        return (state(Present, By.xpath(xpathPago), driver).check());
     }
     
     public static boolean isPresentCabeceraStep(String nombrePago, Channel channel, WebDriver driver) {
         String xpathCab = getXPathEntradaPago(nombrePago, channel);
-        return (isElementPresent(driver, By.xpath(xpathCab)));
+        return (state(Present, By.xpath(xpathCab), driver).check());
     }
-    
-    public static boolean isPresentButtonPago(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathButtonPago)));
-    }
-    
-    public static void clickToPay(Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web) {
-            clickAndWaitLoad(driver, By.xpath(XPathInputIconoDotpay));
-        } else {
-            clickAndWaitLoad(driver, By.xpath(XPathButtonPago));
-        }
-    }
+
+	public static boolean isPresentButtonPago(WebDriver driver) {
+		return (state(Present, By.xpath(XPathButtonPago), driver).check());
+	}
+
+	public static void clickToPay(Channel channel, WebDriver driver) {
+		if (channel==Channel.movil_web) {
+			click(By.xpath(XPathInputIconoDotpay), driver).exec();
+		} else {
+			click(By.xpath(XPathButtonPago), driver).exec();
+		}
+	}
 }

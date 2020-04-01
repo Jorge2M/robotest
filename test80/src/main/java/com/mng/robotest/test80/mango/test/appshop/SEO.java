@@ -22,7 +22,7 @@ public class SEO {
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 		return dCtxSh;
 	}
 
@@ -37,12 +37,14 @@ public class SEO {
 			return;
 		}
 		
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		String urlBase = inputParamsSuite.getUrlBase();
 		if (testCase.getInputParamsSuite().getApp()==AppEcom.shop) {
-			BrowserStpV.inputRobotsURLandValidate(dCtxSh.urlAcceso, dCtxSh.appE, driver);
+			BrowserStpV.inputRobotsURLandValidate(urlBase, dCtxSh.appE, driver);
 		}
 
-		URI uriBase = new URI(dCtxSh.urlAcceso);
-		String urlSitemap = dCtxSh.urlAcceso.replace(uriBase.getPath(), "") + "/" + "sitemap.xml";
+		URI uriBase = new URI(urlBase);
+		String urlSitemap = urlBase.replace(uriBase.getPath(), "") + "/" + "sitemap.xml";
 		BrowserStpV.inputSitemapURLandValidate(urlSitemap, driver);
 	}
 }

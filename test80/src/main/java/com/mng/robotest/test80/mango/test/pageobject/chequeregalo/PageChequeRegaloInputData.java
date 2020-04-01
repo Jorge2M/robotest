@@ -6,11 +6,15 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.PageFromFooter;
 
-public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFooter {
+public class PageChequeRegaloInputData extends PageObjTM implements PageFromFooter {
+	
     public enum Importe {euro25, euro50, euro100, euro150, euro200, euro250}
 
     public enum ConsultaSaldo implements ElementPage {
@@ -22,15 +26,14 @@ public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFo
         cvvInputError("//span[@class[contains(.,'gc-error-message--show')]]"),
         mensajeTarjetaSinSaldo("//span[@class[contains(.,'gc-error-message--show')] and text()[contains(.,'no tiene saldo')]]");
 
-        String element;
-
-        ConsultaSaldo(String element){
-            this.element = element;
+        By by;
+        ConsultaSaldo(String xpath){
+            by = By.xpath(xpath);
         }
 
         @Override
-        public String getXPath() {
-            return this.element;
+        public By getBy() {
+            return by;
         }
     }
 
@@ -45,24 +48,26 @@ public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFo
         	"//button[text()[contains(.,'Comprar ahora')]]",
         	null);
 
-        String element;
-        String mobile_element;
-        ElementCheque(String element, String mobile_element) {
-            this.element = element;
-            this.mobile_element = mobile_element;
-        }
-
-        @Override
-        public String getXPath() {
-            return this.element;
-        }
-
-        @Override
-        public String getXPath(Channel channel) {
-            if (channel == Channel.movil_web && this.mobile_element != null) {
-                return this.mobile_element;
+        By byDesktop;
+        By byMobil;
+        ElementCheque(String xpathDesktop, String xpathMobil) {
+            byDesktop = By.xpath(xpathDesktop);
+            if (xpathMobil!=null) {
+            	byMobil = By.xpath(xpathMobil);
             }
-            return this.element;
+        }
+
+        @Override
+        public By getBy() {
+            return byDesktop;
+        }
+
+        @Override
+        public By getBy(Channel channel) {
+            if (channel == Channel.movil_web && this.byMobil != null) {
+                return byMobil;
+            }
+            return byDesktop;
         }
     }
 
@@ -75,16 +80,19 @@ public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFo
         mensaje("//textarea[@id='message']"),
         comprar("//button[text()='Comprar ahora']");
 
-        String element;
-
-        InputCheque(String element) {
-            this.element = element;
+        By by;
+        InputCheque(String xpath) {
+            by = By.xpath(xpath);
         }
 
         @Override
-        public String getXPath() {
-            return this.element;
+        public By getBy() {
+            return by;
         }
+    }
+    
+    public PageChequeRegaloInputData(WebDriver driver) {
+    	super(driver);
     }
     
     public static String getXPathRadioImporte(Importe importe) {
@@ -97,60 +105,59 @@ public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFo
 	}
 	
 	@Override
-	public boolean isPageCorrectUntil(int maxSecondsWait, WebDriver driver) {
-		return (isElementInStateUntil(ElementCheque.paginaForm, StateElem.Present, maxSecondsWait, driver));
+	public boolean isPageCorrectUntil(int maxSeconds) {
+		return (state(Present, ElementCheque.paginaForm.getBy()).wait(maxSeconds).check());
 	}
-    
-    public static boolean isPresentInputImportes(WebDriver driver) {
-        for (Importe importe : Importe.values()) {
-            String xpathRadio = getXPathRadioImporte(importe);
-            if (!isElementPresent(driver, By.xpath(xpathRadio))) {
-                return false;
-            }
-        }
-        
-        return true;
-    }
 
-    public static void clickImporteCheque(Importe importeToClick, WebDriver driver) throws  Exception {
-        clickAndWaitLoad(driver, By.xpath(getXPathRadioImporte(importeToClick)));
-    }
+	public boolean isPresentInputImportes() {
+		for (Importe importe : Importe.values()) {
+			String xpathRadio = getXPathRadioImporte(importe);
+			if (!state(Present, By.xpath(xpathRadio)).check()) {
+				return false;
+			}
+		}
+		return true;
+	}
 
-    public static void introducirTarjetaConsultaSaldo(WebDriver driver, String numTarjeta) throws Exception {
-    	WebElement inputNumTarjeta = driver.findElement(By.xpath(ConsultaSaldo.numeroTarjeta.getXPath()));
-    	inputNumTarjeta.clear();
-    	inputNumTarjeta.sendKeys(numTarjeta);
-        //inputDataInElement(ConsultaSaldo.numeroTarjeta, numTarjeta, driver);
-        clickAndWait(ConsultaSaldo.validar, driver);
-    }
-    
-	public static void introducirCvc(String cvvNumber, WebDriver driver) throws Exception {
-		WebElement cvvTarjeta = driver.findElement(By.xpath(ConsultaSaldo.cvvTarjeta.getXPath()));
+	public void clickImporteCheque(Importe importeToClick) {
+		By byElem = By.xpath(getXPathRadioImporte(importeToClick));
+		click(byElem).exec();
+	}
+
+	public void introducirTarjetaConsultaSaldo(String numTarjeta) {
+		WebElement inputNumTarjeta = driver.findElement(ConsultaSaldo.numeroTarjeta.getBy());
+		inputNumTarjeta.clear();
+		inputNumTarjeta.sendKeys(numTarjeta);
+		click(ConsultaSaldo.validar.getBy()).exec();
+	}
+
+	public void introducirCvc(String cvvNumber) throws Exception {
+		WebElement cvvTarjeta = driver.findElement(ConsultaSaldo.cvvTarjeta.getBy());
 		cvvTarjeta.clear();
 		cvvTarjeta.sendKeys(cvvNumber);
-		PageChequeRegaloInputData.clickAndWait(ConsultaSaldo.validar, 3, driver);
+		click(ConsultaSaldo.validar.getBy()).waitLoadPage(3).exec();
 	}
 
-    public static void clickButtonComprar(ChequeRegalo chequeRegalo, WebDriver driver) throws Exception {
-        clickAndWait(ElementCheque.compraAhora, driver);
-        
-        //Existe un problema en Firefox-Gecko muy extraño: a veces, después de seleccionar el botón "comprar ahora" te muestra error en todos
-        //los campos de input y no avanza a la siguiente página
-        for (int i=0; i<10; i++) {
-        	if (!WebdrvWrapp.isElementInvisibleUntil(driver, By.xpath(ElementCheque.compraAhora.getXPath()), 3)) {
-	        	inputDataCheque(chequeRegalo, driver);
-        		clickAndWait(ElementCheque.compraAhora, driver);
-	        } else {
-	        	break;
-	        }
-        }
-    }
-    
-    public static void inputDataCheque(ChequeRegalo chequeRegalo, WebDriver driver) throws Exception {
-        inputDataInElement(InputCheque.nombre, chequeRegalo.getNombre(), driver);
-        inputDataInElement(InputCheque.apellidos, chequeRegalo.getApellidos(), driver);
-        inputDataInElement(InputCheque.email, chequeRegalo.getEmail(), driver);
-        inputDataInElement(InputCheque.repetirEmail, chequeRegalo.getEmail(), driver);
-        inputDataInElement(InputCheque.mensaje, chequeRegalo.getMensaje(), driver);
-    }
+	public void clickButtonComprar(ChequeRegalo chequeRegalo) {
+		click(ElementCheque.compraAhora.getBy()).exec();
+
+		//Existe un problema en Firefox-Gecko muy extraño: a veces, después de seleccionar el botón "comprar ahora" 
+		//te muestra error en todos los campos de input y no avanza a la siguiente página
+		for (int i=0; i<10; i++) {
+			if (!state(Invisible, ElementCheque.compraAhora.getBy()).wait(3).check()) {
+				inputDataCheque(chequeRegalo);
+				click(ElementCheque.compraAhora.getBy()).exec();
+			} else {
+				break;
+			}
+		}
+	}
+
+	public void inputDataCheque(ChequeRegalo chequeRegalo) {
+		sendKeysWithRetry(chequeRegalo.getNombre(), InputCheque.nombre.getBy(), 2, driver);
+		sendKeysWithRetry(chequeRegalo.getApellidos(), InputCheque.apellidos.getBy(), 2, driver);
+		sendKeysWithRetry(chequeRegalo.getEmail(), InputCheque.email.getBy(), 2, driver);
+		sendKeysWithRetry(chequeRegalo.getEmail(), InputCheque.repetirEmail.getBy(), 2, driver);
+		sendKeysWithRetry(chequeRegalo.getMensaje(), InputCheque.mensaje.getBy(), 2, driver);
+	}
 }

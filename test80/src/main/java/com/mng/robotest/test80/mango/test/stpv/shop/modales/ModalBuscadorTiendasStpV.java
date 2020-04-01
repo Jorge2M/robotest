@@ -13,13 +13,13 @@ public class ModalBuscadorTiendasStpV {
 	@Validation
     public static ChecksTM validaBusquedaConResultados(WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 5;
+        int maxSeconds = 5;
 	 	validations.add(
 			"La capa de búsqueda es visible",
 			ModalBuscadorTiendas.isVisible(driver), State.Warn);
 	 	validations.add(
-			"Se ha localizado alguna tienda (la esperamos hasta " + maxSecondsWait + " segundos)",
-			ModalBuscadorTiendas.isPresentAnyTiendaUntil(driver, maxSecondsWait), State.Warn);
+			"Se ha localizado alguna tienda (la esperamos hasta " + maxSeconds + " segundos)",
+			ModalBuscadorTiendas.isPresentAnyTiendaUntil(driver, maxSeconds), State.Warn);
 		return validations;
     }
     

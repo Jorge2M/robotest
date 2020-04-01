@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.postfinance;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PagePostfCodSeg extends WebdrvWrapp {
+public class PagePostfCodSeg {
 
     static String XPathAceptarButton = "//form/input[@id='btn_Accept']";
     static String XPathInputCodSeg = "//input[@id='postfinanceCardId']";
@@ -50,30 +51,30 @@ public class PagePostfCodSeg extends WebdrvWrapp {
      * @return si existe un botón "Aceptar" en la página1 de efinance y card
      */
     public static boolean isPresentButtonAceptar(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathAceptarButton)));
+    	return (state(Present, By.xpath(XPathAceptarButton), driver).check());
     }
-    
-    public static void clickAceptarButton(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathAceptarButton));
-    }
+
+	public static void clickAceptarButton(WebDriver driver) {
+		click(By.xpath(XPathAceptarButton), driver).exec();
+	}
     
     /**
      * @return si existe o no el input del código de seguridad (en "e-finance" no existe y en "card" sí)
      */
     public static boolean isPresentInputCodSeg(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathInputCodSeg)));
+    	return (state(Present, By.xpath(XPathInputCodSeg), driver).check());
     }
     
     public static boolean isPresentButtonWeiter(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathButtonWeiter)));
+    	return (state(Present, By.xpath(XPathButtonWeiter), driver).check());
     }
     
     public static void inputCodigoSeguridad(WebDriver driver, String codigoSeg) {
         driver.findElement(By.xpath(XPathInputCodSeg)).sendKeys(codigoSeg);
     }
 
-	public static void waitLoadPage() throws Exception {
-		Thread.sleep(5000);
+	public static void waitLoadPage() {
+		waitMillis(5000);
 	}
 	
 }

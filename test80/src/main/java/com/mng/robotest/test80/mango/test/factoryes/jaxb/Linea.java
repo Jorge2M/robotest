@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.factoryes.jaxb;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,9 +10,11 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
 
 
-public class Linea {
+public class Linea implements Serializable {
 
-    public static enum LineaType { 
+	private static final long serialVersionUID = -4709433951288421080L;
+
+	public static enum LineaType { 
     	nuevo("nuevo", "outletN", "nuevo", "nuevo"), 
     	rebajas("rebajas", "outletR", "rebajas", "rebajas"), 
     	she("mujer", "outlet", "she", "she"), 

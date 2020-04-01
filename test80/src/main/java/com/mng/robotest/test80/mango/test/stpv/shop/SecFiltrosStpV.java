@@ -25,8 +25,9 @@ public class SecFiltrosStpV {
 		description="Seleccionar los colores <b>" + tagLitColorsToSelect + "</b>", 
         expected="Aparece la galería de imágenes",
         saveNettraffic=SaveWhen.Always)
-    public static int selectFiltroColoresStep (AppEcom app, Channel channel, boolean validaciones, String litMenu, 
-    										   List<Color> colorsToSelect, WebDriver driver) throws Exception {
+    public static int selectFiltroColoresStep (
+    		AppEcom app, Channel channel, boolean validaciones, String litMenu, List<Color> colorsToSelect, WebDriver driver) 
+			throws Exception {
         TestMaker.getCurrentStepInExecution().replaceInDescription(tagLitColorsToSelect, Color.getListNamesFiltros(colorsToSelect).toString());
         SecFiltros secFiltros = SecFiltros.newInstance(channel, app, driver);
         int numArticulos1page = secFiltros.selecFiltroColoresAndReturnNumArticles(colorsToSelect);            

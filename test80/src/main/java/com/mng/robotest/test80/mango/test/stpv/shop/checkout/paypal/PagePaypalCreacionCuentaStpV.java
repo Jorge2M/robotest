@@ -9,11 +9,11 @@ public class PagePaypalCreacionCuentaStpV {
 	@Step (
 		description="Seleccionamos el botón <b>Iniciar Sesión</b>", 
          expected="Aparece la página de login")
-    public static void clickButtonIniciarSesion(WebDriver driver) throws Exception {       
+    public static void clickButtonIniciarSesion(WebDriver driver) {
         PagePaypalCreacionCuenta.clickButtonIniciarSesion(driver);
         
         //Validaciones
-        int maxSecondsWait = 10;
-        PagePaypalLoginStpV.validateIsPageUntil(maxSecondsWait, driver);
+        int maxSeconds = 10;
+        PagePaypalLoginStpV.validateIsPageUntil(maxSeconds, driver);
     }
 }

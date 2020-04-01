@@ -40,7 +40,7 @@ public class PageGestionSolPedidoBuyerStpV {
 	@Step (
 		description="Introducir el texto #{textToSearch} en el buscador y pulsar el icono de la lupa",
 		expected="Se muestran solicitudes de pedido")
-	public void searchSolicitudExistente(String textToSearch) throws Exception {
+	public void searchSolicitudExistente(String textToSearch) {
 		pageObject.filterBuscar.sendText(textToSearch);
 		pageObject.filterBuscar.clickLupaForSearch();
 		checkSolicitudesVisible(5);
@@ -88,14 +88,14 @@ public class PageGestionSolPedidoBuyerStpV {
 		description="Clickar Botón <b>Ir</b>",
 		expected="Aparece una lista de Productos",
 		saveImagePage=SaveWhen.Always)
-	public void clickIrButton() throws Exception {
+	public void clickIrButton() {
 		pageObject.clickIrButton();
 	}
 	
 	@Step (
 		description="Seleccionar el icono + para añadir un pedido",
 		expected="Aparece la página de \"Solicitud de Pedido\"")
-	public PageSolicitudPedidoStpV clickIconAñadirPedido() throws Exception {
+	public PageSolicitudPedidoStpV clickIconAñadirPedido() {
 		PageSolicitudPedidoStpV pageSolPedidosStpV = 
 			PageSolicitudPedidoStpV.getNew(
 				pageObject.clickIconAñadirPedido());

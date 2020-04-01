@@ -32,8 +32,7 @@ public class PageRegistroNinosStpV {
 	@Step (
 		description="Introducir datos de los niños: <br>#{listaNinos.getFormattedHTMLData()}<br> y finalmente pulsar el botón \"Continuar\"", 
         expected="Aparece la página de introducción de datos de la dirección")
-    public static void sendNinoDataAndContinue(ListDataNinos listaNinos, Pais pais, WebDriver driver) 
-    throws Exception {
+    public static void sendNinoDataAndContinue(ListDataNinos listaNinos, Pais pais, WebDriver driver) {
         PageRegistroNinos.setDataNinoIfNotExists(listaNinos, 2, driver);
         PageRegistroNinos.clickContinuar(driver);
         PageRegistroDirecStpV.isPageFromPais(pais, driver);

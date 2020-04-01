@@ -30,8 +30,4 @@ public class SuitesExecuted {
 		return null;
 	}
 	
-//	SuiteTestMaker getSuite(String idSuite) {
-//		listSuites.get(1).
-//	}
-	
 }

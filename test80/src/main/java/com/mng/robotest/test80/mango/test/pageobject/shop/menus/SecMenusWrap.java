@@ -6,8 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -90,7 +90,7 @@ public class SecMenusWrap {
     }
 
 	public void closeSessionIfUserLogged() throws Exception {
-		secMenusUser.clickMenuIfInState(UserMenu.cerrarSesion, StateElem.Clickable);
+		secMenusUser.clickMenuIfInState(UserMenu.cerrarSesion, State.Clickable);
     }
     
     public List<DataScreenMenu> getListDataScreenMenus(Linea linea, SublineaNinosType sublineaType) throws Exception {
@@ -118,7 +118,7 @@ public class SecMenusWrap {
         return lineaShop.name();
     }
     
-    public void selecLinea(Pais pais, LineaType lineaType) throws Exception {
+    public void selecLinea(Pais pais, LineaType lineaType) {
         if (channel==Channel.movil_web) {
         	secMenuLateralMobil.selecLinea(pais.getShoponline().getLinea(lineaType));
         } else {
@@ -139,7 +139,7 @@ public class SecMenusWrap {
      *  Desktop: selecciona una entrada del menú superior
      *  Móvil:   selecciona una entrada del menú lateral
      */
-    public void clickMenu1erNivel(Pais pais, Menu1rstLevel menu1rstLevel) throws Exception {
+    public void clickMenu1erNivel(Pais pais, Menu1rstLevel menu1rstLevel) {
         if (channel==Channel.desktop) {
         	secMenusDesktop.secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel);
         } else {

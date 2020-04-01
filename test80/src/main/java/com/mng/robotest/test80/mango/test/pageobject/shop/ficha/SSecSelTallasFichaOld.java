@@ -7,12 +7,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Talla;
 
 
-public class SSecSelTallasFichaOld extends WebdrvWrapp {
+public class SSecSelTallasFichaOld {
     
     static String XPathSelectTalla = "//select[@id[contains(.,'productFormSelect')]]";
     static String XPathOptionTallaUnica = XPathSelectTalla + "/option[@data-available='true' and @value[contains(.,'99')]]";
@@ -28,8 +29,9 @@ public class SSecSelTallasFichaOld extends WebdrvWrapp {
     	return (xpathOption + "//self::*[text()[contains(.,'" + talla + "')]]");
     }
     
-    public static boolean isVisibleSelectorTallasUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathSelectTalla), maxSecondsToWait));
+    public static boolean isVisibleSelectorTallasUntil(int maxSeconds, WebDriver driver) {
+    	return (state(Visible, By.xpath(XPathSelectTalla), driver)
+    			.wait(maxSeconds).check());
     }
     
     public static int getNumOptionsTallas(WebDriver driver) {
@@ -43,11 +45,11 @@ public class SSecSelTallasFichaOld extends WebdrvWrapp {
     
     public static boolean isTallaAvailable(String talla, WebDriver driver) {
     	String xpathTalla = getXPathOptionTallaSegunDisponible(true, talla);
-    	return (isElementPresent(driver, By.xpath(xpathTalla)));
+    	return (state(Present, By.xpath(xpathTalla), driver).check());
     }
     
     public static boolean isTallaUnica(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathOptionTallaUnica)));
+    	return (state(Present, By.xpath(XPathOptionTallaUnica), driver).check());
     }
 
     public static Select despliegaSelectTallas(WebDriver driver) {
@@ -110,7 +112,7 @@ public class SSecSelTallasFichaOld extends WebdrvWrapp {
     
     public static String getTallaAlf(int posicion, WebDriver driver) {
     	String xpathTalla = "(" + XPathOptionTalla + ")[" + posicion + "]";
-    	if (isElementPresent(driver, By.xpath(xpathTalla))) {
+    	if (state(Present, By.xpath(xpathTalla), driver).check()) {
     		return (driver.findElement(By.xpath(xpathTalla)).getText());
     	}
     	return "";
@@ -118,7 +120,7 @@ public class SSecSelTallasFichaOld extends WebdrvWrapp {
     
     public static String getTallaCodNum(int posicion, WebDriver driver) {
     	String xpathTalla = "(" + XPathOptionTalla + ")[" + posicion + "]";
-    	if (isElementPresent(driver, By.xpath(xpathTalla))) {
+    	if (state(Present, By.xpath(xpathTalla), driver).check()) {
     		return (driver.findElement(By.xpath(xpathTalla)).getAttribute("value"));
     	}
     	return "";

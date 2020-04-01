@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort.PageSofort2on;
 
 /**
@@ -16,19 +16,19 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort.PageSo
 public class PageSofort2onStpV {
     
 	@Validation (
-		description="Aparece la página de selección del país/banco (la esperamos hasta #{maxSecondsWait} segundos)",
+		description="Aparece la página de selección del país/banco (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-    public static boolean validaIsPageUntil(int maxSecondsWait, WebDriver driver) {
-		return (PageSofort2on.isPageUntil(maxSecondsWait, driver));
+    public static boolean validaIsPageUntil(int maxSeconds, WebDriver driver) {
+		return (PageSofort2on.isPageUntil(maxSeconds, driver));
     }
     
 	@Step (
 		description="Seleccionamos el país con código <b>#{paisSofort}</b> y el código de banco <b>#{bankCode}</b> y pulsamos \"Weiter\"",
 		expected="Aparece la página de indentificación en SOFORT")
-    public static void selectPaisYBanco(String paisSofort, String bankCode, WebDriver driver) throws Exception {
+    public static void selectPaisYBanco(String paisSofort, String bankCode, WebDriver driver) {
         PageSofort2on.selectPais(driver, paisSofort);
         PageSofort2on.inputBankcode(bankCode, driver);
-        WebdrvWrapp.waitForPageLoaded(driver, 5);
+        SeleniumUtils.waitForPageLoaded(driver, 5);
         PageSofort2on.clickSubmitButtonPage3(driver);
     
         //Validaciones

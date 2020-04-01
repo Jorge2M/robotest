@@ -1,12 +1,16 @@
 package com.mng.robotest.test80.mango.test.factoryes.jaxb;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.*;
 
 
 @XmlRootElement
-public class Tpv {
+public class Tpv implements Serializable {
 
-    String id;
+	private static final long serialVersionUID = -11661968618489661L;
+	
+	String id;
 	String clase;
     String estado;
     String notificaciones;

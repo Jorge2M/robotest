@@ -41,7 +41,7 @@ public class PageHomeDonateLikesStpV {
 	@Step (
 		description="Seleccionamos el botón para donar #{buttonLikes.getNumLikes()} likes",
 		expected="Se donan correctamente los likes")
-	public void selectDonateButton(ButtonLikes buttonLikes) throws Exception {
+	public void selectDonateButton(ButtonLikes buttonLikes) {
 		pageHomeDonateLikes.clickButton(buttonLikes);
 		checkAfterDonateLikes(buttonLikes);
 	}
@@ -49,10 +49,10 @@ public class PageHomeDonateLikesStpV {
 	@Validation
 	public ChecksTM checkAfterDonateLikes(ButtonLikes buttonSelected) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSecondsWait = 5;
+		int maxSeconds = 5;
 		checks.add(
-			"Aparece el icono correspondiente a la operación realizada (lo esperamos hasta " + maxSecondsWait + " segundos)",
-			pageHomeDonateLikes.isVisibleIconOperationDoneUntil(maxSecondsWait), State.Defect);
+			"Aparece el icono correspondiente a la operación realizada (lo esperamos hasta " + maxSeconds + " segundos)",
+			pageHomeDonateLikes.isVisibleIconOperationDoneUntil(maxSeconds), State.Defect);
 
 		return checks;
 	}	

@@ -4,8 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecBolsaButtonAndLinksNew.ActionFavButton;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecBolsaButtonAndLinksNew.LinksAfterBolsa;
+
 
 @SuppressWarnings({"static-access"})
 /**
@@ -25,7 +27,7 @@ public class PageFichaArtNew extends PageFicha {
     private static final String XPathHtmlFicha = "//html[@class[contains(.,'ficha')]]";
     
     private PageFichaArtNew(Channel channel, WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         this.channel = channel;
         this.typeFicha = TypeFicha.New;
     }
@@ -40,30 +42,30 @@ public class PageFichaArtNew extends PageFicha {
     }
     
     @Override
-    public boolean isPageUntil(int maxSecondsWait) {
-        return (isElementPresentUntil(driver, By.xpath(XPathHtmlFicha), maxSecondsWait) &&
-                secDataProduct.secSelTallasNew.isVisibleSelectorTallasUntil(maxSecondsWait, driver));
+    public boolean isPageUntil(int maxSeconds) {
+    	return (state(Present, By.xpath(XPathHtmlFicha)).wait(maxSeconds).check() &&
+                secDataProduct.secSelTallasNew.isVisibleSelectorTallasUntil(maxSeconds, driver));
     }
     
     @Override
-    public boolean isFichaArticuloUntil(String refArticulo, int maxSecondsToWait) {
+    public boolean isFichaArticuloUntil(String refArticulo, int maxSeconds) {
         String refSinColor = refArticulo.substring(0,8); 
         String xpathFichaRef = getXPathIsPage(refSinColor);
-        return (isElementVisibleUntil(driver, By.xpath(xpathFichaRef), maxSecondsToWait));
+        return (state(Visible, By.xpath(xpathFichaRef)).wait(maxSeconds).check());
     }
     
     @Override
-    public void clickAnadirBolsaButtonAndWait() throws Exception {
+    public void clickAnadirBolsaButtonAndWait() {
     	secBolsaButtonAndLinks.clickAnadirBolsaButtonAndWait(this.driver);
     }
     
     @Override
-    public void selectAnadirAFavoritosButton() throws Exception {
+    public void selectAnadirAFavoritosButton() {
         secBolsaButtonAndLinks.selectFavoritosButton(ActionFavButton.Add, driver);
     }
     
     @Override
-    public void selectRemoveFromFavoritosButton() throws Exception {
+    public void selectRemoveFromFavoritosButton() {
         secBolsaButtonAndLinks.selectFavoritosButton(ActionFavButton.Remove, driver);
     }    
     
@@ -93,7 +95,7 @@ public class PageFichaArtNew extends PageFicha {
     }
     
     @Override
-    public void selectBuscarEnTiendaLink() throws Exception {
+    public void selectBuscarEnTiendaLink() {
     	secBolsaButtonAndLinks.clickLinkAndWaitLoad(LinksAfterBolsa.DisponibilidadTienda, this.driver);
     }
     

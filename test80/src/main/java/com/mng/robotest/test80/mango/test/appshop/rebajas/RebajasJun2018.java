@@ -62,7 +62,7 @@ public class RebajasJun2018 {
 	    dCtxSh.setChannel(inputParamsSuite.getChannel());
 	    dCtxSh.pais = this.paisFactory;
 	    dCtxSh.idioma = this.idiomaFactory;
-	    dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+	    //dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 	    return dCtxSh;
     }
 	
@@ -71,7 +71,7 @@ public class RebajasJun2018 {
     	   description="Validaciones específicas correspondientes a las Rebajas de Diciembre-2017")
     public void REB001_RebajasDic2018() throws Exception {
     	setInputParamsSuite();
-    	TestMaker.getTestCase().setRefineDataName(index_fact);
+    	TestMaker.getTestCase().setSpecificInputData(index_fact);
         DataCtxShop dCtxSh = getCtxShForTest();
     	WebDriver driver = TestMaker.getDriverTestCase();
         int numLineasPais = dCtxSh.pais.getShoponline().getNumLineasTiendas(dCtxSh.appE);

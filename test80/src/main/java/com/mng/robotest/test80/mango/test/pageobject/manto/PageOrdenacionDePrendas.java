@@ -1,10 +1,10 @@
 package com.mng.robotest.test80.mango.test.pageobject.manto;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import org.openqa.selenium.By;
 
-public class PageOrdenacionDePrendas extends WebdrvWrapp {
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
+
+public class PageOrdenacionDePrendas {
 	
     public enum Orden implements ElementPage {
     	titulo("ORDENADOR DE PRENDAS"),
@@ -22,18 +22,19 @@ public class PageOrdenacionDePrendas extends WebdrvWrapp {
     	aplicarOrden("//button[@onclick[contains(.,'aplicarOrden')]]");
     	
     	String xpath;
-    	
-    	Orden(String xpath) {
-    		this.xpath = xpath;
+    	By by;
+    	Orden(String xPath) {
+    		xpath = xPath;
+    		by = By.xpath(xPath);
     	}
     	
+    	@Override
+    	public By getBy() {
+    		return by;
+    	}
     	public String getXPath() {
-    		return this.xpath;
+    		return xpath;
     	}
-
-		public String getXPath(Channel channel) {
-			return xpath;
-		}
 	}
     
 	public enum Modal implements ElementPage {
@@ -42,18 +43,14 @@ public class PageOrdenacionDePrendas extends WebdrvWrapp {
 		applyCountry("//input[@value='Aplicar orden país']"),
 		cancel("//button[@id='cancelarAplicar']");
 		
-		String element;
-		
-		Modal(String element) {
-			this.element = element;
+		By by;
+		Modal(String xpath) {
+			by = By.xpath(xpath);
 		}
 		
-		public String getXPath() {
-			return this.element;
-		}
-
-		public String getXPath(Channel channel) {
-			return element;
+		@Override
+		public By getBy() {
+			return by;
 		}
 	}
 	
@@ -64,18 +61,14 @@ public class PageOrdenacionDePrendas extends WebdrvWrapp {
 		Nino("//input[@src[contains(.,'cabecera_mango_nino')]]"),
 		Violeta("//input[@src[contains(.,'cabecera_mango_violeta')]]");
 		
-		String element;
-		
-		Section(String element) {
-			this.element = element;
+		By by;
+		Section(String xpath) {
+			by = By.xpath(xpath);
 		}
 		
-		public String getXPath() {
-			return this.element;
-		}
-
-		public String getXPath(Channel channel) {
-			return element;
+		@Override
+		public By getBy() {
+			return by;
 		}
 	}
 

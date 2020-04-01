@@ -5,16 +5,16 @@ import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.DataDireccion.DataDirType;
 
 
-public abstract class ModalDireccion extends WebdrvWrapp {
+public abstract class ModalDireccion {
 
     static String XPathInputNif = "//input[@id[contains(.,'cfDni')]]";
     static String XPathInputName = "//input[@id[contains(.,'cfName')]]";
@@ -91,15 +91,15 @@ public abstract class ModalDireccion extends WebdrvWrapp {
     public static void selectProvincia(String provincia, String XPathFormModal, WebDriver driver) {
         new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(By.xpath(XPathFormModal + XPathSelectProvincia)));
         new Select(driver.findElement(By.xpath(XPathFormModal + XPathSelectProvincia))).selectByVisibleText(provincia);
-    }    
-    
-    public static void selectPais(String codigoPais, String XPathFormModal, WebDriver driver) {
-        String xpathSelectedPais = XPathSelectPais + "/option[@selected='selected' and @value='" + codigoPais + "']";
-        if (!isElementPresent(driver, By.xpath(xpathSelectedPais))) {
-            new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(By.xpath(XPathFormModal + XPathSelectPais)));
-            new Select(driver.findElement(By.xpath(XPathFormModal + XPathSelectPais))).selectByValue(codigoPais);
-        }
-    }    
+    }
+
+	public static void selectPais(String codigoPais, String XPathFormModal, WebDriver driver) {
+		String xpathSelectedPais = XPathSelectPais + "/option[@selected='selected' and @value='" + codigoPais + "']";
+		if (!state(Present, By.xpath(xpathSelectedPais), driver).check()) {
+			new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(By.xpath(XPathFormModal + XPathSelectPais)));
+			new Select(driver.findElement(By.xpath(XPathFormModal + XPathSelectPais))).selectByValue(codigoPais);
+		}
+	}
 
 	private static void sendKeysToInput(DataDirType inputType, String dataToSend, String XPathFormModal, WebDriver driver) {
 		String xpathInput = XPathFormModal + getXPathInput(inputType);

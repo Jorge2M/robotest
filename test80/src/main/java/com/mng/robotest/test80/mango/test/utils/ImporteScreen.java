@@ -8,7 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class ImporteScreen {
 	
@@ -88,7 +89,7 @@ public class ImporteScreen {
     	}
     	
     	xpathImports = replaceLast(xpathImports, litOr, "") + "]";
-        return (WebdrvWrapp.isElementPresent(driver, By.xpath(xpathImports)));
+    	return (state(Present, By.xpath(xpathImports), driver).check());
     }
     
     /**

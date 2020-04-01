@@ -4,15 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.sapfiori.access.test.testcase.generic.webobject.makers.StandarElementsMaker;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 
-public class PageObject extends WebdrvWrapp {
+public class PageObject extends PageObjTM {
 	
-	protected final WebDriver driver;
 	protected final StandarElementsMaker elementsMaker;
 	
 	public PageObject(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 		this.elementsMaker = StandarElementsMaker.getNew(driver);
 	}
 	
@@ -24,15 +23,14 @@ public class PageObject extends WebdrvWrapp {
 		return this.elementsMaker;
 	}
 	
-	public void waitForPageFinished() throws Exception {
+	public void waitForPageFinished() {
 		waitForPageLoaded(driver);
 		StandarElementsMaker standarMaker = StandarElementsMaker.getNew(driver);
 		standarMaker.getModalLoading().isInvisibleUntil(20);
 	}
 	
-	public boolean clickAndWaitLoad(By byElem) throws Exception {
-		boolean ok = clickAndWaitLoad(driver, byElem);
+	public void clickAndWaitLoad(By byElem) {
+		click(byElem).exec();
 		waitForPageFinished();
-		return ok;
 	}
 }

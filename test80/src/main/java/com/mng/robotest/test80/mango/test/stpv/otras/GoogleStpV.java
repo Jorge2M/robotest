@@ -13,43 +13,49 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.landing.PageLanding;
 
 public class GoogleStpV {
 
+	private final WebDriver driver;
+	private final PageGoogle pageGoogle;
+	
+	public GoogleStpV(WebDriver driver) {
+		this.driver = driver;
+		this.pageGoogle = new PageGoogle(driver);
+	}
+	
 	@Step (
 		description="Accedemos a la URL de Google (http://www.google.es\") y buscamos \"MANGO\"", 
         expected="Aparecen los links de Mango con contenido correcto",
         saveHtmlPage=SaveWhen.IfProblem)
-    public static void accessGoogleAndSearchMango(WebDriver driver) throws Exception {
-        PageGoogle.accessViaURL(driver);
-        PageGoogle.searchTextAndWait(driver, "MANGO");       
-        checkLinksMango(driver);
+    public void accessGoogleAndSearchMango() throws Exception {
+        pageGoogle.accessViaURL();
+        pageGoogle.searchTextAndWait("MANGO");
+        checkLinksMango();
     }
 	
 	@Validation
-	private static ChecksTM checkLinksMango(WebDriver driver) {
+	private ChecksTM checkLinksMango() {
 		ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 3;
+        int maxSeconds = 3;
     	validations.add(
-    		"El 1er link no-anuncio contiene \"MANGO\" (lo esperamos " + maxSecondsWait + " segundos)",
-    		PageGoogle.validaFirstLinkContainsUntil("Mango", maxSecondsWait, driver), State.Defect);		
+    		"El 1er link no-anuncio contiene \"MANGO\" (lo esperamos " + maxSeconds + " segundos)",
+    		pageGoogle.validaFirstLinkContainsUntil("Mango", maxSeconds), State.Defect);		
     	validations.add(
     		"El 1er link no-anuncion no contiene \"robots.txt\"",
-    		!PageGoogle.validaFirstLinkContainsUntil("robots.txt", 0, driver), State.Warn);
+    		!pageGoogle.validaFirstLinkContainsUntil("robots.txt", 0), State.Warn);
     	return validations;
 	}
 
 	@Step (
 		description="Seleccionamos el 1er link normal (sin publicidad)", 
         expected="Aparece la página inicial de la shop de Mango")
-    public static void selectFirstLinkSinPublicidad(WebDriver driver) throws Exception { 
-		PageGoogle.clickFirstLinkNoPubli(driver);
-    
-        //Validaciones
-		checkInitialPageShop(driver);
+    public void selectFirstLinkSinPublicidad() throws Exception { 
+		pageGoogle.clickFirstLinkNoPubli();
+		checkInitialPageShop();
     }
 	
 	@Validation (
 		description="Aparece la página de <b>Landing</b> o <b>Prehome</b>",
 		level=State.Defect)	
-	private static boolean checkInitialPageShop(WebDriver driver) throws Exception {
+	private boolean checkInitialPageShop() throws Exception {
         boolean isPageLanding = PageLanding.isPage(driver);
         boolean isPagePrehome = PagePrehome.isPage(driver);
         return (isPageLanding || isPagePrehome);

@@ -5,10 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.test80.mango.test.data.CodIdioma;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageSelectIdiomaVOTF extends WebdrvWrapp {
+public class PageSelectIdiomaVOTF {
 
     private static final String XPathSelectIdioma = "//select[@name[contains(.,'country')]]";
     private static final String XPathButtonAceptar = "//span[@class[contains(.,'button submit')]]";
@@ -17,16 +18,16 @@ public class PageSelectIdiomaVOTF extends WebdrvWrapp {
         new Select(driver.findElement(By.xpath(XPathSelectIdioma))).selectByValue(codigoIdioma.toString());
     }
 
-    public static void clickButtonAceptar(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonAceptar));
+    public static void clickButtonAceptar(WebDriver driver) {
+    	click(By.xpath(XPathButtonAceptar), driver).exec();
     	
         //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
         if (isVisibleButtonAceptar(driver)) {
-        	clickAndWaitLoad(driver, By.xpath(XPathButtonAceptar));
+        	click(By.xpath(XPathButtonAceptar), driver).exec();
         }
     }
     
     public static boolean isVisibleButtonAceptar(WebDriver driver) {
-    	return (isElementVisible(driver, By.xpath(XPathButtonAceptar)));
+    	return (state(Visible, By.xpath(XPathButtonAceptar), driver).check());
     }
 }

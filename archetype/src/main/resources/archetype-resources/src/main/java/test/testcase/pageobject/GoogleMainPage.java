@@ -1,5 +1,6 @@
 package ${package}.test.testcase.pageobject;
 
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -7,10 +8,9 @@ public class GoogleMainPage extends PageObject {
 
 	private final static String XPathInputBuscador = "//input[@role='combobox']";
 	private final static String XPathBuscarConGoogleButton = "//input[@value='Buscar con Google']";
-	private final WebDriver driver;
 	
 	private GoogleMainPage(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 	}
 	public static GoogleMainPage getNew(WebDriver driver) {
 		return new GoogleMainPage(driver);
@@ -21,8 +21,8 @@ public class GoogleMainPage extends PageObject {
 		driver.findElement(byInput).sendKeys(textToInput);
 	}
 	
-	public ResultsGooglePage clickBuscarConGoogleButton() throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathBuscarConGoogleButton));
+	public ResultsGooglePage clickBuscarConGoogleButton() {
+		click(By.xpath(XPathBuscarConGoogleButton)).exec();
 		return ResultsGooglePage.getNew(driver);
 	}
 }

@@ -5,7 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 /**
@@ -13,10 +14,9 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
  * @author jorge.munoz
  *
  */
-public class SecSelectorPrecios extends WebdrvWrapp {
+public class SecSelectorPrecios extends PageObjTM {
 	public enum TypeClick {left, right}
 	
-	private final WebDriver driver;
 	private final AppEcom app;
 //	private OutletGalery outputGalery;
 	
@@ -35,8 +35,8 @@ public class SecSelectorPrecios extends WebdrvWrapp {
 	private static String XPathRightCornerShop = XPathImporteMaximoShop + "/../..";
 	
 	public SecSelectorPrecios(AppEcom app, WebDriver driver) {
+		super(driver);
 		this.app = app;
-		this.driver = driver;
 	}
 	
 //	private OutletGalery getOutletGalery() {
@@ -113,7 +113,7 @@ public class SecSelectorPrecios extends WebdrvWrapp {
 
 	public boolean isVisible() {
 		By byLineaFiltro = By.xpath(getXPathLineaFiltro());
-		return (isElementVisible(driver, byLineaFiltro));
+		return (state(Visible, byLineaFiltro).check());
 	}
 
 	public int getImporteMinimo() {

@@ -3,23 +3,25 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.multibanco;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageMultibancoEnProgreso extends WebdrvWrapp {
+public class PageMultibancoEnProgreso {
     
     static String XPathCabeceraEnProgreso = "//h2[text()[contains(.,'Pagamento em progresso')]]";
     static String XPathButtonNextStep = "//input[@id='mainSubmit' and @type='submit']";
     
-    public static boolean isPageUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementPresentUntil(driver, By.xpath(XPathCabeceraEnProgreso), maxSecondsToWait));
+    public static boolean isPageUntil(int maxSeconds, WebDriver driver) {
+    	return (state(Present, By.xpath(XPathCabeceraEnProgreso), driver)
+    			.wait(maxSeconds).check());
     }
     
     public static boolean isButonNextStep(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathButtonNextStep)));
+    	return (state(Present, By.xpath(XPathButtonNextStep), driver).check());
     }
-    
-    public static void clickButtonNextStep(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonNextStep));
-    }
+
+	public static void clickButtonNextStep(WebDriver driver) {
+		click(By.xpath(XPathButtonNextStep), driver).exec();
+	}
 }

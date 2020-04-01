@@ -33,11 +33,11 @@ public class SecTarjetaPciStpV {
     public ChecksTM validateIsSectionOk(Pago pago, Pais pais) {
     	ChecksTM validations = ChecksTM.getNew();
     	if (channel==Channel.desktop && pago.getTypePago()!=TypePago.KrediKarti) {
-            int maxSecondsWait = 5;
+            int maxSeconds = 5;
 		 	validations.add(
 				"Aparece el bloque correspondiente a la introducción de los datos del método de pago " + pago.getNombre(channel) + 
-				" (lo esperamos hasta " + maxSecondsWait + " segundo)",
-				secTarjetaPci.isVisiblePanelPagoUntil(pago.getNombre(channel), maxSecondsWait), 
+				" (lo esperamos hasta " + maxSeconds + " segundo)",
+				secTarjetaPci.isVisiblePanelPagoUntil(pago.getNombre(channel), maxSeconds), 
 				State.Warn);    
     	}
     	

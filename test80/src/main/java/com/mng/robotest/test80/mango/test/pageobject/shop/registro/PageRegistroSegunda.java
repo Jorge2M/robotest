@@ -7,10 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageRegistroSegunda extends WebdrvWrapp {
+public class PageRegistroSegunda {
 
     private static final String XPathNewsletterTitle = "//div[@class[contains(.,'additionalData')]]//span[@class='info']";
     private static final String XPathFormStep2 = "//form[@class[contains(.,'customFormIdSTEP2')]]";
@@ -54,8 +55,8 @@ public class PageRegistroSegunda extends WebdrvWrapp {
         return ("//div[@class='radiobuttonBtn']/input[@value='" + numNinos + "']");
     }
     
-    public static boolean isPageUntil(WebDriver driver, int maxSecondsToWait) throws Exception {
-        return (isElementPresentUntil(driver, By.xpath(XPathFormStep2), maxSecondsToWait));    
+    public static boolean isPageUntil(WebDriver driver, int maxSeconds) {
+    	return (state(Present, By.xpath(XPathFormStep2), driver).wait(maxSeconds).check());
     }
     
     /**
@@ -85,7 +86,7 @@ public class PageRegistroSegunda extends WebdrvWrapp {
     }
     
     public static boolean isPresentSelectDiaNacim(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathSelectDiaNacim)));
+    	return (state(Present, By.xpath(XPathSelectDiaNacim), driver).check());
     }
     
     public static void selectDiaNacimByText(WebDriver driver, String dia) {
@@ -109,7 +110,7 @@ public class PageRegistroSegunda extends WebdrvWrapp {
         while (tokensLinea.hasMoreElements()) {
             String lineaStr=tokensLinea.nextToken();
             String xpathCheckboxLinea = getXPath_checkboxLinea(lineaStr);
-            if (!isElementPresent(driver, By.xpath(xpathCheckboxLinea))) {
+            if (!state(Present, By.xpath(xpathCheckboxLinea), driver).check()) {
                 isPresentInputs = false;
                 break;
             }
@@ -122,7 +123,7 @@ public class PageRegistroSegunda extends WebdrvWrapp {
      * Desmarca una serie de líneas al azar (de entre las contenidas en lineasComaSeparated)
      * @return las líneas desmarcadas separadas por comas
      */
-    public static String desmarcarLineasRandom(WebDriver driver, String lineasComaSeparated) throws Exception {
+    public static String desmarcarLineasRandom(WebDriver driver, String lineasComaSeparated) {
         StringTokenizer tokensLin = new StringTokenizer(lineasComaSeparated, ",");
         String lineasDesmarcadas = "";
         int i=0;
@@ -130,8 +131,8 @@ public class PageRegistroSegunda extends WebdrvWrapp {
             String lineaStr=tokensLin.nextToken();
             if (Math.random() < 0.5) {
                 String xpathLineaClick = getXPath_checkboxLineaClickable(lineaStr);
-                if (isElementPresent(driver, By.xpath(xpathLineaClick))) {
-                    clickAndWaitLoad(driver, By.xpath(xpathLineaClick));
+                if (state(Present, By.xpath(xpathLineaClick), driver).check()) {
+                	click(By.xpath(xpathLineaClick), driver).exec();
                 }
                         
                 //Las líneas que desmarcamos las guardamos
@@ -146,7 +147,7 @@ public class PageRegistroSegunda extends WebdrvWrapp {
         return lineasDesmarcadas;
     }
     
-    public static void clickButtonContinuar(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonContinuar));
+    public static void clickButtonContinuar(WebDriver driver) {
+    	click(By.xpath(XPathButtonContinuar), driver).exec();
     }
 }

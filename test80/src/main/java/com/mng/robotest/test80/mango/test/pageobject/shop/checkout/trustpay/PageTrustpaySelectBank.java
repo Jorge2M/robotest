@@ -9,10 +9,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageTrustpaySelectBank extends WebdrvWrapp {
+public class PageTrustpaySelectBank {
     
     static String XPathListOfPayments = "//ul[@id='paymentMethods']";
     static String XPathCabeceraStep = "//h2[@id[contains(.,'stageheader')]]";
@@ -31,27 +32,28 @@ public class PageTrustpaySelectBank extends WebdrvWrapp {
     
     public static boolean isPresentEntradaPago(String nombrePago, Channel channel, WebDriver driver) {
         String xpathPago = getXPathEntradaPago(nombrePago, channel);
-        return (isElementPresent(driver, By.xpath(xpathPago)));
+        return (state(Present, By.xpath(xpathPago), driver).check());
     }
     
     public static boolean isPresentCabeceraStep(String nombrePago, Channel channel, WebDriver driver) {
         String xpathCab = getXPathEntradaPago(nombrePago, channel);
-        return (isElementPresent(driver, By.xpath(xpathCab)));
+        return (state(Present, By.xpath(xpathCab), driver).check());
     }
     
     public static boolean isPresentButtonPago(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathButtonPago)));
+    	return (state(Present, By.xpath(XPathButtonPago), driver).check());
     }
     
     public static boolean isPresentSelectBancos(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathSelectBancos))); 
+    	return (state(Present, By.xpath(XPathSelectBancos), driver).check());
     }
     
-    public static void selectBankThatContains(ArrayList<String> strContains, Channel channel, WebDriver driver) throws Exception {
+    public static void selectBankThatContains(ArrayList<String> strContains, Channel channel, WebDriver driver) {
         //En el caso de móvil para que aparezca el desplegable se ha de seleccionar el icono del banco
         if (channel==Channel.movil_web) {
-            if (!isElementVisible(driver, By.xpath(XPathSelectBancos)))
+        	if (!state(Visible, By.xpath(XPathSelectBancos), driver).check()) {
                 clickIconoBanco(driver);
+        	}
         }
         
         Select selectBank = new Select(driver.findElement(By.xpath(XPathSelectBancos)));
@@ -79,16 +81,16 @@ public class PageTrustpaySelectBank extends WebdrvWrapp {
         
         return false;
     }
-    
-    public static void clickIconoBanco(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathInputIconoTrustpay));
-    }
-    
-    public static void clickButtonToContinuePay(Channel channel, WebDriver driver) throws Exception {
+
+	public static void clickIconoBanco(WebDriver driver) {
+		click(By.xpath(XPathInputIconoTrustpay), driver).exec();
+	}
+
+    public static void clickButtonToContinuePay(Channel channel, WebDriver driver) {
         if (channel==Channel.movil_web) {
-            clickAndWaitLoad(driver, By.xpath(XPathButtonContinueMobil));
+        	click(By.xpath(XPathButtonContinueMobil), driver).exec();
         } else {
-            clickAndWaitLoad(driver, By.xpath(XPathButtonPayDesktop));
+        	click(By.xpath(XPathButtonPayDesktop), driver).exec();
         }
     }
 }

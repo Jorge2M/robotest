@@ -25,7 +25,7 @@ public class PageListPedidosStpV {
 	@Step (
 		description="Seleccionar el pedido de la lista <b>#{codPedido}</b>", 
         expected="Apareca la página con los datos correctos del pedido")
-    public static void selectPedido(String codPedido, WebDriver driver) throws Exception {
+    public static void selectPedido(String codPedido, WebDriver driver) {
 		PageListPedidos.selectLineaPedido(codPedido, driver);
     }
 }

@@ -3,13 +3,13 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.pci;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.testmaker.service.webdriver.pageobject.SelectElement.TypeSelect.*;
 
 
-public class SecTarjetaPciNotInIframeDesktop extends WebdrvWrapp implements SecTarjetaPci {
+public class SecTarjetaPciNotInIframeDesktop extends PageObjTM implements SecTarjetaPci {
 
-	private final WebDriver driver;
-	
     static String XPathBlock = "//span[@id[contains(.,'panelTarjetasForm')]]";
     static String XPathInputNumber = XPathBlock + "//input[@id[contains(.,'cardNumber')] or @id[contains(.,'cardnumber')] or @id[contains(.,'msu_cardpan')]]";
     static String XPathInputTitular = XPathBlock + "//input[@data-encrypted-name[contains(.,'holderName')] or @class[contains(.,'holdername')] or @class[contains(.,'holderName')] or @class[contains(.,'msu_nameoncard')]]";
@@ -19,7 +19,7 @@ public class SecTarjetaPciNotInIframeDesktop extends WebdrvWrapp implements SecT
     static String XPathInputDni = XPathBlock + "//input[@class[contains(.,'falcon_dni')]]"; //Specific for Codensa (Colombia)
     
     private SecTarjetaPciNotInIframeDesktop(WebDriver driver) {
-    	this.driver = driver;
+    	super(driver);
     }
     
     public static SecTarjetaPciNotInIframeDesktop getNew(WebDriver driver) {
@@ -33,37 +33,38 @@ public class SecTarjetaPciNotInIframeDesktop extends WebdrvWrapp implements SecT
     @Override
     public boolean isVisiblePanelPagoUntil(String nombrePago, int maxSeconds) {
         String xpathPanelPago = getXPath_PanelPago(nombrePago);
-        return (isElementVisibleUntil(driver, By.xpath(xpathPanelPago), maxSeconds));
+        return (state(Visible, By.xpath(xpathPanelPago), driver).wait(maxSeconds).check());
     }
     
     @Override
-    public boolean isPresentInputNumberUntil(int maxSecondsToWait) {
-        return (isElementPresentUntil(driver, By.xpath(XPathInputNumber), maxSecondsToWait));
+    public boolean isPresentInputNumberUntil(int maxSeconds) {
+    	return (state(Present, By.xpath(XPathInputNumber), driver)
+    			.wait(maxSeconds).check());
     }
     
     @Override
     public boolean isPresentInputTitular() {
-        return (isElementPresent(driver, By.xpath(XPathInputTitular)));
+    	return (state(Present, By.xpath(XPathInputTitular), driver).check());
     }
     
     @Override
     public boolean isPresentSelectMes() {
-        return (isElementPresent(driver, By.xpath(XPathSelectMes)));
+    	return (state(Present, By.xpath(XPathSelectMes), driver).check());
     }
      
     @Override
     public boolean isPresentSelectAny() {
-        return (isElementPresent(driver, By.xpath(XPathSelectAny)));
+    	return (state(Present, By.xpath(XPathSelectAny), driver).check());
     }
     
     @Override
     public boolean isPresentInputCvc() {
-        return (isElementPresent(driver, By.xpath(XPathInputCvc)));
+    	return (state(Present, By.xpath(XPathInputCvc), driver).check());
     }
     
     @Override
     public boolean isPresentInputDni() {
-        return (isElementPresent(driver, By.xpath(XPathInputDni)));
+    	return (state(Present, By.xpath(XPathInputDni), driver).check());
     }    
     
     @Override
@@ -92,11 +93,11 @@ public class SecTarjetaPciNotInIframeDesktop extends WebdrvWrapp implements SecT
     
     @Override
     public void selectMesByVisibleText(String mes) {
-        selectOption(By.xpath(XPathSelectMes), mes, OptionSelect.ByVisibleText, driver);
+		select(By.xpath(XPathSelectMes), mes).type(VisibleText).exec();
     }
     
     @Override
     public void selectAnyByVisibleText(String any) {
-        selectOption(By.xpath(XPathSelectAny), any, OptionSelect.ByVisibleText, driver);
+    	select(By.xpath(XPathSelectAny), any).type(VisibleText).exec();
     }
 }

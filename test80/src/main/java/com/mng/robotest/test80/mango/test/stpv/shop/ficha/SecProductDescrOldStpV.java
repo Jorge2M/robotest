@@ -35,7 +35,7 @@ public class SecProductDescrOldStpV {
 	@Step (
 		description="Seleccionar el panel <b>#{typePanel}</b> (en estado inicial: " + tagInitStatePanel + ")",
         expected="La pestaña queda en estado " + tagFinalStateExpected)
-    public static void selectPanel(TypePanel typePanel, WebDriver driver) throws Exception {
+    public static void selectPanel(TypePanel typePanel, WebDriver driver) {
         TypeStatePanel statePanelIni = SecProductDescrOld.getStatePanel(typePanel, driver);
         TypeStatePanel stateExpectedAfterClick = SecProductDescrOld.getStatePanelAfterClick(statePanelIni);
         StepTM step = TestMaker.getCurrentStepInExecution();
@@ -43,15 +43,14 @@ public class SecProductDescrOldStpV {
         step.replaceInExpected(tagFinalStateExpected, stateExpectedAfterClick.toString());
         
         SecProductDescrOld.clickPanel(typePanel, driver);
-        int maxSecondsWait = 1;
-        checkPanelInState(typePanel, stateExpectedAfterClick, maxSecondsWait, driver);
+        int maxSeconds = 1;
+        checkPanelInState(typePanel, stateExpectedAfterClick, maxSeconds, driver);
     }
 	
 	@Validation (
-		description="La sección ha de quedar en estado <b>#{stateExpectedAfterClick}</b> (lo esperamos hasta #{maxSecondsWait} segundos)",
+		description="La sección ha de quedar en estado <b>#{stateExpectedAfterClick}</b> (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-	private static boolean checkPanelInState(TypePanel typePanel, TypeStatePanel stateExpectedAfterClick, int maxSecondsWait, WebDriver driver) 
-	throws Exception {
-	    return (SecProductDescrOld.isPanelInStateUntil(typePanel, stateExpectedAfterClick, maxSecondsWait, driver));
+	private static boolean checkPanelInState(TypePanel typePanel, TypeStatePanel stateExpectedAfterClick, int maxSeconds, WebDriver driver) {
+	    return (SecProductDescrOld.isPanelInStateUntil(typePanel, stateExpectedAfterClick, maxSeconds, driver));
 	}
 }

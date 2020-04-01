@@ -4,7 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.data.TiendaMantoEnum.TiendaManto;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 /**
@@ -12,31 +13,20 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
  * @author jorge.munoz
  *
  */
-public class PageSelTda extends WebdrvWrapp {
+public class PageSelTda {
 
-    static String XPathCeldaTextSelectEntorno = "//td[text()[contains(.,'Seleccion de Entorno')]]";
-    
-    /**
-     * @param tienda
-     * @return el xpath correspondiente al link de una tienda/almacén concreto (Alemania, Europa Palau...)
-     */
-    public static String getXpath_linkTienda(TiendaManto tienda) {
-        return ("//a[text()[contains(.,'" + tienda.litPantManto + "')]]");
-    }
-    
-    /**
-     * @return si realmente estamos en la página
-     */
-    public static boolean isPage(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathCeldaTextSelectEntorno)));
-    }
-    
-    /**
-     * Seleccionamos una tienda/almacén concreta de entre las disponibles (Alemania, Europa Palau...)
-     * @param tienda
-     */
-    public static void selectTienda(TiendaManto tienda, WebDriver driver) throws Exception {
-        String xpath = getXpath_linkTienda(tienda);
-        clickAndWaitLoad(driver, By.xpath(xpath));
-    }
+	static String XPathCeldaTextSelectEntorno = "//td[text()[contains(.,'Seleccion de Entorno')]]";
+
+	public static String getXpath_linkTienda(TiendaManto tienda) {
+		return ("//a[text()[contains(.,'" + tienda.litPantManto + "')]]");
+	}
+
+	public static boolean isPage(WebDriver driver) {
+		return (state(Present, By.xpath(XPathCeldaTextSelectEntorno), driver).check());
+	}
+
+	public static void selectTienda(TiendaManto tienda, WebDriver driver) {
+		String xpath = getXpath_linkTienda(tienda);
+		click(By.xpath(xpath), driver).exec();
+	}
 }

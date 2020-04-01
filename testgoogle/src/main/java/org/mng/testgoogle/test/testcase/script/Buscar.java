@@ -15,7 +15,6 @@ public class Buscar {
 	public void BUS001_Search_With_ManyPages() throws Exception {
 		TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
 		WebDriver driver = testCase.getDriver();
-		driver.get(testCase.getInputParamsSuite().getUrlBase());
 		
 		GoogleMainPageStpV googlePageStpV = GoogleMainPageStpV.getNew(driver);
 		ResultsGooglePageStpV resultsPageStpV = 

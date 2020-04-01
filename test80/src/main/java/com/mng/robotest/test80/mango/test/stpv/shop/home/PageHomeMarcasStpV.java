@@ -7,10 +7,12 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageHomeMarcas;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
@@ -43,7 +45,7 @@ public class PageHomeMarcasStpV {
     	}
 		validations.add(
 			"No aparece ningún tag de error",
-			!WebdrvWrapp.isElementPresent(driver, By.xpath("//error")), State.Warn);
+			!state(Present, By.xpath("//error"), driver).check(), State.Warn);
 		return validations;
     }
         

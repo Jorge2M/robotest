@@ -51,11 +51,6 @@ public class FilterTestsSuiteXML {
     	return this.groupsToInclude;
     }
     
-    /**
-     * Filter of a XmlTest of TestNG with the list of testCases. 
-     * @param testCaseList contains the names of the methods to exec
-     * 
-     */
     public void filterTestCasesToExec(TestRunTM testRun) {
         try {
         	List<TestMethod> testCaseListToExec = getTestCasesToExecute(testRun);
@@ -124,7 +119,7 @@ public class FilterTestsSuiteXML {
     	
     	List<TestMethod> listTestsFiltered = new ArrayList<>();
     	for (TestMethod testMethod : listToFilter) {
-    		String methodName = testMethod.getMethod().getName();
+    		String methodName = testMethod.getData().getTestCaseName();
     		if (TestNameUtils.isMethodNameInTestCaseList(methodName, dFilter.getTestCasesFilter())) {
     			listTestsFiltered.add(testMethod);
     		}
@@ -307,8 +302,8 @@ public class FilterTestsSuiteXML {
 
     private boolean testMethodsContainsMethod(List<TestMethod> testCasesToInclude, String methodName) {
         for (TestMethod testMethod : testCasesToInclude) {
-            if (testMethod.getMethod().getName().compareTo(methodName)==0 ||  
-                methodName.indexOf(TestNameUtils.getCodeFromTestCase(testMethod.getMethod().getName()))==0) {
+            if (testMethod.getData().getTestCaseName().compareTo(methodName)==0 ||  
+                methodName.indexOf(TestNameUtils.getCodeFromTestCase(testMethod.getData().getTestCaseName()))==0) {
                 return true;
             }
         }

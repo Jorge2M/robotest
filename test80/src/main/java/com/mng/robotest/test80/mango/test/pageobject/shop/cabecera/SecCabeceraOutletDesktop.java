@@ -4,7 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
+import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 /**
@@ -24,13 +26,14 @@ public class SecCabeceraOutletDesktop extends SecCabeceraOutlet {
 		ayuda("//a[@class[contains(.,'_pedidos')]]"),
 		bolsa("//div[@class[contains(.,'shoppingCart')]]");
 		
-		private String xpath;
+		private By by;
 		private LinkCabeceraOutletDesktop(String xpath) {
-			this.xpath = xpath;
+			by = By.xpath(xpath);
 		}
 		
-		public String getXPath() {
-			return xpath;
+		@Override
+		public By getBy() {
+			return by;
 		}
 	}
 
@@ -51,19 +54,19 @@ public class SecCabeceraOutletDesktop extends SecCabeceraOutlet {
     }
     
     @Override
-    public boolean isInStateIconoBolsa(StateElem state) {
+    public boolean isInStateIconoBolsa(State state) {
     	return (isElementInState(LinkCabeceraOutletDesktop.bolsa, state));
     }
 
     @Override
-    public void clickIconoBolsa() throws Exception {
+    public void clickIconoBolsa() {
     	clickElement(LinkCabeceraOutletDesktop.bolsa);
     }
 
     
     @Override
-    public void clickIconoBolsaWhenDisp(int maxSecondsWait) throws Exception {
-    	boolean isIconoClickable = isElementInStateUntil(LinkCabeceraOutletDesktop.bolsa, StateElem.Clickable, maxSecondsWait, driver);
+    public void clickIconoBolsaWhenDisp(int maxSeconds) {
+    	boolean isIconoClickable = state(Clickable, LinkCabeceraOutletDesktop.bolsa.getBy()).wait(maxSeconds).check();
         if (isIconoClickable) {
         	clickIconoBolsa();
         }
@@ -74,20 +77,19 @@ public class SecCabeceraOutletDesktop extends SecCabeceraOutlet {
     	hoverElement(LinkCabeceraOutletDesktop.bolsa);
     }
     
-    public boolean isElementInState(LinkCabeceraOutletDesktop element, StateElem state) {
-    	return (isElementInState(element, state, driver));
+    public boolean isElementInState(LinkCabeceraOutletDesktop element, State state) {
+    	return (state(state, element.getBy()).check());
     }
     
-    public boolean isElementInStateUntil(LinkCabeceraOutletDesktop element, StateElem state, int maxSecondsWait) {
-    	return (isElementInStateUntil(element, state, maxSecondsWait, driver));
+    public boolean isElementInStateUntil(LinkCabeceraOutletDesktop element, State state, int maxSeconds) {
+    	return (state(state, element.getBy()).wait(maxSeconds).check());
     }
     
-    public void clickElement(LinkCabeceraOutletDesktop element) throws Exception {
-    	clickAndWait(element, driver);
+    public void clickElement(LinkCabeceraOutletDesktop element) {
+    	click(element.getBy()).exec();
     }
     
     public void hoverElement(LinkCabeceraOutletDesktop element) {
-        By elementBy = By.xpath(element.getXPath());
-        moveToElement(elementBy, driver);
+        moveToElement(element.getBy(), driver);
     }
 }

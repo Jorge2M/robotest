@@ -31,10 +31,10 @@ public class SecKlarnaStpV {
 	@Validation
 	private static ChecksTM checkIsVisibleModalDirecciones(Pago pago, WebDriver driver) {
     	ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 3;
+        int maxSeconds = 3;
       	validations.add(
-    		"Aparece el modal de las direcciones de Klarna (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		SecKlarna.isModalDireccionesVisibleUntil(maxSecondsWait, driver), State.Defect);
+    		"Aparece el modal de las direcciones de Klarna (lo esperamos hasta " + maxSeconds + " segundos)",
+    		SecKlarna.isModalDireccionesVisibleUntil(maxSeconds, driver), State.Defect);
       	validations.add(
     		"Aparecen los datos asociados al Nº persona: " + pago.getNomklarna() + " - " + pago.getDirecklarna() + " - " + pago.getProvinklarna(),
     		SecKlarna.getTextNombreAddress(driver).contains(pago.getNomklarna()) &&
@@ -58,10 +58,10 @@ public class SecKlarnaStpV {
     }
 	
 	@Validation (
-		description="Desaparece el modal de las direcciones de Klarna (lo esperamos hasta #{maxSecondsWait} segundos)",
+		description="Desaparece el modal de las direcciones de Klarna (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
-	private static boolean checkIsInvisibleModalDirecciones(int maxSecondsWait, WebDriver driver) {
-	    return (SecKlarna.isModalDireccionesInvisibleUntil(maxSecondsWait, driver));
+	private static boolean checkIsInvisibleModalDirecciones(int maxSeconds, WebDriver driver) {
+	    return (SecKlarna.isModalDireccionesInvisibleUntil(maxSeconds, driver));
 	}
 	
 	@Validation (

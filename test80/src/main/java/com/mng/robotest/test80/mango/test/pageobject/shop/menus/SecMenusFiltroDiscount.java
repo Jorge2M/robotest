@@ -3,25 +3,23 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.menus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecMenusFiltroDiscount extends WebdrvWrapp {
-	
-	private final WebDriver driver;
+public class SecMenusFiltroDiscount extends PageObjTM {
 	
     public enum TypeMenuDiscount {UpTo50, UpTo60, Between50y60, off60, From60, From70}
     static String XPathDivMenus = "//nav[@id='descuentoFilter']";
     
     private SecMenusFiltroDiscount(WebDriver driver) {
-    	this.driver = driver;
+    	super(driver);
     }
-    
+
     public static SecMenusFiltroDiscount getNew(WebDriver driver) {
     	return (new SecMenusFiltroDiscount(driver));
     }
-    
-    
+
     private static String getXPathMenu(TypeMenuDiscount typeMenu) {
         String valuesParamTemporada1 = "";
         switch (typeMenu) {
@@ -50,7 +48,7 @@ public class SecMenusFiltroDiscount extends WebdrvWrapp {
     }
     
     public boolean isVisible() {
-        return (isElementVisible(driver, By.xpath(XPathDivMenus)));
+    	return (state(Visible, By.xpath(XPathDivMenus)).check());
     }
     
     public boolean isVisibleMenu(String typeMenu) {
@@ -59,7 +57,7 @@ public class SecMenusFiltroDiscount extends WebdrvWrapp {
     
     public boolean isVisibleMenu(TypeMenuDiscount typeMenu) {
         String xpathMenu = getXPathMenu(typeMenu);
-        return (isElementVisible(driver, By.xpath(xpathMenu)));
+        return (state(Visible, By.xpath(xpathMenu)).check());
     }
     
     public int getNumberOfVisibleMenus() {
@@ -73,12 +71,12 @@ public class SecMenusFiltroDiscount extends WebdrvWrapp {
     	return numberMenusVisibles;
     }
     
-    public void click(String typeMenu) throws Exception {
+    public void click(String typeMenu) {
     	click(TypeMenuDiscount.valueOf(typeMenu));
     }
-    
-    public void click(TypeMenuDiscount typeMenu) throws Exception {
-    	String xpathMenu = getXPathMenu(typeMenu);
-    	clickAndWaitLoad(driver, By.xpath(xpathMenu));
-    }
+
+	public void click(TypeMenuDiscount typeMenu) {
+		String xpathMenu = getXPathMenu(typeMenu);
+		click(By.xpath(xpathMenu)).exec();
+	}
 }

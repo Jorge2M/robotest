@@ -3,7 +3,8 @@ package com.mng.robotest.test80.mango.test.pageobject.shop;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 /**
@@ -12,7 +13,7 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
  * @author jorge.munoz
  *
  */
-public class PageJCAS extends WebdrvWrapp {
+public class PageJCAS {
 
 	private static final String XPathInputUser = "//input[@id='username']";
 	private static final String XPathInputPass = "//input[@id='password']";
@@ -32,7 +33,7 @@ public class PageJCAS extends WebdrvWrapp {
 	/**
 	 * Realiza el proceso de identificación en la página de Jasig CAS
 	 */
-	public static void identication(WebDriver driver, String usuario, String password) throws Exception {
+	public static void identication(WebDriver driver, String usuario, String password) {
 		inputCredenciales(usuario, password, driver);
 		clickCaptchaIfPresent(driver);
 		clickButtonLogin(driver);
@@ -43,13 +44,13 @@ public class PageJCAS extends WebdrvWrapp {
 		driver.findElement(By.xpath(XPathInputPass)).sendKeys(password);
 	}
 	
-	public static void clickCaptchaIfPresent(WebDriver driver) throws Exception {
+	public static void clickCaptchaIfPresent(WebDriver driver) {
 		By byIframe = By.xpath(XPathIframeCaptcha);
-		if (WebdrvWrapp.isElementPresent(driver, byIframe)) {
+		if (state(Present, byIframe, driver).check()) {
 			try {
 				driver.switchTo().frame(driver.findElement(byIframe));
-				WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(XPathRadioCaptchaWithinIframe));
-				WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(XPathRecaptchaCheckedWithinIframe), 5);
+				click(By.xpath(XPathRadioCaptchaWithinIframe), driver).exec();
+				state(Visible, By.xpath(XPathRecaptchaCheckedWithinIframe), driver).wait(5).check();
 			}
 			finally {
 				driver.switchTo().defaultContent();
@@ -57,7 +58,7 @@ public class PageJCAS extends WebdrvWrapp {
 		}
 	}
 
-	public static void clickButtonLogin(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathButtonLogin));
+	public static void clickButtonLogin(WebDriver driver) {
+		click(By.xpath(XPathButtonLogin), driver).exec();
 	}
 }

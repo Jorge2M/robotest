@@ -6,10 +6,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecKlarna extends WebdrvWrapp {
+public class SecKlarna {
 
     //Parte del error que aparece cuando se introduce un teléfono incorrecto desde Desktop
     public static final String errorTlfDesktop = "The telephone number you submitted is not in the correct format";
@@ -48,10 +49,12 @@ public class SecKlarna extends WebdrvWrapp {
         }
         return XPathButtonConfirmAddressDesktop;
     }
-    
-    public static boolean isVisibleUntil(Channel channel, int maxSecondsToWait, WebDriver driver) {
-        return (isElementVisibleUntil(driver, By.xpath(getXPath_capaKlarna(channel)), maxSecondsToWait));
-    }
+
+	public static boolean isVisibleUntil(Channel channel, int maxSeconds, WebDriver driver) {
+		String xpath = getXPath_capaKlarna(channel);
+		return (state(Visible, By.xpath(xpath), driver)
+				.wait(maxSeconds).check());
+	}
     
     /**
      * Espera un determinado número de segundos a que esté disponible el input y posteriormente introduce el número personal
@@ -80,37 +83,40 @@ public class SecKlarna extends WebdrvWrapp {
         return isError;
     }
     
-    /**
-     * Selección del botón "Search Address" (se trata de un botón que aparece en algunos tipos de Klarna como p.e. el de Sweden)
-     */
-    public static void clickSearchAddress(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonSearchAddress));
-    }
-    
-    /**
-     * @return indicador de si existe o no el modal de la confirmación de la dirección (aparece sólo en algunos tipos de Klarna como p.e. el de Sweden)
-     */
-    public static boolean isModalDireccionesVisibleUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathModalDirecciones), maxSecondsToWait));
-    }
-    
-    public static boolean isModalDireccionesInvisibleUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementInvisibleUntil(driver, By.xpath(XPathModalDirecciones), maxSecondsToWait));
-    }    
-    
-    public static String getTextNombreAddress(WebDriver driver) {
-        return driver.findElement(By.xpath(XPathNombreAddress)).getText();
-    }
-    
-    public static String getTextDireccionAddress(WebDriver driver) {
-        return driver.findElement(By.xpath(XPathDireccionAddress)).getText();
-    }
-    
-    public static String getTextProvinciaAddress(WebDriver driver) {
-        return driver.findElement(By.xpath(XPathProvinciaAddress)).getText();
-    }
-    
-    public static void clickConfirmAddress(WebDriver driver, Channel channel) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(getXPATH_buttonConfirmAddress(channel)));
-    }
+	/**
+	 * Selección del botón "Search Address" (se trata de un botón que aparece en algunos tipos de Klarna como p.e. el de Sweden)
+	 */
+	public static void clickSearchAddress(WebDriver driver) {
+		click(By.xpath(XPathButtonSearchAddress), driver).exec();
+	}
+
+	/**
+	 * @return indicador de si existe o no el modal de la confirmación de la dirección (aparece sólo en algunos tipos de Klarna como p.e. el de Sweden)
+	 */
+	public static boolean isModalDireccionesVisibleUntil(int maxSeconds, WebDriver driver) {
+		return (state(Visible, By.xpath(XPathModalDirecciones), driver)
+				.wait(maxSeconds).check());
+	}
+
+	public static boolean isModalDireccionesInvisibleUntil(int maxSeconds, WebDriver driver) {
+		return (state(Invisible, By.xpath(XPathModalDirecciones), driver)
+				.wait(maxSeconds).check());
+	}
+
+	public static String getTextNombreAddress(WebDriver driver) {
+		return driver.findElement(By.xpath(XPathNombreAddress)).getText();
+	}
+
+	public static String getTextDireccionAddress(WebDriver driver) {
+		return driver.findElement(By.xpath(XPathDireccionAddress)).getText();
+	}
+
+	public static String getTextProvinciaAddress(WebDriver driver) {
+		return driver.findElement(By.xpath(XPathProvinciaAddress)).getText();
+	}
+
+	public static void clickConfirmAddress(WebDriver driver, Channel channel) {
+		By byElem = By.xpath(getXPATH_buttonConfirmAddress(channel));
+		click(byElem, driver).exec();
+	}
 }

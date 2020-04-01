@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
 import com.mng.testmaker.domain.InputParamsTM;
+//import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.testmaker.domain.suitetree.TestRunTM;
 import com.mng.testmaker.service.TestMaker;
@@ -107,7 +108,7 @@ public class Manto {
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Consulta de la información referente a varios pedidos")
 	public void MAN002_Consulta_ID_EAN() throws Exception {
-    	setDataMantoAccess();
+		setDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
 		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
@@ -132,7 +133,7 @@ public class Manto {
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Consulta y gestión de clientes")
 	public void MAN003_GestionarClientes() throws Exception {
-    	setDataMantoAccess();
+		setDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
 		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
@@ -150,7 +151,7 @@ public class Manto {
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Consulta de cheques")
 	public void MAN004_GestorCheques() throws Exception {
-    	setDataMantoAccess();
+		setDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
 		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
@@ -158,20 +159,20 @@ public class Manto {
 
 		String mail = "esther.esteve@mango.com";
 		String cheque = "204028046151";
-		PageGestorChequesStpV.inputMailAndClickCorreoCliente(mail, driver);
-		
-		PageGestorChequesStpV.clickPedido(10, mail, driver);
-		PageGestorChequesStpV.volverCheques(driver);
-		PageGestorChequesStpV.inputCheque(cheque, driver);
-		PageGestorChequesStpV.chequeDetails(driver);
-		PageGestorChequesStpV.volverCheques(driver);
+		PageGestorChequesStpV pageGestChecksStpV = new PageGestorChequesStpV(driver);
+		pageGestChecksStpV.inputMailAndClickCorreoCliente(mail);
+		pageGestChecksStpV.clickPedido(10, mail);
+		pageGestChecksStpV.volverCheques();
+		pageGestChecksStpV.inputCheque(cheque);
+		pageGestChecksStpV.chequeDetails();
+		pageGestChecksStpV.volverCheques();
 	}
 	
 	@Test(
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Consulta de estadísticas de pedidos")
 	public void MAN005_GestorEstadisticasPedidos() throws Exception {
-    	setDataMantoAccess();
+		setDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
 		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
@@ -184,7 +185,7 @@ public class Manto {
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Gestor de saldos de TPV")
 	public void MAN006_GestorSaldosTPV() throws Exception {
-    	setDataMantoAccess();
+		setDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
 		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
@@ -201,7 +202,7 @@ public class Manto {
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Gestor de consulta y cambio de familia")
 	public void MAN007_GestorConsultaCambioFamilia() throws Exception {
-    	setDataMantoAccess();
+		setDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
 		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
@@ -214,14 +215,16 @@ public class Manto {
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Comprueba el correcto funcionamiento del ordenador de prendas")
 	public void MAN008_Ordenador_de_Prendas() throws Exception {
-    	setDataMantoAccess();
+		setDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
 		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
 		PageMenusMantoStpV.goToOrdenadorDePrendas(driver);
-		PageOrdenacionDePrendasStpV.mantoOrdenacionInicio(driver);
-		PageOrdenacionDePrendasStpV.mantoSeccionPrendas(driver);
-		PageOrdenacionDePrendasStpV.ordenacionModal(driver);		
+		
+		PageOrdenacionDePrendasStpV pageOrdenacionDePrendasStpV = new PageOrdenacionDePrendasStpV(driver);
+		pageOrdenacionDePrendasStpV.mantoOrdenacionInicio();
+		pageOrdenacionDePrendasStpV.mantoSeccionPrendas();
+		pageOrdenacionDePrendasStpV.ordenacionModal();		
 	}
 }
 

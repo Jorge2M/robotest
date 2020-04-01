@@ -12,7 +12,7 @@ import com.mng.sapfiori.access.test.testcase.generic.webobject.inputs.withmodal.
 import com.mng.sapfiori.access.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForDefineConditions;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.makers.StandarElementsMaker;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.utils.PageObject;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public abstract class ModalSelectFromListBase extends PageObject {
 
@@ -55,10 +55,10 @@ public abstract class ModalSelectFromListBase extends PageObject {
 	
 	public boolean isModalVisible() {
 		String xpathTitle = getXPathTitleModal();
-		return WebdrvWrapp.isElementVisible(driver, By.xpath(xpathTitle));
+		return (state(Visible, By.xpath(xpathTitle)).check());
 	}
 
-	public void clickEnterToShowInitialElements() throws Exception {
+	public void clickEnterToShowInitialElements() {
 		waitForPageFinished();
 		By byInputField = By.xpath(XPathInputField);
 		driver.findElement(byInputField).click();
@@ -67,15 +67,15 @@ public abstract class ModalSelectFromListBase extends PageObject {
 	}
 
 	public boolean isElementListPresent(int maxSeconds) {
-		return (WebdrvWrapp.isElementPresentUntil(driver, By.xpath(XPathElementLine), maxSeconds));
+		return (state(Present, By.xpath(XPathElementLine)).wait(maxSeconds).check());
 	}
 	
-	public void selectElementByPosition(int posElement) throws Exception {
+	public void selectElementByPosition(int posElement) {
 		By byElem = By.xpath(getXPathForSelectElementByIndex(posElement));
-		WebdrvWrapp.clickAndWaitLoad(driver, byElem);
+		click(byElem).exec();
 	}
 	
-	public boolean findAndSelectElement(String valueToSearch, String valueToSelectInTable) throws Exception {
+	public boolean findAndSelectElement(String valueToSearch, String valueToSelectInTable) {
 		if (inputBuscador.isVisible()) {
 			if (findByBuscarAndSelectElement(valueToSearch, valueToSelectInTable)) {
 				return true;
@@ -93,22 +93,21 @@ public abstract class ModalSelectFromListBase extends PageObject {
 		return true;
 	}
 	
-	private boolean findByBuscarAndSelectElement(String valueToSearch, String valueToSelectInTable) throws Exception {
+	private boolean findByBuscarAndSelectElement(String valueToSearch, String valueToSelectInTable) {
 		waitForPageFinished();
 		inputBuscador.clearAndSendText(valueToSearch);
 		inputBuscador.clickLupaForSearch();
 		return (selectElementInTable(valueToSelectInTable));
 	}
 	
-	private boolean findByInputLabelAndSelectElement(String valueToSearch, String valueToSelectInTable) throws Exception {
+	private boolean findByInputLabelAndSelectElement(String valueToSearch, String valueToSelectInTable) {
 		waitForPageFinished();
 		inputDataLabel.clearAndSendText(valueToSearch);
 		inputDataLabel.sendText(Keys.RETURN);
 		return (selectElementInTable(valueToSelectInTable));
 	}
 	
-	public void findByFiltersAndSelectElement(Map<String,String> inputLabelAndValues, String valueToSelectInTable) 
-	throws Exception {
+	public void findByFiltersAndSelectElement(Map<String,String> inputLabelAndValues, String valueToSelectInTable) {
 		waitForPageFinished();
 		for (Map.Entry<String,String> labelAndValue : inputLabelAndValues.entrySet()) {
 			InputWithIconBase inputWeb = standarMaker.getInputWithIconForSelectItem(labelAndValue.getKey());
@@ -118,16 +117,16 @@ public abstract class ModalSelectFromListBase extends PageObject {
 		selectElementInTable(valueToSelectInTable);
 	}
 	
-	public boolean selectElementInTable(String valueToSelect) throws Exception {
+	public boolean selectElementInTable(String valueToSelect) {
 		String xpath = getXPathForSelectElementByValue(valueToSelect);
-		if (isElementVisibleUntil(driver, By.xpath(xpath), 3)) {
-			clickAndWaitLoad(driver, By.xpath(xpath));
+		if (state(Visible, By.xpath(xpath)).wait(3).check()) {
+			click(By.xpath(xpath)).exec();
 			return true;
 		}
 		return false;
 	}
 	
-	public void clickOkButton() throws Exception {
-		WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(XPathOkButton));
+	public void clickOkButton() {
+		click(By.xpath(XPathOkButton)).exec();
 	}
 }

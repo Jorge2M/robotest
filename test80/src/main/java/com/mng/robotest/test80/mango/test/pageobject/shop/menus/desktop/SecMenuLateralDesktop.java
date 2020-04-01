@@ -3,13 +3,13 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDesktop;
 
-public class SecMenuLateralDesktop extends WebdrvWrapp {
+public class SecMenuLateralDesktop extends PageObjTM {
 	
-	private final WebDriver driver;
 	private final AppEcom app;
 	
 	private static String TagConcatMenus = "[@TAG_CONCAT_MENUS]";
@@ -34,7 +34,7 @@ public class SecMenuLateralDesktop extends WebdrvWrapp {
 		"//self::*[@aria-label[contains(.,'seleccionado')]]";
 
 	private SecMenuLateralDesktop(AppEcom app, WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 		this.app = app;
 	}
 	public static SecMenuLateralDesktop getNew(AppEcom app, WebDriver driver) {
@@ -79,15 +79,15 @@ public class SecMenuLateralDesktop extends WebdrvWrapp {
 		return (getXPathLinkMenu(menu) + getXPathSelectedRelativeMenu());
 	}
 
-	public boolean isSelectedMenu(MenuLateralDesktop menu, int maxSecondsToWait) {
+	public boolean isSelectedMenu(MenuLateralDesktop menu, int maxSeconds) {
 		String linkMenuSel = getXPathLinkMenuSelected(menu) ;
-		return (isElementVisibleUntil(driver, By.xpath(linkMenuSel), maxSecondsToWait));
+		return (state(Visible, By.xpath(linkMenuSel)).wait(maxSeconds).check());
 	}
 
-	public void clickMenu(MenuLateralDesktop menu) throws Exception {
+	public void clickMenu(MenuLateralDesktop menu) {
 		String xpathMenu1erNivel = getXPathLinkMenu(menu);
-		WebdrvWrapp.moveToElement(By.xpath(xpathMenu1erNivel), driver);
-		clickAndWaitLoad(driver, By.xpath(xpathMenu1erNivel));
+		moveToElement(By.xpath(xpathMenu1erNivel), driver);
+		click(By.xpath(xpathMenu1erNivel)).exec();
 	}
 
 	/**
@@ -95,6 +95,6 @@ public class SecMenuLateralDesktop extends WebdrvWrapp {
 	 */
 	public boolean isVisibleMenu(MenuLateralDesktop menu) throws Exception {
 		String xpathMenu = getXPathLinkMenu(menu);
-		return (isElementVisible(driver, By.xpath(xpathMenu)));
+		return (state(Visible, By.xpath(xpathMenu)).check());
 	}
 }

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.sapfiori.access.test.testcase.generic.webobject.utils.PageObject;
 import com.mng.sapfiori.access.test.testcase.webobject.iconsmenu.OptionMenu;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public abstract class PageFilter extends PageObject {
 
@@ -24,11 +24,11 @@ public abstract class PageFilter extends PageObject {
 	
 	public boolean isVisiblePage(int maxSeconds) {
 		By byTitle = By.xpath(getXPathTitle());
-		return WebdrvWrapp.isElementVisibleUntil(driver, byTitle, maxSeconds);
+		return (state(Visible, byTitle).wait(maxSeconds).check());
 	}
 	
-	public void clickIrButton() throws Exception {
+	public void clickIrButton() {
 		waitForPageFinished();
-		clickAndWaitLoad(driver, By.xpath(XPathIrButton));
+		click(By.xpath(XPathIrButton)).exec();
 	}
 }

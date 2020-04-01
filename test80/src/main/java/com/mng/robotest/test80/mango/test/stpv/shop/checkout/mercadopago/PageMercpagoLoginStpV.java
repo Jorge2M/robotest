@@ -36,8 +36,7 @@ public class PageMercpagoLoginStpV {
 			"Aparece alguna de las páginas:<br>" +
 	        " - Elección medio pago<br>" +
 	        " - Introducción CVC")
-    public static void loginMercadopago(Pago pago, Channel channel, WebDriver driver) 
-    throws Exception {
+    public static void loginMercadopago(Pago pago, Channel channel, WebDriver driver) {
         PageMercpagoLogin.sendInputUser(driver, pago.getUseremail());
         PageMercpagoLogin.sendInputPassword(driver, pago.getPasswordemail());
         PageMercpagoLogin.clickBotonContinuar(driver);

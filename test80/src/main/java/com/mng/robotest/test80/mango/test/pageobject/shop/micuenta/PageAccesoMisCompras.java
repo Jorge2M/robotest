@@ -3,11 +3,12 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.micuenta;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.PageFromFooter;
 
 
-public class PageAccesoMisCompras extends WebdrvWrapp implements PageFromFooter {
+public class PageAccesoMisCompras extends PageObjTM implements PageFromFooter {
 
     public enum TypeBlock {SiRegistrado, NoRegistrado}
     static String XPathContainerBlocks = "//div[@class[contains(.,'mypurchases')]]//div[@class='shopping-container']";
@@ -47,69 +48,73 @@ public class PageAccesoMisCompras extends WebdrvWrapp implements PageFromFooter 
         return XPathContainerBlocks;
     }
     
+    public PageAccesoMisCompras(WebDriver driver) {
+    	super(driver);
+    }
+    
 	@Override
 	public String getName() {
 		return "Mis Compras";
 	}
     
 	@Override
-	public boolean isPageCorrectUntil(int maxSecondsWait, WebDriver driver) {
-		return (isElementPresentUntil(driver, By.xpath(getXPathIsPage()), maxSecondsWait));
+	public boolean isPageCorrectUntil(int maxSeconds) {
+		return (state(Present, By.xpath(getXPathIsPage())).wait(maxSeconds).check());
 	}
 	
-    public static boolean isPage(WebDriver driver) {
-       return (isElementPresent(driver, By.xpath(getXPathIsPage())));
+    public boolean isPage() {
+    	return (state(Present, By.xpath(getXPathIsPage())).check());
     }
     
-    public static boolean isPresentBlock(TypeBlock typeBlock, WebDriver driver) {
+    public boolean isPresentBlock(TypeBlock typeBlock) {
         String xpathBlock = getXPathBlock(typeBlock);
-        return (isElementPresent(driver, By.xpath(xpathBlock)));
+        return (state(Present, By.xpath(xpathBlock)).check());
     }
     
-    public static boolean isVisibleBlockUntil(TypeBlock typeBlock, int maxSecondsToWait, WebDriver driver) {
+    public boolean isVisibleBlockUntil(TypeBlock typeBlock, int maxSeconds) {
         String xpathBlock = getXPathBlock(typeBlock);
-        return (isElementVisibleUntil(driver, By.xpath(xpathBlock), maxSecondsToWait));
-    }    
+        return (state(Visible, By.xpath(xpathBlock)).wait(maxSeconds).check());
+    }
     
-    public static void clickBlock(TypeBlock typeBlock, WebDriver driver) {
+    public void clickBlock(TypeBlock typeBlock) {
         String xpathBlock = getXPathLinkBlock(typeBlock);
         driver.findElement(By.xpath(xpathBlock)).click();
     }
     
-    public static void inputUserBlockSi(String usuario, WebDriver driver) {
+    public void inputUserBlockSi(String usuario) {
         driver.findElement(By.xpath(XPathInputUserBlockSi)).clear();
         driver.findElement(By.xpath(XPathInputUserBlockSi)).sendKeys(usuario);
     }
     
-    public static void inputPasswordBlockSi(String password, WebDriver driver) {
+    public void inputPasswordBlockSi(String password) {
         driver.findElement(By.xpath(XpathInputPasswordBlockSi)).clear();
         driver.findElement(By.xpath(XpathInputPasswordBlockSi)).sendKeys(password);
     }    
     
-    public static void inputUserPasswordBlockSi(String usuario, String password, WebDriver driver) {
-        inputUserBlockSi(usuario, driver);
-        inputPasswordBlockSi(password, driver);
+    public void inputUserPasswordBlockSi(String usuario, String password) {
+        inputUserBlockSi(usuario);
+        inputPasswordBlockSi(password);
     }
     
-    public static void clickEntrarBlockSi(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonEntrarBlockSi));
+    public void clickEntrarBlockSi() {
+    	click(By.xpath(XPathButtonEntrarBlockSi)).exec();
     }
     
-    public static void inputUserBlockNo(String usuario, WebDriver driver) {
-    	sendKeysWithRetry(2, usuario, By.xpath(XPathInputUserBlockNo), driver);
+    public void inputUserBlockNo(String usuario) {
+    	sendKeysWithRetry(usuario, By.xpath(XPathInputUserBlockNo), 2, driver);
     }
     
-    public static void inputNumPedidoBlockNo(String numPedido, WebDriver driver) {
+    public void inputNumPedidoBlockNo(String numPedido) {
         driver.findElement(By.xpath(XPathInputNumPedidoBlockNo)).clear();
         driver.findElement(By.xpath(XPathInputNumPedidoBlockNo)).sendKeys(numPedido);
     }
     
-    public static void inputUserAndNumPedidoBlockNo(String usuario, String numPedido, WebDriver driver) {
-        inputUserBlockNo(usuario, driver);
-        inputNumPedidoBlockNo(numPedido, driver);
+    public void inputUserAndNumPedidoBlockNo(String usuario, String numPedido) {
+        inputUserBlockNo(usuario);
+        inputNumPedidoBlockNo(numPedido);
     }
     
-    public static void clickBuscarPedidoBlockNo(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonBuscarPedidoBlockNo));
+    public void clickBuscarPedidoBlockNo() {
+    	click(By.xpath(XPathButtonBuscarPedidoBlockNo)).exec();
     }
 }

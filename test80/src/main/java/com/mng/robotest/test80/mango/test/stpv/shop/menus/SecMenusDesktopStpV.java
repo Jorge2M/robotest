@@ -146,8 +146,8 @@ public class SecMenusDesktopStpV {
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.desktop, app, driver);
 		pageGaleriaStpV.bannerHead.validateBannerSuperiorIfExistsDesktop();
     	if (menu.isMenuLateral()) {
-    		int maxSecondsWait = 2;
-    		checkIsSelectedLateralMenu(menu, maxSecondsWait);
+    		int maxSeconds = 2;
+    		checkIsSelectedLateralMenu(menu, maxSeconds);
     	}
     	
         if (menu instanceof Menu1rstLevel) {
@@ -170,10 +170,10 @@ public class SecMenusDesktopStpV {
     }
     
     @Validation (
-    	description="Aparece seleccionado el menú lateral <b>#{menu.getNombre()}</b> (lo esperamos hasta #{maxSecondsWait} segundos)",
+    	description="Aparece seleccionado el menú lateral <b>#{menu.getNombre()}</b> (lo esperamos hasta #{maxSeconds} segundos)",
     	level=State.Warn)
-    private boolean checkIsSelectedLateralMenu(MenuLateralDesktop menu, int maxSecondsWait) {
-        return (secMenus.secMenuLateral.isSelectedMenu(menu, maxSecondsWait));
+    private boolean checkIsSelectedLateralMenu(MenuLateralDesktop menu, int maxSeconds) {
+        return (secMenus.secMenuLateral.isSelectedMenu(menu, maxSeconds));
     }
       
 	@Validation
@@ -267,10 +267,10 @@ public class SecMenusDesktopStpV {
     @Validation
     private ChecksTM checkCarruselsAfterHoverLinea(Linea linea) {
     	ChecksTM validations = ChecksTM.getNew();
-	    int maxSecondsWait = 1;
+	    int maxSeconds = 1;
       	validations.add(
-    		"Aparece el bloque de menús de la línea " + linea.getType() + " (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		secMenus.secMenuSuperior.secBlockMenus.isCapaMenusLineaVisibleUntil(linea.getType(), maxSecondsWait), 
+    		"Aparece el bloque de menús de la línea " + linea.getType() + " (lo esperamos hasta " + maxSeconds + " segundos)",
+    		secMenus.secMenuSuperior.secBlockMenus.isCapaMenusLineaVisibleUntil(linea.getType(), maxSeconds), 
     		State.Warn);
       	validations.add(
     		"El número de carrusels es de " + linea.getListCarrusels().length,
@@ -285,7 +285,7 @@ public class SecMenusDesktopStpV {
     @Step (
     	description="Seleccionar el carrusel de la línea #{lineaType} correspondiente a <b>#{idCarrusel}</b>",
         expected="Aparece la página asociada al carrusel #{lineaType} / #{idCarrusel}")
-    public void stepSeleccionaCarrusel(LineaType lineaType, String idCarrusel) throws Exception {
+    public void stepSeleccionaCarrusel(LineaType lineaType, String idCarrusel) {
         Linea linea = pais.getShoponline().getLinea(lineaType);
         secMenus.secMenuSuperior.secLineas.hoverLinea(lineaType, null);
         secMenus.secMenuSuperior.secCarrusel.clickCarrousel(pais, lineaType, idCarrusel);
@@ -293,14 +293,14 @@ public class SecMenusDesktopStpV {
     }
 
 	@Validation
-	private ChecksTM checkAfterSelectCarrusel(Linea linea, String idCarrusel) throws Exception {
+	private ChecksTM checkAfterSelectCarrusel(Linea linea, String idCarrusel) {
 		ChecksTM validations = ChecksTM.getNew();
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
 
-		int maxSecondsWait = 3;
+		int maxSeconds = 3;
 		validations.add(
-			"Aparece algún artículo (lo esperamos hasta " + maxSecondsWait + " segundos)",
-			pageGaleriaDesktop.isVisibleArticleUntil(1, maxSecondsWait), State.Info, true);
+			"Aparece algún artículo (lo esperamos hasta " + maxSeconds + " segundos)",
+			pageGaleriaDesktop.isVisibleArticleUntil(1, maxSeconds), State.Info, true);
 //			validations.add(
 //			"El 1er artículo es de tipo " + linea.getType(),
 //			pageGaleriaDesktop.isArticleFromLinea(1, lineaType), State.Warn);
@@ -357,8 +357,8 @@ public class SecMenusDesktopStpV {
         switch (linea.getContentDeskType()) {
         case articulos:
         	PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.desktop, app, driver);
-        	int maxSecondsWait = 3;
-            pageGaleriaStpV.validaArtEnContenido(maxSecondsWait);
+        	int maxSeconds = 3;
+            pageGaleriaStpV.validaArtEnContenido(maxSeconds);
             break;
         case banners:
         	int maxBannersToLoad = 1;
@@ -483,7 +483,6 @@ public class SecMenusDesktopStpV {
         expected=
         	"Aparece la ficha del producto " + tagRefArticle)
     public static void checkURLRedirectFicha(Pais pais, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	
     	GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh).build();
     	Garment product = getterProducts.getAll().get(0);
     	Article article = product.getArticleWithMoreStock();

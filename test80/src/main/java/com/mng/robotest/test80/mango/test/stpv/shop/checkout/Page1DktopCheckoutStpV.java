@@ -26,15 +26,15 @@ public class Page1DktopCheckoutStpV {
 	@Validation
     public static ChecksTM validateIsPageOK(DataBag dataBag, WebDriver driver) throws Exception {
     	ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 5;
-        boolean isPageInitCheckout = Page1DktopCheckout.isPageUntil(maxSecondsWait, driver);
+        int maxSeconds = 5;
+        boolean isPageInitCheckout = Page1DktopCheckout.isPageUntil(maxSeconds, driver);
 	 	validations.add(
-			"Aparece la página inicial del Checkout (la esperamos un máximo de " + maxSecondsWait + " segundos)",
+			"Aparece la página inicial del Checkout (la esperamos un máximo de " + maxSeconds + " segundos)",
 			isPageInitCheckout, State.Warn, true);
 	 	if (!isPageInitCheckout) {
 		 	validations.add(
-				"Si no ha aparecido la esperamos " + (maxSecondsWait * 2) + " segundos más",
-				Page1DktopCheckout.isPageUntil(maxSecondsWait*2, driver), State.Defect);
+				"Si no ha aparecido la esperamos " + (maxSeconds * 2) + " segundos más",
+				Page1DktopCheckout.isPageUntil(maxSeconds*2, driver), State.Defect);
 	 	}
 	 	validations.add(
 			"Cuadran los artículos a nivel de la Referencia e Importe",
@@ -46,10 +46,10 @@ public class Page1DktopCheckoutStpV {
 	@Validation
     public static ChecksTM validateIsVersionChequeRegalo(ChequeRegalo chequeRegalo, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 5;
+        int maxSeconds = 5;
     	validations.add(
-    		"Aparece la página inicial del Checkout (la esperamos un máximo de " + maxSecondsWait + " segundos)<br>",
-    		Page1DktopCheckout.isPageUntil(maxSecondsWait, driver), State.Defect);
+    		"Aparece la página inicial del Checkout (la esperamos un máximo de " + maxSeconds + " segundos)<br>",
+    		Page1DktopCheckout.isPageUntil(maxSeconds, driver), State.Defect);
     	validations.add(
     		"Aparecen los datos introducidos:<br>" + 
     		"\"Nombre: <b>" + chequeRegalo.getNombre() + "</b><br>" + 
@@ -65,10 +65,10 @@ public class Page1DktopCheckoutStpV {
     public static ChecksTM validaResultImputPromoEmpl(DataBag dataBag, AppEcom app, WebDriver driver) 
     throws Exception {
     	ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 5;
+        int maxSeconds = 5;
 	 	validations.add(
-			"Aparece el descuento total aplicado al empleado (lo experamos hasta " + maxSecondsWait + " segundos)",
-			Page1DktopCheckout.isVisibleDescuentoEmpleadoUntil(driver, maxSecondsWait), State.Defect);
+			"Aparece el descuento total aplicado al empleado (lo experamos hasta " + maxSeconds + " segundos)",
+			Page1DktopCheckout.isVisibleDescuentoEmpleadoUntil(driver, maxSeconds), State.Defect);
 	 	
     	Descuento descuento = new Descuento(app, DiscountType.Empleado);
 	 	validations.add(
@@ -116,8 +116,8 @@ public class Page1DktopCheckoutStpV {
 	@Validation
 	private static ChecksTM checkAfterInputDiscountVale(ValePais valePais, WebDriver driver) {
     	ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 1;
-        boolean isVisibleError = Page1DktopCheckout.isVisibleErrorRojoInputPromoUntil(maxSecondsWait, driver);
+        int maxSeconds = 1;
+        boolean isVisibleError = Page1DktopCheckout.isVisibleErrorRojoInputPromoUntil(maxSeconds, driver);
         if (valePais.isValid()) {
 		 	validations.add(
 				"<b>No</b> aparece mensaje de error en rojo (rgba(255, 0, 0, 1) en el bloque correspondiente al \"Código promocional\"",
@@ -153,10 +153,10 @@ public class Page1DktopCheckoutStpV {
     }
 	
 	@Validation (
-		description="Aparece el input para la introducción del vale (lo esperamos hasta #{maxSecondsWait} segundos)",
+		description="Aparece el input para la introducción del vale (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
-	private static boolean checkIsVisibleInputVale(int maxSecondsWait, WebDriver driver) throws Exception {
-		return (Page1DktopCheckout.isVisibleInputCodigoPromoUntil(maxSecondsWait, driver));
+	private static boolean checkIsVisibleInputVale(int maxSeconds, WebDriver driver) throws Exception {
+		return (Page1DktopCheckout.isVisibleInputCodigoPromoUntil(maxSeconds, driver));
 	}
     
     @Step (

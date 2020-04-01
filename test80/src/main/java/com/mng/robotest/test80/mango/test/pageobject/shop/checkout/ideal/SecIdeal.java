@@ -4,9 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class SecIdeal extends WebdrvWrapp {
+public class SecIdeal {
+	
 	//HAY QUE AÑADIR LAS OPCIONES DE PRE Y QUITAR LAS DE PRO
     public enum BancoSeleccionado {
     	KiesEenBank("Kies een bank", "selected"),
@@ -57,15 +59,18 @@ public class SecIdeal extends WebdrvWrapp {
      * @return el xpath correspondiente al elemento que puede recibir el click para el check del banco
      */
         
-    public static boolean isVisibleUntil(Channel channel, int maxSecondsToWait, WebDriver driver) {    	
-        return (isElementVisibleUntil(driver, By.xpath(getXPath_section(channel)), maxSecondsToWait));
+    public static boolean isVisibleUntil(Channel channel, int maxSeconds, WebDriver driver) {
+    	String xpath = getXPath_section(channel);
+    	return (state(Visible, By.xpath(xpath), driver).wait(maxSeconds).check());
     }
     
-    public static boolean isVisibleSelectorOfBank(Channel channel, int maxSecondsToWait, WebDriver driver) {
+    public static boolean isVisibleSelectorOfBank(Channel channel, int maxSeconds, WebDriver driver) {
     	if (channel==Channel.movil_web) {
-    		return (isElementVisibleUntil(driver, By.xpath(XPathSelectorBankIdealMobile), maxSecondsToWait));
+    		return (state(Visible, By.xpath(XPathSelectorBankIdealMobile), driver)
+    				.wait(maxSeconds).check());
     	}
-    	return (isElementVisibleUntil(driver, By.xpath(XPathSelectorBankIdeal), maxSecondsToWait));
+    	return (state(Present, By.xpath(XPathSelectorBankIdeal), driver)
+    			.wait(maxSeconds).check());
     }
     
     /**
@@ -73,7 +78,8 @@ public class SecIdeal extends WebdrvWrapp {
      */
     
     public static boolean isBancoDisponible(WebDriver driver, Channel channel, BancoSeleccionado bancoSeleccionado) {
-        return (isElementPresent(driver, By.xpath(getXPathBankOptionByValue(channel, bancoSeleccionado))));    
+    	String xpath = getXPathBankOptionByValue(channel, bancoSeleccionado);
+    	return (state(Present, By.xpath(xpath), driver).check());
     }
     
     /**

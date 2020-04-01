@@ -3,25 +3,28 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class ModalAvisoCambioPais extends WebdrvWrapp {
+public class ModalAvisoCambioPais {
 
-    static String XPathModal = "//div[@class[contains(.,'modal-alert-change-country')]]";
-    static String XPathButtonConfCambio = "//input[@id[contains(.,'ModalDatosEnvio')] and @class[contains(.,'changeCountry')]]";
-    
-    public static boolean isVisibleUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathModal), maxSecondsToWait));
-    }
-    
-    public static boolean isInvisibleUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementInvisibleUntil(driver, By.xpath(XPathModal), maxSecondsToWait));
-    }
-    
-    public static void clickConfirmarCambio(WebDriver driver) throws Exception {
-        waitForPageLoaded(driver);
-        moveToElement(By.xpath(XPathButtonConfCambio), driver);
-        clickAndWaitLoad(driver, By.xpath(XPathButtonConfCambio));
-    }
+	static String XPathModal = "//div[@class[contains(.,'modal-alert-change-country')]]";
+	static String XPathButtonConfCambio = "//input[@id[contains(.,'ModalDatosEnvio')] and @class[contains(.,'changeCountry')]]";
+
+	public static boolean isVisibleUntil(int maxSeconds, WebDriver driver) {
+		return (state(Visible, By.xpath(XPathModal), driver)
+				.wait(maxSeconds).check());
+	}
+
+	public static boolean isInvisibleUntil(int maxSeconds, WebDriver driver) {
+		return (state(Invisible, By.xpath(XPathModal), driver)
+				.wait(maxSeconds).check());
+	}
+
+	public static void clickConfirmarCambio(WebDriver driver) {
+		waitForPageLoaded(driver);
+		moveToElement(By.xpath(XPathButtonConfCambio), driver);
+		click(By.xpath(XPathButtonConfCambio), driver).exec();
+	}
 }

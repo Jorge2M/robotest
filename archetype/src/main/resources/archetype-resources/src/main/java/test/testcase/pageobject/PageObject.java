@@ -1,7 +1,12 @@
 package ${package}.test.testcase.pageobject;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 
-public class PageObject extends WebdrvWrapp {
+import org.openqa.selenium.WebDriver;
 
+public class PageObject extends PageObjTM {
+	
+	public PageObject(WebDriver driver) {
+		super(driver);
+	}
 }

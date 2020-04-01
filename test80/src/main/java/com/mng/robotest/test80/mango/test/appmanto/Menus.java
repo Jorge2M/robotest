@@ -1,11 +1,13 @@
 package com.mng.robotest.test80.mango.test.appmanto;
 
+import java.io.Serializable;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.domain.InputParamsTM;
+//import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.testmaker.domain.suitetree.TestRunTM;
 import com.mng.testmaker.service.TestMaker;
@@ -15,8 +17,10 @@ import com.mng.robotest.test80.mango.test.stpv.manto.PageLoginMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageMenusMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageSelTdaMantoStpV;
 
-public class Menus {
+public class Menus implements Serializable {
 
+	private static final long serialVersionUID = -5780907750259210736L;
+	
 	String cabeceraName = "";
 	String cabeceraNameNext = "";
 	int prioridad = 1;
@@ -37,8 +41,8 @@ public class Menus {
 		DataMantoAccess dMantoAcc = new DataMantoAccess();
 		TestCaseTM testCase = TestMaker.getTestCase();
 		TestRunTM testRun = testCase.getTestRunParent();
-		InputParamsTM inputParams = testCase.getInputParamsSuite();
-		dMantoAcc.urlManto = inputParams.getUrlBase();
+		//InputParamsTM inputParams = testCase.getInputParamsSuite();
+		//dMantoAcc.urlManto = inputParams.getUrlBase();
 		dMantoAcc.userManto = testRun.getParameter(Constantes.paramUsrmanto);
 		dMantoAcc.passManto = testRun.getParameter(Constantes.paramPasmanto);
 		dMantoAcc.channel = Channel.desktop;
@@ -50,7 +54,7 @@ public class Menus {
 		groups={"Menus", "Canal:desktop_App:all"},
 		description="Consulta de menús")
 	public void MAN005_ConsultaMenus() throws Exception {
-		TestMaker.getTestCase().setRefineDataName(this.index_fact);
+		TestMaker.getTestCase().setSpecificInputData(this.index_fact);
 		DataMantoAccess dMantoAcc = getDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
 		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);

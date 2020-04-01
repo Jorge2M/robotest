@@ -4,10 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageSelectLineaVOTF extends WebdrvWrapp {
+public class PageSelectLineaVOTF {
 
     private static String getXPathLineaSection(LineaType linea) {
         return ("//div[@id='" + linea.name() + "' and @class[contains(.,'section')]]");
@@ -30,16 +31,16 @@ public class PageSelectLineaVOTF extends WebdrvWrapp {
     
     public static boolean isBannerPresent(LineaType linea, WebDriver driver) {
         String xpathBanner = getXPathLineaSection(linea);
-        return isElementPresent(driver, By.xpath(xpathBanner));
+        return (state(Present, By.xpath(xpathBanner), driver).check());
     }
     
-    public static void clickBanner(LineaType linea, WebDriver driver) throws Exception {
+    public static void clickBanner(LineaType linea, WebDriver driver) {
         String xpathLinkBanner = getXPathLineaLink(linea);
-        clickAndWaitLoad(driver, By.xpath(xpathLinkBanner)); 
+        click(By.xpath(xpathLinkBanner), driver).exec();
     }
     
-    public static void clickMenu(LineaType linea, int numMenu, WebDriver driver) throws Exception {
+    public static void clickMenu(LineaType linea, int numMenu, WebDriver driver) {
         String xpathMenu = getXPathMenu(linea, numMenu);
-        clickAndWaitLoad(driver, By.xpath(xpathMenu));
+        click(By.xpath(xpathMenu), driver).exec();
     }
 }

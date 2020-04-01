@@ -12,7 +12,7 @@ public class PageSelectIdiomaVOTFStpV {
 	@Step (
 		description="Seleccionar el idioma <b>#{idioma.getLiteral()}</b> y pulsar \"Aceptar\" (si aparece una página de alerta la aceptamos)",
         expected="Aparece la página de selección de la línea")
-    public static void selectIdiomaAndContinue(IdiomaPais idioma, WebDriver driver) throws Exception {
+    public static void selectIdiomaAndContinue(IdiomaPais idioma, WebDriver driver) {
         PageSelectIdiomaVOTF.selectIdioma(idioma.getCodigo(), driver);
         PageSelectIdiomaVOTF.clickButtonAceptar(driver);
         if (PageAlertaVOTF.isPage(driver)) {

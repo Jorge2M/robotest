@@ -3,10 +3,10 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paytrail;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 
 
-public class PagePaytrailResultadoOk extends WebdrvWrapp {
+public class PagePaytrailResultadoOk {
     
     static String aceptadoEnFinlandes = "hyväksytty";
     static String volverAlServicioDelVendedorEnFinlandes = "Palaa myyjän palveluun";
@@ -18,9 +18,9 @@ public class PagePaytrailResultadoOk extends WebdrvWrapp {
     public static boolean isPage(WebDriver driver) {
         return (driver.getTitle().toLowerCase().contains(aceptadoEnFinlandes));
     }
-    
-    public static void clickVolverAMangoButton(WebDriver driver) throws Exception {
-        String xpathButton = getXPathVolverAMangoButton();
-        clickAndWaitLoad(driver, By.xpath(xpathButton));
-    }
+
+	public static void clickVolverAMangoButton(WebDriver driver) {
+		String xpathButton = getXPathVolverAMangoButton();
+		click(By.xpath(xpathButton), driver).exec();
+	}
 }

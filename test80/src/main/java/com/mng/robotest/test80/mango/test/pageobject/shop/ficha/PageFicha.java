@@ -6,36 +6,37 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 
 @SuppressWarnings({"static-access"})
-public abstract class PageFicha extends WebdrvWrapp {
+public abstract class PageFicha extends PageObjTM {
 
     public enum TypeFicha {Old, New}
     
-    abstract public boolean isPageUntil(int maxSecondsWait);
+    abstract public boolean isPageUntil(int maxSeconds);
     abstract public boolean isFichaArticuloUntil(String refArticulo, int maxSecondsToWait);
-    abstract public void clickAnadirBolsaButtonAndWait() throws Exception;
-    abstract public void selectAnadirAFavoritosButton() throws Exception;
-    abstract public void selectRemoveFromFavoritosButton() throws Exception;
+    abstract public void clickAnadirBolsaButtonAndWait();
+    abstract public void selectAnadirAFavoritosButton();
+    abstract public void selectRemoveFromFavoritosButton();
     abstract public boolean isVisibleDivAnadiendoAFavoritosUntil(int maxSecondsToWait);
     abstract public boolean isInvisibleDivAnadiendoAFavoritosUntil(int maxSecondsToWait);
     abstract public boolean isVisibleButtonElimFavoritos();
     abstract public boolean isVisibleButtonAnadirFavoritos();
     abstract public String getNameLinkBuscarEnTienda();
-    abstract public void selectBuscarEnTiendaLink() throws Exception;
+    abstract public void selectBuscarEnTiendaLink();
     abstract public boolean isVisibleSlider(Slider typeSlider);
     abstract public int getNumArtVisiblesSlider(Slider typeSlider);
     abstract public boolean isModalNoStockVisible(int maxSecondsToWait);
     
     public static SecDataProduct secDataProduct; //Name, color, talla section
     public static SecFitFinder secFitFinder; //Guía de tallas v.Fit Finder
-    WebDriver driver;
     Channel channel;
     AppEcom appE;
     TypeFicha typeFicha;
     
-    public PageFicha() {};
+    public PageFicha(WebDriver driver) {
+    	super(driver);
+    };
     
     //Constructor estático
     public static PageFicha newInstance(Channel channel, AppEcom appE, WebDriver driver) {

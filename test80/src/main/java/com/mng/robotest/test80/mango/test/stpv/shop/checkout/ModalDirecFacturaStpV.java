@@ -16,14 +16,14 @@ public class ModalDirecFacturaStpV {
 	@Validation
     public static ChecksTM validateIsOk(WebDriver driver) {
     	ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 5;
+        int maxSeconds = 5;
 	 	validations.add(
-			"Es visible el formulario para la introducción de la \"Dirección de facturación\" (lo esperamos hasta " + maxSecondsWait + " seconds)",
-			ModalDirecFactura.isVisibleFormUntil(maxSecondsWait, driver), State.Defect);    
+			"Es visible el formulario para la introducción de la \"Dirección de facturación\" (lo esperamos hasta " + maxSeconds + " seconds)",
+			ModalDirecFactura.isVisibleFormUntil(maxSeconds, driver), State.Defect);    
 	 	validations.add(
 			"Es visible el botón \"Actualizar\"",
 	 		ModalDirecFactura.isVisibleButtonActualizar(driver), State.Defect);
-	 	int maxSeconds = 2;
+	 	maxSeconds = 2;
 	 	validations.add(
 	 		"Desaparece la capa de Loading (lo esperamos hasta " + maxSeconds + "segundos", 
 	 		PageCheckoutWrapper.waitUntilNoDivLoading(driver, maxSeconds), State.Warn);

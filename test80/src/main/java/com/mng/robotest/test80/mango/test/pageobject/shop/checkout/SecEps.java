@@ -4,12 +4,12 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecEps extends WebdrvWrapp {
+public class SecEps {
 
-    
     static String XPathInputBanco = "//div[@id='eps-bank-selector']";
     static String iniXPathSelectOptionBanco = XPathInputBanco + "//option[text()[contains(.,'";
     
@@ -25,7 +25,8 @@ public class SecEps extends WebdrvWrapp {
 	}
 
 	public static boolean isBancoSeleccionado(String nombreBanco, WebDriver driver) {
-		return isElementVisible(driver, By.xpath(getXPathSelectOptionBanco(nombreBanco)));
+		String xpath = getXPathSelectOptionBanco(nombreBanco);
+		return (state(Visible, By.xpath(xpath), driver).check());
 	}
 
 }

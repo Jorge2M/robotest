@@ -5,45 +5,50 @@ import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
-import com.mng.robotest.test80.mango.test.pageobject.manto.PageOrdenacionDePrendas;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageOrdenacionDePrendas.*;
-import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecModalPersonalizacion;
 
-public class PageOrdenacionDePrendasStpV {
+import static com.mng.testmaker.service.webdriver.pageobject.SelectElement.TypeSelect.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+
+public class PageOrdenacionDePrendasStpV extends PageObjTM {
 
 	static String refPrenda = "";
-
-	public static void mantoOrdenacionInicio(WebDriver driver) throws Exception {
-		selectPreProduccion(driver);
-		selectShe(driver);
+	
+	public PageOrdenacionDePrendasStpV(WebDriver driver) {
+		super(driver);
 	}
 
-	public static void mantoSeccionPrendas(WebDriver driver) throws Exception {
-		selectSectionPrenda(driver);
-		selectTipoPrenda(driver);
-		bajarPrenda(driver);
+	public void mantoOrdenacionInicio() throws Exception {
+		selectPreProduccion();
+		selectShe();
 	}
 
-	public static void ordenacionModal(WebDriver driver) throws Exception {
-		aplicarOrden(driver);
-		aceptarOrdenPais(driver);
+	public void mantoSeccionPrendas() throws Exception {
+		selectSectionPrenda();
+		selectTipoPrenda();
+		bajarPrenda();
+	}
+
+	public void ordenacionModal() throws Exception {
+		aplicarOrden();
+		aceptarOrdenPais();
 	}
 
     @Validation
-    public static ChecksTM validateIsPage(WebDriver driver) {
+    public ChecksTM validateIsPage() {
         ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 10;
         validations.add(
         	"Estamos en la página " + Orden.titulo.getXPath(),
-            PageOrdenacionDePrendas.isElementInStateUntil(Orden.initialTitulo, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        	state(Visible, Orden.initialTitulo.getBy()).wait(10).check(), State.Defect);
         validations.add(
         	"Aparece el desplegable de tiendas",
-        	PageOrdenacionDePrendas.isElementInStateUntil(Orden.desplegableTiendas, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        	state(Visible, Orden.desplegableTiendas.getBy()).wait(10).check(), State.Defect);
         validations.add(
         	"El botón <b>Ver Tiendas</b> está en la página",
-        	PageOrdenacionDePrendas.isElementInStateUntil(Orden.verTiendas, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        	state(Visible, Orden.verTiendas.getBy()).wait(10).check(), State.Defect);
         return validations;
     }
 
@@ -51,152 +56,150 @@ public class PageOrdenacionDePrendasStpV {
 		description="Seleccionamos en el desplegable la opción <b>PreProduccion</b>",
 		expected="Aparecen los diferentes indicadores de secciones",
 		saveErrorData = SaveWhen.Never)
-	private static void selectPreProduccion(WebDriver driver) throws Exception {
-		PageOrdenacionDePrendas.selectInDropDown(Orden.desplegableTiendas, "shop.org.pre.mango.com", driver);
-		PageOrdenacionDePrendas.clickAndWait(Orden.verTiendas, driver);
-		validatePreProductionElements(driver);
+	private void selectPreProduccion() throws Exception {
+		select(Orden.desplegableTiendas.getBy(), "shop.org.pre.mango.com").type(Value).exec();
+		click(Orden.verTiendas.getBy()).exec();
+		validatePreProductionElements();
 	}
 
-    @Validation
-	private static ChecksTM validatePreProductionElements(WebDriver driver) {
-        ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 10;
-        validations.add(
-        	"Está presente el enlace de <b>She</b>",
-            PageOrdenacionDePrendas.isElementInStateUntil(Section.She, StateElem.Visible, maxSecondsWait, driver), State.Defect);
-        validations.add(
-            "Está presente el enlace de <b>He</b>",
-            PageOrdenacionDePrendas.isElementInStateUntil(Section.He, StateElem.Visible, maxSecondsWait, driver), State.Defect);
-        validations.add(
-            "Está presente el enlace de <b>Nina</b>",
-            PageOrdenacionDePrendas.isElementInStateUntil(Section.Nina, StateElem.Visible, maxSecondsWait, driver), State.Defect);
-        validations.add(
-            "Aparece correctamente el boton de <b>cancelar</b>",
-            PageOrdenacionDePrendas.isElementInStateUntil(Section.Nino, StateElem.Visible, maxSecondsWait, driver), State.Defect);
-        validations.add(
-            "Está presente el enlace de <b>Violeta</b>",
-            PageOrdenacionDePrendas.isElementInStateUntil(Section.Violeta, StateElem.Visible, maxSecondsWait, driver), State.Defect);
-        return validations;
-    }
+	@Validation
+	private ChecksTM validatePreProductionElements() {
+		ChecksTM validations = ChecksTM.getNew();
+		validations.add(
+			"Está presente el enlace de <b>She</b>",
+			state(Visible, Section.She.getBy()).wait(10).check(), State.Defect);
+		validations.add(
+			"Está presente el enlace de <b>He</b>",
+			state(Visible, Section.He.getBy()).wait(10).check(), State.Defect);
+		validations.add(
+			"Está presente el enlace de <b>Nina</b>",
+			state(Visible, Section.Nina.getBy()).wait(10).check(), State.Defect);
+		validations.add(
+			"Aparece correctamente el boton de <b>cancelar</b>",
+			state(Visible, Section.Nino.getBy()).wait(10).check(), State.Defect);
+		validations.add(
+			"Está presente el enlace de <b>Violeta</b>",
+			state(Visible, Section.Violeta.getBy()).wait(10).check(), State.Defect);
+		return validations;
+	}
 
 	@Step(
 		description="Seleccionamos la seccion de <b>She</b>",
 		expected="Podemos seleccionar que queremos realizar",
 		saveErrorData = SaveWhen.Never)
-	private static void selectShe(WebDriver driver) throws Exception {
-		SecModalPersonalizacion.selectElement(Section.She, driver);
-		validateSectionShe(13, driver);
+	private void selectShe() throws Exception {
+		click(Section.She.getBy()).waitLoadPage(3).exec();
+		validateSectionShe(13);
 	}
 
 	@Validation(
 		description="1) Está presente el selector de secciones dentro de <b>She</b>",
 		level=State.Warn)
-	private static boolean validateSectionShe(int maxSecondsWait, WebDriver driver) {
-		return (PageOrdenacionDePrendas.isElementInStateUntil(Orden.selectorOrdenacion, StateElem.Visible, maxSecondsWait, driver));
+	private boolean validateSectionShe(int maxSeconds) {
+		return (state(Visible, Orden.selectorOrdenacion.getBy()).wait(maxSeconds).check());
 	}
 
 	@Step(
 		description="Seleccionamos la sección de <b>prendas</b> en el desplegable",
 		expected="Nos aparece otro desplegable con los tipos de prenda",
 		saveErrorData = SaveWhen.Never)
-	private static void selectSectionPrenda(WebDriver driver){
-		PageOrdenacionDePrendas.selectInDropDown(Orden.selectorOrdenacion, "prendas_she", driver);
-		validateSectionPrenda(driver);
+	private void selectSectionPrenda() {
+		select(Orden.selectorOrdenacion.getBy(), "prendas_she").type(Value).exec();
+		validateSectionPrenda();
 	}
 
-    @Validation
-	private static ChecksTM validateSectionPrenda(WebDriver driver) {
-        ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 13;
-        validations.add(
-            "Se vuelve visible el selector de tipo de <b>Prendas</b>",
-            PageOrdenacionDePrendas.isElementInStateUntil(Orden.selectorPrendas, StateElem.Visible, maxSecondsWait, driver), State.Defect);
-        validations.add(
-            "Podemos ver el <b>botón</b> para ver las prendas",
-            PageOrdenacionDePrendas.isElementInStateUntil(Orden.verPrendas, StateElem.Visible, maxSecondsWait, driver), State.Defect);
-        return validations;
-    }
+	@Validation
+	private ChecksTM validateSectionPrenda() {
+		ChecksTM validations = ChecksTM.getNew();
+		validations.add(
+			"Se vuelve visible el selector de tipo de <b>Prendas</b>",
+			state(Visible, Orden.selectorPrendas.getBy()).wait(13).check(), State.Defect);
+		validations.add(
+			"Podemos ver el <b>botón</b> para ver las prendas",
+			state(Visible, Orden.verPrendas.getBy()).wait(13).check(), State.Defect);
+		return validations;
+	}
 
 	@Step(
 		description="Seleccionamos <b>Camisas</b> en el desplegable de tipo de prenda y confirmamos nuestra seleccion",
 		expected="Aparecen fotos en pantalla",
 		saveErrorData = SaveWhen.Never)
-	private static void selectTipoPrenda(WebDriver driver) throws Exception {
-		SecModalPersonalizacion.selectInDropDown(Orden.selectorPrendas, "camisas_she", driver);
-		int secondsWaitElement = 2;
-		SecModalPersonalizacion.selectElementWaitingForAvailability(Orden.verPrendas, secondsWaitElement, driver);
-		validateTipoPrenda(driver);
+	private void selectTipoPrenda() throws Exception {
+		select(Orden.selectorPrendas.getBy(), "camisas_she").type(Value).exec();
+//      Thread.sleep(100);
+		click(Orden.verPrendas.getBy()).waitLink(2).exec();
+		validateTipoPrenda();
 	}
 
 	@Validation
-	private static ChecksTM validateTipoPrenda(WebDriver driver) {
-        ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 20;
-        validations.add(
-            "Aparecen imagenes en la nueva página (lo esperamos hasta " + maxSecondsWait + " segundos)",
-            PageOrdenacionDePrendas.isElementInStateUntil(Orden.pruebaImagen, StateElem.Visible, maxSecondsWait, driver), State.Defect);
-        validations.add(
-            "Estamos en la sección que corresponde <b>camisas</b>",
-            PageOrdenacionDePrendas.isElementInState(Orden.pruebaCamisa, StateElem.Visible, driver), State.Defect);
-        return validations;
-    }
+	private ChecksTM validateTipoPrenda() {
+		ChecksTM validations = ChecksTM.getNew();
+		int maxSeconds = 20;
+		validations.add(
+			"Aparecen imagenes en la nueva página (lo esperamos hasta " + maxSeconds + " segundos)",
+			state(Visible, Orden.pruebaImagen.getBy()).wait(maxSeconds).check(), State.Defect);
+		validations.add(
+			"Estamos en la sección que corresponde <b>camisas</b>",
+			state(Visible, Orden.pruebaCamisa.getBy()).wait(maxSeconds).check(), State.Defect);
+		return validations;
+	}
 
 	@Step(
 		description="Enviamos la primera prenda al final",
 		expected="La prenda ha cambiado",
 		saveErrorData = SaveWhen.Never)
-	private static void bajarPrenda(WebDriver driver) throws Exception {
-		PageOrdenacionDePrendas.clickAndWait(Orden.primeraPrenda, driver);
-		PageOrdenacionDePrendas.moveToAndSelectElement(Orden.bajarPrenda, driver);
-		validateBajarPrenda(driver, 15);
+	private void bajarPrenda() throws Exception {
+		click(Orden.primeraPrenda.getBy()).exec();
+		moveToElement(Orden.bajarPrenda.getBy(), driver);
+		click(Orden.bajarPrenda.getBy()).waitLink(3).exec();
+		validateBajarPrenda(15);
 	}
 
-    @Validation
-    private static ChecksTM validateBajarPrenda(WebDriver driver, int maxSecondsWait) {
-        ChecksTM validations = ChecksTM.getNew();
-        validations.add(
-            "Se sigue viendo la segunda prenda",
-            PageOrdenacionDePrendas.isElementInStateUntil(Orden.segundaPrenda, StateElem.Visible, maxSecondsWait, driver), State.Defect);
-        validations.add(
-            "La primera prenda no se corresponde con la que había inicialmente",
-            PageOrdenacionDePrendas.isElementInStateUntil(Orden.primeraPrenda, StateElem.Visible, maxSecondsWait, driver), State.Defect);
-        return validations;
-    }
+	@Validation
+	private ChecksTM validateBajarPrenda(int maxSeconds) {
+		ChecksTM validations = ChecksTM.getNew();
+		validations.add(
+			"Se sigue viendo la segunda prenda",
+			state(Visible, Orden.segundaPrenda.getBy()).wait(maxSeconds).check(), State.Defect);
+		validations.add(
+			"La primera prenda no se corresponde con la que había inicialmente",
+			state(Visible, Orden.primeraPrenda.getBy()).wait(maxSeconds).check(), State.Defect);
+		return validations;
+	}
 
 	@Step(
 		description="Aplicamos el nuevo orden a las prendas",
 		expected="Se despliega el modal de la ordenacion de predas",
 		saveErrorData = SaveWhen.Never)
-	private static void aplicarOrden(WebDriver driver) throws Exception {
-		PageOrdenacionDePrendas.selectElement(Orden.aplicarOrden, driver);
-		validateAplicarOrden(driver);
+	private void aplicarOrden() {
+		click(Orden.aplicarOrden.getBy()).waitLoadPage(3).exec();
+		validateAplicarOrden();
 	}
 
-    @Validation
-	private static ChecksTM validateAplicarOrden(WebDriver driver) {
-        ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 15;
-        validations.add(
-            "Aparece correctamente el modal de confirmacion",
-            PageOrdenacionDePrendas.isElementInStateUntil(Modal.container, StateElem.Visible, maxSecondsWait, driver), State.Defect);
-        validations.add(
-            "Aparece correctamente el boton de <b>aplicar general</b>",
-            PageOrdenacionDePrendas.isElementInStateUntil(Modal.applyGeneric, StateElem.Visible, maxSecondsWait, driver), State.Defect);
-        validations.add(
-            "Aparece correctamente el boton de <b>aplicar pais</b>",
-            PageOrdenacionDePrendas.isElementInStateUntil(Modal.applyCountry, StateElem.Visible, maxSecondsWait, driver), State.Defect);
-        validations.add(
-            "Aparece correctamente el boton de <b>cancelar</b>",
-            PageOrdenacionDePrendas.isElementInStateUntil(Modal.cancel, StateElem.Visible, maxSecondsWait, driver), State.Defect);
-        return validations;
-    }
+	@Validation
+	private ChecksTM validateAplicarOrden() {
+		ChecksTM validations = ChecksTM.getNew();
+		validations.add(
+			"Aparece correctamente el modal de confirmacion",
+			state(Visible, Modal.container.getBy()).wait(15).check(), State.Defect);
+		validations.add(
+			"Aparece correctamente el boton de <b>aplicar general</b>",
+			state(Visible, Modal.applyGeneric.getBy()).wait(15).check(), State.Defect);
+		validations.add(
+			"Aparece correctamente el boton de <b>aplicar pais</b>",
+			state(Visible, Modal.applyCountry.getBy()).wait(15).check(), State.Defect);
+		validations.add(
+			"Aparece correctamente el boton de <b>cancelar</b>",
+			state(Visible, Modal.cancel.getBy()).wait(15).check(), State.Defect);
+		return validations;
+	}
 
 	@Step(
 		description="Aplicamos el nuevo orden a las prendas",
 		expected="Se despliega el modal de la ordenacion de predas",
 		saveErrorData = SaveWhen.Never)
-	private static void aceptarOrdenPais(WebDriver driver) throws Exception {
-		SecModalPersonalizacion.selectElement(Modal.applyCountry, driver);
-		validateBajarPrenda(driver, 10);
+	private void aceptarOrdenPais() throws Exception {
+		click(Modal.applyCountry.getBy()).waitLoadPage(3).exec();
+		validateBajarPrenda(10);
 	}
 }

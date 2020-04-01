@@ -7,8 +7,10 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.testmaker.testreports.html.ResultadoErrores;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.AllPages;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
@@ -22,7 +24,7 @@ public class AllPagesSEO {
     /**
      * Validaciones que determinan si una página generada en MANGO es o no correcta
      */
-    public static ResultadoErrores validacionesGenericasSEO(WebDriver driver) throws Exception {
+    public static ResultadoErrores validacionesGenericasSEO(WebDriver driver) {
 
         ResultadoErrores resultado = new ResultadoErrores();
         resultado.setResultado(ResultadoErrores.Resultado.OK);
@@ -71,10 +73,12 @@ public class AllPagesSEO {
      */
     public static ArrayList<String> validaMetaDescription(WebDriver driver) {
         ArrayList<String> listaErrorsInHtmlFormat = new ArrayList<>();
-        if (!WebdrvWrapp.isElementPresent(driver, By.xpath("//meta[@name='description' and @content]")) || //Existe el meta "Description" 
-            driver.findElement(By.xpath("//meta[@name='description' and @content]")).getAttribute("content").compareTo("") == 0) //Tiene un content que no está a blancos
-            listaErrorsInHtmlFormat.add("<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">No existe el meta 'description' o tiene el atributo 'content' a nulo</c>");
         
+        String xpath = "//meta[@name='description' and @content]";
+        if (state(Present, By.xpath(xpath), driver).check() ||
+            driver.findElement(By.xpath("//meta[@name='description' and @content]")).getAttribute("content").compareTo("") == 0) {
+            listaErrorsInHtmlFormat.add("<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">No existe el meta 'description' o tiene el atributo 'content' a nulo</c>");
+        }
         return listaErrorsInHtmlFormat;
     }
     

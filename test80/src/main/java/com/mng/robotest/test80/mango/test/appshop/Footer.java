@@ -29,23 +29,23 @@ public class Footer {
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 		dCtxSh.pais = españa;
 		dCtxSh.idioma = castellano;
 		return dCtxSh;
 	}
 
-    @Test(
-        groups = { "Footer", "Canal:all_App:shop", "Canal:desktop_App:outlet" }, alwaysRun = true, 
-        description="Verificar que los links del footer aparecen y redirigen correctamente")
-    public void FOOT001_Menu() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
-        dCtxSh.userRegistered = false;
+	@Test(
+		groups = { "Footer", "Canal:all_App:shop", "Canal:desktop_App:outlet" }, alwaysRun = true, 
+		description="Verificar que los links del footer aparecen y redirigen correctamente")
+	public void FOOT001_Menu() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		DataCtxShop dCtxSh = getCtxShForTest();
+		dCtxSh.userRegistered = false;
 
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
-        String urlInitialPage = driver.getCurrentUrl();
-        SecFooterStpV.validaLinksFooter(dCtxSh.channel, dCtxSh.appE, driver);
+		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+		String urlInitialPage = driver.getCurrentUrl();
+		SecFooterStpV.validaLinksFooter(dCtxSh.channel, dCtxSh.appE, driver);
         
         List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinksFiltered(dCtxSh.appE, dCtxSh.channel);
         //List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinks(dCtxSh.appE, dCtxSh.channel);

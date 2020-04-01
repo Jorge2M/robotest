@@ -86,7 +86,11 @@ public class TestRunMaker {
         testRun.setStorerErrorStep(storerErrorStep);
         testRun.setBrowserStackDesktop(browserStackDesktop);
         testRun.setBrowserStackMobil(browserStackMobil);
-        filterSuiteXML.filterTestCasesToExec(testRun); 
+        
+        //Para el caso de tests provenientes de factorías delegaremos el filtrado al @Test
+        if (inputData.getTestObject()==null) {
+        	filterSuiteXML.filterTestCasesToExec(testRun);
+        }
         return testRun;
     }
     

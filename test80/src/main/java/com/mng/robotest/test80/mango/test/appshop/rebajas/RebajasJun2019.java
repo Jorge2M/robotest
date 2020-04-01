@@ -1,6 +1,8 @@
 package com.mng.robotest.test80.mango.test.appshop.rebajas;
 
 import org.testng.annotations.*;
+
+import java.io.Serializable;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 
@@ -31,9 +33,11 @@ import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroIniStpV;
 
-public class RebajasJun2019 {
+public class RebajasJun2019 implements Serializable {
 
-    public int prioridad;
+	private static final long serialVersionUID = 4613310852981337754L;
+	
+	public int prioridad;
 	private InputParamsMango inputParamsSuite = null;
     private String index_fact;
     private Pais paisFactory = null;
@@ -64,7 +68,7 @@ public class RebajasJun2019 {
 	    dCtxSh.setChannel(inputParamsSuite.getChannel());
 	    dCtxSh.pais = this.paisFactory;
 	    dCtxSh.idioma = this.idiomaFactory;
-	    dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+	    //dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 	    return dCtxSh;
     }
 	
@@ -73,7 +77,7 @@ public class RebajasJun2019 {
     	   description="Validaciones específicas correspondientes a las Rebajas de Diciembre-2017")
     public void REB001_RebajasDic2019() throws Exception {
     	setInputParamsSuite();
-    	TestMaker.getTestCase().setRefineDataName(index_fact);
+    	TestMaker.getTestCase().setSpecificInputData(index_fact);
     	WebDriver driver = TestMaker.getDriverTestCase();
         DataCtxShop dCtxSh = getCtxShForTest();
         int numLineasPais = dCtxSh.pais.getShoponline().getNumLineasTiendas(dCtxSh.appE);

@@ -31,8 +31,7 @@ public class PageYandex1rstStpv {
 	@Step (
 		description="Introducimos el teléfono <b>#{telefonoRuso}</b> y seleccionamos el botón <b>\"Continuar\"</b>", 
         expected="Aparece la página de confirmación del pago")
-    public static String inputTlfnAndclickContinuar(String telefonoRuso, String importeTotal, String codPais, WebDriver driver) 
-    throws Exception {
+    public static String inputTlfnAndclickContinuar(String telefonoRuso, String importeTotal, String codPais, WebDriver driver) {
         PageYandex1rst.inputTelefono(telefonoRuso, driver);
         PageYandex1rst.clickContinue(driver);
         if (!PageYandex1rst.retryButtonExists(driver)) {
@@ -47,8 +46,7 @@ public class PageYandex1rstStpv {
         return PageYandex1rst.retryButtonExists(driver);
     }
 
-    public static String retry(String importeTotal, String codPais, WebDriver driver) 
-    throws Exception {
+    public static String retry(String importeTotal, String codPais, WebDriver driver) {
         PageYandex1rst.clickOnRetry(driver);
         PageYandex1rst.clickContinue(driver);
         PageYandexPayingByCodeStpV.validateIsPage(importeTotal, codPais, driver);

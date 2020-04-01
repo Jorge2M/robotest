@@ -9,9 +9,10 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.sapfiori.access.test.testcase.generic.webobject.elements.inputs.select.SelectEstandardWithoutLabel;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.makers.StandarElementsMaker;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.sapfiori.access.test.testcase.generic.webobject.utils.PageObject;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class ModalSelectConditions extends WebdrvWrapp {
+public class ModalSelectConditions extends PageObject {
 
 	public enum Block {Incluir, Excluir}
 	
@@ -43,8 +44,6 @@ public class ModalSelectConditions extends WebdrvWrapp {
 		}
 	}
 	
-	private final WebDriver driver;
-	
 	//Elementos
 	private final SelectEstandardWithoutLabel selectIncluir;
 	private final SelectEstandardWithoutLabel selectExcluir;
@@ -58,7 +57,7 @@ public class ModalSelectConditions extends WebdrvWrapp {
 	private static final String XPathButtonOk = "//button[@id[contains(.,'-ok')]]";
 	
 	private ModalSelectConditions(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 		StandarElementsMaker maker = StandarElementsMaker.getNew(driver);
 		int idSelectInclude = getIdSelect(Block.Incluir);
 		selectIncluir = maker.getSelectEstandardWithoutLabel(idSelectInclude);
@@ -91,7 +90,7 @@ public class ModalSelectConditions extends WebdrvWrapp {
 	
 	private int getIdSelect(Block block) {
 		String xpathSelect = getXPathSelect(block);
-		isElementPresentUntil(driver, By.xpath(xpathSelect), 1);
+		state(Present, By.xpath(xpathSelect)).wait(1).check();
 		String id = driver.findElement(By.xpath(xpathSelect)).getAttribute("id");
 		
 		Pattern pattern = Pattern.compile(".*(\\d+).*");
@@ -119,8 +118,8 @@ public class ModalSelectConditions extends WebdrvWrapp {
 		driver.findElement(byInput).sendKeys(text);
 	}
 	
-	public void clickOk() throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathButtonOk));
+	public void clickOk() {
+		click(By.xpath(XPathButtonOk)).exec();
 	}
 	
 	private void unfold(Block block) {

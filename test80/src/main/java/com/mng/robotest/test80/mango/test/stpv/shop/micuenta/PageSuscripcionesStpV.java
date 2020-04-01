@@ -47,7 +47,7 @@ public class PageSuscripcionesStpV {
     @Step(
         description = "Seleccionar los checkbox de las Newsletter <b>#{listNewsletters.toString()}</b> + Botón \"Guardar Cambios\"",
         expected = "parece la confirmación que los datos se han modificado")
-    public static void selectNewslettersAndGuarda(ArrayList<idNewsletters> listNewsletters, WebDriver driver) throws Exception {
+    public static void selectNewslettersAndGuarda(ArrayList<idNewsletters> listNewsletters, WebDriver driver) {
         for (idNewsletters idNewsletter : listNewsletters) {
             PageSuscripciones.clickRadioNewsletter(driver, idNewsletter);
         }

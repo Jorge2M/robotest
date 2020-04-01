@@ -3,11 +3,12 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancredit
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
 
-public class PageKoCardINIpay1Mobil extends ElementPageFunctions {
+
+public class PageKoCardINIpay1Mobil {
+	
 	private final static String tagTitleButtonTypeCard = "@TagLitTypeCard";
     public enum BodyPageKoCardINIpay1 implements ElementPage {
         terms("//label[@for='allAgree']"),
@@ -16,20 +17,24 @@ public class PageKoCardINIpay1Mobil extends ElementPageFunctions {
         typecardbutton_withtag("//li[text()[contains(.,'" + tagTitleButtonTypeCard + "')]]"),
     	submitButton("//input[@type='submit']");
 
-        private String xPath;
+        private By by;
+        private String xpath;
         BodyPageKoCardINIpay1 (String xPath) {
-            this.xPath = xPath;
+        	xpath = xPath;
+            by = By.xpath(xPath);
         }
 
         @Override
-        public String getXPath() {
-            return this.xPath;
+        public By getBy() {
+            return by;
         }
-        
-        public static void clickTypeCardButton(String litButton, WebDriver driver) throws Exception {
+        public String getXPath() {
+        	return xpath;
+        }
+
+        public static void clickTypeCardButton(String litButton, WebDriver driver) {
         	String xpatyButtonTypeCard = typecardbutton_withtag.getXPath().replace(tagTitleButtonTypeCard, litButton);
-        	WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(xpatyButtonTypeCard));
-        	
+        	click(By.xpath(xpatyButtonTypeCard), driver).exec();
         }
     }
     

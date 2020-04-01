@@ -5,11 +5,11 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.ModalDroppoints;
 
@@ -17,10 +17,10 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.ModalDr
 public class SecConfirmDatosStpV {
 
 	@Validation (
-		description="Es visible la capa de confirmación de los datos (la esperamos hasta #{maxSecondsWait} segundos)",
+		description="Es visible la capa de confirmación de los datos (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-	public static boolean validateIsVisible(int maxSecondsWait, Channel channel, WebDriver driver) {
-		return (ModalDroppoints.secConfirmDatos.isVisibleUntil(maxSecondsWait, channel, driver));
+	public static boolean validateIsVisible(int maxSeconds, Channel channel, WebDriver driver) {
+		return (ModalDroppoints.secConfirmDatos.isVisibleUntil(maxSeconds, channel, driver));
 	}
 	
 	public static void setDataIfNeeded(String codigoPais,WebDriver driver) throws Exception {
@@ -41,16 +41,14 @@ public class SecConfirmDatosStpV {
 	@Step (
 		description="Clickamos el botón \"Confirmar Datos\"", 
 		expected="La dirección de envío se establece a la de la tienda")
-	public static void clickConfirmarDatosButton(Channel channel, DataPedido dataPedido, WebDriver driver) 
-	throws Exception {
+	public static void clickConfirmarDatosButton(Channel channel, DataPedido dataPedido, WebDriver driver) {
 		ModalDroppoints.secConfirmDatos.clickConfirmarDatosButtonAndWait(5, driver);
-		WebdrvWrapp.waitForPageLoaded(driver, 2);       
+		SeleniumUtils.waitForPageLoaded(driver, 2);       
 		checkConfirmacionCambioDireccionEnvio(dataPedido, channel, driver);
 	}
 	
 	@Validation
-	private static ChecksTM checkConfirmacionCambioDireccionEnvio(DataPedido dataPedido, Channel channel, WebDriver driver) 
-	throws Exception {
+	private static ChecksTM checkConfirmacionCambioDireccionEnvio(DataPedido dataPedido, Channel channel, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
 		validations.add(
 			"Desaparece la capa de Droppoints",

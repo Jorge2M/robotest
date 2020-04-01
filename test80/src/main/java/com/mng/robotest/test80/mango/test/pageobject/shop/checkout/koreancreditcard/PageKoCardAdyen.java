@@ -1,39 +1,45 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 
-public class PageKoCardAdyen extends WebdrvWrapp {
-
+public class PageKoCardAdyen extends PageObjTM {
+	
     private final static String XPathIconKoreanCreditCard = "//input[@name='brandName']";
     private final static String XPathGreenButton = "//input[@name='pay']";
     
-    public static boolean isPage(WebDriver driver) {
-        return (isIconVisible(driver));
+    public PageKoCardAdyen(WebDriver driver) {
+    	super(driver);
+    }
+    
+    public boolean isPage() {
+        return (isIconVisible());
     }
 
-	public static boolean isIconVisible(WebDriver driver) {
-		return isElementVisible(driver, By.xpath(XPathIconKoreanCreditCard));
+	public boolean isIconVisible() {
+		return (state(Visible, By.xpath(XPathIconKoreanCreditCard), driver).check());
 	}
 
-	public static void clickForContinue(Channel channel, WebDriver driver) throws Exception {
+	public void clickForContinue(Channel channel) {
 		switch (channel) {
 		case movil_web:
-			clickIcon(driver);
+			clickIcon();
 			break;
 		case desktop:
-			clickGreenButton(driver);
+			clickGreenButton();
 		}
 	}
 	
-	private static void clickIcon(WebDriver driver) throws Exception {
-    	WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(XPathIconKoreanCreditCard));
+	private void clickIcon() {
+		click(By.xpath(XPathIconKoreanCreditCard)).exec();
 	}
 	
-	private static void clickGreenButton(WebDriver driver) throws Exception {
-		WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(XPathGreenButton));
+	private void clickGreenButton() {
+		click(By.xpath(XPathGreenButton)).exec();
 	}
 }

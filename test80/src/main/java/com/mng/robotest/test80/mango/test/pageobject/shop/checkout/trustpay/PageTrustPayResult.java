@@ -4,10 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageTrustPayResult extends WebdrvWrapp {
+public class PageTrustPayResult {
     
     static String XPathHeader = "//h2[@id='stageheader']";
     static String XPathButtonContinue = "//input[@type='submit' and @value='continue']";
@@ -25,10 +26,10 @@ public class PageTrustPayResult extends WebdrvWrapp {
     }
     
     public static boolean isPresentButtonContinue(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathButtonContinue)));
+    	return (state(Present, By.xpath(XPathButtonContinue), driver).check());
     }
-    
-    public static void clickButtonContinue(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonContinue));
-    }
+
+	public static void clickButtonContinue(WebDriver driver) {
+		click(By.xpath(XPathButtonContinue), driver).exec();
+	}
 }

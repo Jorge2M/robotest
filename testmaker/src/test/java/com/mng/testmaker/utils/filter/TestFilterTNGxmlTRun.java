@@ -38,9 +38,9 @@ public class TestFilterTNGxmlTRun {
         
         assertEquals("The number of tests is 3", 3, testStub.getListTests().size());
         ArrayList<String> testMethodsNames = new ArrayList<>();
-        testMethodsNames.add(testStub.getListTests().get(0).getMethod().getName());
-        testMethodsNames.add(testStub.getListTests().get(1).getMethod().getName());
-        testMethodsNames.add(testStub.getListTests().get(2).getMethod().getName());
+        testMethodsNames.add(testStub.getListTests().get(0).getData().getTestCaseName());
+        testMethodsNames.add(testStub.getListTests().get(1).getData().getTestCaseName());
+        testMethodsNames.add(testStub.getListTests().get(2).getData().getTestCaseName());
         String method1 = "MIC001_Opciones_Mi_Cuenta";
         String method2 = "GPO001_Galeria_Camisas";
         String method3 = "BOR001_AddBolsaFromGaleria_NoReg";
@@ -63,7 +63,7 @@ public class TestFilterTNGxmlTRun {
         TestMethod methodIncluded = testStub.getListTests().get(0);
         String methodNameExpected = testStub.getMethodsIncludedInClass().get(0);
         assertEquals("The description is " + descriptionExpected, descriptionExpected, methodIncluded.getDescription());
-        assertEquals("The method is " + methodNameExpected, methodNameExpected, methodIncluded.getMethod().getName());
+        assertEquals("The method is " + methodNameExpected, methodNameExpected, methodIncluded.getData().getTestCaseName());
     }
     
     @Test

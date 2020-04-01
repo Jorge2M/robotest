@@ -2,6 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageMercpagoDatosTrjDesktop extends PageMercpagoDatosTrj {
     
@@ -23,8 +24,8 @@ public class PageMercpagoDatosTrjDesktop extends PageMercpagoDatosTrj {
 //    }
     
     @Override
-    public boolean isPageUntil(int maxSecondsToWait) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathInputCvc), maxSecondsToWait));
+    public boolean isPageUntil(int maxSeconds) {
+    	return (state(Visible, By.xpath(XPathInputCvc), driver).wait(maxSeconds).check());
     }
     
     @Override
@@ -34,20 +35,15 @@ public class PageMercpagoDatosTrjDesktop extends PageMercpagoDatosTrj {
     
     @Override
     public void sendCvc(String cvc) {
-        sendKeysWithRetry(3, cvc, By.xpath(XPathInputCvc), driver);
+        sendKeysWithRetry(cvc, By.xpath(XPathInputCvc), 3, driver);
     }
     
-    public boolean isVisibleVisaIconUntil(int maxSecondsToWait) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathVisaIconNumTarj), maxSecondsToWait));
+    public boolean isVisibleVisaIconUntil(int maxSeconds) {
+    	return (state(Visible, By.xpath(XPathVisaIconNumTarj), driver)
+    			.wait(maxSeconds).check());
     }
-    
-//    public void selectBanco(String litBanco) {
-//    	driver.findElement(By.xpath(XPathDivBancoToClick)).click();
-//    	String xpathBanco = getXPathOptionBanco(litBanco);
-//    	driver.findElement(By.xpath(xpathBanco)).click();
-//    }
-    
-    public void clickBotonForContinue() throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathBotonContinuar + " | " + XPathBotonPagar));    
+
+    public void clickBotonForContinue() {
+    	click(By.xpath(XPathBotonContinuar + " | " + XPathBotonPagar)).exec();
     }
 }

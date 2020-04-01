@@ -55,10 +55,10 @@ public class PageAssist1rstStpV {
 	@Validation
 	private static ChecksTM checkAfterClickPayButton(Channel channel, WebDriver driver) {
     	ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 10;
+        int maxSeconds = 10;
 	 	validations.add(
-			"Desaparece la página con el botón de pago (lo esperamos hasta " + maxSecondsWait + " segundos)",
-			PageAssist1rst.invisibilityBotonPagoUntil(maxSecondsWait, channel, driver), State.Warn);
+			"Desaparece la página con el botón de pago (lo esperamos hasta " + maxSeconds + " segundos)",
+			PageAssist1rst.invisibilityBotonPagoUntil(maxSeconds, channel, driver), State.Warn);
 	 	validations.add(
 			"Aparece una página intermedia con un botón de submit",
 			PageAssistLast.isPage(driver), State.Warn);

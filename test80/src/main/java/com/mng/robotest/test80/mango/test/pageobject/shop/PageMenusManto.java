@@ -8,10 +8,13 @@ import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
-public class PageMenusManto extends WebdrvWrapp {
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+public class PageMenusManto {
 
 	static String iniXPathTitulo = "//td[@class='txt11B' and text()[contains(.,'";
 	static String XPathTitulo = "//td[@class='txt11B'] | //form[@id='formTempl']";
@@ -59,13 +62,10 @@ public class PageMenusManto extends WebdrvWrapp {
 		return driver.findElement(By.xpath(XPathTitulo)).getText();
 	}
 
-    /**
-     * @return si nos encontramos en la página principal
-     */
-    public static boolean isPage(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathCeldaTextMenuPrincipal)));
-    }
-    
+	public static boolean isPage(WebDriver driver) {
+		return (state(Present, By.xpath(XPathCeldaTextMenuPrincipal), driver).check());
+	}
+
     /**
      * @return valida si la página seleccionada corresponde con el menú seleccionado
      */
@@ -91,13 +91,10 @@ public class PageMenusManto extends WebdrvWrapp {
 		}
 		
 		return false;
-    }
+	}
 
-    /**
-     * @return nos dice si existe el elemento de la cabecera
-     */
 	public static boolean isMenuHeaderVisible(WebDriver driver) {
-		return (isElementPresent(driver, By.xpath(XPathTitulo)));
+		return (state(Present, By.xpath(XPathTitulo), driver).check());
 	}
 
 	/**
@@ -116,7 +113,7 @@ public class PageMenusManto extends WebdrvWrapp {
      */
     private static boolean isNextXPathEndTable(String XPathPosicionInicial, WebDriver driver) {
 		String XPathNextPosicion = XPathPosicionInicial + "/../following::td/child::node()";
-		if (!isElementPresent(driver,By.xpath(XPathNextPosicion))) {
+		if (!state(Present, By.xpath(XPathNextPosicion), driver).check()) {
 			return false;
 		}
 		//String texto = driver.findElement(By.xpath(XPathNextPosicion)).getText();
@@ -132,7 +129,7 @@ public class PageMenusManto extends WebdrvWrapp {
     	try {
     		clickMenu(textoMenu, driver);
 		} catch (UnhandledAlertException f) {
-	        String textAlert = WebdrvWrapp.acceptAlertIfExists(driver);
+	        String textAlert = SeleniumUtils.acceptAlertIfExists(driver);
 	        if ("".compareTo(textAlert)==0) {
 	        	return "Unknown or Empty";
 	        }
@@ -141,30 +138,33 @@ public class PageMenusManto extends WebdrvWrapp {
     	
     	return "";
     }
-    
-    /**
-     * @param textoMenu
-     * @return hace click en el submenu corresponiente, revisanto si tiene '
-     */
-    public static void clickMenu(String textoMenu, WebDriver driver) throws Exception {
-    	int maxTimeToWait = 60;
-    	int timeWaited = 0;
-    	if (textoMenu.contains("'")) {
-    		int positionDelete = textoMenu.indexOf("'");
-    		String textoMenuRecortado = textoMenu.substring(positionDelete+1, textoMenu.length());
-    		waitClickAndWaitLoad(driver, 60, By.xpath(getXpath_linkMenu(textoMenuRecortado)), 60, TypeOfClick.javascript);
-    	}else {
-    		waitClickAndWaitLoad(driver, 60,By.xpath(getXpath_linkMenu(textoMenu)), 60, TypeOfClick.javascript);
-    	}
-    	
-    	while (!isElementPresent(driver, By.xpath(XPathTitulo)) && timeWaited != maxTimeToWait) {
-    		Thread.sleep(1000);
-    		timeWaited++;
-    	}
-    	
-    	waitForPageLoaded(driver, 60);
-    }
-    
+
+	public static void clickMenu(String textoMenu, WebDriver driver) {
+		int maxTimeToWait = 60;
+		int timeWaited = 0;
+		if (textoMenu.contains("'")) {
+			int positionDelete = textoMenu.indexOf("'");
+			String textoMenuRecortado = textoMenu.substring(positionDelete+1, textoMenu.length());
+			By byElem = By.xpath(getXpath_linkMenu(textoMenuRecortado));
+			click(byElem, driver)
+				.waitLink(60).waitLoadPage(60)
+				.type(TypeClick.javascript).exec();
+		}else {
+			By byElem = By.xpath(getXpath_linkMenu(textoMenu));
+			click(byElem, driver)
+				.waitLink(60).waitLoadPage(60)
+				.type(TypeClick.javascript).exec();
+		}
+		
+		while (!state(Present, By.xpath(XPathTitulo), driver).check() && 
+				timeWaited != maxTimeToWait) {
+			waitMillis(1000);
+			timeWaited++;
+		}
+		
+		waitForPageLoaded(driver, 60);
+	}
+
     public static List<WebElement> getListLinksMenus(WebDriver driver) {
         return (driver.findElements(By.xpath(XPathLinkMenu)));
     }

@@ -26,10 +26,10 @@ public class ModalAvisoCambioPaisStpV {
 	@Validation
 	private static ChecksTM checkConfirmacionCambio(Pais paisEnvio, WebDriver driver) throws Exception {
     	ChecksTM validations = ChecksTM.getNew();
-	    int maxSecondsWait = 10;
+	    int maxSeconds = 10;
 	 	validations.add(
-			"Desaparece el modal de aviso de cambio de país (lo esperamos hasta " + maxSecondsWait + " segundos)",
-			ModalAvisoCambioPais.isInvisibleUntil(maxSecondsWait, driver), State.Defect);    	
+			"Desaparece el modal de aviso de cambio de país (lo esperamos hasta " + maxSeconds + " segundos)",
+			ModalAvisoCambioPais.isInvisibleUntil(maxSeconds, driver), State.Defect);    	
 	 	validations.add(
 			"En la dirección de envió aparece el país " + paisEnvio.getNombre_pais(),
 			PageCheckoutWrapper.direcEnvioContainsPais(Channel.desktop, paisEnvio.getNombre_pais(), driver), State.Defect);   

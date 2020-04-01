@@ -23,7 +23,7 @@ public class ModalSelectItemStpV {
 	@Step (
 		description = "Clickamos ENTER",
 		expected = "Aparece una lista inicial de elementos")
-	public ModalSelectItemStpV clickEnterToShowInitialElements() throws Exception {
+	public ModalSelectItemStpV clickEnterToShowInitialElements() {
 		modalSetFilter.clickEnterToShowInitialElements();
 		checkIsElementListVisible(1);
 		return this;
@@ -31,7 +31,7 @@ public class ModalSelectItemStpV {
 	
 	@Step (
 		description = "Seleccionamos el elemento de la tabla que contiene el valor <b>#{valueToSelect}</b>")
-	public void selectElementInTable(String valueToSelect) throws Exception {
+	public void selectElementInTable(String valueToSelect) {
 		modalSetFilter.selectElementInTable(valueToSelect);
 	}
 	
@@ -45,14 +45,14 @@ public class ModalSelectItemStpV {
 	@Step (
 		description = "Buscar <b>#{valueToSearch}</b> y seleccionar el elemento con el valor <b>#{valueToSelect}</b>",
 		expected = "Queda seleccionado el elemento")
-	public void searchAndSelectElement(String valueToSearch, String valueToSelect) throws Exception {
+	public void searchAndSelectElement(String valueToSearch, String valueToSelect) {
 		modalSetFilter.findAndSelectElement(valueToSearch, valueToSelect);
 	}
 	
 	@Step (
 		description = "Seleccionar los elementos en las posiciones <b>#{listPosElementsToSelect}</b>",
 		expected = "Quedan marcados dichos elementos")
-	public void selectElementsByPosition(List<Integer> listPosElementsToSelect) throws Exception {
+	public void selectElementsByPosition(List<Integer> listPosElementsToSelect) {
 		if (!(modalSetFilter instanceof ModalSelectMultiItem)) {
 			throw new ClassCastException(
 				modalSetFilter.getClass() + " is not instance of " + ModalSelectMultiItem.class.getName());
@@ -74,7 +74,7 @@ public class ModalSelectItemStpV {
 	@Step (
 		description = "Clickar el botón OK para acepter los cambios",
 		expected = "Desaparece el modal")
-	public void clickOkButton() throws Exception {
+	public void clickOkButton() {
 		modalSetFilter.clickOkButton();
 	}
 }

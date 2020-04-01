@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageBolsas;
@@ -19,14 +18,14 @@ public class PageBolsasMantoStpV {
 	@Validation
     public static ChecksResultWithFlagLinkCodPed validaLineaBolsa(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
 		ChecksResultWithFlagLinkCodPed validations = ChecksResultWithFlagLinkCodPed.getNew();
-        int maxSecondsWait = 1;
-        boolean isPresentLinkPedido = PageBolsas.presentLinkPedidoInBolsaUntil(dataPedido.getCodigoPedidoManto(), maxSecondsWait, driver);
+        int maxSeconds = 1;
+        boolean isPresentLinkPedido = PageBolsas.presentLinkPedidoInBolsaUntil(dataPedido.getCodigoPedidoManto(), maxSeconds, driver);
 	 	if (isPresentLinkPedido) {
 	 		dataPedido.setIdCompra(PageBolsas.getIdCompra(dataPedido.getCodigoPedidoManto(), driver));
 	 	}
         validations.setExistsLinkCodPed(isPresentLinkPedido);
 	 	validations.add(
-			"En la columna 1 aparece el código de pedido: " + dataPedido.getCodigoPedidoManto() + " (lo esperamos hasta " + maxSecondsWait + " segundos)",
+			"En la columna 1 aparece el código de pedido: " + dataPedido.getCodigoPedidoManto() + " (lo esperamos hasta " + maxSeconds + " segundos)",
 			isPresentLinkPedido, State.Warn);
 	 	
 	 	validations.add(

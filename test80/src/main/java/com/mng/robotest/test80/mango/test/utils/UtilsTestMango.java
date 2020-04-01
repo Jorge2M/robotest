@@ -109,10 +109,7 @@ public class UtilsTestMango {
     		}
     	}
     	
-    	GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh)
-    			.numProducts(maxArticlesAwayVale)
-    			.build();
-    	
+    	GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh).build();
     	listProducts = getterProducts.getAll();
         if (dCtxSh.vale!=null) {
         	for (Garment product : listProducts) {

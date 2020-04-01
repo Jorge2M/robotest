@@ -29,7 +29,11 @@ import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
+
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.navigations.ArticuloNavigations;
@@ -50,14 +54,14 @@ public class UtilsMangoTest {
 
         return codigoPostal;
     }
-    
-    public static String getPageSource(WebDriver driver) {
-        String idWebKit = "webkit-xml-viewer-source-xml";
-        if (WebdrvWrapp.isElementPresent(driver, By.id(idWebKit))) {
-            return driver.findElement(By.id(idWebKit)).getAttribute("innerHTML");
-        }
-        return driver.getPageSource();
-    }
+
+	public static String getPageSource(WebDriver driver) {
+		String idWebKit = "webkit-xml-viewer-source-xml";
+		if (PageObjTM.state(Present, By.id(idWebKit), driver).check()) {
+			return driver.findElement(By.id(idWebKit)).getAttribute("innerHTML");
+		}
+		return driver.getPageSource();
+	}
 
     /**
      * Usa diferentes métodos para posicionarse en la página inicial
@@ -72,7 +76,7 @@ public class UtilsMangoTest {
             if (urlPaginaPostAcceso!=null) {
                 driver.get(urlPaginaPostAcceso);
             } else {
-                if (WebdrvWrapp.isElementPresent(driver, By.xpath("//base"))) {
+            	if (PageObjTM.state(Present, By.xpath("//base"), driver).check()) {
                     String urlBase = driver.findElement(By.xpath("//base")).getAttribute("href");
                     driver.get(urlBase);
                 }
@@ -80,8 +84,7 @@ public class UtilsMangoTest {
         }
     }    
 
-	public static ArticuloScreen addArticuloBolsa(Garment selArticulo, AppEcom app, Channel channel, WebDriver driver)
-	throws Exception {
+	public static ArticuloScreen addArticuloBolsa(Garment selArticulo, AppEcom app, Channel channel, WebDriver driver) {
 		ArticuloScreen articulo = ArticuloNavigations.selectArticuloTallaColorByRef(selArticulo, app, channel, driver);
 		PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
 		pageFicha.clickAnadirBolsaButtonAndWait(); 
@@ -212,9 +215,9 @@ public class UtilsMangoTest {
     
     public static void openLinkInNewTab(WebDriver driver, WebElement element) throws Exception {
         Actions a = new Actions(driver);
-        WebdrvWrapp.moveToElement(element, driver);
+        SeleniumUtils.moveToElement(element, driver);
         Thread.sleep(500);
-        WebdrvWrapp.moveToElement(element, driver);
+        SeleniumUtils.moveToElement(element, driver);
         Thread.sleep(500);
         a.moveToElement(element)
         	.keyDown(Keys.CONTROL)
@@ -263,16 +266,18 @@ public class UtilsMangoTest {
     /** Metodo de acceso a cualquier menú de la pantalla principal de Manto.
      * Requiere de por lo menos un criterio de búsqueda, hasta dos opcionales (y en modo AND lógico) y el WebDriver para hacer un waitForPageLoaded 
      */
-    public static void accesoMenusManto(WebDriver driver, String criterio1, String criterio2) throws Exception {
+    public static void accesoMenusManto(WebDriver driver, String criterio1, String criterio2) {
         if (criterio1 != null && !criterio1.isEmpty() && "".compareTo(criterio1)!=0) {
             if (criterio2 != null && !criterio2.isEmpty() && "".compareTo(criterio2)!=0) {
-                WebdrvWrapp.clickAndWaitLoad(driver, By.xpath("//a[text()[contains(.,'" + criterio1 + "') and contains(.,'" + criterio2 + "')]]"));
+            	By byElem = By.xpath("//a[text()[contains(.,'" + criterio1 + "') and contains(.,'" + criterio2 + "')]]");
+            	PageObjTM.click(byElem, driver).exec();
             } else {
-                WebdrvWrapp.clickAndWaitLoad(driver, By.xpath("//a[text()[contains(.,'" + criterio1 + "')]]"));
+            	By byElem = By.xpath("//a[text()[contains(.,'" + criterio1 + "')]]");
+            	PageObjTM.click(byElem, driver).exec();
             }
         }
         
-        WebdrvWrapp.waitForPageLoaded(driver, 5);
+        SeleniumUtils.waitForPageLoaded(driver, 5);
     }
     
     /**

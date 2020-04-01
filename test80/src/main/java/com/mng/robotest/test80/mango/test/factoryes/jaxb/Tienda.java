@@ -1,5 +1,7 @@
 package com.mng.robotest.test80.mango.test.factoryes.jaxb;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.*;
 
 /**
@@ -7,9 +9,11 @@ import javax.xml.bind.annotation.*;
  *
  */
 
-public class Tienda {
+public class Tienda implements Serializable {
 
-    String nuevo;
+	private static final long serialVersionUID = 7895392091251192587L;
+	
+	String nuevo;
     String rebajas;
     String she;
     String he;

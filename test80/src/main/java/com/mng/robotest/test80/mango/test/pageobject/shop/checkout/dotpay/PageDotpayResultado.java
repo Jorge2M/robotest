@@ -3,18 +3,22 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.dotpay;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 
 
-public class PageDotpayResultado extends WebdrvWrapp {
+public class PageDotpayResultado extends PageObjTM {
 
-    static String XPathButtonNext = "//input[@type='submit' and @value='Next']";
+	private final static String XPathButtonNext = "//input[@type='submit' and @value='Next']";
+	
+	public PageDotpayResultado(WebDriver driver) {
+		super(driver);
+	}
     
-    public static boolean isPageResultadoOk(WebDriver driver) {
+    public boolean isPageResultadoOk() {
         return (driver.getPageSource().contains("Payment successful"));
     }
 
-    public static void clickButtonNext(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonNext));
-    }
+	public void clickButtonNext() {
+		click(By.xpath(XPathButtonNext)).exec();
+	}
 }

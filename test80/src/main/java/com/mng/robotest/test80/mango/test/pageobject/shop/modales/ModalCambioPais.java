@@ -9,7 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 /**
@@ -17,7 +18,7 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
  * @author jorge.munoz
  *
  */
-public class ModalCambioPais extends WebdrvWrapp {
+public class ModalCambioPais {
     
     static String XPathModal = "//div[(@id='cambioPais' or @id='seleccionPais') and @class='modalPopUp']"; 
     static String XPathModalSelecProvincia = "//div[@class='wrapper-cell']/div[@id='seleccionProvincia']";
@@ -41,12 +42,12 @@ public class ModalCambioPais extends WebdrvWrapp {
     /**
      * @return indica si el modal es visible
      */
-    public static boolean isVisibleModalUntil(WebDriver driver, int secondsMaxWait) {
-        return isElementVisibleUntil(driver, By.xpath(XPathModal), secondsMaxWait);
+    public static boolean isVisibleModalUntil(WebDriver driver, int maxSeconds) {
+    	return (state(Visible, By.xpath(XPathModal), driver).wait(maxSeconds).check());
     }
     
     public static boolean isVisibleModalSelecProvincia(WebDriver driver) {
-        return isElementVisible(driver, By.xpath(XPathModalSelecProvincia));
+    	return (state(Visible, By.xpath(XPathModalSelecProvincia), driver).check());
     }
     
     /**
@@ -54,7 +55,7 @@ public class ModalCambioPais extends WebdrvWrapp {
      */
     public static boolean isLinkToConfirmPais(WebDriver driver, String hrefPais) {
         String xpath = getXPath_linkToConfirmPais(hrefPais);
-        return (isElementPresent(driver, By.xpath(xpath)));
+        return (state(Present, By.xpath(xpath), driver).check());
     }
     
     public static Pais getPaisOfButtonForChangePais(List<Pais> listPaisesCandidatos, String urlBaseTest, WebDriver driver) 
@@ -76,7 +77,7 @@ public class ModalCambioPais extends WebdrvWrapp {
      */
     public static boolean isButtonToChangePais(WebDriver driver, String urlAccesoPais) {
         String xpath = getXPath_buttonToChangePais(urlAccesoPais);
-        return (isElementPresent(driver, By.xpath(xpath)));
+        return (state(Present, By.xpath(xpath), driver).check());
     }
     
     /**
@@ -100,10 +101,10 @@ public class ModalCambioPais extends WebdrvWrapp {
     /**
      * Selecciona el botón de confirmación de cambio de país
      */
-    public static void clickButtonChangePais(WebDriver driver) throws Exception {
+    public static void clickButtonChangePais(WebDriver driver) {
         //Obtenemos el xpath del botón y lo seleccionamos
         String xpath = getXPath_buttonToChangePais(""/*urlAccesoPais*/);
-        clickAndWaitLoad(driver, By.xpath(xpath));
+        click(By.xpath(xpath), driver).exec();
     }
     
     /**

@@ -4,10 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecConfirmDatos extends WebdrvWrapp {
+public class SecConfirmDatos {
 
     static String XPathDivGeneralDesktop = "//div[@class[contains(.,'fixedConfirm')]]";
     static String XPathDivGeneralMovil = "//div[@class[contains(.,'dp-confirm-page')]]";
@@ -24,20 +25,21 @@ public class SecConfirmDatos extends WebdrvWrapp {
         }
     }
     
-    public static boolean isVisibleUntil(int maxSecondsToWait, Channel channel, WebDriver driver) {
+    public static boolean isVisibleUntil(int maxSeconds, Channel channel, WebDriver driver) {
         String xpathDivGeneral = getXPathDivGeneral(channel);
-        return (isElementVisibleUntil(driver, By.xpath(xpathDivGeneral), maxSecondsToWait));
+        return (state(Visible, By.xpath(xpathDivGeneral), driver)
+        		.wait(maxSeconds).check());
     }
     
     public static boolean isVisibleInputPostNumberIdDeutschland(WebDriver driver) {
-    	return (WebdrvWrapp.isElementVisible(driver, By.xpath(XPathInputPostNumberIdDeutschland)));
+    	return (state(Visible, By.xpath(XPathInputPostNumberIdDeutschland), driver).check());
     }
     
     public static void sendDataInputPostNumberIdDeutschland(String data, WebDriver driver) throws Exception {
-    	WebdrvWrapp.sendKeysWithRetry(2, data, By.xpath(XPathInputPostNumberIdDeutschland), driver);
+    	sendKeysWithRetry(data, By.xpath(XPathInputPostNumberIdDeutschland), 2, driver);
     }
-    
-    public static void clickConfirmarDatosButtonAndWait(int maxSecondsToWait, WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathConfirmDatosButton), maxSecondsToWait);
-    }
+
+	public static void clickConfirmarDatosButtonAndWait(int maxSeconds, WebDriver driver) {
+		click(By.xpath(XPathConfirmDatosButton), driver).waitLoadPage(maxSeconds).exec();
+	}
 }

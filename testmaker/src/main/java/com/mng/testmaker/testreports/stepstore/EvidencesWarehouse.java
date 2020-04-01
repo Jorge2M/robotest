@@ -40,25 +40,40 @@ public class EvidencesWarehouse {
 		return "";
 	}
 	
-	public void captureAndStore() {
+	public void captureAndStore(Storage typeStorage) {
 		if (isNecessariStorage(step)) {
-			createPathForEvidencesStore(step);
+			if (typeStorage.inFile()) {
+				createPathForEvidencesStore(step);
+			}
 			for (StepEvidence evidence : StepEvidence.values()) {
 				if (step.isNecessaryStorage(evidence)) {
-					EvidenceStorer evidenceStorer = evidenceStorerFactory(evidence);
-					if (evidenceStorer!=null) {
-						evidenceStorer.captureAndStoreContent(step);
-						evidenceStorer.storeContentInFile(step);
-						addEvidence(new StepEvidenceContent(evidence, evidenceStorer.getContent()));
-					}
+					storeEvidence(evidence, typeStorage);
 				}
 			}
 		}
 	}
 	
+	private void storeEvidence(StepEvidence evidence, Storage typeStorage) {
+		EvidenceStorer evidenceStorer = evidenceStorerFactory(evidence);
+		if (evidenceStorer!=null) {
+			evidenceStorer.captureAndStoreContent(step);
+			if (typeStorage.inFile()) {
+				evidenceStorer.storeContentInFile(step);
+			}
+			if (typeStorage.inMemory()) {
+				addEvidence(new StepEvidenceContent(evidence, evidenceStorer.getContent()));
+			}
+		}
+	}
+	
 	public void moveContentEvidencesToFile() {
+		List<StepEvidenceContent> listStepEvidences = getStoredEvidences();
+		if (listStepEvidences.size()==0) {
+			return;
+		}
+		
 		createPathForEvidencesStore(step);
-		for (StepEvidenceContent evidence : getStoredEvidences()) {
+		for (StepEvidenceContent evidence : listStepEvidences) {
 			EvidenceStorer evidenceStorer = evidenceStorerFactory(evidence.getStepEvidence());
 			if (evidenceStorer!=null) {
 				evidenceStorer.saveContentEvidenceInFile(

@@ -4,9 +4,13 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 
-import com.mng.testmaker.boundary.aspects.test.remote.RemoteTest;
+import java.lang.reflect.Method;
+import java.util.List;
+
 import com.mng.testmaker.domain.InputParamsTM;
+import com.mng.testmaker.domain.ServerSubscribers;
 import com.mng.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.testmaker.service.TestMaker;
 
@@ -20,14 +24,6 @@ public class TestAspect {
 	@Pointcut("execution(* *(..))")
 	public void atExecution(){}
 
-//	@Before("annotationTestPointcut() && atExecution()")
-//	public void before(JoinPoint joinPoint) {
-//		TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
-//		skipTestIfSuiteEnded(testCase, joinPoint);
-//		//TODO El COM010 no lo soporta
-//		//testCase.makeWebDriver();
-//	}
-
 	@Around("annotationTestPointcut() && atExecution()")
 	public Object aroundTest(ProceedingJoinPoint joinPoint) throws Throwable {
 		return manageAroundTest(joinPoint);
@@ -39,41 +35,41 @@ public class TestAspect {
 			TestMaker.skipTestsIfSuiteEnded(testCase.getSuiteParent());
 		}
 		
-		Object returnValue = null;
 		InputParamsTM inputParams = testCase.getInputParamsSuite();
-		if (false && !inputParams.isRemote()) {
-			RemoteTest remoteTest = new RemoteTest();
-			remoteTest.execute(testCase, inputParams);
+		if (executeTestRemote(inputParams)) {
+			ServerSubscribers.sendTestToRemoteServer(testCase, joinPoint.getTarget());
+			//TODO si un @Test retorna un valor <> de void tendremos problemas. Se debería serializar el objeto de respuesta
+			return null;
 		} else {
-			testCase.makeWebDriver();
-			returnValue = joinPoint.proceed();
+			return executeTest(testCase, joinPoint);
 		}
-		
-		return returnValue;
 	}
-//
-//	private void skipTestIfSuiteEnded(TestCaseTM testCase, JoinPoint joinPoint) throws SkipException {
-//		if (testCase!=null) {
-//			TestMaker.skipTestsIfSuiteEnded(testCase.getSuiteParent());
-//		} else {
-//			if (!isFactoryMethod(joinPoint)) {
-//				throw new SkipException("TestCase removed");
-//			}
-//		}
-//	} 
 	
-//	private boolean isFactoryMethod(JoinPoint joinPoint) {
-//		String testMethod = joinPoint.getSignature().getName();
-//		Method[] listMethodsOfClass = joinPoint.getSignature().getDeclaringType().getDeclaredMethods();
-//		for (Method methodOfClass : listMethodsOfClass) {
-//			if (methodOfClass.getName().compareTo(testMethod)==0) {
-//				for (Annotation annotationMethod : methodOfClass.getAnnotations()) {
-//					if (annotationMethod.annotationType()==Factory.class) {
-//						return true;
-//					}
-//				}
-//			}
-//		}
-//		return false;
-//	}
+	private Object executeTest(TestCaseTM testCase, ProceedingJoinPoint joinPoint) throws Throwable {
+		InputParamsTM inputParams = testCase.getInputParamsSuite();
+		Method presentMethod = ((MethodSignature)joinPoint.getSignature()).getMethod();
+		if (executeTestLocal(inputParams, presentMethod)) {
+			testCase.makeWebDriver();
+			return joinPoint.proceed();
+		}
+		return null;
+	}
+	
+	public static boolean executeTestRemote(InputParamsTM inputParams) {
+		return (
+			!inputParams.isTestExecutingInRemote() && 
+			ServerSubscribers.isSome());
+	}
+	public static boolean executeTestLocal(InputParamsTM inputParams, Method presentTestCaseMethod) {
+		if (executeTestRemote(inputParams)) {
+			return false;
+		}
+		List<String> listTestCaseFilter = inputParams.getListTestCasesName();
+		if (!inputParams.isTestExecutingInRemote() || 
+			listTestCaseFilter.size()==0) {
+			return true;
+		}
+		return (presentTestCaseMethod.getName().compareTo(listTestCaseFilter.get(0))==0);
+	}
+	
 }

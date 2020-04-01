@@ -29,14 +29,18 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV.Type
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 
 @SuppressWarnings({ "static-access" })
-public class Favoritos {
 
+public class Favoritos implements Serializable {
+
+	private static final long serialVersionUID = -3932978752450813757L;
+	
 	public int prioridad;
 	private String index_fact = "";
 	private Pais paisFactory = null;
@@ -61,7 +65,7 @@ public class Favoritos {
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 
 		//Si el acceso es normal (no es desde una @Factory) utilizaremos el España/Castellano
 		if (this.paisFactory==null) {
@@ -78,7 +82,7 @@ public class Favoritos {
 		groups={"Favoritos", "Canal:all_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="[Usuario registrado] Alta favoritos desde la galería")
 	public void FAV001_AltaFavoritosDesdeGaleria() throws Exception {
-		TestMaker.getTestCase().setRefineDataName(this.index_fact);
+		TestMaker.getTestCase().setSpecificInputData(this.index_fact);
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
 
@@ -122,7 +126,7 @@ public class Favoritos {
 		groups={"Favoritos", "Canal:all_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="[Usuario no registrado] Alta favoritos desde la galería y posterior identificación")
 	public void FAV002_AltaFavoritosDesdeFicha() throws Exception {
-		TestMaker.getTestCase().setRefineDataName(this.index_fact);
+		TestMaker.getTestCase().setSpecificInputData(this.index_fact);
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
 		dCtxSh.userRegistered=false;

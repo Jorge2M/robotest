@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
+import java.io.Serializable;
 import java.util.*;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
@@ -30,8 +31,10 @@ import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusDesktopStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
-public class TestNodos {
+public class TestNodos implements Serializable {
 
+	private static final long serialVersionUID = 1986211132936039272L;
+	
 	private final static Pais españa = PaisGetter.get(PaisShop.España);
 	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
 	  
@@ -69,7 +72,7 @@ public class TestNodos {
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setChannel(inputParamsSuite.getChannel());
         dCtxSh.setAppEcom(this.nodo.getAppEcom());
-        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+        //dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
         dCtxSh.pais = españa;
         dCtxSh.idioma = castellano;
         return dCtxSh;
@@ -81,7 +84,7 @@ public class TestNodos {
     public void NOD001_TestNodo() throws Throwable {
     	DataCtxShop dCtxSh = getCtxShForTest();
     	WebDriver driver = TestMaker.getDriverTestCase();
-    	TestMaker.getTestCase().setRefineDataName(index_fact);
+    	TestMaker.getTestCase().setSpecificInputData(index_fact);
         AppEcom appE = nodo.getAppEcom();
         AccesoStpV.testNodoState(nodo, driver);
         if (this.nodo.getStatusJSON().isStatusOk()) {

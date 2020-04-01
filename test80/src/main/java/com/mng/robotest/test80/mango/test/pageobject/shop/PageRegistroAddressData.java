@@ -3,7 +3,8 @@ package com.mng.robotest.test80.mango.test.pageobject.shop;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 /**
@@ -11,38 +12,36 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
  * @author jorge.munoz
  *
  */
-public class PageRegistroAddressData extends WebdrvWrapp {
+public class PageRegistroAddressData {
 
-    static String XPathTitleAddressSteps = "//div[@class[contains(.,'addressData')]]";
-    static String XPathDesplegablePaises = "//select[@id[contains(.,'pais')]]";
-    static String XPathButtonFinalizar = "//div[@class[contains(.,'registerStepsModal')]]//div[@class='submitContent']//input[@type='submit']";
-    static String XPathErrorInputDireccion = "//div[@id[contains(.,'cfDir1ErrorLabel')]]";    
-  
-    public static String getXPath_optionPaisSelected(String codigoPais) {
-        return ("//select[@id[contains(.,'pais')]]/option[@selected='selected' and @value='" + codigoPais + "']");
-    }
-    
-    /**
-     * @return si se trata de la página en cuestión
-     */
-    public static boolean isPageUntil(WebDriver driver, int secondsWait) {
-        return (isElementPresentUntil(driver, By.xpath(XPathTitleAddressSteps), secondsWait));
-    }
-    
-    public static boolean existsDesplegablePaises(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathDesplegablePaises)));
-    }
-    
-    public static boolean isOptionPaisSelected(WebDriver driver, String codigoPais) {
-        String xpathOptionPaisSelected = getXPath_optionPaisSelected(codigoPais);
-        return (isElementPresent(driver, By.xpath(xpathOptionPaisSelected)));
-    }
-    
-    public static void clickButtonFinalizar(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonFinalizar));
-    }
-    
-    public static boolean isVisibleErrorInputDireccion(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathErrorInputDireccion)));
-    }
+	static String XPathTitleAddressSteps = "//div[@class[contains(.,'addressData')]]";
+	static String XPathDesplegablePaises = "//select[@id[contains(.,'pais')]]";
+	static String XPathButtonFinalizar = "//div[@class[contains(.,'registerStepsModal')]]//div[@class='submitContent']//input[@type='submit']";
+	static String XPathErrorInputDireccion = "//div[@id[contains(.,'cfDir1ErrorLabel')]]";    
+
+	public static String getXPath_optionPaisSelected(String codigoPais) {
+		return ("//select[@id[contains(.,'pais')]]/option[@selected='selected' and @value='" + codigoPais + "']");
+	}
+
+	public static boolean isPageUntil(WebDriver driver, int secondsWait) {
+		return (state(Present, By.xpath(XPathTitleAddressSteps), driver)
+				.wait(secondsWait).check());
+	}
+
+	public static boolean existsDesplegablePaises(WebDriver driver) {
+		return (state(Present, By.xpath(XPathDesplegablePaises), driver).check());
+	}
+
+	public static boolean isOptionPaisSelected(WebDriver driver, String codigoPais) {
+		String xpathOptionPaisSelected = getXPath_optionPaisSelected(codigoPais);
+		return (state(Present, By.xpath(xpathOptionPaisSelected), driver).check());
+	}
+
+	public static void clickButtonFinalizar(WebDriver driver) {
+		click(By.xpath(XPathButtonFinalizar), driver).exec();
+	}
+
+	public static boolean isVisibleErrorInputDireccion(WebDriver driver) {
+		return (state(Visible, By.xpath(XPathErrorInputDireccion), driver).check());
+	}
 }

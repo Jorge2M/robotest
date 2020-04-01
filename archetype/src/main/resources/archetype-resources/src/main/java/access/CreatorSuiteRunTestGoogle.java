@@ -1,9 +1,10 @@
-package org.mng.testgoogle.access;
+package ${package}.access;
 
 import java.util.Arrays;
 
-import org.mng.testgoogle.access.datatmaker.Suites;
-import org.mng.testgoogle.test.suite.SmokeTestSuite;
+import ${package}.access.datatmaker.Suites;
+import ${package}.test.suite.SmokeTestSuite;
+
 import com.mng.testmaker.domain.CreatorSuiteRun;
 import com.mng.testmaker.domain.InputParamsBasic;
 import com.mng.testmaker.domain.SuiteMaker;

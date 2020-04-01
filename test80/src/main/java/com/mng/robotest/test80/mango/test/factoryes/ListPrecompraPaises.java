@@ -37,7 +37,7 @@ public class ListPrecompraPaises {
 				if (UtilsTestMango.paisConCompra(pais, app)) {
 					if (!(version.isEmpl() && pais.getAccesoEmpl().getTarjeta()==null)) {
 						if (!(app==AppEcom.votf && pais.getAccesoVOTF().getUsuario()==null)) {
-							DataCtxShop dCtxSh = new DataCtxShop(app, channel, pais, pais.getListIdiomas().get(0), inputData.getUrlBase());
+							DataCtxShop dCtxSh = new DataCtxShop(app, channel, pais, pais.getListIdiomas().get(0)/*, inputData.getUrlBase()*/);
 							listTests.add(new PaisAplicaVale(version, dCtxSh, prioridad));
 							prioridad+=1;
 							System.out.println(

@@ -14,47 +14,49 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterOrdenaci
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticle;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 
-public class SecPreciosArticulo extends WebdrvWrapp {
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+public class SecPreciosArticulo extends PageObjTM {
 	
 	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
 	public enum TipoPrecio {
 		precio_inicial_tachado (
-			"//span[@class[contains(.,'tAcLx')]]",
+			"//span[@class[contains(.,'price-crossed-1')]]",
 			
 			//TODO el price__price-crossed es por la nueva versión Outlet-Desktop-React
 //			"//span[(@class[contains(.,'product-list-price')] and @class[contains(.,'line-through')]) or " +
 //				   "(@class[contains(.,'list-product-price')] and @class[contains(.,'price__price-crossed')])]",
-			"//span[@class[contains(.,'tAcLx')]]",
+			"//span[@class[contains(.,'price-crossed-1')]]",
 			
 			"//span[@class[contains(.,'product-price-crossed')]]",
 			"//span[@class[contains(.,'price-text--through')]]"),
 		precio_2o_tachado (
-			"//span[@class='?']",
-			
+			"//span[@class[contains(.,'price-crossed-2')]]",
+			"//span[@class[contains(.,'price-crossed-2')]]",
 			//TODO el price__price-crossed es por la nueva versión Outlet-Desktop-React
-			"//span[(@class[contains(.,'product-list-price')] and @class[contains(.,'line-through')]) or " +
-			       "(@class[contains(.,'list-product-price')] and @class[contains(.,'price__price-crossed')])][2]",
+//			"//span[(@class[contains(.,'product-list-price')] and @class[contains(.,'line-through')]) or " +
+//			       "(@class[contains(.,'list-product-price')] and @class[contains(.,'price__price-crossed')])][2]",
 			
 			"//span[@class[contains(.,'product-price-crossed')]][2]",
 			"//span[@class[contains(.,'price-text--through')]][2]"),
 		precio_rebajado_definitivo (
-			"//div[@class[contains(.,'_2-Zal')]]//span[@class[contains(.,'B16Le')]]",
+			"//div[@class[contains(.,'prices-container')]]//span[@class[contains(.,'price-sale')]]",
 			
 			//TODO el product-price__price es por la nueva versión Outlet-Desktop-React
 			//"//span[@class='product-list-sale-price' or (@class[contains(.,'product-price__price')] and not(@class[contains(.,'-crossed')]))]",
-			"//div[@class[contains(.,'_2-Zal')]]//span[@class[contains(.,'B16Le')]]",
+			"//div[@class[contains(.,'prices-container')]]//span[@class[contains(.,'price-sale')]]",
 			
 			"//div[@class[contains(.,'prices--cross')]]/span[@class='product-price']",
 			"//span[@class[contains(.,'info-price-sale')] or @class='product-price']"),
 		precio_no_rebajado_definitivo (
-			"//div[@class='_3wfbJ' or not(@class)]/span[@class[contains(.,'B16Le')]]", //El not(@class) es debido al nuevo desarrollo en Cloud (04-febrero-2020)
+			"//div[@class='_3wfbJ' or not(@class)]/span[@class[contains(.,'price-sale')]]", //El not(@class) es debido al nuevo desarrollo en Cloud (04-febrero-2020)
 			
 			//TODO el product-price__price es por la nueva versión Outlet-Desktop-React
 			//duct-list-sale-price' or (@class[contains(.,'product-price__price')] and not(@class[contains(.,'-crossed')]))]",
-			"//div[@class='_3wfbJ' or not(@class)]/span[@class[contains(.,'B16Le')]]", //El not(@class) es debido al nuevo desarrollo en Cloud (04-febrero-2020)
+			"//div[@class='_3wfbJ' or not(@class)]/span[@class[contains(.,'price-sale')]]", //El not(@class) es debido al nuevo desarrollo en Cloud (04-febrero-2020)
 			
 			"//div[@class='product-prices']/span[@class='product-price']",
 			"//span[@class[contains(.,'info-price-sale')] or @class='product-price']"); //?
@@ -85,12 +87,11 @@ public class SecPreciosArticulo extends WebdrvWrapp {
 
 	private final Channel channel;
 	private final AppEcom app;
-	private final WebDriver driver;
 
 	public SecPreciosArticulo(Channel channel, AppEcom app, WebDriver driver) {
+		super(driver);
 		this.channel = channel;
 		this.app = app;
-		this.driver = driver;
 	}
 	
 	public String getXPathPrecioArticulo(TypeArticle typeArticle) {
@@ -119,7 +120,7 @@ public class SecPreciosArticulo extends WebdrvWrapp {
 	
 	public boolean isArticleRebajado(WebElement articulo) {
 		By byPrecioRebajado = By.xpath("." + TipoPrecio.precio_rebajado_definitivo.getXPath(channel, app));
-		return (isElementPresent(articulo, byPrecioRebajado));
+		return (state(Present, byPrecioRebajado).check());
 	}
 
     public List<WebElement> getListaPreciosPrendas(List<WebElement> listArticles) throws Exception {

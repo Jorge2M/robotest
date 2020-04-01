@@ -15,7 +15,7 @@ import com.mng.testmaker.conf.defaultmail.DefaultMailEndSuite;
 import com.mng.testmaker.domain.suitetree.SuiteTM;
 import com.mng.testmaker.domain.testfilter.FilterTestsSuiteXML;
 import com.mng.testmaker.domain.testfilter.TestMethod;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.testmaker.testreports.html.Reporter;
 
 public abstract class SuiteMaker {
@@ -41,7 +41,7 @@ public abstract class SuiteMaker {
     private static synchronized String makeIdSuiteExecution() {
         Calendar c1 = Calendar.getInstance();
         String timestamp = new SimpleDateFormat("yyMMdd_HHmmssSS").format(c1.getTime());
-        WebdrvWrapp.waitMillis(1);
+        SeleniumUtils.waitMillis(1);
         return (timestamp);
     }
 	
@@ -98,11 +98,13 @@ public abstract class SuiteMaker {
 		this.threadCount = threadCount;
 	}
     
-    private static List<Class<?>> createStandardListeners() {
+    private List<Class<?>> createStandardListeners() {
         List<Class<?>> listeners = new ArrayList<>();
         listeners.add(MyTransformer.class);
         listeners.add(InvokeListener.class);
-        listeners.add(Reporter.class);
+        if (!inputData.isTestExecutingInRemote()) {
+        	listeners.add(Reporter.class);
+        }
         return listeners;
     }
 

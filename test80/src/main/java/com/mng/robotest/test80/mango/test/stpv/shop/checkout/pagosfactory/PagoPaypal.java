@@ -28,7 +28,7 @@ public class PagoPaypal extends PagoStpV {
     public void testPagoFromCheckout(boolean execPay) throws Exception {
         PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, driver);
         PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, driver);
-        int maxSecondsWait = 10;
+        int maxSeconds = 10;
         ModalPreloaderSppinerStpV.validateAppearsAndDisappears(driver);
         switch (getInitPagePaypal(driver)) {
         case Login:
@@ -42,19 +42,19 @@ public class PagoPaypal extends PagoStpV {
         if (execPay) {
             DataPedido dataPedido = this.dCtxPago.getDataPedido();
             dataPedido.setCodtipopago("P");
-        	ModalPreloaderSppinerStpV.validateIsVanished(maxSecondsWait, driver);
+        	ModalPreloaderSppinerStpV.validateIsVanished(maxSeconds, driver);
             if (PagePaypalLogin.isPageUntil(0, driver)) {
                 PagePaypalLoginStpV.loginPaypal(dataPedido.getPago().getUseremail(), dataPedido.getPago().getPasswordemail(), driver);
             }
             
-            ModalPreloaderSppinerStpV.validateIsVanished(maxSecondsWait, driver);
+            ModalPreloaderSppinerStpV.validateIsVanished(maxSeconds, driver);
             if (getPostLoginPagePaypal()==PostLoginPagePaypal.SelectPago) {
             	PagePaypalSelectPagoStpV.validateIsPageUntil(0, driver);
             	PagePaypalSelectPagoStpV.clickContinuarButton(driver);      
             }
             
-            maxSecondsWait = 3;
-            if (PagePaypalConfirmacion.isPageUntil(maxSecondsWait, driver)) {
+            maxSeconds = 3;
+            if (PagePaypalConfirmacion.isPageUntil(maxSeconds, driver)) {
 	            PagePaypalConfirmacionStpV.validateIsPageUntil(0, driver);
 	            PagePaypalConfirmacionStpV.clickContinuarButton(driver);
             }
@@ -65,8 +65,8 @@ public class PagoPaypal extends PagoStpV {
     private enum PostLoginPagePaypal {SelectPago, Confirmacion}
     
     private InitPagePaypal getInitPagePaypal(WebDriver driver) {
-    	int maxSecondsWait = 5;
-        if (PagePaypalLogin.isPageUntil(maxSecondsWait, driver)) {
+    	int maxSeconds = 5;
+        if (PagePaypalLogin.isPageUntil(maxSeconds, driver)) {
         	return InitPagePaypal.Login;
         }
         
@@ -78,8 +78,8 @@ public class PagoPaypal extends PagoStpV {
     }
     
     private PostLoginPagePaypal getPostLoginPagePaypal() {
-    	int maxSecondsWait = 5;
-    	if (PagePaypalSelectPago.isPageUntil(maxSecondsWait, driver)) {
+    	int maxSeconds = 5;
+    	if (PagePaypalSelectPago.isPageUntil(maxSeconds, driver)) {
     		return PostLoginPagePaypal.SelectPago;
     	}
     	if (PagePaypalConfirmacion.isPageUntil(0, driver)) {

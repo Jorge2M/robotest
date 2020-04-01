@@ -11,11 +11,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
-import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
+
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageDetallePedido extends WebdrvWrapp {
+public class PageDetallePedido {
 
 	private final static String tagIdPedido = "@tagIdPedido";
     public final static String XPathImporteTotal = "//span[text()[contains(.,'TOTAL:')]]/../following-sibling::*[1]";
@@ -33,62 +35,51 @@ public class PageDetallePedido extends WebdrvWrapp {
         DetallesCliente("//input[@value='Detalles Cliente']"),
         Devoluciones("//input[@value='Devoluciones']");
 
-        private String xPath;
-        
+        private By by;
         RightButtons(String xPath) {
-            this.xPath = xPath;
+            by = By.xpath(xPath);
         }
-
+        
         @Override
-        public String getXPath() {
-            return this.xPath;
+        public By getBy() {
+        	return by;
         }
     }
     
     private static String getXPathLabelIdPedido(String idPedido) {
     	return (XPathLabelIdPedido.replace(tagIdPedido, idPedido));
     }
-    
-    /**
-     * @param driver
-     * @return si se trata de la página de detalle de un pedido
-     */
-    public static boolean isPage(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath("//td[text()[contains(.,'DETALLES PEDIDOS')]]")));
-    }
-    
-    public static boolean isPage(String idPedido, WebDriver driver) {
-    	if (isPage(driver)) {
-    		String xpathLabelIdPedido = getXPathLabelIdPedido(idPedido);
-    		return (WebdrvWrapp.isElementVisible(driver, By.xpath(xpathLabelIdPedido)));
-    	}
-    	
-    	return false;
-    }
-    
-    /**
-     * @return el string que contiene el código de país
-     */
+
+	public static boolean isPage(WebDriver driver) {
+		String xpath = "//td[text()[contains(.,'DETALLES PEDIDOS')]]";
+		return (state(Present, By.xpath(xpath), driver).check());
+	}
+
+	public static boolean isPage(String idPedido, WebDriver driver) {
+		if (isPage(driver)) {
+			String xpathLabelIdPedido = getXPathLabelIdPedido(idPedido);
+			return (state(Visible, By.xpath(xpathLabelIdPedido), driver).check());
+		}
+		
+		return false;
+	}
+
     public static String getCodigoPais(WebDriver driver) {
         return (driver.findElement(By.xpath(XPathCodigoPais)).getText());
     }
-    
-    public static String getTiendaIfExists(WebDriver driver) {
-    	if (WebdrvWrapp.isElementPresent(driver, By.xpath(XPathLinkEnvioTienda))) {
-    		String lineaTexto = driver.findElement(By.xpath(XPathLinkEnvioTienda)).getText();
-            Pattern pattern = Pattern.compile("(.*?)ENVIO A TIENDA(.*?)(\\d+)");//(^[0-9])
-            Matcher matcher = pattern.matcher(lineaTexto);
-            if (matcher.find()) {
-                return matcher.group(3);
-            }
-    	}
-    	
-    	return "";
-    }
-    
-    /**
-     * @return el string que contiene el estado del pedido
-     */
+
+	public static String getTiendaIfExists(WebDriver driver) {
+		if (state(Present, By.xpath(XPathLinkEnvioTienda), driver).check()) {
+			String lineaTexto = driver.findElement(By.xpath(XPathLinkEnvioTienda)).getText();
+			Pattern pattern = Pattern.compile("(.*?)ENVIO A TIENDA(.*?)(\\d+)");//(^[0-9])
+			Matcher matcher = pattern.matcher(lineaTexto);
+			if (matcher.find()) {
+				return matcher.group(3);
+			}
+		}
+		return "";
+	}
+
     public static String getEstadoPedido(WebDriver driver) {
         return (driver.findElement(By.xpath(XPathEstadoPedido)).getText());
     }
@@ -162,21 +153,13 @@ public class PageDetallePedido extends WebdrvWrapp {
         
         return estadoEncontrado;
     }
-    
-    
-    /**
-     * Se vuelve a la lista de pedidos mediante selección del link "Volver a pedidos" (si existe)
-     */
-    public static void gotoListaPedidos(WebDriver driver) throws Exception {
-        if (isElementPresent(driver, By.xpath(XPathLinkVolverPedidos))) {
-            clickAndWaitLoad(driver, By.xpath(XPathLinkVolverPedidos));
-        }
-    }
 
-	/**
-	 * @param driver
-	 * @return referencias del pedido
-	 */
+	public static void gotoListaPedidos(WebDriver driver) {
+		if (state(Present, By.xpath(XPathLinkVolverPedidos), driver).check()) {
+			click(By.xpath(XPathLinkVolverPedidos), driver).exec();
+		}
+	}
+
 	public static List<String> getReferenciasArticulosDetallePedido(WebDriver driver) {
 		List <String> referenciasText = new ArrayList<>();
 		List<WebElement> referencias = driver.findElements(By.xpath(XPathRefereciaArticulo));
@@ -187,13 +170,8 @@ public class PageDetallePedido extends WebdrvWrapp {
 		return referenciasText;
 	}
 
-	/**
-	 * @param driver
-	 * @throws Exception
-	 */
-	public static void clickLinkDetallesCliente(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathLinkDetallesCliente));
+	public static void clickLinkDetallesCliente(WebDriver driver) {
+		click(By.xpath(XPathLinkDetallesCliente), driver).exec();
 	}
 
-	
 }

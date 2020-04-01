@@ -90,7 +90,7 @@ public class SecMenuLateralMobilStpV {
         validaSelecLinea(pais, lineaConCarrusels, null);
         navSelectCarrusels(lineaConCarrusels, pais);
     }
-    
+
     /**
      * Seleccionamos todos los sublinks de las líneas de móvil con 'carrusels' (nuevo u ofertas de momento)
      */
@@ -107,7 +107,7 @@ public class SecMenuLateralMobilStpV {
                 if (secMenuLateral.isCarruselNuevoAssociated(lineaDelPais)) {
                     selectCarruselNuevo(pais.getShoponline().getLinea(LineaType.nuevo), lineaDelPais);
                 }
-                break;            
+                break;
             default:
                 break;
             }
@@ -117,26 +117,23 @@ public class SecMenuLateralMobilStpV {
     @Step (
     	description="Seleccionar el carrusel \"nuevo\" asociado a la línea #{lineaType}",
         expected="Aparece la página de nuevo asociada a la línea #{lineaType}")
-    public void selectCarruselNuevo(Linea lineaNuevo, LineaType lineaType) throws Exception {
+    public void selectCarruselNuevo(Linea lineaNuevo, LineaType lineaType) {
     	secMenuLateral.clickCarruselNuevo(lineaNuevo, lineaType);
         checkGaleriaAfterSelectNuevo();
     }
-    
-    @Validation
-    private ChecksTM checkGaleriaAfterSelectNuevo() throws Exception {
-    	ChecksTM validations = ChecksTM.getNew();
-	    PageGaleria pageGaleria = PageGaleria.getNew(Channel.movil_web, app, driver);
-	    int maxSecondsWait = 3;
-	 	validations.add(
-			"Aparece algún artículo (esperamos " + maxSecondsWait + " segundos)",
-			pageGaleria.isVisibleArticleUntil(1, maxSecondsWait), State.Warn);
-//	 	validations.add(
-//			"El 1er artículo es de tipo " + LineaType.nuevo,
-//			pageGaleria.isFirstArticleOfType(LineaType.nuevo), State.Warn);
-	 	
-    	return validations;   
-    }
-    
+
+	@Validation
+	private ChecksTM checkGaleriaAfterSelectNuevo() {
+		ChecksTM validations = ChecksTM.getNew();
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.movil_web, app, driver);
+		int maxSeconds = 3;
+		validations.add(
+			"Aparece algún artículo (esperamos " + maxSeconds + " segundos)",
+			pageGaleria.isVisibleArticleUntil(1, maxSeconds), State.Warn);
+
+		return validations;   
+	}
+
     @Step (
     	description="Seleccionar la sublínea de \"rebajas\" <b>#{lineaType}</b>",
         expected="Aparece la capa de menús asociada a la sublínea #{lineaType}")
@@ -197,8 +194,8 @@ public class SecMenuLateralMobilStpV {
             break;
         case articulos:
             PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.movil_web, app, driver);
-            int maxSecondsWait = 3;
-            pageGaleriaStpV.validaArtEnContenido(maxSecondsWait);
+            int maxSeconds = 3;
+            pageGaleriaStpV.validaArtEnContenido(maxSeconds);
             break;
         default:
             break;

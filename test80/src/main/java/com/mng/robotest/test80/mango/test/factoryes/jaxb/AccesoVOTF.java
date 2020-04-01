@@ -1,11 +1,15 @@
 package com.mng.robotest.test80.mango.test.factoryes.jaxb;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.*;
 
 
-public class AccesoVOTF {
+public class AccesoVOTF implements Serializable {
 
-    String usuario;
+	private static final long serialVersionUID = -3723423171416095969L;
+	
+	String usuario;
     String password;
     String entregadomic = "S";
 	

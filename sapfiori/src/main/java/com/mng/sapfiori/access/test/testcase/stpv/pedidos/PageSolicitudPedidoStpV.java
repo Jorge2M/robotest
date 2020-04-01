@@ -66,7 +66,7 @@ public class PageSolicitudPedidoStpV {
 	@Step (
 		description="Seleccionamos el botón <b>Guardar</b>",
 		expected="No aparece el modal de errores")
-	public void clickButtonGuardar() throws Exception {
+	public void clickButtonGuardar() {
 		pageObject.clickButtonGuardar();
 		checkModalErroresNotAppears(2);
 	}

@@ -6,18 +6,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class SecTallasArticuloDesktop extends WebdrvWrapp {
+public class SecTallasArticuloDesktop extends PageObjTM {
 	
-	private final AppEcom app;
-	private final WebDriver driver;
+	//private final AppEcom app;
 	private final String xpathArticulo;
 //	private OutletGalery outputGalery;
 	
 	public SecTallasArticuloDesktop(AppEcom app, String xpathArticulo, WebDriver driver) {
-		this.app = app;
-		this.driver = driver;
+		super(driver);
+		//this.app = app;
 		this.xpathArticulo = xpathArticulo;
 	}
 
@@ -34,7 +34,7 @@ public class SecTallasArticuloDesktop extends WebdrvWrapp {
 	
 	//final String XPathCapaTallasArticuloOutletOld = "//div[@class[contains(.,'add-cart')] and @data-stock]";
 	//final String XPathCapaTallasArticuloOutletNew = "//div[@class[contains(.,'sizes__container')]]";
-	final String XPathCapaTallasArticuloShop = "//div[@class[contains(.,'_1BBIV')]]";
+	final String XPathCapaTallasArticuloShop = "//div[@class[contains(.,'sizes-container')]]";
 	private String getXPathArticleCapaInferiorDesktop(int posArticulo) {
 		String xpathArticuloX = "(" + xpathArticulo + ")[" + posArticulo + "]";
 //		if (app==AppEcom.outlet) {
@@ -56,7 +56,7 @@ public class SecTallasArticuloDesktop extends WebdrvWrapp {
 	}
 
 	//final String classCapaActiveOutlet = "@class[contains(.,'active')]";
-	final String classCapaActiveShop = "@class[contains(.,'_2yZ7h')]";
+	final String classCapaActiveShop = "@class[contains(.,'active')]";
 	private String getClassCapaTallasActive() {
 //		if (app==AppEcom.outlet) {
 //			return classCapaActiveOutlet;
@@ -75,7 +75,7 @@ public class SecTallasArticuloDesktop extends WebdrvWrapp {
 
 //	private final String XPathTallaAvailableOutletOld = "//span[@data-id and not(@class[contains(.,'no-stock')])]";
 //	private final String XPathTallaAvailableOutletNew = "//button[not(@class[contains(.,'no-stock')])]";
-	private final String XPathTallaAvailableShop = "//button[not(@class[contains(.,'mQ11o')])]";
+	private final String XPathTallaAvailableShop = "//button[@class[contains(.,'si-stock')]]";
 	private String getXPathTallaAvailable() {
 //		if (app==AppEcom.outlet) {
 //			if (getOutletGalery()==OutletGalery.old) {
@@ -92,7 +92,7 @@ public class SecTallasArticuloDesktop extends WebdrvWrapp {
 
 //	private final static String XpathTallaNoDisponibleArticuloOutletOld = "//span[@data-id and (@class[contains(.,'no-stock')])]";
 //	private final static String XpathTallaNoDisponibleArticuloOutletNew = "//button[@class[contains(.,'no-stock')]]";
-	private final static String XpathTallaNoDisponibleArticuloShop = "//button[@class[contains(.,'mQ11o')]]";
+	private final static String XpathTallaNoDisponibleArticuloShop = "//button[@class[contains(.,'no-stock')]]";
 	public String getXPathArticleTallaNotAvailable() {
 //		if (app==AppEcom.outlet) {
 //			if (getOutletGalery()==OutletGalery.old) {
@@ -102,12 +102,12 @@ public class SecTallasArticuloDesktop extends WebdrvWrapp {
 //		}
 		return XpathTallaNoDisponibleArticuloShop;
 	}
-	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSecondsToWait) {
+	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSeconds) {
 		String xpathCapa = getXPathCapaTallas(posArticulo, true);
-		return (isElementVisibleUntil(driver, By.xpath(xpathCapa), maxSecondsToWait));
+		return (state(Visible, By.xpath(xpathCapa)).wait(maxSeconds).check());
 	}
 	
-    public void selectLinkAñadirOutlet(int posArticulo) throws Exception {
+    public void selectLinkAñadirOutlet(int posArticulo) {
         String xpathCapaAlta = getXPathFirstCapaAñadirOutlet(posArticulo, true);
         int i=0;
         while (i<5) {
@@ -118,7 +118,7 @@ public class SecTallasArticuloDesktop extends WebdrvWrapp {
             catch (WebDriverException e) {
                 //Scrollamos un poquito hacia arriba para asegurar
                 ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-100)", "");
-                Thread.sleep(200);
+                waitMillis(200);
                 i+=1;
             }
         }

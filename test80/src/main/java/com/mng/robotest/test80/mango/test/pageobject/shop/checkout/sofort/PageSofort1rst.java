@@ -4,7 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 /**
@@ -12,7 +13,7 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
  * @author jorge.munoz
  *
  */
-public class PageSofort1rst extends WebdrvWrapp {
+public class PageSofort1rst {
     final static String xPathFigurasButtonDesktop = "//input[@class[contains(.,'paySubmit')]]";
     final static String xPathIconoSofort = "//input[@name='brandName' and @type='submit']";
     
@@ -26,11 +27,12 @@ public class PageSofort1rst extends WebdrvWrapp {
     
     public static boolean isPageVisibleUntil(int maxSeconds, Channel channel, WebDriver driver) {
     	String xpPathClickFollowing = getXPathClickToFollow(channel);
-    	return (isElementVisibleUntil(driver, By.xpath(xpPathClickFollowing), maxSeconds));
+    	return (state(Visible, By.xpath(xpPathClickFollowing), driver)
+    			.wait(maxSeconds).check());
     }
-    
-    public static void clickGoToSofort(WebDriver driver, Channel channel) throws Exception {
-        String xpPathClickFollowing = getXPathClickToFollow(channel);
-        clickAndWaitLoad(driver, By.xpath(xpPathClickFollowing));
-    }
+
+	public static void clickGoToSofort(WebDriver driver, Channel channel) {
+		String xpPathClickFollowing = getXPathClickToFollow(channel);
+		click(By.xpath(xpPathClickFollowing), driver).exec();
+	}
 }

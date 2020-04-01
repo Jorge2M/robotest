@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.pedidos;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageListPedidos extends WebdrvWrapp {
+public class PageListPedidos {
 
     private static final String XPathListaPedidos = "//span[@id[contains(.,'listaPedidos')]]";
     
@@ -15,16 +16,16 @@ public class PageListPedidos extends WebdrvWrapp {
     }
     
     public static boolean isPage(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathListaPedidos)));
+    	return (state(Present, By.xpath(XPathListaPedidos), driver).check());
     }
     
     public static boolean isVisibleCodPedido(String codPedido, WebDriver driver) {
         String xpathPedido = getXPath_LinkPedido(codPedido);
-        return (isElementVisible(driver, By.xpath(xpathPedido)));
+        return (state(Visible, By.xpath(xpathPedido), driver).check());
     }
     
-    public static void selectLineaPedido(String codPedido, WebDriver driver) throws Exception {
+    public static void selectLineaPedido(String codPedido, WebDriver driver) {
         String xpathPedido = getXPath_LinkPedido(codPedido);
-        clickAndWaitLoad(driver, By.xpath(xpathPedido));
+        click(By.xpath(xpathPedido), driver).exec();
     }
 }

@@ -9,6 +9,7 @@ import com.mng.sapfiori.access.test.testcase.generic.webobject.elements.inputs.s
 import com.mng.sapfiori.access.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForDefineConditions;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.pages.PageFilter;
 import com.mng.sapfiori.access.test.testcase.webobject.iconsmenu.OptionMenu;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageGestionSolPedidoBuyer extends PageFilter {
 
@@ -36,13 +37,13 @@ public class PageGestionSolPedidoBuyer extends PageFilter {
 		return new PageGestionSolPedidoBuyer(driver);
 	}
 
-	public PageSolicitudPedido clickIconAñadirPedido() throws Exception {
+	public PageSolicitudPedido clickIconAñadirPedido() {
 		waitForPageFinished();
-		clickAndWaitLoad(driver, By.xpath(XPathIconSolPedido));
+		click(By.xpath(XPathIconSolPedido)).exec();
 		return PageSolicitudPedido.getNew(driver);
 	}
 	
 	public boolean checkSolicitudesVisible(int maxSeconds) {
-		return (isElementVisibleUntil(driver, By.xpath(XPathLineaPedido), maxSeconds));
+		return (state(Visible, By.xpath(XPathLineaPedido)).wait(maxSeconds).check());
 	}
 }

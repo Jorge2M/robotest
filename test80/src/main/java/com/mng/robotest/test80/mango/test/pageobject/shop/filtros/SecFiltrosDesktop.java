@@ -6,9 +6,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Color;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 
 
@@ -17,22 +18,21 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
  * @author jorge.munoz
  *
  */
-public class SecFiltrosDesktop extends WebdrvWrapp implements SecFiltros {
+public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
     
 	final static String TagOrdenacion = "@TagOrden";
 	final static String TagColor = "@TagColor";
 	final static String XPathLinkOrdenWithTag = "//a[text()[contains(.,'" + TagOrdenacion + "')]]";
 	final static String XPathLinkColorWithTag = "//a[@aria-label[contains(.,'" + TagColor + "')]]";
 	
-	WebDriver driver;
 	PageGaleria pageGaleria = null;
 	
 	private SecFiltrosDesktop(WebDriver driver, PageGaleria pageGaleria) {
-		this.driver = driver;
+		super(driver);
 		this.pageGaleria = pageGaleria;
 	}
 	
-	public static SecFiltrosDesktop getInstance(AppEcom app, WebDriver driver) throws Exception {
+	public static SecFiltrosDesktop getInstance(AppEcom app, WebDriver driver) {
 		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
 		return (new SecFiltrosDesktop(driver, pageGaleria));
 	}
@@ -50,7 +50,7 @@ public class SecFiltrosDesktop extends WebdrvWrapp implements SecFiltros {
 	}
 	
 	@Override
-    public void selectCollection(FilterCollection collection) throws Exception {
+    public void selectCollection(FilterCollection collection) {
 		//TODO
     }
 	
@@ -61,9 +61,9 @@ public class SecFiltrosDesktop extends WebdrvWrapp implements SecFiltros {
     }
 	
 	@Override
-    public void selectOrdenacion(FilterOrdenacion ordenacion) throws Exception {
+    public void selectOrdenacion(FilterOrdenacion ordenacion) {
     	String xpathLink = getXPathLinkOrdenacion(ordenacion);
-        clickAndWaitLoad(driver, By.xpath(xpathLink));        
+    	click(By.xpath(xpathLink)).exec();
     }
 	
 	@Override
@@ -78,21 +78,21 @@ public class SecFiltrosDesktop extends WebdrvWrapp implements SecFiltros {
      * @return el número de artículos que aparecen en la galería después de seleccionar el filtro
      */
 	@Override
-    public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToSelect) 
-    throws Exception {
+    public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToSelect) {
 		for (Color color : colorsToSelect) {
 			String xpathLinkColor = getXPathLinkColor(color);
 			moveToElement(By.xpath(xpathLinkColor), driver);
-			clickAndWaitLoad(driver, By.xpath(xpathLinkColor));
+			click(By.xpath(xpathLinkColor)).exec();
 		}
 		
-        int maxSecondsToWait = 10;
-        int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(maxSecondsToWait);
-        return numArticles;
-    }
+		int maxSecondsToWait = 10;
+		int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(maxSecondsToWait);
+		return numArticles;
+	}
 	
-    @Override
-    public boolean isClickableFiltroUntil(int seconds) {
-        return (isElementClickableUntil(driver, By.xpath(XPathLinkOrdenWithTag), seconds));
-    }    
+	@Override
+	public boolean isClickableFiltroUntil(int seconds) {
+		return (state(Clickable, By.xpath(XPathLinkOrdenWithTag), driver)
+				.wait(seconds).check());
+	}
 }

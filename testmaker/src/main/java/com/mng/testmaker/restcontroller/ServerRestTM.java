@@ -1,5 +1,12 @@
 package com.mng.testmaker.restcontroller;
 
+import java.net.InetAddress;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import org.eclipse.jetty.http.HttpVersion;
 import org.eclipse.jetty.server.HttpConfiguration;
 import org.eclipse.jetty.server.HttpConnectionFactory;
@@ -15,14 +22,19 @@ import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
+
+import com.mng.testmaker.boundary.access.ServerCmdLine.ResultCmdServer;
+import com.mng.testmaker.boundary.remotetest.JaxRsClient;
 import com.mng.testmaker.domain.CreatorSuiteRun;
 
-public class ServerRestTM {
+public class ServerRestTM extends JaxRsClient {
 	
 	private static ServerRestTM serverRestTM = null; 
 	
 	private final Integer httpPort;
 	private final Integer httpsPort;
+	private final String urlServerSlave;
+	private final String urlServerHub;
 	private final String pathCertificate;
 	private final String passwordCertificate;
 	private final Server jettyServer;
@@ -32,11 +44,17 @@ public class ServerRestTM {
 	private final Class<? extends Enum<?>> suiteEnum;
 	private final Class<? extends Enum<?>> appEnum;
 
-	private ServerRestTM(Integer httpPort, Integer httpsPort, String pathCertificate, String passwordCertificate,
+	private ServerRestTM(Integer httpPort, Integer httpsPort, String urlServerHub, String urlServerSlave, String pathCertificate, String passwordCertificate,
 						 CreatorSuiteRun creatorSuiteRun, Class<? extends RestApiTM> restApiTM, 
 						 Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) throws Exception {
 		this.httpPort = httpPort;
 		this.httpsPort = httpsPort;
+		this.urlServerHub = urlServerHub;
+		if (urlServerSlave!=null) {
+			this.urlServerSlave = urlServerSlave;
+		} else {
+			this.urlServerSlave = makeUrlServerSlave();
+		}
 		this.pathCertificate = pathCertificate;
 		this.passwordCertificate = passwordCertificate;
 		this.creatorSuiteRun = creatorSuiteRun;
@@ -48,6 +66,14 @@ public class ServerRestTM {
 	}
 	public static ServerRestTM getServerRestTM() {
 		return serverRestTM;
+	}
+	
+	private String makeUrlServerSlave() throws Exception {
+		String hostAddress = InetAddress.getLocalHost().getHostAddress();
+		if (httpPort!=null) {
+			return "http://" + hostAddress + ":" + httpPort;
+		}
+		return "https://" + hostAddress + ":" + httpsPort;
 	}
 	
 	public int getHttpPort() {
@@ -78,15 +104,50 @@ public class ServerRestTM {
 		try {
 			jettyServer.start();
 			System.out.println("Started Jetty Server!");
-			System.out.println("HttpPort: " + httpPort);
+			if (httpPort!=null) {
+				System.out.println("HttpPort: " + httpPort);
+			}
 			if (httpsPort!=null) {
 				System.out.println("HttpsPort: " + httpsPort);
+			}
+			if (urlServerHub!=null) {
+				subscribeServerToHub();
 			}
 			jettyServer.join();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			if (urlServerHub!=null) {
+				unsubscribeServerFromHub();
+			}
 			jettyServer.destroy();
+		}
+	}
+	
+	private void subscribeServerToHub() throws Exception {
+		manageConnectionHub(true);
+	}
+	private void unsubscribeServerFromHub() throws Exception {
+		manageConnectionHub(false);
+	}
+	private void manageConnectionHub(boolean subscription) throws Exception {
+		Client client = getClientIgnoreCertificates();
+		Invocation.Builder builder = client
+			.target(urlServerHub).path("subscription")
+			.queryParam("urlslave", urlServerSlave)
+			.request(MediaType.APPLICATION_JSON);
+		
+		Response response;
+		if (subscription) {
+			response = builder.get();
+		} else {
+			response = builder.delete();
+		}
+		
+		if (response.getStatus() >= 400) {
+			String action = (subscription) ? "subscripting" : "unsubscripting";
+			System.out.println("Problem " + action + " server slave in url " + urlServerSlave + " with server hub in url " + urlServerHub);
+			System.out.println(response);
 		}
 	}
 	
@@ -107,7 +168,9 @@ public class ServerRestTM {
 			httpConfiguration.setSecurePort(httpsPort);
 		}
 		ServerConnector http = new ServerConnector(jettyServer, new HttpConnectionFactory(httpConfiguration));
-		http.setPort(httpPort);
+		if (httpPort!=null) {
+			http.setPort(httpPort);
+		}
 		jettyServer.addConnector(http);
 	}
 	private void setServerHttpsConnector() {
@@ -146,8 +209,10 @@ public class ServerRestTM {
 		private final Class<? extends Enum<?>> suiteEnum;
 		private final Class<? extends Enum<?>> appEnum;
 		private Class<? extends RestApiTM> restApiTM = RestApiTM.class;
-		private Integer httpPort = 80;
+		private Integer httpPort = null;
 		private Integer httpsPort = null; 
+		private String urlServerSlave = null;
+		private String urlServerHub = null;
 		private String pathCertificate = ServerRestTM.class.getResource("/testkey.jks").toExternalForm();
 		private String passwordCertificate = "robotest";
 
@@ -156,13 +221,28 @@ public class ServerRestTM {
 			this.suiteEnum = suiteEnum;
 			this.appEnum = appEnum;
 		}
-
-		public Builder portHttp(int httpPort) {
+		
+		public Builder setWithParams(ResultCmdServer params) {
+			portHttp(params.getPort());
+			portHttps(params.getSecurePort());
+			urlServerHub(params.getUrlServerHub());
+			urlServerSlave(params.getUrlServerSlave());
+			return this;
+		}
+		public Builder portHttp(Integer httpPort) {
 			this.httpPort = httpPort;
 			return this;
 		}
-		public Builder portHttps(int httpsPort) {
+		public Builder portHttps(Integer httpsPort) {
 			this.httpsPort = httpsPort;
+			return this;
+		}
+		public Builder urlServerHub(String urlServerHub) {
+			this.urlServerHub = urlServerHub;
+			return this;
+		}
+		public Builder urlServerSlave(String urlServerSlave) {
+			this.urlServerSlave = urlServerSlave;
 			return this;
 		}
 		public Builder certificate(String path, String password) {
@@ -182,7 +262,7 @@ public class ServerRestTM {
 			}
 			if (serverRestTM==null || isRestartRequired) {
 				serverRestTM = new ServerRestTM(
-						httpPort, httpsPort, 
+						httpPort, httpsPort, urlServerHub, urlServerSlave,
 						pathCertificate, passwordCertificate, 
 						creatorSuiteRun, restApiTM, 
 						suiteEnum, appEnum);

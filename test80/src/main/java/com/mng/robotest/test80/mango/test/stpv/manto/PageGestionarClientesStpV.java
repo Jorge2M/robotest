@@ -79,11 +79,11 @@ public class PageGestionarClientesStpV {
 			"Aparece el mensaje <b>" + typeButton.getMensaje() + "</b>",
 			PageGestionarClientes.isVisibleMensajeClickThirdButton(typeButton, driver), State.Defect);
 	 	
-		int maxSecondsWait = 2;
+		int maxSeconds = 2;
 		TypeThirdButton buttonExpected = typeButton.buttonExpectedAfterClick();
 	 	validations.add(
-			"Aparece el botón \"Alta\" (lo esperamos hasta " + maxSecondsWait + " segundos)",
-			PageGestionarClientes.isVisibleThirdButtonUntil(buttonExpected, maxSecondsWait, driver), State.Defect);
+			"Aparece el botón \"Alta\" (lo esperamos hasta " + maxSeconds + " segundos)",
+			PageGestionarClientes.isVisibleThirdButtonUntil(buttonExpected, maxSeconds, driver), State.Defect);
 		
 	 	return validations;
 	}

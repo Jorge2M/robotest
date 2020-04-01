@@ -4,10 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageAssistQiwi1rst extends WebdrvWrapp {
+public class PageAssistQiwi1rst {
 
     public enum pasarelasAssist { visa, webmoney, Яндекс, qiwikошелек, qiwimts, qiwimegafon }
     
@@ -63,16 +64,17 @@ public class PageAssistQiwi1rst extends WebdrvWrapp {
     
     
     public static boolean isPresentIconoAssist(WebDriver driver, Channel channel) {
-        return (isElementPresent(driver, By.xpath(getXPATH_icono(channel))));
+    	String xpath = getXPATH_icono(channel);
+    	return (state(Present, By.xpath(xpath), driver).check());
     }
     
     public static boolean isPresentIconPasarelas(WebDriver driver, Channel channel) {
-        return (isElementPresent(driver, By.xpath(getXPATH_iconPasarelas(channel))));
+    	String xpath = getXPATH_iconPasarelas(channel);
+    	return (state(Present, By.xpath(xpath), driver).check());
     }
-    
-    public static void clickIconPasarela(WebDriver driver, Channel channel, pasarelasAssist pasarela) throws Exception {
-        
-        String xpath = getXPATH_iconPasarela(channel, pasarela);
-        clickAndWaitLoad(driver, By.xpath(xpath));
-    }
+
+	public static void clickIconPasarela(WebDriver driver, Channel channel, pasarelasAssist pasarela) {
+		String xpath = getXPATH_iconPasarela(channel, pasarela);
+		click(By.xpath(xpath), driver).exec();
+	}
 }

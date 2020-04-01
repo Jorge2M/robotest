@@ -18,7 +18,7 @@ public class InputWithIconBase extends InputLabel {
 		super(label, driver);
 	}
 	
-	void clickIconBase() throws Exception {
+	void clickIconBase() {
 		for (int i=0; i<3; i++) {
 			try {
 				waitForPageFinished();

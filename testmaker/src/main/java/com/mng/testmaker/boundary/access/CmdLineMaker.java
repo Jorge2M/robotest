@@ -51,7 +51,7 @@ public class CmdLineMaker {
 		return inputParams.getAppEnum();
 	}
 	
-	public CommandLine getParsedOptions() throws ParseException {
+	private CommandLine getParsedOptions() throws ParseException {
 		CommandLine cmdLineToReturn;
 		CommandLine cmdLineHelp = checkHelpParameterCase(args);
 		if (cmdLineHelp==null) {

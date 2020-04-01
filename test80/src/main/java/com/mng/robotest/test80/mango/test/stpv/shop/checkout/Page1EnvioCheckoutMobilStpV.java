@@ -1,6 +1,5 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
@@ -11,7 +10,6 @@ import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1EnvioCheckoutMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page2DatosPagoCheckoutMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
@@ -33,15 +31,15 @@ public class Page1EnvioCheckoutMobilStpV {
 		ChecksTM validations = ChecksTM.getNew();
 			validations.add(
 			"Aparece la página correspondiente al paso-1",
-			WebdrvWrapp.isElementPresent(driver, By.xpath("//h2[@data-toggle='step1']")), State.Warn);
+			Page1EnvioCheckoutMobil.isPageUntil(1, driver), State.Warn);
+			//WebdrvWrapp.isElementPresent(driver, By.xpath("//h2[@data-toggle='step1']")), State.Warn);
 			validations.add(
 			"Aparece el botón de introducción del código promocional",
 			Page1EnvioCheckoutMobil.isVisibleInputCodigoPromoUntil(0, driver), State.Defect);
 			if (!userLogged) {
 				validations.add(
 				"Aparece seleccionado el método de envío \"Estándar\"",
-				WebdrvWrapp.isElementPresent(driver, By.xpath("//div[@data-analytics-id='standard' and @class[contains(.,'checked')]]")), 
-				State.Warn);
+				Page1EnvioCheckoutMobil.isPresentEnvioStandard(driver), State.Warn);
 			}
 			
 			return validations;
@@ -70,11 +68,11 @@ public class Page1EnvioCheckoutMobilStpV {
 	}
     
     @Validation (
-    	description="Queda seleccionado el bloque correspondiete a <b>#{tipoTransporte}</b> (lo esperamos hasta #{maxSecondsWait} segundos)",
+    	description="Queda seleccionado el bloque correspondiete a <b>#{tipoTransporte}</b> (lo esperamos hasta #{maxSeconds} segundos)",
     	level=State.Warn)
-    public static boolean validaBlockSelected(TipoTransporte tipoTransporte, int maxSecondsWait, WebDriver driver) 
+    public static boolean validaBlockSelected(TipoTransporte tipoTransporte, int maxSeconds, WebDriver driver) 
     throws Exception {
-        return (Page1EnvioCheckoutMobil.isBlockSelectedUntil(tipoTransporte, maxSecondsWait, driver));
+        return (Page1EnvioCheckoutMobil.isBlockSelectedUntil(tipoTransporte, maxSeconds, driver));
     }
     
     @Step (
@@ -107,10 +105,10 @@ public class Page1EnvioCheckoutMobilStpV {
     @Validation
     public static ChecksTM validaResultImputPromoEmpl(WebDriver driver) throws Exception {
     	ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsWait = 2;
+        int maxSeconds = 2;
 	 	validations.add(
-			"Aparece el descuento total aplicado al empleado (en menos de " + maxSecondsWait + " segundos)",
-			Page1EnvioCheckoutMobil.isVisibleDescuentoEmpleadoUntil(driver, maxSecondsWait), State.Warn);
+			"Aparece el descuento total aplicado al empleado (en menos de " + maxSeconds + " segundos)",
+			Page1EnvioCheckoutMobil.isVisibleDescuentoEmpleadoUntil(driver, maxSeconds), State.Warn);
 	 	validations.add(
 			"Aparece un descuento de empleado mayor que 0",
 			Page1EnvioCheckoutMobil.validateDiscountEmpleadoNotNull(driver), State.Warn);

@@ -16,6 +16,7 @@ import org.apache.commons.cli.CommandLine;
 
 import com.mng.testmaker.boundary.access.OptionTMaker;
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.conf.ConstantesTM;
 import com.mng.testmaker.domain.testfilter.DataFilterTCases;
 import com.mng.testmaker.domain.util.TestNameUtils;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
@@ -44,6 +45,7 @@ public abstract class InputParamsTM {
 	public static final String TypeAccessParam = "typeAccess";
 	public static final String ChromeDriverVersionParam = "chromedriverVersion";
 	public static final String GeckoDriverVersionParam = "geckodriverVersion";
+	public static final String TestObjectParam = "testobject";
 	
 	public static final String patternTestCaseItem = "([^\\{\\}]+)(?:\\{([0-9]+)(?:-([0-9]+)){0,1}\\}){0,1}";
 	
@@ -106,6 +108,9 @@ public abstract class InputParamsTM {
 	
 	@FormParam(GeckoDriverVersionParam)
 	String geckoDriverVersion;	
+	
+	@FormParam(TestObjectParam)
+	String testObject;
 
 	public InputParamsTM() {}
 
@@ -172,11 +177,10 @@ public abstract class InputParamsTM {
 			.desc("Application Web to test. Possible values: " + Arrays.toString(getNames(appEnum.getEnumConstants())))
 			.build());
 
-		String patternUrl = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
 		optionsTM.add(OptionTMaker.builder(InputParamsTM.URLNameParam)
 			.required(true)
 			.hasArg()
-			.pattern(patternUrl)
+			.pattern(ConstantesTM.URL_Pattern)
 			.desc("Initial URL of the application Web to test")
 			.build());
 
@@ -316,7 +320,8 @@ public abstract class InputParamsTM {
 		Mails(MailsParam),
 		TypeAccess(TypeAccessParam),
 		ChromeDriverVersion(ChromeDriverVersionParam),
-		GeckoDriverVersion(GeckoDriverVersionParam);
+		GeckoDriverVersion(GeckoDriverVersionParam),
+		TestObject(TestObjectParam);
 		
 		public String nameParam;
 		private ParamTM(String nameParam) {
@@ -373,9 +378,9 @@ public abstract class InputParamsTM {
 			return this.chromeDriverVersion;
 		case GeckoDriverVersion:
 			return this.geckoDriverVersion;
+		default:
+			return "";
 		}
-
-		return "";
 	}
 
 	public Class<? extends Enum<?>> getSuiteEnum() {
@@ -549,10 +554,10 @@ public abstract class InputParamsTM {
 		}
 		return true;
 	} 
-	public void setRemote(String remote) {
+	public void setTestExecutingInRemote(String remote) {
 		this.remote = remote;
 	}
-	public boolean isRemote() {
+	public boolean isTestExecutingInRemote() {
 		if (remote!=null) {
 			return ("true".compareTo(remote)==0);
 		}
@@ -613,6 +618,12 @@ public abstract class InputParamsTM {
 		this.geckoDriverVersion = geckoDriverVersion;
 	}
 
+	public String getTestObject() {
+		return testObject;
+	}
+	public void setTestObject(String testObject) {
+		this.testObject = testObject;
+	}
 	public DataFilterTCases getDataFilter() {
 		DataFilterTCases dFilter = new DataFilterTCases(getChannel(), getApp());
 		dFilter.setGroupsFilter(getGroupsFilter());

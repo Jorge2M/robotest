@@ -7,8 +7,8 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 public interface SecSearch {
 	
-	public void search(String text) throws Exception;
-	public void close() throws Exception;
+	public void search(String text);
+	public void close();
 	
 	public static SecSearch getNew(Channel channel, AppEcom app, WebDriver driver) {
 		switch (channel) {

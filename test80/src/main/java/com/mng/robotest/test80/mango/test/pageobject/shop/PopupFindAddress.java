@@ -6,7 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 /**
@@ -14,7 +15,7 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
  * @author jorge.munoz
  *
  */
-public class PopupFindAddress extends WebdrvWrapp {
+public class PopupFindAddress {
     private final static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     private final static String XPathInputBuscador = "//input[@id='region_name']";
     private final static String XPathButtonLupa = "//button[@class='btn_search']";
@@ -28,27 +29,27 @@ public class PopupFindAddress extends WebdrvWrapp {
         catch (Exception e) {
             pLogger.warn("Exception going to Find Address Popup. ", e);
         }
-        //wbdrvUtils.waitForPageLoaded(driver, maxSecondsToWait);
         return popupBuscador;
     }
-    
-    public static boolean isIFrameUntil(int maxSecondsToWait, WebDriver driver) {
-        //driver.navigate().refresh();
-        return (isElementPresentUntil(driver, By.xpath("//iframe"), maxSecondsToWait));
-    }
-    
-    public static boolean isBuscadorClickableUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementClickableUntil(driver, By.xpath(XPathInputBuscador), maxSecondsToWait));
-    }
-    
+
+	public static boolean isIFrameUntil(int maxSeconds, WebDriver driver) {
+		return (state(Present, By.xpath("//iframe"), driver)
+				.wait(maxSeconds).check());
+	}
+
+	public static boolean isBuscadorClickableUntil(int maxSeconds, WebDriver driver) {
+		return (state(Clickable, By.xpath(XPathInputBuscador), driver)
+				.wait(maxSeconds).check());
+	}
+
     public static void setDataBuscador(WebDriver driver, String data) {
         driver.findElement(By.xpath(XPathInputBuscador)).sendKeys(data);
     }
-    
-    public static void clickButtonLupa(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonLupa));
-    }
-    
+
+	public static void clickButtonLupa(WebDriver driver) {
+		click(By.xpath(XPathButtonLupa), driver).exec();
+	}
+
     public static void clickFirstDirecc(WebDriver driver) {
         driver.findElement(By.xpath(XPathLinkDirecc)).click();
     }

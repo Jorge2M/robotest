@@ -6,10 +6,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PagePedidos extends WebdrvWrapp {
+public class PagePedidos {
 
     public enum TypeDetalle {bolsa, pedido} 
     public enum Envio {STANDARD, TIENDA, ASM, PICKPOINT}
@@ -82,7 +83,7 @@ public class PagePedidos extends WebdrvWrapp {
     	int i=0;
     	for (WebElement tdColumn : listColumns) {
     		i+=1;
-    		if (isElementPresent(tdColumn, By.xpath("./span")) &&
+    		if (state(Present, tdColumn, driver).by(By.xpath("./span")).check() &&
     			tdColumn.findElement(By.xpath("./span")).getText().compareTo(idColumn.textoColumna)==0) {
     			return i;
     		}
@@ -108,18 +109,16 @@ public class PagePedidos extends WebdrvWrapp {
     	    	+ "text()[contains(.,'" + data.toLowerCase() + "')] or "
     	    	+ "text()[contains(.,'" + data.toUpperCase() + "')]]");
     }
-    
-    /**
-     * @return si se trata de la página de pedidos de manto
-     */
-    public static boolean isPage(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathMainForm)));
-    }
-    
-    public static boolean isInvisibleCapaLoadingUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementInvisibleUntil(driver, By.xpath(XPathCapaLoading), maxSecondsToWait));
-    }
-    
+
+	public static boolean isPage(WebDriver driver) {
+		return (state(Present, By.xpath(XPathMainForm), driver).check());
+	}
+
+	public static boolean isInvisibleCapaLoadingUntil(int maxSeconds, WebDriver driver) {
+		return (state(Invisible, By.xpath(XPathCapaLoading), driver)
+				.wait(maxSeconds).check());
+	}
+
     /**
      * @return el número de líneas de pedidos que aparecen en pantalla
      */
@@ -127,17 +126,18 @@ public class PagePedidos extends WebdrvWrapp {
         return (driver.findElements(By.xpath(XPathLineaPedido)).size());
     }
     
-    public static void clickLinkPedidoInLineas(WebDriver driver, String codigoPedidoManto, TypeDetalle typeDetalle) throws Exception {
+    public static void clickLinkPedidoInLineas(WebDriver driver, String codigoPedidoManto, TypeDetalle typeDetalle) {
     	String xpath = getXPathDataPedidoInLineas(IdColumn.idpedido, codigoPedidoManto, typeDetalle, driver);
-        //String xpath = getXpath_linkPedidoInLineas(codigoPedidoManto);
-        clickAndWaitLoad(driver, By.xpath(xpath));
+    	click(By.xpath(xpath), driver).exec();
     }
 
-    public static boolean isPresentDataInPedido(IdColumn idColumn, String data, TypeDetalle typeDetalle, int maxSecondsToWait, WebDriver driver) {
-    	String xpath = getXPathDataPedidoInLineas(idColumn, data, typeDetalle, driver);
-    	return (isElementPresentUntil(driver, By.xpath(xpath), maxSecondsToWait));
-    }
-    
+	public static boolean isPresentDataInPedido(
+			IdColumn idColumn, String data, TypeDetalle typeDetalle, int maxSeconds, WebDriver driver) {
+		String xpath = getXPathDataPedidoInLineas(idColumn, data, typeDetalle, driver);
+		return (state(Present, By.xpath(xpath), driver)
+				.wait(maxSeconds).check());
+	}
+
 	/**
 	 * @param posicionPedidoActual, driver
 	 * @return codigo del pedido asociado a una posicion de la lista
@@ -175,26 +175,24 @@ public class PagePedidos extends WebdrvWrapp {
 	 */
 	public static int getPosicionPedidoUsuarioRegistrado(int posicionPedidoActual, WebDriver driver) {
 		int iterator = posicionPedidoActual;
-		isElementVisibleUntil(driver, By.xpath(getXPathIdRegistroForLine(posicionPedidoActual)), 400);
-		while (driver.findElement(By.xpath(getXPathIdRegistroForLine(iterator))).getText().equals("0"))
+		String xpath = getXPathIdRegistroForLine(posicionPedidoActual);
+		state(Visible, By.xpath(xpath), driver).wait(400).check();
+		while (driver.findElement(By.xpath(getXPathIdRegistroForLine(iterator))).getText().equals("0")) {
 			iterator++;
+		}
 		return iterator;
 	}
 
-	/**
-	 * @param driver
-	 * @throws Exception
-	 */
-	public static void clickPaginaSiguientePedidos(WebDriver driver) throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathLinkPaginaSiguientePedidos));
+	public static void clickPaginaSiguientePedidos(WebDriver driver) {
+		click(By.xpath(XPathLinkPaginaSiguientePedidos), driver).exec();
 	}
 
 	
-    public static void clickPedidoWithTypeEnvio(Envio envio, WebDriver driver) {
-    	String xpathLineaEnvTienda = getXPathLineaPedidoWithTypeEnvio(envio, driver);
-    	int posIdPedido = getPosicionColumn(IdColumn.idpedido, TypeDetalle.pedido, driver);
-    	driver.findElement(By.xpath(xpathLineaEnvTienda + "/td[" + posIdPedido + "]/a")).click();
-    }
+	public static void clickPedidoWithTypeEnvio(Envio envio, WebDriver driver) {
+		String xpathLineaEnvTienda = getXPathLineaPedidoWithTypeEnvio(envio, driver);
+		int posIdPedido = getPosicionColumn(IdColumn.idpedido, TypeDetalle.pedido, driver);
+		driver.findElement(By.xpath(xpathLineaEnvTienda + "/td[" + posIdPedido + "]/a")).click();
+	}
 	
 	public static String getTiendaFisicaFromListaPedidos(WebDriver driver) throws Exception {
 		clickPedidoWithTypeEnvio(Envio.TIENDA, driver);

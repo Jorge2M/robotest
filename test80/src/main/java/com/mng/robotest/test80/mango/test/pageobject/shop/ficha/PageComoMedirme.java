@@ -3,9 +3,10 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.ficha;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class PageComoMedirme extends WebdrvWrapp {
+public class PageComoMedirme {
 
 	private final WebDriver driver;
 	
@@ -33,7 +34,7 @@ public class PageComoMedirme extends WebdrvWrapp {
 	}
 	
 	private boolean isPage() {
-		return (isElementVisible(driver, By.xpath(XPathBloqueGuiaTallas)));
+		return (state(Visible, By.xpath(XPathBloqueGuiaTallas), driver).check());
 	}
 	
 	private boolean goToPageInNewTab(String windowFatherHandle) throws Exception {

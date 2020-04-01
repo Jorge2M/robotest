@@ -17,38 +17,40 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.PageJCAS;
 public class PageLoginMantoStpV {
 
 	public static void login(String urlManto, String usrManto, String passManto, WebDriver driver) throws Exception {
-		goToManto(urlManto, driver);
+		goToMantoIfNotYet(urlManto, driver);
 		if (!PageSelTda.isPage(driver)) {
 			identFromJasigCasPage(usrManto, passManto, driver);
 		}
-		
 		checkIsPageSelectTienda(driver);
 	}
 	
-    @Step (
-    	description=
-    		"<b style=\"color:brown;\">ACCEDER A MANTO</b> (#{urlManto})" +
-    		"Aparece la página de selección de login o selección de tienda",
-    	expected=
-    		"Aparece la página de selección de login o selección de tienda",
-    	saveErrorData=SaveWhen.Never)
-    public static void goToManto(String urlManto, WebDriver driver) throws Exception {
-    	driver.manage().deleteAllCookies();
-        driver.get(urlManto);
-    }
-    
-    @Step (
-    	description="Identificarse desde la página de Jasig CAS con #{usrManto}",
-    	expected="Aparece la página de selección de la tienda",
-    	saveErrorData=SaveWhen.Never)
-    public static void identFromJasigCasPage(String usrManto, String passManto, WebDriver driver) throws Exception {
-    	PageJCAS.identication(driver, usrManto, passManto);
-    }
-    
-    @Validation (
-    	description="Aparece la página de selección de la tienda",
-    	level=State.Warn)
-    private static boolean checkIsPageSelectTienda(WebDriver driver) {
-    	return (PageSelTda.isPage(driver));
-    }
+	@Step (
+		description=
+			"<b style=\"color:brown;\">Acceder a Manto</b> si todavía no estamos allí (#{urlManto})" +
+			"Aparece la página de selección de login o selección de tienda",
+		expected=
+			"Aparece la página de selección de login o selección de tienda",
+		saveErrorData=SaveWhen.Never)
+	public static void goToMantoIfNotYet(String urlManto, WebDriver driver) throws Exception {
+		String currentURL = driver.getCurrentUrl();
+		if (currentURL.compareTo(urlManto)!=0) {
+			driver.manage().deleteAllCookies();
+			driver.get(urlManto);
+		}
+	}
+
+	@Step (
+		description="Identificarse desde la página de Jasig CAS con #{usrManto}",
+		expected="Aparece la página de selección de la tienda",
+		saveErrorData=SaveWhen.Never)
+	public static void identFromJasigCasPage(String usrManto, String passManto, WebDriver driver) throws Exception {
+		PageJCAS.identication(driver, usrManto, passManto);
+	}
+
+	@Validation (
+		description="Aparece la página de selección de la tienda",
+		level=State.Warn)
+	private static boolean checkIsPageSelectTienda(WebDriver driver) {
+		return (PageSelTda.isPage(driver));
+	}
 }

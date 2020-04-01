@@ -40,11 +40,8 @@ public class PageIdentificacionStpV {
 	@Step (
 		description="Seleccionar el link \"¿Has olvidado tu contraseña?\"", 
         expected="Aparece la página de cambio de contraseña")
-    public static void selectHasOlvidadoTuContrasenya(WebDriver driver) 
-    throws Exception {
+    public static void selectHasOlvidadoTuContrasenya(WebDriver driver) {
         PageIdentificacion.clickHasOlvidadoContrasenya(driver); 
-
-        //Validaciones
         PageRecuperaPasswdStpV.isPage(driver); 
         
         StdValidationFlags flagsVal = StdValidationFlags.newOne();

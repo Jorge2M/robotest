@@ -30,6 +30,7 @@ import com.mng.robotest.test80.mango.test.suites.PaisIdiomaSuite.VersionPaisSuit
 import com.mng.robotest.test80.mango.test.utils.LevelPais;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -37,7 +38,10 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 
-public class PaisIdioma {
+public class PaisIdioma implements Serializable {
+	
+	private static final long serialVersionUID = 7000361927887748996L;
+
 	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
 	private String index_fact = "";
@@ -74,7 +78,7 @@ public class PaisIdioma {
             dCtxSh.idioma = castellano;
             dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
             dCtxSh.setChannel(inputParamsSuite.getChannel());
-            dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+            //dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
         }
         if (linesToTest==null) {
             linesToTest = dCtxSh.pais.getShoponline().getLineasToTest(dCtxSh.appE);
@@ -90,7 +94,7 @@ public class PaisIdioma {
     public void PAR001_Lineas() throws Exception {
     	beforeMethod();
     	WebDriver driver = TestMaker.getDriverTestCase();
-    	TestMaker.getTestCase().setRefineDataName(index_fact);
+    	TestMaker.getTestCase().setSpecificInputData(index_fact);
     	
         PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, driver);
         PageHomeMarcasStpV.validateIsPageWithCorrectLineas(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver);

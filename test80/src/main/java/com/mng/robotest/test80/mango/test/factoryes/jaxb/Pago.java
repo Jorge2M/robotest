@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.factoryes.jaxb;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,8 +15,11 @@ import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 
-public class Pago {
-    public static enum TypePago {
+public class Pago implements Serializable {
+	
+	private static final long serialVersionUID = -2329928763754362241L;
+
+	public static enum TypePago {
         TarjetaIntegrada, 
         TMango, 
         KrediKarti, 

@@ -6,12 +6,11 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.sapfiori.access.test.testcase.generic.webobject.makers.StandarElementsMaker;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.modals.ModalLoading;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.utils.PageObject;
 import com.mng.sapfiori.access.test.testcase.webobject.pedidos.PageGestionSolPedidoBuyer;
 import com.mng.sapfiori.access.test.testcase.webobject.reclassifprods.PageSelProdsToReclassify;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageIconsMenu extends PageObject {
 	
@@ -40,25 +39,25 @@ public class PageIconsMenu extends PageObject {
 	}
 	
 	public boolean checkIsInitialPageSpanish(int maxSeconds) {
-		return (
-			WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(XPathLabelInitialPageSpanish), maxSeconds));
+		return (state(Visible, By.xpath(XPathLabelInitialPageSpanish))
+				.wait(maxSeconds).check());
 	}
 	
-	public PageSelProdsToReclassify clickClasificarProductos() throws Exception {
+	public PageSelProdsToReclassify clickClasificarProductos() {
 		List<String> textsInIcon = PageSelProdsToReclassify.option.getTextsInIcon();
 		clickOption(textsInIcon);
 		return PageSelProdsToReclassify.getNew(driver);
 	}
 	
-	public PageGestionSolPedidoBuyer clickManagePurchaseRequisitionsBuyer() throws Exception {
+	public PageGestionSolPedidoBuyer clickManagePurchaseRequisitionsBuyer() {
 		List<String> textsInIcon = PageGestionSolPedidoBuyer.option.getTextsInIcon();
 		clickOption(textsInIcon);
 		return PageGestionSolPedidoBuyer.getNew(driver);
 	}
 
-	private void clickOption(List<String> textsInIcon) throws Exception {
+	private void clickOption(List<String> textsInIcon) {
 		String xpath = getXPathOption(textsInIcon);
-		clickAndWaitLoad(driver, By.xpath(xpath));
+		click(By.xpath(xpath)).exec();
 		ModalLoading modalLoading = elementsMaker.getModalLoading();
 		modalLoading.isVisibleUntil(3);
 		modalLoading.isInvisibleUntil(10);

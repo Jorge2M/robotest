@@ -40,15 +40,13 @@ public class PagePaytrail1rstStpV {
 		
 		return validations;
     }
-    
+
 	@Step (
 		description="Seleccionar el banco <b>Nordea</b> del desplegable y pulsar el botón \"Continue\"", 
-        expected="Aparece la página de identificación de E-payment")
-    public static void selectBancoAndContinue(Channel channel, WebDriver driver) throws Exception {
-        PagePaytrail1rst.selectBanco("Nordea", channel, driver);
-        PagePaytrail1rst.clickButtonContinue(channel, driver);
-        
-        //Validaciones
-        PagePaytrailEpaymentStpV.validateIsPage(driver);
-    }
+		expected="Aparece la página de identificación de E-payment")
+	public static void selectBancoAndContinue(Channel channel, WebDriver driver) {
+		PagePaytrail1rst.selectBanco("Nordea", channel, driver);
+		PagePaytrail1rst.clickButtonContinue(channel, driver);
+		(new PagePaytrailEpaymentStpV(driver)).validateIsPage();
+	}
 }

@@ -2,6 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageMercpagoDatosTrjMobil extends PageMercpagoDatosTrj {
 
@@ -21,14 +22,15 @@ public class PageMercpagoDatosTrjMobil extends PageMercpagoDatosTrj {
     }
 
     @Override
-    public boolean isPageUntil(int maxSecondsToWait) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathInputCvc), maxSecondsToWait));
+    public boolean isPageUntil(int maxSeconds) {
+    	return (state(Visible, By.xpath(XPathInputCvc), driver)
+    			.wait(maxSeconds).check());
     }
     
     @Override
     public void sendCaducidadTarj(String fechaVencimiento) {
         int i=0;
-        while (!isElementClickableUntil(driver, By.xpath(XPathInputFecCaducidad), 1/*maxSeconds*/) && i<3) {
+        while (!state(Clickable, By.xpath(XPathInputFecCaducidad), driver).wait(1).check() && i<3) {
             clickNextButton();
             i+=1;
         }
@@ -39,7 +41,7 @@ public class PageMercpagoDatosTrjMobil extends PageMercpagoDatosTrj {
     @Override
     public void sendCvc(String securityCode) {
         int i=0;
-        while (!isElementClickableUntil(driver, By.xpath(XPathInputCvc), 1/*maxSeconds*/) && i<3) {
+        while (!state(Clickable, By.xpath(XPathInputCvc), driver).wait(1).check() && i<3) {
             clickNextButton();
             i+=1;
         }
@@ -47,8 +49,9 @@ public class PageMercpagoDatosTrjMobil extends PageMercpagoDatosTrj {
         driver.findElement(By.xpath(XPathInputCvc)).sendKeys(securityCode);        
     }
     
-    public boolean isActiveWrapperVisaUntil(int maxSecondsToWait) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathWrapperVisaActive), maxSecondsToWait));
+    public boolean isActiveWrapperVisaUntil(int maxSeconds) {
+    	return (state(Visible, By.xpath(XPathWrapperVisaActive), driver)
+    			.wait(maxSeconds).check());
     }
     
     public void clickNextButton() {
@@ -59,11 +62,13 @@ public class PageMercpagoDatosTrjMobil extends PageMercpagoDatosTrj {
         driver.findElement(By.xpath(XPathBackButton)).click();
     }    
     
-    public boolean isClickableButtonNextPayUntil(int maxSecondsToWait) {
-        return (isElementClickableUntil(driver, By.xpath(XPathButtonNextPay), maxSecondsToWait));
+    public boolean isClickableButtonNextPayUntil(int maxSeconds) {
+    	return (state(Clickable, By.xpath(XPathButtonNextPay), driver)
+    			.wait(maxSeconds).check());
     }
-    
-    public void clickButtonForPay() throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonNextPay + " | " + XPathBotonPagar));
-    }
+
+	public void clickButtonForPay() {
+		By byElem = By.xpath(XPathButtonNextPay + " | " + XPathBotonPagar);
+		click(byElem).exec();
+	}
 }

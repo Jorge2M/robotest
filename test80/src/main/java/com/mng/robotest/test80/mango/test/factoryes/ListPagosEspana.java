@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.factoryes;
 
+import java.io.Serializable;
 import java.util.*;
 
 import org.testng.ITestContext;
@@ -14,7 +15,9 @@ import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
-public class ListPagosEspana {
+public class ListPagosEspana implements Serializable {
+	
+	private static final long serialVersionUID = 6058455886676687127L;
 	
 	Pais espana = null;
 	IdiomaPais castellano = null;

@@ -7,11 +7,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 
-public class SecProductDescrOld extends WebdrvWrapp {
+public class SecProductDescrOld {
 
     public enum TypeStatePanel {folded, unfolded, missing}
     public enum TypePanel {
@@ -77,10 +78,10 @@ public class SecProductDescrOld extends WebdrvWrapp {
         }
     }
     
-    public static TypeStatePanel getStatePanel(TypePanel typePanel, WebDriver driver) throws Exception {
-        Thread.sleep(200);
+    public static TypeStatePanel getStatePanel(TypePanel typePanel, WebDriver driver) {
+        waitMillis(200);
         String xpathPanel = getXPathPanel(typePanel);
-        if (!isElementVisible(driver, By.xpath(xpathPanel))) {
+        if (!state(Present, By.xpath(xpathPanel), driver).check()) {
             return TypeStatePanel.missing;
         }
         
@@ -91,21 +92,20 @@ public class SecProductDescrOld extends WebdrvWrapp {
         return TypeStatePanel.folded;
     }
     
-    public static boolean isPanelInStateUntil(TypePanel typePanel, TypeStatePanel stateExpected, int maxSecondsToWait, WebDriver driver) 
-    throws Exception {
+    public static boolean isPanelInStateUntil(TypePanel typePanel, TypeStatePanel stateExpected, int maxSecondsToWait, WebDriver driver) {
         TypeStatePanel statePanel = getStatePanel(typePanel, driver);
         int seconds=0;
         while (statePanel!=stateExpected && seconds<maxSecondsToWait) {
-            Thread.sleep(1000);
+            waitMillis(1000);
             seconds+=1;
             statePanel = getStatePanel(typePanel, driver);
         }
 
         return (statePanel==stateExpected);
     }
-    
-    public static void clickPanel(TypePanel typePanel, WebDriver driver) throws Exception {
-        String xpathPanelLink = getXPathPanelLink(typePanel);
-        clickAndWaitLoad(driver, By.xpath(xpathPanelLink));
-    }
+
+	public static void clickPanel(TypePanel typePanel, WebDriver driver) {
+		String xpathPanelLink = getXPathPanelLink(typePanel);
+		click(By.xpath(xpathPanelLink), driver).exec();
+	}
 }

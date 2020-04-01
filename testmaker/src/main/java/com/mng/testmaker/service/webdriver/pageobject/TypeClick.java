@@ -1,10 +1,10 @@
-package com.mng.testmaker.service.webdriver.wrapper;
+package com.mng.testmaker.service.webdriver.pageobject;
 
-public enum TypeOfClick {
+public enum TypeClick {
     webdriver, 
     javascript;
 	
-	public static TypeOfClick next(TypeOfClick typeClick) {
+	public static TypeClick next(TypeClick typeClick) {
 		switch (typeClick) {
 		case webdriver:
 			return javascript;

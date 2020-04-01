@@ -4,10 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageConsola extends WebdrvWrapp {
+public class PageConsola {
 
     /**
      * Mensaje que aparece en el caso de una consulta de tipos de envío OK 
@@ -112,14 +113,16 @@ public class PageConsola extends WebdrvWrapp {
      * @return si existe el apartado de "Test servicios VOTF"
      */
     public static boolean existTestServVOTF(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath("//span[text()[contains(.,'Test servicios VOTF')]]")));
+    	String xpath = "//span[text()[contains(.,'Test servicios VOTF')]]";
+    	return (state(Present, By.xpath(xpath), driver).check());
     }
     
     /**
      * @return si existe el apartado de "Consola comandos VOTF"
      */
     public static boolean existConsolaComVOTF(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath("//span[text()[contains(.,'Consola comandos VOTF')]]")));
+    	String xpath = "//span[text()[contains(.,'Consola comandos VOTF')]]";
+    	return (state(Present, By.xpath(xpath), driver).check());
     }
     
     /**
@@ -213,26 +216,24 @@ public class PageConsola extends WebdrvWrapp {
         driver.findElement(By.xpath(XPathInputTiendaConsola)).sendKeys(tienda);        
     }
     
-    /**
-     * Selección del botón "Consultar Tipos Envío"
-     */
-    public static void clickButtonConsTiposEnvios(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonConsTiposEnvios));
+    public static void clickButtonConsTiposEnvios(WebDriver driver) {
+    	click(By.xpath(XPathButtonConsTiposEnvios), driver).exec();
     }
     
     /**
      * Consulta disponibilidad envío a domicilio (mediante selección del botón correspondient) y devuelve los datos de transporte obtenidos
      * @return valores del desplegable "Código de transporte" obtenido
      */
-    public static void clickButtonConsultarDispEnvioDomicilio(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonDispEnvioDomic));
+    public static void clickButtonConsultarDispEnvioDomicilio(WebDriver driver) {
+    	click(By.xpath(XPathButtonDispEnvioDomic), driver).exec();
     }
     
     /**
      * Esperamos hasta que existen valores (options) en el desplegable (select) de "Código transporte" (tardan un poco en cargarse)
      */
-    public static boolean isDataSelectCodigoTransporte(int maxSecondsToWait, WebDriver driver) {
-        return (isElementPresentUntil(driver, By.xpath(XPathSelectCodTransporte + "/option"), maxSecondsToWait));
+    public static boolean isDataSelectCodigoTransporte(int maxSeconds, WebDriver driver) {
+    	String xpath = XPathSelectCodTransporte + "/option";
+    	return (state(Present, By.xpath(xpath), driver).wait(maxSeconds).check());
     }
     
         
@@ -243,44 +244,44 @@ public class PageConsola extends WebdrvWrapp {
     /**
      * Seleccionamos el botón "Consultar Disponibilidad Envío Tienda" (y esperamos hasta que se carga la página)
      */
-    public static void consDispEnvioTienda(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonDispEnvioTienda));
+    public static void consDispEnvioTienda(WebDriver driver) {
+    	click(By.xpath(XPathButtonDispEnvioTienda), driver).exec();
     }
     
-    public static void clickButtonSolATienda(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonSolATienda));
+    public static void clickButtonSolATienda(WebDriver driver) {
+    	click(By.xpath(XPathButtonSolATienda), driver).exec();
     }
     
-    public static void clickButtonSolADomicilio(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonSolADomicilio));
+    public static void clickButtonSolADomicilio(WebDriver driver) {
+    	click(By.xpath(XPathButtonSolADomicilio), driver).exec();
     }
     
     /**
      * Selección del botón "Obtención del pedido" y wait hasta carga de la página
      */
-    public static void clickButtonObtenerPedidos(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonObtencionPedidos));
+    public static void clickButtonObtenerPedidos(WebDriver driver) {
+    	click(By.xpath(XPathButtonObtencionPedidos), driver).exec();
     }
     
     /**
      * Selección del botón "Seleccionar pedido" del apartado "Consola comandos VOTF"
      */
-    public static void clickButtonSelectPedido(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonSelectPedido));
+    public static void clickButtonSelectPedido(WebDriver driver) {
+    	click(By.xpath(XPathButtonSelectPedido), driver).exec();
     }
     
     /**
      * Seleccionamos el botón "Preconfirmar Pedido" del apartado "Consola comandos VOTF"
      */
-    public static void clickButtonPreconfPedido(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonPreconfPedido));
+    public static void clickButtonPreconfPedido(WebDriver driver) {
+    	click(By.xpath(XPathButtonPreconfPedido), driver).exec();
     }
     
     /**
      * Seleccionamos el botón "Confirmar Pedido" del apartado "Consola comandos VOTF"
      */    
-    public static void clickButtonConfPedido(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonConfPedido));
+    public static void clickButtonConfPedido(WebDriver driver) {
+    	click(By.xpath(XPathButtonConfPedido), driver).exec();
     }
     
     /**

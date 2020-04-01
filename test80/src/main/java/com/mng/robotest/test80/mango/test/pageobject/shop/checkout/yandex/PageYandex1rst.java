@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.yandex;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageYandex1rst extends WebdrvWrapp {
+public class PageYandex1rst {
 
     static String XPathInputEmail = "//input[@name='cps_email']";
     static String XPathButtonContinue = "//div[@class[contains(.,'payment-submit')]]//button";
@@ -26,21 +27,21 @@ public class PageYandex1rst extends WebdrvWrapp {
     public static String getValueInputEmail(WebDriver driver) {
         return (driver.findElement(By.xpath(XPathInputEmail)).getAttribute("value"));
     }
-    
-    public static void clickContinue(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonContinue));
-    }
-    
+
+	public static void clickContinue(WebDriver driver) {
+		click(By.xpath(XPathButtonContinue), driver).exec();
+	}
+
     public static void inputTelefono(String telefono, WebDriver driver) {
         driver.findElement(By.xpath(XPathInputTelefono)).clear();
-        sendKeysWithRetry(2, telefono, By.xpath(XPathInputTelefono), driver);
+        sendKeysWithRetry(telefono, By.xpath(XPathInputTelefono), 2, driver);
     }
 
-    public static boolean retryButtonExists(WebDriver driver){
-        return isElementPresent(driver, By.xpath(XPathRetryButton));
+    public static boolean retryButtonExists(WebDriver driver) {
+    	return (state(Present, By.xpath(XPathRetryButton), driver).check());
     }
 
-    public static void clickOnRetry(WebDriver driver) throws Exception{
-        clickAndWaitLoad(driver, By.xpath(XPathRetryButton), 2);
-    }
+	public static void clickOnRetry(WebDriver driver) {
+		click(By.xpath(XPathRetryButton), driver).waitLoadPage(2).exec();
+	}
 }

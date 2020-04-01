@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.micuenta;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageSuscripciones extends WebdrvWrapp {
+public class PageSuscripciones {
 
     //Los valores que permiten identificar los radios correspondientes a los newsletter seleccionables
     public enum idNewsletters { she, he, kids, violeta }
@@ -28,19 +29,19 @@ public class PageSuscripciones extends WebdrvWrapp {
     }
     
     public static boolean isPage(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath("//div[@class[contains(.,'Subscriptions')]]")));
+    	return (state(Visible, By.xpath("//div[@class[contains(.,'Subscriptions')]]"), driver).check());
     }
     
     public static void clickRadioNewsletter(WebDriver driver, idNewsletters idRadio) {
         driver.findElement(By.xpath(getXPATH_radioNewsletterClickable(idRadio))).click();
     }
     
-    public static void clickGuardarCambios(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonGuardarCambios));
+    public static void clickGuardarCambios(WebDriver driver) {
+    	click(By.xpath(XPathButtonGuardarCambios), driver).exec();
     }
     
-    public static boolean isPageResOKUntil(int maxSecondsToWait, WebDriver driver) { 
-        return (isElementPresentUntil(driver, By.xpath(XPathPageResOK), maxSecondsToWait));
+    public static boolean isPageResOKUntil(int maxSeconds, WebDriver driver) { 
+    	return (state(Present, By.xpath(XPathPageResOK), driver).wait(maxSeconds).check());
     }
     
     public static int getNumNewsletters(WebDriver driver) {
@@ -54,6 +55,6 @@ public class PageSuscripciones extends WebdrvWrapp {
     
     public static boolean isNewsletterDesmarcada(String linea, WebDriver driver) {
         String xpathLinDesmarcada = getXPath_newsletterDesmarcadas(linea);
-        return (isElementPresent(driver, By.xpath(xpathLinDesmarcada)));
+        return (state(Present, By.xpath(xpathLinDesmarcada), driver).check());
     }
 }

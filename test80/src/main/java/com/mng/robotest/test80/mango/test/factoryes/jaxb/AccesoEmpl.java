@@ -1,10 +1,14 @@
 package com.mng.robotest.test80.mango.test.factoryes.jaxb;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.*;
 
-public class AccesoEmpl { 
+public class AccesoEmpl implements Serializable { 
 
-    String tarjeta;
+	private static final long serialVersionUID = -2766931391516031617L;
+	
+	String tarjeta;
     String nif;
     String nombre;
     String fecnac;

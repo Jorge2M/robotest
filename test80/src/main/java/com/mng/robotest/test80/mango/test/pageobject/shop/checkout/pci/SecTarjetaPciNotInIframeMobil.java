@@ -4,9 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class SecTarjetaPciNotInIframeMobil extends WebdrvWrapp implements SecTarjetaPci {
+public class SecTarjetaPciNotInIframeMobil implements SecTarjetaPci {
 
 	private final WebDriver driver;
 	
@@ -32,33 +33,34 @@ public class SecTarjetaPciNotInIframeMobil extends WebdrvWrapp implements SecTar
     }
     
     @Override
-    public boolean isPresentInputNumberUntil(int maxSecondsToWait) {
-        return (isElementPresentUntil(driver, By.xpath(XPathInputNumber), maxSecondsToWait));
+    public boolean isPresentInputNumberUntil(int maxSeconds) {
+    	return (state(Present, By.xpath(XPathInputNumber), driver)
+    			.wait(maxSeconds).check());
     }
     
     @Override
     public boolean isPresentInputTitular() {
-        return (isElementPresent(driver, By.xpath(XPathInputTitular)));
+    	return (state(Present, By.xpath(XPathInputTitular), driver).check());
     }
     
     @Override
     public boolean isPresentSelectMes() {
-        return (isElementPresent(driver, By.xpath(XPathSelectMes)));
+    	return (state(Present, By.xpath(XPathSelectMes), driver).check());
     }
      
     @Override
     public boolean isPresentSelectAny() {
-        return (isElementPresent(driver, By.xpath(XPathSelectAny)));
+    	return (state(Present, By.xpath(XPathSelectAny), driver).check());
     }
     
     @Override
     public boolean isPresentInputCvc() {
-        return (isElementPresent(driver, By.xpath(XPathInputCvc)));
+    	return (state(Present, By.xpath(XPathInputCvc), driver).check());
     }
     
     @Override
     public boolean isPresentInputDni() {
-        return (isElementPresent(driver, By.xpath(XPathInputDni)));
+    	return (state(Present, By.xpath(XPathInputDni), driver).check());
     }    
     
     @Override

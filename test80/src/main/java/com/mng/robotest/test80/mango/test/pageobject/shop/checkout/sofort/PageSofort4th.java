@@ -3,7 +3,8 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 /**
@@ -11,7 +12,8 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
  * @author jorge.munoz
  *
  */
-public class PageSofort4th extends WebdrvWrapp {
+public class PageSofort4th {
+	
     static String XPathSubmitButton = "//form//button[@class[contains(.,'primary')]]";
     static String XPathInputUser = "//input[@id[contains(.,'LOGINNAMEUSERID')]]";
     static String XPathInputPass = "//input[@id[contains(.,'USERPIN')] and @type='password']";
@@ -21,7 +23,7 @@ public class PageSofort4th extends WebdrvWrapp {
     
     public static boolean isPage(WebDriver driver) {
         if (driver.getTitle().toLowerCase().contains("sofort") && 
-            isElementVisible(driver, By.xpath(XPathInputUser))) {
+        	state(Visible, By.xpath(XPathInputUser), driver).check()) {
             return true;
         }
         return false;
@@ -32,12 +34,12 @@ public class PageSofort4th extends WebdrvWrapp {
         driver.findElement(By.xpath(XPathInputPass)).sendKeys(password);        
     }
 
-    public static void clickSubmitButton(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathSubmitButton));
-    }
-    
+	public static void clickSubmitButton(WebDriver driver) {
+		click(By.xpath(XPathSubmitButton), driver).exec();
+	}
+
     public static boolean isVisibleFormSelCta(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathFormSelCta)));
+    	return (state(Visible, By.xpath(XPathFormSelCta), driver).check());
     }
     
     public static void selectRadioCta(WebDriver driver, int posCta) {
@@ -45,7 +47,7 @@ public class PageSofort4th extends WebdrvWrapp {
     }
     
     public static boolean isVisibleInputTAN(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathInputTAN)));
+    	return (state(Visible, By.xpath(XPathInputTAN), driver).check());
     }
     
     public static void inputTAN(WebDriver driver, String TAN) {

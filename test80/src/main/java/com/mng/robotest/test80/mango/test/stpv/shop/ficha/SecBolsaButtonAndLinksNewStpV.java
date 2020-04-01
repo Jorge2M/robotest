@@ -83,10 +83,10 @@ public class SecBolsaButtonAndLinksNewStpV {
 	@Validation
 	private static ChecksTM checkAppearsModalShareSocial(String codigoPais, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
-	    int maxSecondsWait = 1;
+	    int maxSeconds = 1;
 	 	validations.add(
-	 		"Aparece el modal para compartir a nivel social (lo esperamos hasta " + maxSecondsWait + " segundos) ",
-	 		ModCompartirNew.isVisibleUntil(maxSecondsWait, driver), State.Defect);
+	 		"Aparece el modal para compartir a nivel social (lo esperamos hasta " + maxSeconds + " segundos) ",
+	 		ModCompartirNew.isVisibleUntil(maxSeconds, driver), State.Defect);
 		
 		boolean isPaisChina = (codigoPais.compareTo("720")==0);
 		for (IconSocial icon : IconSocial.values()) {

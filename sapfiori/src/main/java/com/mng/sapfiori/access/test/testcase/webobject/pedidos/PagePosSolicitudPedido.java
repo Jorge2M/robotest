@@ -7,6 +7,8 @@ import com.mng.sapfiori.access.test.testcase.generic.webobject.inputs.withmodal.
 import com.mng.sapfiori.access.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForSelectItem;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.utils.PageObject;
 
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 public class PagePosSolicitudPedido extends PageObject {
 
 	public enum SectionPageSolPedido {
@@ -35,13 +37,12 @@ public class PagePosSolicitudPedido extends PageObject {
 	}
 	
 	public boolean checkIsPage(int maxSeconds) throws Exception {
-		boolean check = isElementVisibleUntil(driver, By.xpath(XPathTitle), maxSeconds);
-		return check;
+		return (state(Visible, By.xpath(XPathTitle)).wait(maxSeconds).check());
 	}
 	
-	public void selectSection(SectionPageSolPedido section) throws Exception {
+	public void selectSection(SectionPageSolPedido section) {
 		if (!isSectionSelected(section)) {
-			clickAndWaitLoad(driver, By.xpath(section.xpath));
+			click(By.xpath(section.xpath)).exec();
 		}
 	}
 	
@@ -74,8 +75,8 @@ public class PagePosSolicitudPedido extends PageObject {
 		return getInputWithoutIcon(inputType);
 	}
 	
-	public PageSolicitudPedido clickAplicar() throws Exception {
-		clickAndWaitLoad(driver, By.xpath(XPathAplicarButotn));
+	public PageSolicitudPedido clickAplicar() {
+		click(By.xpath(XPathAplicarButotn)).exec();
 		return PageSolicitudPedido.getNew(driver);
 	}
 }

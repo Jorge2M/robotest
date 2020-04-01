@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
@@ -25,7 +26,9 @@ import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageSuscripcionesSt
 import com.mng.robotest.test80.mango.test.stpv.shop.miscompras.PageMisComprasStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
-public class MiCuenta {
+public class MiCuenta implements Serializable {
+	
+	private static final long serialVersionUID = 2188911402476562105L;
 	
 	public int prioridad;
 	private String index_fact = "";
@@ -51,7 +54,7 @@ public class MiCuenta {
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());
-        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+        //dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 
         //Si el acceso es normal (no es desde una @Factory) utilizaremos el España/Castellano
         if (this.paisFactory==null) {
@@ -71,7 +74,7 @@ public class MiCuenta {
     public void MIC001_Opciones_Mi_Cuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion) 
     throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
-    	TestMaker.getTestCase().setRefineDataName(index_fact);
+    	TestMaker.getTestCase().setSpecificInputData(index_fact);
         DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userConnected = userConDevolucionPeroNoEnPRO;
         dCtxSh.passwordUser = passwordUserConDevolucion;
@@ -115,7 +118,7 @@ public class MiCuenta {
     public void MIC002_CheckConsultaMisCompras(
     		String userWithOnlinePurchases, String userWithStorePurchases, 
     		String passUserWithOnlinePurchases, String passUserWithStorePurchases) throws Exception {
-    	TestMaker.getTestCase().setRefineDataName(this.index_fact);
+    	TestMaker.getTestCase().setSpecificInputData(this.index_fact);
     	WebDriver driver = TestMaker.getDriverTestCase();
         DataCtxShop dCtxSh = getCtxShForTest();
         

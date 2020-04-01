@@ -27,10 +27,10 @@ public class ModalArticleNotAvailableStpV {
     }
 
     @Validation (
-    description="El modal de \"Avísame\" por artículo no disponible está en estado #{stateModal} (lo esperamos hasta #{maxSecondsWait} segundos)",
+    description="El modal de \"Avísame\" por artículo no disponible está en estado #{stateModal} (lo esperamos hasta #{maxSeconds} segundos)",
     level=State.Info)
-    public boolean validateState(int maxSecondsWait, StateModal stateModal, WebDriver driver) throws Exception {
-		return (ModalArticleNotAvailable.inStateUntil(stateModal, maxSecondsWait, driver));
+    public boolean validateState(int maxSeconds, StateModal stateModal, WebDriver driver) throws Exception {
+		return (ModalArticleNotAvailable.inStateUntil(stateModal, maxSeconds, driver));
     }
     
 	@Step (

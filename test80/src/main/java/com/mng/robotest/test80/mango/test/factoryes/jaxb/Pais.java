@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.factoryes.jaxb;
 
+import java.io.Serializable;
 import java.net.URI;
 import java.sql.Timestamp;
 import java.util.*;
@@ -12,9 +13,11 @@ import com.mng.robotest.test80.mango.test.utils.PagoGetter;
 import com.mng.robotest.test80.mango.test.utils.PagoGetter.PaymentCountry;
 
 @XmlRootElement
-public class Pais {
+public class Pais implements Serializable {
 
-    public static final int MAX_PAGOS = 25;
+	private static final long serialVersionUID = -3152111055294108127L;
+
+	public static final int MAX_PAGOS = 25;
 	
     String nombre_pais;
     String codigo_pais;

@@ -11,12 +11,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
@@ -27,9 +29,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper
  * @author jorge.munoz
  *
  */
-public class PageFavoritos extends WebdrvWrapp {
+public class PageFavoritos extends PageObjTM {
   
-    private final WebDriver driver;
 	private final ModalFichaFavoritos modalFichaFavoritos;
     
     private final static String XPathBlockFavoritos = "//div[@data-pais and @class[contains(.,'favorites')]]";
@@ -43,7 +44,7 @@ public class PageFavoritos extends WebdrvWrapp {
     private final static String xPathUrlShareLabel = "//div[@id='linkShareButton']";
     
     private PageFavoritos(WebDriver driver) {
-    	this.driver = driver;
+    	super(driver);
     	this.modalFichaFavoritos = ModalFichaFavoritos.getNew(driver);
     }
     
@@ -93,57 +94,61 @@ public class PageFavoritos extends WebdrvWrapp {
     public void openShareModal() {
     	driver.findElement(By.xpath(xPathShareModalButton)).click();
     }
-    
-    public void closeShareModal() throws Exception {
-    	WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(xPathCloseShareModalButton), TypeOfClick.javascript);
-    }
-    
+
+	public void closeShareModal() {
+		click(By.xpath(xPathCloseShareModalButton)).type(javascript).exec();
+	}
+
     public boolean checkShareModalUntill(int maxSeconds) {
-    	return (isElementVisibleUntil(driver, By.xpath(xPathCloseShareModalButton), maxSeconds));
+    	return (state(Visible, By.xpath(xPathCloseShareModalButton), driver)
+    			.wait(maxSeconds).check());
     }
     
     public boolean isShareFavoritesVisible() {
-    	return (isElementVisible(driver, By.xpath(xPathShareModalButton)));
+    	return (state(Visible, By.xpath(xPathShareModalButton), driver).check());
     }
     
     public boolean isShareWhatsappFavoritesVisible() {
-    	return (isElementVisible(driver, By.xpath(xPathWhatsAppShareButton)));
+    	return (state(Visible, By.xpath(xPathWhatsAppShareButton), driver).check());
     }
     
     public boolean isShareTelegramFavoritesVisible() {
-    	return (isElementVisible(driver, By.xpath(xPathTelegramShareButton)));
+    	return (state(Visible, By.xpath(xPathTelegramShareButton), driver).check());
     }
     
     public boolean isShareUrlFavoritesVisible() {
-    	return (isElementVisible(driver, By.xpath(xPathUrlShareLabel)));
+    	return (state(Visible, By.xpath(xPathUrlShareLabel), driver).check());
     }
     
-    public boolean checkShareModalInvisible(int secondsToWait) {
-    	return (isElementInvisibleUntil(driver, By.xpath(xPathCloseShareModalButton), secondsToWait));
+    public boolean checkShareModalInvisible(int maxSeconds) {
+    	return (state(Invisible, By.xpath(xPathCloseShareModalButton), driver)
+    			.wait(maxSeconds).check());
     }
 
     public boolean isSectionVisible() {
-        return (isElementVisible(driver, By.xpath(XPathBlockFavoritos)));
+    	return (state(Visible, By.xpath(XPathBlockFavoritos), driver).check());
     }
     
-    public boolean isSectionArticlesVisibleUntil(int maxSecondsToWait) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathBlockFavWithArt), maxSecondsToWait));
+    public boolean isSectionArticlesVisibleUntil(int maxSeconds) {
+    	return (state(Visible, By.xpath(XPathBlockFavWithArt), driver)
+    			.wait(maxSeconds).check());
     }
     
-    public void clearArticuloAndWait(String refArticulo, String codColorArticulo) throws Exception {
+    public void clearArticuloAndWait(String refArticulo, String codColorArticulo) {
         String xpathBorrar = getXPathAspaBorrar(refArticulo, codColorArticulo);
         
         //Ejecutamos el click mediante JavaScript porque en el caso de móvil en ocasiones el aspa de cerrado queda por debajo de la cabecera
-        clickAndWaitLoad(driver, By.xpath(xpathBorrar), TypeOfClick.javascript);
+        click(By.xpath(xpathBorrar)).type(javascript).exec();
     }
     
-    public boolean isInvisibleArticleUntil(String referencia, String codColor, int maxSecondsToWait) {
+    public boolean isInvisibleArticleUntil(String referencia, String codColor, int maxSeconds) {
         String xpathArticulo = getXPathArticle(referencia, codColor);
-        return (isElementInvisibleUntil(driver, By.xpath(xpathArticulo), maxSecondsToWait));
+        return (state(Invisible, By.xpath(xpathArticulo), driver)
+        		.wait(maxSeconds).check());
     }
     
     @SuppressWarnings("static-access")
-    public void clearAllArticulos(Channel channel, AppEcom appE) throws Exception {
+    public void clearAllArticulos(Channel channel, AppEcom appE) {
         //Si la sección no es visible clickamos en favoritos
         if (!isSectionVisible()) {
         	SecMenusWrap secMenus = SecMenusWrap.getNew(channel, appE, driver);
@@ -157,7 +162,7 @@ public class PageFavoritos extends WebdrvWrapp {
     }
     
     public boolean hayArticulos() {
-        return (isElementPresent(driver, By.xpath(XPathArticulo)));
+    	return (state(Present, By.xpath(XPathArticulo), driver).check());
     }
     
     public boolean areVisibleArticlesUntil(DataFavoritos dataFavoritos, int maxSecondsToWait) {
@@ -176,19 +181,19 @@ public class PageFavoritos extends WebdrvWrapp {
         return true;
     }
     
-    public boolean isVisibleArticleUntil(String refArticulo, String codigoColor, int maxSecondsToWait) {
+    public boolean isVisibleArticleUntil(String refArticulo, String codigoColor, int maxSeconds) {
         String xpathArt = getXPathArticle(refArticulo, codigoColor);
-        return (isElementVisibleUntil(driver, By.xpath(xpathArt), maxSecondsToWait));
+        return (state(Visible, By.xpath(xpathArt), driver)
+        		.wait(maxSeconds).check());
     }
     
-    public void clear1rstArticuloAndWait() throws Exception {
+    public void clear1rstArticuloAndWait() {
         if (hayArticulos()) {
             String xpathArtWithIdItem = getXPathWithIdItem(1);
             
             //Ejecutamos el click mediante JavaScript porque en el caso de móvil en ocasiones el aspa de cerrado queda por debajo de la cabecera
-            clickAndWaitLoad(driver, By.xpath(xpathArtWithIdItem + "//span[@class[contains(.,'icofav-eliminar')]]"), TypeOfClick.javascript);
-            //driver.findElement(By.xpath(xpathArtWithIdItem + "//span[@class[contains(.,'icofav-eliminar')]]")).click();
-            
+            By byElem = By.xpath(xpathArtWithIdItem + "//span[@class[contains(.,'icofav-eliminar')]]");
+            click(byElem).type(javascript).exec();
             new WebDriverWait(driver, 3).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpathArtWithIdItem)));
         }
     }
@@ -233,7 +238,7 @@ public class PageFavoritos extends WebdrvWrapp {
         List<WebElement> listTallas = getListaTallas(refProducto, codigoColor);
         List<WebElement> listTallasAvailable = new ArrayList<>();
         for (WebElement talla : listTallas) {
-            if (!isElementPresent(talla, By.xpath("./span"))) {
+        	if (!state(Present, By.xpath("./span"), driver).check()) {
                 listTallasAvailable.add(talla);
             }
         }
@@ -250,6 +255,6 @@ public class PageFavoritos extends WebdrvWrapp {
     }
     
     public boolean isVisibleButtonEmpty() {
-        return (isElementVisible(driver, By.xpath(XPathButtonEmpty)));
+    	return (state(Visible, By.xpath(XPathButtonEmpty), driver).check());
     }
 }

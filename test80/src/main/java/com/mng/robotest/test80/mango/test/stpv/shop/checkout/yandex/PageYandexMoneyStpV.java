@@ -36,7 +36,7 @@ public class PageYandexMoneyStpV {
 	@Step (
 		description="Introducimos el paymentCode <b>#{paymentCode}</b>, el importe <b>#{importe}</b> y pulsamos el botón de Pago", 
         expected="Aparece la página de resultado del pago a nivel de Yandex")
-    public static void inputDataAndPay(String paymentCode, String importe, WebDriver driver) throws Exception {
+    public static void inputDataAndPay(String paymentCode, String importe, WebDriver driver) {
         PageYandexMoney.inputPaymentCode(paymentCode, driver);
         PageYandexMoney.inputImport(importe, driver);
         PageYandexMoney.clickPayButton(driver);

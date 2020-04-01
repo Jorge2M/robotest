@@ -7,11 +7,11 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.testmaker.testreports.html.ResultadoErrores;
 import com.mng.robotest.test80.mango.test.pageobject.shop.AllPages;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.DataBanner;
@@ -42,7 +42,7 @@ public class SecBannersStpV {
 			boolean makeValidations = true;
 			seleccionarBanner(posBanner, makeValidations, dCtxSh.appE, dCtxSh.channel);
 			driver.get(urlPagPrincipal);
-			WebdrvWrapp.waitForPageLoaded(driver);
+			SeleniumUtils.waitForPageLoaded(driver);
 			managerBannersScreen.reloadBanners(driver); //For avoid StaleElement Exception
 			sizeListBanners = managerBannersScreen.getListDataBanners().size();
 		}
@@ -89,16 +89,16 @@ public class SecBannersStpV {
     public ChecksTM validacionesGeneralesBanner(String urlPagPadre, URI uriPagPadre, int elementosPagPadre) 
     throws Exception {
     	ChecksTM validations = ChecksTM.getNew();
-    	int maxSecondsWait1 = 3;
+    	int maxSeconds1 = 3;
     	int marginElements = 3;
-    	int maxSecondsWait2 = 1;
+    	int maxSeconds2 = 1;
 	 	validations.add(
-	 		"La URL de la página cambia (lo esperamos hasta un máximo de " + maxSecondsWait1 + " segundos)",
-	 		AllPages.validateUrlNotMatchUntil(urlPagPadre, maxSecondsWait1, driver), State.Defect);    
+	 		"La URL de la página cambia (lo esperamos hasta un máximo de " + maxSeconds1 + " segundos)",
+	 		AllPages.validateUrlNotMatchUntil(urlPagPadre, maxSeconds1, driver), State.Defect);    
 	 	validations.add(
 	 		"La página cambia; el número de elementos DOM ha variado (en " + marginElements + " o más) " + 
 	 		"con respecto al original (" + elementosPagPadre + ")",
-	 		AllPages.validateElementsNotEqualsUntil(elementosPagPadre, marginElements, maxSecondsWait2, driver), State.Warn); 
+	 		AllPages.validateElementsNotEqualsUntil(elementosPagPadre, marginElements, maxSeconds2, driver), State.Warn); 
 	 	
 	 	int maxErrors = 1;
         ResultadoErrores resultadoImgs = WebDriverMngUtils.imagesBroken(driver, Channel.desktop, maxErrors);

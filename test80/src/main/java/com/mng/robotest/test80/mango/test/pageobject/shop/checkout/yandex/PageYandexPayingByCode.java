@@ -5,10 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageYandexPayingByCode extends WebdrvWrapp {
+public class PageYandexPayingByCode {
     
     static String XPathDivPaymentCode = "//div[@class[contains(.,'payment-code-wrapper')]]";
     static String XPathPaymentCode = XPathDivPaymentCode + "//div[@class[contains(.,'payment-code-value')]]";
@@ -30,26 +31,26 @@ public class PageYandexPayingByCode extends WebdrvWrapp {
     }
     
     public static boolean isPage(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathDivPaymentCode)));
+    	return (state(Visible, By.xpath(XPathDivPaymentCode), driver).check());
     }
         
     public static boolean isVisibleEmail(String emailUsr, WebDriver driver) {
         String xpathEmail = getXPathDataUnitThatContains(emailUsr);
-        return (isElementVisible(driver, By.xpath(xpathEmail)));
+        return (state(Visible, By.xpath(xpathEmail), driver).check());
     }
     
     public static boolean isPresentEmail(String emailUsr, WebDriver driver) {
         String xpathEmail = getXPathDataUnitThatContains(emailUsr);
-        return (isElementPresent(driver, By.xpath(xpathEmail)));
+        return (state(Present, By.xpath(xpathEmail), driver).check());
     }    
-    
-    public static void clickBackToMango(Channel channel, WebDriver driver) throws Exception {
-        String xpathBackToMango = getXPathBackToMangoLink(channel);
-        clickAndWaitLoad(driver, By.xpath(xpathBackToMango));
-    }
+
+	public static void clickBackToMango(Channel channel, WebDriver driver) {
+		String xpathBackToMango = getXPathBackToMangoLink(channel);
+		click(By.xpath(xpathBackToMango), driver).exec();
+	}
 
     public static boolean isVisiblePaymentCode(WebDriver driver) {
-        return isElementVisible(driver, By.xpath(XPathPaymentCode));
+    	return (state(Visible, By.xpath(XPathPaymentCode), driver).check());
     }
     
     public static String getPaymentCode(WebDriver driver) {

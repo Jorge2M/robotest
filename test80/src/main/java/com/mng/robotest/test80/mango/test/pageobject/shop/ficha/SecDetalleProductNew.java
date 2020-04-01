@@ -3,7 +3,9 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.ficha;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 
 /**
  * SectionObject de la ficha nueva correspondiente al bloque al que se scrolla cuando se selecciona el link "Detalle del producto"
@@ -12,7 +14,7 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
  *
  */
 
-public class SecDetalleProductNew extends WebdrvWrapp {
+public class SecDetalleProductNew {
 
     public enum ItemBreadcrumb {linea, grupo, galeria}
     
@@ -40,21 +42,23 @@ public class SecDetalleProductNew extends WebdrvWrapp {
         }
     }
     
-    public static boolean isVisibleUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathWrapper), maxSecondsToWait));
+    public static boolean isVisibleUntil(int maxSeconds, WebDriver driver) {
+    	return (state(Visible, By.xpath(XPathWrapper), driver)
+    			.wait(maxSeconds).check());
     }
     
-    public static boolean isVisibleBreadcrumbs(int maxSecondsToWait, WebDriver driver) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathBreadCrumbs), maxSecondsToWait));
+    public static boolean isVisibleBreadcrumbs(int maxSeconds, WebDriver driver) {
+    	return (state(Visible, By.xpath(XPathBreadCrumbs), driver)
+    			.wait(maxSeconds).check());
     }
     
     public static boolean isVisibleItemBreadCrumb(ItemBreadcrumb itemBCrumb, WebDriver driver) {
         String xpathItem = getXPathBreadcrumbItemLink(itemBCrumb);
-        return (isElementVisible(driver, By.xpath(xpathItem)));
+        return (state(Visible, By.xpath(xpathItem), driver).check());
     }
     
     public static boolean isVisibleBlockKcSafety(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathBlockKcSafety)));
+    	return (state(Visible, By.xpath(XPathBlockKcSafety), driver).check());
     }
     
 }

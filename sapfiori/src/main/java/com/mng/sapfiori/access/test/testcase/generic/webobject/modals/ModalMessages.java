@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.sapfiori.access.test.testcase.generic.webobject.utils.PageObject;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class ModalMessages extends PageObject {
 
@@ -22,6 +23,6 @@ public class ModalMessages extends PageObject {
 	}
 	
 	public boolean isVisibleUntil(int maxSeconds) {
-		return isElementVisibleUntil(driver, By.xpath(XPathModal), maxSeconds);
+		return (state(Visible, By.xpath(XPathModal)).wait(maxSeconds).check());
 	}
 }

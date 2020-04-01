@@ -12,9 +12,11 @@ import org.testng.ITestContext;
 
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class AllPages extends WebdrvWrapp {
+public class AllPages {
+	
     static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
     public static final String XPath_tagCanonical = "//link[@rel='canonical']";
@@ -23,14 +25,14 @@ public class AllPages extends WebdrvWrapp {
     public static String getXPathMainContent(Pais pais) {
         return ("//div[@class[contains(.,'main-content')] and @data-pais='" + pais.getCodigo_pais() + "']");
     }
-    
-    public static boolean isPresentTagCanonical(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPath_tagCanonical)));    
-    }
-    
-    public static boolean isPresentTagRobots(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPath_tagRobots)));    
-    }
+
+	public static boolean isPresentTagCanonical(WebDriver driver) {
+		return (state(Present, By.xpath(XPath_tagCanonical), driver).check());
+	}
+
+	public static boolean isPresentTagRobots(WebDriver driver) {
+		return (state(Present, By.xpath(XPath_tagRobots), driver).check());
+	}
 
     public static WebElement getTagCanonincal(WebDriver driver) {
         return (driver.findElement(By.xpath(XPath_tagCanonical)));
@@ -44,16 +46,18 @@ public class AllPages extends WebdrvWrapp {
         
         return urlTagCanonical;
     }
-    
-    public static boolean isPresentElementWithTextUntil(String text, int maxSecondsToWait, WebDriver driver) {
-        return (isElementPresentUntil(driver, By.xpath("//*[text()[contains(.,'" + text + "')]]"), maxSecondsToWait));
-    }
-    
-    public static boolean isCodLiteralSinTraducir(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath("//*[text()[contains(.,'???')]]")));
-    }
-    
-    public static boolean validateUrlNotMatchUntil(String url, int maxSecondsWait, WebDriver driver) throws Exception {
+
+	public static boolean isPresentElementWithTextUntil(String text, int maxSeconds, WebDriver driver) {
+		String xpath = "//*[text()[contains(.,'" + text + "')]]";
+		return (state(Present, By.xpath(xpath), driver).wait(maxSeconds).check());
+	}
+
+	public static boolean isCodLiteralSinTraducir(WebDriver driver) {
+		String xpath = "//*[text()[contains(.,'???')]]";
+		return (state(Present, By.xpath(xpath), driver).check());
+	}
+
+    public static boolean validateUrlNotMatchUntil(String url, int maxSeconds, WebDriver driver) throws Exception {
     	int seconds = 0;
     	do {
     		if (url.compareTo(driver.getCurrentUrl())!=0) {
@@ -62,11 +66,11 @@ public class AllPages extends WebdrvWrapp {
     		Thread.sleep(1000);
     		seconds+=1;
     	}
-    	while (seconds<maxSecondsWait);
+    	while (seconds<maxSeconds);
     	return false;
     }
     
-    public static boolean validateElementsNotEqualsUntil(int elementosPagina, int margin, int maxSecondsWait, WebDriver driver) 
+    public static boolean validateElementsNotEqualsUntil(int elementosPagina, int margin, int maxSeconds, WebDriver driver) 
     throws Exception {
     	int seconds = 0;
     	do {
@@ -76,7 +80,7 @@ public class AllPages extends WebdrvWrapp {
     		Thread.sleep(1000);
     		seconds+=1;
     	}
-    	while (seconds<maxSecondsWait);
+    	while (seconds<maxSeconds);
     	return false;
     }
 
@@ -179,12 +183,12 @@ public class AllPages extends WebdrvWrapp {
         }
         return malicious;
     }
-    
-    public static boolean isPresentMainContent(Pais pais, WebDriver driver) {
-        String xpathMainContent = getXPathMainContent(pais);
-        return (isElementPresent(driver, By.xpath(xpathMainContent)));
-    }
-    
+
+	public static boolean isPresentMainContent(Pais pais, WebDriver driver) {
+		String xpathMainContent = getXPathMainContent(pais);
+		return (state(Present, By.xpath(xpathMainContent), driver).check());
+	}
+
     public static boolean isTitleAssociatedToMenu(String menuName, WebDriver driver) {
         String titlePage = driver.getTitle();
         if (titlePage.toLowerCase().contains(menuName.toLowerCase())) {

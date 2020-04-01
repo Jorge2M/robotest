@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageComoMedirme;
 
 public class PageComoMedirmeStpV {

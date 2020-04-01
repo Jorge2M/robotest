@@ -3,11 +3,16 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.footer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class PageFormasDePago extends WebdrvWrapp implements PageFromFooter {
+public class PageFormasDePago extends PageObjTM implements PageFromFooter {
 	
 	final String XPathForIdPage = "//*[text()[contains(.,'Métodos de pago')]]";
+	
+	public PageFormasDePago(WebDriver driver) {
+		super(driver);
+	}
 	
 	@Override
 	public String getName() {
@@ -15,7 +20,7 @@ public class PageFormasDePago extends WebdrvWrapp implements PageFromFooter {
 	}
 	
 	@Override
-	public boolean isPageCorrectUntil(int maxSecondsWait, WebDriver driver) {
-		return (isElementPresentUntil(driver, By.xpath(XPathForIdPage), maxSecondsWait));
+	public boolean isPageCorrectUntil(int maxSeconds) {
+		return (state(Present, By.xpath(XPathForIdPage)).wait(maxSeconds).check());
 	}
 }

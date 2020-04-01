@@ -3,17 +3,20 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paypal;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class ModalPreloaderSpinner extends WebdrvWrapp {
+public class ModalPreloaderSpinner {
 	
     private final static String XPathPreloaderSpinner = "//div[@id='preloaderSpinner']";
 
-    public static boolean isVisibleUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathPreloaderSpinner), maxSecondsToWait));
+    public static boolean isVisibleUntil(int maxSeconds, WebDriver driver) {
+    	return (state(Visible, By.xpath(XPathPreloaderSpinner), driver)
+    			.wait(maxSeconds).check());
     }
     
-    public static boolean isNotVisibleUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementInvisibleUntil(driver, By.xpath(XPathPreloaderSpinner), maxSecondsToWait));
+    public static boolean isNotVisibleUntil(int maxSeconds, WebDriver driver) {
+    	return (state(Invisible, By.xpath(XPathPreloaderSpinner), driver)
+    			.wait(maxSeconds).check());
     }
 }

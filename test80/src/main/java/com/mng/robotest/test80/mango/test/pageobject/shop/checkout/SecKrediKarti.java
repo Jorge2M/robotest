@@ -3,8 +3,8 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.pci.SecTarjetaPciInIframe;
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class SecKrediKarti extends SecTarjetaPciInIframe {
 
@@ -48,19 +48,19 @@ public class SecKrediKarti extends SecTarjetaPciInIframe {
     	return ("(" + getXPathRadioPagoPlazo() + ")[" + numRadio + "]");
     }
 
-    public boolean isVisiblePagoAPlazoUntil(int maxSecondsWait) {
-    	goToIframe();
-        String xpathCapaPlazo = getXPathCapaPagoPlazo();
-        boolean result = (isElementVisibleUntil(driver, By.xpath(xpathCapaPlazo), maxSecondsWait));
-        leaveIframe();
-        return result;
-    }
-    
-    public void clickRadioPagoAPlazo(int numRadio) throws Exception {
-    	goToIframe();
-    	By radioBy = By.xpath(getXPathRadioPagoAPlazo(numRadio));
-    	WebdrvWrapp.clickAndWaitLoad(driver, radioBy);
-    	WebdrvWrapp.clickAndWaitLoad(driver, radioBy);
-        leaveIframe();
-    }
+	public boolean isVisiblePagoAPlazoUntil(int maxSeconds) {
+		goToIframe();
+		String xpathCapaPlazo = getXPathCapaPagoPlazo();
+		boolean result = state(Visible, By.xpath(xpathCapaPlazo), driver).wait(maxSeconds).check();
+		leaveIframe();
+		return result;
+	}
+
+	public void clickRadioPagoAPlazo(int numRadio) throws Exception {
+		goToIframe();
+		By radioBy = By.xpath(getXPathRadioPagoAPlazo(numRadio));
+		click(radioBy).exec();
+		click(radioBy).exec();
+		leaveIframe();
+	}
 }

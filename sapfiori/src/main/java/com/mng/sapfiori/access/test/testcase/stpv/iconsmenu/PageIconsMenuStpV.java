@@ -39,7 +39,7 @@ public class PageIconsMenuStpV {
 	@Step (
 		description="Seleccionar el option <b>Clasificar Productos</b>",
 		expected="Aparece la página para clasificar los productos")
-	public PageSelProdsToReclassifyStpV clickClasificarProductos() throws Exception {
+	public PageSelProdsToReclassifyStpV clickClasificarProductos() {
 		PageSelProdsToReclassifyStpV pageClassifProductosStpV = PageSelProdsToReclassifyStpV.getNew(
 			pageIconsMenu.clickClasificarProductos());
 		
@@ -50,7 +50,7 @@ public class PageIconsMenuStpV {
 	@Step (
 		description="Seleccionar el option <b>Manage Purchase Requisitions (Buyer)</b>",
 		expected="Aparece la página correcta")
-	public PageGestionSolPedidoBuyerStpV clickManagePurchaseRequisitionsBuyer() throws Exception {
+	public PageGestionSolPedidoBuyerStpV clickManagePurchaseRequisitionsBuyer() {
 		PageGestionSolPedidoBuyerStpV pageGestionPedidoStpV = PageGestionSolPedidoBuyerStpV.getNew(
 			pageIconsMenu.clickManagePurchaseRequisitionsBuyer());
 		

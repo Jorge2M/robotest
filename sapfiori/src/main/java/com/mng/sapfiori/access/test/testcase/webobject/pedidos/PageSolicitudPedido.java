@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.elements.inputs.select.SelectEstandard;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.utils.PageObject;
 
+import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 public class PageSolicitudPedido extends PageObject {
 
 	public final static String TitlePage = "Solicitud de pedido";
@@ -36,7 +38,7 @@ public class PageSolicitudPedido extends PageObject {
 	}
 	
 	public boolean checkIsPage(int maxSeconds) {
-		return (isElementVisibleUntil(driver, By.xpath(XPathTitle), maxSeconds));
+		return (state(Visible, By.xpath(XPathTitle)).wait(maxSeconds).check());
 	}
 	
 	public void inputInfoGeneral(InfoGeneralSolPedido infoGeneral) {
@@ -81,7 +83,7 @@ public class PageSolicitudPedido extends PageObject {
 	throws Exception {
 		waitForPageFinished();
 		String xpathInput = getXPathInput1rstPedidoWithValue(inputPage, value);
-		return PageObject.isElementPresentUntil(driver, By.xpath(xpathInput), maxSeconds);
+		return (state(Present, By.xpath(xpathInput)).wait(maxSeconds).check());
 	}
 	
 	public void inputFielValuedIn1rstLinePedidos(InputFieldPedido inputPage, String value) throws Exception {
@@ -92,7 +94,7 @@ public class PageSolicitudPedido extends PageObject {
 	}
 	
 	private final static String XPathButtonGuardar = "//button[@id[contains(.,'-activate')]]";
-	public void clickButtonGuardar() throws Exception {
+	public void clickButtonGuardar() {
 		clickAndWaitLoad(By.xpath(XPathButtonGuardar));
 	}
 }

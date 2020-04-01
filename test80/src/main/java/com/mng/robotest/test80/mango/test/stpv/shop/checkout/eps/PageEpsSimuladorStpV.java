@@ -23,11 +23,11 @@ public class PageEpsSimuladorStpV {
     public static void selectDelay(TypeDelay typeDelay, WebDriver driver) {
 		PageEpsSimulador.selectDelayAuthorised(typeDelay, driver);
     }
-    
+
 	@Step (
 		description="Seleccionar el botón \"pending > autrhorised\"", 
-        expected="El pago se realiza correctamente")
-    public static void clickContinueButton(WebDriver driver) throws Exception {
+		expected="El pago se realiza correctamente")
+	public static void clickContinueButton(WebDriver driver) {
 		PageEpsSimulador.clickButtonContinue(driver);
-    }
+	}
 }
