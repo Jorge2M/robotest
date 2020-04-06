@@ -2,8 +2,9 @@ package com.mng.robotest.test80.mango.test.appshop;
 
 import org.testng.annotations.*;
 
-import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -82,7 +83,7 @@ public class Favoritos implements Serializable {
 		groups={"Favoritos", "Canal:all_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="[Usuario registrado] Alta favoritos desde la galería")
 	public void FAV001_AltaFavoritosDesdeGaleria() throws Exception {
-		TestMaker.getTestCase().setSpecificInputData(this.index_fact);
+		TestCaseTM.addNameSufix(this.index_fact);
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
 
@@ -126,7 +127,7 @@ public class Favoritos implements Serializable {
 		groups={"Favoritos", "Canal:all_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="[Usuario no registrado] Alta favoritos desde la galería y posterior identificación")
 	public void FAV002_AltaFavoritosDesdeFicha() throws Exception {
-		TestMaker.getTestCase().setSpecificInputData(this.index_fact);
+		TestCaseTM.addNameSufix(this.index_fact);
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
 		dCtxSh.userRegistered=false;

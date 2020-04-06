@@ -6,9 +6,9 @@ import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.sapfiori.access.test.testcase.script.Piloto;
 import com.mng.sapfiori.access.test.testcase.script.SolicitudPedido;
-import com.mng.testmaker.domain.InputParamsTM;
-import com.mng.testmaker.domain.SuiteMaker;
-import com.mng.testmaker.domain.TestRunMaker;
+import com.github.jorge2m.testmaker.domain.InputParamsTM;
+import com.github.jorge2m.testmaker.domain.SuiteMaker;
+import com.github.jorge2m.testmaker.domain.TestRunMaker;
 
 public class SmokeTestSuite extends SuiteMaker {
 

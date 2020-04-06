@@ -12,7 +12,7 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsS
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.eps.PageEpsSelBancoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.eps.PageEpsSimuladorStpV;
-import com.mng.testmaker.conf.Log4jConfig;
+import com.github.jorge2m.testmaker.conf.Log4jConfig;
 
 public class PagoEps extends PagoStpV {
     static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);

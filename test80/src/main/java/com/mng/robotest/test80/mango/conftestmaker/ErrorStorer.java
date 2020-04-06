@@ -8,13 +8,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.domain.InputParamsTM;
-import com.mng.testmaker.domain.suitetree.StepTM;
-import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
-import com.mng.testmaker.testreports.stepstore.EvidenceStorer;
-import com.mng.testmaker.testreports.stepstore.StepEvidence;
+import com.github.jorge2m.testmaker.conf.Log4jConfig;
+import com.github.jorge2m.testmaker.domain.InputParamsTM;
+import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
+import com.github.jorge2m.testmaker.testreports.stepstore.EvidenceStorer;
+import com.github.jorge2m.testmaker.testreports.stepstore.StepEvidence;
 
 public class ErrorStorer extends EvidenceStorer {
 

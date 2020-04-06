@@ -1,8 +1,8 @@
 <%response.setHeader("Cache-Control","no-cache");
 response.setHeader("Pragma","no-cache");
 response.setDateHeader ("Expires", -1);%>
-<%@ page import="com.mng.testmaker.service.TestMaker" %>
-<%@ page import="com.mng.testmaker.domain.StateExecution" %>
+<%@ page import="com.github.jorge2m.testmaker.service.TestMaker" %>
+<%@ page import="com.github.jorge2m.testmaker.domain.StateExecution" %>
 <%@ page language="java" contentType="text/html" %>
 <%@page session="false"%>
 <%

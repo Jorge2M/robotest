@@ -3,10 +3,10 @@ package com.mng.robotest.test80.access.rest;
 import com.mng.robotest.test80.access.CreatorSuiteRunMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Suites;
-import com.mng.testmaker.boundary.access.ServerCmdLine;
-import com.mng.testmaker.boundary.access.ServerCmdLine.ResultCmdServer;
-import com.mng.testmaker.domain.CreatorSuiteRun;
-import com.mng.testmaker.restcontroller.ServerRestTM;
+import com.github.jorge2m.testmaker.boundary.access.ServerCmdLine;
+import com.github.jorge2m.testmaker.boundary.access.ServerCmdLine.ResultCmdServer;
+import com.github.jorge2m.testmaker.domain.CreatorSuiteRun;
+import com.github.jorge2m.testmaker.restcontroller.ServerRestTM;
 
 //For renewal robotest.pro.mango.com certificate manually:
 //-> Execute Powershell with Administrator Privileges

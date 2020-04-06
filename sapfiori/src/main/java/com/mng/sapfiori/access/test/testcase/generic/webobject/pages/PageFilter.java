@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.sapfiori.access.test.testcase.generic.webobject.utils.PageObject;
 import com.mng.sapfiori.access.test.testcase.webobject.iconsmenu.OptionMenu;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public abstract class PageFilter extends PageObject {
 

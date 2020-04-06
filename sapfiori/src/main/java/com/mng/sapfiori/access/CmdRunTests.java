@@ -2,9 +2,9 @@ package com.mng.sapfiori.access;
 
 import com.mng.sapfiori.access.datatmaker.Apps;
 import com.mng.sapfiori.access.datatmaker.Suites;
-import com.mng.testmaker.boundary.access.CmdLineMaker;
-import com.mng.testmaker.domain.CreatorSuiteRun;
-import com.mng.testmaker.domain.InputParamsBasic;
+import com.github.jorge2m.testmaker.boundary.access.CmdLineMaker;
+import com.github.jorge2m.testmaker.domain.CreatorSuiteRun;
+import com.github.jorge2m.testmaker.domain.InputParamsBasic;
 
 public class CmdRunTests {
 

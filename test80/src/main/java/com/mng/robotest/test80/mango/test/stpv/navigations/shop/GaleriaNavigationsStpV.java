@@ -8,7 +8,7 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.ModalArticleNotAvailableStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
-import com.mng.testmaker.conf.Log4jConfig;
+import com.github.jorge2m.testmaker.conf.Log4jConfig;
 
 public class GaleriaNavigationsStpV {
 

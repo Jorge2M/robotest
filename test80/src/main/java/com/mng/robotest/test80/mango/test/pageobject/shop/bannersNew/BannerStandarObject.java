@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
-import com.mng.testmaker.domain.suitetree.TestCaseTM;
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 
 public class BannerStandarObject extends BannerObject {
 

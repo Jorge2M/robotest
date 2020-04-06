@@ -18,7 +18,7 @@ import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Continente;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Response;
-import com.mng.testmaker.conf.Log4jConfig;
+import com.github.jorge2m.testmaker.conf.Log4jConfig;
 
 public class PaisGetter {
 

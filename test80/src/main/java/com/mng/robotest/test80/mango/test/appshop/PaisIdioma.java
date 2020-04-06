@@ -2,9 +2,10 @@ package com.mng.robotest.test80.mango.test.appshop;
 
 import org.testng.annotations.*;
 
-import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.Log4jConfig;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Log4jConfig;
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -94,7 +95,7 @@ public class PaisIdioma implements Serializable {
     public void PAR001_Lineas() throws Exception {
     	beforeMethod();
     	WebDriver driver = TestMaker.getDriverTestCase();
-    	TestMaker.getTestCase().setSpecificInputData(index_fact);
+		TestCaseTM.addNameSufix(this.index_fact);
     	
         PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, driver);
         PageHomeMarcasStpV.validateIsPageWithCorrectLineas(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver);

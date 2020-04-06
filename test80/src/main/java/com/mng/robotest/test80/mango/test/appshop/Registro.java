@@ -10,8 +10,9 @@ import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Constantes.ThreeState;
-import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.domain.InputParamsTM.TypeAccess;
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -87,7 +88,7 @@ public class Registro implements Serializable {
     public void REG001_RegistroNOK() throws Exception {
     	DataCtxShop dCtxSh = getCtxShForTest();
     	WebDriver driver = TestMaker.getDriverTestCase();
-    	TestMaker.getTestCase().setSpecificInputData(index_fact);
+		TestCaseTM.addNameSufix(this.index_fact);
         dCtxSh.userRegistered = false;
         if (dCtxSh.appE==AppEcom.votf) {
             return;
@@ -133,7 +134,7 @@ public class Registro implements Serializable {
     public void REG002_RegistroOK_publi() throws Exception {
     	DataCtxShop dCtxSh = getCtxShForTest();
     	WebDriver driver = TestMaker.getDriverTestCase();
-    	TestMaker.getTestCase().setSpecificInputData(index_fact);
+		TestCaseTM.addNameSufix(this.index_fact);
     	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
         if (inputParamsSuite.getTypeAccess()==TypeAccess.Bat) {
             return;
@@ -152,7 +153,7 @@ public class Registro implements Serializable {
         groups={"Registro", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
         description="Alta/Registro de un usuario (sin seleccionar el link de publicidad)")
     public void REG003_RegistroOK_NoPubli() throws Exception {
-    	TestMaker.getTestCase().setSpecificInputData(index_fact);
+		TestCaseTM.addNameSufix(this.index_fact);
     	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
         if (inputParamsSuite.getTypeAccess()==TypeAccess.Bat) {
             return; 

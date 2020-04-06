@@ -10,12 +10,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//import com.mng.testmaker.listeners.CallBack;
-import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
+//import com.github.jorge2m.testmaker.listeners.CallBack;
+import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.test.data.Constantes;
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.domain.TestRunMaker;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.domain.TestRunMaker;
 
 public class SuiteMakerResources {
     

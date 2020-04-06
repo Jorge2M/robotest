@@ -6,11 +6,11 @@
 	<version>1.0</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>testmaker</module>
+		<module>testmaker0</module>
 		<module>test80</module>
 		<module>webmngtest</module>
 		<module>sapfiori</module>
-		<module>archetype</module>
+		<module>archetype0</module>
   </modules>
 
 	<properties>

@@ -6,8 +6,9 @@ import java.io.Serializable;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -77,7 +78,7 @@ public class RebajasJun2019 implements Serializable {
     	   description="Validaciones específicas correspondientes a las Rebajas de Diciembre-2017")
     public void REB001_RebajasDic2019() throws Exception {
     	setInputParamsSuite();
-    	TestMaker.getTestCase().setSpecificInputData(index_fact);
+		TestCaseTM.addNameSufix(this.index_fact);
     	WebDriver driver = TestMaker.getDriverTestCase();
         DataCtxShop dCtxSh = getCtxShForTest();
         int numLineasPais = dCtxSh.pais.getShoponline().getNumLineasTiendas(dCtxSh.appE);

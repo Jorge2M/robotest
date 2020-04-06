@@ -6,11 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
-import com.mng.testmaker.conf.Channel;
-//import com.mng.testmaker.domain.InputParamsTM;
-import com.mng.testmaker.domain.suitetree.TestCaseTM;
-import com.mng.testmaker.domain.suitetree.TestRunTM;
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.conf.Channel;
+//import com.github.jorge2m.testmaker.domain.InputParamsTM;
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
+import com.github.jorge2m.testmaker.domain.suitetree.TestRunTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.stpv.manto.DataMantoAccess;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageLoginMantoStpV;
@@ -54,7 +54,7 @@ public class Menus implements Serializable {
 		groups={"Menus", "Canal:desktop_App:all"},
 		description="Consulta de menús")
 	public void MAN005_ConsultaMenus() throws Exception {
-		TestMaker.getTestCase().setSpecificInputData(this.index_fact);
+		TestCaseTM.addNameSufix(this.index_fact);
 		DataMantoAccess dMantoAcc = getDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
 		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);

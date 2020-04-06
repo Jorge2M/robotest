@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 import com.mng.sapfiori.access.datatmaker.Suites;
 import com.mng.sapfiori.access.test.suite.SmokeTestSuite;
-import com.mng.testmaker.domain.CreatorSuiteRun;
-import com.mng.testmaker.domain.InputParamsBasic;
-import com.mng.testmaker.domain.SuiteMaker;
+import com.github.jorge2m.testmaker.domain.CreatorSuiteRun;
+import com.github.jorge2m.testmaker.domain.InputParamsBasic;
+import com.github.jorge2m.testmaker.domain.SuiteMaker;
 
 public class CreatorSuiteRunSapFiori extends CreatorSuiteRun {
 

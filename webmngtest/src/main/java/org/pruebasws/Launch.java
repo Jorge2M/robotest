@@ -13,7 +13,7 @@ package org.pruebasws;
 import org.pruebasws.thread.TSuiteThreadsManager;
 import org.testng.TestNG;
 
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.service.TestMaker;
 
 
 /**

@@ -2,9 +2,9 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.pci.SecTarjetaPciInIframe;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class SecKrediKarti extends SecTarjetaPciInIframe {
 

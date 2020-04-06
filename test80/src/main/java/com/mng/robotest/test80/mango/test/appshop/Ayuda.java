@@ -9,7 +9,7 @@ import com.mng.robotest.test80.mango.test.stpv.ayuda.AyudaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.service.TestMaker;
 
 import org.openqa.selenium.WebDriver;
 

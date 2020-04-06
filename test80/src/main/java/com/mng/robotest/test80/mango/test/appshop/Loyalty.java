@@ -12,7 +12,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.loyalty.PageRegalarMisLikesS
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;

@@ -8,8 +8,9 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
-import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -108,7 +109,7 @@ public class CompraFact implements Serializable {
         groups={"Compra", "Canal:all_App:all"}, alwaysRun=true, priority=1, 
         description="Test de compra (creado desde Factoría) con valores específicos a nivel de Pago, Tipo de Envío, Usuario Conectado y Empleado")
     public void COM010_Pago() throws Exception {
-    	TestMaker.getTestCase().setSpecificInputData(this.index_fact);
+		TestCaseTM.addNameSufix(this.index_fact);
     	WebDriver driver = TestMaker.getDriverTestCase();
         DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userRegistered = this.usrRegistrado;

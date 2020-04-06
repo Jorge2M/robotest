@@ -18,12 +18,12 @@ response.setDateHeader ("Expires", -1);
 <%@ page import="java.util.TreeSet"%>
 <%@ page import="com.mng.robotest.test80.access.CmdRunTests"%>
 <%@ page import="com.mng.robotest.test80.access.InputParamsMango"%>
-<%@ page import="com.mng.testmaker.boundary.access.CmdLineMaker"%>
-<%@ page import="com.mng.testmaker.domain.InputParamsTM"%>
+<%@ page import="com.github.jorge2m.testmaker.boundary.access.CmdLineMaker"%>
+<%@ page import="com.github.jorge2m.testmaker.domain.InputParamsTM"%>
 <%@ page import="com.mng.robotest.test80.access.InputParamsMango" %>
-<%@ page import="com.mng.testmaker.domain.testfilter.TestMethod"%>
-<%@ page import="com.mng.testmaker.domain.testfilter.FilterTestsSuiteXML"%>
-<%@ page import="com.mng.testmaker.domain.util.TestNameUtils"%>
+<%@ page import="com.github.jorge2m.testmaker.domain.testfilter.TestMethod"%>
+<%@ page import="com.github.jorge2m.testmaker.domain.testfilter.FilterTestsSuiteXML"%>
+<%@ page import="com.github.jorge2m.testmaker.domain.util.TestNameUtils"%>
 <%@ page import="com.mng.robotest.test80.mango.conftestmaker.AppEcom" %>
 <%@ page import="com.mng.robotest.test80.mango.conftestmaker.Suites" %>
 

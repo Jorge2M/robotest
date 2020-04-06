@@ -10,8 +10,8 @@ response.setDateHeader ("Expires", -1);%>
 <body>
 	<%@ page import="com.mng.robotest.test80.access.CmdRunTests" %>
 	<%@ page import="com.mng.robotest.test80.access.InputParamsMango" %>
-	<%@ page import="com.mng.testmaker.domain.InputParamsTM" %>
-	<%@ page import="com.mng.testmaker.boundary.access.CmdLineMaker"%>
+	<%@ page import="com.github.jorge2m.testmaker.domain.InputParamsTM" %>
+	<%@ page import="com.github.jorge2m.testmaker.boundary.access.CmdLineMaker"%>
 	<%@ page import="java.io.BufferedReader" %>
 	<%@ page import="javax.servlet.ServletContext" %>
 	<%@ page import="java.io.InputStreamReader" %>
@@ -20,8 +20,8 @@ response.setDateHeader ("Expires", -1);%>
 	<%@ page import="com.mng.robotest.test80.access.CallBack" %>
 	<%@ page import="com.mng.robotest.test80.mango.conftestmaker.Suites" %>
 	<%@ page import="com.mng.robotest.test80.mango.conftestmaker.AppEcom" %>
-	<%@ page import="com.mng.testmaker.service.TestMaker" %>
-	<%@ page import="com.mng.testmaker.domain.suitetree.SuiteTM" %>
+	<%@ page import="com.github.jorge2m.testmaker.service.TestMaker" %>
+	<%@ page import="com.github.jorge2m.testmaker.domain.suitetree.SuiteTM" %>
 
 	<style>
 	body {

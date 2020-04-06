@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.footer;
 
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Channel;
 
 import org.openqa.selenium.WebDriver;
 

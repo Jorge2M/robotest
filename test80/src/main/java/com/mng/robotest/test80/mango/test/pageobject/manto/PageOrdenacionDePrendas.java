@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.manto;
 
 import org.openqa.selenium.By;
 
-import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 
 public class PageOrdenacionDePrendas {
 	

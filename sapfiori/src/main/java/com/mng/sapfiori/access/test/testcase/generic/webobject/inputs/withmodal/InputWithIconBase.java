@@ -7,7 +7,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.sapfiori.access.test.testcase.generic.webobject.utils.PageObject;
-import com.mng.testmaker.conf.Log4jConfig;
+import com.github.jorge2m.testmaker.conf.Log4jConfig;
 
 public class InputWithIconBase extends InputLabel {
 	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);

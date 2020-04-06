@@ -23,9 +23,9 @@
 		</dependency>
 		-->
 		<dependency>
-			<groupId>com.mng</groupId>
-			<artifactId>testmaker</artifactId>
-			<version>1.0</version>
+			<groupId>com.github.jorge2m</groupId>
+			<artifactId>testmaker-core</artifactId>
+			<version>1.1.0</version>
 		</dependency>
 	</dependencies>
 
@@ -64,7 +64,7 @@
 					<weaveDependencies>
 						<weaveDependency> 
 							<groupId>com.mng</groupId>
-							<artifactId>testmaker</artifactId>
+							<artifactId>testmaker0</artifactId>
 						</weaveDependency>
 					</weaveDependencies>
 				</configuration>

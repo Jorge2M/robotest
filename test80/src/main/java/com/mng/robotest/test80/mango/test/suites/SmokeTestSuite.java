@@ -28,8 +28,8 @@ import com.mng.robotest.test80.mango.test.appshop.Registro;
 import com.mng.robotest.test80.mango.test.appshop.SEO;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.factoryes.ListPagosEspana;
-import com.mng.testmaker.domain.SuiteMaker;
-import com.mng.testmaker.domain.TestRunMaker;
+import com.github.jorge2m.testmaker.domain.SuiteMaker;
+import com.github.jorge2m.testmaker.domain.TestRunMaker;
 
 public class SmokeTestSuite extends SuiteMaker {
 

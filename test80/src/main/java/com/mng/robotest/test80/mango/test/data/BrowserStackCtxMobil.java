@@ -1,7 +1,7 @@
 package com.mng.robotest.test80.mango.test.data;
 
-import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackMobil;
-import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackSO.PlatformMobilBS;
+import com.github.jorge2m.testmaker.service.webdriver.maker.brwstack.BrowserStackMobil;
+import com.github.jorge2m.testmaker.service.webdriver.maker.brwstack.BrowserStackSO.PlatformMobilBS;
 
 public enum BrowserStackCtxMobil implements BrowserStackMobil {
 

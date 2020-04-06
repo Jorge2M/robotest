@@ -26,7 +26,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageResultPagoStpV;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.service.TestMaker;
 
 import java.util.Arrays;
 import java.util.List;

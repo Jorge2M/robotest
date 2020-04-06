@@ -12,8 +12,8 @@ import org.apache.commons.cli.CommandLine;
 
 import com.mng.robotest.test80.access.CmdRunTests.TypeCallBackMethod;
 import com.mng.robotest.test80.access.CmdRunTests.TypeCallbackSchema;
-import com.mng.testmaker.boundary.access.OptionTMaker;
-import com.mng.testmaker.domain.InputParamsTM;
+import com.github.jorge2m.testmaker.boundary.access.OptionTMaker;
+import com.github.jorge2m.testmaker.domain.InputParamsTM;
 
 public class InputParamsMango extends InputParamsTM {
 

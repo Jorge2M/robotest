@@ -4,9 +4,9 @@ import com.mng.sapfiori.access.test.testcase.generic.webobject.modals.ModalMessa
 import com.mng.sapfiori.access.test.testcase.webobject.pedidos.InfoGeneralSolPedido;
 import com.mng.sapfiori.access.test.testcase.webobject.pedidos.InputFieldPedido;
 import com.mng.sapfiori.access.test.testcase.webobject.pedidos.PageSolicitudPedido;
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.conf.State;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.State;
 
 public class PageSolicitudPedidoStpV {
 

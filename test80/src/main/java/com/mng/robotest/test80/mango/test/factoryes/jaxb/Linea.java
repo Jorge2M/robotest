@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.xml.bind.annotation.*;
 
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
 
 

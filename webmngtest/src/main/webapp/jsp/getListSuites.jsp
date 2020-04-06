@@ -6,12 +6,12 @@ response.setDateHeader ("Expires", -1);%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.Arrays"%>
-<%@ page import="com.mng.testmaker.service.TestMaker"%>
-<%@ page import="com.mng.testmaker.conf.Channel"%>
-<%@ page import="com.mng.testmaker.domain.RepositoryI"%>
-<%@ page import="com.mng.testmaker.conf.defaultstorer.RepositorySQLite"%>
-<%@ page import="com.mng.testmaker.repository.jdbc.dao.SuitesDAO"%>
-<%@ page import="com.mng.testmaker.domain.suitetree.SuiteBean"%>
+<%@ page import="com.github.jorge2m.testmaker.service.TestMaker"%>
+<%@ page import="com.github.jorge2m.testmaker.conf.Channel"%>
+<%@ page import="com.github.jorge2m.testmaker.domain.RepositoryI"%>
+<%@ page import="com.github.jorge2m.testmaker.conf.defaultstorer.RepositorySQLite"%>
+<%@ page import="com.github.jorge2m.testmaker.repository.jdbc.dao.SuitesDAO"%>
+<%@ page import="com.github.jorge2m.testmaker.domain.suitetree.SuiteBean"%>
 
 <%
 	String idExecSuite = request.getParameter("idExecSuite");

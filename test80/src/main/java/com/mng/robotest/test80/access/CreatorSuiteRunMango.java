@@ -15,8 +15,8 @@ import com.mng.robotest.test80.mango.test.suites.RegistrosSuite;
 import com.mng.robotest.test80.mango.test.suites.SmokeMantoSuite;
 import com.mng.robotest.test80.mango.test.suites.SmokeTestSuite;
 import com.mng.robotest.test80.mango.test.suites.ValesPaisesSuite;
-import com.mng.testmaker.domain.CreatorSuiteRun;
-import com.mng.testmaker.domain.SuiteMaker;
+import com.github.jorge2m.testmaker.domain.CreatorSuiteRun;
+import com.github.jorge2m.testmaker.domain.SuiteMaker;
 
 
 public class CreatorSuiteRunMango extends CreatorSuiteRun {

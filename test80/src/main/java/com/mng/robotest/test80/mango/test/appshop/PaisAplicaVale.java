@@ -15,8 +15,8 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigatio
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.suites.PagosPaisesSuite.VersionPagosSuite;
 import com.mng.robotest.test80.mango.test.suites.ValesPaisesSuite.VersionValesSuite;
-
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
 
 public class PaisAplicaVale implements Serializable {
 
@@ -56,7 +56,7 @@ public class PaisAplicaVale implements Serializable {
 		description="Compra usuario no registrado")
 	public void CHK001_Compra() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-		TestMaker.getTestCase().setSpecificInputData(index_fact);
+		TestCaseTM.addNameSufix(this.index_fact);
 		dCtxSh.userRegistered = false;
 		//dCtxSh.urlAcceso = TestMaker.getTestCase().getInputParamsSuite().getUrlBase();
 		DataCtxPago dCtxPago = new DataCtxPago(this.dCtxSh);
@@ -80,7 +80,7 @@ public class PaisAplicaVale implements Serializable {
 			description="Compra usuario no registrado. Fake")
 		public void CHK002_CompraFake() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-		TestMaker.getTestCase().setSpecificInputData(index_fact);
+		TestCaseTM.addNameSufix(this.index_fact);
 		dCtxSh.userRegistered = false;
 		//dCtxSh.urlAcceso = TestMaker.getTestCase().getInputParamsSuite().getUrlBase();
 		DataCtxPago dCtxPago = new DataCtxPago(this.dCtxSh);

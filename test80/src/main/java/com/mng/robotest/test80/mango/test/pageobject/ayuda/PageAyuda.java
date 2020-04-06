@@ -1,7 +1,7 @@
 package com.mng.robotest.test80.mango.test.pageobject.ayuda;
 
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -9,8 +9,8 @@ import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import java.io.Reader;
 import java.io.InputStreamReader;

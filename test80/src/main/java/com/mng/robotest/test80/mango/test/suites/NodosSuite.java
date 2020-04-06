@@ -6,8 +6,8 @@ import java.util.Map;
 import org.testng.xml.XmlSuite.ParallelMode;
 import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.getParametersSuiteShop;
 
-import com.mng.testmaker.domain.SuiteMaker;
-import com.mng.testmaker.domain.TestRunMaker;
+import com.github.jorge2m.testmaker.domain.SuiteMaker;
+import com.github.jorge2m.testmaker.domain.TestRunMaker;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.ErrorStorer;
 import com.mng.robotest.test80.mango.test.factoryes.ListAllNodes;

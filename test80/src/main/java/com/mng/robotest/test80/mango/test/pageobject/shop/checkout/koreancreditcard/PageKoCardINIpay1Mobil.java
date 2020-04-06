@@ -3,8 +3,8 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancredit
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 
 
 public class PageKoCardINIpay1Mobil {

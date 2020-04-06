@@ -7,12 +7,12 @@ import org.testng.annotations.*;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.TiendaMantoEnum.TiendaManto;
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.domain.InputParamsTM;
-import com.mng.testmaker.domain.suitetree.TestRunTM;
-import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker;
-import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.domain.InputParamsTM;
+import com.github.jorge2m.testmaker.domain.suitetree.TestRunTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker;
+import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appmanto.Menus;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageSelTda;

@@ -9,8 +9,8 @@ import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
-import com.mng.testmaker.domain.InputParamsTM;
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.domain.InputParamsTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
 
 import org.testng.ITestContext;
 
