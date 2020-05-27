@@ -15,7 +15,7 @@ public abstract class SecCabeceraOutlet extends SecCabecera {
 		switch (channel) {
 		case desktop:
 			return SecCabeceraOutletDesktop.getNew(channel, app, driver);
-		case movil_web:
+		case mobile:
 		default:
 			return SecCabeceraOutletMobil.getNew(channel, app, driver);
 		}

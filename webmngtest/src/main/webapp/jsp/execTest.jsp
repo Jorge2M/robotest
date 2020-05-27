@@ -73,7 +73,7 @@ response.setDateHeader ("Expires", -1);%>
 	<div id="dataTestSuite"">
 		<p id="testSuiteName">TestSuite: <b><%=paramsTSuite.getSuiteName()%></b></p>
 		<p class="testSuiteAttribute">Channel: <b><%=paramsTSuite.getChannel()%></b></p>
-		<p class="testSuiteAttribute">Browser: <b><%=paramsTSuite.getWebDriverType()%></b></p>
+		<p class="testSuiteAttribute">Browser: <b><%=paramsTSuite.getDriver()%></b></p>
 		<%
 			if (paramsTSuite.getVersion()!=null && "".compareTo(paramsTSuite.getVersion())!=0) {
 		%>
@@ -95,16 +95,16 @@ response.setDateHeader ("Expires", -1);%>
 
 	<%
 		boolean browserTasksRunning;
-		if(System.getProperty("os.name").contains("Windows")){
-			browserTasksRunning = browserTasksRunning(paramsTSuite.getWebDriverType().toString(), "tasklist");
-		} else {
-			browserTasksRunning = browserTasksRunning(paramsTSuite.getWebDriverType().toString(), "ps");
-		}
-		if (forceStart.toLowerCase().compareTo("on")!=0 && browserTasksRunning) {
+			if(System.getProperty("os.name").contains("Windows")){
+		browserTasksRunning = browserTasksRunning(paramsTSuite.getDriver(), "tasklist");
+			} else {
+		browserTasksRunning = browserTasksRunning(paramsTSuite.getDriver(), "ps");
+			}
+			if (forceStart.toLowerCase().compareTo("on")!=0 && browserTasksRunning) {
 	%>
 		<div id="contenidoAjax"><p style="color:red;">Test no iniciado! </p>
 			<ul>
-				<li><b>Existe un <%=paramsTSuite.getWebDriverType().toString().toUpperCase()%> arrancado en la m�quina de Test.</b> Puede tratarse de un test activo. Espere a que finalice el test en la m�quina remota o cierre las pantallas de <%=paramsTSuite.getWebDriverType().toString().toUpperCase()%>.</li>
+				<li><b>Existe un <%=paramsTSuite.getDriver().toUpperCase()%> arrancado en la m�quina de Test.</b> Puede tratarse de un test activo. Espere a que finalice el test en la m�quina remota o cierre las pantallas de <%=paramsTSuite.getDriver().toUpperCase()%>.</li>
 			</ul>
 		</div>
 		<%
@@ -149,7 +149,7 @@ response.setDateHeader ("Expires", -1);%>
     	paramsTSuite.setApp(AppEcom.valueOf(app));
     	paramsTSuite.setSuite(Suites.valueOf(suite));
 	    paramsTSuite.setChannel(request.getParameter(InputParamsTM.ChannelNameParam));
-	    paramsTSuite.setBrowser(request.getParameter(InputParamsTM.BrowserNameParam));
+	    paramsTSuite.setDriver(request.getParameter(InputParamsTM.DriverNameParam));
 	    paramsTSuite.setVersion(request.getParameter(InputParamsTM.VersionNameParam));
 	    paramsTSuite.setUrlBase(request.getParameter(InputParamsTM.URLNameParam));
 	    paramsTSuite.setNetAnalysis(request.getParameter(InputParamsTM.NetAnalysisParam));

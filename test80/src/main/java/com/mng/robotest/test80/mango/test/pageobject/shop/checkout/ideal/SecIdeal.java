@@ -47,7 +47,7 @@ public class SecIdeal {
      */
     
     public static String getXPath_section(Channel channel) {
-    	if (channel==Channel.movil_web) {
+    	if (channel==Channel.mobile) {
     		return XPathCardConditionsMobile;
     	}
     	return XPathCardConditions;
@@ -65,7 +65,7 @@ public class SecIdeal {
     }
     
     public static boolean isVisibleSelectorOfBank(Channel channel, int maxSeconds, WebDriver driver) {
-    	if (channel==Channel.movil_web) {
+    	if (channel==Channel.mobile) {
     		return (state(Visible, By.xpath(XPathSelectorBankIdealMobile), driver)
     				.wait(maxSeconds).check());
     	}
@@ -87,14 +87,14 @@ public class SecIdeal {
      */
     
     public static String getXPathBankOptionByValue(Channel channel, BancoSeleccionado bancoSeleccionado) {
-    	if (channel==Channel.movil_web) { 		
+    	if (channel==Channel.mobile) { 		
     		return XPathListBankIdealMobile + "//option[@value='" + bancoSeleccionado.valueOption + "']";
     	}
     	return XPathListBankIdeal + "//option[@value='" + bancoSeleccionado.valueOption + "']";
     }
     
     public static String getXPathBankOptionByName(Channel channel, BancoSeleccionado bancoSeleccionado) {
-    	if (channel==Channel.movil_web) {
+    	if (channel==Channel.mobile) {
     		return XPathListBankIdealMobile + "//option[@text='" + bancoSeleccionado.nombre + "']";
     	}
     	return XPathListBankIdeal + "//option[@text='" + bancoSeleccionado.nombre + "']";

@@ -36,7 +36,7 @@ public class SmokeTestSuite extends SuiteMaker {
     public SmokeTestSuite(InputParamsMango inputParams) {
     	super(inputParams);
     	setParameters(getParametersSuiteShop(inputParams));
-    	if (!isBrowserStack(inputParams.getWebDriverType())) {
+    	if (!isBrowserStack(inputParams.getDriver())) {
 	    	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), getClasses());
 	    	testRun.setStorerErrorStep(new ErrorStorer());
 	    	addTestRun(testRun);

@@ -85,7 +85,7 @@ public class SecMenuLateralMobilStpV {
     	description="Realizar click sobre la línea <b>#{lineaConCarrusels}</b>",
         expected="Aparecen los sublinks de #{lineaConCarrusels} correspondientes según el país")
     public void navClickLineaAndCarrusels(LineaType lineaConCarrusels, Pais pais) throws Exception {
-    	SecMenusWrap secMenus = SecMenusWrap.getNew(Channel.movil_web, app, driver);    	
+    	SecMenusWrap secMenus = SecMenusWrap.getNew(Channel.mobile, app, driver);    	
         secMenus.selecLinea(pais, lineaConCarrusels); 
         validaSelecLinea(pais, lineaConCarrusels, null);
         navSelectCarrusels(lineaConCarrusels, pais);
@@ -125,7 +125,7 @@ public class SecMenuLateralMobilStpV {
 	@Validation
 	private ChecksTM checkGaleriaAfterSelectNuevo() {
 		ChecksTM validations = ChecksTM.getNew();
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.movil_web, app, driver);
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.mobile, app, driver);
 		int maxSeconds = 3;
 		validations.add(
 			"Aparece algún artículo (esperamos " + maxSeconds + " segundos)",
@@ -193,7 +193,7 @@ public class SecMenuLateralMobilStpV {
             validaSelecLineaNinosWithSublineas(lineaType);
             break;
         case articulos:
-            PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.movil_web, app, driver);
+            PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.mobile, app, driver);
             int maxSeconds = 3;
             pageGaleriaStpV.validaArtEnContenido(maxSeconds);
             break;
@@ -291,7 +291,7 @@ public class SecMenuLateralMobilStpV {
     	description="Aparecen artículos, banners, frames, maps o Sliders",
     	level=State.Warn)
     private boolean checkElementsAfterClickMenu2onLevel() throws Exception {
-    	PageGaleria pageGaleria = PageGaleria.getNew(Channel.movil_web, app, driver);
+    	PageGaleria pageGaleria = PageGaleria.getNew(Channel.mobile, app, driver);
         return (
         	pageGaleria.isVisibleArticleUntil(1, 3) ||
             PageLanding.hayIframes(driver) ||

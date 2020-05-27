@@ -5,12 +5,12 @@ import com.github.jorge2m.testmaker.service.webdriver.maker.brwstack.BrowserStac
 
 public enum BrowserStackCtxDesktop implements BrowserStackDesktop {
 
-    //Win10_Edge16 (PlatformDesktopBS.Windows, "10", "Edge", "16.0", "1920x1080"),
-    Win8_Firefox68 (PlatformDesktopBS.Windows, "8", "Firefox", "68.0", "1920x1080"),
-    macOSMojave_Safari(PlatformDesktopBS.OSX, "Mojave", "Safari", "12.1", "1920x1080");
-    //macOSMojave_Chrome68(PlatformDesktopBS.OSX, "Mojave", "Chrome", "75.0", "1920x1080");
-    //Win8_Firefox62 (PlatformDesktopBS.Windows, "8", "Firefox", "62.0", "1920x1080"),
-    //OSX_Safari11 (PlatformDesktopBS.OSX, "High Sierra", "Safari", "11.0", "1920x1080");
+	//Win10_Edge16 (PlatformDesktopBS.Windows, "10", "Edge", "16.0", "1920x1080"),
+	Win8_Firefox68 (PlatformDesktopBS.Windows, "8", "Firefox", "68.0", "1920x1080"),
+	macOSMojave_Safari(PlatformDesktopBS.OSX, "Mojave", "Safari", "12.1", "1920x1080");
+	//macOSMojave_Chrome68(PlatformDesktopBS.OSX, "Mojave", "Chrome", "75.0", "1920x1080");
+	//Win8_Firefox62 (PlatformDesktopBS.Windows, "8", "Firefox", "62.0", "1920x1080"),
+	//OSX_Safari11 (PlatformDesktopBS.OSX, "High Sierra", "Safari", "11.0", "1920x1080");
 	
 	PlatformDesktopBS so;
 	String soVersion;

@@ -113,7 +113,7 @@ public class PageMisCompras extends PageObjTM {
     }    
 
     private String getXPathNumPrendasCompra(int posInLista) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (getXPathCompra(posInLista) + "//span[@class='prendas']");
         }
         return (getXPathCompra(posInLista) + "//div[@class='box-info']//div[@class='shop-look']");
@@ -121,7 +121,7 @@ public class PageMisCompras extends PageObjTM {
     
     private String getXPathEstadoCompraOnline(int posInLista) {
         String lastElem = "p[3]";
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             lastElem = "/li[@class='regular'][2]";
         }
         return (getXPathCompra(posInLista) + "//div[@class='box-info']/div[@class='shop']/" + lastElem);

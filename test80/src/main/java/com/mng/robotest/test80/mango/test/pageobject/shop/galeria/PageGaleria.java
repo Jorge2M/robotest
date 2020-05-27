@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -14,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Locatable;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.Log4jConfig;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
@@ -44,10 +42,7 @@ public abstract class PageGaleria extends PageObjTM {
 	final AppEcom app;
 	final From from;
 	final String XPathArticulo;
-    
 	final SecPreciosArticulo secPrecios;
-	
-	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 
 	public PageGaleria(From from, Channel channel, AppEcom app, WebDriver driver) {
 		super(driver);
@@ -106,7 +101,7 @@ public abstract class PageGaleria extends PageObjTM {
 		switch (channel) {
 		case desktop:
 			return (PageGaleriaDesktop.getNew(from, app, driver));
-		case movil_web:
+		case mobile:
 		default:
 			return (PageGaleriaMobil.getNew(from, app, driver));
 		}
@@ -125,7 +120,7 @@ public abstract class PageGaleria extends PageObjTM {
 	private String getXPathArticulo() {
 		switch (app) {
 		case outlet:
-			if (channel==Channel.movil_web) {
+			if (channel==Channel.mobile) {
 				return XPathArticuloMobilOutlet;
 			}
 		case shop:
@@ -147,7 +142,7 @@ public abstract class PageGaleria extends PageObjTM {
 		switch (channel) {
 		case desktop:
 			return XPathHearthIconRelativeArticleDesktop;
-		case movil_web:
+		case mobile:
 		default:
 			return XPathHearthIconRelativeArticleMovil;
 		}
@@ -278,7 +273,7 @@ public abstract class PageGaleria extends PageObjTM {
 				break;
 			}
 			catch (StaleElementReferenceException e) {
-				pLogger.info("StaleElementReferenceException checking articles filtered by prize");
+				Log4jTM.getLogger().info("StaleElementReferenceException checking articles filtered by prize");
 			}
 		}
 		return inInterval;

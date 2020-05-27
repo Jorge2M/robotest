@@ -104,7 +104,7 @@ public class PageGaleriaMobil extends PageGaleria {
     public static int scrollToLast = 20; 
     
     private PageGaleriaMobil(From from, AppEcom app, WebDriver driver) {
-    	super(from, Channel.movil_web, app, driver);
+    	super(from, Channel.mobile, app, driver);
     }
     
     public static PageGaleriaMobil getNew(From from, AppEcom app, WebDriver driver) {

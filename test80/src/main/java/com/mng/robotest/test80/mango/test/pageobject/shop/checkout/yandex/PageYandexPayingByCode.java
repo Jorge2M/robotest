@@ -21,7 +21,7 @@ public class PageYandexPayingByCode {
         case desktop:
             return XPathButtonBackToMangoDesktop;
         default:
-        case movil_web:
+        case mobile:
             return XPathButtonBackToMangoMovil;
         }        
     }

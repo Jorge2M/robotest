@@ -24,8 +24,8 @@ public class SecFooter {
     static List<AppEcom> footerAll = Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf);
     
     static List<Channel> channelDesktop = Arrays.asList(Channel.desktop);
-    static List<Channel> channelMobile = Arrays.asList(Channel.movil_web);
-    static List<Channel> channelAll = Arrays.asList(Channel.desktop, Channel.movil_web);    
+    static List<Channel> channelMobile = Arrays.asList(Channel.mobile);
+    static List<Channel> channelAll = Arrays.asList(Channel.desktop, Channel.mobile);    
     
     public static enum FooterLink {
     	ayuda(footerShop, channelAll, "//a[@data-ga-label='ayuda' and text()[contains(.,'Ayuda')]]", false), 

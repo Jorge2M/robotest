@@ -3,8 +3,6 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.registro;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.Keys;
@@ -14,7 +12,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.Log4jConfig;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
@@ -26,8 +24,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegis
 
 
 public class PageRegistroIni extends PageObjTM {
-	
-	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
 	private static String XPathPestanyaRegistro = "//div[@class[contains(.,'registerTab')]]";
 	private static String XPathHeaderNews = "//div[@class[contains(.,'registerModal')]]//div[@class='info']";
@@ -206,7 +202,7 @@ public class PageRegistroIni extends PageObjTM {
         		click(By.xpath(XPathButtonRegistrate)).type(javascript).exec();
         	}
         	catch (Exception e) {
-        		pLogger.info("Problem in second click to Registrate Button", e);
+        		Log4jTM.getLogger().info("Problem in second click to Registrate Button", e);
         	}
         }
     }

@@ -20,7 +20,7 @@ public interface SecSearch {
 			case outlet:
 				return SecSearchDesktopOutlet.getNew(driver);
 			}
-		case movil_web:
+		case mobile:
 			switch (app) {
 			case shop:
 			case votf:

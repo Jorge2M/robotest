@@ -24,7 +24,7 @@ public class PageSepa1rstStpV {
     	
     	State stateVal = State.Warn;
     	boolean avoidEvidences = false;
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             stateVal = State.Info;
             avoidEvidences = true;
         }
@@ -57,7 +57,7 @@ public class PageSepa1rstStpV {
 	        "Y pulsamos el botón <b>Pay</b>",
 	    expected="Aparece la página de resultado de pago OK de Mango")
     public static void inputDataAndclickPay(String iban, String titular, String importeTotal, String codPais, Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
         	StepTM step = TestMaker.getCurrentStepInExecution();
         	step.setDescripcion("Seleccionamos el icono de SEPA. " + step.getDescripcion());
         	PageSepa1rst.clickIconoSepa(channel, driver);
@@ -69,7 +69,7 @@ public class PageSepa1rstStpV {
         PageSepa1rst.clickButtonContinuePago(channel, driver);
         
         //En el caso de móvil aparece una página de resultado específica de SEPA
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             PageSepaResultMobilStpV.validateIsPage(importeTotal, codPais, driver);
         }
     }

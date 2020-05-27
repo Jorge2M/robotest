@@ -140,7 +140,7 @@ public class PageGaleriaStpV {
     }
 
 	public void shopTallasArticulo(int posArticulo) throws Exception {
-		if (channel==Channel.movil_web || app==AppEcom.outlet) {
+		if (channel==Channel.mobile || app==AppEcom.outlet) {
 			showTallasOutletAndMovil(posArticulo);
 		} else {
 			showTallasShopDesktop(posArticulo);
@@ -209,7 +209,7 @@ public class PageGaleriaStpV {
     throws Exception {
         DataScroll datosScroll = null;
         int pageToScroll = dataForScroll.numPageToScroll;
-        if (dCtxSh.channel == Channel.movil_web) {
+        if (dCtxSh.channel == Channel.mobile) {
         	pageToScroll = 3;
         }
         

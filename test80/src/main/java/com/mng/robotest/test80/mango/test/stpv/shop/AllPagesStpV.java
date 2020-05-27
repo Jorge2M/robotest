@@ -9,7 +9,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
+import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.EmbeddedDriver;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.github.jorge2m.testmaker.service.webdriver.utils.WebUtils;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
@@ -47,8 +47,8 @@ public class AllPagesStpV {
     	
     	if (flagsVal.validaJS) {
         	//Nota: No funciona con GeckoDriver porque no están implementados los servicios al no formar parte del protocolo W3C https://github.com/w3c/webdriver/issues/406
-        	if (SeleniumUtils.getTypeDriver(driver)!=WebDriverType.firefox &&
-        		SeleniumUtils.getTypeDriver(driver)!=WebDriverType.firefoxhless) {
+        	if (SeleniumUtils.getTypeDriver(driver)!=EmbeddedDriver.firefox &&
+        		SeleniumUtils.getTypeDriver(driver)!=EmbeddedDriver.firefoxhless) {
         		int maxErrors = 1;
         		ResultadoErrores resultadoLogs = WebUtils.getLogErrors(Level.WARNING, driver, maxErrors);
         		String descripValidac = "No hay errores JavaScript";

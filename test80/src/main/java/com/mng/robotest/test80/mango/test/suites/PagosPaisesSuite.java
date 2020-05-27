@@ -54,7 +54,7 @@ public class PagosPaisesSuite extends SuiteMaker {
     	super(inputParams);
     	setParameters(getParametersSuiteShop(inputParams));
     	List<Class<?>> listTestClasses = Arrays.asList(ListPrecompraPaises.class);
-    	if (!isBrowserStack(inputParams.getWebDriverType())) {
+    	if (!isBrowserStack(inputParams.getDriver())) {
 	    	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), listTestClasses);
 	    	testRun.setStorerErrorStep(new ErrorStorer());
 	    	addTestRun(testRun);

@@ -26,7 +26,7 @@ public class PageResultPago {
      * @return el xpath correspondiente al elemento que contiene el texto con la confirmación del pago
      */
     public static String getXPathTextoConfirmacionPago(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathTextoConfirmacionPagoMobil;
         }
         return XPathTextoConfirmacionPagoDesktop;
@@ -36,7 +36,7 @@ public class PageResultPago {
      * @return el xpath correspondiente al elemento lincable de "Seguir de shopping"
      */
     public static String getXPathLinkSeguirDeShopping(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathLinkSeguirDeShoppingMobil;
         }
         return XPathLinkSeguirDeShoppingDesktop;
@@ -46,7 +46,7 @@ public class PageResultPago {
      * @return el xpath correspondiente al elemento que contiene el texto con el id del pedido
      */
     public static String getXPathTextPedido(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathTextPedidoMobil;
         }
         return XPathTextPedidoDesktop;

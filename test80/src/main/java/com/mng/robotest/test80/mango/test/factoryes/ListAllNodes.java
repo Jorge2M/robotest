@@ -11,7 +11,6 @@ import com.github.jorge2m.testmaker.domain.InputParamsTM;
 import com.github.jorge2m.testmaker.domain.suitetree.TestRunTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker;
-import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.TestNodos;
@@ -86,9 +85,9 @@ public class ListAllNodes {
     		AppEcom appE, ITestContext ctxTestRun) throws Exception { 
     	TestRunTM testRun = TestMaker.getTestRun(ctxTestRun);
     	WebDriver driver = 
-    		FactoryWebdriverMaker.make(WebDriverType.chrome, testRun)
+    		FactoryWebdriverMaker.make(testRun)
     			.setChannel(Channel.desktop)
-    			.build();    	
+    			.build();
 	    
 		for (int i=0; i<iteraciones; i++) {
 		    //Cargamos la página de error donde se encuentra la IP del nodo

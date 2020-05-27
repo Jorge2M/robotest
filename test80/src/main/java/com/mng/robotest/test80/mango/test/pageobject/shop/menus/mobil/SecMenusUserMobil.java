@@ -18,7 +18,7 @@ public class SecMenusUserMobil extends PageObjTM {
 	private SecMenusUserMobil(AppEcom app, WebDriver driver) {
 		super(driver);
 		this.app = app;
-		this.secCabecera = SecCabecera.getNew(Channel.movil_web, app, driver);
+		this.secCabecera = SecCabecera.getNew(Channel.mobile, app, driver);
 	}
 	
 	public static SecMenusUserMobil getNew(AppEcom app, WebDriver driver) {

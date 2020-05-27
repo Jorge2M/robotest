@@ -39,7 +39,7 @@ public class PageMangoCard extends PageObjTM implements PageFromFooter {
      * Selecciona el botón "Solicitar Tarjeta Mango" de la página 1
      */
     public void clickOnWantMangoCardNow(Channel channel) {
-    	if (channel==Channel.movil_web) {
+    	if (channel==Channel.mobile) {
     		click(By.xpath(XPathGoMangoCardButtonMobile)).exec();
     	} else {
     		click(By.xpath(XPathGoMangoCardButton)).exec();

@@ -64,7 +64,7 @@ public class PageMiCuentaStpV {
         expected = "Aparece la página de \"Mis Compras\"")
     private void goToMisComprasFromMenuAndValidate(Pais pais) {
         pageMiCuenta.clickMisCompras();
-        if (channel == Channel.movil_web &&
+        if (channel == Channel.mobile &&
         	PageInfoNewMisComprasMovil.isPage(driver)) {
             PageInfoNewMisComprasMovilStpV.validateIsPage(driver);
             PageInfoNewMisComprasMovilStpV.clickButtonToMisComprasAndNoValidate(driver);

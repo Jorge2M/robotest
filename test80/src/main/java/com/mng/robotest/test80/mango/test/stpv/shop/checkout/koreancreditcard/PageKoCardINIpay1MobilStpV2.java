@@ -2,7 +2,6 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Log4jConfig;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
@@ -10,12 +9,9 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjT
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardINIpay1Mobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardINIpay1Mobil.BodyPageKoCardINIpay1;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 public class PageKoCardINIpay1MobilStpV2 {
-    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
     @Validation
     public static ChecksTM validateIsPage(WebDriver driver) {

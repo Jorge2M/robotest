@@ -27,7 +27,7 @@ public class PageKoCardAdyen extends PageObjTM {
 
 	public void clickForContinue(Channel channel) {
 		switch (channel) {
-		case movil_web:
+		case mobile:
 			clickIcon();
 			break;
 		case desktop:

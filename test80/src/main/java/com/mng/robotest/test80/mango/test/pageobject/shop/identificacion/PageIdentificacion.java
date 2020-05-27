@@ -98,9 +98,9 @@ public class PageIdentificacion {
      */
     @SuppressWarnings("static-access")
     public static void clickIniciarSesionAndWait(Channel channel, AppEcom app, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             //En el caso de mobile nos tenemos que asegurar que están desplegados los menús
-        	SecCabecera secCabeceraMobil = SecCabecera.getNew(Channel.movil_web, app, driver);
+        	SecCabecera secCabeceraMobil = SecCabecera.getNew(Channel.mobile, app, driver);
         	boolean toOpen = true;
         	secCabeceraMobil.clickIconoMenuHamburguerMobil(toOpen);
             

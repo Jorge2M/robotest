@@ -174,7 +174,7 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 		expected="El artículo se da de alta correctamente en la bolsa"	)
 	public void checkCustomizationProof () {
 		click(ModalElement.Siguiente.getBy(dCtxSh.channel)).exec();
-		if (dCtxSh.channel == Channel.movil_web) {
+		if (dCtxSh.channel == Channel.mobile) {
 			click(ModalElement.GoToBag.getBy(dCtxSh.channel)).exec();
 		}
 		validateCustomizationProof(2);
@@ -184,7 +184,7 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 		description="1) En la bolsa aparece el apartado correspondiente a la personalización (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
 	private boolean validateCustomizationProof(int maxSeconds) {
-		if (dCtxSh.channel==Channel.movil_web) {
+		if (dCtxSh.channel==Channel.mobile) {
 			return (state(Present, ModalElement.BolsaProof.getBy(dCtxSh.channel)).wait(maxSeconds).check());
 		} else {
 			return (state(Visible, ModalElement.BolsaProof.getBy(dCtxSh.channel)).wait(maxSeconds).check());

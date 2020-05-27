@@ -29,7 +29,7 @@ public class PagoKoreanCreditCard extends PagoStpV {
         pageKoCardAdyenStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais);
         pageKoCardAdyenStpV.clickIconForContinue();
     	if (execPay) {
-	        if (dCtxSh.channel == Channel.movil_web) {
+	        if (dCtxSh.channel == Channel.mobile) {
 	        	PageKoCardINIpay1MobilStpV2.checkTerminosBox(driver);
 	        	PageKoCardINIpay1MobilStpV2.continuarConPagoCoreaMobile(driver);
 	        	PageKoCardINIpay2MobilStpV.confirmMainPaymentCorea(driver);

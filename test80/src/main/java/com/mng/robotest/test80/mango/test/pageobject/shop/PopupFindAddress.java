@@ -1,11 +1,10 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.conf.Log4jConfig;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -16,7 +15,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
  *
  */
 public class PopupFindAddress {
-    private final static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
+
     private final static String XPathInputBuscador = "//input[@id='region_name']";
     private final static String XPathButtonLupa = "//button[@class='btn_search']";
     private final static String XPathLinkDirecc = "//button[@class='link_post']";
@@ -27,7 +26,7 @@ public class PopupFindAddress {
             isIFrameUntil(maxSecondsToWait, driver);
         }
         catch (Exception e) {
-            pLogger.warn("Exception going to Find Address Popup. ", e);
+        	Log4jTM.getLogger().warn("Exception going to Find Address Popup. ", e);
         }
         return popupBuscador;
     }

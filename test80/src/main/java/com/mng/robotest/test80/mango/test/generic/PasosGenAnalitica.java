@@ -3,14 +3,13 @@ package com.mng.robotest.test80.mango.test.generic;
 import java.io.FileNotFoundException;
 import java.util.EnumSet;
 import java.util.Iterator;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Log4jConfig;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
@@ -26,8 +25,7 @@ import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 
 
 public class PasosGenAnalitica {
-    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
-    
+
     /**
      * Aplica las validaciones estándar a nivel de Analítica
      */
@@ -50,7 +48,7 @@ public class PasosGenAnalitica {
     public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, DataPedido dataPedido, EnumSet<Constantes.AnalyticsVal> analyticSet, WebDriver driver) 
     throws Exception {
     	StepTM step = TestMaker.getLastStep();
-        SaveWhen whenSaveNettraffic = step.getWhenSave(StepEvidence.har);
+        SaveWhen whenSaveNettraffic = step.getWhenSave(StepEvidence.Har);
         if (whenSaveNettraffic == SaveWhen.Always &&
             driver.toString().toLowerCase().contains("firefox")) {
 
@@ -61,9 +59,9 @@ public class PasosGenAnalitica {
             }
             catch (FileNotFoundException e) {
                 //Capturamos la excepción para que no se produzca error (las posteriores validaciones generarán un warning para este caso)
-                pLogger.warn(
-                	". Not located file HAR associated to method {}, step {}", 
-                	step.getTestCaseParent().getNameUnique(), Integer.valueOf(step.getNumber()), e);
+            	Log4jTM.getLogger().warn(
+            			". Not located file HAR associated to method " + step.getTestCaseParent() + 
+            			", step " + Integer.valueOf(step.getNumber()), e);
             }
             
             if (gestorHAR!=null) {
@@ -360,7 +358,7 @@ public class PasosGenAnalitica {
             tiempo = primeraRequest.get("time").toString();
         }
         catch (Exception e) {
-            pLogger.warn("Problem in getTime1rstPet", e);
+        	Log4jTM.getLogger().warn("Problem in getTime1rstPet", e);
         }
 
         return (Float.valueOf(tiempo).floatValue());

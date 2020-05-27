@@ -29,7 +29,7 @@ public class SecKrediKarti extends SecTarjetaPciInIframe {
     	case desktop:
     		return XPathCapaPagoPlazoDesktop;
     	default:
-    	case movil_web:
+    	case mobile:
     		return XPathCapaPagoPlazoMobil;
     	}
     }
@@ -39,7 +39,7 @@ public class SecKrediKarti extends SecTarjetaPciInIframe {
     	case desktop:
     		return XPathRadioPagoPlazoDesktop;
     	default:
-    	case movil_web:
+    	case mobile:
     		return XPathRadioPagoPlazoMobil;
     	}
     }

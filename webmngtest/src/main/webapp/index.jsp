@@ -152,7 +152,7 @@ for (SuiteTestData suiteTest : listTestSuites) {
 					<input id="force-<%=i%>" type="checkbox" name="forceStart" />
 				</td>
 				<td id="browser-<%=i%>">
-					<select id="browser-select-<%=i%>" name="<%=InputParamsTM.BrowserNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
+					<select id="browser-select-<%=i%>" name="<%=InputParamsTM.DriverNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
 							String actualBrowser = suiteTest.getIdBrowser();
 															for (BrowserSuite browserSuite : suiteTest.getListBrowsersChannel()) {
@@ -336,7 +336,7 @@ for (SuiteTestData suiteTest : listTestSuites) {
 		src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script>
 $(document).ready(function () {
-    $('select[name=<%=InputParamsTM.BrowserNameParam%>]').change(function () {
+    $('select[name=<%=InputParamsTM.DriverNameParam%>]').change(function () {
     	updateData($(this).attr("suite"), $(this).attr("channel"), "browser", $(this).val());
     });
     
@@ -387,7 +387,7 @@ function updateData(suite, channel, dataToChange, newBrowser) {
 	paramsTSuite.setApp(AppEcom.valueOf(app));
 	paramsTSuite.setSuite(Suites.valueOf(suite));
     paramsTSuite.setChannel(suiteTest.getChannel());
-    paramsTSuite.setBrowser(suiteTest.getIdBrowser());
+    paramsTSuite.setDriver(suiteTest.getIdBrowser());
     paramsTSuite.setVersion(suiteTest.getVersionActual());
 
     return paramsTSuite;

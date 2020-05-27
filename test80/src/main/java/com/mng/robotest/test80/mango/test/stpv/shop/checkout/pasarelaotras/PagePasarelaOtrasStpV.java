@@ -1,12 +1,9 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pasarelaotras;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.Log4jConfig;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -15,7 +12,6 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 
 public class PagePasarelaOtrasStpV {
-    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
     @Validation
     public static ChecksTM validateIsPage(String importeTotal, Pais pais, Channel channel, WebDriver driver) {

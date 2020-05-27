@@ -1,11 +1,10 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.cabecera;
 
-import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.Log4jConfig;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -111,7 +110,7 @@ public abstract class SecCabecera extends PageObjTM {
 		return articulos;
 	}
 
-    //-- Específic functions for movil_web (Shop & Outlet)
+    //-- Específic functions for movil (Shop & Outlet)
     
 	private final static String XPathHeader = "//header";
     private final static String XPathSmartBanner = XPathHeader + "/div[@id='smartbanner']";
@@ -145,7 +144,7 @@ public abstract class SecCabecera extends PageObjTM {
                 menuVisible = secMenuLateral.isMenuInStateUntil(toOpenMenus, 2);
             }
             catch (Exception e) {
-                LogManager.getLogger(Log4jConfig.log4jLogger).warn("Exception in click icono Hamburguer", e);
+            	Log4jTM.getLogger().warn("Exception in click icono Hamburguer", e);
             }
             
             i+=1;

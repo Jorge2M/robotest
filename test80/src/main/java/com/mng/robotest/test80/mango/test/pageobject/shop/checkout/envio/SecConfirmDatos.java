@@ -19,8 +19,8 @@ public class SecConfirmDatos {
         switch (channel) {
         case desktop:
             return XPathDivGeneralDesktop;
-        case movil_web:
-        default:            
+        case mobile:
+        default:
             return XPathDivGeneralMovil;
         }
     }

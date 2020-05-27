@@ -1,12 +1,9 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.postfinance;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Log4jConfig;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
@@ -16,8 +13,6 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 
 public class PagePostfCodSegStpV {
-
-    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);    
     
     /**
      * Validación a nivel de la pasarela

@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.EmbeddedDriver;
 //import com.github.jorge2m.testmaker.listeners.CallBack;
-import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -73,14 +73,14 @@ public class SuiteMakerResources {
         return parametersReturn;
     }
     
-    public static boolean isBrowserStack(WebDriverType webDriverType) {
-    	return (webDriverType==WebDriverType.browserstack);
+    public static boolean isBrowserStack(String browser) {
+    	return (browser.compareTo(EmbeddedDriver.browserstack.name())==0);
     }
-    
-    public static List<TestRunMaker> getTestRunsForBrowserStack(String suiteName, Channel channel, List<Class<?>> listClasses) {
-    	List<TestRunMaker> listTestsRun = new ArrayList<>();
-    	switch (channel) {
-    	case desktop:
+
+	public static List<TestRunMaker> getTestRunsForBrowserStack(String suiteName, Channel channel, List<Class<?>> listClasses) {
+		List<TestRunMaker> listTestsRun = new ArrayList<>();
+		switch (channel) {
+		case desktop:
 			TestRunMaker testRunOSX = TestRunMaker.from(suiteName + "_" + macOSMojave_Safari, listClasses);
 			testRunOSX.setBrowserStackDesktop(macOSMojave_Safari);
 			listTestsRun.add(testRunOSX);
@@ -88,15 +88,15 @@ public class SuiteMakerResources {
 			testRunWin8.setBrowserStackDesktop(Win8_Firefox68);
 			listTestsRun.add(testRunWin8);
 			break;
-	    case movil_web:
+		case mobile:
 			TestRunMaker testRunAndroid = TestRunMaker.from(suiteName + SamsungGalaxyS9plus_Android9, listClasses);
 			testRunAndroid.setBrowserStackMobil(SamsungGalaxyS9plus_Android9);
 			listTestsRun.add(testRunAndroid);
 			TestRunMaker testRuniOS = TestRunMaker.from(suiteName + IPhoneXS_iOS12, listClasses);
 			testRuniOS.setBrowserStackMobil(IPhoneXS_iOS12);
 			listTestsRun.add(testRuniOS);
-    	}
-    	
-    	return listTestsRun;
-    }
+		}
+		
+		return listTestsRun;
+	}
 }

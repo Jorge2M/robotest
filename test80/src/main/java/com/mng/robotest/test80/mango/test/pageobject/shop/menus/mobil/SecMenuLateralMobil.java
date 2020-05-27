@@ -251,7 +251,7 @@ public class SecMenuLateralMobil extends PageObjTM {
 
 	public void selecLinea(Linea linea) {
 		boolean toOpenMenus = true;
-		SecCabecera secCabecera = SecCabecera.getNew(Channel.movil_web, app, driver);
+		SecCabecera secCabecera = SecCabecera.getNew(Channel.mobile, app, driver);
 		secCabecera.clickIconoMenuHamburguerMobil(toOpenMenus);
 		if ("n".compareTo(linea.getExtended())==0) {
 			By byElem = By.xpath(getXPathLineaLink(linea.getType()));

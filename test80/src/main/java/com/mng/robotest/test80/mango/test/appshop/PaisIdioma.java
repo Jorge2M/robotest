@@ -4,7 +4,6 @@ import org.testng.annotations.*;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.Log4jConfig;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -34,16 +33,12 @@ import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import java.io.Serializable;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 
 public class PaisIdioma implements Serializable {
 	
 	private static final long serialVersionUID = 7000361927887748996L;
-
-	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
 	private String index_fact = "";
 	private List<Linea> linesToTest = null;

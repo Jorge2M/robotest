@@ -3,22 +3,18 @@ package com.mng.robotest.test80.mango.test.pageobject.shop;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.ITestContext;
 
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.github.jorge2m.testmaker.conf.Log4jConfig;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class AllPages {
 	
-    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
-    
     public static final String XPath_tagCanonical = "//link[@rel='canonical']";
     public static final String XPath_tagRobots = "//meta[@name='robots' and @content[contains(.,'noindex')]]";
 
@@ -109,7 +105,10 @@ public class AllPages {
                 if (isMaliciousHttp(context, tagHttp)) {
                     String src = tagHttp.getAttribute("src");
                     listaHttpMalicious.add(webdriver.getCurrentUrl() + ". <br><b>Http malicious!</b> " + ".id:" + tagHttp.getAttribute("id") + ",src:" + src);
-                    pLogger.warn("{}. Http malicious! ,id:{}, src:{}", webdriver.getCurrentUrl(), tagHttp.getAttribute("id"), src);
+                    Log4jTM.getLogger().warn(
+                    		webdriver.getCurrentUrl() + ". Http malicious! " + 
+                    		", id:" + tagHttp.getAttribute("id") + 
+                    		", src:" + src);
                 }
             }
         }

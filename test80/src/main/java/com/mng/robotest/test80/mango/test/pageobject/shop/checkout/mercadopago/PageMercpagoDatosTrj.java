@@ -29,7 +29,7 @@ public abstract class PageMercpagoDatosTrj extends PageObjTM {
     	switch (channel) {
     	case desktop:
     		return (PageMercpagoDatosTrjDesktop.newInstance(driver));
-    	case movil_web:
+    	case mobile:
     	default:
     		return (PageMercpagoDatosTrjMobil.newInstance(driver));
     	}

@@ -32,7 +32,7 @@ public class LineasArticuloBolsa {
 		}
 		
 		public static List<DataArtBolsa> getValuesValidForChannel(Channel channel) {
-			if (channel==Channel.movil_web) {
+			if (channel==Channel.mobile) {
 				List<DataArtBolsa> listData = new ArrayList<>();
 				for (DataArtBolsa dataArt : DataArtBolsa.values()) {
 					if (dataArt.validMobilWeb) {
@@ -75,7 +75,7 @@ public class LineasArticuloBolsa {
 		switch (channel) {
 		case desktop:
 			return XPathLineaDesktop;
-		case movil_web:
+		case mobile:
 		default:
 			return XPathLineaMobil;
 		}
@@ -85,7 +85,7 @@ public class LineasArticuloBolsa {
 		switch (channel) {
 		case desktop:
 			return XPathLineaWithTagRefDesktop;
-		case movil_web:
+		case mobile:
 		default:
 			return XPathLineaWithTagRefMobil;
 		}
@@ -95,7 +95,7 @@ public class LineasArticuloBolsa {
 		switch (channel) {
 		case desktop:
 			return XPathLinkRelativeArticleDesktop;
-		case movil_web:
+		case mobile:
 		default:
 			return XPathLinkRelativeArticleMobil;
 		}
@@ -115,7 +115,7 @@ public class LineasArticuloBolsa {
 		switch (channel) {
 		case desktop:
 			return (getXPathDataRelativeArticleDesktop(dataArt));
-		case movil_web:
+		case mobile:
 		default:
 			return (getXPathDataRelativeArticleMobil(dataArt));
 		}

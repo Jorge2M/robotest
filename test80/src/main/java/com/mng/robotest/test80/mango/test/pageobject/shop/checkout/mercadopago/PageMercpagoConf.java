@@ -15,7 +15,7 @@ public class PageMercpagoConf {
     
     public static String getXPathSectionReview(Channel channel) {
         switch (channel) {
-        case movil_web:
+        case mobile:
             return XPathButtonPagar;
         default:
         case desktop:

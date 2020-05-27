@@ -46,7 +46,7 @@ public class Linea implements Serializable {
     	
     	public String getSufixOutlet(Channel channel) {
     		if (this.compareTo(LineaType.she)==0) {
-	            if (channel==Channel.movil_web) {
+	            if (channel==Channel.mobile) {
 	                return "outlet ";
 	            }
     		}

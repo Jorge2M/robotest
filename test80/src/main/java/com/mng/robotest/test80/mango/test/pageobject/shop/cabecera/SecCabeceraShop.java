@@ -11,7 +11,7 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop;
 
 /**
- * Cabecera Shop compatible con desktop y movil_web
+ * Cabecera Shop compatible con desktop y movil
  *
  */
 public class SecCabeceraShop extends SecCabecera {

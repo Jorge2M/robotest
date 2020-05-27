@@ -70,7 +70,7 @@ for (SuiteBean suite : listSuitesToDisplay) {
 		<td id="version"><%=suite.getVersion()%></td>
 		<td id="channel"><%=suite.getChannel()%></td>
 		<td id="application"><%=suite.getApp()%></td>
-		<td id="browser"><%=suite.getWebDriverType()%></td>
+		<td id="browser"><%=suite.getDriver()%></td>
 		<td id="numTCases"><%=suite.getNumberTestCases()%></td>
 		<td id="countrys"><%=suite.getMoreInfo()%></td>
 		<td id="urlBase">

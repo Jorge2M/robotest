@@ -26,7 +26,7 @@ public interface SecFiltros {
 		switch (channel) {
 		case desktop:
 			return (SecFiltrosDesktop.getInstance(app, driver));
-		case movil_web:
+		case mobile:
 		default:
 			if (app==AppEcom.outlet) {
 				//TODO unificar con Shop cuando suba a PRO (eliminar los filtros simples)

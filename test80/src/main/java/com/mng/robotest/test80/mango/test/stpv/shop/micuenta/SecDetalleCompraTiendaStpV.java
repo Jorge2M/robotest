@@ -25,7 +25,7 @@ public class SecDetalleCompraTiendaStpV {
 	
 	public void validateIsOk(CompraTienda compraTienda) {
 		checkData(compraTienda);
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			checkIsVisibleImgCodigoBarrasMovil();
 		}
 	}

@@ -25,7 +25,7 @@ public class ModalDroppoints {
         case desktop:
             return XPathPanelGeneralDesktop;
         default:
-        case movil_web:
+        case mobile:
             return XPathPanelGeneralMovil;
         }
     }

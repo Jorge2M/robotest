@@ -14,6 +14,8 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
@@ -661,7 +663,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 					break;
 				}
 				catch (StaleElementReferenceException e) {
-					pLogger.info("StaleElementReferenceException getting listTextos no validos from Galery");
+					Log4jTM.getLogger().info("StaleElementReferenceException getting listTextos no validos from Galery");
 				}
 			}
 		}

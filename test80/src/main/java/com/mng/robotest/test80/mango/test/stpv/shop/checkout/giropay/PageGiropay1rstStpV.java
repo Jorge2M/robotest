@@ -21,7 +21,7 @@ public class PageGiropay1rstStpV {
 
 		State stateVal = State.Warn;
 		boolean avoidEvidences = false;
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			stateVal = State.Info;
 			avoidEvidences = true;
 		}

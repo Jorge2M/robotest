@@ -19,7 +19,7 @@ public class PageAyuda {
     }
 
 	public static boolean isPresentCabPreguntasFreq(Channel channel, WebDriver driver) {
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			return (state(Present, By.xpath(XPathFAQMobile), driver).check());
 		}
 		return (state(Present, By.xpath(XPathCabPreguntasFreq), driver).check());

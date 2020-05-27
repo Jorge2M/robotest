@@ -2,8 +2,6 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.bolsa;
 
 import java.util.ListIterator;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.Log4jConfig;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -30,7 +28,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class SecBolsa {
 	
 	public enum StateBolsa {Open, Closed}
-    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
+
     public static LineasArticuloBolsa lineasArticuloBolsa;
     
     //TODO cuando suba a PRO la operativa eliminar el 1er XPath
@@ -48,14 +46,14 @@ public class SecBolsa {
     private static final String XPathLinkArticulo = "//div[@class[contains(.,'itemDesc')]]/a";
     
     private static String getXPathPanelBolsa(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathPanelBolsaMobil;
         }
         return XPathPanelBolsaDesktop;
     }
     
     private static String getXPATH_BotonComprar(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathBotonComprarMobil;
         }
         return XPathBotonComprarDesktop;
@@ -69,7 +67,7 @@ public class SecBolsa {
     }
     
     private static String getXPATH_LinkBorrarArt(Channel channel, String refArticle) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (XPathLinkBorrarArtMobilNew.replace(tagRefArticle, refArticle));
         }
 
@@ -80,7 +78,7 @@ public class SecBolsa {
      * @return el xpath correspondiente al elemento que contiene el precio subtotal (sin el importe)
      */
     private static String getXPATH_precioSubTotal(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathPrecioSubTotalMobil;
         }
         return XPathPrecioSubTotalDesktop; 
@@ -91,7 +89,7 @@ public class SecBolsa {
      */
     private static String getXPATH_precioTransporte(Channel channel) {
         String xpathCapaBolsa = SecBolsa.getXPathPanelBolsa(channel);
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return "(" + xpathCapaBolsa + "//div[@class[contains(.,'totalPriceContainer')]])[2]";
         }
         return xpathCapaBolsa + "//*[@class='contenedor_precio_transporte']"; 
@@ -185,7 +183,7 @@ public class SecBolsa {
         ListIterator<WebElement> itTotalDecimal = null;
         String xpathCapaBolsa = SecBolsa.getXPathPanelBolsa(channel);
         String xpathSubtotal = getXPATH_precioSubTotal(channel);
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             itTotalEntero = driver.findElements(By.xpath("(" + xpathCapaBolsa + xpathSubtotal + ")[1]" + "//span[@style[not(contains(.,'padding'))]][1]")).listIterator();
             itTotalDecimal = driver.findElements(By.xpath("(" + xpathCapaBolsa + xpathSubtotal + ")[1]" + "//span[@style[not(contains(.,'padding'))]][2]")).listIterator();
         } else {
@@ -216,7 +214,7 @@ public class SecBolsa {
 		ListIterator<WebElement> itTotalDecimal = null;
 		String xpathImpTransp = getXPATH_precioTransporte(channel);
 		if (state(Present, By.xpath(xpathImpTransp), driver).check()) {
-			if (channel==Channel.movil_web) {
+			if (channel==Channel.mobile) {
 				itTotalEntero = driver.findElements(By.xpath("(" + xpathImpTransp + ")[1]" + "//span[1]")).listIterator();
 				itTotalDecimal = driver.findElements(By.xpath("(" + xpathImpTransp + ")[1]" + "//span[2]")).listIterator();
 			} else {
@@ -287,7 +285,8 @@ public class SecBolsa {
 					}
 				} catch (Exception e) {
 					if (i==49) {
-						pLogger.warn("Problem clearing articles from Bag. " + e.getClass().getName() + ". " + e.getMessage());
+						Log4jTM.getLogger().warn(
+							"Problem clearing articles from Bag. " + e.getClass().getName() + ". " + e.getMessage());
 					}
 				}
 
@@ -296,7 +295,8 @@ public class SecBolsa {
 					numArticulos = lineasArticuloBolsa.getNumLinesArticles(dCtxSh.channel, driver);
 				} 
 				catch (Exception e) {
-					pLogger.debug("Problem getting num articles in Bag. " + e.getClass().getName() + ". " + e.getMessage());
+					Log4jTM.getLogger().debug(
+						"Problem getting num articles in Bag. " + e.getClass().getName() + ". " + e.getMessage());
 					numArticulos = 0;
 				}
 				i += 1;

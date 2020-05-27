@@ -40,7 +40,7 @@ public class PageMercpagoDatosTrjStpV {
     
     public void inputNumTarjeta(String numTarjeta) throws Exception {
         switch (channel) {
-        case movil_web:
+        case mobile:
             inputNumTarjetaMobil(numTarjeta);
             break;
         default:
@@ -99,7 +99,7 @@ public class PageMercpagoDatosTrjStpV {
     
     private void inputData(InputData inputData) throws Exception {
         switch (channel) {
-        case movil_web:
+        case mobile:
             inputDataMobil(inputData);
             break;
         default:
@@ -111,7 +111,7 @@ public class PageMercpagoDatosTrjStpV {
     
     private void clickButtonForPay(boolean afterTrjGuardada) throws Exception {
         switch (channel) {
-        case movil_web:
+        case mobile:
             clickButtonForPayMobil(afterTrjGuardada);
             break;
         default:
@@ -152,7 +152,7 @@ public class PageMercpagoDatosTrjStpV {
     		PageResultPagoStpV.validaIsPageUntil(30, channel, driver);
     	}
     	else {
-    		PageMercpagoConfStpV.validaIsPageUntil(5, Channel.movil_web, driver);
+    		PageMercpagoConfStpV.validaIsPageUntil(5, Channel.mobile, driver);
     	}
     }    
     

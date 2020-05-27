@@ -22,7 +22,7 @@ public class PagePaytrail1rstStpV {
     		PagePaytrail1rst.isPresentEntradaPago(nombrePagoCabecera, driver), State.Warn);
     	
     	State stateVal = State.Warn;
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
         	stateVal = State.Info;
         }
     	validations.add(

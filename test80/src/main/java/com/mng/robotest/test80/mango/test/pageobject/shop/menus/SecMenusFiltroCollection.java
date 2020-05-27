@@ -15,7 +15,7 @@ public interface SecMenusFiltroCollection {
     
     public static SecMenusFiltroCollection make(Channel channel, AppEcom app, WebDriver driver) {
     	switch (channel) {
-    	case movil_web:
+    	case mobile:
     		return new SecMenusFiltroCollectionMobil(app, driver);
     	case desktop:
     	default:

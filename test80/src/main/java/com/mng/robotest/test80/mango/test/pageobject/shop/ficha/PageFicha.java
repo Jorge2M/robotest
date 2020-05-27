@@ -41,7 +41,7 @@ public abstract class PageFicha extends PageObjTM {
     //Constructor estático
     public static PageFicha newInstance(Channel channel, AppEcom appE, WebDriver driver) {
     	PageFicha pageFicha;
-        if (appE==AppEcom.outlet || channel==Channel.movil_web) {
+        if (appE==AppEcom.outlet || channel==Channel.mobile) {
         	pageFicha = PageFichaArtOld.getNewInstance(channel, driver);
         } else {
         	pageFicha = PageFichaArtNew.getNewInstance(channel, driver);

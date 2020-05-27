@@ -49,7 +49,7 @@ public class PagoGetterTest {
 
 		//When
 		List<String> listPaymentsResult = PagoGetter.getLabelsPaymentsAlphabetically(
-				listCodCountries, Channel.movil_web, AppEcom.outlet, false);
+				listCodCountries, Channel.mobile, AppEcom.outlet, false);
 
 		//Then
 		assertTrue(listPaymentsResult.contains("VISA"));

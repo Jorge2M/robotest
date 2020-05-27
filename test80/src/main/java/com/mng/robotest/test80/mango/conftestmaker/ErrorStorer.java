@@ -8,18 +8,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.github.jorge2m.testmaker.conf.Log4jConfig;
 import com.github.jorge2m.testmaker.domain.InputParamsTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
+import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.EmbeddedDriver;
 import com.github.jorge2m.testmaker.testreports.stepstore.EvidenceStorer;
 import com.github.jorge2m.testmaker.testreports.stepstore.StepEvidence;
 
 public class ErrorStorer extends EvidenceStorer {
 
 	public ErrorStorer() {
-		super(StepEvidence.errorpage);
+		super(StepEvidence.ErrorPage);
 	}
 	
 	@Override
@@ -29,7 +28,7 @@ public class ErrorStorer extends EvidenceStorer {
 			content = capturaErrorPage(step);
 		}
 		catch (Exception e) {
-			Log4jConfig.pLogger.warn("Exception capturin error. " + e);
+			step.getSuiteParent().getLogger().warn("Exception capturin error. " + e);
 		}
 		return content;
 	}
@@ -40,8 +39,8 @@ public class ErrorStorer extends EvidenceStorer {
 	private String capturaErrorPage(StepTM step) throws Exception {
 		String htmlPageError = "";
 		InputParamsTM inputParams = TestMaker.getTestCase().getInputParamsSuite();
-		WebDriverType webDriverType = inputParams.getWebDriverType();
-		if (webDriverType!=WebDriverType.browserstack) {
+		String driverId = inputParams.getDriver();
+		if (driverId.compareTo(EmbeddedDriver.browserstack.name())!=0) {
 			//Cargamos la página errorPage en una pestaña aparte y nos posicionamos en ella
 			//BrowserStack parece que no soporta abrir ventanas aparte
 			WebDriver driver = TestMaker.getDriverTestCase();

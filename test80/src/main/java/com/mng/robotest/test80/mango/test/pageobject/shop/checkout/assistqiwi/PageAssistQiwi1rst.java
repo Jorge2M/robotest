@@ -18,14 +18,14 @@ public class PageAssistQiwi1rst {
     static String XPathIconoPasarelasDesktop = "//form/div[@class='tip']";
     
     public static String getXPATH_icono(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathIconoMobil;
         }
         return XPathIconoDesktop;
     }
         
     public static String getXPATH_iconPasarelas(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathIconoPasarelasMobil;
         }
         return XPathIconoPasarelasDesktop;

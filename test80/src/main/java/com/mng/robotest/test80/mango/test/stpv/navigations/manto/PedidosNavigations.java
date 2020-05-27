@@ -5,7 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.conf.Log4jConfig;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.InputParamsTM.TypeAccess;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
@@ -28,7 +28,6 @@ import com.mng.robotest.test80.mango.test.stpv.manto.SecFiltrosMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.SecFiltrosMantoStpV.TypeSearch;
 
 public class PedidosNavigations {
-    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 
     public static void testPedidosEnManto(CopyOnWriteArrayList<DataPedido> listPedidos, AppEcom appE, WebDriver driver)
     throws Exception {
@@ -74,7 +73,7 @@ public class PedidosNavigations {
                     validaPedidoStpVs(dataPedido, appE, driver);
                 }
                 catch (Exception e) {
-                    pLogger.warn("Problem in validation of Pedido", e);
+                	Log4jTM.getLogger().warn("Problem in validation of Pedido", e);
                 }      
             }
         }

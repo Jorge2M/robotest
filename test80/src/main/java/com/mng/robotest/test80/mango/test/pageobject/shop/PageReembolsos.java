@@ -198,7 +198,7 @@ public class PageReembolsos {
 
 	public static boolean isVisibleModalConfTransf(WebDriver driver, Channel channel, int seconds) throws Exception {
 		//En el caso de móvil el div se oculta desplazándolo x píxeles por debajo de la coordenada 0Y
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			for (int i=0; i<seconds; i++) {
 				if (driver.findElement(By.xpath(XPathModalConfTransf)).getLocation().getY()>0) {
 					return (true);
@@ -215,7 +215,7 @@ public class PageReembolsos {
 
 	public static boolean isNotVisibleModalConfTransf(WebDriver driver, Channel channel, int seconds) throws Exception {
 		//En el caso de móvil el div se oculta desplazándolo x píxeles por debajo de la coordenada 0Y
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			for (int i=0; i<seconds; i++) {
 				if (driver.findElement(By.xpath(XPathModalConfTransf)).getLocation().getY()<20) {
 					return (true);

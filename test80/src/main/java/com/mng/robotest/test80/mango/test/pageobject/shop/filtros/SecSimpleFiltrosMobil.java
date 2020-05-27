@@ -33,7 +33,7 @@ public class SecSimpleFiltrosMobil extends PageObjTM implements SecFiltros {
 	}
 	
 	public static SecSimpleFiltrosMobil getInstance(AppEcom app, WebDriver driver) {
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.movil_web, app, driver);
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.mobile, app, driver);
 		return (new SecSimpleFiltrosMobil(driver, pageGaleria));
 	}
 	

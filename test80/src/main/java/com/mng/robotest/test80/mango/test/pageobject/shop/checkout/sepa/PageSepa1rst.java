@@ -21,7 +21,7 @@ public class PageSepa1rst {
     static String XPathIconoSepaDesktop = XPathListOfPayments + "/li[@data-variant[contains(.,'sepa')]]";
     
     public static String getXPathIconoSepa(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathIconoSepaMobil;
         }
         return XPathIconoSepaDesktop;
@@ -46,7 +46,7 @@ public class PageSepa1rst {
     }
 
 	public static void clickButtonContinuePago(Channel channel, WebDriver driver) {
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			click(By.xpath(XPathButtonContinueMobil), driver).exec();
 		} else {
 			click(By.xpath(XPathButtonPagoDesktop), driver).exec();

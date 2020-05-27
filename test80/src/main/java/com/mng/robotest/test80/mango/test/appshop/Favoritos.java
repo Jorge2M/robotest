@@ -114,7 +114,7 @@ public class Favoritos implements Serializable {
 		secMenusStpV.getMenusUser().selectFavoritos(dataFavoritos);
 		ArticuloScreen artToPlay = dataFavoritos.getArticulo(0);
 		pageFavoritosStpV.addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel);
-		if (dCtxSh.channel==Channel.movil_web) {
+		if (dCtxSh.channel==Channel.mobile) {
 			SecBolsaStpV.clickAspaForCloseMobil(driver);
 			pageFavoritosStpV.validaIsPageOK(dataFavoritos);
 		}
@@ -173,7 +173,7 @@ public class Favoritos implements Serializable {
 		ArticuloScreen artToPlay = dataFavoritos.getArticulo(0);
 		pageFavoritosStpV.clickArticuloImg(artToPlay);
 		pageFavoritosStpV.getModalFichaFavoritosStpV().addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel, dCtxSh.appE);
-		if (dCtxSh.channel==Channel.movil_web) {
+		if (dCtxSh.channel==Channel.mobile) {
 			pageFavoritosStpV.validaIsPageOK(dataFavoritos);
 		} else {
 			pageFavoritosStpV.getModalFichaFavoritosStpV().closeFicha(artToPlay);

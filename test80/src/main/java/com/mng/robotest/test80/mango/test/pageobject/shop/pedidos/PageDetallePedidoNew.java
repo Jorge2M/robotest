@@ -20,7 +20,7 @@ public class PageDetallePedidoNew extends PageObjTM implements PageDetallePedido
     	switch (channel) {
     	case desktop:
     		return XPathBackButtonDesktop;
-    	case movil_web:
+    	case mobile:
     	default:
     		return XPathBackButtonMobil;
     	}

@@ -107,14 +107,14 @@ public class SecDataProduct extends SeleniumUtils {
         switch (channel) {
         case desktop:
             return "//span[@class[contains(.,'-reference')] and text()[contains(.,'" + referencia + "')]]";
-        case movil_web:
+        case mobile:
         default:
             return "//p[@class[contains(.,'-reference')] and text()[contains(.,'" + referencia + "')]]";
         }
     }
     
     private static String getXPathNombreArt(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathNombreArticuloMobil;
         }
         return XPathNombreArticuloDesktop;
@@ -178,7 +178,7 @@ public class SecDataProduct extends SeleniumUtils {
                 return (driver.findElement(By.xpath(XPathNombreColorSelectedDesktop)).getAttribute("alt"));
             }
             return Constantes.colorDesconocido;
-        case movil_web:
+        case mobile:
         default:
         	return (getNombreColorMobil(ColorType.Selected, driver));
         }

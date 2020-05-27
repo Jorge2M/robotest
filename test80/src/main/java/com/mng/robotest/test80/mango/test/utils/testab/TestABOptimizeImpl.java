@@ -31,7 +31,7 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 			"V1-B - Color en link + CTA añadir con selectores como overlay", 
 			"V2-C - Color CTA + CTA añadir con selectores en modal",
 			"V3-D - Color en link + CTA añadir con selectores en modal"),
-		Arrays.asList(Channel.movil_web),
+		Arrays.asList(Channel.mobile),
 		Arrays.asList(AppEcom.shop)
 	),
 	

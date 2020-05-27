@@ -1,20 +1,15 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.github.jorge2m.testmaker.conf.Log4jConfig;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 
 
 public class SecMetodoEnvioDesktop {
-	
-	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
     public static ModalDroppoints modalDroppoints;
     static String XPathRadioInput = "//input[@id[contains(.,'Transportes')]]";

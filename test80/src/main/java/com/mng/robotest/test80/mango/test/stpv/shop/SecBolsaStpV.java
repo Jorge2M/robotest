@@ -45,7 +45,7 @@ public class SecBolsaStpV {
 
 	public static void close(Channel channel, AppEcom app, WebDriver driver) 
 	throws Exception {
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			clickAspaForCloseMobil(driver);
 		} else {
 			forceStateBolsaTo(StateBolsa.Closed, app, channel, driver);
@@ -64,7 +64,7 @@ public class SecBolsaStpV {
 		description="Desaparece la bolsa (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
 	private static boolean checkBolsaDisappears(int maxSeconds, WebDriver driver) {
-		return (SecBolsa.isInStateUntil(StateBolsa.Closed, Channel.movil_web, maxSeconds, driver));
+		return (SecBolsa.isInStateUntil(StateBolsa.Closed, Channel.mobile, maxSeconds, driver));
 	}
 
 	/**

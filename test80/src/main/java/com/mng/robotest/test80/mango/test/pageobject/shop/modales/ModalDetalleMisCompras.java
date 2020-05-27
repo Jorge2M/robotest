@@ -32,7 +32,7 @@ public class ModalDetalleMisCompras extends PageObjTM {
 		switch (channel) {
 		case desktop:
 			return XPathLinkToMisComprasDesktop;
-		case movil_web:
+		case mobile:
 		default:
 			return XPathLinkToMisComprasMobil;
 		}

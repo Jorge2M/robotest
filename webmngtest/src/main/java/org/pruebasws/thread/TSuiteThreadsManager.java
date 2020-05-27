@@ -62,7 +62,7 @@ public class TSuiteThreadsManager {
         return (
         	getLocatorThreadTestSuite(
         		paramsTSuite.getSuiteName(), paramsTSuite.getApp().toString(), paramsTSuite.getChannel().toString(), 
-        		paramsTSuite.getWebDriverType().toString(), paramsTSuite.getVersion(), idExecSuite));   
+        		paramsTSuite.getDriver(), paramsTSuite.getVersion(), idExecSuite));   
     }
     
     public static String getLocatorThreadTestSuite(String suiteName, String application, String channel, String browser, String version, String idSuiteExecution) {

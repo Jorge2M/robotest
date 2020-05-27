@@ -644,7 +644,7 @@ public class Pago implements Serializable {
     }
     
     public String getNombre(Channel channel) {
-        if (channel==Channel.movil_web && getNombremovil()!=null && "".compareTo(getNombremovil())!=0) {
+        if (channel==Channel.mobile && getNombremovil()!=null && "".compareTo(getNombremovil())!=0) {
             return getNombremovil();
         }
         return getNombre();
