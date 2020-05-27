@@ -1,7 +1,6 @@
 package com.mng.robotest.test80.mango.test.suites;
 
 import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.getParametersSuiteShop;
-import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.getTestRunsForBrowserStack;
 import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.isBrowserStack;
 
 import java.util.Arrays;
@@ -48,22 +47,20 @@ public class PagosPaisesSuite extends SuiteMaker {
 		public boolean validaPedidosEnManto() {return validaPedidosEnManto;}
 		public boolean isEmpl() {return isEmpl;}
 		public boolean forceTestMisCompras() {return forceTestMisCompras;}
-    }
+	}
 	
-    public PagosPaisesSuite(InputParamsMango inputParams) {
-    	super(inputParams);
-    	setParameters(getParametersSuiteShop(inputParams));
-    	List<Class<?>> listTestClasses = Arrays.asList(ListPrecompraPaises.class);
-    	if (!isBrowserStack(inputParams.getDriver())) {
-	    	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), listTestClasses);
-	    	testRun.setStorerErrorStep(new ErrorStorer());
-	    	addTestRun(testRun);
-	    	setParallelMode(ParallelMode.METHODS);
-	    	setThreadCount(4);
-    	} else {
-    		addTestRuns(getTestRunsForBrowserStack(inputParams.getSuiteName(), inputParams.getChannel(), listTestClasses));
-	    	setParallelMode(ParallelMode.TESTS);
-	    	setThreadCount(Constantes.BSTACK_PARALLEL);
-    	}
-    }
+	public PagosPaisesSuite(InputParamsMango inputParams) {
+		super(inputParams);
+		setParameters(getParametersSuiteShop(inputParams));
+		List<Class<?>> listTestClasses = Arrays.asList(ListPrecompraPaises.class);
+		TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), listTestClasses);
+		testRun.setStorerErrorStep(new ErrorStorer());
+		addTestRun(testRun);
+		setParallelMode(ParallelMode.METHODS);
+		if (!isBrowserStack(inputParams.getDriver())) {
+			setThreadCount(4);
+		} else {
+			setThreadCount(Constantes.BSTACK_PARALLEL);
+		}
+	}
 }

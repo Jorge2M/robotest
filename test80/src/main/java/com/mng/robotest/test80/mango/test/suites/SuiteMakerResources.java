@@ -1,21 +1,12 @@
 package com.mng.robotest.test80.mango.test.suites;
 
-import static com.mng.robotest.test80.mango.test.data.BrowserStackCtxDesktop.macOSMojave_Safari;
-import static com.mng.robotest.test80.mango.test.data.BrowserStackCtxDesktop.Win8_Firefox68;
-import static com.mng.robotest.test80.mango.test.data.BrowserStackCtxMobil.IPhoneXS_iOS12;
-import static com.mng.robotest.test80.mango.test.data.BrowserStackCtxMobil.SamsungGalaxyS9plus_Android9;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.EmbeddedDriver;
 //import com.github.jorge2m.testmaker.listeners.CallBack;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.test.data.Constantes;
-import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.domain.TestRunMaker;
 
 public class SuiteMakerResources {
     
@@ -76,27 +67,4 @@ public class SuiteMakerResources {
     public static boolean isBrowserStack(String browser) {
     	return (browser.compareTo(EmbeddedDriver.browserstack.name())==0);
     }
-
-	public static List<TestRunMaker> getTestRunsForBrowserStack(String suiteName, Channel channel, List<Class<?>> listClasses) {
-		List<TestRunMaker> listTestsRun = new ArrayList<>();
-		switch (channel) {
-		case desktop:
-			TestRunMaker testRunOSX = TestRunMaker.from(suiteName + "_" + macOSMojave_Safari, listClasses);
-			testRunOSX.setBrowserStackDesktop(macOSMojave_Safari);
-			listTestsRun.add(testRunOSX);
-			TestRunMaker testRunWin8 = TestRunMaker.from(suiteName + Win8_Firefox68, listClasses);
-			testRunWin8.setBrowserStackDesktop(Win8_Firefox68);
-			listTestsRun.add(testRunWin8);
-			break;
-		case mobile:
-			TestRunMaker testRunAndroid = TestRunMaker.from(suiteName + SamsungGalaxyS9plus_Android9, listClasses);
-			testRunAndroid.setBrowserStackMobil(SamsungGalaxyS9plus_Android9);
-			listTestsRun.add(testRunAndroid);
-			TestRunMaker testRuniOS = TestRunMaker.from(suiteName + IPhoneXS_iOS12, listClasses);
-			testRuniOS.setBrowserStackMobil(IPhoneXS_iOS12);
-			listTestsRun.add(testRuniOS);
-		}
-		
-		return listTestsRun;
-	}
 }
