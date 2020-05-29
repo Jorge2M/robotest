@@ -74,7 +74,7 @@ public class AccesoNavigations {
     
     public static void cambioPaisFromHomeIfNeeded(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        String codigoPais = PageLanding.getCodigoPais(driver);
+        String codigoPais = (new PageLanding(driver)).getCodigoPais();
         if (dCtxSh.pais.getCodigo_pais().compareTo(codigoPais)!=0) {
             cambioPais(dCtxSh, driver);
         }

@@ -197,6 +197,13 @@ public class SecMenusWrapperStpV {
         	secMenusDesktopStpV.selectMenuSuperiorTypeCatalog(menu1rstLevel, dCtxSh);
         }
     }
+    public boolean checkExistMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) {
+        if (dCtxSh.channel==Channel.mobile) {
+            return secMenuLateralMobilStpV.checkNotExistsMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh.pais);
+        } else {	
+        	return secMenusDesktopStpV.checkNotExistsMenuSuperiorTypeCatalog(menu1rstLevel);
+        }
+    }
     
     public void selectMenuLateral1erLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
         if (dCtxSh.channel==Channel.mobile) {

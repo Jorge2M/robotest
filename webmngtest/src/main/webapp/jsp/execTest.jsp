@@ -163,7 +163,7 @@ response.setDateHeader ("Expires", -1);%>
 	    }
 
 	    //Parameters that don't come from index.jsp (for exemple, the call from Jenkin's CI Task)
-	    paramsTSuite.setStoreResult(StoreUntil.testcase); 
+	    paramsTSuite.setStoreBd(StoreUntil.testcase); 
 	    paramsTSuite.setUrlManto(request.getParameter(InputParamsMango.UrlMantoParam)); 
 	    paramsTSuite.setRecicleWD(request.getParameter(InputParamsTM.RecicleWDParam)); 
 	    paramsTSuite.setNetAnalysis(request.getParameter(InputParamsTM.NetAnalysisParam));

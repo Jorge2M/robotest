@@ -12,15 +12,18 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
+import com.mng.robotest.test80.mango.test.stpv.shop.landing.PageLandingStpV;
 
 public class SecCabeceraStpV {
 
 	private final SecCabecera secCabecera;
+	private final WebDriver driver;
 	private final Pais pais;
 	
 	private SecCabeceraStpV(Pais pais, Channel channel, AppEcom app, WebDriver driver) {
 		this.pais = pais;
 		this.secCabecera = SecCabecera.getNew(channel, app, driver);
+		this.driver = driver;
 	}
 	
 	public static SecCabeceraStpV getNew(Pais pais, Channel channel, AppEcom app, WebDriver driver) {
@@ -32,6 +35,7 @@ public class SecCabeceraStpV {
 		expected="Se accede a la página principal de la línea")
 	public void selecLogo() throws Exception {
 		secCabecera.clickLogoMango();
+		(new PageLandingStpV(driver)).checkIsPage(5);
 	}
 
 	@Validation

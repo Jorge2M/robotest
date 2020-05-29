@@ -35,7 +35,9 @@ public class SmokeTestSuite extends SuiteMaker {
 	public SmokeTestSuite(InputParamsMango inputParams) {
 		super(inputParams);
 		setParameters(getParametersSuiteShop(inputParams));
-		TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), getClasses());
+		TestRunMaker testRun = TestRunMaker.from(
+				inputParams.getSuiteName(), 
+				getClasses());
 		testRun.setStorerErrorStep(new ErrorStorer());
 		addTestRun(testRun);
 		setParallelMode(ParallelMode.METHODS);

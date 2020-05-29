@@ -164,12 +164,17 @@ public class SecBloquesMenuDesktop extends PageObjTM {
         return (driver.findElements(By.xpath(xpathMenuLinea + xpathEntradaMenu)));
     }
 
-    public void clickMenuAndGetName(Menu1rstLevel menu1rstLevel) {
+    public boolean goToMenuAndCheckIsVisible(Menu1rstLevel menu1rstLevel) {
     	LineaType lineaMenu = menu1rstLevel.getLinea();
     	SublineaNinosType sublineaMenu = menu1rstLevel.getSublinea();
     	secLineasMenu.hoverLineaAndWaitForMenus(lineaMenu, sublineaMenu);
         String xpathMenu = getXPathMenuSuperiorLinkVisible(menu1rstLevel);
-        state(Visible, By.xpath(xpathMenu)).wait(1).check();
+        return (state(Visible, By.xpath(xpathMenu)).wait(1).check());
+    }
+    
+    public void clickMenuAndGetName(Menu1rstLevel menu1rstLevel) {
+    	goToMenuAndCheckIsVisible(menu1rstLevel);
+    	String xpathMenu = getXPathMenuSuperiorLinkVisible(menu1rstLevel);
         moveToElement(By.xpath(xpathMenu), driver);
         click(By.xpath(xpathMenu)).exec();
     }    

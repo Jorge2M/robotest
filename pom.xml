@@ -6,11 +6,9 @@
 	<version>1.0</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>testmaker0</module>
 		<module>test80</module>
 		<module>webmngtest</module>
 		<module>sapfiori</module>
-		<module>archetype0</module>
   </modules>
 
 	<properties>
@@ -38,11 +36,13 @@
 	-->
 
 	<dependencies>
+		<!-- 
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 			<version>2.10.0</version>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

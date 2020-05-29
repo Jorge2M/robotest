@@ -56,6 +56,13 @@ public class SecMenuLateralMobilStpV {
 		secMenuLateral.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, dCtxSh.pais);
 		validaSelecMenu(menu1rstLevel, dCtxSh);
 	}
+	
+	@Validation(
+		description="No existe el menú lateral de 1er nivel <b>#{menu1rstLevel}</b>",
+		level=State.Defect)
+	public boolean checkNotExistsMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, Pais pais) {
+		return (!secMenuLateral.existsMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais));
+	}
 
 	public void validaSelecMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh) throws Exception {
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
@@ -292,11 +299,12 @@ public class SecMenuLateralMobilStpV {
     	level=State.Warn)
     private boolean checkElementsAfterClickMenu2onLevel() throws Exception {
     	PageGaleria pageGaleria = PageGaleria.getNew(Channel.mobile, app, driver);
+    	PageLanding pageLanding = new PageLanding(driver);
         return (
         	pageGaleria.isVisibleArticleUntil(1, 3) ||
-            PageLanding.hayIframes(driver) ||
-            PageLanding.hayMaps(driver) ||
-            PageLanding.haySliders(driver) ||
+            pageLanding.hayIframes() ||
+            pageLanding.hayMaps() ||
+            pageLanding.haySliders() ||
             ManagerBannersScreen.existBanners(driver));
     }
 }

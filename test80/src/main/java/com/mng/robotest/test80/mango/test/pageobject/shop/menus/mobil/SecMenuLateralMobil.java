@@ -423,6 +423,12 @@ public class SecMenuLateralMobil extends PageObjTM {
         //menu1rstLevel.setNombre(getLiteralMenuVisible(typeLocator, menu1rstLevel));
         clickMenuYetDisplayed(typeLocator, menu1rstLevel);
     }
+    public boolean existsMenuLateral1rstLevel(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel, Pais pais) {
+        Linea linea = pais.getShoponline().getLinea(menu1rstLevel.getLinea());
+        selectLinea(linea, menu1rstLevel.getSublinea());
+		String xpathMenu = getXPathMenuByTypeLocator(typeLocator, menu1rstLevel);
+		return (state(Visible, By.xpath(xpathMenu)).check());
+    }
     
     public void bringHeaderMobileBackground() throws Exception {
     	WebElement menuWrapp = driver.findElement(By.xpath(XPathHeaderMobile));

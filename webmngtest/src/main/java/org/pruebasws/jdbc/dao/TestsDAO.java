@@ -116,7 +116,7 @@ public class TestsDAO {
         ArrayList<SuiteTestData> listSuites = new ArrayList<>();
         ArrayList<String> listLineas = getListLinesShop();
         try (Connection conn = getConnection();
-            PreparedStatement select = conn.prepareStatement(SQLSelectDataTests)) {            
+            PreparedStatement select = conn.prepareStatement(SQLSelectDataTests)) {
             select.setString(1, filterSuite);
             select.setString(2, filterChannel);
             try (ResultSet resultado = select.executeQuery()) {

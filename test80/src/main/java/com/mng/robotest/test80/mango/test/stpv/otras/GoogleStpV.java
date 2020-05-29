@@ -56,7 +56,7 @@ public class GoogleStpV {
 		description="Aparece la página de <b>Landing</b> o <b>Prehome</b>",
 		level=State.Defect)	
 	private boolean checkInitialPageShop() throws Exception {
-        boolean isPageLanding = PageLanding.isPage(driver);
+        boolean isPageLanding = (new PageLanding(driver)).isPage();
         boolean isPagePrehome = PagePrehome.isPage(driver);
         return (isPageLanding || isPagePrehome);
 	}

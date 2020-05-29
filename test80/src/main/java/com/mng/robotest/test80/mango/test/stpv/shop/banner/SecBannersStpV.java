@@ -23,12 +23,14 @@ import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
 public class SecBannersStpV {
 	
 	int maxBannersToLoad;
-	ManagerBannersScreen managerBannersScreen;
-	WebDriver driver;
+	private final ManagerBannersScreen managerBannersScreen;
+	private final PageLanding pageLanding;
+	private final WebDriver driver;
 	
 	public SecBannersStpV(int maxBannersToLoad, WebDriver driver) {
 		this.driver = driver;
 		managerBannersScreen = new ManagerBannersScreen(maxBannersToLoad, driver);
+		pageLanding = new PageLanding(driver);
 	}
 	
 	public ManagerBannersScreen getManagerBannerScreen() {
@@ -121,8 +123,8 @@ public class SecBannersStpV {
     	description="Aparece una página con secciones, galería, banners, bloque de contenido con imágenes o página acceso",
     	level=State.Warn)
     public boolean validacionesBannerEstandar(AppEcom app) throws Exception {
-        if (!PageLanding.haySecc_Art_Banners(app, driver)) {
-            return (PageLanding.hayImgsEnContenido(driver));
+        if (!pageLanding.haySecc_Art_Banners(app)) {
+            return (pageLanding.hayImgsEnContenido());
         }
         
         return true; 
@@ -133,8 +135,8 @@ public class SecBannersStpV {
     	level=State.Warn)
     public boolean validaBannEnContenido() {
         boolean existBanners = managerBannersScreen.existBanners();
-        boolean existsMaps = PageLanding.hayMaps(driver);
-        boolean existsEditItems = PageLanding.hayItemsEdits(driver);
+        boolean existsMaps = pageLanding.hayMaps();
+        boolean existsEditItems = pageLanding.hayItemsEdits();
         return (existBanners || existsMaps || existsEditItems);
     }
 }

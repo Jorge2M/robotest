@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.ficha;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 /**
@@ -12,17 +12,20 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
  *
  */
 
-public class ModEnvioYdevolNew {
+public class ModEnvioYdevolNew extends PageObjTM {
 
-	static String XPathWrapper = "//div[@class='handling-modal-wrapper']";
-	static String XPathAspaForClose = XPathWrapper + "//span[@class[contains(.,'modal-close')]]";
+	private static String XPathWrapper = "//div[@class='handling-modal-wrapper']";
+	private static String XPathAspaForClose = XPathWrapper + "//span[@class[contains(.,'modal-close')]]";
 
-	public static boolean isVisibleUntil(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(XPathWrapper), driver)
-				.wait(maxSeconds).check());
+	public ModEnvioYdevolNew(WebDriver driver) {
+		super(driver);
+	}
+	
+	public boolean isVisibleUntil(int maxSeconds) {
+		return (state(Visible, By.xpath(XPathWrapper)).wait(maxSeconds).check());
 	}
 
-	public static void clickAspaForClose(WebDriver driver) {
-		click(By.xpath(XPathAspaForClose), driver).exec();
+	public void clickAspaForClose() {
+		click(By.xpath(XPathAspaForClose)).exec();
 	}
 }

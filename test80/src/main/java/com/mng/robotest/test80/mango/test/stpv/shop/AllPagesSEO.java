@@ -91,7 +91,9 @@ public class AllPagesSEO {
             //El canonical ha de aparecer como mínimo en las páginas de Portada, Catálogo y Ficha
         	PageFicha pageFicha = PageFicha.newInstanceFichaNew(Channel.desktop, AppEcom.shop, driver);
         	PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, AppEcom.shop, driver);
-            if (PageLanding.isPage(driver) || ((PageGaleriaDesktop)pageGaleria).isPage() || pageFicha.isPageUntil(0)) {
+            if ((new PageLanding(driver)).isPage() || 
+            	((PageGaleriaDesktop)pageGaleria).isPage() || 
+            	pageFicha.isPageUntil(0)) {
                 String currentURL = driver.getCurrentUrl(); 
                 //Hemos de añadir un par de excepciones
                 if (!currentURL.contains("catalogPc.faces?") && !currentURL.contains("search?") && !currentURL.contains("favorites.faces?")) {

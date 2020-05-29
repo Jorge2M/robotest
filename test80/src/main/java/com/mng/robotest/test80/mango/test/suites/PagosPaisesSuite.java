@@ -53,7 +53,9 @@ public class PagosPaisesSuite extends SuiteMaker {
 		super(inputParams);
 		setParameters(getParametersSuiteShop(inputParams));
 		List<Class<?>> listTestClasses = Arrays.asList(ListPrecompraPaises.class);
-		TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), listTestClasses);
+		TestRunMaker testRun = TestRunMaker.from(
+				inputParams.getSuiteName(), 
+				listTestClasses);
 		testRun.setStorerErrorStep(new ErrorStorer());
 		addTestRun(testRun);
 		setParallelMode(ParallelMode.METHODS);

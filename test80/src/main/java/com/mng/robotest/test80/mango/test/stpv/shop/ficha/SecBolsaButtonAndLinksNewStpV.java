@@ -15,6 +15,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.ModCompartirNew.
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecBolsaButtonAndLinksNew.LinksAfterBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecDetalleProductNew.ItemBreadcrumb;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrOld.TypePanel;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class SecBolsaButtonAndLinksNewStpV {
 
@@ -23,7 +24,15 @@ public class SecBolsaButtonAndLinksNewStpV {
 		expected="Aparece el modal con los datos a nivel de envío y devolución")
 	public static void selectEnvioYDevoluciones(WebDriver driver) throws Exception {
 		SecBolsaButtonAndLinksNew.clickLinkAndWaitLoad(LinksAfterBolsa.EnvioGratisTienda, driver);
-		ModEnvioYdevolNewStpV.validateIsVisible(driver);
+		(new ModEnvioYdevolNewStpV(driver)).checkIsVisible();
+	}
+	@Validation (
+		description="No es visible el link <b>Envío gratis a tienda</b>",
+		level=State.Defect)
+	public static boolean checkEnvioGratisInvisible(WebDriver driver) {
+		return (
+			SecBolsaButtonAndLinksNew
+				.checkLinkInState(LinksAfterBolsa.EnvioGratisTienda, Invisible, driver));
 	}
 
 	@Step (

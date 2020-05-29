@@ -3,6 +3,8 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.ficha;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -85,5 +87,10 @@ public class SecBolsaButtonAndLinksNew {
 	public static void clickLinkAndWaitLoad(LinksAfterBolsa linkType, WebDriver driver) {
 		String xpathLink = getXPathLink(linkType);
 		click(By.xpath(xpathLink), driver).exec();
+	}
+	
+	public static boolean checkLinkInState(LinksAfterBolsa linkType, State state, WebDriver driver) {
+		String xpathLink = getXPathLink(linkType);
+		return (state(state, By.xpath(xpathLink), driver).check());
 	}
 }

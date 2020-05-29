@@ -88,6 +88,12 @@ public class SecMenusDesktopStpV {
     	secMenus.secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel);
     	validaSelecMenu(menu1rstLevel, dCtxSh);
     }
+    @Validation(
+    	description="No existe el menú superior <b>#{menu1rstLevel}</b>",
+    	level=State.Defect)
+    public boolean checkNotExistsMenuSuperiorTypeCatalog(Menu1rstLevel menu1rstLevel) {
+    	return (!secMenus.secMenuSuperior.secBlockMenus.goToMenuAndCheckIsVisible(menu1rstLevel));
+    }
     
     @Step (
     	description="Seleccionar el menú lateral de 1er nivel <b>#{menu1rstLevel}</b>", 
@@ -441,10 +447,11 @@ public class SecMenusDesktopStpV {
     	level=State.Warn)
     private boolean checkAreValidMangoObjectsInPage() throws Exception {
         PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
+        PageLanding pageLanding = new PageLanding(driver);
         if (!pageGaleria.isVisibleArticleUntil(1, 3) &&
-            !PageLanding.hayIframes(driver) &&
-            !PageLanding.hayMaps(driver) &&
-            !PageLanding.haySliders(driver)) {
+            !pageLanding.hayIframes() &&
+            !pageLanding.hayMaps() &&
+            !pageLanding.haySliders()) {
             int maxBannersToLoad = 1;
             ManagerBannersScreen managerBanners = new ManagerBannersScreen(maxBannersToLoad, driver);
             return (managerBanners.existBanners());
@@ -565,7 +572,7 @@ public class SecMenusDesktopStpV {
     	ChecksTM validations = ChecksTM.getNew();
     	GroupMenu groupMenu = menu.getGroup();
     	List<Element> elemsCanBeContained = groupMenu.getElementsCanBeContained();
-    	boolean contentPageOk = PageLanding.isSomeElementVisibleInPage(elemsCanBeContained, app, driver);
+    	boolean contentPageOk = (new PageLanding(driver)).isSomeElementVisibleInPage(elemsCanBeContained, app);
 	 	validations.add(
 			"Aparecen alguno de los siguientes elementos: <b>" + elemsCanBeContained + "</b> (es un menú perteneciente al grupo <b>" + groupMenu + ")</b>",
 			contentPageOk, State.Warn);

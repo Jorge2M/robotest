@@ -9,9 +9,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.ManagerBannersScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
@@ -24,41 +24,49 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDeskt
  * @author jorge.munoz
  *
  */
-public class PageLanding {
+public class PageLanding extends PageObjTM {
 	
-    static String XPathMainContentPais = "//div[@class[contains(.,'main-content')] and @data-pais]";
-    static String XPathContenido = "//div[@class[contains(.,'container-fluid home')]]";
-    static String XPathSlider = "//section[@class='entitieswrapper']//div[@class[contains(.,'vsv-slide')]]";
-    static String XPathEditItem = "//div[@class[contains(.,'item-edit')] and @data-id]";
-    static String XPathMapT1 = "//map[@name[contains(.,'item_')]]/..";
-    static String XPathMapT2 = "//img[@class[contains(.,'responsive')] and @hidefocus='true']";
-    
-    public static boolean isPage(WebDriver driver) throws Exception {
-    	return (state(Present, By.xpath(XPathContenido), driver).check());
+	private static String XPathMainContentPais = "//div[@class[contains(.,'main-content')] and @data-pais]";
+	private static String XPathContenido = "//div[@class[contains(.,'container-fluid home')]]";
+	private static String XPathSlider = "//section[@class='entitieswrapper']//div[@class[contains(.,'vsv-slide')]]";
+	private static String XPathEditItem = "//div[@class[contains(.,'item-edit')] and @data-id]";
+	private static String XPathMapT1 = "//map[@name[contains(.,'item_')]]/..";
+	private static String XPathMapT2 = "//img[@class[contains(.,'responsive')] and @hidefocus='true']";
+
+	public PageLanding(WebDriver driver) {
+		super(driver);
+	}
+	
+    public boolean isPage() {
+    	return (isPageUntil(0));
     }
     
-    public static String getCodigoPais(WebDriver driver) {
-    	if (state(Present, By.xpath(XPathMainContentPais), driver).check()) {
+    public boolean isPageUntil(int maxSeconds) {
+    	return (state(Present, By.xpath(XPathContenido)).wait(maxSeconds).check());
+    }
+    
+    public String getCodigoPais() {
+    	if (state(Present, By.xpath(XPathMainContentPais)).check()) {
             return (driver.findElement(By.xpath(XPathMainContentPais)).getAttribute("data-pais"));
         }
         return "";
     }
     
-    public static boolean haySliders(WebDriver driver) {
-    	return (state(Visible, By.xpath(XPathSlider), driver).check());
+    public boolean haySliders() {
+    	return (state(Visible, By.xpath(XPathSlider)).check());
     }
     
-    public static boolean hayMaps(WebDriver driver) {
-        List<WebElement> listaMaps = getListaMaps(driver);
+    public boolean hayMaps() {
+        List<WebElement> listaMaps = getListaMaps();
         return (listaMaps!=null && listaMaps.size()>0);
     }
     
-    public static boolean hayItemsEdits(WebDriver driver) {
-        List<WebElement> listaItemsEdits = getListaItemsEdit(driver);
+    public boolean hayItemsEdits() {
+        List<WebElement> listaItemsEdits = getListaItemsEdit();
         return (listaItemsEdits!=null && listaItemsEdits.size()>0);
     }
     
-    public static List<WebElement> getListaMaps(WebDriver driver) {
+    public List<WebElement> getListaMaps() {
         // Seleccionamos cada uno de los banners visibles
         List<WebElement> listMaps;
         listMaps = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathMapT1));
@@ -66,7 +74,7 @@ public class PageLanding {
         return listMaps;
     }
     
-    public static List<WebElement> getListaItemsEdit(WebDriver driver) {
+    public List<WebElement> getListaItemsEdit() {
         List<WebElement> listItemsEdits;
         listItemsEdits = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathEditItem));
         return listItemsEdits;        
@@ -75,7 +83,7 @@ public class PageLanding {
     /**
      * Función que indica si hay secciones de vídeo
      */
-    public static boolean hayIframes(WebDriver driver) {
+    public boolean hayIframes() {
         List<WebElement> listaIFrames = UtilsMangoTest.findDisplayedElements(driver, By.xpath("//iframe"));
         return (listaIFrames!=null && listaIFrames.size()>0);
     }
@@ -83,20 +91,20 @@ public class PageLanding {
     /**
      * Función que indica si hay imágenes o no en el contenido de la página
      */
-    public static boolean hayImgsEnContenido(final WebDriver driver) {
+    public boolean hayImgsEnContenido() {
         boolean banners = true;
         String xpathImg = "";
         try {
-        	if (state(Present, By.xpath("//*[@class[contains(.,'bannerHome')]]"), driver).check()) {
+        	if (state(Present, By.xpath("//*[@class[contains(.,'bannerHome')]]")).check()) {
                 xpathImg = "//*[@class[contains(.,'bannerHome')]]//img";
             } else {
-            	if (state(Present, By.xpath("//*[@id[contains(.,'homeContent')]]"), driver).check()) {
+            	if (state(Present, By.xpath("//*[@id[contains(.,'homeContent')]]")).check()) {
                     xpathImg = "//*[@id[contains(.,'homeContent')]]//img";
                 } else {
-                	if (state(Present, By.xpath("//*[@class[contains(.,'contentHolder')]]"), driver).check()) {
+                	if (state(Present, By.xpath("//*[@class[contains(.,'contentHolder')]]")).check()) {
                         xpathImg = "//*[@class[contains(.,'contentHolder')]]//iframe";
                     } else {
-                    	if (state(Present, By.xpath("//*[@id[contains(.,'bodyContent')]]"), driver).check()) {
+                    	if (state(Present, By.xpath("//*[@id[contains(.,'bodyContent')]]")).check()) {
                             xpathImg = "//*[@id[contains(.,'bodyContent')]]//img";
                         } else {
                             banners = false;
@@ -113,16 +121,16 @@ public class PageLanding {
         return banners;
     }
 
-    public static boolean haySecc_Art_Banners(AppEcom app, WebDriver driver) throws Exception {
+    public boolean haySecc_Art_Banners(AppEcom app) throws Exception {
     	PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
         return (((PageGaleriaDesktop)pageGaleria).isVisibleAnyArticle() ||
         		state(Present, By.xpath(
         			"(//section[@id='section1'] | " + 
                      "//div[@class[contains(.,'datos_ficha_producto')]] | " +
-                     "//*[@class='celda'])"), driver).check());
+                     "//*[@class='celda'])")).check());
     }
     
-    public static boolean isSomeElementVisibleInPage(List<Element> elementsCanBeContained, AppEcom app, WebDriver driver) 
+    public boolean isSomeElementVisibleInPage(List<Element> elementsCanBeContained, AppEcom app) 
     throws Exception {
     	for (Element element : elementsCanBeContained) {
     		boolean elementContained = false;
@@ -135,13 +143,13 @@ public class PageLanding {
     			elementContained = ManagerBannersScreen.existBanners(driver);
     			break;
     		case slider:
-    			elementContained = PageLanding.haySliders(driver);
+    			elementContained = haySliders();
     			break;
     		case map:
-    			elementContained = PageLanding.hayMaps(driver);
+    			elementContained = hayMaps();
     			break;
     		case iframe:
-    			elementContained = PageLanding.hayIframes(driver);
+    			elementContained = hayIframes();
     			break;
     		}
     			

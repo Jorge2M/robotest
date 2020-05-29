@@ -41,11 +41,11 @@ public class PageFichaArtStpV {
     WebDriver driver;
     Channel channel;
     AppEcom app;
-    PageFicha pageFicha;
+    private final PageFicha pageFicha;
+    private final ModEnvioYdevolNewStpV modEnvioYdevol;
     
     public static SecProductDescrOldStpV secProductDescOld;
     public static SecBolsaButtonAndLinksNewStpV secBolsaButtonAndLinksNew;
-    public static ModEnvioYdevolNewStpV modEnvioYdevol;
     public static SecFotosNewStpV secFotosNew;
     public static SecFitFinderStpV secFitFinder;
     public static SecTotalLookStpV secTotalLook;
@@ -55,10 +55,14 @@ public class PageFichaArtStpV {
         this.channel = channel;
         this.app = appE;
         this.pageFicha = PageFicha.newInstance(channel, appE, driver);
+        this.modEnvioYdevol = new ModEnvioYdevolNewStpV(driver);
     }
     
     public PageFicha getFicha() {
         return this.pageFicha;
+    }
+    public ModEnvioYdevolNewStpV getModEnvioYdevol() {
+    	return this.modEnvioYdevol;
     }
     
     public void validateIsFichaAccordingTypeProduct(Garment product) throws Exception {            
