@@ -22,6 +22,8 @@ public class TestABactive {
 		//El forzar este TestAB no tiene efecto al estar junto con el de GaleriaDesktopReact v0. Siempre aparece la versión 0
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.PLP_Desktop_New_filters_v2, 0));
 		
+		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.SHOP_260_Menu_Mobile_Nuevo_Diseño, 0));
+		
 		TestABmanager.activateTestsAB(listTestABsToActivate, channel, app, driver);
 	}
 }

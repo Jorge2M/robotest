@@ -24,9 +24,6 @@ public class PagePaypalLoginStpV {
         PagePaypalLogin.inputUserAndPassword(userMail, password, driver);
         PagePaypalLogin.clickIniciarSesion(driver);
         driver.switchTo().window(paginaPadre); //Salimos del iframe
-        
-        //Validaciones
-        int maxSeconds = 20;
-        PagePaypalSelectPagoStpV.validateIsPageUntil(maxSeconds, driver);
+        PagePaypalSelectPagoStpV.validateIsPageUntil(20, driver);
     }
 }

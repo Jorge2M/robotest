@@ -67,14 +67,15 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		"GTM-5T8R33",
 		"SHOP-260 - Menu - Mobile - Nuevo Diseño",
 		"UWOU5vObVAZJ7ylnbAK2vQ",
-		"GTM-KWJ6XJ_OPT-K9JCF$",
+		"GTM-KWJ6XJ_OPT-KMZZV$",
 		"QUICK_PREVIEW",
 		Arrays.asList(0,1),
 		Arrays.asList(
-			"V0-Original", 
-			"V1-New Filters"),
-		Arrays.asList(Channel.desktop),
-		Arrays.asList(AppEcom.shop, AppEcom.votf)
+			"Variante 0 - Original",
+			"Variante 1 - Anidado plegado", 
+			"Variante 2 - Anidado desplegado"),
+		Arrays.asList(Channel.mobile),
+		Arrays.asList(AppEcom.shop)
 	);
 	
 	private String group;
