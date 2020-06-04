@@ -19,7 +19,7 @@ public class SecCabeceraShop extends SecCabecera {
 	private final ModalUserSesionShopDesktop modalUserSesionShopDesktop;
 	
     private final static String XPathDivNavTools = "//div[@id='navTools']";
-    private final static String XPathNumArticlesBolsa = "//span[@class='icon-button-items']";
+    public final static String XPathNumArticlesBolsa = "//span[@class='icon-button-items']";
 	
 	public enum IconoCabeceraShop implements ElementPage {
 		lupa("//span[@class[contains(.,'-search')]]/.."),

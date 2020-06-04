@@ -7,7 +7,9 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraShop.IconoCabeceraShop;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
@@ -19,8 +21,8 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 public class SecCabeceraOutletMobil extends SecCabeceraOutlet {
 	
 	public enum IconoCabOutletMobil implements ElementPage {
-		bolsa("//a[@class[contains(.,'cartLink')]]"),
-		lupa("//div[@class='menu-search-button']");
+		bolsa(IconoCabeceraShop.bolsa.getXPath()),
+		lupa(IconoCabeceraShop.lupa.getXPath());
 		
 		private By by;
 		private IconoCabOutletMobil(String xpath) {
@@ -33,7 +35,7 @@ public class SecCabeceraOutletMobil extends SecCabeceraOutlet {
 		}
 	}
 		
-	private final static String XPathNumArticles = "//span[@class[contains(.,'_cartNum')]]";
+	//private final static String XPathNumArticles = "//span[@class[contains(.,'_cartNum')]]";
 
     private SecCabeceraOutletMobil(Channel channel, AppEcom app, WebDriver driver) {
     	super(channel, app, driver);
@@ -45,7 +47,7 @@ public class SecCabeceraOutletMobil extends SecCabeceraOutlet {
     
     @Override
     String getXPathNumberArtIcono() {
-    	return XPathNumArticles;
+    	return SecCabeceraShop.XPathNumArticlesBolsa;
     }
     
     @Override

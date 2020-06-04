@@ -118,7 +118,7 @@ public class Compra {
 		DataCtxShop dCtxSh = getCtxShForTest();
 		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
 		dCtxSh.userConnected = userShop.user;
-		dCtxSh.passwordUser = userShop.password;        
+		dCtxSh.passwordUser = userShop.password;
 		dCtxSh.userRegistered = true;
 		dCtxSh.pais = españa;
 
