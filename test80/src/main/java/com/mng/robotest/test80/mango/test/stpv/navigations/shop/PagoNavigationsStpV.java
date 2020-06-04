@@ -396,6 +396,7 @@ public class PagoNavigationsStpV {
             	PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, dCtxSh.channel, driver);
             }
             testPagoFromCheckoutToEnd(dCtxPago, dCtxSh, pago, driver);
+            System.out.println("Compra realizada con código de pedido: " + dataPedido.getCodpedido());
         }
         catch (Exception e) {
         	Log4jTM.getLogger().warn("Problem checking Payment {} from country {}", pago.getNombre(), dCtxSh.pais.getNombre_pais(), e);

@@ -23,7 +23,9 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
+import com.mng.robotest.test80.mango.test.getdata.products.data.Color;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
+import com.mng.robotest.test80.mango.test.getdata.products.data.Size;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigations;
@@ -124,9 +126,22 @@ public class CompraFact implements Serializable {
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, this.usrRegistrado, driver);
         //TestAB.activateTestABcheckoutMovilEnNPasos(0, dCtxSh, dFTest.driver);
 
-        
         int maxArticlesAwayVale = 3;
         List<Garment> listArticles = UtilsTestMango.getArticlesForTest(dCtxSh, maxArticlesAwayVale, this.testVale);
+        
+//        Garment garment = new Garment("67067672");
+//        garment.setStock(1000);
+//        Color color = new Color();
+//        color.setId("99");
+//        color.setLabel("Negro");
+//        Size size = new Size();
+//        size.setId(19);
+//        size.setLabel("XL");
+//        color.setSizes(Arrays.asList(size));
+//        garment.setColors(Arrays.asList(color));
+//        List<Garment> listArticles = Arrays.asList(garment);
+//        manyArticles = false;
+        
         if (!manyArticles) {
         	listArticles = Arrays.asList(listArticles.get(0));
         }
@@ -138,7 +153,7 @@ public class CompraFact implements Serializable {
         FlagsTestCkout fTCkout = new FlagsTestCkout();
         fTCkout.validaPasarelas = true;  
         fTCkout.validaPagos = true;
-        fTCkout.validaPedidosEnManto = true;
+        fTCkout.validaPedidosEnManto = false; //TODO -> Volver a poner a true
         fTCkout.emailExist = true; 
         fTCkout.trjGuardada = false;
         fTCkout.isEmpl = this.empleado;
