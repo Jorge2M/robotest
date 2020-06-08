@@ -11,15 +11,17 @@ import org.openqa.selenium.WebDriver;
 
 public class PageHomeLikes extends PageObjTM {
 
-	String idLoyaltySpace = "loyaltyLoyaltySpace";
-	String xpathPoints = "//*[@class[contains(.,'user-total-likes')] or @class[contains(.,'enough-likes')]]";
-	String xpathBlockExchange = "//ul[@class='cards-list']/li";
+	String idLoyaltySpace = "loyaltySpace";
+	//String xpathPoints = "//*[@class[contains(.,'user-total-likes')] or @class[contains(.,'enough-likes')]]";
+	String xpathPoints = "//div[@class='vmPyL']"; //TODO pendiente Víctor gestione el cambio de la página
+	//String xpathBlockExchange = "//ul[@class='cards-list']/li";
+	String xpathBlockExchange = "//div[@class='Em-Eu']";
 	
 	public enum ButtonUseLikes {
-		CompraConDescuento("//span[text()='Compra con descuento']"),
-		DonarMisLikes("//span[contains(text(), 'Donar mis Likes')]"),
-		Conseguir("//span[contains(text(), 'Conseguir')]"),
-		RegalarMisLikes("//span[text()[contains(.,'Regalar')]]");
+		CompraConDescuento("//div[@role='button' and text()='Compra con descuento']"),
+		DonarMisLikes("//div[@role='button' and contains(text(), 'Donar mis Likes')]"),
+		Conseguir("//div[@role='button' and contains(text(), 'Conseguir')]"),
+		RegalarMisLikes("//div[@role='button' and text()[contains(.,'Regalar')]]");
 		
 		private By by;
 		private ButtonUseLikes(String xpath) {

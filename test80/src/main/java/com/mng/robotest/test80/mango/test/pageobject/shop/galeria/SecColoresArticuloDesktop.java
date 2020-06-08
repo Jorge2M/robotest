@@ -6,7 +6,11 @@ public class SecColoresArticuloDesktop {
 
 	private final AppEcom app;
 	
-	private final String XPathColorsArticleShop = "//div[@class[contains(.,'product-colors')]]";
+	private final String XPathColorsArticleShop = 
+			"//div[" + 
+				"@class[contains(.,'product-colors')] or " + 
+				"@class[contains(.,'_1nxc_')]" + //TODO (Outlet) A la espera que Sergio Campillo haga el cambio
+			"]";
 	final static String TagIdColor = "@TagIdColor";
 	final static String XPathImgCodColorWithTagColor = "//img[@class[contains(.,'other-color')] and @data-id='" + TagIdColor + "']";
 	

@@ -90,6 +90,7 @@ public abstract class PageGaleria extends PageObjTM {
         	"@class[contains(.,'productList__name')] or " + 
         	"@class[contains(.,'product-list-name')] or " + 
         	"@class='product-list-info-name' or " +
+        	"@class[contains(.,'_1P8s4')] or " + //TODO (Outlet) a la espera que Sergio Campillo proporcione un identificador válido
         	"@class[contains(.,'product-name')]";
     final static String XPathNombreRelativeToArticle = "//*[" + classProductItem + "]";
     final static String XPathLinkRelativeToArticle = ".//a[@class='product-link']";

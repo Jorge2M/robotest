@@ -14,6 +14,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -32,6 +33,7 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigatio
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 public class CompraFact implements Serializable {
@@ -129,7 +131,8 @@ public class CompraFact implements Serializable {
         int maxArticlesAwayVale = 3;
         List<Garment> listArticles = UtilsTestMango.getArticlesForTest(dCtxSh, maxArticlesAwayVale, this.testVale);
         
-//        Garment garment = new Garment("67067672");
+//        //TODO para pruebas Dani Luque
+//        Garment garment = new Garment("63100536");
 //        garment.setStock(1000);
 //        Color color = new Color();
 //        color.setId("99");

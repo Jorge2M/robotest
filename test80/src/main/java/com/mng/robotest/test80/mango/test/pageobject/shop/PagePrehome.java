@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -237,7 +238,7 @@ public class PagePrehome {
     	AccesoNavigations.goToInitURL(/*urlPreHome,*/ driver);
         waitForPageLoaded(driver);
         if (PageJCAS.thisPageIsShown(driver)) {
-            PageJCAS.identication(driver, "jorge.munoz", "2010martina");
+            PageJCAS.identication(driver, Constantes.userManto, Constantes.passwordManto);
         }
     }    
     

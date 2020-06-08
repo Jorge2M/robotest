@@ -18,6 +18,7 @@ import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFichaArtOld;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.Slider;
@@ -205,6 +206,11 @@ public class FichaProducto {
         dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0); //Coreano
         
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+        
+        //TODO en el acceso se ejecuta la función setInitialModalsOff para evitar la aparición de modales
+        //pero en el caso de Corea se escapa el de Subscripción en la Newsletter
+        PagePrehome.closeModalNewsLetterIfExists(driver);
+        
         Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.nina, null, "pantalones"));
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh);
