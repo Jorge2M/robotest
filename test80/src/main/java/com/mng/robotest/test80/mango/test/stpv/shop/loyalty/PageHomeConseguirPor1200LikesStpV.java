@@ -23,10 +23,10 @@ public class PageHomeConseguirPor1200LikesStpV {
 	}
 	
 	@Validation (
-		description="Aparece el botón de \"Conseguir por 1200 Likes\"",
+		description="Aparece el botón de \"Conseguir por 1200 Likes\" (esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-	public boolean checkIsPage() {
-		return pageHomeConseguirPor1200Likes.isPage();
+	public boolean checkIsPage(int maxSeconds) {
+		return pageHomeConseguirPor1200Likes.isPage(maxSeconds);
 	}
 	
 	@Step (

@@ -170,7 +170,6 @@ public class Loyalty {
 			loyaltyPointsIni = secMenusUserStpV.clickMenuMangoLikesYou();
 		}
 		
-		
 		PageHomeLikesStpV pageHomeLikesStpV = PageHomeLikesStpV.getNewInstance(driver);
 		pageHomeLikesStpV.clickButtonDonarLikes();
 		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
@@ -206,7 +205,6 @@ public class Loyalty {
 			client.addLoyaltyPoints(UserTest.loy003, 25000);
 			loyaltyPointsIni = secMenusUserStpV.clickMenuMangoLikesYou();
 		}
-		
 		
 		PageHomeLikesStpV.getNewInstance(driver).clickButtonConseguirPor1200Likes();
 		if (!isEntornoPro) {

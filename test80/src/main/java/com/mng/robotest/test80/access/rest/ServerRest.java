@@ -24,6 +24,7 @@ import com.github.jorge2m.testmaker.restcontroller.ServerRestTM;
 //      (Tarda unos minutos)
 //-> Press Enter
 //-> Certificate in C:\ProgramData\win-acme\acme-v02.api.letsencrypt.org\Certificates ..
+//-> Mover el .pfx a /robotest.pro.mango.com.pfx
 //Último resultado (03-06-2020)
 //[INFO] Requesting certificate [Manual] robotest.pro.mango.com
 //[INFO] Store with CertificateStore...

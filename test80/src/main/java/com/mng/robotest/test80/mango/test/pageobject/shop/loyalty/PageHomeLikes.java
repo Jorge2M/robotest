@@ -12,13 +12,10 @@ import org.openqa.selenium.WebDriver;
 public class PageHomeLikes extends PageObjTM {
 
 	String idLoyaltySpace = "loyaltySpace";
-	//String xpathPoints = "//*[@class[contains(.,'user-total-likes')] or @class[contains(.,'enough-likes')]]";
 	String xpathPoints = "//div[@class='vmPyL']"; //TODO pendiente Víctor gestione el cambio de la página
-	//String xpathBlockExchange = "//ul[@class='cards-list']/li";
-	String xpathBlockExchange = "//div[@class='Em-Eu']";
 	
 	public enum ButtonUseLikes {
-		CompraConDescuento("//div[@role='button' and text()='Compra con descuento']"),
+		CompraConDescuento("//div[@role='button' and text()='Comprar con descuento']"),
 		DonarMisLikes("//div[@role='button' and contains(text(), 'Donar mis Likes')]"),
 		Conseguir("//div[@role='button' and contains(text(), 'Conseguir')]"),
 		RegalarMisLikes("//div[@role='button' and text()[contains(.,'Regalar')]]");
@@ -45,7 +42,7 @@ public class PageHomeLikes extends PageObjTM {
 	}
 	
 	public int getPoints() {
-		if (state(Present, By.xpath(xpathPoints)).check()) {
+		if (state(Present, By.xpath(xpathPoints)).wait(2).check()) {
 			String textPoints = driver.findElement(By.xpath(xpathPoints)).getText();
 			Pattern pattern = Pattern.compile(" [0-9,.]+ ");
 			Matcher matcher = pattern.matcher(textPoints);
@@ -59,9 +56,9 @@ public class PageHomeLikes extends PageObjTM {
 		}
 		return 0;
 	}
-	
-	public boolean areVisibleBlocksExchangeLikes() {
-		return (state(Visible, By.xpath(xpathBlockExchange)).wait(2).check());
+
+	public boolean isVisibleButton(ButtonUseLikes button, int maxSeconds) {
+		return (state(Visible, button.getBy()).wait(maxSeconds).check());
 	}
 
 	public void clickButton(ButtonUseLikes button) {

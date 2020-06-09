@@ -23,16 +23,16 @@ public class PageHomeDonateLikesStpV {
 	}
 	
 	@Validation
-	public ChecksTM checkIsPage() {
+	public ChecksTM checkIsPage(int maxSeconds) {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
-			"Aparece la pagina de <b>Donar Likes</b>",
-			pageHomeDonateLikes.checkIsPage(), State.Defect);
+			"Aparece la pagina de <b>Donar Likes</b> (esperamos hasta " + maxSeconds + " segundos)",
+			pageHomeDonateLikes.checkIsPage(0), State.Defect);
 		
 		for (ButtonLikes buttonLikes : ButtonLikes.values()) {
 			checks.add(
-				"Aparece el botón para donar " + buttonLikes.getNumLikes() + " Likes",
-				pageHomeDonateLikes.isVisible(buttonLikes), State.Defect);
+				"Aparece el botón para donar " + buttonLikes.getNumLikes() + " Likes (esperamos hasta " + maxSeconds + " segundos)",
+				pageHomeDonateLikes.isVisible(buttonLikes, maxSeconds), State.Defect);
 		}
 		
 		return checks;

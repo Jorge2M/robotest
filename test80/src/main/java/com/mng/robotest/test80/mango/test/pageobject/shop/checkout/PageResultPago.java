@@ -20,7 +20,7 @@ public class PageResultPago {
     //xpath del link hacia los pedidos (sólo aparecen en la versión Desktop de la página)
     static String XPathLinkPedidosDesktop = "//a[@href[contains(.,'/account/orders')] or @href[contains(.,'/loginPedidos.faces')]]"; 
     static String XPathLinkMisComprasDesktop = "//a[@href[contains(.,'/mypurchases')]]";
-	static String xpathBlockNewLoyaltyPoints = "//div[@class='simulate-likes']";
+	static String xpathBlockNewLoyaltyPoints = "//div[@class[contains(.,'simulate-likes')]]";
     
     /**
      * @return el xpath correspondiente al elemento que contiene el texto con la confirmación del pago
