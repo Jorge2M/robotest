@@ -6,11 +6,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 /**
@@ -36,14 +36,14 @@ public class PageAssist1rst {
     static String XPathBotonPagoMobil = "//input[@type='Submit' and not(@disabled)]";
 
     public static String getXPath_LogoAssist(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathLogoAssistMobil; 
         }
         return XPathLogoAssistDesktop;
     }
     
     public static String getXPath_buttonPago(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathBotonPagoMovilAvailable;
         }
         return XPathBotonPagoDesktopAvailable;
@@ -56,7 +56,7 @@ public class PageAssist1rst {
     
     public static boolean isPresentInputsForTrjData(Channel channel, WebDriver driver) {
         boolean inputsOk = true;
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
         	if (!state(Present, By.xpath(XPathInputNumTrjMovil), driver).check() ||
         		!state(Present, By.xpath(XPathSelectMMCaducMovil), driver).check() ||
         		!state(Present, By.xpath(XPathSelectAACaducMovil), driver).check()) {
@@ -80,7 +80,7 @@ public class PageAssist1rst {
     
     public static void inputDataPagoAndWaitSubmitAvailable(Pago pago, Channel channel, WebDriver driver) throws Exception {
         //Input data
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             driver.findElement(By.xpath(XPathInputNumTrjMovil)).sendKeys(pago.getNumtarj());
             new Select(driver.findElement(By.xpath(XPathSelectMMCaducMovil))).selectByValue(pago.getMescad());
             new Select(driver.findElement(By.xpath(XPathSelectAACaducMovil))).selectByValue("20" + pago.getAnycad()); //Atención con el efecto 2100!!!
@@ -101,7 +101,7 @@ public class PageAssist1rst {
     }
     
 	public static void clickBotonPago(Channel channel, WebDriver driver) {
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			click(By.xpath(XPathBotonPagoMobil), driver).exec();
 		} else {
 			click(By.xpath(XPathBotonPagoDesktop), driver).exec();

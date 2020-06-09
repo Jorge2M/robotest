@@ -4,20 +4,20 @@ import java.util.logging.Level;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.suitetree.ChecksTM;
-import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
-import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
-import com.mng.testmaker.service.webdriver.utils.WebUtils;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.EmbeddedDriver;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.service.webdriver.utils.WebUtils;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.testmaker.testreports.html.ResultadoErrores;
+import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
 import com.mng.robotest.test80.mango.test.pageobject.shop.AllPages;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter;
 import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
@@ -47,8 +47,8 @@ public class AllPagesStpV {
     	
     	if (flagsVal.validaJS) {
         	//Nota: No funciona con GeckoDriver porque no están implementados los servicios al no formar parte del protocolo W3C https://github.com/w3c/webdriver/issues/406
-        	if (SeleniumUtils.getTypeDriver(driver)!=WebDriverType.firefox &&
-        		SeleniumUtils.getTypeDriver(driver)!=WebDriverType.firefoxhless) {
+        	if (SeleniumUtils.getTypeDriver(driver)!=EmbeddedDriver.firefox &&
+        		SeleniumUtils.getTypeDriver(driver)!=EmbeddedDriver.firefoxhless) {
         		int maxErrors = 1;
         		ResultadoErrores resultadoLogs = WebUtils.getLogErrors(Level.WARNING, driver, maxErrors);
         		String descripValidac = "No hay errores JavaScript";

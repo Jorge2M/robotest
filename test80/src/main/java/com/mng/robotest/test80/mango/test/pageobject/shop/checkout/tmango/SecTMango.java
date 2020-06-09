@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 public class SecTMango {
@@ -37,7 +37,7 @@ public class SecTMango {
      * @return el xpath que engloba la capa con la sección
      */
     public static String getXPath_section(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathSectionMobil;
         }
         return XPathSectionDesktop;
@@ -48,7 +48,7 @@ public class SecTMango {
      */
     public static String getXPATH_labelsCheckModalidad(Channel channel) {
         String xpathSection = getXPath_section(channel); 
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (xpathSection + "//p[@class='method-name']");
         }
         return (xpathSection + "//input/../label/span");
@@ -68,7 +68,7 @@ public class SecTMango {
      */
     public static String getXPATH_clickModalidad(TipoPago tipoPago, Channel channel) {
         String xpathLabelMod = getXPATH_labelModalidad(tipoPago, channel);
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (xpathLabelMod + "/..");
         }
         return (xpathLabelMod + "/../../input");

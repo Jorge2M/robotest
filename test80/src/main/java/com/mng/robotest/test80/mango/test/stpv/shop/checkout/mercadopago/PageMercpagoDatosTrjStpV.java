@@ -2,10 +2,10 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.mercadopago;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoDatosTrj;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoDatosTrjDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoDatosTrjMobil;
@@ -40,7 +40,7 @@ public class PageMercpagoDatosTrjStpV {
     
     public void inputNumTarjeta(String numTarjeta) throws Exception {
         switch (channel) {
-        case movil_web:
+        case mobile:
             inputNumTarjetaMobil(numTarjeta);
             break;
         default:
@@ -99,7 +99,7 @@ public class PageMercpagoDatosTrjStpV {
     
     private void inputData(InputData inputData) throws Exception {
         switch (channel) {
-        case movil_web:
+        case mobile:
             inputDataMobil(inputData);
             break;
         default:
@@ -111,7 +111,7 @@ public class PageMercpagoDatosTrjStpV {
     
     private void clickButtonForPay(boolean afterTrjGuardada) throws Exception {
         switch (channel) {
-        case movil_web:
+        case mobile:
             clickButtonForPayMobil(afterTrjGuardada);
             break;
         default:
@@ -152,7 +152,7 @@ public class PageMercpagoDatosTrjStpV {
     		PageResultPagoStpV.validaIsPageUntil(30, channel, driver);
     	}
     	else {
-    		PageMercpagoConfStpV.validaIsPageUntil(5, Channel.movil_web, driver);
+    		PageMercpagoConfStpV.validaIsPageUntil(5, Channel.mobile, driver);
     	}
     }    
     

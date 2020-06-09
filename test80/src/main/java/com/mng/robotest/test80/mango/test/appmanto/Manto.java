@@ -6,11 +6,11 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
-import com.mng.testmaker.domain.InputParamsTM;
-//import com.mng.testmaker.domain.InputParamsTM;
-import com.mng.testmaker.domain.suitetree.TestCaseTM;
-import com.mng.testmaker.domain.suitetree.TestRunTM;
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.domain.InputParamsTM;
+//import com.github.jorge2m.testmaker.domain.InputParamsTM;
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
+import com.github.jorge2m.testmaker.domain.suitetree.TestRunTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;

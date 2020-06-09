@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Channel;
 
 /**
  * Bean associated to TESTS_SUITES

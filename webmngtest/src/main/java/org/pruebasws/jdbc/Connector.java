@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import org.sqlite.SQLiteConfig;
 import org.sqlite.SQLiteConfig.LockingMode;
 
-import com.mng.testmaker.conf.ConstantesTM;
+import com.github.jorge2m.testmaker.conf.ConstantesTM;
 
 @SuppressWarnings("javadoc")
 public class Connector {

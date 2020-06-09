@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
@@ -29,7 +29,7 @@ public class PagoKoreanCreditCard extends PagoStpV {
         pageKoCardAdyenStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais);
         pageKoCardAdyenStpV.clickIconForContinue();
     	if (execPay) {
-	        if (dCtxSh.channel == Channel.movil_web) {
+	        if (dCtxSh.channel == Channel.mobile) {
 	        	PageKoCardINIpay1MobilStpV2.checkTerminosBox(driver);
 	        	PageKoCardINIpay1MobilStpV2.continuarConPagoCoreaMobile(driver);
 	        	PageKoCardINIpay2MobilStpV.confirmMainPaymentCorea(driver);

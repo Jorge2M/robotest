@@ -3,10 +3,10 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.footer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class ModalBuscadorTiendas extends PageObjTM implements PageFromFooter {
 	
@@ -27,7 +27,7 @@ public class ModalBuscadorTiendas extends PageObjTM implements PageFromFooter {
 	
 	@Override
 	public boolean isPageCorrectUntil(int maxSeconds) {
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			return (state(Present, By.xpath(XPathForIdPageMobile), driver)
 					.wait(maxSeconds).check());
 		}

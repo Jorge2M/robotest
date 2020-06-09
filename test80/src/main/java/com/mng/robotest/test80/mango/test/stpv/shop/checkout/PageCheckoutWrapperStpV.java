@@ -2,19 +2,17 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
 import java.util.List;
 import java.util.StringTokenizer;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.suitetree.ChecksTM;
-import com.mng.testmaker.domain.suitetree.StepTM;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -33,7 +31,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango.SecTMangoStp
 
 @SuppressWarnings({"static-access"})
 public class PageCheckoutWrapperStpV {
-    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 
     public static SecMetodoEnvioDesktopStpV secMetodoEnvio;
     public static SecStoreCreditStpV secStoreCredit;
@@ -60,7 +57,7 @@ public class PageCheckoutWrapperStpV {
     
     public static void validateIsFirstPage(boolean userLogged, DataBag dataBag, Channel channel, WebDriver driver) 
     throws Exception {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             page1MobilCheck.validateIsPage(userLogged, driver);
         } else {
             page1DktopCheck.validateIsPageOK(dataBag, driver);
@@ -103,7 +100,7 @@ public class PageCheckoutWrapperStpV {
     private static ChecksTM checkLogosPagos(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) { 
     	ChecksTM validations = ChecksTM.getNew();
         List<Pago> listPagos = pais.getListPagosForTest(app, isEmpl);
-        if (listPagos.size()==1 && channel==Channel.movil_web) {
+        if (listPagos.size()==1 && channel==Channel.mobile) {
         	return validations;
         }
         for (int i=0; i<listPagos.size(); i++) {
@@ -164,7 +161,7 @@ public class PageCheckoutWrapperStpV {
         case desktop:
             SecMetodoEnvioDesktopStpV.selectFranjaHorariaUrgente(1, driver);
             break;
-        case movil_web:
+        case mobile:
             Page1EnvioCheckoutMobilStpV.selectFranjaHorariaUrgente(1, driver);
         }    
     }
@@ -178,7 +175,7 @@ public class PageCheckoutWrapperStpV {
         case desktop:
             SecMetodoEnvioDesktopStpV.selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago, driver);
             break;
-        case movil_web:
+        case mobile:
             Page1EnvioCheckoutMobilStpV.selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago, driver);
             break;
         }
@@ -201,7 +198,7 @@ public class PageCheckoutWrapperStpV {
             if (pago.getTipoEnvioType(appE)==TipoTransporte.TIENDA) {
                 pago.setTipoEnvioShop(TipoTransporte.STANDARD);
                 pago.setTipoEnvioOutlet(TipoTransporte.STANDARD);
-            	pLogger.info("Modificado tipo de envío: " + pago.getTipoEnvioType(appE) + " -> " + TipoTransporte.STANDARD);
+                Log4jTM.getLogger().info("Modificado tipo de envío: " + pago.getTipoEnvioType(appE) + " -> " + TipoTransporte.STANDARD);
             }
             
             //Esto no está muy claro si es correcto, pero la configuración en Manto de los transportes dice que en el caso de Outlet los 
@@ -259,7 +256,7 @@ public class PageCheckoutWrapperStpV {
             PageCheckoutWrapper.forceClickMetodoPagoAndWait(pago.getNombre(channel), pais, channel, driver);
         }
         catch (Exception e) {
-            pLogger.warn("Problem clicking icono pago for payment {} in country {}", pago.getNombre(), pais.getNombre_pais(), e);
+        	Log4jTM.getLogger().warn("Problem clicking icono pago for payment {} in country {}", pago.getNombre(), pais.getNombre_pais(), e);
         }
 
         if (pago.getTypePago()==TypePago.TarjetaIntegrada || 
@@ -402,7 +399,7 @@ public class PageCheckoutWrapperStpV {
             PageCheckoutWrapper.page2MobilCheckout.clickFinalizarCompraAndWait(maxSecondsToWait, driver);
         }
         catch (Exception e) {
-            pLogger.warn("Problem in click Confirm payment button", e);
+        	Log4jTM.getLogger().warn("Problem in click Confirm payment button", e);
         }
                             
         PageRedirectPasarelaLoadingStpV.validateDisappeared(5, driver);
@@ -477,7 +474,7 @@ public class PageCheckoutWrapperStpV {
         
     public static void validaResultImputPromoEmpl(DataBag dataBag, Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             Page1EnvioCheckoutMobilStpV.validaResultImputPromoEmpl(driver);
         } else {
             Page1DktopCheckoutStpV.validaResultImputPromoEmpl(dataBag, app, driver);
@@ -525,7 +522,7 @@ public class PageCheckoutWrapperStpV {
 		case desktop:
 			loyaltyPointsApplyDesktop(driver);
 			break;
-		case movil_web:
+		case mobile:
 		default:
 			loyaltyPointsApplyMobil(driver);
 		}

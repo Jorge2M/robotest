@@ -1,9 +1,9 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.loyalty;
 
-import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -25,12 +25,12 @@ public class PageHomeDonateLikes extends PageObjTM {
     	}
     	
     	public By getBy() {
-    		return By.xpath("//button[contains(.,'" + numLikes + "')]");
+    		return By.xpath("//button[text()[contains(.,'" + numLikes + "')]]");
     	}
 	}
 	
-	final static String idBlockLoyalty = "loyaltyLoyaltySpace";
-	final static String xpathIconOperationDone = "//span[@class='icon-outline-done']";
+	final static String xpathPage = "//*[@class[contains(.,'loyalty_loyaltySpace')]]";
+	final static String xpathIconOperationDone = "//*[@class[contains(.,'icon-outline-done')]]";
 
 	private PageHomeDonateLikes(WebDriver driver) {
 		super(driver);
@@ -40,12 +40,12 @@ public class PageHomeDonateLikes extends PageObjTM {
 		return (new PageHomeDonateLikes(driver));
 	}
 	
-	public boolean checkIsPage() {
-		return (state(Visible, By.id(idBlockLoyalty)).check());
+	public boolean checkIsPage(int maxSeconds) {
+		return (state(Visible, By.xpath(xpathPage)).wait(maxSeconds).check());
 	}
 	
-	public boolean isVisible(ButtonLikes buttonLikes) {
-		return (state(Visible, buttonLikes.getBy()).check());
+	public boolean isVisible(ButtonLikes buttonLikes, int maxSeconds) {
+		return (state(Visible, buttonLikes.getBy()).wait(maxSeconds).check());
 	}
 	
 	public void clickButton(ButtonLikes buttonLikes) {

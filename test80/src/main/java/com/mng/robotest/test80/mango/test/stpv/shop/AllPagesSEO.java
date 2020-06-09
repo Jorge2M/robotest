@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.testreports.html.ResultadoErrores;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.AllPages;
@@ -91,7 +91,9 @@ public class AllPagesSEO {
             //El canonical ha de aparecer como mínimo en las páginas de Portada, Catálogo y Ficha
         	PageFicha pageFicha = PageFicha.newInstanceFichaNew(Channel.desktop, AppEcom.shop, driver);
         	PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, AppEcom.shop, driver);
-            if (PageLanding.isPage(driver) || ((PageGaleriaDesktop)pageGaleria).isPage() || pageFicha.isPageUntil(0)) {
+            if ((new PageLanding(driver)).isPage() || 
+            	((PageGaleriaDesktop)pageGaleria).isPage() || 
+            	pageFicha.isPageUntil(0)) {
                 String currentURL = driver.getCurrentUrl(); 
                 //Hemos de añadir un par de excepciones
                 if (!currentURL.contains("catalogPc.faces?") && !currentURL.contains("search?") && !currentURL.contains("favorites.faces?")) {

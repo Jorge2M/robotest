@@ -5,9 +5,9 @@ import org.openqa.selenium.WebDriver;
 import com.mng.sapfiori.access.test.testcase.stpv.pedidos.PageGestionSolPedidoBuyerStpV;
 import com.mng.sapfiori.access.test.testcase.stpv.reclassifprods.PageSelProdsToReclassifyStpV;
 import com.mng.sapfiori.access.test.testcase.webobject.iconsmenu.PageIconsMenu;
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.conf.State;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.State;
 
 public class PageIconsMenuStpV {
 

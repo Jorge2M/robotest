@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.sapfiori.access.test.testcase.generic.webobject.utils.PageObject;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class InputBase extends PageObject {
 	

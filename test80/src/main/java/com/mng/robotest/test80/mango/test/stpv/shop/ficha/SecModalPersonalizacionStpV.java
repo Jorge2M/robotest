@@ -1,14 +1,14 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.suitetree.ChecksTM;
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
@@ -174,7 +174,7 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 		expected="El artículo se da de alta correctamente en la bolsa"	)
 	public void checkCustomizationProof () {
 		click(ModalElement.Siguiente.getBy(dCtxSh.channel)).exec();
-		if (dCtxSh.channel == Channel.movil_web) {
+		if (dCtxSh.channel == Channel.mobile) {
 			click(ModalElement.GoToBag.getBy(dCtxSh.channel)).exec();
 		}
 		validateCustomizationProof(2);
@@ -184,7 +184,7 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 		description="1) En la bolsa aparece el apartado correspondiente a la personalización (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
 	private boolean validateCustomizationProof(int maxSeconds) {
-		if (dCtxSh.channel==Channel.movil_web) {
+		if (dCtxSh.channel==Channel.mobile) {
 			return (state(Present, ModalElement.BolsaProof.getBy(dCtxSh.channel)).wait(maxSeconds).check());
 		} else {
 			return (state(Visible, ModalElement.BolsaProof.getBy(dCtxSh.channel)).wait(maxSeconds).check());

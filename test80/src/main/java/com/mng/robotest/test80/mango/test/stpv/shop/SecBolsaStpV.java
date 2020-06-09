@@ -6,14 +6,14 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.boundary.aspects.step.SaveWhen;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.Constantes;
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -45,7 +45,7 @@ public class SecBolsaStpV {
 
 	public static void close(Channel channel, AppEcom app, WebDriver driver) 
 	throws Exception {
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			clickAspaForCloseMobil(driver);
 		} else {
 			forceStateBolsaTo(StateBolsa.Closed, app, channel, driver);
@@ -64,7 +64,7 @@ public class SecBolsaStpV {
 		description="Desaparece la bolsa (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
 	private static boolean checkBolsaDisappears(int maxSeconds, WebDriver driver) {
-		return (SecBolsa.isInStateUntil(StateBolsa.Closed, Channel.movil_web, maxSeconds, driver));
+		return (SecBolsa.isInStateUntil(StateBolsa.Closed, Channel.mobile, maxSeconds, driver));
 	}
 
 	/**

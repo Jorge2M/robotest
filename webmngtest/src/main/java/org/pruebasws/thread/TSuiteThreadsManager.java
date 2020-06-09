@@ -2,12 +2,12 @@ package org.pruebasws.thread;
 
 import java.util.Set;
 
-import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
-import com.mng.testmaker.domain.suitetree.SuiteTM;
+import com.github.jorge2m.testmaker.domain.InputParamsTM.TypeAccess;
+import com.github.jorge2m.testmaker.domain.suitetree.SuiteTM;
 import com.mng.robotest.test80.access.CreatorSuiteRunMango;
 import com.mng.robotest.test80.access.InputParamsMango;
-import com.mng.testmaker.domain.CreatorSuiteRun;
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.domain.CreatorSuiteRun;
+import com.github.jorge2m.testmaker.service.TestMaker;
 
 import java.util.ArrayList;
 
@@ -62,7 +62,7 @@ public class TSuiteThreadsManager {
         return (
         	getLocatorThreadTestSuite(
         		paramsTSuite.getSuiteName(), paramsTSuite.getApp().toString(), paramsTSuite.getChannel().toString(), 
-        		paramsTSuite.getWebDriverType().toString(), paramsTSuite.getVersion(), idExecSuite));   
+        		paramsTSuite.getDriver(), paramsTSuite.getVersion(), idExecSuite));   
     }
     
     public static String getLocatorThreadTestSuite(String suiteName, String application, String channel, String browser, String version, String idSuiteExecution) {

@@ -18,9 +18,9 @@ import javax.ws.rs.core.Response;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.utils.PagoGetter;
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.domain.InputParamsBasic;
-import com.mng.testmaker.restcontroller.RestApiTM;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.domain.InputParamsBasic;
+import com.github.jorge2m.testmaker.restcontroller.RestApiTM;
 
 @Path("/")
 public class RestApiMango extends RestApiTM {

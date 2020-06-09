@@ -6,9 +6,9 @@ import java.util.*;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
-import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.domain.InputParamsTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.domain.InputParamsTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.CompraFact;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
@@ -23,6 +23,7 @@ public class ListPagosEspana implements Serializable {
 	IdiomaPais castellano = null;
 	Pais francia = null;
 	IdiomaPais frances = null;
+	Pais USA = null;
 	
 	final boolean usrReg = true;
 	final boolean empleado = true;
@@ -68,6 +69,7 @@ public class ListPagosEspana implements Serializable {
         this.francia = PaisGetter.get(PaisShop.France);
         this.castellano = espana.getListIdiomas().get(0);
         this.frances = francia.getListIdiomas().get(0);
+        this.USA = PaisGetter.get(PaisShop.USA);
     }
     
     private void createTestPagosEspana(ArrayList<Object> listTests, AppEcom appE, Channel channel, ITestContext ctx) {

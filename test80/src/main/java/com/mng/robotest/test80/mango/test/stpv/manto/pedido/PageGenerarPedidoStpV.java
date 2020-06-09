@@ -1,15 +1,15 @@
 package com.mng.robotest.test80.mango.test.stpv.manto.pedido;
 
-import com.mng.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 
-import com.mng.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageGenerarPedido;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageGenerarPedido.EstadoPedido;
 import static com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageGenerarPedido.GestionPostCompra.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import org.openqa.selenium.WebDriver;
 
 public class PageGenerarPedidoStpV {

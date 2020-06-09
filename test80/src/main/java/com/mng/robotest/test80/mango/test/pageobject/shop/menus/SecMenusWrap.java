@@ -6,8 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -55,14 +55,14 @@ public class SecMenusWrap {
     }
     
 	public boolean isLineaPresent(LineaType lineaType) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return secMenuLateralMobil.isLineaPresent(lineaType);
         }
         return secMenusDesktop.secMenuSuperior.secLineas.isLineaPresent(lineaType);
     }
     
     public boolean isLineaPresentUntil(LineaType lineaType, int maxSeconds) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return secMenuLateralMobil.isLineaPresent(lineaType);
         }
         return secMenusDesktop.secMenuSuperior.secLineas.isLineaPresentUntil(lineaType, maxSeconds);
@@ -94,7 +94,7 @@ public class SecMenusWrap {
     }
     
     public List<DataScreenMenu> getListDataScreenMenus(Linea linea, SublineaNinosType sublineaType) throws Exception {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return secMenuLateralMobil.getListDataScreenMenus(linea, sublineaType);
         }
         return 
@@ -119,7 +119,7 @@ public class SecMenusWrap {
     }
     
     public void selecLinea(Pais pais, LineaType lineaType) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
         	secMenuLateralMobil.selecLinea(pais.getShoponline().getLinea(lineaType));
         } else {
         	secMenusDesktop.secMenuSuperior.secLineas.selecLinea(pais, lineaType);
@@ -127,7 +127,7 @@ public class SecMenusWrap {
     }
     
     public void selecSublinea(Pais pais, LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
         	secMenuLateralMobil.selectLinea(pais.getShoponline().getLinea(lineaType), sublineaType);
         } else {
         	secMenusDesktop.secMenuSuperior.secLineas.selectSublinea(lineaType, sublineaType);
@@ -151,7 +151,7 @@ public class SecMenusWrap {
      * Función que selecciona una determinada línea->menú (lo busca en el href como último elemento del path)
      */
     public void seleccionarMenuXHref(Menu1rstLevel menu1rstLevel, Pais pais) throws Exception {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
         	secMenuLateralMobil.clickMenuLateral1rstLevel(TypeLocator.hrefPortion, menu1rstLevel, pais);
         } else {
         	secMenusDesktop.secMenuSuperior.secBlockMenus.seleccionarMenuXHref(menu1rstLevel);

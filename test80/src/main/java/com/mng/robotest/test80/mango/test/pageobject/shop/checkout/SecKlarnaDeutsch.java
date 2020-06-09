@@ -6,9 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.testmaker.conf.Channel;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 public class SecKlarnaDeutsch {
@@ -22,14 +22,14 @@ public class SecKlarnaDeutsch {
     static String XPathLinkRadioAceptoMobil = "//div[@class[contains(.,'klarnaTerms')]]";
     
     public static String getXPath_capaKlarna(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathCapaKlarnaMobil;
         }
         return XPathCapaKlarnaDesktop; 
     }
     
     public static String getXPath_linkRadioAcepto(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathLinkRadioAceptoMobil;
         }
         return XPathRadioAceptoDesktop;

@@ -8,9 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.testmaker.conf.Channel;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 public class PageTrustpaySelectBank {
@@ -24,7 +24,7 @@ public class PageTrustpaySelectBank {
     static String XPathButtonContinueMobil = "//input[@type='submit' and @value='continue']";
     
     public static String getXPathEntradaPago(String nombrePago, Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (XPathListOfPayments + "/li/input[@class[contains(.,'" + nombrePago.toLowerCase() + "')]]");
         }
         return (XPathListOfPayments + "/li[@data-variant[contains(.,'" + nombrePago.toLowerCase() + "')]]");
@@ -50,7 +50,7 @@ public class PageTrustpaySelectBank {
     
     public static void selectBankThatContains(ArrayList<String> strContains, Channel channel, WebDriver driver) {
         //En el caso de móvil para que aparezca el desplegable se ha de seleccionar el icono del banco
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
         	if (!state(Visible, By.xpath(XPathSelectBancos), driver).check()) {
                 clickIconoBanco(driver);
         	}
@@ -87,7 +87,7 @@ public class PageTrustpaySelectBank {
 	}
 
     public static void clickButtonToContinuePay(Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
         	click(By.xpath(XPathButtonContinueMobil), driver).exec();
         } else {
         	click(By.xpath(XPathButtonPayDesktop), driver).exec();

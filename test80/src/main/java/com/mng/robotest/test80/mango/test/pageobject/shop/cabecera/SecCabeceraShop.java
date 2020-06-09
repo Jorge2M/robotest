@@ -3,15 +3,15 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.cabecera;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop;
 
 /**
- * Cabecera Shop compatible con desktop y movil_web
+ * Cabecera Shop compatible con desktop y movil
  *
  */
 public class SecCabeceraShop extends SecCabecera {
@@ -19,7 +19,7 @@ public class SecCabeceraShop extends SecCabecera {
 	private final ModalUserSesionShopDesktop modalUserSesionShopDesktop;
 	
     private final static String XPathDivNavTools = "//div[@id='navTools']";
-    private final static String XPathNumArticlesBolsa = "//span[@class='icon-button-items']";
+    public final static String XPathNumArticlesBolsa = "//span[@class='icon-button-items']";
 	
 	public enum IconoCabeceraShop implements ElementPage {
 		lupa("//span[@class[contains(.,'-search')]]/.."),

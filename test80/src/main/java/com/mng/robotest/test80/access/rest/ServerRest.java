@@ -3,10 +3,10 @@ package com.mng.robotest.test80.access.rest;
 import com.mng.robotest.test80.access.CreatorSuiteRunMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Suites;
-import com.mng.testmaker.boundary.access.ServerCmdLine;
-import com.mng.testmaker.boundary.access.ServerCmdLine.ResultCmdServer;
-import com.mng.testmaker.domain.CreatorSuiteRun;
-import com.mng.testmaker.restcontroller.ServerRestTM;
+import com.github.jorge2m.testmaker.boundary.access.ServerCmdLine;
+import com.github.jorge2m.testmaker.boundary.access.ServerCmdLine.ResultCmdServer;
+import com.github.jorge2m.testmaker.domain.CreatorSuiteRun;
+import com.github.jorge2m.testmaker.restcontroller.ServerRestTM;
 
 //For renewal robotest.pro.mango.com certificate manually:
 //-> Execute Powershell with Administrator Privileges
@@ -21,17 +21,19 @@ import com.mng.testmaker.restcontroller.ServerRestTM;
 //    -> Seleccionar "pro.mango.com"
 //    -> Buscar "robotest"
 //    -> Modificar el registro _acme-challenge.robotest.pro.mango.com. introduciendo el TXT-Content 
+//      (Tarda unos minutos)
 //-> Press Enter
 //-> Certificate in C:\ProgramData\win-acme\acme-v02.api.letsencrypt.org\Certificates ..
-//Último resultado (02-03-2020)
+//-> Mover el .pfx a /robotest.pro.mango.com.pfx
+//Último resultado (03-06-2020)
 //[INFO] Requesting certificate [Manual] robotest.pro.mango.com
 //[INFO] Store with CertificateStore...
 //[INFO] Installing certificate in the certificate store
-//[INFO] Adding certificate [Manual] robotest.pro.mango.com 2020/3/2 15:41:38 to store WebHosting
+//[INFO] Adding certificate [Manual] robotest.pro.mango.com 2020/6/3 7:16:15 to store WebHosting
 //[INFO] Installing with None...
 //[INFO] Uninstalling certificate from the certificate store
-//[INFO] Removing certificate [Manual] robotest.pro.mango.com 2019/12/11 10:21:39 from store WebHosting
-//[INFO] Next renewal scheduled at 04/26/2020 16:41:38
+//[INFO] Removing certificate [Manual] robotest.pro.mango.com 2020/3/2 15:41:38 from store WebHosting
+//[INFO] Next renewal scheduled at 07/28/2020 07:16:15
 //[INFO] Renewal for [Manual] robotest.pro.mango.com succeeded
 
 //Probably the automation of the renewal is not possible because is utilized --manual method with TXT autentication (dns01)

@@ -23,7 +23,7 @@ import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.getdata.products.data.GarmentDetails;
 import com.mng.robotest.test80.mango.test.getdata.products.data.ProductList;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment.Article;
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.service.TestMaker;
 
 public class GetterProducts extends JaxRsClient {
 	

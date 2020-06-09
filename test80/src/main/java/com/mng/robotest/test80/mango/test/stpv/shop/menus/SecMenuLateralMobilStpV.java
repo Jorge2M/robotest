@@ -3,13 +3,13 @@ package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 import java.util.EnumSet;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -56,6 +56,13 @@ public class SecMenuLateralMobilStpV {
 		secMenuLateral.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, dCtxSh.pais);
 		validaSelecMenu(menu1rstLevel, dCtxSh);
 	}
+	
+	@Validation(
+		description="No existe el menú lateral de 1er nivel <b>#{menu1rstLevel}</b>",
+		level=State.Defect)
+	public boolean checkNotExistsMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, Pais pais) {
+		return (!secMenuLateral.existsMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais));
+	}
 
 	public void validaSelecMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh) throws Exception {
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
@@ -85,7 +92,7 @@ public class SecMenuLateralMobilStpV {
     	description="Realizar click sobre la línea <b>#{lineaConCarrusels}</b>",
         expected="Aparecen los sublinks de #{lineaConCarrusels} correspondientes según el país")
     public void navClickLineaAndCarrusels(LineaType lineaConCarrusels, Pais pais) throws Exception {
-    	SecMenusWrap secMenus = SecMenusWrap.getNew(Channel.movil_web, app, driver);    	
+    	SecMenusWrap secMenus = SecMenusWrap.getNew(Channel.mobile, app, driver);    	
         secMenus.selecLinea(pais, lineaConCarrusels); 
         validaSelecLinea(pais, lineaConCarrusels, null);
         navSelectCarrusels(lineaConCarrusels, pais);
@@ -125,7 +132,7 @@ public class SecMenuLateralMobilStpV {
 	@Validation
 	private ChecksTM checkGaleriaAfterSelectNuevo() {
 		ChecksTM validations = ChecksTM.getNew();
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.movil_web, app, driver);
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.mobile, app, driver);
 		int maxSeconds = 3;
 		validations.add(
 			"Aparece algún artículo (esperamos " + maxSeconds + " segundos)",
@@ -193,7 +200,7 @@ public class SecMenuLateralMobilStpV {
             validaSelecLineaNinosWithSublineas(lineaType);
             break;
         case articulos:
-            PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.movil_web, app, driver);
+            PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.mobile, app, driver);
             int maxSeconds = 3;
             pageGaleriaStpV.validaArtEnContenido(maxSeconds);
             break;
@@ -291,12 +298,13 @@ public class SecMenuLateralMobilStpV {
     	description="Aparecen artículos, banners, frames, maps o Sliders",
     	level=State.Warn)
     private boolean checkElementsAfterClickMenu2onLevel() throws Exception {
-    	PageGaleria pageGaleria = PageGaleria.getNew(Channel.movil_web, app, driver);
+    	PageGaleria pageGaleria = PageGaleria.getNew(Channel.mobile, app, driver);
+    	PageLanding pageLanding = new PageLanding(driver);
         return (
         	pageGaleria.isVisibleArticleUntil(1, 3) ||
-            PageLanding.hayIframes(driver) ||
-            PageLanding.hayMaps(driver) ||
-            PageLanding.haySliders(driver) ||
+            pageLanding.hayIframes() ||
+            pageLanding.hayMaps() ||
+            pageLanding.haySliders() ||
             ManagerBannersScreen.existBanners(driver));
     }
 }

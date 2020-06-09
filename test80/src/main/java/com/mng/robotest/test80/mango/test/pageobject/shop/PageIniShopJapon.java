@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
 
 /**

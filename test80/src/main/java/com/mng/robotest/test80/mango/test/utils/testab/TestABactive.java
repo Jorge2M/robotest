@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.testab.TestABactData;
-import com.mng.testmaker.service.testab.manager.TestABmanager;
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.testab.TestABactData;
+import com.github.jorge2m.testmaker.service.testab.manager.TestABmanager;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 public class TestABactive {
@@ -21,6 +21,8 @@ public class TestABactive {
 		
 		//El forzar este TestAB no tiene efecto al estar junto con el de GaleriaDesktopReact v0. Siempre aparece la versión 0
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.PLP_Desktop_New_filters_v2, 0));
+		
+		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.SHOP_260_Menu_Mobile_Nuevo_Diseño, 0));
 		
 		TestABmanager.activateTestsAB(listTestABsToActivate, channel, app, driver);
 	}

@@ -8,9 +8,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalDetalleMisCompras;
 
 
@@ -113,7 +113,7 @@ public class PageMisCompras extends PageObjTM {
     }    
 
     private String getXPathNumPrendasCompra(int posInLista) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (getXPathCompra(posInLista) + "//span[@class='prendas']");
         }
         return (getXPathCompra(posInLista) + "//div[@class='box-info']//div[@class='shop-look']");
@@ -121,7 +121,7 @@ public class PageMisCompras extends PageObjTM {
     
     private String getXPathEstadoCompraOnline(int posInLista) {
         String lastElem = "p[3]";
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             lastElem = "/li[@class='regular'][2]";
         }
         return (getXPathCompra(posInLista) + "//div[@class='box-info']/div[@class='shop']/" + lastElem);

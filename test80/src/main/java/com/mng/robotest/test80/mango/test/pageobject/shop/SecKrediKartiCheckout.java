@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Channel;
 
 
 public class SecKrediKartiCheckout {
@@ -17,7 +17,7 @@ public class SecKrediKartiCheckout {
     static String XPathCapaPagoPlazoDesktop = "//div[@class[contains(.,'installmentsTable')]]";            
     
     public static String getXPATH_capaPagoPlazo(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathCapaPagoPlazoMobil;
         }
         return XPathCapaPagoPlazoDesktop;
@@ -29,7 +29,7 @@ public class SecKrediKartiCheckout {
      */    
     public static String getXPATH_checkPlazos(int posicion, Channel channel) {
         String xpathDivPlazo = getXPATH_capaPagoPlazo(channel);
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return xpathDivPlazo + "//div[@class[contains(.,'custom-radio')] and @data-custom-radio-id][" + posicion + "]";
         }
         return xpathDivPlazo + "//input[@type='radio' and @name='installment'][" + posicion + "]"; 

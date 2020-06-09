@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.votfcons;
 
-import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
 public class ChecksResultWithStringData extends ChecksTM {
 	String data;

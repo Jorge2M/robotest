@@ -12,8 +12,8 @@ import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.testmaker.conf.Channel;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticleDesktop;
 
 /**
@@ -104,7 +104,7 @@ public class PageGaleriaMobil extends PageGaleria {
     public static int scrollToLast = 20; 
     
     private PageGaleriaMobil(From from, AppEcom app, WebDriver driver) {
-    	super(from, Channel.movil_web, app, driver);
+    	super(from, Channel.mobile, app, driver);
     }
     
     public static PageGaleriaMobil getNew(From from, AppEcom app, WebDriver driver) {

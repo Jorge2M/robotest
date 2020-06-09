@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.shop;
 
-import com.mng.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.State;
 
 public class StdValidationFlags {
 	public boolean validaSEO = false;

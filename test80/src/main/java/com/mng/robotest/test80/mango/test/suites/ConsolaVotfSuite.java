@@ -4,8 +4,8 @@ import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.getP
 
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.testmaker.domain.SuiteMaker;
-import com.mng.testmaker.domain.TestRunMaker;
+import com.github.jorge2m.testmaker.domain.SuiteMaker;
+import com.github.jorge2m.testmaker.domain.TestRunMaker;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.test.appshop.ConsolaVotf;
 

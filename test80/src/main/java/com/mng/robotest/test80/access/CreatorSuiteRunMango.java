@@ -15,13 +15,13 @@ import com.mng.robotest.test80.mango.test.suites.RegistrosSuite;
 import com.mng.robotest.test80.mango.test.suites.SmokeMantoSuite;
 import com.mng.robotest.test80.mango.test.suites.SmokeTestSuite;
 import com.mng.robotest.test80.mango.test.suites.ValesPaisesSuite;
-import com.mng.testmaker.domain.CreatorSuiteRun;
-import com.mng.testmaker.domain.SuiteMaker;
+import com.github.jorge2m.testmaker.domain.CreatorSuiteRun;
+import com.github.jorge2m.testmaker.domain.SuiteMaker;
 
 
 public class CreatorSuiteRunMango extends CreatorSuiteRun {
 	
-	private final String ChromeDriverVersionDefault = "80.0.3987.106";
+	private final String ChromeDriverVersionDefault = "83.0.4103.39";
 	private final String GeckoDriverVersionDefault = "0.26.0";
 	
 	private CreatorSuiteRunMango() throws Exception {
@@ -79,11 +79,15 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 	}
 	
 	private void setWebDriverVersion() {
-		if (inputParams.getChromeDriverVersion()==null) {
-			inputParams.setChromeDriverVersion(ChromeDriverVersionDefault);
-		}
-		if (inputParams.getGeckoDriverVersion()==null) {
-			inputParams.setGeckoDriverVersion(GeckoDriverVersionDefault);
+		if (inputParams.getDriverVersion()==null) {
+			switch (inputParams.getDriver()) {
+			case "firefox":
+				inputParams.setDriverVersion(GeckoDriverVersionDefault);
+				break;
+			case "chrome":
+				inputParams.setDriverVersion(ChromeDriverVersionDefault);
+				break;
+			}
 		}
 	}
 }

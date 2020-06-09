@@ -2,11 +2,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.ficha;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 @SuppressWarnings({"static-access"})
 public abstract class PageFicha extends PageObjTM {
@@ -41,7 +41,7 @@ public abstract class PageFicha extends PageObjTM {
     //Constructor estático
     public static PageFicha newInstance(Channel channel, AppEcom appE, WebDriver driver) {
     	PageFicha pageFicha;
-        if (appE==AppEcom.outlet || channel==Channel.movil_web) {
+        if (appE==AppEcom.outlet || channel==Channel.mobile) {
         	pageFicha = PageFichaArtOld.getNewInstance(channel, driver);
         } else {
         	pageFicha = PageFichaArtNew.getNewInstance(channel, driver);

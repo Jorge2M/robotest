@@ -5,14 +5,14 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.suitetree.ChecksTM;
-import com.mng.testmaker.domain.suitetree.StepTM;
-import com.mng.testmaker.domain.suitetree.Check;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
+import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -24,9 +24,9 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
-import com.mng.testmaker.service.TestMaker;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha.TypeFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollection;
@@ -140,7 +140,7 @@ public class PageGaleriaStpV {
     }
 
 	public void shopTallasArticulo(int posArticulo) throws Exception {
-		if (channel==Channel.movil_web || app==AppEcom.outlet) {
+		if (channel==Channel.mobile || app==AppEcom.outlet) {
 			showTallasOutletAndMovil(posArticulo);
 		} else {
 			showTallasShopDesktop(posArticulo);
@@ -209,7 +209,7 @@ public class PageGaleriaStpV {
     throws Exception {
         DataScroll datosScroll = null;
         int pageToScroll = dataForScroll.numPageToScroll;
-        if (dCtxSh.channel == Channel.movil_web) {
+        if (dCtxSh.channel == Channel.mobile) {
         	pageToScroll = 3;
         }
         

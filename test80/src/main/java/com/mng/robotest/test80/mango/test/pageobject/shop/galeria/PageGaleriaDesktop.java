@@ -13,14 +13,16 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Talla;
-import com.mng.testmaker.conf.Channel;
-import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 
 /**getArticuloConVariedadColoresAndHover
@@ -41,9 +43,9 @@ public class PageGaleriaDesktop extends PageGaleria {
 	public enum TypeColor {codigo, nombre}
 	public enum TypeArticleDesktop {
 		Simple (
-			"//self::*[@data-imgsize='A1']"),
+			"//self::*[@data-imgsize='A1' or @class[contains(.,'_2zQ2a')]]"), //TODO (Outlet) a la espera de los cambios de Sergio Campillo
 		Doble (
-			"//self::*[@data-imgsize='A2']"),
+			"//self::*[@data-imgsize='A2' or @class[contains(.,'_3QWF_')]]"), //TODO (Outlet) a la espera de los cambios de Sergio Campillo
 		Video (
 			"//video");
 		
@@ -62,6 +64,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 			   "@class[contains(.,'productListImg')] or " + 
 			   "@class[contains(.,'product-list-image')] or " +
 			   "@class[contains(.,'product-image')] or " + 
+			   "@class[contains(.,'TaqRk')] or " + //TODO (Outlet) pendiente Sergio Campillo suba los cambios
 			   "@class[contains(.,'product-list-im')])]";
 	private final static String XPathImgSliderActiveRelativeArticleDesktop = 
 		"//div[@class[contains(.,'swiper-slide-active')]]" + XPathImgRelativeArticle;
@@ -661,7 +664,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 					break;
 				}
 				catch (StaleElementReferenceException e) {
-					pLogger.info("StaleElementReferenceException getting listTextos no validos from Galery");
+					Log4jTM.getLogger().info("StaleElementReferenceException getting listTextos no validos from Galery");
 				}
 			}
 		}

@@ -10,15 +10,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;

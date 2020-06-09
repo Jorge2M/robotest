@@ -12,7 +12,7 @@ import com.mng.sapfiori.access.test.testcase.generic.webobject.inputs.withmodal.
 import com.mng.sapfiori.access.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForSelectMultiItem;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.pages.PageFilter;
 import com.mng.sapfiori.access.test.testcase.webobject.iconsmenu.OptionMenu;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageSelProdsToReclassify extends PageFilter {
 	

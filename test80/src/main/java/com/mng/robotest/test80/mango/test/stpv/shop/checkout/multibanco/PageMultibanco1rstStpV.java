@@ -2,11 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.multibanco;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.suitetree.ChecksTM;
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.multibanco.PageMultibanco1rst;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
@@ -20,7 +20,7 @@ public class PageMultibanco1rstStpV {
     		PageMultibanco1rst.isPresentEntradaPago(nombrePago, channel, driver), State.Warn);
 	   	
 	   	State stateVal = State.Warn;
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
         	stateVal = State.Info;
         }
 	   	validations.add(

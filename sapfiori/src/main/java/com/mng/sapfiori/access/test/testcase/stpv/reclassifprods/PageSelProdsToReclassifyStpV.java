@@ -8,9 +8,9 @@ import com.mng.sapfiori.access.test.testcase.generic.stpv.modals.ModalSelectItem
 import com.mng.sapfiori.access.test.testcase.webobject.reclassifprods.PageReclassifProducts;
 import com.mng.sapfiori.access.test.testcase.webobject.reclassifprods.PageSelProdsToReclassify;
 import com.mng.sapfiori.access.test.testcase.webobject.reclassifprods.PageSelProdsToReclassify.ProductData;
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.conf.State;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.State;
 
 public class PageSelProdsToReclassifyStpV {
 	

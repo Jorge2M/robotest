@@ -7,8 +7,6 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -17,17 +15,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.mng.testmaker.testreports.html.ResultadoErrores;
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.Log4jConfig;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.test80.mango.conftestmaker.ErrorStorer;
 import com.mng.robotest.test80.mango.test.generic.stackTrace;
 
 public class WebDriverMngUtils {
-	
-    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
     /**
      * Cargamos el errorPage y de allí extraemos el nodo
@@ -112,7 +108,7 @@ public class WebDriverMngUtils {
         ITestContext ctx = TestMaker.getTestCase().getTestRunParent().getTestNgContext();
         		
         //En el caso de móvil sólo procesaremos 200 imágenes para paliar el caso en el que el script se ejecuta contra un dispositivo físico y el rendimiento es limitado
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             imagesBroken(driver,  200, maxErrors, ctx);
         }
         
@@ -192,10 +188,10 @@ public class WebDriverMngUtils {
     
                             // Siempre pintaremos el mensaje de warning en el caso de prueba y en la consola
                             listaImgBroken.add(driver.getCurrentUrl() + descError);
-                            pLogger.warn(driver.getCurrentUrl() + descError);
+                            Log4jTM.getLogger().warn(driver.getCurrentUrl() + descError);
                         }
                         else {
-                            pLogger.warn("Imagen con SRC {} y status OK (2xx) pero con tamaño nulo en la página {} and id {}", currentImageUrl, i, imageId);
+                        	Log4jTM.getLogger().warn("Imagen con SRC {} y status OK (2xx) pero con tamaño nulo en la página {} and id {}", currentImageUrl, i, imageId);
                         }
                     }
                 } else {
@@ -237,7 +233,7 @@ public class WebDriverMngUtils {
                 }
             }
         } catch (Exception e) {
-            pLogger.warn("Problem verifying Image Active", e);
+        	Log4jTM.getLogger().warn("Problem verifying Image Active", e);
         }
         
         return imgActive;
@@ -278,7 +274,7 @@ public class WebDriverMngUtils {
 	        return broken;
         }
         catch (Exception e) {
-        	pLogger.warn(e);
+        	Log4jTM.getLogger().warn(e);
         	return false;
         }
     }

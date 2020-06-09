@@ -2,11 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.assist;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.suitetree.ChecksTM;
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
@@ -30,7 +30,7 @@ public class PageAssist1rstStpV {
 			!PageCheckoutWrapper.isPresentMetodosPago(channel, driver), State.Defect);
 	 	
 	 	boolean inputsTrjOk = PageAssist1rst.isPresentInputsForTrjData(channel, driver);
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
     	 	validations.add(
 				"Figuran 5 campos de input para los datos de la tarjeta: 1 para el número de tarjeta, 2 para la fecha de caducidad, 1 para el titular y 1 para el CVC",
 				inputsTrjOk, State.Warn);

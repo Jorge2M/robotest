@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageMercpagoDatosTrjDesktop extends PageMercpagoDatosTrj {
     

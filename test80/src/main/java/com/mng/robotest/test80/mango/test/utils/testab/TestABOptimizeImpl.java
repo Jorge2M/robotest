@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.mng.testmaker.service.testab.TestABOptimize;
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.testab.TestABOptimize;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 public enum TestABOptimizeImpl implements TestABOptimize {
@@ -19,35 +19,35 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 	//5) Obtener los datos de la URL que se muestra
 
 	
-	MobileSelectorTallaColor (
-		"GTM-5T8R33",
-		"SHOP-176-PLP-Mobile-Selector talla/color",
-		"UWOU5vObVAZJ7ylnbAK2vQ",
-		"GTM-KWJ6XJ_OPT-PHJV7$",
-		"QUICK_PREVIEW",
-		Arrays.asList(0,1,2,3),
-		Arrays.asList(
-			"V0-Original", 
-			"V1-B - Color en link + CTA añadir con selectores como overlay", 
-			"V2-C - Color CTA + CTA añadir con selectores en modal",
-			"V3-D - Color en link + CTA añadir con selectores en modal"),
-		Arrays.asList(Channel.movil_web),
-		Arrays.asList(AppEcom.shop)
-	),
+//	MobileSelectorTallaColor (
+//		"GTM-5T8R33",
+//		"SHOP-176-PLP-Mobile-Selector talla/color",
+//		"UWOU5vObVAZJ7ylnbAK2vQ",
+//		"GTM-KWJ6XJ_OPT-PHJV7$",
+//		"QUICK_PREVIEW",
+//		Arrays.asList(0,1,2,3),
+//		Arrays.asList(
+//			"V0-Original", 
+//			"V1-B - Color en link + CTA añadir con selectores como overlay", 
+//			"V2-C - Color CTA + CTA añadir con selectores en modal",
+//			"V3-D - Color en link + CTA añadir con selectores en modal"),
+//		Arrays.asList(Channel.mobile),
+//		Arrays.asList(AppEcom.shop)
+//	),
 	
-	SHOP191_BuscadorDesktop (
-		"GTM-5T8R33",
-		"SHOP-191 - Buscador - Desktop - últimas búsquedas",
-		"UWOU5vObVAZJ7ylnbAK2vQ",
-		"GTM-KWJ6XJ_OPT-MSZD5$",
-		"QUICK_PREVIEW",
-		Arrays.asList(0,1),
-		Arrays.asList(
-			"V0-Original", 
-			"V1-Last Searches Visible"),
-		Arrays.asList(Channel.desktop),
-		Arrays.asList(AppEcom.shop, AppEcom.votf)
-	),
+//	SHOP191_BuscadorDesktop (
+//		"GTM-5T8R33",
+//		"SHOP-191 - Buscador - Desktop - últimas búsquedas",
+//		"UWOU5vObVAZJ7ylnbAK2vQ",
+//		"GTM-KWJ6XJ_OPT-MSZD5$",
+//		"QUICK_PREVIEW",
+//		Arrays.asList(0,1),
+//		Arrays.asList(
+//			"V0-Original", 
+//			"V1-Last Searches Visible"),
+//		Arrays.asList(Channel.desktop),
+//		Arrays.asList(AppEcom.shop, AppEcom.votf)
+//	),
 	
 	PLP_Desktop_New_filters_v2(
 		"GTM-5T8R33",
@@ -61,6 +61,21 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 			"V1-New Filters"),
 		Arrays.asList(Channel.desktop),
 		Arrays.asList(AppEcom.shop, AppEcom.votf)
+	),
+	
+	SHOP_260_Menu_Mobile_Nuevo_Diseño(
+		"GTM-5T8R33",
+		"SHOP-260 - Menu - Mobile - Nuevo Diseño",
+		"UWOU5vObVAZJ7ylnbAK2vQ",
+		"GTM-KWJ6XJ_OPT-KMZZV$",
+		"QUICK_PREVIEW",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"Variante 0 - Original",
+			"Variante 1 - Anidado plegado", 
+			"Variante 2 - Anidado desplegado"),
+		Arrays.asList(Channel.mobile),
+		Arrays.asList(AppEcom.shop)
 	);
 	
 	private String group;

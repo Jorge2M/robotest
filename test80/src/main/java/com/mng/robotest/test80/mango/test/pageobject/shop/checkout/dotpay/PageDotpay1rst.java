@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.dotpay;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 public class PageDotpay1rst {
@@ -16,7 +16,7 @@ public class PageDotpay1rst {
     static String XPathButtonPago = "//input[@name='pay' and @type='submit']";
     
     public static String getXPathEntradaPago(String nombrePago, Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (XPathListOfPayments + "/li/input[@class[contains(.,'" + nombrePago.toLowerCase() + "')]]");
         }
         return (XPathListOfPayments + "/li[@data-variant[contains(.,'" + nombrePago.toLowerCase() + "')]]");
@@ -37,7 +37,7 @@ public class PageDotpay1rst {
 	}
 
 	public static void clickToPay(Channel channel, WebDriver driver) {
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			click(By.xpath(XPathInputIconoDotpay), driver).exec();
 		} else {
 			click(By.xpath(XPathButtonPago), driver).exec();

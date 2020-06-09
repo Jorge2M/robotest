@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.sapfiori.access.test.testcase.generic.webobject.makers.StandarElementsMaker;
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 public class PageObject extends PageObjTM {
 	

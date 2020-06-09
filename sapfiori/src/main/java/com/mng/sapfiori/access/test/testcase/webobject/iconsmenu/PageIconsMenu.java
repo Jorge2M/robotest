@@ -10,7 +10,7 @@ import com.mng.sapfiori.access.test.testcase.generic.webobject.modals.ModalLoadi
 import com.mng.sapfiori.access.test.testcase.generic.webobject.utils.PageObject;
 import com.mng.sapfiori.access.test.testcase.webobject.pedidos.PageGestionSolPedidoBuyer;
 import com.mng.sapfiori.access.test.testcase.webobject.reclassifprods.PageSelProdsToReclassify;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageIconsMenu extends PageObject {
 	

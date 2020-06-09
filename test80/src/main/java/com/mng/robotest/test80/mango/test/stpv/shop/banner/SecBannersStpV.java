@@ -4,15 +4,15 @@ import java.net.URI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.suitetree.ChecksTM;
-import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.testmaker.testreports.html.ResultadoErrores;
+import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
 import com.mng.robotest.test80.mango.test.pageobject.shop.AllPages;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.DataBanner;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.ManagerBannersScreen;
@@ -23,12 +23,14 @@ import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
 public class SecBannersStpV {
 	
 	int maxBannersToLoad;
-	ManagerBannersScreen managerBannersScreen;
-	WebDriver driver;
+	private final ManagerBannersScreen managerBannersScreen;
+	private final PageLanding pageLanding;
+	private final WebDriver driver;
 	
 	public SecBannersStpV(int maxBannersToLoad, WebDriver driver) {
 		this.driver = driver;
 		managerBannersScreen = new ManagerBannersScreen(maxBannersToLoad, driver);
+		pageLanding = new PageLanding(driver);
 	}
 	
 	public ManagerBannersScreen getManagerBannerScreen() {
@@ -121,8 +123,8 @@ public class SecBannersStpV {
     	description="Aparece una página con secciones, galería, banners, bloque de contenido con imágenes o página acceso",
     	level=State.Warn)
     public boolean validacionesBannerEstandar(AppEcom app) throws Exception {
-        if (!PageLanding.haySecc_Art_Banners(app, driver)) {
-            return (PageLanding.hayImgsEnContenido(driver));
+        if (!pageLanding.haySecc_Art_Banners(app)) {
+            return (pageLanding.hayImgsEnContenido());
         }
         
         return true; 
@@ -133,8 +135,8 @@ public class SecBannersStpV {
     	level=State.Warn)
     public boolean validaBannEnContenido() {
         boolean existBanners = managerBannersScreen.existBanners();
-        boolean existsMaps = PageLanding.hayMaps(driver);
-        boolean existsEditItems = PageLanding.hayItemsEdits(driver);
+        boolean existsMaps = pageLanding.hayMaps();
+        boolean existsEditItems = pageLanding.hayItemsEdits();
         return (existBanners || existsMaps || existsEditItems);
     }
 }

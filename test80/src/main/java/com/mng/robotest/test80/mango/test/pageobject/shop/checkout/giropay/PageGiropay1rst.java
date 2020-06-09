@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.giropay;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 public class PageGiropay1rst {
@@ -18,7 +18,7 @@ public class PageGiropay1rst {
     static String XPathIconoGiropayDesktop = XPathListOfPayments + "/li[@data-variant[contains(.,'giropay')]]";
     
     public static String getXPathIconoGiropay(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathIconoGiropayMobil;
         }
         return XPathIconoGiropayDesktop;
@@ -47,7 +47,7 @@ public class PageGiropay1rst {
 //    }
 //    
 //    public static void inputBank(String bank, Channel channel, WebDriver driver) throws Exception {
-//        if (channel==Channel.movil_web) {
+//        if (channel==Channel.mobile) {
 //            if (!isElementVisible(driver, By.xpath(XPathInputBank))) {
 //                clickIconoGiropay(channel, driver);
 //            }
@@ -68,7 +68,7 @@ public class PageGiropay1rst {
 	}
 
     public static void clickButtonContinuePay(Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             clickButtonContinueMobil(driver);
         } else {
             clickButtonPagoDesktop(driver);

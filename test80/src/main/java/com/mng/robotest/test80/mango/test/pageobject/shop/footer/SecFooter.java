@@ -8,9 +8,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.conf.Channel;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalClubMangoLikes;
 
@@ -24,8 +24,8 @@ public class SecFooter {
     static List<AppEcom> footerAll = Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf);
     
     static List<Channel> channelDesktop = Arrays.asList(Channel.desktop);
-    static List<Channel> channelMobile = Arrays.asList(Channel.movil_web);
-    static List<Channel> channelAll = Arrays.asList(Channel.desktop, Channel.movil_web);    
+    static List<Channel> channelMobile = Arrays.asList(Channel.mobile);
+    static List<Channel> channelAll = Arrays.asList(Channel.desktop, Channel.mobile);    
     
     public static enum FooterLink {
     	ayuda(footerShop, channelAll, "//a[@data-ga-label='ayuda' and text()[contains(.,'Ayuda')]]", false), 

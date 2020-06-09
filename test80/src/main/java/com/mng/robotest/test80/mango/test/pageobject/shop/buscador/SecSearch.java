@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.buscador;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 public interface SecSearch {
@@ -20,7 +20,7 @@ public interface SecSearch {
 			case outlet:
 				return SecSearchDesktopOutlet.getNew(driver);
 			}
-		case movil_web:
+		case mobile:
 			switch (app) {
 			case shop:
 			case votf:

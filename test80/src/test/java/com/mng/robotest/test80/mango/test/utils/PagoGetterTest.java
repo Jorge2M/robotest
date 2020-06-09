@@ -10,7 +10,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Channel;
 
 import static com.mng.robotest.test80.mango.test.data.PaisShop.*; 
 
@@ -49,7 +49,7 @@ public class PagoGetterTest {
 
 		//When
 		List<String> listPaymentsResult = PagoGetter.getLabelsPaymentsAlphabetically(
-				listCodCountries, Channel.movil_web, AppEcom.outlet, false);
+				listCodCountries, Channel.mobile, AppEcom.outlet, false);
 
 		//Then
 		assertTrue(listPaymentsResult.contains("VISA"));

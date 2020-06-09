@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 public class PageResultPago {
@@ -20,13 +20,13 @@ public class PageResultPago {
     //xpath del link hacia los pedidos (sólo aparecen en la versión Desktop de la página)
     static String XPathLinkPedidosDesktop = "//a[@href[contains(.,'/account/orders')] or @href[contains(.,'/loginPedidos.faces')]]"; 
     static String XPathLinkMisComprasDesktop = "//a[@href[contains(.,'/mypurchases')]]";
-	static String xpathBlockNewLoyaltyPoints = "//div[@class='simulate-likes']";
+	static String xpathBlockNewLoyaltyPoints = "//div[@class[contains(.,'simulate-likes')]]";
     
     /**
      * @return el xpath correspondiente al elemento que contiene el texto con la confirmación del pago
      */
     public static String getXPathTextoConfirmacionPago(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathTextoConfirmacionPagoMobil;
         }
         return XPathTextoConfirmacionPagoDesktop;
@@ -36,7 +36,7 @@ public class PageResultPago {
      * @return el xpath correspondiente al elemento lincable de "Seguir de shopping"
      */
     public static String getXPathLinkSeguirDeShopping(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathLinkSeguirDeShoppingMobil;
         }
         return XPathLinkSeguirDeShoppingDesktop;
@@ -46,7 +46,7 @@ public class PageResultPago {
      * @return el xpath correspondiente al elemento que contiene el texto con el id del pedido
      */
     public static String getXPathTextPedido(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathTextPedidoMobil;
         }
         return XPathTextPedidoDesktop;

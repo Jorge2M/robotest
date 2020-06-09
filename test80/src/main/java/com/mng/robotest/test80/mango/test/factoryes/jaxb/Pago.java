@@ -10,8 +10,8 @@ import javax.xml.bind.annotation.*;
 import org.testng.ITestContext;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 
@@ -644,7 +644,7 @@ public class Pago implements Serializable {
     }
     
     public String getNombre(Channel channel) {
-        if (channel==Channel.movil_web && getNombremovil()!=null && "".compareTo(getNombremovil())!=0) {
+        if (channel==Channel.mobile && getNombremovil()!=null && "".compareTo(getNombremovil())!=0) {
             return getNombremovil();
         }
         return getNombre();

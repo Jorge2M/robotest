@@ -1,18 +1,16 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 
 import java.util.List;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import static com.mng.robotest.test80.mango.test.data.Constantes.PrefixRebajas;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.data.CodIdioma;
 import com.mng.robotest.test80.mango.test.data.Constantes.ThreeState;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -39,8 +37,6 @@ import com.mng.robotest.test80.mango.test.utils.checkmenus.Label;
 import com.mng.robotest.test80.mango.test.utils.checkmenus.MenuTraduc;
 
 public class SecMenusWrapperStpV {
-	
-	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
 	private final Channel channel;
 	private final AppEcom app;
@@ -151,20 +147,20 @@ public class SecMenusWrapperStpV {
         for (int i=0; i<listMenusLabel.size(); i++) {
             try {
             	Menu1rstLevel menu1rstLevel = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(lineaType, sublineaType, listMenusLabel.get(i)));
-                if (channel==Channel.movil_web) {
+                if (channel==Channel.mobile) {
                     secMenuLateralMobilStpV.stepClickMenu1rstLevel(menu1rstLevel, pais);
                 } else {
                     secMenusDesktopStpV.stepEntradaMenuDesktop(menu1rstLevel, paginaLinea);
                 }
             }
             catch (Exception e) {
-            	pLogger.warn("Problem in selection of menu " + lineaType + " / " + sublineaType + " / " + listMenusLabel.get(i), e);
+            	Log4jTM.getLogger().warn("Problem in selection of menu " + lineaType + " / " + sublineaType + " / " + listMenusLabel.get(i), e);
             }        
         }
     }
     
     public void navSeleccionaCarruselsLinea(Pais pais, LineaType lineaNuevoOReb) throws Exception {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             secMenuLateralMobilStpV.navClickLineaAndCarrusels(lineaNuevoOReb, pais);
         } else {
             secMenusDesktopStpV.stepValidaCarrusels(lineaNuevoOReb);
@@ -195,15 +191,22 @@ public class SecMenusWrapperStpV {
     }
     
     public void selectMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
-        if (dCtxSh.channel==Channel.movil_web) {
+        if (dCtxSh.channel==Channel.mobile) {
             secMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh);
         } else {	
         	secMenusDesktopStpV.selectMenuSuperiorTypeCatalog(menu1rstLevel, dCtxSh);
         }
     }
+    public boolean checkExistMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) {
+        if (dCtxSh.channel==Channel.mobile) {
+            return secMenuLateralMobilStpV.checkNotExistsMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh.pais);
+        } else {	
+        	return secMenusDesktopStpV.checkNotExistsMenuSuperiorTypeCatalog(menu1rstLevel);
+        }
+    }
     
     public void selectMenuLateral1erLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
-        if (dCtxSh.channel==Channel.movil_web) {
+        if (dCtxSh.channel==Channel.mobile) {
             secMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh); 
         } else {
         	secMenusDesktopStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh);        
@@ -219,7 +222,7 @@ public class SecMenusWrapperStpV {
     }
     
     public void seleccionLinea(LineaType lineaType) throws Exception {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             secMenuLateralMobilStpV.seleccionLinea(lineaType, pais);
         } else {
 	        secMenusDesktopStpV.seleccionLinea(lineaType);
@@ -228,7 +231,7 @@ public class SecMenusWrapperStpV {
     
     public void seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh)
     throws Exception {
-        if (dCtxSh.channel==Channel.movil_web) {
+        if (dCtxSh.channel==Channel.mobile) {
             secMenuLateralMobilStpV.seleccionSublineaNinos(lineaType, sublineaType, pais);
         } else {
         	secMenusDesktopStpV.seleccionSublinea(lineaType, sublineaType);

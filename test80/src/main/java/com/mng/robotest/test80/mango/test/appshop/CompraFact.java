@@ -8,11 +8,13 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
-import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -22,13 +24,16 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
+import com.mng.robotest.test80.mango.test.getdata.products.data.Color;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
+import com.mng.robotest.test80.mango.test.getdata.products.data.Size;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigations;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 public class CompraFact implements Serializable {
@@ -108,7 +113,7 @@ public class CompraFact implements Serializable {
         groups={"Compra", "Canal:all_App:all"}, alwaysRun=true, priority=1, 
         description="Test de compra (creado desde Factoría) con valores específicos a nivel de Pago, Tipo de Envío, Usuario Conectado y Empleado")
     public void COM010_Pago() throws Exception {
-    	TestMaker.getTestCase().setSpecificInputData(this.index_fact);
+		TestCaseTM.addNameSufix(this.index_fact);
     	WebDriver driver = TestMaker.getDriverTestCase();
         DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userRegistered = this.usrRegistrado;
@@ -123,9 +128,23 @@ public class CompraFact implements Serializable {
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, this.usrRegistrado, driver);
         //TestAB.activateTestABcheckoutMovilEnNPasos(0, dCtxSh, dFTest.driver);
 
-        
         int maxArticlesAwayVale = 3;
         List<Garment> listArticles = UtilsTestMango.getArticlesForTest(dCtxSh, maxArticlesAwayVale, this.testVale);
+        
+//        //TODO para pruebas Dani Luque
+//        Garment garment = new Garment("63100536");
+//        garment.setStock(1000);
+//        Color color = new Color();
+//        color.setId("99");
+//        color.setLabel("Negro");
+//        Size size = new Size();
+//        size.setId(19);
+//        size.setLabel("XL");
+//        color.setSizes(Arrays.asList(size));
+//        garment.setColors(Arrays.asList(color));
+//        List<Garment> listArticles = Arrays.asList(garment);
+//        manyArticles = false;
+        
         if (!manyArticles) {
         	listArticles = Arrays.asList(listArticles.get(0));
         }
@@ -137,7 +156,7 @@ public class CompraFact implements Serializable {
         FlagsTestCkout fTCkout = new FlagsTestCkout();
         fTCkout.validaPasarelas = true;  
         fTCkout.validaPagos = true;
-        fTCkout.validaPedidosEnManto = true;
+        fTCkout.validaPedidosEnManto = false; //TODO -> Volver a poner a true
         fTCkout.emailExist = true; 
         fTCkout.trjGuardada = false;
         fTCkout.isEmpl = this.empleado;

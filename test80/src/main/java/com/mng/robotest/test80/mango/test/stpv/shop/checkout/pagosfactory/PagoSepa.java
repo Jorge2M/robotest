@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
@@ -28,7 +28,7 @@ public class PagoSepa extends PagoStpV {
         
         if (execPay) {
             PageSepa1rstStpV.inputDataAndclickPay(pago.getNumtarj(), pago.getTitular(), importeTotal, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
-            if (dCtxSh.channel==Channel.movil_web) {
+            if (dCtxSh.channel==Channel.mobile) {
                 PageSepaResultMobilStpV.clickButtonPagar(driver);
             }
         }

@@ -6,10 +6,10 @@ import org.openqa.selenium.WebDriver;
 import com.mng.sapfiori.access.test.testcase.generic.stpv.modals.ModalSelectConditionsStpV;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.modals.ModalSelectConditions;
 import com.mng.sapfiori.access.test.testcase.webobject.pedidos.PageGestionSolPedidoBuyer;
-import com.mng.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.conf.State;
+import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.State;
 
 public class PageGestionSolPedidoBuyerStpV {
 

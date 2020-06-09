@@ -6,20 +6,18 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.boundary.aspects.step.SaveWhen;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.Constantes;
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
-import com.mng.testmaker.domain.suitetree.StepTM;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.InputParamsTM.TypeAccess;
+import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -55,7 +53,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory.PagoSt
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 public class PagoNavigationsStpV {
-    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
     public static void testFromLoginToExecPaymetIfNeeded(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) 
     throws Exception {
@@ -133,7 +130,7 @@ public class PagoNavigationsStpV {
         }
         
         test1rstPageCheckout(dCtxSh, dCtxPago, driver);
-        if (dCtxSh.channel==Channel.movil_web) {
+        if (dCtxSh.channel==Channel.mobile) {
         	boolean isSaldoEnCuenta = dCtxPago.getFTCkout().isStoreCredit;
         	Page1EnvioCheckoutMobilStpV.clickContinuarToMetodosPago(dCtxSh, isSaldoEnCuenta, driver);
         }
@@ -151,7 +148,7 @@ public class PagoNavigationsStpV {
                 testInputCodPromoEmpl(dCtxSh, dataBag, driver);
             } else {
                 if (dCtxSh.vale!=null) {
-                    if (dCtxSh.channel == Channel.movil_web) {
+                    if (dCtxSh.channel == Channel.mobile) {
                         Page1EnvioCheckoutMobil.inputCodigoPromo(dCtxSh.vale.getCodigoVale(), driver);
                     } else {
                     	testValeDescuento(dCtxSh.vale, dataBag, dCtxSh.appE, driver);
@@ -353,7 +350,7 @@ public class PagoNavigationsStpV {
             }
         }
         catch (Exception e) {
-            pLogger.warn("Problem validating Payments methods of country {} ",  dCtxSh.pais.getNombre_pais(), e);
+        	Log4jTM.getLogger().warn("Problem validating Payments methods of country {} ",  dCtxSh.pais.getNombre_pais(), e);
             throw e; 
         }
     }
@@ -399,9 +396,10 @@ public class PagoNavigationsStpV {
             	PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, dCtxSh.channel, driver);
             }
             testPagoFromCheckoutToEnd(dCtxPago, dCtxSh, pago, driver);
+            System.out.println("Compra realizada con código de pedido: " + dataPedido.getCodpedido());
         }
         catch (Exception e) {
-            pLogger.warn("Problem checking Payment {} from country {}", pago.getNombre(), dCtxSh.pais.getNombre_pais(), e);
+        	Log4jTM.getLogger().warn("Problem checking Payment {} from country {}", pago.getNombre(), dCtxSh.pais.getNombre_pais(), e);
         }
     }
     

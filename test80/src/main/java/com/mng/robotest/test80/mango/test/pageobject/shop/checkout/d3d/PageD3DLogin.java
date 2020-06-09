@@ -3,8 +3,8 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.d3d;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 
 
 public class PageD3DLogin extends PageObjTM {

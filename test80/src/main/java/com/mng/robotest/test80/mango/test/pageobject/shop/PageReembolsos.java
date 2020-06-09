@@ -4,9 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.testmaker.conf.Channel;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 
@@ -198,7 +198,7 @@ public class PageReembolsos {
 
 	public static boolean isVisibleModalConfTransf(WebDriver driver, Channel channel, int seconds) throws Exception {
 		//En el caso de móvil el div se oculta desplazándolo x píxeles por debajo de la coordenada 0Y
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			for (int i=0; i<seconds; i++) {
 				if (driver.findElement(By.xpath(XPathModalConfTransf)).getLocation().getY()>0) {
 					return (true);
@@ -215,7 +215,7 @@ public class PageReembolsos {
 
 	public static boolean isNotVisibleModalConfTransf(WebDriver driver, Channel channel, int seconds) throws Exception {
 		//En el caso de móvil el div se oculta desplazándolo x píxeles por debajo de la coordenada 0Y
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			for (int i=0; i<seconds; i++) {
 				if (driver.findElement(By.xpath(XPathModalConfTransf)).getLocation().getY()<20) {
 					return (true);

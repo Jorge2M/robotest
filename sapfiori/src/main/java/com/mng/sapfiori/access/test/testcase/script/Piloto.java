@@ -12,7 +12,7 @@ import com.mng.sapfiori.access.test.testcase.stpv.login.PageLoginStpV;
 import com.mng.sapfiori.access.test.testcase.stpv.reclassifprods.PageReclassifProductsStpV;
 import com.mng.sapfiori.access.test.testcase.stpv.reclassifprods.PageSelProdsToReclassifyStpV;
 import com.mng.sapfiori.access.test.testcase.webobject.reclassifprods.PageSelProdsToReclassify.ProductData;
-import com.mng.testmaker.domain.suitetree.TestCaseTM;
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 
 public class Piloto {
 

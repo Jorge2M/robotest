@@ -5,9 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mng.testmaker.conf.Channel;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 public class SecKlarna {
@@ -29,7 +29,7 @@ public class SecKlarna {
     static String XPathButtonConfirmAddressDesktop = "//span[@id[contains(.,'FormularioKlarna')] and @class[contains(.,'modalConfirmar')]]";
     
     public static String getXPath_capaKlarna(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathCapaKlarnaMobil;
         }
         return XPathCapaKlarnaDesktop; 
@@ -37,14 +37,14 @@ public class SecKlarna {
     
     public static String getXPath_inputNumPersonal(Channel channel) {
         String xpathCapaKlarna = getXPath_capaKlarna(channel);
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (xpathCapaKlarna + "//input[@id[contains(.,'number-card')]]");
         }
         return (xpathCapaKlarna + "//input[@id[contains(.,'personalno')] and @class[contains(.,'personalno-input')]]");
     }
     
     public static String getXPATH_buttonConfirmAddress(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathButtonConfirmAddressMobil; 
         }
         return XPathButtonConfirmAddressDesktop;
@@ -70,7 +70,7 @@ public class SecKlarna {
      */
     public static boolean isErrorTlfn(String mensajeError, Channel channel) {
         boolean isError = false;
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             if (mensajeError.contains(errorTlfMovil)) {
                 isError = true;
             }

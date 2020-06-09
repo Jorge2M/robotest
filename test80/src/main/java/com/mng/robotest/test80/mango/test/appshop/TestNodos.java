@@ -6,8 +6,9 @@ import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
-import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -84,7 +85,7 @@ public class TestNodos implements Serializable {
     public void NOD001_TestNodo() throws Throwable {
     	DataCtxShop dCtxSh = getCtxShForTest();
     	WebDriver driver = TestMaker.getDriverTestCase();
-    	TestMaker.getTestCase().setSpecificInputData(index_fact);
+		TestCaseTM.addNameSufix(this.index_fact);
         AppEcom appE = nodo.getAppEcom();
         AccesoStpV.testNodoState(nodo, driver);
         if (this.nodo.getStatusJSON().isStatusOk()) {

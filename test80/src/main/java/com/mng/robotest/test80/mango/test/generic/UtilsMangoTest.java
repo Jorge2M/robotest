@@ -27,12 +27,12 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;

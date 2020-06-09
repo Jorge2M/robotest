@@ -8,13 +8,13 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -87,6 +87,12 @@ public class SecMenusDesktopStpV {
     public void selectMenuSuperiorTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
     	secMenus.secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel);
     	validaSelecMenu(menu1rstLevel, dCtxSh);
+    }
+    @Validation(
+    	description="No existe el menú superior <b>#{menu1rstLevel}</b>",
+    	level=State.Defect)
+    public boolean checkNotExistsMenuSuperiorTypeCatalog(Menu1rstLevel menu1rstLevel) {
+    	return (!secMenus.secMenuSuperior.secBlockMenus.goToMenuAndCheckIsVisible(menu1rstLevel));
     }
     
     @Step (
@@ -441,10 +447,11 @@ public class SecMenusDesktopStpV {
     	level=State.Warn)
     private boolean checkAreValidMangoObjectsInPage() throws Exception {
         PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
+        PageLanding pageLanding = new PageLanding(driver);
         if (!pageGaleria.isVisibleArticleUntil(1, 3) &&
-            !PageLanding.hayIframes(driver) &&
-            !PageLanding.hayMaps(driver) &&
-            !PageLanding.haySliders(driver)) {
+            !pageLanding.hayIframes() &&
+            !pageLanding.hayMaps() &&
+            !pageLanding.haySliders()) {
             int maxBannersToLoad = 1;
             ManagerBannersScreen managerBanners = new ManagerBannersScreen(maxBannersToLoad, driver);
             return (managerBanners.existBanners());
@@ -565,7 +572,7 @@ public class SecMenusDesktopStpV {
     	ChecksTM validations = ChecksTM.getNew();
     	GroupMenu groupMenu = menu.getGroup();
     	List<Element> elemsCanBeContained = groupMenu.getElementsCanBeContained();
-    	boolean contentPageOk = PageLanding.isSomeElementVisibleInPage(elemsCanBeContained, app, driver);
+    	boolean contentPageOk = (new PageLanding(driver)).isSomeElementVisibleInPage(elemsCanBeContained, app);
 	 	validations.add(
 			"Aparecen alguno de los siguientes elementos: <b>" + elemsCanBeContained + "</b> (es un menú perteneciente al grupo <b>" + groupMenu + ")</b>",
 			contentPageOk, State.Warn);

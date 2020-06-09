@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.xml.bind.annotation.*;
 
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
 
 
@@ -46,7 +46,7 @@ public class Linea implements Serializable {
     	
     	public String getSufixOutlet(Channel channel) {
     		if (this.compareTo(LineaType.she)==0) {
-	            if (channel==Channel.movil_web) {
+	            if (channel==Channel.mobile) {
 	                return "outlet ";
 	            }
     		}

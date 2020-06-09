@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 public class SecConfirmDatos {
@@ -19,8 +19,8 @@ public class SecConfirmDatos {
         switch (channel) {
         case desktop:
             return XPathDivGeneralDesktop;
-        case movil_web:
-        default:            
+        case mobile:
+        default:
             return XPathDivGeneralMovil;
         }
     }

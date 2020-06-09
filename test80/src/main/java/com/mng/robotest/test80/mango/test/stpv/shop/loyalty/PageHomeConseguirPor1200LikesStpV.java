@@ -2,10 +2,10 @@ package com.mng.robotest.test80.mango.test.stpv.shop.loyalty;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.loyalty.PageHomeConseguirPor1200Likes;
 
 public class PageHomeConseguirPor1200LikesStpV {
@@ -23,10 +23,10 @@ public class PageHomeConseguirPor1200LikesStpV {
 	}
 	
 	@Validation (
-		description="Aparece el botón de \"Conseguir por 1200 Likes\"",
+		description="Aparece el botón de \"Conseguir por 1200 Likes\" (esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-	public boolean checkIsPage() {
-		return pageHomeConseguirPor1200Likes.isPage();
+	public boolean checkIsPage(int maxSeconds) {
+		return pageHomeConseguirPor1200Likes.isPage(maxSeconds);
 	}
 	
 	@Step (

@@ -2,11 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.giropay;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.suitetree.ChecksTM;
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.giropay.PageGiropay1rst;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
@@ -21,7 +21,7 @@ public class PageGiropay1rstStpV {
 
 		State stateVal = State.Warn;
 		boolean avoidEvidences = false;
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			stateVal = State.Info;
 			avoidEvidences = true;
 		}

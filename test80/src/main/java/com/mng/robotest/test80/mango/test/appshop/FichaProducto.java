@@ -18,6 +18,7 @@ import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFichaArtOld;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.Slider;
@@ -39,10 +40,10 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalBuscadorTiendasStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
-import com.mng.testmaker.domain.SuitesExecuted;
-import com.mng.testmaker.domain.suitetree.SuiteTM;
-import com.mng.testmaker.domain.suitetree.TestRunTM;
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.domain.SuitesExecuted;
+import com.github.jorge2m.testmaker.domain.suitetree.SuiteTM;
+import com.github.jorge2m.testmaker.domain.suitetree.TestRunTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
 
 public class FichaProducto {
 	
@@ -171,8 +172,13 @@ public class FichaProducto {
             boolean isFichaAccesorio = pageFichaStpV.getFicha().isFichaAccesorio(); 
             pageFichaStpV.secFotosNew.validaLayoutFotosNew(isFichaAccesorio, driver);
             pageFichaStpV.secTotalLook.checkIsVisible(driver);
-            pageFichaStpV.secBolsaButtonAndLinksNew.selectEnvioYDevoluciones(driver);
-            pageFichaStpV.modEnvioYdevol.clickAspaForClose(driver);
+
+            
+            //TODO modificar cuando restauren el link de "Envío y devoluciones"
+            pageFichaStpV.secBolsaButtonAndLinksNew.checkEnvioGratisInvisible(driver);
+            //pageFichaStpV.getModEnvioYdevol().checkIsVisible();
+            //pageFichaStpV.getModEnvioYdevol().clickAspaForClose();
+            
             pageFichaStpV.secBolsaButtonAndLinksNew.selectDetalleDelProducto(dCtxSh.appE, LineaType.she, driver);
             pageFichaStpV.secBolsaButtonAndLinksNew.selectLinkCompartir(dCtxSh.pais.getCodigo_pais(), driver);
 
@@ -200,6 +206,11 @@ public class FichaProducto {
         dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0); //Coreano
         
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+        
+        //TODO en el acceso se ejecuta la función setInitialModalsOff para evitar la aparición de modales
+        //pero en el caso de Corea se escapa el de Subscripción en la Newsletter
+        PagePrehome.closeModalNewsLetterIfExists(driver);
+        
         Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.nina, null, "pantalones"));
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh);
@@ -237,29 +248,34 @@ public class FichaProducto {
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		Menu1rstLevel menuPersonalizacion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.he, null, "personalizacion"));
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
-        secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
-		LocationArticle articleNum = LocationArticle.getInstanceInCatalog(1);
-		pageGaleriaStpV.selectArticulo(articleNum, dCtxSh);
-        SecModalPersonalizacionStpV modalPersonalizacionStpV = SecModalPersonalizacionStpV.getNewOne(dCtxSh, driver); 
-        modalPersonalizacionStpV.checkAreArticleCustomizable();
         
-        PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
-        pageFichaStpv.selectFirstTallaAvailable();
-        modalPersonalizacionStpV.selectLinkPersonalizacion();
-        //modalPersonalizacionStpV.startCustomization();
-        modalPersonalizacionStpV.selectIconCustomization();
-        modalPersonalizacionStpV.selectFirstIcon();
-    	modalPersonalizacionStpV.validateIconSelectedDesktop();
-        modalPersonalizacionStpV.selectConfirmarButton();
-        modalPersonalizacionStpV.validateCabeceraStep(2);
-        modalPersonalizacionStpV.validateWhereDesktop();
-        modalPersonalizacionStpV.selectConfirmarButton();
-    	modalPersonalizacionStpV.validateCabeceraStep(3);
-    	modalPersonalizacionStpV.validateSelectionColor();
- 
-        modalPersonalizacionStpV.selectSize();
-        modalPersonalizacionStpV.confirmCustomization();
-        modalPersonalizacionStpV.checkCustomizationProof();
+        //TODO volver a activar cuando añadan el menú Personalización
+        secMenusStpV.checkExistMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
+        if (false) {
+	        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
+	        secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
+			LocationArticle articleNum = LocationArticle.getInstanceInCatalog(1);
+			pageGaleriaStpV.selectArticulo(articleNum, dCtxSh);
+	        SecModalPersonalizacionStpV modalPersonalizacionStpV = SecModalPersonalizacionStpV.getNewOne(dCtxSh, driver); 
+	        modalPersonalizacionStpV.checkAreArticleCustomizable();
+	        
+	        PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
+	        pageFichaStpv.selectFirstTallaAvailable();
+	        modalPersonalizacionStpV.selectLinkPersonalizacion();
+	        //modalPersonalizacionStpV.startCustomization();
+	        modalPersonalizacionStpV.selectIconCustomization();
+	        modalPersonalizacionStpV.selectFirstIcon();
+	    	modalPersonalizacionStpV.validateIconSelectedDesktop();
+	        modalPersonalizacionStpV.selectConfirmarButton();
+	        modalPersonalizacionStpV.validateCabeceraStep(2);
+	        modalPersonalizacionStpV.validateWhereDesktop();
+	        modalPersonalizacionStpV.selectConfirmarButton();
+	    	modalPersonalizacionStpV.validateCabeceraStep(3);
+	    	modalPersonalizacionStpV.validateSelectionColor();
+	 
+	        modalPersonalizacionStpV.selectSize();
+	        modalPersonalizacionStpV.confirmCustomization();
+	        modalPersonalizacionStpV.checkCustomizationProof();
+        }
     }
 }

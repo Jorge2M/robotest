@@ -1,19 +1,15 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.PageAmexInputTarjeta;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 public class PageAmexInputTarjetaStpV {
-    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 
     @Validation
     public static ChecksTM validateIsPageOk(String importeTotal, String codPais, WebDriver driver) {

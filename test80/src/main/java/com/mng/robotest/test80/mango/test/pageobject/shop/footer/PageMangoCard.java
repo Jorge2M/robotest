@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.footer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageMangoCard extends PageObjTM implements PageFromFooter {
 	
@@ -39,7 +39,7 @@ public class PageMangoCard extends PageObjTM implements PageFromFooter {
      * Selecciona el botón "Solicitar Tarjeta Mango" de la página 1
      */
     public void clickOnWantMangoCardNow(Channel channel) {
-    	if (channel==Channel.movil_web) {
+    	if (channel==Channel.mobile) {
     		click(By.xpath(XPathGoMangoCardButtonMobile)).exec();
     	} else {
     		click(By.xpath(XPathGoMangoCardButton)).exec();

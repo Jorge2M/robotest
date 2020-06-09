@@ -12,7 +12,7 @@ import com.mng.sapfiori.access.test.testcase.generic.webobject.inputs.withmodal.
 import com.mng.sapfiori.access.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForDefineConditions;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.makers.StandarElementsMaker;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.utils.PageObject;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public abstract class ModalSelectFromListBase extends PageObject {
 

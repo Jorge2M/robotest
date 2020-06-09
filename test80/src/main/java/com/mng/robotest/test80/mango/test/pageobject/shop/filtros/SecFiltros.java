@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Color;
 
@@ -26,7 +26,7 @@ public interface SecFiltros {
 		switch (channel) {
 		case desktop:
 			return (SecFiltrosDesktop.getInstance(app, driver));
-		case movil_web:
+		case mobile:
 		default:
 			if (app==AppEcom.outlet) {
 				//TODO unificar con Shop cuando suba a PRO (eliminar los filtros simples)

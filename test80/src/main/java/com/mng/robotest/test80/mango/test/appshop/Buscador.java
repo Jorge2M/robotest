@@ -13,7 +13,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.buscador.SecBuscadorStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.home.PageHomeMarcasStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.service.TestMaker;
 
 public class Buscador {
 

@@ -11,18 +11,13 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Continente;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Response;
-import com.mng.testmaker.conf.Log4jConfig;
 
 public class PaisGetter {
-
-	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
 	private final static String NameFileCountiesXml = "ListCountries.xml";
 	private final static List<Pais> listAllCountries = getListAllCountries();
@@ -74,7 +69,7 @@ public class PaisGetter {
 			xmlFiltered = getXmlFilteredByCountries();
 		}
 		catch (JAXBException e) {
-			pLogger.error(e);
+			Log4jTM.getLogger().error(e);
 			return null;
 		}
 		Iterator<Continente> itContinentes = xmlFiltered.getResponse().iterator();

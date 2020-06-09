@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.bloqueMenu;
-import com.mng.testmaker.domain.RepositoryI;
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.domain.RepositoryI;
+import com.github.jorge2m.testmaker.service.TestMaker;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

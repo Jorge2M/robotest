@@ -8,7 +8,7 @@ import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 import com.google.common.base.Splitter;
-import com.mng.testmaker.service.webdriver.utils.WebUtils;
+import com.github.jorge2m.testmaker.service.webdriver.utils.WebUtils;
 
 public class CallBack {
 	String reportTSuiteURL = "";

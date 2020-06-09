@@ -5,18 +5,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Arrays;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.mng.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletDesktop.LinkCabeceraOutletDesktop;
@@ -31,8 +29,6 @@ import static com.mng.robotest.test80.mango.conftestmaker.AppEcom.outlet;
 import static com.mng.robotest.test80.mango.conftestmaker.AppEcom.votf;
 
 public class MenusUserWrapper extends PageObjTM {
-
-	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
 	final Channel channel;
 	final AppEcom app;
@@ -209,7 +205,7 @@ public class MenusUserWrapper extends PageObjTM {
 			if (channel==Channel.desktop) {
 				return LinkCabeceraOutletDesktop.lupa;
 			}
-			if (channel==Channel.movil_web) {
+			if (channel==Channel.mobile) {
 				return IconoCabOutletMobil.lupa;
 			}
 		}
@@ -224,7 +220,7 @@ public class MenusUserWrapper extends PageObjTM {
 			if (channel==Channel.desktop) {
 				return LinkCabeceraOutletDesktop.iniciarsesion;
 			}
-			if (channel==Channel.movil_web) {
+			if (channel==Channel.mobile) {
 				return MenuUserMobil.iniciarsesion;
 			}
 		}
@@ -240,7 +236,7 @@ public class MenusUserWrapper extends PageObjTM {
 				return LinkCabeceraOutletDesktop.cerrarsesion;
 			}
 		}
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			return MenuUserMobil.cerrarsesion;
 		}
 		return null;
@@ -255,7 +251,7 @@ public class MenusUserWrapper extends PageObjTM {
 				return LinkCabeceraOutletDesktop.registrate;
 			}
 		}
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			return MenuUserMobil.registrate;
 		}
 		return null;
@@ -269,7 +265,7 @@ public class MenusUserWrapper extends PageObjTM {
 			if (channel==Channel.desktop) {
 				return LinkCabeceraOutletDesktop.micuenta;
 			}
-			if (channel==Channel.movil_web) {
+			if (channel==Channel.mobile) {
 				return MenuUserMobil.micuenta;
 			}
 		}
@@ -288,7 +284,7 @@ public class MenusUserWrapper extends PageObjTM {
 			if (channel==Channel.desktop) {
 				return MenuUserDesktop.misCompras;
 			}
-			if (channel==Channel.movil_web) {
+			if (channel==Channel.mobile) {
 				return MenuUserMobil.miscompras;
 			}
 		}
@@ -300,7 +296,7 @@ public class MenusUserWrapper extends PageObjTM {
 			if (channel==Channel.desktop) {
 				return LinkCabeceraOutletDesktop.pedidos;
 			}
-			if (channel==Channel.movil_web) {
+			if (channel==Channel.mobile) {
 				return MenuUserMobil.pedidos;
 			}
 		}
@@ -312,7 +308,7 @@ public class MenusUserWrapper extends PageObjTM {
 			if (channel==Channel.desktop) {
 				return MenuUserDesktop.mangoLikesYou;
 			}
-			if (channel==Channel.movil_web) {
+			if (channel==Channel.mobile) {
 				return MenuUserMobil.mangolikesyou;
 			}
 		}
@@ -328,14 +324,14 @@ public class MenusUserWrapper extends PageObjTM {
 				return LinkCabeceraOutletDesktop.ayuda;
 			}
 		}
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			return MenuUserMobil.ayuda;
 		}
 		return null;
 	}
 	
 	private ElementPage getMenuCambioPais() {
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			return MenuUserMobil.cambiopais;
 		}
 		return null;
@@ -363,8 +359,8 @@ public class MenusUserWrapper extends PageObjTM {
 		    		innerHTML = shadowLoyaltyPoints.toString();
 		    	}
 		    	int numberBlocksLoyalty = driver.findElements(By.tagName("loyalty-user-menu")).size();
-		    	pLogger.info("Contenido del elemento HTML loyalty-user-menu  " + innerHTML);
-		    	pLogger.info("Número de bloques de Loyalty " + numberBlocksLoyalty);
+		    	Log4jTM.getLogger().info("Contenido del elemento HTML loyalty-user-menu  " + innerHTML);
+		    	Log4jTM.getLogger().info("Número de bloques de Loyalty " + numberBlocksLoyalty);
 		        Pattern pattern = Pattern.compile("tienes (.*?) Likes");
 		        Matcher matcher = pattern.matcher(innerHTML);
 		    	if (matcher.find()) {

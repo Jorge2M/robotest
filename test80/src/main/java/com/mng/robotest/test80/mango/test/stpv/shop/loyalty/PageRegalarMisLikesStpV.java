@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.stpv.shop.loyalty;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.loyalty.PageRegalarMisLikes;
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.conf.State;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.State;
 
 public class PageRegalarMisLikesStpV {
 

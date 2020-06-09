@@ -1,16 +1,13 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -20,7 +17,6 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 @SuppressWarnings({"static-access"})
 public class SecStoreCreditStpV { 
-    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
     final static String tagNombrePago = "@TagNombrePago";
     @Step (
@@ -53,7 +49,7 @@ public class SecStoreCreditStpV {
             //}
         } else {
         	checkAfterMarkSaldoEnCuenta(channel, pais, driver);
-            if (channel==Channel.movil_web) {
+            if (channel==Channel.mobile) {
                 dCtxPago.getDataPedido().setImporteTotalSinSaldoCta(PageCheckoutWrapper.getPrecioTotalSinSaldoEnCuenta(channel, driver));
             }
         }

@@ -8,14 +8,14 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
-import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Color;
 
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 
 
@@ -37,7 +37,7 @@ public class SecMultiFiltrosMobil extends PageObjTM implements SecFiltros {
 	}
 	
 	public static SecMultiFiltrosMobil getInstance(AppEcom app, WebDriver driver) {
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.movil_web, app, driver);
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.mobile, app, driver);
 		return (new SecMultiFiltrosMobil(driver, pageGaleria));
 	}
 	

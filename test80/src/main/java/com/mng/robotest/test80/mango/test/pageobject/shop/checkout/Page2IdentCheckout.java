@@ -3,8 +3,6 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -13,22 +11,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.PopupFindAddress;
 
 public class Page2IdentCheckout {
 	
-    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
-    
     final static String XPathMainForm = "//form[@action[contains(.,'/expressregister')]]";
     final static String XPathInputPassword = "//input[@id[contains(.,'cfPass')]]";
     final static String XPathInputNombreUsr = "//input[@id[contains(.,':cfName')]]";
@@ -276,7 +272,7 @@ public class Page2IdentCheckout {
 				}
 			}
 			catch (Exception e) {
-				pLogger.warn("Exception clicking Find Address button", e);
+				Log4jTM.getLogger().warn("Exception clicking Find Address button", e);
 			}
 			finally { driver.switchTo().window(mainWindowHandle); }
 		}
@@ -323,7 +319,7 @@ public class Page2IdentCheckout {
                 }
                 catch (StaleElementReferenceException e) {
                     Thread.sleep(500);
-                    pLogger.warn("Exception setting localidad from select", e);
+                    Log4jTM.getLogger().warn("Exception setting localidad from select", e);
                 }
             }
             
@@ -390,7 +386,7 @@ public class Page2IdentCheckout {
                 }
                 catch (StaleElementReferenceException e) {
                     Thread.sleep(500);
-                    pLogger.warn("Exception selecting Estados from select", e);
+                    Log4jTM.getLogger().warn("Exception selecting Estados from select", e);
                 }
             }
             i+=1;
@@ -444,11 +440,11 @@ public class Page2IdentCheckout {
                 }
                 catch (StaleElementReferenceException e) {
                     Thread.sleep(1000);
-                    pLogger.warn("Exception selecting localidad from select. ", e);
+                    Log4jTM.getLogger().warn("Exception selecting localidad from select. ", e);
                 }
                 catch (NoSuchElementException e) {
                     Thread.sleep(1000);
-                    pLogger.warn("Exception selecting localidad from select. ", e);
+                    Log4jTM.getLogger().warn("Exception selecting localidad from select. ", e);
                 }
             }
             i+=1;

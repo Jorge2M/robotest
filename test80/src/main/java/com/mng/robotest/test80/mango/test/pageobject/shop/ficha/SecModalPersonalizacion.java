@@ -1,9 +1,9 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.ficha;
 import org.openqa.selenium.By;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
-import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
 public class SecModalPersonalizacion extends SeleniumUtils {
 
@@ -50,7 +50,7 @@ public class SecModalPersonalizacion extends SeleniumUtils {
 		
 		@Override
 		public By getBy(Channel channel) {
-			if (channel == Channel.movil_web && this.byMobil != null) {
+			if (channel == Channel.mobile && this.byMobil != null) {
 				return this.byMobil;
 			}
 			return this.by;

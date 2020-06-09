@@ -3,8 +3,8 @@ package com.mng.robotest.test80.mango.test.appshop;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.ModalArticleNotAvailableStpV;
 import org.testng.annotations.*;
 
-import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Color;
@@ -63,7 +63,7 @@ public class GaleriaProducto {
     }
     
     @Test (
-        groups={"GaleriaProducto", "Canal:movil_web_App:all"}, alwaysRun=true, 
+        groups={"GaleriaProducto", "Canal:mobile_App:all"}, alwaysRun=true, 
         description="[Usuario registrado] Acceder a galería camisas. Filtros y ordenación. Seleccionar producto y color")
     public void GPO001_Galeria_Camisas() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
@@ -81,8 +81,8 @@ public class GaleriaProducto {
         
         List<Color> colorsToFilter = new ArrayList<>();
         colorsToFilter.add(Color.Blanco);
-        //En outlet/movil_web tenemos el antiguo filtro que sólo permite seleccionar un color
-        if (!(dCtxSh.appE==AppEcom.outlet && dCtxSh.channel==Channel.movil_web)) {
+        //En outlet/movil tenemos el antiguo filtro que sólo permite seleccionar un color
+        if (!(dCtxSh.appE==AppEcom.outlet && dCtxSh.channel==Channel.mobile)) {
         	colorsToFilter.add(Color.Azul);
         }
         SecFiltrosStpV.selectFiltroColoresStep(dCtxSh.appE, dCtxSh.channel, true, "Camisas", colorsToFilter, driver);
@@ -103,7 +103,7 @@ public class GaleriaProducto {
         dataScroll.validaImgBroken = true;
         DataScroll datosScrollFinalGaleria = pageGaleriaStpV.scrollFromFirstPage(dataScroll, dCtxSh);
         
-        if (dCtxSh.channel==Channel.movil_web) {
+        if (dCtxSh.channel==Channel.mobile) {
             pageGaleriaStpV.backTo1erArticleMobilStep(dCtxSh);
         }
         int numArticulosPantalla = 
@@ -134,8 +134,8 @@ public class GaleriaProducto {
 
         List<Color> colorsToFilter = new ArrayList<>();
         colorsToFilter.add(Color.Blanco);
-        //En outlet/movil_web tenemos el antiguo filtro que sólo permite seleccionar un color
-        if (!(dCtxSh.appE!=AppEcom.outlet && dCtxSh.channel==Channel.movil_web)) {
+        //En outlet/movil tenemos el antiguo filtro que sólo permite seleccionar un color
+        if (!(dCtxSh.appE!=AppEcom.outlet && dCtxSh.channel==Channel.mobile)) {
         	colorsToFilter.add(Color.Negro);
         }
         SecFiltrosStpV.selectFiltroColoresStep(dCtxSh.appE, dCtxSh.channel, false, "Camisas", colorsToFilter, driver);

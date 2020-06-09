@@ -2,8 +2,8 @@ package com.mng.robotest.test80.mango.test.stpv.navigations.shop;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.domain.suitetree.TestCaseTM;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -74,7 +74,7 @@ public class AccesoNavigations {
     
     public static void cambioPaisFromHomeIfNeeded(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        String codigoPais = PageLanding.getCodigoPais(driver);
+        String codigoPais = (new PageLanding(driver)).getCodigoPais();
         if (dCtxSh.pais.getCodigo_pais().compareTo(codigoPais)!=0) {
             cambioPais(dCtxSh, driver);
         }
@@ -82,7 +82,7 @@ public class AccesoNavigations {
     
     public static void cambioPais(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        if (dCtxSh.channel==Channel.movil_web && dCtxSh.appE==AppEcom.outlet) {
+        if (dCtxSh.channel==Channel.mobile && dCtxSh.appE==AppEcom.outlet) {
         	SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         	secMenusStpV.getMenusUser().cambioPaisMobil(dCtxSh);
         } else {

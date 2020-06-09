@@ -3,13 +3,13 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.loyalty;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageHomeConseguirPor1200Likes extends PageObjTM {
 
 	final static String XPathButton1200Likes = "//button[text()='Conseguir por 1200 Likes']";
-	final static String xpathIconOperationDone = "//span[@class='icon-outline-done']";
+	final static String xpathIconOperationDone = "//span[@class[contains(.,'icon-outline-done')]]";
 	
 	private PageHomeConseguirPor1200Likes(WebDriver driver) {
 		super(driver);
@@ -19,8 +19,8 @@ public class PageHomeConseguirPor1200Likes extends PageObjTM {
 		return (new PageHomeConseguirPor1200Likes(driver));
 	}
 	
-	public boolean isPage() {
-		return (state(Visible, By.xpath(XPathButton1200Likes)).check());
+	public boolean isPage(int maxSeconds) {
+		return (state(Visible, By.xpath(XPathButton1200Likes)).wait(maxSeconds).check());
 	}
 	
 	public void selectConseguirButton() {

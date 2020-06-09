@@ -2,9 +2,9 @@ package com.mng.robotest.test80.mango.test.appshop;
 
 import org.testng.annotations.*;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.domain.InputParamsTM.TypeAccess;
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Constantes;
@@ -130,7 +130,7 @@ public class Compra {
 		secMenusStpV.seleccionLinea(LineaType.she, null, dCtxSh);
 		SecFooterStpV.clickLinkFooter(FooterLink.cheque_regalo, false, dCtxSh.channel, driver);
 		PageChequeRegaloInputDataStpV pageChequeRegaloInputDataStpV = new PageChequeRegaloInputDataStpV(driver);
-		if(dCtxSh.channel != Channel.movil_web){
+		if(dCtxSh.channel != Channel.mobile){
 			nTarjeta = "100000040043";
 			cvvTarjeta = "618";
 			pageChequeRegaloInputDataStpV.paginaConsultarSaldo(nTarjeta);

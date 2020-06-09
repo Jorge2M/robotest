@@ -3,7 +3,7 @@ package com.mng.sapfiori.access.test.testcase.generic.stpv.modals;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.modals.ModalSelectConditions;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.modals.ModalSelectConditions.ConditionExclude;
 import com.mng.sapfiori.access.test.testcase.generic.webobject.modals.ModalSelectConditions.ConditionInclude;
-import com.mng.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 
 public class ModalSelectConditionsStpV {
 

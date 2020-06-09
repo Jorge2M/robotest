@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter.Foote
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.service.TestMaker;
 
 public class Footer {
 

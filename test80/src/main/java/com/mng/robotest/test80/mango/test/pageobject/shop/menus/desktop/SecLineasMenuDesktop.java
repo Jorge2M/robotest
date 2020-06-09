@@ -2,32 +2,28 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop;
 
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.Log4jConfig;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
-import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 
 public class SecLineasMenuDesktop extends PageObjTM {
 	
 	private final AppEcom app;
-	
-	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
     static String TagIdLinea = "@LineaId";
     static String TagIdSublinea = "@SublineaId";
@@ -178,7 +174,7 @@ public class SecLineasMenuDesktop extends PageObjTM {
 	    	SecBloquesMenuDesktop secBloques = SecBloquesMenuDesktop.getNew(app, driver);
 	    	isCapaMenusVisible = secBloques.isCapaMenusLineaVisibleUntil(lineaType, maxSecondsToWait);
 	    	if (!isCapaMenusVisible) {
-	    		pLogger.warn("No se hacen visibles los menús después de Hover sobre línea " + lineaType);
+	    		Log4jTM.getLogger().warn("No se hacen visibles los menús después de Hover sobre línea " + lineaType);
 	    	}
 	    	i+=1;
     	}

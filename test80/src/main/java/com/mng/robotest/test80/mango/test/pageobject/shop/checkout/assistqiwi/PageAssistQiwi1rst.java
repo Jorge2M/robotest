@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.assistqiwi;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 public class PageAssistQiwi1rst {
@@ -18,14 +18,14 @@ public class PageAssistQiwi1rst {
     static String XPathIconoPasarelasDesktop = "//form/div[@class='tip']";
     
     public static String getXPATH_icono(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathIconoMobil;
         }
         return XPathIconoDesktop;
     }
         
     public static String getXPATH_iconPasarelas(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathIconoPasarelasMobil;
         }
         return XPathIconoPasarelasDesktop;

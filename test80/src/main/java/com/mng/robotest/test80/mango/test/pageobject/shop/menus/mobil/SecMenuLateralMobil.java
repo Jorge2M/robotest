@@ -7,16 +7,16 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
-import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
@@ -251,7 +251,7 @@ public class SecMenuLateralMobil extends PageObjTM {
 
 	public void selecLinea(Linea linea) {
 		boolean toOpenMenus = true;
-		SecCabecera secCabecera = SecCabecera.getNew(Channel.movil_web, app, driver);
+		SecCabecera secCabecera = SecCabecera.getNew(Channel.mobile, app, driver);
 		secCabecera.clickIconoMenuHamburguerMobil(toOpenMenus);
 		if ("n".compareTo(linea.getExtended())==0) {
 			By byElem = By.xpath(getXPathLineaLink(linea.getType()));
@@ -422,6 +422,12 @@ public class SecMenuLateralMobil extends PageObjTM {
         selectLinea(linea, menu1rstLevel.getSublinea());
         //menu1rstLevel.setNombre(getLiteralMenuVisible(typeLocator, menu1rstLevel));
         clickMenuYetDisplayed(typeLocator, menu1rstLevel);
+    }
+    public boolean existsMenuLateral1rstLevel(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel, Pais pais) {
+        Linea linea = pais.getShoponline().getLinea(menu1rstLevel.getLinea());
+        selectLinea(linea, menu1rstLevel.getSublinea());
+		String xpathMenu = getXPathMenuByTypeLocator(typeLocator, menu1rstLevel);
+		return (state(Visible, By.xpath(xpathMenu)).check());
     }
     
     public void bringHeaderMobileBackground() throws Exception {

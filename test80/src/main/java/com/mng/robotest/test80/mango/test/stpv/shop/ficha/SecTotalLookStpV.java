@@ -3,8 +3,8 @@ package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecTotalLook;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.conf.State;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.State;
 
 public class SecTotalLookStpV {
 

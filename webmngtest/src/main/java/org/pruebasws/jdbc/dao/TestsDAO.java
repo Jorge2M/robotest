@@ -10,7 +10,7 @@ import java.util.List;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.utils.PagoGetter;
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Channel;
 
 import org.pruebasws.jdbc.Connector;
 import org.pruebasws.jdbc.to.ApplicationSuite;
@@ -116,7 +116,7 @@ public class TestsDAO {
         ArrayList<SuiteTestData> listSuites = new ArrayList<>();
         ArrayList<String> listLineas = getListLinesShop();
         try (Connection conn = getConnection();
-            PreparedStatement select = conn.prepareStatement(SQLSelectDataTests)) {            
+            PreparedStatement select = conn.prepareStatement(SQLSelectDataTests)) {
             select.setString(1, filterSuite);
             select.setString(2, filterChannel);
             try (ResultSet resultado = select.executeQuery()) {

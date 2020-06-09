@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sepa;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 public class PageSepa1rst {
@@ -21,7 +21,7 @@ public class PageSepa1rst {
     static String XPathIconoSepaDesktop = XPathListOfPayments + "/li[@data-variant[contains(.,'sepa')]]";
     
     public static String getXPathIconoSepa(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathIconoSepaMobil;
         }
         return XPathIconoSepaDesktop;
@@ -46,7 +46,7 @@ public class PageSepa1rst {
     }
 
 	public static void clickButtonContinuePago(Channel channel, WebDriver driver) {
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			click(By.xpath(XPathButtonContinueMobil), driver).exec();
 		} else {
 			click(By.xpath(XPathButtonPagoDesktop), driver).exec();

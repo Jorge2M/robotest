@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Channel;
 
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 public class SecBillpay {
@@ -28,14 +28,14 @@ public class SecBillpay {
      * @return el XPATH correspondiente al radio 'acepto' de billpay
      */
     public static String getXPath_radioAcepto(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathRadioAceptoMobil;
         }
         return XPathRadioAceptoDesktop;
     }
 
 	public static boolean isVisibleUntil(Channel channel, int maxSeconds, WebDriver driver) {
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			String xpath = XPathBlockRechnungMobil + " | " + XPathBlockLastschriftMobil;
 			return (state(Visible, By.xpath(xpath), driver).wait(maxSeconds).check());
 		}

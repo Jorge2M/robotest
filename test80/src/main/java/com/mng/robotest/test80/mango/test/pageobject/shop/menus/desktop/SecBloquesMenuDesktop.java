@@ -7,12 +7,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.bloqueMenu;
@@ -164,12 +164,17 @@ public class SecBloquesMenuDesktop extends PageObjTM {
         return (driver.findElements(By.xpath(xpathMenuLinea + xpathEntradaMenu)));
     }
 
-    public void clickMenuAndGetName(Menu1rstLevel menu1rstLevel) {
+    public boolean goToMenuAndCheckIsVisible(Menu1rstLevel menu1rstLevel) {
     	LineaType lineaMenu = menu1rstLevel.getLinea();
     	SublineaNinosType sublineaMenu = menu1rstLevel.getSublinea();
     	secLineasMenu.hoverLineaAndWaitForMenus(lineaMenu, sublineaMenu);
         String xpathMenu = getXPathMenuSuperiorLinkVisible(menu1rstLevel);
-        state(Visible, By.xpath(xpathMenu)).wait(1).check();
+        return (state(Visible, By.xpath(xpathMenu)).wait(1).check());
+    }
+    
+    public void clickMenuAndGetName(Menu1rstLevel menu1rstLevel) {
+    	goToMenuAndCheckIsVisible(menu1rstLevel);
+    	String xpathMenu = getXPathMenuSuperiorLinkVisible(menu1rstLevel);
         moveToElement(By.xpath(xpathMenu), driver);
         click(By.xpath(xpathMenu)).exec();
     }    

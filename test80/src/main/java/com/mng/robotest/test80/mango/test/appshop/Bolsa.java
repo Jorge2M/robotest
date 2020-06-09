@@ -22,7 +22,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.service.TestMaker;
 
 import org.openqa.selenium.WebDriver;
 

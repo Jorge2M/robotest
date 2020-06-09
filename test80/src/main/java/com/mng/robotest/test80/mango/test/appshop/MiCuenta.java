@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -74,7 +75,7 @@ public class MiCuenta implements Serializable {
     public void MIC001_Opciones_Mi_Cuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion) 
     throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
-    	TestMaker.getTestCase().setSpecificInputData(index_fact);
+		TestCaseTM.addNameSufix(this.index_fact);
         DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userConnected = userConDevolucionPeroNoEnPRO;
         dCtxSh.passwordUser = passwordUserConDevolucion;
@@ -118,7 +119,7 @@ public class MiCuenta implements Serializable {
     public void MIC002_CheckConsultaMisCompras(
     		String userWithOnlinePurchases, String userWithStorePurchases, 
     		String passUserWithOnlinePurchases, String passUserWithStorePurchases) throws Exception {
-    	TestMaker.getTestCase().setSpecificInputData(this.index_fact);
+		TestCaseTM.addNameSufix(this.index_fact);
     	WebDriver driver = TestMaker.getDriverTestCase();
         DataCtxShop dCtxSh = getCtxShForTest();
         

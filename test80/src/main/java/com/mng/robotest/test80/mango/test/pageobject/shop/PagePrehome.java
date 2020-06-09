@@ -2,8 +2,6 @@ package com.mng.robotest.test80.mango.test.pageobject.shop;
 
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,14 +9,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
@@ -32,8 +31,8 @@ import com.mng.robotest.test80.mango.test.utils.testab.TestABactive;
  * @author jorge.munoz
  */
 public class PagePrehome {
-	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
-    enum ButtonEnter {Enter, Continuar};
+
+	enum ButtonEnter {Enter, Continuar};
 	
     static String XPathSelectPaises = "//select[@id='countrySelect']";
     
@@ -142,7 +141,7 @@ public class PagePrehome {
      */
     public static void inputPaisAndSelect(WebDriver driver, String nombrePais, Channel channel) throws Exception {
         String codigoPais = getCodigoPais(driver, nombrePais);
-        if (channel!=Channel.movil_web) {
+        if (channel!=Channel.mobile) {
             new WebDriverWait(driver, 5).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@class[contains(.,'chosen-with-drop')]]")));
             driver.findElement(By.xpath(XPathInputPais)).sendKeys(nombrePais);
             
@@ -166,7 +165,7 @@ public class PagePrehome {
             }
         } 
         catch (Exception e) {
-        	pLogger.warn("Exception clicking button for Enter. But perhaps the click have work fine", e);
+        	Log4jTM.getLogger().warn("Exception clicking button for Enter. But perhaps the click have work fine", e);
         }
     }
 
@@ -218,8 +217,8 @@ public class PagePrehome {
         TestABactive.currentTestABsToActivate(dCtxSh.channel, dCtxSh.appE, driver);
         PagePrehome.selecPaisIdiomaYAccede(dCtxSh, driver);
         ModalLoyaltyAfterAccess.closeModalIfVisible(driver);
-        if (dCtxSh.channel==Channel.movil_web) {
-        	SecCabeceraOutletMobil secCabecera = (SecCabeceraOutletMobil)SecCabeceraOutletMobil.getNew(Channel.movil_web, dCtxSh.appE, driver);
+        if (dCtxSh.channel==Channel.mobile) {
+        	SecCabeceraOutletMobil secCabecera = (SecCabeceraOutletMobil)SecCabeceraOutletMobil.getNew(Channel.mobile, dCtxSh.appE, driver);
         	secCabecera.closeSmartBannerIfExistsMobil();
         }
     }
@@ -239,7 +238,7 @@ public class PagePrehome {
     	AccesoNavigations.goToInitURL(/*urlPreHome,*/ driver);
         waitForPageLoaded(driver);
         if (PageJCAS.thisPageIsShown(driver)) {
-            PageJCAS.identication(driver, "jorge.munoz", "2010martina");
+            PageJCAS.identication(driver, Constantes.userManto, Constantes.passwordManto);
         }
     }    
     
@@ -253,8 +252,8 @@ public class PagePrehome {
         //Damos de alta la cookie de newsLetter porque no podemos gestionar correctamente el cierre 
         //del modal en la página de portada (es aleatorio y aparece en un intervalo de 0 a 5 segundos)
         setInitialModalsOff(driver);
-        if (dCtxSh.channel==Channel.movil_web || !isPaisSelectedDesktop(driver, dCtxSh.pais.getNombre_pais())) {
-            if (dCtxSh.channel!=Channel.movil_web) {
+        if (dCtxSh.channel==Channel.mobile || !isPaisSelectedDesktop(driver, dCtxSh.pais.getNombre_pais())) {
+            if (dCtxSh.channel!=Channel.mobile) {
                 //Nos posicionamos y desplegamos la lista de países (en el caso de mobile no desplegamos 
             	//porque entonces es complejo manejar el desplegable que aparece en este tipo de dispositivos)
                 desplieguaListaPaises(driver);

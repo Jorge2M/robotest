@@ -12,15 +12,15 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Talla;
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
-import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
-import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha.TypeFicha;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
@@ -107,14 +107,14 @@ public class SecDataProduct extends SeleniumUtils {
         switch (channel) {
         case desktop:
             return "//span[@class[contains(.,'-reference')] and text()[contains(.,'" + referencia + "')]]";
-        case movil_web:
+        case mobile:
         default:
             return "//p[@class[contains(.,'-reference')] and text()[contains(.,'" + referencia + "')]]";
         }
     }
     
     private static String getXPathNombreArt(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathNombreArticuloMobil;
         }
         return XPathNombreArticuloDesktop;
@@ -178,7 +178,7 @@ public class SecDataProduct extends SeleniumUtils {
                 return (driver.findElement(By.xpath(XPathNombreColorSelectedDesktop)).getAttribute("alt"));
             }
             return Constantes.colorDesconocido;
-        case movil_web:
+        case mobile:
         default:
         	return (getNombreColorMobil(ColorType.Selected, driver));
         }

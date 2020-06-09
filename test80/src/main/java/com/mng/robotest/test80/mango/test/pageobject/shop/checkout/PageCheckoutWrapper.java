@@ -7,15 +7,15 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Descuento;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.SecMetodoEnvioDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
@@ -47,7 +47,7 @@ public class PageCheckoutWrapper {
     }
 
     public static boolean isFirstPageUntil(Channel channel, int maxSecondsToWait, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (page1MobilCheckout.isVisibleLink1EnvioUntil(driver, maxSecondsToWait));
         }
         
@@ -80,7 +80,7 @@ public class PageCheckoutWrapper {
     }
     
     public static void inputCodigoPromoAndAccept(String codigoPromo, Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             page1MobilCheckout.inputCodigoPromoAndAccept(codigoPromo, driver);
         } else {
             page1DktopCheckout.showInputCodigoPromoAndAccept(codigoPromo, driver);
@@ -88,7 +88,7 @@ public class PageCheckoutWrapper {
     }
     
     public static void clickEliminarValeIfExists(Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             page1MobilCheckout.clickEliminarValeIfExists(driver);
         } else {
             page1DktopCheckout.clickEliminarValeIfExists(driver);
@@ -96,28 +96,28 @@ public class PageCheckoutWrapper {
     }
     
     public static boolean isPresentInputApellidoPromoEmplUntil(Channel channel, int maxSecondsToWait, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (page1MobilCheckout.isPresentInputApellidoPromoEmplUntil(maxSecondsToWait, driver));
         }
         return (page1DktopCheckout.isPresentInputApellidoPromoEmplUntil(maxSecondsToWait, driver));
     }
     
     public static boolean isPresentInputDNIPromoEmpl(Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (page1MobilCheckout.isPresentInputDNIPromoEmpl(driver));
         }
         return (page1DktopCheckout.isPresentInputDNIPromoEmpl(driver));
     }    
     
     public static boolean isPresentDiaNaciPromoEmpl(Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (page1MobilCheckout.isPresentDiaNaciPromoEmpl(driver));
         }
         return (page1DktopCheckout.isPresentDiaNaciPromoEmpl(driver));
     }    
     
     public static void inputDNIPromoEmpl(String dni, Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             page1MobilCheckout.inputDNIPromoEmpl(dni, driver);
         } else {
             page1DktopCheckout.inputDNIPromoEmpl(dni, driver);
@@ -125,7 +125,7 @@ public class PageCheckoutWrapper {
     }
     
     public static void inputApellidoPromoEmpl(String apellido, Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             page1MobilCheckout.inputApellidoPromoEmpl(apellido, driver);
         } else {
             page1DktopCheckout.inputApellidoPromoEmpl(apellido, driver);
@@ -161,7 +161,7 @@ public class PageCheckoutWrapper {
      * @param fechaNaci en formato "dd-mm-aaaa"
      */
     public static void selectFechaNacPromoEmpl(String fechaNaci, Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             page1MobilCheckout.selectFechaNacPromoEmpl(fechaNaci, driver);
         } else {
             page1DktopCheckout.selectFechaNacPromoEmpl(fechaNaci, driver);
@@ -169,7 +169,7 @@ public class PageCheckoutWrapper {
     }
     
     public static void clickGuardarPromo(Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             page1MobilCheckout.clickAceptarPromo(driver);
         } else {
             page1DktopCheckout.clickGuardarPromo(driver);
@@ -177,7 +177,7 @@ public class PageCheckoutWrapper {
     }
     
     public static void clickButtonAceptarPromoEmpl(Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             page1MobilCheckout.clickButtonAceptarPromoEmpl(driver);
         } else {
             page1DktopCheckout.clickGuardarPromo(driver);
@@ -185,14 +185,14 @@ public class PageCheckoutWrapper {
     }
     
     public static String getImporteDescuentoEmpleado(Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (page1MobilCheckout.getImporteDescuentoEmpleado(driver));
         }
         return (page1DktopCheckout.getImporteDescuentoEmpleado(driver));
     }
     
     public static boolean isVisibleDescuentoEmpleadoUntil(Channel channel, WebDriver driver, int secondsToWait) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (page1MobilCheckout.isVisibleDescuentoEmpleadoUntil(driver, secondsToWait));
         }
         return (page1DktopCheckout.isVisibleDescuentoEmpleadoUntil(driver, secondsToWait)); 
@@ -202,35 +202,35 @@ public class PageCheckoutWrapper {
      * @return si el número de métodos de pago visualizados en pantalla es el correcto
      */
     public static boolean isNumMetodosPagoOK(Pais pais, AppEcom app, Channel channel, boolean isEmpl, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return page2MobilCheckout.isNumMetodosPagoOK(pais, app, isEmpl, driver);
         }
         return page1DktopCheckout.isNumMetodosPagoOK(driver, pais, app, isEmpl);
     }
     
     public static boolean isNumpagos(int numPagosExpected, Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             page2MobilCheckout.isNumpagos(numPagosExpected, driver);
         }
         return page1DktopCheckout.isNumpagos(numPagosExpected, driver);
     }
     
     public static boolean isPresentMetodosPago(Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return page2MobilCheckout.isPresentMetodosPago(driver);
         }
         return page1DktopCheckout.isPresentMetodosPago(driver);
     }    
     
     public static boolean isMetodoPagoPresent(String metodoPago, Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return page2MobilCheckout.isMetodoPagoPresent(metodoPago, driver);
         }
         return page1DktopCheckout.isMetodoPagoPresent(metodoPago, driver);
     }
     
     public static void despliegaMetodosPago(Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             page2MobilCheckout.despliegaMetodosPago(driver);
         } else {
             page1DktopCheckout.despliegaMetodosPago(driver);
@@ -238,21 +238,21 @@ public class PageCheckoutWrapper {
     }
 
     public static String getPrecioTotalFromResumen(Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (page2MobilCheckout.getPrecioTotalFromResumen(driver));
         }
         return (page1DktopCheckout.getPrecioTotalFromResumen(driver));
     }
     
     public static String getPrecioTotalSinSaldoEnCuenta(Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (page2MobilCheckout.getPrecioTotalSinSaldoEnCuenta(driver));
         }
         return (page1DktopCheckout.getPrecioTotalFromResumen(driver));
     }
     
     public static String getAlmacenFromNoProdEntorn(Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return "";
         }
         return (page1DktopCheckout.getAlmacenFromNoProdEntorn(driver)); 
@@ -303,7 +303,7 @@ public class PageCheckoutWrapper {
      */
     public static void forceClickMetodoPagoAndWait(String metodoPago, Pais pais, Channel channel, WebDriver driver) 
     throws Exception {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             page2MobilCheckout.forceClickMetodoPagoAndWait(metodoPago, pais, driver);
         } else {
             page1DktopCheckout.forceClickMetodoPagoAndWait(metodoPago, pais, driver);
@@ -311,7 +311,7 @@ public class PageCheckoutWrapper {
     }
     
     public static boolean isAvailableTrjGuardada(String metodoPago, Channel channel, WebDriver driver) {
-    	if (channel==Channel.movil_web) {
+    	if (channel==Channel.mobile) {
     		return (page2MobilCheckout.isVisibleRadioTrjGuardada(metodoPago, driver));
     	} else {
     		return (page1DktopCheckout.isVisibleRadioTrjGuardada(metodoPago, driver));
@@ -319,7 +319,7 @@ public class PageCheckoutWrapper {
     }
 
 	public static void clickRadioTrjGuardada(Channel channel, WebDriver driver) throws Exception {
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			page2MobilCheckout.clickRadioTrjGuardada(driver);
 		} else {
 			page1DktopCheckout.clickRadioTrjGuardada(driver);
@@ -327,7 +327,7 @@ public class PageCheckoutWrapper {
 	}
 
 	public static void inputCvcTrjGuardadaIfVisible(String cvc, Channel channel, WebDriver driver) { 
-		if (channel==Channel.movil_web) {
+		if (channel==Channel.mobile) {
 			page2MobilCheckout.inputCvcTrjGuardadaIfVisible(cvc, driver);
 		} else {
 			page1DktopCheckout.inputCvcTrjGuardadaIfVisible(cvc, driver);
@@ -335,7 +335,7 @@ public class PageCheckoutWrapper {
 	}
     
     public static void clickSolicitarFactura(Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             page2MobilCheckout.clickSolicitarFactura(driver);
         } else {
             page1DktopCheckout.clickSolicitarFactura(driver);
@@ -343,14 +343,14 @@ public class PageCheckoutWrapper {
     }    
     
     public static boolean isMarkedQuieroFacturaDesktop(Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (page2MobilCheckout.isMarkedQuieroFactura(driver));
         }
         return (page1DktopCheckout.isMarkedQuieroFactura(driver));
     }
     
     public static void clickEditDirecEnvio(Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             page1MobilCheckout.clickEditDirecEnvio(driver);
         } else {
             page1DktopCheckout.clickEditDirecEnvio(driver);
@@ -358,7 +358,7 @@ public class PageCheckoutWrapper {
     }
     
     public static boolean isArticulos(Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (page2MobilCheckout.isArticulos(driver));
         }
         return (page1DktopCheckout.isArticulos(driver));
@@ -371,7 +371,7 @@ public class PageCheckoutWrapper {
     
     public static void confirmarPagoFromMetodos(Channel channel, DataPedido dataPedido, WebDriver driver) throws Exception {
         PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, channel, driver);
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             page2MobilCheckout.confirmarPagoFromMetodos(dataPedido, driver);
         } else {
             page1DktopCheckout.confirmarPagoFromMetodos(driver);
@@ -379,14 +379,14 @@ public class PageCheckoutWrapper {
     }
     
     public static boolean isVisibleBloquePagoNoTRJIntegradaUntil(Pago pago, Channel channel, int maxSecondsToWait, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (page2MobilCheckout.isVisibleTextoBajoPagoUntil(pago, channel, maxSecondsToWait, driver));
         }
         return (page1DktopCheckout.isVisibleBloquePagoNoTRJIntegradaUntil(pago, maxSecondsToWait, driver));
     }
     
     public static String getTextDireccionEnvioCompleta(Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             if (Page1EnvioCheckoutMobil.isPageUntil(0, driver)) {
                 return (page1MobilCheckout.getTextDireccionEnvioCompleta(driver));
             }
@@ -406,7 +406,7 @@ public class PageCheckoutWrapper {
     }
     
     public static String getDireccionEnvioCompleta(WebDriver driver, Channel channel) throws Exception {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (Page1EnvioCheckoutMobil.getTextDireccionEnvioCompleta(driver));
         }
         return (Page1DktopCheckout.getTextDireccionEnvioCompleta(driver));
@@ -426,7 +426,7 @@ public class PageCheckoutWrapper {
         switch (channel) {
         case desktop:
             return SecMetodoEnvioDesktop.isPresentBlockMetodo(tipoTransporte, driver);
-        case movil_web:
+        case mobile:
         default:
             return Page1EnvioCheckoutMobil.isPresentBlockMetodo(tipoTransporte, driver);
         }
@@ -466,7 +466,7 @@ public class PageCheckoutWrapper {
 
         //En el caso de móvil existen 3 páginas de checkout y no tenemos claro si estamos en la de los métodos de pago 
         //así que si existe, clickamos el link a la página-2 del checkout con los métodos de pago        
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             Page2DatosPagoCheckoutMobil.clickLink2DatosPagoIfVisible(driver);
         }
     }

@@ -3,11 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.pageobject.TypeClick;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class SecSoyNuevo {
 	
@@ -22,7 +22,7 @@ public class SecSoyNuevo {
     
     public static String getXPath_checkPubliNewsletter(Channel channel, boolean active) {
         String sufix = "";
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             if (active) {
                 sufix = " on";
             }
@@ -36,7 +36,7 @@ public class SecSoyNuevo {
     }
     
     public static String getXPath_BotonContinue(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathBotonContinueMobil;
         }
         return XPathBotonContinueDesktop;

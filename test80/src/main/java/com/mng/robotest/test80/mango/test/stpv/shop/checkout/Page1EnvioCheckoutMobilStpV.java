@@ -2,11 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.suitetree.ChecksTM;
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -61,9 +61,9 @@ public class Page1EnvioCheckoutMobilStpV {
 		//Validaciones
 		validaBlockSelected(tipoTransporte, 3, driver);
 		if (tipoTransporte.isEntregaDomicilio()) {
-			modalDroppoints.validaIsNotVisible(Channel.movil_web, driver);
+			modalDroppoints.validaIsNotVisible(Channel.mobile, driver);
 		} else {
-			modalDroppoints.validaIsVisible(Channel.movil_web, driver);
+			modalDroppoints.validaIsVisible(Channel.mobile, driver);
 		}
 	}
     

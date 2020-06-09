@@ -6,14 +6,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
@@ -70,7 +70,7 @@ public class Page2DatosPagoCheckoutMobil {
     
     static String getXPathRadioPago(String nombrePago) {
     	if (nombrePago.contains("mercadopago")) {
-        	String methodRadioName = PageCheckoutWrapper.getMethodInputValue(nombrePago, Channel.movil_web);
+        	String methodRadioName = PageCheckoutWrapper.getMethodInputValue(nombrePago, Channel.mobile);
         	return ("//div[@data-custom-radio-id='" + methodRadioName + "']"); 
     	}
     	return (getXPathPago(nombrePago) + "//div[@data-custom-radio-id]");
@@ -271,9 +271,9 @@ public class Page2DatosPagoCheckoutMobil {
 	public static boolean isVisibleTextoBajoPagoUntil(Pago pago, Channel channel, int maxSeconds, WebDriver driver) {
 		switch (pago.getTypePago()) {
 		case TMango:
-			return (secTMango.isVisibleUntil(Channel.movil_web, maxSeconds, driver));
+			return (secTMango.isVisibleUntil(Channel.mobile, maxSeconds, driver));
 		case Billpay:
-			return (secBillpay.isVisibleUntil(Channel.movil_web, maxSeconds, driver));
+			return (secBillpay.isVisibleUntil(Channel.mobile, maxSeconds, driver));
 		default:
 			String xpathTexto = getXPathTextUnderPago(pago.getNombre(channel));
 			return (state(Visible, By.xpath(xpathTexto), driver).wait(maxSeconds).check());

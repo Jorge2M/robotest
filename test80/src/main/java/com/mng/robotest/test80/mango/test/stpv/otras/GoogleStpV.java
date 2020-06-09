@@ -2,11 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.otras;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.otras.PageGoogle;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test80.mango.test.pageobject.shop.landing.PageLanding;
@@ -56,7 +56,7 @@ public class GoogleStpV {
 		description="Aparece la página de <b>Landing</b> o <b>Prehome</b>",
 		level=State.Defect)	
 	private boolean checkInitialPageShop() throws Exception {
-        boolean isPageLanding = PageLanding.isPage(driver);
+        boolean isPageLanding = (new PageLanding(driver)).isPage();
         boolean isPagePrehome = PagePrehome.isPage(driver);
         return (isPageLanding || isPagePrehome);
 	}

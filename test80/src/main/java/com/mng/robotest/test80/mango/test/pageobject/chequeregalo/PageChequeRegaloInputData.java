@@ -4,12 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
-import com.mng.testmaker.service.webdriver.pageobject.ElementPage;
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.PageFromFooter;
 
@@ -64,7 +64,7 @@ public class PageChequeRegaloInputData extends PageObjTM implements PageFromFoot
 
         @Override
         public By getBy(Channel channel) {
-            if (channel == Channel.movil_web && this.byMobil != null) {
+            if (channel == Channel.mobile && this.byMobil != null) {
                 return byMobil;
             }
             return byDesktop;

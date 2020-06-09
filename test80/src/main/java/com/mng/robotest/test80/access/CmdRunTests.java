@@ -1,25 +1,19 @@
 package com.mng.robotest.test80.access;
 
-import java.net.HttpURLConnection;       
+import java.net.HttpURLConnection;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import com.mng.testmaker.boundary.access.CmdLineMaker;
-import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.domain.CreatorSuiteRun;
-import com.mng.testmaker.domain.suitetree.SuiteTM;
-import com.mng.testmaker.domain.testfilter.TestMethod;
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.boundary.access.CmdLineMaker;
+import com.github.jorge2m.testmaker.domain.CreatorSuiteRun;
+import com.github.jorge2m.testmaker.domain.suitetree.SuiteTM;
+import com.github.jorge2m.testmaker.domain.testfilter.TestMethod;
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Suites;
 import com.mng.robotest.test80.mango.test.suites.*;
 
 public class CmdRunTests { 
 	
-	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger); 
-
 	enum TypeCallbackSchema {http, https}
 	public enum TypeCallBackMethod {POST, GET}
 
@@ -51,10 +45,10 @@ public class CmdRunTests {
 			callBack.setReportTSuiteURL(reportTSuiteURL);
 			try {
 				HttpURLConnection urlConnection = callBack.callURL();
-				pLogger.error("Called CallbackURL" + urlConnection);
+				suite.getLogger().error("Called CallbackURL" + urlConnection);
 			}
 			catch (Exception e) {
-				pLogger.error("Problem procesing CallBack", e);
+				suite.getLogger().error("Problem procesing CallBack", e);
 			}
 		}
 	}

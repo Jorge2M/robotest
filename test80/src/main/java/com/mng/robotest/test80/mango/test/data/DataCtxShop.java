@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.data;
 
-import com.mng.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Channel;
 
 import java.io.Serializable;
 

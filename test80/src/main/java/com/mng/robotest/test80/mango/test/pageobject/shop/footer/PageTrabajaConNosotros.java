@@ -1,17 +1,13 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.footer;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.service.webdriver.pageobject.PageObjTM;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageTrabajaConNosotros extends PageObjTM implements PageFromFooter {
-	
-    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
 	final String XPathIdFrame = "//iframe[@id='bodyFrame']";
 	final String XPathForIdPage = "//section[@id='all-jobs-link-section']";
@@ -36,7 +32,7 @@ public class PageTrabajaConNosotros extends PageObjTM implements PageFromFooter 
 			return false;
 		}
 		catch (Exception e) {
-			pLogger.warn("Problem in switch to bodyFrame", e);
+			Log4jTM.getLogger().warn("Problem in switch to bodyFrame", e);
 			return false;
 		}
 	}

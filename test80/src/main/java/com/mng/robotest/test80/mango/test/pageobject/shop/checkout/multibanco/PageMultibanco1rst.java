@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.multibanco;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 public class PageMultibanco1rst {
@@ -19,14 +19,14 @@ public class PageMultibanco1rst {
     final static String XPathInputEmailWithTag = "//input[@id[contains(.,'multibanco')] and @value[contains(.,'" + TagEmail + "')]]";
     
     public static String getXPathEntradaPago(String nombrePago, Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return (XPathListOfPayments + "//input[@class[contains(.,'" + nombrePago.toLowerCase() + "')]]");
         }
         return (XPathListOfPayments + "/li[@data-variant[contains(.,'" + nombrePago.toLowerCase() + "')]]");
     }
     
     public static String getXPathButtonContinuePay(Channel channel) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             return XPathButtonContinueMobil;
         }
         return XPathButtonPagoDesktop;
@@ -56,7 +56,7 @@ public class PageMultibanco1rst {
 
     public static void continueToNextPage(Channel channel, WebDriver driver) {
         //En el caso de móvil hemos de seleccionar el icono de banco para visualizar el botón de continue
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             String xpathButton = getXPathButtonContinuePay(channel);
             if (!state(Visible, By.xpath(xpathButton), driver).check()) {
                 clickIconoBanco(driver);

@@ -2,14 +2,14 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.suitetree.ChecksTM;
-import com.mng.testmaker.domain.suitetree.StepTM;
-import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.ModalDroppoints;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.SecSelectDPoint.TypeDeliveryPoint;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio.DataSearchDeliveryPoint.DataSearchDp;

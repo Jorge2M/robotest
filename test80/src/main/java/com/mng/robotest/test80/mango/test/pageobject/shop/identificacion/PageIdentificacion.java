@@ -3,13 +3,13 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.identificacion;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.conf.Channel;
-import static com.mng.testmaker.service.webdriver.pageobject.TypeClick.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper.UserMenu;
@@ -98,9 +98,9 @@ public class PageIdentificacion {
      */
     @SuppressWarnings("static-access")
     public static void clickIniciarSesionAndWait(Channel channel, AppEcom app, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
             //En el caso de mobile nos tenemos que asegurar que están desplegados los menús
-        	SecCabecera secCabeceraMobil = SecCabecera.getNew(Channel.movil_web, app, driver);
+        	SecCabecera secCabeceraMobil = SecCabecera.getNew(Channel.mobile, app, driver);
         	boolean toOpen = true;
         	secCabeceraMobil.clickIconoMenuHamburguerMobil(toOpen);
             

@@ -2,10 +2,10 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import java.util.Map;
 
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.State;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageInfoNewMisComprasMovil;
@@ -66,7 +66,7 @@ public class PageMiCuentaStpV {
         expected = "Aparece la página de \"Mis Compras\"")
     private void goToMisComprasFromMenuAndValidate(Pais pais) {
         pageMiCuenta.clickMisCompras();
-        if (channel == Channel.movil_web &&
+        if (channel == Channel.mobile &&
         	PageInfoNewMisComprasMovil.isPage(driver)) {
             PageInfoNewMisComprasMovilStpV.validateIsPage(driver);
             PageInfoNewMisComprasMovilStpV.clickButtonToMisComprasAndNoValidate(driver);

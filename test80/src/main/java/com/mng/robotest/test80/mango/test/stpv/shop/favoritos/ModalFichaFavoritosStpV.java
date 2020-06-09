@@ -1,13 +1,13 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.favoritos;
 
-import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -64,7 +64,7 @@ public class ModalFichaFavoritosStpV {
             SecBolsaStpV.validaAltaArtBolsa(dataBolsa, channel, AppEcom.shop, driver);
             break;
         default:
-        case movil_web:
+        case mobile:
             //En este caso no se hace visible la bolsa después de añadir a Favoritos con lo que sólo validamos el número
             SecBolsaStpV.validaNumArtEnBolsa(dataBolsa, channel, app, driver);
             break;

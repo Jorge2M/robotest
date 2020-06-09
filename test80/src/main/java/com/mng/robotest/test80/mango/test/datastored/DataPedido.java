@@ -4,7 +4,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio.DataDeliveryPoint;
-import com.mng.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.State;
 
 
 public class DataPedido {

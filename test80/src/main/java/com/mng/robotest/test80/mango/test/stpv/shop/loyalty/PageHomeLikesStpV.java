@@ -1,12 +1,12 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.loyalty;
 
-import com.mng.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV.ChecksResultWithNumberPoints;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.conf.State;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.test80.mango.test.pageobject.shop.loyalty.PageHomeLikes;
 import com.mng.robotest.test80.mango.test.pageobject.shop.loyalty.PageHomeLikes.ButtonUseLikes;
 
@@ -30,11 +30,13 @@ public class PageHomeLikesStpV {
 		PageHomeLikes pageLikes = PageHomeLikes.getNew(driver);
 		int maxSeconds = 5;
 		checks.add(
-			"Aparece la página de <b>Mango likes you</b> (la esperamos hasta " + maxSeconds + " segundos)",
+			"Aparece la página de <b>Mango likes you</b> (esperamos hasta " + maxSeconds + " segundos)",
 			pageLikes.checkIsPageUntil(4), State.Defect);
+		
+		int maxSecondsButton = 2;
 		checks.add(
-			"Aparecen bloques para el canjeo de Likes",
-			pageLikes.areVisibleBlocksExchangeLikes(), State.Defect);
+			"Es visible el botón \"Compra con descuento\" (esperamos hasta " + maxSecondsButton + " segundos)",
+			pageLikes.isVisibleButton(ButtonUseLikes.CompraConDescuento, maxSecondsButton), State.Defect);
 		
 		checks.setNumberPoints(pageLikes.getPoints());
 		checks.add(
@@ -57,7 +59,7 @@ public class PageHomeLikesStpV {
 		expected="Aparece una página para donar mis Likes")
 	public void clickButtonDonarLikes() {
 		pageHomeLikes.clickButton(ButtonUseLikes.DonarMisLikes);
-		PageHomeDonateLikesStpV.getNew(driver).checkIsPage();
+		PageHomeDonateLikesStpV.getNew(driver).checkIsPage(2);
 	}
 	
 	@Step(
@@ -65,7 +67,7 @@ public class PageHomeLikesStpV {
 		expected="Aparece una página para conseguir por 1200 Likes")
 	public void clickButtonConseguirPor1200Likes() {
 		pageHomeLikes.clickButton(ButtonUseLikes.Conseguir);
-		PageHomeConseguirPor1200LikesStpV.getNew(driver).checkIsPage();
+		PageHomeConseguirPor1200LikesStpV.getNew(driver).checkIsPage(2);
 	}
 	
 	@Step(

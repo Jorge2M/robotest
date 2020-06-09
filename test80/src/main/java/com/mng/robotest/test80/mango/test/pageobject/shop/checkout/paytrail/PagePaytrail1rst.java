@@ -4,9 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.testmaker.conf.Channel;
-import static com.mng.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.mng.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.github.jorge2m.testmaker.conf.Channel;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 public class PagePaytrail1rst {
@@ -39,7 +39,7 @@ public class PagePaytrail1rst {
     }    
     
     public static void clickButtonContinue(Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
         	click(By.xpath(XPathButtonContinueMobil), driver).exec();
         } else {
         	click(By.xpath(XPathButtonPagoDesktop), driver).exec();
@@ -48,7 +48,7 @@ public class PagePaytrail1rst {
     
     public static void selectBanco(String visibleText, Channel channel, WebDriver driver) {
         //En el caso de móvil hemos de seleccionar el icono del banco para visualizar el desplegable
-        if (channel==Channel.movil_web) {
+        if (channel==Channel.mobile) {
         	if (state(Visible, By.xpath(XPathSelectBancos), driver).check()) {
                 clickIconoBanco(driver);
             }

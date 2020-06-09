@@ -12,7 +12,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.loyalty.PageRegalarMisLikesS
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
-import com.mng.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -170,7 +170,6 @@ public class Loyalty {
 			loyaltyPointsIni = secMenusUserStpV.clickMenuMangoLikesYou();
 		}
 		
-		
 		PageHomeLikesStpV pageHomeLikesStpV = PageHomeLikesStpV.getNewInstance(driver);
 		pageHomeLikesStpV.clickButtonDonarLikes();
 		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
@@ -206,7 +205,6 @@ public class Loyalty {
 			client.addLoyaltyPoints(UserTest.loy003, 25000);
 			loyaltyPointsIni = secMenusUserStpV.clickMenuMangoLikesYou();
 		}
-		
 		
 		PageHomeLikesStpV.getNewInstance(driver).clickButtonConseguirPor1200Likes();
 		if (!isEntornoPro) {

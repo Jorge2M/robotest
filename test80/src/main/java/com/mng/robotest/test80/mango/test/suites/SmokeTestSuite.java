@@ -1,7 +1,6 @@
 package com.mng.robotest.test80.mango.test.suites;
 
 import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.getParametersSuiteShop;
-import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.getTestRunsForBrowserStack;
 import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.isBrowserStack;
 
 import java.util.Arrays;
@@ -28,45 +27,45 @@ import com.mng.robotest.test80.mango.test.appshop.Registro;
 import com.mng.robotest.test80.mango.test.appshop.SEO;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.factoryes.ListPagosEspana;
-import com.mng.testmaker.domain.SuiteMaker;
-import com.mng.testmaker.domain.TestRunMaker;
+import com.github.jorge2m.testmaker.domain.SuiteMaker;
+import com.github.jorge2m.testmaker.domain.TestRunMaker;
 
 public class SmokeTestSuite extends SuiteMaker {
 
-    public SmokeTestSuite(InputParamsMango inputParams) {
-    	super(inputParams);
-    	setParameters(getParametersSuiteShop(inputParams));
-    	if (!isBrowserStack(inputParams.getWebDriverType())) {
-	    	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), getClasses());
-	    	testRun.setStorerErrorStep(new ErrorStorer());
-	    	addTestRun(testRun);
-	    	setParallelMode(ParallelMode.METHODS);
-	    	setThreadCount(3); 
-    	} else {
-    		addTestRuns(getTestRunsForBrowserStack(inputParams.getSuiteName(), inputParams.getChannel(), getClasses()));
-	    	setParallelMode(ParallelMode.TESTS);
-	    	setThreadCount(Constantes.BSTACK_PARALLEL);
-    	}
-    }
+	public SmokeTestSuite(InputParamsMango inputParams) {
+		super(inputParams);
+		setParameters(getParametersSuiteShop(inputParams));
+		TestRunMaker testRun = TestRunMaker.from(
+				inputParams.getSuiteName(), 
+				getClasses());
+		testRun.setStorerErrorStep(new ErrorStorer());
+		addTestRun(testRun);
+		setParallelMode(ParallelMode.METHODS);
+		if (!isBrowserStack(inputParams.getDriver())) {
+			setThreadCount(3); 
+		} else {
+			setThreadCount(Constantes.BSTACK_PARALLEL);
+		}
+	}
 
-    private static List<Class<?>> getClasses() {
-    	return Arrays.asList(
-	        Otras.class,
-	        SEO.class,
-	        IniciarSesion.class,
-	        Bolsa.class,
-	        FichaProducto.class,
-	        Ayuda.class,
-	        Buscador.class,
-	        Footer.class,
-	        Registro.class,
-	        PaisIdioma.class,
-	        GaleriaProducto.class,
-	        Compra.class,
-	        ListPagosEspana.class,
-	        MiCuenta.class,
-	        Favoritos.class,
-	        Reembolsos.class,
-	        Loyalty.class);
-    }
+	private static List<Class<?>> getClasses() {
+		return Arrays.asList(
+			Otras.class,
+			SEO.class,
+			IniciarSesion.class,
+			Bolsa.class,
+			FichaProducto.class,
+			Ayuda.class,
+			Buscador.class,
+			Footer.class,
+			Registro.class,
+			PaisIdioma.class,
+			GaleriaProducto.class,
+			Compra.class,
+			ListPagosEspana.class,
+			MiCuenta.class,
+			Favoritos.class,
+			Reembolsos.class,
+			Loyalty.class);
+	}
 }
