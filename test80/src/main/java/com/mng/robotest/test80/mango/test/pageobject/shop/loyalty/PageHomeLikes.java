@@ -15,10 +15,10 @@ public class PageHomeLikes extends PageObjTM {
 	String xpathPoints = "//div[@class='vmPyL']"; //TODO pendiente Víctor gestione el cambio de la página
 	
 	public enum ButtonUseLikes {
-		CompraConDescuento("//div[@role='button' and text()='Comprar con descuento']"),
-		DonarMisLikes("//div[@role='button' and contains(text(), 'Donar mis Likes')]"),
-		Conseguir("//div[@role='button' and contains(text(), 'Conseguir')]"),
-		RegalarMisLikes("//div[@role='button' and text()[contains(.,'Regalar')]]");
+		CompraConDescuento("//button[text()='Comprar con descuento']"),
+		DonarMisLikes("//button[contains(text(), 'Donar mis Likes')]"),
+		Conseguir("//button[contains(text(), 'Conseguir')]"),
+		RegalarMisLikes("//button[text()[contains(.,'Regalar')]]");
 		
 		private By by;
 		private ButtonUseLikes(String xpath) {

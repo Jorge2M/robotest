@@ -127,7 +127,7 @@ public class ModalFichaFavoritos {
         //Filtramos y nos quedamos sólo con las tallas disponibles
         List<WebElement> listTallasAvailable = new ArrayList<>();
         for (WebElement talla : listTallas) {
-        	if (!state(Present, By.xpath("./span"), driver).check()) {
+        	if (!state(Present, talla, driver).by(By.xpath("./span")).check()) {
                 listTallasAvailable.add(talla);
             }
         }
