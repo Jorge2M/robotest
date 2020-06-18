@@ -11,7 +11,6 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras.TypeBlock;
-import com.mng.robotest.test80.mango.test.stpv.shop.miscompras.PageMisComprasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageDetallePedidoStpV;
 
 public class PageAccesoMisComprasStpV {
