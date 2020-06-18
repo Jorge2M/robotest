@@ -15,7 +15,7 @@ import org.openqa.selenium.WebDriver;
 
 public class Ayuda {
 	
-	public Ayuda() {} 
+	public Ayuda() {}  
 
 	private DataCtxShop getCtxShForTest() throws Exception {
 		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
