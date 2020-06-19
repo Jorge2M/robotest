@@ -17,6 +17,7 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 public class CorreoReport {
 
 	public static void main(String[] args) throws Exception { 
+		System.out.println("Inicio...");
 		String htmlBody = buildHtmlBody();
 		sendMailResult(htmlBody);
 	}
@@ -24,9 +25,11 @@ public class CorreoReport {
 	private static String buildHtmlBody() throws Exception {
 		//Fecha actual - 13 horas
 		//Date fechaDesde = new Date(System.currentTimeMillis() - 3600000 /*1 horas*/);
-		//Date fechaDesde = new Date(System.currentTimeMillis() - 50400000 /*14 horas*/);	    
+		//Date fechaDesde = new Date(System.currentTimeMillis() - 50400000 /*14 horas*/);
 		//Date fechaDesde = new Date(System.currentTimeMillis() - 54000000 /*15 horas*/);
 		Date fechaDesde = new Date(System.currentTimeMillis() - 46800000 /*13 horas*/);
+		//Date fechaDesde = new Date(System.currentTimeMillis() - 84800000 /*24 horas*/);
+		//Date fechaDesde = new Date(System.currentTimeMillis() - 168000000 /*48 horas*/);
 		Date fechaHasta = new Date(System.currentTimeMillis());
 		RepositoryI repository = TestMaker.getRepository();
 		List<SuiteBean> listSuites = repository.getListSuitesAfter(fechaDesde);
