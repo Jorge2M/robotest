@@ -156,7 +156,7 @@ public class CompraFact implements Serializable {
         FlagsTestCkout fTCkout = new FlagsTestCkout();
         fTCkout.validaPasarelas = true;  
         fTCkout.validaPagos = true;
-        fTCkout.validaPedidosEnManto = false; //TODO -> Volver a poner a true
+        fTCkout.validaPedidosEnManto = true;
         fTCkout.emailExist = true; 
         fTCkout.trjGuardada = false;
         fTCkout.isEmpl = this.empleado;

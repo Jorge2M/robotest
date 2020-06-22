@@ -238,7 +238,7 @@ public class PageFavoritos extends PageObjTM {
         List<WebElement> listTallas = getListaTallas(refProducto, codigoColor);
         List<WebElement> listTallasAvailable = new ArrayList<>();
         for (WebElement talla : listTallas) {
-        	if (!state(Present, By.xpath("./span"), driver).check()) {
+        	if (!state(Present, talla, driver).by(By.xpath("./span")).check()) {
                 listTallasAvailable.add(talla);
             }
         }

@@ -599,7 +599,7 @@ public class PageGaleriaDesktop extends PageGaleria {
     	String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
     	for (int i=0; i<5; i++) {
         	hoverArticle(article);
-        	if (state(Clickable, By.xpath(xpathSlider)).wait(2).check()) {
+        	if (state(Clickable, article).by(By.xpath("." + xpathSlider)).wait(2).check()) {
 	    		break;
 	    	}
 	    	moveToElement(article.findElement(By.xpath("//a")), driver);
