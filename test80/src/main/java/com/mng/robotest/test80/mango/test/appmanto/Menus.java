@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.domain.InputParamsTM;
 //import com.github.jorge2m.testmaker.domain.InputParamsTM;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.domain.suitetree.TestRunTM;
@@ -41,8 +42,8 @@ public class Menus implements Serializable {
 		DataMantoAccess dMantoAcc = new DataMantoAccess();
 		TestCaseTM testCase = TestMaker.getTestCase();
 		TestRunTM testRun = testCase.getTestRunParent();
-		//InputParamsTM inputParams = testCase.getInputParamsSuite();
-		//dMantoAcc.urlManto = inputParams.getUrlBase();
+		InputParamsTM inputParams = testCase.getInputParamsSuite();
+		dMantoAcc.urlManto = inputParams.getUrlBase();
 		dMantoAcc.userManto = testRun.getParameter(Constantes.paramUsrmanto);
 		dMantoAcc.passManto = testRun.getParameter(Constantes.paramPasmanto);
 		dMantoAcc.channel = Channel.desktop;
