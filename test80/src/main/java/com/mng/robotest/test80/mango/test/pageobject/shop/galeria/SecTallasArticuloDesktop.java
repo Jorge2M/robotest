@@ -34,7 +34,10 @@ public class SecTallasArticuloDesktop extends PageObjTM {
 	
 	//final String XPathCapaTallasArticuloOutletOld = "//div[@class[contains(.,'add-cart')] and @data-stock]";
 	//final String XPathCapaTallasArticuloOutletNew = "//div[@class[contains(.,'sizes__container')]]";
-	final String XPathCapaTallasArticuloShop = "//div[@class[contains(.,'sizes-container')]]";
+	final String XPathCapaTallasArticuloShop = 
+			"//div[@class[contains(.,'sizes-container')] or " + 
+			      "@class[contains(.,'_1BBIV']]"; //TODO eliminar cuando suban los cambios desde maquetación
+	
 	private String getXPathArticleCapaInferiorDesktop(int posArticulo) {
 		String xpathArticuloX = "(" + xpathArticulo + ")[" + posArticulo + "]";
 //		if (app==AppEcom.outlet) {
@@ -56,7 +59,9 @@ public class SecTallasArticuloDesktop extends PageObjTM {
 	}
 
 	//final String classCapaActiveOutlet = "@class[contains(.,'active')]";
-	final String classCapaActiveShop = "@class[contains(.,'active')]";
+	final String classCapaActiveShop = 
+			"@class[contains(.,'active')] or " + 
+			"@class[contains(.,'_2yZ7h')]"; //Para Outlet -> Eliminar cuando suban los cambios desde maquetación
 	private String getClassCapaTallasActive() {
 //		if (app==AppEcom.outlet) {
 //			return classCapaActiveOutlet;
@@ -107,20 +112,20 @@ public class SecTallasArticuloDesktop extends PageObjTM {
 		return (state(Visible, By.xpath(xpathCapa)).wait(maxSeconds).check());
 	}
 	
-    public void selectLinkAñadirOutlet(int posArticulo) {
-        String xpathCapaAlta = getXPathFirstCapaAñadirOutlet(posArticulo, true);
-        int i=0;
-        while (i<5) {
-            try {
-                driver.findElement(By.xpath(xpathCapaAlta)).click();
-                break;
-            }
-            catch (WebDriverException e) {
-                //Scrollamos un poquito hacia arriba para asegurar
-                ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-100)", "");
-                waitMillis(200);
-                i+=1;
-            }
-        }
-    }
+//    public void selectLinkAñadirOutlet(int posArticulo) {
+//        String xpathCapaAlta = getXPathFirstCapaAñadirOutlet(posArticulo, true);
+//        int i=0;
+//        while (i<5) {
+//            try {
+//                driver.findElement(By.xpath(xpathCapaAlta)).click();
+//                break;
+//            }
+//            catch (WebDriverException e) {
+//                //Scrollamos un poquito hacia arriba para asegurar
+//                ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-100)", "");
+//                waitMillis(200);
+//                i+=1;
+//            }
+//        }
+//    }
 }

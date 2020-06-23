@@ -87,7 +87,7 @@ public class SecMenuLateralMobil extends PageObjTM {
     	"//a[@class='menu-item-label' and @data-label[contains(.,'nuevo')] and @data-label[contains(.,'nino')]]";
     
     static String XPathLinkMenuVisibleFromLi = 
-    	"//ul[@class='section-detail' or @class='dropdown-menu']" +
+    	"//ul[@class='section-detail' or @class[contains(.,'dropdown-menu')]]" +
     	"/li[not(@class[contains(.,'mobile-label-hidden')] or @class[contains(.,' gap ')])]" +
     	"/a[@class='menu-item-label' and @href]";
     

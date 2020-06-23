@@ -517,9 +517,9 @@ public class PageGaleriaDesktop extends PageGaleria {
 		//Nos posicionamos en el artículo y clicamos la capa. 
 		//Es un click muy extraño porque cuando lo ejecutas automáticamente posiciona la capa en el top del navegador y queda oculta por el menú
 		moveToArticleAndGetObject(posArticulo);
-		if (app==AppEcom.outlet) {
-			secTallas.selectLinkAñadirOutlet(posArticulo);
-		}
+//		if (app==AppEcom.outlet) {
+//			secTallas.selectLinkAñadirOutlet(posArticulo);
+//		}
 	}
 
 	@Override

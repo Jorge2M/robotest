@@ -92,7 +92,7 @@ public class SecBannersStpV {
     throws Exception {
     	ChecksTM validations = ChecksTM.getNew();
     	int maxSeconds1 = 3;
-    	int marginElements = 3;
+    	int marginElements = 2;
     	int maxSeconds2 = 1;
 	 	validations.add(
 	 		"La URL de la página cambia (lo esperamos hasta un máximo de " + maxSeconds1 + " segundos)",
