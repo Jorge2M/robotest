@@ -36,7 +36,7 @@ public class SecTallasArticuloDesktop extends PageObjTM {
 	//final String XPathCapaTallasArticuloOutletNew = "//div[@class[contains(.,'sizes__container')]]";
 	final String XPathCapaTallasArticuloShop = 
 			"//div[@class[contains(.,'sizes-container')] or " + 
-			      "@class[contains(.,'_1BBIV']]"; //TODO eliminar cuando suban los cambios desde maquetación
+			      "@class[contains(.,'_1BBIV')]]"; //TODO eliminar cuando suban los cambios desde maquetación
 	
 	private String getXPathArticleCapaInferiorDesktop(int posArticulo) {
 		String xpathArticuloX = "(" + xpathArticulo + ")[" + posArticulo + "]";
@@ -80,7 +80,9 @@ public class SecTallasArticuloDesktop extends PageObjTM {
 
 //	private final String XPathTallaAvailableOutletOld = "//span[@data-id and not(@class[contains(.,'no-stock')])]";
 //	private final String XPathTallaAvailableOutletNew = "//button[not(@class[contains(.,'no-stock')])]";
-	private final String XPathTallaAvailableShop = "//button[@class[contains(.,'si-stock')]]";
+	private final String XPathTallaAvailableShop = 
+		"//button[@class[contains(.,'si-stock')] or " + 
+				 "@class[contains(.,'undefined')]]"; //TODO para outlet, eliminar cuando suban los cambios de maquetación
 	private String getXPathTallaAvailable() {
 //		if (app==AppEcom.outlet) {
 //			if (getOutletGalery()==OutletGalery.old) {

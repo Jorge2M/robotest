@@ -87,6 +87,7 @@ public class ListAllNodes {
     	WebDriver driver = 
     		FactoryWebdriverMaker.make(testRun)
     			.setChannel(Channel.desktop)
+    			.setupDriverVersionFluent(testRun.getSuiteParent().getInputParams().getDriverVersion())
     			.build();
 	    
 		for (int i=0; i<iteraciones; i++) {

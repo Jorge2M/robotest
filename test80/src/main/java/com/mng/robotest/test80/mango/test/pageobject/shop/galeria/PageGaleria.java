@@ -116,14 +116,14 @@ public abstract class PageGaleria extends PageObjTM {
 	
 	final static String XPathArticuloDesktopBuscador = "//div[@class[contains(.,'product-list-item')]]";
 	//final static String XPathArticuloMobilOutlet = "//div[@class[contains(.,'product-list-item')] or @id[contains(.,'product-key-id')] or @class='product']";
-	final static String XPathArticuloMobilOutlet = "//li[@class='product-list-item']";
+	//final static String XPathArticuloMobilOutlet = "//li[@class='product-list-item']";
 	final static String XPathArticuloMobilShop = "//li[@class='product']";
 	private String getXPathArticulo() {
 		switch (app) {
-		case outlet:
-			if (channel==Channel.mobile) {
-				return XPathArticuloMobilOutlet;
-			}
+//		case outlet:
+//			if (channel==Channel.mobile) {
+//				return XPathArticuloMobilOutlet;
+//			}
 		case shop:
 		case votf:
 		default:
