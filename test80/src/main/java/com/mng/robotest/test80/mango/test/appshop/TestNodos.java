@@ -88,7 +88,7 @@ public class TestNodos implements Serializable {
 		TestCaseTM.addNameSufix(this.index_fact);
         AppEcom appE = nodo.getAppEcom();
         AccesoStpV.testNodoState(nodo, driver);
-        if (this.nodo.getStatusJSON().isStatusOk()) {
+        if (this.nodo.getStatusJSON().getDataStatusNode()==null || this.nodo.getStatusJSON().isStatusOk()) {
             NodoStatus nodoAnt = findNodoForCompareStatus(listaNodos, nodo);
             if (nodoAnt!=null) {
                 AccesoStpV.validaCompareStatusNodos(this.nodo, nodoAnt);

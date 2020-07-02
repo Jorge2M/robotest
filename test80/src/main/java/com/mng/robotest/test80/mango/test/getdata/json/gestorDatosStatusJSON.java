@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.test80.mango.test.factoryes.NodoStatus;
 
 /**
@@ -104,9 +105,14 @@ public class gestorDatosStatusJSON {
         String dataJSON = webdriver.findElement(By.tagName("body")).getText();
         
         //Generamos los datos JSON obtenidos mediante la llamada a la URL /services/controles/status 
-        JSONObject jsonObject = readJsonFromString(dataJSON);
-        
-        return jsonObject;
+        try {
+        	JSONObject jsonObject = readJsonFromString(dataJSON);
+        	return jsonObject;
+        }
+        catch (Exception e) {
+        	Log4jTM.getLogger().warn("Problem parsing Json of url " + urlStatus, e);
+        	return null;
+        }
     }
     
     private JSONObject readJsonFromString(String dataJSON) throws Exception {

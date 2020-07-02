@@ -374,7 +374,9 @@ public class AccesoStpV {
     public static void testNodoState(NodoStatus nodo, WebDriver driver) throws Exception {
     	TestMaker.getCurrentStepInExecution().replaceInDescription(tagPathStatus, nodo.getStatusJSON().pathStatus);
         nodo.setDataStateNodeFromBrowser(driver);
-        checkStatusUp(nodo);
+        if (nodo.getStatusJSON()!=null && nodo.getStatusJSON().getDataStatusNode()!=null) {
+        	checkStatusUp(nodo);
+        }
     }
     
     @Validation (
