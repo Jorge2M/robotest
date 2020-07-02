@@ -75,7 +75,7 @@ public class PageGaleriaStpV {
     	this.channel = channel;
     	this.app = app;
     	this.secCrossSellingStpV = new SecCrossSellingStpV(channel, app, driver);
-    	this.secSelectorPreciosStpV = new SecSelectorPreciosStpV(app, driver);
+    	this.secSelectorPreciosStpV = new SecSelectorPreciosStpV(app, channel, driver);
     	this.bannerHead = BannerHeadGalleryStpV.newInstance(this, driver);
     	this.pageGaleria = PageGaleria.getNew(channel, app, driver);
     }

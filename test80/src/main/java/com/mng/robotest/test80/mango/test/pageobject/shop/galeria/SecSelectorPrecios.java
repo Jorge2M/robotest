@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.SecFiltrosDesktop;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -18,6 +20,7 @@ public class SecSelectorPrecios extends PageObjTM {
 	public enum TypeClick {left, right}
 	
 	private final AppEcom app;
+	private final Channel channel;
 //	private OutletGalery outputGalery;
 	
 //	private static String XPathLineaFiltroOutlet = "//div[@id='priceRange']";
@@ -34,9 +37,10 @@ public class SecSelectorPrecios extends PageObjTM {
 	private static String XPathLeftCornerShop = XPathImporteMinimoShop + "/../..";
 	private static String XPathRightCornerShop = XPathImporteMaximoShop + "/../..";
 	
-	public SecSelectorPrecios(AppEcom app, WebDriver driver) {
+	public SecSelectorPrecios(AppEcom app, Channel channel, WebDriver driver) {
 		super(driver);
 		this.app = app;
+		this.channel = channel;
 	}
 	
 //	private OutletGalery getOutletGalery() {
@@ -112,6 +116,11 @@ public class SecSelectorPrecios extends PageObjTM {
 	}
 
 	public boolean isVisible() {
+		if (channel==Channel.desktop) {
+			PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
+			SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(driver, pageGaleria);
+			secFiltros.showFilters();
+		}
 		By byLineaFiltro = By.xpath(getXPathLineaFiltro());
 		return (state(Visible, byLineaFiltro).check());
 	}

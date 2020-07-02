@@ -3,9 +3,14 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.SecFiltrosDesktop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDesktop;
 
 public class SecMenuLateralDesktop extends PageObjTM {
@@ -80,6 +85,9 @@ public class SecMenuLateralDesktop extends PageObjTM {
 	}
 
 	public boolean isSelectedMenu(MenuLateralDesktop menu, int maxSeconds) {
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
+		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(driver, pageGaleria);
+		secFiltros.showLateralMenus();
 		String linkMenuSel = getXPathLinkMenuSelected(menu) ;
 		return (state(Visible, By.xpath(linkMenuSel)).wait(maxSeconds).check());
 	}
@@ -94,7 +102,21 @@ public class SecMenuLateralDesktop extends PageObjTM {
 	 * @return si es o no visible un menú lateral de 1er (menu2oNivel=null) o 2o nivel (menu2oNivel!=null)
 	 */
 	public boolean isVisibleMenu(MenuLateralDesktop menu) throws Exception {
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
+		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(driver, pageGaleria);
+		secFiltros.showLateralMenus();
 		String xpathMenu = getXPathLinkMenu(menu);
 		return (state(Visible, By.xpath(xpathMenu)).check());
+	}
+	
+	private static final String XPathCapaMenusShop = "//div[@id='sidebar']/aside[@id='navigation']";
+	private static final String XPathCapaMenusOutlet = "//div[@id='sticky']/aside[@id='filters']";
+	public boolean isVisibleCapaMenus(int maxSeconds) {
+		switch (app) {
+		case outlet:
+			return state(State.Visible, By.xpath(XPathCapaMenusOutlet)).wait(maxSeconds).check();
+		default:
+			return state(State.Visible, By.xpath(XPathCapaMenusShop)).wait(maxSeconds).check();
+		}
 	}
 }

@@ -21,12 +21,11 @@ public class SecSelectorPreciosStpV {
 	private final WebDriver driver;
 	private final AppEcom app;
 	
-	public SecSelectorPreciosStpV(AppEcom app, WebDriver driver) {
-		this.selectorPrecios = new SecSelectorPrecios(app, driver);
+	public SecSelectorPreciosStpV(AppEcom app, Channel channel, WebDriver driver) {
+		this.selectorPrecios = new SecSelectorPrecios(app, channel, driver);
 		this.driver = driver;
 		this.app = app;
 	}
-	
 	
 	@Validation (
 		description="Es visible el selector de precios",
