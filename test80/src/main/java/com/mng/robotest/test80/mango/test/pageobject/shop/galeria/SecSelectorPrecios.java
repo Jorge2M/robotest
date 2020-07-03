@@ -116,13 +116,16 @@ public class SecSelectorPrecios extends PageObjTM {
 	}
 
 	public boolean isVisible() {
+		By byLineaFiltro = By.xpath(getXPathLineaFiltro());
 		if (channel==Channel.desktop) {
 			PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
 			SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(driver, pageGaleria);
 			secFiltros.showFilters();
+			boolean visible = state(Visible, byLineaFiltro).check();
+			secFiltros.hideFilters();
+			return visible;
 		}
-		By byLineaFiltro = By.xpath(getXPathLineaFiltro());
-		return (state(Visible, byLineaFiltro).check());
+		return state(Visible, byLineaFiltro).check();
 	}
 
 	public int getImporteMinimo() {

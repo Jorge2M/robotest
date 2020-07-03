@@ -122,6 +122,13 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 			}
 		}
 	}
+	public void hideFilters() {
+		if (app!=AppEcom.outlet) {
+			if (isFiltersShopVisible(1)) {
+				click(By.xpath(XPathLinkFiltrarShop)).exec();
+			}
+		}
+	}
 	public void acceptFilters() {
 		if (app!=AppEcom.outlet) {
 			click(By.xpath(XPathLinkFiltrarShop)).exec();
