@@ -173,11 +173,8 @@ public class FichaProducto {
             pageFichaStpV.secFotosNew.validaLayoutFotosNew(isFichaAccesorio, driver);
             pageFichaStpV.secTotalLook.checkIsVisible(driver);
 
-            
-            //TODO modificar cuando restauren el link de "Envío y devoluciones"
-            pageFichaStpV.secBolsaButtonAndLinksNew.checkEnvioGratisInvisible(driver);
-            //pageFichaStpV.getModEnvioYdevol().checkIsVisible();
-            //pageFichaStpV.getModEnvioYdevol().clickAspaForClose();
+            pageFichaStpV.secBolsaButtonAndLinksNew.selectEnvioYDevoluciones(driver);
+            pageFichaStpV.getModEnvioYdevol().clickAspaForClose();
             
             pageFichaStpV.secBolsaButtonAndLinksNew.selectDetalleDelProducto(dCtxSh.appE, LineaType.she, driver);
             pageFichaStpV.secBolsaButtonAndLinksNew.selectLinkCompartir(dCtxSh.pais.getCodigo_pais(), driver);

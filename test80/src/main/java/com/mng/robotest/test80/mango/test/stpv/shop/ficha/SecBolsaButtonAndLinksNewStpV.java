@@ -26,14 +26,6 @@ public class SecBolsaButtonAndLinksNewStpV {
 		SecBolsaButtonAndLinksNew.clickLinkAndWaitLoad(LinksAfterBolsa.EnvioGratisTienda, driver);
 		(new ModEnvioYdevolNewStpV(driver)).checkIsVisible();
 	}
-	@Validation (
-		description="No es visible el link <b>Envío gratis a tienda</b>",
-		level=State.Defect)
-	public static boolean checkEnvioGratisInvisible(WebDriver driver) {
-		return (
-			SecBolsaButtonAndLinksNew
-				.checkLinkInState(LinksAfterBolsa.EnvioGratisTienda, Invisible, driver));
-	}
 
 	@Step (
 		description="Seleccionar el link <b>Detalle del producto</b>",
