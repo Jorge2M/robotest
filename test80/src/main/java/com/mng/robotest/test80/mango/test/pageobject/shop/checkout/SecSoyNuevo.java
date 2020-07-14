@@ -2,8 +2,10 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
@@ -75,7 +77,11 @@ public class SecSoyNuevo {
     }
 
 	public static void inputEmail(String email, WebDriver driver) {
-		sendKeysWithRetry(email, By.xpath(XPathInputEmail), 3, driver);
+		WebElement input = driver.findElement(By.xpath(XPathInputEmail));
+		input.clear();
+		input.sendKeys(email);
+		SeleniumUtils.waitMillis(500);
+		//sendKeysWithRetry(email, By.xpath(XPathInputEmail), 3, driver);
 	}
 
 	public static void clickContinue(Channel channel, WebDriver driver) {
