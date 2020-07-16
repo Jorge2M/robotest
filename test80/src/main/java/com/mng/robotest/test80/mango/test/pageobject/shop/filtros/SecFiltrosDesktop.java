@@ -7,10 +7,12 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Color;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenuLateralDesktop;
 
 
 /**
@@ -25,11 +27,13 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	final static String XPathLinkOrdenWithTag = "//a[text()[contains(.,'" + TagOrdenacion + "')]]";
 	final static String XPathLinkColorWithTag = "//a[@aria-label[contains(.,'" + TagColor + "')]]";
 	
-	PageGaleria pageGaleria = null;
+	final PageGaleria pageGaleria;
+	final AppEcom app;
 	
 	private SecFiltrosDesktop(WebDriver driver, PageGaleria pageGaleria) {
 		super(driver);
 		this.pageGaleria = pageGaleria;
+		this.app = pageGaleria.getApp();
 	}
 	
 	public static SecFiltrosDesktop getInstance(AppEcom app, WebDriver driver) {
@@ -79,12 +83,13 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
      */
 	@Override
     public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToSelect) {
+		showFilters();
 		for (Color color : colorsToSelect) {
 			String xpathLinkColor = getXPathLinkColor(color);
 			moveToElement(By.xpath(xpathLinkColor), driver);
 			click(By.xpath(xpathLinkColor)).exec();
 		}
-		
+		acceptFilters();
 		int maxSecondsToWait = 10;
 		int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(maxSecondsToWait);
 		return numArticles;
@@ -94,5 +99,42 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	public boolean isClickableFiltroUntil(int seconds) {
 		return (state(Clickable, By.xpath(XPathLinkOrdenWithTag), driver)
 				.wait(seconds).check());
+	}
+	
+	
+	private static final String XPathLinkCollectionShop = "//div[@id='navigationContainer']/button";
+	public void showLateralMenus() {
+		if (app!=AppEcom.outlet) {
+			SecMenuLateralDesktop secMenuLateral = SecMenuLateralDesktop.getNew(AppEcom.shop, driver);
+			if (!secMenuLateral.isVisibleCapaMenus(1)) {
+				click(By.xpath(XPathLinkCollectionShop)).exec();
+			}
+		}
+	}
+	
+	//TODO hablar con Sergio Campillo para que añada algún id no-react
+	private static final String XPathCapaFiltersShop = "//div[@class[contains(.,'_1PO8g')]]";
+	private static final String XPathLinkFiltrarShop = "//button[@id='filtersBtn']";
+	public void showFilters() {
+		if (app!=AppEcom.outlet) {
+			if (!isFiltersShopVisible(1)) {
+				click(By.xpath(XPathLinkFiltrarShop)).exec();
+			}
+		}
+	}
+	public void hideFilters() {
+		if (app!=AppEcom.outlet) {
+			if (isFiltersShopVisible(1)) {
+				click(By.xpath(XPathLinkFiltrarShop)).exec();
+			}
+		}
+	}
+	public void acceptFilters() {
+		if (app!=AppEcom.outlet) {
+			click(By.xpath(XPathLinkFiltrarShop)).exec();
+		}
+	}
+	private boolean isFiltersShopVisible(int maxSeconds) {
+		return state(State.Visible, By.xpath(XPathCapaFiltersShop)).wait(maxSeconds).check();
 	}
 }

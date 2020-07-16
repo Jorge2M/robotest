@@ -18,6 +18,10 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -106,6 +110,10 @@ public abstract class PageGaleria extends PageObjTM {
 		default:
 			return (PageGaleriaMobil.getNew(from, app, driver));
 		}
+	}
+	
+	public AppEcom getApp() {
+		return app;
 	}
 	
 	public SecPreciosArticulo getSecPreciosArticulo() {
@@ -649,8 +657,12 @@ public abstract class PageGaleria extends PageObjTM {
     }
 
 	public void clickArticulo(WebElement articulo) {
+		//SeleniumUtils.waitMillis(2000);
 		moveToElement(articulo, driver);
-		click(articulo).waitLoadPage(30).type(webdriver).exec();
+		//state(State.Clickable, articulo).wait(10).check();
+		//SeleniumUtils.waitMillis(2000);
+		click(articulo).waitLoadPage(30).exec();
+		//SeleniumUtils.waitMillis(10);
 	}
 
 	@SuppressWarnings("static-access")
