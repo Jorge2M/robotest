@@ -25,9 +25,16 @@ public class Page2IdentCheckoutStpV {
 			Page2IdentCheckout.isPageUntil(maxSeconds, driver), State.Defect);
 	 	validations.add(
 			"Es <b>" + !emailYetExists + "</b> que aparece el input para la introducción de la contraseña",
-			Page2IdentCheckout.isInputPasswordAccordingEmail(emailYetExists, driver), State.Defect);
+			Page2IdentCheckout.isInputPasswordAccordingEmail(emailYetExists, driver), State.Warn);
 	 	return validations;
     }
+	
+	@Validation (
+		description="Figura el email <b>#{email}</b>",
+		level=State.Warn)
+	public static boolean checkEmail(String email, WebDriver driver) {
+		return Page2IdentCheckout.checkEmail(email, driver);
+	}
     
 	@Step (
 		description="Introducimos los datos del cliente según el país", 

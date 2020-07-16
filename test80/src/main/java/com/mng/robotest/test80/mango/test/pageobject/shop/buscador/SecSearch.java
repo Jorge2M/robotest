@@ -13,13 +13,7 @@ public interface SecSearch {
 	public static SecSearch getNew(Channel channel, AppEcom app, WebDriver driver) {
 		switch (channel) {
 		case desktop:
-			switch (app) {
-			case shop:
-			case votf:
-				return SecSearchDesktopShop.getNew(driver);
-			case outlet:
-				return SecSearchDesktopOutlet.getNew(driver);
-			}
+			return SecSearchDesktopShop.getNew(driver);
 		case mobile:
 			switch (app) {
 			case shop:

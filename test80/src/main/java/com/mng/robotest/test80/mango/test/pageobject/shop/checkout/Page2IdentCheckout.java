@@ -13,6 +13,8 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
@@ -56,6 +58,17 @@ public class Page2IdentCheckout {
 
 	public static boolean isPageUntil(int maxSeconds, WebDriver driver) {
 		return (state(Present, By.xpath(XPathMainForm), driver).wait(maxSeconds).check());
+	}
+	
+	public static boolean checkEmail(String email, WebDriver driver) {
+		By byEmail = By.xpath(XPathInputEmail);
+		if (PageObjTM.state(State.Visible, byEmail, driver).check()) {
+			String emailScreen = driver.findElement(byEmail).getAttribute("value");
+			if (emailScreen!=null) {
+				return (email.compareTo(emailScreen)==0);
+			}
+		}
+		return false;
 	}
 
 	public static boolean isInputPasswordAccordingEmail(boolean emailYetExists, WebDriver driver) {

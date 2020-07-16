@@ -17,7 +17,6 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletDesktop.LinkCabeceraOutletDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMobil.IconoCabOutletMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraShop.IconoCabeceraShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop.MenuUserDesktop;
@@ -163,9 +162,6 @@ public class MenusUserWrapper extends PageObjTM {
 		if (menu instanceof IconoCabeceraShop) {
 			return (secCabecera.getShop().isIconoInStateUntil((IconoCabeceraShop)menu, state, maxSeconds));
 		}
-		if (menu instanceof LinkCabeceraOutletDesktop) {
-			return (secCabecera.getOutletDesktop().isElementInStateUntil((LinkCabeceraOutletDesktop) menu, state, maxSeconds));
-		}
 		if (menu instanceof MenuUserDesktop) {
 			return (secCabecera.getShop().getModalUserSesionDesktop().isMenuInStateUntil((MenuUserDesktop)menu, state, maxSeconds));
 		}
@@ -181,9 +177,6 @@ public class MenusUserWrapper extends PageObjTM {
 	private void clickMenuAndWait(ElementPage menu) {
 		if (menu instanceof IconoCabeceraShop) {
 			secCabecera.getShop().clickIconoAndWait((IconoCabeceraShop)menu);
-		}
-		if (menu instanceof LinkCabeceraOutletDesktop) {
-			secCabecera.getOutletDesktop().clickElement((LinkCabeceraOutletDesktop)menu);
 		}
 		if (menu instanceof MenuUserDesktop) {
 			secCabecera.getShop().hoverIconForShowUserMenuDesktop();
@@ -203,7 +196,7 @@ public class MenusUserWrapper extends PageObjTM {
 		}
 		if (app==AppEcom.outlet) {
 			if (channel==Channel.desktop) {
-				return LinkCabeceraOutletDesktop.lupa;
+				return IconoCabeceraShop.lupa;
 			}
 			if (channel==Channel.mobile) {
 				return IconoCabOutletMobil.lupa;
@@ -218,7 +211,7 @@ public class MenusUserWrapper extends PageObjTM {
 		}
 		if (app==AppEcom.outlet) {
 			if (channel==Channel.desktop) {
-				return LinkCabeceraOutletDesktop.iniciarsesion;
+				return IconoCabeceraShop.iniciarsesion;
 			}
 			if (channel==Channel.mobile) {
 				return MenuUserMobil.iniciarsesion;
@@ -229,12 +222,7 @@ public class MenusUserWrapper extends PageObjTM {
 	
 	private ElementPage getMenuCerrarSesion() {
 		if (channel==Channel.desktop) {
-			if (app==AppEcom.shop || app==AppEcom.votf) {
-				return MenuUserDesktop.cerrarSesion;
-			}
-			if (app==AppEcom.outlet) {
-				return LinkCabeceraOutletDesktop.cerrarsesion;
-			}
+			return MenuUserDesktop.cerrarSesion;
 		}
 		if (channel==Channel.mobile) {
 			return MenuUserMobil.cerrarsesion;
@@ -244,12 +232,7 @@ public class MenusUserWrapper extends PageObjTM {
 	
 	private ElementPage getMenuRegistrate() {
 		if (channel==Channel.desktop) {
-			if (app==AppEcom.shop || app==AppEcom.votf) {
-				return MenuUserDesktop.registrate;
-			}
-			if (app==AppEcom.outlet) {
-				return LinkCabeceraOutletDesktop.registrate;
-			}
+			return MenuUserDesktop.registrate;
 		}
 		if (channel==Channel.mobile) {
 			return MenuUserMobil.registrate;
@@ -263,7 +246,7 @@ public class MenusUserWrapper extends PageObjTM {
 		}
 		if (app==AppEcom.outlet) {
 			if (channel==Channel.desktop) {
-				return LinkCabeceraOutletDesktop.micuenta;
+				return IconoCabeceraShop.micuenta;
 			}
 			if (channel==Channel.mobile) {
 				return MenuUserMobil.micuenta;
@@ -292,13 +275,8 @@ public class MenusUserWrapper extends PageObjTM {
 	}
 	
 	private ElementPage getMenuPedidos() {
-		if (app==AppEcom.outlet) {
-			if (channel==Channel.desktop) {
-				return LinkCabeceraOutletDesktop.pedidos;
-			}
-			if (channel==Channel.mobile) {
-				return MenuUserMobil.pedidos;
-			}
+		if (app==AppEcom.outlet && channel==Channel.mobile) {
+			return MenuUserMobil.pedidos;
 		}
 		return null;
 	}
@@ -317,12 +295,7 @@ public class MenusUserWrapper extends PageObjTM {
 	
 	private ElementPage getMenuAyuda() {
 		if (channel==Channel.desktop) {
-			if (app==AppEcom.shop || app==AppEcom.votf) {
-				return MenuUserDesktop.ayuda;
-			}
-			if (app==AppEcom.outlet) {
-				return LinkCabeceraOutletDesktop.ayuda;
-			}
+			return MenuUserDesktop.ayuda;
 		}
 		if (channel==Channel.mobile) {
 			return MenuUserMobil.ayuda;

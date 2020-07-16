@@ -107,9 +107,11 @@ public class AccesoStpV {
 	    	validations.add(
 	    		"NO aparece el link \"Favoritos\"",
 	    		!isVisibleMenuFav, State.Defect);
-	    	validations.add(
-	    		"Aparece el link \"Mis Pedidos\"",
-	    		userMenus.isMenuInState(UserMenu.pedidos, Present), State.Defect);
+	    	if (dCtxSh.channel==Channel.mobile) {
+		    	validations.add(
+		    		"Aparece el link \"Mis Pedidos\"",
+		    		userMenus.isMenuInState(UserMenu.pedidos, Present), State.Defect);
+	    	}
 		} else {
 	    	validations.add(
 	    		"Aparece el link \"Favoritos\"",
@@ -129,7 +131,7 @@ public class AccesoStpV {
 	    	}
 		}
 		
-		if (dCtxSh.channel!=Channel.desktop || dCtxSh.appE!=AppEcom.shop) {
+		if (dCtxSh.channel!=Channel.desktop) {
 	    	validations.add(
 	    		"Aparece el link \"Ayuda\"",
 	    		userMenus.isMenuInState(UserMenu.ayuda, Visible), State.Defect);

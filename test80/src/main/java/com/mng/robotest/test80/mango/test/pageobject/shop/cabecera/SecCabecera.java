@@ -43,7 +43,6 @@ public abstract class SecCabecera extends PageObjTM {
 		case shop:
 		case votf:
 			return SecCabeceraShop.getNew(channel, app, driver);
-		case outlet:
 		default:
 			return SecCabeceraOutlet.getNew(channel, app, driver);
 		}
@@ -51,10 +50,6 @@ public abstract class SecCabecera extends PageObjTM {
 	
 	public SecCabeceraShop getShop() {
 		return (SecCabeceraShop)this;
-	}
-	
-	public SecCabeceraOutletDesktop getOutletDesktop() {
-		return (SecCabeceraOutletDesktop)this;
 	}
 	
 	public SecCabeceraOutletMobil getOutletMobil() {

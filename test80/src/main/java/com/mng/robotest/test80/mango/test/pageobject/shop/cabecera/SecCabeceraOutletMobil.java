@@ -18,7 +18,7 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
  * @author jorge.munoz
  *
  */
-public class SecCabeceraOutletMobil extends SecCabeceraOutlet {
+public class SecCabeceraOutletMobil extends SecCabecera {
 	
 	public enum IconoCabOutletMobil implements ElementPage {
 		bolsa(IconoCabeceraShop.bolsa.getXPath()),

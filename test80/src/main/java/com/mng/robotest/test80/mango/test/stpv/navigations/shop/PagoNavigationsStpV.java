@@ -191,6 +191,14 @@ public class PagoNavigationsStpV {
         dCtxPago.getDataPedido().setEmailCheckout(emailCheckout);
 
         Page1IdentCheckoutStpV.secSoyNuevo.inputEmailAndContinue(emailCheckout, dCtxPago.getFTCkout().emailExist, dCtxSh.appE, dCtxSh.userRegistered, dCtxSh.pais, dCtxSh.channel, driver);
+        boolean emailOk = Page2IdentCheckoutStpV.checkEmail(emailCheckout, driver);
+        if (!emailOk) {
+        	//Existe un problema según el cual en ocasiones no se propaga el email desde la página de identificación
+        	AllPagesStpV.backNagegador(driver);
+        	Page1IdentCheckoutStpV.secSoyNuevo.inputEmailAndContinue(emailCheckout, dCtxPago.getFTCkout().emailExist, dCtxSh.appE, dCtxSh.userRegistered, dCtxSh.pais, dCtxSh.channel, driver);
+        }
+        
+        
         HashMap<String, String> datosRegistro = Page2IdentCheckoutStpV.inputDataPorDefecto(dCtxSh.pais, emailCheckout, validaCharNoLatinos, dCtxSh.channel, driver);
         dCtxPago.setDatosRegistro(datosRegistro);
         if (validaCharNoLatinos) {

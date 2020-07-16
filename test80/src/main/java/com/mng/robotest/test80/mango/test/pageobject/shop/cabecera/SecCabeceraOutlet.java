@@ -11,10 +11,10 @@ public abstract class SecCabeceraOutlet extends SecCabecera {
 		super(channel, app, driver);
 	}
 	
-	public static SecCabeceraOutlet getNew(Channel channel, AppEcom app, WebDriver driver) {
+	public static SecCabecera getNew(Channel channel, AppEcom app, WebDriver driver) {
 		switch (channel) {
 		case desktop:
-			return SecCabeceraOutletDesktop.getNew(channel, app, driver);
+			return SecCabeceraShop.getNew(channel, app, driver);
 		case mobile:
 		default:
 			return SecCabeceraOutletMobil.getNew(channel, app, driver);
