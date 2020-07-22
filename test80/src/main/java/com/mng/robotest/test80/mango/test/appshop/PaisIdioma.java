@@ -95,7 +95,7 @@ public class PaisIdioma implements Serializable {
         PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, driver);
         PageHomeMarcasStpV.validateIsPageWithCorrectLineas(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver);
         for (Linea linea : linesToTest) {
-            if (UtilsMangoTest.validarLinea(dCtxSh.pais, linea, dCtxSh.appE)) {
+            if (UtilsMangoTest.validarLinea(dCtxSh.pais, linea, dCtxSh.channel, dCtxSh.appE)) {
                 validaLinea(linea, null, driver);
                 for (Sublinea sublinea : linea.getListSublineas()) {
                     validaLinea(linea, sublinea, driver);

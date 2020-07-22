@@ -63,7 +63,7 @@ public class MenusUserWrapper extends PageObjTM {
 		this.channel = channel;
 		this.app = app;
 		this.secCabecera = SecCabecera.getNew(channel, app, driver);
-		this.secMenuLateralMobil = SecMenuLateralMobil.getNew(app, driver);
+		this.secMenuLateralMobil = new SecMenuLateralMobil(app, driver);
 	}
 	
 	public static MenusUserWrapper getNew(Channel channel, AppEcom app, WebDriver driver) {
@@ -106,7 +106,7 @@ public class MenusUserWrapper extends PageObjTM {
 			secCabecera.hoverIconoBolsa();
 		} else {
 			ElementPage menuElement = getMenu(menu);
-			moveToElement(menuElement.getBy(), driver);
+			moveToElement(menuElement.getBy(app), driver);
 		}
 	}
 	

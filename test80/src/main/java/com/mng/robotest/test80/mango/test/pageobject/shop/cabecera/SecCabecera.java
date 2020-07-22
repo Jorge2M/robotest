@@ -127,7 +127,7 @@ public abstract class SecCabecera extends PageObjTM {
      *              'false' queremos que el menú lateral de móvil se cierre
      */
     public void clickIconoMenuHamburguerMobil(boolean toOpenMenus) {
-    	SecMenuLateralMobil secMenuLateral = SecMenuLateralMobil.getNew(app, driver);
+    	SecMenuLateralMobil secMenuLateral = new SecMenuLateralMobil(app, driver);
         boolean menuVisible = secMenuLateral.isMenuInStateUntil(toOpenMenus, 1);
         int i=0;
         TypeClick typeClick = TypeClick.webdriver;

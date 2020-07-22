@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import javax.xml.bind.annotation.*;
+import java.util.Arrays;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
@@ -15,25 +16,27 @@ public class Linea implements Serializable {
 	private static final long serialVersionUID = -4709433951288421080L;
 
 	public static enum LineaType { 
-    	nuevo("nuevo", "outletN", "nuevo", "nuevo"), 
-    	rebajas("rebajas", "outletR", "rebajas", "rebajas"), 
-    	she("mujer", "outlet", "she", "she"), 
-    	he("hombre", "outletH", "he", "he"), 
-    	nina("ninas", "outletA", "kidsA", "nina"), 
-    	nino("ninos", "outletO", "kidsO", "nino"), 
-    	kids("kids", "outletX", "kids", "kids"), 
-    	violeta("violeta", "outletV", "violeta", "violeta"), 
-    	edits("edits", "outletE", "edits", "edits");
+    	nuevo("nuevo", "outletN", "nuevo", "nuevo", Arrays.asList(Channel.desktop)), 
+    	rebajas("rebajas", "outletR", "rebajas", "rebajas", Arrays.asList(Channel.desktop)), 
+    	she("mujer", "outlet", "she", "she", Arrays.asList(Channel.desktop, Channel.mobile)), 
+    	he("hombre", "outletH", "he", "he", Arrays.asList(Channel.desktop, Channel.mobile)), 
+    	nina("ninas", "outletA", "kidsA", "nina", Arrays.asList(Channel.desktop, Channel.mobile)), 
+    	nino("ninos", "outletO", "kidsO", "nino", Arrays.asList(Channel.desktop, Channel.mobile)), 
+    	kids("kids", "outletX", "kids", "kids", Arrays.asList(Channel.desktop, Channel.mobile)), 
+    	violeta("violeta", "outletV", "violeta", "violeta", Arrays.asList(Channel.desktop, Channel.mobile)), 
+    	edits("edits", "outletE", "edits", "edits", Arrays.asList(Channel.desktop));
     	
     	String literal = "";
     	String sufixOutlet = "";
     	String id2 = "";
     	String id3 = "";
-    	private LineaType(String literal, String sufixOutlet, String id2, String id3) {
+    	List<Channel> channels;
+    	private LineaType(String literal, String sufixOutlet, String id2, String id3, List<Channel> channels) {
     		this.literal = literal;
     		this.sufixOutlet = sufixOutlet;
     		this.id2 = id2;
     		this.id3 = id3;
+    		this.channels = channels;
     	}
     	
     	public String getLiteral() {
@@ -60,6 +63,15 @@ public class Linea implements Serializable {
     	
     	public String getId3() {
     		return this.id3;
+    	}
+    	
+    	public boolean isActiveIn(Channel channel) {
+    		for (Channel channelValid : channels) {
+    			if (channelValid == channel) {
+    				return true;
+    			}
+    		}
+    		return false;
     	}
     	
         public static LineaType getLineaType(String id) {
@@ -184,6 +196,10 @@ public class Linea implements Serializable {
         
     public LineaType getType() {
         return (LineaType.valueOf(getId()));
+    }
+    
+    public boolean isActiveIn(Channel channel) {
+    	return getType().isActiveIn(channel);
     }
         
     @XmlElement(name="sublinea") 

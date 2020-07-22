@@ -283,7 +283,11 @@ public class UtilsMangoTest {
     /**
      * @return indica si se ha de probar o no una determinada línea
      */
-    public static boolean validarLinea(Pais pais, Linea linea, AppEcom app) throws Exception {
+    public static boolean validarLinea(Pais pais, Linea linea, Channel channel, AppEcom app) throws Exception {
+    	if (!linea.isActiveIn(channel)) {
+    		return false;
+    	}
+    	
         //En caso de tratarse de la línea de rebajas miramos si se ha de probar
         if (linea.getType().compareTo(LineaType.rebajas)==0) {
             return validarLineaRebajas(pais);

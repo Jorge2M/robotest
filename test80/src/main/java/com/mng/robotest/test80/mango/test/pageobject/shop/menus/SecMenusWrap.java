@@ -42,7 +42,7 @@ public class SecMenusWrap {
     	this.app = app;
     	this.driver = driver;
     	this.secMenusUser = MenusUserWrapper.getNew(channel, app, driver);
-    	this.secMenuLateralMobil = SecMenuLateralMobil.getNew(app, driver);
+    	this.secMenuLateralMobil = new SecMenuLateralMobil(app, driver);
     	this.secMenusDesktop = SecMenusDesktop.getNew(app, driver);
     }
     
@@ -56,14 +56,14 @@ public class SecMenusWrap {
     
 	public boolean isLineaPresent(LineaType lineaType) {
         if (channel==Channel.mobile) {
-            return secMenuLateralMobil.isLineaPresent(lineaType);
+            return secMenuLateralMobil.getSecLineasMobil().isLineaPresent(lineaType);
         }
         return secMenusDesktop.secMenuSuperior.secLineas.isLineaPresent(lineaType);
     }
     
     public boolean isLineaPresentUntil(LineaType lineaType, int maxSeconds) {
         if (channel==Channel.mobile) {
-            return secMenuLateralMobil.isLineaPresent(lineaType);
+            return secMenuLateralMobil.getSecLineasMobil().isLineaPresent(lineaType);
         }
         return secMenusDesktop.secMenuSuperior.secLineas.isLineaPresentUntil(lineaType, maxSeconds);
     }    
@@ -120,7 +120,7 @@ public class SecMenusWrap {
     
     public void selecLinea(Pais pais, LineaType lineaType) {
         if (channel==Channel.mobile) {
-        	secMenuLateralMobil.selecLinea(pais.getShoponline().getLinea(lineaType));
+        	secMenuLateralMobil.getSecLineasMobil().selectLinea(pais.getShoponline().getLinea(lineaType));
         } else {
         	secMenusDesktop.secMenuSuperior.secLineas.selecLinea(pais, lineaType);
         }
@@ -128,7 +128,7 @@ public class SecMenusWrap {
     
     public void selecSublinea(Pais pais, LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
         if (channel==Channel.mobile) {
-        	secMenuLateralMobil.selectLinea(pais.getShoponline().getLinea(lineaType), sublineaType);
+        	secMenuLateralMobil.getSecLineasMobil().selectLinea(pais.getShoponline().getLinea(lineaType), sublineaType);
         } else {
         	secMenusDesktop.secMenuSuperior.secLineas.selectSublinea(lineaType, sublineaType);
         }

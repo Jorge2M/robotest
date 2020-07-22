@@ -25,7 +25,9 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	final static String TagOrdenacion = "@TagOrden";
 	final static String TagColor = "@TagColor";
 	final static String XPathLinkOrdenWithTag = "//a[text()[contains(.,'" + TagOrdenacion + "')]]";
-	final static String XPathLinkColorWithTag = "//a[@aria-label[contains(.,'" + TagColor + "')]]";
+	final static String XPathLinkColorWithTagOutlet = "//a[@aria-label[contains(.,'" + TagColor + "')]]";
+	final static String XPathLinkColorWithTagShop = 
+			"//label[@for[contains(.,'filter_')] and text()[contains(.,'" + TagColor + "')]]";
 	
 	final PageGaleria pageGaleria;
 	final AppEcom app;
@@ -50,7 +52,10 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	}
 	
 	private String getXPathLinkColor(Color color) {
-		return (XPathLinkColorWithTag.replace(TagColor, color.getNameFiltro()));
+		if (app==AppEcom.outlet) {
+			return (XPathLinkColorWithTagOutlet.replace(TagColor, color.getNameFiltro()));
+		}
+		return (XPathLinkColorWithTagShop.replace(TagColor, color.getNameFiltro()));
 	}
 	
 	@Override

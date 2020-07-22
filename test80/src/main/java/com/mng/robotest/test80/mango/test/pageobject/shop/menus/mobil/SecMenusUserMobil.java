@@ -26,48 +26,59 @@ public class SecMenusUserMobil extends PageObjTM {
 	}
 	
 	public enum MenuUserMobil implements ElementPage {
-		ayuda("//a[@href[contains(.,'/help/')]]"),
-		miscompras("//a[@href[contains(.,'/mypurchases')]]"),
-		pedidos("//a[@href[contains(.,'account/orders')]]"),
-		cerrarsesion("//a[@href[contains(.,'/logout')]]"),
-		favoritos("//a[@href[contains(.,'/favorites')]]"),
-		iniciarsesion("//a[@href[contains(.,'/login?')]]"),
-		registrate("//a[@href[contains(.,'/signup?')]]"),
-		micuenta("//a[@data-label='mi_cuenta']"),
-		mangolikesyou("//a[@href[contains(.,'/mangolikesyou')]]"),
-		cambiopais("//a[@href[contains(.,'/preHome.faces')]]");
+		ayuda("//span[@data-label='ayuda']", "//a[@href[contains(.,'/help/')]]"),
+		miscompras("//span[@data-label='mis-compras']", "//a[@href[contains(.,'/mypurchases')]]"),
+		pedidos("//span[@data-label='pedidos']", "//a[@href[contains(.,'account/orders')]]"),
+		cerrarsesion("//span[@data-label='cerrar_sesion']", "//a[@href[contains(.,'/logout')]]"),
+		favoritos("//span[@data-label='favoritos']", "//a[@href[contains(.,'/favorites')]]"),
+		iniciarsesion("//span[@data-label='iniciar_sesion']", "//a[@href[contains(.,'/login?')]]"),
+		registrate("//span[@data-label='iniciar_sesion']", "//a[@href[contains(.,'/signup?')]]"),
+		micuenta("//span[@data-label='mi_cuenta']", "//a[@data-label='mi_cuenta']"),
+		mangolikesyou("//span[text()[contains(.,'Mango likes you')]]", "//a[@href[contains(.,'/mangolikesyou')]]"),
+		cambiopais("//span[@data-label='cambio_pais']", "//a[@href[contains(.,'/preHome.faces')]]");
 
-		private String XPathCapaMenus = "//ul[@class[contains(.,'menu-section-links')]]";
-		private By by;
-		MenuUserMobil(String xPath) {
-			by = By.xpath(XPathCapaMenus + xPath);
+		private String XPathCapaUserMenusShop = "//ul[@class='menu-section-user-menu-links']";
+		private String XPathCapaMenusOutlet = "//ul[@class[contains(.,'menu-section-links')]]";
+		private By byShop;
+		private By byOutlet;
+		MenuUserMobil(String xPathShop, String xPathOutlet) {
+			byShop = By.xpath(XPathCapaUserMenusShop + xPathShop);
+			byOutlet = By.xpath(XPathCapaMenusOutlet + xPathOutlet);
 		}
 
 		@Override
 		public By getBy() {
-			return by;
+			throw new IllegalArgumentException("Undefined app");
+		}
+		
+		@Override
+		public By getBy(Enum<?> app) {
+			if (app==AppEcom.outlet) {
+				return byOutlet;
+			}
+			return byShop;
 		}
 	}
     
     public boolean isMenuInState(MenuUserMobil menu, State state) throws Exception {
     	secCabecera.clickIconoMenuHamburguerMobil(true);
-    	return (state(state, menu.getBy()).check());
+    	return (state(state, menu.getBy(app)).check());
     }
     
     public boolean isMenuInStateUntil(MenuUserMobil menu, State state, int maxSeconds) {
     	secCabecera.clickIconoMenuHamburguerMobil(true);
-    	return (state(state, menu.getBy()).wait(maxSeconds).check());
+    	return (state(state, menu.getBy(app)).wait(maxSeconds).check());
     }
     
     public void clickMenu(MenuUserMobil menu) {
     	secCabecera.clickIconoMenuHamburguerMobil(true);
-    	click(menu.getBy()).exec();
+    	click(menu.getBy(app)).exec();
     }
 
     public boolean clickMenuIfinState(MenuUserMobil menu, State stateExpected) throws Exception {
     	secCabecera.clickIconoMenuHamburguerMobil(true);
         if (isMenuInState(menu, stateExpected)) {
-        	moveToElement(menu.getBy(), driver);
+        	moveToElement(menu.getBy(app), driver);
             clickMenu(menu);
             return true;
         }
@@ -76,7 +87,7 @@ public class SecMenusUserMobil extends PageObjTM {
     
     public void MoveAndclickMenu(MenuUserMobil menu) throws Exception {
     	secCabecera.clickIconoMenuHamburguerMobil(true);
-    	moveToElement(menu.getBy(), driver);
+    	moveToElement(menu.getBy(app), driver);
         clickMenu(menu);
     }
 

@@ -24,7 +24,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.landing.PageLanding;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDesktop;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil.TypeLocator;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
@@ -41,7 +40,7 @@ public class SecMenuLateralMobilStpV {
 	private SecMenuLateralMobilStpV(AppEcom app, WebDriver driver) {
 		this.app = app;
 		this.driver = driver;
-		secMenuLateral = SecMenuLateralMobil.getNew(app, driver);
+		secMenuLateral = new SecMenuLateralMobil(app, driver);
 	}
 	
 	public static SecMenuLateralMobilStpV getNew(AppEcom app, WebDriver driver) {
@@ -85,50 +84,6 @@ public class SecMenuLateralMobilStpV {
 		PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, menu.getLinea(), analyticSet, driver);
 	}
 
-    /**
-     * Selección de las líneas de Móvil con 'Carrusels' (básicamente las líneas 'Nuevo' y 'Rebajas')
-     */
-    @Step (
-    	description="Realizar click sobre la línea <b>#{lineaConCarrusels}</b>",
-        expected="Aparecen los sublinks de #{lineaConCarrusels} correspondientes según el país")
-    public void navClickLineaAndCarrusels(LineaType lineaConCarrusels, Pais pais) throws Exception {
-    	SecMenusWrap secMenus = SecMenusWrap.getNew(Channel.mobile, app, driver);    	
-        secMenus.selecLinea(pais, lineaConCarrusels); 
-        validaSelecLinea(pais, lineaConCarrusels, null);
-        navSelectCarrusels(lineaConCarrusels, pais);
-    }
-
-    /**
-     * Seleccionamos todos los sublinks de las líneas de móvil con 'carrusels' (nuevo u ofertas de momento)
-     */
-    public void navSelectCarrusels(LineaType lineaConCarrusels, Pais pais) throws Exception {
-        for (Linea linea : pais.getShoponline().getLineasToTest(app)) {
-            LineaType lineaDelPais = linea.getType();
-            switch (lineaConCarrusels) {
-            case rebajas:
-                if (secMenuLateral.isSublineaRebajasAssociated(lineaDelPais)) {
-                    selectSublineaRebajas(pais.getShoponline().getLinea(LineaType.rebajas), lineaDelPais);
-                }
-                break;
-            case nuevo:
-                if (secMenuLateral.isCarruselNuevoAssociated(lineaDelPais)) {
-                    selectCarruselNuevo(pais.getShoponline().getLinea(LineaType.nuevo), lineaDelPais);
-                }
-                break;
-            default:
-                break;
-            }
-        }
-    }
-    
-    @Step (
-    	description="Seleccionar el carrusel \"nuevo\" asociado a la línea #{lineaType}",
-        expected="Aparece la página de nuevo asociada a la línea #{lineaType}")
-    public void selectCarruselNuevo(Linea lineaNuevo, LineaType lineaType) {
-    	secMenuLateral.clickCarruselNuevo(lineaNuevo, lineaType);
-        checkGaleriaAfterSelectNuevo();
-    }
-
 	@Validation
 	private ChecksTM checkGaleriaAfterSelectNuevo() {
 		ChecksTM validations = ChecksTM.getNew();
@@ -140,21 +95,6 @@ public class SecMenuLateralMobilStpV {
 
 		return validations;   
 	}
-
-    @Step (
-    	description="Seleccionar la sublínea de \"rebajas\" <b>#{lineaType}</b>",
-        expected="Aparece la capa de menús asociada a la sublínea #{lineaType}")
-    public void selectSublineaRebajas(Linea lineaRebajas, LineaType lineaType) throws Exception {
-    	secMenuLateral.clickSublineaRebajas(lineaRebajas, lineaType);
-        checkIsVisibleSubmenusLinea(lineaType);
-    }
-    
-    @Validation (
-    	description="Se hace visible una capa de submenús asociada a #{lineaType}",
-    	level=State.Defect)
-    private boolean checkIsVisibleSubmenusLinea(LineaType lineaType) {
-	    return (secMenuLateral.isVisibleMenuSublineaRebajas(lineaType));
-    }
     
     @Step (
     	description=
@@ -162,7 +102,7 @@ public class SecMenuLateralMobilStpV {
     		"<b style=\"color:brown;\">#{lineaType.getNameUpper()}</b>",
         expected="Aparece la página correcta asociada a la línea #{lineaType.getNameUpper()}")
     public void seleccionLinea(LineaType lineaType, Pais pais) throws Exception {
-    	secMenuLateral.selecLinea(pais.getShoponline().getLinea(lineaType)); 
+    	secMenuLateral.getSecLineasMobil().selectLinea(pais.getShoponline().getLinea(lineaType)); 
         validaSelecLinea(pais, lineaType, null);
     }    
     
@@ -172,7 +112,9 @@ public class SecMenuLateralMobilStpV {
     		"<b style=\"color:brown;\">#{lineaType.name()} / #{sublineaType.getNameUpper()}</b>",
         expected="Aparece la página correcta asociada a la línea/sublínea")
     public void seleccionSublineaNinos(LineaType lineaType, SublineaNinosType sublineaType, Pais pais) throws Exception {
-    	secMenuLateral.selecSublineaNinosIfNotSelected(pais.getShoponline().getLinea(lineaType), sublineaType);
+    	secMenuLateral
+    		.getSecLineasMobil()
+    		.selecSublineaNinosIfNotSelected(pais.getShoponline().getLinea(lineaType), sublineaType);
         validaSelecLinea(pais, lineaType, sublineaType);
     }
     
@@ -187,12 +129,6 @@ public class SecMenuLateralMobilStpV {
         }
         
         switch (typeContent) {
-        case bloquesnuevo:
-            validaSelectLineaNuevoWithCarrusels(pais);
-            break;
-        case bloquesrebaj:
-            validaSelectLineaRebajasWithSublineas(pais);
-            break;
         case menus2:
             validaSelecLineaWithMenus2onLevelAssociated(lineaType, sublineaType);
             break;
@@ -205,60 +141,19 @@ public class SecMenuLateralMobilStpV {
             pageGaleriaStpV.validaArtEnContenido(maxSeconds);
             break;
         default:
-            break;
+        	throw new IllegalArgumentException("TypeContent " + typeContent + " not valid for channel mobil");
         }
-    }
-    
-    @Validation
-    public ChecksTM validaSelectLineaNuevoWithCarrusels(Pais pais) {
-    	ChecksTM validations = ChecksTM.getNew();
-    	
-        String listCarrusels = "";
-        boolean carruselsOk = true;
-        for (Linea linea : pais.getShoponline().getLineasToTest(app)) {
-            if (secMenuLateral.isCarruselNuevoAssociated(linea.getType())) {
-                listCarrusels+=(linea.getType() + " ");
-                if (!secMenuLateral.isCarruselNuevoVisible(linea.getType())) {
-                    carruselsOk=false;     
-                }
-            }
-        }
-	 	validations.add(
-			"Aparecen los carrusels asociados a la linea de " + LineaType.nuevo + " (<b>" + listCarrusels + "</b>)",
-			carruselsOk, State.Warn);  
-	 	
-	 	return validations;
     }
         
-    @Validation
-    public ChecksTM validaSelectLineaRebajasWithSublineas(Pais pais) {
-    	ChecksTM validations = ChecksTM.getNew();
-        String listSublineas = "";
-        boolean isSublineasOk = true;
-        for (Linea linea : pais.getShoponline().getLineasToTest(app)) {
-            if (secMenuLateral.isSublineaRebajasAssociated(linea.getType())) {
-                listSublineas+=(linea.getType() + " ");
-                if (!secMenuLateral.isSublineaRebajasVisible(linea.getType())) {
-                    isSublineasOk = false;      
-                }
-            }
-        }
-	 	validations.add(
-			"Aparecen las sublíneas asociados a la linea de " + LineaType.rebajas + "(<b>" + listSublineas + "</b>)",
-			isSublineasOk, State.Warn);
-    	
-	 	return validations;
-    }
-     
     @Validation
     public ChecksTM validaSelecLineaNinosWithSublineas(LineaType lineaNinosType) {
     	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Está seleccionada la línea <b>" + lineaNinosType + "</b>",
-			secMenuLateral.isSelectedLinea(lineaNinosType), State.Warn);
+			secMenuLateral.getSecLineasMobil().isSelectedLinea(lineaNinosType), State.Warn);
 	 	validations.add(
 			"Es visible el bloque con las sublíneas de " + lineaNinosType,
-			secMenuLateral.isVisibleBlockSublineasNinos(lineaNinosType), State.Warn);
+			secMenuLateral.getSecLineasMobil().isVisibleBlockSublineasNinos(lineaNinosType), State.Warn);
 	 	return validations;
     }
     
@@ -267,7 +162,7 @@ public class SecMenuLateralMobilStpV {
     	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Está seleccionada la línea <b>" + lineaType + "</b>",
-			secMenuLateral.isSelectedLinea(lineaType), State.Warn);
+			secMenuLateral.getSecLineasMobil().isSelectedLinea(lineaType), State.Warn);
 	 	validations.add(
 			"Son visibles links de Menú de 2o nivel",
 			secMenuLateral.isMenus2onLevelDisplayed(sublineaType), State.Warn);

@@ -75,27 +75,29 @@ public class SecMenusWrapperStpV {
         ChecksTM validations = ChecksTM.getNew();
         LineaType[] lineasToTest = Linea.LineaType.values();
         for (LineaType lineaType : lineasToTest) {
-            ThreeState stateLinea = pais.getShoponline().stateLinea(lineaType, app);
-            if ( stateLinea!=ThreeState.UNKNOWN &&
-                (lineaType!=LineaType.rebajas || UtilsMangoTest.validarLineaRebajas(pais))) {
-                ThreeState apareceLinea = stateLinea;
-                
-                //Caso especial de un país con una sóla línea de she -> No ha de aparecer la línea de she
-                if (lineaType==LineaType.she && app!=AppEcom.outlet && pais.getShoponline().getNumLineasTiendas(app)==1) {
-                    apareceLinea = ThreeState.FALSE;
-                }
-                
-                boolean isLineaPresent = secMenusWrap.isLineaPresent(lineaType);
-                if (apareceLinea==ThreeState.TRUE) {
-            		validations.add (
-        				"<b>Sí</b> aparece el link de la línea <b>" + lineaType + "</b>",
-        				isLineaPresent, State.Warn);
-                } else {
-            		validations.add (
-            			"<b>No</b> aparece el link de la línea <b>" + lineaType + "</b>",
-            			!isLineaPresent, State.Warn);
-                }
-            }
+        	if (lineaType.isActiveIn(channel)) {
+	            ThreeState stateLinea = pais.getShoponline().stateLinea(lineaType, app);
+	            if ( stateLinea!=ThreeState.UNKNOWN &&
+	                (lineaType!=LineaType.rebajas || UtilsMangoTest.validarLineaRebajas(pais))) {
+	                ThreeState apareceLinea = stateLinea;
+	                
+	                //Caso especial de un país con una sóla línea de she -> No ha de aparecer la línea de she
+	                if (lineaType==LineaType.she && app!=AppEcom.outlet && pais.getShoponline().getNumLineasTiendas(app)==1) {
+	                    apareceLinea = ThreeState.FALSE;
+	                }
+	                
+	                boolean isLineaPresent = secMenusWrap.isLineaPresent(lineaType);
+	                if (apareceLinea==ThreeState.TRUE) {
+	            		validations.add (
+	        				"<b>Sí</b> aparece el link de la línea <b>" + lineaType + "</b>",
+	        				isLineaPresent, State.Warn);
+	                } else {
+	            		validations.add (
+	            			"<b>No</b> aparece el link de la línea <b>" + lineaType + "</b>",
+	            			!isLineaPresent, State.Warn);
+	                }
+	            }
+        	}
         }
             
         return validations;
@@ -161,7 +163,7 @@ public class SecMenusWrapperStpV {
     
     public void navSeleccionaCarruselsLinea(Pais pais, LineaType lineaNuevoOReb) throws Exception {
         if (channel==Channel.mobile) {
-            secMenuLateralMobilStpV.navClickLineaAndCarrusels(lineaNuevoOReb, pais);
+            //secMenuLateralMobilStpV.navClickLineaAndCarrusels(lineaNuevoOReb, pais);
         } else {
             secMenusDesktopStpV.stepValidaCarrusels(lineaNuevoOReb);
         }
