@@ -128,6 +128,7 @@
 <!ENTITY TPV-360 "<tpv id='360' clase='GMOVisa'            estado='0'   notificaciones='n'/>">
 <!ENTITY TPV-361 "<tpv id='361' clase='GMODiners'          estado='0'   notificaciones='n'/>">
 <!ENTITY TPV-362 "<tpv id='362' clase='GMO'                estado='0'   notificaciones='n'/>">
+<!ENTITY TPV-364 "<tpv id='364' clase='ProcessOut'         estado='0'   notificaciones='n'/>">
 <!ENTITY TPV-390 "<tpv id='390' clase='Falcon'             estado='0;4' notificaciones='s'/>">
 <!ENTITY TPV-393 "<tpv id='393' clase='Falcon'             estado='0;4' notificaciones='s'/>">
 <!ENTITY TPV-394 "<tpv id='394' clase='Falcon'             estado='0;4' notificaciones='s'/>">
@@ -1009,9 +1010,11 @@
 <pago 
 	type="Sepa" tiendas="shop,outlet" empleado="n"
 	nombre="SEPA" testpasarela='s' testpago='s' numtarj="DE89370400440532013000">&TPV-050;</pago>
+<!-- 
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet" empleado="n"
-	nombre="BANKÜBERWEISUNG" namefilter="BANKUBERWEISUNG" testpasarela='s' testpago='s'>&TPV-107;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
+	nombre="BANKÜBERWEISUNG" namefilter="BANKUBERWEISUNG" testpasarela='s' testpago='s'>&TPV-107;</pago>
+-->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="10" anycad="2020" cvc="7373">&TPV-555;</pago>
@@ -5200,14 +5203,14 @@
 	type="storecredit" tiendas="shop"
 	nombre="STORECREDIT" testpasarela='s' testpago='s'>&TPV-803;</pago> <!-- Pago Store Credit que aparece cuando el usuario tiene Saldo en Cuenta (y desaparecen el resto de métodos de pago)-->
 <pago 
-	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="10" anycad="2020" cvc="737">&TPV-500;</pago>
+	type="ProcessOut" tiendas="shop,outlet"
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4242424242424242" mescad="10" anycad="2020" cvc="100">&TPV-500;</pago>
 <pago 
-	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="10" anycad="2020" cvc="737" usrd3d="user" passd3d="password">&TPV-500;</pago>
+	type="ProcessOut" tiendas="shop,outlet"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5436031030606378" mescad="10" anycad="2020" cvc="257" usrd3d="user" passd3d="password">&TPV-500;</pago>
 <pago 
-	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA ELECTRON" testpasarela='n'>&TPV-500;</pago>
+	type="ProcessOut" tiendas="shop,outlet"
+	nombre="Mada" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4242424242424242" mescad="10" anycad="2020" cvc="100">&TPV-364;</pago>
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-161;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
@@ -5513,6 +5516,9 @@
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
+<pago 
+	type="storecredit" tiendas="shop"
+	nombre="STORECREDIT" testpasarela='s' testpago='s'>&TPV-803;</pago> <!-- Pago Store Credit que aparece cuando el usuario tiene Saldo en Cuenta (y desaparecen el resto de métodos de pago)-->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="10" anycad="2020" cvc="737">&TPV-501;</pago>

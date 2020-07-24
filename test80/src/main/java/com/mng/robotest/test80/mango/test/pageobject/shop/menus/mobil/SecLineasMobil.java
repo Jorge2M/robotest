@@ -113,7 +113,8 @@ public abstract class SecLineasMobil extends PageObjTM {
 			xpathSublineaWithFlagOpen+="/..";
 		}
 		if (state(Present, By.xpath(xpathSublineaWithFlagOpen)).check()) {
-			return (driver.findElement(By.xpath(xpathSublineaWithFlagOpen)).getAttribute("class").contains("open"));
+			String classDropdown = driver.findElement(By.xpath(xpathSublineaWithFlagOpen)).getAttribute("class");
+			return (classDropdown.contains("open") || classDropdown.contains("-up"));
 		}
 		return false;
 	}

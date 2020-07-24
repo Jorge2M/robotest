@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
+package com.mng.robotest.test80.mango.test.stpv.shop.miscompras;
 
 import org.openqa.selenium.WebDriver;
 
@@ -12,30 +12,29 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraOnline;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraTienda;
-import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisCompras;
-import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisCompras.TypeCompra;
-import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.SecDetalleCompraTienda;
-import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.SecQuickViewArticulo;
-import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalDetalleMisCompras;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.ModalDetalleMisComprasShop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisComprasShop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.SecDetalleCompraTiendaShop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.SecQuickViewArticuloShop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisComprasShop.TypeCompra;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
-import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalDetalleMisComprasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageDetallePedidoStpV;
 
 public class PageMisComprasStpV {
 	
 	private final WebDriver driver;
-    private final PageMisCompras pageMisCompras;
+    private final PageMisComprasShop pageMisCompras;
     private final SecDetalleCompraTiendaStpV secDetalleCompraTiendaStpV; 
     private final SecQuickViewArticuloStpV secQuickViewArticuloStpV;
     private final ModalDetalleMisComprasStpV modalDetalleMisComprasStpV;
     
     private PageMisComprasStpV(Channel channel, WebDriver driver) {
     	this.driver = driver;
-    	this.pageMisCompras = PageMisCompras.getNew(channel, driver);
-    	SecDetalleCompraTienda secDetalle = pageMisCompras.getSecDetalleCompraTienda();
-    	SecQuickViewArticulo secQuickView = pageMisCompras.getSecQuickViewArticulo();
-    	ModalDetalleMisCompras modalDetalle = pageMisCompras.getModalDetalleMisCompras();
+    	this.pageMisCompras = PageMisComprasShop.getNew(channel, driver);
+    	SecDetalleCompraTiendaShop secDetalle = pageMisCompras.getSecDetalleCompraTienda();
+    	SecQuickViewArticuloShop secQuickView = pageMisCompras.getSecQuickViewArticulo();
+    	ModalDetalleMisComprasShop modalDetalle = pageMisCompras.getModalDetalleMisCompras();
     	this.secDetalleCompraTiendaStpV = SecDetalleCompraTiendaStpV.getNew(secDetalle, channel);
     	this.secQuickViewArticuloStpV = SecQuickViewArticuloStpV.getNew(secQuickView);
     	this.modalDetalleMisComprasStpV = ModalDetalleMisComprasStpV.getNew(modalDetalle, driver);

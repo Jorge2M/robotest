@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.pageobject.shop.micuenta;
+package com.mng.robotest.test80.mango.test.pageobject.shop.miscompras;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,7 +8,7 @@ import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class SecDetalleCompraTienda extends PageObjTM {
+public class SecDetalleCompraTiendaShop extends PageObjTM {
 	
     private static String XPathDataTicket = "//div[@class[contains(.,'ticket-container')]]";
     private static String XPathNumTicket = XPathDataTicket + "//div[@class='info']/p[1]";  
@@ -17,11 +17,11 @@ public class SecDetalleCompraTienda extends PageObjTM {
     private static String XPathCodigoBarrasImg = XPathDataTicket + "//div[@class='code']/img";
     private static String XPathArticulo = "//div[@onclick[contains(.,'openProductDetails')]]";
     
-    private SecDetalleCompraTienda(WebDriver driver) {
+    private SecDetalleCompraTiendaShop(WebDriver driver) {
     	super(driver);
     }
-    public static SecDetalleCompraTienda getNew(WebDriver driver) {
-    	return new SecDetalleCompraTienda(driver);
+    public static SecDetalleCompraTiendaShop getNew(WebDriver driver) {
+    	return new SecDetalleCompraTiendaShop(driver);
     }
     
     private String getXPathArticulo(int posArticulo) {

@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
+package com.mng.robotest.test80.mango.test.stpv.shop.miscompras;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
@@ -8,18 +8,18 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraTienda;
-import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.SecDetalleCompraTienda;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.SecDetalleCompraTiendaShop;
 
 public class SecDetalleCompraTiendaStpV {
 	
 	private final Channel channel;
-	private final SecDetalleCompraTienda secDetalleCompraTienda;
+	private final SecDetalleCompraTiendaShop secDetalleCompraTienda;
 	
-	private SecDetalleCompraTiendaStpV(SecDetalleCompraTienda section, Channel channel) {
+	private SecDetalleCompraTiendaStpV(SecDetalleCompraTiendaShop section, Channel channel) {
 		this.secDetalleCompraTienda = section;
 		this.channel = channel;
 	}
-	public static SecDetalleCompraTiendaStpV getNew(SecDetalleCompraTienda section, Channel channel) {
+	public static SecDetalleCompraTiendaStpV getNew(SecDetalleCompraTiendaShop section, Channel channel) {
 		return new SecDetalleCompraTiendaStpV(section, channel);
 	}
 	

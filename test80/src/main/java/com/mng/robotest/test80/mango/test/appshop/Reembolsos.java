@@ -44,8 +44,8 @@ public class Reembolsos {
     //TODO mientras que tengamos problemas con el buscador en Arabia probaremos contra España
 //    private final static Pais arabia = PaisGetter.get(PaisShop.España);
 //    private final static IdiomaPais arabia_arabe = arabia.getListIdiomas().get(0);
-	private final static Pais arabia = PaisGetter.get(PaisShop.SaudiArabia);
-	private final static IdiomaPais arabia_arabe = arabia.getListIdiomas().get(0);
+	private final static Pais emiratos = PaisGetter.get(PaisShop.UnitedArabEmirates);
+	private final static IdiomaPais emiratos_arabe = emiratos.getListIdiomas().get(0);
     
     private DataCtxShop getCtxShForTest() throws Exception {
     	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
@@ -53,8 +53,8 @@ public class Reembolsos {
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());
         //dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
-        dCtxSh.pais = arabia;
-        dCtxSh.idioma = arabia_arabe;
+        dCtxSh.pais = emiratos;
+        dCtxSh.idioma = emiratos_arabe;
         return dCtxSh;
     }
 	

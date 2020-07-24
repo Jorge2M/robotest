@@ -12,6 +12,7 @@ public class TiendaMantoEnum {
 		RusiaShop ("Rusia", "075", AppEcom.shop),
 		RusiaOutlet ("Outlet Rusia", "075", AppEcom.outlet),
 		TurquiaShop ("Turquía Estambul", "052", AppEcom.shop),
+		AlhokairShop("Alhokair", "632", AppEcom.shop),
 		TurquiaOutlet ("Outlet Turquia", "052", AppEcom.outlet),
 		ChinaShop ("China Shangai", "720", AppEcom.shop),
 		ColombiaShop ("Colombia", "480", AppEcom.shop),

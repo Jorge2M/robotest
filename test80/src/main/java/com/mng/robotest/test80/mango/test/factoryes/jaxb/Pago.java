@@ -45,6 +45,7 @@ public class Pago implements Serializable {
         KoreanCreditCard,
         ContraReembolso,
         Bancontact,
+        ProcessOut,
         Yandex,
         StoreCredit, 
         TpvVotf
@@ -158,6 +159,8 @@ public class Pago implements Serializable {
             return TypePago.Yandex;                
         case "storecredit":
             return TypePago.StoreCredit;
+        case "ProcessOut":
+            return TypePago.ProcessOut;
         case "tpvvotf":
             return TypePago.TpvVotf;
         default:

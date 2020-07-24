@@ -19,6 +19,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIde
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper.LoyaltyData;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper.UserMenu;
+import com.mng.robotest.test80.mango.test.pageobject.shop.registro.PageRegistroIni;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
@@ -59,25 +60,27 @@ public class SecMenusUserStpV {
 	
 	@Step (
 		description="Seleccionar el menú de usuario \"Favoritos\"", 
-        expected="Aparece la página de gestión de favoritos con los artículos correctos")
-    public void selectFavoritos(DataFavoritos dataFavoritos) throws Exception {
+		expected="Aparece la página de gestión de favoritos con los artículos correctos")
+	public void selectFavoritos(DataFavoritos dataFavoritos) throws Exception {
 		userMenus.clickMenuAndWait(UserMenu.favoritos);
 		PageFavoritosStpV pageFavoritosStpV = PageFavoritosStpV.getNew(driver);
 		pageFavoritosStpV.validaIsPageOK(dataFavoritos);
-    }
-    
+	}
+
 	@Step (
-		description="Seleccionar el menú de usuario \"Regístrate\"", 
-        expected="Aparece al página inicial del registro",
-        saveHtmlPage=SaveWhen.Always)
-    public void selectRegistrate(DataCtxShop dCtxSh) throws Exception {
-		userMenus.clickMenuAndWait(UserMenu.registrate);    
-        int maxSeconds = 5;
-        PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(driver);
-        pageRegistroIniStpV.validaIsPageUntil(maxSeconds);
-        pageRegistroIniStpV.validaIsRGPDVisible(dCtxSh);
-    }
-    
+		description="Seleccionar el menú de usuario \"Regístrate\" y la pestaña \"Regístrate\"", 
+		expected="Aparece al página inicial del registro",
+		saveHtmlPage=SaveWhen.Always)
+	public void selectRegistrate(DataCtxShop dCtxSh) throws Exception {
+		userMenus.clickMenuAndWait(UserMenu.registrate);
+		PageRegistroIni pageRegistroIni = PageRegistroIni.getNew(driver);  
+		pageRegistroIni.clickRegisterTab(driver);
+		
+		PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(driver);
+		pageRegistroIniStpV.validaIsPageUntil(5);
+		pageRegistroIniStpV.validaIsRGPDVisible(dCtxSh);
+	}
+
 	@Step (
 		description="Clicar el link de Cerrar Sesión", 
         expected="Aparece el link de login")

@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.pageobject.shop.modales;
+package com.mng.robotest.test80.mango.test.pageobject.shop.miscompras;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +9,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class ModalDetalleMisCompras extends PageObjTM {
+public class ModalDetalleMisComprasShop extends PageObjTM {
 
 	private final Channel channel;
 	
@@ -20,12 +20,12 @@ public class ModalDetalleMisCompras extends PageObjTM {
     private static String XPathLinkToMisComprasDesktop = "//div[@class[contains(.,'shopping-breadcrumbs')]]";
     private static String XPathLinkToMisComprasMobil = "//div[@class[contains(.,'iconBack')]]";
     
-    private ModalDetalleMisCompras(Channel channel, WebDriver driver) {
+    private ModalDetalleMisComprasShop(Channel channel, WebDriver driver) {
     	super(driver);
     	this.channel = channel;
     }
-    public static ModalDetalleMisCompras getNew(Channel channel, WebDriver driver) {
-    	return new ModalDetalleMisCompras(channel, driver);
+    public static ModalDetalleMisComprasShop getNew(Channel channel, WebDriver driver) {
+    	return new ModalDetalleMisComprasShop(channel, driver);
     }
     
 	private String getXPathLinkToMisCompras() {

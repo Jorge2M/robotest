@@ -16,6 +16,7 @@ import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
 import com.mng.robotest.test80.mango.test.pageobject.shop.AllPages;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.DataBanner;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.ManagerBannersScreen;
+import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.landing.PageLanding;
 import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
 import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
@@ -81,7 +82,7 @@ public class SecBannersStpV {
                 break;
             default:                
             case Otros:
-                validacionesBannerEstandar(app);
+                validacionesBannerEstandar(channel, app);
                 break;
             }
         }
@@ -117,26 +118,34 @@ public class SecBannersStpV {
 	 		uriPagPadre.getHost().compareTo(uriPagActual.getHost())==0, State.Defect);    
 	 	
 	 	return validations;
-    }
-    
-    @Validation (
-    	description="Aparece una página con secciones, galería, banners, bloque de contenido con imágenes o página acceso",
-    	level=State.Warn)
-    public boolean validacionesBannerEstandar(AppEcom app) throws Exception {
-        if (!pageLanding.haySecc_Art_Banners(app)) {
-            return (pageLanding.hayImgsEnContenido());
-        }
-        
-        return true; 
-    }
-    
-    @Validation (
-    	description="El bloque de contenido (homeContent o bannerHome) existe y tiene >= 1 banner o >=1 map o >=1 items-edit",
-    	level=State.Warn)
-    public boolean validaBannEnContenido() {
-        boolean existBanners = managerBannersScreen.existBanners();
-        boolean existsMaps = pageLanding.hayMaps();
-        boolean existsEditItems = pageLanding.hayItemsEdits();
-        return (existBanners || existsMaps || existsEditItems);
-    }
+	}
+
+	@Validation (
+		description=
+			"Aparece una página con alguno de los siguientes elementos:<br>" + 
+			"- Secciones<br>" + 
+			"- Galería<br>" + 
+			"- Banners<br>" + 
+			"- Ficha<br>" +
+			"- Bloque de contenido con imágenes o página acceso",
+		level=State.Warn)
+	public boolean validacionesBannerEstandar(Channel channel, AppEcom app) throws Exception {
+		if (!pageLanding.haySecc_Art_Banners(app)) {
+			if (!pageLanding.hayImgsEnContenido()) {
+				PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
+				return pageFicha.isPageUntil(0);
+			}
+		}
+		return true; 
+	}
+
+	@Validation (
+		description="El bloque de contenido (homeContent o bannerHome) existe y tiene >= 1 banner o >=1 map o >=1 items-edit",
+		level=State.Warn)
+	public boolean validaBannEnContenido() {
+		boolean existBanners = managerBannersScreen.existBanners();
+		boolean existsMaps = pageLanding.hayMaps();
+		boolean existsEditItems = pageLanding.hayItemsEdits();
+		return (existBanners || existsMaps || existsEditItems);
+	}
 }

@@ -96,7 +96,10 @@ public class FactoryPagos {
             break;
         case Bancontact:
             pagoMaked = new PagoBancontact(dCtxSh, dCtxPago, driver);
-            break;            
+            break;
+        case ProcessOut:
+        	pagoMaked = new PagoProcessOut(dCtxSh, dCtxPago, driver);
+        	break;
         case TpvVotf:
             pagoMaked = new PagoTpvVotf(dCtxSh, dCtxPago, driver);
             break;

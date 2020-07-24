@@ -21,6 +21,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
+import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalNewsLetterAfterAccess;
 import com.mng.robotest.test80.mango.test.pageobject.utils.LocalStorage;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
 //import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
@@ -217,6 +218,7 @@ public class PagePrehome {
         TestABactive.currentTestABsToActivate(dCtxSh.channel, dCtxSh.appE, driver);
         PagePrehome.selecPaisIdiomaYAccede(dCtxSh, driver);
         ModalLoyaltyAfterAccess.closeModalIfVisible(driver);
+        //ModalNewsLetterAfterAccess.closeModalIfVisible(driver);
         if (dCtxSh.channel==Channel.mobile) {
         	SecCabeceraOutletMobil secCabecera = (SecCabeceraOutletMobil)SecCabeceraOutletMobil.getNew(Channel.mobile, dCtxSh.appE, driver);
         	secCabecera.closeSmartBannerIfExistsMobil();

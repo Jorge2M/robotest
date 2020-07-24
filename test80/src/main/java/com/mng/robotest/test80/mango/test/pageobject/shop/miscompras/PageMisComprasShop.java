@@ -1,24 +1,24 @@
-package com.mng.robotest.test80.mango.test.pageobject.shop.micuenta;
+package com.mng.robotest.test80.mango.test.pageobject.shop.miscompras;
 
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-//import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalDetalleMisCompras;
+
+import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraOnline;
+import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraTienda;
 
 
-public class PageMisCompras extends PageObjTM {
+public class PageMisComprasShop extends PageMisCompras {
     
-    private final SecDetalleCompraTienda secDetalleCompraTienda;
-    private final SecQuickViewArticulo secQuickViewArticulo;
-    private final ModalDetalleMisCompras modalDetalleMisCompras;
+    private final SecDetalleCompraTiendaShop secDetalleCompraTienda;
+    private final SecQuickViewArticuloShop secQuickViewArticulo;
+    private final ModalDetalleMisComprasShop modalDetalleMisCompras;
     
     private final Channel channel;
     
@@ -34,24 +34,24 @@ public class PageMisCompras extends PageObjTM {
     static String XPathArticuloMasInfo = "//div[@class='small-box-container']";
     static String XPathReferenciaArticulo = XPathArticuloMasInfo + "//div[@class='reference']";
     
-    private PageMisCompras(Channel channel, WebDriver driver) {
+    private PageMisComprasShop(Channel channel, WebDriver driver) {
     	super(driver);
     	this.channel = channel;
-        this.secDetalleCompraTienda = SecDetalleCompraTienda.getNew(driver);
-        this.secQuickViewArticulo = SecQuickViewArticulo.getNew(driver);
-        this.modalDetalleMisCompras = ModalDetalleMisCompras.getNew(channel, driver);
+        this.secDetalleCompraTienda = SecDetalleCompraTiendaShop.getNew(driver);
+        this.secQuickViewArticulo = SecQuickViewArticuloShop.getNew(driver);
+        this.modalDetalleMisCompras = ModalDetalleMisComprasShop.getNew(channel, driver);
     }
-    public static PageMisCompras getNew(Channel channel, WebDriver driver) {
-    	return new PageMisCompras(channel, driver);
+    public static PageMisComprasShop getNew(Channel channel, WebDriver driver) {
+    	return new PageMisComprasShop(channel, driver);
     }
     
-    public SecDetalleCompraTienda getSecDetalleCompraTienda() {
+    public SecDetalleCompraTiendaShop getSecDetalleCompraTienda() {
     	return this.secDetalleCompraTienda;
     }
-    public SecQuickViewArticulo getSecQuickViewArticulo() {
+    public SecQuickViewArticuloShop getSecQuickViewArticulo() {
     	return this.secQuickViewArticulo;
     }
-    public ModalDetalleMisCompras getModalDetalleMisCompras() {
+    public ModalDetalleMisComprasShop getModalDetalleMisCompras() {
     	return this.modalDetalleMisCompras;
     }
     

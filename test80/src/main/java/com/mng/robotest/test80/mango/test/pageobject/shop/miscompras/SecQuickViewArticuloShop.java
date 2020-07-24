@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.pageobject.shop.micuenta;
+package com.mng.robotest.test80.mango.test.pageobject.shop.miscompras;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +7,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecQuickViewArticulo extends PageObjTM {
+public class SecQuickViewArticuloShop extends PageObjTM {
 	
     private static String XPathContainerItem = "//div[@class='container-item']";
     private static String XPathContainerDescription = XPathContainerItem + "//div[@class[contains(.,'container-description-title')]]";
@@ -15,11 +15,11 @@ public class SecQuickViewArticulo extends PageObjTM {
     private static String XPathNombre = XPathContainerDescription + "//li[1]";
     private static String XPathPrecio = XPathContainerDescription + "//ul/li[2]";
     
-	private SecQuickViewArticulo(WebDriver driver) {
+	private SecQuickViewArticuloShop(WebDriver driver) {
 		super(driver);
 	}
-	public static SecQuickViewArticulo getNew(WebDriver driver) {
-		return new SecQuickViewArticulo(driver);
+	public static SecQuickViewArticuloShop getNew(WebDriver driver) {
+		return new SecQuickViewArticuloShop(driver);
 	}
     
     public boolean isVisibleUntil(int maxSeconds) {

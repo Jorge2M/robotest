@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.stpv.shop.modales;
+package com.mng.robotest.test80.mango.test.stpv.shop.miscompras;
 
 
 import org.openqa.selenium.WebDriver;
@@ -7,19 +7,19 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.ModalDetalleMisComprasShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalBuscadorTiendasMisCompras;
-import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalDetalleMisCompras;
 
 public class ModalDetalleMisComprasStpV {
     
 	private final WebDriver driver;
-	private final ModalDetalleMisCompras modalDetalleMisCompras;
+	private final ModalDetalleMisComprasShop modalDetalleMisCompras;
 	
-	private ModalDetalleMisComprasStpV(ModalDetalleMisCompras modalObject, WebDriver driver) {
+	private ModalDetalleMisComprasStpV(ModalDetalleMisComprasShop modalObject, WebDriver driver) {
 		this.driver = driver;
 		this.modalDetalleMisCompras = modalObject;
 	}
-	public static ModalDetalleMisComprasStpV getNew(ModalDetalleMisCompras modalObject, WebDriver driver) {
+	public static ModalDetalleMisComprasStpV getNew(ModalDetalleMisComprasShop modalObject, WebDriver driver) {
 		return new ModalDetalleMisComprasStpV(modalObject, driver);
 	}
 	

@@ -13,6 +13,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMiCuenta;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.miscompras.PageMisComprasStpV;
+
 import org.openqa.selenium.WebDriver;
 
 public class PageMiCuentaStpV {
@@ -33,7 +35,7 @@ public class PageMiCuentaStpV {
 	}
 	
     @Validation(
-        description="1) Aparece una pantalla de resultado OK (la esperamos hasta #{maxSecondsToWait} segundos)",
+        description="1) Aparece la página de \"Mi cuenta\" (la esperamos hasta #{maxSecondsToWait} segundos)",
         level=State.Defect)
     public boolean validateIsPage (int maxSecondsToWait) {
         return (pageMiCuenta.isPageUntil(maxSecondsToWait));

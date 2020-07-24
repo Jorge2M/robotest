@@ -1,19 +1,19 @@
-package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
+package com.mng.robotest.test80.mango.test.stpv.shop.miscompras;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.SecQuickViewArticulo;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.SecQuickViewArticuloShop;
 
 public class SecQuickViewArticuloStpV {
     
-	private final SecQuickViewArticulo secQuickViewArticulo;
+	private final SecQuickViewArticuloShop secQuickViewArticulo;
 	
-	private SecQuickViewArticuloStpV(SecQuickViewArticulo sectionObject) {
+	private SecQuickViewArticuloStpV(SecQuickViewArticuloShop sectionObject) {
 		this.secQuickViewArticulo = sectionObject;
 	}
-	public static SecQuickViewArticuloStpV getNew(SecQuickViewArticulo sectionObject) {
+	public static SecQuickViewArticuloStpV getNew(SecQuickViewArticuloShop sectionObject) {
 		return new SecQuickViewArticuloStpV(sectionObject);
 	}
 	

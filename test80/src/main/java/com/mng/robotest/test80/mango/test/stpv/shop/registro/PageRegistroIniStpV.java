@@ -73,7 +73,7 @@ public class PageRegistroIniStpV {
 		description="Introducir los datos:<br>#{dataToSendInHtmlFormat}",
 		expected="En los datos incorrectos aparece error y en los correctos no")
 	public void sendFixedDataToInputs(ListDataRegistro dataToSend, String dataToSendInHtmlFormat) {
-		pageRegistroIni.sendDataToInputs(dataToSend);       
+		pageRegistroIni.sendDataToInputs(dataToSend);
 		validateMessagesErrorDependingInputs(dataToSend);
 	}
 	
