@@ -9,7 +9,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class ModalDetalleMisComprasShop extends PageObjTM {
+public class ModalDetalleMisComprasDesktop extends PageObjTM {
 
 	private final Channel channel;
 	
@@ -20,12 +20,12 @@ public class ModalDetalleMisComprasShop extends PageObjTM {
     private static String XPathLinkToMisComprasDesktop = "//div[@class[contains(.,'shopping-breadcrumbs')]]";
     private static String XPathLinkToMisComprasMobil = "//div[@class[contains(.,'iconBack')]]";
     
-    private ModalDetalleMisComprasShop(Channel channel, WebDriver driver) {
+    private ModalDetalleMisComprasDesktop(Channel channel, WebDriver driver) {
     	super(driver);
     	this.channel = channel;
     }
-    public static ModalDetalleMisComprasShop getNew(Channel channel, WebDriver driver) {
-    	return new ModalDetalleMisComprasShop(channel, driver);
+    public static ModalDetalleMisComprasDesktop getNew(Channel channel, WebDriver driver) {
+    	return new ModalDetalleMisComprasDesktop(channel, driver);
     }
     
 	private String getXPathLinkToMisCompras() {

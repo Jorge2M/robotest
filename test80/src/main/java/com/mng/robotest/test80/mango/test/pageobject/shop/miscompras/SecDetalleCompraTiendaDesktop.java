@@ -8,7 +8,7 @@ import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class SecDetalleCompraTiendaShop extends PageObjTM {
+public class SecDetalleCompraTiendaDesktop extends PageObjTM {
 	
     private static String XPathDataTicket = "//div[@class[contains(.,'ticket-container')]]";
     private static String XPathNumTicket = XPathDataTicket + "//div[@class='info']/p[1]";  
@@ -17,11 +17,11 @@ public class SecDetalleCompraTiendaShop extends PageObjTM {
     private static String XPathCodigoBarrasImg = XPathDataTicket + "//div[@class='code']/img";
     private static String XPathArticulo = "//div[@onclick[contains(.,'openProductDetails')]]";
     
-    private SecDetalleCompraTiendaShop(WebDriver driver) {
+    private SecDetalleCompraTiendaDesktop(WebDriver driver) {
     	super(driver);
     }
-    public static SecDetalleCompraTiendaShop getNew(WebDriver driver) {
-    	return new SecDetalleCompraTiendaShop(driver);
+    public static SecDetalleCompraTiendaDesktop getNew(WebDriver driver) {
+    	return new SecDetalleCompraTiendaDesktop(driver);
     }
     
     private String getXPathArticulo(int posArticulo) {

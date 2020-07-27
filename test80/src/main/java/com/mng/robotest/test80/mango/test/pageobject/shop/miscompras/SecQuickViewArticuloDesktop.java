@@ -7,7 +7,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecQuickViewArticuloShop extends PageObjTM {
+public class SecQuickViewArticuloDesktop extends PageObjTM {
 	
     private static String XPathContainerItem = "//div[@class='container-item']";
     private static String XPathContainerDescription = XPathContainerItem + "//div[@class[contains(.,'container-description-title')]]";
@@ -15,11 +15,11 @@ public class SecQuickViewArticuloShop extends PageObjTM {
     private static String XPathNombre = XPathContainerDescription + "//li[1]";
     private static String XPathPrecio = XPathContainerDescription + "//ul/li[2]";
     
-	private SecQuickViewArticuloShop(WebDriver driver) {
+	private SecQuickViewArticuloDesktop(WebDriver driver) {
 		super(driver);
 	}
-	public static SecQuickViewArticuloShop getNew(WebDriver driver) {
-		return new SecQuickViewArticuloShop(driver);
+	public static SecQuickViewArticuloDesktop getNew(WebDriver driver) {
+		return new SecQuickViewArticuloDesktop(driver);
 	}
     
     public boolean isVisibleUntil(int maxSeconds) {

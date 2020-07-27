@@ -7,19 +7,19 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.ModalDetalleMisComprasShop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.ModalDetalleMisComprasDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalBuscadorTiendasMisCompras;
 
 public class ModalDetalleMisComprasStpV {
     
 	private final WebDriver driver;
-	private final ModalDetalleMisComprasShop modalDetalleMisCompras;
+	private final ModalDetalleMisComprasDesktop modalDetalleMisCompras;
 	
-	private ModalDetalleMisComprasStpV(ModalDetalleMisComprasShop modalObject, WebDriver driver) {
+	private ModalDetalleMisComprasStpV(ModalDetalleMisComprasDesktop modalObject, WebDriver driver) {
 		this.driver = driver;
 		this.modalDetalleMisCompras = modalObject;
 	}
-	public static ModalDetalleMisComprasStpV getNew(ModalDetalleMisComprasShop modalObject, WebDriver driver) {
+	public static ModalDetalleMisComprasStpV getNew(ModalDetalleMisComprasDesktop modalObject, WebDriver driver) {
 		return new ModalDetalleMisComprasStpV(modalObject, driver);
 	}
 	

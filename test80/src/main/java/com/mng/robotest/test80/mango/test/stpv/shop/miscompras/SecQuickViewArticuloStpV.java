@@ -4,16 +4,16 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.SecQuickViewArticuloShop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.SecQuickViewArticuloDesktop;
 
 public class SecQuickViewArticuloStpV {
     
-	private final SecQuickViewArticuloShop secQuickViewArticulo;
+	private final SecQuickViewArticuloDesktop secQuickViewArticulo;
 	
-	private SecQuickViewArticuloStpV(SecQuickViewArticuloShop sectionObject) {
+	private SecQuickViewArticuloStpV(SecQuickViewArticuloDesktop sectionObject) {
 		this.secQuickViewArticulo = sectionObject;
 	}
-	public static SecQuickViewArticuloStpV getNew(SecQuickViewArticuloShop sectionObject) {
+	public static SecQuickViewArticuloStpV getNew(SecQuickViewArticuloDesktop sectionObject) {
 		return new SecQuickViewArticuloStpV(sectionObject);
 	}
 	

@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageSuscripciones.idNewsletters;
-import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisComprasShop.TypeCompra;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras.TypeCompra;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.PagePrehomeStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;

@@ -12,11 +12,12 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraOnline;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraTienda;
-import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.ModalDetalleMisComprasShop;
-import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisComprasShop;
-import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.SecDetalleCompraTiendaShop;
-import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.SecQuickViewArticuloShop;
-import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisComprasShop.TypeCompra;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.ModalDetalleMisComprasDesktop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras.TypeCompra;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisComprasDesktop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.SecDetalleCompraTiendaDesktop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.SecQuickViewArticuloDesktop;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageDetallePedidoStpV;
@@ -24,17 +25,19 @@ import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageDetallePedidoStp
 public class PageMisComprasStpV {
 	
 	private final WebDriver driver;
-    private final PageMisComprasShop pageMisCompras;
+	private final Channel channel;
+    private final PageMisCompras pageMisCompras;
     private final SecDetalleCompraTiendaStpV secDetalleCompraTiendaStpV; 
     private final SecQuickViewArticuloStpV secQuickViewArticuloStpV;
     private final ModalDetalleMisComprasStpV modalDetalleMisComprasStpV;
     
     private PageMisComprasStpV(Channel channel, WebDriver driver) {
     	this.driver = driver;
-    	this.pageMisCompras = PageMisComprasShop.getNew(channel, driver);
-    	SecDetalleCompraTiendaShop secDetalle = pageMisCompras.getSecDetalleCompraTienda();
-    	SecQuickViewArticuloShop secQuickView = pageMisCompras.getSecQuickViewArticulo();
-    	ModalDetalleMisComprasShop modalDetalle = pageMisCompras.getModalDetalleMisCompras();
+    	this.channel = channel;
+    	this.pageMisCompras = PageMisCompras.make(channel, driver);
+    	SecDetalleCompraTiendaDesktop secDetalle = pageMisCompras.getSecDetalleCompraTienda();
+    	SecQuickViewArticuloDesktop secQuickView = pageMisCompras.getSecQuickViewArticulo();
+    	ModalDetalleMisComprasDesktop modalDetalle = pageMisCompras.getModalDetalleMisCompras();
     	this.secDetalleCompraTiendaStpV = SecDetalleCompraTiendaStpV.getNew(secDetalle, channel);
     	this.secQuickViewArticuloStpV = SecQuickViewArticuloStpV.getNew(secQuickView);
     	this.modalDetalleMisComprasStpV = ModalDetalleMisComprasStpV.getNew(modalDetalle, driver);
@@ -67,21 +70,29 @@ public class PageMisComprasStpV {
         }
     }
 
-    @Validation
-    private ChecksTM validateIsPageWhenNotExistTabs() {
-    	ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsToWait = 2;
-      	validations.add(
-    		"Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsToWait + " segundos)",
-    		pageMisCompras.isPageUntil(maxSecondsToWait), State.Warn);
-      	validations.add(
-    		"No aparece el bloque de \"Tienda\"",
-    		!pageMisCompras.isPresentBlockUntil(0, TypeCompra.Tienda), State.Warn);
-      	validations.add(
-    		"No aparece el bloque de \"Online\"",
-    		!pageMisCompras.isPresentBlockUntil(0, TypeCompra.Online), State.Warn);
-      	return validations;
-    }
+	@Validation
+	private ChecksTM validateIsPageWhenNotExistTabs() {
+		ChecksTM validations = ChecksTM.getNew();
+		int maxSecondsToWait = 2;
+		validations.add(
+			"Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsToWait + " segundos)",
+			pageMisCompras.isPageUntil(maxSecondsToWait), State.Warn);
+		
+		if (channel==Channel.desktop) {
+			PageMisComprasDesktop pageMisComprasDesktop = (PageMisComprasDesktop)pageMisCompras;
+			validations.add(
+				"No aparece el bloque de \"Tienda\"",
+				!pageMisComprasDesktop.isPresentBlockUntil(0, TypeCompra.Tienda), State.Warn);
+			validations.add(
+				"No aparece el bloque de \"Online\"",
+				!pageMisComprasDesktop.isPresentBlockUntil(0, TypeCompra.Online), State.Warn);
+		}
+		else {
+			"No aparecen pedidos de tipo \"Tienda\"",
+			"No aparecen pedidos de tipo \"Online\""
+		}
+		return validations;
+	}
 
     @Validation
     public ChecksTM validateIsPage() {

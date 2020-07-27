@@ -14,50 +14,27 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraOnline;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraTienda;
 
 
-public class PageMisComprasShop extends PageMisCompras {
-    
-    private final SecDetalleCompraTiendaShop secDetalleCompraTienda;
-    private final SecQuickViewArticuloShop secQuickViewArticulo;
-    private final ModalDetalleMisComprasShop modalDetalleMisCompras;
-    
-    private final Channel channel;
-    
-    public enum TypeCompra {Tienda, Online}
-    static String XPathCapaContenedora = "//div[@id='myPurchasesPage']";
-    static String XPathBlockTienda = "//div[@id='menuTabsShop']";
-    static String XPathBlockOnline = "//div[@id='menuTabsOnline']";
-    static String XPathListCompras = "//div[@id='listData']";
-    static String XPathEmptyListImageTienda = XPathListCompras + "//img[@src[contains(.,'empty_offline')]]"; 
-    static String XPathEmptyListImageOnline = XPathListCompras + "//img[@src[contains(.,'empty_online')]]";
-    static String prefixIdCompra = "box_";
-    static String XPathCompra = XPathListCompras + "//div[@id[contains(.,'" + prefixIdCompra + "')] and @class[contains(.,'fills')]]";
-    static String XPathArticuloMasInfo = "//div[@class='small-box-container']";
-    static String XPathReferenciaArticulo = XPathArticuloMasInfo + "//div[@class='reference']";
-    
-    private PageMisComprasShop(Channel channel, WebDriver driver) {
-    	super(driver);
-    	this.channel = channel;
-        this.secDetalleCompraTienda = SecDetalleCompraTiendaShop.getNew(driver);
-        this.secQuickViewArticulo = SecQuickViewArticuloShop.getNew(driver);
-        this.modalDetalleMisCompras = ModalDetalleMisComprasShop.getNew(channel, driver);
-    }
-    public static PageMisComprasShop getNew(Channel channel, WebDriver driver) {
-    	return new PageMisComprasShop(channel, driver);
-    }
-    
-    public SecDetalleCompraTiendaShop getSecDetalleCompraTienda() {
-    	return this.secDetalleCompraTienda;
-    }
-    public SecQuickViewArticuloShop getSecQuickViewArticulo() {
-    	return this.secQuickViewArticulo;
-    }
-    public ModalDetalleMisComprasShop getModalDetalleMisCompras() {
-    	return this.modalDetalleMisCompras;
-    }
-    
-    public boolean isPageUntil(int maxSeconds) {
-    	return (state(Visible, By.xpath(XPathCapaContenedora)).wait(maxSeconds).check());
-    }
+public class PageMisComprasDesktop extends PageMisCompras {
+
+	static String XPathCapaContenedora = "//div[@id='myPurchasesPage']";
+	static String XPathBlockTienda = "//div[@id='menuTabsShop']";
+	static String XPathBlockOnline = "//div[@id='menuTabsOnline']";
+	static String XPathListCompras = "//div[@id='listData']";
+	static String XPathEmptyListImageTienda = XPathListCompras + "//img[@src[contains(.,'empty_offline')]]"; 
+	static String XPathEmptyListImageOnline = XPathListCompras + "//img[@src[contains(.,'empty_online')]]";
+	static String prefixIdCompra = "box_";
+	static String XPathCompra = XPathListCompras + "//div[@id[contains(.,'" + prefixIdCompra + "')] and @class[contains(.,'fills')]]";
+	static String XPathArticuloMasInfo = "//div[@class='small-box-container']";
+	static String XPathReferenciaArticulo = XPathArticuloMasInfo + "//div[@class='reference']";
+
+	public PageMisComprasDesktop(WebDriver driver) {
+		super(Channel.desktop, driver);
+	}
+
+	@Override
+	public boolean isPageUntil(int maxSeconds) {
+			return (state(Visible, By.xpath(XPathCapaContenedora)).wait(maxSeconds).check());
+	}
     
     private String getXPathBlock(TypeCompra typeCompra) {
         String xpathBlock = "";
