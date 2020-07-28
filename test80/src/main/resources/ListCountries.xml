@@ -47,6 +47,7 @@
 <!ENTITY TPV-093 "<tpv id='093' clase='Falcon'             estado='0;4' notificaciones='s'/>">
 <!ENTITY TPV-094 "<tpv id='094' clase='Paypal'             estado='0;4' notificaciones='n'/>">
 <!ENTITY TPV-098 "<tpv id='098' clase='Paypal'             estado='0;4' notificaciones='n'/>">
+<!ENTITY TPV-100 "<tpv id='100' clase='COD'                estado='0'   notificaciones='n'/>">
 <!ENTITY TPV-101 "<tpv id='101' clase='Yandex'    		   estado='0;4' notificaciones='n'/>">
 <!ENTITY TPV-102 "<tpv id='102' clase='TransferenciaES'    estado='4'   notificaciones='n'/>">
 <!ENTITY TPV-104 "<tpv id='104' clase='TransferenciaIC'    estado='4'   notificaciones='n'/>">
@@ -2112,22 +2113,22 @@
 <linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
-	type="AssistQiwi" tiendas="shop,outlet"
+	type="PaysecureQiwi" tiendas="shop,outlet"
 	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='PICKPOINT' tipoenviooutlet='PICKPOINT' provinciaenvio="Абинск" tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="10" anycad="2020" cvc="737" telefqiwi = "8000005105">&TPV-031;</pago> <!-- En  el caso de Rusia no se puede testear el pago, es Assist -->
 <pago 
-	type="AssistQiwi" tiendas="shop,outlet"
+	type="PaysecureQiwi" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="10" anycad="2020" cvc="737" usrd3d="user" passd3d="password" telefqiwi = "8000005105">&TPV-031;</pago>
 <pago 
-	type="AssistQiwi" tiendas="shop,outlet"
+	type="PaysecureQiwi" tiendas="shop,outlet"
 	nombre="Яндекс Деньги" namefilter="Russia_Ahdekc Aehbzu" testpasarela='s'>&TPV-031;</pago> 
 <pago 
-	type="AssistQiwi" tiendas="shop,outlet"
+	type="PaysecureQiwi" tiendas="shop,outlet"
 	nombre="WEBMONEY" testpasarela='s'>&TPV-031;</pago>
 <pago 
-	type="AssistQiwi" tiendas="shop,outlet"
+	type="PaysecureQiwi" tiendas="shop,outlet"
 	nombre="DINERS" testpasarela='s'>&TPV-031;</pago>
 <pago 
-	type="AssistQiwi" tiendas="shop,outlet"
+	type="PaysecureQiwi" tiendas="shop,outlet"
 	nombre="JCB" nombremovil="Jcb"    testpasarela='s'>&TPV-031;</pago>
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
@@ -2230,6 +2231,9 @@
 <pago 
 	type="Trustpay" tiendas="shop,outlet" empleado="n" 
 	nombre="TRUSTPAY" testpasarela='s' testpago='s'>&TPV-121;</pago>-->
+<pago 
+	type="ContraReembolso" tiendas="shop,outlet" empleado="n" 
+	nombre="BANK TRANSFER" testpasarela='s' testpago='s'>&TPV-100;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>

@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.assistqiwi;
+package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paysecureqiwi;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

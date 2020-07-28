@@ -12,6 +12,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.loyalty.PageRegalarMisLikesS
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -137,10 +138,16 @@ public class Loyalty {
     }
     
     private DataBag addBagArticleNoRebajado(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-		Menu1rstLevel menuPersonalizacion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "nueva_coleccion"));
+    	Menu1rstLevel menuNewCollection;
+    	if (dCtxSh.channel==Channel.desktop) {
+    		menuNewCollection = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "nueva_coleccion"));
+    	}
+    	else {
+    		menuNewCollection = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "promos-vestidos"));
+    	}
 		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
-		secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
+		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuNewCollection, dCtxSh);
+		//secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
 		DataBag dataBag = GaleriaNavigationsStpV.selectArticleAvailableFromGaleria(dCtxSh, driver);
 		return dataBag;
     }

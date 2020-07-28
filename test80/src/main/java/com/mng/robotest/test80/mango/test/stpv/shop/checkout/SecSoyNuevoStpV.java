@@ -18,14 +18,14 @@ public class SecSoyNuevoStpV {
 	@Step (
 		description=
 			"1. Desmarcamos el check NewsLetter<br>" + 
-			"2. Introducmos el email <b>#{email}</b> (existente: <b>#{emailExistsYet}</b>)<br>" + 
+			"2. Introducimos el email <b>#{email}</b> (existente: <b>#{emailExistsYet}</b>)<br>" + 
 			"3. Seleccionamos \"Continuar\"", 
 		expected="Aparece la página de introducción de datos del usuario")
 	public static void inputEmailAndContinue(
 			String email, boolean emailExistsYet, AppEcom appE, boolean userRegistered, Pais pais, 
 			Channel channel, WebDriver driver) throws Exception {
 		SecSoyNuevo.setCheckPubliNewsletter(driver, ActionNewsL.deactivate, channel);
-		SecSoyNuevo.inputEmail(email, driver);
+		SecSoyNuevo.inputEmail(email, channel, driver);
 		SecSoyNuevo.clickContinue(channel, driver);
 
 		Page2IdentCheckoutStpV.validateIsPage(emailExistsYet, 2, driver);
