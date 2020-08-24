@@ -1,6 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -144,8 +146,7 @@ public class SecMenusWrapperStpV {
      */
     public void stepsMenusLinea(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
         String paginaLinea = driver.getCurrentUrl();
-        Linea linea = pais.getShoponline().getLinea(lineaType);
-        List<DataScreenMenu> listMenusLabel = secMenusWrap.getListDataScreenMenus(linea, sublineaType);
+        List<DataScreenMenu> listMenusLabel = getListMenus(lineaType, sublineaType);
         for (int i=0; i<listMenusLabel.size(); i++) {
             try {
             	Menu1rstLevel menu1rstLevel = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(lineaType, sublineaType, listMenusLabel.get(i)));
@@ -159,6 +160,15 @@ public class SecMenusWrapperStpV {
             	Log4jTM.getLogger().warn("Problem in selection of menu " + lineaType + " / " + sublineaType + " / " + listMenusLabel.get(i), e);
             }        
         }
+    }
+    
+    private List<DataScreenMenu> getListMenus(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
+        Linea linea = pais.getShoponline().getLinea(lineaType);
+        List<DataScreenMenu> listMenus = secMenusWrap.getListDataScreenMenus(linea, sublineaType);
+        List<DataScreenMenu> listWithoutDuplicates = listMenus.stream()
+                .distinct()
+                .collect(Collectors.toList());
+        return listWithoutDuplicates;
     }
     
     public void navSeleccionaCarruselsLinea(Pais pais, LineaType lineaNuevoOReb) throws Exception {

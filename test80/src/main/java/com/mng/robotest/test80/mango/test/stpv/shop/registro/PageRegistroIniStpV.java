@@ -101,13 +101,10 @@ public class PageRegistroIniStpV {
 		pageRegistroIni.clickButtonRegistrate();
         PageObjTM.waitMillis(1000);
 
-        //Validaciones
-        int maxSeconds = 3;
-        validaIsInvisibleCapaLoading(maxSeconds);
+        validaIsInvisibleCapaLoading(7);
         if (usrExists || pageRegistroIni.getNumInputsObligatoriosNoInformados() > 0) {
         	if (usrExists) {
-	        	maxSeconds=5;
-	        	validaEmailYaRegistradoShown(maxSeconds);
+	        	validaEmailYaRegistradoShown(5);
         	}
             int numInputsObligatoriosNoInf = pageRegistroIni.getNumInputsObligatoriosNoInformados();
             if (numInputsObligatoriosNoInf > 0) {

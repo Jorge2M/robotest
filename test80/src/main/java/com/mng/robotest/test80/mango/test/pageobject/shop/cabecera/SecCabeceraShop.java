@@ -69,8 +69,8 @@ public class SecCabeceraShop extends SecCabecera {
     }
     
     @Override
-    public boolean isInStateIconoBolsa(State state) {
-    	return (isIconoInState(IconoCabeceraShop.bolsa, state));
+    public boolean isInStateIconoBolsa(State state, int maxSeconds) {
+    	return (isIconoInState(IconoCabeceraShop.bolsa, state, maxSeconds));
     }
     
     @Override
@@ -91,7 +91,11 @@ public class SecCabeceraShop extends SecCabecera {
     }
     
     public boolean isIconoInState(IconoCabeceraShop icono, State state) {
-    	return (state(state, icono.getBy()).check());
+    	return isIconoInState(icono, state, 0);
+    }
+    
+    public boolean isIconoInState(IconoCabeceraShop icono, State state, int maxSeconds) {
+    	return (state(state, icono.getBy()).wait(maxSeconds).check());
     }
     
     public boolean isIconoInStateUntil(IconoCabeceraShop icono, State state, int maxSeconds) {

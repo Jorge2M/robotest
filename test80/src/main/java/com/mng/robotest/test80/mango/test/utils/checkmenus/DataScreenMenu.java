@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.utils.checkmenus;
 
-public class DataScreenMenu implements Label {
+public class DataScreenMenu implements Label, Comparable<DataScreenMenu> {
 
 	private String dataGaLabel;
 	private String label;
@@ -48,6 +48,11 @@ public class DataScreenMenu implements Label {
 		return (dataGaLabel!=null && dataGaLabel.compareTo("")!=0);
 	}
 	
+	@Override
+	public int compareTo(DataScreenMenu dataMenu) {
+	  return (dataGaLabel.compareTo(dataMenu.dataGaLabel));
+	}
+	
     @Override
     public boolean equals(Object o) { 
         if (o == this) { 
@@ -61,4 +66,21 @@ public class DataScreenMenu implements Label {
         	c.dataGaLabel.compareTo(this.dataGaLabel)==0 &&
         	c.getLabel().toLowerCase().compareTo(this.getLabel().toLowerCase())==0);
     } 
+    
+    @Override
+    public int hashCode() {
+        return this.dataGaLabel.hashCode();
+    }
+    
+    @Override
+    public String toString() {
+    	String result = "";
+    	if (dataGaLabel.compareTo("")!=0) {
+    		result+=dataGaLabel;
+    	}
+    	if (getLabel().compareTo("")!=0) {
+    		result+=", " + getLabel();
+    	}
+    	return result;
+    }
 }

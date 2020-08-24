@@ -190,7 +190,7 @@ public class Loyalty {
 
 	@Test (
 		groups={"Loyalty", "Canal:all_App:shop"},
-		description="Exchange entrada de cine mediante 1200 Likes")
+		description="Conseguir algo por 1200 likes")
 	public void LOY003_Exhange_Compra_Entrada() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();

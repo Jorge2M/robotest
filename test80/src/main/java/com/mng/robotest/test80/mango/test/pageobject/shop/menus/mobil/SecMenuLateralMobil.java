@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -80,7 +81,11 @@ public class SecMenuLateralMobil extends PageObjTM {
 
 	private List<WebElement> getListMenusDisplayed(SublineaNinosType sublineaType) {
 		String xpath2oLevelMenuLink = getXPathLinksMenus(sublineaType);
-		return (getElementsVisible(driver, By.xpath(xpath2oLevelMenuLink)));
+		if (app==AppEcom.outlet) {
+			return (getElementsVisible(driver, By.xpath(xpath2oLevelMenuLink)));
+		} else {
+			return driver.findElements(By.xpath(xpath2oLevelMenuLink));
+		}
 	}
 
 	public List<DataScreenMenu> getListDataScreenMenus(Linea linea, SublineaNinosType sublineaType) throws Exception {
@@ -140,17 +145,22 @@ public class SecMenuLateralMobil extends PageObjTM {
 		Linea linea = pais.getShoponline().getLinea(menu1rstLevel.getLinea());
 		secLineasMobil.selectLinea(linea, menu1rstLevel.getSublinea());
 		if (app==AppEcom.shop) {
-			clickMenuGroup(typeLocator, menu1rstLevel);
+			unfoldMenuGroup(typeLocator, menu1rstLevel);
 			SeleniumUtils.waitMillis(500);
 		}
 		clickMenuYetDisplayed(typeLocator, menu1rstLevel);
 	}
 	
-	public void clickMenuGroup(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel) {
-		String xpathGroupMenu = 
-				getXPathMenuByTypeLocator(typeLocator, menu1rstLevel) + 
-				"/ancestor::li[@class[contains(.,'dropdown')]]";
-		click(By.xpath(xpathGroupMenu)).exec();
+	public void unfoldMenuGroup(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel) {
+		String xpathLinkMenu = getXPathMenuByTypeLocator(typeLocator, menu1rstLevel);
+		for (int i=0; i<5; i++) {
+			if (!state(State.Clickable, By.xpath(xpathLinkMenu)).check()) {
+				String xpathGroupMenu = xpathLinkMenu + "/../../preceding-sibling::div[@class[contains(.,'dropdown')]]";
+				click(By.xpath(xpathGroupMenu)).exec();
+			} else {
+				break;
+			}
+		}
 	}
 	
 	public boolean existsMenuLateral1rstLevel(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel, Pais pais) {

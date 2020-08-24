@@ -218,6 +218,7 @@
 <!ENTITY TPV-803 "<tpv id='803' clase='Storecredit'        estado='0;4' notificaciones='n'/>">
 <!ENTITY TPV-999 "<tpv id='999' clase='Storecredit'        estado='0;4' notificaciones='n'/>">
 ]>
+
 <Response Code="200">
 <continente nombre_continente="Europe">
 
@@ -272,7 +273,7 @@
 <rgpd>S</rgpd>
 <tarifa>AN</tarifa>
 <codpos>AD400</codpos>
-<telefono>665015122</telefono>
+<telefono>345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -420,7 +421,7 @@
 <rgpd>S</rgpd>
 <tarifa>FB</tarifa>
 <codpos>1030</codpos>
-<telefono>412345678</telefono>
+<telefono>465162757</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -481,7 +482,7 @@
 <idioma acceso="ba">IN</idioma>
 <tarifa>KM</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>61234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -527,7 +528,7 @@
 <rgpd>S</rgpd>
 <tarifa>BL</tarifa>
 <codpos>2030</codpos>
-<telefono>665015122</telefono>
+<telefono>871234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -576,7 +577,7 @@
 <rgpd>S</rgpd>
 <tarifa>KK</tarifa>
 <codpos>10363</codpos>
-<telefono>665015122</telefono>
+<telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -625,7 +626,7 @@
 <rgpd>S</rgpd>
 <tarifa>CY</tarifa>
 <codpos>3000</codpos>
-<telefono>665015122</telefono>
+<telefono>94123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -681,7 +682,7 @@
 <rgpd>S</rgpd>
 <tarifa>CK</tarifa>
 <codpos>251 99</codpos>
-<telefono>665015122</telefono>
+<telefono>602123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -797,7 +798,7 @@
 <direccharnolatinos check='s' text='check адреѿ доказательѿтва, 3'/>
 <tarifa>EK</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>5123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>false</miscompras>
@@ -976,7 +977,7 @@
 <rgpd>S</rgpd>
 <tarifa>DM</tarifa>
 <codpos>10115</codpos>
-<telefono>01512345678</telefono>
+<telefono>017632021234</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -1084,7 +1085,7 @@
 <direccharnolatinos check='s' text='check στείλετε την παϿαγγελία'/>
 <tarifa>DR</tarifa>
 <codpos>180 30</codpos>
-<telefono>665015122</telefono>
+<telefono>6951234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -1144,7 +1145,7 @@
 <rgpd>S</rgpd>
 <tarifa>HU</tarifa>
 <codpos>3000</codpos>
-<telefono>665015122</telefono>
+<telefono>201234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -1199,7 +1200,7 @@
 <idioma acceso="is">IN</idioma> 
 <rgpd>S</rgpd>
 <codpos>220</codpos>
-<telefono>665015122</telefono>
+<telefono>6123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online> 
 <miscompras>true</miscompras>
@@ -1249,7 +1250,7 @@
 <rgpd>S</rgpd>
 <tarifa>IR</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>881234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -1301,7 +1302,7 @@
 <rgpd>S</rgpd>
 <tarifa>IL</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>3123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -1385,7 +1386,7 @@
 <direccharnolatinos check='s' text='check адреѿ доказательѿтва, 3'/>
 <tarifa>LV</tarifa>
 <codpos>5401</codpos>
-<telefono>665015122</telefono>
+<telefono>21234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -1435,7 +1436,7 @@
 <rgpd>S</rgpd>
 <tarifa>FS</tarifa>
 <codpos>9490</codpos>
-<telefono>665015122</telefono>
+<telefono>7916972</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -1480,7 +1481,7 @@
 <rgpd>S</rgpd>
 <tarifa>LI</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>61234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -1534,7 +1535,7 @@
 <tarifa>LU</tarifa>
 <rgpd>S</rgpd>
 <codpos>0001</codpos>
-<telefono>665015122</telefono>
+<telefono>621345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -1617,7 +1618,7 @@
 <rgpd>S</rgpd>
 <tarifa>LM</tarifa>
 <codpos>ZTN 1073</codpos>
-<telefono>665015122</telefono>
+<telefono>79123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -1801,7 +1802,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" tipoenvioshop='POSTNLPOINT' tipoenviooutlet='STANDARD' numtarj="4055011111111111" mescad="10" anycad="2020" cvc="737">&TPV-233;</pago> <!-- JPMorgan -->
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" tipoenvioshop='POSTNLPOINT' tipoenviooutlet='STANDARD' numtarj="5405222222222226" mescad="10" anycad="2020" cvc="737">&TPV-233;</pago> <!-- JPMorgan -->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAESTANDAR' numtarj="5405222222222226" mescad="10" anycad="2020" cvc="737">&TPV-233;</pago> <!-- JPMorgan -->
@@ -1834,7 +1835,7 @@
 <rgpd>S</rgpd>
 <tarifa>YC</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>99123456</telefono>
 <dni>10000000146</dni>
 <tiendas_online></tiendas_online>
 <miscompras>false</miscompras>
@@ -1986,7 +1987,7 @@
 <rgpd>S</rgpd>
 <tarifa>ES</tarifa>
 <codpos>4455-111</codpos>
-<telefono>665015122</telefono>
+<telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -2041,7 +2042,7 @@
 <rgpd>S</rgpd>
 <tarifa>RL</tarifa>
 <codpos>030000</codpos>
-<telefono>665015122</telefono>
+<telefono>722560300</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -2195,7 +2196,7 @@
 <rgpd>S</rgpd>
 <tarifa>SV</tarifa>
 <codpos>811 02</codpos>
-<telefono>665015122</telefono>
+<telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -2253,7 +2254,7 @@
 <rgpd>S</rgpd>
 <tarifa>LM</tarifa>
 <codpos>1000</codpos>
-<telefono>665015122</telefono>
+<telefono>030123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -2637,7 +2638,7 @@
 <rgpd>S</rgpd>
 <tarifa>FS</tarifa>
 <codpos>8001</codpos>
-<telefono>665015122</telefono>
+<telefono>754111234</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -2753,7 +2754,7 @@
 <paistop>S</paistop>
 <rgpd>S</rgpd>
 <tarifa>UK</tarifa>
-<codpos>EC1Y8SY</codpos>
+<codpos>EC1Y 8SY</codpos>
 <telefono>07123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
@@ -2811,7 +2812,7 @@
 <rgpd>S</rgpd>
 <tarifa>JY</tarifa>
 <codpos>GY</codpos>
-<telefono>665015122</telefono>
+<telefono>07123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -2865,7 +2866,7 @@
 <idioma acceso="aw" >IN</idioma>
 <tarifa>AF</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>5612345</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -2937,7 +2938,7 @@
 <idioma acceso="ca-fr" idioma_descripcion="FR">FR</idioma>
 <tarifa>CD</tarifa>
 <codpos>M5H 2N2</codpos>
-<telefono>665015122</telefono>
+<telefono>6135550165</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>
@@ -2983,7 +2984,7 @@
 <idioma acceso="cr">ES</idioma>
 <tarifa>CC</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>50012345</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -3082,7 +3083,7 @@
 <idioma acceso="sv">ES</idioma>
 <tarifa>SC</tarifa>
 <codpos>1120</codpos>
-<telefono>665015122</telefono>
+<telefono>71234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -3128,7 +3129,7 @@
 <rgpd>S</rgpd>
 <tarifa>FG</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>690123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>
@@ -3177,7 +3178,7 @@
 <idioma acceso="gt">ES</idioma>
 <tarifa>GQ</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>41234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -3266,7 +3267,7 @@
 <!-- <idioma acceso="mx-en">IN</idioma>-->
 <tarifa>PM</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>8183202020</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -3329,7 +3330,7 @@
 <!-- <idioma acceso="cw-es">ES</idioma>-->
 <tarifa>NA</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>96671040</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -3372,7 +3373,7 @@
 <idioma acceso="pa">ES</idioma>
 <tarifa>PN</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>61234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>
@@ -3588,7 +3589,7 @@
 <idioma acceso="co">ES</idioma>
 <tarifa>CL</tarifa>
 <codpos>050005</codpos>
-<telefono>665015122</telefono>
+<telefono>3101234567</telefono>
 <dni>8001984561</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>
@@ -3671,7 +3672,7 @@
 <rgpd>S</rgpd>
 <tarifa>MF</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>696123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>
@@ -3720,7 +3721,7 @@
 <idioma acceso="gf">FR</idioma>
 <rgpd>S</rgpd>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>694123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -3768,7 +3769,7 @@
 <codigo_alf>NI</codigo_alf>
 <idioma acceso="ni">IN</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>81234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>
@@ -3953,7 +3954,7 @@
 <idioma acceso="au">IN</idioma>
 <tarifa>AD</tarifa>
 <codpos>2060</codpos>
-<telefono>665015122</telefono>
+<telefono>412345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -4091,7 +4092,7 @@
 <idioma acceso="bh-en">IN</idioma>
 <tarifa>BD</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>31234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>
@@ -4172,7 +4173,7 @@
 <paistop>S</paistop>
 <tarifa>CR</tarifa>
 <codpos>266033</codpos>
-<telefono>665015122</telefono>
+<telefono>13910998888</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>
@@ -4291,7 +4292,7 @@
 <idioma acceso="hk">IN</idioma>
 <tarifa>HD</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>62836675</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>
@@ -4338,7 +4339,7 @@
 <idioma acceso="in">IN</idioma>
 <tarifa>ID</tarifa>
 <codpos>110006</codpos>
-<telefono>665015122</telefono>
+<telefono>9123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -4385,7 +4386,7 @@
 <idioma acceso="id">IN</idioma>
 <tarifa>IN</tarifa>
 <codpos>10350</codpos>
-<telefono>665015122</telefono>
+<telefono>812345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -4619,7 +4620,7 @@
 <idioma acceso="jo-en">IN</idioma>
 <tarifa>JD</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>775669933</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>
@@ -4662,7 +4663,7 @@
 <idioma acceso="kz">RU</idioma>
 <tarifa>KZ</tarifa>
 <codpos>040900</codpos>
-<telefono>665015122</telefono>
+<telefono>7012345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>
@@ -4703,7 +4704,7 @@
 <idioma acceso="kw-en">IN</idioma>
 <tarifa>KU</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>51234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>
@@ -4782,7 +4783,7 @@
 <idioma acceso="lb-en">IN</idioma>
 <tarifa>LL</tarifa>
 <codpos>2038 3054</codpos>
-<telefono>665015122</telefono>
+<telefono>3123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>
@@ -4835,7 +4836,7 @@
 <idioma acceso="mo">IN</idioma>
 <tarifa>HD</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>68258508</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>
@@ -4872,7 +4873,7 @@
 <idioma acceso="my">IN</idioma>
 <tarifa>MA</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>126946551</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -4918,7 +4919,7 @@
 <codigo_alf>MV</codigo_alf> 
 <idioma acceso="mv">IN</idioma> 
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>7712345</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -4993,7 +4994,7 @@
 <idioma acceso="om-en">IN</idioma>
 <tarifa>OR</tarifa>
 <codpos>112</codpos>
-<telefono>665015122</telefono>
+<telefono>91234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>
@@ -5078,7 +5079,7 @@
 <idioma acceso="ph">IN</idioma>
 <tarifa>FI</tarifa>
 <codpos>1008</codpos>
-<telefono>665015122</telefono>
+<telefono>9123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -5086,7 +5087,7 @@
 <maximo_bolsa>21000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="n" edits="s"></tienda>
 <shoponline>
-<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
+<linea 		  id="nuevo"     shop="n" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
 <linea 		  id="she"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5129,7 +5130,7 @@
 <idioma acceso="qa-en">IN</idioma>
 <tarifa>QR</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>33123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>
@@ -5180,7 +5181,7 @@
 <idioma acceso="sa-en">IN</idioma>
 <tarifa>AR</tarifa>
 <codpos>11522</codpos>
-<telefono>665015122</telefono>
+<telefono>512345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>
@@ -5188,10 +5189,10 @@
 <maximo_bolsa>3000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
 <shoponline>
-<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
+<linea 		  id="nuevo"     shop="n" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
 <linea 		  id="she"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="he"        shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
@@ -5200,7 +5201,7 @@
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
-<linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="violeta"   shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
@@ -5208,16 +5209,17 @@
 	nombre="STORECREDIT" testpasarela='s' testpago='s'>&TPV-803;</pago> <!-- Pago Store Credit que aparece cuando el usuario tiene Saldo en Cuenta (y desaparecen el resto de métodos de pago)-->
 <pago 
 	type="ProcessOut" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4242424242424242" mescad="10" anycad="2020" cvc="100">&TPV-500;</pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4242424242424242" mescad="10" anycad="2020" cvc="100">&TPV-364;</pago>
 <pago 
 	type="ProcessOut" tiendas="shop,outlet"
-	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5436031030606378" mescad="10" anycad="2020" cvc="257" usrd3d="user" passd3d="password">&TPV-500;</pago>
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5436031030606378" mescad="10" anycad="2020" cvc="257" usrd3d="user" passd3d="password">&TPV-364;</pago>
 <pago 
 	type="ProcessOut" tiendas="shop,outlet"
 	nombre="Mada" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4242424242424242" mescad="10" anycad="2020" cvc="100">&TPV-364;</pago>
+<!-- 
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
-	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-161;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
+	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-161;</pago>-->
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
@@ -5231,7 +5233,7 @@
 <idioma acceso="sg">IN</idioma>
 <tarifa>SD</tarifa>
 <codpos>546080</codpos>
-<telefono>665015122</telefono>
+<telefono>81234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -5497,7 +5499,7 @@
 <idioma acceso="ae-en">IN</idioma>
 <tarifa>DU</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>0501234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>
@@ -5550,7 +5552,7 @@
 <idioma acceso="uz">IN</idioma>
 <tarifa>UZ</tarifa>
 <codpos>100123</codpos>
-<telefono>665015122</telefono>
+<telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -5653,7 +5655,7 @@
 <idioma acceso="ao" >IN</idioma>
 <tarifa>AK</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <miscompras>false</miscompras>
@@ -5796,7 +5798,7 @@
 <idioma acceso="eg-en">IN</idioma>
 <tarifa>EG</tarifa>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>1123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>

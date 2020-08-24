@@ -50,7 +50,7 @@ public class IframeResult {
         String[] listTrans = codigosTransporte.trim().split("\n");
         for (int i=0; i<listTrans.length; i++) {
         	String xpath = XPathBlockTransportes + "//table//tr[" + (i+3) + "]/td[1][text()='" + listTrans[i] + "']";
-        	if (state(Present, By.xpath(xpath), driver).check()) { 
+        	if (!state(Present, By.xpath(xpath), driver).check()) { 
                contains = false;
             }
         }

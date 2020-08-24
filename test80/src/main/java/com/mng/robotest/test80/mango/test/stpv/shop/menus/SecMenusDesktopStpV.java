@@ -138,9 +138,8 @@ public class SecMenusDesktopStpV {
     
     @Validation (
     	description="Está seleccionada la línea <b>#{lineaType}</b>",
-    	//TODO provisionalmente lo ponemos a Info, cuando pasen las rebajas o cuando se resuelva 
-    	//el tícket https://jira.mangodev.net/jira/browse/GPS-621
-    	level=State.Info)
+    	level=State.Info,
+    	avoidEvidences=true)
     public boolean validateIsLineaSelected(LineaType lineaType) {
     	return (secMenus.secMenuSuperior.secLineas.isLineaSelected(lineaType));
     }

@@ -171,7 +171,7 @@ public class SecMenuLateralMobilStpV {
     
     final static String tagTextMenu = "@TagTextMenu";
     @Step (
-    	description="Selección del menú <b>" + tagTextMenu + "</b> (data-ga-label contains #{menu1rstLevel.getDataGaLabelMenuSuperiorDesktop()})", 
+    	description="Selección del menú <b>" + tagTextMenu + "</b> (data-label contains #{menu1rstLevel.getDataGaLabelMenuSuperiorDesktop()})", 
         expected="El menú se ejecuta correctamente")
     public void stepClickMenu1rstLevel(Menu1rstLevel menu1rstLevel, Pais pais) throws Exception {
     	secMenuLateral.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais);

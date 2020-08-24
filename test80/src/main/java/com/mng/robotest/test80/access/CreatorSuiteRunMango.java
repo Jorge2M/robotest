@@ -3,6 +3,7 @@ package com.mng.robotest.test80.access;
 import java.util.Arrays;
 
 import com.mng.robotest.test80.mango.conftestmaker.Suites;
+import com.mng.robotest.test80.mango.test.suites.CompraLuqueSuite;
 import com.mng.robotest.test80.mango.test.suites.ConsolaVotfSuite;
 import com.mng.robotest.test80.mango.test.suites.GenericFactorySuite;
 import com.mng.robotest.test80.mango.test.suites.MenusMantoSuite;
@@ -68,6 +69,8 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 				return (new RegistrosSuite(inputParamsMango));
 			case RebajasPaises:
 				return (new RebajasSuite(inputParamsMango));
+			case CompraLuque:
+				return (new CompraLuqueSuite(inputParamsMango));
 			default:
 			}
 		}

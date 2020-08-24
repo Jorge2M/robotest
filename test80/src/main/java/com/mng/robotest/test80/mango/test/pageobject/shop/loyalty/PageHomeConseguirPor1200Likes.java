@@ -9,7 +9,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageHomeConseguirPor1200Likes extends PageObjTM {
 
 	final static String XPathButton1200Likes = "//button[text()='Conseguir por 1200 Likes']";
-	final static String xpathIconOperationDone = "//span[@class[contains(.,'icon-outline-done')]]";
+	final static String xpathIconOperationDone = "//*[@class[contains(.,'icon-outline-done')]]";
 	
 	private PageHomeConseguirPor1200Likes(WebDriver driver) {
 		super(driver);

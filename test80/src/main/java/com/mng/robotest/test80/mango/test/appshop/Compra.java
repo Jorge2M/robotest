@@ -10,7 +10,6 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
-import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -21,8 +20,6 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
-import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
-import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRegaloInputData.Importe;
@@ -31,7 +28,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter.Foote
 import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigations;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecCabeceraStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checqueregalo.PageChequeRegaloInputDataStpV;
@@ -50,8 +46,6 @@ public class Compra {
 	
 	private final static Pais españa = PaisGetter.get(PaisShop.España);
 	private final static Pais francia = PaisGetter.get(PaisShop.France);
-	private final static Pais colombia = PaisGetter.get(PaisShop.Colombia);
-	private final static IdiomaPais castellanoColomb = colombia.getListIdiomas().get(0);
 	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
 	private final static IdiomaPais frances = francia.getListIdiomas().get(0);
 
@@ -294,56 +288,5 @@ public class Compra {
         }
     }
     
-    //@Test (
-    //    groups={"Compra", "Canal:desktop_App:shop"}, alwaysRun=true, priority=1,
-    //    description="description=[Usuario sin conectar] Alta pago con Codensa (Colombia) y posterior cambios de estado mediante API")
-    public void COM008_Compra_ColombiaCodensa() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
-        dCtxSh.pais=colombia;
-        dCtxSh.idioma=castellanoColomb;   
-        dCtxSh.userRegistered = false;
-        
-        //Acceder a Colombia
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
-        
-        //Alta artículos en la bolsa
-		GetterProducts getterProductsColombia = new GetterProducts.Builder(dCtxSh).build();
-        List<Garment> productsToAddBolsa = Arrays.asList(getterProductsColombia.getAll().get(0));
-        DataBag dataBag = new DataBag(); 
-        SecBolsaStpV.altaListaArticulosEnBolsa(productsToAddBolsa, dataBag, dCtxSh, driver);
-        
-        //Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
-        FlagsTestCkout FTCkout = new FlagsTestCkout();
-        FTCkout.validaPasarelas = false;  
-        FTCkout.validaPagos = false;
-        FTCkout.emailExist = false; 
-        FTCkout.trjGuardada = false;
-        FTCkout.isEmpl = false;
-        FTCkout.testCodPromocional = false;
-        FTCkout.validaPedidosEnManto = true;
-        DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
-        dCtxPago.setFTCkout(FTCkout);
-        dCtxPago.getDataPedido().setDataBag(dataBag);
-        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, driver);
-        
-        //Informamos datos varios necesarios para el proceso de pagos de modo que se pruebe el pago Codensa sobre el país de colombia
-        dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
-        dCtxPago.getFTCkout().validaPagos = true;
-        Pago pagoCodensa = dCtxSh.pais.getPago("CODENSA");
-        dCtxPago.getDataPedido().setPago(pagoCodensa);
-        PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, driver);
-        
-        //Validación en Manto de los Pedidos (si existen)
-        if (FTCkout.validaPedidosEnManto) {
-        	List<CheckPedido> listChecks = Arrays.asList(
-        		CheckPedido.consultarBolsa, 
-        		CheckPedido.consultarPedido);
-            DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
-            PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
-            
-            //String idCompra = dCtxPago.getListPedidos().get(0).getIdCompra();
-            //Test API...
-        }
-    }
+
 }

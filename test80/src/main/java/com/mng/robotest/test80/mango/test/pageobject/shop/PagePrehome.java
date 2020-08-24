@@ -201,13 +201,11 @@ public class PagePrehome {
 	}
 
     public static void setInitialModalsOff(WebDriver driver) {
-        Cookie ck = new Cookie("modalRegistroNewsletter", "0");
-        driver.manage().addCookie(ck);
-        
+//        Cookie ck = new Cookie("modalRegistroNewsletter", "0");
+//        driver.manage().addCookie(ck);
         LocalStorage localStorage = new LocalStorage(driver);
+        localStorage.setItemInLocalStorage("modalRegistroNewsletter", "0");
         localStorage.setItemInLocalStorage("modalAdhesionLoyalty", "true");
-//        Cookie ck2 = new Cookie("modalAdhesionLoyalty", "false");
-//        driver.manage().addCookie(ck2);
     }
 
     /**
