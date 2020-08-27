@@ -41,7 +41,7 @@ public class SecCabeceraStpV {
 	@Validation
 	public ChecksTM validateIconoBolsa() {
 		ChecksTM validations = ChecksTM.getNew();
-		boolean isVisibleIconoBolsa = secCabecera.isInStateIconoBolsa(Visible);
+		boolean isVisibleIconoBolsa = secCabecera.isInStateIconoBolsa(Visible, 2);
 		if (pais.isVentaOnline()) {
 			validations.add(
 				"<b>Sí</b> es posible comprar (aparece la capa relacionada con la bolsa)",

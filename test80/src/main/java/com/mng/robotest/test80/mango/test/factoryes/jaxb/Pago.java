@@ -39,7 +39,7 @@ public class Pago implements Serializable {
         Sofort, 
         Klarna,
         KlarnaDeutsch,
-        AssistQiwi, 
+        PaysecureQiwi, 
         Assist, 
         PasarelaOtras, 
         KoreanCreditCard,
@@ -143,8 +143,8 @@ public class Pago implements Serializable {
             return TypePago.Klarna;                
         case "KlarnaDeutsch":
             return TypePago.KlarnaDeutsch;                
-        case "AssistQiwi":
-            return TypePago.AssistQiwi;                
+        case "PaysecureQiwi":
+            return TypePago.PaysecureQiwi;                
         case "Assist":
             return TypePago.Assist;                
         case "PasarelaOtras":

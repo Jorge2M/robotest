@@ -33,7 +33,7 @@ public class SecBloquesMenuDesktop extends PageObjTM {
     static String XPathCapaMenusLineaWithTag = XPathCapaMenus + "//self::*[@data-brand='" + TagIdLinea + "']";
     static String XPathEntradaMenuLineaRelativeToCapaWithTag = 
     	"//ul[@class[contains(.,'" + TagIdTypeMenu + "')]]" +
-    	"/li[@class[contains(.,'menu-item')] and not(@class[contains(.,'desktop-label-hidden')])]/a"; 
+    	"/li[@class[contains(.,'menu-item')] and not(@class[contains(.,'desktop-label-hidden')] or @class[contains(.,' label-hidden')])]/a"; 
     static String XPathEntradaMenuBloqueRelativeWithTag = "//ul/li/a[@data-label[contains(.,'" + TagIdBloque + "-')]]";
     
     private SecBloquesMenuDesktop(AppEcom app, WebDriver driver) {

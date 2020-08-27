@@ -66,7 +66,7 @@ public class PageHomeLikesStpV {
 		description="Seleccionar el 1er botón \"Conseguir por 1200 Likes\"",
 		expected="Aparece una página para conseguir por 1200 Likes")
 	public void clickButtonConseguirPor1200Likes() {
-		pageHomeLikes.clickButton(ButtonUseLikes.Conseguir);
+		pageHomeLikes.clickButton(ButtonUseLikes.ConseguirPor1200);
 		PageHomeConseguirPor1200LikesStpV.getNew(driver).checkIsPage(2);
 	}
 	

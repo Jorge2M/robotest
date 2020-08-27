@@ -73,8 +73,8 @@ public class FactoryPagos {
         case KlarnaDeutsch:
             pagoMaked = new PagoKlarnaDeutsch(dCtxSh, dCtxPago, driver);
             break;            
-        case AssistQiwi:
-            pagoMaked = new PagoAssistQiwi(dCtxSh, dCtxPago, driver);
+        case PaysecureQiwi:
+            pagoMaked = new PagoPaysecureQiwi(dCtxSh, dCtxPago, driver);
             break;
         case StoreCredit:
             pagoMaked = new PagoStoreCredit(dCtxSh, dCtxPago, driver);

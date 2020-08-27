@@ -122,7 +122,8 @@ public abstract class PageGaleria extends PageObjTM {
 	
 	final static String XPathArticuloDesktop = "//li[@id[contains(.,'product-key-id')]]";
 	
-	final static String XPathArticuloDesktopBuscador = "//div[@class[contains(.,'product-list-item')]]";
+	final static String XPathArticuloDesktopBuscador = 
+		"//div[@class[contains(.,'product-list-item')] or @class[contains(.,'z0q8P')]]";
 	//final static String XPathArticuloMobilOutlet = "//div[@class[contains(.,'product-list-item')] or @id[contains(.,'product-key-id')] or @class='product']";
 	//final static String XPathArticuloMobilOutlet = "//li[@class='product-list-item']";
 	final static String XPathArticuloMobilShop = "//li[@class='product']";

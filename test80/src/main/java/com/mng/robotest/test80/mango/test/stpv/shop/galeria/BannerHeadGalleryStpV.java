@@ -41,7 +41,7 @@ public class BannerHeadGalleryStpV {
 	@SuppressWarnings("static-access")
 	@Validation (
 		description="El Banner de Cabecera contiene algún texto",
-		level=State.Defect)
+		level=State.Warn)
 	public boolean checkBannerContainsSomeText() {
 		String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
 		return ("".compareTo(textBanner)!=0);

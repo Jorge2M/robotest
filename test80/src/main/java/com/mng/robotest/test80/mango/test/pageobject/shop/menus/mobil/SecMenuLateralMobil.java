@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -9,6 +10,7 @@ import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -31,7 +33,7 @@ public class SecMenuLateralMobil extends PageObjTM {
 	
 	static String XPathLinkMenuVisibleFromLi = 
 		"//ul[@class='section-detail' or @class[contains(.,'dropdown-menu')]]" +
-		"/li[not(@class[contains(.,'mobile-label-hidden')] or @class[contains(.,' gap ')])]" +
+		"/li[not(@class[contains(.,'mobile-label-hidden') or @class[contains(.,' label-hidden')] or @class[contains(.,' gap ')])]" +
 		"/a[@class='menu-item-label' and @href]";
 
 	public SecMenuLateralMobil(AppEcom app, WebDriver driver) {
@@ -80,7 +82,11 @@ public class SecMenuLateralMobil extends PageObjTM {
 
 	private List<WebElement> getListMenusDisplayed(SublineaNinosType sublineaType) {
 		String xpath2oLevelMenuLink = getXPathLinksMenus(sublineaType);
-		return (getElementsVisible(driver, By.xpath(xpath2oLevelMenuLink)));
+		if (app==AppEcom.outlet) {
+			return (getElementsVisible(driver, By.xpath(xpath2oLevelMenuLink)));
+		} else {
+			return driver.findElements(By.xpath(xpath2oLevelMenuLink));
+		}
 	}
 
 	public List<DataScreenMenu> getListDataScreenMenus(Linea linea, SublineaNinosType sublineaType) throws Exception {
@@ -140,17 +146,27 @@ public class SecMenuLateralMobil extends PageObjTM {
 		Linea linea = pais.getShoponline().getLinea(menu1rstLevel.getLinea());
 		secLineasMobil.selectLinea(linea, menu1rstLevel.getSublinea());
 		if (app==AppEcom.shop) {
-			clickMenuGroup(typeLocator, menu1rstLevel);
+			unfoldMenuGroup(typeLocator, menu1rstLevel);
 			SeleniumUtils.waitMillis(500);
 		}
 		clickMenuYetDisplayed(typeLocator, menu1rstLevel);
 	}
 	
-	public void clickMenuGroup(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel) {
-		String xpathGroupMenu = 
-				getXPathMenuByTypeLocator(typeLocator, menu1rstLevel) + 
-				"/ancestor::li[@class[contains(.,'dropdown')]]";
-		click(By.xpath(xpathGroupMenu)).exec();
+	public void unfoldMenuGroup(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel) {
+		String xpathLinkMenu = getXPathMenuByTypeLocator(typeLocator, menu1rstLevel);
+		boolean menuVisible = state(State.Clickable, By.xpath(xpathLinkMenu)).check();
+		String xpathGroupMenu = xpathLinkMenu + "/../../preceding-sibling::div[@class[contains(.,'dropdown')]]";
+		List<WebElement> listGroups = driver.findElements(By.xpath(xpathGroupMenu));
+		Iterator<WebElement> itGroups = listGroups.iterator();
+		while (!menuVisible && itGroups.hasNext()) {
+			WebElement group = itGroups.next();
+			int ii=0;
+			while (!menuVisible && ii<2) {
+				click(group).exec();
+				menuVisible = state(State.Clickable, By.xpath(xpathLinkMenu)).wait(1).check();
+				ii+=1;
+			}
+		}
 	}
 	
 	public boolean existsMenuLateral1rstLevel(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel, Pais pais) {

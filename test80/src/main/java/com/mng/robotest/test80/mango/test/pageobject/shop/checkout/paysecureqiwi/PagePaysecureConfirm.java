@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.assistqiwi;
+package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paysecureqiwi;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +7,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjT
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageQiwiConfirm {
+public class PagePaysecureConfirm {
 
     static String XPathButtonConfirmar = "//input[@name[contains(.,'Submit_Success')]]"; 
     

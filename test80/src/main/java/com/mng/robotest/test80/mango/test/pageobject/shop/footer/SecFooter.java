@@ -125,7 +125,7 @@ public class SecFooter {
     public static boolean isVisible(AppEcom app, WebDriver driver) throws Exception {
         String xpath = getXPathCapaFooter(app);
         waitForPageLoaded(driver);
-        return (state(Present, By.xpath(xpath), driver).check());
+        return (state(Visible, By.xpath(xpath), driver).check());
     }    
     
     public static void clickLink(FooterLink footerType, WebDriver driver) {

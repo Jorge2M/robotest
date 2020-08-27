@@ -9,11 +9,11 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageDotpayAcceptSimulation {
     
+    static String XPathEncabezado = "//h1[text()[contains(.,'Simulation of payment')]]";
     static String XPathRedButtonAceptar = "//input[@id='submit_success' and @type='submit']";
-    static String title = "Dotpay payment simulation";
-    
-    public static boolean isPage(WebDriver driver) {
-        return (driver.getTitle().contains(title));
+
+    public static boolean isPage(int maxSeconds, WebDriver driver) {
+    	return (state(Visible, By.xpath(XPathEncabezado), driver).wait(maxSeconds).check());
     }
     
     public static boolean isPresentRedButtonAceptar(WebDriver driver) {

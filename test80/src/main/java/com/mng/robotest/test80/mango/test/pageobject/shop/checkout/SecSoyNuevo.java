@@ -15,8 +15,9 @@ public class SecSoyNuevo {
 	
     public enum ActionNewsL {activate, deactivate}
 
-    static String XPathFormIdent = "//form[@id='SVLoginCheck:FRegLogChk']";
-    static String XPathInputEmail = "//input[@id[contains(.,'expMail')]]";
+    static String XPathFormIdent = "//div[@class='register' or @id='registerCheckOut']//form"; //desktop y mobil
+    static String XPathInputEmail = XPathFormIdent + "//input[@id[contains(.,'expMail')]]";
+    static String XPathInputContent = XPathFormIdent + "//span[@class='eac-cval']";
     static String XPathBotonContinueMobil = "//div[@id='registerCheckOut']//div[@class='submit']/a";
     static String XPathBotonContinueDesktop = "//div[@class='register']//div[@class='submit']/input";
     private static String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
@@ -76,7 +77,21 @@ public class SecSoyNuevo {
         }
     }
 
-	public static void inputEmail(String email, WebDriver driver) {
+	public static void inputEmail(String email, Channel channel, WebDriver driver) {
+		inputEmailOneTime(email, driver);
+		if (!isInputWithText(email, channel, driver)) {
+			inputEmailOneTime(email, driver);
+		}
+	}
+	private static boolean isInputWithText(String text, Channel channel, WebDriver driver) {
+		if (channel==Channel.desktop) {
+			return (driver.findElement(By.xpath(XPathInputContent)).getAttribute("innerHTML").compareTo(text)==0);
+		} else {
+			return (driver.findElement(By.xpath(XPathInputEmail)).getAttribute("value").compareTo(text)==0);
+		}
+	}
+
+	private static void inputEmailOneTime(String email, WebDriver driver) {
 		WebElement input = driver.findElement(By.xpath(XPathInputEmail));
 		input.clear();
 		input.sendKeys(email);

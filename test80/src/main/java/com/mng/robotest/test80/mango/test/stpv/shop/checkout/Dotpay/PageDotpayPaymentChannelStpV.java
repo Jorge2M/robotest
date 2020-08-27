@@ -44,6 +44,6 @@ public class PageDotpayPaymentChannelStpV {
 	public static void inputNameAndConfirm(String nameFirst, String nameSecond, WebDriver driver) {
 		PageDotpayPaymentChannel.sendInputNombre(nameFirst, nameSecond, driver);
 		PageDotpayPaymentChannel.clickButtonConfirm(driver);
-		PageDotpayAcceptSimulationStpV.validateIsPage(driver);
+		PageDotpayAcceptSimulationStpV.validateIsPage(5, driver);
 	}
 }

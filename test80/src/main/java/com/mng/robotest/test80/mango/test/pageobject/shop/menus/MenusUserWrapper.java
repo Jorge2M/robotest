@@ -76,7 +76,7 @@ public class MenusUserWrapper extends PageObjTM {
 	
 	public boolean isMenuInStateUntil(UserMenu menu, State state, int maxSeconds) {
 		if (menu==UserMenu.bolsa) {
-			return (secCabecera.isInStateIconoBolsa(state));
+			return (secCabecera.isInStateIconoBolsa(state, maxSeconds));
 		} else {
 			ElementPage menuElement = getMenu(menu);
 			return (isMenuInStateUntil(menuElement, state, maxSeconds));

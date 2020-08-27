@@ -51,8 +51,8 @@ public class SecCabeceraOutletMobil extends SecCabecera {
     }
     
     @Override
-    public boolean isInStateIconoBolsa(State state) {
-    	return (isElementInStateUntil(IconoCabOutletMobil.bolsa, state, 0));
+    public boolean isInStateIconoBolsa(State state, int maxSeconds) {
+    	return (isElementInStateUntil(IconoCabOutletMobil.bolsa, state, maxSeconds));
     }
     
     @Override

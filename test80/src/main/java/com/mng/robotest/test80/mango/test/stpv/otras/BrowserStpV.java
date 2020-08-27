@@ -111,9 +111,11 @@ public class BrowserStpV {
 		validations.add(
 			"Figura el siguiente contenido: <br>" + contRobots1.replace("\n", "<br>"),
 			driver.getPageSource().toLowerCase().contains(contRobots1.toLowerCase()), State.Defect);
-		validations.add(
-			"Figura el siguiente contenido: <br>" + contRobots2.replace("\n", "<br>"),
-			driver.getPageSource().contains(contRobots2), State.Defect);
+		if (app==AppEcom.outlet) {
+			validations.add(
+				"Figura el siguiente contenido: <br>" + contRobots2.replace("\n", "<br>"),
+				driver.getPageSource().contains(contRobots2), State.Defect);
+		}
 		validations.add(
 			"Figura el siguiente contenido: <br>" + contRobots3.replace("\n", "<br>"),
 			driver.getPageSource().contains(contRobots3), State.Defect);

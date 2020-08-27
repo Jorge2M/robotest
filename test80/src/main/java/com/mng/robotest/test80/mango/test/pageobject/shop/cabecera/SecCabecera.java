@@ -26,7 +26,7 @@ public abstract class SecCabecera extends PageObjTM {
 	private final static String XPathLinkLogoMango = "//a[@class='logo-link' or @class[contains(.,'logo_')]]";
 
 	abstract String getXPathNumberArtIcono();
-	public abstract boolean isInStateIconoBolsa(State state);
+	public abstract boolean isInStateIconoBolsa(State state, int maxSeconds);
 	public abstract void clickIconoBolsa();
 	public abstract void clickIconoBolsaWhenDisp(int maxSecondsToWait);
 	public abstract void hoverIconoBolsa();

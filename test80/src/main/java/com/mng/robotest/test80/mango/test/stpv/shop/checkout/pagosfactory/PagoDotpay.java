@@ -10,7 +10,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapper
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Dotpay.PageDotpay1rstStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Dotpay.PageDotpayAcceptSimulationStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Dotpay.PageDotpayPaymentChannelStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Dotpay.PageDotpayResultadoStpV;
 
 public class PagoDotpay extends PagoStpV {
     
@@ -32,7 +31,6 @@ public class PagoDotpay extends PagoStpV {
             PageDotpayPaymentChannelStpV.selectPayment(1, driver);
             PageDotpayPaymentChannelStpV.inputNameAndConfirm("Jorge", "Muñoz", driver);
             PageDotpayAcceptSimulationStpV.clickRedButtonAceptar(driver);
-            (new PageDotpayResultadoStpV(driver)).clickNext();
             dataPedido.setCodtipopago("F");
         }
     }

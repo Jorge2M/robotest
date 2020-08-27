@@ -1,11 +1,11 @@
-package com.mng.robotest.test80.mango.test.stpv.shop.checkout.assistqiwi;
+package com.mng.robotest.test80.mango.test.stpv.shop.checkout.paysecureqiwi;
 
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
-import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.assistqiwi.PageQiwiInputTlfn;
+import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paysecureqiwi.PageQiwiInputTlfn;
 
 public class PageQiwiInputTlfnStpV {
                  
