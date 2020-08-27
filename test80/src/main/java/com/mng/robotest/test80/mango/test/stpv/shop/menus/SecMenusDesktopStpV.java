@@ -599,6 +599,7 @@ public class SecMenusDesktopStpV {
 	 	return validations;
     }    
 
+    @Validation
     public ChecksTM checkErrorPageWithoutException() throws Exception {
     	ChecksTM validations = ChecksTM.getNew();
     	ITestContext ctx = TestMaker.getTestCase().getTestRunParent().getTestNgContext();
