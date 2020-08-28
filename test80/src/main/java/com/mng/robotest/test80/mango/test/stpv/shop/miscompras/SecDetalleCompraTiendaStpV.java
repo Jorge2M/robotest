@@ -7,7 +7,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraTienda;
+import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.TicketOnline;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.SecDetalleCompraTiendaDesktop;
 
 public class SecDetalleCompraTiendaStpV {
@@ -23,7 +23,7 @@ public class SecDetalleCompraTiendaStpV {
 		return new SecDetalleCompraTiendaStpV(section, channel);
 	}
 	
-	public void validateIsOk(CompraTienda compraTienda) {
+	public void validateIsOk(TicketOnline compraTienda) {
 		checkData(compraTienda);
 		if (channel==Channel.mobile) {
 			checkIsVisibleImgCodigoBarrasMovil();
@@ -32,7 +32,7 @@ public class SecDetalleCompraTiendaStpV {
 	
     @SuppressWarnings("static-access")
     @Validation
-    private ChecksTM checkData(CompraTienda compraTienda) {
+    private ChecksTM checkData(TicketOnline compraTienda) {
         ChecksTM validations = ChecksTM.getNew();
         int maxSeconds = 1;
         validations.add(

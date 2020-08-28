@@ -8,7 +8,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
-import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraOnline;
+import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.Ticket;
 import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.PageDetallePedido.DetallePedido;
 
@@ -31,7 +31,7 @@ public class PageDetallePedidoStpV {
     	return this.pageDetalle;
     }
     
-    public void validateIsPageOk(CompraOnline compraOnline, String codPais, WebDriver driver) {
+    public void validateIsPageOk(Ticket compraOnline, String codPais, WebDriver driver) {
         String codPedido = compraOnline.numPedido;
         String importeTotal = compraOnline.importe.replaceAll("[^\\d.,]", "");  //Eliminamos la divisa;
         validateIsPageOk(codPedido, importeTotal, codPais);

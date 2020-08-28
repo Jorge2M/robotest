@@ -17,7 +17,7 @@ import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageResultPago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras.TypeBlock;
-import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisComprasDesktop.TypeCompra;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras.TypeTicket;
 import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.PageListPedidos;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
@@ -176,7 +176,7 @@ public class PageResultPagoStpV {
         DataPedido dataPedido = dCtxPago.getDataPedido();
         if (dCtxSh.userRegistered) {
         	PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(dCtxSh.channel, driver);
-        	pageMisComprasStpV.selectBlock(TypeCompra.Online, true);
+        	pageMisComprasStpV.selectBlock(TypeTicket.Online, true);
         	pageMisComprasStpV.validateIsCompraOnlineVisible(dataPedido.getCodpedido(), dCtxPago.getFTCkout().isChequeRegalo);
         } else {
         	PageAccesoMisComprasStpV pageAccesoMisComprasStpV = PageAccesoMisComprasStpV.getNew(driver);

@@ -10,12 +10,12 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraOnline;
-import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraTienda;
+import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.Ticket;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.ModalDetalleMisComprasDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras;
-import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras.TypeCompra;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras.TypeTicket;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisComprasDesktop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisComprasMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.SecDetalleCompraTiendaDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.SecQuickViewArticuloDesktop;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
@@ -61,7 +61,7 @@ public class PageMisComprasStpV {
         if (pais.isTicketStoreEnabled()) {
             validateIsPage();
         } else {
-            validateIsPageWhenNotExistTabs();
+        	validateIsPage_WhenOnlyOnlineTickets();
             StdValidationFlags flagsVal = StdValidationFlags.newOne();
             flagsVal.validaSEO = true;
             flagsVal.validaJS = true;
@@ -71,7 +71,7 @@ public class PageMisComprasStpV {
     }
 
 	@Validation
-	private ChecksTM validateIsPageWhenNotExistTabs() {
+	private ChecksTM validateIsPage_WhenOnlyOnlineTickets() {
 		ChecksTM validations = ChecksTM.getNew();
 		int maxSecondsToWait = 2;
 		validations.add(
@@ -82,15 +82,21 @@ public class PageMisComprasStpV {
 			PageMisComprasDesktop pageMisComprasDesktop = (PageMisComprasDesktop)pageMisCompras;
 			validations.add(
 				"No aparece el bloque de \"Tienda\"",
-				!pageMisComprasDesktop.isPresentBlockUntil(0, TypeCompra.Tienda), State.Warn);
+				!pageMisComprasDesktop.isPresentBlockUntil(0, TypeTicket.Tienda), State.Warn);
 			validations.add(
 				"No aparece el bloque de \"Online\"",
-				!pageMisComprasDesktop.isPresentBlockUntil(0, TypeCompra.Online), State.Warn);
-		}
+				!pageMisComprasDesktop.isPresentBlockUntil(0, TypeTicket.Online), State.Warn);
+		} 
 		else {
-			"No aparecen pedidos de tipo \"Tienda\"",
-			"No aparecen pedidos de tipo \"Online\""
+			PageMisComprasMobil pageMisComprasMobil = (PageMisComprasMobil)pageMisCompras;
+			validations.add(
+				"Existe algún tícket de tipo \"Online\"",
+				!pageMisComprasMobil.getTickets(TypeTicket.Tienda).size()>0, State.Warn);
+			validations.add(
+				"No hay ningún tícket de tipo \"Tienda\"",
+				!pageMisComprasMobil.getTickets(TypeTicket.Online).size()==0, State.Warn);
 		}
+			
 		return validations;
 	}
 
@@ -103,17 +109,17 @@ public class PageMisComprasStpV {
     		pageMisCompras.isPageUntil(maxSeconds), State.Warn);
       	validations.add(
     		"Aparece el bloque de \"Tienda\"",
-    		pageMisCompras.isPresentBlockUntil(0, TypeCompra.Tienda), State.Warn);
+    		pageMisCompras.isPresentBlockUntil(0, TypeTicket.Tienda), State.Warn);
       	validations.add(
       		"Aparece el bloque de \"Online\"",
-      		pageMisCompras.isPresentBlockUntil(0, TypeCompra.Online), State.Warn);
+      		pageMisCompras.isPresentBlockUntil(0, TypeTicket.Online), State.Warn);
       	return validations;
     }
     
     @Step (
     	description="Seleccionar el bloque <b>#{typeCompra}<b>", 
         expected="Se hace visible el bloque #{typeCompra}")
-    public void selectBlock(TypeCompra typeCompra, boolean ordersExpected) {
+    public void selectBlock(TypeTicket typeCompra, boolean ordersExpected) {
     	pageMisCompras.clickBlock(typeCompra);
         int maxSeconds = 2;
     	checkBlockSelected(typeCompra, maxSeconds);
@@ -127,12 +133,12 @@ public class PageMisComprasStpV {
 	@Validation (
 		description="Queda seleccionado el bloque de <b>#{typeCompra}</b> (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
-	private boolean checkBlockSelected(TypeCompra typeCompra, int maxSeconds) {
+	private boolean checkBlockSelected(TypeTicket typeCompra, int maxSeconds) {
 		return (pageMisCompras.isSelectedBlockUntil(maxSeconds, typeCompra));
 	}
 	
 	@Validation
-	private ChecksTM checkArticlesInList(TypeCompra typeCompra) {
+	private ChecksTM checkArticlesInList(TypeTicket typeCompra) {
     	ChecksTM validations = ChecksTM.getNew();
     	int maxSeconds = 2;
     	boolean isVisibleAnyCompra = pageMisCompras.isVisibleAnyCompraUntil(maxSeconds); 
@@ -148,7 +154,7 @@ public class PageMisComprasStpV {
 	}
 		
 	@Validation
-	private ChecksTM checkListArticlesVoid(TypeCompra typeCompra) {
+	private ChecksTM checkListArticlesVoid(TypeTicket typeCompra) {
     	ChecksTM validations = ChecksTM.getNew();
     	boolean isVisibleAnyCompra = pageMisCompras.isVisibleAnyCompraUntil(0);
       	validations.add(
@@ -170,7 +176,7 @@ public class PageMisComprasStpV {
             avoidEvidences = true;
         }
         validations.add(
-        	"Es visible la compra " + TypeCompra.Online + " asociada al pedido <b>" + codPedido + "</b>",
+        	"Es visible la compra " + TypeTicket.Online + " asociada al pedido <b>" + codPedido + "</b>",
         	pageMisCompras.isVisibleCompraOnline(codPedido), stateVal, avoidEvidences);
         return validations;
     }
@@ -180,7 +186,7 @@ public class PageMisComprasStpV {
         expected="Aparece la página con los detalles del pedido",
         saveHtmlPage=SaveWhen.IfProblem)
     public void selectCompraOnline(int posInLista, String codPais) {
-    	CompraOnline compraOnline = pageMisCompras.getDataCompraOnline(posInLista);
+    	Ticket compraOnline = pageMisCompras.getDataCompraOnline(posInLista);
     	pageMisCompras.clickCompra(posInLista);       
         PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(driver);
         pageDetPedidoStpV.validateIsPageOk(compraOnline, codPais, driver);       
@@ -191,7 +197,7 @@ public class PageMisComprasStpV {
     	description="Seleccionamos la #{posInLista}a compra (tipo Tienda) de la lista", 
         expected="Aparece una sección con los detalles de la Compra")
     public void selectCompraTienda(int posInLista) {
-    	CompraTienda compraTienda = pageMisCompras.getDataCompraTienda(posInLista);
+    	TicketOnline compraTienda = pageMisCompras.getDataCompraTienda(posInLista);
     	pageMisCompras.clickCompra(posInLista);       
     	secDetalleCompraTiendaStpV.validateIsOk(compraTienda);      
     }
