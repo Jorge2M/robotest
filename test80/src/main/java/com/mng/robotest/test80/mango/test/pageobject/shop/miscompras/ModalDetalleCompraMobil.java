@@ -10,9 +10,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class ModalDetalleCompraMobil extends PageObjTM implements PageDetallePedido {
-	
-	private final ModalDetalleArticulo modalDetalleArticulo;
+public class ModalDetalleCompraMobil extends ModalDetalleCompra implements PageDetallePedido {
 	
 	private String getXPathIdTicket(TypeTicket type) {
 		switch (type) {
@@ -24,16 +22,10 @@ public class ModalDetalleCompraMobil extends PageObjTM implements PageDetallePed
 		}
 	}
     
-    public ModalDetalleCompraMobil(Channel channel, WebDriver driver) {
+    public ModalDetalleCompraMobil(WebDriver driver) {
     	super(driver);
-    	this.channel = channel;
-    	modalDetalleArticulo = ModalDetalleArticulo.getNew(driver);
     }
-    
-    public ModalDetalleArticulo getModalDetalleArticulo() {
-    	return modalDetalleArticulo;
-    }
-    
+
 	private String getXPathArticulo(int position) {
 		return "//div[@id='box_" + position + "' and @class[contains(.,'fills')]]";
 	}

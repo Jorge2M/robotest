@@ -7,12 +7,9 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras.TypeTicket;
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class ModalDetalleCompraDesktop extends ModalDetalleCompra implements PageDetallePedido {
-	
-	private final ModalDetalleArticulo modalDetalleArticulo;
 	
     private static String XPathDataTicket = "//div[@class[contains(.,'ticket-container')]]";
     private static String XPathIdTicketTienda = XPathDataTicket + "//div[@class='info']/p[1]";
@@ -46,13 +43,8 @@ public class ModalDetalleCompraDesktop extends ModalDetalleCompra implements Pag
     
     public ModalDetalleCompraDesktop(WebDriver driver) {
     	super(driver);
-    	modalDetalleArticulo = ModalDetalleArticulo.getNew(driver);
     }
-    
-    public ModalDetalleArticulo getModalDetalleArticulo() {
-    	return modalDetalleArticulo;
-    }
-    
+
 	private String getXPathArticulo(int position) {
 		return "//div[@id='box_" + position + "' and @class[contains(.,'fills')]]";
 	}
