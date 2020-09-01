@@ -75,14 +75,14 @@ public class PageAccesoMisComprasStpV {
 			"(" + tagUsuario + " / <b style=\"color:blue;\">#{dataPedido.getCodpedido()}</b>)" + 
 			" y pulsar \"Buscar pedido\"", 
 		expected="Aparece la página de detalle del pedido")
-	public void buscarPedidoForNoRegistrado(DataPedido dataPedido) {
+	public void buscarPedidoForNoRegistrado(DataPedido dataPedido, Channel channel) {
 		String usuario = dataPedido.getEmailCheckout();
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagUsuario, usuario);
 
 		pageAccesoMisCompras.inputUserAndNumPedidoBlockNo(usuario, dataPedido.getCodpedido()); 
 		pageAccesoMisCompras.clickBuscarPedidoBlockNo(); 
 
-		PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(driver);
+		PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(channel, driver);
 		pageDetPedidoStpV.validateIsPageOk(dataPedido);
 	}
 }

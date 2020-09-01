@@ -124,9 +124,7 @@ public class PageMisComprasDesktop extends PageMisCompras {
 	@Override
 	public Ticket selectTicket(TypeTicket type, int position) {
 		Ticket ticket = getTickets(type).get(position-1);
-		if (channel==Channel.desktop) {
-			clickBlockIfExists(type);
-		}
+		clickBlockIfExists(type);
 		By byTicket = By.xpath(getXPathTicket(ticket.getId()));
 		driver.findElement(byTicket).click();
 		return ticket;

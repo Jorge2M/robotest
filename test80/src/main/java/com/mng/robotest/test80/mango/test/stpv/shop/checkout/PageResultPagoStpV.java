@@ -18,7 +18,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageResultPago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras.TypeBlock;
-import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.PageListPedidos;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageListPedidosOld;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageAccesoMisComprasStpV;
@@ -115,14 +115,14 @@ public class PageResultPagoStpV {
     @Step (
     	description="Seleccionar el link \"Mis pedidos\"", 
         expected="Apareca la página de identificación del pedido")
-    public static void selectMisPedidos(DataPedido dataPedido, WebDriver driver) throws Exception {
+    public static void selectMisPedidos(DataPedido dataPedido, Channel channel, WebDriver driver) throws Exception {
         PageResultPago.clickMisPedidos(driver);      
                                 
         //Validations. Puede aparecer la página con la lista de pedidos o la de introducción de los datos del pedido
-        if (PageListPedidos.isPage(driver)) {
+        if (PageListPedidosOld.isPage(driver)) {
         	PageListPedidosStpV.validateIsPage(dataPedido.getCodpedido(), driver);
         } else {
-        	PageInputPedidoStpV.getNew(driver).validateIsPage();
+        	PageInputPedidoStpV.getNew(channel, driver).validateIsPage();
         }
     }    
     
@@ -157,15 +157,15 @@ public class PageResultPagoStpV {
         }
     }
     
-    public static void selectLinkPedidoAndValidatePedido(DataPedido dataPedido, WebDriver driver) 
+    public static void selectLinkPedidoAndValidatePedido(DataPedido dataPedido, Channel channel, WebDriver driver) 
     throws Exception {
-        PageResultPagoStpV.selectMisPedidos(dataPedido, driver);
+        PageResultPagoStpV.selectMisPedidos(dataPedido, channel, driver);
         StepTM StepTestMaker = TestMaker.getLastStep();
         if (StepTestMaker.getResultSteps()==State.Ok) {
-            if (PageListPedidos.isPage(driver)) {
+            if (PageListPedidosOld.isPage(driver)) {
                 PageListPedidosStpV.selectPedido(dataPedido.getCodpedido(), driver);
             } else {
-                PageInputPedidoStpV.getNew(driver).inputPedidoAndSubmit(dataPedido);
+                PageInputPedidoStpV.getNew(channel, driver).inputPedidoAndSubmit(dataPedido);
             }
         }
     }
@@ -180,7 +180,7 @@ public class PageResultPagoStpV {
         } else {
         	PageAccesoMisComprasStpV pageAccesoMisComprasStpV = PageAccesoMisComprasStpV.getNew(driver);
             pageAccesoMisComprasStpV.clickBlock(TypeBlock.NoRegistrado);
-            pageAccesoMisComprasStpV.buscarPedidoForNoRegistrado(dCtxPago.getDataPedido());
+            pageAccesoMisComprasStpV.buscarPedidoForNoRegistrado(dCtxPago.getDataPedido(), dCtxSh.channel);
         }
     }
 }

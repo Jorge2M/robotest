@@ -11,21 +11,21 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.Ticket;
-import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.ModalDetalleCompra;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.ModalDetalleCompraDesktop;
 
 public class ModalDetalleCompraStpV {
 	
-	private final ModalDetalleCompra modalDetalleCompra;
+	private final ModalDetalleCompraDesktop modalDetalleCompra;
     private final ModalDetalleArticuloStpV modalDetalleArticuloStpV;
 	private final Channel channel;
 	
-	private ModalDetalleCompraStpV(ModalDetalleCompra section, Channel channel, WebDriver driver) {
+	private ModalDetalleCompraStpV(ModalDetalleCompraDesktop section, Channel channel, WebDriver driver) {
 		this.modalDetalleCompra = section;
 		this.modalDetalleArticuloStpV = ModalDetalleArticuloStpV.getNew(modalDetalleCompra.getModalDetalleArticulo(), driver);
 		this.channel = channel;
 		
 	}
-	public static ModalDetalleCompraStpV getNew(ModalDetalleCompra section, Channel channel, WebDriver driver) {
+	public static ModalDetalleCompraStpV getNew(ModalDetalleCompraDesktop section, Channel channel, WebDriver driver) {
 		return new ModalDetalleCompraStpV(section, channel, driver);
 	}
 	public ModalDetalleArticuloStpV getModalDetalleArticulo() {

@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.pageobject.shop.pedidos;
+package com.mng.robotest.test80.mango.test.pageobject.shop.miscompras;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,14 +9,14 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 
-public class PageDetallePedidoOld extends PageObjTM implements PageDetallePedido {
+public class PageDetalleCompraOld extends PageObjTM implements PageDetallePedido {
 	
     private static final String XPathDivDetalle = "//div[@class[contains(.,'detallePedido')]]";
     private static final String XPathLineaPrenda = "//tr/td[@align='left' and @height='30']/..";
     private static final String XPathIrATiendaButton = "(//div[@id[contains(.,'ListaDetail')]])[1]";
     private static final String XPathBackButton = "(//div[@id[contains(.,'ListaDetail')]])[2]";
     
-    public PageDetallePedidoOld(WebDriver driver) {
+    public PageDetalleCompraOld(WebDriver driver) {
     	super(driver);
     }
     

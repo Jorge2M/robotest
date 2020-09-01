@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.pageobject.shop.pedidos;
+package com.mng.robotest.test80.mango.test.pageobject.shop.miscompras;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +7,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjT
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageListPedidos {
+public class PageListPedidosOld {
 
     private static final String XPathListaPedidos = "//span[@id[contains(.,'listaPedidos')]]";
     

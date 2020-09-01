@@ -13,7 +13,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.Ticket;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras.TypeTicket;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisComprasDesktop;
-import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.ModalDetalleCompra;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.ModalDetalleCompraDesktop;
 import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageDetallePedidoStpV;
 
 public class PageMisComprasStpV {
@@ -27,7 +27,7 @@ public class PageMisComprasStpV {
     	this.driver = driver;
     	this.channel = channel;
     	this.pageMisCompras = PageMisCompras.make(channel, driver);
-    	ModalDetalleCompra secDetalle = pageMisCompras.getModalDetalleCompra();
+    	ModalDetalleCompraDesktop secDetalle = pageMisCompras.getModalDetalleCompra();
     	this.modalDetalleCompraStpV = ModalDetalleCompraStpV.getNew(secDetalle, channel, driver);
 
     }
@@ -100,7 +100,7 @@ public class PageMisComprasStpV {
         saveHtmlPage=SaveWhen.IfProblem)
     public void selectCompraOnline(int posInLista, String codPais) {
     	Ticket ticket = pageMisCompras.selectTicket(TypeTicket.Online, posInLista);       
-        PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(driver);
+        PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(channel, driver);
         pageDetPedidoStpV.validateIsPageOk(ticket, codPais, driver);       
     }
     

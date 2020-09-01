@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.pageobject.shop.pedidos;
+package com.mng.robotest.test80.mango.test.pageobject.shop.miscompras;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRegaloInputData;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter.FooterLink;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras;
-import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.PageInputPedido;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageInputPedido;
 
 public class FactoryPageFromFooter {
 	

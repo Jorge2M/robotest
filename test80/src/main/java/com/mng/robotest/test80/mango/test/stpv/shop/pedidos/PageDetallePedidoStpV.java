@@ -9,21 +9,21 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.Ticket;
-import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.*;
-import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.PageDetallePedido.DetallePedido;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageDetallePedido;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageDetallePedido.DetallePedido;
 
 public class PageDetallePedidoStpV {
 	
 	private final WebDriver driver;
 	private final PageDetallePedido pageDetalle;
 	
-    public PageDetallePedidoStpV(WebDriver driver) {
+    public PageDetallePedidoStpV(Channel channel, WebDriver driver) {
     	this.driver = driver;
-		PageDetallePedido pageDetalle = DetallePedido.New.getPageObject(driver);
+		PageDetallePedido pageDetalle = DetallePedido.New.getPageObject(channel, driver);
 		if (pageDetalle.isPage()) {
 			this.pageDetalle = pageDetalle;
 		} else {
-			this.pageDetalle = DetallePedido.Old.getPageObject(driver);
+			this.pageDetalle = DetallePedido.Old.getPageObject(channel, driver);
 		}
     }
     

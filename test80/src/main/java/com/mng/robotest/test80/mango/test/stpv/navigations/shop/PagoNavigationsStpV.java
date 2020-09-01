@@ -238,7 +238,7 @@ public class PagoNavigationsStpV {
                     if (testMisCompras(dCtxPago, dCtxSh)) {
                         PageResultPagoStpV.selectLinkMisComprasAndValidateCompra(dCtxPago, dCtxSh, driver);
                     } else {
-                        PageResultPagoStpV.selectLinkPedidoAndValidatePedido(dataPedido, driver);
+                        PageResultPagoStpV.selectLinkPedidoAndValidatePedido(dataPedido, dCtxSh.channel, driver);
                     }
                 }
             } else {

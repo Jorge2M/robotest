@@ -10,30 +10,9 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class ModalDetalleCompra extends PageObjTM {
+public class ModalDetalleCompraMobil extends PageObjTM implements PageDetallePedido {
 	
-	private final Channel channel;
 	private final ModalDetalleArticulo modalDetalleArticulo;
-	
-    private static String XPathDataTicket = "//div[@class[contains(.,'ticket-container')]]";
-    private static String XPathIdTicketTienda = XPathDataTicket + "//div[@class='info']/p[1]";
-    private static String XPathIdTicketOnline = XPathDataTicket + "//div[@class='info']/p[2]";  
-    private static String XPathImporte = XPathDataTicket + "//div[@class='box-price' or @class='price' or @class[contains(.,'price-shop')]]";
-    private static String XPathDireccion = XPathDataTicket + "//div[@class='info']/p[3]"; 
-    private static String XPathCodigoBarrasImg = XPathDataTicket + "//div[@class='code']/img";
-    private static String XPathArticulo = "//div[@onclick[contains(.,'openProductDetails')]]";
-    private static String XPathLinkToMisComprasDesktop = "//div[@class[contains(.,'shopping-breadcrumbs')]]";
-    private static String XPathLinkToMisComprasMobil = "//div[@class[contains(.,'iconBack')]]";
-    
-	private String getXPathLinkToMisCompras() {
-		switch (channel) {
-		case desktop:
-			return XPathLinkToMisComprasDesktop;
-		case mobile:
-		default:
-			return XPathLinkToMisComprasMobil;
-		}
-	}
 	
 	private String getXPathIdTicket(TypeTicket type) {
 		switch (type) {
@@ -45,13 +24,10 @@ public class ModalDetalleCompra extends PageObjTM {
 		}
 	}
     
-    private ModalDetalleCompra(Channel channel, WebDriver driver) {
+    public ModalDetalleCompraMobil(Channel channel, WebDriver driver) {
     	super(driver);
     	this.channel = channel;
     	modalDetalleArticulo = ModalDetalleArticulo.getNew(driver);
-    }
-    public static ModalDetalleCompra getNew(Channel channel, WebDriver driver) {
-    	return new ModalDetalleCompra(channel, driver);
     }
     
     public ModalDetalleArticulo getModalDetalleArticulo() {
@@ -77,6 +53,28 @@ public class ModalDetalleCompra extends PageObjTM {
         return (xpathArticulo + "//div[@class='price' or @class[contains(.,'box-price')]]");
     }
     
+    @Override
+    public boolean isPage() {
+    	return isVisibleSectionUntil(2);
+    }
+    @Override
+    public DetallePedido getTypeDetalle() {
+    	return DetallePedido.New;
+    }
+    @Override
+    public boolean isPresentImporteTotal(String importeTotal, String codPais) {
+    	String importe = getImporte();
+    	return (importe.compareTo(importeTotal)==0);
+    }
+    @Override
+    public boolean isVisiblePrendaUntil(int maxSeconds) {
+    	return getNumPrendas()>0;
+    }
+    @Override
+    public void clickBackButton(Channel channel) {
+    	gotoListaMisCompras();
+    }
+    
     public boolean isVisibleSectionUntil(int maxSeconds) {
     	return (state(Visible, By.xpath(XPathDataTicket)).wait(maxSeconds).check());
     }
@@ -95,6 +93,7 @@ public class ModalDetalleCompra extends PageObjTM {
         return (driver.findElement(By.xpath(XPathDireccion)).getText());
     }
     
+    @Override
     public int getNumPrendas() {
         return (driver.findElements(By.xpath(XPathArticulo)).size());
     }
@@ -146,7 +145,6 @@ public class ModalDetalleCompra extends PageObjTM {
     }
     
 	public void gotoListaMisCompras() {
-		String xpath = getXPathLinkToMisCompras();
-		click(By.xpath(xpath)).exec();
+		click(By.xpath(XPathLinkToMisCompras)).exec();
 	}
 }

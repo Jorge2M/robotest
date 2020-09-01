@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.pageobject.shop.pedidos;
+package com.mng.robotest.test80.mango.test.pageobject.shop.miscompras;
 
 import org.openqa.selenium.WebDriver;
 
@@ -10,13 +10,16 @@ public interface PageDetallePedido {
     	Old, 
     	New;
     	
-        public PageDetallePedido getPageObject(WebDriver driver) {
+        public PageDetallePedido getPageObject(Channel channel, WebDriver driver) {
         	switch (this) {
         	case Old:
-        		return (new PageDetallePedidoOld(driver));
+        		return (new PageDetalleCompraOld(driver));
         	case New:
         	default:
-        		return (new PageDetallePedidoNew(driver));	
+        		if (channel==Channel.desktop) {
+        			return (new ModalDetalleCompraDesktop(driver));
+        		}
+        		return (new ModalDetalleCompraMobil(driver));
         	}	
         } 
     };

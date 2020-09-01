@@ -11,7 +11,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.Ticket;
 
 public abstract class PageMisCompras extends PageObjTM {
 
-	private final ModalDetalleCompra modalDetalleCompra;
+	private final ModalDetalleCompraDesktop modalDetalleCompra;
 	
 	public enum TypeTicket {Tienda, Online}
 	final Channel channel;
@@ -35,10 +35,10 @@ public abstract class PageMisCompras extends PageObjTM {
 	protected PageMisCompras(Channel channel, WebDriver driver) {
 		super(driver);
 		this.channel = channel;
-		this.modalDetalleCompra = ModalDetalleCompra.getNew(channel, driver);
+		this.modalDetalleCompra = new ModalDetalleCompraDesktop(channel, driver);
 	}
 	
-	public ModalDetalleCompra getModalDetalleCompra() {
+	public ModalDetalleCompraDesktop getModalDetalleCompra() {
 		return this.modalDetalleCompra;
 	}
 	
