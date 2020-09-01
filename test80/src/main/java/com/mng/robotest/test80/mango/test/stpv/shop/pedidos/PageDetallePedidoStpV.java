@@ -31,11 +31,10 @@ public class PageDetallePedidoStpV {
     	return this.pageDetalle;
     }
     
-    public void validateIsPageOk(Ticket compraOnline, String codPais, WebDriver driver) {
-        String codPedido = compraOnline.numPedido;
-        String importeTotal = compraOnline.importe.replaceAll("[^\\d.,]", "");  //Eliminamos la divisa;
-        validateIsPageOk(codPedido, importeTotal, codPais);
-        areOkPrendasOnline(compraOnline.numPrendas);
+    public void validateIsPageOk(Ticket compra, String codPais, WebDriver driver) {
+        String importeTotal = compra.getPrecio().replaceAll("[^\\d.,]", "");  //Eliminamos la divisa;
+        validateIsPageOk(compra.getId(), importeTotal, codPais);
+        areOkPrendasOnline(compra.getNumItems());
     }
     
     @Validation

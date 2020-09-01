@@ -13,8 +13,8 @@ public class ModalBuscadorTiendasMisCompras {
     static String XPathTienda = XPathModalContainer + "//div[@class[contains(.,'dp__element')]]";
     static String XPathAspaForClose = "//span[@class[contains(.,'iconClose')]]";
     
-    public static boolean isVisible(WebDriver driver) {
-    	return (state(Visible, By.xpath(XPathModalContainer), driver).check());
+    public static boolean isVisible(int maxSeconds, WebDriver driver) {
+    	return (state(Visible, By.xpath(XPathModalContainer), driver).wait(maxSeconds).check());
     }
     
     public static boolean isPresentAnyTiendaUntil(WebDriver driver, int maxSeconds) {

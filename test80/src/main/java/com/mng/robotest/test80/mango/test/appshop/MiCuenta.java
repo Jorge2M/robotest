@@ -6,7 +6,6 @@ import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -16,7 +15,6 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageSuscripciones.idNewsletters;
-import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras.TypeTicket;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.PagePrehomeStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
@@ -133,16 +131,14 @@ public class MiCuenta implements Serializable {
         
         PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
         pageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh.pais);
-        
         PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(dCtxSh.channel, driver);
-        pageMisComprasStpV.selectBlock(TypeTicket.Online, true);
         pageMisComprasStpV.selectCompraOnline(1, dCtxSh.pais.getCodigo_pais());
-        if (dCtxSh.channel == Channel.desktop) {
-        	pageMisComprasStpV.clickMoreInfo();
-        	pageMisComprasStpV.getModalDetalleMisCompras().clickBuscarTiendaButton();
-	        pageMisComprasStpV.getModalDetalleMisCompras().clickCloseModalBuscadorTiendas();
-        }
-        pageMisComprasStpV.getModalDetalleMisCompras().gotoListaMisCompras();
+        //if (dCtxSh.channel == Channel.desktop) {
+        	pageMisComprasStpV.clickDetalleArticulo(1);
+        	pageMisComprasStpV.clickBuscarTiendaArticulo();
+	        pageMisComprasStpV.clickCloseBuscarTiendaArticulo();
+        //}
+        pageMisComprasStpV.gotoMisComprasFromDetalleCompra();
         
         //Test Compras en Tienda
         dCtxSh.userConnected = userWithStorePurchases;
@@ -151,9 +147,10 @@ public class MiCuenta implements Serializable {
         SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
         userMenusStpV.logoff();
         AccesoStpV.identificacionEnMango(dCtxSh, driver);
+        
         pageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh.pais);
-        pageMisComprasStpV.selectBlock(TypeTicket.Tienda, true);
+        pageMisComprasStpV = PageMisComprasStpV.getNew(dCtxSh.channel, driver);
         pageMisComprasStpV.selectCompraTienda(1);
-        pageMisComprasStpV.getSecDetalleCompraTienda().selectArticulo(1, pageMisComprasStpV);
+        pageMisComprasStpV.clickDetalleArticulo(1);
     }
 }

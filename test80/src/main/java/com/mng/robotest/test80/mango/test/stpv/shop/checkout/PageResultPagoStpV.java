@@ -14,10 +14,10 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageResultPago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras.TypeBlock;
-import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras.TypeTicket;
 import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.PageListPedidos;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
@@ -129,11 +129,11 @@ public class PageResultPagoStpV {
     @Step (
     	description="Seleccionar el link \"Mis Compras\"",
     	expected="Aparece la página de \"Mis compras\" o la de \"Acceso a Mis compras\" según si el usuario está o no loginado")
-    public static void selectMisCompras(boolean userRegistered, Channel channel, WebDriver driver) throws Exception {
+    public static void selectMisCompras(boolean userRegistered, Channel channel, Pais pais, WebDriver driver) throws Exception {
         PageResultPago.clickMisCompras(driver);     
         if (userRegistered) {
         	PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(channel, driver);
-        	pageMisComprasStpV.validateIsPage();
+        	pageMisComprasStpV.validateIsPage(pais);
             
             StdValidationFlags flagsVal = StdValidationFlags.newOne();
             flagsVal.validaSEO = true;
@@ -172,12 +172,11 @@ public class PageResultPagoStpV {
     
     public static void selectLinkMisComprasAndValidateCompra(DataCtxPago dCtxPago, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {    	
-        PageResultPagoStpV.selectMisCompras(dCtxSh.userRegistered, dCtxSh.channel, driver);
+        PageResultPagoStpV.selectMisCompras(dCtxSh.userRegistered, dCtxSh.channel, dCtxSh.pais, driver);
         DataPedido dataPedido = dCtxPago.getDataPedido();
         if (dCtxSh.userRegistered) {
         	PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(dCtxSh.channel, driver);
-        	pageMisComprasStpV.selectBlock(TypeTicket.Online, true);
-        	pageMisComprasStpV.validateIsCompraOnlineVisible(dataPedido.getCodpedido(), dCtxPago.getFTCkout().isChequeRegalo);
+        	pageMisComprasStpV.validateIsCompraOnline(dataPedido.getCodpedido(), dCtxPago.getFTCkout().isChequeRegalo);
         } else {
         	PageAccesoMisComprasStpV pageAccesoMisComprasStpV = PageAccesoMisComprasStpV.getNew(driver);
             pageAccesoMisComprasStpV.clickBlock(TypeBlock.NoRegistrado);

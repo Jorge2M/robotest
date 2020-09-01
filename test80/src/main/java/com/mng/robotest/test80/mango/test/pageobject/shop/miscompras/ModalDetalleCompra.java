@@ -5,28 +5,62 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras.TypeTicket;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class SecDetalleCompraTiendaDesktop extends PageObjTM {
+public class ModalDetalleCompra extends PageObjTM {
+	
+	private final Channel channel;
+	private final ModalDetalleArticulo modalDetalleArticulo;
 	
     private static String XPathDataTicket = "//div[@class[contains(.,'ticket-container')]]";
-    private static String XPathNumTicket = XPathDataTicket + "//div[@class='info']/p[1]";  
+    private static String XPathIdTicketTienda = XPathDataTicket + "//div[@class='info']/p[1]";
+    private static String XPathIdTicketOnline = XPathDataTicket + "//div[@class='info']/p[2]";  
     private static String XPathImporte = XPathDataTicket + "//div[@class='box-price' or @class='price' or @class[contains(.,'price-shop')]]";
     private static String XPathDireccion = XPathDataTicket + "//div[@class='info']/p[3]"; 
     private static String XPathCodigoBarrasImg = XPathDataTicket + "//div[@class='code']/img";
     private static String XPathArticulo = "//div[@onclick[contains(.,'openProductDetails')]]";
+    private static String XPathLinkToMisComprasDesktop = "//div[@class[contains(.,'shopping-breadcrumbs')]]";
+    private static String XPathLinkToMisComprasMobil = "//div[@class[contains(.,'iconBack')]]";
     
-    private SecDetalleCompraTiendaDesktop(WebDriver driver) {
+	private String getXPathLinkToMisCompras() {
+		switch (channel) {
+		case desktop:
+			return XPathLinkToMisComprasDesktop;
+		case mobile:
+		default:
+			return XPathLinkToMisComprasMobil;
+		}
+	}
+	
+	private String getXPathIdTicket(TypeTicket type) {
+		switch (type) {
+		case Tienda:
+			return XPathIdTicketTienda;
+		case Online:
+		default:
+			return XPathIdTicketOnline;
+		}
+	}
+    
+    private ModalDetalleCompra(Channel channel, WebDriver driver) {
     	super(driver);
+    	this.channel = channel;
+    	modalDetalleArticulo = ModalDetalleArticulo.getNew(driver);
     }
-    public static SecDetalleCompraTiendaDesktop getNew(WebDriver driver) {
-    	return new SecDetalleCompraTiendaDesktop(driver);
+    public static ModalDetalleCompra getNew(Channel channel, WebDriver driver) {
+    	return new ModalDetalleCompra(channel, driver);
     }
     
-    private String getXPathArticulo(int posArticulo) {
-        return ("(" + XPathArticulo + ")[" + posArticulo + "]");
+    public ModalDetalleArticulo getModalDetalleArticulo() {
+    	return modalDetalleArticulo;
     }
+    
+	private String getXPathArticulo(int position) {
+		return "//div[@id='box_" + position + "' and @class[contains(.,'fills')]]";
+	}
     
     private String getXPathReferenciaArticulo(int posArticulo) {
         String xpathArticulo = getXPathArticulo(posArticulo);
@@ -47,8 +81,9 @@ public class SecDetalleCompraTiendaDesktop extends PageObjTM {
     	return (state(Visible, By.xpath(XPathDataTicket)).wait(maxSeconds).check());
     }
     
-    public String getNumTicket() {
-        String dataNumTicket = driver.findElement(By.xpath(XPathNumTicket)).getText();
+    public String getIdTicket(TypeTicket typeTicket) {
+    	String xpathIdTicket = getXPathIdTicket(typeTicket);
+        String dataNumTicket = driver.findElement(By.xpath(xpathIdTicket)).getText();
         return (getDataRightFrom(": ", dataNumTicket));
     }
     
@@ -109,4 +144,9 @@ public class SecDetalleCompraTiendaDesktop extends PageObjTM {
         String xpathArticulo = getXPathArticulo(posArticulo);
         driver.findElement(By.xpath(xpathArticulo)).click();
     }
+    
+	public void gotoListaMisCompras() {
+		String xpath = getXPathLinkToMisCompras();
+		click(By.xpath(xpath)).exec();
+	}
 }

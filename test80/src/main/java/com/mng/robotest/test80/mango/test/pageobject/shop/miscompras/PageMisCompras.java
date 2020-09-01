@@ -11,23 +11,22 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.Ticket;
 
 public abstract class PageMisCompras extends PageObjTM {
 
+	private final ModalDetalleCompra modalDetalleCompra;
+	
 	public enum TypeTicket {Tienda, Online}
-	
 	final Channel channel;
-	
-	private final SecDetalleCompraTiendaDesktop secDetalleCompraTienda;
-	private final SecQuickViewArticuloDesktop secQuickViewArticulo;
-	private final ModalDetalleMisComprasDesktop modalDetalleMisCompras;
+	private List<Ticket> listTickets = null;
 	
 	public abstract boolean isPageUntil(int maxSeconds);
 	public abstract List<Ticket> getTickets();
+	public abstract Ticket selectTicket(TypeTicket type, int position);
 	
 	public static PageMisCompras make(Channel channel, WebDriver driver) {
 		switch (channel) {
 		case desktop:
-			return new PageMisComprasMobil(driver);
-		case mobile:
 			return new PageMisComprasDesktop(driver);
+		case mobile:
+			return new PageMisComprasMobil(driver);
 		default:
 			return null;
 		}
@@ -36,26 +35,29 @@ public abstract class PageMisCompras extends PageObjTM {
 	protected PageMisCompras(Channel channel, WebDriver driver) {
 		super(driver);
 		this.channel = channel;
-		this.secDetalleCompraTienda = SecDetalleCompraTiendaDesktop.getNew(driver);
-		this.secQuickViewArticulo = SecQuickViewArticuloDesktop.getNew(driver);
-		this.modalDetalleMisCompras = ModalDetalleMisComprasDesktop.getNew(channel, driver);
+		this.modalDetalleCompra = ModalDetalleCompra.getNew(channel, driver);
 	}
 	
-	public SecDetalleCompraTiendaDesktop getSecDetalleCompraTienda() {
-		return this.secDetalleCompraTienda;
-	}
-	public SecQuickViewArticuloDesktop getSecQuickViewArticulo() {
-		return this.secQuickViewArticulo;
-	}
-	public ModalDetalleMisComprasDesktop getModalDetalleMisCompras() {
-		return this.modalDetalleMisCompras;
+	public ModalDetalleCompra getModalDetalleCompra() {
+		return this.modalDetalleCompra;
 	}
 	
 	public List<Ticket> getTickets(TypeTicket typeCompra) {
-		return (
-			getTickets().stream()
+		if (listTickets==null) {
+			listTickets = getTickets().stream()
 				.filter(ticket -> ticket.getType()==typeCompra)
-				.collect(Collectors.toList()));
+				.collect(Collectors.toList());
+		}
+		return listTickets;
 	}
 	
+	public boolean areTickets() {
+		return getTickets().size()>0;
+	}
+	
+	public boolean isTicketOnline(String idPedido) {
+		return (getTickets().stream()
+			.filter(item -> item.getId().compareTo(idPedido)==0)
+			.findAny().isPresent());
+	}
 }

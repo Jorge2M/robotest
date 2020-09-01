@@ -9,6 +9,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras.TypeBlock;
 import com.mng.robotest.test80.mango.test.stpv.shop.miscompras.PageMisComprasStpV;
@@ -60,11 +61,11 @@ public class PageAccesoMisComprasStpV {
 	@Step (
 		description="En el bloque de \"Si Registrado\", introducir el usuario/password (#{usuario}/#{password}) y pulsar \"Entrar\"", 
         expected="Aparece la página de \"Mis compras\"")
-    public void enterForSiRegistrado(String usuario, String password, Channel channel) {
+    public void enterForSiRegistrado(String usuario, String password, Channel channel, Pais pais) {
         pageAccesoMisCompras.inputUserPasswordBlockSi(usuario, password); 
         pageAccesoMisCompras.clickEntrarBlockSi();
         PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(channel, driver);
-        pageMisComprasStpV.validateIsPage();
+        pageMisComprasStpV.validateIsPage(pais);
     }
 
 	final static String tagUsuario = "@TagUsuario";
