@@ -109,7 +109,7 @@ public class PagePedidosMantoStpV {
 		DataBag dBagPrueba = new DataBag();
 		List<String> referencias = PageDetallePedido.getReferenciasArticulosDetallePedido(driver);
 		for (String referencia : referencias) {
-			ArticuloScreen articulo = new ArticuloScreen(app);
+			ArticuloScreen articulo = new ArticuloScreen();
 			articulo.setReferencia(referencia);
 			dBagPrueba.addArticulo(articulo);
 		}

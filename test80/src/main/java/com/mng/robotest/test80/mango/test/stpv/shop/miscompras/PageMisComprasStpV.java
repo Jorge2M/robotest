@@ -8,12 +8,13 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.Ticket;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras.TypeTicket;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisComprasDesktop;
-import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.ModalDetalleCompraDesktop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.ModalDetalleCompra;
 import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageDetallePedidoStpV;
 
 public class PageMisComprasStpV {
@@ -23,16 +24,16 @@ public class PageMisComprasStpV {
     private final PageMisCompras pageMisCompras;
     private final ModalDetalleCompraStpV modalDetalleCompraStpV; 
 
-    private PageMisComprasStpV(Channel channel, WebDriver driver) {
+    private PageMisComprasStpV(Channel channel, AppEcom app, WebDriver driver) {
     	this.driver = driver;
     	this.channel = channel;
     	this.pageMisCompras = PageMisCompras.make(channel, driver);
-    	ModalDetalleCompraDesktop secDetalle = pageMisCompras.getModalDetalleCompra();
-    	this.modalDetalleCompraStpV = ModalDetalleCompraStpV.getNew(secDetalle, channel, driver);
+    	ModalDetalleCompra secDetalle = pageMisCompras.getModalDetalleCompra();
+    	this.modalDetalleCompraStpV = ModalDetalleCompraStpV.getNew(secDetalle, driver);
 
     }
-    public static PageMisComprasStpV getNew(Channel channel, WebDriver driver) {
-    	return new PageMisComprasStpV(channel, driver);
+    public static PageMisComprasStpV getNew(Channel channel, AppEcom app, WebDriver driver) {
+    	return new PageMisComprasStpV(channel, app, driver);
     }
     
     public ModalDetalleCompraStpV getModalDetalleCompra() {
@@ -116,11 +117,11 @@ public class PageMisComprasStpV {
     public void clickDetalleArticulo(int posArticulo) {
     	modalDetalleCompraStpV.selectArticulo(posArticulo);
     }
-    public void clickBuscarTiendaArticulo() {
-    	modalDetalleCompraStpV.getModalDetalleArticulo().clickBuscarTiendaButton();
+    public void clickBuscarTiendaArticulo_Desktop() {
+    	modalDetalleCompraStpV.getModalDetalleArticulo().clickBuscarTiendaButton_Desktop();
     }
-    public void clickCloseBuscarTiendaArticulo() throws Exception {
-    	modalDetalleCompraStpV.getModalDetalleArticulo().clickCloseModalBuscadorTiendas();
+    public void clickCloseBuscarTiendaArticulo_Desktop() throws Exception {
+    	modalDetalleCompraStpV.getModalDetalleArticulo().clickCloseModalBuscadorTiendas_Desktop();
     }
     public void gotoMisComprasFromDetalleCompra() {
     	modalDetalleCompraStpV.gotoListaMisCompras();

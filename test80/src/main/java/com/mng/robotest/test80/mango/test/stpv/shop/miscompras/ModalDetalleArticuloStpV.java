@@ -45,8 +45,8 @@ public class ModalDetalleArticuloStpV {
 	@Step (
 		description="Damos click al botón de \"Buscar talla en tienda\"",
         expected="Aparece el modal de busqueda en tienda")
-    public void clickBuscarTiendaButton() {
-		modalDetalleMisCompras.clickBuscarTallaTiendaButton();
+    public void clickBuscarTiendaButton_Desktop() {
+		modalDetalleMisCompras.getDesktopVersion().clickBuscarTallaTiendaButton();
 		checkAppearsModalSearchTallaTienda(3);
     }
 	
@@ -60,7 +60,7 @@ public class ModalDetalleArticuloStpV {
 	@Step (
 		description="Cerramos el modal del buscador de tiendas mediante click en el aspa superior derecha",
 		expected="Desaparece el modal del buscador de tiendas")
-	public void clickCloseModalBuscadorTiendas() throws Exception {
+	public void clickCloseModalBuscadorTiendas_Desktop() throws Exception {
 		ModalBuscadorTiendasMisCompras.clickAspaForClose(driver);
 		checkIsInvisibleModalBuscadorTiendas();
 	}

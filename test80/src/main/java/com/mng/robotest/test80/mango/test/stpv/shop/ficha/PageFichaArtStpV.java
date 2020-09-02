@@ -261,7 +261,7 @@ public class PageFichaArtStpV {
 		expected="El artículo se añade a Favoritos")
 	public void selectAnadirAFavoritos(DataFavoritos dataFavoritos) throws Exception {
 		pageFicha.selectAnadirAFavoritosButton();
-		ArticuloScreen articulo = pageFicha.getArticuloObject();
+		ArticuloScreen articulo = pageFicha.getArticuloObject(app);
 		dataFavoritos.addArticulo(articulo);
 		checkCapaAltaFavoritos();
 		validateVisibleButtonFavoritos(ActionFavButton.Remove);
@@ -271,7 +271,7 @@ public class PageFichaArtStpV {
     	description="Cambiar de color dentro de la misma ficha volviendo al color/talla originales",
         expected="El articulo es cambiado de color.")
     public void changeColorGarment() {
-        ArticuloScreen articulo = pageFicha.getArticuloObject();
+        ArticuloScreen articulo = pageFicha.getArticuloObject(app);
         ArrayList<String> colors = SecDataProduct.getColorsGarment(driver);
         String codeColor = colors.get(0);
         SecDataProduct.selectColor(codeColor, driver);

@@ -72,7 +72,7 @@ public class PageMiCuentaStpV {
             PageInfoNewMisComprasMovilStpV.clickButtonToMisComprasAndNoValidate(driver);
         }
 
-        PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(channel, driver);
+        PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(channel, app, driver);
         pageMisComprasStpV.validateIsPage(pais);
     }
  

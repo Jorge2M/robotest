@@ -60,8 +60,8 @@ public abstract class PageFicha extends PageObjTM {
     	return this.typeFicha;
     }
     
-    public ArticuloScreen getArticuloObject() {
-        return (secDataProduct.getArticuloObject(channel, appE, typeFicha, driver));
+    public ArticuloScreen getArticuloObject(AppEcom app) {
+        return (secDataProduct.getArticuloObject(channel, app, typeFicha, driver));
     }
     
     public boolean isTallaUnica() {

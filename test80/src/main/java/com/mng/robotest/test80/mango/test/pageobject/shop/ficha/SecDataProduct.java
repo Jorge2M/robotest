@@ -121,7 +121,7 @@ public class SecDataProduct extends SeleniumUtils {
     }
     
     public static ArticuloScreen getArticuloObject(Channel channel, AppEcom app, TypeFicha typeFicha, WebDriver driver) {
-        ArticuloScreen articulo = new ArticuloScreen(app);
+        ArticuloScreen articulo = new ArticuloScreen();
         articulo.setReferencia(getReferenciaProducto(driver));
         articulo.setNombre(getTituloArt(channel, driver));
         articulo.setPrecio(getPrecioFinalArticulo(driver));

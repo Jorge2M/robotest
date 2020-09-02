@@ -62,6 +62,7 @@ public class PageMisComprasMobil extends PageMisCompras {
 	}
 	
     private List<WebElement> getTicketsPage() {
+    	state(State.Visible, By.xpath(XPathTicket)).wait(2).check();
         return (driver.findElements(By.xpath(XPathTicket)));
     }
     
@@ -83,10 +84,10 @@ public class PageMisComprasMobil extends PageMisCompras {
         return TypeTicket.Online;
 	}
 	private String getIdTicketPage(WebElement boxDataTicket) {
-	    return (boxDataTicket.findElements(By.xpath(XPathInfoTicket)).get(0).getText());
+	    return (boxDataTicket.findElements(By.xpath("." + XPathInfoTicket)).get(0).getText());
 	}
 	private String getPrecioTicketPage(WebElement boxDataTicket) {
-	    return (boxDataTicket.findElements(By.xpath(XPathInfoTicket)).get(1).getText());
+	    return (boxDataTicket.findElements(By.xpath("." + XPathInfoTicket)).get(1).getText());
 	}
 	private int getNumItemsTicketPage(WebElement boxDataTicket) {
 		By byNumItems = By.xpath(XPathNumItemsTicket);
@@ -97,6 +98,6 @@ public class PageMisComprasMobil extends PageMisCompras {
 		return 1;
 	}
 	private String getFechaTicketPage(WebElement boxDataTicket) {
-	    return (boxDataTicket.findElements(By.xpath(XPathInfoTicket)).get(3).getText());
+	    return (boxDataTicket.findElements(By.xpath("." + XPathInfoTicket)).get(3).getText());
 	}
 }

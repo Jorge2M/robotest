@@ -8,6 +8,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras;
@@ -61,10 +62,10 @@ public class PageAccesoMisComprasStpV {
 	@Step (
 		description="En el bloque de \"Si Registrado\", introducir el usuario/password (#{usuario}/#{password}) y pulsar \"Entrar\"", 
         expected="Aparece la página de \"Mis compras\"")
-    public void enterForSiRegistrado(String usuario, String password, Channel channel, Pais pais) {
+    public void enterForSiRegistrado(String usuario, String password, Channel channel, AppEcom app, Pais pais) {
         pageAccesoMisCompras.inputUserPasswordBlockSi(usuario, password); 
         pageAccesoMisCompras.clickEntrarBlockSi();
-        PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(channel, driver);
+        PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(channel, app, driver);
         pageMisComprasStpV.validateIsPage(pais);
     }
 

@@ -18,7 +18,7 @@ public class ArticuloNavigations {
 	 * Selecciona un artículo disponible a partir de su referencia (selecciona una talla/color que esté disponible)
 	 */
 	public static ArticuloScreen selectArticuloTallaColorByRef(Garment productStock, AppEcom app, Channel channel, WebDriver driver) {
-		ArticuloScreen articulo = new ArticuloScreen(app);
+		ArticuloScreen articulo = new ArticuloScreen();
 		
 		Article articleStock = productStock.getArticleWithMoreStock();
 		articulo.setReferencia(articleStock.getGarmentId());

@@ -2,7 +2,6 @@ package com.mng.robotest.test80.mango.test.generic.beans;
 
 import java.util.ArrayList;
 
-import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment.Article;
@@ -19,14 +18,11 @@ public class ArticuloScreen {
 	String precio = "";
 	String precioSinDesc = "";
 	ValePais valePais=null;
-	AppEcom app;
 
 	int numero = 1;
-	
-	public ArticuloScreen(AppEcom app) {
-		this.app = app;
-	}
 
+	public ArticuloScreen() {}
+	
 	public ArticuloScreen(Garment productStock) {
 		Article articleStock = productStock.getArticleWithMoreStock();
 		this.referencia = articleStock.getGarmentId();

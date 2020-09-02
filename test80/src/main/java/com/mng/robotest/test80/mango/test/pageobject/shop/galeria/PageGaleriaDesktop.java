@@ -677,7 +677,7 @@ public class PageGaleriaDesktop extends PageGaleria {
     public ArticuloScreen getArticuloObject(int numArticulo) {
         WebElement artWElem = driver.findElements(By.xpath(XPathArticulo)).get(numArticulo-1);
         moveToElement(artWElem, driver);
-        ArticuloScreen articulo = new ArticuloScreen(app);
+        ArticuloScreen articulo = new ArticuloScreen();
         articulo.setReferencia(getRefArticulo(artWElem));
         articulo.setNombre(getNombreArticulo(artWElem));
         articulo.setPrecio(getPrecioArticulo(artWElem));

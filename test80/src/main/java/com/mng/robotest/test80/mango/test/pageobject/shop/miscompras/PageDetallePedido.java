@@ -16,10 +16,7 @@ public interface PageDetallePedido {
         		return (new PageDetalleCompraOld(driver));
         	case New:
         	default:
-        		if (channel==Channel.desktop) {
-        			return (new ModalDetalleCompraDesktop(driver));
-        		}
-        		return (new ModalDetalleCompraMobil(driver));
+        		return ModalDetalleCompra.make(channel, driver);
         	}	
         } 
     };

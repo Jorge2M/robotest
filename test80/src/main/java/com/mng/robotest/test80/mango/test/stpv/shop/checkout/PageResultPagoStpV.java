@@ -129,10 +129,11 @@ public class PageResultPagoStpV {
     @Step (
     	description="Seleccionar el link \"Mis Compras\"",
     	expected="Aparece la página de \"Mis compras\" o la de \"Acceso a Mis compras\" según si el usuario está o no loginado")
-    public static void selectMisCompras(boolean userRegistered, Channel channel, Pais pais, WebDriver driver) throws Exception {
+    public static void selectMisCompras(boolean userRegistered, Channel channel, AppEcom app, Pais pais, WebDriver driver) 
+    throws Exception {
         PageResultPago.clickMisCompras(driver);     
         if (userRegistered) {
-        	PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(channel, driver);
+        	PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(channel, app, driver);
         	pageMisComprasStpV.validateIsPage(pais);
             
             StdValidationFlags flagsVal = StdValidationFlags.newOne();
@@ -172,10 +173,10 @@ public class PageResultPagoStpV {
     
     public static void selectLinkMisComprasAndValidateCompra(DataCtxPago dCtxPago, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {    	
-        PageResultPagoStpV.selectMisCompras(dCtxSh.userRegistered, dCtxSh.channel, dCtxSh.pais, driver);
+        PageResultPagoStpV.selectMisCompras(dCtxSh.userRegistered, dCtxSh.channel, dCtxSh.appE, dCtxSh.pais, driver);
         DataPedido dataPedido = dCtxPago.getDataPedido();
         if (dCtxSh.userRegistered) {
-        	PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(dCtxSh.channel, driver);
+        	PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
         	pageMisComprasStpV.validateIsCompraOnline(dataPedido.getCodpedido(), dCtxPago.getFTCkout().isChequeRegalo);
         } else {
         	PageAccesoMisComprasStpV pageAccesoMisComprasStpV = PageAccesoMisComprasStpV.getNew(driver);
