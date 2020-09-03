@@ -25,15 +25,16 @@ import com.github.jorge2m.testmaker.restcontroller.ServerRestTM;
 //-> Press Enter
 //-> Certificate in C:\ProgramData\win-acme\acme-v02.api.letsencrypt.org\Certificates ..
 //-> Mover el .pfx a /robotest.pro.mango.com.pfx
-//Último resultado (03-06-2020)
+//
+//Último resultado (03-09-2020)
 //[INFO] Requesting certificate [Manual] robotest.pro.mango.com
 //[INFO] Store with CertificateStore...
 //[INFO] Installing certificate in the certificate store
-//[INFO] Adding certificate [Manual] robotest.pro.mango.com 2020/6/3 7:16:15 to store WebHosting
+//[INFO] Adding certificate [Manual] robotest.pro.mango.com 2020/9/3 8:52:20 to store WebHosting
 //[INFO] Installing with None...
 //[INFO] Uninstalling certificate from the certificate store
-//[INFO] Removing certificate [Manual] robotest.pro.mango.com 2020/3/2 15:41:38 from store WebHosting
-//[INFO] Next renewal scheduled at 07/28/2020 07:16:15
+//[INFO] Removing certificate [Manual] robotest.pro.mango.com 2020/6/3 7:16:15 from store WebHosting
+//[INFO] Next renewal scheduled at 10/28/2020 07:52:20
 //[INFO] Renewal for [Manual] robotest.pro.mango.com succeeded
 
 //Probably the automation of the renewal is not possible because is utilized --manual method with TXT autentication (dns01)
