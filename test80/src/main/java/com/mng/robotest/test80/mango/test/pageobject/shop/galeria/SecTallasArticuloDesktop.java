@@ -1,9 +1,7 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.galeria;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;

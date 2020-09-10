@@ -86,7 +86,7 @@ public class AccesoNavigations {
         	SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         	secMenusStpV.getMenusUser().cambioPaisMobil(dCtxSh);
         } else {
-            SecFooterStpV.cambioPais(dCtxSh, driver);
+            (new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver)).cambioPais(dCtxSh);
         }
     }
         

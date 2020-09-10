@@ -219,7 +219,7 @@ public class PageGaleriaStpV {
         }
         TestMaker.getCurrentStepInExecution().replaceInDescription(tagIdPage, idPage);
         int numArticulosInicio = pageGaleria.getNumArticulos();
-        datosScroll = pageGaleria.scrollToPageFromFirst(pageToScroll, dCtxSh.appE);
+        datosScroll = pageGaleria.scrollToPageFromFirst(pageToScroll);
         
         if (pageToScroll>=PageGaleriaDesktop.maxPageToScroll) {
         	checkVisibilityFooter(pageToScroll, dCtxSh.appE);
@@ -251,7 +251,7 @@ public class PageGaleriaStpV {
 		description="Sí aparece el footer",
 		level=State.Warn)
 	private boolean checkVisibilityFooter(int pageToScroll, AppEcom app) throws Exception {
-		return SecFooter.isVisible(app, driver);
+		return (new SecFooter(app, driver)).isVisible();
 	}
 
     @Validation (

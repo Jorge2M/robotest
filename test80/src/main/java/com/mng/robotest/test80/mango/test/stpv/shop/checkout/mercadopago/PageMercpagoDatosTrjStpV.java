@@ -6,6 +6,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoDatosTrj;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoDatosTrjDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoDatosTrjMobil;
@@ -149,7 +150,7 @@ public class PageMercpagoDatosTrjStpV {
     public void clickButtonForPayMobil(boolean afterTrjGuardada) {
     	((PageMercpagoDatosTrjMobil)pageMercpagoDatosTrj).clickButtonForPay();
     	if (afterTrjGuardada) {
-    		PageResultPagoStpV.validaIsPageUntil(30, channel, driver);
+    		(new PageResultPagoStpV(TypePago.Mercadopago, channel, driver)).validaIsPageUntil(30);
     	}
     	else {
     		PageMercpagoConfStpV.validaIsPageUntil(5, Channel.mobile, driver);
@@ -179,7 +180,7 @@ public class PageMercpagoDatosTrjStpV {
         PageMercpagoDatosTrjDesktop pageDesktop = (PageMercpagoDatosTrjDesktop)pageMercpagoDatosTrj;
         pageDesktop.clickBotonForContinue();
         if (afterTrjGuardada) {
-        	PageResultPagoStpV.validaIsPageUntil(30, channel, driver);
+        	(new PageResultPagoStpV(TypePago.Mercadopago, channel, driver)).validaIsPageUntil(30);
         }
         else {
         	PageMercpagoConfStpV.validaIsPageUntil(10, Channel.desktop, driver);

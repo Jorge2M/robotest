@@ -6,6 +6,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoConf;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageResultPagoStpV;
 
@@ -23,6 +24,6 @@ public class PageMercpagoConfStpV {
         expected="Aparece la página de resultado")
     public static void clickPagar(Channel channel, WebDriver driver) {
         PageMercpagoConf.clickPagar(driver);
-        PageResultPagoStpV.validaIsPageUntil(30, channel, driver);
+        (new PageResultPagoStpV(TypePago.Mercadopago, channel, driver)).validaIsPageUntil(30);
     }
 }

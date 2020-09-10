@@ -18,11 +18,6 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
-
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
@@ -124,15 +119,15 @@ public abstract class PageGaleria extends PageObjTM {
 	
 	final static String XPathArticuloDesktopBuscador = 
 		"//div[@class[contains(.,'product-list-item')] or @class[contains(.,'z0q8P')]]";
-	//final static String XPathArticuloMobilOutlet = "//div[@class[contains(.,'product-list-item')] or @id[contains(.,'product-key-id')] or @class='product']";
+	final static String XPathArticuloMobilOutlet = "//div[@class[contains(.,'product-list-item')] or @id[contains(.,'product-key-id')] or @class='product']";
 	//final static String XPathArticuloMobilOutlet = "//li[@class='product-list-item']";
 	final static String XPathArticuloMobilShop = "//li[@class='product']";
 	private String getXPathArticulo() {
 		switch (app) {
-//		case outlet:
-//			if (channel==Channel.mobile) {
-//				return XPathArticuloMobilOutlet;
-//			}
+		case outlet:
+			if (channel==Channel.mobile) {
+				return XPathArticuloMobilOutlet;
+			}
 		case shop:
 		case votf:
 		default:
@@ -512,7 +507,7 @@ public abstract class PageGaleria extends PageObjTM {
      * Función que realiza un scroll/paginación hasta el final de los artículos. Retorna el número de elementos obtenidos
      * Desktop: scrolla reiteradamente hasta el último elemento para forzar la paginación
      */
-    public DataScroll scrollToPageFromFirst(int numPage, AppEcom app) throws Exception {
+    public DataScroll scrollToPageFromFirst(int numPage) throws Exception {
         DataScroll datosScroll = new DataScroll();
         int pageToScroll = getPageToScroll(numPage);
         goToInitPageAndWaitForArticle();
@@ -522,7 +517,8 @@ public abstract class PageGaleria extends PageObjTM {
         List<Integer> numArticlesDoubleXpage = new ArrayList<>();
         initializeDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, pageToScroll + 10);
         updateDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, lastPage);
-        while (!SecFooter.isVisible(app, driver) && lastPage < pageToScroll) {
+        SecFooter secFooter = new SecFooter(app, driver);
+        while (!secFooter.isVisible() && lastPage < pageToScroll) {
         	goToLastPage();
         	int newLastPage = getNumLastPage();
         	updateDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, newLastPage);
@@ -532,12 +528,12 @@ public abstract class PageGaleria extends PageObjTM {
         	lastPage=newLastPage;
         }
         
-        if (SecFooter.isVisible(app, driver)) {
-        	SecFooter.moveTo(app, driver);
+        if (secFooter.isVisible()) {
+        	secFooter.moveTo();
         }
         
         datosScroll.paginaFinal = lastPage;
-        datosScroll.finalAlcanzado = SecFooter.isVisible(app, driver);
+        datosScroll.finalAlcanzado = secFooter.isVisible();
         datosScroll.articulosMostrados = getNumArticulos();
         datosScroll.articulosDobleTamaño = getTotalNumArticles(numArticlesDoubleXpage);
         datosScroll.articulosTotalesPagina = getTotalNumArticles(numArticlesXpage);

@@ -93,7 +93,8 @@ public class RebajasJun2019 implements Serializable {
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         secMenusStpV.checkLineaRebajas(salesOnInCountry, dCtxSh);
     	PageHomeMarcasStpV.bannerRebajas2019.checkBanner(salesOnInCountry, TypeHome.Multimarca, dCtxSh, driver);
-    	PageHomeMarcasStpV.checkMsgNewsletterFooter(salesOnInCountry, dCtxSh.idioma, driver); //?
+    	(new PageHomeMarcasStpV(dCtxSh.channel, dCtxSh.appE, driver))
+    		.checkMsgNewsletterFooter(salesOnInCountry, dCtxSh.idioma); //?
         
         if (salesOnInCountry && dCtxSh.pais.isVentaOnline()) {
         	int maxBannersToLoad = 1;

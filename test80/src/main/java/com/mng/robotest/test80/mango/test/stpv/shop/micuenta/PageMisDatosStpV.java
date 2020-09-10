@@ -8,24 +8,33 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisDatos;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 
 public class PageMisDatosStpV {
 
+	private final PageMisDatos pageMisDatos;
+	private final WebDriver driver;
+	
+	public PageMisDatosStpV(AppEcom app, WebDriver driver) {
+		pageMisDatos = new PageMisDatos(app, driver);
+		this.driver = driver;
+	}
+	
     @Validation
-    public static ChecksTM validaIsPage (String usuarioReg, WebDriver driver) {
+    public ChecksTM validaIsPage (String usuarioReg) {
         ChecksTM validations = ChecksTM.getNew();
         validations.add(
             "Aparece una página con el la cabecera \"Mis datos\"",
-            PageMisDatos.isPage(driver), State.Warn);
+            pageMisDatos.isPage(), State.Warn);
         validations.add(
             "El campo de email está bloqueado",
-            PageMisDatos.emailIsDisabled(driver), State.Warn);
+            pageMisDatos.emailIsDisabled(), State.Warn);
         validations.add(
             "El campo de email contiene " + usuarioReg,
-            PageMisDatos.getValueEmailInput(driver).compareTo(usuarioReg.toUpperCase())==0, State.Warn);
+            pageMisDatos.getValueEmailInput().compareTo(usuarioReg.toUpperCase())==0, State.Warn);
 
         StdValidationFlags flagsVal = StdValidationFlags.newOne();
         flagsVal.validaSEO = true;
@@ -37,7 +46,7 @@ public class PageMisDatosStpV {
     }
 
     @Validation
-    public static ChecksTM validaIsDataAssociatedToRegister (Map<String,String> datosRegOk, String codpais, WebDriver driver) {
+    public ChecksTM validaIsDataAssociatedToRegister(Map<String,String> datosRegOk, String codpais) {
         String nombre = datosRegOk.get("cfName");
         String apellidos = datosRegOk.get("cfSname");
         String email = datosRegOk.get("cfEmail");
@@ -49,35 +58,35 @@ public class PageMisDatosStpV {
         ChecksTM validations = ChecksTM.getNew();
         validations.add(
             "Aparece un campo de contraseña de tipo password",
-            PageMisDatos.isVisiblePasswordTypePassword(driver), State.Defect);
+            pageMisDatos.isVisiblePasswordTypePassword(), State.Defect);
         validations.add(
             "El resto de campos de tipo \"inputContent\" están informados",
-            PageMisDatos.emailIsDisabled(driver), State.Defect);
+            pageMisDatos.emailIsDisabled(), State.Defect);
         validations.add(
             "El Nombre contiene el definido durante el registro: <b>" + nombre + "</b>",
-            !(PageMisDatos.getNumInputContentVoid(driver) > 1), State.Defect);
+            !(pageMisDatos.getNumInputContentVoid() > 1), State.Defect);
         validations.add(
             "El Apellidos contiene el definido durante el registro: <b>" + apellidos + "</b>",
-            (PageMisDatos.getText_inputNombre(driver).compareTo(nombre)==0), State.Defect);
+            (pageMisDatos.getText_inputNombre().compareTo(nombre)==0), State.Defect);
         validations.add(
             "El Email contiene el definido durante el registro: <b>" + email + "</b>",
-            (PageMisDatos.getText_inputEmail(driver).toLowerCase().compareTo(email.toLowerCase())==0), State.Defect);
+            (pageMisDatos.getText_inputEmail().toLowerCase().compareTo(email.toLowerCase())==0), State.Defect);
         validations.add(
             "La Dirección contiene la definida durante el registro: <b>" + direccion + "</b>",
-            (PageMisDatos.getText_inputDireccion(driver).compareTo(direccion)==0), State.Defect);
+            (pageMisDatos.getText_inputDireccion().compareTo(direccion)==0), State.Defect);
         validations.add(
             "El Código postal contiene el definido durante el registro: <b>" + codpostal + "</b>",
-            (PageMisDatos.getText_inputCodPostal(driver).compareTo(codpostal)==0), State.Defect);
+            (pageMisDatos.getText_inputCodPostal().compareTo(codpostal)==0), State.Defect);
         validations.add(
             "La población contiene la definida durante el registro: <b>" + poblacion + "</b>",
-            (PageMisDatos.getText_inputPoblacion(driver).compareTo(poblacion)==0), State.Defect);
+            (pageMisDatos.getText_inputPoblacion().compareTo(poblacion)==0), State.Defect);
         validations.add(
             "Está seleccionado el país definido durante el registro: <b>" + codpais + "</b>",
-            (PageMisDatos.getCodPaisSelected(driver).compareTo(codpais)==0), State.Defect);
+            (pageMisDatos.getCodPaisSelected().compareTo(codpais)==0), State.Defect);
         if (provincia != null) {
             validations.add(
                 "Está seleccionada la provincia definida durante el registro: <b>" + provincia + "</b>",
-                (PageMisDatos.getProvinciaSelected(driver).compareTo(provincia)==0), State.Defect);
+                (pageMisDatos.getProvinciaSelected().compareTo(provincia)==0), State.Defect);
         }
         
         StdValidationFlags flagsVal = StdValidationFlags.newOne();
@@ -92,32 +101,32 @@ public class PageMisDatosStpV {
     @Step(
         description = "Modificar el nombre (cambio de mayúsculas<->minúsculas) + Botón \"Modificar Datos\"",
         expected = "Aparece la confirmación que los datos se han modificados")
-    public static String modificaNombreYGuarda (WebDriver driver) {
-        String nombreActual = PageMisDatos.getValueNombreInput(driver);
+    public String modificaNombreYGuarda() {
+        String nombreActual = pageMisDatos.getValueNombreInput();
         if (nombreActual.compareTo(nombreActual.toUpperCase()) == 0) {
             nombreActual = nombreActual.toLowerCase();
         } else {
             nombreActual = nombreActual.toUpperCase();
         }
 
-        PageMisDatos.setNombreInput(driver, nombreActual);
-        PageMisDatos.clickGuardarCambios(driver);
-        validateModificationOfData(driver);
+        pageMisDatos.setNombreInput(nombreActual);
+        pageMisDatos.clickGuardarCambios();
+        validateModificationOfData();
 
         return nombreActual;
     }
 
     @Validation(
-        description = "1) Aparece una pantalla con el literal \"Tus datos han sido modificados en nuestra base de datos\"",
+        description = "1) Aparece una pantalla de resultado Ok de la suscripción",
         level = State.Defect)
-    private static boolean validateModificationOfData (WebDriver driver) {
-        return (PageMisDatos.pageResOK(driver));
+    private boolean validateModificationOfData() {
+        return (pageMisDatos.pageResOK());
     }
 
     @Validation (
     	description="En el campo del nombre figura<b>: #{nombre}<b>",
     	level=State.Warn)
-    public static boolean validaContenidoNombre(String nombre, WebDriver driver) {
-        return (PageMisDatos.getValueNombreInput(driver).contains(nombre));
+    public boolean validaContenidoNombre(String nombre) {
+        return (pageMisDatos.getValueNombreInput().contains(nombre));
     }
 }

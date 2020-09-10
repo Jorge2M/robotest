@@ -9,16 +9,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalClubMangoLikes;
 
 
-public class SecFooter {
+public class SecFooter extends PageObjTM {
 
-    public static String XPathCapaShop = "//div[@id='nav-footer']";
-    public static String XPathCapaOutlet = "//div[@class[contains(.,'footer__column footer__column')]]";
+	private final AppEcom app;
+	
+    private final static String XPathCapaShop = "//div[@id='nav-footer']";
+    private final static String XPathCapaOutlet = "//div[@class[contains(.,'footer__column footer__column')]]";
+    
     static List<AppEcom> footerShop = Arrays.asList(AppEcom.shop);
     static List<AppEcom> footerOutlet = Arrays.asList(AppEcom.outlet);
     static List<AppEcom> footerAll = Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf);
@@ -82,21 +86,19 @@ public class SecFooter {
 
     }
     
-    final static String XPathNewsLetterMsg = "//div[@class='newsletter-label']";
-    final static String XPathTextAreaMailSuscripcion = "//input[@id[contains(.,'FooterNewsletter')]]";
-    final static String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
-    final static String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
+    private final static String XPathNewsLetterMsg = "//div[@class='newsletter-label']";
+    private final static String XPathTextAreaMailSuscripcionShop = "//input[@id[contains(.,'newsletterSubscriptionFooter-email')]]";
+    private final static String XPathTextAreaMailSuscripcionOutlet = "//input[@class[contains(.,'newsletterFormInput')]]";
+    private final static String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
+    private final static String XPathCambioPaisShop = "//div[@class[contains(.,'modalCambioPaisShow')]]";
+    private final static String XPathCambioPaisOutlet = "//span[@class[contains(.,'countrySelector')]]";
     
-    //TODO Remove the Old version when the new change country block is released in PRO 
-    final static String XPathCambioPaisShopOld = "//li[@class[contains(.,'modalCambioPaisShow')]]/a";
-    final static String XPathCambioPaisShopNew = "//div[@class[contains(.,'modalCambioPaisShow')]]";
+    public SecFooter(AppEcom app, WebDriver driver) {
+    	super(driver);
+    	this.app = app;
+    }
     
-    final static String XPathCambioPaisOutlet = "//span[@class[contains(.,'countrySelector')]]";
-    
-    /**
-     * @return xpath correspondiente a la capa del footer
-     */
-    static String getXPathCapaFooter(AppEcom app) {
+    private String getXPathCapaFooter() {
     	switch (app) {
     	case outlet:
             return XPathCapaOutlet;
@@ -106,61 +108,67 @@ public class SecFooter {
     	}
     }
     
-    static String getXPathLink(FooterLink footerType, AppEcom app) {
-    	return (getXPathCapaFooter(app) + footerType.getXPathRelativeCapa());
+    private String getXPathLink(FooterLink footerType) {
+    	return (getXPathCapaFooter() + footerType.getXPathRelativeCapa());
     }
     
-    private static String getXPathLinkCambioPais(AppEcom app) {
+    private String getXPathLinkCambioPais() {
         if (app==AppEcom.outlet) {
             return XPathCambioPaisOutlet;
         }
-        return (XPathCambioPaisShopOld + " | " + XPathCambioPaisShopNew);
+        return XPathCambioPaisShop;
     }
     
-    public static boolean isPresent(AppEcom app, WebDriver driver) {
-        String xpath = getXPathCapaFooter(app);
-        return (state(Present, By.xpath(xpath), driver).check());
+    private String getXPathTextAreaMailSuscripcion() {
+        if (app==AppEcom.outlet) {
+            return XPathTextAreaMailSuscripcionOutlet;
+        }
+        return XPathTextAreaMailSuscripcionShop;
     }
     
-    public static boolean isVisible(AppEcom app, WebDriver driver) throws Exception {
-        String xpath = getXPathCapaFooter(app);
+    public boolean isPresent() {
+        String xpath = getXPathCapaFooter();
+        return (state(Present, By.xpath(xpath)).check());
+    }
+    
+    public boolean isVisible() throws Exception {
+        String xpath = getXPathCapaFooter();
         waitForPageLoaded(driver);
-        return (state(Visible, By.xpath(xpath), driver).check());
+        return (state(Visible, By.xpath(xpath)).check());
     }    
     
-    public static void clickLink(FooterLink footerType, WebDriver driver) {
+    public void clickLink(FooterLink footerType) {
     	ModalClubMangoLikes.closeModalIfVisible(driver);
     	moveToElement(By.xpath(footerType.getXPathRelativeCapa()), driver);
-    	click(By.xpath(footerType.getXPathRelativeCapa()), driver).exec();
+    	click(By.xpath(footerType.getXPathRelativeCapa())).exec();
     }
     
-    public static String clickLinkAndGetWindowFatherHandle(FooterLink footerType, WebDriver driver) throws Exception {
-    	clickLink(footerType, driver);
+    public String clickLinkAndGetWindowFatherHandle(FooterLink footerType) throws Exception {
+    	clickLink(footerType);
     	String windowFatherHandle = driver.getWindowHandle();
 	    if (footerType.pageInNewTab) {
 	        switchToAnotherWindow(driver, windowFatherHandle);
 	        waitForPageLoaded(driver, 10);
 	    }
-	    
 	    return windowFatherHandle;
     }
 
-	public static void clickLinkCambioPais(WebDriver driver, AppEcom app) {
-		String xpathLink = getXPathLinkCambioPais(app);
-		click(By.xpath(xpathLink), driver).exec();
+	public void clickLinkCambioPais() {
+		String xpathLink = getXPathLinkCambioPais();
+		click(By.xpath(xpathLink)).exec();
 	}
 
-    public static boolean checkFooters(List<FooterLink> listFooterLinksToValidate, AppEcom app, WebDriver driver) {
+    public boolean checkFooters(List<FooterLink> listFooterLinksToValidate) {
         for (FooterLink footerLink : listFooterLinksToValidate) {
-        	String xpathLink = getXPathLink(footerLink, app);
-        	if (!state(Present, By.xpath(xpathLink), driver).check()) {
+        	String xpathLink = getXPathLink(footerLink);
+        	if (!state(Present, By.xpath(xpathLink)).check()) {
                 return false;
             }
         }
         return true;
     }
     
-    public static String getNewsLetterMsgText(WebDriver driver) {
+    public String getNewsLetterMsgText() {
         try {
             WebElement titleNws = driver.findElement(By.xpath(XPathNewsLetterMsg));
             if (titleNws!=null) {
@@ -170,29 +178,25 @@ public class SecFooter {
         catch (Exception e) {
             //Retornamos ""
         }
-        
         return "";
     }
     
-    public static boolean newsLetterMsgContains(String literal, WebDriver driver) {
-        return (getNewsLetterMsgText(driver).contains(literal));
+    public boolean newsLetterMsgContains(String literal) {
+        return (getNewsLetterMsgText().contains(literal));
     }
 
-	public static void clickFooterSuscripcion(WebDriver driver) throws Exception {
+	public void clickFooterSuscripcion() throws Exception {
 		ModalClubMangoLikes.closeModalIfVisible(driver);
-		driver.findElement(By.xpath(XPathTextAreaMailSuscripcion)).click();
+		String xpath = getXPathTextAreaMailSuscripcion();
+		driver.findElement(By.xpath(xpath)).click();
 	}
 
-	public static boolean isTextoRGPDPresent(WebDriver driver) {
-		return (state(Present, By.xpath(XPathTextRGPD), driver).check());
-	}
-
-	public static boolean isTextoLegalRGPDPresent(WebDriver driver) {
-		return (state(Present, By.xpath(XPathLegalRGPD), driver).check());
+	public boolean isTextoLegalRGPDPresent() {
+		return (state(Present, By.xpath(XPathLegalRGPD)).check());
 	}
 	
-	public static void moveTo(AppEcom app, WebDriver driver) {
-		String xpath = getXPathCapaFooter(app);
+	public void moveTo() {
+		String xpath = getXPathCapaFooter();
 		By footer = By.xpath(xpath);
 		if (state(Visible, footer, driver).check()) {
 			moveToElement(footer, driver);

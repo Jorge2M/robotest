@@ -152,7 +152,8 @@ public class Reembolsos {
         PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, driver);
         
         //Volvemos a la portada (Seleccionamos el link "Seguir de shopping" o el icono de Mango)
-        PageResultPagoStpV.selectSeguirDeShopping(dCtxSh.channel, dCtxSh.appE, driver);
+        PageResultPagoStpV pageResultPagoStpV = new PageResultPagoStpV(pagoStoreCredit.getTypePago(), dCtxSh.channel, driver);
+        pageResultPagoStpV.selectSeguirDeShopping(dCtxSh.appE);
         
         //Calculamos el saldo en cuenta que debería quedar (según si se ha realizado o no el pago);
         float saldoCtaEsperado;

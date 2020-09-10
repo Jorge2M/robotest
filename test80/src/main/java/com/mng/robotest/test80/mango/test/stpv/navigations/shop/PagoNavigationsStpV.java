@@ -233,12 +233,13 @@ public class PagoNavigationsStpV {
         if (execPay) {
             //Validaciones
             if (pagoToTest.getTypePago()!=TypePago.TpvVotf) {
-                PageResultPagoStpV.validateIsPageOk(dCtxPago, dCtxSh, driver);
+            	PageResultPagoStpV pageResultPagoStpV = new PageResultPagoStpV(pagoToTest.getTypePago(), dCtxSh.channel, driver);
+                pageResultPagoStpV.validateIsPageOk(dCtxPago, dCtxSh);
                 if (dCtxSh.channel==Channel.desktop && !dCtxPago.getFTCkout().isChequeRegalo) {
                     if (testMisCompras(dCtxPago, dCtxSh)) {
-                        PageResultPagoStpV.selectLinkMisComprasAndValidateCompra(dCtxPago, dCtxSh, driver);
+                        pageResultPagoStpV.selectLinkMisComprasAndValidateCompra(dCtxPago, dCtxSh);
                     } else {
-                        PageResultPagoStpV.selectLinkPedidoAndValidatePedido(dataPedido, dCtxSh.channel, driver);
+                        pageResultPagoStpV.selectLinkPedidoAndValidatePedido(dataPedido);
                     }
                 }
             } else {

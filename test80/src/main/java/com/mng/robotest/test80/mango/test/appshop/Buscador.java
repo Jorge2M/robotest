@@ -39,7 +39,7 @@ public class Buscador {
         dCtxSh.userRegistered = false;
 
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, driver);
-        PageHomeMarcasStpV.validateIsPageWithCorrectLineas(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver);
+        (new PageHomeMarcasStpV(dCtxSh.channel, dCtxSh.appE, driver)).validateIsPageWithCorrectLineas(dCtxSh.pais);
         
         GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh).build();
         Garment product = getterProducts.getAll().get(0);

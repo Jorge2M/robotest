@@ -88,10 +88,12 @@ public class MiCuenta implements Serializable {
         AccesoStpV.identificacionEnMango(dCtxSh, driver);
         
         PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
-        pageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected);                
-        String nombreActual = PageMisDatosStpV.modificaNombreYGuarda(driver);
         pageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected);
-        PageMisDatosStpV.validaContenidoNombre(nombreActual, driver);
+        
+        PageMisDatosStpV pageMisDatosStpV = new PageMisDatosStpV(dCtxSh.appE, driver);
+        String nombreActual = pageMisDatosStpV.modificaNombreYGuarda();
+        pageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected);
+        pageMisDatosStpV.validaContenidoNombre(nombreActual);
         if (dCtxSh.appE==AppEcom.shop) {
         	pageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh.pais);
         } else {
@@ -151,11 +153,7 @@ public class MiCuenta implements Serializable {
         //Existe un problema en móbil por el cual si te vuelves a loginar manteniendo el navegador
         //se muestran las compras del anterior usuario
         if (dCtxSh.channel==Channel.mobile) {
-        	//Cuando esté disponible en TestMaker, sustituir este código por "driver = TestMaker.renewDriverTestCase()"
-	        driver.quit();
-	        TestCaseTM.getTestCaseInExecution().makeWebDriver();
-	        driver = TestMaker.getDriverTestCase();
-	        
+        	driver = TestMaker.renewDriverTestCase();
 	        pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
 	        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, driver);
         }

@@ -82,8 +82,8 @@ public class CompraLuque {
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		dCtxSh.pais=PaisGetter.get(PaisShop.USA);
-		dCtxSh.idioma=dCtxSh.pais.getListIdiomas().get(0);
+		dCtxSh.pais=pais;
+		dCtxSh.idioma=idioma;
 		return dCtxSh;
 	}
 	

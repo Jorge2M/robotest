@@ -45,22 +45,23 @@ public class Footer {
 
 		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
 		String urlInitialPage = driver.getCurrentUrl();
-		SecFooterStpV.validaLinksFooter(dCtxSh.channel, dCtxSh.appE, driver);
+		SecFooterStpV secFooterStpV = new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver);
+		secFooterStpV.validaLinksFooter();
         
         List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinksFiltered(dCtxSh.appE, dCtxSh.channel);
         //List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinks(dCtxSh.appE, dCtxSh.channel);
         for (FooterLink footerLinkToValidate : listFooterLinksToValidate) {
         	switch (footerLinkToValidate) {
         	case ayuda:
-        		SecFooterStpV.clickLinkFooter(footerLinkToValidate, false, dCtxSh.channel, driver);
-        		SecFooterStpV.validaPaginaAyuda(dCtxSh.channel, driver);
+        		secFooterStpV.clickLinkFooter(footerLinkToValidate, false);
+        		secFooterStpV.validaPaginaAyuda();
         		break;
         	case mango_card:
-        		SecFooterStpV.clickLinkFooter(footerLinkToValidate, false, dCtxSh.channel, driver);
-                SecFooterStpV.checkSolicitarTarjeta(dCtxSh.channel, driver);
+        		secFooterStpV.clickLinkFooter(footerLinkToValidate, false);
+                secFooterStpV.checkSolicitarTarjeta();
         		break;
         	default:
-                SecFooterStpV.clickLinkFooter(footerLinkToValidate, true, dCtxSh.channel, driver);
+                secFooterStpV.clickLinkFooter(footerLinkToValidate, true);
                 driver.get(urlInitialPage);
         	}
         	

@@ -122,7 +122,7 @@ public class Compra {
 		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
 		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
 		secMenusStpV.seleccionLinea(LineaType.she, null, dCtxSh);
-		SecFooterStpV.clickLinkFooter(FooterLink.cheque_regalo, false, dCtxSh.channel, driver);
+		(new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver)).clickLinkFooter(FooterLink.cheque_regalo, false);
 		PageChequeRegaloInputDataStpV pageChequeRegaloInputDataStpV = new PageChequeRegaloInputDataStpV(driver);
 		if(dCtxSh.channel != Channel.mobile){
 			nTarjeta = "100000040043";

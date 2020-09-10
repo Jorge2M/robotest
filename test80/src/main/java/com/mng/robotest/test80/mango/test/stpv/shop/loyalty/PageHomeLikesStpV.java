@@ -33,7 +33,7 @@ public class PageHomeLikesStpV {
 			"Aparece la página de <b>Mango likes you</b> (esperamos hasta " + maxSeconds + " segundos)",
 			pageLikes.checkIsPageUntil(4), State.Defect);
 		
-		int maxSecondsButton = 2;
+		int maxSecondsButton = 3;
 		checks.add(
 			"Es visible el botón \"Compra con descuento\" (esperamos hasta " + maxSecondsButton + " segundos)",
 			pageLikes.isVisibleButton(ButtonUseLikes.CompraConDescuento, maxSecondsButton), State.Defect);

@@ -140,7 +140,7 @@ public class Loyalty {
     private DataBag addBagArticleNoRebajado(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
     	Menu1rstLevel menuNewCollection;
     	if (dCtxSh.channel==Channel.desktop) {
-    		menuNewCollection = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "nueva_coleccion"));
+    		menuNewCollection = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "nuevo"));
     	}
     	else {
     		menuNewCollection = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "promos-vestidos"));

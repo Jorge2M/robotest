@@ -38,7 +38,7 @@ public class Ayuda {
 		dCtxSh.userRegistered = false;
 
 		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
-		SecFooterStpV.clickLinkFooter(SecFooter.FooterLink.ayuda, false, dCtxSh.channel, driver);
+		(new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver)).clickLinkFooter(SecFooter.FooterLink.ayuda, false);
 		AyudaStpV ayudaStpV = AyudaStpV.getNew(driver);
 		ayudaStpV.selectTypeValidaciones(dCtxSh.channel);
 	}

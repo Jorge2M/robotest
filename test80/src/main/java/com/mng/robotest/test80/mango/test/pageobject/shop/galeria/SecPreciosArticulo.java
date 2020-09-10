@@ -101,7 +101,7 @@ public class SecPreciosArticulo extends PageObjTM {
 	
 	public boolean isArticleRebajado(WebElement articulo) {
 		By byPrecioRebajado = By.xpath("." + TipoPrecio.precio_rebajado_definitivo.getXPath(channel, app));
-		return (state(Present, byPrecioRebajado).check());
+		return (state(Present, articulo).by(byPrecioRebajado).check());
 	}
 
     public List<WebElement> getListaPreciosPrendas(List<WebElement> listArticles) throws Exception {

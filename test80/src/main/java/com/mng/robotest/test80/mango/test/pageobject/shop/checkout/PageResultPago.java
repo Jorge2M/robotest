@@ -4,94 +4,104 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageResultPago {
-
-    static String XPathTextoConfirmacionPagoMobil = "//div[@class='confirmation']"; 
-    static String XPathTextoConfirmacionPagoDesktop = "//*[@class[contains(.,'textoConfirmacion')] or @class[contains(.,'confirmation-header-title')] or @id[contains(.,'confirmacionContrareembolso')] or @class[contains(.,'titulos pasos')]]";
-    static String XPathLinkSeguirDeShoppingMobil = "//div[@class='confirmation-link']//a";  
-    static String XPathLinkSeguirDeShoppingDesktop = "//div[@class='button-wrapper']/a";
-    static String XPathTextPedidoMobil = "//div[@class[contains(.,'confirmation-summary-value')]]//p[string-length(text())=6]"; 
-    static String XPathTextPedidoDesktop = "//div[@class='labels']//*[@class[contains(.,'data')] and string-length(text())=6]";
+public class PageResultPago extends PageObjTM {
+	
+	private final TypePago typePago;
+	private final Channel channel;
+	
+	public final static String XPathTextoConfirmacionPagoEstandar = "//h2[@class[contains(.,'fdHRp')]]"; //React
+	public final static String XPathTextoConfirmacionPagoContrareembolsoDesktop = "//span[@class[contains(.,'titulos pasos')]]"; 
+	public final static String XPathTextoConfirmacionPagoContrareembolsoMobil = "//div[@class='confirmation']";
+	
+    public final static String XPathDescubrirLoUltimoButton = "//div[@class[contains(.,'_2koW5')]]/button"; //React
+    public final static String XPathDataPedido = "//div[@class[contains(.,'_3HaKt')]]"; //React
     
-    //xpath del link hacia los pedidos (sólo aparecen en la versión Desktop de la página)
-    static String XPathLinkPedidosDesktop = "//a[@href[contains(.,'/account/orders')] or @href[contains(.,'/loginPedidos.faces')]]"; 
-    static String XPathLinkMisComprasDesktop = "//a[@href[contains(.,'/mypurchases')]]";
-	static String xpathBlockNewLoyaltyPoints = "//div[@class[contains(.,'simulate-likes')]]";
+    public final static String XPathCodigoPedidoEstandar = XPathDataPedido + "//div[@class[contains(.,'_1T2hc')]]/div[3]"; //React
+    public final static String XPathCodigoPedidoContrareembolsoDesktop = "//div[@class='labels']//*[@class[contains(.,'data')] and string-length(text())=6]";
+    public final static String XPathCodigoPedidoContrareembolsoMobil = "//div[@class[contains(.,'confirmation-summary-value')]]//p[string-length(text())=6]"; 
     
-    /**
-     * @return el xpath correspondiente al elemento que contiene el texto con la confirmación del pago
-     */
-    public static String getXPathTextoConfirmacionPago(Channel channel) {
-        if (channel==Channel.mobile) {
-            return XPathTextoConfirmacionPagoMobil;
-        }
-        return XPathTextoConfirmacionPagoDesktop;
-    }    
+    public final static String XPathLinkMisCompras = "//a[@href[contains(.,'/mypurchases')]]";
+    public final static String XPathLinkPedidos = "//a[@href[contains(.,'/account/orders')]]";
+    public final static String XPathBlockNewLoyaltyPoints = "//div[@class[contains(.,'_2h1Ha')]]"; //React
     
-    /**
-     * @return el xpath correspondiente al elemento lincable de "Seguir de shopping"
-     */
-    public static String getXPathLinkSeguirDeShopping(Channel channel) {
-        if (channel==Channel.mobile) {
-            return XPathLinkSeguirDeShoppingMobil;
-        }
-        return XPathLinkSeguirDeShoppingDesktop;
+    public PageResultPago(TypePago typePago, Channel channel, WebDriver driver) {
+    	super(driver);
+    	this.typePago = typePago;
+    	this.channel = channel;
     }
     
-    /**
-     * @return el xpath correspondiente al elemento que contiene el texto con el id del pedido
-     */
-    public static String getXPathTextPedido(Channel channel) {
-        if (channel==Channel.mobile) {
-            return XPathTextPedidoMobil;
-        }
-        return XPathTextPedidoDesktop;
+    private String getXPathTextoConfirmacionPago() {
+    	switch (typePago) {
+    	case ContraReembolso:
+    		switch (channel) {
+    		case desktop:
+    			return XPathTextoConfirmacionPagoContrareembolsoDesktop;
+    		default:
+    			return XPathTextoConfirmacionPagoContrareembolsoMobil;
+    		}
+    	default:
+    		return XPathTextoConfirmacionPagoEstandar;
+    	}
+    }
+    
+    private String getXPathCodigoPedido() {
+    	switch (typePago) {
+    	case ContraReembolso:
+    		switch (channel) {
+    		case desktop:
+    			return XPathCodigoPedidoContrareembolsoDesktop;
+    		default:
+    			return XPathCodigoPedidoContrareembolsoMobil;
+    		}
+    	default:
+    		return XPathCodigoPedidoEstandar;
+    	}
     }
 
-	public static boolean isVisibleTextoConfirmacionPago(WebDriver driver, Channel channel, int seconds) {
-		String xpath = getXPathTextoConfirmacionPago(channel);
-		return (state(Visible, By.xpath(xpath), driver).wait(seconds).check());
+	public boolean isVisibleTextoConfirmacionPago(int seconds) {
+		String xpath = getXPathTextoConfirmacionPago();
+		return (state(Visible, By.xpath(xpath)).wait(seconds).check());
 	}
 
-	public static void clickSeguirDeShopping(WebDriver driver, Channel channel) {
-		click(By.xpath(getXPathLinkSeguirDeShopping(channel)), driver).exec();
+	public boolean isVisibleDescubrirLoUltimo() {
+		return state(Visible, By.xpath(XPathDescubrirLoUltimoButton)).check();
+	}
+	
+	public void clickDescubrirLoUltimo() {
+		click(By.xpath(XPathDescubrirLoUltimoButton)).exec();
 	}
 
-	public static boolean isClickableSeguirDeShopping(WebDriver driver, Channel channel) {
-		String xpath = getXPathLinkSeguirDeShopping(channel);
-		return (state(Clickable, By.xpath(xpath), driver).check());
-	}
-
-	public static String getCodigoPedido(WebDriver driver, Channel channel, int seconds) throws Exception {
-		String codPedido = "";
-		String xpathPedido = getXPathTextPedido(channel);
-		if (state(Present, By.xpath(xpathPedido), driver).wait(seconds).check()) {
-			codPedido = driver.findElements(By.xpath(xpathPedido)).get(0).getText();
+	public String getCodigoPedido(int seconds) throws Exception {
+		By codigoPedidoBy = By.xpath(getXPathCodigoPedido()); 
+		if (state(Present, codigoPedidoBy).wait(seconds).check()) {
+			return driver.findElement(codigoPedidoBy).getText();
 		}
-		return codPedido;
+		return "";
 	}
 
-	public static boolean isLinkPedidosDesktop(WebDriver driver) {
-		return (state(Present, By.xpath(XPathLinkPedidosDesktop), driver).check());
+	public boolean isLinkPedidos() {
+		return (state(Visible, By.xpath(XPathLinkPedidos)).check());
 	}
 
-	public static void clickMisPedidos(WebDriver driver) {
-		click(By.xpath(XPathLinkPedidosDesktop), driver).exec();
+	public void clickMisPedidos() {
+		click(By.xpath(XPathLinkPedidos)).exec();
 	}
 
-	public static boolean isLinkMisComprasDesktop(WebDriver driver) {
-		return (state(Present, By.xpath(XPathLinkMisComprasDesktop), driver).check());
+	public boolean isLinkMisCompras() {
+		return (state(Visible, By.xpath(XPathLinkMisCompras)).check());
 	}
 
-	public static void clickMisCompras(WebDriver driver) {
-		click(By.xpath(XPathLinkMisComprasDesktop), driver).exec();
+	public void clickMisCompras() {
+		click(By.xpath(XPathLinkMisCompras)).exec();
 	}
 
-	public static boolean isVisibleBlockNewLoyaltyPoints(WebDriver driver) {
-		return (state(Visible, By.xpath(xpathBlockNewLoyaltyPoints), driver).check());
+	public boolean isVisibleBlockNewLoyaltyPoints() {
+		return (state(Visible, By.xpath(XPathBlockNewLoyaltyPoints)).check());
 	}
 }

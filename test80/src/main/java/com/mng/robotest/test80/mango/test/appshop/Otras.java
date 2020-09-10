@@ -140,7 +140,7 @@ public class Otras {
         //Steps. Acabamos ejecutando la funcionalidad típica de cambio de país desde el footer
         dCtxSh.pais = francia;
         dCtxSh.idioma = francia_frances;
-        SecFooterStpV.cambioPais(dCtxSh, driver);
+        (new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver)).cambioPais(dCtxSh);
     }
 
     

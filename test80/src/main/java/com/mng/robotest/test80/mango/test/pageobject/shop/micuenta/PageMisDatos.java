@@ -3,107 +3,128 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.micuenta;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageMisDatos {
+public class PageMisDatos extends PageObjTM {
 	
-    static String XPathIsPage = "//div[@class='myDetails']";
-    static String XPathTitleOk = "//h2[text()[contains(.,'Mis datos')]]";
-    static String XPathInputEmail = "//input[@id[contains(.,'cfEmail')]]";
-    static String XPathInputNombre = "//input[@id[contains(.,'cfName')]]";
-    static String XPathInputApellidos = "//input[@id[contains(.,'cfSname')]]";
-    static String XPathInputDireccion = "//input[@id[contains(.,'cfDir1')]]";
-    static String XPathInputCodPostal = "//input[@id[contains(.,'cfCp')]]";
-    static String XPathInputPoblacion = "//input[@id[contains(.,'cfCity')]]";
-    static String XPathBotonGuardarCambios = "//div[@class='submitContent']/input[@type='submit']";
-    static String XPathPageResOK = "//*[text()[contains(.,'Tus datos han sido modificados en nuestra base de datos')]]";
-    static String XPathInputPasswordTypePassword = "//input[@id[contains(.,'cfPass')] and @type='password']";
-    static String XPathInputContentVoid = "//div[@class='inputContent']/input[not(@value)]";
-    static String XPathSelectPais = "//select[@id[contains(.,':pais')]]";
-    static String XPathSelectProvincia = "//select[@id[contains(.,':estadosPais')]]";
-    static String XPathOptionPaisSelected = XPathSelectPais + "/option[@selected]";
-    static String XPathOptionProvinciaSelected = XPathSelectProvincia + "/option[@selected]";
+	private final AppEcom app;
+	
+    private final static String XPathIsPage = "//div[@class='myDetails']";
+    private final static String XPathTitleOk = "//h2[text()[contains(.,'Mis datos')]]";
+    private final static String XPathInputEmail = "//input[@id[contains(.,'cfEmail')]]";
+    private final static String XPathInputNombre = "//input[@id[contains(.,'cfName')]]";
+    private final static String XPathInputApellidos = "//input[@id[contains(.,'cfSname')]]";
+    private final static String XPathInputDireccion = "//input[@id[contains(.,'cfDir1')]]";
+    private final static String XPathInputCodPostal = "//input[@id[contains(.,'cfCp')]]";
+    private final static String XPathInputPoblacion = "//input[@id[contains(.,'cfCity')]]";
+    private final static String XPathBotonGuardarCambios = "//div[@class='submitContent']/input[@type='submit']";
+    private final static String XPathPageResOKshop = "//span[@class[contains(.,'icon-fill-done')]]";
+    private final static String XPathPageResOKoutlet = "//span[text()[contains(.,'Tus datos han sido modificados en nuestra base de datos.')]]";
+    private final static String XPathInputPasswordTypePassword = "//input[@id[contains(.,'cfPass')] and @type='password']";
+    private final static String XPathInputContentVoid = "//div[@class='inputContent']/input[not(@value)]";
+    private final static String XPathSelectPais = "//select[@id[contains(.,':pais')]]";
+    private final static String XPathSelectProvincia = "//select[@id[contains(.,':estadosPais')]]";
+    private final static String XPathOptionPaisSelected = XPathSelectPais + "/option[@selected]";
+    private final static String XPathOptionProvinciaSelected = XPathSelectProvincia + "/option[@selected]";
     
-    public static String getText_inputNombre(WebDriver driver) {
+    public PageMisDatos(AppEcom app, WebDriver driver) {
+    	super(driver);
+    	this.app = app;
+    }
+    
+    private String getXPathPageResOK(AppEcom app) {
+    	switch (app) {
+    	case outlet:
+    		return XPathPageResOKoutlet;
+    	default:
+    		return XPathPageResOKshop;
+    	}
+    }
+    
+    public String getText_inputNombre() {
         return (driver.findElement(By.xpath(XPathInputNombre)).getAttribute("value"));
     }
     
-    public static String getText_inputApellidos(WebDriver driver) {
+    public String getText_inputApellidos() {
         return (driver.findElement(By.xpath(XPathInputApellidos)).getAttribute("value"));
     }
     
-    public static String getText_inputEmail(WebDriver driver) {
+    public String getText_inputEmail() {
         return (driver.findElement(By.xpath(XPathInputEmail)).getAttribute("value"));
     }
 
-    public static String getText_inputDireccion(WebDriver driver) {
+    public String getText_inputDireccion() {
         return (driver.findElement(By.xpath(XPathInputDireccion)).getAttribute("value"));
     }
     
-    public static String getText_inputCodPostal(WebDriver driver) {
+    public String getText_inputCodPostal() {
         return (driver.findElement(By.xpath(XPathInputCodPostal)).getAttribute("value"));
     }
     
-    public static String getText_inputPoblacion(WebDriver driver) {
+    public String getText_inputPoblacion() {
         return (driver.findElement(By.xpath(XPathInputPoblacion)).getAttribute("value"));
     }
     
-    public static String getCodPaisSelected(WebDriver driver) {
-    	if (state(Present, By.xpath(XPathOptionPaisSelected), driver).check()) {
+    public String getCodPaisSelected() {
+    	if (state(Present, By.xpath(XPathOptionPaisSelected)).check()) {
             return (driver.findElement(By.xpath(XPathOptionPaisSelected)).getAttribute("value"));
         }
         return "";
     }
     
-    public static String getProvinciaSelected(WebDriver driver) {
-    	if (state(Present, By.xpath(XPathOptionProvinciaSelected), driver).check()) {
+    public String getProvinciaSelected() {
+    	if (state(Present, By.xpath(XPathOptionProvinciaSelected)).check()) {
             return (driver.findElement(By.xpath(XPathOptionProvinciaSelected)).getText());
         }
         return "";
     }    
     
-    public static boolean isVisiblePasswordTypePassword(WebDriver driver) {
-    	return (state(Visible, By.xpath(XPathInputPasswordTypePassword), driver).check());
+    public boolean isVisiblePasswordTypePassword() {
+    	return (state(Visible, By.xpath(XPathInputPasswordTypePassword)).check());
     }
     
-    public static int getNumInputContentVoid(WebDriver driver) {
+    public int getNumInputContentVoid() {
         return (driver.findElements(By.xpath(XPathInputContentVoid)).size());
     }
     
-    public static boolean isPage(WebDriver driver) {
-    	return (state(Present, By.xpath(XPathIsPage), driver).check());
+    public boolean isPage() {
+    	return (state(Present, By.xpath(XPathIsPage)).check());
     }
     
-    public static boolean titleOk(WebDriver driver) {
-    	return (state(Present, By.xpath(XPathTitleOk), driver).check());
+    public boolean titleOk() {
+    	return (state(Present, By.xpath(XPathTitleOk)).check());
     }
     
-    public static boolean emailIsDisabled(WebDriver driver) {
+    public boolean emailIsDisabled() {
         //Obtenemos el atributo "disabled" del email
         String cfMailStatus = driver.findElement(By.xpath(XPathInputEmail)).getAttribute("disabled");
         return (cfMailStatus!=null && cfMailStatus.compareTo("false")!=0);
     }
     
-    public static String getValueEmailInput(WebDriver driver) {
+    public String getValueEmailInput() {
         return (driver.findElement(By.xpath(XPathInputEmail)).getAttribute("value"));
     }
     
-    public static String getValueNombreInput(WebDriver driver) {
+    public String getValueNombreInput() {
         return (driver.findElement(By.xpath(XPathInputNombre)).getAttribute("value"));
     }
     
-    public static void setNombreInput(WebDriver driver, String nombre) {
+    public void setNombreInput(String nombre) {
         driver.findElement(By.xpath(XPathInputNombre)).clear();
         driver.findElement(By.xpath(XPathInputNombre)).sendKeys(nombre);
     }
     
-    public static void clickGuardarCambios(WebDriver driver) {
-    	click(By.xpath(XPathBotonGuardarCambios), driver).exec();
+    public void clickGuardarCambios() {
+    	click(By.xpath(XPathBotonGuardarCambios)).exec();
     }
     
-    public static boolean pageResOK(WebDriver driver) { 
-    	return (state(Present, By.xpath(XPathPageResOK), driver).check());
+    public boolean pageResOK() { 
+    	String xpath = getXPathPageResOK(app);
+    	return (state(Present, By.xpath(xpath)).check());
     }
 }

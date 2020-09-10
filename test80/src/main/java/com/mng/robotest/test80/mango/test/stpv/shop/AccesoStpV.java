@@ -232,7 +232,7 @@ public class AccesoStpV {
         IdiomaPais idiomaOriginal = dCtxSh.idioma;
         dCtxSh.pais = paisDestino;
         dCtxSh.idioma = idiomaDestino;
-        SecFooterStpV.cambioPais(dCtxSh, driver);
+        (new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver)).cambioPais(dCtxSh);
         dCtxSh.pais = paisOriginal;
         dCtxSh.idioma = idiomaOriginal;
         

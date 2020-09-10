@@ -46,7 +46,7 @@ public class SecCrossSellingStpV {
 		ChecksTM validations = ChecksTM.getNew();
 		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
 		if (!secCrossSelling.isSectionVisible()) {
-			pageGaleria.scrollToPageFromFirst(PageGaleriaDesktop.maxPageToScroll, app);
+			pageGaleria.scrollToPageFromFirst(PageGaleriaDesktop.maxPageToScroll);
 		}
 		validations.add(
 			"La sección cross-selling existe (si de primeras no existe scrollamos hasta el final de la galería)",

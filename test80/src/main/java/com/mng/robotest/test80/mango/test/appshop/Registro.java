@@ -194,6 +194,7 @@ public class Registro implements Serializable {
         SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
         userMenusStpV.selectRegistrate(dCtxSh);
         Map<String,String> dataRegistro = null;
+        SecFooterStpV secFooterStpV = new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver);
         if(version.register()) {
 	        String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
 	        PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(driver);
@@ -216,7 +217,7 @@ public class Registro implements Serializable {
             SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver);
             secCabeceraStpV.selecLogo();
 
-	        SecFooterStpV.validaRGPDFooter(version.register(), dCtxSh, driver);
+	        secFooterStpV.validaRGPDFooter(version.register(), dCtxSh);
 	        if (version.loginAfterRegister()) {
 	            String emailUsr = dataRegistro.get("cfEmail");
 	            String password = dataRegistro.get("cfPass");
@@ -226,7 +227,7 @@ public class Registro implements Serializable {
 	            pageMiCuentaStpV.goToSuscripcionesAndValidateData(dataRegistro);        
 	        }
         } else {
-        	SecFooterStpV.validaRGPDFooter(version.register(), dCtxSh, driver);
+        	secFooterStpV.validaRGPDFooter(version.register(), dCtxSh);
         }
         
         return dataRegistro;

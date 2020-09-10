@@ -24,32 +24,38 @@ import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalCambioPaisStpV;
 
 public class SecFooterStpV {
     
+	private final SecFooter secFooter;
+	private final Channel channel;
+	private final AppEcom app;
+	private final WebDriver driver;
+	
+	public SecFooterStpV(Channel channel, AppEcom app, WebDriver driver) {
+		this.secFooter = new SecFooter(app, driver);
+		this.channel = channel;
+		this.app = app;
+		this.driver = driver;
+	}
+	
 	@Validation 
-    public static ChecksTM validaLinksFooter(Channel channel, AppEcom app, WebDriver driver) throws Exception { 
+    public ChecksTM validaLinksFooter() throws Exception { 
     	ChecksTM validations = ChecksTM.getNew();
     	List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinksFiltered(app, channel);
     	validations.add(
     		"Aparecen los siguientes links en el footer <b>" + listFooterLinksToValidate + "</b>",
-    		SecFooter.checkFooters(listFooterLinksToValidate, app, driver), State.Defect);
+    		secFooter.checkFooters(listFooterLinksToValidate), State.Defect);
     	return validations;
     }
 
-    /**
-     * @param pageInNewTab indica si el link abrirá la página en una nueva ventana
-     * @param closeTabAtEnd indicamos si queremos que finalmente se cierre la ventana o no (porque posteriormente queremos proseguir con la prueba)
-     */
 	@Step (
 		description="Seleccionar el link del footer <b>#{typeFooter}</b>", 
         expected="Se redirige a la pantalla adecuada")
-    public static void clickLinkFooter(FooterLink typeFooter, boolean closeAtEnd, Channel channel, WebDriver driver) 
-    throws Exception { 
-    	String windowFatherHandle = SecFooter.clickLinkAndGetWindowFatherHandle(typeFooter, driver);
-    	checkPageCorrectAfterSelectLinkFooter(windowFatherHandle, typeFooter, closeAtEnd, channel, driver);
+    public void clickLinkFooter(FooterLink typeFooter, boolean closeAtEnd) throws Exception { 
+    	String windowFatherHandle = secFooter.clickLinkAndGetWindowFatherHandle(typeFooter);
+    	checkPageCorrectAfterSelectLinkFooter(windowFatherHandle, typeFooter, closeAtEnd);
     }
 	 
 	@Validation
-	private static ChecksTM checkPageCorrectAfterSelectLinkFooter(
-			String windowFatherHandle, FooterLink typeFooter, boolean closeAtEnd, Channel channel, WebDriver driver) {
+	private ChecksTM checkPageCorrectAfterSelectLinkFooter(String windowFatherHandle, FooterLink typeFooter, boolean closeAtEnd) {
 		ChecksTM validations = ChecksTM.getNew();
 		PageFromFooter pageObject = FactoryPageFromFooter.make(typeFooter, channel, driver);
 		String windowActualHandle = driver.getWindowHandle();
@@ -76,12 +82,9 @@ public class SecFooterStpV {
 	    
 	    return validations;
 	}
-    
-    /**
-     * Método que valida la existencia del número de teléfono en el apartado Preguntas frecuentes
-     */    
+     
 	@Validation
-    public static ChecksTM validaPaginaAyuda(Channel channel, WebDriver driver) throws Exception {
+    public ChecksTM validaPaginaAyuda() throws Exception {
 		ChecksTM validations = ChecksTM.getNew();
 		String telefono = "901 150 543";
     	validations.add(
@@ -93,32 +96,26 @@ public class SecFooterStpV {
     	return validations;
     }
         
-    /**
-     * Método para probar el formulario de Solicitud de Tarjeta Mango
-     */    
-     public static void checkSolicitarTarjeta (Channel channel, WebDriver driver) throws Exception {
-    	 selectLoQuieroAhoraButton(channel, driver);
-    	 if (!driver.getCurrentUrl().contains("shop-ci")) {
-    		 
-    	 }
+     public void checkSolicitarTarjeta () throws Exception {
+    	 selectLoQuieroAhoraButton();
      }
      
      @Step (
     	description="Seleccionar el botón con fondo negro \"¡La quiero ahora!\"",
         expected="La página hace scroll hasta el formulario previo de solicitud de la tarjeta")
-     public static void selectLoQuieroAhoraButton (Channel channel, WebDriver driver) {
+     public void selectLoQuieroAhoraButton() {
     	 PageMangoCard pageMangoCard = new PageMangoCard(driver);
          String ventanaOriginal = driver.getWindowHandle();
          pageMangoCard.clickOnWantMangoCardNow(channel);
          if(!driver.getCurrentUrl().contains("shop-ci")) {
-        	 checkAfterClickLoQuieroAhoraButton(driver);
-        	 selectLoQuieroAhoraUnderForm(driver);
-        	 selectContinueButton(ventanaOriginal, driver);
+        	 checkAfterClickLoQuieroAhoraButton();
+        	 selectLoQuieroAhoraUnderForm();
+        	 selectContinueButton(ventanaOriginal);
          }
      }
      
      @Validation
-     private static ChecksTM checkAfterClickLoQuieroAhoraButton(WebDriver driver) {
+     private ChecksTM checkAfterClickLoQuieroAhoraButton() {
     	 PageMangoCard pageMangoCard = new PageMangoCard(driver);
     	 ChecksTM validations = ChecksTM.getNew();
     	 validations.add(
@@ -145,15 +142,15 @@ public class SecFooterStpV {
      @Step (
     	description="Seleccionamos el botón \"¡Lo quiero ahora!\" que aparece debajo del formulario",
     	expected="Se abre una nueva pestaña del Banc Sabadell con un modal y texto \"Solicitud de tu MANGO Card\"")
-     public static void selectLoQuieroAhoraUnderForm(WebDriver driver) {
+     public void selectLoQuieroAhoraUnderForm() {
     	 PageMangoCard pageMangoCard = new PageMangoCard(driver);
     	 pageMangoCard.clickToGoSecondMangoCardPage();
          waitMillis(1000);
-         checkAfterClickLoQuieroAhoraUnderForm(driver);
+         checkAfterClickLoQuieroAhoraUnderForm();
      }
      
      @Validation
-     private static ChecksTM checkAfterClickLoQuieroAhoraUnderForm(WebDriver driver) {
+     private ChecksTM checkAfterClickLoQuieroAhoraUnderForm() {
   		ChecksTM validations = ChecksTM.getNew();
         String ventanaPadre = driver.getWindowHandle();
         SeleniumUtils.switchToAnotherWindow(driver, ventanaPadre);    
@@ -173,13 +170,13 @@ public class SecFooterStpV {
      @Step (
     	description="Seleccionar el botón \"Continuar\"", 
         expected="Aparece la página del formulario de solicitud de la tarjeta")
-     private static void selectContinueButton(String ventanaOriginal, WebDriver driver) {
+     private void selectContinueButton(String ventanaOriginal) {
          PageInputDataSolMangoCard.clickBotonCerrarModal(driver);
-         checkValidPageTarjetaMango(ventanaOriginal, driver);
+         checkValidPageTarjetaMango(ventanaOriginal);
      }
      
      @Validation
-     private static ChecksTM checkValidPageTarjetaMango(String ventanaOriginal, WebDriver driver) {
+     private ChecksTM checkValidPageTarjetaMango(String ventanaOriginal) {
   		ChecksTM validations = ChecksTM.getNew();
      	validations.add(
      		"Aparece la página de Solicitud de tu Tarjeta MANGO",
@@ -218,11 +215,11 @@ public class SecFooterStpV {
      @Step (
     	description="Se selecciona el link para el cambio de país", 
         expected="Aparece el modal para el cambio de país")
-     public static void cambioPais(DataCtxShop dCtxSh, WebDriver driver) {
-    	 SecFooter.clickLinkCambioPais(driver, dCtxSh.appE);
+     public void cambioPais(DataCtxShop dCtxSh) {
+    	 secFooter.clickLinkCambioPais();
     	 if (!ModalCambioPaisStpV.validateIsVisible(3, driver)) {
     		 //Hay un problema según el cuál en ocasiones no funciona el click así que lo repetimos
-    		 SecFooter.clickLinkCambioPais(driver, dCtxSh.appE); 
+    		 secFooter.clickLinkCambioPais(); 
     	 }
          ModalCambioPaisStpV.validateIsVisible(5, driver);
          try {
@@ -236,39 +233,29 @@ public class SecFooterStpV {
      @Step (
     	description="Hacer click en el cuadro de suscripción del footer",
         expected="Aparecen los textos legales de RGPD")
-    public static void validaRGPDFooter(Boolean clickRegister, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    public void validaRGPDFooter(Boolean clickRegister, DataCtxShop dCtxSh) throws Exception {
  		if (!clickRegister) {
  			SecCabecera.getNew(dCtxSh.channel, dCtxSh.appE, driver).clickLogoMango();
  		}
-        SecFooter.clickFooterSuscripcion(driver);
+        secFooter.clickFooterSuscripcion();
  		if (dCtxSh.pais.getRgpd().equals("S")) {
- 			checkIsRGPDpresent(dCtxSh.pais.getCodigo_pais(), driver);
+ 			checkIsRGPDpresent(dCtxSh.pais.getCodigo_pais());
  		} else {
- 			checkIsNotPresentRGPD(dCtxSh.pais.getCodigo_pais(), driver);
+ 			checkIsNotPresentRGPD(dCtxSh.pais.getCodigo_pais());
  		}
     }
      
-    @Validation
-    private static ChecksTM checkIsRGPDpresent(String codigoPais, WebDriver driver) {
-  		ChecksTM validations = ChecksTM.getNew();
-     	validations.add(
-     		"El texto de info de RGPD <b>SI</b> existe en el modal de suscripción para el pais " + codigoPais,
-     		SecFooter.isTextoRGPDPresent(driver), State.Defect);
-     	validations.add(
-     		"El texto legal de RGPD <b>SI</b> existe en el modal de suscripción para el pais " + codigoPais,
-     		SecFooter.isTextoLegalRGPDPresent(driver), State.Defect);
-     	return validations;
+    @Validation (
+    	description="El texto legal de RGPD <b>SI</b> existe en el modal de suscripción para el pais #{codigoPais}",
+    	level=State.Defect)
+    private boolean checkIsRGPDpresent(String codigoPais) {
+  		return secFooter.isTextoLegalRGPDPresent();
     }
     
-    @Validation
-    private static ChecksTM checkIsNotPresentRGPD(String codigoPais, WebDriver driver) {
-  		ChecksTM validations = ChecksTM.getNew();
-     	validations.add(
-     		"El texto de info de RGPD <b>NO</b> existe en el modal de suscripción para el pais " + codigoPais,
-     		!SecFooter.isTextoRGPDPresent(driver), State.Defect);
-     	validations.add(
-     		"El texto legal de RGPD <b>NO</b> existe en el modal de suscripción para el pais " + codigoPais,
-     		!SecFooter.isTextoLegalRGPDPresent(driver), State.Defect);
-     	return validations;
+    @Validation (
+    	description="El texto legal de RGPD <b>NO</b> existe en el modal de suscripción para el pais #{codigoPais}",
+    	level=State.Defect)
+    private boolean checkIsNotPresentRGPD(String codigoPais) {
+  		return !secFooter.isTextoLegalRGPDPresent();
     }
 }

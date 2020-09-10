@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
-import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalSuscripcion;
@@ -25,27 +24,17 @@ public class ModalSuscripcionStpV {
 		}
     }
 	
-	@Validation
-	private static ChecksTM checkExistsTextsRGPD(String codigoPais, WebDriver driver) {
-    	ChecksTM validations = ChecksTM.getNew();
-      	validations.add(
-    		"El texto de info de RGPD <b>SI</b> existe en el modal de suscripción para el pais " + codigoPais,
-    		ModalSuscripcion.isTextoRGPDPresent(driver), State.Defect);		
-      	validations.add(
-    		"El texto legal de RGPD <b>SI</b> existe en el modal de suscripción para el pais " + codigoPais,
-    		ModalSuscripcion.isTextoLegalRGPDPresent(driver), State.Defect);	
-      	return validations;
+	@Validation (
+		description="El texto legal de RGPD <b>SI</b> existe en el modal de suscripción para el pais #{codigoPais}",
+		level=State.Defect)
+	private static boolean checkExistsTextsRGPD(String codigoPais, WebDriver driver) {
+      	return ModalSuscripcion.isTextoLegalRGPDPresent(driver);	
 	}
 	
-	@Validation
-	private static ChecksTM checkNotExistsTextsRGPD(String codigoPais, WebDriver driver) {
-    	ChecksTM validations = ChecksTM.getNew();
-      	validations.add(
-    		"El texto de info de RGPD <b>NO</b> existe en el modal de suscripción para el pais " + codigoPais,
-    		!ModalSuscripcion.isTextoRGPDPresent(driver), State.Defect);		
-      	validations.add(
-    		"El texto legal de RGPD <b>NO</b> existe en el modal de suscripción para el pais " + codigoPais,
-    		!ModalSuscripcion.isTextoLegalRGPDPresent(driver), State.Defect);
-      	return validations;
+	@Validation (
+		description="El texto legal de RGPD <b>NO</b> existe en el modal de suscripción para el pais #{codigoPais}",
+		level=State.Defect)
+	private static boolean checkNotExistsTextsRGPD(String codigoPais, WebDriver driver) {
+      	return !ModalSuscripcion.isTextoLegalRGPDPresent(driver);	
 	}
 }

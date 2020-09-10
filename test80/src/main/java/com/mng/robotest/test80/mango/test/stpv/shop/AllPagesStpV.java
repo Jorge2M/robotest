@@ -87,7 +87,7 @@ public class AllPagesStpV {
     	ChecksTM validations = ChecksTM.getNew();
 		validations.add(
 			"Aparece el footer",
-			SecFooter.isPresent(app, driver), State.Warn);
+			(new SecFooter(app, driver)).isPresent(), State.Warn);
 		
 		if (pais!=null) {
 			validations.add(
