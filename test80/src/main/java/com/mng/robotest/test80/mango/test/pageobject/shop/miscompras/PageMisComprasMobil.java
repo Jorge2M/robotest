@@ -16,11 +16,11 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.Ticket;
 
 public class PageMisComprasMobil extends PageMisCompras {
 
-	private static String XPathCapaContenedora = "//div[@id='myPurchases']";
-	private static String XPathTicket = XPathCapaContenedora + "//div[@class[contains(.,'_25xm6')]]";
+	private static String XPathCapaContenedora = "//div[@id[contains(.,'myPurchases')]]";
+	private static String XPathTicket = XPathCapaContenedora + "//a[@class[contains(.,'_1BkjR')]]"; //React
 	private static String XPathInfoTicket = "//span[@class[contains(.,'sg-subtitle-small')]]";
 	private static String XPathVerDetalleTicket = "//a[@class='sg-button-primary']";
-	private static String XPathNumItemsTicket = ".//div[@class='aS4HI']";
+	private static String XPathNumItemsTicket = ".//div[@class='_3GEoy']"; //React
 	
     private String getXPathTicket(String id) {
     	return (XPathTicket + XPathInfoTicket + "[1]" + "//self::*[text()='" + id + "']");

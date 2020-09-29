@@ -43,7 +43,7 @@ public class PageMisComprasStpV {
     @Validation
     public ChecksTM validateIsPage(Pais pais) {
     	ChecksTM validations = ChecksTM.getNew();
-		int maxSecondsToWait = 2;
+		int maxSecondsToWait = 5;
 		validations.add(
 			"Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsToWait + " segundos)",
 			pageMisCompras.isPageUntil(maxSecondsToWait), State.Warn);

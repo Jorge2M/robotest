@@ -39,7 +39,7 @@ public class SecDataProduct extends SeleniumUtils {
     private static final String XPathNombreArticuloDesktop = "//h1[@itemprop='name']";
     
     //Existe un Test A/B que hace que el nombre del artículo salga debajo del botón de "Añadir a la bolsa" o en la cabecera, por eso el or.
-    private static final String XPathNombreArticuloMobil = "//*[@class='product-info-name' or @class='headerMobile__text']";
+    private static final String XPathNombreArticuloMobil = "//*[@class[contains(.,'product-info-name')] or @class='headerMobile__text']";
     
 //xpaths asociados a los links prev/next
     private static final String XPathProductNavBlock = "//div[@class='nav-product-container' or @class='nav-product-navigation']";

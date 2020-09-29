@@ -111,11 +111,22 @@ public class GetterProducts extends JaxRsClient {
 		List<Garment> listGarmentsWithManyColors = new ArrayList<>();
 		List<Garment> listGarments = getAll();
 		for (Garment garment : listGarments) {
-			if (garment.getColors().size()>1) {
+			if (garment.getColors().size() > 1) {
 				listGarmentsWithManyColors.add(garment);
 			}
 		}
 		return listGarmentsWithManyColors;
+	}
+	
+	public List<Garment> getWithStock() {
+		List<Garment> listGarmentsWithStock = new ArrayList<>();
+		List<Garment> listGarments = getAll();
+		for (Garment garment : listGarments) {
+			if (garment.getStock() > 0) {
+				listGarmentsWithStock.add(garment);
+			}
+		}
+		return listGarmentsWithStock;
 	}
 	
 	public Garment getOneWithTotalLook() {
@@ -138,8 +149,15 @@ public class GetterProducts extends JaxRsClient {
 				.path("looktotal")
 				.queryParam("color", article.getColor().getId())
 				.request(MediaType.APPLICATION_JSON)
-				.header("stock-id", productList.getStockId())
+				.header("stock-id", getIdStockNormalized())
 				.get(GarmentDetails.class));
+	}
+	private String getIdStockNormalized() {
+		if (app==AppEcom.votf) {
+			//Por algún motivo que no entiendo, falla "001.ES.0.false.true.v0" pero funciona "001.ES.0.false.false.v0"
+			return (productList.getStockId().replace("false.true", "false.false"));
+		}
+		return productList.getStockId();
 	}
 	
 	private String getLineaPath() {

@@ -11,10 +11,12 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClic
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
+import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
-import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecModalPersonalizacion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecModalPersonalizacion.ModalElement;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class SecModalPersonalizacionStpV extends PageObjTM {
 
@@ -51,7 +53,8 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 		description="Aparece el modal de personalización con el botón <b>Siguiente</b> (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
 	private boolean validateModal(int maxSeconds) {
-		return (state(Visible, ModalElement.Siguiente.getBy()).wait(maxSeconds).check());
+		return isBotonSiguienteVisible(maxSeconds);
+		//return (state(Visible, ModalElement.Siguiente.getBy()).wait(maxSeconds).check());
 	}
 
 	@Validation(
@@ -97,7 +100,8 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 			State.Warn);
 		validations.add(
 			"Podemos confirmar nuestra seleccion",
-			state(Visible, ModalElement.Siguiente.getBy(dCtxSh.channel)).wait(maxSeconds).check(),
+			isBotonSiguienteVisible(maxSeconds),
+			//state(Visible, ModalElement.Siguiente.getBy(dCtxSh.channel)).wait(maxSeconds).check(),
 			State.Warn);
 		return validations;
 	}
@@ -106,7 +110,21 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 		description="Seleccionamos el botón \"Siguiente\"",
 		expected="Se hace visible el paso-2")
 	public void selectConfirmarButton () {
-		click(ModalElement.Siguiente.getBy(dCtxSh.channel)).exec();
+		click(getBotonSiguienteVisible()).exec();
+		//click(ModalElement.Siguiente.getBy(dCtxSh.channel)).exec();
+	}
+	
+	private WebElement getBotonSiguienteVisible() {
+		return getElementVisible(driver, ModalElement.Siguiente.getBy(dCtxSh.channel));
+	}
+	private boolean isBotonSiguienteVisible(int maxSeconds) {
+		for (int i=0; i<maxSeconds; i++) {
+			if (getBotonSiguienteVisible()!=null) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
 	}
 
 	@Validation
@@ -119,7 +137,8 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 			State.Warn);
 		validations.add(
 			"Podemos confirmar nuestra seleccion",
-			state(Visible, ModalElement.Siguiente.getBy()).wait(maxSeconds).check(),
+			isBotonSiguienteVisible(maxSeconds),
+			//state(Visible, ModalElement.Siguiente.getBy()).wait(maxSeconds).check(),
 			State.Warn);
 		return validations;
 	}
@@ -143,7 +162,8 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 		description="Seleccionamos el botón \"Confirmar\"",
 		expected="Aparece el apartado 4 de la personalización")
 	public void selectSize () throws Exception {
-		click(ModalElement.Siguiente.getBy(dCtxSh.channel)).exec();
+		click(getBotonSiguienteVisible()).exec();
+		//click(ModalElement.Siguiente.getBy(dCtxSh.channel)).exec();
 		validateSizeList(2);
 	}
 
@@ -158,7 +178,8 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 		description="Seleccionamos el botón \"Siguiente\"",
 		expected="Aparece el modal con las opciones para ver la bolsa o seguir comprando")
 	public void confirmCustomization() throws Exception {
-		click(ModalElement.Siguiente.getBy(dCtxSh.channel)).exec();
+		click(getBotonSiguienteVisible()).exec();
+		//click(ModalElement.Siguiente.getBy(dCtxSh.channel)).exec();
 		validateAddBag(2);
 	}
 
@@ -166,16 +187,21 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 		description="1) Aparece el botón para añadir a la bolsa",
 		level=State.Warn)
 	private boolean validateAddBag(int maxSeconds) {
-		return (state(Visible, ModalElement.Siguiente.getBy(dCtxSh.channel)).wait(maxSeconds).check());
+		return isBotonSiguienteVisible(maxSeconds);
+		//return (state(Visible, ModalElement.Siguiente.getBy(dCtxSh.channel)).wait(maxSeconds).check());
 	}
 
 	@Step(
 		description="Seleccionar botón <b>Añadir a la bolsa</b>",
 		expected="El artículo se da de alta correctamente en la bolsa"	)
 	public void checkCustomizationProof () {
-		click(ModalElement.Siguiente.getBy(dCtxSh.channel)).exec();
-		if (dCtxSh.channel == Channel.mobile) {
-			click(ModalElement.GoToBag.getBy(dCtxSh.channel)).exec();
+		click(getBotonSiguienteVisible()).exec();
+		//click(ModalElement.Siguiente.getBy(dCtxSh.channel)).exec();
+//		if (dCtxSh.channel == Channel.mobile) {
+//			click(ModalElement.GoToBag.getBy(dCtxSh.channel)).exec();
+//		}
+		if (dCtxSh.channel==Channel.mobile) {
+			SecBolsa.setBolsaToStateIfNotYet(StateBolsa.Open, Channel.mobile, dCtxSh.appE, driver);
 		}
 		validateCustomizationProof(2);
 	}

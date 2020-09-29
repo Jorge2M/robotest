@@ -40,7 +40,7 @@ public class SecBolsa {
     private static final String XPathBotonComprarDesktop = "//*[@id='bolsaComprar']";
     private static final String tagRefArticle = "[TAGREF]";
     private static final String XPathLinkBorrarArtMobilNew = "//*[@id[contains(.,'trashMobile')] and @onclick[contains(.,'" + tagRefArticle + "')]]"; 
-    private static final String XPathLinkBorrarArtDesktop = "//*[@class='boton_basura' and @onclick[contains(.,'" + tagRefArticle + "')]]";
+    private static final String XPathLinkBorrarArtDesktop = "//*[@class='boton_basura' and @onclick[contains(.,'" + tagRefArticle + "')]]/..";
     private static final String XPathPrecioSubTotalMobil = "//div[@class[contains(.,'totalPriceContainer')]]";
     private static final String XPathPrecioSubTotalDesktop = "//*[@class='box_total_price']";
     private static final String XPathLinkArticulo = "//div[@class[contains(.,'itemDesc')]]/a";

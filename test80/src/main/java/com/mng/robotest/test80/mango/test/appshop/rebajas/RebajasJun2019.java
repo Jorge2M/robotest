@@ -121,7 +121,7 @@ public class RebajasJun2019 implements Serializable {
             if (UtilsMangoTest.validarLinea(dCtxSh.pais, linea, dCtxSh.channel, dCtxSh.appE) &&
                 linea.getType()!=LineaType.edits) {
                 validaLinea(salesOnInCountry, linea, null, ("banners".compareTo(linea.getContentDesk())==0), dCtxSh, driver);
-                for (Sublinea sublinea : linea.getListSublineas()) {
+                for (Sublinea sublinea : linea.getListSublineas(dCtxSh.appE)) {
                     validaLinea(salesOnInCountry, linea, sublinea, ("banners".compareTo(sublinea.getContentDesk())==0), dCtxSh, driver);
                 }
             }

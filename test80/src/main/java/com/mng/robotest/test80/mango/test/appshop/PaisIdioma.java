@@ -97,7 +97,7 @@ public class PaisIdioma implements Serializable {
         for (Linea linea : linesToTest) {
             if (UtilsMangoTest.validarLinea(dCtxSh.pais, linea, dCtxSh.channel, dCtxSh.appE)) {
                 validaLinea(linea, null, driver);
-                for (Sublinea sublinea : linea.getListSublineas()) {
+                for (Sublinea sublinea : linea.getListSublineas(dCtxSh.appE)) {
                     validaLinea(linea, sublinea, driver);
                 }
             }

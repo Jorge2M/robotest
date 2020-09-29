@@ -132,8 +132,14 @@ public class PageCheckoutWrapperStpV {
         if (!dCtxPago.getFTCkout().isChequeRegalo) {
             pagoPintado = fluxSelectEnvio(dCtxPago, dCtxSh, driver);
         }
-        
-        PageCheckoutWrapperStpV.forceClickIconoPagoAndWait(dCtxSh.pais, dCtxPago.getDataPedido().getPago(), dCtxSh.channel, !pagoPintado, driver);
+        boolean methodSelectedOK = 
+        		PageCheckoutWrapperStpV
+        			.forceClickIconoPagoAndWait(dCtxSh.pais, dCtxPago.getDataPedido().getPago(), dCtxSh.channel, !pagoPintado, driver);
+        if (!methodSelectedOK) {
+        	//En caso de no conseguir seleccionar correctamente el pago no nos podemos arriesgar a continuar con el pago
+        	//porque quizás esté seleccionado otro método de pago del tipo Contrareembolso y un "Confirmar Pago" desencadenaría la compra en PRO
+        	throw new RuntimeException("Problem selecting payment method " + dCtxPago.getDataPedido().getPago().getNombre() + " in country " + dCtxSh.pais.getNombre_pais());
+        }
     }
     
     public static boolean fluxSelectEnvio(DataCtxPago dCtxPago, DataCtxShop dCtxSh, WebDriver driver) 
@@ -244,7 +250,7 @@ public class PageCheckoutWrapperStpV {
     @Step (
     	description="Seleccionamos el icono/pestaña correspondiente al método de pago y esperamos la desaparición de los \"loading\"",
     	expected="La operación se ejecuta correctamente")
-    public static void forceClickIconoPagoAndWait(Pais pais, Pago pago, Channel channel, boolean pintaNombrePago, WebDriver driver) throws Exception {
+    public static boolean forceClickIconoPagoAndWait(Pais pais, Pago pago, Channel channel, boolean pintaNombrePago, WebDriver driver) throws Exception {
         if (pintaNombrePago) {
             String pintaPago = "<b style=\"color:blue;\">" + pago.getNombre(channel) + "</b>:"; 
             StepTM step = TestMaker.getCurrentStepInExecution();
@@ -263,8 +269,9 @@ public class PageCheckoutWrapperStpV {
             pago.getTypePago()==TypePago.KrediKarti ||
             pago.getTypePago()==TypePago.Bancontact) {
             PageCheckoutWrapperStpV.validateSelectPagoTRJintegrada(pago, pais, channel, driver);
+            return true;
         } else {
-            PageCheckoutWrapperStpV.validateSelectPagoNoTRJintegrada(pago, channel, driver);
+            return PageCheckoutWrapperStpV.validateSelectPagoNoTRJintegrada(pago, channel, driver);
         }
     }
     
@@ -276,16 +283,16 @@ public class PageCheckoutWrapperStpV {
         PageCheckoutWrapperStpV.getSecTarjetaPciStpV(channel, driver).validateIsSectionOk(pago, pais);
     }
     
-    public static void validateSelectPagoNoTRJintegrada(Pago pago, Channel channel, WebDriver driver) {
+    public static boolean validateSelectPagoNoTRJintegrada(Pago pago, Channel channel, WebDriver driver) {
         if (channel==Channel.desktop) {
             validateIsPresentButtonCompraDesktop(driver);
         }
-        checkIsVisibleTextUnderPayment(pago.getNombreInCheckout(channel), pago, 2, channel, driver);
+        return checkIsVisibleTextUnderPayment(pago.getNombreInCheckout(channel), pago, 2, channel, driver);
     }
     
     @Validation (
     	description="Se hace visible el texto bajo el método de pago: #{nombrePago} (lo esperamos hasta #{maxSeconds} segundos)",
-    	level=State.Warn)
+    	level=State.Defect)
     private static boolean checkIsVisibleTextUnderPayment(@SuppressWarnings("unused") String nombrePago, Pago pago, int maxSeconds, Channel channel, WebDriver driver) {
         return (PageCheckoutWrapper.isVisibleBloquePagoNoTRJIntegradaUntil(pago, channel, maxSeconds, driver));
     }

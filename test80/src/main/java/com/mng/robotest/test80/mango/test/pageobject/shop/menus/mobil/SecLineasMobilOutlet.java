@@ -7,18 +7,21 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosT
 
 public class SecLineasMobilOutlet extends SecLineasMobil {
 
-	static String IniXPathLinkLinea = XPathCapaLevelLinea + "//li/div[@class[contains(.,'menu-item-label')] and @id";
-	static String XPathLinkLineaMujer = IniXPathLinkLinea + "='outlet']";
-	static String XPathLinkLineaHombre = IniXPathLinkLinea + "='outletH']";
-	static String XPathLinkLineaNina = IniXPathLinkLinea + "='outletA']";
-	static String XPathLinkLineaNino =IniXPathLinkLinea + "='outletO']";
-	static String XPathLinkLineaVioleta = IniXPathLinkLinea + "='outletV']";
+	private static String IniXPathLinkLinea = XPathCapaLevelLinea + "//li/div[@class[contains(.,'menu-item-label')] and @id";
+	private static String XPathLinkLineaMujer = IniXPathLinkLinea + "='outlet']";
+	private static String XPathLinkLineaHombre = IniXPathLinkLinea + "='outletH']";
+	private static String XPathLinkLineaNina = IniXPathLinkLinea + "='outletA']";
+	private static String XPathLinkLineaNino =IniXPathLinkLinea + "='outletO']";
+	private static String XPathLinkLineaVioleta = IniXPathLinkLinea + "='outletV']";
 
-	static String IniXPathLinkSublinea = XPathCapa2onLevelMenu + "//div[@data-label[contains(.,'interior-"; 
-	static String XPathLinkSublineaNina =  IniXPathLinkSublinea + "nina')]]";
-	static String XPathLinkSublineaBebeNina = IniXPathLinkSublinea + "bebe_nina')]]";
-	static String XPathLinkSublineaNino = IniXPathLinkSublinea + "nino')]]";
-	static String XPathLinkSublineaBebeNino = IniXPathLinkSublinea + "bebe_nino')]]";
+	private static String IniXPathLinkSublinea = XPathCapa2onLevelMenu + "//div[@data-label[contains(.,'interior-"; 
+	private static String XPathLinkSublineaNina =  IniXPathLinkSublinea + "nina')]]";
+	private static String XPathLinkSublineaTeenNina =  IniXPathLinkSublinea + "teen')]]";
+	private static String XPathLinkSublineaBebeNina = IniXPathLinkSublinea + "bebe_nina')]]";
+	
+	private static String XPathLinkSublineaNino = IniXPathLinkSublinea + "nino')]]";
+	private static String XPathLinkSublineaTeenNino =  IniXPathLinkSublinea + "teen')]]";
+	private static String XPathLinkSublineaBebeNino = IniXPathLinkSublinea + "bebe_nino')]]";
 	
 	public SecLineasMobilOutlet(WebDriver driver) {
 		super(AppEcom.outlet, driver);
@@ -47,10 +50,14 @@ public class SecLineasMobilOutlet extends SecLineasMobil {
 		switch (sublineaType) {
 		case nina:
 			return XPathLinkSublineaNina;
+		case teen_nina:
+			return XPathLinkSublineaTeenNina;
 		case bebe_nina:
 			return XPathLinkSublineaBebeNina;
 		case nino:
 			return XPathLinkSublineaNino;
+		case teen_nino:
+			return XPathLinkSublineaTeenNino;
 		case bebe_nino:
 		default:
 			return XPathLinkSublineaBebeNino;

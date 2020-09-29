@@ -11,19 +11,19 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalDetalleCompraMobil extends ModalDetalleCompra {
 	
-	private static String XPathDataTicket = "//div[@class='i1ELB' or @class='_3Sg3f']";
-	private static String XPathItemDataTicket = XPathDataTicket + "//*[@class[contains(.,'YfZQV')] or @class[contains(.,'_28tei')]]";
+	private static String XPathDataTicket = "//div[@class='_3vFiY' or @class='_3KavU']"; //React
+	private static String XPathItemDataTicket = XPathDataTicket + "//*[@class[contains(.,'Db4DJ')] or @class[contains(.,'wcdEz')]]"; //React
     private static String XPathIdTicket = XPathItemDataTicket + "[1]/span";
 	private static String XPathLineaImporte = XPathItemDataTicket + "[2]//span[@class[contains(.,'sg-subtitle-small')]]";
-	private static String XPathArticulo = "//div[@class[contains(.,'_2qsgF ')]]";
-    private static String XPathLinkToMisCompras = "//button[@class[contains(.,'W0Ycl')]]";
+	private static String XPathArticulo = "//div[@class[contains(.,'_1cg73 ')]]"; //React
+    private static String XPathLinkToMisCompras = "//button/*[@class[contains(.,'icon-fill-prev')]]/.."; 
     
 	private String getXPathArticulo(int position) {
 		return "(" + XPathArticulo + ")[" + position + "]";
 	}
     private String getXPathReferenciaArticulo(int posArticulo) {
         String xpathArticulo = getXPathArticulo(posArticulo);
-        return (xpathArticulo + "//div[@class[contains(.,'_29rNr')]]");
+        return (xpathArticulo + "//div[@class[contains(.,'_13V8z')]]"); //React
     }
     private String getXPathNombreArticulo(int posArticulo) {
         String xpathArticulo = getXPathArticulo(posArticulo);
@@ -31,7 +31,7 @@ public class ModalDetalleCompraMobil extends ModalDetalleCompra {
     }
     private String getXPathPrecioArticulo(int posArticulo) {
         String xpathArticulo = getXPathArticulo(posArticulo);        
-        return (xpathArticulo + "//div[@class[contains(.,'wO2G0')]]");
+        return (xpathArticulo + "//div[@class[contains(.,'saSFe')]]//span[last()]"); //React
     }
     
     public ModalDetalleCompraMobil(Channel channel, WebDriver driver) {
@@ -44,7 +44,7 @@ public class ModalDetalleCompraMobil extends ModalDetalleCompra {
     }
     @Override
     public boolean isPresentImporteTotal(String importeTotal, String codPais) {
-    	String importe = getImporte();
+    	String importe = getImporte().replaceAll("[^\\d.,]", "");  //Eliminamos la divisa;
     	return (importe.compareTo(importeTotal)==0);
     }
     @Override

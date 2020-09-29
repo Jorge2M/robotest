@@ -45,6 +45,7 @@ public class Page2IdentCheckout {
     final static String XPathSelectProvPais = "//select[@id[contains(.,'provinciaPais')]]";
     final static String XPathSelectEstadosPais = "//select[@id[contains(.,'estadosPais')]]";
     final static String XPathSelectLocalidadesProvCity = "//select[@id[contains(.,'localidadesProvCity')]]";
+    final static String XPathSelectLocalidadesNeighbourhoodCity = "//select[@id[contains(.,'localidadesNeighbourhoodCity')]]";
     final static String XPathCheckHombre = "//div[@id[contains(.,':cfGener_H')]]";
     final static String XPathCheckCondiciones = "//input[@id[contains(.,':cfPriv')]]";
     final static String XPathBotonFindAddress = "//input[@class[contains(.,'load-button')] and @type='button']";
@@ -433,18 +434,33 @@ public class Page2IdentCheckout {
         return "";
     }
     
-    /**
-     * @param posInSelect: elemento del desplegable que queremos desplegar (comenzando desde el 1)
-     */
-    public static String setSelectLocalidadesProvCity(int posInSelect, WebDriver driver) throws Exception {
+    private enum TypeLocalidad {ProvCity, NeighbourhoodCity}
+    private static String setSelectLocalidadesProvCity(int posInSelect, WebDriver driver) throws Exception {
+    	return (setSelectLocalidades(TypeLocalidad.ProvCity, posInSelect, driver));
+    }
+    private static String setSelectLocalidadesNeighbourhoodCity(int posInSelect, WebDriver driver) throws Exception {
+    	return (setSelectLocalidades(TypeLocalidad.NeighbourhoodCity, posInSelect, driver));
+    }
+    
+    private static String setSelectLocalidades(TypeLocalidad typeLocalidad, int posInSelect, WebDriver driver) 
+    throws Exception {
         String datoSeteado = "";
+        String xpathSelect = "";
+        switch (typeLocalidad) {
+        case ProvCity:
+        	xpathSelect = XPathSelectLocalidadesProvCity;
+        	break;
+        case NeighbourhoodCity:
+        	xpathSelect = XPathSelectLocalidadesNeighbourhoodCity;
+        	break;
+        }
 
         //Tenemos problemas aleatorios de StaleElementReferenceException con este elemento
         //Probamos hasta 3 veces mientras que obtengamos la Excepción
         boolean staleElement = true;
         int i=0;
         while (staleElement && i<3) {
-            List<WebElement> localidadesList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathSelectLocalidadesProvCity));
+            List<WebElement> localidadesList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(xpathSelect));
             if (localidadesList.size() > 0) {
                 try {
                     new Select(localidadesList.get(0)).selectByIndex(posInSelect);
@@ -471,7 +487,13 @@ public class Page2IdentCheckout {
         if ("".compareTo(datoSeteado)!=0) {
             datosRegistro.put("localidadesProvCity", datoSeteado);
         }
-    }        
+    }     
+    public static void setSelectLocalidadesNeighbourhoodCity(int posInSelect, HashMap<String,String> datosRegistro, WebDriver driver) throws Exception {
+        String datoSeteado = setSelectLocalidadesNeighbourhoodCity(posInSelect, driver);
+        if ("".compareTo(datoSeteado)!=0) {
+            datosRegistro.put("localidadesNeighbourhoodCity", datoSeteado);
+        }
+    }
     
     public static boolean setCheckHombreIfVisible(WebDriver driver) {
         boolean datoSeteado = false;
@@ -548,7 +570,8 @@ public class Page2IdentCheckout {
             setSelectLocalidadesIfVisible(driver, 1, datosSeteados);
             setSelectProvPaisIfVisible(datosSeteados, pais.getCodigo_pais(), channel, driver); // Desplegable provincia país (p.e. Turquía)
             setCheckCondicionesIfVisible(datosSeteados, driver); // Selección aceptación de condiciones (actualmente sólo en Turquía)
-            setSelectLocalidadesProvCity(1/*posInSelect*/, datosSeteados, driver); // Desplegable específico de Turquía
+            setSelectLocalidadesProvCity(1, datosSeteados, driver); // Desplegable específico de Turquía
+            setSelectLocalidadesNeighbourhoodCity(1, datosSeteados, driver); // Desplegable específico de Turquía
             setInputProvEstadoIfVisible(cfState, datosSeteados, driver);
             setInputDniIfVisible(dni, datosSeteados, driver);
             setSelectEstadosPaisIfVisible(datosSeteados, codigoPais, driver);

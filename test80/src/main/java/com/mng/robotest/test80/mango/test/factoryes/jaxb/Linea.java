@@ -5,9 +5,12 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import javax.xml.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
 
 
@@ -201,12 +204,32 @@ public class Linea implements Serializable {
     public boolean isActiveIn(Channel channel) {
     	return getType().isActiveIn(channel);
     }
+    
+    public boolean isActiveIn(AppEcom app) {
+    	switch (app) {
+    	case outlet:
+    		return "s".compareTo(getOutlet())==0;
+    	case shop:
+    	case votf:
+    	default:
+    		return "s".compareTo(getShop())==0;
+    	}
+    }
         
     @XmlElement(name="sublinea") 
     List<Sublinea> listSublineas = new LinkedList<>();
         
-    public List<Sublinea> getListSublineas() {
+    private List<Sublinea> getListSublineas() {
         return this.listSublineas;
+    }
+    public List<Sublinea> getListSublineas(AppEcom app) {
+    	List<Sublinea> sublineasApp = new ArrayList<>();
+    	for (Sublinea sublinea : listSublineas) {
+    		if (sublinea.isActiveIn(app)) {
+    			sublineasApp.add(sublinea);
+    		}
+    	}
+    	return sublineasApp;
     }
     
     public Sublinea getSublineaNinos(SublineaNinosType sublineaType) {

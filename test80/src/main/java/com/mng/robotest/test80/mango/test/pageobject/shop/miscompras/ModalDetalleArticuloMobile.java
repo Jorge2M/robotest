@@ -8,11 +8,11 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalDetalleArticuloMobile extends ModalDetalleArticulo {
 
-    private static String XPathModalInfoArticulo = "//div[@class[contains(.,'_2FacL')]]";
+    private static String XPathModalInfoArticulo = "//div[@class[contains(.,'wHrEl')]]"; //React
     private static String XPathAspaForClose = "//i[@class[contains(.,'icon-outline-close')]]";
-    private static String XPathReferencia = "//div[@class[contains(.,'YKRc7')]]";
+    private static String XPathReferencia = "//div[@class[contains(.,'_2ByJT')]]"; //React
     private static String XPathNombre = XPathModalInfoArticulo + "/div/div[@class='sg-subtitle']";
-    private static String XPathPrecio = XPathModalInfoArticulo + "//div[@class[contains(.,'wO2G0')]]";
+    private static String XPathPrecio = XPathModalInfoArticulo + "//div[@class[contains(.,'saSFe')]]//span[last()]"; //React
     
     public ModalDetalleArticuloMobile(WebDriver driver) {
     	super(driver);

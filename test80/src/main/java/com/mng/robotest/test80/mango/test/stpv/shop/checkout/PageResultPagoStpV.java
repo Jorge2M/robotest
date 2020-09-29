@@ -55,6 +55,13 @@ public class PageResultPagoStpV {
         }
     }
     
+    @Validation (
+    	description="Aparece la URL correspondiente a la página de resultado OK (la esperamos hasta #{maxSeconds} segundos)",
+    	level=State.Defect)
+    public boolean checkUrl(int maxSeconds) {
+    	return (pageResultPago.checkUrl(maxSeconds));
+    }
+    
     @Validation
     public ChecksTM validateTextConfirmacionPago() {
     	ChecksTM validations = ChecksTM.getNew();

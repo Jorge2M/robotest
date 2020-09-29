@@ -105,7 +105,7 @@ public class Favoritos implements Serializable {
 		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh);
 
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-		List<Integer> iconsToMark = Arrays.asList(1, 3, 4);  
+		List<Integer> iconsToMark = Arrays.asList(2, 3, 5);  
 		pageGaleriaStpV.clickArticlesHearthIcons(iconsToMark, TypeActionFav.Marcar, dataFavoritos);
 
 		List<Integer> iconsToUnmark = Arrays.asList(3);

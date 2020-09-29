@@ -66,6 +66,7 @@ public class CompraLuque {
         fTCkout.emailExist = false; 
         fTCkout.trjGuardada = false;
         fTCkout.isEmpl = false;
+        fTCkout.stressMode = true;
         DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
         dCtxPago.setFTCkout(fTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);

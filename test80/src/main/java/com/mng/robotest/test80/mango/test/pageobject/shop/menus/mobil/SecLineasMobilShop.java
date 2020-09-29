@@ -19,8 +19,10 @@ public class SecLineasMobilShop extends SecLineasMobil {
 	static String IniXPathLinkSublinea = XPathCapa2onLevelMenu + "//div[@data-label[contains(.,'interior-"; 
 	static String XPathLinkSublineaNina =  IniXPathLinkSublinea + "nina')]]";
 	static String XPathLinkSublineaBebeNina = IniXPathLinkSublinea + "bebe_nina')]]";
+	static String XPathLinkSublineaTeenNina = IniXPathLinkSublinea + "teen')]]";
 	static String XPathLinkSublineaNino = IniXPathLinkSublinea + "nino')]]";
 	static String XPathLinkSublineaBebeNino = IniXPathLinkSublinea + "bebe_nino')]]";
+	static String XPathLinkSublineaTeenNino = IniXPathLinkSublinea + "teen')]]";
 	
 	public SecLineasMobilShop(WebDriver driver) {
 		super(AppEcom.shop, driver);
@@ -51,10 +53,14 @@ public class SecLineasMobilShop extends SecLineasMobil {
 		switch (sublineaType) {
 		case nina:
 			return XPathLinkSublineaNina;
+		case teen_nina:
+			return XPathLinkSublineaTeenNina;
 		case bebe_nina:
 			return XPathLinkSublineaBebeNina;
 		case nino:
 			return XPathLinkSublineaNino;
+		case teen_nino:
+			return XPathLinkSublineaTeenNino;
 		case bebe_nino:
 		default:
 			return XPathLinkSublineaBebeNino;

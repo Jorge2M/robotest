@@ -12,6 +12,7 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
@@ -208,7 +209,10 @@ public class FichaProducto {
         //pero en el caso de Corea se escapa el de Subscripción en la Newsletter
         PagePrehome.closeModalNewsLetterIfExists(driver);
         
-        Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.nina, null, "pantalones"));
+        Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(
+        	dCtxSh.appE, KeyMenu1rstLevel.from(
+        		LineaType.nina, 
+        		SublineaNinosType.teen_nina, "pantalones"));
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh);
 
@@ -246,33 +250,30 @@ public class FichaProducto {
 		Menu1rstLevel menuPersonalizacion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.he, null, "personalizacion"));
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         
-        //TODO volver a activar cuando añadan el menú Personalización
-        secMenusStpV.checkExistMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
-        if (false) {
-	        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
-	        secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
-			LocationArticle articleNum = LocationArticle.getInstanceInCatalog(1);
-			pageGaleriaStpV.selectArticulo(articleNum, dCtxSh);
-	        SecModalPersonalizacionStpV modalPersonalizacionStpV = SecModalPersonalizacionStpV.getNewOne(dCtxSh, driver); 
-	        modalPersonalizacionStpV.checkAreArticleCustomizable();
-	        
-	        PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
-	        pageFichaStpv.selectFirstTallaAvailable();
-	        modalPersonalizacionStpV.selectLinkPersonalizacion();
-	        //modalPersonalizacionStpV.startCustomization();
-	        modalPersonalizacionStpV.selectIconCustomization();
-	        modalPersonalizacionStpV.selectFirstIcon();
-	    	modalPersonalizacionStpV.validateIconSelectedDesktop();
-	        modalPersonalizacionStpV.selectConfirmarButton();
-	        modalPersonalizacionStpV.validateCabeceraStep(2);
-	        modalPersonalizacionStpV.validateWhereDesktop();
-	        modalPersonalizacionStpV.selectConfirmarButton();
-	    	modalPersonalizacionStpV.validateCabeceraStep(3);
-	    	modalPersonalizacionStpV.validateSelectionColor();
-	 
-	        modalPersonalizacionStpV.selectSize();
-	        modalPersonalizacionStpV.confirmCustomization();
-	        modalPersonalizacionStpV.checkCustomizationProof();
-        }
+        //secMenusStpV.checkExistMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
+        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
+        secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
+		LocationArticle articleNum = LocationArticle.getInstanceInCatalog(1);
+		pageGaleriaStpV.selectArticulo(articleNum, dCtxSh);
+        SecModalPersonalizacionStpV modalPersonalizacionStpV = SecModalPersonalizacionStpV.getNewOne(dCtxSh, driver); 
+        modalPersonalizacionStpV.checkAreArticleCustomizable();
+        
+        PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
+        pageFichaStpv.selectFirstTallaAvailable();
+        modalPersonalizacionStpV.selectLinkPersonalizacion();
+        //modalPersonalizacionStpV.startCustomization();
+        modalPersonalizacionStpV.selectIconCustomization();
+        modalPersonalizacionStpV.selectFirstIcon();
+    	modalPersonalizacionStpV.validateIconSelectedDesktop();
+        modalPersonalizacionStpV.selectConfirmarButton();
+        modalPersonalizacionStpV.validateCabeceraStep(2);
+        modalPersonalizacionStpV.validateWhereDesktop();
+        modalPersonalizacionStpV.selectConfirmarButton();
+    	modalPersonalizacionStpV.validateCabeceraStep(3);
+    	modalPersonalizacionStpV.validateSelectionColor();
+ 
+        modalPersonalizacionStpV.selectSize();
+        modalPersonalizacionStpV.confirmCustomization();
+        modalPersonalizacionStpV.checkCustomizationProof();
     }
 }

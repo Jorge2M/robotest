@@ -20,6 +20,7 @@ public class FlagsTestCkout implements Cloneable, Serializable {
     public boolean isChequeRegalo = false;
     public boolean isStoreCredit = false;
     public boolean loyaltyPoints = false;
+    public boolean stressMode = false;
     
     public FlagsTestCkout() {}
     

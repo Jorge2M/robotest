@@ -139,12 +139,12 @@ public class Loyalty {
     
     private DataBag addBagArticleNoRebajado(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
     	Menu1rstLevel menuNewCollection;
-    	if (dCtxSh.channel==Channel.desktop) {
+//    	if (dCtxSh.channel==Channel.desktop) {
     		menuNewCollection = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "nuevo"));
-    	}
-    	else {
-    		menuNewCollection = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "promos-vestidos"));
-    	}
+//    	}
+//    	else {
+//    		menuNewCollection = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "promos-vestidos"));
+//    	}
 		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
 		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuNewCollection, dCtxSh);
 		//secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);

@@ -231,36 +231,24 @@ public class PagoNavigationsStpV {
         pagoStpV.testPagoFromCheckout(execPay);
         dataPedido = dCtxPago.getDataPedido();
         if (execPay) {
-            //Validaciones
-            if (pagoToTest.getTypePago()!=TypePago.TpvVotf) {
-            	PageResultPagoStpV pageResultPagoStpV = new PageResultPagoStpV(pagoToTest.getTypePago(), dCtxSh.channel, driver);
-                pageResultPagoStpV.validateIsPageOk(dCtxPago, dCtxSh);
-                if (dCtxSh.channel==Channel.desktop && !dCtxPago.getFTCkout().isChequeRegalo) {
-                    if (testMisCompras(dCtxPago, dCtxSh)) {
-                        pageResultPagoStpV.selectLinkMisComprasAndValidateCompra(dCtxPago, dCtxSh);
-                    } else {
-                        pageResultPagoStpV.selectLinkPedidoAndValidatePedido(dataPedido);
-                    }
-                }
-            } else {
-                PageResultPagoTpvStpV.validateIsPageOk(dataPedido, dCtxSh.pais.getCodigo_pais(), driver);
+        	PageResultPagoStpV pageResultPagoStpV = new PageResultPagoStpV(pagoToTest.getTypePago(), dCtxSh.channel, driver);
+            if (dCtxPago.getFTCkout().stressMode) {
+            	pageResultPagoStpV.checkUrl(10);
             }
-            
-            //Almacenamos el pedido en el contexto para la futura validación en Manto
-            pagoStpV.storePedidoForMantoAndResetData();
-
-            //Validaciones Analítica (sólo para firefox y NetAnalysis)
-            EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
-                    Constantes.AnalyticsVal.GoogleAnalytics,
-                    Constantes.AnalyticsVal.NetTraffic, 
-                    Constantes.AnalyticsVal.Criteo,
-                    Constantes.AnalyticsVal.DataLayer);
-            if (dataPedido.getPago().getTestpolyvore()!=null && 
-                dataPedido.getPago().getTestpolyvore().compareTo("s")==0) { 
-                analyticSet.add(Constantes.AnalyticsVal.Polyvore);
+            else {
+	            if (pagoToTest.getTypePago()!=TypePago.TpvVotf) {
+	                pageResultPagoStpV.validateIsPageOk(dCtxPago, dCtxSh);
+	                if (dCtxSh.channel==Channel.desktop && !dCtxPago.getFTCkout().isChequeRegalo) {
+	                    if (testMisCompras(dCtxPago, dCtxSh)) {
+	                        pageResultPagoStpV.selectLinkMisComprasAndValidateCompra(dCtxPago, dCtxSh);
+	                    } else {
+	                        pageResultPagoStpV.selectLinkPedidoAndValidatePedido(dataPedido);
+	                    }
+	                }
+	            } else {
+	                PageResultPagoTpvStpV.validateIsPageOk(dataPedido, dCtxSh.pais.getCodigo_pais(), driver);
+	            }
             }
-            
-            PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, dataPedido, analyticSet, driver);
         }
     }
     

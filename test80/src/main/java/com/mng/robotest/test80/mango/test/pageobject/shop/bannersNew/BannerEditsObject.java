@@ -9,12 +9,16 @@ import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 
 public class BannerEditsObject extends BannerObject {
 
-	final static String tagAnalytics = "@data-analytics and not(@data-analytics='')";
-	final static String XPathBannerV1 = "//div[@class[contains(.,'vsv-')] and " + tagAnalytics + "]//a";
-	final static String XPathBannerV2 = "//div[@class[contains(.,'vsv-')]]//a[" + tagAnalytics + "]";
-	final static String XPathBannerV3 = "//div[@class[contains(.,'swiper-slide-active')]]//a";
-	final static String XPathBannerV4 = "//div[@class[contains(.,'vsv-openQuickLook')]]";
-	final static String XPathBanner = "(" + XPathBannerV1 + " | " + XPathBannerV2 + "|" + XPathBannerV3 + "|" + XPathBannerV4 + ")";
+//	final static String tagAnalytics = "@data-analytics and not(@data-analytics='')";
+//	final static String XPathBannerV1 = "//div[@class[contains(.,'vsv-')] and " + tagAnalytics + "]//a";
+//	final static String XPathBannerV2 = "//div[@class[contains(.,'vsv-')]]//a[" + tagAnalytics + "]";
+//	final static String XPathBannerV3 = "//div[@class[contains(.,'swiper-slide-active')]]//a";
+//	final static String XPathBannerV4 = "//div[@class[contains(.,'vsv-openQuickLook')]]";
+//	final static String XPathBanner = "(" + XPathBannerV1 + " | " + XPathBannerV2 + "|" + XPathBannerV3 + "|" + XPathBannerV4 + ")";
+	
+	private final static String XPathBannerCarrusel = "//div[@class='heroSwiper']//div[@class='swiperImage']";
+	private final static String XPathBannerPestanyas = "//div[@class='masonryGrid']//div[@class='masonryItem']/a";
+	private final static String XPathBanner = "(" + XPathBannerCarrusel + " | " + XPathBannerPestanyas + ")";
 	
 	public BannerEditsObject(BannerType bannerType) {
 		super(bannerType, XPathBanner);

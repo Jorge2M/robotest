@@ -110,7 +110,7 @@ public class UtilsTestMango {
     	}
     	
     	GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh).build();
-    	listProducts = getterProducts.getAll();
+    	listProducts = getterProducts.getWithStock();
         if (dCtxSh.vale!=null) {
         	for (Garment product : listProducts) {
         		product.setValePais(dCtxSh.vale);
