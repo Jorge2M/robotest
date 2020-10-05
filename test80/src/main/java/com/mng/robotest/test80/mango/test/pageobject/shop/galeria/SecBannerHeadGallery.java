@@ -15,10 +15,10 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClic
 
 public class SecBannerHeadGallery {
 	public enum TypeLinkInfo {more, less};
-    static String XPathBanner = "//div[@class='bannerHead' or @class='firstBanner' or @class='innerBanner']";
+    static String XPathBanner = "//div[@class='bannerHead' or @class='firstBanner' or @class='innerBanner' or @class='_2mOAS']"; //React
     static String XPathBannerWithVideo = XPathBanner + "//div[@data-video]";
     static String XPathBannerWithBackgroundImage = XPathBanner + "//div[@style[contains(.,'background-image')]]";
-    static String XPathText = XPathBanner + "//div[@class[contains(.,'textinfo')] or @class[contains(.,'vsv-text')] or @class='vsv-content-text']";
+    static String XPathText = XPathBanner + "//*[@class[contains(.,'textinfo')] or @class[contains(.,'vsv-text')] or @class='vsv-content-text' or @class[contains(.,'text-subtitle')]]";
     static String XPathTextLinkInfoRebajas = XPathBanner + "//div[@class[contains(.,'infotext')]]";
     static String XPathTextLinkMoreInfoRebajas = XPathTextLinkInfoRebajas + "//self::*[@class[contains(.,'max')]]";
     static String XPathTextLinkLessInfoRebajas = XPathTextLinkInfoRebajas + "//self::*[@class[contains(.,'min')]]";

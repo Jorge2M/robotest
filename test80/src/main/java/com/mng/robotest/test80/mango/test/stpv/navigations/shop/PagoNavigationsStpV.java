@@ -248,6 +248,22 @@ public class PagoNavigationsStpV {
 	            } else {
 	                PageResultPagoTpvStpV.validateIsPageOk(dataPedido, dCtxSh.pais.getCodigo_pais(), driver);
 	            }
+	            
+	            //Almacenamos el pedido en el contexto para la futura validación en Manto
+	            pagoStpV.storePedidoForMantoAndResetData();
+
+	            //Validaciones Analítica (sólo para firefox y NetAnalysis)
+	            EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
+	                    Constantes.AnalyticsVal.GoogleAnalytics,
+	                    Constantes.AnalyticsVal.NetTraffic, 
+	                    Constantes.AnalyticsVal.Criteo,
+	                    Constantes.AnalyticsVal.DataLayer);
+	            if (dataPedido.getPago().getTestpolyvore()!=null && 
+	                dataPedido.getPago().getTestpolyvore().compareTo("s")==0) { 
+	                analyticSet.add(Constantes.AnalyticsVal.Polyvore);
+	            }
+	            
+	            PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, dataPedido, analyticSet, driver);
             }
         }
     }
