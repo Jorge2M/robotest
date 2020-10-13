@@ -16,7 +16,7 @@ public interface PageDetallePedido {
         		return (new PageDetalleCompraOld(driver));
         	case New:
         	default:
-        		return ModalDetalleCompra.make(channel, driver);
+        		return PageDetalleCompra.make(channel, driver);
         	}	
         } 
     };

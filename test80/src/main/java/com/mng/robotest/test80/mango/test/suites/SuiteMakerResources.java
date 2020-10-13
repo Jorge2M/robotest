@@ -43,8 +43,10 @@ public class SuiteMakerResources {
         
         parametersReturn.put("categoriaProdExistente", "BOLSOS");
         parametersReturn.put("catProdInexistente", "Anchoas del Cantábrico");
+        
         parametersReturn.put("userWithOnlinePurchases" ,"espana.test@mango.com");
         parametersReturn.put("passUserWithOnlinePurchases" ,"mango123");
+        
         parametersReturn.put("userWithStorePurchases" ,"ticket_digital_es@mango.com");
         parametersReturn.put("passUserWithStorePurchases" ,"mango123");
         

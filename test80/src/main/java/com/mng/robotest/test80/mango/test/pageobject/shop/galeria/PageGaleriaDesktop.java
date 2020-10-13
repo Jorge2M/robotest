@@ -15,6 +15,7 @@ import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -528,19 +529,22 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
     
     @Override
-    public ArticuloScreen selectTallaArticle(int posArticulo, int posTalla) throws Exception {
+    public ArticuloScreen selectTallaAvailableArticle(int posArticulo, int posTalla) throws Exception {
         //Si no está visible la capa de tallas ejecutamos los pasos necesarios para hacer la visible 
     	waitForPageLoaded(driver);
         if (!isVisibleArticleCapaTallasUntil(posArticulo, 1)) {
             showTallasArticulo(posArticulo);
         }
         
-        String xpathTalla = secTallas.getXPathArticleTallaAvailable(posArticulo, posTalla);
-        WebElement tallaToSelect = driver.findElement(By.xpath(xpathTalla));
-        ArticuloScreen articulo = getArticuloObject(posArticulo);
-        articulo.setTalla(Talla.from(tallaToSelect.getText()));
-        tallaToSelect.click();
-        return articulo;
+        By byTalla = By.xpath(secTallas.getXPathArticleTallaAvailable(posArticulo, posTalla));
+        if (state(State.Visible, byTalla).check()) {
+	        WebElement tallaToSelect = driver.findElement(byTalla);
+	        ArticuloScreen articulo = getArticuloObject(posArticulo);
+	        articulo.setTalla(Talla.from(tallaToSelect.getText()));
+	        tallaToSelect.click();
+	        return articulo;
+        }
+        return null;
     }
 
 	public void selectTallaArticleNotAvalaible() {

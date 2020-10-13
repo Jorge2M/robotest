@@ -9,10 +9,10 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class ModalDetalleCompraMobil extends ModalDetalleCompra {
+public class PageDetalleCompraMobil extends PageDetalleCompra {
 	
 	private static String XPathDataTicket = "//div[@class='_3vFiY' or @class='_3KavU']"; //React
-	private static String XPathItemDataTicket = XPathDataTicket + "//*[@class[contains(.,'Db4DJ')] or @class[contains(.,'wcdEz')]]"; //React
+	private static String XPathItemDataTicket = XPathDataTicket + "//*[@class[contains(.,'_1rWLb')] or @class[contains(.,'wcdEz')]]"; //React
     private static String XPathIdTicket = XPathItemDataTicket + "[1]/span";
 	private static String XPathLineaImporte = XPathItemDataTicket + "[2]//span[@class[contains(.,'sg-subtitle-small')]]";
 	private static String XPathArticulo = "//div[@class[contains(.,'_1cg73 ')]]"; //React
@@ -34,7 +34,7 @@ public class ModalDetalleCompraMobil extends ModalDetalleCompra {
         return (xpathArticulo + "//div[@class[contains(.,'saSFe')]]//span[last()]"); //React
     }
     
-    public ModalDetalleCompraMobil(Channel channel, WebDriver driver) {
+    public PageDetalleCompraMobil(Channel channel, WebDriver driver) {
     	super(channel, driver);
     }
     
@@ -62,6 +62,10 @@ public class ModalDetalleCompraMobil extends ModalDetalleCompra {
     @Override
     public boolean isVisibleDataTicket(int maxSeconds) {
     	return (state(Visible, By.xpath(XPathDataTicket)).wait(maxSeconds).check());
+    }
+    @Override
+    public boolean isVisibleIdTicket(int maxSeconds) {
+    	return state(State.Visible, By.xpath(XPathIdTicket)).wait(maxSeconds).check();
     }
     @Override
     public String getIdTicket(TypeTicket typeTicket) {

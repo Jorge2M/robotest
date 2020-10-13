@@ -76,7 +76,7 @@ public abstract class PageGaleria extends PageObjTM {
 	abstract public boolean isHeaderArticlesVisible(String textHeader);
 	abstract public void showTallasArticulo(int posArticulo);
 	abstract public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSecondsToWait);
-	abstract public ArticuloScreen selectTallaArticle(int posArticulo, int posTalla) throws Exception;
+	abstract public ArticuloScreen selectTallaAvailableArticle(int posArticulo, int posTalla) throws Exception;
 	abstract public StateFavorito getStateHearthIcon(WebElement hearthIcon);
 
 	

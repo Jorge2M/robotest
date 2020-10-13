@@ -13,8 +13,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.Ticket;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras.TypeTicket;
-import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisComprasDesktop;
-import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.ModalDetalleCompra;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageDetalleCompra;
 import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageDetallePedidoStpV;
 
 public class PageMisComprasStpV {
@@ -28,8 +27,8 @@ public class PageMisComprasStpV {
     	this.driver = driver;
     	this.channel = channel;
     	this.pageMisCompras = PageMisCompras.make(channel, driver);
-    	ModalDetalleCompra secDetalle = pageMisCompras.getModalDetalleCompra();
-    	this.modalDetalleCompraStpV = ModalDetalleCompraStpV.getNew(secDetalle, driver);
+    	PageDetalleCompra secDetalle = pageMisCompras.getModalDetalleCompra();
+    	this.modalDetalleCompraStpV = ModalDetalleCompraStpV.getNew(secDetalle);
 
     }
     public static PageMisComprasStpV getNew(Channel channel, AppEcom app, WebDriver driver) {
@@ -48,26 +47,6 @@ public class PageMisComprasStpV {
 			"Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsToWait + " segundos)",
 			pageMisCompras.isPageUntil(maxSecondsToWait), State.Warn);
 		
-		if (channel==Channel.desktop) {
-			PageMisComprasDesktop pageMisComprasDesktop = (PageMisComprasDesktop)pageMisCompras;
-			boolean isBlockTienda = pageMisComprasDesktop.isPresentBlock(TypeTicket.Tienda, 0);
-			boolean isBlockOnline = pageMisComprasDesktop.isPresentBlock(TypeTicket.Online, 0);
-			if (pais.isTicketStoreEnabled()) {
-		      	validations.add(
-	        		"Aparece el bloque de \"Tienda\"",
-	        		isBlockTienda, State.Warn);
-	          	validations.add(
-	          		"Aparece el bloque de \"Online\"",
-	          		isBlockOnline, State.Warn);
-        	} else {
-				validations.add(
-					"No aparece el bloque de \"Tienda\"",
-					!isBlockTienda, State.Warn);
-				validations.add(
-					"No aparece el bloque de \"Online\"",
-					!isBlockOnline, State.Warn);
-        	}
-		}
 		return validations;
     }
 		
@@ -95,6 +74,13 @@ public class PageMisComprasStpV {
         return validations;
     }
     
+	@Validation (
+		description="Es visible una compra de tipo #{typeTicket} (la esperamos hasta #{maxSeconds} segundos)",
+		level=State.Defect)
+    public boolean validateIsCompraOfType(TypeTicket typeTicket, int maxSeconds) {
+		return pageMisCompras.isTicket(typeTicket, maxSeconds);
+    }
+    
     @Step (
     	description="Seleccionamos la #{posInLista}a compra (tipo Online) de la lista", 
         expected="Aparece la página con los detalles del pedido",
@@ -117,12 +103,12 @@ public class PageMisComprasStpV {
     public void clickDetalleArticulo(int posArticulo) {
     	modalDetalleCompraStpV.selectArticulo(posArticulo);
     }
-    public void clickBuscarTiendaArticulo_Desktop() {
-    	modalDetalleCompraStpV.getModalDetalleArticulo().clickBuscarTiendaButton_Desktop();
-    }
-    public void clickCloseBuscarTiendaArticulo_Desktop() throws Exception {
-    	modalDetalleCompraStpV.getModalDetalleArticulo().clickCloseModalBuscadorTiendas_Desktop();
-    }
+//    public void clickBuscarTiendaArticulo_Desktop() {
+//    	modalDetalleCompraStpV.getModalDetalleArticulo().clickBuscarTiendaButton_Desktop();
+//    }
+//    public void clickCloseBuscarTiendaArticulo_Desktop() throws Exception {
+//    	modalDetalleCompraStpV.getModalDetalleArticulo().clickCloseModalBuscadorTiendas_Desktop();
+//    }
     public void gotoMisComprasFromDetalleCompra() {
     	modalDetalleCompraStpV.gotoListaMisCompras();
     }

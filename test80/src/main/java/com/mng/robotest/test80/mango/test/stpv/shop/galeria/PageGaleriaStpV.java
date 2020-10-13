@@ -35,7 +35,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.SecFiltros;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
-import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.ModalArticleNotAvailable.StateModal;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.ControlTemporada;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.NumColumnas;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticle;
@@ -174,17 +173,18 @@ public class PageGaleriaStpV {
 		description="Del #{posArticulo}o artículo, seleccionamos la #{posTalla}a talla disponible", 
 		expected="Se da de alta correctamente el artículo en la bolsa",
 		saveHtmlPage=SaveWhen.Always)
-	public boolean selectTallaArticulo(int posArticulo, int posTalla, DataBag dataBag, DataCtxShop dCtxSh) 
+	public boolean selectTallaAvailableArticulo(int posArticulo, int posTalla, DataBag dataBag, DataCtxShop dCtxSh) 
 	throws Exception {
-		ArticuloScreen articulo = pageGaleria.selectTallaArticle(posArticulo, posTalla);
-		ModalArticleNotAvailableStpV modalArticleNotAvailableStpV = ModalArticleNotAvailableStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-		boolean notVisibleAvisame = modalArticleNotAvailableStpV.validateState(1, StateModal.notvisible, driver);
-		if (notVisibleAvisame) {
+		ArticuloScreen articulo = pageGaleria.selectTallaAvailableArticle(posArticulo, posTalla);
+		boolean tallaVisible = (articulo!=null);
+		//ModalArticleNotAvailableStpV modalArticleNotAvailableStpV = ModalArticleNotAvailableStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		//boolean notVisibleAvisame = modalArticleNotAvailableStpV.validateState(1, StateModal.notvisible, driver);
+		if (tallaVisible) {
 			dataBag.addArticulo(articulo);
 			SecBolsaStpV.validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE, driver);
 		}
 
-		return notVisibleAvisame;
+		return tallaVisible;
 	}
 
     @Step (

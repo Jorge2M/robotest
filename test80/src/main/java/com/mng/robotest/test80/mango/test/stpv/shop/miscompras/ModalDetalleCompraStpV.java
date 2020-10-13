@@ -3,46 +3,61 @@ package com.mng.robotest.test80.mango.test.stpv.shop.miscompras;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.Ticket;
-import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.ModalDetalleCompra;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageDetalleCompra;
 
 public class ModalDetalleCompraStpV {
 	
-	private final ModalDetalleCompra modalDetalleCompra;
+	private final PageDetalleCompra modalDetalleCompra;
     private final ModalDetalleArticuloStpV modalDetalleArticuloStpV;
 	
-	private ModalDetalleCompraStpV(ModalDetalleCompra section, WebDriver driver) {
+	private ModalDetalleCompraStpV(PageDetalleCompra section) {
 		this.modalDetalleCompra = section;
-		this.modalDetalleArticuloStpV = ModalDetalleArticuloStpV.getNew(modalDetalleCompra.getModalDetalleArticulo(), driver);
+		this.modalDetalleArticuloStpV = ModalDetalleArticuloStpV.getNew(modalDetalleCompra.getModalDetalleArticulo());
 		
 	}
-	public static ModalDetalleCompraStpV getNew(ModalDetalleCompra section, WebDriver driver) {
-		return new ModalDetalleCompraStpV(section, driver);
+	public static ModalDetalleCompraStpV getNew(PageDetalleCompra section) {
+		return new ModalDetalleCompraStpV(section);
 	}
 	public ModalDetalleArticuloStpV getModalDetalleArticulo() {
 		return modalDetalleArticuloStpV;
 	}
 	
 	public void validateIsOk(Ticket compraTienda) {
-		checkData(compraTienda);
-//		if (channel==Channel.mobile) {
-//			checkIsVisibleImgCodigoBarrasMovil();
-//		}
+		ChecksTM checks = checkIsDataVisible();
+		if (!checks.calculateStateValidation().isMoreCriticThan(State.Warn)) {
+			checkDataContent(compraTienda);
+		}
 	}
 	
     @SuppressWarnings("static-access")
     @Validation
-    private ChecksTM checkData(Ticket compra) {
+    private ChecksTM checkIsDataVisible() {
         ChecksTM validations = ChecksTM.getNew();
         int maxSeconds = 1;
-        validations.add(
+    	validations.add(
         	"Es visible la capa correspondiente al detalle del tícket de compra (la esperamos hasta " + maxSeconds + " segundos)",
-        	modalDetalleCompra.isVisibleDataTicket(maxSeconds), State.Warn);
+        	modalDetalleCompra.isVisibleDataTicket(maxSeconds), State.Defect);
+        maxSeconds = 2;
+        validations.add(
+        	"Son visibles los datos del tícket (los esperamos hasta " + maxSeconds + " segundos)",
+        	modalDetalleCompra.isVisibleDataTicket(maxSeconds), State.Defect);
+        validations.add(
+        	"Figura un id de tícket (lo esperamos hasta " + maxSeconds + " segundos)",
+        	modalDetalleCompra.isVisibleIdTicket(maxSeconds), State.Defect);
+        validations.add(
+        	"Figura alguna prenda (la esperamos hasta " + maxSeconds + " segundos)",
+        	modalDetalleCompra.isVisiblePrendaUntil(maxSeconds), State.Warn);
+        return validations;
+    }
+	
+    @SuppressWarnings("static-access")
+    @Validation
+    private ChecksTM checkDataContent(Ticket compra) {
+        ChecksTM validations = ChecksTM.getNew();
         validations.add(
         	"Figura un id de tícket " + compra.getId(),
         	modalDetalleCompra.getIdTicket(compra.getType()).compareTo(compra.getId())==0, State.Warn);

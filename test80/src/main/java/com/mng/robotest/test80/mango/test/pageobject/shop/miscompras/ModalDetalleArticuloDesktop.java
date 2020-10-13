@@ -8,22 +8,22 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalDetalleArticuloDesktop extends ModalDetalleArticulo {
 
-    private static String XPathModalInfoArticulo = "//div[@id='productDetailsContent']";
-    private static String XPathAspaForClose = "//button[@class[contains(.,'icofav-cerrar')]]";
-    private static String XPathBuscarTallaTiendaButton = "//div[@id='findInShop']";
-    private static String XPathContainerItem = "//div[@class='container-item']";
-    private static String XPathContainerDescription = XPathContainerItem + "//div[@class[contains(.,'container-description-title')]]";
-    private static String XPathReferencia = XPathContainerDescription + "//li[@class='reference']";
-    private static String XPathNombre = XPathContainerDescription + "//li[1]";
-    private static String XPathPrecio = XPathContainerDescription + "//ul/li[2]";
+    private static String XPathModalInfoArticulo = "//div[@class[contains(.,'_1rkFK')]]"; //React
+    private static String XPathAspaForClose = "//button[@class[contains(.,'_2b7eU')]]"; //React
+    //private static String XPathBuscarTallaTiendaButton = "//div[@id='findInShop']";
+    private static String XPathContainerItem = "//div[@class[contains(.,'_2YDn_')]]"; //React
+    private static String XPathContainerDescription = XPathContainerItem + "//div[@class[contains(.,'_1rkFK')]]"; //React
+    private static String XPathReferencia = XPathContainerDescription + "//div/div[3]";
+    private static String XPathNombre = XPathContainerDescription + "//div[@class[contains(.,'sg-headline')]]";
+    private static String XPathPrecio = XPathContainerDescription + "//div/div[2]/div[not(@class='_1HVSr')]"; //React
     
     public ModalDetalleArticuloDesktop(WebDriver driver) {
     	super(driver);
     }
     
     @Override
-    public boolean isVisible() {
-    	return (state(Visible, By.xpath(XPathModalInfoArticulo)).check());
+    public boolean isVisible(int maxSeconds) {
+    	return (state(Visible, By.xpath(XPathModalInfoArticulo)).wait(maxSeconds).check());
     }
     @Override
     public void clickAspaForClose() {
@@ -48,7 +48,12 @@ public class ModalDetalleArticuloDesktop extends ModalDetalleArticulo {
 		return idArticulo.replace(" ", "").equals(idArticuloModal);
 	}
 
-    public void clickBuscarTallaTiendaButton() {
-    	click(By.xpath(XPathBuscarTallaTiendaButton)).waitLoadPage(3).exec();
+    public boolean isInvisible(int maxSeconds) {
+    	return (state(Invisible, By.xpath(XPathModalInfoArticulo)).wait(maxSeconds).check());
     }
+    
+
+//    public void clickBuscarTallaTiendaButton() {
+//    	click(By.xpath(XPathBuscarTallaTiendaButton)).waitLoadPage(3).exec();
+//    }
 }

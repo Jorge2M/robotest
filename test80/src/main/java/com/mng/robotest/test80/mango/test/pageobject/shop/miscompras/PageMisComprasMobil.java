@@ -2,9 +2,6 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.miscompras;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -23,7 +20,7 @@ public class PageMisComprasMobil extends PageMisCompras {
 	private static String XPathNumItemsTicket = ".//div[@class='_3GEoy']"; //React
 	
     private String getXPathTicket(String id) {
-    	return (XPathTicket + XPathInfoTicket + "[1]" + "//self::*[text()='" + id + "']");
+    	return (getXPathTicket() + XPathInfoTicket + "[1]" + "//self::*[text()='" + id + "']");
     }
     private String getXPathVerDetalleTicket(String id) {
     	return (XPathVerDetalleTicket + "//self::*[@href[contains(.,'" + id + "')]]");
@@ -34,16 +31,15 @@ public class PageMisComprasMobil extends PageMisCompras {
 	}
 	
 	@Override
+	public String getXPathTicket() {
+		return XPathTicket;
+	}
+	
+	@Override
 	public boolean isPageUntil(int maxSeconds) {
 		return (state(Visible, By.xpath(XPathCapaContenedora)).wait(maxSeconds).check());
 	}
-	@Override
-	public List<Ticket> getTickets() {
-		isVisibleTicket(5);
-		return getTicketsPage().stream()
-				.map(item -> getTicket(item))
-				.collect(Collectors.toList());
-	}
+
 	@Override
 	public Ticket selectTicket(TypeTicket type, int position) {
 		Ticket ticket = getTickets(type).get(position-1);
@@ -57,16 +53,8 @@ public class PageMisComprasMobil extends PageMisCompras {
 		return ticket;
 	}
 	
-	private boolean isVisibleTicket(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathTicket)).wait(maxSeconds).check());
-	}
-	
-    private List<WebElement> getTicketsPage() {
-    	state(State.Visible, By.xpath(XPathTicket)).wait(2).check();
-        return (driver.findElements(By.xpath(XPathTicket)));
-    }
-    
-	private Ticket getTicket(WebElement ticketScreen) {
+    @Override
+	public Ticket getTicket(WebElement ticketScreen) {
 		Ticket ticket = new Ticket();
 		ticket.setType(getTypeTicketPage(ticketScreen));
 		ticket.setId(getIdTicketPage(ticketScreen));
@@ -75,7 +63,7 @@ public class PageMisComprasMobil extends PageMisCompras {
 		ticket.setFecha(getFechaTicketPage(ticketScreen));
 		return ticket;
 	}
-	
+
 	private TypeTicket getTypeTicketPage(WebElement boxDataTicket) {
 		String idTicket = getIdTicketPage(boxDataTicket);
         if (StringUtils.isNumeric(idTicket)) {

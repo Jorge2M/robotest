@@ -7,7 +7,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras.TypeTicket;
 
-public abstract class ModalDetalleCompra extends PageObjTM implements PageDetallePedido {
+public abstract class PageDetalleCompra extends PageObjTM implements PageDetallePedido {
 
 	private final ModalDetalleArticulo modalDetalleArticulo;
 	
@@ -23,6 +23,7 @@ public abstract class ModalDetalleCompra extends PageObjTM implements PageDetall
     public abstract int getNumPrendas();
     
     public abstract boolean isVisibleDataTicket(int maxSeconds);
+    public abstract boolean isVisibleIdTicket(int maxSeconds);
     public abstract String getIdTicket(TypeTicket typeTicket);
     public abstract String getImporte();
     public abstract String getReferenciaArticulo(int posArticulo);
@@ -31,17 +32,17 @@ public abstract class ModalDetalleCompra extends PageObjTM implements PageDetall
     public abstract void selectArticulo(int posArticulo);
     public abstract void gotoListaMisCompras();
 	
-    public static ModalDetalleCompra make(Channel channel, WebDriver driver) {
+    public static PageDetalleCompra make(Channel channel, WebDriver driver) {
     	switch (channel) {
     	case desktop:
-    		return new ModalDetalleCompraDesktop(channel, driver);
+    		return new PageDetalleCompraDesktop(channel, driver);
     	case mobile:
-    		return new ModalDetalleCompraMobil(channel, driver);
+    		return new PageDetalleCompraMobil(channel, driver);
     	}
     	return null;
     }
     
-	public ModalDetalleCompra(Channel channel, WebDriver driver) {
+	public PageDetalleCompra(Channel channel, WebDriver driver) {
 		super(driver);
     	modalDetalleArticulo = ModalDetalleArticulo.make(channel, driver);
 	}

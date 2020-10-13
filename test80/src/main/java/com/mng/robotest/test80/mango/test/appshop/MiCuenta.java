@@ -6,7 +6,6 @@ import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -16,6 +15,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageSuscripciones.idNewsletters;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras.TypeTicket;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.PagePrehomeStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
@@ -135,13 +135,9 @@ public class MiCuenta implements Serializable {
         PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
         pageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh.pais);
         PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+        pageMisComprasStpV.validateIsCompraOfType(TypeTicket.Online, 3);
         pageMisComprasStpV.selectCompraOnline(1, dCtxSh.pais.getCodigo_pais());
         pageMisComprasStpV.clickDetalleArticulo(1);
-        if (dCtxSh.channel == Channel.desktop) {
-        	pageMisComprasStpV.clickBuscarTiendaArticulo_Desktop();
-	        pageMisComprasStpV.clickCloseBuscarTiendaArticulo_Desktop();
-        }
-
         pageMisComprasStpV.gotoMisComprasFromDetalleCompra();
         
         //Test Compras en Tienda
@@ -150,17 +146,16 @@ public class MiCuenta implements Serializable {
         SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
         userMenusStpV.logoff();
         
-        //Existe un problema en móbil por el cual si te vuelves a loginar manteniendo el navegador
+        //Existe un problema en por el cual si te vuelves a loginar manteniendo el navegador
         //se muestran las compras del anterior usuario
-        if (dCtxSh.channel==Channel.mobile) {
-        	driver = TestMaker.renewDriverTestCase();
-	        pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
-	        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, driver);
-        }
+    	driver = TestMaker.renewDriverTestCase();
+        pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, driver);
         AccesoStpV.identificacionEnMango(dCtxSh, driver);
         
         pageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh.pais);
         pageMisComprasStpV = PageMisComprasStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+        pageMisComprasStpV.validateIsCompraOfType(TypeTicket.Tienda, 3);
         pageMisComprasStpV.selectCompraTienda(1);
         pageMisComprasStpV.clickDetalleArticulo(1);
     }

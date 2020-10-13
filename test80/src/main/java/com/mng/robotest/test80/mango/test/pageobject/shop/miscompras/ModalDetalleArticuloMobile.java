@@ -19,8 +19,8 @@ public class ModalDetalleArticuloMobile extends ModalDetalleArticulo {
     }
     
     @Override
-    public boolean isVisible() {
-    	return (state(Visible, By.xpath(XPathModalInfoArticulo)).wait(2).check());
+    public boolean isVisible(int maxSeconds) {
+    	return (state(Visible, By.xpath(XPathModalInfoArticulo)).wait(maxSeconds).check());
     }
     @Override
     public void clickAspaForClose() {

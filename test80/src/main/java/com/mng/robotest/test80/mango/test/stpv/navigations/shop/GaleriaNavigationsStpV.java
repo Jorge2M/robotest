@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
-import com.mng.robotest.test80.mango.test.stpv.shop.galeria.ModalArticleNotAvailableStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 
 public class GaleriaNavigationsStpV {
@@ -19,14 +18,14 @@ public class GaleriaNavigationsStpV {
 	    	pageGaleriaStpV.shopTallasArticulo(posArticulo);
 	    	int tallaToSelect = 1;
 	    	try {
-	    		articleAvailable = pageGaleriaStpV.selectTallaArticulo(posArticulo, tallaToSelect, dataBag, dCtxSh);
+	    		articleAvailable = pageGaleriaStpV.selectTallaAvailableArticulo(posArticulo, tallaToSelect, dataBag, dCtxSh);
 	    	}
 	    	catch (Exception e) {
 	    		Log4jTM.getLogger().warn("Problem selecting talla " + tallaToSelect + " from article " + posArticulo, e);
 	    	}
 	        if (!articleAvailable) {
-	            ModalArticleNotAvailableStpV modalArticleNotAvailableStpV = ModalArticleNotAvailableStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-	            modalArticleNotAvailableStpV.clickAspaForClose(driver);
+//	            ModalArticleNotAvailableStpV modalArticleNotAvailableStpV = ModalArticleNotAvailableStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+//	            modalArticleNotAvailableStpV.clickAspaForClose(driver);
 	            posArticulo+=1;
 	        }
 	    }

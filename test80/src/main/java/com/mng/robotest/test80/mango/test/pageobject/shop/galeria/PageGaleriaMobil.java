@@ -315,7 +315,7 @@ public class PageGaleriaMobil extends PageGaleria {
     }
     
     @Override
-    public ArticuloScreen selectTallaArticle(int posArticulo, int posTalla) {
+    public ArticuloScreen selectTallaAvailableArticle(int posArticulo, int posTalla) {
         //Si no está visible la capa de tallas ejecutamos los pasos necesarios para hacer la visible 
         if (!isVisibleArticleCapaTallasUntil(posArticulo, 0/*maxSecondsToWait*/)) {
             showTallasArticulo(posArticulo);
