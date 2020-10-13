@@ -31,7 +31,7 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	}
 	private String getXPathDataArticulo(int position) {
 		String xpathArticulo = getXPathArticulo(position);
-		return xpathArticulo + "//div[@class[contains(.,'_2Ekfz')]]";
+		return xpathArticulo + "//div[@class[contains(.,'_2Ekfz')]]"; //React
 	}
     private String getXPathReferenciaArticulo(int posArticulo) {
         String xpathDataArticulo = getXPathDataArticulo(posArticulo);

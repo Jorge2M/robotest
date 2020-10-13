@@ -14,7 +14,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageMisComprasDesktop extends PageMisCompras {
 
 	private final static String XPathCapaContenedora = "//div[@id='myPurchasesDesktop']";
-	private final static String XPathListTickets = "//div[@class[contains(.,'_3UUJa')]]"; //React
+	private final static String XPathListTickets = "//div[@class[contains(.,'_3UUJa')] or @class='daPI0']"; //React
 	private final static String prefixIdCompra = "purchase-";
 	private final static String XPathTicket = XPathListTickets + "//div[@id[contains(.,'" + prefixIdCompra + "')]]";
 
