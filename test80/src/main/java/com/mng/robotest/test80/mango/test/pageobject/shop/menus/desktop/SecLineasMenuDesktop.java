@@ -40,7 +40,11 @@ public class SecLineasMenuDesktop extends PageObjTM {
 			"@class='image-item' and @data-label[contains(.,'" + TagIdLinea + "')] and " +
 			"@data-label[contains(.,'" + TagIdSublinea + "')]" +
 		"]";
-	static String XPathSublineaLinkWithTag = "//div[@class[contains(.,'nav-item')] and @data-brand='" + TagIdSublinea + "']";
+	static String XPathSublineaLinkWithTag = 
+		"//div[" + 
+			"(@class[contains(.,'nav-item')] or " + 
+			 "@class[contains(.,'section-detail-list')]) " + //Caso países tipo Colombia con 1 sola sublínea 
+			"and @data-brand='" + TagIdSublinea + "']";
 
 	private SecLineasMenuDesktop(AppEcom app, WebDriver driver) {
 		super(driver);

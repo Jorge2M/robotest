@@ -52,7 +52,7 @@ public class PageMiCuentaStpV {
         expected = "Aparece la página de \"Mis datos\"")
     private void clickLinkMisDatos (String usuarioReg) {
         pageMiCuenta.clickMisDatos();
-        (new PageMisDatosStpV(app,driver)).validaIsPage(usuarioReg);
+        (new PageMisDatosStpV(driver)).validaIsPage(usuarioReg);
     }
 
     public void goToMisComprasFromMenu(Pais pais) {
@@ -78,7 +78,7 @@ public class PageMiCuentaStpV {
  
     public void goToMisDatosAndValidateData(Map<String,String> dataRegistro, String codPais) {
         goToMisDatos(dataRegistro.get("cfEmail"));
-        (new PageMisDatosStpV(app,driver)).validaIsDataAssociatedToRegister(dataRegistro, codPais);
+        (new PageMisDatosStpV(driver)).validaIsDataAssociatedToRegister(dataRegistro, codPais);
     }
 
     public void goToSuscripciones() {

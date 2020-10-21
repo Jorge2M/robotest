@@ -3,7 +3,6 @@ package com.mng.robotest.test80.mango.test.pageobject.shop;
 import java.util.Map;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,12 +18,14 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import com.mng.robotest.test80.mango.test.pageobject.shop.acceptcookies.ModalSetCookies.SectionConfCookies;
+import com.mng.robotest.test80.mango.test.pageobject.shop.acceptcookies.SectionCookies;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
-import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalNewsLetterAfterAccess;
 import com.mng.robotest.test80.mango.test.pageobject.utils.LocalStorage;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
-//import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
+import com.mng.robotest.test80.mango.test.stpv.shop.acceptcookies.ModalSetCookiesStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.acceptcookies.SectionCookiesStpV;
 import com.mng.robotest.test80.mango.test.utils.testab.TestABactive;
 
 /**
@@ -212,14 +213,28 @@ public class PagePrehome {
      * Ejecuta una acceso a la shop vía la páinga de prehome
      */
     public static void accesoShopViaPrehome(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	identJCASifExists(/*dCtxSh.urlAcceso,*/ driver);
-        TestABactive.currentTestABsToActivate(dCtxSh.channel, dCtxSh.appE, driver);
+    	previousAccessShopSteps(dCtxSh, driver);
         PagePrehome.selecPaisIdiomaYAccede(dCtxSh, driver);
         ModalLoyaltyAfterAccess.closeModalIfVisible(driver);
         //ModalNewsLetterAfterAccess.closeModalIfVisible(driver);
         if (dCtxSh.channel==Channel.mobile) {
         	SecCabeceraOutletMobil secCabecera = (SecCabeceraOutletMobil)SecCabeceraOutletMobil.getNew(Channel.mobile, dCtxSh.appE, driver);
         	secCabecera.closeSmartBannerIfExistsMobil();
+        }
+    }
+    
+    private static void previousAccessShopSteps(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    	identJCASifExists(driver);
+        TestABactive.currentTestABsToActivate(dCtxSh.channel, dCtxSh.appE, driver);
+        
+        SectionCookies sectionCookies = new SectionCookies(driver);
+        if (sectionCookies.isVisible()) {
+        	SectionCookiesStpV sectionCookiesStpV = new SectionCookiesStpV(driver);
+        	ModalSetCookiesStpV modalSetCookiesStpV = 
+        		sectionCookiesStpV.setCookies();
+        	modalSetCookiesStpV.select(SectionConfCookies.Cookies_de_redes_sociales);
+        	modalSetCookiesStpV.disableSwitchCookies();
+        	modalSetCookiesStpV.saveConfiguration();
         }
     }
     

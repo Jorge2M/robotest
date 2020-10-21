@@ -90,7 +90,7 @@ public class MiCuenta implements Serializable {
         PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
         pageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected);
         
-        PageMisDatosStpV pageMisDatosStpV = new PageMisDatosStpV(dCtxSh.appE, driver);
+        PageMisDatosStpV pageMisDatosStpV = new PageMisDatosStpV(driver);
         String nombreActual = pageMisDatosStpV.modificaNombreYGuarda();
         pageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected);
         pageMisDatosStpV.validaContenidoNombre(nombreActual);

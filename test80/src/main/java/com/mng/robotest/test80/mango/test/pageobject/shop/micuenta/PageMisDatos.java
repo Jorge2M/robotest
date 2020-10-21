@@ -4,15 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 public class PageMisDatos extends PageObjTM {
-	
-	private final AppEcom app;
 	
     private final static String XPathIsPage = "//div[@class='myDetails']";
     private final static String XPathTitleOk = "//h2[text()[contains(.,'Mis datos')]]";
@@ -23,8 +18,8 @@ public class PageMisDatos extends PageObjTM {
     private final static String XPathInputCodPostal = "//input[@id[contains(.,'cfCp')]]";
     private final static String XPathInputPoblacion = "//input[@id[contains(.,'cfCity')]]";
     private final static String XPathBotonGuardarCambios = "//div[@class='submitContent']/input[@type='submit']";
-    private final static String XPathPageResOKshop = "//span[@class[contains(.,'icon-fill-done')]]";
-    private final static String XPathPageResOKoutlet = "//span[text()[contains(.,'Tus datos han sido modificados en nuestra base de datos.')]]";
+    //private final static String XPathPageResOKshop = "//span[@class[contains(.,'icon-fill-done')]]";
+    private final static String XPathPageResOK = "//span[text()[contains(.,'Tus datos han sido modificados en nuestra base de datos.')]]";
     private final static String XPathInputPasswordTypePassword = "//input[@id[contains(.,'cfPass')] and @type='password']";
     private final static String XPathInputContentVoid = "//div[@class='inputContent']/input[not(@value)]";
     private final static String XPathSelectPais = "//select[@id[contains(.,':pais')]]";
@@ -32,19 +27,18 @@ public class PageMisDatos extends PageObjTM {
     private final static String XPathOptionPaisSelected = XPathSelectPais + "/option[@selected]";
     private final static String XPathOptionProvinciaSelected = XPathSelectProvincia + "/option[@selected]";
     
-    public PageMisDatos(AppEcom app, WebDriver driver) {
+    public PageMisDatos(WebDriver driver) {
     	super(driver);
-    	this.app = app;
     }
     
-    private String getXPathPageResOK(AppEcom app) {
-    	switch (app) {
-    	case outlet:
-    		return XPathPageResOKoutlet;
-    	default:
-    		return XPathPageResOKshop;
-    	}
-    }
+//    private String getXPathPageResOK(AppEcom app) {
+//    	switch (app) {
+//    	case outlet:
+//    		return XPathPageResOKoutlet;
+//    	default:
+//    		return XPathPageResOKshop;
+//    	}
+//    }
     
     public String getText_inputNombre() {
         return (driver.findElement(By.xpath(XPathInputNombre)).getAttribute("value"));
@@ -124,7 +118,7 @@ public class PageMisDatos extends PageObjTM {
     }
     
     public boolean pageResOK() { 
-    	String xpath = getXPathPageResOK(app);
-    	return (state(Present, By.xpath(xpath)).check());
+    	//String xpath = getXPathPageResOK(app);
+    	return (state(Present, By.xpath(XPathPageResOK)).check());
     }
 }

@@ -23,7 +23,12 @@ public class PageDetallePedidoStpV {
 		if (pageDetalle.isPage()) {
 			this.pageDetalle = pageDetalle;
 		} else {
-			this.pageDetalle = DetallePedido.Old.getPageObject(channel, driver);
+			pageDetalle = DetallePedido.Old.getPageObject(channel, driver);
+			if (pageDetalle.isPage()) {
+				this.pageDetalle = pageDetalle;
+			} else {
+				this.pageDetalle = DetallePedido.OldOld.getPageObject(channel, driver);
+			}
 		}
     }
     

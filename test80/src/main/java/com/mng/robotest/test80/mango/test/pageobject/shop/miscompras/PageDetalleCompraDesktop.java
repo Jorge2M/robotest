@@ -13,7 +13,7 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
     private static String XPathDataTicket = "//div[@class[contains(.,'_1NsYW')]]"; //React
     private static String XPathIdTicket = XPathDataTicket + "//span[@class[contains(.,'_1lSPL')]]"; //React
     private static String XPathImporte = XPathDataTicket + "//div[@class[contains(.,'_3rubp')]]/span[2]"; //React
-    private static String XPathDireccionEnvio = XPathDataTicket + "//div[@class[contains(.,'_1NsYW')]]/div[2]/div[2]"; //React 
+    private static String XPathDireccionEnvio = XPathDataTicket + "/div[2]/div[2]"; //React 
     //private static String XPathCodigoBarrasImg = XPathDataTicket + "//div[@class='code']/img";
     private static String XPathArticulo = "//div[@class[contains(.,'_2ykE3')]]"; //React
     private static String XPathLinkToMisCompras = "//button[@class='QErEj']"; //React

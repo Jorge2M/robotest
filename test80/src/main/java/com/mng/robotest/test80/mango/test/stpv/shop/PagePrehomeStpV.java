@@ -24,7 +24,7 @@ public class PagePrehomeStpV {
         expected="Se selecciona el país/idioma correctamente")
     public static void seleccionPaisIdioma(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        PagePrehome.identJCASifExists(/*dCtxSh.urlAcceso, */driver);
+        PagePrehome.identJCASifExists(driver);
         PagePrehome.selecionPais(dCtxSh, driver);
         checkPaisSelected(dCtxSh, driver);
     }

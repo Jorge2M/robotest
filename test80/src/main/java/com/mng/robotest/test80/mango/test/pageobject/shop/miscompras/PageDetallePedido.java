@@ -7,11 +7,14 @@ import com.github.jorge2m.testmaker.conf.Channel;
 public interface PageDetallePedido {
 	
     public enum DetallePedido {
-    	Old, 
+    	OldOld, 
+    	Old,
     	New;
     	
         public PageDetallePedido getPageObject(Channel channel, WebDriver driver) {
         	switch (this) {
+        	case OldOld:
+        		return (new PageDetalleCompraOldOld(driver));
         	case Old:
         		return (new PageDetalleCompraOld(driver));
         	case New:

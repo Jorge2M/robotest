@@ -12,7 +12,7 @@ public class ModalDetalleArticuloMobile extends ModalDetalleArticulo {
     private static String XPathAspaForClose = "//i[@class[contains(.,'icon-outline-close')]]";
     private static String XPathReferencia = "//div[@class[contains(.,'_2ByJT')]]"; //React
     private static String XPathNombre = XPathModalInfoArticulo + "/div/div[@class='sg-subtitle']";
-    private static String XPathPrecio = XPathModalInfoArticulo + "//div[@class[contains(.,'saSFe')]]//span[last()]"; //React
+    private static String XPathPrecio = XPathModalInfoArticulo + "//div[@class[contains(.,'saSFe')]]//span[last()]"; 
     
     public ModalDetalleArticuloMobile(WebDriver driver) {
     	super(driver);

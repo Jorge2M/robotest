@@ -9,13 +9,14 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 
-public class PageDetalleCompraOld extends PageObjTM implements PageDetallePedido {
+public class PageDetalleCompraOldOld extends PageObjTM implements PageDetallePedido {
 	
-    private static final String XPathDivDetalle = "//div[@id='myPurchasesPage']";
-    private static final String XPathLineaPrenda = "//div[@class[contains(.,'small-box-container')]]";
-    private static final String XPathBackButton = "//div[@class[contains(.,'shopping-breadcrumbs')]]";
+    private static final String XPathDivDetalle = "//div[@class[contains(.,'detallePedido')]]";
+    private static final String XPathLineaPrenda = "//tr/td[@align='left' and @height='30']/..";
+    private static final String XPathIrATiendaButton = "(//div[@id[contains(.,'ListaDetail')]])[1]";
+    private static final String XPathBackButton = "(//div[@id[contains(.,'ListaDetail')]])[2]";
     
-    public PageDetalleCompraOld(WebDriver driver) {
+    public PageDetalleCompraOldOld(WebDriver driver) {
     	super(driver);
     }
     
@@ -31,7 +32,7 @@ public class PageDetalleCompraOld extends PageObjTM implements PageDetallePedido
     
     @Override
     public boolean isPresentImporteTotal(String importeTotal, String codPais) {
-    	return (ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver));
+        return (ImporteScreen.isPresentImporteInElements(importeTotal, codPais, "//td[@class='txt12ArialB']/../*", driver));
     }
     
     @Override
@@ -48,4 +49,8 @@ public class PageDetalleCompraOld extends PageObjTM implements PageDetallePedido
     public void clickBackButton(Channel channel) {
     	click(By.xpath(XPathBackButton)).exec();
     }
+    
+    public void clickIrATiendaButton() {
+    	click(By.xpath(XPathIrATiendaButton)).exec();
+    }    
 }
