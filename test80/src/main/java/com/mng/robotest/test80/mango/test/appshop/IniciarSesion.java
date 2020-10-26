@@ -51,6 +51,8 @@ public class IniciarSesion {
         PageIdentificacionStpV.selectHasOlvidadoTuContrasenya(driver);
         String emailQA = "eqp.ecommerce.qamango@mango.com";
         PageRecuperaPasswdStpV.inputMailAndClickEnviar(emailQA, driver);
+        
+        Bolsa.checkCookies(driver);
     }
 
     @Test (
@@ -65,5 +67,7 @@ public class IniciarSesion {
         dCtxSh.userRegistered = true;
             
         AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, driver);
+        
+        Bolsa.checkCookies(driver);
     }
 }

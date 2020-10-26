@@ -134,7 +134,7 @@ public class PageCheckoutWrapper {
 
 	final static String XpathButtonForApplyLoyaltyPoints = "//button[@class[contains(.,'redeem-likes')] and @type='button']";
 	public static boolean isVisibleButtonForApplyLoyaltyPoints(WebDriver driver) {
-		return (state(Visible, By.xpath(XpathButtonForApplyLoyaltyPoints), driver).check());
+		return (state(Visible, By.xpath(XpathButtonForApplyLoyaltyPoints), driver).wait(2).check());
 	}
 
 	public static float applyAndGetLoyaltyPoints(WebDriver driver) {

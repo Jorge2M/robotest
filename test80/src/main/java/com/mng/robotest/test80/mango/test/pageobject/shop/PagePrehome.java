@@ -229,13 +229,23 @@ public class PagePrehome {
         
         SectionCookies sectionCookies = new SectionCookies(driver);
         if (sectionCookies.isVisible()) {
-        	SectionCookiesStpV sectionCookiesStpV = new SectionCookiesStpV(driver);
-        	ModalSetCookiesStpV modalSetCookiesStpV = 
-        		sectionCookiesStpV.setCookies();
-        	modalSetCookiesStpV.select(SectionConfCookies.Cookies_de_redes_sociales);
-        	modalSetCookiesStpV.disableSwitchCookies();
-        	modalSetCookiesStpV.saveConfiguration();
+        	acceptCookies(driver);
+        	//setupCookies(driver);
         }
+    }
+    
+    private static void acceptCookies(WebDriver driver) {
+    	SectionCookiesStpV sectionCookiesStpV = new SectionCookiesStpV(driver);
+    	sectionCookiesStpV.accept();
+    }
+    
+    private static void setupCookies(WebDriver driver) {
+    	SectionCookiesStpV sectionCookiesStpV = new SectionCookiesStpV(driver);
+    	ModalSetCookiesStpV modalSetCookiesStpV = 
+    		sectionCookiesStpV.setCookies();
+    	modalSetCookiesStpV.select(SectionConfCookies.Cookies_de_redes_sociales);
+    	modalSetCookiesStpV.disableSwitchCookies();
+    	modalSetCookiesStpV.saveConfiguration();
     }
     
     /**

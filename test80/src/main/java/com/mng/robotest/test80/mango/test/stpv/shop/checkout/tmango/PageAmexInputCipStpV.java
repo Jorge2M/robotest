@@ -31,8 +31,6 @@ public class PageAmexInputCipStpV {
     public static void inputCipAndAcceptButton(String CIP, String importeTotal, String codigoPais, WebDriver driver) {
         PageAmexInputCip.inputCIP(CIP, driver);
         PageAmexInputCip.clickAceptarButton(driver);
-                    
-        //Validaciones
         PageAmexResultStpV.validateIsPageOk(importeTotal, codigoPais, driver);
     }
 }

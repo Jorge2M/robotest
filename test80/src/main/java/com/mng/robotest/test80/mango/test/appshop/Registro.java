@@ -125,6 +125,8 @@ public class Registro implements Serializable {
         dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.pageInicial);
         pageRegistroIniStpV.sendFixedDataToInputs(dataToSend, dataToSendInHtmlFormat);
         pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, true, dCtxSh.appE, dataRegister);
+        
+        Bolsa.checkCookies(driver);
     }
 
     @SuppressWarnings("static-access")
@@ -146,6 +148,8 @@ public class Registro implements Serializable {
     	}
     	
     	registro_e_irdeshopping_sipubli(dCtxSh, version, driver);
+    	
+        Bolsa.checkCookies(driver);
     }
     
     @SuppressWarnings("static-access")
@@ -162,6 +166,8 @@ public class Registro implements Serializable {
         DataCtxShop dCtxSh = getCtxShForTest();
 		WebDriver driver = TestMaker.getDriverTestCase();
 		registro_e_irdeshopping_nopubli(dCtxSh, driver);
+		
+        Bolsa.checkCookies(driver);
 	}
 
 	public static Map<String,String> registro_e_irdeshopping_nopubli(DataCtxShop dCtxSh, WebDriver driver) 

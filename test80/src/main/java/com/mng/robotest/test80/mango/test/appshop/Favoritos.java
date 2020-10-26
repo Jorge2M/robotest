@@ -121,6 +121,8 @@ public class Favoritos implements Serializable {
 
 		pageFavoritosStpV.clear(artToPlay, dataFavoritos);
 		pageFavoritosStpV.clearAll(dataFavoritos, dCtxSh);
+		
+        Bolsa.checkCookies(driver);
 	}
 
 	@Test(
@@ -180,5 +182,7 @@ public class Favoritos implements Serializable {
 		}
 
 		pageFavoritosStpV.clear(artToPlay, dataFavoritos);
+		
+        Bolsa.checkCookies(driver);
 	}
 }

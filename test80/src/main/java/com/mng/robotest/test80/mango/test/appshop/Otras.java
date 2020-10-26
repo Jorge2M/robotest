@@ -60,6 +60,8 @@ public class Otras {
         dCtxSh.idioma = francia_frances;
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);      
         SecMenusDesktopStpV.checkURLRedirectFicha(francia, dCtxSh, driver);
+        
+        Bolsa.checkCookies(driver);
     }
 	
     
@@ -71,6 +73,8 @@ public class Otras {
     	GoogleStpV googleStpV = new GoogleStpV(driver);
         googleStpV.accessGoogleAndSearchMango();
         googleStpV.selectFirstLinkSinPublicidad();
+        
+        Bolsa.checkCookies(driver);
     }
     
     @Test (
@@ -84,6 +88,8 @@ public class Otras {
         dCtxSh.idioma = castellano;
         dCtxSh.userRegistered = false;
         AccesoStpV.accesoPRYCambioPais(dCtxSh, francia, francia_frances, driver);
+        
+        Bolsa.checkCookies(driver);
     }
 
     /**
@@ -141,6 +147,8 @@ public class Otras {
         dCtxSh.pais = francia;
         dCtxSh.idioma = francia_frances;
         (new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver)).cambioPais(dCtxSh);
+        
+        Bolsa.checkCookies(driver);
     }
 
     
@@ -159,5 +167,7 @@ public class Otras {
         PagePrehomeStpV.seleccionPaisIdioma(dCtxSh, driver);
         PagePrehomeStpV.entradaShopGivenPaisSeleccionado(japon, japones, dCtxSh.channel, driver);
         PageIniShopJaponStpV.validaPageIniJapon(2, driver);
+        
+        Bolsa.checkCookies(driver);
     }	
 }

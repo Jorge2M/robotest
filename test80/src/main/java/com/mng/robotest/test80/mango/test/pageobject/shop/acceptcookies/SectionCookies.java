@@ -19,8 +19,15 @@ public class SectionCookies extends PageObjTM {
 		return state(State.Visible, By.xpath(XPathAcceptButton)).check();
 	}
 	
+	public boolean isInvisible(int maxSeconds) {
+		return state(State.Invisible, By.xpath(XPathAcceptButton)).wait(maxSeconds).check();
+	}
+	
 	public void accept() {
 		click(By.xpath(XPathAcceptButton)).exec();
+		if (!isInvisible(2)) {
+			click(By.xpath(XPathAcceptButton)).exec();
+		}
 	}
 	
 	public void setCookies() {

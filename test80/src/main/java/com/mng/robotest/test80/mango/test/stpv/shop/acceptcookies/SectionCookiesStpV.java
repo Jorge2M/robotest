@@ -38,7 +38,7 @@ public class SectionCookiesStpV {
 		description="No es visible la sección inferior para la configuración de las cookies",
 		level=State.Defect)
     public boolean checkSectionInvisible() {
-		return (!sectionCookies.isVisible());
+		return (sectionCookies.isInvisible(2));
     }
 	
 }

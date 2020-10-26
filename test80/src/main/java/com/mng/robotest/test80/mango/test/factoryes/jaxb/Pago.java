@@ -47,6 +47,7 @@ public class Pago implements Serializable {
         Bancontact,
         ProcessOut,
         Yandex,
+        PayMaya,
         StoreCredit, 
         TpvVotf
     }
@@ -89,6 +90,9 @@ public class Pago implements Serializable {
     String usrsofort;
     String passsofort; 
     String tansofort;
+    String usrpaymaya;
+    String passwordpaymaya;
+    String otppaymaya;
     String iban;
     String bic;
     String bankidgiropay;
@@ -138,7 +142,9 @@ public class Pago implements Serializable {
         case "Giropay":
             return TypePago.Giropay;                
         case "Sofort":
-            return TypePago.Sofort;                
+            return TypePago.Sofort;     
+        case "Paymaya":
+        	return TypePago.PayMaya;
         case "Klarna":
             return TypePago.Klarna;                
         case "KlarnaDeutsch":
@@ -512,7 +518,34 @@ public class Pago implements Serializable {
     public void setPaissofort(String paissofort) {
         this.paissofort = paissofort;
     }
-	
+    
+    public String getUsrpaymaya() {
+        return this.usrpaymaya;
+    }
+
+    @XmlAttribute(name="usrpaymaya")
+    public void setUsrpaymaya(String usrpaymaya) {
+        this.usrpaymaya = usrpaymaya;
+    }
+
+    public String getPasswordpaymaya() {
+        return this.passwordpaymaya;
+    }
+
+    @XmlAttribute(name="passwordpaymaya")
+    public void setPasswordpaymaya(String passwordpaymaya) {
+        this.passwordpaymaya = passwordpaymaya;
+    }
+    
+    public String getOtpdpaymaya() {
+        return this.otppaymaya;
+    }
+
+    @XmlAttribute(name="otppaymaya")
+    public void setOtppaymaya(String otppaymaya) {
+        this.otppaymaya = otppaymaya;
+    }
+    
     public String getUseremail() {
         return this.useremail;
     }

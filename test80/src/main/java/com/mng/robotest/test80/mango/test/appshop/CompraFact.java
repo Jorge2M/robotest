@@ -178,6 +178,8 @@ public class CompraFact implements Serializable {
             DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
             PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
         }
+        
+        Bolsa.checkCookies(driver);
     }
     
     private boolean includeValeValidation(AppEcom app, WebDriver driver) {

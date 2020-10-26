@@ -8,9 +8,9 @@ import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango.PageAmexInputCipStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango.PageAmexInputTarjetaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango.PageAmexResultStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango.PageRedsysSimStpV;
 
 public class PagoTMango extends PagoStpV {
 
@@ -31,8 +31,16 @@ public class PagoTMango extends PagoStpV {
         
         if (execPay) {
             dataPedido.setCodtipopago("M");
-            PageAmexInputTarjetaStpV.inputTarjetaAndPayButton(dataPedido.getPago().getNumtarj(), dataPedido.getPago().getMescad(), dataPedido.getPago().getAnycad(), dataPedido.getPago().getCvc(), dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), driver);
-            PageAmexInputCipStpV.inputCipAndAcceptButton(dataPedido.getPago().getCip(), dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), driver);
+            PageRedsysSimStpV pageRedsysSimStpV = 
+            	PageAmexInputTarjetaStpV.inputTarjetaAndPayButton(
+            		dataPedido.getPago().getNumtarj(), 
+            		dataPedido.getPago().getMescad(), 
+            		dataPedido.getPago().getAnycad(), 
+            		dataPedido.getPago().getCvc(), 
+            		dataPedido.getImporteTotal(), 
+            		dCtxSh.pais.getCodigo_pais(), driver);
+            
+            pageRedsysSimStpV.clickEnviar(dataPedido.getPago().getCip(), dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), driver);
             PageAmexResultStpV.clickContinuarButton(driver);
         }
     }

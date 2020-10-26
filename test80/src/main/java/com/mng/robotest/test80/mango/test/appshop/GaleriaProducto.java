@@ -117,6 +117,8 @@ public class GaleriaProducto {
         pageGaleriaStpV.scrollFromFirstPage(dataScroll, dCtxSh);
         pageGaleriaStpV.selecColorFromArtGaleriaStep(1/*numArtConColores*/, 2/*posColor*/);
         pageGaleriaStpV.selecArticuloGaleriaStep(1/*numArtConColores*/);
+        
+        Bolsa.checkCookies(driver);
     }
     
     @Test (
@@ -164,6 +166,8 @@ public class GaleriaProducto {
         dataScroll.numArticlesExpected = datosScrollFinalGaleria.articulosTotalesPagina;
         dataScroll.validaImgBroken = false;
         pageGaleriaStpV.scrollFromFirstPage(dataScroll, dCtxSh);
+        
+        Bolsa.checkCookies(driver);
     }
     
     @Test (
@@ -203,6 +207,8 @@ public class GaleriaProducto {
         Menu2onLevel menuCamisasTops = MenuTreeApp.getMenuLevel2From(menuCamisas, "tops");
         SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, driver);
         secMenusDesktopStpV.selectMenuLateral2oLevel(menuCamisasTops, dCtxSh);
+        
+        Bolsa.checkCookies(driver);
     }
     
     @Test (
@@ -246,6 +252,8 @@ public class GaleriaProducto {
         typeSliderList.add(TypeSlider.prev);
         typeSliderList.add(TypeSlider.prev);
         pageGaleriaStpV.clicksSliderArticuloConColores(numArtConColores, typeSliderList, srcImgAfterClickColor);
+        
+        Bolsa.checkCookies(driver);
     }
 
 	@Test (
@@ -270,5 +278,7 @@ public class GaleriaProducto {
 		pageGaleriaStpV.selectTallaNoDisponibleArticulo();
 		ModalArticleNotAvailableStpV modalArticleNotAvailableStpV = ModalArticleNotAvailableStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		modalArticleNotAvailableStpV.checkVisibleAvisame();
+		
+        Bolsa.checkCookies(driver);
 	}
 }

@@ -35,13 +35,15 @@ public class PageAmexInputTarjetaStpV {
     
     @Step (
 		description="Introducimos los datos de la tarjeta: #{numTarj} / #{mesCad}-#{anyCad} / #{Cvc} y pulsamos el botón \"Pagar\"", 
-        expected="Aparece la página de introducción del CIP")
-    public static void inputTarjetaAndPayButton(String numTarj, String mesCad, String anyCad, String Cvc, 
-    												 String importeTotal, String codigoPais, WebDriver driver) throws Exception {
+        expected="Aparece la página de simulación del pago RedSys")
+    public static PageRedsysSimStpV inputTarjetaAndPayButton(
+    		String numTarj, String mesCad, String anyCad, String Cvc, String importeTotal, String codigoPais, WebDriver driver) 
+    throws Exception {
         PageAmexInputTarjeta.inputDataTarjeta(numTarj, mesCad, anyCad, Cvc, driver);
         PageAmexInputTarjeta.clickPagarButton(driver);
-                    
-        //Validaciones
-        PageAmexInputCipStpV.validateIsPageOk(importeTotal, codigoPais, driver);
+        
+        PageRedsysSimStpV pageRedsysSimStpV = new PageRedsysSimStpV(driver);
+        pageRedsysSimStpV.checkPage(driver);
+        return pageRedsysSimStpV;
     }
 }

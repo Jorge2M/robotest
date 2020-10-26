@@ -102,6 +102,8 @@ public class Compra {
 			CheckPedido.consultarPedido);
 		DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
 		PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
+		
+        Bolsa.checkCookies(driver);
 	}
 
 	@Test (
@@ -168,6 +170,8 @@ public class Compra {
 			DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
 			PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
 		}
+		
+        Bolsa.checkCookies(driver);
 	}
 
     @Test (
@@ -200,6 +204,8 @@ public class Compra {
             DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
             PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
         }
+        
+        Bolsa.checkCookies(driver);
     }
             
     @SuppressWarnings("static-access")
@@ -256,6 +262,8 @@ public class Compra {
                 PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
             }
         }
+        
+        Bolsa.checkCookies(driver);
     }
 
     @Test (
@@ -286,6 +294,8 @@ public class Compra {
             DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
             PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
         }
+        
+        Bolsa.checkCookies(driver);
     }
     
 

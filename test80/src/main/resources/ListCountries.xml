@@ -572,9 +572,10 @@
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-310;</pago>
+<!-- 
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
-	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-183;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
+	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-183;</pago> --><!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
@@ -5283,10 +5284,13 @@
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="10" anycad="2020" cvc="737" usrd3d="user" passd3d="password">&TPV-565;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA ELECTRON" testpasarela='s'>&TPV-565;</pago>
+	nombre="JCB" testpasarela='s'>&TPV-362;</pago>
 <pago 
-	type="Paypal" tiendas="shop,outlet"
-	nombre="PAYPAL" testpasarela='n' testpago='n' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-611;</pago> <!-- Desactivada la validación de la pasarela porque no acepta mail asociado a otro país -->
+	type="Paymaya" tiendas="shop"
+	nombre="Paymaya" testpasarela='s' testpago='s' usrpaymaya='639212456051' passwordpaymaya='Password1' otppaymaya='123456'>&TPV-016;</pago>
+<pago 
+	type="ContraReembolso" tiendas="shop,outlet"
+	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-184;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>

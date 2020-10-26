@@ -135,6 +135,8 @@ public class Loyalty {
     		CheckPedido.consultarPedido);
         DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
         PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
+        
+        Bolsa.checkCookies(driver);
     }
     
     private DataBag addBagArticleNoRebajado(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
@@ -186,6 +188,8 @@ public class Loyalty {
 			int loyaltyPointsFin = secMenusUserStpV.clickMenuMangoLikesYou();
 			secMenusUserStpV.checkLoyaltyPoints(loyaltyPointsIni, donateButton.getNumLikes(), loyaltyPointsFin);
 		}
+		
+        Bolsa.checkCookies(driver);
 	}
 
 	@Test (
@@ -220,6 +224,8 @@ public class Loyalty {
 			int loyaltyPointsFin = secMenusUserStpV.clickMenuMangoLikesYou();
 			secMenusUserStpV.checkLoyaltyPoints(loyaltyPointsIni, 1200, loyaltyPointsFin);
 		}
+		
+        Bolsa.checkCookies(driver);
 	}
 
 //	@Test (
@@ -313,5 +319,7 @@ public class Loyalty {
 		dataPoints.setFinPointsEmisorReal(finPointsEmisor);
 		dataPoints.setFinPointsReceptorReal(finPointsReceptor);
 		PageHomeLikesStpV.checkRegalarPointsOk(dataPoints);
+		
+        Bolsa.checkCookies(driver);
 	}
 }

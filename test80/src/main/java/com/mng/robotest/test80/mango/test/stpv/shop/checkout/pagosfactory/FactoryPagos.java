@@ -67,6 +67,9 @@ public class FactoryPagos {
         case Sofort:
             pagoMaked = new PagoSofort(dCtxSh, dCtxPago, driver);
             break;       
+        case PayMaya:
+        	pagoMaked = new PagoPayMaya(dCtxSh, dCtxPago, driver);
+        	break;
         case Klarna:
             pagoMaked = new PagoKlarna(dCtxSh, dCtxPago, driver);
             break;

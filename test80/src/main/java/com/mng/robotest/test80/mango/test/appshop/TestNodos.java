@@ -135,6 +135,8 @@ public class TestNodos implements Serializable {
             
             this.nodo.setTested(true);
         }
+        
+        Bolsa.checkCookies(driver);
     }
     
     /**

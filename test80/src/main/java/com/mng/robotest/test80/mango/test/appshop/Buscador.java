@@ -47,5 +47,7 @@ public class Buscador {
         SecBuscadorStpV.searchArticulo(product, dCtxSh, driver);
         SecBuscadorStpV.busquedaCategoriaProducto(categoriaProdExistente, true, dCtxSh.appE, dCtxSh.channel, driver);
         SecBuscadorStpV.busquedaCategoriaProducto(catProdInexistente, false, dCtxSh.appE, dCtxSh.channel, driver);
+        
+        Bolsa.checkCookies(driver);
     }
 }

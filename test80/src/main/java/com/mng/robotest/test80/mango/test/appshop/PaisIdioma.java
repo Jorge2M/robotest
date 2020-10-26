@@ -102,6 +102,8 @@ public class PaisIdioma implements Serializable {
                 }
             }
         }
+        
+        Bolsa.checkCookies(driver);
     }
     
 	@SuppressWarnings("static-access")

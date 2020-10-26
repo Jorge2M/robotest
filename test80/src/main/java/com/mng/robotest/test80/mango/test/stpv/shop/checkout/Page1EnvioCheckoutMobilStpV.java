@@ -92,7 +92,7 @@ public class Page1EnvioCheckoutMobilStpV {
     	description="Aparece la página asociada al Paso-2",
     	level=State.Defect)
     private static boolean checkAppearsStep2(WebDriver driver) {
-    	return (Page2DatosPagoCheckoutMobil.isPageUntil(1, driver));
+    	return (Page2DatosPagoCheckoutMobil.isPageUntil(3, driver));
     }
     
     @Validation (

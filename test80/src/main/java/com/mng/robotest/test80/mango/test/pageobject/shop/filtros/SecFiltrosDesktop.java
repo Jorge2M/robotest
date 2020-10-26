@@ -118,7 +118,7 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	}
 	
 	//TODO hablar con Sergio Campillo para que añada algún id no-react
-	private static final String XPathCapaFiltersShop = "//div[@class[contains(.,'_1PO8g')]]";
+	private static final String XPathCapaFiltersShop = "//div[@class[contains(.,'filters--')]]";
 	private static final String XPathLinkFiltrarShop = "//button[@id='filtersBtn']";
 	public void showFilters() {
 		if (app!=AppEcom.outlet) {
