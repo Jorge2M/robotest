@@ -79,7 +79,7 @@ public class PagoNavigationsStpV {
         }
         
         int maxArticlesAwayVale = 2;
-        List<Garment> listArticles = UtilsTestMango.getArticlesForTestDependingVale(dCtxSh, maxArticlesAwayVale);
+        List<Garment> listArticles = UtilsTestMango.getArticlesForTestDependingVale(dCtxSh, maxArticlesAwayVale, driver);
         DataBag dataBag = dCtxPago.getDataPedido().getDataBag();
         SecBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag, dCtxSh, driver);
         dCtxPago.getFTCkout().testCodPromocional = true;

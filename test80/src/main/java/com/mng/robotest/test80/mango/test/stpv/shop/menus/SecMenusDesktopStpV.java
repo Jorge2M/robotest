@@ -489,7 +489,7 @@ public class SecMenusDesktopStpV {
         expected=
         	"Aparece la ficha del producto " + tagRefArticle)
     public static void checkURLRedirectFicha(Pais pais, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh).build();
+    	GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh, driver).build();
     	Garment product = getterProducts.getAll().get(0);
     	Article article = product.getArticleWithMoreStock();
     	TestMaker.getCurrentStepInExecution().replaceInDescription(tagRefArticle, article.getGarmentId());

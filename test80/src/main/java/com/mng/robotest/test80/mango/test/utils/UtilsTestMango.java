@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
@@ -81,11 +83,11 @@ public class UtilsTestMango {
 	}
 	
 	static int maxArticles = 99;
-	public static List<Garment> getArticlesForTest(DataCtxShop dCtxSh) throws Exception {
-		return (getArticlesForTestDependingVale(dCtxSh, maxArticles));
+	public static List<Garment> getArticlesForTest(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+		return (getArticlesForTestDependingVale(dCtxSh, maxArticles, driver));
 	}
 	
-	public static List<Garment> getArticlesForTest(DataCtxShop dCtxSh, int maxArticlesAwayVale, boolean withValeTest) 
+	public static List<Garment> getArticlesForTest(DataCtxShop dCtxSh, int maxArticlesAwayVale, boolean withValeTest, WebDriver driver) 
 	throws Exception {
 		ValePais valeTest = null;
 		if (withValeTest) {
@@ -93,14 +95,15 @@ public class UtilsTestMango {
 			dCtxSh.vale = valeTest;
 		}
 		
-		return (getArticlesForTestDependingVale(dCtxSh, maxArticlesAwayVale));
+		return (getArticlesForTestDependingVale(dCtxSh, maxArticlesAwayVale, driver));
 	}
 	
-	public static List<Garment> getArticlesForTestDependingVale(DataCtxShop dCtxSh) throws Exception {
-		return (getArticlesForTestDependingVale(dCtxSh, maxArticles));
+	public static List<Garment> getArticlesForTestDependingVale(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+		return (getArticlesForTestDependingVale(dCtxSh, maxArticles, driver));
 	}
 	
-    public static List<Garment> getArticlesForTestDependingVale(DataCtxShop dCtxSh, int maxArticlesAwayVale) throws Exception {
+    public static List<Garment> getArticlesForTestDependingVale(DataCtxShop dCtxSh, int maxArticlesAwayVale, WebDriver driver) 
+    throws Exception {
     	List<Garment> listProducts;
     	if (dCtxSh.vale!=null) {
     		listProducts = dCtxSh.vale.getArticlesFromVale();
@@ -109,7 +112,7 @@ public class UtilsTestMango {
     		}
     	}
     	
-    	GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh).build();
+    	GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh, driver).build();
     	listProducts = getterProducts.getWithStock();
         if (dCtxSh.vale!=null) {
         	for (Garment product : listProducts) {

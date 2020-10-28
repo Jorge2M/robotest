@@ -102,7 +102,7 @@ public class FichaProducto {
 
 		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, driver);
 
-		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh).build();
+		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh, driver).build();
 		Garment articleWithColors = getterProducts.getWithManyColors().get(0);
 		SecBuscadorStpV.searchArticulo(articleWithColors, dCtxSh, driver);
 
@@ -146,7 +146,7 @@ public class FichaProducto {
 
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
         
-		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh).build();
+		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh, driver).build();
         Garment articleWithTotalLook = getterProducts.getOneWithTotalLook();
         SecBuscadorStpV.searchArticulo(articleWithTotalLook, dCtxSh, driver);
         

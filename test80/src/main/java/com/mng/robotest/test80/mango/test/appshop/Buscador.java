@@ -41,7 +41,7 @@ public class Buscador {
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, driver);
         (new PageHomeMarcasStpV(dCtxSh.channel, dCtxSh.appE, driver)).validateIsPageWithCorrectLineas(dCtxSh.pais);
         
-        GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh).build();
+        GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh, driver).build();
         Garment product = getterProducts.getAll().get(0);
         
         SecBuscadorStpV.searchArticulo(product, dCtxSh, driver);

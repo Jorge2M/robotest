@@ -32,7 +32,7 @@ public class ConsolaVotf {
 		ConsolaVotfStpV.selectEntornoTestAndCons("Preproducción", driver);
 		
 		int numProdsMax = 10;
-		List<Article> listArticles = getArticlesAvailable(numProdsMax);
+		List<Article> listArticles = getArticlesAvailable(numProdsMax, driver);
 		String idArticle = listArticles.get(0).getArticleId();
 		ConsolaVotfStpV.inputArticleAndTiendaDisp(idArticle, "00011459", driver);
 		ConsolaVotfStpV.consultarTiposEnvio(driver);
@@ -52,9 +52,9 @@ public class ConsolaVotf {
 		ConsolaVotfStpV.selectConfPedido(codigoPedidoFull, driver);
 	}
 
-	private List<Article> getArticlesAvailable(int numProductsMax) throws Exception {
+	private List<Article> getArticlesAvailable(int numProductsMax, WebDriver driver) throws Exception {
 		Pais españa = PaisGetter.get(PaisShop.España);
-		GetterProducts getterProducts = new GetterProducts.Builder("https://shop.mango.com/", españa.getCodigo_alf(), AppEcom.votf).
+		GetterProducts getterProducts = new GetterProducts.Builder("https://shop.mango.com/", españa.getCodigo_alf(), AppEcom.votf, driver).
 				linea(LineaType.she).
 				seccion("prendas").
 				galeria("camisas").

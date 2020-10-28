@@ -125,7 +125,7 @@ public class CompraFact implements Serializable {
         //TestAB.activateTestABcheckoutMovilEnNPasos(0, dCtxSh, dFTest.driver);
 
         int maxArticlesAwayVale = 3;
-        List<Garment> listArticles = UtilsTestMango.getArticlesForTest(dCtxSh, maxArticlesAwayVale, this.testVale);
+        List<Garment> listArticles = UtilsTestMango.getArticlesForTest(dCtxSh, maxArticlesAwayVale, this.testVale, driver);
         
 //        //TODO para pruebas Dani Luque
 //        Garment garment = new Garment("63100536");

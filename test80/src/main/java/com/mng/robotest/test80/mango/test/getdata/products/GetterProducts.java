@@ -11,6 +11,9 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mng.robotest.test80.access.InputParamsMango;
@@ -24,6 +27,7 @@ import com.mng.robotest.test80.mango.test.getdata.products.data.GarmentDetails;
 import com.mng.robotest.test80.mango.test.getdata.products.data.ProductList;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment.Article;
 import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
 public class GetterProducts extends JaxRsClient {
 	
@@ -40,7 +44,7 @@ public class GetterProducts extends JaxRsClient {
 	private final ProductList productList;
 	
 	private GetterProducts(String url, String codigoPaisAlf, AppEcom app, LineaType lineaType, String seccion, 
-						   String galeria, String familia, Integer numProducts, Integer pagina) throws Exception {
+						   String galeria, String familia, Integer numProducts, Integer pagina, WebDriver driver) throws Exception {
 		String urlTmp = getDnsUrl(url);
 		if (urlTmp.charAt(urlTmp.length()-1)=='/') {
 			urlDomain = urlTmp;
@@ -64,12 +68,31 @@ public class GetterProducts extends JaxRsClient {
 		this.familia = familia;
 		this.numProducts = numProducts;
 		this.pagina = pagina;
-		this.productList = getProductList();
+		this.productList = getProductList(driver);
 	}
 	
-	private ProductList getProductList() throws Exception {
-		Client client = getClientIgnoreCertificates();
+	private ProductList getProductList(WebDriver driver) throws Exception {
+		WebTarget webTarget = getWebTargetProductlist();
+		String productsJson = getProductsFromApiRest(webTarget);
+		if (productsJson==null && driver!=null) {
+			String urlGetProducts = webTarget.getUri().toURL().toString();
+			productsJson = getProductsFromWebDriver(urlGetProducts, driver);
+		}
 		
+		//Without that modification Jackson can't parse the JSON
+		productsJson = productsJson.replace("\"garments\":{", "\"garments\":[");
+		productsJson = productsJson.replace("}}}]", "}]}]");
+		productsJson = productsJson.replaceAll("\"g[0-9]{8}(..){0,1}\":", "");
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		ProductList productList = objectMapper.readValue(productsJson, ProductList.class);
+		
+		return productList;
+	}
+	
+	private WebTarget getWebTargetProductlist() throws Exception {
+		Client client = getClientIgnoreCertificates();
 		WebTarget webTarget = 
 			client
 				.target(urlDomain.replace("http:", "https:") + "services/productlist/products")
@@ -84,26 +107,26 @@ public class GetterProducts extends JaxRsClient {
 		if ("".compareTo(saleType)!=0) {
 			webTarget = webTarget.queryParam("saleType", saleType);
 		}
-		
-		Response response = 
-			webTarget
-				.request(MediaType.APPLICATION_JSON)
-				.get();
-		
-		//Without that modification Jackson can't parse the JSON
-		String body = response.readEntity(String.class);
-		body = body.replace("\"garments\":{", "\"garments\":[");
-		body = body.replace("}}}]", "}]}]");
-		body = body.replaceAll("\"g[0-9]{8}(..){0,1}\":", "");
-		
-		ObjectMapper objectMapper = new ObjectMapper();
-		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		ProductList productList = objectMapper.readValue(body, ProductList.class);
-		
-		return productList;
+		return webTarget;
+	}
+	
+	private String getProductsFromApiRest(WebTarget webTarget) throws Exception {
+		Response response = webTarget.request(MediaType.APPLICATION_JSON).get();
+		if (response.getStatus()==Response.Status.OK.getStatusCode()) {
+			return response.readEntity(String.class);
+		}
+		return null;
+	}
+	
+	private String getProductsFromWebDriver(String urlProductList, WebDriver driver) throws Exception {
+		String nameTab = "GetProducts";
+		String idWindow = driver.getWindowHandle();
+		SeleniumUtils.loadUrlInAnotherTabTitle(urlProductList, nameTab, driver);
+		String body = driver.findElement(By.xpath("//body/pre")).getText();
+		SeleniumUtils.closeTabByTitleAndReturnToWidow(nameTab, idWindow, driver);
+		return body;
 	}
 
-	
 	public List<Garment> getAll() {
 		return productList.getGroups().get(0).getGarments();
 	}
@@ -178,6 +201,7 @@ public class GetterProducts extends JaxRsClient {
 		private final String url;
 		private final String codigoPaisAlf;
 		private final AppEcom app;
+		private final WebDriver driver;
 		private LineaType lineaType = LineaType.she;
 		private String seccion = "prendas";
 		private String galeria = "camisas";
@@ -185,17 +209,19 @@ public class GetterProducts extends JaxRsClient {
 		private Integer numProducts = 40;
 		private Integer pagina = 1;
 
-		public Builder(DataCtxShop dCtxSh) throws Exception {
+		public Builder(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 			this.url = ((InputParamsMango)TestMaker.getTestCase().getInputParamsSuite()).getUrlBase();
 			//this.url = dCtxSh.getDnsUrlAcceso();
 			this.codigoPaisAlf = dCtxSh.pais.getCodigo_alf();
 			this.app = dCtxSh.appE;
+			this.driver = driver;
 		}
 		
-		public Builder(String url, String codigoPaisAlf, AppEcom app) {
+		public Builder(String url, String codigoPaisAlf, AppEcom app, WebDriver driver) {
 			this.url = url;
 			this.codigoPaisAlf = codigoPaisAlf;
 			this.app = app;
+			this.driver = driver;
 		}
 		
 		public Builder linea(LineaType lineaType) {
@@ -224,9 +250,7 @@ public class GetterProducts extends JaxRsClient {
 		}
 		public GetterProducts build() throws Exception {
 			return (
-				new GetterProducts(url, codigoPaisAlf, app, lineaType, seccion, galeria, familia, numProducts, pagina));
+				new GetterProducts(url, codigoPaisAlf, app, lineaType, seccion, galeria, familia, numProducts, pagina, driver));
 		}
-		
-
 	}
 }

@@ -22,7 +22,7 @@ public class GetterProductsTest {
 	public GetterProductsTest() throws Exception {
 		if (getterProducts==null) {
 			Pais españa = PaisGetter.get(PaisShop.España);
-			getterProducts = new GetterProducts.Builder("https://shop.mango.com/", españa.getCodigo_alf(), AppEcom.shop).
+			getterProducts = new GetterProducts.Builder("https://shop.mango.com/", españa.getCodigo_alf(), AppEcom.shop, null).
 					linea(LineaType.she).
 					seccion("prendas").
 					galeria("camisas").

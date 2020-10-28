@@ -224,14 +224,20 @@ public class PagePrehome {
     }
     
     private static void previousAccessShopSteps(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    	reloadIfServiceUnavailable(driver);
     	identJCASifExists(driver);
         TestABactive.currentTestABsToActivate(dCtxSh.channel, dCtxSh.appE, driver);
-        
         SectionCookies sectionCookies = new SectionCookies(driver);
         if (sectionCookies.isVisible()) {
         	acceptCookies(driver);
         	//setupCookies(driver);
         }
+    }
+    
+    private static void reloadIfServiceUnavailable(WebDriver driver) {
+    	if (driver.getPageSource().contains("Service Unavailable")) {
+    		driver.navigate().refresh();
+    	}
     }
     
     private static void acceptCookies(WebDriver driver) {
