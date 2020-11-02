@@ -34,7 +34,7 @@ public class SecMenuLateralMobil extends PageObjTM {
 	static String XPathLinkMenuVisibleFromLi = 
 		"//ul[@class='section-detail' or @class[contains(.,'dropdown-menu')]]" +
 		"/li[not(@class[contains(.,'mobile-label-hidden')] or @class[contains(.,' label-hidden')] or @class[contains(.,' gap ')])]" +
-		"/a[@class='menu-item-label' and @href]";
+		"/a[@class[contains(.,'menu-item-label')] and @href]";
 
 	public SecMenuLateralMobil(AppEcom app, WebDriver driver) {
 		super(driver);

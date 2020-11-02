@@ -91,8 +91,8 @@ public class FactoryPagos {
         case PasarelaOtras:
             pagoMaked = new PagoPasarelaOtras(dCtxSh, dCtxPago, driver);
             break;
-        case KoreanCreditCard:
-        	pagoMaked = new PagoKoreanCreditCard(dCtxSh, dCtxPago, driver);
+        case KCP:
+        	pagoMaked = new PagoKCP(dCtxSh, dCtxPago, driver);
         	break;
         case ContraReembolso:            
             pagoMaked = new PagoContraReembolso(dCtxSh, dCtxPago, driver);

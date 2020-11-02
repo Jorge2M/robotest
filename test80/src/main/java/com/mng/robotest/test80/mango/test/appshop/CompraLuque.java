@@ -28,6 +28,15 @@ import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
 public class CompraLuque {
 	
+	private final List<String> codPostalesCanada = Arrays.asList( 
+		"A0A 1B0",   //CAYHM
+		"T6W 0V9",   //CAYEG
+		"A0K 4E9",   //CAYMX
+		"A0L 0A8",   //CAYUL
+		"A0P 1E5",   //CAYMX
+		"T2M 1Y0",   //CAYYC
+		"V2P 7Y0");  //CAYVR
+	
     @Test (
         groups={"Compra", "Canal:all_App:all"}, alwaysRun=true,
         description="Compra USA")
@@ -42,7 +51,15 @@ public class CompraLuque {
         description="Compra THOR")
     public void LUQ002_Compra_THOR() throws Exception {
 		Pais pais=getPaisThor();
-    	//Pais pais=PaisGetter.get(PaisShop.España);
+		IdiomaPais idioma = pais.getListIdiomas().get(0);
+		executePurchase(pais, idioma);
+    }
+    
+    @Test (
+        groups={"Compra", "Canal:all_App:all"}, alwaysRun=true,
+        description="Compra THOR")
+    public void LUQ003_Compra_CANADA() throws Exception {
+		Pais pais=PaisGetter.get(PaisShop.Canada);
 		IdiomaPais idioma = pais.getListIdiomas().get(0);
 		executePurchase(pais, idioma);
     }
@@ -57,6 +74,9 @@ public class CompraLuque {
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
         DataBag dataBag = new DataBag(); 
         SecBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag, dCtxSh, driver);
+        
+        //Modify Postal Code
+        pais.setCodpos(getCodPostal(pais));
         
         //To checkout Page
         FlagsTestCkout fTCkout = new FlagsTestCkout();
@@ -93,11 +113,24 @@ public class CompraLuque {
 		switch (paisShop) {
 		case USA:
 			return getListArticlesUSA();
+		case Canada:
+			return getListArticlesCANADA();
 		case Latvia:
 		case Lithuania:
 		case Estonia:
 		default:
 			return getListArticlesTHOR();
+		}
+	}
+	
+	private String getCodPostal(Pais pais) {
+		PaisShop paisShop = PaisShop.getPais(pais.getCodigo_pais());
+		switch (paisShop) {
+		case Canada:
+	        Random rand = new Random(); 
+	        return codPostalesCanada.get(rand.nextInt(codPostalesCanada.size())); 
+		default:
+			return pais.getCodpos();
 		}
 	}
 	
@@ -139,6 +172,21 @@ public class CompraLuque {
         garment2.setColors(Arrays.asList(color2));
         
         return Arrays.asList(garment1, garment2);
+	}
+	
+	private List<Garment> getListArticlesCANADA() {
+        Garment garment1 = new Garment("61040184");
+        garment1.setStock(1000);
+        Color color1 = new Color();
+        color1.setId("91");
+        color1.setLabel("Negro");
+        Size size1 = new Size();
+        size1.setId(23);
+        size1.setLabel("XL");
+        color1.setSizes(Arrays.asList(size1));
+        garment1.setColors(Arrays.asList(color1));
+        
+        return Arrays.asList(garment1);
 	}
 	
 	private List<Garment> getListArticlesTHOR() {

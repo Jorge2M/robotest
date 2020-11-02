@@ -75,7 +75,8 @@ public class Page1DktopCheckout {
         "//div[@id='avisoConfirmar']/div[@style='']/div[@class[contains(.,'tituloPago')]] | " +
         "//div[@class='mensajesContrarembolso'] | " +
         "//div[@class[contains(.,'cardContainerNotIntegrated')]] | " +
-        "//div[@class[contains(.,'falconFormularioTarjeta')]]"; 
+        "//div[@class[contains(.,'falconFormularioTarjeta')]] | " + 
+        "//div[@class[contains(.,'formasPago')]]"; 
     
     final static String tagMetodoPago = "@TagMetodoPago";
     final static String XPathBlockTarjetaGuardadaPagoWithTag = "//div[@class[contains(.,'tarjetaGuardada')] and @data-analytics-value='" + tagMetodoPago + "']";

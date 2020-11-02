@@ -42,7 +42,7 @@ public class Pago implements Serializable {
         PaysecureQiwi, 
         Assist, 
         PasarelaOtras, 
-        KoreanCreditCard,
+        KCP,
         ContraReembolso,
         Bancontact,
         ProcessOut,
@@ -155,8 +155,8 @@ public class Pago implements Serializable {
             return TypePago.Assist;                
         case "PasarelaOtras":
             return TypePago.PasarelaOtras;
-        case "KoreanCreditCard":
-        	return TypePago.KoreanCreditCard;
+        case "KCP":
+        	return TypePago.KCP;
         case "ContraReembolso":
             return TypePago.ContraReembolso;
         case "Bancontact":

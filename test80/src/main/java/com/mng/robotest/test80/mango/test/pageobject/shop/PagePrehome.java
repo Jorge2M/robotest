@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils.HtmlLocator;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
@@ -249,6 +251,10 @@ public class PagePrehome {
     	SectionCookiesStpV sectionCookiesStpV = new SectionCookiesStpV(driver);
     	ModalSetCookiesStpV modalSetCookiesStpV = 
     		sectionCookiesStpV.setCookies();
+    	modalSetCookiesStpV.select(SectionConfCookies.Cookies_dirigidas);
+        ((JavascriptExecutor) driver).executeScript("document.getElementsByClassName('ot-tgl')[0].style.display='block'");    
+    	modalSetCookiesStpV.disableSwitchCookies();
+    	
     	modalSetCookiesStpV.select(SectionConfCookies.Cookies_de_redes_sociales);
     	modalSetCookiesStpV.disableSwitchCookies();
     	modalSetCookiesStpV.saveConfiguration();
