@@ -5,6 +5,10 @@ import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.isBr
 
 import java.util.Arrays;
 import java.util.List;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.test80.access.InputParamsMango;
@@ -27,8 +31,12 @@ import com.mng.robotest.test80.mango.test.appshop.Registro;
 import com.mng.robotest.test80.mango.test.appshop.SEO;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.factoryes.ListPagosEspana;
+
+import io.github.bonigarcia.wdm.ChromeDriverManager;
+
 import com.github.jorge2m.testmaker.domain.SuiteMaker;
 import com.github.jorge2m.testmaker.domain.TestRunMaker;
+import com.github.jorge2m.testmaker.service.webdriver.maker.DriverMaker;
 
 public class SmokeTestSuite extends SuiteMaker {
 
@@ -39,6 +47,7 @@ public class SmokeTestSuite extends SuiteMaker {
 				inputParams.getSuiteName(), 
 				getClasses());
 		testRun.setStorerErrorStep(new ErrorStorer());
+		//testRun.setDriverMaker(new MyDriverMaker());
 		addTestRun(testRun);
 		setParallelMode(ParallelMode.METHODS);
 		if (!isBrowserStack(inputParams.getDriver())) {
@@ -67,5 +76,29 @@ public class SmokeTestSuite extends SuiteMaker {
 			Favoritos.class,
 			Reembolsos.class,
 			Loyalty.class);
+	}
+	
+	public static class MyDriverMaker extends DriverMaker {
+		
+		private String driverVersion = "87.0.4280.20";
+		
+		@Override
+		public String getTypeDriver() {
+			return "mychrome";
+		}
+		
+		@Override
+		public void setupDriverVersion(String driverVersion) {
+			//this.driverVersion = driverVersion;
+		}
+		
+		@Override
+		public WebDriver build() {
+			ChromeDriverManager.chromedriver().version(driverVersion).setup();
+			ChromeOptions options = new ChromeOptions();
+			options.setBinary("C:\\Program Files\\Google\\Chrome Beta\\Application\\chrome.exe");
+			WebDriver driver =  new ChromeDriver(options);
+			return driver;
+		}
 	}
 }

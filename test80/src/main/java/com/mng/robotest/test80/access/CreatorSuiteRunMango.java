@@ -24,7 +24,7 @@ import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMake
 public class CreatorSuiteRunMango extends CreatorSuiteRun {
 	
 	private final String ChromeDriverVersionDefault = "86.0.4240.22";
-	private final String GeckoDriverVersionDefault = "0.27.0";
+	private final String GeckoDriverVersionDefault = "0.28.0";
 	
 	private CreatorSuiteRunMango() throws Exception {
 		super();

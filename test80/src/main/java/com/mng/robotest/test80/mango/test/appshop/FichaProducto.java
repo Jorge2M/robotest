@@ -147,7 +147,7 @@ public class FichaProducto {
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
         
 		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh, driver).build();
-        Garment articleWithTotalLook = getterProducts.getOneWithTotalLook();
+        Garment articleWithTotalLook = getterProducts.getOneWithTotalLook(driver);
         SecBuscadorStpV.searchArticulo(articleWithTotalLook, dCtxSh, driver);
         
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);

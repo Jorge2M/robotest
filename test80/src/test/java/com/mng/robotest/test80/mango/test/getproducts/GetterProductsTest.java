@@ -54,9 +54,9 @@ public class GetterProductsTest {
 	}
 
 	@Test
-	public void testGetProductCompletaTuLook() {
+	public void testGetProductCompletaTuLook() throws Exception {
 		//When
-		Garment product = getterProducts.getOneWithTotalLook();
+		Garment product = getterProducts.getOneWithTotalLook(null);
 		
 		//Then
 		assertTrue(product!=null);

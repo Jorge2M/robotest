@@ -1,7 +1,6 @@
 package com.mng.robotest.test80.mango.test.getdata.products;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -31,7 +31,8 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
 public class GetterProducts extends JaxRsClient {
 	
-	private final String urlDomain;
+	private final String urlForJavaCall;
+	private final String urlForBrowserCall;
 	private final String saleType;
 	private final String codigoPaisAlf;
 	private final AppEcom app;
@@ -45,13 +46,9 @@ public class GetterProducts extends JaxRsClient {
 	
 	private GetterProducts(String url, String codigoPaisAlf, AppEcom app, LineaType lineaType, String seccion, 
 						   String galeria, String familia, Integer numProducts, Integer pagina, WebDriver driver) throws Exception {
-		String urlTmp = getDnsUrl(url);
-		if (urlTmp.charAt(urlTmp.length()-1)=='/') {
-			urlDomain = urlTmp;
-		} else {
-			urlDomain = urlTmp + "/";
-		}
 		
+		urlForJavaCall = getUrlForJavaCall(url, driver);
+		urlForBrowserCall = getUrlBase(url);
 		switch (app) {
 		case votf:
 			this.saleType = "V";
@@ -71,12 +68,29 @@ public class GetterProducts extends JaxRsClient {
 		this.productList = getProductList(driver);
 	}
 	
+	private String getUrlForJavaCall(String initialURL, WebDriver driver) throws Exception {
+		String cloudtestName = getNameCloudtestFromCookie(driver);
+		if (cloudtestName==null) {
+			return getUrlBase(initialURL);
+		} else {
+			return "https://" + cloudtestName + ".dev.mango.com/";
+		}
+	}
+	
+	private String getUrlBase(String initialURL) throws Exception {
+		URI uri = new URI(initialURL);
+		String urlTmp = (uri.getScheme() + "://" + uri.getHost());
+		if (urlTmp.charAt(urlTmp.length()-1)=='/') {
+			return urlTmp;
+		} else {
+			return urlTmp + "/";
+		}
+	}
+	
 	private ProductList getProductList(WebDriver driver) throws Exception {
-		WebTarget webTarget = getWebTargetProductlist();
-		String productsJson = getProductsFromApiRest(webTarget);
-		if (productsJson==null && driver!=null) {
-			String urlGetProducts = webTarget.getUri().toURL().toString();
-			productsJson = getProductsFromWebDriver(urlGetProducts, driver);
+		String productsJson = getProductsFromApiRest();
+		if ((productsJson==null || !productsJson.contains("garments")) && driver!=null) {
+			productsJson = getProductsFromWebDriver(driver);
 		}
 		
 		//Without that modification Jackson can't parse the JSON
@@ -90,12 +104,23 @@ public class GetterProducts extends JaxRsClient {
 		
 		return productList;
 	}
+
+	private String getNameCloudtestFromCookie(WebDriver driver) {
+		if (driver==null) {
+			return null;
+		}
+		Cookie cookieName = driver.manage().getCookieNamed("cloudtest-name");
+		if (cookieName!=null) {
+			return cookieName.getValue();
+		}
+		return null;
+	}
 	
-	private WebTarget getWebTargetProductlist() throws Exception {
+	private WebTarget getWebTargetProductlist(String urlBase) throws Exception {
 		Client client = getClientIgnoreCertificates();
 		WebTarget webTarget = 
 			client
-				.target(urlDomain.replace("http:", "https:") + "services/productlist/products")
+				.target(urlBase.replace("http:", "https:") + "services/productlist/products")
 				.path(codigoPaisAlf)
 				.path(getLineaPath())
 				.path("sections_" + lineaType.name() + "." + seccion + "_" + lineaType.name())
@@ -104,13 +129,15 @@ public class GetterProducts extends JaxRsClient {
 				.queryParam("pageNum", pagina)
 				.queryParam("columnsPerRow", "1")
 				.queryParam("rowsPerPage", numProducts);
+		
 		if ("".compareTo(saleType)!=0) {
 			webTarget = webTarget.queryParam("saleType", saleType);
 		}
 		return webTarget;
 	}
 	
-	private String getProductsFromApiRest(WebTarget webTarget) throws Exception {
+	private String getProductsFromApiRest() throws Exception {
+		WebTarget webTarget = getWebTargetProductlist(urlForJavaCall);
 		Response response = webTarget.request(MediaType.APPLICATION_JSON).get();
 		if (response.getStatus()==Response.Status.OK.getStatusCode()) {
 			return response.readEntity(String.class);
@@ -118,10 +145,13 @@ public class GetterProducts extends JaxRsClient {
 		return null;
 	}
 	
-	private String getProductsFromWebDriver(String urlProductList, WebDriver driver) throws Exception {
+	private String getProductsFromWebDriver(WebDriver driver) throws Exception {
+		WebTarget webTarget = getWebTargetProductlist(urlForBrowserCall);
+		String urlGetProducts = webTarget.getUri().toURL().toString();
+		
 		String nameTab = "GetProducts";
 		String idWindow = driver.getWindowHandle();
-		SeleniumUtils.loadUrlInAnotherTabTitle(urlProductList, nameTab, driver);
+		SeleniumUtils.loadUrlInAnotherTabTitle(urlGetProducts, nameTab, driver);
 		String body = driver.findElement(By.xpath("//body/pre")).getText();
 		SeleniumUtils.closeTabByTitleAndReturnToWidow(nameTab, idWindow, driver);
 		return body;
@@ -152,29 +182,40 @@ public class GetterProducts extends JaxRsClient {
 		return listGarmentsWithStock;
 	}
 	
-	public Garment getOneWithTotalLook() {
+	public Garment getOneWithTotalLook(WebDriver driver) throws Exception {
 		List<Garment> listGarments = getAll();
 		for (Garment garment : listGarments) {
-			if (getTotalLookGarment(garment)!=null) {
+			if (getTotalLookGarment(garment, driver)!=null) {
 				return garment;
 			}
 		}
 		return null;
 	}
 	
-	private GarmentDetails getTotalLookGarment(Garment product) {
+	private GarmentDetails getTotalLookGarment(Garment product, WebDriver driver) throws Exception {
+		WebTarget webTarget = getWebTargetTotalLookGarment(product);
+		Response response = webTarget
+				.request(MediaType.APPLICATION_JSON)
+				.header("stock-id", getIdStockNormalized())
+				.get();
+		
+		if (response.getStatus()==Response.Status.OK.getStatusCode()) {
+			return response.readEntity(GarmentDetails.class);
+		}
+		return null;
+	}
+	
+	private WebTarget getWebTargetTotalLookGarment(Garment product) {
 		Article article = product.getArticleWithMoreStock();
 		Client client = ClientBuilder.newClient();
 		return ( 
 			client
-				.target(urlDomain.replace("http:", "https:") + "services/garments")
+				.target(urlForJavaCall.replace("http:", "https:") + "services/garments")
 				.path(article.getGarmentId())
 				.path("looktotal")
-				.queryParam("color", article.getColor().getId())
-				.request(MediaType.APPLICATION_JSON)
-				.header("stock-id", getIdStockNormalized())
-				.get(GarmentDetails.class));
+				.queryParam("color", article.getColor().getId()));
 	}
+	
 	private String getIdStockNormalized() {
 		if (app==AppEcom.votf) {
 			//Por algún motivo que no entiendo, falla "001.ES.0.false.true.v0" pero funciona "001.ES.0.false.false.v0"
@@ -190,11 +231,6 @@ public class GetterProducts extends JaxRsClient {
 		default:
 			return lineaType.name();
 		}
-	}
-	
-	private String getDnsUrl(String url) throws URISyntaxException {
-		URI uri = new URI(url);
-		return (uri.getScheme() + "://" + uri.getHost());
 	}
 	
 	public static class Builder {

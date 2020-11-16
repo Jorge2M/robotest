@@ -822,7 +822,7 @@
 <telefono>5123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <outlet_online>true</outlet_online>
 <miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
@@ -1921,7 +1921,7 @@
 <telefono>40123456</telefono> <!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ NOK</moneda>
 <maximo_bolsa>12000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -2445,7 +2445,8 @@
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesoempl tarjeta="8000000002266" nif="43523316W" nombre="MONTAGUT POLL, CONSUELO"/>
+<!-- select * from MNGBD.tarjeta_empleados where codigo_carnet = '8000000002266'; -->
+<accesoempl tarjeta="8000007330287" nif="32070858A" nombre="OCA MUÑOZ, ADRIAN"/>
 <accesovotf usuario="tda00003" password="mng00003"/>
 </pais>
 
@@ -3227,7 +3228,7 @@
 <telefono>690123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -3703,7 +3704,7 @@
 <telefono>3101234567</telefono>
 <dni>8001984561</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ COP</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -3788,7 +3789,7 @@
 <telefono>696123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -3889,7 +3890,7 @@
 <telefono>81234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -4440,7 +4441,7 @@
 <telefono>62836675</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ HKD</moneda>
 <maximo_bolsa>15000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="s" nino="s" baby="n" violeta="n" edits="s"></tienda>
@@ -4822,7 +4823,7 @@
 <telefono>7012345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ KZT</moneda>
 <maximo_bolsa>250000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="s" nina="s" nino="s" baby="n" violeta="s" edits="s"></tienda>
@@ -5005,7 +5006,7 @@
 <telefono>68258508</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>MOP %@</moneda>
 <maximo_bolsa>15000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
@@ -5476,7 +5477,7 @@
 <telefono>01665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ KRW</moneda>
 <maximo_bolsa>2000000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="n" edits="s"></tienda>

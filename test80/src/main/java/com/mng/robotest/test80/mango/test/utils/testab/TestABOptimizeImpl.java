@@ -76,6 +76,20 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 			"Variante 2 - Anidado desplegado"),
 		Arrays.asList(Channel.mobile),
 		Arrays.asList(AppEcom.shop)
+	),
+	
+	PLP_Desktop_Navigation_Filters(
+		"GTM-5T8R33",
+		"PLP - Desktop - Navigation filters",
+		"UWOU5vObVAZJ7ylnbAK2vQ",
+		"OPT-KWJ6XJ_OPT-N5ZLQ$",
+		"opt_preview-slim",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"Variante 0 - Original",
+			"Variante 1 - Filtros superiores"),
+		Arrays.asList(Channel.desktop),
+		Arrays.asList(AppEcom.shop)
 	);
 	
 	private String group;

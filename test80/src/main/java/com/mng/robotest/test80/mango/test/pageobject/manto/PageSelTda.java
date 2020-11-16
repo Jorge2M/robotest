@@ -22,7 +22,7 @@ public class PageSelTda {
 	}
 
 	public static boolean isPage(WebDriver driver) {
-		return (state(Present, By.xpath(XPathCeldaTextSelectEntorno), driver).check());
+		return (state(Present, By.xpath(XPathCeldaTextSelectEntorno), driver).wait(3).check());
 	}
 
 	public static void selectTienda(TiendaManto tienda, WebDriver driver) {
