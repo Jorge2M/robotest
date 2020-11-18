@@ -67,9 +67,9 @@ public class Reembolsos {
     public void REE001_configureReembolso() throws Exception {
     	DataCtxShop dCtxSh = getCtxShForTest();
     	WebDriver driver = TestMaker.getDriverTestCase();
-        if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
-            return;        
-        }
+//        if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
+//            return;        
+//        }
 
         boolean paisConSaldoCta = dCtxSh.pais.existsPagoStoreCredit();
         //dCtxSh.userConnected = Constantes.mail_standard;
@@ -106,9 +106,9 @@ public class Reembolsos {
     	DataCtxShop dCtxSh = getCtxShForTest();
     	WebDriver driver = TestMaker.getDriverTestCase();
         
-        if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
-            return;
-        }
+//        if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
+//            return;
+//        }
 
         //dCtxSh.userConnected = Constantes.mail_standard;
         dCtxSh.userConnected = "mng_test_SA_pruebaSaldo@mango.com";
@@ -153,31 +153,33 @@ public class Reembolsos {
         dCtxPago.getDataPedido().setPago(pagoStoreCredit);
         PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, driver);
         
-        //Volvemos a la portada (Seleccionamos el link "Seguir de shopping" o el icono de Mango)
-        PageResultPagoStpV pageResultPagoStpV = new PageResultPagoStpV(pagoStoreCredit.getTypePago(), dCtxSh.channel, driver);
-        pageResultPagoStpV.selectSeguirDeShopping(dCtxSh.appE);
-        
-        //Calculamos el saldo en cuenta que debería quedar (según si se ha realizado o no el pago);
-        float saldoCtaEsperado;
-        if (pagoStoreCredit.getTestpasarela().compareTo("s")==0 &&
-            pagoStoreCredit.getTestpago().compareTo("s")==0) {
-            DataPedido dataPedido = dCtxPago.getListPedidos().get(0);
-            float importePago = ImporteScreen.getFloatFromImporteMangoScreen(dataPedido.getImporteTotalSinSaldoCta());
-            saldoCtaEsperado = UtilsMangoTest.round(saldoCtaIni - importePago, 2);
-        } else {
-            saldoCtaEsperado = saldoCtaIni;
+        if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
+	        //Volvemos a la portada (Seleccionamos el link "Seguir de shopping" o el icono de Mango)
+	        PageResultPagoStpV pageResultPagoStpV = new PageResultPagoStpV(pagoStoreCredit.getTypePago(), dCtxSh.channel, driver);
+	        pageResultPagoStpV.selectSeguirDeShopping(dCtxSh.appE);
+	        
+	        //Calculamos el saldo en cuenta que debería quedar (según si se ha realizado o no el pago);
+	        float saldoCtaEsperado;
+	        if (pagoStoreCredit.getTestpasarela().compareTo("s")==0 &&
+	            pagoStoreCredit.getTestpago().compareTo("s")==0) {
+	            DataPedido dataPedido = dCtxPago.getListPedidos().get(0);
+	            float importePago = ImporteScreen.getFloatFromImporteMangoScreen(dataPedido.getImporteTotalSinSaldoCta());
+	            saldoCtaEsperado = UtilsMangoTest.round(saldoCtaIni - importePago, 2);
+	        } else {
+	            saldoCtaEsperado = saldoCtaIni;
+	        }
+	        
+	        //Step (+validaciones) selección menú "Mi cuenta" + "Reembolsos"
+	        PageReembolsosStpV.gotoRefundsFromMenuAndValidaSalCta(dCtxSh.pais.existsPagoStoreCredit(), saldoCtaEsperado, dCtxSh.appE, dCtxSh.channel, driver);
+	        
+	        //Validación en Manto de los Pedidos (si existen)
+	    	List<CheckPedido> listChecks = Arrays.asList(
+	    		CheckPedido.consultarBolsa, 
+	    		CheckPedido.consultarPedido);
+	        DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
+	        PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
+	        
+	        Bolsa.checkCookies(driver);
         }
-        
-        //Step (+validaciones) selección menú "Mi cuenta" + "Reembolsos"
-        PageReembolsosStpV.gotoRefundsFromMenuAndValidaSalCta(dCtxSh.pais.existsPagoStoreCredit(), saldoCtaEsperado, dCtxSh.appE, dCtxSh.channel, driver);
-        
-        //Validación en Manto de los Pedidos (si existen)
-    	List<CheckPedido> listChecks = Arrays.asList(
-    		CheckPedido.consultarBolsa, 
-    		CheckPedido.consultarPedido);
-        DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
-        PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
-        
-        Bolsa.checkCookies(driver);
     }
 }

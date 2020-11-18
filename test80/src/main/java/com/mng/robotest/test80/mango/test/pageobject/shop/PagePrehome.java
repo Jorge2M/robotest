@@ -225,7 +225,7 @@ public class PagePrehome {
         }
     }
     
-    private static void previousAccessShopSteps(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    public static void previousAccessShopSteps(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
     	reloadIfServiceUnavailable(driver);
     	identJCASifExists(driver);
         TestABactive.currentTestABsToActivate(dCtxSh.channel, dCtxSh.appE, driver);
@@ -270,9 +270,6 @@ public class PagePrehome {
     }
     
     public static void identJCASifExists(/*String urlPreHome, */WebDriver driver) {
-    	//Temporal para test Canary!!!
-    	//AccesoNavigations.goToInitURL(urlPreHome + "?canary=true", driver);
-    	AccesoNavigations.goToInitURL(/*urlPreHome,*/ driver);
         waitForPageLoaded(driver);
         if (PageJCAS.thisPageIsShown(driver)) {
             PageJCAS.identication(driver, Constantes.userManto, Constantes.passwordManto);

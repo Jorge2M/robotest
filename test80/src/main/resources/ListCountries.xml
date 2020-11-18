@@ -3700,7 +3700,7 @@
 <codigo_alf>CO</codigo_alf>
 <idioma acceso="co">ES</idioma>
 <tarifa>CL</tarifa>
-<codpos>050005</codpos>
+<codpos>056060</codpos> <!-- Este código posta hace que se muestre el pago "Contra entrega efectivo" -->
 <telefono>3101234567</telefono>
 <dni>8001984561</dni>
 <tiendas_online>shop,votf</tiendas_online>
@@ -3747,9 +3747,10 @@
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CONTRA ENTREGA EFECTIVO" testpasarela='s' testpago='s'>&TPV-183;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
+<!-- 
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
-	nombre="CONTRA ENTREGA TARJETA" testpasarela='s' testpago='s'>&TPV-183;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
+	nombre="CONTRA ENTREGA TARJETA" testpasarela='s' testpago='s'>&TPV-183;</pago> -->
 </pais>
 
 <pais nombre_pais="Ecuador" codigo="500">

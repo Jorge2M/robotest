@@ -41,6 +41,7 @@ public class AccesoNavigations {
         if (dCtxSh.appE==AppEcom.votf) {
             accesoVOTF(dCtxSh, driver);
             goFromLineasToMultimarcaVOTF(dCtxSh, driver);
+        	PagePrehome.previousAccessShopSteps(dCtxSh, driver);
         } else {
             PagePrehome.accesoShopViaPrehome(dCtxSh, driver);
         }

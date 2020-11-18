@@ -16,6 +16,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
 
 public class PagePrehomeStpV {
     
@@ -24,6 +25,9 @@ public class PagePrehomeStpV {
         expected="Se selecciona el país/idioma correctamente")
     public static void seleccionPaisIdioma(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
+    	//Temporal para test Canary!!!
+    	//AccesoNavigations.goToInitURL(urlPreHome + "?canary=true", driver);
+    	AccesoNavigations.goToInitURL(/*urlPreHome,*/ driver);
         PagePrehome.identJCASifExists(driver);
         PagePrehome.selecionPais(dCtxSh, driver);
         checkPaisSelected(dCtxSh, driver);
