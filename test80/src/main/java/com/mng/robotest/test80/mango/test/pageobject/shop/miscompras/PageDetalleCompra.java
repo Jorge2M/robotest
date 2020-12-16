@@ -64,4 +64,12 @@ public abstract class PageDetalleCompra extends PageObjTM implements PageDetalle
         articulo.setPrecio(getPrecioArticulo(posArticulo));
         return articulo;
     }
+    
+    protected String getDataRightFrom(String stringFrom, String data) {
+    	if (data.indexOf(stringFrom)>=0) { 
+	        int beginIndex = data.indexOf(stringFrom) + stringFrom.length();
+	        return (data.substring(beginIndex));
+    	}
+    	return data;
+    }
 }

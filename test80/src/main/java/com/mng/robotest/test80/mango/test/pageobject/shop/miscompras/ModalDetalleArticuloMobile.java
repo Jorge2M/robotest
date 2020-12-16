@@ -8,11 +8,11 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalDetalleArticuloMobile extends ModalDetalleArticulo {
 
-    private static String XPathModalInfoArticulo = "//div[@class[contains(.,'wHrEl')]]"; //React
+    private static String XPathModalInfoArticulo = "//div[@class[contains(.,'_3DqIY')]]"; //React
     private static String XPathAspaForClose = "//i[@class[contains(.,'icon-outline-close')]]";
-    private static String XPathReferencia = "//div[@class[contains(.,'_2ByJT')]]"; //React
+    private static String XPathReferencia = "//div[@class[contains(.,'_3Yy7v')]]"; //React
     private static String XPathNombre = XPathModalInfoArticulo + "/div/div[@class='sg-subtitle']";
-    private static String XPathPrecio = XPathModalInfoArticulo + "//div[@class[contains(.,'saSFe')]]//span[last()]"; 
+    private static String XPathPrecio = XPathModalInfoArticulo + "//div[@class[contains(.,'_2H9YI')]]/div[last()]"; 
     
     public ModalDetalleArticuloMobile(WebDriver driver) {
     	super(driver);
@@ -21,6 +21,10 @@ public class ModalDetalleArticuloMobile extends ModalDetalleArticulo {
     @Override
     public boolean isVisible(int maxSeconds) {
     	return (state(Visible, By.xpath(XPathModalInfoArticulo)).wait(maxSeconds).check());
+    }
+    @Override
+    public boolean isInvisible(int maxSeconds) {
+    	return (state(Invisible, By.xpath(XPathModalInfoArticulo)).wait(maxSeconds).check());
     }
     @Override
     public void clickAspaForClose() {

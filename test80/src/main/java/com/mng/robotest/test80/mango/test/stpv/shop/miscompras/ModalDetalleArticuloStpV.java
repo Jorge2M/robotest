@@ -9,10 +9,10 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.ModalDetall
 
 public class ModalDetalleArticuloStpV {
     
-	private final ModalDetalleArticulo modalDetalleMisCompras;
+	private final ModalDetalleArticulo modalDetalleArticulo;
 	
 	private ModalDetalleArticuloStpV(ModalDetalleArticulo modalObject) {
-		this.modalDetalleMisCompras = modalObject;
+		this.modalDetalleArticulo = modalObject;
 	}
 	public static ModalDetalleArticuloStpV getNew(ModalDetalleArticulo modalObject) {
 		return new ModalDetalleArticuloStpV(modalObject);
@@ -24,16 +24,16 @@ public class ModalDetalleArticuloStpV {
         int maxSeconds = 2;
         validations.add(
         	"Aparece el modal correspondiente al artículo (lo esperamos hasta " + maxSeconds + " segundos)",
-        	modalDetalleMisCompras.isVisible(maxSeconds), State.Warn);
+        	modalDetalleArticulo.isVisible(maxSeconds), State.Warn);
         validations.add(
         	"Se muestra la referencia " + articulo.getReferencia(),
-        	modalDetalleMisCompras.getReferencia().compareTo(articulo.getReferencia())==0, State.Warn);
+        	modalDetalleArticulo.getReferencia().compareTo(articulo.getReferencia())==0, State.Warn);
         validations.add(
         	"Se muestra el nombre " + articulo.getNombre(),
-        	modalDetalleMisCompras.getNombre().compareTo(articulo.getNombre())==0, State.Warn);
+        	modalDetalleArticulo.getNombre().compareTo(articulo.getNombre())==0, State.Warn);
         validations.add(
         	"Se muestra el precio " + articulo.getPrecio(),
-        	modalDetalleMisCompras.getPrecio().contains(articulo.getPrecio()), State.Warn);
+        	modalDetalleArticulo.getPrecio().contains(articulo.getPrecio()), State.Warn);
         return validations;
     }
 	

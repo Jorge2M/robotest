@@ -109,6 +109,10 @@ public class PageMisComprasStpV {
 //    public void clickCloseBuscarTiendaArticulo_Desktop() throws Exception {
 //    	modalDetalleCompraStpV.getModalDetalleArticulo().clickCloseModalBuscadorTiendas_Desktop();
 //    }
+    public void closeArticuloModal() {
+    	
+    }
+    
     public void gotoMisComprasFromDetalleCompra() {
     	modalDetalleCompraStpV.gotoListaMisCompras();
     }

@@ -50,7 +50,8 @@ public class SecMenuLateralMobilStpV {
 	@Step (
 		description="Seleccionar el menú lateral de 1er nivel <b>#{menu1rstLevel}</b>", 
 		expected="Aparece la galería de productos asociada al menú",
-		saveNettraffic=SaveWhen.Always)
+		saveNettraffic=SaveWhen.Always,
+		saveHtmlPage=SaveWhen.Always)
 	public void selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
 		secMenuLateral.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, dCtxSh.pais);
 		validaSelecMenu(menu1rstLevel, dCtxSh);

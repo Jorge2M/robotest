@@ -1,7 +1,10 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.checkout;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -33,11 +36,14 @@ public class ModalDirecFactura extends ModalDireccion {
 	}
 
 	public static void clickActualizar(WebDriver driver) {
-		click(By.xpath(XPathButtonUpdate), driver).exec();
-
-		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
-		if (isVisibleButtonActualizar(driver)) {
-			click(By.xpath(XPathButtonUpdate), driver).exec();
+		click(By.xpath(XPathButtonUpdate), driver).exec(); 
+		try {
+			if (isVisibleButtonActualizar(driver)) {
+				click(By.xpath(XPathButtonUpdate), driver).exec();
+			}
+		}
+		catch (StaleElementReferenceException e) {
+			Log4jTM.getLogger().info(e);
 		}
 	}
 }

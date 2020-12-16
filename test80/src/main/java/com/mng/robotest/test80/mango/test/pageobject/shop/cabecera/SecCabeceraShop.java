@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -87,7 +89,7 @@ public class SecCabeceraShop extends SecCabecera {
     }
 
     public void clickIconoAndWait(IconoCabeceraShop icono) {
-    	click(icono.getBy()).exec();
+    	click(icono.getBy()).type(TypeClick.javascript).exec(); //TODO
     }
     
     public boolean isIconoInState(IconoCabeceraShop icono, State state) {

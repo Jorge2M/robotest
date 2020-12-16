@@ -80,7 +80,7 @@ public class SmokeTestSuite extends SuiteMaker {
 	
 	public static class MyDriverMaker extends DriverMaker {
 		
-		private String driverVersion = "87.0.4280.20";
+		private String driverVersion = "87.0.4280.88";
 		
 		@Override
 		public String getTypeDriver() {

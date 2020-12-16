@@ -15,8 +15,8 @@ public class SectionCookies extends PageObjTM {
 		super(driver);
 	}
 	
-	public boolean isVisible() {
-		return state(State.Visible, By.xpath(XPathAcceptButton)).check();
+	public boolean isVisible(int maxSeconds) {
+		return state(State.Visible, By.xpath(XPathAcceptButton)).wait(maxSeconds).check();
 	}
 	
 	public boolean isInvisible(int maxSeconds) {

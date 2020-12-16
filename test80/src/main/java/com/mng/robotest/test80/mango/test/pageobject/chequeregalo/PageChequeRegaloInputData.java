@@ -15,7 +15,22 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.footer.PageFromFooter;
 
 public class PageChequeRegaloInputData extends PageObjTM implements PageFromFooter {
 	
-    public enum Importe {euro25, euro50, euro100, euro150, euro200, euro250}
+    public enum Importe {
+    	euro25(25), 
+    	euro50(50), 
+    	euro100(100), 
+    	euro150(150), 
+    	euro200(200), 
+    	euro250(250);
+    	
+    	int importe;
+    	private Importe(int importe) {
+    		this.importe = importe;
+    	}
+    	public int getImporte() {
+    		return importe;
+    	}
+    }
 
     public enum ConsultaSaldo implements ElementPage {
         ir("//button[@class='sg-t-btn' and text()[contains(.,'Consultar')]]"),
@@ -96,7 +111,7 @@ public class PageChequeRegaloInputData extends PageObjTM implements PageFromFoot
     }
     
     public static String getXPathRadioImporte(Importe importe) {
-        return ("//span[text()[contains(.,'" + importe.name().replace("euro", "") + "')]]");
+        return ("//span[@class='gc-text' and text()[contains(.,'" + importe.getImporte() + "')]]");
     }
 
 	@Override

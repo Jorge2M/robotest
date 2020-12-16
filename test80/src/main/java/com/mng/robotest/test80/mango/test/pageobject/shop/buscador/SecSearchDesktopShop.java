@@ -33,9 +33,14 @@ public class SecSearchDesktopShop extends PageObjTM implements SecSearch {
 
 	private void setTextAndReturn(String referencia) {
 		WebElement input = getElementVisible(driver, By.xpath(XPathInputBuscador));
-		//sendKeysWithRetry(5, input, referencia); 
-		input.clear();
-		input.sendKeys(referencia);
+		sendKeysWithRetry(5, input, referencia); 
+//		try {
+//			input.clear();
+//		}
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		input.sendKeys(referencia);
 		input.sendKeys(Keys.RETURN);
 		waitForPageLoaded(driver);
 	}

@@ -124,10 +124,10 @@ public abstract class PageGaleria extends PageObjTM {
 	final static String XPathArticuloMobilShop = "//li[@class='product']";
 	private String getXPathArticulo() {
 		switch (app) {
-//		case outlet:
-//			if (channel==Channel.mobile) {
-//				return XPathArticuloMobilOutlet;
-//			}
+		case outlet:
+			if (channel==Channel.mobile) {
+				return XPathArticuloMobilOutlet;
+			}
 		case shop:
 		case votf:
 		default:

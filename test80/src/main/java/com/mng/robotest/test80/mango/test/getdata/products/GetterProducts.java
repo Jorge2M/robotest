@@ -29,6 +29,7 @@ import com.mng.robotest.test80.mango.test.getdata.products.data.Garment.Article;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
+
 public class GetterProducts extends JaxRsClient {
 	
 	private final String urlForJavaCall;
@@ -42,7 +43,10 @@ public class GetterProducts extends JaxRsClient {
 	private final String familia;
 	private final Integer numProducts;
 	private final Integer pagina;
+	private final WebDriver driver;
 	private final ProductList productList;
+	
+	public enum MethodGetter {ApiRest, WebDriver}
 	
 	private GetterProducts(String url, String codigoPaisAlf, AppEcom app, LineaType lineaType, String seccion, 
 						   String galeria, String familia, Integer numProducts, Integer pagina, WebDriver driver) throws Exception {
@@ -65,7 +69,8 @@ public class GetterProducts extends JaxRsClient {
 		this.familia = familia;
 		this.numProducts = numProducts;
 		this.pagina = pagina;
-		this.productList = getProductList(driver);
+		this.driver = driver;
+		this.productList = getProductList();
 	}
 	
 	private String getUrlForJavaCall(String initialURL, WebDriver driver) throws Exception {
@@ -87,21 +92,21 @@ public class GetterProducts extends JaxRsClient {
 		}
 	}
 	
-	private ProductList getProductList(WebDriver driver) throws Exception {
-		String productsJson = getProductsFromApiRest();
-		if ((productsJson==null || !productsJson.contains("garments")) && driver!=null) {
-			productsJson = getProductsFromWebDriver(driver);
+	public ProductList getProductList(MethodGetter method) throws Exception {
+		switch (method) {
+		case ApiRest:
+			getProductsFromApiRest();
+		case WebDriver:
+		default:
+			return getProductsFromWebDriver();
 		}
-		
-		//Without that modification Jackson can't parse the JSON
-		productsJson = productsJson.replace("\"garments\":{", "\"garments\":[");
-		productsJson = productsJson.replace("}}}]", "}]}]");
-		productsJson = productsJson.replaceAll("\"g[0-9]{8}(..){0,1}\":", "");
-		
-		ObjectMapper objectMapper = new ObjectMapper();
-		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		ProductList productList = objectMapper.readValue(productsJson, ProductList.class);
-		
+	}
+	
+	private ProductList getProductList() throws Exception {
+		ProductList productList = getProductsFromApiRest();
+		if (productList==null && driver!=null) {
+			return getProductsFromWebDriver();
+		}
 		return productList;
 	}
 
@@ -136,16 +141,19 @@ public class GetterProducts extends JaxRsClient {
 		return webTarget;
 	}
 	
-	private String getProductsFromApiRest() throws Exception {
+	private ProductList getProductsFromApiRest() throws Exception {
 		WebTarget webTarget = getWebTargetProductlist(urlForJavaCall);
 		Response response = webTarget.request(MediaType.APPLICATION_JSON).get();
 		if (response.getStatus()==Response.Status.OK.getStatusCode()) {
-			return response.readEntity(String.class);
+			String productsJson = response.readEntity(String.class);
+			if (productsJson!=null && productsJson.contains("garments")) {
+				return getProductsFromJson(productsJson);
+			}
 		}
 		return null;
 	}
 	
-	private String getProductsFromWebDriver(WebDriver driver) throws Exception {
+	private ProductList getProductsFromWebDriver() throws Exception {
 		WebTarget webTarget = getWebTargetProductlist(urlForBrowserCall);
 		String urlGetProducts = webTarget.getUri().toURL().toString();
 		
@@ -154,7 +162,20 @@ public class GetterProducts extends JaxRsClient {
 		SeleniumUtils.loadUrlInAnotherTabTitle(urlGetProducts, nameTab, driver);
 		String body = driver.findElement(By.xpath("//body/pre")).getText();
 		SeleniumUtils.closeTabByTitleAndReturnToWidow(nameTab, idWindow, driver);
-		return body;
+		
+		return getProductsFromJson(body);
+	}
+	
+	private ProductList getProductsFromJson(String productsJson) throws Exception {
+		//Without that modification Jackson can't parse the JSON
+		productsJson = productsJson.replace("\"garments\":{", "\"garments\":[");
+		productsJson = productsJson.replace("}}}]", "}]}]");
+		productsJson = productsJson.replaceAll("\"g[0-9]{8}(..){0,1}\":", "");
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		ProductList productList = objectMapper.readValue(productsJson, ProductList.class);
+		return productList;
 	}
 
 	public List<Garment> getAll() {

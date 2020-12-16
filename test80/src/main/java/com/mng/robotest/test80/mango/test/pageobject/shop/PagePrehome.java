@@ -230,8 +230,9 @@ public class PagePrehome {
     	identJCASifExists(driver);
         TestABactive.currentTestABsToActivate(dCtxSh.channel, dCtxSh.appE, driver);
         SectionCookies sectionCookies = new SectionCookies(driver);
-        if (sectionCookies.isVisible()) {
+        if (sectionCookies.isVisible(2)) {
         	acceptCookies(driver);
+        	//changeCookie_OptanonConsent(driver);
         	//setupCookies(driver);
         }
     }
@@ -245,6 +246,11 @@ public class PagePrehome {
     private static void acceptCookies(WebDriver driver) {
     	SectionCookiesStpV sectionCookiesStpV = new SectionCookiesStpV(driver);
     	sectionCookiesStpV.accept();
+    }
+    
+    private static void changeCookie_OptanonConsent(WebDriver driver) {
+    	SectionCookiesStpV sectionCookiesStpV = new SectionCookiesStpV(driver);
+    	sectionCookiesStpV.changeCookie_OptanonConsent();
     }
     
     private static void setupCookies(WebDriver driver) {

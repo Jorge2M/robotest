@@ -3,7 +3,6 @@ package com.mng.robotest.test80.mango.test.stpv.shop;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
-import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -16,15 +15,16 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.factoryes.NodoStatus;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIdentificacion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper;
@@ -364,55 +364,14 @@ public class AccesoStpV {
     	return (driver.getCurrentUrl().toLowerCase().contains(hrefBotonCambioPais.toLowerCase()));
     }
     
-    /**
-     * Accede y testea el estado de un nodo concreto de amazon (especificado mediante cookies de sesión). Almacena los datos obtenidos mediante llamada a la URL de status 
-     * @param urlControl url para testear el estado del nodo
-     */
-    final static String tagPathStatus = "@TagPathStatus";
     @Step (
-    	description="Invocamos a <b>" + tagPathStatus + "</b> para obtener los datos JSON", 
-        expected="El nodo se encuentra en un estado correcto",
-        saveHtmlPage=SaveWhen.Always)
-    public static void testNodoState(NodoStatus nodo, WebDriver driver) throws Exception {
-    	TestMaker.getCurrentStepInExecution().replaceInDescription(tagPathStatus, nodo.getStatusJSON().pathStatus);
-        nodo.setDataStateNodeFromBrowser(driver);
-        if (nodo.getStatusJSON()!=null && nodo.getStatusJSON().getDataStatusNode()!=null) {
-        	checkStatusUp(nodo);
-        }
-    }
-    
-    @Validation (
-    	description="El estatus es <b>UP</b>",
-    	level=State.Defect)
-    private static boolean checkStatusUp(NodoStatus nodo) {
-    	return (nodo.getStatusJSON().isStatusOk());
+    	description="Cargar la URL inicial", 
+        expected="La URL se carga correctamente")
+    public static void goToInitialURL(WebDriver driver) {
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+    	driver.get(inputParamsSuite.getUrlBase());
     }
 
-    @Validation
-    public static ChecksTM validaCompareStatusNodos(NodoStatus nodoAct, NodoStatus nodoAnt) throws Exception {
-       	ChecksTM validations = ChecksTM.getNew();
-        JSONObject stockAct = nodoAct.getStatusJSON().getWarehouses();
-        String vShopCAct = nodoAct.getStatusJSON().getVShopconfig();
-        String vShopCAnt = nodoAnt.getStatusJSON().getVShopconfig();
-        int sessionCAnt = nodoAnt.getStatusJSON().getSessionCount();
-        int sessionCAct = nodoAct.getStatusJSON().getSessionCount();
-        
-    	validations.add(
-    		"El stock de los almacenes (" + stockAct + ") coincide (+-10%) con el del nodo " + nodoAnt.getIp(),
-    		nodoAct.comparaStocksWarehouses(nodoAnt, 0.10), State.Warn);
-    	validations.add(
-    		"La versión del shopconfig (" + vShopCAct + ") es igual que la del nodo " + nodoAnt.getIp(),
-    		vShopCAct.compareTo(vShopCAnt)==0, State.Warn);
-    	
-        float divisor = Math.abs(sessionCAct - sessionCAnt);
-        float dividendo = Math.max(sessionCAct, sessionCAnt);
-    	validations.add(
-    		"El contador de sesiones (" + sessionCAct + ") coincide (+-50%) con el del nodo " + nodoAnt.getIp() + " (" + sessionCAnt + ")",
-    		(divisor / dividendo) <= 0.5, State.Warn);
-    	
-    	return validations;
-    }
-    
     public static class ResultValWithPais extends ChecksTM {
     	Pais pais;
     	private ResultValWithPais() {

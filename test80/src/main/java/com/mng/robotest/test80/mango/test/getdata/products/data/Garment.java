@@ -109,6 +109,9 @@ public class Garment {
 		public Color getColor() {
 			return color;
 		}
+		public String getColorLabel() {
+			return color.getLabel();
+		}
 		public void setColor(Color color) {
 			this.color = color;
 		}

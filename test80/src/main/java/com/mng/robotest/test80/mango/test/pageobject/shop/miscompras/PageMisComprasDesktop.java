@@ -14,7 +14,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageMisComprasDesktop extends PageMisCompras {
 
 	private final static String XPathCapaContenedora = "//div[@id='myPurchasesDesktop']";
-	private final static String XPathListTickets = "//div[@class[contains(.,'_3UUJa')] or @class='daPI0']"; //React
+	private final static String XPathListTickets = "//div[@class[contains(.,'_3Gv4A')] or @class='NPtmD']"; //React
 	private final static String prefixIdCompra = "purchase-";
 	private final static String XPathTicket = XPathListTickets + "//div[@id[contains(.,'" + prefixIdCompra + "')]]";
 
@@ -64,13 +64,13 @@ public class PageMisComprasDesktop extends PageMisCompras {
         return TypeTicket.Online;
 	}
 	private String getIdTicketPage(WebElement boxDataTicket) {
-	    return (boxDataTicket.findElement(By.xpath("//p[@class[contains(.,'_3G4Rb')]]/span[2]")).getText()); //React
+	    return (boxDataTicket.findElement(By.xpath("//p[@class[contains(.,'_3660d')]]/span[2]")).getText()); //React
 	}
 	private String getIdMangoTicketPage(WebElement boxDataTicket) {
 		return (boxDataTicket.getAttribute("id").replace(prefixIdCompra, ""));
 	}
 	private String getPrecioTicketPage(WebElement boxDataTicket) {
-		return (boxDataTicket.findElement(By.xpath("//h1[@class[contains(.,'_2EhpI')]]")).getText()); //React
+		return (boxDataTicket.findElement(By.xpath("//h1[@class[contains(.,'_1OG4b')]]")).getText()); //React
 	}
 	private int getNumItemsTicketPage(WebElement boxDataTicket) {
 		String textLinea = boxDataTicket.findElement(By.xpath("//p[@class='sg-body-small']")).getText();

@@ -41,6 +41,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalBuscadorTiendasStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.SuitesExecuted;
 import com.github.jorge2m.testmaker.domain.suitetree.SuiteTM;
 import com.github.jorge2m.testmaker.domain.suitetree.TestRunTM;
@@ -48,16 +49,16 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 
 public class FichaProducto {
 	
+	private final SecBuscadorStpV secBuscadorStpV;
+	private final Channel channel;
+	private final AppEcom app;
 	private final static Pais españa = PaisGetter.get(PaisShop.España);
 	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
 
-	private DataCtxShop getCtxShForTest() throws Exception {
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
-		DataCtxShop dCtxSh = new DataCtxShop();
-		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
-		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
-		return dCtxSh;
+	public FichaProducto(Channel channel, AppEcom app, WebDriver driver) {
+		this.channel = channel;
+		this.app = app;
+		this.secBuscadorStpV = new SecBuscadorStpV(app, channel, driver);
 	}
 	
 	@BeforeMethod (groups={"FichaProducto", "Canal:desktop_App:all"})
@@ -92,19 +93,13 @@ public class FichaProducto {
 		description="[Usuario registrado] Se testean las features principales de una ficha con origen el buscador: añadir a la bolsa, selección color/talla, buscar en tienda, añadir a favoritos")
 	public void FIC001_FichaFromSearch_PrimaryFeatures_Reg() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-		DataCtxShop dCtxSh = getCtxShForTest();
-		dCtxSh.pais=españa;
-		dCtxSh.idioma=castellano;
 		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
-		dCtxSh.userConnected = userShop.user;
-		dCtxSh.passwordUser = userShop.password;
-		dCtxSh.userRegistered=true;
+		DataCtxShop dCtxSh = getCtxShForTest(españa, castellano, true, userShop.user, userShop.password);
 
 		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, driver);
-
 		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh, driver).build();
 		Garment articleWithColors = getterProducts.getWithManyColors().get(0);
-		SecBuscadorStpV.searchArticulo(articleWithColors, dCtxSh, driver);
+		secBuscadorStpV.searchArticulo(articleWithColors);
 
 		PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
 		boolean isTallaUnica = pageFichaStpv.selectAnadirALaBolsaTallaPrevNoSelected();
@@ -139,16 +134,12 @@ public class FichaProducto {
         description="[Usuario no registrado] Se testean las features secundarias de una ficha con origen el buscador: guía de tallas, carrusel imágenes, imagen central, panel de opciones, total look")
     public void FIC002_FichaFromSearch_SecondaryFeatures_NoReg() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
-        dCtxSh.userRegistered = false;
-        dCtxSh.pais=this.españa;
-        dCtxSh.idioma=this.castellano;
+    	DataCtxShop dCtxSh = getCtxShForTest(españa, castellano);
 
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
-        
 		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh, driver).build();
         Garment articleWithTotalLook = getterProducts.getOneWithTotalLook(driver);
-        SecBuscadorStpV.searchArticulo(articleWithTotalLook, dCtxSh, driver);
+        secBuscadorStpV.searchArticulo(articleWithTotalLook);
         
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {
@@ -202,11 +193,9 @@ public class FichaProducto {
         description="[Usuario no registrado] Desde Corea/coreano, se testea una ficha con origen la Galería validando el panel KcSafety")
     public void FIC003_FichaFromGalery_CheckKcSafety() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
-        dCtxSh.userRegistered = false;
-        dCtxSh.pais = PaisGetter.get(PaisShop.CoreaDelSur);
-        dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0); //Coreano
-        
+        Pais corea = PaisGetter.get(PaisShop.CoreaDelSur);
+    	DataCtxShop dCtxSh = getCtxShForTest(corea, corea.getListIdiomas().get(0));
+     
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
         
         //TODO en el acceso se ejecuta la función setInitialModalsOff para evitar la aparición de modales
@@ -246,12 +235,9 @@ public class FichaProducto {
         alwaysRun=true, description="[Usario no registrado] Testeo Personalización bordados")
     public void FIC005_Articulo_Personalizable_Noreg() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
-        dCtxSh.pais=españa;
-        dCtxSh.idioma=castellano;
-        dCtxSh.userRegistered = false;
+    	DataCtxShop dCtxSh = getCtxShForTest(españa, castellano);
+
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
-        
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		Menu1rstLevel menuPersonalizacion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.he, null, "personalizacion"));
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
@@ -284,4 +270,22 @@ public class FichaProducto {
         
         Bolsa.checkCookies(driver);
     }
+    
+    private DataCtxShop getCtxShForTest(Pais pais, IdiomaPais idioma) {
+    	return getCtxShForTest(pais, idioma, false, "", "");
+    }
+    
+	private DataCtxShop getCtxShForTest(Pais pais, IdiomaPais idioma, boolean userRegistered, String user, String password) {
+		DataCtxShop dCtxSh = new DataCtxShop();
+		dCtxSh.setAppEcom(app);
+		dCtxSh.setChannel(channel);
+        dCtxSh.pais=pais;
+        dCtxSh.idioma=idioma;
+        if (userRegistered) {
+        	dCtxSh.userRegistered = false;
+        	dCtxSh.userConnected = user;
+        	dCtxSh.passwordUser = password;
+        }
+		return dCtxSh;
+	}
 }

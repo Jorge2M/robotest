@@ -1,16 +1,11 @@
 package com.mng.robotest.test80.mango.test.factoryes;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.Cookie;
-import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.getdata.json.gestorDatosStatusJSON;
 import com.mng.robotest.test80.mango.test.pageobject.utils.NombreYRef;
 import com.mng.robotest.test80.mango.test.pageobject.utils.NombreYRefList;
 
@@ -21,7 +16,6 @@ public class NodoStatus {
     Set<Cookie> cookies;
     AppEcom appE;
     String sourceDataURL;
-    gestorDatosStatusJSON statusJSON = new gestorDatosStatusJSON();
     NombreYRefList articlesNuevo = null;
     boolean tested = false;
 
@@ -55,10 +49,6 @@ public class NodoStatus {
         this.sourceDataURL = sourceDataURL;
     }
     
-    public gestorDatosStatusJSON getStatusJSON() {
-        return this.statusJSON;
-    }
-    
     public NombreYRefList getArticlesNuevo() {
         return this.articlesNuevo;
     }
@@ -84,13 +74,6 @@ public class NodoStatus {
     }
     
     /**
-     * Cargamos al URL de status y almacenamos los datos JSON obtenidos
-     */
-    public void setDataStateNodeFromBrowser(WebDriver driver) throws Exception {
-        this.statusJSON.setDataStateNodeFromBrowser(driver, this);
-    }
-    
-    /**
      * Busca una cookie por su nombre
      */
     public Cookie getCookieByName(String nameCookie) {
@@ -106,32 +89,6 @@ public class NodoStatus {
         }
                 
         return cookie;
-    }
-    
-    /**
-     * Función que revisa los stocks del nodo con los de otro nodo. Valida que si la difencia en alguno de los stocks es superior a un porcentaje determinado
-     */
-    public boolean comparaStocksWarehouses(NodoStatus nodoAnt, final double porcentaje) {
-
-        String warehouseAct = this.getStatusJSON().getWarehouses().toString().replace("{", "").replace("}", "");
-        String warehouseAnt = nodoAnt.getStatusJSON().getWarehouses().toString().replace("{", "").replace("}", "");
-        
-        List<String> listWareAct = new ArrayList<>(Arrays.asList(warehouseAct.split(",")));
-        List<String> listWareAnt = new ArrayList<>(Arrays.asList(warehouseAnt.split(",")));
-
-        for (int i = 0; i < listWareAct.size(); i++) {
-            int valorStock = Integer.parseInt(listWareAct.get(i).substring(listWareAct.get(i).indexOf(":") + 1).trim());
-            int valorStock_C = Integer.parseInt(listWareAnt.get(i).substring(listWareAnt.get(i).indexOf(":") + 1).trim());
-            if (valorStock_C <= 0) {
-                return false;
-            }
-            int porcentajeValor = Math.abs((valorStock - valorStock_C) / valorStock);
-            if (porcentajeValor >= porcentaje) {
-                return false;
-            }
-        }
-
-        return true;
     }
     
     public NombreYRef getArticleNuevoThatNotFitWith(NodoStatus nodoAnt) { 

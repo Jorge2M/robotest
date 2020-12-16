@@ -12,6 +12,8 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
@@ -176,7 +178,7 @@ public class SecBloquesMenuDesktop extends PageObjTM {
     	goToMenuAndCheckIsVisible(menu1rstLevel);
     	String xpathMenu = getXPathMenuSuperiorLinkVisible(menu1rstLevel);
         moveToElement(By.xpath(xpathMenu), driver);
-        click(By.xpath(xpathMenu)).exec();
+        click(By.xpath(xpathMenu)).type(TypeClick.javascript).exec();
     }    
     
     public boolean isPresentMenuFirstLevel(Menu1rstLevel menu1rstLevel) throws Exception {

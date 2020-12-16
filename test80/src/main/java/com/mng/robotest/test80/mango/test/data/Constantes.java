@@ -23,7 +23,7 @@ public class Constantes {
     public static final int BOTON_CERRAR = 2;
     
     public static final String userManto = "00556106";
-    public static final String passwordManto = "gENJURO74";
+    public static final String passwordManto = "gENJURO75";
 //	public static final String userManto = "testjam01";
 //	public static final String passwordManto = "k48CJuyd";
     

@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -264,7 +265,7 @@ public class SecBolsa {
     public static void clearArticuloAndWait(Channel channel, String refArticulo, WebDriver driver) throws Exception {
         //Seleccionar el link de la papelera para eliminar de la bolsa
         String xpathClearArt = getXPATH_LinkBorrarArt(channel, refArticulo);
-        driver.findElement(By.xpath(xpathClearArt)).click();
+        PageObjTM.click(By.xpath(xpathClearArt), driver).exec();
         waitForPageLoaded(driver); 
     }
 

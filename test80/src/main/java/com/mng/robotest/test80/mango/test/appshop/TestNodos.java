@@ -24,7 +24,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test80.mango.test.pageobject.utils.NombreYRefList;
-import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.PagePrehomeStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.banner.SecBannersStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
@@ -87,54 +86,48 @@ public class TestNodos implements Serializable {
     	WebDriver driver = TestMaker.getDriverTestCase();
 		TestCaseTM.addNameSufix(this.index_fact);
         AppEcom appE = nodo.getAppEcom();
-        AccesoStpV.testNodoState(nodo, driver);
-        if (this.nodo.getStatusJSON().getDataStatusNode()==null || this.nodo.getStatusJSON().isStatusOk()) {
-            NodoStatus nodoAnt = findNodoForCompareStatus(listaNodos, nodo);
-            if (nodoAnt!=null) {
-                AccesoStpV.validaCompareStatusNodos(this.nodo, nodoAnt);
+    	NodoStatus nodoAnt = findNodoForCompareStatus(listaNodos, nodo);
+       
+        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, true, driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
+        if (appE==AppEcom.shop) {
+        	secMenusStpV.seleccionLinea(LineaType.nuevo, null, dCtxSh);
+            PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, dCtxSh.appE, driver);
+            NombreYRefList listArticlesNuevoAct = pageGaleria.getListaNombreYRefArticulos();
+            this.nodo.setArticlesNuevo(listArticlesNuevoAct);
+            PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+            if (nodoAnt!=null && nodoAnt.getArticlesNuevo()!=null) {
+                pageGaleriaStpV.validaNombresYRefEnOrden(nodoAnt, this.nodo);
             }
-           
-            PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, true, driver);
-            SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-            if (appE==AppEcom.shop) {
-            	secMenusStpV.seleccionLinea(LineaType.nuevo, null, dCtxSh);
-                PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, dCtxSh.appE, driver);
-                NombreYRefList listArticlesNuevoAct = pageGaleria.getListaNombreYRefArticulos();
-                this.nodo.setArticlesNuevo(listArticlesNuevoAct);
-                PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-                if (nodoAnt!=null && nodoAnt.getArticlesNuevo()!=null) {
-                    pageGaleriaStpV.validaNombresYRefEnOrden(nodoAnt, this.nodo);
-                }
-                
-                pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
-            }
-			
-            SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, driver);
-            secMenusDesktopStpV.seleccionLinea(LineaType.she);
-            secMenusDesktopStpV.countSaveMenusEntorno(LineaType.she, null, nodo.getIp(), autAddr);
-            int maxBannersToLoad = 1;
-            SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToLoad, driver);
-            secBannersStpV.testPageBanners(dCtxSh, 1);
-            if (appE==AppEcom.outlet) {
-                Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
-                secMenusStpV.accesoMenuXRef(menuVestidos, dCtxSh);
-            } else {
-            	Linea lineaNuevo = dCtxSh.pais.getShoponline().getLinea(LineaType.nuevo);
-            	String idCarruselMujer = lineaNuevo.getListCarrusels()[0];
-            	secMenusDesktopStpV.stepSeleccionaCarrusel(LineaType.nuevo, idCarruselMujer);
-            }
-			
-            secMenusStpV.seleccionLinea(LineaType.he, null, dCtxSh);
-            secMenusDesktopStpV.countSaveMenusEntorno (LineaType.he, null, nodo.getIp(), autAddr);
-            secMenusStpV.seleccionLinea(LineaType.nina, SublineaNinosType.nina, dCtxSh);	
-            secMenusDesktopStpV.countSaveMenusEntorno(LineaType.nina, SublineaNinosType.nina, nodo.getIp(), autAddr);
-            secMenusStpV.seleccionLinea(LineaType.nino, SublineaNinosType.bebe_nino, dCtxSh);     
-            secMenusDesktopStpV.countSaveMenusEntorno(LineaType.nino, SublineaNinosType.bebe_nino, nodo.getIp(), autAddr);
-            secMenusStpV.seleccionLinea(LineaType.violeta, null, dCtxSh);	
-            secMenusDesktopStpV.countSaveMenusEntorno (LineaType.violeta, null, nodo.getIp(), autAddr);
             
-            this.nodo.setTested(true);
+            pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
         }
+		
+        SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, driver);
+        secMenusDesktopStpV.seleccionLinea(LineaType.she);
+        secMenusDesktopStpV.countSaveMenusEntorno(LineaType.she, null, nodo.getIp(), autAddr);
+        int maxBannersToLoad = 1;
+        SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToLoad, driver);
+        secBannersStpV.testPageBanners(dCtxSh, 1);
+        if (appE==AppEcom.outlet) {
+            Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
+            secMenusStpV.accesoMenuXRef(menuVestidos, dCtxSh);
+        } else {
+        	Linea lineaNuevo = dCtxSh.pais.getShoponline().getLinea(LineaType.nuevo);
+        	String idCarruselMujer = lineaNuevo.getListCarrusels()[0];
+        	secMenusDesktopStpV.stepSeleccionaCarrusel(LineaType.nuevo, idCarruselMujer);
+        }
+		
+        secMenusStpV.seleccionLinea(LineaType.he, null, dCtxSh);
+        secMenusDesktopStpV.countSaveMenusEntorno (LineaType.he, null, nodo.getIp(), autAddr);
+        secMenusStpV.seleccionLinea(LineaType.nina, SublineaNinosType.nina, dCtxSh);	
+        secMenusDesktopStpV.countSaveMenusEntorno(LineaType.nina, SublineaNinosType.nina, nodo.getIp(), autAddr);
+        secMenusStpV.seleccionLinea(LineaType.nino, SublineaNinosType.bebe_nino, dCtxSh);     
+        secMenusDesktopStpV.countSaveMenusEntorno(LineaType.nino, SublineaNinosType.bebe_nino, nodo.getIp(), autAddr);
+        secMenusStpV.seleccionLinea(LineaType.violeta, null, dCtxSh);	
+        secMenusDesktopStpV.countSaveMenusEntorno (LineaType.violeta, null, nodo.getIp(), autAddr);
+        
+        this.nodo.setTested(true);
         
         Bolsa.checkCookies(driver);
     }
@@ -149,10 +142,7 @@ public class TestNodos implements Serializable {
         Iterator<NodoStatus> itNodos = listaNodosI.values().iterator();
         while (itNodos.hasNext() && !encontrado) { 
             NodoStatus nodoCandidato = itNodos.next();
-            
-            //Si ya se cargó en el nodo los datos del servicio JSON y es del mismo canal (shop/outlet)
-            if (nodoCandidato.getStatusJSON().getDataStatusNode() != null &&
-                nodoCandidato.getAppEcom() == nodoAct.getAppEcom() &&
+            if (nodoCandidato.getAppEcom() == nodoAct.getAppEcom() &&
                 nodoCandidato.getIp().compareTo(nodoAct.getIp())!=0) {
                 nodoAnt = nodoCandidato;
                 if (this.nodo.getTested()) {

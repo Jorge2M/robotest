@@ -9,39 +9,14 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 
 public class PageKcpMain extends PageObjTM {
 
-	private final ModalHundayCard1 modalHundayCard1;
-	private final ModalHundayCard2 modalHundayCard2;
-	private final ModalHundayCard3 modalHundayCard3;
-	private final ModalHundayCard4 modalHundayCard4;
-	
 	private static final String XPathAgreeAllRadio = "//input[@id='chk_all']";
-	private static final String XPathHyundaiBlock = "//span[@class[contains(.,'btnCard')]]//span[text()[contains(.,'Hyundai')]]";
+	private static final String XPathHyundaiBlock = "//span[@class[contains(.,'btnCard')]]//span[text()[contains(.,'현대')]]";
 	private static final String XPathSelectInstallment = "//select[@id='select-month']";
 	private static final String XPathNextButton = "//button[@id='cardNext']";
 	private static final String XPathIframePage = "//iframe[@id='naxIfr']";
 	
 	public PageKcpMain(WebDriver driver) {
 		super(driver);
-		modalHundayCard1 = new ModalHundayCard1(driver);
-		modalHundayCard2 = new ModalHundayCard2(driver);
-		modalHundayCard3 = new ModalHundayCard3(driver);
-		modalHundayCard4 = new ModalHundayCard4(driver);
-	}
-	
-	public ModalHundayCard1 getModalHundayCard1() {
-		return modalHundayCard1;
-	}
-
-	public ModalHundayCard2 getModalHundayCard2() {
-		return modalHundayCard2;
-	}
-
-	public ModalHundayCard3 getModalHundayCard3() {
-		return modalHundayCard3;
-	}
-
-	public ModalHundayCard4 getModalHundayCard4() {
-		return modalHundayCard4;
 	}
 	
 	public boolean isPage(int maxSeconds) {
@@ -55,6 +30,13 @@ public class PageKcpMain extends PageObjTM {
 		goToIframe(driver);
 		click(By.xpath(XPathAgreeAllRadio)).exec();
 		leaveIframe();
+	}
+	
+	public boolean isVisibleTermAndConditions(int maxSeconds) {
+		goToIframe(driver);
+		boolean isVisible = PageObjTM.state(State.Visible, By.xpath(XPathAgreeAllRadio), driver).wait(maxSeconds).check();
+		leaveIframe();
+		return isVisible;
 	}
 	
 	public void selectHyundai() {

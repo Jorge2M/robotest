@@ -58,6 +58,7 @@ public class Otras {
         
         dCtxSh.pais = francia;
         dCtxSh.idioma = francia_frances;
+        AccesoStpV.goToInitialURL(driver);
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);      
         SecMenusDesktopStpV.checkURLRedirectFicha(francia, dCtxSh, driver);
         

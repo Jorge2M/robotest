@@ -44,7 +44,12 @@ public class PageIdentificacion {
 
 	public static void inputUserPassword(String usuario, String password, WebDriver driver) {
 		By byInput = By.xpath(XPathInputUser);
-		driver.findElement(byInput).clear();
+		try {
+			driver.findElement(byInput).clear();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 		waitMillis(250);
 		driver.findElement(byInput).sendKeys(usuario);
 		waitMillis(250);
@@ -73,31 +78,32 @@ public class PageIdentificacion {
     public static void iniciarSesion(String user, String password, Channel channel, AppEcom app, WebDriver driver) {
         clickIniciarSesionAndWait(channel, app, driver);
         isVisibleUserUntil(10, driver);
+        //normalizeLoginForDefeatAkamai(channel, app, driver);
         PageIdentificacion.inputUserPassword(user, password, driver);
-        clickButtonEntrar_BypassAkamai(app, driver);
+        clickButtonEntrar(driver);
         ModalCambioPais.closeModalIfVisible(driver);
         ModalActPoliticaPrivacidad.clickOkIfVisible(driver);
         ModalLoyaltyAfterLogin.closeModalIfVisible(driver);
     }    
     
-    /**
-     * Permite superar el control de Akamai a nivel de las peticiones /login.faces?
-     */
-    private static void clickButtonEntrar_BypassAkamai(AppEcom app, WebDriver driver) {
-    	if (UtilsMangoTest.isEntornoPRO(app, driver)) {
-    		clickButtonEntrarSync(driver);
-    	} else {
-    		clickButtonEntrar(driver);
-    	}
-    }
-    
-    private static synchronized void clickButtonEntrarSync(WebDriver driver) {
-    	click(By.xpath(XPathSubmitButton), driver).waitLoadPage(10).exec(); 
-        if (isButtonEntrarVisible(driver)) {
-        	click(By.xpath(XPathSubmitButton), driver).type(javascript).waitLoadPage(10).exec();
-        }
-    }
-    private static synchronized void clickButtonEntrar(WebDriver driver) {
+//    /**
+//     * Permite superar el control de Akamai a nivel de las peticiones /login.faces?
+//     */
+//    private static void clickButtonEntrar_BypassAkamai(AppEcom app, WebDriver driver) {
+//    	if (UtilsMangoTest.isEntornoPRO(app, driver)) {
+//    		clickButtonEntrarSync(driver);
+//    	} else {
+//    		clickButtonEntrar(driver);
+//    	}
+//    }
+//    
+//    private static synchronized void clickButtonEntrarSync(WebDriver driver) {
+//    	click(By.xpath(XPathSubmitButton), driver).waitLoadPage(10).exec(); 
+//        if (isButtonEntrarVisible(driver)) {
+//        	click(By.xpath(XPathSubmitButton), driver).type(javascript).waitLoadPage(10).exec();
+//        }
+//    }
+    private static void clickButtonEntrar(WebDriver driver) {
     	click(By.xpath(XPathSubmitButton), driver).waitLoadPage(10).exec(); 
         if (isButtonEntrarVisible(driver)) {
         	click(By.xpath(XPathSubmitButton), driver).type(javascript).waitLoadPage(10).exec();

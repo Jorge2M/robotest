@@ -67,9 +67,11 @@ public class Reembolsos {
     public void REE001_configureReembolso() throws Exception {
     	DataCtxShop dCtxSh = getCtxShForTest();
     	WebDriver driver = TestMaker.getDriverTestCase();
-//        if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
-//            return;        
-//        }
+    	
+    	//TODO hasta que se solvente el https://jira.mangodev.net/jira/browse/GUIL-2311
+        if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
+            return;        
+        }
 
         boolean paisConSaldoCta = dCtxSh.pais.existsPagoStoreCredit();
         //dCtxSh.userConnected = Constantes.mail_standard;
@@ -105,10 +107,11 @@ public class Reembolsos {
     public void REE002_checkoutWithSaldoCta() throws Exception {
     	DataCtxShop dCtxSh = getCtxShForTest();
     	WebDriver driver = TestMaker.getDriverTestCase();
-        
-//        if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
-//            return;
-//        }
+
+    	//TODO hasta que se solvente el https://jira.mangodev.net/jira/browse/GUIL-2311
+        if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
+            return;
+        }
 
         //dCtxSh.userConnected = Constantes.mail_standard;
         dCtxSh.userConnected = "mng_test_SA_pruebaSaldo@mango.com";

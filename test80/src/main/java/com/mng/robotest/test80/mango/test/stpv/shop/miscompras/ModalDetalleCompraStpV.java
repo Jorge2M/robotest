@@ -7,16 +7,19 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.Ticket;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.ModalDetalleArticulo;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageDetalleCompra;
 
 public class ModalDetalleCompraStpV {
 	
 	private final PageDetalleCompra modalDetalleCompra;
+	private final ModalDetalleArticulo modalDetalleArticulo;
     private final ModalDetalleArticuloStpV modalDetalleArticuloStpV;
 	
 	private ModalDetalleCompraStpV(PageDetalleCompra section) {
 		this.modalDetalleCompra = section;
-		this.modalDetalleArticuloStpV = ModalDetalleArticuloStpV.getNew(modalDetalleCompra.getModalDetalleArticulo());
+		this.modalDetalleArticulo = modalDetalleCompra.getModalDetalleArticulo();
+		this.modalDetalleArticuloStpV = ModalDetalleArticuloStpV.getNew(modalDetalleArticulo);
 		
 	}
 	public static ModalDetalleCompraStpV getNew(PageDetalleCompra section) {
@@ -92,6 +95,10 @@ public class ModalDetalleCompraStpV {
 		description="Clickamos el link para volver a la lista de \"Mis compras\"",
 		expected="Volvemos a la página de Mis Compras")
 	public void gotoListaMisCompras() {
+		if (modalDetalleArticulo.isVisible(0)) {
+			modalDetalleArticulo.clickAspaForClose();
+			modalDetalleArticulo.isInvisible(2);
+		}
 		modalDetalleCompra.gotoListaMisCompras();
 	}
 }

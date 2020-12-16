@@ -10,13 +10,13 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	
-    private static String XPathDataTicket = "//div[@class[contains(.,'_1NsYW')]]"; //React
-    private static String XPathIdTicket = XPathDataTicket + "//span[@class[contains(.,'_1lSPL')]]"; //React
-    private static String XPathImporte = XPathDataTicket + "//div[@class[contains(.,'_3rubp')]]/span[2]"; //React
+    private static String XPathDataTicket = "//div[@class[contains(.,'dGt6h')]]"; //React
+    private static String XPathIdTicket = XPathDataTicket + "//*[@class[contains(.,'_3660d')]]"; //React
+    private static String XPathImporte = XPathDataTicket + "//div[@class[contains(.,'_3rNmb')]]/span[2]"; //React
     private static String XPathDireccionEnvio = XPathDataTicket + "/div[2]/div[2]"; //React 
     //private static String XPathCodigoBarrasImg = XPathDataTicket + "//div[@class='code']/img";
-    private static String XPathArticulo = "//div[@class[contains(.,'_2ykE3')]]"; //React
-    private static String XPathLinkToMisCompras = "//button[@class='QErEj']"; //React
+    private static String XPathArticulo = "//div[@class[contains(.,'_2K1yc')]]"; //React
+    private static String XPathLinkToMisCompras = "//button[@class='fN9KS']"; //React
     
     public PageDetalleCompraDesktop(Channel channel, WebDriver driver) {
     	super(channel, driver);
@@ -31,19 +31,19 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	}
 	private String getXPathDataArticulo(int position) {
 		String xpathArticulo = getXPathArticulo(position);
-		return xpathArticulo + "//div[@class[contains(.,'_2Ekfz')]]"; //React
+		return xpathArticulo + "//div[@class[contains(.,'_2NEwt')]]"; //React
 	}
     private String getXPathReferenciaArticulo(int posArticulo) {
         String xpathDataArticulo = getXPathDataArticulo(posArticulo);
-        return (xpathDataArticulo + "//div[@class[contains(.,'_2dAjA')]]"); //React
+        return (xpathDataArticulo + "//div[@class[contains(.,'sg-overline-small')]]"); //React
     }
     private String getXPathNombreArticulo(int posArticulo) {
         String xpathDataArticulo = getXPathDataArticulo(posArticulo);
-        return (xpathDataArticulo + "//span");
+        return (xpathDataArticulo + "//button");
     }    
     private String getXPathPrecioArticulo(int posArticulo) {
         String xpathDataArticulo = getXPathDataArticulo(posArticulo);
-        return (xpathDataArticulo + "//div[@class[contains(.,'_2luSv')]]//div[not(@class='_1HVSr')]"); //React
+        return (xpathDataArticulo + "//div[@class[contains(.,'_2H9YI')]]//div[not(@class='_1LGHV')]"); //React
     }
 
     @Override
@@ -74,7 +74,7 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
     @Override
     public String getIdTicket(TypeTicket typeTicket) {
         String dataNumTicket = driver.findElement(By.xpath(XPathIdTicket)).getText();
-        return (getDataRightFrom(": ", dataNumTicket));
+        return (getDataRightFrom(":", dataNumTicket));
     }
     @Override
     public boolean isVisibleIdTicket(int maxSeconds) {
@@ -82,7 +82,9 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
     }
     @Override
     public String getImporte() {
-        return (driver.findElement(By.xpath(XPathImporte)).getText());
+    	state(State.Visible, By.xpath(XPathImporte)).wait(2).check();
+        String importe = driver.findElement(By.xpath(XPathImporte)).getText();
+        return importe.replaceAll("[^\\d., ]", "");  //Eliminamos la divisa;
     }
     @Override
     public String getReferenciaArticulo(int posArticulo) {
@@ -117,15 +119,7 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
     public String getDireccionEnvio() {
         return (driver.findElement(By.xpath(XPathDireccionEnvio)).getText());
     }
-    
-    private String getDataRightFrom(String stringFrom, String data) {
-    	if (data.indexOf(stringFrom)>=0) { 
-	        int beginIndex = data.indexOf(stringFrom) + stringFrom.length();
-	        return (data.substring(beginIndex));
-    	}
-    	return data;
-    }
-    
+
 //    public boolean isVisibleCodigoBarrasImg() {
 //    	if (state(Visible, By.xpath(XPathCodigoBarrasImg)).check()) {
 //            //Consideramos que la imagen ha de tener unas dimensiones mínimas de 30x50 para ser visible

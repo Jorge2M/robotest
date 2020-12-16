@@ -8,14 +8,14 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalDetalleArticuloDesktop extends ModalDetalleArticulo {
 
-    private static String XPathModalInfoArticulo = "//div[@class[contains(.,'_1rkFK')]]"; //React
-    private static String XPathAspaForClose = "//button[@class[contains(.,'_2b7eU')]]"; //React
+    private static String XPathModalInfoArticulo = "//div[@class[contains(.,'_3lBiU')]]"; //React
+    private static String XPathAspaForClose = "//button[@class[contains(.,'A9wId')]]"; //React
     //private static String XPathBuscarTallaTiendaButton = "//div[@id='findInShop']";
-    private static String XPathContainerItem = "//div[@class[contains(.,'_2YDn_')]]"; //React
-    private static String XPathContainerDescription = XPathContainerItem + "//div[@class[contains(.,'_1rkFK')]]"; //React
+    private static String XPathContainerItem = "//div[@class[contains(.,'_2KZf3')]]"; //React
+    private static String XPathContainerDescription = XPathContainerItem + "//div[@class[contains(.,'_3pzeS')]]"; //React
     private static String XPathReferencia = XPathContainerDescription + "//div/div[3]";
     private static String XPathNombre = XPathContainerDescription + "//div[@class[contains(.,'sg-headline')]]";
-    private static String XPathPrecio = XPathContainerDescription + "//div/div[2]/div[not(@class='_1HVSr')]"; //React
+    private static String XPathPrecio = XPathContainerDescription + "//div/div[2]/div[not(@class='_1LGHV')]"; //React
     
     public ModalDetalleArticuloDesktop(WebDriver driver) {
     	super(driver);

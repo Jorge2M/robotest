@@ -66,7 +66,7 @@ public class SecBolsaButtonAndLinksNew {
 
 	public static boolean isVisibleButtonFavoritos(ActionFavButton actionButton, WebDriver driver) {
 		String xpathButtonFav = getXPathButtonFavoritos(actionButton);
-		return (state(Visible, By.xpath(xpathButtonFav), driver).wait(1).check());
+		return (state(Visible, By.xpath(xpathButtonFav), driver).wait(2).check());
 	}
 
 	public static void selectFavoritosButton(ActionFavButton actionButton, WebDriver driver) {
