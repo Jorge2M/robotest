@@ -24,7 +24,6 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
-import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIdentificacion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper;
@@ -36,6 +35,7 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigation
 import com.mng.robotest.test80.mango.test.stpv.votf.PageLoginVOTFStpV;
 import com.mng.robotest.test80.mango.test.stpv.votf.PageSelectIdiomaVOTFStpV;
 import com.mng.robotest.test80.mango.test.stpv.votf.PageSelectLineaVOTFStpV;
+import com.mng.robotest.test80.mango.test.utils.Test80;
 
 @SuppressWarnings({"static-access"})
 public class AccesoStpV {
@@ -43,6 +43,12 @@ public class AccesoStpV {
 	final static String tagNombrePais = "@TagNombrePais";
 	final static String tagLiteralIdioma = "@TagLiteralIdioma";
 	final static String tagRegistro = "@TagRegistro";
+	
+	public static void defaultAccess(WebDriver driver) throws Exception {
+    	DataCtxShop dCtxSh = Test80.getDefaultDataShop();
+    	accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+	}
+	
 	@Step (
 		description="Acceder a Mango (" + tagNombrePais + "/" + tagLiteralIdioma + ")<br>" + tagRegistro, 
 		expected="Se accede correctamente",

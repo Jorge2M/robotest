@@ -15,20 +15,29 @@ public class PageResultPago extends PageObjTM {
 	private final TypePago typePago;
 	private final Channel channel;
 	
-	public final static String XPathTextoConfirmacionPagoEstandar = "//h2[@class[contains(.,'fdHRp')]]"; //React
+	//public final static String XPathTextoConfirmacionPagoEstandar = "//h2[@class[contains(.,'fdHRp')]]"; //React
+	private final static String XpathTextConfirmacionPagoEstandar = "//*[@data-testid[contains(.,'confirmationText')]]";
+	
 	public final static String XPathTextoConfirmacionPagoContrareembolsoDesktop = "//span[@class[contains(.,'titulos pasos')]]"; 
 	public final static String XPathTextoConfirmacionPagoContrareembolsoMobil = "//div[@class='confirmation']";
 	
-    public final static String XPathDescubrirLoUltimoButton = "//div[@class[contains(.,'_2koW5')]]/button"; //React
-    public final static String XPathDataPedido = "//div[@class[contains(.,'_3HaKt')]]"; //React
+    //public final static String XPathDescubrirLoUltimoButton = "//div[@class[contains(.,'_2koW5')]]/button"; //React
+    public final static String XPathDescubrirLoUltimoButton = "//*[@data-testid[contains(.,'cta.goToMain')]]";
     
-    public final static String XPathCodigoPedidoEstandar = XPathDataPedido + "//div[@class[contains(.,'_1T2hc')]]/div[3]"; //React
+    //public final static String XPathDataPedido = "//div[@class[contains(.,'_3HaKt')]]"; //React
+    public final static String XPathDataPedido = "//*[@data-testid[contains(.,'purchaseData')]]";
+    
+    //public final static String XPathCodigoPedidoEstandar = XPathDataPedido + "//div[@class[contains(.,'_1T2hc')]]/div[3]"; //React
+    public final static String XPathCodigoPedidoEstandar = XPathDataPedido + "//*[@data-testid[contains(.,'purchaseIdRow')]]";
+    
     public final static String XPathCodigoPedidoContrareembolsoDesktop = "//div[@class='labels']//*[@class[contains(.,'data')] and string-length(text())=6]";
     public final static String XPathCodigoPedidoContrareembolsoMobil = "//div[@class[contains(.,'confirmation-summary-value')]]//p[string-length(text())=6]"; 
     
     public final static String XPathLinkMisCompras = "//a[@href[contains(.,'/mypurchases')]]";
     public final static String XPathLinkPedidos = "//a[@href[contains(.,'/account/orders')]]";
-    public final static String XPathBlockNewLoyaltyPoints = "//div[@class[contains(.,'_2h1Ha')]]"; //React
+    
+    //public final static String XPathBlockNewLoyaltyPoints = "//div[@class[contains(.,'_2h1Ha')]]"; //React
+    public final static String XPathBlockNewLoyaltyPoints = "//*[@data-testid[contains(.,'loyaltyPointsBlock')]]";
     
     public PageResultPago(TypePago typePago, Channel channel, WebDriver driver) {
     	super(driver);
@@ -46,7 +55,7 @@ public class PageResultPago extends PageObjTM {
     			return XPathTextoConfirmacionPagoContrareembolsoMobil;
     		}
     	default:
-    		return XPathTextoConfirmacionPagoEstandar;
+    		return XpathTextConfirmacionPagoEstandar;
     	}
     }
     

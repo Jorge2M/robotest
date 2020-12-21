@@ -44,12 +44,12 @@ public class GetterProducts extends JaxRsClient {
 	private final Integer numProducts;
 	private final Integer pagina;
 	private final WebDriver driver;
-	private final ProductList productList;
+	private ProductList productList;
 	
-	public enum MethodGetter {ApiRest, WebDriver}
+	public enum MethodGetter {ApiRest, WebDriver, Any}
 	
-	private GetterProducts(String url, String codigoPaisAlf, AppEcom app, LineaType lineaType, String seccion, 
-						   String galeria, String familia, Integer numProducts, Integer pagina, WebDriver driver) throws Exception {
+	private GetterProducts(String url, String codigoPaisAlf, AppEcom app, LineaType lineaType, String seccion, String galeria, 
+						   String familia, Integer numProducts, Integer pagina, MethodGetter method, WebDriver driver) throws Exception {
 		
 		urlForJavaCall = getUrlForJavaCall(url, driver);
 		urlForBrowserCall = getUrlBase(url);
@@ -95,10 +95,11 @@ public class GetterProducts extends JaxRsClient {
 	public ProductList getProductList(MethodGetter method) throws Exception {
 		switch (method) {
 		case ApiRest:
-			getProductsFromApiRest();
+			return getProductsFromApiRest();
 		case WebDriver:
-		default:
 			return getProductsFromWebDriver();
+		default:
+			return getProductList();
 		}
 	}
 	
@@ -265,6 +266,7 @@ public class GetterProducts extends JaxRsClient {
 		private String familia = "14";
 		private Integer numProducts = 40;
 		private Integer pagina = 1;
+		private MethodGetter method = MethodGetter.Any;
 
 		public Builder(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 			this.url = ((InputParamsMango)TestMaker.getTestCase().getInputParamsSuite()).getUrlBase();
@@ -305,9 +307,13 @@ public class GetterProducts extends JaxRsClient {
 			this.numProducts = numProducts;
 			return this;
 		}
+		public Builder method(MethodGetter method) {
+			this.method = method;
+			return this;
+		}
 		public GetterProducts build() throws Exception {
 			return (
-				new GetterProducts(url, codigoPaisAlf, app, lineaType, seccion, galeria, familia, numProducts, pagina, driver));
+				new GetterProducts(url, codigoPaisAlf, app, lineaType, seccion, galeria, familia, numProducts, pagina, method, driver));
 		}
 	}
 }

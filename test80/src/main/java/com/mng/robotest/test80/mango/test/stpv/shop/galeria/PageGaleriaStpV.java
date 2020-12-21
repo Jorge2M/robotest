@@ -196,6 +196,12 @@ public class PageGaleriaStpV {
         pageGaleriaDesktop.selectTallaArticleNotAvalaible();
     }
     
+    public DataScroll scrollFromFirstPage(DataCtxShop dCtxSh) throws Exception {
+    	DataForScrollStep data = new DataForScrollStep();
+    	data.numPageToScroll = 99;
+    	return scrollFromFirstPage(data, dCtxSh);
+    }
+    
     /**
      * Escrollamos hasta llegar a la página indicada en toPage
      * @param toPage indica el número de página en el que nos queremos posicionar. Si es PageGaleria.scrollToLast asumimos que queremos llegar hasta el final del catálogo

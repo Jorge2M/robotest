@@ -26,6 +26,7 @@ import com.mng.robotest.test80.mango.test.appshop.Loyalty;
 import com.mng.robotest.test80.mango.test.appshop.MiCuenta;
 import com.mng.robotest.test80.mango.test.appshop.Otras;
 import com.mng.robotest.test80.mango.test.appshop.PaisIdioma;
+import com.mng.robotest.test80.mango.test.appshop.Personalizacion;
 import com.mng.robotest.test80.mango.test.appshop.Reembolsos;
 import com.mng.robotest.test80.mango.test.appshop.Registro;
 import com.mng.robotest.test80.mango.test.appshop.SEO;
@@ -75,7 +76,8 @@ public class SmokeTestSuite extends SuiteMaker {
 			MiCuenta.class,
 			Favoritos.class,
 			Reembolsos.class,
-			Loyalty.class);
+			Loyalty.class,
+			Personalizacion.class);
 	}
 	
 	public static class MyDriverMaker extends DriverMaker {
