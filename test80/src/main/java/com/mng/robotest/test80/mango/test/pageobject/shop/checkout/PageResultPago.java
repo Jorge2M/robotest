@@ -25,7 +25,7 @@ public class PageResultPago extends PageObjTM {
     public final static String XPathDescubrirLoUltimoButton = "//*[@data-testid[contains(.,'cta.goToMain')]]";
     
     //public final static String XPathDataPedido = "//div[@class[contains(.,'_3HaKt')]]"; //React
-    public final static String XPathDataPedido = "//*[@data-testid[contains(.,'purchaseData')]]";
+    public final static String XPathDataPedido = "//*[@data-testid[contains(.,'purchaseData')]]"; 
     
     //public final static String XPathCodigoPedidoEstandar = XPathDataPedido + "//div[@class[contains(.,'_1T2hc')]]/div[3]"; //React
     public final static String XPathCodigoPedidoEstandar = XPathDataPedido + "//*[@data-testid[contains(.,'purchaseIdRow')]]";
