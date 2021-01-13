@@ -67,7 +67,5 @@ public class Footer {
         	
             driver.get(urlInitialPage);
         }
-        
-        Bolsa.checkCookies(driver);
     }
 }

@@ -10,6 +10,7 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
+import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test80.mango.test.stpv.otras.GoogleStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.PageIniShopJaponStpV;
@@ -61,8 +62,6 @@ public class Otras {
         AccesoStpV.goToInitialURL(driver);
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);      
         SecMenusDesktopStpV.checkURLRedirectFicha(francia, dCtxSh, driver);
-        
-        Bolsa.checkCookies(driver);
     }
 	
     
@@ -74,8 +73,6 @@ public class Otras {
     	GoogleStpV googleStpV = new GoogleStpV(driver);
         googleStpV.accessGoogleAndSearchMango();
         googleStpV.selectFirstLinkSinPublicidad();
-        
-        Bolsa.checkCookies(driver);
     }
     
     @Test (
@@ -89,8 +86,6 @@ public class Otras {
         dCtxSh.idioma = castellano;
         dCtxSh.userRegistered = false;
         AccesoStpV.accesoPRYCambioPais(dCtxSh, francia, francia_frances, driver);
-        
-        Bolsa.checkCookies(driver);
     }
 
     /**
@@ -148,8 +143,6 @@ public class Otras {
         dCtxSh.pais = francia;
         dCtxSh.idioma = francia_frances;
         (new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver)).cambioPais(dCtxSh);
-        
-        Bolsa.checkCookies(driver);
     }
 
     
@@ -165,10 +158,9 @@ public class Otras {
 
         dCtxSh.pais = japon;
         dCtxSh.idioma = japones;
+        PagePrehome.previousAccessShopSteps(dCtxSh, driver);
         PagePrehomeStpV.seleccionPaisIdioma(dCtxSh, driver);
         PagePrehomeStpV.entradaShopGivenPaisSeleccionado(japon, japones, dCtxSh.channel, driver);
         PageIniShopJaponStpV.validaPageIniJapon(2, driver);
-        
-        Bolsa.checkCookies(driver);
     }	
 }

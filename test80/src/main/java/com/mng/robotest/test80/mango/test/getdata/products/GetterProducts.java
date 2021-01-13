@@ -27,7 +27,9 @@ import com.mng.robotest.test80.mango.test.getdata.products.data.GarmentDetails;
 import com.mng.robotest.test80.mango.test.getdata.products.data.ProductList;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment.Article;
 import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 
 public class GetterProducts extends JaxRsClient {
@@ -44,6 +46,7 @@ public class GetterProducts extends JaxRsClient {
 	private final Integer numProducts;
 	private final Integer pagina;
 	private final WebDriver driver;
+	private final MethodGetter method;
 	private ProductList productList;
 	
 	public enum MethodGetter {ApiRest, WebDriver, Any}
@@ -69,6 +72,7 @@ public class GetterProducts extends JaxRsClient {
 		this.familia = familia;
 		this.numProducts = numProducts;
 		this.pagina = pagina;
+		this.method = method;
 		this.driver = driver;
 		this.productList = getProductList();
 	}
@@ -92,23 +96,19 @@ public class GetterProducts extends JaxRsClient {
 		}
 	}
 	
-	public ProductList getProductList(MethodGetter method) throws Exception {
+	private ProductList getProductList() throws Exception {
 		switch (method) {
 		case ApiRest:
 			return getProductsFromApiRest();
 		case WebDriver:
 			return getProductsFromWebDriver();
 		default:
-			return getProductList();
+			ProductList productList = getProductsFromApiRest();
+			if (productList==null && driver!=null) {
+				return getProductsFromWebDriver();
+			}
+			return productList;
 		}
-	}
-	
-	private ProductList getProductList() throws Exception {
-		ProductList productList = getProductsFromApiRest();
-		if (productList==null && driver!=null) {
-			return getProductsFromWebDriver();
-		}
-		return productList;
 	}
 
 	private String getNameCloudtestFromCookie(WebDriver driver) {
@@ -161,7 +161,10 @@ public class GetterProducts extends JaxRsClient {
 		String nameTab = "GetProducts";
 		String idWindow = driver.getWindowHandle();
 		SeleniumUtils.loadUrlInAnotherTabTitle(urlGetProducts, nameTab, driver);
-		String body = driver.findElement(By.xpath("//body/pre")).getText();
+		if (PageObjTM.state(State.Visible, By.id("rawdata-tab"), driver).check()) {
+			PageObjTM.click(By.id("rawdata-tab"), driver).exec();
+		}
+		String body = driver.findElement(By.xpath("//body//pre")).getText();
 		SeleniumUtils.closeTabByTitleAndReturnToWidow(nameTab, idWindow, driver);
 		
 		return getProductsFromJson(body);
@@ -172,6 +175,7 @@ public class GetterProducts extends JaxRsClient {
 		productsJson = productsJson.replace("\"garments\":{", "\"garments\":[");
 		productsJson = productsJson.replace("}}}]", "}]}]");
 		productsJson = productsJson.replaceAll("\"g[0-9]{8}(..){0,1}\":", "");
+		productsJson = productsJson.replaceAll("\"g[0-9]{10}(..){0,1}\":", "");
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

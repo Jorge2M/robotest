@@ -33,7 +33,7 @@ public class PagoTarjetaIntegrada extends PagoStpV {
             switch (dataPedido.getPago().getTipotarjEnum()) {
             case VISAD3D:
             	PageD3DLoginStpV pageD3DLoginStpV = new PageD3DLoginStpV(driver);
-                boolean isD3D = pageD3DLoginStpV.validateIsD3D(1);
+                boolean isD3D = pageD3DLoginStpV.validateIsD3D(2);
                 pageD3DLoginStpV.isImporteVisible(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais());
                 dataPedido.setCodtipopago("Y");
                 if (isD3D) {

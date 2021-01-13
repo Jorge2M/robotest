@@ -10,7 +10,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecSearchMobilShop extends PageObjTM implements SecSearch {
 	
-	private final static String XPathInputBuscador = "//div[@class='search-component']//form[not(@class)]/input[@class='search-input']";
+	private final static String XPathInputBuscador = "//div[@class='search-component']//form[not(@class)]/input[@class[contains(.,'search-input')]]";
 	private final static String XPathCancelarLink = "//div[@class[contains(.,'search-cancel')]]";
 	
 	private SecSearchMobilShop(WebDriver driver) {

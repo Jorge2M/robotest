@@ -47,7 +47,7 @@
 <!ENTITY TPV-093 "<tpv id='093' clase='Falcon'             estado='0;4' notificaciones='s'/>">
 <!ENTITY TPV-094 "<tpv id='094' clase='Paypal'             estado='0;4' notificaciones='n'/>">
 <!ENTITY TPV-098 "<tpv id='098' clase='Paypal'             estado='0;4' notificaciones='n'/>">
-<!ENTITY TPV-100 "<tpv id='100' clase='COD'                estado='0'   notificaciones='n'/>">
+<!ENTITY TPV-100 "<tpv id='100' clase='COD'                estado='0;4'	notificaciones='n'/>">
 <!ENTITY TPV-101 "<tpv id='101' clase='Yandex'    		   estado='0;4' notificaciones='n'/>">
 <!ENTITY TPV-102 "<tpv id='102' clase='TransferenciaES'    estado='4'   notificaciones='n'/>">
 <!ENTITY TPV-104 "<tpv id='104' clase='TransferenciaIC'    estado='4'   notificaciones='n'/>">
@@ -129,7 +129,7 @@
 <!ENTITY TPV-360 "<tpv id='360' clase='GMOVisa'            estado='0'   notificaciones='n'/>">
 <!ENTITY TPV-361 "<tpv id='361' clase='GMODiners'          estado='0'   notificaciones='n'/>">
 <!ENTITY TPV-362 "<tpv id='362' clase='GMO'                estado='0'   notificaciones='n'/>">
-<!ENTITY TPV-364 "<tpv id='364' clase='ProcessOut'         estado='0'   notificaciones='n'/>">
+<!ENTITY TPV-364 "<tpv id='364' clase='ProcessOut'         estado='0;4'	notificaciones='n'/>">
 <!ENTITY TPV-390 "<tpv id='390' clase='Falcon'             estado='0;4' notificaciones='s'/>">
 <!ENTITY TPV-393 "<tpv id='393' clase='Falcon'             estado='0;4' notificaciones='s'/>">
 <!ENTITY TPV-394 "<tpv id='394' clase='Falcon'             estado='0;4' notificaciones='s'/>">
@@ -200,6 +200,9 @@
 <!ENTITY TPV-566 "<tpv id='566' clase='Falcon'             estado='0;4' notificaciones='s'/>">
 <!ENTITY TPV-568 "<tpv id='568' clase='Falcon'             estado='0;4' notificaciones='s'/>">
 <!ENTITY TPV-571 "<tpv id='571' clase='Adyen'              estado='0;4' notificaciones='s'/>">
+<!ENTITY TPV-573 "<tpv id='573' clase='Amex'               estado='0;4' notificaciones='s'/>">
+<!ENTITY TPV-574 "<tpv id='574' clase='Falcon'             estado='0;4' notificaciones='s'/>">
+<!ENTITY TPV-576 "<tpv id='576' clase='Falcon'             estado='0;4' notificaciones='s'/>">
 <!ENTITY TPV-600 "<tpv id='600' clase='Paypal'             estado='0;4' notificaciones='n'/>">
 <!ENTITY TPV-601 "<tpv id='601' clase='Paypal'             estado='0;4' notificaciones='n'/>">
 <!ENTITY TPV-602 "<tpv id='602' clase='Paypal'             estado='0;4' notificaciones='n'/>">
@@ -215,6 +218,7 @@
 <!ENTITY TPV-612 "<tpv id='612' clase='Paypal'             estado='0;4' notificaciones='n'/>">
 <!ENTITY TPV-613 "<tpv id='613' clase='Paypal'             estado='0;4' notificaciones='n'/>">
 <!ENTITY TPV-614 "<tpv id='614' clase='Paypal'             estado='0;4' notificaciones='n'/>">
+<!ENTITY TPV-615 "<tpv id='615' clase='Paypal'             estado='0;4' notificaciones='n'/>">
 <!ENTITY TPV-803 "<tpv id='803' clase='Storecredit'        estado='0;4' notificaciones='n'/>">
 <!ENTITY TPV-999 "<tpv id='999' clase='Storecredit'        estado='0;4' notificaciones='n'/>">
 ]>
@@ -357,7 +361,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-515;</pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-549;</pago>
 <pago 
 	type="Eps" tiendas="shop,outlet" empleado="s"
 	nombre="EPS" testpasarela='s' testpago='s'>&TPV-571;</pago>
@@ -369,7 +373,7 @@
 	nombre="Rechnung" testpasarela='s' testpago='s'>&TPV-202;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-515;</pago>
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-549;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-515;</pago>
@@ -794,7 +798,7 @@
 	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='POSTNORD' tipoenviooutlet='STANDARD' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-515;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA/DANKORT" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-543;</pago>
+	nombre="VISA/DANKORT" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-576;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s'>&TPV-543;</pago>
@@ -914,10 +918,10 @@
 	nombre="KLARNA ACCOUNT" testpasarela='s' testpago='s' numperklarna="190122-829F" telefklarna = "0401234567" nomklarna="Testperson-fi Approved" direcklarna="Kiväärikatu 10" provinklarna="28100 Pori" searchaddklarna="n">&TPV-212;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='POSTNORD' tipoenviooutlet='STANDARD' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-515;</pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='POSTNORD' tipoenviooutlet='STANDARD' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-549;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-515;</pago>
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-549;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-515;</pago>
@@ -1031,10 +1035,10 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='PACKSTATION' tipoenviooutlet='PACKSTATION' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-515;</pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='PACKSTATION' tipoenviooutlet='PACKSTATION' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-549;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
-	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-515;</pago>
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-549;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-515;</pago>
@@ -2071,10 +2075,10 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-515;</pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-549;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-515;</pago>
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-549;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-515;</pago>
@@ -2288,10 +2292,10 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-515;</pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-549;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
-	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-515;</pago>
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-549;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-515;</pago>
@@ -2414,10 +2418,10 @@
 	nombre="STORECREDIT" testpasarela='s' testpago='s' tipoenvioshop='STANDARD'>&TPV-999;</pago> --> <!-- Pago Store Credit que aparece cuando el usuario tiene Saldo en Cuenta (y desaparecen el resto de métodos de pago) -->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
-	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='STANDARD' tipoenviooutlet='STANDARD' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-515;</pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='STANDARD' tipoenviooutlet='STANDARD' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-549;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
-	nombre="MASTERCARD" testpasarela='s' testpago='s' tipoenvioshop='TIENDA' tipoenviooutlet='STANDARD' provinciaenvio="BARCELONA" tipotarj='VISAESTANDAR' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737">&TPV-515;</pago>
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipoenvioshop='TIENDA' tipoenviooutlet='STANDARD' provinciaenvio="BARCELONA" tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-549;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-515;</pago>
@@ -3399,19 +3403,19 @@
 -->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-561;</pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-574;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-561;</pago>
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-574;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-561;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="03" anycad="2030" cvc="7373">&TPV-550;</pago>
+	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="03" anycad="2030" cvc="7373">&TPV-573;</pago>
 <pago 
 	type="Paypal" tiendas="shop,outlet"
-	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-610;</pago>
+	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-615;</pago>
 <!-- Mercadopago x Transferencia -->
 <!-- 
 <pago 
@@ -5399,10 +5403,9 @@
 <pago 
 	type="ProcessOut" tiendas="shop,outlet"
 	nombre="Mada" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4242424242424242" mescad="03" anycad="2030" cvc="100">&TPV-364;</pago>
-<!-- 
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
-	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-161;</pago>-->
+	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-161;</pago>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>

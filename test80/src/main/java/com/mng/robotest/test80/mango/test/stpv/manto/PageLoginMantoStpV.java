@@ -21,7 +21,7 @@ public class PageLoginMantoStpV {
 		if (!PageSelTda.isPage(driver)) {
 			identFromJasigCasPage(usrManto, passManto, driver);
 		}
-		checkIsPageSelectTienda(driver);
+		checkIsPageSelectTienda(5, driver);
 	}
 	
 	@Step (
@@ -48,9 +48,9 @@ public class PageLoginMantoStpV {
 	}
 
 	@Validation (
-		description="Aparece la página de selección de la tienda",
+		description="Aparece la página de selección de la tienda (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
-	private static boolean checkIsPageSelectTienda(WebDriver driver) {
-		return (PageSelTda.isPage(driver));
+	private static boolean checkIsPageSelectTienda(int maxSeconds, WebDriver driver) {
+		return (PageSelTda.isPage(maxSeconds, driver));
 	}
 }

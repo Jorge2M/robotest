@@ -22,14 +22,8 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
-import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
-import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 
-import java.util.Set;
-
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
 public class Bolsa {
@@ -83,8 +77,6 @@ public class Bolsa {
         DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userRegistered = false;
         BOR005_6_Gest_Prod_Bolsa(dCtxSh, driver);
-        
-        Bolsa.checkCookies(driver);
     }
 
     @Test (
@@ -117,8 +109,6 @@ public class Bolsa {
         dCtxPago.setFTCkout(FTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
         PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, driver);
-        
-        checkCookies(driver);
     }
 
 	@Test (
@@ -132,8 +122,6 @@ public class Bolsa {
 		dCtxSh.passwordUser = userShop.password;
 		dCtxSh.userRegistered = true;
 		BOR005_6_Gest_Prod_Bolsa(dCtxSh, driver);
-		
-        checkCookies(driver);
 	}
 
     public static void BOR005_6_Gest_Prod_Bolsa(DataCtxShop dCtxSh, WebDriver driver) 
@@ -148,22 +136,4 @@ public class Bolsa {
         SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, driver);
         SecBolsaStpV.click1erArticuloBolsa(dataBag, dCtxSh.appE, dCtxSh.channel, driver);
     }
-    
-//	@Validation
-    public static void checkCookies(WebDriver driver) {
-//		Set<Cookie> listCookies = driver.manage().getCookies();
-//		ChecksTM validations = ChecksTM.getNew();
-//	 	validations.add(
-//			"Tenemos una lista de cookies no vacía<br>" + getCookiesStr(listCookies),
-//			listCookies.size()>0, State.Warn); 
-//	 	return validations;
-    }
-	
-	private static String getCookiesStr(Set<Cookie> listCookies) {
-		String cookiesStr = "";
-		for (Cookie cookie : listCookies) {
-			cookiesStr+=cookie.toJson() + "<br>";
-		}
-		return cookiesStr;
-	}
 }

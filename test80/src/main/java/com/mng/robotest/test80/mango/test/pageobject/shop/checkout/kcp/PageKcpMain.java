@@ -9,7 +9,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 
 public class PageKcpMain extends PageObjTM {
 
-	private static final String XPathAgreeAllRadio = "//input[@id='chk_all']";
+	private static final String XPathAgreeAllRadio = "//input[@id='chk_agree1']";
 	private static final String XPathHyundaiBlock = "//span[@class[contains(.,'btnCard')]]//span[text()[contains(.,'현대')]]";
 	private static final String XPathSelectInstallment = "//select[@id='select-month']";
 	private static final String XPathNextButton = "//button[@id='cardNext']";
@@ -34,7 +34,7 @@ public class PageKcpMain extends PageObjTM {
 	
 	public boolean isVisibleTermAndConditions(int maxSeconds) {
 		goToIframe(driver);
-		boolean isVisible = PageObjTM.state(State.Visible, By.xpath(XPathAgreeAllRadio), driver).wait(maxSeconds).check();
+		boolean isVisible = PageObjTM.state(State.Present, By.xpath(XPathAgreeAllRadio), driver).wait(maxSeconds).check();
 		leaveIframe();
 		return isVisible;
 	}

@@ -199,6 +199,7 @@ public class PageGaleriaStpV {
     public DataScroll scrollFromFirstPage(DataCtxShop dCtxSh) throws Exception {
     	DataForScrollStep data = new DataForScrollStep();
     	data.numPageToScroll = 99;
+    	data.ordenacionExpected = FilterOrdenacion.NOordenado;
     	return scrollFromFirstPage(data, dCtxSh);
     }
     

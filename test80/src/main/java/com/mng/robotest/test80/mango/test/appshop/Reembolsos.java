@@ -94,8 +94,6 @@ public class Reembolsos {
                 PageReembolsosStpV.testConfTransferencia(driver);
             }
         }     
-        
-        Bolsa.checkCookies(driver);
     }
     
     /**
@@ -181,8 +179,6 @@ public class Reembolsos {
 	    		CheckPedido.consultarPedido);
 	        DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
 	        PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
-	        
-	        Bolsa.checkCookies(driver);
         }
     }
 }

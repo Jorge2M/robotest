@@ -9,14 +9,16 @@ public class TiendaMantoEnum {
 		AlemaniaShop ("Alemania", "004", AppEcom.shop),
 		USAShop ("USA New Jersey", "400", AppEcom.shop),
 		USAOutlet ("Outlet USA", "400", AppEcom.outlet),
-		RusiaShop ("Rusia", "075", AppEcom.shop),
+		RusiaShop ("Rusia (Major)", "084", AppEcom.shop),
 		RusiaOutlet ("Outlet Rusia", "075", AppEcom.outlet),
 		TurquiaShop ("Turquía Estambul", "052", AppEcom.shop),
 		AlhokairShop("Alhokair", "632", AppEcom.shop),
-		TurquiaOutlet ("Outlet Turquia", "052", AppEcom.outlet),
+		//TurquiaOutlet ("Outlet Turquia", "052", AppEcom.outlet),
 		ChinaShop ("China Shangai", "720", AppEcom.shop),
-		ColombiaShop ("Colombia", "480", AppEcom.shop),
-		MexicoShop("Mexico", "412", AppEcom.shop);
+		ColombiaShop ("Mercadeo deposit", "480", AppEcom.shop),
+		MercadoShop("Mercadeo Deposit", "481", AppEcom.shop),
+		MexicoShop("Mexico", "412", AppEcom.shop),
+		PhilippinesShop("Trimarket Philippines", "708", AppEcom.shop);
 		
 		public String litPantManto = "";
 		public String codAlmacen = "";

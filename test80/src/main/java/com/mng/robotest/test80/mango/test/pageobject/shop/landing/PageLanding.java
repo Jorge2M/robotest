@@ -130,8 +130,19 @@ public class PageLanding extends PageObjTM {
                      "//*[@class='celda'])")).check());
     }
     
-    public boolean isSomeElementVisibleInPage(List<Element> elementsCanBeContained, AppEcom app) 
+    public boolean isSomeElementVisibleInPage(List<Element> elementsCanBeContained, AppEcom app, int maxSeconds) 
     throws Exception {
+    	for (int i=0; i<maxSeconds; i++) {
+    		if (isSomeElementVisibleInPage(elementsCanBeContained, app)) {
+    			return true;
+    		}
+    		PageObjTM.waitMillis(1000);
+    	}
+    	return false;
+    }
+    	
+	private boolean isSomeElementVisibleInPage(List<Element> elementsCanBeContained, AppEcom app) 
+	throws Exception {
     	for (Element element : elementsCanBeContained) {
     		boolean elementContained = false;
     		switch (element) {

@@ -9,6 +9,7 @@ public class Garment {
 	private String garmentId;
 	private int stock;
 	private List<Color> colors;
+	private AnalyticsEventsData analyticsEventsData;
 	
 	private ValePais valePais = null;
 
@@ -121,5 +122,12 @@ public class Garment {
 		public void setSize(Size size) {
 			this.size = size;
 		}
+	}
+
+	public AnalyticsEventsData getAnalyticsEventsData() {
+		return analyticsEventsData;
+	}
+	public void setAnalyticsEventData(AnalyticsEventsData analyticsEventsData) {
+		this.analyticsEventsData = analyticsEventsData;
 	}
 }

@@ -46,7 +46,5 @@ public class SEO {
 		URI uriBase = new URI(urlBase);
 		String urlSitemap = urlBase.replace(uriBase.getPath(), "") + "/" + "sitemap.xml";
 		BrowserStpV.inputSitemapURLandValidate(urlSitemap, driver);
-		
-        Bolsa.checkCookies(driver);
 	}
 }

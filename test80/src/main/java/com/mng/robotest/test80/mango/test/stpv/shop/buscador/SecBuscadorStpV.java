@@ -9,6 +9,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
+import com.mng.robotest.test80.mango.test.pageobject.shop.PageErrorBusqueda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria.From;
@@ -48,10 +49,15 @@ public class SecBuscadorStpV {
 	public void busquedaCategoriaProducto(String categoriaABuscar, boolean categoriaExiste) throws Exception {
 		SecCabecera.buscarTexto(categoriaABuscar, channel, app, driver);
 		SeleniumUtils.waitForPageLoaded(driver);    
-		if (categoriaExiste || app==AppEcom.outlet) { 
+		if (categoriaExiste) { 
 			areProducts(categoriaABuscar, 3);
 		} else {
-			areProducts(3);
+//TODO cuando activen la versión definitiva del buscador habrá que invocar siempre a areProducts
+//			if (app!=AppEcom.outlet) {
+//				areProducts(3);
+//			} else {
+				appearsSearchErrorPage(categoriaABuscar, driver);
+//			}
 		}
 
 		//Validaciones estándar. 
@@ -75,5 +81,12 @@ public class SecBuscadorStpV {
 		level=State.Defect)
 	private boolean areProducts(int maxSeconds) {
 		return pageGaleria.isVisibleArticleUntil(1, maxSeconds);
+	}
+	
+	@Validation (
+		description="Aparece la página de error en la búsqueda con el encabezado <b>#{categoriaABuscar}</b>",
+		level=State.Warn)
+	private static boolean appearsSearchErrorPage(String categoriaABuscar, WebDriver driver) {
+		return (PageErrorBusqueda.isCabeceraResBusqueda(driver, categoriaABuscar));
 	}
 }

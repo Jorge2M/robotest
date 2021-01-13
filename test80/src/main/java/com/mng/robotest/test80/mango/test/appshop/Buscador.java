@@ -13,7 +13,10 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.buscador.SecBuscadorStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.home.PageHomeMarcasStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
+import com.mng.robotest.test80.mango.test.utils.testab.TestABOptimizeImpl;
 import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.service.testab.TestABactData;
+import com.github.jorge2m.testmaker.service.testab.manager.TestABmanager;
 
 public class Buscador {
 
@@ -36,9 +39,9 @@ public class Buscador {
         
         secBuscadorStpV.searchArticulo(product);
         secBuscadorStpV.busquedaCategoriaProducto(categoriaProdExistente, true);
-        secBuscadorStpV.busquedaCategoriaProducto(catProdInexistente, false);
         
-        Bolsa.checkCookies(driver);
+        //TestABmanager.activateTestAB(TestABactData.getNew(TestABOptimizeImpl.ES_SHOP_XXX_EMP_vs_FH_Search_Desktop, 1), dCtxSh.channel, dCtxSh.appE, driver);
+        secBuscadorStpV.busquedaCategoriaProducto(catProdInexistente, false);
     }
     
 	private DataCtxShop getCtxShForTest() throws Exception {

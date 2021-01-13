@@ -21,6 +21,6 @@ public class PagoKCP extends PagoStpV {
         PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, driver);
         PageKcpMainStpV pageKcpMainStpV = new PageKcpMainStpV(driver);
         pageKcpMainStpV.isPage(30);
-        pageKcpMainStpV.isPresentTermAndConditions(20);
+        pageKcpMainStpV.isPresentTermAndConditions(30);
     }    
 }

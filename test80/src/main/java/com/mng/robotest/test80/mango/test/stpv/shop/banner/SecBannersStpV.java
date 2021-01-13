@@ -82,7 +82,7 @@ public class SecBannersStpV {
                 break;
             default:                
             case Otros:
-                validacionesBannerEstandar(channel, app);
+                validacionesBannerEstandar(2, channel, app);
                 break;
             }
         }
@@ -122,14 +122,23 @@ public class SecBannersStpV {
 
 	@Validation (
 		description=
-			"Aparece una página con alguno de los siguientes elementos:<br>" + 
+			"Esperamos hasta #{maxSeconds} segundos a que aparezca una página con alguno de los siguientes elementos:<br>" + 
 			"- Secciones<br>" + 
 			"- Galería<br>" + 
 			"- Banners<br>" + 
 			"- Ficha<br>" +
 			"- Bloque de contenido con imágenes o página acceso",
 		level=State.Warn)
-	public boolean validacionesBannerEstandar(Channel channel, AppEcom app) throws Exception {
+	public boolean validacionesBannerEstandar(int maxSeconds, Channel channel, AppEcom app) throws Exception {
+		for (int i=0; i<maxSeconds; i++) {
+			if (validacionesBannerEstandar(channel, app)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean validacionesBannerEstandar(Channel channel, AppEcom app) throws Exception {
 		if (!pageLanding.haySecc_Art_Banners(app)) {
 			if (!pageLanding.hayImgsEnContenido()) {
 				PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);

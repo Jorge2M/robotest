@@ -46,15 +46,15 @@ public class PageSelTdaMantoStpV {
 		return (PageMenusManto.isPage(driver));
 	}
 
-    /**
-     * Accede a la tienda asociada al almacén (sólo si no estamos en ella ya)
-     */
-    public static void goToTiendaPais(String codigoAlmacen, String codigoPais,  AppEcom appE, WebDriver driver) 
-    throws Exception {
-        String tiendaActual = SecCabecera.getLitTienda(driver);
-        TiendaManto tiendaToGo = TiendaManto.getTienda(codigoAlmacen, codigoPais, appE);
-        if (!tiendaActual.contains(tiendaToGo.litPantManto)) {
-            selectTienda(codigoAlmacen, codigoPais, appE, driver);
-        }
-    }
+//    /**
+//     * Accede a la tienda asociada al almacén (sólo si no estamos en ella ya)
+//     */
+//    public static void goToTiendaPais(String codigoAlmacen, String codigoPais,  AppEcom appE, WebDriver driver) 
+//    throws Exception {
+//        String tiendaActual = SecCabecera.getLitTienda(driver);
+//        TiendaManto tiendaToGo = TiendaManto.getTienda(codigoAlmacen, codigoPais, appE);
+//        if (!tiendaActual.contains(tiendaToGo.litPantManto)) {
+//            selectTienda(codigoAlmacen, codigoPais, appE, driver);
+//        }
+//    }
 }

@@ -25,7 +25,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegis
 
 public class PageRegistroIni extends PageObjTM {
 	
-	private static String XPathPestanyaRegistro = "//div[@class[contains(.,'registerTab')]]";
+	private static String XPathPestanyaRegistro = "//*[@class[contains(.,'registerTab')]]";
 	private static String XPathHeaderNews = "//div[@class[contains(.,'registerModal')]]//div[@class='info']";
 	
     private static String XPathNewsletterTitle = XPathHeaderNews + "//p[@class[contains(.,'newsletter-register-title')]]";

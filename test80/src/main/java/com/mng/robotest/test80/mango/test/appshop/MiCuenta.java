@@ -109,8 +109,6 @@ public class MiCuenta implements Serializable {
             PageDevolucionesStpV.solicitarRegogidaGratuitaADomicilio(driver);
             pageMiCuentaStpV.goToReembolsos();
         }
-        
-        Bolsa.checkCookies(driver);
     }
     
     /**
@@ -160,7 +158,5 @@ public class MiCuenta implements Serializable {
         pageMisComprasStpV.validateIsCompraOfType(TypeTicket.Tienda, 3);
         pageMisComprasStpV.selectCompraTienda(1);
         pageMisComprasStpV.clickDetalleArticulo(1);
-        
-        Bolsa.checkCookies(driver);
     }
 }

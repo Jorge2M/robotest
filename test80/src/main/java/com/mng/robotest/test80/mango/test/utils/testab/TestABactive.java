@@ -25,6 +25,8 @@ public class TestABactive {
 		//listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.SHOP_260_Menu_Mobile_Nuevo_Diseño, 0));
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.PLP_Desktop_Navigation_Filters, 0));
 		
+		//listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.ES_SHOP_XXX_EMP_vs_FH_Search_Desktop, 0));
+		
 		TestABmanager.activateTestsAB(listTestABsToActivate, channel, app, driver);
 	}
 }

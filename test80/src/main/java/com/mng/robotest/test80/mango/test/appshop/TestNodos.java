@@ -128,8 +128,6 @@ public class TestNodos implements Serializable {
         secMenusDesktopStpV.countSaveMenusEntorno (LineaType.violeta, null, nodo.getIp(), autAddr);
         
         this.nodo.setTested(true);
-        
-        Bolsa.checkCookies(driver);
     }
     
     /**

@@ -124,8 +124,6 @@ public class FichaProducto {
         }
         
         pageFichaStpv.selectAnadirALaBolsaTallaPrevSiSelected(articulo, dCtxSh);
-        
-        Bolsa.checkCookies(driver);
     }
 
     @SuppressWarnings("static-access")
@@ -183,8 +181,6 @@ public class FichaProducto {
         if (dCtxSh.appE!=AppEcom.outlet) {
             pageFichaStpV.validateSliderIfExists(Slider.CompletaTuLook);
         }
-        
-        Bolsa.checkCookies(driver);
     }
     
     @SuppressWarnings("static-access")
@@ -226,8 +222,6 @@ public class FichaProducto {
         
         pageFichaStpV.selectLinkNavigation(ProductNav.Next, dCtxSh, dataArtOrigin.getReferencia());
         pageFichaStpV.selectLinkNavigation(ProductNav.Prev, dCtxSh, dataArtOrigin.getReferencia());
-        
-        Bolsa.checkCookies(driver);
     }
     
     @Test (
@@ -267,8 +261,6 @@ public class FichaProducto {
         modalPersonalizacionStpV.selectSize();
         modalPersonalizacionStpV.confirmCustomization();
         modalPersonalizacionStpV.checkCustomizationProof();
-        
-        Bolsa.checkCookies(driver);
     }
     
     private DataCtxShop getCtxShForTest(Pais pais, IdiomaPais idioma) {

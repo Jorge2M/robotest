@@ -571,7 +571,7 @@ public class SecMenusDesktopStpV {
     	ChecksTM validations = ChecksTM.getNew();
     	GroupMenu groupMenu = menu.getGroup();
     	List<Element> elemsCanBeContained = groupMenu.getElementsCanBeContained();
-    	boolean contentPageOk = (new PageLanding(driver)).isSomeElementVisibleInPage(elemsCanBeContained, app);
+    	boolean contentPageOk = (new PageLanding(driver)).isSomeElementVisibleInPage(elemsCanBeContained, app, 2);
 	 	validations.add(
 			"Aparecen alguno de los siguientes elementos: <b>" + elemsCanBeContained + "</b> (es un menú perteneciente al grupo <b>" + groupMenu + ")</b>",
 			contentPageOk, State.Warn);
