@@ -2,7 +2,6 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.miscompras;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras.TypeTicket;
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -13,14 +12,13 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageDetalleCompraMobil extends PageDetalleCompra {
 	
-	private static String XPathDataTicket = "//div[@class[contains(.,'U8w6k')]]"; //React
-	private static String XPathItemDataTicketOnline = XPathDataTicket + "//*[@class[contains(.,'_1iQV_')]]";
-	private static String XPathItemDataTicketTienda = XPathDataTicket + "//span[@class[contains(.,'_2glQv')]]"; //React
-    private static String XPathIdTicketOnline = XPathItemDataTicketOnline + "[1]/span";
-    private static String XPathIdTicketTienda = XPathItemDataTicketTienda + "[1]/span";
-	private static String XPathLineaImporteOnline = "(" + XPathItemDataTicketOnline + ")[2]";
-	private static String XPathLineaImporteTienda = "(" + XPathItemDataTicketTienda + ")[2]";
-	private static String XPathArticulo = "//div[@class[contains(.,'_17bwV')]]"; //React
+	//private static String XPathDataTicket = "//div[@class[contains(.,'U8w6k')]]"; //React
+	//private static String XPathItemDataTicket = "//*[@data-testid[contains(.,'_1iQV_')]]";
+    //private static String XPathIdTicketOnline = XPathItemDataTicketOnline + "[1]/span";
+    private static String XPathIdTicket = "//*[@data-testid[contains(.,'order.orderId')]]";
+	private static String XPathLineaImporte = "//*[@data-testid[contains(.,'order.price')]]";
+	//private static String XPathLineaImporteTienda = "(" + XPathItemDataTicketTienda + ")[2]";
+	private static String XPathArticulo = "//*[@data-testid='myPurchases.detail.product']";
     private static String XPathLinkToMisCompras = "//button/*[@class[contains(.,'icon-fill-prev')]]/.."; 
     
 	private String getXPathArticulo(int position) {
@@ -28,15 +26,15 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	}
     private String getXPathReferenciaArticulo(int posArticulo) {
         String xpathArticulo = getXPathArticulo(posArticulo);
-        return (xpathArticulo + "//div[@class='sg-overline-small']"); //React
+        return (xpathArticulo + "//*[@data-testid[contains(.,'detail.reference')]]");
     }
     private String getXPathNombreArticulo(int posArticulo) {
         String xpathArticulo = getXPathArticulo(posArticulo);
-        return (xpathArticulo + "//button[@class[contains(.,'sg-subtitle-small')]]");
+        return (xpathArticulo + "//*[@data-testid[contains(.,'product.openModal')]]");
     }
     private String getXPathPrecioArticulo(int posArticulo) {
         String xpathArticulo = getXPathArticulo(posArticulo);        
-        return (xpathArticulo + "//div[@class[contains(.,'_2H9YI')]]"); //React
+        return (xpathArticulo + "//*[@data-testid[contains(.,'product.paidPrice')]]");
     }
     
     public PageDetalleCompraMobil(Channel channel, WebDriver driver) {
@@ -66,31 +64,20 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
     }
     @Override
     public boolean isVisibleDataTicket(int maxSeconds) {
-    	return (state(Visible, By.xpath(XPathDataTicket)).wait(maxSeconds).check());
+    	return (state(Visible, By.xpath(XPathIdTicket)).wait(maxSeconds).check());
     }
     @Override
     public boolean isVisibleIdTicket(int maxSeconds) {
-    	return 
-    		state(State.Visible, By.xpath(XPathIdTicketTienda)).wait(maxSeconds).check() ||
-    		state(State.Visible, By.xpath(XPathIdTicketOnline)).wait(maxSeconds).check();
+    	return state(State.Visible, By.xpath(XPathIdTicket)).wait(maxSeconds).check();
     }
     @Override
     public String getIdTicket(TypeTicket typeTicket) {
-        WebElement idTicket = PageObjTM.getElementWeb(By.xpath(XPathIdTicketOnline), driver);
-        if (idTicket!=null) {
-        	return idTicket.getText();
-        }
-        return driver.findElement(By.xpath(XPathIdTicketTienda)).getText();
+        return PageObjTM.getElementWeb(By.xpath(XPathIdTicket), driver).getText();
     }
     @Override
     public String getImporte() {
-    	state(State.Visible, By.xpath(XPathLineaImporteOnline)).wait(2).check();
-        WebElement linImport = PageObjTM.getElementWeb(By.xpath(XPathLineaImporteOnline), driver);
-        if (linImport!=null) {
-        	return linImport.getText();
-        }
-        String importe = driver.findElement(By.xpath(XPathLineaImporteTienda)).getText();
-        return getDataRightFrom(": ", importe);
+    	state(State.Visible, By.xpath(XPathLineaImporte)).wait(2).check();
+        return PageObjTM.getElementWeb(By.xpath(XPathLineaImporte), driver).getText();
     }
     @Override
     public String getReferenciaArticulo(int posArticulo) {

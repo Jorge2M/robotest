@@ -30,7 +30,7 @@ public class Ticket {
 		this.type = type;
 	}
 	public String getPrecio() {
-		return precio;
+		return precio.replaceAll("[^\\d.,]", "");  //Eliminamos la divisa;
 	}
 	public void setPrecio(String precio) {
 		this.precio = precio;

@@ -14,7 +14,12 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageMisComprasDesktop extends PageMisCompras {
 
 	private final static String XPathCapaContenedora = "//div[@id='myPurchasesDesktop']";
-	private final static String XPathListTickets = "//div[@class[contains(.,'_3Gv4A')] or @class='NPtmD']"; //React
+	
+	//private final static String XPathListTickets = "//div[@class[contains(.,'_3Gv4A')] or @class='NPtmD']"; //React
+	private final static String XPathListTickets = 
+		"//*[@data-testid[contains(.,'activePurchases')] or " +
+		    "@data-testid[contains(.,'inactivePurchases')]]";
+	
 	private final static String prefixIdCompra = "purchase-";
 	private final static String XPathTicket = XPathListTickets + "//div[@id[contains(.,'" + prefixIdCompra + "')]]";
 
@@ -64,13 +69,19 @@ public class PageMisComprasDesktop extends PageMisCompras {
         return TypeTicket.Online;
 	}
 	private String getIdTicketPage(WebElement boxDataTicket) {
-	    return (boxDataTicket.findElement(By.xpath("//p[@class[contains(.,'_3660d')]]/span[2]")).getText()); //React
+	    //return (boxDataTicket.findElement(By.xpath("//p[@class[contains(.,'_3660d')]]/span[2]")).getText()); //React
+		String xpathIdTicket = 
+			"//*[@data-testid[contains(.,'list.orderId')] or " +
+			    "@data-testid[contains(.,'list.multi.orderId')]]";
+		return (boxDataTicket.findElement(By.xpath(xpathIdTicket)).getText());
 	}
 	private String getIdMangoTicketPage(WebElement boxDataTicket) {
 		return (boxDataTicket.getAttribute("id").replace(prefixIdCompra, ""));
 	}
 	private String getPrecioTicketPage(WebElement boxDataTicket) {
-		return (boxDataTicket.findElement(By.xpath("//h1[@class[contains(.,'_1OG4b')]]")).getText()); //React
+		//return (boxDataTicket.findElement(By.xpath("//h1[@class[contains(.,'_1OG4b')]]")).getText()); //React
+		String xpathPrecioTicket = "//*[@data-testid[contains(.,'list.purchasePrice')]]";
+		return (boxDataTicket.findElement(By.xpath(xpathPrecioTicket)).getText());
 	}
 	private int getNumItemsTicketPage(WebElement boxDataTicket) {
 		String textLinea = boxDataTicket.findElement(By.xpath("//p[@class='sg-body-small']")).getText();

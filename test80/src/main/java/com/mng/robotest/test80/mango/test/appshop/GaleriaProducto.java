@@ -195,14 +195,21 @@ public class GaleriaProducto {
             pageGaleriaStpV.secCrossSellingStpV.validaIsCorrect(LineaType.she);
             pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
         }    
-                
-        Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos_y_monos"));
-        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh);
         
+        selectMenuVestidos(secMenusStpV, dCtxSh);
         secMenusStpV.selectMenuLateral1erLevelTypeCatalog(menuCamisas, dCtxSh);
         Menu2onLevel menuCamisasTops = MenuTreeApp.getMenuLevel2From(menuCamisas, "tops");
         SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, driver);
         secMenusDesktopStpV.selectMenuLateral2oLevel(menuCamisasTops, dCtxSh);
+    }
+    
+    private void selectMenuVestidos(SecMenusWrapperStpV secMenusStpV, DataCtxShop dCtxSh) throws Exception {
+        String menuToClick = "vestidos_y_monos";
+        if (dCtxSh.appE==AppEcom.outlet) {
+        	menuToClick = "vestidos";
+        }
+        Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, menuToClick));
+        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh);
     }
     
     @Test (
