@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecSearch;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper.UserMenu;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralDevice;
 
 public abstract class SecCabecera extends PageObjTM {
 	
@@ -127,7 +127,8 @@ public abstract class SecCabecera extends PageObjTM {
      *              'false' queremos que el menú lateral de móvil se cierre
      */
     public void clickIconoMenuHamburguerMobil(boolean toOpenMenus) {
-    	SecMenuLateralMobil secMenuLateral = new SecMenuLateralMobil(app, driver);
+    	//SecMenuLateralMobil secMenuLateral = new SecMenuLateralMobil(app, driver);
+    	SecMenuLateralDevice secMenuLateral = new SecMenuLateralDevice(channel, app, driver);
         boolean menuVisible = secMenuLateral.isMenuInStateUntil(toOpenMenus, 1);
         int i=0;
         TypeClick typeClick = TypeClick.webdriver;

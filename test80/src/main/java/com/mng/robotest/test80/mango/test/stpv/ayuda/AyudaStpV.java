@@ -29,7 +29,7 @@ public class AyudaStpV {
     public void selectTypeValidaciones (Channel channel) throws Exception {
         List<String> sections = pageAyuda.getKeysFromJSON();
         for(String section : sections){
-             if (section.equals("Buscar una tienda") && channel!=Channel.mobile) {
+             if (section.equals("Buscar una tienda") && !channel.isDevice()) {
                 helpToBuscarTienda(section);
              } else {
                  accesAndValidationSection(section);

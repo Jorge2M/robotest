@@ -128,11 +128,11 @@ public class PageIdentificacion {
      */
     @SuppressWarnings("static-access")
     public static void clickIniciarSesionAndWait(Channel channel, AppEcom app, WebDriver driver) {
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             //En el caso de mobile nos tenemos que asegurar que están desplegados los menús
-        	SecCabecera secCabeceraMobil = SecCabecera.getNew(Channel.mobile, app, driver);
+        	SecCabecera secCabeceraDevice = SecCabecera.getNew(channel, app, driver);
         	boolean toOpen = true;
-        	secCabeceraMobil.clickIconoMenuHamburguerMobil(toOpen);
+        	secCabeceraDevice.clickIconoMenuHamburguerMobil(toOpen);
             
             // Si existe, nos posicionamos y seleccionamos el link \"CERRAR SESIÓN\" 
             // En el caso de iPhone parece que mantiene la sesión abierta después de un caso de prueba 
@@ -141,7 +141,7 @@ public class PageIdentificacion {
             
             //Si hemos clicado el menú 'Cerrar Sesión' volvemos a abrir los menús
             if (menuClicado) {
-            	secCabeceraMobil.clickIconoMenuHamburguerMobil(toOpen);
+            	secCabeceraDevice.clickIconoMenuHamburguerMobil(toOpen);
             }
         }
         

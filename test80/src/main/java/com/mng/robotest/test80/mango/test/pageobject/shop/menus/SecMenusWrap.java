@@ -16,8 +16,8 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper.UserMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil.TypeLocator;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralDevice;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralDevice.TypeLocator;
 import com.mng.robotest.test80.mango.test.utils.checkmenus.DataScreenMenu;
 
 @SuppressWarnings({"static-access"}) 
@@ -29,7 +29,7 @@ import com.mng.robotest.test80.mango.test.utils.checkmenus.DataScreenMenu;
 public class SecMenusWrap {
     
     private final MenusUserWrapper secMenusUser;
-    private final SecMenuLateralMobil secMenuLateralMobil;
+    private final SecMenuLateralDevice secMenuLateralDevice;
     private final SecMenusDesktop secMenusDesktop;
     private final Channel channel;
     private final AppEcom app;
@@ -42,7 +42,7 @@ public class SecMenusWrap {
     	this.app = app;
     	this.driver = driver;
     	this.secMenusUser = MenusUserWrapper.getNew(channel, app, driver);
-    	this.secMenuLateralMobil = new SecMenuLateralMobil(app, driver);
+    	this.secMenuLateralDevice = new SecMenuLateralDevice(channel, app, driver);
     	this.secMenusDesktop = SecMenusDesktop.getNew(app, driver);
     }
     
@@ -55,15 +55,15 @@ public class SecMenusWrap {
     }
     
 	public boolean isLineaPresent(LineaType lineaType) {
-        if (channel==Channel.mobile) {
-            return secMenuLateralMobil.getSecLineasMobil().isLineaPresent(lineaType);
+        if (channel.isDevice()) {
+            return secMenuLateralDevice.getSecLineasDevice().isLineaPresent(lineaType);
         }
         return secMenusDesktop.secMenuSuperior.secLineas.isLineaPresent(lineaType);
     }
     
     public boolean isLineaPresentUntil(LineaType lineaType, int maxSeconds) {
-        if (channel==Channel.mobile) {
-            return secMenuLateralMobil.getSecLineasMobil().isLineaPresent(lineaType);
+        if (channel.isDevice()) {
+            return secMenuLateralDevice.getSecLineasDevice().isLineaPresent(lineaType);
         }
         return secMenusDesktop.secMenuSuperior.secLineas.isLineaPresentUntil(lineaType, maxSeconds);
     }    
@@ -94,8 +94,8 @@ public class SecMenusWrap {
     }
     
     public List<DataScreenMenu> getListDataScreenMenus(Linea linea, SublineaNinosType sublineaType) throws Exception {
-        if (channel==Channel.mobile) {
-            return secMenuLateralMobil.getListDataScreenMenus(linea, sublineaType);
+        if (channel.isDevice()) {
+            return secMenuLateralDevice.getListDataScreenMenus(linea, sublineaType);
         }
         return 
         	secMenusDesktop.secMenuSuperior.secBlockMenus.getListDataScreenMenus(linea.getType(), sublineaType);        
@@ -119,16 +119,16 @@ public class SecMenusWrap {
     }
     
     public void selecLinea(Pais pais, LineaType lineaType) {
-        if (channel==Channel.mobile) {
-        	secMenuLateralMobil.getSecLineasMobil().selectLinea(pais.getShoponline().getLinea(lineaType));
+        if (channel.isDevice()) {
+        	secMenuLateralDevice.getSecLineasDevice().selectLinea(pais.getShoponline().getLinea(lineaType));
         } else {
         	secMenusDesktop.secMenuSuperior.secLineas.selecLinea(pais, lineaType);
         }
     }
     
     public void selecSublinea(Pais pais, LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
-        if (channel==Channel.mobile) {
-        	secMenuLateralMobil.getSecLineasMobil().selectLinea(pais.getShoponline().getLinea(lineaType), sublineaType);
+        if (channel.isDevice()) {
+        	secMenuLateralDevice.getSecLineasDevice().selectLinea(pais.getShoponline().getLinea(lineaType), sublineaType);
         } else {
         	secMenusDesktop.secMenuSuperior.secLineas.selectSublinea(lineaType, sublineaType);
         }
@@ -143,7 +143,7 @@ public class SecMenusWrap {
         if (channel==Channel.desktop) {
         	secMenusDesktop.secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel);
         } else {
-        	secMenuLateralMobil.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais);
+        	secMenuLateralDevice.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais);
         }
     }
     
@@ -151,8 +151,8 @@ public class SecMenusWrap {
      * Función que selecciona una determinada línea->menú (lo busca en el href como último elemento del path)
      */
     public void seleccionarMenuXHref(Menu1rstLevel menu1rstLevel, Pais pais) throws Exception {
-        if (channel==Channel.mobile) {
-        	secMenuLateralMobil.clickMenuLateral1rstLevel(TypeLocator.hrefPortion, menu1rstLevel, pais);
+        if (channel.isDevice()) {
+        	secMenuLateralDevice.clickMenuLateral1rstLevel(TypeLocator.hrefPortion, menu1rstLevel, pais);
         } else {
         	secMenusDesktop.secMenuSuperior.secBlockMenus.seleccionarMenuXHref(menu1rstLevel);
         }

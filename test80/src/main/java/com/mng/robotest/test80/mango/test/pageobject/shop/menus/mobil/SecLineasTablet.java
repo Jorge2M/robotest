@@ -1,22 +1,24 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil;
 
-
 import org.openqa.selenium.WebDriver;
+
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 
-public class SecLineasMobilShop extends SecLineasMobil {
-
-	static String IniXPathLinkLinea = XPathCapaLevelLinea + "//div[@class[contains(.,'brand-item')] and @id";
+public class SecLineasTablet extends SecLineasDevice {
+	
+	static String XPathCapaLevelLinea = "//ul[@class[contains(.,'menu-section-brands')]]";
+	static String IniXPathLinkLinea = XPathCapaLevelLinea + "//div[@class[contains(.,'menu-item-label')] and @id";
 	static String XPathLinkLineaMujer = IniXPathLinkLinea + "='she']";
 	static String XPathLinkLineaHombre = IniXPathLinkLinea + "='he']";
 	static String XPathLinkLineaNina = IniXPathLinkLinea + "='nina']";
 	static String XPathLinkLineaNino =IniXPathLinkLinea + "='nino']";
 	static String XPathLinkLineaKids =IniXPathLinkLinea + "='kids']"; //p.e. Bolivia
 	static String XPathLinkLineaVioleta = IniXPathLinkLinea + "='violeta']";
-
-	public SecLineasMobilShop(WebDriver driver) {
-		super(AppEcom.shop, driver);
+	
+	public SecLineasTablet(AppEcom app, WebDriver driver) {
+		super(Channel.tablet, app, driver);
 	}
 	
 	@Override
@@ -38,4 +40,5 @@ public class SecLineasMobilShop extends SecLineasMobil {
 			throw new IllegalArgumentException("The line " + lineaType + " is not present in the movil channel");
 		}
 	}
+
 }

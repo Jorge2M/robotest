@@ -36,14 +36,14 @@ public class PageAssist1rst {
     static String XPathBotonPagoMobil = "//input[@type='Submit' and not(@disabled)]";
 
     public static String getXPath_LogoAssist(Channel channel) {
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             return XPathLogoAssistMobil; 
         }
         return XPathLogoAssistDesktop;
     }
     
     public static String getXPath_buttonPago(Channel channel) {
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             return XPathBotonPagoMovilAvailable;
         }
         return XPathBotonPagoDesktopAvailable;
@@ -56,7 +56,7 @@ public class PageAssist1rst {
     
     public static boolean isPresentInputsForTrjData(Channel channel, WebDriver driver) {
         boolean inputsOk = true;
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
         	if (!state(Present, By.xpath(XPathInputNumTrjMovil), driver).check() ||
         		!state(Present, By.xpath(XPathSelectMMCaducMovil), driver).check() ||
         		!state(Present, By.xpath(XPathSelectAACaducMovil), driver).check()) {
@@ -80,7 +80,7 @@ public class PageAssist1rst {
     
     public static void inputDataPagoAndWaitSubmitAvailable(Pago pago, Channel channel, WebDriver driver) throws Exception {
         //Input data
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             driver.findElement(By.xpath(XPathInputNumTrjMovil)).sendKeys(pago.getNumtarj());
             new Select(driver.findElement(By.xpath(XPathSelectMMCaducMovil))).selectByValue(pago.getMescad());
             new Select(driver.findElement(By.xpath(XPathSelectAACaducMovil))).selectByValue("20" + pago.getAnycad()); //Atención con el efecto 2100!!!
@@ -101,7 +101,7 @@ public class PageAssist1rst {
     }
     
 	public static void clickBotonPago(Channel channel, WebDriver driver) {
-		if (channel==Channel.mobile) {
+		if (channel.isDevice()) {
 			click(By.xpath(XPathBotonPagoMobil), driver).exec();
 		} else {
 			click(By.xpath(XPathBotonPagoDesktop), driver).exec();

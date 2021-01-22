@@ -30,7 +30,7 @@ public class PageAssist1rstStpV {
 			!PageCheckoutWrapper.isPresentMetodosPago(channel, driver), State.Defect);
 	 	
 	 	boolean inputsTrjOk = PageAssist1rst.isPresentInputsForTrjData(channel, driver);
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
     	 	validations.add(
 				"Figuran 5 campos de input para los datos de la tarjeta: 1 para el número de tarjeta, 2 para la fecha de caducidad, 1 para el titular y 1 para el CVC",
 				inputsTrjOk, State.Warn);

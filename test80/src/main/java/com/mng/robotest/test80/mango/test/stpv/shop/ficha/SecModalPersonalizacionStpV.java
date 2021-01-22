@@ -197,10 +197,10 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 	public void checkCustomizationProof () {
 		click(getBotonSiguienteVisible()).exec();
 		//click(ModalElement.Siguiente.getBy(dCtxSh.channel)).exec();
-//		if (dCtxSh.channel == Channel.mobile) {
+//		if (dCtxSh.channel.isDevice()) {
 //			click(ModalElement.GoToBag.getBy(dCtxSh.channel)).exec();
 //		}
-		if (dCtxSh.channel==Channel.mobile) {
+		if (dCtxSh.channel.isDevice()) {
 			SecBolsa.setBolsaToStateIfNotYet(StateBolsa.Open, Channel.mobile, dCtxSh.appE, driver);
 		}
 		validateCustomizationProof(2);
@@ -210,7 +210,7 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 		description="1) En la bolsa aparece el apartado correspondiente a la personalización (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
 	private boolean validateCustomizationProof(int maxSeconds) {
-		if (dCtxSh.channel==Channel.mobile) {
+		if (dCtxSh.channel.isDevice()) {
 			return (state(Present, ModalElement.BolsaProof.getBy(dCtxSh.channel)).wait(maxSeconds).check());
 		} else {
 			return (state(Visible, ModalElement.BolsaProof.getBy(dCtxSh.channel)).wait(maxSeconds).check());

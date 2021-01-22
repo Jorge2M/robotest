@@ -21,12 +21,12 @@ public class Linea implements Serializable {
 	public static enum LineaType { 
     	nuevo("nuevo", "outletN", "nuevo", "nuevo", Arrays.asList(Channel.desktop)), 
     	rebajas("rebajas", "outletR", "rebajas", "rebajas", Arrays.asList(Channel.desktop)), 
-    	she("mujer", "outlet", "she", "she", Arrays.asList(Channel.desktop, Channel.mobile)), 
-    	he("hombre", "outletH", "he", "he", Arrays.asList(Channel.desktop, Channel.mobile)), 
-    	nina("ninas", "outletA", "kidsA", "nina", Arrays.asList(Channel.desktop, Channel.mobile)), 
-    	nino("ninos", "outletO", "kidsO", "nino", Arrays.asList(Channel.desktop, Channel.mobile)), 
-    	kids("kids", "outletX", "kids", "kids", Arrays.asList(Channel.desktop, Channel.mobile)), 
-    	violeta("violeta", "outletV", "violeta", "violeta", Arrays.asList(Channel.desktop, Channel.mobile)), 
+    	she("mujer", "outlet", "she", "she", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
+    	he("hombre", "outletH", "he", "he", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
+    	nina("ninas", "outletA", "kidsA", "nina", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
+    	nino("ninos", "outletO", "kidsO", "nino", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
+    	kids("kids", "outletX", "kids", "kids", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
+    	violeta("violeta", "outletV", "violeta", "violeta", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
     	edits("edits", "outletE", "edits", "edits", Arrays.asList(Channel.desktop));
     	
     	String literal = "";
@@ -52,7 +52,7 @@ public class Linea implements Serializable {
     	
     	public String getSufixOutlet(Channel channel) {
     		if (this.compareTo(LineaType.she)==0) {
-	            if (channel==Channel.mobile) {
+	            if (channel.isDevice()) {
 	                return "outlet ";
 	            }
     		}

@@ -124,7 +124,7 @@ public class Compra {
 		secMenusStpV.seleccionLinea(LineaType.she, null, dCtxSh);
 		(new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver)).clickLinkFooter(FooterLink.cheque_regalo, false);
 		PageChequeRegaloInputDataStpV pageChequeRegaloInputDataStpV = new PageChequeRegaloInputDataStpV(driver);
-		if(dCtxSh.channel != Channel.mobile){
+		if(dCtxSh.channel.isDevice()){
 			nTarjeta = "100000040043";
 			cvvTarjeta = "618";
 			pageChequeRegaloInputDataStpV.paginaConsultarSaldo(nTarjeta);

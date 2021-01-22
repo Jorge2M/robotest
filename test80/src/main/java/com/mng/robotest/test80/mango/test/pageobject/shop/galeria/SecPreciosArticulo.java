@@ -54,12 +54,12 @@ public class SecPreciosArticulo extends PageObjTM {
 		}
 		public String getXPath(Channel channel, AppEcom app) {
 			if (app==AppEcom.outlet) {
-				if (channel==Channel.mobile) {
+				if (channel.isDevice()) {
 					return xpathOutletMovil;
 				}
 				return xpathOutletDesktop;
 			}
-			if (channel==Channel.mobile) {
+			if (channel.isDevice()) {
 				return xpathShopMovil;
 			}
 			return xpathShopDesktop;

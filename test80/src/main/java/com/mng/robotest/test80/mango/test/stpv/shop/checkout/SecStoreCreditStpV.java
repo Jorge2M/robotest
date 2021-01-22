@@ -49,7 +49,7 @@ public class SecStoreCreditStpV {
             //}
         } else {
         	checkAfterMarkSaldoEnCuenta(channel, pais, driver);
-            if (channel==Channel.mobile) {
+            if (channel.isDevice()) {
                 dCtxPago.getDataPedido().setImporteTotalSinSaldoCta(PageCheckoutWrapper.getPrecioTotalSinSaldoEnCuenta(channel, driver));
             }
         }

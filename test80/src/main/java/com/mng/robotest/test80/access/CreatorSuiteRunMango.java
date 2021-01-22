@@ -84,19 +84,30 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 	
 	private void setWebDriverVersion() {
 		if (inputParams.getDriverVersion()==null) {
-			EmbeddedDriver driverType = EmbeddedDriver.valueOf(inputParams.getDriver());
-			switch (driverType) {
-			case firefox:
-			case firefoxhless:
-				inputParams.setDriverVersion(GeckoDriverVersionDefault);
-				break;
-			case chrome:
-			case chromehless:
-				inputParams.setDriverVersion(ChromeDriverVersionDefault);
-				break;
-			default:
-				break;
+			if (isEmbeddedDriver(inputParams.getDriver())) {
+				EmbeddedDriver driverType = EmbeddedDriver.valueOf(inputParams.getDriver());
+				switch (driverType) {
+				case firefox:
+				case firefoxhless:
+					inputParams.setDriverVersion(GeckoDriverVersionDefault);
+					break;
+				case chrome:
+				case chromehless:
+					inputParams.setDriverVersion(ChromeDriverVersionDefault);
+					break;
+				default:
+					break;
+				}
 			}
 		}
+	}
+	
+	private boolean isEmbeddedDriver(String driver) {
+		for (EmbeddedDriver embDriver : EmbeddedDriver.values()) {
+			if (driver.compareTo(embDriver.name())==0) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

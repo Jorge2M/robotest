@@ -45,7 +45,7 @@ public class SecBolsaStpV {
 
 	public static void close(Channel channel, AppEcom app, WebDriver driver) 
 	throws Exception {
-		if (channel==Channel.mobile) {
+		if (channel.isDevice()) {
 			clickAspaForCloseMobil(driver);
 		} else {
 			forceStateBolsaTo(StateBolsa.Closed, app, channel, driver);

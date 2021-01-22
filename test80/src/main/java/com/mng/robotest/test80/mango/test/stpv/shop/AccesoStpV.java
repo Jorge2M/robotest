@@ -113,7 +113,7 @@ public class AccesoStpV {
 	    	validations.add(
 	    		"NO aparece el link \"Favoritos\"",
 	    		!isVisibleMenuFav, State.Defect);
-	    	if (dCtxSh.channel==Channel.mobile) {
+	    	if (dCtxSh.channel.isDevice()) {
 		    	validations.add(
 		    		"Aparece el link \"Mis Pedidos\"",
 		    		userMenus.isMenuInState(UserMenu.pedidos, Present), State.Defect);

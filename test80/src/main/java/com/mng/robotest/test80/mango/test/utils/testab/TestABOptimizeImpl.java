@@ -37,7 +37,7 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 			"Variante 0 - Original",
 			"Variante 1 - Anidado plegado", 
 			"Variante 2 - Anidado desplegado"),
-		Arrays.asList(Channel.mobile),
+		Arrays.asList(Channel.mobile, Channel.tablet),
 		Arrays.asList(AppEcom.shop)
 	),
 	

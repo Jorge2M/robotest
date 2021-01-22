@@ -20,8 +20,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMobil.IconoCabOutletMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraShop.IconoCabeceraShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop.MenuUserDesktop;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenusUserMobil.MenuUserMobil;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralDevice;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenusUserDevice.MenuUserDevice;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 import static com.mng.robotest.test80.mango.conftestmaker.AppEcom.shop;
 import static com.mng.robotest.test80.mango.conftestmaker.AppEcom.outlet;
@@ -32,7 +32,7 @@ public class MenusUserWrapper extends PageObjTM {
 	final Channel channel;
 	final AppEcom app;
 	final SecCabecera secCabecera;
-	final SecMenuLateralMobil secMenuLateralMobil;
+	final SecMenuLateralDevice secMenuLateralMobil;
 	
 	public enum UserMenu {
 		lupa(Arrays.asList(shop, outlet, votf)),
@@ -63,7 +63,7 @@ public class MenusUserWrapper extends PageObjTM {
 		this.channel = channel;
 		this.app = app;
 		this.secCabecera = SecCabecera.getNew(channel, app, driver);
-		this.secMenuLateralMobil = new SecMenuLateralMobil(app, driver);
+		this.secMenuLateralMobil = new SecMenuLateralDevice(channel, app, driver);
 	}
 	
 	public static MenusUserWrapper getNew(Channel channel, AppEcom app, WebDriver driver) {
@@ -106,7 +106,7 @@ public class MenusUserWrapper extends PageObjTM {
 			secCabecera.hoverIconoBolsa();
 		} else {
 			ElementPage menuElement = getMenu(menu);
-			moveToElement(menuElement.getBy(app), driver);
+			moveToElement(menuElement.getBy(channel, app), driver);
 		}
 	}
 	
@@ -165,8 +165,8 @@ public class MenusUserWrapper extends PageObjTM {
 		if (menu instanceof MenuUserDesktop) {
 			return (secCabecera.getShop().getModalUserSesionDesktop().isMenuInStateUntil((MenuUserDesktop)menu, state, maxSeconds));
 		}
-		if (menu instanceof MenuUserMobil) {
-			return (secMenuLateralMobil.getUserMenu().isMenuInStateUntil((MenuUserMobil)menu, state, maxSeconds));
+		if (menu instanceof MenuUserDevice) {
+			return (secMenuLateralMobil.getUserMenu().isMenuInStateUntil((MenuUserDevice)menu, state, maxSeconds));
 		}
 		if (menu instanceof IconoCabOutletMobil) {
 			return (secCabecera.getOutletMobil().isElementInStateUntil((IconoCabOutletMobil)menu, state, maxSeconds));
@@ -182,8 +182,8 @@ public class MenusUserWrapper extends PageObjTM {
 			secCabecera.getShop().hoverIconForShowUserMenuDesktop();
 			secCabecera.getShop().getModalUserSesionDesktop().wait1sForItAndclickMenu((MenuUserDesktop)menu);
 		}
-		if (menu instanceof MenuUserMobil) {
-			secMenuLateralMobil.getUserMenu().clickMenu((MenuUserMobil)menu);
+		if (menu instanceof MenuUserDevice) {
+			secMenuLateralMobil.getUserMenu().clickMenu((MenuUserDevice)menu);
 		}
 		if (menu instanceof IconoCabOutletMobil) {
 			secCabecera.getOutletMobil().click((IconoCabOutletMobil)menu);
@@ -198,7 +198,7 @@ public class MenusUserWrapper extends PageObjTM {
 			if (channel==Channel.desktop) {
 				return IconoCabeceraShop.lupa;
 			}
-			if (channel==Channel.mobile) {
+			if (channel.isDevice()) {
 				return IconoCabOutletMobil.lupa;
 			}
 		}
@@ -206,16 +206,16 @@ public class MenusUserWrapper extends PageObjTM {
 	}
 	
 	private ElementPage getMenuIniciarSesion() {
-		if (app==AppEcom.shop || app==AppEcom.votf) {
-			return IconoCabeceraShop.iniciarsesion;
-		}
-		if (app==AppEcom.outlet) {
+		if (app==AppEcom.outlet || channel==Channel.tablet) {
 			if (channel==Channel.desktop) {
 				return IconoCabeceraShop.iniciarsesion;
 			}
-			if (channel==Channel.mobile) {
-				return MenuUserMobil.iniciarsesion;
+			if (channel.isDevice()) {
+				return MenuUserDevice.iniciarsesion;
 			}
+		}
+		if (app==AppEcom.shop || app==AppEcom.votf) {
+			return IconoCabeceraShop.iniciarsesion;
 		}
 		return null;
 	}
@@ -224,8 +224,8 @@ public class MenusUserWrapper extends PageObjTM {
 		if (channel==Channel.desktop) {
 			return MenuUserDesktop.cerrarSesion;
 		}
-		if (channel==Channel.mobile) {
-			return MenuUserMobil.cerrarsesion;
+		if (channel.isDevice()) {
+			return MenuUserDevice.cerrarsesion;
 		}
 		return null;
 	}
@@ -234,28 +234,31 @@ public class MenusUserWrapper extends PageObjTM {
 		if (channel==Channel.desktop) {
 			return MenuUserDesktop.registrate;
 		}
-		if (channel==Channel.mobile) {
-			return MenuUserMobil.registrate;
+		if (channel.isDevice()) {
+			return MenuUserDevice.registrate;
 		}
 		return null;
 	}
 	
 	private ElementPage getMenuMiCuenta() {
-		if (app==AppEcom.shop || app==AppEcom.votf) {
-			return IconoCabeceraShop.micuenta;
-		}
-		if (app==AppEcom.outlet) {
+		if (app==AppEcom.outlet || channel==Channel.tablet) {
 			if (channel==Channel.desktop) {
 				return IconoCabeceraShop.micuenta;
 			}
-			if (channel==Channel.mobile) {
-				return MenuUserMobil.micuenta;
+			if (channel.isDevice()) {
+				return MenuUserDevice.micuenta;
 			}
+		}
+		if (app==AppEcom.shop || app==AppEcom.votf) {
+			return IconoCabeceraShop.micuenta;
 		}
 		return null;
 	}
 	
 	private ElementPage getMenuFavoritos() {
+		if (channel==Channel.tablet) {
+			return MenuUserDevice.favoritos;
+		}
 		if (app==AppEcom.shop || app==AppEcom.votf) {
 			return IconoCabeceraShop.favoritos;
 		}
@@ -267,16 +270,16 @@ public class MenusUserWrapper extends PageObjTM {
 			if (channel==Channel.desktop) {
 				return MenuUserDesktop.misCompras;
 			}
-			if (channel==Channel.mobile) {
-				return MenuUserMobil.miscompras;
+			if (channel.isDevice()) {
+				return MenuUserDevice.miscompras;
 			}
 		}
 		return null;
 	}
 	
 	private ElementPage getMenuPedidos() {
-		if (app==AppEcom.outlet && channel==Channel.mobile) {
-			return MenuUserMobil.pedidos;
+		if (app==AppEcom.outlet && channel.isDevice()) {
+			return MenuUserDevice.pedidos;
 		}
 		return null;
 	}
@@ -286,8 +289,8 @@ public class MenusUserWrapper extends PageObjTM {
 			if (channel==Channel.desktop) {
 				return MenuUserDesktop.mangoLikesYou;
 			}
-			if (channel==Channel.mobile) {
-				return MenuUserMobil.mangolikesyou;
+			if (channel.isDevice()) {
+				return MenuUserDevice.mangolikesyou;
 			}
 		}
 		return null;
@@ -297,15 +300,15 @@ public class MenusUserWrapper extends PageObjTM {
 		if (channel==Channel.desktop) {
 			return MenuUserDesktop.ayuda;
 		}
-		if (channel==Channel.mobile) {
-			return MenuUserMobil.ayuda;
+		if (channel.isDevice()) {
+			return MenuUserDevice.ayuda;
 		}
 		return null;
 	}
 	
 	private ElementPage getMenuCambioPais() {
-		if (channel==Channel.mobile) {
-			return MenuUserMobil.cambiopais;
+		if (channel.isDevice()) {
+			return MenuUserDevice.cambiopais;
 		}
 		return null;
 	}

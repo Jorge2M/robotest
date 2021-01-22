@@ -130,7 +130,7 @@ public class PagoNavigationsStpV {
         }
         
         test1rstPageCheckout(dCtxSh, dCtxPago, driver);
-        if (dCtxSh.channel==Channel.mobile) {
+        if (dCtxSh.channel.isDevice()) {
         	boolean isSaldoEnCuenta = dCtxPago.getFTCkout().isStoreCredit;
         	Page1EnvioCheckoutMobilStpV.clickContinuarToMetodosPago(dCtxSh, isSaldoEnCuenta, driver);
         }
@@ -148,7 +148,7 @@ public class PagoNavigationsStpV {
                 testInputCodPromoEmpl(dCtxSh, dataBag, driver);
             } else {
                 if (dCtxSh.vale!=null) {
-                    if (dCtxSh.channel == Channel.mobile) {
+                    if (dCtxSh.channel.isDevice()) {
                         Page1EnvioCheckoutMobil.inputCodigoPromo(dCtxSh.vale.getCodigoVale(), driver);
                     } else {
                     	testValeDescuento(dCtxSh.vale, dataBag, dCtxSh.appE, driver);

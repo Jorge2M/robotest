@@ -28,8 +28,8 @@ public class SecFooter extends PageObjTM {
     static List<AppEcom> footerAll = Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf);
     
     static List<Channel> channelDesktop = Arrays.asList(Channel.desktop);
-    static List<Channel> channelMobile = Arrays.asList(Channel.mobile);
-    static List<Channel> channelAll = Arrays.asList(Channel.desktop, Channel.mobile);    
+    static List<Channel> channelMobile = Arrays.asList(Channel.mobile, Channel.tablet);
+    static List<Channel> channelAll = Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet);    
     
     public static enum FooterLink {
     	ayuda(footerShop, channelAll, "//a[@data-ga-label='ayuda' and text()[contains(.,'Ayuda')]]", false), 

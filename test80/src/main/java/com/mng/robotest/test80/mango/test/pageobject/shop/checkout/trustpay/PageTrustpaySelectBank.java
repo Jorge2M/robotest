@@ -24,7 +24,7 @@ public class PageTrustpaySelectBank {
     static String XPathButtonContinueMobil = "//input[@type='submit' and @value='continue']";
     
     public static String getXPathEntradaPago(String nombrePago, Channel channel) {
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             return (XPathListOfPayments + "/li/input[@class[contains(.,'" + nombrePago.toLowerCase() + "')]]");
         }
         return (XPathListOfPayments + "/li[@data-variant[contains(.,'" + nombrePago.toLowerCase() + "')]]");
@@ -50,7 +50,7 @@ public class PageTrustpaySelectBank {
     
     public static void selectBankThatContains(ArrayList<String> strContains, Channel channel, WebDriver driver) {
         //En el caso de móvil para que aparezca el desplegable se ha de seleccionar el icono del banco
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
         	if (!state(Visible, By.xpath(XPathSelectBancos), driver).check()) {
                 clickIconoBanco(driver);
         	}
@@ -87,7 +87,7 @@ public class PageTrustpaySelectBank {
 	}
 
     public static void clickButtonToContinuePay(Channel channel, WebDriver driver) {
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
         	click(By.xpath(XPathButtonContinueMobil), driver).exec();
         } else {
         	click(By.xpath(XPathButtonPayDesktop), driver).exec();

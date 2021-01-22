@@ -50,7 +50,7 @@ public class SecModalPersonalizacion extends SeleniumUtils {
 		
 		@Override
 		public By getBy(Channel channel) {
-			if (channel == Channel.mobile && this.byMobil != null) {
+			if (channel.isDevice() && this.byMobil != null) {
 				return this.byMobil;
 			}
 			return this.by;

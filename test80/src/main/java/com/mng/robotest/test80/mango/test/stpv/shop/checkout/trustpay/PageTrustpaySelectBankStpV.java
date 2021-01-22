@@ -23,7 +23,7 @@ public class PageTrustpaySelectBankStpV {
 			PageTrustpaySelectBank.isPresentEntradaPago(nombrePago, channel, driver), State.Warn);
 	 	
 	 	State level = State.Warn;
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             level = State.Info;
         }
 	 	validations.add(

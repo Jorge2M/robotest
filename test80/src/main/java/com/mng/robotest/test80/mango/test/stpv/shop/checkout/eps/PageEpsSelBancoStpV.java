@@ -19,7 +19,7 @@ public class PageEpsSelBancoStpV {
     		PageEpsSelBanco.isPresentIconoEps(driver), State.Warn);
     	
     	State stateVal = State.Warn;
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
         	stateVal=State.Info;
         }
     	validations.add(

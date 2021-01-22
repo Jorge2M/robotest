@@ -47,14 +47,14 @@ public class SecBolsa {
     private static final String XPathLinkArticulo = "//div[@class[contains(.,'itemDesc')]]/a";
     
     private static String getXPathPanelBolsa(Channel channel) {
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             return XPathPanelBolsaMobil;
         }
         return XPathPanelBolsaDesktop;
     }
     
     private static String getXPATH_BotonComprar(Channel channel) {
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             return XPathBotonComprarMobil;
         }
         return XPathBotonComprarDesktop;
@@ -68,7 +68,7 @@ public class SecBolsa {
     }
     
     private static String getXPATH_LinkBorrarArt(Channel channel, String refArticle) {
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             return (XPathLinkBorrarArtMobilNew.replace(tagRefArticle, refArticle));
         }
 
@@ -79,7 +79,7 @@ public class SecBolsa {
      * @return el xpath correspondiente al elemento que contiene el precio subtotal (sin el importe)
      */
     private static String getXPATH_precioSubTotal(Channel channel) {
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             return XPathPrecioSubTotalMobil;
         }
         return XPathPrecioSubTotalDesktop; 
@@ -90,7 +90,7 @@ public class SecBolsa {
      */
     private static String getXPATH_precioTransporte(Channel channel) {
         String xpathCapaBolsa = SecBolsa.getXPathPanelBolsa(channel);
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             return "(" + xpathCapaBolsa + "//div[@class[contains(.,'totalPriceContainer')]])[2]";
         }
         return xpathCapaBolsa + "//*[@class='contenedor_precio_transporte']"; 
@@ -184,7 +184,7 @@ public class SecBolsa {
         ListIterator<WebElement> itTotalDecimal = null;
         String xpathCapaBolsa = SecBolsa.getXPathPanelBolsa(channel);
         String xpathSubtotal = getXPATH_precioSubTotal(channel);
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             itTotalEntero = driver.findElements(By.xpath("(" + xpathCapaBolsa + xpathSubtotal + ")[1]" + "//span[@style[not(contains(.,'padding'))]][1]")).listIterator();
             itTotalDecimal = driver.findElements(By.xpath("(" + xpathCapaBolsa + xpathSubtotal + ")[1]" + "//span[@style[not(contains(.,'padding'))]][2]")).listIterator();
         } else {
@@ -215,7 +215,7 @@ public class SecBolsa {
 		ListIterator<WebElement> itTotalDecimal = null;
 		String xpathImpTransp = getXPATH_precioTransporte(channel);
 		if (state(Present, By.xpath(xpathImpTransp), driver).check()) {
-			if (channel==Channel.mobile) {
+			if (channel.isDevice()) {
 				itTotalEntero = driver.findElements(By.xpath("(" + xpathImpTransp + ")[1]" + "//span[1]")).listIterator();
 				itTotalDecimal = driver.findElements(By.xpath("(" + xpathImpTransp + ")[1]" + "//span[2]")).listIterator();
 			} else {

@@ -29,7 +29,7 @@ public class SecKlarna {
     static String XPathButtonConfirmAddressDesktop = "//span[@id[contains(.,'FormularioKlarna')] and @class[contains(.,'modalConfirmar')]]";
     
     public static String getXPath_capaKlarna(Channel channel) {
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             return XPathCapaKlarnaMobil;
         }
         return XPathCapaKlarnaDesktop; 
@@ -37,14 +37,14 @@ public class SecKlarna {
     
     public static String getXPath_inputNumPersonal(Channel channel) {
         String xpathCapaKlarna = getXPath_capaKlarna(channel);
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             return (xpathCapaKlarna + "//input[@id[contains(.,'number-card')]]");
         }
         return (xpathCapaKlarna + "//input[@id[contains(.,'personalno')] and @class[contains(.,'personalno-input')]]");
     }
     
     public static String getXPATH_buttonConfirmAddress(Channel channel) {
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             return XPathButtonConfirmAddressMobil; 
         }
         return XPathButtonConfirmAddressDesktop;
@@ -70,7 +70,7 @@ public class SecKlarna {
      */
     public static boolean isErrorTlfn(String mensajeError, Channel channel) {
         boolean isError = false;
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             if (mensajeError.contains(errorTlfMovil)) {
                 isError = true;
             }

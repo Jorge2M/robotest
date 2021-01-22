@@ -75,8 +75,14 @@ public class PageResultPago extends PageObjTM {
 
     public boolean checkUrl(int maxSeconds) {
     	for (int i=0; i<maxSeconds; i++) {
-    		if (driver.getCurrentUrl().contains("resultadoOK")) {
-    			return true;
+    		if (channel.isDevice()) {
+	    		if (driver.getCurrentUrl().contains("success.faces")) {
+	    			return true;
+	    		}
+    		} else {
+	    		if (driver.getCurrentUrl().contains("resultadoOK")) {
+	    			return true;
+	    		}
     		}
     		waitMillis(1000);
     	}

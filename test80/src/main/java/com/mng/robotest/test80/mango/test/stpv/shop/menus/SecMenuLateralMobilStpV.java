@@ -24,8 +24,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.landing.PageLanding;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDesktop;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil.TypeLocator;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralDevice;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralDevice.TypeLocator;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
@@ -35,16 +35,16 @@ public class SecMenuLateralMobilStpV {
     
 	private final AppEcom app;
 	private final WebDriver driver;
-	private final SecMenuLateralMobil secMenuLateral;
+	private final SecMenuLateralDevice secMenuLateral;
 	
-	private SecMenuLateralMobilStpV(AppEcom app, WebDriver driver) {
+	private SecMenuLateralMobilStpV(Channel channel, AppEcom app, WebDriver driver) {
 		this.app = app;
 		this.driver = driver;
-		secMenuLateral = new SecMenuLateralMobil(app, driver);
+		secMenuLateral = new SecMenuLateralDevice(channel, app, driver);
 	}
 	
-	public static SecMenuLateralMobilStpV getNew(AppEcom app, WebDriver driver) {
-		return (new SecMenuLateralMobilStpV(app, driver));
+	public static SecMenuLateralMobilStpV getNew(Channel channel, AppEcom app, WebDriver driver) {
+		return (new SecMenuLateralMobilStpV(channel, app, driver));
 	}
 	
 	@Step (
@@ -103,7 +103,7 @@ public class SecMenuLateralMobilStpV {
     		"<b style=\"color:brown;\">#{lineaType.getNameUpper()}</b>",
         expected="Aparece la página correcta asociada a la línea #{lineaType.getNameUpper()}")
     public void seleccionLinea(LineaType lineaType, Pais pais) throws Exception {
-    	secMenuLateral.getSecLineasMobil().selectLinea(pais.getShoponline().getLinea(lineaType)); 
+    	secMenuLateral.getSecLineasDevice().selectLinea(pais.getShoponline().getLinea(lineaType)); 
         validaSelecLinea(pais, lineaType, null);
     }    
     
@@ -114,7 +114,7 @@ public class SecMenuLateralMobilStpV {
         expected="Aparece la página correcta asociada a la línea/sublínea")
     public void seleccionSublineaNinos(LineaType lineaType, SublineaNinosType sublineaType, Pais pais) throws Exception {
     	secMenuLateral
-    		.getSecLineasMobil()
+    		.getSecLineasDevice()
     		.selecSublineaNinosIfNotSelected(pais.getShoponline().getLinea(lineaType), sublineaType);
         validaSelecLinea(pais, lineaType, sublineaType);
     }
@@ -151,10 +151,10 @@ public class SecMenuLateralMobilStpV {
     	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Está seleccionada la línea <b>" + lineaNinosType + "</b>",
-			secMenuLateral.getSecLineasMobil().isSelectedLinea(lineaNinosType), State.Warn);
+			secMenuLateral.getSecLineasDevice().isSelectedLinea(lineaNinosType), State.Warn);
 	 	validations.add(
 			"Es visible el bloque con las sublíneas de " + lineaNinosType,
-			secMenuLateral.getSecLineasMobil().isVisibleBlockSublineasNinos(lineaNinosType), State.Warn);
+			secMenuLateral.getSecLineasDevice().isVisibleBlockSublineasNinos(lineaNinosType), State.Warn);
 	 	return validations;
     }
     
@@ -163,7 +163,7 @@ public class SecMenuLateralMobilStpV {
     	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Está seleccionada la línea <b>" + lineaType + "</b>",
-			secMenuLateral.getSecLineasMobil().isSelectedLinea(lineaType), State.Warn);
+			secMenuLateral.getSecLineasDevice().isSelectedLinea(lineaType), State.Warn);
 	 	validations.add(
 			"Son visibles links de Menú de 2o nivel",
 			secMenuLateral.isMenus2onLevelDisplayed(sublineaType), State.Warn);

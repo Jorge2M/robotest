@@ -26,8 +26,7 @@ public class ArticuloNavigations {
 
 		//Esperamos un máximo de 10 segundos a que aparezca la ficha del artículo
 		PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
-		int maxSecondsToWait = 10;
-		pageFicha.isFichaArticuloUntil(articulo.getReferencia(), maxSecondsToWait);
+		pageFicha.isFichaArticuloUntil(articulo.getReferencia(), 10);
 
 		String idColor = null;
 		if (articleStock.getColor()!=null) {

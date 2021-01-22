@@ -39,7 +39,7 @@ public class PagePaytrail1rst {
     }    
     
     public static void clickButtonContinue(Channel channel, WebDriver driver) {
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
         	click(By.xpath(XPathButtonContinueMobil), driver).exec();
         } else {
         	click(By.xpath(XPathButtonPagoDesktop), driver).exec();
@@ -48,7 +48,7 @@ public class PagePaytrail1rst {
     
     public static void selectBanco(String visibleText, Channel channel, WebDriver driver) {
         //En el caso de móvil hemos de seleccionar el icono del banco para visualizar el desplegable
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
         	if (state(Visible, By.xpath(XPathSelectBancos), driver).check()) {
                 clickIconoBanco(driver);
             }

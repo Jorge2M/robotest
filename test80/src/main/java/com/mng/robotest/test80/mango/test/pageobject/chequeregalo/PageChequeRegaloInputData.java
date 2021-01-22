@@ -79,7 +79,7 @@ public class PageChequeRegaloInputData extends PageObjTM implements PageFromFoot
 
         @Override
         public By getBy(Channel channel) {
-            if (channel == Channel.mobile && this.byMobil != null) {
+            if (channel.isDevice() && this.byMobil != null) {
                 return byMobil;
             }
             return byDesktop;

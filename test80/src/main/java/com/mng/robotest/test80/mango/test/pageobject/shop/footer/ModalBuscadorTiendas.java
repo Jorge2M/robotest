@@ -27,7 +27,7 @@ public class ModalBuscadorTiendas extends PageObjTM implements PageFromFooter {
 	
 	@Override
 	public boolean isPageCorrectUntil(int maxSeconds) {
-		if (channel==Channel.mobile) {
+		if (channel.isDevice()) {
 			return (state(Present, By.xpath(XPathForIdPageMobile), driver)
 					.wait(maxSeconds).check());
 		}

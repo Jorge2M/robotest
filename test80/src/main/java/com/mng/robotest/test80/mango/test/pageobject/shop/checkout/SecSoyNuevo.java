@@ -25,7 +25,7 @@ public class SecSoyNuevo {
     
     public static String getXPath_checkPubliNewsletter(Channel channel, boolean active) {
         String sufix = "";
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             if (active) {
                 sufix = " on";
             }
@@ -39,7 +39,7 @@ public class SecSoyNuevo {
     }
     
     public static String getXPath_BotonContinue(Channel channel) {
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             return XPathBotonContinueMobil;
         }
         return XPathBotonContinueDesktop;

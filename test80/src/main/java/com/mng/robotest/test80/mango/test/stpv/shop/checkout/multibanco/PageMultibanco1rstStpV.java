@@ -20,7 +20,7 @@ public class PageMultibanco1rstStpV {
     		PageMultibanco1rst.isPresentEntradaPago(nombrePago, channel, driver), State.Warn);
 	   	
 	   	State stateVal = State.Warn;
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
         	stateVal = State.Info;
         }
 	   	validations.add(

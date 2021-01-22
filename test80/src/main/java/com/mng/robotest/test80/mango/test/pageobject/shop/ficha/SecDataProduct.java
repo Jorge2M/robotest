@@ -114,7 +114,7 @@ public class SecDataProduct extends SeleniumUtils {
     }
     
     private static String getXPathNombreArt(Channel channel) {
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             return XPathNombreArticuloMobil;
         }
         return XPathNombreArticuloDesktop;

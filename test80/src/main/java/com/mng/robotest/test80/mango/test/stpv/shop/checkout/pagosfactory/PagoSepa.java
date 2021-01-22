@@ -28,7 +28,7 @@ public class PagoSepa extends PagoStpV {
         
         if (execPay) {
             PageSepa1rstStpV.inputDataAndclickPay(pago.getNumtarj(), pago.getTitular(), importeTotal, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
-            if (dCtxSh.channel==Channel.mobile) {
+            if (dCtxSh.channel.isDevice()) {
                 PageSepaResultMobilStpV.clickButtonPagar(driver);
             }
         }

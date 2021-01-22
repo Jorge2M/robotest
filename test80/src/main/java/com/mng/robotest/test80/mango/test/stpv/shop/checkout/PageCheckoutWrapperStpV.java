@@ -57,7 +57,7 @@ public class PageCheckoutWrapperStpV {
     
     public static void validateIsFirstPage(boolean userLogged, DataBag dataBag, Channel channel, WebDriver driver) 
     throws Exception {
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             page1MobilCheck.validateIsPage(userLogged, driver);
         } else {
             page1DktopCheck.validateIsPageOK(dataBag, driver);
@@ -100,7 +100,7 @@ public class PageCheckoutWrapperStpV {
     private static ChecksTM checkLogosPagos(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) { 
     	ChecksTM validations = ChecksTM.getNew();
         List<Pago> listPagos = pais.getListPagosForTest(app, isEmpl);
-        if (listPagos.size()==1 && channel==Channel.mobile) {
+        if (listPagos.size()==1 && channel.isDevice()) {
         	return validations;
         }
         for (int i=0; i<listPagos.size(); i++) {
@@ -481,7 +481,7 @@ public class PageCheckoutWrapperStpV {
         
     public static void validaResultImputPromoEmpl(DataBag dataBag, Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             Page1EnvioCheckoutMobilStpV.validaResultImputPromoEmpl(driver);
         } else {
             Page1DktopCheckoutStpV.validaResultImputPromoEmpl(dataBag, app, driver);

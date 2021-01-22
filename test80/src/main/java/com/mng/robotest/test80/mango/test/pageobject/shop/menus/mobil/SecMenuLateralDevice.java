@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -23,39 +23,43 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.utils.checkmenus.DataScreenMenu;
 
-public class SecMenuLateralMobil extends PageObjTM {
+public class SecMenuLateralDevice extends PageObjTM {
 
 	public enum TypeLocator {dataGaLabelPortion, hrefPortion}
 	
-	private final SecLineasMobil secLineasMobil;
-	private final SecMenusUserMobil secUserMenu;
+	private final Channel channel;
 	private final AppEcom app;
 	
-	static String XPathLinkMenuVisibleFromLi = 
+	private final SecLineasDevice secLineasDevice;
+	private final SecMenusUserDevice secUserMenu;
+	
+	private static String XPathCapa2onLevelMenu = "//div[@class[contains(.,'section-detail-list')]]";
+	private String XPathLinkMenuVisibleFromLi = 
 		"//ul[@class='section-detail' or @class[contains(.,'dropdown-menu')]]" +
 		"/li[not(@class[contains(.,'mobile-label-hidden')] or @class[contains(.,' label-hidden')] or @class[contains(.,' gap ')])]" +
 		"/a[@class[contains(.,'menu-item-label')] and @href]";
 
-	public SecMenuLateralMobil(AppEcom app, WebDriver driver) {
+	public SecMenuLateralDevice(Channel channel, AppEcom app, WebDriver driver) {
 		super(driver);
-		this.secLineasMobil = SecLineasMobil.getNew(app, driver);
-		this.secUserMenu = SecMenusUserMobil.getNew(app, driver);
+		this.channel = channel;
 		this.app = app;
+		this.secLineasDevice = SecLineasDevice.make(channel, app, driver);
+		this.secUserMenu = SecMenusUserDevice.getNew(channel, app, driver);
 	}
 
-	public SecLineasMobil getSecLineasMobil() {
-		return secLineasMobil;
+	public SecLineasDevice getSecLineasDevice() {
+		return secLineasDevice;
 	}
 	
-	public SecMenusUserMobil getUserMenu() {
+	public SecMenusUserDevice getUserMenu() {
 		return secUserMenu;
 	}
 	
 	private String getXPathLinksMenus(SublineaNinosType sublineaType) {
 		if (sublineaType==null) {
-			return secLineasMobil.getXPathCapa2onLevelMenu() + XPathLinkMenuVisibleFromLi;
+			return XPathCapa2onLevelMenu + XPathLinkMenuVisibleFromLi;
 		}
-		String divSublineaNinos = secLineasMobil.getXPathSublineaNinosLink(sublineaType); 
+		String divSublineaNinos = secLineasDevice.getXPathSublineaNinosLink(sublineaType); 
 		return divSublineaNinos + "/.." + XPathLinkMenuVisibleFromLi;
 	}
 
@@ -76,7 +80,7 @@ public class SecMenuLateralMobil extends PageObjTM {
 	}
 
 	public List<WebElement> getListMenusAfterSelectLinea(Linea linea, SublineaNinosType sublineaType) throws Exception {
-		secLineasMobil.selectLinea(linea, sublineaType);
+		secLineasDevice.selectLinea(linea, sublineaType);
 		return (getListMenusDisplayed(sublineaType));
 	}
 
@@ -122,9 +126,27 @@ public class SecMenuLateralMobil extends PageObjTM {
 	}
 
 	public boolean isMenuInStateUntil(boolean open, int maxSeconds) {
+		switch (channel) {
+		case tablet:
+			return isMenuTabletInStateUntil(open, maxSeconds);
+		case mobile:
+		default:
+			return isMenuMobilInStateUntil(open, maxSeconds);
+		}
+	}
+	
+	private final static String XPathLineaItem = "//ul[@class='menu-section-brands']/li[@class[contains(.,'menu-item')]]";
+	private boolean isMenuTabletInStateUntil(boolean open, int maxSeconds) {
+		if (open) {
+			return (state(Visible, By.xpath(XPathLineaItem)).wait(maxSeconds).check());
+		}
+		return (state(Invisible, By.xpath(XPathLineaItem)).wait(maxSeconds).check());
+	}
+	
+	private boolean isMenuMobilInStateUntil(boolean open, int maxSeconds) {
 		try {
-			String xpathLineaShe = secLineasMobil.getXPathLineaLink(LineaType.she);
-			String xpathLineaNina = secLineasMobil.getXPathLineaLink(LineaType.nina);
+			String xpathLineaShe = secLineasDevice.getXPathLineaLink(LineaType.she);
+			String xpathLineaNina = secLineasDevice.getXPathLineaLink(LineaType.nina);
 			String xpathValidation = xpathLineaShe + " | " + xpathLineaNina;
 			if (open) {
 				return (state(Visible, By.xpath(xpathValidation)).wait(maxSeconds).check());
@@ -144,7 +166,7 @@ public class SecMenuLateralMobil extends PageObjTM {
 	 */
 	public void clickMenuLateral1rstLevel(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel, Pais pais) {
 		Linea linea = pais.getShoponline().getLinea(menu1rstLevel.getLinea());
-		secLineasMobil.selectLinea(linea, menu1rstLevel.getSublinea());
+		secLineasDevice.selectLinea(linea, menu1rstLevel.getSublinea());
 		if (app==AppEcom.shop) {
 			unfoldMenuGroup(typeLocator, menu1rstLevel);
 			SeleniumUtils.waitMillis(500);
@@ -171,14 +193,8 @@ public class SecMenuLateralMobil extends PageObjTM {
 	
 	public boolean existsMenuLateral1rstLevel(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel, Pais pais) {
 		Linea linea = pais.getShoponline().getLinea(menu1rstLevel.getLinea());
-		secLineasMobil.selectLinea(linea, menu1rstLevel.getSublinea());
+		secLineasDevice.selectLinea(linea, menu1rstLevel.getSublinea());
 		String xpathMenu = getXPathMenuByTypeLocator(typeLocator, menu1rstLevel);
 		return (state(Visible, By.xpath(xpathMenu)).check());
-	}
-
-	public void bringHeaderMobileBackground() throws Exception {
-		WebElement menuWrapp = driver.findElement(By.xpath(secLineasMobil.getXPathHeaderMobile()));
-		((JavascriptExecutor) driver).executeScript("arguments[0].style.zIndex=1;", menuWrapp);
-		Thread.sleep(500);
 	}
 }

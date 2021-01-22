@@ -145,7 +145,7 @@ public class PagePrehome {
      */
     public static void inputPaisAndSelect(WebDriver driver, String nombrePais, Channel channel) throws Exception {
         String codigoPais = getCodigoPais(driver, nombrePais);
-        if (channel!=Channel.mobile) {
+        if (!channel.isDevice()) {
             new WebDriverWait(driver, 5).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@class[contains(.,'chosen-with-drop')]]")));
             driver.findElement(By.xpath(XPathInputPais)).sendKeys(nombrePais);
             
@@ -219,7 +219,7 @@ public class PagePrehome {
         PagePrehome.selecPaisIdiomaYAccede(dCtxSh, driver);
         ModalLoyaltyAfterAccess.closeModalIfVisible(driver);
         //ModalNewsLetterAfterAccess.closeModalIfVisible(driver);
-        if (dCtxSh.channel==Channel.mobile) {
+        if (dCtxSh.channel.isDevice()) {
         	SecCabeceraOutletMobil secCabecera = (SecCabeceraOutletMobil)SecCabeceraOutletMobil.getNew(Channel.mobile, dCtxSh.appE, driver);
         	secCabecera.closeSmartBannerIfExistsMobil();
         }
@@ -292,8 +292,9 @@ public class PagePrehome {
         //Damos de alta la cookie de newsLetter porque no podemos gestionar correctamente el cierre 
         //del modal en la página de portada (es aleatorio y aparece en un intervalo de 0 a 5 segundos)
         setInitialModalsOff(driver);
-        if (dCtxSh.channel==Channel.mobile || !isPaisSelectedDesktop(driver, dCtxSh.pais.getNombre_pais())) {
-            if (dCtxSh.channel!=Channel.mobile) {
+        if (dCtxSh.channel.isDevice() ||
+        	!isPaisSelectedDesktop(driver, dCtxSh.pais.getNombre_pais())) {
+            if (!dCtxSh.channel.isDevice()) {
                 //Nos posicionamos y desplegamos la lista de países (en el caso de mobile no desplegamos 
             	//porque entonces es complejo manejar el desplegable que aparece en este tipo de dispositivos)
                 desplieguaListaPaises(driver);

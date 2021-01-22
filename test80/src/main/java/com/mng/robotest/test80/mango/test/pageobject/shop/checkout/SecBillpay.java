@@ -28,14 +28,14 @@ public class SecBillpay {
      * @return el XPATH correspondiente al radio 'acepto' de billpay
      */
     public static String getXPath_radioAcepto(Channel channel) {
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             return XPathRadioAceptoMobil;
         }
         return XPathRadioAceptoDesktop;
     }
 
 	public static boolean isVisibleUntil(Channel channel, int maxSeconds, WebDriver driver) {
-		if (channel==Channel.mobile) {
+		if (channel.isDevice()) {
 			String xpath = XPathBlockRechnungMobil + " | " + XPathBlockLastschriftMobil;
 			return (state(Visible, By.xpath(xpath), driver).wait(maxSeconds).check());
 		}

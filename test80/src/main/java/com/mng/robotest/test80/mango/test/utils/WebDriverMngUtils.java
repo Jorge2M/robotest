@@ -108,7 +108,7 @@ public class WebDriverMngUtils {
         ITestContext ctx = TestMaker.getTestCase().getTestRunParent().getTestNgContext();
         		
         //En el caso de móvil sólo procesaremos 200 imágenes para paliar el caso en el que el script se ejecuta contra un dispositivo físico y el rendimiento es limitado
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             imagesBroken(driver,  200, maxErrors, ctx);
         }
         

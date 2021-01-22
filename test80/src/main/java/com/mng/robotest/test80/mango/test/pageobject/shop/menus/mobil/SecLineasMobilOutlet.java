@@ -3,7 +3,6 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
 
 public class SecLineasMobilOutlet extends SecLineasMobil {
 
@@ -13,15 +12,6 @@ public class SecLineasMobilOutlet extends SecLineasMobil {
 	private static String XPathLinkLineaNina = IniXPathLinkLinea + "='outletA']";
 	private static String XPathLinkLineaNino =IniXPathLinkLinea + "='outletO']";
 	private static String XPathLinkLineaVioleta = IniXPathLinkLinea + "='outletV']";
-
-	private static String IniXPathLinkSublinea = XPathCapa2onLevelMenu + "//div[@data-label[contains(.,'interior-"; 
-	private static String XPathLinkSublineaNina =  IniXPathLinkSublinea + "nina')]]";
-	private static String XPathLinkSublineaTeenNina =  IniXPathLinkSublinea + "teen')]]";
-	private static String XPathLinkSublineaBebeNina = IniXPathLinkSublinea + "bebe_nina')]]";
-	
-	private static String XPathLinkSublineaNino = IniXPathLinkSublinea + "nino')]]";
-	private static String XPathLinkSublineaTeenNino =  IniXPathLinkSublinea + "teen')]]";
-	private static String XPathLinkSublineaBebeNino = IniXPathLinkSublinea + "bebe_nino')]]";
 	
 	public SecLineasMobilOutlet(WebDriver driver) {
 		super(AppEcom.outlet, driver);
@@ -45,22 +35,4 @@ public class SecLineasMobilOutlet extends SecLineasMobil {
 		}
 	}
 
-	@Override
-	public String getXPathSublineaNinosLink(SublineaNinosType sublineaType) {
-		switch (sublineaType) {
-		case nina:
-			return XPathLinkSublineaNina;
-		case teen_nina:
-			return XPathLinkSublineaTeenNina;
-		case bebe_nina:
-			return XPathLinkSublineaBebeNina;
-		case nino:
-			return XPathLinkSublineaNino;
-		case teen_nino:
-			return XPathLinkSublineaTeenNino;
-		case bebe_nino:
-		default:
-			return XPathLinkSublineaBebeNino;
-		}
-	}
 }

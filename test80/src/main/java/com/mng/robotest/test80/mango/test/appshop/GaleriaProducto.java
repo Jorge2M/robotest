@@ -63,7 +63,7 @@ public class GaleriaProducto {
     }
     
     @Test (
-        groups={"GaleriaProducto", "Canal:mobile_App:all"}, alwaysRun=true, 
+        groups={"GaleriaProducto", "Canal:mobile,tablet_App:all"}, alwaysRun=true, 
         description="[Usuario registrado] Acceder a galería camisas. Filtros y ordenación. Seleccionar producto y color")
     public void GPO001_Galeria_Camisas() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
@@ -82,7 +82,7 @@ public class GaleriaProducto {
         List<Color> colorsToFilter = new ArrayList<>();
         colorsToFilter.add(Color.Blanco);
         //En outlet/movil tenemos el antiguo filtro que sólo permite seleccionar un color
-        if (!(dCtxSh.appE==AppEcom.outlet && dCtxSh.channel==Channel.mobile)) {
+        if (!(dCtxSh.appE==AppEcom.outlet && dCtxSh.channel.isDevice())) {
         	colorsToFilter.add(Color.Azul);
         }
         SecFiltrosStpV.selectFiltroColoresStep(dCtxSh.appE, dCtxSh.channel, true, "Camisas", colorsToFilter, driver);
@@ -103,7 +103,7 @@ public class GaleriaProducto {
         dataScroll.validaImgBroken = true;
         DataScroll datosScrollFinalGaleria = pageGaleriaStpV.scrollFromFirstPage(dataScroll, dCtxSh);
         
-        if (dCtxSh.channel==Channel.mobile) {
+        if (dCtxSh.channel.isDevice()) {
             pageGaleriaStpV.backTo1erArticleMobilStep(dCtxSh);
         }
         int numArticulosPantalla = 
@@ -135,7 +135,7 @@ public class GaleriaProducto {
         List<Color> colorsToFilter = new ArrayList<>();
         colorsToFilter.add(Color.Blanco);
         //En outlet/movil tenemos el antiguo filtro que sólo permite seleccionar un color
-        if (!(dCtxSh.appE!=AppEcom.outlet && dCtxSh.channel==Channel.mobile)) {
+        if (!(dCtxSh.appE!=AppEcom.outlet && dCtxSh.channel.isDevice())) {
         	colorsToFilter.add(Color.Negro);
         }
         SecFiltrosStpV.selectFiltroColoresStep(dCtxSh.appE, dCtxSh.channel, false, "Camisas", colorsToFilter, driver);

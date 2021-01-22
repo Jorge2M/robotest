@@ -55,7 +55,7 @@ public class SecMenusWrapperStpV {
     	this.pais = pais;
     	this.driver = driver;
     	this.secMenusUserStpV = SecMenusUserStpV.getNew(channel, app, driver);
-    	this.secMenuLateralMobilStpV = SecMenuLateralMobilStpV.getNew(app, driver);
+    	this.secMenuLateralMobilStpV = SecMenuLateralMobilStpV.getNew(channel, app, driver);
     	this.secMenusDesktopStpV = SecMenusDesktopStpV.getNew(pais, app, driver);
     	this.secMenusWrap = SecMenusWrap.getNew(channel, app, driver);
     }
@@ -150,7 +150,7 @@ public class SecMenusWrapperStpV {
         for (int i=0; i<listMenusLabel.size(); i++) {
             try {
             	Menu1rstLevel menu1rstLevel = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(lineaType, sublineaType, listMenusLabel.get(i)));
-                if (channel==Channel.mobile) {
+                if (channel.isDevice()) {
                     secMenuLateralMobilStpV.stepClickMenu1rstLevel(menu1rstLevel, pais);
                 } else {
                     secMenusDesktopStpV.stepEntradaMenuDesktop(menu1rstLevel, paginaLinea);
@@ -172,7 +172,7 @@ public class SecMenusWrapperStpV {
     }
     
     public void navSeleccionaCarruselsLinea(Pais pais, LineaType lineaNuevoOReb) throws Exception {
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             //secMenuLateralMobilStpV.navClickLineaAndCarrusels(lineaNuevoOReb, pais);
         } else {
             secMenusDesktopStpV.stepValidaCarrusels(lineaNuevoOReb);
@@ -203,14 +203,14 @@ public class SecMenusWrapperStpV {
     }
     
     public void selectMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
-        if (dCtxSh.channel==Channel.mobile) {
+        if (dCtxSh.channel.isDevice()) {
             secMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh);
         } else {	
         	secMenusDesktopStpV.selectMenuSuperiorTypeCatalog(menu1rstLevel, dCtxSh);
         }
     }
     public boolean checkExistMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) {
-        if (dCtxSh.channel==Channel.mobile) {
+        if (dCtxSh.channel.isDevice()) {
             return secMenuLateralMobilStpV.checkNotExistsMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh.pais);
         } else {	
         	return secMenusDesktopStpV.checkNotExistsMenuSuperiorTypeCatalog(menu1rstLevel);
@@ -218,7 +218,7 @@ public class SecMenusWrapperStpV {
     }
     
     public void selectMenuLateral1erLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
-        if (dCtxSh.channel==Channel.mobile) {
+        if (dCtxSh.channel.isDevice()) {
             secMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh); 
         } else {
         	secMenusDesktopStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh);        
@@ -234,7 +234,7 @@ public class SecMenusWrapperStpV {
     }
     
     public void seleccionLinea(LineaType lineaType) throws Exception {
-        if (channel==Channel.mobile) {
+        if (channel.isDevice()) {
             secMenuLateralMobilStpV.seleccionLinea(lineaType, pais);
         } else {
 	        secMenusDesktopStpV.seleccionLinea(lineaType);
@@ -243,7 +243,7 @@ public class SecMenusWrapperStpV {
     
     public void seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh)
     throws Exception {
-        if (dCtxSh.channel==Channel.mobile) {
+        if (dCtxSh.channel.isDevice()) {
             secMenuLateralMobilStpV.seleccionSublineaNinos(lineaType, sublineaType, pais);
         } else {
         	secMenusDesktopStpV.seleccionSublinea(lineaType, sublineaType);

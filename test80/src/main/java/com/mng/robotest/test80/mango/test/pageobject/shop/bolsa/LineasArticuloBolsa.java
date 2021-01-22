@@ -32,7 +32,7 @@ public class LineasArticuloBolsa {
 		}
 		
 		public static List<DataArtBolsa> getValuesValidForChannel(Channel channel) {
-			if (channel==Channel.mobile) {
+			if (channel.isDevice()) {
 				List<DataArtBolsa> listData = new ArrayList<>();
 				for (DataArtBolsa dataArt : DataArtBolsa.values()) {
 					if (dataArt.validMobilWeb) {
