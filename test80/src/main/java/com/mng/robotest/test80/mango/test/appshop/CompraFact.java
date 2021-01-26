@@ -106,7 +106,7 @@ public class CompraFact implements Serializable {
     }
       
     @Test (
-        groups={"Compra", "Canal:all_App:all"}, alwaysRun=true, priority=1, 
+        groups={"Compra", "Canal:desktop,mobile_App:all"}, alwaysRun=true, priority=1, 
         description="Test de compra (creado desde Factoría) con valores específicos a nivel de Pago, Tipo de Envío, Usuario Conectado y Empleado")
     public void COM010_Pago() throws Exception {
 		TestCaseTM.addNameSufix(this.index_fact);

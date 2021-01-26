@@ -62,7 +62,7 @@ public class Reembolsos {
      * Script correspondiente al caso de prueba que configura el reembolso vía transferencia y saldo en cuenta en arabia/inglés 
      */
     @Test (
-        groups={"Reembolso", "Canal:all_App:shop"}, 
+        groups={"Reembolso", "Canal:desktop,mobile_App:shop"}, 
         description="Configura el reembolso vía transferencia y saldo en cuenta para un país/idioma determinado")
     public void REE001_configureReembolso() throws Exception {
     	DataCtxShop dCtxSh = getCtxShForTest();
@@ -100,7 +100,7 @@ public class Reembolsos {
      * Realiza un checkout utilizando el Saldo en Cuenta 
      */
     @Test (
-        groups={"Reembolso", "Canal:all_App:shop"},
+        groups={"Reembolso", "Canal:desktop,mobile_App:shop"},
         description="Se realiza un Checkout utilizando Saldo en Cuenta. Se accede a la configuración al inicio y al final para comprobar que el saldo en cuenta se resta correctamente")
     public void REE002_checkoutWithSaldoCta() throws Exception {
     	DataCtxShop dCtxSh = getCtxShForTest();

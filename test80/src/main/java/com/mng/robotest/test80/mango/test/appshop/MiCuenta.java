@@ -115,7 +115,7 @@ public class MiCuenta implements Serializable {
      * @param userConCompras Usuario con compras de ambos tipos (tienda, online) en PRE pero sólo de tipo online en PRO
      */
     @Test (
-        groups={"Micuenta", "Canal:all_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
+        groups={"Micuenta", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
         description="Consulta de mis compras con un usuario con datos a nivel de Tienda y Online")
     @Parameters({"userWithOnlinePurchases", "userWithStorePurchases", "passUserWithOnlinePurchases", "passUserWithStorePurchases"})
     public void MIC002_CheckConsultaMisCompras(

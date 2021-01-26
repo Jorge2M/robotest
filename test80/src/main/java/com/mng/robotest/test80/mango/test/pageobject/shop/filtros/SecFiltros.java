@@ -21,22 +21,17 @@ public interface SecFiltros {
     public boolean isClickableFiltroUntil(int seconds);
     public boolean isCollectionFilterPresent() throws Exception;
     
-    //Static factory
-	public static SecFiltros newInstance(Channel channel, AppEcom app, WebDriver driver) {
+	public static SecFiltros make(Channel channel, AppEcom app, WebDriver driver) {
 		switch (channel) {
 		case desktop:
-			return (SecFiltrosDesktop.getInstance(app, driver));
+			return SecFiltrosDesktop.getInstance(app, driver);
 		case mobile:
+		case tablet:
 		default:
-			if (app==AppEcom.outlet) {
-				//TODO unificar con Shop cuando suba a PRO (eliminar los filtros simples)
-				SecSimpleFiltrosMobil secSimple = SecSimpleFiltrosMobil.getInstance(app, driver);
-				if (!secSimple.isPresent(driver)) {
-					return (SecMultiFiltrosMobil.getInstance(app, driver));
-				}
-				return (secSimple);
+			if (app==AppEcom.outlet && channel==Channel.tablet) {
+				return SecFiltrosTabletOutlet.getInstance(driver);
 			}
-			return (SecMultiFiltrosMobil.getInstance(app, driver));
+			return SecMultiFiltrosDevice.getInstance(app, driver);
 		}
 	}
 	

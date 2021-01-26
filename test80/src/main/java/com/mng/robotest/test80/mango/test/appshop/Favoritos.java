@@ -80,7 +80,7 @@ public class Favoritos implements Serializable {
 	}
 
 	@Test(
-		groups={"Favoritos", "Canal:all_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
+		groups={"Favoritos", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="[Usuario registrado] Alta favoritos desde la galería")
 	public void FAV001_AltaFavoritosDesdeGaleria() throws Exception {
 		TestCaseTM.addNameSufix(this.index_fact);
@@ -124,7 +124,7 @@ public class Favoritos implements Serializable {
 	}
 
 	@Test(
-		groups={"Favoritos", "Canal:all_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
+		groups={"Favoritos", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="[Usuario no registrado] Alta favoritos desde la galería y posterior identificación")
 	public void FAV002_AltaFavoritosDesdeFicha() throws Exception {
 		TestCaseTM.addNameSufix(this.index_fact);

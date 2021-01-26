@@ -225,7 +225,7 @@ public class FichaProducto {
     }
     
     @Test (
-        groups={"FichaProducto", "Canal:all_App:shop"}, 
+        groups={"FichaProducto", "Canal:desktop,mobile_App:shop"}, 
         alwaysRun=true, description="[Usario no registrado] Testeo Personalización bordados")
     public void FIC005_Articulo_Personalizable_Noreg() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();

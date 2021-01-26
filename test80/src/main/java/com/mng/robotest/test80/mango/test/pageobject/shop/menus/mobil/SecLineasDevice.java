@@ -42,7 +42,7 @@ public abstract class SecLineasDevice extends PageObjTM {
 	public static SecLineasDevice make(Channel channel, AppEcom app, WebDriver driver) {
 		switch (channel) {
 		case tablet:
-			return new SecLineasTablet(app, driver);
+			return SecLineasTablet.getNew(app, driver); 
 		case mobile:
 		default:
 			return SecLineasMobil.getNew(app, driver);

@@ -3530,7 +3530,7 @@
 <idioma acceso="us-es">ES</idioma>
 <paistop>S</paistop>
 <tarifa>UD</tarifa>
-<codpos>07047</codpos>
+<codpos>11231</codpos>
 <telefono>2014920975</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
@@ -3556,10 +3556,10 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-093;</pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737">&TPV-093;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5500000000000004" mescad="03" anycad="2030" cvc="737">&TPV-093;</pago>
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737">&TPV-093;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="03" anycad="2030" cvc="7373">&TPV-093;</pago>

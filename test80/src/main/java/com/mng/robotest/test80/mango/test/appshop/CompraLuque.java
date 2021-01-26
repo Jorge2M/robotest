@@ -39,7 +39,7 @@ public class CompraLuque {
 		"V2P 7Y0");  //CAYVR
 	
     @Test (
-        groups={"Compra", "Canal:all_App:all"}, alwaysRun=true,
+        groups={"Compra", "Canal:desktop,mobile_App:all"}, alwaysRun=true,
         description="Compra USA o Canadá")
     public void LUQ001_Compra() throws Exception {
     	Pais pais=getPaisRandom(Arrays.asList(PaisShop.USA, PaisShop.Canada, PaisShop.Serbia));
@@ -164,14 +164,14 @@ public class CompraLuque {
 		}
 		
 		if (randomNumber>=1) {
-	        Garment garment1 = new Garment("87091029");
+	        Garment garment1 = new Garment("63100536");
 	        garment1.setStock(1000);
 	        Color color1 = new Color();
-	        color1.setId("69");
-	        color1.setLabel("Dark Navy");
+	        color1.setId("99");
+	        color1.setLabel("Negro");
 	        Size size1 = new Size();
-	        size1.setId(06);
-	        size1.setLabel("5-6 years (116cm)");
+	        size1.setId(20);
+	        size1.setLabel("S");
 	        color1.setSizes(Arrays.asList(size1));
 	        garment1.setColors(Arrays.asList(color1));
 	        listReturn.add(garment1);

@@ -22,45 +22,56 @@ public class SecPreciosArticulo extends PageObjTM {
 			"//span[@class[contains(.,'price-crossed-1')]]",
 			"//span[@class[contains(.,'price-crossed-1')] or @class='tAcLx']",
 			"//span[@class[contains(.,'product-price-crossed')]]",
-			"//span[@class[contains(.,'price-text--through')]]"),
+			"//span[@class[contains(.,'price-text--through')]]",
+			"//span[@class[contains(.,'product-list-price')] and @class[contains(.,'line-through')]]"),
 		precio_2o_tachado (
 			"//span[@class[contains(.,'price-crossed-2')]]",
 			"//span[@class[contains(.,'price-crossed-2')]]", //?
 			"//span[@class[contains(.,'product-price-crossed')]][2]",
-			"//span[@class[contains(.,'price-text--through')]][2]"),
+			"//span[@class[contains(.,'price-text--through')]][2]",
+			"//span[@class[contains(.,'product-list-price')] and @class[contains(.,'line-through')]]"),
 		precio_rebajado_definitivo (
 			"//div[@class[contains(.,'prices-container')]]//span[@class[contains(.,'price-sale')]]",
-			
-			//"//div[@class[contains(.,'prices-container')]]//span[@class[contains(.,'price-sale')]]",
-			"//span[@class='B16Le']", //TODO a la espera de los cambios de Sergio Campillo
-			
+			"//span[@class='B16Le']", 
 			"//div[@class[contains(.,'prices--cross')]]/span[@class='product-price']",
-			"//span[@class[contains(.,'info-price-sale')] or @class='product-price']"),
+			"//span[@class[contains(.,'info-price-sale')] or @class='product-price']",
+			"//span[@class='product-list-sale-price']"),
 		precio_no_rebajado_definitivo (
 			"//div[@class='_3wfbJ' or not(@class)]/span[@class[contains(.,'price-sale')]]", //El not(@class) es debido al nuevo desarrollo en Cloud (04-febrero-2020)
 			"//div[@class='_3wfbJ' or not(@class)]/span[@class[contains(.,'price-sale')]]", //El not(@class) es debido al nuevo desarrollo en Cloud (04-febrero-2020)
 			"//div[@class='product-prices']/span[@class='product-price']",
-			"//span[@class[contains(.,'info-price-sale')] or @class='product-price']"); //?
+			"//span[@class[contains(.,'info-price-sale')] or @class='product-price']",
+			"//span[@class='product-list-sale-price']"); //?
 		
-		String xpathShopDesktop;
-		String xpathOutletDesktop;
-		String xpathShopMovil;
-		String xpathOutletMovil;
-		private TipoPrecio(String xpathShopDesktop, String xpathOutletDesktop, String xpathShopMovil, String xpathOutletMovil) {
+		final String xpathShopDesktop;
+		final String xpathOutletDesktop;
+		final String xpathShopDevice;
+		final String xpathOutletMovil;
+		final String xpathOutletTablet;
+		private TipoPrecio(
+				String xpathShopDesktop, 
+				String xpathOutletDesktop, 
+				String xpathShopDevice, 
+				String xpathOutletMovil,
+				String xpathOutletTablet) {
 			this.xpathShopDesktop = xpathShopDesktop;
 			this.xpathOutletDesktop = xpathOutletDesktop;
-			this.xpathShopMovil = xpathShopMovil;
+			this.xpathShopDevice = xpathShopDevice;
 			this.xpathOutletMovil = xpathOutletMovil;
+			this.xpathOutletTablet = xpathOutletTablet;
 		}
 		public String getXPath(Channel channel, AppEcom app) {
 			if (app==AppEcom.outlet) {
-				if (channel.isDevice()) {
+				if (channel==Channel.mobile) {
 					return xpathOutletMovil;
+				}
+				if (channel==Channel.tablet) {
+					return xpathOutletTablet;
 				}
 				return xpathOutletDesktop;
 			}
 			if (channel.isDevice()) {
-				return xpathShopMovil;
+				return xpathShopDevice;
 			}
 			return xpathShopDesktop;
 		}

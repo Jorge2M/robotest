@@ -309,7 +309,7 @@ public class PageGaleriaStpV {
         expected="Los artículos se ordenan correctamente")
     public int seleccionaOrdenacionGaleria(FilterOrdenacion typeOrdenacion, String tipoPrendasGaleria, int numArticulosValidar, 
 		   								   DataCtxShop dCtxSh) throws Exception {
-        SecFiltros secFiltros = SecFiltros.newInstance(dCtxSh.channel, dCtxSh.appE, driver);
+        SecFiltros secFiltros = SecFiltros.make(dCtxSh.channel, dCtxSh.appE, driver);
         secFiltros.selecOrdenacionAndReturnNumArticles(typeOrdenacion);    
         
         checkIsVisiblePageWithTitle(tipoPrendasGaleria);
@@ -367,7 +367,7 @@ public class PageGaleriaStpV {
     		"Es clickable el 1er elemento de la lista",
     		pageGaleria.isClickableArticuloUntil(1, 0), State.Warn);
       	
-        SecFiltros secFiltros = SecFiltros.newInstance(dCtxSh.channel, dCtxSh.appE, driver);
+        SecFiltros secFiltros = SecFiltros.make(dCtxSh.channel, dCtxSh.appE, driver);
         int maxSeconds = 2;
       	validations.add(
     		"Es clickable el bloque de filtros (esperamos hasta " + maxSeconds + " segundos)",

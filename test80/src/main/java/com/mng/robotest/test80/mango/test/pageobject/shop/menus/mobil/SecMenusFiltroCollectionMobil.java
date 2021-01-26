@@ -15,7 +15,7 @@ public class SecMenusFiltroCollectionMobil extends SeleniumUtils implements SecM
 	private final SecFiltros secFiltros;
     
     public SecMenusFiltroCollectionMobil(AppEcom app, WebDriver driver) {
-    	this.secFiltros = SecFiltros.newInstance(Channel.mobile, app, driver);
+    	this.secFiltros = SecFiltros.make(Channel.mobile, app, driver);
     }
     
     @Override

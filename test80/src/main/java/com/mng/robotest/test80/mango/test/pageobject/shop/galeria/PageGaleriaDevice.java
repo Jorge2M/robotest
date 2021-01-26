@@ -20,7 +20,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDes
  * Clase que define la automatización de las diferentes funcionalidades de la página de "GALERÍA DE PRODUCTOS"
  * @author jorge.munoz
  */
-public class PageGaleriaMobil extends PageGaleria {
+public class PageGaleriaDevice extends PageGaleria {
 	
     final static String TagIdColor = "@TagIdColor";
     final static String TagFlagSelected = "@TagFlagSelected";
@@ -45,10 +45,12 @@ public class PageGaleriaMobil extends PageGaleria {
         	"@class[contains(.,'product-price')]]";
     final static String XPathButtonAnyadirRelativeArticle = "//div[@class[contains(.,'product-add')]]/button";
     final static String XPathCapaTallasRelativeArticle = "//div[@class[contains(.,'product-sizes-container')]]";
-    final static String XPpathIconoUpGalery = "//div[@id='scrollTop']";
+    final static String XPathIconoUpGaleryMobile = "//div[@class[contains(.,'scroll-container--visible')]]";
+    final static String XPathIconoUpGaleryTablet = "//div[@class='scroll-top-step']";
     final static String XPathFiltersDiv = "//div[@class='order-filters-fixed']";
     final static String TagNumPagina = "@tagNumPagina";
-    final static String XPathPaginaWithTag = "//div[@id='page" + TagNumPagina + "']";
+    final static String XPathPaginaMobileWithTag = "//div[@id='page" + TagNumPagina + "']";
+    final static String XPathPaginaTabletWithTag = "//div[@id='page" + TagNumPagina + "Height']";
     final static String XPathHeaderArticles = "//h1[@class='catalog-title']";
     
     static String classProductName = 
@@ -60,28 +62,31 @@ public class PageGaleriaMobil extends PageGaleria {
     //TODO cuando suba el Outlet-Desktop-React a PRO podremos igualar este XPath con el XPathColoresArticuloShop (outlet=shop)
     final static String XPathColoresArticuloOutlet = "//div[@class[contains(.,'product-list-color--stock')] or @class[contains(.,'product-colors')]]";
     
-    final static String XPathColoresArticuloShop = "//div[@class[contains(.,'product-colors')]]";
+    final static String XPathColoresArticulo = "//div[@class[contains(.,'product-colors')]]";
+    final static String XPathColoresArticuloOutletTablet = "//div[@class[contains(.,'product-list-colors')]]";
     
     //TODO cuando suba el Outlet-Desktop-React a PRO podremos igualar este XPath con el XPathColoresArticuloShop (outlet=shop)
-    final static String XPathArticleWithColorsOutlet = "//div[@class[contains(.,'product-list-info-color')] or @class[contains(.,'product-colors')]]/ancestor::li";	
+    //final static String XPathArticleWithColorsOutlet = "//div[@class[contains(.,'product-list-info-color')] or @class[contains(.,'product-colors')]]/ancestor::li";	
+    //final static String XPathArticleWithColorsOutletTablet = "//div[@class[contains(.,'product-list-colors')]]/ancestor::li";
     
     String getXPathColoresArticle() {
-    	switch (app) {
-    	case outlet:
-    		return XPathColoresArticuloOutlet;
-    	case shop:
-    	default:
-    		return XPathColoresArticuloShop;
+    	if (channel==Channel.tablet && app==AppEcom.outlet) {
+    		return XPathColoresArticuloOutletTablet;
     	}
+    	return XPathColoresArticulo;
     }
 
     String getXPathArticuloConColores() {
-    	switch (app) {
-    	case outlet:
-    		return XPathArticleWithColorsOutlet;
-    	case shop:	
+    	return getXPathColoresArticle() + "//" + getXPathAncestorArticulo();
+    }
+    
+    String getXPpathIconoUpGalery() {
+    	switch (channel) {
+    	case mobile:
+    		return XPathIconoUpGaleryMobile;
+    	case tablet:
     	default:
-    		return getXPathColoresArticle() + "//" + getXPathAncestorArticulo();
+    		return XPathIconoUpGaleryTablet;
     	}
     }
     
@@ -103,12 +108,12 @@ public class PageGaleriaMobil extends PageGaleria {
     //Número de páginas a partir del que consideramos que se requiere un scroll hasta el final de la galería
     public static int scrollToLast = 20; 
     
-    private PageGaleriaMobil(From from, AppEcom app, WebDriver driver) {
-    	super(from, Channel.mobile, app, driver);
+    private PageGaleriaDevice(From from, Channel channel, AppEcom app, WebDriver driver) {
+    	super(from, channel, app, driver);
     }
     
-    public static PageGaleriaMobil getNew(From from, AppEcom app, WebDriver driver) {
-    	return (new PageGaleriaMobil(from, app, driver)); 
+    public static PageGaleriaDevice getNew(From from, Channel channel, AppEcom app, WebDriver driver) {
+    	return (new PageGaleriaDevice(from, channel, app, driver)); 
     }
     
     String getXPathArticuloConVariedadColores(int numArticulo) {
@@ -138,7 +143,13 @@ public class PageGaleriaMobil extends PageGaleria {
     }
     
     String getXPathPagina(int pagina) {
-    	return (XPathPaginaWithTag.replace(TagNumPagina, String.valueOf(pagina)));
+    	switch (channel) {
+    	case mobile:
+    		return (XPathPaginaMobileWithTag.replace(TagNumPagina, String.valueOf(pagina)));
+    	case tablet:
+    	default:
+    		return (XPathPaginaTabletWithTag.replace(TagNumPagina, String.valueOf(pagina)));
+    	}
     }
     
     @Override
@@ -365,7 +376,8 @@ public class PageGaleriaMobil extends PageGaleria {
     
     @Override
     public boolean backTo1erArticulo() throws InterruptedException {
-    	return backTo1erArticulo(XPpathIconoUpGalery);
+    	String xpathIconoUp = getXPpathIconoUpGalery();
+    	return backTo1erArticulo(xpathIconoUp);
     }
     
     /**

@@ -129,7 +129,7 @@ public class Registro implements Serializable {
 
     @SuppressWarnings("static-access")
     @Test (
-        groups={"Registro", "Canal:all_App:shop,outlet", "SupportsFactoryCountrys"}, alwaysRun=true, 
+        groups={"Registro", "Canal:desktop,mobile_App:shop,outlet", "SupportsFactoryCountrys"}, alwaysRun=true, 
         description="Alta/Registro de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
     public void REG002_RegistroOK_publi() throws Exception {
     	DataCtxShop dCtxSh = getCtxShForTest();

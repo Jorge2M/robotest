@@ -21,7 +21,7 @@ import com.github.jorge2m.testmaker.service.testab.manager.TestABmanager;
 public class Buscador {
 
     @Test (
-        groups={"Buscador", "Canal:all_App:all"}, alwaysRun=true, 
+        groups={"Buscador", "Canal:desktop,mobile_App:all"}, alwaysRun=true, 
         description="[Usuario no registrado] Búsqueda artículos existente / no existente")
     @Parameters({"categoriaProdExistente", "catProdInexistente"})
     public void BUS001_Buscador_NoReg(String categoriaProdExistente, String catProdInexistente) 

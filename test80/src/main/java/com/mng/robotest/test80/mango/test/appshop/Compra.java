@@ -63,7 +63,7 @@ public class Compra {
 	}
 
 	@Test (
-		groups={"Compra", "Canal:all_App:shop,outlet"}, alwaysRun=true, priority=2, 
+		groups={"Compra", "Canal:desktop,mobile_App:shop,outlet"}, alwaysRun=true, priority=2, 
 		description="[Usuario registrado][Tarjeta guardada] Compra con descuento empleado. Verificar compra en sección 'Mis compras'") //Lo marcamos con prioridad 2 para dar tiempo a que otro caso de prueba registre la tarjeta 
 	public void COM001_Compra_TrjSaved_Empl() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();

@@ -102,8 +102,9 @@ public abstract class PageGaleria extends PageObjTM {
 		case desktop:
 			return (PageGaleriaDesktop.getNew(from, app, driver));
 		case mobile:
+		case tablet:
 		default:
-			return (PageGaleriaMobil.getNew(from, app, driver));
+			return (PageGaleriaDevice.getNew(from, channel, app, driver));
 		}
 	}
 	
@@ -121,7 +122,8 @@ public abstract class PageGaleria extends PageObjTM {
 		"//div[@class[contains(.,'product-list-item')] or @class[contains(.,'z0q8P')]]";
 	//final static String XPathArticuloMobilOutlet = "//div[@class[contains(.,'product-list-item')] or @id[contains(.,'product-key-id')] or @class='product']";
 	//final static String XPathArticuloMobilOutlet = "//li[@class='product-list-item']";
-	final static String XPathArticuloMobilShop = "//li[@class='product']";
+	final static String XPathArticuloDevice = "//li[@class='product']";
+	final static String XPathArticuloTabletOutlet = "//li[@class[contains(.,'product-list-item')]]";
 	private String getXPathArticulo() {
 		if (channel==Channel.desktop) {
 			if (from==From.menu) {
@@ -129,7 +131,12 @@ public abstract class PageGaleria extends PageObjTM {
 			}
 			return XPathArticuloDesktopBuscador;
 		}
-		return XPathArticuloMobilShop;
+		else {
+			if (channel==Channel.tablet && app==AppEcom.outlet) {
+				return XPathArticuloTabletOutlet;
+			}
+			return XPathArticuloDevice;
+		}
 	}
 	
 	String XPathHearthIconRelativeArticleDesktop = "//span[@class[contains(.,'icon-favorite')]]";

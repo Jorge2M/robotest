@@ -24,25 +24,25 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
  * @author jorge.munoz
  *
  */
-public class SecMultiFiltrosMobil extends PageObjTM implements SecFiltros {
+public class SecMultiFiltrosDevice extends PageObjTM implements SecFiltros {
     
 	private final static String XPathFiltrarYOrdenarButton = "//button[@class[contains(.,'-filters-btn')]]";
 	private final static String XPathButtonAplicarFiltros = "//button[@class[contains(.,'filters-apply')]]";
 	
 	PageGaleria pageGaleria = null;
 	
-	private SecMultiFiltrosMobil(WebDriver driver, PageGaleria pageGaleria) {
+	private SecMultiFiltrosDevice(WebDriver driver, PageGaleria pageGaleria) {
 		super(driver);
 		this.pageGaleria = pageGaleria;
 	}
 	
-	public static SecMultiFiltrosMobil getInstance(AppEcom app, WebDriver driver) {
+	public static SecMultiFiltrosDevice getInstance(AppEcom app, WebDriver driver) {
 		PageGaleria pageGaleria = PageGaleria.getNew(Channel.mobile, app, driver);
-		return (new SecMultiFiltrosMobil(driver, pageGaleria));
+		return (new SecMultiFiltrosDevice(driver, pageGaleria));
 	}
 	
-	public static SecMultiFiltrosMobil getInstance(WebDriver driver, PageGaleria pageGaleria) {
-		return (new SecMultiFiltrosMobil(driver, pageGaleria));
+	public static SecMultiFiltrosDevice getInstance(WebDriver driver, PageGaleria pageGaleria) {
+		return (new SecMultiFiltrosDevice(driver, pageGaleria));
 	}
     
     @Override

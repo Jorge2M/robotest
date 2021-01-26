@@ -95,7 +95,7 @@ public class Loyalty {
 	}
 	
     @Test (
-        groups={"Loyalty", "Canal:all_App:shop"},
+        groups={"Loyalty", "Canal:desktop,mobile_App:shop"},
         description="Se realiza una compra mediante un usuario loyalty con Likes")
     public void LOY001_Compra_LikesStored() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
@@ -151,7 +151,7 @@ public class Loyalty {
     }
     
 	@Test (
-		groups={"Loyalty", "Canal:all_App:shop"},
+		groups={"Loyalty", "Canal:desktop,mobile_App:shop"},
 		description="Exchange mediante donación de Likes")
 	public void LOY002_Exhange_Donacion_Likes() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
@@ -187,7 +187,7 @@ public class Loyalty {
 	}
 
 	@Test (
-		groups={"Loyalty", "Canal:all_App:shop"},
+		groups={"Loyalty", "Canal:desktop,mobile_App:shop"},
 		description="Conseguir algo por 1200 likes")
 	public void LOY003_Exhange_Compra_Entrada() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
@@ -221,7 +221,7 @@ public class Loyalty {
 	}
 
 //	@Test (
-//		groups={"Loyalty", "Canal:all_App:shop"},
+//		groups={"Loyalty", "Canal:desktop,mobile_App:shop"},
 //		description="Registro nuevo usuario comprobando que funciona el vale de descuento MANGOLIKESYOU")
 //	public void LOY004_Registro_y_vale_MANGOLIKESYOU() throws Exception {
 //		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
@@ -263,7 +263,7 @@ public class Loyalty {
 //	}
 	
 	@Test (
-		groups={"Loyalty", "Canal:all_App:shop"},
+		groups={"Loyalty", "Canal:desktop,mobile_App:shop"},
 		description="Transferencia de Likes de un cliente a otro")
 	public void LOY005_TransferLikes_To_Another_Client() throws Exception {
 		DataCtxShop dCtxSh = getCtxShForTest();
