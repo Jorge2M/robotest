@@ -64,7 +64,7 @@ public class PageHomeMarcasStpV {
     public ChecksTM checkMsgNewsletterFooter(boolean salesOnInCountry, IdiomaPais idioma) {
     	ChecksTM validations = ChecksTM.getNew();
     	String percentageSymbol = UtilsTestMango.getPercentageSymbol(idioma);
-    	boolean isMsgWithPercentageSimbol = (new SecFooter(app, driver)).getNewsLetterMsgText().contains(percentageSymbol);
+    	boolean isMsgWithPercentageSimbol = (new SecFooter(app, driver)).newsLetterMsgContains(percentageSymbol);
     	if (salesOnInCountry) {
 	    	validations.add(
 	    		PrefixRebajas + "El mensaje de NewsLetter del Footer No contiene \"" + percentageSymbol + "\"",

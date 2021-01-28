@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
@@ -22,6 +21,8 @@ public class SecFooter extends PageObjTM {
 	
     private final static String XPathCapaShop = "//div[@id='nav-footer']";
     private final static String XPathCapaOutlet = "//div[@class[contains(.,'footer__column footer__column')]]";
+    
+    private final SecNewsLetter secNewsLetter;
     
     static List<AppEcom> footerShop = Arrays.asList(AppEcom.shop);
     static List<AppEcom> footerOutlet = Arrays.asList(AppEcom.outlet);
@@ -86,9 +87,7 @@ public class SecFooter extends PageObjTM {
 
     }
     
-    private final static String XPathNewsLetterMsg = "//div[@class='newsletter-label']";
-    private final static String XPathTextAreaMailSuscripcionShop = "//input[@id[contains(.,'newsletterSubscriptionFooter-email')]]";
-    private final static String XPathTextAreaMailSuscripcionOutlet = "//input[@class[contains(.,'newsletterFormInput')]]";
+    
     private final static String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
     private final static String XPathCambioPaisShop = "//div[@class[contains(.,'modalCambioPaisShow')]]";
     private final static String XPathCambioPaisOutlet = "//span[@class[contains(.,'countrySelector')]]";
@@ -96,6 +95,7 @@ public class SecFooter extends PageObjTM {
     public SecFooter(AppEcom app, WebDriver driver) {
     	super(driver);
     	this.app = app;
+    	this.secNewsLetter = new SecNewsLetter(app, driver);
     }
     
     private String getXPathCapaFooter() {
@@ -117,13 +117,6 @@ public class SecFooter extends PageObjTM {
             return XPathCambioPaisOutlet;
         }
         return XPathCambioPaisShop;
-    }
-    
-    private String getXPathTextAreaMailSuscripcion() {
-        if (app==AppEcom.outlet) {
-            return XPathTextAreaMailSuscripcionOutlet;
-        }
-        return XPathTextAreaMailSuscripcionShop;
     }
     
     public boolean isPresent() {
@@ -168,29 +161,6 @@ public class SecFooter extends PageObjTM {
         return true;
     }
     
-    public String getNewsLetterMsgText() {
-        try {
-            WebElement titleNws = driver.findElement(By.xpath(XPathNewsLetterMsg));
-            if (titleNws!=null) {
-                return driver.findElement(By.xpath(XPathNewsLetterMsg)).getText();
-            }
-        }
-        catch (Exception e) {
-            //Retornamos ""
-        }
-        return "";
-    }
-    
-    public boolean newsLetterMsgContains(String literal) {
-        return (getNewsLetterMsgText().contains(literal));
-    }
-
-	public void clickFooterSuscripcion() throws Exception {
-		ModalClubMangoLikes.closeModalIfVisible(driver);
-		String xpath = getXPathTextAreaMailSuscripcion();
-		driver.findElement(By.xpath(xpath)).click();
-	}
-
 	public boolean isTextoLegalRGPDPresent() {
 		return (state(Present, By.xpath(XPathLegalRGPD)).check());
 	}
@@ -201,5 +171,13 @@ public class SecFooter extends PageObjTM {
 		if (state(Visible, footer, driver).check()) {
 			moveToElement(footer, driver);
 		}
+	}
+	
+	public void clickFooterSuscripcion() throws Exception {
+		secNewsLetter.clickFooterSuscripcion();
+	}
+	
+	public boolean newsLetterMsgContains(String literal) {
+		return secNewsLetter.newsLetterMsgContains(literal);
 	}
 }

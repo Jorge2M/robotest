@@ -32,7 +32,7 @@ public class SecBloquesMenuDesktop extends PageObjTM {
 	static String TagIdTypeMenu = "@TypeMenu";
     static String XPathContainerMenus = "//div[@class[contains(.,'section-detail-container')]]";
     static String XPathCapaMenus = XPathContainerMenus + "//div[@class[contains(.,'section-detail-list')]]";
-    static String XPathCapaMenusLineaWithTag = XPathCapaMenus + "//self::*[@data-brand='" + TagIdLinea + "']";
+    static String XPathCapaMenusLineaWithTag = XPathCapaMenus + "//self::*[@data-brand[contains(.,'" + TagIdLinea + "')]]";
     static String XPathEntradaMenuLineaRelativeToCapaWithTag = 
     	"//ul[@class[contains(.,'" + TagIdTypeMenu + "')]]" +
     	"/li[@class[contains(.,'menu-item')] and not(@class[contains(.,'desktop-label-hidden')] or @class[contains(.,' label-hidden')])]/a"; 
