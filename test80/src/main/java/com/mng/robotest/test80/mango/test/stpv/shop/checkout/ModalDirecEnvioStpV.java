@@ -41,9 +41,9 @@ public class ModalDirecEnvioStpV {
 	private static ChecksTM checkAfterUpdateData(WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
 		int maxSeconds = 2;
-		validations.add(
-			"Desaparece el modal de introducción de los datos de la dirección (lo esperamos hasta " + maxSeconds + " segundos)",
-			ModalDirecEnvio.isInvisibleFormUntil(maxSeconds, driver), State.Defect); 
+//		validations.add(
+//			"Desaparece el modal de introducción de los datos de la dirección (lo esperamos hasta " + maxSeconds + " segundos)",
+//			ModalDirecEnvio.isInvisibleFormUntil(maxSeconds, driver), State.Defect); 
 		validations.add(
 			"Aparece un modal de alerta alertando de un posible cambio de precios (lo esperamos hasta " + maxSeconds + " segundos)",
 			Page1DktopCheckout.modalAvisoCambioPais.isVisibleUntil(maxSeconds, driver), State.Warn); 

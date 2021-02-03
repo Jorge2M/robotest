@@ -9,8 +9,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalAvisoCambioPais {
 
-	static String XPathModal = "//div[@class[contains(.,'modal-alert-change-country')]]";
-	static String XPathButtonConfCambio = "//input[@id[contains(.,'ModalDatosEnvio')] and @class[contains(.,'changeCountry')]]";
+	static String XPathModal = "//div[@aria-labelledby[contains(.,'changeCountryModal')]]";
+	static String XPathButtonConfCambio = XPathModal + "//button[@name='continue']";
 
 	public static boolean isVisibleUntil(int maxSeconds, WebDriver driver) {
 		return (state(Visible, By.xpath(XPathModal), driver)

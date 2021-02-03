@@ -13,13 +13,13 @@ public class SecNewsLetter {
 	private final AppEcom app;
 	
     private final static String XPathCapaNewsLetterShop = "//div[@id[contains(.,'newsletterSubscriptionFooter')]]";
-    private final static String XPathCapaNewsLetterOutlet = "//div[@id[contains(.,'panelFooterRegistroNewsletter')]]";
+    private final static String XPathCapaNewsLetterOutlet = "//div[@class[contains(.,'newsletterForm')]]";
     
     private final static String XPathNewsLetterMsgShop = XPathCapaNewsLetterShop + "//p[@class[contains(.,'sg-text-action')]]";
     private final static String XPathNewsLetterMsgOutlet = XPathCapaNewsLetterOutlet + "//span[@class='newsletterForm__text']";
     
     private final static String XPathTextAreaMailSuscripcionShop = XPathCapaNewsLetterShop + "//input[@name='mail']";
-    private final static String XPathTextAreaMailSuscripcionOutlet = XPathCapaNewsLetterOutlet + "//input[@class[contains(.,'regExpMail')]]";
+    private final static String XPathTextAreaMailSuscripcionOutlet = XPathCapaNewsLetterOutlet + "//input[@id[contains(.,'regExpMail')]]";
 	
     public SecNewsLetter(AppEcom app, WebDriver driver) {
     	this.driver = driver;

@@ -28,7 +28,7 @@ public class Page1EnvioCheckoutMobil {
 	static String XPathDescuentoEmpleado = "//div[@class[contains(.,'employee-discount')]]//p[@class='discount-total-amount']/strong";
 	static String XPathRadioEnvio = "//div[@class[contains(.,'custom-radio')] and @data-custom-radio-id]";
 	static String XPathSelectFranjaHorariaMetodoUrgente = "//select[@data-component-id='time-range-sameday_nextday_franjas']";
-	static String XPathDireccionEnvio = "//span[@class='address']";
+	static String XPathDireccionEnvio = "//p[@class='address']";
 	static String XPathLinkOtrosMetEnvioClosed = "//div[@class[contains(.,'shipment-method')]]" + 
 												 "//span[@class[contains(.,'others-title')] and not(@class[contains(.,'selected')])]";
 	static String XPathLinkEditDirecEnvio = "//div[@id[contains(.,'addressBlock')]]//span[class='address']";

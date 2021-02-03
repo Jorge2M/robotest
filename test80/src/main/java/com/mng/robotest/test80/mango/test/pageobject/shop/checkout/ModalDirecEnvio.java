@@ -34,10 +34,10 @@ public class ModalDirecEnvio extends ModalDireccion {
 				.wait(maxSeconds).check());
 	}
 
-	public static boolean isInvisibleFormUntil(int maxSeconds, WebDriver driver) {
-		return (state(Invisible, By.xpath(XPathFormModal), driver)
-				.wait(maxSeconds).check());
-	}
+//	public static boolean isInvisibleFormUntil(int maxSeconds, WebDriver driver) {
+//		return (state(Invisible, By.xpath(XPathFormModal), driver)
+//				.wait(maxSeconds).check());
+//	}
 
 	public static boolean isVisibleButtonActualizar(WebDriver driver) {
 		return (state(Visible, By.xpath(XPathButtonUpdate), driver).check());

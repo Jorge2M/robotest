@@ -10,7 +10,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageMangoCard extends PageObjTM implements PageFromFooter {
 	
 	static String XPathGoMangoCardButton = "//span[@class='menu-link-button']";
-	static String XPathGoMangoCardButtonMobile = "//a[@id='formLink']";
+	static String XPathGoMangoCardButtonMobile = "//a[@id='getCardLink']";
     static String XPathLinkSolMangoCardPage1 = "//button[@class[contains(.,'form-submit')]]";
      
     static String XPathNameField = "//input[@id='datNombre']";

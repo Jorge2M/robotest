@@ -28,10 +28,10 @@ public abstract class SecLineasDevice extends PageObjTM {
 	static String IniXPathLinkSublinea = "//div[@data-label[contains(.,'interior-"; 
 	static String XPathLinkSublineaNina =  IniXPathLinkSublinea + "nina')]]";
 	static String XPathLinkSublineaBebeNina = IniXPathLinkSublinea + "bebe_nina')]]";
-	static String XPathLinkSublineaTeenNina = IniXPathLinkSublinea + "teen')]]";
+	static String XPathLinkSublineaTeenNina = IniXPathLinkSublinea + "chica')]]";
 	static String XPathLinkSublineaNino = IniXPathLinkSublinea + "nino')]]";
 	static String XPathLinkSublineaBebeNino = IniXPathLinkSublinea + "bebe_nino')]]";
-	static String XPathLinkSublineaTeenNino = IniXPathLinkSublinea + "teen')]]";
+	static String XPathLinkSublineaTeenNino = IniXPathLinkSublinea + "chico')]]";
 	
 	public SecLineasDevice(Channel channel, AppEcom app, WebDriver driver) {
 		super(driver);
