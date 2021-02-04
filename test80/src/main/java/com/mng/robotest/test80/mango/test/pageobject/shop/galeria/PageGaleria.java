@@ -123,7 +123,7 @@ public abstract class PageGaleria extends PageObjTM {
 	//final static String XPathArticuloMobilOutlet = "//div[@class[contains(.,'product-list-item')] or @id[contains(.,'product-key-id')] or @class='product']";
 	//final static String XPathArticuloMobilOutlet = "//li[@class='product-list-item']";
 	final static String XPathArticuloDevice = "//li[@class='product']";
-	final static String XPathArticuloTabletOutlet = "//li[@class[contains(.,'product-list-item')]]";
+	final static String XPathArticuloDeviceOutlet = "//*[@class[contains(.,'product-list-item')]]";
 	private String getXPathArticulo() {
 		if (channel==Channel.desktop) {
 			if (from==From.menu) {
@@ -132,8 +132,8 @@ public abstract class PageGaleria extends PageObjTM {
 			return XPathArticuloDesktopBuscador;
 		}
 		else {
-			if (channel==Channel.tablet && app==AppEcom.outlet) {
-				return XPathArticuloTabletOutlet;
+			if (app==AppEcom.outlet) {
+				return XPathArticuloDeviceOutlet;
 			}
 			return XPathArticuloDevice;
 		}
