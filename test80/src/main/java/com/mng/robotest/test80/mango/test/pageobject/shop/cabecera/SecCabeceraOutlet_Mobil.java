@@ -7,9 +7,9 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraShop_DesktopMobile.IconoCabeceraShop_DesktopMobile;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraShop.IconoCabeceraShop;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
@@ -18,11 +18,11 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
  * @author jorge.munoz
  *
  */
-public class SecCabeceraOutletMobil extends SecCabecera {
+public class SecCabeceraOutlet_Mobil extends SecCabecera {
 	
 	public enum IconoCabOutletMobil implements ElementPage {
-		bolsa(IconoCabeceraShop.bolsa.getXPath()),
-		lupa(IconoCabeceraShop.lupa.getXPath());
+		bolsa(IconoCabeceraShop_DesktopMobile.bolsa.getXPath()),
+		lupa(IconoCabeceraShop_DesktopMobile.lupa.getXPath());
 		
 		private By by;
 		private IconoCabOutletMobil(String xpath) {
@@ -37,17 +37,17 @@ public class SecCabeceraOutletMobil extends SecCabecera {
 		
 	//private final static String XPathNumArticles = "//span[@class[contains(.,'_cartNum')]]";
 
-    private SecCabeceraOutletMobil(Channel channel, AppEcom app, WebDriver driver) {
+    private SecCabeceraOutlet_Mobil(Channel channel, AppEcom app, WebDriver driver) {
     	super(channel, app, driver);
     }
     
-    public static SecCabeceraOutletMobil getNew(Channel channel, AppEcom app, WebDriver driver) {
-    	return (new SecCabeceraOutletMobil(channel, app, driver));
+    public static SecCabeceraOutlet_Mobil getNew(Channel channel, AppEcom app, WebDriver driver) {
+    	return (new SecCabeceraOutlet_Mobil(channel, app, driver));
     }
     
     @Override
     String getXPathNumberArtIcono() {
-    	return SecCabeceraShop.XPathNumArticlesBolsa;
+    	return SecCabeceraShop_DesktopMobile.XPathNumArticlesBolsa;
     }
     
     @Override

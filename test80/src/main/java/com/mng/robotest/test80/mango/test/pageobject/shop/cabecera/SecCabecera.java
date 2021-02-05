@@ -13,8 +13,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecSearch;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper.UserMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralDevice;
 
 public abstract class SecCabecera extends PageObjTM {
@@ -48,12 +48,16 @@ public abstract class SecCabecera extends PageObjTM {
 		}
 	}
 	
-	public SecCabeceraShop getShop() {
-		return (SecCabeceraShop)this;
+	public SecCabeceraShop_DesktopMobile getShop_DesktopMobile() {
+		return (SecCabeceraShop_DesktopMobile)this;
 	}
 	
-	public SecCabeceraOutletMobil getOutletMobil() {
-		return (SecCabeceraOutletMobil)this;
+	public SecCabeceraShop_Tablet getShop_Tablet() {
+		return (SecCabeceraShop_Tablet)this;
+	}
+	
+	public SecCabeceraOutlet_Mobil getOutletMobil() {
+		return (SecCabeceraOutlet_Mobil)this;
 	}
 	
 	public static void buscarTexto(String referencia, Channel channel, AppEcom app, WebDriver driver) {

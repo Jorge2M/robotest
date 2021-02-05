@@ -1,9 +1,7 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.menus;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.Arrays;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -17,15 +15,15 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMobil.IconoCabOutletMobil;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraShop.IconoCabeceraShop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutlet_Mobil.IconoCabOutletMobil;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraShop_DesktopMobile.IconoCabeceraShop_DesktopMobile;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraShop_Tablet.IconoCabeceraShop_Tablet;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop.MenuUserDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralDevice;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenusUserDevice.MenuUserDevice;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
-import static com.mng.robotest.test80.mango.conftestmaker.AppEcom.shop;
-import static com.mng.robotest.test80.mango.conftestmaker.AppEcom.outlet;
-import static com.mng.robotest.test80.mango.conftestmaker.AppEcom.votf;
+
 
 public class MenusUserWrapper extends PageObjTM {
 	
@@ -33,30 +31,6 @@ public class MenusUserWrapper extends PageObjTM {
 	final AppEcom app;
 	final SecCabecera secCabecera;
 	final SecMenuLateralDevice secMenuLateralMobil;
-	
-	public enum UserMenu {
-		lupa(Arrays.asList(shop, outlet, votf)),
-		iniciarSesion(Arrays.asList(shop, outlet)),
-		cerrarSesion(Arrays.asList(shop, outlet)),
-		registrate(Arrays.asList(shop, outlet)),
-		miCuenta(Arrays.asList(shop, outlet)),
-		favoritos(Arrays.asList(shop, votf)),
-		bolsa(Arrays.asList(shop, outlet)),
-		misCompras(Arrays.asList(shop)),
-		pedidos(Arrays.asList(outlet)),
-		mangoLikesYou(Arrays.asList(shop)),
-		ayuda(Arrays.asList(shop, outlet, votf)),
-		cambioPais(Arrays.asList(outlet));
-
-		List<AppEcom> apps;
-		private UserMenu(List<AppEcom> apps) {
-			this.apps = apps;
-		}
-		
-		public List<AppEcom> getAppsSupported() {
-			return this.apps;
-		}
-	}
 	
 	private MenusUserWrapper(Channel channel, AppEcom app, WebDriver driver) {
 		super(driver);
@@ -78,8 +52,8 @@ public class MenusUserWrapper extends PageObjTM {
 		if (menu==UserMenu.bolsa) {
 			return (secCabecera.isInStateIconoBolsa(state, maxSeconds));
 		} else {
-			ElementPage menuElement = getMenu(menu);
-			return (isMenuInStateUntil(menuElement, state, maxSeconds));
+			MenuUserItem menuUserItem = new MenuUserItem(menu, channel, app);
+			return (isMenuInStateUntil(menuUserItem, state, maxSeconds));
 		}
 	}
 	
@@ -88,8 +62,8 @@ public class MenusUserWrapper extends PageObjTM {
 		if (menu==UserMenu.bolsa) {
 			secCabecera.clickIconoBolsa();
 		} else {
-			ElementPage menuElement = getMenu(menu);
-			clickMenuAndWait(menuElement);
+			MenuUserItem menuUserItem = new MenuUserItem(menu, channel, app);
+			clickMenuAndWait(menuUserItem);
 		}
 	}
 	
@@ -105,8 +79,8 @@ public class MenusUserWrapper extends PageObjTM {
 		if (menu==UserMenu.bolsa) {
 			secCabecera.hoverIconoBolsa();
 		} else {
-			ElementPage menuElement = getMenu(menu);
-			moveToElement(menuElement.getBy(channel, app), driver);
+			MenuUserItem menuUserItem = new MenuUserItem(menu, channel, app);
+			moveToElement(menuUserItem.getLink().getBy(channel, app), driver);
 		}
 	}
 	
@@ -120,7 +94,7 @@ public class MenusUserWrapper extends PageObjTM {
 			throw new IllegalArgumentException(
 				"This function doesn't support the channel " + channel + " and the application " + app);
 		}
-		secCabecera.getShop().hoverIconForShowUserMenuDesktop();
+		secCabecera.getShop_DesktopMobile().hoverIconForShowUserMenuDesktop();
 	}
 	
 	private void checkAppSupported(AppEcom app, UserMenu userMenu) {
@@ -129,188 +103,44 @@ public class MenusUserWrapper extends PageObjTM {
 		}
 	}
 
-	private ElementPage getMenu(UserMenu menu) {
-		switch (menu) {
-			case lupa:
-				return getMenuLupa();
-			case iniciarSesion:
-				return getMenuIniciarSesion();
-			case cerrarSesion:
-				return getMenuCerrarSesion();
-			case registrate:
-				return getMenuRegistrate();
-			case miCuenta:
-				return getMenuMiCuenta();
-			case favoritos:
-				return getMenuFavoritos();
-			case misCompras:
-				return getMenuMisCompras();
-			case pedidos:
-				return getMenuPedidos();
-			case mangoLikesYou:
-				return getMenuMangoLikesYou();
-			case ayuda:
-				return getMenuAyuda();
-			case cambioPais:
-				return getMenuCambioPais();
+	private boolean isMenuInStateUntil(MenuUserItem menu, State state, int maxSeconds) {
+		ElementPage menuLink = menu.getLink();
+		switch (menu.getType()) {
+			case IconoCabeceraShop_DesktopMobile:
+				return (secCabecera.getShop_DesktopMobile().isIconoInStateUntil((IconoCabeceraShop_DesktopMobile)menuLink, state, maxSeconds));
+			case IconoCabeceraShop_Tablet:
+				return (secCabecera.getShop_Tablet().isIconoInStateUntil((IconoCabeceraShop_Tablet)menuLink, state, maxSeconds));
+			case MenuUserDesktop:
+				return (secCabecera.getShop_DesktopMobile().getModalUserSesionDesktop().isMenuInStateUntil((MenuUserDesktop)menuLink, state, maxSeconds));
+			case MenuUserDevice:
+				return (secMenuLateralMobil.getUserMenu().isMenuInStateUntil((MenuUserDevice)menuLink, state, maxSeconds));
+			case IconoCabOutletMobil:
+				return (secCabecera.getOutletMobil().isElementInStateUntil((IconoCabOutletMobil)menuLink, state, maxSeconds));
 			default:
-				return null;
-		}
-	}
-
-	private boolean isMenuInStateUntil(ElementPage menu, State state, int maxSeconds) {
-		if (menu instanceof IconoCabeceraShop) {
-			return (secCabecera.getShop().isIconoInStateUntil((IconoCabeceraShop)menu, state, maxSeconds));
-		}
-		if (menu instanceof MenuUserDesktop) {
-			return (secCabecera.getShop().getModalUserSesionDesktop().isMenuInStateUntil((MenuUserDesktop)menu, state, maxSeconds));
-		}
-		if (menu instanceof MenuUserDevice) {
-			return (secMenuLateralMobil.getUserMenu().isMenuInStateUntil((MenuUserDevice)menu, state, maxSeconds));
-		}
-		if (menu instanceof IconoCabOutletMobil) {
-			return (secCabecera.getOutletMobil().isElementInStateUntil((IconoCabOutletMobil)menu, state, maxSeconds));
-		}
-		return false;
-	}
-	
-	private void clickMenuAndWait(ElementPage menu) {
-		if (menu instanceof IconoCabeceraShop) {
-			secCabecera.getShop().clickIconoAndWait((IconoCabeceraShop)menu);
-		}
-		if (menu instanceof MenuUserDesktop) {
-			secCabecera.getShop().hoverIconForShowUserMenuDesktop();
-			secCabecera.getShop().getModalUserSesionDesktop().wait1sForItAndclickMenu((MenuUserDesktop)menu);
-		}
-		if (menu instanceof MenuUserDevice) {
-			secMenuLateralMobil.getUserMenu().clickMenu((MenuUserDevice)menu);
-		}
-		if (menu instanceof IconoCabOutletMobil) {
-			secCabecera.getOutletMobil().click((IconoCabOutletMobil)menu);
+				return false;
 		}
 	}
 	
-	private ElementPage getMenuLupa() {
-		if (app==AppEcom.shop || app==AppEcom.votf) {
-			return IconoCabeceraShop.lupa;
+	private void clickMenuAndWait(MenuUserItem menu) {
+		ElementPage menuLink = menu.getLink();
+		switch (menu.getType()) {
+			case IconoCabeceraShop_DesktopMobile:
+				secCabecera.getShop_DesktopMobile().clickIconoAndWait((IconoCabeceraShop_DesktopMobile)menuLink);
+				break;
+			case IconoCabeceraShop_Tablet:
+				secCabecera.getShop_Tablet().clickIconoAndWait((IconoCabeceraShop_Tablet)menuLink);
+				break;
+			case MenuUserDesktop:
+				secCabecera.getShop_DesktopMobile().hoverIconForShowUserMenuDesktop();
+				secCabecera.getShop_DesktopMobile().getModalUserSesionDesktop().wait1sForItAndclickMenu((MenuUserDesktop)menuLink);
+				break;
+			case MenuUserDevice:
+				secMenuLateralMobil.getUserMenu().clickMenu((MenuUserDevice)menuLink);
+				break;
+			case IconoCabOutletMobil:
+				secCabecera.getOutletMobil().click((IconoCabOutletMobil)menuLink);
+				break;
 		}
-		if (app==AppEcom.outlet) {
-			if (channel==Channel.desktop) {
-				return IconoCabeceraShop.lupa;
-			}
-			if (channel.isDevice()) {
-				return IconoCabOutletMobil.lupa;
-			}
-		}
-		return null;
-	}
-	
-	private ElementPage getMenuIniciarSesion() {
-		if (app==AppEcom.outlet || channel==Channel.tablet) {
-			if (channel==Channel.desktop) {
-				return IconoCabeceraShop.iniciarsesion;
-			}
-			if (channel.isDevice()) {
-				return MenuUserDevice.iniciarsesion;
-			}
-		}
-		if (app==AppEcom.shop || app==AppEcom.votf) {
-			return IconoCabeceraShop.iniciarsesion;
-		}
-		return null;
-	}
-	
-	private ElementPage getMenuCerrarSesion() {
-		if (channel==Channel.desktop) {
-			return MenuUserDesktop.cerrarSesion;
-		}
-		if (channel.isDevice()) {
-			return MenuUserDevice.cerrarsesion;
-		}
-		return null;
-	}
-	
-	private ElementPage getMenuRegistrate() {
-		if (channel==Channel.desktop) {
-			return MenuUserDesktop.registrate;
-		}
-		if (channel.isDevice()) {
-			return MenuUserDevice.registrate;
-		}
-		return null;
-	}
-	
-	private ElementPage getMenuMiCuenta() {
-		if (app==AppEcom.outlet || channel==Channel.tablet) {
-			if (channel==Channel.desktop) {
-				return IconoCabeceraShop.micuenta;
-			}
-			if (channel.isDevice()) {
-				return MenuUserDevice.micuenta;
-			}
-		}
-		if (app==AppEcom.shop || app==AppEcom.votf) {
-			return IconoCabeceraShop.micuenta;
-		}
-		return null;
-	}
-	
-	private ElementPage getMenuFavoritos() {
-		if (channel==Channel.tablet) {
-			return MenuUserDevice.favoritos;
-		}
-		if (app==AppEcom.shop || app==AppEcom.votf) {
-			return IconoCabeceraShop.favoritos;
-		}
-		return null;
-	}
-	
-	private ElementPage getMenuMisCompras() {
-		if (app==AppEcom.shop || app==AppEcom.votf) {
-			if (channel==Channel.desktop) {
-				return MenuUserDesktop.misCompras;
-			}
-			if (channel.isDevice()) {
-				return MenuUserDevice.miscompras;
-			}
-		}
-		return null;
-	}
-	
-	private ElementPage getMenuPedidos() {
-		if (app==AppEcom.outlet && channel.isDevice()) {
-			return MenuUserDevice.pedidos;
-		}
-		return null;
-	}
-	
-	private ElementPage getMenuMangoLikesYou() {
-		if (app==AppEcom.shop || app==AppEcom.votf) {
-			if (channel==Channel.desktop) {
-				return MenuUserDesktop.mangoLikesYou;
-			}
-			if (channel.isDevice()) {
-				return MenuUserDevice.mangolikesyou;
-			}
-		}
-		return null;
-	}
-	
-	private ElementPage getMenuAyuda() {
-		if (channel==Channel.desktop) {
-			return MenuUserDesktop.ayuda;
-		}
-		if (channel.isDevice()) {
-			return MenuUserDevice.ayuda;
-		}
-		return null;
-	}
-	
-	private ElementPage getMenuCambioPais() {
-		if (channel.isDevice()) {
-			return MenuUserDevice.cambiopais;
-		}
-		return null;
 	}
 	
 	public LoyaltyData checkAndGetLoyaltyPointsUntil(int maxSeconds) throws Exception {

@@ -11,19 +11,15 @@ public interface SecSearch {
 	public void close();
 	
 	public static SecSearch getNew(Channel channel, AppEcom app, WebDriver driver) {
-		switch (channel) {
-		case desktop:
-			return SecSearchDesktopShop.getNew(driver);
-		case mobile:
-			switch (app) {
-			case shop:
-			case votf:
-				return SecSearchMobilShop.getNew(driver);
-			case outlet:
+		if (channel.isDevice()) {
+			if (channel==Channel.tablet) {
+				return SecSearchTablet.getNew(driver);
+			}
+			if (app==AppEcom.outlet) {
 				return SecSearchMobilOutlet.getNew(driver);
 			}
+			return SecSearchMobilShop.getNew(driver);
 		}
-		
-		return null;
+		return SecSearchDesktopShop.getNew(driver);
 	}
 }
