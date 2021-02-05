@@ -127,20 +127,6 @@ public class CompraFact implements Serializable {
         int maxArticlesAwayVale = 3;
         List<Garment> listArticles = UtilsTestMango.getArticlesForTest(dCtxSh, maxArticlesAwayVale, this.testVale, driver);
         
-//        //TODO para pruebas Dani Luque
-//        Garment garment = new Garment("63100536");
-//        garment.setStock(1000);
-//        Color color = new Color();
-//        color.setId("99");
-//        color.setLabel("Negro");
-//        Size size = new Size();
-//        size.setId(19);
-//        size.setLabel("XL");
-//        color.setSizes(Arrays.asList(size));
-//        garment.setColors(Arrays.asList(color));
-//        List<Garment> listArticles = Arrays.asList(garment);
-//        manyArticles = false;
-        
         if (!manyArticles) {
         	listArticles = Arrays.asList(listArticles.get(0));
         }

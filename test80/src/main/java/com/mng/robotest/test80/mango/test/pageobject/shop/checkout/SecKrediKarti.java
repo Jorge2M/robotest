@@ -16,7 +16,7 @@ public class SecKrediKarti extends SecTarjetaPciInIframe {
     final static String XPathRadioPagoPlazoDesktop = XPathCapaPagoPlazoDesktop + "//input[@type='radio' and @name='installment']";
     
     private SecKrediKarti(Channel channel, WebDriver driver) {
-    	super(driver);
+    	super(channel, driver);
     	this.channel = channel;
     }
     

@@ -32,7 +32,7 @@ public class ValidatorContentBolsa {
 	@SuppressWarnings("static-access")
 	private void storeArticlesFromScreen(WebDriver driver) throws Exception {
 		linesArticlesInScreen.clear();
-		SecBolsa.setBolsaToState(StateBolsa.Open, channel, app, driver);
+		SecBolsa.setBolsaToStateIfNotYet(StateBolsa.Open, channel, app, driver);
 		int numArticles = SecBolsa.lineasArticuloBolsa.getNumLinesArticles(channel, driver);
 		for (int i=1; i<=numArticles; i++) {
 			ArticuloDataBolsaScreen dataArtScreen = SecBolsa.lineasArticuloBolsa.getArticuloDataByPosicion(i, channel, driver);

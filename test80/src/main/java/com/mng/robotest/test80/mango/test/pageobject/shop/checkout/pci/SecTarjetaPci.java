@@ -27,13 +27,13 @@ public interface SecTarjetaPci {
 			if (secTarjetaPci.isPresentInputNumberUntil(1)) {
 				return secTarjetaPci;
 			}
-			return (SecTarjetaPciInIframe.getNew(driver));    
+			return (SecTarjetaPciInIframe.getNew(channel, driver));    
 		}
 		
 		SecTarjetaPci secTarjetaPci = SecTarjetaPciNotInIframeMobil.getNew(driver);
 		if (secTarjetaPci.isPresentInputNumberUntil(1)) {
 			return secTarjetaPci;
 		}
-		return (SecTarjetaPciInIframe.getNew(driver));    
+		return (SecTarjetaPciInIframe.getNew(channel, driver));    
     }
 }

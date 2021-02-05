@@ -74,6 +74,7 @@ public class LineasArticuloBolsa {
 	private static String getXPathLinea(Channel channel) {
 		switch (channel) {
 		case desktop:
+		case tablet:
 			return XPathLineaDesktop;
 		case mobile:
 		default:
@@ -84,6 +85,7 @@ public class LineasArticuloBolsa {
 	private static String getXPathLineaWithTagRef(Channel channel) {
 		switch (channel) {
 		case desktop:
+		case tablet:
 			return XPathLineaWithTagRefDesktop;
 		case mobile:
 		default:
@@ -94,6 +96,7 @@ public class LineasArticuloBolsa {
 	private static String getXPathLinkRelativeArticle(Channel channel) {
 		switch (channel) {
 		case desktop:
+		case tablet:
 			return XPathLinkRelativeArticleDesktop;
 		case mobile:
 		default:
@@ -114,6 +117,7 @@ public class LineasArticuloBolsa {
 	private static String getXPathDataRelativeArticle(DataArtBolsa dataArt, Channel channel) {
 		switch (channel) {
 		case desktop:
+		case tablet:
 			return (getXPathDataRelativeArticleDesktop(dataArt));
 		case mobile:
 		default:

@@ -57,11 +57,11 @@ public class PageCheckoutWrapperStpV {
     
     public static void validateIsFirstPage(boolean userLogged, DataBag dataBag, Channel channel, WebDriver driver) 
     throws Exception {
-        if (channel.isDevice()) {
-            page1MobilCheck.validateIsPage(userLogged, driver);
-        } else {
-            page1DktopCheck.validateIsPageOK(dataBag, driver);
-        }
+    	if (channel==Channel.mobile) {
+    		page1MobilCheck.validateIsPage(userLogged, driver);
+    	} else {
+    		page1DktopCheck.validateIsPageOK(dataBag, driver);
+    	}
     } 
     
     @Validation (
@@ -165,6 +165,7 @@ public class PageCheckoutWrapperStpV {
     public static void selectFranjaHorariaUrgente(Channel channel, WebDriver driver) {
         switch (channel) {
         case desktop:
+        case tablet:
             SecMetodoEnvioDesktopStpV.selectFranjaHorariaUrgente(1, driver);
             break;
         case mobile:
@@ -179,6 +180,7 @@ public class PageCheckoutWrapperStpV {
         TipoTransporte tipoTransporte = pago.getTipoEnvioType(appE);
         switch (channel) {
         case desktop:
+        case tablet:
             SecMetodoEnvioDesktopStpV.selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago, driver);
             break;
         case mobile:
@@ -527,6 +529,7 @@ public class PageCheckoutWrapperStpV {
 	public static void loyaltyPointsApply(Channel channel, WebDriver driver) throws Exception {
 		switch (channel) {
 		case desktop:
+		case tablet:
 			loyaltyPointsApplyDesktop(driver);
 			break;
 		case mobile:

@@ -130,7 +130,7 @@ public class PagoNavigationsStpV {
         }
         
         test1rstPageCheckout(dCtxSh, dCtxPago, driver);
-        if (dCtxSh.channel.isDevice()) {
+        if (dCtxSh.channel==Channel.mobile) {
         	boolean isSaldoEnCuenta = dCtxPago.getFTCkout().isStoreCredit;
         	Page1EnvioCheckoutMobilStpV.clickContinuarToMetodosPago(dCtxSh, isSaldoEnCuenta, driver);
         }
@@ -148,7 +148,7 @@ public class PagoNavigationsStpV {
                 testInputCodPromoEmpl(dCtxSh, dataBag, driver);
             } else {
                 if (dCtxSh.vale!=null) {
-                    if (dCtxSh.channel.isDevice()) {
+                    if (dCtxSh.channel==Channel.mobile) {
                         Page1EnvioCheckoutMobil.inputCodigoPromo(dCtxSh.vale.getCodigoVale(), driver);
                     } else {
                     	testValeDescuento(dCtxSh.vale, dataBag, dCtxSh.appE, driver);
@@ -238,7 +238,7 @@ public class PagoNavigationsStpV {
             else {
 	            if (pagoToTest.getTypePago()!=TypePago.TpvVotf) {
 	                pageResultPagoStpV.validateIsPageOk(dCtxPago, dCtxSh);
-	                if (dCtxSh.channel==Channel.desktop && !dCtxPago.getFTCkout().isChequeRegalo) {
+	                if (dCtxSh.channel!=Channel.mobile && !dCtxPago.getFTCkout().isChequeRegalo) {
 	                    if (testMisCompras(dCtxPago, dCtxSh)) {
 	                        pageResultPagoStpV.selectLinkMisComprasAndValidateCompra(dCtxPago, dCtxSh);
 	                    } else {
@@ -291,7 +291,7 @@ public class PagoNavigationsStpV {
         SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, driver);
         dCtxPago.getFTCkout().testCodPromocional = false;
         testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, driver);
-        if (dCtxSh.channel==Channel.desktop) {
+        if (dCtxSh.channel!=Channel.mobile) {
         	PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, dCtxSh.channel, driver);
         }
     }    
@@ -314,7 +314,7 @@ public class PagoNavigationsStpV {
     throws Exception {
         try {
             DataPedido dataPedido = dCtxPago.getDataPedido();
-            if (dCtxSh.channel==Channel.desktop) {
+            if (dCtxSh.channel!=Channel.mobile) {
                 PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, dCtxSh.channel, driver);
             }
                 
@@ -405,7 +405,7 @@ public class PagoNavigationsStpV {
         DataPedido dataPedido = dCtxPago.getDataPedido(); 
         Pago pago = dataPedido.getPago();
         try {
-            if (dCtxSh.channel==Channel.desktop) {
+            if (dCtxSh.channel!=Channel.mobile) {
             	PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, dCtxSh.channel, driver);
             }
             testPagoFromCheckoutToEnd(dCtxPago, dCtxSh, pago, driver);
@@ -425,7 +425,7 @@ public class PagoNavigationsStpV {
     throws Exception {
         DataPedido dataPedido = dCtxPago.getDataPedido();
         dataPedido.setCodtipopago("R");
-        if (channel==Channel.desktop) {
+        if (channel!=Channel.mobile) {
         	PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, channel, driver);
             PageCheckoutWrapperStpV.pasoBotonAceptarCompraDesktop(driver);
         } else {

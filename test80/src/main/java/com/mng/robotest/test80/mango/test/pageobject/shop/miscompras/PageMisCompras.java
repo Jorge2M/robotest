@@ -30,6 +30,7 @@ public abstract class PageMisCompras extends PageObjTM {
 	public static PageMisCompras make(Channel channel, WebDriver driver) {
 		switch (channel) {
 		case desktop:
+		case tablet:
 			return new PageMisComprasDesktop(driver);
 		case mobile:
 			return new PageMisComprasMobil(driver);

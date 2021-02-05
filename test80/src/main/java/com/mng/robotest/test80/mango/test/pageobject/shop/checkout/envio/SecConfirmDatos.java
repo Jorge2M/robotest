@@ -18,6 +18,7 @@ public class SecConfirmDatos {
     public static String getXPathDivGeneral(Channel channel) {
         switch (channel) {
         case desktop:
+        case tablet:
             return XPathDivGeneralDesktop;
         case mobile:
         default:
