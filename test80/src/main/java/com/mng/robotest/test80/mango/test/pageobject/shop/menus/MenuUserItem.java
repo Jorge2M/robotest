@@ -11,7 +11,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutlet_Mobil.IconoCabOutletMobil;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraShop_DesktopMobile.IconoCabeceraShop_DesktopMobile;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera_MostFrequent.IconoCabeceraShop_DesktopMobile;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraShop_Tablet.IconoCabeceraShop_Tablet;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop.MenuUserDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenusUserDevice.MenuUserDevice;
@@ -191,42 +191,33 @@ public class MenuUserItem {
 	}
 	
 	private ElementPage getMenuFavoritos() {
-		if (channel==Channel.tablet) {
+		if (channel.isDevice()) {
 			return MenuUserDevice.favoritos;
 		}
-		if (app==AppEcom.shop || app==AppEcom.votf) {
-			return IconoCabeceraShop_DesktopMobile.favoritos;
-		}
-		return null;
+
+		return IconoCabeceraShop_DesktopMobile.favoritos;
 	}
 	
 	private ElementPage getMenuMisCompras() {
-		if (app==AppEcom.shop || app==AppEcom.votf) {
-			if (channel==Channel.desktop) {
-				return MenuUserDesktop.misCompras;
-			}
-			if (channel.isDevice()) {
-				return MenuUserDevice.miscompras;
-			}
+		if (channel==Channel.desktop) {
+			return MenuUserDesktop.misCompras;
+		}
+		if (channel.isDevice()) {
+			return MenuUserDevice.miscompras;
 		}
 		return null;
 	}
 	
 	private ElementPage getMenuPedidos() {
-		if (app==AppEcom.outlet && channel.isDevice()) {
-			return MenuUserDevice.pedidos;
-		}
-		return null;
+		return MenuUserDevice.pedidos;
 	}
 	
 	private ElementPage getMenuMangoLikesYou() {
-		if (app==AppEcom.shop || app==AppEcom.votf) {
-			if (channel==Channel.desktop) {
-				return MenuUserDesktop.mangoLikesYou;
-			}
-			if (channel.isDevice()) {
-				return MenuUserDevice.mangolikesyou;
-			}
+		if (channel==Channel.desktop) {
+			return MenuUserDesktop.mangoLikesYou;
+		}
+		if (channel.isDevice()) {
+			return MenuUserDevice.mangolikesyou;
 		}
 		return null;
 	}
@@ -242,9 +233,6 @@ public class MenuUserItem {
 	}
 	
 	private ElementPage getMenuCambioPais() {
-		if (channel.isDevice()) {
-			return MenuUserDevice.cambiopais;
-		}
-		return null;
+		return MenuUserDevice.cambiopais;
 	}
 }

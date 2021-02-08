@@ -39,17 +39,22 @@ public abstract class SecCabecera extends PageObjTM {
 	}
 	
 	public static SecCabecera getNew(Channel channel, AppEcom app, WebDriver driver) {
-		switch (app) {
-		case shop:
-		case votf:
-			return SecCabeceraShop.getNew(channel, app, driver);
+		if (channel.isDevice() && app==AppEcom.outlet) {
+			return SecCabeceraOutlet_Mobil.getNew(channel, app, driver);
+		}
+		
+		switch (channel) {
+		case tablet:
+			return SecCabeceraShop_Tablet.getNew(driver);
+		case desktop:
+		case mobile:
 		default:
-			return SecCabeceraOutlet.getNew(channel, app, driver);
+			return SecCabecera_MostFrequent.getNew(channel, driver);
 		}
 	}
 	
-	public SecCabeceraShop_DesktopMobile getShop_DesktopMobile() {
-		return (SecCabeceraShop_DesktopMobile)this;
+	public SecCabecera_MostFrequent getShop_DesktopMobile() {
+		return (SecCabecera_MostFrequent)this;
 	}
 	
 	public SecCabeceraShop_Tablet getShop_Tablet() {

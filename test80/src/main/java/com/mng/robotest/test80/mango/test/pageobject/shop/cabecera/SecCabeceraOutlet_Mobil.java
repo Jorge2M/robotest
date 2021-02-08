@@ -7,7 +7,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraShop_DesktopMobile.IconoCabeceraShop_DesktopMobile;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera_MostFrequent.IconoCabeceraShop_DesktopMobile;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -47,7 +47,7 @@ public class SecCabeceraOutlet_Mobil extends SecCabecera {
     
     @Override
     String getXPathNumberArtIcono() {
-    	return SecCabeceraShop_DesktopMobile.XPathNumArticlesBolsa;
+    	return SecCabecera_MostFrequent.XPathNumArticlesBolsa;
     }
     
     @Override

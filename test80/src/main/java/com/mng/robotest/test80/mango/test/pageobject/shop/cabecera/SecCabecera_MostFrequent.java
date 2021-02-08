@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.ModalUse
  * Cabecera Shop compatible con desktop y movil
  *
  */
-public class SecCabeceraShop_DesktopMobile extends SecCabecera {
+public class SecCabecera_MostFrequent extends SecCabecera {
 	
 	private final ModalUserSesionShopDesktop modalUserSesionShopDesktop;
 	
@@ -47,13 +47,13 @@ public class SecCabeceraShop_DesktopMobile extends SecCabecera {
 		}
 	}
     
-	protected SecCabeceraShop_DesktopMobile(Channel channel, WebDriver driver) {
+	protected SecCabecera_MostFrequent(Channel channel, WebDriver driver) {
 		super(channel, AppEcom.shop, driver);
 		this.modalUserSesionShopDesktop = ModalUserSesionShopDesktop.getNew(driver);
 	}
 	
-	public static SecCabeceraShop_DesktopMobile getNew(Channel channel, WebDriver driver) {
-		return (new SecCabeceraShop_DesktopMobile(channel, driver));
+	public static SecCabecera_MostFrequent getNew(Channel channel, WebDriver driver) {
+		return (new SecCabecera_MostFrequent(channel, driver));
 	}
 	
 	public ModalUserSesionShopDesktop getModalUserSesionDesktop() {

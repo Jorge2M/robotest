@@ -16,7 +16,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutlet_Mobil.IconoCabOutletMobil;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraShop_DesktopMobile.IconoCabeceraShop_DesktopMobile;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera_MostFrequent.IconoCabeceraShop_DesktopMobile;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraShop_Tablet.IconoCabeceraShop_Tablet;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop.MenuUserDesktop;
