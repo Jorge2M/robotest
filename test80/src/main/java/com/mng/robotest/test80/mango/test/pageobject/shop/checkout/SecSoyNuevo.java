@@ -39,7 +39,7 @@ public class SecSoyNuevo {
     }
     
     public static String getXPath_BotonContinue(Channel channel) {
-        if (channel.isDevice()) {
+        if (channel==Channel.mobile) {
             return XPathBotonContinueMobil;
         }
         return XPathBotonContinueDesktop;

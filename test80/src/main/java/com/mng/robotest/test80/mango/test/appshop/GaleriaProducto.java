@@ -214,8 +214,9 @@ public class GaleriaProducto {
     
     @Test (
         groups={"GaleriaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 
-        description="Acceder a galería y testear el slider. Testeamos secuencias de sliders en ambas direcciones y " + 
-    				"finalmente las combinamos con cambios de color")
+        description=
+        	"Acceder a galería y testear el slider. Testeamos secuencias de sliders en ambas direcciones y " + 
+    		"finalmente las combinamos con cambios de color")
     public void GPO006_SliderInDesktop() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
         DataCtxShop dCtxSh = getCtxShForTest();

@@ -1,9 +1,6 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-import java.lang.reflect.Method;
-
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestNGMethod;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.access.InputParamsMango;
@@ -41,52 +38,13 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalBuscadorTiendasStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
-import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.domain.SuitesExecuted;
-import com.github.jorge2m.testmaker.domain.suitetree.SuiteTM;
-import com.github.jorge2m.testmaker.domain.suitetree.TestRunTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 
 public class FichaProducto {
 	
-	private final SecBuscadorStpV secBuscadorStpV;
-	private final Channel channel;
-	private final AppEcom app;
 	private final static Pais españa = PaisGetter.get(PaisShop.España);
 	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
-
-	public FichaProducto(Channel channel, AppEcom app, WebDriver driver) {
-		this.channel = channel;
-		this.app = app;
-		this.secBuscadorStpV = new SecBuscadorStpV(app, channel, driver);
-	}
 	
-	@BeforeMethod (groups={"FichaProducto", "Canal:desktop_App:all"})
-	public void before(Method method) {
-		TestRunTM testRun = getTestRun(method);
-		InputParamsMango inputParamsSuite = (InputParamsMango)testRun.getSuiteParent().getInputParams();
-		System.out.println("Before Method. Test executing in remote: " + inputParamsSuite.isTestExecutingInRemote());
-	}
-	
-	@AfterMethod (groups={"FichaProducto", "Canal:desktop_App:all"})
-	public void after(Method method) {
-		TestRunTM testRun = getTestRun(method);
-		InputParamsMango inputParamsSuite = (InputParamsMango)testRun.getSuiteParent().getInputParams();
-		System.out.println("After Method. Test executing in remote: " + inputParamsSuite.isTestExecutingInRemote());
-	}
-	
-	private static TestRunTM getTestRun(Method method) {
-		for (SuiteTM suite : SuitesExecuted.getSuitesExecuted()) {
-			for (TestRunTM testRun : suite.getListTestRuns()) {
-				for (ITestNGMethod testMethod : testRun.getTestNgContext().getAllTestMethods()) {
-					if (testMethod.getConstructorOrMethod().getMethod()==method) {
-						return testRun;
-					}
-				}
-			}
-		}
-		return null;
-	}
 	
 	@Test (
 		groups={"FichaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 
@@ -99,6 +57,7 @@ public class FichaProducto {
 		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, driver);
 		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh, driver).build();
 		Garment articleWithColors = getterProducts.getWithManyColors().get(0);
+		SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
 		secBuscadorStpV.searchArticulo(articleWithColors);
 
 		PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
@@ -137,6 +96,7 @@ public class FichaProducto {
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
 		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh, driver).build();
         Garment articleWithTotalLook = getterProducts.getOneWithTotalLook(driver);
+        SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
         secBuscadorStpV.searchArticulo(articleWithTotalLook);
         
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
@@ -268,9 +228,10 @@ public class FichaProducto {
     }
     
 	private DataCtxShop getCtxShForTest(Pais pais, IdiomaPais idioma, boolean userRegistered, String user, String password) {
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
 		DataCtxShop dCtxSh = new DataCtxShop();
-		dCtxSh.setAppEcom(app);
-		dCtxSh.setChannel(channel);
+		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
+		dCtxSh.setChannel(inputParamsSuite.getChannel());
         dCtxSh.pais=pais;
         dCtxSh.idioma=idioma;
         if (userRegistered) {
