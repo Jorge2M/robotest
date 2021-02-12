@@ -41,6 +41,17 @@ public enum TestABGoogleExpImpl implements TestABGoogleExp {
 		Arrays.asList(Channel.desktop),
 		Arrays.asList(AppEcom.shop, AppEcom.votf)
 	),
+	
+	SelectorFichaMobil(
+		"vpc6sLvUTbObe3jyJ97xzQ",
+		"sub_8rhk5o_wc6i3wg92ap",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"V0-Original", 
+			"V1-Nuevo"),
+		Arrays.asList(Channel.mobile,Channel.tablet),
+		Arrays.asList(AppEcom.shop)
+	),
 
 	SHOP_296_PLP_Desktop_Personalizacion_en_listado (
 		"JiAeRtIqRU6ROe1V_rz44w",

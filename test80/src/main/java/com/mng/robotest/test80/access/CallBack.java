@@ -17,7 +17,7 @@ public class CallBack {
 	String callBackSchema = null;
 	String callBackParams = null;
 	String callBackUser = null;
-	String callBackPassword = null;
+	String callBackPassword = null; 
 
 
 	public String getReportTSuiteURL() {

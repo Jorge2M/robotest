@@ -223,6 +223,7 @@ public class PagePrehome {
         	SecCabeceraOutlet_Mobil secCabecera = (SecCabeceraOutlet_Mobil)SecCabeceraOutlet_Mobil.getNew(Channel.mobile, dCtxSh.appE, driver);
         	secCabecera.closeSmartBannerIfExistsMobil();
         }
+        
     }
     
     public static void previousAccessShopSteps(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
