@@ -33,7 +33,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.LocationArticle;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalBuscadorTiendasStpV;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings({"static-access"})
 public class PageFichaArtStpV {
@@ -43,8 +43,8 @@ public class PageFichaArtStpV {
     AppEcom app;
     private final PageFicha pageFicha;
     private final ModEnvioYdevolNewStpV modEnvioYdevol;
+    public final SecProductDescrOldStpV secProductDescOld;
     
-    public static SecProductDescrOldStpV secProductDescOld;
     public static SecBolsaButtonAndLinksNewStpV secBolsaButtonAndLinksNew;
     public static SecFotosNewStpV secFotosNew;
     public static SecFitFinderStpV secFitFinder;
@@ -56,6 +56,7 @@ public class PageFichaArtStpV {
         this.app = appE;
         this.pageFicha = PageFicha.newInstance(channel, appE, driver);
         this.modEnvioYdevol = new ModEnvioYdevolNewStpV(driver);
+        this.secProductDescOld = new SecProductDescrOldStpV(channel, driver);
     }
     
     public PageFicha getFicha() {
@@ -272,15 +273,23 @@ public class PageFichaArtStpV {
         expected="El articulo es cambiado de color.")
     public void changeColorGarment() {
         ArticuloScreen articulo = pageFicha.getArticuloObject(app);
-        ArrayList<String> colors = SecDataProduct.getColorsGarment(driver);
-        String codeColor = colors.get(0);
+        List<String> colors = SecDataProduct.getColorsGarment(driver);
+        String codeColor = getColorNotSelected(colors, articulo);
         SecDataProduct.selectColor(codeColor, driver);
 
         validateNotVisibleButtonFavoritos(ActionFavButton.Add);
 
         SecDataProduct.selectColor(articulo.getCodigoColor(), driver);
         SecDataProduct.selectTallaByValue(articulo.getTalla(), pageFicha.getTypeFicha(), driver);
-
+    }
+    
+    private String getColorNotSelected(List<String> listColors, ArticuloScreen articulo) {
+    	for (String color : listColors) {
+    		if (color.compareTo(articulo.getCodigoColor())!=0) {
+    			return color;
+    		}
+    	}
+    	return listColors.get(0);
     }
 
     @Validation (
@@ -338,7 +347,7 @@ public class PageFichaArtStpV {
     public void selectBuscarEnTiendaButton() {
     	TestMaker.getCurrentStepInExecution().replaceInDescription(tagNameLink, pageFicha.getNameLinkBuscarEnTienda());
         pageFicha.selectBuscarEnTiendaLink();
-        ModalBuscadorTiendasStpV.validaBusquedaConResultados(driver);
+        new ModalBuscadorTiendasStpV(channel, driver).validaBusquedaConResultados();
     }
     
     @Step (
@@ -453,8 +462,6 @@ public class PageFichaArtStpV {
     public void selectImagenCentralFichaOld() {
         String pngImgCentralOriginal = ((PageFichaArtOld)pageFicha).getSrcImagenCentral();
         ((PageFichaArtOld)pageFicha).clickImagenFichaCentral();
-                    
-        //Validaciones
         checkImgCentralAfterZoom(pngImgCentralOriginal);
     }    
     
@@ -468,6 +475,20 @@ public class PageFichaArtStpV {
 	 		"La imagen central con Zoom sigue conteniendo la imagen original: " + pngImgCentralOriginal,
 	 		((PageFichaArtOld)pageFicha).srcImagenCentralConZoomContains(pngImgCentralOriginal), State.Defect);
 	 	return validations;
+    }
+    
+    @Step (
+    	description="Seleccionar el aspa para cerrar la imagen central con Zoom", 
+    	expected="La imagen con Zoom desaparece")
+    public void closeZoomImageCentralDevice() {
+        ((PageFichaArtOld)pageFicha).closeZoomImageCentralDevice();
+    }
+    
+    @Validation (
+    	description="La imagen central se corresponde con la imagen del carrusel seleccionada (<b>#{pngImagenCarrusel}</b>)",
+    	level=State.Defect)
+    private boolean checkZoomImageCentralDissapeared() {
+    	return !((PageFichaArtOld)pageFicha).isVisibleFichaConZoom();
     }
     
     @Validation

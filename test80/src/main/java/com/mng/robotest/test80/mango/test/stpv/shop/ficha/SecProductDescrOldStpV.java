@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
@@ -15,8 +16,14 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrO
 
 public class SecProductDescrOldStpV {
     
+	private final SecProductDescrOld secProductDescrOld;
+	
+	public SecProductDescrOldStpV(Channel channel, WebDriver driver) {
+		secProductDescrOld = new SecProductDescrOld(channel, driver);
+	}
+	
 	@Validation
-    public static ChecksTM validateAreInStateInitial(AppEcom appE, WebDriver driver) throws Exception {
+    public ChecksTM validateAreInStateInitial(AppEcom appE) throws Exception {
     	ChecksTM validations = ChecksTM.getNew();
     	for (TypePanel typePanel : TypePanel.values()) {
     		TypeStatePanel stateExpected = TypeStatePanel.missing;
@@ -25,7 +32,7 @@ public class SecProductDescrOldStpV {
             }
 	      	validations.add(
 	    		"El panel <b>" + typePanel + "</b> está en estado <b>" + stateExpected + "</b>",
-	    		SecProductDescrOld.getStatePanel(typePanel, driver)==stateExpected, State.Defect);
+	    		secProductDescrOld.getStatePanel(typePanel)==stateExpected, State.Defect);
     	}
     	return validations;
     }
@@ -35,22 +42,22 @@ public class SecProductDescrOldStpV {
 	@Step (
 		description="Seleccionar el panel <b>#{typePanel}</b> (en estado inicial: " + tagInitStatePanel + ")",
         expected="La pestaña queda en estado " + tagFinalStateExpected)
-    public static void selectPanel(TypePanel typePanel, WebDriver driver) {
-        TypeStatePanel statePanelIni = SecProductDescrOld.getStatePanel(typePanel, driver);
-        TypeStatePanel stateExpectedAfterClick = SecProductDescrOld.getStatePanelAfterClick(statePanelIni);
+    public void selectPanel(TypePanel typePanel) {
+        TypeStatePanel statePanelIni = secProductDescrOld.getStatePanel(typePanel);
+        TypeStatePanel stateExpectedAfterClick = secProductDescrOld.getStatePanelAfterClick(statePanelIni);
         StepTM step = TestMaker.getCurrentStepInExecution();
         step.replaceInDescription(tagInitStatePanel, statePanelIni.toString());
         step.replaceInExpected(tagFinalStateExpected, stateExpectedAfterClick.toString());
         
-        SecProductDescrOld.clickPanel(typePanel, driver);
+        secProductDescrOld.clickPanel(typePanel);
         int maxSeconds = 1;
-        checkPanelInState(typePanel, stateExpectedAfterClick, maxSeconds, driver);
+        checkPanelInState(typePanel, stateExpectedAfterClick, maxSeconds);
     }
 	
 	@Validation (
 		description="La sección ha de quedar en estado <b>#{stateExpectedAfterClick}</b> (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-	private static boolean checkPanelInState(TypePanel typePanel, TypeStatePanel stateExpectedAfterClick, int maxSeconds, WebDriver driver) {
-	    return (SecProductDescrOld.isPanelInStateUntil(typePanel, stateExpectedAfterClick, maxSeconds, driver));
+	private boolean checkPanelInState(TypePanel typePanel, TypeStatePanel stateExpectedAfterClick, int maxSeconds) {
+	    return (secProductDescrOld.isPanelInStateUntil(typePanel, stateExpectedAfterClick, maxSeconds));
 	}
 }

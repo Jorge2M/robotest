@@ -8,6 +8,7 @@ import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRega
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter.FooterLink;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageInputPedido;
+import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalBuscadorTiendas;
 
 public class FactoryPageFromFooter {
 	

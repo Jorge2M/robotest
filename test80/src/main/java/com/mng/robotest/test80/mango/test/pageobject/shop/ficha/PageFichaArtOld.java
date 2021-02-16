@@ -32,10 +32,15 @@ public class PageFichaArtOld extends PageFicha {
     private static final String XPathDivAnadiendoFavoritos = "//div[@class[contains(.,'product-banner')]]";
     private static final String XPathBuscarEnTiendaButton = "//button[@class[contains(.,'garment-finder')]]";
     private static final String XPathGuiaDeTallasLink = "//span[@id='productFormSizesGuide']";
-    private static final String XPathDivImgCentralDiv = "//div[@class='main-img']";
-    private static final String XPathImagenCentral = XPathDivImgCentralDiv + "/img";
-    private static final String XPathFichaConZoom = "//div[@class[contains(.,'zoom-out')]]";
-    private static final String XPathImagenCentralConZoom = XPathFichaConZoom + "//img";
+    
+    private static final String XPathDivImgCentralDivDesktop = "//div[@class='main-img']";
+    private static final String XPathDivImgCentralDivDevice = 
+    		"//div[@class[contains(.,'product-img-container')] and @class[contains(.,'slide-active')]]";
+    private static final String XPathAspaZoomImageCentral = "//div[@class='zoom-image-close']";
+    
+    private static final String XPathFichaConZoomDesktop = "//div[@class[contains(.,'zoom-out')]]";
+    private static final String XPathFichaConZoomDevice = "//div[@class[contains(.,'zoom-image-container')]]";
+    
     private static final String XPathUltimosProductosSection = "//*[@id='ultimos_productos']";
     private static final String XPathModalNoStock = "//div[@class='modalNoStock show']";
     private static final String XPathImagenCarruselIzq = "//div[@class='carousel-img-container']//img[@class[contains(.,'carousel-img')]]";
@@ -53,6 +58,28 @@ public class PageFichaArtOld extends PageFicha {
     
     private String getXPathIsPage(String referencia, Channel channel) {
         return XPathContainerFicha + secDataProduct.getXPathLinReferencia(referencia, channel);
+    }
+    
+    private String getXPathDivImgCentralDiv() {
+    	if (channel.isDevice()) {
+    		return XPathDivImgCentralDivDevice;
+    	}
+    	return XPathDivImgCentralDivDesktop;
+    }
+    private String getXPathImagenCentral() {
+    	String xpathDiv = getXPathDivImgCentralDiv();
+        return xpathDiv + "/img";
+    }
+    
+    private String getXPathFichaConZoom() {
+    	if (channel.isDevice()) {
+    		return XPathFichaConZoomDevice;
+    	}
+    	return XPathFichaConZoomDesktop;
+    }
+    private String getXPathImagenCentralConZoom() {
+    	String xpathDiv = getXPathFichaConZoom();
+    	return xpathDiv + "//img";
     }
     
     @Override
@@ -136,7 +163,12 @@ public class PageFichaArtOld extends PageFicha {
     }
 
 	public void clickImagenFichaCentral() {
-		click(By.xpath(XPathDivImgCentralDiv)).exec();
+		String xpathImg = getXPathDivImgCentralDiv();
+		click(By.xpath(xpathImg)).exec();
+	}
+	
+	public void closeZoomImageCentralDevice() {
+		click(By.xpath(XPathAspaZoomImageCentral)).exec();
 	}
 
     public int getNumImgsCarruselIzq() {
@@ -154,21 +186,21 @@ public class PageFichaArtOld extends PageFicha {
     }
     
     public String getSrcImagenCentral() {
-        String srcImagen = "";
-        if (state(Present, By.xpath(XPathImagenCentral)).check()) {
-            String srcImagenO = driver.findElement(By.xpath(XPathImagenCentral)).getAttribute("src");
-            srcImagen = srcImagenO.substring(srcImagenO.lastIndexOf("/"));
+    	By byImgCentral = By.xpath(getXPathImagenCentral());
+        if (state(Present, byImgCentral).check()) {
+            String srcImagenO = driver.findElement(byImgCentral).getAttribute("src");
+            return srcImagenO.substring(srcImagenO.lastIndexOf("/"));
         }
-        return srcImagen;
+        return "";
     }
     
     public String getSrcImagenCentralConZoom() {
-        String srcImagen = "";
-        if (state(Present, By.xpath(XPathImagenCentralConZoom)).check()) {
-            String srcImagenO = driver.findElement(By.xpath(XPathImagenCentralConZoom)).getAttribute("src");
-            srcImagen = srcImagenO.substring(srcImagenO.lastIndexOf("/"));
+    	By byImg = By.xpath(getXPathImagenCentralConZoom());
+        if (state(Present, byImg).check()) {
+            String srcImagenO = driver.findElement(byImg).getAttribute("src");
+            return srcImagenO.substring(srcImagenO.lastIndexOf("/"));
         }
-        return srcImagen;
+        return "";
     }    
     
     public void clickImgCarruselIzq(int numImagen) {
@@ -184,7 +216,7 @@ public class PageFichaArtOld extends PageFicha {
         return (nameFileImgCentral.compareTo(nameFileImgCarrusel)==0); 
     }
     
-    private static String getNameFileImgArticleWithoutExt(String srcImgCarrusel) {
+    private String getNameFileImgArticleWithoutExt(String srcImgCarrusel) {
         Pattern pattern = Pattern.compile("(.*?).jpg");
         Matcher matcher = pattern.matcher(srcImgCarrusel);
         if (matcher.find()) {
@@ -195,14 +227,18 @@ public class PageFichaArtOld extends PageFicha {
     
     public boolean srcImagenCentralConZoomContains(String srcImagen) {
         String srcImagenCentralConZoom = getSrcImagenCentralConZoom();
-        return (
-        	"".compareTo(srcImagen)!=0 &&
-            "".compareTo(srcImagenCentralConZoom)!=0 &&
-            srcImagenCentralConZoom.contains(srcImagen));
+        if ("".compareTo(srcImagen)!=0 &&
+            "".compareTo(srcImagenCentralConZoom)!=0) {
+        	String nameOld = getNameFileImgArticleWithoutExt(srcImagen);
+        	String nameNew = getNameFileImgArticleWithoutExt(srcImagenCentralConZoom);
+            return nameOld.compareTo(nameNew)==0;
+        }
+        return false;
     }    
     
     public boolean isVisibleFichaConZoom() {
-    	return (state(Visible, By.xpath(XPathFichaConZoom)).check());
+    	By byDivZoom = By.xpath(getXPathDivImgCentralDiv());
+    	return (state(Visible, byDivZoom).check());
     }
 
 	public void selectGuiaDeTallasLink() {

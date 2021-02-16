@@ -7,26 +7,60 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 
-public class SecProductDescrOld {
+public class SecProductDescrOld extends PageObjTM {
 
+	private final Channel channel;
+	
     public enum TypeStatePanel {folded, unfolded, missing}
     public enum TypePanel {
-        Description(Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf), TypeStatePanel.unfolded),
-        Composition(Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf), TypeStatePanel.folded),
-        Shipment(Arrays.asList(AppEcom.shop, AppEcom.votf), TypeStatePanel.folded), 
-        Returns(Arrays.asList(AppEcom.shop, AppEcom.votf), TypeStatePanel.folded),
-        KcSafety(Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf), TypeStatePanel.missing);
+        Description(
+        	"//div[@id='descriptionPanel']", "//div[@class[contains(.,'product-description')]]",
+        	Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf), TypeStatePanel.unfolded),
+        Composition(
+        	"//div[@id='compositionPanel']", "//div[@class[contains(.,'more-info')]]",
+        	Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf), TypeStatePanel.folded),
+        Shipment(
+        	"//div[@id='shipmentPanel']", "//div[@class[contains(.,'shipment-and-returns')]]",
+        	Arrays.asList(AppEcom.shop, AppEcom.votf), TypeStatePanel.folded), 
+        Returns(
+        	"//div[@id='returnsPanel']", "//div[@class[contains(.,'shipment-and-returns')]]",
+        	Arrays.asList(AppEcom.shop, AppEcom.votf), TypeStatePanel.folded),
+        KcSafety(
+        	"//div[@id='kcSafetyPanel']", "//div[@id='kcSafetyPanel']", //?
+        	Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf), TypeStatePanel.missing);
         
+    	private final String xPathDesktop;
+    	private final String xPathDevice;
         private final List<AppEcom> listApps;
         private final TypeStatePanel stateInitial;
-        TypePanel(List<AppEcom> listApps, TypeStatePanel stateInitial) {
+        TypePanel(String xPathDesktop, String xPathDevice, List<AppEcom> listApps, TypeStatePanel stateInitial) {
+        	this.xPathDesktop = xPathDesktop;
+        	this.xPathDevice = xPathDevice;
             this.listApps = listApps;
             this.stateInitial = stateInitial;
+        }
+        
+        private String XPathDivProductDescriptionDesktop = "//div[@class='product-description']";
+        private String XPathDivProductDescriptionDevice = "//div[@class='product-detail']";
+        public String getXPath(Channel channel) {
+        	if (channel.isDevice()) {
+        		return XPathDivProductDescriptionDevice + xPathDevice;
+        	}
+        	return XPathDivProductDescriptionDesktop + xPathDesktop;
+        }
+        public String getXPathLink(Channel channel) {
+        	if (channel.isDevice()) {
+        		return getXPath(channel);
+        	}
+        	return getXPath(channel) + "//div[@role='button']";
         }
         
         public List<AppEcom> getListApps() {
@@ -38,35 +72,12 @@ public class SecProductDescrOld {
         }
     }
     
-    static String XPathDivProductDescription = "//div[@class='product-description']";
-    static String XPathDescriptionPanel = XPathDivProductDescription + "//div[@id='descriptionPanel']";
-    static String XPathCompositionPanel = XPathDivProductDescription + "//div[@id='compositionPanel']";
-    static String XPathShipmentPanel = XPathDivProductDescription + "//div[@id='shipmentPanel']";
-    static String XPathReturnsPanel = XPathDivProductDescription + "//div[@id='returnsPanel']";
-    static String XPathKcSafetyPanel = XPathDivProductDescription + "//div[@id='kcSafetyPanel']";
-    
-    public static String getXPathPanelLink(TypePanel typePanel) {
-        return (getXPathPanel(typePanel) + "//a");
+    public SecProductDescrOld(Channel channel, WebDriver driver) {
+    	super(driver);
+    	this.channel = channel;
     }
     
-    public static String getXPathPanel(TypePanel typePanel) {
-        switch (typePanel) {
-        case Description:
-            return XPathDescriptionPanel;
-        case Composition:
-            return XPathCompositionPanel;
-        case Shipment:
-            return XPathShipmentPanel;
-        case Returns:
-            return XPathReturnsPanel;
-        case KcSafety:
-            return XPathKcSafetyPanel;
-        default:
-            return "";
-        }
-    }
-    
-    public static TypeStatePanel getStatePanelAfterClick(TypeStatePanel stateOriginal) {
+    public TypeStatePanel getStatePanelAfterClick(TypeStatePanel stateOriginal) {
         switch (stateOriginal) {
         case folded:
             return TypeStatePanel.unfolded;
@@ -78,34 +89,46 @@ public class SecProductDescrOld {
         }
     }
     
-    public static TypeStatePanel getStatePanel(TypePanel typePanel, WebDriver driver) {
+    public TypeStatePanel getStatePanel(TypePanel typePanel) {
         waitMillis(200);
-        String xpathPanel = getXPathPanel(typePanel);
+        String xpathPanel = typePanel.getXPath(channel);
         if (!state(Present, By.xpath(xpathPanel), driver).check()) {
             return TypeStatePanel.missing;
         }
         
         WebElement panel = driver.findElement(By.xpath(xpathPanel));
-        if (panel.getAttribute("class").contains("-active")) {
-            return TypeStatePanel.unfolded;
+        if (channel.isDevice()) {
+        	By byCapa = By.xpath(".//div[@class[contains(.,'collapsible-info-body')]]");
+        	if (state(State.Present, panel).by(byCapa).check()) {
+        		WebElement capa = driver.findElement(byCapa);
+	        	if (capa.getAttribute("class").contains("-opened")) {
+	        		return TypeStatePanel.unfolded;
+	        	}
+        	} else {
+        		return TypeStatePanel.unfolded;
+        	}
+        } else {
+	        if (panel.getAttribute("class").contains("-active")) {
+	            return TypeStatePanel.unfolded;
+	        }
         }
         return TypeStatePanel.folded;
     }
     
-    public static boolean isPanelInStateUntil(TypePanel typePanel, TypeStatePanel stateExpected, int maxSecondsToWait, WebDriver driver) {
-        TypeStatePanel statePanel = getStatePanel(typePanel, driver);
+    public boolean isPanelInStateUntil(TypePanel typePanel, TypeStatePanel stateExpected, int maxSeconds) {
+        TypeStatePanel statePanel = getStatePanel(typePanel);
         int seconds=0;
-        while (statePanel!=stateExpected && seconds<maxSecondsToWait) {
+        while (statePanel!=stateExpected && seconds<maxSeconds) {
             waitMillis(1000);
             seconds+=1;
-            statePanel = getStatePanel(typePanel, driver);
+            statePanel = getStatePanel(typePanel);
         }
 
         return (statePanel==stateExpected);
     }
 
-	public static void clickPanel(TypePanel typePanel, WebDriver driver) {
-		String xpathPanelLink = getXPathPanelLink(typePanel);
+	public void clickPanel(TypePanel typePanel) {
+		String xpathPanelLink = typePanel.getXPathLink(channel);
 		click(By.xpath(xpathPanelLink), driver).exec();
 	}
 }

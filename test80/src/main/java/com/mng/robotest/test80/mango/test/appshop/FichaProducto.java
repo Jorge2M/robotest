@@ -47,7 +47,7 @@ public class FichaProducto {
 	
 	
 	@Test (
-		groups={"FichaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 
+		groups={"FichaProducto", "Canal:all_App:all"}, alwaysRun=true, 
 		description="[Usuario registrado] Se testean las features principales de una ficha con origen el buscador: añadir a la bolsa, selección color/talla, buscar en tienda, añadir a favoritos")
 	public void FIC001_FichaFromSearch_PrimaryFeatures_Reg() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
@@ -76,7 +76,7 @@ public class FichaProducto {
         articulo = pageFichaStpv.getFicha().getArticuloObject(dCtxSh.appE);
         if (dCtxSh.appE==AppEcom.shop) { //"Buscar en Tienda" y "Favoritos" no existen en Outlet ni Votf
             pageFichaStpv.selectBuscarEnTiendaButton();
-            ModalBuscadorTiendasStpV.close(driver);
+            new ModalBuscadorTiendasStpV(dCtxSh.channel, driver).close();
             pageFichaStpv.selectAnadirAFavoritos();
             pageFichaStpv.changeColorGarment();
             pageFichaStpv.selectRemoveFromFavoritos();
@@ -87,7 +87,7 @@ public class FichaProducto {
 
     @SuppressWarnings("static-access")
     @Test (
-        groups={"FichaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 
+        groups={"FichaProducto", "Canal:all_App:all"}, alwaysRun=true, 
         description="[Usuario no registrado] Se testean las features secundarias de una ficha con origen el buscador: guía de tallas, carrusel imágenes, imagen central, panel de opciones, total look")
     public void FIC002_FichaFromSearch_SecondaryFeatures_NoReg() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
@@ -102,23 +102,28 @@ public class FichaProducto {
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {
             pageFichaStpV.validaExistsImgsCarruselIzqFichaOld();
-            pageFichaStpV.secProductDescOld.validateAreInStateInitial(dCtxSh.appE, driver);
+            pageFichaStpV.secProductDescOld.validateAreInStateInitial(dCtxSh.appE);
             PageFicha pageFicha = PageFicha.newInstance(dCtxSh.channel, dCtxSh.appE, driver);
             if (((PageFichaArtOld)pageFicha).getNumImgsCarruselIzq() > 2) {
                 pageFichaStpV.selectImgCarruselIzqFichaOld(2);
             }
             pageFichaStpV.selectImagenCentralFichaOld();
-            if (TypePanel.Description.getListApps().contains(dCtxSh.appE)) {
-                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Description, driver);
+            if (dCtxSh.channel.isDevice()) {
+            	pageFichaStpV.closeZoomImageCentralDevice();
+            }
+            if (TypePanel.Description.getListApps().contains(dCtxSh.appE) &&
+            	!dCtxSh.channel.isDevice()) {
+                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Description);
             }
             if (TypePanel.Composition.getListApps().contains(dCtxSh.appE)) {
-                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Composition, driver);
+                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Composition);
             }
             if (TypePanel.Returns.getListApps().contains(dCtxSh.appE)) {
-                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Returns, driver);
+                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Returns);
             }
-            if (TypePanel.Shipment.getListApps().contains(dCtxSh.appE)) {
-                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Shipment, driver);  
+            if (TypePanel.Shipment.getListApps().contains(dCtxSh.appE) &&
+            	!dCtxSh.channel.isDevice()) {
+                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Shipment);  
             }
         } else {
             boolean isFichaAccesorio = pageFichaStpV.getFicha().isFichaAccesorio(); 
@@ -172,7 +177,7 @@ public class FichaProducto {
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {
             if (TypePanel.KcSafety.getListApps().contains(dCtxSh.appE)) {
-                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.KcSafety, driver);
+                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.KcSafety);
             }
         } else {
             if (TypePanel.KcSafety.getListApps().contains(dCtxSh.appE)) {

@@ -96,7 +96,7 @@ public class SecDataProduct extends SeleniumUtils {
     private static final String XPathItemsPrecioSinDesc = "//span[(@class[contains(.,'product-prices-sale--cross')] or @class[contains(.,'product-sale--cross')])]";
 
     //xpaths asociados a los colores de la prenda
-    private static final String XPathColoresPrendaSinIdentificar = "//div[@class='color-container']";
+    private static final String XPathColoresPrendaSinIdentificar = "//div[@class[contains(.,'color-container')]]";
     
     private static String getXPathPastillaColorClick(String codigoColor) {
         return ("//div[@class[contains(.,'color-container')] and @id='" + codigoColor + "']/img");
