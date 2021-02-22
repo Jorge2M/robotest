@@ -159,7 +159,11 @@ public class SecMenusDesktopStpV {
         	Menu1rstLevel menu1rstLevel = (Menu1rstLevel) menu;
         	List<Menu2onLevel> menus2onLevel = menu1rstLevel.getListMenus2onLevel();
 	        if (menus2onLevel!=null && menus2onLevel.size()>0) {
-	        	checkVisibility2onLevelMenus(menus2onLevel);
+	        	if (app==AppEcom.outlet) {
+	        		checkVisibility2onLevelMenusOulet(menus2onLevel);
+	        	} else {
+	        		pageGaleriaStpV.checkVisibilitySubmenus(menus2onLevel);
+	        	}
 	        }
     	}
         
@@ -182,7 +186,7 @@ public class SecMenusDesktopStpV {
     }
       
 	@Validation
-	private ChecksTM checkVisibility2onLevelMenus(List<Menu2onLevel> menus2onLevel) throws Exception {
+	private ChecksTM checkVisibility2onLevelMenusOulet(List<Menu2onLevel> menus2onLevel) throws Exception {
 		ChecksTM validations = ChecksTM.getNew();
 		for (Menu2onLevel menu2oNivelTmp : menus2onLevel) {
 			validations.add(

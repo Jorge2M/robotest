@@ -44,14 +44,14 @@ public abstract class PageFicha extends PageObjTM {
         if (appE==AppEcom.outlet || channel.isDevice()) {
         	pageFicha = PageFichaArtOld.getNewInstance(channel, driver);
         } else {
-        	pageFicha = PageFichaArtNew.getNewInstance(channel, driver);
+        	pageFicha = PageFichaArt_DesktopShop.getNewInstance(channel, driver);
         }
         pageFicha.appE = appE;
         return pageFicha;
     }
     
     public static PageFicha newInstanceFichaNew(Channel channel, AppEcom appE, WebDriver driver) {
-    	PageFicha pageFicha = PageFichaArtNew.getNewInstance(channel, driver);
+    	PageFicha pageFicha = PageFichaArt_DesktopShop.getNewInstance(channel, driver);
     	pageFicha.appE = appE;
     	return pageFicha;
     }

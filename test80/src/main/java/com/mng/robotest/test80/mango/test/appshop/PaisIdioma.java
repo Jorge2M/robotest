@@ -132,8 +132,8 @@ public class PaisIdioma implements Serializable {
         } else {
         	SecMenusWrap secMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver);
             if (secMenus.canClickMenuArticles(dCtxSh.pais, linea, sublinea)) {
-            	Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "pantalones"));
-            	secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh);
+            	Menu1rstLevel menu = getMenu(lineaType, sublineaType);
+            	secMenusStpV.selectMenu1rstLevelTypeCatalog(menu, dCtxSh);
                 if (flagsNavigation.testMenus()) {
                     PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 					boolean bannerIsLincable = PageGaleriaDesktop.secBannerHead.isLinkable(driver);
@@ -144,6 +144,19 @@ public class PaisIdioma implements Serializable {
             }
         }
     }
+	
+	private Menu1rstLevel getMenu(LineaType lineaType, SublineaNinosType sublineaType) {
+		String menu = "";
+		switch (lineaType) {
+		case nina:
+		case nino:
+			menu = "camisetas";
+			break;
+		default:
+			menu = "pantalones";
+		}
+		return MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, menu));
+	}
     
     /**
      * Se testean características específicas de la Línea (que no se dan en una Sublínea)

@@ -113,8 +113,7 @@ public class RebajasJun2018 {
         
         //Aplicamos el test a las líneas/sublíneas
         for (Linea linea : this.lineasAprobar) {
-            if (UtilsMangoTest.validarLinea(dCtxSh.pais, linea, dCtxSh.channel, dCtxSh.appE) &&
-                linea.getType()!=LineaType.edits) {
+            if (UtilsMangoTest.validarLinea(dCtxSh.pais, linea, dCtxSh.channel, dCtxSh.appE)) {
                 validaLinea(salesOnInCountry, linea, null, ("banners".compareTo(linea.getContentDesk())==0), dCtxSh, driver);
                 for (Sublinea sublinea : linea.getListSublineas(dCtxSh.appE)) {
                     validaLinea(salesOnInCountry, linea, sublinea, ("banners".compareTo(sublinea.getContentDesk())==0), dCtxSh, driver);

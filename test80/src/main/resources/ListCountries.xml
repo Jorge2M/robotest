@@ -238,7 +238,7 @@
 <miscompras>true</miscompras>
 <moneda>ALL %@</moneda>
 <maximo_bolsa>999999999999</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea id="nuevo"     		 shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea id="rebajas"   		 shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -255,7 +255,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea id="violeta"   		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     		 shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -286,7 +285,7 @@
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <ticketStore_enabled>false</ticketStore_enabled>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -303,7 +302,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea id="violeta"   		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     		 shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -340,7 +338,7 @@
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -357,7 +355,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
@@ -408,14 +405,13 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>15000000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" kids="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" kids="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj"/>
 <linea id="she"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -438,7 +434,7 @@
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <ticketStore_enabled>false</ticketStore_enabled>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -455,7 +451,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
@@ -500,7 +495,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ BAM</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -517,7 +512,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -565,7 +559,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -601,7 +594,7 @@
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ HRK</moneda>
 <maximo_bolsa>8500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -618,7 +611,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -652,7 +644,7 @@
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -669,7 +661,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -710,7 +701,7 @@
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ CSK</moneda>
 <maximo_bolsa>43000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -727,7 +718,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners" contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
@@ -768,7 +758,7 @@
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ DKK</moneda>
 <maximo_bolsa>11200</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -785,7 +775,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="Klarna" tiendas="shop,outlet" empleado="n"
@@ -831,7 +820,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -848,7 +837,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -891,7 +879,7 @@
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -908,7 +896,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="Klarna" tiendas="shop,outlet" empleado="n"
@@ -956,7 +943,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea	 	  id="nuevo" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/> 
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -973,7 +960,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>S
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
@@ -1014,7 +1000,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -1031,7 +1017,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
@@ -1092,7 +1077,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -1101,7 +1086,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -1125,7 +1109,7 @@
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -1142,7 +1126,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
@@ -1187,7 +1170,7 @@
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ HUF</moneda>
 <maximo_bolsa>375000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -1204,7 +1187,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
@@ -1243,7 +1225,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ ISK</moneda> 
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda> 
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda> 
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -1260,7 +1242,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -1295,7 +1276,7 @@
 <miscompras>true</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -1312,7 +1293,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
@@ -1349,7 +1329,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -1366,7 +1346,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
@@ -1405,7 +1384,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -1414,7 +1393,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -1435,7 +1413,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -1452,7 +1430,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -1487,7 +1464,7 @@
 <miscompras>true</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>2300</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -1504,7 +1481,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -1534,7 +1510,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ LTL</moneda>
 <maximo_bolsa>5200</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -1551,7 +1527,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -1590,7 +1565,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -1607,7 +1582,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -1646,7 +1620,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ MKD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -1655,7 +1629,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -1675,7 +1648,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -1692,7 +1665,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -1727,7 +1699,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ MDL</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -1736,7 +1708,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -1756,7 +1727,7 @@
 <miscompras>true</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -1773,7 +1744,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -1807,7 +1777,7 @@
 <tiendas_online></tiendas_online>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -1816,7 +1786,6 @@
 <linea id="nina"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -1838,7 +1807,7 @@
 <miscompras>true</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -1855,7 +1824,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
@@ -1898,7 +1866,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -1907,7 +1875,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -1928,7 +1895,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ NOK</moneda>
 <maximo_bolsa>12000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -1945,7 +1912,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="Klarna" tiendas="shop,outlet"
@@ -1993,7 +1959,7 @@
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ PLZ</moneda>
 <maximo_bolsa>5800</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -2010,7 +1976,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
@@ -2054,7 +2019,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -2071,7 +2036,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
@@ -2111,7 +2075,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ RON</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -2128,7 +2092,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" 
@@ -2161,7 +2124,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ RUB</moneda>
 <maximo_bolsa>60000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -2178,7 +2141,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="PaysecureQiwi" tiendas="shop,outlet"
@@ -2225,7 +2187,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ DIN</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -2242,7 +2204,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" 
@@ -2271,7 +2232,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -2288,7 +2249,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
@@ -2331,7 +2291,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -2348,7 +2308,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" 
@@ -2393,7 +2352,7 @@
 <ticketStore_enabled>true</ticketStore_enabled>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea    	  id="nuevo" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/> 
 <linea    	  id="rebajas"   shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -2410,7 +2369,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <!-- 
 <pago 
@@ -2469,7 +2427,7 @@
 <ticketStore_enabled>true</ticketStore_enabled>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/> 
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -2486,7 +2444,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
@@ -2536,7 +2493,7 @@
 <ticketStore_enabled>true</ticketStore_enabled>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/> 
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -2553,7 +2510,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
@@ -2599,7 +2555,7 @@
 <ticketStore_enabled>true</ticketStore_enabled>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/> 
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -2616,7 +2572,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
@@ -2666,7 +2621,7 @@
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ SEK</moneda>
 <maximo_bolsa>14000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -2683,7 +2638,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners" contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners" contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="Klarna" tiendas="shop,outlet" empleado="n" 
@@ -2728,7 +2682,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ CHF</moneda>
 <maximo_bolsa>2300</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -2745,7 +2699,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" 
@@ -2802,7 +2755,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ UAH</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -2819,7 +2772,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -2849,7 +2801,7 @@
 <miscompras>true</miscompras>
 <moneda>GBP %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -2866,7 +2818,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
@@ -2908,7 +2859,7 @@
 <miscompras>true</miscompras>
 <moneda>GBP %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -2925,7 +2876,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -2964,7 +2914,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ AWG</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -2981,7 +2931,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -3009,7 +2958,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -3018,7 +2967,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -3038,7 +2986,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ CAN</moneda>
 <maximo_bolsa>2500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -3055,7 +3003,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -3086,7 +3033,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ CRC</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -3103,7 +3050,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -3131,7 +3077,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ CUP</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -3140,7 +3086,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -3159,7 +3104,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ DOP</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="s"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -3168,7 +3113,6 @@
 <linea id="nina"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -3187,7 +3131,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ USD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -3204,7 +3148,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -3235,7 +3178,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -3252,7 +3195,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -3286,7 +3228,7 @@
 <miscompras>true</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -3303,7 +3245,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -3377,7 +3318,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ MXP</moneda>
 <maximo_bolsa>13000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -3393,7 +3334,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <!-- Mercadopago x Débito -->
 <!-- 
@@ -3442,7 +3382,7 @@
 <miscompras>true</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -3459,7 +3399,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -3487,7 +3426,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ USD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -3504,7 +3443,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -3537,7 +3475,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ USD</moneda>
 <maximo_bolsa>2000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="s" edits="s"></tienda> 
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="s"></tienda> 
 <shoponline>
 <linea id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -3552,7 +3490,6 @@
 	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"  contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
@@ -3600,7 +3537,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ ARS</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="n"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -3609,7 +3546,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="n" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>S</invertida>
 <micuenta>N</micuenta>
@@ -3628,7 +3564,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ BRL</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="s"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -3636,7 +3572,6 @@
 <linea id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="kids"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="n" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>S</invertida>
 <micuenta>N</micuenta>
@@ -3656,7 +3591,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ BRL</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="n"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -3665,7 +3600,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="n" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>S</invertida>
 <micuenta>N</micuenta>
@@ -3684,7 +3618,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ CLP</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" kids="s" baby="n" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" kids="s" baby="n" violeta="s"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -3692,7 +3626,6 @@
 <linea id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="kids"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="n" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>S</invertida>
 <micuenta>N</micuenta>
@@ -3711,7 +3644,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ COP</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="n" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="articulos" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="articulos"/>
@@ -3728,7 +3661,6 @@
 	<sublinea id="bebe_nino" shop="n" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -3768,7 +3700,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ USD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -3777,7 +3709,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -3797,7 +3728,7 @@
 <miscompras>true</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -3814,7 +3745,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -3848,7 +3778,7 @@
 <miscompras>true</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -3865,7 +3795,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -3898,7 +3827,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -3915,7 +3844,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -3946,7 +3874,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" kids="s" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" kids="s" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj"/>
@@ -3954,7 +3882,6 @@
 <linea id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="kids"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="n" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>S</invertida>
 <micuenta>N</micuenta>
@@ -3973,7 +3900,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ PEN</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" kids="s" baby="n" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" kids="s" baby="n" violeta="s"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -3981,7 +3908,6 @@
 <linea id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="kids"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="n" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>S</invertida>
 <micuenta>N</micuenta>
@@ -4000,7 +3926,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" kids="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" kids="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj"/>
@@ -4008,7 +3934,6 @@
 <linea id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="kids"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>S</invertida>
 <micuenta>N</micuenta>
@@ -4027,7 +3952,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="s"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj"/>
@@ -4036,7 +3961,6 @@
 <linea id="nina"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>S</invertida>
 <micuenta>N</micuenta>
@@ -4055,7 +3979,7 @@
 <miscompras>false</miscompras>
 <moneda>VEB %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -4064,7 +3988,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -4085,7 +4008,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ AUD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="n" nino="s" baby="n" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="n" nino="s" baby="n" violeta="s"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -4100,7 +4023,6 @@
 	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -4134,7 +4056,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -4143,7 +4065,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>S</invertida>
 <micuenta>N</micuenta>
@@ -4165,7 +4086,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ AMD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -4174,7 +4095,6 @@
 <linea id="nina"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -4194,7 +4114,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ AZN</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="s" nino="s" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="s" nino="s" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -4211,7 +4131,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -4231,7 +4150,7 @@
 <miscompras>false</miscompras>
 <moneda>BHD %@</moneda>
 <maximo_bolsa>780</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -4248,7 +4167,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <!-- 
 <pago 
@@ -4284,7 +4202,7 @@
 <miscompras>false</miscompras>
 <moneda>USD %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -4301,7 +4219,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -4322,7 +4239,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ CNY</moneda>
 <maximo_bolsa>12900</maximo_bolsa>
-<tienda nuevo="n" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="n" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" submenusMobil="mujer" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" submenusMobil="mujer" carrusels="she,he,nina,nino"/>
@@ -4337,7 +4254,6 @@
 	<!-- <sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>-->
 </linea>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
@@ -4413,7 +4329,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ GEL</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="n"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -4430,7 +4346,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -4449,7 +4364,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ HKD</moneda>
 <maximo_bolsa>15000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="s" nino="s" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="s" nino="s" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" submenusMobil="mujer,kids" panoramicas="s"/>
 <linea id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" submenusMobil="mujer,kids" carrusels="mujer,nina,nino"/>
@@ -4464,7 +4379,6 @@
 	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -4502,7 +4416,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ INR</moneda>
 <maximo_bolsa>17000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -4519,7 +4433,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -4551,7 +4464,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ IDR</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -4567,7 +4480,6 @@
 	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -4595,7 +4507,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="s"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -4604,7 +4516,6 @@
 <linea id="nina"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -4623,7 +4534,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="s" nino="s" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="s" nino="s" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -4632,7 +4543,6 @@
 <linea id="nina"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -4651,7 +4561,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ ILS</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" kids="s" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" kids="s" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -4659,7 +4569,6 @@
 <linea id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="kids"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="n" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -4679,7 +4588,7 @@
 <miscompras>false</miscompras>
 <moneda>JPY %@</moneda>
 <maximo_bolsa>195000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj"/>
@@ -4688,7 +4597,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -4729,7 +4637,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ CUP</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -4738,7 +4646,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -4757,7 +4664,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ CUP</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -4766,7 +4673,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -4786,7 +4692,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ JOD</moneda>
 <maximo_bolsa>999999999</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -4803,7 +4709,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -4831,7 +4736,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ KZT</moneda>
 <maximo_bolsa>250000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="s" nina="s" nino="s" baby="n" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="s" nina="s" nino="s" baby="n" violeta="s"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -4846,7 +4751,6 @@
 	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="Assist" tiendas="shop,outlet"
@@ -4878,7 +4782,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ KWD</moneda>
 <maximo_bolsa>999999999</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -4895,7 +4799,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -4930,7 +4833,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ KGS</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -4939,7 +4842,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -4959,7 +4861,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ LBP</moneda>
 <maximo_bolsa>1250000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -4976,7 +4878,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -5014,7 +4915,7 @@
 <miscompras>true</miscompras>
 <moneda>MOP %@</moneda>
 <maximo_bolsa>15000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="articulos" panoramicas="s"/>
 <linea id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="articulos"/>
@@ -5023,7 +4924,6 @@
 <linea id="nina"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"  contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -5051,7 +4951,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ MYR</moneda>
 <maximo_bolsa>4500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -5068,7 +4968,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -5099,7 +4998,7 @@
 <miscompras>true</miscompras>
 <moneda>EUR %@</moneda> 
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda> 
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda> 
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -5116,7 +5015,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -5147,7 +5045,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ MNT</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="s" nino="s" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="s" nino="s" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -5156,7 +5054,6 @@
 <linea id="nina"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -5176,7 +5073,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ OMR</moneda>
 <maximo_bolsa>500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -5193,7 +5090,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <!-- 
 <pago 
@@ -5229,7 +5125,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="s" nino="s" baby="s" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="s" nino="s" baby="s" violeta="n"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -5246,7 +5142,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -5265,7 +5160,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ PHP</moneda>
 <maximo_bolsa>21000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="n"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="n" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -5280,7 +5175,6 @@
 	<!-- <sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/> -->
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -5319,7 +5213,7 @@
 <miscompras>false</miscompras>
 <moneda>QAR %@</moneda>
 <maximo_bolsa>3000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -5336,7 +5230,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -5372,7 +5265,7 @@
 <miscompras>false</miscompras>
 <moneda>SAR %@</moneda>
 <maximo_bolsa>3000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="n" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -5389,7 +5282,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="storecredit" tiendas="shop"
@@ -5425,7 +5317,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ SGD</moneda>
 <maximo_bolsa>400</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -5442,7 +5334,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -5484,7 +5375,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ KRW</moneda>
 <maximo_bolsa>2000000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="mujer,he,nina,nino"/>
@@ -5499,7 +5390,6 @@
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <!-- 
 <pago 
@@ -5529,7 +5419,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="articulos" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -5538,7 +5428,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -5557,7 +5446,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ SYP</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -5566,7 +5455,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -5585,7 +5473,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ TWD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="s" nino="s" baby="s" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="s" nino="s" baby="s" violeta="n"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -5602,7 +5490,6 @@
 	<sublinea id="bebe_nino" shop="n" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -5621,7 +5508,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ THB</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -5630,7 +5517,6 @@
 <linea id="nina"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -5650,7 +5536,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ TRL</moneda>
 <maximo_bolsa>3500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -5667,7 +5553,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <!-- Hay un pequeño problema y es que en Shop aparece "KREDİ KARTI"  y en Outlet "KREDI KARTI". Mientras que siga así tendremos que definir las siguientes 2 líneas-->
 <!-- 
@@ -5703,7 +5588,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ AED</moneda>
 <maximo_bolsa>990</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -5720,7 +5605,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="storecredit" tiendas="shop"
@@ -5758,7 +5642,7 @@
 <miscompras>true</miscompras>
 <moneda>%@ UZS</moneda>
 <maximo_bolsa>999999999999</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -5775,7 +5659,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -5803,7 +5686,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ USD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -5812,7 +5695,6 @@
 <linea id="nina"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -5834,7 +5716,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ DZD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -5843,7 +5725,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -5863,7 +5744,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -5872,7 +5753,6 @@
 <linea id="nina"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="s" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -5891,7 +5771,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -5900,7 +5780,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -5919,7 +5798,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -5928,7 +5807,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -5949,7 +5827,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -5958,7 +5836,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"  contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -5977,7 +5854,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -5986,7 +5863,6 @@
 <linea id="nina"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -6006,7 +5882,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ EGP</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>
 <shoponline>
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -6023,7 +5899,6 @@
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -6053,7 +5928,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -6062,7 +5937,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -6081,7 +5955,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="s" nino="s" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="s" nino="s" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -6090,7 +5964,6 @@
 <linea id="nina"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -6109,7 +5982,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="s" outlet="n" menus="s" menusart="s" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -6118,7 +5991,6 @@
 <linea id="nina"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -6137,7 +6009,7 @@
 <miscompras>false</miscompras>
 <moneda>LYD %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -6146,7 +6018,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -6166,7 +6037,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="s" nino="s" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="s" nino="s" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -6175,7 +6046,6 @@
 <linea id="nina"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -6196,7 +6066,7 @@
 <miscompras>false</miscompras>
 <moneda>%@ MAD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -6205,7 +6075,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -6224,7 +6093,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -6233,7 +6102,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -6252,7 +6120,7 @@
 <miscompras>false</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -6261,7 +6129,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -6289,7 +6156,6 @@
 <linea id="nina"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -6315,7 +6181,7 @@
 <tiendas_online></tiendas_online>
 <moneda>%@ TND</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n" edits="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
@@ -6324,7 +6190,6 @@
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <invertida>N</invertida>
 <micuenta>N</micuenta>

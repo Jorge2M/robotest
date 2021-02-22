@@ -41,6 +41,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDes
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeSlider;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.SecBannerHeadGallery.TypeLinkInfo;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu2onLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusFiltroCollection;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.bloqueMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
@@ -940,4 +941,16 @@ public class PageGaleriaStpV {
 		
 		return validations;
     }
+    
+	@SuppressWarnings("static-access")
+	@Validation
+	public ChecksTM checkVisibilitySubmenus(List<Menu2onLevel> menus2onLevel) {
+		ChecksTM validations = ChecksTM.getNew();
+		for (Menu2onLevel menu2oNivelTmp : menus2onLevel) {
+			validations.add(
+				"Aparece el submenú <b>" + menu2oNivelTmp.getNombre() + "</b>",
+				((PageGaleriaDesktop)pageGaleria).secSubmenusGallery.isVisibleSubmenu(menu2oNivelTmp.getNombre(), driver), State.Warn);
+		}
+		return validations;
+	}
 }

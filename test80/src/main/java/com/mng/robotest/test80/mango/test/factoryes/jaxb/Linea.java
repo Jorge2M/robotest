@@ -26,8 +26,7 @@ public class Linea implements Serializable {
     	nina("ninas", "outletA", "kidsA", "nina", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
     	nino("ninos", "outletO", "kidsO", "nino", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
     	kids("kids", "outletX", "kids", "kids", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
-    	violeta("violeta", "outletV", "violeta", "violeta", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
-    	edits("edits", "outletE", "edits", "edits", Arrays.asList(Channel.desktop));
+    	violeta("violeta", "outletV", "violeta", "violeta", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet));
     	
     	String literal = "";
     	String sufixOutlet = "";

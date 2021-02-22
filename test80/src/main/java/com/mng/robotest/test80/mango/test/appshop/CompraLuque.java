@@ -29,6 +29,8 @@ import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
 public class CompraLuque {
 	
+	//Más info: https://confluence.mango.com/display/TT/BlackFriday+-+Stress+Tests
+	
 	private final List<String> codPostalesCanada = Arrays.asList( 
 		"A0A 1B0",   //CAYHM
 		"T6W 0V9",   //CAYEG
@@ -40,30 +42,12 @@ public class CompraLuque {
 	
     @Test (
         groups={"Compra", "Canal:desktop,mobile_App:all"}, alwaysRun=true,
-        description="Compra USA o Canadá")
+        description="Compra USA o Irlanda")
     public void LUQ001_Compra() throws Exception {
-    	Pais pais=getPaisRandom(Arrays.asList(PaisShop.USA, PaisShop.Canada, PaisShop.Serbia));
+    	Pais pais=getPaisRandom(Arrays.asList(PaisShop.USA, PaisShop.Ireland));
 		IdiomaPais idioma = pais.getListIdiomas().get(0);
 		executePurchase(pais, idioma);
     }
-    
-//    @Test (
-//        groups={"Compra", "Canal:all_App:all"}, alwaysRun=true,
-//        description="Compra THOR")
-//    public void LUQ002_Compra_THOR() throws Exception {
-//		Pais pais=getPaisThor();
-//		IdiomaPais idioma = pais.getListIdiomas().get(0);
-//		executePurchase(pais, idioma);
-//    }
-//    
-//    @Test (
-//        groups={"Compra", "Canal:all_App:all"}, alwaysRun=true,
-//        description="Compra THOR")
-//    public void LUQ003_Compra_CANADA() throws Exception {
-//		Pais pais=PaisGetter.get(PaisShop.Canada);
-//		IdiomaPais idioma = pais.getListIdiomas().get(0);
-//		executePurchase(pais, idioma);
-//    }
     
     private void executePurchase(Pais pais, IdiomaPais idioma) throws Exception {
     	//Data For Test
@@ -113,16 +97,9 @@ public class CompraLuque {
 		PaisShop paisShop = PaisShop.getPais(pais.getCodigo_pais());
 		switch (paisShop) {
 		case USA:
-		case Canada:
-		case Serbia:
+		case Ireland:
 		default:
-			return getArticles_USA_CANADA_SERBIA();
-//			return getListArticlesCANADA();
-//		case Latvia:
-//		case Lithuania:
-//		case Estonia:
-//		default:
-//			return getListArticlesTHOR();
+			return getArticles();
 		}
 	}
 	
@@ -143,28 +120,28 @@ public class CompraLuque {
     	return PaisGetter.get(listaPaises.get(randomNumber));
     }
 	
-	private List<Garment> getArticles_USA_CANADA_SERBIA() {
+	private List<Garment> getArticles() {
 		List<Garment> listReturn = new ArrayList<>();
 		
     	Random rn = new Random();
-		int randomNumber = rn.nextInt(3);
+		int randomNumber = rn.nextInt(2);
 
 		if (randomNumber>=0) {
-	        Garment garment1 = new Garment("87091029");
+	        Garment garment1 = new Garment("87092508");
 	        garment1.setStock(1000);
 	        Color color1 = new Color();
-	        color1.setId("69");
-	        color1.setLabel("Dark Navy");
+	        color1.setId("99");
+	        color1.setLabel("Negro");
 	        Size size1 = new Size();
-	        size1.setId(06);
-	        size1.setLabel("5-6 years (116cm)");
+	        size1.setId(21);
+	        size1.setLabel("M");
 	        color1.setSizes(Arrays.asList(size1));
 	        garment1.setColors(Arrays.asList(color1));
 	        listReturn.add(garment1);
 		}
 		
 		if (randomNumber>=1) {
-	        Garment garment1 = new Garment("63100536");
+	        Garment garment1 = new Garment("87092508");
 	        garment1.setStock(1000);
 	        Color color1 = new Color();
 	        color1.setId("99");
@@ -176,48 +153,6 @@ public class CompraLuque {
 	        garment1.setColors(Arrays.asList(color1));
 	        listReturn.add(garment1);
 		}
-		
-		if (randomNumber==2) {
-	        Garment garment1 = new Garment("87091029");
-	        garment1.setStock(1000);
-	        Color color1 = new Color();
-	        color1.setId("69");
-	        color1.setLabel("Dark Navy");
-	        Size size1 = new Size();
-	        size1.setId(06);
-	        size1.setLabel("5-6 years (116cm)");
-	        color1.setSizes(Arrays.asList(size1));
-	        garment1.setColors(Arrays.asList(color1));
-	        listReturn.add(garment1);
-		}
-        
-//		if (randomNumber>=1) {
-//	        Garment garment2 = new Garment("63100536");
-//	        garment2.setStock(1000);
-//	        Color color2 = new Color();
-//	        color2.setId("99");
-//	        color2.setLabel("Negro");
-//	        Size size2 = new Size();
-//	        size2.setId(20);
-//	        size2.setLabel("M");
-//	        color2.setSizes(Arrays.asList(size2));
-//	        garment2.setColors(Arrays.asList(color2));
-//	        listReturn.add(garment2);
-//		}
-//        
-//		if (randomNumber==2) {
-//	        Garment garment3 = new Garment("77007893");
-//	        garment3.setStock(1000);
-//	        Color color3 = new Color();
-//	        color3.setId("99");
-//	        color3.setLabel("Negro");
-//	        Size size3 = new Size();
-//	        size3.setId(20);
-//	        size3.setLabel("S");
-//	        color3.setSizes(Arrays.asList(size3));
-//	        garment3.setColors(Arrays.asList(color3));
-//	        listReturn.add(garment3);
-//		}
         
         return listReturn;
 	}

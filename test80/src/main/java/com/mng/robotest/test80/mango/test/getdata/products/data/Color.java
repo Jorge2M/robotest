@@ -11,7 +11,7 @@ public class Color {
 	private List<Size> sizes;
 	
 	public Size getSizeWithMoreStock() {
-		int maxStock = 0;
+		int maxStock = -1;
 		Size sizeCandidate = null;
 		for (Size size : getSizes()) {
 			if (size.getStock()>maxStock) {

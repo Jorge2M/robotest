@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecBolsaButtonAn
  * Clase que define la automatización de las diferentes funcionalidades de la página de "GALERÍA DE PRODUCTOS"
  * @author jorge.munoz
  */
-public class PageFichaArtNew extends PageFicha {
+public class PageFichaArt_DesktopShop extends PageFicha {
 
     public static SecBolsaButtonAndLinksNew secBolsaButtonAndLinks; //Button bolsa and UnderLinks "Detalle Producto"...
     public static ModEnvioYdevolNew modEnvioYdevolNew; //Modal que aparece al seleccionar el link "Envío y devoluciones"
@@ -26,15 +26,15 @@ public class PageFichaArtNew extends PageFicha {
     
     private static final String XPathHtmlFicha = "//html[@class[contains(.,'ficha')]]";
     
-    private PageFichaArtNew(Channel channel, WebDriver driver) {
+    private PageFichaArt_DesktopShop(Channel channel, WebDriver driver) {
         super(driver);
         this.channel = channel;
         this.typeFicha = TypeFicha.New;
     }
     
     //Static constructor
-    public static PageFichaArtNew getNewInstance(Channel channel, WebDriver driver) {
-    	return (new PageFichaArtNew(channel, driver));
+    public static PageFichaArt_DesktopShop getNewInstance(Channel channel, WebDriver driver) {
+    	return (new PageFichaArt_DesktopShop(channel, driver));
     }
     
     private String getXPathIsPage(String referencia) {

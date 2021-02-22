@@ -12,13 +12,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 /**
@@ -36,9 +38,17 @@ public class SecBolsa {
     private static final String XPathAspaMobil = "(//a[@class[contains(.,'iconCross')]] | //span[@class[contains(.,'outline-close')]])";
     
     private static final String XPathPanelBolsaMobil = "//div[@class[contains(.,'m_bolsa')]]";
-    private static final String XPathPanelBolsaDesktop = "//div[@id='mainDivBolsa']";
+    
+    //TODO eliminar cuando se active la nueva versión
+    private static final String XPathPanelBolsaDesktopOld = "//div[(@class='shoppingBagContent' or @id='shoppingBagContent') and not(@style[contains(.,'display: none')])]//div[@id='mainDivBolsa']"; 
+    private static final String XPathPanelBolsaDesktopNew = "//div[@id='openedShoppingBag']";
+    
     private static final String XPathBotonComprarMobil = "//div[@class='comButton']/span";
-    private static final String XPathBotonComprarDesktop = "//*[@id='bolsaComprar']";
+    
+    //TODO eliminar cuando se active la nueva versión
+    private static final String XPathBotonComprarDesktopOld = XPathPanelBolsaDesktopOld + "//*[@id='bolsaComprar']";
+    private static final String XPathBotonComprarDesktopNew = "//button[@data-testid='bag.fullpage.checkout.button']";
+    
     private static final String tagRefArticle = "[TAGREF]";
     private static final String XPathLinkBorrarArtMobilNew = "//*[@id[contains(.,'trashMobile')] and @onclick[contains(.,'" + tagRefArticle + "')]]"; 
     private static final String XPathLinkBorrarArtDesktop = "//*[@class='boton_basura' and @onclick[contains(.,'" + tagRefArticle + "')]]/..";
@@ -50,14 +60,14 @@ public class SecBolsa {
         if (channel==Channel.mobile) {
             return XPathPanelBolsaMobil;
         }
-        return XPathPanelBolsaDesktop;
+        return "(" + XPathPanelBolsaDesktopOld + " | " + XPathPanelBolsaDesktopNew + ")";
     }
     
     private static String getXPATH_BotonComprar(Channel channel) {
         if (channel==Channel.mobile) {
             return XPathBotonComprarMobil;
         }
-        return XPathBotonComprarDesktop;
+        return "(" + XPathBotonComprarDesktopOld + " | " + XPathBotonComprarDesktopNew + ")"; 
     }
     
     /**
@@ -97,16 +107,15 @@ public class SecBolsa {
     }
 
 	public static boolean isInStateUntil(StateBolsa stateBolsaExpected, Channel channel, int maxSeconds, WebDriver driver) {
+		String xpath = SecBolsa.getXPathPanelBolsa(channel);
 		switch (stateBolsaExpected) {
 		case Open:
-			String xpath = SecBolsa.getXPathPanelBolsa(channel);
 			if (state(Visible, By.xpath(xpath), driver).wait(maxSeconds).check()) {
 				return true;
 			}
 			break;
 		case Closed:
-			String xpath2 = SecBolsa.getXPathPanelBolsa(channel);
-			if (state(Invisible, By.xpath(xpath2), driver).wait(maxSeconds).check()) {
+			if (state(Invisible, By.xpath(xpath), driver).wait(maxSeconds).check()) {
 				return true;
 			}
 			break;
@@ -143,7 +152,8 @@ public class SecBolsa {
 
 	public static void clickBotonComprar(WebDriver driver, Channel channel, int secondsWait) {
 		String xpathComprarBt = SecBolsa.getXPATH_BotonComprar(channel);
-		new WebDriverWait(driver, secondsWait).until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathComprarBt)));
+		PageObjTM.state(State.Visible, By.xpath(xpathComprarBt), driver).wait(secondsWait).check();
+		//new WebDriverWait(driver, secondsWait).until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathComprarBt)));
 		click(By.xpath(xpathComprarBt), driver).type(TypeClick.javascript).exec();
 	}
     

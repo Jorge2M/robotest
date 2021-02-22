@@ -33,6 +33,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenus
 public class PageGaleriaDesktop extends PageGaleria {
 	
 	public static SecBannerHeadGallery secBannerHead;
+	public static SecSubmenusGallery secSubmenusGallery;
 	public static SecSelectorPrecios secSelectorPrecios;
 	public static SecCrossSelling secCrossSelling;
 	
