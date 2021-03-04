@@ -47,8 +47,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.blo
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataFichaArt;
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataScroll;
-import com.mng.robotest.test80.mango.test.pageobject.utils.NombreYRef;
-import com.mng.robotest.test80.mango.test.pageobject.utils.NombreYRefList;
+import com.mng.robotest.test80.mango.test.pageobject.utils.IndexArticleGalery;
+import com.mng.robotest.test80.mango.test.pageobject.utils.ListIndexArticleGalery;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
@@ -91,7 +91,7 @@ public class PageGaleriaStpV {
 	@Step (
 		description="Seleccionamos el artículo #{locationArt} en una pestaña aparte", 
 		expected="Aparece la ficha del artículo seleccionado en una pestaña aparte")
-	public void selectArticuloEnPestanyaAndBack(LocationArticle locationArt) throws Exception {
+	public void selectArticuloEnPestanyaAndBack(LocationArticle locationArt, Pais pais) throws Exception {
 		String galeryWindowHandle = driver.getWindowHandle();
 		DataFichaArt datosArticulo = new DataFichaArt();
 
@@ -101,7 +101,7 @@ public class PageGaleriaStpV {
 		datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
 
 		String detailWindowHandle = pageGaleria.openArticuloPestanyaAndGo(articulo, app);
-		PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel);
+		PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel, pais);
 		pageFichaStpV.validaDetallesProducto(datosArticulo);
 
 		if (detailWindowHandle.compareTo(galeryWindowHandle)!=0) {
@@ -125,7 +125,7 @@ public class PageGaleriaStpV {
         datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
 
         pageGaleria.clickArticulo(articulo);
-        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
+        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
         pageFichaStpV.validaDetallesProducto(datosArticulo);
         pageFichaStpV.validaPrevNext(locationArt, dCtxSh);
 
@@ -182,7 +182,8 @@ public class PageGaleriaStpV {
 		//boolean notVisibleAvisame = modalArticleNotAvailableStpV.validateState(1, StateModal.notvisible, driver);
 		if (tallaVisible) {
 			dataBag.addArticulo(articulo);
-			SecBolsaStpV.validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE, driver);
+			SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
+			secBolsaStpV.validaAltaArtBolsa(dataBag);
 		}
 
 		return tallaVisible;
@@ -279,9 +280,9 @@ public class PageGaleriaStpV {
     }
     
     @Validation
-    private ChecksTM checkNotRepeatedArticles() {
+    private ChecksTM checkNotRepeatedArticles() throws Exception {
     	ChecksTM validations = ChecksTM.getNew();
-        ArrayList<NombreYRef> productsRepeated = pageGaleria.searchArticleRepeatedInGallery();
+        ArrayList<IndexArticleGalery> productsRepeated = pageGaleria.searchArticleRepeatedInGallery();
         String producRepeatedWarning = "";
         if (productsRepeated!=null && productsRepeated.size()>0) {
         	producRepeatedWarning+=
@@ -403,13 +404,13 @@ public class PageGaleriaStpV {
         WebElement colorToClick = pageGaleria.getColorArticulo(articuloColores, false/*selected*/, posColor);
         step.replaceInDescription(tagPrecio1erArtic, pageGaleria.getPrecioArticulo(articuloColores));
        
-        String srcImg1erArt = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
+        String srcImg1erArt = pageGaleria.getImagenArticulo(articuloColores);
         step.replaceInDescription(tagSrcPng2oColor, colorToClick.getAttribute("src"));
        
         click(colorToClick, driver).exec();
         Thread.sleep(100);
         
-        String srcImgAfterClickColor = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
+        String srcImgAfterClickColor = pageGaleria.getImagenArticulo(articuloColores);
         checkImageIsModified(srcImg1erArt, srcImgAfterClickColor);
        
         return srcImgAfterClickColor;
@@ -457,10 +458,10 @@ public class PageGaleriaStpV {
        WebElement articuloColores = pageGaleriaDesktop.getArticuloConVariedadColoresAndHoverNoDoble(numArtConColores);
        stepTM.replaceInDescription(tagNombreArt, pageGaleria.getNombreArticulo(articuloColores));
        stepTM.replaceInExpected(tagNombreArt, pageGaleria.getNombreArticulo(articuloColores));
-       String srcImg1erSlider = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
+       String srcImg1erSlider = pageGaleria.getImagenArticulo(articuloColores);
        pageGaleriaDesktop.clickSliderAfterHoverArticle(articuloColores, typeSliderList);
        
-       String srcImg2oSlider = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
+       String srcImg2oSlider = pageGaleria.getImagenArticulo(articuloColores);
        checkImageSliderArticleHasChanged(srcImg1erSlider, srcImg2oSlider, typeSliderList.size());
        if ("".compareTo(srcImageExpected)!=0) {
     	   checkActualImgSliderIsTheExpected(srcImg2oSlider, srcImageExpected);
@@ -617,11 +618,12 @@ public class PageGaleriaStpV {
     @Step (
     	description="Seleccionar el link del listado a <b>#{numColumnas.name()} columnas</b>", 
         expected="Aparece un listado de artículos a #{numColumnas.name()} columnas")
-    public NombreYRefList selectListadoXColumnasDesktop(NumColumnas numColumnas, NombreYRefList listArticlesGaleriaAnt) {
+    public ListIndexArticleGalery selectListadoXColumnasDesktop(NumColumnas numColumnas, ListIndexArticleGalery listArticlesGaleriaAnt) 
+    throws Exception {
 	    ((PageGaleriaDesktop)pageGaleria).clickLinkColumnas(numColumnas);
 	    checkIsVisibleLayoutListadoXcolumns(numColumnas);
        
-        NombreYRefList listArticlesGaleriaAct = pageGaleria.getListaNombreYRefArticulos();
+        ListIndexArticleGalery listArticlesGaleriaAct = pageGaleria.getListaIndexArticles();
         if (listArticlesGaleriaAnt!=null) {
         	int articulosComprobar = 20;
         	checkArticlesEqualsToPreviousGalery(articulosComprobar, listArticlesGaleriaAnt, listArticlesGaleriaAct, numColumnas);
@@ -632,14 +634,14 @@ public class PageGaleriaStpV {
     
     @Validation
     private ChecksTM checkArticlesEqualsToPreviousGalery(
-    	int articulosComprobar, NombreYRefList listArticlesGaleriaAnt, 
-    	NombreYRefList listArticlesGaleriaAct, NumColumnas numColumnas) {
+    	int articulosComprobar, ListIndexArticleGalery listArticlesGaleriaAnt, 
+    	ListIndexArticleGalery listArticlesGaleriaAct, NumColumnas numColumnas) {
    		ChecksTM validations = ChecksTM.getNew();
    		
    		boolean articlesEquals = listArticlesGaleriaAct.isArticleListEquals(listArticlesGaleriaAnt, articulosComprobar);
    		String infoWarning = "";
    		if (!articlesEquals) {
-   			NombreYRef articleGaleryActualNotFit = listArticlesGaleriaAct.getFirstArticleThatNotFitWith(listArticlesGaleriaAnt);
+   			IndexArticleGalery articleGaleryActualNotFit = listArticlesGaleriaAct.getFirstArticleThatNotFitWith(listArticlesGaleriaAnt);
    			infoWarning+="<br><b style=\"color:" + State.Info.getColorCss() + "\">Warning!</b>: hay productos de la galería que no cuadran con los de la galería anterior (por ejemplo <b>" + articleGaleryActualNotFit.toString() + "</b>). ";
    			infoWarning+=listArticlesGaleriaAct.getTableHTLMCompareArticlesGaleria(listArticlesGaleriaAnt);
    		}
@@ -666,7 +668,7 @@ public class PageGaleriaStpV {
     		nodoAnt.getIp() + " (" + nodoAnt.getArticlesNuevo().size() + ")",
     		nodoAct.getArticlesNuevo().size()==nodoAct.getArticlesNuevo().size(), State.Warn);
    		
-   		NombreYRef articleGaleryActualNotFit = nodoAct.getArticleNuevoThatNotFitWith(nodoAnt);
+   		IndexArticleGalery articleGaleryActualNotFit = nodoAct.getArticleNuevoThatNotFitWith(nodoAnt);
    		String messageWarning = "";
         if (articleGaleryActualNotFit!=null) {
         	messageWarning+="<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b>: hay productos de la galería que no cuadran con los de la galería del nodo " + nodoAnt.getIp() + " (por ejemplo <b>" + articleGaleryActualNotFit.toString() + "</b>). ";

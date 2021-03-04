@@ -16,7 +16,7 @@ import com.github.jorge2m.testmaker.restcontroller.ServerRestTM;
 //-> Option "1" [Manual] -> Nos pide un TXT-Content
 //-> AWS 
 //    -> Acceder al AWS de mango-test
-//    -> Buscar servicio "DNS"
+//    -> Buscar servicio "DNS" (Route 53)
 //    -> Clickar "Zonas hospedadas"
 //    -> Seleccionar "pro.mango.com"
 //    -> Buscar "robotest"

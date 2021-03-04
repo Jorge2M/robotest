@@ -23,7 +23,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
-import com.mng.robotest.test80.mango.test.pageobject.utils.NombreYRefList;
+import com.mng.robotest.test80.mango.test.pageobject.utils.ListIndexArticleGalery;
 import com.mng.robotest.test80.mango.test.stpv.shop.PagePrehomeStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.banner.SecBannersStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
@@ -93,7 +93,7 @@ public class TestNodos implements Serializable {
         if (appE==AppEcom.shop) {
         	secMenusStpV.seleccionLinea(LineaType.nuevo, null, dCtxSh);
             PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, dCtxSh.appE, driver);
-            NombreYRefList listArticlesNuevoAct = pageGaleria.getListaNombreYRefArticulos();
+            ListIndexArticleGalery listArticlesNuevoAct = pageGaleria.getListaIndexArticles();
             this.nodo.setArticlesNuevo(listArticlesNuevoAct);
             PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
             if (nodoAnt!=null && nodoAnt.getArticlesNuevo()!=null) {

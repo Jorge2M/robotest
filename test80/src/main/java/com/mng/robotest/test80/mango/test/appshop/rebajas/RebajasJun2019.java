@@ -101,7 +101,7 @@ public class RebajasJun2019 implements Serializable {
         	int posBannerToTest = 1;
         	boolean applyValidations = true;
         	SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToLoad, driver);
-	        secBannersStpV.seleccionarBanner(posBannerToTest, applyValidations, dCtxSh.appE, dCtxSh.channel);
+	        secBannersStpV.seleccionarBanner(posBannerToTest, applyValidations, dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
 	        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 	        pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, true, dCtxSh.pais, dCtxSh.idioma, LineaType.she, bloqueMenu.prendas);
 	        PageGaleriaStpV.clickMoreInfoBannerRebajasJun2018(driver);

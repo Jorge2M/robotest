@@ -31,10 +31,10 @@ public class Buscador {
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
         (new PageHomeMarcasStpV(dCtxSh.channel, dCtxSh.appE, driver)).validateIsPageWithCorrectLineas(dCtxSh.pais);
         
-        GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh, driver).build();
+        GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
         Garment product = getterProducts.getAll().get(0);
         
-        secBuscadorStpV.searchArticulo(product);
+        secBuscadorStpV.searchArticulo(product, dCtxSh.pais);
         secBuscadorStpV.busquedaCategoriaProducto(categoriaProdExistente, true);
         
         //TestABmanager.activateTestAB(TestABactData.getNew(TestABOptimizeImpl.ES_SHOP_XXX_EMP_vs_FH_Search_Desktop, 1), dCtxSh.channel, dCtxSh.appE, driver);

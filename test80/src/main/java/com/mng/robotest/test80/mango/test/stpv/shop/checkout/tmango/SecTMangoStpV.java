@@ -13,15 +13,21 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMa
 
 public class SecTMangoStpV {
 
+	private final SecTMango secTMango;
+	
+	public SecTMangoStpV(Channel channel, WebDriver driver) {
+		secTMango = new SecTMango(channel, driver);
+	}
+	
 	@Validation
-    public static ChecksTM validateIsSectionOk(Channel channel, WebDriver driver) {
+    public ChecksTM validateIsSectionOk() {
 		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparece el bloque de selección de la forma de pago",
-			SecTMango.isVisibleUntil(channel, 0, driver), State.Defect); 
+			secTMango.isVisibleUntil(0), State.Defect); 
 	 	validations.add(
-			"Aparece disponible la modalidad de pago:<br>" + SecTMango.getDescripcionTipoPago(TipoPago.pagoHabitual), 
-			SecTMango.isModalidadDisponible(driver, SecTMango.TipoPago.pagoHabitual, channel), State.Defect); 
+			"Aparece disponible la modalidad de pago:<br>" + secTMango.getDescripcionTipoPago(TipoPago.pagoHabitual), 
+			secTMango.isModalidadDisponible(SecTMango.TipoPago.pagoHabitual), State.Defect); 
 	 	return validations;
     }
     
@@ -32,8 +38,8 @@ public class SecTMangoStpV {
 	@Step (
 		description="Seleccionar la forma de pago \"" + tagDescrPago + "\"", 
         expected="El resultado es correcto")
-    public static void clickTipoPago(TipoPago tipoPago, Channel channel, WebDriver driver) {
-		TestMaker.getCurrentStepInExecution().replaceInDescription(tagDescrPago, SecTMango.getDescripcionTipoPago(tipoPago));
-        SecTMango.clickModalidad(driver, tipoPago, channel);
+    public void clickTipoPago(TipoPago tipoPago) {
+		TestMaker.getCurrentStepInExecution().replaceInDescription(tagDescrPago, secTMango.getDescripcionTipoPago(tipoPago));
+        secTMango.clickModalidad(tipoPago);
     }
 }

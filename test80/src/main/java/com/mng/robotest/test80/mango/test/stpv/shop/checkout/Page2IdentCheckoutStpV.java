@@ -17,85 +17,94 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page2IdentChe
 
 public class Page2IdentCheckoutStpV {
     
+	private final Page2IdentCheckout page2IdentCheckout;
+	private final Channel channel;
+	private final WebDriver driver;
+	
+	public Page2IdentCheckoutStpV(Channel channel, WebDriver driver) {
+		this.page2IdentCheckout = new Page2IdentCheckout(driver);
+		this.channel = channel;
+		this.driver = driver;
+	}
+	
 	@Validation
-    public static ChecksTM validateIsPage(boolean emailYetExists, int maxSeconds, WebDriver driver) {
+    public ChecksTM validateIsPage(boolean emailYetExists, int maxSeconds) {
     	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparece la página-2 de introducción de datos de la dirección del cliente (la esperamos hasta " + maxSeconds + " segundos)",
-			Page2IdentCheckout.isPageUntil(maxSeconds, driver), State.Defect);
+			page2IdentCheckout.isPageUntil(maxSeconds), State.Defect);
 	 	validations.add(
 			"Es <b>" + !emailYetExists + "</b> que aparece el input para la introducción de la contraseña",
-			Page2IdentCheckout.isInputPasswordAccordingEmail(emailYetExists, driver), State.Warn);
+			page2IdentCheckout.isInputPasswordAccordingEmail(emailYetExists), State.Warn);
 	 	return validations;
     }
 	
 	@Validation (
 		description="Figura el email <b>#{email}</b>",
 		level=State.Warn)
-	public static boolean checkEmail(String email, WebDriver driver) {
-		return Page2IdentCheckout.checkEmail(email, driver);
+	public boolean checkEmail(String email) {
+		return page2IdentCheckout.checkEmail(email);
 	}
     
 	@Step (
 		description="Introducimos los datos del cliente según el país", 
         expected="Se hace clickable el botón \"Continuar\"",
         saveImagePage=SaveWhen.Always)
-    public static HashMap<String, String> inputDataPorDefecto(
-    		Pais pais, String emailUsr, boolean inputDireccCharNoLatinos, Channel channel, WebDriver driver) throws Exception {
+    public HashMap<String, String> inputDataPorDefecto(Pais pais, String emailUsr, boolean inputDireccCharNoLatinos) throws Exception {
         HashMap<String, String> datosRegistro = 
-            Page2IdentCheckout.inputDataPorDefectoSegunPais(pais, emailUsr, inputDireccCharNoLatinos, false, channel, driver);
+            page2IdentCheckout.inputDataPorDefectoSegunPais(pais, emailUsr, inputDireccCharNoLatinos, false, channel);
+        
         TestMaker.getCurrentStepInExecution().addDescriptionText(". Utilizando los datos: "+ UtilsMangoTest.listaCamposHTML(datosRegistro)); 
-        checkIsVisibleContiueButton(5, driver);
+        checkIsVisibleContiueButton(5);
         return datosRegistro;
     }
 	
 	@Validation (
 		description="Se hace clickable el botón \"Continuar\" (lo esperamos hasta #{maxSeconds})",
 		level=State.Defect)
-	private static boolean checkIsVisibleContiueButton(int maxSeconds, WebDriver driver) {
-	    return (Page2IdentCheckout.isContinuarClickableUntil(maxSeconds, driver));
+	private boolean checkIsVisibleContiueButton(int maxSeconds) {
+	    return (page2IdentCheckout.isContinuarClickableUntil(maxSeconds));
 	}
     
 	@Step (
 		description="Seleccionamos el botón \"Continuar\"",
 		expected="Aparece la página de Checkout",
 		saveImagePage=SaveWhen.Always)
-    public static void clickContinuar(boolean userRegistered, DataBag dataBag, Channel channel, WebDriver driver)
+    public void clickContinuar(boolean userRegistered, DataBag dataBag)
     throws Exception {
         int maxSecondsToWait = 20;
-        Page2IdentCheckout.clickBotonContinuarAndWait(maxSecondsToWait, driver);   
-        PageCheckoutWrapperStpV.validateIsFirstPage(userRegistered, dataBag, channel, driver);
+        page2IdentCheckout.clickBotonContinuarAndWait(maxSecondsToWait);   
+        new PageCheckoutWrapperStpV(channel, driver).validateIsFirstPage(userRegistered, dataBag);
     }
 	
 	@Step (
 		description="Seleccionamos el botón \"Continuar\" (hay carácteres no-latinos introducidos en la dirección)",
         expected="Aparece un aviso indicando que en la dirección no pueden figurar carácteres no-latinos",
         saveImagePage=SaveWhen.Always)
-    public static void clickContinuarAndExpectAvisoDirecWithNoLatinCharacters(WebDriver driver)
-    throws Exception {
+    public void clickContinuarAndExpectAvisoDirecWithNoLatinCharacters() throws Exception {
         int maxSecondsToWait = 2;
-        Page2IdentCheckout.clickBotonContinuarAndWait(maxSecondsToWait, driver);      
-        checkAvisoDireccionWithNoLatinCharacters(driver);
+        page2IdentCheckout.clickBotonContinuarAndWait(maxSecondsToWait);      
+        checkAvisoDireccionWithNoLatinCharacters();
     }
             
     @Validation (
     	description="Aparece el aviso a nivel de aduanas que indica que la dirección contiene carácteres no-latinos",
     	level=State.Defect)
-    private static boolean checkAvisoDireccionWithNoLatinCharacters(WebDriver driver) {
-        return (Page2IdentCheckout.isDisplayedAvisoAduanas(driver));
+    private boolean checkAvisoDireccionWithNoLatinCharacters() {
+        return (page2IdentCheckout.isDisplayedAvisoAduanas());
     }
     
     @Validation
-    public static ChecksTM validaRGPDText(Pais pais, WebDriver driver) {  
+    public ChecksTM validaRGPDText(Pais pais) {  
     	ChecksTM validations = ChecksTM.getNew();
 		if (pais.getRgpd().equals("S")) {
 		 	validations.add(
 				"El texto legal de RGPD <b>SI</b> existe para el pais " + pais.getCodigo_pais(),
-				Page2IdentCheckout.isTextoLegalRGPDVisible(driver), State.Defect);
+				page2IdentCheckout.isTextoLegalRGPDVisible(), State.Defect);
 		} else {
 		 	validations.add(
 				"El texto legal de RGPD <b>NO</b> existe para el pais " + pais.getCodigo_pais(),
-				!Page2IdentCheckout.isTextoLegalRGPDVisible(driver), State.Defect);
+				!page2IdentCheckout.isTextoLegalRGPDVisible(), State.Defect);
 		}
 		
 		return validations;

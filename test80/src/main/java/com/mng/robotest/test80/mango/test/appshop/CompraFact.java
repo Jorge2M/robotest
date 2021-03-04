@@ -132,7 +132,8 @@ public class CompraFact implements Serializable {
         }
         
         DataBag dataBag = new DataBag(); 
-        SecBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag, dCtxSh, driver);
+    	SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
+        secBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag);
         
         //Hasta página Checkout
         FlagsTestCkout fTCkout = new FlagsTestCkout();
@@ -146,12 +147,14 @@ public class CompraFact implements Serializable {
         dCtxPago.setFTCkout(fTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
         dCtxPago.getFTCkout().testCodPromocional = this.testVale || this.empleado;
-        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, driver);
+        
+        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
+        pagoNavigationsStpV.testFromBolsaToCheckoutMetPago();
         
         //Pago
         dCtxPago.getFTCkout().validaPagos = true;
         dCtxPago.getDataPedido().setPago(this.pago);
-        PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, driver);
+        pagoNavigationsStpV.checkPasarelaPago();
         
         //Validación en Manto de los Pedidos (si existen)
         if (fTCkout.validaPedidosEnManto) {

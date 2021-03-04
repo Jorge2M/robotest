@@ -11,12 +11,18 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.ideal.SecIdea
 
 public class SecIdealStpV {
 
+	private final SecIdeal secIdeal;
+	
+	public SecIdealStpV(Channel channel, WebDriver driver) {
+		this.secIdeal = new SecIdeal(channel, driver);
+	}
+	
 	@Validation (
 		description="Aparece el bloque de selección del banco",
 		level=State.Defect)
-    public static boolean validateIsSectionOk(Channel channel, WebDriver driver) {
+    public boolean validateIsSectionOk() {
 		int maxSeconds = 1;
-		return (SecIdeal.isVisibleSelectorOfBank(channel, maxSeconds, driver));
+		return (secIdeal.isVisibleSelectorOfBank(maxSeconds));
     }
     
     /**
@@ -25,7 +31,7 @@ public class SecIdealStpV {
 	@Step (
 		description="Seleccionar el banco \"#{bancoSeleccionado}\"", 
         expected="El resultado es correcto")
-    public static void clickBanco(BancoSeleccionado bancoSeleccionado, Channel channel, WebDriver driver) {
-		SecIdeal.clickBancoByValue(driver, channel, bancoSeleccionado);
+    public void clickBanco(BancoSeleccionado bancoSeleccionado) {
+		secIdeal.clickBancoByValue(bancoSeleccionado);
     }
 }

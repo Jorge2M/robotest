@@ -18,8 +18,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-//import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.getdata.JaxRsClient;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
@@ -176,6 +174,7 @@ public class GetterProducts extends JaxRsClient {
 		productsJson = productsJson.replace("}}}]", "}]}]");
 		productsJson = productsJson.replaceAll("\"g[0-9]{8}(..){0,1}\":", "");
 		productsJson = productsJson.replaceAll("\"g[0-9]{10}(..){0,1}\":", "");
+		productsJson = productsJson.replaceAll("\"g[0-9]{8}(..)(..){0,1}\":", "");
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -272,11 +271,11 @@ public class GetterProducts extends JaxRsClient {
 		private Integer pagina = 1;
 		private MethodGetter method = MethodGetter.Any;
 
-		public Builder(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+		public Builder(String codPaisAlf, AppEcom app, WebDriver driver) throws Exception {
 			this.url = ((InputParamsMango)TestMaker.getTestCase().getInputParamsSuite()).getUrlBase();
 			//this.url = dCtxSh.getDnsUrlAcceso();
-			this.codigoPaisAlf = dCtxSh.pais.getCodigo_alf();
-			this.app = dCtxSh.appE;
+			this.codigoPaisAlf = codPaisAlf;
+			this.app = app;
 			this.driver = driver;
 		}
 		

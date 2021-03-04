@@ -6,40 +6,43 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 public class ModalDirecFactura extends ModalDireccion {
 
-    static String XPathFormModal = "//form[@class[contains(.,'customFormIdFACT')]]";
-    static String XPathButtonUpdate = XPathFormModal + "//div[@class[contains(.,'updateButton')]]/input[@type='submit']";
+    private final static String XPathFormModal = "//form[@class[contains(.,'customFormIdFACT')]]";
+    private final static String XPathButtonUpdate = XPathFormModal + "//div[@class[contains(.,'updateButton')]]/input[@type='submit']";
     
-    public static void sendDataToInputs(DataDireccion dataToSend, WebDriver driver) throws Exception {
-        sendDataToInputs(dataToSend, XPathFormModal, driver);
+    public ModalDirecFactura(WebDriver driver) {
+    	super(driver);
     }
     
-    public static void selectPoblacion(String poblacion, WebDriver driver) throws Exception {
-        selectPoblacion(poblacion, XPathFormModal, driver);
+    public void sendDataToInputs(DataDireccion dataToSend) throws Exception {
+        sendDataToInputs(dataToSend, XPathFormModal);
+    }
+    
+    public void selectPoblacion(String poblacion) throws Exception {
+        selectPoblacion(poblacion, XPathFormModal);
     }
 
-	public static void selectProvincia(String provincia, WebDriver driver) {
-		selectProvincia(provincia, XPathFormModal, driver);
+	public void selectProvincia(String provincia) {
+		selectProvincia(provincia, XPathFormModal);
 	} 
 
-	public static boolean isVisibleFormUntil(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(XPathFormModal), driver).wait(maxSeconds).check());
+	public boolean isVisibleFormUntil(int maxSeconds) {
+		return (state(Visible, By.xpath(XPathFormModal)).wait(maxSeconds).check());
 	}
 
-	public static boolean isVisibleButtonActualizar(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathButtonUpdate), driver).check());
+	public boolean isVisibleButtonActualizar() {
+		return (state(Visible, By.xpath(XPathButtonUpdate)).check());
 	}
 
-	public static void clickActualizar(WebDriver driver) {
-		click(By.xpath(XPathButtonUpdate), driver).exec(); 
+	public void clickActualizar() {
+		click(By.xpath(XPathButtonUpdate)).exec(); 
 		try {
-			if (isVisibleButtonActualizar(driver)) {
-				click(By.xpath(XPathButtonUpdate), driver).exec();
+			if (isVisibleButtonActualizar()) {
+				click(By.xpath(XPathButtonUpdate)).exec();
 			}
 		}
 		catch (StaleElementReferenceException e) {

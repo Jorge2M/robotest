@@ -4,63 +4,68 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 
 
-public class SecMetodoEnvioDesktop {
+public class SecMetodoEnvioDesktop extends PageObjTM {
 	
+
     public static ModalDroppoints modalDroppoints;
-    static String XPathRadioInput = "//input[@id[contains(.,'Transportes')]]";
-    static String XPathSelectFranjaHorariaMetodoUrgente = "//select[@data-component-id='time-range-sameday_nextday_franjas']";
+    private final String XPathRadioInput = "//input[@id[contains(.,'Transportes')]]";
+    private final String XPathSelectFranjaHorariaMetodoUrgente = "//select[@data-component-id='time-range-sameday_nextday_franjas']";
     
-    private static String getXPathBlockMetodo(TipoTransporte tipoTransporte) {
+    public SecMetodoEnvioDesktop(WebDriver driver) {
+    	super(driver);
+    }
+    
+    private String getXPathBlockMetodo(TipoTransporte tipoTransporte) {
         return (
         	"//div[(@class[contains(.,'bloqueMetodos')] or @class[contains(.,'metodoSelected')]) and @data-analytics-id='" + 
         	tipoTransporte.getIdAnalytics() + "']");
     }
     
-    private static String getXPathBlockMetodoSelected(TipoTransporte tipoTransporte) {
+    private String getXPathBlockMetodoSelected(TipoTransporte tipoTransporte) {
     	String xpathBlockMethod = getXPathBlockMetodo(tipoTransporte);
     	return (xpathBlockMethod + "//self::*[@class[contains(.,'metodoSelected')]]");
     }
 
-	private static String getXPathRadioMetodo(TipoTransporte tipoTransporte) {
+	private String getXPathRadioMetodo(TipoTransporte tipoTransporte) {
         return getXPathBlockMetodo(tipoTransporte) + XPathRadioInput;
     }
     
-    public static void selectMetodoIfNotSelected(TipoTransporte tipoTransporte, WebDriver driver) {
+    public void selectMetodoIfNotSelected(TipoTransporte tipoTransporte) {
     	int zeroSecondsToWait = 0;
-        if (!isBlockSelectedUntil(tipoTransporte, zeroSecondsToWait, driver)) {
-        	selectMetodo(tipoTransporte, driver);
+        if (!isBlockSelectedUntil(tipoTransporte, zeroSecondsToWait)) {
+        	selectMetodo(tipoTransporte);
         }
     }
 
-	public static void selectMetodo(TipoTransporte tipoTransporte, WebDriver driver) {
+	public void selectMetodo(TipoTransporte tipoTransporte) {
 		String xpathMethodRadio = getXPathRadioMetodo(tipoTransporte);
-		if (state(Visible, By.xpath(xpathMethodRadio), driver).check() &&
-				tipoTransporte != TipoTransporte.POSTNORD) {
-			click(By.xpath(xpathMethodRadio), driver).waitLoadPage(5).exec();
+		if (state(Visible, By.xpath(xpathMethodRadio)).check() &&
+			tipoTransporte != TipoTransporte.POSTNORD) {
+			click(By.xpath(xpathMethodRadio)).waitLoadPage(5).exec();
 		} else {
 			String xpathBlock = getXPathBlockMetodo(tipoTransporte);
-			click(By.xpath(xpathBlock), driver).waitLoadPage(5).exec();
+			click(By.xpath(xpathBlock)).waitLoadPage(5).exec();
 		}
 	}
 
-    public static boolean isPresentBlockMetodo(TipoTransporte tipoTransporte, WebDriver driver) {
+    public boolean isPresentBlockMetodo(TipoTransporte tipoTransporte) {
         String xpathBLock = getXPathBlockMetodo(tipoTransporte);
-        return (state(Present, By.xpath(xpathBLock), driver).check());
+        return (state(Present, By.xpath(xpathBLock)).check());
     }
     
-    public static boolean isBlockSelectedUntil(TipoTransporte tipoTransporte, int maxSeconds, WebDriver driver) {
+    public boolean isBlockSelectedUntil(TipoTransporte tipoTransporte, int maxSeconds) {
         String xpathBlockSelected = getXPathBlockMetodoSelected(tipoTransporte);
     	waitForPageLoaded(driver);
-    	return (state(Visible, By.xpath(xpathBlockSelected), driver)
-    			.wait(maxSeconds).check());
+    	return (state(Visible, By.xpath(xpathBlockSelected)).wait(maxSeconds).check());
     }
     
-    public static void selectFranjaHorariaUrgente(int posicion, WebDriver driver) {
+    public void selectFranjaHorariaUrgente(int posicion) {
         Select selectHorario = new Select(driver.findElement(By.xpath(XPathSelectFranjaHorariaMetodoUrgente)));
         selectHorario.selectByIndex(posicion);
     }

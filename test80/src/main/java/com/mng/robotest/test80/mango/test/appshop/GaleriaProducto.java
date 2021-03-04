@@ -27,7 +27,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu2onLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataScroll;
-import com.mng.robotest.test80.mango.test.pageobject.utils.NombreYRefList;
+import com.mng.robotest.test80.mango.test.pageobject.utils.ListIndexArticleGalery;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFiltrosStpV;
@@ -91,7 +91,7 @@ public class GaleriaProducto {
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
         if (dCtxSh.channel==Channel.desktop && dCtxSh.appE!=AppEcom.outlet) {
         	PageGaleriaDesktop pageGaleria = (PageGaleriaDesktop)PageGaleria.getNew(From.menu, Channel.desktop, dCtxSh.appE, driver);
-            NombreYRefList listArticlesGaleria2Cols = pageGaleria.getListaNombreYRefArticulos();
+            ListIndexArticleGalery listArticlesGaleria2Cols = pageGaleria.getListaIndexArticles();
             listArticlesGaleria2Cols = pageGaleriaStpV.selectListadoXColumnasDesktop(NumColumnas.cuatro, listArticlesGaleria2Cols);
             pageGaleriaStpV.selectListadoXColumnasDesktop(NumColumnas.dos, listArticlesGaleria2Cols);
         }
@@ -149,7 +149,7 @@ public class GaleriaProducto {
         dataScroll.validaImgBroken = true;
         pageGaleriaStpV.scrollFromFirstPage(dataScroll, dCtxSh);
         LocationArticle loc1rsArticle1rstPage = LocationArticle.getInstanceInPage(2, 1);
-        pageGaleriaStpV.selectArticuloEnPestanyaAndBack(loc1rsArticle1rstPage);
+        pageGaleriaStpV.selectArticuloEnPestanyaAndBack(loc1rsArticle1rstPage, dCtxSh.pais);
         
         //Scrollar hasta el final de la Galería
         dataScroll.numPageToScroll = PageGaleriaDesktop.maxPageToScroll;

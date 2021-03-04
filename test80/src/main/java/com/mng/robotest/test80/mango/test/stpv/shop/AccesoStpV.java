@@ -74,7 +74,8 @@ public class AccesoStpV {
         }
         
         if (clearArticulos) {
-            SecBolsa.clearArticulos(dCtxSh, driver);
+        	SecBolsa secBolsa = SecBolsa.make(dCtxSh, driver);
+            secBolsa.clearArticulos();
         }
         
         if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf) {
@@ -167,10 +168,8 @@ public class AccesoStpV {
             PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, false/*execValidacs*/, driver);
             if (dCtxSh.userRegistered) {
                 identificacionEnMango(dCtxSh, driver);
-                SecBolsaStpV.clear(dCtxSh, driver);
-//                if (dCtxSh.appE==AppEcom.shop) {
-//                    PageFavoritosStpV.clearAll(dCtxSh, driver);
-//                }
+                SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
+                secBolsaStpV.clear();
             }
         }
     }    

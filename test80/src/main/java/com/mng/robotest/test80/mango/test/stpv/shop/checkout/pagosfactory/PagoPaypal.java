@@ -9,8 +9,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paypal.PagePa
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paypal.PagePaypalCreacionCuenta;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paypal.PagePaypalLogin;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paypal.PagePaypalSelectPago;
-import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.paypal.ModalPreloaderSppinerStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.paypal.PagePaypalConfirmacionStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.paypal.PagePaypalCreacionCuentaStpV;
@@ -26,8 +24,8 @@ public class PagoPaypal extends PagoStpV {
     
     @Override
     public void testPagoFromCheckout(boolean execPay) throws Exception {
-        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, driver);
-        PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, driver);
+        pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
+        pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
         int maxSeconds = 10;
         ModalPreloaderSppinerStpV.validateAppearsAndDisappears(driver);
         switch (getInitPagePaypal(driver)) {

@@ -5,15 +5,15 @@ import java.util.Iterator;
 import java.util.TreeSet;
 
 
-public class NombreYRefList {
+public class ListIndexArticleGalery {
 
-    ArrayList<NombreYRef> listNombreYRef = new ArrayList<>();
+    ArrayList<IndexArticleGalery> listNombreYRef = new ArrayList<>();
 
-    public Iterator<NombreYRef> getIterator() {
+    public Iterator<IndexArticleGalery> getIterator() {
         return this.listNombreYRef.iterator();
     }
     
-    public void setListNombreYRef(ArrayList<NombreYRef> listNombreYRef) {
+    public void setListNombreYRef(ArrayList<IndexArticleGalery> listNombreYRef) {
         this.listNombreYRef = listNombreYRef;
     }
     
@@ -24,18 +24,18 @@ public class NombreYRefList {
         return this.listNombreYRef.size();
     }
     
-    public NombreYRef get(int i) {
+    public IndexArticleGalery get(int i) {
         return this.listNombreYRef.get(i);
     }
     
-    public void add(NombreYRef item) {
+    public void add(IndexArticleGalery item) {
         this.listNombreYRef.add(item);
     }
     
-    public ArrayList<NombreYRef> getArticlesRepeated() {
-        ArrayList<NombreYRef> duplicates = new ArrayList<>();
-        TreeSet<NombreYRef> nombreYRefSet = new TreeSet<>(new NombreYRefComparator());
-        for(NombreYRef nombreYRef : this.listNombreYRef) {
+    public ArrayList<IndexArticleGalery> getArticlesRepeated() {
+        ArrayList<IndexArticleGalery> duplicates = new ArrayList<>();
+        TreeSet<IndexArticleGalery> nombreYRefSet = new TreeSet<>(new NombreYRefComparator());
+        for(IndexArticleGalery nombreYRef : this.listNombreYRef) {
             if(!nombreYRefSet.add(nombreYRef)) {
                 duplicates.add(nombreYRef);
             }
@@ -44,7 +44,7 @@ public class NombreYRefList {
         return duplicates;
     }
     
-    public NombreYRef getFirstArticleThatNotFitWith(NombreYRefList otherList) {
+    public IndexArticleGalery getFirstArticleThatNotFitWith(ListIndexArticleGalery otherList) {
         for (int i=0; i<this.size(); i++) {
             if (i>=otherList.size()) {
                 return this.get(i);
@@ -57,7 +57,7 @@ public class NombreYRefList {
         return null;
     }
     
-    public boolean isArticleListEquals(NombreYRefList otherList, int articlesCompare) {
+    public boolean isArticleListEquals(ListIndexArticleGalery otherList, int articlesCompare) {
         for (int i=0; i<articlesCompare; i++) {
             if (!this.get(i).equals(otherList.get(i)))
                return false;                    
@@ -69,7 +69,7 @@ public class NombreYRefList {
     /**
     /* Construye una tabla HTML mediante DIVs con 2 columnas que incluyan todos los artículos del nodo actual y el anterior
      */
-    public String getTableHTLMCompareArticlesGaleria(NombreYRefList otherListArticles) {
+    public String getTableHTLMCompareArticlesGaleria(ListIndexArticleGalery otherListArticles) {
        String result = "";
        //Table with Divs
        result += "<div style=\"display:table;margin:3px;\">";
@@ -81,8 +81,8 @@ public class NombreYRefList {
        result += "</div>";
        
        //Rows
-       Iterator<NombreYRef> it1 = this.getIterator();
-       Iterator<NombreYRef> it2 = otherListArticles.getIterator();
+       Iterator<IndexArticleGalery> it1 = this.getIterator();
+       Iterator<IndexArticleGalery> it2 = otherListArticles.getIterator();
        while (it1.hasNext() || it2.hasNext()) {
            result += "<div style=\"display:table-row;\">";
            

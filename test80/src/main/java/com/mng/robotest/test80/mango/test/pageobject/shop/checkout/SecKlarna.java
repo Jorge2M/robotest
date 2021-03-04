@@ -6,69 +6,67 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecKlarna {
+public class SecKlarna extends PageObjTM {
 
-    //Parte del error que aparece cuando se introduce un teléfono incorrecto desde Desktop
-    public static final String errorTlfDesktop = "The telephone number you submitted is not in the correct format";
+	private final Channel channel;
+	
+    private final static String errorTlfDesktop = "The telephone number you submitted is not in the correct format";
+    private final static String errorTlfMovil   = "The mobile phone / cell phone number you submitted is not formatted correctly";
     
-    //Parte del error que aparece cuando se introduce un teléfono incorrecto desde Móvil
-    public static final String errorTlfMovil   = "The mobile phone / cell phone number you submitted is not formatted correctly";
+    private final static String XPathButtonSearchAddress = "//*[@id[contains(.,'btnKlarnaConfirmar')]]";
+    private final static String XPathModalDirecciones = "//div[@class[contains(.,'modalDireccionesKlarna')]]";
+    private final static String XPathNombreAddress = "//div[@class[contains(.,'klarnaAddressNombre')]]";
+    private final static String XPathDireccionAddress = "//div[@class[contains(.,'klarnaAddressDireccion')]]";
+    private final static String XPathProvinciaAddress = "//div[@class[contains(.,'klarnaAddressProvincia')]]";
+    private final static String XPathCapaKlarnaMobil = "//div[@class[contains(.,'klarna')] and @class[contains(.,'show')]]";
+    private final static String XPathCapaKlarnaDesktop = "//div[@class[contains(.,'klarnaInput')]]";
+    private final static String XPathButtonConfirmAddressMobil = "//span[@id[contains(.,'formDireccionesKlarna')] and @class[contains(.,'modalConfirmar')]]"; 
+    private final static String XPathButtonConfirmAddressDesktop = "//span[@id[contains(.,'FormularioKlarna')] and @class[contains(.,'modalConfirmar')]]";
+
+    public SecKlarna(Channel channel, WebDriver driver) {
+    	super(driver);
+    	this.channel = channel;
+    }
     
-    static String XPathButtonSearchAddress = "//*[@id[contains(.,'btnKlarnaConfirmar')]]";
-    static String XPathModalDirecciones = "//div[@class[contains(.,'modalDireccionesKlarna')]]";
-    static String XPathNombreAddress = "//div[@class[contains(.,'klarnaAddressNombre')]]";
-    static String XPathDireccionAddress = "//div[@class[contains(.,'klarnaAddressDireccion')]]";
-    static String XPathProvinciaAddress = "//div[@class[contains(.,'klarnaAddressProvincia')]]";
-    static String XPathCapaKlarnaMobil = "//div[@class[contains(.,'klarna')] and @class[contains(.,'show')]]";
-    static String XPathCapaKlarnaDesktop = "//div[@class[contains(.,'klarnaInput')]]";
-    static String XPathButtonConfirmAddressMobil = "//span[@id[contains(.,'formDireccionesKlarna')] and @class[contains(.,'modalConfirmar')]]"; 
-    static String XPathButtonConfirmAddressDesktop = "//span[@id[contains(.,'FormularioKlarna')] and @class[contains(.,'modalConfirmar')]]";
-    
-    public static String getXPath_capaKlarna(Channel channel) {
+    public String getXPath_capaKlarna() {
         if (channel.isDevice()) {
             return XPathCapaKlarnaMobil;
         }
         return XPathCapaKlarnaDesktop; 
     }
     
-    public static String getXPath_inputNumPersonal(Channel channel) {
-        String xpathCapaKlarna = getXPath_capaKlarna(channel);
+    public String getXPath_inputNumPersonal() {
+        String xpathCapaKlarna = getXPath_capaKlarna();
         if (channel.isDevice()) {
             return (xpathCapaKlarna + "//input[@id[contains(.,'number-card')]]");
         }
         return (xpathCapaKlarna + "//input[@id[contains(.,'personalno')] and @class[contains(.,'personalno-input')]]");
     }
     
-    public static String getXPATH_buttonConfirmAddress(Channel channel) {
+    public String getXPATH_buttonConfirmAddress() {
         if (channel.isDevice()) {
             return XPathButtonConfirmAddressMobil; 
         }
         return XPathButtonConfirmAddressDesktop;
     }
 
-	public static boolean isVisibleUntil(Channel channel, int maxSeconds, WebDriver driver) {
-		String xpath = getXPath_capaKlarna(channel);
-		return (state(Visible, By.xpath(xpath), driver)
-				.wait(maxSeconds).check());
+	public boolean isVisibleUntil(int maxSeconds) {
+		String xpath = getXPath_capaKlarna();
+		return (state(Visible, By.xpath(xpath)).wait(maxSeconds).check());
 	}
     
-    /**
-     * Espera un determinado número de segundos a que esté disponible el input y posteriormente introduce el número personal
-     */
-    public static void waitAndinputNumPersonal(WebDriver driver, int secondsWait, String numPerKlarna, Channel channel) {
-        String xpathInput = getXPath_inputNumPersonal(channel);
+    public void waitAndinputNumPersonal(int secondsWait, String numPerKlarna) {
+        String xpathInput = getXPath_inputNumPersonal();
         new WebDriverWait(driver, secondsWait).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathInput)));
         driver.findElement(By.xpath(xpathInput)).sendKeys(numPerKlarna);
     }
     
-    /**
-     * @return si un determinado mensaje es el correspondiente al mensaje de error por teléfono introducido con formato incorrecto
-     */
-    public static boolean isErrorTlfn(String mensajeError, Channel channel) {
+    public boolean isErrorTlfn(String mensajeError) {
         boolean isError = false;
         if (channel.isDevice()) {
             if (mensajeError.contains(errorTlfMovil)) {
@@ -83,40 +81,32 @@ public class SecKlarna {
         return isError;
     }
     
-	/**
-	 * Selección del botón "Search Address" (se trata de un botón que aparece en algunos tipos de Klarna como p.e. el de Sweden)
-	 */
-	public static void clickSearchAddress(WebDriver driver) {
-		click(By.xpath(XPathButtonSearchAddress), driver).exec();
+	public void clickSearchAddress() {
+		click(By.xpath(XPathButtonSearchAddress)).exec();
 	}
 
-	/**
-	 * @return indicador de si existe o no el modal de la confirmación de la dirección (aparece sólo en algunos tipos de Klarna como p.e. el de Sweden)
-	 */
-	public static boolean isModalDireccionesVisibleUntil(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(XPathModalDirecciones), driver)
-				.wait(maxSeconds).check());
+	public boolean isModalDireccionesVisibleUntil(int maxSeconds) {
+		return (state(Visible, By.xpath(XPathModalDirecciones)).wait(maxSeconds).check());
 	}
 
-	public static boolean isModalDireccionesInvisibleUntil(int maxSeconds, WebDriver driver) {
-		return (state(Invisible, By.xpath(XPathModalDirecciones), driver)
-				.wait(maxSeconds).check());
+	public boolean isModalDireccionesInvisibleUntil(int maxSeconds) {
+		return (state(Invisible, By.xpath(XPathModalDirecciones)).wait(maxSeconds).check());
 	}
 
-	public static String getTextNombreAddress(WebDriver driver) {
+	public String getTextNombreAddress() {
 		return driver.findElement(By.xpath(XPathNombreAddress)).getText();
 	}
 
-	public static String getTextDireccionAddress(WebDriver driver) {
+	public String getTextDireccionAddress() {
 		return driver.findElement(By.xpath(XPathDireccionAddress)).getText();
 	}
 
-	public static String getTextProvinciaAddress(WebDriver driver) {
+	public String getTextProvinciaAddress() {
 		return driver.findElement(By.xpath(XPathProvinciaAddress)).getText();
 	}
 
-	public static void clickConfirmAddress(WebDriver driver, Channel channel) {
-		By byElem = By.xpath(getXPATH_buttonConfirmAddress(channel));
-		click(byElem, driver).exec();
+	public void clickConfirmAddress() {
+		By byElem = By.xpath(getXPATH_buttonConfirmAddress());
+		click(byElem).exec();
 	}
 }

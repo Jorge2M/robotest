@@ -3,28 +3,33 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class ModalAvisoCambioPais {
+public class ModalAvisoCambioPais extends PageObjTM {
 
-	static String XPathModal = "//div[@aria-labelledby[contains(.,'changeCountryModal')]]";
-	static String XPathButtonConfCambio = XPathModal + "//button[@name='continue']";
+	private final static String XPathModal = "//div[@aria-labelledby[contains(.,'changeCountryModal')]]";
+	private final static String XPathButtonConfCambio = XPathModal + "//button[@name='continue']";
+	
+	public ModalAvisoCambioPais(WebDriver driver) {
+		super(driver);
+	}
 
-	public static boolean isVisibleUntil(int maxSeconds, WebDriver driver) {
+	public boolean isVisibleUntil(int maxSeconds) {
 		return (state(Visible, By.xpath(XPathModal), driver)
 				.wait(maxSeconds).check());
 	}
 
-	public static boolean isInvisibleUntil(int maxSeconds, WebDriver driver) {
+	public boolean isInvisibleUntil(int maxSeconds) {
 		return (state(Invisible, By.xpath(XPathModal), driver)
 				.wait(maxSeconds).check());
 	}
 
-	public static void clickConfirmarCambio(WebDriver driver) {
+	public void clickConfirmarCambio() {
 		waitForPageLoaded(driver);
 		moveToElement(By.xpath(XPathButtonConfCambio), driver);
-		click(By.xpath(XPathButtonConfCambio), driver).exec();
+		click(By.xpath(XPathButtonConfCambio)).exec();
 	}
 }

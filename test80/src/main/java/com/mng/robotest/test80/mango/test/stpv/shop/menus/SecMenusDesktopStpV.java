@@ -493,7 +493,7 @@ public class SecMenusDesktopStpV {
         expected=
         	"Aparece la ficha del producto " + tagRefArticle)
     public static void checkURLRedirectFicha(Pais pais, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh, driver).build();
+    	GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
     	Garment product = getterProducts.getAll().get(0);
     	Article article = product.getArticleWithMoreStock();
     	TestMaker.getCurrentStepInExecution().replaceInDescription(tagRefArticle, article.getGarmentId());
@@ -512,7 +512,7 @@ public class SecMenusDesktopStpV {
         driver.navigate().to(urlAccesoCorreo);
 
         DataFichaArt datosArticulo = new DataFichaArt(article.getGarmentId(), "");
-        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
+        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
         pageFichaStpV.validaDetallesProducto(datosArticulo);
     }
     

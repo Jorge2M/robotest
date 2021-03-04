@@ -18,14 +18,16 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
-import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.ValidatorContentBolsa;
-import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.LineasArticuloBolsa.DataArtBolsa;
+import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.LineasArtBolsa.DataArtBolsa;
+import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
+import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsaMobile;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Page1IdentCheckoutStpV;
@@ -34,37 +36,59 @@ import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
 
 public class SecBolsaStpV {
 
+	private final SecBolsa secBolsa;
+	
+	private final Channel channel;
+	private final AppEcom app;
+	private final Pais pais;
+	private final WebDriver driver;
+	
+	public SecBolsaStpV(DataCtxShop dCtxSh, WebDriver driver) {
+		this.secBolsa = SecBolsa.make(dCtxSh, driver);
+		this.driver = driver;
+		this.channel = dCtxSh.channel;
+		this.app = dCtxSh.appE;
+		this.pais = dCtxSh.pais;
+	}
+	
+	public SecBolsaStpV(Channel channel, AppEcom app, Pais pais, WebDriver driver) {
+		this.secBolsa = SecBolsa.make(channel, app, pais, driver);
+		this.driver = driver;
+		this.channel = channel;
+		this.app = app;
+		this.pais = pais;
+	}
+	
 	@Step (
 		description="Eliminamos los posibles artículos existentes en la Bolsa",
 		expected="La bolsa queda vacía")
-	public static void clear(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-		if (SecCabecera.getNew(dCtxSh.channel, dCtxSh.appE, driver).hayArticulosBolsa()) {
-			SecBolsa.clearArticulos(dCtxSh, driver);
+	public void clear() throws Exception {
+		if (SecCabecera.getNew(channel, app, driver).hayArticulosBolsa()) {
+			secBolsa.clearArticulos();
 		}
 	}
 
-	public static void close(Channel channel, AppEcom app, WebDriver driver) 
-	throws Exception {
+	public void close() throws Exception {
 		if (channel.isDevice()) {
-			clickAspaForCloseMobil(driver);
+			clickAspaForCloseMobil();
 		} else {
-			forceStateBolsaTo(StateBolsa.Closed, app, channel, driver);
+			forceStateBolsaTo(StateBolsa.Closed);
 		}
 	}
 
 	@Step (
 		description="Click en el aspa para cerrar la bolsa", 
 		expected="Se cierra la bolsa")
-	public static void clickAspaForCloseMobil(WebDriver driver) throws Exception {
-		SecBolsa.clickAspaMobil(driver);
-		checkBolsaDisappears(3, driver);
+	public void clickAspaForCloseMobil() throws Exception {
+		((SecBolsaMobile)secBolsa).clickAspaMobil();
+		checkBolsaDisappears(3);
 	}
 
 	@Validation (
 		description="Desaparece la bolsa (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-	private static boolean checkBolsaDisappears(int maxSeconds, WebDriver driver) {
-		return (SecBolsa.isInStateUntil(StateBolsa.Closed, Channel.mobile, maxSeconds, driver));
+	private boolean checkBolsaDisappears(int maxSeconds) {
+		return (secBolsa.isInStateUntil(StateBolsa.Closed, maxSeconds));
 	}
 
 	/**
@@ -74,24 +98,22 @@ public class SecBolsaStpV {
 	@Step (
 		description="Mediante click o hover conseguir que la bolsa quede en estado #{stateBolsaExpected}", 
 		expected="La bolsa queda en estado #{stateBolsaExpected}")
-	public static void forceStateBolsaTo(StateBolsa stateBolsaExpected, AppEcom app, Channel channel, WebDriver driver) 
-	throws Exception {
-		SecBolsa.setBolsaToStateIfNotYet(stateBolsaExpected, channel, app, driver);
-		validateBolsaInState(stateBolsaExpected, 1, channel, driver);
+	public void forceStateBolsaTo(StateBolsa stateBolsaExpected) throws Exception {
+		secBolsa.setBolsaToStateIfNotYet(stateBolsaExpected);
+		validateBolsaInState(stateBolsaExpected, 1);
 	}
 
 	@Validation (
 		description="La bolsa queda en estado #{stateBolsaExpected} (lo esperamos hasta #{maxSecondsToWait} segundos)",
 		level=State.Defect)
-	private static boolean validateBolsaInState(StateBolsa stateBolsaExpected, int maxSeconds, Channel channel, WebDriver driver) {
-		return (SecBolsa.isInStateUntil(stateBolsaExpected, channel, maxSeconds, driver));
+	private boolean validateBolsaInState(StateBolsa stateBolsaExpected, int maxSeconds) {
+		return (secBolsa.isInStateUntil(stateBolsaExpected, maxSeconds));
 	}
 
-	public static void altaArticlosConColores(int numArticulos, DataBag dataBag, DataCtxShop dCtxSh, WebDriver driver) 
-	throws Exception {
-		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh, driver).build();
+	public void altaArticlosConColores(int numArticulos, DataBag dataBag) throws Exception {
+		GetterProducts getterProducts = new GetterProducts.Builder(pais.getCodigo_alf(), app, driver).build();
 		List<Garment> listParaAlta = getterProducts.getWithManyColors().subList(0, numArticulos);
-		altaListaArticulosEnBolsa(listParaAlta, dataBag, dCtxSh, driver);
+		altaListaArticulosEnBolsa(listParaAlta, dataBag);
 	}
 
 	/**
@@ -99,16 +121,14 @@ public class SecBolsaStpV {
 	 * @param listParaAlta lista de artículos que hay que dar de alta
 	 * @param listArtEnBolsa lista total de artículos que hay en la bolsa (y en la que se añadirán los nuevos)
 	 */
-	public static void altaListaArticulosEnBolsa(List<Garment> listArticlesForAdd, DataBag dataBag, DataCtxShop dCtxSh, WebDriver driver) 
-	throws Exception {
+	public void altaListaArticulosEnBolsa(List<Garment> listArticlesForAdd, DataBag dataBag) throws Exception {
 		if (listArticlesForAdd!=null && !listArticlesForAdd.isEmpty()) {
-			altaBolsaArticulos(listArticlesForAdd, dataBag, dCtxSh, driver);
-			validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE, driver);
+			altaBolsaArticulos(listArticlesForAdd, dataBag);
+			validaAltaArtBolsa(dataBag);
 		}
 
-		//Almacenamos el importe SubTotal y el de Transporte
-		dataBag.setImporteTotal(SecBolsa.getPrecioSubTotal(dCtxSh.channel, driver));
-		dataBag.setImporteTransp(SecBolsa.getPrecioTransporte(driver, dCtxSh.channel));
+		dataBag.setImporteTotal(secBolsa.getPrecioSubTotal());
+		dataBag.setImporteTransp(secBolsa.getPrecioTransporte());
 	}
 
 	final static String tagListaArt = "@TagListaArt";
@@ -116,12 +136,11 @@ public class SecBolsaStpV {
 		description="Buscar y dar de alta los siguientes productos en la bolsa:<br>" + tagListaArt, 
 		expected="Los productos se dan de alta en la bolsa correctamente",
 		saveNettraffic=SaveWhen.Always)
-	public static void altaBolsaArticulos(List<Garment> listParaAlta, DataBag dataBag, DataCtxShop dCtxSh, WebDriver driver) 
-	throws Exception {
+	public void altaBolsaArticulos(List<Garment> listParaAlta, DataBag dataBag) throws Exception {
 		includeListaArtInTestCaseDescription(listParaAlta);
 		for (int i=0; i<listParaAlta.size(); i++) {
 			Garment artTmp = listParaAlta.get(i);
-			ArticuloScreen articulo = UtilsMangoTest.addArticuloBolsa(artTmp, dCtxSh.appE, dCtxSh.channel, driver);
+			ArticuloScreen articulo = UtilsMangoTest.addArticuloBolsa(artTmp, app, channel, driver);
 			if (artTmp.isVale()) {
 				articulo.setVale(artTmp.getValePais());
 			}
@@ -129,13 +148,13 @@ public class SecBolsaStpV {
 			dataBag.addArticulo(articulo);
 		}
 
-		if (dCtxSh.channel==Channel.desktop) {
+		if (channel==Channel.desktop) {
 			int maxSecondsToWait = 10;
-			SecBolsa.isInStateUntil(StateBolsa.Open, dCtxSh.channel, maxSecondsToWait, driver);
+			secBolsa.isInStateUntil(StateBolsa.Open,maxSecondsToWait);
 		}
 	}
 
-	private static void includeListaArtInTestCaseDescription(List<Garment> listParaAlta) {
+	private void includeListaArtInTestCaseDescription(List<Garment> listParaAlta) {
 		//Obtener el literal con la lista de artículos a dar de alta en la bolsa
 		String listaArtStr = "";
 		for (int i=0; i<listParaAlta.size(); i++) {
@@ -158,14 +177,13 @@ public class SecBolsaStpV {
 	 * Validaciones posteriores al alta de una lista de artículos en la bolsa
 	 * @param listArtEnBolsa lista total de artículos dados de alta a la bolsa
 	 */
-	public static void validaAltaArtBolsa(DataBag dataBag, Channel channel, AppEcom app, WebDriver driver) 
-	throws Exception {
-		validaNumArtEnBolsa(dataBag, channel, app, driver);
+	public void validaAltaArtBolsa(DataBag dataBag) throws Exception {
+		validaNumArtEnBolsa(dataBag);
 		if (channel==Channel.desktop) {
-			checkIsBolsaVisibleInDesktop(driver);
+			checkIsBolsaVisibleInDesktop();
 		}
 
-		validaCuadranArticulosBolsa(dataBag, app, channel, driver);
+		validaCuadranArticulosBolsa(dataBag);
 		EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
 				Constantes.AnalyticsVal.GoogleAnalytics,
 				Constantes.AnalyticsVal.Criteo,
@@ -175,35 +193,33 @@ public class SecBolsaStpV {
 	}
 
 	@Validation
-	private static ChecksTM checkIsBolsaVisibleInDesktop(WebDriver driver) {
+	private ChecksTM checkIsBolsaVisibleInDesktop() {
 		ChecksTM validations = ChecksTM.getNew();
 		int maxSeconds = 1;
 	 	validations.add(
 			"Es visible la capa/página correspondiente a la bolsa (la esperamos hasta " + maxSeconds + " segundos)",
-			SecBolsa.isInStateUntil(StateBolsa.Open, Channel.desktop, maxSeconds, driver), State.Defect);
+			secBolsa.isInStateUntil(StateBolsa.Open, maxSeconds), State.Defect);
 	 	validations.add(
 			"Aparece el botón \"Comprar\" (lo esperamos hasta " + maxSeconds + " segundos)",
-			SecBolsa.isVisibleBotonComprarUntil(driver, Channel.desktop, maxSeconds), State.Defect);
+			secBolsa.isVisibleBotonComprarUntil(maxSeconds), State.Defect);
 		return validations;
 	}
 
 	@Validation
-	public static ChecksTM validaNumArtEnBolsa(DataBag dataBag, Channel channel, AppEcom app, WebDriver driver) 
-	throws Exception {
+	public ChecksTM validaNumArtEnBolsa(DataBag dataBag) throws Exception {
 		ChecksTM validations = ChecksTM.getNew();
 		int maxSeconds = 2;
 		String itemsSaved = String.valueOf(dataBag.getListArticulos().size());
 	 	validations.add(
 			"Existen " + dataBag.getListArticulos().size() + " elementos dados de alta en la bolsa (los esperamos hasta " + maxSeconds + " segundos)",
-			SecBolsa.numberItemsIsUntil(itemsSaved, channel, app, maxSeconds, driver), State.Warn);
+			secBolsa.numberItemsIsUntil(itemsSaved, channel, app, maxSeconds), State.Warn);
 	 	return validations;
 	}
 
 	@Validation
-	public static ChecksTM validaCuadranArticulosBolsa(DataBag dataBag, AppEcom app, Channel channel, WebDriver driver) 
-	throws Exception {
+	public ChecksTM validaCuadranArticulosBolsa(DataBag dataBag) throws Exception {
 		ChecksTM validations = ChecksTM.getNew();
-		ValidatorContentBolsa validatorBolsa = new ValidatorContentBolsa(dataBag, app, channel, driver);
+		ValidatorContentBolsa validatorBolsa = new ValidatorContentBolsa(dataBag, app, channel, pais, driver);
 		validations.add(
 			"Cuadra el número de artículos existentes en la bolsa",
 			validatorBolsa.numArticlesIsCorrect(), State.Warn);
@@ -245,30 +261,27 @@ public class SecBolsaStpV {
 		return validations;
 	}
 
-	public static void clear1erArticuloBolsa(DataBag dataBag, AppEcom app, Channel channel, WebDriver driver) 
-	throws Exception {
+	public void clear1erArticuloBolsa(DataBag dataBag) throws Exception {
 		ArticuloScreen artToClear = dataBag.getArticulo(0);
-		clearArticuloBolsa(artToClear, dataBag, app, channel, driver);
+		clearArticuloBolsa(artToClear, dataBag);
 	}
 
 	@Step (
 		description="Eliminar el artículo-1 #{artToClear.getReferencia()} de la bolsa", 
 		expected="El artículo se elimina correctamente")
-	private static void clearArticuloBolsa(ArticuloScreen artToClear, DataBag dataBag, AppEcom app, Channel channel, WebDriver driver) 
-	throws Exception {
-		String importeTotalOrig = SecBolsa.getPrecioSubtotalTextPant(channel, driver);
-		SecBolsa.clearArticuloAndWait(channel, artToClear.getReferencia(), driver);
+	private void clearArticuloBolsa(ArticuloScreen artToClear, DataBag dataBag) throws Exception {
+		String importeTotalOrig = secBolsa.getPrecioSubtotalTextPant();
+		secBolsa.getLineasArtBolsa().clearArticuloAndWait(artToClear.getReferencia());
 		dataBag.removeArticulo(0); 
-		checkImporteIsModified(importeTotalOrig, 5, channel, driver);
-		validaCuadranArticulosBolsa(dataBag, app, channel, driver);
+		checkImporteIsModified(importeTotalOrig, 5);
+		validaCuadranArticulosBolsa(dataBag);
 	}
 
 	@Validation (
 		description="El importe total se acaba modificando (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
-	private static boolean checkImporteIsModified(String importeTotalOrig, int maxSeconds, Channel channel, WebDriver driver) 
-	throws Exception {
-		return (SecBolsa.isNotThisImporteTotalUntil(importeTotalOrig, channel, maxSeconds, driver));
+	private boolean checkImporteIsModified(String importeTotalOrig, int maxSeconds) 	throws Exception {
+		return (secBolsa.isNotThisImporteTotalUntil(importeTotalOrig, maxSeconds));
 	}
 
 	@SuppressWarnings("static-access")
@@ -276,9 +289,9 @@ public class SecBolsaStpV {
 		description="Se selecciona el botón \"COMPRAR\" de la bolsa", 
 		expected="Se muestra la página de identificación",
 		saveNettraffic=SaveWhen.Always)
-	public static void selectButtonComprar(DataBag dataBag, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-		SecBolsa.clickBotonComprar(driver, dCtxSh.channel, 10);
-		validaSelectButtonComprar(dataBag, dCtxSh, driver);
+	public void selectButtonComprar(DataBag dataBag, DataCtxShop dCtxSh) throws Exception {
+		secBolsa.clickBotonComprar(10);
+		validaSelectButtonComprar(dataBag, dCtxSh);
 		if(!dCtxSh.userRegistered) {
 			Page1IdentCheckoutStpV.secSoyNuevo.validaRGPDText(dCtxSh, driver);
 		}
@@ -288,32 +301,29 @@ public class SecBolsaStpV {
 	 * Validaciones resultado de seleccionar el botón "Comprar" de la bolsa
 	 * @param accUsrReg si la operación se está realizando con un usuario registrado
 	 */
-	public static void validaSelectButtonComprar(DataBag dataBag, DataCtxShop dCtxSh, WebDriver driver) 
-	throws Exception {
+	public void validaSelectButtonComprar(DataBag dataBag, DataCtxShop dCtxSh) throws Exception {
 		if (dCtxSh.userRegistered) {
-			PageCheckoutWrapperStpV.validateIsFirstPage(dCtxSh.userRegistered, dataBag, dCtxSh.channel, driver);
+			new PageCheckoutWrapperStpV(dCtxSh.channel, driver).validateIsFirstPage(dCtxSh.userRegistered, dataBag);
 		} else {
 			int maxSeconds = 5;
 			Page1IdentCheckoutStpV.validateIsPage(maxSeconds, driver);
 		}
 	}
 
-	public static void click1erArticuloBolsa(DataBag dataBag, AppEcom app, Channel channel, WebDriver driver) 
-	throws Exception {
+	public void click1erArticuloBolsa(DataBag dataBag) throws Exception {
 		ArticuloScreen articuloClickado = dataBag.getArticulo(0);
-		clickArticuloBolsa(articuloClickado, app, channel, driver);
+		clickArticuloBolsa(articuloClickado);
 	}
 
 	@Step (
 		description="Lincar con el artículo existente en la bolsa" + " #{articuloClickado.getReferencia()})", 
 		expected="El link al artículo es correcto")
-	public static void clickArticuloBolsa(ArticuloScreen articuloClickado, AppEcom app, Channel channel, WebDriver driver) 
-	throws Exception {
-		SecBolsa.setBolsaToStateIfNotYet(StateBolsa.Open, channel, app, driver);
-		SecBolsa.click1erArticuloBolsa(driver);
+	public void clickArticuloBolsa(ArticuloScreen articuloClickado) throws Exception {
+		secBolsa.setBolsaToStateIfNotYet(StateBolsa.Open);
+		secBolsa.click1erArticuloBolsa();
 
 		String refArticulo = articuloClickado.getReferencia();
-		PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(app, channel);
+		PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(app, channel, pais);
 		pageFichaStpv.validateIsFichaArtDisponible(refArticulo, 3);
 	}
 }

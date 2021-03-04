@@ -55,7 +55,7 @@ public class SecConfirmDatosStpV {
 			!ModalDroppoints.isVisible(channel, driver), State.Warn);
 		
 		DataDeliveryPoint dataDp = dataPedido.getDataDeliveryPoint();
-		String textDireccionEnvioCompleta = PageCheckoutWrapper.getTextDireccionEnvioCompleta(channel, driver);
+		String textDireccionEnvioCompleta = new PageCheckoutWrapper(channel, driver).getTextDireccionEnvioCompleta();
 		dataPedido.setDireccionEnvio(textDireccionEnvioCompleta);
 		validations.add(
 			"Se modifica la dirección de envío por la del Delivery Point (" + dataDp.getDireccion() + ")",

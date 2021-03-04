@@ -3,18 +3,13 @@ package com.mng.robotest.test80.mango.test.stpv.miscelanea;
 import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.service.TestMaker;
-import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts.MethodGetter;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
-import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.utils.Test80;
 
 public class GetProductsStpV {
@@ -28,7 +23,7 @@ public class GetProductsStpV {
 	public static void callProductListService(LineaType linea, String seccion, String galeria, String familia, WebDriver driver) 
 	throws Exception {
     	DataCtxShop dCtxSh = Test80.getDefaultDataShop(); 
-		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh, driver)
+		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver)
 			.method(MethodGetter.WebDriver)
 			.linea(LineaType.she)
 			.seccion("prendas")

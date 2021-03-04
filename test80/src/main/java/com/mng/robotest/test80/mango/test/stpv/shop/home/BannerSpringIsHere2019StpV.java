@@ -112,7 +112,7 @@ public class BannerSpringIsHere2019StpV {
     }
     
     public void clickBanner() throws Exception {
-    	secBannersStpV.seleccionarBanner(posBannerSpringIsHere, true/*applyValidations*/, dCtxSh.appE, dCtxSh.channel);
+    	secBannersStpV.seleccionarBanner(posBannerSpringIsHere, true, dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
     }
     
 	private boolean textBannersContainsPossibleText(String textBanner) {

@@ -66,7 +66,9 @@ public class Bolsa {
         DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
         dCtxPago.setFTCkout(FTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
-        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, driver);
+        
+        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
+        pagoNavigationsStpV.testFromBolsaToCheckoutMetPago();
     }
 
     @Test (
@@ -95,7 +97,9 @@ public class Bolsa {
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
         secMenusStpV.accesoMenuXRef(menuVestidos, dCtxSh);
-        SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, driver);
+        
+    	SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
+        secBolsaStpV.altaArticlosConColores(1, dataBag);
         
         //Hasta página de Checkout
         FlagsTestCkout FTCkout = new FlagsTestCkout();
@@ -108,7 +112,9 @@ public class Bolsa {
         DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
         dCtxPago.setFTCkout(FTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
-        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, driver);
+        
+        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
+        pagoNavigationsStpV.testFromBolsaToCheckoutMetPago();
     }
 
 	@Test (
@@ -126,14 +132,15 @@ public class Bolsa {
 
     public static void BOR005_6_Gest_Prod_Bolsa(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-    	//TestAB.activateTestABiconoBolsaDesktop(2, dCtxSh, dFTest.driver);
+    	SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
         DataBag dataBag = new DataBag();
+        
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, dCtxSh.userRegistered, driver);
-        SecBolsaStpV.altaArticlosConColores(2, dataBag, dCtxSh, driver);
-        SecBolsaStpV.forceStateBolsaTo(StateBolsa.Closed, dCtxSh.appE, dCtxSh.channel, driver);
-        SecBolsaStpV.forceStateBolsaTo(StateBolsa.Open, dCtxSh.appE, dCtxSh.channel, driver); 
-        SecBolsaStpV.clear1erArticuloBolsa(dataBag, dCtxSh.appE, dCtxSh.channel, driver);                                
-        SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, driver);
-        SecBolsaStpV.click1erArticuloBolsa(dataBag, dCtxSh.appE, dCtxSh.channel, driver);
+        secBolsaStpV.altaArticlosConColores(2, dataBag);
+        secBolsaStpV.forceStateBolsaTo(StateBolsa.Closed);
+        secBolsaStpV.forceStateBolsaTo(StateBolsa.Open); 
+        secBolsaStpV.clear1erArticuloBolsa(dataBag);                                
+        secBolsaStpV.altaArticlosConColores(1, dataBag);
+        secBolsaStpV.click1erArticuloBolsa(dataBag);
     }
 }

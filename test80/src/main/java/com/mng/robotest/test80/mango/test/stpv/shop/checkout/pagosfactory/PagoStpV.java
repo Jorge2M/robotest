@@ -5,8 +5,14 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 
 public abstract class PagoStpV {
+	
+	final PagoNavigationsStpV pagoNavigationsStpV;
+	final PageCheckoutWrapperStpV pageCheckoutWrapperStpV;
+	
 	public DataCtxShop dCtxSh;
 	public DataCtxPago dCtxPago;
 	public WebDriver driver;
@@ -18,6 +24,8 @@ public abstract class PagoStpV {
 		this.dCtxSh = dCtxSh;
 		this.dCtxPago = dCtxPago;
 		this.driver = driver;
+		this.pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
+		this.pageCheckoutWrapperStpV = new PageCheckoutWrapperStpV(dCtxSh.channel, driver);
 	}
 
 	public boolean isAvailableExecPay() {

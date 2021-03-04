@@ -5,8 +5,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
-import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
+
 
 public class PagoKlarna extends PagoStpV {
     
@@ -18,17 +17,17 @@ public class PagoKlarna extends PagoStpV {
     @SuppressWarnings("static-access")
     @Override
     public void testPagoFromCheckout(boolean execPay) throws Exception {
-        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, driver);
+        pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
         Pago pago = this.dCtxPago.getDataPedido().getPago();
-        PageCheckoutWrapperStpV.secKlarna.inputNumPersonal(pago.getNumperklarna(), dCtxSh.channel, driver);
+        pageCheckoutWrapperStpV.getSecKlarnaStpV().inputNumPersonal(pago.getNumperklarna());
         if (pago.getSearchAddklarna().compareTo("s")==0) {
-            PageCheckoutWrapperStpV.secKlarna.searchAddress(pago, driver);
-            PageCheckoutWrapperStpV.secKlarna.confirmAddress(pago, dCtxSh.channel, driver);
+            pageCheckoutWrapperStpV.getSecKlarnaStpV().searchAddress(pago);
+            pageCheckoutWrapperStpV.getSecKlarnaStpV().confirmAddress(pago);
         }
         
         if (execPay) {
             this.dCtxPago.getDataPedido().setCodtipopago("K");
-            PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, driver);
+            pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
         }
     }    
 }

@@ -11,8 +11,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClic
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
+import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecModalPersonalizacion.ModalElement;
 import org.openqa.selenium.WebDriver;
@@ -201,7 +201,8 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 //			click(ModalElement.GoToBag.getBy(dCtxSh.channel)).exec();
 //		}
 		if (dCtxSh.channel.isDevice()) {
-			SecBolsa.setBolsaToStateIfNotYet(StateBolsa.Open, Channel.mobile, dCtxSh.appE, driver);
+			SecBolsa secBolsa = SecBolsa.make(dCtxSh, driver);
+			secBolsa.setBolsaToStateIfNotYet(StateBolsa.Open);
 		}
 		validateCustomizationProof(2);
 	}
@@ -210,11 +211,7 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 		description="1) En la bolsa aparece el apartado correspondiente a la personalización (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
 	private boolean validateCustomizationProof(int maxSeconds) {
-		if (dCtxSh.channel.isDevice()) {
-			return (state(Present, ModalElement.BolsaProof.getBy(dCtxSh.channel)).wait(maxSeconds).check());
-		} else {
-			return (state(Visible, ModalElement.BolsaProof.getBy(dCtxSh.channel)).wait(maxSeconds).check());
-		}
+		return (state(Present, ModalElement.BolsaProof.getBy(dCtxSh.channel)).wait(maxSeconds).check());
 	}
 
 	@Validation(

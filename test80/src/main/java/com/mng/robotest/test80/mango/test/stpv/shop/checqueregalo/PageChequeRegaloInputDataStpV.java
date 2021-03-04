@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
@@ -173,9 +174,9 @@ public class PageChequeRegaloInputDataStpV extends PageObjTM {
 			"Importe: <b>#{chequeRegalo.getImporte()}</b><br>" +
 			"Mensaje: <b>#{chequeRegalo.getMensaje()}</b>",
 		expected="Aparece la página de identificación del usuario")
-	public void inputDataAndClickComprar(ChequeRegalo chequeRegalo) {
+	public void inputDataAndClickComprar(Channel channel, ChequeRegalo chequeRegalo) {
 		pageChequeRegaloInputData.inputDataCheque(chequeRegalo);
 		pageChequeRegaloInputData.clickButtonComprar(chequeRegalo);
-		PageCheckoutWrapperStpV.validaIsVersionChequeRegalo(chequeRegalo, driver);
+		new PageCheckoutWrapperStpV(channel, driver).validaIsVersionChequeRegalo(chequeRegalo);
 	}
 }

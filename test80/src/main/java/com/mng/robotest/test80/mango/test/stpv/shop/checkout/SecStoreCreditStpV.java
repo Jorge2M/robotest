@@ -11,46 +11,58 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1DktopCheckout;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
+import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.SecStoreCredit;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen; 
 
 @SuppressWarnings({"static-access"})
 public class SecStoreCreditStpV { 
     
+	private final SecStoreCredit secStoreCredit;
+	private final Channel channel;
+	private final WebDriver driver;
+	
+	public SecStoreCreditStpV(Channel channel, WebDriver driver) {
+		this.secStoreCredit = new SecStoreCredit(driver);
+		this.channel = channel;
+		this.driver = driver;
+	}
+	
     final static String tagNombrePago = "@TagNombrePago";
     @Step (
     	description="Revisamos el bloque de \"Saldo en cuenta\"", 
         expected="Sólo aparece el método de pago " + tagNombrePago)
-    public static void validateInitialStateOk(Channel channel, DataCtxPago dCtxPago, WebDriver driver) 
-    throws Exception {
+    public void validateInitialStateOk(DataCtxPago dCtxPago) throws Exception {
         String nombrePago = dCtxPago.getDataPedido().getPago().getNombre(channel);
         TestMaker.getCurrentStepInExecution().replaceInExpected(tagNombrePago, nombrePago);
         
-        dCtxPago.getDataPedido().setImporteTotal(PageCheckoutWrapper.getPrecioTotalFromResumen(channel, driver));
-        validaBloqueSaldoEnCuenta(true, channel, dCtxPago, driver);
+        dCtxPago.getDataPedido().setImporteTotal(
+        		new PageCheckoutWrapper(channel, driver).getPrecioTotalFromResumen());
+        
+        validaBloqueSaldoEnCuenta(true, dCtxPago);
     }
 
     @Step (
     	description="Seleccionamos el bloque de \"Saldo en cuenta\"", 
         expected="El marcado o desmarcado es correcto")
-    public static void selectSaldoEnCuentaBlock(Pais pais, DataCtxPago dCtxPago, AppEcom app, Channel channel, WebDriver driver) 
-    throws Exception {
-        boolean marcadoInicialmente = Page1DktopCheckout.secStoreCredit.isChecked(driver);
-        Page1DktopCheckout.secStoreCredit.selectSaldoEnCuenta(driver);
-                            
-        PageCheckoutWrapperStpV.validateLoadingDisappears(5, driver);
-        validaBloqueSaldoEnCuenta(!marcadoInicialmente, channel, dCtxPago, driver);
+    public void selectSaldoEnCuentaBlock(Pais pais, DataCtxPago dCtxPago, AppEcom app) throws Exception {
+        boolean marcadoInicialmente = secStoreCredit.isChecked();
+        secStoreCredit.selectSaldoEnCuenta();
+        
+        PageCheckoutWrapperStpV pageCheckoutWrapperStpV = new PageCheckoutWrapperStpV(channel, driver);
+        PageCheckoutWrapper pageCheckoutWrapper = pageCheckoutWrapperStpV.getPageCheckoutWrapper();
+        pageCheckoutWrapperStpV.validateLoadingDisappears(5);
+        validaBloqueSaldoEnCuenta(!marcadoInicialmente, dCtxPago);
         if (marcadoInicialmente) {
             boolean isEmpl = dCtxPago.getFTCkout().isEmpl;
-            PageCheckoutWrapperStpV.validaMetodosPagoDisponibles(pais, isEmpl, app, channel, driver);
-            //if (channel==Channel.desktop) {
-                dCtxPago.getDataPedido().setImporteTotalSinSaldoCta(PageCheckoutWrapper.getPrecioTotalSinSaldoEnCuenta(channel, driver));
-            //}
+            pageCheckoutWrapperStpV.validaMetodosPagoDisponibles(pais, isEmpl, app);
+            dCtxPago.getDataPedido().setImporteTotalSinSaldoCta(
+            		pageCheckoutWrapper.getPrecioTotalSinSaldoEnCuenta());
         } else {
-        	checkAfterMarkSaldoEnCuenta(channel, pais, driver);
+        	checkAfterMarkSaldoEnCuenta(pais, pageCheckoutWrapper);
             if (channel.isDevice()) {
-                dCtxPago.getDataPedido().setImporteTotalSinSaldoCta(PageCheckoutWrapper.getPrecioTotalSinSaldoEnCuenta(channel, driver));
+                dCtxPago.getDataPedido().setImporteTotalSinSaldoCta(
+                		pageCheckoutWrapper.getPrecioTotalSinSaldoEnCuenta());
             }
         }
     }
@@ -58,20 +70,19 @@ public class SecStoreCreditStpV {
     @Validation (
     	description="Aparecen 0 métodos de pago",
     	level=State.Warn)
-    private static boolean checkAfterMarkSaldoEnCuenta(Channel channel, Pais pais, WebDriver driver) {
+    private boolean checkAfterMarkSaldoEnCuenta(Pais pais, PageCheckoutWrapper pageCheckoutWrapper) {
 	    int numPagosExpected = 0;
-	    return (PageCheckoutWrapper.isNumpagos(numPagosExpected, channel, driver));
+	    return (pageCheckoutWrapper.isNumpagos(numPagosExpected));
     }
    
     @Validation
-    public static ChecksTM validaBloqueSaldoEnCuenta(boolean checkedSaldoEnCta, Channel channel, DataCtxPago dCtxPago, WebDriver driver) 
-    throws Exception {
+    public ChecksTM validaBloqueSaldoEnCuenta(boolean checkedSaldoEnCta, DataCtxPago dCtxPago) throws Exception {
     	ChecksTM validations = ChecksTM.getNew();
       	validations.add(
     		"Es visible el bloque correspondiente al pago mediante \"Saldo en cuenta\"",
-    		Page1DktopCheckout.secStoreCredit.isVisible(driver), State.Defect);
+    		secStoreCredit.isVisible(), State.Defect);
       	
-      	boolean isCheckedBlock = Page1DktopCheckout.secStoreCredit.isChecked(driver);
+      	boolean isCheckedBlock = secStoreCredit.isChecked();
       	if (checkedSaldoEnCta) {
           	validations.add(
         		"Está marcado el radio del bloque de \"Saldo en cuenta\"",
@@ -83,7 +94,7 @@ public class SecStoreCreditStpV {
       	}
       	
       	if (checkedSaldoEnCta/* || channel==Channel.desktop*/) {
-            String impTotResumen = PageCheckoutWrapper.getPrecioTotalFromResumen(channel, driver);
+            String impTotResumen = new PageCheckoutWrapper(channel, driver).getPrecioTotalFromResumen();
             float impFloat = ImporteScreen.getFloatFromImporteMangoScreen(impTotResumen);
           	validations.add(
         		"Figura un importe total de 0",
@@ -93,7 +104,7 @@ public class SecStoreCreditStpV {
         float saldoCta = dCtxPago.getSaldoCta();
       	validations.add(
     		"Figura un saldo en cuenta de: " + saldoCta,
-    		Page1DktopCheckout.secStoreCredit.getImporte(driver)==saldoCta, State.Warn);
+    		secStoreCredit.getImporte()==saldoCta, State.Warn);
       	
       	return validations;
     }

@@ -9,33 +9,35 @@ import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.LineasArticuloBolsa.DataArtBolsa;
+import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.LineasArtBolsa.DataArtBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 
 public class ValidatorContentBolsa {
 	
-	ArrayList<ArticuloScreen> linesArticlesExpected;
-	ArrayList<ArticuloDataBolsaScreen> linesArticlesInScreen = new ArrayList<>();
-	AppEcom app;
-	Channel channel;
-	WebDriver driver;
+	private final SecBolsa secBolsa;
 	
-	public ValidatorContentBolsa(DataBag contentBagExpected, AppEcom app, Channel channel, WebDriver driver) throws Exception {
+	private final ArrayList<ArticuloScreen> linesArticlesExpected;
+	private final ArrayList<ArticuloDataBolsaScreen> linesArticlesInScreen = new ArrayList<>();
+	private final Channel channel;
+
+	
+	public ValidatorContentBolsa(DataBag contentBagExpected, AppEcom app, Channel channel, Pais pais, WebDriver driver) 
+	throws Exception {
+		this.secBolsa = SecBolsa.make(channel, app, pais, driver);
 		this.linesArticlesExpected = contentBagExpected.getListArticlesTypeViewInBolsa();
-		this.app = app;
 		this.channel = channel;
-		this.driver = driver;
-		storeArticlesFromScreen(driver);
+		storeArticlesFromScreen();
 	}
 	
 	@SuppressWarnings("static-access")
-	private void storeArticlesFromScreen(WebDriver driver) throws Exception {
+	private void storeArticlesFromScreen() throws Exception {
 		linesArticlesInScreen.clear();
-		SecBolsa.setBolsaToStateIfNotYet(StateBolsa.Open, channel, app, driver);
-		int numArticles = SecBolsa.lineasArticuloBolsa.getNumLinesArticles(channel, driver);
+		secBolsa.setBolsaToStateIfNotYet(StateBolsa.Open);
+		int numArticles = secBolsa.getLineasArtBolsa().getNumLinesArticles();
 		for (int i=1; i<=numArticles; i++) {
-			ArticuloDataBolsaScreen dataArtScreen = SecBolsa.lineasArticuloBolsa.getArticuloDataByPosicion(i, channel, driver);
+			ArticuloDataBolsaScreen dataArtScreen = secBolsa.getLineasArtBolsa().getArticuloDataByPosicion(i);
 			linesArticlesInScreen.add(dataArtScreen);
 		}	
 	}

@@ -12,7 +12,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.github.jorge2m.testmaker.conf.Channel;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Talla;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen.Color;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
@@ -99,17 +102,21 @@ public class ModalFichaFavoritos {
         return (getNombreColorSelectedFicha().compareTo(color.getColorName())==0);
     }
     
-    public Talla addArticleToBag(String refProducto, int posicionTalla, Channel channel) throws Exception {
+    public Talla addArticleToBag(String refProducto, int posicionTalla, Channel channel, AppEcom app, Pais pais) 
+    throws Exception {
         Talla tallaSelected = selectTallaAvailable(refProducto, posicionTalla);
-        clickButtonAddToBagAndWait(refProducto, channel);
+        clickButtonAddToBagAndWait(refProducto, channel, app, pais);
         return tallaSelected;
     }
     
-    public void clickButtonAddToBagAndWait(String refProducto, Channel channel) throws Exception {
+    public void clickButtonAddToBagAndWait(String refProducto, Channel channel, AppEcom app, Pais pais) 
+    throws Exception {
         String xpathAdd = getXPathButtonAddBolsa(refProducto);
         driver.findElement(By.xpath(xpathAdd)).click();
         int maxSecondsToWait = 2;
-        SecBolsa.isInStateUntil(StateBolsa.Open, channel, maxSecondsToWait, driver);
+        
+        SecBolsa secBolsa = SecBolsa.make(channel, app, pais, driver);
+        secBolsa.isInStateUntil(StateBolsa.Open, maxSecondsToWait);
     }
     
     public String selectTalla(String refProducto, int posicionTalla) {

@@ -18,15 +18,11 @@ public class SecTarjetaPciStpV {
 	final Channel channel;
 	final private SecTarjetaPci secTarjetaPci;
 	
-	private SecTarjetaPciStpV(Channel channel, WebDriver driver) {
+	public SecTarjetaPciStpV(Channel channel, WebDriver driver) {
 		this.driver = driver;
 		this.channel = channel;
-		PageCheckoutWrapper pageCheckoutStpV = new PageCheckoutWrapper();
-		this.secTarjetaPci = pageCheckoutStpV.getSecTarjetaPci(channel, driver);
-	}
-	
-	public static SecTarjetaPciStpV getNew(Channel channel, WebDriver driver) {
-		return (new SecTarjetaPciStpV(channel, driver));
+		PageCheckoutWrapper pageCheckoutStpV = new PageCheckoutWrapper(channel, driver);
+		this.secTarjetaPci = pageCheckoutStpV.getSecTarjetaPci();
 	}
     
 	@Validation

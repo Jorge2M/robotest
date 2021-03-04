@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
-import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.SecKrediKartiStpV;
 
 public class PagoKrediKarti extends PagoStpV {
@@ -19,16 +18,16 @@ public class PagoKrediKarti extends PagoStpV {
     @Override
     public void testPagoFromCheckout(boolean execPay) throws Exception {
         DataPedido dataPedido = dCtxPago.getDataPedido();
-        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, driver);
+        pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
         
-        SecKrediKartiStpV secKrediKartiStpV = PageCheckoutWrapperStpV.getSecKrediKartiStpV(dCtxSh.channel, driver);
+        SecKrediKartiStpV secKrediKartiStpV = pageCheckoutWrapperStpV.getSecKrediKartiStpV();
         secKrediKartiStpV.inputNumTarjeta(dataPedido.getPago().getNumtarj());
         secKrediKartiStpV.clickOpcionPagoAPlazo(1);
         
         if (execPay) {
             dataPedido.setCodtipopago("O");
             this.dCtxPago.getFTCkout().trjGuardada = false;
-            PageCheckoutWrapperStpV.inputDataTrjAndConfirmPago(dCtxPago, dCtxSh.channel, driver);
+            pageCheckoutWrapperStpV.inputDataTrjAndConfirmPago(dCtxPago);
         }
     }    
 }

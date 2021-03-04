@@ -4,36 +4,33 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecStoreCredit {
+public class SecStoreCredit extends PageObjTM {
 
-	static String XPathStoreCreditBlock = "//div[@class='customer-balance']";
-	static String XPathStoreCreditOption = XPathStoreCreditBlock + "/div[@class[contains(.,'customer-balance-option')]]";
-	static String XPathImporteStoreCredit = "//p[@class='customer-balance-title']"; 
+	private final static String XPathStoreCreditBlock = "//div[@class='customer-balance']";
+	private final static String XPathStoreCreditOption = XPathStoreCreditBlock + "/div[@class[contains(.,'customer-balance-option')]]";
+	private final static String XPathImporteStoreCredit = "//p[@class='customer-balance-title']"; 
 
-	public static void selectSaldoEnCuenta(WebDriver driver) {
-		click(By.xpath(XPathStoreCreditOption), driver).exec();
+	public SecStoreCredit(WebDriver driver) {
+		super(driver);
+	}
+	
+	public void selectSaldoEnCuenta() {
+		click(By.xpath(XPathStoreCreditOption)).exec();
 	}
 
-    /**
-     * @param driver
-     * @return si es visible el bloque correspondiente al pago mediante Store Credit (Saldo en Cuenta)
-     */
-    public static boolean isVisible(WebDriver driver) {
-    	return (state(Visible, By.xpath(XPathStoreCreditBlock), driver).check());
+    public boolean isVisible() {
+    	return (state(Visible, By.xpath(XPathStoreCreditBlock)).check());
     }
     
-    /**
-     * @return si está marcado o no el radio del bloque correspondiente al pago mediante Store Credit (Saldo en Cuenta)
-     */
-    public static boolean isChecked(WebDriver driver) {
+    public boolean isChecked() {
         boolean isChecked = false;
-        if (isVisible(driver)) {
+        if (isVisible()) {
             WebElement optionStoreC = driver.findElement(By.xpath(XPathStoreCreditOption));
             if (optionStoreC!=null && optionStoreC.getAttribute("class").contains("-checked")) {
                 isChecked = true;
@@ -43,13 +40,9 @@ public class SecStoreCredit {
         return isChecked;
     }
     
-    /**
-     * @param driver
-     * @return el importe correspondiente al saldo en cuenta
-     */
-    public static float getImporte(WebDriver driver) {
+    public float getImporte() {
         float precioFloat = -1;
-        if (state(Visible, By.xpath(XPathImporteStoreCredit), driver).check()) {
+        if (state(Visible, By.xpath(XPathImporteStoreCredit)).check()) {
             String precioTotal = driver.findElement(By.xpath(XPathImporteStoreCredit)).getText();
             precioFloat = ImporteScreen.getFloatFromImporteMangoScreen(precioTotal);
         }

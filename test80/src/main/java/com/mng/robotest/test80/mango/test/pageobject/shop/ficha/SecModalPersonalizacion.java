@@ -18,7 +18,10 @@ public class SecModalPersonalizacion extends SeleniumUtils {
 		Step4Proof("//*[text()[contains(.,'4. ')]]"),
 		HeaderProof("//*[@class='customization-header']"),
 		BackProof("//button[@class='back-btn']"),
-		BolsaProof("//div[@class='sbi-customization-content']"),
+		
+		//TODO me han de pasar el data-testid 
+		BolsaProof("//div[@class='sbi-customization-content' or @class[contains(.,'_3hjWl')]]"),
+		
 		Siguiente("//button[@class[contains(.,'sg-button-primary')]]"),
 		addToBag("", "//button[@class[contains(.,'sg-s-btn')]]"),
 		botonLugarBordado("//button[@class='customization-position-item']"),

@@ -65,7 +65,8 @@ public class PaisAplicaVale implements Serializable {
 		fTCkout.trjGuardada = false;
 		dCtxPago.setFTCkout(fTCkout);
 
-		PagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(this.dCtxSh, dCtxPago, driver);
+        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
+		pagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded();
 		if (fTCkout.validaPedidosEnManto) {
 			List<CheckPedido> listChecks = Arrays.asList(
 				CheckPedido.consultarBolsa, 

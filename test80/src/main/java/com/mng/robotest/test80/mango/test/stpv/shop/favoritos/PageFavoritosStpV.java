@@ -13,6 +13,7 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.PageFavoritos;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
@@ -148,14 +149,16 @@ public class PageFavoritosStpV {
     @Step (
     	description="Desde Favoritos añadimos el artículo <b>#{artToAddBolsa.getRefProducto()}</b> (1a talla disponible) a la bolsa",
         expected="El artículo aparece en la bolsa")
-    public void addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa, Channel channel) 
+    public void addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa, Channel channel, AppEcom app, Pais pais) 
     throws Exception {
         String refProductoToAdd = artToAddBolsa.getRefProducto();
         String codigoColor = artToAddBolsa.getCodigoColor();
         Talla tallaSelected = pageFavoritos.addArticleToBag(refProductoToAdd, codigoColor, 1);
         artToAddBolsa.setTalla(tallaSelected);
         dataBolsa.addArticulo(artToAddBolsa);
-        SecBolsaStpV.validaAltaArtBolsa(dataBolsa, channel, AppEcom.shop, driver);
+        
+        SecBolsaStpV secBolsaStpV = new SecBolsaStpV(channel, app, pais, driver);
+        secBolsaStpV.validaAltaArtBolsa(dataBolsa);
     }
     
     @Step (

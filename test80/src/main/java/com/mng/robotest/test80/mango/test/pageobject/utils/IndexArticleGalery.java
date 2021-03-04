@@ -1,14 +1,17 @@
 package com.mng.robotest.test80.mango.test.pageobject.utils;
 
 
-public class NombreYRef {
+public class IndexArticleGalery {
 
-    String nombre = "";
-    String referencia = "";
+    private final String nombre;
+    private final String referencia;
+    private final String imagen;
     
-    public NombreYRef(String nombre, String referencia) {
+    
+    public IndexArticleGalery(String nombre, String referencia, String imagen) {
         this.nombre = nombre;
         this.referencia = referencia;
+        this.imagen = imagen;
     }
     
     public String getNombre() {
@@ -19,16 +22,21 @@ public class NombreYRef {
         return this.referencia;
     }
     
+    public String getImagen() {
+    	return this.imagen;
+    }
+    
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof NombreYRef)) {
+        if (!(o instanceof IndexArticleGalery)) {
             return false;
         }
         
-        NombreYRef otherObject = (NombreYRef)o;
+        IndexArticleGalery otherObject = (IndexArticleGalery)o;
         return (
         	this.nombre.compareTo(otherObject.getNombre())==0 &&
-            this.referencia.compareTo(otherObject.getReferencia())==0);   
+            this.referencia.compareTo(otherObject.getReferencia())==0 &&
+            this.imagen.compareTo(otherObject.imagen)==0);   
     }
     
     @Override

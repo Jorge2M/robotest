@@ -16,11 +16,13 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClic
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
+
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
+import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 
@@ -223,13 +225,15 @@ public class PageFavoritos extends PageObjTM {
         return (driver.findElements(By.xpath(xpathTalla)));
     }
     
-    public String selectTallaAndWait(String refProducto, String codigoColor, int posicionTalla, Channel channel) {
+    public String selectTallaAndWait(String refProducto, String codigoColor, int posicionTalla, Channel channel, AppEcom app, Pais pais) {
         List<WebElement> listaTallas = getListaTallas(refProducto, codigoColor);
         WebElement talla = listaTallas.get(posicionTalla);
         String litTalla = talla.getText();
         talla.click();
         int maxSecondsToWait = 2;
-        SecBolsa.isInStateUntil(StateBolsa.Open, channel, maxSecondsToWait, driver);
+        
+        SecBolsa secBolsa = SecBolsa.make(channel, app, pais, driver);
+        secBolsa.isInStateUntil(StateBolsa.Open, maxSecondsToWait);
         return litTalla;
     }
     

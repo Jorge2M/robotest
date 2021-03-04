@@ -34,7 +34,6 @@ import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.DataDireccion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1EnvioCheckoutMobil;
-import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.DataDireccion.DataDirType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIdentificacion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
@@ -42,7 +41,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Page1DktopCheckoutStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Page1EnvioCheckoutMobilStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Page1IdentCheckoutStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Page2IdentCheckoutStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
@@ -54,19 +52,32 @@ import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 public class PagoNavigationsStpV {
     
-    public static void testFromLoginToExecPaymetIfNeeded(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) 
-    throws Exception {
-        testFromLoginToExecPaymetIfNeeded(null, dCtxSh, dCtxPago, driver);
+	private final PageCheckoutWrapperStpV pageCheckoutWrapperStpV;
+	private final SecBolsaStpV secBolsaStpV;
+	private final WebDriver driver;
+	
+	private final DataCtxShop dCtxSh;
+	private final DataCtxPago dCtxPago;
+	
+	public PagoNavigationsStpV(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
+		this.secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
+		this.pageCheckoutWrapperStpV = new PageCheckoutWrapperStpV(dCtxSh.channel, driver);
+		this.driver = driver;
+		this.dCtxSh = dCtxSh;
+		this.dCtxPago = dCtxPago;
+	}
+	
+    public void testFromLoginToExecPaymetIfNeeded() throws Exception {
+        testFromLoginToExecPaymetIfNeeded(null);
     }
     
     /**
      * Implementa el caso de prueba completo hasta la validación de un vale (válido o inválido)
      */
-    public static void testFromLoginToExecPaymetIfNeeded(List<Pais> paisesDestino, DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) 
-    throws Exception {
-    	accessShopAndLoginOrLogoff(dCtxSh, driver);
+    public void testFromLoginToExecPaymetIfNeeded(List<Pais> paisesDestino) throws Exception {
+    	accessShopAndLoginOrLogoff();
         if (dCtxSh.userRegistered) {
-            SecBolsaStpV.clear(dCtxSh, driver);
+            secBolsaStpV.clear();
 //            if (dCtxSh.appE==AppEcom.shop) {
 //                PageFavoritosStpV.clearAll(dCtxSh, driver);
 //            }
@@ -81,11 +92,11 @@ public class PagoNavigationsStpV {
         int maxArticlesAwayVale = 2;
         List<Garment> listArticles = UtilsTestMango.getArticlesForTestDependingVale(dCtxSh, maxArticlesAwayVale, driver);
         DataBag dataBag = dCtxPago.getDataPedido().getDataBag();
-        SecBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag, dCtxSh, driver);
+        secBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag);
         dCtxPago.getFTCkout().testCodPromocional = true;
-        testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, driver);
+        testFromBolsaToCheckoutMetPago();
         if (dCtxSh.pais.getListPagosForTest(dCtxSh.appE, dCtxPago.getFTCkout().isEmpl).size() > 0) {
-            checkMetodosPagos(dCtxSh, dCtxPago, paisesDestino, driver);
+            checkMetodosPagos(paisesDestino);
         }
     }
     	
@@ -94,8 +105,7 @@ public class PagoNavigationsStpV {
     	description="Acceder a Mango " + tagLoginOrLogoff, 
     	expected="Se accede a Mango",
     	saveNettraffic=SaveWhen.Always)
-    public static void accessShopAndLoginOrLogoff(DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
+    public void accessShopAndLoginOrLogoff() throws Exception {
         StepTM StepTestMaker = TestMaker.getCurrentStepInExecution();    	
         if (dCtxSh.userRegistered) {
             StepTestMaker.replaceInDescription(
@@ -120,78 +130,77 @@ public class PagoNavigationsStpV {
     /**
      * Testea desde la bolsa hasta la página de checkout con los métodos de pago
      */
-    public static void testFromBolsaToCheckoutMetPago(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver)
-    throws Exception {
-        SecBolsaStpV.selectButtonComprar(dCtxPago.getDataPedido().getDataBag(), dCtxSh, driver);
+    public void testFromBolsaToCheckoutMetPago() throws Exception {
+        secBolsaStpV.selectButtonComprar(dCtxPago.getDataPedido().getDataBag(), dCtxSh);
         if (dCtxSh.userRegistered) {
             dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
         } else {
-            testFromIdentToCheckoutIni(dCtxPago, dCtxSh, driver);
+            testFromIdentToCheckoutIni();
         }
         
-        test1rstPageCheckout(dCtxSh, dCtxPago, driver);
+        test1rstPageCheckout();
         if (dCtxSh.channel==Channel.mobile) {
         	boolean isSaldoEnCuenta = dCtxPago.getFTCkout().isStoreCredit;
-        	Page1EnvioCheckoutMobilStpV.clickContinuarToMetodosPago(dCtxSh, isSaldoEnCuenta, driver);
+        	pageCheckoutWrapperStpV.getPage1CheckoutMobilStpV()
+        		.clickContinuarToMetodosPago(dCtxSh, isSaldoEnCuenta);
         }
     }
     
     /**
      * Testea la 1a página del checkout-resumen compra.
      */
-    public static void test1rstPageCheckout(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) 
-    throws Exception {
+    public void test1rstPageCheckout() throws Exception {
         if ((dCtxPago.getFTCkout().testCodPromocional || dCtxPago.getFTCkout().isEmpl) && 
         	 dCtxSh.appE!=AppEcom.votf) {
             DataBag dataBag = dCtxPago.getDataPedido().getDataBag();    
             if (dCtxPago.getFTCkout().isEmpl) {
-                testInputCodPromoEmpl(dCtxSh, dataBag, driver);
+                testInputCodPromoEmpl(dataBag);
             } else {
                 if (dCtxSh.vale!=null) {
                     if (dCtxSh.channel==Channel.mobile) {
-                        Page1EnvioCheckoutMobil.inputCodigoPromo(dCtxSh.vale.getCodigoVale(), driver);
+                        (new Page1EnvioCheckoutMobil(driver)).inputCodigoPromo(dCtxSh.vale.getCodigoVale());
                     } else {
-                    	testValeDescuento(dCtxSh.vale, dataBag, dCtxSh.appE, driver);
+                    	testValeDescuento(dCtxSh.vale, dataBag);
                     }
                 }
             }
         }
         
-        if (dCtxSh.appE==AppEcom.votf && dCtxSh.pais.getCodigo_pais().compareTo("001")==0 /*España*/) {
-            Page1DktopCheckoutStpV.stepIntroduceCodigoVendedorVOTF("111111", driver);
+        if (dCtxSh.appE==AppEcom.votf && dCtxSh.pais.getCodigo_pais().compareTo("001")==0) {
+        	new Page1DktopCheckoutStpV(dCtxSh.channel, driver).stepIntroduceCodigoVendedorVOTF("111111");
         }
         
         if (dCtxPago.getFTCkout().loyaltyPoints) {
-	        PageCheckoutWrapperStpV.validateBlockLoyalty(driver);
-	        PageCheckoutWrapperStpV.loyaltyPointsApply(dCtxSh.channel, driver);
+	        pageCheckoutWrapperStpV.validateBlockLoyalty();
+	        pageCheckoutWrapperStpV.loyaltyPointsApply();
         }
     }
     
-    private static void testValeDescuento(ValePais vale, DataBag dataBag, AppEcom app, WebDriver driver) throws Exception {
+    private void testValeDescuento(ValePais vale, DataBag dataBag) throws Exception {
+    	Page1DktopCheckoutStpV page1 = new Page1DktopCheckoutStpV(dCtxSh.channel, driver);
     	if ("".compareTo(vale.getTextoCheckout())!=0) {
     		if (vale.isValid()) {
-    			Page1DktopCheckoutStpV.checkIsVisibleTextVale(vale, driver);
+    			page1.checkIsVisibleTextVale(vale);
     		} else {
-    			Page1DktopCheckoutStpV.checkIsNotVisibleTextVale(vale, driver);
+    			page1.checkIsNotVisibleTextVale(vale);
     		}
     	}
-    	
-    	Page1DktopCheckoutStpV.inputValeDescuento(vale, dataBag, app, driver);
+    	page1.inputValeDescuento(vale, dataBag, dCtxSh.appE);
     }
     
     /**
      * Testea desde la página inicial de identificación hasta la 1a página de checkout 
      */
     @SuppressWarnings("static-access")
-    public static void testFromIdentToCheckoutIni(DataCtxPago dCtxPago, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
+    public void testFromIdentToCheckoutIni() throws Exception {
         boolean validaCharNoLatinos = (dCtxSh.pais!=null && dCtxSh.pais.getDireccharnolatinos().check() && dCtxSh.appE!=AppEcom.votf);
         DataBag dataBag = dCtxPago.getDataPedido().getDataBag();
         String emailCheckout = UtilsMangoTest.getEmailForCheckout(dCtxSh.pais, dCtxPago.getFTCkout().emailExist); 
         dCtxPago.getDataPedido().setEmailCheckout(emailCheckout);
 
         Page1IdentCheckoutStpV.secSoyNuevo.inputEmailAndContinue(emailCheckout, dCtxPago.getFTCkout().emailExist, dCtxSh.appE, dCtxSh.userRegistered, dCtxSh.pais, dCtxSh.channel, driver);
-        boolean emailOk = Page2IdentCheckoutStpV.checkEmail(emailCheckout, driver);
+        Page2IdentCheckoutStpV page2IdentCheckoutStpV = new Page2IdentCheckoutStpV(dCtxSh.channel, driver);
+        boolean emailOk = page2IdentCheckoutStpV.checkEmail(emailCheckout);
         if (!emailOk) {
         	//Existe un problema según el cual en ocasiones no se propaga el email desde la página de identificación
         	AllPagesStpV.backNagegador(driver);
@@ -199,14 +208,14 @@ public class PagoNavigationsStpV {
         }
         
         
-        HashMap<String, String> datosRegistro = Page2IdentCheckoutStpV.inputDataPorDefecto(dCtxSh.pais, emailCheckout, validaCharNoLatinos, dCtxSh.channel, driver);
+        HashMap<String, String> datosRegistro = page2IdentCheckoutStpV.inputDataPorDefecto(dCtxSh.pais, emailCheckout, validaCharNoLatinos);
         dCtxPago.setDatosRegistro(datosRegistro);
         if (validaCharNoLatinos) {
-            Page2IdentCheckoutStpV.clickContinuarAndExpectAvisoDirecWithNoLatinCharacters(driver);
-            datosRegistro = Page2IdentCheckoutStpV.inputDataPorDefecto(dCtxSh.pais, emailCheckout, false, dCtxSh.channel, driver);
+            page2IdentCheckoutStpV.clickContinuarAndExpectAvisoDirecWithNoLatinCharacters();
+            datosRegistro = page2IdentCheckoutStpV.inputDataPorDefecto(dCtxSh.pais, emailCheckout, false);
         }
         
-        Page2IdentCheckoutStpV.clickContinuar(dCtxSh.userRegistered, dataBag, dCtxSh.channel, driver);
+        page2IdentCheckoutStpV.clickContinuar(dCtxSh.userRegistered, dataBag);
         
         //Validaciones para analytics (sólo para firefox y NetAnalysis)
         EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
@@ -219,15 +228,14 @@ public class PagoNavigationsStpV {
         PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, analyticSet, driver);
     }
     
-    public static void testPagoFromCheckoutToEnd(DataCtxPago dCtxPago, DataCtxShop dCtxSh, Pago pagoToTest, WebDriver driver) 
-    throws Exception {
+    public void testPagoFromCheckoutToEnd(Pago pagoToTest) throws Exception {
         DataPedido dataPedido = dCtxPago.getDataPedido();
         dataPedido.setPago(pagoToTest);
         dataPedido.setResejecucion(State.Nok);
         
         //Obtenemos el objeto PagoStpV específico según el TypePago y ejecutamos el test 
         PagoStpV pagoStpV = FactoryPagos.makePagoStpV(dCtxSh, dCtxPago, driver);
-        boolean execPay = iCanExecPago(pagoStpV, dCtxSh.appE, driver);
+        boolean execPay = iCanExecPago(pagoStpV);
         pagoStpV.testPagoFromCheckout(execPay);
         dataPedido = dCtxPago.getDataPedido();
         if (execPay) {
@@ -239,7 +247,7 @@ public class PagoNavigationsStpV {
 	            if (pagoToTest.getTypePago()!=TypePago.TpvVotf) {
 	                pageResultPagoStpV.validateIsPageOk(dCtxPago, dCtxSh);
 	                if (dCtxSh.channel!=Channel.mobile && !dCtxPago.getFTCkout().isChequeRegalo) {
-	                    if (testMisCompras(dCtxPago, dCtxSh)) {
+	                    if (testMisCompras()) {
 	                        pageResultPagoStpV.selectLinkMisComprasAndValidateCompra(dCtxPago, dCtxSh);
 	                    } else {
 	                        pageResultPagoStpV.selectLinkPedidoAndValidatePedido(dataPedido);
@@ -268,7 +276,7 @@ public class PagoNavigationsStpV {
         }
     }
     
-    private static boolean testMisCompras(DataCtxPago dCtxPago, DataCtxShop dCtxSh) {
+    private boolean testMisCompras() {
     	return (
     		(dCtxSh.pais.isPaisWithMisCompras() && 
     		 dCtxSh.appE!=AppEcom.outlet) ||
@@ -279,48 +287,46 @@ public class PagoNavigationsStpV {
     @Step (
     	description="Nos posicionamos en la página inicial", 
         expected="La acción se ejecuta correctamente")
-    public static void fluxQuickInitToCheckout(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver)
-    throws Exception {
+    public void fluxQuickInitToCheckout() throws Exception {
         DataPedido dataPedido = dCtxPago.getDataPedido();
         DataBag dataBag = dataPedido.getDataBag();
         UtilsMangoTest.goToPaginaInicio(dCtxSh.channel, dCtxSh.appE, driver);
         
         //(en Chrome, cuando existe paralelización en ocasiones se pierden las cookies cuando se completa un pago con pasarela externa)
-        actionsWhenSessionLoss(dCtxSh, driver);
+        actionsWhenSessionLoss();
         
-        SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, driver);
+        secBolsaStpV.altaArticlosConColores(1, dataBag);
         dCtxPago.getFTCkout().testCodPromocional = false;
-        testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, driver);
+        testFromBolsaToCheckoutMetPago();
         if (dCtxSh.channel!=Channel.mobile) {
-        	PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, dCtxSh.channel, driver);
+        	pageCheckoutWrapperStpV.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
         }
     }    
     
-    private static void actionsWhenSessionLoss(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    private void actionsWhenSessionLoss() throws Exception {
     	ModalCambioPais.closeModalIfVisible(driver);
         AccesoNavigations.cambioPaisFromHomeIfNeeded(dCtxSh, driver);
     }
     
-    public static void testInputCodPromoEmpl(DataCtxShop dCtxSh, DataBag dataBag, WebDriver driver) throws Exception {
-        PageCheckoutWrapperStpV.inputTarjetaEmplEnCodPromo(dCtxSh.pais, dCtxSh.channel, driver);
-        PageCheckoutWrapperStpV.inputDataEmplEnPromoAndAccept(dataBag, dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver);
+    public void testInputCodPromoEmpl(DataBag dataBag) throws Exception {
+        pageCheckoutWrapperStpV.inputTarjetaEmplEnCodPromo(dCtxSh.pais);
+        pageCheckoutWrapperStpV.inputDataEmplEnPromoAndAccept(dataBag, dCtxSh.pais, dCtxSh.appE);
     }
     
     /**
      * Función que parte de la página de "Resumen de artículos" y que valida todos los métodos de pago del país
      */
     @SuppressWarnings("static-access")
-    public static void checkMetodosPagos(DataCtxShop dCtxSh, DataCtxPago dCtxPago, List<Pais> paisesDestino, WebDriver driver) 
-    throws Exception {
+    public void checkMetodosPagos(List<Pais> paisesDestino) throws Exception {
         try {
             DataPedido dataPedido = dCtxPago.getDataPedido();
             if (dCtxSh.channel!=Channel.mobile) {
-                PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, dCtxSh.channel, driver);
+                pageCheckoutWrapperStpV.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
             }
                 
-            PageCheckoutWrapperStpV.despliegaYValidaMetodosPago(dCtxSh.pais, dCtxPago.getFTCkout().isEmpl, dCtxSh.appE, dCtxSh.channel, driver);
+            pageCheckoutWrapperStpV.despliegaYValidaMetodosPago(dCtxSh.pais, dCtxPago.getFTCkout().isEmpl, dCtxSh.appE);
             if (dCtxPago.getFTCkout().validaPasarelas) {
-                validaPasarelasPagoPais(dCtxSh, dCtxPago, driver);
+                validaPasarelasPagoPais();
             }
                 
             //En el caso de españa, después de validar todos los países probamos el botón "CHANGE DETAILS" sobre los países indicados en la lista
@@ -331,7 +337,7 @@ public class PagoNavigationsStpV {
                     paisChange = itPaises.next();
                     if (dCtxSh.appE==AppEcom.shop) {
                         //Test funcionalidad "Quiero recibir factura"
-                        PageCheckoutWrapperStpV.clickSolicitarFactura(dCtxSh.channel, driver);
+                        pageCheckoutWrapperStpV.clickSolicitarFactura();
                         DataDireccion dataDirFactura = new DataDireccion();
                         dataDirFactura.put(DataDirType.nif, "76367949Z");
                         dataDirFactura.put(DataDirType.name, "Carolina");
@@ -341,12 +347,13 @@ public class PagoNavigationsStpV {
                         dataDirFactura.put(DataDirType.email, "crp1974@hotmail.com");
                         dataDirFactura.put(DataDirType.telefono, "665015122");
                         dataDirFactura.put(DataDirType.poblacion, "PEREPAU");
-                        PageCheckoutWrapperStpV.modalDirecFactura.inputDataAndActualizar(dataDirFactura, driver);
+                        new PageCheckoutWrapperStpV(dCtxSh.channel, driver).getModalDirecFacturaStpV()
+                        	.inputDataAndActualizar(dataDirFactura);
                     }
                     
                     if (dCtxSh.appE!=AppEcom.votf) {
                         //Test funcionalidad "Cambio dirección de envío"
-                        PageCheckoutWrapperStpV.clickEditarDirecEnvio(driver);
+                        pageCheckoutWrapperStpV.clickEditarDirecEnvio();
                         DataDireccion dataDirEnvio = new DataDireccion();
                         dataDirEnvio.put(DataDirType.codigoPais, paisChange.getCodigo_pais());
                         dataDirEnvio.put(DataDirType.codpostal, paisChange.getCodpos());                    
@@ -355,9 +362,9 @@ public class PagoNavigationsStpV {
                         dataDirEnvio.put(DataDirType.direccion, "c./ mossen trens nº6 5º1ª");
                         dataDirEnvio.put(DataDirType.email, "jorge.munoz.sge@mango.com");
                         dataDirEnvio.put(DataDirType.telefono, "665015122");
-                        PageCheckoutWrapperStpV.modalDirecEnvio.inputDataAndActualizar(dataDirEnvio, driver);
-                        PageCheckoutWrapperStpV.modalAvisoCambioPais.clickConfirmar(paisChange, driver);
-                        PageCheckoutWrapperStpV.validaMetodosPagoDisponibles(paisChange, dCtxPago.getFTCkout().isEmpl, dCtxSh.appE, dCtxSh.channel, driver);
+                        pageCheckoutWrapperStpV.getModalDirecEnvioStpV().inputDataAndActualizar(dataDirEnvio);
+                        pageCheckoutWrapperStpV.getModalAvisoCambioPaisStpV().clickConfirmar(paisChange);
+                        pageCheckoutWrapperStpV.validaMetodosPagoDisponibles(paisChange, dCtxPago.getFTCkout().isEmpl, dCtxSh.appE);
                     }
                 }
             }
@@ -371,25 +378,24 @@ public class PagoNavigationsStpV {
     /**
      * Validación de todas las pasarelas de pago asociadas al país
      */
-    public static void validaPasarelasPagoPais(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) 
-    throws Exception {
-        List<Pago> listPagosToTest = getListPagosToTest(dCtxSh, dCtxPago.getFTCkout().isEmpl);
+    public void validaPasarelasPagoPais() throws Exception {
+        List<Pago> listPagosToTest = getListPagosToTest(dCtxPago.getFTCkout().isEmpl);
         for (Iterator<Pago> it = listPagosToTest.iterator(); it.hasNext(); ) {
         	Pago pagoToTest = it.next();
             dCtxPago.getDataPedido().setPago(pagoToTest);
             String urlPagChekoutToReturn = driver.getCurrentUrl();
-            checkPasarelaPago(dCtxPago, dCtxSh, driver);
+            checkPasarelaPago();
             if (it.hasNext()) {
 	            if (!dCtxPago.isPaymentExecuted(pagoToTest)) {
-	            	PageCheckoutWrapper.backPageMetodosPagos(urlPagChekoutToReturn, dCtxSh.channel, driver);
+	            	pageCheckoutWrapperStpV.getPageCheckoutWrapper().backPageMetodosPagos(urlPagChekoutToReturn);
 	            } else {
-	            	fluxQuickInitToCheckout(dCtxSh, dCtxPago, driver);
+	            	fluxQuickInitToCheckout();
 	            }
             }
         }
     }
     
-    private static List<Pago> getListPagosToTest(DataCtxShop dCtxSh, boolean isEmpl) {
+    private List<Pago> getListPagosToTest(boolean isEmpl) {
     	List<Pago> listPagosToTest = new ArrayList<>();
     	ITestContext ctx = TestMaker.getTestCase().getTestRunContext();
     	List<Pago> listPagosPais = dCtxSh.pais.getListPagosForTest(dCtxSh.appE, isEmpl);
@@ -401,14 +407,14 @@ public class PagoNavigationsStpV {
     	return listPagosToTest;
     }
 
-    public static void checkPasarelaPago(DataCtxPago dCtxPago, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    public void checkPasarelaPago() throws Exception {
         DataPedido dataPedido = dCtxPago.getDataPedido(); 
         Pago pago = dataPedido.getPago();
         try {
             if (dCtxSh.channel!=Channel.mobile) {
-            	PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, dCtxSh.channel, driver);
+            	pageCheckoutWrapperStpV.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
             }
-            testPagoFromCheckoutToEnd(dCtxPago, dCtxSh, pago, driver);
+            testPagoFromCheckoutToEnd(pago);
             System.out.println("Compra realizada con código de pedido: " + dataPedido.getCodpedido());
         }
         catch (Exception e) {
@@ -421,27 +427,26 @@ public class PagoNavigationsStpV {
      *     Desktop: simplemente se selecciona el botón "Confirmar Compra"
      *     Movil  : se selecciona los botones "Ver resumen" y "Confirmación del pago)
      */
-    public static void aceptarCompraDesdeMetodosPago(DataCtxPago dCtxPago, Channel channel, WebDriver driver)
-    throws Exception {
+    public void aceptarCompraDesdeMetodosPago() throws Exception {
         DataPedido dataPedido = dCtxPago.getDataPedido();
         dataPedido.setCodtipopago("R");
-        if (channel!=Channel.mobile) {
-        	PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, channel, driver);
-            PageCheckoutWrapperStpV.pasoBotonAceptarCompraDesktop(driver);
+        if (dCtxSh.channel!=Channel.mobile) {
+        	pageCheckoutWrapperStpV.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
+            pageCheckoutWrapperStpV.pasoBotonAceptarCompraDesktop();
         } else {
             //PageCheckoutWrapperStpV.pasoBotonVerResumenCheckout2Mobil(driver);
-        	PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, channel, driver);
-            PageCheckoutWrapperStpV.pasoBotonConfirmarPagoCheckout3Mobil(driver);
+        	pageCheckoutWrapperStpV.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
+            pageCheckoutWrapperStpV.pasoBotonConfirmarPagoCheckout3Mobil();
         }       
     }
     
-    public static boolean iCanExecPago(PagoStpV pagoStpV, AppEcom appE, WebDriver driver) {
+    public boolean iCanExecPago(PagoStpV pagoStpV) {
         boolean validaPagos = pagoStpV.dCtxPago.getFTCkout().validaPagos;
         Pago pago = pagoStpV.dCtxPago.getDataPedido().getPago();
         TypeAccess typeAccess = ((InputParamsMango)TestMaker.getTestCase().getInputParamsSuite()).getTypeAccess();
         return (
             //No estamos en el entorno productivo
-            !UtilsMangoTest.isEntornoPRO(appE, driver) &&
+            !UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver) &&
             //No estamos en modo BATCH
             typeAccess!=TypeAccess.Bat &&
             //Está activado el flag de pago en el fichero XML de configuración del test (testNG)

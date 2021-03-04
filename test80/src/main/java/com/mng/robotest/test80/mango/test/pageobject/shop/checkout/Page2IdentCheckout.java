@@ -20,50 +20,53 @@ import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.PopupFindAddress;
 
-public class Page2IdentCheckout {
+public class Page2IdentCheckout extends PageObjTM {
 	
-    final static String XPathMainForm = "//form[@action[contains(.,'/expressregister')]]";
-    final static String XPathInputPassword = "//input[@id[contains(.,'cfPass')]]";
-    final static String XPathInputNombreUsr = "//input[@id[contains(.,':cfName')]]";
-    final static String XPathInputApellidosUsr = "//input[@id[contains(.,':cfSname')]]";
-    final static String XPathInputMiddleNameUsr = "//input[@id[contains(.,':cfMiddleName')]]";
-    final static String XPathInputTelefono = "//input[@id[contains(.,':cfTelf')]]";
-    final static String XPathInputDireccion1 = "//input[@id[contains(.,':cfDir1')]]";
-    final static String XPathInputDireccion2 = "//input[@id[contains(.,':cfDir2')]]";
-    final static String XPathCheckPublicidad = "//input[@id[contains(.,':cfPubli')] or @id[contains(.,'_cfPubli')]]/..";
-    final static String XPathInputEmail = "//input[@id[contains(.,':cfEmail')]]";
-    final static String XPathInputDNI = "//input[@id[contains(.,':cfDni')]]";
-    final static String XPathInputCodPost = "//input[@id[contains(.,':cfCp')]]";
-    final static String XPathInputProvEstadoActive = "//input[@id[contains(.,':cfState')] and not(@disabled) and not(@readonly)]";
-    final static String XPathInputPoblacionActive = "//input[@id[contains(.,':cfCity')] and not(@disabled) and not(@readonly)]";
-    final static String XPathSelectPais = "//select[@id[contains(.,':pais')]]";
-    final static String XPathSelectProvPais = "//select[@id[contains(.,'provinciaPais')]]";
-    final static String XPathSelectEstadosPais = "//select[@id[contains(.,'estadosPais')]]";
-    final static String XPathSelectLocalidadesProvCity = "//select[@id[contains(.,'localidadesProvCity')]]";
-    final static String XPathSelectLocalidadesNeighbourhoodCity = "//select[@id[contains(.,'localidadesNeighbourhoodCity')]]";
-    final static String XPathCheckHombre = "//div[@id[contains(.,':cfGener_H')]]";
-    final static String XPathCheckCondiciones = "//input[@id[contains(.,':cfPriv')]]";
-    final static String XPathBotonFindAddress = "//input[@class[contains(.,'load-button')] and @type='button']";
-    final static String XPathBotonContinuar = "//div[@class='submitContent']/input[@type='submit']";
-    final static String XPathMsgAduanas = "//div[@class='aduanas']";
-    final static String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
-    final static String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
+    private final static String XPathMainForm = "//form[@action[contains(.,'/expressregister')]]";
+    private final static String XPathInputPassword = "//input[@id[contains(.,'cfPass')]]";
+    private final static String XPathInputNombreUsr = "//input[@id[contains(.,':cfName')]]";
+    private final static String XPathInputApellidosUsr = "//input[@id[contains(.,':cfSname')]]";
+    private final static String XPathInputMiddleNameUsr = "//input[@id[contains(.,':cfMiddleName')]]";
+    private final static String XPathInputTelefono = "//input[@id[contains(.,':cfTelf')]]";
+    private final static String XPathInputDireccion1 = "//input[@id[contains(.,':cfDir1')]]";
+    private final static String XPathInputDireccion2 = "//input[@id[contains(.,':cfDir2')]]";
+    private final static String XPathCheckPublicidad = "//input[@id[contains(.,':cfPubli')] or @id[contains(.,'_cfPubli')]]/..";
+    private final static String XPathInputEmail = "//input[@id[contains(.,':cfEmail')]]";
+    private final static String XPathInputDNI = "//input[@id[contains(.,':cfDni')]]";
+    private final static String XPathInputCodPost = "//input[@id[contains(.,':cfCp')]]";
+    private final static String XPathInputProvEstadoActive = "//input[@id[contains(.,':cfState')] and not(@disabled) and not(@readonly)]";
+    private final static String XPathInputPoblacionActive = "//input[@id[contains(.,':cfCity')] and not(@disabled) and not(@readonly)]";
+    private final static String XPathSelectPais = "//select[@id[contains(.,':pais')]]";
+    private final static String XPathSelectProvPais = "//select[@id[contains(.,'provinciaPais')]]";
+    private final static String XPathSelectEstadosPais = "//select[@id[contains(.,'estadosPais')]]";
+    private final static String XPathSelectLocalidadesProvCity = "//select[@id[contains(.,'localidadesProvCity')]]";
+    private final static String XPathSelectLocalidadesNeighbourhoodCity = "//select[@id[contains(.,'localidadesNeighbourhoodCity')]]";
+    private final static String XPathCheckHombre = "//div[@id[contains(.,':cfGener_H')]]";
+    private final static String XPathCheckCondiciones = "//input[@id[contains(.,':cfPriv')]]";
+    private final static String XPathBotonFindAddress = "//input[@class[contains(.,'load-button')] and @type='button']";
+    private final static String XPathBotonContinuar = "//div[@class='submitContent']/input[@type='submit']";
+    private final static String XPathMsgAduanas = "//div[@class='aduanas']";
+    private final static String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
+    private final static String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
     
     //Con el substring simulamos un ends-with (que no está disponible en xpath 1.0)
-    static String XPathSelectLocalidades = "//select[substring(@id, string-length(@id) - string-length('localidades') +1) = 'localidades']";
+    private static String XPathSelectLocalidades = "//select[substring(@id, string-length(@id) - string-length('localidades') +1) = 'localidades']";
 
-	public static boolean isPageUntil(int maxSeconds, WebDriver driver) {
-		return (state(Present, By.xpath(XPathMainForm), driver).wait(maxSeconds).check());
+    public Page2IdentCheckout(WebDriver driver) {
+    	super(driver);
+    }
+    
+	public boolean isPageUntil(int maxSeconds) {
+		return (state(Present, By.xpath(XPathMainForm)).wait(maxSeconds).check());
 	}
 	
-	public static boolean checkEmail(String email, WebDriver driver) {
+	public boolean checkEmail(String email) {
 		By byEmail = By.xpath(XPathInputEmail);
-		if (PageObjTM.state(State.Visible, byEmail, driver).check()) {
+		if (state(State.Visible, byEmail).check()) {
 			String emailScreen = driver.findElement(byEmail).getAttribute("value");
 			if (emailScreen!=null) {
 				return (email.compareTo(emailScreen)==0);
@@ -72,15 +75,15 @@ public class Page2IdentCheckout {
 		return false;
 	}
 
-	public static boolean isInputPasswordAccordingEmail(boolean emailYetExists, WebDriver driver) {
-		boolean isVisiblePassword = state(Visible, By.xpath(XPathInputPassword), driver).check();
+	public boolean isInputPasswordAccordingEmail(boolean emailYetExists) {
+		boolean isVisiblePassword = state(Visible, By.xpath(XPathInputPassword)).check();
 		if (emailYetExists==isVisiblePassword) {
 			return false;
 		}
 		return true;
 	}
 
-    private static boolean setInputIfVisible(String xpathInput, String valueToSet, WebDriver driver) {
+    private boolean setInputIfVisible(String xpathInput, String valueToSet) {
         boolean datoSeteado = false;
         try {
             List<WebElement> cfElementList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(xpathInput));
@@ -106,77 +109,76 @@ public class Page2IdentCheckout {
         return datoSeteado;
     }
     
-    public static void setNombreUsuarioIfVisible(String nombreUsr, HashMap<String,String> datosRegistro, WebDriver driver) {
-        boolean datoSeteado = setInputIfVisible(XPathInputNombreUsr, nombreUsr, driver);
+    public void setNombreUsuarioIfVisible(String nombreUsr, HashMap<String,String> datosRegistro) {
+        boolean datoSeteado = setInputIfVisible(XPathInputNombreUsr, nombreUsr);
         if (datoSeteado) {
             datosRegistro.put("cfName", nombreUsr);
         }
     }
     
-    public static void setApellidosUsuarioIfVisible(String apellidosUsr, HashMap<String,String> dataPago, WebDriver driver) {
-        boolean datoSeteado = setInputIfVisible(XPathInputApellidosUsr, apellidosUsr, driver);
+    public void setApellidosUsuarioIfVisible(String apellidosUsr, HashMap<String,String> dataPago) {
+        boolean datoSeteado = setInputIfVisible(XPathInputApellidosUsr, apellidosUsr);
         if (datoSeteado) {
             dataPago.put("cfSname", apellidosUsr);
         }
     }
     
-    public static void setMiddleNameUsuarioIfVisible(String middleNameUsr, HashMap<String,String> dataPago, WebDriver driver) {
-        boolean datoSeteado = setInputIfVisible(XPathInputMiddleNameUsr, middleNameUsr, driver);
+    public void setMiddleNameUsuarioIfVisible(String middleNameUsr, HashMap<String,String> dataPago) {
+        boolean datoSeteado = setInputIfVisible(XPathInputMiddleNameUsr, middleNameUsr);
         if (datoSeteado) {
             dataPago.put("cfMiddleName", middleNameUsr);
         }
     }
     
-    public static void setPasswordIfVisible(String password, HashMap<String,String> datosRegistro, WebDriver driver) {
-        boolean datoSeteado = setInputIfVisible(XPathInputPassword, password, driver);
+    public void setPasswordIfVisible(String password, HashMap<String,String> datosRegistro) {
+        boolean datoSeteado = setInputIfVisible(XPathInputPassword, password);
         if (datoSeteado) {
             datosRegistro.put("cfPass", password);
         }
     }
     
-    public static void setTelefonoIfVisible(String movil, HashMap<String,String> datosRegistro, WebDriver driver) {
-        boolean datoSeteado = setInputIfVisible(XPathInputTelefono, movil, driver);
+    public void setTelefonoIfVisible(String movil, HashMap<String,String> datosRegistro) {
+        boolean datoSeteado = setInputIfVisible(XPathInputTelefono, movil);
         if (datoSeteado) {
             datosRegistro.put("cfTelf", movil);
         }
     }    
 
-	public static void setInputPoblacionIfVisible(String cfCity, HashMap<String,String> datosRegistro, WebDriver driver) 
-	throws Exception {
+	public void setInputPoblacionIfVisible(String cfCity, HashMap<String,String> datosRegistro) throws Exception {
 		waitForPageLoaded(driver);
-		state(Clickable, By.xpath(XPathInputPoblacionActive), driver).wait(1).check();
-		boolean datoSeteado = setInputIfVisible(XPathInputPoblacionActive, cfCity, driver);
+		state(Clickable, By.xpath(XPathInputPoblacionActive)).wait(1).check();
+		boolean datoSeteado = setInputIfVisible(XPathInputPoblacionActive, cfCity);
 		if (datoSeteado) {
 			datosRegistro.put("cfCity", cfCity);
 		}
 	}
 
-	public static void setInputDireccion1IfVisible(String direccion1, WebDriver driver) {
-		setInputIfVisible(XPathInputDireccion1, direccion1, driver);
+	public void setInputDireccion1IfVisible(String direccion1) {
+		setInputIfVisible(XPathInputDireccion1, direccion1);
 	}
     
-    public static void setInputDireccion1IfVisible(String direccion1, HashMap<String,String> datosRegistro, WebDriver driver) {
-        boolean datoSeteado = setInputIfVisible(XPathInputDireccion1, direccion1, driver);
+    public void setInputDireccion1IfVisible(String direccion1, HashMap<String,String> datosRegistro) {
+        boolean datoSeteado = setInputIfVisible(XPathInputDireccion1, direccion1);
         if (datoSeteado)
             datosRegistro.put("cfDir1", direccion1);
     }    
     
-    public static void setInputDireccion2IfVisible(String direccion1, HashMap<String,String> datosRegistro, WebDriver driver) {
-        boolean datoSeteado = setInputIfVisible(XPathInputDireccion2, direccion1, driver);
+    public void setInputDireccion2IfVisible(String direccion1, HashMap<String,String> datosRegistro) {
+        boolean datoSeteado = setInputIfVisible(XPathInputDireccion2, direccion1);
         if (datoSeteado) {
             datosRegistro.put("cfDir2", direccion1);
         }
     }
     
-    public static void setInputProvEstadoIfVisible(String cfState, HashMap<String,String> datosRegistro, WebDriver driver) {
-        boolean datoSeteado = setInputIfVisible(XPathInputProvEstadoActive, cfState, driver);
+    public void setInputProvEstadoIfVisible(String cfState, HashMap<String,String> datosRegistro) {
+        boolean datoSeteado = setInputIfVisible(XPathInputProvEstadoActive, cfState);
         if (datoSeteado) {
             datosRegistro.put("cfState", cfState);
         }
     }    
 
-    public static void setInputDniIfVisible(String dni, HashMap<String,String> datosRegistro, WebDriver driver) {
-        boolean datoSeteado = setInputIfVisible(XPathInputDNI, dni, driver);        
+    public void setInputDniIfVisible(String dni, HashMap<String,String> datosRegistro) {
+        boolean datoSeteado = setInputIfVisible(XPathInputDNI, dni);        
         if (datoSeteado) {
             datosRegistro.put("cfDni", dni);
         }
@@ -185,15 +187,15 @@ public class Page2IdentCheckout {
 	/**
 	 * Se introduce el código postal y si se detectan un 'onkeyup' se espera un máximo de 2 segundos a que esté disponible la lista de poblaciones
 	 */
-	public static boolean setCodPostalIfExistsAndWait(String codPostal, WebDriver driver) {
-		boolean datoSeteado = setInputIfVisible(XPathInputCodPost, codPostal, driver);
+	public boolean setCodPostalIfExistsAndWait(String codPostal) {
+		boolean datoSeteado = setInputIfVisible(XPathInputCodPost, codPostal);
 		if (datoSeteado) {            
 			List<WebElement> cfCodpostalList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathInputCodPost));
 			if (cfCodpostalList.size() > 0) {
 				//Si existe el tag 'onkeyup' (se desencadena petición Ajax) tenemos que esperaremos un máximo de 2 segundos hasta que aparezca el desplegable con las poblaciones
 				if (cfCodpostalList.get(0).getAttribute("onkeyup")!=null && 
 					cfCodpostalList.get(0).getAttribute("onkeyup").compareTo("")!=0) {
-					state(Visible, By.xpath(XPathSelectLocalidades), driver).wait(2).check();
+					state(Visible, By.xpath(XPathSelectLocalidades)).wait(2).check();
 				}
 			}
 		}
@@ -201,8 +203,8 @@ public class Page2IdentCheckout {
 		return datoSeteado;
 	}
 
-    public static void setCodPostalIfExistsAndWait(String codigoPostal, HashMap<String,String> datosRegistro, WebDriver driver) {
-        boolean datoSeteado = setCodPostalIfExistsAndWait(codigoPostal, driver);
+    public void setCodPostalIfExistsAndWait(String codigoPostal, HashMap<String,String> datosRegistro) {
+        boolean datoSeteado = setCodPostalIfExistsAndWait(codigoPostal);
         if (datoSeteado) {
             datosRegistro.put("cfCp", codigoPostal);
         }
@@ -211,7 +213,7 @@ public class Page2IdentCheckout {
     /**
      * Seteamos el email (si el campo de input existe, no está protegido y no está ya informado con ese valor)
      */
-    public static String setEmailIfExists(String email, WebDriver driver) {
+    public String setEmailIfExists(String email) {
         String emailRegistro = email;
         
         // Revisamos si está visible el campo de input
@@ -235,16 +237,16 @@ public class Page2IdentCheckout {
         return emailRegistro;
     }
     
-    public static void setEmailIfExists(String email, HashMap<String,String> datosRegistro, WebDriver driver) {
-        datosRegistro.put("cfEmail", setEmailIfExists(email, driver));
+    public void setEmailIfExists(String email, HashMap<String,String> datosRegistro) {
+        datosRegistro.put("cfEmail", setEmailIfExists(email));
     }
 
-	public static boolean setPaisIfVisibleAndNotSelected(String codigoPais, WebDriver driver) {
+	public boolean setPaisIfVisibleAndNotSelected(String codigoPais) {
 		boolean datoSeteado = false;
 		List<WebElement> paisCf = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathSelectPais));
 		if (paisCf.size() > 0) {
 			String xpathSelectedPais = XPathSelectPais + "/option[@selected='selected' and @value='" + codigoPais + "']";
-			if (state(Present, By.xpath(xpathSelectedPais), driver).check()) {
+			if (state(Present, By.xpath(xpathSelectedPais)).check()) {
 				new Select(paisCf.get(0)).selectByValue(codigoPais);
 				datoSeteado = true;
 			}
@@ -253,14 +255,14 @@ public class Page2IdentCheckout {
 		return datoSeteado;
 	}
 
-    public static void setPaisIfVisibleAndNotSelected(String codigoPais, HashMap<String,String> datosRegistro, WebDriver driver) {
-        boolean datoSeteado = setPaisIfVisibleAndNotSelected(codigoPais, driver);
+    public void setPaisIfVisibleAndNotSelected(String codigoPais, HashMap<String,String> datosRegistro) {
+        boolean datoSeteado = setPaisIfVisibleAndNotSelected(codigoPais);
         if (datoSeteado) {
             datosRegistro.put(":pais", codigoPais);
         }
     }    
     
-    public static void clickBotonFindAddress(WebDriver driver) throws Exception {
+    public void clickBotonFindAddress() throws Exception {
         driver.findElement(By.xpath(XPathBotonFindAddress)).click();
         Thread.sleep(3000);
     }
@@ -268,14 +270,14 @@ public class Page2IdentCheckout {
 	/**
 	 * Si existe, utiliza el botón "Find Address" para establecer la dirección (actualmente sólo existe en Corea del Sur)
 	 */
-	public static void setDireccionWithFindAddressIfExists(String codPostalPais, WebDriver driver) throws Exception {
-		String codPostalSeteado = getCodigoPostal(driver);
+	public void setDireccionWithFindAddressIfExists(String codPostalPais) throws Exception {
+		String codPostalSeteado = getCodigoPostal();
 		if (codPostalPais.compareTo(codPostalSeteado)!=0 &&
-				state(Visible, By.xpath(XPathBotonFindAddress), driver).check()) {
-			clickBotonFindAddress(driver);
+			state(Visible, By.xpath(XPathBotonFindAddress)).check()) {
+			clickBotonFindAddress();
 			String mainWindowHandle = driver.getWindowHandle();
 			try {
-				String popupBuscador = PopupFindAddress.goToPopupAndWait(mainWindowHandle, 5/*maxSecondsToWait*/, driver);
+				String popupBuscador = PopupFindAddress.goToPopupAndWait(mainWindowHandle, 5, driver);
 				if ("".compareTo(popupBuscador)!=0 && PopupFindAddress.isIFrameUntil(0, driver)) {
 					PopupFindAddress.switchToIFrame(driver);
 					if (PopupFindAddress.isBuscadorClickableUntil(2/*maxSecondsToWait*/, driver)) {
@@ -292,16 +294,16 @@ public class Page2IdentCheckout {
 		}
 	}
 
-	public static String getCodigoPostal(WebDriver driver) {
-		if (state(Present, By.xpath(XPathInputCodPost), driver).check()) {
+	public String getCodigoPostal() {
+		if (state(Present, By.xpath(XPathInputCodPost)).check()) {
 			return (driver.findElement(By.xpath(XPathInputCodPost)).getAttribute("value"));
 		}
 		return "";
 	}
 
-	public static void clickPublicidadIfVisible(HashMap<String,String> datosRegistro, WebDriver driver) {
+	public void clickPublicidadIfVisible(HashMap<String,String> datosRegistro) {
 		By byCheckPublic = By.xpath(XPathCheckPublicidad);
-		if (state(Present, byCheckPublic, driver).check()) {
+		if (state(Present, byCheckPublic).check()) {
 			moveToElement(byCheckPublic, driver);
 			if (state(Visible, byCheckPublic, driver).check()) {
 				driver.findElement(byCheckPublic).click();
@@ -315,7 +317,7 @@ public class Page2IdentCheckout {
     /**
      * @param posInSelect: elemento del desplegable que queremos desplegar (comenzando desde el 1)
      */
-    public static String setSelectLocalidadesIfVisible(int posInSelect, WebDriver driver) throws Exception {
+    public String setSelectLocalidadesIfVisible(int posInSelect) throws Exception {
         String datoSeteado = "";
         boolean staleElement = true;
         int i=0;
@@ -343,8 +345,8 @@ public class Page2IdentCheckout {
         return datoSeteado;
     }
     
-    public static void setSelectLocalidadesIfVisible(WebDriver driver, int posInSelect, HashMap<String,String> datosRegistro) throws Exception {
-        String datoSeteado = setSelectLocalidadesIfVisible(posInSelect, driver);
+    public void setSelectLocalidadesIfVisible(int posInSelect, HashMap<String,String> datosRegistro) throws Exception {
+        String datoSeteado = setSelectLocalidadesIfVisible(posInSelect);
         if ("".compareTo(datoSeteado)!=0) {
             datosRegistro.put("cfCity", datoSeteado);
         }
@@ -353,9 +355,9 @@ public class Page2IdentCheckout {
     /**
      * @param posInSelect: elemento del desplegable que queremos desplegar (comenzando desde el 1)
      */
-    final static String firstProvinciaUkranie = "Ananivskyi";
-    final static String XPathOptionFirstProvUkranie = "//div[@class[contains(.,'choices')] and text()[contains(.,'" + firstProvinciaUkranie + "')]]";
-    public static String setSelectProv1PaisIfVisible(String codCountry, Channel channel, WebDriver driver) {
+    private final static String firstProvinciaUkranie = "Ananivskyi";
+    private final static String XPathOptionFirstProvUkranie = "//div[@class[contains(.,'choices')] and text()[contains(.,'" + firstProvinciaUkranie + "')]]";
+    public String setSelectProv1PaisIfVisible(String codCountry, Channel channel) {
         String datoSeteado = "";
         WebElement provinciaPais = UtilsMangoTest.findElementPriorizingDisplayed(driver, By.xpath(XPathSelectProvPais));
         if (provinciaPais!=null) {
@@ -374,14 +376,14 @@ public class Page2IdentCheckout {
         return "";
     }
     
-    public static void setSelectProvPaisIfVisible(HashMap<String,String> datosRegistro, String codPais, Channel channel, WebDriver driver) {
-        String datoSeteado = setSelectProv1PaisIfVisible(codPais, channel, driver);
+    public void setSelectProvPaisIfVisible(HashMap<String,String> datosRegistro, String codPais, Channel channel) {
+        String datoSeteado = setSelectProv1PaisIfVisible(codPais, channel);
         if ("".compareTo(datoSeteado)!=0) {
             datosRegistro.put("provinciaPais", datoSeteado);
         }
     }   
     
-    public static String setSelectEstados1PaisIfVisible(WebDriver driver) throws Exception {
+    public String setSelectEstados1PaisIfVisible() throws Exception {
         String datoSeteado = "";
         
         //Tenemos problemas aleatorios de StaleElementReferenceException con este elemento
@@ -409,19 +411,19 @@ public class Page2IdentCheckout {
         return datoSeteado;
     }
     
-    public static void setSelectEstadosPaisIfVisible(HashMap<String,String> datosRegistro, String codPais, WebDriver driver) throws Exception {
+    public void setSelectEstadosPaisIfVisible(HashMap<String,String> datosRegistro, String codPais) throws Exception {
        	String datoSeteado = "";
     	if ("001".compareTo(codPais)==0) {
-    		datoSeteado = setSeletEstadoEspanya("Barcelona", driver);
+    		datoSeteado = setSeletEstadoEspanya("Barcelona");
     	} else {
-    		datoSeteado = setSelectEstados1PaisIfVisible(driver);
+    		datoSeteado = setSelectEstados1PaisIfVisible();
     	}
         if ("".compareTo(datoSeteado)!=0) {
             datosRegistro.put("estadosPais", datoSeteado);
         }
     }    
     
-    public static String setSeletEstadoEspanya(String provincia, WebDriver driver) throws Exception {
+    public String setSeletEstadoEspanya(String provincia) throws Exception {
     	waitForPageLoaded(driver);
         WebElement provinciaPais = UtilsMangoTest.findElementPriorizingDisplayed(driver, By.xpath(XPathSelectEstadosPais));
         if (provinciaPais!=null) {
@@ -435,15 +437,14 @@ public class Page2IdentCheckout {
     }
     
     private enum TypeLocalidad {ProvCity, NeighbourhoodCity}
-    private static String setSelectLocalidadesProvCity(int posInSelect, WebDriver driver) throws Exception {
-    	return (setSelectLocalidades(TypeLocalidad.ProvCity, posInSelect, driver));
+    private String setSelectLocalidadesProvCity(int posInSelect) throws Exception {
+    	return (setSelectLocalidades(TypeLocalidad.ProvCity, posInSelect));
     }
-    private static String setSelectLocalidadesNeighbourhoodCity(int posInSelect, WebDriver driver) throws Exception {
-    	return (setSelectLocalidades(TypeLocalidad.NeighbourhoodCity, posInSelect, driver));
+    private String setSelectLocalidadesNeighbourhoodCity(int posInSelect) throws Exception {
+    	return (setSelectLocalidades(TypeLocalidad.NeighbourhoodCity, posInSelect));
     }
     
-    private static String setSelectLocalidades(TypeLocalidad typeLocalidad, int posInSelect, WebDriver driver) 
-    throws Exception {
+    private String setSelectLocalidades(TypeLocalidad typeLocalidad, int posInSelect) throws Exception {
         String datoSeteado = "";
         String xpathSelect = "";
         switch (typeLocalidad) {
@@ -482,20 +483,20 @@ public class Page2IdentCheckout {
         return datoSeteado;
     }
     
-    public static void setSelectLocalidadesProvCity(int posInSelect, HashMap<String,String> datosRegistro, WebDriver driver) throws Exception {
-        String datoSeteado = setSelectLocalidadesProvCity(posInSelect, driver);
+    public void setSelectLocalidadesProvCity(int posInSelect, HashMap<String,String> datosRegistro) throws Exception {
+        String datoSeteado = setSelectLocalidadesProvCity(posInSelect);
         if ("".compareTo(datoSeteado)!=0) {
             datosRegistro.put("localidadesProvCity", datoSeteado);
         }
     }     
-    public static void setSelectLocalidadesNeighbourhoodCity(int posInSelect, HashMap<String,String> datosRegistro, WebDriver driver) throws Exception {
-        String datoSeteado = setSelectLocalidadesNeighbourhoodCity(posInSelect, driver);
+    public void setSelectLocalidadesNeighbourhoodCity(int posInSelect, HashMap<String,String> datosRegistro) throws Exception {
+        String datoSeteado = setSelectLocalidadesNeighbourhoodCity(posInSelect);
         if ("".compareTo(datoSeteado)!=0) {
             datosRegistro.put("localidadesNeighbourhoodCity", datoSeteado);
         }
     }
     
-    public static boolean setCheckHombreIfVisible(WebDriver driver) {
+    public boolean setCheckHombreIfVisible() {
         boolean datoSeteado = false;
         List<WebElement> cfGener_HList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathCheckHombre));
         if (cfGener_HList.size() > 0) {
@@ -505,26 +506,25 @@ public class Page2IdentCheckout {
         return datoSeteado;        
     }
     
-    public static void setCheckHombreIfVisible(HashMap<String,String> datosRegistro, WebDriver driver) {
-        boolean datoSeteado = setCheckHombreIfVisible(driver);
+    public void setCheckHombreIfVisible(HashMap<String,String> datosRegistro) {
+        boolean datoSeteado = setCheckHombreIfVisible();
         if (datoSeteado) {
             datosRegistro.put("cfGener", "H");
         }
     }    
     
-    public static boolean setCheckCondicionesIfVisible(WebDriver driver) {
+    public boolean setCheckCondicionesIfVisible() {
         boolean datoSeteado = false;
         List<WebElement> cfPriv = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathCheckCondiciones + "/../../div[@class='checkbox__image']"));
         if (cfPriv.size() > 0) { //Revisamos si el check NO está marcado 
             driver.findElement(By.xpath(XPathCheckCondiciones)).click();
             datoSeteado = true;
         }        
-        
         return datoSeteado;        
     }
     
-    public static void setCheckCondicionesIfVisible(HashMap<String,String> datosRegistro, WebDriver driver) {
-        boolean datoSeteado = setCheckCondicionesIfVisible(driver);
+    public void setCheckCondicionesIfVisible(HashMap<String,String> datosRegistro) {
+        boolean datoSeteado = setCheckCondicionesIfVisible();
         if (datoSeteado) {
             datosRegistro.put("cfPriv", "true");
         }
@@ -533,9 +533,8 @@ public class Page2IdentCheckout {
     /**
      * Función que introduce los datos de cliente (sirve para la 1a página del registro y el checkout)
      */
-    public static HashMap<String,String> inputDataPorDefectoSegunPais(
-    		Pais pais, String emailUsr, boolean testCharNoLatinos, boolean clickPubli, Channel channel, WebDriver driver)
-    		throws Exception {
+    public HashMap<String,String> inputDataPorDefectoSegunPais(
+    		Pais pais, String emailUsr, boolean testCharNoLatinos, boolean clickPubli, Channel channel) throws Exception {
         HashMap<String,String> datosSeteados = new HashMap<>();
         String nombreUsr = "Jorge";
         String apellidosUsr = "Muñoz Martínez";
@@ -555,60 +554,58 @@ public class Page2IdentCheckout {
         
         // Lo repetimos 2 veces porque el sendKeys sufre un bug ocasional que envía los datos a inputs incorrectos
         for (int i = 0; i < 2; i++) {
-            setNombreUsuarioIfVisible(nombreUsr, datosSeteados, driver);
-            setApellidosUsuarioIfVisible(apellidosUsr, datosSeteados, driver);
-            setMiddleNameUsuarioIfVisible(middleNameUsr, datosSeteados, driver);
-            setTelefonoIfVisible(movil, datosSeteados, driver);
-            setPasswordIfVisible(Constantes.pass_standard, datosSeteados, driver);
-            setEmailIfExists(emailUsr, datosSeteados, driver);
-            setInputDireccion1IfVisible(direccion1, datosSeteados, driver);
-            setInputDireccion2IfVisible(direccion2, datosSeteados, driver);
-            setDireccionWithFindAddressIfExists(codPostalPais, driver);
-            setPaisIfVisibleAndNotSelected(codigoPais, datosSeteados, driver);
-            setCodPostalIfExistsAndWait(codPostalPais, datosSeteados, driver);
-            setInputPoblacionIfVisible(cfCity, datosSeteados, driver);
-            setSelectLocalidadesIfVisible(driver, 1, datosSeteados);
-            setSelectProvPaisIfVisible(datosSeteados, pais.getCodigo_pais(), channel, driver); // Desplegable provincia país (p.e. Turquía)
-            setCheckCondicionesIfVisible(datosSeteados, driver); // Selección aceptación de condiciones (actualmente sólo en Turquía)
-            setSelectLocalidadesProvCity(1, datosSeteados, driver); // Desplegable específico de Turquía
-            setSelectLocalidadesNeighbourhoodCity(1, datosSeteados, driver); // Desplegable específico de Turquía
-            setInputProvEstadoIfVisible(cfState, datosSeteados, driver);
-            setInputDniIfVisible(dni, datosSeteados, driver);
-            setSelectEstadosPaisIfVisible(datosSeteados, codigoPais, driver);
+            setNombreUsuarioIfVisible(nombreUsr, datosSeteados);
+            setApellidosUsuarioIfVisible(apellidosUsr, datosSeteados);
+            setMiddleNameUsuarioIfVisible(middleNameUsr, datosSeteados);
+            setTelefonoIfVisible(movil, datosSeteados);
+            setPasswordIfVisible(Constantes.pass_standard, datosSeteados);
+            setEmailIfExists(emailUsr, datosSeteados);
+            setInputDireccion1IfVisible(direccion1, datosSeteados);
+            setInputDireccion2IfVisible(direccion2, datosSeteados);
+            setDireccionWithFindAddressIfExists(codPostalPais);
+            setPaisIfVisibleAndNotSelected(codigoPais, datosSeteados);
+            setCodPostalIfExistsAndWait(codPostalPais, datosSeteados);
+            setInputPoblacionIfVisible(cfCity, datosSeteados);
+            setSelectLocalidadesIfVisible(1, datosSeteados);
+            setSelectProvPaisIfVisible(datosSeteados, pais.getCodigo_pais(), channel); // Desplegable provincia país (p.e. Turquía)
+            setCheckCondicionesIfVisible(datosSeteados); // Selección aceptación de condiciones (actualmente sólo en Turquía)
+            setSelectLocalidadesProvCity(1, datosSeteados); // Desplegable específico de Turquía
+            setSelectLocalidadesNeighbourhoodCity(1, datosSeteados); // Desplegable específico de Turquía
+            setInputProvEstadoIfVisible(cfState, datosSeteados);
+            setInputDniIfVisible(dni, datosSeteados);
+            setSelectEstadosPaisIfVisible(datosSeteados, codigoPais);
             if (i==0 && clickPubli) {
-                clickPublicidadIfVisible(datosSeteados, driver);
-                setCheckHombreIfVisible(datosSeteados, driver);
+                clickPublicidadIfVisible(datosSeteados);
+                setCheckHombreIfVisible(datosSeteados);
             }
         }
         
         return datosSeteados;
     }
 
-	public static boolean isContinuarClickableUntil(int maxSeconds, WebDriver driver) {
-		return (state(Clickable, By.xpath(XPathBotonContinuar), driver)
-				.wait(maxSeconds).check());
+	public boolean isContinuarClickableUntil(int maxSeconds) {
+		return (state(Clickable, By.xpath(XPathBotonContinuar)).wait(maxSeconds).check());
 	}
 
-	public static void clickBotonContinuarAndWait(int maxSeconds, WebDriver driver) {
-		click(By.xpath(XPathBotonContinuar), driver).waitLoadPage(maxSeconds).exec();
+	public void clickBotonContinuarAndWait(int maxSeconds) {
+		click(By.xpath(XPathBotonContinuar)).waitLoadPage(maxSeconds).exec();
  
 		//Hay una especie de bug (p.e. en el caso de Turquía) que hace que en ocasiones el click no tenga efecto
-		if (state(Present, By.xpath(XPathBotonContinuar), driver).check()) {
+		if (state(Present, By.xpath(XPathBotonContinuar)).check()) {
 			waitMillis(1500);
-			click(By.xpath(XPathBotonContinuar), driver).type(TypeClick.javascript).exec();
+			click(By.xpath(XPathBotonContinuar)).type(TypeClick.javascript).exec();
 		}
 	}
 
-	public static boolean isDisplayedAvisoAduanas(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathMsgAduanas), driver)
-				.wait(1).check());
+	public boolean isDisplayedAvisoAduanas() {
+		return (state(Visible, By.xpath(XPathMsgAduanas)).wait(1).check());
 	}
 
-	public static boolean isTextoRGPDVisible(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathTextRGPD), driver).check());
+	public boolean isTextoRGPDVisible() {
+		return (state(Visible, By.xpath(XPathTextRGPD)).check());
 	}
 
-	public static boolean isTextoLegalRGPDVisible(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathLegalRGPD), driver).check());
+	public boolean isTextoLegalRGPDVisible() {
+		return (state(Visible, By.xpath(XPathLegalRGPD)).check());
 	}
 }

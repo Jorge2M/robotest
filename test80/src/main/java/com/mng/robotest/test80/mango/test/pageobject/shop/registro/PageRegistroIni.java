@@ -152,7 +152,8 @@ public class PageRegistroIni extends PageObjTM {
     
     public HashMap<String,String> sendDataAccordingCountryToInputs(
     		Pais pais, String emailNonExistent, boolean clickPubli, Channel channel) throws Exception {
-        return (Page2IdentCheckout.inputDataPorDefectoSegunPais(pais, emailNonExistent, false, clickPubli, channel, driver));
+        return (new Page2IdentCheckout(driver)
+        		.inputDataPorDefectoSegunPais(pais, emailNonExistent, false, clickPubli, channel));
     }
     
     public void sendDataToInputs(ListDataRegistro dataToSend) {

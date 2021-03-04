@@ -4,9 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
-import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
-import com.github.jorge2m.testmaker.service.TestMaker;
+
 
 public class PagoStoreCredit extends PagoStpV {
     
@@ -18,13 +16,12 @@ public class PagoStoreCredit extends PagoStpV {
     @SuppressWarnings("static-access")
     @Override
     public void testPagoFromCheckout(boolean execPay) throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        PageCheckoutWrapperStpV.secStoreCredit.validateInitialStateOk(dCtxSh.channel, dCtxPago, driver);
-        PageCheckoutWrapperStpV.secStoreCredit.selectSaldoEnCuentaBlock(dCtxSh.pais, dCtxPago, dCtxSh.appE, dCtxSh.channel, driver);
-        PageCheckoutWrapperStpV.secStoreCredit.selectSaldoEnCuentaBlock(dCtxSh.pais, dCtxPago, dCtxSh.appE, dCtxSh.channel, driver);
+        pageCheckoutWrapperStpV.getSecStoreCreditStpV().validateInitialStateOk(dCtxPago);
+        pageCheckoutWrapperStpV.getSecStoreCreditStpV().selectSaldoEnCuentaBlock(dCtxSh.pais, dCtxPago, dCtxSh.appE);
+        pageCheckoutWrapperStpV.getSecStoreCreditStpV().selectSaldoEnCuentaBlock(dCtxSh.pais, dCtxPago, dCtxSh.appE);
         
         if (execPay) {
-            PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, driver);
+            pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
             this.dCtxPago.getDataPedido().setCodtipopago("U");
         }
     }

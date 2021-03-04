@@ -4,21 +4,26 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecTMango {
+public class SecTMango extends PageObjTM {
 
     public enum TipoPago {pagoHabitual, tresMeses, seisMeses, pagoUnico}
     
-    static String XPathSectionMobil = "//div[@class[contains(.,'mango_card')] and @class[contains(.,'show')]]"; 
-    static String XPathSectionDesktop = "//div[@id='mangoCardContent']"; 
+    private final Channel channel;
     
-    /**
-     * @return el literal descriptivo que debería aparecer a la derecha de cada uno de los radiobuttons
-     */
-    public static String getDescripcionTipoPago(TipoPago tipoPago) {
+    private final static String XPathSectionMobil = "//div[@class[contains(.,'mango_card')] and @class[contains(.,'show')]]"; 
+    private final static String XPathSectionDesktop = "//div[@id='mangoCardContent']"; 
+    
+    public SecTMango(Channel channel, WebDriver driver) {
+    	super(driver);
+    	this.channel = channel;
+    }
+    
+    public String getDescripcionTipoPago(TipoPago tipoPago) {
         switch (tipoPago) {
         case pagoHabitual:
             return "La modalidad de pago habitual que tengas elegida para tu Tarjeta MANGO";
@@ -33,65 +38,46 @@ public class SecTMango {
         }
     }
     
-    /**
-     * @return el xpath que engloba la capa con la sección
-     */
-    public static String getXPath_section(Channel channel) {
+    public String getXPath_section() {
         if (channel.isDevice()) {
             return XPathSectionMobil;
         }
         return XPathSectionDesktop;
     }
     
-    /**
-     * @return el xpath correspondiente a los elementos que contienen el texto con los labels de cada una de las modalidades
-     */
-    public static String getXPATH_labelsCheckModalidad(Channel channel) {
-        String xpathSection = getXPath_section(channel); 
+    public String getXPATH_labelsCheckModalidad() {
+        String xpathSection = getXPath_section(); 
         if (channel.isDevice()) {
             return (xpathSection + "//p[@class='method-name']");
         }
         return (xpathSection + "//input/../label/span");
     }
     
-    /**
-     * @return xpath correspondiente al elemento que contiene un determinado texto de modalidad
-     */
-    public static String getXPATH_labelModalidad(TipoPago tipoPago, Channel channel) {
-        String litModalidad = SecTMango.getDescripcionTipoPago(tipoPago);
-        String xpathLabelsMod = getXPATH_labelsCheckModalidad(channel);
+    public String getXPATH_labelModalidad(TipoPago tipoPago) {
+        String litModalidad = getDescripcionTipoPago(tipoPago);
+        String xpathLabelsMod = getXPATH_labelsCheckModalidad();
         return (xpathLabelsMod + "[text()[contains(.,'" + litModalidad + "')]]");
     }
     
-    /**
-     * @return el xpath correspondiente al elemento que puede recibir el click para el check de la modalidad de pago
-     */
-    public static String getXPATH_clickModalidad(TipoPago tipoPago, Channel channel) {
-        String xpathLabelMod = getXPATH_labelModalidad(tipoPago, channel);
+    public String getXPATH_clickModalidad(TipoPago tipoPago) {
+        String xpathLabelMod = getXPATH_labelModalidad(tipoPago);
         if (channel.isDevice()) {
             return (xpathLabelMod + "/..");
         }
         return (xpathLabelMod + "/../../input");
     }
     
-    public static boolean isVisibleUntil(Channel channel, int maxSeconds, WebDriver driver) {
-    	String xpath = getXPath_section(channel);
-    	return (state(Visible, By.xpath(xpath), driver).wait(maxSeconds)
-    			.check());
+    public boolean isVisibleUntil(int maxSeconds) {
+    	String xpath = getXPath_section();
+    	return (state(Visible, By.xpath(xpath)).wait(maxSeconds).check());
     }
     
-    /**
-     * @return si una determinada modalidad está disponible
-     */
-    public static boolean isModalidadDisponible(WebDriver driver, TipoPago tipoPago, Channel channel) {
-    	String xpath = getXPATH_labelModalidad(tipoPago, channel);
-    	return (state(Present, By.xpath(xpath), driver).check());
+    public boolean isModalidadDisponible(TipoPago tipoPago) {
+    	String xpath = getXPATH_labelModalidad(tipoPago);
+    	return (state(Present, By.xpath(xpath)).check());
     }
     
-    /**
-     * Selecciona una modalidad de pago especificada por su literal
-     */
-    public static void clickModalidad(WebDriver driver, TipoPago tipoPago, Channel channel) {
-        driver.findElement(By.xpath(getXPATH_clickModalidad(tipoPago, channel))).click();
+    public void clickModalidad(TipoPago tipoPago) {
+        driver.findElement(By.xpath(getXPATH_clickModalidad(tipoPago))).click();
     }
 }

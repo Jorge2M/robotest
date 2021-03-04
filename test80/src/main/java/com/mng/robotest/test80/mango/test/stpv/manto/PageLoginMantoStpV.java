@@ -21,7 +21,7 @@ public class PageLoginMantoStpV {
 		if (!PageSelTda.isPage(driver)) {
 			identFromJasigCasPage(usrManto, passManto, driver);
 		}
-		checkIsPageSelectTienda(10, driver);
+		checkIsPageSelectTienda(15, driver);
 	}
 	
 	@Step (

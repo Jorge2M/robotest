@@ -80,20 +80,22 @@ public class Compra {
 		FTCkout.isEmpl = true;
 		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
 		dCtxPago.setFTCkout(FTCkout);
-		//TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-		PagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(dCtxSh, dCtxPago, driver);
+		
+        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
+		pagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded();
 
 		//Pago
 		Pago pagoVisaToTest = españa.getPago("VISA");
 		DataPedido dataPedido = new DataPedido(dCtxSh.pais);
 		dataPedido.setPago(pagoVisaToTest);
 
-		PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, dCtxSh.channel, driver);
+		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(dCtxSh.channel, driver);
+		pageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido);
 		dCtxPago.setDataPedido(dataPedido);
 		dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
 		dCtxPago.getFTCkout().validaPasarelas = true;
 		dCtxPago.getFTCkout().validaPagos = true;
-		PagoNavigationsStpV.testPagoFromCheckoutToEnd(dCtxPago, dCtxSh, pagoVisaToTest, driver);
+		pagoNavigationsStpV.testPagoFromCheckoutToEnd(pagoVisaToTest);
 
 		//Validación en Manto de los Pedidos (si existen)
 		List<CheckPedido> listChecks = Arrays.asList(
@@ -139,7 +141,7 @@ public class Compra {
 		chequeRegalo.setEmail(Constantes.mail_standard);
 		chequeRegalo.setImporte(Importe.euro50);
 		chequeRegalo.setMensaje("Ya sólo queda por determinar si el universo partió de cero o del infinito");
-		pageChequeRegaloInputDataStpV.inputDataAndClickComprar(chequeRegalo);
+		pageChequeRegaloInputDataStpV.inputDataAndClickComprar(dCtxSh.channel, chequeRegalo);
 
 		//Ejecutar el pago
 		FlagsTestCkout fTCkout = new FlagsTestCkout();
@@ -155,10 +157,14 @@ public class Compra {
 		Pago pagoVISA = españa.getPago("VISA");
 		dCtxPago.getDataPedido().setPago(pagoVISA);
 		DataPedido dataPedido = dCtxPago.getDataPedido();
-		dataPedido.setImporteTotal(PageCheckoutWrapper.getPrecioTotalFromResumen(dCtxSh.channel, driver));
+		
+		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(dCtxSh.channel, driver);
+		dataPedido.setImporteTotal(pageCheckoutWrapper.getPrecioTotalFromResumen());
 		dataPedido.setDireccionEnvio("");
 		dataPedido.setEmailCheckout(dCtxSh.userConnected);
-		PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, driver);
+		
+        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
+		pagoNavigationsStpV.checkPasarelaPago();
 		if (fTCkout.validaPedidosEnManto) {
 			List<CheckPedido> listChecks = Arrays.asList(
 				CheckPedido.consultarBolsa, 
@@ -190,8 +196,9 @@ public class Compra {
         FTCkout.isEmpl = false;
         DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
         dCtxPago.setFTCkout(FTCkout);
-        //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-        PagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(paisesDestino, dCtxSh, dCtxPago, driver);
+        
+        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
+        pagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(paisesDestino);
         if (FTCkout.validaPedidosEnManto) {
         	List<CheckPedido> listChecks = Arrays.asList(
         		CheckPedido.consultarBolsa, 
@@ -223,8 +230,9 @@ public class Compra {
             FTCkout.isEmpl = false;
             DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
             dCtxPago.setFTCkout(FTCkout);
-            //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-            PagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(dCtxSh, dCtxPago, driver);
+            
+            PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
+            pagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded();
                     
             //Seleccionamos el logo de Mango (necesitamos acceder a una página con los links del menú superior)
             SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver);
@@ -277,7 +285,9 @@ public class Compra {
         FTCkout.isEmpl = false;
         DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
         dCtxPago.setFTCkout(FTCkout);
-        PagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(dCtxSh, dCtxPago, driver);
+        
+        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
+        pagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded();
         if (FTCkout.validaPedidosEnManto) {
         	List<CheckPedido> listChecks = Arrays.asList(
         		CheckPedido.consultarBolsa, 

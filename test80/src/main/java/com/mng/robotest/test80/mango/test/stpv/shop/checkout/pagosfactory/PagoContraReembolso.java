@@ -4,8 +4,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
-import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 
 public class PagoContraReembolso extends PagoStpV {
     
@@ -16,9 +14,9 @@ public class PagoContraReembolso extends PagoStpV {
     
     @Override
     public void testPagoFromCheckout(boolean execPay) throws Exception {
-        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, driver);
+        pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
         if (execPay) {
-            PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, driver);
+            pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
             this.dCtxPago.getDataPedido().setCodtipopago("U");
         }
     }

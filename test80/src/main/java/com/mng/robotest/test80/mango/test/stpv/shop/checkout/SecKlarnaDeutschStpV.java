@@ -10,11 +10,17 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.SecKlarnaDeut
 
 public class SecKlarnaDeutschStpV {
     
+	private final SecKlarnaDeutsch secKlarnaDeutsch;
+	
+	public SecKlarnaDeutschStpV(Channel channel, WebDriver driver) {
+		this.secKlarnaDeutsch = new SecKlarnaDeutsch(channel, driver);
+	}
+	
 	@Validation (
 		description="Aparece el selector de la fecha de nacimiento (lo esperamos hasta un máximo de #{maxSecondsToWait} segundos)",
 		level=State.Warn)
-    public static boolean validateIsSection(int maxSeconds, WebDriver driver) {
-        return (SecKlarnaDeutsch.isVisibleSelectDiaNacimientoUntil(maxSeconds, driver));
+    public boolean validateIsSection(int maxSeconds) {
+        return (secKlarnaDeutsch.isVisibleSelectDiaNacimientoUntil(maxSeconds));
     }
     
     /**
@@ -23,8 +29,8 @@ public class SecKlarnaDeutschStpV {
 	@Step (
 		description="Introducimos la fecha de nacimiento<b>#{fechaNaci}</b> y marcamos el radio de <b>\"Acepto\"</b>", 
         expected="Los datos se informan correctamente")
-    public static void inputData(String fechaNaci, Channel channel, WebDriver driver) {
-        SecKlarnaDeutsch.selectFechaNacimiento(fechaNaci, driver);
-        SecKlarnaDeutsch.clickAcepto(channel, driver);
+    public void inputData(String fechaNaci) {
+        secKlarnaDeutsch.selectFechaNacimiento(fechaNaci);
+        secKlarnaDeutsch.clickAcepto();
     }
 }

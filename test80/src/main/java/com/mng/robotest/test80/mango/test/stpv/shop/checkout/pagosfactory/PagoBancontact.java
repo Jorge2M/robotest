@@ -7,7 +7,6 @@ import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypeTarj;
-import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.d3d.PageD3DLoginStpV;
 
 public class PagoBancontact extends PagoStpV {
@@ -20,11 +19,11 @@ public class PagoBancontact extends PagoStpV {
     @Override
     public void testPagoFromCheckout(boolean execPay) throws Exception {
         boolean isD3D = true;
-        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, driver);
+        pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
         this.dCtxPago.getFTCkout().trjGuardada = false;
         
         if (execPay) {
-        	PageCheckoutWrapperStpV.inputDataTrjAndConfirmPago(this.dCtxPago, dCtxSh.channel, driver);
+        	pageCheckoutWrapperStpV.inputDataTrjAndConfirmPago(this.dCtxPago);
             DataPedido dataPedido = this.dCtxPago.getDataPedido(); 
             dataPedido.setCodtipopago("U");
             Pago pago = dataPedido.getPago();

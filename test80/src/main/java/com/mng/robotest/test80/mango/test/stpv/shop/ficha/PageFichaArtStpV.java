@@ -17,6 +17,7 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
@@ -42,6 +43,7 @@ public class PageFichaArtStpV {
     Channel channel;
     AppEcom app;
     private final PageFicha pageFicha;
+    private final SecBolsa secBolsa;
     private final ModEnvioYdevolNewStpV modEnvioYdevol;
     public final SecProductDescrOldStpV secProductDescOld;
     
@@ -50,11 +52,12 @@ public class PageFichaArtStpV {
     public static SecFitFinderStpV secFitFinder;
     public static SecTotalLookStpV secTotalLook;
     
-    public PageFichaArtStpV(AppEcom appE, Channel channel) {
+    public PageFichaArtStpV(AppEcom appE, Channel channel, Pais pais) {
         this.driver = TestMaker.getDriverTestCase();
         this.channel = channel;
         this.app = appE;
         this.pageFicha = PageFicha.newInstance(channel, appE, driver);
+        this.secBolsa = SecBolsa.make(channel, app, pais, driver);
         this.modEnvioYdevol = new ModEnvioYdevolNewStpV(driver);
         this.secProductDescOld = new SecProductDescrOldStpV(channel, driver);
     }
@@ -160,7 +163,7 @@ public class PageFichaArtStpV {
     	description="Seleccionar la talla con código <b>#{talla.name()}</b> (previamente, si está abierta, cerramos la capa de la bolsa)", 
         expected="Se cambia la talla correctamente")
     public void selectTalla(Talla talla) {
-    	SecBolsa.setBolsaToStateIfNotYet(StateBolsa.Closed, channel, app, driver);
+    	secBolsa.setBolsaToStateIfNotYet(StateBolsa.Closed);
         pageFicha.selectTallaByValue(talla);
         checkTallaSelected(talla);
     }
@@ -186,7 +189,7 @@ public class PageFichaArtStpV {
     	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"No aparece el botón \"COMPRAR\"",
-			!SecBolsa.isVisibleBotonComprar(Channel.desktop, driver), State.Defect);
+			!secBolsa.isVisibleBotonComprar(), State.Defect);
 	 	boolean isVisibleAvisame = pageFicha.secDataProduct.isVisibleCapaAvisame(driver);
 	 	validations.add(
 			"Aparece la capa de introducción de avísame",
@@ -249,7 +252,9 @@ public class PageFichaArtStpV {
         selectAnadirALaBolsaStep();
         DataBag dataBag = new DataBag();
         dataBag.addArticulo(articulo);
-        SecBolsaStpV.validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE, driver);
+        
+        SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
+        secBolsaStpV.validaAltaArtBolsa(dataBag);
     }    
 
     public void selectAnadirAFavoritos() throws Exception {

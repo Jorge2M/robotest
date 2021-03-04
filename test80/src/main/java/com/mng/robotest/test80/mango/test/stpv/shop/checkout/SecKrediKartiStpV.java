@@ -15,14 +15,10 @@ public class SecKrediKartiStpV {
 	final private Channel channel;
 	final private SecKrediKarti secKrediKarti;
 	
-	private SecKrediKartiStpV(Channel channel, WebDriver driver) {
+	public SecKrediKartiStpV(Channel channel, WebDriver driver) {
 		this.driver = driver;
 		this.channel = channel;
 		this.secKrediKarti = SecKrediKarti.getNew(channel, driver);
-	}
-	
-	public static SecKrediKartiStpV getNew(Channel channel, WebDriver driver) {
-		return (new SecKrediKartiStpV(channel, driver));
 	}
 	
 	@Step (

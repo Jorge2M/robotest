@@ -118,14 +118,16 @@ public class Loyalty {
         DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
         dCtxPago.setFTCkout(FTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
-        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, driver); 
+        
+        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
+        pagoNavigationsStpV.testFromBolsaToCheckoutMetPago(); 
 
         //Informamos datos varios necesarios para el proceso de pagos de modo que se pruebe el pago StoreCredit
         dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
         dCtxPago.getFTCkout().validaPagos = true;
         Pago pagoVISA = dCtxSh.pais.getPago("VISA");
         dCtxPago.getDataPedido().setPago(pagoVISA);
-        PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, driver);
+        pagoNavigationsStpV.checkPasarelaPago();
         
         //Validación en Manto de los Pedidos (si existen)
     	List<CheckPedido> listChecks = Arrays.asList(

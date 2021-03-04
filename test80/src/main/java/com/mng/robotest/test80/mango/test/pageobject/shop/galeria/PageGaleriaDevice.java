@@ -161,7 +161,7 @@ public class PageGaleriaDevice extends PageGaleria {
     }
     
     @Override
-    public WebElement getImagenArticulo(WebElement articulo) {
+    public WebElement getImagenElementArticulo(WebElement articulo) {
     	By byImg = By.xpath("." + XPathImgRelativeArticle);
     	state(Clickable, byImg).wait(1).check();
     	return (articulo.findElement(byImg));
@@ -192,7 +192,7 @@ public class PageGaleriaDevice extends PageGaleria {
     }         
     
     @Override
-    public ArticuloScreen getArticuloObject(int numArticulo) {
+    public ArticuloScreen getArticuloObject(int numArticulo) throws Exception {
         WebElement artWElem = driver.findElements(By.xpath(XPathArticulo)).get(numArticulo-1);
         ArticuloScreen articulo = new ArticuloScreen();
         articulo.setReferencia(getRefArticulo(artWElem));
@@ -225,10 +225,10 @@ public class PageGaleriaDevice extends PageGaleria {
     }
     
     @Override
-    public String getCodColorArticulo(int numArticulo) {
+    public String getCodColorArticulo(int numArticulo) throws Exception {
         String xpathArticulo = "(" + XPathArticulo + ")[" + numArticulo + "]";
-        WebElement imgArticle = getImagenArticulo(driver.findElement(By.xpath(xpathArticulo)));
-        return (UtilsPageGaleria.getCodColorFromSrcImg(imgArticle.getAttribute("src")));
+        String image = getImagenArticulo(driver.findElement(By.xpath(xpathArticulo)));
+        return (UtilsPageGaleria.getCodColorFromSrcImg(image));
     }
     
     @Override
@@ -326,7 +326,7 @@ public class PageGaleriaDevice extends PageGaleria {
     }
     
     @Override
-    public ArticuloScreen selectTallaAvailableArticle(int posArticulo, int posTalla) {
+    public ArticuloScreen selectTallaAvailableArticle(int posArticulo, int posTalla) throws Exception {
         //Si no está visible la capa de tallas ejecutamos los pasos necesarios para hacer la visible 
         if (!isVisibleArticleCapaTallasUntil(posArticulo, 0/*maxSecondsToWait*/)) {
             showTallasArticulo(posArticulo);

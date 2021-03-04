@@ -3,6 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.galeria;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -26,8 +27,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataScroll;
-import com.mng.robotest.test80.mango.test.pageobject.utils.NombreYRef;
-import com.mng.robotest.test80.mango.test.pageobject.utils.NombreYRefList;
+import com.mng.robotest.test80.mango.test.pageobject.utils.IndexArticleGalery;
+import com.mng.robotest.test80.mango.test.pageobject.utils.ListIndexArticleGalery;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.LocationArticle;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV.TypeActionFav;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
@@ -55,7 +56,7 @@ public abstract class PageGaleria extends PageObjTM {
 	abstract public String getXPathLinkRelativeToArticle();
 	abstract public int getLayoutNumColumnas();
 	abstract public WebElement getArticuloConVariedadColoresAndHover(int numArticulo);
-	abstract public WebElement getImagenArticulo(WebElement articulo) throws Exception;
+	abstract public WebElement getImagenElementArticulo(WebElement articulo) throws Exception;
 	abstract public WebElement getColorArticulo(WebElement articulo, boolean selected, int numColor);
 	abstract public ArticuloScreen getArticuloObject(int numArticulo) throws Exception;
 	abstract public String getNombreArticulo(WebElement articulo);
@@ -118,8 +119,9 @@ public abstract class PageGaleria extends PageObjTM {
 	
 	final static String XPathArticuloDesktop = "//li[@id[contains(.,'product-key-id')]]";
 	
+	//TODO adaptar React (pendiente petición a Jesús Bermúdez 3-Marzo-2021)
 	final static String XPathArticuloDesktopBuscador = 
-		"//div[@class[contains(.,'product-list-item')] or @class[contains(.,'z0q8P')]]";
+		"//div[@class[contains(.,'product-list-item')] or @class[contains(.,'z0q8P')] or @class[contains(.,'_29n6N')]]";
 	//final static String XPathArticuloMobilOutlet = "//div[@class[contains(.,'product-list-item')] or @id[contains(.,'product-key-id')] or @class='product']";
 	//final static String XPathArticuloMobilOutlet = "//li[@class='product-list-item']";
 	final static String XPathArticuloDevice = "//li[@class='product']";
@@ -388,10 +390,11 @@ public abstract class PageGaleria extends PageObjTM {
 	/**
 	 * @return el nombre y referencia con color del artículo en formato "NOMBRE (REFERENCIACOLOR)"
 	 */
-	public NombreYRef getNombreYRefArticulo(WebElement articulo) {
-		String nombreArticulo = getNombreArticulo(articulo);
-		String refArticulo = getRefColorArticulo(articulo);
-		return (new NombreYRef(nombreArticulo, refArticulo));
+	public IndexArticleGalery getNombreYRefArticulo(WebElement articulo) throws Exception {
+		return (new IndexArticleGalery(
+				getNombreArticulo(articulo), 
+				getRefColorArticulo(articulo), 
+				getImagenArticulo(articulo)));
 	}
 
 	public boolean waitToHearthIconInState(WebElement hearthIcon, StateFavorito stateIcon, int maxSecondsToWait) {
@@ -415,13 +418,13 @@ public abstract class PageGaleria extends PageObjTM {
      * Busca artículos repetidos en la galería
      * @return 1er artículo repetido en la galería. Si no encuentra ninguno devuelve null
      */
-    public ArrayList<NombreYRef> searchArticleRepeatedInGallery() {
-        NombreYRefList list = getListaNombreYRefArticulos();
+    public ArrayList<IndexArticleGalery> searchArticleRepeatedInGallery() throws Exception {
+        ListIndexArticleGalery list = getListaIndexArticles();
         return (list.getArticlesRepeated());
     }
     
-    public NombreYRefList getListaNombreYRefArticulos() {
-        NombreYRefList listReturn = new NombreYRefList();
+    public ListIndexArticleGalery getListaIndexArticles() throws Exception {
+        ListIndexArticleGalery listReturn = new ListIndexArticleGalery();
         for (WebElement articulo : getListaArticulos()) {
             listReturn.add(getNombreYRefArticulo(articulo)); 
         }
@@ -702,5 +705,13 @@ public abstract class PageGaleria extends PageObjTM {
 			}
 		}
 		return false;
+	}
+	
+	public String getImagenArticulo(WebElement articulo) throws Exception {
+		WebElement imagen = getImagenElementArticulo(articulo);
+		if (imagen!=null) {
+			return imagen.getAttribute("src");
+		}
+		return "";
 	}
 }

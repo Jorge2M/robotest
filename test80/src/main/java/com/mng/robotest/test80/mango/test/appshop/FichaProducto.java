@@ -55,12 +55,12 @@ public class FichaProducto {
 		DataCtxShop dCtxSh = getCtxShForTest(españa, castellano, true, userShop.user, userShop.password);
 
 		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, driver);
-		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh, driver).build();
+		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
 		Garment articleWithColors = getterProducts.getWithManyColors().get(0);
 		SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
-		secBuscadorStpV.searchArticulo(articleWithColors);
+		secBuscadorStpV.searchArticulo(articleWithColors, dCtxSh.pais);
 
-		PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
+		PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
 		boolean isTallaUnica = pageFichaStpv.selectAnadirALaBolsaTallaPrevNoSelected();
 
 		ArticuloScreen articulo = new ArticuloScreen(articleWithColors);
@@ -70,7 +70,8 @@ public class FichaProducto {
         //Si es talla única -> Significa que lo dimos de alta en la bolsa cuando seleccionamos el click "Añadir a la bolsa"
         //-> Lo damos de baja
         if (isTallaUnica) {
-            SecBolsaStpV.clear(dCtxSh, driver);
+        	SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
+            secBolsaStpV.clear();
         }
         
         articulo = pageFichaStpv.getFicha().getArticuloObject(dCtxSh.appE);
@@ -94,12 +95,12 @@ public class FichaProducto {
     	DataCtxShop dCtxSh = getCtxShForTest(españa, castellano);
 
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
-		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh, driver).build();
+		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
         Garment articleWithTotalLook = getterProducts.getOneWithTotalLook(driver);
         SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
-        secBuscadorStpV.searchArticulo(articleWithTotalLook);
+        secBuscadorStpV.searchArticulo(articleWithTotalLook, dCtxSh.pais);
         
-        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
+        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
         if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {
             pageFichaStpV.validaExistsImgsCarruselIzqFichaOld();
             pageFichaStpV.secProductDescOld.validateAreInStateInitial(dCtxSh.appE);
@@ -174,7 +175,7 @@ public class FichaProducto {
         LocationArticle location1rstArticle = LocationArticle.getInstanceInCatalog(1);
         DataFichaArt dataArtOrigin = pageGaleriaStpV.selectArticulo(location1rstArticle, dCtxSh);
         
-        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
+        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
         if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {
             if (TypePanel.KcSafety.getListApps().contains(dCtxSh.appE)) {
                 pageFichaStpV.secProductDescOld.selectPanel(TypePanel.KcSafety);
@@ -209,7 +210,7 @@ public class FichaProducto {
         SecModalPersonalizacionStpV modalPersonalizacionStpV = SecModalPersonalizacionStpV.getNewOne(dCtxSh, driver); 
         modalPersonalizacionStpV.checkAreArticleCustomizable();
         
-        PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
+        PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
         pageFichaStpv.selectFirstTallaAvailable();
         modalPersonalizacionStpV.selectLinkPersonalizacion();
         //modalPersonalizacionStpV.startCustomization();

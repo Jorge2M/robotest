@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.DataDireccion;
@@ -12,44 +13,52 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1DktopChe
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 
 public class ModalDirecEnvioStpV {
-
+	
+	private final ModalDirecEnvio modalDirecEnvio;
+	private final WebDriver driver;
+	private final Channel channel;
+	
+	public ModalDirecEnvioStpV(Channel channel, WebDriver driver) {
+		this.modalDirecEnvio = new ModalDirecEnvio(driver);
+		this.driver = driver;
+		this.channel = channel;
+	}
+	
 	@Validation
-	public static ChecksTM validateIsOk(WebDriver driver) {
+	public ChecksTM validateIsOk() {
 		ChecksTM validations = ChecksTM.getNew();
 		int maxSeconds = 5;
 	 	validations.add(
 			"Es visible el formulario para la introducción de la \"Dirección de envío\" (lo esperamos hasta #{maxSeconds} seconds)",
-			ModalDirecEnvio.isVisibleFormUntil(maxSeconds, driver), State.Defect); 
+			modalDirecEnvio.isVisibleFormUntil(maxSeconds), State.Defect); 
 	 	validations.add(
 			"Es visible el botón \"Actualizar\"",
-			ModalDirecEnvio.isVisibleButtonActualizar(driver), State.Defect); 
+			modalDirecEnvio.isVisibleButtonActualizar(), State.Defect); 
 	 	return validations;
 	}
 
 	@Step (
 		description="Introducir los datos y pulsar \"Actualizar\"<br>#{dataDirFactura.getFormattedHTMLData()}", 
 		expected="Los datos se actualizan correctamente")
-	public static void inputDataAndActualizar(DataDireccion dataDirFactura, WebDriver driver) throws Exception {
+	public void inputDataAndActualizar(DataDireccion dataDirFactura) throws Exception {
 		int nTimes = 3;
-		ModalDirecEnvio.sendDataToInputsNTimesAndWait(dataDirFactura, nTimes, driver);
-		ModalDirecEnvio.moveToAndDoubleClickActualizar(driver);
-		checkAfterUpdateData(driver);
+		modalDirecEnvio.sendDataToInputsNTimesAndWait(dataDirFactura, nTimes);
+		modalDirecEnvio.moveToAndDoubleClickActualizar();
+		checkAfterUpdateData();
 	}
 
 	@SuppressWarnings("static-access")
 	@Validation
-	private static ChecksTM checkAfterUpdateData(WebDriver driver) {
+	private ChecksTM checkAfterUpdateData() {
 		ChecksTM validations = ChecksTM.getNew();
-		int maxSeconds = 2;
-//		validations.add(
-//			"Desaparece el modal de introducción de los datos de la dirección (lo esperamos hasta " + maxSeconds + " segundos)",
-//			ModalDirecEnvio.isInvisibleFormUntil(maxSeconds, driver), State.Defect); 
+		Page1DktopCheckout page1DktopCheckout = new Page1DktopCheckout(channel, driver);
+		int maxSeconds = 2; 
 		validations.add(
 			"Aparece un modal de alerta alertando de un posible cambio de precios (lo esperamos hasta " + maxSeconds + " segundos)",
-			Page1DktopCheckout.modalAvisoCambioPais.isVisibleUntil(maxSeconds, driver), State.Warn); 
+			page1DktopCheckout.getModalAvisoCambioPais().isVisibleUntil(maxSeconds), State.Warn); 
 		validations.add(
 			"Desaparece la capa de Loading (lo esperamos hasta " + maxSeconds + "segundos", 
-			PageCheckoutWrapper.waitUntilNoDivLoading(driver, maxSeconds), State.Warn);
+			(new PageCheckoutWrapper(channel, driver)).waitUntilNoDivLoading(maxSeconds), State.Warn);
 		return validations;
 	}
 }

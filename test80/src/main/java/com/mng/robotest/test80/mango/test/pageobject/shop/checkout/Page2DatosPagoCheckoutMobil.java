@@ -7,11 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
@@ -22,68 +22,78 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
  * PageObject asociado a la página-2 del checkout de móvil ("Datos de Pago" con los métodos de pago)
  * @author jorge.munoz
  */
-public class Page2DatosPagoCheckoutMobil {
+public class Page2DatosPagoCheckoutMobil extends PageObjTM {
 	
 	public enum StateMethod {unselected, selecting, selected}
 	enum TypeActionLinkFP {PlegarPagos, DesplegarPagos}
 	
-    public static SecTMango secTMango;
-    public static SecBillpay secBillpay;
+	private final Channel channel;
+	
+    private final SecTMango secTMango;
+    private final SecBillpay secBillpay;
     
-    static String XPathLink2DatosPago = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step2']";
-    static String XPathButtonFinalizarCompra = 
+    private final static String XPathLink2DatosPago = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step2']";
+    private final static String XPathButtonFinalizarCompra = 
     	"//button[(@id[contains(.,'complete-step2')] or @id[contains(.,'complete-iframe-step2')]) and not(@class[contains(.,' hidden')])]";
-    static String XPathRedError = "//div[@class[contains(.,'step-error')]]/p";
+    private final static String XPathRedError = "//div[@class[contains(.,'step-error')]]/p";
     
-    static String tagMetodoPago = "@TagMetodoPago";
-    static String tagMetodoPagoLowerCase = "@LowerCaseTagMetodoPago";
-    static String XPathBlockTarjetaGuardadaPagoWithTag = "//div[" + 
+    private final static String tagMetodoPago = "@TagMetodoPago";
+    private final static String tagMetodoPagoLowerCase = "@LowerCaseTagMetodoPago";
+    private final static String XPathBlockTarjetaGuardadaPagoWithTag = "//div[" + 
     	"@data-analytics-value='" + tagMetodoPago + "' or " + 
     	"@data-analytics-value='" + tagMetodoPagoLowerCase + "']";
-    static String XPathRadioTrjGuardada = "//div[@data-custom-radio-id[contains(.,'-saved')]]";
+    private final static String XPathRadioTrjGuardada = "//div[@data-custom-radio-id[contains(.,'-saved')]]";
     
     //Desconozco este XPath, de momento he puesto el de Desktop
-    static String XPathCvcTrjGuardada = "//div[@class='storedCardForm']//input[@id='cvc']"; 
+    private final static String XPathCvcTrjGuardada = "//div[@class='storedCardForm']//input[@id='cvc']"; 
     
-    static String XPathLinkSolicitarFactura = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
-    static String XPathLinkFormasPago = "//div[@class[contains(.,'payment-method')]]//span[@class[contains(.,'others-title')]]"; 
-    static String XPathLineaPagoLayoutLinea = "//div[@class[contains(.,'payment-method')] and @data-id]";
-    static String XPathLineaPagoLayoutPestanya = "//ul[@class[contains(.,'nav-tabs')]]/li[@data-toggle='tab']";
+    private final static String XPathLinkSolicitarFactura = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
+    private final static String XPathLinkFormasPago = "//div[@class[contains(.,'payment-method')]]//span[@class[contains(.,'others-title')]]"; 
+    private final static String XPathLineaPagoLayoutLinea = "//div[@class[contains(.,'payment-method')] and @data-id]";
+    private final static String XPathLineaPagoLayoutPestanya = "//ul[@class[contains(.,'nav-tabs')]]/li[@data-toggle='tab']";
     
     //secciones de pagos (que se pueden mostrar/ocultar) disponibles en países como México
-    static String XPathSectionsPagosMobil = "//*[@class[contains(.,'group-card-js')]]"; 
+    private final static String XPathSectionsPagosMobil = "//*[@class[contains(.,'group-card-js')]]"; 
     
-    static String getXPathBlockTarjetaGuardada(String metodoPago) {
+    public Page2DatosPagoCheckoutMobil(Channel channel, WebDriver driver) {
+    	super(driver);
+    	this.channel = channel;
+        this.secTMango = new SecTMango(channel, driver);
+        this.secBillpay = new SecBillpay(channel, driver);
+    }
+    
+    private String getXPathBlockTarjetaGuardada(String metodoPago) {
     	return (XPathBlockTarjetaGuardadaPagoWithTag
     			.replace(tagMetodoPago, metodoPago)
     			.replace(tagMetodoPagoLowerCase, metodoPago.toLowerCase()));
     }
     
-    static String getXPathRadioTarjetaGuardada(String metodoPago) {
+    private String getXPathRadioTarjetaGuardada(String metodoPago) {
     	String xpathMethod = getXPathBlockTarjetaGuardada(metodoPago);
     	return (xpathMethod + XPathRadioTrjGuardada);
     }
     
-    static String getXPathPago(String nombrePago) {
+    private String getXPathPago(String nombrePago) {
     	return (XPathLineaPagoLayoutLinea + "/div[@data-analytics-value='" + nombrePago.toLowerCase() + "']/..");
     }
     
-    static String getXPathRadioPago(String nombrePago) {
+    private String getXPathRadioPago(String nombrePago) {
     	if (nombrePago.contains("mercadopago")) {
-        	String methodRadioName = PageCheckoutWrapper.getMethodInputValue(nombrePago, Channel.mobile);
+    		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, driver);
+        	String methodRadioName = pageCheckoutWrapper.getMethodInputValue(nombrePago);
         	return ("//div[@data-custom-radio-id='" + methodRadioName + "']"); 
     	}
     	return (getXPathPago(nombrePago) + "//div[@data-custom-radio-id]");
     }
     
-    static String getXPathTextUnderPago(String nombrePago) {
+    private String getXPathTextUnderPago(String nombrePago) {
     	return (getXPathPago(nombrePago) + "//div[@class='variable-card-content']");
     }
 
     /**
      * @return el XPath correspondiente al link para plegar/desplegar los métodos de pago
      */
-    static String getXPathLinkFormasPagoFor(TypeActionLinkFP actionForLink) {
+    private String getXPathLinkFormasPagoFor(TypeActionLinkFP actionForLink) {
     	switch (actionForLink) {
     	case PlegarPagos:
             return XPathLinkFormasPago + "//self::*[@class[contains(.,'selected')]]";
@@ -93,46 +103,45 @@ public class Page2DatosPagoCheckoutMobil {
     	}
     }
     
-    public static boolean isPageUntil(int maxSecondsToWait, WebDriver driver) {
-        return isClickableButtonFinalizarCompraUntil(maxSecondsToWait, driver);
+    public boolean isPageUntil(int maxSecondsToWait) {
+        return isClickableButtonFinalizarCompraUntil(maxSecondsToWait);
     }
 
-	public static void clickLink2DatosPagoAndWait(WebDriver driver) {
-		click(By.xpath(XPathLink2DatosPago), driver).exec();
-		isPageUntil(2, driver);
+	public void clickLink2DatosPagoAndWait() {
+		click(By.xpath(XPathLink2DatosPago)).exec();
+		isPageUntil(2);
 	}
 
-	public static void clickLink2DatosPagoIfVisible(WebDriver driver) {
-		if (state(Visible, By.xpath(XPathLink2DatosPago), driver).check()) {
-			clickLink2DatosPagoAndWait(driver);
+	public void clickLink2DatosPagoIfVisible() {
+		if (state(Visible, By.xpath(XPathLink2DatosPago)).check()) {
+			clickLink2DatosPagoAndWait();
 		}
 	}
 
-	public static void clickButtonFinalizarCompra(WebDriver driver) throws Exception {
-		click(By.xpath(XPathButtonFinalizarCompra), driver).type(javascript).exec();
+	public void clickButtonFinalizarCompra() throws Exception {
+		click(By.xpath(XPathButtonFinalizarCompra)).type(javascript).exec();
 	}
 
-	public static boolean isClickableButtonFinalizarCompraUntil(int maxSeconds, WebDriver driver) {
-		return(state(Clickable, By.xpath(XPathButtonFinalizarCompra), driver)
-				.wait(maxSeconds).check());
+	public boolean isClickableButtonFinalizarCompraUntil(int maxSeconds) {
+		return(state(Clickable, By.xpath(XPathButtonFinalizarCompra)).wait(maxSeconds).check());
 	}
 
-    public static void waitAndClickFinalizarCompra(int maxSecondsToWait, WebDriver driver) throws Exception {
-    	isClickableButtonFinalizarCompraUntil(maxSecondsToWait, driver);
-    	clickButtonFinalizarCompra(driver);
+    public void waitAndClickFinalizarCompra(int maxSecondsToWait) throws Exception {
+    	isClickableButtonFinalizarCompraUntil(maxSecondsToWait);
+    	clickButtonFinalizarCompra();
         
         //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
-        if (isClickableButtonFinalizarCompraUntil(0, driver)) {
-        	clickButtonFinalizarCompra(driver);  
+        if (isClickableButtonFinalizarCompraUntil(0)) {
+        	clickButtonFinalizarCompra();  
         }
     }
 
-	public static boolean isMetodoPagoPresent(String nombrePago, WebDriver driver) {
+	public boolean isMetodoPagoPresent(String nombrePago) {
 		String xpathClickPago = getXPathRadioPago(nombrePago);
-		return (state(Present, By.xpath(xpathClickPago), driver).check());
+		return (state(Present, By.xpath(xpathClickPago)).check());
 	}
 
-    public static StateMethod getStateMethod(String nombrePago, WebDriver driver) {
+    public StateMethod getStateMethod(String nombrePago) {
     	String xpathRadio = getXPathRadioPago(nombrePago);
     	WebElement radio = driver.findElement(By.xpath(xpathRadio));
     	String classRadio = radio.getAttribute("class");
@@ -145,45 +154,42 @@ public class Page2DatosPagoCheckoutMobil {
     	return StateMethod.unselected;
     }
     
-    public static boolean isMethodInStateUntil(
-    		String nombrePago, StateMethod stateExpected, int maxSeconds, WebDriver driver) throws Exception {
+    public boolean isMethodInStateUntil(String nombrePago, StateMethod stateExpected, int maxSeconds) 
+    throws Exception {
     	for (int i=0; i<maxSeconds; i++) {
-    		StateMethod actualState = getStateMethod(nombrePago, driver);
+    		StateMethod actualState = getStateMethod(nombrePago);
     		if (actualState==stateExpected) {
     			return true;
     		}
     		Thread.sleep(1000);
     	}
-    	
     	return false;
     }
     
-    /**
-     * @return si el número de métodos de pago visualizados en pantalla es el correcto
-     */
-    public static boolean isNumMetodosPagoOK(Pais pais, AppEcom app, boolean isEmpl, WebDriver driver) {
+    public boolean isNumMetodosPagoOK(Pais pais, AppEcom app, boolean isEmpl) {
         int numPagosPant = driver.findElements(By.xpath(XPathLineaPagoLayoutLinea)).size();
         int numPagosPais = pais.getListPagosForTest(app, isEmpl).size();
         return (numPagosPais == numPagosPant);
     }
     
-    public static boolean isNumpagos(int numPagosExpected, WebDriver driver) {
+    public boolean isNumpagos(int numPagosExpected) {
         int numPagosPant = driver.findElements(By.xpath(XPathLineaPagoLayoutLinea)).size();
         return (numPagosPant == numPagosExpected);
     }
 
-	public static boolean isPresentMetodosPago(WebDriver driver) {
-		return (state(Present, By.xpath(XPathLineaPagoLayoutLinea), driver).check());
+	public boolean isPresentMetodosPago() {
+		return (state(Present, By.xpath(XPathLineaPagoLayoutLinea)).check());
 	}
 
-    public static void goToPageFromCheckoutIfNeeded(WebDriver driver) throws Exception {
+    public void goToPageFromCheckoutIfNeeded() throws Exception {
         int i=0;
-        while (!isPageUntil(1, driver) && i<3) {
+        while (!isPageUntil(1) && i<3) {
             i+=1;
-            if (Page1EnvioCheckoutMobil.isPageUntil(0, driver)) {
-                Page1EnvioCheckoutMobil.clickContinuarAndWaitPage2(driver);
+            Page1EnvioCheckoutMobil page1 = new Page1EnvioCheckoutMobil(driver);
+            if (page1.isPageUntil(0)) {
+                page1.clickContinuarAndWaitPage2();
             } else {
-                clickLink2DatosPagoAndWait(driver);
+                clickLink2DatosPagoAndWait();
             }
         }
     }
@@ -191,48 +197,44 @@ public class Page2DatosPagoCheckoutMobil {
     /**
      * Realizamos las acciones necesarias para forzar el click sobre un método de pago y esperamos a que desaparezcan las capas de loading
      */
-    public static void forceClickMetodoPagoAndWait(String nombrePago, Pais pais, WebDriver driver) throws Exception {
-        goToPageFromCheckoutIfNeeded(driver);
-        despliegaMetodosPago(driver);
-        moveToFirstMetodoPagoLine(driver);
-        PageCheckoutWrapper.waitUntilNoDivLoading(driver, 2);
-        clickMetodoPagoAndWait(pais, nombrePago, driver);
-        PageCheckoutWrapper.waitUntilNoDivLoading(driver, 10);
+    public void forceClickMetodoPagoAndWait(String nombrePago, Pais pais) throws Exception {
+        goToPageFromCheckoutIfNeeded();
+        despliegaMetodosPago();
+        moveToFirstMetodoPagoLine();
+        
+        PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, driver);
+        pageCheckoutWrapper.waitUntilNoDivLoading(2);
+        clickMetodoPagoAndWait(pais, nombrePago);
+        pageCheckoutWrapper.waitUntilNoDivLoading(10);
         waitForPageLoaded(driver); //For avoid StaleElementReferenceException
     }
 
-	public static void clickLinkFormasPagoFor(TypeActionLinkFP typeAction, WebDriver driver) throws Exception {
+	public void clickLinkFormasPagoFor(TypeActionLinkFP typeAction) throws Exception {
 		By formasPagosBy = By.xpath(getXPathLinkFormasPagoFor(typeAction));
-		click(formasPagosBy, driver).type(javascript).exec();
+		click(formasPagosBy).type(javascript).exec();
 	}
 
-    public static void moveToFirstMetodoPagoLine(WebDriver driver) {
+    public void moveToFirstMetodoPagoLine() {
     	moveToElement(By.xpath(XPathLineaPagoLayoutLinea), driver);
     }
     
-    /**
-     * Si no lo están, despliega los métodos de pago de la página de checkout
-     *      */
-    public static void despliegaMetodosPago(WebDriver driver) throws Exception {
-        if (areMetodosPagoPlegados(driver)) { 
-        	clickLinkFormasPagoFor(TypeActionLinkFP.DesplegarPagos, driver);
-        	metodosPagosInStateUntil(false/*plegados*/, 3/*seconds*/, driver);
+    public void despliegaMetodosPago() throws Exception {
+        if (areMetodosPagoPlegados()) { 
+        	clickLinkFormasPagoFor(TypeActionLinkFP.DesplegarPagos);
+        	metodosPagosInStateUntil(false, 3);
         }
     }
 
-	public static boolean areMetodosPagoPlegados(WebDriver driver) {
+	public boolean areMetodosPagoPlegados() {
 		String xpathOtrasFormasPagoPlegado = getXPathLinkFormasPagoFor(TypeActionLinkFP.DesplegarPagos); 
-		return (state(Visible, By.xpath(xpathOtrasFormasPagoPlegado), driver).check());
+		return (state(Visible, By.xpath(xpathOtrasFormasPagoPlegado)).check());
 	}
 
-    /**
-     * Esperamos un máximo de segundos hasta que los métodos de pago estén plegados/desplegados
-     */
-    public static void metodosPagosInStateUntil(boolean plegados, int seconds, WebDriver driver) throws Exception {
+    public void metodosPagosInStateUntil(boolean plegados, int seconds) throws Exception {
         boolean inStateOk = false;
         int i=0;
         do {
-            boolean arePlegados = areMetodosPagoPlegados(driver);
+            boolean arePlegados = areMetodosPagoPlegados();
             if (arePlegados==plegados) {
                 inStateOk = true;
                 break;
@@ -244,12 +246,12 @@ public class Page2DatosPagoCheckoutMobil {
         while (!inStateOk && i<seconds);
     }    
     
-    public static void clickMetodoPagoAndWait(Pais pais, String nombrePago, WebDriver driver) throws Exception {
-    	clickMetodoPago(nombrePago, driver);
-    	isMethodInStateUntil(nombrePago, StateMethod.selected, 1, driver);
+    public void clickMetodoPagoAndWait(Pais pais, String nombrePago) throws Exception {
+    	clickMetodoPago(nombrePago);
+    	isMethodInStateUntil(nombrePago, StateMethod.selected, 1);
     }
 
-    private static void clickMetodoPago(String nombrePago, WebDriver driver) throws Exception {
+    private void clickMetodoPago(String nombrePago) throws Exception {
         String xpathClickMetodoPago = getXPathRadioPago(nombrePago);
         moveToElement(By.xpath(xpathClickMetodoPago), driver);
         
@@ -259,24 +261,24 @@ public class Page2DatosPagoCheckoutMobil {
 
         //Si el icono sigue sin estar visible y existen secciones plegadas que pueden estar ocultándolo (como p.e. en México) buscaremos el pago en dichas secciones
         if (!driver.findElement(By.xpath(xpathClickMetodoPago)).isDisplayed()) {
-        	searchMetPagoLayoutLineaInSections(nombrePago, driver);
+        	searchMetPagoLayoutLineaInSections(nombrePago);
         }
-        click(By.xpath(xpathClickMetodoPago), driver).exec();
+        click(By.xpath(xpathClickMetodoPago)).exec();
     }
 
 	/**
 	 * Nos dice si es visible el bloque correspondiente a un determinado pago externo que aparece al seleccionar el método de pago
 	 */
 	@SuppressWarnings("static-access")
-	public static boolean isVisibleTextoBajoPagoUntil(Pago pago, Channel channel, int maxSeconds, WebDriver driver) {
+	public boolean isVisibleTextoBajoPagoUntil(Pago pago, int maxSeconds) {
 		switch (pago.getTypePago()) {
 		case TMango:
-			return (secTMango.isVisibleUntil(Channel.mobile, maxSeconds, driver));
+			return (secTMango.isVisibleUntil(maxSeconds));
 		case Billpay:
-			return (secBillpay.isVisibleUntil(Channel.mobile, maxSeconds, driver));
+			return (secBillpay.isVisibleUntil(maxSeconds));
 		default:
 			String xpathTexto = getXPathTextUnderPago(pago.getNombre(channel));
-			return (state(Visible, By.xpath(xpathTexto), driver).wait(maxSeconds).check());
+			return (state(Visible, By.xpath(xpathTexto)).wait(maxSeconds).check());
 		}
 	}
 
@@ -284,7 +286,7 @@ public class Page2DatosPagoCheckoutMobil {
      * Revisa si el método de pago no está visible. En este caso mira si existen secciones plegadas que puedan estar ocultándolo  (como p.e. en México) 
      * y las va desplegando hasta que encuentra el método de pago   
      */
-    private static void searchMetPagoLayoutLineaInSections(String nombrePago, WebDriver driver) throws Exception {
+    private void searchMetPagoLayoutLineaInSections(String nombrePago) throws Exception {
         String xpathClickMetodoPago = getXPathPago(nombrePago);
         boolean methodDisplayed = driver.findElement(By.xpath(xpathClickMetodoPago)).isDisplayed();
         if (!methodDisplayed) {
@@ -299,72 +301,73 @@ public class Page2DatosPagoCheckoutMobil {
         }
     }    
 
-	public static boolean isRedErrorVisible(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathRedError), driver).check());
+	public boolean isRedErrorVisible() {
+		return (state(Visible, By.xpath(XPathRedError)).check());
 	}
 
-	public static String getTextRedError(WebDriver driver) {
+	public String getTextRedError() {
 		return (driver.findElement(By.xpath(XPathRedError)).getText());
 	}
 
-	public static boolean isVisibleRadioTrjGuardada(String metodoPago, WebDriver driver)  {
+	public boolean isVisibleRadioTrjGuardada(String metodoPago)  {
 		String xpathRadioTrjGuardada = getXPathRadioTarjetaGuardada(metodoPago);
-		return (state(Visible, By.xpath(xpathRadioTrjGuardada), driver).check());
+		return (state(Visible, By.xpath(xpathRadioTrjGuardada)).check());
 	}
 
-	public static void clickRadioTrjGuardada(WebDriver driver) {
-		click(By.xpath(XPathRadioTrjGuardada), driver).exec();
+	public void clickRadioTrjGuardada() {
+		click(By.xpath(XPathRadioTrjGuardada)).exec();
 	}
 
-	public static void inputCvcTrjGuardadaIfVisible(String cvc, WebDriver driver) {
-		if (state(Visible, By.xpath(XPathCvcTrjGuardada), driver).check()) {
+	public void inputCvcTrjGuardadaIfVisible(String cvc) {
+		if (state(Visible, By.xpath(XPathCvcTrjGuardada)).check()) {
 			WebElement input = driver.findElement(By.xpath(XPathCvcTrjGuardada));
 			input.clear();
 			input.sendKeys(cvc);
 		}
 	}
 
-	public static void clickSolicitarFactura(WebDriver driver) {
+	public void clickSolicitarFactura() {
 		driver.findElement(By.xpath(XPathLinkSolicitarFactura)).click();
 	}
 
 	static String XPathArticleBolsa = "//div[@id[contains(.,'panelBolsa:iteradorEntrega')]]";
-	public static boolean isArticulos(WebDriver driver) {
-		return (state(Present, By.xpath(XPathArticleBolsa), driver).check());
+	public boolean isArticulos() {
+		return (state(Present, By.xpath(XPathArticleBolsa)).check());
 	}
 
-    public static void confirmarPagoFromMetodos(DataPedido dataPedido, WebDriver driver) throws Exception {
-    	clickButtonFinalizarCompra(driver);
+    public void confirmarPagoFromMetodos(DataPedido dataPedido) throws Exception {
+    	clickButtonFinalizarCompra();
     }
     
-    public static boolean isMarkedQuieroFactura(WebDriver driver) {
+    public boolean isMarkedQuieroFactura() {
         WebElement radio = driver.findElement(By.xpath(XPathLinkSolicitarFactura));
         return (
         	radio.getAttribute("checked")!=null &&
             radio.getAttribute("checked").contains("true"));
     }
     
-    static String XPathPrecioTotal = "//div[@class[contains(.,'summary-total-price')]]/p";
-    static String XPathDescuento = "//div[@class[contains(.,'summary-subtotal-price')]]/p/span[@class='price-negative']/..";
-    static String XPathDireccionEnvioText = "//p[@class='address']";
+    private final static String XPathPrecioTotal = "//div[@class[contains(.,'summary-total-price')]]/p";
+    private final static String XPathDescuento = "//div[@class[contains(.,'summary-subtotal-price')]]/p/span[@class='price-negative']/..";
+    private final static String XPathDireccionEnvioText = "//p[@class='address']";
 
-    public static void clickFinalizarCompraAndWait(int maxSecondsToWait, WebDriver driver) throws Exception {
-        clickButtonFinalizarCompra(driver);
+    public void clickFinalizarCompraAndWait(int maxSecondsToWait) throws Exception {
+        clickButtonFinalizarCompra();
         
         //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
-        if (isClickableButtonFinalizarCompraUntil(0, driver)) {
-        	clickButtonFinalizarCompra(driver);  
-        	if (isClickableButtonFinalizarCompraUntil(1, driver)) {
-        		clickButtonFinalizarCompra(driver);  
+        if (isClickableButtonFinalizarCompraUntil(0)) {
+        	clickButtonFinalizarCompra();  
+        	if (isClickableButtonFinalizarCompraUntil(1)) {
+        		clickButtonFinalizarCompra();  
         	}
         }
         
         PageRedirectPasarelaLoading.isPageNotVisibleUntil(maxSecondsToWait, driver);
     }
     
-    public static String getPrecioTotalFromResumen(WebDriver driver) throws Exception {
+    public String getPrecioTotalFromResumen() throws Exception {
         String precioTotal = "";
-        precioTotal = PageCheckoutWrapper.formateaPrecioTotal(XPathPrecioTotal, driver);
+        PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, driver);
+        precioTotal = pageCheckoutWrapper.formateaPrecioTotal(XPathPrecioTotal);
 //        if (precioTotal.indexOf("0")==0) {
 //            //Si el total es 0 podríamos estar en el caso de saldo en cuenta (el importe total = importe del descuento)
 //            precioTotal = PageCheckoutWrapper.formateaPrecioTotal(XPathDescuento, driver);
@@ -373,19 +376,20 @@ public class Page2DatosPagoCheckoutMobil {
         return (ImporteScreen.normalizeImportFromScreen(precioTotal));
     }
     
-    public static String getPrecioTotalSinSaldoEnCuenta(WebDriver driver) throws Exception {
+    public String getPrecioTotalSinSaldoEnCuenta() throws Exception {
         String precioTotal = "";
-        precioTotal = PageCheckoutWrapper.formateaPrecioTotal(XPathPrecioTotal, driver);
+        PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, driver);
+        precioTotal = pageCheckoutWrapper.formateaPrecioTotal(XPathPrecioTotal);
         if (precioTotal.indexOf("0")==0) {
             //Si el total es 0 podríamos estar en el caso de saldo en cuenta (el importe total = importe del descuento)
-            precioTotal = PageCheckoutWrapper.formateaPrecioTotal(XPathDescuento, driver);
+            precioTotal = pageCheckoutWrapper.formateaPrecioTotal(XPathDescuento);
         }
         
         return (ImporteScreen.normalizeImportFromScreen(precioTotal));
     }
 
-	public static String getTextDireccionEnvioCompleta(WebDriver driver) {
-		if (state(Present, By.xpath(XPathDireccionEnvioText), driver).check()) {
+	public String getTextDireccionEnvioCompleta() {
+		if (state(Present, By.xpath(XPathDireccionEnvioText)).check()) {
 			return (driver.findElement(By.xpath(XPathDireccionEnvioText)).getText());
 		}
 		return "";

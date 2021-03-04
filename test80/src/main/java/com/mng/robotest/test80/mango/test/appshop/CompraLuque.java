@@ -57,8 +57,9 @@ public class CompraLuque {
         
         //Access and add articles
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
-        DataBag dataBag = new DataBag(); 
-        SecBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag, dCtxSh, driver);
+        DataBag dataBag = new DataBag();
+    	SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
+        secBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag);
         
         //Modify Postal Code
         pais.setCodpos(getCodPostal(pais));
@@ -75,12 +76,14 @@ public class CompraLuque {
         DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
         dCtxPago.setFTCkout(fTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
-        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, driver);
+        
+        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
+        pagoNavigationsStpV.testFromBolsaToCheckoutMetPago();
         
         //Payment
         Pago pagoVISA = dCtxSh.pais.getPago("VISA");
         dCtxPago.getDataPedido().setPago(pagoVISA);
-        PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, driver);
+        pagoNavigationsStpV.checkPasarelaPago();
     }
     
 	private DataCtxShop getCtxShForTest(Pais pais, IdiomaPais idioma) throws Exception {

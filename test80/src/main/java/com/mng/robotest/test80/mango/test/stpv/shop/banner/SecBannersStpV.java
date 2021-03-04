@@ -12,6 +12,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
 import com.mng.robotest.test80.mango.test.pageobject.shop.AllPages;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.DataBanner;
@@ -43,7 +44,7 @@ public class SecBannersStpV {
 		int sizeListBanners = managerBannersScreen.getListDataBanners().size();
 		for (int posBanner=1; posBanner<=sizeListBanners && posBanner<=maximoBanners; posBanner++) {
 			boolean makeValidations = true;
-			seleccionarBanner(posBanner, makeValidations, dCtxSh.appE, dCtxSh.channel);
+			seleccionarBanner(posBanner, makeValidations, dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
 			driver.get(urlPagPrincipal);
 			SeleniumUtils.waitForPageLoaded(driver);
 			managerBannersScreen.reloadBanners(driver); //For avoid StaleElement Exception
@@ -51,10 +52,10 @@ public class SecBannersStpV {
 		}
 	}
     
-    public void seleccionarBanner(int posBanner, boolean validaciones, AppEcom app, Channel channel) 
+    public void seleccionarBanner(int posBanner, boolean validaciones, AppEcom app, Channel channel, Pais pais) 
     throws Exception {
         DataBanner dataBanner = this.managerBannersScreen.getBanner(posBanner);
-        seleccionarBanner(dataBanner, validaciones, app, channel);
+        seleccionarBanner(dataBanner, validaciones, app, channel, pais);
     }
     
     @Step (
@@ -64,7 +65,7 @@ public class SecBannersStpV {
             	"<b>imagen</b>: #{dataBanner.getSrcImage()}<br>" + 
                 "<b>texto</b>: #{dataBanner.getText()}",
         expected="Aparece una página correcta (con banners o artículos)")
-    public void seleccionarBanner(DataBanner dataBanner, boolean validaciones, AppEcom app, Channel channel) 
+    public void seleccionarBanner(DataBanner dataBanner, boolean validaciones, AppEcom app, Channel channel, Pais pais) 
     throws Exception {
         String urlPagPrincipal = driver.getCurrentUrl();
         URI uriPagPrincipal = new URI(urlPagPrincipal);
@@ -77,7 +78,7 @@ public class SecBannersStpV {
             validacionesGeneralesBanner(urlPagPrincipal, uriPagPrincipal, elementosPagPrincipal);
             switch (dataBanner.getDestinoType()) {
             case Ficha:
-            	PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel);
+            	PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel, pais);
             	pageFichaStpV.validateIsFichaCualquierArticulo();
                 break;
             default:                

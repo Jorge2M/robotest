@@ -94,7 +94,8 @@ public class Favoritos implements Serializable {
 		DataBag dataBolsa = new DataBag();
 
 		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
-		SecBolsaStpV.clear(dCtxSh, driver);
+    	SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
+		secBolsaStpV.clear();
 
 		PageFavoritosStpV pageFavoritosStpV = PageFavoritosStpV.getNew(driver);
 		pageFavoritosStpV.clearAll(dataFavoritos, dCtxSh);
@@ -112,9 +113,9 @@ public class Favoritos implements Serializable {
 
 		secMenusStpV.getMenusUser().selectFavoritos(dataFavoritos);
 		ArticuloScreen artToPlay = dataFavoritos.getArticulo(0);
-		pageFavoritosStpV.addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel);
+		pageFavoritosStpV.addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel, dCtxSh.appE, dCtxSh.pais);
 		if (dCtxSh.channel.isDevice()) {
-			SecBolsaStpV.clickAspaForCloseMobil(driver);
+			secBolsaStpV.clickAspaForCloseMobil();
 			pageFavoritosStpV.validaIsPageOK(dataFavoritos);
 		}
 
@@ -138,7 +139,9 @@ public class Favoritos implements Serializable {
 		//TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
 		//TestAB.activateTestABfiltrosMobil(1, dCtxSh, getDriver().driver); //!!!!!
 		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, driver);
-		SecBolsaStpV.clear(dCtxSh, driver);
+		
+		SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
+		secBolsaStpV.clear();
 
 		PageFavoritosStpV pageFavoritosStpV = PageFavoritosStpV.getNew(driver);
 		pageFavoritosStpV.clearAll(dataFavoritos, dCtxSh);
@@ -151,7 +154,7 @@ public class Favoritos implements Serializable {
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		pageGaleriaStpV.selectArticulo(article1, dCtxSh);
 
-		PageFichaArtStpV pageFichaArtStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
+		PageFichaArtStpV pageFichaArtStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
 		pageFichaArtStpv.selectAnadirAFavoritos(dataFavoritos);
 
 		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
@@ -159,7 +162,8 @@ public class Favoritos implements Serializable {
 		dCtxSh.passwordUser = userShop.password;
 		AccesoStpV.identificacionEnMango(dCtxSh, driver);
 		//TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-		SecBolsaStpV.clear(dCtxSh, driver);
+		
+		secBolsaStpV.clear();
 		secMenusStpV.getMenusUser().selectFavoritos(dataFavoritos);
 
 		// Cuando la funcionalidad de "Share Favorites" suba a producción, este if debería eliminarse
@@ -171,7 +175,10 @@ public class Favoritos implements Serializable {
 
 		ArticuloScreen artToPlay = dataFavoritos.getArticulo(0);
 		pageFavoritosStpV.clickArticuloImg(artToPlay);
-		pageFavoritosStpV.getModalFichaFavoritosStpV().addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel, dCtxSh.appE);
+		pageFavoritosStpV
+			.getModalFichaFavoritosStpV()
+			.addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel, dCtxSh.appE, dCtxSh.pais);
+		
 		if (dCtxSh.channel.isDevice()) {
 			pageFavoritosStpV.validaIsPageOK(dataFavoritos);
 		} else {

@@ -4,53 +4,50 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 
 
 public class ModalDirecEnvio extends ModalDireccion {
 
-	static String XPathFormModal = "//form[@class[contains(.,'customFormIdENVIO')]]";
-	static String XPathButtonUpdate = XPathFormModal + "//div[@class[contains(.,'updateButton')]]/*[@class[contains(.,'modalConfirmar')]]";
+	private final static String XPathFormModal = "//form[@class[contains(.,'customFormIdENVIO')]]";
+	private final static String XPathButtonUpdate = XPathFormModal + "//div[@class[contains(.,'updateButton')]]/*[@class[contains(.,'modalConfirmar')]]";
+	
+	public ModalDirecEnvio(WebDriver driver) {
+		super(driver);
+	}
 
-	public static void sendDataToInputsNTimesAndWait(DataDireccion dataToSend, int nTimes, WebDriver driver) throws Exception {
-		sendDataToInputsNTimes(dataToSend, nTimes, XPathFormModal, driver);
+	public void sendDataToInputsNTimesAndWait(DataDireccion dataToSend, int nTimes) throws Exception {
+		sendDataToInputsNTimes(dataToSend, nTimes, XPathFormModal);
 		waitForPageLoaded(driver);
 	}
 
-	public static void sendDataToInputs(DataDireccion dataToSend, WebDriver driver) throws Exception {
-		sendDataToInputs(dataToSend, XPathFormModal, driver);
+	public void sendDataToInputs(DataDireccion dataToSend) throws Exception {
+		sendDataToInputs(dataToSend, XPathFormModal);
 	}
 
-	public static void selectPoblacion(String poblacion, WebDriver driver) throws Exception {
-		selectPoblacion(poblacion, XPathFormModal, driver);
+	public void selectPoblacion(String poblacion) throws Exception {
+		selectPoblacion(poblacion, XPathFormModal);
 	}
 
-	public static void selectProvincia(String provincia, WebDriver driver) {
-		selectProvincia(provincia, XPathFormModal, driver);
+	public void selectProvincia(String provincia) {
+		selectProvincia(provincia, XPathFormModal);
 	} 
 
-	public static boolean isVisibleFormUntil(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(XPathFormModal), driver)
-				.wait(maxSeconds).check());
+	public boolean isVisibleFormUntil(int maxSeconds) {
+		return (state(Visible, By.xpath(XPathFormModal)).wait(maxSeconds).check());
 	}
 
-//	public static boolean isInvisibleFormUntil(int maxSeconds, WebDriver driver) {
-//		return (state(Invisible, By.xpath(XPathFormModal), driver)
-//				.wait(maxSeconds).check());
-//	}
-
-	public static boolean isVisibleButtonActualizar(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathButtonUpdate), driver).check());
+	public boolean isVisibleButtonActualizar() {
+		return (state(Visible, By.xpath(XPathButtonUpdate)).check());
 	}
 
-	public static void moveToAndDoubleClickActualizar(WebDriver driver) {
+	public void moveToAndDoubleClickActualizar() {
 		moveToElement(By.xpath(XPathButtonUpdate), driver);
 		waitForPageLoaded(driver);
-		click(By.xpath(XPathButtonUpdate), driver).exec();
+		click(By.xpath(XPathButtonUpdate)).exec();
 
 		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
-		if (isVisibleButtonActualizar(driver)) {
-			click(By.xpath(XPathButtonUpdate), driver).exec();
+		if (isVisibleButtonActualizar()) {
+			click(By.xpath(XPathButtonUpdate)).exec();
 		}
 	}
 }

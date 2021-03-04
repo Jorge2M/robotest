@@ -8,6 +8,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageErrorBusqueda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
@@ -35,11 +36,10 @@ public class SecBuscadorStpV {
 	@Step (
 		description="Buscar el artículo con id #{product.getGarmentId()} y color:#{product.getArticleWithMoreStock().getColorLabel()})", 
 		expected="Aparece la ficha del producto")
-	public void searchArticulo(Garment product) 
-	throws Exception {
+	public void searchArticulo(Garment product, Pais pais) throws Exception {
 		ArticuloNavigations.buscarArticulo(product.getArticleWithMoreStock(), channel, app, driver);
 		SeleniumUtils.waitForPageLoaded(driver);  
-		PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel);
+		PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel, pais);
 		pageFichaStpV.validateIsFichaAccordingTypeProduct(product);
 	}
 

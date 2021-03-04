@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
-import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.d3d.PageD3DJPTestSelectOptionStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.d3d.PageD3DLoginStpV;
 
@@ -19,16 +18,16 @@ public class PagoTarjetaIntegrada extends PagoStpV {
     @Override
     public void testPagoFromCheckout(boolean execPay) throws Exception {
         DataPedido dataPedido = this.dCtxPago.getDataPedido();
-        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, driver);
+        pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
         
         if (execPay) {
             dataPedido.setCodtipopago("U");
         	String metodoPago = dCtxPago.getDataPedido().getPago().getNombre();
             if (dCtxPago.getFTCkout().trjGuardada && 
-            	PageCheckoutWrapperStpV.isTarjetaGuardadaAvailable(metodoPago, dCtxSh.channel, driver)) {
-            	PageCheckoutWrapperStpV.selectTrjGuardadaAndConfirmPago(dCtxPago, "737", dCtxSh.channel, driver);
+            	pageCheckoutWrapperStpV.isTarjetaGuardadaAvailable(metodoPago)) {
+            	pageCheckoutWrapperStpV.selectTrjGuardadaAndConfirmPago(dCtxPago, "737");
             } else {
-            	PageCheckoutWrapperStpV.inputDataTrjAndConfirmPago(dCtxPago, dCtxSh.channel, driver);
+            	pageCheckoutWrapperStpV.inputDataTrjAndConfirmPago(dCtxPago);
             }
             switch (dataPedido.getPago().getTipotarjEnum()) {
             case VISAD3D:

@@ -73,8 +73,25 @@ public class UtilsTestMango {
     	return (text.contains(setenta));
     }
     
-	public static String getReferenciaFromHref(String hrefArticulo) {
+    public static String getReferenciaFromHref(String hrefArticulo) {
+    	String referencia = getReferenciaFromHref_type1(hrefArticulo);
+    	if ("".compareTo(referencia)!=0) {
+    		return referencia;
+    	}
+    	return getReferenciaFromHref_type2(hrefArticulo);
+    }
+    
+	private static String getReferenciaFromHref_type1(String hrefArticulo) {
         Pattern pattern = Pattern.compile("(\\d+).html");
+        Matcher matcher = pattern.matcher(hrefArticulo);
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+        return "";
+	}
+	
+	private static String getReferenciaFromHref_type2(String hrefArticulo) {
+        Pattern pattern = Pattern.compile("\\?producto=(\\d+)\\&");
         Matcher matcher = pattern.matcher(hrefArticulo);
         if (matcher.find()) {
             return matcher.group(1);
@@ -112,7 +129,8 @@ public class UtilsTestMango {
     		}
     	}
     	
-    	GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh, driver).build();
+    	
+    	GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
     	listProducts = getterProducts.getWithStock();
         if (dCtxSh.vale!=null) {
         	for (Garment product : listProducts) {

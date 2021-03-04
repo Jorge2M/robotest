@@ -34,7 +34,7 @@ public class PageRegistroDirec {
     
     public static void sendDataAccordingCountryToInputs(
     		Map<String,String> dataRegistro, Pais pais, Channel channel, WebDriver driver) throws Exception {
-        dataRegistro.putAll(Page2IdentCheckout.inputDataPorDefectoSegunPais(pais, dataRegistro.get("cfEmail"), false, false, channel, driver));
+        dataRegistro.putAll(new Page2IdentCheckout(driver).inputDataPorDefectoSegunPais(pais, dataRegistro.get("cfEmail"), false, false, channel));
     }
     
     public static void sendDataToInputs(ListDataRegistro dataToSend, WebDriver driver, int repeat) throws Exception {

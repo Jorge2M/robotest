@@ -129,7 +129,8 @@ public class Reembolsos {
         float saldoCtaIni = PageReembolsos.getImporteStoreCredit(driver);
         
         DataBag dataBag = new DataBag(); 
-        SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, driver);
+        SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
+        secBolsaStpV.altaArticlosConColores(1, dataBag);
         
         //Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
         FlagsTestCkout FTCkout = new FlagsTestCkout();
@@ -143,7 +144,9 @@ public class Reembolsos {
         DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
         dCtxPago.setFTCkout(FTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
-        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, driver); 
+        
+        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
+        pagoNavigationsStpV.testFromBolsaToCheckoutMetPago(); 
         
         //Informamos datos varios necesarios para el proceso de pagos de modo que se pruebe el pago StoreCredit
         dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
@@ -152,7 +155,7 @@ public class Reembolsos {
         dCtxPago.getFTCkout().validaPagos = true;
         Pago pagoStoreCredit = dCtxSh.pais.getPago("STORECREDIT");
         dCtxPago.getDataPedido().setPago(pagoStoreCredit);
-        PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, driver);
+        pagoNavigationsStpV.checkPasarelaPago();
         
         if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
 	        //Volvemos a la portada (Seleccionamos el link "Seguir de shopping" o el icono de Mango)

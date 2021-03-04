@@ -15,6 +15,7 @@ import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
@@ -231,13 +232,20 @@ public class PageGaleriaDesktop extends PageGaleria {
     }
     
     @Override
-    public WebElement getImagenArticulo(WebElement articulo) {
+    public WebElement getImagenElementArticulo(WebElement articulo) {
+    	moveToElement(articulo, driver);
+    	By byImg;
     	if (isPresentSliderInArticle(TypeSlider.next, articulo)) {
-    		hoverSliderUntilClickable(TypeSlider.next, articulo);
-    		return (articulo.findElement(By.xpath("." + XPathImgSliderActiveRelativeArticleDesktop)));
+    		//hoverSliderUntilClickable(TypeSlider.next, articulo);
+    		byImg = By.xpath("." + XPathImgSliderActiveRelativeArticleDesktop);
     	} else {
-    		return (articulo.findElement(By.xpath("." + XPathImgRelativeArticle)));
+	    	byImg = By.xpath("." + XPathImgRelativeArticle);
     	}
+	    	
+    	if (state(State.Present, articulo).by(byImg).check()) {
+    		return (articulo.findElement(byImg));
+    	}
+    	return null;
     }
 
     @Override
@@ -679,7 +687,7 @@ public class PageGaleriaDesktop extends PageGaleria {
     
     //Equivalent to Mobil
     @Override
-    public ArticuloScreen getArticuloObject(int numArticulo) {
+    public ArticuloScreen getArticuloObject(int numArticulo) throws Exception {
         WebElement artWElem = driver.findElements(By.xpath(XPathArticulo)).get(numArticulo-1);
         moveToElement(artWElem, driver);
         ArticuloScreen articulo = new ArticuloScreen();
@@ -695,10 +703,10 @@ public class PageGaleriaDesktop extends PageGaleria {
     
     //Equivalent to Mobil
     @Override
-    public String getCodColorArticulo(int numArticulo) {
+    public String getCodColorArticulo(int numArticulo) throws Exception {
         String xpathArticulo = "(" + XPathArticulo + ")[" + numArticulo + "]";
-        WebElement imgArticle = getImagenArticulo(driver.findElement(By.xpath(xpathArticulo)));
-        return (UtilsPageGaleria.getCodColorFromSrcImg(imgArticle.getAttribute("src")));
+        String image = getImagenArticulo(driver.findElement(By.xpath(xpathArticulo)));
+        return (UtilsPageGaleria.getCodColorFromSrcImg(image));
     }
     
     //Equivalent to Mobil

@@ -6,8 +6,6 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.eps.PageEpsSimulador.TypeDelay;
-import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.eps.PageEpsSelBancoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.eps.PageEpsSimuladorStpV;
 
@@ -24,9 +22,9 @@ public class PagoEps extends PagoStpV {
     	//activateTestABforMethodEPS();
     	driver.navigate().refresh();
     	
-        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, driver);
-        PageCheckoutWrapperStpV.selectBancoEPS(dCtxSh, driver);
-        PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, driver);
+        pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
+        pageCheckoutWrapperStpV.selectBancoEPS(dCtxSh);
+        pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
         if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
         	PageEpsSimuladorStpV.validateIsPage(driver);
         	PageEpsSimuladorStpV.selectDelay(TypeDelay.OneMinutes, driver);
