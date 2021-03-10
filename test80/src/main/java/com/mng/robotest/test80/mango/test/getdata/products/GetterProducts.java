@@ -244,7 +244,9 @@ public class GetterProducts extends JaxRsClient {
 	private String getIdStockNormalized() {
 		if (app==AppEcom.votf) {
 			//Por algún motivo que no entiendo, falla "001.ES.0.false.true.v0" pero funciona "001.ES.0.false.false.v0"
-			return (productList.getStockId().replace("false.true", "false.false"));
+			return (productList.getStockId()
+						.replace("false.true", "false.false")
+						.replace("true.true", "true.false"));
 		}
 		return productList.getStockId();
 	}

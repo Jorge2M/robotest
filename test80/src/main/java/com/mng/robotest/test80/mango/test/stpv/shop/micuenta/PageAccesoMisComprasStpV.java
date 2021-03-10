@@ -35,9 +35,10 @@ public class PageAccesoMisComprasStpV {
         validations.add(
         	"Aparece la página de \"Acceso a Mis Compras\"",
         	pageAccesoMisCompras.isPage(), State.Warn);
+        int maxSeconds = 3;
         validations.add(
-        	"Aparecen el bloque \"Ya estoy registrado\"",
-        	pageAccesoMisCompras.isPresentBlock(TypeBlock.SiRegistrado), State.Warn);
+        	"Aparece el bloque \"Ya estoy registrado\" (lo esperamos hasta " + maxSeconds + "segundos)",
+        	pageAccesoMisCompras.isPresentBlock(TypeBlock.SiRegistrado, maxSeconds), State.Warn);
         validations.add(
         	"Aparece el bloque de \"No estoy registrado\"",
         	pageAccesoMisCompras.isPresentBlock(TypeBlock.NoRegistrado), State.Warn);

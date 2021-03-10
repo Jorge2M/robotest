@@ -87,8 +87,15 @@ public class SecDataProduct extends SeleniumUtils {
     
 //xpaths asociados al tema tallas
     private static final String XPathCapaAvisame = "//*[@id='bocataAvisame']";
-    private static final String XPathMsgAvisoTalla = "//p[@class[contains(.,'sugg--error')]]";
     private static final String XPathGuiaDeTallasLink = "//*[@id='productFormSizesGuide']";
+    private static final String XPathMsgAvisoTallaDevice = "//p[@class[contains(.,'sizes-notify-error')]]";
+    private static final String XPathMsgAvisoTallaDesktop = "//p[@class[contains(.,'sg-inp-sugg--error')]]";  
+    private static String getXPathMsgAvisoTalla(Channel channel) {
+    	if (channel.isDevice()) {
+    		return XPathMsgAvisoTallaDevice;
+    	}
+    	return XPathMsgAvisoTallaDesktop;
+    }
     
 //xpaths asociados a los precios
     //El class es diferente en ficha old y la new (product-price-sale vs product-sale)
@@ -239,8 +246,9 @@ public class SecDataProduct extends SeleniumUtils {
     	return (state(Visible, By.xpath(XPathCapaAvisame), driver).check());
     }
     
-    public static boolean isVisibleAvisoSeleccionTalla(WebDriver driver) {
-    	return (state(Visible, By.xpath(XPathMsgAvisoTalla), driver).check());
+    public static boolean isVisibleAvisoSeleccionTalla(Channel channel, WebDriver driver) {
+    	String xpathAviso = getXPathMsgAvisoTalla(channel);
+    	return (state(Visible, By.xpath(xpathAviso), driver).check());
     }
 
 	public static void selectGuiaDeTallasLink(WebDriver driver) {

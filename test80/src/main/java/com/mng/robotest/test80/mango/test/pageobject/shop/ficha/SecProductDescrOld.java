@@ -60,7 +60,7 @@ public class SecProductDescrOld extends PageObjTM {
         	if (channel.isDevice()) {
         		return getXPath(channel);
         	}
-        	return getXPath(channel) + "//div[@role='button']";
+        	return getXPath(channel) + "//*[@role='button']";
         }
         
         public List<AppEcom> getListApps() {

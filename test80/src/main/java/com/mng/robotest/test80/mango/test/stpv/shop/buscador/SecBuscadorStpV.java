@@ -10,7 +10,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
-import com.mng.robotest.test80.mango.test.pageobject.shop.PageErrorBusqueda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria.From;
@@ -52,11 +51,10 @@ public class SecBuscadorStpV {
 		if (categoriaExiste) { 
 			areProducts(categoriaABuscar, 3);
 		} else {
-//TODO cuando activen la versión definitiva del buscador habrá que invocar siempre a areProducts
 //			if (app!=AppEcom.outlet) {
-//				areProducts(3);
+			areProducts(3);
 //			} else {
-				appearsSearchErrorPage(categoriaABuscar, driver);
+//				appearsSearchErrorPage(categoriaABuscar, driver);
 //			}
 		}
 
@@ -83,10 +81,10 @@ public class SecBuscadorStpV {
 		return pageGaleria.isVisibleArticleUntil(1, maxSeconds);
 	}
 	
-	@Validation (
-		description="Aparece la página de error en la búsqueda con el encabezado <b>#{categoriaABuscar}</b>",
-		level=State.Warn)
-	private static boolean appearsSearchErrorPage(String categoriaABuscar, WebDriver driver) {
-		return (PageErrorBusqueda.isCabeceraResBusqueda(driver, categoriaABuscar));
-	}
+//	@Validation (
+//		description="Aparece la página de error en la búsqueda con el encabezado <b>#{categoriaABuscar}</b>",
+//		level=State.Warn)
+//	private static boolean appearsSearchErrorPage(String categoriaABuscar, WebDriver driver) {
+//		return (PageErrorBusqueda.isCabeceraResBusqueda(driver, categoriaABuscar));
+//	}
 }

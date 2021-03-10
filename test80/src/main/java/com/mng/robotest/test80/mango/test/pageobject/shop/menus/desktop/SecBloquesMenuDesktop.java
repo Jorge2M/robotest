@@ -178,10 +178,14 @@ public class SecBloquesMenuDesktop extends PageObjTM {
     	goToMenuAndCheckIsVisible(menu1rstLevel);
     	String xpathMenu = getXPathMenuSuperiorLinkVisible(menu1rstLevel);
         moveToElement(By.xpath(xpathMenu), driver);
-        click(By.xpath(xpathMenu)).exec();
-        if (!state(State.Invisible, By.xpath(xpathMenu)).wait(1).check()) {
+        boolean menuVisible;
+        int i=0;
+        do {
         	click(By.xpath(xpathMenu)).exec();
-        }
+        	menuVisible = !state(State.Invisible, By.xpath(xpathMenu)).wait(1).check();
+        	i+=1;
+        } 
+        while (menuVisible && i<5);
     }    
     
     public boolean isPresentMenuFirstLevel(Menu1rstLevel menu1rstLevel) throws Exception {

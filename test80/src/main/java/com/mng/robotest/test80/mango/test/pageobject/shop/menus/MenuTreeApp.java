@@ -28,8 +28,12 @@ public class MenuTreeApp {
     	//If doesnt exists -> creation, initialization and store in cache
     	MenuTreeApp menuTree = new MenuTreeApp(app);
     	menuTree.setInitialMenus();
-    	libraryMenusForEachApp.add(menuTree);
+    	menuTree.getLibraryMenusForEachApp().add(menuTree);
     	return menuTree;
+    }
+    
+    public List<MenuTreeApp> getLibraryMenusForEachApp() {
+    	return libraryMenusForEachApp;
     }
     
     public static Menu1rstLevel getMenuLevel1From(AppEcom app, KeyMenu1rstLevel keyMenu) {
@@ -77,7 +81,8 @@ public class MenuTreeApp {
     	addMenu1rstLevelMujerNuevo();
     	addMenus2onLevelOfMujerVestidos();
     	addMenus2onLevelOfMujerCamisas();
-    	addMenu1rstLevelHombreZapatos();
+    	addMenus2onLevelOfHombreAbrigosParkas();
+    	//addMenu1rstLevelHombreZapatos();
     }
     
     private void addMenu1rstLevelMujerNuevo() {
@@ -117,11 +122,18 @@ public class MenuTreeApp {
 	    libraryMenusFirstLevel.add(menu1rstLeveCamisas);
     }
     
-    private void addMenu1rstLevelHombreZapatos() {
-	    if (app!=AppEcom.votf) {
-	    	KeyMenu1rstLevel keyHombreZapatos = KeyMenu1rstLevel.from(LineaType.he, null, "zapatos");
-	        Menu1rstLevel menu1rstLevelZapatos  = Menu1rstLevel.from(app, keyHombreZapatos, "accesorios-zapatos", true, "*".split(","));
-	        libraryMenusFirstLevel.add(menu1rstLevelZapatos);
-	    }
+    private void addMenus2onLevelOfHombreAbrigosParkas() {
+    	KeyMenu1rstLevel keyMujerCamisas = KeyMenu1rstLevel.from(LineaType.he, null, "abrigos");
+	    Menu1rstLevel menuAbrigos  = Menu1rstLevel.from(this.app, keyMujerCamisas, "abrigos", true, "Parkas".split(","));
+	    menuAbrigos.addMenu2onLevel(Menu2onLevel.from(menuAbrigos, "parkas", "".split(",")));
+	    libraryMenusFirstLevel.add(menuAbrigos);
     }
+    
+//    private void addMenu1rstLevelHombreZapatos() {
+//	    if (app!=AppEcom.votf) {
+//	    	KeyMenu1rstLevel keyHombreZapatos = KeyMenu1rstLevel.from(LineaType.he, null, "zapatos");
+//	        Menu1rstLevel menu1rstLevelZapatos  = Menu1rstLevel.from(app, keyHombreZapatos, "accesorios-zapatos", true, "*".split(","));
+//	        libraryMenusFirstLevel.add(menu1rstLevelZapatos);
+//	    }
+//    }
 }

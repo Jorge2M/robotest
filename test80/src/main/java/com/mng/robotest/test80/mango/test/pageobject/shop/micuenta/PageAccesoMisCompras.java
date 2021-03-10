@@ -11,30 +11,24 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.footer.PageFromFooter;
 public class PageAccesoMisCompras extends PageObjTM implements PageFromFooter {
 
     public enum TypeBlock {SiRegistrado, NoRegistrado}
-    static String XPathContainerBlocks = "//div[@class[contains(.,'mypurchases')]]//div[@class='shopping-container']";
-    static String XPathLinkSiRegistrado = "//div[@id='menuRegistered']";
-    static String XPathLinkNoRegistrado = "//div[@id='menuNoRegistered']";
-    static String XPathBlockSiRegistrado = "//div[@id='loginContainer']";
-    static String XPathBlockNoRegistrado = "//div[@id='consultOrder']";
-    static String XPathInputUserBlockSi = XPathBlockSiRegistrado + "//input[@id[contains(.,'userMail')]]";
-    static String XpathInputPasswordBlockSi = XPathBlockSiRegistrado + "//input[@id[contains(.,'chkPwd')]]";
-    static String XPathInputUserBlockNo = XPathBlockNoRegistrado + "//input[@id[contains(.,'emailValueConsultOrder')]]";
-    static String XPathInputNumPedidoBlockNo = XPathBlockNoRegistrado + "//input[@id[contains(.,'orderValueConsultOrder')]]";
-    static String XPathButtonEntrarBlockSi = XPathBlockSiRegistrado + "//div[@id='buttonLogin']/input";
-    static String XPathButtonBuscarPedidoBlockNo = XPathBlockNoRegistrado + "//div[@id='buttonConsultOrder']";
+    
+    private final static String XPathContainerBlocks = "//div[@id='myPurchasesDesktop']"; //
+    private final static String XPathLinkSiRegistrado = "//button[@data-testid='0']"; //
+    private final static String XPathLinkNoRegistrado = "//button[@data-testid='1']"; //
+    private final static String XPathInputUserBlockSi = "//input[@data-testid='mngLogin.LoginForm.emil']";
+    private final static String XpathInputPasswordBlockSi = "//input[@data-testid='mngLogin.LoginForm.password']";
+    private final static String XPathButtonEntrarBlockSi = "//button[@data-testid='mngLogin.LoginForm.button']";
+    
+    private final static String XPathInputUserBlockNo = "//input[@data-testid[contains(.,'login.guest.email.input')]]";
+    private final static String XPathInputNumPedidoBlockNo = "//input[@data-testid[contains(.,'login.guest.orderId.input')]]";
+    private final static String XPathButtonBuscarPedidoBlockNo = "//button[@data-testid[contains(.,'login.guest.goToDetails')]]";
     
     
-    public static String getXPathBlock(TypeBlock typeBlock) {
-        switch (typeBlock) {
-        case SiRegistrado:
-            return XPathBlockSiRegistrado;
-        case NoRegistrado:
-        default:
-            return XPathBlockNoRegistrado;
-        }
+    public PageAccesoMisCompras(WebDriver driver) {
+    	super(driver);
     }
     
-    public static String getXPathLinkBlock(TypeBlock typeBlock) {
+    public String getXPathLinkBlock(TypeBlock typeBlock) {
         switch (typeBlock) {
         case SiRegistrado:
             return XPathLinkSiRegistrado;
@@ -46,10 +40,6 @@ public class PageAccesoMisCompras extends PageObjTM implements PageFromFooter {
     
     public static String getXPathIsPage() {
         return XPathContainerBlocks;
-    }
-    
-    public PageAccesoMisCompras(WebDriver driver) {
-    	super(driver);
     }
     
 	@Override
@@ -67,12 +57,15 @@ public class PageAccesoMisCompras extends PageObjTM implements PageFromFooter {
     }
     
     public boolean isPresentBlock(TypeBlock typeBlock) {
-        String xpathBlock = getXPathBlock(typeBlock);
-        return (state(Present, By.xpath(xpathBlock)).check());
+    	return isPresentBlock(typeBlock, 0);
+    }
+    public boolean isPresentBlock(TypeBlock typeBlock, int maxSeconds) {
+        String xpathBlock = getXPathLinkBlock(typeBlock);
+        return (state(Present, By.xpath(xpathBlock)).wait(maxSeconds).check());
     }
     
     public boolean isVisibleBlockUntil(TypeBlock typeBlock, int maxSeconds) {
-        String xpathBlock = getXPathBlock(typeBlock);
+        String xpathBlock = getXPathLinkBlock(typeBlock);
         return (state(Visible, By.xpath(xpathBlock)).wait(maxSeconds).check());
     }
     

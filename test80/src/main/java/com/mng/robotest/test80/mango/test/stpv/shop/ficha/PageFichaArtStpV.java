@@ -224,7 +224,7 @@ public class PageFichaArtStpV {
     @Validation
     public ChecksTM checkAvisoTallaUnica(boolean isTallaUnica, TypeFicha typeFichaAct) {
     	ChecksTM validations = ChecksTM.getNew();
-    	boolean isVisibleAviso = pageFicha.secDataProduct.isVisibleAvisoSeleccionTalla(driver);
+    	boolean isVisibleAviso = pageFicha.secDataProduct.isVisibleAvisoSeleccionTalla(channel, driver);
     	if (isTallaUnica || typeFichaAct==TypeFicha.New) {
 		 	validations.add(
 		 		"NO aparece un aviso indicando que hay que seleccionar la talla",

@@ -151,8 +151,7 @@ public class SecMenusDesktopStpV {
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.desktop, app, driver);
 		pageGaleriaStpV.bannerHead.validateBannerSuperiorIfExistsDesktop();
     	if (menu.isMenuLateral()) {
-    		int maxSeconds = 2;
-    		checkIsSelectedLateralMenu(menu, maxSeconds);
+    		checkIsSelectedLateralMenu(menu, 2);
     	}
     	
         if (menu instanceof Menu1rstLevel) {
@@ -464,9 +463,9 @@ public class SecMenusDesktopStpV {
     
     final static String tagUrlAcceso = "@TagUrlAcceso";
     @Step (
-    	description="Cargar la siguiente URL de redirect a <b>España / HE / Zapatos</b>:<br>" + tagUrlAcceso,
-        expected="Aparece desplegada la página de Zapatos (HE)")
-    public void checkURLRedirectZapatosHeEspanya() throws Exception {
+    	description="Cargar la siguiente URL de redirect a <b>España / HE / Abrigos / Parkas </b>:<br>" + tagUrlAcceso,
+        expected="Aparece desplegada la página de Parkas (HE)")
+    public void checkURLRedirectParkasHeEspanya() throws Exception {
         URI uri = new URI(driver.getCurrentUrl());
         String tiendaId = "he";
         if (app==AppEcom.outlet) {
@@ -475,14 +474,17 @@ public class SecMenusDesktopStpV {
         String urlAccesoCorreo = 
         	uri.getScheme() + "://" + 
         	uri.getHost() + 
-        	"/redirect.faces?op=conta&seccion=accesorios_he&tiendaid=" + 
-        	tiendaId + 
-        	"&menu_temporada=2&menu_accesorio=140";
+        	"/redirect.faces?op=conta&seccion=prendas_he.abrigos_he&menu_abrigos106=Parkas&tiendaid=" + tiendaId;
         TestMaker.getCurrentStepInExecution().replaceInDescription(tagUrlAcceso, urlAccesoCorreo);
 
         driver.navigate().to(urlAccesoCorreo);
-    	Menu1rstLevel menu1erNivel = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.he, null, "zapatos"));
-        validationsSelecMenuEspecificDesktop(menu1erNivel);
+    	Menu1rstLevel menuAbrigos = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.he, null, "abrigos"));
+    	MenuLateralDesktop submenuParkas = MenuTreeApp.getMenuLevel2From(menuAbrigos, "Parkas");
+    	if (app==AppEcom.outlet) {
+    		validationsSelecMenuEspecificDesktop(submenuParkas);
+    	} else {
+    		validationsSelecMenuEspecificDesktop(menuAbrigos);
+    	}
     }
     
     final static String tagRefArticle = "@TagRefArticle";
