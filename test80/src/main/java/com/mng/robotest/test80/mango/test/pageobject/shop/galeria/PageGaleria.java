@@ -27,7 +27,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDes
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataArticleGalery;
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataScroll;
-import com.mng.robotest.test80.mango.test.pageobject.utils.ListIndexArticleGalery;
+import com.mng.robotest.test80.mango.test.pageobject.utils.ListDataArticleGalery;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.LocationArticle;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV.TypeActionFav;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
@@ -413,7 +413,7 @@ public abstract class PageGaleria extends PageObjTM {
 	private enum AttributeArticle {Nombre, Referencia, Imagen}
 	
     public ArrayList<DataArticleGalery> searchArticleRepeatedInGallery() throws Exception {
-        ListIndexArticleGalery list = getListArticles(Arrays.asList(
+        ListDataArticleGalery list = getListArticles(Arrays.asList(
         		AttributeArticle.Nombre, 
         		AttributeArticle.Referencia));
         
@@ -428,14 +428,14 @@ public abstract class PageGaleria extends PageObjTM {
         return (list.getArticlesRepeated());
     }
     
-    public ListIndexArticleGalery getListDataArticles() throws Exception {
+    public ListDataArticleGalery getListDataArticles() throws Exception {
         return getListArticles(Arrays.asList(
         		AttributeArticle.Nombre, 
         		AttributeArticle.Referencia));
     }
     
-    private ListIndexArticleGalery getListArticles(List<AttributeArticle> attributes) throws Exception {
-        ListIndexArticleGalery listReturn = new ListIndexArticleGalery();
+    private ListDataArticleGalery getListArticles(List<AttributeArticle> attributes) throws Exception {
+        ListDataArticleGalery listReturn = new ListDataArticleGalery();
         for (WebElement articulo : getListaArticulos()) {
             listReturn.add(getDataArticulo(articulo, attributes)); 
         }

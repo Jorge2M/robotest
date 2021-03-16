@@ -48,7 +48,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenus
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataFichaArt;
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataScroll;
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataArticleGalery;
-import com.mng.robotest.test80.mango.test.pageobject.utils.ListIndexArticleGalery;
+import com.mng.robotest.test80.mango.test.pageobject.utils.ListDataArticleGalery;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
@@ -618,12 +618,12 @@ public class PageGaleriaStpV {
     @Step (
     	description="Seleccionar el link del listado a <b>#{numColumnas.name()} columnas</b>", 
         expected="Aparece un listado de artículos a #{numColumnas.name()} columnas")
-    public ListIndexArticleGalery selectListadoXColumnasDesktop(NumColumnas numColumnas, ListIndexArticleGalery listArticlesGaleriaAnt) 
+    public ListDataArticleGalery selectListadoXColumnasDesktop(NumColumnas numColumnas, ListDataArticleGalery listArticlesGaleriaAnt) 
     throws Exception {
 	    ((PageGaleriaDesktop)pageGaleria).clickLinkColumnas(numColumnas);
 	    checkIsVisibleLayoutListadoXcolumns(numColumnas);
        
-        ListIndexArticleGalery listArticlesGaleriaAct = pageGaleria.getListaIndexArticles();
+        ListDataArticleGalery listArticlesGaleriaAct = pageGaleria.getListDataArticles();
         if (listArticlesGaleriaAnt!=null) {
         	int articulosComprobar = 20;
         	checkArticlesEqualsToPreviousGalery(articulosComprobar, listArticlesGaleriaAnt, listArticlesGaleriaAct, numColumnas);
@@ -634,8 +634,8 @@ public class PageGaleriaStpV {
     
     @Validation
     private ChecksTM checkArticlesEqualsToPreviousGalery(
-    	int articulosComprobar, ListIndexArticleGalery listArticlesGaleriaAnt, 
-    	ListIndexArticleGalery listArticlesGaleriaAct, NumColumnas numColumnas) {
+    	int articulosComprobar, ListDataArticleGalery listArticlesGaleriaAnt, 
+    	ListDataArticleGalery listArticlesGaleriaAct, NumColumnas numColumnas) {
    		ChecksTM validations = ChecksTM.getNew();
    		
    		boolean articlesEquals = listArticlesGaleriaAct.isArticleListEquals(listArticlesGaleriaAnt, articulosComprobar);

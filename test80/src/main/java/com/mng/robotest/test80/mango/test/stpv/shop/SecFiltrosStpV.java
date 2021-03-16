@@ -70,7 +70,7 @@ public class SecFiltrosStpV {
 		List<String> listMenus = getListMenusStr(menusToSelect);
         TestMaker.getCurrentStepInExecution().replaceInDescription(tagLitMenusToSelect, StringUtils.join(menusToSelect, ","));
         SecFiltros secFiltros = SecFiltros.make(channel, app, driver);
-        secFiltros.selectMenu2onLevel(menusToSelect);        
+        secFiltros.selectMenu2onLevel(listMenus);        
 		SecMenuLateralMobilStpV.getNew(channel, app, driver).validaSelecMenu(menusToSelect.get(0));
     }
 	

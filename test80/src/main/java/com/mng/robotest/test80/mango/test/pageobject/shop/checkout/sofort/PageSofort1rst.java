@@ -29,14 +29,13 @@ public class PageSofort1rst extends PageObjTM {
         }
     }
     
-    public boolean isPageVisibleUntil(int maxSeconds, Channel channel) {
+    public boolean isPageVisibleUntil(int maxSeconds) {
     	String xpPathClickFollowing = getXPathClickToFollow(channel);
-    	return (state(Visible, By.xpath(xpPathClickFollowing), driver)
-    			.wait(maxSeconds).check());
+    	return (state(Visible, By.xpath(xpPathClickFollowing)).wait(maxSeconds).check());
     }
 
 	public void clickGoToSofort() {
 		String xpPathClickFollowing = getXPathClickToFollow(channel);
-		click(By.xpath(xpPathClickFollowing), driver).exec();
+		click(By.xpath(xpPathClickFollowing)).exec();
 	}
 }

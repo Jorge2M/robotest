@@ -29,6 +29,10 @@ public class SecCabeceraStpV {
 	public static SecCabeceraStpV getNew(Pais pais, Channel channel, AppEcom app, WebDriver driver) {
 		return (new SecCabeceraStpV(pais, channel, app, driver));
 	}
+	
+	public SecCabecera getSecCabecera() {
+		return secCabecera;
+	}
 
 	@Step (
 		description="Seleccionar el logo de Mango", 

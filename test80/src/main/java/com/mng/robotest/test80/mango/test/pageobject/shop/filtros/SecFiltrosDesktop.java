@@ -25,8 +25,8 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	final static String TagOrdenacion = "@TagOrden";
 	final static String TagColor = "@TagColor";
 	final static String XPathLinkOrdenWithTag = "//a[text()[contains(.,'" + TagOrdenacion + "')]]";
-	final static String XPathLinkColorWithTagOutlet1 = "//a[@aria-label[contains(.,'" + TagColor + "')]]";
-	final static String XPathLinkColorWithTagShop2 = "//label[@for[contains(.,'filtercolor')] and text()[contains(.,'" + TagColor + "')]]";
+	final static String XPathLinkColorWithTagOutlet = "//a[@aria-label[contains(.,'" + TagColor + "')]]";
+	final static String XPathLinkColorWithTagShop = "//label[@for[contains(.,'filtercolor')] and text()[contains(.,'" + TagColor + "')]]";
 	final static String XPathLinkColorWithTagTabletOutlet	 = "//label[@for[contains(.,'color_" + TagColor + "')]]";
 	
 	final PageGaleria pageGaleria;

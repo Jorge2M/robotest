@@ -158,15 +158,6 @@ public class SecMenusWrap {
         }
     }    
     
-    /**
-     * @param datagalabel_MenuSuperior: el data-ga-label asociado al menú superior
-     * @return obtiene los menús laterales de 2o nivel asociados a un menú superior de 1er nivel
-     */
-    public List<WebElement> linkMenus2oLevel(String datagalabel_MenuSuperior) {
-        String menuSupNorm = datagalabel_MenuSuperior.replace("-", ":");
-        return (driver.findElements(By.xpath("//a[@data-ga-category='filtros' and @data-ga-label[contains(.,'" + menuSupNorm + "')]]")));
-    }
-    
     public boolean canClickMenuArticles(Pais paisI, Linea linea, Sublinea sublinea) {
         if (paisI.isVentaOnline()) {
             if (sublinea==null) {

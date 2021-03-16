@@ -27,8 +27,8 @@ public class PagoSofort extends PagoStpV {
         //saltándose la página de selección del icono de sofort
         if (isPageIconoSofort) {
         	PageSofortIconosBancoStpV pageSofortIconosBancoStpV = new PageSofortIconosBancoStpV(dCtxSh.channel, driver);
-            PageSofortIconosBancoStpV.validateIsPageUntil(3, dCtxSh.channel, driver);
-            PageSofortIconosBancoStpV.clickIconoSofort(dCtxSh.channel, driver);
+            pageSofortIconosBancoStpV.validateIsPageUntil(3);
+            pageSofortIconosBancoStpV.clickIconoSofort();
         }
 
         if (execPay) {

@@ -6,8 +6,8 @@ import java.util.Set;
 import org.openqa.selenium.Cookie;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.pageobject.utils.IndexArticleGalery;
-import com.mng.robotest.test80.mango.test.pageobject.utils.ListIndexArticleGalery;
+import com.mng.robotest.test80.mango.test.pageobject.utils.DataArticleGalery;
+import com.mng.robotest.test80.mango.test.pageobject.utils.ListDataArticleGalery;
 
 
 public class NodoStatus {
@@ -16,7 +16,7 @@ public class NodoStatus {
     Set<Cookie> cookies;
     AppEcom appE;
     String sourceDataURL;
-    ListIndexArticleGalery articlesNuevo = null;
+    ListDataArticleGalery articlesNuevo = null;
     boolean tested = false;
 
     public NodoStatus() {}
@@ -49,7 +49,7 @@ public class NodoStatus {
         this.sourceDataURL = sourceDataURL;
     }
     
-    public ListIndexArticleGalery getArticlesNuevo() {
+    public ListDataArticleGalery getArticlesNuevo() {
         return this.articlesNuevo;
     }
     
@@ -61,7 +61,7 @@ public class NodoStatus {
         this.appE = appE;
     }
     
-    public void setArticlesNuevo(ListIndexArticleGalery articlesNuevo) {
+    public void setArticlesNuevo(ListDataArticleGalery articlesNuevo) {
         this.articlesNuevo = articlesNuevo;
     }
     
@@ -91,7 +91,7 @@ public class NodoStatus {
         return cookie;
     }
     
-    public IndexArticleGalery getArticleNuevoThatNotFitWith(NodoStatus nodoAnt) { 
+    public DataArticleGalery getArticleNuevoThatNotFitWith(NodoStatus nodoAnt) { 
         return (this.getArticlesNuevo().getFirstArticleThatNotFitWith(nodoAnt.getArticlesNuevo()));
     }
 }

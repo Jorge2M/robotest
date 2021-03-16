@@ -210,7 +210,7 @@ public class Compra {
             
     @SuppressWarnings("static-access")
     @Test (
-        groups={"Compra", "Canal:desktop,mobile_App:all"}, alwaysRun=true,
+        groups={"Compra", "Canal:all_App:all"}, alwaysRun=true,
         description="[Usuario no registrado] Pre-compra. Cierre/Inicio sesión correcto")
     public void COM005_Compra_noReg_emailNoExist() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();

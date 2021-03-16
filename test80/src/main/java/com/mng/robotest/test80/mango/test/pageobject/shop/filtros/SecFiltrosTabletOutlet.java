@@ -83,7 +83,9 @@ public class SecFiltrosTabletOutlet extends PageObjTM implements SecFiltros {
 	}
 	
     @Override
-    public void selectMenu2onLevel(String nameMenu) {
-    	selectFiltrosAndWaitLoad(FiltroMobil.Familia, Arrays.asList(nameMenu));
+    public void selectMenu2onLevel(List<String> listMenus) {
+    	//selectFiltrosAndWaitLoad(FiltroMobil.Familia, Arrays.asList(nameMenu));
+    	//TODO
     }
+
 }

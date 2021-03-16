@@ -118,7 +118,7 @@ public class SecMenusDesktopStpV {
      */
 	public void validaSelecMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh) throws Exception {
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-		pageGaleriaStpV.validateGaleriaAfeterSelectMenu(dCtxSh);
+		pageGaleriaStpV.validateGaleriaAfeterSelectMenu(dCtxSh.appE);
         validationsSelecMenuEspecificDesktop(menu);
        
         StdValidationFlags flagsVal = StdValidationFlags.newOne();

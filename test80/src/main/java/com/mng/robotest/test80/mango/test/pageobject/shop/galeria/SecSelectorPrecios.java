@@ -16,7 +16,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
  * @author jorge.munoz
  *
  */
-public class SecSelectorPrecios implements SecSelectorPrecios extends PageObjTM {
+public class SecSelectorPrecios extends PageObjTM {
 	
 	public enum TypeClick {left, right}
 	
@@ -40,7 +40,7 @@ public class SecSelectorPrecios implements SecSelectorPrecios extends PageObjTM 
 		By byLineaFiltro = By.xpath(XPathLineaFiltroShop);
 		if (channel==Channel.desktop) {
 			PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
-			SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(driver, pageGaleria);
+			SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(pageGaleria, driver);
 			secFiltros.showFilters();
 			boolean visible = state(Visible, byLineaFiltro).check();
 			secFiltros.hideFilters();

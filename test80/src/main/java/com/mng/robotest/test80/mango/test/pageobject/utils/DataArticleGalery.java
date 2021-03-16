@@ -44,9 +44,9 @@ public class DataArticleGalery {
         
         DataArticleGalery otherObject = (DataArticleGalery)o;
         return (
-        	this.nombre.compareTo(otherObject.getNombre())==0 &&
-            this.referencia.compareTo(otherObject.getReferencia())==0 &&
-            this.imagen.compareTo(otherObject.imagen)==0);   
+        	(this.nombre==otherObject.nombre || this.nombre.compareTo(otherObject.getNombre())==0) &&
+            (this.referencia==otherObject.referencia || this.referencia.compareTo(otherObject.getReferencia())==0) &&
+            (this.imagen==otherObject.imagen || this.imagen.compareTo(otherObject.imagen)==0));   
     }
     
     @Override

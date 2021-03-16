@@ -29,7 +29,7 @@ public interface SecFiltros {
 		case mobile:
 		case tablet:
 			if (app==AppEcom.outlet) {
-				return SecFiltrosDesktop.getInstance(app, driver);
+				return SecFiltrosDesktop.getInstance(channel, app, driver);
 			}
 		default:
 			return SecMultiFiltrosDevice.getInstance(app, driver);

@@ -18,12 +18,10 @@ public class PageSofortIconosBancoStpV {
 	
 	private final PageSofort1rst pageSofort1rst;
 	private final WebDriver driver;
-	private final Channel channel;
 	
 	public PageSofortIconosBancoStpV(Channel channel, WebDriver driver) {
 		this.pageSofort1rst = new PageSofort1rst(channel, driver);
 		this.driver = driver;
-		this.channel = channel;
 	}
 	
 	@Validation (

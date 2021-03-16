@@ -27,7 +27,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu2onLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataScroll;
-import com.mng.robotest.test80.mango.test.pageobject.utils.ListIndexArticleGalery;
+import com.mng.robotest.test80.mango.test.pageobject.utils.ListDataArticleGalery;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFiltrosStpV;
@@ -90,7 +90,7 @@ public class GaleriaProducto {
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
         if (dCtxSh.channel==Channel.desktop && dCtxSh.appE!=AppEcom.outlet) {
         	PageGaleriaDesktop pageGaleria = (PageGaleriaDesktop)PageGaleria.getNew(From.menu, Channel.desktop, dCtxSh.appE, driver);
-            ListIndexArticleGalery listArticlesGaleria2Cols = pageGaleria.getListDataArticles();
+            ListDataArticleGalery listArticlesGaleria2Cols = pageGaleria.getListDataArticles();
             listArticlesGaleria2Cols = pageGaleriaStpV.selectListadoXColumnasDesktop(NumColumnas.cuatro, listArticlesGaleria2Cols);
             pageGaleriaStpV.selectListadoXColumnasDesktop(NumColumnas.dos, listArticlesGaleria2Cols);
         }
@@ -119,7 +119,7 @@ public class GaleriaProducto {
     }
     
     @Test (
-        groups={"GaleriaProducto", "Canal:desktop,mobile_App:all"}, alwaysRun=true, 
+        groups={"GaleriaProducto", "Canal:all_App:all"}, alwaysRun=true, 
         description="[Usuario no registrado][Chrome] Acceder a galería camisas. Filtro color. Scroll")
 	public void GPO004_Navega_Galeria() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
