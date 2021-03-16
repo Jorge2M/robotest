@@ -47,17 +47,17 @@ public class SecMultiFiltrosDevice extends PageObjTM implements SecFiltros {
     
     @Override
     public void selectOrdenacion(FilterOrdenacion ordenacion) throws Exception {
-        selectFiltroAndWaitLoad(FiltroMobil.Ordenar, ordenacion.getValueForMobil(), driver);
+        selectFiltroAndWaitLoad(FiltroMobil.Ordenar, ordenacion.getValueForMobil());
     }
     
     @Override
     public void selectCollection(FilterCollection collection) {
-        selectFiltroAndWaitLoad(FiltroMobil.Coleccion, collection.getValueMobil(), driver);
+        selectFiltroAndWaitLoad(FiltroMobil.Coleccion, collection.getValueMobil());
     }
     
     @Override
     public boolean isCollectionFilterPresent() throws Exception {
-    	String xpath = FiltroMobil.Coleccion.getXPathLineaFiltroMulti();
+    	String xpath = FiltroMobil.Coleccion.getXPathLineaFiltro();
     	return (state(Present, By.xpath(xpath), driver).check());
     }
     
@@ -79,7 +79,7 @@ public class SecMultiFiltrosDevice extends PageObjTM implements SecFiltros {
      */
     @Override
     public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToFilter) {
-        selectFiltrosAndWaitLoad(FiltroMobil.Colores, Color.getListNamesFiltros(colorsToFilter), driver);
+        selectFiltrosAndWaitLoad(FiltroMobil.Colores, Color.getListNamesFiltros(colorsToFilter));
         int maxSecondsToWait = 10;
         int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(maxSecondsToWait);
         return numArticles;
@@ -87,43 +87,48 @@ public class SecMultiFiltrosDevice extends PageObjTM implements SecFiltros {
     
     @Override
     public boolean isClickableFiltroUntil(int seconds) {
-    	return (state(Clickable, By.xpath(XPathFiltrarYOrdenarButton), driver)
-    			.wait(seconds).check());
+    	return (state(Clickable, By.xpath(XPathFiltrarYOrdenarButton)).wait(seconds).check());
     }    
+    
+    @Override
+    public void selectMenu2onLevel(List<String> listMenus) {
+    	selectFiltrosAndWaitLoad(FiltroMobil.Familia, listMenus);
+    }
     
     /**
      * Selecciona un determinado filtro de la galería de móvil
      * @param valor atributo 'value' a nivel de la option del filtro (select)
      */
-    private void selectFiltroAndWaitLoad(FiltroMobil typeFiltro, String textFiltro, WebDriver driver) {
+    private void selectFiltroAndWaitLoad(FiltroMobil typeFiltro, String textFiltro) {
     	List<String> listTextFiltros = Arrays.asList(textFiltro);
-    	selectFiltrosAndWaitLoad(typeFiltro, listTextFiltros, driver);
+    	selectFiltrosAndWaitLoad(typeFiltro, listTextFiltros);
     }
     
-    private void selectFiltrosAndWaitLoad(FiltroMobil typeFiltro, List<String> listTextFiltros, WebDriver driver) {
-        goAndClickFiltroButton(driver);
+    private void selectFiltrosAndWaitLoad(FiltroMobil typeFiltro, List<String> listTextFiltros) {
+        goAndClickFiltroButton();
     	for (String textFiltro : listTextFiltros) {
-    		clickFiltroOption(typeFiltro, textFiltro, driver);
+    		clickFiltroOption(typeFiltro, textFiltro);
     	}
-        clickApplicarFiltrosButton(driver);
+        clickApplicarFiltrosButton();
         pageGaleria.isVisibleArticuloUntil(1, 2);
     }
     
-    private void clickFiltroOption(FiltroMobil typeFiltro, String textFiltro, WebDriver driver) {
-        WebElement filtroLinea = driver.findElement(By.xpath(typeFiltro.getXPathLineaFiltroMulti()));
+    private void clickFiltroOption(FiltroMobil typeFiltro, String textFiltro) {
+        WebElement filtroLinea = driver.findElement(By.xpath(typeFiltro.getXPathLineaFiltro()));
         filtroLinea.click();
         waitForPageLoaded(driver);
-        By byFiltroOption = By.xpath(".//*[text()[contains(.,'" + textFiltro + "')]]");
+        ,,,
+        By byFiltroOption = By.xpath(".//*[text()[contains(.,'" + upperCaseFirst(textFiltro) + "')]]");
         state(Clickable, byFiltroOption, driver).wait(1).check();
         filtroLinea.findElement(byFiltroOption).click();
         waitForPageLoaded(driver);
     }
     
-    private void clickApplicarFiltrosButton(WebDriver driver) {
+    private void clickApplicarFiltrosButton() {
     	click(By.xpath(XPathButtonAplicarFiltros)).exec();
     }
     
-    private void goAndClickFiltroButton(WebDriver driver) {
+    private void goAndClickFiltroButton() {
     	if (state(Visible, By.xpath(XPathFiltrarYOrdenarButton), driver).check()) {
         	moveToElement(By.xpath(XPathFiltrarYOrdenarButton), driver);
             waitMillis(500);
@@ -132,20 +137,25 @@ public class SecMultiFiltrosDevice extends PageObjTM implements SecFiltros {
             ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-50)", "");
         }
         
-        int maxSeconds = 2;
-        waitAndClickFiltroButton(maxSeconds, driver);
+        waitAndClickFiltroButton(2);
     }
     
-    private void waitAndClickFiltroButton(int maxSeconds, WebDriver driver) {
-        if (!isOpenFiltrosUntil(0, driver)) {
+    private void waitAndClickFiltroButton(int maxSeconds) {
+        if (!isOpenFiltrosUntil(0)) {
         	state(Clickable, By.xpath(XPathFiltrarYOrdenarButton), driver).wait(maxSeconds).check();
         	click(By.xpath(XPathFiltrarYOrdenarButton)).type(javascript).exec();
-            isOpenFiltrosUntil(maxSeconds, driver);
+            isOpenFiltrosUntil(maxSeconds);
         }        
     }
     
-    private boolean isOpenFiltrosUntil(int maxSeconds, WebDriver driver) {
-    	String xpathLineaOrdenar = FiltroMobil.Ordenar.getXPathLineaFiltroMulti();
+    private boolean isOpenFiltrosUntil(int maxSeconds) {
+    	String xpathLineaOrdenar = FiltroMobil.Ordenar.getXPathLineaFiltro();
     	return (state(Visible, By.xpath(xpathLineaOrdenar), driver).wait(maxSeconds).check());
+    }
+    
+    private String upperCaseFirst(String val) {
+        char[] arr = val.toCharArray();
+        arr[0] = Character.toUpperCase(arr[0]);
+        return new String(arr);
     }
 }

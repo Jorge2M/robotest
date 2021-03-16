@@ -81,7 +81,7 @@ public class MenuTreeApp {
     	addMenu1rstLevelMujerNuevo();
     	addMenus2onLevelOfMujerVestidos();
     	addMenus2onLevelOfMujerCamisas();
-    	addMenus2onLevelOfHombreAbrigosParkas();
+    	addMenus2onLevelOfHombreAbrigosAnoraks();
     	//addMenu1rstLevelHombreZapatos();
     }
     
@@ -122,10 +122,10 @@ public class MenuTreeApp {
 	    libraryMenusFirstLevel.add(menu1rstLeveCamisas);
     }
     
-    private void addMenus2onLevelOfHombreAbrigosParkas() {
+    private void addMenus2onLevelOfHombreAbrigosAnoraks() {
     	KeyMenu1rstLevel keyMujerCamisas = KeyMenu1rstLevel.from(LineaType.he, null, "abrigos");
-	    Menu1rstLevel menuAbrigos  = Menu1rstLevel.from(this.app, keyMujerCamisas, "abrigos", true, "Parkas".split(","));
-	    menuAbrigos.addMenu2onLevel(Menu2onLevel.from(menuAbrigos, "parkas", "".split(",")));
+	    Menu1rstLevel menuAbrigos  = Menu1rstLevel.from(this.app, keyMujerCamisas, "abrigos", true, "Anoraks".split(","));
+	    menuAbrigos.addMenu2onLevel(Menu2onLevel.from(menuAbrigos, "anoraks", "".split(",")));
 	    libraryMenusFirstLevel.add(menuAbrigos);
     }
     

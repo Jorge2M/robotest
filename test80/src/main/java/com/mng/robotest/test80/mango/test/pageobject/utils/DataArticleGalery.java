@@ -1,15 +1,15 @@
 package com.mng.robotest.test80.mango.test.pageobject.utils;
 
 
-public class IndexArticleGalery {
+public class DataArticleGalery {
 
     private String nombre;
     private String referencia;
     private String imagen;
     
-    public IndexArticleGalery() {}
+    public DataArticleGalery() {}
     
-    public IndexArticleGalery(String nombre, String referencia, String imagen) {
+    public DataArticleGalery(String nombre, String referencia, String imagen) {
         this.nombre = nombre;
         this.referencia = referencia;
         this.imagen = imagen;

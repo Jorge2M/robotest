@@ -49,8 +49,8 @@ public class PageGaleriaDevice extends PageGaleria {
     final static String XPathIconoUpGaleryTablet = "//div[@class='scroll-top-step']";
     final static String XPathFiltersDiv = "//div[@class='order-filters-fixed']";
     final static String TagNumPagina = "@tagNumPagina";
-    final static String XPathPaginaMobileWithTag = "//div[@id='page" + TagNumPagina + "']";
-    final static String XPathPaginaTabletWithTag = "//div[@id='page" + TagNumPagina + "Height']";
+    final static String XPathPaginaWithTag = "//div[@id='page" + TagNumPagina + "']";
+    final static String XPathPaginaTabletOutletWithTag = "//div[@id='page" + TagNumPagina + "Height']";
     final static String XPathHeaderArticles = "//h1[@class='catalog-title']";
     
     static String classProductName = 
@@ -143,13 +143,10 @@ public class PageGaleriaDevice extends PageGaleria {
     }
     
     String getXPathPagina(int pagina) {
-    	switch (channel) {
-    	case mobile:
-    		return (XPathPaginaMobileWithTag.replace(TagNumPagina, String.valueOf(pagina)));
-    	case tablet:
-    	default:
-    		return (XPathPaginaTabletWithTag.replace(TagNumPagina, String.valueOf(pagina)));
+    	if (channel==Channel.tablet && app==AppEcom.outlet ) {
+    		return (XPathPaginaTabletOutletWithTag.replace(TagNumPagina, String.valueOf(pagina)));
     	}
+    	return (XPathPaginaWithTag.replace(TagNumPagina, String.valueOf(pagina)));
     }
     
     @Override
@@ -350,13 +347,18 @@ public class PageGaleriaDevice extends PageGaleria {
 	}
     
     private List<WebElement> getListArticulosFromPagina(int numPagina) {
+    	moveToPagina(numPagina);
 	    By byArticulo = By.xpath(getXPathArticuloFromPagina(numPagina));
 	    return (driver.findElements(byArticulo));
     }
     
-    String getXPathArticuloFromPagina(int pagina) {
+    private String getXPathArticuloFromPagina(int pagina) {
     	String xpathPagina = getXPathPagina(pagina);
     	return  (xpathPagina + XPathArticulo);
+    }
+    
+    private void moveToPagina(int numPagina) {
+    	moveToElement(driver.findElement(By.xpath(getXPathPagina(numPagina))), driver);
     }
     
     private void clickHearthIconPreventingOverlapping(WebElement hearthIcon) throws Exception {

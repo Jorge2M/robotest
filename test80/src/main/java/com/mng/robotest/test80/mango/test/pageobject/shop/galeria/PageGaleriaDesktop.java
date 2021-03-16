@@ -35,7 +35,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	
 	public static SecBannerHeadGallery secBannerHead;
 	public static SecSubmenusGallery secSubmenusGallery;
-	public static SecSelectorPrecios secSelectorPrecios;
+	public static SecSelectorPreciosDesktop secSelectorPreciosDesktop;
 	public static SecCrossSelling secCrossSelling;
 	
 	private final SecColoresArticuloDesktop secColores;

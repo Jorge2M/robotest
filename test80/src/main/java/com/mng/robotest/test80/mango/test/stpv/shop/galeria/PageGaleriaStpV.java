@@ -47,7 +47,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.blo
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataFichaArt;
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataScroll;
-import com.mng.robotest.test80.mango.test.pageobject.utils.IndexArticleGalery;
+import com.mng.robotest.test80.mango.test.pageobject.utils.DataArticleGalery;
 import com.mng.robotest.test80.mango.test.pageobject.utils.ListIndexArticleGalery;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
@@ -282,7 +282,7 @@ public class PageGaleriaStpV {
     @Validation
     private ChecksTM checkNotRepeatedArticles() throws Exception {
     	ChecksTM validations = ChecksTM.getNew();
-        ArrayList<IndexArticleGalery> productsRepeated = pageGaleria.searchArticleRepeatedInGallery();
+        ArrayList<DataArticleGalery> productsRepeated = pageGaleria.searchArticleRepeatedInGallery();
         String producRepeatedWarning = "";
         if (productsRepeated!=null && productsRepeated.size()>0) {
         	producRepeatedWarning+=
@@ -641,7 +641,7 @@ public class PageGaleriaStpV {
    		boolean articlesEquals = listArticlesGaleriaAct.isArticleListEquals(listArticlesGaleriaAnt, articulosComprobar);
    		String infoWarning = "";
    		if (!articlesEquals) {
-   			IndexArticleGalery articleGaleryActualNotFit = listArticlesGaleriaAct.getFirstArticleThatNotFitWith(listArticlesGaleriaAnt);
+   			DataArticleGalery articleGaleryActualNotFit = listArticlesGaleriaAct.getFirstArticleThatNotFitWith(listArticlesGaleriaAnt);
    			infoWarning+="<br><b style=\"color:" + State.Info.getColorCss() + "\">Warning!</b>: hay productos de la galería que no cuadran con los de la galería anterior (por ejemplo <b>" + articleGaleryActualNotFit.toString() + "</b>). ";
    			infoWarning+=listArticlesGaleriaAct.getTableHTLMCompareArticlesGaleria(listArticlesGaleriaAnt);
    		}
@@ -668,7 +668,7 @@ public class PageGaleriaStpV {
     		nodoAnt.getIp() + " (" + nodoAnt.getArticlesNuevo().size() + ")",
     		nodoAct.getArticlesNuevo().size()==nodoAct.getArticlesNuevo().size(), State.Warn);
    		
-   		IndexArticleGalery articleGaleryActualNotFit = nodoAct.getArticleNuevoThatNotFitWith(nodoAnt);
+   		DataArticleGalery articleGaleryActualNotFit = nodoAct.getArticleNuevoThatNotFitWith(nodoAnt);
    		String messageWarning = "";
         if (articleGaleryActualNotFit!=null) {
         	messageWarning+="<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b>: hay productos de la galería que no cuadran con los de la galería del nodo " + nodoAnt.getIp() + " (por ejemplo <b>" + articleGaleryActualNotFit.toString() + "</b>). ";
@@ -919,14 +919,14 @@ public class PageGaleriaStpV {
     }
     
 	@Validation
-    public ChecksTM validateGaleriaAfeterSelectMenu(DataCtxShop dCtxSh) {
+    public ChecksTM validateGaleriaAfeterSelectMenu(AppEcom app) {
 		ChecksTM validations = ChecksTM.getNew();
 		int maxSecondsToWaitArticle = 3;
 		int maxSecondsToWaitIcon = 2;
 		validations.add (
 			"Como mínimo se obtiene un artículo (lo esperamos hasta " + maxSecondsToWaitArticle + " segundos)",
 			pageGaleria.isVisibleArticleUntil(1, maxSecondsToWaitArticle), State.Warn);
-		if (dCtxSh.appE==AppEcom.shop) {
+		if (app==AppEcom.shop) {
 			validations.add (
 				"El 1er artículo tiene 1 icono de favorito asociado (lo esperamos hasta " + maxSecondsToWaitIcon + " segundos)",
 				pageGaleria.isArticleWithHearthIconPresentUntil(1, maxSecondsToWaitIcon), State.Defect);

@@ -4,20 +4,24 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-/**
- * Page1: la página inicial de Sofort (la posterior a la selección del botón "Confirmar Pago")
- * @author jorge.munoz
- *
- */
-public class PageSofort1rst {
-    final static String xPathFigurasButtonDesktop = "//input[@class[contains(.,'paySubmit')]]";
-    final static String xPathIconoSofort = "//input[@name='brandName' and @type='submit']";
+public class PageSofort1rst extends PageObjTM {
+	
+	private final Channel channel;
+	
+    private final static String xPathFigurasButtonDesktop = "//input[@class[contains(.,'paySubmit')]]";
+    private final static String xPathIconoSofort = "//input[@name='brandName' and @type='submit']";
     
-    static String getXPathClickToFollow(Channel channel) {
+    public PageSofort1rst(Channel channel, WebDriver driver) {
+    	super(driver);
+    	this.channel = channel;
+    }
+    
+    private String getXPathClickToFollow(Channel channel) {
         if (channel.isDevice()) {
             return xPathIconoSofort;
         } else {
@@ -25,13 +29,13 @@ public class PageSofort1rst {
         }
     }
     
-    public static boolean isPageVisibleUntil(int maxSeconds, Channel channel, WebDriver driver) {
+    public boolean isPageVisibleUntil(int maxSeconds, Channel channel) {
     	String xpPathClickFollowing = getXPathClickToFollow(channel);
     	return (state(Visible, By.xpath(xpPathClickFollowing), driver)
     			.wait(maxSeconds).check());
     }
 
-	public static void clickGoToSofort(WebDriver driver, Channel channel) {
+	public void clickGoToSofort() {
 		String xpPathClickFollowing = getXPathClickToFollow(channel);
 		click(By.xpath(xpPathClickFollowing), driver).exec();
 	}

@@ -83,7 +83,7 @@ public class Registro implements Serializable {
 
     @SuppressWarnings("static-access")
     @Test (
-        groups={"Registro", "Canal:desktop_App:all"},
+        groups={"Registro", "Canal:desktop,mobile_App:all"},
         description="Registro con errores en la introducción de los datos")
     public void REG001_RegistroNOK() throws Exception {
     	DataCtxShop dCtxSh = getCtxShForTest();

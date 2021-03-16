@@ -34,7 +34,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.SecFiltrosStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.DataForScrollStep;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.LocationArticle;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusDesktopStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
@@ -91,7 +90,7 @@ public class GaleriaProducto {
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
         if (dCtxSh.channel==Channel.desktop && dCtxSh.appE!=AppEcom.outlet) {
         	PageGaleriaDesktop pageGaleria = (PageGaleriaDesktop)PageGaleria.getNew(From.menu, Channel.desktop, dCtxSh.appE, driver);
-            ListIndexArticleGalery listArticlesGaleria2Cols = pageGaleria.getListaIndexArticles();
+            ListIndexArticleGalery listArticlesGaleria2Cols = pageGaleria.getListDataArticles();
             listArticlesGaleria2Cols = pageGaleriaStpV.selectListadoXColumnasDesktop(NumColumnas.cuatro, listArticlesGaleria2Cols);
             pageGaleriaStpV.selectListadoXColumnasDesktop(NumColumnas.dos, listArticlesGaleria2Cols);
         }
@@ -120,7 +119,7 @@ public class GaleriaProducto {
     }
     
     @Test (
-        groups={"GaleriaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 
+        groups={"GaleriaProducto", "Canal:desktop,mobile_App:all"}, alwaysRun=true, 
         description="[Usuario no registrado][Chrome] Acceder a galería camisas. Filtro color. Scroll")
 	public void GPO004_Navega_Galeria() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
@@ -167,7 +166,7 @@ public class GaleriaProducto {
     }
     
     @Test (
-        groups={"GaleriaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 
+        groups={"GaleriaProducto", "Canal:all_App:all"}, alwaysRun=true, 
         description="[Usuario registrado] Acceder a galería. Navegación menú lateral de primer y segundo nivel. Selector de precios")
     public void GPO005_Galeria_Menu_Lateral() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
@@ -181,7 +180,7 @@ public class GaleriaProducto {
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-        if (dCtxSh.appE==AppEcom.outlet) {
+        if (dCtxSh.appE==AppEcom.outlet || dCtxSh.channel.isDevice()) {
         	secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
         } else {
         	Menu1rstLevel menuNuevo = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "New Now"));
@@ -190,17 +189,20 @@ public class GaleriaProducto {
             pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
         }
         
-        pageGaleriaStpV.getSecSelectorPreciosStpV().seleccionaIntervalo();
-        if (dCtxSh.appE!=AppEcom.outlet) {
+        if (!dCtxSh.channel.isDevice()) {
+            pageGaleriaStpV.getSecSelectorPreciosStpV().seleccionaIntervalo();
+        }
+
+        if (dCtxSh.appE!=AppEcom.outlet && !dCtxSh.channel.isDevice()) {
             pageGaleriaStpV.secCrossSellingStpV.validaIsCorrect(LineaType.she);
             pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
         }    
         
         selectMenuVestidos(secMenusStpV, dCtxSh);
         secMenusStpV.selectMenuLateral1erLevelTypeCatalog(menuCamisas, dCtxSh);
+        
         Menu2onLevel menuCamisasTops = MenuTreeApp.getMenuLevel2From(menuCamisas, "tops");
-        SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, driver);
-        secMenusDesktopStpV.selectMenuLateral2oLevel(menuCamisasTops, dCtxSh);
+        secMenusStpV.selectMenu2onLevel(menuCamisasTops, dCtxSh);
     }
     
     private void selectMenuVestidos(SecMenusWrapperStpV secMenusStpV, DataCtxShop dCtxSh) throws Exception {
@@ -213,7 +215,7 @@ public class GaleriaProducto {
     }
     
     @Test (
-        groups={"GaleriaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 
+        groups={"GaleriaProducto", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
         description=
         	"Acceder a galería y testear el slider. Testeamos secuencias de sliders en ambas direcciones y " + 
     		"finalmente las combinamos con cambios de color")

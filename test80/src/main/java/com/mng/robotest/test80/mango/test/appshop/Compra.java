@@ -25,9 +25,9 @@ import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRega
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter.FooterLink;
 import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigations;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.NavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.SecCabeceraStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checqueregalo.PageChequeRegaloInputDataStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
@@ -210,7 +210,7 @@ public class Compra {
             
     @SuppressWarnings("static-access")
     @Test (
-        groups={"Compra", "Canal:desktop_App:all"}, alwaysRun=true,
+        groups={"Compra", "Canal:desktop,mobile_App:all"}, alwaysRun=true,
         description="[Usuario no registrado] Pre-compra. Cierre/Inicio sesión correcto")
     public void COM005_Compra_noReg_emailNoExist() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
@@ -235,8 +235,8 @@ public class Compra {
             pagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded();
                     
             //Seleccionamos el logo de Mango (necesitamos acceder a una página con los links del menú superior)
-            SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver);
-            secCabeceraStpV.selecLogo();
+            NavigationsStpV.gotoPortada(dCtxSh, driver);
+            
             if (dCtxSh.appE!=AppEcom.votf) {
                 //Cerramos sesión y nos volvemos a identificar con los datos del registro
                 String usrEmail = dCtxPago.getDatosRegistro().get("cfEmail");

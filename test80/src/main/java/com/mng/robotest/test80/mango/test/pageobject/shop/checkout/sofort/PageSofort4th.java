@@ -3,54 +3,54 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-/**
- * Page4: la página de entrada usuario/password
- * @author jorge.munoz
- *
- */
-public class PageSofort4th {
+public class PageSofort4th extends PageObjTM {
 	
-    static String XPathSubmitButton = "//form//button[@class[contains(.,'primary')]]";
-    static String XPathInputUser = "//input[@id[contains(.,'LOGINNAMEUSERID')]]";
-    static String XPathInputPass = "//input[@id[contains(.,'USERPIN')] and @type='password']";
-    static String XPathFormSelCta = "//form[@action[contains(.,'select_account')]]";
-    static String XPathInputRadioCtas = "//input[@id[contains(.,'account')] and @type='radio']";
-    static String XPathInputTAN = "//input[(@id[contains(.,'BackendFormTAN')] or @id[contains(.,'BackendFormTan')]) and @type='text']";
+    private final static String XPathSubmitButton = "//form//button[@class[contains(.,'primary')]]";
+    private final static String XPathInputUser = "//input[@id[contains(.,'LOGINNAMEUSERID')]]";
+    private final static String XPathInputPass = "//input[@id[contains(.,'USERPIN')] and @type='password']";
+    private final static String XPathFormSelCta = "//form[@action[contains(.,'select_account')]]";
+    private final static String XPathInputRadioCtas = "//input[@id[contains(.,'account')] and @type='radio']";
+    private final static String XPathInputTAN = "//input[(@id[contains(.,'BackendFormTAN')] or @id[contains(.,'BackendFormTan')]) and @type='text']";
     
-    public static boolean isPage(WebDriver driver) {
+    public PageSofort4th(WebDriver driver) {
+    	super(driver);
+    }
+    
+    public boolean isPage() {
         if (driver.getTitle().toLowerCase().contains("sofort") && 
-        	state(Visible, By.xpath(XPathInputUser), driver).check()) {
+        	state(Visible, By.xpath(XPathInputUser)).check()) {
             return true;
         }
         return false;
     }
     
-    public static void inputUserPass(WebDriver driver, String user, String password) {
+    public void inputUserPass(String user, String password) {
         driver.findElement(By.xpath(XPathInputUser)).sendKeys(user);
         driver.findElement(By.xpath(XPathInputPass)).sendKeys(password);        
     }
 
-	public static void clickSubmitButton(WebDriver driver) {
+	public void clickSubmitButton() {
 		click(By.xpath(XPathSubmitButton), driver).exec();
 	}
 
-    public static boolean isVisibleFormSelCta(WebDriver driver) {
-    	return (state(Visible, By.xpath(XPathFormSelCta), driver).check());
+    public boolean isVisibleFormSelCta() {
+    	return (state(Visible, By.xpath(XPathFormSelCta)).check());
     }
     
-    public static void selectRadioCta(WebDriver driver, int posCta) {
+    public void selectRadioCta(int posCta) {
         driver.findElements(By.xpath(XPathInputRadioCtas)).get(posCta).click();
     }
     
-    public static boolean isVisibleInputTAN(WebDriver driver) {
-    	return (state(Visible, By.xpath(XPathInputTAN), driver).check());
+    public boolean isVisibleInputTAN() {
+    	return (state(Visible, By.xpath(XPathInputTAN)).check());
     }
     
-    public static void inputTAN(WebDriver driver, String TAN) {
+    public void inputTAN(String TAN) {
         driver.findElement(By.xpath(XPathInputTAN)).sendKeys(TAN);    
     }        
 }

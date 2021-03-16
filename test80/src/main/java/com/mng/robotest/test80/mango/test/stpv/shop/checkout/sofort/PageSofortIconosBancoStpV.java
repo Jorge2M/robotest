@@ -16,19 +16,30 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort.PageSo
  */
 public class PageSofortIconosBancoStpV {
 	
+	private final PageSofort1rst pageSofort1rst;
+	private final WebDriver driver;
+	private final Channel channel;
+	
+	public PageSofortIconosBancoStpV(Channel channel, WebDriver driver) {
+		this.pageSofort1rst = new PageSofort1rst(channel, driver);
+		this.driver = driver;
+		this.channel = channel;
+	}
+	
 	@Validation (
 		description="Aparece la 1a página de Sofort (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
-	public static boolean validateIsPageUntil(int maxSeconds, Channel channel, WebDriver driver) {
-		return (PageSofort1rst.isPageVisibleUntil(maxSeconds, channel, driver));
+	public boolean validateIsPageUntil(int maxSeconds) {
+		return (pageSofort1rst.isPageVisibleUntil(maxSeconds));
 	}
 	
 	@Step (
 		description="Seleccionar el link hacia la siguiente página de Sofort", 
 		expected="Aparece la página de selección del Banco")
-	public static void clickIconoSofort(Channel channel, WebDriver driver) { 
-		PageSofort1rst.clickGoToSofort(driver, channel);
-		int maxSeconds = 3;
-		PageSofort2onStpV.validaIsPageUntil(maxSeconds, driver);
+	public void clickIconoSofort() { 
+		pageSofort1rst.clickGoToSofort();
+		
+		PageSofort2onStpV pageSofort2onStpV = new PageSofort2onStpV(driver); 
+		pageSofort2onStpV.validaIsPageUntil(3);
 	}
 }

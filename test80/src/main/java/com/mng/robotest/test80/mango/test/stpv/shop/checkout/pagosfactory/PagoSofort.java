@@ -21,22 +21,26 @@ public class PagoSofort extends PagoStpV {
     public void testPagoFromCheckout(boolean execPay) throws Exception {
         pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
         pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
-        boolean isPageIconoSofort = PageSofort1rst.isPageVisibleUntil(3, dCtxSh.channel, driver);
+        boolean isPageIconoSofort = new PageSofort1rst(dCtxSh.channel, driver).isPageVisibleUntil(3);
         
         //En ocasiones se salta desde la página de Checkout-Mango hasta la página de selección del banco
         //saltándose la página de selección del icono de sofort
         if (isPageIconoSofort) {
-        	int maxSeconds = 3;
-            PageSofortIconosBancoStpV.validateIsPageUntil(maxSeconds, dCtxSh.channel, driver);
+        	PageSofortIconosBancoStpV pageSofortIconosBancoStpV = new PageSofortIconosBancoStpV(dCtxSh.channel, driver);
+            PageSofortIconosBancoStpV.validateIsPageUntil(3, dCtxSh.channel, driver);
             PageSofortIconosBancoStpV.clickIconoSofort(dCtxSh.channel, driver);
         }
 
         if (execPay) {
             Pago pago = this.dCtxPago.getDataPedido().getPago();
-            PageSofort2onStpV.selectPaisYBanco(pago.getPaissofort(), pago.getBankcode(), driver);
-            PageSofort4thStpV.inputCredencialesUsr(pago.getUsrsofort(), pago.getPasssofort(), driver);            
-            PageSofort4thStpV.select1rstCtaAndAccept(driver);
-            PageSofort4thStpV.inputTANandAccept(pago.getTansofort(), driver);
+            PageSofort2onStpV pageSofort2onStpV = new PageSofort2onStpV(driver);
+            pageSofort2onStpV.acceptCookies();
+            pageSofort2onStpV.selectPaisYBanco(pago.getPaissofort(), pago.getBankcode());
+            
+            PageSofort4thStpV pageSofort4thStpV = new PageSofort4thStpV(driver);
+            pageSofort4thStpV.inputCredencialesUsr(pago.getUsrsofort(), pago.getPasssofort());            
+            pageSofort4thStpV.select1rstCtaAndAccept();
+            pageSofort4thStpV.inputTANandAccept(pago.getTansofort());
             this.dCtxPago.getDataPedido().setCodtipopago("F");
         }
     }    

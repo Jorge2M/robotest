@@ -111,7 +111,7 @@ public class SecMenuLateralDevice extends PageObjTM {
 		String xpathMenu = getXPathMenuByTypeLocator(typeLocator, menu1rstLevel);
 		click(By.xpath(xpathMenu))
 			.state(Visible)
-			.type(javascript)
+			//.type(javascript)
 			.waitLoadPage(0).exec();
 	}
 

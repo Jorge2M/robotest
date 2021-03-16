@@ -45,7 +45,7 @@ public abstract class SecCabecera extends PageObjTM {
 		
 		switch (channel) {
 		case tablet:
-			return SecCabeceraShop_Tablet.getNew(driver);
+			//return SecCabeceraShop_Tablet.getNew(driver);
 		case desktop:
 		case mobile:
 		default:
@@ -73,11 +73,15 @@ public abstract class SecCabecera extends PageObjTM {
 	}
 	
 	public boolean clickLogoMango() {
-		if (state(Present, By.xpath(XPathLinkLogoMango)).wait(2).check()) {
+		if (isPresentLogoMango(2)) {
 			click(By.xpath(XPathLinkLogoMango)).exec();
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean isPresentLogoMango(int maxSeconds) {
+		return state(Present, By.xpath(XPathLinkLogoMango)).wait(maxSeconds).check();
 	}
 
 	public void hoverLogoMango() throws Exception {

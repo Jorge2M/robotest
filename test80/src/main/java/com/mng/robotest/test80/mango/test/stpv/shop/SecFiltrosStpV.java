@@ -1,22 +1,23 @@
 package com.mng.robotest.test80.mango.test.stpv.shop;
 
-import java.util.EnumSet;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Color;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.SecFiltros;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDesktop;
+import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenuLateralMobilStpV;
 
 public class SecFiltrosStpV {
 
@@ -25,29 +26,14 @@ public class SecFiltrosStpV {
 		description="Seleccionar los colores <b>" + tagLitColorsToSelect + "</b>", 
         expected="Aparece la galería de imágenes",
         saveNettraffic=SaveWhen.Always)
-    public static int selectFiltroColoresStep (
-    		AppEcom app, Channel channel, boolean validaciones, String litMenu, List<Color> colorsToSelect, WebDriver driver) 
-			throws Exception {
+    public static int selectFiltroColoresStep (AppEcom app, Channel channel, boolean validaciones, String litMenu, List<Color> colorsToSelect, WebDriver driver) 
+	throws Exception {
         TestMaker.getCurrentStepInExecution().replaceInDescription(tagLitColorsToSelect, Color.getListNamesFiltros(colorsToSelect).toString());
         SecFiltros secFiltros = SecFiltros.make(channel, app, driver);
         int numArticulos1page = secFiltros.selecFiltroColoresAndReturnNumArticles(colorsToSelect);            
-                
         if (validaciones) {
         	checkAfterSelectFiltroColores(colorsToSelect, litMenu, numArticulos1page, driver);
-                
-            //Validaciones para Analytics (sólo Firefox y NetAnalysis)
-            EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
-                    Constantes.AnalyticsVal.GoogleAnalytics,
-                    Constantes.AnalyticsVal.DataLayer);
-            PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, analyticSet, driver);
         }
-        
-        //Validaciones estándar. 
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
         
         return numArticulos1page;
     }
@@ -72,5 +58,27 @@ public class SecFiltrosStpV {
 			"En pantalla aparecen >1 artículos (están apareciendo " + numArticulos1page + ")",
 			numArticulos1page>1, State.Warn);   
 	 	return validations;
+	}
+	
+	final static String tagLitMenusToSelect = "@TagLitMenusToSelect";
+	@Step (
+		description="Seleccionar los menús <b>" + tagLitMenusToSelect + "</b>", 
+        expected="Aparece la galería de artículos",
+        saveNettraffic=SaveWhen.Always)
+    public static void selectFiltroMenus(AppEcom app, Channel channel, List<MenuLateralDesktop> menusToSelect, WebDriver driver) 
+	throws Exception {
+		List<String> listMenus = getListMenusStr(menusToSelect);
+        TestMaker.getCurrentStepInExecution().replaceInDescription(tagLitMenusToSelect, StringUtils.join(menusToSelect, ","));
+        SecFiltros secFiltros = SecFiltros.make(channel, app, driver);
+        secFiltros.selectMenu2onLevel(menusToSelect);        
+		SecMenuLateralMobilStpV.getNew(channel, app, driver).validaSelecMenu(menusToSelect.get(0));
+    }
+	
+	private static List<String> getListMenusStr(List<MenuLateralDesktop> listMenus) {
+		List<String> listReturn = new ArrayList<>();
+		for (MenuLateralDesktop menu : listMenus) {
+			listReturn.add(menu.getNombre());
+		}
+		return listReturn;
 	}
 }

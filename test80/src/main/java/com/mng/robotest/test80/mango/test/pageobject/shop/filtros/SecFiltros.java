@@ -18,19 +18,20 @@ public interface SecFiltros {
     public void selectCollection(FilterCollection coleccion);
     public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception;
     public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToSelect);
+    public void selectMenu2onLevel(List<String> listMenus);
     public boolean isClickableFiltroUntil(int seconds);
     public boolean isCollectionFilterPresent() throws Exception;
     
 	public static SecFiltros make(Channel channel, AppEcom app, WebDriver driver) {
 		switch (channel) {
 		case desktop:
-			return SecFiltrosDesktop.getInstance(app, driver);
+			return SecFiltrosDesktop.getInstance(channel, app, driver);
 		case mobile:
 		case tablet:
-		default:
-			if (app==AppEcom.outlet && channel==Channel.tablet) {
-				return SecFiltrosTabletOutlet.getInstance(driver);
+			if (app==AppEcom.outlet) {
+				return SecFiltrosDesktop.getInstance(app, driver);
 			}
+		default:
 			return SecMultiFiltrosDevice.getInstance(app, driver);
 		}
 	}

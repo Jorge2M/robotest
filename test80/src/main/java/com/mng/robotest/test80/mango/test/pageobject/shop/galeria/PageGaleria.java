@@ -3,7 +3,6 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.galeria;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -26,8 +25,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterOrdenaci
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
+import com.mng.robotest.test80.mango.test.pageobject.utils.DataArticleGalery;
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataScroll;
-import com.mng.robotest.test80.mango.test.pageobject.utils.IndexArticleGalery;
 import com.mng.robotest.test80.mango.test.pageobject.utils.ListIndexArticleGalery;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.LocationArticle;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV.TypeActionFav;
@@ -104,9 +103,16 @@ public abstract class PageGaleria extends PageObjTM {
 			return (PageGaleriaDesktop.getNew(from, app, driver));
 		case mobile:
 		case tablet:
+			if (app==AppEcom.outlet) {
+				return (PageGaleriaDesktop.getNew(from, app, driver));
+			}
 		default:
 			return (PageGaleriaDevice.getNew(from, channel, app, driver));
 		}
+	}
+	
+	public Channel getChannel() {
+		return channel;
 	}
 	
 	public AppEcom getApp() {
@@ -387,16 +393,6 @@ public abstract class PageGaleria extends PageObjTM {
 		return (UtilsTestMango.getReferenciaFromHref(href));
 	}
 
-	/**
-	 * @return el nombre y referencia con color del artículo en formato "NOMBRE (REFERENCIACOLOR)"
-	 */
-	public IndexArticleGalery getNombreYRefArticulo(WebElement articulo) throws Exception {
-		return (new IndexArticleGalery(
-				getNombreArticulo(articulo), 
-				getRefColorArticulo(articulo), 
-				getImagenArticulo(articulo)));
-	}
-
 	public boolean waitToHearthIconInState(WebElement hearthIcon, StateFavorito stateIcon, int maxSecondsToWait) {
 		for (int i=0; i<maxSecondsToWait; i++) {
 			if (getStateHearthIcon(hearthIcon)==stateIcon) {
@@ -414,22 +410,56 @@ public abstract class PageGaleria extends PageObjTM {
 		hearthIcon.click();
 	}
 
-    /**
-     * Busca artículos repetidos en la galería
-     * @return 1er artículo repetido en la galería. Si no encuentra ninguno devuelve null
-     */
-    public ArrayList<IndexArticleGalery> searchArticleRepeatedInGallery() throws Exception {
-        ListIndexArticleGalery list = getListaIndexArticles();
+	private enum AttributeArticle {Nombre, Referencia, Imagen}
+	
+    public ArrayList<DataArticleGalery> searchArticleRepeatedInGallery() throws Exception {
+        ListIndexArticleGalery list = getListArticles(Arrays.asList(
+        		AttributeArticle.Nombre, 
+        		AttributeArticle.Referencia));
+        
+        if (list.getArticlesRepeated().size()>0) {
+        	//Obtener la imagen de cada artículo es muy costoso así que sólo lo hacemos en este caso
+        	list = getListArticles(Arrays.asList(
+        			AttributeArticle.Nombre, 
+        			AttributeArticle.Referencia,
+        			AttributeArticle.Imagen));
+        }
+        
         return (list.getArticlesRepeated());
     }
     
-    public ListIndexArticleGalery getListaIndexArticles() throws Exception {
+    public ListIndexArticleGalery getListDataArticles() throws Exception {
+        return getListArticles(Arrays.asList(
+        		AttributeArticle.Nombre, 
+        		AttributeArticle.Referencia));
+    }
+    
+    private ListIndexArticleGalery getListArticles(List<AttributeArticle> attributes) throws Exception {
         ListIndexArticleGalery listReturn = new ListIndexArticleGalery();
         for (WebElement articulo : getListaArticulos()) {
-            listReturn.add(getNombreYRefArticulo(articulo)); 
+            listReturn.add(getDataArticulo(articulo, attributes)); 
         }
         return listReturn;
     }
+
+	private DataArticleGalery getDataArticulo(WebElement articulo, List<AttributeArticle> attributes) 
+	throws Exception {
+		DataArticleGalery dataArticle = new DataArticleGalery();
+		for (AttributeArticle attribute : attributes) {
+			switch (attribute) {
+			case Nombre:
+				dataArticle.setNombre(getNombreArticulo(articulo));
+				break;
+			case Referencia:
+				dataArticle.setReferencia(getRefColorArticulo(articulo));
+				break;
+			case Imagen:
+				dataArticle.setImagen(getImagenArticulo(articulo));
+				break;
+			}
+		}
+		return dataArticle;
+	}
 
     public enum StateFavorito {Marcado, Desmarcado} 
     public boolean iconsInCorrectState(List<Integer> posIconosFav, TypeActionFav typeAction) {

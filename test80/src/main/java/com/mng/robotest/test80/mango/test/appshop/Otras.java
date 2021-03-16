@@ -55,7 +55,7 @@ public class Otras {
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
         
         SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, driver);
-        secMenusDesktopStpV.checkURLRedirectParkasHeEspanya();
+        secMenusDesktopStpV.checkURLRedirectZapatosHeEspanya();
         
         dCtxSh.pais = francia;
         dCtxSh.idioma = francia_frances;

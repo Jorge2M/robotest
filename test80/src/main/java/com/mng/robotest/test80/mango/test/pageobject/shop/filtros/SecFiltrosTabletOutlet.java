@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.filtros;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -80,4 +81,9 @@ public class SecFiltrosTabletOutlet extends PageObjTM implements SecFiltros {
 		String xpath = getXPathLinkOrdenacion(FilterOrdenacion.PrecioAsc);
 		return (state(Clickable, By.xpath(xpath), driver).wait(seconds).check());
 	}
+	
+    @Override
+    public void selectMenu2onLevel(String nameMenu) {
+    	selectFiltrosAndWaitLoad(FiltroMobil.Familia, Arrays.asList(nameMenu));
+    }
 }

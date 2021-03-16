@@ -11,21 +11,21 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.SecFiltrosDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
-import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.SecSelectorPrecios;
+import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.SecSelectorPreciosDesktop;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 
 @SuppressWarnings({"static-access"})
 public class SecSelectorPreciosStpV {
 
-	private final SecSelectorPrecios selectorPrecios;
+	private final SecSelectorPreciosDesktop selectorPreciosDesktop;
 	private final SecFiltrosDesktop secFiltrosDesktop;
 	private final WebDriver driver;
 	private final AppEcom app;
 	private final Channel channel;
 	
 	public SecSelectorPreciosStpV(AppEcom app, Channel channel, WebDriver driver) {
-		this.selectorPrecios = new SecSelectorPrecios(app, channel, driver);
+		this.selectorPreciosDesktop = new SecSelectorPreciosDesktop(app, driver);
 		this.secFiltrosDesktop = SecFiltrosDesktop.getInstance(app, driver);
 		this.driver = driver;
 		this.app = app;
@@ -36,7 +36,7 @@ public class SecSelectorPreciosStpV {
 		description="Es visible el selector de precios",
 		level=State.Warn)
 	public boolean validaIsSelector() {
-		return (selectorPrecios.isVisible());
+		return (selectorPreciosDesktop.isVisible());
 	}
 
 	/**
@@ -53,12 +53,12 @@ public class SecSelectorPreciosStpV {
 		if (channel==Channel.desktop) {
 			secFiltrosDesktop.showFilters();
 		}
-		dataFilter.minimoOrig = selectorPrecios.getImporteMinimo();
-		dataFilter.maximoOrig = selectorPrecios.getImporteMaximo();
+		dataFilter.minimoOrig = selectorPreciosDesktop.getImporteMinimo();
+		dataFilter.maximoOrig = selectorPreciosDesktop.getImporteMaximo();
 
-		selectorPrecios.clickMinAndMax(30, 30);
-		dataFilter.minimoFinal = selectorPrecios.getImporteMinimo();
-		dataFilter.maximoFinal = selectorPrecios.getImporteMaximo();
+		selectorPreciosDesktop.clickMinAndMax(30, 30);
+		dataFilter.minimoFinal = selectorPreciosDesktop.getImporteMinimo();
+		dataFilter.maximoFinal = selectorPreciosDesktop.getImporteMaximo();
 		if (channel==Channel.desktop) {
 			secFiltrosDesktop.hideFilters();
 		}

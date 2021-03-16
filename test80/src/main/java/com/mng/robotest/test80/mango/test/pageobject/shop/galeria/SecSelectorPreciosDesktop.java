@@ -16,12 +16,11 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
  * @author jorge.munoz
  *
  */
-public class SecSelectorPrecios implements SecSelectorPrecios extends PageObjTM {
+public class SecSelectorPreciosDesktop extends PageObjTM {
 	
 	public enum TypeClick {left, right}
 	
 	private final AppEcom app;
-	private final Channel channel;
 	
 	private static String XPathLineaFiltroShop = "//div[@class[contains(.,'input-range__track--background')]]"; //
 	private static String XPathImporteMinimoShop = "(" + XPathLineaFiltroShop + "//span[@class[contains(.,'label-container')]])[1]"; //
@@ -30,23 +29,19 @@ public class SecSelectorPrecios implements SecSelectorPrecios extends PageObjTM 
 	private static String XPathLeftCornerShop = XPathImporteMinimoShop + "/../..";
 	private static String XPathRightCornerShop = XPathImporteMaximoShop + "/../..";
 	
-	public SecSelectorPrecios(AppEcom app, Channel channel, WebDriver driver) {
+	public SecSelectorPreciosDesktop(AppEcom app, WebDriver driver) {
 		super(driver);
 		this.app = app;
-		this.channel = channel;
 	}
 
 	public boolean isVisible() {
 		By byLineaFiltro = By.xpath(XPathLineaFiltroShop);
-		if (channel==Channel.desktop) {
-			PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
-			SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(driver, pageGaleria);
-			secFiltros.showFilters();
-			boolean visible = state(Visible, byLineaFiltro).check();
-			secFiltros.hideFilters();
-			return visible;
-		}
-		return state(Visible, byLineaFiltro).check();
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
+		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(driver, pageGaleria);
+		secFiltros.showFilters();
+		boolean visible = state(Visible, byLineaFiltro).check();
+		secFiltros.hideFilters();
+		return visible;
 	}
 
 	public int getImporteMinimo() {

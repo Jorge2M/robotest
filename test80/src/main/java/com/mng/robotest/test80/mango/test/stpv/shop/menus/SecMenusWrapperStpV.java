@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,14 +24,17 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollection;
+import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.SecMultiFiltrosDevice;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticle;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu2onLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusFiltroCollection;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.SecFiltrosStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.utils.ListComparator;
@@ -204,7 +208,7 @@ public class SecMenusWrapperStpV {
     
     public void selectMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
         if (dCtxSh.channel.isDevice()) {
-            secMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh);
+            secMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh.pais);
         } else {	
         	secMenusDesktopStpV.selectMenuSuperiorTypeCatalog(menu1rstLevel, dCtxSh);
         }
@@ -219,9 +223,17 @@ public class SecMenusWrapperStpV {
     
     public void selectMenuLateral1erLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
         if (dCtxSh.channel.isDevice()) {
-            secMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh); 
+            secMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh.pais); 
         } else {
         	secMenusDesktopStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh);        
+        }
+    }
+    
+    public void selectMenu2onLevel(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh) throws Exception {
+        if (dCtxSh.channel.isDevice()) {
+        	SecFiltrosStpV.selectFiltroMenus(app, channel, Arrays.asList(menu2onLevel), driver);
+        } else {
+            secMenusDesktopStpV.selectMenuLateral2oLevel(menu2onLevel, dCtxSh);
         }
     }
     

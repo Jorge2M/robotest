@@ -25,26 +25,28 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	final static String TagOrdenacion = "@TagOrden";
 	final static String TagColor = "@TagColor";
 	final static String XPathLinkOrdenWithTag = "//a[text()[contains(.,'" + TagOrdenacion + "')]]";
-	final static String XPathLinkColorWithTagOutlet = "//a[@aria-label[contains(.,'" + TagColor + "')]]";
-	final static String XPathLinkColorWithTagShop = 
-			"//label[@for[contains(.,'filtercolor')] and text()[contains(.,'" + TagColor + "')]]";
+	final static String XPathLinkColorWithTagOutlet1 = "//a[@aria-label[contains(.,'" + TagColor + "')]]";
+	final static String XPathLinkColorWithTagShop2 = "//label[@for[contains(.,'filtercolor')] and text()[contains(.,'" + TagColor + "')]]";
+	final static String XPathLinkColorWithTagTabletOutlet	 = "//label[@for[contains(.,'color_" + TagColor + "')]]";
 	
 	final PageGaleria pageGaleria;
+	final Channel channel;
 	final AppEcom app;
 	
-	private SecFiltrosDesktop(WebDriver driver, PageGaleria pageGaleria) {
+	private SecFiltrosDesktop(PageGaleria pageGaleria, WebDriver driver) {
 		super(driver);
 		this.pageGaleria = pageGaleria;
+		this.channel = pageGaleria.getChannel();
 		this.app = pageGaleria.getApp();
 	}
 	
-	public static SecFiltrosDesktop getInstance(AppEcom app, WebDriver driver) {
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
-		return (new SecFiltrosDesktop(driver, pageGaleria));
+	public static SecFiltrosDesktop getInstance(Channel channel, AppEcom app, WebDriver driver) {
+		PageGaleria pageGaleria = PageGaleria.getNew(channel, app, driver);
+		return (new SecFiltrosDesktop(pageGaleria, driver));
 	}
 	
-	public static SecFiltrosDesktop getInstance(WebDriver driver, PageGaleria pageGaleria) {
-		return (new SecFiltrosDesktop(driver, pageGaleria));
+	public static SecFiltrosDesktop getInstance(PageGaleria pageGaleria, WebDriver driver) {
+		return (new SecFiltrosDesktop(pageGaleria, driver));
 	}
 	
 	private String getXPathLinkOrdenacion(FilterOrdenacion ordenacion) {
@@ -53,6 +55,9 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	
 	private String getXPathLinkColor(Color color) {
 		if (app==AppEcom.outlet) {
+			if (channel==Channel.tablet) {
+				return XPathLinkColorWithTagTabletOutlet.replace(TagColor, color.getNameFiltro());
+			}
 			return (XPathLinkColorWithTagOutlet.replace(TagColor, color.getNameFiltro()));
 		}
 		return (XPathLinkColorWithTagShop.replace(TagColor, color.getNameFiltro()));
@@ -105,6 +110,11 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 		return (state(Clickable, By.xpath(XPathLinkOrdenWithTag), driver)
 				.wait(seconds).check());
 	}
+	
+    @Override
+    public void selectMenu2onLevel(List<String> listMenus) {
+    	//TODO
+    }
 	
 	
 	private static final String XPathLinkCollectionShop = "//div[@id='navigationContainer']/button";

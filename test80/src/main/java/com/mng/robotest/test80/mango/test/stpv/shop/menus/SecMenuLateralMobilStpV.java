@@ -33,11 +33,13 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 
 public class SecMenuLateralMobilStpV {
     
+	private final Channel channel;
 	private final AppEcom app;
 	private final WebDriver driver;
 	private final SecMenuLateralDevice secMenuLateral;
 	
 	private SecMenuLateralMobilStpV(Channel channel, AppEcom app, WebDriver driver) {
+		this.channel = channel;
 		this.app = app;
 		this.driver = driver;
 		secMenuLateral = new SecMenuLateralDevice(channel, app, driver);
@@ -52,9 +54,9 @@ public class SecMenuLateralMobilStpV {
 		expected="Aparece la galería de productos asociada al menú",
 		saveNettraffic=SaveWhen.Always,
 		saveHtmlPage=SaveWhen.Always)
-	public void selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
-		secMenuLateral.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, dCtxSh.pais);
-		validaSelecMenu(menu1rstLevel, dCtxSh);
+	public void selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, Pais pais) throws Exception {
+		secMenuLateral.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais);
+		validaSelecMenu(menu1rstLevel);
 	}
 	
 	@Validation(
@@ -64,25 +66,9 @@ public class SecMenuLateralMobilStpV {
 		return (!secMenuLateral.existsMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais));
 	}
 
-	public void validaSelecMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh) throws Exception {
-		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-		pageGaleriaStpV.validateGaleriaAfeterSelectMenu(dCtxSh);
-
-		//Validaciones estándar. 
-		StdValidationFlags flagsVal = StdValidationFlags.newOne();
-		flagsVal.validaSEO = true;
-		flagsVal.validaJS = true;
-		flagsVal.validaImgBroken = false;
-		AllPagesStpV.validacionesEstandar(flagsVal, driver);
-
-		//Por defecto aplicaremos todas las avalidaciones (Google Analytics, Criteo, NetTraffic y DataLayer)
-		EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
-				Constantes.AnalyticsVal.GoogleAnalytics,
-				Constantes.AnalyticsVal.NetTraffic, 
-				Constantes.AnalyticsVal.Criteo,
-				Constantes.AnalyticsVal.DataLayer);
-
-		PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, menu.getLinea(), analyticSet, driver);
+	public void validaSelecMenu(MenuLateralDesktop menu) throws Exception {
+		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app, driver);
+		pageGaleriaStpV.validateGaleriaAfeterSelectMenu(app);
 	}
 
 	@Validation
