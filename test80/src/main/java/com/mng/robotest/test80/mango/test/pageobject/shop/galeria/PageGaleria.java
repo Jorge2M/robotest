@@ -738,6 +738,7 @@ public abstract class PageGaleria extends PageObjTM {
 	}
 	
 	public String getImagenArticulo(WebElement articulo) throws Exception {
+		waitForPageLoaded(driver);
 		WebElement imagen = getImagenElementArticulo(articulo);
 		if (imagen!=null) {
 			return imagen.getAttribute("src");
