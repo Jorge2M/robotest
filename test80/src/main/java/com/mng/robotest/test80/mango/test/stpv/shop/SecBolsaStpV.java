@@ -208,7 +208,7 @@ public class SecBolsaStpV {
 	@Validation
 	public ChecksTM validaNumArtEnBolsa(DataBag dataBag) throws Exception {
 		ChecksTM validations = ChecksTM.getNew();
-		int maxSeconds = 2;
+		int maxSeconds = 3;
 		String itemsSaved = String.valueOf(dataBag.getListArticulos().size());
 	 	validations.add(
 			"Existen " + dataBag.getListArticulos().size() + " elementos dados de alta en la bolsa (los esperamos hasta " + maxSeconds + " segundos)",

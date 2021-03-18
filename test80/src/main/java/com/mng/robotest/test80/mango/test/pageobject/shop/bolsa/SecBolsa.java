@@ -46,7 +46,7 @@ public abstract class SecBolsa extends PageObjTM {
     }
     
 	public static SecBolsa make(Channel channel, AppEcom app, Pais pais, WebDriver driver) {
-		if (channel==Channel.mobile) {
+		if (channel.isDevice()) {
 			return new SecBolsaMobile(app, driver);
 		}
 		if (app==AppEcom.outlet) {
