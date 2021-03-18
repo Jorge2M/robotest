@@ -11,7 +11,7 @@ public class NavigationsStpV {
 	public static void gotoPortada(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver);
 		int i=0;
-		while (!secCabeceraStpV.getSecCabecera().isPresentLogoMango(1) && i<3) {
+		while (!secCabeceraStpV.getSecCabecera().isPresentLogoMango(1) && i<5) {
 			AllPagesStpV.backNagegador(driver);
 			i+=1;
 		}
