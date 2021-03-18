@@ -57,10 +57,6 @@ public abstract class SecCabecera extends PageObjTM {
 		return (SecCabecera_MostFrequent)this;
 	}
 	
-	public SecCabeceraShop_Tablet getShop_Tablet() {
-		return (SecCabeceraShop_Tablet)this;
-	}
-	
 	public SecCabeceraOutlet_Mobil getOutletMobil() {
 		return (SecCabeceraOutlet_Mobil)this;
 	}

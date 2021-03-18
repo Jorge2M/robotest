@@ -12,7 +12,6 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutlet_Mobil.IconoCabOutletMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera_MostFrequent.IconoCabeceraShop_DesktopMobile;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraShop_Tablet.IconoCabeceraShop_Tablet;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop.MenuUserDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenusUserDevice.MenuUserDevice;
 
@@ -78,9 +77,6 @@ public class MenuUserItem {
 		if (link instanceof IconoCabeceraShop_DesktopMobile) {
 			return TypeMenu.IconoCabeceraShop_DesktopMobile;
 		}
-		if (link instanceof IconoCabeceraShop_Tablet) {
-			return TypeMenu.IconoCabeceraShop_Tablet;
-		}
 		if (link instanceof MenuUserDesktop) {
 			return TypeMenu.MenuUserDesktop;
 		}
@@ -124,9 +120,9 @@ public class MenuUserItem {
 	
 	private ElementPage getMenuLupa() {
 		if (app==AppEcom.shop || app==AppEcom.votf) {
-			if (channel==Channel.tablet) {
-				return IconoCabeceraShop_Tablet.lupa;
-			}
+//			if (channel==Channel.tablet) {
+//				return IconoCabeceraShop_Tablet.lupa;
+//			}
 			return IconoCabeceraShop_DesktopMobile.lupa;
 		}
 		if (app==AppEcom.outlet) {

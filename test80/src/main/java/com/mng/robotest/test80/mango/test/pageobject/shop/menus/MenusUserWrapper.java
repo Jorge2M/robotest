@@ -17,7 +17,6 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutlet_Mobil.IconoCabOutletMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera_MostFrequent.IconoCabeceraShop_DesktopMobile;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraShop_Tablet.IconoCabeceraShop_Tablet;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop.MenuUserDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralDevice;
@@ -108,8 +107,6 @@ public class MenusUserWrapper extends PageObjTM {
 		switch (menu.getType()) {
 			case IconoCabeceraShop_DesktopMobile:
 				return (secCabecera.getShop_DesktopMobile().isIconoInStateUntil((IconoCabeceraShop_DesktopMobile)menuLink, state, maxSeconds));
-			case IconoCabeceraShop_Tablet:
-				return (secCabecera.getShop_Tablet().isIconoInStateUntil((IconoCabeceraShop_Tablet)menuLink, state, maxSeconds));
 			case MenuUserDesktop:
 				return (secCabecera.getShop_DesktopMobile().getModalUserSesionDesktop().isMenuInStateUntil((MenuUserDesktop)menuLink, state, maxSeconds));
 			case MenuUserDevice:
@@ -126,9 +123,6 @@ public class MenusUserWrapper extends PageObjTM {
 		switch (menu.getType()) {
 			case IconoCabeceraShop_DesktopMobile:
 				secCabecera.getShop_DesktopMobile().clickIconoAndWait((IconoCabeceraShop_DesktopMobile)menuLink);
-				break;
-			case IconoCabeceraShop_Tablet:
-				secCabecera.getShop_Tablet().clickIconoAndWait((IconoCabeceraShop_Tablet)menuLink);
 				break;
 			case MenuUserDesktop:
 				secCabecera.getShop_DesktopMobile().hoverIconForShowUserMenuDesktop();
