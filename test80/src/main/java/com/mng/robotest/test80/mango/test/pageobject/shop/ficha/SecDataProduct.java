@@ -111,13 +111,7 @@ public class SecDataProduct extends SeleniumUtils {
     
 //xpath asociados a los datos básicoos del artículo (nombre y referencia)
     public static String getXPathLinReferencia(String referencia, Channel channel) {
-        switch (channel) {
-        case desktop:
-            return "//span[@class[contains(.,'-reference')] and text()[contains(.,'" + referencia + "')]]";
-        case mobile:
-        default:
-            return "//p[@class[contains(.,'-reference')] and text()[contains(.,'" + referencia + "')]]";
-        }
+    	return "//*[@class[contains(.,'-reference')] and text()[contains(.,'" + referencia + "')]]";
     }
     
     private static String getXPathNombreArt(Channel channel) {

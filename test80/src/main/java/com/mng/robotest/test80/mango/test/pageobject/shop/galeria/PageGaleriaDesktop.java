@@ -15,7 +15,6 @@ import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
@@ -72,13 +71,13 @@ public class PageGaleriaDesktop extends PageGaleria {
 	private final static String XPathImgSliderActiveRelativeArticleDesktop = 
 		"//div[@class[contains(.,'swiper-slide-active')]]" + XPathImgRelativeArticle;
 
-	private PageGaleriaDesktop(From from, AppEcom app, WebDriver driver) {
-		super(from, Channel.desktop, app, driver);
+	private PageGaleriaDesktop(From from, Channel channel, AppEcom app, WebDriver driver) {
+		super(from, channel, app, driver);
 		secColores = new SecColoresArticuloDesktop(app);
 		secTallas = new SecTallasArticuloDesktop(app, XPathArticulo, driver);
 	}
-	public static PageGaleriaDesktop getNew(From from, AppEcom app, WebDriver driver) {
-		return (new PageGaleriaDesktop(from, app, driver));
+	public static PageGaleriaDesktop getNew(From from, Channel channel, AppEcom app, WebDriver driver) {
+		return (new PageGaleriaDesktop(from, channel, app, driver));
 	}
 
 	public enum TypeArticle {rebajado, norebajado};

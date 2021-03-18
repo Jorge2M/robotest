@@ -39,7 +39,7 @@ public abstract class SecCabecera extends PageObjTM {
 	}
 	
 	public static SecCabecera getNew(Channel channel, AppEcom app, WebDriver driver) {
-		if (channel.isDevice() && app==AppEcom.outlet) {
+		if (channel==Channel.mobile && app==AppEcom.outlet) {
 			return SecCabeceraOutlet_Mobil.getNew(channel, app, driver);
 		}
 		

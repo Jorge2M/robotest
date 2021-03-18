@@ -38,6 +38,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalBuscadorTiendasStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.TestMaker;
 
 public class FichaProducto {
@@ -108,8 +109,9 @@ public class FichaProducto {
             if (((PageFichaArtOld)pageFicha).getNumImgsCarruselIzq() > 2) {
                 pageFichaStpV.selectImgCarruselIzqFichaOld(2);
             }
-            pageFichaStpV.selectImagenCentralFichaOld();
-            if (dCtxSh.channel.isDevice()) {
+            
+            if (dCtxSh.channel!=Channel.tablet) {
+            	pageFichaStpV.selectImagenCentralFichaOld();
             	pageFichaStpV.closeZoomImageCentralDevice();
             }
             if (TypePanel.Description.getListApps().contains(dCtxSh.appE) &&

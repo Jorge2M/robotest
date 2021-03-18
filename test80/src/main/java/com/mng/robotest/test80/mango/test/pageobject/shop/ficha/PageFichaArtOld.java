@@ -61,7 +61,7 @@ public class PageFichaArtOld extends PageFicha {
     }
     
     private String getXPathDivImgCentralDiv() {
-    	if (channel.isDevice()) {
+    	if (channel==Channel.mobile) {
     		return XPathDivImgCentralDivDevice;
     	}
     	return XPathDivImgCentralDivDesktop;

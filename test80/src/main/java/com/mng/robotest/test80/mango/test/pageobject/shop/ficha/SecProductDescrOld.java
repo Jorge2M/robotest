@@ -49,9 +49,9 @@ public class SecProductDescrOld extends PageObjTM {
         }
         
         private String XPathDivProductDescriptionDesktop = "//div[@class='product-description']";
-        private String XPathDivProductDescriptionDevice = "//div[@class='product-detail']";
+        private String XPathDivProductDescriptionDevice = "//div[@class[contains(.,'product-detail')]]";
         public String getXPath(Channel channel) {
-        	if (channel.isDevice()) {
+        	if (channel==Channel.mobile) {
         		return XPathDivProductDescriptionDevice + xPathDevice;
         	}
         	return XPathDivProductDescriptionDesktop + xPathDesktop;
@@ -97,7 +97,7 @@ public class SecProductDescrOld extends PageObjTM {
         }
         
         WebElement panel = driver.findElement(By.xpath(xpathPanel));
-        if (channel.isDevice()) {
+        if (channel==Channel.mobile) {
         	By byCapa = By.xpath(".//div[@class[contains(.,'collapsible-info-body')]]");
         	if (state(State.Present, panel).by(byCapa).check()) {
         		WebElement capa = driver.findElement(byCapa);

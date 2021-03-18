@@ -100,12 +100,12 @@ public abstract class PageGaleria extends PageObjTM {
 	public static PageGaleria getNew(From from, Channel channel, AppEcom app, WebDriver driver) {
 		switch (channel) {
 		case desktop:
-			return (PageGaleriaDesktop.getNew(from, app, driver));
+			return (PageGaleriaDesktop.getNew(from, channel, app, driver));
 		case mobile:
 		case tablet:
-			if (app==AppEcom.outlet) {
-				return (PageGaleriaDesktop.getNew(from, app, driver));
-			}
+//			if (app==AppEcom.outlet) {
+//				return (PageGaleriaDesktop.getNew(from, channel, app, driver));
+//			}
 		default:
 			return (PageGaleriaDevice.getNew(from, channel, app, driver));
 		}

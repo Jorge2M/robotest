@@ -119,21 +119,10 @@ public class MenuUserItem {
 	}
 	
 	private ElementPage getMenuLupa() {
-		if (app==AppEcom.shop || app==AppEcom.votf) {
-//			if (channel==Channel.tablet) {
-//				return IconoCabeceraShop_Tablet.lupa;
-//			}
-			return IconoCabeceraShop_DesktopMobile.lupa;
+		if (app==AppEcom.outlet && channel==Channel.mobile) {
+			return IconoCabOutletMobil.lupa;
 		}
-		if (app==AppEcom.outlet) {
-			if (channel==Channel.desktop) {
-				return IconoCabeceraShop_DesktopMobile.lupa;
-			}
-			if (channel.isDevice()) {
-				return IconoCabOutletMobil.lupa;
-			}
-		}
-		return null;
+		return IconoCabeceraShop_DesktopMobile.lupa;
 	}
 	
 	private ElementPage getMenuIniciarSesion() {
