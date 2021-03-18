@@ -14,14 +14,16 @@ import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha.TypeFicha;
+import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.tallas.SSecSelTallasFicha;
+import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.tallas.SSecSelTallasFichaNew;
+import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.tallas.SSecSelTallasFichaOld;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 /**
@@ -30,22 +32,30 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
  *
  */
 @SuppressWarnings({"static-access"})
-public class SecDataProduct extends SeleniumUtils {
+public class SecDataProduct extends PageObjTM {
     
     public enum ProductNav {Prev, Next}
-    public static SSecSelTallasFichaOld secSelTallasOld;
-    public static SSecSelTallasFichaNew secSelTallasNew;
+    private final SSecSelTallasFicha secSelTallas;
 
     private static final String XPathNombreArticuloDesktop = "//h1[@itemprop='name']";
     
     //Existe un Test A/B que hace que el nombre del artículo salga debajo del botón de "Añadir a la bolsa" o en la cabecera, por eso el or.
     private static final String XPathNombreArticuloMobil = "//*[@class[contains(.,'product-info-name')] or @class='headerMobile__text']";
     
+    public SecDataProduct(TypeFicha typeFicha, WebDriver driver) {
+    	super(driver);
+    	this.secSelTallas = SSecSelTallasFicha.make(typeFicha, driver);
+    }
+    
+    public SSecSelTallasFicha getSecSelTallas() {
+    	return secSelTallas; 
+    }
+    
 //xpaths asociados a los links prev/next
     private static final String XPathProductNavBlock = "//div[@class='nav-product-container' or @class='nav-product-navigation']";
     private static final String XPathPrevLink = XPathProductNavBlock + "//a[@id='prev' or text()[contains(.,'Anterior')]]";
     private static final String XPathNextLink = XPathProductNavBlock + "//a[@id='next' or text()[contains(.,'Siguiente')]]";
-    private static final String getXPathLinkProductNav(ProductNav productNav) {
+    private String getXPathLinkProductNav(ProductNav productNav) {
         switch (productNav) {
         case Prev:
             return XPathPrevLink;
@@ -90,7 +100,7 @@ public class SecDataProduct extends SeleniumUtils {
     private static final String XPathGuiaDeTallasLink = "//*[@id='productFormSizesGuide']";
     private static final String XPathMsgAvisoTallaDevice = "//p[@class[contains(.,'sizes-notify-error')]]";
     private static final String XPathMsgAvisoTallaDesktop = "//p[@class[contains(.,'sg-inp-sugg--error')]]";  
-    private static String getXPathMsgAvisoTalla(Channel channel) {
+    private String getXPathMsgAvisoTalla(Channel channel) {
     	if (channel.isDevice()) {
     		return XPathMsgAvisoTallaDevice;
     	}
@@ -105,36 +115,36 @@ public class SecDataProduct extends SeleniumUtils {
     //xpaths asociados a los colores de la prenda
     private static final String XPathColoresPrendaSinIdentificar = "//div[@class[contains(.,'color-container')]]";
     
-    private static String getXPathPastillaColorClick(String codigoColor) {
+    private String getXPathPastillaColorClick(String codigoColor) {
         return ("//div[@class[contains(.,'color-container')] and @id='" + codigoColor + "']/img");
     }    
     
 //xpath asociados a los datos básicoos del artículo (nombre y referencia)
-    public static String getXPathLinReferencia(String referencia, Channel channel) {
+    public String getXPathLinReferencia(String referencia, Channel channel) {
     	return "//*[@class[contains(.,'-reference')] and text()[contains(.,'" + referencia + "')]]";
     }
     
-    private static String getXPathNombreArt(Channel channel) {
+    private String getXPathNombreArt(Channel channel) {
         if (channel.isDevice()) {
             return XPathNombreArticuloMobil;
         }
         return XPathNombreArticuloDesktop;
     }
     
-    public static ArticuloScreen getArticuloObject(Channel channel, AppEcom app, TypeFicha typeFicha, WebDriver driver) {
+    public ArticuloScreen getArticuloObject(Channel channel, AppEcom app, TypeFicha typeFicha) {
         ArticuloScreen articulo = new ArticuloScreen();
-        articulo.setReferencia(getReferenciaProducto(driver));
-        articulo.setNombre(getTituloArt(channel, driver));
-        articulo.setPrecio(getPrecioFinalArticulo(driver));
-        articulo.setCodigoColor(getCodeColor(ColorType.Selected, driver));
-        articulo.setColorName(getNombreColorSelected(channel, driver));
-        articulo.setTalla(getTallaSelected(typeFicha, app, driver));
+        articulo.setReferencia(getReferenciaProducto());
+        articulo.setNombre(getTituloArt(channel));
+        articulo.setPrecio(getPrecioFinalArticulo());
+        articulo.setCodigoColor(getCodeColor(ColorType.Selected));
+        articulo.setColorName(getNombreColorSelected(channel));
+        articulo.setTalla(getTallaSelected(typeFicha, app));
         articulo.setNumero(1);
         return articulo;
     }
     
 //Funciones referentes a los datos básicos del artículo
-    public static String getReferenciaProducto(WebDriver driver) {
+    public String getReferenciaProducto() {
         String url = driver.getCurrentUrl();
         Pattern pattern = Pattern.compile("_(.*?).html");
         Matcher matcher = pattern.matcher(url);
@@ -144,7 +154,7 @@ public class SecDataProduct extends SeleniumUtils {
         return "";
     }
     
-    public static String getTituloArt(Channel channel, WebDriver driver) {
+    public String getTituloArt(Channel channel) {
         String xpathNombreArt = getXPathNombreArt(channel);
         List<WebElement> listArticles = getElementsVisible(driver, By.xpath(xpathNombreArt));
         if (listArticles.size()>0) {
@@ -159,12 +169,12 @@ public class SecDataProduct extends SeleniumUtils {
     
 //Funciones referentes a los colores
     
-    public static String getCodeColor(ColorType colorType, WebDriver driver) {
+    public String getCodeColor(ColorType colorType) {
     	WebElement color = getElementWeb(colorType.getBy(), driver);
         return (color.getAttribute("id"));
     }
     
-    public static String getNombreColorMobil(ColorType colorType, WebDriver driver) {
+    public String getNombreColorMobil(ColorType colorType) {
     	WebElement color = getElementWeb(colorType.getBy(), driver);
     	if (color!=null) {
     		return (color.getAttribute("title"));
@@ -172,42 +182,39 @@ public class SecDataProduct extends SeleniumUtils {
     	return Constantes.colorDesconocido;
     }
     
-    public static String getNombreColorSelected(Channel channel, WebDriver driver) {
+    public String getNombreColorSelected(Channel channel) {
         switch (channel) {
         case desktop:
-        	if (state(Present, By.xpath(XPathNombreColorSelectedDesktop), driver).check()) {
+        	if (state(Present, By.xpath(XPathNombreColorSelectedDesktop)).check()) {
                 return (driver.findElement(By.xpath(XPathNombreColorSelectedDesktop)).getAttribute("alt"));
             }
             return Constantes.colorDesconocido;
         case mobile:
         default:
-        	return (getNombreColorMobil(ColorType.Selected, driver));
+        	return (getNombreColorMobil(ColorType.Selected));
         }
     }
 
-    public static boolean checkPotatoe (WebDriver driver) {
-    	return (state(Present, By.xpath(XPathNombreColorSelectedDesktop), driver).check());
+    public boolean checkPotatoe () {
+    	return (state(Present, By.xpath(XPathNombreColorSelectedDesktop)).check());
     }
 
-	public static void selectColorWaitingForAvailability(String codigoColor, WebDriver driver) {
+	public void selectColorWaitingForAvailability(String codigoColor) {
 		By byColor = By.xpath(getXPathPastillaColorClick(codigoColor));
 		int maxSecondsToWaitColor = 3;
 		int maxSecondsToWaitLoadPage = 5;
-		click(byColor, driver)
+		click(byColor)
 			.type(TypeClick.javascript)
 			.waitLink(maxSecondsToWaitColor).waitLoadPage(maxSecondsToWaitLoadPage).exec();
 	}
     
-    /**
-     * @return si la pastilla de color es o no visible
-     */
-    public static boolean isClickableColor(String codigoColor, WebDriver driver) {
+    public boolean isClickableColor(String codigoColor) {
     	String xpathColor = getXPathPastillaColorClick(codigoColor);
-    	return (state(Clickable, By.xpath(xpathColor), driver).check());
+    	return (state(Clickable, By.xpath(xpathColor)).check());
     }
     
 //Funciones referentes a los precios
-    public static String getPrecioFinalArticulo(WebDriver driver) {
+    public String getPrecioFinalArticulo() {
         List<WebElement> listElemsPrecio = driver.findElements(By.xpath(XPathItemsPrecioFinalArt));
         ListIterator<WebElement> itPrecioVenta = listElemsPrecio.listIterator();
         String precioArticulo = "";
@@ -220,13 +227,13 @@ public class SecDataProduct extends SeleniumUtils {
     /**
      * Extrae (si existe) el precio rebajado de la página de ficha de producto. Si no existe devuelve ""
      */
-    public static String getPrecioTachadoFromFichaArt(WebDriver driver) {
-    	if (state(Present, By.xpath(XPathItemsPrecioSinDesc), driver).check()) {
+    public String getPrecioTachadoFromFichaArt() {
+    	if (state(Present, By.xpath(XPathItemsPrecioSinDesc)).check()) {
             // Entero
             String precioSinDesc = driver.findElement(By.xpath(XPathItemsPrecioSinDesc + "[1]")).getText();
     
             // Decimales
-            if (state(Present, By.xpath(XPathItemsPrecioSinDesc + "[2]"), driver).check()) {
+            if (state(Present, By.xpath(XPathItemsPrecioSinDesc + "[2]")).check()) {
                 precioSinDesc += driver.findElement(By.xpath(XPathItemsPrecioSinDesc + "[2]")).getText();
             }
             return (ImporteScreen.normalizeImportFromScreen(precioSinDesc));
@@ -236,38 +243,31 @@ public class SecDataProduct extends SeleniumUtils {
     }    
     
 //Funciones referentes a las tallas (en algunas se actúa a modo de Wrapper)
-    public static boolean isVisibleCapaAvisame(WebDriver driver) {
-    	return (state(Visible, By.xpath(XPathCapaAvisame), driver).check());
+    public boolean isVisibleCapaAvisame() {
+    	return (state(Visible, By.xpath(XPathCapaAvisame)).check());
     }
     
-    public static boolean isVisibleAvisoSeleccionTalla(Channel channel, WebDriver driver) {
+    public boolean isVisibleAvisoSeleccionTalla(Channel channel) {
     	String xpathAviso = getXPathMsgAvisoTalla(channel);
-    	return (state(Visible, By.xpath(xpathAviso), driver).check());
+    	return (state(Visible, By.xpath(xpathAviso)).check());
     }
 
-	public static void selectGuiaDeTallasLink(WebDriver driver) {
-		click(By.xpath(XPathGuiaDeTallasLink), driver).exec();
+	public void selectGuiaDeTallasLink() {
+		click(By.xpath(XPathGuiaDeTallasLink)).exec();
 	}
 
-    public static boolean selectGuiaDeTallasIfVisible(WebDriver driver) {
-    	boolean isVisible = state(Visible, By.xpath(XPathGuiaDeTallasLink), driver).check();
+    public boolean selectGuiaDeTallasIfVisible() {
+    	boolean isVisible = state(Visible, By.xpath(XPathGuiaDeTallasLink)).check();
     	if (isVisible) {
-    		selectGuiaDeTallasLink(driver);
+    		selectGuiaDeTallasLink();
     	}
     	return isVisible;
     }
-
-	public static Talla getTallaSelected(TypeFicha typeFicha, AppEcom app, WebDriver driver) {
-		if (typeFicha==TypeFicha.Old) {
-			return Talla.from(secSelTallasOld.getTallaAlfSelected(app, driver));
-		}
-		return Talla.from(secSelTallasNew.getTallaAlfSelected(driver));
-	}
 	
 	/**
 	 * @return talla eliminando el literal del tipo " [Almacen: 001]
 	 */
-	public static String removeAlmacenFromTalla(String talla) {
+	public String removeAlmacenFromTalla(String talla) {
 	    Pattern tallaWithAlmacen = Pattern.compile("(.*)( \\[Almacen: [0-9]{3}\\])");
 	    Matcher matcher = tallaWithAlmacen.matcher(talla);
 	    if (matcher.find()) {
@@ -275,95 +275,22 @@ public class SecDataProduct extends SeleniumUtils {
 	    }
 	    return talla;
 	}
-    
-//    public static String getTallaNumSelected(TypeFicha typeFicha, AppEcom app, WebDriver driver) {
-//        if (typeFicha==TypeFicha.Old) {
-//            return secSelTallasOld.getTallaNumSelected(driver);
-//        }
-//        return secSelTallasNew.getTallaNumSelected(app, driver);
-//    }    
-    
-    public static String getTallaAlf(TypeFicha typeFicha, int posicion, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old) {
-            return secSelTallasOld.getTallaAlf(posicion, driver);
-        }
-        return secSelTallasNew.getTallaAlf(posicion, driver);
-    }    
-    
-    public static String getTallaCodNum(TypeFicha typeFicha, int posicion, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old) {
-            return secSelTallasOld.getTallaCodNum(posicion, driver);
-        }
-        return secSelTallasNew.getTallaCodNum(posicion, driver);
-    }    
-    
-    public static boolean isTallaUnica(TypeFicha typeFicha, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old) {
-            return secSelTallasOld.isTallaUnica(driver);
-        }
-        return secSelTallasNew.isTallaUnica(driver);
-    }    
-    
-	public static void selectTallaByValue(Talla talla, TypeFicha typeFicha, WebDriver driver) {
-		if (typeFicha==TypeFicha.Old) {
-			secSelTallasOld.selectTallaByValue(talla.getTallaNum(), driver);
-		} else {
-			secSelTallasNew.selectTallaByValue(talla.getTallaNum(), driver);
-		}
-	}
-    
-    public static void selectTallaByIndex(int posicion, TypeFicha typeFicha, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old) {
-            secSelTallasOld.selectTallaByIndex(posicion, driver);
-        } else {
-            secSelTallasNew.selectTallaByIndex(posicion, driver);
-        }
-    }        
-    
-    public static void selectFirstTallaAvailable(TypeFicha typeFicha, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old) {
-            secSelTallasOld.selectFirstTallaAvailable(driver);
-        } else {
-            secSelTallasNew.selectFirstTallaAvailable(driver);
-        }
-    }    
-    
-    public static boolean isTallaAvailable(String talla, TypeFicha typeFicha, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old) {
-            return (secSelTallasOld.isTallaAvailable(talla, driver));
-        }
-        return (secSelTallasNew.isTallaAvailable(talla, driver));
-    }
-    
-    public static int getNumOptionsTallasNoDisponibles(TypeFicha typeFicha, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old) {
-            return (secSelTallasOld.getNumOptionsTallasNoDisponibles(driver));
-        }
-        return (secSelTallasNew.getNumOptionsTallasNoDisponibles(driver));
-    }
-    
-    public static int getNumOptionsTallas(TypeFicha typeFicha, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old) {
-            return (secSelTallasOld.getNumOptionsTallas(driver));
-        }
-        return (secSelTallasNew.getNumOptionsTallas(driver));
-    }    
+     
     
 //Funciones referentes al prev/next
-    public static boolean isVisiblePrevNextUntil(ProductNav productNav, int maxSeconds, WebDriver driver) {
+    public boolean isVisiblePrevNextUntil(ProductNav productNav, int maxSeconds) {
         String xpathLink = getXPathLinkProductNav(productNav);
-        return (state(Visible, By.xpath(xpathLink), driver)
-        		.wait(maxSeconds).check());
+        return (state(Visible, By.xpath(xpathLink)).wait(maxSeconds).check());
     }
 
-	public static void selectLinkNavigation(ProductNav productNav, WebDriver driver) {
+	public void selectLinkNavigation(ProductNav productNav) {
 		String xpathLink = getXPathLinkProductNav(productNav);
-		click(By.xpath(xpathLink), driver).waitLink(2).exec();
+		click(By.xpath(xpathLink)).waitLink(2).exec();
 	}
 
 	//zona de colores dentro de la ficha
 
-    public static ArrayList<String> getColorsGarment(WebDriver driver) {
+    public ArrayList<String> getColorsGarment() {
         ArrayList<String> colors = new ArrayList<>();
         for (WebElement element : driver.findElements(By.xpath(XPathColoresPrendaSinIdentificar))) {
             colors.add(element.getAttribute("id"));
@@ -371,8 +298,8 @@ public class SecDataProduct extends SeleniumUtils {
         return colors;
     }
 
-	public static void selectColor(String codeColor, WebDriver driver) {
+	public void selectColor(String codeColor) {
 		String path = getXPathPastillaColorClick(codeColor);
-		click(By.xpath(path), driver).exec();
+		click(By.xpath(path)).exec();
 	}
 }

@@ -46,9 +46,8 @@ public class PageFichaArtOld extends PageFicha {
     private static final String XPathImagenCarruselIzq = "//div[@class='carousel-img-container']//img[@class[contains(.,'carousel-img')]]";
     
     private PageFichaArtOld(Channel channel, WebDriver driver) {
-        super(driver);
+        super(TypeFicha.Old, driver);
         this.channel = channel;
-        this.typeFicha = TypeFicha.Old;
     }
     
     //Static constructor
@@ -86,7 +85,7 @@ public class PageFichaArtOld extends PageFicha {
     public boolean isPageUntil(int maxSeconds) {
         return (
         	state(Present, By.xpath(XPathContainerFicha)).wait(maxSeconds).check() &&
-            secDataProduct.secSelTallasOld.isVisibleSelectorTallasUntil(maxSeconds, driver)
+            secDataProduct.getSecSelTallas().isVisibleSelectorTallasUntil(maxSeconds)
         );
     }
     

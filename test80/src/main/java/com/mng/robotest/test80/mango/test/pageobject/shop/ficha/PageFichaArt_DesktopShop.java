@@ -27,9 +27,8 @@ public class PageFichaArt_DesktopShop extends PageFicha {
     private static final String XPathHtmlFicha = "//html[@class[contains(.,'ficha')]]";
     
     private PageFichaArt_DesktopShop(Channel channel, WebDriver driver) {
-        super(driver);
+        super(TypeFicha.New, driver);
         this.channel = channel;
-        this.typeFicha = TypeFicha.New;
     }
     
     //Static constructor
@@ -44,7 +43,7 @@ public class PageFichaArt_DesktopShop extends PageFicha {
     @Override
     public boolean isPageUntil(int maxSeconds) {
     	return (state(Present, By.xpath(XPathHtmlFicha)).wait(maxSeconds).check() &&
-                secDataProduct.secSelTallasNew.isVisibleSelectorTallasUntil(maxSeconds, driver));
+                secDataProduct.getSecSelTallas().isVisibleSelectorTallasUntil(maxSeconds));
     }
     
     @Override

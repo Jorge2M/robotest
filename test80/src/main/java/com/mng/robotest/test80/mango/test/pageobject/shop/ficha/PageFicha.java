@@ -28,15 +28,26 @@ public abstract class PageFicha extends PageObjTM {
     abstract public int getNumArtVisiblesSlider(Slider typeSlider);
     abstract public boolean isModalNoStockVisible(int maxSecondsToWait);
     
-    public static SecDataProduct secDataProduct; //Name, color, talla section
+    private final SecDataProduct secDataProduct; //Name, color, talla section
     public static SecFitFinder secFitFinder; //Guía de tallas v.Fit Finder
+    
+    private final TypeFicha typeFicha;
     Channel channel;
     AppEcom appE;
-    TypeFicha typeFicha;
     
-    public PageFicha(WebDriver driver) {
+    public PageFicha(TypeFicha typeFicha, WebDriver driver) {
     	super(driver);
-    };
+    	this.secDataProduct = new SecDataProduct(typeFicha, driver);
+    	this.typeFicha = typeFicha;
+    }
+    
+    public TypeFicha getTypeFicha() {
+    	return typeFicha;
+    }
+    
+    public SecDataProduct getSecDataProduct() {
+    	return getSecDataProduct();
+    }
     
     //Constructor estático
     public static PageFicha newInstance(Channel channel, AppEcom appE, WebDriver driver) {
@@ -55,49 +66,45 @@ public abstract class PageFicha extends PageObjTM {
     	pageFicha.appE = appE;
     	return pageFicha;
     }
-
-    public TypeFicha getTypeFicha() {
-    	return this.typeFicha;
-    }
     
     public ArticuloScreen getArticuloObject(AppEcom app) {
         return (secDataProduct.getArticuloObject(channel, app, typeFicha, driver));
     }
     
     public boolean isTallaUnica() {
-        return (secDataProduct.isTallaUnica(typeFicha, driver));
+        return (secDataProduct.getSecSelTallas().isTallaUnica());
     }
     
     public Talla getTallaSelected() {
-        return (SecDataProduct.getTallaSelected(typeFicha, appE, driver));
+        return (secDataProduct.getSecSelTallas().getTallaSelected(appE));
     }
     
     public void selectTallaByValue(Talla talla) {
-        secDataProduct.selectTallaByValue(talla, typeFicha, driver);
+        secDataProduct.getSecSelTallas().selectTallaByValue(talla);
     }
     
     public void selectTallaByIndex(int posicion) {
-        secDataProduct.selectTallaByIndex(posicion, typeFicha, driver);
+        secDataProduct.getSecSelTallas().selectTallaByIndex(posicion);
     }
     
     public void selectFirstTallaAvailable() {
-        secDataProduct.selectFirstTallaAvailable(typeFicha, driver);
+        secDataProduct.getSecSelTallas().selectFirstTallaAvailable();
     }
     
     public String getTallaAlf(int posicion) {
-    	return (secDataProduct.getTallaAlf(typeFicha, posicion, driver));
+    	return (secDataProduct.getSecSelTallas().getTallaAlf(posicion));
     }
     
     public String getTallaCodNum(int posicion) {
-    	return (secDataProduct.getTallaCodNum(typeFicha, posicion, driver));
+    	return (secDataProduct.getSecSelTallas().getTallaCodNum(posicion));
     }
     
     public int getNumOptionsTallasNoDisponibles() {
-        return (secDataProduct.getNumOptionsTallasNoDisponibles(typeFicha, driver));
+        return (secDataProduct.getSecSelTallas().getNumOptionsTallasNoDisponibles());
     }
     
     public int getNumOptionsTallas() {
-        return (secDataProduct.getNumOptionsTallas(typeFicha, driver));
+        return (secDataProduct.getSecSelTallas().getNumOptionsTallas());
     }
     
     public boolean isFichaAccesorio() {

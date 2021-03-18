@@ -32,12 +32,12 @@ public class ArticuloNavigations {
 		if (articleStock.getColor()!=null) {
 			idColor = articleStock.getColor().getId();
 		}
-		if (pageFicha.secDataProduct.isClickableColor(idColor, driver)) {
-			pageFicha.secDataProduct.selectColorWaitingForAvailability(idColor, driver);
+		if (pageFicha.getSecDataProduct().isClickableColor(idColor)) {
+			pageFicha.getSecDataProduct().selectColorWaitingForAvailability(idColor);
 		}
 		articulo.setCodigoColor(idColor);
 
-		articulo.setColorName(pageFicha.secDataProduct.getNombreColorSelected(channel, driver));
+		articulo.setColorName(pageFicha.getSecDataProduct().getNombreColorSelected(channel));
 		if (articleStock.getSize()!=null) {
 			pageFicha.selectTallaByValue(Talla.getTalla(articleStock.getSize().getId()));
 		} else {
@@ -49,11 +49,11 @@ public class ArticuloNavigations {
 
 		// Almacenamos el precio para futuras validaciones (hemos de contemplar todos los posibles formatos según el país)
 		String precio = "";
-		precio = pageFicha.secDataProduct.getPrecioFinalArticulo(driver);
+		precio = pageFicha.getSecDataProduct().getPrecioFinalArticulo();
 		articulo.setPrecio(precio);
 
 		// Extraemos el precio original tachado (si existe)
-		String precioSinDesc = pageFicha.secDataProduct.getPrecioTachadoFromFichaArt(driver);
+		String precioSinDesc = pageFicha.getSecDataProduct().getPrecioTachadoFromFichaArt();
 
 		if (precioSinDesc!=null && "".compareTo(precioSinDesc)!=0) {
 			articulo.setPrecioSinDesc(precioSinDesc);
@@ -62,7 +62,7 @@ public class ArticuloNavigations {
 		}
 
 		// Almacenamos el nombre de artículo para futuras validaciones
-		articulo.setNombre(pageFicha.secDataProduct.getTituloArt(channel, driver));
+		articulo.setNombre(pageFicha.getSecDataProduct().getTituloArt(channel));
 
 		return articulo;
 	}
@@ -78,10 +78,10 @@ public class ArticuloNavigations {
 	private static void selectColorIfExists(String colourCode, AppEcom app, WebDriver driver) {
 		if (colourCode!=null && "".compareTo(colourCode)!=0) {
 			PageFicha pageFicha = PageFicha.newInstance(Channel.desktop, app, driver);
-			if (pageFicha.secDataProduct.isClickableColor(colourCode, driver)) {
+			if (pageFicha.getSecDataProduct().isClickableColor(colourCode)) {
 				int maxSecondsToWait = 5;
 				if (pageFicha.isPageUntil(maxSecondsToWait)) {
-					pageFicha.secDataProduct.selectColorWaitingForAvailability(colourCode, driver);
+					pageFicha.getSecDataProduct().selectColorWaitingForAvailability(colourCode);
 				}
 			}
 		}

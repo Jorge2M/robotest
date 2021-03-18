@@ -266,7 +266,7 @@ public class Compra {
     }
 
     @Test (
-        groups={"Compra", "Canal:desktop_App:votf"}, /*dependsOnGroups = {"Bolsa"},*/ alwaysRun=true,
+        groups={"Compra", "Canal:tablet_App:votf"}, alwaysRun=true,
         description="description=[Usuario no registrado] Test en VOTF compra desde tienda Francia")
     public void COM006_Compra_Francia_Tienda() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();

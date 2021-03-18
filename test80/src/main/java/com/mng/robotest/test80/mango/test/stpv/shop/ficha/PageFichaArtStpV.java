@@ -117,7 +117,7 @@ public class PageFichaArtStpV {
         }
             
         if (datosArticulo.availableNombre()) {
-        	String nombreArtFicha = pageFicha.secDataProduct.getTituloArt(channel, driver).trim();
+        	String nombreArtFicha = pageFicha.getSecDataProduct().getTituloArt(channel).trim();
     	 	validations.add(
 				"Como nombre del artículo aparece el seleccionado: " + datosArticulo.getNombre(),
 				datosArticulo.getNombre().toLowerCase().compareTo(nombreArtFicha.toLowerCase())==0, State.Warn); 
@@ -128,15 +128,15 @@ public class PageFichaArtStpV {
 
     public void selectColorAndSaveData(ArticuloScreen articulo) {
         selectColor(articulo.getCodigoColor());
-        articulo.setColorName(pageFicha.secDataProduct.getNombreColorSelected(channel, driver));
+        articulo.setColorName(pageFicha.getSecDataProduct().getNombreColorSelected(channel));
     }
     
     @Step (
     	description="Seleccionar el color con código <b>#{codigoColor}</b>", 
         expected="Se muestra la ficha correspondiente al color seleccionado")
     public void selectColor(String codigoColor) {
-        if (pageFicha.secDataProduct.isClickableColor(codigoColor, driver)) {
-            pageFicha.secDataProduct.selectColorWaitingForAvailability(codigoColor, driver);
+        if (pageFicha.getSecDataProduct().isClickableColor(codigoColor)) {
+            pageFicha.getSecDataProduct().selectColorWaitingForAvailability(codigoColor);
         }
 
         checkIsSelectedColor(codigoColor);
@@ -146,7 +146,7 @@ public class PageFichaArtStpV {
     	description="Está seleccionado el color con código <b>#{codigoColor}<b>",
     	level=State.Defect)
     private boolean checkIsSelectedColor(String codigoColor) {
-        String codigoColorPage = pageFicha.secDataProduct.getCodeColor(ColorType.Selected, driver); 
+        String codigoColorPage = pageFicha.getSecDataProduct().getCodeColor(ColorType.Selected); 
         return (codigoColorPage.contains(codigoColor));
     }
     
@@ -180,7 +180,7 @@ public class PageFichaArtStpV {
     	description="Seleccionar la talla <b>#{talla.name()} </b>", 
 	    expected="Aparece una capa de introducción email para aviso")
     public void selectTallaNoDisp(Talla talla) {
-	    pageFicha.secDataProduct.selectTallaByValue(talla, pageFicha.getTypeFicha(), driver);
+	    pageFicha.getSecDataProduct().getSecSelTallas().selectTallaByValue(talla);
 	    checkAppearsCapaAvisame();
     }
     
@@ -190,7 +190,7 @@ public class PageFichaArtStpV {
 	 	validations.add(
 			"No aparece el botón \"COMPRAR\"",
 			!secBolsa.isVisibleBotonComprar(), State.Defect);
-	 	boolean isVisibleAvisame = pageFicha.secDataProduct.isVisibleCapaAvisame(driver);
+	 	boolean isVisibleAvisame = pageFicha.getSecDataProduct().isVisibleCapaAvisame();
 	 	validations.add(
 			"Aparece la capa de introducción de avísame",
 			isVisibleAvisame, State.Defect);
@@ -224,7 +224,7 @@ public class PageFichaArtStpV {
     @Validation
     public ChecksTM checkAvisoTallaUnica(boolean isTallaUnica, TypeFicha typeFichaAct) {
     	ChecksTM validations = ChecksTM.getNew();
-    	boolean isVisibleAviso = pageFicha.secDataProduct.isVisibleAvisoSeleccionTalla(channel, driver);
+    	boolean isVisibleAviso = pageFicha.getSecDataProduct().isVisibleAvisoSeleccionTalla(channel);
     	if (isTallaUnica || typeFichaAct==TypeFicha.New) {
 		 	validations.add(
 		 		"NO aparece un aviso indicando que hay que seleccionar la talla",
@@ -241,7 +241,7 @@ public class PageFichaArtStpV {
     	description="Se hace visible la lista de tallas",
     	level=State.Warn)
     public boolean checkListaTallasVisible() {
-    	return (pageFicha.secDataProduct.secSelTallasNew.isVisibleListTallasForSelectUntil(0, driver));
+    	return (pageFicha.getSecDataProduct().getSecSelTallas().isVisibleListTallasForSelectUntil(0));
     }
     
     /**
@@ -278,14 +278,14 @@ public class PageFichaArtStpV {
         expected="El articulo es cambiado de color.")
     public void changeColorGarment() {
         ArticuloScreen articulo = pageFicha.getArticuloObject(app);
-        List<String> colors = SecDataProduct.getColorsGarment(driver);
+        List<String> colors = pageFicha.getSecDataProduct().getColorsGarment();
         String codeColor = getColorNotSelected(colors, articulo);
-        SecDataProduct.selectColor(codeColor, driver);
+        pageFicha.getSecDataProduct().selectColor(codeColor);
 
         validateNotVisibleButtonFavoritos(ActionFavButton.Add);
 
-        SecDataProduct.selectColor(articulo.getCodigoColor(), driver);
-        SecDataProduct.selectTallaByValue(articulo.getTalla(), pageFicha.getTypeFicha(), driver);
+        pageFicha.getSecDataProduct().selectColor(articulo.getCodigoColor());
+        pageFicha.getSecDataProduct().getSecSelTallas().selectTallaByValue(articulo.getTalla());
     }
     
     private String getColorNotSelected(List<String> listColors, ArticuloScreen articulo) {
@@ -359,7 +359,7 @@ public class PageFichaArtStpV {
     	description="Si está visible, Seleccionar el link \"<b>Guía de tallas</b>\"", 
         expected="Aparece la página asociada a la guía de tallas")
     public void selectGuiaDeTallas(AppEcom app) throws Exception {
-    	boolean isVisibleLink = pageFicha.secDataProduct.selectGuiaDeTallasIfVisible(driver);           
+    	boolean isVisibleLink = pageFicha.getSecDataProduct().selectGuiaDeTallasIfVisible();           
     	if (isVisibleLink) {
 	    	switch (app) {
 	    	case outlet:
@@ -399,7 +399,7 @@ public class PageFichaArtStpV {
     public ChecksTM validaPrevNext(LocationArticle locationArt, DataCtxShop dCtxSh) {
     	ChecksTM validations = ChecksTM.getNew();
         int maxSeconds = 5;
-    	boolean isVisiblePrevLink = pageFicha.secDataProduct.isVisiblePrevNextUntil(ProductNav.Prev, maxSeconds, driver);
+    	boolean isVisiblePrevLink = pageFicha.getSecDataProduct().isVisiblePrevNextUntil(ProductNav.Prev, maxSeconds);
         if (locationArt.isFirstInGalery()) {
 		 	validations.add(
 		 		"No es visible el link <b>Prev</b> (lo esperamos hasta " + maxSeconds + " segundos)",
@@ -412,7 +412,7 @@ public class PageFichaArtStpV {
         if (dCtxSh.appE==AppEcom.outlet || dCtxSh.channel==Channel.desktop) {
 		 	validations.add(
 		 		"Es visible el link <b>Next</b>",
-		 		pageFicha.secDataProduct.isVisiblePrevNextUntil(ProductNav.Next, 0, driver), State.Warn);
+		 		pageFicha.getSecDataProduct().isVisiblePrevNextUntil(ProductNav.Next, 0), State.Warn);
         }
         
         return validations;
@@ -422,7 +422,7 @@ public class PageFichaArtStpV {
 		description="Seleccionamos el link #{productNav}</b>", 
         expected="Aparece una página de ficha correcta")
     public void selectLinkNavigation(ProductNav productNav, DataCtxShop dCtxSh, String refProductOrigin) {
-    	pageFicha.secDataProduct.selectLinkNavigation(productNav, driver);
+    	pageFicha.getSecDataProduct().selectLinkNavigation(productNav);
         if (productNav==ProductNav.Prev) {
             validateIsFichaArtDisponible(refProductOrigin, 3);
         }

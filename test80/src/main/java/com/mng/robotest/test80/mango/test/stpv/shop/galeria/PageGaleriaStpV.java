@@ -27,7 +27,6 @@ import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha.TypeFicha;
@@ -539,8 +538,8 @@ public class PageGaleriaStpV {
     		"Aparece la página de ficha (la esperamos hasta " + maxSeconds + " segundos)",
     		pageFicha.isPageUntil(maxSeconds), State.Warn);
       	
-        String nombreArtFicha = pageFicha.secDataProduct.getTituloArt(channel, driver);
-        String precioArtFicha = pageFicha.secDataProduct.getPrecioFinalArticulo(driver);
+        String nombreArtFicha = pageFicha.getSecDataProduct().getTituloArt(channel);
+        String precioArtFicha = pageFicha.getSecDataProduct().getPrecioFinalArticulo();
       	validations.add(
     		"Aparece el artículo anteriormente seleccionado: <br>\" +\n" + 
     		"   - Nombre " + nombre1erArt + "<br>" + 

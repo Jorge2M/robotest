@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.pageobject.shop.ficha;
+package com.mng.robotest.test80.mango.test.pageobject.shop.ficha.tallas;
 
 import java.util.List;
 
@@ -7,68 +7,83 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Talla;
+import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecDataProduct;
 
 
-public class SSecSelTallasFichaOld {
+public class SSecSelTallasFichaOld extends PageObjTM implements SSecSelTallasFicha {
+	
+	//-> Se ha de crear un SSecSelTallasFichaOld_TabletVotf
     
-    static String XPathSelectTalla = "//select[@id[contains(.,'productFormSelect')]]";
-    static String XPathOptionTallaUnica = XPathSelectTalla + "/option[@data-available='true' and @value[contains(.,'99')]]";
-    static String XPathOptionTalla = XPathSelectTalla + "/option[not(@data-text='0')]"; 
+    private final static String XPathSelectTalla = "//select[@id[contains(.,'productFormSelect')]]";
+    private final static String XPathOptionTallaUnica = XPathSelectTalla + "/option[@data-available='true' and @value[contains(.,'99')]]";
+    private final static String XPathOptionTalla = XPathSelectTalla + "/option[not(@data-text='0')]"; 
     
-    public static String getXPathOptionTallaSegunDisponible(boolean disponible) {
+    public SSecSelTallasFichaOld(WebDriver driver) {
+    	super(driver);
+    }
+    
+    private String getXPathOptionTallaSegunDisponible(boolean disponible) {
         String disponibleStr = String.valueOf(disponible);
         return (XPathOptionTalla + "[@data-available='" + disponibleStr + "']");
     }
     
-    public static String getXPathOptionTallaSegunDisponible(boolean disponible, String talla) {
+    private String getXPathOptionTallaSegunDisponible(boolean disponible, String talla) {
     	String xpathOption = getXPathOptionTallaSegunDisponible(disponible);
     	return (xpathOption + "//self::*[text()[contains(.,'" + talla + "')]]");
     }
     
-    public static boolean isVisibleSelectorTallasUntil(int maxSeconds, WebDriver driver) {
-    	return (state(Visible, By.xpath(XPathSelectTalla), driver)
-    			.wait(maxSeconds).check());
+    @Override
+    public boolean isVisibleSelectorTallasUntil(int maxSeconds) {
+    	return (state(Visible, By.xpath(XPathSelectTalla)).wait(maxSeconds).check());
     }
     
-    public static int getNumOptionsTallas(WebDriver driver) {
+    @Override
+    public int getNumOptionsTallas() {
         return (driver.findElements(By.xpath(XPathOptionTalla)).size());
     }
     
-    public static int getNumOptionsTallasNoDisponibles(WebDriver driver) {
-        String xpathOptions = getXPathOptionTallaSegunDisponible(false/*disponible*/);
+    @Override
+    public int getNumOptionsTallasNoDisponibles() {
+        String xpathOptions = getXPathOptionTallaSegunDisponible(false);
         return (driver.findElements(By.xpath(xpathOptions)).size());
     }
     
-    public static boolean isTallaAvailable(String talla, WebDriver driver) {
+    @Override
+    public boolean isTallaAvailable(String talla) {
     	String xpathTalla = getXPathOptionTallaSegunDisponible(true, talla);
-    	return (state(Present, By.xpath(xpathTalla), driver).check());
+    	return (state(Present, By.xpath(xpathTalla)).check());
     }
     
-    public static boolean isTallaUnica(WebDriver driver) {
-    	return (state(Present, By.xpath(XPathOptionTallaUnica), driver).check());
+    @Override
+    public boolean isTallaUnica() {
+    	return (state(Present, By.xpath(XPathOptionTallaUnica)).check());
     }
 
-    public static Select despliegaSelectTallas(WebDriver driver) {
+    private Select despliegaSelectTallas() {
         return (new Select(driver.findElement(By.xpath(XPathSelectTalla))));
     }
     
     /**
      * @param value talla existente en el atributo value (se trata de la talla en formato número)
      */
-    public static void selectTallaByValue(int tallaValue, WebDriver driver) {
+    @Override
+    public void selectTallaByValue(int tallaValue) {
         new Select(driver.findElement(By.xpath(XPathSelectTalla))).selectByValue(String.valueOf(tallaValue));
     }
     
-    public static void selectTallaByIndex(int posicionEnDesplegable, WebDriver driver) {
+    @Override
+    public void selectTallaByIndex(int posicionEnDesplegable) {
         new Select(driver.findElement(By.xpath(XPathSelectTalla))).selectByIndex(posicionEnDesplegable);
     }
     
-    public static void selectFirstTallaAvailable(WebDriver driver) {
-        Select selectTalla = despliegaSelectTallas(driver);
+    @Override
+    public void selectFirstTallaAvailable() {
+        Select selectTalla = despliegaSelectTallas();
         List<WebElement> listOptions = selectTalla.getOptions();
         String valueTallaToSelect = "";
         for (WebElement talla : listOptions) {
@@ -84,8 +99,9 @@ public class SSecSelTallasFichaOld {
     /**
      * @return el literal visible de la talla seleccionada en el desplegable
      */
-    public static String getTallaAlfSelected(AppEcom app, WebDriver driver) {
-        Select select = despliegaSelectTallas(driver);
+    @Override
+    public String getTallaAlfSelected(AppEcom app) {
+        Select select = despliegaSelectTallas();
         String tallaVisible = select.getFirstSelectedOption().getText(); 
         tallaVisible = SecDataProduct.removeAlmacenFromTalla(tallaVisible);
         
@@ -95,7 +111,7 @@ public class SSecSelTallasFichaOld {
         }
         
         //Tratamos el caso de talla única donde unificamos el valor a "U"
-        if (getTallaNumSelected(driver)==Talla.U.getTallaNum()) {
+        if (getTallaNumSelected()==Talla.U.getTallaNum()) {
             tallaVisible = Talla.U.name();
         }
         
@@ -105,12 +121,13 @@ public class SSecSelTallasFichaOld {
 	/**
 	 * @return el value de la talla seleccionada en el desplegable
 	 */
-	public static int getTallaNumSelected(WebDriver driver) {
-		Select select = despliegaSelectTallas(driver);
+	private int getTallaNumSelected() {
+		Select select = despliegaSelectTallas();
 		return (Integer.valueOf(select.getFirstSelectedOption().getAttribute("value")));
 	}
     
-    public static String getTallaAlf(int posicion, WebDriver driver) {
+	@Override
+    public String getTallaAlf(int posicion) {
     	String xpathTalla = "(" + XPathOptionTalla + ")[" + posicion + "]";
     	if (state(Present, By.xpath(xpathTalla), driver).check()) {
     		return (driver.findElement(By.xpath(xpathTalla)).getText());
@@ -118,7 +135,8 @@ public class SSecSelTallasFichaOld {
     	return "";
     }
     
-    public static String getTallaCodNum(int posicion, WebDriver driver) {
+	@Override
+    public String getTallaCodNum(int posicion) {
     	String xpathTalla = "(" + XPathOptionTalla + ")[" + posicion + "]";
     	if (state(Present, By.xpath(xpathTalla), driver).check()) {
     		return (driver.findElement(By.xpath(xpathTalla)).getAttribute("value"));
