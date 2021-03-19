@@ -28,7 +28,7 @@ public abstract class PageFicha extends PageObjTM {
     abstract public int getNumArtVisiblesSlider(Slider typeSlider);
     abstract public boolean isModalNoStockVisible(int maxSecondsToWait);
     
-    private final SecDataProduct secDataProduct; //Name, color, talla section
+    protected final SecDataProduct secDataProduct; //Name, color, talla section
     public static SecFitFinder secFitFinder; //Guía de tallas v.Fit Finder
     
     private final TypeFicha typeFicha;
@@ -68,7 +68,7 @@ public abstract class PageFicha extends PageObjTM {
     }
     
     public ArticuloScreen getArticuloObject(AppEcom app) {
-        return (secDataProduct.getArticuloObject(channel, app, typeFicha, driver));
+        return (secDataProduct.getArticuloObject(channel, app));
     }
     
     public boolean isTallaUnica() {

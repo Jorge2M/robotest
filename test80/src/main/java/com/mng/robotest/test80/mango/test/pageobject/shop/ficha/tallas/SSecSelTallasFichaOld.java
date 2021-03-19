@@ -103,7 +103,7 @@ public class SSecSelTallasFichaOld extends PageObjTM implements SSecSelTallasFic
     public String getTallaAlfSelected(AppEcom app) {
         Select select = despliegaSelectTallas();
         String tallaVisible = select.getFirstSelectedOption().getText(); 
-        tallaVisible = SecDataProduct.removeAlmacenFromTalla(tallaVisible);
+        tallaVisible = removeAlmacenFromTalla(tallaVisible);
         
         //Tratamos el caso relacionado con los entornos de test y eliminamos la parte a partir de " - " para contemplar casos como el de 'S - Delivery in 4-7 business day')
         if (tallaVisible.indexOf(" - ") >= 0) {

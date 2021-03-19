@@ -1,5 +1,8 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.ficha.tallas;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -34,5 +37,18 @@ public interface SSecSelTallasFicha {
 	
 	public default void selectTallaByValue(Talla talla) {
 		selectTallaByValue(talla.getTallaNum());
+	}
+	
+	
+	/**
+	 * @return talla eliminando el literal del tipo " [Almacen: 001]
+	 */
+	public default String removeAlmacenFromTalla(String talla) {
+	    Pattern tallaWithAlmacen = Pattern.compile("(.*)( \\[Almacen: [0-9]{3}\\])");
+	    Matcher matcher = tallaWithAlmacen.matcher(talla);
+	    if (matcher.find()) {
+	    	return matcher.group(1);
+	    }
+	    return talla;
 	}
 }

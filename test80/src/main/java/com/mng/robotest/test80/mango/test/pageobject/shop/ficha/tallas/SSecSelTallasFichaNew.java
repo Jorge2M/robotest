@@ -46,7 +46,7 @@ public class SSecSelTallasFichaNew extends PageObjTM implements SSecSelTallasFic
             }
             
             String textTalla = driver.findElement(By.xpath(XPathTallaSelected)).getText();
-            textTalla = SecDataProduct.removeAlmacenFromTalla(textTalla);
+            textTalla = removeAlmacenFromTalla(textTalla);
             return textTalla;
         }
         

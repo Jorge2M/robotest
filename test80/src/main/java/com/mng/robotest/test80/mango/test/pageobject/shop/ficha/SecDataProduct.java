@@ -11,7 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
-import com.mng.robotest.test80.mango.test.data.Talla;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
@@ -22,8 +21,6 @@ import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha.TypeFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.tallas.SSecSelTallasFicha;
-import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.tallas.SSecSelTallasFichaNew;
-import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.tallas.SSecSelTallasFichaOld;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 /**
@@ -131,14 +128,14 @@ public class SecDataProduct extends PageObjTM {
         return XPathNombreArticuloDesktop;
     }
     
-    public ArticuloScreen getArticuloObject(Channel channel, AppEcom app, TypeFicha typeFicha) {
+    public ArticuloScreen getArticuloObject(Channel channel, AppEcom app) {
         ArticuloScreen articulo = new ArticuloScreen();
         articulo.setReferencia(getReferenciaProducto());
         articulo.setNombre(getTituloArt(channel));
         articulo.setPrecio(getPrecioFinalArticulo());
         articulo.setCodigoColor(getCodeColor(ColorType.Selected));
         articulo.setColorName(getNombreColorSelected(channel));
-        articulo.setTalla(getTallaSelected(typeFicha, app));
+        articulo.setTalla(secSelTallas.getTallaSelected(app));
         articulo.setNumero(1);
         return articulo;
     }
@@ -263,18 +260,7 @@ public class SecDataProduct extends PageObjTM {
     	}
     	return isVisible;
     }
-	
-	/**
-	 * @return talla eliminando el literal del tipo " [Almacen: 001]
-	 */
-	public String removeAlmacenFromTalla(String talla) {
-	    Pattern tallaWithAlmacen = Pattern.compile("(.*)( \\[Almacen: [0-9]{3}\\])");
-	    Matcher matcher = tallaWithAlmacen.matcher(talla);
-	    if (matcher.find()) {
-	    	return matcher.group(1);
-	    }
-	    return talla;
-	}
+
      
     
 //Funciones referentes al prev/next
