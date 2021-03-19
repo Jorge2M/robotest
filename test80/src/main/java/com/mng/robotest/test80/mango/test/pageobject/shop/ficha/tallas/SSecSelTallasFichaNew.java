@@ -4,9 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecDataProduct;
-
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
@@ -39,7 +37,7 @@ public class SSecSelTallasFichaNew extends PageObjTM implements SSecSelTallasFic
     }
     
     @Override
-    public String getTallaAlfSelected() {
+    public String getTallaAlfSelected(AppEcom app) {
     	if (state(Present, By.xpath(XPathTallaSelected)).check()) {
             if (isTallaUnica()) {
                return "unitalla";
@@ -74,10 +72,6 @@ public class SSecSelTallasFichaNew extends PageObjTM implements SSecSelTallasFic
     @Override
     public boolean isTallaUnica() {
     	return (state(Present, By.xpath(XPathTallaUnica)).check());
-    }
-    
-    private boolean isTallaSelected() {
-    	return (state(Present, By.xpath(XPathTallaSelected)).check());
     }
     
     private boolean unfoldListTallasIfNotYet() {

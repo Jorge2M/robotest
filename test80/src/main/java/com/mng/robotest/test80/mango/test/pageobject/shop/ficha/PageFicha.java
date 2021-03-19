@@ -32,13 +32,15 @@ public abstract class PageFicha extends PageObjTM {
     public static SecFitFinder secFitFinder; //Guía de tallas v.Fit Finder
     
     private final TypeFicha typeFicha;
-    Channel channel;
-    AppEcom appE;
+    final Channel channel;
+    final AppEcom appE;
     
-    public PageFicha(TypeFicha typeFicha, WebDriver driver) {
+    public PageFicha(TypeFicha typeFicha, Channel channel, AppEcom app, WebDriver driver) {
     	super(driver);
     	this.secDataProduct = new SecDataProduct(typeFicha, driver);
     	this.typeFicha = typeFicha;
+    	this.channel = channel;
+    	this.appE = app;
     }
     
     public TypeFicha getTypeFicha() {
@@ -46,25 +48,21 @@ public abstract class PageFicha extends PageObjTM {
     }
     
     public SecDataProduct getSecDataProduct() {
-    	return getSecDataProduct();
+    	return secDataProduct;
     }
     
-    //Constructor estático
-    public static PageFicha newInstance(Channel channel, AppEcom appE, WebDriver driver) {
+    public static PageFicha newInstance(Channel channel, AppEcom app, WebDriver driver) {
     	PageFicha pageFicha;
-        if (appE==AppEcom.outlet || channel.isDevice()) {
-        	pageFicha = PageFichaArtOld.getNewInstance(channel, driver);
+        if (app==AppEcom.outlet || channel.isDevice()) {
+        	pageFicha = PageFichaArtOld.getNewInstance(channel, app, driver);
         } else {
-        	pageFicha = PageFichaArt_DesktopShop.getNewInstance(channel, driver);
+        	pageFicha = PageFichaArt_DesktopShop.getNewInstance(channel, app, driver);
         }
-        pageFicha.appE = appE;
         return pageFicha;
     }
     
-    public static PageFicha newInstanceFichaNew(Channel channel, AppEcom appE, WebDriver driver) {
-    	PageFicha pageFicha = PageFichaArt_DesktopShop.getNewInstance(channel, driver);
-    	pageFicha.appE = appE;
-    	return pageFicha;
+    public static PageFicha newInstanceFichaNew(Channel channel, AppEcom app, WebDriver driver) {
+    	return PageFichaArt_DesktopShop.getNewInstance(channel, app, driver);
     }
     
     public ArticuloScreen getArticuloObject(AppEcom app) {

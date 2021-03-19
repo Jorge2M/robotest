@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecBolsaButtonAndLinksNew.ActionFavButton;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecBolsaButtonAndLinksNew.LinksAfterBolsa;
 
@@ -26,14 +28,13 @@ public class PageFichaArt_DesktopShop extends PageFicha {
     
     private static final String XPathHtmlFicha = "//html[@class[contains(.,'ficha')]]";
     
-    private PageFichaArt_DesktopShop(Channel channel, WebDriver driver) {
-        super(TypeFicha.New, driver);
-        this.channel = channel;
+    private PageFichaArt_DesktopShop(Channel channel, AppEcom app, WebDriver driver) {
+        super(TypeFicha.New, channel, app, driver);
     }
     
     //Static constructor
-    public static PageFichaArt_DesktopShop getNewInstance(Channel channel, WebDriver driver) {
-    	return (new PageFichaArt_DesktopShop(channel, driver));
+    public static PageFichaArt_DesktopShop getNewInstance(Channel channel, AppEcom app, WebDriver driver) {
+    	return (new PageFichaArt_DesktopShop(channel, app, driver));
     }
     
     private String getXPathIsPage(String referencia) {

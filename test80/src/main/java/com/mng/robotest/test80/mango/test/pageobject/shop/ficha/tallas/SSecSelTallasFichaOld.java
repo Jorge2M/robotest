@@ -12,13 +12,10 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Talla;
-import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecDataProduct;
 
 
 public class SSecSelTallasFichaOld extends PageObjTM implements SSecSelTallasFicha {
 	
-	//-> Se ha de crear un SSecSelTallasFichaOld_TabletVotf
-    
     private final static String XPathSelectTalla = "//select[@id[contains(.,'productFormSelect')]]";
     private final static String XPathOptionTallaUnica = XPathSelectTalla + "/option[@data-available='true' and @value[contains(.,'99')]]";
     private final static String XPathOptionTalla = XPathSelectTalla + "/option[not(@data-text='0')]"; 
@@ -62,6 +59,11 @@ public class SSecSelTallasFichaOld extends PageObjTM implements SSecSelTallasFic
     @Override
     public boolean isTallaUnica() {
     	return (state(Present, By.xpath(XPathOptionTallaUnica)).check());
+    }
+    
+    @Override
+    public boolean isVisibleListTallasForSelectUntil(int maxSeconds) {
+    	return (state(Visible, By.xpath(XPathOptionTalla)).wait(maxSeconds).check());
     }
 
     private Select despliegaSelectTallas() {

@@ -7,6 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -45,14 +47,12 @@ public class PageFichaArtOld extends PageFicha {
     private static final String XPathModalNoStock = "//div[@class='modalNoStock show']";
     private static final String XPathImagenCarruselIzq = "//div[@class='carousel-img-container']//img[@class[contains(.,'carousel-img')]]";
     
-    private PageFichaArtOld(Channel channel, WebDriver driver) {
-        super(TypeFicha.Old, driver);
-        this.channel = channel;
+    private PageFichaArtOld(Channel channel, AppEcom app, WebDriver driver) {
+        super(TypeFicha.Old, channel, app, driver);
     }
     
-    //Static constructor
-    public static PageFichaArtOld getNewInstance(Channel channel, WebDriver driver) {
-    	return (new PageFichaArtOld(channel, driver));
+    public static PageFichaArtOld getNewInstance(Channel channel, AppEcom app, WebDriver driver) {
+    	return (new PageFichaArtOld(channel, app, driver));
     }
     
     private String getXPathIsPage(String referencia, Channel channel) {
