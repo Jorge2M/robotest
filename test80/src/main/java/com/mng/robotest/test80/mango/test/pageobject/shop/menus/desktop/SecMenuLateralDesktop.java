@@ -51,18 +51,9 @@ public class SecMenuLateralDesktop extends PageObjTM {
 		switch (app) {
 		case outlet:
 			return (XPathLinkMenuWithTagOutlet
-					.replace(TagConcatMenus, dataGaLabel
-					.replace(":", "-")
-					.replaceFirst("-", "/")));
-//			switch (PageGaleriaDesktop.getOutletVersion(driver)) {
-//			case newwithreact:
-//				return (XPathLinkMenuWithTagOutletNew
-//					.replace(TagConcatMenus, dataGaLabel
-//					.replace(":", "-")
-//					.replaceFirst("-", "/")));
-//			case old:
-//				return (XPathLinkMenuWithTagOutletOld.replace(TagConcatMenus, dataGaLabel));
-//			}
+				.replace(TagConcatMenus, dataGaLabel
+				.replace(":", "-")
+				.replaceFirst("-", "/")));
 		default:
 			return (XPathLinkMenuWithTagShop
 				.replace(TagConcatMenus, dataGaLabel

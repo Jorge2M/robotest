@@ -59,7 +59,7 @@ public class PageFichaArtStpV {
         this.pageFicha = PageFicha.newInstance(channel, appE, driver);
         this.secBolsa = SecBolsa.make(channel, app, pais, driver);
         this.modEnvioYdevol = new ModEnvioYdevolNewStpV(driver);
-        this.secProductDescOld = new SecProductDescrOldStpV(channel, driver);
+        this.secProductDescOld = new SecProductDescrOldStpV(channel, appE, driver);
     }
     
     public PageFicha getFicha() {

@@ -30,4 +30,18 @@ public class SecSubmenusGallery {
 		String xpath = getXPathMenu(nameMenu);
 		return PageObjTM.state(State.Visible, By.xpath(xpath), driver).check();
 	}
+	
+	public static boolean isMenuSelected(String nameMenu, WebDriver driver) {
+		if (isVisibleSubmenu(nameMenu, driver)) {
+			String xpath = getXPathMenu(nameMenu);
+			//TODO solicitar data-testid
+			return driver.findElement(By.xpath(xpath)).getAttribute("className").contains("_3alhc");
+		}
+		return false;
+	}
+	
+	public static void clickSubmenu(String nameMenu, WebDriver driver) {
+		String xpath = getXPathMenu(nameMenu);
+		PageObjTM.click(By.xpath(xpath), driver).exec();
+	}
 }

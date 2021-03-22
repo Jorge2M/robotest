@@ -18,8 +18,8 @@ public class SecProductDescrOldStpV {
     
 	private final SecProductDescrOld secProductDescrOld;
 	
-	public SecProductDescrOldStpV(Channel channel, WebDriver driver) {
-		secProductDescrOld = new SecProductDescrOld(channel, driver);
+	public SecProductDescrOldStpV(Channel channel, AppEcom app, WebDriver driver) {
+		secProductDescrOld = new SecProductDescrOld(channel, app, driver);
 	}
 	
 	@Validation

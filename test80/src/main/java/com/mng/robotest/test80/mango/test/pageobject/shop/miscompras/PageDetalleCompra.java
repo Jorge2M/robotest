@@ -37,6 +37,7 @@ public abstract class PageDetalleCompra extends PageObjTM implements PageDetalle
     	case desktop:
     		return new PageDetalleCompraDesktop(channel, driver);
     	case mobile:
+    	case tablet:
     		return new PageDetalleCompraMobil(channel, driver);
     	}
     	return null;

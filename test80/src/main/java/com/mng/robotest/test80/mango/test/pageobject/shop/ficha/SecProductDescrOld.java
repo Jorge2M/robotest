@@ -18,6 +18,7 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 public class SecProductDescrOld extends PageObjTM {
 
 	private final Channel channel;
+	private final AppEcom app;
 	
     public enum TypeStatePanel {folded, unfolded, missing}
     public enum TypePanel {
@@ -50,17 +51,17 @@ public class SecProductDescrOld extends PageObjTM {
         
         private String XPathDivProductDescriptionDesktop = "//div[@class='product-description']";
         private String XPathDivProductDescriptionDevice = "//div[@class[contains(.,'product-detail')]]";
-        public String getXPath(Channel channel) {
-        	if (channel==Channel.mobile) {
+        public String getXPath(Channel channel, AppEcom app) {
+        	if (channel==Channel.mobile || (channel==Channel.tablet && app!=AppEcom.outlet)) {
         		return XPathDivProductDescriptionDevice + xPathDevice;
         	}
         	return XPathDivProductDescriptionDesktop + xPathDesktop;
         }
-        public String getXPathLink(Channel channel) {
-        	if (channel.isDevice()) {
-        		return getXPath(channel);
+        public String getXPathLink(Channel channel, AppEcom app) {
+        	if (channel==Channel.mobile || (channel==Channel.tablet && app!=AppEcom.outlet)) {
+        		return getXPath(channel, app);
         	}
-        	return getXPath(channel) + "//*[@role='button']";
+        	return getXPath(channel, app) + "//*[@role='button']";
         }
         
         public List<AppEcom> getListApps() {
@@ -72,9 +73,10 @@ public class SecProductDescrOld extends PageObjTM {
         }
     }
     
-    public SecProductDescrOld(Channel channel, WebDriver driver) {
+    public SecProductDescrOld(Channel channel, AppEcom app, WebDriver driver) {
     	super(driver);
     	this.channel = channel;
+    	this.app = app;
     }
     
     public TypeStatePanel getStatePanelAfterClick(TypeStatePanel stateOriginal) {
@@ -91,13 +93,13 @@ public class SecProductDescrOld extends PageObjTM {
     
     public TypeStatePanel getStatePanel(TypePanel typePanel) {
         waitMillis(200);
-        String xpathPanel = typePanel.getXPath(channel);
+        String xpathPanel = typePanel.getXPath(channel, app);
         if (!state(Present, By.xpath(xpathPanel), driver).check()) {
             return TypeStatePanel.missing;
         }
         
         WebElement panel = driver.findElement(By.xpath(xpathPanel));
-        if (channel==Channel.mobile) {
+        if (channel==Channel.mobile || (channel==Channel.tablet && app!=AppEcom.outlet)) {
         	By byCapa = By.xpath(".//div[@class[contains(.,'collapsible-info-body')]]");
         	if (state(State.Present, panel).by(byCapa).check()) {
         		WebElement capa = driver.findElement(byCapa);
@@ -128,7 +130,7 @@ public class SecProductDescrOld extends PageObjTM {
     }
 
 	public void clickPanel(TypePanel typePanel) {
-		String xpathPanelLink = typePanel.getXPathLink(channel);
+		String xpathPanelLink = typePanel.getXPathLink(channel, app);
 		click(By.xpath(xpathPanelLink), driver).exec();
 	}
 }

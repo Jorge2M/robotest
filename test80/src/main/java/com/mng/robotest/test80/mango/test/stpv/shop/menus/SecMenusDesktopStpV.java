@@ -109,7 +109,12 @@ public class SecMenusDesktopStpV {
         expected="Aparecen artículos asociados al menú",
         saveNettraffic=SaveWhen.Always)
     public void selectMenuLateral2oLevel(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh) throws Exception {
-    	secMenus.secMenuLateral.clickMenu(menu2onLevel);
+    	if (app==AppEcom.outlet) { 
+    		secMenus.secMenuLateral.clickMenu(menu2onLevel);
+    	} else {
+    		PageGaleria pageGaleria = PageGaleriaDesktop.getNew(dCtxSh.channel, app, driver);
+    		((PageGaleriaDesktop)pageGaleria).secSubmenusGallery.clickSubmenu(menu2onLevel.getNombre(), driver);
+    	}
     	validaSelecMenu(menu2onLevel, dCtxSh);
     }
     
@@ -181,7 +186,11 @@ public class SecMenusDesktopStpV {
     	description="Aparece seleccionado el menú lateral <b>#{menu.getNombre()}</b> (lo esperamos hasta #{maxSeconds} segundos)",
     	level=State.Warn)
     private boolean checkIsSelectedLateralMenu(MenuLateralDesktop menu, int maxSeconds) {
-        return (secMenus.secMenuLateral.isSelectedMenu(menu, maxSeconds));
+    	if (app!=AppEcom.outlet && menu instanceof Menu2onLevel) {
+    		PageGaleria pageGaleria = PageGaleriaDesktop.getNew(Channel.desktop, app, driver);
+    		return ((PageGaleriaDesktop)pageGaleria).secSubmenusGallery.isMenuSelected(menu.getNombre(), driver);
+    	}
+    	return (secMenus.secMenuLateral.isSelectedMenu(menu, maxSeconds));
     }
       
 	@Validation
