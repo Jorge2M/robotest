@@ -983,7 +983,8 @@
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <accesoempl tarjeta="8000000060433" nombre="DURAND , BEATRICE" fecnac="26-9-1971"/>
-<accesovotf usuario="fra07504" password="mng07504"/>
+<!--select * from mngbd.usuarios_venta_asistida where username like 'fra%' and bloqueado = 'N'-->
+<accesovotf usuario="fra04974" password="mng04974"/>
 </pais>
 
 <pais nombre_pais="Deutschland" codigo="004">

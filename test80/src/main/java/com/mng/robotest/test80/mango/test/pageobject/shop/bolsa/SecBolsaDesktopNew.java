@@ -12,8 +12,11 @@ public class SecBolsaDesktopNew extends SecBolsaDesktop {
 	private final LineasArtBolsa lineasArtBolsa;
 	
     private static final String XPathPanelBolsa = "//div[@id='openedShoppingBag']";
-    private static final String XPathBotonComprar = "//button[@data-testid='bag.fullpage.checkout.button']";
     
+    //TODO eliminar el 1o cuando suba a PRO
+    private static final String XPathBotonComprar = 
+    	"//button[@data-testid='bag.fullpage.checkout.button' or @data-testid='bag.preview.checkout.button']";
+
 	private static final String XPathPrecioSubTotal = 
 			XPathPanelBolsa + 
 			"//div[@class[contains(.,'layout-content')]]" + 

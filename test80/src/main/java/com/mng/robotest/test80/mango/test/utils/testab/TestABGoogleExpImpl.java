@@ -54,7 +54,7 @@ public enum TestABGoogleExpImpl implements TestABGoogleExp {
 	),
 
 	SHOP_296_PLP_Desktop_Personalizacion_en_listado (
-		"neDvqgqoTyyx28Y6bDO-5g",
+		"3UgybAXPQI67bh3iGUVxOQ",
 		"sub_8rhk5o_wc6i3wg92ap",
 		Arrays.asList(0,1,2),
 		Arrays.asList(
