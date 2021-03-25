@@ -56,7 +56,7 @@ public class CompraLuque {
         List<Garment> listArticles = getListArticles(pais);
         
         //Access and add articles
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+        AccesoStpV.oneStep(dCtxSh, false, driver);
         DataBag dataBag = new DataBag();
     	SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
         secBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag);

@@ -37,7 +37,7 @@ public class Ayuda {
 		DataCtxShop dCtxSh = getCtxShForTest();
 		dCtxSh.userRegistered = false;
 
-		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+		AccesoStpV.oneStep(dCtxSh, false, driver);
 		(new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver)).clickLinkFooter(SecFooter.FooterLink.ayuda, false);
 		AyudaStpV ayudaStpV = AyudaStpV.getNew(driver);
 		ayudaStpV.selectTypeValidaciones(dCtxSh.channel);

@@ -49,7 +49,7 @@ public class Bolsa {
         DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userRegistered = false;
         
-        AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, driver);
+        AccesoStpV.manySteps(dCtxSh, driver);
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
         secMenusStpV.accesoMenuXRef(menuVestidos, dCtxSh);
@@ -93,7 +93,7 @@ public class Bolsa {
         dCtxSh.userRegistered = true;
         DataBag dataBag = new DataBag();
         
-        AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, driver);
+        AccesoStpV.manySteps(dCtxSh, driver);
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
         secMenusStpV.accesoMenuXRef(menuVestidos, dCtxSh);
@@ -135,7 +135,7 @@ public class Bolsa {
     	SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
         DataBag dataBag = new DataBag();
         
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, dCtxSh.userRegistered, driver);
+        AccesoStpV.oneStep(dCtxSh, dCtxSh.userRegistered, driver);
         secBolsaStpV.altaArticlosConColores(2, dataBag);
         secBolsaStpV.forceStateBolsaTo(StateBolsa.Closed);
         secBolsaStpV.forceStateBolsaTo(StateBolsa.Open); 

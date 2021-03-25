@@ -55,7 +55,7 @@ public class FichaProducto {
 		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest(españa, castellano, true, userShop.user, userShop.password);
 
-		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, driver);
+		AccesoStpV.oneStep(dCtxSh, true, driver);
 		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
 		Garment articleWithColors = getterProducts.getWithManyColors().get(0);
 		SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
@@ -95,7 +95,7 @@ public class FichaProducto {
     	WebDriver driver = TestMaker.getDriverTestCase();
     	DataCtxShop dCtxSh = getCtxShForTest(españa, castellano);
 
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+        AccesoStpV.oneStep(dCtxSh, false, driver);
 		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
         Garment articleWithTotalLook = getterProducts.getOneWithTotalLook(driver);
         SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
@@ -160,7 +160,7 @@ public class FichaProducto {
         Pais corea = PaisGetter.get(PaisShop.CoreaDelSur);
     	DataCtxShop dCtxSh = getCtxShForTest(corea, corea.getListIdiomas().get(0));
      
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+        AccesoStpV.oneStep(dCtxSh, false, driver);
         
         //TODO en el acceso se ejecuta la función setInitialModalsOff para evitar la aparición de modales
         //pero en el caso de Corea se escapa el de Subscripción en la Newsletter
@@ -199,7 +199,7 @@ public class FichaProducto {
     	WebDriver driver = TestMaker.getDriverTestCase();
     	DataCtxShop dCtxSh = getCtxShForTest(españa, castellano);
 
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+        AccesoStpV.oneStep(dCtxSh, false, driver);
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		Menu1rstLevel menuPersonalizacion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.he, null, "personalizacion"));
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);

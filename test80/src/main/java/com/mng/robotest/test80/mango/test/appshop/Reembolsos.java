@@ -83,7 +83,7 @@ public class Reembolsos {
             dCtxSh.passwordUser = dCtxSh.pais.getPassuser();
         }
             
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+        AccesoStpV.oneStep(dCtxSh, false, driver);
         PageReembolsosStpV.gotoRefundsFromMenu(paisConSaldoCta, dCtxSh.appE, dCtxSh.channel, driver);
         if (paisConSaldoCta) {
             if (PageReembolsos.isCheckedRadio(TypeReembolso.StoreCredit, driver)) {
@@ -120,7 +120,7 @@ public class Reembolsos {
             dCtxSh.passwordUser = dCtxSh.pais.getPassuser();
         }
         
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, driver);
+        AccesoStpV.oneStep(dCtxSh, true, driver);
         PageReembolsosStpV.gotoRefundsFromMenu(dCtxSh.pais.existsPagoStoreCredit(), dCtxSh.appE, dCtxSh.channel, driver);
         PageReembolsosStpV.selectRadioSalCtaAndRefresh(driver);
         if (PageReembolsos.isVisibleSaveButtonStoreCredit(driver)) {

@@ -17,6 +17,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.PageIniShopJaponStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.PagePrehomeStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusDesktopStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalChatBotStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.github.jorge2m.testmaker.service.TestMaker;
 
@@ -52,7 +53,7 @@ public class Otras {
         dCtxSh.pais = españa;
         dCtxSh.idioma = castellano;
         dCtxSh.userRegistered = false;
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+        AccesoStpV.oneStep(dCtxSh, false, driver);
         
         SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, driver);
         secMenusDesktopStpV.checkURLRedirectParkasHeEspanya();
@@ -60,7 +61,7 @@ public class Otras {
         dCtxSh.pais = francia;
         dCtxSh.idioma = francia_frances;
         AccesoStpV.goToInitialURL(driver);
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);      
+        AccesoStpV.oneStep(dCtxSh, false, driver);      
         SecMenusDesktopStpV.checkURLRedirectFicha(francia, dCtxSh, driver);
     }
 	
@@ -163,4 +164,36 @@ public class Otras {
         PagePrehomeStpV.entradaShopGivenPaisSeleccionado(japon, japones, dCtxSh.channel, driver);
         PageIniShopJaponStpV.validaPageIniJapon(2, driver);
     }	
+    
+    //TODO cuando lo activen en Tablet añadir ese canal
+    @Test (
+        groups={"Otras", "Canal:desktop,mobile_App:shop"}, 
+        description="Chequear el ChatBot")
+    public void OTR006_chatBot() throws Exception {
+    	WebDriver driver = TestMaker.getDriverTestCase();
+        DataCtxShop dCtxSh = getCtxShForTest();
+        dCtxSh.pais = españa;
+        dCtxSh.idioma = castellano;
+        dCtxSh.userRegistered = false;
+        AccesoStpV.oneStep(dCtxSh, false, driver);
+        
+        ModalChatBotStpV chatBotStpV = new ModalChatBotStpV(driver);
+        if (!chatBotStpV.checkIconVisible()) {
+        	return;
+        }
+        if (!chatBotStpV.clickIcon()) {
+        	return;
+        }
+        
+        String option1 = "Estado de mi pedido";
+        chatBotStpV.isVisibleOption(option1, 3);
+        chatBotStpV.selectOption(option1);
+        
+        String option2 = "Retraso de mi pedido";
+        chatBotStpV.isVisibleOption(option2, 3);
+        chatBotStpV.selectOption(option2);
+        
+        chatBotStpV.checkResponseVisible("Si has recibido un e-mail de retraso de tu pedido no te preocupes", 3);
+        chatBotStpV.isVisibleButton("¡Sí, gracias!", 1);
+    }
 }

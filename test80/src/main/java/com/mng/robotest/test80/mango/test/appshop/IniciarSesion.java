@@ -45,7 +45,7 @@ public class IniciarSesion {
         DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userRegistered = false;
                     
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+        AccesoStpV.oneStep(dCtxSh, false, driver);
         PageIdentificacionStpV.inicioSesionDatosKO("usuarioKeNoExiste@mango.com", "chuflapassw", dCtxSh.channel, dCtxSh.appE, driver);
         PageIdentificacionStpV.inicioSesionDatosKO(Constantes.mail_standard, "chuflapassw", dCtxSh.channel, dCtxSh.appE, driver);
         PageIdentificacionStpV.selectHasOlvidadoTuContrasenya(driver);
@@ -64,6 +64,6 @@ public class IniciarSesion {
         dCtxSh.passwordUser = userShop.password;
         dCtxSh.userRegistered = true;
             
-        AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, driver);
+        AccesoStpV.manySteps(dCtxSh, driver);
     }
 }

@@ -120,7 +120,7 @@ public class Compra {
 		//Creamos una estructura para ir almacenando los datos del proceso de pagos
 		String nTarjeta;
 		String cvvTarjeta = "";
-		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+		AccesoStpV.oneStep(dCtxSh, false, driver);
 		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
 		secMenusStpV.seleccionLinea(LineaType.she, null, dCtxSh);
 		(new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver)).clickLinkFooter(FooterLink.cheque_regalo, false);

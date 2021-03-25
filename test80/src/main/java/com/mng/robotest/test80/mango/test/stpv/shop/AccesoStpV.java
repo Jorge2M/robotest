@@ -46,14 +46,14 @@ public class AccesoStpV {
 	
 	public static void defaultAccess(WebDriver driver) throws Exception {
     	DataCtxShop dCtxSh = Test80.getDefaultDataShop();
-    	accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+    	oneStep(dCtxSh, false, driver);
 	}
 	
 	@Step (
 		description="Acceder a Mango (" + tagNombrePais + "/" + tagLiteralIdioma + ")<br>" + tagRegistro, 
 		expected="Se accede correctamente",
 		saveNettraffic=SaveWhen.Always)
-	public static void accesoAplicacionEnUnPaso(DataCtxShop dCtxSh, boolean clearArticulos, WebDriver driver) 
+	public static void oneStep(DataCtxShop dCtxSh, boolean clearArticulos, WebDriver driver) 
 	throws Exception {
 		String registro = "";
 		if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf) {
@@ -161,7 +161,7 @@ public class AccesoStpV {
      * Accedemos a la aplicación (shop/outlet/votf)
      * Se ejecutan cada acción en un paso
      */
-    public static void accesoAplicacionEnVariosPasos(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    public static void manySteps(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         if (dCtxSh.appE==AppEcom.votf && !dCtxSh.userRegistered) { //En VOTF no tiene sentido identificarte con las credenciales del cliente
             AccesoStpV.accesoVOTFtoHOME(dCtxSh, driver);                    
         } else {
@@ -231,7 +231,7 @@ public class AccesoStpV {
         StepTestMaker.replaceInDescription(tagCodigoPaisOrigen, dCtxSh.pais.getCodigo_pais());
         StepTestMaker.replaceInDescription(tagNombreIdiomaOrigen, dCtxSh.idioma.getLiteral());
     	
-        AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, driver);
+        AccesoStpV.manySteps(dCtxSh, driver);
         
         Pais paisOriginal = dCtxSh.pais;
         IdiomaPais idiomaOriginal = dCtxSh.idioma;

@@ -43,7 +43,7 @@ public class Footer {
 		DataCtxShop dCtxSh = getCtxShForTest();
 		dCtxSh.userRegistered = false;
 
-		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+		AccesoStpV.oneStep(dCtxSh, false, driver);
 		String urlInitialPage = driver.getCurrentUrl();
 		SecFooterStpV secFooterStpV = new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver);
 		secFooterStpV.validaLinksFooter();

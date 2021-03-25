@@ -73,7 +73,7 @@ public class GaleriaProducto {
         dCtxSh.userRegistered = true;
         String tipoPrendasGaleria = "camisa";
             
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, driver);
+        AccesoStpV.oneStep(dCtxSh, false/*clearArticulos*/, driver);
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
@@ -126,7 +126,7 @@ public class GaleriaProducto {
 		DataCtxShop dCtxSh = getCtxShForTest();
 		dCtxSh.userRegistered = false;
 
-		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+		AccesoStpV.oneStep(dCtxSh, false, driver);
 		Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
 		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
 		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
@@ -176,7 +176,7 @@ public class GaleriaProducto {
         dCtxSh.passwordUser = userShop.password;
         dCtxSh.userRegistered = true;
     
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+        AccesoStpV.oneStep(dCtxSh, false, driver);
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
@@ -225,7 +225,7 @@ public class GaleriaProducto {
         dCtxSh.userRegistered = false;
     
         //Ini script
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+        AccesoStpV.oneStep(dCtxSh, false, driver);
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
@@ -270,7 +270,7 @@ public class GaleriaProducto {
 		dCtxSh.userRegistered = true;
 
 		// Abrir listado de mujer camisas
-		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, driver);
+		AccesoStpV.oneStep(dCtxSh, false/*clearArticulos*/, driver);
 		Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
 		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
 		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);

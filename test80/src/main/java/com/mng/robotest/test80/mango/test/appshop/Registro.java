@@ -94,7 +94,7 @@ public class Registro implements Serializable {
             return;
         }
             
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+        AccesoStpV.oneStep(dCtxSh, false, driver);
         SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
         userMenusStpV.selectRegistrate(dCtxSh);
         
@@ -167,7 +167,7 @@ public class Registro implements Serializable {
 	public static Map<String,String> registro_e_irdeshopping_nopubli(DataCtxShop dCtxSh, WebDriver driver) 
 	throws Exception {
 		dCtxSh.userRegistered = false;
-		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+		AccesoStpV.oneStep(dCtxSh, false, driver);
 		SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
 		userMenusStpV.selectRegistrate(dCtxSh);
 		String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
@@ -186,7 +186,7 @@ public class Registro implements Serializable {
 	public static Map<String,String> registro_e_irdeshopping_sipubli(DataCtxShop dCtxSh, VersionRegistroSuite version, WebDriver driver) 
 	throws Exception {
         dCtxSh.userRegistered = false;
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+        AccesoStpV.oneStep(dCtxSh, false, driver);
         if (!dCtxSh.userRegistered) {
         	ModalSuscripcionStpV.validaRGPDModal(dCtxSh, driver);
         }

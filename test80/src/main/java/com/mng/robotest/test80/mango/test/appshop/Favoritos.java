@@ -93,7 +93,7 @@ public class Favoritos implements Serializable {
 		DataFavoritos dataFavoritos = new DataFavoritos();
 		DataBag dataBolsa = new DataBag();
 
-		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+		AccesoStpV.oneStep(dCtxSh, false, driver);
     	SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
 		secBolsaStpV.clear();
 
@@ -138,7 +138,7 @@ public class Favoritos implements Serializable {
 		//Script
 		//TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
 		//TestAB.activateTestABfiltrosMobil(1, dCtxSh, getDriver().driver); //!!!!!
-		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, driver);
+		AccesoStpV.oneStep(dCtxSh, false/*clearArticulos*/, driver);
 		
 		SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
 		secBolsaStpV.clear();

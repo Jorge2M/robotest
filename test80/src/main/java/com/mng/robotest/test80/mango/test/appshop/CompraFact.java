@@ -121,7 +121,7 @@ public class CompraFact implements Serializable {
         }
         
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, this.usrRegistrado, driver);
+        AccesoStpV.oneStep(dCtxSh, this.usrRegistrado, driver);
         //TestAB.activateTestABcheckoutMovilEnNPasos(0, dCtxSh, dFTest.driver);
 
         int maxArticlesAwayVale = 3;

@@ -104,7 +104,7 @@ public class Loyalty {
         dCtxSh.passwordUser = UserTest.loy001.getPassword();
         dCtxSh.userRegistered = true;
         
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, driver);
+        AccesoStpV.oneStep(dCtxSh, true, driver);
         
         //Queremos asegurarnos que obtenemos artículos no-rebajados para poder aplicarle el descuento por Loyalty Points
         DataBag dataBag = addBagArticleNoRebajado(dCtxSh, driver);
@@ -163,7 +163,7 @@ public class Loyalty {
 			dCtxSh.passwordUser = UserTest.loy002.getPassword();
 		}
 
-		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+		AccesoStpV.oneStep(dCtxSh, false, driver);
 		SecMenusUserStpV secMenusUserStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
 		int loyaltyPointsIni = secMenusUserStpV.clickMenuMangoLikesYou();
 		if (loyaltyPointsIni < 3000 && !isEntornoPro) {
@@ -199,7 +199,7 @@ public class Loyalty {
 			dCtxSh.passwordUser = UserTest.loy003.getPassword();
 		}
 
-		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+		AccesoStpV.oneStep(dCtxSh, false, driver);
 		SecMenusUserStpV secMenusUserStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
 		int loyaltyPointsIni = secMenusUserStpV.clickMenuMangoLikesYou();
 		if (loyaltyPointsIni < 3000 && !isEntornoPro) {
@@ -274,7 +274,7 @@ public class Loyalty {
 		dCtxSh.userConnected = UserTest.loy005_receptor.getEmail();
 		dCtxSh.passwordUser = UserTest.loy005_receptor.getPassword();
 		dCtxSh.userRegistered = true;
-		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+		AccesoStpV.oneStep(dCtxSh, false, driver);
 		SecMenusUserStpV secMenusUserStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
 		int iniPointsReceptor = secMenusUserStpV.clickMenuMangoLikesYou();
 		
