@@ -1,0 +1,215 @@
+//Se pueden hacer imports al principio del script, estos no los usamos pe7ro se definirian así
+//import groovy.json.JsonOutput
+//import groovy.json.JsonSlurper
+//import java.text.SimpleDateFormat
+
+//Si quisieramos ejecutar una funcion antes de la ejecución del pipeline (por ejemplo para buscar info en la config de jenkins, se hace asís
+//def DPL_SCP_PARAMS=getScpServers()
+//Y así es como se define una función que luego podemos invocar en nuestro pipeline
+/*
+def getScpServers() {
+ def instance=Jenkins.getInstanceOrNull()
+ def publish_ssh = instance.getDescriptor("jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin") 
+ def dplParams= new DplParams(hostChoices:'', dplHosts : [:])
+ if (publish_ssh.getHostConfigurations().size() > 0) {
+     publish_ssh.getHostConfigurations().each() {
+        dplParams.dplHosts.put(it.getHostname(),it.getName())
+        dplParams.hostChoices = dplParams.hostChoices +  it.getHostname() + ','
+     }
+     dplParams.hostChoices = dplParams.hostChoices.substring(0,dplParams.hostChoices.length()-1)
+ }
+ 
+ return dplParams;
+}
+*/
+
+//Podemos definir classes como la que usa la funcion anterior
+/*
+class DplParams {
+    String hostChoices;
+    Map dplHosts;
+}
+*/
+
+@NonCPS
+def inputParamsString(dir) {
+    def selectedProperty = input( id: 'userInput', 
+        message: 'Choose properties file', 
+        parameters: [ [$class: 'ListSubversionTagsParameterDefinition', 
+            name: 'SVN_REPO', 
+            tagsDir: 'https://conexus.prod.fedex.com:9443/subversion/sefs_commons/tags', 
+            credentialsId: 'eb3bca34-c00f-4c48-bee9-5f953b8bce9e',
+            reverseByDate: true
+        ] ])
+}
+
+pipeline {
+    
+    //Si se usa master-slave jenkins se puede seleccionar el nodo aquí, pero como nosotros sólo usamos master, no aplica.
+    agent any
+    
+    //Temporarily disabled until speaking Miguel
+    //tools { 
+        //Dependiendo de la instalación estos identificadores varían, tengo pendiente montar un script para averiguar 'on the fly' los id's
+    //    maven 'MVN3'  
+    //    jdk 'JDK8' 
+    //}
+    
+    options {
+        buildDiscarder(logRotator(daysToKeepStr:'60',numToKeepStr:'-1', artifactDaysToKeepStr: '30',artifactNumToKeepStr:'-1'))
+        timeout(time: 30, unit: 'MINUTES')
+    }
+    
+    parameters {
+    
+    	//I don't understand this param. Temporarily disabled until speaking with Miguel
+        //booleanParam(name: 'CI_EXECUTION', defaultValue: true, description: 'Informar a true si se quiere obviar la compliación.')
+        
+        //Params specifics for Test80. Temporarily disabled
+        //string(name: 'BUCKET_S3_REPORT', defaultValue: 'id_bucket', description: 'identificador del bucket')
+        //string(name: 'RUTA_DESCARGA_S3_REPORT', defaultValue: 'dir/to/report/rel/job/workspace/', description: 'ruta relativa del desde donde hacemos la descarga s3 del report')
+        
+        //Me sirve para ejemplarizar el uso de choice, se podría extraer/fijar la dirección de la configuración general de Jenkis, donde estará siempre el correo del equipo.
+        choice(name: 'CORREO_EQUIPO', choices: 'jorge.munoz.sge@mango.com\neqp.ecommerce.qamango@mango.com\neqp.ebusiness.test@mango.com\neqp.ecommerce.support@mango.com\neqp.ecommerce.sysops@mango.com\neqp.ecommerce.payments@mango.com\neqp.ecommerce.marketplaces@mango.com', description: 'El nombre de la aplicación.')
+        
+        //La branch dinamica como parametro en pipeline no se hacerla, he visto por hay que se puede hacer algo como esto, pero no se muy bien como...
+        //[$class: 'ListSubversionTagsParameterDefinition',name: 'SVN_TAG_TO_BUILD',tagsDir: 'https://server/svn/repo/tags',credentialsId: 'jenkins',maxTags: '50',reverseByDate: true,reverseByName: false]
+        [$class: 'ListSubversionTagsParameterDefinition', 
+        	name: 'BRANCH', 
+        	tagsDir: 'https://ci.mangodev.net/svn/testing', 
+        	credentialsId: 'jenkins_admin', 
+        	maxTags: '50', 
+        	reverseByDate: true, 
+        	reverseByName: false]
+        	
+        string(name: 'ROBOTEST_BRANCH2', defaultValue: 'branches/RELEASE_2', description: 'ruta relativa del desde donde hacemos la descarga s3 del report')   
+        //La instancia y el user id la pongo a fuego... se podría generar el nombre con el plugin BuildUser https://support.cloudbees.com/hc/en-us/articles/226287607-How-to-use-Build-User-Vars-Plugin-with-Pipeline-  
+        string(name: 'ROBOTEST_INSTANCE_ID', defaultValue: 'MangoTest.usuario', description: 'Nombre instancia robotest')
+    }    
+     
+    stages {
+        stage('Downlad SCM') {
+            //when {
+            //    expression {
+            //      return "${params.CI_EXECUTION}" != "true" 
+            //    }
+            //}          
+            steps {
+                //La credential debe tener el ID = USER_TEAM_OPS_LDAP_CREDENTIALS con el id ldap y password del usuario de operaciones de cada equipo (enkins.admin, pagos payments.admin, etc.)
+                checkout([$class: 'SubversionSCM', 
+                            additionalCredentials: [], 
+                            excludedCommitMessages: '', 
+                            excludedRegions: '', 
+                            excludedRevprop: '', 
+                            excludedUsers: '', 
+                            filterChangelog: false, 
+                            ignoreDirPropChanges: false, 
+                            includedRegions: '', 
+                            locations: [[credentialsId: 'USER_TEAM_OPS_LDAP_CREDENTIALS', 
+                            depthOption: 'infinity', 
+                            ignoreExternalsOption: true, 
+                            local: '.', 
+                            remote: "https://ci.mangodev.net/svn/testing/branches/RELEASE_1/MangoTest"]], 
+                            workspaceUpdater: [$class: 'UpdateUpdater']])
+            }  
+        }     
+        stage('Build MangoTest') {
+            //when {
+            //    expression {
+            //      return "${params.CI_EXECUTION}" != "true" 
+            //    }
+            //}          
+            steps {
+                  sh "mvn install"
+            }  
+        } 
+        stage('Terraform') {
+            //when {
+            //    expression {
+            //      return "${params.CI_EXECUTION}" == "true" 
+            //    }
+            //}          
+            steps {
+                //La credential debe tener el ID = USER_TEAM_OPS_AWS_ACCESS_KEY_ID con el access key id y access key password id generado en la consola de AWS para el usuario de operaciones de cada equipo.
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'USER_TEAM_OPS_AWS_CREDENTIALS',
+                                      usernameVariable: 'USER_TEAM_OPS_AWS_ACCESS_KEY_ID', passwordVariable: 'USER_TEAM_OPS_AWS_SECRET_ACCESS_KEY']]) {
+                    script {
+                        
+                        //Sino pongo esto en mi local, docker me da error de permisos al usar el /var/run/docker.sock  
+                        sh 'sudo chmod 777 /var/run/docker.sock'
+                        
+                        //El comando siempre es igual, primero recupero el volumen...
+                        VOLUMES_FROM=sh(returnStdout: true, script: "docker ps --filter 'name=applications_jenkins_1' -q").trim()
+                        
+                        //...despues monto el comando...
+                        DOCKER_TERRRAFORM_CMD="docker run --rm -i -e AWS_ACCESS_KEY_ID=${USER_TEAM_OPS_AWS_ACCESS_KEY_ID} -e AWS_SECRET_ACCESS_KEY=${USER_TEAM_OPS_AWS_SECRET_ACCESS_KEY} -e AWS_DEFAULT_REGION=eu-west-1 --volumes-from ${VOLUMES_FROM} -w /awsdeploy/terraform hashicorp/terraform:0.11.2"
+                        
+                        
+                        echo "Init deploy MangoTest in instance ${params.ROBOTEST_INSTANCE_ID} with CMD: ${DOCKER_TERRRAFORM_CMD}"
+
+                        //...y ejecuto finalmente los comandos reales....
+                        sh "${DOCKER_TERRRAFORM_CMD} init -backend-config \"key=infraestructure/robotest/tfstate-${params.ROBOTEST_INSTANCE_ID}\""
+        
+                        sh "${DOCKER_TERRRAFORM_CMD} plan -var robot=\"MangoTest\" -var branch_robot=${params.ROBOTEST_BRANCH} -var id_instance=\"${params.ROBOTEST_INSTANCE_ID}\""
+        
+                        sh "${DOCKER_TERRRAFORM_CMD} apply -auto-approve -var robot=\"MangoTest\" -var branch_robot=${params.ROBOTEST_BRANCH} -var id_instance=\"${params.ROBOTEST_INSTANCE_ID}\""
+                    }
+                }     
+                
+            	//Code specific for Test80. Temporary disabled 
+                //withAWS(credentials:'USER_TEAM_OPS_AWS_CREDENTIALS') {
+                    //Hay que probarlo no se si funciona, requiere tener instalado el plugin pipeline-aws https://github.com/jenkinsci/pipeline-aws-plugin#s3download
+                    //Desconozco bucket y ruta del bucket 
+                //    s3Download(file:"robotest1_report/", bucket:'${params.BUCKET_S3_REPORT}', path:'${params.RUTA_DESCARGA_S3_REPORT}', force:true)
+                //}     
+            }
+        }
+     }
+    post {
+        //always {
+            //Colocamos el link resultante al report en la home del Job.
+            //El directorio es el mismo desde el que ejecutamos
+            
+            //Code specific for Test80. Temporarily disabled
+            //publishHTML([
+            //             allowMissing: true,
+            //             alwaysLinkToLastBuild: false,
+            //             keepAll: false,
+            //             reportDir: 'robotest1_report/',
+            //             reportFiles: 'index.html',
+            //             reportTitles: 'INDICE_REPORT',
+            //             reportName: 'ROBOTEST_REPORT'
+            //           ])     
+        //}
+        success {
+            notifyByMail("SUCCESS");
+        }
+        failure {
+            notifyByMail("FAILURE");
+        }
+        unstable {
+            notifyByMail("UNSTABLE");
+        }
+    }         
+     
+}
+
+//Las clases y metodos se pueden definir al final del pipeline, no es problema
+def notifyByMail(String buildStatus) {
+
+  def subject = "ROBOTEST PIPELINE EXECUTION ${env.JOB_NAME} NUMERO CONSTRUCCIÓN ${env.BUILD_NUMBER}"
+  
+  //Se podría generar un link al report de Jenkins publicado por publishHTML
+  def details = "RESULTADO DE LA CONSTRUCCIÓN: ${buildStatus}!<br /><br />"
+  
+  //https://jenkins.io/doc/pipeline/steps/email-ext/ 
+  emailext (
+    subject: subject,
+    body: details,
+    attachLog: true,
+    mimeType: 'text/html',
+    to: "${params.CORREO_EQUIPO}",
+    replyTo: "no-reply@mangodev.net"
+  )
+  
+}

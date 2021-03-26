@@ -166,6 +166,19 @@ public class SecDataProduct extends PageObjTM {
     
 //Funciones referentes a los colores
     
+    public int getNumColors() {
+    	return getListColors().size();
+    }
+    
+    public void clickColor(int numColor) {
+    	WebElement color = getListColors().get(numColor - 1);
+    	click(color).exec();
+    }
+    
+    private List<WebElement> getListColors() {
+    	return driver.findElements(ColorType.Available.getBy());
+    }
+    
     public String getCodeColor(ColorType colorType) {
     	WebElement color = getElementWeb(colorType.getBy(), driver);
         return (color.getAttribute("id"));

@@ -4,6 +4,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
@@ -33,12 +34,28 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 		return (new SecModalPersonalizacionStpV(dCtxSh, driver));
 	}
 	
-	@SuppressWarnings("unused")
-	@Validation (
-		description="El artículo es personalizable (aparece el link \"Añadir bordado\")",
-		level=State.Defect)
-	public boolean checkAreArticleCustomizable() {
-		return (state(Present, ModalElement.AñadirBordadoLink.getBy(dCtxSh.channel)).wait(1).check());
+	public boolean checkArticleCustomizable() {
+		return checkArticleCustomizable(State.Defect);
+	}
+	
+	public boolean checkArticleCustomizable(State levelError) {
+		ChecksTM checks = checkAreArticleCustomizable(levelError);
+		for (Check check : checks.getListChecks()) {
+			if (!check.isOvercomed()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	@Validation
+	private ChecksTM checkAreArticleCustomizable(State levelError) {
+		ChecksTM validations = ChecksTM.getNew();
+		validations.add(
+			"El artículo es personalizable (aparece el link \"Añadir bordado\")",
+			state(Present, ModalElement.AñadirBordadoLink.getBy(dCtxSh.channel)).wait(1).check(), 
+			levelError);
+		return validations;
 	}
 
 	@Step(

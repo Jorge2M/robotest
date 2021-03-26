@@ -108,4 +108,8 @@ public abstract class PageFicha extends PageObjTM {
     public boolean isFichaAccesorio() {
         return (this.driver.getCurrentUrl().contains("accesorio"));
     }
+    
+    public int getNumColors() {
+    	return secDataProduct.getNumColors();
+    }
 }

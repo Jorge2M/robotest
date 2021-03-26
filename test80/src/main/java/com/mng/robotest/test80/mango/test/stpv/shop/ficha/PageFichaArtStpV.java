@@ -142,6 +142,13 @@ public class PageFichaArtStpV {
         checkIsSelectedColor(codigoColor);
     }
     
+    @Step (
+    	description="Seleccionar el color en la posición <b>#{numColor}</b>", 
+        expected="El color se selecciona correctamente")
+    public void selectColor(int numColor) {
+    	pageFicha.getSecDataProduct().clickColor(numColor);
+    }
+    
     @Validation (
     	description="Está seleccionado el color con código <b>#{codigoColor}<b>",
     	level=State.Defect)

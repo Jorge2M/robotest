@@ -39,6 +39,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalBuscadorTiendasStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.service.TestMaker;
 
 public class FichaProducto {
@@ -209,10 +210,18 @@ public class FichaProducto {
         secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
 		LocationArticle articleNum = LocationArticle.getInstanceInCatalog(1);
 		pageGaleriaStpV.selectArticulo(articleNum, dCtxSh);
-        SecModalPersonalizacionStpV modalPersonalizacionStpV = SecModalPersonalizacionStpV.getNewOne(dCtxSh, driver); 
-        modalPersonalizacionStpV.checkAreArticleCustomizable();
-        
+		
         PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
+        SecModalPersonalizacionStpV modalPersonalizacionStpV = SecModalPersonalizacionStpV.getNewOne(dCtxSh, driver); 
+    	int numColors = pageFichaStpv.getFicha().getNumColors();
+        for (int i=1; i<=numColors; i++) {
+        	pageFichaStpv.selectColor(i);
+        	State levelError = (i==numColors) ? State.Defect : State.Info;
+        	if (modalPersonalizacionStpV.checkArticleCustomizable(levelError)) {
+        		break;
+        	}
+        }
+        
         pageFichaStpv.selectFirstTallaAvailable();
         modalPersonalizacionStpV.selectLinkPersonalizacion();
         //modalPersonalizacionStpV.startCustomization();
