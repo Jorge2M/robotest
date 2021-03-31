@@ -303,7 +303,7 @@ public class SecBolsaStpV {
 	 */
 	public void validaSelectButtonComprar(DataBag dataBag, DataCtxShop dCtxSh) throws Exception {
 		if (dCtxSh.userRegistered) {
-			new PageCheckoutWrapperStpV(dCtxSh.channel, driver).validateIsFirstPage(dCtxSh.userRegistered, dataBag);
+			new PageCheckoutWrapperStpV(dCtxSh.channel, dCtxSh.appE, driver).validateIsFirstPage(dCtxSh.userRegistered, dataBag);
 		} else {
 			int maxSeconds = 5;
 			Page1IdentCheckoutStpV.validateIsPage(maxSeconds, driver);

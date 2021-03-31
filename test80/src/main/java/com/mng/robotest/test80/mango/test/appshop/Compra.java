@@ -89,7 +89,7 @@ public class Compra {
 		DataPedido dataPedido = new DataPedido(dCtxSh.pais);
 		dataPedido.setPago(pagoVisaToTest);
 
-		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(dCtxSh.channel, driver);
+		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(dCtxSh.channel, dCtxSh.appE, driver);
 		pageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido);
 		dCtxPago.setDataPedido(dataPedido);
 		dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
@@ -141,7 +141,7 @@ public class Compra {
 		chequeRegalo.setEmail(Constantes.mail_standard);
 		chequeRegalo.setImporte(Importe.euro50);
 		chequeRegalo.setMensaje("Ya sólo queda por determinar si el universo partió de cero o del infinito");
-		pageChequeRegaloInputDataStpV.inputDataAndClickComprar(dCtxSh.channel, chequeRegalo);
+		pageChequeRegaloInputDataStpV.inputDataAndClickComprar(dCtxSh.channel, dCtxSh.appE, chequeRegalo);
 
 		//Ejecutar el pago
 		FlagsTestCkout fTCkout = new FlagsTestCkout();
@@ -158,7 +158,7 @@ public class Compra {
 		dCtxPago.getDataPedido().setPago(pagoVISA);
 		DataPedido dataPedido = dCtxPago.getDataPedido();
 		
-		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(dCtxSh.channel, driver);
+		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(dCtxSh.channel, dCtxSh.appE, driver);
 		dataPedido.setImporteTotal(pageCheckoutWrapper.getPrecioTotalFromResumen());
 		dataPedido.setDireccionEnvio("");
 		dataPedido.setEmailCheckout(dCtxSh.userConnected);

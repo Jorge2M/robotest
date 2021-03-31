@@ -30,6 +30,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PageCheckoutWrapper extends PageObjTM {
  
 	private final Channel channel;
+	private final AppEcom app;
 	
     private final Page1DktopCheckout page1DktopCheckout;
     private final Page1EnvioCheckoutMobil page1MobilCheckout;
@@ -40,12 +41,13 @@ public class PageCheckoutWrapper extends PageObjTM {
     //Abarca cualquier div de loading
     private final static String XPathDivLoading = "//div[@class[contains(.,'panel_loading')] or @class[contains(.,'container-full-centered-loading')] or @class[contains(.,'loading-panel')]]";
     
-    public PageCheckoutWrapper(Channel channel, WebDriver driver) {
+    public PageCheckoutWrapper(Channel channel, AppEcom app, WebDriver driver) {
     	super(driver);
     	this.channel = channel;
-        this.page1DktopCheckout = new Page1DktopCheckout(channel, driver);
+    	this.app = app;
+        this.page1DktopCheckout = new Page1DktopCheckout(channel, app, driver);
         this.page1MobilCheckout = new Page1EnvioCheckoutMobil(driver);
-        this.page2MobilCheckout = new Page2DatosPagoCheckoutMobil(channel, driver);
+        this.page2MobilCheckout = new Page2DatosPagoCheckoutMobil(channel, app, driver);
         this.modalAvisoCambioPais = new ModalAvisoCambioPais(driver);
         this.secTarjetaPci = SecTarjetaPci.makeSecTarjetaPci(channel, driver);
     }
@@ -211,11 +213,11 @@ public class PageCheckoutWrapper extends PageObjTM {
         return (page1DktopCheckout.isVisibleDescuentoEmpleadoUntil(secondsToWait)); 
     }
 
-    public boolean isNumMetodosPagoOK(Pais pais, AppEcom app, boolean isEmpl) {
+    public boolean isNumMetodosPagoOK(Pais pais, boolean isEmpl) {
         if (channel==Channel.mobile) {
-            return page2MobilCheckout.isNumMetodosPagoOK(pais, app, isEmpl);
+            return page2MobilCheckout.isNumMetodosPagoOK(pais, isEmpl);
         }
-        return page1DktopCheckout.isNumMetodosPagoOK(pais, app, isEmpl);
+        return page1DktopCheckout.isNumMetodosPagoOK(pais, isEmpl);
     }
     
     public boolean isNumpagos(int numPagosExpected) {

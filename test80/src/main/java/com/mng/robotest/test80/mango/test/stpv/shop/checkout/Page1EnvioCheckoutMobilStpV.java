@@ -7,6 +7,7 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -86,25 +87,25 @@ public class Page1EnvioCheckoutMobilStpV {
         expected="Aparece la página asociada al Paso-2")
     public void clickContinuarToMetodosPago(DataCtxShop dCtxSh, boolean saldoEnCuenta) throws Exception {
     	page1EnvioCheckoutMobil.clickContinuar();
-        new PageCheckoutWrapperStpV(dCtxSh.channel, driver).validateLoadingDisappears(10);
-        checkAppearsStep2();
+        new PageCheckoutWrapperStpV(dCtxSh.channel, dCtxSh.appE, driver).validateLoadingDisappears(10);
+        checkAppearsStep2(dCtxSh.appE);
         if (!saldoEnCuenta) {
-        	checkAppearsPageWithPaymentMethods(dCtxSh.pais);
+        	checkAppearsPageWithPaymentMethods(dCtxSh.pais, dCtxSh.appE);
         }
     }
     
     @Validation (
     	description="Aparece la página asociada al Paso-2",
     	level=State.Defect)
-    private boolean checkAppearsStep2() {
-    	return (new Page2DatosPagoCheckoutMobil(Channel.mobile, driver).isPageUntil(3));
+    private boolean checkAppearsStep2(AppEcom app) {
+    	return (new Page2DatosPagoCheckoutMobil(Channel.mobile, app, driver).isPageUntil(3));
     }
     
     @Validation (
     	description="Están presentes los métodos de pago",
     	level=State.Defect)
-    private boolean checkAppearsPageWithPaymentMethods(Pais pais) {
-        return (new PageCheckoutWrapper(Channel.mobile, driver).isPresentMetodosPago());
+    private boolean checkAppearsPageWithPaymentMethods(Pais pais, AppEcom app) {
+        return (new PageCheckoutWrapper(Channel.mobile, app, driver).isPresentMetodosPago());
     }
     
     @Validation

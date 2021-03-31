@@ -49,28 +49,30 @@ public class PageCheckoutWrapperStpV {
     
 	private final WebDriver driver;
 	private final Channel channel;
+	private final AppEcom app;
 
 
-    public PageCheckoutWrapperStpV(Channel channel, WebDriver driver) {
+    public PageCheckoutWrapperStpV(Channel channel, AppEcom app, WebDriver driver) {
     	this.driver = driver;
     	this.channel = channel;
+    	this.app = app;
     	
-    	this.pageCheckoutWrapper = new PageCheckoutWrapper(channel, driver);
+    	this.pageCheckoutWrapper = new PageCheckoutWrapper(channel, app, driver);
     	
-    	this.modalDirecEnvioStpV = new ModalDirecEnvioStpV(channel, driver);
-    	this.secMetodoEnvioDesktopStpV = new SecMetodoEnvioDesktopStpV(channel, driver);
-        this.secStoreCreditStpV = new SecStoreCreditStpV(channel, driver);
-        this.secTMangoStpV = new SecTMangoStpV(channel, driver);
+    	this.modalDirecEnvioStpV = new ModalDirecEnvioStpV(channel, app, driver);
+    	this.secMetodoEnvioDesktopStpV = new SecMetodoEnvioDesktopStpV(channel, app, driver);
+        this.secStoreCreditStpV = new SecStoreCreditStpV(channel, app, driver);
+        this.secTMangoStpV = new SecTMangoStpV(channel, app, driver);
         this.secKrediKartiStpV = new SecKrediKartiStpV(channel, driver); 
         this.secBillpayStpV = new SecBillpayStpV(channel, driver);
-        this.secKlarnaStpV = new SecKlarnaStpV(channel, driver);
-        this.modalDirecFacturaStpV = new ModalDirecFacturaStpV(channel, driver);
+        this.secKlarnaStpV = new SecKlarnaStpV(channel, app, driver);
+        this.modalDirecFacturaStpV = new ModalDirecFacturaStpV(channel, app, driver);
         this.modalAvisoCambioPaisStpV = new ModalAvisoCambioPaisStpV(driver);
-        this.page1DktopCheckStpV = new Page1DktopCheckoutStpV(channel, driver);
+        this.page1DktopCheckStpV = new Page1DktopCheckoutStpV(channel, app, driver);
         this.page1MobilCheckStpV = new Page1EnvioCheckoutMobilStpV(driver);
         this.secIdealStpV = new SecIdealStpV(channel, driver);
         this.secKlarnaDeutschStpV = new SecKlarnaDeutschStpV(channel, driver);
-        this.secTarjetaPciStpV = new SecTarjetaPciStpV(channel, driver);
+        this.secTarjetaPciStpV = new SecTarjetaPciStpV(channel, app, driver);
     }
     
     public PageCheckoutWrapper getPageCheckoutWrapper() {
@@ -132,28 +134,28 @@ public class PageCheckoutWrapperStpV {
     @Step (
     	description="Si existen y están plegados, desplegamos el bloque con los métodos de pago", 
         expected="Aparecen los métodos de pagos asociados al país")
-    public void despliegaYValidaMetodosPago(Pais pais, boolean isEmpl, AppEcom app) throws Exception {
+    public void despliegaYValidaMetodosPago(Pais pais, boolean isEmpl) throws Exception {
     	TestMaker.getCurrentStepInExecution().addExpectedText(": " + pais.getStringPagosTest(app, isEmpl));
         pageCheckoutWrapper.despliegaMetodosPago();
-        validaMetodosPagoDisponibles(pais, isEmpl, app);
+        validaMetodosPagoDisponibles(pais, isEmpl);
     }
     
-    public void validaMetodosPagoDisponibles(Pais pais, boolean isEmpl, AppEcom app) {
-    	checkAvailablePagos(pais, isEmpl, app);
-    	checkLogosPagos(pais, isEmpl, app);
+    public void validaMetodosPagoDisponibles(Pais pais, boolean isEmpl) {
+    	checkAvailablePagos(pais, isEmpl);
+    	checkLogosPagos(pais, isEmpl);
     }
     
     @Validation
-    private ChecksTM checkAvailablePagos(Pais pais, boolean isEmpl, AppEcom app) {
+    private ChecksTM checkAvailablePagos(Pais pais, boolean isEmpl) {
     	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país (" + pais.getListPagosForTest(app, isEmpl).size() + ")",
-			pageCheckoutWrapper.isNumMetodosPagoOK(pais, app, isEmpl), State.Defect);    	
+			pageCheckoutWrapper.isNumMetodosPagoOK(pais, isEmpl), State.Defect);    	
     	return validations;
     }
     
     @Validation
-    private ChecksTM checkLogosPagos(Pais pais, boolean isEmpl, AppEcom app) { 
+    private ChecksTM checkLogosPagos(Pais pais, boolean isEmpl) { 
     	ChecksTM validations = ChecksTM.getNew();
         List<Pago> listPagos = pais.getListPagosForTest(app, isEmpl);
         if (listPagos.size()==1 && channel.isDevice()) {
@@ -161,7 +163,7 @@ public class PageCheckoutWrapperStpV {
         }
         for (int i=0; i<listPagos.size(); i++) {
             if (listPagos.get(i).getTypePago()!=TypePago.TpvVotf) {
-            	String pagoNameExpected = listPagos.get(i).getNombre(channel);
+            	String pagoNameExpected = listPagos.get(i).getNombre(channel, app);
         	 	validations.add(
         			"Aparece el logo/pestaña asociado al pago <b>" + pagoNameExpected + "</b>",
         			pageCheckoutWrapper.isMetodoPagoPresent(pagoNameExpected), State.Defect);    
@@ -202,14 +204,14 @@ public class PageCheckoutWrapperStpV {
     	expected="La operación se ejecuta correctamente")
     public boolean forceClickIconoPagoAndWait(Pais pais, Pago pago, boolean pintaNombrePago) throws Exception {
         if (pintaNombrePago) {
-            String pintaPago = "<b style=\"color:blue;\">" + pago.getNombre(channel) + "</b>:"; 
+            String pintaPago = "<b style=\"color:blue;\">" + pago.getNombre(channel, app) + "</b>:"; 
             StepTM step = TestMaker.getCurrentStepInExecution();
             String newDescription = pintaPago + step.getDescripcion();
             step.setDescripcion(newDescription);
         }
 
         try {
-            pageCheckoutWrapper.forceClickMetodoPagoAndWait(pago.getNombre(channel), pais);
+            pageCheckoutWrapper.forceClickMetodoPagoAndWait(pago.getNombre(channel, app), pais);
         }
         catch (Exception e) {
         	Log4jTM.getLogger().warn("Problem clicking icono pago for payment {} in country {}", pago.getNombre(), pais.getNombre_pais(), e);
@@ -236,7 +238,7 @@ public class PageCheckoutWrapperStpV {
         if (channel==Channel.desktop) {
             validateIsPresentButtonCompraDesktop();
         }
-        return checkIsVisibleTextUnderPayment(pago.getNombreInCheckout(channel), pago, 2);
+        return checkIsVisibleTextUnderPayment(pago.getNombreInCheckout(channel, app), pago, 2);
     }
     
     @Validation (
@@ -419,7 +421,7 @@ public class PageCheckoutWrapperStpV {
         if (channel.isDevice()) {
         	page1MobilCheckStpV.validaResultImputPromoEmpl();
         } else {
-        	page1DktopCheckStpV.validaResultImputPromoEmpl(dataBag, app);
+        	page1DktopCheckStpV.validaResultImputPromoEmpl(dataBag);
         }
     }    
     

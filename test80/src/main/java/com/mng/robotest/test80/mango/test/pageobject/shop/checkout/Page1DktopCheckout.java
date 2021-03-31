@@ -18,7 +18,6 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango;
@@ -35,6 +34,7 @@ public class Page1DktopCheckout extends PageObjTM {
     private final ModalAvisoCambioPais modalAvisoCambioPais;
     
     private final Channel channel;
+    private final AppEcom app;
     
     private final static String XPathConfPagoButtonDesktop = "//*[@id[contains(.,'btnCheckout')]]";
     private final static String XPathAlmacenInNoProEntorns = "//span[@class='labelTestShowAlmacenStrong']";
@@ -113,11 +113,12 @@ public class Page1DktopCheckout extends PageObjTM {
     private final static String tagCodVendedor = "@TagCodVendedor";
     private final static String XPathCodVendedorVotfWithTag = "//form[@id[contains(.,'Dependienta')]]//span[text()[contains(.,'" + tagCodVendedor + "')]]";
     
-    public Page1DktopCheckout(Channel channel, WebDriver driver) {
+    public Page1DktopCheckout(Channel channel, AppEcom app, WebDriver driver) {
     	super(driver);
         this.channel = channel;
+        this.app = app;
         this.secStoreCredit = new SecStoreCredit(driver);
-        this.secTMango = new SecTMango(channel, driver);
+        this.secTMango = new SecTMango(channel, app, driver);
         this.secBillpay = new SecBillpay(channel, driver);
         this.secKlarna = new SecKlarna(channel, driver);
         this.secKlarnaDeutsch = new SecKlarnaDeutsch(channel, driver);
@@ -174,7 +175,7 @@ public class Page1DktopCheckout extends PageObjTM {
 		case KlarnaDeutsch:
 			return (secKlarnaDeutsch.isVisibleUntil(maxSeconds));
 		default:
-			String nameExpected = pago.getNombreInCheckout(Channel.desktop).toLowerCase();
+			String nameExpected = pago.getNombreInCheckout(Channel.desktop, app).toLowerCase();
 			return (
 				state(Visible, By.xpath(XPathBloquesPagoPosibles), driver).wait(maxSeconds).check() &&
 				driver.findElement(By.xpath(XPathBloquesPagoPosibles)).getAttribute("innerHTML").toLowerCase().contains(nameExpected)
@@ -186,7 +187,7 @@ public class Page1DktopCheckout extends PageObjTM {
         if (TextKrediKarti.compareTo(metodoPago)==0) {
         	return XPathPestanyaKrediKarti;
         }
-        String metodoPagoClick = (new PageCheckoutWrapper(Channel.desktop, driver)).getMethodInputValue(metodoPago);
+        String metodoPagoClick = (new PageCheckoutWrapper(channel, app, driver)).getMethodInputValue(metodoPago);
         return (XPathRadioPagoWithTag.replace(TagMetodoPago, metodoPagoClick));
     }
 
@@ -322,7 +323,7 @@ public class Page1DktopCheckout extends PageObjTM {
 		return (state(Present, By.xpath(xpathClickPago), driver).check());
 	}
 
-    public boolean isNumMetodosPagoOK(Pais pais, AppEcom app, boolean isEmpl) {
+    public boolean isNumMetodosPagoOK(Pais pais, boolean isEmpl) {
         int numPagosPant = driver.findElements(By.xpath(XPathMetodoPago)).size();
         if (app!=AppEcom.votf) {
             int numPagosPais = pais.getListPagosForTest(app, isEmpl).size();
@@ -346,7 +347,7 @@ public class Page1DktopCheckout extends PageObjTM {
      * Realizamos las acciones necesarias para forzar el click sobre un método de pago y esperamos a que desaparezcan las capas de loading
      */
     public void forceClickMetodoPagoAndWait(String metodoPago, Pais pais) throws Exception {
-    	PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, driver);
+    	PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app, driver);
         despliegaMetodosPago();
         pageCheckoutWrapper.waitUntilNoDivLoading(2);
         moveToMetodosPago();
@@ -432,7 +433,7 @@ public class Page1DktopCheckout extends PageObjTM {
 	}
 
 	public String getPrecioTotalFromResumen() throws Exception {
-		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, driver);
+		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app, driver);
 		String precioTotal = pageCheckoutWrapper.formateaPrecioTotal(XPathPrecioTotal);
 		return (ImporteScreen.normalizeImportFromScreen(precioTotal));
 	}
@@ -479,7 +480,7 @@ public class Page1DktopCheckout extends PageObjTM {
     		}
     		
     		PreciosArticulo preciosArticuloScreen = getPreciosArticuloResumen(lineaArticulo);
-    		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, driver);
+    		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app, driver);
     		if (articulo.getValePais()!=null) {
 	    		if (!pageCheckoutWrapper.validateDiscountOk(preciosArticuloScreen, descuento)) {
 	    			return false;
@@ -496,7 +497,7 @@ public class Page1DktopCheckout extends PageObjTM {
     }
     
     public String getPrecioSubTotalFromResumen() throws Exception {
-    	PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, driver);
+    	PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app, driver);
         return pageCheckoutWrapper.formateaPrecioTotal(XPathPrecioSubTotal);
     }
     

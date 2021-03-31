@@ -7,6 +7,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.DataDireccion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.ModalDirecFactura;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1DktopCheckout;
@@ -17,11 +18,13 @@ public class ModalDirecFacturaStpV {
 	private final ModalDirecFactura modalDirecFactura;
 	private final WebDriver driver;
 	private final Channel channel;
+	private final AppEcom app;
 	
-	public ModalDirecFacturaStpV(Channel channel, WebDriver driver) {
+	public ModalDirecFacturaStpV(Channel channel, AppEcom app, WebDriver driver) {
 		this.modalDirecFactura = new ModalDirecFactura(driver);
 		this.driver = driver;
 		this.channel = channel;
+		this.app = app;
 	}
 	
 	@Validation
@@ -37,7 +40,7 @@ public class ModalDirecFacturaStpV {
 	 	maxSeconds = 2;
 	 	validations.add(
 	 		"Desaparece la capa de Loading (lo esperamos hasta " + maxSeconds + "segundos", 
-	 		(new PageCheckoutWrapper(channel, driver)).waitUntilNoDivLoading(maxSeconds), State.Warn);
+	 		(new PageCheckoutWrapper(channel, app, driver)).waitUntilNoDivLoading(maxSeconds), State.Warn);
     	return validations;
     }
     
@@ -58,11 +61,11 @@ public class ModalDirecFacturaStpV {
 	 		!modalDirecFactura.isVisibleFormUntil(0), State.Defect);    
 	 	validations.add(
 			"Queda marcado el radiobutton \"Quiero recibir una factura\"",
-			(new Page1DktopCheckout(channel, driver)).isMarkedQuieroFactura(), State.Defect);
+			(new Page1DktopCheckout(channel, app, driver)).isMarkedQuieroFactura(), State.Defect);
 	 	int maxSeconds = 2;
 	 	validations.add(
 	 		"Desaparece la capa de Loading (lo esperamos hasta " + maxSeconds + "segundos", 
-	 		(new PageCheckoutWrapper(channel, driver)).waitUntilNoDivLoading(maxSeconds), State.Warn);
+	 		(new PageCheckoutWrapper(channel, app, driver)).waitUntilNoDivLoading(maxSeconds), State.Warn);
 	 	
 	 	return validations;
 	}

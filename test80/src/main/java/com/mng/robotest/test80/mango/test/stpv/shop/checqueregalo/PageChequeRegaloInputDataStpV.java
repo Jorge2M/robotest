@@ -8,6 +8,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRegaloInputData;
 import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRegaloInputData.*;
@@ -174,9 +175,9 @@ public class PageChequeRegaloInputDataStpV extends PageObjTM {
 			"Importe: <b>#{chequeRegalo.getImporte()}</b><br>" +
 			"Mensaje: <b>#{chequeRegalo.getMensaje()}</b>",
 		expected="Aparece la página de identificación del usuario")
-	public void inputDataAndClickComprar(Channel channel, ChequeRegalo chequeRegalo) {
+	public void inputDataAndClickComprar(Channel channel, AppEcom app, ChequeRegalo chequeRegalo) {
 		pageChequeRegaloInputData.inputDataCheque(chequeRegalo);
 		pageChequeRegaloInputData.clickButtonComprar(chequeRegalo);
-		new PageCheckoutWrapperStpV(channel, driver).validaIsVersionChequeRegalo(chequeRegalo);
+		new PageCheckoutWrapperStpV(channel, app, driver).validaIsVersionChequeRegalo(chequeRegalo);
 	}
 }

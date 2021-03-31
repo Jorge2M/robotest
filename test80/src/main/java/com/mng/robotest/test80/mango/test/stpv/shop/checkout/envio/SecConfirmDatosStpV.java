@@ -8,6 +8,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
@@ -41,21 +42,21 @@ public class SecConfirmDatosStpV {
 	@Step (
 		description="Clickamos el botón \"Confirmar Datos\"", 
 		expected="La dirección de envío se establece a la de la tienda")
-	public static void clickConfirmarDatosButton(Channel channel, DataPedido dataPedido, WebDriver driver) {
+	public static void clickConfirmarDatosButton(Channel channel, AppEcom app, DataPedido dataPedido, WebDriver driver) {
 		ModalDroppoints.secConfirmDatos.clickConfirmarDatosButtonAndWait(5, driver);
 		SeleniumUtils.waitForPageLoaded(driver, 2);       
-		checkConfirmacionCambioDireccionEnvio(dataPedido, channel, driver);
+		checkConfirmacionCambioDireccionEnvio(dataPedido, channel, app, driver);
 	}
 	
 	@Validation
-	private static ChecksTM checkConfirmacionCambioDireccionEnvio(DataPedido dataPedido, Channel channel, WebDriver driver) {
+	private static ChecksTM checkConfirmacionCambioDireccionEnvio(DataPedido dataPedido, Channel channel, AppEcom app, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
 		validations.add(
 			"Desaparece la capa de Droppoints",
 			!ModalDroppoints.isVisible(channel, driver), State.Warn);
 		
 		DataDeliveryPoint dataDp = dataPedido.getDataDeliveryPoint();
-		String textDireccionEnvioCompleta = new PageCheckoutWrapper(channel, driver).getTextDireccionEnvioCompleta();
+		String textDireccionEnvioCompleta = new PageCheckoutWrapper(channel, app, driver).getTextDireccionEnvioCompleta();
 		dataPedido.setDireccionEnvio(textDireccionEnvioCompleta);
 		validations.add(
 			"Se modifica la dirección de envío por la del Delivery Point (" + dataDp.getDireccion() + ")",

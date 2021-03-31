@@ -236,11 +236,11 @@ public class Pago implements Serializable {
         this.nombremovil = nombremovil;
     }    
     
-    public String getNameFilter(Channel channel) {
+    public String getNameFilter(Channel channel, AppEcom app) {
         if ("".compareTo(this.namefilter)!=0) {
             return this.namefilter;
         }
-        return (getNombre(channel));
+        return (getNombre(channel, app));
     }
         
     @XmlAttribute(name="namefilter")
@@ -252,7 +252,7 @@ public class Pago implements Serializable {
         return this.testpasarela;
     }
     
-    public boolean isNeededTestPasarelaDependingFilter(Channel channel, ITestContext ctx) {
+    public boolean isNeededTestPasarelaDependingFilter(Channel channel, AppEcom app, ITestContext ctx) {
         if (getTestpasarela().compareTo("s")==0) {
             String listPayments = TestMaker.getParamTestRun(Constantes.paramPayments, ctx);
             if (listPayments==null || "".compareTo(listPayments)==0) {
@@ -260,7 +260,7 @@ public class Pago implements Serializable {
             }
             ArrayList<String> paymentsArray = new ArrayList<>(Arrays.asList(listPayments.split(",")));
             for (String paymentFilterName : paymentsArray) {
-                if (paymentFilterName.compareTo(getNameFilter(channel))==0) {
+                if (paymentFilterName.compareTo(getNameFilter(channel, app))==0) {
                     return true;
                 }
             }
@@ -679,15 +679,16 @@ public class Pago implements Serializable {
         this.telefqiwi = telefqiwi;
     }
     
-    public String getNombre(Channel channel) {
-        if (channel.isDevice() && getNombremovil()!=null && "".compareTo(getNombremovil())!=0) {
+    public String getNombre(Channel channel, AppEcom app) {
+        if (channel.isDevice() && !(channel==Channel.tablet && app==AppEcom.outlet) && 
+        	getNombremovil()!=null && "".compareTo(getNombremovil())!=0) {
             return getNombremovil();
         }
         return getNombre();
     }
     
-    public String getNombreInCheckout(Channel channel) {
-    	String nombre = getNombre(channel);
+    public String getNombreInCheckout(Channel channel, AppEcom app) {
+    	String nombre = getNombre(channel, app);
     	if (nombre.contains("mercadopago")) {
     		return "mercadopago";
     	}

@@ -11,6 +11,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClic
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
@@ -261,9 +262,9 @@ public class Page1EnvioCheckoutMobil extends PageObjTM {
 		}
 	}
 
-	public void clickContinuarAndWaitPage2() {
+	public void clickContinuarAndWaitPage2(AppEcom app) {
 		clickContinuar();
-		(new Page2DatosPagoCheckoutMobil(Channel.mobile, driver)).isPageUntil(2);
+		(new Page2DatosPagoCheckoutMobil(Channel.mobile, app, driver)).isPageUntil(2);
 	}
 	
 	public boolean isVisibleButtonContinuarUntil(int maxSeconds) {

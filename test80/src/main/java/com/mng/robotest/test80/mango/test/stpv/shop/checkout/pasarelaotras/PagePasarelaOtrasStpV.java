@@ -6,6 +6,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
@@ -14,7 +15,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PagePasarelaOtrasStpV {
     
     @Validation
-    public static ChecksTM validateIsPage(String importeTotal, Pais pais, Channel channel, WebDriver driver) {
+    public static ChecksTM validateIsPage(String importeTotal, Pais pais, Channel channel, AppEcom app, WebDriver driver) {
     	ChecksTM validations = ChecksTM.getNew();
         if (channel==Channel.desktop) {
     	   	validations.add(
@@ -23,7 +24,7 @@ public class PagePasarelaOtrasStpV {
         }
 	   	validations.add(
     		"No se trata de la página de precompra (no aparece los logos de formas de pago)",
-    		new PageCheckoutWrapper(channel, driver).isPresentMetodosPago(), State.Defect);
+    		new PageCheckoutWrapper(channel, app, driver).isPresentMetodosPago(), State.Defect);
 	   	
 	   	return validations;
     }

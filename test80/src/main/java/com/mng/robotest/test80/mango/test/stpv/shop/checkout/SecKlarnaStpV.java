@@ -7,6 +7,7 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1DktopCheckout;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.SecKlarna;
@@ -15,11 +16,13 @@ public class SecKlarnaStpV {
     
 	private final SecKlarna secKlarna;
 	private final Channel channel;
+	private final AppEcom app;
 	private final WebDriver driver;
 	
-	public SecKlarnaStpV(Channel channel, WebDriver driver) {
+	public SecKlarnaStpV(Channel channel, AppEcom app, WebDriver driver) {
 		this.secKlarna = new SecKlarna(channel, driver);
 		this.channel = channel;
+		this.app = app;
 		this.driver = driver;
 	}
 	
@@ -78,7 +81,7 @@ public class SecKlarnaStpV {
 		description="Como Shipping Address figura la de Klarna: #{pago.getNomklarna()} - #{pago.getDirecklarna()} - #{pago.getProvinklarna()}",
 		level=State.Warn)
 	private boolean checkShippingAddress(Pago pago) {
-		Page1DktopCheckout page1DktopCheckout = new Page1DktopCheckout(channel, driver);
+		Page1DktopCheckout page1DktopCheckout = new Page1DktopCheckout(channel, app, driver);
 		return (
 			page1DktopCheckout.getTextNombreEnvio().contains(pago.getNomklarna()) &&
 			page1DktopCheckout.getTextDireccionEnvio().contains(pago.getDirecklarna()) &&

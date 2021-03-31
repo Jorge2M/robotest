@@ -22,7 +22,7 @@ public class PagoPostfinance extends PagoStpV {
         DataPedido dataPedido = dCtxPago.getDataPedido();
         pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
         pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
-        String nombrePago = dataPedido.getPago().getNombre(this.dCtxSh.channel);
+        String nombrePago = dataPedido.getPago().getNombre(dCtxSh.channel, dCtxSh.appE);
         String importeTotal = dataPedido.getImporteTotal();
         String codPais = this.dCtxSh.pais.getCodigo_pais();
         if (isPageSelectChannel(2)) {

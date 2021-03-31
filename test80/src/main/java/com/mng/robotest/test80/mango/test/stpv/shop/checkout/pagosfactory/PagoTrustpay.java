@@ -19,7 +19,7 @@ public class PagoTrustpay extends PagoStpV {
         pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
         pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
         String importeTotal = this.dCtxPago.getDataPedido().getImporteTotal();
-        PageTrustpaySelectBankStpV.validateIsPage(dCtxPago.getDataPedido().getPago().getNombre(dCtxSh.channel), importeTotal, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
+        PageTrustpaySelectBankStpV.validateIsPage(dCtxPago.getDataPedido().getPago().getNombre(dCtxSh.channel, dCtxSh.appE), importeTotal, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
         
         if (execPay) {
             PageTrustpaySelectBankStpV.selectTestBankAndPay(importeTotal, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);

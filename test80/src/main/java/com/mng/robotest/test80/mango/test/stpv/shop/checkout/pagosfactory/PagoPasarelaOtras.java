@@ -17,7 +17,7 @@ public class PagoPasarelaOtras extends PagoStpV {
     public void testPagoFromCheckout(boolean execPay) throws Exception {
         pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
         pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
-        PagePasarelaOtrasStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais, dCtxSh.channel, driver);
+        PagePasarelaOtrasStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver);
         
         if (execPay) {
             throw new PaymethodWithoutTestPayImplemented(MsgNoPayImplemented);

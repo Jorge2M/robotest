@@ -30,19 +30,19 @@ public class PagoGetter {
 
 	public static List<String> getLabelsPaymentsAlphabetically(Channel channel, AppEcom app, boolean isEmpleado) {
 		List<PaymentCountry> listPayments = getListPayments(app, isEmpleado);
-		return getLabelsPaymentsFromCountries(listPayments, channel); 	
+		return getLabelsPaymentsFromCountries(listPayments, channel, app); 	
 	}
 	
 	public static List<String> getLabelsPaymentsAlphabetically(
 			List<String> listCodCountries, Channel channel, AppEcom app, boolean isEmpleado) {
 		List<PaymentCountry> listPayments = getListPayments(listCodCountries, app, isEmpleado);
-		return getLabelsPaymentsFromCountries(listPayments, channel); 
+		return getLabelsPaymentsFromCountries(listPayments, channel, app); 
 	}
 	
-	private static List<String> getLabelsPaymentsFromCountries(List<PaymentCountry> listPayments, Channel channel) {
+	private static List<String> getLabelsPaymentsFromCountries(List<PaymentCountry> listPayments, Channel channel, AppEcom app) {
 		List<String> listLabels = new ArrayList<>();
 		for (PaymentCountry payment : listPayments) {
-			listLabels.add(payment.pago.getNameFilter(channel));
+			listLabels.add(payment.pago.getNameFilter(channel, app));
 		}
 		List<String> listSortedAndWithoutDuplicates = listLabels.stream()
 			.distinct()

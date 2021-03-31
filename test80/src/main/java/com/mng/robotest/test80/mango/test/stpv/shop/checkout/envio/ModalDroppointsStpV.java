@@ -50,6 +50,6 @@ public class ModalDroppointsStpV {
         dCtxPago.getDataPedido().setDataDeliveryPoint(dataDp);
         secSelectDPoint.clickSelectButton(dCtxSh.channel, driver);
         secConfirmDatos.setDataIfNeeded(dCtxSh.pais.getCodigo_pais(), driver);
-        secConfirmDatos.clickConfirmarDatosButton(dCtxSh.channel, dCtxPago.getDataPedido(), driver);                
+        secConfirmDatos.clickConfirmarDatosButton(dCtxSh.channel, dCtxSh.appE, dCtxPago.getDataPedido(), driver);                
     }
 }

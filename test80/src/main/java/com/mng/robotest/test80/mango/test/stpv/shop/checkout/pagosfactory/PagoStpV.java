@@ -25,7 +25,7 @@ public abstract class PagoStpV {
 		this.dCtxPago = dCtxPago;
 		this.driver = driver;
 		this.pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
-		this.pageCheckoutWrapperStpV = new PageCheckoutWrapperStpV(dCtxSh.channel, driver);
+		this.pageCheckoutWrapperStpV = new PageCheckoutWrapperStpV(dCtxSh.channel, dCtxSh.appE, driver);
 	}
 
 	public boolean isAvailableExecPay() {

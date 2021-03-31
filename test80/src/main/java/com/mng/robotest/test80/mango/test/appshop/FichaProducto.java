@@ -113,7 +113,9 @@ public class FichaProducto {
             
             if (dCtxSh.channel!=Channel.tablet) {
             	pageFichaStpV.selectImagenCentralFichaOld();
-            	pageFichaStpV.closeZoomImageCentralDevice();
+            	if (dCtxSh.channel!=Channel.mobile) {
+            		pageFichaStpV.closeZoomImageCentralDevice();
+            	}
             }
             if (TypePanel.Description.getListApps().contains(dCtxSh.appE) &&
             	!dCtxSh.channel.isDevice()) {

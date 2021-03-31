@@ -25,11 +25,13 @@ public class SecMetodoEnvioDesktopStpV {
     
     private final WebDriver driver;
     private final Channel channel;
+    private final AppEcom app;
     
-    public SecMetodoEnvioDesktopStpV(Channel channel, WebDriver driver) {
+    public SecMetodoEnvioDesktopStpV(Channel channel, AppEcom app, WebDriver driver) {
     	this.secMetodoEnvioDesktop = new SecMetodoEnvioDesktop(driver);
     	this.driver = driver;
     	this.channel = channel;
+    	this.app = app;
     }
     
     @SuppressWarnings({ "static-access", "unused" })
@@ -58,7 +60,7 @@ public class SecMetodoEnvioDesktopStpV {
         int maxSeconds = 5;
       	validations.add(
     		"Desaparece la capa de Loading  (lo esperamos hasta " + maxSeconds + " segundos)",
-    		new PageCheckoutWrapper(channel, driver).waitUntilNoDivLoading(maxSeconds), State.Warn);
+    		new PageCheckoutWrapper(channel, app, driver).waitUntilNoDivLoading(maxSeconds), State.Warn);
       	validations.add(
     		"Queda seleccionado el bloque correspondiete a <b>" + tipoTransporte + "</b>",
     		secMetodoEnvioDesktop.isBlockSelectedUntil(tipoTransporte, maxSeconds), State.Warn);
@@ -73,10 +75,10 @@ public class SecMetodoEnvioDesktopStpV {
     }
     
 
-    public void selectMetodoEnvio(DataCtxPago dCtxPago, String nombrePago, AppEcom appE) throws Exception {
-        alterTypeEnviosAccordingContext(dCtxPago, appE);
+    public void selectMetodoEnvio(DataCtxPago dCtxPago, String nombrePago) throws Exception {
+        alterTypeEnviosAccordingContext(dCtxPago);
         Pago pago = dCtxPago.getDataPedido().getPago();
-        TipoTransporte tipoTransporte = pago.getTipoEnvioType(appE);
+        TipoTransporte tipoTransporte = pago.getTipoEnvioType(app);
         switch (channel) {
         case desktop:
         case tablet:
@@ -92,8 +94,8 @@ public class SecMetodoEnvioDesktopStpV {
         boolean pagoPintado = false;
         Pago pago = dCtxPago.getDataPedido().getPago();
         if (pago.getTipoEnvio(dCtxSh.appE)!=null) {
-            String nombrePago = dCtxPago.getDataPedido().getPago().getNombre(dCtxSh.channel);
-            selectMetodoEnvio(dCtxPago, nombrePago, dCtxSh.appE);
+            String nombrePago = dCtxPago.getDataPedido().getPago().getNombre(dCtxSh.channel, dCtxSh.appE);
+            selectMetodoEnvio(dCtxPago, nombrePago);
             pagoPintado = true;
             TipoTransporte tipoEnvio = pago.getTipoEnvioType(dCtxSh.appE);
             if (tipoEnvio.isDroppoint()) {
@@ -121,42 +123,42 @@ public class SecMetodoEnvioDesktopStpV {
     /**
      * No tenemos posibilidad sencilla de determinar si nos aparecerá el envío de tipo "Urgente" o "SendayNextday" así que si no encontramos uno ejecutamos la prueba con el otro
      */
-    private void alterTypeEnviosAccordingContext(DataCtxPago dCtxPago, AppEcom appE) {
-    	alterTypeEnviosTiendaStandar(dCtxPago, appE);
+    private void alterTypeEnviosAccordingContext(DataCtxPago dCtxPago) {
+    	alterTypeEnviosTiendaStandar(dCtxPago);
     	Pago pago = dCtxPago.getDataPedido().getPago();
-        alterTypeEnviosNextaySomedayUntilExists(pago, appE);
+        alterTypeEnviosNextaySomedayUntilExists(pago);
     }
     
-    private void alterTypeEnviosTiendaStandar(DataCtxPago dCtxPago, AppEcom appE) {
+    private void alterTypeEnviosTiendaStandar(DataCtxPago dCtxPago) {
         //If employee and Spain not "Recogida en Tienda"
         Pago pago = dCtxPago.getDataPedido().getPago();
         if (dCtxPago.getFTCkout().isEmpl && 
             "001".compareTo(dCtxPago.getDataPedido().getCodigoPais())==0) {
-            if (pago.getTipoEnvioType(appE)==TipoTransporte.TIENDA) {
+            if (pago.getTipoEnvioType(app)==TipoTransporte.TIENDA) {
                 pago.setTipoEnvioShop(TipoTransporte.STANDARD);
                 pago.setTipoEnvioOutlet(TipoTransporte.STANDARD);
-                Log4jTM.getLogger().info("Modificado tipo de envío: " + pago.getTipoEnvioType(appE) + " -> " + TipoTransporte.STANDARD);
+                Log4jTM.getLogger().info("Modificado tipo de envío: " + pago.getTipoEnvioType(app) + " -> " + TipoTransporte.STANDARD);
             }
             
             //Esto no está muy claro si es correcto, pero la configuración en Manto de los transportes dice que en el caso de Outlet los 
             //empleados no tienen PickPoint así que nos ceñimos a ella.
-            if (appE==AppEcom.outlet &&
-                pago.getTipoEnvioType(appE)==TipoTransporte.ASM)
+            if (app==AppEcom.outlet &&
+                pago.getTipoEnvioType(app)==TipoTransporte.ASM)
                 pago.setTipoEnvioOutlet(TipoTransporte.STANDARD);
         }    	
     }
     
-    private void alterTypeEnviosNextaySomedayUntilExists(Pago pago, AppEcom appE) {
+    private void alterTypeEnviosNextaySomedayUntilExists(Pago pago) {
         //Estos tipos de pago se intercambian constantemente a nivel de configuración en la shop
-        if (pago.getTipoEnvioType(appE)==TipoTransporte.NEXTDAY ||
-        	pago.getTipoEnvioType(appE)==TipoTransporte.NEXTDAY_FRANJAS ||
-        	pago.getTipoEnvioType(appE)==TipoTransporte.SAMEDAY ||
-        	pago.getTipoEnvioType(appE)==TipoTransporte.SAMEDAY_NEXTDAY_FRANJAS) {
+        if (pago.getTipoEnvioType(app)==TipoTransporte.NEXTDAY ||
+        	pago.getTipoEnvioType(app)==TipoTransporte.NEXTDAY_FRANJAS ||
+        	pago.getTipoEnvioType(app)==TipoTransporte.SAMEDAY ||
+        	pago.getTipoEnvioType(app)==TipoTransporte.SAMEDAY_NEXTDAY_FRANJAS) {
         	for (int i=0; i<4; i++) {
-	            if (new PageCheckoutWrapper(channel, driver).isPresentBlockMetodo(pago.getTipoEnvioType(appE))) {
+	            if (new PageCheckoutWrapper(channel, app, driver).isPresentBlockMetodo(pago.getTipoEnvioType(app))) {
 	            	break;
 	            }
-            	switch (pago.getTipoEnvioType(appE)) {
+            	switch (pago.getTipoEnvioType(app)) {
             	case NEXTDAY:
                     pago.setTipoEnvioShop(TipoTransporte.NEXTDAY_FRANJAS);
                     break;

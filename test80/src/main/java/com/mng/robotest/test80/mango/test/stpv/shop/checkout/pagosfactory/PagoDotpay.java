@@ -21,7 +21,7 @@ public class PagoDotpay extends PagoStpV {
         pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
         pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
         DataPedido dataPedido = dCtxPago.getDataPedido(); 
-        String nombrePago = dataPedido.getPago().getNombre(this.dCtxSh.channel);
+        String nombrePago = dataPedido.getPago().getNombre(dCtxSh.channel, dCtxSh.appE);
         PageDotpay1rstStpV.validateIsPage(nombrePago, dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
         
         if (execPay) {

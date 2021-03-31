@@ -20,7 +20,7 @@ public class PagoMultibanco extends PagoStpV {
         pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
         pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
         DataPedido dataPedido = this.dCtxPago.getDataPedido(); 
-        String nombrePago = dataPedido.getPago().getNombre(dCtxSh.channel);
+        String nombrePago = dataPedido.getPago().getNombre(dCtxSh.channel, dCtxSh.appE);
         PageMultibanco1rstStpV.validateIsPage(nombrePago, dataPedido.getImporteTotal(), dataPedido.getEmailCheckout(), dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
         PageMultibanco1rstStpV.continueToNextPage(dCtxSh.channel, driver);
         

@@ -21,7 +21,7 @@ public class PagoGiropay extends PagoStpV {
 		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
 		pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
 		DataPedido dataPedido = dCtxPago.getDataPedido(); 
-		String nombrePago = dataPedido.getPago().getNombre(dCtxSh.channel);
+		String nombrePago = dataPedido.getPago().getNombre(dCtxSh.channel, dCtxSh.appE);
 		PageGiropay1rstStpV.validateIsPage(nombrePago, dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
 		PageGiropay1rstStpV.clickButtonContinuePay(dCtxSh.channel, driver);
 

@@ -20,7 +20,7 @@ public class PagoBillpay extends PagoStpV {
         DataPedido dataPedido = this.dCtxPago.getDataPedido();
         pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
         pageCheckoutWrapperStpV.getSecBillpayStpV().validateIsSectionOk();
-        String nombrePago = dataPedido.getPago().getNombre(dCtxSh.channel);
+        String nombrePago = dataPedido.getPago().getNombre(dCtxSh.channel, dCtxSh.appE);
         pageCheckoutWrapperStpV.getSecBillpayStpV().inputDiaNacAndCheckAcepto("23-04-1974", nombrePago);
         if (nombrePago.compareTo("Lastschrift")==0) {
             pageCheckoutWrapperStpV.getSecBillpayStpV().inputDataInLastschrift(dataPedido.getPago().getIban(), dataPedido.getPago().getBic(), dataPedido.getPago().getTitular());

@@ -20,11 +20,13 @@ public class SecStoreCreditStpV {
     
 	private final SecStoreCredit secStoreCredit;
 	private final Channel channel;
+	private final AppEcom app;
 	private final WebDriver driver;
 	
-	public SecStoreCreditStpV(Channel channel, WebDriver driver) {
+	public SecStoreCreditStpV(Channel channel, AppEcom app, WebDriver driver) {
 		this.secStoreCredit = new SecStoreCredit(driver);
 		this.channel = channel;
+		this.app = app;
 		this.driver = driver;
 	}
 	
@@ -33,11 +35,11 @@ public class SecStoreCreditStpV {
     	description="Revisamos el bloque de \"Saldo en cuenta\"", 
         expected="Sólo aparece el método de pago " + tagNombrePago)
     public void validateInitialStateOk(DataCtxPago dCtxPago) throws Exception {
-        String nombrePago = dCtxPago.getDataPedido().getPago().getNombre(channel);
+        String nombrePago = dCtxPago.getDataPedido().getPago().getNombre(channel, app);
         TestMaker.getCurrentStepInExecution().replaceInExpected(tagNombrePago, nombrePago);
         
         dCtxPago.getDataPedido().setImporteTotal(
-        		new PageCheckoutWrapper(channel, driver).getPrecioTotalFromResumen());
+        		new PageCheckoutWrapper(channel, app, driver).getPrecioTotalFromResumen());
         
         validaBloqueSaldoEnCuenta(true, dCtxPago);
     }
@@ -49,13 +51,13 @@ public class SecStoreCreditStpV {
         boolean marcadoInicialmente = secStoreCredit.isChecked();
         secStoreCredit.selectSaldoEnCuenta();
         
-        PageCheckoutWrapperStpV pageCheckoutWrapperStpV = new PageCheckoutWrapperStpV(channel, driver);
+        PageCheckoutWrapperStpV pageCheckoutWrapperStpV = new PageCheckoutWrapperStpV(channel, app, driver);
         PageCheckoutWrapper pageCheckoutWrapper = pageCheckoutWrapperStpV.getPageCheckoutWrapper();
         pageCheckoutWrapperStpV.validateLoadingDisappears(5);
         validaBloqueSaldoEnCuenta(!marcadoInicialmente, dCtxPago);
         if (marcadoInicialmente) {
             boolean isEmpl = dCtxPago.getFTCkout().isEmpl;
-            pageCheckoutWrapperStpV.validaMetodosPagoDisponibles(pais, isEmpl, app);
+            pageCheckoutWrapperStpV.validaMetodosPagoDisponibles(pais, isEmpl);
             dCtxPago.getDataPedido().setImporteTotalSinSaldoCta(
             		pageCheckoutWrapper.getPrecioTotalSinSaldoEnCuenta());
         } else {
@@ -94,7 +96,7 @@ public class SecStoreCreditStpV {
       	}
       	
       	if (checkedSaldoEnCta/* || channel==Channel.desktop*/) {
-            String impTotResumen = new PageCheckoutWrapper(channel, driver).getPrecioTotalFromResumen();
+            String impTotResumen = new PageCheckoutWrapper(channel, app, driver).getPrecioTotalFromResumen();
             float impFloat = ImporteScreen.getFloatFromImporteMangoScreen(impTotResumen);
           	validations.add(
         		"Figura un importe total de 0",

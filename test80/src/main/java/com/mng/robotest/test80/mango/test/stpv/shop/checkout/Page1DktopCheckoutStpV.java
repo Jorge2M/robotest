@@ -25,11 +25,13 @@ public class Page1DktopCheckoutStpV {
     
 	private final Page1DktopCheckout page1DktopCheckout;
 	private final Channel channel;
+	private final AppEcom app;
 	private final WebDriver driver;
 	
-	public Page1DktopCheckoutStpV(Channel channel, WebDriver driver) {
-		this.page1DktopCheckout = new Page1DktopCheckout(channel, driver);
+	public Page1DktopCheckoutStpV(Channel channel, AppEcom app, WebDriver driver) {
+		this.page1DktopCheckout = new Page1DktopCheckout(channel, app, driver);
 		this.channel = channel;
+		this.app = app;
 		this.driver = driver;
 	}
 	
@@ -72,7 +74,7 @@ public class Page1DktopCheckoutStpV {
     }
     
 	@Validation
-    public ChecksTM validaResultImputPromoEmpl(DataBag dataBag, AppEcom app) throws Exception {
+    public ChecksTM validaResultImputPromoEmpl(DataBag dataBag) throws Exception {
     	ChecksTM validations = ChecksTM.getNew();
         int maxSeconds = 5;
 	 	validations.add(
@@ -105,13 +107,13 @@ public class Page1DktopCheckoutStpV {
 		description="Introducir el vale <b style=\"color:blue;\">#{valePais.getCodigoVale()}</b> y pulsar el botón \"CONFIRMAR\"", 
         expected="Aparece la página de resumen de artículos con los descuentos correctamente aplicados",
         saveNettraffic=SaveWhen.Always)
-    public void inputValeDescuento(ValePais valePais, DataBag dataBag, AppEcom app) throws Exception { 
-		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, driver);
+    public void inputValeDescuento(ValePais valePais, DataBag dataBag) throws Exception { 
+		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app, driver);
         pageCheckoutWrapper.inputCodigoPromoAndAccept(valePais.getCodigoVale());
         dataBag.setImporteTotal(pageCheckoutWrapper.getPrecioTotalFromResumen());    
         checkAfterInputDiscountVale(valePais);
         if (valePais.isValid()) {
-        	checkValeDiscountIsCorrect(valePais, dataBag, app);
+        	checkValeDiscountIsCorrect(valePais, dataBag);
         }
         
         EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
@@ -141,7 +143,7 @@ public class Page1DktopCheckoutStpV {
 	}
 	
 	@Validation
-	private ChecksTM checkValeDiscountIsCorrect(ValePais valePais, DataBag dataBag, AppEcom app) throws Exception {
+	private ChecksTM checkValeDiscountIsCorrect(ValePais valePais, DataBag dataBag) throws Exception {
     	ChecksTM validations = ChecksTM.getNew();
     	Descuento descuento = new Descuento(valePais.getPorcDescuento(), app);
 	 	validations.add(
@@ -156,7 +158,7 @@ public class Page1DktopCheckoutStpV {
 		description="Si existe -> seleccionar el link \"Eliminar\" asociado al vale", 
         expected="El vale desaparece")
     public void clearValeIfLinkExists() throws Exception {
-		new PageCheckoutWrapper(channel, driver).clickEliminarValeIfExists();
+		new PageCheckoutWrapper(channel, app, driver).clickEliminarValeIfExists();
         checkIsVisibleInputVale(1);
     }
 	

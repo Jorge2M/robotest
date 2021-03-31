@@ -10,6 +10,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
@@ -70,11 +71,11 @@ public class Page2IdentCheckoutStpV {
 		description="Seleccionamos el botón \"Continuar\"",
 		expected="Aparece la página de Checkout",
 		saveImagePage=SaveWhen.Always)
-    public void clickContinuar(boolean userRegistered, DataBag dataBag)
+    public void clickContinuar(boolean userRegistered, AppEcom app, DataBag dataBag)
     throws Exception {
         int maxSecondsToWait = 20;
         page2IdentCheckout.clickBotonContinuarAndWait(maxSecondsToWait);   
-        new PageCheckoutWrapperStpV(channel, driver).validateIsFirstPage(userRegistered, dataBag);
+        new PageCheckoutWrapperStpV(channel, app, driver).validateIsFirstPage(userRegistered, dataBag);
     }
 	
 	@Step (

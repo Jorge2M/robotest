@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -14,13 +15,15 @@ public class SecTMango extends PageObjTM {
     public enum TipoPago {pagoHabitual, tresMeses, seisMeses, pagoUnico}
     
     private final Channel channel;
+    private final AppEcom app;
     
     private final static String XPathSectionMobil = "//div[@class[contains(.,'mango_card')] and @class[contains(.,'show')]]"; 
     private final static String XPathSectionDesktop = "//div[@id='mangoCardContent']"; 
     
-    public SecTMango(Channel channel, WebDriver driver) {
+    public SecTMango(Channel channel, AppEcom app, WebDriver driver) {
     	super(driver);
     	this.channel = channel;
+    	this.app = app;
     }
     
     public String getDescripcionTipoPago(TipoPago tipoPago) {
@@ -39,7 +42,7 @@ public class SecTMango extends PageObjTM {
     }
     
     public String getXPath_section() {
-        if (channel.isDevice()) {
+        if (channel.isDevice() && !(channel==Channel.tablet && app==AppEcom.outlet)) {
             return XPathSectionMobil;
         }
         return XPathSectionDesktop;
@@ -47,7 +50,7 @@ public class SecTMango extends PageObjTM {
     
     public String getXPATH_labelsCheckModalidad() {
         String xpathSection = getXPath_section(); 
-        if (channel.isDevice()) {
+        if (channel.isDevice() && !(channel==Channel.tablet && app==AppEcom.outlet)) {
             return (xpathSection + "//p[@class='method-name']");
         }
         return (xpathSection + "//input/../label/span");
@@ -61,7 +64,7 @@ public class SecTMango extends PageObjTM {
     
     public String getXPATH_clickModalidad(TipoPago tipoPago) {
         String xpathLabelMod = getXPATH_labelModalidad(tipoPago);
-        if (channel.isDevice()) {
+        if (channel.isDevice() && !(channel==Channel.tablet && app==AppEcom.outlet)) {
             return (xpathLabelMod + "/..");
         }
         return (xpathLabelMod + "/../../input");

@@ -7,6 +7,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.DataDireccion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.ModalDirecEnvio;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1DktopCheckout;
@@ -17,11 +18,13 @@ public class ModalDirecEnvioStpV {
 	private final ModalDirecEnvio modalDirecEnvio;
 	private final WebDriver driver;
 	private final Channel channel;
+	private final AppEcom app;
 	
-	public ModalDirecEnvioStpV(Channel channel, WebDriver driver) {
+	public ModalDirecEnvioStpV(Channel channel, AppEcom app, WebDriver driver) {
 		this.modalDirecEnvio = new ModalDirecEnvio(driver);
 		this.driver = driver;
 		this.channel = channel;
+		this.app = app;
 	}
 	
 	@Validation
@@ -51,14 +54,14 @@ public class ModalDirecEnvioStpV {
 	@Validation
 	private ChecksTM checkAfterUpdateData() {
 		ChecksTM validations = ChecksTM.getNew();
-		Page1DktopCheckout page1DktopCheckout = new Page1DktopCheckout(channel, driver);
+		Page1DktopCheckout page1DktopCheckout = new Page1DktopCheckout(channel, app, driver);
 		int maxSeconds = 2; 
 		validations.add(
 			"Aparece un modal de alerta alertando de un posible cambio de precios (lo esperamos hasta " + maxSeconds + " segundos)",
 			page1DktopCheckout.getModalAvisoCambioPais().isVisibleUntil(maxSeconds), State.Warn); 
 		validations.add(
 			"Desaparece la capa de Loading (lo esperamos hasta " + maxSeconds + "segundos", 
-			(new PageCheckoutWrapper(channel, driver)).waitUntilNoDivLoading(maxSeconds), State.Warn);
+			(new PageCheckoutWrapper(channel, app, driver)).waitUntilNoDivLoading(maxSeconds), State.Warn);
 		return validations;
 	}
 }

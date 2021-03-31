@@ -61,7 +61,7 @@ public class PagoNavigationsStpV {
 	
 	public PagoNavigationsStpV(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
 		this.secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
-		this.pageCheckoutWrapperStpV = new PageCheckoutWrapperStpV(dCtxSh.channel, driver);
+		this.pageCheckoutWrapperStpV = new PageCheckoutWrapperStpV(dCtxSh.channel, dCtxSh.appE, driver);
 		this.driver = driver;
 		this.dCtxSh = dCtxSh;
 		this.dCtxPago = dCtxPago;
@@ -167,7 +167,7 @@ public class PagoNavigationsStpV {
         }
         
         if (dCtxSh.appE==AppEcom.votf && dCtxSh.pais.getCodigo_pais().compareTo("001")==0) {
-        	new Page1DktopCheckoutStpV(dCtxSh.channel, driver).stepIntroduceCodigoVendedorVOTF("111111");
+        	new Page1DktopCheckoutStpV(dCtxSh.channel, dCtxSh.appE, driver).stepIntroduceCodigoVendedorVOTF("111111");
         }
         
         if (dCtxPago.getFTCkout().loyaltyPoints) {
@@ -177,7 +177,7 @@ public class PagoNavigationsStpV {
     }
     
     private void testValeDescuento(ValePais vale, DataBag dataBag) throws Exception {
-    	Page1DktopCheckoutStpV page1 = new Page1DktopCheckoutStpV(dCtxSh.channel, driver);
+    	Page1DktopCheckoutStpV page1 = new Page1DktopCheckoutStpV(dCtxSh.channel, dCtxSh.appE, driver);
     	if ("".compareTo(vale.getTextoCheckout())!=0) {
     		if (vale.isValid()) {
     			page1.checkIsVisibleTextVale(vale);
@@ -185,7 +185,7 @@ public class PagoNavigationsStpV {
     			page1.checkIsNotVisibleTextVale(vale);
     		}
     	}
-    	page1.inputValeDescuento(vale, dataBag, dCtxSh.appE);
+    	page1.inputValeDescuento(vale, dataBag);
     }
     
     /**
@@ -215,7 +215,7 @@ public class PagoNavigationsStpV {
             datosRegistro = page2IdentCheckoutStpV.inputDataPorDefecto(dCtxSh.pais, emailCheckout, false);
         }
         
-        page2IdentCheckoutStpV.clickContinuar(dCtxSh.userRegistered, dataBag);
+        page2IdentCheckoutStpV.clickContinuar(dCtxSh.userRegistered, dCtxSh.appE, dataBag);
         
         //Validaciones para analytics (sólo para firefox y NetAnalysis)
         EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
@@ -324,7 +324,7 @@ public class PagoNavigationsStpV {
                 pageCheckoutWrapperStpV.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
             }
                 
-            pageCheckoutWrapperStpV.despliegaYValidaMetodosPago(dCtxSh.pais, dCtxPago.getFTCkout().isEmpl, dCtxSh.appE);
+            pageCheckoutWrapperStpV.despliegaYValidaMetodosPago(dCtxSh.pais, dCtxPago.getFTCkout().isEmpl);
             if (dCtxPago.getFTCkout().validaPasarelas) {
                 validaPasarelasPagoPais();
             }
@@ -347,7 +347,7 @@ public class PagoNavigationsStpV {
                         dataDirFactura.put(DataDirType.email, "crp1974@hotmail.com");
                         dataDirFactura.put(DataDirType.telefono, "665015122");
                         dataDirFactura.put(DataDirType.poblacion, "PEREPAU");
-                        new PageCheckoutWrapperStpV(dCtxSh.channel, driver).getModalDirecFacturaStpV()
+                        new PageCheckoutWrapperStpV(dCtxSh.channel, dCtxSh.appE, driver).getModalDirecFacturaStpV()
                         	.inputDataAndActualizar(dataDirFactura);
                     }
                     
@@ -363,8 +363,8 @@ public class PagoNavigationsStpV {
                         dataDirEnvio.put(DataDirType.email, "jorge.munoz.sge@mango.com");
                         dataDirEnvio.put(DataDirType.telefono, "665015122");
                         pageCheckoutWrapperStpV.getModalDirecEnvioStpV().inputDataAndActualizar(dataDirEnvio);
-                        pageCheckoutWrapperStpV.getModalAvisoCambioPaisStpV().clickConfirmar(paisChange);
-                        pageCheckoutWrapperStpV.validaMetodosPagoDisponibles(paisChange, dCtxPago.getFTCkout().isEmpl, dCtxSh.appE);
+                        pageCheckoutWrapperStpV.getModalAvisoCambioPaisStpV().clickConfirmar(paisChange, dCtxSh.appE);
+                        pageCheckoutWrapperStpV.validaMetodosPagoDisponibles(paisChange, dCtxPago.getFTCkout().isEmpl);
                     }
                 }
             }
@@ -400,7 +400,7 @@ public class PagoNavigationsStpV {
     	ITestContext ctx = TestMaker.getTestCase().getTestRunContext();
     	List<Pago> listPagosPais = dCtxSh.pais.getListPagosForTest(dCtxSh.appE, isEmpl);
     	for (Pago pago : listPagosPais) {
-    		if (pago.isNeededTestPasarelaDependingFilter(dCtxSh.channel, ctx)) {
+    		if (pago.isNeededTestPasarelaDependingFilter(dCtxSh.channel, dCtxSh.appE, ctx)) {
     			listPagosToTest.add(pago);
     		}
     	}

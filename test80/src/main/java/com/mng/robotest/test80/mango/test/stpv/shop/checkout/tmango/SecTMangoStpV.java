@@ -8,6 +8,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango.TipoPago;
 
@@ -15,8 +16,8 @@ public class SecTMangoStpV {
 
 	private final SecTMango secTMango;
 	
-	public SecTMangoStpV(Channel channel, WebDriver driver) {
-		secTMango = new SecTMango(channel, driver);
+	public SecTMangoStpV(Channel channel, AppEcom app, WebDriver driver) {
+		secTMango = new SecTMango(channel, app, driver);
 	}
 	
 	@Validation

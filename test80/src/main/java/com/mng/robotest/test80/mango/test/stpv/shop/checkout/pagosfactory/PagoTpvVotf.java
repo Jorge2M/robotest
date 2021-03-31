@@ -15,7 +15,7 @@ public class PagoTpvVotf extends PagoStpV {
     
     @Override
     public void testPagoFromCheckout(boolean execPay) throws Exception {
-        String nombrePago = this.dCtxPago.getDataPedido().getPago().getNombre(this.dCtxSh.channel);
+        String nombrePago = this.dCtxPago.getDataPedido().getPago().getNombre(dCtxSh.channel, dCtxSh.appE);
         pageCheckoutWrapperStpV.noClickIconoVotf(nombrePago);
         if (execPay) {
             pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();

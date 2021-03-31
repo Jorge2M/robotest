@@ -21,7 +21,7 @@ public class PagoSepa extends PagoStpV {
         pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, dCtxSh);
         pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
         String importeTotal = dCtxPago.getDataPedido().getImporteTotal();
-        PageSepa1rstStpV.validateIsPage(pago.getNombre(dCtxSh.channel), importeTotal, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
+        PageSepa1rstStpV.validateIsPage(pago.getNombre(dCtxSh.channel, dCtxSh.appE), importeTotal, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
         
         if (execPay) {
             PageSepa1rstStpV.inputDataAndclickPay(pago.getNumtarj(), pago.getTitular(), importeTotal, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);

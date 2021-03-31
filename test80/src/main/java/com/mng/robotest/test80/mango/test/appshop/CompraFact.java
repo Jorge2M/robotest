@@ -68,14 +68,14 @@ public class CompraFact implements Serializable {
         this.index_fact = getIndexFactoria(pais, pago, appE, channel);
     }
     
-    private String getIndexFactoria(Pais pais, Pago pago, AppEcom appE, Channel channel) {
+    private String getIndexFactoria(Pais pais, Pago pago, AppEcom app, Channel channel) {
     	String index =
     		" " + 
 		    pais.getNombre_pais().replace(" (Península y Baleares)", "") + 
 		    "-" + 
-			pago.getNameFilter(channel) +
+			pago.getNameFilter(channel, app) +
 			"-" +
-			pago.getTipoEnvioType(appE);
+			pago.getTipoEnvioType(app);
 			if (usrRegistrado) {
 				index+="-síUsrReg";
 			}

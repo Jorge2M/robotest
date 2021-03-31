@@ -186,11 +186,11 @@ public class Otras {
         }
         
         String option1 = "Estado de mi pedido";
-        chatBotStpV.isVisibleOption(option1, 3);
+        chatBotStpV.isVisibleOption(option1, 5);
         chatBotStpV.selectOption(option1);
         
         String option2 = "Retraso de mi pedido";
-        chatBotStpV.isVisibleOption(option2, 3);
+        chatBotStpV.isVisibleOption(option2, 5);
         chatBotStpV.selectOption(option2);
         
         chatBotStpV.checkResponseVisible("Si has recibido un e-mail de retraso de tu pedido no te preocupes", 3);

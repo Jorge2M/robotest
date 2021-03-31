@@ -6,6 +6,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
@@ -16,12 +17,14 @@ public class SecTarjetaPciStpV {
 	
 	final WebDriver driver;
 	final Channel channel;
+	final AppEcom app;
 	final private SecTarjetaPci secTarjetaPci;
 	
-	public SecTarjetaPciStpV(Channel channel, WebDriver driver) {
+	public SecTarjetaPciStpV(Channel channel, AppEcom app, WebDriver driver) {
 		this.driver = driver;
 		this.channel = channel;
-		PageCheckoutWrapper pageCheckoutStpV = new PageCheckoutWrapper(channel, driver);
+		this.app = app;
+		PageCheckoutWrapper pageCheckoutStpV = new PageCheckoutWrapper(channel, app, driver);
 		this.secTarjetaPci = pageCheckoutStpV.getSecTarjetaPci();
 	}
     
@@ -31,9 +34,9 @@ public class SecTarjetaPciStpV {
     	if (channel==Channel.desktop && pago.getTypePago()!=TypePago.KrediKarti) {
             int maxSeconds = 5;
 		 	validations.add(
-				"Aparece el bloque correspondiente a la introducción de los datos del método de pago " + pago.getNombre(channel) + 
+				"Aparece el bloque correspondiente a la introducción de los datos del método de pago " + pago.getNombre(channel, app) + 
 				" (lo esperamos hasta " + maxSeconds + " segundo)",
-				secTarjetaPci.isVisiblePanelPagoUntil(pago.getNombre(channel), maxSeconds), 
+				secTarjetaPci.isVisiblePanelPagoUntil(pago.getNombre(channel, app), maxSeconds), 
 				State.Warn);    
     	}
     	
