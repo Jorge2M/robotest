@@ -63,15 +63,23 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 		expected="Aparece el modal para la personalización de la prenda")
 	public void selectLinkPersonalizacion () throws Exception {
 		click(ModalElement.AñadirBordadoLink.getBy(dCtxSh.channel)).type(javascript).exec();
-		validateModal(3);
+		validateModal();
 	}
-
-	@Validation(
-		description="Aparece el modal de personalización con el botón <b>Siguiente</b> (lo esperamos hasta #{maxSeconds} segundos)",
-		level=State.Warn)
-	private boolean validateModal(int maxSeconds) {
-		return isBotonSiguienteVisible(maxSeconds);
-		//return (state(Visible, ModalElement.Siguiente.getBy()).wait(maxSeconds).check());
+	
+	@Validation
+	private ChecksTM validateModal() {
+		int maxSeconds = 3;
+		ChecksTM validations = ChecksTM.getNew();
+		validations.add(
+			"Aparece el modal de personalización con el botón <b>Siguiente</b> (lo esperamos hasta " + maxSeconds + " segundos)",
+			isBotonSiguienteVisible(maxSeconds), 
+			State.Warn);
+		validations.add(
+			"Aparece la opción <b>Un icono</b> (la esperamos hasta " + maxSeconds + " segundos)",
+			state(Visible, ModalElement.ButtonUnIcono.getBy(dCtxSh.channel)).wait(maxSeconds).check(), 
+			State.Warn);
+	
+		return validations;
 	}
 
 	@Validation(

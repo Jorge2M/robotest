@@ -115,7 +115,7 @@ public class SecMenusWrap {
         if (app==AppEcom.outlet) {
             return lineaShop.getSufixOutlet(channel);
         }
-        return lineaShop.name();
+        return lineaShop.name(app);
     }
     
     public void selecLinea(Pais pais, LineaType lineaType) {

@@ -65,7 +65,7 @@ public final class Menu1rstLevel implements MenuLateralDesktop {
     
     @Override
     public String getDataGaLabelMenuLateralDesktop() {
-    	return (getLinea().getLiteral() + ":" + getNombre().toLowerCase());
+    	return (getLinea().getLiteral(app) + ":" + getNombre().toLowerCase());
     }
     
     @Override

@@ -10,8 +10,8 @@ public class SecLineasMobilShop extends SecLineasMobil {
 	static String IniXPathLinkLinea = XPathCapaLevelLinea + "//div[@class[contains(.,'brand-item')] and @id";
 	static String XPathLinkLineaMujer = IniXPathLinkLinea + "='she']";
 	static String XPathLinkLineaHombre = IniXPathLinkLinea + "='he']";
-	static String XPathLinkLineaNina = IniXPathLinkLinea + "='nina']";
-	static String XPathLinkLineaNino =IniXPathLinkLinea + "='nino']";
+	static String XPathLinkLineaNina = IniXPathLinkLinea + "='kids']";
+	static String XPathLinkLineaNino =IniXPathLinkLinea + "='kids']";
 	static String XPathLinkLineaKids =IniXPathLinkLinea + "='kids']"; //p.e. Bolivia
 	static String XPathLinkLineaVioleta = IniXPathLinkLinea + "='violeta']";
 

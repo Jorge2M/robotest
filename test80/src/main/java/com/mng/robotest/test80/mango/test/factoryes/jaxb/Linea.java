@@ -41,8 +41,18 @@ public class Linea implements Serializable {
     		this.channels = channels;
     	}
     	
-    	public String getLiteral() {
-    		return this.literal;
+    	public String getLiteral(AppEcom app) {
+    		if (app!=AppEcom.outlet && (this==nina || this==nino)) {
+    			return "kids";
+    		}
+			return this.literal;
+    	}
+    	
+    	public String name(AppEcom app) {
+    		if (app!=AppEcom.outlet && (this==nina || this==nino)) {
+    			return "kids";
+    		}
+    		return name();
     	}
     	
     	public String getNameUpper() {
