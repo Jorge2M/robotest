@@ -983,7 +983,6 @@
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <accesoempl tarjeta="8000000060433" nombre="DURAND , BEATRICE" fecnac="26-9-1971"/>
-<!--select * from mngbd.usuarios_venta_asistida where username like 'fra%' and bloqueado = 'N'-->
 <accesovotf usuario="fra04974" password="mng04974"/>
 </pais>
 
@@ -1370,7 +1369,19 @@
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <accesoempl tarjeta="8000001382572" nombre="PASTORI , DARIA" fecnac="7-2-1979"/>
-<accesovotf usuario="tda01488" password="mng01488"/>
+<!-- 
+select * from 
+    mngbd.usuarios_venta_asistida t1, 
+    mngbd.usuarios_venta_asis_tda_fisica t2,
+    mngbd.tiendas_fisicas t3
+where
+    t1.username = t2.username and
+    t2.id_tienda = t3.id and
+    t1.bloqueado = 'N' and
+    t3.codigo_pais = '005' and
+    t3.bloqueo_votf = 'N' and
+    t3.baja_shop is null-->
+<accesovotf usuario="tda01182" password="mng01182"/>
 </pais>
 
 <pais nombre_pais="Kosovo" codigo="095">

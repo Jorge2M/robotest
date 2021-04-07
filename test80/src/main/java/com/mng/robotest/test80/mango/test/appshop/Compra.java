@@ -44,9 +44,9 @@ import org.openqa.selenium.WebDriver;
 public class Compra {
 	
 	private final static Pais españa = PaisGetter.get(PaisShop.España);
-	private final static Pais francia = PaisGetter.get(PaisShop.France);
+	private final static Pais italia = PaisGetter.get(PaisShop.Italia);
 	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
-	private final static IdiomaPais frances = francia.getListIdiomas().get(0);
+	private final static IdiomaPais italiano = italia.getListIdiomas().get(0);
 
 	public Compra() {}
 
@@ -185,7 +185,7 @@ public class Compra {
             
         //Indicamos la lista de países hacia los que queremos cambiar/verificar en la página de precompra 
         List<Pais> paisesDestino = new ArrayList<>();
-        paisesDestino.add(francia);
+        paisesDestino.add(italia);
         
         //Hasta página de Checkout
         FlagsTestCkout FTCkout = new FlagsTestCkout();
@@ -267,12 +267,12 @@ public class Compra {
 
     @Test (
         groups={"Compra", "Canal:tablet_App:votf"}, alwaysRun=true,
-        description="description=[Usuario no registrado] Test en VOTF compra desde tienda Francia")
+        description="description=[Usuario no registrado] Test en VOTF compra desde tienda Italia")
     public void COM006_Compra_Francia_Tienda() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
         DataCtxShop dCtxSh = getCtxShForTest();
-        dCtxSh.pais=francia;
-        dCtxSh.idioma=frances;   
+        dCtxSh.pais=italia;
+        dCtxSh.idioma=italiano;   
         dCtxSh.userRegistered = false;
         
         //Hasta página de Checkout

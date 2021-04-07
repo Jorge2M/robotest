@@ -97,8 +97,8 @@ public class SecDataProduct extends PageObjTM {
     private static final String XPathGuiaDeTallasLink = "//*[@id='productFormSizesGuide']";
     private static final String XPathMsgAvisoTallaDevice = "//p[@class[contains(.,'sizes-notify-error')]]";
     private static final String XPathMsgAvisoTallaDesktop = "//p[@class[contains(.,'sg-inp-sugg--error')]]";  
-    private String getXPathMsgAvisoTalla(Channel channel) {
-    	if (channel.isDevice()) {
+    private String getXPathMsgAvisoTalla(Channel channel, AppEcom app) {
+    	if (channel.isDevice() && !(channel==Channel.mobile && app==AppEcom.outlet)) {
     		return XPathMsgAvisoTallaDevice;
     	}
     	return XPathMsgAvisoTallaDesktop;
@@ -257,8 +257,8 @@ public class SecDataProduct extends PageObjTM {
     	return (state(Visible, By.xpath(XPathCapaAvisame)).check());
     }
     
-    public boolean isVisibleAvisoSeleccionTalla(Channel channel) {
-    	String xpathAviso = getXPathMsgAvisoTalla(channel);
+    public boolean isVisibleAvisoSeleccionTalla(Channel channel, AppEcom app) {
+    	String xpathAviso = getXPathMsgAvisoTalla(channel, app);
     	return (state(Visible, By.xpath(xpathAviso)).check());
     }
 

@@ -104,7 +104,9 @@ public class FichaProducto {
         
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
         if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {
-            pageFichaStpV.validaExistsImgsCarruselIzqFichaOld();
+        	if (dCtxSh.appE==AppEcom.outlet && dCtxSh.channel!=Channel.mobile) {
+        		pageFichaStpV.validaExistsImgsCarruselIzqFichaOld();
+        	}
             pageFichaStpV.secProductDescOld.validateAreInStateInitial(dCtxSh.appE);
             PageFicha pageFicha = PageFicha.newInstance(dCtxSh.channel, dCtxSh.appE, driver);
             if (((PageFichaArtOld)pageFicha).getNumImgsCarruselIzq() > 2) {
@@ -113,7 +115,7 @@ public class FichaProducto {
             
             if (dCtxSh.channel!=Channel.tablet) {
             	pageFichaStpV.selectImagenCentralFichaOld();
-            	if (dCtxSh.channel!=Channel.mobile) {
+            	if (dCtxSh.appE!=AppEcom.outlet) {
             		pageFichaStpV.closeZoomImageCentralDevice();
             	}
             }

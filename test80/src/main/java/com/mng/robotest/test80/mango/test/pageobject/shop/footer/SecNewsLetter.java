@@ -4,12 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalClubMangoLikes;
 
-public class SecNewsLetter {
+public class SecNewsLetter extends PageObjTM {
 
-	private final WebDriver driver;
 	private final AppEcom app;
 	
     private final static String XPathCapaNewsLetterShop = "//div[@id[contains(.,'newsletterSubscriptionFooter')]]";
@@ -22,7 +23,7 @@ public class SecNewsLetter {
     private final static String XPathTextAreaMailSuscripcionOutlet = XPathCapaNewsLetterOutlet + "//input[@id[contains(.,'regExpMail')]]";
 	
     public SecNewsLetter(AppEcom app, WebDriver driver) {
-    	this.driver = driver;
+    	super(driver);
     	this.app = app;
     }
     
@@ -60,8 +61,12 @@ public class SecNewsLetter {
 
 	public void clickFooterSuscripcion() throws Exception {
 		ModalClubMangoLikes.closeModalIfVisible(driver);
-		String xpath = getXPathTextAreaMailSuscripcion();
-		driver.findElement(By.xpath(xpath)).click();
+		SecFooter secFooter = new SecFooter(app, driver);
+		secFooter.moveTo();
+		
+		By byLink = By.xpath(getXPathTextAreaMailSuscripcion());
+		state(State.Visible, byLink).wait(2).check();
+		click(byLink).exec();
 	}
 
 }
