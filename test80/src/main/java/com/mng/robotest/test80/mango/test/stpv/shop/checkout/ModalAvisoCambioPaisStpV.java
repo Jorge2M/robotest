@@ -16,22 +16,24 @@ public class ModalAvisoCambioPaisStpV {
 
 	private final ModalAvisoCambioPais modalAvisoCambioPais;
 	private final WebDriver driver;
+	private final AppEcom app;
 	
-	public ModalAvisoCambioPaisStpV(WebDriver driver) {
-		this.modalAvisoCambioPais = new ModalAvisoCambioPais(driver);
+	public ModalAvisoCambioPaisStpV(AppEcom app, WebDriver driver) {
+		this.modalAvisoCambioPais = new ModalAvisoCambioPais(app, driver);
+		this.app = app;
 		this.driver = driver;
 	}
 	
 	@Step (
 		description="Seleccionar botón \"Confirmar cambio\"", 
         expected="Aparece el modal para la introducción de la dirección de facturación")
-    public void clickConfirmar(Pais paisEnvio, AppEcom app) throws Exception {
+    public void clickConfirmar(Pais paisEnvio) throws Exception {
 		modalAvisoCambioPais.clickConfirmarCambio();
-        checkConfirmacionCambio(paisEnvio, app);
+        checkConfirmacionCambio(paisEnvio);
     }
 	
 	@Validation
-	private ChecksTM checkConfirmacionCambio(Pais paisEnvio, AppEcom app) throws Exception {
+	private ChecksTM checkConfirmacionCambio(Pais paisEnvio) throws Exception {
     	ChecksTM validations = ChecksTM.getNew();
 	    int maxSeconds = 10;
 	 	validations.add(

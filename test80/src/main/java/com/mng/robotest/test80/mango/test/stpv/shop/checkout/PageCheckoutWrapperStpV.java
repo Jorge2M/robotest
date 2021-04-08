@@ -67,7 +67,7 @@ public class PageCheckoutWrapperStpV {
         this.secBillpayStpV = new SecBillpayStpV(channel, driver);
         this.secKlarnaStpV = new SecKlarnaStpV(channel, app, driver);
         this.modalDirecFacturaStpV = new ModalDirecFacturaStpV(channel, app, driver);
-        this.modalAvisoCambioPaisStpV = new ModalAvisoCambioPaisStpV(driver);
+        this.modalAvisoCambioPaisStpV = new ModalAvisoCambioPaisStpV(app, driver);
         this.page1DktopCheckStpV = new Page1DktopCheckoutStpV(channel, app, driver);
         this.page1MobilCheckStpV = new Page1EnvioCheckoutMobilStpV(driver);
         this.secIdealStpV = new SecIdealStpV(channel, driver);

@@ -363,7 +363,7 @@ public class PagoNavigationsStpV {
                         dataDirEnvio.put(DataDirType.email, "jorge.munoz.sge@mango.com");
                         dataDirEnvio.put(DataDirType.telefono, "665015122");
                         pageCheckoutWrapperStpV.getModalDirecEnvioStpV().inputDataAndActualizar(dataDirEnvio);
-                        pageCheckoutWrapperStpV.getModalAvisoCambioPaisStpV().clickConfirmar(paisChange, dCtxSh.appE);
+                        pageCheckoutWrapperStpV.getModalAvisoCambioPaisStpV().clickConfirmar(paisChange);
                         pageCheckoutWrapperStpV.validaMetodosPagoDisponibles(paisChange, dCtxPago.getFTCkout().isEmpl);
                     }
                 }
