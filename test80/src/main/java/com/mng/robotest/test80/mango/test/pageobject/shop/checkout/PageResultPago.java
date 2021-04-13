@@ -18,8 +18,8 @@ public class PageResultPago extends PageObjTM {
 	//public final static String XPathTextoConfirmacionPagoEstandar = "//h2[@class[contains(.,'fdHRp')]]"; //React
 	private final static String XpathTextConfirmacionPagoEstandar = "//*[@data-testid[contains(.,'confirmationText')]]";
 	
-	public final static String XPathTextoConfirmacionPagoContrareembolsoDesktop = "//span[@class[contains(.,'titulos pasos')]]"; 
-	public final static String XPathTextoConfirmacionPagoContrareembolsoMobil = "//div[@class='confirmation']";
+	//public final static String XPathTextoConfirmacionPagoContrareembolsoDesktop = "//span[@class[contains(.,'titulos pasos')]]"; 
+	//public final static String XPathTextoConfirmacionPagoContrareembolsoMobil = "//div[@class='confirmation']";
 	
     //public final static String XPathDescubrirLoUltimoButton = "//div[@class[contains(.,'_2koW5')]]/button"; //React
     public final static String XPathDescubrirLoUltimoButton = "//*[@data-testid[contains(.,'cta.goToMain')]]";
@@ -46,31 +46,31 @@ public class PageResultPago extends PageObjTM {
     }
     
     private String getXPathTextoConfirmacionPago() {
-    	switch (typePago) {
-    	case ContraReembolso:
-    		switch (channel) {
-    		case desktop:
-    			return XPathTextoConfirmacionPagoContrareembolsoDesktop;
-    		default:
-    			return XPathTextoConfirmacionPagoContrareembolsoMobil;
-    		}
-    	default:
+//    	switch (typePago) {
+//    	case ContraReembolso:
+//    		switch (channel) {
+//    		case desktop:
+//    			return XPathTextoConfirmacionPagoContrareembolsoDesktop;
+//    		default:
+//    			return XPathTextoConfirmacionPagoContrareembolsoMobil;
+//    		}
+//    	default:
     		return XpathTextConfirmacionPagoEstandar;
-    	}
+//    	}
     }
     
     private String getXPathCodigoPedido() {
-    	switch (typePago) {
-    	case ContraReembolso:
-    		switch (channel) {
-    		case desktop:
-    			return XPathCodigoPedidoContrareembolsoDesktop;
-    		default:
-    			return XPathCodigoPedidoContrareembolsoMobil;
-    		}
-    	default:
+//    	switch (typePago) {
+//    	case ContraReembolso:
+//    		switch (channel) {
+//    		case desktop:
+//    			return XPathCodigoPedidoContrareembolsoDesktop;
+//    		default:
+//    			return XPathCodigoPedidoContrareembolsoMobil;
+//    		}
+//    	default:
     		return XPathCodigoPedidoEstandar;
-    	}
+//    	}
     }
 
     public boolean checkUrl(int maxSeconds) {
