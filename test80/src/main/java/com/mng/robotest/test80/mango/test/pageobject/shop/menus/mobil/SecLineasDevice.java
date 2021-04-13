@@ -23,7 +23,7 @@ public abstract class SecLineasDevice extends PageObjTM {
 	protected final AppEcom app;
 	
 	static String XPathCapaMenuLineasTablet = "//div[@class='menu-section-brands']";
-	static String XPathCapaMenuLineasMobil = "//div[@class='section-detail-list']";
+	static String XPathCapaMenuLineasMobil = "//div[@class='section-detail-list']"; 
 	
 	static String IniXPathLinkSublinea = "//div[@data-label[contains(.,'interior-"; 
 	static String XPathLinkSublineaNina =  IniXPathLinkSublinea + "nina')]]";
