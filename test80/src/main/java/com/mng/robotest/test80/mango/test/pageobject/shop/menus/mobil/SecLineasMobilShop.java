@@ -14,6 +14,7 @@ public class SecLineasMobilShop extends SecLineasMobil {
 	static String XPathLinkLineaNino =IniXPathLinkLinea + "='kids']";
 	static String XPathLinkLineaKids =IniXPathLinkLinea + "='kids']"; //p.e. Bolivia
 	static String XPathLinkLineaVioleta = IniXPathLinkLinea + "='violeta']";
+	static String XPathLinkLineaHome = IniXPathLinkLinea + "='home']";
 
 	public SecLineasMobilShop(WebDriver driver) {
 		super(AppEcom.shop, driver);
@@ -34,6 +35,8 @@ public class SecLineasMobilShop extends SecLineasMobil {
 			return XPathLinkLineaKids;
 		case violeta: 
 			return XPathLinkLineaVioleta;
+		case home:
+			return XPathLinkLineaHome;
 		default:
 			throw new IllegalArgumentException("The line " + lineaType + " is not present in the movil channel");
 		}

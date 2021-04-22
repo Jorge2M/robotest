@@ -5,13 +5,14 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Dotpay.PageDotpay1rstStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Dotpay.PageDotpayAcceptSimulationStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Dotpay.PageDotpayPaymentChannelStpV;
 
 public class PagoDotpay extends PagoStpV {
     
-    public PagoDotpay(DataCtxShop dCtxSh, DataCtxPago dataPago, WebDriver driver) {
+    public PagoDotpay(DataCtxShop dCtxSh, DataCtxPago dataPago, WebDriver driver) throws Exception {
         super(dCtxSh, dataPago, driver);
         super.isAvailableExecPay = true;
     }
@@ -19,7 +20,7 @@ public class PagoDotpay extends PagoStpV {
     @Override
     public void testPagoFromCheckout(boolean execPay) throws Exception {
         pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-        pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
+        dCtxPago = checkoutFlow.checkout(From.MetodosPago);
         DataPedido dataPedido = dCtxPago.getDataPedido(); 
         String nombrePago = dataPedido.getPago().getNombre(dCtxSh.channel, dCtxSh.appE);
         PageDotpay1rstStpV.validateIsPage(nombrePago, dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);

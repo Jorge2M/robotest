@@ -73,6 +73,15 @@ public class UtilsTestMango {
     	return (text.contains(setenta));
     }
     
+    public static String getReferenciaFromSrcImg(String srcImage) {
+        Pattern pattern = Pattern.compile("(\\d+)_(.*?).jpg");
+        Matcher matcher = pattern.matcher(srcImage);
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+        return "";    	
+    }
+    
     public static String getReferenciaFromHref(String hrefArticulo) {
     	String referencia = getReferenciaFromHref_type1(hrefArticulo);
     	if ("".compareTo(referencia)!=0) {

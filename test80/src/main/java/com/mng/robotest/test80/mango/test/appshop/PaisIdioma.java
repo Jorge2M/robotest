@@ -152,6 +152,9 @@ public class PaisIdioma implements Serializable {
 		case nino:
 			menu = "camisetas";
 			break;
+		case home:
+			menu = "mantas";
+			break;
 		default:
 			menu = "pantalones";
 		}

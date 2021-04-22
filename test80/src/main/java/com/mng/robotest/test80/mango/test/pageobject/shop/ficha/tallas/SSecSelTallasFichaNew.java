@@ -23,7 +23,7 @@ public class SSecSelTallasFichaNew extends PageObjTM implements SSecSelTallasFic
     	super(driver);
     }
     
-    private String getXPathTallaByCodigo(int codigoNumericoTalla) {
+    private String getXPathTallaByCodigo(String codigoNumericoTalla) {
         return (XPathTallaItem + "//self::span[@data-value='" + codigoNumericoTalla + "']"); 
     }
     
@@ -94,7 +94,7 @@ public class SSecSelTallasFichaNew extends PageObjTM implements SSecSelTallasFic
     }
     
     @Override
-    public void selectTallaByValue(int codigoNumericoTalla) {
+    public void selectTallaByValue(String codigoNumericoTalla) {
         unfoldListTallasIfNotYet();
         String xpathTalla = getXPathTallaByCodigo(codigoNumericoTalla);
         if (state(Clickable, By.xpath(xpathTalla)).check()) {

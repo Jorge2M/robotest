@@ -1,5 +1,7 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.bolsa;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.ListIterator;
 
 import org.openqa.selenium.By;
@@ -10,6 +12,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
@@ -29,9 +32,14 @@ public class SecBolsaMobile extends SecBolsa {
     private static final String XPathPrecioSubTotal = "//div[@class[contains(.,'totalPriceContainer')]]";
     
     
-    public SecBolsaMobile(AppEcom app, WebDriver driver) {
+    public SecBolsaMobile(AppEcom app, Pais pais, WebDriver driver) {
     	super(Channel.mobile, app, driver);
-    	lineasArtBolsa = new LineasArtBolsaMobile(driver);
+    	//List<String> countrysNewBag = Arrays.asList("001","011","005","010","060","009","066","092","007","003");
+    	//if (countrysNewBag.contains(pais.getCodigo_pais()) && app!=AppEcom.outlet) {
+    	//	lineasArtBolsa = new LineasArtBolsaNew(channel, driver);
+    	//} else {
+    		lineasArtBolsa = new LineasArtBolsaMobile(driver);
+    	//}
     }
     
     @Override

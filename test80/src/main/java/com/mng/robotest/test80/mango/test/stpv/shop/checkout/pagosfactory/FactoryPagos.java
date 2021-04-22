@@ -11,7 +11,7 @@ public class FactoryPagos {
     /**
      * @return Factoría de objetos de tipo 'PagoStpV' en el que se implementan los pasos/validaciones específicos a partir de la página de checkout
      */
-    public static PagoStpV makePagoStpV(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
+    public static PagoStpV makePagoStpV(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
         TypePago typePago = dCtxPago.getDataPedido().getPago().getTypePago();
         
         PagoStpV pagoMaked = null; 

@@ -10,7 +10,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.d3d.PageD3DLoginStp
 
 public class PagoTarjetaIntegrada extends PagoStpV {
 
-    public PagoTarjetaIntegrada(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
+    public PagoTarjetaIntegrada(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
         super(dCtxSh, dCtxPago, driver);
         super.isAvailableExecPay = true;
     }

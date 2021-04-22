@@ -102,7 +102,7 @@ public class Garment {
 			return garmentId;
 		}
 		public String getArticleId() {
-			return garmentId + size.getId() + color.getId();
+			return garmentId + size.getId2Digits() + color.getId();
 		}
 		public void setGarmentId(String garmentId) {
 			this.garmentId = garmentId;

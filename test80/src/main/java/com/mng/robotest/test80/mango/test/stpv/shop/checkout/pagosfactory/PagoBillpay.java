@@ -5,11 +5,12 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 
 
 public class PagoBillpay extends PagoStpV {
     
-    public PagoBillpay(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
+    public PagoBillpay(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
         super(dCtxSh, dCtxPago, driver);
         super.isAvailableExecPay = true;
     }
@@ -27,7 +28,7 @@ public class PagoBillpay extends PagoStpV {
         }
         
         if (execPay) {
-            pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
+        	dCtxPago = checkoutFlow.checkout(From.MetodosPago);
             throw new PaymethodWithoutTestPayImplemented(MsgNoPayImplemented);
         }
     }    

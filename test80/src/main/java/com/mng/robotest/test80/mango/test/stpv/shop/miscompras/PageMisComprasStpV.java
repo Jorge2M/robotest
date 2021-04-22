@@ -26,7 +26,7 @@ public class PageMisComprasStpV {
     private PageMisComprasStpV(Channel channel, AppEcom app, WebDriver driver) {
     	this.driver = driver;
     	this.channel = channel;
-    	this.pageMisCompras = PageMisCompras.make(channel, driver);
+    	this.pageMisCompras = new PageMisCompras(channel, driver);
     	PageDetalleCompra secDetalle = pageMisCompras.getModalDetalleCompra();
     	this.modalDetalleCompraStpV = ModalDetalleCompraStpV.getNew(secDetalle);
 

@@ -12,7 +12,8 @@ import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigations;
-import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test80.mango.test.suites.PagosPaisesSuite.VersionPagosSuite;
 import com.mng.robotest.test80.mango.test.suites.ValesPaisesSuite.VersionValesSuite;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
@@ -57,17 +58,19 @@ public class PaisAplicaVale implements Serializable {
 	public void CHK001_Compra() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		TestCaseTM.addNameSufix(this.index_fact);
+		
 		dCtxSh.userRegistered = false;
-		//dCtxSh.urlAcceso = TestMaker.getTestCase().getInputParamsSuite().getUrlBase();
 		DataCtxPago dCtxPago = new DataCtxPago(this.dCtxSh);
 		FlagsTestCkout fTCkout = (FlagsTestCkout)fTCkoutIni.clone();
 		fTCkout.emailExist = true; 
 		fTCkout.trjGuardada = false;
 		dCtxPago.setFTCkout(fTCkout);
-
-        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
-		pagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded();
-		if (fTCkout.validaPedidosEnManto) {
+		
+		dCtxPago = new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver)
+    		.build()
+    		.checkout(From.Prehome);
+		
+		if (dCtxPago.getFTCkout().validaPedidosEnManto) {
 			List<CheckPedido> listChecks = Arrays.asList(
 				CheckPedido.consultarBolsa, 
 				CheckPedido.consultarPedido);

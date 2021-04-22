@@ -1,10 +1,10 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.bolsa;
 
-
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 
 
 public class SecBolsaDesktopNew extends SecBolsaDesktop {
@@ -22,9 +22,9 @@ public class SecBolsaDesktopNew extends SecBolsaDesktop {
 			"//div[@class[contains(.,'layout-content')]]" + 
 			"//div[@class[contains(.,'right')]]/div";
     
-    public SecBolsaDesktopNew(Channel channel, AppEcom app, WebDriver driver) {
+    public SecBolsaDesktopNew(Channel channel, AppEcom app, Pais pais, WebDriver driver) {
     	super(app, driver);
-    	lineasArtBolsa = new LineasArtBolsaDesktopNew(channel, driver);
+    	lineasArtBolsa = new LineasArtBolsaNew(channel, driver);
     }
     
     @Override

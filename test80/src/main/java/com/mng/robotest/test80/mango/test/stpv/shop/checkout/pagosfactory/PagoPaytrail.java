@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.paytrail.PagePaytrail1rstStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.paytrail.PagePaytrailEpaymentStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.paytrail.PagePaytrailIdConfirmStpV;
@@ -11,7 +12,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.paytrail.PagePaytra
 
 public class PagoPaytrail extends PagoStpV {
     
-    public PagoPaytrail(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
+    public PagoPaytrail(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
         super(dCtxSh, dCtxPago, driver);
         super.isAvailableExecPay = true;
     }
@@ -19,7 +20,7 @@ public class PagoPaytrail extends PagoStpV {
     @Override
     public void testPagoFromCheckout(boolean execPay) throws Exception {
         pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-        pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
+        dCtxPago = checkoutFlow.checkout(From.MetodosPago);
         PagePaytrail1rstStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
         PagePaytrail1rstStpV.selectBancoAndContinue(dCtxSh.channel, driver);
         

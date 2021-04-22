@@ -128,7 +128,12 @@ public abstract class LineasArtBolsa extends PageObjTM {
 		if (link==null) {
 			return "";
 		}
-		return (UtilsTestMango.getReferenciaFromHref(link.getAttribute("href")));
+		if (link.getAttribute("href")!=null) {
+			return (UtilsTestMango.getReferenciaFromHref(link.getAttribute("href")));
+		} else {
+			return (UtilsTestMango.getReferenciaFromSrcImg(link.getAttribute("src")));
+		}
+		
 	}
 
 	

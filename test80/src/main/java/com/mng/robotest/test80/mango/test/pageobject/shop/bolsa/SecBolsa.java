@@ -3,9 +3,6 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.bolsa;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Invisible;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -47,22 +44,12 @@ public abstract class SecBolsa extends PageObjTM {
     
 	public static SecBolsa make(Channel channel, AppEcom app, Pais pais, WebDriver driver) {
 		if (channel==Channel.mobile) {
-			return new SecBolsaMobile(app, driver);
+			return new SecBolsaMobile(app, pais, driver);
 		}
 		if (app==AppEcom.outlet || channel==Channel.tablet) {
 			return new SecBolsaDesktopOld(channel, app, driver);
 		}
-		
-//		List<String> countriesWithNewBag = Arrays.asList(
-//				"001","004","005","006","010","011","017","028","036","038","060","400","412","003","052","043","092",
-//				"081","072","030","388","706","094","075","066","061","019","644","442","649","432","015","046","667",
-//				"064","700","018","007","743","037","701","416","636","054","628","604","055","009","079","475","664",
-//				//"024","740","496","708","063","480","632","021","032","008","728");
-//				"024","740","496");
-//		if (!countriesWithNewBag.contains(pais.getCodigo_pais())) {
-//			return new SecBolsaDesktopOld(channel, app, driver);
-//		}
-		return new SecBolsaDesktopNew(channel, app, driver);
+		return new SecBolsaDesktopNew(channel, app, pais, driver);
 	}
 	
 	protected SecBolsa(Channel channel, AppEcom app, WebDriver driver) {

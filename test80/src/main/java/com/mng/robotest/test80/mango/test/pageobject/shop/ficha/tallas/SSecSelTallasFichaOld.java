@@ -74,7 +74,7 @@ public class SSecSelTallasFichaOld extends PageObjTM implements SSecSelTallasFic
      * @param value talla existente en el atributo value (se trata de la talla en formato número)
      */
     @Override
-    public void selectTallaByValue(int tallaValue) {
+    public void selectTallaByValue(String tallaValue) {
         new Select(driver.findElement(By.xpath(XPathSelectTalla))).selectByValue(String.valueOf(tallaValue));
     }
     
@@ -113,7 +113,7 @@ public class SSecSelTallasFichaOld extends PageObjTM implements SSecSelTallasFic
         }
         
         //Tratamos el caso de talla única donde unificamos el valor a "U"
-        if (getTallaNumSelected()==Talla.U.getTallaNum()) {
+        if (getTallaNumSelected().compareTo(Talla.U.getTallaNum())==0) {
             tallaVisible = Talla.U.name();
         }
         
@@ -123,9 +123,9 @@ public class SSecSelTallasFichaOld extends PageObjTM implements SSecSelTallasFic
 	/**
 	 * @return el value de la talla seleccionada en el desplegable
 	 */
-	private int getTallaNumSelected() {
+	private String getTallaNumSelected() {
 		Select select = despliegaSelectTallas();
-		return (Integer.valueOf(select.getFirstSelectedOption().getAttribute("value")));
+		return (select.getFirstSelectedOption().getAttribute("value"));
 	}
     
 	@Override

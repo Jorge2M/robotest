@@ -11,7 +11,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.d3d.PageD3DLoginStp
 
 public class PagoBancontact extends PagoStpV {
     
-    public PagoBancontact(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
+    public PagoBancontact(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
         super(dCtxSh, dCtxPago, driver);
         super.isAvailableExecPay = true;
     }

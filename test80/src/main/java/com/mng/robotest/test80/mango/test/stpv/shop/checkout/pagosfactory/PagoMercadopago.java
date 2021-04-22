@@ -6,6 +6,7 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoDatosTrj.TypePant;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.mercadopago.PageMercpago1rstStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.mercadopago.PageMercpagoConfStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.mercadopago.PageMercpagoDatosTrjStpV;
@@ -15,7 +16,7 @@ public class PagoMercadopago extends PagoStpV {
 
 	private final static String codigoSeguridad = "123";
 	
-    public PagoMercadopago(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
+    public PagoMercadopago(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
         super(dCtxSh, dCtxPago, driver);
         super.isAvailableExecPay = true;
     }
@@ -24,7 +25,7 @@ public class PagoMercadopago extends PagoStpV {
     public void testPagoFromCheckout(boolean execPay) throws Exception {
         DataPedido dataPedido = this.dCtxPago.getDataPedido();
         pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-        pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
+        dCtxPago = checkoutFlow.checkout(From.MetodosPago);
         int maxSeconds = 5;
         PageMercpago1rstStpV.validateIsPageUntil(maxSeconds, driver);
         PageMercpago1rstStpV.clickLinkRegistration(driver);

@@ -10,7 +10,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 
-public class LineasArtBolsaDesktopNew extends LineasArtBolsa {
+public class LineasArtBolsaDesktopTmp extends LineasArtBolsa {
 
 
 //	private final static String XPathLinkRelativeArticle = ".//div[@class[contains(.,'itemImage')]]/a";
@@ -37,7 +37,7 @@ public class LineasArtBolsaDesktopNew extends LineasArtBolsa {
 	private static final String XPathItemRef = XPathLinkItemRef + "/ancestor::*[@data-testid='bag.item']";
 	private static final String XPathLinkBorrarArtRef = XPathItemRef + "//*[@data-testid[contains(.,'removeItem.button')]]";
 	
-	public LineasArtBolsaDesktopNew(Channel channel, WebDriver driver) {
+	public LineasArtBolsaDesktopTmp(Channel channel, WebDriver driver) {
 		super(channel, driver);
 	}
 

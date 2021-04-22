@@ -11,22 +11,21 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
-import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
+import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
+import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts.MethodGetter;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRegaloInputData.Importe;
-import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter.FooterLink;
 import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigations;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.NavigationsStpV;
-import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checqueregalo.PageChequeRegaloInputDataStpV;
@@ -34,7 +33,8 @@ import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMiCuentaStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
-import java.util.ArrayList;
+import static com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.BuilderCheckout;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -64,8 +64,8 @@ public class Compra {
 
 	@Test (
 		groups={"Compra", "Canal:desktop,mobile_App:shop,outlet"}, alwaysRun=true, priority=2, 
-		description="[Usuario registrado][Tarjeta guardada] Compra con descuento empleado. Verificar compra en sección 'Mis compras'") //Lo marcamos con prioridad 2 para dar tiempo a que otro caso de prueba registre la tarjeta 
-	public void COM001_Compra_TrjSaved_Empl() throws Exception {
+		description="[Usuario registrado][Tarjeta guardada][Productos Home] Compra con descuento empleado. Verificar compra en sección 'Mis compras'") //Lo marcamos con prioridad 2 para dar tiempo a que otro caso de prueba registre la tarjeta 
+	public void COM001_Compra_HomeProducts_TrjSaved_Empl() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
 		dCtxSh.userConnected = "test.performance10@mango.com";
@@ -74,29 +74,27 @@ public class Compra {
 
 		//To checkout
 		FlagsTestCkout FTCkout = new FlagsTestCkout();
-		FTCkout.validaPasarelas = false;  
-		FTCkout.validaPagos = false;
+		FTCkout.validaPasarelas = true;  
+		FTCkout.validaPagos = true;
 		FTCkout.emailExist = true; 
 		FTCkout.trjGuardada = true;
 		FTCkout.isEmpl = true;
 		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
 		dCtxPago.setFTCkout(FTCkout);
 		
-        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
-		pagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded();
-
-		//Pago
-		Pago pagoVisaToTest = españa.getPago("VISA");
-		DataPedido dataPedido = new DataPedido(dCtxSh.pais);
-		dataPedido.setPago(pagoVisaToTest);
-
-		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(dCtxSh.channel, dCtxSh.appE, driver);
-		pageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido);
-		dCtxPago.setDataPedido(dataPedido);
-		dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
-		dCtxPago.getFTCkout().validaPasarelas = true;
-		dCtxPago.getFTCkout().validaPagos = true;
-		pagoNavigationsStpV.testPagoFromCheckoutToEnd(pagoVisaToTest);
+		GetterProducts getterProducts = new GetterProducts.Builder(españa.getCodigo_alf(), dCtxSh.appE, driver)
+			.method(MethodGetter.WebDriver)
+			.linea(LineaType.home)
+			.seccion("bano")
+			.galeria("toallas")
+			.familia("722")
+			.build();
+		
+		dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago, driver)
+        	.pago(españa.getPago("VISA"))
+        	.listArticles(Arrays.asList(getterProducts.getWithStock().get(0), getterProducts.getWithStock().get(1)))
+        	.build()
+        	.checkout(From.Prehome);
 
 		//Validación en Manto de los Pedidos (si existen)
 		List<CheckPedido> listChecks = Arrays.asList(
@@ -155,18 +153,13 @@ public class Compra {
 		fTCkout.isChequeRegalo = true;
 		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
 		dCtxPago.setFTCkout(fTCkout);
-		Pago pagoVISA = españa.getPago("VISA");
-		dCtxPago.getDataPedido().setPago(pagoVISA);
-		DataPedido dataPedido = dCtxPago.getDataPedido();
+
+		dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago, driver)
+        	.pago(españa.getPago("VISA"))
+        	.build()
+        	.checkout(From.Identification);
 		
-		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(dCtxSh.channel, dCtxSh.appE, driver);
-		dataPedido.setImporteTotal(pageCheckoutWrapper.getPrecioTotalFromResumen());
-		dataPedido.setDireccionEnvio("");
-		dataPedido.setEmailCheckout(dCtxSh.userConnected);
-		
-        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
-		pagoNavigationsStpV.checkPasarelaPago();
-		if (fTCkout.validaPedidosEnManto) {
+		if (dCtxPago.getFTCkout().validaPedidosEnManto) {
 			List<CheckPedido> listChecks = Arrays.asList(
 				CheckPedido.consultarBolsa, 
 				CheckPedido.consultarPedido,
@@ -183,10 +176,6 @@ public class Compra {
     	WebDriver driver = TestMaker.getDriverTestCase();
         DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userRegistered = false;
-            
-        //Indicamos la lista de países hacia los que queremos cambiar/verificar en la página de precompra 
-        List<Pais> paisesDestino = new ArrayList<>();
-        paisesDestino.add(francia);
         
         //Hasta página de Checkout
         FlagsTestCkout FTCkout = new FlagsTestCkout();
@@ -198,9 +187,12 @@ public class Compra {
         DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
         dCtxPago.setFTCkout(FTCkout);
         
-        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
-        pagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(paisesDestino);
-        if (FTCkout.validaPedidosEnManto) {
+        dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago, driver)
+        	.finalCountrys(Arrays.asList(francia))
+    		.build()
+    		.checkout(From.Prehome);
+        
+        if (dCtxPago.getFTCkout().validaPedidosEnManto) {
         	List<CheckPedido> listChecks = Arrays.asList(
         		CheckPedido.consultarBolsa, 
         		CheckPedido.consultarPedido);
@@ -232,8 +224,9 @@ public class Compra {
             DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
             dCtxPago.setFTCkout(FTCkout);
             
-            PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
-            pagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded();
+            dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago, driver)
+    			.build()
+    			.checkout(From.Prehome);
                     
             //Seleccionamos el logo de Mango (necesitamos acceder a una página con los links del menú superior)
             NavigationsStpV.gotoPortada(dCtxSh, driver);
@@ -256,7 +249,7 @@ public class Compra {
             }            
             
             //Validación en Manto de los Pedidos (si existen)
-            if (FTCkout.validaPedidosEnManto) {
+            if (dCtxPago.getFTCkout().validaPedidosEnManto) {
             	List<CheckPedido> listChecks = Arrays.asList(
             		CheckPedido.consultarBolsa, 
             		CheckPedido.consultarPedido);
@@ -287,9 +280,11 @@ public class Compra {
         DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
         dCtxPago.setFTCkout(FTCkout);
         
-        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
-        pagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded();
-        if (FTCkout.validaPedidosEnManto) {
+        dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago, driver)
+			.build()
+			.checkout(From.Prehome);
+        
+        if (dCtxPago.getFTCkout().validaPedidosEnManto) {
         	List<CheckPedido> listChecks = Arrays.asList(
         		CheckPedido.consultarBolsa, 
         		CheckPedido.consultarPedido);
@@ -297,4 +292,5 @@ public class Compra {
             PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
         }
     }
+    
 }

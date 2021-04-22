@@ -9,6 +9,13 @@ public class Size {
 	public int getId() {
 		return id;
 	}
+	public String getId2Digits() {
+		String valor = String.valueOf(getId());
+		if (valor.length()==1) {
+			return "0" + valor;
+		}
+		return valor;
+	}
 	public void setId(int id) {
 		this.id = id;
 	}

@@ -4,10 +4,11 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 
 public class PagoKlarnaDeutsch extends PagoStpV {
     
-    public PagoKlarnaDeutsch(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
+    public PagoKlarnaDeutsch(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
         super(dCtxSh, dCtxPago, driver);
         super.isAvailableExecPay = true;
     }
@@ -20,7 +21,7 @@ public class PagoKlarnaDeutsch extends PagoStpV {
         pageCheckoutWrapperStpV.getSecKlarnaDeutschStpV().inputData("23-04-1974");
         if (execPay) {
             this.dCtxPago.getDataPedido().setCodtipopago("?");
-            pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
+            dCtxPago = checkoutFlow.checkout(From.MetodosPago);
         }
     }    
 }

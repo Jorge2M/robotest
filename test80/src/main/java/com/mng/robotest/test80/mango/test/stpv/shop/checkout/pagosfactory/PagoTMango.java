@@ -6,13 +6,14 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango.PageAmexInputTarjetaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango.PageAmexResultStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango.PageRedsysSimStpV;
 
 public class PagoTMango extends PagoStpV {
 
-    public PagoTMango(DataCtxShop dCtxSh, DataCtxPago dataPago, WebDriver driver) {
+    public PagoTMango(DataCtxShop dCtxSh, DataCtxPago dataPago, WebDriver driver) throws Exception {
         super(dCtxSh, dataPago, driver);
         super.isAvailableExecPay = true;
     }
@@ -24,7 +25,7 @@ public class PagoTMango extends PagoStpV {
         pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
         pageCheckoutWrapperStpV.getSecTMangoStpV().validateIsSectionOk();
         pageCheckoutWrapperStpV.getSecTMangoStpV().clickTipoPago(SecTMango.TipoPago.pagoHabitual);
-        pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
+        dCtxPago = checkoutFlow.checkout(From.MetodosPago);
         PageAmexInputTarjetaStpV.validateIsPageOk(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), driver);
         
         if (execPay) {

@@ -5,12 +5,13 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.sepa.PageSepa1rstStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.sepa.PageSepaResultMobilStpV;
 
 public class PagoSepa extends PagoStpV {
     
-    public PagoSepa(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
+    public PagoSepa(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
         super(dCtxSh, dCtxPago, driver);
         super.isAvailableExecPay = true;
     }
@@ -19,7 +20,7 @@ public class PagoSepa extends PagoStpV {
     public void testPagoFromCheckout(boolean execPay) throws Exception {
         Pago pago = this.dCtxPago.getDataPedido().getPago();
         pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, dCtxSh);
-        pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
+        dCtxPago = checkoutFlow.checkout(From.MetodosPago);
         String importeTotal = dCtxPago.getDataPedido().getImporteTotal();
         PageSepa1rstStpV.validateIsPage(pago.getNombre(dCtxSh.channel, dCtxSh.appE), importeTotal, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
         

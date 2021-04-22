@@ -17,12 +17,12 @@ import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Color;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Size;
-import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
@@ -77,13 +77,10 @@ public class CompraLuque {
         dCtxPago.setFTCkout(fTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
         
-        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
-        pagoNavigationsStpV.testFromBolsaToCheckoutMetPago();
-        
-        //Payment
-        Pago pagoVISA = dCtxSh.pais.getPago("VISA");
-        dCtxPago.getDataPedido().setPago(pagoVISA);
-        pagoNavigationsStpV.checkPasarelaPago();
+        new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver)
+        	.pago(dCtxSh.pais.getPago("VISA"))
+        	.build()
+        	.checkout(From.Bolsa);
     }
     
 	private DataCtxShop getCtxShForTest(Pais pais, IdiomaPais idioma) throws Exception {

@@ -4,11 +4,12 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.pasarelaotras.PagePasarelaOtrasStpV;
 
 public class PagoPasarelaOtras extends PagoStpV {
     
-    public PagoPasarelaOtras(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
+    public PagoPasarelaOtras(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
         super(dCtxSh, dCtxPago, driver);
         super.isAvailableExecPay = false;
     }
@@ -16,7 +17,7 @@ public class PagoPasarelaOtras extends PagoStpV {
     @Override
     public void testPagoFromCheckout(boolean execPay) throws Exception {
         pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-        pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
+        dCtxPago = checkoutFlow.checkout(From.MetodosPago);
         PagePasarelaOtrasStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver);
         
         if (execPay) {

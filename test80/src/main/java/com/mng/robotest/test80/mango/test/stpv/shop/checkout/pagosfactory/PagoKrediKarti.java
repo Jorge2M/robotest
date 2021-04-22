@@ -9,7 +9,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.SecKrediKartiStpV;
 
 public class PagoKrediKarti extends PagoStpV {
     
-    public PagoKrediKarti(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
+    public PagoKrediKarti(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
         super(dCtxSh, dCtxPago, driver);
         super.isAvailableExecPay = true;
     }

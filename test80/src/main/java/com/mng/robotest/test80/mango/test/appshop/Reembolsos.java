@@ -19,7 +19,8 @@ import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageReembolsos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageReembolsos.TypeReembolso;
 import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigations;
-import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.PageReembolsosStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
@@ -145,17 +146,18 @@ public class Reembolsos {
         dCtxPago.setFTCkout(FTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
         
-        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
-        pagoNavigationsStpV.testFromBolsaToCheckoutMetPago(); 
-        
         //Informamos datos varios necesarios para el proceso de pagos de modo que se pruebe el pago StoreCredit
         dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
         dCtxPago.setUserWithStoreC(true);
         dCtxPago.setSaldoCta(saldoCtaIni);
         dCtxPago.getFTCkout().validaPagos = true;
         Pago pagoStoreCredit = dCtxSh.pais.getPago("STORECREDIT");
-        dCtxPago.getDataPedido().setPago(pagoStoreCredit);
-        pagoNavigationsStpV.checkPasarelaPago();
+        dCtxPago.getDataPedido().setDataBag(dataBag);
+        
+        dCtxPago = new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver)
+    		.pago(pagoStoreCredit)
+    		.build()
+    		.checkout(From.Bolsa);
         
         if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
 	        //Volvemos a la portada (Seleccionamos el link "Seguir de shopping" o el icono de Mango)

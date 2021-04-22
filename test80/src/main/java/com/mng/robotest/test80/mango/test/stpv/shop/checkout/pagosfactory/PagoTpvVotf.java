@@ -4,11 +4,12 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 
 
 public class PagoTpvVotf extends PagoStpV {
     
-    public PagoTpvVotf(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
+    public PagoTpvVotf(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
         super(dCtxSh, dCtxPago, driver);
         super.isAvailableExecPay = true;
     }
@@ -18,7 +19,7 @@ public class PagoTpvVotf extends PagoStpV {
         String nombrePago = this.dCtxPago.getDataPedido().getPago().getNombre(dCtxSh.channel, dCtxSh.appE);
         pageCheckoutWrapperStpV.noClickIconoVotf(nombrePago);
         if (execPay) {
-            pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
+        	dCtxPago = checkoutFlow.checkout(From.MetodosPago);
         }
     }    
 }

@@ -5,11 +5,12 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 
 
 public class PagoKlarna extends PagoStpV {
     
-    public PagoKlarna(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
+    public PagoKlarna(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
         super(dCtxSh, dCtxPago, driver);
         super.isAvailableExecPay = true;
     }
@@ -27,7 +28,7 @@ public class PagoKlarna extends PagoStpV {
         
         if (execPay) {
             this.dCtxPago.getDataPedido().setCodtipopago("K");
-            pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
+            dCtxPago = checkoutFlow.checkout(From.MetodosPago);
         }
     }    
 }

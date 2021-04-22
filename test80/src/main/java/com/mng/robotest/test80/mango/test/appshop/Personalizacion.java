@@ -28,8 +28,8 @@ public class Personalizacion {
     	DataCtxShop dCtxSh = Test80.getDefaultDataShop();
     	AccesoStpV.defaultAccess(driver);
 
-		TestABmanagerStpV.activateTestAB_GoogleExp(
-			TestABGoogleExpImpl.SHOP_296_PLP_Desktop_Personalizacion_en_listado, 1, dCtxSh.channel, dCtxSh.appE, driver);
+//		TestABmanagerStpV.activateTestAB_GoogleExp(
+//			TestABGoogleExpImpl.SHOP_296_PLP_Desktop_Personalizacion_en_listado, 1, dCtxSh.channel, dCtxSh.appE, driver);
 		
 		SecMenusWrapperStpV.getNew(dCtxSh, driver).selectMenu1rstLevelTypeCatalog(
 			MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas")),

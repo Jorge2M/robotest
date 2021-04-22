@@ -51,19 +51,20 @@ public enum TestABGoogleExpImpl implements TestABGoogleExp {
 			"V1-Nuevo"),
 		Arrays.asList(Channel.mobile,Channel.tablet),
 		Arrays.asList(AppEcom.shop, AppEcom.votf)
-	),
-
-	SHOP_296_PLP_Desktop_Personalizacion_en_listado (
-		"3UgybAXPQI67bh3iGUVxOQ",
-		"sub_8rhk5o_wc6i3wg92ap",
-		Arrays.asList(0,1,2),
-		Arrays.asList(
-			"0-Original", 
-			"1-BestSellers / CollaborativeFiltering + Bestsellers",
-			"2-BestSellers / CollaborativeFiltering + no more"),
-		Arrays.asList(Channel.desktop),
-		Arrays.asList(AppEcom.shop, AppEcom.votf)
 	);
+
+//	SHOP_296_PLP_Desktop_Personalizacion_en_listado (
+//		//"3UgybAXPQI67bh3iGUVxOQ",
+//		"JiAeRtIqRU6ROe1V_rz44w",
+//		"sub_8rhk5o_wc6i3wg92ap",
+//		Arrays.asList(0,1,2),
+//		Arrays.asList(
+//			"0-Original", 
+//			"1-BestSellers / CollaborativeFiltering + Bestsellers",
+//			"2-BestSellers / CollaborativeFiltering + no more"),
+//		Arrays.asList(Channel.desktop),
+//		Arrays.asList(AppEcom.shop, AppEcom.votf)
+//	);
 		
 	private String valueCookieShop;
 	private String valueCookieOutlet;

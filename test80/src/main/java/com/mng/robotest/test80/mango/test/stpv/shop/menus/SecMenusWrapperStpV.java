@@ -24,7 +24,6 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollection;
-import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.SecMultiFiltrosDevice;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticle;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
@@ -92,7 +91,7 @@ public class SecMenusWrapperStpV {
 	                    apareceLinea = ThreeState.FALSE;
 	                }
 	                
-	                boolean isLineaPresent = secMenusWrap.isLineaPresent(lineaType);
+	                boolean isLineaPresent = isLineaPresent(lineaType);
 	                if (apareceLinea==ThreeState.TRUE) {
 	            		validations.add (
 	        				"<b>Sí</b> aparece el link de la línea <b>" + lineaType + "</b>",
@@ -107,6 +106,15 @@ public class SecMenusWrapperStpV {
         }
             
         return validations;
+    }
+    
+    private boolean isLineaPresent(LineaType lineaType) {
+    	try {
+    		return secMenusWrap.isLineaPresent(lineaType);
+    	} 
+    	catch (Exception e) {
+    		return false;
+    	}
     }
     
     @Validation

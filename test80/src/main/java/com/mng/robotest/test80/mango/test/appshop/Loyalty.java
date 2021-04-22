@@ -22,7 +22,6 @@ import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedido;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -33,8 +32,9 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigations;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.GaleriaNavigationsStpV;
-import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
@@ -111,23 +111,18 @@ public class Loyalty {
         
         //Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
         FlagsTestCkout FTCkout = new FlagsTestCkout();
-        FTCkout.validaPasarelas = false;  
-        FTCkout.validaPagos = false;
+        FTCkout.validaPasarelas = true;  
+        FTCkout.validaPagos = true;
         FTCkout.emailExist = true; 
         FTCkout.loyaltyPoints = true;
         DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
         dCtxPago.setFTCkout(FTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
         
-        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
-        pagoNavigationsStpV.testFromBolsaToCheckoutMetPago(); 
-
-        //Informamos datos varios necesarios para el proceso de pagos de modo que se pruebe el pago StoreCredit
-        dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
-        dCtxPago.getFTCkout().validaPagos = true;
-        Pago pagoVISA = dCtxSh.pais.getPago("VISA");
-        dCtxPago.getDataPedido().setPago(pagoVISA);
-        pagoNavigationsStpV.checkPasarelaPago();
+        dCtxPago = new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver)
+        	.pago(dCtxSh.pais.getPago("VISA"))
+        	.build()
+        	.checkout(From.Bolsa);
         
         //Validación en Manto de los Pedidos (si existen)
     	List<CheckPedido> listChecks = Arrays.asList(

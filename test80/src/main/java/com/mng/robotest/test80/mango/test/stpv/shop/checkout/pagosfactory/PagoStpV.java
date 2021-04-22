@@ -5,12 +5,13 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
-import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
+import static com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.BuilderCheckout;
 
 public abstract class PagoStpV {
 	
-	final PagoNavigationsStpV pagoNavigationsStpV;
+	final CheckoutFlow checkoutFlow;
 	final PageCheckoutWrapperStpV pageCheckoutWrapperStpV;
 	
 	public DataCtxShop dCtxSh;
@@ -20,11 +21,11 @@ public abstract class PagoStpV {
 
 	public boolean isAvailableExecPay = false;
 
-	public PagoStpV(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
+	public PagoStpV(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
 		this.dCtxSh = dCtxSh;
 		this.dCtxPago = dCtxPago;
 		this.driver = driver;
-		this.pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
+		this.checkoutFlow = new BuilderCheckout(dCtxSh, dCtxPago, driver).build();
 		this.pageCheckoutWrapperStpV = new PageCheckoutWrapperStpV(dCtxSh.channel, dCtxSh.appE, driver);
 	}
 

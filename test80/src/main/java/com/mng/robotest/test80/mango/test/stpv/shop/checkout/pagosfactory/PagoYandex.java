@@ -5,13 +5,14 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.yandex.PageYandex1rstStpv;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.yandex.PageYandexMoneyStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.yandex.PageYandexPayingByCodeStpV;
 
 public class PagoYandex extends PagoStpV {
     
-    public PagoYandex(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
+    public PagoYandex(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
         super(dCtxSh, dCtxPago, driver);
         super.isAvailableExecPay = true;
     }
@@ -19,7 +20,7 @@ public class PagoYandex extends PagoStpV {
     @Override
     public void testPagoFromCheckout(boolean execPay) throws Exception {
         pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-        pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
+        dCtxPago = checkoutFlow.checkout(From.MetodosPago);
         DataPedido dataPedido = this.dCtxPago.getDataPedido();
         PageYandex1rstStpv.validateIsPage(dataPedido.getEmailCheckout(), dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), driver);
         if (execPay) {

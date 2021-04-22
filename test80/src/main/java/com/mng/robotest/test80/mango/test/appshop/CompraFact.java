@@ -27,7 +27,8 @@ import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigations;
-import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.BuilderCheckout;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
@@ -148,16 +149,13 @@ public class CompraFact implements Serializable {
         dCtxPago.getDataPedido().setDataBag(dataBag);
         dCtxPago.getFTCkout().testCodPromocional = this.testVale || this.empleado;
         
-        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
-        pagoNavigationsStpV.testFromBolsaToCheckoutMetPago();
-        
-        //Pago
-        dCtxPago.getFTCkout().validaPagos = true;
-        dCtxPago.getDataPedido().setPago(this.pago);
-        pagoNavigationsStpV.checkPasarelaPago();
+        dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago, driver)
+        	.pago(this.pago)
+        	.build()
+        	.checkout(From.Bolsa);
         
         //Validación en Manto de los Pedidos (si existen)
-        if (fTCkout.validaPedidosEnManto) {
+        if (dCtxPago.getFTCkout().validaPedidosEnManto) {
         	List<CheckPedido> listChecks = new ArrayList<CheckPedido>(Arrays.asList(
         		CheckPedido.consultarBolsa, 
         		CheckPedido.consultarPedido));

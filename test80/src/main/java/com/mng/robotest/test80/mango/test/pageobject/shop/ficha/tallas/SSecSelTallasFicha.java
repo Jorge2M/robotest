@@ -15,7 +15,7 @@ public interface SSecSelTallasFicha {
 	public int getNumOptionsTallasNoDisponibles();
 	public boolean isTallaAvailable(String talla);
 	public boolean isTallaUnica();
-	public void selectTallaByValue(int tallaValue);
+	public void selectTallaByValue(String tallaValue);
 	public void selectTallaByIndex(int posicionEnDesplegable);
 	public void selectFirstTallaAvailable();
 	public String getTallaAlfSelected(AppEcom app);

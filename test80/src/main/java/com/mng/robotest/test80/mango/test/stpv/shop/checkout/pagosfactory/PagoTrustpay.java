@@ -4,12 +4,13 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.trustpay.PageTrustPayResultStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.trustpay.PageTrustpaySelectBankStpV;
 
 public class PagoTrustpay extends PagoStpV {
 
-    public PagoTrustpay(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
+    public PagoTrustpay(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
         super(dCtxSh, dCtxPago, driver);
         super.isAvailableExecPay = true;
     }
@@ -17,7 +18,7 @@ public class PagoTrustpay extends PagoStpV {
     @Override
     public void testPagoFromCheckout(boolean execPay) throws Exception {
         pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-        pagoNavigationsStpV.aceptarCompraDesdeMetodosPago();
+        dCtxPago = checkoutFlow.checkout(From.MetodosPago);
         String importeTotal = this.dCtxPago.getDataPedido().getImporteTotal();
         PageTrustpaySelectBankStpV.validateIsPage(dCtxPago.getDataPedido().getPago().getNombre(dCtxSh.channel, dCtxSh.appE), importeTotal, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
         

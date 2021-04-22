@@ -16,8 +16,9 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBo
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.GaleriaNavigationsStpV;
-import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
@@ -67,8 +68,7 @@ public class Bolsa {
         dCtxPago.setFTCkout(FTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
         
-        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
-        pagoNavigationsStpV.testFromBolsaToCheckoutMetPago();
+        new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver).build().checkout(From.Bolsa);
     }
 
     @Test (
@@ -113,8 +113,7 @@ public class Bolsa {
         dCtxPago.setFTCkout(FTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
         
-        PagoNavigationsStpV pagoNavigationsStpV = new PagoNavigationsStpV(dCtxSh, dCtxPago, driver);
-        pagoNavigationsStpV.testFromBolsaToCheckoutMetPago();
+        new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver).build().checkout(From.Bolsa);
     }
 
 	@Test (
