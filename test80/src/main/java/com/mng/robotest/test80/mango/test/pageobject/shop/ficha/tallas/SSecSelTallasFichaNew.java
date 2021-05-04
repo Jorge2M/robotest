@@ -24,7 +24,8 @@ public class SSecSelTallasFichaNew extends PageObjTM implements SSecSelTallasFic
     }
     
     private String getXPathTallaByCodigo(String codigoNumericoTalla) {
-        return (XPathTallaItem + "//self::span[@data-value='" + codigoNumericoTalla + "']"); 
+    	int numTalla = Integer.valueOf(codigoNumericoTalla);
+        return (XPathTallaItem + "//self::span[@data-value='" + codigoNumericoTalla + "' or @data-value='" + numTalla + "']"); 
     }
     
     private String getXPathTallaAvailable(String talla) {

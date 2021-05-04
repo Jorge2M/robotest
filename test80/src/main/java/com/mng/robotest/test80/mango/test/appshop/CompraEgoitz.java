@@ -32,7 +32,7 @@ public class CompraEgoitz {
     @Test (
         groups={"Compra", "Canal:desktop,mobile_App:all"}, alwaysRun=true,
         description="Compra artículos intimissim partiendo de la URL de ficha")
-    public void EGO01_Compra() throws Exception {
+    public void EGO001_Compra() throws Exception {
     	Pais pais=PaisGetter.get(PaisShop.España);
 		IdiomaPais idioma = pais.getListIdiomas().get(0);
 		executePurchase(pais, idioma);
@@ -64,7 +64,7 @@ public class CompraEgoitz {
         dCtxPago.getDataPedido().setDataBag(dataBag);
         
         new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver)
-        	.pago(dCtxSh.pais.getPago("VISA"))
+        	.pago(dCtxSh.pais.getPago("PAYPAL"))
         	.build()
         	.checkout(From.Bolsa);
     }
@@ -79,33 +79,36 @@ public class CompraEgoitz {
 		return dCtxSh;
 	}
 	
-	private List<Garment> getListArticles() {
+	private List<Garment> getListArticles() throws Exception {
 		List<Garment> listReturn = new ArrayList<>();
 		
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		String domain = inputParamsSuite.getDnsUrlAcceso();
+		
         Garment garment1 = new Garment("87092508");
-        garment1.setUrlFicha("https://shop.mango.com/es/hombre/camisetas-lisas/camiseta-algodon-stretch_87092508.html?c=99&busqref=true");
+        garment1.setUrlFicha(domain + "/es/mujer/braguita-brasilena-estilo-anos-80-confeccionada-en-encaje-forro-interior-100-algodon_91267934.html?c=99");
         garment1.setStock(1000);
         Color color1 = new Color();
         color1.setId("99");
         color1.setLabel("Negro");
         Size size1 = new Size();
-        size1.setId(21);
-        size1.setLabel("M");
+        size1.setId(20);
+        size1.setLabel("S");
         color1.setSizes(Arrays.asList(size1));
         garment1.setColors(Arrays.asList(color1));
         listReturn.add(garment1);
 
         Garment garment2 = new Garment("87092508");
-        garment1.setUrlFicha("https://shop.mango.com/es/hombre/camisetas-lisas/camiseta-algodon-stretch_87092508.html?c=99&busqref=true");
+        garment2.setUrlFicha(domain + "/es/mujer/culotte-efecto-pantalon-corto-en-suave-y-liviano-algodon-natural--ideal-para-llevar-todos-los-dias_99483318.html?c=01");
         garment2.setStock(1000);
         Color color2 = new Color();
-        color2.setId("99");
-        color2.setLabel("Negro");
+        color2.setId("01");
+        color2.setLabel("Blanco");
         Size size2 = new Size();
-        size2.setId(20);
-        size2.setLabel("S");
+        size2.setId(5);
+        size2.setLabel("44");
         color2.setSizes(Arrays.asList(size2));
-        garment1.setColors(Arrays.asList(color2));
+        garment2.setColors(Arrays.asList(color2));
         listReturn.add(garment2);
         
         return listReturn;

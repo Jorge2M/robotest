@@ -22,9 +22,10 @@ public class SecMetodoEnvioDesktop extends PageObjTM {
     }
     
     private String getXPathBlockMetodo(TipoTransporte tipoTransporte) {
-        return (
-        	"//div[(@class[contains(.,'bloqueMetodos')] or @class[contains(.,'metodoSelected')]) and @data-analytics-id='" + 
-        	tipoTransporte.getIdAnalytics() + "']");
+    	String xpath = 
+    			"//div[(@class[contains(.,'bloqueMetodos')] or @class[contains(.,'metodoSelected')]) and " + 
+    			"@data-analytics-id='" + tipoTransporte.getIdAnalytics() + "']";
+    	return xpath;
     }
     
     private String getXPathBlockMetodoSelected(TipoTransporte tipoTransporte) {
@@ -33,7 +34,13 @@ public class SecMetodoEnvioDesktop extends PageObjTM {
     }
 
 	private String getXPathRadioMetodo(TipoTransporte tipoTransporte) {
-        return getXPathBlockMetodo(tipoTransporte) + XPathRadioInput;
+        String xpath = getXPathBlockMetodo(tipoTransporte) + XPathRadioInput;
+    	
+    	//TODO for test intimissimi
+    	if (tipoTransporte==TipoTransporte.STANDARD) {
+    		return xpath + " | " + "//input[@id[contains(.,'Intimissimi')] and @value='Domicilio']";
+    	}
+    	return xpath;
     }
     
     public void selectMetodoIfNotSelected(TipoTransporte tipoTransporte) {
