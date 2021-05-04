@@ -19,6 +19,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts.MethodGetter;
+import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRegaloInputData.Importe;
@@ -82,17 +83,9 @@ public class Compra {
 		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
 		dCtxPago.setFTCkout(FTCkout);
 		
-		GetterProducts getterProducts = new GetterProducts.Builder(españa.getCodigo_alf(), dCtxSh.appE, driver)
-			.method(MethodGetter.WebDriver)
-			.linea(LineaType.home)
-			.seccion("bano")
-			.galeria("toallas")
-			.familia("722")
-			.build();
-		
 		dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago, driver)
         	.pago(españa.getPago("VISA"))
-        	.listArticles(Arrays.asList(getterProducts.getWithStock().get(0), getterProducts.getWithStock().get(1)))
+        	.listArticles(getArticles(dCtxSh.appE, driver))
         	.build()
         	.checkout(From.Prehome);
 
@@ -102,6 +95,21 @@ public class Compra {
 			CheckPedido.consultarPedido);
 		DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
 		PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
+	}
+	
+	private List<Garment> getArticles(AppEcom app, WebDriver driver) throws Exception {
+		if (app==AppEcom.outlet) {
+			return null;
+		}
+		GetterProducts getterProducts = new GetterProducts.Builder(españa.getCodigo_alf(), app, driver)
+			.method(MethodGetter.WebDriver)
+			.linea(LineaType.home)
+			.seccion("bano")
+			.galeria("toallas")
+			.familia("722")
+			.build();
+		
+		return Arrays.asList(getterProducts.getWithStock().get(0), getterProducts.getWithStock().get(1));
 	}
 
 	@Test (

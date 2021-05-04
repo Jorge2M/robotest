@@ -47,6 +47,8 @@ public class PageMisCompras extends PageObjTM {
 	
 	public List<Ticket> getTickets() {
 		isVisibleTicket(5);
+		waitForPageLoaded(driver);
+		waitMillis(1000);
 		return getTicketsPage().stream()
 				.map(item -> getTicket(item))
 				.collect(Collectors.toList());
@@ -153,7 +155,7 @@ public class PageMisCompras extends PageObjTM {
 	
 	private final static String XPathItemsRelativeTicket = ".//div[@class[contains(.,'purchase-card__info')]]/div[2]/div";
 	private int getNumItemsTicketPage(WebElement boxDataTicket) {
-		String textLinea = boxDataTicket.findElement(By.xpath(XPathItemsRelativeTicket)).getText();
+		String textLinea = "0" + boxDataTicket.findElement(By.xpath(XPathItemsRelativeTicket)).getText();
 		return (Integer.valueOf(textLinea.replaceAll("[^0-9]", "")));
 	}
 	

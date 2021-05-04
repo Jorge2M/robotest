@@ -12,6 +12,7 @@ public class Garment {
 	private AnalyticsEventsData analyticsEventsData;
 	
 	private ValePais valePais = null;
+	private String urlFicha;
 
 	public Garment() {}
 	public Garment(String garmentId) {
@@ -91,6 +92,13 @@ public class Garment {
 	}
 	public boolean isVale() {
 		return valePais!=null;
+	}
+	
+	public void setUrlFicha(String urlFicha) {
+		this.urlFicha = urlFicha;
+	}
+	public String getUrlFicha() {
+		return urlFicha;
 	}
 	
 	public static class Article {

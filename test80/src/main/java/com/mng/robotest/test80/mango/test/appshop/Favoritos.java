@@ -125,7 +125,7 @@ public class Favoritos implements Serializable {
 
 	@Test(
 		groups={"Favoritos", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
-		description="[Usuario no registrado] Alta favoritos desde la galería y posterior identificación")
+		description="[Usuario no registrado] Alta favoritos desde la galería Mango-Home y posterior identificación")
 	public void FAV002_AltaFavoritosDesdeFicha() throws Exception {
 		TestCaseTM.addNameSufix(this.index_fact);
 		WebDriver driver = TestMaker.getDriverTestCase();
@@ -135,10 +135,7 @@ public class Favoritos implements Serializable {
 		DataFavoritos dataFavoritos = new DataFavoritos();
 		DataBag dataBolsa = new DataBag();
 
-		//Script
-		//TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-		//TestAB.activateTestABfiltrosMobil(1, dCtxSh, getDriver().driver); //!!!!!
-		AccesoStpV.oneStep(dCtxSh, false/*clearArticulos*/, driver);
+		AccesoStpV.oneStep(dCtxSh, false, driver);
 		
 		SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
 		secBolsaStpV.clear();
@@ -146,9 +143,9 @@ public class Favoritos implements Serializable {
 		PageFavoritosStpV pageFavoritosStpV = PageFavoritosStpV.getNew(driver);
 		pageFavoritosStpV.clearAll(dataFavoritos, dCtxSh);
 
-		Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "Vestidos"));
+
 		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh);
+		secMenusStpV.selectMenu1rstLevelTypeCatalog(getMenu(dCtxSh.appE), dCtxSh);
 		LocationArticle article1 = LocationArticle.getInstanceInCatalog(1);
 
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
@@ -166,12 +163,8 @@ public class Favoritos implements Serializable {
 		secBolsaStpV.clear();
 		secMenusStpV.getMenusUser().selectFavoritos(dataFavoritos);
 
-		// Cuando la funcionalidad de "Share Favorites" suba a producción, este if debería eliminarse
-		//if (pageFavoritosStpV.getPageFavoritos().isShareFavoritesVisible()) {
-			// Codigo que se ejecutará solamente si el elemento de compartir favoritos existe
-			pageFavoritosStpV.clickShareIsOk();
-			pageFavoritosStpV.closeShareModal();
-		//}
+		pageFavoritosStpV.clickShareIsOk();
+		pageFavoritosStpV.closeShareModal();
 
 		ArticuloScreen artToPlay = dataFavoritos.getArticulo(0);
 		pageFavoritosStpV.clickArticuloImg(artToPlay);
@@ -186,5 +179,12 @@ public class Favoritos implements Serializable {
 		}
 
 		pageFavoritosStpV.clear(artToPlay, dataFavoritos);
+	}
+	
+	private Menu1rstLevel getMenu(AppEcom app) {
+		if (app==AppEcom.outlet) {
+			return MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.she, null, "Vestidos"));
+		}
+		return MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.home, null, "Albornoces"));
 	}
 }

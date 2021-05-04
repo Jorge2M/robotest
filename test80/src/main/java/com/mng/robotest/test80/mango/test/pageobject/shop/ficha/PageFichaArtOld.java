@@ -56,7 +56,7 @@ public class PageFichaArtOld extends PageFicha {
     }
     
     private String getXPathIsPage(String referencia, Channel channel) {
-        return XPathContainerFicha + secDataProduct.getXPathLinReferencia(referencia, channel);
+        return XPathContainerFicha + secDataProduct.getXPathLinReferencia(referencia);
     }
     
     private String getXPathDivImgCentralDiv() {

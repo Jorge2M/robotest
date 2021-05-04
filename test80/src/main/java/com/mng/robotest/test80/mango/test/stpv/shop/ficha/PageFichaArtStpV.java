@@ -117,7 +117,7 @@ public class PageFichaArtStpV {
         }
             
         if (datosArticulo.availableNombre()) {
-        	String nombreArtFicha = pageFicha.getSecDataProduct().getTituloArt(channel).trim();
+        	String nombreArtFicha = pageFicha.getSecDataProduct().getTituloArt().trim();
     	 	validations.add(
 				"Como nombre del artículo aparece el seleccionado: " + datosArticulo.getNombre(),
 				datosArticulo.getNombre().toLowerCase().compareTo(nombreArtFicha.toLowerCase())==0, State.Warn); 
@@ -128,7 +128,7 @@ public class PageFichaArtStpV {
 
     public void selectColorAndSaveData(ArticuloScreen articulo) {
         selectColor(articulo.getCodigoColor());
-        articulo.setColorName(pageFicha.getSecDataProduct().getNombreColorSelected(channel));
+        articulo.setColorName(pageFicha.getSecDataProduct().getNombreColorSelected());
     }
     
     @Step (
@@ -231,7 +231,7 @@ public class PageFichaArtStpV {
     @Validation
     public ChecksTM checkAvisoTallaUnica(boolean isTallaUnica, TypeFicha typeFichaAct) {
     	ChecksTM validations = ChecksTM.getNew();
-    	boolean isVisibleAviso = pageFicha.getSecDataProduct().isVisibleAvisoSeleccionTalla(channel, app);
+    	boolean isVisibleAviso = pageFicha.getSecDataProduct().isVisibleAvisoSeleccionTalla();
     	if (isTallaUnica || typeFichaAct==TypeFicha.New) {
 		 	validations.add(
 		 		"NO aparece un aviso indicando que hay que seleccionar la talla",
@@ -274,7 +274,7 @@ public class PageFichaArtStpV {
 		expected="El artículo se añade a Favoritos")
 	public void selectAnadirAFavoritos(DataFavoritos dataFavoritos) throws Exception {
 		pageFicha.selectAnadirAFavoritosButton();
-		ArticuloScreen articulo = pageFicha.getArticuloObject(app);
+		ArticuloScreen articulo = pageFicha.getArticuloObject();
 		dataFavoritos.addArticulo(articulo);
 		checkCapaAltaFavoritos();
 		validateVisibleButtonFavoritos(ActionFavButton.Remove);
@@ -284,7 +284,7 @@ public class PageFichaArtStpV {
     	description="Cambiar de color dentro de la misma ficha volviendo al color/talla originales",
         expected="El articulo es cambiado de color.")
     public void changeColorGarment() {
-        ArticuloScreen articulo = pageFicha.getArticuloObject(app);
+        ArticuloScreen articulo = pageFicha.getArticuloObject();
         List<String> colors = pageFicha.getSecDataProduct().getColorsGarment();
         String codeColor = getColorNotSelected(colors, articulo);
         pageFicha.getSecDataProduct().selectColor(codeColor);

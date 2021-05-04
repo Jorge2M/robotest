@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import org.openqa.selenium.WebDriver;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha.TypeFicha;
@@ -24,9 +25,12 @@ public interface SSecSelTallasFicha {
 	public boolean isVisibleSelectorTallasUntil(int maxSeconds);
 	public boolean isVisibleListTallasForSelectUntil(int maxSeconds);
 	
-	public static SSecSelTallasFicha make(TypeFicha typeFicha, WebDriver driver) {
+	public static SSecSelTallasFicha make(TypeFicha typeFicha, Channel channel, AppEcom app, WebDriver driver) {
 		if (typeFicha==TypeFicha.Old) {
-			return new SSecSelTallasFichaOld(driver);
+			if (channel.isDevice() && app!=AppEcom.outlet) {
+				return new SSecSelTallasFichaOldDevice(driver);
+			}
+			return new SSecSelTallasFichaOldDesktop(driver);
 		}
 		return new SSecSelTallasFichaNew(driver);
 	}

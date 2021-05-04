@@ -24,7 +24,7 @@ public class TestABactive {
 		
 		//listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.SHOP_260_Menu_Mobile_Nuevo_Diseño, 0));
 		//TODO en breve se activa en PRO la variante-1
-		listTestABsToActivate.add(TestABactData.getNew(TestABGoogleExpImpl.SelectorFichaMobil, 0));
+		//listTestABsToActivate.add(TestABactData.getNew(TestABGoogleExpImpl.SelectorFichaMobil, 0));
 		
 		
 		//listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.ES_SHOP_XXX_EMP_vs_FH_Search_Desktop, 0));

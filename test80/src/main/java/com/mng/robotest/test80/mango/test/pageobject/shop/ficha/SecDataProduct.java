@@ -32,16 +32,21 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class SecDataProduct extends PageObjTM {
     
     public enum ProductNav {Prev, Next}
+    
     private final SSecSelTallasFicha secSelTallas;
+    private final Channel channel;
+    private final AppEcom app;
 
     private static final String XPathNombreArticuloDesktop = "//h1[@itemprop='name']";
     
     //Existe un Test A/B que hace que el nombre del artículo salga debajo del botón de "Añadir a la bolsa" o en la cabecera, por eso el or.
     private static final String XPathNombreArticuloMobil = "//*[@class[contains(.,'product-info-name')] or @class='headerMobile__text']";
     
-    public SecDataProduct(TypeFicha typeFicha, WebDriver driver) {
+    public SecDataProduct(TypeFicha typeFicha, Channel channel, AppEcom app, WebDriver driver) {
     	super(driver);
-    	this.secSelTallas = SSecSelTallasFicha.make(typeFicha, driver);
+    	this.channel = channel;
+    	this.app = app;
+    	this.secSelTallas = SSecSelTallasFicha.make(typeFicha, channel, app, driver);
     }
     
     public SSecSelTallasFicha getSecSelTallas() {
@@ -97,7 +102,7 @@ public class SecDataProduct extends PageObjTM {
     private static final String XPathGuiaDeTallasLink = "//*[@id='productFormSizesGuide']";
     private static final String XPathMsgAvisoTallaDevice = "//p[@class[contains(.,'sizes-notify-error')]]";
     private static final String XPathMsgAvisoTallaDesktop = "//p[@class[contains(.,'sg-inp-sugg--error')]]";  
-    private String getXPathMsgAvisoTalla(Channel channel, AppEcom app) {
+    private String getXPathMsgAvisoTalla() {
     	if (channel.isDevice() && !(channel==Channel.mobile && app==AppEcom.outlet)) {
     		return XPathMsgAvisoTallaDevice;
     	}
@@ -117,24 +122,24 @@ public class SecDataProduct extends PageObjTM {
     }    
     
 //xpath asociados a los datos básicoos del artículo (nombre y referencia)
-    public String getXPathLinReferencia(String referencia, Channel channel) {
+    public String getXPathLinReferencia(String referencia) {
     	return "//*[@class[contains(.,'-reference')] and text()[contains(.,'" + referencia + "')]]";
     }
     
-    private String getXPathNombreArt(Channel channel) {
+    private String getXPathNombreArt() {
         if (channel.isDevice()) {
             return XPathNombreArticuloMobil;
         }
         return XPathNombreArticuloDesktop;
     }
     
-    public ArticuloScreen getArticuloObject(Channel channel, AppEcom app) {
+    public ArticuloScreen getArticuloObject() {
         ArticuloScreen articulo = new ArticuloScreen();
         articulo.setReferencia(getReferenciaProducto());
-        articulo.setNombre(getTituloArt(channel));
+        articulo.setNombre(getTituloArt());
         articulo.setPrecio(getPrecioFinalArticulo());
         articulo.setCodigoColor(getCodeColor(ColorType.Selected));
-        articulo.setColorName(getNombreColorSelected(channel));
+        articulo.setColorName(getNombreColorSelected());
         articulo.setTalla(secSelTallas.getTallaSelected(app));
         articulo.setNumero(1);
         return articulo;
@@ -151,8 +156,8 @@ public class SecDataProduct extends PageObjTM {
         return "";
     }
     
-    public String getTituloArt(Channel channel) {
-        String xpathNombreArt = getXPathNombreArt(channel);
+    public String getTituloArt() {
+        String xpathNombreArt = getXPathNombreArt();
         List<WebElement> listArticles = getElementsVisible(driver, By.xpath(xpathNombreArt));
         if (listArticles.size()>0) {
 	        WebElement tituloArt = listArticles.get(0);
@@ -192,7 +197,7 @@ public class SecDataProduct extends PageObjTM {
     	return Constantes.colorDesconocido;
     }
     
-    public String getNombreColorSelected(Channel channel) {
+    public String getNombreColorSelected() {
         switch (channel) {
         case desktop:
         	if (state(Present, By.xpath(XPathNombreColorSelectedDesktop)).check()) {
@@ -257,8 +262,8 @@ public class SecDataProduct extends PageObjTM {
     	return (state(Visible, By.xpath(XPathCapaAvisame)).check());
     }
     
-    public boolean isVisibleAvisoSeleccionTalla(Channel channel, AppEcom app) {
-    	String xpathAviso = getXPathMsgAvisoTalla(channel, app);
+    public boolean isVisibleAvisoSeleccionTalla() {
+    	String xpathAviso = getXPathMsgAvisoTalla();
     	return (state(Visible, By.xpath(xpathAviso)).check());
     }
 

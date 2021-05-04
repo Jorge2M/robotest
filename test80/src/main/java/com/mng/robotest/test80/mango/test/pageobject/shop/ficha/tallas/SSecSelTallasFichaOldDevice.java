@@ -1,11 +1,7 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.ficha.tallas;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -14,19 +10,21 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Talla;
 
 
-public class SSecSelTallasFichaOld extends PageObjTM implements SSecSelTallasFicha {
+public class SSecSelTallasFichaOldDevice extends PageObjTM implements SSecSelTallasFicha {
 	
-    private final static String XPathSelectTalla = "//select[@id[contains(.,'productFormSelect')]]";
-    private final static String XPathOptionTallaUnica = XPathSelectTalla + "/option[@data-available='true' and @value[contains(.,'99')]]";
-    private final static String XPathOptionTalla = XPathSelectTalla + "/option[not(@data-text='0')]"; 
+	private final static String XPathSelectorButton = "//*[@data-testid='sizeSelectorButton']";
+	private final static String XPathCapaTallas = "//div[@id='sizesContainerId']";
+	private final static String XPathOptionTalla = XPathCapaTallas + "//span[@class='size-text']";
+	private final static String XPathTallaSelected = XPathSelectorButton + "//span[@class='size-text']";
+	private final static String XPathOptionTallaUnica = "//button[@id='productFormSelect]" + "//span[@class='size-text']";
     
-    public SSecSelTallasFichaOld(WebDriver driver) {
+    public SSecSelTallasFichaOldDevice(WebDriver driver) {
     	super(driver);
     }
     
     private String getXPathOptionTallaSegunDisponible(boolean disponible) {
-        String disponibleStr = String.valueOf(disponible);
-        return (XPathOptionTalla + "[@data-available='" + disponibleStr + "']");
+        String symbol = (disponible) ? "<" : ">";
+        return (XPathOptionTalla + "//self::*[string-length(normalize-space(text()))" + symbol + "12]");
     }
     
     private String getXPathOptionTallaSegunDisponible(boolean disponible, String talla) {
@@ -34,9 +32,13 @@ public class SSecSelTallasFichaOld extends PageObjTM implements SSecSelTallasFic
     	return (xpathOption + "//self::*[text()[contains(.,'" + talla + "')]]");
     }
     
+    private String getXPathOptionTalla(String talla) {
+    	return XPathOptionTalla + "//self::*[text()[contains(.,'" + talla + "')]]";
+    }
+    
     @Override
     public boolean isVisibleSelectorTallasUntil(int maxSeconds) {
-    	return (state(Visible, By.xpath(XPathSelectTalla)).wait(maxSeconds).check());
+    	return (state(Visible, By.xpath(XPathCapaTallas)).wait(maxSeconds).check());
     }
     
     @Override
@@ -66,36 +68,29 @@ public class SSecSelTallasFichaOld extends PageObjTM implements SSecSelTallasFic
     	return (state(Visible, By.xpath(XPathOptionTalla)).wait(maxSeconds).check());
     }
 
-    private Select despliegaSelectTallas() {
-        return (new Select(driver.findElement(By.xpath(XPathSelectTalla))));
+    private void despliegaSelectTallas() {
+    	click(By.xpath(XPathSelectorButton)).exec();
     }
     
-    /**
-     * @param value talla existente en el atributo value (se trata de la talla en formato número)
-     */
     @Override
-    public void selectTallaByValue(String tallaValue) {
-        new Select(driver.findElement(By.xpath(XPathSelectTalla))).selectByValue(String.valueOf(tallaValue));
+    public void selectTallaByValue(String tallaNum) {
+    	despliegaSelectTallas();
+    	Talla talla = Talla.getTalla(tallaNum);
+    	String xpathTalla = getXPathOptionTalla(talla.getName());
+    	click(By.xpath(xpathTalla)).exec();
     }
     
     @Override
     public void selectTallaByIndex(int posicionEnDesplegable) {
-        new Select(driver.findElement(By.xpath(XPathSelectTalla))).selectByIndex(posicionEnDesplegable);
+    	despliegaSelectTallas();
+    	click(By.xpath("(" + By.xpath(XPathOptionTalla + ")[" + posicionEnDesplegable + "]"))).exec();
     }
     
     @Override
     public void selectFirstTallaAvailable() {
-        Select selectTalla = despliegaSelectTallas();
-        List<WebElement> listOptions = selectTalla.getOptions();
-        String valueTallaToSelect = "";
-        for (WebElement talla : listOptions) {
-            if ("true".compareTo(talla.getAttribute("data-available"))==0) {
-                valueTallaToSelect = talla.getAttribute("value");
-                break;
-            }
-        }
-        
-        selectTalla.selectByValue(valueTallaToSelect);
+        despliegaSelectTallas();
+        String xpathTallaAvailable = getXPathOptionTallaSegunDisponible(true);
+        click(By.xpath(xpathTallaAvailable)).exec();
     }    
     
     /**
@@ -103,8 +98,7 @@ public class SSecSelTallasFichaOld extends PageObjTM implements SSecSelTallasFic
      */
     @Override
     public String getTallaAlfSelected(AppEcom app) {
-        Select select = despliegaSelectTallas();
-        String tallaVisible = select.getFirstSelectedOption().getText(); 
+        String tallaVisible = driver.findElement(By.xpath(XPathTallaSelected)).getText();
         tallaVisible = removeAlmacenFromTalla(tallaVisible);
         
         //Tratamos el caso relacionado con los entornos de test y eliminamos la parte a partir de " - " para contemplar casos como el de 'S - Delivery in 4-7 business day')
@@ -112,21 +106,8 @@ public class SSecSelTallasFichaOld extends PageObjTM implements SSecSelTallasFic
             tallaVisible = tallaVisible.substring(0, tallaVisible.indexOf(" - "));
         }
         
-        //Tratamos el caso de talla única donde unificamos el valor a "U"
-        if (getTallaNumSelected().compareTo(Talla.U.getTallaNum())==0) {
-            tallaVisible = Talla.U.name();
-        }
-        
         return tallaVisible;
     }
-    
-	/**
-	 * @return el value de la talla seleccionada en el desplegable
-	 */
-	private String getTallaNumSelected() {
-		Select select = despliegaSelectTallas();
-		return (select.getFirstSelectedOption().getAttribute("value"));
-	}
     
 	@Override
     public String getTallaAlf(int posicion) {

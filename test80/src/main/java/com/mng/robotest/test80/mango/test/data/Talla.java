@@ -32,12 +32,6 @@ public enum Talla {
 			}
 		}
 		return Undefined;
-//		try {
-//			return Talla.valueOf(tallaStr);
-//		}
-//		catch (IllegalArgumentException e) {
-//			return Undefined;
-//		}
 	}
 	public static Talla getTalla(String tallaNum) {
 		for (Talla talla : Talla.values()) {

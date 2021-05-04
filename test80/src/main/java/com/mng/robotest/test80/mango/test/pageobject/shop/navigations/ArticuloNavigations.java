@@ -22,7 +22,11 @@ public class ArticuloNavigations {
 		
 		Article articleStock = productStock.getArticleWithMoreStock();
 		articulo.setReferencia(articleStock.getGarmentId());
-		buscarArticulo(articleStock, channel, app, driver);
+		if ("".compareTo(productStock.getUrlFicha())==0) {
+			buscarArticulo(articleStock, channel, app, driver);
+		} else {
+			driver.get(productStock.getUrlFicha());
+		}
 
 		//Esperamos un máximo de 10 segundos a que aparezca la ficha del artículo
 		PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
@@ -37,7 +41,7 @@ public class ArticuloNavigations {
 		}
 		articulo.setCodigoColor(idColor);
 
-		articulo.setColorName(pageFicha.getSecDataProduct().getNombreColorSelected(channel));
+		articulo.setColorName(pageFicha.getSecDataProduct().getNombreColorSelected());
 		if (articleStock.getSize()!=null) {
 			pageFicha.selectTallaByValue(Talla.getTalla(articleStock.getSize().getId2Digits()));
 		} else {
@@ -62,7 +66,7 @@ public class ArticuloNavigations {
 		}
 
 		// Almacenamos el nombre de artículo para futuras validaciones
-		articulo.setNombre(pageFicha.getSecDataProduct().getTituloArt(channel));
+		articulo.setNombre(pageFicha.getSecDataProduct().getTituloArt());
 
 		return articulo;
 	}
@@ -70,14 +74,14 @@ public class ArticuloNavigations {
 	public static void buscarArticulo(Article article, Channel channel, AppEcom app, WebDriver driver) {
 		SecCabecera.buscarTexto(article.getGarmentId(), channel, app, driver);
 		if (article.getColor()!=null) {
-			selectColorIfExists(article.getColor().getId(), app, driver);
+			selectColorIfExists(article.getColor().getId(), channel, app, driver);
 		}
 	}
 
 	@SuppressWarnings("static-access")
-	private static void selectColorIfExists(String colourCode, AppEcom app, WebDriver driver) {
+	private static void selectColorIfExists(String colourCode, Channel channel, AppEcom app, WebDriver driver) {
 		if (colourCode!=null && "".compareTo(colourCode)!=0) {
-			PageFicha pageFicha = PageFicha.newInstance(Channel.desktop, app, driver);
+			PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
 			if (pageFicha.getSecDataProduct().isClickableColor(colourCode)) {
 				int maxSecondsToWait = 5;
 				if (pageFicha.isPageUntil(maxSecondsToWait)) {

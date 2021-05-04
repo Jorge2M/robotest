@@ -37,7 +37,7 @@ public abstract class PageFicha extends PageObjTM {
     
     public PageFicha(TypeFicha typeFicha, Channel channel, AppEcom app, WebDriver driver) {
     	super(driver);
-    	this.secDataProduct = new SecDataProduct(typeFicha, driver);
+    	this.secDataProduct = new SecDataProduct(typeFicha, channel, app, driver);
     	this.typeFicha = typeFicha;
     	this.channel = channel;
     	this.appE = app;
@@ -65,8 +65,8 @@ public abstract class PageFicha extends PageObjTM {
     	return PageFichaArt_DesktopShop.getNewInstance(channel, app, driver);
     }
     
-    public ArticuloScreen getArticuloObject(AppEcom app) {
-        return (secDataProduct.getArticuloObject(channel, app));
+    public ArticuloScreen getArticuloObject() {
+        return (secDataProduct.getArticuloObject());
     }
     
     public boolean isTallaUnica() {

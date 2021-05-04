@@ -538,7 +538,7 @@ public class PageGaleriaStpV {
     		"Aparece la página de ficha (la esperamos hasta " + maxSeconds + " segundos)",
     		pageFicha.isPageUntil(maxSeconds), State.Warn);
       	
-        String nombreArtFicha = pageFicha.getSecDataProduct().getTituloArt(channel);
+        String nombreArtFicha = pageFicha.getSecDataProduct().getTituloArt();
         String precioArtFicha = pageFicha.getSecDataProduct().getPrecioFinalArticulo();
       	validations.add(
     		"Aparece el artículo anteriormente seleccionado: <br>\" +\n" + 

@@ -151,12 +151,6 @@ public class PageResultPagoStpV {
         if (userRegistered) {
         	PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(channel, app, driver);
         	pageMisComprasStpV.validateIsPage(pais);
-            
-            StdValidationFlags flagsVal = StdValidationFlags.newOne();
-            flagsVal.validaSEO = true;
-            flagsVal.validaJS = true;
-            flagsVal.validaImgBroken = false;
-            AllPagesStpV.validacionesEstandar(flagsVal, driver);
         } else {
             PageAccesoMisComprasStpV.getNew(driver).validateIsPage();
         }

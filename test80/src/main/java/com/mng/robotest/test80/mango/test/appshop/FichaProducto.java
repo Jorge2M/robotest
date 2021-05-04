@@ -76,7 +76,7 @@ public class FichaProducto {
             secBolsaStpV.clear();
         }
         
-        articulo = pageFichaStpv.getFicha().getArticuloObject(dCtxSh.appE);
+        articulo = pageFichaStpv.getFicha().getArticuloObject();
         if (dCtxSh.appE==AppEcom.shop) { //"Buscar en Tienda" y "Favoritos" no existen en Outlet ni Votf
             pageFichaStpv.selectBuscarEnTiendaButton();
             new ModalBuscadorTiendasStpV(dCtxSh.channel, driver).close();

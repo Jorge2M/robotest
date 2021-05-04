@@ -38,7 +38,7 @@ public class PageFichaArt_DesktopShop extends PageFicha {
     }
     
     private String getXPathIsPage(String referencia) {
-        return XPathHtmlFicha + secDataProduct.getXPathLinReferencia(referencia, channel);
+        return XPathHtmlFicha + secDataProduct.getXPathLinReferencia(referencia);
     }
     
     @Override
