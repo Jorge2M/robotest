@@ -112,17 +112,36 @@ public class Compra {
 		return Arrays.asList(getterProducts.getWithStock().get(0), getterProducts.getWithStock().get(1));
 	}
 
+	private enum TypeCheque {Old, New}
+	
 	@Test (
 		groups={"Compra", "Canal:desktop_App:shop"}, alwaysRun=true,
-		description="[Usuario registrado] Consulta datos cheque existente y posterior compra Cheque regalo")
-	public void COM004_Cheque_Regalo_UsrReg_emailExist() throws Exception {
+		description="Consulta datos cheque existente y posterior compra Cheque regalo New (España)")
+	public void COM004_Cheque_Regalo_New() throws Exception {
+		testChequeRegalo(TypeCheque.New);
+	}
+	
+	@Test (
+		groups={"Compra", "Canal:desktop_App:shop"}, alwaysRun=true,
+		description="Compra cheque regalo Old (Francia)")
+	public void COM007_Cheque_Regalo_Old() throws Exception {
+		testChequeRegalo(TypeCheque.Old);
+	}
+	
+	private void testChequeRegalo(TypeCheque typeCheque) throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
 		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
 		dCtxSh.userConnected = userShop.user;
 		dCtxSh.passwordUser = userShop.password;        
 		dCtxSh.userRegistered = true;
-		dCtxSh.pais = españa;
+		if (typeCheque==TypeCheque.New) {
+			dCtxSh.pais = españa;
+		} else {
+			dCtxSh.pais = francia;
+			dCtxSh.userConnected = "francia.test@mango.com";
+			dCtxSh.passwordUser = "mango123";
+		}
 
 		//Creamos una estructura para ir almacenando los datos del proceso de pagos
 		String nTarjeta;
@@ -130,17 +149,24 @@ public class Compra {
 		AccesoStpV.oneStep(dCtxSh, false, driver);
 		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
 		secMenusStpV.seleccionLinea(LineaType.she, null, dCtxSh);
-		(new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver)).clickLinkFooter(FooterLink.cheque_regalo, false);
-		PageChequeRegaloInputDataStpV pageChequeRegaloInputDataStpV = new PageChequeRegaloInputDataStpV(driver);
-		if(dCtxSh.channel.isDevice()){
-			nTarjeta = "100000040043";
-			cvvTarjeta = "618";
-			pageChequeRegaloInputDataStpV.paginaConsultarSaldo(nTarjeta);
-			pageChequeRegaloInputDataStpV.insertCVVConsultaSaldo(cvvTarjeta);
+		
+		PageChequeRegaloInputDataStpV pageChequeRegaloInputDataStpV = new PageChequeRegaloInputDataStpV(dCtxSh.pais, driver);
+		SecFooterStpV secFooterStpV = new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver);
+		if (typeCheque==TypeCheque.Old) {
+			secFooterStpV.clickLinkFooter(FooterLink.cheque_regalo_old, false);
+			pageChequeRegaloInputDataStpV.clickQuieroComprarChequeRegalo();
+			pageChequeRegaloInputDataStpV.seleccionarCantidades(Importe.euro50);
+		} else {
+			secFooterStpV.clickLinkFooter(FooterLink.cheque_regalo, false);
+			if(dCtxSh.channel.isDevice()){
+				nTarjeta = "100000040043";
+				cvvTarjeta = "618";
+				pageChequeRegaloInputDataStpV.paginaConsultarSaldo(nTarjeta);
+				pageChequeRegaloInputDataStpV.insertCVVConsultaSaldo(cvvTarjeta);
+			}
+			pageChequeRegaloInputDataStpV.seleccionarCantidades(Importe.euro50);
+			pageChequeRegaloInputDataStpV.clickQuieroComprarChequeRegalo();
 		}
-
-		pageChequeRegaloInputDataStpV.seleccionarCantidades(Importe.euro50);
-		pageChequeRegaloInputDataStpV.clickQuieroComprarChequeRegalo();
 
 		ChequeRegalo chequeRegalo = new ChequeRegalo();
 		chequeRegalo.setNombre("Jorge");
@@ -176,7 +202,7 @@ public class Compra {
 			PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
 		}
 	}
-
+	
     @Test (
         groups={"Compra", "Canal:desktop_App:shop,outlet"}, alwaysRun=true,
         description="[Usuario no registrado] Compra con cambio datos en dirección de envío en checkout")

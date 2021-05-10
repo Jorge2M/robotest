@@ -39,6 +39,7 @@ public class SecFooter extends PageObjTM {
     	tiendas(footerShop, channelAll, "//a[@data-ga-label='buscarTiendas']", false),
 		mango_card(footerShop, channelAll, "//a[@data-ga-label='tarjetaMango' and text()[contains(.,'Mango Card')]]", false),
     	cheque_regalo(footerShop, channelDesktop, "//a[@data-ga-label='cheques' and text()[contains(.,'egalo')]]", false),
+    	cheque_regalo_old(footerShop, channelDesktop, "//a[@data-ga-label='cheques']", false),
     	apps(footerShop, channelAll, "//a[@data-ga-label='apps' and text()[contains(.,'Apps')]]", false), 
     	empresa(footerAll, channelDesktop, "//a[@data-ga-label='pieEmpresa' and text()[contains(.,'Empresa')]]", true), 
     	franquicias(footerShop, channelDesktop, "//a[@data-ga-label='pieFranquicias' and text()[contains(.,'Franquicias')]]", true), 

@@ -16,7 +16,7 @@ public class PageResultPago extends PageObjTM {
 	private final Channel channel;
 	
 	//public final static String XPathTextoConfirmacionPagoEstandar = "//h2[@class[contains(.,'fdHRp')]]"; //React
-	private final static String XpathTextConfirmacionPagoEstandar = "//*[@data-testid[contains(.,'confirmationText')]]";
+	private final static String XpathTextConfirmacionPagoEstandar = "//*[@data-testid[contains(.,'confirmationText')] or @data-testid='purchaseConfirmation.confirmationText']";
 	
 	//public final static String XPathTextoConfirmacionPagoContrareembolsoDesktop = "//span[@class[contains(.,'titulos pasos')]]"; 
 	//public final static String XPathTextoConfirmacionPagoContrareembolsoMobil = "//div[@class='confirmation']";

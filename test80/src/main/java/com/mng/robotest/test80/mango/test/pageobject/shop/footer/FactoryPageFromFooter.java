@@ -4,7 +4,8 @@ import com.github.jorge2m.testmaker.conf.Channel;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRegaloInputData;
+import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRegaloInputDataNew;
+import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRegaloInputDataOld;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter.FooterLink;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageInputPedido;
@@ -25,7 +26,9 @@ public class FactoryPageFromFooter {
         case mango_card:
         	return (new PageMangoCard(driver));
         case cheque_regalo:
-        	return (new PageChequeRegaloInputData(driver));
+        	return (new PageChequeRegaloInputDataNew(driver));
+        case cheque_regalo_old:
+        	return (new PageChequeRegaloInputDataOld(driver));
         case apps:
         	return (new PageMangoShoppingApp(driver));
         case empresa:

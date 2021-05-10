@@ -46,7 +46,8 @@ public abstract class SecBolsa extends PageObjTM {
 		if (channel==Channel.mobile) {
 			return new SecBolsaMobile(app, pais, driver);
 		}
-		if (app==AppEcom.outlet /*|| channel==Channel.tablet*/) {
+		if (app==AppEcom.outlet) {
+		//if (app==AppEcom.outlet || channel==Channel.tablet) {
 			return new SecBolsaDesktopOld(channel, app, driver);
 		}
 		return new SecBolsaDesktopNew(channel, app, pais, driver);

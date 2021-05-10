@@ -22,7 +22,7 @@ public class ArticuloNavigations {
 		
 		Article articleStock = productStock.getArticleWithMoreStock();
 		articulo.setReferencia(articleStock.getGarmentId());
-		if (productStock.getUrlFicha()!=null && "".compareTo(productStock.getUrlFicha())==0) {
+		if (productStock.getUrlFicha()==null || "".compareTo(productStock.getUrlFicha())==0) {
 			buscarArticulo(articleStock, channel, app, driver);
 		} else {
 			driver.get(productStock.getUrlFicha());
