@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 
-import java.util.EnumSet;
+import java.util.Arrays;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
@@ -10,15 +10,12 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.TypeContentMobil;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
-import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.ManagerBannersScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.landing.PageLanding;
@@ -27,9 +24,9 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDeskt
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralDevice;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralDevice.TypeLocator;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
-import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 
 public class SecMenuLateralMobilStpV {
     
@@ -69,6 +66,8 @@ public class SecMenuLateralMobilStpV {
 	public void validaSelecMenu(MenuLateralDesktop menu) throws Exception {
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app, driver);
 		pageGaleriaStpV.validateGaleriaAfeterSelectMenu(app);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.Analitica)).checks(driver);
 	}
 
 	@Validation
@@ -169,11 +168,11 @@ public class SecMenuLateralMobilStpV {
     
     public void validaPaginaResultMenu2onLevel() throws Exception {
     	checkElementsAfterClickMenu2onLevel();
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = true;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.SEO, 
+				GenericCheck.JSerrors, 
+				GenericCheck.Analitica,
+				GenericCheck.ImgsBroken)).checks(driver);
     }
     
     @Validation (

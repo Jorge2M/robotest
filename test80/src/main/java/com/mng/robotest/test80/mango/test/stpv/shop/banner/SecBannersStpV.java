@@ -20,7 +20,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.ManagerBann
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.landing.PageLanding;
 import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
-import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.CheckerImgsBroken;
+
 
 public class SecBannersStpV {
 	
@@ -105,7 +106,7 @@ public class SecBannersStpV {
 	 		AllPages.validateElementsNotEqualsUntil(elementosPagPadre, marginElements, maxSeconds2, driver), State.Warn); 
 	 	
 	 	int maxErrors = 1;
-        ResultadoErrores resultadoImgs = WebDriverMngUtils.imagesBroken(driver, Channel.desktop, maxErrors);
+        ResultadoErrores resultadoImgs = CheckerImgsBroken.imagesBroken(driver, Channel.desktop, maxErrors);
         if (resultadoImgs.getResultado() != ResultadoErrores.Resultado.OK) { // Si hay error lo pintamos en la descripción de la validación
 		 	validations.add(
 		 		"No hay imágenes cortadas" + resultadoImgs.getlistaLogError().toString(),

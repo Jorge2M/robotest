@@ -6,6 +6,11 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageDevoluciones;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageDevoluciones.Devolucion;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
+
+import java.util.Arrays;
+
 import org.openqa.selenium.WebDriver;
 
 public class PageDevolucionesStpV {
@@ -37,5 +42,9 @@ public class PageDevolucionesStpV {
         Devolucion.EnDomicilio.waitForInState(desplegada, 2, driver);
         PageDevoluciones.clickSolicitarRecogida(driver);
         PageRecogidaDomicStpV.vaidaIsPageSinDevoluciones(driver);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.SEO, 
+				GenericCheck.JSerrors, 
+				GenericCheck.Analitica)).checks(driver);
     }
 }

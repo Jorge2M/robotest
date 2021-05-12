@@ -32,10 +32,10 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu2onLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusFiltroCollection;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
-import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFiltrosStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test80.mango.test.utils.ListComparator;
 import com.mng.robotest.test80.mango.test.utils.checkmenus.DataScreenMenu;
 import com.mng.robotest.test80.mango.test.utils.checkmenus.Label;
@@ -197,12 +197,11 @@ public class SecMenusWrapperStpV {
     public void accesoMenuXRef(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
     	secMenusWrap.seleccionarMenuXHref(menu1rstLevel, dCtxSh.pais);
         checkIsVisibleAarticle(dCtxSh, 3);
-        
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = true;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.SEO, 
+				GenericCheck.JSerrors, 
+				GenericCheck.Analitica,
+				GenericCheck.ImgsBroken)).checks(driver);
     }
     
     @Validation (

@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -10,8 +11,8 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageInfoNewMisComprasMovil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMiCuenta;
-import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.miscompras.PageMisComprasStpV;
 
@@ -53,6 +54,10 @@ public class PageMiCuentaStpV {
     private void clickLinkMisDatos (String usuarioReg) {
         pageMiCuenta.clickMisDatos();
         (new PageMisDatosStpV(driver)).validaIsPage(usuarioReg);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.SEO, 
+				GenericCheck.JSerrors, 
+				GenericCheck.Analitica)).checks(driver);
     }
 
     public void goToMisComprasFromMenu(Pais pais) {
@@ -79,6 +84,10 @@ public class PageMiCuentaStpV {
     public void goToMisDatosAndValidateData(Map<String,String> dataRegistro, String codPais) {
         goToMisDatos(dataRegistro.get("cfEmail"));
         (new PageMisDatosStpV(driver)).validaIsDataAssociatedToRegister(dataRegistro, codPais);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.SEO, 
+				GenericCheck.JSerrors, 
+				GenericCheck.Analitica)).checks(driver);
     }
 
     public void goToSuscripciones() {
@@ -93,12 +102,10 @@ public class PageMiCuentaStpV {
     private void clickLinkSuscripciones() {
         pageMiCuenta.clickSuscripciones();
         PageSuscripcionesStpV.validaIsPage(driver);
-        
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.SEO, 
+				GenericCheck.JSerrors, 
+				GenericCheck.Analitica)).checks(driver);
     }
     
     public void goToSuscripcionesAndValidateData(Map<String,String> datosRegOk) {

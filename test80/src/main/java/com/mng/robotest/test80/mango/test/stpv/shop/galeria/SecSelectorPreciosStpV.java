@@ -1,5 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.galeria;
 
+import java.util.Arrays;
+
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -12,8 +14,8 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.SecFiltrosDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.SecSelectorPreciosDesktop;
-import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 
 @SuppressWarnings({"static-access"})
 public class SecSelectorPreciosStpV {
@@ -67,11 +69,10 @@ public class SecSelectorPreciosStpV {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagMaximo, String.valueOf(dataFilter.maximoFinal));    
 		checkResultSelectFiltro(dataFilter);
 
-		StdValidationFlags flagsVal = StdValidationFlags.newOne();
-		flagsVal.validaSEO = true;
-		flagsVal.validaJS = true;
-		flagsVal.validaImgBroken = false;
-		AllPagesStpV.validacionesEstandar(flagsVal, driver);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.SEO,
+				GenericCheck.JSerrors,
+				GenericCheck.Analitica)).checks(driver);
 	}
 	
 	@Validation

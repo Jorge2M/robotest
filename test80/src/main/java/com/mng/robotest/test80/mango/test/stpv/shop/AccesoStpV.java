@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.shop;
 
-import java.util.EnumSet;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -20,8 +19,6 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
@@ -32,6 +29,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test80.mango.test.stpv.votf.PageLoginVOTFStpV;
 import com.mng.robotest.test80.mango.test.stpv.votf.PageSelectIdiomaVOTFStpV;
 import com.mng.robotest.test80.mango.test.stpv.votf.PageSelectLineaVOTFStpV;
@@ -85,19 +84,11 @@ public class AccesoStpV {
     
     public static void validaIdentificacionEnShop(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		checkLinksAfterLogin(dCtxSh, driver);
-		
-        //Validaciones estándar. 
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = false;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
-        
-        //Validaciones para Analytics (sólo para firefox y NetAnalysis)´
-        EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(Constantes.AnalyticsVal.GoogleAnalytics,
-                                                                  Constantes.AnalyticsVal.NetTraffic,
-                                                                  Constantes.AnalyticsVal.DataLayer);
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, analyticSet, driver);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.GoogleAnalytics, 
+				GenericCheck.JSerrors, 
+				GenericCheck.Analitica, //
+				GenericCheck.NetTraffic)).checks(driver);
     }
 	
 	@Validation
@@ -201,12 +192,10 @@ public class AccesoStpV {
         }
         
         PageSelectLineaVOTFStpV.validateIsPage(driver);
-        
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = false;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.Analitica, 
+				GenericCheck.JSerrors)).checks(driver);
+		
         PageSelectLineaVOTFStpV.selectMenuAndLogoMango(1, dCtxSh, driver);
     }
 

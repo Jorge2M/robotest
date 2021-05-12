@@ -1,5 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.identificacion;
 
+import java.util.Arrays;
+
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -7,8 +9,8 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageRecuperaPasswd;
-import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 
 public class PageRecuperaPasswdStpV {
     
@@ -32,12 +34,9 @@ public class PageRecuperaPasswdStpV {
         PageRecuperaPasswd.inputEmail(email, driver);
         PageRecuperaPasswd.clickEnviar(driver);
         isPageCambioPassword(driver);
-        
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = false;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+		GenericChecks.from(Arrays.asList( 
+				GenericCheck.JSerrors, 
+				GenericCheck.Analitica)).checks(driver);
     }
     
     @Validation

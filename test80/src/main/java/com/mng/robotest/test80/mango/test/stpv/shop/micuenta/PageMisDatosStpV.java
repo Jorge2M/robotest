@@ -9,17 +9,13 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisDatos;
-import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 
 public class PageMisDatosStpV {
 
 	private final PageMisDatos pageMisDatos;
-	private final WebDriver driver;
 	
 	public PageMisDatosStpV(WebDriver driver) {
 		pageMisDatos = new PageMisDatos(driver);
-		this.driver = driver;
 	}
 	
     @Validation
@@ -34,12 +30,6 @@ public class PageMisDatosStpV {
         validations.add(
             "El campo de email contiene " + usuarioReg,
             pageMisDatos.getValueEmailInput().compareTo(usuarioReg.toUpperCase())==0, State.Warn);
-
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
 
         return validations;
     }
@@ -87,12 +77,6 @@ public class PageMisDatosStpV {
                 "Está seleccionada la provincia definida durante el registro: <b>" + provincia + "</b>",
                 (pageMisDatos.getProvinciaSelected().compareTo(provincia)==0), State.Defect);
         }
-        
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
 
         return validations;
     }

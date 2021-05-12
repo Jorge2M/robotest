@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.registro;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
@@ -15,8 +16,9 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.PageRegistroSegunda;
-import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
+
 
 public class PageRegistroSegundaStpV {
     
@@ -110,10 +112,8 @@ public class PageRegistroSegundaStpV {
             PageRegistroDirecStpV.isPageFromPais(pais, driver);
         }
         
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = false;
-        flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.SEO, 
+				GenericCheck.Analitica)).checks(driver);
     }
 }

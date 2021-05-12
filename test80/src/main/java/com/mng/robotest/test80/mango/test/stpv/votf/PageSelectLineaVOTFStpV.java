@@ -1,5 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.votf;
 
+import java.util.Arrays;
+
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -12,8 +14,8 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.votf.PageSelectLineaVOTF;
-import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 
 public class PageSelectLineaVOTFStpV {
 
@@ -46,12 +48,9 @@ public class PageSelectLineaVOTFStpV {
         PageSelectLineaVOTF.clickMenu(LineaType.she, numMenu, driver);
         SecCabecera.getNew(Channel.desktop, AppEcom.votf, driver).clickLogoMango();
         SectionBarraSupVOTFStpV.validate(dCtxSh.pais.getAccesoVOTF().getUsuario(), driver);
-        
-        //Validaciones estándar. 
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.SEO, 
+				GenericCheck.JSerrors, 
+				GenericCheck.Analitica)).checks(driver);
     }
 }

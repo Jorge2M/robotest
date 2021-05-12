@@ -1,5 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.buscador;
 
+import java.util.Arrays;
+
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -14,9 +16,9 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria.From;
 import com.mng.robotest.test80.mango.test.pageobject.shop.navigations.ArticuloNavigations;
-import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 
 public class SecBuscadorStpV {
 
@@ -58,12 +60,10 @@ public class SecBuscadorStpV {
 //			}
 		}
 
-		//Validaciones estándar. 
-		StdValidationFlags flagsVal = StdValidationFlags.newOne();
-		flagsVal.validaSEO = false;
-		flagsVal.validaJS = true;
-		flagsVal.validaImgBroken = true;
-		AllPagesStpV.validacionesEstandar(flagsVal, driver);
+		GenericChecks.from(Arrays.asList( 
+				GenericCheck.JSerrors, //
+				GenericCheck.Analitica,//
+				GenericCheck.ImgsBroken)).checks(driver);
 	}
 
 	@Validation (

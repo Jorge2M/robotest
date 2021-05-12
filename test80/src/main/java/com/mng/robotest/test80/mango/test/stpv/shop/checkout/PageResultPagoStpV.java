@@ -20,8 +20,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageResultPago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras.TypeBlock;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageListPedidosOld;
-import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageAccesoMisComprasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.miscompras.PageMisComprasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageInputPedidoStpV;

@@ -1,7 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.navigations.shop;
 
 import java.util.ArrayList;
-import java.util.EnumSet;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -18,7 +18,6 @@ import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -28,9 +27,7 @@ import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
-import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
@@ -41,7 +38,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIde
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Page1DktopCheckoutStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Page1IdentCheckoutStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Page2IdentCheckoutStpV;
@@ -50,6 +46,8 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageResultPagoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageResultPagoTpvStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory.FactoryPagos;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory.PagoStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
@@ -107,11 +105,8 @@ public class CheckoutFlow {
     	accessShopAndLoginOrLogoff();
         if (dCtxSh.userRegistered) {
             secBolsaStpV.clear();
-            StdValidationFlags flagsVal = StdValidationFlags.newOne();
-            flagsVal.validaSEO = false;
-            flagsVal.validaJS = false;
-            flagsVal.validaImgBroken = false;
-            AllPagesStpV.validacionesEstandar(flagsVal, driver);
+    		GenericChecks.from(Arrays.asList(
+    				GenericCheck.Analitica)).checks(driver);
         }
     
         DataBag dataBag = dCtxPago.getDataPedido().getDataBag();
@@ -162,16 +157,10 @@ public class CheckoutFlow {
         }
         
         page2IdentCheckoutStpV.clickContinuar(dCtxSh.userRegistered, dCtxSh.appE, dataBag);
-        
-        //Validaciones para analytics (sólo para firefox y NetAnalysis)
-        EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
-            Constantes.AnalyticsVal.GoogleAnalytics,
-            Constantes.AnalyticsVal.Criteo,
-            Constantes.AnalyticsVal.NetTraffic,
-            Constantes.AnalyticsVal.DataLayer
-        );
-        
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, analyticSet, driver);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.GoogleAnalytics, 
+				GenericCheck.NetTraffic, 
+				GenericCheck.Analitica)).checks(driver);
     }
     
     private void test1rstPageCheckout() throws Exception {
@@ -318,19 +307,10 @@ public class CheckoutFlow {
 	            
 	            //Almacenamos el pedido en el contexto para la futura validación en Manto
 	            pagoStpV.storePedidoForMantoAndResetData();
-
-	            //Validaciones Analítica (sólo para firefox y NetAnalysis)
-	            EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
-	                    Constantes.AnalyticsVal.GoogleAnalytics,
-	                    Constantes.AnalyticsVal.NetTraffic, 
-	                    Constantes.AnalyticsVal.Criteo,
-	                    Constantes.AnalyticsVal.DataLayer);
-	            if (dataPedido.getPago().getTestpolyvore()!=null && 
-	                dataPedido.getPago().getTestpolyvore().compareTo("s")==0) { 
-	                analyticSet.add(Constantes.AnalyticsVal.Polyvore);
-	            }
-	            
-	            PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, dataPedido, analyticSet, driver);
+	    		GenericChecks.from(Arrays.asList(
+	    				GenericCheck.GoogleAnalytics, 
+	    				GenericCheck.NetTraffic, 
+	    				GenericCheck.Analitica)).checks(driver);
             }
         }
     }

@@ -12,6 +12,8 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import java.util.Arrays;
+
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
@@ -21,9 +23,9 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper.LoyaltyData;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.PageRegistroIni;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
-import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.favoritos.PageFavoritosStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test80.mango.test.stpv.shop.loyalty.PageHomeLikesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMiCuentaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalCambioPaisStpV;
@@ -107,12 +109,9 @@ public class SecMenusUserStpV {
     public void identification(String userConnect, String userPassword) throws Exception {
         PageIdentificacion.iniciarSesion(userConnect, userPassword, channel, app, driver);
         checkIsVisibleLinkCerrarSesion();
-        
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = false;
-        flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.SEO,  
+				GenericCheck.Analitica)).checks(driver);
     }
 	
 	@Validation (

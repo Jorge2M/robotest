@@ -5,13 +5,15 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
+import java.util.Arrays;
+
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataNinos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.PageRegistroNinos;
-import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 
 
 public class PageRegistroNinosStpV {
@@ -36,12 +38,8 @@ public class PageRegistroNinosStpV {
         PageRegistroNinos.setDataNinoIfNotExists(listaNinos, 2, driver);
         PageRegistroNinos.clickContinuar(driver);
         PageRegistroDirecStpV.isPageFromPais(pais, driver);
-        
-        //Validaciones estándar.
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = false;
-        flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.SEO, 
+				GenericCheck.Analitica)).checks(driver);
     }
 }

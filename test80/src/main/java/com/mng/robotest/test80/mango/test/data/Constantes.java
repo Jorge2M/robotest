@@ -50,9 +50,6 @@ public class Constantes {
     public static String BROWSERSTACK = "browserstack";
 	
     public enum ThreeState {TRUE, FALSE, UNKNOWN}
-	
-    //Conjunto de las validaciones disponibles a nivel de Analítica
-    public enum AnalyticsVal {GoogleAnalytics, Criteo, Bing, Polyvore, NetTraffic, DataLayer} 
 
     //ID parámetros contexto relacionados con BrowserStack
     public static final String UserBrowserStack = "equipoqa1";

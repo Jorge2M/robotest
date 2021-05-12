@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.galeria;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,7 +22,6 @@ import com.mng.robotest.test80.mango.test.factoryes.NodoStatus;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
 import com.github.jorge2m.testmaker.service.TestMaker;
@@ -50,10 +50,10 @@ import com.mng.robotest.test80.mango.test.pageobject.utils.DataFichaArt;
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataScroll;
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataArticleGalery;
 import com.mng.robotest.test80.mango.test.pageobject.utils.ListDataArticleGalery;
-import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 public class PageGaleriaStpV {
@@ -245,13 +245,15 @@ public class PageGaleriaStpV {
         	checkNumArticlesInScreen(datosScroll.articulosTotalesPagina, dataForScroll.numArticlesExpected);
         }
         
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = dataForScroll.validaImgBroken;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
-        
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, driver);
+        List<GenericCheck> listChecks = new ArrayList<>();
+        listChecks.add(GenericCheck.SEO); 
+        listChecks.add(GenericCheck.JSerrors); 
+        listChecks.add(GenericCheck.Analitica);
+        listChecks.add(GenericCheck.NetTraffic);
+        listChecks.add(GenericCheck.GoogleAnalytics);
+        if (dataForScroll.validaImgBroken) {
+        	listChecks.add(GenericCheck.ImgsBroken);
+        }
         
         datosScroll.step = TestMaker.getCurrentStepInExecution();
         return datosScroll;
@@ -318,13 +320,11 @@ public class PageGaleriaStpV {
         checkIsVisiblePageWithTitle(tipoPrendasGaleria);
         int numArticulosPant = pageGaleria.getNumArticulos() + pageGaleria.getNumArticulos();
         checkOrderListArticles(typeOrdenacion, numArticulosPant, numArticulosValidar);
-
-        //Validaciones estándar. 
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+ 
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.SEO,
+				GenericCheck.JSerrors,
+				GenericCheck.Analitica)).checks(driver);
        
         return numArticulosPant;
     }
@@ -519,13 +519,12 @@ public class PageGaleriaStpV {
         int maxSeconds = 3;
         checkIsFichaArticle(nombre1erArt, precio1erArt, maxSeconds);
 
-        //Validaciones estándar. 
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
-        PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, driver);        
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.GoogleAnalytics, 
+				GenericCheck.JSerrors,
+				GenericCheck.SEO,
+				GenericCheck.Analitica,
+				GenericCheck.NetTraffic)).checks(driver);       
     }
    
    	@SuppressWarnings("static-access")

@@ -1,5 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.identificacion;
 
+import java.util.Arrays;
+
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -8,8 +10,8 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIdentificacion;
-import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 
 public class PageIdentificacionStpV {
 
@@ -19,15 +21,10 @@ public class PageIdentificacionStpV {
     public static void inicioSesionDatosKO(String usrExistente, String password, Channel channel, AppEcom appE, WebDriver driver) 
     throws Exception {
         PageIdentificacion.iniciarSesion(usrExistente, password, channel, appE, driver);
-
-        //Validaciones
         checkTextoCredencialesKO(driver);
-        
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = false;
-        flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);      
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.SEO, 
+				GenericCheck.Analitica)).checks(driver);    
     }
 	
 	@Validation (
@@ -43,11 +40,8 @@ public class PageIdentificacionStpV {
     public static void selectHasOlvidadoTuContrasenya(WebDriver driver) {
         PageIdentificacion.clickHasOlvidadoContrasenya(driver); 
         PageRecuperaPasswdStpV.isPage(driver); 
-        
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = false;
-        flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.SEO,  
+				GenericCheck.Analitica)).checks(driver);
     }
 }

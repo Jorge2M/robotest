@@ -1,11 +1,10 @@
 package com.mng.robotest.test80.mango.test.stpv.shop;
 
-import java.util.EnumSet;
+import java.util.Arrays;
 import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -13,10 +12,10 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 
 public class PagePrehomeStpV {
     
@@ -75,21 +74,19 @@ public class PagePrehomeStpV {
     public static void seleccionPaisIdiomaAndEnter(DataCtxShop dCtxSh, boolean execValidacs, WebDriver driver) throws Exception {
     	PagePrehome.accesoShopViaPrehome(dCtxSh, driver);
     	
-        EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
-            Constantes.AnalyticsVal.GoogleAnalytics,
-            Constantes.AnalyticsVal.NetTraffic, 
-            Constantes.AnalyticsVal.DataLayer);        
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, analyticSet, driver);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.GoogleAnalytics,
+				GenericCheck.Analitica,
+				GenericCheck.NetTraffic)).checks(driver);
         
         if (execValidacs) {
         	checkPagePostPreHome(dCtxSh.appE, driver);
         }
         
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.SEO,
+				GenericCheck.Analitica,
+				GenericCheck.JSerrors)).checks(driver);
     }    
     
     @Validation

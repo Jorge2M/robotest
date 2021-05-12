@@ -3,7 +3,6 @@ package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.EnumSet;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
@@ -15,14 +14,12 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
-import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.generic.stackTrace;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
@@ -48,12 +45,12 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataFichaArt;
-import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecCabeceraStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.banner.SecBannersStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
 
 @SuppressWarnings({"static-access"})
@@ -125,20 +122,12 @@ public class SecMenusDesktopStpV {
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		pageGaleriaStpV.validateGaleriaAfeterSelectMenu(dCtxSh.appE);
         validationsSelecMenuEspecificDesktop(menu);
-       
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
-        
-        EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
-        	Constantes.AnalyticsVal.GoogleAnalytics,
-            Constantes.AnalyticsVal.NetTraffic, 
-            Constantes.AnalyticsVal.Criteo,
-            Constantes.AnalyticsVal.DataLayer);
-        
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, menu.getLinea(), analyticSet, driver);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.SEO,
+				GenericCheck.JSerrors,
+				GenericCheck.Analitica,
+				GenericCheck.GoogleAnalytics,
+				GenericCheck.NetTraffic)).checks(driver);
     }
     
     @Validation (
@@ -255,7 +244,11 @@ public class SecMenusDesktopStpV {
         SecMenusWrap secMenus = SecMenusWrap.getNew(Channel.desktop, app, driver);
         LineaType lineaResult = secMenus.getLineaResultAfterClickMenu(lineaMenu, menu1rstLevel.getNombre());
         validateIsLineaSelected(lineaResult);
-        PasosGenAnalitica.validaHTTPAnalytics(app, lineaMenu, driver);
+        
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.GoogleAnalytics, 
+				GenericCheck.NetTraffic, 
+				GenericCheck.Analitica)).checks(driver);
     }
     
     final static String tagCarruselsLinea = "@TagCarrusels";
@@ -388,15 +381,11 @@ public class SecMenusDesktopStpV {
             break;
         }
         
-        //Validaciones
-        //AllPagesStpV.validatePageWithFooter(dCtxSh.pais, dCtxSh.appE, StepTestMaker, dFTest);
-        
-        //Validaciones estándar. 
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = true;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.SEO, 
+				GenericCheck.JSerrors, 
+				GenericCheck.Analitica,
+				GenericCheck.ImgsBroken)).checks(driver);
     }
     
     @Step (
@@ -545,11 +534,11 @@ public class SecMenusDesktopStpV {
             validationsRebajas();
     	}
     	
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = true;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.SEO, 
+				GenericCheck.JSerrors, 
+				GenericCheck.Analitica,
+				GenericCheck.ImgsBroken)).checks(driver);
     }
     
     @Validation

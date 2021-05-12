@@ -1,12 +1,11 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
-import java.util.EnumSet;
+import java.util.Arrays;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -14,12 +13,12 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Descuento;
 import com.mng.robotest.test80.mango.test.data.Descuento.DiscountType;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
-import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1DktopCheckout;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 
 public class Page1DktopCheckoutStpV {
     
@@ -116,12 +115,10 @@ public class Page1DktopCheckoutStpV {
         	checkValeDiscountIsCorrect(valePais, dataBag);
         }
         
-        EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
-            Constantes.AnalyticsVal.GoogleAnalytics,
-            Constantes.AnalyticsVal.Criteo,
-            Constantes.AnalyticsVal.NetTraffic, 
-            Constantes.AnalyticsVal.DataLayer);
-        PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, analyticSet, driver);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.GoogleAnalytics,
+				GenericCheck.Analitica,
+				GenericCheck.NetTraffic)).checks(driver);
     }
 	
 	@Validation

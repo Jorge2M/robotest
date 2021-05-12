@@ -28,12 +28,13 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecBreadcrumbFic
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecDataProduct.ColorType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecDataProduct.ProductNav;
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataFichaArt;
-import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.LocationArticle;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalBuscadorTiendasStpV;
 
+import java.util.Arrays;
 import java.util.List;
 
 @SuppressWarnings({"static-access"})
@@ -71,11 +72,11 @@ public class PageFichaArtStpV {
     
     public void validateIsFichaAccordingTypeProduct(Garment product) throws Exception {            
         validateIsFichaArtDisponible(product.getGarmentId(), 3);
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = true;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.SEO, 
+				GenericCheck.JSerrors, 
+				GenericCheck.ImgsBroken,
+				GenericCheck.NetTraffic)).checks(driver);
     }
     
     @Validation (

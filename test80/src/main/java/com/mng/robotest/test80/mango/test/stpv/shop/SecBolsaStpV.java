@@ -1,7 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop;
 
 import java.util.ArrayList;
-import java.util.EnumSet;
+import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -10,16 +10,13 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
@@ -33,6 +30,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Page1IdentCheckoutStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 
 public class SecBolsaStpV {
 
@@ -184,12 +183,11 @@ public class SecBolsaStpV {
 		}
 
 		validaCuadranArticulosBolsa(dataBag);
-		EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
-				Constantes.AnalyticsVal.GoogleAnalytics,
-				Constantes.AnalyticsVal.Criteo,
-				Constantes.AnalyticsVal.NetTraffic, 
-				Constantes.AnalyticsVal.DataLayer);
-		PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, analyticSet, driver);
+		
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.GoogleAnalytics,
+				GenericCheck.Analitica,
+				GenericCheck.NetTraffic)).checks(driver);
 	}
 
 	@Validation

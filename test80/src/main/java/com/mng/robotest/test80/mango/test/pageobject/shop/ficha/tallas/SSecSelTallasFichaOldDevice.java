@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Talla;
 
@@ -77,6 +78,7 @@ public class SSecSelTallasFichaOldDevice extends PageObjTM implements SSecSelTal
     	despliegaSelectTallas();
     	Talla talla = Talla.getTalla(tallaNum);
     	String xpathTalla = getXPathOptionTalla(talla.getName());
+    	state(State.Visible, By.xpath(xpathTalla)).wait(2).check();
     	click(By.xpath(xpathTalla)).exec();
     }
     
