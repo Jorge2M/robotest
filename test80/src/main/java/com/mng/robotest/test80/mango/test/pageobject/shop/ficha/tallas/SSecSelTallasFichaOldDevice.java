@@ -70,6 +70,7 @@ public class SSecSelTallasFichaOldDevice extends PageObjTM implements SSecSelTal
     }
 
     private void despliegaSelectTallas() {
+    	state(State.Visible, By.xpath(XPathSelectorButton)).wait(2).check();
     	click(By.xpath(XPathSelectorButton)).exec();
     }
     
