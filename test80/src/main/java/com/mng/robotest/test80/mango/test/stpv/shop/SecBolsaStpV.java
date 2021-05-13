@@ -225,7 +225,7 @@ public class SecBolsaStpV {
 		ArrayList<DataArtBolsa> listDataToValidate = new ArrayList<>();
 		listDataToValidate.add(DataArtBolsa.Referencia);
 		validations.add(
-			"Cuadran los nombres de los artículos existentes en la bolsa",
+			"Cuadran las referencias de los artículos existentes en la bolsa",
 			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), State.Warn);
 		
 		listDataToValidate.clear();

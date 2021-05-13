@@ -28,7 +28,7 @@ public class LineasArtBolsaNew extends LineasArtBolsa {
 	
 	private static final String TagRef = "[TAGREF]";
 	private static final String XPathLinkItemRef = XPathItem + "//img[@src[contains(.,'" + TagRef + "')]]";
-	private static final String XPathItemRef = XPathLinkItemRef + "/ancestor::*[@class[contains(.,'_3oq0q')]]";	
+	private static final String XPathItemRef = XPathLinkItemRef + "/ancestor::*[@class[contains(.,'layout-content')]]";	
 	private static final String XPathLinkBorrarArtRef = XPathItemRef + "//*[@data-testid[contains(.,'removeItem.button')]]";
 	
 	public LineasArtBolsaNew(Channel channel, WebDriver driver) {
