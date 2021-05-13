@@ -94,20 +94,4 @@ public class Page2IdentCheckoutStpV {
     private boolean checkAvisoDireccionWithNoLatinCharacters() {
         return (page2IdentCheckout.isDisplayedAvisoAduanas());
     }
-    
-    @Validation
-    public ChecksTM validaRGPDText(Pais pais) {  
-    	ChecksTM validations = ChecksTM.getNew();
-		if (pais.getRgpd().equals("S")) {
-		 	validations.add(
-				"El texto legal de RGPD <b>SI</b> existe para el pais " + pais.getCodigo_pais(),
-				page2IdentCheckout.isTextoLegalRGPDVisible(), State.Defect);
-		} else {
-		 	validations.add(
-				"El texto legal de RGPD <b>NO</b> existe para el pais " + pais.getCodigo_pais(),
-				!page2IdentCheckout.isTextoLegalRGPDVisible(), State.Defect);
-		}
-		
-		return validations;
-	}
 }

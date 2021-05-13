@@ -93,6 +93,11 @@ public abstract class BannerObject {
     	return texto;
     }
 	
+    public boolean isVisibleAnyBanner(WebDriver driver) {
+    	List<WebElement> listBanners = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathBanner));
+    	return (listBanners.size()>0);
+    }
+    
     protected List<WebElement> getDisplayedBannersInOrder(WebDriver driver) {
         List<WebElement> listBanners = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathBanner));
         SeleniumUtils.orderElementsByPositionInScreen(listBanners);

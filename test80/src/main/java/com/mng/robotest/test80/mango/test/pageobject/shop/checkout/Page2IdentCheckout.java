@@ -604,8 +604,4 @@ public class Page2IdentCheckout extends PageObjTM {
 	public boolean isTextoRGPDVisible() {
 		return (state(Visible, By.xpath(XPathTextRGPD)).check());
 	}
-
-	public boolean isTextoLegalRGPDVisible() {
-		return (state(Visible, By.xpath(XPathLegalRGPD)).check());
-	}
 }

@@ -30,9 +30,6 @@ public class SecSoyNuevoStpV {
 
 		Page2IdentCheckoutStpV page2IdentCheckoutStpV = new Page2IdentCheckoutStpV(channel, driver);
 		page2IdentCheckoutStpV.validateIsPage(emailExistsYet, 2);
-		if (!userRegistered && appE != AppEcom.votf) {
-			page2IdentCheckoutStpV.validaRGPDText(pais);
-		}
 	}
 
 	@SuppressWarnings("static-access")

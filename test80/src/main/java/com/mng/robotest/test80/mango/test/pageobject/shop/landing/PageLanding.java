@@ -13,7 +13,12 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.BannerObject;
+import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.BannerObjectFactory;
+import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.BannerType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.ManagerBannersScreen;
+import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDesktop.Element;
@@ -123,11 +128,26 @@ public class PageLanding extends PageObjTM {
 
     public boolean haySecc_Art_Banners(AppEcom app) throws Exception {
     	PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
-        return (((PageGaleriaDesktop)pageGaleria).isVisibleAnyArticle() ||
-        		state(Present, By.xpath(
-        			"(//section[@id='section1'] | " + 
-                     "//div[@class[contains(.,'datos_ficha_producto')]] | " +
-                     "//*[@class='celda'])")).check());
+    	if (((PageGaleriaDesktop)pageGaleria).isVisibleAnyArticle()) {
+    		return true;
+    	}
+
+    	PageFicha pageFicha = PageFicha.newInstance(Channel.desktop, app, driver);
+    	if (pageFicha.isPageUntil(0)) {
+    		return true;
+    	}
+    	
+    	BannerObject banners = BannerObjectFactory.make(BannerType.Standar);
+    	if (banners.isVisibleAnyBanner(driver)) {
+    		return true;
+    	}
+        
+    	return false;
+//        return (((PageGaleriaDesktop)pageGaleria).isVisibleAnyArticle() ||
+//        		state(Present, By.xpath(
+//        			"(//section[@id='section1'] | " + 
+//                     "//div[@class[contains(.,'datos_ficha_producto')]] | " +
+//                     "//*[@class='celda'])")).check());
     }
     
     public boolean isSomeElementVisibleInPage(List<Element> elementsCanBeContained, AppEcom app, int maxSeconds) 
