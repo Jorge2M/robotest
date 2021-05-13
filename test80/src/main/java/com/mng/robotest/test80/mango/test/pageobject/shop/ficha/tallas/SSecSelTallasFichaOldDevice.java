@@ -25,7 +25,7 @@ public class SSecSelTallasFichaOldDevice extends PageObjTM implements SSecSelTal
     
     private String getXPathOptionTallaSegunDisponible(boolean disponible) {
         String symbol = (disponible) ? "<" : ">";
-        return (XPathOptionTalla + "//self::*[string-length(normalize-space(text()))" + symbol + "12]");
+        return (XPathOptionTalla + "//self::*[string-length(normalize-space(text()))" + symbol + "20]");
     }
     
     private String getXPathOptionTallaSegunDisponible(boolean disponible, String talla) {
