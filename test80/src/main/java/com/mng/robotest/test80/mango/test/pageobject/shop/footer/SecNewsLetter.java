@@ -13,36 +13,22 @@ public class SecNewsLetter extends PageObjTM {
 
 	private final AppEcom app;
 	
-    private final static String XPathCapaNewsLetterShop = "//div[@id[contains(.,'newsletterSubscriptionFooter')]]";
-    private final static String XPathCapaNewsLetterOutlet = "//div[@class[contains(.,'newsletterForm')]]";
+    private final static String XPathCapaNewsLetter = "//micro-frontend[@name[contains(.,'newsletterSubscriptionFooter')]]";
+    //private final static String XPathCapaNewsLetterOutlet = "//div[@class[contains(.,'newsletterForm')]]";
     
-    private final static String XPathNewsLetterMsgShop = XPathCapaNewsLetterShop + "//p[@class[contains(.,'sg-text-action')]]";
-    private final static String XPathNewsLetterMsgOutlet = XPathCapaNewsLetterOutlet + "//span[@class='newsletterForm__text']";
+    private final static String XPathNewsLetterMsg = XPathCapaNewsLetter + "//p[@class[contains(.,'sg-text-action')]]";
+    //private final static String XPathNewsLetterMsgOutlet = XPathCapaNewsLetterOutlet + "//span[@class='newsletterForm__text']";
     
-    private final static String XPathTextAreaMailSuscripcionShop = XPathCapaNewsLetterShop + "//input[@name='mail']";
-    private final static String XPathTextAreaMailSuscripcionOutlet = XPathCapaNewsLetterOutlet + "//input[@id[contains(.,'regExpMail')]]";
+    private final static String XPathTextAreaMailSuscripcion = XPathCapaNewsLetter + "//input[@name='mail']";
+    //private final static String XPathTextAreaMailSuscripcionOutlet = XPathCapaNewsLetterOutlet + "//input[@id[contains(.,'regExpMail')]]";
 	
     public SecNewsLetter(AppEcom app, WebDriver driver) {
     	super(driver);
     	this.app = app;
     }
     
-    private String getXPathNewsLetterMsgShop() {
-        if (app==AppEcom.outlet) {
-            return XPathNewsLetterMsgShop;
-        }
-        return XPathNewsLetterMsgOutlet;
-    }
-    
-    private String getXPathTextAreaMailSuscripcion() {
-        if (app==AppEcom.outlet) {
-            return XPathTextAreaMailSuscripcionOutlet;
-        }
-        return XPathTextAreaMailSuscripcionShop;
-    }
-    
     public String getNewsLetterMsgText() {
-    	By byMsg = By.xpath(getXPathNewsLetterMsgShop());
+    	By byMsg = By.xpath(XPathNewsLetterMsg);
         try {
             WebElement titleNws = driver.findElement(byMsg);
             if (titleNws!=null) {
@@ -64,7 +50,7 @@ public class SecNewsLetter extends PageObjTM {
 		SecFooter secFooter = new SecFooter(app, driver);
 		secFooter.moveTo();
 		
-		By byLink = By.xpath(getXPathTextAreaMailSuscripcion());
+		By byLink = By.xpath(XPathTextAreaMailSuscripcion);
 		state(State.Visible, byLink).wait(2).check();
 		click(byLink).exec();
 	}

@@ -43,14 +43,22 @@ public abstract class SecBolsa extends PageObjTM {
     }
     
 	public static SecBolsa make(Channel channel, AppEcom app, Pais pais, WebDriver driver) {
-		if (channel==Channel.mobile) {
-			return new SecBolsaMobile(app, pais, driver);
-		}
 		if (app==AppEcom.outlet) {
-		//if (app==AppEcom.outlet || channel==Channel.tablet) {
+			if (channel==Channel.mobile) {
+				return new SecBolsaMobile(app, pais, driver);
+			}
 			return new SecBolsaDesktopOld(channel, app, driver);
 		}
 		return new SecBolsaDesktopNew(channel, app, pais, driver);
+		
+//		if (channel==Channel.mobile) {
+//			return new SecBolsaMobile(app, pais, driver);
+//		}
+//		if (app==AppEcom.outlet) {
+//		//if (app==AppEcom.outlet || channel==Channel.tablet) {
+//			return new SecBolsaDesktopOld(channel, app, driver);
+//		}
+//		return new SecBolsaDesktopNew(channel, app, pais, driver);
 	}
 	
 	protected SecBolsa(Channel channel, AppEcom app, WebDriver driver) {
