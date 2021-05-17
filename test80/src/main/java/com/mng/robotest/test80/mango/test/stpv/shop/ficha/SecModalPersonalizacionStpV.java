@@ -236,7 +236,7 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 		description="1) En la bolsa aparece el apartado correspondiente a la personalización (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
 	private boolean validateCustomizationProof(int maxSeconds) {
-		return (state(Present, ModalElement.BolsaProof.getBy(dCtxSh.channel)).wait(maxSeconds).check());
+		return (state(Visible, ModalElement.BolsaProof.getBy(dCtxSh.channel)).wait(maxSeconds).check());
 	}
 
 	@Validation(

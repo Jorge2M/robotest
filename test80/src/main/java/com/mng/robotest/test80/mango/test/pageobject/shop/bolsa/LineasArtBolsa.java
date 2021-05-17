@@ -49,7 +49,7 @@ public abstract class LineasArtBolsa extends PageObjTM {
 		}
 	};
 	
-	private final Channel channel;
+	protected final Channel channel;
 	
 	final static String TagReference = "@Reference";
 	

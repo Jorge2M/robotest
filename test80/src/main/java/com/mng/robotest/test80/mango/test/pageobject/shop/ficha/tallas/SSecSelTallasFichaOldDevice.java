@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -13,14 +14,19 @@ import com.mng.robotest.test80.mango.test.data.Talla;
 
 public class SSecSelTallasFichaOldDevice extends PageObjTM implements SSecSelTallasFicha {
 	
+	private Channel channel;
+	private AppEcom app;
+	
 	private final static String XPathSelectorButton = "//*[@data-testid='sizeSelectorButton']";
 	private final static String XPathCapaTallas = "//div[@id='sizesContainerId']";
 	private final static String XPathOptionTalla = XPathCapaTallas + "//span[@class='size-text']";
 	private final static String XPathTallaSelected = XPathSelectorButton + "//span[@class='size-text']";
 	private final static String XPathOptionTallaUnica = "//button[@id='productFormSelect]" + "//span[@class='size-text']";
     
-    public SSecSelTallasFichaOldDevice(WebDriver driver) {
+    public SSecSelTallasFichaOldDevice(Channel channel, AppEcom app, WebDriver driver) {
     	super(driver);
+    	this.channel = channel;
+    	this.app = app;
     }
     
     private String getXPathOptionTallaSegunDisponible(boolean disponible) {
@@ -68,10 +74,23 @@ public class SSecSelTallasFichaOldDevice extends PageObjTM implements SSecSelTal
     public boolean isVisibleListTallasForSelectUntil(int maxSeconds) {
     	return (state(Visible, By.xpath(XPathOptionTalla)).wait(maxSeconds).check());
     }
-
+    
     private void despliegaSelectTallas() {
-    	state(State.Visible, By.xpath(XPathSelectorButton)).wait(2).check();
-    	click(By.xpath(XPathSelectorButton)).exec();
+    	if (channel==Channel.tablet && app==AppEcom.votf) {
+    		despliegaSelectTallasTabletVotf();
+    	} else {
+    		despliegaSelectTallasExec();
+    	}
+    }
+    
+    //Synchronized because is a error when unfold in many tablet-votf in parallel
+    private synchronized void despliegaSelectTallasTabletVotf() {
+    	
+    }
+    
+    public void despliegaSelectTallasExec() {
+		state(State.Visible, By.xpath(XPathSelectorButton)).wait(2).check();
+		click(By.xpath(XPathSelectorButton)).exec();
     }
     
     @Override

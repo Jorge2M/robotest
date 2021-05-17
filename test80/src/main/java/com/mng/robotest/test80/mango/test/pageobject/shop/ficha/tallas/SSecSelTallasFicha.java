@@ -28,7 +28,7 @@ public interface SSecSelTallasFicha {
 	public static SSecSelTallasFicha make(TypeFicha typeFicha, Channel channel, AppEcom app, WebDriver driver) {
 		if (typeFicha==TypeFicha.Old) {
 			if (channel.isDevice() && app!=AppEcom.outlet) {
-				return new SSecSelTallasFichaOldDevice(driver);
+				return new SSecSelTallasFichaOldDevice(channel, app, driver);
 			}
 			return new SSecSelTallasFichaOldDesktop(driver);
 		}

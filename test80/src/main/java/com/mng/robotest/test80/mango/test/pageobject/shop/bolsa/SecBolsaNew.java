@@ -7,29 +7,30 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 
 
-public class SecBolsaDesktopNew extends SecBolsaDesktop {
+public class SecBolsaNew extends SecBolsaDesktop {
  
 	private final LineasArtBolsa lineasArtBolsa;
 	
-    private static final String XPathPanelBolsa = "//div[@id='openedShoppingBag']";
+    private static final String XPathPanelBolsaDesktop = "//div[@id='openedShoppingBag']";
+    private static final String XPathPanelBolsaMobile = "//div[@class[contains(.,'m_bolsa')]]";
     
     //TODO eliminar el 1o cuando suba a PRO
     private static final String XPathBotonComprar = 
     	"//button[@data-testid='bag.fullpage.checkout.button' or @data-testid='bag.preview.checkout.button']";
 
-	private static final String XPathPrecioSubTotal = 
-			XPathPanelBolsa + 
-			"//div[@class[contains(.,'layout-content')]]" + 
-			"//div[@class[contains(.,'right')]]/div";
-    
-    public SecBolsaDesktopNew(Channel channel, AppEcom app, Pais pais, WebDriver driver) {
-    	super(app, driver);
+
+    public SecBolsaNew(Channel channel, AppEcom app, Pais pais, WebDriver driver) {
+    	super(channel, app, driver);
     	lineasArtBolsa = new LineasArtBolsaNew(channel, driver);
     }
+
     
     @Override
     String getXPathPanelBolsa() {
-        return XPathPanelBolsa;
+    	if (channel==Channel.mobile) {
+    		return XPathPanelBolsaMobile;
+    	}
+    	return XPathPanelBolsaDesktop;
     }
     
     @Override
@@ -39,7 +40,11 @@ public class SecBolsaDesktopNew extends SecBolsaDesktop {
     
 	@Override
     String getXPathPrecioSubTotal() {
-        return XPathPrecioSubTotal; 
+    	String xpathBolsa = getXPathPanelBolsa();
+    	return  
+    		xpathBolsa + 
+    		"//div[@class[contains(.,'layout-content')]]" + 
+    		"//div[@class[contains(.,'right')]]/div";
     }  
 	
 	@Override

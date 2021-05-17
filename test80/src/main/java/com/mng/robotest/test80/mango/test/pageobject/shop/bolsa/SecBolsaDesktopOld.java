@@ -16,7 +16,7 @@ public class SecBolsaDesktopOld extends SecBolsaDesktop {
 	private static final String XPathPrecioSubTotal = "//*[@class='box_total_price']";
     
     public SecBolsaDesktopOld(Channel channel, AppEcom app, WebDriver driver) {
-    	super(app, driver);
+    	super(channel, app, driver);
     	lineasArtBolsa = new LineasArtBolsaDesktopOld(channel, driver);
     }
     

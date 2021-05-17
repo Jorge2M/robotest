@@ -14,7 +14,7 @@ public class LineasArtBolsaNew extends LineasArtBolsa {
 
 	//TODO ha desaparecido el data-testid (15-abril)
 	//private static final String XPathItem = "//*[@data-testid='bag.item']";
-	private static final String XPathItem = "//div[@class[contains(.,'_3oq0q')]]";
+	private static final String XPathItem = "//div[@class[contains(.,'layout-content')] and @class[contains(.,' card')]]";
 	
 	//TODO pendiente data-testid
 	//private final static String XPathLinkRelativeArticle = ".//a[@href[contains(.,'redirect.faces?')]]";
@@ -28,11 +28,18 @@ public class LineasArtBolsaNew extends LineasArtBolsa {
 	
 	private static final String TagRef = "[TAGREF]";
 	private static final String XPathLinkItemRef = XPathItem + "//img[@src[contains(.,'" + TagRef + "')]]";
-	private static final String XPathItemRef = XPathLinkItemRef + "/ancestor::*[@class[contains(.,'layout-content')]]";	
-	private static final String XPathLinkBorrarArtRef = XPathItemRef + "//*[@data-testid[contains(.,'removeItem.button')]]";
+	private static final String XPathItemRefDesktop = XPathLinkItemRef + "/ancestor::*[@class[contains(.,'layout-content')]]";
+	private static final String XPathItemRefMobile = XPathLinkItemRef + "/ancestor::*[@class[contains(.,'layout-content')]]/..";
+	
 	
 	public LineasArtBolsaNew(Channel channel, WebDriver driver) {
 		super(channel, driver);
+	}
+	
+	private String getXPathLinkBorrarArt(String refArticulo) {
+		String xpathItemWithTag = getXPathLineaWithTagRef();
+		String xpathLinkBorrarArtRef = xpathItemWithTag + "//*[@data-testid[contains(.,'removeItem.button')]]";
+		return xpathLinkBorrarArtRef.replace(TagRef, refArticulo);
 	}
 
 	@Override
@@ -60,7 +67,10 @@ public class LineasArtBolsaNew extends LineasArtBolsa {
 	
 	@Override
 	String getXPathLineaWithTagRef() {
-		return XPathItemRef;
+		if (channel==Channel.mobile) {
+			return XPathItemRefMobile;
+		}
+		return XPathItemRefDesktop;
 	}
 	
 	@Override
@@ -103,9 +113,6 @@ public class LineasArtBolsaNew extends LineasArtBolsa {
     private String getXPathLinkBorrarArt() {
         return getXPathLinkBorrarArt("");
     }
-	
-	private String getXPathLinkBorrarArt(String refArticulo) {
-		return XPathLinkBorrarArtRef.replace(TagRef, refArticulo);
-	}
+
 	
 }

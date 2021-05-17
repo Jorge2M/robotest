@@ -1,7 +1,5 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.bolsa;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.ListIterator;
 
 import org.openqa.selenium.By;
@@ -21,7 +19,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
  * @author jorge.munoz
  *
  */
-public class SecBolsaMobile extends SecBolsa {
+public class SecBolsaMobileOld extends SecBolsa {
 	
 	private final LineasArtBolsa lineasArtBolsa;
 	
@@ -32,7 +30,7 @@ public class SecBolsaMobile extends SecBolsa {
     private static final String XPathPrecioSubTotal = "//div[@class[contains(.,'totalPriceContainer')]]";
     
     
-    public SecBolsaMobile(AppEcom app, Pais pais, WebDriver driver) {
+    public SecBolsaMobileOld(AppEcom app, Pais pais, WebDriver driver) {
     	super(Channel.mobile, app, driver);
     	//List<String> countrysNewBag = Arrays.asList("001","011","005","010","060","009","066","092","007","003");
     	//if (countrysNewBag.contains(pais.getCodigo_pais()) && app!=AppEcom.outlet) {

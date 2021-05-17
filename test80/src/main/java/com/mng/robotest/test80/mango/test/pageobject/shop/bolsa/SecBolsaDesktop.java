@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.bolsa;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
 
 import java.util.ListIterator;
 
@@ -16,8 +17,8 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public abstract class SecBolsaDesktop extends SecBolsa {
 
 
-	public SecBolsaDesktop(AppEcom app, WebDriver driver) {
-		super(Channel.desktop, app, driver);
+	public SecBolsaDesktop(Channel channel, AppEcom app, WebDriver driver) {
+		super(channel, app, driver);
 	}
 	
     @Override
@@ -73,14 +74,36 @@ public abstract class SecBolsaDesktop extends SecBolsa {
 	@Override
 	public void setBolsaToStateIfNotYet(StateBolsa stateBolsaExpected) {
 		if (!isInStateUntil(stateBolsaExpected, 1)) {
-			setBolsaToState(stateBolsaExpected);
+			if (channel==Channel.mobile) {
+				setBolsaMobileToState(stateBolsaExpected);
+			} else {
+				setBolsaDesktopToState(stateBolsaExpected);
+			}
 		}
 	}
 
-	private void setBolsaToState(StateBolsa stateBolsaExpected) {
+	private void setBolsaDesktopToState(StateBolsa stateBolsaExpected) {
 		SecCabecera secCabecera = SecCabecera.getNew(Channel.desktop, app, driver);
 		secCabecera.clickIconoBolsaWhenDisp(2);
 		isInStateUntil(stateBolsaExpected, 2);
+	}
+	
+	private void setBolsaMobileToState(StateBolsa stateBolsaExpected) {
+		if (stateBolsaExpected==StateBolsa.Open) {
+			//SecCabecera secCabecera = SecCabecera.getNew(Channel.desktop, app, driver);
+			SecCabecera secCabecera = SecCabecera.getNew(Channel.mobile, app, driver);
+			secCabecera.clickIconoBolsaWhenDisp(2);
+		} else {
+			clickIconoCloseMobile();
+		}
+		isInStateUntil(stateBolsaExpected, 2);
+	}
+	
+	private void clickIconoCloseMobile() {
+		String xpathAspa =  "//div[@id='close_mobile']";
+		if (state(Visible, By.xpath(xpathAspa), driver).check()) {
+			click(By.xpath(xpathAspa), driver).exec();
+		}
 	}
 	
 }

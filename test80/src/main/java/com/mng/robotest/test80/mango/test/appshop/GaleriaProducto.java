@@ -136,6 +136,7 @@ public class GaleriaProducto {
         //En outlet/movil tenemos el antiguo filtro que sólo permite seleccionar un color
         if (!(dCtxSh.appE!=AppEcom.outlet && dCtxSh.channel.isDevice())) {
         	colorsToFilter.add(Color.Negro);
+        	colorsToFilter.add(Color.Azul);
         }
         SecFiltrosStpV.selectFiltroColoresStep(dCtxSh.appE, dCtxSh.channel, false, "Camisas", colorsToFilter, driver);
             
