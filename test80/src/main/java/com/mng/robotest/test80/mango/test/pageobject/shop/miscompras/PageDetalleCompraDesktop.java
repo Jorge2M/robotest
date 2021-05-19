@@ -10,38 +10,16 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	
+	private final SectionPrendas sectionPrendas;
+	
     private static String XPathIdTicket = "//*[@data-testid[contains(.,'detail.orderId')]]"; 
     private static String XPathImporte = "//*[@data-testid[contains(.,'detail.totalPrice')]]";
     private static String XPathDireccionEnvio = XPathIdTicket + "/..";
-    private static String XPathArticulo = "//*[@data-testid='myPurchases.detail.product']";
     private static String XPathLinkToMisCompras = "//*[@data-testid[contains(.,'detail.goBack')]]";
     
     public PageDetalleCompraDesktop(Channel channel, WebDriver driver) {
     	super(channel, driver);
-    }
-
-	private String getXPathArticulo(int position) {
-		return "(" + XPathArticulo + ")[" + position + "]";
-	}
-	private String getXPathLinkArticulo(int position) {
-		String xpathArticulo = getXPathArticulo(position);
-		return xpathArticulo + "//button";
-	}
-	private String getXPathDataArticulo(int position) {
-		String xpathArticulo = getXPathArticulo(position);
-		return xpathArticulo + "//*[@data-testid[contains(.,'detail.productInfo')]]/..";
-	}
-    private String getXPathReferenciaArticulo(int posArticulo) {
-        String xpathDataArticulo = getXPathDataArticulo(posArticulo);
-        return (xpathDataArticulo + "//*[@data-testid[contains(.,'detail.reference')]]");
-    }
-    private String getXPathNombreArticulo(int posArticulo) {
-        String xpathDataArticulo = getXPathDataArticulo(posArticulo);
-        return (xpathDataArticulo + "//*[@data-testid[contains(.,'detail.product.openModal')]]");
-    }    
-    private String getXPathPrecioArticulo(int posArticulo) {
-        String xpathDataArticulo = getXPathDataArticulo(posArticulo);
-        return (xpathDataArticulo + "//*[@data-testid[contains(.,'product.paidPrice')]]");
+    	this.sectionPrendas = new SectionPrendas(driver);
     }
 
     @Override
@@ -63,7 +41,7 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
     }
     @Override
     public int getNumPrendas() {
-        return (driver.findElements(By.xpath(XPathArticulo)).size());
+        return sectionPrendas.getNumPrendas();
     }
     @Override
     public boolean isVisibleDataTicket(int maxSeconds) {
@@ -86,23 +64,19 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
     }
     @Override
     public String getReferenciaArticulo(int posArticulo) {
-        String xpathReferencia = getXPathReferenciaArticulo(posArticulo);
-        return (driver.findElement(By.xpath(xpathReferencia)).getText().replaceAll("\\D+",""));
+    	return sectionPrendas.getReferenciaArticulo(posArticulo);
     }
     @Override
     public String getNombreArticulo(int posArticulo) {
-        String xpathNombre = getXPathNombreArticulo(posArticulo);
-        return (driver.findElement(By.xpath(xpathNombre)).getText());
+    	return sectionPrendas.getNombreArticulo(posArticulo);
     }
     @Override
     public String getPrecioArticulo(int posArticulo) {
-        String xpathPrecio = getXPathPrecioArticulo(posArticulo);
-        return (driver.findElement(By.xpath(xpathPrecio)).getText());
+    	return sectionPrendas.getPrecioArticulo(posArticulo);
     }
     @Override
     public void selectArticulo(int posArticulo) {
-        String xpathLinkArticulo = getXPathLinkArticulo(posArticulo);
-        driver.findElement(By.xpath(xpathLinkArticulo)).click();
+    	sectionPrendas.selectArticulo(posArticulo);
     }
     @Override
 	public void gotoListaMisCompras() {

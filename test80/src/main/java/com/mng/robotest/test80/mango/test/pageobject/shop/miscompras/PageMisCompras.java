@@ -25,14 +25,15 @@ public class PageMisCompras extends PageObjTM {
 	final Channel channel;
 	private List<Ticket> listTickets = null;
 	
-	private final static String XPathCapaContenedoraDesktop = "//div[@id='myPurchasesDesktop']";
-	private final static String XPathCapaContenedoraMobile = "//div[@id='myPurchasesMobile']";
+	private final static String XPathCapaContenedoraDesktop = "//micro-frontend[@id='myPurchasesDesktop']";
+	private final static String XPathCapaContenedoraMobile = "//micro-frontend[@id='myPurchasesMobile']";
 	
 	private final static String XPathListTickets = 
 		"//*[@data-testid[contains(.,'activePurchases')] or " +
 		    "@data-testid[contains(.,'inactivePurchases')]]";
 	
-	private final static String XPathTicket = XPathListTickets + "//div[@class[contains(.,'purchase-card__border')]]";
+	//private final static String XPathTicket = XPathListTickets + "//div[@class[contains(.,'purchase-card__border')]]";
+	private final static String XPathTicket = XPathListTickets + "//div[@class[contains(.,'layout-content')] and @class[contains(.,'card')]]";
 
 	
 	public PageMisCompras(Channel channel, WebDriver driver) {
@@ -137,10 +138,10 @@ public class PageMisCompras extends PageObjTM {
         return TypeTicket.Online;
 	}
 	
-	private final static String XPathIdRelativeTicket = ".//div[@class[contains(.,'purchase-card__info')]]/div/div";
+	private final static String XPathIdRelativeTicket = ".//div[@class[contains(.,'card__info')]]/div/div";
 	private String getIdTicketPage(WebElement boxDataTicket) {
 		String lineaId = boxDataTicket.findElement(By.xpath(XPathIdRelativeTicket)).getText();
-        Pattern pattern = Pattern.compile("_*: (.*)");
+        Pattern pattern = Pattern.compile("_*: (.*)"); boxDataTicket.getAttribute("innerHTML");
         Matcher matcher = pattern.matcher(lineaId);
         if (matcher.find()) {
             return matcher.group(1);
@@ -153,13 +154,13 @@ public class PageMisCompras extends PageObjTM {
 		return (boxDataTicket.findElement(By.xpath(XPathPriceRelativeTicket)).getText());
 	}
 	
-	private final static String XPathItemsRelativeTicket = ".//div[@class[contains(.,'purchase-card__info')]]/div[2]/div";
+	private final static String XPathItemsRelativeTicket = ".//div[@class[contains(.,'card__info')]]/div/div[2]";
 	private int getNumItemsTicketPage(WebElement boxDataTicket) {
 		String textLinea = "0" + boxDataTicket.findElement(By.xpath(XPathItemsRelativeTicket)).getText();
 		return (Integer.valueOf(textLinea.replaceAll("[^0-9]", "")));
 	}
 	
-	private final static String XPathFechaRelativeTicket = ".//span[@class[contains(.,'purchase-card__date')]]";
+	private final static String XPathFechaRelativeTicket = ".//span[@class[contains(.,'sg-caption-light')]]";
 	private String getFechaTicketPage(WebElement boxDataTicket) {
 		return (boxDataTicket.findElement(By.xpath(XPathFechaRelativeTicket)).getText());
 	} 

@@ -85,7 +85,7 @@ public class SSecSelTallasFichaOldDevice extends PageObjTM implements SSecSelTal
     
     //Synchronized because is a error when unfold in many tablet-votf in parallel
     private synchronized void despliegaSelectTallasTabletVotf() {
-    	
+    	despliegaSelectTallasExec();
     }
     
     public void despliegaSelectTallasExec() {
