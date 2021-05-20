@@ -23,8 +23,6 @@ public class SecBolsaMobileOld extends SecBolsa {
 	
 	private final LineasArtBolsa lineasArtBolsa;
 	
-    //TODO cuando suba a PRO la operativa eliminar el 1er XPath
-    private static final String XPathAspa = "(//a[@class[contains(.,'iconCross')]] | //span[@class[contains(.,'outline-close')]])";
     private static final String XPathPanelBolsa = "//div[@class[contains(.,'m_bolsa')]]"; 
     private static final String XPathBotonComprar = "//div[@class='comButton']/span"; 
     private static final String XPathPrecioSubTotal = "//div[@class[contains(.,'totalPriceContainer')]]";
@@ -132,9 +130,6 @@ public class SecBolsaMobileOld extends SecBolsa {
 			click(By.xpath(xpathAspa), driver).exec();
 		}
 	}
-	
-	public void clickAspaMobil() {
-		click(By.xpath(XPathAspa), driver).exec();
-	}
+
 	
 }

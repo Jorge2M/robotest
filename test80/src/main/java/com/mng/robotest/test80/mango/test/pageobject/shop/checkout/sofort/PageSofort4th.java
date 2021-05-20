@@ -43,7 +43,7 @@ public class PageSofort4th extends PageObjTM {
     }
     
     public void selectRadioCta(int posCta) {
-        driver.findElements(By.xpath(XPathInputRadioCtas)).get(posCta).click();
+        driver.findElements(By.xpath(XPathInputRadioCtas)).get(posCta-1).click();
     }
     
     public boolean isVisibleInputTAN() {

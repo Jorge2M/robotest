@@ -36,7 +36,7 @@ public abstract class SecBolsa extends PageObjTM {
 	abstract public void setBolsaToStateIfNotYet(StateBolsa stateBolsaExpected);
 	abstract public LineasArtBolsa getLineasArtBolsa();
 	
-    //private static final String XPathLinkArticulo = "//div[@class[contains(.,'itemDesc')]]/a";
+    private static final String XPathAspa = "//span[@class[contains(.,'outline-close')]]";
 
     public static SecBolsa make(DataCtxShop dCtxShop, WebDriver driver) {
     	return make(dCtxShop.channel, dCtxShop.appE, dCtxShop.pais, driver);
@@ -188,5 +188,9 @@ public abstract class SecBolsa extends PageObjTM {
     	getLineasArtBolsa().clickArticle(1);
         waitForPageLoaded(driver);
     }
+    
+	public void clickAspaMobil() {
+		click(By.xpath(XPathAspa), driver).exec();
+	}
 	
 }

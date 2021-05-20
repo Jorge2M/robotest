@@ -12,7 +12,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageSofort2on extends PageObjTM {
 	
-	private static String XPathButtonAcceptCookies = "//button[@data-url[contains(.,'accept-all')]]";
+	private static String XPathButtonAcceptCookies = "//div[@id='Modal']//div[@id='modal-button-container']//button[@data-url[contains(.,'accept-all')]]";
     private static String XPathSelectPaises = "//select[@id[contains(.,'Country')]]";
     private static String XPathInputBankCode = "//input[@id[contains(.,'BankCodeSearch')]]";
     private static String XPathSubmitButton = "//form//button[@class[contains(.,'primary')]]";
@@ -28,7 +28,7 @@ public class PageSofort2on extends PageObjTM {
     public void acceptCookies() {
     	By byAccept = By.xpath(XPathButtonAcceptCookies);
     	if (state(State.Visible, byAccept).check()) {
-    		click(By.xpath(XPathButtonAcceptCookies)).exec();
+    		click(byAccept).exec();
     	}
     }
     

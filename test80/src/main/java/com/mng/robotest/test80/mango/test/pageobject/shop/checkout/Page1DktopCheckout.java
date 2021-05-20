@@ -123,7 +123,7 @@ public class Page1DktopCheckout extends PageObjTM {
         this.secKlarna = new SecKlarna(channel, driver);
         this.secKlarnaDeutsch = new SecKlarnaDeutsch(channel, driver);
         this.secEps = new SecEps(driver);
-        this.modalAvisoCambioPais = new ModalAvisoCambioPais(app, driver);
+        this.modalAvisoCambioPais = new ModalAvisoCambioPais(driver);
     }
     
 	public SecStoreCredit getSecStoreCredit() {

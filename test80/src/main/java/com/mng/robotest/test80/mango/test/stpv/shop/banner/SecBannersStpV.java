@@ -99,11 +99,19 @@ public class SecBannersStpV {
     	int maxSeconds2 = 1;
 	 	validations.add(
 	 		"La URL de la página cambia (lo esperamos hasta un máximo de " + maxSeconds1 + " segundos)",
-	 		AllPages.validateUrlNotMatchUntil(urlPagPadre, maxSeconds1, driver), State.Defect);    
+	 		AllPages.validateUrlNotMatchUntil(urlPagPadre, maxSeconds1, driver), State.Defect);  
+	 	
+	 	boolean urlEqual = false;
+	 	boolean elemsEqual = false;
+	 	if (urlPagPadre.compareTo(driver.getCurrentUrl())==0) {
+	 		urlEqual = true;
+	 		elemsEqual = !AllPages.validateElementsNotEqualsUntil(elementosPagPadre, marginElements, maxSeconds2, driver);
+	 	}
 	 	validations.add(
-	 		"La página cambia; el número de elementos DOM ha variado (en " + marginElements + " o más) " + 
-	 		"con respecto al original (" + elementosPagPadre + ")",
-	 		AllPages.validateElementsNotEqualsUntil(elementosPagPadre, marginElements, maxSeconds2, driver), State.Warn); 
+	 		"La página cambia: <br>" + 
+	 		"- La URL cambia o <br>" + 
+	 		"- El número de elementos DOM ha variado (en " + marginElements + " o más) con respecto al original (" + elementosPagPadre + ")",
+	 		(!urlEqual || !elemsEqual), State.Warn); 
 	 	
 	 	int maxErrors = 1;
         ResultadoErrores resultadoImgs = CheckerImgsBroken.imagesBroken(driver, Channel.desktop, maxErrors);

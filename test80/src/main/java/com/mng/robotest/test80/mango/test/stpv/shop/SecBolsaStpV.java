@@ -24,7 +24,6 @@ import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.ValidatorContentBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.LineasArtBolsa.DataArtBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
-import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsaMobileOld;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Page1IdentCheckoutStpV;
@@ -79,7 +78,7 @@ public class SecBolsaStpV {
 		description="Click en el aspa para cerrar la bolsa", 
 		expected="Se cierra la bolsa")
 	public void clickAspaForCloseMobil() throws Exception {
-		((SecBolsaMobileOld)secBolsa).clickAspaMobil();
+		secBolsa.clickAspaMobil();
 		checkBolsaDisappears(3);
 	}
 

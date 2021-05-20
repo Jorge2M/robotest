@@ -48,7 +48,7 @@ public class PageCheckoutWrapper extends PageObjTM {
         this.page1DktopCheckout = new Page1DktopCheckout(channel, app, driver);
         this.page1MobilCheckout = new Page1EnvioCheckoutMobil(driver);
         this.page2MobilCheckout = new Page2DatosPagoCheckoutMobil(channel, app, driver);
-        this.modalAvisoCambioPais = new ModalAvisoCambioPais(app, driver);
+        this.modalAvisoCambioPais = new ModalAvisoCambioPais(driver);
         this.secTarjetaPci = SecTarjetaPci.makeSecTarjetaPci(channel, driver);
     }
 

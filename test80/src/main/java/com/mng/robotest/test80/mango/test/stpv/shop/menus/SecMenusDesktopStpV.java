@@ -477,12 +477,12 @@ public class SecMenusDesktopStpV {
 
         driver.navigate().to(urlAccesoCorreo);
     	Menu1rstLevel menuAbrigos = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.he, null, "abrigos"));
-    	MenuLateralDesktop submenuParkas = MenuTreeApp.getMenuLevel2From(menuAbrigos, "Parkas");
-    	if (app==AppEcom.outlet) {
-    		validationsSelecMenuEspecificDesktop(submenuParkas);
-    	} else {
+//    	MenuLateralDesktop submenuParkas = MenuTreeApp.getMenuLevel2From(menuAbrigos, "Parkas");
+//    	if (app==AppEcom.outlet) {
+//    		validationsSelecMenuEspecificDesktop(submenuParkas);
+//    	} else {
     		validationsSelecMenuEspecificDesktop(menuAbrigos);
-    	}
+//    	}
     }
     
     final static String tagRefArticle = "@TagRefArticle";

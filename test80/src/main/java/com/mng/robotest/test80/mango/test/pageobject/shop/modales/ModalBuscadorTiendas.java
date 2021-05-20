@@ -14,8 +14,8 @@ public class ModalBuscadorTiendas extends PageObjTM implements PageFromFooter {
 
 	private final Channel channel;
 	
-    private final static String XPathModalContainer = "//div[@class[contains(.,'garment-finder-container')]]";
-    private final static String XPathTienda = XPathModalContainer + "//div[@class[contains(.,'list-store')]]";
+    private final static String XPathContainer = "//div[@class[contains(.,'garment-finder-container')]]";
+    private final static String XPathTiendas = XPathContainer + "//div[@class[contains(.,'list-store')]]";
     private final static String XPathAspaForCloseDesktop = "//button[@class[contains(.,'close-modal')]]";
     private final static String XPahLeftArrowDevice = "//span[@class[contains(.,'garment-finder-close')]]";
     
@@ -39,11 +39,11 @@ public class ModalBuscadorTiendas extends PageObjTM implements PageFromFooter {
 	}
 	
     public boolean isVisible(int maxSeconds) {
-    	return (state(Visible, By.xpath(XPathModalContainer)).check());
+    	return (state(Visible, By.xpath(XPathContainer)).check());
     }
     
     public boolean isPresentAnyTiendaUntil(int maxSeconds) {
-    	return (state(Present, By.xpath(XPathTienda)).wait(maxSeconds).check());
+    	return (state(Present, By.xpath(XPathTiendas)).wait(maxSeconds).check());
     }
     
     public void clickAspaForClose() {

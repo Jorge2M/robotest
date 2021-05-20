@@ -23,7 +23,7 @@ public class ModalBuscadorTiendasStpV {
         int maxSeconds = 5;
 	 	validations.add(
 			"La capa de búsqueda es visible",
-			modalBuscadorTiendas.isVisible(), State.Warn);
+			modalBuscadorTiendas.isVisible(1), State.Warn);
 	 	validations.add(
 			"Se ha localizado alguna tienda (la esperamos hasta " + maxSeconds + " segundos)",
 			modalBuscadorTiendas.isPresentAnyTiendaUntil(maxSeconds), State.Warn);

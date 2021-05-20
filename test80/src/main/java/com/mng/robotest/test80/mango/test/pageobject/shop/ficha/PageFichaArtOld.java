@@ -124,12 +124,12 @@ public class PageFichaArtOld extends PageFicha {
     
     @Override
     public boolean isVisibleButtonElimFavoritos() {
-    	return (state(Visible, By.xpath(XPathEliminarDeFavoritosButton)).check());
+    	return (state(Visible, By.xpath(XPathEliminarDeFavoritosButton)).wait(2).check());
     }
     
     @Override
     public boolean isVisibleButtonAnadirFavoritos() {
-    	return (state(Visible, By.xpath(XPathAnadirAFavoritosButton)).check());
+    	return (state(Visible, By.xpath(XPathAnadirAFavoritosButton)).wait(2).check());
     } 
     
     @Override

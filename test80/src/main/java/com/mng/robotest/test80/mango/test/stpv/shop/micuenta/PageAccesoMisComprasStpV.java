@@ -32,13 +32,16 @@ public class PageAccesoMisComprasStpV {
 	@Validation
     public ChecksTM validateIsPage() {
         ChecksTM validations = ChecksTM.getNew();
+        int maxSeconds = 2;
         validations.add(
-        	"Aparece la página de \"Acceso a Mis Compras\"",
-        	pageAccesoMisCompras.isPage(), State.Warn);
-        int maxSeconds = 3;
+        	"Aparece la página de \"Acceso a Mis Compras\" (la esperamos hasta " + maxSeconds + " segundos)",
+        	pageAccesoMisCompras.isPage(maxSeconds), State.Warn);
+        
+        maxSeconds = 3;
         validations.add(
         	"Aparece el bloque \"Ya estoy registrado\" (lo esperamos hasta " + maxSeconds + "segundos)",
         	pageAccesoMisCompras.isPresentBlock(TypeBlock.SiRegistrado, maxSeconds), State.Warn);
+        
         validations.add(
         	"Aparece el bloque de \"No estoy registrado\"",
         	pageAccesoMisCompras.isPresentBlock(TypeBlock.NoRegistrado), State.Warn);

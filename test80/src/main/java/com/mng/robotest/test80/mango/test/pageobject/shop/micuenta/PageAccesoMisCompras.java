@@ -53,7 +53,10 @@ public class PageAccesoMisCompras extends PageObjTM implements PageFromFooter {
 	}
 	
     public boolean isPage() {
-    	return (state(Present, By.xpath(getXPathIsPage())).check());
+    	return isPage(0);
+    }
+    public boolean isPage(int maxSeconds) {
+    	return (state(Present, By.xpath(getXPathIsPage())).wait(maxSeconds).check());
     }
     
     public boolean isPresentBlock(TypeBlock typeBlock) {

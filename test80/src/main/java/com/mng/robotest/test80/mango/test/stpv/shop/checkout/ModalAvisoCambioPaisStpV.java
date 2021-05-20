@@ -19,7 +19,7 @@ public class ModalAvisoCambioPaisStpV {
 	private final AppEcom app;
 	
 	public ModalAvisoCambioPaisStpV(AppEcom app, WebDriver driver) {
-		this.modalAvisoCambioPais = new ModalAvisoCambioPais(app, driver);
+		this.modalAvisoCambioPais = new ModalAvisoCambioPais(driver);
 		this.app = app;
 		this.driver = driver;
 	}

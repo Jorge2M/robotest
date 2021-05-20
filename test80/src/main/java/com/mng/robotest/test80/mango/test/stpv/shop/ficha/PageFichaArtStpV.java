@@ -9,6 +9,8 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 
@@ -173,15 +175,21 @@ public class PageFichaArtStpV {
     public void selectTalla(Talla talla) {
     	secBolsa.setBolsaToStateIfNotYet(StateBolsa.Closed);
         pageFicha.selectTallaByValue(talla);
-        checkTallaSelected(talla);
+        checkTallaSelected(talla, 2);
     }
 
 	@Validation (
-		description="Queda seleccionada la talla <b>#{talla.name()}<b>",
+		description="Queda seleccionada la talla <b>#{talla.name()}</b> (esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-	private boolean checkTallaSelected(Talla talla) {
-		Talla tallaSelected = pageFicha.getTallaSelected(); 
-		return (tallaSelected==talla);
+	private boolean checkTallaSelected(Talla talla, int maxSeconds) {
+		for (int i=0; i<maxSeconds; i++) {
+			Talla tallaSelected = pageFicha.getTallaSelected(); 
+			if (tallaSelected==talla) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
 	}
 
     @Step (
