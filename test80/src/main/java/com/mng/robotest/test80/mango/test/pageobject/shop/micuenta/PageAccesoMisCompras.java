@@ -12,7 +12,7 @@ public class PageAccesoMisCompras extends PageObjTM implements PageFromFooter {
 
     public enum TypeBlock {SiRegistrado, NoRegistrado}
     
-    private final static String XPathContainerBlocks = "//div[@id='myPurchasesDesktop']"; //
+    private final static String XPathContainerBlocks = "//*[@id='myPurchasesDesktop']"; //
     private final static String XPathLinkSiRegistrado = "//button[@data-testid='0']"; //
     private final static String XPathLinkNoRegistrado = "//button[@data-testid='1']"; //
     private final static String XPathInputUserBlockSi = "//input[@data-testid='mngLogin.LoginForm.emil']";

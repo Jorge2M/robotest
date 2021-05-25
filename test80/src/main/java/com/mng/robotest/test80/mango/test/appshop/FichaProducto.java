@@ -115,7 +115,8 @@ public class FichaProducto {
             
             if (dCtxSh.channel!=Channel.tablet) {
             	pageFichaStpV.selectImagenCentralFichaOld();
-            	if (dCtxSh.appE!=AppEcom.outlet) {
+            	//if (dCtxSh.appE!=AppEcom.outlet) {
+            	if (dCtxSh.channel.isDevice()) {
             		pageFichaStpV.closeZoomImageCentralDevice();
             	}
             }

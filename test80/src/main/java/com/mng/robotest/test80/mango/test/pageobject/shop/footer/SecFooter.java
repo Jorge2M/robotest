@@ -20,7 +20,8 @@ public class SecFooter extends PageObjTM {
 	private final AppEcom app;
 	
     private final static String XPathCapaShop = "//div[@id='nav-footer']";
-    private final static String XPathCapaOutlet = "//div[@class[contains(.,'footer__column footer__column')]]";
+    //private final static String XPathCapaOutlet = "//div[@class[contains(.,'footer__column footer__column')]]";
+    private final static String XPathCapaOutlet = "//footer[@id='footerMNG']";
     
     private final SecNewsLetter secNewsLetter;
     

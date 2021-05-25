@@ -42,7 +42,8 @@ public class SecTMango extends PageObjTM {
     }
     
     public String getXPath_section() {
-        if (channel.isDevice() && !(channel==Channel.tablet && app==AppEcom.outlet)) {
+        //if (channel.isDevice() && !(channel==Channel.tablet && app==AppEcom.outlet)) {
+    	if (channel==Channel.mobile) {
             return XPathSectionMobil;
         }
         return XPathSectionDesktop;
@@ -50,7 +51,8 @@ public class SecTMango extends PageObjTM {
     
     public String getXPATH_labelsCheckModalidad() {
         String xpathSection = getXPath_section(); 
-        if (channel.isDevice() && !(channel==Channel.tablet && app==AppEcom.outlet)) {
+        //if (channel.isDevice() && !(channel==Channel.tablet && app==AppEcom.outlet)) {
+        if (channel==Channel.mobile) {
             return (xpathSection + "//p[@class='method-name']");
         }
         return (xpathSection + "//input/../label/span");
@@ -64,7 +66,8 @@ public class SecTMango extends PageObjTM {
     
     public String getXPATH_clickModalidad(TipoPago tipoPago) {
         String xpathLabelMod = getXPATH_labelModalidad(tipoPago);
-        if (channel.isDevice() && !(channel==Channel.tablet && app==AppEcom.outlet)) {
+        //if (channel.isDevice() && !(channel==Channel.tablet && app==AppEcom.outlet)) {
+        if (channel==Channel.mobile) {
             return (xpathLabelMod + "/..");
         }
         return (xpathLabelMod + "/../../input");
