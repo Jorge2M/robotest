@@ -40,7 +40,7 @@ public class SSecSelTallasFichaOldDevice extends PageObjTM implements SSecSelTal
     }
     
     private String getXPathOptionTalla(String talla) {
-    	return XPathOptionTalla + "//self::*[text()[contains(.,'" + talla + "')]]";
+    	return XPathOptionTalla + "//self::*[starts-with(text(),'" + talla + "')]";
     }
     
     @Override
