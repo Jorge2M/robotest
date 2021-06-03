@@ -10,7 +10,6 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test80.mango.test.stpv.otras.GoogleStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.PageIniShopJaponStpV;
@@ -159,9 +158,10 @@ public class Otras {
 
         dCtxSh.pais = japon;
         dCtxSh.idioma = japones;
-        PagePrehome.previousAccessShopSteps(dCtxSh, driver);
-        PagePrehomeStpV.seleccionPaisIdioma(dCtxSh, driver);
-        PagePrehomeStpV.entradaShopGivenPaisSeleccionado(japon, japones, dCtxSh.channel, driver);
+        PagePrehomeStpV pagePrehomeStpV = new PagePrehomeStpV(dCtxSh, driver);
+        pagePrehomeStpV.getPageObject().previousAccessShopSteps();
+        pagePrehomeStpV.seleccionPaisIdioma();
+        pagePrehomeStpV.entradaShopGivenPaisSeleccionado();
         PageIniShopJaponStpV.validaPageIniJapon(2, driver);
     }	
     

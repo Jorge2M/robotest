@@ -170,7 +170,7 @@ public class FichaProducto {
         
         //TODO en el acceso se ejecuta la función setInitialModalsOff para evitar la aparición de modales
         //pero en el caso de Corea se escapa el de Subscripción en la Newsletter
-        PagePrehome.closeModalNewsLetterIfExists(driver);
+        (new PagePrehome(dCtxSh, driver)).closeModalNewsLetterIfExists();
         
         Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(
         	dCtxSh.appE, KeyMenu1rstLevel.from(

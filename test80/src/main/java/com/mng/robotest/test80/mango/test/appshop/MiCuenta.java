@@ -80,7 +80,7 @@ public class MiCuenta implements Serializable {
         dCtxSh.userConnected = userConDevolucionPeroNoEnPRO;
         dCtxSh.passwordUser = passwordUserConDevolucion;
             
-        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, driver);
+        new PagePrehomeStpV(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
         dCtxSh.userRegistered = false;
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         secMenusStpV.seleccionLinea(LineaType.she, null, dCtxSh);
@@ -129,7 +129,7 @@ public class MiCuenta implements Serializable {
         dCtxSh.userConnected = userWithOnlinePurchases;
         dCtxSh.passwordUser = passUserWithOnlinePurchases;
         dCtxSh.userRegistered = true;
-        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, driver);
+        new PagePrehomeStpV(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
         AccesoStpV.identificacionEnMango(dCtxSh, driver);
         
         PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
@@ -150,7 +150,7 @@ public class MiCuenta implements Serializable {
         //se muestran las compras del anterior usuario
     	driver = TestMaker.renewDriverTestCase();
         pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
-        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, driver);
+        new PagePrehomeStpV(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
         AccesoStpV.identificacionEnMango(dCtxSh, driver);
         
         pageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh.pais);

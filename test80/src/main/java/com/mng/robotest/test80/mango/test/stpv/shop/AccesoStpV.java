@@ -156,7 +156,7 @@ public class AccesoStpV {
         if (dCtxSh.appE==AppEcom.votf && !dCtxSh.userRegistered) { //En VOTF no tiene sentido identificarte con las credenciales del cliente
             AccesoStpV.accesoVOTFtoHOME(dCtxSh, driver);                    
         } else {
-            PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, false/*execValidacs*/, driver);
+            new PagePrehomeStpV(dCtxSh, driver).seleccionPaisIdiomaAndEnter(false);
             if (dCtxSh.userRegistered) {
                 identificacionEnMango(dCtxSh, driver);
                 SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);

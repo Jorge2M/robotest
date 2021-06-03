@@ -38,12 +38,13 @@ public class AccesoNavigations {
      */
     public static void accesoHomeAppWeb(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
+    	PagePrehome pagePrehome = new PagePrehome(dCtxSh, driver);
         if (dCtxSh.appE==AppEcom.votf) {
             accesoVOTF(dCtxSh, driver);
             goFromLineasToMultimarcaVOTF(dCtxSh, driver);
-        	PagePrehome.previousAccessShopSteps(dCtxSh, driver);
+            pagePrehome.previousAccessShopSteps();
         } else {
-            PagePrehome.accesoShopViaPrehome(dCtxSh, driver);
+            pagePrehome.accesoShopViaPrehome();
         }
     }
     

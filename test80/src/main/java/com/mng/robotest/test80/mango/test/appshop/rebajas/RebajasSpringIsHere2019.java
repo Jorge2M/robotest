@@ -212,7 +212,7 @@ public class RebajasSpringIsHere2019 {
         DataCtxShop dCtxSh = getCtxShForTest();
         int numLineasPais = dCtxSh.pais.getShoponline().getNumLineasTiendas(dCtxSh.appE);
             
-        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, driver);
+        new PagePrehomeStpV(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
         if (numLineasPais==1) {
             return;
         }

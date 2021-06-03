@@ -11,13 +11,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils.HtmlLocator;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.acceptcookies.ModalSetCookies.SectionConfCookies;
@@ -25,7 +21,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.acceptcookies.SectionC
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutlet_Mobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
 import com.mng.robotest.test80.mango.test.pageobject.utils.LocalStorage;
-import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
 import com.mng.robotest.test80.mango.test.stpv.shop.acceptcookies.ModalSetCookiesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.acceptcookies.SectionCookiesStpV;
 import com.mng.robotest.test80.mango.test.utils.testab.TestABactive;
@@ -34,37 +29,34 @@ import com.mng.robotest.test80.mango.test.utils.testab.TestABactive;
  * Clase que define la automatización de las diferentes funcionalidades de la página de "GALERÍA DE PRODUCTOS"
  * @author jorge.munoz
  */
-public class PagePrehome {
+public class PagePrehome extends PageObjTM {
 
 	enum ButtonEnter {Enter, Continuar};
 	
-    static String XPathSelectPaises = "//select[@id='countrySelect']";
+	private final DataCtxShop dCtxSh;
+	
+    private final static String XPathSelectPaises = "//select[@id='countrySelect']";
     
     //xpath correspondiente al div con el país seleccionado (cuyo click que permite desplegar la lista de países)
-    static String XPathDivPaisSeleccionado = "//div[@id='countrySelect_chosen']";
+    private final static String XPathDivPaisSeleccionado = "//div[@id='countrySelect_chosen']";
     
-    static String XPathIconSalePaisSeleccionado = XPathDivPaisSeleccionado + "//span[@class[contains(.,'salesIcon')]]";
-    static String XPathDivProvincias = "//div[@class[contains(.,'Cnt on')]]/div[@class[contains(.,'provinceSelect')]]";
-    static String XPathInputPais = "//div[@class[contains(.,'chosen-search')]]/input";
+    private final static String XPathIconSalePaisSeleccionado = XPathDivPaisSeleccionado + "//span[@class[contains(.,'salesIcon')]]";
+    private final static String XPathInputPais = "//div[@class[contains(.,'chosen-search')]]/input";
     
-    public static String getXPath_optionPaisFromName(String nombrePais) {
+    public PagePrehome(DataCtxShop dCtxSh, WebDriver driver) {
+    	super(driver);
+    	this.dCtxSh = dCtxSh;
+    }
+    
+    private String getXPath_optionPaisFromName(String nombrePais) {
         return (XPathSelectPaises + "//option[@data-alt-spellings[contains(.,'" + nombrePais + "')]]");
-    }
+    }   
     
-    public static String getXPath_optionPaisFromCodigo(String codigoPais) {
-        return (XPathSelectPaises + "//option[@value[contains(.,'" + codigoPais + "')]]");
-    }    
-    
-    //TODO eliminar cuando haya desaparecido definitivamente la lista de provincias de la Shop/Outlet
-    public static String getXPathListaProvincias(String codigoPais) {
-    	return ("//div[@id='province_" + codigoPais + "_chosen']");
-    }
-    
-    public static String getXPathButtonIdioma(String codigoPais, String nombreIdioma) {
+    private String getXPathButtonIdioma(String codigoPais, String nombreIdioma) {
     	return "//div[@id='lang_" + codigoPais + "']//a[text()[contains(.,'" + nombreIdioma + "')]]";
     }
     
-    public static String getXPathButtonForEnter(ButtonEnter button, String codigoPais) {
+    private String getXPathButtonForEnter(ButtonEnter button, String codigoPais) {
     	switch (button) {
     	case Enter:
     		return ("//div[@id='lang_" + codigoPais + "']/div[@class[contains(.,'phFormEnter')]]");
@@ -74,68 +66,42 @@ public class PagePrehome {
     	}
     }
 
+	public boolean isPage() {
+		return isPage(driver);
+	}
 	public static boolean isPage(WebDriver driver) {
-		return (state(Present, By.xpath(XPathDivPaisSeleccionado), driver).check());
+		return (PageObjTM.state(Present, By.xpath(XPathDivPaisSeleccionado), driver).check());
 	}
 
-	public static boolean isNotPageUntil(int maxSeconds, WebDriver driver) {
-		return (state(Invisible, By.xpath(XPathDivPaisSeleccionado), driver)
-				.wait(maxSeconds).check());
+	public boolean isNotPageUntil(int maxSeconds) {
+		return (state(Invisible, By.xpath(XPathDivPaisSeleccionado)).wait(maxSeconds).check());
 	}
 
     /**
      * @return el código de país que existe en pantalla en base a su nombre
      */
-    public static String getCodigoPais(WebDriver driver, String nombrePais) {
+    public String getCodigoPais(String nombrePais) {
         String xpathOptionPais = getXPath_optionPaisFromName(nombrePais);
         String codigoPais = driver.findElement(By.xpath(xpathOptionPais)).getAttribute("value");
         return codigoPais;
     }
 
-	public static boolean isPaisSelectedWithMarcaCompra(WebDriver driver) {
+	public boolean isPaisSelectedWithMarcaCompra() {
 		return (state(Visible, By.xpath(XPathIconSalePaisSeleccionado), driver).check());
 	}
 
-	public static boolean isPaisSelectedDesktop(WebDriver driver, String nombrePais) {
+	public boolean isPaisSelectedDesktop() {
+		String nombrePais = dCtxSh.pais.getNombre_pais();
 		return (driver.findElement(By.xpath(XPathDivPaisSeleccionado)).getText().contains(nombrePais));
 	}
 
-	public static boolean existeDesplProvincias(WebDriver driver) {
-		return (
-			state(Present, By.xpath(XPathDivProvincias), driver).check() &&
-			driver.findElement(By.xpath(XPathDivProvincias)).isDisplayed());
-	}
-
-    public static void desplieguaListaPaises(WebDriver driver) {
+    public void desplieguaListaPaises() {
     	moveToElement(By.xpath(XPathDivPaisSeleccionado), driver);
         driver.findElement(By.xpath(XPathDivPaisSeleccionado + "/a")).click();
     }
-    
-    /**
-     * Despliega la lista de provincias y selecciona la provincia "Barcelona"
-     */
-    //TODO eliminar cuando haya desaparecido definitivamente la lista de provincias de la Shop/Outlet
-    public static void seleccionaProvincia(WebDriver driver, String nombrePais, Channel channel) {
-        if (channel==Channel.desktop) {
-            //Desplegamos la lista de provincias
-            String codigoPais = getCodigoPais(driver, nombrePais);
-            String xpathListaProv = getXPathListaProvincias(codigoPais);
-            moveToElement(By.xpath(xpathListaProv), driver);
-            driver.findElement(By.xpath(xpathListaProv)).click();
-            
-            //Introducimos la provincia Barcelona
-            sendKeysWithRetry("Barcelona", By.xpath(xpathListaProv + "//div[@class[contains(.,'chosen-search')]]/input"), 3, driver);
-            
-            //Seleccionamos la provincia encontrada
-            driver.findElement(By.xpath(xpathListaProv + "//div[@class='chosen-drop']/ul/li")).click();
-        }
-        else
-            //Seleccionamos la provincia 8 (Barcelona)
-            driver.findElement(By.xpath("//select[@id[contains(.,'province')]]/option[@value='" + "8" + "']")).click();
-    }    
 
-	public static void seleccionaIdioma(WebDriver driver, String nombrePais, String nombreIdioma) {
-		String codigoPais = getCodigoPais(driver, nombrePais);
+	public void seleccionaIdioma(String nombrePais, String nombreIdioma) {
+		String codigoPais = getCodigoPais(nombrePais);
 		String xpathButtonIdioma = getXPathButtonIdioma(codigoPais, nombreIdioma);
 		click(By.xpath(xpathButtonIdioma), driver).type(TypeClick.javascript).exec();
 	}
@@ -143,9 +109,9 @@ public class PagePrehome {
     /**
      * Introducimos el nombre del país en el campo de input de "Busca tu país..." y lo seleccionamos
      */
-    public static void inputPaisAndSelect(WebDriver driver, String nombrePais, Channel channel) throws Exception {
-        String codigoPais = getCodigoPais(driver, nombrePais);
-        if (!channel.isDevice()) {
+    public void inputPaisAndSelect(String nombrePais) throws Exception {
+        String codigoPais = getCodigoPais(nombrePais);
+        if (!dCtxSh.channel.isDevice()) {
             new WebDriverWait(driver, 5).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@class[contains(.,'chosen-with-drop')]]")));
             driver.findElement(By.xpath(XPathInputPais)).sendKeys(nombrePais);
             
@@ -161,11 +127,11 @@ public class PagePrehome {
     /**
      * Selecciona el botón para acceder a la shop (soporta desktop/móvil y prehome/modal)
      */
-    public static void selectButtonForEnter(WebDriver driver, String codigoPais) {
+    public void selectButtonForEnter(String codigoPais) {
         try {
-        	boolean buttonEnterSelected = clickButtonForEnterIfExists(ButtonEnter.Enter, codigoPais, driver); 
+        	boolean buttonEnterSelected = clickButtonForEnterIfExists(ButtonEnter.Enter, codigoPais); 
             if (!buttonEnterSelected) {
-            	clickButtonForEnterIfExists(ButtonEnter.Continuar, codigoPais, driver);
+            	clickButtonForEnterIfExists(ButtonEnter.Continuar, codigoPais);
             }
         } 
         catch (Exception e) {
@@ -173,7 +139,7 @@ public class PagePrehome {
         }
     }
 
-	public static boolean clickButtonForEnterIfExists(ButtonEnter buttonEnter, String codigoPais, WebDriver driver) {
+	public boolean clickButtonForEnterIfExists(ButtonEnter buttonEnter, String codigoPais) {
 		String xpathButton = getXPathButtonForEnter(buttonEnter, codigoPais);
 		if (state(Present, By.xpath(xpathButton), driver).check() && 
 			driver.findElement(By.xpath(xpathButton)).isDisplayed()) {
@@ -185,7 +151,7 @@ public class PagePrehome {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static void closeModalNewsLetterIfExists(WebDriver driver) {
+	public void closeModalNewsLetterIfExists() {
 		//Capturamos la variable JavaScript "sessionObjectJson"
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		Object result = js.executeScript("return sessionObjectsJson");
@@ -203,20 +169,15 @@ public class PagePrehome {
 		}
 	}
 
-    public static void setInitialModalsOff(WebDriver driver) {
-//        Cookie ck = new Cookie("modalRegistroNewsletter", "0");
-//        driver.manage().addCookie(ck);
+    public void setInitialModalsOff() {
         LocalStorage localStorage = new LocalStorage(driver);
         localStorage.setItemInLocalStorage("modalRegistroNewsletter", "0");
         localStorage.setItemInLocalStorage("modalAdhesionLoyalty", "true");
     }
 
-    /**
-     * Ejecuta una acceso a la shop vía la páinga de prehome
-     */
-    public static void accesoShopViaPrehome(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	previousAccessShopSteps(dCtxSh, driver);
-        PagePrehome.selecPaisIdiomaYAccede(dCtxSh, driver);
+    public void accesoShopViaPrehome() throws Exception {
+    	previousAccessShopSteps();
+        selecPaisIdiomaYAccede();
         ModalLoyaltyAfterAccess.closeModalIfVisible(driver);
         //ModalNewsLetterAfterAccess.closeModalIfVisible(driver);
         if (dCtxSh.channel.isDevice()) {
@@ -226,35 +187,35 @@ public class PagePrehome {
         
     }
     
-    public static void previousAccessShopSteps(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	reloadIfServiceUnavailable(driver);
-    	identJCASifExists(driver);
+    public void previousAccessShopSteps() throws Exception {
+    	reloadIfServiceUnavailable();
+    	identJCASifExists();
         TestABactive.currentTestABsToActivate(dCtxSh.channel, dCtxSh.appE, driver);
-        SectionCookies sectionCookies = new SectionCookies(driver);
-        if (sectionCookies.isVisible(2)) {
-        	acceptCookies(driver);
-        	//changeCookie_OptanonConsent(driver);
-        	//setupCookies(driver);
-        }
+        acceptCookies();
     }
     
-    private static void reloadIfServiceUnavailable(WebDriver driver) {
+    private void acceptCookies() {
+    	SectionCookies sectionCookies = new SectionCookies(driver);
+	    if (sectionCookies.isVisible(2)) {
+	    	SectionCookiesStpV sectionCookiesStpV = new SectionCookiesStpV(driver);
+	    	sectionCookiesStpV.accept();
+	    	//changeCookie_OptanonConsent(driver);
+	    	//setupCookies(driver);
+	    }
+    }
+    
+    private void reloadIfServiceUnavailable() {
     	if (driver.getPageSource().contains("Service Unavailable")) {
     		driver.navigate().refresh();
     	}
     }
     
-    private static void acceptCookies(WebDriver driver) {
-    	SectionCookiesStpV sectionCookiesStpV = new SectionCookiesStpV(driver);
-    	sectionCookiesStpV.accept();
-    }
-    
-    private static void changeCookie_OptanonConsent(WebDriver driver) {
+    private void changeCookie_OptanonConsent() {
     	SectionCookiesStpV sectionCookiesStpV = new SectionCookiesStpV(driver);
     	sectionCookiesStpV.changeCookie_OptanonConsent();
     }
     
-    private static void setupCookies(WebDriver driver) {
+    private void setupCookies() {
     	SectionCookiesStpV sectionCookiesStpV = new SectionCookiesStpV(driver);
     	ModalSetCookiesStpV modalSetCookiesStpV = 
     		sectionCookiesStpV.setCookies();
@@ -267,64 +228,47 @@ public class PagePrehome {
     	modalSetCookiesStpV.saveConfiguration();
     }
     
-    /**
-     * Ejecuta el flujo correspondiente a la selección de un país + la posterior selección de provincia/idioma/enter (sirve para prehome y modal) 
-     */
-    public static void selecPaisIdiomaYAccede(DataCtxShop dCtxSh, WebDriver driver) //No modificar
-    throws Exception {
-        selecionPais(dCtxSh, driver);
-        selecionProvIdiomAndEnter(dCtxSh.pais, dCtxSh.idioma, dCtxSh.channel, driver);
+    public void selecPaisIdiomaYAccede() throws Exception {
+        selecionPais();
+        selecionIdiomaAndEnter();
     }
     
-    public static void identJCASifExists(/*String urlPreHome, */WebDriver driver) {
+    public void identJCASifExists() {
         waitForPageLoaded(driver);
         if (PageJCAS.thisPageIsShown(driver)) {
             PageJCAS.identication(driver, Constantes.userManto, Constantes.passwordManto);
         }
     }    
     
-    /**
-     * Ejecuta el flujo para selecionar el país especificado
-     */
-    public static void selecionPais(DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
+    public void selecionPais() throws Exception {
         new WebDriverWait(driver, 5).until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPathSelectPaises)));
         
         //Damos de alta la cookie de newsLetter porque no podemos gestionar correctamente el cierre 
         //del modal en la página de portada (es aleatorio y aparece en un intervalo de 0 a 5 segundos)
-        setInitialModalsOff(driver);
+        setInitialModalsOff();
         if (dCtxSh.channel.isDevice() ||
-        	!isPaisSelectedDesktop(driver, dCtxSh.pais.getNombre_pais())) {
+        	!isPaisSelectedDesktop()) {
             if (!dCtxSh.channel.isDevice()) {
                 //Nos posicionamos y desplegamos la lista de países (en el caso de mobile no desplegamos 
             	//porque entonces es complejo manejar el desplegable que aparece en este tipo de dispositivos)
-                desplieguaListaPaises(driver);
+                desplieguaListaPaises();
             }
             
-            inputPaisAndSelect(driver, dCtxSh.pais.getNombre_pais(), dCtxSh.channel);
+            inputPaisAndSelect(dCtxSh.pais.getNombre_pais());
         }
     }
     
-    /**
-     * Ejecuta el flujo (posterior a la selección del país) de selección de país/idioma + entrar
-     */
-    public static void selecionProvIdiomAndEnter(Pais pais, final IdiomaPais idioma, Channel channel, WebDriver driver) 
-    throws Exception { 
-        if (existeDesplProvincias(driver)) {
-            //Selecciona la provincia "Barcelona"
-            seleccionaProvincia(driver, pais.getNombre_pais(), channel);
-        }
-        
-        if (pais.getListIdiomas().size() > 1) {
+    public void selecionIdiomaAndEnter() throws Exception { 
+        if (dCtxSh.pais.getListIdiomas().size() > 1) {
             //Si el país tiene más de 1 idioma seleccionar el que nos llega como parámetro
-            seleccionaIdioma(driver, pais.getNombre_pais(), idioma.getCodigo().getLiteral());
+            seleccionaIdioma(dCtxSh.pais.getNombre_pais(), dCtxSh.idioma.getCodigo().getLiteral());
         } else {
-            String codigoPais = getCodigoPais(driver, pais.getNombre_pais());
-            selectButtonForEnter(driver, codigoPais);
+            String codigoPais = getCodigoPais(dCtxSh.pais.getNombre_pais());
+            selectButtonForEnter(codigoPais);
         }
     
         //Esperamos a que desaparezca la página de Prehome
-        PagePrehome.isNotPageUntil(30, driver);
+        isNotPageUntil(30);
         waitForPageLoaded(driver);
     }
 }

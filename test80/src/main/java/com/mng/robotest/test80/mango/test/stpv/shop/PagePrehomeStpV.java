@@ -8,10 +8,9 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
 import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
@@ -19,29 +18,43 @@ import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.
 
 public class PagePrehomeStpV {
     
+	private final WebDriver driver;
+	private final DataCtxShop dCtxSh;
+	private final PagePrehome pagePrehome;
+	
+	public PagePrehomeStpV(DataCtxShop dCtxSh, WebDriver driver) {
+		this.driver = driver;
+		this.dCtxSh = dCtxSh;
+		this.pagePrehome = new PagePrehome(dCtxSh, driver);
+	}
+	
+	public PagePrehome getPageObject() {
+		return this.pagePrehome;
+	}
+	
 	@Step (
 		description="Acceder a la página de inicio y seleccionar el país <b>#{dCtxSh.getNombrePais()}</b>",
         expected="Se selecciona el país/idioma correctamente")
-    public static void seleccionPaisIdioma(DataCtxShop dCtxSh, WebDriver driver) 
+    public void seleccionPaisIdioma() 
     throws Exception {
     	//Temporal para test Canary!!!
     	//AccesoNavigations.goToInitURL(urlPreHome + "?canary=true", driver);
     	AccesoNavigations.goToInitURL(/*urlPreHome,*/ driver);
-        PagePrehome.identJCASifExists(driver);
-        PagePrehome.selecionPais(dCtxSh, driver);
-        checkPaisSelected(dCtxSh, driver);
+        pagePrehome.identJCASifExists();
+        pagePrehome.selecionPais();
+        checkPaisSelected();
     }
 	
 	@Validation
-	private static ChecksTM checkPaisSelected(DataCtxShop dCtxSh, WebDriver driver) {
+	private ChecksTM checkPaisSelected() {
 		ChecksTM validations = ChecksTM.getNew();
 	    if (dCtxSh.channel==Channel.desktop) {
 	    	validations.add(
 				"Queda seleccionado el país con código " + dCtxSh.pais.getCodigo_pais() + " (" + dCtxSh.pais.getNombre_pais() + ")",
-				PagePrehome.isPaisSelectedDesktop(driver, dCtxSh.pais.getNombre_pais()), State.Warn, true);
+				pagePrehome.isPaisSelectedDesktop(), State.Warn, true);
 	    }
 	    
-	    boolean isPaisWithMarcaCompra = PagePrehome.isPaisSelectedWithMarcaCompra(driver);
+	    boolean isPaisWithMarcaCompra = pagePrehome.isPaisSelectedWithMarcaCompra();
 	    if (dCtxSh.pais.isVentaOnline()) {
 	    	validations.add(
 				"El país <b>Sí</b> tiene la marca de venta online\"",
@@ -55,32 +68,34 @@ public class PagePrehomeStpV {
 	}
     
 	@Step (
-		description="Si es preciso introducimos la provincia/idioma y finalmente seleccionamos el botón \"Entrar\"",
+		description="Si es preciso seleccionamos el idioma y finalmente el botón \"Entrar\"",
         expected="Se accede a la Shop correctamente")
-    public static void entradaShopGivenPaisSeleccionado(Pais pais, IdiomaPais idioma, Channel channel, WebDriver driver) 
-    throws Exception {
-		PagePrehome.selecionProvIdiomAndEnter(pais, idioma, channel, driver);
+    public void entradaShopGivenPaisSeleccionado() throws Exception {
+		pagePrehome.selecionIdiomaAndEnter();
     }
 
-    // Acceso a través de objetos Pais e Iidoma
-    public static void seleccionPaisIdiomaAndEnter(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, false/*execValidacs*/, driver);
+    public void seleccionPaisIdiomaAndEnter() throws Exception {
+        seleccionPaisIdiomaAndEnter(false);
     }
     
+    private final String TagPais = "@TAGPAIS";
+    private final String TagIdioma = "@TAGIDIOMA";
     @Step (
-    	description="Acceder a la página de inicio y seleccionar el país <b>#{dCtxSh.getNombrePais()}</b>, el idioma <b>#{dCtxSh.getLiteralIdioma()}</b> y acceder",
+    	description="Acceder a la página de inicio y seleccionar el país <b>" + TagPais + "</b>, el idioma <b>" + TagIdioma + "</b> y acceder",
         expected="Se accede correctamente al pais / idioma seleccionados",
         saveNettraffic=SaveWhen.Always)
-    public static void seleccionPaisIdiomaAndEnter(DataCtxShop dCtxSh, boolean execValidacs, WebDriver driver) throws Exception {
-    	PagePrehome.accesoShopViaPrehome(dCtxSh, driver);
-    	
+    public void seleccionPaisIdiomaAndEnter(boolean execValidacs) throws Exception {
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TagPais, dCtxSh.getNombrePais());
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TagIdioma, dCtxSh.getLiteralIdioma());
+		
+    	pagePrehome.accesoShopViaPrehome();
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.GoogleAnalytics,
 				GenericCheck.Analitica,
 				GenericCheck.NetTraffic)).checks(driver);
         
         if (execValidacs) {
-        	checkPagePostPreHome(dCtxSh.appE, driver);
+        	checkPagePostPreHome();
         }
         
 		GenericChecks.from(Arrays.asList(
@@ -90,10 +105,10 @@ public class PagePrehomeStpV {
     }    
     
     @Validation
-    private static ChecksTM checkPagePostPreHome(AppEcom app, WebDriver driver) {
+    private ChecksTM checkPagePostPreHome() {
     	ChecksTM validations = ChecksTM.getNew();
     	String title = driver.getTitle().toLowerCase();
-    	if (app==AppEcom.outlet) {
+    	if (dCtxSh.appE==AppEcom.outlet) {
 	    	validations.add(
 				"Aparece una pantalla en la que el título contiene <b>outlet</b>",
 				title.contains("outlet"), State.Defect);

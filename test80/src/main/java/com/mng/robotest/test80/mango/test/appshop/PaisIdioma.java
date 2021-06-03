@@ -92,7 +92,7 @@ public class PaisIdioma implements Serializable {
     	WebDriver driver = TestMaker.getDriverTestCase();
 		TestCaseTM.addNameSufix(this.index_fact);
     	
-        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, driver);
+        new PagePrehomeStpV(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
         (new PageHomeMarcasStpV(dCtxSh.channel, dCtxSh.appE, driver)).validateIsPageWithCorrectLineas(dCtxSh.pais);
         for (Linea linea : linesToTest) {
             if (UtilsMangoTest.validarLinea(dCtxSh.pais, linea, dCtxSh.channel, dCtxSh.appE)) {

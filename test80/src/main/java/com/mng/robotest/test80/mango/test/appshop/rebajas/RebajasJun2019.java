@@ -85,7 +85,7 @@ public class RebajasJun2019 implements Serializable {
         RebajasPaisDAO rebajasDAO = new RebajasPaisDAO();
     	boolean salesOnInCountry = rebajasDAO.isRebajasEnabledPais(dCtxSh.pais.getCodigo_pais());
             
-        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, driver);
+        new PagePrehomeStpV(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
         if (numLineasPais==1) {
             return;
         }
