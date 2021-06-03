@@ -268,17 +268,17 @@ public class GetterProducts extends JaxRsClient {
 		private LineaType lineaType = LineaType.she;
 		private String seccion = "prendas";
 		private String galeria = "camisas";
-		private String familia = "14";
+		private String familia = "14,414";
 		private Integer numProducts = 40;
 		private Integer pagina = 1;
 		private MethodGetter method = MethodGetter.Any;
 
 		public Builder(String codPaisAlf, AppEcom app, WebDriver driver) throws Exception {
 			this.url = ((InputParamsMango)TestMaker.getTestCase().getInputParamsSuite()).getUrlBase();
-			//this.url = dCtxSh.getDnsUrlAcceso();
 			this.codigoPaisAlf = codPaisAlf;
 			this.app = app;
 			this.driver = driver;
+			menu(Menu.Camisas);
 		}
 		
 		public Builder(String url, String codigoPaisAlf, AppEcom app, WebDriver driver) {
@@ -286,6 +286,7 @@ public class GetterProducts extends JaxRsClient {
 			this.codigoPaisAlf = codigoPaisAlf;
 			this.app = app;
 			this.driver = driver;
+			menu(Menu.Camisas);
 		}
 		
 		public Builder linea(LineaType lineaType) {
@@ -304,6 +305,13 @@ public class GetterProducts extends JaxRsClient {
 			this.familia = familia;
 			return this;
 		}
+		public Builder menu(Menu menu) {
+			this.seccion = menu.getSeccion();
+			this.galeria = menu.getGaleria();
+			this.familia = menu.getFamilia(app);
+			return this;
+		}
+		
 		public Builder pagina(Integer pagina) {
 			this.pagina = pagina;
 			return this;

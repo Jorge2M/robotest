@@ -13,6 +13,7 @@ import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
+import com.mng.robotest.test80.mango.test.getdata.products.Menu;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment.Article;
 import com.mng.robotest.test80.mango.test.stpv.votfcons.ConsolaVotfStpV;
@@ -56,9 +57,7 @@ public class ConsolaVotf {
 		Pais españa = PaisGetter.get(PaisShop.España);
 		GetterProducts getterProducts = new GetterProducts.Builder("https://shop.mango.com/", españa.getCodigo_alf(), AppEcom.votf, driver).
 				linea(LineaType.she).
-				seccion("prendas").
-				galeria("camisas").
-				familia("14").
+				menu(Menu.Camisas).
 				numProducts(numProductsMax).
 				pagina(1).
 				build();

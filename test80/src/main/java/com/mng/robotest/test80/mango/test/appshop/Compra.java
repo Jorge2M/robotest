@@ -19,6 +19,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts.MethodGetter;
+import com.mng.robotest.test80.mango.test.getdata.products.Menu;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
@@ -104,9 +105,7 @@ public class Compra {
 		GetterProducts getterProducts = new GetterProducts.Builder(españa.getCodigo_alf(), app, driver)
 			.method(MethodGetter.WebDriver)
 			.linea(LineaType.home)
-			.seccion("bano")
-			.galeria("toallas")
-			.familia("722")
+			.menu(Menu.Toallas)
 			.build();
 		
 		return Arrays.asList(getterProducts.getWithStock().get(0), getterProducts.getWithStock().get(1));

@@ -8,6 +8,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
+import com.mng.robotest.test80.mango.test.getdata.products.Menu;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts.MethodGetter;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.utils.Test80;
@@ -26,9 +27,7 @@ public class GetProductsStpV {
 		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver)
 			.method(MethodGetter.WebDriver)
 			.linea(LineaType.she)
-			.seccion("prendas")
-			.galeria("vaqueros")
-			.familia("28")
+			.menu(Menu.Vaqueros)
 			.build();
 		
 		isPersonalization(2, 4, getterProducts);

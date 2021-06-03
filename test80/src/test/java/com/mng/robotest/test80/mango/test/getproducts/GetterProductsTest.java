@@ -12,6 +12,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
+import com.mng.robotest.test80.mango.test.getdata.products.Menu;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 
 public class GetterProductsTest {
@@ -24,9 +25,7 @@ public class GetterProductsTest {
 			Pais españa = PaisGetter.get(PaisShop.España);
 			getterProducts = new GetterProducts.Builder("https://shop.mango.com/", españa.getCodigo_alf(), AppEcom.shop, null).
 					linea(LineaType.she).
-					seccion("prendas").
-					galeria("camisas").
-					familia("14").
+					menu(Menu.Camisas).
 					numProducts(numProducts).
 					pagina(1).
 					build();
