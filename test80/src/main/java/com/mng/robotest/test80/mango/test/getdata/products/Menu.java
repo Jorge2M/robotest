@@ -10,7 +10,7 @@ public enum Menu {
 	
 	String seccion;
 	String galeria;
-	String familiaShopPro;
+	String familiaShopPro;	
 	String familiaOutletPro;
 	String familiaShopTest;
 	String familiaOutletTest;

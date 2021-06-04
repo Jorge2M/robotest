@@ -159,14 +159,22 @@ public class GetterProducts extends JaxRsClient {
 		
 		String nameTab = "GetProducts";
 		String idWindow = driver.getWindowHandle();
-		SeleniumUtils.loadUrlInAnotherTabTitle(urlGetProducts, nameTab, driver);
-		if (PageObjTM.state(State.Visible, By.id("rawdata-tab"), driver).check()) {
-			PageObjTM.click(By.id("rawdata-tab"), driver).exec();
+		String body = null;
+		try {
+			SeleniumUtils.loadUrlInAnotherTabTitle(urlGetProducts, nameTab, driver);
+			if (PageObjTM.state(State.Visible, By.id("rawdata-tab"), driver).check()) {
+				PageObjTM.click(By.id("rawdata-tab"), driver).exec();
+			}
+			body = driver.findElement(By.xpath("//body//pre")).getText();
+		} 
+		finally {
+			SeleniumUtils.closeTabByTitleAndReturnToWidow(nameTab, idWindow, driver);
 		}
-		String body = driver.findElement(By.xpath("//body//pre")).getText();
-		SeleniumUtils.closeTabByTitleAndReturnToWidow(nameTab, idWindow, driver);
 		
-		return getProductsFromJson(body);
+		if (body!=null) {
+			return getProductsFromJson(body);
+		}
+		return null;
 	}
 	
 	private ProductList getProductsFromJson(String productsJson) throws Exception {
