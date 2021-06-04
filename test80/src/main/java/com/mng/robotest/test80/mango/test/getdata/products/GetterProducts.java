@@ -279,7 +279,7 @@ public class GetterProducts extends JaxRsClient {
 			this.codigoPaisAlf = codPaisAlf;
 			this.app = app;
 			this.driver = driver;
-			menu(Menu.Camisas);
+			menu(Menu.Shorts);
 		}
 		
 		public Builder(String url, String codigoPaisAlf, AppEcom app, WebDriver driver) {
@@ -287,7 +287,7 @@ public class GetterProducts extends JaxRsClient {
 			this.codigoPaisAlf = codigoPaisAlf;
 			this.app = app;
 			this.driver = driver;
-			menu(Menu.Camisas);
+			menu(Menu.Shorts);
 		}
 		
 		public Builder linea(LineaType lineaType) {
@@ -313,10 +313,7 @@ public class GetterProducts extends JaxRsClient {
 			return this;
 		}
 		private boolean isPro() {
-			if (driver==null) {
-				return true;
-			}
-			return UtilsMangoTest.isEntornoPRO(app, driver);
+			return UtilsMangoTest.isEntornoPRO(app, url);
 		}
 		
 		public Builder pagina(Integer pagina) {

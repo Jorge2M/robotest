@@ -230,11 +230,16 @@ public class UtilsMangoTest {
      * Determina si nos encontramos en un entorno de PRO
      */
     public static boolean isEntornoPRO(AppEcom app, WebDriver driver) {
-        boolean isEntornoPRO = false;
+        String urlBase = TestMaker.getTestCase().getInputParamsSuite().getUrlBase();
+        if (isEntornoPRO(app, urlBase)) {
+        	return true;
+        }
+        return isEntornoPRO(app, driver.getCurrentUrl());
+    }
+    
+    public static boolean isEntornoPRO(AppEcom app, String url) {
         List<String> URLsProShop   = Arrays.asList("shop.mango.com", "shoptest.pro.mango.com");
         List<String> URLsProOutlet = Arrays.asList("www.mangooutlet.com", "outlettest.pro.mango.com");
-        String xmlURL = TestMaker.getTestCase().getInputParamsSuite().getUrlBase();
-        String browserURL = driver.getCurrentUrl();
         Iterator<String> itURLsPRO = null;
         if (app==AppEcom.outlet) {
             itURLsPRO = URLsProOutlet.iterator();
@@ -242,14 +247,13 @@ public class UtilsMangoTest {
             itURLsPRO = URLsProShop.iterator();
         }
         
-        while (itURLsPRO.hasNext() && !isEntornoPRO) {
+        while (itURLsPRO.hasNext()) {
             String URL = itURLsPRO.next();
-            if (xmlURL.contains(URL) || browserURL.contains(URL)) {
-                isEntornoPRO = true; 
+            if (url.contains(URL)) {
+                return true;
             }
         }
-        
-        return isEntornoPRO;
+        return false;
     }
     
     public static boolean isEntornoCI(AppEcom app) {

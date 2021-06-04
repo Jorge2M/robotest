@@ -5,7 +5,8 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 public enum Menu {
 	Camisas("prendas", "camisas", "14,414", "14", "14", "14"),
 	Toallas("bano", "toallas", "722", "722", "722", "722"),
-	Vaqueros("prendas", "vaqueros", "28,428", "28,428", "28,428", "28,428");
+	Vaqueros("prendas", "vaqueros", "28,428", "28,428", "28,428", "28,428"),
+	Shorts("prendas", "shorts", "25,422", "25", "25,422", "25");
 	
 	String seccion;
 	String galeria;

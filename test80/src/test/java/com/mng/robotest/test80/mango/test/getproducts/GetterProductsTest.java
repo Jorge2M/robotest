@@ -25,7 +25,7 @@ public class GetterProductsTest {
 			Pais españa = PaisGetter.get(PaisShop.España);
 			getterProducts = new GetterProducts.Builder("https://shop.mango.com/", españa.getCodigo_alf(), AppEcom.shop, null).
 					linea(LineaType.she).
-					menu(Menu.Camisas).
+					menu(Menu.Shorts).
 					numProducts(numProducts).
 					pagina(1).
 					build();

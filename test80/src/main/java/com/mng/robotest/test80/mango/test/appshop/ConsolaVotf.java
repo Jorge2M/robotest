@@ -57,7 +57,7 @@ public class ConsolaVotf {
 		Pais españa = PaisGetter.get(PaisShop.España);
 		GetterProducts getterProducts = new GetterProducts.Builder("https://shop.mango.com/", españa.getCodigo_alf(), AppEcom.votf, driver).
 				linea(LineaType.she).
-				menu(Menu.Camisas).
+				menu(Menu.Shorts).
 				numProducts(numProductsMax).
 				pagina(1).
 				build();
