@@ -20,21 +20,24 @@ import com.github.jorge2m.testmaker.restcontroller.ServerRestTM;
 //    -> Clickar "Zonas hospedadas"
 //    -> Seleccionar "pro.mango.com"
 //    -> Buscar "robotest"
-//    -> Modificar el registro _acme-challenge.robotest.pro.mango.com. introduciendo el TXT-Content 
-//      (Tarda unos minutos)
+//    -> Modificar el registro _acme-challenge.robotest.pro.mango.com. introduciendo el TXT-Content que pinta wacs.exe
+//      Notas: 
+//			-Desconectar la VPN
+//			-Tarda unos minutos
 //-> Press Enter
 //-> Certificate in C:\ProgramData\win-acme\acme-v02.api.letsencrypt.org\Certificates ..
 //-> Mover el .pfx a /robotest.pro.mango.com.pfx
 //
-//Último resultado (03-12-2020)
+//Último resultado (04-6-2021)
+//[WARN] Cached certificate available but not used with --force. Use 'Renew specific' or 'Renew all' in the main menu to run unscheduled renewals without hitting rate limits.
 //[INFO] Requesting certificate [Manual] robotest.pro.mango.com
 //[INFO] Store with CertificateStore...
 //[INFO] Installing certificate in the certificate store
-//[INFO] Adding certificate [Manual] robotest.pro.mango.com 2020/12/3 16:36:40 to store WebHosting
+//[INFO] Adding certificate [Manual] robotest.pro.mango.com 2021/6/4 9:53:04 to store WebHosting
 //[INFO] Installing with None...
 //[INFO] Uninstalling certificate from the certificate store
-//[INFO] Removing certificate [Manual] robotest.pro.mango.com 2020/9/3 8:52:20 from store WebHosting
-//[INFO] Next renewal scheduled at 01/27/2021 16:36:40
+//[INFO] Removing certificate [Manual] robotest.pro.mango.com 2021/6/4 9:27:11 from store WebHosting
+//[INFO] Next renewal scheduled at 07/29/2021 09:53:04
 //[INFO] Renewal for [Manual] robotest.pro.mango.com succeeded
 
 //Probably the automation of the renewal is not possible because is utilized --manual method with TXT autentication (dns01)

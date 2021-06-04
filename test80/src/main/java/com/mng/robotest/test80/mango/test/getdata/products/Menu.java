@@ -3,19 +3,25 @@ package com.mng.robotest.test80.mango.test.getdata.products;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 public enum Menu {
-	Camisas("prendas", "camisas", "14,414", "14"),
-	Toallas("bano", "toallas", "722", "722"),
-	Vaqueros("prendas", "vaqueros", "28,428", "28,428");
+	Camisas("prendas", "camisas", "14,414", "14", "14", "14"),
+	Toallas("bano", "toallas", "722", "722", "722", "722"),
+	Vaqueros("prendas", "vaqueros", "28,428", "28,428", "28,428", "28,428");
 	
 	String seccion;
 	String galeria;
-	String familiaShop;
-	String familiaOutlet;
-	private Menu(String seccion, String galeria, String familiaShop, String familiaOutlet) {
+	String familiaShopPro;
+	String familiaOutletPro;
+	String familiaShopTest;
+	String familiaOutletTest;
+	private Menu(
+			String seccion, String galeria, String familiaShopPro, String familiaOutletPro,
+			String familiaShopTest, String familiaOutletTest) {
 		this.seccion = seccion;
 		this.galeria = galeria;
-		this.familiaShop = familiaShop;
-		this.familiaOutlet = familiaOutlet;
+		this.familiaShopPro = familiaShopPro;
+		this.familiaOutletPro = familiaOutletPro;
+		this.familiaShopTest = familiaShopTest;
+		this.familiaOutletTest = familiaOutletTest;
 	}
 	public String getSeccion() {
 		return seccion;
@@ -23,10 +29,16 @@ public enum Menu {
 	public String getGaleria() {
 		return galeria;
 	}
-	public String getFamilia(AppEcom app) {
+	public String getFamilia(AppEcom app, boolean isPro) {
 		if (app==AppEcom.outlet) {
-			return familiaOutlet;
+			if (isPro) {
+				return familiaOutletPro;
+			}
+			return familiaOutletTest;
 		}
-		return familiaShop;
+		if (isPro) {
+			return familiaShopPro;
+		}
+		return familiaShopTest;
 	}
 }

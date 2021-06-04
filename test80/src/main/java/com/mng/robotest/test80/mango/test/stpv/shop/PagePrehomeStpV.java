@@ -88,7 +88,7 @@ public class PagePrehomeStpV {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TagPais, dCtxSh.getNombrePais());
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TagIdioma, dCtxSh.getLiteralIdioma());
 		
-    	pagePrehome.accesoShopViaPrehome();
+    	pagePrehome.accesoShopViaPrehome(true);
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.GoogleAnalytics,
 				GenericCheck.Analitica,

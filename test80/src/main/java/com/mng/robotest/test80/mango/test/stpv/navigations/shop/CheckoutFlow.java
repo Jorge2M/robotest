@@ -443,7 +443,7 @@ public class CheckoutFlow {
         		tagLoginOrLogoff, "(si estamos logados cerramos sesión)");
         }
         
-        AccesoNavigations.accesoHomeAppWeb(dCtxSh, driver);
+        AccesoNavigations.accesoHomeAppWeb(dCtxSh, dCtxPago.getFTCkout().acceptCookies, driver);
         PageIdentificacion.loginOrLogoff(dCtxSh, driver);
     }
 	

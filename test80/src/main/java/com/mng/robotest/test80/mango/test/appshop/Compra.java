@@ -66,7 +66,7 @@ public class Compra {
 
 	@Test (
 		groups={"Compra", "Canal:desktop,mobile_App:shop,outlet"}, alwaysRun=true, priority=2, 
-		description="[Usuario registrado][Tarjeta guardada][Productos Home] Compra con descuento empleado. Verificar compra en sección 'Mis compras'") //Lo marcamos con prioridad 2 para dar tiempo a que otro caso de prueba registre la tarjeta 
+		description="[Usuario registrado][Tarjeta guardada][Productos Home][No aceptación cookies] Compra con descuento empleado. Verificar compra en sección 'Mis compras'") //Lo marcamos con prioridad 2 para dar tiempo a que otro caso de prueba registre la tarjeta 
 	public void COM001_Compra_HomeProducts_TrjSaved_Empl() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
@@ -81,6 +81,7 @@ public class Compra {
 		FTCkout.emailExist = true; 
 		FTCkout.trjGuardada = true;
 		FTCkout.isEmpl = true;
+		FTCkout.acceptCookies = false;
 		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
 		dCtxPago.setFTCkout(FTCkout);
 		

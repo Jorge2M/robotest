@@ -16,6 +16,7 @@ public class FlagsTestCkout implements Cloneable, Serializable {
     public boolean emailExist = false; 
     public boolean trjGuardada = false;
     public boolean isEmpl = false;
+    public boolean acceptCookies = true;
     public boolean testCodPromocional = false;
     public boolean isChequeRegalo = false;
     public boolean isStoreCredit = false;

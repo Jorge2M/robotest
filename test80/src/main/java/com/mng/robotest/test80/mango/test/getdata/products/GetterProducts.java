@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
+import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.getdata.JaxRsClient;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.getdata.products.data.GarmentDetails;
@@ -308,8 +309,14 @@ public class GetterProducts extends JaxRsClient {
 		public Builder menu(Menu menu) {
 			this.seccion = menu.getSeccion();
 			this.galeria = menu.getGaleria();
-			this.familia = menu.getFamilia(app);
+			this.familia = menu.getFamilia(app, isPro());
 			return this;
+		}
+		private boolean isPro() {
+			if (driver==null) {
+				return true;
+			}
+			return UtilsMangoTest.isEntornoPRO(app, driver);
 		}
 		
 		public Builder pagina(Integer pagina) {

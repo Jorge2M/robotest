@@ -33,18 +33,22 @@ public class AccesoNavigations {
     	}
 	}
 	
+	public static void accesoHomeAppWeb(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+		accesoHomeAppWeb(dCtxSh, true, driver); 
+	}
+	
     /**
     /* Acceso a la página inicial (home) de la APP Web (shop o VOTF)
      */
-    public static void accesoHomeAppWeb(DataCtxShop dCtxSh, WebDriver driver) 
+    public static void accesoHomeAppWeb(DataCtxShop dCtxSh, boolean acceptCookies, WebDriver driver) 
     throws Exception {
     	PagePrehome pagePrehome = new PagePrehome(dCtxSh, driver);
         if (dCtxSh.appE==AppEcom.votf) {
             accesoVOTF(dCtxSh, driver);
             goFromLineasToMultimarcaVOTF(dCtxSh, driver);
-            pagePrehome.previousAccessShopSteps();
+            pagePrehome.previousAccessShopSteps(acceptCookies);
         } else {
-            pagePrehome.accesoShopViaPrehome();
+            pagePrehome.accesoShopViaPrehome(acceptCookies);
         }
     }
     

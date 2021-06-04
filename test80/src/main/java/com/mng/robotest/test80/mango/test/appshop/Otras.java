@@ -159,7 +159,7 @@ public class Otras {
         dCtxSh.pais = japon;
         dCtxSh.idioma = japones;
         PagePrehomeStpV pagePrehomeStpV = new PagePrehomeStpV(dCtxSh, driver);
-        pagePrehomeStpV.getPageObject().previousAccessShopSteps();
+        pagePrehomeStpV.getPageObject().previousAccessShopSteps(true);
         pagePrehomeStpV.seleccionPaisIdioma();
         pagePrehomeStpV.entradaShopGivenPaisSeleccionado();
         PageIniShopJaponStpV.validaPageIniJapon(2, driver);

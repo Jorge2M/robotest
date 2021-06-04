@@ -175,8 +175,8 @@ public class PagePrehome extends PageObjTM {
         localStorage.setItemInLocalStorage("modalAdhesionLoyalty", "true");
     }
 
-    public void accesoShopViaPrehome() throws Exception {
-    	previousAccessShopSteps();
+    public void accesoShopViaPrehome(boolean acceptCookies) throws Exception {
+    	previousAccessShopSteps(acceptCookies);
         selecPaisIdiomaYAccede();
         ModalLoyaltyAfterAccess.closeModalIfVisible(driver);
         //ModalNewsLetterAfterAccess.closeModalIfVisible(driver);
@@ -187,21 +187,26 @@ public class PagePrehome extends PageObjTM {
         
     }
     
-    public void previousAccessShopSteps() throws Exception {
+    public void previousAccessShopSteps(boolean acceptCookies) throws Exception {
     	reloadIfServiceUnavailable();
     	identJCASifExists();
         TestABactive.currentTestABsToActivate(dCtxSh.channel, dCtxSh.appE, driver);
-        acceptCookies();
+        manageCookies(acceptCookies);
     }
     
-    private void acceptCookies() {
+    private void manageCookies(boolean acceptCookies) {
     	SectionCookies sectionCookies = new SectionCookies(driver);
-	    if (sectionCookies.isVisible(2)) {
-	    	SectionCookiesStpV sectionCookiesStpV = new SectionCookiesStpV(driver);
-	    	sectionCookiesStpV.accept();
-	    	//changeCookie_OptanonConsent(driver);
-	    	//setupCookies(driver);
-	    }
+    	SectionCookiesStpV sectionCookiesStpV = new SectionCookiesStpV(driver);
+    	if (acceptCookies) {
+		    if (sectionCookies.isVisible(2)) {
+		    	sectionCookiesStpV.accept();
+		    	//changeCookie_OptanonConsent(driver);
+		    	//setupCookies(driver);
+		    }
+    	} else {
+        	ModalSetCookiesStpV modalSetCookiesStpV = sectionCookiesStpV.setCookies();
+        	modalSetCookiesStpV.saveConfiguration();
+    	}
     }
     
     private void reloadIfServiceUnavailable() {
