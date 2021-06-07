@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
@@ -14,7 +13,6 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.beans.FactoryVale;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
-import com.mng.robotest.test80.mango.test.getdata.products.Menu;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 
 
@@ -140,7 +138,7 @@ public class UtilsTestMango {
     		}
     	}
     	
-    	listProducts = getProductsWithStock(dCtxSh, driver);
+    	listProducts = GetterProducts.getProductsWithStock(dCtxSh, driver);
     	
         if (dCtxSh.vale!=null) {
         	for (Garment product : listProducts) {
@@ -152,20 +150,5 @@ public class UtilsTestMango {
         	return (listProducts.subList(0, maxArticlesAwayVale));
         }
         return listProducts;
-    }
-    
-    private static List<Garment> getProductsWithStock(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	GetterProducts getterProducts = null;
-    	try {
-    		getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).menu(Menu.Shorts).build();
-    	}
-    	catch (Exception e) {
-    		Log4jTM.getLogger().warn("Problem retriving articles of type " + Menu.Shorts + " for country " + dCtxSh.pais.getCodigo_alf(), e);
-    	}
-    	
-    	if (getterProducts==null || getterProducts.getWithStock().isEmpty()) {
-    		getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).menu(Menu.Camisas).build();
-    	}
-    	return getterProducts.getWithStock();
     }
 }

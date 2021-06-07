@@ -16,7 +16,7 @@ public class GenericChecks {
 		SEO(State.Info),
 		JSerrors(State.Info),
 		ImgsBroken(State.Warn),
-		Analitica(State.Info),
+		Analitica(State.Defect),
 		NetTraffic(State.Warn),
 		GoogleAnalytics(State.Warn);
 		

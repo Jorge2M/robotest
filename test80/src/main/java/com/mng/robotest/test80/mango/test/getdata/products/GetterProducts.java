@@ -2,6 +2,7 @@ package com.mng.robotest.test80.mango.test.getdata.products;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.ws.rs.client.Client;
@@ -18,6 +19,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.getdata.JaxRsClient;
@@ -25,6 +27,7 @@ import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.getdata.products.data.GarmentDetails;
 import com.mng.robotest.test80.mango.test.getdata.products.data.ProductList;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment.Article;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
@@ -268,6 +271,27 @@ public class GetterProducts extends JaxRsClient {
 			return lineaType.name();
 		}
 	}
+	
+    public static List<Garment> getProductsWithStock(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    	List<Menu> galerys = Arrays.asList(
+    			Menu.Shorts, 
+    			Menu.Camisas, 
+    			Menu.Pijamas);
+    	
+    	GetterProducts getterProducts = null;
+    	for (Menu menu : galerys) {
+        	try {
+        		getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).menu(menu).build();
+        		if (getterProducts!=null && !getterProducts.getWithStock().isEmpty()) {
+        			return getterProducts.getWithStock();
+        		}
+        	}
+        	catch (Exception e) {
+        		Log4jTM.getLogger().warn("Problem retriving articles of type " + menu + " for country " + dCtxSh.pais.getCodigo_alf(), e);
+        	}
+    	}
+    	return null;
+    }
 	
 	public static class Builder {
 		private final String url;

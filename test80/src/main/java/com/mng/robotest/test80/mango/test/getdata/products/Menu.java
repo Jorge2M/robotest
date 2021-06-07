@@ -6,7 +6,8 @@ public enum Menu {
 	Camisas("prendas", "camisas", "14,414", "14", "14", "14"),
 	Toallas("bano", "toallas", "722", "722", "722", "722"),
 	Vaqueros("prendas", "vaqueros", "28,428", "28,428", "28,428", "28,428"),
-	Shorts("prendas", "shorts", "25,422", "25", "25,422", "25");
+	Shorts("prendas", "shorts", "25,422", "25", "25,422", "25"),
+	Pijamas("prendas", "pijamas", "628", "628", "628", "628");
 	
 	String seccion;
 	String galeria;
