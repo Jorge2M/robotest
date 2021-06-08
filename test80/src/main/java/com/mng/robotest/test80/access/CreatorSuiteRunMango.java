@@ -18,13 +18,13 @@ import com.mng.robotest.test80.mango.test.suites.SmokeTestSuite;
 import com.mng.robotest.test80.mango.test.suites.ValesPaisesSuite;
 import com.github.jorge2m.testmaker.domain.CreatorSuiteRun;
 import com.github.jorge2m.testmaker.domain.SuiteMaker;
-import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.EmbeddedDriver;
+//import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.EmbeddedDriver;
 
 
 public class CreatorSuiteRunMango extends CreatorSuiteRun {
 	
-	private final String ChromeDriverVersionDefault = "90.0.4430.24";
-	private final String GeckoDriverVersionDefault = "0.28.0";
+//	private final String ChromeDriverVersionDefault = "90.0.4430.24";
+//	private final String GeckoDriverVersionDefault = "0.28.0";
 	
 	private CreatorSuiteRunMango() throws Exception {
 		super();
@@ -41,7 +41,9 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 	
 	@Override
 	public SuiteMaker getSuiteMaker() throws Exception {
-		setWebDriverVersion();
+//		//Realmente no es necesario porque robotest carga automáticamente el driver asociado al navegador que arranca
+//		//pero puede ser necesario si en algún momento puntual se produce alguna incompatibilidad entre el navegador/driver
+		//setWebDriverVersion();
 		InputParamsMango inputParamsMango = (InputParamsMango)inputParams;
 		try {
 			switch ((Suites)inputParams.getSuite()) {
@@ -82,32 +84,32 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 		return null;
 	}
 	
-	private void setWebDriverVersion() {
-		if (inputParams.getDriverVersion()==null) {
-			if (isEmbeddedDriver(inputParams.getDriver())) {
-				EmbeddedDriver driverType = EmbeddedDriver.valueOf(inputParams.getDriver());
-				switch (driverType) {
-				case firefox:
-				case firefoxhless:
-					inputParams.setDriverVersion(GeckoDriverVersionDefault);
-					break;
-				case chrome:
-				case chromehless:
-					inputParams.setDriverVersion(ChromeDriverVersionDefault);
-					break;
-				default:
-					break;
-				}
-			}
-		}
-	}
-	
-	private boolean isEmbeddedDriver(String driver) {
-		for (EmbeddedDriver embDriver : EmbeddedDriver.values()) {
-			if (driver.compareTo(embDriver.name())==0) {
-				return true;
-			}
-		}
-		return false;
-	}
+//	private void setWebDriverVersion() {
+//		if (inputParams.getDriverVersion()==null) {
+//			if (isEmbeddedDriver(inputParams.getDriver())) {
+//				EmbeddedDriver driverType = EmbeddedDriver.valueOf(inputParams.getDriver());
+//				switch (driverType) {
+//				case firefox:
+//				case firefoxhless:
+//					inputParams.setDriverVersion(GeckoDriverVersionDefault);
+//					break;
+//				case chrome:
+//				case chromehless:
+//					inputParams.setDriverVersion(ChromeDriverVersionDefault);
+//					break;
+//				default:
+//					break;
+//				}
+//			}
+//		}
+//	}
+//	
+//	private boolean isEmbeddedDriver(String driver) {
+//		for (EmbeddedDriver embDriver : EmbeddedDriver.values()) {
+//			if (driver.compareTo(embDriver.name())==0) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
 }

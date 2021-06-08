@@ -199,9 +199,9 @@ public class PagePrehome extends PageObjTM {
     	SectionCookiesStpV sectionCookiesStpV = new SectionCookiesStpV(driver);
     	if (acceptCookies) {
 		    if (sectionCookies.isVisible(2)) {
-		    	sectionCookiesStpV.accept();
-		    	//changeCookie_OptanonConsent(driver);
-		    	//setupCookies(driver);
+		    	//sectionCookiesStpV.accept();
+		    	changeCookie_OptanonConsent();
+		    	setupCookies();
 		    }
     	} else {
         	ModalSetCookiesStpV modalSetCookiesStpV = sectionCookiesStpV.setCookies();
@@ -230,6 +230,13 @@ public class PagePrehome extends PageObjTM {
     	
     	modalSetCookiesStpV.select(SectionConfCookies.Cookies_de_redes_sociales);
     	modalSetCookiesStpV.disableSwitchCookies();
+    	
+    	modalSetCookiesStpV.select(SectionConfCookies.Cookies_funcionales);
+    	modalSetCookiesStpV.disableSwitchCookies();
+    	
+    	modalSetCookiesStpV.select(SectionConfCookies.Cookies_de_rendimiento);
+    	modalSetCookiesStpV.disableSwitchCookies();
+    	
     	modalSetCookiesStpV.saveConfiguration();
     }
     
