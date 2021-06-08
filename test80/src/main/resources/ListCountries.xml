@@ -3191,7 +3191,8 @@ where
 </pais>
 
 <pais nombre_pais="France (Guadeloupe)" codigo="458">
-<codigo_pais>GP</codigo_pais>
+<codigo_pais>458</codigo_pais>
+<codigo_alf>GP</codigo_alf>
 <idioma acceso="gp">FR</idioma>
 <rgpd>S</rgpd>
 <tarifa>FG</tarifa>

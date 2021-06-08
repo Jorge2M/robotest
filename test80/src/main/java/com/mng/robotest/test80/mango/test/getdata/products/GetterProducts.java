@@ -276,7 +276,9 @@ public class GetterProducts extends JaxRsClient {
     	List<Menu> galerys = Arrays.asList(
     			Menu.Shorts, 
     			Menu.Camisas, 
-    			Menu.Pijamas);
+    			Menu.Pijamas,
+    			Menu.Faldas,
+    			Menu.Fulares);
     	
     	GetterProducts getterProducts = null;
     	for (Menu menu : galerys) {
@@ -290,7 +292,7 @@ public class GetterProducts extends JaxRsClient {
         		Log4jTM.getLogger().warn("Problem retriving articles of type " + menu + " for country " + dCtxSh.pais.getCodigo_alf(), e);
         	}
     	}
-    	return null;
+    	return Arrays.asList();
     }
 	
 	public static class Builder {
