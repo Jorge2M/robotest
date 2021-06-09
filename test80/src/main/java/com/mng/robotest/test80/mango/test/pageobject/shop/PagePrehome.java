@@ -199,9 +199,9 @@ public class PagePrehome extends PageObjTM {
     	SectionCookiesStpV sectionCookiesStpV = new SectionCookiesStpV(driver);
     	if (acceptCookies) {
 		    if (sectionCookies.isVisible(2)) {
-		    	//sectionCookiesStpV.accept();
-		    	changeCookie_OptanonConsent();
-		    	setupCookies();
+		    	sectionCookiesStpV.accept();
+		    	//changeCookie_OptanonConsent();
+		    	//setupCookies();
 		    }
     	} else {
         	ModalSetCookiesStpV modalSetCookiesStpV = sectionCookiesStpV.setCookies();

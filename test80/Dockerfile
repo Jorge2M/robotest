@@ -5,7 +5,8 @@
 
 #When executing docker run for an image with Chrome or Firefox please either mount -v /dev/shm:/dev/shm or use the flag --shm-size=2g to use the host's shared memory.
 #example create image: docker build -t jorge2m/test80:latest .
-#example container run: docker run -d -p 80:80 -p 443:443 --privileged -v "%CD%/dockerresults:/output-library" jorge2m/test80:latest
+#example container run: docker run -d -p 80:80 -p 443:443 --privileged -v "%CD%/dockerresults:/test80/output-library" jorge2m/test80:latest
+#   -> In PowerShell replace %CD% by ${pwd}
 FROM ubuntu:20.04
 
 RUN apt-get update -y \
@@ -42,8 +43,7 @@ RUN add-apt-repository ppa:ts.sch.gr/ppa \
 #=======
 #ARG CHROME_VERSION="google-chrome-stable"
 #List of versions in https://www.ubuntuupdates.org/ppa/google_chrome
-#ARG CHROME_VERSION=88.0.4324.96-1
-ARG CHROME_VERSION=88.0.4324.182-1
+ARG CHROME_VERSION=91.0.4472.77-1
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
 	&& echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
 	&& apt-get update -qqy \
@@ -85,7 +85,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 #=========
 #ARG FIREFOX_VERSION=latest
 #List of versions in https://download-installer.cdn.mozilla.net/pub/firefox/releases/
-ARG FIREFOX_VERSION=80.0
+ARG FIREFOX_VERSION=89.0
 RUN FIREFOX_DOWNLOAD_URL=$(if [ $FIREFOX_VERSION = "latest" ] || [ $FIREFOX_VERSION = "nightly-latest" ] || [ $FIREFOX_VERSION = "devedition-latest" ]; then echo "https://download.mozilla.org/?product=firefox-$FIREFOX_VERSION-ssl&os=linux64&lang=en-US"; else echo "https://download-installer.cdn.mozilla.net/pub/firefox/releases/$FIREFOX_VERSION/linux-x86_64/en-US/firefox-$FIREFOX_VERSION.tar.bz2"; fi) \
   && apt-get update -qqy \
   && apt-get -qqy --no-install-recommends install firefox \
@@ -119,11 +119,15 @@ RUN apt-get update -qqy \
 	&& apt-get -qqy install xvfb \
 	&& rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
+
 COPY target/test80-*.zip test80.zip
 RUN unzip test80.zip \
 	&& mv test80-* test80
 	
+COPY docker-entrypoint.sh /test80/docker-entrypoint.sh
+	
 WORKDIR /test80
 
 EXPOSE 80
-CMD echo "none /dev/shm tmpfs defaults,size=2g 0 0" >> /etc/fstab ; mount -o remount /dev/shm ; xvfb-run -s "-screen 0 1024x768x24" java -cp test80.jar com.mng.robotest.test80.access.rest.ServerRest -port 80 -secureport 443
+ENTRYPOINT ["/test80/docker-entrypoint.sh","1920x1080x24",""]
+#CMD echo "none /dev/shm tmpfs defaults,size=2g 0 0" >> /etc/fstab ; mount -o remount /dev/shm ; xvfb-run -s "-screen 0 1024x768x24" java -cp test80.jar com.mng.robotest.test80.access.rest.ServerRest -port 80 -secureport 443

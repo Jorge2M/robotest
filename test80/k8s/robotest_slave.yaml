@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: robotest-slave
+spec:
+  selector:
+    matchLabels:
+      run: robotest-slave
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: robotest-slave
+    spec:
+      containers:
+      - name: robotest-slave
+        image: gcr.io/testmaker-example/test80:latest
+        ports:
+        - containerPort: 80
+        securityContext:
+          privileged: true
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: robotest-slave
+spec:
+  selector:
+    app: robotest-slave
+  ports:
+    - protocol: TCP
+      port: 80
+  type: LoadBalancer
+
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: robotest-slave
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: robotest-slave
+  minReplicas: 3
+  maxReplicas: 5
+  metrics:
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 50
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: AverageValue
+        averageValue: 500Mi
