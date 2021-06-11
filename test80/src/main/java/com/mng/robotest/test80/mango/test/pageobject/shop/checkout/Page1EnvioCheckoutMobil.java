@@ -28,16 +28,14 @@ public class Page1EnvioCheckoutMobil extends PageObjTM {
 	private final static String XPathAnyNaciPromoEmpl = "//select[@id[contains(.,'employeeBirthdateYear')]]";
 	private final static String XPathAceptarPromoEmpl = "//input[@id[contains(.,'confirmEmployeeData')]]";
 	private final static String XPathDescuentoEmpleado = "//div[@class[contains(.,'employee-discount')]]//p[@class='discount-total-amount']/strong";
-	private final static String XPathRadioEnvio = "//div[@class[contains(.,'custom-radio')] and @data-custom-radio-id]";
+	private final static String XPathRadioEnvio = "//input[@data-testid[contains(.,'checkout.delivery.methods')]]";
 	private final static String XPathSelectFranjaHorariaMetodoUrgente = "//select[@data-component-id='time-range-sameday_nextday_franjas']";
 	
 	//TODO Necesito data-testid -> 27-05-21 Solicitado a Fernando Cano
 	private final static String XPathDireccionEnvio = "//div[@class[contains(.,'_1Ycgo')]]";
 	//private final static String XPathDireccionEnvio = "//p[@class='address']";
 	
-	private final static String XPathLinkOtrosMetEnvioClosed = 
-			"//div[@class[contains(.,'shipment-method')]]" + 
-			 "//span[@class[contains(.,'others-title')] and not(@class[contains(.,'selected')])]";
+	private final static String XPathLinkOtrosMetEnvioClosed = "//button[@data-testid[contains(.,'otherMethods.button')]]";
 	private final static String XPathLinkEditDirecEnvio = "//div[@id[contains(.,'addressBlock')]]//span[class='address']";
 	private final static String XPathBotonContinuar = "//button[@id[contains(.,'complete-step1')]]";
 	private final static String XPathErrorPromo = "//div[@data-component-id='error-voucherCode']";
@@ -49,8 +47,7 @@ public class Page1EnvioCheckoutMobil extends PageObjTM {
 	}
 	
 	private String getXPathBlockMetodo(TipoTransporte tipoTransporte) {
-		return ("//div[@class[contains(.,'shipment-method')] and @data-custom-radio-option-id='"
-				+ tipoTransporte.getCodigo() + "']");
+		return ("//label[@for='selection-" + tipoTransporte.getCodigo() + "']");
 	}
 
 	private String getXPathRadioMetodo(TipoTransporte tipoTransporte) {
@@ -200,10 +197,24 @@ public class Page1EnvioCheckoutMobil extends PageObjTM {
 		selectMetodoEnvioAfterLinkOtrosIfNeeded(tipoTransporte);
 	}
 
-	public void selectMetodoEnvioAfterLinkOtrosIfNeeded(TipoTransporte tipoTransporte) {
+	public void selectMetodoEnvioAfterLinkOtrosIfNeeded(TipoTransporte tipoTransporte) throws Exception {
 		openOtrosMetodosDeEnvio();
-		String xpathLink = getXPathRadioMetodo(tipoTransporte);
-		click(By.xpath(xpathLink)).type(javascript).exec();
+		if (tipoTransporte.isDroppoint() &&
+			isBlockSelectedUntil(tipoTransporte, 0) &&
+			isVisibleEditarDireccion()) {
+			clickEditarDireccion();
+		} else {
+			String xpathLink = getXPathRadioMetodo(tipoTransporte);
+			click(By.xpath(xpathLink)).type(javascript).exec();
+		}
+	}
+	
+	private final String XPathEditarDireccion = "//*[@data-testid[contains(.,'delivery.methods.editAddress.button')]]";
+	private boolean isVisibleEditarDireccion() {
+		return (state(Visible, By.xpath(XPathEditarDireccion), driver).check());
+	}
+	private void clickEditarDireccion() {
+		click(By.xpath(XPathEditarDireccion)).exec();
 	}
 
 	public boolean isPresentBlockMetodo(TipoTransporte tipoTransporte) {
@@ -224,10 +235,10 @@ public class Page1EnvioCheckoutMobil extends PageObjTM {
 	public boolean isBlockSelectedUntil(TipoTransporte tipoTransporte, int maxSecondsToWait)
 	throws Exception {
 		String xpathBlock = getXPathBlockMetodo(tipoTransporte);
-		for (int i = 0; i < maxSecondsToWait; i++) {
+		for (int i = 0; i <= maxSecondsToWait; i++) {
 			try {
 				if (driver.findElement(By.xpath(xpathBlock)) != null && 
-					driver.findElement(By.xpath(xpathBlock)).getAttribute("class").contains("selected")) {
+					driver.findElement(By.xpath(xpathBlock)).getAttribute("class").contains("radio-on")) {
 					return true;
 				}
 			} catch (StaleElementReferenceException ex) {
