@@ -117,12 +117,21 @@ public class SecMultiFiltrosDevice extends PageObjTM implements SecFiltros {
         WebElement filtroLinea = driver.findElement(By.xpath(typeFiltro.getXPathLineaFiltro()));
         filtroLinea.click();
         waitForPageLoaded(driver);
-        By byFiltroOption = By.xpath(
-        		".//*[@name[contains(.,'" + textFiltro + "')] or " + 
-        			 "@name[contains(.,'" + upperCaseFirst(textFiltro) + "')]]/../span");
+        By byFiltroOption = By.xpath(getXPathFiltroOption(typeFiltro, textFiltro));
         state(Clickable, byFiltroOption, driver).wait(1).check();
         filtroLinea.findElement(byFiltroOption).click();
         waitForPageLoaded(driver);
+    }
+    private String getXPathFiltroOption(FiltroMobil typeFiltro, String textFiltro) {
+        if (typeFiltro==FiltroMobil.Familia) {
+	        return(
+	        	".//*[@name[contains(.,'" + textFiltro + "')] or " + 
+	        	"@name[contains(.,'" + upperCaseFirst(textFiltro) + "')]]/../span");
+        } else {
+        	return (
+        		".//*[text()[contains(.,'" + textFiltro + "')] or " + 
+        		"text()[contains(.,'" + upperCaseFirst(textFiltro) + "')]]");
+        }
     }
     
     private void clickApplicarFiltrosButton() {

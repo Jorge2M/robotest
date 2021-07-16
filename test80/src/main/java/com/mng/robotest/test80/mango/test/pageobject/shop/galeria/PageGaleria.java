@@ -741,7 +741,15 @@ public abstract class PageGaleria extends PageObjTM {
 		waitForPageLoaded(driver);
 		WebElement imagen = getImagenElementArticulo(articulo);
 		if (imagen!=null) {
-			return imagen.getAttribute("src");
+			try {
+				return imagen.getAttribute("src");
+			}
+			catch (StaleElementReferenceException e) {
+				imagen = getImagenElementArticulo(articulo);
+				if (imagen!=null) {
+					return imagen.getAttribute("src");
+				}
+			}
 		}
 		return "";
 	}
