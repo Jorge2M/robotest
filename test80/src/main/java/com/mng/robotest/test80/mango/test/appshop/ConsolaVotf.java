@@ -32,7 +32,7 @@ public class ConsolaVotf {
 		ConsolaVotfStpV.accesoPagInicial(/*paginaIniVOTF, */driver);
 		ConsolaVotfStpV.selectEntornoTestAndCons("Preproducción", driver);
 		
-		int numProdsMax = 10;
+		int numProdsMax = 15;
 		List<Article> listArticles = getArticlesAvailable(numProdsMax, driver);
 		String idArticle = listArticles.get(0).getArticleId();
 		ConsolaVotfStpV.inputArticleAndTiendaDisp(idArticle, "00011459", driver);

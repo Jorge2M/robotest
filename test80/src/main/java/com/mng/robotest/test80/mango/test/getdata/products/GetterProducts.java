@@ -184,6 +184,7 @@ public class GetterProducts extends JaxRsClient {
 		//Without that modification Jackson can't parse the JSON
 		productsJson = productsJson.replace("\"garments\":{", "\"garments\":[");
 		productsJson = productsJson.replace("}}}]", "}]}]");
+		productsJson = productsJson.replace("}}},", "}]},");
 		productsJson = productsJson.replaceAll("\"g[0-9]{8}(..){0,1}\":", "");
 		productsJson = productsJson.replaceAll("\"g[0-9]{10}(..){0,1}\":", "");
 		productsJson = productsJson.replaceAll("\"g[0-9]{8}(..)(..){0,1}\":", "");
@@ -284,6 +285,31 @@ public class GetterProducts extends JaxRsClient {
     	for (Menu menu : galerys) {
         	try {
         		getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).menu(menu).build();
+        		if (getterProducts!=null && !getterProducts.getWithStock().isEmpty()) {
+        			return getterProducts.getWithStock();
+        		}
+        	}
+        	catch (Exception e) {
+        		Log4jTM.getLogger().warn("Problem retriving articles of type " + menu + " for country " + dCtxSh.pais.getCodigo_alf(), e);
+        	}
+    	}
+    	return Arrays.asList();
+    }
+    
+    public static List<Garment> getProductsHomeWithStock(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    	List<Menu> galerys = Arrays.asList(
+    			Menu.Albornoces, 
+    			Menu.Toallas, 
+    			Menu.Alfombras);
+    	
+    	GetterProducts getterProducts = null;
+    	for (Menu menu : galerys) {
+        	try {
+        		getterProducts = new GetterProducts
+        				.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver)
+        				.linea(LineaType.home)
+        				.menu(menu)
+        				.build();
         		if (getterProducts!=null && !getterProducts.getWithStock().isEmpty()) {
         			return getterProducts.getWithStock();
         		}

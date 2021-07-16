@@ -27,6 +27,7 @@ public class GoogleStpV {
         saveHtmlPage=SaveWhen.IfProblem)
     public void accessGoogleAndSearchMango() throws Exception {
         pageGoogle.accessViaURL();
+        pageGoogle.acceptModalCookieIfExists();
         pageGoogle.searchTextAndWait("MANGO");
         checkLinksMango();
     }

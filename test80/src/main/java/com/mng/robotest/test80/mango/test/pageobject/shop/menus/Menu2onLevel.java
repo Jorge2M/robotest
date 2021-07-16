@@ -31,6 +31,11 @@ public class Menu2onLevel implements MenuLateralDesktop {
     }
     
     @Override
+    public int getLevel() {
+    	return 2;
+    }
+    
+    @Override
     public AppEcom getApp() {
     	return this.key.menu1rstLevel.getApp();
     }

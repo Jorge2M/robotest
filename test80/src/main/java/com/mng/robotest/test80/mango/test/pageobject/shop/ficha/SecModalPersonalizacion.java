@@ -21,7 +21,7 @@ public class SecModalPersonalizacion extends SeleniumUtils {
 		
 		//TODO me han de pasar el data-testid 
 		//BolsaProof("//div[@class='sbi-customization-content' or @class[contains(.,'_3hjWl')]]"),
-		BolsaProof("//div[text()='Personalizado']"),
+		BolsaProof("//*[text()='Personalizado']"),
 		
 		Siguiente("//button[@class[contains(.,'sg-button-primary')]]"),
 		addToBag("", "//button[@class[contains(.,'sg-s-btn')]]"),

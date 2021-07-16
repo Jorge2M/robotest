@@ -180,9 +180,10 @@ public class GaleriaProducto {
         AccesoStpV.oneStep(dCtxSh, false, driver);
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
+        Menu1rstLevel menuCardigans = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "cardigans-y-jerseis"));
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         if (dCtxSh.appE==AppEcom.outlet || dCtxSh.channel.isDevice()) {
-        	secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
+        	secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCardigans, dCtxSh);
         } else {
         	Menu1rstLevel menuNuevo = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "New Now"));
         	secMenusStpV.selectMenu1rstLevelTypeCatalog(menuNuevo, dCtxSh);
@@ -200,17 +201,23 @@ public class GaleriaProducto {
         }    
         
         selectMenuVestidos(secMenusStpV, dCtxSh);
-        secMenusStpV.selectMenuLateral1erLevelTypeCatalog(menuCamisas, dCtxSh);
         
-        Menu2onLevel menuCamisasTops = MenuTreeApp.getMenuLevel2From(menuCamisas, "tops");
-        secMenusStpV.selectMenu2onLevel(menuCamisasTops, dCtxSh);
+        if (dCtxSh.appE==AppEcom.outlet || dCtxSh.channel.isDevice()) {
+        	secMenusStpV.selectMenuLateral1erLevelTypeCatalog(menuCardigans, dCtxSh);
+        	Menu2onLevel menuCardigansJerseis = MenuTreeApp.getMenuLevel2From(menuCardigans, "jerseis");
+        	secMenusStpV.selectMenu2onLevel(menuCardigansJerseis, dCtxSh);
+        } else {
+        	secMenusStpV.selectMenuLateral1erLevelTypeCatalog(menuCamisas, dCtxSh);
+        	Menu2onLevel menuCamisasTops = MenuTreeApp.getMenuLevel2From(menuCamisas, "tops");
+        	secMenusStpV.selectMenu2onLevel(menuCamisasTops, dCtxSh);
+        }
     }
     
     private void selectMenuVestidos(SecMenusWrapperStpV secMenusStpV, DataCtxShop dCtxSh) throws Exception {
         String menuToClick = "vestidos_y_monos";
-        if (dCtxSh.appE==AppEcom.outlet) {
-        	menuToClick = "vestidos";
-        }
+//        if (dCtxSh.appE==AppEcom.outlet) {
+//        	menuToClick = "vestidos";
+//        }
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, menuToClick));
         secMenusStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh);
     }

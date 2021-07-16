@@ -19,7 +19,7 @@ public class SecNewsLetter extends PageObjTM {
     private final static String XPathNewsLetterMsg = XPathCapaNewsLetter + "//p[@class[contains(.,'sg-text-action')]]";
     //private final static String XPathNewsLetterMsgOutlet = XPathCapaNewsLetterOutlet + "//span[@class='newsletterForm__text']";
     
-    private final static String XPathTextAreaMailSuscripcion = XPathCapaNewsLetter + "//input[@name='mail']";
+    private final static String XPathTextAreaMailSuscripcion = XPathCapaNewsLetter + "//input[@name='mail' or @name='email']";
     //private final static String XPathTextAreaMailSuscripcionOutlet = XPathCapaNewsLetterOutlet + "//input[@id[contains(.,'regExpMail')]]";
 	
     public SecNewsLetter(AppEcom app, WebDriver driver) {

@@ -87,7 +87,10 @@ public class PageMisDatos extends PageObjTM {
     }
     
     public boolean isPage() {
-    	return (state(Present, By.xpath(XPathIsPage)).check());
+    	return isPage(0);
+    }
+    public boolean isPage(int maxSeconds) {
+    	return (state(Present, By.xpath(XPathIsPage)).wait(maxSeconds).check());
     }
     
     public boolean titleOk() {

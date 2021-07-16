@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 public class PageGoogle extends PageObjTM {
@@ -14,6 +15,7 @@ public class PageGoogle extends PageObjTM {
 	static final String XPath_inputText = "//input[@type='text']";
 	static final String XPath_linkNoPubli = "//div[@class='g']//a";
 	static final String XPath_LinkNoPubliText = XPath_linkNoPubli + "//h3";
+	static final String XPath_ButtonAcceptModalCookie = "//button[@id='L2AGLb']";
 
 	public PageGoogle(WebDriver driver) {
 		super(driver);
@@ -37,6 +39,21 @@ public class PageGoogle extends PageObjTM {
 		driver.findElement(By.xpath(XPath_inputText)).sendKeys(Keys.RETURN);
 		waitForPageLoaded(driver);
 	}
+	
+	public void acceptModalCookieIfExists() {
+		if (isVisibleModalCookie(0)) {
+			acceptModalCookie();
+			isVisibleModalCookie(2);
+		}
+	}
+	
+    private boolean isVisibleModalCookie(int maxSeconds) {
+    	return state(Visible, By.xpath(XPath_ButtonAcceptModalCookie), driver).wait(maxSeconds).check();
+    }
+    
+    private void acceptModalCookie() {
+    	click(By.xpath(XPath_ButtonAcceptModalCookie), driver).exec();
+    }
 
 	public boolean validaFirstLinkContains(String textToBeContained) {
 		WebElement headerText = driver.findElement(By.xpath(XPath_LinkNoPubliText));

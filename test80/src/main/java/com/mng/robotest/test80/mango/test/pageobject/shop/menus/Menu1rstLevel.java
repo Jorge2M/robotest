@@ -40,6 +40,11 @@ public final class Menu1rstLevel implements MenuLateralDesktop {
     }
     
     @Override
+    public int getLevel() {
+    	return 1;
+    }
+    
+    @Override
     public AppEcom getApp() {
     	return this.app;
     }

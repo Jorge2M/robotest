@@ -17,6 +17,7 @@ public interface MenuLateralDesktop {
 	abstract public boolean isMenuLateral();
     abstract public boolean isDataForValidateArticleNames();
     abstract public String[] getTextsArticlesGalery();
+    abstract int getLevel();
     
     public enum Element {
     	article, campaign, slider, map, iframe

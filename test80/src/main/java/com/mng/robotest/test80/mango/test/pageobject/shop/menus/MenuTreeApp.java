@@ -81,6 +81,7 @@ public class MenuTreeApp {
     	addMenu1rstLevelMujerNuevo();
     	addMenus2onLevelOfMujerVestidos();
     	addMenus2onLevelOfMujerCamisas();
+    	addMenus2onLevelOfMujerCardigansJerseys();
     	addMenus2onLevelOfHombreAbrigosParkas();
     	//addMenu1rstLevelHombreZapatos();
     }
@@ -120,6 +121,16 @@ public class MenuTreeApp {
 	    menu1rstLeveCamisas.addMenu2onLevel(Menu2onLevel.from(menu1rstLeveCamisas, "blusas", "".split(",")));
 	    menu1rstLeveCamisas.addMenu2onLevel(Menu2onLevel.from(menu1rstLeveCamisas, "tops", "Camisa,Blusa,Top".split(",")));
 	    libraryMenusFirstLevel.add(menu1rstLeveCamisas);
+    }
+    
+    private void addMenus2onLevelOfMujerCardigansJerseys() {
+    	KeyMenu1rstLevel keyMujerCardigans = KeyMenu1rstLevel.from(LineaType.she, null, "cardigans-y-jerseis");
+	    Menu1rstLevel menu1rstLeveCardigans  = Menu1rstLevel.from(
+	    	this.app, keyMujerCardigans, "cardigans", true, "Jersey,Chaleco,Top,Sudadera,Cárdigan".split(",")
+	    );
+	    menu1rstLeveCardigans.addMenu2onLevel(Menu2onLevel.from(menu1rstLeveCardigans, "jerseis", "".split(",")));
+	    menu1rstLeveCardigans.addMenu2onLevel(Menu2onLevel.from(menu1rstLeveCardigans, "cardigans", "".split(",")));
+	    libraryMenusFirstLevel.add(menu1rstLeveCardigans);
     }
     
     private void addMenus2onLevelOfHombreAbrigosParkas() {

@@ -21,9 +21,10 @@ public class PageMisDatosStpV {
     @Validation
     public ChecksTM validaIsPage (String usuarioReg) {
         ChecksTM validations = ChecksTM.getNew();
+        int maxSeconds = 2;
         validations.add(
-            "Aparece una página con el la cabecera \"Mis datos\"",
-            pageMisDatos.isPage(), State.Warn);
+            "Aparece una página con el la cabecera \"Mis datos\" (esperamos hasta " + maxSeconds + " segundos)",
+            pageMisDatos.isPage(maxSeconds), State.Warn);
         validations.add(
             "El campo de email está bloqueado",
             pageMisDatos.emailIsDisabled(), State.Warn);

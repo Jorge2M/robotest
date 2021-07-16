@@ -48,18 +48,16 @@ public class SecMenuLateralDesktop extends PageObjTM {
 
 	private String getXPathLinkMenu(MenuLateralDesktop menu) {
 		String dataGaLabel =  menu.getDataGaLabelMenuLateralDesktop();
-		switch (app) {
-		case outlet:
+		if (app==AppEcom.outlet && menu.getLevel()==1) {
 			return (XPathLinkMenuWithTagOutlet
 				.replace(TagConcatMenus, dataGaLabel
 				.replace(":", "-")
 				.replaceFirst("-", "/")));
-		default:
-			return (XPathLinkMenuWithTagShop
-				.replace(TagConcatMenus, dataGaLabel
-				.replace(":", "-")
-				.replaceFirst("-", "/")));
 		}
+		return (XPathLinkMenuWithTagShop
+			.replace(TagConcatMenus, dataGaLabel
+			.replace(":", "-")
+			.replaceFirst("-", "/")));
 	}
 	
 	private String getXPathSelectedRelativeMenu() {

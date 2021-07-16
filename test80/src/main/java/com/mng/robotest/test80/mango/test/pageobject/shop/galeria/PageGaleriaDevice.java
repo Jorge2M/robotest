@@ -161,8 +161,10 @@ public class PageGaleriaDevice extends PageGaleria {
     public WebElement getImagenElementArticulo(WebElement articulo) {
     	moveToElement(articulo, driver);
     	By byImg = By.xpath("." + XPathImgRelativeArticle);
-    	state(Clickable, byImg).wait(1).check();
-    	return (articulo.findElement(byImg));
+    	if (state(Clickable, byImg).wait(1).check()) {
+    		return (articulo.findElement(byImg));
+    	}
+    	return null;
     }
     
     @Override
