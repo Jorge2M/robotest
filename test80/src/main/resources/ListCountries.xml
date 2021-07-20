@@ -745,7 +745,6 @@
 <accesoempl tarjeta="8000005809907" nombre="DOCEKALOVA , NINA" fecnac="19-12-1993"/>
 <accesovotf usuario="tda01084" password="mng01084"/>
 </pais>
-
 <pais nombre_pais="Denmark" codigo="008">
 <codigo_pais>008</codigo_pais>
 <codigo_alf>DK</codigo_alf>
@@ -753,6 +752,7 @@
 <rgpd>S</rgpd>
 <tarifa>DK</tarifa>
 <codpos>2900</codpos>
+<address>Strandvejen 153</address>
 <telefono>20123456</telefono> <!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
@@ -780,11 +780,16 @@
 <linea 		  id="home"   	 shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
+	type="Klarna" tiendas="shop,outlet"
+	nombre="KLARNA" testpasarela='s' testpago='s' numperklarna="0801363945">&TPV-208;</pago>
+<!-- 
+<pago 
 	type="Klarna" tiendas="shop,outlet" empleado="n"
 	nombre="KLARNA INVOICE" testpasarela='s' testpago='s' numperklarna="0801363945" telefklarna = "20123456" nomklarna="Testperson-dk Approved" direcklarna="Sæffleberggate 56,1 mf" provinklarna="6800 Varde" searchaddklarna="n">&TPV-213;</pago>
 <pago 
 	type="Klarna" tiendas="shop,outlet" empleado="n"
 	nombre="KLARNA ACCOUNT" testpasarela='s' testpago='s' numperklarna="0801363945" telefklarna = "20123456" nomklarna="Testperson-dk Approved" direcklarna="Sæffleberggate 56,1 mf" provinklarna="6800 Varde" searchaddklarna="n">&TPV-214;</pago>
+-->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='POSTNORD' tipoenviooutlet='STANDARD' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-515;</pago>
@@ -875,6 +880,7 @@
 <rgpd>S</rgpd>
 <tarifa>FL</tarifa>
 <codpos>00240</codpos>
+<address>Palkkatilankatu 5 C 28</address>
 <telefono>0401234567</telefono> <!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
@@ -901,11 +907,15 @@
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
+	type="Klarna" tiendas="shop,outlet"
+	nombre="KLARNA" testpasarela='s' testpago='s' numperklarna="190122-829F">&TPV-208;</pago>
+<!-- 
+<pago 
 	type="Klarna" tiendas="shop,outlet" empleado="n"
 	nombre="KLARNA INVOICE" testpasarela='s' testpago='s' numperklarna="190122-829F" telefklarna = "0401234567" nomklarna="Testperson-fi Approved" direcklarna="Kiväärikatu 10" provinklarna="28100 Pori" searchaddklarna="n">&TPV-211;</pago> 
 <pago 
 	type="Klarna" tiendas="shop,outlet" empleado="n"
-	nombre="KLARNA ACCOUNT" testpasarela='s' testpago='s' numperklarna="190122-829F" telefklarna = "0401234567" nomklarna="Testperson-fi Approved" direcklarna="Kiväärikatu 10" provinklarna="28100 Pori" searchaddklarna="n">&TPV-212;</pago>
+	nombre="KLARNA ACCOUNT" testpasarela='s' testpago='s' numperklarna="190122-829F" telefklarna = "0401234567" nomklarna="Testperson-fi Approved" direcklarna="Kiväärikatu 10" provinklarna="28100 Pori" searchaddklarna="n">&TPV-212;</pago>-->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='POSTNORD' tipoenviooutlet='STANDARD' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-549;</pago>
@@ -998,6 +1008,7 @@
 <rgpd>S</rgpd>
 <tarifa>DM</tarifa>
 <codpos>10115</codpos>
+<address>Platz vor dem Neuen Tor 6</address>
 <telefono>017632021234</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
@@ -1023,6 +1034,9 @@
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="home"   	 shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
+<pago 
+	type="Klarna" tiendas="shop,outlet"
+	nombre="KLARNA" testpasarela='s' testpago='s' numperklarna='23.04.1974'>&TPV-208;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='PACKSTATION' tipoenviooutlet='PACKSTATION' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-549;</pago>
@@ -1053,12 +1067,13 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
+<!-- 
 <pago 
 	type="KlarnaDeutsch" tiendas="shop,outlet" empleado="n"
 	nombre="RECHNUNG" testpasarela='s' testpago='s'>&TPV-215;</pago> 
 <pago 
 	type="KlarnaDeutsch" tiendas="shop,outlet" empleado="n"
-	nombre="KLARNA KONTO" testpasarela='s' testpago='s'>&TPV-216;</pago>
+	nombre="KLARNA KONTO" testpasarela='s' testpago='s'>&TPV-216;</pago>-->
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
@@ -1909,7 +1924,8 @@ where
 <idioma acceso="no-en">IN</idioma>
 <rgpd>S</rgpd>
 <tarifa>NO</tarifa>
-<codpos>0010</codpos>
+<codpos>3728</codpos>
+<address>Hakasteinvegen 243</address>
 <telefono>40123456</telefono> <!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
@@ -1936,10 +1952,15 @@ where
 </shoponline>
 <pago 
 	type="Klarna" tiendas="shop,outlet"
-	nombre="KLARNA FAKTURA" testpasarela='s' testpago='s' numperklarna="01121579533" telefklarna = "40123456" nomklarna="Testperson-no Approved" direcklarna="Sæffleberggate 56" provinklarna="0563 Oslo" searchaddklarna="n">&TPV-208;</pago> 
+	nombre="KLARNA" testpasarela='s' testpago='s' numperklarna="01121579533">&TPV-208;</pago>
+<!-- 
 <pago 
 	type="Klarna" tiendas="shop,outlet"
-	nombre="KLARNA-KONTO" testpasarela='s' testpago='s' numperklarna="01121579533" telefklarna = "40123456" nomklarna="Testperson-no Approved" direcklarna="Sæffleberggate 56" provinklarna="0563 Oslo" searchaddklarna="n">&TPV-209;</pago>
+	nombre="KLARNA FAKTURA" testpasarela='s' testpago='s' numperklarna="01121579533" telefklarna = "40123456" nomklarna="Testperson-no Approved" direcklarna="Sæffleberggate 56" provinklarna="Oslo" searchaddklarna="n">&TPV-208;</pago> 
+<pago 
+	type="Klarna" tiendas="shop,outlet"
+	nombre="KLARNA-KONTO" testpasarela='s' testpago='s' numperklarna="01121579533" telefklarna = "40123456" nomklarna="Testperson-no Approved" direcklarna="Sæffleberggate 56" provinklarna="Oslo" searchaddklarna="n">&TPV-209;</pago>
+-->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='POSTNORD' tipoenviooutlet='STANDARD' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-080;</pago>
@@ -2636,7 +2657,8 @@ where
 <idioma acceso="se-en">IN</idioma>
 <rgpd>S</rgpd>
 <tarifa>SK</tarifa>
-<codpos>11157</codpos>
+<codpos>111 24</codpos>
+<address>Kammakargatan 70</address>
 <telefono>0765260000</telefono><!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
@@ -2664,11 +2686,16 @@ where
 <linea 		  id="home"   	 shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
+	type="Klarna" tiendas="shop,outlet"
+	nombre="KLARNA" testpasarela='s' testpago='s' numperklarna="19410321-9202">&TPV-208;</pago>
+<!-- 
+<pago 
 	type="Klarna" tiendas="shop,outlet" empleado="n" 
 	nombre="KLARNA FAKTURA" almacenmontcada='n' testpasarela='s' testpago='s' numperklarna="410321-9202" telefklarna = "076526000" nomklarna="Testperson-se Approved" direcklarna="Stårgatan 1" provinklarna="12345 Ankeborg" searchaddklarna="s">&TPV-206;</pago> 
 <pago 
 	type="Klarna" tiendas="shop,outlet" empleado="n" 
-	nombre="Klarna konto" almacenmontcada='n' testpasarela='s' testpago='s' numperklarna="410321-9202" telefklarna = "076526000" nomklarna="Testperson-se Approved" direcklarna="Stårgatan 1" provinklarna="12345 Ankeborg" searchaddklarna="s">&TPV-207;</pago> 
+	nombre="Klarna konto" almacenmontcada='n' testpasarela='s' testpago='s' numperklarna="410321-9202" telefklarna = "076526000" nomklarna="Testperson-se Approved" direcklarna="Stårgatan 1" provinklarna="12345 Ankeborg" searchaddklarna="s">&TPV-207;</pago>
+--> 
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="VISA" testpasarela='s' tipoenvioshop='POSTNORD' tipoenviooutlet='STANDARD' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-544;</pago>

@@ -38,7 +38,6 @@ public class Pago implements Serializable {
         Giropay, 
         Sofort, 
         Klarna,
-        KlarnaDeutsch,
         PaysecureQiwi, 
         Assist, 
         PasarelaOtras, 
@@ -78,13 +77,8 @@ public class Pago implements Serializable {
     String cip;
     String usrd3d;
     String passd3d;
-    String numperklarna;
-    String telefklarna; 
     String telefqiwi; 
-    String nomklarna; 
-    String direcklarna;
-    String provinklarna;
-    String searchaddklarna;
+    String numperklarna;
     String paissofort;
     String bankcode;
     String usrsofort;
@@ -146,9 +140,7 @@ public class Pago implements Serializable {
         case "Paymaya":
         	return TypePago.PayMaya;
         case "Klarna":
-            return TypePago.Klarna;                
-        case "KlarnaDeutsch":
-            return TypePago.KlarnaDeutsch;                
+            return TypePago.Klarna;                               
         case "PaysecureQiwi":
             return TypePago.PaysecureQiwi;                
         case "Assist":
@@ -446,60 +438,6 @@ public class Pago implements Serializable {
     public void setPassd3d(String passd3d) {
         this.passd3d = passd3d;
     }
-	
-    public String getNumperklarna() {
-        return this.numperklarna;
-    }
-	
-    @XmlAttribute(name="numperklarna")
-    public void setNumperklarna(String numperklarna) {
-        this.numperklarna = numperklarna;
-    }
-	
-    public String getTelefklarna() {
-        return this.telefklarna;
-    }
-	
-    @XmlAttribute(name="telefklarna")
-    public void setTelefklarna(String telefklarna) {
-        this.telefklarna = telefklarna;
-    }
-	
-    public String getNomklarna() {
-        return this.nomklarna;
-    }
-	
-    @XmlAttribute(name="nomklarna")
-    public void setNomklarna(String nomklarna) {
-        this.nomklarna = nomklarna;
-    }
-	
-    public String getDirecklarna() {
-        return this.direcklarna;
-    }
-	
-    @XmlAttribute(name="direcklarna")
-    public void setDirecklarna(String direcklarna) {
-        this.direcklarna = direcklarna;
-    }
-	
-    public String getProvinklarna() {
-        return this.provinklarna;
-    }
-	
-    @XmlAttribute(name="provinklarna")
-    public void setProvinklarna(String provinklarna) {
-        this.provinklarna = provinklarna;
-    }
-	
-    public String getSearchAddklarna() {
-        return this.searchaddklarna;
-    }
-	
-    @XmlAttribute(name="searchaddklarna")
-    public void setSearchAddklarna(String searchaddklarna) {
-        this.searchaddklarna = searchaddklarna;
-    }
 
     public String getUsrsofort() {
         return this.usrsofort;
@@ -668,6 +606,15 @@ public class Pago implements Serializable {
             return true;
         }
         return false;
+    }
+    
+    public String getNumPerKlarna() {
+        return this.numperklarna;
+    }
+	
+    @XmlAttribute(name="numperklarna")
+    public void setNumPerKlarna(String numperklarna) {
+        this.numperklarna = numperklarna;
     }
     
     public String getTelefqiwi() {

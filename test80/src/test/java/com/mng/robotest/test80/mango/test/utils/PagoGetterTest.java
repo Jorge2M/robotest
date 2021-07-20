@@ -30,14 +30,13 @@ public class PagoGetterTest {
 		//Then
 		//TODO creo que el flag de empleado lo estoy gestionando mal
 		assertTrue(listPaymentsResult.contains("AMERICAN EXPRESS"));
-		assertTrue(listPaymentsResult.contains("KLARNA FAKTURA"));
-		assertTrue(listPaymentsResult.contains("Klarna konto"));
+		assertTrue(listPaymentsResult.contains("KLARNA"));
 		assertTrue(listPaymentsResult.contains("MASTERCARD"));
 		assertTrue(listPaymentsResult.contains("PAYPAL"));
 		assertTrue(listPaymentsResult.contains("TARJETA MANGO"));
 		assertTrue(listPaymentsResult.contains("VISA"));
 		assertTrue(listPaymentsResult.contains("VISA ELECTRON"));
-		assertTrue(listPaymentsResult.size()==8);
+		assertTrue(listPaymentsResult.size()==7);
 	}
 	
 	@Test

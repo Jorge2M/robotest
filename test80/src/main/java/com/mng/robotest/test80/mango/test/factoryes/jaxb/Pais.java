@@ -34,6 +34,7 @@ public class Pais implements Serializable {
     String paistop="";
     String rgpd="";
     String codpos;
+    String address;
     String telefono;
     String dni;
     String tiendas_online;
@@ -130,13 +131,28 @@ public class Pais implements Serializable {
     } 
     
     public String getCodpos() {
-        return this.codpos;
+    	if (codpos==null || codpos.compareTo("")==0) {
+    		return "08720";
+    	}
+        return codpos;
     }
 
     @XmlElement
     public void setCodpos(String codpos) {
         this.codpos = codpos;
-    }        
+    }      
+    
+    public String getAddress() {
+    	if (address==null || address.compareTo("")==0) {
+    		return "c./ mossen trens n6 5 1a";
+    	}
+        return address;
+    }
+
+    @XmlElement
+    public void setAddress(String address) {
+        this.address = address;
+    }  
     
     public String getTelefono() {
         return this.telefono;

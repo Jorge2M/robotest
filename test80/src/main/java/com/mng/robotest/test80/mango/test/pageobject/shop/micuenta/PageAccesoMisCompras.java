@@ -112,5 +112,8 @@ public class PageAccesoMisCompras extends PageObjTM implements PageFromFooter {
     
     public void clickBuscarPedidoBlockNo() {
     	click(By.xpath(XPathButtonBuscarPedidoBlockNo)).exec();
+    	if (!state(Invisible, By.xpath(XPathButtonBuscarPedidoBlockNo)).wait(2).check()) {
+    		click(By.xpath(XPathButtonBuscarPedidoBlockNo)).exec();
+    	}
     }
 }

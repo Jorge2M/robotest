@@ -84,6 +84,10 @@ public class Page2DatosPagoCheckoutMobil extends PageObjTM {
         	String methodRadioName = pageCheckoutWrapper.getMethodInputValue(nombrePago);
         	return ("//div[@data-custom-radio-id='" + methodRadioName + "']"); 
     	}
+    	//TODO eliminar cuando añadan el valor klarna al atributo data-analytics-value
+    	if (nombrePago.compareTo("KLARNA")==0) {
+    		return "//div[@data-custom-radio-id='klarna']";
+    	}
     	return (getXPathPago(nombrePago) + "//div[@data-custom-radio-id]");
     }
     

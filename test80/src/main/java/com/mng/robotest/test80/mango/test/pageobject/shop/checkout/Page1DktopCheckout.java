@@ -28,8 +28,6 @@ public class Page1DktopCheckout extends PageObjTM {
     private final SecStoreCredit secStoreCredit;
     private final SecTMango secTMango;
     private final SecBillpay secBillpay;
-    private final SecKlarna secKlarna;
-    private final SecKlarnaDeutsch secKlarnaDeutsch;
     private final SecEps secEps;
     private final ModalAvisoCambioPais modalAvisoCambioPais;
     
@@ -120,8 +118,6 @@ public class Page1DktopCheckout extends PageObjTM {
         this.secStoreCredit = new SecStoreCredit(driver);
         this.secTMango = new SecTMango(channel, app, driver);
         this.secBillpay = new SecBillpay(channel, driver);
-        this.secKlarna = new SecKlarna(channel, driver);
-        this.secKlarnaDeutsch = new SecKlarnaDeutsch(channel, driver);
         this.secEps = new SecEps(driver);
         this.modalAvisoCambioPais = new ModalAvisoCambioPais(driver);
     }
@@ -136,10 +132,6 @@ public class Page1DktopCheckout extends PageObjTM {
 
 	public SecBillpay getSecBillpay() {
 		return secBillpay;
-	}
-
-	public SecKlarna getSecKlarna() {
-		return secKlarna;
 	}
 
 	public SecEps getSecEps() {
@@ -170,10 +162,6 @@ public class Page1DktopCheckout extends PageObjTM {
 			return (secTMango.isVisibleUntil(maxSeconds));
 		case Billpay:
 			return (secBillpay.isVisibleUntil(maxSeconds));
-		case Klarna:
-			return (secKlarna.isVisibleUntil(maxSeconds));
-		case KlarnaDeutsch:
-			return (secKlarnaDeutsch.isVisibleUntil(maxSeconds));
 		default:
 			String nameExpected = pago.getNombreInCheckout(Channel.desktop, app).toLowerCase();
 			return (
@@ -186,6 +174,11 @@ public class Page1DktopCheckout extends PageObjTM {
     private String getXPathClickMetodoPago(String metodoPago) {
         if (TextKrediKarti.compareTo(metodoPago)==0) {
         	return XPathPestanyaKrediKarti;
+        }
+        
+        //TODO eliminar cuando añadan el "KLARNA" al value del input
+        if (metodoPago.compareTo("KLARNA")==0) {
+        	return "//div[@class[contains(.,'cuadroPago')]]/input[@value='klarna' and @type='radio']";
         }
         String metodoPagoClick = (new PageCheckoutWrapper(channel, app, driver)).getMethodInputValue(metodoPago);
         return (XPathRadioPagoWithTag.replace(TagMetodoPago, metodoPagoClick));

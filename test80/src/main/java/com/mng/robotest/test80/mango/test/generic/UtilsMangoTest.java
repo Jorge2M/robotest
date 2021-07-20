@@ -41,20 +41,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.navigations.ArticuloNa
 
 public class UtilsMangoTest {
 
-    /**
-     * Devuelve un código postal según el país
-     */
-    public static String codigoPostal(final Pais pais) {
-        String codigoPostal = "08720";
-        if (pais != null) {
-            if (pais.getCodigo_pais() != null) {
-                codigoPostal = pais.getCodpos();
-            }
-        }
-
-        return codigoPostal;
-    }
-
 	public static String getPageSource(WebDriver driver) {
 		String idWebKit = "webkit-xml-viewer-source-xml";
 		if (PageObjTM.state(Present, By.id(idWebKit), driver).check()) {

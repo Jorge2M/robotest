@@ -540,13 +540,13 @@ public class Page2IdentCheckout extends PageObjTM {
         String apellidosUsr = "Muñoz Martínez";
         String middleNameUsr = "Sputnik";
         String codigoPais = pais.getCodigo_pais();
-        String direccion1 = "c./ mossen trens n6 5 1a";
+        String direccion1 = pais.getAddress();
         if (testCharNoLatinos) {
             direccion1 = pais.getDireccharnolatinos().getText();
         }
         String direccion2 = "6";
         String cfCity = "VILAFRANCA";
-        String codPostalPais = UtilsMangoTest.codigoPostal(pais);
+        String codPostalPais = pais.getCodpos();
         String cfState = "BARCELONA";        
         String movil = "665015122";
         movil = pais.getTelefono();

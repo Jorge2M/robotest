@@ -38,8 +38,6 @@ public class PageCheckoutWrapperStpV {
     private final SecTMangoStpV secTMangoStpV;
     private final SecKrediKartiStpV secKrediKartiStpV;
     private final SecBillpayStpV secBillpayStpV;
-    private final SecKlarnaStpV secKlarnaStpV;
-    private final SecKlarnaDeutschStpV secKlarnaDeutschStpV;
     private final ModalDirecFacturaStpV modalDirecFacturaStpV;
     private final ModalAvisoCambioPaisStpV modalAvisoCambioPaisStpV;
     private final Page1DktopCheckoutStpV page1DktopCheckStpV;
@@ -65,13 +63,11 @@ public class PageCheckoutWrapperStpV {
         this.secTMangoStpV = new SecTMangoStpV(channel, app, driver);
         this.secKrediKartiStpV = new SecKrediKartiStpV(channel, driver); 
         this.secBillpayStpV = new SecBillpayStpV(channel, driver);
-        this.secKlarnaStpV = new SecKlarnaStpV(channel, app, driver);
         this.modalDirecFacturaStpV = new ModalDirecFacturaStpV(channel, app, driver);
         this.modalAvisoCambioPaisStpV = new ModalAvisoCambioPaisStpV(app, driver);
         this.page1DktopCheckStpV = new Page1DktopCheckoutStpV(channel, app, driver);
         this.page1MobilCheckStpV = new Page1EnvioCheckoutMobilStpV(driver);
         this.secIdealStpV = new SecIdealStpV(channel, driver);
-        this.secKlarnaDeutschStpV = new SecKlarnaDeutschStpV(channel, driver);
         this.secTarjetaPciStpV = new SecTarjetaPciStpV(channel, app, driver);
     }
     
@@ -95,12 +91,6 @@ public class PageCheckoutWrapperStpV {
     }
     public SecKrediKartiStpV getSecKrediKartiStpV() {
     	return secKrediKartiStpV;
-    }
-    public SecKlarnaDeutschStpV getSecKlarnaDeutschStpV() {
-    	return secKlarnaDeutschStpV;
-    }
-    public SecKlarnaStpV getSecKlarnaStpV() {
-    	return secKlarnaStpV;
     }
     public SecStoreCreditStpV getSecStoreCreditStpV() {
     	return secStoreCreditStpV;
