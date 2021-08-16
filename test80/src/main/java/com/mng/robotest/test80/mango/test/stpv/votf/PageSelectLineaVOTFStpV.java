@@ -34,9 +34,6 @@ public class PageSelectLineaVOTFStpV {
     	validations.add(
     		"Aparece el banner correspondiente a NIÑOS",
     		PageSelectLineaVOTF.isBannerPresent(LineaType.nino, driver), State.Warn);
-    	validations.add(
-    		"Aparece el banner correspondiente a VIOLETA",
-    		PageSelectLineaVOTF.isBannerPresent(LineaType.violeta, driver), State.Warn);
     	return validations;
     }
     

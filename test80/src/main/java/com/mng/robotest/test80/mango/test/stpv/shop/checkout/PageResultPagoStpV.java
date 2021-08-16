@@ -92,7 +92,7 @@ public class PageResultPagoStpV {
       		ImporteScreen.isPresentImporteInScreen(importeTotal, dCtxSh.pais.getCodigo_pais(), driver), State.Warn);
         
 	    if (dCtxSh.channel==Channel.desktop) {
-	        if (dCtxSh.pais.isPaisWithMisCompras() && dCtxSh.appE==AppEcom.shop) {
+	        if (dCtxSh.appE==AppEcom.shop) {
 	        	validations.add(
               		"Aparece el link hacia las compras",
               		pageResultPago.isLinkMisCompras(), State.Warn);

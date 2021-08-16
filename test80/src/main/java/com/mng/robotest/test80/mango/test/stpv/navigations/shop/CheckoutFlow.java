@@ -317,8 +317,7 @@ public class CheckoutFlow {
     
     private boolean testMisCompras() {
     	return (
-    		(dCtxSh.pais.isPaisWithMisCompras() && 
-    		 dCtxSh.appE!=AppEcom.outlet) ||
+    		(dCtxSh.appE!=AppEcom.outlet) ||
     		 dCtxPago.getFTCkout().forceTestMisCompras
     	);
     }

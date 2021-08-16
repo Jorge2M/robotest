@@ -117,15 +117,9 @@ public class AccesoStpV {
 	    	
 	    	if (dCtxSh.channel!=Channel.desktop) {
 		    	boolean isPresentLinkMisCompras = userMenus.isMenuInState(UserMenu.misCompras, Present);
-		    	if (dCtxSh.pais.isMisCompras()) {
-			    	validations.add(
-			    		"Aparece el link \"Mis Compras\"",
-			    		isPresentLinkMisCompras, State.Defect);
-		    	} else {
-			    	validations.add(
-			    		"No aparece el link \"Mis Compras\"",
-			    		!isPresentLinkMisCompras, State.Defect);
-		    	}
+		    	validations.add(
+		    		"Aparece el link \"Mis Compras\"",
+		    		isPresentLinkMisCompras, State.Defect);
 	    	}
 		}
 		

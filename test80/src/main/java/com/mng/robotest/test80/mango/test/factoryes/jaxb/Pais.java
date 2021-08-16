@@ -38,7 +38,6 @@ public class Pais implements Serializable {
     String telefono;
     String dni;
     String tiendas_online;
-    String miscompras;
     String moneda;
     String maximo_bolsa;
     String control_net;
@@ -190,20 +189,7 @@ public class Pais implements Serializable {
     		}
     	}
     	return listApps;
-    }
-    
-    public String getMiscompras() {
-        return this.miscompras;
     }   
-    
-    public boolean isMisCompras() {
-        return ("true".compareTo(getMiscompras())==0);
-    }
-
-    @XmlElement
-    public void setMiscompras(String miscompras) {
-        this.miscompras = miscompras;
-    }    
     
     public String getMoneda() {
         return this.moneda;
@@ -363,10 +349,6 @@ public class Pais implements Serializable {
     public boolean isPaisTop() {
         return ("s".compareTo(this.paistop.toLowerCase())==0);
     }
-
-	public boolean isPaisWithMisCompras() {
-		return ("true".compareTo(getMiscompras())==0);
-	}
 
 	public boolean isVentaOnline() {
 		return getTiendasOnlineList().size()>0;

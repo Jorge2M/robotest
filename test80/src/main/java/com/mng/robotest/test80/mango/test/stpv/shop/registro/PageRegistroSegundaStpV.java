@@ -43,11 +43,6 @@ public class PageRegistroSegundaStpV {
             numLineas+=1;
         }
         
-        if (paisRegistro.getShoponline().stateLinea(LineaType.violeta, app)==ThreeState.TRUE) {
-            lineasComaSeparated+="," + LineaType.violeta.name();
-            numLineas+=1;
-        }
-        
         if (app==AppEcom.outlet) {
             lineasComaSeparated+=",outlet";
             numLineas+=1;

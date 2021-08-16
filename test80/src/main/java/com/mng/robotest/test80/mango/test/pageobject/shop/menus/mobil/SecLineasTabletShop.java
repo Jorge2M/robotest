@@ -14,7 +14,6 @@ public class SecLineasTabletShop extends SecLineasTablet {
 	static String XPathLinkLineaNina = IniXPathLinkLinea + "='kids']";
 	static String XPathLinkLineaNino =IniXPathLinkLinea + "='kids']";
 	static String XPathLinkLineaKids =IniXPathLinkLinea + "='kids']"; //p.e. Bolivia
-	static String XPathLinkLineaVioleta = IniXPathLinkLinea + "='violeta']";
 	static String XPathLinkLineaHome = IniXPathLinkLinea + "='home']";
 	
 	public SecLineasTabletShop(WebDriver driver) {
@@ -34,8 +33,6 @@ public class SecLineasTabletShop extends SecLineasTablet {
 			return XPathLinkLineaNino;
 		case kids: 
 			return XPathLinkLineaKids;
-		case violeta: 
-			return XPathLinkLineaVioleta;
 		case home:
 			return XPathLinkLineaHome;
 		default:

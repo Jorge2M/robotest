@@ -11,7 +11,6 @@ public class SecLineasMobilOutlet extends SecLineasMobil {
 	private static String XPathLinkLineaHombre = IniXPathLinkLinea + "='outletH']";
 	private static String XPathLinkLineaNina = IniXPathLinkLinea + "='outletA']";
 	private static String XPathLinkLineaNino =IniXPathLinkLinea + "='outletO']";
-	private static String XPathLinkLineaVioleta = IniXPathLinkLinea + "='outletV']";
 	
 	public SecLineasMobilOutlet(WebDriver driver) {
 		super(AppEcom.outlet, driver);
@@ -28,8 +27,6 @@ public class SecLineasMobilOutlet extends SecLineasMobil {
 			return XPathLinkLineaNina;
 		case nino: 
 			return XPathLinkLineaNino;
-		case violeta: 
-			return XPathLinkLineaVioleta;
 		default:
 			throw new IllegalArgumentException("The line " + lineaType + " is not present in the Outlet for the mobile channel");
 		}
