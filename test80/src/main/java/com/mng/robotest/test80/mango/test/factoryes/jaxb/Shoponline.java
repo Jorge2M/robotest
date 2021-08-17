@@ -18,7 +18,7 @@ public class Shoponline implements Serializable {
 	private static final long serialVersionUID = -8214276147980655399L;
 
 	//Líneas correspondientes a las 5 básicas ("kids" sigue apareciendo en algunos países sin venta como Bolivia) 
-    public enum LineaBasica { she, he, nina, nino, kids, violeta }    
+    public enum LineaBasica { she, he, nina, nino, kids, teen }    
 
     @XmlElement(name="linea") 
     List<Linea> Lineas = new LinkedList<>();
@@ -77,7 +77,7 @@ public class Shoponline implements Serializable {
         return (stateLinea(linea, app));
     }
     
-    //Identifica si la línea pertenece a una de las 5 líneas de tipo 'tienda' (she, he, nino, nina, violeta)
+    //Identifica si la línea pertenece a una de las 5 líneas de tipo 'tienda' (she, he, nino, nina, teen)
     public boolean isLineaTienda(Linea linea) {
         for (LineaBasica lineaTda : LineaBasica.values()) {
             if (lineaTda.name().compareTo(linea.getType().name())==0) {
@@ -115,7 +115,7 @@ public class Shoponline implements Serializable {
     }
     
     /**
-     * Identifica el número de líneas con tienda asociada (she, he, kids y violeta)
+     * Identifica el número de líneas con tienda asociada (she, he, kids, teen)
      */
     public List<Linea> getListLineasTiendas(AppEcom app) {
     	List<Linea> listLineas = new ArrayList<>();

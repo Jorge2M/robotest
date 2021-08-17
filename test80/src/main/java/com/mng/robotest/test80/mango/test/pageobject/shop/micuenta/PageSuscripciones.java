@@ -10,7 +10,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageSuscripciones {
 
     //Los valores que permiten identificar los radios correspondientes a los newsletter seleccionables
-    public enum idNewsletters { she, he, kids, violeta }
+    public enum idNewsletters { she, he, kids, teen }
     
     static String XPathButtonGuardarCambios = "//input[@type='submit' and @value[contains(.,'Guardar')]]";
     static String XPathPageResOK = "//*[text()[contains(.,'Tus preferencias han sido actualizadas')]]";

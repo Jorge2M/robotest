@@ -155,7 +155,7 @@ public class SecBloquesMenuDesktop extends PageObjTM {
     }
     
     /**
-     * @param linea she, he, kids, violeta
+     * @param linea she, he, kids, home, teen
      * @param bloque prendas, accesorios, colecciones...
      * @return los menús asociados a una línea/bloque concretos (por bloque entendemos prendas, accesorios, colecciones...)
      */

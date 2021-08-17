@@ -59,7 +59,7 @@ public class PageOrdenacionDePrendas {
 		He("//input[@src[contains(.,'cabecera_mango_he')]]"),
 		Nina("//input[@src[contains(.,'cabecera_mango_nina')]]"),
 		Nino("//input[@src[contains(.,'cabecera_mango_nino')]]"),
-		Violeta("//input[@src[contains(.,'cabecera_mango_violeta')]]");
+		Teen("//input[@src[contains(.,'cabecera_mango_teen')]]");
 		
 		By by;
 		Section(String xpath) {

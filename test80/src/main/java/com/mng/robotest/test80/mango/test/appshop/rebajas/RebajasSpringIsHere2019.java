@@ -171,6 +171,8 @@ public class RebajasSpringIsHere2019 {
     private boolean bannerMustBeInPortada(String codigoPais, Linea linea, Sublinea sublinea) {
     	switch (linea.getType()) {
     	case she:
+    	case violeta:
+    		return true;
     	case he:
     		return (!countrysWithoutCampaignInHE.contains(codigoPais));
     	case nina:

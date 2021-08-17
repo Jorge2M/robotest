@@ -77,9 +77,6 @@ public class PageOrdenacionDePrendasStpV extends PageObjTM {
 		validations.add(
 			"Aparece correctamente el boton de <b>cancelar</b>",
 			state(Visible, Section.Nino.getBy()).wait(10).check(), State.Defect);
-		validations.add(
-			"Está presente el enlace de <b>Violeta</b>",
-			state(Visible, Section.Violeta.getBy()).wait(10).check(), State.Defect);
 		return validations;
 	}
 

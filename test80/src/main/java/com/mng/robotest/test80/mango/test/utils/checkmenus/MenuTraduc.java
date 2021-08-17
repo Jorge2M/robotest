@@ -160,11 +160,7 @@ public class MenuTraduc {
 	    
 	    maternity_she(Arrays.asList(
 	    	Translation.getNew(CodIdioma.ES, "Premamá"),
-	    	Translation.getNew(CodIdioma.FR, "Vêtements de grossesse"))),
-	    
-	    violeta(Arrays.asList(
-	    	Translation.getNew(CodIdioma.ES, "Tallas grandes"),
-	    	Translation.getNew(CodIdioma.FR, "Grandes tailles")));
+	    	Translation.getNew(CodIdioma.FR, "Vêtements de grossesse")));
 	
 	    private List<Translation> translations;
 	    private MenuShe(List<Translation> translations) {

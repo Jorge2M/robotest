@@ -19,7 +19,7 @@ public class Tienda implements Serializable {
     String he;
     String kids;
     String baby;
-    String violeta;
+    String teen;
     String edits;
 	
     public String getNuevo() {
@@ -76,13 +76,13 @@ public class Tienda implements Serializable {
         this.baby = baby;
     }
 	
-    public String getVioleta() {
-        return this.violeta;
+    public String getTeen() {
+        return this.teen;
     }
 	
-    @XmlAttribute(name="violeta")
-    public void setVioleta(String violeta) {
-        this.violeta = violeta;
+    @XmlAttribute(name="teen")
+    public void setTeen(String teen) {
+        this.teen = teen;
     }	
 	
     public String getEdits() {
@@ -96,7 +96,7 @@ public class Tienda implements Serializable {
 	
     @Override
     public String toString() {
-        return "Tienda [nuevo=" + this.nuevo + ", rebajas=" + this.rebajas + ", she="+ this.she + ", he=" + this.he + ", kids=" + this.kids + ", baby=" + this.baby + ", violeta =" + this.violeta + ", edits =" + this.edits +
+        return "Tienda [nuevo=" + this.nuevo + ", rebajas=" + this.rebajas + ", she="+ this.she + ", he=" + this.he + ", kids=" + this.kids + ", baby=" + this.baby + ", teen =" + this.teen + ", edits =" + this.edits +
                 ", toString()=" + super.toString() + "]";
     }
 }

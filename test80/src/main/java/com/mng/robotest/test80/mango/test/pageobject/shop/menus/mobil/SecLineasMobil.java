@@ -11,7 +11,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 
 public abstract class SecLineasMobil extends SecLineasDevice {
 
-	protected static String[] tagsRebajasMobil = {"mujer", "hombre", "ninos", "violeta"};
+	protected static String[] tagsRebajasMobil = {"mujer", "hombre", "ninos", "teen"};
 
 	protected static String XPathHeaderMobile = "//div[@id='headerMobile']";
 	protected static String XPathCapaLevelLinea = "//div[@class[contains(.,'menu-section')]]";

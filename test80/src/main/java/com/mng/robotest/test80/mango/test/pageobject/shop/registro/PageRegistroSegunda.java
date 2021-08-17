@@ -60,7 +60,7 @@ public class PageRegistroSegunda {
     }
     
     /**
-     * @return el número de colecciones existentes a nivel de checkbox (she, he, kids, violeta...)
+     * @return el número de colecciones existentes a nivel de checkbox (she, he, kids...)
      */
     public static int getNumColecciones(WebDriver driver) {
         return (driver.findElements(By.xpath(XPathCheckboxLinea)).size());

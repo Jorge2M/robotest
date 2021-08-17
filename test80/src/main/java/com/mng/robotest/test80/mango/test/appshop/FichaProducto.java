@@ -77,9 +77,9 @@ public class FichaProducto {
         }
         
         articulo = pageFichaStpv.getFicha().getArticuloObject();
-        if (dCtxSh.appE==AppEcom.shop) { //"Buscar en Tienda" y "Favoritos" no existen en Outlet ni Votf
-            pageFichaStpv.selectBuscarEnTiendaButton();
-            new ModalBuscadorTiendasStpV(dCtxSh.channel, driver).close();
+        pageFichaStpv.selectBuscarEnTiendaButton();
+        new ModalBuscadorTiendasStpV(dCtxSh.channel, driver).close();
+        if (dCtxSh.appE==AppEcom.shop) {
             pageFichaStpv.selectAnadirAFavoritos();
             pageFichaStpv.changeColorGarment();
             pageFichaStpv.selectRemoveFromFavoritos();
