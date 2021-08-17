@@ -132,14 +132,16 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	private static final String XPathLinkFiltrarShop = "//button[@id='filtersBtn']";
 	public void showFilters() {
 		if (app!=AppEcom.outlet) {
-			if (!isFiltersShopVisible(1)) {
+			if (!isFiltersShopVisible(1) &&
+				state(State.Clickable, By.xpath(XPathLinkFiltrarShop)).check()) {
 				click(By.xpath(XPathLinkFiltrarShop)).exec();
 			}
 		}
 	}
 	public void hideFilters() {
 		if (app!=AppEcom.outlet) {
-			if (isFiltersShopVisible(1)) {
+			if (isFiltersShopVisible(1) &&
+				state(State.Clickable, By.xpath(XPathLinkFiltrarShop)).check()) {
 				click(By.xpath(XPathLinkFiltrarShop)).exec();
 			}
 		}

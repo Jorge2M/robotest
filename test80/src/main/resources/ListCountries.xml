@@ -2395,7 +2395,7 @@ where
 <ticketStore_enabled>true</ticketStore_enabled>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
-<tienda nuevo="s" rebajas="n" she="s" he="s" nina="s" nino="s" baby="s" violeta="s" home="s"></tienda>
+<tienda nuevo="s" rebajas="n" she="s" he="s" nina="s" nino="s" baby="s" teen="s" violeta="s" home="s"></tienda>
 <shoponline>
 <linea    	  id="nuevo" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/> 
 <linea    	  id="rebajas"   shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
@@ -2403,13 +2403,15 @@ where
 <linea    	  id="he" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="home"   	 shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
