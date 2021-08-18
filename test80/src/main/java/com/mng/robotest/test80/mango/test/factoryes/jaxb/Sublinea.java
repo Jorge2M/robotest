@@ -7,9 +7,11 @@ public class Sublinea extends Linea {
 
     public static enum SublineaNinosType { 
     	teen_nina("teenA", "teenA", LineaType.teen),
+    	nina_teen("teenA", "teenA", LineaType.nina),
     	nina("nina", "outletA", LineaType.nina), 
     	bebe_nina("babyNina", "outletBA", LineaType.nina),
     	teen_nino("teenO", "teenO", LineaType.teen),
+    	nino_teen("teenO", "teenO", LineaType.nino),
     	nino("nino", "outletO", LineaType.nino), 
     	bebe_nino("babyNino", "outletBO", LineaType.nino); 
     	

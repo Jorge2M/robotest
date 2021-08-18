@@ -23,8 +23,8 @@ public class PageGestorCheques extends PageObjTM {
 	public enum ButtonsCheque implements ElementPage {
 		editar("//input[@value='EDITAR']"),
 		modificar("//input[@value='Modificar']"),
-		add("//input[@value='Añadir']"),
-		desactivar("//input[@value='Desactivar']"),
+		//add("//input[@value='Añadir']"),
+		//desactivar("//input[@value='Desactivar']"),
 		reenviar("//input[@value='Reenviar']"),
 		idPedido("//input[@value[contains(.,'pedido')]]"),
 		numCheque("//input[@value[contains(.,'Número')]]"),

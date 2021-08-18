@@ -175,7 +175,7 @@ public class FichaProducto {
         Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(
         	dCtxSh.appE, KeyMenu1rstLevel.from(
         		LineaType.nina, 
-        		SublineaNinosType.teen_nina, "pantalones"));
+        		SublineaNinosType.nina_teen, "pantalones"));
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh);
 

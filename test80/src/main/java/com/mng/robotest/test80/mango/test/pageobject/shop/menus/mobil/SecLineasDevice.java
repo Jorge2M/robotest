@@ -54,12 +54,14 @@ public abstract class SecLineasDevice extends PageObjTM {
 		case nina:
 			return getXPathCapaMenus() + XPathLinkSublineaNina;
 		case teen_nina:
+		case nina_teen:
 			return getXPathCapaMenus() + XPathLinkSublineaTeenNina;
 		case bebe_nina:
 			return getXPathCapaMenus() + XPathLinkSublineaBebeNina;
 		case nino:
 			return getXPathCapaMenus() + XPathLinkSublineaNino;
 		case teen_nino:
+		case nino_teen:
 			return getXPathCapaMenus() + XPathLinkSublineaTeenNino;
 		case bebe_nino:
 		default:

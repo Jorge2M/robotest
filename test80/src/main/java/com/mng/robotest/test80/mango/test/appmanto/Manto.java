@@ -82,6 +82,7 @@ public class Manto {
     }
 
 	@Test(
+		enabled=false, //El menú "Consultar tiendas" ha desaparecido
 		dependsOnMethods = { "MAN000_GenerarPedidoFicticioMANTO" },
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Consulta de varios una tienda existente y otra no existente")
@@ -169,6 +170,7 @@ public class Manto {
 	}
 	
 	@Test(
+		enabled=false, //La operativa siempre falla en pre por timeout
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Consulta de estadísticas de pedidos")
 	public void MAN005_GestorEstadisticasPedidos() throws Exception {
@@ -182,6 +184,7 @@ public class Manto {
 	}
 	
 	@Test(
+		enabled=false, //Ha desaparecido el menú de "Gestor de saldos de TPV"
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Gestor de saldos de TPV")
 	public void MAN006_GestorSaldosTPV() throws Exception {

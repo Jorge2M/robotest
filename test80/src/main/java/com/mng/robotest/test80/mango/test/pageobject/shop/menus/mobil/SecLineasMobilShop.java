@@ -11,7 +11,8 @@ public class SecLineasMobilShop extends SecLineasMobil {
 	static String XPathLinkLineaMujer = IniXPathLinkLinea + "='she']";
 	static String XPathLinkLineaHombre = IniXPathLinkLinea + "='he']";
 	static String XPathLinkLineaNina = IniXPathLinkLinea + "='kids']";
-	static String XPathLinkLineaNino =IniXPathLinkLinea + "='kids']";
+	static String XPathLinkLineaNino = IniXPathLinkLinea + "='kids']";
+	static String XPathLinkLineaTeen = IniXPathLinkLinea + "='teen']";
 	static String XPathLinkLineaKids =IniXPathLinkLinea + "='kids']"; //p.e. Bolivia
 	static String XPathLinkLineaVioleta = IniXPathLinkLinea + "='violeta']";
 	static String XPathLinkLineaHome = IniXPathLinkLinea + "='home']";
@@ -31,6 +32,8 @@ public class SecLineasMobilShop extends SecLineasMobil {
 			return XPathLinkLineaNina;
 		case nino: 
 			return XPathLinkLineaNino;
+		case teen:
+			return XPathLinkLineaTeen;
 		case kids: 
 			return XPathLinkLineaKids;
 		case violeta: 

@@ -180,18 +180,18 @@ public class PageGestorChequesStpV extends PageObjTM {
 		validations.add(
 			"Existe el boton para <b>Modificar</b>",
 			state(Present, ButtonsCheque.modificar.getBy()).wait(3).check(), State.Defect);
-		validations.add(
-			"Existe el boton para <b>Añadir</b>",
-			state(Present, ButtonsCheque.add.getBy()).wait(3).check(), State.Defect);
+//		validations.add(
+//			"Existe el boton para <b>Añadir</b>",
+//			state(Present, ButtonsCheque.add.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"Existe el boton para <b>Reenviar</b>",
 			state(Present, ButtonsCheque.reenviar.getBy()).wait(3).check(), State.Defect);
 		validations.add(
 			"Existe el boton para <b>Editar</b>",
 			state(Present, ButtonsCheque.editar.getBy()).wait(3).check(), State.Defect);
-		validations.add(
-			"Existe el boton para <b>Desactivar</b>",
-			state(Present, ButtonsCheque.desactivar.getBy()).wait(3).check(), State.Defect);
+//		validations.add(
+//			"Existe el boton para <b>Desactivar</b>",
+//			state(Present, ButtonsCheque.desactivar.getBy()).wait(3).check(), State.Defect);
 		return validations;
 	}
 
