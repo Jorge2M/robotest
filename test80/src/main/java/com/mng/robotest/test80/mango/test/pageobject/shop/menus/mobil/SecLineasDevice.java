@@ -12,7 +12,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 
 public abstract class SecLineasDevice extends PageObjTM {
@@ -49,21 +49,19 @@ public abstract class SecLineasDevice extends PageObjTM {
 		}
 	}
 	
-	public String getXPathSublineaNinosLink(SublineaNinosType sublineaType) {
+	public String getXPathSublineaNinosLink(SublineaType sublineaType) {
 		switch (sublineaType) {
-		case nina:
+		case nina_nina:
 			return getXPathCapaMenus() + XPathLinkSublineaNina;
 		case teen_nina:
-		case nina_teen:
 			return getXPathCapaMenus() + XPathLinkSublineaTeenNina;
-		case bebe_nina:
+		case nina_bebe:
 			return getXPathCapaMenus() + XPathLinkSublineaBebeNina;
-		case nino:
+		case nino_nino:
 			return getXPathCapaMenus() + XPathLinkSublineaNino;
 		case teen_nino:
-		case nino_teen:
 			return getXPathCapaMenus() + XPathLinkSublineaTeenNino;
-		case bebe_nino:
+		case nino_bebe:
 		default:
 			return getXPathCapaMenus() + XPathLinkSublineaBebeNino;
 		}
@@ -76,7 +74,7 @@ public abstract class SecLineasDevice extends PageObjTM {
 		return XPathCapaMenuLineasMobil;
 	}
 	
-	public void selectLinea(Linea linea, SublineaNinosType sublineaType) {
+	public void selectLinea(Linea linea, SublineaType sublineaType) {
 		if (sublineaType==null) {
 			selectLinea(linea);
 		} else {
@@ -84,7 +82,7 @@ public abstract class SecLineasDevice extends PageObjTM {
 		}
 	}
 	
-	public void selecSublineaNinosIfNotSelected(Linea linea, SublineaNinosType sublineaType) {
+	public void selecSublineaNinosIfNotSelected(Linea linea, SublineaType sublineaType) {
 		selectLinea(linea);
 		if (!isSelectedSublineaNinos(sublineaType)) {
 			By byElem = By.xpath(getXPathSublineaNinosLink(sublineaType));
@@ -118,7 +116,7 @@ public abstract class SecLineasDevice extends PageObjTM {
 		return false;
 	}
 	
-	public boolean isSelectedSublineaNinos(SublineaNinosType sublineaNinosType) {
+	public boolean isSelectedSublineaNinos(SublineaType sublineaNinosType) {
 		String xpathSublineaWithFlagOpen = getXPathSublineaNinosLink(sublineaNinosType);
 		if (app==AppEcom.outlet || channel==Channel.tablet) {
 			xpathSublineaWithFlagOpen+="/..";
@@ -134,22 +132,25 @@ public abstract class SecLineasDevice extends PageObjTM {
 		String xpathBlockSublineas = "";
 		switch (lineaNinosType) {
 		case nina: 
-			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaNinosType.nina);
+			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaType.nina_nina);
+			break;
+		case teen:
+			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaType.teen_nina);
 			break;
 		default:
 		case nino:
-			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaNinosType.nino);
+			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaType.nino_nino);
 			break;
 		}
 		return (state(Visible, By.xpath(xpathBlockSublineas)).check());
 	}
 	
-	private String getXPathLiSublineaNinos(SublineaNinosType sublineaType) {
+	private String getXPathLiSublineaNinos(SublineaType sublineaType) {
 		String xpathLinkSublinea = getXPathSublineaNinosLink(sublineaType);        
 		return (xpathLinkSublinea + "/..");
 	}
 	
-	private String getXPathBlockSublineasNinos(SublineaNinosType sublineaType) {
+	private String getXPathBlockSublineasNinos(SublineaType sublineaType) {
 		String xpathSublineaLi = getXPathLiSublineaNinos(sublineaType);        
 		return (xpathSublineaLi + "/..");
 	}

@@ -246,13 +246,15 @@
 <linea id="he"        		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nina" 	  		 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea id="nino"      		 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea id="violeta"   		 shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -293,13 +295,15 @@
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea id="violeta"   		 shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -346,13 +350,15 @@
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="home"   	 shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -443,13 +449,15 @@
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
     <sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-    <sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="home"   	 shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -505,13 +513,15 @@
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -552,13 +562,15 @@
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -604,13 +616,15 @@
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -654,13 +668,15 @@
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -711,13 +727,15 @@
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -768,13 +786,15 @@
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="home"   	 shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -836,13 +856,15 @@
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -896,13 +918,15 @@
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -964,13 +988,15 @@
 <linea 		  id="he" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="nina_teen" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="nino_teen" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="home"   	 shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1023,13 +1049,15 @@
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="home"   	 shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1137,13 +1165,15 @@
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -1198,13 +1228,15 @@
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -1253,13 +1285,15 @@
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -1304,13 +1338,15 @@
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="home"   	 shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1358,13 +1394,15 @@
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="home"   	 shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1455,13 +1493,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -1506,13 +1546,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -1552,13 +1594,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -1607,13 +1651,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="home"   	 shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1691,13 +1737,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -1770,13 +1818,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -1850,13 +1900,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="home"   	 shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1940,13 +1992,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -2009,13 +2063,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -2069,13 +2125,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="home"   	 shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2126,13 +2184,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -2175,13 +2235,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -2238,13 +2300,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -2283,13 +2347,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -2342,13 +2408,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -2481,13 +2549,15 @@ where
 <linea 		  id="he" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -2547,13 +2617,15 @@ where
 <linea 		  id="he" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -2609,13 +2681,15 @@ where
 <linea 		  id="he" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -2676,13 +2750,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners" contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners" contentMovil="menus2"/>
 <linea 		  id="home"   	 shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2743,13 +2819,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -2816,13 +2894,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -2862,13 +2942,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -2920,13 +3002,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -2975,13 +3059,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -3047,13 +3133,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -3094,13 +3182,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -3192,13 +3282,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -3240,13 +3332,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -3290,13 +3384,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -3341,6 +3437,10 @@ where
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -3379,13 +3479,15 @@ where
 <linea 		  id="she"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -3444,13 +3546,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -3488,13 +3592,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -3537,10 +3643,14 @@ where
 <linea id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3706,13 +3816,15 @@ where
 <linea 		  id="he"        shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="n" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="bebe_nina" shop="n" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="n" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="bebe_nino" shop="n" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -3790,13 +3902,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -3840,13 +3954,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -3889,13 +4005,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -4070,10 +4188,14 @@ where
 <linea id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4176,13 +4298,15 @@ where
 <linea 		  id="he"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -4212,13 +4336,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -4264,13 +4390,15 @@ where
 <linea id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -4391,13 +4519,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -4426,10 +4556,14 @@ where
 <linea id="he"        shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4478,13 +4612,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -4526,11 +4662,14 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4754,13 +4893,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -4798,10 +4939,14 @@ where
 <linea id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4844,13 +4989,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -4923,13 +5070,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -5013,13 +5162,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -5060,13 +5211,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -5135,13 +5288,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -5187,13 +5342,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -5275,13 +5432,15 @@ where
 <linea 	 	  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -5327,13 +5486,15 @@ where
 <linea 		  id="he"        shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -5379,13 +5540,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -5436,12 +5599,16 @@ where
 <linea id="she"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
-    <sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -5533,15 +5700,17 @@ where
 <linea 		  id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
 <linea 		  id="she"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea 		  id="he"        shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea    	  id="nina" 	 shop="n" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
-	<sublinea id="nina" 	 shop="n" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="n" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="bebe_nina" shop="n" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+<linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
-<linea 		  id="nino"      shop="n" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
-	<sublinea id="nino" 	 shop="n" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="n" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="bebe_nino" shop="n" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+<linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -5598,13 +5767,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -5650,13 +5821,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -5704,13 +5877,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -5944,13 +6119,15 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>

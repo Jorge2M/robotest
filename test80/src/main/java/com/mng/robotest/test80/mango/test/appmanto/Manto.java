@@ -81,27 +81,27 @@ public class Manto {
     	this.dPedidoPrueba = PagePedidosMantoStpV.getTiendaFisicaListaPedidos(dPedidoPrueba, driver);
     }
 
-	@Test(
-		enabled=false, //El menú "Consultar tiendas" ha desaparecido
-		dependsOnMethods = { "MAN000_GenerarPedidoFicticioMANTO" },
-		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
-		description="Consulta de varios una tienda existente y otra no existente")
-	public void MAN001_ConsultaTiendas() throws Exception {
-    	setDataMantoAccess();
-		WebDriver driver = TestMaker.getDriverTestCase();
-		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
-		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
-		PageMenusMantoStpV.goToConsultarTiendas(driver);
-
-		String tiendaNoExistente = "423";
-		PageConsultaTiendaStpV.consultaTiendaInexistente(tiendaNoExistente, driver);
-		String tiendaExistente = dPedidoPrueba.getDataDeliveryPoint().getCodigo();
-		if (this.dPedidoPrueba.getDataDeliveryPoint().getCodigo() == null) {
-			tiendaExistente = "7543";
-		}
-			
-		PageConsultaTiendaStpV.consultaTiendaExistente(tiendaExistente, driver);
-	}
+//	@Test(
+//		enabled=false, //El menú "Consultar tiendas" ha desaparecido
+//		dependsOnMethods = { "MAN000_GenerarPedidoFicticioMANTO" },
+//		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
+//		description="Consulta de varios una tienda existente y otra no existente")
+//	public void MAN001_ConsultaTiendas() throws Exception {
+//    	setDataMantoAccess();
+//		WebDriver driver = TestMaker.getDriverTestCase();
+//		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
+//		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
+//		PageMenusMantoStpV.goToConsultarTiendas(driver);
+//
+//		String tiendaNoExistente = "423";
+//		PageConsultaTiendaStpV.consultaTiendaInexistente(tiendaNoExistente, driver);
+//		String tiendaExistente = dPedidoPrueba.getDataDeliveryPoint().getCodigo();
+//		if (this.dPedidoPrueba.getDataDeliveryPoint().getCodigo() == null) {
+//			tiendaExistente = "7543";
+//		}
+//			
+//		PageConsultaTiendaStpV.consultaTiendaExistente(tiendaExistente, driver);
+//	}
 
 
 	@Test(
@@ -183,23 +183,23 @@ public class Manto {
 		PageGestorEstadisticasPedidoStpV.compareLastDayInformation(driver);
 	}
 	
-	@Test(
-		enabled=false, //Ha desaparecido el menú de "Gestor de saldos de TPV"
-		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
-		description="Gestor de saldos de TPV")
-	public void MAN006_GestorSaldosTPV() throws Exception {
-		setDataMantoAccess();
-		WebDriver driver = TestMaker.getDriverTestCase();
-		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
-		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
-		PageMenusMantoStpV.goToGestorSaldosTPV(driver);
-	
-		this.tpv = "600";
-		PageGestorSaldosTPVStpV.searchValidTPV(this.tpv, driver);
-		
-		this.tpv = "4238";
-		PageGestorSaldosTPVStpV.searchUnvalidTPV(this.tpv, driver);
-	}
+//	@Test(
+//		enabled=false, //Ha desaparecido el menú de "Gestor de saldos de TPV"
+//		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
+//		description="Gestor de saldos de TPV")
+//	public void MAN006_GestorSaldosTPV() throws Exception {
+//		setDataMantoAccess();
+//		WebDriver driver = TestMaker.getDriverTestCase();
+//		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
+//		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
+//		PageMenusMantoStpV.goToGestorSaldosTPV(driver);
+//	
+//		this.tpv = "600";
+//		PageGestorSaldosTPVStpV.searchValidTPV(this.tpv, driver);
+//		
+//		this.tpv = "4238";
+//		PageGestorSaldosTPVStpV.searchUnvalidTPV(this.tpv, driver);
+//	}
 	
 	@Test(
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 

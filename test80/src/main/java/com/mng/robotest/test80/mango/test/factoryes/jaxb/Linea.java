@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaType;
 
 
 public class Linea implements Serializable {
@@ -243,7 +243,7 @@ public class Linea implements Serializable {
     	return sublineasApp;
     }
     
-    public Sublinea getSublineaNinos(SublineaNinosType sublineaType) {
+    public Sublinea getSublineaNinos(SublineaType sublineaType) {
         Sublinea sublineaRet = null;
         boolean encontrada = false;
         Iterator<Sublinea> it = getListSublineas().iterator();

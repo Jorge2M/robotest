@@ -90,53 +90,31 @@ public class ConsolaVotfStpV {
 	public static boolean consultarDispEnvDomic(String articulo, WebDriver driver) {
 		PageConsola.inputArticDispYCompra(driver, articulo);
 		PageConsola.clickButtonConsultarDispEnvioDomicilio(driver);
-		return checkAfterClickConsultDispEnvioDomicilio(driver);
-	}
-	
-	private static boolean checkAfterClickConsultDispEnvioDomicilio(WebDriver driver) {
-		String codsTransporte = checkCodTransporteWithData(driver).getData();
-		if ("".compareTo(codsTransporte)!=0) {
-			checkPetResultadoAfterClickConsEnvioDomic(codsTransporte, driver);
-			return true;
-		}
-		return false;
+		return checkAfterClickConsultDispEnvioDomicilio(driver).areAllChecksOvercomed();
 	}
 	
 	@Validation
-	private static ChecksResultWithStringData checkCodTransporteWithData(WebDriver driver) {
-		ChecksResultWithStringData validations = ChecksResultWithStringData.getNew();
-		int maxSeconds = 10;
-		boolean isDataSelectCodigoTrasnp = PageConsola.isDataSelectCodigoTransporte(maxSeconds, driver);
-	 	validations.add(
-			"En el desplegable \"Código de Transporte\" aparecen datos (lo esperamos hasta " + maxSeconds + " segundos)",
-			isDataSelectCodigoTrasnp, State.Warn);
-		String codigosTransporte = "";
-		if (isDataSelectCodigoTrasnp) {
-			codigosTransporte = PageConsola.getCodigoTransporte(driver);
-		}
-		validations.setData(codigosTransporte);
-		return validations;
-	}
-	
-	@Validation
-	private static ChecksTM checkPetResultadoAfterClickConsEnvioDomic(String codsTransporte, WebDriver driver) {
-		ChecksResultWithStringData validations = ChecksResultWithStringData.getNew();
+	private static ChecksTM checkAfterClickConsultDispEnvioDomicilio(WebDriver driver) {
+		ChecksTM validations = ChecksResultWithStringData.getNew();
 		String paginaPadre = driver.getWindowHandle();
 		try {
 			PageConsola.switchToResultIFrame(driver);
 			validations.add(
-				"En el bloque de \"Petición/Resultado\" aparece una tabla \"transportes__content\"",
+				"En el bloque de \"Petición/Resultado\" aparece una tabla \"Transportes\"",
 				IframeResult.existsTransportes(driver), State.Defect);
+			validations.add(
+				"En el bloque de \"Petición/Resultado\" aparece una tabla \"Disponibilidad\"",
+				IframeResult.existsDisponibilidad(driver), State.Defect);
 		 	validations.add(
-				"En la tabla figuran los tipos " + codsTransporte.replace("\n", ","),
-				IframeResult.transportesContainsTipos(driver, codsTransporte), State.Defect);
+				"En la tabla \"Disponibilidad\" figura el campo <b>Disponible=true</b>",
+				IframeResult.flagDisponibleIsTrue(driver), State.Defect);
 		}
 		finally {
 			driver.switchTo().window(paginaPadre);
 		}
 		return validations;
 	}
-
+	
 	@Step (
 		description="Introducimos el artículo #{articulo} (a nivel de  artículo disponible y de compra) + Seleccionar el botón \"Consultar Disponibilidad Envío Tienda\"",
 		expected="Aparece el bloque de transportes y el tipo de stock",

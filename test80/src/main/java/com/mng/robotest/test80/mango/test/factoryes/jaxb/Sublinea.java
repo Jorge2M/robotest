@@ -5,20 +5,18 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 public class Sublinea extends Linea {
 
-    public static enum SublineaNinosType { 
+    public static enum SublineaType { 
     	teen_nina("teenA", "teenA", LineaType.teen),
-    	nina_teen("teenA", "teenA", LineaType.nina),
-    	nina("nina", "outletA", LineaType.nina), 
-    	bebe_nina("babyNina", "outletBA", LineaType.nina),
     	teen_nino("teenO", "teenO", LineaType.teen),
-    	nino_teen("teenO", "teenO", LineaType.nino),
-    	nino("nino", "outletO", LineaType.nino), 
-    	bebe_nino("babyNino", "outletBO", LineaType.nino); 
+    	nina_nina("nina", "outletA", LineaType.nina), 
+    	nina_bebe("babyNina", "outletBA", LineaType.nina),
+    	nino_nino("nino", "outletO", LineaType.nino), 
+    	nino_bebe("babyNino", "outletBO", LineaType.nino); 
     	
     	String idShop = "";
     	String idOutlet = "";
     	LineaType parentLine;
-    	private SublineaNinosType(String idShop, String idOutlet, LineaType parentLine) {
+    	private SublineaType(String idShop, String idOutlet, LineaType parentLine) {
     		this.idShop = idShop;
     		this.idOutlet = idOutlet;
     		this.parentLine = parentLine;
@@ -42,12 +40,12 @@ public class Sublinea extends Linea {
     	}
     }
     
-    public SublineaNinosType getTypeSublinea() {
-        return (SublineaNinosType.valueOf(super.getId()));
+    public SublineaType getTypeSublinea() {
+        return (SublineaType.valueOf(super.getId()));
     }
         
     @Override
-    public Sublinea getSublineaNinos(SublineaNinosType sublineaType) {
+    public Sublinea getSublineaNinos(SublineaType sublineaType) {
         return null;
     }
     

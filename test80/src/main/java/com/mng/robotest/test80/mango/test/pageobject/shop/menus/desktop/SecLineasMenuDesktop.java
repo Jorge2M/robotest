@@ -13,7 +13,7 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaType;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
@@ -70,17 +70,15 @@ public class SecLineasMenuDesktop extends PageObjTM {
         return (xpathLinea + "/a");
     }
 
-    public String getXPathImgSublinea(LineaType lineaId, SublineaNinosType sublineaType) {
-    	if (sublineaType==SublineaNinosType.teen_nina ||
-    		sublineaType==SublineaNinosType.teen_nino ||
-    		sublineaType==SublineaNinosType.nina_teen ||
-    		sublineaType==SublineaNinosType.nino_teen) {
+    public String getXPathImgSublinea(LineaType lineaId, SublineaType sublineaType) {
+    	if (sublineaType==SublineaType.teen_nina ||
+    		sublineaType==SublineaType.teen_nino) {
     		return XPathImagesSublineaWithTags.replace(TagIdLinea, "interior-teen").replace(TagIdSublinea, "interior-teen");
     	}
     	return XPathImagesSublineaWithTags.replace(TagIdLinea, lineaId.name()).replace(TagIdSublinea, sublineaType.toString());
     }
     
-    public String getXPathSublineaLink(SublineaNinosType sublineaType) {
+    public String getXPathSublineaLink(SublineaType sublineaType) {
         String idSublineaEnDom = sublineaType.getId(app);
     	return (XPathSublineaLinkWithTag.replace(TagIdSublinea, idSublineaEnDom));
     }
@@ -159,12 +157,12 @@ public class SecLineasMenuDesktop extends PageObjTM {
     	);
     }
 
-    public boolean isVisibleImgSublineaUntil(LineaType lineaType, SublineaNinosType sublineaType, int maxSeconds) {
+    public boolean isVisibleImgSublineaUntil(LineaType lineaType, SublineaType sublineaType, int maxSeconds) {
     	String xpathImg = getXPathImgSublinea(lineaType, sublineaType);
     	return (state(Visible, By.xpath(xpathImg)).wait(maxSeconds).check());
     }
 
-	public void clickImgSublineaIfVisible(LineaType lineaType, SublineaNinosType sublineaType) {
+	public void clickImgSublineaIfVisible(LineaType lineaType, SublineaType sublineaType) {
 		int maxSecondsToWait = 1;
 		if (isVisibleImgSublineaUntil(lineaType, sublineaType, maxSecondsToWait)) {
 			String xpathImg = getXPathImgSublinea(lineaType, sublineaType);
@@ -173,7 +171,7 @@ public class SecLineasMenuDesktop extends PageObjTM {
 		}
 	}
 
-    public void hoverLineaAndWaitForMenus(LineaType lineaType, SublineaNinosType sublineaType) {
+    public void hoverLineaAndWaitForMenus(LineaType lineaType, SublineaType sublineaType) {
     	//Existe un problema aleatorio en Firefox que provoca que el Hover sobre la línea (mientras se está cargando la galería) 
     	//ejecute realmente un hover contra la línea de la izquerda
     	boolean isCapaMenusVisible = false;
@@ -191,7 +189,7 @@ public class SecLineasMenuDesktop extends PageObjTM {
     	while (!isCapaMenusVisible && i<2);
     }
     
-    public void hoverLinea(LineaType lineaType, SublineaNinosType sublineaType) {
+    public void hoverLinea(LineaType lineaType, SublineaType sublineaType) {
     	if (sublineaType==null) {
     		hoverLinea(lineaType);
     	} else {
@@ -206,7 +204,7 @@ public class SecLineasMenuDesktop extends PageObjTM {
         moveToElement(By.xpath(xpathLinkLinea), driver);
     }
 
-    public void selectSublinea(LineaType lineaType, SublineaNinosType sublineaType) {
+    public void selectSublinea(LineaType lineaType, SublineaType sublineaType) {
     	hoverLinea(lineaType);
        	clickImgSublineaIfVisible(lineaType, sublineaType);
         String xpathLinkSublinea = getXPathSublineaLink(sublineaType);

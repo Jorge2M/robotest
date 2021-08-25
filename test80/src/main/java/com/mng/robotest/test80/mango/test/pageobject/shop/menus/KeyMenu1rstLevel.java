@@ -3,25 +3,25 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.menus;
 import java.util.Objects;
 
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.utils.checkmenus.DataScreenMenu;
 
 public class KeyMenu1rstLevel {
     final LineaType lineaType;
-    final SublineaNinosType sublineaType;
+    final SublineaType sublineaType;
     DataScreenMenu dataMenu;
     
-    private KeyMenu1rstLevel(LineaType lineaType, SublineaNinosType sublineaType, DataScreenMenu dataMenu) {
+    private KeyMenu1rstLevel(LineaType lineaType, SublineaType sublineaType, DataScreenMenu dataMenu) {
     	this.lineaType = lineaType;
     	this.sublineaType = sublineaType;
     	this.dataMenu = dataMenu;
     }
     
-    public static KeyMenu1rstLevel from(LineaType lineaType, SublineaNinosType sublineaType, DataScreenMenu dataMenu) {
+    public static KeyMenu1rstLevel from(LineaType lineaType, SublineaType sublineaType, DataScreenMenu dataMenu) {
     	return new KeyMenu1rstLevel(lineaType, sublineaType, dataMenu);
     }
     
-    public static KeyMenu1rstLevel from(LineaType lineaType, SublineaNinosType sublineaType, String nombreMenu) {
+    public static KeyMenu1rstLevel from(LineaType lineaType, SublineaType sublineaType, String nombreMenu) {
     	DataScreenMenu dataMenu = DataScreenMenu.getNew(nombreMenu);
     	return new KeyMenu1rstLevel(lineaType, sublineaType, dataMenu);
     }

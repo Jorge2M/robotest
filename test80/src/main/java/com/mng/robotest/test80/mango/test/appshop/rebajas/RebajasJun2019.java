@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollection;
@@ -131,7 +131,7 @@ public class RebajasJun2019 implements Serializable {
 	private void validaLinea(boolean salesOnInCountry, Linea linea, Sublinea sublinea, boolean areBanners, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
         LineaType lineaType = linea.getType();
-        SublineaNinosType sublineaType = null;
+        SublineaType sublineaType = null;
         if (sublinea!=null) {
             sublineaType = sublinea.getTypeSublinea();
         }
@@ -190,8 +190,8 @@ public class RebajasJun2019 implements Serializable {
         }
     }
     
-    private String getDataGaLabelNuevaTemporada(String codigoPais, SublineaNinosType sublineaType) {
-        if ("075".compareTo(codigoPais)==0 && sublineaType==SublineaNinosType.nino) {
+    private String getDataGaLabelNuevaTemporada(String codigoPais, SublineaType sublineaType) {
+        if ("075".compareTo(codigoPais)==0 && sublineaType==SublineaType.nino_nino) {
         	return ("nueva_coleccion");
         }
         return "nueva_temporada";

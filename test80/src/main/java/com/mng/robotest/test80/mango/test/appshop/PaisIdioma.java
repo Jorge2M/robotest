@@ -12,7 +12,7 @@ import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.TypeContentDesk;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
@@ -107,7 +107,7 @@ public class PaisIdioma implements Serializable {
 	@SuppressWarnings("static-access")
 	private void validaLinea(Linea linea, Sublinea sublinea, WebDriver driver) throws Exception {
         LineaType lineaType = linea.getType();
-        SublineaNinosType sublineaType = null;
+        SublineaType sublineaType = null;
         if (sublinea!=null) {
             sublineaType = sublinea.getTypeSublinea();
         }
@@ -145,7 +145,7 @@ public class PaisIdioma implements Serializable {
         }
     }
 	
-	private Menu1rstLevel getMenu(LineaType lineaType, SublineaNinosType sublineaType) {
+	private Menu1rstLevel getMenu(LineaType lineaType, SublineaType sublineaType) {
 		String menu = "";
 		switch (lineaType) {
 		case nina:

@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticle;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
@@ -246,7 +246,7 @@ public class RebajasSpringIsHere2019 {
 	private void validaLinea(Linea linea, Sublinea sublinea, boolean areBanners, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
         LineaType lineaType = linea.getType();
-        SublineaNinosType sublineaType = null;
+        SublineaType sublineaType = null;
         if (sublinea!=null) {
             sublineaType = sublinea.getTypeSublinea();
         }
@@ -268,7 +268,7 @@ public class RebajasSpringIsHere2019 {
         }
     }
 
-    private void checkMenuLateralSpringPromotion(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, WebDriver driver) 
+    private void checkMenuLateralSpringPromotion(LineaType lineaType, SublineaType sublineaType, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
         Menu1rstLevel menuSpringPromotion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "Spring Promotion"));
         menuSpringPromotion.setDataGaLabel("promos-spring_promotion");
@@ -277,7 +277,7 @@ public class RebajasSpringIsHere2019 {
         checkGaleryOfArticlesInPromotion(dCtxSh, driver);
     }
     
-    private void checkMenuSuperiorPantalones(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, WebDriver driver) 
+    private void checkMenuSuperiorPantalones(LineaType lineaType, SublineaType sublineaType, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
     	Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "pantalones"));
     	SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);

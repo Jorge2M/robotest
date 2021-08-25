@@ -19,7 +19,7 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.generic.stackTrace;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
@@ -346,11 +346,11 @@ public class SecMenusDesktopStpV {
     		"<b style=\"color:brown;\">\"#{lineaType.name()} / #{sublineaType.getNameUpper()}</b>",
         expected=
     		"Aparece la página correcta asociada a la línea/sublínea")
-    public void seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
+    public void seleccionSublinea(LineaType lineaType, SublineaType sublineaType) throws Exception {
         validaSelecLinea(lineaType, sublineaType);
     }    
     
-    public void validaSelecLinea(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
+    public void validaSelecLinea(LineaType lineaType, SublineaType sublineaType) throws Exception {
     	SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(pais, Channel.desktop, app, driver);
         if (sublineaType==null) {
             validateIsLineaSelected(lineaType);
@@ -391,7 +391,7 @@ public class SecMenusDesktopStpV {
     @Step (
     	description="Contamos el número de pestañas y menús de #{lineaType} / #{sublineaType}",
         expected="El número de pestañas/menús coincide con el del nodo anterior")
-    public void countSaveMenusEntorno(LineaType lineaType, SublineaNinosType sublineaType, String inodo, String urlBase) 
+    public void countSaveMenusEntorno(LineaType lineaType, SublineaType sublineaType, String inodo, String urlBase) 
     throws Exception {
     	int numPestanyas = secMenus.secMenuSuperior.secLineas.getListaLineas().size();
         int numMenus = secMenus.secMenuSuperior.secBlockMenus.getListMenusLinea(lineaType, sublineaType).size();
@@ -400,7 +400,7 @@ public class SecMenusDesktopStpV {
     
     @Validation
     private ChecksTM checkNumPestanyasYmenusEqualsInBothNodes(
-    		int numPestanyas, int numMenus, LineaType lineaType, SublineaNinosType sublineaType, String inodo, String urlBase) {
+    		int numPestanyas, int numMenus, LineaType lineaType, SublineaType sublineaType, String inodo, String urlBase) {
     	
     	ChecksTM validations = ChecksTM.getNew();
         String clave = lineaType.name();
@@ -437,7 +437,7 @@ public class SecMenusDesktopStpV {
     @Step (
     	description="Seleccionar el banner existente a la derecha de los menús", 
         expected="Aparece una página con banners o artículos")
-    public void clickRightBanner(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
+    public void clickRightBanner(LineaType lineaType, SublineaType sublineaType) throws Exception {
     	secMenus.secMenuSuperior.secBlockMenus.clickRightBanner(lineaType, sublineaType);
         checkAreValidMangoObjectsInPage();
     }

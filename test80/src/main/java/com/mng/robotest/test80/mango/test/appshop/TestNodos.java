@@ -18,7 +18,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
@@ -120,10 +120,10 @@ public class TestNodos implements Serializable {
 		
         secMenusStpV.seleccionLinea(LineaType.he, null, dCtxSh);
         secMenusDesktopStpV.countSaveMenusEntorno (LineaType.he, null, nodo.getIp(), autAddr);
-        secMenusStpV.seleccionLinea(LineaType.nina, SublineaNinosType.nina, dCtxSh);	
-        secMenusDesktopStpV.countSaveMenusEntorno(LineaType.nina, SublineaNinosType.nina, nodo.getIp(), autAddr);
-        secMenusStpV.seleccionLinea(LineaType.nino, SublineaNinosType.bebe_nino, dCtxSh);     
-        secMenusDesktopStpV.countSaveMenusEntorno(LineaType.nino, SublineaNinosType.bebe_nino, nodo.getIp(), autAddr);
+        secMenusStpV.seleccionLinea(LineaType.nina, SublineaType.nina_nina, dCtxSh);	
+        secMenusDesktopStpV.countSaveMenusEntorno(LineaType.nina, SublineaType.nina_nina, nodo.getIp(), autAddr);
+        secMenusStpV.seleccionLinea(LineaType.nino, SublineaType.nino_bebe, dCtxSh);     
+        secMenusDesktopStpV.countSaveMenusEntorno(LineaType.nino, SublineaType.nino_bebe, nodo.getIp(), autAddr);
         
         this.nodo.setTested(true);
     }

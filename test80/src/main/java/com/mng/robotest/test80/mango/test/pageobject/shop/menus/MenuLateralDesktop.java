@@ -5,12 +5,12 @@ import java.util.Arrays;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaType;
 
 public interface MenuLateralDesktop {
 	abstract public AppEcom getApp();
 	abstract public LineaType getLinea();
-	abstract SublineaNinosType getSublinea();
+	abstract SublineaType getSublinea();
 	abstract String getNombre();
 	abstract String getDataGaLabelMenuLateralDesktop();
 	abstract String getDataGaLabelMenuSuperiorDesktop();

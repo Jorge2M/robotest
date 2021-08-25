@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaType;
 
 
 public class Menu2onLevel implements MenuLateralDesktop {
@@ -46,7 +46,7 @@ public class Menu2onLevel implements MenuLateralDesktop {
     }
     
     @Override
-    public SublineaNinosType getSublinea() {
+    public SublineaType getSublinea() {
     	return this.key.menu1rstLevel.getSublinea();
     }
     

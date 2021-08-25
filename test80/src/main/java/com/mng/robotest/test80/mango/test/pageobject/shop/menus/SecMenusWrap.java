@@ -13,7 +13,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralDevice;
@@ -93,7 +93,7 @@ public class SecMenusWrap {
 		secMenusUser.clickMenuIfInState(UserMenu.cerrarSesion, State.Clickable);
     }
     
-    public List<DataScreenMenu> getListDataScreenMenus(Linea linea, SublineaNinosType sublineaType) throws Exception {
+    public List<DataScreenMenu> getListDataScreenMenus(Linea linea, SublineaType sublineaType) throws Exception {
         if (channel.isDevice()) {
             return secMenuLateralDevice.getListDataScreenMenus(linea, sublineaType);
         }
@@ -126,7 +126,7 @@ public class SecMenusWrap {
         }
     }
     
-    public void selecSublinea(Pais pais, LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
+    public void selecSublinea(Pais pais, LineaType lineaType, SublineaType sublineaType) throws Exception {
         if (channel.isDevice()) {
         	secMenuLateralDevice.getSecLineasDevice().selectLinea(pais.getShoponline().getLinea(lineaType), sublineaType);
         } else {

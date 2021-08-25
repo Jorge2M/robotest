@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.TypeContentMobil;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.ManagerBannersScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.landing.PageLanding;
@@ -97,7 +97,7 @@ public class SecMenuLateralMobilStpV {
     		"Seleccionar la línea / <b style=\"color:chocolate\">Sublínea</b> " + 
     		"<b style=\"color:brown;\">#{lineaType.name()} / #{sublineaType.getNameUpper()}</b>",
         expected="Aparece la página correcta asociada a la línea/sublínea")
-    public void seleccionSublineaNinos(LineaType lineaType, SublineaNinosType sublineaType, Pais pais) throws Exception {
+    public void seleccionSublineaNinos(LineaType lineaType, SublineaType sublineaType, Pais pais) throws Exception {
     	secMenuLateral
     		.getSecLineasDevice()
     		.selecSublineaNinosIfNotSelected(pais.getShoponline().getLinea(lineaType), sublineaType);
@@ -107,7 +107,7 @@ public class SecMenuLateralMobilStpV {
     /**
      * Validamos el resultado esperado después de seleccionar una línea (she, he, kids...) en Móbil
      */
-    public void validaSelecLinea(Pais pais, LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
+    public void validaSelecLinea(Pais pais, LineaType lineaType, SublineaType sublineaType) throws Exception {
         Linea linea = pais.getShoponline().getLinea(lineaType);
         TypeContentMobil typeContent = linea.getContentMobilType();
         if (sublineaType!=null) {
@@ -144,7 +144,7 @@ public class SecMenuLateralMobilStpV {
     }
     
     @Validation
-    public ChecksTM validaSelecLineaWithMenus2onLevelAssociated(LineaType lineaType, SublineaNinosType sublineaType) {
+    public ChecksTM validaSelecLineaWithMenus2onLevelAssociated(LineaType lineaType, SublineaType sublineaType) {
     	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Está seleccionada la línea <b>" + lineaType + "</b>",

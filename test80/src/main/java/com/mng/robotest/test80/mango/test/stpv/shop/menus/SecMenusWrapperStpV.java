@@ -21,7 +21,7 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
@@ -156,7 +156,7 @@ public class SecMenusWrapperStpV {
     /**
      * Recorre todos los menús existentes en la página y crea un step por cada uno de ellos
      */
-    public void stepsMenusLinea(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
+    public void stepsMenusLinea(LineaType lineaType, SublineaType sublineaType) throws Exception {
         String paginaLinea = driver.getCurrentUrl();
         List<DataScreenMenu> listMenusLabel = getListMenus(lineaType, sublineaType);
         for (int i=0; i<listMenusLabel.size(); i++) {
@@ -174,7 +174,7 @@ public class SecMenusWrapperStpV {
         }
     }
     
-    private List<DataScreenMenu> getListMenus(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
+    private List<DataScreenMenu> getListMenus(LineaType lineaType, SublineaType sublineaType) throws Exception {
         Linea linea = pais.getShoponline().getLinea(lineaType);
         List<DataScreenMenu> listMenus = secMenusWrap.getListDataScreenMenus(linea, sublineaType);
         List<DataScreenMenu> listWithoutDuplicates = listMenus.stream()
@@ -244,7 +244,7 @@ public class SecMenusWrapperStpV {
         }
     }
     
-    public void seleccionLinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh) throws Exception {
+    public void seleccionLinea(LineaType lineaType, SublineaType sublineaType, DataCtxShop dCtxSh) throws Exception {
         if (sublineaType==null) {
             seleccionLinea(lineaType);
         } else {
@@ -260,7 +260,7 @@ public class SecMenusWrapperStpV {
         }
     }
     
-    public void seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh)
+    public void seleccionSublinea(LineaType lineaType, SublineaType sublineaType, DataCtxShop dCtxSh)
     throws Exception {
         if (dCtxSh.channel.isDevice()) {
             secMenuLateralMobilStpV.seleccionSublineaNinos(lineaType, sublineaType, pais);

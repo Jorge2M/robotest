@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaType;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -54,7 +54,7 @@ public class SecMenuLateralDevice extends PageObjTM {
 		return secUserMenu;
 	}
 	
-	private String getXPathLinksMenus(SublineaNinosType sublineaType) {
+	private String getXPathLinksMenus(SublineaType sublineaType) {
 		if (sublineaType==null) {
 			return XPathCapa2onLevelMenu + XPathLinkMenuVisibleFromLi;
 		}
@@ -73,17 +73,17 @@ public class SecMenuLateralDevice extends PageObjTM {
 		}
 	}
 
-	public boolean isMenus2onLevelDisplayed(SublineaNinosType sublineaType) {
+	public boolean isMenus2onLevelDisplayed(SublineaType sublineaType) {
 		List<WebElement> listMenus = getListMenusDisplayed(sublineaType);
 		return (listMenus!=null && listMenus.size()>0);
 	}
 
-	public List<WebElement> getListMenusAfterSelectLinea(Linea linea, SublineaNinosType sublineaType) throws Exception {
+	public List<WebElement> getListMenusAfterSelectLinea(Linea linea, SublineaType sublineaType) throws Exception {
 		secLineasDevice.selectLinea(linea, sublineaType);
 		return (getListMenusDisplayed(sublineaType));
 	}
 
-	private List<WebElement> getListMenusDisplayed(SublineaNinosType sublineaType) {
+	private List<WebElement> getListMenusDisplayed(SublineaType sublineaType) {
 		String xpath2oLevelMenuLink = getXPathLinksMenus(sublineaType);
 		if (app==AppEcom.outlet) {
 			return (getElementsVisible(driver, By.xpath(xpath2oLevelMenuLink)));
@@ -92,7 +92,7 @@ public class SecMenuLateralDevice extends PageObjTM {
 		}
 	}
 
-	public List<DataScreenMenu> getListDataScreenMenus(Linea linea, SublineaNinosType sublineaType) throws Exception {
+	public List<DataScreenMenu> getListDataScreenMenus(Linea linea, SublineaType sublineaType) throws Exception {
 		List<DataScreenMenu> listDataMenus = new ArrayList<>();
 		List<WebElement> listMenus = getListMenusAfterSelectLinea(linea, sublineaType);
 		for (int i=0; i<listMenus.size(); i++) {

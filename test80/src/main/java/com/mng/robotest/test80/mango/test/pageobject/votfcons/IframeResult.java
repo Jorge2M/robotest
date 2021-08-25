@@ -20,6 +20,8 @@ public class IframeResult {
 	
     private static final String XPathBlockResultado = "//*[@class[contains(.,'response__content')]]";
     private static final String XPathBlockTransportes = "//div[@class[contains(.,'transportes__content')]]";
+    private static final String XPathBlockDisponibilidad = "//div[@class[contains(.,'articulos__content')]]";
+    private static final String XPathCampoDisponible = XPathBlockDisponibilidad + "//tr[@class]/td[2]";
     private static final String XPathLintTipoStock = "//div[@class[contains(.,'masinfo')]]/span[text()[contains(.,'TipoStock: (')]]";
     
     //xpath correspondiente al bloque del resultado del pedido que aparece al seleccionar el botón "Realizar Solicitud A Tienda" o "A Domicilio"
@@ -44,6 +46,17 @@ public class IframeResult {
     public static boolean existsTransportes(WebDriver driver) {
     	return (state(Present, By.xpath(XPathBlockTransportes), driver).check());
     }    
+    
+    public static boolean existsDisponibilidad(WebDriver driver) {
+    	return (state(Present, By.xpath(XPathBlockDisponibilidad), driver).check());
+    }    
+    
+    public static boolean flagDisponibleIsTrue(WebDriver driver) {
+    	if (state(Present, By.xpath(XPathCampoDisponible), driver).check()) {
+    		return ("true".compareTo(driver.findElement(By.xpath(XPathCampoDisponible)).getText())==0);
+    	}
+    	return false;
+    }
     
     public static boolean transportesContainsTipos(WebDriver driver, String codigosTransporte) {
         boolean contains = true;

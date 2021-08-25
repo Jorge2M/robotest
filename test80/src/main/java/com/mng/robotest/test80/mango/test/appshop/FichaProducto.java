@@ -9,7 +9,7 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
@@ -175,7 +175,7 @@ public class FichaProducto {
         Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(
         	dCtxSh.appE, KeyMenu1rstLevel.from(
         		LineaType.nina, 
-        		SublineaNinosType.nina_teen, "pantalones"));
+        		SublineaType.teen_nina, "pantalones"));
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh);
 
