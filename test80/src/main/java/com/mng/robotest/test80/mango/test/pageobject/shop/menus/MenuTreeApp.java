@@ -119,7 +119,7 @@ public class MenuTreeApp {
 	    );
 	    menu1rstLeveCamisas.addMenu2onLevel(Menu2onLevel.from(menu1rstLeveCamisas, "camisas", "".split(",")));
 	    menu1rstLeveCamisas.addMenu2onLevel(Menu2onLevel.from(menu1rstLeveCamisas, "blusas", "".split(",")));
-	    menu1rstLeveCamisas.addMenu2onLevel(Menu2onLevel.from(menu1rstLeveCamisas, "tops", "Camisa,Blusa,Top".split(",")));
+	    menu1rstLeveCamisas.addMenu2onLevel(Menu2onLevel.from(menu1rstLeveCamisas, "básicas", "Camisa,Blusa,Top".split(",")));
 	    libraryMenusFirstLevel.add(menu1rstLeveCamisas);
     }
     

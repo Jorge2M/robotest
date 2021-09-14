@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,6 +25,10 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
+import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.SecFiltrosDesktop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.SecFiltrosDesktop.Visibility;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 
 /**getArticuloConVariedadColoresAndHover
@@ -733,6 +738,20 @@ public class PageGaleriaDesktop extends PageGaleria {
         
         return listArtFav;
     }
+    
+	public void clickHearthIcon(WebElement hearthIcon) throws Exception {
+		moveToElement(hearthIcon, driver);
+		state(Clickable, hearthIcon).wait(1).check();
+		try {
+			hearthIcon.click();
+		} 
+		catch (ElementClickInterceptedException e) {
+			SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(channel, app, driver);
+			secFiltros.makeFilters(Visibility.Invisible);
+			hearthIcon.click();
+			secFiltros.makeFilters(Visibility.Visible);
+		}
+	}
     
     @Override
     public boolean isArticleWithHearthIconPresentUntil(int posArticle, int maxSeconds) {

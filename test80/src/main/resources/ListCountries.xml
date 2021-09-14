@@ -396,7 +396,7 @@
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesoempl tarjeta="8000006301660" nombre="VILA , HEIDI" fecnac="29-7-1978"/>
+<accesoempl tarjeta="8000006326687" nombre="YALCIN , TUGBA" fecnac="27-2-1993"/>
 <accesovotf usuario="tda00413" password="mng00413"/>
 </pais>
 
@@ -489,7 +489,7 @@
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesoempl tarjeta="8000006221555" nombre="DANLOY , MEGANE" fecnac="24-6-1992"/>
+<accesoempl tarjeta="8000006227083" nombre="GJUNI , KLODIANA" fecnac="08-07-1994"/>
 <accesovotf usuario="tda00188" password="mng00188"/>
 </pais>
 
@@ -829,7 +829,7 @@
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <mobiluser>20123456</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
-<accesoempl tarjeta="8000009002557" nombre="NAZEMI , SHADI" fecnac="21-3-1982"/>
+<accesoempl tarjeta="8000009005190" nombre="THRAINSDOTTIR , HAFDIS" fecnac="23-2-1995"/>
 </pais>
 
 <pais nombre_pais="Estonia" codigo="053">
@@ -963,7 +963,7 @@
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <mobiluser>0401234567</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
-<accesoempl tarjeta="8000001384804" nombre="KIIVERI , SARI" fecnac="1-2-1975"/>
+<accesoempl tarjeta="8000002859790" nombre="KIVI , KARMEN" fecnac="24-8-2000"/>
 </pais>
 
 <pais nombre_pais="France" codigo="011">
@@ -2099,7 +2099,7 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesoempl tarjeta="8000008311353" nombre="KLAK , BEATA" fecnac="21-4-1993"/>
+<accesoempl tarjeta="8000008324278" nombre="SHELKOVSKA , MARIIA" fecnac="17-10-1989"/>
 <accesovotf usuario="tda01490" password="mng01490"/>
 </pais>
 
@@ -2159,7 +2159,7 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesoempl tarjeta="8000001371095" nombre="BRANDAO VIEIRA, PAULA CRISTINA" fecnac="3-6-1978"/>
+<accesoempl tarjeta="8000001370692" nombre="VIEIRA CANUTE, FATU" fecnac="12-5-1980"/>
 </pais>
 
 <pais nombre_pais="Romania" codigo="066">
@@ -3317,7 +3317,7 @@ where
 <idioma acceso="gp">FR</idioma>
 <rgpd>S</rgpd>
 <tarifa>FG</tarifa>
-<codpos>08720</codpos>
+<codpos>97110</codpos>
 <telefono>690123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
@@ -3643,15 +3643,12 @@ where
 <linea id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina_nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="nina_bebe" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino_nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="nino_bebe" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
@@ -4188,11 +4185,9 @@ where
 <linea id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina_nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="nina_bebe" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino_nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="nino_bebe" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
@@ -4556,11 +4551,9 @@ where
 <linea id="he"        shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina_nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="nina_bebe" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino_nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="nino_bebe" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
@@ -4939,11 +4932,9 @@ where
 <linea id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina_nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="nina_bebe" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino_nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="nino_bebe" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
@@ -5600,11 +5591,9 @@ where
 <linea id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina_nina" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="nina_bebe" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino_nino" 	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="nino_bebe" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>

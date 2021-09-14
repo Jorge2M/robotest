@@ -1,7 +1,9 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.cabecera;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
@@ -23,6 +25,7 @@ public abstract class SecCabecera extends PageObjTM {
 	protected final AppEcom app;
 	protected final SecSearch secSearch;
 
+	private final static String XPathHeader = "//header";
 	private final static String XPathLinkLogoMango = "//a[@class='logo-link' or @class[contains(.,'logo_')]]";
 
 	abstract String getXPathNumberArtIcono();
@@ -116,11 +119,12 @@ public abstract class SecCabecera extends PageObjTM {
 
     //-- Específic functions for movil (Shop & Outlet)
     
-	private final static String XPathHeader = "//header";
+
     private final static String XPathSmartBanner = XPathHeader + "/div[@id='smartbanner']";
     private final static String XPathLinkCloseSmartBanner = XPathSmartBanner + "//a[@class='sb-close']";    
     private final static String XPathIconoMenuHamburguesa = XPathHeader + "//div[@class[contains(.,'menu-open-button')]]";
 
+    
 	/**
 	 * Si existe, cierra el banner de aviso en móvil (p.e. el que sale proponiendo la descarga de la App)
 	 */

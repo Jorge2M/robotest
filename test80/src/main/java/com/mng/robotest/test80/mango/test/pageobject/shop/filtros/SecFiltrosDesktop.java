@@ -3,7 +3,9 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.filtros;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
@@ -11,6 +13,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Color;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenuLateralDesktop;
 
@@ -24,6 +27,7 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
     
 	final static String TagOrdenacion = "@TagOrden";
 	final static String TagColor = "@TagColor";
+	final static String XPathWrapper = "//div[@id='stickyMenu']";
 	final static String XPathLinkOrdenWithTag = "//a[text()[contains(.,'" + TagOrdenacion + "')]]";
 	final static String XPathLinkColorWithTagOutlet = "//a[@aria-label[contains(.,'" + TagColor + "')]]";
 	final static String XPathLinkColorWithTagShop = "//label[@for[contains(.,'filtercolor')] and text()[contains(.,'" + TagColor + "')]]";
@@ -115,7 +119,18 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
     public void selectMenu2onLevel(List<String> listMenus) {
     	//TODO
     }
-	
+    
+    public enum Visibility {Visible, Invisible}
+    
+	public void makeFilters(Visibility visibility) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		WebElement element = driver.findElement(By.xpath(XPathWrapper));
+		String style = "block";
+		if (visibility == Visibility.Invisible) {
+			style = "none";
+		}
+		js.executeScript("arguments[0].setAttribute('style', 'display:" + style + "')", element);
+	}
 	
 	private static final String XPathLinkCollectionShop = "//div[@id='navigationContainer']/button";
 	public void showLateralMenus() {

@@ -6,19 +6,21 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 public class Sublinea extends Linea {
 
     public static enum SublineaType { 
-    	teen_nina("teenA", "teenA", LineaType.teen),
-    	teen_nino("teenO", "teenO", LineaType.teen),
-    	nina_nina("nina", "outletA", LineaType.nina), 
-    	nina_bebe("babyNina", "outletBA", LineaType.nina),
-    	nino_nino("nino", "outletO", LineaType.nino), 
-    	nino_bebe("babyNino", "outletBO", LineaType.nino); 
+    	teen_nina("teenA", "teenA", "nina", LineaType.teen),
+    	teen_nino("teenO", "teenO", "nino", LineaType.teen),
+    	nina_nina("nina", "outletA", "nina", LineaType.nina), 
+    	nina_bebe("babyNina", "outletBA", "bebe", LineaType.nina),
+    	nino_nino("nino", "outletO", "nino", LineaType.nino), 
+    	nino_bebe("babyNino", "outletBO", "bebe", LineaType.nino); 
     	
     	String idShop = "";
     	String idOutlet = "";
+    	String text;
     	LineaType parentLine;
-    	private SublineaType(String idShop, String idOutlet, LineaType parentLine) {
+    	private SublineaType(String idShop, String idOutlet, String text, LineaType parentLine) {
     		this.idShop = idShop;
     		this.idOutlet = idOutlet;
+    		this.text = text;
     		this.parentLine = parentLine;
     	}
     	
@@ -29,6 +31,10 @@ public class Sublinea extends Linea {
     		default:
     			return idShop;
     		}
+    	}
+    	
+    	public String getText() {
+    		return text;
     	}
     	
     	public String getNameUpper() {

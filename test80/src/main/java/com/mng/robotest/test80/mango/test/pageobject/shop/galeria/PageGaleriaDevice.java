@@ -347,6 +347,13 @@ public class PageGaleriaDevice extends PageGaleria {
 		}
 		return StateFavorito.Desmarcado;
 	}
+
+	@Override
+	public void clickHearthIcon(WebElement hearthIcon) throws Exception {
+		moveToElement(hearthIcon, driver);
+		state(Clickable, hearthIcon).wait(1).check();
+		hearthIcon.click();
+	}
     
     private List<WebElement> getListArticulosFromPagina(int numPagina) {
     	moveToPagina(numPagina);

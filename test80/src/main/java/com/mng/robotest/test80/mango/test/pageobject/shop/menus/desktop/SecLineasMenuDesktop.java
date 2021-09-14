@@ -71,11 +71,9 @@ public class SecLineasMenuDesktop extends PageObjTM {
     }
 
     public String getXPathImgSublinea(LineaType lineaId, SublineaType sublineaType) {
-    	if (sublineaType==SublineaType.teen_nina ||
-    		sublineaType==SublineaType.teen_nino) {
-    		return XPathImagesSublineaWithTags.replace(TagIdLinea, "interior-teen").replace(TagIdSublinea, "interior-teen");
-    	}
-    	return XPathImagesSublineaWithTags.replace(TagIdLinea, lineaId.name()).replace(TagIdSublinea, sublineaType.toString());
+    	return XPathImagesSublineaWithTags
+    				.replace(TagIdLinea, lineaId.name())
+    				.replace(TagIdSublinea, "interior-" + sublineaType.getText());
     }
     
     public String getXPathSublineaLink(SublineaType sublineaType) {

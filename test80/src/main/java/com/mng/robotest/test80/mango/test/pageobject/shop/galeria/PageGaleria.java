@@ -78,6 +78,7 @@ public abstract class PageGaleria extends PageObjTM {
 	abstract public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSecondsToWait);
 	abstract public ArticuloScreen selectTallaAvailableArticle(int posArticulo, int posTalla) throws Exception;
 	abstract public StateFavorito getStateHearthIcon(WebElement hearthIcon);
+	abstract public void clickHearthIcon(WebElement hearthIcon) throws Exception;
 
 	
     public static List<LabelArticle> listLabelsNew = Arrays.asList(
@@ -401,13 +402,6 @@ public abstract class PageGaleria extends PageObjTM {
 			waitMillis(1000);
 		}
 		return false;
-	}
-
-	//Equivalent to Mobil
-	void clickHearthIcon(WebElement hearthIcon) throws Exception {
-		moveToElement(hearthIcon, driver);
-		state(Clickable, hearthIcon).wait(1).check();
-		hearthIcon.click();
 	}
 
 	private enum AttributeArticle {Nombre, Referencia, Imagen}

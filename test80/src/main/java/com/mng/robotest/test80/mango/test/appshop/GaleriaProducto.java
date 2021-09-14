@@ -208,8 +208,8 @@ public class GaleriaProducto {
         	secMenusStpV.selectMenu2onLevel(menuCardigansJerseis, dCtxSh);
         } else {
         	secMenusStpV.selectMenuLateral1erLevelTypeCatalog(menuCamisas, dCtxSh);
-        	Menu2onLevel menuCamisasTops = MenuTreeApp.getMenuLevel2From(menuCamisas, "tops");
-        	secMenusStpV.selectMenu2onLevel(menuCamisasTops, dCtxSh);
+        	Menu2onLevel menuCamisasBasicas = MenuTreeApp.getMenuLevel2From(menuCamisas, "básicas");
+        	secMenusStpV.selectMenu2onLevel(menuCamisasBasicas, dCtxSh);
         }
     }
     
