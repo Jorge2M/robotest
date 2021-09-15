@@ -344,7 +344,7 @@
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" home="s"></tienda>
 <shoponline>
-<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
+<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa,home" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
 <linea 		  id="she"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -443,7 +443,7 @@
 <ticketStore_enabled>false</ticketStore_enabled>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" home="s"></tienda>
 <shoponline>
-<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
+<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa,home" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
 <linea 		  id="she"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -780,7 +780,7 @@
 <maximo_bolsa>11200</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" home="s"></tienda>
 <shoponline>
-<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
+<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa,home" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
 <linea 		  id="she"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -982,7 +982,7 @@
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" nina="s" nino="s" baby="s" violeta="s" home="s"></tienda>
 <shoponline>
-<linea	 	  id="nuevo" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/> 
+<linea	 	  id="nuevo" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa,home" panoramicas="s"/> 
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
 <linea 		  id="she" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="he" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1043,7 +1043,7 @@
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" home="s"></tienda>
 <shoponline>
-<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
+<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa,home" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
 <linea 		  id="she"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1332,7 +1332,7 @@
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" home="s"></tienda>
 <shoponline>
-<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
+<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa,home" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
 <linea 		  id="she"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1388,7 +1388,7 @@
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" home="s"></tienda>
 <shoponline>
-<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
+<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa,home" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
 <linea 		  id="she"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1645,7 +1645,7 @@ where
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" home="s"></tienda>
 <shoponline>
-<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
+<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa,home" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
 <linea 		  id="she"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1894,7 +1894,7 @@ where
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" home="s	"></tienda>
 <shoponline>
-<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
+<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa,home" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
 <linea 		  id="she"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2119,7 +2119,7 @@ where
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" home="s"></tienda>
 <shoponline>
-<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
+<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa,home" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
 <linea 		  id="she"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2465,7 +2465,7 @@ where
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" nina="s" nino="s" baby="s" teen="s" violeta="s" home="s"></tienda>
 <shoponline>
-<linea    	  id="nuevo" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/> 
+<linea    	  id="nuevo" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa,home" panoramicas="s"/> 
 <linea    	  id="rebajas"   shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
 <linea    	  id="she" 	     shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="he" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2744,7 +2744,7 @@ where
 <maximo_bolsa>14000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" home="s"></tienda>
 <shoponline>
-<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa" panoramicas="s"/>
+<linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" carrusels="mujer,he,kidso,kidsa,home" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj" carrusels="she,he,nina,nino,violeta"/>
 <linea 		  id="she"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners" contentMovil="menus2"/>
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners" contentMovil="menus2"/>

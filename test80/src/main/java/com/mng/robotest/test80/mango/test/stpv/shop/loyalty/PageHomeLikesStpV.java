@@ -55,7 +55,7 @@ public class PageHomeLikesStpV {
 	}
 
 	@Step(
-		description="Seleccionar el 1er botón \"Donar mis Likes\"",
+		description="Seleccionar el 1er botón \"Donar Likes\"",
 		expected="Aparece una página para donar mis Likes")
 	public void clickButtonDonarLikes() {
 		pageHomeLikes.clickButton(ButtonUseLikes.DonarMisLikes);
