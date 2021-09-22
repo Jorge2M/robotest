@@ -66,6 +66,7 @@ public class PageRegistroIni extends PageObjTM {
     
     private static String msgCampoObligatorio = "Este campo es obligatorio";
     private static String msgUsrDuplicadoPostClick = "Email ya registrado";
+    private static String msgEmailIncorrectoPostClick = "Introduce un e-mail válido";
     
     private PageRegistroIni(WebDriver driver) {
     	super(driver);
@@ -211,6 +212,10 @@ public class PageRegistroIni extends PageObjTM {
     public boolean isVisibleErrorUsrDuplicadoUntil(int maxSeconds) {
         String xpathError = getXPath_mensajeErrorFormulario(msgUsrDuplicadoPostClick);
         return (state(Present, By.xpath(xpathError)).wait(maxSeconds).check());
+    }    
+    
+    public boolean isVisibleErrorEmailIncorrecto(int maxSeconds) {
+    	return getNumberMsgInputInvalid(DataRegType.email)==1;
     }    
     
     public int getNumberMsgCampoObligatorio() {

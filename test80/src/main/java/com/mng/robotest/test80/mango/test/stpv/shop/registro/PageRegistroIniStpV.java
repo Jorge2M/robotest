@@ -96,24 +96,55 @@ public class PageRegistroIniStpV {
 		return validations;
 	}
 
+	public enum ErrorRegister {
+		None,
+		InputWarnings,
+		UsrExistsInMango,
+		UsrNoExistsInGmail
+	}
+	
+	public void clickRegistrateButton(
+    		Pais paisRegistro, AppEcom app, Map<String,String> dataRegistro) {
+		clickRegistrateButton(paisRegistro, app, dataRegistro, ErrorRegister.None);
+	}
+	
 	@Step (
 		description="Seleccionar el botón <b>Regístrate</b>")
-    public void clickRegistrateButton(Pais paisRegistro, boolean usrExists, AppEcom app, Map<String,String> dataRegistro) {
+    public void clickRegistrateButton(
+    		Pais paisRegistro, AppEcom app, Map<String,String> dataRegistro, ErrorRegister errorExpected) {
 		pageRegistroIni.clickButtonRegistrate();
         PageObjTM.waitMillis(1000);
-
-        validaIsInvisibleCapaLoading(7);
-        if (usrExists || pageRegistroIni.getNumInputsObligatoriosNoInformados() > 0) {
-        	if (usrExists) {
-	        	validaEmailYaRegistradoShown(5);
-        	}
+        validaIsInvisibleCapaLoading(15);
+        
+        switch (errorExpected) {
+        case None:
+        	PageRegistroSegundaStpV.validaIsPageRegistroOK(paisRegistro, app, dataRegistro, driver);
+        	break;
+        case InputWarnings:
             int numInputsObligatoriosNoInf = pageRegistroIni.getNumInputsObligatoriosNoInformados();
             if (numInputsObligatoriosNoInf > 0) {
             	validateAreInputsWithErrorMessageAssociated(numInputsObligatoriosNoInf, paisRegistro);  
             }
-        } else {
-            PageRegistroSegundaStpV.validaIsPageRegistroOK(paisRegistro, app, dataRegistro, driver);
+            break;
+        case UsrExistsInMango:
+        	validaEmailYaRegistradoShown(5);
+        	break;
+        case UsrNoExistsInGmail:
+        	validaEmailIncorrectShown(5);
+        	break;
         }
+        
+//        if (usrExists || pageRegistroIni.getNumInputsObligatoriosNoInformados() > 0) {
+//        	if (usrExists) {
+//	        	validaEmailYaRegistradoShown(5);
+//        	}
+//            int numInputsObligatoriosNoInf = pageRegistroIni.getNumInputsObligatoriosNoInformados();
+//            if (numInputsObligatoriosNoInf > 0) {
+//            	validateAreInputsWithErrorMessageAssociated(numInputsObligatoriosNoInf, paisRegistro);  
+//            }
+//        } else {
+//            PageRegistroSegundaStpV.validaIsPageRegistroOK(paisRegistro, app, dataRegistro, driver);
+//        }
         
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.SEO, 
@@ -133,6 +164,13 @@ public class PageRegistroIniStpV {
 		level=State.Defect)
     private boolean validaEmailYaRegistradoShown(int maxSeconds) {
 		return(pageRegistroIni.isVisibleErrorUsrDuplicadoUntil(maxSeconds));
+    }
+	
+	@Validation (
+		description="Aparece un error <b>Email incorrecto</b> (lo esperamos hasta #{maxSeconds} segundos)",
+		level=State.Defect)
+    private boolean validaEmailIncorrectShown(int maxSeconds) {
+		return(pageRegistroIni.isVisibleErrorEmailIncorrecto(maxSeconds));
     }
 	
 	@Validation

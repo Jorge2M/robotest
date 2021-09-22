@@ -13,6 +13,7 @@ import com.mng.robotest.test80.mango.test.data.Constantes.ThreeState;
 import com.github.jorge2m.testmaker.domain.InputParamsTM.TypeAccess;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -35,6 +36,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalSuscripcionStpV
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroDirecStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroFinStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroIniStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroIniStpV.ErrorRegister;
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroNinosStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroSegundaStpV;
 import com.mng.robotest.test80.mango.test.suites.RegistrosSuite.VersionRegistroSuite;
@@ -80,7 +82,7 @@ public class Registro implements Serializable {
         }
         return dCtxSh;
     }
-
+    
     @SuppressWarnings("static-access")
     @Test (
         groups={"Registro", "Canal:all_App:all"},
@@ -101,7 +103,7 @@ public class Registro implements Serializable {
         //Step. Click inicial a Registrate (sin haber introducido ningún dato) -> Aparecerán los correspondientes mensajes de error
         HashMap<String,String> dataRegister = new HashMap<>();        
         PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(driver);
-        pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false, dCtxSh.appE, dataRegister);
+        pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, dCtxSh.appE, dataRegister, ErrorRegister.InputWarnings);
                     
         //Step. Introducir datos incorrectos y validar mensajes de error
         ListDataRegistro dataKOToSend = new ListDataRegistro();
@@ -113,9 +115,25 @@ public class Registro implements Serializable {
         dataKOToSend.add(DataRegType.codpostal, "0872A", false);
         String dataToSendInHtmlFormat = dataKOToSend.getFormattedHTMLData(PageData.pageInicial);
         pageRegistroIniStpV.sendFixedDataToInputs(dataKOToSend, dataToSendInHtmlFormat);
+        
+        //Step. Introducir datos correctos pero email no existente en GMail
+        driver.navigate().refresh();
+        PageObjTM.waitMillis(1000);
+        ListDataRegistro dataToSend = new ListDataRegistro(); 
+        dataToSend.add(DataRegType.name, "Jorge", true);
+        dataToSend.add(DataRegType.apellidos, "Muñoz Martínez", true);
+        dataToSend.add(DataRegType.email, "jorge.munoz.noexiste@gmail.com", true);
+        dataToSend.add(DataRegType.password, "Sirjorge74", true);
+        dataToSend.add(DataRegType.telefono, "665015122", true);
+        dataToSend.add(DataRegType.codpostal, "08720", true);
+        dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.pageInicial);
+        pageRegistroIniStpV.sendFixedDataToInputs(dataToSend, dataToSendInHtmlFormat);
+        pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, dCtxSh.appE, dataRegister, ErrorRegister.UsrNoExistsInGmail);
 
         //Step. Introducir datos correctos pero usuario ya existente
-        ListDataRegistro dataToSend = new ListDataRegistro(); 
+        driver.navigate().refresh();
+        PageObjTM.waitMillis(1000);
+        dataToSend = new ListDataRegistro(); 
         dataToSend.add(DataRegType.name, "Jorge", true);
         dataToSend.add(DataRegType.apellidos, "Muñoz Martínez", true);
         dataToSend.add(DataRegType.email, Constantes.mail_standard, true);
@@ -124,7 +142,7 @@ public class Registro implements Serializable {
         dataToSend.add(DataRegType.codpostal, "08720", true);
         dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.pageInicial);
         pageRegistroIniStpV.sendFixedDataToInputs(dataToSend, dataToSendInHtmlFormat);
-        pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, true, dCtxSh.appE, dataRegister);
+        pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, dCtxSh.appE, dataRegister, ErrorRegister.UsrExistsInMango);
     }
 
     @SuppressWarnings("static-access")
@@ -174,7 +192,7 @@ public class Registro implements Serializable {
 		PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(driver);
 		HashMap<String,String> dataRegistro = 
 				pageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, false, dCtxSh.channel);
-		pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false, dCtxSh.appE, dataRegistro);
+		pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, dCtxSh.appE, dataRegistro);
 		PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dCtxSh.channel, driver);
 		PageRegistroDirecStpV.clickFinalizarButton(driver);
 		PageRegistroFinStpV.clickIrDeShoppingButton(dCtxSh, driver);
@@ -200,7 +218,7 @@ public class Registro implements Serializable {
 	        PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(driver);
 	        dataRegistro = 
 	        	pageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, true, dCtxSh.channel);
-	        pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false, dCtxSh.appE, dataRegistro);
+	        pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, dCtxSh.appE, dataRegistro);
 	        boolean paisConNinos = dCtxSh.pais.getShoponline().stateLinea(LineaType.nina, dCtxSh.appE)==ThreeState.TRUE;
 	        PageRegistroSegundaStpV.setDataAndLineasRandom("23/4/1974", paisConNinos, 2, dCtxSh.pais, dataRegistro, driver);
 	        if (paisConNinos) {
