@@ -7,11 +7,12 @@
 	</parent>
 	<artifactId>test80</artifactId>
 	<packaging>jar</packaging>
+  
 	<dependencies>
 		<dependency>
 			<groupId>com.github.jorge2m</groupId>
 			<artifactId>testmaker-core</artifactId>
-			<version>1.3.19</version>
+			<version>1.3.20</version>
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
