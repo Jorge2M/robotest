@@ -1,6 +1,8 @@
-@Library('jenkins-shared-library')
-import com.mango.chavos.jenkins.CorporateJenkins
-import com.mango.chavos.jenkins.ApplicationHealth
+#!groovy
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
+library("k8s@1.0.0")
 
 def corporateJenkins = new CorporateJenkins(this)
 def applicationHealth = new ApplicationHealth(this)
