@@ -152,26 +152,8 @@ pipeline {
 //        }
     }
     post {
-        success {
-            node('master') {
-                script {
-                    notifyBitbucket('SUCCESSFUL')
-                }
-            }
-        }
-        aborted {
-            node('master') {
-                script {
-                    notifyBitbucket('FAILED')
-                }
-            }
-        }
-        failure {
-            node('master') {
-                script {
-                    notifyBitbucket('FAILED')
-                }
-            }
+        cleanup {
+            cleanWs()
         }
     }
 }
