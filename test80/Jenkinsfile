@@ -33,7 +33,6 @@ pipeline {
                 //notifyBitbucket('INPROGRESS')
                 sh 'mvn clean'
                 sh 'mvn test verify -DargLine="-Duser.timezone=Europe/Paris"'
-                sh 'mvn pact:publish'
             }
             post {
                 success {
