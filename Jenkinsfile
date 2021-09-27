@@ -24,16 +24,16 @@ pipeline {
 
         stage('Run tests') {
             agent {
-                customWorkspace '/test80'
                 docker {
                     image 'maven:3.5.4-jdk-8-alpine'
                     args '-v /home/ubuntu/.m2:/root/.m2'
                 }
             }
             steps {
-                //notifyBitbucket('INPROGRESS')
-                sh 'mvn clean'
-                sh 'mvn test verify -DargLine="-Duser.timezone=Europe/Paris"'
+            	dir("test80") {
+	                sh 'mvn clean'
+	                sh 'mvn test verify -DargLine="-Duser.timezone=Europe/Paris"'
+                }
             }
             post {
                 success {
@@ -47,7 +47,6 @@ pipeline {
         stage('Create and zip package') {
             when { anyOf { branch 'master'; branch 'develop' } }
             agent {
-            	customWorkspace '/test80'
                 docker {
                     image 'maven:3.5.4-jdk-8-alpine'
                     args '-v /home/ubuntu/.m2:/root/.m2'
@@ -55,9 +54,11 @@ pipeline {
             }
 
             steps {
-                sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
-                sh "mvn -B clean -Dmaven.test.skip=true package"
-                zip(zipFile: "target/test80-${NJORD_VERSION}.zip", archive: true, dir: 'test80/target', glob: "test80-${NJORD_VERSION}.war")
+            	dir("test80") {
+	                sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
+	                sh "mvn -B clean -Dmaven.test.skip=true package"
+	                zip(zipFile: "target/test80-${NJORD_VERSION}.zip", archive: true, dir: 'test80/target', glob: "test80-${NJORD_VERSION}.war")
+                }
             }
 
             post {
