@@ -30,10 +30,8 @@ pipeline {
                 }
             }
             steps {
-            	dir("test80") {
-	                sh 'mvn clean'
-	                sh 'mvn test verify -DargLine="-Duser.timezone=Europe/Paris"'
-                }
+	        	sh 'mvn clean'
+	            sh 'mvn test verify -DargLine="-Duser.timezone=Europe/Paris"'
             }
             post {
                 success {
@@ -54,11 +52,9 @@ pipeline {
             }
 
             steps {
-            	dir("test80") {
-	                sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
-	                sh "mvn -B clean -Dmaven.test.skip=true package"
-	                zip(zipFile: "target/test80-${NJORD_VERSION}.zip", archive: true, dir: 'test80/target', glob: "test80-${NJORD_VERSION}.war")
-                }
+	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
+	            sh "mvn -B clean -Dmaven.test.skip=true package"
+	            zip(zipFile: "test80/target/test80-${NJORD_VERSION}.zip", archive: true, dir: 'test80/target', glob: "test80-${NJORD_VERSION}.war")
             }
 
             post {
