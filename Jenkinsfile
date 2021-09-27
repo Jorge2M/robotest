@@ -24,6 +24,7 @@ pipeline {
 
         stage('Run tests') {
             agent {
+                customWorkspace '/test80'
                 docker {
                     image 'maven:3.5.4-jdk-8-alpine'
                     args '-v /home/ubuntu/.m2:/root/.m2'
@@ -46,6 +47,7 @@ pipeline {
         stage('Create and zip package') {
             when { anyOf { branch 'master'; branch 'develop' } }
             agent {
+            	customWorkspace '/test80'
                 docker {
                     image 'maven:3.5.4-jdk-8-alpine'
                     args '-v /home/ubuntu/.m2:/root/.m2'
@@ -55,7 +57,7 @@ pipeline {
             steps {
                 sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
                 sh "mvn -B clean -Dmaven.test.skip=true package"
-                zip(zipFile: "test80/target/test80-${NJORD_VERSION}.zip", archive: true, dir: 'test80/target', glob: "test80-${NJORD_VERSION}.war")
+                zip(zipFile: "target/test80-${NJORD_VERSION}.zip", archive: true, dir: 'test80/target', glob: "test80-${NJORD_VERSION}.war")
             }
 
             post {
@@ -151,12 +153,12 @@ pipeline {
 //            }
 //        }
     }
-    post {
-        cleanup {
-        	//TODO
-            //cleanWs()
-        }
-    }
+//    post {
+//        cleanup {
+//        	//TODO
+//            //cleanWs()
+//        }
+//    }
 }
 
 //def notifyBitbucket(def state) {
