@@ -25,7 +25,7 @@ public class ServerRestIT {
 	@BeforeClass
 	public static void setupLocalServerRobotest() throws Exception {
 		ipServer = "localhost";
-		portServer = "8082";
+		portServer = "8080";
 		JaxRsClient jaxClient = new JaxRsClient();
 		client = jaxClient.getClientIgnoreCertificates();
 		startLocalServer(portServer);
