@@ -36,6 +36,7 @@ public class RobotestRestIT extends ServerRestIT {
 				.asyncExec(false);
 		
 		//When
+		Thread.sleep(10);
 		SuiteBean suiteData = executeTestsAgainstServer(inputParams);
 
 		//Then
@@ -47,7 +48,7 @@ public class RobotestRestIT extends ServerRestIT {
 		
 		//Given
 		InputParamsRobotest inputParams = InputParamsRobotest.from(
-				Suites.PagosPaises, 
+				Suites.PagosPaises,
 				"chrome", 
 				Channel.desktop, 
 				AppEcom.shop, 
