@@ -44,13 +44,13 @@ pipeline {
 
         stage('Create and zip package') {
             when { anyOf { branch 'master'; branch 'develop' } }
-//            agent {
-//                docker {
-//                    //image 'maven:3.5.4-jdk-8-alpine'
-//                    //args '-v /home/ubuntu/.m2:/root/.m2'
-//                    image 'markhobson/maven-chrome'
-//                }
-//            }
+            agent {
+                docker {
+                    //image 'maven:3.5.4-jdk-8-alpine'
+                    args '-v /home/ubuntu/.m2:/root/.m2'
+                    image 'markhobson/maven-chrome'
+                }
+            }
 
             steps {
 	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
