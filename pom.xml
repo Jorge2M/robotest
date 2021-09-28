@@ -7,8 +7,8 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>test80</module>
-		<module>webmngtest</module>
-		<module>sapfiori</module>
+		<!-- <module>webmngtest</module>
+		<module>sapfiori</module>-->
     </modules>
 
 	<properties>

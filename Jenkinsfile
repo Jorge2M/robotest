@@ -54,7 +54,7 @@ pipeline {
 
             steps {
 	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
-	            sh "mvn -B clean -Dmaven.test.skip=true package"
+	            sh "mvn -B clean package -Dmaven.test.skip=true"
             }
 
             post {
