@@ -54,6 +54,7 @@ pipeline {
 
             steps {
 	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
+	        	sh "mvn -B clean package -DskipTests failsafe:integration-test"
 	            sh "mvn -B failsafe:integration-test"
             }
 
