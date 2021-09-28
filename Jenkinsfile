@@ -31,7 +31,7 @@ pipeline {
             }
             steps {
 	        	sh 'mvn clean'
-	            sh 'mvn test verify -DargLine="-Duser.timezone=Europe/Paris"'
+	            sh 'mvn test verify -DskipITs -DargLine="-Duser.timezone=Europe/Paris"'
             }
             post {
                 success {
@@ -46,8 +46,9 @@ pipeline {
             when { anyOf { branch 'master'; branch 'develop' } }
             agent {
                 docker {
-                    image 'maven:3.5.4-jdk-8-alpine'
-                    args '-v /home/ubuntu/.m2:/root/.m2'
+                    //image 'maven:3.5.4-jdk-8-alpine'
+                    //args '-v /home/ubuntu/.m2:/root/.m2'
+                    image 'markhobson/maven-chrome'
                 }
             }
 
