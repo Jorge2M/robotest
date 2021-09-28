@@ -48,7 +48,7 @@ pipeline {
                 docker {
                     //image 'maven:3.5.4-jdk-8-alpine'
                     //args '-v /home/ubuntu/.m2:/root/.m2'
-                    image 'markhobson/docker-maven-chrome'
+                    image 'markhobson/maven-chrome'
                 }
             }
 
