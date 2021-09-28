@@ -3,7 +3,7 @@
   <parent>
     <groupId>com.mng</groupId>
     <artifactId>robotest</artifactId>
-    <version>1.0</version>
+    <version>1.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>webmngtest</artifactId>
   <packaging>war</packaging>

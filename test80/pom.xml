@@ -28,21 +28,6 @@
 
 	<build>
 		<plugins> 	
-			<!-- Define Aspectj Nature -->
-			<!-- 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<configuration>
-					<additionalProjectnatures>
-						<projectnature>org.eclipse.ajdt.ui.ajnature</projectnature>
-					</additionalProjectnatures>
-					<additionalBuildcommands>
-						<buildcommand>org.eclipse.ajdt.core.ajbuilder</buildcommand>
-					</additionalBuildcommands>
-				</configuration>
-			</plugin>  	
-			-->
 			<!-- Seguramente si lo ejecuto sin testmaker se quejará de que no encuentra el aspectj en .m2 -->
 			<plugin>
 				<groupId>com.github.m50d</groupId>
@@ -70,7 +55,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin> 		
+			</plugin> 
 			
 			<plugin>
 				<!-- Configuración extraída de: http://emystein.blogspot.com.es/2010/12/empaquetar-una-aplicacion-de-consola.html -->
@@ -97,7 +82,7 @@
 					</archive>
 				</configuration>
 			</plugin>
-
+			
 			<!-- Configuramos el plugin de Assembly para usar un descriptor llamado distribution.xml que el plugin tomará del directorio src/main/assembly -->	
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
