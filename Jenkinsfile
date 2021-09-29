@@ -49,7 +49,7 @@ pipeline {
                     //image 'maven:3.5.4-jdk-8-alpine'
                     //args '-v /home/ubuntu/.m2:/root/.m2'
                     image 'markhobson/maven-chrome'
-                    args '--privileged --shm-size=2g'
+                    args '--privileged mount -v /dev/shm:/dev/shm --shm-size=2g'
                 }
             }
 
