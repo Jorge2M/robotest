@@ -28,7 +28,7 @@ public class RobotestRestIT extends ServerRestIT {
 		//Given
 		InputParamsRobotest inputParams = InputParamsRobotest.from(
 				Suites.SmokeTest, 
-				"chrome", 
+				"chromehless", 
 				Channel.desktop, 
 				AppEcom.shop, 
 				"https://shop.mango.com/preHome.faces")
