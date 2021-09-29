@@ -15,15 +15,15 @@ import com.github.jorge2m.testmaker.restcontroller.ServerRestTM;
 //-> Option "S Renew specific"
 //-> Option "1" [Manual] -> Nos pide un TXT-Content
 //-> AWS 
-//    -> Acceder al AWS de mango-test
+//    -> Acceder al AWS de mangomng
 //    -> Buscar servicio "DNS" (Route 53)
 //    -> Clickar "Zonas hospedadas"
 //    -> Seleccionar "pro.mango.com"
 //    -> Buscar "robotest"
 //    -> Modificar el registro _acme-challenge.robotest.pro.mango.com. introduciendo el TXT-Content que pinta wacs.exe
 //      Notas: 
+//			-Esperar que esté disponible mediante "nslookup -q=txt _acme-challenge.robotest.pro.mango.com" en PS (tarda unos minutos)
 //			-Desconectar la VPN
-//			-Tarda unos minutos
 //-> Press Enter
 //-> Certificate in C:\ProgramData\win-acme\acme-v02.api.letsencrypt.org\Certificates ..
 //-> Mover el .pfx a /robotest.pro.mango.com.pfx

@@ -32,7 +32,7 @@ public class RobotestRestIT extends ServerRestIT {
 				Channel.desktop, 
 				AppEcom.shop, 
 				"https://shop.mango.com/preHome.faces")
-				.tcase("BUS001{2-2}")
+				.tcase("BUS001{1-1}")
 				.asyncExec(false);
 		
 		//When

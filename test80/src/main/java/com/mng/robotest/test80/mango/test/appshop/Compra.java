@@ -172,7 +172,7 @@ public class Compra {
 		chequeRegalo.setApellidos("Muñoz Martínez");
 		chequeRegalo.setEmail(Constantes.mail_standard);
 		chequeRegalo.setImporte(Importe.euro50);
-		chequeRegalo.setMensaje("Ya sólo queda por determinar si el universo partió de cero o del infinito");
+		chequeRegalo.setMensaje("Te conocía aún antes de haberte formado en el vientre de tu madre");
 		pageChequeRegaloInputDataStpV.inputDataAndClickComprar(dCtxSh.channel, dCtxSh.appE, chequeRegalo);
 
 		//Ejecutar el pago
