@@ -43,7 +43,7 @@ public class RobotestRestIT extends ServerRestIT {
 		checkResultStandarTestCase(suiteData);
 	}
 	
-	//@Test
+	@Test
 	public void testFactoryTestCase() throws Exception {
 		
 		//Given
