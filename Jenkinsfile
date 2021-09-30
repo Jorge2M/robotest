@@ -72,7 +72,7 @@ pipeline {
 
             steps {
 	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
-	            sh "mvn -B failsafe:integration-test"
+	            sh "mvn -B verify -Dskip.surefire.tests"
             }
 
             post {
