@@ -46,10 +46,8 @@ pipeline {
             when { anyOf { branch 'master'; branch 'develop' } }
             agent {
                 docker {
-                    //image 'maven:3.5.4-jdk-8-alpine'
-                    //args '-v /home/ubuntu/.m2:/root/.m2'
-                    image 'markhobson/maven-chrome'
-                    args '--privileged --shm-size=2g'
+                    image 'markhobson/maven-chrome:jdk-8'
+                    args '--privileged --shm-size=1g -v /home/ubuntu/.m2:/root/.m2'
                 }
             }
 
