@@ -168,12 +168,11 @@ pipeline {
 //            }
 //        }
     }
-//    post {
-//        cleanup {
-//        	//TODO
-//            //cleanWs()
-//        }
-//    }
+    post {
+        cleanup {
+            cleanWs()
+        }
+    }
 }
 
 //def notifyBitbucket(def state) {
