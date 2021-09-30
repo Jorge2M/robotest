@@ -20,7 +20,7 @@ public class SSecSelTallasFichaOldDevice extends PageObjTM implements SSecSelTal
 	private final static String XPathSelectorButton = "//*[@data-testid='sizeSelectorButton']";
 	private final static String XPathCapaTallas = "//div[@id='sizesContainerId']";
 	private final static String XPathOptionTalla = XPathCapaTallas + "//span[@class='size-text']";
-	private final static String XPathTallaSelected = XPathSelectorButton + "//span[@class='size-text']";
+	private final static String XPathTallaSelected = XPathSelectorButton + "//span[@class[contains(.,'size-text')]]";
 	private final static String XPathOptionTallaUnica = "//button[@id='productFormSelect]" + "//span[@class='size-text']";
     
     public SSecSelTallasFichaOldDevice(Channel channel, AppEcom app, WebDriver driver) {

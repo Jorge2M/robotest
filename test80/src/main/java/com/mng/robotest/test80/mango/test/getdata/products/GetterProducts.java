@@ -42,9 +42,7 @@ public class GetterProducts extends JaxRsClient {
 	private final String codigoPaisAlf;
 	private final AppEcom app;
 	private final LineaType lineaType;
-	private final String seccion;
-	private final String galeria;
-	private final String familia;
+	private final List<MenuProduct> menusCandidates;
 	private final Integer numProducts;
 	private final Integer pagina;
 	private final WebDriver driver;
@@ -53,8 +51,9 @@ public class GetterProducts extends JaxRsClient {
 	
 	public enum MethodGetter {ApiRest, WebDriver, Any}
 	
-	private GetterProducts(String url, String codigoPaisAlf, AppEcom app, LineaType lineaType, String seccion, String galeria, 
-						   String familia, Integer numProducts, Integer pagina, MethodGetter method, WebDriver driver) throws Exception {
+	private GetterProducts(
+			String url, String codigoPaisAlf, AppEcom app, LineaType lineaType, List<MenuProduct> menusCandidates, 
+			Integer numProducts, Integer pagina, MethodGetter method, WebDriver driver) throws Exception {
 		
 		urlForJavaCall = getUrlForJavaCall(url, driver);
 		urlForBrowserCall = getUrlBase(url);
@@ -69,9 +68,7 @@ public class GetterProducts extends JaxRsClient {
 		this.codigoPaisAlf = codigoPaisAlf;
 		this.app = app;
 		this.lineaType = lineaType;
-		this.seccion = seccion;
-		this.galeria = galeria;
-		this.familia = familia;
+		this.menusCandidates = menusCandidates;
 		this.numProducts = numProducts;
 		this.pagina = pagina;
 		this.method = method;
@@ -99,15 +96,36 @@ public class GetterProducts extends JaxRsClient {
 	}
 	
 	private ProductList getProductList() throws Exception {
+		
+		int sizeMenus = menusCandidates.size();
+    	for (int i=0; i<sizeMenus; i++) {
+    		MenuProduct menuCandidate = menusCandidates.get(i);
+        	try {
+        		ProductList productList = getProductList(menuCandidate);
+        		if (productList!=null) {
+        			if (!getWithStock(productList).isEmpty() ||
+        			    (i+1) == sizeMenus) {
+        				return productList;
+        			}
+        		}
+        	}
+        	catch (Exception e) {
+        		Log4jTM.getLogger().warn("Problem retriving articles of type " + menuCandidate + " for country " + codigoPaisAlf, e);
+        	}
+    	}
+    	return null;
+	}
+	
+	private ProductList getProductList(MenuProduct menu) throws Exception {
 		switch (method) {
 		case ApiRest:
-			return getProductsFromApiRest();
+			return getProductsFromApiRest(menu);
 		case WebDriver:
-			return getProductsFromWebDriver();
+			return getProductsFromWebDriver(menu);
 		default:
-			ProductList productList = getProductsFromApiRest();
+			ProductList productList = getProductsFromApiRest(menu);
 			if (productList==null && driver!=null) {
-				return getProductsFromWebDriver();
+				return getProductsFromWebDriver(menu);
 			}
 			return productList;
 		}
@@ -124,16 +142,16 @@ public class GetterProducts extends JaxRsClient {
 		return null;
 	}
 	
-	private WebTarget getWebTargetProductlist(String urlBase) throws Exception {
+	private WebTarget getWebTargetProductlist(String urlBase, MenuProduct menu) throws Exception {
 		Client client = getClientIgnoreCertificates();
 		WebTarget webTarget = 
 			client
 				.target(urlBase.replace("http:", "https:") + "services/productlist/products")
 				.path(codigoPaisAlf)
 				.path(getLineaPath())
-				.path("sections_" + lineaType.name() + "." + seccion + "_" + lineaType.name())
-				.queryParam("idSubSection", galeria + "_" + lineaType.name())
-				.queryParam("menu", "familia;" + familia)
+				.path("sections_" + lineaType.name() + "." + menu.getSeccion() + "_" + lineaType.name())
+				.queryParam("idSubSection", menu.getGaleria() + "_" + lineaType.name())
+				.queryParam("menu", "familia;" + menu.getFamilia())
 				.queryParam("pageNum", pagina)
 				.queryParam("columnsPerRow", "1")
 				.queryParam("rowsPerPage", numProducts);
@@ -144,8 +162,8 @@ public class GetterProducts extends JaxRsClient {
 		return webTarget;
 	}
 	
-	private ProductList getProductsFromApiRest() throws Exception {
-		WebTarget webTarget = getWebTargetProductlist(urlForJavaCall);
+	private ProductList getProductsFromApiRest(MenuProduct menu) throws Exception {
+		WebTarget webTarget = getWebTargetProductlist(urlForJavaCall, menu);
 		Response response = webTarget.request(MediaType.APPLICATION_JSON).get();
 		if (response.getStatus()==Response.Status.OK.getStatusCode()) {
 			String productsJson = response.readEntity(String.class);
@@ -156,8 +174,8 @@ public class GetterProducts extends JaxRsClient {
 		return null;
 	}
 	
-	private ProductList getProductsFromWebDriver() throws Exception {
-		WebTarget webTarget = getWebTargetProductlist(urlForBrowserCall);
+	private ProductList getProductsFromWebDriver(MenuProduct menu) throws Exception {
+		WebTarget webTarget = getWebTargetProductlist(urlForBrowserCall, menu);
 		String urlGetProducts = webTarget.getUri().toURL().toString();
 		
 		String nameTab = "GetProducts";
@@ -168,7 +186,10 @@ public class GetterProducts extends JaxRsClient {
 			if (PageObjTM.state(State.Visible, By.id("rawdata-tab"), driver).check()) {
 				PageObjTM.click(By.id("rawdata-tab"), driver).exec();
 			}
-			body = driver.findElement(By.xpath("//body//pre")).getText();
+			By bodyPreBy = By.xpath("//body//pre");
+			if (PageObjTM.state(State.Present, bodyPreBy, driver).check()) {
+				body = driver.findElement(bodyPreBy).getText();
+			}
 		} 
 		finally {
 			SeleniumUtils.closeTabByTitleAndReturnToWidow(nameTab, idWindow, driver);
@@ -210,9 +231,16 @@ public class GetterProducts extends JaxRsClient {
 	}
 	
 	public List<Garment> getWithStock() {
+		return getWithStock(getAll());
+	}
+	
+	private List<Garment> getWithStock(ProductList productList) {
+		return productList.getGroups().get(0).getGarments();
+	}
+	
+	private List<Garment> getWithStock(List<Garment> listAllGarments) {
 		List<Garment> listGarmentsWithStock = new ArrayList<>();
-		List<Garment> listGarments = getAll();
-		for (Garment garment : listGarments) {
+		for (Garment garment : listAllGarments) {
 			if (garment.getStock() > 0) {
 				listGarmentsWithStock.add(garment);
 			}
@@ -273,6 +301,7 @@ public class GetterProducts extends JaxRsClient {
 		}
 	}
 	
+	//TODO remove
     public static List<Garment> getProductsWithStock(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
     	List<Menu> galerys = Arrays.asList(
     			Menu.Shorts, 
@@ -327,10 +356,15 @@ public class GetterProducts extends JaxRsClient {
 		private final AppEcom app;
 		private final WebDriver driver;
 		private LineaType lineaType = LineaType.she;
-		private String seccion = "prendas";
-		private String galeria = "camisas";
-		private String familia = "14,414";
 		private Integer numProducts = 40;
+		private List<Menu> menusCandidates = 
+			Arrays.asList(
+    			Menu.Shorts, 
+    			Menu.Camisas, 
+    			Menu.Pijamas,
+    			Menu.Faldas,
+    			Menu.Fulares);
+		
 		private Integer pagina = 1;
 		private MethodGetter method = MethodGetter.Any;
 
@@ -339,7 +373,6 @@ public class GetterProducts extends JaxRsClient {
 			this.codigoPaisAlf = codPaisAlf;
 			this.app = app;
 			this.driver = driver;
-			menu(Menu.Shorts);
 		}
 		
 		public Builder(String url, String codigoPaisAlf, AppEcom app, WebDriver driver) {
@@ -347,35 +380,20 @@ public class GetterProducts extends JaxRsClient {
 			this.codigoPaisAlf = codigoPaisAlf;
 			this.app = app;
 			this.driver = driver;
-			menu(Menu.Shorts);
 		}
 		
 		public Builder linea(LineaType lineaType) {
 			this.lineaType = lineaType;
 			return this;
 		}
-		public Builder seccion(String seccion) {
-			this.seccion = seccion;
+		public Builder menusCandidates(List<Menu> menusCandidates) {
+			this.menusCandidates = menusCandidates;
 			return this;
-		}
-		public Builder galeria(String galeria) {
-			this.galeria = galeria;
-			return this;
-		}
-		public Builder familia(String familia) {
-			this.familia = familia;
-			return this;
-		}
+		}		
 		public Builder menu(Menu menu) {
-			this.seccion = menu.getSeccion();
-			this.galeria = menu.getGaleria();
-			this.familia = menu.getFamilia(app, isPro());
+			this.menusCandidates = Arrays.asList(menu);
 			return this;
 		}
-		private boolean isPro() {
-			return UtilsMangoTest.isEntornoPRO(app, url);
-		}
-		
 		public Builder pagina(Integer pagina) {
 			this.pagina = pagina;
 			return this;
@@ -390,7 +408,41 @@ public class GetterProducts extends JaxRsClient {
 		}
 		public GetterProducts build() throws Exception {
 			return (
-				new GetterProducts(url, codigoPaisAlf, app, lineaType, seccion, galeria, familia, numProducts, pagina, method, driver));
+				new GetterProducts(url, codigoPaisAlf, app, lineaType, getMenusProduct(), numProducts, pagina, method, driver));
+		}
+		
+		private List<MenuProduct> getMenusProduct() {
+			List<MenuProduct> listReturn = new ArrayList<>();
+			for (Menu menu : menusCandidates) {
+				listReturn.add(new MenuProduct(menu, app, url));
+			}
+			return listReturn;
+		}
+	}
+	
+	private static class MenuProduct {
+		private final String seccion;
+		private final String galeria;
+		private final String familia;
+		
+		public MenuProduct(Menu menu, AppEcom app, String urlBase) {
+			this.seccion = menu.getSeccion();
+			this.galeria = menu.getGaleria();
+			this.familia = menu.getFamilia(app, isPro(app, urlBase));
+		}
+		
+		public String getSeccion() {
+			return this.seccion;
+		}
+		public String getGaleria() {
+			return this.galeria;
+		}
+		public String getFamilia() {
+			return this.familia;
+		}
+		
+		private boolean isPro(AppEcom app, String urlBase) {
+			return UtilsMangoTest.isEntornoPRO(app, urlBase);
 		}
 	}
 }
