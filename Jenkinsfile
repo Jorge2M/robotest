@@ -22,7 +22,7 @@ pipeline {
             }
         }
 
-        stage('Run tests') {
+        stage('Run Unit Tests') {
             agent {
                 docker {
                     image 'maven:3.5.4-jdk-8-alpine'
@@ -41,8 +41,27 @@ pipeline {
                 }
             }
         }
+        
+        stage('Package') {
+            agent {
+                docker {
+                    image 'maven:3.5.4-jdk-8-alpine'
+                    args '-v /home/ubuntu/.m2:/root/.m2'
+                }
+            }
+            steps {
+	            sh "mvn -B package -DskipTests"
+            }
+            post {
+                success {
+                    script {
+                        stash includes: '**/target/', name: 'target'
+                    }
+                }
+            }
+        }
 
-        stage('Create and zip package') {
+        stage('Integration Tests') {
             when { anyOf { branch 'master'; branch 'develop' } }
             agent {
                 docker {
@@ -53,7 +72,6 @@ pipeline {
 
             steps {
 	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
-	        	sh "mvn -B clean package -DskipTests"
 	            sh "mvn -B failsafe:integration-test"
             }
 
