@@ -31,7 +31,7 @@ pipeline {
             }
             steps {
 	        	sh 'mvn clean'
-	            sh 'mvn test verify -DskipITs -DargLine="-Duser.timezone=Europe/Paris"'
+	            sh 'mvn test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
             }
             post {
                 success {
@@ -72,7 +72,7 @@ pipeline {
 
             steps {
 	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
-	            sh "mvn -B verify -Dskip.surefire.tests"
+	            sh "mvn -B verify -DskipUnitTests"
             }
 
             post {

@@ -11,9 +11,15 @@
 		<module>sapfiori</module>-->
     </modules>
 
+	<!-- 
+		-DskipTests skips both unit and integration tests
+		-DskipUnitTests skips unit tests but executes integration tests
+		-DskipIntegrationTests skips integration tests but executes unit tests -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<skipUnitTests>${skipTests}</skipUnitTests>
+        <skipIntegrationTests>${skipTests}</skipIntegrationTests>
 	</properties>
 
 	<dependencies>
@@ -59,7 +65,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M5</version>
 				<configuration>
-					<skipTests>${skip.surefire.tests}</skipTests>
+					<skipTests>${skipUnitTests}</skipTests>
 				</configuration>
 				<dependencies>
 					<dependency>
@@ -76,6 +82,7 @@
 				<version>3.0.0-M5</version>
 				<configuration>
         			<argLine>-Dfile.encoding=UTF-8</argLine>
+        			<skipTests>${skipIntegrationTests}</skipTests>
     			</configuration>
 			    <executions>
 			        <execution>
