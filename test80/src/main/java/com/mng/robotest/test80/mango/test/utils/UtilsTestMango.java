@@ -138,7 +138,11 @@ public class UtilsTestMango {
     		}
     	}
     	
-    	listProducts = GetterProducts.getProductsWithStock(dCtxSh, driver);
+        GetterProducts getterProducts = new GetterProducts
+        		.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver)
+        		.build();
+
+    	listProducts = getterProducts.getWithStock();
     	
         if (dCtxSh.vale!=null) {
         	for (Garment product : listProducts) {

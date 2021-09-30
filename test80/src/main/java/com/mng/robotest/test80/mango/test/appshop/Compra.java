@@ -18,6 +18,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
+import com.mng.robotest.test80.mango.test.getdata.products.Menu;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
@@ -101,14 +102,16 @@ public class Compra {
 		if (dCtxSh.appE==AppEcom.outlet) {
 			return null;
 		}
-		return GetterProducts.getProductsHomeWithStock(dCtxSh, driver);
-//		GetterProducts getterProducts = new GetterProducts.Builder(españa.getCodigo_alf(), app, driver)
-//			.method(MethodGetter.WebDriver)
-//			.linea(LineaType.home)
-//			.menu(Menu.Toallas)
-//			.build();
-//		
-//		return Arrays.asList(getterProducts.getWithStock().get(0), getterProducts.getWithStock().get(1));
+		
+		GetterProducts getterProducts = new GetterProducts.Builder(españa.getCodigo_alf(), dCtxSh.appE, driver)
+			.linea(LineaType.home)
+			.menusCandidates(Arrays.asList(
+					Menu.Albornoces, 
+					Menu.Toallas, 
+					Menu.Alfombras))
+			.build();
+		
+		return getterProducts.getWithStock();
 	}
 
 	private enum TypeCheque {Old, New}

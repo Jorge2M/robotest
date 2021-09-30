@@ -19,7 +19,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.getdata.JaxRsClient;
@@ -300,55 +299,6 @@ public class GetterProducts extends JaxRsClient {
 			return lineaType.name();
 		}
 	}
-	
-	//TODO remove
-    public static List<Garment> getProductsWithStock(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	List<Menu> galerys = Arrays.asList(
-    			Menu.Shorts, 
-    			Menu.Camisas, 
-    			Menu.Pijamas,
-    			Menu.Faldas,
-    			Menu.Fulares);
-    	
-    	GetterProducts getterProducts = null;
-    	for (Menu menu : galerys) {
-        	try {
-        		getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).menu(menu).build();
-        		if (getterProducts!=null && !getterProducts.getWithStock().isEmpty()) {
-        			return getterProducts.getWithStock();
-        		}
-        	}
-        	catch (Exception e) {
-        		Log4jTM.getLogger().warn("Problem retriving articles of type " + menu + " for country " + dCtxSh.pais.getCodigo_alf(), e);
-        	}
-    	}
-    	return Arrays.asList();
-    }
-    
-    public static List<Garment> getProductsHomeWithStock(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	List<Menu> galerys = Arrays.asList(
-    			Menu.Albornoces, 
-    			Menu.Toallas, 
-    			Menu.Alfombras);
-    	
-    	GetterProducts getterProducts = null;
-    	for (Menu menu : galerys) {
-        	try {
-        		getterProducts = new GetterProducts
-        				.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver)
-        				.linea(LineaType.home)
-        				.menu(menu)
-        				.build();
-        		if (getterProducts!=null && !getterProducts.getWithStock().isEmpty()) {
-        			return getterProducts.getWithStock();
-        		}
-        	}
-        	catch (Exception e) {
-        		Log4jTM.getLogger().warn("Problem retriving articles of type " + menu + " for country " + dCtxSh.pais.getCodigo_alf(), e);
-        	}
-    	}
-    	return Arrays.asList();
-    }
 	
 	public static class Builder {
 		private final String url;
