@@ -49,7 +49,7 @@ public class RobotestRestIT extends ServerRestIT {
 		//Given
 		InputParamsRobotest inputParams = InputParamsRobotest.from(
 				Suites.PagosPaises,
-				"chrome", 
+				"chromehless", 
 				Channel.desktop, 
 				AppEcom.shop, 
 				"https://shop.mango.com/preHome.faces")
