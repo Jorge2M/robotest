@@ -55,7 +55,7 @@ public class RobotestRestIT extends ServerRestIT {
 				"https://shop.mango.com/preHome.faces")
 				.asyncExec(false)
 				.version("V1")
-				.countrys(Arrays.asList("001","011"));
+				.countrys(Arrays.asList("001"));
 		
 		//When
 		SuiteBean suiteData = executeTestsAgainstServer(inputParams);
@@ -117,10 +117,10 @@ public class RobotestRestIT extends ServerRestIT {
 		
 		//Check TestCases
 		List<TestCaseBean> listTestCases = suiteData.getListTestRun().get(0).getListTestCase();
-		assertTrue(listTestCases.size()==2);
-		assertTrue(
-			"Check existe el test para la búsqueda: " + "France (011)", 
-			checkExistsTestCase("France (011)", listTestCases));
+		assertTrue(listTestCases.size()==1);
+//		assertTrue(
+//			"Check existe el test para la búsqueda: " + "France (011)", 
+//			checkExistsTestCase("France (011)", listTestCases));
 		assertTrue(
 			"Check existe el test para la búsqueda: " + "España (Península y Baleares) (001)", 
 			checkExistsTestCase("España (Península y Baleares) (001)", listTestCases));
