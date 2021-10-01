@@ -10,4 +10,4 @@ docker tag "$REPOSITORY_NAME/$IMAGE:latest" "$REPOSITORY:latest"
 
 echo $(aws --version)
 eval $(aws --region eu-west-1 ecr get-login --no-include-email --registry-ids ${PRO_ACCOUNT_ID})
-docker push -a "$REPOSITORY:latest"
+docker push -a "$REPOSITORY"
