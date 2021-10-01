@@ -36,7 +36,7 @@ pipeline {
             post {
                 success {
                     script {
-                        stash includes: '**/target/', name: 'target'
+                        stash includes: 'test80/**/target/', name: 'target'
                     }
                 }
             }
@@ -55,7 +55,7 @@ pipeline {
             post {
                 success {
                     script {
-                        stash includes: '**/target/', name: 'target'
+                        stash includes: 'test80/**/target/', name: 'target'
                     }
                 }
             }
@@ -88,8 +88,8 @@ pipeline {
       		when { expression { return env.BRANCH_NAME.equals('master') || env.BRANCH_NAME.equals('develop') || env.BRANCH_NAME.contains('release') } }
       		steps {
         		unstash 'target'
-        		sh 'chmod -R 777 ./infrastructure/aws/build-publish-docker.sh'
-        		sh './infrastructure/aws/build-publish-docker.sh'
+        		sh 'chmod -R 777 ./test80/infrastructure/aws/build-publish-docker.sh'
+        		sh './test80/infrastructure/aws/build-publish-docker.sh'
       		}
     	}
 
