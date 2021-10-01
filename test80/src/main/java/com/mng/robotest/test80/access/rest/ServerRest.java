@@ -45,6 +45,23 @@ import com.github.jorge2m.testmaker.restcontroller.ServerRestTM;
 //Also, the client wacs.exe is not instaled in the windows machine because a lack of .dll
 //If we want to automate the certificate renewal perhaps I must install .\wacs.exe in the Windows machine and choose the http01 autentication
 
+
+//** CREATION / RENEWAL **
+//1) Accder a la máquina-3 de Robotest
+//2) cd D:/Utils/win-acme
+//3) ./wacs.exe --validation route53 --route53iamrole x
+
+//** CREATION **/
+//4)  Option M: Create certificate (full options)
+//5)  Option 2: Manual input
+//6)  Host: robotest.pro.mango.com + Enter
+//7)  Option 6: [dns-01] Create verification records in AWS Route 53 + Enter
+//8)  Option 2: RSA Key
+//9)  Option 3: PFX archive + d:/TestWebdriver/test80-1.0
+//10) Option 1: None
+//11) Option 5: No (additional) store steps
+//12) Option 4: No (additional) installation steps (este podríamos cambiarlo para que ejecute un .bat con el zipado)
+
 public class ServerRest {
 
 	public static void main(String[] args) throws Exception {

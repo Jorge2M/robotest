@@ -61,28 +61,37 @@ pipeline {
             }
         }
 
-        stage('Integration Tests') {
-            when { anyOf { branch 'master'; branch 'develop' } }
-            agent {
-                docker {
-                    image 'markhobson/maven-chrome:jdk-8'
-                    args '--privileged --shm-size=1g -v /home/ubuntu/.m2:/root/.m2'
-                }
-            }
-
-            steps {
-	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
-	            sh "mvn -B verify -DskipUnitTests"
-            }
-
-            post {
-                success {
-                    script {
-                        stash includes: '**/target/', name: 'server-package'
-                    }
-                }
-            }
-        }
+//        stage('Integration Tests') {
+//            when { anyOf { branch 'master'; branch 'develop' } }
+//            agent {
+//                docker {
+//                    image 'markhobson/maven-chrome:jdk-8'
+//                    args '--privileged --shm-size=1g -v /home/ubuntu/.m2:/root/.m2'
+//                }
+//            }
+//
+//            steps {
+//	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
+//	            sh "mvn -B verify -DskipUnitTests"
+//            }
+//
+//            post {
+//                success {
+//                    script {
+//                        stash includes: '**/target/', name: 'server-package'
+//                    }
+//                }
+//            }
+//        }
+        
+        stage('Publish') {
+      		when { expression { return env.BRANCH_NAME.equals('master') || env.BRANCH_NAME.contains('release') } }
+      		steps {
+        		unstash buildStash
+        		sh 'chmod -R 777 ./infrastructure/aws/publish-docker.sh'
+        		sh './infrastructure/aws/publish-docker.sh'
+      		}
+    	}
 
 //        stage('Upload package to test S3') {
 //            when { anyOf { branch 'master'; branch 'develop' } }
