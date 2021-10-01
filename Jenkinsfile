@@ -85,7 +85,7 @@ pipeline {
 //        }
         
         stage('Publish') {
-      		when { expression { return env.BRANCH_NAME.equals('master') || env.BRANCH_NAME.contains('release') } }
+      		when { expression { return env.BRANCH_NAME.equals('master') || env.BRANCH_NAME.equals('develop') || env.BRANCH_NAME.contains('release') } }
       		steps {
         		unstash buildStash
         		sh 'chmod -R 777 ./infrastructure/aws/publish-docker.sh'
