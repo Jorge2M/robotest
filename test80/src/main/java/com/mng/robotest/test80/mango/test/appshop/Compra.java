@@ -28,6 +28,7 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigatio
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.NavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checqueregalo.PageChequeRegaloInputDataStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
@@ -149,6 +150,7 @@ public class Compra {
 		String nTarjeta;
 		String cvvTarjeta = "";
 		AccesoStpV.oneStep(dCtxSh, false, driver);
+		new SecBolsaStpV(dCtxSh, driver).clear();
 		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
 		secMenusStpV.seleccionLinea(LineaType.she, null, dCtxSh);
 		

@@ -396,8 +396,6 @@
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesoempl tarjeta="8000006326687" nombre="YALCIN , TUGBA" fecnac="27-2-1993"/>
-<accesovotf usuario="tda00413" password="mng00413"/>
 </pais>
 
 <pais nombre_pais="Беларусь" codigo="073">
@@ -489,8 +487,6 @@
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesoempl tarjeta="8000006227083" nombre="GJUNI , KLODIANA" fecnac="08-07-1994"/>
-<accesovotf usuario="tda00188" password="mng00188"/>
 </pais>
 
 <pais nombre_pais="Bosnia and Herzegovina " codigo="093">
@@ -590,7 +586,6 @@
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<!-- <accesoempl tarjeta="8000001472495" nombre="PENCHEV , MIROSLAV TSVETANOV" fecnac="6-5-1986"/>--> <!-- No funciona -->
 </pais>
 
 <pais nombre_pais="Croatia" codigo="092">
@@ -644,7 +639,6 @@
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<!--<accesoempl tarjeta="8000001372405" nombre="DUGEC , ANA" fecnac="25-8-1985"/>--> <!--No funciona la tarjeta-->
 </pais>
 
 <pais nombre_pais="Cyprus (Euros)" codigo="600">
@@ -702,7 +696,6 @@
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesovotf usuario="fra04388" password="mng04388"/>
 </pais>
 
 <pais nombre_pais="Czech Republic" codigo="061">
@@ -762,8 +755,6 @@
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesoempl tarjeta="8000005809907" nombre="DOCEKALOVA , NINA" fecnac="19-12-1993"/>
-<accesovotf usuario="tda01084" password="mng01084"/>
 </pais>
 <pais nombre_pais="Denmark" codigo="008">
 <codigo_pais>008</codigo_pais>
@@ -831,7 +822,6 @@
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <mobiluser>20123456</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
-<accesoempl tarjeta="8000009005190" nombre="THRAINSDOTTIR , HAFDIS" fecnac="23-2-1995"/>
 </pais>
 
 <pais nombre_pais="Estonia" codigo="053">
@@ -966,7 +956,6 @@
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <mobiluser>0401234567</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
-<accesoempl tarjeta="8000002859790" nombre="KIVI , KARMEN" fecnac="24-8-2000"/>
 </pais>
 
 <pais nombre_pais="France" codigo="011">
@@ -1025,8 +1014,6 @@
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesoempl tarjeta="8000000060433" nombre="DURAND , BEATRICE" fecnac="26-9-1971"/>
-<accesovotf usuario="fra04974" password="mng04974"/>
 </pais>
 
 <pais nombre_pais="Deutschland" codigo="004">
@@ -1111,8 +1098,6 @@
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesoempl tarjeta="8000000150417" nombre="CHIONNA , DONATA" fecnac="21-5-1976"/>
-<accesovotf usuario="tda01554" password="mng01554"/>
 </pais>
 
 <pais nombre_pais="Gibraltar" codigo="044">
@@ -1205,8 +1190,6 @@
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesoempl tarjeta="8000001371361" nombre="ZAGKIORE , ANGELIKE" fecnac="16-1-1978"/>
-<accesovotf usuario="tda01048" password="mng01048"/>
 </pais>
 
 <pais nombre_pais="Hungary" codigo="064">
@@ -1265,8 +1248,6 @@
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesoempl tarjeta="8000008104900" nombre="KISS , EVA" fecnac="26-12-1975"/>
-<accesovotf usuario="tda00472" password="mng00472"/>
 </pais>
 
 <pais nombre_pais="Iceland" codigo="024">
@@ -1373,7 +1354,6 @@
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesoempl tarjeta="8000001378346" nombre="FOLEY , LISA" fecnac="25-5-1980"/>
 </pais>
 
 <pais nombre_pais="Italia" codigo="005">
@@ -1432,20 +1412,6 @@
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesoempl tarjeta="8000001382572" nombre="PASTORI , DARIA" fecnac="7-2-1979"/>
-<!-- 
-select * from 
-    mngbd.usuarios_venta_asistida t1, 
-    mngbd.usuarios_venta_asis_tda_fisica t2,
-    mngbd.tiendas_fisicas t3
-where
-    t1.username = t2.username and
-    t2.id_tienda = t3.id and
-    t1.bloqueado = 'N' and
-    t3.codigo_pais = '005' and
-    t3.bloqueo_votf = 'N' and
-    t3.baja_shop is null-->
-<accesovotf usuario="tda01182" password="mng01182"/>
 </pais>
 
 <pais nombre_pais="Kosovo" codigo="095">
@@ -1689,8 +1655,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<!--<accesoempl tarjeta="8000001447394" nombre="VESTIDELLO , CECILE" fecnac="3-1-1991"/>--> <!-- No funciona la tarjeta -->
-<accesovotf usuario="tda01518" password="mng01518"/>
 </pais>
 
 <pais nombre_pais="Macedonia " codigo="096">
@@ -1771,7 +1735,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<!-- <accesovotf usuario="fra07092" password="mng07092"/>-->
 </pais>
 
 <pais nombre_pais="Moldova" codigo="074">
@@ -1941,8 +1904,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesoempl tarjeta="8000000120304" nombre="VAN SIMPSEN , GIOVANNE" fecnac="28-4-1966"/>
-<accesovotf usuario="tda01500" password="mng01500"/>
 </pais>
 
 <pais nombre_pais="Kuzey Kıbrıs (Türk Lirasi)" codigo="602"> <!-- Chipre del norte -->
@@ -2040,8 +2001,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<mobiluser>40123456</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
-<accesovotf usuario="tda00776" password="mng00776"/>
 </pais>
 
 <pais nombre_pais="Poland" codigo="060">
@@ -2104,8 +2063,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesoempl tarjeta="8000008324278" nombre="SHELKOVSKA , MARIIA" fecnac="17-10-1989"/>
-<accesovotf usuario="tda01490" password="mng01490"/>
 </pais>
 
 <pais nombre_pais="Portugal" codigo="010">
@@ -2164,7 +2121,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesoempl tarjeta="8000001370692" nombre="VIEIRA CANUTE, FATU" fecnac="12-5-1980"/>
 </pais>
 
 <pais nombre_pais="Romania" codigo="066">
@@ -2217,7 +2173,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<!--<accesoempl tarjeta="8000001372719" nombre="CINDEA , MIRELA-TEODORA" fecnac="15-12-1989"/>--> <!-- No funciona la tarjeta -->
 </pais>
 
 <pais nombre_pais="Россия (Российская Федерация)" codigo="075"> <!-- Russia -->
@@ -2283,7 +2238,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesovotf usuario="tda01476" password="mng01476"/>
 </pais>
 
 <pais nombre_pais="Serbia" codigo="094">
@@ -2390,7 +2344,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesoempl tarjeta="8000001371453" nombre="CEPELOVA , DANIELA" fecnac="8-5-1979"/>
 </pais>
 
 <pais nombre_pais="Slovenia" codigo="091">
@@ -2529,6 +2482,18 @@ where
 <marcamng>N</marcamng>
 <!-- select * from MNGBD.tarjeta_empleados where codigo_carnet = '8000000002266'; -->
 <accesoempl tarjeta="8000007330287" nif="32070858A" nombre="OCA MUÑOZ, ADRIAN"/>
+<!-- 
+select * from 
+    mngbd.usuarios_venta_asistida t1, 
+    mngbd.usuarios_venta_asis_tda_fisica t2,
+    mngbd.tiendas_fisicas t3
+where
+    t1.username = t2.username and
+    t2.id_tienda = t3.id and
+    t1.bloqueado = 'N' and
+    t3.codigo_pais = '005' and
+    t3.bloqueo_votf = 'N' and
+    t3.baja_shop is null-->
 <accesovotf usuario="tda00003" password="mng00003"/>
 </pais>
 
@@ -2799,7 +2764,6 @@ where
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <mobiluser>0765-260000</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
-<accesoempl tarjeta="8000003507713" nombre="CURDIC , DANIJELA" fecnac="23-1-1980"/>
 </pais>
 
 <pais nombre_pais="Schweiz" codigo="036">
@@ -2874,7 +2838,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesovotf usuario="tda00627" password="mng00627"/>
 <emailuser>jorge.munoz@mango.com</emailuser> <!-- Utilizaremos un email con timestamp para superar el control de fraude de "Rechnung" -->
 </pais>
 
@@ -2985,7 +2948,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesoempl tarjeta="8000001377875" nombre="BIBI , NAIEED" fecnac="22-12-1973"/>
 </pais>
 
 <pais nombre_pais="United Kingdom (Channel Islands)" codigo="019">
@@ -3687,8 +3649,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesoempl tarjeta="8000003801026" nombre="DE LA VEGA , PATRICIA" fecnac="6-1-1975"/>
-<accesovotf usuario="tda00398" password="mng00398"/>
 </pais>
 
 </continente>
@@ -4498,7 +4458,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesovotf usuario="tda01220" password="mng01220"/>
 </pais>
 
 <pais nombre_pais="Georgia" codigo="076">
@@ -4589,7 +4548,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesovotf usuario="tda01056" password="mng01056"/>
 </pais>
 
 <pais nombre_pais="India" codigo="664">
@@ -4815,7 +4773,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesovotf usuario="tda00410" password="mng00410"/>
 </pais>
 
 <pais nombre_pais="Myanmar" codigo="676">
@@ -5017,7 +4974,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesovotf usuario="fra09038" password="mng09038"/>
 </pais>
 
 <pais nombre_pais="Киргизия" codigo="083">
@@ -5099,9 +5055,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesovotf usuario="fra05674" password="mng05674"/>
-<!--<emailuser>libano.test.saldo@mango.com</emailuser>--> <!-- Es preciso probar con este email si queremos certificar el tema de storec -->
-<!--<passuser>mango123</passuser>-->
 </pais>
 
 <pais nombre_pais="Macao" codigo="743">
@@ -5187,7 +5140,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesovotf usuario="fra08894" password="mng08894"/>
 </pais>
 
 <pais nombre_pais="Maldives" codigo="667">
@@ -5406,7 +5358,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesovotf usuario="fra08873" password="mng08873" entregadomic="N"/>
 </pais>
 
 <pais nombre_pais="Qatar" codigo="644">
@@ -5460,7 +5411,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesovotf usuario="fra04493" password="mng04493" entregadomic="N"/>
 </pais>
 
 <pais nombre_pais="Saudi Arabia" codigo="632">
@@ -5571,7 +5521,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesovotf usuario="fra04489" password="mng04489" entregadomic="N"/>
 </pais>
 
 <pais nombre_pais="대한민국" codigo="728"> <!-- Corea del Sur -->
@@ -5621,7 +5570,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesovotf usuario="tda01535" password="mng01535"/>
 </pais>
 
 <pais nombre_pais="Sri Lanka" codigo="669">
@@ -5793,7 +5741,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesovotf usuario="tda01463" password="mng01463"/>
 </pais>
 
 <pais nombre_pais="United Arab Emirates" codigo="647">
@@ -5850,7 +5797,6 @@ where
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesovotf usuario="fra06836" password="mng06836"/>
 </pais>
 
 <pais nombre_pais="Uzbekistan" codigo="081">
