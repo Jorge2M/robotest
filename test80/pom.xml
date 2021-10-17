@@ -24,6 +24,11 @@
 		    <artifactId>httpclient</artifactId>
 		    <version>4.5.13</version>
 		</dependency>
+		<dependency>
+			<groupId>com.mango</groupId>
+			<artifactId>aws.secrets.client</artifactId>
+			<version>master-20200226-100233-85319be-14</version>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -15,6 +15,9 @@ import org.testng.annotations.Test;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.beans.IdiomaPais;
+import com.mng.robotest.test80.mango.test.beans.Pais;
+import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -22,9 +25,6 @@ import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedido;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.getdata.loyaltypoints.ClientApiLoyaltyPointsDev;
 import com.mng.robotest.test80.mango.test.pageobject.shop.loyalty.PageHomeDonateLikes.ButtonLikes;
@@ -39,41 +39,36 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets.SecretType;
+
 
 public class Loyalty {
 	
 	private final static Pais españa = PaisGetter.get(PaisShop.España);
 	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
-	
+
 	final static String userProWithLPoints = "ticket_digital_es@mango.com";
-	final static String passwUserProWithLPoints = "mango123";
-//	
-//	final static String userWithLPointsOnlyInTest = "test.performance10@mango.com";
-//	final static String passwUserWithLPointsOnlyInTest = "Mango123";
+
 	
 	public static enum UserTest {
-		loy001(userProWithLPoints, passwUserProWithLPoints, "6051483560048388114", "ES"),
-		loy002("test.performance21@mango.com", "Mango123", "6877377061230042978", "ES"),
-		loy003("test.performance22@mango.com", "Mango123", "6876577027622042923", "ES"),
-		loy005_emisor("test.performance23@mango.com", "Mango123", "6875476978997042979", "ES"),
-		loy005_receptor("test.performance24@mango.com", "Mango123", "6876477022921042981", "ES");
+		loy001(userProWithLPoints, "6051483560048388114", "ES"),
+		loy002("test.performance21@mango.com", "6877377061230042978", "ES"),
+		loy003("test.performance22@mango.com", "6876577027622042923", "ES"),
+		loy005_emisor("test.performance23@mango.com", "6875476978997042979", "ES"),
+		loy005_receptor("test.performance24@mango.com", "6876477022921042981", "ES");
 		
 		private String email;
-		private String password;
 		private String contactId;
 		private String country;
-		private UserTest(String email, String password, String contactId, String country) {
+		private UserTest(String email, String contactId, String country) {
 			this.email = email;
-			this.password = password;
 			this.contactId = contactId;
 			this.country = country;
 		}
 		
 		public String getEmail() {
 			return email;
-		}
-		public String getPassword() {
-			return password;
 		}
 		public String getContactId() {
 			return contactId;
@@ -101,9 +96,11 @@ public class Loyalty {
     	WebDriver driver = TestMaker.getDriverTestCase();
         DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userConnected = UserTest.loy001.getEmail();
-        dCtxSh.passwordUser = UserTest.loy001.getPassword();
         dCtxSh.userRegistered = true;
-        
+        dCtxSh.passwordUser = GetterSecrets.factory()
+    			.getCredentials(SecretType.SHOP_STANDARD_USER)
+    			.getPassword();
+
         AccesoStpV.oneStep(dCtxSh, true, driver);
         
         //Queremos asegurarnos que obtenemos artículos no-rebajados para poder aplicarle el descuento por Loyalty Points
@@ -152,10 +149,14 @@ public class Loyalty {
 		dCtxSh.userRegistered = true;
 		if (isEntornoPro) {
 			dCtxSh.userConnected = userProWithLPoints;
-			dCtxSh.passwordUser = passwUserProWithLPoints;
+			dCtxSh.passwordUser = GetterSecrets.factory()
+	    			.getCredentials(SecretType.SHOP_STANDARD_USER)
+	    			.getPassword();
 		} else {
 			dCtxSh.userConnected = UserTest.loy002.getEmail();
-			dCtxSh.passwordUser = UserTest.loy002.getPassword();
+			dCtxSh.passwordUser = GetterSecrets.factory()
+					.getCredentials(SecretType.SHOP_PERFORMANCE_USER)
+					.getPassword();
 		}
 
 		AccesoStpV.oneStep(dCtxSh, false, driver);
@@ -188,10 +189,14 @@ public class Loyalty {
 		dCtxSh.userRegistered = true;
 		if (isEntornoPro) {
 			dCtxSh.userConnected = userProWithLPoints;
-			dCtxSh.passwordUser = passwUserProWithLPoints;
+			dCtxSh.passwordUser = GetterSecrets.factory()
+	    			.getCredentials(SecretType.SHOP_STANDARD_USER)
+	    			.getPassword();
 		} else {
 			dCtxSh.userConnected = UserTest.loy003.getEmail();
-			dCtxSh.passwordUser = UserTest.loy003.getPassword();
+			dCtxSh.passwordUser = GetterSecrets.factory()
+					.getCredentials(SecretType.SHOP_PERFORMANCE_USER)
+					.getPassword();
 		}
 
 		AccesoStpV.oneStep(dCtxSh, false, driver);
@@ -266,14 +271,19 @@ public class Loyalty {
 		}
 		//Nota: la operativa de transferencia de likes no funciona si restando los puntos el emisor se queda < 1500 likes
 		int pointsRegalar = 2500;
+		
+		String passwordTestPerformmance = GetterSecrets.factory()
+				.getCredentials(SecretType.SHOP_PERFORMANCE_USER)
+				.getPassword();
 		dCtxSh.userConnected = UserTest.loy005_receptor.getEmail();
-		dCtxSh.passwordUser = UserTest.loy005_receptor.getPassword();
+		dCtxSh.passwordUser = passwordTestPerformmance;
 		dCtxSh.userRegistered = true;
+		
 		AccesoStpV.oneStep(dCtxSh, false, driver);
 		SecMenusUserStpV secMenusUserStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
 		int iniPointsReceptor = secMenusUserStpV.clickMenuMangoLikesYou();
 		
-		secMenusUserStpV.logoffLogin(UserTest.loy005_emisor.getEmail(), UserTest.loy005_receptor.getPassword());
+		secMenusUserStpV.logoffLogin(UserTest.loy005_emisor.getEmail(), passwordTestPerformmance);
 		int iniPointsEmisor = secMenusUserStpV.clickMenuMangoLikesYou();
 		if (iniPointsEmisor < pointsRegalar && !isEntornoPro) {
 			ClientApiLoyaltyPointsDev client = new ClientApiLoyaltyPointsDev();
@@ -289,7 +299,7 @@ public class Loyalty {
 		pageRegalarMisLikesStpV.inputNumLikesAndClickEnviarRegalo(pointsRegalar);
 		
 		int finPointsEmisor = secMenusUserStpV.clickMenuMangoLikesYou();
-		secMenusUserStpV.logoffLogin(UserTest.loy005_receptor.getEmail(), UserTest.loy005_receptor.getPassword());
+		secMenusUserStpV.logoffLogin(UserTest.loy005_receptor.getEmail(), passwordTestPerformmance);
 		int finPointsReceptor = secMenusUserStpV.clickMenuMangoLikesYou();
 		
 		DataRegaloPuntos dataPoints = new DataRegaloPuntos();

@@ -2,10 +2,10 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
 import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.test80.mango.test.beans.Pago;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.klarna.DataKlarna;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.klarna.PageKlarnaStpV;
@@ -43,7 +43,7 @@ public class PagoKlarna extends PagoStpV {
     	Pago pago = this.dCtxPago.getDataPedido().getPago();
     	
     	DataKlarna dataKlarna = new DataKlarna();
-    	dataKlarna.setEmail(Constantes.mail_standard);
+    	dataKlarna.setEmail(Constantes.MAIL_PERSONAL);
     	dataKlarna.setCodPostal(dCtxSh.pais.getCodpos());
     	dataKlarna.setUserName("Jorge");
     	dataKlarna.setApellidos("Muñoz Martínez");

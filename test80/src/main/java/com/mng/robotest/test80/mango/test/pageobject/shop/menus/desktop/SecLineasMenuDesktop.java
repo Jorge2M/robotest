@@ -10,15 +10,15 @@ import org.openqa.selenium.WebElement;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaType;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import com.mng.robotest.test80.mango.test.beans.Linea;
+import com.mng.robotest.test80.mango.test.beans.Pais;
+import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
+import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 
 public class SecLineasMenuDesktop extends PageObjTM {

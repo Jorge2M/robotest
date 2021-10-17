@@ -10,8 +10,8 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.InputParamsTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.PaisAplicaVale;
+import com.mng.robotest.test80.mango.test.beans.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.suites.PagosPaisesSuite.VersionPagosSuite;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
@@ -35,18 +35,14 @@ public class ListPrecompraPaises {
 				AppEcom app = (AppEcom)inputData.getApp();
 				Channel channel = inputData.getChannel();
 				if (UtilsTestMango.paisConCompra(pais, app)) {
-					if (!(version.isEmpl() && pais.getAccesoEmpl().getTarjeta()==null)) {
-						if (!(app==AppEcom.votf && pais.getAccesoVOTF().getUsuario()==null)) {
-							DataCtxShop dCtxSh = new DataCtxShop(app, channel, pais, pais.getListIdiomas().get(0)/*, inputData.getUrlBase()*/);
-							listTests.add(new PaisAplicaVale(version, dCtxSh, prioridad));
-							prioridad+=1;
-							System.out.println(
-								"Creado Test con datos: " +
-								",Pais=" + pais.getNombre_pais() +
-								",Idioma=" + primerIdioma.getCodigo().getLiteral() +
-								",Num Idiomas=" + pais.getListIdiomas().size());
-						}
-					}
+					DataCtxShop dCtxSh = new DataCtxShop(app, channel, pais, pais.getListIdiomas().get(0)/*, inputData.getUrlBase()*/);
+					listTests.add(new PaisAplicaVale(version, dCtxSh, prioridad));
+					prioridad+=1;
+					System.out.println(
+						"Creado Test con datos: " +
+						",Pais=" + pais.getNombre_pais() +
+						",Idioma=" + primerIdioma.getCodigo().getLiteral() +
+						",Num Idiomas=" + pais.getListIdiomas().size());
 				}
 			}
 		}

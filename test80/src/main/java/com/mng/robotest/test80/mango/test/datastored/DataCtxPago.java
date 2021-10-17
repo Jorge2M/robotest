@@ -3,8 +3,8 @@ package com.mng.robotest.test80.mango.test.datastored;
 import java.util.HashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import com.mng.robotest.test80.mango.test.beans.Pago;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 
 
 public class DataCtxPago {

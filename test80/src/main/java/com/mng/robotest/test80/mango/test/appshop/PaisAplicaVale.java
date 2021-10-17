@@ -53,7 +53,7 @@ public class PaisAplicaVale implements Serializable {
 	}
 	
 	@Test (
-		groups={"Pagos", "shop-movil-web", "Canal:desktop,mobile_App:all"}, alwaysRun=true, 
+		groups={"Pagos", "shop-movil-web", "Canal:desktop,mobile_App:shop,outlet"}, alwaysRun=true, 
 		description="Compra usuario no registrado")
 	public void CHK001_Compra() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();

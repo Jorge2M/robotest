@@ -12,6 +12,8 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.mng.robotest.test80.mango.test.beans.Linea;
+import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -20,8 +22,6 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;

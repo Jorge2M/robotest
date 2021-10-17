@@ -13,10 +13,9 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.mango.test.beans.IdiomaPais;
+import com.mng.robotest.test80.mango.test.beans.Pais;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.DataRegistro;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.PageRegistroIni;
@@ -49,7 +48,7 @@ public class PageRegistroIniStpV {
 		description=
 			"Introducir:<br>" + 
 			"  - Un email no existente: <b>#{emailNonExistent}</b><br>" +
-			"  - Password usuario: " + Constantes.pass_standard + "<br>" + 
+			"  - Password usuario: *****<br>" + 
 			"  - Seleccionar el link de publicidad<br>" +
 			"  - El resto de datos específicos para el país \"#{pais.getNombre_pais()}\"", 
 		expected=

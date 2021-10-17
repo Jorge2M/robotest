@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
+import com.mng.robotest.test80.mango.test.beans.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataNinos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.PageRegistroNinos;
 import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;

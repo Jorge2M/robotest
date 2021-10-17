@@ -16,8 +16,8 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.sitemap.Sitemapindex;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.sitemap.Sitemapindex.Sitemap;
+import com.mng.robotest.test80.mango.test.beans.sitemap.Sitemapindex;
+import com.mng.robotest.test80.mango.test.beans.sitemap.Sitemapindex.Sitemap;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 
 /**

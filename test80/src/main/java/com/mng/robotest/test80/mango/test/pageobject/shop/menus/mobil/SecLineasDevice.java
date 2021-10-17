@@ -10,9 +10,9 @@ import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaType;
+import com.mng.robotest.test80.mango.test.beans.Linea;
+import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
+import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 
 public abstract class SecLineasDevice extends PageObjTM {

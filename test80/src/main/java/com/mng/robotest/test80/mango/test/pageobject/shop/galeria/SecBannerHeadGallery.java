@@ -5,10 +5,10 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
-
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+import com.mng.robotest.test80.mango.test.beans.IdiomaPais;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 

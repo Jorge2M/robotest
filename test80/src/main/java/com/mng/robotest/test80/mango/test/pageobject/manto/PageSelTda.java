@@ -3,6 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.manto;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.test80.mango.test.data.TiendaMantoEnum.TiendaManto;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -30,6 +31,6 @@ public class PageSelTda {
 
 	public static void selectTienda(TiendaManto tienda, WebDriver driver) {
 		String xpath = getXpath_linkTienda(tienda);
-		click(By.xpath(xpath), driver).exec();
+		click(By.xpath(xpath), driver).type(TypeClick.webdriver).exec();
 	}
 }

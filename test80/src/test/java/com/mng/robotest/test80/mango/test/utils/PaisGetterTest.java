@@ -8,8 +8,8 @@ import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
+import com.mng.robotest.test80.mango.test.beans.Pais;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 
 public class PaisGetterTest {
 

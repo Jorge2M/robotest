@@ -12,10 +12,10 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.mng.robotest.test80.mango.test.beans.Continente;
+import com.mng.robotest.test80.mango.test.beans.Pais;
+import com.mng.robotest.test80.mango.test.beans.Response;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Continente;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Response;
 
 public class PaisGetter {
 	

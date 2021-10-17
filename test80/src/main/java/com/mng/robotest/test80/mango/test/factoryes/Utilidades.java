@@ -3,8 +3,8 @@ package com.mng.robotest.test80.mango.test.factoryes;
 import java.util.*;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
+import com.mng.robotest.test80.mango.test.beans.Linea;
+import com.mng.robotest.test80.mango.test.beans.Pais;
 
 
 public class Utilidades {

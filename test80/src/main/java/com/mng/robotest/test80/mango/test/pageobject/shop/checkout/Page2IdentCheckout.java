@@ -16,13 +16,14 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
-import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.mango.test.beans.Pais;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.PopupFindAddress;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets.SecretType;
 
 public class Page2IdentCheckout extends PageObjTM {
 	
@@ -51,7 +52,6 @@ public class Page2IdentCheckout extends PageObjTM {
     private final static String XPathBotonContinuar = "//div[@class='submitContent']/input[@type='submit']";
     private final static String XPathMsgAduanas = "//div[@class='aduanas']";
     private final static String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
-    private final static String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
     
     //Con el substring simulamos un ends-with (que no está disponible en xpath 1.0)
     private static String XPathSelectLocalidades = "//select[substring(@id, string-length(@id) - string-length('localidades') +1) = 'localidades']";
@@ -551,6 +551,7 @@ public class Page2IdentCheckout extends PageObjTM {
         String movil = "665015122";
         movil = pais.getTelefono();
         String dni = pais.getDni();
+    	String passStandard = GetterSecrets.factory().getCredentials(SecretType.SHOP_STANDARD_USER).getPassword();
         
         // Lo repetimos 2 veces porque el sendKeys sufre un bug ocasional que envía los datos a inputs incorrectos
         for (int i = 0; i < 2; i++) {
@@ -558,7 +559,7 @@ public class Page2IdentCheckout extends PageObjTM {
             setApellidosUsuarioIfVisible(apellidosUsr, datosSeteados);
             setMiddleNameUsuarioIfVisible(middleNameUsr, datosSeteados);
             setTelefonoIfVisible(movil, datosSeteados);
-            setPasswordIfVisible(Constantes.pass_standard, datosSeteados);
+            setPasswordIfVisible(passStandard, datosSeteados);
             setEmailIfExists(emailUsr, datosSeteados);
             setInputDireccion1IfVisible(direccion1, datosSeteados);
             setInputDireccion2IfVisible(direccion2, datosSeteados);

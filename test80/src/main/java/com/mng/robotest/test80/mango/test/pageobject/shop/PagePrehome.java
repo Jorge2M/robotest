@@ -12,7 +12,6 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -23,6 +22,9 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAf
 import com.mng.robotest.test80.mango.test.pageobject.utils.LocalStorage;
 import com.mng.robotest.test80.mango.test.stpv.shop.acceptcookies.ModalSetCookiesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.acceptcookies.SectionCookiesStpV;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.Secret;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets.SecretType;
 import com.mng.robotest.test80.mango.test.utils.testab.TestABactive;
 
 /**
@@ -248,7 +250,8 @@ public class PagePrehome extends PageObjTM {
     public void identJCASifExists() {
         waitForPageLoaded(driver);
         if (PageJCAS.thisPageIsShown(driver)) {
-            PageJCAS.identication(driver, Constantes.userManto, Constantes.passwordManto);
+        	Secret secret = GetterSecrets.factory().getCredentials(SecretType.MANTO_USER);
+            PageJCAS.identication(driver, secret.getUser(), secret.getPassword());
         }
     }    
     

@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.factoryes.jaxb;
+package com.mng.robotest.test80.mango.test.beans;
 
 import java.io.Serializable;
 import java.net.URI;
@@ -7,7 +7,7 @@ import java.util.*;
 import javax.xml.bind.annotation.*;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
+import com.mng.robotest.test80.mango.test.beans.Pago.TypePago;
 import com.mng.robotest.test80.mango.test.utils.LevelPais;
 import com.mng.robotest.test80.mango.test.utils.PagoGetter;
 import com.mng.robotest.test80.mango.test.utils.PagoGetter.PaymentCountry;
@@ -45,8 +45,6 @@ public class Pais implements Serializable {
     
     Tienda tienda = new Tienda();
     Shoponline shoponline = new Shoponline();
-    AccesoEmpl accesoEmpl = new AccesoEmpl();
-    AccesoVOTF accesoVOTF = new AccesoVOTF();
     
     @XmlElement(name="pago") 
     List<Pago> listPagos = new LinkedList<>();
@@ -258,24 +256,6 @@ public class Pais implements Serializable {
     public void setShoponline(Shoponline shoponline) {
         this.shoponline = shoponline;
     }
-    
-    public AccesoEmpl getAccesoEmpl() {
-        return this.accesoEmpl;
-    }
-
-    @XmlElement(name="accesoempl")
-    public void setAccesoEmpl(AccesoEmpl accesoEmpl) {
-        this.accesoEmpl = accesoEmpl;
-    }
-    
-    public AccesoVOTF getAccesoVOTF() {
-        return this.accesoVOTF;
-    }
-
-    @XmlElement(name="accesovotf")
-    public void setAccesoVOTF(AccesoVOTF accesoVOTF) {
-        this.accesoVOTF = accesoVOTF;
-    } 
     
     public List<Pago> getListPagos() {
         return this.listPagos;

@@ -12,8 +12,8 @@ import com.github.jorge2m.testmaker.conf.State;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import com.mng.robotest.test80.mango.test.beans.Linea;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.DataBanner;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.ManagerBannersScreen;
 import com.mng.robotest.test80.mango.test.stpv.shop.banner.SecBannersStpV;

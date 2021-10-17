@@ -10,8 +10,10 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.beans.AccesoVOTF;
+import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
+import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.votf.PageSelectLineaVOTF;
 import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
@@ -44,7 +46,9 @@ public class PageSelectLineaVOTFStpV {
         PageSelectLineaVOTF.clickBanner(LineaType.she, driver);
         PageSelectLineaVOTF.clickMenu(LineaType.she, numMenu, driver);
         SecCabecera.getNew(Channel.desktop, AppEcom.votf, driver).clickLogoMango();
-        SectionBarraSupVOTFStpV.validate(dCtxSh.pais.getAccesoVOTF().getUsuario(), driver);
+        
+        AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dCtxSh.pais));
+        SectionBarraSupVOTFStpV.validate(accesoVOTF.getUsuario(), driver);
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 

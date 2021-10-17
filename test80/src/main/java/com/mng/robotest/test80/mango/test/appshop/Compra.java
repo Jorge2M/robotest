@@ -6,6 +6,9 @@ import com.github.jorge2m.testmaker.domain.InputParamsTM.TypeAccess;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.beans.IdiomaPais;
+import com.mng.robotest.test80.mango.test.beans.Pais;
+import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
@@ -13,9 +16,6 @@ import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedido;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
 import com.mng.robotest.test80.mango.test.getdata.products.Menu;
@@ -34,6 +34,8 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checqueregalo.PageChequeRega
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMiCuentaStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets.SecretType;
 
 import static com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.BuilderCheckout;
 
@@ -50,6 +52,7 @@ public class Compra {
 	private final static Pais francia = PaisGetter.get(PaisShop.France);
 	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
 	private final static IdiomaPais italiano = italia.getListIdiomas().get(0);
+
 
 	public Compra() {}
 
@@ -70,9 +73,12 @@ public class Compra {
 	public void COM001_Compra_HomeProducts_TrjSaved_Empl() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
-		dCtxSh.userConnected = "test.performance10@mango.com";
-		dCtxSh.passwordUser = "Mango123";
+		
 		dCtxSh.userRegistered = true;
+		dCtxSh.userConnected = "test.performance10@mango.com";
+		dCtxSh.passwordUser = GetterSecrets.factory()
+			.getCredentials(SecretType.SHOP_PERFORMANCE_USER)
+			.getPassword();
 
 		//To checkout
 		FlagsTestCkout FTCkout = new FlagsTestCkout();
@@ -142,8 +148,11 @@ public class Compra {
 			dCtxSh.pais = españa;
 		} else {
 			dCtxSh.pais = francia;
+			
 			dCtxSh.userConnected = "francia.test@mango.com";
-			dCtxSh.passwordUser = "mango123";
+			dCtxSh.passwordUser = GetterSecrets.factory()
+				.getCredentials(SecretType.SHOP_STANDARD_USER)
+				.getPassword();
 		}
 
 		//Creamos una estructura para ir almacenando los datos del proceso de pagos
@@ -175,7 +184,7 @@ public class Compra {
 		ChequeRegalo chequeRegalo = new ChequeRegalo();
 		chequeRegalo.setNombre("Jorge");
 		chequeRegalo.setApellidos("Muñoz Martínez");
-		chequeRegalo.setEmail(Constantes.mail_standard);
+		chequeRegalo.setEmail(Constantes.MAIL_PERSONAL);
 		chequeRegalo.setImporte(Importe.euro50);
 		chequeRegalo.setMensaje("Te conocía aún antes de haberte formado en el vientre de tu madre");
 		pageChequeRegaloInputDataStpV.inputDataAndClickComprar(dCtxSh.channel, dCtxSh.appE, chequeRegalo);

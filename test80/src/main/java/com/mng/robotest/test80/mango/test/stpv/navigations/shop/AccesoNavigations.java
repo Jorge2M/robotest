@@ -5,8 +5,10 @@ import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.beans.AccesoVOTF;
+import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
+import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.landing.PageLanding;
@@ -65,8 +67,10 @@ public class AccesoNavigations {
      */
     public static void accesoVOTF(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         PageLoginVOTF.goToFromUrlAndSetTestABs(/*dCtxSh.urlAcceso,*/ dCtxSh, driver);
-        PageLoginVOTF.inputUsuario(dCtxSh.pais.getAccesoVOTF().getUsuario(), driver);
-        PageLoginVOTF.inputPassword(dCtxSh.pais.getAccesoVOTF().getPassword(), driver);
+        
+        AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dCtxSh.pais));
+        PageLoginVOTF.inputUsuario(accesoVOTF.getUsuario(), driver);
+        PageLoginVOTF.inputPassword(accesoVOTF.getPassword(), driver);
         PageLoginVOTF.clickButtonContinue(driver);
         if (dCtxSh.pais.getListIdiomas().size() > 1) {
             PageSelectIdiomaVOTF.selectIdioma(dCtxSh.idioma.getCodigo(), driver);

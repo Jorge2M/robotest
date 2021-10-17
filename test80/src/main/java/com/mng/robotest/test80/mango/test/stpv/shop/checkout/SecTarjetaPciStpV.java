@@ -7,9 +7,9 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
+import com.mng.robotest.test80.mango.test.beans.Pago;
+import com.mng.robotest.test80.mango.test.beans.Pais;
+import com.mng.robotest.test80.mango.test.beans.Pago.TypePago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.pci.SecTarjetaPci;
 

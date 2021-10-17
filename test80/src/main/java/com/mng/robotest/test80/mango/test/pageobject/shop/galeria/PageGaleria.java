@@ -14,7 +14,7 @@ import org.openqa.selenium.interactions.Locatable;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
+import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;

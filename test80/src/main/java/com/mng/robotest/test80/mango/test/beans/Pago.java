@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.factoryes.jaxb;
+package com.mng.robotest.test80.mango.test.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;

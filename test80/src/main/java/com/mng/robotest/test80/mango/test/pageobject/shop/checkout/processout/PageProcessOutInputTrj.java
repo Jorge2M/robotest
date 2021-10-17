@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
+import com.mng.robotest.test80.mango.test.beans.Pago;
 
 public class PageProcessOutInputTrj extends PageObjTM {
 

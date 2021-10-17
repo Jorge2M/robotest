@@ -2,9 +2,9 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
 import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.test80.mango.test.beans.Pago;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.sepa.PageSepa1rstStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.sepa.PageSepaResultMobilStpV;

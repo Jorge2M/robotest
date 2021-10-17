@@ -3,8 +3,9 @@ package com.mng.robotest.test80.mango.test.utils.checkmenus;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.data.CodIdioma;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 
 public class MenuTraduc {
 	

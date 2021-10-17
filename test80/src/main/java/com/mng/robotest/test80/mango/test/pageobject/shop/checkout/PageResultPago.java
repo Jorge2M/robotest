@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
+import com.mng.robotest.test80.mango.test.beans.Pago.TypePago;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 

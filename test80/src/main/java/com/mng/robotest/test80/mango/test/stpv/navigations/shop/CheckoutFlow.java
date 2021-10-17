@@ -18,16 +18,17 @@ import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.beans.AccesoEmpl;
+import com.mng.robotest.test80.mango.test.beans.IdiomaPais;
+import com.mng.robotest.test80.mango.test.beans.Pago;
+import com.mng.robotest.test80.mango.test.beans.Pais;
+import com.mng.robotest.test80.mango.test.beans.Pago.TypePago;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
@@ -50,6 +51,8 @@ import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
+
+import static com.mng.robotest.test80.mango.test.data.PaisShop.España;
 
 public class CheckoutFlow {
 
@@ -167,8 +170,8 @@ public class CheckoutFlow {
         if ((dCtxPago.getFTCkout().testCodPromocional || dCtxPago.getFTCkout().isEmpl) && 
         	 dCtxSh.appE!=AppEcom.votf) {
             DataBag dataBag = dCtxPago.getDataPedido().getDataBag();    
-            if (dCtxPago.getFTCkout().isEmpl) {
-                testInputCodPromoEmpl(dataBag);
+            if (dCtxPago.getFTCkout().isEmpl && España.equals(dCtxSh.pais)) {
+                testInputCodPromoEmplSpain(dataBag);
             } else {
                 if (dCtxSh.vale!=null) {
                     if (dCtxSh.channel==Channel.mobile) {
@@ -190,9 +193,10 @@ public class CheckoutFlow {
         }
     }
     
-    public void testInputCodPromoEmpl(DataBag dataBag) throws Exception {
-        pageCheckoutWrapperStpV.inputTarjetaEmplEnCodPromo(dCtxSh.pais);
-        pageCheckoutWrapperStpV.inputDataEmplEnPromoAndAccept(dataBag, dCtxSh.pais, dCtxSh.appE);
+    public void testInputCodPromoEmplSpain(DataBag dataBag) throws Exception {
+    	AccesoEmpl accesoEmpl = AccesoEmpl.forSpain(); 
+        pageCheckoutWrapperStpV.inputTarjetaEmplEnCodPromo(dCtxSh.pais, accesoEmpl);
+        pageCheckoutWrapperStpV.inputDataEmplEnPromoAndAccept(dataBag, accesoEmpl, dCtxSh.pais, dCtxSh.appE);
     }
     
     /**

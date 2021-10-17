@@ -5,8 +5,8 @@ import org.testng.annotations.*;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.rebajas.RebajasJun2019;
+import com.mng.robotest.test80.mango.test.beans.*;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.github.jorge2m.testmaker.domain.InputParamsTM;

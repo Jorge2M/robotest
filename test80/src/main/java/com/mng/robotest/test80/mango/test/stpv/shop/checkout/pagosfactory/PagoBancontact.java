@@ -2,11 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
 import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.test80.mango.test.beans.Pago;
+import com.mng.robotest.test80.mango.test.beans.Pago.TypeTarj;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypeTarj;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.d3d.PageD3DLoginStpV;
 
 public class PagoBancontact extends PagoStpV {

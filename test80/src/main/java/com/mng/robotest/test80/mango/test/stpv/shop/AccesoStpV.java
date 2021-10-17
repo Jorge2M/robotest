@@ -16,9 +16,9 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.beans.IdiomaPais;
+import com.mng.robotest.test80.mango.test.beans.Pais;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
@@ -167,7 +167,7 @@ public class AccesoStpV {
     }
     
     @Step (
-    	description="Seleccionar \"Iniciar Sesión\" e identificarse con #{dCtxSh.getUserConnected()} / #{dCtxSh.getPasswordUser()}", 
+    	description="Seleccionar \"Iniciar Sesión\" e identificarse con #{dCtxSh.getUserConnected()}", 
         expected="La identificación es correcta",
         saveHtmlPage=SaveWhen.Always,
         saveNettraffic=SaveWhen.Always)

@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Arrays;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaType;
+import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
+import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
 
 public interface MenuLateralDesktop {
 	abstract public AppEcom getApp();

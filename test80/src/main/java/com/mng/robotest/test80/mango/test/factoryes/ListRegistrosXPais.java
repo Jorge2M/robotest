@@ -7,7 +7,7 @@ import org.testng.annotations.*;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.Registro;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
+import com.mng.robotest.test80.mango.test.beans.*;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.github.jorge2m.testmaker.service.TestMaker;
 

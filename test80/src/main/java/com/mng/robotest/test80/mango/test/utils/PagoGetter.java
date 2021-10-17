@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
+import com.mng.robotest.test80.mango.test.beans.Pago;
+import com.mng.robotest.test80.mango.test.beans.Pais;
+import com.mng.robotest.test80.mango.test.beans.Pago.TypePago;
 import com.github.jorge2m.testmaker.conf.Channel;
 
 public class PagoGetter {

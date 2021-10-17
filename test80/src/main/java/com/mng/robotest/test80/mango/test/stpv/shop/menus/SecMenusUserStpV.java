@@ -104,7 +104,7 @@ public class SecMenusUserStpV {
 	}
 	
 	@Step (
-		description="Identificarse con los datos del registro (#{userConnect} / #{userPassword})", 
+		description="Identificarse con los datos del registro (#{userConnect})", 
         expected="La nueva identificación es correcta")
     public void identification(String userConnect, String userPassword) throws Exception {
         PageIdentificacion.iniciarSesion(userConnect, userPassword, channel, app, driver);

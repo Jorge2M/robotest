@@ -7,6 +7,10 @@ import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMake
 //import com.github.jorge2m.testmaker.listeners.CallBack;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.Secret;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets.SecretType;
+
 
 public class SuiteMakerResources {
     
@@ -18,8 +22,9 @@ public class SuiteMakerResources {
     	parametersReturn.put(Constantes.paramPayments, params.getListaPaymentsCommaSeparated());
 
         //Credenciales acceso a Manto
-    	parametersReturn.put(Constantes.paramUsrmanto, Constantes.userManto);
-    	parametersReturn.put(Constantes.paramPasmanto, Constantes.passwordManto);
+    	Secret secret = GetterSecrets.factory().getCredentials(SecretType.MANTO_USER);
+    	parametersReturn.put(Constantes.paramUsrmanto, secret.getUser());
+    	parametersReturn.put(Constantes.paramPasmanto, secret.getPassword());
         if (params.getUrlManto()!=null) {
         	parametersReturn.put(Constantes.paramUrlmanto, params.getUrlManto());
         } else {
@@ -44,14 +49,22 @@ public class SuiteMakerResources {
         parametersReturn.put("categoriaProdExistente", "BOLSOS");
         parametersReturn.put("catProdInexistente", "Anchoas del Cantábrico");
         
+    	String PASSWORD_STANDARD = 
+    			GetterSecrets.factory()
+    				.getCredentials(SecretType.SHOP_STANDARD_USER)
+    				.getPassword();
         parametersReturn.put("userWithOnlinePurchases" ,"espana.test@mango.com");
-        parametersReturn.put("passUserWithOnlinePurchases" ,"mango123");
+        parametersReturn.put("passUserWithOnlinePurchases", PASSWORD_STANDARD);
         
         parametersReturn.put("userWithStorePurchases" ,"ticket_digital_es@mango.com");
-        parametersReturn.put("passUserWithStorePurchases" ,"mango123");
+        parametersReturn.put("passUserWithStorePurchases", PASSWORD_STANDARD);
         
-        parametersReturn.put("userConDevolucionPeroSoloEnPRO" ,"robot.test@mango.com");
-        parametersReturn.put("passwordUserConDevolucion" ,"sirjorge74");
+    	String PASSWORD_ROBOT = 
+    			GetterSecrets.factory()
+    				.getCredentials(SecretType.SHOP_ROBOT_USER)
+    				.getPassword();
+        parametersReturn.put("userConDevolucionPeroSoloEnPRO", "robot.test@mango.com");
+        parametersReturn.put("passwordUserConDevolucion", PASSWORD_ROBOT);
         
 //        CallBack callBack = params.getCallBack();
 //        if (params.getCallBack()!=null) {

@@ -7,6 +7,8 @@ import java.util.List;
 import org.junit.Test;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.beans.Pago;
+import com.mng.robotest.test80.mango.test.beans.Pais;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;

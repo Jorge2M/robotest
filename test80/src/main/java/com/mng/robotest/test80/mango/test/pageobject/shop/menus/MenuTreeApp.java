@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
+import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 
 
 public class MenuTreeApp {

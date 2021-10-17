@@ -18,6 +18,9 @@ import com.mng.robotest.test80.mango.test.pageobject.manto.PageSelTda;
 import com.mng.robotest.test80.mango.test.pageobject.manto.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageJCAS;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageMenusManto;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets.SecretType;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.Secret;
 
 import org.openqa.selenium.WebDriver;
 
@@ -64,7 +67,10 @@ public class ListMenusManto {
 
     	driver.manage().deleteAllCookies();
     	driver.get(urlBaseManto);
-    	goToMantoLoginAndSelectTienda(/*urlBaseManto, */Constantes.userManto, Constantes.passwordManto, driver);
+    
+    	Secret secret = GetterSecrets.factory().getCredentials(SecretType.MANTO_USER);
+    	goToMantoLoginAndSelectTienda(secret.getUser(), secret.getPassword(), driver);
+    	
         ArrayList<String> listMenuNames = PageMenusManto.getListCabecerasMenusName(driver);
         driver.quit();
         return listMenuNames;

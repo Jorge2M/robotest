@@ -7,9 +7,9 @@ import java.util.regex.Pattern;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.beans.IdiomaPais;
+import com.mng.robotest.test80.mango.test.beans.Pais;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.beans.FactoryVale;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;

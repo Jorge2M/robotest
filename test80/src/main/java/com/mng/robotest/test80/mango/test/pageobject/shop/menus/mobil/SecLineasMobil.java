@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
+import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 
 public abstract class SecLineasMobil extends SecLineasDevice {
 

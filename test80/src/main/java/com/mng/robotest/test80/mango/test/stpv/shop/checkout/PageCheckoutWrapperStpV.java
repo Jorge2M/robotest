@@ -14,12 +14,13 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.beans.AccesoEmpl;
+import com.mng.robotest.test80.mango.test.beans.Pago;
+import com.mng.robotest.test80.mango.test.beans.Pais;
+import com.mng.robotest.test80.mango.test.beans.Pago.TypePago;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
@@ -345,14 +346,14 @@ public class PageCheckoutWrapperStpV {
     @Step (
     	description="Introducir la tarjeta de empleado " + tagTarjeta + " y pulsar el botón \"Aplicar\"", 
         expected="Aparecen los datos para la introducción del 1er apellido y el nif")
-    public void inputTarjetaEmplEnCodPromo(Pais pais) throws Exception {
-    	TestMaker.getCurrentStepInExecution().replaceInDescription(tagTarjeta, pais.getAccesoEmpl().getTarjeta());
-        pageCheckoutWrapper.inputCodigoPromoAndAccept(pais.getAccesoEmpl().getTarjeta());
-        checkAfterInputTarjetaEmpleado(pais);
+    public void inputTarjetaEmplEnCodPromo(Pais pais, AccesoEmpl accesoEmpl) throws Exception {
+    	TestMaker.getCurrentStepInExecution().replaceInDescription(tagTarjeta, accesoEmpl.getTarjeta());
+        pageCheckoutWrapper.inputCodigoPromoAndAccept(accesoEmpl.getTarjeta());
+        checkAfterInputTarjetaEmpleado(pais, accesoEmpl);
     }
     
     @Validation
-    private ChecksTM checkAfterInputTarjetaEmpleado(Pais pais) {
+    private ChecksTM checkAfterInputTarjetaEmpleado(Pais pais, AccesoEmpl accesoEmpl) {
     	ChecksTM validations = ChecksTM.getNew();
 	    int maxSeconds = 5;
 	 	validations.add(
@@ -360,7 +361,7 @@ public class PageCheckoutWrapperStpV {
 			pageCheckoutWrapper.isPresentInputApellidoPromoEmplUntil(maxSeconds), State.Defect);
     	
     	boolean isPresentInputDni = pageCheckoutWrapper.isPresentInputDNIPromoEmpl();
-    	if (pais.getAccesoEmpl().getNif()!=null) {
+    	if (accesoEmpl.getNif()!=null) {
 		 	validations.add(
 				"Aparece el campo de introducción del DNI/Pasaporte",
 				isPresentInputDni, State.Defect);
@@ -371,15 +372,9 @@ public class PageCheckoutWrapperStpV {
     	}
     	
     	boolean isPresentInputFechaNac = pageCheckoutWrapper.isPresentDiaNaciPromoEmpl();
-    	if (pais.getAccesoEmpl().getFecnac()!=null) {
-		 	validations.add(
-				"Aparece el campo de introducción de la fecha de nacimiento",
-				isPresentInputFechaNac, State.Defect);
-    	} else {
-		 	validations.add(
-				"No aparece el campo de introducción de la fecha de nacimiento",
-				!isPresentInputFechaNac, State.Defect);	
-    	}
+	 	validations.add(
+			"No aparece el campo de introducción de la fecha de nacimiento",
+			!isPresentInputFechaNac, State.Defect);	
     	
     	return validations;
     }
@@ -388,20 +383,16 @@ public class PageCheckoutWrapperStpV {
     @Step (
     	description="Introducir el primer apellido " + tag1erApellido + " y pulsar el botón \"Guardar\"", 
         expected="Se aplican los descuentos correctamente")
-    public void inputDataEmplEnPromoAndAccept(DataBag dataBag, Pais pais, AppEcom app) throws Exception {
+    public void inputDataEmplEnPromoAndAccept(DataBag dataBag, AccesoEmpl accesoEmpl, Pais pais, AppEcom app) throws Exception {
     	StepTM step = TestMaker.getCurrentStepInExecution();
-    	String primerApellido = (new StringTokenizer(pais.getAccesoEmpl().getNombre(), " ")).nextToken();
+    	String primerApellido = (new StringTokenizer(accesoEmpl.getNombre(), " ")).nextToken();
     	step.replaceInDescription(tag1erApellido, primerApellido);
     	
-        if (pais.getAccesoEmpl().getNif()!=null) {
-        	step.addRightDescriptionText("Introducir el NIF del usuario " + pais.getAccesoEmpl().getNif() + ". ");
-        	pageCheckoutWrapper.inputDNIPromoEmpl(pais.getAccesoEmpl().getNif());
+        if (accesoEmpl.getNif()!=null) {
+        	step.addRightDescriptionText("Introducir el NIF del usuario " + accesoEmpl.getNif() + ". ");
+        	pageCheckoutWrapper.inputDNIPromoEmpl(accesoEmpl.getNif());
         }
         pageCheckoutWrapper.inputApellidoPromoEmpl(primerApellido);
-        if (pais.getAccesoEmpl().getFecnac()!=null) {
-        	step.addRightDescriptionText("Introducir la fecha de nacimiento " + pais.getAccesoEmpl().getFecnac() + ". ");
-        	pageCheckoutWrapper.selectFechaNacPromoEmpl(pais.getAccesoEmpl().getFecnac()); 
-        }
         pageCheckoutWrapper.clickButtonAceptarPromoEmpl();
         
         validaResultImputPromoEmpl(dataBag, app);

@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop.StateUser;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets.SecretType;
 
 
 public class GestorUsersShop {
@@ -14,6 +16,11 @@ public class GestorUsersShop {
     public static final int minutesForUserLiberation = 30;
     
     public static void setGestorUsersShopIfVoid() {
+    	String PASSWORD_TEST_PERFORMANCE = 
+    			GetterSecrets.factory()
+    				.getCredentials(SecretType.SHOP_PERFORMANCE_USER)
+    				.getPassword();
+    	
         if (ListUsers==null) {
             ListUsers = new CopyOnWriteArrayList<>();
 
@@ -23,7 +30,7 @@ public class GestorUsersShop {
                 if (i<10) {
                     number = "0" + number;
                 }
-                ListUsers.add(new UserShop("test.performance" + number + "@mango.com", "Mango123"));
+                ListUsers.add(new UserShop("test.performance" + number + "@mango.com", PASSWORD_TEST_PERFORMANCE));
             }
         }
     }

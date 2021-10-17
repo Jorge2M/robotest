@@ -5,8 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
+import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test80.mango.test.stpv.miscelanea.GetProductsStpV;

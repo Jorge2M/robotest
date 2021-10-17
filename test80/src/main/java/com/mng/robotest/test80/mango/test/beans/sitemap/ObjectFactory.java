@@ -6,7 +6,7 @@
 //
 
 
-package com.mng.robotest.test80.mango.test.factoryes.jaxb.sitemap;
+package com.mng.robotest.test80.mango.test.beans.sitemap;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

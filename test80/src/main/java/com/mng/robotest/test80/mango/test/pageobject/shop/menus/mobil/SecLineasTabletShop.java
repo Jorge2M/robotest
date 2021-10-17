@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
+import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 
 public class SecLineasTabletShop extends SecLineasTablet {
 	

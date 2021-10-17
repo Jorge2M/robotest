@@ -17,35 +17,33 @@ import com.mng.robotest.test80.mango.test.factoryes.ListPrecompraPaises;
 public class PagosPaisesSuite extends SuiteMaker {
     
 	public enum VersionPagosSuite {
-		V1(false, false, false, false, false),
-		V2(true, false, false, false, false),
-		V3(true, true, false, false, false),
-		V4(true, true, true, false, false),
-		V5(false, false, false, true, false),
-		V6(true, false, false, true, false),
-		V7(true, true, false, true, false),
-		V8(true, true, true, true, false),
-		V9(true, true, false, false, true);
+		//TODO eliminar las que ya no son necesrias después de la elminia
+		V1(false, false, false, false),
+		V2(true, false, false, false),
+		V3(true, true, false, false),
+		V4(true, true, true, false),
+		V5(false, false, false, false),
+		V6(true, false, false, false),
+		V7(true, true, false, false),
+		V8(true, true, true, false),
+		V9(true, true, false, true);
 		
 		boolean validaPasarelas;
 		boolean validaPagos;
 		boolean validaPedidosEnManto;
-		boolean isEmpl;
 		boolean forceTestMisCompras;
 		private VersionPagosSuite(
 				boolean validaPasarelas, boolean validaPagos, boolean validaPedidosEnManto, 
-				boolean isEmpl, boolean forceTestMisCompras) {
+				boolean forceTestMisCompras) {
 			this.validaPasarelas = validaPasarelas;
 			this.validaPagos = validaPagos;
 			this.validaPedidosEnManto = validaPedidosEnManto;
-			this.isEmpl = isEmpl;
 			this.forceTestMisCompras = forceTestMisCompras;
 		}
 		
 		public boolean validaPasarelas() {return validaPasarelas;}
 		public boolean validaPagos() {return validaPagos;}
 		public boolean validaPedidosEnManto() {return validaPedidosEnManto;}
-		public boolean isEmpl() {return isEmpl;}
 		public boolean forceTestMisCompras() {return forceTestMisCompras;}
 	}
 	

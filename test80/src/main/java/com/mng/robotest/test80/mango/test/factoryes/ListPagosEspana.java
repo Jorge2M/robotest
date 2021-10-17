@@ -11,8 +11,8 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.InputParamsTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.CompraFact;
+import com.mng.robotest.test80.mango.test.beans.*;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
 public class ListPagosEspana implements Serializable {

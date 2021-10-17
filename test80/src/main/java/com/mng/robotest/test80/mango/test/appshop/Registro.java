@@ -8,7 +8,9 @@ import com.mng.robotest.test80.mango.test.stpv.shop.SecCabeceraStpV;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
-import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.mango.test.beans.IdiomaPais;
+import com.mng.robotest.test80.mango.test.beans.Pais;
+import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.data.Constantes.ThreeState;
 import com.github.jorge2m.testmaker.domain.InputParamsTM.TypeAccess;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
@@ -19,9 +21,6 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.DataMango;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.DataNino;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataNinos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro;
@@ -41,6 +40,9 @@ import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroNinosSt
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroSegundaStpV;
 import com.mng.robotest.test80.mango.test.suites.RegistrosSuite.VersionRegistroSuite;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets.SecretType;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.Secret;
 
 public class Registro implements Serializable {
     
@@ -123,7 +125,7 @@ public class Registro implements Serializable {
         dataToSend.add(DataRegType.name, "Jorge", true);
         dataToSend.add(DataRegType.apellidos, "Muñoz Martínez", true);
         dataToSend.add(DataRegType.email, "jorge.munoz.noexiste@gmail.com", true);
-        dataToSend.add(DataRegType.password, "Sirjorge74", true);
+        dataToSend.add(DataRegType.password, "xxxxxxxxx", true);
         dataToSend.add(DataRegType.telefono, "665015122", true);
         dataToSend.add(DataRegType.codpostal, "08720", true);
         dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.pageInicial);
@@ -136,8 +138,12 @@ public class Registro implements Serializable {
         dataToSend = new ListDataRegistro(); 
         dataToSend.add(DataRegType.name, "Jorge", true);
         dataToSend.add(DataRegType.apellidos, "Muñoz Martínez", true);
-        dataToSend.add(DataRegType.email, Constantes.mail_standard, true);
-        dataToSend.add(DataRegType.password, "Sirjorge74", true);
+        
+        
+    	Secret secret = GetterSecrets.factory().getCredentials(SecretType.SHOP_JORGE_USER);
+        dataToSend.add(DataRegType.email, secret.getUser(), true);
+        dataToSend.add(DataRegType.password, secret.getPassword(), true);
+        
         dataToSend.add(DataRegType.telefono, "665015122", true);
         dataToSend.add(DataRegType.codpostal, "08720", true);
         dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.pageInicial);

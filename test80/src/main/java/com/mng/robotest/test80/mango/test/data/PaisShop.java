@@ -1,5 +1,7 @@
 package com.mng.robotest.test80.mango.test.data;
 
+import com.mng.robotest.test80.mango.test.beans.Pais;
+
 public enum PaisShop {
 	Albania("070"),
 	Algérie("208"),
@@ -153,6 +155,14 @@ public enum PaisShop {
 	
 	public String getCodigoPais() {
 		return this.codigoPais;
+	}
+	
+	public boolean equals(Pais pais) {
+		return this==getPais(pais.getCodigo_pais());
+	}
+	
+	public static PaisShop getPais(Pais pais) {
+		return getPais(pais.getCodigo_pais());
 	}
 	
 	public static PaisShop getPais(String codigoPais) {

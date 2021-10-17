@@ -4,6 +4,9 @@ import org.testng.annotations.*;
 
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.beans.IdiomaPais;
+import com.mng.robotest.test80.mango.test.beans.Pago;
+import com.mng.robotest.test80.mango.test.beans.Pais;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -12,9 +15,6 @@ import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedido;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageReembolsos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageReembolsos.TypeReembolso;
@@ -27,6 +27,8 @@ import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageResultPagoStpV;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets.SecretType;
 import com.github.jorge2m.testmaker.service.TestMaker;
 
 import java.util.Arrays;
@@ -75,10 +77,12 @@ public class Reembolsos {
         }
 
         boolean paisConSaldoCta = dCtxSh.pais.existsPagoStoreCredit();
-        //dCtxSh.userConnected = Constantes.mail_standard;
-        dCtxSh.userConnected = "mng_test_SA_pruebaSaldo@mango.com";
-        dCtxSh.passwordUser = "mango123";
         dCtxSh.userRegistered = true;
+        dCtxSh.userConnected = "mng_test_SA_pruebaSaldo@mango.com";
+        dCtxSh.passwordUser = GetterSecrets.factory()
+    			.getCredentials(SecretType.SHOP_STANDARD_USER)
+    			.getPassword();
+
         if (dCtxSh.pais.getEmailuser()!=null && dCtxSh.pais.getPassuser()!=null) {
             dCtxSh.userConnected = dCtxSh.pais.getEmailuser();
             dCtxSh.passwordUser = dCtxSh.pais.getPassuser();
@@ -112,10 +116,12 @@ public class Reembolsos {
             return;
         }
 
-        //dCtxSh.userConnected = Constantes.mail_standard;
-        dCtxSh.userConnected = "mng_test_SA_pruebaSaldo@mango.com";
-        dCtxSh.passwordUser = "mango123";
         dCtxSh.userRegistered = true;
+        dCtxSh.userConnected = "mng_test_SA_pruebaSaldo@mango.com";
+        dCtxSh.passwordUser = dCtxSh.passwordUser = GetterSecrets.factory()
+    			.getCredentials(SecretType.SHOP_STANDARD_USER)
+    			.getPassword();
+
         if (dCtxSh.pais.getEmailuser()!=null && dCtxSh.pais.getPassuser()!=null) {
             dCtxSh.userConnected = dCtxSh.pais.getEmailuser();
             dCtxSh.passwordUser = dCtxSh.pais.getPassuser();

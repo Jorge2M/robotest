@@ -30,7 +30,6 @@ public class FlagsTestCkout implements Cloneable, Serializable {
 		flags.validaPasarelas = version.validaPasarelas();
 		flags.validaPagos = version.validaPagos();
 		flags.validaPedidosEnManto = version.validaPedidosEnManto();
-		flags.isEmpl = version.isEmpl();
 		flags.forceTestMisCompras = version.forceTestMisCompras();
 		return flags;
     }

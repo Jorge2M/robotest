@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
+import com.mng.robotest.test80.mango.test.beans.Pais;
 
 
 public class SecBolsaNew extends SecBolsaDesktop {

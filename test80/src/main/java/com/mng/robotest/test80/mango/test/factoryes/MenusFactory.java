@@ -9,9 +9,9 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.InputParamsTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.PaisIdioma;
+import com.mng.robotest.test80.mango.test.beans.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.suites.MenusPaisSuite.VersionMenusPais;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 

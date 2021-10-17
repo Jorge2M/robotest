@@ -6,7 +6,7 @@
 //
 
 
-package com.mng.robotest.test80.mango.test.factoryes.jaxb.sitemap;
+package com.mng.robotest.test80.mango.test.beans.sitemap;
 
 import java.util.ArrayList;
 import java.util.List;

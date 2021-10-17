@@ -13,7 +13,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
+import com.mng.robotest.test80.mango.test.beans.IdiomaPais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecSearch;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper;

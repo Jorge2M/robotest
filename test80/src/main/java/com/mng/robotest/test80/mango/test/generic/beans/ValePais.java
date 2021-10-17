@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Calendar;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.mng.robotest.test80.mango.test.beans.Pais;
 import com.mng.robotest.test80.mango.test.data.ValesData.Campanya;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 
 @XmlRootElement

@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.factoryes.jaxb;
+package com.mng.robotest.test80.mango.test.beans;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaType;
+import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
 
 
 public class Linea implements Serializable {

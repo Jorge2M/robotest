@@ -5,9 +5,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import com.mng.robotest.test80.mango.test.beans.Pais;
 import com.mng.robotest.test80.mango.test.generic.beans.FactoryVale;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 
 //TODO refactorizar para que cada campaña sea una clase
 public class ValesData {

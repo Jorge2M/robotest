@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.chequeregalo;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
+import com.mng.robotest.test80.mango.test.beans.Pais;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
