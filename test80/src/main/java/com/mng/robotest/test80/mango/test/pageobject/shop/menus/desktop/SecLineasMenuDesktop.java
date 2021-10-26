@@ -29,7 +29,7 @@ public class SecLineasMenuDesktop extends PageObjTM {
     static String TagIdSublinea = "@SublineaId";
     static String XPathMenuFatherWrapper = "//div[@id='navMain']";
     static String XPathLineasMenuWrapper = "//div[@class='menu-section']";
-    static String XPathLinea = "//ul[@class='menu-section-brands']/li[@class[contains(.,'menu-item-brands')]]";
+    static String XPathLinea = "//ul[@class[contains(.,'menu-section-brands')]]/li[@class[contains(.,'menu-item-brands')]]";
     static String XPathLineaSpecificWithTag = 
     	XPathLinea + 
     	"//self::*[@id='" + TagIdLinea + "' or " +

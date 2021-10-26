@@ -12,7 +12,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageMiCuenta extends PageObjTM {
 	
     private static String XPathLinkMisDatos = "//a[@href[contains(.,'account/personalinfo')]]";
-    private static String XPathLinkMisPedidos = "//a[@href[contains(.,'account/orders')]]";
+//    private static String XPathLinkMisPedidos = "//a[@href[contains(.,'account/orders')]]";
     private static String XPathLinkMisCompras = "//a[@href[contains(.,'/mypurchases')]]";
     private static String XPathLinkSuscripciones = "//a[@href[contains(.,'account/suscriptions')]]";
     private static String XPathLinkDevoluciones = "//span[@data-event-category='devoluciones']";
@@ -29,9 +29,9 @@ public class PageMiCuenta extends PageObjTM {
     	return (state(Visible, By.xpath(XPathLinkMisDatos)).wait(maxSeconds).check());
     }
     
-    public void clickMisPedidos() {
-    	click(By.xpath(XPathLinkMisPedidos)).exec();
-    }
+//    public void clickMisPedidos() {
+//    	click(By.xpath(XPathLinkMisPedidos)).exec();
+//    }
     
     public void clickMisCompras() {
     	click(By.xpath(XPathLinkMisCompras)).exec();

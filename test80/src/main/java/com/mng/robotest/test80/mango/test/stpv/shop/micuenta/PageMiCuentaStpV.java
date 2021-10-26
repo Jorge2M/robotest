@@ -113,19 +113,19 @@ public class PageMiCuentaStpV {
         PageSuscripcionesStpV.validaIsDataAssociatedToRegister(datosRegOk, driver);
     }
 
-    public void goToMisPedidos (String usrRegistrado) {
-    	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
-    	userMenusStpV.clickMenuMiCuenta();
-    	clickLinkMisPedidos(usrRegistrado);
-    }
+//    public void goToMisPedidos (String usrRegistrado) {
+//    	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
+//    	userMenusStpV.clickMenuMiCuenta();
+//    	clickLinkMisPedidos(usrRegistrado);
+//    }
 
-    @Step(
-        description = "Seleccionar el link \"Mis pedidos\"",
-        expected = "Aparece la página de \"Mis pedidos\" sin pedidos")
-    private void clickLinkMisPedidos(String usrRegistrado) {
-        pageMiCuenta.clickMisPedidos();
-        PagePedidosStpV.validaIsPageSinPedidos(usrRegistrado, driver);
-    }
+//    @Step(
+//        description = "Seleccionar el link \"Mis pedidos\"",
+//        expected = "Aparece la página de \"Mis pedidos\" sin pedidos")
+//    private void clickLinkMisPedidos(String usrRegistrado) {
+//        pageMiCuenta.clickMisPedidos();
+//        PagePedidosStpV.validaIsPageSinPedidos(usrRegistrado, driver);
+//    }
 
     public void goToDevoluciones() {
     	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);

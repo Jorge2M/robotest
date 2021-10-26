@@ -28,7 +28,10 @@ import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 public class AccesoNavigations {
 
 	public static void goToInitURL(WebDriver driver) {
-		String urlInitial = TestCaseTM.getTestCaseInExecution().getInputParamsSuite().getUrlBase();
+		String canary = "";
+    	//Temporal para test Canary!!!
+    	//canary = "?canary=true";
+		String urlInitial = TestCaseTM.getTestCaseInExecution().getInputParamsSuite().getUrlBase() + canary;
     	String currentUrl = driver.getCurrentUrl();
     	if (currentUrl.compareTo(urlInitial)!=0) {
     		driver.get(urlInitial);

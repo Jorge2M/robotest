@@ -78,6 +78,7 @@ public class MenusUserWrapper extends PageObjTM {
 		if (menu==UserMenu.bolsa) {
 			secCabecera.hoverIconoBolsa();
 		} else {
+			isMenuInStateUntil(menu, State.Visible, 2);
 			MenuUserItem menuUserItem = new MenuUserItem(menu, channel, app);
 			moveToElement(menuUserItem.getLink().getBy(channel, app), driver);
 		}

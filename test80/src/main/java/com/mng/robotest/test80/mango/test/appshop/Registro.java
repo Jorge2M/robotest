@@ -125,7 +125,7 @@ public class Registro implements Serializable {
         dataToSend.add(DataRegType.name, "Jorge", true);
         dataToSend.add(DataRegType.apellidos, "Muñoz Martínez", true);
         dataToSend.add(DataRegType.email, "jorge.munoz.noexiste@gmail.com", true);
-        dataToSend.add(DataRegType.password, "xxxxxxxxx", true);
+        dataToSend.add(DataRegType.password, "sirjjjjj74", true);
         dataToSend.add(DataRegType.telefono, "665015122", true);
         dataToSend.add(DataRegType.codpostal, "08720", true);
         dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.pageInicial);

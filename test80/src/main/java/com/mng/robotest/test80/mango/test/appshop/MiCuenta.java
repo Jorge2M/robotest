@@ -94,11 +94,11 @@ public class MiCuenta implements Serializable {
         String nombreActual = pageMisDatosStpV.modificaNombreYGuarda();
         pageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected);
         pageMisDatosStpV.validaContenidoNombre(nombreActual);
-        if (dCtxSh.appE==AppEcom.shop) {
-        	pageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh.pais);
-        } else {
-        	pageMiCuentaStpV.goToMisPedidos(dCtxSh.userConnected);
-        }
+//        if (dCtxSh.appE==AppEcom.shop) {
+        pageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh.pais);
+//        } else {
+//        	pageMiCuentaStpV.goToMisPedidos(dCtxSh.userConnected);
+//        }
             
         pageMiCuentaStpV.goToSuscripciones();
         ArrayList<idNewsletters> listNewsletters = new ArrayList<>();

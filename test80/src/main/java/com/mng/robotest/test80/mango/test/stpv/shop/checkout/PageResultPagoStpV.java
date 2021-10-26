@@ -92,15 +92,15 @@ public class PageResultPagoStpV {
       		ImporteScreen.isPresentImporteInScreen(importeTotal, dCtxSh.pais.getCodigo_pais(), driver), State.Warn);
         
 	    if (dCtxSh.channel==Channel.desktop) {
-	        if (dCtxSh.appE==AppEcom.shop) {
+//	        if (dCtxSh.appE==AppEcom.shop) {
 	        	validations.add(
               		"Aparece el link hacia las compras",
               		pageResultPago.isLinkMisCompras(), State.Warn);
-	        } else {
-	        	validations.add(
-              		"Aparece el link hacia los pedidos",
-              		pageResultPago.isLinkPedidos(), State.Warn);
-	        }
+//	        } else {
+//	        	validations.add(
+//              		"Aparece el link hacia los pedidos",
+//              		pageResultPago.isLinkPedidos(), State.Warn);
+//	        }
 	    }
 	    
 	    int maxSeconds = 5;
@@ -126,19 +126,19 @@ public class PageResultPagoStpV {
     	return (pageResultPago.isVisibleBlockNewLoyaltyPoints());
     }
     
-    @Step (
-    	description="Seleccionar el link \"Mis pedidos\"", 
-        expected="Apareca la página de identificación del pedido")
-    public void selectMisPedidos(DataPedido dataPedido) throws Exception {
-        pageResultPago.clickMisPedidos();      
-                                
-        //Validations. Puede aparecer la página con la lista de pedidos o la de introducción de los datos del pedido
-        if (PageListPedidosOld.isPage(driver)) {
-        	PageListPedidosStpV.validateIsPage(dataPedido.getCodpedido(), driver);
-        } else {
-        	PageInputPedidoStpV.getNew(channel, driver).validateIsPage();
-        }
-    }    
+//    @Step (
+//    	description="Seleccionar el link \"Mis pedidos\"", 
+//        expected="Apareca la página de identificación del pedido")
+//    public void selectMisPedidos(DataPedido dataPedido) throws Exception {
+//        pageResultPago.clickMisPedidos();      
+//                                
+//        //Validations. Puede aparecer la página con la lista de pedidos o la de introducción de los datos del pedido
+//        if (PageListPedidosOld.isPage(driver)) {
+//        	PageListPedidosStpV.validateIsPage(dataPedido.getCodpedido(), driver);
+//        } else {
+//        	PageInputPedidoStpV.getNew(channel, driver).validateIsPage();
+//        }
+//    }    
     
     @Step (
     	description="Seleccionar el link \"Mis Compras\"",
@@ -165,18 +165,18 @@ public class PageResultPagoStpV {
     	}
     }
     
-    public void selectLinkPedidoAndValidatePedido(DataPedido dataPedido) 
-    throws Exception {
-        selectMisPedidos(dataPedido);
-        StepTM StepTestMaker = TestMaker.getLastStep();
-        if (StepTestMaker.getResultSteps()==State.Ok) {
-            if (PageListPedidosOld.isPage(driver)) {
-                PageListPedidosStpV.selectPedido(dataPedido.getCodpedido(), driver);
-            } else {
-                PageInputPedidoStpV.getNew(channel, driver).inputPedidoAndSubmit(dataPedido);
-            }
-        }
-    }
+//    public void selectLinkPedidoAndValidatePedido(DataPedido dataPedido) 
+//    throws Exception {
+//        selectMisPedidos(dataPedido);
+//        StepTM StepTestMaker = TestMaker.getLastStep();
+//        if (StepTestMaker.getResultSteps()==State.Ok) {
+//            if (PageListPedidosOld.isPage(driver)) {
+//                PageListPedidosStpV.selectPedido(dataPedido.getCodpedido(), driver);
+//            } else {
+//                PageInputPedidoStpV.getNew(channel, driver).inputPedidoAndSubmit(dataPedido);
+//            }
+//        }
+//    }
     
     public void selectLinkMisComprasAndValidateCompra(DataCtxPago dCtxPago, DataCtxShop dCtxSh) 
     throws Exception {    	

@@ -37,9 +37,7 @@ public class PagePrehomeStpV {
         expected="Se selecciona el país/idioma correctamente")
     public void seleccionPaisIdioma() 
     throws Exception {
-    	//Temporal para test Canary!!!
-    	//AccesoNavigations.goToInitURL(urlPreHome + "?canary=true", driver);
-    	AccesoNavigations.goToInitURL(/*urlPreHome,*/ driver);
+    	AccesoNavigations.goToInitURL(driver);
         pagePrehome.identJCASifExists();
         pagePrehome.selecionPais();
         checkPaisSelected();

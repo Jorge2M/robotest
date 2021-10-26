@@ -20,7 +20,21 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<skipUnitTests>${skipTests}</skipUnitTests>
         <skipIntegrationTests>${skipTests}</skipIntegrationTests>
+        <nexus.url>https://nexus.sys.mango/nexus</nexus.url>
 	</properties>
+	
+	<distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <name>releases</name>
+            <url>${nexus.url}/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus</id>
+            <name>snapshots</name>
+            <url>${nexus.url}/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 	<dependencies>
 		<dependency>

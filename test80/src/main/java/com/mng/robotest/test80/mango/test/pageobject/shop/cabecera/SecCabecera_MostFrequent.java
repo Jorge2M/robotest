@@ -89,6 +89,7 @@ public class SecCabecera_MostFrequent extends SecCabecera {
     }
 
     public void clickIconoAndWait(IconoCabeceraShop_DesktopMobile icono) {
+    	isInStateIconoBolsa(State.Visible, 3); //Con los nuevos menús ahora tardan bastante en aparecer los iconos
     	click(icono.getBy()).type(TypeClick.javascript).exec(); //TODO
     }
     
@@ -105,6 +106,7 @@ public class SecCabecera_MostFrequent extends SecCabecera {
     }
     
     public void hoverIcono(IconoCabeceraShop_DesktopMobile icono) {
+    	isInStateIconoBolsa(State.Visible, 3); //Con los nuevos menús ahora tardan bastante en aparecer los iconos
     	moveToElement(By.xpath(icono.getXPath() + "/*"), driver); //Workaround problema hover en Firefox
         moveToElement(icono.getBy(), driver);
     }

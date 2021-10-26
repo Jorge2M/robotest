@@ -299,11 +299,11 @@ public class CheckoutFlow {
 	            if (pagoToTest.getTypePago()!=TypePago.TpvVotf) {
 	                pageResultPagoStpV.validateIsPageOk(dCtxPago, dCtxSh);
 	                if (dCtxSh.channel!=Channel.mobile && !dCtxPago.getFTCkout().isChequeRegalo) {
-	                    if (testMisCompras()) {
+//	                    if (testMisCompras()) {
 	                        pageResultPagoStpV.selectLinkMisComprasAndValidateCompra(dCtxPago, dCtxSh);
-	                    } else {
-	                        pageResultPagoStpV.selectLinkPedidoAndValidatePedido(dataPedido);
-	                    }
+//	                    } else {
+//	                        pageResultPagoStpV.selectLinkPedidoAndValidatePedido(dataPedido);
+//	                    }
 	                }
 	            } else {
 	                PageResultPagoTpvStpV.validateIsPageOk(dataPedido, dCtxSh.pais.getCodigo_pais(), driver);
@@ -319,12 +319,12 @@ public class CheckoutFlow {
         }
     }
     
-    private boolean testMisCompras() {
-    	return (
-    		(dCtxSh.appE!=AppEcom.outlet) ||
-    		 dCtxPago.getFTCkout().forceTestMisCompras
-    	);
-    }
+//    private boolean testMisCompras() {
+//    	return (
+//    		(dCtxSh.appE!=AppEcom.outlet) ||
+//    		 dCtxPago.getFTCkout().forceTestMisCompras
+//    	);
+//    }
     
     @Step (
     	description="Nos posicionamos en la página inicial", 

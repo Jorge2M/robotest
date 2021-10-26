@@ -10,13 +10,18 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 public enum TestABOptimizeImpl implements TestABOptimize {
 
-	//Optimize
-	//La mejor forma para obtener los parámetros es:
-	//1) Acceder a Google Optimize con un usuario autorizado de Mango
-	//2) Consultar el Test AB en cuestión
-	//3) Seleccionar la opción "OBTENER VISTA PREVIA"
-	//4) Seleccionar "Compartir vista previa"
-	//5) Obtener los datos de la URL que se muestra
+	//El id está en el campo "ID d experimento" del detalle en Google Optimize
+	//Si se quiere activar hay que añadirlo en la clase TestABactive
+	Test_New_Menu_Desktop_PRE(
+		"Test - New Menú - Desktop PRE",
+		"7gBkOrIuSPOvqf80HInMEQ",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"V0-Original", 
+			"V1-New Menu"),
+		Arrays.asList(Channel.desktop),
+		Arrays.asList(AppEcom.shop)
+	),
 	
 	PLP_Desktop_New_filters_v2(
 		"PLP - Desktop - New filters v2",

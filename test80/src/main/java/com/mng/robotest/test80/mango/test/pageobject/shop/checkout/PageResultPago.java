@@ -34,7 +34,7 @@ public class PageResultPago extends PageObjTM {
     public final static String XPathCodigoPedidoContrareembolsoMobil = "//div[@class[contains(.,'confirmation-summary-value')]]//p[string-length(text())=6]"; 
     
     public final static String XPathLinkMisCompras = "//a[@href[contains(.,'/mypurchases')]]";
-    public final static String XPathLinkPedidos = "//a[@href[contains(.,'/account/orders')]]";
+    //public final static String XPathLinkPedidos = "//a[@href[contains(.,'/account/orders')]]";
     
     //public final static String XPathBlockNewLoyaltyPoints = "//div[@class[contains(.,'_2h1Ha')]]"; //React
     public final static String XPathBlockNewLoyaltyPoints = "//*[@data-testid[contains(.,'loyaltyPointsBlock')]]";
@@ -110,13 +110,13 @@ public class PageResultPago extends PageObjTM {
 		return "";
 	}
 
-	public boolean isLinkPedidos() {
-		return (state(Visible, By.xpath(XPathLinkPedidos)).check());
-	}
-
-	public void clickMisPedidos() {
-		click(By.xpath(XPathLinkPedidos)).exec();
-	}
+//	public boolean isLinkPedidos() {
+//		return (state(Visible, By.xpath(XPathLinkPedidos)).check());
+//	}
+//
+//	public void clickMisPedidos() {
+//		click(By.xpath(XPathLinkPedidos)).exec();
+//	}
 
 	public boolean isLinkMisCompras() {
 		return (state(Visible, By.xpath(XPathLinkMisCompras)).check());
