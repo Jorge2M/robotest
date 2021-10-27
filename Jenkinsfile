@@ -31,7 +31,7 @@ pipeline {
             }
             steps {
 	        	sh 'mvn clean'
-	            sh 'mvn test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
+	            sh 'mvn --settings test80/infrastructure/ci/settings.xml test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
             }
             post {
                 success {
@@ -50,7 +50,7 @@ pipeline {
                 }
             }
             steps {
-	            sh "mvn -B package -DskipTests"
+	            sh "mvn --settings test80/infrastructure/ci/settings.xml -B package -DskipTests"
             }
             post {
                 success {
@@ -72,7 +72,7 @@ pipeline {
 
             steps {
 	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
-	            sh "mvn -B verify -DskipUnitTests"
+	            sh "mvn --settings test80/infrastructure/ci/settings.xml -B verify -DskipUnitTests"
             }
 
             post {
