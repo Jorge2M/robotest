@@ -46,13 +46,14 @@ public class GetterProducts extends JaxRsClient {
 	private final Integer pagina;
 	private final WebDriver driver;
 	private final MethodGetter method;
+	private final boolean retryPro;
 	private ProductList productList;
 	
 	public enum MethodGetter {ApiRest, WebDriver, Any}
 	
 	private GetterProducts(
 			String url, String codigoPaisAlf, AppEcom app, LineaType lineaType, List<MenuProduct> menusCandidates, 
-			Integer numProducts, Integer pagina, MethodGetter method, WebDriver driver) throws Exception {
+			Integer numProducts, Integer pagina, MethodGetter method, boolean retryPro, WebDriver driver) throws Exception {
 		
 		urlForJavaCall = getUrlForJavaCall(url, driver);
 		urlForBrowserCall = getUrlBase(url);
@@ -71,6 +72,7 @@ public class GetterProducts extends JaxRsClient {
 		this.numProducts = numProducts;
 		this.pagina = pagina;
 		this.method = method;
+		this.retryPro = retryPro;
 		this.driver = driver;
 		this.productList = getProductList();
 	}
@@ -116,6 +118,14 @@ public class GetterProducts extends JaxRsClient {
 	}
 	
 	private ProductList getProductList(MenuProduct menu) throws Exception {
+		ProductList productList = getProductListFromUrl(menu);
+		if (productList==null && retryPro) {
+			productList = getProductListFromPro(menu);
+		}
+		return productList;
+	}
+	
+	private ProductList getProductListFromUrl(MenuProduct menu) throws Exception {
 		switch (method) {
 		case ApiRest:
 			return getProductsFromApiRest(menu);
@@ -128,6 +138,21 @@ public class GetterProducts extends JaxRsClient {
 			}
 			return productList;
 		}
+	}
+	
+	private ProductList getProductListFromPro(MenuProduct menu) throws Exception {
+		GetterProducts getterPro = new GetterProducts(
+				"https://shop.mango.com/", 
+				codigoPaisAlf, 
+				app, 
+				lineaType, 
+				menusCandidates,
+				numProducts, 
+				pagina, 
+				method, 
+				false,
+				driver);
+		return getterPro.getProductList();
 	}
 
 	private String getNameCloudtestFromCookie(WebDriver driver) {
@@ -317,6 +342,7 @@ public class GetterProducts extends JaxRsClient {
 		
 		private Integer pagina = 1;
 		private MethodGetter method = MethodGetter.Any;
+		private boolean retryPro = true;
 
 		public Builder(String codPaisAlf, AppEcom app, WebDriver driver) throws Exception {
 			this.url = ((InputParamsMango)TestMaker.getTestCase().getInputParamsSuite()).getUrlBase();
@@ -356,9 +382,13 @@ public class GetterProducts extends JaxRsClient {
 			this.method = method;
 			return this;
 		}
+		public Builder retryPro(boolean retryPro) {
+			this.retryPro = retryPro;
+			return this;
+		}
 		public GetterProducts build() throws Exception {
 			return (
-				new GetterProducts(url, codigoPaisAlf, app, lineaType, getMenusProduct(), numProducts, pagina, method, driver));
+				new GetterProducts(url, codigoPaisAlf, app, lineaType, getMenusProduct(), numProducts, pagina, method, retryPro, driver));
 		}
 		
 		private List<MenuProduct> getMenusProduct() {

@@ -18,6 +18,7 @@ import com.mng.robotest.test80.mango.test.pageobject.votf.PageSelectIdiomaVOTF;
 import com.mng.robotest.test80.mango.test.pageobject.votf.PageSelectLineaVOTF;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
+import com.mng.robotest.test80.mango.test.pageobject.shop.PageJCAS;
 
 /**
  * Clase que implementa los diferentes steps/validations asociados asociados a la página de Login de Manto
@@ -70,7 +71,7 @@ public class AccesoNavigations {
      */
     public static void accesoVOTF(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         PageLoginVOTF.goToFromUrlAndSetTestABs(/*dCtxSh.urlAcceso,*/ dCtxSh, driver);
-        
+        PageJCAS.identJCASifExists(driver);
         AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dCtxSh.pais));
         PageLoginVOTF.inputUsuario(accesoVOTF.getUsuario(), driver);
         PageLoginVOTF.inputPassword(accesoVOTF.getPassword(), driver);

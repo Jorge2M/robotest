@@ -191,7 +191,7 @@ public class PagePrehome extends PageObjTM {
     
     public void previousAccessShopSteps(boolean acceptCookies) throws Exception {
     	reloadIfServiceUnavailable();
-    	identJCASifExists();
+    	PageJCAS.identJCASifExists(driver);
         TestABactive.currentTestABsToActivate(dCtxSh.channel, dCtxSh.appE, driver);
         manageCookies(acceptCookies);
     }
@@ -246,14 +246,6 @@ public class PagePrehome extends PageObjTM {
         selecionPais();
         selecionIdiomaAndEnter();
     }
-    
-    public void identJCASifExists() {
-        waitForPageLoaded(driver);
-        if (PageJCAS.thisPageIsShown(driver)) {
-        	Secret secret = GetterSecrets.factory().getCredentials(SecretType.MANTO_USER);
-            PageJCAS.identication(driver, secret.getUser(), secret.getPassword());
-        }
-    }    
     
     public void selecionPais() throws Exception {
         new WebDriverWait(driver, 5).until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPathSelectPaises)));

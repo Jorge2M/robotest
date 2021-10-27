@@ -15,6 +15,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
 import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
+import com.mng.robotest.test80.mango.test.pageobject.shop.PageJCAS;
 
 public class PagePrehomeStpV {
     
@@ -38,7 +39,7 @@ public class PagePrehomeStpV {
     public void seleccionPaisIdioma() 
     throws Exception {
     	AccesoNavigations.goToInitURL(driver);
-        pagePrehome.identJCASifExists();
+        PageJCAS.identJCASifExists(driver);
         pagePrehome.selecionPais();
         checkPaisSelected();
     }

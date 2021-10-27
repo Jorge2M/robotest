@@ -3,6 +3,10 @@ package com.mng.robotest.test80.mango.test.pageobject.shop;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.Secret;
+import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets.SecretType;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -29,6 +33,14 @@ public class PageJCAS {
 	public static boolean thisPageIsShown(WebDriver driver) {
 		return (driver.getTitle().contains("Central Authentication Service"));
 	}
+	
+    public static void identJCASifExists(WebDriver driver) {
+        waitForPageLoaded(driver);
+        if (thisPageIsShown(driver)) {
+        	Secret secret = GetterSecrets.factory().getCredentials(SecretType.MANTO_USER);
+            identication(driver, secret.getUser(), secret.getPassword());
+        }
+    }  
 
 	/**
 	 * Realiza el proceso de identificación en la página de Jasig CAS
