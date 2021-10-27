@@ -31,7 +31,9 @@ pipeline {
             }
             steps {
 	        	sh 'mvn clean'
-	            sh 'mvn --settings test80/infrastructure/ci/settings.xml test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
+	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+	            	sh 'mvn --settings test80/infrastructure/ci/settings.xml test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
+	            }
             }
             post {
                 success {
@@ -50,7 +52,9 @@ pipeline {
                 }
             }
             steps {
-	            sh "mvn --settings test80/infrastructure/ci/settings.xml -B package -DskipTests"
+            	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+	            	sh "mvn --settings test80/infrastructure/ci/settings.xml -B package -DskipTests"
+	            }
             }
             post {
                 success {
@@ -72,7 +76,9 @@ pipeline {
 
             steps {
 	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
-	            sh "mvn --settings test80/infrastructure/ci/settings.xml -B verify -DskipUnitTests"
+	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+	            	sh "mvn --settings test80/infrastructure/ci/settings.xml -B verify -DskipUnitTests"
+	            }
             }
 
             post {
