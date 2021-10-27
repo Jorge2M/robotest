@@ -22,9 +22,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAf
 import com.mng.robotest.test80.mango.test.pageobject.utils.LocalStorage;
 import com.mng.robotest.test80.mango.test.stpv.shop.acceptcookies.ModalSetCookiesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.acceptcookies.SectionCookiesStpV;
-import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets;
-import com.mng.robotest.test80.mango.test.utils.awssecrets.Secret;
-import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets.SecretType;
 import com.mng.robotest.test80.mango.test.utils.testab.TestABactive;
 
 /**

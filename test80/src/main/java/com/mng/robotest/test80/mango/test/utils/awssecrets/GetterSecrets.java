@@ -25,11 +25,15 @@ public interface GetterSecrets {
 	}
 	
 	public static GetterSecrets factory() {
-		GetterSecrets getterLocal = new GetterLocalSecrets();
-		if (getterLocal.isAvailable()) {
-			return getterLocal;
+		GetterSecrets getterSecrets = new GetterLocalFileSecrets();
+		if (getterSecrets.isAvailable()) {
+			return getterSecrets;
 		}
-		return new GetterAwsSecrets();
+		getterSecrets = new GetterAwsSecrets();
+		if (getterSecrets.isAvailable()) {
+			return getterSecrets;
+		}
+		return new GetterHardCodeSecrets();
 	}
 	
 	public default boolean isAvailable() {

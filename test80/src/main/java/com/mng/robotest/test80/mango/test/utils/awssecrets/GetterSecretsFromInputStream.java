@@ -1,7 +1,5 @@
 package com.mng.robotest.test80.mango.test.utils.awssecrets;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 
 import javax.xml.bind.JAXBContext;
@@ -10,9 +8,9 @@ import javax.xml.bind.Unmarshaller;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 
 
-public class GetterLocalSecrets implements GetterSecrets {
-
-	private final static String PATH_FILE = "C:\\mango\\ficheros\\secrets\\secrets.xml";
+public abstract class GetterSecretsFromInputStream implements GetterSecrets {
+	
+	abstract InputStream getInputStreamSecrets() throws Exception;
 	
 	@Override
 	public Secret getCredentials(SecretType secretType) {
@@ -30,10 +28,6 @@ public class GetterLocalSecrets implements GetterSecrets {
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 		Secrets secrets = (Secrets) jaxbUnmarshaller.unmarshal(getInputStreamSecrets());		
 		return getSecret(secrets, secretType);
-	}
-	
-	InputStream getInputStreamSecrets() throws Exception {
-		return new FileInputStream(new File(PATH_FILE));
 	}
 	
 	private Secret getSecret(Secrets secrets, SecretType secretType) {

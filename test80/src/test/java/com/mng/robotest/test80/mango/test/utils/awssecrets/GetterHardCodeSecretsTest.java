@@ -1,23 +1,19 @@
 package com.mng.robotest.test80.mango.test.utils.awssecrets;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
-
-import java.io.InputStream;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets.SecretType;
 
-public class GetterLocalSecretsTest {
+public class GetterHardCodeSecretsTest {
 
-	private static GetterLocalSecrets getterSecrets;
+	private static GetterHardCodeSecrets getterSecrets;
 	
 	@Before
 	public void init() throws Exception {
-		getterSecrets = getMock();
+		getterSecrets = new GetterHardCodeSecrets();
 	}
 	
 	@Test
@@ -52,13 +48,6 @@ public class GetterLocalSecretsTest {
 	@Test
 	public void testIsAvailable() throws Exception {
 		assertTrue(getterSecrets.isAvailable());
-	}
-	
-	private static GetterLocalSecrets getMock() throws Exception {
-		InputStream countriesXmlStream = GetterLocalSecretsTest.class.getResourceAsStream("/secrets.xml");
-		GetterLocalSecrets getterLocalFile = Mockito.spy(GetterLocalSecrets.class);
-		when(getterLocalFile.getInputStreamSecrets()).thenReturn(countriesXmlStream);
-		return getterLocalFile;
 	}
 
 }
