@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.utils.awssecrets;
 
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 
 public interface GetterSecrets {
 
@@ -37,6 +38,7 @@ public interface GetterSecrets {
 			return (credentials!=null && credentials.getUser()!=null);
 		}
 		catch (Exception e) {
+			Log4jTM.getLogger().warn("Problem retrieving Secret ", e);
 			return false;
 		}
 		
