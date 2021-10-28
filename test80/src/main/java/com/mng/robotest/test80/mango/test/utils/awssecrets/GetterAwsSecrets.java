@@ -7,14 +7,11 @@ public class GetterAwsSecrets implements GetterSecrets {
 	
 	@Override
 	public Secret getCredentials(SecretType secret) {
-		Log4jTM.getLogger().warn("Retrieving Aws Secrets 1...");
         AwsSecretsProvider<Secret> shopSecretAwsSecretsProvider = new AwsSecretsProvider<>(
                 awsSecretsClientFor(getSecretArn(secret)),
                 Secret.class,
                 null
         );
-        
-        Log4jTM.getLogger().warn("Retrieving Aws Secrets 2...");
         
         Secret secretBean = null;
         try {
@@ -24,8 +21,6 @@ public class GetterAwsSecrets implements GetterSecrets {
         catch (Exception e) {
         	Log4jTM.getLogger().warn("Retrieving Aws Secrets 3..." + e);
         }
-        
-        Log4jTM.getLogger().warn("Retrieving Aws Secrets 4..." + secret);
         
         return secretBean;
 	}
