@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.suites.*;
 public class CmdRunTests { 
 	
 	enum TypeCallbackSchema {http, https}
-	public enum TypeCallBackMethod {POST, GET}
+	public enum TypeCallBackMethod {POST, GET}	
 
 	public static void main(String[] args) throws Exception { 
 		InputParamsMango inputParamsMango = new InputParamsMango(Suites.class, AppEcom.class);
