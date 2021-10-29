@@ -105,23 +105,23 @@ public class AccesoStpV {
 	    	validations.add(
 	    		"NO aparece el link \"Favoritos\"",
 	    		!isVisibleMenuFav, State.Defect);
-	    	if (dCtxSh.channel.isDevice()) {
-		    	validations.add(
-		    		"Aparece el link \"Mis Pedidos\"",
-		    		userMenus.isMenuInState(UserMenu.pedidos, Present), State.Defect);
-	    	}
+//	    	if (dCtxSh.channel.isDevice()) {
+//		    	validations.add(
+//		    		"Aparece el link \"Mis Pedidos\"",
+//		    		userMenus.isMenuInState(UserMenu.pedidos, Present), State.Defect);
+//	    	}
 		} else {
 	    	validations.add(
 	    		"Aparece el link \"Favoritos\"",
 	    		isVisibleMenuFav, State.Defect);
-	    	
-	    	if (dCtxSh.channel!=Channel.desktop) {
-		    	boolean isPresentLinkMisCompras = userMenus.isMenuInState(UserMenu.misCompras, Present);
-		    	validations.add(
-		    		"Aparece el link \"Mis Compras\"",
-		    		isPresentLinkMisCompras, State.Defect);
-	    	}
 		}
+		
+    	if (dCtxSh.channel!=Channel.desktop) {
+	    	boolean isPresentLinkMisCompras = userMenus.isMenuInState(UserMenu.misCompras, Present);
+	    	validations.add(
+	    		"Aparece el link \"Mis Compras\"",
+	    		isPresentLinkMisCompras, State.Defect);
+    	}
 		
 		if (dCtxSh.channel!=Channel.desktop) {
 	    	validations.add(
