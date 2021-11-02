@@ -1,11 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.genericchecks;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.state;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
-
 import java.util.ArrayList;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -49,8 +45,8 @@ public class CheckerSEO implements Checker {
             //Validaciones a nivel del "Title"
             listaProblemas.addAll(validaTagTitle(driver));
     
-            //Validaciones a nivel del meta "Description"
-            listaProblemas.addAll(validaMetaDescription(driver));
+//            //Validaciones a nivel del meta "Description"
+//            listaProblemas.addAll(validaMetaDescription(driver));
     
             //Validaciones a nivel del "Canonical"
             listaProblemas.addAll(validaCanonical(driver));
@@ -84,19 +80,19 @@ public class CheckerSEO implements Checker {
         return listaErrorsInHtmlFormat;
     }
     
-    /**
-     * @return lista de errores en formato HTML referidos al meta "Description" 
-     */
-    private ArrayList<String> validaMetaDescription(WebDriver driver) {
-        ArrayList<String> listaErrorsInHtmlFormat = new ArrayList<>();
-        
-        String xpath = "//meta[@name='description' and @content]";
-        if (state(Present, By.xpath(xpath), driver).check() ||
-            driver.findElement(By.xpath("//meta[@name='description' and @content]")).getAttribute("content").compareTo("") == 0) {
-            listaErrorsInHtmlFormat.add("<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">No existe el meta 'description' o tiene el atributo 'content' a nulo</c>");
-        }
-        return listaErrorsInHtmlFormat;
-    }
+//    /**
+//     * @return lista de errores en formato HTML referidos al meta "Description" 
+//     */
+//    private ArrayList<String> validaMetaDescription(WebDriver driver) {
+//        ArrayList<String> listaErrorsInHtmlFormat = new ArrayList<>();
+//        
+//        String xpath = "//meta[@name='description' and @content]";
+//        if (state(Present, By.xpath(xpath), driver).check() ||
+//            driver.findElement(By.xpath("//meta[@name='description' and @content]")).getAttribute("content").compareTo("") == 0) {
+//            listaErrorsInHtmlFormat.add("<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">No existe el meta 'description' o tiene el atributo 'content' a nulo</c>");
+//        }
+//        return listaErrorsInHtmlFormat;
+//    }
     
     /**
      * @return lista de errores en formato HTML referidos al "canonical"

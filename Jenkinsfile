@@ -69,7 +69,7 @@ pipeline {
             when { anyOf { branch 'master'; branch 'develop' } }
             agent {
                 docker {
-                    image 'markhobson/maven-chrome:jdk-8'
+                    image 'jorge2m/chrome-firefox-openjdk8:1635851061'
                     args '--privileged --shm-size=1g -v /home/ubuntu/.m2:/root/.m2'
                 }
             }
