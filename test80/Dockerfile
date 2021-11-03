@@ -4,7 +4,7 @@
 #   -> In PowerShell replace %CD% by ${pwd}
 FROM jorge2m/chrome-firefox-jdk8-maven:latest
 
-COPY target/test80-*.zip test80.zip
+COPY target/test80.zip test80.zip
 RUN unzip test80.zip \
 	&& mv test80-* test80
 	

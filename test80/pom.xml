@@ -93,6 +93,7 @@
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>3.0.0</version>
 				<configuration>
+					<finalName>${project.artifactId}</finalName>
 			 		<appendAssemblyId>false</appendAssemblyId>
 					<descriptors>
 						<!-- el descriptor contiene la información para armar el assembly -->
