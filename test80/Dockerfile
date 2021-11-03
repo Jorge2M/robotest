@@ -5,8 +5,7 @@
 FROM jorge2m/chrome-firefox-jdk8-maven:latest
 
 COPY target/test80.zip test80.zip
-RUN unzip test80.zip \
-	&& mv test80-* test80
+RUN unzip test80.zip
 	
 COPY docker-entrypoint.sh /test80/docker-entrypoint.sh
 	
