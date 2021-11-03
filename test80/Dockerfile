@@ -2,7 +2,7 @@
 #example create image: docker build -t jorge2m/test80:latest .
 #example container run: docker run -d -p 80:80 -p 443:443 --privileged -v "%CD%/dockerresults:/test80/output-library" jorge2m/test80:latest
 #   -> In PowerShell replace %CD% by ${pwd}
-FROM jorge2m/chrome-firefox-openjdk8:1635929405
+FROM jorge2m/chrome-firefox-jdk8-maven:latest
 
 COPY target/test80-*.zip test80.zip
 RUN unzip test80.zip \
