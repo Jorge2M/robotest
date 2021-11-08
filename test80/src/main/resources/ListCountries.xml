@@ -2925,6 +2925,9 @@ where
 <linea 		  id="home"   	 shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
+	type="KlarnaUK" tiendas="shop,outlet"
+	nombre="KLARNA" testpasarela='s' testpago='s'>&TPV-208;</pago>
+<pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='COLLECT_PLUS' tipotarj="VISAD3D_JP" numtarj="4142621111111112" mescad="03" anycad="2030" cvc="737">&TPV-230;</pago>
 <pago 
@@ -5450,13 +5453,13 @@ where
 	type="storecredit" tiendas="shop"
 	nombre="STORECREDIT" testpasarela='s' testpago='s'>&TPV-803;</pago> <!-- Pago Store Credit que aparece cuando el usuario tiene Saldo en Cuenta (y desaparecen el resto de métodos de pago)-->
 <pago 
-	type="ProcessOut" tiendas="shop,outlet"
+	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4242424242424242" mescad="03" anycad="2030" cvc="100">&TPV-364;</pago>
 <pago 
-	type="ProcessOut" tiendas="shop,outlet"
+	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5436031030606378" mescad="03" anycad="2030" cvc="257" usrd3d="user" passd3d="password">&TPV-364;</pago>
 <pago 
-	type="ProcessOut" tiendas="shop,outlet"
+	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="Mada" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4242424242424242" mescad="03" anycad="2030" cvc="100">&TPV-364;</pago>
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"

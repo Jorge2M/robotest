@@ -93,7 +93,7 @@ public class Compra {
 		
 		dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago, driver)
         	.pago(españa.getPago("VISA"))
-        	.listArticles(getArticlesHome(dCtxSh, driver))
+        	.listArticles(getArticlesHome(dCtxSh, driver).subList(0, 2))
         	.build()
         	.checkout(From.Prehome);
 

@@ -172,7 +172,7 @@ public class Loyalty {
 		pageHomeLikesStpV.clickButtonDonarLikes();
 		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
 			PageHomeDonateLikesStpV pageHomeDonateLikesStpV = PageHomeDonateLikesStpV.getNew(driver);
-			ButtonLikes donateButton = ButtonLikes.Button50likes;
+			ButtonLikes donateButton = ButtonLikes.Button100likes;
 			pageHomeDonateLikesStpV.selectDonateButton(donateButton);
 			int loyaltyPointsFin = secMenusUserStpV.clickMenuMangoLikesYou();
 			secMenusUserStpV.checkLoyaltyPoints(loyaltyPointsIni, donateButton.getNumLikes(), loyaltyPointsFin);

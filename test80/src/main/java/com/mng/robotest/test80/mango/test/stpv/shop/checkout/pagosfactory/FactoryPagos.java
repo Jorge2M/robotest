@@ -72,7 +72,10 @@ public class FactoryPagos {
         	break;
         case Klarna:
             pagoMaked = new PagoKlarna(dCtxSh, dCtxPago, driver);
-            break;           
+            break;
+        case KlarnaUK:
+            pagoMaked = new PagoKlarnaUK(dCtxSh, dCtxPago, driver);
+            break;
         case PaysecureQiwi:
             pagoMaked = new PagoPaysecureQiwi(dCtxSh, dCtxPago, driver);
             break;

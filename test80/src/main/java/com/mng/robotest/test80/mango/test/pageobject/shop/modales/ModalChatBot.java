@@ -8,7 +8,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 
 public class ModalChatBot extends PageObjTM {
 
-	private final static String XPathRoot = "//div[@id='webchatRoot']";
+	private final static String XPathRoot = "//div[@data-testid='chatbot']";
 	private final static String XPathIcon = XPathRoot + "//img";
 	private final static String XPathWebchat = XPathRoot + "//div[@id='botonic-webchat']";
 	

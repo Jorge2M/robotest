@@ -12,6 +12,7 @@ public class PageHomeDonateLikes extends PageObjTM {
 
 	public enum ButtonLikes implements ElementPage {
 		Button50likes(50), 
+		Button100likes(100), 
 		Button200likes(200),
 		Button800likes(1000);
 		

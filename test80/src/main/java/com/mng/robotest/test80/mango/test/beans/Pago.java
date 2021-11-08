@@ -38,6 +38,7 @@ public class Pago implements Serializable {
         Giropay, 
         Sofort, 
         Klarna,
+        KlarnaUK,
         PaysecureQiwi, 
         Assist, 
         PasarelaOtras, 
@@ -140,7 +141,9 @@ public class Pago implements Serializable {
         case "Paymaya":
         	return TypePago.PayMaya;
         case "Klarna":
-            return TypePago.Klarna;                               
+            return TypePago.Klarna;          
+        case "KlarnaUK":
+            return TypePago.KlarnaUK;    
         case "PaysecureQiwi":
             return TypePago.PaysecureQiwi;                
         case "Assist":

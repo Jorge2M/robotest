@@ -21,7 +21,7 @@ public class PageKlarnaStpV {
 		description="Aparece la página inicial de Klarna (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
     public boolean checkIsPage(int maxSeconds) { 
-        return pageKlarna.isPage(5);
+        return pageKlarna.isPage(maxSeconds);
     }
 	
 	@Step (
@@ -29,13 +29,12 @@ public class PageKlarnaStpV {
         expected="Aparece el modal de introducción de datos del usuario")
 	public void clickComprar() {
         pageKlarna.clickBuyButton();
-        checkIsModalInputUserData(5);
 	}
 	
 	@Validation (
 		description="Aparece el modal de introducción de los datos del usuario (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-    private boolean checkIsModalInputUserData(int maxSeconds) { 
+    public boolean checkIsModalInputUserData(int maxSeconds) { 
         return pageKlarna.isVisibleModalInputUserData(maxSeconds);
     }
 	
@@ -46,12 +45,26 @@ public class PageKlarnaStpV {
 		pageKlarna.inputUserDataAndConfirm(dataKlarna);
 	}
 	
+	@Step (
+		description="Introducir el phone number / otp:<br>#{phoneNumber} #{otp}",
+        expected="Aparece el modal para la introducción del número personal")
+	public void inputDataPhoneAndConfirm(String phoneNumber, String otp) {
+		pageKlarna.inputDataPhoneAndConfirm(phoneNumber, otp);
+	}
+	
 	@Validation (
 		description="Es visible el modal para la introducción del número personal (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Info)
-    public boolean checkModalInputPersonNumber(int maxSeconds) { 
-        return pageKlarna.isVisibleModalPersonNumber(maxSeconds);
-    }
+	public boolean checkModalInputPersonNumber(int maxSeconds) { 
+		return pageKlarna.isVisibleModalPersonNumber(maxSeconds);
+	}
+	
+	@Validation (
+		description="Es visible el modal para la introducción del phone number (lo esperamos hasta #{maxSeconds} segundos)",
+		level=State.Info)
+	public boolean checkModalInputPhoneNumber(int maxSeconds) { 
+		return pageKlarna.isVisibleModalInputPhone(maxSeconds);
+	}
 	
 	@Step (
 		description="Introducir y confirmar el Personal Number: <b>#{personnumber}</b>",

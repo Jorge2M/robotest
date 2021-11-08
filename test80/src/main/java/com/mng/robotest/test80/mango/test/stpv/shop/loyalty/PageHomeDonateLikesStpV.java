@@ -29,11 +29,9 @@ public class PageHomeDonateLikesStpV {
 			"Aparece la pagina de <b>Donar Likes</b> (esperamos hasta " + maxSeconds + " segundos)",
 			pageHomeDonateLikes.checkIsPage(0), State.Defect);
 		
-		for (ButtonLikes buttonLikes : ButtonLikes.values()) {
-			checks.add(
-				"Aparece el botón para donar " + buttonLikes.getNumLikes() + " Likes (esperamos hasta " + maxSeconds + " segundos)",
-				pageHomeDonateLikes.isVisible(buttonLikes, maxSeconds), State.Defect);
-		}
+		checks.add(
+			"Aparece el botón para donar " + ButtonLikes.Button100likes.getNumLikes() + " Likes (esperamos hasta " + maxSeconds + " segundos)",
+			pageHomeDonateLikes.isVisible(ButtonLikes.Button100likes, maxSeconds), State.Defect);
 		
 		return checks;
 	}

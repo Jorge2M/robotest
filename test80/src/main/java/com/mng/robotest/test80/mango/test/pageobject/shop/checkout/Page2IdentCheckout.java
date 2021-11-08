@@ -43,8 +43,8 @@ public class Page2IdentCheckout extends PageObjTM {
     private final static String XPathInputPoblacionActive = "//input[@id[contains(.,':cfCity')] and not(@disabled) and not(@readonly)]";
     private final static String XPathSelectPais = "//select[@id[contains(.,':pais')]]";
     private final static String XPathSelectProvPais = "//select[@id[contains(.,'provinciaPais')]]";
-    private final static String XPathSelectEstadosPais = "//select[@id[contains(.,'estadosPais')]]";
-    private final static String XPathSelectLocalidadesProvCity = "//select[@id[contains(.,'localidadesProvCity')]]";
+    private final static String XPathSelectEstadosPais = "//select[@id[contains(.,'estadosPais')] or @id[contains(.,':nivelCity')]]";
+    private final static String XPathSelectLocalidadesProvCity = "//select[@id[contains(.,'localidadesProvCity')] or @id[contains(.,':nivelCityArea')]]";
     private final static String XPathSelectLocalidadesNeighbourhoodCity = "//select[@id[contains(.,'localidadesNeighbourhoodCity')]]";
     private final static String XPathCheckHombre = "//div[@id[contains(.,':cfGener_H')]]";
     private final static String XPathCheckCondiciones = "//input[@id[contains(.,':cfPriv')]]";

@@ -11,8 +11,9 @@ public class PageKlarna extends PageObjTM {
 	private final ModalUserDataKlarna modalUserData;
 	private final ModalConfUserDataKlarna modalConfUserData;
 	private final ModalInputPersonnumberKlarna modalInputPersonnumber;
+	private final ModalInputPhoneKlarna modalInputPhone;
 	
-	private final static String XPathBuyButton = "//button[@id='buy-button']";
+	private final static String XPathBuyButton = "//button[@id[contains(.,'buy-button')]]";
 	private final static String XPathIframe = "//iframe[@id[contains(.,'klarna-hpp-instance-fullscreen')]]";
 	
 	public PageKlarna(WebDriver driver) {
@@ -20,6 +21,7 @@ public class PageKlarna extends PageObjTM {
 		modalUserData = new ModalUserDataKlarna(driver);
 		modalConfUserData = new ModalConfUserDataKlarna(driver);
 		modalInputPersonnumber = new ModalInputPersonnumberKlarna(driver);
+		modalInputPhone = new ModalInputPhoneKlarna(driver);
 	}
 	
 	public boolean isPage(int maxSeconds) {
@@ -40,6 +42,13 @@ public class PageKlarna extends PageObjTM {
 		return result;
 	}
 	
+	public boolean isVisibleModalInputPhone(int maxSeconds) {
+		goToIframe();
+		boolean result = modalInputPhone.isModal(maxSeconds);
+		leaveIframe();
+		return result;
+	}
+	
 	public void inputUserDataAndConfirm(DataKlarna dataKlarna) {
 		goToIframe();
 		modalUserData.inputData(dataKlarna);
@@ -47,6 +56,15 @@ public class PageKlarna extends PageObjTM {
 		if (modalConfUserData.isModal(2)) {
 			modalConfUserData.clickButtonConfirmation();
 		}
+		leaveIframe();
+	}
+	
+	public void inputDataPhoneAndConfirm(String phoneNumber, String otp) {
+		goToIframe();
+		modalInputPhone.inputPhoneNumber(phoneNumber);
+		modalInputPhone.clickButtonContinue();
+		modalInputPhone.inputOTP(otp);
+		modalInputPhone.clickButtonConfirm();
 		leaveIframe();
 	}
 	
