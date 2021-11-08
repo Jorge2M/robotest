@@ -64,9 +64,10 @@ public class Reembolsos {
     /**
      * Script correspondiente al caso de prueba que configura el reembolso vía transferencia y saldo en cuenta en arabia/inglés 
      */
-    @Test (
-        groups={"Reembolso", "Canal:desktop,mobile_App:shop"}, 
-        description="Configura el reembolso vía transferencia y saldo en cuenta para un país/idioma determinado")
+    //TODO conseguir reactivar el usuario mng_test_SA_pruebaSaldo@mango.com
+//    @Test (
+//        groups={"Reembolso", "Canal:desktop,mobile_App:shop"}, 
+//        description="Configura el reembolso vía transferencia y saldo en cuenta para un país/idioma determinado")
     public void REE001_configureReembolso() throws Exception {
     	DataCtxShop dCtxSh = getCtxShForTest();
     	WebDriver driver = TestMaker.getDriverTestCase();
@@ -104,9 +105,9 @@ public class Reembolsos {
     /**
      * Realiza un checkout utilizando el Saldo en Cuenta 
      */
-    @Test (
-        groups={"Reembolso", "Canal:desktop,mobile_App:shop"},
-        description="Se realiza un Checkout utilizando Saldo en Cuenta. Se accede a la configuración al inicio y al final para comprobar que el saldo en cuenta se resta correctamente")
+//    @Test (
+//        groups={"Reembolso", "Canal:desktop,mobile_App:shop"},
+//        description="Se realiza un Checkout utilizando Saldo en Cuenta. Se accede a la configuración al inicio y al final para comprobar que el saldo en cuenta se resta correctamente")
     public void REE002_checkoutWithSaldoCta() throws Exception {
     	DataCtxShop dCtxSh = getCtxShForTest();
     	WebDriver driver = TestMaker.getDriverTestCase();

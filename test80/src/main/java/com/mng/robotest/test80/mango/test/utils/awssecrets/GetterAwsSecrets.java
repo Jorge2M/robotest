@@ -31,6 +31,7 @@ public class GetterAwsSecrets implements GetterSecrets {
 		case SHOP_STANDARD_USER:
 		case SHOP_ROBOT_USER:
 		case SHOP_JORGE_USER:
+		case SHOP_FRANCIA_USER:
     		return "arn:aws:secretsmanager:eu-west-1:687762684238:secret:pro/robotest/user-shop-ynflty";
     	case MANTO_USER:
     		return "arn:aws:secretsmanager:eu-west-1:687762684238:secret:pro/robotest/user-manto-Vl6Mxx";

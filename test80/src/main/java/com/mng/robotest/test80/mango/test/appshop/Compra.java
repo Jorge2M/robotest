@@ -151,7 +151,7 @@ public class Compra {
 			
 			dCtxSh.userConnected = "francia.test@mango.com";
 			dCtxSh.passwordUser = GetterSecrets.factory()
-				.getCredentials(SecretType.SHOP_STANDARD_USER)
+				.getCredentials(SecretType.SHOP_FRANCIA_USER)
 				.getPassword();
 		}
 

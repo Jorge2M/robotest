@@ -16,6 +16,8 @@ public class Secret {
 	private String password_robot;
 	private String user_jorge;
 	private String password_jorge;
+	private String user_francia;
+	private String password_francia;
 	private String nif;
 	private String nombre;
 	
@@ -53,6 +55,8 @@ public class Secret {
 			return user_robot;
 		case SHOP_JORGE_USER:
 			return user_jorge;
+		case SHOP_FRANCIA_USER:
+			return user_francia;
 		}
 		return user;
 	}
@@ -67,6 +71,8 @@ public class Secret {
 			return password_standard;
 		case SHOP_ROBOT_USER:
 			return password_robot;
+		case SHOP_FRANCIA_USER:
+			return password_francia;
 		case SHOP_JORGE_USER:
 			return password_jorge;
 		}
@@ -99,6 +105,14 @@ public class Secret {
     @XmlElement(name="password_robot") 
 	public void setPasswordRobot(String password_robot) {
 		this.password_robot = password_robot;
+	}
+    @XmlElement(name="user_francia") 
+	public void setUserFrancia(String user_francia) {
+		this.user_francia = user_francia;
+	}
+    @XmlElement(name="password_francia") 
+	public void setPasswordFrancia(String password_francia) {
+		this.password_francia = password_francia;
 	}
 
 	
