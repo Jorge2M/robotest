@@ -19,6 +19,7 @@ import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedid
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
 import com.mng.robotest.test80.mango.test.getdata.products.Menu;
+import com.mng.robotest.test80.mango.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
@@ -118,7 +119,7 @@ public class Compra {
 					Menu.Alfombras))
 			.build();
 		
-		return getterProducts.getWithStock();
+		return getterProducts.getFiltered(FilterType.Stock);
 	}
 
 	private enum TypeCheque {Old, New}

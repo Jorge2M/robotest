@@ -13,6 +13,7 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.generic.beans.FactoryVale;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
+import com.mng.robotest.test80.mango.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 
 
@@ -62,50 +63,50 @@ public class UtilsTestMango {
 			return "70";
 		}
 	}
-    
-    public static boolean textContainsPercentage(String text, IdiomaPais idioma) {
-        String percentageSymbol = getPercentageSymbol(idioma);
-        return (text.contains(percentageSymbol));
-    }
-    
-    public static boolean textContainsSetenta(String text, IdiomaPais idioma) {
-    	String setenta = getSetenta(idioma);
-    	return (text.contains(setenta));
-    }
-    
-    public static String getReferenciaFromSrcImg(String srcImage) {
-        Pattern pattern = Pattern.compile("(\\d+)_(.*?).jpg");
-        Matcher matcher = pattern.matcher(srcImage);
-        if (matcher.find()) {
-            return matcher.group(1);
-        }
-        return "";    	
-    }
-    
-    public static String getReferenciaFromHref(String hrefArticulo) {
-    	String referencia = getReferenciaFromHref_type1(hrefArticulo);
-    	if ("".compareTo(referencia)!=0) {
-    		return referencia;
-    	}
-    	return getReferenciaFromHref_type2(hrefArticulo);
-    }
-    
+
+	public static boolean textContainsPercentage(String text, IdiomaPais idioma) {
+		String percentageSymbol = getPercentageSymbol(idioma);
+		return (text.contains(percentageSymbol));
+	}
+
+	public static boolean textContainsSetenta(String text, IdiomaPais idioma) {
+		String setenta = getSetenta(idioma);
+		return (text.contains(setenta));
+	}
+
+	public static String getReferenciaFromSrcImg(String srcImage) {
+		Pattern pattern = Pattern.compile("(\\d+)_(.*?).jpg");
+		Matcher matcher = pattern.matcher(srcImage);
+		if (matcher.find()) {
+			return matcher.group(1);
+		}
+		return "";
+	}
+
+	public static String getReferenciaFromHref(String hrefArticulo) {
+		String referencia = getReferenciaFromHref_type1(hrefArticulo);
+		if ("".compareTo(referencia)!=0) {
+			return referencia;
+		}
+		return getReferenciaFromHref_type2(hrefArticulo);
+	}
+
 	private static String getReferenciaFromHref_type1(String hrefArticulo) {
-        Pattern pattern = Pattern.compile("(\\d+).html");
-        Matcher matcher = pattern.matcher(hrefArticulo);
-        if (matcher.find()) {
-            return matcher.group(1);
-        }
-        return "";
+		Pattern pattern = Pattern.compile("(\\d+).html");
+		Matcher matcher = pattern.matcher(hrefArticulo);
+		if (matcher.find()) {
+			return matcher.group(1);
+		}
+		return "";
 	}
 	
 	private static String getReferenciaFromHref_type2(String hrefArticulo) {
-        Pattern pattern = Pattern.compile("\\?producto=(\\d+)\\&");
-        Matcher matcher = pattern.matcher(hrefArticulo);
-        if (matcher.find()) {
-            return matcher.group(1);
-        }
-        return "";
+		Pattern pattern = Pattern.compile("\\?producto=(\\d+)\\&");
+		Matcher matcher = pattern.matcher(hrefArticulo);
+		if (matcher.find()) {
+			return matcher.group(1);
+		}
+		return "";
 	}
 	
 	static int maxArticles = 99;
@@ -128,31 +129,31 @@ public class UtilsTestMango {
 		return (getArticlesForTestDependingVale(dCtxSh, maxArticles, driver));
 	}
 	
-    public static List<Garment> getArticlesForTestDependingVale(DataCtxShop dCtxSh, int maxArticlesAwayVale, WebDriver driver) 
-    throws Exception {
-    	List<Garment> listProducts;
-    	if (dCtxSh.vale!=null) {
-    		listProducts = dCtxSh.vale.getArticlesFromVale();
-    		if (listProducts.size()>0) {
-    			return listProducts;
-    		}
-    	}
-    	
-        GetterProducts getterProducts = new GetterProducts
-        		.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver)
-        		.build();
+	public static List<Garment> getArticlesForTestDependingVale(DataCtxShop dCtxSh, int maxArticlesAwayVale, WebDriver driver) 
+	throws Exception {
+		List<Garment> listProducts;
+		if (dCtxSh.vale!=null) {
+			listProducts = dCtxSh.vale.getArticlesFromVale();
+			if (listProducts.size()>0) {
+				return listProducts;
+			}
+		}
+		
+		GetterProducts getterProducts = new GetterProducts
+				.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver)
+				.build();
 
-    	listProducts = getterProducts.getWithStock();
-    	
-        if (dCtxSh.vale!=null) {
-        	for (Garment product : listProducts) {
-        		product.setValePais(dCtxSh.vale);
-        	}
-        }
-        
-        if (listProducts.size() > maxArticlesAwayVale) {
-        	return (listProducts.subList(0, maxArticlesAwayVale));
-        }
-        return listProducts;
-    }
+		listProducts = getterProducts.getFiltered(FilterType.Stock);
+		
+		if (dCtxSh.vale!=null) {
+			for (Garment product : listProducts) {
+				product.setValePais(dCtxSh.vale);
+			}
+		}
+
+		if (listProducts.size() > maxArticlesAwayVale) {
+			return (listProducts.subList(0, maxArticlesAwayVale));
+		}
+		return listProducts;
+	}
 }

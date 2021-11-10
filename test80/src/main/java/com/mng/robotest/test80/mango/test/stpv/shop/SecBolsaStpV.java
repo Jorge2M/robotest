@@ -20,6 +20,7 @@ import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
+import com.mng.robotest.test80.mango.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.ValidatorContentBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.LineasArtBolsa.DataArtBolsa;
@@ -110,7 +111,10 @@ public class SecBolsaStpV {
 
 	public void altaArticlosConColores(int numArticulos, DataBag dataBag) throws Exception {
 		GetterProducts getterProducts = new GetterProducts.Builder(pais.getCodigo_alf(), app, driver).build();
-		List<Garment> listParaAlta = getterProducts.getWithManyColors().subList(0, numArticulos);
+		List<Garment> listParaAlta = getterProducts
+				.getFiltered(FilterType.ManyColors)
+				.subList(0, numArticulos);
+		
 		altaListaArticulosEnBolsa(listParaAlta, dataBag);
 	}
 

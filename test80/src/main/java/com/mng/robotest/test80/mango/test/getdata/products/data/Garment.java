@@ -9,6 +9,7 @@ public class Garment {
 	private String garmentId;
 	private int stock;
 	private List<Color> colors;
+	private Labels labels;
 	private AnalyticsEventsData analyticsEventsData;
 	
 	private ValePais valePais = null;
@@ -82,6 +83,12 @@ public class Garment {
 	}
 	public void setColors(List<Color> colors) {
 		this.colors = colors;
+	}
+	public Labels getLabels() {
+		return labels;
+	}
+	public void setLabels(Labels labels) {
+		this.labels = labels;
 	}
 	
 	public void setValePais(ValePais valePais) {

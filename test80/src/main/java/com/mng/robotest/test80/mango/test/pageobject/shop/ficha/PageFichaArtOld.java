@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
@@ -136,6 +137,11 @@ public class PageFichaArtOld extends PageFicha {
     public String getNameLinkBuscarEnTienda() {
     	return "Botón Buscar en tienda";
     }
+
+	@Override
+	public boolean isVisibleBuscarEnTiendaLink() {
+		return state(State.Visible, By.xpath(XPathBuscarEnTiendaButton)).check();
+	}
 
 	@Override
 	public void selectBuscarEnTiendaLink() {

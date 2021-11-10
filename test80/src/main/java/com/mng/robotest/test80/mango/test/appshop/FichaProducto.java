@@ -1,5 +1,8 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
@@ -13,6 +16,7 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
+import com.mng.robotest.test80.mango.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
@@ -57,36 +61,45 @@ public class FichaProducto {
 		DataCtxShop dCtxSh = getCtxShForTest(españa, castellano, true, userShop.user, userShop.password);
 
 		AccesoStpV.oneStep(dCtxSh, true, driver);
-		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
-		Garment articleWithColors = getterProducts.getWithManyColors().get(0);
 		SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
-		secBuscadorStpV.searchArticulo(articleWithColors, dCtxSh.pais);
-
 		PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
+		
+		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
+		List<FilterType> filterOnline = Arrays.asList(FilterType.Online);
+		Garment articleOnline = getterProducts.getOneFiltered(filterOnline);
+		if (articleOnline!=null) {
+			secBuscadorStpV.searchArticulo(articleOnline, dCtxSh.pais, filterOnline);
+			pageFichaStpv.checkLinkDispTiendaInvisible();
+		}
+		
+		List<FilterType> filterNoOnlineWithColors = Arrays.asList(FilterType.NoOnline, FilterType.ManyColors); 
+		Garment articleNoOnlineWithColors = getterProducts.getOneFiltered(filterNoOnlineWithColors);
+		
+		secBuscadorStpV.searchArticulo(articleNoOnlineWithColors, dCtxSh.pais, filterNoOnlineWithColors);
 		boolean isTallaUnica = pageFichaStpv.selectAnadirALaBolsaTallaPrevNoSelected();
 
-		ArticuloScreen articulo = new ArticuloScreen(articleWithColors);
+		ArticuloScreen articulo = new ArticuloScreen(articleNoOnlineWithColors);
 		pageFichaStpv.selectColorAndSaveData(articulo);
 		pageFichaStpv.selectTallaAndSaveData(articulo);
 
-        //Si es talla única -> Significa que lo dimos de alta en la bolsa cuando seleccionamos el click "Añadir a la bolsa"
-        //-> Lo damos de baja
-        if (isTallaUnica) {
-        	SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
-            secBolsaStpV.clear();
-        }
-        
-        articulo = pageFichaStpv.getFicha().getArticuloObject();
-        pageFichaStpv.selectBuscarEnTiendaButton();
-        new ModalBuscadorTiendasStpV(dCtxSh.channel, driver).close();
-        if (dCtxSh.appE==AppEcom.shop) {
-            pageFichaStpv.selectAnadirAFavoritos();
-            pageFichaStpv.changeColorGarment();
-            pageFichaStpv.selectRemoveFromFavoritos();
-        }
-        
-        pageFichaStpv.selectAnadirALaBolsaTallaPrevSiSelected(articulo, dCtxSh);
-    }
+		//Si es talla única -> Significa que lo dimos de alta en la bolsa cuando seleccionamos el click "Añadir a la bolsa"
+		//-> Lo damos de baja
+		if (isTallaUnica) {
+			SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
+			secBolsaStpV.clear();
+		}
+
+		articulo = pageFichaStpv.getFicha().getArticuloObject();
+		pageFichaStpv.selectBuscarEnTiendaButton();
+		new ModalBuscadorTiendasStpV(dCtxSh.channel, driver).close();
+		if (dCtxSh.appE==AppEcom.shop) {
+			pageFichaStpv.selectAnadirAFavoritos();
+			pageFichaStpv.changeColorGarment();
+			pageFichaStpv.selectRemoveFromFavoritos();
+		}
+
+		pageFichaStpv.selectAnadirALaBolsaTallaPrevSiSelected(articulo, dCtxSh);
+	}
 
     @SuppressWarnings("static-access")
     @Test (
@@ -98,7 +111,7 @@ public class FichaProducto {
 
         AccesoStpV.oneStep(dCtxSh, false, driver);
 		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
-        Garment articleWithTotalLook = getterProducts.getOneWithTotalLook(driver);
+        Garment articleWithTotalLook = getterProducts.getOneFiltered(FilterType.TotalLook);
         SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
         secBuscadorStpV.searchArticulo(articleWithTotalLook, dCtxSh.pais);
         

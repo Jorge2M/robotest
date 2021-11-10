@@ -9,7 +9,6 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
@@ -360,17 +359,32 @@ public class PageFichaArtStpV {
             return (pageFicha.isVisibleButtonAnadirFavoritos());
         }
     }
-    
-    final String tagNameLink = "@TagNameLink";
-    @Step (
-    	description="Seleccionar <b>" + tagNameLink + "</b>", 
-        expected="Aparece un resultado de la búsqueda correcta")
-    public void selectBuscarEnTiendaButton() {
-    	TestMaker.getCurrentStepInExecution().replaceInDescription(tagNameLink, pageFicha.getNameLinkBuscarEnTienda());
-        pageFicha.selectBuscarEnTiendaLink();
-        new ModalBuscadorTiendasStpV(channel, driver).validaBusquedaConResultados();
-    }
-    
+
+
+	@Validation (
+		description="Es visible el link de <b>Disponibilidad en Tienda</b>",
+		level=State.Defect)
+	public boolean checkLinkDispTiendaVisible() {
+		return pageFicha.isVisibleBuscarEnTiendaLink();
+	}
+	
+	@Validation (
+		description="Es invisible el link de <b>Disponibilidad en Tienda</b>",
+		level=State.Defect)
+	public boolean checkLinkDispTiendaInvisible() {
+		return !pageFicha.isVisibleBuscarEnTiendaLink();
+	}
+	
+	final String tagNameLink = "@TagNameLink";
+	@Step (
+		description="Seleccionar <b>" + tagNameLink + "</b>", 
+		expected="Aparece un resultado de la búsqueda correcta")
+	public void selectBuscarEnTiendaButton() {
+		TestMaker.getCurrentStepInExecution().replaceInDescription(tagNameLink, pageFicha.getNameLinkBuscarEnTienda());
+		pageFicha.selectBuscarEnTiendaLink();
+		new ModalBuscadorTiendasStpV(channel, driver).validaBusquedaConResultados();
+	}
+
     @Step (
     	description="Si está visible, Seleccionar el link \"<b>Guía de tallas</b>\"", 
         expected="Aparece la página asociada a la guía de tallas")

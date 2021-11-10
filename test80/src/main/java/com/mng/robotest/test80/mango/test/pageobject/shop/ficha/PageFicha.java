@@ -24,6 +24,7 @@ public abstract class PageFicha extends PageObjTM {
     abstract public boolean isVisibleButtonAnadirFavoritos();
     abstract public String getNameLinkBuscarEnTienda();
     abstract public void selectBuscarEnTiendaLink();
+    abstract public boolean isVisibleBuscarEnTiendaLink();
     abstract public boolean isVisibleSlider(Slider typeSlider);
     abstract public int getNumArtVisiblesSlider(Slider typeSlider);
     abstract public boolean isModalNoStockVisible(int maxSecondsToWait);

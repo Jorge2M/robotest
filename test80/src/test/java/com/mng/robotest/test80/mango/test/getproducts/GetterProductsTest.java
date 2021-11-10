@@ -13,7 +13,9 @@ import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.mng.robotest.test80.mango.test.getdata.products.GetterProducts;
 import com.mng.robotest.test80.mango.test.getdata.products.Menu;
+import com.mng.robotest.test80.mango.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
+import com.mng.robotest.test80.mango.test.getdata.products.data.ProductLabel;
 
 public class GetterProductsTest {
 	
@@ -23,12 +25,12 @@ public class GetterProductsTest {
 	public GetterProductsTest() throws Exception {
 		if (getterProducts==null) {
 			Pais españa = PaisGetter.get(PaisShop.España);
-			getterProducts = new GetterProducts.Builder("https://shop.mango.com/", españa.getCodigo_alf(), AppEcom.shop, null).
-					linea(LineaType.she).
-					menu(Menu.Shorts).
-					numProducts(numProducts).
-					pagina(1).
-					build();
+			getterProducts = new GetterProducts.Builder("https://shop.mango.com/", españa.getCodigo_alf(), AppEcom.shop, null)
+					.linea(LineaType.she)
+					.menu(Menu.Shorts)
+					.numProducts(numProducts)
+					.pagina(1)
+					.build();
 		}
 	}
 	
@@ -45,7 +47,7 @@ public class GetterProductsTest {
 	@Test
 	public void testGetProductsManyColors() throws Exception {
 		//When
-		List<Garment> listProducts = getterProducts.getWithManyColors();
+		List<Garment> listProducts = getterProducts.getFiltered(FilterType.ManyColors);
 		
 		//Then
 		assertTrue(listProducts.size()>0);
@@ -55,9 +57,56 @@ public class GetterProductsTest {
 	@Test
 	public void testGetProductCompletaTuLook() throws Exception {
 		//When
-		Garment product = getterProducts.getOneWithTotalLook(null);
+		Garment product = getterProducts.getOneFiltered(FilterType.TotalLook);
 		
 		//Then
 		assertTrue(product!=null);
+	}
+	
+	@Test
+	public void testGetProductNoOnline() throws Exception {
+		//When
+		List<Garment> products = getterProducts.getFiltered(FilterType.NoOnline);
+		Garment garmentOnline = getGarmentOnline(products);
+		
+		//Then
+		assertTrue(garmentOnline==null);
+	}
+	
+	@Test
+	public void testGetProductOnline() throws Exception {
+		//When
+		List<Garment> products = getterProducts.getFiltered(FilterType.Online);
+		Garment garmentNoOnline = getGarmentNoOnline(products);
+		
+		//Then
+		assertTrue(garmentNoOnline==null);
+	}
+	
+	private Garment getGarmentOnline(List<Garment> garments) {
+		for (Garment garment: garments) {
+			if (isGarmentOnline(garment)) {
+				return garment;
+			}
+		}
+		return null;
+	}
+	
+	private Garment getGarmentNoOnline(List<Garment> garments) {
+		for (Garment garment: garments) {
+			if (!isGarmentOnline(garment)) {
+				return garment;
+			}
+		}
+		return null;
+	}
+	
+	private boolean isGarmentOnline(Garment garment) {
+		for (ProductLabel productLabel : garment.getLabels().getProductLabels()) {
+			if (productLabel!=null && "exclusivo_online".compareTo(productLabel.getKey())==0) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

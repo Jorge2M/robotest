@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -22,10 +21,9 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.getdata.JaxRsClient;
+import com.mng.robotest.test80.mango.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
-import com.mng.robotest.test80.mango.test.getdata.products.data.GarmentDetails;
 import com.mng.robotest.test80.mango.test.getdata.products.data.ProductList;
-import com.mng.robotest.test80.mango.test.getdata.products.data.Garment.Article;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
@@ -47,7 +45,8 @@ public class GetterProducts extends JaxRsClient {
 	private final WebDriver driver;
 	private final MethodGetter method;
 	private final boolean retryPro;
-	private ProductList productList;
+	private final ProductList productList;
+	private final ProductFilter productFilter;
 	
 	public enum MethodGetter {ApiRest, WebDriver, Any}
 	
@@ -75,6 +74,27 @@ public class GetterProducts extends JaxRsClient {
 		this.retryPro = retryPro;
 		this.driver = driver;
 		this.productList = getProductList();
+		this.productFilter = new ProductFilter(productList, app, urlForJavaCall);
+	}
+	
+	public List<Garment> getAll() {
+		return productList.getGroups().get(0).getGarments();
+	}
+	
+	public List<Garment> getFiltered(FilterType filter) throws Exception {
+		return getFiltered(Arrays.asList(filter));
+	}
+	
+	public List<Garment> getFiltered(List<FilterType> listFilters) throws Exception {
+		return productFilter.getListFiltered(listFilters);
+	}
+	
+	public Garment getOneFiltered(FilterType filter) throws Exception {
+		return getOneFiltered(Arrays.asList(filter));
+	}
+	
+	public Garment getOneFiltered(List<FilterType> listFilters) throws Exception {
+		return productFilter.getOneFiltered(listFilters);
 	}
 	
 	private String getUrlForJavaCall(String initialURL, WebDriver driver) throws Exception {
@@ -97,24 +117,24 @@ public class GetterProducts extends JaxRsClient {
 	}
 	
 	private ProductList getProductList() throws Exception {
-		
 		int sizeMenus = menusCandidates.size();
-    	for (int i=0; i<sizeMenus; i++) {
-    		MenuProduct menuCandidate = menusCandidates.get(i);
-        	try {
-        		ProductList productList = getProductList(menuCandidate);
-        		if (productList!=null) {
-        			if (!getWithStock(productList).isEmpty() ||
-        			    (i+1) == sizeMenus) {
-        				return productList;
-        			}
-        		}
-        	}
-        	catch (Exception e) {
-        		Log4jTM.getLogger().warn("Problem retriving articles of type " + menuCandidate + " for country " + codigoPaisAlf, e);
-        	}
-    	}
-    	return null;
+		for (int i=0; i<sizeMenus; i++) {
+			MenuProduct menuCandidate = menusCandidates.get(i);
+			try {
+				ProductList productList = getProductList(menuCandidate);
+				if (productList!=null) {
+					Filter filterStock = new FilterStock();
+					if (!filterStock.filter(productList.getGroups().get(0).getGarments()).isEmpty() ||
+						(i+1) == sizeMenus) {
+						return productList;
+					}
+				}
+			}
+			catch (Exception e) {
+				Log4jTM.getLogger().warn("Problem retriving articles of type " + menuCandidate + " for country " + codigoPaisAlf, e);
+			}
+		}
+		return null;
 	}
 	
 	private ProductList getProductList(MenuProduct menu) throws Exception {
@@ -238,82 +258,6 @@ public class GetterProducts extends JaxRsClient {
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		ProductList productList = objectMapper.readValue(productsJson, ProductList.class);
 		return productList;
-	}
-
-	public List<Garment> getAll() {
-		return productList.getGroups().get(0).getGarments();
-	}
-	public List<Garment> getWithManyColors() {
-		List<Garment> listGarmentsWithManyColors = new ArrayList<>();
-		List<Garment> listGarments = getAll();
-		for (Garment garment : listGarments) {
-			if (garment.getColors().size() > 1) {
-				listGarmentsWithManyColors.add(garment);
-			}
-		}
-		return listGarmentsWithManyColors;
-	}
-	
-	public List<Garment> getWithStock() {
-		return getWithStock(getAll());
-	}
-	
-	private List<Garment> getWithStock(ProductList productList) {
-		return productList.getGroups().get(0).getGarments();
-	}
-	
-	private List<Garment> getWithStock(List<Garment> listAllGarments) {
-		List<Garment> listGarmentsWithStock = new ArrayList<>();
-		for (Garment garment : listAllGarments) {
-			if (garment.getStock() > 0) {
-				listGarmentsWithStock.add(garment);
-			}
-		}
-		return listGarmentsWithStock;
-	}
-	
-	public Garment getOneWithTotalLook(WebDriver driver) throws Exception {
-		List<Garment> listGarments = getAll();
-		for (Garment garment : listGarments) {
-			if (getTotalLookGarment(garment, driver)!=null) {
-				return garment;
-			}
-		}
-		return null;
-	}
-	
-	private GarmentDetails getTotalLookGarment(Garment product, WebDriver driver) throws Exception {
-		WebTarget webTarget = getWebTargetTotalLookGarment(product);
-		Response response = webTarget
-				.request(MediaType.APPLICATION_JSON)
-				.header("stock-id", getIdStockNormalized())
-				.get();
-		
-		if (response.getStatus()==Response.Status.OK.getStatusCode()) {
-			return response.readEntity(GarmentDetails.class);
-		}
-		return null;
-	}
-	
-	private WebTarget getWebTargetTotalLookGarment(Garment product) {
-		Article article = product.getArticleWithMoreStock();
-		Client client = ClientBuilder.newClient();
-		return ( 
-			client
-				.target(urlForJavaCall.replace("http:", "https:") + "services/garments")
-				.path(article.getGarmentId())
-				.path("looktotal")
-				.queryParam("color", article.getColor().getId()));
-	}
-	
-	private String getIdStockNormalized() {
-		if (app==AppEcom.votf) {
-			//Por algún motivo que no entiendo, falla "001.ES.0.false.true.v0" pero funciona "001.ES.0.false.false.v0"
-			return (productList.getStockId()
-						.replace("false.true", "false.false")
-						.replace("true.true", "true.false"));
-		}
-		return productList.getStockId();
 	}
 	
 	private String getLineaPath() {

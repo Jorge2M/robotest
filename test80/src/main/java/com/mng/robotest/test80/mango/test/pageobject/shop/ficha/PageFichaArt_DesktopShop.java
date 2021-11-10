@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -92,6 +94,11 @@ public class PageFichaArt_DesktopShop extends PageFicha {
     @Override
     public String getNameLinkBuscarEnTienda() {
         return "Link Disponibilidad en tienda";
+    }
+    
+    @Override
+    public boolean isVisibleBuscarEnTiendaLink() {
+    	return secBolsaButtonAndLinks.checkLinkInState(LinksAfterBolsa.DisponibilidadTienda, State.Visible, driver);
     }
     
     @Override

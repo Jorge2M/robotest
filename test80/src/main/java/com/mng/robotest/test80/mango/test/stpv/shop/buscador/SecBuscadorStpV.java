@@ -1,16 +1,20 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.buscador;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.beans.Pais;
+import com.mng.robotest.test80.mango.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
@@ -34,10 +38,32 @@ public class SecBuscadorStpV {
 		this.app = app;
 	}
 	
+	private final static String TabHTML = "&emsp;";
 	@Step (
-		description="Buscar el artículo con id #{product.getGarmentId()} y color:#{product.getArticleWithMoreStock().getColorLabel()})", 
+		description=
+			"Buscar el artículo<br>"+ 
+			TabHTML + "id: <b>#{product.getGarmentId()}</b><br>" + 
+			TabHTML + "color: <b>#{product.getArticleWithMoreStock().getColorLabel()}</b>", 
 		expected="Aparece la ficha del producto")
 	public void searchArticulo(Garment product, Pais pais) throws Exception {
+		searchArticuloCommon(product, pais);
+	}
+	
+	private final static String TagValuesFilters = "@TagValuesFilters";
+	@Step (
+		description=
+			"Buscar el artículo<br>"+ 
+			TabHTML + "id: <b>#{product.getGarmentId()}</b><br>" + 
+			TabHTML + "color: <b>#{product.getArticleWithMoreStock().getColorLabel()}</b><br>" +
+			TabHTML + "filters: <b>" + TagValuesFilters + "</b>", 
+		expected="Aparece la ficha del producto")
+	public void searchArticulo(Garment product, Pais pais, List<FilterType> infoFilters) throws Exception {
+		String filterValues = infoFilters.stream().map(FilterType::name).collect(Collectors.joining(","));
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TagValuesFilters, filterValues);
+		searchArticuloCommon(product, pais);
+	}
+	
+	private void searchArticuloCommon(Garment product, Pais pais) throws Exception {
 		ArticuloNavigations.buscarArticulo(product.getArticleWithMoreStock(), channel, app, driver);
 		SeleniumUtils.waitForPageLoaded(driver);  
 		PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel, pais);
