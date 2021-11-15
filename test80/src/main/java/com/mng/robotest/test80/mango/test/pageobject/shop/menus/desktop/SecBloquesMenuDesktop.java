@@ -26,6 +26,7 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	public abstract boolean goToMenuAndCheckIsVisible(Menu1rstLevel menu1rstLevel) throws Exception;
 	public abstract void clickMenu(Menu1rstLevel menu1rstLevel);
 	public abstract void makeMenusGroupVisible(LineaType lineaType, GroupMenu bloque);
+	public abstract List<DataScreenMenu> getListDataScreenMenus(LineaType lineaType, SublineaType sublineaType) throws Exception;
 	
 	protected final AppEcom app;
 	protected final SecLineasMenuDesktop secLineasMenu;
@@ -82,7 +83,7 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 		}
 	}
 
-	private String getXPathMenusSuperiorLinkVisibles(LineaType lineaType, SublineaType sublineaType, TypeMenuDesktop typeMenu) {
+	protected String getXPathMenusSuperiorLinkVisibles(LineaType lineaType, SublineaType sublineaType, TypeMenuDesktop typeMenu) {
 		String xpathCapaMenuLinea = "";
 		if (sublineaType==null) {
 			xpathCapaMenuLinea = getXPathCapaMenusLinea(lineaType);
@@ -139,25 +140,12 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 		waitForPageLoaded(driver);
 	}
 
-	public List<WebElement> getListMenusLinea(LineaType lineaType, SublineaType sublineaType) throws Exception {
-		secLineasMenu.hoverLineaAndWaitForMenus(lineaType, sublineaType);
-		String XPathMenusVisibles = getXPathMenusSuperiorLinkVisibles(lineaType, sublineaType, TypeMenuDesktop.Link);
-		return (driver.findElements(By.xpath(XPathMenusVisibles)));
-	}
-
-	public List<DataScreenMenu> getListDataScreenMenus(LineaType lineaType, SublineaType sublineaType) 
-	throws Exception {
+	protected List<DataScreenMenu> getDataListMenus(List<WebElement> listMenus) {
 		List<DataScreenMenu> listDataMenus = new ArrayList<>();
-		List<WebElement> listMenus = getListMenusLinea(lineaType, sublineaType);
 		for (int i=0; i<listMenus.size(); i++) {
-			DataScreenMenu dataMenu = DataScreenMenu.getNew();
-			dataMenu.setDataGaLabel(listMenus.get(i).getAttribute("data-label"));
-			if (dataMenu.isDataGaLabelValid()) {
-				dataMenu.setLabel(listMenus.get(i).getText().replace("New!", "").trim());
-				listDataMenus.add(dataMenu);
-			}
+			DataScreenMenu dataMenu = DataScreenMenu.from(listMenus.get(i));
+			listDataMenus.add(dataMenu);
 		}
-
 		return listDataMenus;
 	}
 

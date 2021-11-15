@@ -152,50 +152,50 @@ public class SecMenusWrapperStpV {
        
         return validations;
     }
-    
-    /**
-     * Recorre todos los menús existentes en la página y crea un step por cada uno de ellos
-     */
-    public void stepsMenusLinea(LineaType lineaType, SublineaType sublineaType) throws Exception {
-        String paginaLinea = driver.getCurrentUrl();
-        List<DataScreenMenu> listMenusLabel = getListMenus(lineaType, sublineaType);
-        for (int i=0; i<listMenusLabel.size(); i++) {
-            try {
-            	Menu1rstLevel menu1rstLevel = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(lineaType, sublineaType, listMenusLabel.get(i)));
-                if (channel.isDevice()) {
-                    secMenuLateralMobilStpV.stepClickMenu1rstLevel(menu1rstLevel, pais);
-                } else {
-                    secMenusDesktopStpV.stepEntradaMenuDesktop(menu1rstLevel, paginaLinea);
-                }
-            }
-            catch (Exception e) {
-            	Log4jTM.getLogger().warn("Problem in selection of menu " + lineaType + " / " + sublineaType + " / " + listMenusLabel.get(i), e);
-            }        
-        }
-    }
-    
-    private List<DataScreenMenu> getListMenus(LineaType lineaType, SublineaType sublineaType) throws Exception {
-        Linea linea = pais.getShoponline().getLinea(lineaType);
-        List<DataScreenMenu> listMenus = secMenusWrap.getListDataScreenMenus(linea, sublineaType);
-        List<DataScreenMenu> listWithoutDuplicates = listMenus.stream()
-                .distinct()
-                .collect(Collectors.toList());
-        return listWithoutDuplicates;
-    }
-    
-    @Step (
-    	description="Seleccionar el menú <b>#{menu1rstLevel}</b>",
-        expected="Se obtiene el catálogo de artículos asociados al menú")
-    public void accesoMenuXRef(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
-    	secMenusWrap.seleccionarMenuXHref(menu1rstLevel, dCtxSh.pais);
-        checkIsVisibleAarticle(dCtxSh, 3);
+
+	/**
+	 * Recorre todos los menús existentes en la página y crea un step por cada uno de ellos
+	 */
+	public void stepsMenusLinea(LineaType lineaType, SublineaType sublineaType) throws Exception {
+		String paginaLinea = driver.getCurrentUrl();
+		List<DataScreenMenu> listMenusLabel = getListMenus(lineaType, sublineaType);
+		for (int i=0; i<listMenusLabel.size(); i++) {
+			try {
+				Menu1rstLevel menu1rstLevel = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(lineaType, sublineaType, listMenusLabel.get(i)));
+				if (channel.isDevice()) {
+					secMenuLateralMobilStpV.stepClickMenu1rstLevel(menu1rstLevel, pais);
+				} else {
+					secMenusDesktopStpV.stepEntradaMenuDesktop(menu1rstLevel, paginaLinea);
+				}
+			}
+			catch (Exception e) {
+				Log4jTM.getLogger().warn("Problem in selection of menu " + lineaType + " / " + sublineaType + " / " + listMenusLabel.get(i), e);
+			}
+		}
+	}
+
+	private List<DataScreenMenu> getListMenus(LineaType lineaType, SublineaType sublineaType) throws Exception {
+		Linea linea = pais.getShoponline().getLinea(lineaType);
+		List<DataScreenMenu> listMenus = secMenusWrap.getListDataScreenMenus(linea, sublineaType);
+		List<DataScreenMenu> listWithoutDuplicates = listMenus.stream()
+				.distinct()
+				.collect(Collectors.toList());
+		return listWithoutDuplicates;
+	}
+
+	@Step (
+		description="Seleccionar el menú <b>#{menu1rstLevel}</b>",
+		expected="Se obtiene el catálogo de artículos asociados al menú")
+	public void accesoMenuXRef(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
+		secMenusWrap.seleccionarMenuXHref(menu1rstLevel, dCtxSh.pais);
+		checkIsVisibleAarticle(dCtxSh, 3);
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
 				GenericCheck.Analitica,
 				GenericCheck.ImgsBroken)).checks(driver);
-    }
-    
+	}
+
     @Validation (
     	description="Como mínimo se obtiene 1 artículo (lo esperamos un máximo de #{maxSeconds} segundos)",
     	level=State.Warn,

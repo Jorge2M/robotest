@@ -98,10 +98,18 @@ public class ListComparator {
     			labelObtainedAct = getNextLabel(itObtained);
     			break;
 		    case nomatch_but_labelexpected_exists_in_listobtained:
-	    		labelObtainedAct = getNextLabel(itObtained);
+		    	if (!surpassedList(labelObtainedAct)) {
+		    		labelObtainedAct = getNextLabel(itObtained);
+		    	} else {
+		    		labelExpectedAct = getNextLabel(itExpected);
+		    	}
 	    		break;
 		    case nomatch_but_labelobtained_exists_in_listexpected:
-	    		labelExpectedAct = getNextLabel(itExpected);
+		    	if (!surpassedList(labelExpectedAct)) {
+		    		labelExpectedAct = getNextLabel(itExpected);
+		    	} else {
+		    		labelObtainedAct = getNextLabel(itObtained);
+		    	}
 			}
 	    }
 		while (!surpassedList(labelExpectedAct) || !surpassedList(labelObtainedAct));

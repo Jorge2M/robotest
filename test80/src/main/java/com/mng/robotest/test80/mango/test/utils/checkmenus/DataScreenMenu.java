@@ -1,13 +1,26 @@
 package com.mng.robotest.test80.mango.test.utils.checkmenus;
 
+import org.openqa.selenium.WebElement;
+
 public class DataScreenMenu implements Label, Comparable<DataScreenMenu> {
 
 	private String dataGaLabel;
 	private String label;
+	private String id;
 	
 	private DataScreenMenu() {}
 	public static DataScreenMenu getNew() {
 		return new DataScreenMenu();
+	}
+	
+	public static DataScreenMenu from(WebElement menu) {
+		DataScreenMenu dataMenu = new DataScreenMenu();
+		dataMenu.setId(menu.getAttribute("id"));
+		dataMenu.setDataGaLabel(menu.getAttribute("data-label"));
+		if (dataMenu.isDataGaLabelValid()) {
+			dataMenu.setLabel(menu.getText().replace("New!", "").trim());
+		}
+		return dataMenu;
 	}
 	
 	public static DataScreenMenu getNew(String dataGaLabel, String label) {
@@ -34,6 +47,14 @@ public class DataScreenMenu implements Label, Comparable<DataScreenMenu> {
 	
 	public void setDataGaLabel(String dataGaLabel) {
 		this.dataGaLabel = dataGaLabel;
+	}
+	
+	public String getId() {
+		return this.id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	public void setLabel(String label) {

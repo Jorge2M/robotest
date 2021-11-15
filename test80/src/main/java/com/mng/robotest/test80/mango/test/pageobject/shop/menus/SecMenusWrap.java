@@ -83,16 +83,18 @@ public class SecMenusWrap {
 
 	public void closeSessionIfUserLogged() throws Exception {
 		secMenusUser.clickMenuIfInState(UserMenu.cerrarSesion, State.Clickable);
-    }
-    
-    public List<DataScreenMenu> getListDataScreenMenus(Linea linea, SublineaType sublineaType) throws Exception {
-        if (channel.isDevice()) {
-            return secMenuLateralDevice.getListDataScreenMenus(linea, sublineaType);
-        }
-        return 
-        	secMenusDesktop.secMenuSuperior.secBlockMenus.getListDataScreenMenus(linea.getType(), sublineaType);        
-    }
-    
+	}
+
+	public List<DataScreenMenu> getListDataScreenMenus(Linea linea, SublineaType sublineaType) throws Exception {
+		if (channel.isDevice()) {
+			return secMenuLateralDevice.getListDataScreenMenus(linea, sublineaType);
+		}
+		return secMenusDesktop
+				.secMenuSuperior
+				.secBlockMenus
+				.getListDataScreenMenus(linea.getType(), sublineaType);
+	}
+
     /**
      * @return codificación que se acostumbra a utilizar para identificar la línea en el DOM
      */

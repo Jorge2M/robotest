@@ -286,7 +286,7 @@ public class MenuTraduc {
         	Translation.getNew(CodIdioma.FR, "Gilets"))),
 
         sastreria_camisas(Arrays.asList(
-        	Translation.getNew(CodIdioma.ES, "Cammmmmmmmmmmmmisas vestir"),
+        	Translation.getNew(CodIdioma.ES, "Camisas vestir"),
         	Translation.getNew(CodIdioma.FR, "Chemises sans"))),
 
         sastreria_camisasnoniron(Arrays.asList(
@@ -414,7 +414,7 @@ public class MenuTraduc {
 		case he:
 			return Arrays.asList(MenuHe.values());
 		default:
-			return null;
+			return new ArrayList<>();
 		}
 	}
 }

@@ -97,6 +97,10 @@ public final class Menu1rstLevel implements MenuLateralDesktop {
     public ArrayList<Menu2onLevel> getListMenus2onLevel() {
         return this.listMenus2onLevel;
     }
+    
+    public String getId() {
+    	return this.dataMenu.getId();
+    }
 
     public void setDataGaLabel(String dataGaLabel) {
     	this.dataMenu.setDataGaLabel(dataGaLabel);

@@ -301,24 +301,24 @@ public class SecMenusDesktopStpV {
         default:
             break;
         }
-        
+
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
 				GenericCheck.Analitica,
 				GenericCheck.ImgsBroken)).checks(driver);
-    }
-    
-    @Step (
-    	description="Contamos el número de pestañas y menús de #{lineaType} / #{sublineaType}",
-        expected="El número de pestañas/menús coincide con el del nodo anterior")
-    public void countSaveMenusEntorno(LineaType lineaType, SublineaType sublineaType, String inodo, String urlBase) 
-    throws Exception {
-    	int numPestanyas = secMenus.secMenuSuperior.secLineas.getListaLineas().size();
-        int numMenus = secMenus.secMenuSuperior.secBlockMenus.getListMenusLinea(lineaType, sublineaType).size();
-        checkNumPestanyasYmenusEqualsInBothNodes(numPestanyas, numMenus, lineaType, sublineaType, inodo, urlBase);
-    }    
-    
+	}
+
+	@Step (
+		description="Contamos el número de pestañas y menús de #{lineaType} / #{sublineaType}",
+		expected="El número de pestañas/menús coincide con el del nodo anterior")
+	public void countSaveMenusEntorno(LineaType lineaType, SublineaType sublineaType, String inodo, String urlBase) 
+	throws Exception {
+		int numPestanyas = secMenus.secMenuSuperior.secLineas.getListaLineas().size();
+		int numMenus = secMenus.secMenuSuperior.secBlockMenus.getListDataScreenMenus(lineaType, sublineaType).size();
+		checkNumPestanyasYmenusEqualsInBothNodes(numPestanyas, numMenus, lineaType, sublineaType, inodo, urlBase);
+	}
+
     @Validation
     private ChecksTM checkNumPestanyasYmenusEqualsInBothNodes(
     		int numPestanyas, int numMenus, LineaType lineaType, SublineaType sublineaType, String inodo, String urlBase) {
@@ -460,25 +460,25 @@ public class SecMenusDesktopStpV {
 				GenericCheck.JSerrors, 
 				GenericCheck.Analitica,
 				GenericCheck.ImgsBroken)).checks(driver);
-    }
-    
-    @Validation
-    private ChecksTM checkSizeDivImages() throws Exception {
-    	ChecksTM validations = ChecksTM.getNew();
+	}
+
+	@Validation
+	private ChecksTM checkSizeDivImages() throws Exception {
+		ChecksTM validations = ChecksTM.getNew();
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
 		int numPage = 1; 
 		double marginPercError = 2;
-	  	ListSizesArticle listArtWrong1rstPage = pageGaleriaDesktop.getArticlesWithWrongSize(numPage, marginPercError);
-	 	validations.add(
+		ListSizesArticle listArtWrong1rstPage = pageGaleriaDesktop.getArticlesWithWrongSize(numPage, marginPercError);
+		validations.add(
 			"Los div de los artículos de la " + numPage + "a página tienen un tamaño acorde al especificado en el atributo width de su imagen " + 
 			"(margen del " + marginPercError + "%)" +
 			getLiteralWarningArticlesSizesWrong(listArtWrong1rstPage),
 			listArtWrong1rstPage.size()==0, State.Defect);
 	 	
 	 	return validations;
-    }
-    
-    private String getLiteralWarningArticlesSizesWrong(ListSizesArticle listArtWrong) {
+	}
+
+	private String getLiteralWarningArticlesSizesWrong(ListSizesArticle listArtWrong) {
 	  	String warningMessage = "";
 	    if (listArtWrong.size() > 0) {
 	    	warningMessage+=(

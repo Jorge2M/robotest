@@ -3,6 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -16,6 +17,7 @@ import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.GroupMenu;
+import com.mng.robotest.test80.mango.test.utils.checkmenus.DataScreenMenu;
 
 
 public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
@@ -57,7 +59,20 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	@Override
 	public void makeMenusGroupVisible(LineaType lineaType, GroupMenu bloque) {
 		secLineasMenu.hoverLineaAndWaitForMenus(lineaType, null);
-		selectGroupMenu(lineaType.name(), bloque.name().toLowerCase());
+		selectGroupMenu(lineaType.name(), bloque.name().toLowerCase() + "_" + lineaType.name().toLowerCase());
+	}
+	
+	@Override
+	public List<DataScreenMenu> getListDataScreenMenus(LineaType lineaType, SublineaType sublineaType) 
+	throws Exception {
+		secLineasMenu.hoverLineaAndWaitForMenus(lineaType, sublineaType);
+		List<DataScreenMenu> listMenus = new ArrayList<>();
+		List<WebElement> groups = driver.findElements(By.xpath(XPathGroupItemWithMenus));
+		for (WebElement group : groups) {
+			List<WebElement> listMenusGroup = getMenusGroupAndStore(lineaType, sublineaType, group);
+			listMenus.addAll(getDataListMenus(listMenusGroup));
+		}
+		return listMenus;
 	}
 	
 	private void clickBlockMenu(Menu1rstLevel menu1rstLevel) {
@@ -83,39 +98,58 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	}
 	
 	private void selectGroupMenu(Menu1rstLevel menu1rstLevel) throws Exception {
-		String group = getGroupMenu(menu1rstLevel);
-		selectGroupMenu(menu1rstLevel.getLinea().name(), group);
+		String group_line = getGroupMenu(menu1rstLevel);
+		selectGroupMenu(menu1rstLevel.getLinea().name(), group_line);
 	}
 	
-	private void selectGroupMenu(String linea, String group) {
-		String id = group + "_" + linea;
-		click(By.xpath(XPathGroupItemWithMenus + "//self::*[@data-brand='" + id + "']")).exec();
+	private void selectGroupMenu(String linea, String group_line) {
+		click(By.xpath(XPathGroupItemWithMenus + "//self::*[@data-brand='" + group_line + "']")).exec();
 	}
 	
 	private String getGroupMenu(Menu1rstLevel menu1rstLevel) throws Exception {		
-		String keyMenu = getKeyMenu(menu1rstLevel.getLinea().name(), menu1rstLevel.getNombre());
+		String keyMenu = getKeyMenu(menu1rstLevel);
 		String group = storedMenus.get(keyMenu);
 		if (group==null) {
 			storeMenusGroups(menu1rstLevel.getLinea(), menu1rstLevel.getSublinea());
 		}
 		return storedMenus.get(keyMenu);
 	}
+
+	
 	
 	private void storeMenusGroups(LineaType lineaType, SublineaType sublineaType) throws Exception {
 		List<WebElement> groups = driver.findElements(By.xpath(XPathGroupItemWithMenus));
 		for (WebElement group : groups) {
-			click(group).exec();
-			List<WebElement> menus = getListMenusLinea(lineaType, sublineaType);
-			for (WebElement menuElem : menus) {
-				storeMenu(lineaType.name(), group, menuElem);
-			}
+			getMenusGroupAndStore(lineaType, sublineaType, group);
 		}
+	}
+	
+	private List<WebElement> getMenusGroupAndStore(LineaType lineaType, SublineaType sublineaType, WebElement group) 
+	throws Exception {
+		click(group).exec();
+		List<WebElement> menus = getListMenusLinea(lineaType, sublineaType);
+		for (WebElement menuElem : menus) {
+			storeMenu(lineaType.name(), group, menuElem);
+		}
+		return menus;
+	}
+	
+	private List<WebElement> getListMenusLinea(LineaType lineaType, SublineaType sublineaType) throws Exception {
+		String XPathMenusVisibles = getXPathMenusSuperiorLinkVisibles(lineaType, sublineaType, TypeMenuDesktop.Link);
+		return (driver.findElements(By.xpath(XPathMenusVisibles)));
 	}
 	
 	private void storeMenu(String linea, WebElement group, WebElement menu) {
 		String menu_linea = menu.getAttribute("id");
 		String group_linea = group.getAttribute("data-brand");
 		storedMenus.put(menu_linea, group_linea);
+	}
+	
+	private String getKeyMenu(Menu1rstLevel menu1rstLevel) {
+		if (menu1rstLevel.getId()!=null) {
+			return menu1rstLevel.getId();
+		}
+		return getKeyMenu(menu1rstLevel.getLinea().name(), menu1rstLevel.getNombre());
 	}
 	
 	private String getKeyMenu(String linea, String nombre) {
