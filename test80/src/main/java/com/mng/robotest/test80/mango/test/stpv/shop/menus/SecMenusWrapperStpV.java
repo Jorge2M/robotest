@@ -183,14 +183,6 @@ public class SecMenusWrapperStpV {
         return listWithoutDuplicates;
     }
     
-    public void navSeleccionaCarruselsLinea(Pais pais, LineaType lineaNuevoOReb) throws Exception {
-        if (channel.isDevice()) {
-            //secMenuLateralMobilStpV.navClickLineaAndCarrusels(lineaNuevoOReb, pais);
-        } else {
-            secMenusDesktopStpV.stepValidaCarrusels(lineaNuevoOReb);
-        }
-    }
-    
     @Step (
     	description="Seleccionar el menú <b>#{menu1rstLevel}</b>",
         expected="Se obtiene el catálogo de artículos asociados al menú")
@@ -220,7 +212,7 @@ public class SecMenusWrapperStpV {
         	secMenusDesktopStpV.selectMenuSuperiorTypeCatalog(menu1rstLevel, dCtxSh);
         }
     }
-    public boolean checkExistMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) {
+    public boolean checkExistMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
         if (dCtxSh.channel.isDevice()) {
             return secMenuLateralMobilStpV.checkNotExistsMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh.pais);
         } else {	

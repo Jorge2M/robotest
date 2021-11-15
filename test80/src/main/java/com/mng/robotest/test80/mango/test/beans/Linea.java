@@ -19,7 +19,7 @@ public class Linea implements Serializable {
 	private static final long serialVersionUID = -4709433951288421080L;
 
 	public static enum LineaType { 
-    	nuevo("nuevo", "outletN", "nuevo", "nuevo", Arrays.asList(Channel.desktop)), 
+    	//nuevo("nuevo", "outletN", "nuevo", "nuevo", Arrays.asList(Channel.desktop)), 
     	rebajas("rebajas", "outletR", "rebajas", "rebajas", Arrays.asList(Channel.desktop)), 
     	she("mujer", "outlet", "she", "she", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
     	he("hombre", "outletH", "he", "he", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 

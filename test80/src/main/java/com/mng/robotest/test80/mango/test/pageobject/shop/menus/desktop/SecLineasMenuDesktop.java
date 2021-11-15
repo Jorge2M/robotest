@@ -21,9 +21,11 @@ import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 
-public class SecLineasMenuDesktop extends PageObjTM {
+public abstract class SecLineasMenuDesktop extends PageObjTM {
 	
-	private final AppEcom app;
+	public abstract void selectSublinea(LineaType lineaType, SublineaType sublineaType);
+	
+	protected final AppEcom app;
 	
     static String TagIdLinea = "@LineaId";
     static String TagIdSublinea = "@SublineaId";
@@ -35,24 +37,23 @@ public class SecLineasMenuDesktop extends PageObjTM {
     	"//self::*[@id='" + TagIdLinea + "' or " +
     			  "@id[contains(.,'sections_" + TagIdLinea + "')] or " +
     			  "@id[contains(.,'sections-" + TagIdLinea + "')]]";
-	static String XPathImagesSublineaWithTags = 
-		"//div[" + 
-			"@class='image-item' and @data-label[contains(.,'" + TagIdLinea + "')] and " +
-			"@data-label[contains(.,'" + TagIdSublinea + "')]" +
-		"]";
+
 	static String XPathSublineaLinkWithTag = 
 		"//div[" + 
 			"(@class[contains(.,'nav-item')] or " + 
 			 "@class[contains(.,'section-detail-list')]) " + //Caso países tipo Colombia con 1 sola sublínea 
 			"and @data-brand='" + TagIdSublinea + "']";
 
-	private SecLineasMenuDesktop(AppEcom app, WebDriver driver) {
+	protected SecLineasMenuDesktop(AppEcom app, WebDriver driver) {
 		super(driver);
 		this.app = app;
 	}
 	
-	public static SecLineasMenuDesktop getNew(AppEcom app, WebDriver driver) {
-		return (new SecLineasMenuDesktop(app, driver));
+	public static SecLineasMenuDesktop factory(AppEcom app, WebDriver driver) {
+		if (app==AppEcom.outlet) {
+			return new SecLineasMenuDesktopOld(app, driver);
+		}
+		return new SecLineasMenuDesktopNew(app, driver);
 	}
 	
     public String getXPathLinea(LineaType lineaType) {
@@ -68,17 +69,6 @@ public class SecLineasMenuDesktop extends PageObjTM {
     public String getXPathLineaLink(LineaType lineaType) {
     	String xpathLinea = getXPathLinea(lineaType);
         return (xpathLinea + "/a");
-    }
-
-    public String getXPathImgSublinea(LineaType lineaId, SublineaType sublineaType) {
-    	return XPathImagesSublineaWithTags
-    				.replace(TagIdLinea, lineaId.name())
-    				.replace(TagIdSublinea, "interior-" + sublineaType.getText());
-    }
-    
-    public String getXPathSublineaLink(SublineaType sublineaType) {
-        String idSublineaEnDom = sublineaType.getId(app);
-    	return (XPathSublineaLinkWithTag.replace(TagIdSublinea, idSublineaEnDom));
     }
 
     public boolean isPresentLineasMenuWrapp() {
@@ -155,20 +145,6 @@ public class SecLineasMenuDesktop extends PageObjTM {
     	);
     }
 
-    public boolean isVisibleImgSublineaUntil(LineaType lineaType, SublineaType sublineaType, int maxSeconds) {
-    	String xpathImg = getXPathImgSublinea(lineaType, sublineaType);
-    	return (state(Visible, By.xpath(xpathImg)).wait(maxSeconds).check());
-    }
-
-	public void clickImgSublineaIfVisible(LineaType lineaType, SublineaType sublineaType) {
-		int maxSecondsToWait = 1;
-		if (isVisibleImgSublineaUntil(lineaType, sublineaType, maxSecondsToWait)) {
-			String xpathImg = getXPathImgSublinea(lineaType, sublineaType);
-			click(By.xpath(xpathImg)).exec();
-			state(Invisible, By.xpath(xpathImg)).wait(1).check();
-		}
-	}
-
     public void hoverLineaAndWaitForMenus(LineaType lineaType, SublineaType sublineaType) {
     	//Existe un problema aleatorio en Firefox que provoca que el Hover sobre la línea (mientras se está cargando la galería) 
     	//ejecute realmente un hover contra la línea de la izquerda
@@ -177,7 +153,7 @@ public class SecLineasMenuDesktop extends PageObjTM {
     	do {
 	    	hoverLinea(lineaType, sublineaType);
 	    	int maxSecondsToWait = 2;
-	    	SecBloquesMenuDesktop secBloques = SecBloquesMenuDesktop.getNew(app, driver);
+	    	SecBloquesMenuDesktop secBloques = SecBloquesMenuDesktop.factory(app, driver);
 	    	isCapaMenusVisible = secBloques.isCapaMenusLineaVisibleUntil(lineaType, maxSecondsToWait);
 	    	if (!isCapaMenusVisible) {
 	    		Log4jTM.getLogger().warn("No se hacen visibles los menús después de Hover sobre línea " + lineaType);
@@ -200,15 +176,5 @@ public class SecLineasMenuDesktop extends PageObjTM {
         String xpathLinkLinea = getXPathLineaLink(lineaType);
         state(Visible, By.xpath(xpathLinkLinea)).wait(1).check();
         moveToElement(By.xpath(xpathLinkLinea), driver);
-    }
-
-    public void selectSublinea(LineaType lineaType, SublineaType sublineaType) {
-    	hoverLinea(lineaType);
-       	clickImgSublineaIfVisible(lineaType, sublineaType);
-        String xpathLinkSublinea = getXPathSublineaLink(sublineaType);
-        
-        //Esperamos que esté visible la sublínea y realizamos un Hover
-        state(Visible, By.xpath(xpathLinkSublinea)).wait(2).check();
-        moveToElement(By.xpath(xpathLinkSublinea), driver);
     }
 }

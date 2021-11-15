@@ -6,8 +6,8 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 public class Sublinea extends Linea {
 
     public static enum SublineaType { 
-    	teen_nina("teenA", "teenA", "nina", LineaType.teen),
-    	teen_nino("teenO", "teenO", "nino", LineaType.teen),
+    	teen_nina("teenQ", "teenA", "nina", LineaType.teen),
+    	teen_nino("teenP", "teenO", "nino", LineaType.teen),
     	nina_nina("nina", "outletA", "nina", LineaType.nina), 
     	nina_bebe("babyNina", "outletBA", "bebe", LineaType.nina),
     	nino_nino("nino", "outletO", "nino", LineaType.nino), 

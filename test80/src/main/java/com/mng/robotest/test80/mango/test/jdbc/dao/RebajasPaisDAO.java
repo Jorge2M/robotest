@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.bloqueMenu;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.GroupMenu;
 import com.github.jorge2m.testmaker.domain.RepositoryI;
 import com.github.jorge2m.testmaker.service.TestMaker;
 
@@ -147,7 +147,7 @@ public class RebajasPaisDAO {
      * @param codigoPais en formato XXX
      * @return el máximo de % de rebajas
      */
-    public List<String> getLineasInvertidas(String codigoPais, bloqueMenu menuType) {
+    public List<String> getLineasInvertidas(String codigoPais, GroupMenu menuType) {
     	String sql;
     	switch (menuType) {
     	case prendas:

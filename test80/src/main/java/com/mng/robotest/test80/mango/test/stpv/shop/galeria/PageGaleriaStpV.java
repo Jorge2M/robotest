@@ -44,7 +44,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDes
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.SecBannerHeadGallery.TypeLinkInfo;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu2onLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusFiltroCollection;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.bloqueMenu;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.GroupMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataFichaArt;
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataScroll;
@@ -707,7 +707,7 @@ public class PageGaleriaStpV {
    
     public void validaRebajasJun2018Desktop(
     	boolean salesOnInCountry, boolean isGaleriaSale, Pais pais, IdiomaPais idioma, 
-    	LineaType lineaType, bloqueMenu menuType) throws Exception {
+    	LineaType lineaType, GroupMenu menuType) throws Exception {
     	checkIsPageGaleria(driver);
     	if (salesOnInCountry) {
     		checkSalesOn(pais, idioma, lineaType, menuType, isGaleriaSale);
@@ -716,7 +716,7 @@ public class PageGaleriaStpV {
     	}
     }
     
-    private void checkSalesOn(Pais pais, IdiomaPais idioma, LineaType lineaType, bloqueMenu menuType, boolean isGaleriaSale) 
+    private void checkSalesOn(Pais pais, IdiomaPais idioma, LineaType lineaType, GroupMenu menuType, boolean isGaleriaSale) 
     throws Exception {
     	bannerHead.checkBannerHeadSalesOn(pais, idioma);
     	SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(Channel.desktop, AppEcom.shop, driver);
@@ -784,7 +784,7 @@ public class PageGaleriaStpV {
     }
    
 	@Validation
-    private ChecksTM checkArticlesCountryWithSalesOn(Pais pais, LineaType lineaType, bloqueMenu menuType, boolean isGaleriaSale) 
+    private ChecksTM checkArticlesCountryWithSalesOn(Pais pais, LineaType lineaType, GroupMenu menuType, boolean isGaleriaSale) 
 	throws Exception {
 	   	ChecksTM validations = ChecksTM.getNew();
 	   	

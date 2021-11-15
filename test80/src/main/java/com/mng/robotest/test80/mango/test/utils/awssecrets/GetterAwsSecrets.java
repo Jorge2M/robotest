@@ -40,7 +40,7 @@ public class GetterAwsSecrets implements GetterSecrets {
     	case VOTF_USER: 
     		return "arn:aws:secretsmanager:eu-west-1:687762684238:secret:pro/robotest/user-votf-ynflty";
     	case EMPLOYEE_DATA: 
-    		return "arn:aws:secretsmanager:eu-west-1:687762684238:secret:pro/robotest/data-employee-RiPVix	";
+    		return "arn:aws:secretsmanager:eu-west-1:687762684238:secret:pro/robotest/data-employee-RiPVix";
     	default:
     		throw new IllegalArgumentException("Unexpected value '" + secret + "'");
     	}

@@ -86,7 +86,7 @@ public class PaisIdioma implements Serializable {
 	
     @Test (
         groups={"Lineas", "Canal:desktop,mobile_App:shop,outlet"}, 
-        description="Acceso desde prehome y navegación por todas las líneas/sublíneas/carrusels del país + selección menú/s")
+        description="Acceso desde prehome y navegación por todas las líneas/sublíneas del país + selección menú/s")
     public void PAR001_Lineas() throws Exception {
     	beforeMethod();
     	WebDriver driver = TestMaker.getDriverTestCase();
@@ -167,16 +167,10 @@ public class PaisIdioma implements Serializable {
      *  Testea todos los carrusels asociados si los hubiera
      */
     public void testSpecificFeaturesForLinea(Linea linea, WebDriver driver) throws Exception {
-        LineaType lineaType = linea.getType();
         if (testBanners(linea)) {
         	int maxBannersToTest = getMaxBannersToTest(dCtxSh.pais, dCtxSh.appE);
         	SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToTest, driver);
         	secBannersStpV.testPageBanners(dCtxSh, maxBannersToTest);
-        }
-        
-        if (linea.getCarrusels()!=null) {
-        	SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-        	secMenusStpV.navSeleccionaCarruselsLinea(dCtxSh.pais, lineaType);
         }
     }
     

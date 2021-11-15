@@ -23,7 +23,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.bloqueMenu;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.GroupMenu;
 import com.mng.robotest.test80.mango.test.stpv.shop.PagePrehomeStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.banner.SecBannersStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
@@ -103,11 +103,11 @@ public class RebajasJun2019 implements Serializable {
         	SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToLoad, driver);
 	        secBannersStpV.seleccionarBanner(posBannerToTest, applyValidations, dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
 	        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-	        pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, true, dCtxSh.pais, dCtxSh.idioma, LineaType.she, bloqueMenu.prendas);
+	        pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, true, dCtxSh.pais, dCtxSh.idioma, LineaType.she, GroupMenu.prendas);
 	        PageGaleriaStpV.clickMoreInfoBannerRebajasJun2018(driver);
 	        
-	        SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, driver);
-	        secMenusDesktopStpV.stepValidaCarrusels(LineaType.rebajas);
+//	        SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, driver);
+//	        secMenusDesktopStpV.stepValidaCarrusels(LineaType.rebajas);
         }
         
         if (salesOnInCountry) {
@@ -150,11 +150,11 @@ public class RebajasJun2019 implements Serializable {
         	Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "pantalones"));
         	secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh);
             boolean isGaleriaSale = true;
-            pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, !isGaleriaSale, dCtxSh.pais, dCtxSh.idioma, linea.getType(), bloqueMenu.prendas);
+            pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, !isGaleriaSale, dCtxSh.pais, dCtxSh.idioma, linea.getType(), GroupMenu.prendas);
             
             Menu1rstLevel menuZapatos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "zapatos"));
             secMenusStpV.selectMenu1rstLevelTypeCatalog(menuZapatos, dCtxSh);
-            pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, !isGaleriaSale, dCtxSh.pais, dCtxSh.idioma, linea.getType(), bloqueMenu.accesorios);
+            pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, !isGaleriaSale, dCtxSh.pais, dCtxSh.idioma, linea.getType(), GroupMenu.accesorios);
             //?
             
             Menu1rstLevel menuRebajas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "promoción"));
@@ -173,7 +173,7 @@ public class RebajasJun2019 implements Serializable {
 	            pageGaleriaStpV.validaArticlesOfTemporadas(FilterCollection.nextSeason.getListTempArticles(), State.Warn, true); //?
             
 	            secMenusStpV.selectMenu1rstLevelTypeCatalog(menuRebajas, dCtxSh);
-	            pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, true, dCtxSh.pais, dCtxSh.idioma, linea.getType(), bloqueMenu.prendas);
+	            pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, true, dCtxSh.pais, dCtxSh.idioma, linea.getType(), GroupMenu.prendas);
 	            PageGaleriaStpV.clickMoreInfoBannerRebajasJun2018(driver);
 	            
 	            RebajasPaisDAO rebajasDAO = new RebajasPaisDAO();

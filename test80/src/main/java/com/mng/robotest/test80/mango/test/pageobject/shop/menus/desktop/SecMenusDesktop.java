@@ -16,7 +16,7 @@ public class SecMenusDesktop {
 	public final SecMenusFiltroDiscount secMenusFiltroDiscount;
 	
 	private SecMenusDesktop(AppEcom app, WebDriver driver) {
-		secBloquesMenu = SecBloquesMenuDesktop.getNew(app, driver);
+		secBloquesMenu = SecBloquesMenuDesktop.factory(app, driver);
 		secMenuSuperior = SecMenuSuperiorDesktop.getNew(app, driver);
 		secMenusUser = ModalUserSesionShopDesktop.getNew(driver);
 		secMenuLateral = SecMenuLateralDesktop.getNew(app, driver);

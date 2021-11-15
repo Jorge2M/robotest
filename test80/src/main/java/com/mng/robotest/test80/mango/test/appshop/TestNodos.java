@@ -91,10 +91,10 @@ public class TestNodos implements Serializable {
         new PagePrehomeStpV(dCtxSh, driver).seleccionPaisIdiomaAndEnter(true);
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         if (appE==AppEcom.shop) {
-        	secMenusStpV.seleccionLinea(LineaType.nuevo, null, dCtxSh);
+        	selectMenuPantalones(dCtxSh, driver);
             PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, dCtxSh.appE, driver);
-            ListDataArticleGalery listArticlesNuevoAct = pageGaleria.getListDataArticles();
-            this.nodo.setArticlesNuevo(listArticlesNuevoAct);
+            ListDataArticleGalery listArticlesPant = pageGaleria.getListDataArticles();
+            this.nodo.setArticlesNuevo(listArticlesPant);
             PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
             if (nodoAnt!=null && nodoAnt.getArticlesNuevo()!=null) {
                 pageGaleriaStpV.validaNombresYRefEnOrden(nodoAnt, this.nodo);
@@ -109,14 +109,8 @@ public class TestNodos implements Serializable {
         int maxBannersToLoad = 1;
         SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToLoad, driver);
         secBannersStpV.testPageBanners(dCtxSh, 1);
-        if (appE==AppEcom.outlet) {
-            Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
-            secMenusStpV.accesoMenuXRef(menuVestidos, dCtxSh);
-        } else {
-        	Linea lineaNuevo = dCtxSh.pais.getShoponline().getLinea(LineaType.nuevo);
-        	String idCarruselMujer = lineaNuevo.getListCarrusels()[0];
-        	secMenusDesktopStpV.stepSeleccionaCarrusel(LineaType.nuevo, idCarruselMujer);
-        }
+        Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
+        secMenusStpV.accesoMenuXRef(menuVestidos, dCtxSh);
 		
         secMenusStpV.seleccionLinea(LineaType.he, null, dCtxSh);
         secMenusDesktopStpV.countSaveMenusEntorno (LineaType.he, null, nodo.getIp(), autAddr);
@@ -126,6 +120,15 @@ public class TestNodos implements Serializable {
         secMenusDesktopStpV.countSaveMenusEntorno(LineaType.nino, SublineaType.nino_bebe, nodo.getIp(), autAddr);
         
         this.nodo.setTested(true);
+    }
+    
+    private void selectMenuPantalones(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+        Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(
+            	dCtxSh.appE, KeyMenu1rstLevel.from(
+            		LineaType.nina, 
+            		SublineaType.nina_nina, "pantalones"));
+            SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
+            secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh);
     }
     
     /**

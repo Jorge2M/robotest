@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.SecCrossSelling;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.bloqueMenu;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.GroupMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 
 @SuppressWarnings({"static-access"})
@@ -36,7 +36,7 @@ public class SecCrossSellingStpV {
 		//Obtenemos la lista de menús de Mujer-Prendas
 		SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
 		List<WebElement> listaMenusBloque = 
-			secMenus.secMenuSuperior.secBlockMenus.getListMenusLineaBloque(lineaType, bloqueMenu.prendas);
+			secMenus.secMenuSuperior.secBlockMenus.getListMenusLineaBloque(lineaType, GroupMenu.prendas);
 
 		String litMenu1 = listaMenusBloque.get(0).findElement(By.xpath("./span")).getAttribute("innerHTML");
 		String litMenu2 = listaMenusBloque.get(1).findElement(By.xpath("./span")).getAttribute("innerHTML");

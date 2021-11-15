@@ -2,9 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.menus;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -33,14 +31,12 @@ public class SecMenusWrap {
     private final SecMenusDesktop secMenusDesktop;
     private final Channel channel;
     private final AppEcom app;
-    private final WebDriver driver;
     
-    public enum bloqueMenu {prendas, accesorios, colecciones}
+    public enum GroupMenu {prendas, accesorios, colecciones}
     
     private SecMenusWrap(Channel channel, AppEcom app, WebDriver driver) {
     	this.channel = channel;
     	this.app = app;
-    	this.driver = driver;
     	this.secMenusUser = MenusUserWrapper.getNew(channel, app, driver);
     	this.secMenuLateralDevice = new SecMenuLateralDevice(channel, app, driver);
     	this.secMenusDesktop = SecMenusDesktop.getNew(app, driver);
@@ -73,10 +69,6 @@ public class SecMenusWrap {
      */
     public static LineaType getLineaResultAfterClickMenu(LineaType lineaType, String nombre) { 
         switch (nombre) {
-        case "nuevo":
-            if (lineaType==LineaType.she)
-                return LineaType.nuevo;
-            break;
         case "rebajas":
 //        case "-rebajas":            
 //            if (lineaType==LineaType.she)
@@ -139,9 +131,9 @@ public class SecMenusWrap {
      *  Desktop: selecciona una entrada del menú superior
      *  Móvil:   selecciona una entrada del menú lateral
      */
-    public void clickMenu1erNivel(Pais pais, Menu1rstLevel menu1rstLevel) {
+    public void clickMenu1erNivel(Pais pais, Menu1rstLevel menu1rstLevel) throws Exception {
         if (channel==Channel.desktop) {
-        	secMenusDesktop.secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel);
+        	secMenusDesktop.secMenuSuperior.secBlockMenus.gotoAndClickMenu(menu1rstLevel);
         } else {
         	secMenuLateralDevice.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais);
         }

@@ -32,7 +32,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.ListSizesArtic
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.ControlTemporada;
-import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.landing.PageLanding;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
@@ -82,13 +81,13 @@ public class SecMenusDesktopStpV {
         expected="Aparece la galería asociada al menú",
         saveNettraffic=SaveWhen.Always)
     public void selectMenuSuperiorTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
-    	secMenus.secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel);
+    	secMenus.secMenuSuperior.secBlockMenus.gotoAndClickMenu(menu1rstLevel);
     	validaSelecMenu(menu1rstLevel, dCtxSh);
     }
     @Validation(
     	description="No existe el menú superior <b>#{menu1rstLevel}</b>",
     	level=State.Defect)
-    public boolean checkNotExistsMenuSuperiorTypeCatalog(Menu1rstLevel menu1rstLevel) {
+    public boolean checkNotExistsMenuSuperiorTypeCatalog(Menu1rstLevel menu1rstLevel) throws Exception {
     	return (!secMenus.secMenuSuperior.secBlockMenus.goToMenuAndCheckIsVisible(menu1rstLevel));
     }
     
@@ -235,7 +234,7 @@ public class SecMenusDesktopStpV {
     	if (!secMenus.secMenuSuperior.secLineas.isLineaVisible(lineaMenu)) {
             driver.get(paginaLinea);
     	}
-    	secMenus.secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel);
+    	secMenus.secMenuSuperior.secBlockMenus.gotoAndClickMenu(menu1rstLevel);
         TestMaker.getCurrentStepInExecution().replaceInDescription(tagMenu, menu1rstLevel.getNombre());
         ModalCambioPais.closeModalIfVisible(driver);
         
@@ -251,85 +250,6 @@ public class SecMenusDesktopStpV {
 				GenericCheck.Analitica)).checks(driver);
     }
     
-    final static String tagCarruselsLinea = "@TagCarrusels";
-    @Step (
-    	description="Realizar \"hover\" sobre la línea #{lineaType}",
-        expected="Aparecen los carrusels correspondientes a la línea " + tagCarruselsLinea)
-    public void stepValidaCarrusels(LineaType lineaType) throws Exception {
-        Linea linea = pais.getShoponline().getLinea(lineaType);
-        TestMaker.getCurrentStepInExecution().replaceInDescription(tagCarruselsLinea, linea.getCarrusels());
-        
-        secMenus.secMenuSuperior.secLineas.hoverLinea(lineaType, null);
-        //if (linea.getType()!=LineaType.rebajas) {
-        	checkCarruselsAfterHoverLinea(linea);
-        	
-    	    //Steps - Selección de cada uno de los carrusels asociados a la línea
-    	    String[] listCarrusels = linea.getListCarrusels();
-    	    for (int i=0; i<listCarrusels.length; i++) {
-    	        //Pare evitar KOs, sólo seleccionaremos el carrusel si realmente existe (si no existe previamente ya habremos dado un Warning)
-    	        if (secMenus.secMenuSuperior.secCarrusel.isPresentCarrusel(linea, listCarrusels[i])) {
-    	            stepSeleccionaCarrusel(lineaType, listCarrusels[i]);
-    	        }
-    	    }
-        //}
-    }
-    
-    @Validation
-    private ChecksTM checkCarruselsAfterHoverLinea(Linea linea) {
-    	ChecksTM validations = ChecksTM.getNew();
-	    int maxSeconds = 1;
-      	validations.add(
-    		"Aparece el bloque de menús de la línea " + linea.getType() + " (lo esperamos hasta " + maxSeconds + " segundos)",
-    		secMenus.secMenuSuperior.secBlockMenus.isCapaMenusLineaVisibleUntil(linea.getType(), maxSeconds), 
-    		State.Warn);
-      	validations.add(
-    		"El número de carrusels es de " + linea.getListCarrusels().length,
-    		linea.getListCarrusels().length==secMenus.secMenuSuperior.secCarrusel.getNumCarrousels(linea.getType()),
-    		//TODO restaurarlo a Warn cuando resuelvan el problema de la aparición del carrusel Home en países sin Home
-    		State.Info);
-      	validations.add(
-    		"Aparecen los carrusels: " + linea.getCarrusels().toString(),
-    		secMenus.secMenuSuperior.secCarrusel.isVisibleCarrusels(linea), State.Warn);
-    	return validations;
-    }
-    
-    @Step (
-    	description="Seleccionar el carrusel de la línea #{lineaType} correspondiente a <b>#{idCarrusel}</b>",
-        expected="Aparece la página asociada al carrusel #{lineaType} / #{idCarrusel}")
-    public void stepSeleccionaCarrusel(LineaType lineaType, String idCarrusel) {
-        Linea linea = pais.getShoponline().getLinea(lineaType);
-        secMenus.secMenuSuperior.secLineas.hoverLinea(lineaType, null);
-        secMenus.secMenuSuperior.secCarrusel.clickCarrousel(pais, lineaType, idCarrusel);
-        checkAfterSelectCarrusel(linea, idCarrusel);
-    }
-
-	@Validation
-	private ChecksTM checkAfterSelectCarrusel(Linea linea, String idCarrusel) {
-		ChecksTM validations = ChecksTM.getNew();
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
-
-		int maxSeconds = 3;
-		validations.add(
-			"Aparece algún artículo (lo esperamos hasta " + maxSeconds + " segundos)",
-			pageGaleriaDesktop.isVisibleArticleUntil(1, maxSeconds), State.Info, true);
-//			validations.add(
-//			"El 1er artículo es de tipo " + linea.getType(),
-//			pageGaleriaDesktop.isArticleFromLinea(1, lineaType), State.Warn);
-		if (linea.getType()!=LineaType.nuevo) {
-			validations.add(
-				"El 1er artículo es de la línea " + idCarrusel,
-				pageGaleriaDesktop.isArticleFromCarrusel(1, linea, idCarrusel), State.Warn);
-		}
-		boolean panoramEnLinea = (linea.getPanoramicas()!=null && linea.getPanoramicas().compareTo("s")==0);
-		if (panoramEnLinea) {
-			validations.add(
-				"Aparece algún artículo doble",
-				pageGaleriaDesktop.getNumArticulos(TypeArticleDesktop.Doble)!=0, State.Warn);
-		}
-	
-		return validations;
-	}
-
     @Step (
     	description=
     		"Seleccionar la <b style=\"color:chocolate\">Línea</b> " + 
