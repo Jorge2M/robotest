@@ -30,11 +30,7 @@ public class Page1EnvioCheckoutMobil extends PageObjTM {
 	private final static String XPathDescuentoEmpleado = "//div[@class[contains(.,'employee-discount')]]//p[@class='discount-total-amount']/strong";
 	private final static String XPathRadioEnvio = "//input[@data-testid[contains(.,'checkout.delivery.methods')]]";
 	private final static String XPathSelectFranjaHorariaMetodoUrgente = "//select[@data-component-id='time-range-sameday_nextday_franjas']";
-	
-	//TODO Necesito data-testid -> 27-05-21 Solicitado a Fernando Cano
-	private final static String XPathDireccionEnvio = "//div[@class[contains(.,'_1Ycgo')]]";
-	//private final static String XPathDireccionEnvio = "//p[@class='address']";
-	
+	private final static String XPathDireccionEnvio = "//div[@data-testid[contains(.,'delivery.methods.address')]]";
 	private final static String XPathLinkOtrosMetEnvioClosed = "//button[@data-testid[contains(.,'otherMethods.button')]]";
 	private final static String XPathLinkEditDirecEnvio = "//div[@id[contains(.,'addressBlock')]]//span[class='address']";
 	private final static String XPathBotonContinuar = "//button[@id[contains(.,'complete-step1')]]";

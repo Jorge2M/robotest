@@ -95,7 +95,7 @@ public class PageResultPagoStpV {
 //	        if (dCtxSh.appE==AppEcom.shop) {
 	        	validations.add(
               		"Aparece el link hacia las compras",
-              		pageResultPago.isLinkMisCompras(), State.Warn);
+              		pageResultPago.isButtonMisCompras(), State.Warn);
 //	        } else {
 //	        	validations.add(
 //              		"Aparece el link hacia los pedidos",

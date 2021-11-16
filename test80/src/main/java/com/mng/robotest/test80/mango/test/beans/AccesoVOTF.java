@@ -8,31 +8,36 @@ import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets.SecretT
 public class AccesoVOTF {
 	
 	private final String usuario;
-    private final String password;
-    
-    String entregadomic = "S";
+	private final String password;
 
-    private AccesoVOTF(String usuario, String password) {
+	String entregadomic = "S";
+
+	private AccesoVOTF(String usuario, String password) {
 	 	this.usuario = usuario;
 	 	this.password = password;
-    }
-    
-    public static AccesoVOTF forSpain() {
-	   	Secret secret = GetterSecrets.factory().getCredentials(SecretType.VOTF_USER);
-	   	return new AccesoVOTF(secret.getUser(), secret.getPassword());
-    }
-    
-    public static AccesoVOTF forFrance() {
-    	//TODO dar de alta un nuevo secreto para Francia
-    	return new AccesoVOTF("fra04974", "mng04974");
-    }
-    
-    public static AccesoVOTF forCountry(PaisShop paisShop) {
-    	switch (paisShop) {
+	}
+
+	public static AccesoVOTF forSpain() {
+		Secret secret = GetterSecrets.factory().getCredentials(SecretType.VOTF_USER);
+		return new AccesoVOTF(secret.getUser(), secret.getPassword());
+	}
+
+	public static AccesoVOTF forFrance() {
+		return new AccesoVOTF("fra04974", "mng04974");
+	}
+
+	public static AccesoVOTF forItaly() {
+		return new AccesoVOTF("tda01182", "mng01182");
+	}
+
+	public static AccesoVOTF forCountry(PaisShop paisShop) {
+		switch (paisShop) {
     	case España:
     		return forSpain();
     	case France:
     		return forFrance();
+    	case Italia:
+    		return forItaly();
     	default:
     		throw new IllegalArgumentException("Unsuported country '" + paisShop + "' for retrieve credentials");
     	}

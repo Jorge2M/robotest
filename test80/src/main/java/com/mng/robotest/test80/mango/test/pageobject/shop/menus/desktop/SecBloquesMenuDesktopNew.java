@@ -25,6 +25,7 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	//Example row: "abrigos_she" / "prendas_she"
 	private static final Map<String, String> storedMenus = new ConcurrentHashMap<>(); 
 	
+	//private final static String XPathContainerMenus = "//div[@class[contains(.,'section-detail-nav-container')]]";
 	private final static String XPathGroupItemWithMenus = "//div[@role='menuitem' and not(@class[contains(.,'item-link')]) and not(@id[contains(.,'nav-sections')])]";
 	private final static String XPathGroupItemLink = "//div[@role='menuitem' and @class[contains(.,'item-link')] and not(@id[contains(.,'nav-sections')])]";
 	private final static String XPathLinkMenuGroup = XPathGroupItemLink + "//a[@class[contains(.,'menu-item')]]";
@@ -36,7 +37,7 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	private String getXPathLinkMenuGroup(Menu1rstLevel menu1rstLevel) {
 		return XPathLinkMenuGroup + "//self::*[@id='" + menu1rstLevel.getDataGaLabelMenuSuperiorDesktop().toLowerCase() + "']";
 	}
-	
+
 	@Override
 	public boolean goToMenuAndCheckIsVisible(Menu1rstLevel menu1rstLevel) throws Exception {
 		hoverLineaMenu(menu1rstLevel);
@@ -73,6 +74,12 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 			listMenus.addAll(getDataListMenus(listMenusGroup));
 		}
 		return listMenus;
+	}
+	
+	@Override
+	public void seleccionarMenuXHref(Menu1rstLevel menu1rstLevel) throws Exception {
+		goToMenuAndCheckIsVisible(menu1rstLevel);
+		clickMenuInHref(menu1rstLevel);
 	}
 	
 	private void clickBlockMenu(Menu1rstLevel menu1rstLevel) {

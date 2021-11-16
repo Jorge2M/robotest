@@ -31,7 +31,7 @@ public class ListAllNodes {
             switch (appEcom) {
             case shop:
                 accesos = 100;
-            	//accesos = 5;
+            	//accesos = 2;
                 break;
             case outlet:
             default:

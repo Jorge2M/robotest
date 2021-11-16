@@ -6,9 +6,11 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
@@ -42,8 +44,22 @@ public class SecBloquesMenuDesktopOld extends SecBloquesMenuDesktop {
 	@Override
 	public List<DataScreenMenu> getListDataScreenMenus(LineaType lineaType, SublineaType sublineaType) 
 	throws Exception {
-		List<WebElement> listMenus = getListMenusLinea(lineaType, sublineaType);
-		return getDataListMenus(listMenus);
+		for (int i=0; i<3; i++) {
+			try {
+				List<WebElement> listMenus = getListMenusLinea(lineaType, sublineaType);
+				return getDataListMenus(listMenus);
+			}
+			catch (StaleElementReferenceException e) {
+				Log4jTM.getLogger().info("Problem getting menus " + lineaType + " / " + sublineaType, e);
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public void seleccionarMenuXHref(Menu1rstLevel menu1rstLevel) throws Exception {
+		secLineasMenu.hoverLineaAndWaitForMenus(menu1rstLevel.getLinea(), menu1rstLevel.getSublinea());
+		clickMenuInHref(menu1rstLevel);
 	}
 	
 	private List<WebElement> getListMenusLinea(LineaType lineaType, SublineaType sublineaType) throws Exception {

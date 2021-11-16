@@ -16,6 +16,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
+import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.GroupMenu;
@@ -27,6 +28,7 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	public abstract void clickMenu(Menu1rstLevel menu1rstLevel);
 	public abstract void makeMenusGroupVisible(LineaType lineaType, GroupMenu bloque);
 	public abstract List<DataScreenMenu> getListDataScreenMenus(LineaType lineaType, SublineaType sublineaType) throws Exception;
+	public abstract void seleccionarMenuXHref(Menu1rstLevel menu1rstLevel) throws Exception;
 	
 	protected final AppEcom app;
 	protected final SecLineasMenuDesktop secLineasMenu;
@@ -36,9 +38,9 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	protected final static String TagIdLinea = "@LineaId"; //she, he, nina...
 	protected final static String TagIdBloque = "@BloqueId"; //Prendas, Accesorios...
 	protected final static String TagIdTypeMenu = "@TypeMenu";
+
 	protected final static String XPathContainerMenus = "//div[@class[contains(.,'section-detail-container')]]";
-	protected final static String XPathCapaMenus = XPathContainerMenus + "//div[@class[contains(.,'section-detail-list')]]";
-	protected final static String XPathCapaMenusLineaWithTag = XPathCapaMenus + "//self::*[@data-brand[contains(.,'" + TagIdLinea + "')]]";
+	protected final static String XPathCapaMenusRelative = "//div[@class[contains(.,'section-detail-list')]]";
 	protected final static String XPathMenuItem = "/li[@class[contains(.,'menu-item')] and not(@class[contains(.,'desktop-label-hidden')] or @class[contains(.,' label-hidden')])]/a"; 
 	protected final static String XPathEntradaMenuLineaRelativeToCapaWithTag = 
 		"//ul[@class[contains(.,'" + TagIdTypeMenu + "')]]" +
@@ -53,19 +55,34 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	}
 	
 	public static SecBloquesMenuDesktop factory(AppEcom app, WebDriver driver) {
-		if (app==AppEcom.outlet) {
+		if (app==AppEcom.outlet || 
+			//TODO temporalmente, de cara a BF2021 se ha restaurado en pro el menú antiguo
+			//quitar esta línea cuando pase el BF
+			UtilsMangoTest.isEntornoPRO(app, driver)) {
 			return new SecBloquesMenuDesktopOld(app, driver);
 		}
 		return new SecBloquesMenuDesktopNew(app, driver);
 	}
 
-	String getXPathCapaMenusLinea(LineaType lineaId) {
+	private String getXPathContainerMenus() {
+		return XPathContainerMenus;
+	}
+	
+	private String getXPathCapaMenus() {
+		return getXPathContainerMenus() + XPathCapaMenusRelative;
+	}
+	
+	private String getXPathCapaMenusLinea(String idLinea) {
+		return getXPathCapaMenus() + "//self::*[@data-brand[contains(.,'" + idLinea + "')]]";
+	}
+	
+	private String getXPathCapaMenusLinea(LineaType lineaId) {
 		String idLineaDom = SecMenusWrap.getIdLineaEnDOM(Channel.desktop, app, lineaId);
 		if (lineaId==LineaType.rebajas) {
 			idLineaDom = "sections_rebajas_step1";
 		}
 
-		return XPathCapaMenusLineaWithTag.replace(TagIdLinea, idLineaDom);
+		return getXPathCapaMenusLinea(idLineaDom);
 	}
 
 	private String getXPathCapaMenusSublinea(SublineaType sublineaType) {
@@ -133,9 +150,8 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 		return (state(Visible, By.xpath(xpathCapa)).wait(maxSeconds).check());
 	}
 
-	public void clickMenuInHrefAndGetName(Menu1rstLevel menu1rstLevel) throws Exception {
+	protected void clickMenuInHref(Menu1rstLevel menu1rstLevel) throws Exception {
 		String xpathLinkMenu = getXPathMenuVisibleByDataInHref(menu1rstLevel);
-		//menu1rstLevel.setNombre(driver.findElement(By.xpath(xpathLinkMenu)).getText());
 		driver.findElement(By.xpath(xpathLinkMenu)).click();
 		waitForPageLoaded(driver);
 	}
@@ -192,11 +208,6 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 		secLineasMenu.hoverLineaAndWaitForMenus(lineaMenu, sublineaMenu);
 		String xpathMenu = getXPathMenuSuperiorLinkVisible(menu1rstLevel);
 		return (state(Visible, By.xpath(xpathMenu)).wait(2).check());
-	}
-
-	public void seleccionarMenuXHref(Menu1rstLevel menu1rstLevel) throws Exception {
-		secLineasMenu.hoverLineaAndWaitForMenus(menu1rstLevel.getLinea(), menu1rstLevel.getSublinea());
-		clickMenuInHrefAndGetName(menu1rstLevel);
 	}
 
 	public boolean isPresentRightBanner(LineaType lineaType, SublineaType sublineaType) throws Exception {

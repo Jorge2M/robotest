@@ -70,7 +70,7 @@ public class Compra {
 
 	@Test (
 		groups={"Compra", "Canal:desktop,mobile_App:shop,outlet"}, alwaysRun=true, priority=2, 
-		description="[Usuario registrado][Tarjeta guardada][Productos Home][No aceptación cookies] Compra con descuento empleado. Verificar compra en sección 'Mis compras'") //Lo marcamos con prioridad 2 para dar tiempo a que otro caso de prueba registre la tarjeta 
+		description="[Usuario registrado][Tarjeta guardada][Productos Home (Shop)][No aceptación cookies] Compra con descuento empleado. Verificar compra en sección 'Mis compras'") //Lo marcamos con prioridad 2 para dar tiempo a que otro caso de prueba registre la tarjeta 
 	public void COM001_Compra_HomeProducts_TrjSaved_Empl() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
@@ -92,11 +92,7 @@ public class Compra {
 		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
 		dCtxPago.setFTCkout(FTCkout);
 		
-		dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago, driver)
-        	.pago(españa.getPago("VISA"))
-        	.listArticles(getArticlesHome(dCtxSh, driver).subList(0, 2))
-        	.build()
-        	.checkout(From.Prehome);
+		dCtxPago = executeCheckoutForCOM001(dCtxPago, dCtxSh, driver);
 
 		//Validación en Manto de los Pedidos (si existen)
 		List<CheckPedido> listChecks = Arrays.asList(
@@ -104,6 +100,23 @@ public class Compra {
 			CheckPedido.consultarPedido);
 		DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
 		PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
+	}
+	
+	private DataCtxPago executeCheckoutForCOM001(DataCtxPago dCtxPago, DataCtxShop dCtxSh, WebDriver driver) 
+	throws Exception {
+		
+		if (dCtxSh.appE == AppEcom.outlet) {
+			return new BuilderCheckout(dCtxSh, dCtxPago, driver)
+					.pago(españa.getPago("VISA"))
+					.build()
+					.checkout(From.Prehome);
+		} else {
+			return new BuilderCheckout(dCtxSh, dCtxPago, driver)
+					.pago(españa.getPago("VISA"))
+					.listArticles(getArticlesHome(dCtxSh, driver).subList(0, 2))
+					.build()
+					.checkout(From.Prehome);
+		}
 	}
 	
 	private List<Garment> getArticlesHome(DataCtxShop dCtxSh, WebDriver driver) throws Exception {

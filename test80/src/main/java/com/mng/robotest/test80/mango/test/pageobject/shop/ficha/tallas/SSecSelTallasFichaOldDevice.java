@@ -89,34 +89,39 @@ public class SSecSelTallasFichaOldDevice extends PageObjTM implements SSecSelTal
     }
     
     public void despliegaSelectTallasExec() {
-		state(State.Visible, By.xpath(XPathSelectorButton)).wait(2).check();
-		click(By.xpath(XPathSelectorButton)).exec();
-    }
-    
-    @Override
-    public void selectTallaByValue(String tallaNum) {
-    	despliegaSelectTallas();
-    	Talla talla = Talla.getTalla(tallaNum);
-    	String xpathTalla = getXPathOptionTalla(talla.getName());
-    	state(State.Visible, By.xpath(xpathTalla)).wait(2).check();
-    	click(By.xpath(xpathTalla)).exec();
-    }
-    
-    @Override
-    public void selectTallaByIndex(int posicionEnDesplegable) {
-    	despliegaSelectTallas();
-    	click(By.xpath("(" + By.xpath(XPathOptionTalla + ")[" + posicionEnDesplegable + "]"))).exec();
-    }
-    
-    @Override
-    public void selectFirstTallaAvailable() {
-        despliegaSelectTallas();
-        String xpathTallaAvailable = getXPathOptionTallaSegunDisponible(true);
-        click(By.xpath(xpathTallaAvailable)).exec();
-    }    
-    
-    /**
-     * @return el literal visible de la talla seleccionada en el desplegable
+    	for (int i=0; i<3; i++) {
+    		state(State.Visible, By.xpath(XPathSelectorButton)).wait(2).check();
+    		click(By.xpath(XPathSelectorButton)).exec();
+    		if (isVisibleSelectorTallasUntil(1)) {
+    			break;
+    		}
+    	}
+	}
+
+	@Override
+	public void selectTallaByValue(String tallaNum) {
+		despliegaSelectTallas();
+		Talla talla = Talla.getTalla(tallaNum);
+		String xpathTalla = getXPathOptionTalla(talla.getName());
+		state(State.Clickable, By.xpath(xpathTalla)).wait(2).check();
+		click(By.xpath(xpathTalla)).exec();
+	}
+
+	@Override
+	public void selectTallaByIndex(int posicionEnDesplegable) {
+		despliegaSelectTallas();
+		click(By.xpath("(" + By.xpath(XPathOptionTalla + ")[" + posicionEnDesplegable + "]"))).exec();
+	}
+
+	@Override
+	public void selectFirstTallaAvailable() {
+		despliegaSelectTallas();
+		String xpathTallaAvailable = getXPathOptionTallaSegunDisponible(true);
+		click(By.xpath(xpathTallaAvailable)).exec();
+	}
+
+	/**
+	 * @return el literal visible de la talla seleccionada en el desplegable
      */
     @Override
     public String getTallaAlfSelected(AppEcom app) {

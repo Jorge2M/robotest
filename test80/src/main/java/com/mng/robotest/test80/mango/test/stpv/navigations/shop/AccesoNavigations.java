@@ -70,7 +70,7 @@ public class AccesoNavigations {
      * Acceso a VOTF (login + selección de idioma)
      */
     public static void accesoVOTF(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-        PageLoginVOTF.goToFromUrlAndSetTestABs(/*dCtxSh.urlAcceso,*/ dCtxSh, driver);
+        PageLoginVOTF.goToFromUrlAndSetTestABs(dCtxSh, driver);
         PageJCAS.identJCASifExists(driver);
         AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dCtxSh.pais));
         PageLoginVOTF.inputUsuario(accesoVOTF.getUsuario(), driver);

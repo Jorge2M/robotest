@@ -6,7 +6,6 @@ import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.beans.IdiomaPais;
-import com.mng.robotest.test80.mango.test.beans.Linea;
 import com.mng.robotest.test80.mango.test.beans.Pais;
 import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
@@ -78,50 +77,50 @@ public class TestNodos implements Serializable {
         return dCtxSh;
     }
 
-    @Test (
-    	groups={"Canal:desktop_App:all"},
-    	description="Verificar funcionamiento general en un nodo. Validar status, acceso, click banner, navegación por las líneas...")
-    public void NOD001_TestNodo() throws Throwable {
-    	DataCtxShop dCtxSh = getCtxShForTest();
-    	WebDriver driver = TestMaker.getDriverTestCase();
+	@Test (
+		groups={"Canal:desktop_App:all"},
+		description="Verificar funcionamiento general en un nodo. Validar status, acceso, click banner, navegación por las líneas...")
+	public void NOD001_TestNodo() throws Throwable {
+		DataCtxShop dCtxSh = getCtxShForTest();
+		WebDriver driver = TestMaker.getDriverTestCase();
 		TestCaseTM.addNameSufix(this.index_fact);
-        AppEcom appE = nodo.getAppEcom();
-    	NodoStatus nodoAnt = findNodoForCompareStatus(listaNodos, nodo);
-       
-        new PagePrehomeStpV(dCtxSh, driver).seleccionPaisIdiomaAndEnter(true);
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-        if (appE==AppEcom.shop) {
-        	selectMenuPantalones(dCtxSh, driver);
-            PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, dCtxSh.appE, driver);
-            ListDataArticleGalery listArticlesPant = pageGaleria.getListDataArticles();
-            this.nodo.setArticlesNuevo(listArticlesPant);
-            PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-            if (nodoAnt!=null && nodoAnt.getArticlesNuevo()!=null) {
-                pageGaleriaStpV.validaNombresYRefEnOrden(nodoAnt, this.nodo);
-            }
-            
-            pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
-        }
+		AppEcom appE = nodo.getAppEcom();
+		NodoStatus nodoAnt = findNodoForCompareStatus(listaNodos, nodo);
+
+		new PagePrehomeStpV(dCtxSh, driver).seleccionPaisIdiomaAndEnter(true);
+		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
+		if (appE==AppEcom.shop) {
+			selectMenuPantalones(dCtxSh, driver);
+			PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, dCtxSh.appE, driver);
+			ListDataArticleGalery listArticlesPant = pageGaleria.getListDataArticles();
+			this.nodo.setArticlesNuevo(listArticlesPant);
+			PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+			if (nodoAnt!=null && nodoAnt.getArticlesNuevo()!=null) {
+				pageGaleriaStpV.validaNombresYRefEnOrden(nodoAnt, this.nodo);
+			}
+
+			pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
+		}
 		
-        SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, driver);
-        secMenusDesktopStpV.seleccionLinea(LineaType.she);
-        secMenusDesktopStpV.countSaveMenusEntorno(LineaType.she, null, nodo.getIp(), autAddr);
-        int maxBannersToLoad = 1;
-        SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToLoad, driver);
-        secBannersStpV.testPageBanners(dCtxSh, 1);
-        Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
-        secMenusStpV.accesoMenuXRef(menuVestidos, dCtxSh);
+		SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, driver);
+		secMenusDesktopStpV.seleccionLinea(LineaType.she);
+		secMenusDesktopStpV.countSaveMenusEntorno(LineaType.she, null, nodo.getIp(), autAddr);
+		int maxBannersToLoad = 1;
+		SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToLoad, driver);
+		secBannersStpV.testPageBanners(dCtxSh, 1);
+		Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
+		secMenusStpV.accesoMenuXRef(menuVestidos, dCtxSh);
 		
-        secMenusStpV.seleccionLinea(LineaType.he, null, dCtxSh);
-        secMenusDesktopStpV.countSaveMenusEntorno (LineaType.he, null, nodo.getIp(), autAddr);
-        secMenusStpV.seleccionLinea(LineaType.nina, SublineaType.nina_nina, dCtxSh);	
-        secMenusDesktopStpV.countSaveMenusEntorno(LineaType.nina, SublineaType.nina_nina, nodo.getIp(), autAddr);
-        secMenusStpV.seleccionLinea(LineaType.nino, SublineaType.nino_bebe, dCtxSh);     
-        secMenusDesktopStpV.countSaveMenusEntorno(LineaType.nino, SublineaType.nino_bebe, nodo.getIp(), autAddr);
-        
-        this.nodo.setTested(true);
-    }
-    
+		secMenusStpV.seleccionLinea(LineaType.he, null, dCtxSh);
+		secMenusDesktopStpV.countSaveMenusEntorno (LineaType.he, null, nodo.getIp(), autAddr);
+		secMenusStpV.seleccionLinea(LineaType.nina, SublineaType.nina_nina, dCtxSh);	
+		secMenusDesktopStpV.countSaveMenusEntorno(LineaType.nina, SublineaType.nina_nina, nodo.getIp(), autAddr);
+		secMenusStpV.seleccionLinea(LineaType.nino, SublineaType.nino_bebe, dCtxSh);     
+		secMenusDesktopStpV.countSaveMenusEntorno(LineaType.nino, SublineaType.nino_bebe, nodo.getIp(), autAddr);
+
+		this.nodo.setTested(true);
+	}
+
     private void selectMenuPantalones(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(
             	dCtxSh.appE, KeyMenu1rstLevel.from(
