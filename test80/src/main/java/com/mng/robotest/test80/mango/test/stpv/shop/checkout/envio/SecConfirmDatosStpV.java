@@ -44,7 +44,7 @@ public class SecConfirmDatosStpV {
 		expected="La dirección de envío se establece a la de la tienda")
 	public static void clickConfirmarDatosButton(Channel channel, AppEcom app, DataPedido dataPedido, WebDriver driver) {
 		ModalDroppoints.secConfirmDatos.clickConfirmarDatosButtonAndWait(5, driver);
-		SeleniumUtils.waitForPageLoaded(driver, 2);       
+		SeleniumUtils.waitForPageLoaded(driver, 2);	   
 		checkConfirmacionCambioDireccionEnvio(dataPedido, channel, app, driver);
 	}
 	

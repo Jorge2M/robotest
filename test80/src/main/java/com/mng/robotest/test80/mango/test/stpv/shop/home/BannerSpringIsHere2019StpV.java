@@ -37,14 +37,14 @@ public class BannerSpringIsHere2019StpV {
 		//pero que está en el mismo 'location' que la de Spring Is Here
 		int maxBannersToLoad = 2;
 		this.secBannersStpV = new SecBannersStpV(maxBannersToLoad, driver);
-        managerBannersScreen = secBannersStpV.getManagerBannerScreen();
-        for (int i=0; i<managerBannersScreen.getListDataBanners().size(); i++) {
-        	String textBanner = managerBannersScreen.getBanner(i+1).getDirectText();
-        	if (textBannersContainsPossibleText(textBanner)) {
-        		posBannerSpringIsHere = i+1;
-        		break;
-        	}
-        }
+		managerBannersScreen = secBannersStpV.getManagerBannerScreen();
+		for (int i=0; i<managerBannersScreen.getListDataBanners().size(); i++) {
+			String textBanner = managerBannersScreen.getBanner(i+1).getDirectText();
+			if (textBannersContainsPossibleText(textBanner)) {
+				posBannerSpringIsHere = i+1;
+				break;
+			}
+		}
 	}
 	
 	private DataBanner getBanner() {
@@ -65,56 +65,56 @@ public class BannerSpringIsHere2019StpV {
 		}
 		
 		if (state(Visible, By.cssSelector(csselectorSwipperCircle), driver).check()) {
-	    	int firstCircleToClick = 1;
-	    	if (circleAssociatedToCampaign==1) {
-	    		firstCircleToClick=2;
-	    	}
-	    	driver.findElements(By.cssSelector(csselectorSwipperCircle)).get(firstCircleToClick-1).click();
-	    	driver.findElements(By.cssSelector(csselectorSwipperCircle)).get(circleAssociatedToCampaign-1).click();
-	    }
+			int firstCircleToClick = 1;
+			if (circleAssociatedToCampaign==1) {
+				firstCircleToClick=2;
+			}
+			driver.findElements(By.cssSelector(csselectorSwipperCircle)).get(firstCircleToClick-1).click();
+			driver.findElements(By.cssSelector(csselectorSwipperCircle)).get(circleAssociatedToCampaign-1).click();
+		}
 	}
 	
-    @Validation
-    public ChecksResultWithFlagBannerExists checkBanner(TypeHome typeHome) {
-    	ChecksResultWithFlagBannerExists validations = ChecksResultWithFlagBannerExists.getNew();
-    	boolean existenBanners = managerBannersScreen.existBanners();
-    	validations.setexistBanner(posBannerSpringIsHere > 0);
-    	validations.add(
-    		PrefixRebajas + "Existen banners",
-    		existenBanners, State.Defect);    	
-    	if (existenBanners) {
-        	validations.add(
-        		"El 1er Banner contiene el texto " + textsPossible.get(0),
-        		posBannerSpringIsHere > 0, State.Warn);
-    
-        	if (posBannerSpringIsHere>0 && typeHome==TypeHome.Multimarca) {
-	        	List<Linea> listLineas = dCtxSh.pais.getShoponline().getListLineasTiendas(dCtxSh.appE);
-	        	if (listLineas.size()>1) {
-	                for (Linea linea : listLineas) {
-	                    String urlLink = getBanner().getUrlLinkLinea(linea.getType());
-	                    String textToBeContainedInUrl = "seccion=hellosummer_" + linea.getType().getId3();
-	                	validations.add(
-	                		"El link del 1er banner contiene " + textToBeContainedInUrl,
-	                		urlLink.contains(textToBeContainedInUrl), State.Warn);
-	                }
-	        	}
-        	}
-    	}
-    	
-    	return validations;
-    }
-    
-    @Validation (
-    	description="No aparece el banner de <b>Spring is Here</b>",
-    	level=State.Warn)
-    public boolean checkIsNotBannerVisible() {
-    	return (posBannerSpringIsHere==0);
-    }
-    
-    public void clickBanner() throws Exception {
-    	secBannersStpV.seleccionarBanner(posBannerSpringIsHere, true, dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
-    }
-    
+	@Validation
+	public ChecksResultWithFlagBannerExists checkBanner(TypeHome typeHome) {
+		ChecksResultWithFlagBannerExists validations = ChecksResultWithFlagBannerExists.getNew();
+		boolean existenBanners = managerBannersScreen.existBanners();
+		validations.setexistBanner(posBannerSpringIsHere > 0);
+		validations.add(
+			PrefixRebajas + "Existen banners",
+			existenBanners, State.Defect);		
+		if (existenBanners) {
+			validations.add(
+				"El 1er Banner contiene el texto " + textsPossible.get(0),
+				posBannerSpringIsHere > 0, State.Warn);
+	
+			if (posBannerSpringIsHere>0 && typeHome==TypeHome.Multimarca) {
+				List<Linea> listLineas = dCtxSh.pais.getShoponline().getListLineasTiendas(dCtxSh.appE);
+				if (listLineas.size()>1) {
+					for (Linea linea : listLineas) {
+						String urlLink = getBanner().getUrlLinkLinea(linea.getType());
+						String textToBeContainedInUrl = "seccion=hellosummer_" + linea.getType().getId3();
+						validations.add(
+							"El link del 1er banner contiene " + textToBeContainedInUrl,
+							urlLink.contains(textToBeContainedInUrl), State.Warn);
+					}
+				}
+			}
+		}
+		
+		return validations;
+	}
+	
+	@Validation (
+		description="No aparece el banner de <b>Spring is Here</b>",
+		level=State.Warn)
+	public boolean checkIsNotBannerVisible() {
+		return (posBannerSpringIsHere==0);
+	}
+	
+	public void clickBanner() throws Exception {
+		secBannersStpV.seleccionarBanner(posBannerSpringIsHere, true, dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
+	}
+	
 	private boolean textBannersContainsPossibleText(String textBanner) {
 		for (String possibleText : textsPossible) {
 			if (textBanner.toLowerCase().contains(possibleText.toLowerCase())) {

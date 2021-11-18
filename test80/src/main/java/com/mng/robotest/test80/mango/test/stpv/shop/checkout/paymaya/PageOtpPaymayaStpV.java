@@ -24,13 +24,13 @@ public class PageOtpPaymayaStpV {
 		return pageOtpPaymaya.isPage();
 	}
 	
-    @Step(
-        description="Introducimos el otp (<b>#{otp}</b>) y pulsamos \"Proceed\"",
-        expected="Aparece la página de resultado de paymaya")
-    public PageResultPaymayaStpV proceed(String otp) throws Exception {
-    	pageOtpPaymaya.proceed(otp);
-    	PageResultPaymayaStpV pageResultPaymayaStpV = new PageResultPaymayaStpV(driver);
-    	pageResultPaymayaStpV.checkPage();
-    	return pageResultPaymayaStpV;
-    }
+	@Step(
+		description="Introducimos el otp (<b>#{otp}</b>) y pulsamos \"Proceed\"",
+		expected="Aparece la página de resultado de paymaya")
+	public PageResultPaymayaStpV proceed(String otp) throws Exception {
+		pageOtpPaymaya.proceed(otp);
+		PageResultPaymayaStpV pageResultPaymayaStpV = new PageResultPaymayaStpV(driver);
+		pageResultPaymayaStpV.checkPage();
+		return pageResultPaymayaStpV;
+	}
 }

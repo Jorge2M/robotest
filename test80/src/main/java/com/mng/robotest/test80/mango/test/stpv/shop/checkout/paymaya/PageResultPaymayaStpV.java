@@ -22,11 +22,11 @@ public class PageResultPaymayaStpV {
 		return pageResultPaymaya.isPage();
 	}
 	
-    @Step(
-        description="Seleccionamos el botón <b>Confirm Payment</b>",
-        expected="Aparece la página de resultado del pago")
-    public void confirmPayment() throws Exception {
-    	pageResultPaymaya.confirmPayment();
-    }
+	@Step(
+		description="Seleccionamos el botón <b>Confirm Payment</b>",
+		expected="Aparece la página de resultado del pago")
+	public void confirmPayment() throws Exception {
+		pageResultPaymaya.confirmPayment();
+	}
 	
 }

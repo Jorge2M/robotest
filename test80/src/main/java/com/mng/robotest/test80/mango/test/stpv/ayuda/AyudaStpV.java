@@ -26,76 +26,76 @@ public class AyudaStpV {
 		return new AyudaStpV(driver);
 	}
 	
-    public void selectTypeValidaciones (Channel channel) throws Exception {
-        List<String> sections = pageAyuda.getKeysFromJSON();
-        for(String section : sections){
-             if (section.equals("Buscar una tienda") && !channel.isDevice()) {
-                helpToBuscarTienda(section);
-             } else {
-                 accesAndValidationSection(section);
-             }
-        }
-    }
+	public void selectTypeValidaciones (Channel channel) throws Exception {
+		List<String> sections = pageAyuda.getKeysFromJSON();
+		for(String section : sections){
+			 if (section.equals("Buscar una tienda") && !channel.isDevice()) {
+				helpToBuscarTienda(section);
+			 } else {
+				 accesAndValidationSection(section);
+			 }
+		}
+	}
 
-    @Step(
-    	description = "Seleccionamos la seccion de <b>#{section}</b>",
-        expected = "Aparecen sus secciones internas")
-    private void accesAndValidationSection (String section) throws Exception {
-        JSONArray sectionToValidate = pageAyuda.getSectionFromJSON(section);
-        pageAyuda.selectSection(section);
-        for (Object textToCheck : sectionToValidate) {
-            validateSectionsAyuda(textToCheck.toString());
-            if (textToCheck.toString().equals("Tarjeta Regalo Mango")) {
-                helpToChequeRegalo(textToCheck.toString());
-            }
-        }
-    }
+	@Step(
+		description = "Seleccionamos la seccion de <b>#{section}</b>",
+		expected = "Aparecen sus secciones internas")
+	private void accesAndValidationSection (String section) throws Exception {
+		JSONArray sectionToValidate = pageAyuda.getSectionFromJSON(section);
+		pageAyuda.selectSection(section);
+		for (Object textToCheck : sectionToValidate) {
+			validateSectionsAyuda(textToCheck.toString());
+			if (textToCheck.toString().equals("Tarjeta Regalo Mango")) {
+				helpToChequeRegalo(textToCheck.toString());
+			}
+		}
+	}
 
-    @Validation(
-    	description="Está presente el apartado de <b>#{validation}</b>",
-        level= State.Defect)
-    private boolean validateSectionsAyuda(String validation) {
-    	return pageAyuda.sectionInState(validation, Visible);
-    }
+	@Validation(
+		description="Está presente el apartado de <b>#{validation}</b>",
+		level= State.Defect)
+	private boolean validateSectionsAyuda(String validation) {
+		return pageAyuda.sectionInState(validation, Visible);
+	}
 
-    @Step(
-        description="Seleccionamos el enlace a la tarjeta regalo",
-        expected="Aparece una nueva página que contiene la información de cheque regalo")
-    private void helpToChequeRegalo(String textToCheck) throws Exception {
-        pageAyuda.selectSection(textToCheck);
-        checkIsApartadoInState(textToCheck, StateApartado.expanded);	
-        pageAyuda.selectSection("COMPRAR TARJETA REGALO");
-        validatePageTarjetaRegalo();
-        driver.navigate().back();
-    }
+	@Step(
+		description="Seleccionamos el enlace a la tarjeta regalo",
+		expected="Aparece una nueva página que contiene la información de cheque regalo")
+	private void helpToChequeRegalo(String textToCheck) throws Exception {
+		pageAyuda.selectSection(textToCheck);
+		checkIsApartadoInState(textToCheck, StateApartado.expanded);	
+		pageAyuda.selectSection("COMPRAR TARJETA REGALO");
+		validatePageTarjetaRegalo();
+		driver.navigate().back();
+	}
 
-    @Validation(
-    	description="Se despliega el bloque asociado a <b>#{textSection}</b>",
-    	level=State.Warn)
-    private boolean checkIsApartadoInState(String textSection, StateApartado stateApartado) {
-    	return (pageAyuda.isApartadoInStateUntil(textSection, stateApartado, 1));
-    }
-    
-    @Validation(
-        description = "1) Estamos en la página de <b>Tarjeta Regalo</b>",
-        level = State.Defect)
-    private boolean validatePageTarjetaRegalo() {
-        return (PageAyuda.currentURLContains("giftVoucher", 5, driver));
-    }
+	@Validation(
+		description="Se despliega el bloque asociado a <b>#{textSection}</b>",
+		level=State.Warn)
+	private boolean checkIsApartadoInState(String textSection, StateApartado stateApartado) {
+		return (pageAyuda.isApartadoInStateUntil(textSection, stateApartado, 1));
+	}
+	
+	@Validation(
+		description = "1) Estamos en la página de <b>Tarjeta Regalo</b>",
+		level = State.Defect)
+	private boolean validatePageTarjetaRegalo() {
+		return (PageAyuda.currentURLContains("giftVoucher", 5, driver));
+	}
 
-    @Step(
-        description = "Seleccionamos el enlace de \"Buscar tu Tienda\"",
-        expected = "Aparece el modal de busqueda de tiendas")
-    private void helpToBuscarTienda(String textToCheck) throws Exception {
-        pageAyuda.selectSection(textToCheck);
-        validateBuscarTienda();
-        pageAyuda.selectCloseBuscar();
-    }
+	@Step(
+		description = "Seleccionamos el enlace de \"Buscar tu Tienda\"",
+		expected = "Aparece el modal de busqueda de tiendas")
+	private void helpToBuscarTienda(String textToCheck) throws Exception {
+		pageAyuda.selectSection(textToCheck);
+		validateBuscarTienda();
+		pageAyuda.selectCloseBuscar();
+	}
 
-    @Validation(
-        description = "1) Es visible la cabecera de <b>Encuentra tu tienda</b>",
-        level = State.Defect)
-    private boolean validateBuscarTienda() {
-        return (pageAyuda.sectionInState("Encuentra tu tienda", Visible));
-    }
+	@Validation(
+		description = "1) Es visible la cabecera de <b>Encuentra tu tienda</b>",
+		level = State.Defect)
+	private boolean validateBuscarTienda() {
+		return (pageAyuda.sectionInState("Encuentra tu tienda", Visible));
+	}
 }

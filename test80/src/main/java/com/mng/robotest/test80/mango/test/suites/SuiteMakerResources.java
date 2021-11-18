@@ -13,73 +13,73 @@ import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets.SecretT
 
 
 public class SuiteMakerResources {
-    
-    public static Map<String,String> getParametersSuiteShop(InputParamsMango params) {
-    	Map<String,String> parametersReturn = new HashMap<>();
-    	
-    	parametersReturn.put(Constantes.paramCountrys, params.getListaPaisesCommaSeparated());
-    	parametersReturn.put(Constantes.paramLineas, params.getListaLineasCommaSeparated());
-    	parametersReturn.put(Constantes.paramPayments, params.getListaPaymentsCommaSeparated());
+	
+	public static Map<String,String> getParametersSuiteShop(InputParamsMango params) {
+		Map<String,String> parametersReturn = new HashMap<>();
+		
+		parametersReturn.put(Constantes.paramCountrys, params.getListaPaisesCommaSeparated());
+		parametersReturn.put(Constantes.paramLineas, params.getListaLineasCommaSeparated());
+		parametersReturn.put(Constantes.paramPayments, params.getListaPaymentsCommaSeparated());
 
-        //Credenciales acceso a Manto
-    	Secret secret = GetterSecrets.factory().getCredentials(SecretType.MANTO_USER);
-    	parametersReturn.put(Constantes.paramUsrmanto, secret.getUser());
-    	parametersReturn.put(Constantes.paramPasmanto, secret.getPassword());
-        if (params.getUrlManto()!=null) {
-        	parametersReturn.put(Constantes.paramUrlmanto, params.getUrlManto());
-        } else {
-        	//parametersSuite.put(Constantes.paramUrlmanto, "https://ogiol-zfs-manto.dev.mango.com");
-        	parametersReturn.put(Constantes.paramUrlmanto, "http://manto.pre.mango.com");
-        }
-        
-        //Parámetros de acceso a Proxy
-        parametersReturn.put("proxyHost", "");
-        parametersReturn.put("proxyPort", "");
-        parametersReturn.put("proxyUser", "");
-        parametersReturn.put("proxyPassword", "");
-        
-        parametersReturn.put("accesoURLCountrys", "false");
-        parametersReturn.put("prodInexistente", "91439153");
-        parametersReturn.put("masProductos", ""); 
-        parametersReturn.put("transporteExento", "30");
-        
-        //Importe del transporte en España (Península y Baleares)
-        parametersReturn.put("importeTransporte", "2,95€");
-        
-        parametersReturn.put("categoriaProdExistente", "BOLSOS");
-        parametersReturn.put("catProdInexistente", "Anchoas del Cantábrico");
-        
-    	String PASSWORD_STANDARD = 
-    			GetterSecrets.factory()
-    				.getCredentials(SecretType.SHOP_STANDARD_USER)
-    				.getPassword();
-        parametersReturn.put("userWithOnlinePurchases" ,"espana.test@mango.com");
-        parametersReturn.put("passUserWithOnlinePurchases", PASSWORD_STANDARD);
-        
-        parametersReturn.put("userWithStorePurchases" ,"ticket_digital_es@mango.com");
-        parametersReturn.put("passUserWithStorePurchases", PASSWORD_STANDARD);
-        
-    	String PASSWORD_ROBOT = 
-    			GetterSecrets.factory()
-    				.getCredentials(SecretType.SHOP_ROBOT_USER)
-    				.getPassword();
-        parametersReturn.put("userConDevolucionPeroSoloEnPRO", "robot.test@mango.com");
-        parametersReturn.put("passwordUserConDevolucion", PASSWORD_ROBOT);
-        
-//        CallBack callBack = params.getCallBack();
-//        if (params.getCallBack()!=null) {
-//        	parametersReturn.put(Constantes.paramCallBackMethod, callBack.getCallBackMethod());
-//        	parametersReturn.put(Constantes.paramCallBackResource, callBack.getCallBackResource());
-//        	parametersReturn.put(Constantes.paramCallBackSchema, callBack.getCallBackSchema());  
-//        	parametersReturn.put(Constantes.paramCallBackParams, callBack.getCallBackParams());
-//        	parametersReturn.put(Constantes.paramCallBackUser, callBack.getCallBackUser());
-//        	parametersReturn.put(Constantes.paramCallBackPassword, callBack.getCallBackPassword());
-//        }
-        
-        return parametersReturn;
-    }
-    
-    public static boolean isBrowserStack(String browser) {
-    	return (browser.compareTo(EmbeddedDriver.browserstack.name())==0);
-    }
+		//Credenciales acceso a Manto
+		Secret secret = GetterSecrets.factory().getCredentials(SecretType.MANTO_USER);
+		parametersReturn.put(Constantes.paramUsrmanto, secret.getUser());
+		parametersReturn.put(Constantes.paramPasmanto, secret.getPassword());
+		if (params.getUrlManto()!=null) {
+			parametersReturn.put(Constantes.paramUrlmanto, params.getUrlManto());
+		} else {
+			//parametersSuite.put(Constantes.paramUrlmanto, "https://ogiol-zfs-manto.dev.mango.com");
+			parametersReturn.put(Constantes.paramUrlmanto, "http://manto.pre.mango.com");
+		}
+		
+		//Parámetros de acceso a Proxy
+		parametersReturn.put("proxyHost", "");
+		parametersReturn.put("proxyPort", "");
+		parametersReturn.put("proxyUser", "");
+		parametersReturn.put("proxyPassword", "");
+		
+		parametersReturn.put("accesoURLCountrys", "false");
+		parametersReturn.put("prodInexistente", "91439153");
+		parametersReturn.put("masProductos", ""); 
+		parametersReturn.put("transporteExento", "30");
+		
+		//Importe del transporte en España (Península y Baleares)
+		parametersReturn.put("importeTransporte", "2,95€");
+		
+		parametersReturn.put("categoriaProdExistente", "BOLSOS");
+		parametersReturn.put("catProdInexistente", "Anchoas del Cantábrico");
+		
+		String PASSWORD_STANDARD = 
+				GetterSecrets.factory()
+					.getCredentials(SecretType.SHOP_STANDARD_USER)
+					.getPassword();
+		parametersReturn.put("userWithOnlinePurchases" ,"espana.test@mango.com");
+		parametersReturn.put("passUserWithOnlinePurchases", PASSWORD_STANDARD);
+		
+		parametersReturn.put("userWithStorePurchases" ,"ticket_digital_es@mango.com");
+		parametersReturn.put("passUserWithStorePurchases", PASSWORD_STANDARD);
+		
+		String PASSWORD_ROBOT = 
+				GetterSecrets.factory()
+					.getCredentials(SecretType.SHOP_ROBOT_USER)
+					.getPassword();
+		parametersReturn.put("userConDevolucionPeroSoloEnPRO", "robot.test@mango.com");
+		parametersReturn.put("passwordUserConDevolucion", PASSWORD_ROBOT);
+		
+//		CallBack callBack = params.getCallBack();
+//		if (params.getCallBack()!=null) {
+//			parametersReturn.put(Constantes.paramCallBackMethod, callBack.getCallBackMethod());
+//			parametersReturn.put(Constantes.paramCallBackResource, callBack.getCallBackResource());
+//			parametersReturn.put(Constantes.paramCallBackSchema, callBack.getCallBackSchema());  
+//			parametersReturn.put(Constantes.paramCallBackParams, callBack.getCallBackParams());
+//			parametersReturn.put(Constantes.paramCallBackUser, callBack.getCallBackUser());
+//			parametersReturn.put(Constantes.paramCallBackPassword, callBack.getCallBackPassword());
+//		}
+		
+		return parametersReturn;
+	}
+	
+	public static boolean isBrowserStack(String browser) {
+		return (browser.compareTo(EmbeddedDriver.browserstack.name())==0);
+	}
 }

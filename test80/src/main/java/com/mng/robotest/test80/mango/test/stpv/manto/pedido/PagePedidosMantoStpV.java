@@ -31,23 +31,23 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PagePedidosMantoStpV {
 
 	@Validation
-    public static ChecksResultWithFlagLinkCodPed validaLineaPedido(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
-    	ChecksResultWithFlagLinkCodPed validations = ChecksResultWithFlagLinkCodPed.getNew();
-    	
-        int maxSecondsToWait = 30;
+	public static ChecksResultWithFlagLinkCodPed validaLineaPedido(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
+		ChecksResultWithFlagLinkCodPed validations = ChecksResultWithFlagLinkCodPed.getNew();
+		
+		int maxSecondsToWait = 30;
 	 	validations.add(
 			"Desaparece la capa de Loading de \"Consultando\"" + " (lo esperamos hasta " + maxSecondsToWait + " segundos)",
 			PagePedidos.isInvisibleCapaLoadingUntil(maxSecondsToWait, driver), State.Warn);
 	 	
-        validations.setExistsLinkCodPed(
-        	PagePedidos.isPresentDataInPedido(IdColumn.idpedido, dataPedido.getCodigoPedidoManto(), TypeDetalle.pedido, 0, driver));
+		validations.setExistsLinkCodPed(
+			PagePedidos.isPresentDataInPedido(IdColumn.idpedido, dataPedido.getCodigoPedidoManto(), TypeDetalle.pedido, 0, driver));
 	 	validations.add(
 			"En la columna " + IdColumn.idpedido.textoColumna + " aparece el código de pedido: " + dataPedido.getCodigoPedidoManto(),
 			validations.getExistsLinkCodPed(), State.Warn);
 	 	validations.add(
 			"Aparece un solo pedido",
 			PagePedidos.getNumLineas(driver)==1, State.Warn);
-    	
+		
 	 	//En el caso de Outlet no tenemos la información del TPV que toca
 	 	if (appE!=AppEcom.outlet) {
 		 	validations.add(
@@ -55,7 +55,7 @@ public class PagePedidosMantoStpV {
 				PagePedidos.isPresentDataInPedido(IdColumn.tpv, dataPedido.getPago().getTpv().getId(), TypeDetalle.pedido, 0, driver), 
 				State.Warn);
 	 	}
-    	
+		
 	 	validations.add(
 			"En la columna " + IdColumn.email.textoColumna + " aparece el email asociado: " + dataPedido.getEmailCheckout(),
 			PagePedidos.isPresentDataInPedido(IdColumn.email, dataPedido.getEmailCheckout(), TypeDetalle.pedido, 0, driver), 
@@ -70,10 +70,10 @@ public class PagePedidosMantoStpV {
 //			"En la columna " + IdColumn.tarjeta.textoColumna + " aparece el tipo de tarjeta: " + dataPedido.getCodtipopago(),
 //			PagePedidos.isPresentDataInPedido(IdColumn.tarjeta, dataPedido.getCodtipopago(), TypeDetalle.pedido, 0, driver), 
 //			State.Warn);
-        
-        return validations;
-    }
-    
+		
+		return validations;
+	}
+	
 	@Step (
 		description="Buscamos pedidos con id registro",
 		expected="Debemos obtener el ID del pedido",

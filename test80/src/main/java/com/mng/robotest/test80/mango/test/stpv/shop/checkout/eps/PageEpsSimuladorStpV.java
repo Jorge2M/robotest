@@ -9,20 +9,20 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.eps.PageEpsSi
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.eps.PageEpsSimulador.TypeDelay;
 
 public class PageEpsSimuladorStpV {
-    
+	
 	@Validation (
 		description="Aparece la página de simulación de EPS",
 		level=State.Defect)
-    public static boolean validateIsPage(WebDriver driver) { 
-        return (PageEpsSimulador.isPage(driver));
-    }
-    
+	public static boolean validateIsPage(WebDriver driver) { 
+		return (PageEpsSimulador.isPage(driver));
+	}
+	
 	@Step (
 		description="Seleccionar la opción <b>#{typeDelay}</b> del apartado \"pending-authorised\"", 
-        expected="La opción se selecciona correctamente")
-    public static void selectDelay(TypeDelay typeDelay, WebDriver driver) {
+		expected="La opción se selecciona correctamente")
+	public static void selectDelay(TypeDelay typeDelay, WebDriver driver) {
 		PageEpsSimulador.selectDelayAuthorised(typeDelay, driver);
-    }
+	}
 
 	@Step (
 		description="Seleccionar el botón \"pending > autrhorised\"", 

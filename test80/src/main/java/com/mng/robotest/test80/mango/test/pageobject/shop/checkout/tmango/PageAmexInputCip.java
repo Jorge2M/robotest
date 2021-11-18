@@ -9,17 +9,17 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageAmexInputCip {
 
-    static String XPathInputCIP = "//input[@name='pin']";
-    static String XPathAcceptButton = "//img[@src[contains(.,'daceptar.gif')]]/../../a";
-    
-    public static boolean isPageUntil(int maxSeconds, WebDriver driver) {
-    	return (state(Present, By.xpath(XPathInputCIP), driver)
-    			.wait(maxSeconds).check());
-    }
-    
-    public static void inputCIP(String CIP, WebDriver driver) {
-        driver.findElement(By.xpath(XPathInputCIP)).sendKeys(CIP);
-    }
+	static String XPathInputCIP = "//input[@name='pin']";
+	static String XPathAcceptButton = "//img[@src[contains(.,'daceptar.gif')]]/../../a";
+	
+	public static boolean isPageUntil(int maxSeconds, WebDriver driver) {
+		return (state(Present, By.xpath(XPathInputCIP), driver)
+				.wait(maxSeconds).check());
+	}
+	
+	public static void inputCIP(String CIP, WebDriver driver) {
+		driver.findElement(By.xpath(XPathInputCIP)).sendKeys(CIP);
+	}
 
 	public static void clickAceptarButton(WebDriver driver) {
 		click(By.xpath(XPathAcceptButton), driver).exec();

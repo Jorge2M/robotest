@@ -33,17 +33,17 @@ import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroIniStpV
 
 /**
  * Clase que contiene los pasos/validaciones asociados al menú desplegable del frame superior que contiene las opciones del usuario:
- *      iniciar sesión
- *      regístrate
- *      pedidos
- *      ayuda
- *      ...
+ *	  iniciar sesión
+ *	  regístrate
+ *	  pedidos
+ *	  ayuda
+ *	  ...
  * @author jorge.munoz
  *
  */
 @SuppressWarnings({"static-access"})
 public class SecMenusUserStpV {
-    
+	
 	private final WebDriver driver;
 	private final Channel channel;
 	private final AppEcom app;
@@ -85,17 +85,17 @@ public class SecMenusUserStpV {
 
 	@Step (
 		description="Clicar el link de Cerrar Sesión", 
-        expected="Aparece el link de login")
-    public void logoff() throws Exception {
+		expected="Aparece el link de login")
+	public void logoff() throws Exception {
 		userMenus.clickMenuAndWait(UserMenu.cerrarSesion);
-        checkIsVisibleIniciarSesionLink(3);
-    }
+		checkIsVisibleIniciarSesionLink(3);
+	}
 	
 	@Validation (
 		description="Aparece el link superior de \"Iniciar sesión\" (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
 	private boolean checkIsVisibleIniciarSesionLink(int maxSeconds) throws Exception {
-        return (userMenus.isMenuInStateUntil(UserMenu.iniciarSesion, Present, maxSeconds));
+		return (userMenus.isMenuInStateUntil(UserMenu.iniciarSesion, Present, maxSeconds));
 	}
 	
 	public void logoffLogin(String userConnect, String userPassword) throws Exception {
@@ -105,14 +105,14 @@ public class SecMenusUserStpV {
 	
 	@Step (
 		description="Identificarse con los datos del registro (#{userConnect})", 
-        expected="La nueva identificación es correcta")
-    public void identification(String userConnect, String userPassword) throws Exception {
-        PageIdentificacion.iniciarSesion(userConnect, userPassword, channel, app, driver);
-        checkIsVisibleLinkCerrarSesion();
+		expected="La nueva identificación es correcta")
+	public void identification(String userConnect, String userPassword) throws Exception {
+		PageIdentificacion.iniciarSesion(userConnect, userPassword, channel, app, driver);
+		checkIsVisibleLinkCerrarSesion();
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.SEO,  
 				GenericCheck.Analitica)).checks(driver);
-    }
+	}
 	
 	@Validation (
 		description="Aparece el link superior de \"Cerrar Sesión\" (estamos loginados)",
@@ -124,25 +124,25 @@ public class SecMenusUserStpV {
 		return (userMenus.isMenuInStateUntil(UserMenu.cerrarSesion, Present, 1));
 	}
 
-    @Step (
-    	description="Seleccionar el link \"Mi cuenta\"", 
-        expected="Aparece la página de \"Mi cuenta\"")
+	@Step (
+		description="Seleccionar el link \"Mi cuenta\"", 
+		expected="Aparece la página de \"Mi cuenta\"")
 	public void clickMenuMiCuenta() {
-        userMenus.clickMenuAndWait(UserMenu.miCuenta);	
-        PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(channel, app, driver);
-        pageMiCuentaStpV.validateIsPage(2);
+		userMenus.clickMenuAndWait(UserMenu.miCuenta);	
+		PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(channel, app, driver);
+		pageMiCuentaStpV.validateIsPage(2);
 	}
-    
-    @Step (
-    	description="Se selecciona el menú para el cambio de país", 
-        expected="Aparece el modal para el cambio de país")
-    public void cambioPaisMobil(DataCtxShop dCtxSh) throws Exception {
-        userMenus.clickMenuAndWait(UserMenu.cambioPais);
-        ModalCambioPaisStpV.validateIsVisible(5, driver); 
-        ModalCambioPaisStpV.cambioPais(dCtxSh, driver);
-    }
+	
+	@Step (
+		description="Se selecciona el menú para el cambio de país", 
+		expected="Aparece el modal para el cambio de país")
+	public void cambioPaisMobil(DataCtxShop dCtxSh) throws Exception {
+		userMenus.clickMenuAndWait(UserMenu.cambioPais);
+		ModalCambioPaisStpV.validateIsVisible(5, driver); 
+		ModalCambioPaisStpV.cambioPais(dCtxSh, driver);
+	}
 
-    private final static String TagPoints = "@TagPoints";
+	private final static String TagPoints = "@TagPoints";
 	@Step (
 		description=
 			"Seleccionar el link \"Mango Likes You\"<br>" + 
@@ -196,8 +196,8 @@ public class SecMenusUserStpV {
 	}
 	
 	@Validation
-    public ChecksTM checkLoyaltyPoints(int initPoints, int donatedPoints, int finalPoints) 
-    throws Exception {
+	public ChecksTM checkLoyaltyPoints(int initPoints, int donatedPoints, int finalPoints) 
+	throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
  		int loyaltyPointsExpected = initPoints - donatedPoints;
  		
@@ -218,19 +218,19 @@ public class SecMenusUserStpV {
 		userMenus.hoverIconForShowUserMenuDesktopShop();
 	}
 	
-    public static class ChecksResultWithNumberPoints extends ChecksTM {
-    	int numberPoints ;
-    	private ChecksResultWithNumberPoints() {
-    		super();
-    	}
-    	public static ChecksResultWithNumberPoints getNew() {
-    		return (new ChecksResultWithNumberPoints());
-    	}
-    	public int getNumberPoints() {
-    		return this.numberPoints;
-    	}
-    	public void setNumberPoints(int numberPoints) {
-    		this.numberPoints = numberPoints;
-    	}
-    }
+	public static class ChecksResultWithNumberPoints extends ChecksTM {
+		int numberPoints ;
+		private ChecksResultWithNumberPoints() {
+			super();
+		}
+		public static ChecksResultWithNumberPoints getNew() {
+			return (new ChecksResultWithNumberPoints());
+		}
+		public int getNumberPoints() {
+			return this.numberPoints;
+		}
+		public void setNumberPoints(int numberPoints) {
+			this.numberPoints = numberPoints;
+		}
+	}
 }

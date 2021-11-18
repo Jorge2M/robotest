@@ -23,16 +23,16 @@ public class PageMenusMantoStpV {
 
 	@Step (
 		description="Desde la página de menús, seleccionamos el menú \"#{subMenu}\"", 
-        expected="Aparece la página al menú seleccionado",
-        saveErrorData=SaveWhen.Never)
-    public static void goToMainMenusAndClickMenu(String subMenu, WebDriver driver) throws Exception {
-        if (!PageMenusManto.isPage(driver)) {
-        	Thread.sleep(1000);
-            SecCabecera.clickLinkVolverMenuAndWait(driver, 60);
-        }
-        String textAlert = PageMenusManto.clickMenuAndAcceptAlertIfExists(subMenu, driver);
-        checkIsPageOfSubmenu(subMenu, textAlert, driver);
-    }
+		expected="Aparece la página al menú seleccionado",
+		saveErrorData=SaveWhen.Never)
+	public static void goToMainMenusAndClickMenu(String subMenu, WebDriver driver) throws Exception {
+		if (!PageMenusManto.isPage(driver)) {
+			Thread.sleep(1000);
+			SecCabecera.clickLinkVolverMenuAndWait(driver, 60);
+		}
+		String textAlert = PageMenusManto.clickMenuAndAcceptAlertIfExists(subMenu, driver);
+		checkIsPageOfSubmenu(subMenu, textAlert, driver);
+	}
 	
 	@Validation
 	private static ChecksTM checkIsPageOfSubmenu(String subMenu, String textAlertObtained, WebDriver driver) {
@@ -46,103 +46,103 @@ public class PageMenusMantoStpV {
 			"".compareTo(textAlertObtained)==0, State.Warn);
 	 	return validations;
 	}
-    
-    /**
-     * Se accede a la opción de menú de "Bolsas" (sólo en caso de que no estemos ya en ella)
-     */
-    public static void goToBolsas(WebDriver driver) throws Exception {
-        if (!PageBolsas.isPage(driver)) {
-            goToMainMenusAndClickMenu("Bolsas", driver);
-            checkIsVisiblePageBolsas(driver); 
-        }
-    }
-    
-    @Validation (
-    	description="Aparece la página de Bolsas",
-    	level=State.Defect)
-    private static boolean checkIsVisiblePageBolsas(WebDriver driver) {
-        return (PageBolsas.isPage(driver));
-    }
-    
-    public static void goToPedidos(WebDriver driver) throws Exception {
-        //Si ya estamos en la página en cuestión no hacemos nada
-        if (!PagePedidos.isPage(driver)) {
-            goToMainMenusAndClickMenu("Pedidos", driver);
-            checkIsVisiblePagePedidos(driver);
-        }        
-    }    
-    
-    @Validation (
-    	description="Aparece la página de Pedidos",
-    	level=State.Defect)
-    private static boolean checkIsVisiblePagePedidos(WebDriver driver) {
-    	return (PagePedidos.isPage(driver));
-    }
-    
-    public static void goToConsultarTiendas(WebDriver driver) throws Exception {
-    	goToMainMenusAndClickMenu("Consultar Tiendas", driver);
-        PageConsultaTiendaStpV.validateIsPage(driver);
-    }
+	
+	/**
+	 * Se accede a la opción de menú de "Bolsas" (sólo en caso de que no estemos ya en ella)
+	 */
+	public static void goToBolsas(WebDriver driver) throws Exception {
+		if (!PageBolsas.isPage(driver)) {
+			goToMainMenusAndClickMenu("Bolsas", driver);
+			checkIsVisiblePageBolsas(driver); 
+		}
+	}
+	
+	@Validation (
+		description="Aparece la página de Bolsas",
+		level=State.Defect)
+	private static boolean checkIsVisiblePageBolsas(WebDriver driver) {
+		return (PageBolsas.isPage(driver));
+	}
+	
+	public static void goToPedidos(WebDriver driver) throws Exception {
+		//Si ya estamos en la página en cuestión no hacemos nada
+		if (!PagePedidos.isPage(driver)) {
+			goToMainMenusAndClickMenu("Pedidos", driver);
+			checkIsVisiblePagePedidos(driver);
+		}		
+	}	
+	
+	@Validation (
+		description="Aparece la página de Pedidos",
+		level=State.Defect)
+	private static boolean checkIsVisiblePagePedidos(WebDriver driver) {
+		return (PagePedidos.isPage(driver));
+	}
+	
+	public static void goToConsultarTiendas(WebDriver driver) throws Exception {
+		goToMainMenusAndClickMenu("Consultar Tiendas", driver);
+		PageConsultaTiendaStpV.validateIsPage(driver);
+	}
 
-    /**
-     * Se accede a la opción de menú de "ID/EANS" (sólo en caso de que no estemos ya en ella)
-     */
+	/**
+	 * Se accede a la opción de menú de "ID/EANS" (sólo en caso de que no estemos ya en ella)
+	 */
 	public static void goToIdEans(WebDriver driver)  throws Exception{
 		goToMainMenusAndClickMenu("EANS", driver);
-        PageConsultaIdEansStpV.validateIsPage(driver);
+		PageConsultaIdEansStpV.validateIsPage(driver);
 	}
 
 	/**
-     * Se accede a la opción de menú de "Gestionar Clientes" (sólo en caso de que no estemos ya en ella)
-     */
+	 * Se accede a la opción de menú de "Gestionar Clientes" (sólo en caso de que no estemos ya en ella)
+	 */
 	public static void goToGestionarClientes(WebDriver driver) throws Exception{
-        goToMainMenusAndClickMenu("Gestionar Clientes", driver);
-        PageGestionarClientesStpV.validateIsPage(driver);
+		goToMainMenusAndClickMenu("Gestionar Clientes", driver);
+		PageGestionarClientesStpV.validateIsPage(driver);
 	}
 	
 	/**
-     * Se accede a la opción de menú de "Gestor de Cheques" (sólo en caso de que no estemos ya en ella)
+	 * Se accede a la opción de menú de "Gestor de Cheques" (sólo en caso de que no estemos ya en ella)
 	 * @throws Exception 
-     */
+	 */
 	public static void goToGestorCheques(WebDriver driver) throws Exception {
-        goToMainMenusAndClickMenu("Gestor de Cheques", driver);
-        PageGestorChequesStpV pageGestorStpV = new PageGestorChequesStpV(driver);
-        pageGestorStpV.validateIsPage();
+		goToMainMenusAndClickMenu("Gestor de Cheques", driver);
+		PageGestorChequesStpV pageGestorStpV = new PageGestorChequesStpV(driver);
+		pageGestorStpV.validateIsPage();
 	}
 	
 	/**
-     * Se accede a la opción de menú de "Estadísticas Pedidos" (sólo en caso de que no estemos ya en ella)
+	 * Se accede a la opción de menú de "Estadísticas Pedidos" (sólo en caso de que no estemos ya en ella)
 	 * @throws Exception 
-     */
+	 */
 	public static void goToGestorEstadisticasPedido(WebDriver driver) throws Exception {
-        goToMainMenusAndClickMenu("Estadisticas Pedidos", driver);
-        PageGestorEstadisticasPedidoStpV.validateIsPage(driver);
+		goToMainMenusAndClickMenu("Estadisticas Pedidos", driver);
+		PageGestorEstadisticasPedidoStpV.validateIsPage(driver);
 	}
 	
 	
 	/**
-     * Se accede a la opción de menú de "Gestor de Saldos de TPV" (sólo en caso de que no estemos ya en ella)
+	 * Se accede a la opción de menú de "Gestor de Saldos de TPV" (sólo en caso de que no estemos ya en ella)
 	 * @throws Exception 
-     */
+	 */
 	public static void goToGestorSaldosTPV(WebDriver driver) throws Exception {
-        goToMainMenusAndClickMenu("Gestor de Saldos de TPV", driver);
-        PageGestorSaldosTPVStpV.validateIsPage(driver);
+		goToMainMenusAndClickMenu("Gestor de Saldos de TPV", driver);
+		PageGestorSaldosTPVStpV.validateIsPage(driver);
 	}
 	
 	/**
-     * Se accede a la opción de menú de "Consulta y cambio de familia" (sólo en caso de que no estemos ya en ella)
+	 * Se accede a la opción de menú de "Consulta y cambio de familia" (sólo en caso de que no estemos ya en ella)
 	 * @throws Exception 
-     */
+	 */
 	public static void goToGestorConsultaCambioFamilia(WebDriver driver) throws Exception {
-        goToMainMenusAndClickMenu("Gestor de familias", driver);
-        PageGestorConsultaCambioFamiliaStpV.validateIsPage(driver);
+		goToMainMenusAndClickMenu("Gestor de familias", driver);
+		PageGestorConsultaCambioFamiliaStpV.validateIsPage(driver);
 		
 	}
 	
 	/**
-     * Se accede a la opción de menú de "Ordenacion de prendas" (sólo en caso de que no estemos ya en ella)
+	 * Se accede a la opción de menú de "Ordenacion de prendas" (sólo en caso de que no estemos ya en ella)
 	 * @throws Exception 
-     */
+	 */
 	
 	public static void goToOrdenadorDePrendas(WebDriver driver) throws Exception {
 		goToMainMenusAndClickMenu("Ordenador de Prendas", driver);
@@ -153,7 +153,7 @@ public class PageMenusMantoStpV {
 	throws Exception {
 		ArrayList<String> listSubMenuNames = PageMenusManto.getListSubMenusName(cabeceraName, cabeceraNameNext, driver);
 		for (String subMenu : listSubMenuNames) {
-		    goToMainMenusAndClickMenu(subMenu, driver);
+			goToMainMenusAndClickMenu(subMenu, driver);
 		}
 	}
 }

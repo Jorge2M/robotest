@@ -34,15 +34,15 @@ public class PaisIdiomaSuite extends SuiteMaker {
 		public boolean testBanners() {return testBanners;}
 		public boolean testMenus() {return testMenus;}
 		public boolean testOrderAndTranslationMenus() {return testOrderAndTranslationMenus;}
-    }
+	}
 	
-    public PaisIdiomaSuite(InputParamsMango inputParams) {
-    	super(inputParams);
-    	setParameters(getParametersSuiteShop(inputParams));
-    	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), LineasBannersFactory.class);
-    	testRun.setStorerErrorStep(new ErrorStorer());
-    	addTestRun(testRun);
-    	setParallelMode(ParallelMode.METHODS);
-    	setThreadCount(3);
-    }
+	public PaisIdiomaSuite(InputParamsMango inputParams) {
+		super(inputParams);
+		setParameters(getParametersSuiteShop(inputParams));
+		TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), LineasBannersFactory.class);
+		testRun.setStorerErrorStep(new ErrorStorer());
+		addTestRun(testRun);
+		setParallelMode(ParallelMode.METHODS);
+		setThreadCount(3);
+	}
 }

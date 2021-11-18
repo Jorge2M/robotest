@@ -8,7 +8,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalSuscripcion {
 
-    private static String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
+	private static String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
 
 	public static boolean isTextoLegalRGPDPresent(WebDriver driver) {
 		return (state(Present, By.xpath(XPathLegalRGPD), driver).check());

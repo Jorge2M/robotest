@@ -20,8 +20,8 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	
 	private final ModalUserSesionShopDesktop modalUserSesionShopDesktop;
 	
-    private final static String XPathDivNavTools = "//div[@id='navTools']";
-    public final static String XPathNumArticlesBolsa = "//span[@class='icon-button-items']";
+	private final static String XPathDivNavTools = "//div[@id='navTools']";
+	public final static String XPathNumArticlesBolsa = "//span[@class='icon-button-items']";
 	
 	public enum IconoCabeceraShop_DesktopMobile implements ElementPage {
 		lupa("//span[@class[contains(.,'-search')]]/.."),
@@ -46,7 +46,7 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 			return xpath;
 		}
 	}
-    
+	
 	protected SecCabecera_MostFrequent(Channel channel, WebDriver driver) {
 		super(channel, AppEcom.shop, driver);
 		this.modalUserSesionShopDesktop = ModalUserSesionShopDesktop.getNew(driver);
@@ -60,62 +60,62 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 		return modalUserSesionShopDesktop;
 	}
 
-    @Override
-    String getXPathNumberArtIcono() {
-    	return (XPathNumArticlesBolsa);
-    }
-    
-    @Override
-    public void hoverIconoBolsa() {
-    	hoverIcono(IconoCabeceraShop_DesktopMobile.bolsa);
-    }
-    
-    @Override
-    public boolean isInStateIconoBolsa(State state, int maxSeconds) {
-    	return (isIconoInState(IconoCabeceraShop_DesktopMobile.bolsa, state, maxSeconds));
-    }
-    
-    @Override
-    public void clickIconoBolsa() {
-    	clickIconoAndWait(IconoCabeceraShop_DesktopMobile.bolsa);
-    }
+	@Override
+	String getXPathNumberArtIcono() {
+		return (XPathNumArticlesBolsa);
+	}
+	
+	@Override
+	public void hoverIconoBolsa() {
+		hoverIcono(IconoCabeceraShop_DesktopMobile.bolsa);
+	}
+	
+	@Override
+	public boolean isInStateIconoBolsa(State state, int maxSeconds) {
+		return (isIconoInState(IconoCabeceraShop_DesktopMobile.bolsa, state, maxSeconds));
+	}
+	
+	@Override
+	public void clickIconoBolsa() {
+		clickIconoAndWait(IconoCabeceraShop_DesktopMobile.bolsa);
+	}
 
-    @Override
-    public void clickIconoBolsaWhenDisp(int maxSeconds) {
-    	boolean isIconoClickable = state(Clickable, IconoCabeceraShop_DesktopMobile.bolsa.getBy()).wait(maxSeconds).check();
-        if (isIconoClickable) {
-        	clickIconoBolsa(); 
-        }
-    }
+	@Override
+	public void clickIconoBolsaWhenDisp(int maxSeconds) {
+		boolean isIconoClickable = state(Clickable, IconoCabeceraShop_DesktopMobile.bolsa.getBy()).wait(maxSeconds).check();
+		if (isIconoClickable) {
+			clickIconoBolsa(); 
+		}
+	}
 
-    public void clickIconoAndWait(IconoCabeceraShop_DesktopMobile icono) {
-    	isInStateIconoBolsa(State.Visible, 3); //Con los nuevos menús ahora tardan bastante en aparecer los iconos
-    	click(icono.getBy()).type(TypeClick.javascript).exec(); //TODO
-    }
-    
-    public boolean isIconoInState(IconoCabeceraShop_DesktopMobile icono, State state) {
-    	return isIconoInState(icono, state, 0);
-    }
-    
-    public boolean isIconoInState(IconoCabeceraShop_DesktopMobile icono, State state, int maxSeconds) {
-    	return (state(state, icono.getBy()).wait(maxSeconds).check());
-    }
-    
-    public boolean isIconoInStateUntil(IconoCabeceraShop_DesktopMobile icono, State state, int maxSeconds) {
-    	return (state(state, icono.getBy()).wait(maxSeconds).check());
-    }
-    
-    public void hoverIcono(IconoCabeceraShop_DesktopMobile icono) {
-    	isInStateIconoBolsa(State.Visible, 3); //Con los nuevos menús ahora tardan bastante en aparecer los iconos
-    	moveToElement(By.xpath(icono.getXPath() + "/*"), driver); //Workaround problema hover en Firefox
-        moveToElement(icono.getBy(), driver);
-    }
-    
-    public void focusAwayBolsa(WebDriver driver) {
-    	//The moveElement doens't works properly for hide the Bolsa-Modal
-    	driver.findElement(By.xpath(XPathDivNavTools)).click();
-    }
-    
+	public void clickIconoAndWait(IconoCabeceraShop_DesktopMobile icono) {
+		isInStateIconoBolsa(State.Visible, 3); //Con los nuevos menús ahora tardan bastante en aparecer los iconos
+		click(icono.getBy()).type(TypeClick.javascript).exec(); //TODO
+	}
+	
+	public boolean isIconoInState(IconoCabeceraShop_DesktopMobile icono, State state) {
+		return isIconoInState(icono, state, 0);
+	}
+	
+	public boolean isIconoInState(IconoCabeceraShop_DesktopMobile icono, State state, int maxSeconds) {
+		return (state(state, icono.getBy()).wait(maxSeconds).check());
+	}
+	
+	public boolean isIconoInStateUntil(IconoCabeceraShop_DesktopMobile icono, State state, int maxSeconds) {
+		return (state(state, icono.getBy()).wait(maxSeconds).check());
+	}
+	
+	public void hoverIcono(IconoCabeceraShop_DesktopMobile icono) {
+		isInStateIconoBolsa(State.Visible, 3); //Con los nuevos menús ahora tardan bastante en aparecer los iconos
+		moveToElement(By.xpath(icono.getXPath() + "/*"), driver); //Workaround problema hover en Firefox
+		moveToElement(icono.getBy(), driver);
+	}
+	
+	public void focusAwayBolsa(WebDriver driver) {
+		//The moveElement doens't works properly for hide the Bolsa-Modal
+		driver.findElement(By.xpath(XPathDivNavTools)).click();
+	}
+	
 	public void hoverIconForShowUserMenuDesktop() {
 		int i=0;
 		while (!modalUserSesionShopDesktop.isVisible() && i<3) {

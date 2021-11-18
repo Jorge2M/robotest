@@ -21,21 +21,21 @@ public class PageEpsSimulador {
 		}
 	};
 	
-    final static String XPathLogoEps = "//img[@class='paymentMethodLogo' and @src[contains(.,'eps.png')]]";
-    final static String XPathContinueButton = "//button[@value='pendingauthorised']";
-    final static String XPathSelectDelayAuthorised = "//select[@name='delaySelector']";
-    static String getXPathOptionDelayAuthorised(TypeDelay typeDelay) {
-    	return (XPathSelectDelayAuthorised + "//option[text()[contains(.,'" + typeDelay.minutes + " minute')]]");
-    }
-    
-    public static boolean isPage(WebDriver driver) {
-    	return (state(Visible, By.xpath(XPathLogoEps), driver).check());
-    }
-    
-    public static void selectDelayAuthorised(TypeDelay typeDelay, WebDriver driver) {
-    	String xpathOption = getXPathOptionDelayAuthorised(typeDelay);
-    	driver.findElement(By.xpath(xpathOption)).click();
-    }
+	final static String XPathLogoEps = "//img[@class='paymentMethodLogo' and @src[contains(.,'eps.png')]]";
+	final static String XPathContinueButton = "//button[@value='pendingauthorised']";
+	final static String XPathSelectDelayAuthorised = "//select[@name='delaySelector']";
+	static String getXPathOptionDelayAuthorised(TypeDelay typeDelay) {
+		return (XPathSelectDelayAuthorised + "//option[text()[contains(.,'" + typeDelay.minutes + " minute')]]");
+	}
+	
+	public static boolean isPage(WebDriver driver) {
+		return (state(Visible, By.xpath(XPathLogoEps), driver).check());
+	}
+	
+	public static void selectDelayAuthorised(TypeDelay typeDelay, WebDriver driver) {
+		String xpathOption = getXPathOptionDelayAuthorised(typeDelay);
+		driver.findElement(By.xpath(xpathOption)).click();
+	}
 
 	public static void clickButtonContinue(WebDriver driver) {
 		click(By.xpath(XPathContinueButton), driver).exec();

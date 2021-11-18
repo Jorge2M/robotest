@@ -37,33 +37,33 @@ public class IniciarSesion {
 		return dCtxSh;
 	}
 
-    @Test (
-        groups={"IniciarSesion", "Canal:desktop_App:shop,outlet"}, /*dependsOnMethods = {"SES002_Registro_OK"},*/ alwaysRun=true, 
-        description="Verificar inicio sesión con usuario incorrecto")
-    public void SES001_IniciarSesion_NOK() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
-        dCtxSh.userRegistered = false;
-                    
-        AccesoStpV.oneStep(dCtxSh, false, driver);
-        PageIdentificacionStpV.inicioSesionDatosKO("usuarioKeNoExiste@mango.com", "chuflapassw", dCtxSh.channel, dCtxSh.appE, driver);
-        PageIdentificacionStpV.inicioSesionDatosKO(Constantes.MAIL_PERSONAL, "chuflapassw", dCtxSh.channel, dCtxSh.appE, driver);
-        PageIdentificacionStpV.selectHasOlvidadoTuContrasenya(driver);
-        String emailQA = "eqp.ecommerce.qamango@mango.com";
-        PageRecuperaPasswdStpV.inputMailAndClickEnviar(emailQA, driver);
-    }
+	@Test (
+		groups={"IniciarSesion", "Canal:desktop_App:shop,outlet"}, /*dependsOnMethods = {"SES002_Registro_OK"},*/ alwaysRun=true, 
+		description="Verificar inicio sesión con usuario incorrecto")
+	public void SES001_IniciarSesion_NOK() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		DataCtxShop dCtxSh = getCtxShForTest();
+		dCtxSh.userRegistered = false;
+					
+		AccesoStpV.oneStep(dCtxSh, false, driver);
+		PageIdentificacionStpV.inicioSesionDatosKO("usuarioKeNoExiste@mango.com", "chuflapassw", dCtxSh.channel, dCtxSh.appE, driver);
+		PageIdentificacionStpV.inicioSesionDatosKO(Constantes.MAIL_PERSONAL, "chuflapassw", dCtxSh.channel, dCtxSh.appE, driver);
+		PageIdentificacionStpV.selectHasOlvidadoTuContrasenya(driver);
+		String emailQA = "eqp.ecommerce.qamango@mango.com";
+		PageRecuperaPasswdStpV.inputMailAndClickEnviar(emailQA, driver);
+	}
 
-    @Test (
-        groups={"IniciarSesion", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
-        description="[Usuario registrado] Verificar inicio sesión")
-    public void SES002_IniciarSesion_OK() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
-        UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
-        dCtxSh.userConnected = userShop.user;
-        dCtxSh.passwordUser = userShop.password;
-        dCtxSh.userRegistered = true;
-            
-        AccesoStpV.manySteps(dCtxSh, driver);
-    }
+	@Test (
+		groups={"IniciarSesion", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
+		description="[Usuario registrado] Verificar inicio sesión")
+	public void SES002_IniciarSesion_OK() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		DataCtxShop dCtxSh = getCtxShForTest();
+		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
+		dCtxSh.userConnected = userShop.user;
+		dCtxSh.passwordUser = userShop.password;
+		dCtxSh.userRegistered = true;
+			
+		AccesoStpV.manySteps(dCtxSh, driver);
+	}
 }

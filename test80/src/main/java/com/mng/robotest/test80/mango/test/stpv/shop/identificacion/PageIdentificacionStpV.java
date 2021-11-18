@@ -17,31 +17,31 @@ public class PageIdentificacionStpV {
 
 	@Step (
 		description="Seleccionar el link 'Iniciar Sesión' e introducir credenciales incorrectas: <b>#{usrExistente}, #{password}</b>",
-        expected="Aparece el correspondiente mensaje de error")
-    public static void inicioSesionDatosKO(String usrExistente, String password, Channel channel, AppEcom appE, WebDriver driver) 
-    throws Exception {
-        PageIdentificacion.iniciarSesion(usrExistente, password, channel, appE, driver);
-        checkTextoCredencialesKO(driver);
+		expected="Aparece el correspondiente mensaje de error")
+	public static void inicioSesionDatosKO(String usrExistente, String password, Channel channel, AppEcom appE, WebDriver driver) 
+	throws Exception {
+		PageIdentificacion.iniciarSesion(usrExistente, password, channel, appE, driver);
+		checkTextoCredencialesKO(driver);
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.SEO, 
-				GenericCheck.Analitica)).checks(driver);    
-    }
+				GenericCheck.Analitica)).checks(driver);	
+	}
 	
 	@Validation (
 		description="Aparece el texto \"#{PageIdentificacion.getLiteralAvisiCredencialesKO()}\"",
 		level=State.Defect)
 	private static boolean checkTextoCredencialesKO(WebDriver driver) {
-        return (PageIdentificacion.isErrorEmailoPasswordKO(driver));
+		return (PageIdentificacion.isErrorEmailoPasswordKO(driver));
 	}
-    
+	
 	@Step (
 		description="Seleccionar el link \"¿Has olvidado tu contraseña?\"", 
-        expected="Aparece la página de cambio de contraseña")
-    public static void selectHasOlvidadoTuContrasenya(WebDriver driver) {
-        PageIdentificacion.clickHasOlvidadoContrasenya(driver); 
-        PageRecuperaPasswdStpV.isPage(driver); 
+		expected="Aparece la página de cambio de contraseña")
+	public static void selectHasOlvidadoTuContrasenya(WebDriver driver) {
+		PageIdentificacion.clickHasOlvidadoContrasenya(driver); 
+		PageRecuperaPasswdStpV.isPage(driver); 
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.SEO,  
 				GenericCheck.Analitica)).checks(driver);
-    }
+	}
 }

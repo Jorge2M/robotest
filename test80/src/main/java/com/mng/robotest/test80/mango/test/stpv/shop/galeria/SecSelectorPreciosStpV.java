@@ -66,7 +66,7 @@ public class SecSelectorPreciosStpV {
 		}
 		
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagMinimo, String.valueOf(dataFilter.minimoFinal));
-		TestMaker.getCurrentStepInExecution().replaceInDescription(tagMaximo, String.valueOf(dataFilter.maximoFinal));    
+		TestMaker.getCurrentStepInExecution().replaceInDescription(tagMaximo, String.valueOf(dataFilter.maximoFinal));	
 		checkResultSelectFiltro(dataFilter);
 
 		GenericChecks.from(Arrays.asList(
@@ -93,9 +93,9 @@ public class SecSelectorPreciosStpV {
 }
 
 class DataFilterPrecios {
-    public int minimoOrig = 0;
-    public int maximoOrig = 0;
-    public int minimoFinal = 0;
-    public int maximoFinal = 0;
-    public DataFilterPrecios() {}
+	public int minimoOrig = 0;
+	public int maximoOrig = 0;
+	public int minimoFinal = 0;
+	public int maximoFinal = 0;
+	public DataFilterPrecios() {}
 }

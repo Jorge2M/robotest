@@ -17,7 +17,7 @@ public class PageRegistroAddressData {
 	static String XPathTitleAddressSteps = "//div[@class[contains(.,'addressData')]]";
 	static String XPathDesplegablePaises = "//select[@id[contains(.,'pais')]]";
 	static String XPathButtonFinalizar = "//div[@class[contains(.,'registerStepsModal')]]//div[@class='submitContent']//input[@type='submit']";
-	static String XPathErrorInputDireccion = "//div[@id[contains(.,'cfDir1ErrorLabel')]]";    
+	static String XPathErrorInputDireccion = "//div[@id[contains(.,'cfDir1ErrorLabel')]]";	
 
 	public static String getXPath_optionPaisSelected(String codigoPais) {
 		return ("//select[@id[contains(.,'pais')]]/option[@selected='selected' and @value='" + codigoPais + "']");

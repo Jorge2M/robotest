@@ -115,7 +115,7 @@ public class SecPreciosArticulo extends PageObjTM {
 		return (state(Present, articulo).by(byPrecioRebajado).check());
 	}
 
-    public List<WebElement> getListaPreciosPrendas(List<WebElement> listArticles) throws Exception {
+	public List<WebElement> getListaPreciosPrendas(List<WebElement> listArticles) throws Exception {
 		List<WebElement> listPrecios = new ArrayList<WebElement>();
 		waitForPageLoaded(driver);
 		for (WebElement articulo : listArticles) {

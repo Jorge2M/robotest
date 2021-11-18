@@ -24,21 +24,21 @@ public class PageSelTdaMantoStpV {
 	final static String TagTienda = "@TagTienda";
 	@Step (
 		description="Seleccionamos el entorno \"" + TagTienda + "\"", 
-        expected="Aparece la página de Menús",
-        saveErrorData=SaveWhen.Never)
-    public static void selectTienda(String codigoAlmacen, String codigoPais, AppEcom appE, WebDriver driver) 
-    throws Exception {
-        TiendaManto tienda = TiendaManto.getTienda(codigoAlmacen, codigoPais, appE);
-        TestMaker.getCurrentStepInExecution().replaceInDescription(TagTienda, tienda.name());
-        
-        if (!PageSelTda.isPage(driver)) {
-            SecCabecera.clickButtonSelTienda(driver);
-        }
-        
-        PageSelTda.selectTienda(tienda, driver);
-        checkIsPageMenusManto(driver);
-    }
-    
+		expected="Aparece la página de Menús",
+		saveErrorData=SaveWhen.Never)
+	public static void selectTienda(String codigoAlmacen, String codigoPais, AppEcom appE, WebDriver driver) 
+	throws Exception {
+		TiendaManto tienda = TiendaManto.getTienda(codigoAlmacen, codigoPais, appE);
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TagTienda, tienda.name());
+		
+		if (!PageSelTda.isPage(driver)) {
+			SecCabecera.clickButtonSelTienda(driver);
+		}
+		
+		PageSelTda.selectTienda(tienda, driver);
+		checkIsPageMenusManto(driver);
+	}
+	
 	@Validation(
 		description="Aparece la página del Menú principal de Manto donde se encuentran todas las opciones de éste",
 		level=State.Defect)
@@ -46,15 +46,15 @@ public class PageSelTdaMantoStpV {
 		return (PageMenusManto.isPage(driver));
 	}
 
-//    /**
-//     * Accede a la tienda asociada al almacén (sólo si no estamos en ella ya)
-//     */
-//    public static void goToTiendaPais(String codigoAlmacen, String codigoPais,  AppEcom appE, WebDriver driver) 
-//    throws Exception {
-//        String tiendaActual = SecCabecera.getLitTienda(driver);
-//        TiendaManto tiendaToGo = TiendaManto.getTienda(codigoAlmacen, codigoPais, appE);
-//        if (!tiendaActual.contains(tiendaToGo.litPantManto)) {
-//            selectTienda(codigoAlmacen, codigoPais, appE, driver);
-//        }
-//    }
+//	/**
+//	 * Accede a la tienda asociada al almacén (sólo si no estamos en ella ya)
+//	 */
+//	public static void goToTiendaPais(String codigoAlmacen, String codigoPais,  AppEcom appE, WebDriver driver) 
+//	throws Exception {
+//		String tiendaActual = SecCabecera.getLitTienda(driver);
+//		TiendaManto tiendaToGo = TiendaManto.getTienda(codigoAlmacen, codigoPais, appE);
+//		if (!tiendaActual.contains(tiendaToGo.litPantManto)) {
+//			selectTienda(codigoAlmacen, codigoPais, appE, driver);
+//		}
+//	}
 }

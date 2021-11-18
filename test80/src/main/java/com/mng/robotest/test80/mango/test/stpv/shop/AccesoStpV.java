@@ -148,7 +148,7 @@ public class AccesoStpV {
 	 */
 	public static void manySteps(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		if (dCtxSh.appE==AppEcom.votf && !dCtxSh.userRegistered) { //En VOTF no tiene sentido identificarte con las credenciales del cliente
-			AccesoStpV.accesoVOTFtoHOME(dCtxSh, driver);                    
+			AccesoStpV.accesoVOTFtoHOME(dCtxSh, driver);					
 		} else {
 			new PagePrehomeStpV(dCtxSh, driver).seleccionPaisIdiomaAndEnter(false);
 			if (dCtxSh.userRegistered) {
@@ -227,154 +227,154 @@ public class AccesoStpV {
 		//No hacemos nada, simplemente es un paso informativo
 	}
 
-    /**
-     * Acceso vía URL de un país (no asociado a la IP del usuario)
-     * @param paisAccesoNoIP un país que no es el asociado a la IP del usuario
-     * @param paisAccesoPrevio en caso de ser <> null indica el país por cuya URL se ha accedido previamente
-     * @param paisPrevConf en caso de ser <> null indica el país que previamente se ha confirmado vía la opción de cambio existente en el modal
-     * @param vecesPaisConfPrev indica las veces que "paisConfirmado" se ha confirmado previamente 
-     * @param urlBaseTest URL base del test
-     * @param listPaisAsocIP lista de posibles países asociados a la IP del usuario (actualmente España, Irlanda o USA)
-     * @return el país asociado a la IP (al que te proponen cambiar en el modal)
-     */
-    final static String tagUrlAccesoPaisNoIp = "@TagUrlAccesoPaisNoIp";
-    final static String tagLiteralIdiomaOrigen = "@TagLiteralIdiomaOrigen";
-    @Step (
-    	description="Acceder a la shop vía la URL <b>" + tagUrlAccesoPaisNoIp + "</b> (#{paisAccesoNoIP.getNombre_pais()} / " + tagLiteralIdiomaOrigen + ")", 
-        expected="Aparece un modal solicitando confirmación del país")
-    public static Pais accesoConURLPaisNoIP(String urlBaseTest, Pais paisAccesoNoIP, Pais paisAccesoPrevio, Pais paisPrevConf, 
-    										int vecesPaisConfPrev, List<Pais> listPaisAsocIP, WebDriver driver) throws Exception {
-        Pais paisAsocIP = null;
-        String urlAccesoPaisNoIp = paisAccesoNoIP.getUrlPaisEstandar(urlBaseTest);
-        IdiomaPais idiomaOrigen = paisAccesoNoIP.getListIdiomas().get(0);
-        TestMaker.getCurrentStepInExecution().replaceInDescription(tagUrlAccesoPaisNoIp, urlAccesoPaisNoIp);
-        TestMaker.getCurrentStepInExecution().replaceInDescription(tagLiteralIdiomaOrigen, idiomaOrigen.getLiteral());
-        
-        driver.get(urlAccesoPaisNoIp);
-        SeleniumUtils.waitForPageLoaded(driver);
-        if (vecesPaisConfPrev < 2) {
-            //Si se ha confirmado el país < 2 veces debería aparecer el modal del cambio de país
-        	ResultValWithPais resultVal = validacAccesoSiApareceModal(urlBaseTest, paisAccesoNoIP, paisAccesoPrevio, paisPrevConf, listPaisAsocIP, driver);
-            paisAsocIP = resultVal.getPais();
-        } else {
-            //Si el país se ha confirmado > 1 vez no debería aparecer el modal de cambio de país
-            validacAccesoNoApareceModal(urlBaseTest, paisPrevConf, driver);
-        }
-            
-        return paisAsocIP;
-    }
-        
-    /**
-     * Valicaciones correspondientes al caso en que después del acceso SÍ aparece el modal de confirmacióin del país
-     * @return el país asociado a la IP (al que te proponen cambiar en el modal)
-     */
-    @Validation 
-    private static ResultValWithPais validacAccesoSiApareceModal(String urlBaseTest, Pais paisAccesoNoIP, Pais paisAccesoPrevio, Pais paisConfirmado, 
-    															 List<Pais> listPaisAsocIP, WebDriver driver) throws Exception {
-    	ResultValWithPais validations = ResultValWithPais.getNew();
-    	validations.add(
-    		"Aparece un modal solicitando confirmación de país",
-    		ModalCambioPais.isVisibleModalUntil(driver, 0), State.Defect);
-    	
-        if (paisAccesoPrevio==null) {
-        	validations.add(
-        		"En el modal <b>No</b> aparece un link con la opción de confirmar el país " + paisAccesoNoIP.getNombre_pais() + 
-        		" (" + paisAccesoNoIP.getCodigo_pais() + ")",
-        		!ModalCambioPais.isLinkToConfirmPais(driver, paisAccesoNoIP.getNombre_pais()), State.Defect);
-        } else {
-        	if (paisConfirmado==null) {
-	        	validations.add(
-	        		"En el modal <b>Sí</b> aparece un link con la opción de confirmar el acceso al país por el que previsamente se ha accedido vía URL: " + 
-	        		paisAccesoPrevio.getNombre_pais() + " (" + paisAccesoPrevio.getCodigo_pais() + ")",
-	        		ModalCambioPais.isLinkToConfirmPais(driver, paisAccesoPrevio.getUrlPaisEstandar(urlBaseTest)), State.Defect);
-        	} else {
-	        	validations.add(
-	        		"En el modal <b>No</b> aparece un link con la opción de confirmar el acceso al país por el que previsamente se ha accedido vía URL: " + 
-	        		paisAccesoPrevio.getNombre_pais() + " (" + paisAccesoPrevio.getCodigo_pais() + ")",
-	        		!ModalCambioPais.isLinkToConfirmPais(driver, paisAccesoPrevio.getNombre_pais()), State.Defect);
-        	}
-        }
-    	
-        String paisesAsocIP = "";
-        Iterator<Pais> it = listPaisAsocIP.iterator();
-        while (it.hasNext()) {
-            paisesAsocIP = paisesAsocIP + ", " + it.next().getNombre_pais();
-        }
-        Pais paisButtonAssociated = ModalCambioPais.getPaisOfButtonForChangePais(listPaisAsocIP, urlBaseTest, driver);
-    	validations.add(
-    		"En el modal aparece un botón con la opción de cambiar a uno de los posibles países asociados a la IP (" + paisesAsocIP + ")",
-    		paisButtonAssociated!=null, State.Defect);
-    	
-    	validations.setPais(paisButtonAssociated);
-    	return (validations);
-    }
-    
-    /**
-     * Valicaciones correspondientes al caso en que después del acceso NO aparece el modal de confirmacióin del país
-     * @throws Exception
-     */
-    @Validation
-    private static ChecksTM validacAccesoNoApareceModal(String urlBaseTest, Pais paisPrevConf, WebDriver driver) 
-    throws Exception {
-    	ResultValWithPais validations = ResultValWithPais.getNew();
-    	validations.add(
-    		"No aparece un modal solicitando confirmación de país",
-    		!ModalCambioPais.isVisibleModalUntil(driver, 0), State.Defect);
-    	
-        String nombrePaisPrevConf = paisPrevConf.getNombre_pais();
-        String hrefPaisPrevConf = paisPrevConf.getUrlPaisEstandar(urlBaseTest);
-    	validations.add(
-    		"Se ha redirigido a la URL del país confirmado previamente <b>" + nombrePaisPrevConf + "</b> (" + hrefPaisPrevConf + ")",
-    		(driver.getCurrentUrl().toLowerCase().contains(hrefPaisPrevConf.toLowerCase())), State.Defect);
-    	return validations;
-    }
-    
-    final static String tagPaisBotonCambio = "@TagPaisBotonCambio";
-    final static String tagHrefBotonCambio = "@TagHrefBotonCambio";
-    @Step (
-    	description="Confirmamos la propuesta de país del modal <b>" + tagPaisBotonCambio + "</b>", 
-        expected="Se redirige a la URL " + tagHrefBotonCambio)
-    public static void selectConfirmPaisModal(WebDriver driver) {
-        String paisBotonCambio = ModalCambioPais.getTextPaisButtonChagePais(driver);
-        String hrefBotonCambioPais = ModalCambioPais.getHRefPaisButtonChagePais(driver);
-        TestMaker.getCurrentStepInExecution().replaceInDescription(tagPaisBotonCambio, paisBotonCambio);
-        TestMaker.getCurrentStepInExecution().replaceInExpected(tagHrefBotonCambio, hrefBotonCambioPais);
-        
-        ModalCambioPais.clickButtonChangePais(driver);
-        checkIsDoneRedirectToCountry(paisBotonCambio, hrefBotonCambioPais, driver);
-    }
-    
-    @Validation (
-    	description="Se redirige a la URL del país #{paisBotonCambio} (#{hrefBotonCambioPais})",
-    	level=State.Defect)
-    private static boolean checkIsDoneRedirectToCountry(@SuppressWarnings("unused") String paisBotonCambio, 
-    													String hrefBotonCambioPais, WebDriver driver) {
-    	return (driver.getCurrentUrl().toLowerCase().contains(hrefBotonCambioPais.toLowerCase()));
-    }
-    
-    @Step (
-    	description="Cargar la URL inicial", 
-        expected="La URL se carga correctamente")
-    public static void goToInitialURL(WebDriver driver) {
+	/**
+	 * Acceso vía URL de un país (no asociado a la IP del usuario)
+	 * @param paisAccesoNoIP un país que no es el asociado a la IP del usuario
+	 * @param paisAccesoPrevio en caso de ser <> null indica el país por cuya URL se ha accedido previamente
+	 * @param paisPrevConf en caso de ser <> null indica el país que previamente se ha confirmado vía la opción de cambio existente en el modal
+	 * @param vecesPaisConfPrev indica las veces que "paisConfirmado" se ha confirmado previamente 
+	 * @param urlBaseTest URL base del test
+	 * @param listPaisAsocIP lista de posibles países asociados a la IP del usuario (actualmente España, Irlanda o USA)
+	 * @return el país asociado a la IP (al que te proponen cambiar en el modal)
+	 */
+	final static String tagUrlAccesoPaisNoIp = "@TagUrlAccesoPaisNoIp";
+	final static String tagLiteralIdiomaOrigen = "@TagLiteralIdiomaOrigen";
+	@Step (
+		description="Acceder a la shop vía la URL <b>" + tagUrlAccesoPaisNoIp + "</b> (#{paisAccesoNoIP.getNombre_pais()} / " + tagLiteralIdiomaOrigen + ")", 
+		expected="Aparece un modal solicitando confirmación del país")
+	public static Pais accesoConURLPaisNoIP(String urlBaseTest, Pais paisAccesoNoIP, Pais paisAccesoPrevio, Pais paisPrevConf, 
+											int vecesPaisConfPrev, List<Pais> listPaisAsocIP, WebDriver driver) throws Exception {
+		Pais paisAsocIP = null;
+		String urlAccesoPaisNoIp = paisAccesoNoIP.getUrlPaisEstandar(urlBaseTest);
+		IdiomaPais idiomaOrigen = paisAccesoNoIP.getListIdiomas().get(0);
+		TestMaker.getCurrentStepInExecution().replaceInDescription(tagUrlAccesoPaisNoIp, urlAccesoPaisNoIp);
+		TestMaker.getCurrentStepInExecution().replaceInDescription(tagLiteralIdiomaOrigen, idiomaOrigen.getLiteral());
+		
+		driver.get(urlAccesoPaisNoIp);
+		SeleniumUtils.waitForPageLoaded(driver);
+		if (vecesPaisConfPrev < 2) {
+			//Si se ha confirmado el país < 2 veces debería aparecer el modal del cambio de país
+			ResultValWithPais resultVal = validacAccesoSiApareceModal(urlBaseTest, paisAccesoNoIP, paisAccesoPrevio, paisPrevConf, listPaisAsocIP, driver);
+			paisAsocIP = resultVal.getPais();
+		} else {
+			//Si el país se ha confirmado > 1 vez no debería aparecer el modal de cambio de país
+			validacAccesoNoApareceModal(urlBaseTest, paisPrevConf, driver);
+		}
+			
+		return paisAsocIP;
+	}
+		
+	/**
+	 * Valicaciones correspondientes al caso en que después del acceso SÍ aparece el modal de confirmacióin del país
+	 * @return el país asociado a la IP (al que te proponen cambiar en el modal)
+	 */
+	@Validation 
+	private static ResultValWithPais validacAccesoSiApareceModal(String urlBaseTest, Pais paisAccesoNoIP, Pais paisAccesoPrevio, Pais paisConfirmado, 
+																 List<Pais> listPaisAsocIP, WebDriver driver) throws Exception {
+		ResultValWithPais validations = ResultValWithPais.getNew();
+		validations.add(
+			"Aparece un modal solicitando confirmación de país",
+			ModalCambioPais.isVisibleModalUntil(driver, 0), State.Defect);
+		
+		if (paisAccesoPrevio==null) {
+			validations.add(
+				"En el modal <b>No</b> aparece un link con la opción de confirmar el país " + paisAccesoNoIP.getNombre_pais() + 
+				" (" + paisAccesoNoIP.getCodigo_pais() + ")",
+				!ModalCambioPais.isLinkToConfirmPais(driver, paisAccesoNoIP.getNombre_pais()), State.Defect);
+		} else {
+			if (paisConfirmado==null) {
+				validations.add(
+					"En el modal <b>Sí</b> aparece un link con la opción de confirmar el acceso al país por el que previsamente se ha accedido vía URL: " + 
+					paisAccesoPrevio.getNombre_pais() + " (" + paisAccesoPrevio.getCodigo_pais() + ")",
+					ModalCambioPais.isLinkToConfirmPais(driver, paisAccesoPrevio.getUrlPaisEstandar(urlBaseTest)), State.Defect);
+			} else {
+				validations.add(
+					"En el modal <b>No</b> aparece un link con la opción de confirmar el acceso al país por el que previsamente se ha accedido vía URL: " + 
+					paisAccesoPrevio.getNombre_pais() + " (" + paisAccesoPrevio.getCodigo_pais() + ")",
+					!ModalCambioPais.isLinkToConfirmPais(driver, paisAccesoPrevio.getNombre_pais()), State.Defect);
+			}
+		}
+		
+		String paisesAsocIP = "";
+		Iterator<Pais> it = listPaisAsocIP.iterator();
+		while (it.hasNext()) {
+			paisesAsocIP = paisesAsocIP + ", " + it.next().getNombre_pais();
+		}
+		Pais paisButtonAssociated = ModalCambioPais.getPaisOfButtonForChangePais(listPaisAsocIP, urlBaseTest, driver);
+		validations.add(
+			"En el modal aparece un botón con la opción de cambiar a uno de los posibles países asociados a la IP (" + paisesAsocIP + ")",
+			paisButtonAssociated!=null, State.Defect);
+		
+		validations.setPais(paisButtonAssociated);
+		return (validations);
+	}
+	
+	/**
+	 * Valicaciones correspondientes al caso en que después del acceso NO aparece el modal de confirmacióin del país
+	 * @throws Exception
+	 */
+	@Validation
+	private static ChecksTM validacAccesoNoApareceModal(String urlBaseTest, Pais paisPrevConf, WebDriver driver) 
+	throws Exception {
+		ResultValWithPais validations = ResultValWithPais.getNew();
+		validations.add(
+			"No aparece un modal solicitando confirmación de país",
+			!ModalCambioPais.isVisibleModalUntil(driver, 0), State.Defect);
+		
+		String nombrePaisPrevConf = paisPrevConf.getNombre_pais();
+		String hrefPaisPrevConf = paisPrevConf.getUrlPaisEstandar(urlBaseTest);
+		validations.add(
+			"Se ha redirigido a la URL del país confirmado previamente <b>" + nombrePaisPrevConf + "</b> (" + hrefPaisPrevConf + ")",
+			(driver.getCurrentUrl().toLowerCase().contains(hrefPaisPrevConf.toLowerCase())), State.Defect);
+		return validations;
+	}
+	
+	final static String tagPaisBotonCambio = "@TagPaisBotonCambio";
+	final static String tagHrefBotonCambio = "@TagHrefBotonCambio";
+	@Step (
+		description="Confirmamos la propuesta de país del modal <b>" + tagPaisBotonCambio + "</b>", 
+		expected="Se redirige a la URL " + tagHrefBotonCambio)
+	public static void selectConfirmPaisModal(WebDriver driver) {
+		String paisBotonCambio = ModalCambioPais.getTextPaisButtonChagePais(driver);
+		String hrefBotonCambioPais = ModalCambioPais.getHRefPaisButtonChagePais(driver);
+		TestMaker.getCurrentStepInExecution().replaceInDescription(tagPaisBotonCambio, paisBotonCambio);
+		TestMaker.getCurrentStepInExecution().replaceInExpected(tagHrefBotonCambio, hrefBotonCambioPais);
+		
+		ModalCambioPais.clickButtonChangePais(driver);
+		checkIsDoneRedirectToCountry(paisBotonCambio, hrefBotonCambioPais, driver);
+	}
+	
+	@Validation (
+		description="Se redirige a la URL del país #{paisBotonCambio} (#{hrefBotonCambioPais})",
+		level=State.Defect)
+	private static boolean checkIsDoneRedirectToCountry(@SuppressWarnings("unused") String paisBotonCambio, 
+														String hrefBotonCambioPais, WebDriver driver) {
+		return (driver.getCurrentUrl().toLowerCase().contains(hrefBotonCambioPais.toLowerCase()));
+	}
+	
+	@Step (
+		description="Cargar la URL inicial", 
+		expected="La URL se carga correctamente")
+	public static void goToInitialURL(WebDriver driver) {
 		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
-    	driver.get(inputParamsSuite.getUrlBase());
-    }
+		driver.get(inputParamsSuite.getUrlBase());
+	}
 
-    public static class ResultValWithPais extends ChecksTM {
-    	Pais pais;
-    	private ResultValWithPais() {
-    		super();
-    	}
-    	public static ResultValWithPais getNew() {
-    		return (new ResultValWithPais());
-    	}
-    	
-    	public Pais getPais() {
-    		return this.pais;
-    	}
-    	
-    	public void setPais(Pais pais) {
-    		this.pais = pais;
-    	}
-    }
+	public static class ResultValWithPais extends ChecksTM {
+		Pais pais;
+		private ResultValWithPais() {
+			super();
+		}
+		public static ResultValWithPais getNew() {
+			return (new ResultValWithPais());
+		}
+		
+		public Pais getPais() {
+			return this.pais;
+		}
+		
+		public void setPais(Pais pais) {
+			this.pais = pais;
+		}
+	}
 }

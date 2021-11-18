@@ -10,21 +10,21 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.trustpay.PageTrustp
 
 public class PagoTrustpay extends PagoStpV {
 
-    public PagoTrustpay(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
-        super(dCtxSh, dCtxPago, driver);
-        super.isAvailableExecPay = true;
-    }
-    
-    @Override
-    public void testPagoFromCheckout(boolean execPay) throws Exception {
-        pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-        dCtxPago = checkoutFlow.checkout(From.MetodosPago);
-        String importeTotal = this.dCtxPago.getDataPedido().getImporteTotal();
-        PageTrustpaySelectBankStpV.validateIsPage(dCtxPago.getDataPedido().getPago().getNombre(dCtxSh.channel, dCtxSh.appE), importeTotal, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
-        
-        if (execPay) {
-            PageTrustpaySelectBankStpV.selectTestBankAndPay(importeTotal, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
-            PageTrustPayResultStpV.clickButtonContinue(driver);
-        }
-    }    
+	public PagoTrustpay(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
+		super(dCtxSh, dCtxPago, driver);
+		super.isAvailableExecPay = true;
+	}
+	
+	@Override
+	public void testPagoFromCheckout(boolean execPay) throws Exception {
+		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
+		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		String importeTotal = this.dCtxPago.getDataPedido().getImporteTotal();
+		PageTrustpaySelectBankStpV.validateIsPage(dCtxPago.getDataPedido().getPago().getNombre(dCtxSh.channel, dCtxSh.appE), importeTotal, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
+		
+		if (execPay) {
+			PageTrustpaySelectBankStpV.selectTestBankAndPay(importeTotal, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
+			PageTrustPayResultStpV.clickButtonContinue(driver);
+		}
+	}	
 }

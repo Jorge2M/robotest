@@ -16,41 +16,41 @@ public class PagoMercadopago extends PagoStpV {
 
 	private final static String codigoSeguridad = "123";
 	
-    public PagoMercadopago(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
-        super(dCtxSh, dCtxPago, driver);
-        super.isAvailableExecPay = true;
-    }
-    
-    @Override
-    public void testPagoFromCheckout(boolean execPay) throws Exception {
-        DataPedido dataPedido = this.dCtxPago.getDataPedido();
-        pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-        dCtxPago = checkoutFlow.checkout(From.MetodosPago);
-        int maxSeconds = 5;
-        PageMercpago1rstStpV.validateIsPageUntil(maxSeconds, driver);
-        PageMercpago1rstStpV.clickLinkRegistration(driver);
-        if (execPay) {
-            PageMercpagoLoginStpV.loginMercadopago(dataPedido.getPago(), dCtxSh.channel, driver);
-            PageMercpagoDatosTrjStpV pageMercpagoDatosTrjStpV = PageMercpagoDatosTrjStpV.newInstance(dCtxSh.channel, driver);
-            if (pageMercpagoDatosTrjStpV.getPageObject().getTypeInput()==TypePant.inputDataTrjNew) {
-            	fluxFromInputDataTrj(dataPedido, pageMercpagoDatosTrjStpV);
-            }
-            else {
-            	pageMercpagoDatosTrjStpV.inputCvcAndPay(codigoSeguridad);
-            }
-            
-            dataPedido.setCodtipopago("D");
-        }
-    }
-    
-    private void fluxFromInputDataTrj(DataPedido dataPedido, PageMercpagoDatosTrjStpV pageMercpagoDatosTrjStpV) 
-    throws Exception {
-        pageMercpagoDatosTrjStpV.inputNumTarjeta(dataPedido.getPago().getNumtarj());
-        PageMercpagoDatosTrjStpV.InputData inputData = new PageMercpagoDatosTrjStpV.InputData();
-        inputData.setMesVencimiento(dataPedido.getPago().getMescad());
-        inputData.setAnyVencimiento(dataPedido.getPago().getAnycad());
-        inputData.setCodigoSeguridad(codigoSeguridad);
-        pageMercpagoDatosTrjStpV.inputDataAndPay(inputData);
-        PageMercpagoConfStpV.clickPagar(dCtxSh.channel, driver);
-    }
+	public PagoMercadopago(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
+		super(dCtxSh, dCtxPago, driver);
+		super.isAvailableExecPay = true;
+	}
+	
+	@Override
+	public void testPagoFromCheckout(boolean execPay) throws Exception {
+		DataPedido dataPedido = this.dCtxPago.getDataPedido();
+		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
+		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		int maxSeconds = 5;
+		PageMercpago1rstStpV.validateIsPageUntil(maxSeconds, driver);
+		PageMercpago1rstStpV.clickLinkRegistration(driver);
+		if (execPay) {
+			PageMercpagoLoginStpV.loginMercadopago(dataPedido.getPago(), dCtxSh.channel, driver);
+			PageMercpagoDatosTrjStpV pageMercpagoDatosTrjStpV = PageMercpagoDatosTrjStpV.newInstance(dCtxSh.channel, driver);
+			if (pageMercpagoDatosTrjStpV.getPageObject().getTypeInput()==TypePant.inputDataTrjNew) {
+				fluxFromInputDataTrj(dataPedido, pageMercpagoDatosTrjStpV);
+			}
+			else {
+				pageMercpagoDatosTrjStpV.inputCvcAndPay(codigoSeguridad);
+			}
+			
+			dataPedido.setCodtipopago("D");
+		}
+	}
+	
+	private void fluxFromInputDataTrj(DataPedido dataPedido, PageMercpagoDatosTrjStpV pageMercpagoDatosTrjStpV) 
+	throws Exception {
+		pageMercpagoDatosTrjStpV.inputNumTarjeta(dataPedido.getPago().getNumtarj());
+		PageMercpagoDatosTrjStpV.InputData inputData = new PageMercpagoDatosTrjStpV.InputData();
+		inputData.setMesVencimiento(dataPedido.getPago().getMescad());
+		inputData.setAnyVencimiento(dataPedido.getPago().getAnycad());
+		inputData.setCodigoSeguridad(codigoSeguridad);
+		pageMercpagoDatosTrjStpV.inputDataAndPay(inputData);
+		PageMercpagoConfStpV.clickPagar(dCtxSh.channel, driver);
+	}
 }

@@ -101,179 +101,179 @@ public class FichaProducto {
 		pageFichaStpv.selectAnadirALaBolsaTallaPrevSiSelected(articulo, dCtxSh);
 	}
 
-    @SuppressWarnings("static-access")
-    @Test (
-        groups={"FichaProducto", "Canal:all_App:all"}, alwaysRun=true, 
-        description="[Usuario no registrado] Se testean las features secundarias de una ficha con origen el buscador: guía de tallas, carrusel imágenes, imagen central, panel de opciones, total look")
-    public void FIC002_FichaFromSearch_SecondaryFeatures_NoReg() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-    	DataCtxShop dCtxSh = getCtxShForTest(españa, castellano);
+	@SuppressWarnings("static-access")
+	@Test (
+		groups={"FichaProducto", "Canal:all_App:all"}, alwaysRun=true, 
+		description="[Usuario no registrado] Se testean las features secundarias de una ficha con origen el buscador: guía de tallas, carrusel imágenes, imagen central, panel de opciones, total look")
+	public void FIC002_FichaFromSearch_SecondaryFeatures_NoReg() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		DataCtxShop dCtxSh = getCtxShForTest(españa, castellano);
 
-        AccesoStpV.oneStep(dCtxSh, false, driver);
+		AccesoStpV.oneStep(dCtxSh, false, driver);
 		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
-        Garment articleWithTotalLook = getterProducts.getOneFiltered(FilterType.TotalLook);
-        SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
-        secBuscadorStpV.searchArticulo(articleWithTotalLook, dCtxSh.pais);
-        
-        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
-        if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {
-        	if (dCtxSh.appE==AppEcom.outlet && dCtxSh.channel!=Channel.mobile) {
-        		pageFichaStpV.validaExistsImgsCarruselIzqFichaOld();
-        	}
-            pageFichaStpV.secProductDescOld.validateAreInStateInitial(dCtxSh.appE);
-            PageFicha pageFicha = PageFicha.newInstance(dCtxSh.channel, dCtxSh.appE, driver);
-            if (((PageFichaArtOld)pageFicha).getNumImgsCarruselIzq() > 2) {
-                pageFichaStpV.selectImgCarruselIzqFichaOld(2);
-            }
-            
-            if (dCtxSh.channel!=Channel.tablet) {
-            	pageFichaStpV.selectImagenCentralFichaOld();
-            	//if (dCtxSh.appE!=AppEcom.outlet) {
-            	if (dCtxSh.channel.isDevice()) {
-            		pageFichaStpV.closeZoomImageCentralDevice();
-            	}
-            }
-            if (TypePanel.Description.getListApps().contains(dCtxSh.appE) &&
-            	!dCtxSh.channel.isDevice()) {
-                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Description);
-            }
-            if (TypePanel.Composition.getListApps().contains(dCtxSh.appE)) {
-                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Composition);
-            }
-            if (TypePanel.Returns.getListApps().contains(dCtxSh.appE)) {
-                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Returns);
-            }
-            if (TypePanel.Shipment.getListApps().contains(dCtxSh.appE) &&
-            	!dCtxSh.channel.isDevice()) {
-                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Shipment);  
-            }
-        } else {
-            boolean isFichaAccesorio = pageFichaStpV.getFicha().isFichaAccesorio(); 
-            pageFichaStpV.secFotosNew.validaLayoutFotosNew(isFichaAccesorio, driver);
-            pageFichaStpV.secTotalLook.checkIsVisible(driver);
+		Garment articleWithTotalLook = getterProducts.getOneFiltered(FilterType.TotalLook);
+		SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
+		secBuscadorStpV.searchArticulo(articleWithTotalLook, dCtxSh.pais);
+		
+		PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
+		if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {
+			if (dCtxSh.appE==AppEcom.outlet && dCtxSh.channel!=Channel.mobile) {
+				pageFichaStpV.validaExistsImgsCarruselIzqFichaOld();
+			}
+			pageFichaStpV.secProductDescOld.validateAreInStateInitial(dCtxSh.appE);
+			PageFicha pageFicha = PageFicha.newInstance(dCtxSh.channel, dCtxSh.appE, driver);
+			if (((PageFichaArtOld)pageFicha).getNumImgsCarruselIzq() > 2) {
+				pageFichaStpV.selectImgCarruselIzqFichaOld(2);
+			}
+			
+			if (dCtxSh.channel!=Channel.tablet) {
+				pageFichaStpV.selectImagenCentralFichaOld();
+				//if (dCtxSh.appE!=AppEcom.outlet) {
+				if (dCtxSh.channel.isDevice()) {
+					pageFichaStpV.closeZoomImageCentralDevice();
+				}
+			}
+			if (TypePanel.Description.getListApps().contains(dCtxSh.appE) &&
+				!dCtxSh.channel.isDevice()) {
+				pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Description);
+			}
+			if (TypePanel.Composition.getListApps().contains(dCtxSh.appE)) {
+				pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Composition);
+			}
+			if (TypePanel.Returns.getListApps().contains(dCtxSh.appE)) {
+				pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Returns);
+			}
+			if (TypePanel.Shipment.getListApps().contains(dCtxSh.appE) &&
+				!dCtxSh.channel.isDevice()) {
+				pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Shipment);  
+			}
+		} else {
+			boolean isFichaAccesorio = pageFichaStpV.getFicha().isFichaAccesorio(); 
+			pageFichaStpV.secFotosNew.validaLayoutFotosNew(isFichaAccesorio, driver);
+			pageFichaStpV.secTotalLook.checkIsVisible(driver);
 
-            pageFichaStpV.secBolsaButtonAndLinksNew.selectEnvioYDevoluciones(driver);
-            pageFichaStpV.getModEnvioYdevol().clickAspaForClose();
-            
-            pageFichaStpV.secBolsaButtonAndLinksNew.selectDetalleDelProducto(dCtxSh.appE, LineaType.she, driver);
-            pageFichaStpV.secBolsaButtonAndLinksNew.selectLinkCompartir(dCtxSh.pais.getCodigo_pais(), driver);
+			pageFichaStpV.secBolsaButtonAndLinksNew.selectEnvioYDevoluciones(driver);
+			pageFichaStpV.getModEnvioYdevol().clickAspaForClose();
+			
+			pageFichaStpV.secBolsaButtonAndLinksNew.selectDetalleDelProducto(dCtxSh.appE, LineaType.she, driver);
+			pageFichaStpV.secBolsaButtonAndLinksNew.selectLinkCompartir(dCtxSh.pais.getCodigo_pais(), driver);
 
-        }
-            
-        pageFichaStpV.selectGuiaDeTallas(dCtxSh.appE);
-        if (dCtxSh.appE==AppEcom.shop) {
-            pageFichaStpV.validateSliderIfExists(Slider.ElegidoParaTi);
-        }
-        
-        if (dCtxSh.appE!=AppEcom.outlet) {
-            pageFichaStpV.validateSliderIfExists(Slider.CompletaTuLook);
-        }
-    }
-    
-    @SuppressWarnings("static-access")
-    @Test (
-        groups={"FichaProducto", "Canal:desktop_App:shop"}, alwaysRun=true, 
-        description="[Usuario no registrado] Desde Corea/coreano, se testea una ficha con origen la Galería validando el panel KcSafety")
-    public void FIC003_FichaFromGalery_CheckKcSafety() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        Pais corea = PaisGetter.get(PaisShop.CoreaDelSur);
-    	DataCtxShop dCtxSh = getCtxShForTest(corea, corea.getListIdiomas().get(0));
-     
-        AccesoStpV.oneStep(dCtxSh, false, driver);
-        
-        //TODO en el acceso se ejecuta la función setInitialModalsOff para evitar la aparición de modales
-        //pero en el caso de Corea se escapa el de Subscripción en la Newsletter
-        (new PagePrehome(dCtxSh, driver)).closeModalNewsLetterIfExists();
-        
-        Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(
-        	dCtxSh.appE, KeyMenu1rstLevel.from(
-        		LineaType.nina, 
-        		SublineaType.nina_nina, "pantalones"));
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh);
+		}
+			
+		pageFichaStpV.selectGuiaDeTallas(dCtxSh.appE);
+		if (dCtxSh.appE==AppEcom.shop) {
+			pageFichaStpV.validateSliderIfExists(Slider.ElegidoParaTi);
+		}
+		
+		if (dCtxSh.appE!=AppEcom.outlet) {
+			pageFichaStpV.validateSliderIfExists(Slider.CompletaTuLook);
+		}
+	}
+	
+	@SuppressWarnings("static-access")
+	@Test (
+		groups={"FichaProducto", "Canal:desktop_App:shop"}, alwaysRun=true, 
+		description="[Usuario no registrado] Desde Corea/coreano, se testea una ficha con origen la Galería validando el panel KcSafety")
+	public void FIC003_FichaFromGalery_CheckKcSafety() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		Pais corea = PaisGetter.get(PaisShop.CoreaDelSur);
+		DataCtxShop dCtxSh = getCtxShForTest(corea, corea.getListIdiomas().get(0));
+	 
+		AccesoStpV.oneStep(dCtxSh, false, driver);
+		
+		//TODO en el acceso se ejecuta la función setInitialModalsOff para evitar la aparición de modales
+		//pero en el caso de Corea se escapa el de Subscripción en la Newsletter
+		(new PagePrehome(dCtxSh, driver)).closeModalNewsLetterIfExists();
+		
+		Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(
+			dCtxSh.appE, KeyMenu1rstLevel.from(
+				LineaType.nina, 
+				SublineaType.nina_nina, "pantalones"));
+		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
+		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh);
 
-        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-        LocationArticle location1rstArticle = LocationArticle.getInstanceInCatalog(1);
-        DataFichaArt dataArtOrigin = pageGaleriaStpV.selectArticulo(location1rstArticle, dCtxSh);
-        
-        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
-        if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {
-            if (TypePanel.KcSafety.getListApps().contains(dCtxSh.appE)) {
-                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.KcSafety);
-            }
-        } else {
-            if (TypePanel.KcSafety.getListApps().contains(dCtxSh.appE)) {
-                pageFichaStpV.secBolsaButtonAndLinksNew.selectDetalleDelProducto(dCtxSh.appE, LineaType.nina, driver);
-            }
-        }
-        
-        pageFichaStpV.selectLinkNavigation(ProductNav.Next, dCtxSh, dataArtOrigin.getReferencia());
-        pageFichaStpV.selectLinkNavigation(ProductNav.Prev, dCtxSh, dataArtOrigin.getReferencia());
-    }
-    
-    @Test (
-        groups={"FichaProducto", "Canal:desktop,mobile_App:shop"}, 
-        alwaysRun=true, description="[Usario no registrado] Testeo Personalización bordados")
-    public void FIC005_Articulo_Personalizable_Noreg() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-    	DataCtxShop dCtxSh = getCtxShForTest(españa, castellano);
+		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		LocationArticle location1rstArticle = LocationArticle.getInstanceInCatalog(1);
+		DataFichaArt dataArtOrigin = pageGaleriaStpV.selectArticulo(location1rstArticle, dCtxSh);
+		
+		PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
+		if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {
+			if (TypePanel.KcSafety.getListApps().contains(dCtxSh.appE)) {
+				pageFichaStpV.secProductDescOld.selectPanel(TypePanel.KcSafety);
+			}
+		} else {
+			if (TypePanel.KcSafety.getListApps().contains(dCtxSh.appE)) {
+				pageFichaStpV.secBolsaButtonAndLinksNew.selectDetalleDelProducto(dCtxSh.appE, LineaType.nina, driver);
+			}
+		}
+		
+		pageFichaStpV.selectLinkNavigation(ProductNav.Next, dCtxSh, dataArtOrigin.getReferencia());
+		pageFichaStpV.selectLinkNavigation(ProductNav.Prev, dCtxSh, dataArtOrigin.getReferencia());
+	}
+	
+	@Test (
+		groups={"FichaProducto", "Canal:desktop,mobile_App:shop"}, 
+		alwaysRun=true, description="[Usario no registrado] Testeo Personalización bordados")
+	public void FIC005_Articulo_Personalizable_Noreg() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		DataCtxShop dCtxSh = getCtxShForTest(españa, castellano);
 
-        AccesoStpV.oneStep(dCtxSh, false, driver);
+		AccesoStpV.oneStep(dCtxSh, false, driver);
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		Menu1rstLevel menuPersonalizacion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.he, null, "personalizacion"));
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-        
-        //secMenusStpV.checkExistMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
-        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
-        secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
+		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
+		
+		//secMenusStpV.checkExistMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
+		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
+		secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
 		LocationArticle articleNum = LocationArticle.getInstanceInCatalog(1);
 		pageGaleriaStpV.selectArticulo(articleNum, dCtxSh);
 		
-        PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
-        SecModalPersonalizacionStpV modalPersonalizacionStpV = SecModalPersonalizacionStpV.getNewOne(dCtxSh, driver); 
-    	int numColors = pageFichaStpv.getFicha().getNumColors();
-        for (int i=1; i<=numColors; i++) {
-        	pageFichaStpv.selectColor(i);
-        	State levelError = (i==numColors) ? State.Defect : State.Info;
-        	if (modalPersonalizacionStpV.checkArticleCustomizable(levelError)) {
-        		break;
-        	}
-        }
-        
-        pageFichaStpv.selectFirstTallaAvailable();
-        modalPersonalizacionStpV.selectLinkPersonalizacion();
-        //modalPersonalizacionStpV.startCustomization();
-        modalPersonalizacionStpV.selectIconCustomization();
-        modalPersonalizacionStpV.selectFirstIcon();
-    	modalPersonalizacionStpV.validateIconSelectedDesktop();
-        modalPersonalizacionStpV.selectConfirmarButton();
-        modalPersonalizacionStpV.validateCabeceraStep(2);
-        modalPersonalizacionStpV.validateWhereDesktop();
-        modalPersonalizacionStpV.selectConfirmarButton();
-    	modalPersonalizacionStpV.validateCabeceraStep(3);
-    	modalPersonalizacionStpV.validateSelectionColor();
+		PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
+		SecModalPersonalizacionStpV modalPersonalizacionStpV = SecModalPersonalizacionStpV.getNewOne(dCtxSh, driver); 
+		int numColors = pageFichaStpv.getFicha().getNumColors();
+		for (int i=1; i<=numColors; i++) {
+			pageFichaStpv.selectColor(i);
+			State levelError = (i==numColors) ? State.Defect : State.Info;
+			if (modalPersonalizacionStpV.checkArticleCustomizable(levelError)) {
+				break;
+			}
+		}
+		
+		pageFichaStpv.selectFirstTallaAvailable();
+		modalPersonalizacionStpV.selectLinkPersonalizacion();
+		//modalPersonalizacionStpV.startCustomization();
+		modalPersonalizacionStpV.selectIconCustomization();
+		modalPersonalizacionStpV.selectFirstIcon();
+		modalPersonalizacionStpV.validateIconSelectedDesktop();
+		modalPersonalizacionStpV.selectConfirmarButton();
+		modalPersonalizacionStpV.validateCabeceraStep(2);
+		modalPersonalizacionStpV.validateWhereDesktop();
+		modalPersonalizacionStpV.selectConfirmarButton();
+		modalPersonalizacionStpV.validateCabeceraStep(3);
+		modalPersonalizacionStpV.validateSelectionColor();
  
-        modalPersonalizacionStpV.selectSize();
-        modalPersonalizacionStpV.confirmCustomization();
-        modalPersonalizacionStpV.checkCustomizationProof();
-    }
-    
-    private DataCtxShop getCtxShForTest(Pais pais, IdiomaPais idioma) {
-    	return getCtxShForTest(pais, idioma, false, "", "");
-    }
-    
+		modalPersonalizacionStpV.selectSize();
+		modalPersonalizacionStpV.confirmCustomization();
+		modalPersonalizacionStpV.checkCustomizationProof();
+	}
+	
+	private DataCtxShop getCtxShForTest(Pais pais, IdiomaPais idioma) {
+		return getCtxShForTest(pais, idioma, false, "", "");
+	}
+	
 	private DataCtxShop getCtxShForTest(Pais pais, IdiomaPais idioma, boolean userRegistered, String user, String password) {
 		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
-        dCtxSh.pais=pais;
-        dCtxSh.idioma=idioma;
-        if (userRegistered) {
-        	dCtxSh.userRegistered = false;
-        	dCtxSh.userConnected = user;
-        	dCtxSh.passwordUser = password;
-        }
+		dCtxSh.pais=pais;
+		dCtxSh.idioma=idioma;
+		if (userRegistered) {
+			dCtxSh.userRegistered = false;
+			dCtxSh.userConnected = user;
+			dCtxSh.passwordUser = password;
+		}
 		return dCtxSh;
 	}
 }

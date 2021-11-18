@@ -28,12 +28,12 @@ public class ModalDirecFacturaStpV {
 	}
 	
 	@Validation
-    public ChecksTM validateIsOk() {
-    	ChecksTM validations = ChecksTM.getNew();
-        int maxSeconds = 5;
+	public ChecksTM validateIsOk() {
+		ChecksTM validations = ChecksTM.getNew();
+		int maxSeconds = 5;
 	 	validations.add(
 			"Es visible el formulario para la introducción de la \"Dirección de facturación\" (lo esperamos hasta " + maxSeconds + " seconds)",
-			modalDirecFactura.isVisibleFormUntil(maxSeconds), State.Defect);    
+			modalDirecFactura.isVisibleFormUntil(maxSeconds), State.Defect);	
 	 	validations.add(
 			"Es visible el botón \"Actualizar\"",
 	 		modalDirecFactura.isVisibleButtonActualizar(), State.Defect);
@@ -41,24 +41,24 @@ public class ModalDirecFacturaStpV {
 	 	validations.add(
 	 		"Desaparece la capa de Loading (lo esperamos hasta " + maxSeconds + "segundos", 
 	 		(new PageCheckoutWrapper(channel, app, driver)).waitUntilNoDivLoading(maxSeconds), State.Warn);
-    	return validations;
-    }
-    
+		return validations;
+	}
+	
 	@Step (
 		description="Introducir los datos y pulsar \"Actualizar\"<br>#{dataDirFactura.getFormattedHTMLData()}", 
-        expected="Los datos se actualizan correctamente")
-    public void inputDataAndActualizar(DataDireccion dataDirFactura) throws Exception {
-        modalDirecFactura.sendDataToInputs(dataDirFactura);
-        modalDirecFactura.clickActualizar();
-        checkAfterChangeDireccion();
-    }
+		expected="Los datos se actualizan correctamente")
+	public void inputDataAndActualizar(DataDireccion dataDirFactura) throws Exception {
+		modalDirecFactura.sendDataToInputs(dataDirFactura);
+		modalDirecFactura.clickActualizar();
+		checkAfterChangeDireccion();
+	}
 	
 	@Validation
 	private ChecksTM checkAfterChangeDireccion() {
-    	ChecksTM validations = ChecksTM.getNew();
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Desaparece el modal de introducción de los datos de la dirección",
-	 		!modalDirecFactura.isVisibleFormUntil(0), State.Defect);    
+	 		!modalDirecFactura.isVisibleFormUntil(0), State.Defect);	
 	 	validations.add(
 			"Queda marcado el radiobutton \"Quiero recibir una factura\"",
 			(new Page1DktopCheckout(channel, app, driver)).isMarkedQuieroFactura(), State.Defect);

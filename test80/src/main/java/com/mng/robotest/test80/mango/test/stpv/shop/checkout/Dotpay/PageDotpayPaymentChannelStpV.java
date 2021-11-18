@@ -12,24 +12,24 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PageDotpayPaymentChannelStpV {
 
 	@Validation
-    public static ChecksTM validateIsPage(String importeTotal, String codPais, WebDriver driver) {
+	public static ChecksTM validateIsPage(String importeTotal, String codPais, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
-      	validations.add(
-    		"Aparece la página de Dotpay para la selección del banco",
-    		PageDotpayPaymentChannel.isPage(driver), State.Warn);
-      	validations.add(
-    		"Aparece el importe de la compra: " + importeTotal,
-    		ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
+	  	validations.add(
+			"Aparece la página de Dotpay para la selección del banco",
+			PageDotpayPaymentChannel.isPage(driver), State.Warn);
+	  	validations.add(
+			"Aparece el importe de la compra: " + importeTotal,
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
 		return validations;
-    }
-    
+	}
+	
 	@Step (
 		description="Seleccionar el <b>#{numPayment}o</b> de los Canales de Pago", 
-        expected="Se scrolla y se hace visible el bloque de introducción del nombre")
-    public static void selectPayment(int numPayment, WebDriver driver) {
+		expected="Se scrolla y se hace visible el bloque de introducción del nombre")
+	public static void selectPayment(int numPayment, WebDriver driver) {
 		PageDotpayPaymentChannel.clickPayment(numPayment, driver);
 		isVisibleBlockInputNombre(1, driver);
-    }
+	}
 	
 	@Validation (
 		description="Es visible el bloque de introducción del nombre (lo esperamos hasta #{maxSeconds} segundos)",
@@ -37,7 +37,7 @@ public class PageDotpayPaymentChannelStpV {
 	private static boolean isVisibleBlockInputNombre(int maxSeconds, WebDriver driver) {
 		return (PageDotpayPaymentChannel.isVisibleBlockInputDataUntil(maxSeconds, driver));
 	}
-    
+	
 	@Step (
 		description="Introducir el nombre <b>#{nameFirst} / #{nameSecond}</b> y seleccionar el botón para Confirmar", 
 		expected="Aparece la página de pago")

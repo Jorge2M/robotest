@@ -37,20 +37,20 @@ public class PageOrdenacionDePrendasStpV extends PageObjTM {
 		aceptarOrdenPais();
 	}
 
-    @Validation
-    public ChecksTM validateIsPage() {
-        ChecksTM validations = ChecksTM.getNew();
-        validations.add(
-        	"Estamos en la página " + Orden.titulo.getXPath(),
-        	state(Visible, Orden.initialTitulo.getBy()).wait(10).check(), State.Defect);
-        validations.add(
-        	"Aparece el desplegable de tiendas",
-        	state(Visible, Orden.desplegableTiendas.getBy()).wait(10).check(), State.Defect);
-        validations.add(
-        	"El botón <b>Ver Tiendas</b> está en la página",
-        	state(Visible, Orden.verTiendas.getBy()).wait(10).check(), State.Defect);
-        return validations;
-    }
+	@Validation
+	public ChecksTM validateIsPage() {
+		ChecksTM validations = ChecksTM.getNew();
+		validations.add(
+			"Estamos en la página " + Orden.titulo.getXPath(),
+			state(Visible, Orden.initialTitulo.getBy()).wait(10).check(), State.Defect);
+		validations.add(
+			"Aparece el desplegable de tiendas",
+			state(Visible, Orden.desplegableTiendas.getBy()).wait(10).check(), State.Defect);
+		validations.add(
+			"El botón <b>Ver Tiendas</b> está en la página",
+			state(Visible, Orden.verTiendas.getBy()).wait(10).check(), State.Defect);
+		return validations;
+	}
 
 	@Step(
 		description="Seleccionamos en el desplegable la opción <b>PreProduccion</b>",
@@ -123,7 +123,7 @@ public class PageOrdenacionDePrendasStpV extends PageObjTM {
 		saveErrorData = SaveWhen.Never)
 	private void selectTipoPrenda() throws Exception {
 		select(Orden.selectorPrendas.getBy(), "camisas_she").type(Value).exec();
-//      Thread.sleep(100);
+//	  Thread.sleep(100);
 		click(Orden.verPrendas.getBy()).waitLink(2).exec();
 		validateTipoPrenda();
 	}

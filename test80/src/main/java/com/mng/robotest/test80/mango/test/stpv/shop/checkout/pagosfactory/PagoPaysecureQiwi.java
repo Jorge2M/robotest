@@ -12,27 +12,27 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.paysecureqiwi.PageQ
 
 public class PagoPaysecureQiwi extends PagoStpV {
 
-    public PagoPaysecureQiwi(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
-        super(dCtxSh, dCtxPago, driver);
-        super.isAvailableExecPay = true;
-    }
-    
-    @Override
-    public void testPagoFromCheckout(boolean execPay) throws Exception {
-        pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-        dCtxPago = checkoutFlow.checkout(From.MetodosPago);
-        
-        PagePaysecureQiwi1rstStpV pagePaysecureQiwi1rstStpV = new PagePaysecureQiwi1rstStpV(dCtxSh.appE, driver);
-        pagePaysecureQiwi1rstStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dCtxSh.channel);
-        pagePaysecureQiwi1rstStpV.clickIconPasarelaQiwi(dCtxSh.channel);
-        
-        if (execPay) {
-            String tlfQiwi = dCtxPago.getDataPedido().getPago().getTelefqiwi();
-            PageQiwiInputTlfnStpV.inputTelefono(tlfQiwi, driver);
-            PageQiwiInputTlfnStpV.clickConfirmarButton(driver);
-            if (PagePaysecureConfirm.isPage(driver)) {
-            	PageQiwiConfirmStpV.selectConfirmButton(driver);
-            }
-        }
-    }    
+	public PagoPaysecureQiwi(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
+		super(dCtxSh, dCtxPago, driver);
+		super.isAvailableExecPay = true;
+	}
+	
+	@Override
+	public void testPagoFromCheckout(boolean execPay) throws Exception {
+		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
+		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		
+		PagePaysecureQiwi1rstStpV pagePaysecureQiwi1rstStpV = new PagePaysecureQiwi1rstStpV(dCtxSh.appE, driver);
+		pagePaysecureQiwi1rstStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dCtxSh.channel);
+		pagePaysecureQiwi1rstStpV.clickIconPasarelaQiwi(dCtxSh.channel);
+		
+		if (execPay) {
+			String tlfQiwi = dCtxPago.getDataPedido().getPago().getTelefqiwi();
+			PageQiwiInputTlfnStpV.inputTelefono(tlfQiwi, driver);
+			PageQiwiInputTlfnStpV.clickConfirmarButton(driver);
+			if (PagePaysecureConfirm.isPage(driver)) {
+				PageQiwiConfirmStpV.selectConfirmButton(driver);
+			}
+		}
+	}	
 }

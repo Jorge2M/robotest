@@ -28,22 +28,22 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="sitemap" maxOccurs="unbounded" minOccurs="0">
- *           &lt;complexType>
- *             &lt;complexContent>
- *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                 &lt;sequence>
- *                   &lt;element name="loc" type="{http://www.w3.org/2001/XMLSchema}anyURI"/>
- *                   &lt;element name="lastmod" type="{http://www.w3.org/2001/XMLSchema}date"/>
- *                 &lt;/sequence>
- *               &lt;/restriction>
- *             &lt;/complexContent>
- *           &lt;/complexType>
- *         &lt;/element>
- *       &lt;/sequence>
- *     &lt;/restriction>
+ *	 &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *	   &lt;sequence>
+ *		 &lt;element name="sitemap" maxOccurs="unbounded" minOccurs="0">
+ *		   &lt;complexType>
+ *			 &lt;complexContent>
+ *			   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *				 &lt;sequence>
+ *				   &lt;element name="loc" type="{http://www.w3.org/2001/XMLSchema}anyURI"/>
+ *				   &lt;element name="lastmod" type="{http://www.w3.org/2001/XMLSchema}date"/>
+ *				 &lt;/sequence>
+ *			   &lt;/restriction>
+ *			 &lt;/complexContent>
+ *		   &lt;/complexType>
+ *		 &lt;/element>
+ *	   &lt;/sequence>
+ *	 &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -52,126 +52,126 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "sitemap"
+	"sitemap"
 })
 @XmlRootElement(name = "sitemapindex")
 
 public class Sitemapindex {
 
-    protected List<Sitemapindex.Sitemap> sitemap;
+	protected List<Sitemapindex.Sitemap> sitemap;
 
-    /**
-     * Gets the value of the sitemap property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sitemap property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSitemap().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Sitemapindex.Sitemap }
-     * 
-     * 
-     */
-    public List<Sitemapindex.Sitemap> getSitemap() {
-        if (this.sitemap == null) {
-            this.sitemap = new ArrayList<>();
-        }
-        return this.sitemap;
-    }
+	/**
+	 * Gets the value of the sitemap property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list,
+	 * not a snapshot. Therefore any modification you make to the
+	 * returned list will be present inside the JAXB object.
+	 * This is why there is not a <CODE>set</CODE> method for the sitemap property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * <pre>
+	 *	getSitemap().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list
+	 * {@link Sitemapindex.Sitemap }
+	 * 
+	 * 
+	 */
+	public List<Sitemapindex.Sitemap> getSitemap() {
+		if (this.sitemap == null) {
+			this.sitemap = new ArrayList<>();
+		}
+		return this.sitemap;
+	}
 
 
-    /**
-     * <p>Java class for anonymous complex type.
-     * 
-     * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
-     * <pre>
-     * &lt;complexType>
-     *   &lt;complexContent>
-     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *       &lt;sequence>
-     *         &lt;element name="loc" type="{http://www.w3.org/2001/XMLSchema}anyURI"/>
-     *         &lt;element name="lastmod" type="{http://www.w3.org/2001/XMLSchema}date"/>
-     *       &lt;/sequence>
-     *     &lt;/restriction>
-     *   &lt;/complexContent>
-     * &lt;/complexType>
-     * </pre>
-     * 
-     * 
-     */
-    @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "", propOrder = {
-        "loc",
-        "lastmod"
-    })
-    public static class Sitemap {
+	/**
+	 * <p>Java class for anonymous complex type.
+	 * 
+	 * <p>The following schema fragment specifies the expected content contained within this class.
+	 * 
+	 * <pre>
+	 * &lt;complexType>
+	 *   &lt;complexContent>
+	 *	 &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+	 *	   &lt;sequence>
+	 *		 &lt;element name="loc" type="{http://www.w3.org/2001/XMLSchema}anyURI"/>
+	 *		 &lt;element name="lastmod" type="{http://www.w3.org/2001/XMLSchema}date"/>
+	 *	   &lt;/sequence>
+	 *	 &lt;/restriction>
+	 *   &lt;/complexContent>
+	 * &lt;/complexType>
+	 * </pre>
+	 * 
+	 * 
+	 */
+	@XmlAccessorType(XmlAccessType.FIELD)
+	@XmlType(name = "", propOrder = {
+		"loc",
+		"lastmod"
+	})
+	public static class Sitemap {
 
-        @XmlElement(required = true)
-        @XmlSchemaType(name = "anyURI")
-        protected String loc;
-        @XmlElement(required = true)
-        @XmlSchemaType(name = "date")
-        protected XMLGregorianCalendar lastmod;
+		@XmlElement(required = true)
+		@XmlSchemaType(name = "anyURI")
+		protected String loc;
+		@XmlElement(required = true)
+		@XmlSchemaType(name = "date")
+		protected XMLGregorianCalendar lastmod;
 
-        /**
-         * Gets the value of the loc property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
-         */
-        public String getLoc() {
-            return this.loc;
-        }
+		/**
+		 * Gets the value of the loc property.
+		 * 
+		 * @return
+		 *	 possible object is
+		 *	 {@link String }
+		 *	 
+		 */
+		public String getLoc() {
+			return this.loc;
+		}
 
-        /**
-         * Sets the value of the loc property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
-         */
-        public void setLoc(String value) {
-            this.loc = value;
-        }
+		/**
+		 * Sets the value of the loc property.
+		 * 
+		 * @param value
+		 *	 allowed object is
+		 *	 {@link String }
+		 *	 
+		 */
+		public void setLoc(String value) {
+			this.loc = value;
+		}
 
-        /**
-         * Gets the value of the lastmod property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link XMLGregorianCalendar }
-         *     
-         */
-        public XMLGregorianCalendar getLastmod() {
-            return this.lastmod;
-        }
+		/**
+		 * Gets the value of the lastmod property.
+		 * 
+		 * @return
+		 *	 possible object is
+		 *	 {@link XMLGregorianCalendar }
+		 *	 
+		 */
+		public XMLGregorianCalendar getLastmod() {
+			return this.lastmod;
+		}
 
-        /**
-         * Sets the value of the lastmod property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link XMLGregorianCalendar }
-         *     
-         */
-        public void setLastmod(XMLGregorianCalendar value) {
-            this.lastmod = value;
-        }
+		/**
+		 * Sets the value of the lastmod property.
+		 * 
+		 * @param value
+		 *	 allowed object is
+		 *	 {@link XMLGregorianCalendar }
+		 *	 
+		 */
+		public void setLastmod(XMLGregorianCalendar value) {
+			this.lastmod = value;
+		}
 
-    }
+	}
 
 }

@@ -67,7 +67,7 @@ public class ValesData {
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.UnitedKingdom, 30, "08/06/2019 00:00", "14/06/2019 00:00", filterCal, Arrays.asList("43097700"), Arrays.asList("53070658")), listaPaisesVales);
 		//addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Thailand, 30, "07/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("43097700"), Arrays.asList("53070658")), listaPaisesVales);
 		
-	    return listaPaisesVales;
+		return listaPaisesVales;
 	}
 	
 	public static List<ValePais> getIMVIP2019(Campanya campanya, boolean filterCal) throws Exception {
@@ -85,7 +85,7 @@ public class ValesData {
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.USA, 40, "10/06/2019 00:00", "16/06/2019 00:00", filterCal, Arrays.asList("43097700"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.France, 40, "22/05/2019 00:00", "26/05/2019 00:00", filterCal, Arrays.asList("43097700"), Arrays.asList("53070658")), listaPaisesVales);
 		
-	    return listaPaisesVales;
+		return listaPaisesVales;
 	}
 	
 	public static List<ValePais> getVIP19(Campanya campanya, boolean filterCal) throws Exception {
@@ -128,7 +128,7 @@ public class ValesData {
 		//addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Thailand, 30, "10/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.USA, 30, "13/06/2019 00:00", "16/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		
-	    return listaPaisesVales;
+		return listaPaisesVales;
 	}
 	
 	private static String getTextCheckoutVale(ValePais vale) {
@@ -164,6 +164,6 @@ public class ValesData {
 	private static void addValePais(ValePais valePais, List<ValePais> listaPaisesVales) {
 		String textoCheckout = getTextCheckoutVale(valePais);
 		valePais.setTextoCheckout(textoCheckout);
-	    listaPaisesVales.add(valePais);
+		listaPaisesVales.add(valePais);
 	}
 }

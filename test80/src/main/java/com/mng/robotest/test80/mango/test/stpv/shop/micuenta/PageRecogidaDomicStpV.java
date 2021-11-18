@@ -8,19 +8,19 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.PageRecADomic;
 
 public class PageRecogidaDomicStpV {
 
-    @Validation
-    public static ChecksTM vaidaIsPageSinDevoluciones (WebDriver driver) {
-        ChecksTM validations = ChecksTM.getNew();
-        validations.add(
-        	"Aparece la página de Recogida a Domicilio",
-        	PageRecADomic.isPage(driver), State.Defect);
-        validations.add(
-        	"Aparece la tabla de devoluciones",
-        	PageRecADomic.isTableDevoluciones(driver), State.Defect);
-        validations.add(
-        	"No aparece ningún pedido",
-             !PageRecADomic.hayPedidos(driver), State.Info);
+	@Validation
+	public static ChecksTM vaidaIsPageSinDevoluciones (WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
+		validations.add(
+			"Aparece la página de Recogida a Domicilio",
+			PageRecADomic.isPage(driver), State.Defect);
+		validations.add(
+			"Aparece la tabla de devoluciones",
+			PageRecADomic.isTableDevoluciones(driver), State.Defect);
+		validations.add(
+			"No aparece ningún pedido",
+			 !PageRecADomic.hayPedidos(driver), State.Info);
 
-        return validations;
-    }
+		return validations;
+	}
 }

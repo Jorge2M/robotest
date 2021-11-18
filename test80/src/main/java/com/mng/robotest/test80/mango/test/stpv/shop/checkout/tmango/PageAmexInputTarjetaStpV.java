@@ -11,10 +11,10 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 public class PageAmexInputTarjetaStpV {
 
-    @Validation
-    public static ChecksTM validateIsPageOk(String importeTotal, String codPais, WebDriver driver) {
+	@Validation
+	public static ChecksTM validateIsPageOk(String importeTotal, String codPais, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
-        int maxSeconds = 5;
+		int maxSeconds = 5;
 	 	validations.add(
 			"Aparece la pasarela de pagos de Banco Sabadell (la esperamos hasta " + maxSeconds + " segundos)",
 			PageAmexInputTarjeta.isPasarelaBancoSabadellUntil(maxSeconds, driver), State.Defect); 
@@ -24,26 +24,26 @@ public class PageAmexInputTarjetaStpV {
 	 	validations.add(
 			"Aparecen los campos de introducción de tarjeta, fecha caducidad y código de seguridad",
 			PageAmexInputTarjeta.isPresentNumTarj(driver) &&
-            PageAmexInputTarjeta.isPresentInputMesCad(driver) &&
-            PageAmexInputTarjeta.isPresentInputAnyCad(driver) &&
-            PageAmexInputTarjeta.isPresentInputCvc(driver), State.Warn); 
+			PageAmexInputTarjeta.isPresentInputMesCad(driver) &&
+			PageAmexInputTarjeta.isPresentInputAnyCad(driver) &&
+			PageAmexInputTarjeta.isPresentInputCvc(driver), State.Warn); 
 	 	validations.add(
 			"Figura un botón de Aceptar",
 			PageAmexInputTarjeta.isPresentPagarButton(driver), State.Defect); 
 	 	return validations;
-    }
-    
-    @Step (
+	}
+	
+	@Step (
 		description="Introducimos los datos de la tarjeta: #{numTarj} / #{mesCad}-#{anyCad} / #{Cvc} y pulsamos el botón \"Pagar\"", 
-        expected="Aparece la página de simulación del pago RedSys")
-    public static PageRedsysSimStpV inputTarjetaAndPayButton(
-    		String numTarj, String mesCad, String anyCad, String Cvc, String importeTotal, String codigoPais, WebDriver driver) 
-    throws Exception {
-        PageAmexInputTarjeta.inputDataTarjeta(numTarj, mesCad, anyCad, Cvc, driver);
-        PageAmexInputTarjeta.clickPagarButton(driver);
-        
-        PageRedsysSimStpV pageRedsysSimStpV = new PageRedsysSimStpV(driver);
-        pageRedsysSimStpV.checkPage(driver);
-        return pageRedsysSimStpV;
-    }
+		expected="Aparece la página de simulación del pago RedSys")
+	public static PageRedsysSimStpV inputTarjetaAndPayButton(
+			String numTarj, String mesCad, String anyCad, String Cvc, String importeTotal, String codigoPais, WebDriver driver) 
+	throws Exception {
+		PageAmexInputTarjeta.inputDataTarjeta(numTarj, mesCad, anyCad, Cvc, driver);
+		PageAmexInputTarjeta.clickPagarButton(driver);
+		
+		PageRedsysSimStpV pageRedsysSimStpV = new PageRedsysSimStpV(driver);
+		pageRedsysSimStpV.checkPage(driver);
+		return pageRedsysSimStpV;
+	}
 }

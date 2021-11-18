@@ -11,26 +11,26 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 
 public class PageD3DJPTestSelectOptionStpV {
-    
+	
 	@Validation (
 		description="Aparece la página de Test correspondiente al D3D de JPMorgan (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
-    public static boolean validateIsD3D(int maxSeconds, WebDriver driver) {
+	public static boolean validateIsD3D(int maxSeconds, WebDriver driver) {
 		return (PageD3DJPTestSelectOption.isPageUntil(maxSeconds, driver));
-    }	
+	}	
 	
 	@Validation (
 		description="Aparece el importe #{importeTotal} de la operación",
 		level=State.Warn)
-    public static boolean isImporteVisible(String importeTotal, String codPais, WebDriver driver) {
+	public static boolean isImporteVisible(String importeTotal, String codPais, WebDriver driver) {
 		return (ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver));
-    }
-    
+	}
+	
 	@Step (
 		description="Seleccionamos la opción \"Successful\" y clickamos en el botón \"Submit\"", 
-        expected="Aparece la página de resultado OK")
-    public static void clickSubmitButton(WebDriver driver) throws Exception {
-        PageD3DJPTestSelectOption.selectOption(OptionD3D.Successful, driver);
-        PageD3DJPTestSelectOption.clickSubmitButton(driver);
-    }
+		expected="Aparece la página de resultado OK")
+	public static void clickSubmitButton(WebDriver driver) throws Exception {
+		PageD3DJPTestSelectOption.selectOption(OptionD3D.Successful, driver);
+		PageD3DJPTestSelectOption.clickSubmitButton(driver);
+	}
 }

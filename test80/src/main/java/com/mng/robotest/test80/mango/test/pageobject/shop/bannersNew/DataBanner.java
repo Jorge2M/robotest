@@ -109,22 +109,22 @@ public class DataBanner {
 		return (getFloatingText());
 	}
 	
-    public DestinoType getDestinoType() {
-        if (urlBanner!=null && urlBanner.contains("redirect.faces") && urlBanner.contains("producto=")) {
-            return (DestinoType.Ficha);
-        }
-        return (DestinoType.Otros);
-    }
-    
-    public boolean isOverlayedWith(DataBanner dataBanner2) {
-    	return (
-    		dataBanner2!=null &&
-    		getLocation().x==dataBanner2.getLocation().x && 
-    		getLocation().y==dataBanner2.getLocation().y &&
-    		getSize().width==dataBanner2.getSize().width &&
-    		getSize().height==dataBanner2.getSize().height);
-    }
-    
+	public DestinoType getDestinoType() {
+		if (urlBanner!=null && urlBanner.contains("redirect.faces") && urlBanner.contains("producto=")) {
+			return (DestinoType.Ficha);
+		}
+		return (DestinoType.Otros);
+	}
+	
+	public boolean isOverlayedWith(DataBanner dataBanner2) {
+		return (
+			dataBanner2!=null &&
+			getLocation().x==dataBanner2.getLocation().x && 
+			getLocation().y==dataBanner2.getLocation().y &&
+			getSize().width==dataBanner2.getSize().width &&
+			getSize().height==dataBanner2.getSize().height);
+	}
+	
 	private final static String TagLinea = "@TagLinea";
 	private final static String XPathLinkLineaWithTag = 
 		".//a[@class[contains(.,'link')] and @data-cta[contains(.,'tiendaid=" + TagLinea + "')]]";

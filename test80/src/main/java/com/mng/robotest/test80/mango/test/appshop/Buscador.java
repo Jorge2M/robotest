@@ -17,30 +17,30 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 
 public class Buscador {
 
-    @Test (
-        groups={"Buscador", "Canal:all_App:all"}, alwaysRun=true, 
-        description="[Usuario no registrado] Búsqueda artículos existente / no existente")
-    @Parameters({"categoriaProdExistente", "catProdInexistente"})
-    public void BUS001_Buscador_NoReg(String categoriaProdExistente, String catProdInexistente) 
-    throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
-        dCtxSh.userRegistered = false;
-        SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
-        
-        AccesoStpV.oneStep(dCtxSh, false, driver);
-        (new PageHomeMarcasStpV(dCtxSh.channel, dCtxSh.appE, driver)).validateIsPageWithCorrectLineas(dCtxSh.pais);
-        
-        GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
-        Garment product = getterProducts.getAll().get(0);
-        
-        secBuscadorStpV.searchArticulo(product, dCtxSh.pais);
-        secBuscadorStpV.busquedaCategoriaProducto(categoriaProdExistente, true);
-        
-        //TestABmanager.activateTestAB(TestABactData.getNew(TestABOptimizeImpl.ES_SHOP_XXX_EMP_vs_FH_Search_Desktop, 1), dCtxSh.channel, dCtxSh.appE, driver);
-        secBuscadorStpV.busquedaCategoriaProducto(catProdInexistente, false);
-    }
-    
+	@Test (
+		groups={"Buscador", "Canal:all_App:all"}, alwaysRun=true, 
+		description="[Usuario no registrado] Búsqueda artículos existente / no existente")
+	@Parameters({"categoriaProdExistente", "catProdInexistente"})
+	public void BUS001_Buscador_NoReg(String categoriaProdExistente, String catProdInexistente) 
+	throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		DataCtxShop dCtxSh = getCtxShForTest();
+		dCtxSh.userRegistered = false;
+		SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
+		
+		AccesoStpV.oneStep(dCtxSh, false, driver);
+		(new PageHomeMarcasStpV(dCtxSh.channel, dCtxSh.appE, driver)).validateIsPageWithCorrectLineas(dCtxSh.pais);
+		
+		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
+		Garment product = getterProducts.getAll().get(0);
+		
+		secBuscadorStpV.searchArticulo(product, dCtxSh.pais);
+		secBuscadorStpV.busquedaCategoriaProducto(categoriaProdExistente, true);
+		
+		//TestABmanager.activateTestAB(TestABactData.getNew(TestABOptimizeImpl.ES_SHOP_XXX_EMP_vs_FH_Search_Desktop, 1), dCtxSh.channel, dCtxSh.appE, driver);
+		secBuscadorStpV.busquedaCategoriaProducto(catProdInexistente, false);
+	}
+	
 	private DataCtxShop getCtxShForTest() throws Exception {
 		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
 		DataCtxShop dCtxSh = new DataCtxShop();

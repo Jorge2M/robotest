@@ -9,28 +9,28 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 
 public class PagePostfSelectChannel extends PageObjTM {
 
-    public enum ChannelPF {
-    	App("link-pfc"),
-    	Card("link-classic");
-    	
-    	private final String id;
-    	private ChannelPF(String id) {
-    		this.id = id;
-    	}
-    	public String getId() {
-    		return id;
-    	}
-    }
-    
-    public PagePostfSelectChannel(WebDriver driver) {
-    	super(driver);
-    }
-    
-    public boolean isPage(int maxSeconds) {
-    	return state(State.Visible, By.id(ChannelPF.Card.getId())).check();
-    }
-    
-    public void selectChannel(ChannelPF channelPF) {
-    	click(By.id(channelPF.getId())).exec();
-    }
+	public enum ChannelPF {
+		App("link-pfc"),
+		Card("link-classic");
+		
+		private final String id;
+		private ChannelPF(String id) {
+			this.id = id;
+		}
+		public String getId() {
+			return id;
+		}
+	}
+	
+	public PagePostfSelectChannel(WebDriver driver) {
+		super(driver);
+	}
+	
+	public boolean isPage(int maxSeconds) {
+		return state(State.Visible, By.id(ChannelPF.Card.getId())).check();
+	}
+	
+	public void selectChannel(ChannelPF channelPF) {
+		click(By.id(channelPF.getId())).exec();
+	}
 }

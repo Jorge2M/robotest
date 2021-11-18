@@ -10,15 +10,15 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageResultPag
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 public class PageResultPagoTpvStpV {
-    
+	
 	@Validation
-    public static ChecksTM validateIsPageOk(DataPedido dataPedido, String codPais, WebDriver driver) {
-    	ChecksTM validations = ChecksTM.getNew();
+	public static ChecksTM validateIsPageOk(DataPedido dataPedido, String codPais, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparece un texto de confirmación de la compra",
 			PageResultPagoTpv.isPresentCabeceraConfCompra(driver), State.Warn);
 	 	
-        String importeTotal = dataPedido.getImporteTotal();
+		String importeTotal = dataPedido.getImporteTotal();
 	 	validations.add(
 			"Aparece el importe " + importeTotal + " de la operación",
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
@@ -32,9 +32,9 @@ public class PageResultPagoTpvStpV {
 			"Aparece el código de pedido <b>" + codPedido + "</b>",
 			isVisibleCodPedido, State.Defect);
 	 	
-        dataPedido.setCodpedido(codPedido); 
-        dataPedido.setResejecucion(State.Ok);
-        
-        return validations;
-    }
+		dataPedido.setCodpedido(codPedido); 
+		dataPedido.setResejecucion(State.Ok);
+		
+		return validations;
+	}
 }

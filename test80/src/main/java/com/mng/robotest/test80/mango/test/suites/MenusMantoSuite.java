@@ -10,12 +10,12 @@ import com.mng.robotest.test80.mango.test.factoryes.ListMenusManto;
 
 public class MenusMantoSuite extends SuiteMaker {
 
-    public MenusMantoSuite(InputParamsMango inputParams) {
-    	super(inputParams);
-    	setParameters(getParametersSuiteShop(inputParams));
-    	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), ListMenusManto.class);
-    	addTestRun(testRun);
-    	setParallelMode(ParallelMode.METHODS);
-    	setThreadCount(4);
-    }
+	public MenusMantoSuite(InputParamsMango inputParams) {
+		super(inputParams);
+		setParameters(getParametersSuiteShop(inputParams));
+		TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), ListMenusManto.class);
+		addTestRun(testRun);
+		setParallelMode(ParallelMode.METHODS);
+		setThreadCount(4);
+	}
 }

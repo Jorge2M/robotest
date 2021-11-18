@@ -278,11 +278,11 @@ public class GetterProducts extends JaxRsClient {
 		private Integer numProducts = 40;
 		private List<Menu> menusCandidates = 
 			Arrays.asList(
-    			Menu.Shorts, 
-    			Menu.Camisas, 
-    			Menu.Pijamas,
-    			Menu.Faldas,
-    			Menu.Fulares);
+				Menu.Shorts, 
+				Menu.Camisas, 
+				Menu.Pijamas,
+				Menu.Faldas,
+				Menu.Fulares);
 		
 		private Integer pagina = 1;
 		private MethodGetter method = MethodGetter.Any;

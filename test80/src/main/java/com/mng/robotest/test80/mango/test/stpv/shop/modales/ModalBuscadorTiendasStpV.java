@@ -18,9 +18,9 @@ public class ModalBuscadorTiendasStpV {
 	}
 	
 	@Validation
-    public ChecksTM validaBusquedaConResultados() {
+	public ChecksTM validaBusquedaConResultados() {
 		ChecksTM validations = ChecksTM.getNew();
-        int maxSeconds = 5;
+		int maxSeconds = 5;
 	 	validations.add(
 			"La capa de búsqueda es visible",
 			modalBuscadorTiendas.isVisible(1), State.Warn);
@@ -28,15 +28,15 @@ public class ModalBuscadorTiendasStpV {
 			"Se ha localizado alguna tienda (la esperamos hasta " + maxSeconds + " segundos)",
 			modalBuscadorTiendas.isPresentAnyTiendaUntil(maxSeconds), State.Warn);
 		return validations;
-    }
-    
+	}
+	
 	@Step (
 		description="Cerramos la capa correspondiente al resultado del buscador", 
-        expected="La capa correspondiente a la búsqueda desaparece")
-    public void close() {
-        modalBuscadorTiendas.clickAspaForClose();
-        checkModalSearchInvisible();
-    }
+		expected="La capa correspondiente a la búsqueda desaparece")
+	public void close() {
+		modalBuscadorTiendas.clickAspaForClose();
+		checkModalSearchInvisible();
+	}
 	
 	@Validation (
 		description="La capa correspondiente a la búsqueda desaparece",

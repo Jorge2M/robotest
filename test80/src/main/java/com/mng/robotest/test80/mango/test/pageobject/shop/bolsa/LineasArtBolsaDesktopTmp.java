@@ -75,11 +75,11 @@ public class LineasArtBolsaDesktopTmp extends LineasArtBolsa {
 	}	
 	
 	@Override
-    public void clearArticuloAndWait(String refArticulo) throws Exception {
-        String xpathClearArt = getXPathLinkBorrarArt(refArticulo);
-        click(By.xpath(xpathClearArt)).exec();
-        waitForPageLoaded(driver); 
-    }
+	public void clearArticuloAndWait(String refArticulo) throws Exception {
+		String xpathClearArt = getXPathLinkBorrarArt(refArticulo);
+		click(By.xpath(xpathClearArt)).exec();
+		waitForPageLoaded(driver); 
+	}
 	
 	@Override
 	public void clickArticle(int position) {
@@ -99,16 +99,16 @@ public class LineasArtBolsaDesktopTmp extends LineasArtBolsa {
 	@Override
 	public float getPrecioArticle(WebElement lineaArticleWeb) {
 		String importe = getDataArticle(DataArtBolsa.Precio, lineaArticleWeb);
-		return (ImporteScreen.getFloatFromImporteMangoScreen(importe));        
+		return (ImporteScreen.getFloatFromImporteMangoScreen(importe));		
 	}
 	
 	private String getXPathItem(int position) {
 		return "(" + XPathItem + ")[" + position + "]";
 	}
 	
-    private String getXPathLinkBorrarArt() {
-        return getXPathLinkBorrarArt("");
-    }
+	private String getXPathLinkBorrarArt() {
+		return getXPathLinkBorrarArt("");
+	}
 	
 	private String getXPathLinkBorrarArt(String refArticulo) {
 		return XPathLinkBorrarArtRef.replace(TagRef, refArticulo);

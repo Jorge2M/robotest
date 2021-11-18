@@ -37,45 +37,45 @@ public class TestNodos implements Serializable {
 	private final static Pais españa = PaisGetter.get(PaisShop.España);
 	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
 	  
-    private String index_fact;
-    
-    private HashMap<String, NodoStatus> listaNodos;
-    public NodoStatus nodo;
-    public int prioridad;
-    public String autAddr;
-    public String urlStatus;
-    public String urlErrorpage;
-    public boolean testLinksPie;
-    
-    /**
-     * @param listaNodos lista de todos los nodos que está previsto testear
-     * @param nodo nodo concreto que se testeará en el test
-     * @param autAddr URL de acceso a la shop/outlet
-     * @param urlStatus URL correspondiente al servicio que devuelve datos a nivel del 'status' del nodo
-     * @param urlErrorpage URL correspondiente al errorPage
-     * @param testLinksPie si se prueban o no los links a pié de página
-     */
-    public TestNodos(HashMap<String, NodoStatus> listaNodos, NodoStatus nodo, int prioridad, String autAddr, String urlStatus, String urlErrorpage, boolean testLinksPie) {
-        this.index_fact = "Nodo-" + nodo.getIp();
-        this.listaNodos = listaNodos;
+	private String index_fact;
+	
+	private HashMap<String, NodoStatus> listaNodos;
+	public NodoStatus nodo;
+	public int prioridad;
+	public String autAddr;
+	public String urlStatus;
+	public String urlErrorpage;
+	public boolean testLinksPie;
+	
+	/**
+	 * @param listaNodos lista de todos los nodos que está previsto testear
+	 * @param nodo nodo concreto que se testeará en el test
+	 * @param autAddr URL de acceso a la shop/outlet
+	 * @param urlStatus URL correspondiente al servicio que devuelve datos a nivel del 'status' del nodo
+	 * @param urlErrorpage URL correspondiente al errorPage
+	 * @param testLinksPie si se prueban o no los links a pié de página
+	 */
+	public TestNodos(HashMap<String, NodoStatus> listaNodos, NodoStatus nodo, int prioridad, String autAddr, String urlStatus, String urlErrorpage, boolean testLinksPie) {
+		this.index_fact = "Nodo-" + nodo.getIp();
+		this.listaNodos = listaNodos;
 		this.nodo = nodo;
 		this.prioridad = prioridad;
 		this.autAddr = autAddr;
 		this.urlStatus = urlStatus;
 		this.urlErrorpage = urlErrorpage;
 		this.testLinksPie = testLinksPie;
-    }	  
-    
-    private DataCtxShop getCtxShForTest() throws Exception {
-    	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite(); 
-        DataCtxShop dCtxSh = new DataCtxShop();
-        dCtxSh.setChannel(inputParamsSuite.getChannel());
-        dCtxSh.setAppEcom(this.nodo.getAppEcom());
-        //dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
-        dCtxSh.pais = españa;
-        dCtxSh.idioma = castellano;
-        return dCtxSh;
-    }
+	}	  
+	
+	private DataCtxShop getCtxShForTest() throws Exception {
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite(); 
+		DataCtxShop dCtxSh = new DataCtxShop();
+		dCtxSh.setChannel(inputParamsSuite.getChannel());
+		dCtxSh.setAppEcom(this.nodo.getAppEcom());
+		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+		dCtxSh.pais = españa;
+		dCtxSh.idioma = castellano;
+		return dCtxSh;
+	}
 
 	@Test (
 		groups={"Canal:desktop_App:all"},
@@ -115,40 +115,40 @@ public class TestNodos implements Serializable {
 		secMenusDesktopStpV.countSaveMenusEntorno (LineaType.he, null, nodo.getIp(), autAddr);
 		secMenusStpV.seleccionLinea(LineaType.nina, SublineaType.nina_nina, dCtxSh);	
 		secMenusDesktopStpV.countSaveMenusEntorno(LineaType.nina, SublineaType.nina_nina, nodo.getIp(), autAddr);
-		secMenusStpV.seleccionLinea(LineaType.nino, SublineaType.nino_bebe, dCtxSh);     
+		secMenusStpV.seleccionLinea(LineaType.nino, SublineaType.nino_bebe, dCtxSh);	 
 		secMenusDesktopStpV.countSaveMenusEntorno(LineaType.nino, SublineaType.nino_bebe, nodo.getIp(), autAddr);
 
 		this.nodo.setTested(true);
 	}
 
-    private void selectMenuPantalones(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-        Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(
-            	dCtxSh.appE, KeyMenu1rstLevel.from(
-            		LineaType.nina, 
-            		SublineaType.nina_nina, "pantalones"));
-            SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-            secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh);
-    }
-    
-    /**
-     * Se busca un nodo de entre la lista de nodos con el que poder realizar la comparativa a nivel de Status con el nodo actual
-     * Se prioriza la devolución de un nodo que ya esté completamente testeado 
-     */
-    protected NodoStatus findNodoForCompareStatus(HashMap<String, NodoStatus> listaNodosI, NodoStatus nodoAct) {
-        NodoStatus nodoAnt = null;
-        boolean encontrado = false;
-        Iterator<NodoStatus> itNodos = listaNodosI.values().iterator();
-        while (itNodos.hasNext() && !encontrado) { 
-            NodoStatus nodoCandidato = itNodos.next();
-            if (nodoCandidato.getAppEcom() == nodoAct.getAppEcom() &&
-                nodoCandidato.getIp().compareTo(nodoAct.getIp())!=0) {
-                nodoAnt = nodoCandidato;
-                if (this.nodo.getTested()) {
-                    encontrado = true;
-                }
-            }
-        }
-        
-        return nodoAnt;
-    }
+	private void selectMenuPantalones(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+		Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(
+				dCtxSh.appE, KeyMenu1rstLevel.from(
+					LineaType.nina, 
+					SublineaType.nina_nina, "pantalones"));
+			SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
+			secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh);
+	}
+	
+	/**
+	 * Se busca un nodo de entre la lista de nodos con el que poder realizar la comparativa a nivel de Status con el nodo actual
+	 * Se prioriza la devolución de un nodo que ya esté completamente testeado 
+	 */
+	protected NodoStatus findNodoForCompareStatus(HashMap<String, NodoStatus> listaNodosI, NodoStatus nodoAct) {
+		NodoStatus nodoAnt = null;
+		boolean encontrado = false;
+		Iterator<NodoStatus> itNodos = listaNodosI.values().iterator();
+		while (itNodos.hasNext() && !encontrado) { 
+			NodoStatus nodoCandidato = itNodos.next();
+			if (nodoCandidato.getAppEcom() == nodoAct.getAppEcom() &&
+				nodoCandidato.getIp().compareTo(nodoAct.getIp())!=0) {
+				nodoAnt = nodoCandidato;
+				if (this.nodo.getTested()) {
+					encontrado = true;
+				}
+			}
+		}
+		
+		return nodoAnt;
+	}
 }

@@ -12,46 +12,46 @@ import org.openqa.selenium.WebDriver;
 
 public class ModalArticleNotAvailableStpV {
 
-    WebDriver driver = null;
-    Channel channel = null;
-    AppEcom app = null;
+	WebDriver driver = null;
+	Channel channel = null;
+	AppEcom app = null;
 
-    private ModalArticleNotAvailableStpV(Channel channel, AppEcom app, WebDriver driver) throws Exception {
-        this.driver = driver;
-        this.channel = channel;
-        this.app = app;
-    }
+	private ModalArticleNotAvailableStpV(Channel channel, AppEcom app, WebDriver driver) throws Exception {
+		this.driver = driver;
+		this.channel = channel;
+		this.app = app;
+	}
 
-    public static ModalArticleNotAvailableStpV getInstance(Channel channel, AppEcom app, WebDriver driver) throws Exception {
-        return (new ModalArticleNotAvailableStpV(channel, app, driver));
-    }
+	public static ModalArticleNotAvailableStpV getInstance(Channel channel, AppEcom app, WebDriver driver) throws Exception {
+		return (new ModalArticleNotAvailableStpV(channel, app, driver));
+	}
 
-    @Validation (
-    description="El modal de \"Avísame\" por artículo no disponible está en estado #{stateModal} (lo esperamos hasta #{maxSeconds} segundos)",
-    level=State.Info)
-    public boolean validateState(int maxSeconds, StateModal stateModal, WebDriver driver) throws Exception {
+	@Validation (
+	description="El modal de \"Avísame\" por artículo no disponible está en estado #{stateModal} (lo esperamos hasta #{maxSeconds} segundos)",
+	level=State.Info)
+	public boolean validateState(int maxSeconds, StateModal stateModal, WebDriver driver) throws Exception {
 		return (ModalArticleNotAvailable.inStateUntil(stateModal, maxSeconds, driver));
-    }
-    
+	}
+	
 	@Step (
 		description="Seleccionamos el aspa del modal para cerrarlo", 
-        expected="El modal queda en estado No-visible")
-    public void clickAspaForClose(WebDriver driver) throws Exception {
-        ModalArticleNotAvailable.clickAspaForClose(driver);
-        validateState(1, StateModal.notvisible, driver);
-    }
+		expected="El modal queda en estado No-visible")
+	public void clickAspaForClose(WebDriver driver) throws Exception {
+		ModalArticleNotAvailable.clickAspaForClose(driver);
+		validateState(1, StateModal.notvisible, driver);
+	}
 
-    @Validation
-    public ChecksTM checkVisibleAvisame() throws Exception {
-        ChecksTM validations = ChecksTM.getNew();
-        boolean isVisibleModal = ModalArticleNotAvailable.isVisibleUntil(2, driver);
-        boolean isVisibleRPGD = ModalArticleNotAvailable.isVisibleRPGD(2, driver);
-        validations.add(
-            "Si aparece el modal de avisame",
-            isVisibleModal, State.Defect);
-        validations.add(
-            "Si aparece la descripcion de RPGD de usuario",
-            isVisibleRPGD, State.Defect);
-        return validations;
-    }
+	@Validation
+	public ChecksTM checkVisibleAvisame() throws Exception {
+		ChecksTM validations = ChecksTM.getNew();
+		boolean isVisibleModal = ModalArticleNotAvailable.isVisibleUntil(2, driver);
+		boolean isVisibleRPGD = ModalArticleNotAvailable.isVisibleRPGD(2, driver);
+		validations.add(
+			"Si aparece el modal de avisame",
+			isVisibleModal, State.Defect);
+		validations.add(
+			"Si aparece la descripcion de RPGD de usuario",
+			isVisibleRPGD, State.Defect);
+		return validations;
+	}
 }

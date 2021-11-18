@@ -20,34 +20,34 @@ public class PageKlarnaStpV {
 	@Validation (
 		description="Aparece la página inicial de Klarna (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-    public boolean checkIsPage(int maxSeconds) { 
-        return pageKlarna.isPage(maxSeconds);
-    }
+	public boolean checkIsPage(int maxSeconds) { 
+		return pageKlarna.isPage(maxSeconds);
+	}
 	
 	@Step (
 		description="Seleccionamos el botón <b>Comprar</b>", 
-        expected="Aparece el modal de introducción de datos del usuario")
+		expected="Aparece el modal de introducción de datos del usuario")
 	public void clickComprar() {
-        pageKlarna.clickBuyButton();
+		pageKlarna.clickBuyButton();
 	}
 	
 	@Validation (
 		description="Aparece el modal de introducción de los datos del usuario (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-    public boolean checkIsModalInputUserData(int maxSeconds) { 
-        return pageKlarna.isVisibleModalInputUserData(maxSeconds);
-    }
+	public boolean checkIsModalInputUserData(int maxSeconds) { 
+		return pageKlarna.isVisibleModalInputUserData(maxSeconds);
+	}
 	
 	@Step (
 		description="Introducir y confirmar los datos del usuario:<br>#{dataKlarna.getHtmlFormattedData()}",
-        expected="Aparece el modal para la introducción del número personal")
+		expected="Aparece el modal para la introducción del número personal")
 	public void inputUserDataAndConfirm(DataKlarna dataKlarna) {
 		pageKlarna.inputUserDataAndConfirm(dataKlarna);
 	}
 	
 	@Step (
 		description="Introducir el phone number / otp:<br>#{phoneNumber} #{otp}",
-        expected="Aparece el modal para la introducción del número personal")
+		expected="Aparece el modal para la introducción del número personal")
 	public void inputDataPhoneAndConfirm(String phoneNumber, String otp) {
 		pageKlarna.inputDataPhoneAndConfirm(phoneNumber, otp);
 	}
@@ -68,7 +68,7 @@ public class PageKlarnaStpV {
 	
 	@Step (
 		description="Introducir y confirmar el Personal Number: <b>#{personnumber}</b>",
-        expected="Aparece la página Mango de resultado Ok de la compra")
+		expected="Aparece la página Mango de resultado Ok de la compra")
 	public void inputPersonNumberAndConfirm(String personnumber) {
 		pageKlarna.inputPersonNumberAndConfirm(personnumber);
 	}

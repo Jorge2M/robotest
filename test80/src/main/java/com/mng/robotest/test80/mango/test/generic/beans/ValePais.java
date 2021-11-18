@@ -69,57 +69,57 @@ public class ValePais {
 		this.codigoVale = codigoVale;
 	}	
 
-    public String getTextoCheckout() {
-        return this.textoCheckout;
-    }
+	public String getTextoCheckout() {
+		return this.textoCheckout;
+	}
 
-    public void setTextoCheckout(String textoCheckout) {
-        this.textoCheckout = textoCheckout;
-    }   
-    
-    public int getPorcDescuento() {
-        return this.porcDescuento;
-    }
+	public void setTextoCheckout(String textoCheckout) {
+		this.textoCheckout = textoCheckout;
+	}   
+	
+	public int getPorcDescuento() {
+		return this.porcDescuento;
+	}
 
-    public void setPorcDescuento(int porcDescuento) {
-        this.porcDescuento = porcDescuento;
-    }    
-    
-    public Calendar getFechaInicio() {
-        return this.fechaInicio;
-    }
-    
-    public void setFechaInicio(Calendar fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
+	public void setPorcDescuento(int porcDescuento) {
+		this.porcDescuento = porcDescuento;
+	}	
+	
+	public Calendar getFechaInicio() {
+		return this.fechaInicio;
+	}
+	
+	public void setFechaInicio(Calendar fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
 
-    public Calendar getFechaFin() {
-        return this.fechaFin;
-    }
+	public Calendar getFechaFin() {
+		return this.fechaFin;
+	}
 
-    public void setFechaFin(Calendar fechaFin) {
-        this.fechaFin = fechaFin;
-    }        
-    
+	public void setFechaFin(Calendar fechaFin) {
+		this.fechaFin = fechaFin;
+	}		
+	
 
-    public boolean isValid() {
-        return (isActivo() && (!this.filterCal || isInDates()));
-    }
-    
-    public boolean isInDates() {
-        Calendar currDtCal = Calendar.getInstance();
-        if (currDtCal.getTimeInMillis() > this.fechaInicio.getTimeInMillis() &&
-            currDtCal.getTimeInMillis() < this.fechaFin.getTimeInMillis()) {
-            return true;
-        }
-        return false;
-    }
-    
-    public boolean sameKey(ValePais otherValePais) {
-        if (this.pais.getCodigo_pais().compareTo(otherValePais.pais.getCodigo_pais())==0 &&
-            this.codigoVale.compareTo(otherValePais.getCodigoVale())==0) {
-            return true;
-        }
-        return false;
-    }
+	public boolean isValid() {
+		return (isActivo() && (!this.filterCal || isInDates()));
+	}
+	
+	public boolean isInDates() {
+		Calendar currDtCal = Calendar.getInstance();
+		if (currDtCal.getTimeInMillis() > this.fechaInicio.getTimeInMillis() &&
+			currDtCal.getTimeInMillis() < this.fechaFin.getTimeInMillis()) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean sameKey(ValePais otherValePais) {
+		if (this.pais.getCodigo_pais().compareTo(otherValePais.pais.getCodigo_pais())==0 &&
+			this.codigoVale.compareTo(otherValePais.getCodigoVale())==0) {
+			return true;
+		}
+		return false;
+	}
 }

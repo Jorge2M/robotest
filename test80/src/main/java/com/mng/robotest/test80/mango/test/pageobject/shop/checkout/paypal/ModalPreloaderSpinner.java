@@ -8,15 +8,15 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalPreloaderSpinner {
 	
-    private final static String XPathPreloaderSpinner = "//div[@id='preloaderSpinner']";
+	private final static String XPathPreloaderSpinner = "//div[@id='preloaderSpinner']";
 
-    public static boolean isVisibleUntil(int maxSeconds, WebDriver driver) {
-    	return (state(Visible, By.xpath(XPathPreloaderSpinner), driver)
-    			.wait(maxSeconds).check());
-    }
-    
-    public static boolean isNotVisibleUntil(int maxSeconds, WebDriver driver) {
-    	return (state(Invisible, By.xpath(XPathPreloaderSpinner), driver)
-    			.wait(maxSeconds).check());
-    }
+	public static boolean isVisibleUntil(int maxSeconds, WebDriver driver) {
+		return (state(Visible, By.xpath(XPathPreloaderSpinner), driver)
+				.wait(maxSeconds).check());
+	}
+	
+	public static boolean isNotVisibleUntil(int maxSeconds, WebDriver driver) {
+		return (state(Invisible, By.xpath(XPathPreloaderSpinner), driver)
+				.wait(maxSeconds).check());
+	}
 }

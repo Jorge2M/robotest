@@ -13,28 +13,28 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusFiltroCo
 public class SecMenusFiltroCollectionMobil extends SeleniumUtils implements SecMenusFiltroCollection {
 
 	private final SecFiltros secFiltros;
-    
-    public SecMenusFiltroCollectionMobil(AppEcom app, WebDriver driver) {
-    	this.secFiltros = SecFiltros.make(Channel.mobile, app, driver);
-    }
-    
-    @Override
-    public boolean isVisible() {
-    	return (secFiltros.isClickableFiltroUntil(0));
-    }
-    
-    @Override
-    public boolean isVisibleMenu(FilterCollection typeMenu) {
-    	try {
-    		return (secFiltros.isCollectionFilterPresent());
-    	}
-    	catch (Exception e) {
-    		return false;
-    	}
-    }
-    
-    @Override
-    public void click(FilterCollection collection) {
-    	secFiltros.selectCollection(collection);
-    }
+	
+	public SecMenusFiltroCollectionMobil(AppEcom app, WebDriver driver) {
+		this.secFiltros = SecFiltros.make(Channel.mobile, app, driver);
+	}
+	
+	@Override
+	public boolean isVisible() {
+		return (secFiltros.isClickableFiltroUntil(0));
+	}
+	
+	@Override
+	public boolean isVisibleMenu(FilterCollection typeMenu) {
+		try {
+			return (secFiltros.isCollectionFilterPresent());
+		}
+		catch (Exception e) {
+			return false;
+		}
+	}
+	
+	@Override
+	public void click(FilterCollection collection) {
+		secFiltros.selectCollection(collection);
+	}
 }

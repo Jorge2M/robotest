@@ -26,42 +26,42 @@ public class PageConsultaPedidoBolsaStpV {
 
 	@Step (
 		description="Seleccionamos el código de pedido para acceder al Detalle", 
-        expected="Aparece la página de detalle de #{typeDetalle} correcta",
-        saveImagePage=SaveWhen.Always,
-        saveErrorData=SaveWhen.Never)
-    public static void detalleFromListaPedBol(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, WebDriver driver) 
-    throws Exception {
-        PagePedidos.clickLinkPedidoInLineas(driver, dataPedido.getCodigoPedidoManto(), typeDetalle);
-        validacionesTotalesPedido(dataPedido, typeDetalle, appE, driver);
-    }
-    
-    public static void validacionesTotalesPedido(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, WebDriver driver) {
-        validaDatosGeneralesPedido(dataPedido, appE, driver);
-        validaDatosEnvioPedido(dataPedido, typeDetalle, appE, driver);
-    }
-    
-    public static ChecksTM validaDatosEnvioPedido(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, WebDriver driver) {
-    	ChecksTM validations = ChecksTM.getNew();
-        TipoTransporte tipoTransporte = dataPedido.getPago().getTipoEnvioType(appE);
+		expected="Aparece la página de detalle de #{typeDetalle} correcta",
+		saveImagePage=SaveWhen.Always,
+		saveErrorData=SaveWhen.Never)
+	public static void detalleFromListaPedBol(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, WebDriver driver) 
+	throws Exception {
+		PagePedidos.clickLinkPedidoInLineas(driver, dataPedido.getCodigoPedidoManto(), typeDetalle);
+		validacionesTotalesPedido(dataPedido, typeDetalle, appE, driver);
+	}
+	
+	public static void validacionesTotalesPedido(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, WebDriver driver) {
+		validaDatosGeneralesPedido(dataPedido, appE, driver);
+		validaDatosEnvioPedido(dataPedido, typeDetalle, appE, driver);
+	}
+	
+	public static ChecksTM validaDatosEnvioPedido(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
+		TipoTransporte tipoTransporte = dataPedido.getPago().getTipoEnvioType(appE);
 	 	validations.add(
 			"El campo \"tipo servicio\" contiene el valor <b>" + tipoTransporte.getCodigoIntercambio() + "</b> (asociado al tipo de envío " + tipoTransporte + ")",
 			PageDetallePedido.getTipoServicio(driver).compareTo(tipoTransporte.getCodigoIntercambio())==0, State.Info);
 	 	
 	 	if (typeDetalle==TypeDetalle.pedido && 
-	        dataPedido.getTypeEnvio()==TipoTransporte.TIENDA && 
-	        dataPedido.getDataDeliveryPoint()!=null) {
-	        String textEnvioTienda = dataPedido.getDataDeliveryPoint().getCodigo();
+			dataPedido.getTypeEnvio()==TipoTransporte.TIENDA && 
+			dataPedido.getDataDeliveryPoint()!=null) {
+			String textEnvioTienda = dataPedido.getDataDeliveryPoint().getCodigo();
 		 	validations.add(
 				"En los datos de envío aparece el texto <b>ENVIO A TIENDA " + textEnvioTienda + "</b>",
 				PageDetallePedido.get1rstLineDatosEnvioText(driver).contains(textEnvioTienda), State.Defect);
 	 	}
 	 	
-	 	return validations;     
-    }
-    
-    @Validation
-    public static ChecksTM validaDatosGeneralesPedido(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
-    	ChecksTM validations = ChecksTM.getNew();
+	 	return validations;	 
+	}
+	
+	@Validation
+	public static ChecksTM validaDatosGeneralesPedido(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparece la pantalla de detalle del pedido",
 			PageDetallePedido.isPage(driver), State.Warn);
@@ -76,19 +76,19 @@ public class PageConsultaPedidoBolsaStpV {
 			"Figura el código de país (" + dataPedido.getCodigoPais() + ")",
 			PageDetallePedido.isCodPaisPedido(driver, dataPedido.getCodigoPais()), State.Warn);
 	 	
-        Pago pago = dataPedido.getPago();
+		Pago pago = dataPedido.getPago();
 	 	if (pago.getTpv().getEstado()!=null &&
-	        pago.getTpv().getEstado().compareTo("")!=0 &&
-	        appE!=AppEcom.votf) {
+			pago.getTpv().getEstado().compareTo("")!=0 &&
+			appE!=AppEcom.votf) {
 	 		State stateVal = State.Warn;
 	 		if (PageDetallePedido.isPedidoInStateMenos1NULL(driver)) {
-        		stateVal = State.Defect;
-        	}
+				stateVal = State.Defect;
+			}
 		 	validations.add(
 				"Aparece uno de los resultados posibles según el TPV: " + pago.getTpv().getEstado(),
 				PageDetallePedido.isStateInTpvStates(driver, dataPedido), stateVal);
 	 	}
 	 	
 	 	return validations;
-    }
+	}
 }

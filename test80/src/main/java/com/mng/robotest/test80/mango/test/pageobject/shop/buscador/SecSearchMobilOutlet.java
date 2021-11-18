@@ -10,24 +10,24 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecSearchMobilOutlet extends PageObjTM implements SecSearch {
 	
-    private final static String XPathInputBuscador = "//form[not(@class)]/input[@class='search-input']";
-    private final static String XPathCancelarLink = "//div[@class='search-cancel']";
-    
-    private SecSearchMobilOutlet(WebDriver driver) {
-    	super(driver);
-    }
-    
-    public static SecSearchMobilOutlet getNew(WebDriver driver) {
-    	return (new SecSearchMobilOutlet(driver));
-    }
-    
-    @Override
+	private final static String XPathInputBuscador = "//form[not(@class)]/input[@class='search-input']";
+	private final static String XPathCancelarLink = "//div[@class='search-cancel']";
+	
+	private SecSearchMobilOutlet(WebDriver driver) {
+		super(driver);
+	}
+	
+	public static SecSearchMobilOutlet getNew(WebDriver driver) {
+		return (new SecSearchMobilOutlet(driver));
+	}
+	
+	@Override
 	public void search(String text) {
-        WebElement input = getElementVisible(driver, By.xpath(XPathInputBuscador));
-        input.clear();
-        input.sendKeys(text);
-        //sendKeysWithRetry(5, input, text);
-        input.sendKeys(Keys.RETURN);
+		WebElement input = getElementVisible(driver, By.xpath(XPathInputBuscador));
+		input.clear();
+		input.sendKeys(text);
+		//sendKeysWithRetry(5, input, text);
+		input.sendKeys(Keys.RETURN);
 	}
 	
 	@Override

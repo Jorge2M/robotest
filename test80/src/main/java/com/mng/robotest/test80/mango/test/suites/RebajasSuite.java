@@ -15,20 +15,20 @@ import com.mng.robotest.test80.mango.test.factoryes.ListRebajasXPais;
 
 public class RebajasSuite extends SuiteMaker {
 
-    public RebajasSuite(InputParamsMango inputParams) {
-    	super(inputParams);
-    	setParameters(getParametersSuiteShop(inputParams));
-    	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), ListRebajasXPais.class);
-    	testRun.setStorerErrorStep(new ErrorStorer());
-    	testRun.addGroups(getSpecificGroups());
-    	addTestRun(testRun);
-    	setParallelMode(ParallelMode.METHODS);
-    	setThreadCount(3);
-    }
-    
-    private List<String> getSpecificGroups() {
-    	List<String> listReturn = new ArrayList<>();
-    	listReturn.add("SupportsFactoryCountrys");
-        return listReturn;
-    }
+	public RebajasSuite(InputParamsMango inputParams) {
+		super(inputParams);
+		setParameters(getParametersSuiteShop(inputParams));
+		TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), ListRebajasXPais.class);
+		testRun.setStorerErrorStep(new ErrorStorer());
+		testRun.addGroups(getSpecificGroups());
+		addTestRun(testRun);
+		setParallelMode(ParallelMode.METHODS);
+		setThreadCount(3);
+	}
+	
+	private List<String> getSpecificGroups() {
+		List<String> listReturn = new ArrayList<>();
+		listReturn.add("SupportsFactoryCountrys");
+		return listReturn;
+	}
 }

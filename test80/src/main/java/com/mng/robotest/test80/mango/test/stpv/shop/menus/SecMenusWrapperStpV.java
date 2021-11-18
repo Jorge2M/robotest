@@ -48,110 +48,110 @@ public class SecMenusWrapperStpV {
 	private final Pais pais;
 	private final WebDriver driver;
 	private final SecMenusUserStpV secMenusUserStpV;
-    private final SecMenuLateralMobilStpV secMenuLateralMobilStpV;
-    private final SecMenusDesktopStpV secMenusDesktopStpV;
-    private final SecMenusWrap secMenusWrap;
-    
-    private SecMenusWrapperStpV(Channel channel, AppEcom app, Pais pais, WebDriver driver) {
-    	this.channel = channel;
-    	this.app = app;
-    	this.pais = pais;
-    	this.driver = driver;
-    	this.secMenusUserStpV = SecMenusUserStpV.getNew(channel, app, driver);
-    	this.secMenuLateralMobilStpV = SecMenuLateralMobilStpV.getNew(channel, app, driver);
-    	this.secMenusDesktopStpV = SecMenusDesktopStpV.getNew(pais, app, driver);
-    	this.secMenusWrap = SecMenusWrap.getNew(channel, app, driver);
-    }
-    
-    public static SecMenusWrapperStpV getNew(Channel channel, AppEcom app, Pais pais, WebDriver driver) {
-    	return (new SecMenusWrapperStpV(channel, app, pais, driver));
-    }
-    
-    public static SecMenusWrapperStpV getNew(DataCtxShop dCtxSh, WebDriver driver) {
-    	return (getNew(dCtxSh.channel, dCtxSh.appE, dCtxSh.pais, driver));
-    }
-    
-    public SecMenusUserStpV getMenusUser() {
-    	return this.secMenusUserStpV;
-    }
-    
-    @Validation
-    public ChecksTM validateLineas(Pais pais) throws Exception {
-        ChecksTM validations = ChecksTM.getNew();
-        LineaType[] lineasToTest = Linea.LineaType.values();
-        for (LineaType lineaType : lineasToTest) {
-        	if (lineaType.isActiveIn(channel)) {
-	            ThreeState stateLinea = pais.getShoponline().stateLinea(lineaType, app);
-	            if ( stateLinea!=ThreeState.UNKNOWN &&
-	                (lineaType!=LineaType.rebajas || UtilsMangoTest.validarLineaRebajas(pais))) {
-	                ThreeState apareceLinea = stateLinea;
-	                
-	                //Caso especial de un país con una sóla línea de she -> No ha de aparecer la línea de she
-	                if (lineaType==LineaType.she && app!=AppEcom.outlet && pais.getShoponline().getNumLineasTiendas(app)==1) {
-	                    apareceLinea = ThreeState.FALSE;
-	                }
-	                
-	                boolean isLineaPresent = isLineaPresent(lineaType);
-	                if (apareceLinea==ThreeState.TRUE) {
-	            		validations.add (
-	        				"<b>Sí</b> aparece el link de la línea <b>" + lineaType + "</b>",
-	        				isLineaPresent, State.Warn);
-	                } else {
-	            		validations.add (
-	            			"<b>No</b> aparece el link de la línea <b>" + lineaType + "</b>",
-	            			!isLineaPresent, State.Warn);
-	                }
-	            }
-        	}
-        }
-            
-        return validations;
-    }
-    
-    private boolean isLineaPresent(LineaType lineaType) {
-    	try {
-    		return secMenusWrap.isLineaPresent(lineaType);
-    	} 
-    	catch (Exception e) {
-    		return false;
-    	}
-    }
-    
-    @Validation
-    public ChecksTM checkOrderAndTranslationMenus(Linea linea, CodIdioma codIdioma) throws Exception {
-    	ChecksTM validations = ChecksTM.getNew();
-    	List<Label> menuInOrderTraduc = MenuTraduc.getLabels(linea.getType(), codIdioma);
-    	List<DataScreenMenu> listMenusScreen = secMenusWrap.getListDataScreenMenus(linea, null);
-    	ListComparator comparator = ListComparator.getNew(menuInOrderTraduc, listMenusScreen);
-    	boolean menusMatch = comparator.listsMatch();
-    	String html = "";
-    	if (!menusMatch) {
-        	html = "<br>" + comparator.getHtml();
-    	}
-    	validations.add(
-        	"Los menús tienen la label y el orden esperado" + html,
-        	menusMatch, State.Warn);
+	private final SecMenuLateralMobilStpV secMenuLateralMobilStpV;
+	private final SecMenusDesktopStpV secMenusDesktopStpV;
+	private final SecMenusWrap secMenusWrap;
+	
+	private SecMenusWrapperStpV(Channel channel, AppEcom app, Pais pais, WebDriver driver) {
+		this.channel = channel;
+		this.app = app;
+		this.pais = pais;
+		this.driver = driver;
+		this.secMenusUserStpV = SecMenusUserStpV.getNew(channel, app, driver);
+		this.secMenuLateralMobilStpV = SecMenuLateralMobilStpV.getNew(channel, app, driver);
+		this.secMenusDesktopStpV = SecMenusDesktopStpV.getNew(pais, app, driver);
+		this.secMenusWrap = SecMenusWrap.getNew(channel, app, driver);
+	}
+	
+	public static SecMenusWrapperStpV getNew(Channel channel, AppEcom app, Pais pais, WebDriver driver) {
+		return (new SecMenusWrapperStpV(channel, app, pais, driver));
+	}
+	
+	public static SecMenusWrapperStpV getNew(DataCtxShop dCtxSh, WebDriver driver) {
+		return (getNew(dCtxSh.channel, dCtxSh.appE, dCtxSh.pais, driver));
+	}
+	
+	public SecMenusUserStpV getMenusUser() {
+		return this.secMenusUserStpV;
+	}
+	
+	@Validation
+	public ChecksTM validateLineas(Pais pais) throws Exception {
+		ChecksTM validations = ChecksTM.getNew();
+		LineaType[] lineasToTest = Linea.LineaType.values();
+		for (LineaType lineaType : lineasToTest) {
+			if (lineaType.isActiveIn(channel)) {
+				ThreeState stateLinea = pais.getShoponline().stateLinea(lineaType, app);
+				if ( stateLinea!=ThreeState.UNKNOWN &&
+					(lineaType!=LineaType.rebajas || UtilsMangoTest.validarLineaRebajas(pais))) {
+					ThreeState apareceLinea = stateLinea;
+					
+					//Caso especial de un país con una sóla línea de she -> No ha de aparecer la línea de she
+					if (lineaType==LineaType.she && app!=AppEcom.outlet && pais.getShoponline().getNumLineasTiendas(app)==1) {
+						apareceLinea = ThreeState.FALSE;
+					}
+					
+					boolean isLineaPresent = isLineaPresent(lineaType);
+					if (apareceLinea==ThreeState.TRUE) {
+						validations.add (
+							"<b>Sí</b> aparece el link de la línea <b>" + lineaType + "</b>",
+							isLineaPresent, State.Warn);
+					} else {
+						validations.add (
+							"<b>No</b> aparece el link de la línea <b>" + lineaType + "</b>",
+							!isLineaPresent, State.Warn);
+					}
+				}
+			}
+		}
+			
+		return validations;
+	}
+	
+	private boolean isLineaPresent(LineaType lineaType) {
+		try {
+			return secMenusWrap.isLineaPresent(lineaType);
+		} 
+		catch (Exception e) {
+			return false;
+		}
+	}
+	
+	@Validation
+	public ChecksTM checkOrderAndTranslationMenus(Linea linea, CodIdioma codIdioma) throws Exception {
+		ChecksTM validations = ChecksTM.getNew();
+		List<Label> menuInOrderTraduc = MenuTraduc.getLabels(linea.getType(), codIdioma);
+		List<DataScreenMenu> listMenusScreen = secMenusWrap.getListDataScreenMenus(linea, null);
+		ListComparator comparator = ListComparator.getNew(menuInOrderTraduc, listMenusScreen);
+		boolean menusMatch = comparator.listsMatch();
+		String html = "";
+		if (!menusMatch) {
+			html = "<br>" + comparator.getHtml();
+		}
+		validations.add(
+			"Los menús tienen la label y el orden esperado" + html,
+			menusMatch, State.Warn);
 
-    	return validations;
-    }
-    
-    @Validation
-    public ChecksTM checkLineaRebajas(boolean salesOnInCountry, DataCtxShop dCtxSh) {
-        ChecksTM validations = ChecksTM.getNew();
-        int maxSeconds = 3;
-        boolean isPresentLinRebajas = secMenusWrap.isLineaPresentUntil(LineaType.rebajas, maxSeconds);
-        if (salesOnInCountry && dCtxSh.pais.isVentaOnline()) {
-        	validations.add(
-        		PrefixRebajas + "Aparece la línea \"Rebajas\" (lo esperamos hasta " + maxSeconds + " segundos)",
-	    		isPresentLinRebajas, State.Defect);
-        } else {
-        	validations.add(
-	    		PrefixRebajas + "No aparece la línea \"Rebajas\"",
-	    		!isPresentLinRebajas, State.Defect);
-        }
-       
-        return validations;
-    }
+		return validations;
+	}
+	
+	@Validation
+	public ChecksTM checkLineaRebajas(boolean salesOnInCountry, DataCtxShop dCtxSh) {
+		ChecksTM validations = ChecksTM.getNew();
+		int maxSeconds = 3;
+		boolean isPresentLinRebajas = secMenusWrap.isLineaPresentUntil(LineaType.rebajas, maxSeconds);
+		if (salesOnInCountry && dCtxSh.pais.isVentaOnline()) {
+			validations.add(
+				PrefixRebajas + "Aparece la línea \"Rebajas\" (lo esperamos hasta " + maxSeconds + " segundos)",
+				isPresentLinRebajas, State.Defect);
+		} else {
+			validations.add(
+				PrefixRebajas + "No aparece la línea \"Rebajas\"",
+				!isPresentLinRebajas, State.Defect);
+		}
+	   
+		return validations;
+	}
 
 	/**
 	 * Recorre todos los menús existentes en la página y crea un step por cada uno de ellos
@@ -196,95 +196,95 @@ public class SecMenusWrapperStpV {
 				GenericCheck.ImgsBroken)).checks(driver);
 	}
 
-    @Validation (
-    	description="Como mínimo se obtiene 1 artículo (lo esperamos un máximo de #{maxSeconds} segundos)",
-    	level=State.Warn,
-    	avoidEvidences=true)
-    private boolean checkIsVisibleAarticle(DataCtxShop dCtxSh, int maxSeconds) throws Exception {
-        PageGaleria pageGaleria = PageGaleria.getNew(dCtxSh.channel, dCtxSh.appE, driver);
-        return (pageGaleria.isVisibleArticuloUntil(1, maxSeconds));
-    }
-    
-    public void selectMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
-        if (dCtxSh.channel.isDevice()) {
-            secMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh.pais);
-        } else {	
-        	secMenusDesktopStpV.selectMenuSuperiorTypeCatalog(menu1rstLevel, dCtxSh);
-        }
-    }
-    public boolean checkExistMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
-        if (dCtxSh.channel.isDevice()) {
-            return secMenuLateralMobilStpV.checkNotExistsMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh.pais);
-        } else {	
-        	return secMenusDesktopStpV.checkNotExistsMenuSuperiorTypeCatalog(menu1rstLevel);
-        }
-    }
-    
-    public void selectMenuLateral1erLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
-        if (dCtxSh.channel.isDevice()) {
-            secMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh.pais); 
-        } else {
-        	secMenusDesktopStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh);        
-        }
-    }
-    
-    public void selectMenu2onLevel(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh) throws Exception {
-        if (dCtxSh.channel.isDevice()) {
-        	SecFiltrosStpV.selectFiltroMenus(app, channel, Arrays.asList(menu2onLevel), driver);
-        } else {
-            secMenusDesktopStpV.selectMenuLateral2oLevel(menu2onLevel, dCtxSh);
-        }
-    }
-    
-    public void seleccionLinea(LineaType lineaType, SublineaType sublineaType, DataCtxShop dCtxSh) throws Exception {
-        if (sublineaType==null) {
-            seleccionLinea(lineaType);
-        } else {
-        	seleccionSublinea(lineaType, sublineaType, dCtxSh);
-        }
-    }
-    
-    public void seleccionLinea(LineaType lineaType) throws Exception {
-        if (channel.isDevice()) {
-            secMenuLateralMobilStpV.seleccionLinea(lineaType, pais);
-        } else {
-	        secMenusDesktopStpV.seleccionLinea(lineaType);
-        }
-    }
-    
-    public void seleccionSublinea(LineaType lineaType, SublineaType sublineaType, DataCtxShop dCtxSh)
-    throws Exception {
-        if (dCtxSh.channel.isDevice()) {
-            secMenuLateralMobilStpV.seleccionSublineaNinos(lineaType, sublineaType, pais);
-        } else {
-        	secMenusDesktopStpV.seleccionSublinea(lineaType, sublineaType);
-        }
-    }
-    
-    public void selectFiltroCollectionIfExists(FilterCollection typeMenu) throws Exception {
-    	SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(channel, app, driver);
-    	if (filtrosCollection.isVisibleMenu(FilterCollection.nextSeason)) {
-    		selectFiltroCollection(typeMenu);
-    	}
-    }
-    
-    @Step (
-    	description="Seleccionar filtro de colecciones <b>#{typeMenu}</b>", 
-        expected="Aparece una galería con artículos de temporadas#{typeMenu.getListTempArticles()}")
-    public void selectFiltroCollection(FilterCollection typeMenu) {
-    	SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(channel, app, driver);
-    	filtrosCollection.click(typeMenu);
-        if (channel==Channel.desktop) {
-	        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app, driver);
-	        if (typeMenu == FilterCollection.sale) {
-	            pageGaleriaStpV.validaArticlesOfTemporadas(typeMenu.getListTempArticles());
-	            pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.norebajado, State.Warn, false);
-	        }
-	        
-	        if (typeMenu == FilterCollection.nextSeason) {
-	        	pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.rebajado, State.Info, true);
-	        	pageGaleriaStpV.validaArticlesOfTemporadas(typeMenu.getListTempArticles(), State.Info, true);
-	        }
-        }
-    }    
+	@Validation (
+		description="Como mínimo se obtiene 1 artículo (lo esperamos un máximo de #{maxSeconds} segundos)",
+		level=State.Warn,
+		avoidEvidences=true)
+	private boolean checkIsVisibleAarticle(DataCtxShop dCtxSh, int maxSeconds) throws Exception {
+		PageGaleria pageGaleria = PageGaleria.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		return (pageGaleria.isVisibleArticuloUntil(1, maxSeconds));
+	}
+	
+	public void selectMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
+		if (dCtxSh.channel.isDevice()) {
+			secMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh.pais);
+		} else {	
+			secMenusDesktopStpV.selectMenuSuperiorTypeCatalog(menu1rstLevel, dCtxSh);
+		}
+	}
+	public boolean checkExistMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
+		if (dCtxSh.channel.isDevice()) {
+			return secMenuLateralMobilStpV.checkNotExistsMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh.pais);
+		} else {	
+			return secMenusDesktopStpV.checkNotExistsMenuSuperiorTypeCatalog(menu1rstLevel);
+		}
+	}
+	
+	public void selectMenuLateral1erLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
+		if (dCtxSh.channel.isDevice()) {
+			secMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh.pais); 
+		} else {
+			secMenusDesktopStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh);		
+		}
+	}
+	
+	public void selectMenu2onLevel(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh) throws Exception {
+		if (dCtxSh.channel.isDevice()) {
+			SecFiltrosStpV.selectFiltroMenus(app, channel, Arrays.asList(menu2onLevel), driver);
+		} else {
+			secMenusDesktopStpV.selectMenuLateral2oLevel(menu2onLevel, dCtxSh);
+		}
+	}
+	
+	public void seleccionLinea(LineaType lineaType, SublineaType sublineaType, DataCtxShop dCtxSh) throws Exception {
+		if (sublineaType==null) {
+			seleccionLinea(lineaType);
+		} else {
+			seleccionSublinea(lineaType, sublineaType, dCtxSh);
+		}
+	}
+	
+	public void seleccionLinea(LineaType lineaType) throws Exception {
+		if (channel.isDevice()) {
+			secMenuLateralMobilStpV.seleccionLinea(lineaType, pais);
+		} else {
+			secMenusDesktopStpV.seleccionLinea(lineaType);
+		}
+	}
+	
+	public void seleccionSublinea(LineaType lineaType, SublineaType sublineaType, DataCtxShop dCtxSh)
+	throws Exception {
+		if (dCtxSh.channel.isDevice()) {
+			secMenuLateralMobilStpV.seleccionSublineaNinos(lineaType, sublineaType, pais);
+		} else {
+			secMenusDesktopStpV.seleccionSublinea(lineaType, sublineaType);
+		}
+	}
+	
+	public void selectFiltroCollectionIfExists(FilterCollection typeMenu) throws Exception {
+		SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(channel, app, driver);
+		if (filtrosCollection.isVisibleMenu(FilterCollection.nextSeason)) {
+			selectFiltroCollection(typeMenu);
+		}
+	}
+	
+	@Step (
+		description="Seleccionar filtro de colecciones <b>#{typeMenu}</b>", 
+		expected="Aparece una galería con artículos de temporadas#{typeMenu.getListTempArticles()}")
+	public void selectFiltroCollection(FilterCollection typeMenu) {
+		SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(channel, app, driver);
+		filtrosCollection.click(typeMenu);
+		if (channel==Channel.desktop) {
+			PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app, driver);
+			if (typeMenu == FilterCollection.sale) {
+				pageGaleriaStpV.validaArticlesOfTemporadas(typeMenu.getListTempArticles());
+				pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.norebajado, State.Warn, false);
+			}
+			
+			if (typeMenu == FilterCollection.nextSeason) {
+				pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.rebajado, State.Info, true);
+				pageGaleriaStpV.validaArticlesOfTemporadas(typeMenu.getListTempArticles(), State.Info, true);
+			}
+		}
+	}	
 }

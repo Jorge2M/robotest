@@ -9,25 +9,25 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageGestorConsultaCambioFamilia {
 
-    public static String titulo = "Consulta y cambio de familia";
-    static String iniXPathTitulo = "//td[@class='txt11B' and text()[contains(.,'";
-    static String XPathConsultaTable = "//form[@id='formConsulta']/table";
-    static String XPathCambioFamiliaTable = "//form[@id='formCambio']/table";
-    static String iniXPathConsultaButton = "//form[@id='formOptions']//input[@value='Consultar'";
-    static String XPathCambioFamiliaButton = "//form[@id='formOptions']//input[@value='Cambiar']";
-    static String XPathSelectFamiliaOptionAccesorios = "//select[@id='formConsulta:FamiliaConsultar']//option[@value='Accesorios']";
-    static String XPathConsultarPorFamiliaButton = "//input[@id='formConsulta:consultaPorFamilia']";
-    static String XPathTablaProductos = "//th[text()='PRODUCTO']/ancestor::table";
-    static String XPathTablaProductosFamiliaPrincipalFirstRow = XPathTablaProductos + "//tbody/tr[1]/td[5]";
+	public static String titulo = "Consulta y cambio de familia";
+	static String iniXPathTitulo = "//td[@class='txt11B' and text()[contains(.,'";
+	static String XPathConsultaTable = "//form[@id='formConsulta']/table";
+	static String XPathCambioFamiliaTable = "//form[@id='formCambio']/table";
+	static String iniXPathConsultaButton = "//form[@id='formOptions']//input[@value='Consultar'";
+	static String XPathCambioFamiliaButton = "//form[@id='formOptions']//input[@value='Cambiar']";
+	static String XPathSelectFamiliaOptionAccesorios = "//select[@id='formConsulta:FamiliaConsultar']//option[@value='Accesorios']";
+	static String XPathConsultarPorFamiliaButton = "//input[@id='formConsulta:consultaPorFamilia']";
+	static String XPathTablaProductos = "//th[text()='PRODUCTO']/ancestor::table";
+	static String XPathTablaProductosFamiliaPrincipalFirstRow = XPathTablaProductos + "//tbody/tr[1]/td[5]";
 
-    public static String getXPathTitulo(String title){
-    	return (iniXPathTitulo + title + "')]]");
-    }  
-    
-    public static String getXPathConsultaButtonDisabled() {
-    	return (iniXPathConsultaButton + " and @disabled='disabled']");
-    }
-    
+	public static String getXPathTitulo(String title){
+		return (iniXPathTitulo + title + "')]]");
+	}  
+	
+	public static String getXPathConsultaButtonDisabled() {
+		return (iniXPathConsultaButton + " and @disabled='disabled']");
+	}
+	
 	public static boolean isPage(WebDriver driver) {
 		String xpath = getXPathTitulo(titulo);
 		return (state(Present, By.xpath(xpath), driver).check());

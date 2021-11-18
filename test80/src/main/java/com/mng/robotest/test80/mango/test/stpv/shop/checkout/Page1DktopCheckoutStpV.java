@@ -21,7 +21,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 
 public class Page1DktopCheckoutStpV {
-    
+	
 	private final Page1DktopCheckout page1DktopCheckout;
 	private final Channel channel;
 	private final AppEcom app;
@@ -35,10 +35,10 @@ public class Page1DktopCheckoutStpV {
 	}
 	
 	@Validation
-    public ChecksTM validateIsPageOK(DataBag dataBag) throws Exception {
-    	ChecksTM validations = ChecksTM.getNew();
-        int maxSeconds = 5;
-        boolean isPageInitCheckout = page1DktopCheckout.isPageUntil(maxSeconds);
+	public ChecksTM validateIsPageOK(DataBag dataBag) throws Exception {
+		ChecksTM validations = ChecksTM.getNew();
+		int maxSeconds = 5;
+		boolean isPageInitCheckout = page1DktopCheckout.isPageUntil(maxSeconds);
 	 	validations.add(
 			"Aparece la página inicial del Checkout (la esperamos un máximo de " + maxSeconds + " segundos)",
 			isPageInitCheckout, State.Warn, true);
@@ -52,42 +52,42 @@ public class Page1DktopCheckoutStpV {
 			page1DktopCheckout.validateArticlesAndImport(dataBag), State.Warn);
 	 	
 	 	return validations;
-    }
-    
+	}
+	
 	@Validation
-    public ChecksTM validateIsVersionChequeRegalo(ChequeRegalo chequeRegalo) {
+	public ChecksTM validateIsVersionChequeRegalo(ChequeRegalo chequeRegalo) {
 		ChecksTM validations = ChecksTM.getNew();
-        int maxSeconds = 5;
-    	validations.add(
-    		"Aparece la página inicial del Checkout (la esperamos un máximo de " + maxSeconds + " segundos)<br>",
-    		page1DktopCheckout.isPageUntil(maxSeconds), State.Defect);
-    	validations.add(
-    		"Aparecen los datos introducidos:<br>" + 
-    		"\"Nombre: <b>" + chequeRegalo.getNombre() + "</b><br>" + 
-    		"\"Apellidos: <b>" + chequeRegalo.getApellidos() + "</b><br>" + 
-    		"\"Email: <b>" + chequeRegalo.getEmail() + "</b><br>" + 
-    		"\"Importe: <b>" + chequeRegalo.getImporte() + "</b><br>" + 
-    		"\"Mensaje: <b>" + chequeRegalo.getMensaje() + "</b>",
-    		page1DktopCheckout.isDataChequeRegalo(chequeRegalo), State.Warn);
-    	return validations;
-    }
-    
+		int maxSeconds = 5;
+		validations.add(
+			"Aparece la página inicial del Checkout (la esperamos un máximo de " + maxSeconds + " segundos)<br>",
+			page1DktopCheckout.isPageUntil(maxSeconds), State.Defect);
+		validations.add(
+			"Aparecen los datos introducidos:<br>" + 
+			"\"Nombre: <b>" + chequeRegalo.getNombre() + "</b><br>" + 
+			"\"Apellidos: <b>" + chequeRegalo.getApellidos() + "</b><br>" + 
+			"\"Email: <b>" + chequeRegalo.getEmail() + "</b><br>" + 
+			"\"Importe: <b>" + chequeRegalo.getImporte() + "</b><br>" + 
+			"\"Mensaje: <b>" + chequeRegalo.getMensaje() + "</b>",
+			page1DktopCheckout.isDataChequeRegalo(chequeRegalo), State.Warn);
+		return validations;
+	}
+	
 	@Validation
-    public ChecksTM validaResultImputPromoEmpl(DataBag dataBag) throws Exception {
-    	ChecksTM validations = ChecksTM.getNew();
-        int maxSeconds = 5;
+	public ChecksTM validaResultImputPromoEmpl(DataBag dataBag) throws Exception {
+		ChecksTM validations = ChecksTM.getNew();
+		int maxSeconds = 5;
 	 	validations.add(
 			"Aparece el descuento total aplicado al empleado (lo experamos hasta " + maxSeconds + " segundos)",
 			page1DktopCheckout.isVisibleDescuentoEmpleadoUntil(maxSeconds), State.Defect);
 	 	
-    	Descuento descuento = new Descuento(app, DiscountType.Empleado);
+		Descuento descuento = new Descuento(app, DiscountType.Empleado);
 	 	validations.add(
 			"Para todos los artículos, el % de descuento final es como mínimo del " + 
 			descuento.getPercentageDesc() + "% (" + descuento.getDiscountOver().getDescription() + ")",
 			page1DktopCheckout.validateArticlesAndDiscount(dataBag, descuento), State.Warn);
 	 	return validations;
-    }
-    
+	}
+	
 	@Validation (
 		description="<b>Sí</b> aparece el texto del vale/campaña <b>#{valePais.getCampanya()}</b> (\"#{valePais.getTextoCheckout()}\")",
 		level=State.Defect)
@@ -104,45 +104,45 @@ public class Page1DktopCheckoutStpV {
 	
 	@Step (
 		description="Introducir el vale <b style=\"color:blue;\">#{valePais.getCodigoVale()}</b> y pulsar el botón \"CONFIRMAR\"", 
-        expected="Aparece la página de resumen de artículos con los descuentos correctamente aplicados",
-        saveNettraffic=SaveWhen.Always)
-    public void inputValeDescuento(ValePais valePais, DataBag dataBag) throws Exception { 
+		expected="Aparece la página de resumen de artículos con los descuentos correctamente aplicados",
+		saveNettraffic=SaveWhen.Always)
+	public void inputValeDescuento(ValePais valePais, DataBag dataBag) throws Exception { 
 		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app, driver);
-        pageCheckoutWrapper.inputCodigoPromoAndAccept(valePais.getCodigoVale());
-        dataBag.setImporteTotal(pageCheckoutWrapper.getPrecioTotalFromResumen());    
-        checkAfterInputDiscountVale(valePais);
-        if (valePais.isValid()) {
-        	checkValeDiscountIsCorrect(valePais, dataBag);
-        }
-        
+		pageCheckoutWrapper.inputCodigoPromoAndAccept(valePais.getCodigoVale());
+		dataBag.setImporteTotal(pageCheckoutWrapper.getPrecioTotalFromResumen());	
+		checkAfterInputDiscountVale(valePais);
+		if (valePais.isValid()) {
+			checkValeDiscountIsCorrect(valePais, dataBag);
+		}
+		
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.GoogleAnalytics,
 				GenericCheck.Analitica,
 				GenericCheck.NetTraffic)).checks(driver);
-    }
+	}
 	
 	@Validation
 	private ChecksTM checkAfterInputDiscountVale(ValePais valePais) {
-    	ChecksTM validations = ChecksTM.getNew();
-        int maxSeconds = 1;
-        boolean isVisibleError = page1DktopCheckout.isVisibleErrorRojoInputPromoUntil(maxSeconds);
-        if (valePais.isValid()) {
+		ChecksTM validations = ChecksTM.getNew();
+		int maxSeconds = 1;
+		boolean isVisibleError = page1DktopCheckout.isVisibleErrorRojoInputPromoUntil(maxSeconds);
+		if (valePais.isValid()) {
 		 	validations.add(
 				"<b>No</b> aparece mensaje de error en rojo (rgba(255, 0, 0, 1) en el bloque correspondiente al \"Código promocional\"",
 				!isVisibleError, State.Defect);
-        } else {
+		} else {
 		 	validations.add(
 				"<b>Sí</b> aparece mensaje de error en rojo (rgba(255, 0, 0, 1) en el bloque correspondiente al \"Código promocional\"",
 				isVisibleError, State.Defect);
-        }
-        
+		}
+		
 		return validations;
 	}
 	
 	@Validation
 	private ChecksTM checkValeDiscountIsCorrect(ValePais valePais, DataBag dataBag) throws Exception {
-    	ChecksTM validations = ChecksTM.getNew();
-    	Descuento descuento = new Descuento(valePais.getPorcDescuento(), app);
+		ChecksTM validations = ChecksTM.getNew();
+		Descuento descuento = new Descuento(valePais.getPorcDescuento(), app);
 	 	validations.add(
 			"En los artículos a los que aplica, el descuento es de " +  
 			descuento.getPercentageDesc() + "% (" + descuento.getDiscountOver().getDescription() + "):" +
@@ -150,14 +150,14 @@ public class Page1DktopCheckoutStpV {
 			page1DktopCheckout.validateArticlesAndDiscount(dataBag, descuento), State.Defect);
 	 	return validations;
 	}
-    
+	
 	@Step (
 		description="Si existe -> seleccionar el link \"Eliminar\" asociado al vale", 
-        expected="El vale desaparece")
-    public void clearValeIfLinkExists() throws Exception {
+		expected="El vale desaparece")
+	public void clearValeIfLinkExists() throws Exception {
 		new PageCheckoutWrapper(channel, app, driver).clickEliminarValeIfExists();
-        checkIsVisibleInputVale(1);
-    }
+		checkIsVisibleInputVale(1);
+	}
 	
 	@Validation (
 		description="Aparece el input para la introducción del vale (lo esperamos hasta #{maxSeconds} segundos)",
@@ -165,19 +165,19 @@ public class Page1DktopCheckoutStpV {
 	private boolean checkIsVisibleInputVale(int maxSeconds) throws Exception {
 		return (page1DktopCheckout.isVisibleInputCodigoPromoUntil(maxSeconds));
 	}
-    
-    @Step (
-    	description="Introducir un código de vendedor correcto #{codigoVendedor} y pulsar el botón \"Aceptar\"", 
-        expected="El vendedor queda registrado")
-    public void stepIntroduceCodigoVendedorVOTF(String codigoVendedor) throws Exception {
-        page1DktopCheckout.inputVendedorVOTF(codigoVendedor);
-        page1DktopCheckout.acceptInputVendedorVOTF();
-        checkAfterInputCodigoVendedor(codigoVendedor);                
-    }
-    
-    @Validation
-    private ChecksTM checkAfterInputCodigoVendedor(String codigoVendedor) {
-    	ChecksTM validations = ChecksTM.getNew();
+	
+	@Step (
+		description="Introducir un código de vendedor correcto #{codigoVendedor} y pulsar el botón \"Aceptar\"", 
+		expected="El vendedor queda registrado")
+	public void stepIntroduceCodigoVendedorVOTF(String codigoVendedor) throws Exception {
+		page1DktopCheckout.inputVendedorVOTF(codigoVendedor);
+		page1DktopCheckout.acceptInputVendedorVOTF();
+		checkAfterInputCodigoVendedor(codigoVendedor);				
+	}
+	
+	@Validation
+	private ChecksTM checkAfterInputCodigoVendedor(String codigoVendedor) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Desaparece el campo de Input del código de vendedor",
 			!page1DktopCheckout.isVisibleInputVendedorVOTF(), State.Defect);
@@ -185,5 +185,5 @@ public class Page1DktopCheckoutStpV {
 			"En su lugar se pinta el código de vendedor " + codigoVendedor,
 			page1DktopCheckout.isVisibleCodigoVendedorVOTF(codigoVendedor), State.Defect);
 	 	return validations;
-    }
+	}
 }

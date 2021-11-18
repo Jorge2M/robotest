@@ -81,19 +81,19 @@ public abstract class PageGaleria extends PageObjTM {
 	abstract public void clickHearthIcon(WebElement hearthIcon) throws Exception;
 
 	
-    public static List<LabelArticle> listLabelsNew = Arrays.asList(
-    	    LabelArticle.ComingSoon, 
-    	    LabelArticle.NewNow, 
-    	    LabelArticle.NewCollection);
+	public static List<LabelArticle> listLabelsNew = Arrays.asList(
+			LabelArticle.ComingSoon, 
+			LabelArticle.NewNow, 
+			LabelArticle.NewCollection);
 	
-    final static String classProductItem = 
-        	"@class[contains(.,'productList__name')] or " + 
-        	"@class[contains(.,'product-list-name')] or " + 
-        	"@class='product-list-info-name' or " +
-        	"@class[contains(.,'_1P8s4')] or " + //TODO (Outlet) a la espera que Sergio Campillo proporcione un identificador válido
-        	"@class[contains(.,'product-name')]";
-    final static String XPathNombreRelativeToArticle = "//*[" + classProductItem + "]";
-    final static String XPathLinkRelativeToArticle = ".//a[@class='product-link']";
+	final static String classProductItem = 
+			"@class[contains(.,'productList__name')] or " + 
+			"@class[contains(.,'product-list-name')] or " + 
+			"@class='product-list-info-name' or " +
+			"@class[contains(.,'_1P8s4')] or " + //TODO (Outlet) a la espera que Sergio Campillo proporcione un identificador válido
+			"@class[contains(.,'product-name')]";
+	final static String XPathNombreRelativeToArticle = "//*[" + classProductItem + "]";
+	final static String XPathLinkRelativeToArticle = ".//a[@class='product-link']";
 
 	public static PageGaleria getNew(Channel channel, AppEcom app, WebDriver driver) {
 		return PageGaleria.getNew(From.menu, channel, app, driver);
@@ -163,7 +163,7 @@ public abstract class PageGaleria extends PageObjTM {
 	String getXPathArticleHearthIcon(int posArticulo) {
 		String xpathArticulo = "(" + XPathArticulo + ")[" + posArticulo + "]";
 		return (xpathArticulo + getXPathHearthIconRelativeArticle());
-    }
+	}
 	
 	String getXPathArticuloNoDoble() {
 		return (
@@ -204,78 +204,78 @@ public abstract class PageGaleria extends PageObjTM {
 		return listaArticulos;
 	}
 	
-    public boolean articlesInOrder(FilterOrdenacion typeOrden) throws Exception {
-        return ("".compareTo(getAnyArticleNotInOrder(typeOrden))==0);
-    }
+	public boolean articlesInOrder(FilterOrdenacion typeOrden) throws Exception {
+		return ("".compareTo(getAnyArticleNotInOrder(typeOrden))==0);
+	}
 
-    public void hoverArticle(WebElement article) {
-    	moveToElement(article, driver);
-    }
-    
-    /**
-     * @return número de artículos de la galería
-     */
-    public int getNumArticulos() {
-        return (driver.findElements(By.xpath(XPathArticulo)).size());
-    }    
-    
-    public int waitForArticleVisibleAndGetNumberOfThem(int maxSecondsToWait) {
-    	int numArticle = 1;
-        isVisibleArticleUntil(numArticle, maxSecondsToWait);
-        return (getNumArticulos());
-    }
-    
+	public void hoverArticle(WebElement article) {
+		moveToElement(article, driver);
+	}
+	
+	/**
+	 * @return número de artículos de la galería
+	 */
+	public int getNumArticulos() {
+		return (driver.findElements(By.xpath(XPathArticulo)).size());
+	}	
+	
+	public int waitForArticleVisibleAndGetNumberOfThem(int maxSecondsToWait) {
+		int numArticle = 1;
+		isVisibleArticleUntil(numArticle, maxSecondsToWait);
+		return (getNumArticulos());
+	}
+	
 	public boolean waitArticleAndGoTo(int numArticulo, int maxSecondsToWait) { 
-        String xpathUltArticulo = getXPathLinkArticulo(numArticulo);
-        if (isVisibleArticleUntil(numArticulo, maxSecondsToWait)) {
-            ((Locatable) driver.findElement(By.xpath(xpathUltArticulo))).getCoordinates().inViewPort();
-            return true;
-        }
-        
-        return false;
-    }
-    
-    /**
-     * Espera hasta que está presente un artículo en la galería
-     * @return número de artículos que aparecen en la galería
-     */
-    public boolean isVisibleArticleUntil(int numArticulo, int seconds) {
-        //Esperamos a que esté la imagen del 1er artículo pintada
-        String xpathArtGaleria = "(" + XPathArticulo + ")[" + numArticulo + "]";
-        return (state(Visible, By.xpath(xpathArtGaleria)).wait(seconds).check());
-    }
-    
-    public boolean isFirstArticleOfType(LineaType lineaType) {
-	    List<WebElement> listaArticulos = driver.findElements(By.xpath(XPathArticulo));
-	    return (
-	    	listaArticulos.size() > 0 &&
-	    	state(Present, listaArticulos.get(0))
-	    		.by(By.xpath("//a[@href[contains(.,'" + lineaType + "')]]")).check());
-    }
-    
-    public void moveToArticleAndGetObject(int posArticulo) {
-        moveToElement(By.xpath(getXPathLinkArticulo(posArticulo) + "/.."), driver);
-    }
-    
-    /**
-     * Indica si los artículos de la galería realmente están ordenados por precio ascendente o descendente
-     */
-    public String getAnyArticleNotInOrder(FilterOrdenacion typeOrden) throws Exception {
-        switch (typeOrden) {
-        case NOordenado:
-            return "";
-        case PrecioAsc:
-        case PrecioDesc:
-            return secPrecios.getAnyPrecioNotInOrder(typeOrden, getListaArticulos());
-        case TemporadaDesc:
-        case TemporadaAsc:
-        case BloqueTemporadas_3y4_despues_la_5:
-        case BloqueTemporada_5_despues_la_3y4:
-            return getAnyRefNotInOrderTemporada(typeOrden);
-        default:
-            return "";
-        }
-    }
+		String xpathUltArticulo = getXPathLinkArticulo(numArticulo);
+		if (isVisibleArticleUntil(numArticulo, maxSecondsToWait)) {
+			((Locatable) driver.findElement(By.xpath(xpathUltArticulo))).getCoordinates().inViewPort();
+			return true;
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Espera hasta que está presente un artículo en la galería
+	 * @return número de artículos que aparecen en la galería
+	 */
+	public boolean isVisibleArticleUntil(int numArticulo, int seconds) {
+		//Esperamos a que esté la imagen del 1er artículo pintada
+		String xpathArtGaleria = "(" + XPathArticulo + ")[" + numArticulo + "]";
+		return (state(Visible, By.xpath(xpathArtGaleria)).wait(seconds).check());
+	}
+	
+	public boolean isFirstArticleOfType(LineaType lineaType) {
+		List<WebElement> listaArticulos = driver.findElements(By.xpath(XPathArticulo));
+		return (
+			listaArticulos.size() > 0 &&
+			state(Present, listaArticulos.get(0))
+				.by(By.xpath("//a[@href[contains(.,'" + lineaType + "')]]")).check());
+	}
+	
+	public void moveToArticleAndGetObject(int posArticulo) {
+		moveToElement(By.xpath(getXPathLinkArticulo(posArticulo) + "/.."), driver);
+	}
+	
+	/**
+	 * Indica si los artículos de la galería realmente están ordenados por precio ascendente o descendente
+	 */
+	public String getAnyArticleNotInOrder(FilterOrdenacion typeOrden) throws Exception {
+		switch (typeOrden) {
+		case NOordenado:
+			return "";
+		case PrecioAsc:
+		case PrecioDesc:
+			return secPrecios.getAnyPrecioNotInOrder(typeOrden, getListaArticulos());
+		case TemporadaDesc:
+		case TemporadaAsc:
+		case BloqueTemporadas_3y4_despues_la_5:
+		case BloqueTemporada_5_despues_la_3y4:
+			return getAnyRefNotInOrderTemporada(typeOrden);
+		default:
+			return "";
+		}
+	}
 
 	public boolean preciosInIntervalo(int minimo, int maximo) throws Exception {
 		boolean inInterval = false;
@@ -291,80 +291,80 @@ public abstract class PageGaleria extends PageObjTM {
 		return inInterval;
 }
 
-    
-    public String getAnyRefNotInOrderTemporada(FilterOrdenacion typeOrden) {
-        ArrayList<String> listaReferencias = getListaReferenciasPrendas();
-        String refAnterior="";
-        for (String refActual : listaReferencias) {
-            String tempActual = refActual.substring(0,1);
-            if ("".compareTo(refAnterior)!=0) {
-                String tempAnterior = refAnterior.substring(0,1);
-                int tempActualInt = Integer.valueOf(tempActual).intValue();
-                int tempAnteriorInt = Integer.valueOf(tempAnterior).intValue();
-                switch (typeOrden) {
-                case TemporadaDesc:
-                    if (tempActualInt > tempAnteriorInt) {
-                        return (refAnterior + "->" + refActual);
-                    }
-                    break;
-                case TemporadaAsc:
-                    if (tempActualInt < tempAnteriorInt) {
-                        return (refAnterior + "->" + refActual);
-                    }
-                    break;
-            	case BloqueTemporadas_3y4_despues_la_5:
-            		if ((tempActualInt==1 || tempActualInt==2) && tempAnteriorInt==3) {
-            			return (refAnterior + "->" + refActual);
-            		}
-            		break;
-            	case BloqueTemporada_5_despues_la_3y4:
-            	default:
-            		if (tempActualInt==3 && (tempAnteriorInt==1 || tempAnteriorInt==2)) {
-            			return (refAnterior + "->" + refActual);
-            		}
-            		break;
-                }
-            }
-            
-            refAnterior = refActual;
-        }
+	
+	public String getAnyRefNotInOrderTemporada(FilterOrdenacion typeOrden) {
+		ArrayList<String> listaReferencias = getListaReferenciasPrendas();
+		String refAnterior="";
+		for (String refActual : listaReferencias) {
+			String tempActual = refActual.substring(0,1);
+			if ("".compareTo(refAnterior)!=0) {
+				String tempAnterior = refAnterior.substring(0,1);
+				int tempActualInt = Integer.valueOf(tempActual).intValue();
+				int tempAnteriorInt = Integer.valueOf(tempAnterior).intValue();
+				switch (typeOrden) {
+				case TemporadaDesc:
+					if (tempActualInt > tempAnteriorInt) {
+						return (refAnterior + "->" + refActual);
+					}
+					break;
+				case TemporadaAsc:
+					if (tempActualInt < tempAnteriorInt) {
+						return (refAnterior + "->" + refActual);
+					}
+					break;
+				case BloqueTemporadas_3y4_despues_la_5:
+					if ((tempActualInt==1 || tempActualInt==2) && tempAnteriorInt==3) {
+						return (refAnterior + "->" + refActual);
+					}
+					break;
+				case BloqueTemporada_5_despues_la_3y4:
+				default:
+					if (tempActualInt==3 && (tempAnteriorInt==1 || tempAnteriorInt==2)) {
+						return (refAnterior + "->" + refActual);
+					}
+					break;
+				}
+			}
+			
+			refAnterior = refActual;
+		}
 
-        return "";
-    }
+		return "";
+	}
 
-    /**
-     * @return la lista de elementos que contienen la referencia del artículo
-     */
-    public ArrayList<String> getListaReferenciasPrendas() {
-        ArrayList<String> listaReferencias = new ArrayList<>();
-        List<WebElement> listaArticulos = getArticulos();
-        for (WebElement articulo : listaArticulos)
-            listaReferencias.add(getRefArticulo(articulo));
-        
-        return listaReferencias;
-    }
-    
-    public String getReferencia(int posArticle) {
-        if (getListaReferenciasPrendas().size()>0) {
-            return (getListaReferenciasPrendas().get(posArticle-1));
-        }
-        return "";
-    }
-    
-    public List<WebElement> getArticulos() {
-        return (driver.findElements(By.xpath(XPathArticulo))); 
-    }
-    
-    
-    public WebElement getArticulo(LocationArticle locationArt) {
-    	switch (locationArt.accessFrom) {
-    	case InitCatalog:
-    		return (getArticulo(locationArt.numArticle));
-    	case InitPage:
-    	default:
-    		return (getArticleFromPagina(locationArt.numPage, locationArt.numArticle));
-    	}
-    }
+	/**
+	 * @return la lista de elementos que contienen la referencia del artículo
+	 */
+	public ArrayList<String> getListaReferenciasPrendas() {
+		ArrayList<String> listaReferencias = new ArrayList<>();
+		List<WebElement> listaArticulos = getArticulos();
+		for (WebElement articulo : listaArticulos)
+			listaReferencias.add(getRefArticulo(articulo));
+		
+		return listaReferencias;
+	}
+	
+	public String getReferencia(int posArticle) {
+		if (getListaReferenciasPrendas().size()>0) {
+			return (getListaReferenciasPrendas().get(posArticle-1));
+		}
+		return "";
+	}
+	
+	public List<WebElement> getArticulos() {
+		return (driver.findElements(By.xpath(XPathArticulo))); 
+	}
+	
+	
+	public WebElement getArticulo(LocationArticle locationArt) {
+		switch (locationArt.accessFrom) {
+		case InitCatalog:
+			return (getArticulo(locationArt.numArticle));
+		case InitPage:
+		default:
+			return (getArticleFromPagina(locationArt.numPage, locationArt.numArticle));
+		}
+	}
 
 	public WebElement getArticulo(int numArticulo) {
 		List<WebElement> listArticulos = getArticulos();
@@ -406,35 +406,35 @@ public abstract class PageGaleria extends PageObjTM {
 
 	private enum AttributeArticle {Nombre, Referencia, Imagen}
 	
-    public ArrayList<DataArticleGalery> searchArticleRepeatedInGallery() throws Exception {
-        ListDataArticleGalery list = getListArticles(Arrays.asList(
-        		AttributeArticle.Nombre, 
-        		AttributeArticle.Referencia));
-        
-        if (list.getArticlesRepeated().size()>0) {
-        	//Obtener la imagen de cada artículo es muy costoso así que sólo lo hacemos en este caso
-        	list = getListArticles(Arrays.asList(
-        			AttributeArticle.Nombre, 
-        			AttributeArticle.Referencia,
-        			AttributeArticle.Imagen));
-        }
-        
-        return (list.getArticlesRepeated());
-    }
-    
-    public ListDataArticleGalery getListDataArticles() throws Exception {
-        return getListArticles(Arrays.asList(
-        		AttributeArticle.Nombre, 
-        		AttributeArticle.Referencia));
-    }
-    
-    private ListDataArticleGalery getListArticles(List<AttributeArticle> attributes) throws Exception {
-        ListDataArticleGalery listReturn = new ListDataArticleGalery();
-        for (WebElement articulo : getListaArticulos()) {
-            listReturn.add(getDataArticulo(articulo, attributes)); 
-        }
-        return listReturn;
-    }
+	public ArrayList<DataArticleGalery> searchArticleRepeatedInGallery() throws Exception {
+		ListDataArticleGalery list = getListArticles(Arrays.asList(
+				AttributeArticle.Nombre, 
+				AttributeArticle.Referencia));
+		
+		if (list.getArticlesRepeated().size()>0) {
+			//Obtener la imagen de cada artículo es muy costoso así que sólo lo hacemos en este caso
+			list = getListArticles(Arrays.asList(
+					AttributeArticle.Nombre, 
+					AttributeArticle.Referencia,
+					AttributeArticle.Imagen));
+		}
+		
+		return (list.getArticlesRepeated());
+	}
+	
+	public ListDataArticleGalery getListDataArticles() throws Exception {
+		return getListArticles(Arrays.asList(
+				AttributeArticle.Nombre, 
+				AttributeArticle.Referencia));
+	}
+	
+	private ListDataArticleGalery getListArticles(List<AttributeArticle> attributes) throws Exception {
+		ListDataArticleGalery listReturn = new ListDataArticleGalery();
+		for (WebElement articulo : getListaArticulos()) {
+			listReturn.add(getDataArticulo(articulo, attributes)); 
+		}
+		return listReturn;
+	}
 
 	private DataArticleGalery getDataArticulo(WebElement articulo, List<AttributeArticle> attributes) 
 	throws Exception {
@@ -455,45 +455,45 @@ public abstract class PageGaleria extends PageObjTM {
 		return dataArticle;
 	}
 
-    public enum StateFavorito {Marcado, Desmarcado} 
-    public boolean iconsInCorrectState(List<Integer> posIconosFav, TypeActionFav typeAction) {
-        for (int posIcon : posIconosFav) {
-            String XPathIcon = getXPathArticleHearthIcon(posIcon);
-            WebElement hearthIcon = driver.findElement(By.xpath(XPathIcon));
-            switch (typeAction) {
-            case Marcar:
-                if (getStateHearthIcon(hearthIcon)!=StateFavorito.Marcado) {
-                    return false;
-                }
-                break;
-            case Desmarcar:
-                if (getStateHearthIcon(hearthIcon)!=StateFavorito.Desmarcado) {
-                    return false;
-                }
-                break;
-            default:
-                break;
-            }
-        }
-        
-        return true;
-    }
-    
-    public boolean backTo1erArticulo(String xpathIconoUpGalery) throws InterruptedException {
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-50)", ""); //Asure icon showed
-        clickIconoUpToGaleryIfVisible(xpathIconoUpGalery);
-        int numArtToWait = 1;
-        int secondsToWait = 2;
-        boolean isVisible1erArt = isVisibleArticuloUntil(numArtToWait, secondsToWait);
-        Thread.sleep(1000);
-        return isVisible1erArt;
-    }
-    
-    public void clickIconoUpToGaleryIfVisible(String xpathIconoUpGalery) {
-    	if (state(Visible, By.xpath(xpathIconoUpGalery)).wait(1).check()) {
-            driver.findElement(By.xpath(xpathIconoUpGalery)).click();
-        }
-    }
+	public enum StateFavorito {Marcado, Desmarcado} 
+	public boolean iconsInCorrectState(List<Integer> posIconosFav, TypeActionFav typeAction) {
+		for (int posIcon : posIconosFav) {
+			String XPathIcon = getXPathArticleHearthIcon(posIcon);
+			WebElement hearthIcon = driver.findElement(By.xpath(XPathIcon));
+			switch (typeAction) {
+			case Marcar:
+				if (getStateHearthIcon(hearthIcon)!=StateFavorito.Marcado) {
+					return false;
+				}
+				break;
+			case Desmarcar:
+				if (getStateHearthIcon(hearthIcon)!=StateFavorito.Desmarcado) {
+					return false;
+				}
+				break;
+			default:
+				break;
+			}
+		}
+		
+		return true;
+	}
+	
+	public boolean backTo1erArticulo(String xpathIconoUpGalery) throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-50)", ""); //Asure icon showed
+		clickIconoUpToGaleryIfVisible(xpathIconoUpGalery);
+		int numArtToWait = 1;
+		int secondsToWait = 2;
+		boolean isVisible1erArt = isVisibleArticuloUntil(numArtToWait, secondsToWait);
+		Thread.sleep(1000);
+		return isVisible1erArt;
+	}
+	
+	public void clickIconoUpToGaleryIfVisible(String xpathIconoUpGalery) {
+		if (state(Visible, By.xpath(xpathIconoUpGalery)).wait(1).check()) {
+			driver.findElement(By.xpath(xpathIconoUpGalery)).click();
+		}
+	}
 
 	public String getNombreArticuloWithText(String literal, int secondsWait) {
 		WebElement articulo = getArticleThatContainsLitUntil(literal, secondsWait);
@@ -502,20 +502,20 @@ public abstract class PageGaleria extends PageObjTM {
 		}
 		return "";
 		
-//        String articulo = "";
-//        
-//        //Obtenemos el xpath de los artículos eliminando el último carácter (]) pues hemos de insertar condiciones en el XPATH
-//        String xpathLitArticulos = XPathArticulo + "//*[" + classProductName + "]";
-//        xpathLitArticulos = xpathLitArticulos.substring(0, xpathLitArticulos.length() - 1);
-//        
-//        xpathLitArticulos = xpathLitArticulos + " and text()[contains(.,'" + name + "')]]"; 
-//        
-//        if (isElementVisibleUntil(driver, By.xpath(xpathLitArticulos), secondsWait)) {
-//            articulo = driver.findElement(By.xpath(xpathLitArticulos)).getText();
-//        }
-//        
-//        return articulo;
-    }
+//		String articulo = "";
+//		
+//		//Obtenemos el xpath de los artículos eliminando el último carácter (]) pues hemos de insertar condiciones en el XPATH
+//		String xpathLitArticulos = XPathArticulo + "//*[" + classProductName + "]";
+//		xpathLitArticulos = xpathLitArticulos.substring(0, xpathLitArticulos.length() - 1);
+//		
+//		xpathLitArticulos = xpathLitArticulos + " and text()[contains(.,'" + name + "')]]"; 
+//		
+//		if (isElementVisibleUntil(driver, By.xpath(xpathLitArticulos), secondsWait)) {
+//			articulo = driver.findElement(By.xpath(xpathLitArticulos)).getText();
+//		}
+//		
+//		return articulo;
+	}
 	
 	public WebElement getArticleThatContainsLitUntil(String literal, int maxSeconds) {
 		By byArticleName = By.xpath(
@@ -527,50 +527,50 @@ public abstract class PageGaleria extends PageObjTM {
 		}
 		return null;
 	}
-    
-    /**
-     * Función que realiza un scroll/paginación hasta el final de los artículos. Retorna el número de elementos obtenidos
-     * Desktop: scrolla reiteradamente hasta el último elemento para forzar la paginación
-     */
-    public DataScroll scrollToPageFromFirst(int numPage) throws Exception {
-        DataScroll datosScroll = new DataScroll();
-        int pageToScroll = getPageToScroll(numPage);
-        goToInitPageAndWaitForArticle();
-        
-        int lastPage = getNumLastPage();
-        List<Integer> numArticlesXpage = new ArrayList<>();
-        List<Integer> numArticlesDoubleXpage = new ArrayList<>();
-        initializeDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, pageToScroll + 10);
-        updateDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, lastPage);
-        SecFooter secFooter = new SecFooter(app, driver);
-        while (!secFooter.isVisible() && lastPage < pageToScroll) {
-        	goToLastPage();
-        	int newLastPage = getNumLastPage();
-        	updateDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, newLastPage);
-        	if (newLastPage==lastPage) {
-        		break;
-        	}
-        	lastPage=newLastPage;
-        }
-        
-        if (secFooter.isVisible()) {
-        	secFooter.moveTo();
-        }
-        
-        datosScroll.paginaFinal = lastPage;
-        datosScroll.finalAlcanzado = secFooter.isVisible();
-        datosScroll.articulosMostrados = getNumArticulos();
-        datosScroll.articulosDobleTamaño = getTotalNumArticles(numArticlesDoubleXpage);
-        datosScroll.articulosTotalesPagina = getTotalNumArticles(numArticlesXpage);
-        return (datosScroll);
-    }
-    
-    private int getPageToScroll(int numPage) {
-        if (numPage > maxPageToScroll) {
-            return maxPageToScroll;
-        }
-        return numPage;
-    }
+	
+	/**
+	 * Función que realiza un scroll/paginación hasta el final de los artículos. Retorna el número de elementos obtenidos
+	 * Desktop: scrolla reiteradamente hasta el último elemento para forzar la paginación
+	 */
+	public DataScroll scrollToPageFromFirst(int numPage) throws Exception {
+		DataScroll datosScroll = new DataScroll();
+		int pageToScroll = getPageToScroll(numPage);
+		goToInitPageAndWaitForArticle();
+		
+		int lastPage = getNumLastPage();
+		List<Integer> numArticlesXpage = new ArrayList<>();
+		List<Integer> numArticlesDoubleXpage = new ArrayList<>();
+		initializeDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, pageToScroll + 10);
+		updateDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, lastPage);
+		SecFooter secFooter = new SecFooter(app, driver);
+		while (!secFooter.isVisible() && lastPage < pageToScroll) {
+			goToLastPage();
+			int newLastPage = getNumLastPage();
+			updateDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, newLastPage);
+			if (newLastPage==lastPage) {
+				break;
+			}
+			lastPage=newLastPage;
+		}
+		
+		if (secFooter.isVisible()) {
+			secFooter.moveTo();
+		}
+		
+		datosScroll.paginaFinal = lastPage;
+		datosScroll.finalAlcanzado = secFooter.isVisible();
+		datosScroll.articulosMostrados = getNumArticulos();
+		datosScroll.articulosDobleTamaño = getTotalNumArticles(numArticlesDoubleXpage);
+		datosScroll.articulosTotalesPagina = getTotalNumArticles(numArticlesXpage);
+		return (datosScroll);
+	}
+	
+	private int getPageToScroll(int numPage) {
+		if (numPage > maxPageToScroll) {
+			return maxPageToScroll;
+		}
+		return numPage;
+	}
 
 	public void goToInitPageAndWaitForArticle() throws Exception {
 		Object pagePositionObj = ((JavascriptExecutor) driver).executeScript("return window.pageYOffset;");
@@ -588,47 +588,47 @@ public abstract class PageGaleria extends PageObjTM {
 		int maxSeconds = 2;
 		isVisibleArticleUntil(1, maxSeconds);
 	}
-    
-    private void initializeDataNumArticles(List<Integer> numArticlesXpage, List<Integer> numArticlesDoubleXpage, int maxPages) {
-    	for (int i=0; i<=maxPages; i++) {
-    		numArticlesXpage.add(i, 0);
-    		numArticlesDoubleXpage.add(i, 0);
-    	}
-    }
-    
-    private void updateDataNumArticles(List<Integer> numArticlesXpage, List<Integer> numArticlesDoubleXpage,
-    								   int lastPage) {
-    	int page = lastPage;
-    	while (page>0) { 
-    		if (isPresentPagina(page)) {
-	    		if (numArticlesDoubleXpage.get(page)==0) {
-	    			int numArticlesPage = getNumArticulosFromPagina(page, TypeArticleDesktop.Doble);
-	    			numArticlesDoubleXpage.set(page, numArticlesPage);
-	    		}
-    		
-	    		if (numArticlesXpage.get(page)==0) {
-	    			int numArticlesPage = getNumArticulosFromPagina(page, TypeArticleDesktop.Simple) + 
-	    								  numArticlesDoubleXpage.get(page);
-	    			numArticlesXpage.set(page, numArticlesPage);
-	    		}
-    		}
+	
+	private void initializeDataNumArticles(List<Integer> numArticlesXpage, List<Integer> numArticlesDoubleXpage, int maxPages) {
+		for (int i=0; i<=maxPages; i++) {
+			numArticlesXpage.add(i, 0);
+			numArticlesDoubleXpage.add(i, 0);
+		}
+	}
+	
+	private void updateDataNumArticles(List<Integer> numArticlesXpage, List<Integer> numArticlesDoubleXpage,
+									   int lastPage) {
+		int page = lastPage;
+		while (page>0) { 
+			if (isPresentPagina(page)) {
+				if (numArticlesDoubleXpage.get(page)==0) {
+					int numArticlesPage = getNumArticulosFromPagina(page, TypeArticleDesktop.Doble);
+					numArticlesDoubleXpage.set(page, numArticlesPage);
+				}
+			
+				if (numArticlesXpage.get(page)==0) {
+					int numArticlesPage = getNumArticulosFromPagina(page, TypeArticleDesktop.Simple) + 
+										  numArticlesDoubleXpage.get(page);
+					numArticlesXpage.set(page, numArticlesPage);
+				}
+			}
 		
-    		page-=1;
-    	}
-    }
-    
-    private int getTotalNumArticles(List<Integer> numArticlesXpage) {
-    	int numTotalArticles = 0;
-    	for (int i=0; i<numArticlesXpage.size(); i++) {
-    		numTotalArticles+=numArticlesXpage.get(i);
-    	}
-    	return numTotalArticles;
-    }
-    
-    private void goToLastPage() throws Exception {
-    	goToPage(99);
-    }
-    
+			page-=1;
+		}
+	}
+	
+	private int getTotalNumArticles(List<Integer> numArticlesXpage) {
+		int numTotalArticles = 0;
+		for (int i=0; i<numArticlesXpage.size(); i++) {
+			numTotalArticles+=numArticlesXpage.get(i);
+		}
+		return numTotalArticles;
+	}
+	
+	private void goToLastPage() throws Exception {
+		goToPage(99);
+	}
+	
 	private void goToPage(int numPageToGo) throws Exception {
 		boolean lastPageReached = false;
 		int paginaActual = 1;
@@ -645,38 +645,38 @@ public abstract class PageGaleria extends PageObjTM {
 		
 		waitAndGotoLastArticle();
 		waitForPageLoaded(driver);
-    }
-    
-    private void waitAndGotoLastArticle() {
-    	List<WebElement> listaArticulos = getListaArticulos();
-    	int maxSeconds = 5;
-    	waitArticleAndGoTo(listaArticulos.size(), maxSeconds);
-    }
-    
-    public int getNumLastPage() {
-    	int maxPagesToReview = 20;
-    	int lastPageWatched = 0;
-    	boolean aPageLocatedYet = false;
-    	while (lastPageWatched<maxPagesToReview) {
-    		int pageToReview = lastPageWatched + 1;
-    		boolean isPresentPage = isPresentPagina(pageToReview);
-    		if (isPresentPage) {
-    			aPageLocatedYet = true;
-    		} else {
-	    		if (aPageLocatedYet) {
-	    			return lastPageWatched;
-	    		}
-    		}
-    		lastPageWatched=pageToReview;
-    	}
-    	
-    	return 0;
-    }
-    
-    public boolean isPresentPagina(int pagina) {
-    	String xpathPagina = getXPathPagina(pagina);
-    	return (state(Visible, By.xpath(xpathPagina)).check());
-    }
+	}
+	
+	private void waitAndGotoLastArticle() {
+		List<WebElement> listaArticulos = getListaArticulos();
+		int maxSeconds = 5;
+		waitArticleAndGoTo(listaArticulos.size(), maxSeconds);
+	}
+	
+	public int getNumLastPage() {
+		int maxPagesToReview = 20;
+		int lastPageWatched = 0;
+		boolean aPageLocatedYet = false;
+		while (lastPageWatched<maxPagesToReview) {
+			int pageToReview = lastPageWatched + 1;
+			boolean isPresentPage = isPresentPagina(pageToReview);
+			if (isPresentPage) {
+				aPageLocatedYet = true;
+			} else {
+				if (aPageLocatedYet) {
+					return lastPageWatched;
+				}
+			}
+			lastPageWatched=pageToReview;
+		}
+		
+		return 0;
+	}
+	
+	public boolean isPresentPagina(int pagina) {
+		String xpathPagina = getXPathPagina(pagina);
+		return (state(Visible, By.xpath(xpathPagina)).check());
+	}
 
 	public void clickArticulo(WebElement articulo) {
 		//SeleniumUtils.waitMillis(2000);
@@ -690,35 +690,35 @@ public abstract class PageGaleria extends PageObjTM {
 	@SuppressWarnings("static-access")
 	public String openArticuloPestanyaAndGo(WebElement article, AppEcom app) 
 	throws Exception {
-        String galeryWindowHandle = driver.getWindowHandle();
-        
-        //En el caso de Firefox-Geckodriver el moveToElement (que se acaba realizando mediante el workarround basado en JavaScript) 
-        //nos posiciona en la esquina superior izquierda que queda debajo del menú superior... así que tenemos que enviar dicho menú al fondo
-        SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
-        secMenus.secMenuSuperior.secLineas.bringMenuBackground();
-        
-        //WebElement articleName = article.findElement(By.xpath("." + getXPathLinkRelativeToArticle()));
-        UtilsMangoTest.openLinkInNewTab(driver, article/*articleName*/);
-        
-        //Cambiamos el foco de driver a la nueva pestaña que hemos creado y esperamos hasta que está disponible
-        String detailWindowHandle = switchToAnotherWindow(driver, galeryWindowHandle);
-        
-        PageFicha pageFicha = PageFicha.newInstance(Channel.desktop, app, driver);
-        pageFicha.isPageUntil(10/*maxSeconds*/);
-        
-        return detailWindowHandle;
-    }    
-    
-    public static List<String> getNotNewArticlesFrom(List<String> listNameAndLabelArticles) {
-    	List<String> listArtToReturn = new ArrayList<>();
-    	for (String nameAndLabelArticle : listNameAndLabelArticles) {
-    		if (!isArticleNew(nameAndLabelArticle)) {
-    			listArtToReturn.add(nameAndLabelArticle);
-    		}
-    	}
-    	   
-    	return listArtToReturn;
-    }
+		String galeryWindowHandle = driver.getWindowHandle();
+		
+		//En el caso de Firefox-Geckodriver el moveToElement (que se acaba realizando mediante el workarround basado en JavaScript) 
+		//nos posiciona en la esquina superior izquierda que queda debajo del menú superior... así que tenemos que enviar dicho menú al fondo
+		SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
+		secMenus.secMenuSuperior.secLineas.bringMenuBackground();
+		
+		//WebElement articleName = article.findElement(By.xpath("." + getXPathLinkRelativeToArticle()));
+		UtilsMangoTest.openLinkInNewTab(driver, article/*articleName*/);
+		
+		//Cambiamos el foco de driver a la nueva pestaña que hemos creado y esperamos hasta que está disponible
+		String detailWindowHandle = switchToAnotherWindow(driver, galeryWindowHandle);
+		
+		PageFicha pageFicha = PageFicha.newInstance(Channel.desktop, app, driver);
+		pageFicha.isPageUntil(10/*maxSeconds*/);
+		
+		return detailWindowHandle;
+	}	
+	
+	public static List<String> getNotNewArticlesFrom(List<String> listNameAndLabelArticles) {
+		List<String> listArtToReturn = new ArrayList<>();
+		for (String nameAndLabelArticle : listNameAndLabelArticles) {
+			if (!isArticleNew(nameAndLabelArticle)) {
+				listArtToReturn.add(nameAndLabelArticle);
+			}
+		}
+		   
+		return listArtToReturn;
+	}
 
 	private static boolean isArticleNew(String nameAndLabelArticle) {
 		for (LabelArticle label : listLabelsNew) {

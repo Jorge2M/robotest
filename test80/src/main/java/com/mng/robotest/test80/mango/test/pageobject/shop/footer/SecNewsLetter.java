@@ -13,37 +13,37 @@ public class SecNewsLetter extends PageObjTM {
 
 	private final AppEcom app;
 	
-    private final static String XPathCapaNewsLetter = "//micro-frontend[@name[contains(.,'newsletterSubscriptionFooter')]]";
-    //private final static String XPathCapaNewsLetterOutlet = "//div[@class[contains(.,'newsletterForm')]]";
-    
-    private final static String XPathNewsLetterMsg = XPathCapaNewsLetter + "//p[@class[contains(.,'sg-text-action')]]";
-    //private final static String XPathNewsLetterMsgOutlet = XPathCapaNewsLetterOutlet + "//span[@class='newsletterForm__text']";
-    
-    private final static String XPathTextAreaMailSuscripcion = XPathCapaNewsLetter + "//input[@name='mail' or @name='email']";
-    //private final static String XPathTextAreaMailSuscripcionOutlet = XPathCapaNewsLetterOutlet + "//input[@id[contains(.,'regExpMail')]]";
+	private final static String XPathCapaNewsLetter = "//micro-frontend[@name[contains(.,'newsletterSubscriptionFooter')]]";
+	//private final static String XPathCapaNewsLetterOutlet = "//div[@class[contains(.,'newsletterForm')]]";
 	
-    public SecNewsLetter(AppEcom app, WebDriver driver) {
-    	super(driver);
-    	this.app = app;
-    }
-    
-    public String getNewsLetterMsgText() {
-    	By byMsg = By.xpath(XPathNewsLetterMsg);
-        try {
-            WebElement titleNws = driver.findElement(byMsg);
-            if (titleNws!=null) {
-                return driver.findElement(byMsg).getText();
-            }
-        }
-        catch (Exception e) {
-            //Retornamos ""
-        }
-        return "";
-    }
-    
-    public boolean newsLetterMsgContains(String literal) {
-        return (getNewsLetterMsgText().contains(literal));
-    }
+	private final static String XPathNewsLetterMsg = XPathCapaNewsLetter + "//p[@class[contains(.,'sg-text-action')]]";
+	//private final static String XPathNewsLetterMsgOutlet = XPathCapaNewsLetterOutlet + "//span[@class='newsletterForm__text']";
+	
+	private final static String XPathTextAreaMailSuscripcion = XPathCapaNewsLetter + "//input[@name='mail' or @name='email']";
+	//private final static String XPathTextAreaMailSuscripcionOutlet = XPathCapaNewsLetterOutlet + "//input[@id[contains(.,'regExpMail')]]";
+	
+	public SecNewsLetter(AppEcom app, WebDriver driver) {
+		super(driver);
+		this.app = app;
+	}
+	
+	public String getNewsLetterMsgText() {
+		By byMsg = By.xpath(XPathNewsLetterMsg);
+		try {
+			WebElement titleNws = driver.findElement(byMsg);
+			if (titleNws!=null) {
+				return driver.findElement(byMsg).getText();
+			}
+		}
+		catch (Exception e) {
+			//Retornamos ""
+		}
+		return "";
+	}
+	
+	public boolean newsLetterMsgContains(String literal) {
+		return (getNewsLetterMsgText().contains(literal));
+	}
 
 	public void clickFooterSuscripcion() throws Exception {
 		ModalClubMangoLikes.closeModalIfVisible(driver);

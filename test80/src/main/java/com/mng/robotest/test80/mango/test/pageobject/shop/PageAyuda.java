@@ -10,13 +10,13 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageAyuda {
 	
-    static String XPathCabPreguntasFreq = "//h1[text()[contains(.,'Preguntas frecuentes')]]";
-    
-    static String XPathFAQMobile = "//li[@class='leaf']//a[text()[contains(.,'Preguntas frecuentes')]]";
+	static String XPathCabPreguntasFreq = "//h1[text()[contains(.,'Preguntas frecuentes')]]";
+	
+	static String XPathFAQMobile = "//li[@class='leaf']//a[text()[contains(.,'Preguntas frecuentes')]]";
 
-    public static String getXPathTelefono(String telefono) {
-        return ("//*[@class='text_container']/p[text()[contains(.,'" + telefono + "')]]");
-    }
+	public static String getXPathTelefono(String telefono) {
+		return ("//*[@class='text_container']/p[text()[contains(.,'" + telefono + "')]]");
+	}
 
 	public static boolean isPresentCabPreguntasFreq(Channel channel, WebDriver driver) {
 		if (channel.isDevice()) {

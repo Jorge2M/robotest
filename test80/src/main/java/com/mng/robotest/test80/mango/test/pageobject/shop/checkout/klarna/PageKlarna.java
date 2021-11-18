@@ -82,11 +82,11 @@ public class PageKlarna extends PageObjTM {
 		leaveIframe();
 	}
 	
-    private void goToIframe() {
-    	driver.switchTo().frame(driver.findElement(By.xpath(XPathIframe)));
-    }
-    
-    private void leaveIframe() {
-    	driver.switchTo().defaultContent();
-    }
+	private void goToIframe() {
+		driver.switchTo().frame(driver.findElement(By.xpath(XPathIframe)));
+	}
+	
+	private void leaveIframe() {
+		driver.switchTo().defaultContent();
+	}
 }

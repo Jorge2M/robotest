@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrO
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrOld.TypeStatePanel;
 
 public class SecProductDescrOldStpV {
-    
+	
 	private final SecProductDescrOld secProductDescrOld;
 	
 	public SecProductDescrOldStpV(Channel channel, AppEcom app, WebDriver driver) {
@@ -23,41 +23,41 @@ public class SecProductDescrOldStpV {
 	}
 	
 	@Validation
-    public ChecksTM validateAreInStateInitial(AppEcom appE) throws Exception {
-    	ChecksTM validations = ChecksTM.getNew();
-    	for (TypePanel typePanel : TypePanel.values()) {
-    		TypeStatePanel stateExpected = TypeStatePanel.missing;
-            if (typePanel.getListApps().contains(appE)) {
-                stateExpected = typePanel.getStateInitial();
-            }
-	      	validations.add(
-	    		"El panel <b>" + typePanel + "</b> está en estado <b>" + stateExpected + "</b>",
-	    		secProductDescrOld.getStatePanel(typePanel)==stateExpected, State.Defect);
-    	}
-    	return validations;
-    }
-    
+	public ChecksTM validateAreInStateInitial(AppEcom appE) throws Exception {
+		ChecksTM validations = ChecksTM.getNew();
+		for (TypePanel typePanel : TypePanel.values()) {
+			TypeStatePanel stateExpected = TypeStatePanel.missing;
+			if (typePanel.getListApps().contains(appE)) {
+				stateExpected = typePanel.getStateInitial();
+			}
+		  	validations.add(
+				"El panel <b>" + typePanel + "</b> está en estado <b>" + stateExpected + "</b>",
+				secProductDescrOld.getStatePanel(typePanel)==stateExpected, State.Defect);
+		}
+		return validations;
+	}
+	
 	final static String tagInitStatePanel = "@TagInitState";
 	final static String tagFinalStateExpected = "@TagFinalState";
 	@Step (
 		description="Seleccionar el panel <b>#{typePanel}</b> (en estado inicial: " + tagInitStatePanel + ")",
-        expected="La pestaña queda en estado " + tagFinalStateExpected)
-    public void selectPanel(TypePanel typePanel) {
-        TypeStatePanel statePanelIni = secProductDescrOld.getStatePanel(typePanel);
-        TypeStatePanel stateExpectedAfterClick = secProductDescrOld.getStatePanelAfterClick(statePanelIni);
-        StepTM step = TestMaker.getCurrentStepInExecution();
-        step.replaceInDescription(tagInitStatePanel, statePanelIni.toString());
-        step.replaceInExpected(tagFinalStateExpected, stateExpectedAfterClick.toString());
-        
-        secProductDescrOld.clickPanel(typePanel);
-        int maxSeconds = 1;
-        checkPanelInState(typePanel, stateExpectedAfterClick, maxSeconds);
-    }
+		expected="La pestaña queda en estado " + tagFinalStateExpected)
+	public void selectPanel(TypePanel typePanel) {
+		TypeStatePanel statePanelIni = secProductDescrOld.getStatePanel(typePanel);
+		TypeStatePanel stateExpectedAfterClick = secProductDescrOld.getStatePanelAfterClick(statePanelIni);
+		StepTM step = TestMaker.getCurrentStepInExecution();
+		step.replaceInDescription(tagInitStatePanel, statePanelIni.toString());
+		step.replaceInExpected(tagFinalStateExpected, stateExpectedAfterClick.toString());
+		
+		secProductDescrOld.clickPanel(typePanel);
+		int maxSeconds = 1;
+		checkPanelInState(typePanel, stateExpectedAfterClick, maxSeconds);
+	}
 	
 	@Validation (
 		description="La sección ha de quedar en estado <b>#{stateExpectedAfterClick}</b> (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
 	private boolean checkPanelInState(TypePanel typePanel, TypeStatePanel stateExpectedAfterClick, int maxSeconds) {
-	    return (secProductDescrOld.isPanelInStateUntil(typePanel, stateExpectedAfterClick, maxSeconds));
+		return (secProductDescrOld.isPanelInStateUntil(typePanel, stateExpectedAfterClick, maxSeconds));
 	}
 }

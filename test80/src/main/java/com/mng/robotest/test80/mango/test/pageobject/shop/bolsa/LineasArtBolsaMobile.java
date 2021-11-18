@@ -23,8 +23,8 @@ public class LineasArtBolsaMobile extends LineasArtBolsa {
 	private final static String XPathPrecioRelativeArticle = ".//div[@class[contains(.,'sbi-price-content')]]//span[@style[not(contains(.,'padding'))]]";
 	private final static String XPathPrecioEnteroRelativeArticle = XPathPrecioRelativeArticle + "[1]";
 	private final static String XPathPrecioDecimalRelativeArticle = XPathPrecioRelativeArticle + "[2]";
-    private static final String TagRefArticle = "[TAGREF]";
-    private static final String XPathLinkBorrarArt = "//*[@id[contains(.,'trashMobile')] and @onclick[contains(.,'" + TagRefArticle + "')]]";
+	private static final String TagRefArticle = "[TAGREF]";
+	private static final String XPathLinkBorrarArt = "//*[@id[contains(.,'trashMobile')] and @onclick[contains(.,'" + TagRefArticle + "')]]";
 	
 	public LineasArtBolsaMobile(WebDriver driver) {
 		super(Channel.mobile, driver);
@@ -74,11 +74,11 @@ public class LineasArtBolsaMobile extends LineasArtBolsa {
 	}
 	
 	@Override
-    public void clearArticuloAndWait(String refArticulo) throws Exception {
-        String xpathClearArt = getXPathLinkBorrarArt(refArticulo);
-        click(By.xpath(xpathClearArt)).exec();
-        waitForPageLoaded(driver); 
-    }
+	public void clearArticuloAndWait(String refArticulo) throws Exception {
+		String xpathClearArt = getXPathLinkBorrarArt(refArticulo);
+		click(By.xpath(xpathClearArt)).exec();
+		waitForPageLoaded(driver); 
+	}
 	
 	@Override
 	public void clickRemoveArticleIfExists() {
@@ -92,16 +92,16 @@ public class LineasArtBolsaMobile extends LineasArtBolsa {
 	public float getPrecioArticle(WebElement lineaArticleWeb) {
 		String parteEntera = getDataArticle(DataArtBolsa.PrecioEntero, lineaArticleWeb);
 		String parteDecimal = getDataArticle(DataArtBolsa.PrecioDecimal, lineaArticleWeb);
-		return (ImporteScreen.getFloatFromImporteMangoScreen(parteEntera + parteDecimal));        
+		return (ImporteScreen.getFloatFromImporteMangoScreen(parteEntera + parteDecimal));		
 	}
 	
 	private String getXPathItem(int position) {
 		return "(" + XPathLinea + ")[" + position + "]";
 	}
 	
-    private String getXPathLinkBorrarArt() {
-        return getXPathLinkBorrarArt("");
-    }
+	private String getXPathLinkBorrarArt() {
+		return getXPathLinkBorrarArt("");
+	}
 	
 	private String getXPathLinkBorrarArt(String refArticulo) {
 		return XPathLinkBorrarArt.replace(TagRefArticle, refArticulo);

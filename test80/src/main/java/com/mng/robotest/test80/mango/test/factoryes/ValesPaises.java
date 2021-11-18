@@ -20,48 +20,48 @@ import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
 public class ValesPaises {
 
-    List<ValePais> listaPaisesVales = new ArrayList<>();
-    
-    @Factory
-    @Parameters({"countrys"})
-    public Object[] createInstances(String countrys, ITestContext ctxTestRun) throws Exception {
-    	List<Object> listTests = new ArrayList<>();
-    	InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
-    	VersionValesSuite version = VersionValesSuite.valueOf(inputData.getVersion());
-        Calendar currDtCal = Calendar.getInstance();
-        for (Campanya campanya : Campanya.values()) {
-        	if (!version.filtroCalendario() || 
-        		currDtCal.getTimeInMillis() > Campanya.MNGVIP.getFechaInit().getTimeInMillis()) {
-        		List<ValePais> listaVales = ValesData.getListVales(campanya, version.filtroCalendario());
-        		if (listaVales!=null) {
-        			this.listaPaisesVales.addAll(ValesData.getListVales(campanya, version.filtroCalendario()));
-        		}
-        	}
-        } 
-        
-    	List<Pais> listCountrys = PaisGetter.getFromCommaSeparatedCountries(countrys);
-        int prioridad=0;
-        for (Pais pais : listCountrys) {
-            IdiomaPais idioma = pais.getListIdiomas().get(0);
-            List<ValePais> listaValesPais = listValesPais(pais.getCodigo_pais());
-            for (ValePais valePais : listaValesPais) {
-                DataCtxShop dCtxSh = new DataCtxShop((AppEcom)inputData.getApp(), Channel.desktop, pais, idioma, valePais/*, inputData.getUrlBase()*/);
-                listTests.add(new PaisAplicaVale(version, dCtxSh, prioridad));
-                prioridad+=1;
-                                
-                System.out.println(
-                    "Creado Test con datos: " +
-                    ",Pais=" + pais.getNombre_pais() +
-                    ",Idioma=" + idioma.getCodigo().getLiteral() +
-                    ",Vale=" + valePais.getCodigoVale() +
-                    ",Valido? " + valePais.isValid() + 
-                    ",Porcentaje Descuento=" + valePais.getPorcDescuento()
-                );
-            }
-        }
-                        
-        return listTests.toArray(new Object[listTests.size()]);
-    }   
+	List<ValePais> listaPaisesVales = new ArrayList<>();
+	
+	@Factory
+	@Parameters({"countrys"})
+	public Object[] createInstances(String countrys, ITestContext ctxTestRun) throws Exception {
+		List<Object> listTests = new ArrayList<>();
+		InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
+		VersionValesSuite version = VersionValesSuite.valueOf(inputData.getVersion());
+		Calendar currDtCal = Calendar.getInstance();
+		for (Campanya campanya : Campanya.values()) {
+			if (!version.filtroCalendario() || 
+				currDtCal.getTimeInMillis() > Campanya.MNGVIP.getFechaInit().getTimeInMillis()) {
+				List<ValePais> listaVales = ValesData.getListVales(campanya, version.filtroCalendario());
+				if (listaVales!=null) {
+					this.listaPaisesVales.addAll(ValesData.getListVales(campanya, version.filtroCalendario()));
+				}
+			}
+		} 
+		
+		List<Pais> listCountrys = PaisGetter.getFromCommaSeparatedCountries(countrys);
+		int prioridad=0;
+		for (Pais pais : listCountrys) {
+			IdiomaPais idioma = pais.getListIdiomas().get(0);
+			List<ValePais> listaValesPais = listValesPais(pais.getCodigo_pais());
+			for (ValePais valePais : listaValesPais) {
+				DataCtxShop dCtxSh = new DataCtxShop((AppEcom)inputData.getApp(), Channel.desktop, pais, idioma, valePais/*, inputData.getUrlBase()*/);
+				listTests.add(new PaisAplicaVale(version, dCtxSh, prioridad));
+				prioridad+=1;
+								
+				System.out.println(
+					"Creado Test con datos: " +
+					",Pais=" + pais.getNombre_pais() +
+					",Idioma=" + idioma.getCodigo().getLiteral() +
+					",Vale=" + valePais.getCodigoVale() +
+					",Valido? " + valePais.isValid() + 
+					",Porcentaje Descuento=" + valePais.getPorcDescuento()
+				);
+			}
+		}
+						
+		return listTests.toArray(new Object[listTests.size()]);
+	}   
 
 	/**
 	 * @return si se ha de crear un test para un país concreto
@@ -72,14 +72,14 @@ public class ValesPaises {
 			pais.isVentaOnline());
 	}
 
-    public List<ValePais> listValesPais(String codigo_pais) {      
-        List<ValePais> listaValesPais = new ArrayList<>();
-        for (ValePais valePais : listaPaisesVales) {
-            if (valePais.getPais().getCodigo_pais().compareTo(codigo_pais)==0) {
-                listaValesPais.add(valePais);
-            }
-        }
-                
-        return listaValesPais;
-    }
+	public List<ValePais> listValesPais(String codigo_pais) {	  
+		List<ValePais> listaValesPais = new ArrayList<>();
+		for (ValePais valePais : listaPaisesVales) {
+			if (valePais.getPais().getCodigo_pais().compareTo(codigo_pais)==0) {
+				listaValesPais.add(valePais);
+			}
+		}
+				
+		return listaValesPais;
+	}
 }

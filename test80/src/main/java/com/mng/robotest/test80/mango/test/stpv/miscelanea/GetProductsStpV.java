@@ -23,7 +23,7 @@ public class GetProductsStpV {
 			"Aparece el flag de personalización en mínimo 2 y máximo 4 productos")
 	public static void callProductListService(LineaType linea, String seccion, String galeria, String familia, WebDriver driver) 
 	throws Exception {
-    	DataCtxShop dCtxSh = Test80.getDefaultDataShop(); 
+		DataCtxShop dCtxSh = Test80.getDefaultDataShop(); 
 		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver)
 			.method(MethodGetter.WebDriver)
 			.linea(LineaType.she)

@@ -18,7 +18,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageJCAS;
 
 public class PagePrehomeStpV {
-    
+	
 	private final WebDriver driver;
 	private final DataCtxShop dCtxSh;
 	private final PagePrehome pagePrehome;
@@ -35,87 +35,87 @@ public class PagePrehomeStpV {
 	
 	@Step (
 		description="Acceder a la página de inicio y seleccionar el país <b>#{dCtxSh.getNombrePais()}</b>",
-        expected="Se selecciona el país/idioma correctamente")
-    public void seleccionPaisIdioma() 
-    throws Exception {
-    	AccesoNavigations.goToInitURL(driver);
-        PageJCAS.identJCASifExists(driver);
-        pagePrehome.selecionPais();
-        checkPaisSelected();
-    }
+		expected="Se selecciona el país/idioma correctamente")
+	public void seleccionPaisIdioma() 
+	throws Exception {
+		AccesoNavigations.goToInitURL(driver);
+		PageJCAS.identJCASifExists(driver);
+		pagePrehome.selecionPais();
+		checkPaisSelected();
+	}
 	
 	@Validation
 	private ChecksTM checkPaisSelected() {
 		ChecksTM validations = ChecksTM.getNew();
-	    if (dCtxSh.channel==Channel.desktop) {
-	    	validations.add(
+		if (dCtxSh.channel==Channel.desktop) {
+			validations.add(
 				"Queda seleccionado el país con código " + dCtxSh.pais.getCodigo_pais() + " (" + dCtxSh.pais.getNombre_pais() + ")",
 				pagePrehome.isPaisSelectedDesktop(), State.Warn, true);
-	    }
-	    
-	    boolean isPaisWithMarcaCompra = pagePrehome.isPaisSelectedWithMarcaCompra();
-	    if (dCtxSh.pais.isVentaOnline()) {
-	    	validations.add(
+		}
+		
+		boolean isPaisWithMarcaCompra = pagePrehome.isPaisSelectedWithMarcaCompra();
+		if (dCtxSh.pais.isVentaOnline()) {
+			validations.add(
 				"El país <b>Sí</b> tiene la marca de venta online\"",
 				isPaisWithMarcaCompra, State.Warn, true);
-	    } else {
-	    	validations.add(
+		} else {
+			validations.add(
 				"El país <b>No</b> tiene la marca de venta online\"",
-				!isPaisWithMarcaCompra, State.Warn, true);	    	
-	    }
-	    return validations;
+				!isPaisWithMarcaCompra, State.Warn, true);			
+		}
+		return validations;
 	}
-    
+	
 	@Step (
 		description="Si es preciso seleccionamos el idioma y finalmente el botón \"Entrar\"",
-        expected="Se accede a la Shop correctamente")
-    public void entradaShopGivenPaisSeleccionado() throws Exception {
+		expected="Se accede a la Shop correctamente")
+	public void entradaShopGivenPaisSeleccionado() throws Exception {
 		pagePrehome.selecionIdiomaAndEnter();
-    }
+	}
 
-    public void seleccionPaisIdiomaAndEnter() throws Exception {
-        seleccionPaisIdiomaAndEnter(false);
-    }
-    
-    private final String TagPais = "@TAGPAIS";
-    private final String TagIdioma = "@TAGIDIOMA";
-    @Step (
-    	description="Acceder a la página de inicio y seleccionar el país <b>" + TagPais + "</b>, el idioma <b>" + TagIdioma + "</b> y acceder",
-        expected="Se accede correctamente al pais / idioma seleccionados",
-        saveNettraffic=SaveWhen.Always)
-    public void seleccionPaisIdiomaAndEnter(boolean execValidacs) throws Exception {
+	public void seleccionPaisIdiomaAndEnter() throws Exception {
+		seleccionPaisIdiomaAndEnter(false);
+	}
+	
+	private final String TagPais = "@TAGPAIS";
+	private final String TagIdioma = "@TAGIDIOMA";
+	@Step (
+		description="Acceder a la página de inicio y seleccionar el país <b>" + TagPais + "</b>, el idioma <b>" + TagIdioma + "</b> y acceder",
+		expected="Se accede correctamente al pais / idioma seleccionados",
+		saveNettraffic=SaveWhen.Always)
+	public void seleccionPaisIdiomaAndEnter(boolean execValidacs) throws Exception {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TagPais, dCtxSh.getNombrePais());
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TagIdioma, dCtxSh.getLiteralIdioma());
 		
-    	pagePrehome.accesoShopViaPrehome(true);
+		pagePrehome.accesoShopViaPrehome(true);
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.GoogleAnalytics,
 				GenericCheck.Analitica,
 				GenericCheck.NetTraffic)).checks(driver);
-        
-        if (execValidacs) {
-        	checkPagePostPreHome();
-        }
-        
+		
+		if (execValidacs) {
+			checkPagePostPreHome();
+		}
+		
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.SEO,
 				GenericCheck.Analitica,
 				GenericCheck.JSerrors)).checks(driver);
-    }    
-    
-    @Validation
-    private ChecksTM checkPagePostPreHome() {
-    	ChecksTM validations = ChecksTM.getNew();
-    	String title = driver.getTitle().toLowerCase();
-    	if (dCtxSh.appE==AppEcom.outlet) {
-	    	validations.add(
+	}	
+	
+	@Validation
+	private ChecksTM checkPagePostPreHome() {
+		ChecksTM validations = ChecksTM.getNew();
+		String title = driver.getTitle().toLowerCase();
+		if (dCtxSh.appE==AppEcom.outlet) {
+			validations.add(
 				"Aparece una pantalla en la que el título contiene <b>outlet</b>",
 				title.contains("outlet"), State.Defect);
-    	} else {
-	    	validations.add(
+		} else {
+			validations.add(
 				"Aparece una pantalla en la que el título contiene <b>mango</b>",
 				title.contains("mango"), State.Defect);
-    	}
-    	return validations;
-    }
+		}
+		return validations;
+	}
 }

@@ -29,15 +29,15 @@ public class PageD3DLoginStpV {
 	@Validation (
 		description="Es visible el importe total de la operación #{importeTotal}",
 		level=State.Warn)
-    public boolean isImporteVisible(String importeTotal, String codPais) {
+	public boolean isImporteVisible(String importeTotal, String codPais) {
 		return (ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver));
-    }
-    
+	}
+	
 	@Step (
 		description="Autenticarse en D3D con #{user} / #{password}", 
-        expected="Aparece la página de resultado OK")
-    public void loginAndClickSubmit(String user, String password) {
-        pageD3DLogin.inputUserPassword(user, password);
-        pageD3DLogin.clickButtonSubmit();
-    }
+		expected="Aparece la página de resultado OK")
+	public void loginAndClickSubmit(String user, String password) {
+		pageD3DLogin.inputUserPassword(user, password);
+		pageD3DLogin.clickButtonSubmit();
+	}
 }

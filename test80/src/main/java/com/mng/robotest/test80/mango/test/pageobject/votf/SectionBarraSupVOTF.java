@@ -9,14 +9,14 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SectionBarraSupVOTF {
 
-    public static final String titleUserName = "USERNAME: "; 
-    private static final String XPathBarra = "//div[@class[contains(.,'barraTele')]]";
-    
-    public static boolean isPresentUsuario(String usuarioVOTF, WebDriver driver) {
-        String usuarioLit = titleUserName + usuarioVOTF;
-        return (
-        	state(Present, By.xpath(XPathBarra), driver).check() &&
-            driver.findElement(By.xpath(XPathBarra)).getText().toLowerCase().contains(usuarioLit.toLowerCase()));
-    }
-    
+	public static final String titleUserName = "USERNAME: "; 
+	private static final String XPathBarra = "//div[@class[contains(.,'barraTele')]]";
+	
+	public static boolean isPresentUsuario(String usuarioVOTF, WebDriver driver) {
+		String usuarioLit = titleUserName + usuarioVOTF;
+		return (
+			state(Present, By.xpath(XPathBarra), driver).check() &&
+			driver.findElement(By.xpath(XPathBarra)).getText().toLowerCase().contains(usuarioLit.toLowerCase()));
+	}
+	
 }

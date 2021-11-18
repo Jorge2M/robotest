@@ -19,7 +19,7 @@ public class PageInitPaymayaStpV {
 	}
 	
 	@Validation
-    public ChecksTM checkPage() {
+	public ChecksTM checkPage() {
 		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparece la página inicial de PayMaya",
@@ -28,16 +28,16 @@ public class PageInitPaymayaStpV {
 			"Aparece la imagen del QR",
 			pageInitPaymaya.isQrVisible(), State.Defect);
 	 	return validations;
-    }
+	}
 	
-    @Step(
-        description="Seleccionamos el botón PayMaya para el checkout express",
-        expected="Aparece la página de identificación de PayMaya")
-    public PageIdentPaymayaStpV clickPaymayaButton() throws Exception {
-    	pageInitPaymaya.clickButtonPayMaya();
-    	PageIdentPaymayaStpV pageIdentPaymayaStpV = new PageIdentPaymayaStpV(driver);
-    	pageIdentPaymayaStpV.checkPage();
-    	return pageIdentPaymayaStpV;
-    }
+	@Step(
+		description="Seleccionamos el botón PayMaya para el checkout express",
+		expected="Aparece la página de identificación de PayMaya")
+	public PageIdentPaymayaStpV clickPaymayaButton() throws Exception {
+		pageInitPaymaya.clickButtonPayMaya();
+		PageIdentPaymayaStpV pageIdentPaymayaStpV = new PageIdentPaymayaStpV(driver);
+		pageIdentPaymayaStpV.checkPage();
+		return pageIdentPaymayaStpV;
+	}
 	
 }

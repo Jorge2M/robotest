@@ -67,8 +67,8 @@ public class PaisAplicaVale implements Serializable {
 		dCtxPago.setFTCkout(fTCkout);
 		
 		dCtxPago = new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver)
-    		.build()
-    		.checkout(From.Prehome);
+			.build()
+			.checkout(From.Prehome);
 		
 		if (dCtxPago.getFTCkout().validaPedidosEnManto) {
 			List<CheckPedido> listChecks = Arrays.asList(

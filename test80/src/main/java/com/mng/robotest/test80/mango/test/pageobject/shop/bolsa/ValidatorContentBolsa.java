@@ -51,7 +51,7 @@ public class ValidatorContentBolsa {
 	}
 	
 	public boolean numArticlesIsCorrect() {
-	    return (linesArticlesInScreen.size() == linesArticlesExpected.size());
+		return (linesArticlesInScreen.size() == linesArticlesExpected.size());
 	}
 	
 	public boolean allArticlesExpectedDataAreInScreen(List<DataArtBolsa> listDataToMatch) {

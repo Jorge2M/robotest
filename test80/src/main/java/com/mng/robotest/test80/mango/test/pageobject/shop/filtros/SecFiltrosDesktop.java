@@ -24,7 +24,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenuL
  *
  */
 public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
-    
+	
 	final static String TagOrdenacion = "@TagOrden";
 	final static String TagColor = "@TagColor";
 	final static String XPathWrapper = "//div[@id='stickyMenu']";
@@ -68,35 +68,35 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	}
 	
 	@Override
-    public void selectCollection(FilterCollection collection) {
+	public void selectCollection(FilterCollection collection) {
 		//TODO
-    }
-	
-    @Override
-    public boolean isCollectionFilterPresent() throws Exception {
-    	//TODO
-    	return false;
-    }
+	}
 	
 	@Override
-    public void selectOrdenacion(FilterOrdenacion ordenacion) {
-    	String xpathLink = getXPathLinkOrdenacion(ordenacion);
-    	click(By.xpath(xpathLink)).exec();
-    }
+	public boolean isCollectionFilterPresent() throws Exception {
+		//TODO
+		return false;
+	}
 	
 	@Override
-    public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception {
-        selectOrdenacion(typeOrden);
-        int maxSecondsToWait = 10;
-        int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(maxSecondsToWait);
-        return numArticles;
-    }
-    
-    /** 
-     * @return el número de artículos que aparecen en la galería después de seleccionar el filtro
-     */
+	public void selectOrdenacion(FilterOrdenacion ordenacion) {
+		String xpathLink = getXPathLinkOrdenacion(ordenacion);
+		click(By.xpath(xpathLink)).exec();
+	}
+	
 	@Override
-    public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToSelect) {
+	public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception {
+		selectOrdenacion(typeOrden);
+		int maxSecondsToWait = 10;
+		int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(maxSecondsToWait);
+		return numArticles;
+	}
+	
+	/** 
+	 * @return el número de artículos que aparecen en la galería después de seleccionar el filtro
+	 */
+	@Override
+	public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToSelect) {
 		showFilters();
 		for (Color color : colorsToSelect) {
 			String xpathLinkColor = getXPathLinkColor(color);
@@ -115,13 +115,13 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 				.wait(seconds).check());
 	}
 	
-    @Override
-    public void selectMenu2onLevel(List<String> listMenus) {
-    	//TODO
-    }
-    
-    public enum Visibility {Visible, Invisible}
-    
+	@Override
+	public void selectMenu2onLevel(List<String> listMenus) {
+		//TODO
+	}
+	
+	public enum Visibility {Visible, Invisible}
+	
 	public void makeFilters(Visibility visibility) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		WebElement element = driver.findElement(By.xpath(XPathWrapper));

@@ -9,7 +9,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort.PageSo
 
 
 public class PageSofort4thStpV {
-    
+	
 	private final PageSofort4th pageSofort4th;
 	
 	public PageSofort4thStpV(WebDriver driver) {
@@ -19,18 +19,18 @@ public class PageSofort4thStpV {
 	@Validation (
 		description="Aparece la página de introducción del Usuario/Password de \"SOFORT\"",
 		level=State.Warn)
-    public boolean validaIsPage() { 
+	public boolean validaIsPage() { 
 		return (pageSofort4th.isPage());
-    }
-    
+	}
+	
 	@Step (
 		description="Introducir el usuario/password de DEMO: #{usrSofort} / #{passSofort}", 
-        expected="Aparece la página de selección de cuenta")
-    public void inputCredencialesUsr(String usrSofort, String passSofort) {
-        pageSofort4th.inputUserPass(usrSofort, passSofort);
-        pageSofort4th.clickSubmitButton();
-        validateAppearsCtaForm();
-    }
+		expected="Aparece la página de selección de cuenta")
+	public void inputCredencialesUsr(String usrSofort, String passSofort) {
+		pageSofort4th.inputUserPass(usrSofort, passSofort);
+		pageSofort4th.clickSubmitButton();
+		validateAppearsCtaForm();
+	}
 	
 	@Validation (
 		description="Aparece un formulario para la selección de la cuenta",
@@ -38,15 +38,15 @@ public class PageSofort4thStpV {
 	public boolean validateAppearsCtaForm() {
 		return pageSofort4th.isVisibleFormSelCta();
 	}
-    
+	
 	@Step (
 		description="Seleccionamos la 1a cuenta y pulsamos aceptar", 
-        expected="Aparece la página de confirmación de la transacción")
-    public void select1rstCtaAndAccept() { 
-        pageSofort4th.selectRadioCta(1);
-        pageSofort4th.clickSubmitButton();
-        validateAppearsInputTAN();
-    }
+		expected="Aparece la página de confirmación de la transacción")
+	public void select1rstCtaAndAccept() { 
+		pageSofort4th.selectRadioCta(1);
+		pageSofort4th.clickSubmitButton();
+		validateAppearsInputTAN();
+	}
 	
 	@Validation (
 		description="Aparece un campo para la introducción del TAN",

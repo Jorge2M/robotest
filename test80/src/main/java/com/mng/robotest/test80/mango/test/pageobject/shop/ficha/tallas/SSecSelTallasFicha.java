@@ -48,11 +48,11 @@ public interface SSecSelTallasFicha {
 	 * @return talla eliminando el literal del tipo " [Almacen: 001]
 	 */
 	public default String removeAlmacenFromTalla(String talla) {
-	    Pattern tallaWithAlmacen = Pattern.compile("(.*)( \\[Almacen: [0-9]{3}\\])");
-	    Matcher matcher = tallaWithAlmacen.matcher(talla);
-	    if (matcher.find()) {
-	    	return matcher.group(1);
-	    }
-	    return talla;
+		Pattern tallaWithAlmacen = Pattern.compile("(.*)( \\[Almacen: [0-9]{3}\\])");
+		Matcher matcher = tallaWithAlmacen.matcher(talla);
+		if (matcher.find()) {
+			return matcher.group(1);
+		}
+		return talla;
 	}
 }

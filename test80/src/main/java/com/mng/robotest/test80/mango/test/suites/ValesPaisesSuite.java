@@ -9,7 +9,7 @@ import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.ErrorStorer;
 import com.mng.robotest.test80.mango.test.factoryes.ValesPaises;
 
-public class ValesPaisesSuite extends SuiteMaker {         
+public class ValesPaisesSuite extends SuiteMaker {		 
 	
 	public enum VersionValesSuite {
 		V1(false, false, false, true),
@@ -33,15 +33,15 @@ public class ValesPaisesSuite extends SuiteMaker {
 		public boolean validaPasarelas() {return validaPasarelas;}
 		public boolean validaPagos() {return validaPagos;}
 		public boolean filtroCalendario() {return filtroCalendario;}
-    }
+	}
 	
-    public ValesPaisesSuite(InputParamsMango inputParams) {
-    	super(inputParams);
-    	setParameters(getParametersSuiteShop(inputParams));
-    	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), ValesPaises.class);
-    	testRun.setStorerErrorStep(new ErrorStorer());
-    	addTestRun(testRun);
-    	setParallelMode(ParallelMode.METHODS);
-    	setThreadCount(4);
-    }
+	public ValesPaisesSuite(InputParamsMango inputParams) {
+		super(inputParams);
+		setParameters(getParametersSuiteShop(inputParams));
+		TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), ValesPaises.class);
+		testRun.setStorerErrorStep(new ErrorStorer());
+		addTestRun(testRun);
+		setParallelMode(ParallelMode.METHODS);
+		setThreadCount(4);
+	}
 }

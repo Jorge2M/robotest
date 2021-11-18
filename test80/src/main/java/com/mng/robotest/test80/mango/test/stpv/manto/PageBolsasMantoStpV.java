@@ -16,14 +16,14 @@ import com.mng.robotest.test80.mango.test.pageobject.manto.PageBolsas;
 public class PageBolsasMantoStpV {
 
 	@Validation
-    public static ChecksResultWithFlagLinkCodPed validaLineaBolsa(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
+	public static ChecksResultWithFlagLinkCodPed validaLineaBolsa(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
 		ChecksResultWithFlagLinkCodPed validations = ChecksResultWithFlagLinkCodPed.getNew();
-        int maxSeconds = 10;
-        boolean isPresentLinkPedido = PageBolsas.presentLinkPedidoInBolsaUntil(dataPedido.getCodigoPedidoManto(), maxSeconds, driver);
+		int maxSeconds = 10;
+		boolean isPresentLinkPedido = PageBolsas.presentLinkPedidoInBolsaUntil(dataPedido.getCodigoPedidoManto(), maxSeconds, driver);
 	 	if (isPresentLinkPedido) {
 	 		dataPedido.setIdCompra(PageBolsas.getIdCompra(dataPedido.getCodigoPedidoManto(), driver));
 	 	}
-        validations.setExistsLinkCodPed(isPresentLinkPedido);
+		validations.setExistsLinkCodPed(isPresentLinkPedido);
 	 	validations.add(
 			"En la columna 1 aparece el código de pedido: " + dataPedido.getCodigoPedidoManto() + " (lo esperamos hasta " + maxSeconds + " segundos)",
 			isPresentLinkPedido, State.Warn);
@@ -43,7 +43,7 @@ public class PageBolsasMantoStpV {
 	 	validations.add(
 			"En la columna 7 aparece el email asociado: " + dataPedido.getEmailCheckout(),
 			PageBolsas.presentCorreoInBolsa(driver, dataPedido.getEmailCheckout()), State.Warn);
-        
-        return validations;
-    }
+		
+		return validations;
+	}
 }

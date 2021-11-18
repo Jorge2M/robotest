@@ -9,23 +9,23 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageGestorSaldosTPV {
 
-    public static String titulo = "Gestor de Saldos de TPV";
-    static String iniXPathTitulo = "//td[@class='txt11B' and text()[contains(.,'";
-    static String XPathInputTPV = "//textarea[@id='form:tpvInput']";
-    static String XPathConsultarSaldosButton = "//input[@id='form:consultar']";
-    static String XPathTablaSaldos = "//span[text()='SALDOS']/ancestor::table";
-    static String iniXPathIdTPVTablaSaldos = XPathTablaSaldos + "//span[text()[contains(.,'SHOP TPV : ";
-    static String XPathWidgetError = "//div[@aria-describedby='error']";
-    static String XPathLoadPopupImage = "//img[@src='../images/loadingFonsNegre.gif']";
+	public static String titulo = "Gestor de Saldos de TPV";
+	static String iniXPathTitulo = "//td[@class='txt11B' and text()[contains(.,'";
+	static String XPathInputTPV = "//textarea[@id='form:tpvInput']";
+	static String XPathConsultarSaldosButton = "//input[@id='form:consultar']";
+	static String XPathTablaSaldos = "//span[text()='SALDOS']/ancestor::table";
+	static String iniXPathIdTPVTablaSaldos = XPathTablaSaldos + "//span[text()[contains(.,'SHOP TPV : ";
+	static String XPathWidgetError = "//div[@aria-describedby='error']";
+	static String XPathLoadPopupImage = "//img[@src='../images/loadingFonsNegre.gif']";
 
-    public static String getXPathTitulo(String title){
-    	return (iniXPathTitulo + title + "')]]");
-    }  
-    
-    public static String getXPathIdTPVTablaSaldos(String tpv) {
+	public static String getXPathTitulo(String title){
+		return (iniXPathTitulo + title + "')]]");
+	}  
+	
+	public static String getXPathIdTPVTablaSaldos(String tpv) {
 		return iniXPathIdTPVTablaSaldos + tpv + "')] or text()[contains(.,'OUTLET TPV : " + tpv + "')]]";
-    }
-    
+	}
+	
 	public static boolean isPage(WebDriver driver) {
 		String xpath = getXPathTitulo(titulo);
 		return (state(Present, By.xpath(xpath), driver).check());

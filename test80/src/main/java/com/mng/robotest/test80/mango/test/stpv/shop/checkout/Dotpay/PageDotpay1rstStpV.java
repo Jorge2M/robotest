@@ -11,40 +11,40 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.dotpay.PageDo
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 public class PageDotpay1rstStpV {
-    
+	
 	@Validation
-    public static ChecksTM validateIsPage(String nombrePago, String importeTotal, String codPais, Channel channel, WebDriver driver) {
-    	ChecksTM validations = ChecksTM.getNew();
-      	validations.add(
-    		"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b>",
-    		PageDotpay1rst.isPresentEntradaPago(nombrePago, channel, driver), State.Warn);
-      	
-      	State stateVal = State.Warn;
-      	boolean avoidEvidences = false;
-        if (channel.isDevice()) {
-        	stateVal = State.Info;
-        	avoidEvidences = true;
-        }
-      	validations.add(
-    		"Aparece el importe de la compra: " + importeTotal,
-    		ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal, avoidEvidences);
-      	validations.add(
-    		"Aparece la cabecera indicando la 'etapa' del pago",
-    		PageDotpay1rst.isPresentCabeceraStep(nombrePago, channel, driver), State.Warn);
-      	if (channel==Channel.desktop) {
-          	validations.add(
-        		"Figura un botón de pago",
-        		PageDotpay1rst.isPresentButtonPago(driver), State.Defect);
-      	}
-      	
-      	return validations;
-    }
-    
+	public static ChecksTM validateIsPage(String nombrePago, String importeTotal, String codPais, Channel channel, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
+	  	validations.add(
+			"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b>",
+			PageDotpay1rst.isPresentEntradaPago(nombrePago, channel, driver), State.Warn);
+	  	
+	  	State stateVal = State.Warn;
+	  	boolean avoidEvidences = false;
+		if (channel.isDevice()) {
+			stateVal = State.Info;
+			avoidEvidences = true;
+		}
+	  	validations.add(
+			"Aparece el importe de la compra: " + importeTotal,
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal, avoidEvidences);
+	  	validations.add(
+			"Aparece la cabecera indicando la 'etapa' del pago",
+			PageDotpay1rst.isPresentCabeceraStep(nombrePago, channel, driver), State.Warn);
+	  	if (channel==Channel.desktop) {
+		  	validations.add(
+				"Figura un botón de pago",
+				PageDotpay1rst.isPresentButtonPago(driver), State.Defect);
+	  	}
+	  	
+	  	return validations;
+	}
+	
 	@Step (
 		description="Seleccionar el link hacia el Pago", 
-        expected="Aparece la página de selección del canal de pago")
-    public static void clickToPay(String importeTotal, String codPais, Channel channel, WebDriver driver) throws Exception {
-        PageDotpay1rst.clickToPay(channel, driver);
-        PageDotpayPaymentChannelStpV.validateIsPage(importeTotal, codPais, driver);
-    }
+		expected="Aparece la página de selección del canal de pago")
+	public static void clickToPay(String importeTotal, String codPais, Channel channel, WebDriver driver) throws Exception {
+		PageDotpay1rst.clickToPay(channel, driver);
+		PageDotpayPaymentChannelStpV.validateIsPage(importeTotal, codPais, driver);
+	}
 }

@@ -32,36 +32,36 @@ public class AccesoVOTF {
 
 	public static AccesoVOTF forCountry(PaisShop paisShop) {
 		switch (paisShop) {
-    	case España:
-    		return forSpain();
-    	case France:
-    		return forFrance();
-    	case Italia:
-    		return forItaly();
-    	default:
-    		throw new IllegalArgumentException("Unsuported country '" + paisShop + "' for retrieve credentials");
-    	}
-    }
-    
-    public String getUsuario() {
-        return this.usuario;
-    }
+		case España:
+			return forSpain();
+		case France:
+			return forFrance();
+		case Italia:
+			return forItaly();
+		default:
+			throw new IllegalArgumentException("Unsuported country '" + paisShop + "' for retrieve credentials");
+		}
+	}
 	
-    public String getPassword() {
-        return this.password;
-    }
+	public String getUsuario() {
+		return this.usuario;
+	}
 	
-    public String getEntregadomic() {
-        return this.entregadomic;
-    }
+	public String getPassword() {
+		return this.password;
+	}
+	
+	public String getEntregadomic() {
+		return this.entregadomic;
+	}
 
-    public void setEntregadomic(String entregadomic) {
-        this.entregadomic = entregadomic;
-    }
-        
-    @Override
-    public String toString() {
-        return "AccesoVOTF [usuario="+ this.usuario + ", password=" + this.password +
-                ", toString()=" + super.toString() + "]";
-    }
+	public void setEntregadomic(String entregadomic) {
+		this.entregadomic = entregadomic;
+	}
+		
+	@Override
+	public String toString() {
+		return "AccesoVOTF [usuario="+ this.usuario + ", password=" + this.password +
+				", toString()=" + super.toString() + "]";
+	}
 }

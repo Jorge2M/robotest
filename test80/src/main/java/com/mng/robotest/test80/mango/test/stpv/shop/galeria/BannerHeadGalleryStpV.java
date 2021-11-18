@@ -71,52 +71,52 @@ public class BannerHeadGalleryStpV {
 		checkBannerSalesHead(TypeGalery.Sales, pais, idioma);
 	}
 
-    @SuppressWarnings("static-access")
-    @Validation
-    public ChecksTM checkBannerSalesHead(TypeGalery typeGalery, Pais pais, IdiomaPais idioma) {
-    	ChecksTM validations = ChecksTM.getNew();
-    	validations.add(
-    		"<b style=\"color:blue\">Rebajas</b></br>" +
-    		"Es visible el banner de cabecera",
-    		PageGaleriaDesktop.secBannerHead.isVisible(driver), State.Defect);
-    	
-    	String saleTraduction = UtilsTestMango.getSaleTraduction(idioma);
-    	String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
-    	validations.add(
-    		"El banner de cabecera es de rebajas  (contiene un símbolo de porcentaje o " + saleTraduction + ")",
-    		UtilsTestMango.textContainsPercentage(textBanner, idioma) || textBanner.contains(saleTraduction), 
-    		State.Defect);
-    	validations.add(
-    		"El banner de cabecera contiene un link de \"Más info\"",
-    		PageGaleriaDesktop.secBannerHead.isVisibleLinkInfoRebajas(driver), State.Warn);	
-    	
-    	boolean bannerLincable = PageGaleriaDesktop.secBannerHead.isLinkable(driver);
-    	if (typeGalery==TypeGalery.Sales || !pais.isVentaOnline()) {
-	     	validations.add(
-	     		"El banner de cabecera no es lincable",
-	     		!bannerLincable, State.Info, true);
-    	}
-    	else {
-	     	validations.add(
-	     		"El banner de cabecera sí es lincable",
-	     		bannerLincable, State.Warn);
-    	}
-    	
-    	return validations;
-    }
+	@SuppressWarnings("static-access")
+	@Validation
+	public ChecksTM checkBannerSalesHead(TypeGalery typeGalery, Pais pais, IdiomaPais idioma) {
+		ChecksTM validations = ChecksTM.getNew();
+		validations.add(
+			"<b style=\"color:blue\">Rebajas</b></br>" +
+			"Es visible el banner de cabecera",
+			PageGaleriaDesktop.secBannerHead.isVisible(driver), State.Defect);
+		
+		String saleTraduction = UtilsTestMango.getSaleTraduction(idioma);
+		String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
+		validations.add(
+			"El banner de cabecera es de rebajas  (contiene un símbolo de porcentaje o " + saleTraduction + ")",
+			UtilsTestMango.textContainsPercentage(textBanner, idioma) || textBanner.contains(saleTraduction), 
+			State.Defect);
+		validations.add(
+			"El banner de cabecera contiene un link de \"Más info\"",
+			PageGaleriaDesktop.secBannerHead.isVisibleLinkInfoRebajas(driver), State.Warn);	
+		
+		boolean bannerLincable = PageGaleriaDesktop.secBannerHead.isLinkable(driver);
+		if (typeGalery==TypeGalery.Sales || !pais.isVentaOnline()) {
+		 	validations.add(
+		 		"El banner de cabecera no es lincable",
+		 		!bannerLincable, State.Info, true);
+		}
+		else {
+		 	validations.add(
+		 		"El banner de cabecera sí es lincable",
+		 		bannerLincable, State.Warn);
+		}
+		
+		return validations;
+	}
 
-    @SuppressWarnings("static-access")
-    @Validation
-    ChecksTM checkBannerHeadSalesOff(IdiomaPais idioma) {
-    	ChecksTM validations = ChecksTM.getNew();
-    	String saleTraduction = UtilsTestMango.getSaleTraduction(idioma);
-    	validations.add(
-    		"<b style=\"color:blue\">Rebajas</b></br>" +
-    		"El banner de cabecera NO es de rebajas  (NO contiene un símbolo de porcentaje o \"" + saleTraduction + "\")",
-    		!PageGaleriaDesktop.secBannerHead.isSalesBanner(idioma, driver), State.Defect);
-    	
-    	return validations;
-    }
+	@SuppressWarnings("static-access")
+	@Validation
+	ChecksTM checkBannerHeadSalesOff(IdiomaPais idioma) {
+		ChecksTM validations = ChecksTM.getNew();
+		String saleTraduction = UtilsTestMango.getSaleTraduction(idioma);
+		validations.add(
+			"<b style=\"color:blue\">Rebajas</b></br>" +
+			"El banner de cabecera NO es de rebajas  (NO contiene un símbolo de porcentaje o \"" + saleTraduction + "\")",
+			!PageGaleriaDesktop.secBannerHead.isSalesBanner(idioma, driver), State.Defect);
+		
+		return validations;
+	}
    
 	private boolean textBannersContainsPossibleText(String textBanner, List<String> textsPossible) {
 		for (String possibleText : textsPossible) {

@@ -9,37 +9,37 @@ import javax.xml.bind.annotation.*;
 
 public class Checkchar {
 
-    String check;
-    String text;
+	String check;
+	String text;
 	
-    public String getCheck() {
-        return this.check;
-    }
+	public String getCheck() {
+		return this.check;
+	}
 	
-    @XmlAttribute(name="check")
-    public void setCheck(String check) {
-        this.check = check;
-    }
+	@XmlAttribute(name="check")
+	public void setCheck(String check) {
+		this.check = check;
+	}
 	
-    public String getText() {
-        return this.text;
-    }
+	public String getText() {
+		return this.text;
+	}
 	
-    @XmlAttribute(name="text")
-    public void setText(String text) {
-        this.text = text;
-    }
+	@XmlAttribute(name="text")
+	public void setText(String text) {
+		this.text = text;
+	}
 	
-    public boolean checkChar() {
-        if (this.getCheck()!=null && this.getCheck().compareTo("s")==0) {
-            return true;
-        }
-        return false;
-    }
+	public boolean checkChar() {
+		if (this.getCheck()!=null && this.getCheck().compareTo("s")==0) {
+			return true;
+		}
+		return false;
+	}
 		
-    @Override
-    public String toString() {
-        return "Checkchar [check="+ this.check + ", text=" + this.text + 
-                ", toString()=" + super.toString() + "]";
-    }
+	@Override
+	public String toString() {
+		return "Checkchar [check="+ this.check + ", text=" + this.text + 
+				", toString()=" + super.toString() + "]";
+	}
 }

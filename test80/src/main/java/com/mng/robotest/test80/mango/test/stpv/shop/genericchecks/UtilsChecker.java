@@ -18,27 +18,27 @@ public class UtilsChecker {
 	public static GestorDatosHarJSON getGestorHar(WebDriver driver) {
 		GestorDatosHarJSON gestorHAR = null;
 		
-    	StepTM step = TestMaker.getLastStep();
-        SaveWhen whenSaveNettraffic = step.getWhenSave(StepEvidence.Har);
-        if (whenSaveNettraffic == SaveWhen.Always &&
-            driver.toString().toLowerCase().contains("firefox")) {
-            try {
-                gestorHAR = new GestorDatosHarJSON(step);
-            }
-            catch (FileNotFoundException e) {
-                //Capturamos la excepción para que no se produzca error (las posteriores validaciones generarán un warning para este caso)
-            	Log4jTM.getLogger().warn(
-            			". Not located file HAR associated to method " + step.getTestCaseParent() + 
-            			", step " + Integer.valueOf(step.getNumber()), e);
-            }
-            catch (Exception e) {
-            	Log4jTM.getLogger().warn(
-            			". Error creating Gestor for file HAR " + step.getTestCaseParent() + 
-            			", step " + Integer.valueOf(step.getNumber()), e);
-            }
-        }
-        
-        return gestorHAR;
+		StepTM step = TestMaker.getLastStep();
+		SaveWhen whenSaveNettraffic = step.getWhenSave(StepEvidence.Har);
+		if (whenSaveNettraffic == SaveWhen.Always &&
+			driver.toString().toLowerCase().contains("firefox")) {
+			try {
+				gestorHAR = new GestorDatosHarJSON(step);
+			}
+			catch (FileNotFoundException e) {
+				//Capturamos la excepción para que no se produzca error (las posteriores validaciones generarán un warning para este caso)
+				Log4jTM.getLogger().warn(
+						". Not located file HAR associated to method " + step.getTestCaseParent() + 
+						", step " + Integer.valueOf(step.getNumber()), e);
+			}
+			catch (Exception e) {
+				Log4jTM.getLogger().warn(
+						". Error creating Gestor for file HAR " + step.getTestCaseParent() + 
+						", step " + Integer.valueOf(step.getNumber()), e);
+			}
+		}
+		
+		return gestorHAR;
 	}
 	
 	public static AppEcom getApp() {

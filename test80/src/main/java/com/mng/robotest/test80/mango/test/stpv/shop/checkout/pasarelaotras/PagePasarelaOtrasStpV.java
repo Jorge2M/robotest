@@ -13,19 +13,19 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 
 public class PagePasarelaOtrasStpV {
-    
-    @Validation
-    public static ChecksTM validateIsPage(String importeTotal, Pais pais, Channel channel, AppEcom app, WebDriver driver) {
-    	ChecksTM validations = ChecksTM.getNew();
-        if (channel==Channel.desktop) {
-    	   	validations.add(
-	    		"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
-	    		ImporteScreen.isPresentImporteInScreen(importeTotal, pais.getCodigo_pais(), driver), State.Warn);
-        }
+	
+	@Validation
+	public static ChecksTM validateIsPage(String importeTotal, Pais pais, Channel channel, AppEcom app, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
+		if (channel==Channel.desktop) {
+		   	validations.add(
+				"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
+				ImporteScreen.isPresentImporteInScreen(importeTotal, pais.getCodigo_pais(), driver), State.Warn);
+		}
 	   	validations.add(
-    		"No se trata de la página de precompra (no aparece los logos de formas de pago)",
-    		new PageCheckoutWrapper(channel, app, driver).isPresentMetodosPago(), State.Defect);
+			"No se trata de la página de precompra (no aparece los logos de formas de pago)",
+			new PageCheckoutWrapper(channel, app, driver).isPresentMetodosPago(), State.Defect);
 	   	
 	   	return validations;
-    }
+	}
 }

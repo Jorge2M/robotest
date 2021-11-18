@@ -18,42 +18,42 @@ public class PageMenusManto {
 
 	static String iniXPathTitulo = "//td[@class='txt11B' and text()[contains(.,'";
 	static String XPathTitulo = "//td[@class='txt11B'] | //form[@id='formTempl']";
-    static String XPathCeldaTextMenuPrincipal = "//td[text()[contains(.,'Menú principal')]]";
-    static String XPathCabeceraMenu = "//table//td[@bgcolor='#505050']/span";
-    static String XPathSubMenus = "//table//td/a[@onclick]";
-    static String XPathLinkMenu = "//table//a[@onclick]";
-    static String XPathTableLastElement = "//table[@id='tabla_derecha']//tr[last()]/td/a[@onclick]";
-    
-    /**
-     * @param menu
-     * @return el xpath correspondiente a un menú concreto
-     */
-    public static String getXpath_linkMenu(String menu) {
-        return ("//a[text()[contains(.,'" + menu + "')]]");
-    }
-    
-    /**
-     * @param title
-     * @return el XPATH del título de la página
-     */
-    public static String getXPathTitulo(String title){
-    	return (iniXPathTitulo + title + "')]]");
-    }
-    
-    /**
-     * @param XPathPosicionInicial
-     * @return el XPATH del siguiente elemento al ultimo elemento encontrado del submenu
-     */
-    private static String getXPathNextElement(String XPathPosicionInicial) {
+	static String XPathCeldaTextMenuPrincipal = "//td[text()[contains(.,'Menú principal')]]";
+	static String XPathCabeceraMenu = "//table//td[@bgcolor='#505050']/span";
+	static String XPathSubMenus = "//table//td/a[@onclick]";
+	static String XPathLinkMenu = "//table//a[@onclick]";
+	static String XPathTableLastElement = "//table[@id='tabla_derecha']//tr[last()]/td/a[@onclick]";
+	
+	/**
+	 * @param menu
+	 * @return el xpath correspondiente a un menú concreto
+	 */
+	public static String getXpath_linkMenu(String menu) {
+		return ("//a[text()[contains(.,'" + menu + "')]]");
+	}
+	
+	/**
+	 * @param title
+	 * @return el XPATH del título de la página
+	 */
+	public static String getXPathTitulo(String title){
+		return (iniXPathTitulo + title + "')]]");
+	}
+	
+	/**
+	 * @param XPathPosicionInicial
+	 * @return el XPATH del siguiente elemento al ultimo elemento encontrado del submenu
+	 */
+	private static String getXPathNextElement(String XPathPosicionInicial) {
 		String XPathNextPosicion = XPathPosicionInicial + "/../following::td/a";
 		return XPathNextPosicion;
 	}
-    
-    /**
-     * @param menuName
-     * @return el XPATH del siguiente elemento a la cabecera del submenu
-     */
-    private static String getXPathFirstElement(String menuName) {
+	
+	/**
+	 * @param menuName
+	 * @return el XPATH del siguiente elemento a la cabecera del submenu
+	 */
+	private static String getXPathFirstElement(String menuName) {
 		String XPathPosicionInicial = XPathCabeceraMenu + "[text()='" + menuName + "']" + "/../following::td";
 		return XPathPosicionInicial;
 	}
@@ -66,20 +66,20 @@ public class PageMenusManto {
 		return (state(Present, By.xpath(XPathCeldaTextMenuPrincipal), driver).check());
 	}
 
-    /**
-     * @return valida si la página seleccionada corresponde con el menú seleccionado
-     */
-    public static boolean validateIsPage(String subMenu, int maxSeconds, WebDriver driver) {
-    	for (int i=0; i<maxSeconds; i++) {
-    		if (vaidateIsPage(subMenu, driver)) {
-    			return true;
-    		}
-    		waitMillis(1000);
-    	}
-    	return false;
+	/**
+	 * @return valida si la página seleccionada corresponde con el menú seleccionado
+	 */
+	public static boolean validateIsPage(String subMenu, int maxSeconds, WebDriver driver) {
+		for (int i=0; i<maxSeconds; i++) {
+			if (vaidateIsPage(subMenu, driver)) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
 	} 
-    
-    private static boolean vaidateIsPage(String subMenu, WebDriver driver) {
+	
+	private static boolean vaidateIsPage(String subMenu, WebDriver driver) {
 		String menuHeaderText = getTextMenuTitulo(driver);
 		String subMenuText = subMenu.replace("· ", "");
 		if (menuHeaderText.contains(subMenuText) || menuHeaderText.contains(subMenuText.toUpperCase()) || menuHeaderText.toUpperCase().contains(subMenuText.toUpperCase())){
@@ -98,20 +98,20 @@ public class PageMenusManto {
 	}
 
 	/**
-     * @param XPathPosicionInicial, nextMenuName
-     * @return comprueba si xpath del siguiente elemento es una cabecera de submenu, comprobando el text() con el de las cabeceras de menu
-     */
-    private static boolean isNextXPathMenuHeader(String XPathPosicionInicial, String nextMenuName, WebDriver driver) {
+	 * @param XPathPosicionInicial, nextMenuName
+	 * @return comprueba si xpath del siguiente elemento es una cabecera de submenu, comprobando el text() con el de las cabeceras de menu
+	 */
+	private static boolean isNextXPathMenuHeader(String XPathPosicionInicial, String nextMenuName, WebDriver driver) {
 		String XPathNextPosicion = XPathPosicionInicial + "/../following::td/child::node()";
 		String texto = driver.findElement(By.xpath(XPathNextPosicion)).getText();
 		return (!nextMenuName.equals(texto));
 	}
-    
-    /**
-     * @param XPathPosicionInicial, nextMenuName
-     * @return comprueba si xpath del siguiente elemento es el mismo que el del elemento final de la tabla
-     */
-    private static boolean isNextXPathEndTable(String XPathPosicionInicial, WebDriver driver) {
+	
+	/**
+	 * @param XPathPosicionInicial, nextMenuName
+	 * @return comprueba si xpath del siguiente elemento es el mismo que el del elemento final de la tabla
+	 */
+	private static boolean isNextXPathEndTable(String XPathPosicionInicial, WebDriver driver) {
 		String XPathNextPosicion = XPathPosicionInicial + "/../following::td/child::node()";
 		if (!state(Present, By.xpath(XPathNextPosicion), driver).check()) {
 			return false;
@@ -121,23 +121,23 @@ public class PageMenusManto {
 		return true;
 		
 	}
-    
-    /**
-     * @return if alert existed
-     */
-    public static String clickMenuAndAcceptAlertIfExists(String textoMenu, WebDriver driver) throws Exception {
-    	try {
-    		clickMenu(textoMenu, driver);
+	
+	/**
+	 * @return if alert existed
+	 */
+	public static String clickMenuAndAcceptAlertIfExists(String textoMenu, WebDriver driver) throws Exception {
+		try {
+			clickMenu(textoMenu, driver);
 		} catch (UnhandledAlertException f) {
-	        String textAlert = SeleniumUtils.acceptAlertIfExists(driver);
-	        if ("".compareTo(textAlert)==0) {
-	        	return "Unknown or Empty";
-	        }
-	        return textAlert;
-	    }
-    	
-    	return "";
-    }
+			String textAlert = SeleniumUtils.acceptAlertIfExists(driver);
+			if ("".compareTo(textAlert)==0) {
+				return "Unknown or Empty";
+			}
+			return textAlert;
+		}
+		
+		return "";
+	}
 
 	public static void clickMenu(String textoMenu, WebDriver driver) {
 		int maxTimeToWait = 60;
@@ -165,58 +165,58 @@ public class PageMenusManto {
 		waitForPageLoaded(driver, 60);
 	}
 
-    public static List<WebElement> getListLinksMenus(WebDriver driver) {
-        return (driver.findElements(By.xpath(XPathLinkMenu)));
-    }
-    
-    /**
-     * @return devuelve el text() de todos los menus
-     */
-    public static ArrayList<String> getListMenuNames(WebDriver driver) {
-        ArrayList<String> listMenuNames = new ArrayList<>();
-        List<WebElement> listElemMenus = getListLinksMenus(driver);
-        for (WebElement menu : listElemMenus)
-            listMenuNames.add(menu.getText());
-        
-        return listMenuNames;
-    }
-    
-    /**
-     * @return devuelve el WebElement de todas las cabeceras de menu
-     */
-    public static List<WebElement> getListCabecerasMenus(WebDriver driver) {
-        return (driver.findElements(By.xpath(XPathCabeceraMenu)));
-    }
-    
-    /**
-     * @return devuelve el text() de todas las cabeceras de menu
-     */
-    public static ArrayList<String> getListCabecerasMenusName(WebDriver driver) {
-        ArrayList<String> listCabecerasNames = new ArrayList<>();
-        List<WebElement> listCabecerasMenus = getListCabecerasMenus(driver);
-        for (WebElement menu : listCabecerasMenus)
-            listCabecerasNames.add(menu.getText());
-        
-        return listCabecerasNames;
-    }
-
-    /**
-     * @param menuName, nextMenuName
-     * @return devuelve el text() de todos los submenus
-     */
-	public static ArrayList<String> getListSubMenusName(String menuName, String nextMenuName, WebDriver driver) {
-		ArrayList<String> listSubMenusNames = new ArrayList<>();
-        List<WebElement> listSubMenus = getListSubMenus(menuName, nextMenuName, driver);
-        for (WebElement menu : listSubMenus)
-            listSubMenusNames.add(menu.getText());
-        
-        return listSubMenusNames;
+	public static List<WebElement> getListLinksMenus(WebDriver driver) {
+		return (driver.findElements(By.xpath(XPathLinkMenu)));
 	}
 	
 	/**
-     * @param menuName, nextMenuName
-     * @return devuelve el WebElement de todos los submenus
-     */
+	 * @return devuelve el text() de todos los menus
+	 */
+	public static ArrayList<String> getListMenuNames(WebDriver driver) {
+		ArrayList<String> listMenuNames = new ArrayList<>();
+		List<WebElement> listElemMenus = getListLinksMenus(driver);
+		for (WebElement menu : listElemMenus)
+			listMenuNames.add(menu.getText());
+		
+		return listMenuNames;
+	}
+	
+	/**
+	 * @return devuelve el WebElement de todas las cabeceras de menu
+	 */
+	public static List<WebElement> getListCabecerasMenus(WebDriver driver) {
+		return (driver.findElements(By.xpath(XPathCabeceraMenu)));
+	}
+	
+	/**
+	 * @return devuelve el text() de todas las cabeceras de menu
+	 */
+	public static ArrayList<String> getListCabecerasMenusName(WebDriver driver) {
+		ArrayList<String> listCabecerasNames = new ArrayList<>();
+		List<WebElement> listCabecerasMenus = getListCabecerasMenus(driver);
+		for (WebElement menu : listCabecerasMenus)
+			listCabecerasNames.add(menu.getText());
+		
+		return listCabecerasNames;
+	}
+
+	/**
+	 * @param menuName, nextMenuName
+	 * @return devuelve el text() de todos los submenus
+	 */
+	public static ArrayList<String> getListSubMenusName(String menuName, String nextMenuName, WebDriver driver) {
+		ArrayList<String> listSubMenusNames = new ArrayList<>();
+		List<WebElement> listSubMenus = getListSubMenus(menuName, nextMenuName, driver);
+		for (WebElement menu : listSubMenus)
+			listSubMenusNames.add(menu.getText());
+		
+		return listSubMenusNames;
+	}
+	
+	/**
+	 * @param menuName, nextMenuName
+	 * @return devuelve el WebElement de todos los submenus
+	 */
 	public static List<WebElement> getListSubMenus(String menuName, String nextMenuName, WebDriver driver) {
 		String XPathPosicionInicial = getXPathFirstElement(menuName);
 		List<WebElement> elements = new ArrayList<>();

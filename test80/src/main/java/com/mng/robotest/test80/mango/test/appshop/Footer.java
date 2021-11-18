@@ -47,25 +47,25 @@ public class Footer {
 		String urlInitialPage = driver.getCurrentUrl();
 		SecFooterStpV secFooterStpV = new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver);
 		secFooterStpV.validaLinksFooter();
-        
-        List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinksFiltered(dCtxSh.appE, dCtxSh.channel);
-        //List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinks(dCtxSh.appE, dCtxSh.channel);
-        for (FooterLink footerLinkToValidate : listFooterLinksToValidate) {
-        	switch (footerLinkToValidate) {
-        	case ayuda:
-        		secFooterStpV.clickLinkFooter(footerLinkToValidate, false);
-        		secFooterStpV.validaPaginaAyuda();
-        		break;
-        	case mango_card:
-        		secFooterStpV.clickLinkFooter(footerLinkToValidate, false);
-                secFooterStpV.checkSolicitarTarjeta();
-        		break;
-        	default:
-                secFooterStpV.clickLinkFooter(footerLinkToValidate, true);
-                driver.get(urlInitialPage);
-        	}
-        	
-            driver.get(urlInitialPage);
-        }
-    }
+		
+		List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinksFiltered(dCtxSh.appE, dCtxSh.channel);
+		//List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinks(dCtxSh.appE, dCtxSh.channel);
+		for (FooterLink footerLinkToValidate : listFooterLinksToValidate) {
+			switch (footerLinkToValidate) {
+			case ayuda:
+				secFooterStpV.clickLinkFooter(footerLinkToValidate, false);
+				secFooterStpV.validaPaginaAyuda();
+				break;
+			case mango_card:
+				secFooterStpV.clickLinkFooter(footerLinkToValidate, false);
+				secFooterStpV.checkSolicitarTarjeta();
+				break;
+			default:
+				secFooterStpV.clickLinkFooter(footerLinkToValidate, true);
+				driver.get(urlInitialPage);
+			}
+			
+			driver.get(urlInitialPage);
+		}
+	}
 }

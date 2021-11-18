@@ -13,122 +13,122 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ImporteScreen {
 	
-    public static String normalizeImportFromScreen(String screenImport) {
-    	String impToReturn = screenImport.replaceAll("[^\\d.,]", "");
-    	
-    	//Remove first and last character if "." o ","
-    	if (impToReturn.length()>0) {
-    		String firstChar = impToReturn.substring(0,1);
-    		if ((".".compareTo(firstChar)==0 || ",".compareTo(firstChar)==0)) {
-    			impToReturn = impToReturn.substring(1); 
-    		}
-    	}
-    		
-    	if (impToReturn.length()>0) {
-    		String lastChar = impToReturn.substring(impToReturn.length()-1,impToReturn.length());
-    		if (".".compareTo(lastChar)==0 || ",".compareTo(lastChar)==0) {
-    			impToReturn = impToReturn.substring(0, impToReturn.length()-1);
-    		}
-    	}
-    	
-        //Si hay más de un punto eliminamos el 1o
-        if (impToReturn.indexOf(".")!=impToReturn.lastIndexOf(".")) {
-        	impToReturn = impToReturn.replaceFirst("\\.", "");
-        }
-        if (impToReturn.indexOf(".") < impToReturn.length() - 3) {
-        	impToReturn = impToReturn.replace(".", "");
-        }
-        if (impToReturn.indexOf(",") < impToReturn.length() - 3) {
-        	impToReturn = impToReturn.replace(",", "");
-        }
-        if (impToReturn.indexOf(".") == impToReturn.length()) {
-        	impToReturn = impToReturn.replace(".", "");
-        }
-    	return impToReturn;
-    }
-    
-    /**
-     * Adapta un importe a un float teniendo en cuenta los diferentes formatos de importe mostrados en MANGO
-     */
-    public static float getFloatFromImporteMangoScreen(String screenImport) {
-        String importeResult = normalizeImportFromScreen(screenImport);
-        if (importeResult.compareTo("") == 0) {
-            return (0);
-        }
-        return (Float.parseFloat(importeResult.replace(',', '.')));
-    }
+	public static String normalizeImportFromScreen(String screenImport) {
+		String impToReturn = screenImport.replaceAll("[^\\d.,]", "");
+		
+		//Remove first and last character if "." o ","
+		if (impToReturn.length()>0) {
+			String firstChar = impToReturn.substring(0,1);
+			if ((".".compareTo(firstChar)==0 || ",".compareTo(firstChar)==0)) {
+				impToReturn = impToReturn.substring(1); 
+			}
+		}
+			
+		if (impToReturn.length()>0) {
+			String lastChar = impToReturn.substring(impToReturn.length()-1,impToReturn.length());
+			if (".".compareTo(lastChar)==0 || ",".compareTo(lastChar)==0) {
+				impToReturn = impToReturn.substring(0, impToReturn.length()-1);
+			}
+		}
+		
+		//Si hay más de un punto eliminamos el 1o
+		if (impToReturn.indexOf(".")!=impToReturn.lastIndexOf(".")) {
+			impToReturn = impToReturn.replaceFirst("\\.", "");
+		}
+		if (impToReturn.indexOf(".") < impToReturn.length() - 3) {
+			impToReturn = impToReturn.replace(".", "");
+		}
+		if (impToReturn.indexOf(",") < impToReturn.length() - 3) {
+			impToReturn = impToReturn.replace(",", "");
+		}
+		if (impToReturn.indexOf(".") == impToReturn.length()) {
+			impToReturn = impToReturn.replace(".", "");
+		}
+		return impToReturn;
+	}
 	
-    /**
-     * Valida si el importe está apareciendo en la pantalla actual
-     */
-    public static boolean isPresentImporteInScreen(String importe, String codPais, WebDriver driver) {
-    	return (isPresentImporteInElements(importe, codPais, "//*", driver));
-    }
-    
-    public static boolean isPresentImporteInElements(String importe, String codPais, String xpathElementsWhereSearch, WebDriver driver) {
-        ArrayList<String> possibleImports = getPosibleLitImportInScreen(importe, codPais);
-        return (isAnyImportInScreen(possibleImports, xpathElementsWhereSearch, driver));
-    }
-    
-    private static boolean isAnyImportInScreen(ArrayList<String> possibleImports, String xpathElementsWhereSearch, WebDriver driver) {
-        if (isAnyImportInScreenMethodXpath(possibleImports, xpathElementsWhereSearch, driver)) {
-    		return true;
-        }
-        int itemsToIterate = 10;
-    	return (isAnyImportInScreenMethodIterate(possibleImports, xpathElementsWhereSearch, itemsToIterate, driver));
-    }
-    
-    /**
-     * Se buscan los importes en pantalla vía XPath directo
-     */
-    private static boolean isAnyImportInScreenMethodXpath(ArrayList<String> possibleImports, String xpathElementsWhereSearch, WebDriver driver) {
-    	String xpathImports = xpathElementsWhereSearch + "//self::*[";
-    	String litOr = " or ";
-    	for (String possibleImport : possibleImports) {
-    		xpathImports+=("node()[contains(.,'" + possibleImport + "')]" + litOr);
-    	}
-    	
-    	xpathImports = replaceLast(xpathImports, litOr, "") + "]";
-    	return (state(Present, By.xpath(xpathImports), driver).check());
-    }
-    
-    /**
-     * Se buscan los importes en pantalla vía revisión de todos los WebElement
-     */
-    private static boolean isAnyImportInScreenMethodIterate(ArrayList<String> possibleImports, String xpathElementsWhereSearch, 
-    														int itemsToIterate, WebDriver driver) {
-        List<WebElement> listElementos = driver.findElements(By.xpath(xpathElementsWhereSearch));
-        Iterator<WebElement> itElements = listElementos.iterator();
-        int i = 0;
-        while (itElements.hasNext() && i<itemsToIterate) {
-            String textElelments = itElements.next().getText();
-            for (String possibleImport : possibleImports) {
-            	if (textElelments.contains(possibleImport)) {
-            		return true;
-            	}
-            }
-            
-            i+=1;
-        }
-            
-        return false;
-    }
-    
-    private static ArrayList<String> getPosibleLitImportInScreen(String importe, String codPais) {
-    	//Posibles importes a nivel General
-    	ArrayList<String> listOfImports = new ArrayList<String>();
-    	listOfImports.add(importe);
-    	if (importe.contains(".")) {
-    		listOfImports.add(importe.replace(".", ","));
-    	}
-    	if (importe.contains(",")) {
-    		listOfImports.add(importe.replace(",", "."));
-            int ultimaComa = importe.lastIndexOf(",");
-            if (importe.length() - ultimaComa == 4) {
-            	listOfImports.add(importe.replace(",", "")); //Importe sin carácter de miles
-            }
-    	}
-    	
+	/**
+	 * Adapta un importe a un float teniendo en cuenta los diferentes formatos de importe mostrados en MANGO
+	 */
+	public static float getFloatFromImporteMangoScreen(String screenImport) {
+		String importeResult = normalizeImportFromScreen(screenImport);
+		if (importeResult.compareTo("") == 0) {
+			return (0);
+		}
+		return (Float.parseFloat(importeResult.replace(',', '.')));
+	}
+	
+	/**
+	 * Valida si el importe está apareciendo en la pantalla actual
+	 */
+	public static boolean isPresentImporteInScreen(String importe, String codPais, WebDriver driver) {
+		return (isPresentImporteInElements(importe, codPais, "//*", driver));
+	}
+	
+	public static boolean isPresentImporteInElements(String importe, String codPais, String xpathElementsWhereSearch, WebDriver driver) {
+		ArrayList<String> possibleImports = getPosibleLitImportInScreen(importe, codPais);
+		return (isAnyImportInScreen(possibleImports, xpathElementsWhereSearch, driver));
+	}
+	
+	private static boolean isAnyImportInScreen(ArrayList<String> possibleImports, String xpathElementsWhereSearch, WebDriver driver) {
+		if (isAnyImportInScreenMethodXpath(possibleImports, xpathElementsWhereSearch, driver)) {
+			return true;
+		}
+		int itemsToIterate = 10;
+		return (isAnyImportInScreenMethodIterate(possibleImports, xpathElementsWhereSearch, itemsToIterate, driver));
+	}
+	
+	/**
+	 * Se buscan los importes en pantalla vía XPath directo
+	 */
+	private static boolean isAnyImportInScreenMethodXpath(ArrayList<String> possibleImports, String xpathElementsWhereSearch, WebDriver driver) {
+		String xpathImports = xpathElementsWhereSearch + "//self::*[";
+		String litOr = " or ";
+		for (String possibleImport : possibleImports) {
+			xpathImports+=("node()[contains(.,'" + possibleImport + "')]" + litOr);
+		}
+		
+		xpathImports = replaceLast(xpathImports, litOr, "") + "]";
+		return (state(Present, By.xpath(xpathImports), driver).check());
+	}
+	
+	/**
+	 * Se buscan los importes en pantalla vía revisión de todos los WebElement
+	 */
+	private static boolean isAnyImportInScreenMethodIterate(ArrayList<String> possibleImports, String xpathElementsWhereSearch, 
+															int itemsToIterate, WebDriver driver) {
+		List<WebElement> listElementos = driver.findElements(By.xpath(xpathElementsWhereSearch));
+		Iterator<WebElement> itElements = listElementos.iterator();
+		int i = 0;
+		while (itElements.hasNext() && i<itemsToIterate) {
+			String textElelments = itElements.next().getText();
+			for (String possibleImport : possibleImports) {
+				if (textElelments.contains(possibleImport)) {
+					return true;
+				}
+			}
+			
+			i+=1;
+		}
+			
+		return false;
+	}
+	
+	private static ArrayList<String> getPosibleLitImportInScreen(String importe, String codPais) {
+		//Posibles importes a nivel General
+		ArrayList<String> listOfImports = new ArrayList<String>();
+		listOfImports.add(importe);
+		if (importe.contains(".")) {
+			listOfImports.add(importe.replace(".", ","));
+		}
+		if (importe.contains(",")) {
+			listOfImports.add(importe.replace(",", "."));
+			int ultimaComa = importe.lastIndexOf(",");
+			if (importe.length() - ultimaComa == 4) {
+				listOfImports.add(importe.replace(",", "")); //Importe sin carácter de miles
+			}
+		}
+		
 		listOfImports.add(insertCharInMiles(importe, ' ')); //Importe con un espacio indicando los miles
 		
 		//Posibles importes específicos de países concretos
@@ -143,7 +143,7 @@ public class ImporteScreen {
 			listOfImports.add(insertCharInMiles(importe, ' ')); // En Hungría aparece un importe del tipo 8 785
 			listOfImports.add(insertCharInMiles(importe, ',')); // En algunas pasarelas (como Paypal) es de tipo 8,785
 			listOfImports.add(insertCharInMiles(importe, '.')); // En algunas pasarelas es de tipo 8.785			
-            break;
+			break;
 		case "036":
 			int importeSize = importe.length();
 			String lastNum = importe.substring(importeSize-1, importeSize);
@@ -158,34 +158,34 @@ public class ImporteScreen {
 		default:
 		}
 		
-        return listOfImports;
-    }
-    
-    /**
-     * Inserta un carácter determinado en los puntos de miles de un número
-     */
-    private static String insertCharInMiles(String importeTotal, char charToInsert) {
-        int k = 0;
-        String importeTotalSpaces = "";
-        for (int j = importeTotal.length() - 1; j >= 0; j--) {
-            char caracter = importeTotal.charAt(j);
-            importeTotalSpaces = caracter + importeTotalSpaces;
-            if (Character.isDigit(caracter)) {
-                k += 1;
-                if (k == 3) {
-                    importeTotalSpaces = charToInsert + importeTotalSpaces;
-                    k = 0;
-                }
-            }
-        }
-        importeTotalSpaces = importeTotalSpaces.trim();
-        if (importeTotalSpaces.charAt(0) == charToInsert) {
-            importeTotalSpaces = importeTotalSpaces.substring(1);
-        }
-        return importeTotalSpaces;
-    }
-    
-    private static String replaceLast(String text, String regex, String replacement) {
-        return text.replaceFirst("(?s)"+regex+"(?!.*?"+regex+")", replacement);
-    }
+		return listOfImports;
+	}
+	
+	/**
+	 * Inserta un carácter determinado en los puntos de miles de un número
+	 */
+	private static String insertCharInMiles(String importeTotal, char charToInsert) {
+		int k = 0;
+		String importeTotalSpaces = "";
+		for (int j = importeTotal.length() - 1; j >= 0; j--) {
+			char caracter = importeTotal.charAt(j);
+			importeTotalSpaces = caracter + importeTotalSpaces;
+			if (Character.isDigit(caracter)) {
+				k += 1;
+				if (k == 3) {
+					importeTotalSpaces = charToInsert + importeTotalSpaces;
+					k = 0;
+				}
+			}
+		}
+		importeTotalSpaces = importeTotalSpaces.trim();
+		if (importeTotalSpaces.charAt(0) == charToInsert) {
+			importeTotalSpaces = importeTotalSpaces.substring(1);
+		}
+		return importeTotalSpaces;
+	}
+	
+	private static String replaceLast(String text, String regex, String replacement) {
+		return text.replaceFirst("(?s)"+regex+"(?!.*?"+regex+")", replacement);
+	}
 }

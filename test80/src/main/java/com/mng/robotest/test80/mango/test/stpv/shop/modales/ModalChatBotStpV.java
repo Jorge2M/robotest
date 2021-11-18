@@ -21,14 +21,14 @@ public class ModalChatBotStpV {
 	public boolean checkIconVisible() {
 		return modalChatBot.checkIconVisible();
 	}
-    
+	
 	@Step (
 		description="Clickar el icono de ChatBot", 
-        expected="Aparece la capa del webchat")
-    public boolean clickIcon() {
+		expected="Aparece la capa del webchat")
+	public boolean clickIcon() {
 		modalChatBot.clickIcon();
 		return checkWebchatVisible(2);
-    }
+	}
 	
 	@Validation (
 		description="Aparece la capa del WebChat (la esperamos hasta #{maxSeconds} segundos)",
@@ -46,10 +46,10 @@ public class ModalChatBotStpV {
 	
 	@Step (
 		description="Seleccionar la opción <b>#{option}</b>", 
-        expected="La selección es correcta")
-    public void selectOption(String option) {
+		expected="La selección es correcta")
+	public void selectOption(String option) {
 		modalChatBot.clickOption(option);
-    }
+	}
 	
 	@Validation (
 		description="Aparece una respuesta con el texto #{respuesta} (la esperamos hasta #{maxSeconds} segundos)",

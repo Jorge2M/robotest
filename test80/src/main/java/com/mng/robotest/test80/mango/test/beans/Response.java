@@ -9,20 +9,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="Response")
 public class Response {
 
-    List<Continente> Response;    
-        
-    public List<Continente> getResponse() {
-        return this.Response;
-    }
+	List<Continente> Response;	
+		
+	public List<Continente> getResponse() {
+		return this.Response;
+	}
 
-    @XmlElement(name="continente")
-    public void setResponse(List<Continente> Response) {
-        this.Response = Response;
-    }
+	@XmlElement(name="continente")
+	public void setResponse(List<Continente> Response) {
+		this.Response = Response;
+	}
 
-    @Override
-    public String toString() {
-        return "Response [Response=" + this.Response + ", toString()="
-                + super.toString() + "]";
-    }
+	@Override
+	public String toString() {
+		return "Response [Response=" + this.Response + ", toString()="
+				+ super.toString() + "]";
+	}
 }

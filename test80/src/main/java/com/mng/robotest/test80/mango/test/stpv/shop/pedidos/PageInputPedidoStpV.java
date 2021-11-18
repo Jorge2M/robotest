@@ -27,10 +27,10 @@ public class PageInputPedidoStpV {
 	@Validation (
 		description="La página contiene un campo para la introducción del Nº de pedido",
 		level=State.Warn)
-    public boolean validateIsPage() {
+	public boolean validateIsPage() {
 		return (pageInputPedido.isVisibleInputPedido());
-    }
-    
+	}
+	
 	@Step (
 		description=
 			"Buscar el pedido <b style=\"color:brown;\">#{dataPedido.getCodpedido()}</b> introduciendo email + nº pedido</b>",

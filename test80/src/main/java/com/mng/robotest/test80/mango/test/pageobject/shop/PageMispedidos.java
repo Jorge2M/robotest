@@ -9,15 +9,15 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageMispedidos {
 
-    static String XPathPanelPedidos = "//div[@id[contains(.,'panelPedidos')]]";
-    
-    /**
-     * @return el xpath correspondiente al element cuya presencia indica que la lista de pedidos está vacía
-     */
-    public static String getXPATH_listaPedidosVacia() {
-        //La última fila es la de la cabecera de la tabla (contiene el literal 'Código de pedido')
-        return ("//tr[last()]//td[contains(.,'digo pedido')]");
-    }
+	static String XPathPanelPedidos = "//div[@id[contains(.,'panelPedidos')]]";
+	
+	/**
+	 * @return el xpath correspondiente al element cuya presencia indica que la lista de pedidos está vacía
+	 */
+	public static String getXPATH_listaPedidosVacia() {
+		//La última fila es la de la cabecera de la tabla (contiene el literal 'Código de pedido')
+		return ("//tr[last()]//td[contains(.,'digo pedido')]");
+	}
 
 	public static boolean isPage(WebDriver driver) {
 		return (state(Present, By.xpath(XPathPanelPedidos), driver).check());

@@ -34,13 +34,13 @@ public class MenusPaisSuite extends SuiteMaker {
 		public boolean testOrderAndTranslationMenus() {return testOrderAndTranslationMenus;}
 	}
 	
-    public MenusPaisSuite(InputParamsMango inputParams) {
-    	super(inputParams);
-    	setParameters(getParametersSuiteShop(inputParams));
-    	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), MenusFactory.class);
-    	testRun.setStorerErrorStep(new ErrorStorer());
-    	addTestRun(testRun);
-    	setParallelMode(ParallelMode.METHODS);
-    	setThreadCount(3);
-    }
+	public MenusPaisSuite(InputParamsMango inputParams) {
+		super(inputParams);
+		setParameters(getParametersSuiteShop(inputParams));
+		TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), MenusFactory.class);
+		testRun.setStorerErrorStep(new ErrorStorer());
+		addTestRun(testRun);
+		setParallelMode(ParallelMode.METHODS);
+		setThreadCount(3);
+	}
 }

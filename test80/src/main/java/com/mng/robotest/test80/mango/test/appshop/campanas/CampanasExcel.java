@@ -50,26 +50,26 @@
 //	
 //	private ArrayList<DataCampana> getListCamapansFromExcel(String filePathExcel) throws Exception {
 //		ArrayList<DataCampana> listCampanas = new ArrayList<DataCampana>(); 
-//    	File excelFile = new File(filePathExcel);
-//        Workbook workbook = WorkbookFactory.create(excelFile);
-//        Sheet sheet = workbook.getSheetAt(0);
+//		File excelFile = new File(filePathExcel);
+//		Workbook workbook = WorkbookFactory.create(excelFile);
+//		Sheet sheet = workbook.getSheetAt(0);
 //
-//        //Navigate throughout the row/cells
-//        for (int i=0; i<sheet.getPhysicalNumberOfRows(); i++) {
-//        	if (i>0) {
-//        		Row row = sheet.getRow(i);
-//	        	DataCampana dataCampana = new DataCampana();
-//	            for(int j=0; j<row.getPhysicalNumberOfCells(); j++) {
-//	            	Cell cell = row.getCell(j);
-//            		mapCellIntoDataCampana(cell, dataCampana);
-//	            }
-//	            
-//	            listCampanas.add(dataCampana);
-//        	}
-//        }
-//        
-//        workbook.close();		
-//        return listCampanas;
+//		//Navigate throughout the row/cells
+//		for (int i=0; i<sheet.getPhysicalNumberOfRows(); i++) {
+//			if (i>0) {
+//				Row row = sheet.getRow(i);
+//				DataCampana dataCampana = new DataCampana();
+//				for(int j=0; j<row.getPhysicalNumberOfCells(); j++) {
+//					Cell cell = row.getCell(j);
+//					mapCellIntoDataCampana(cell, dataCampana);
+//				}
+//				
+//				listCampanas.add(dataCampana);
+//			}
+//		}
+//		
+//		workbook.close();		
+//		return listCampanas;
 //	}
 //	
 //	private void mapCellIntoDataCampana(Cell cell, DataCampana dataCampana) {

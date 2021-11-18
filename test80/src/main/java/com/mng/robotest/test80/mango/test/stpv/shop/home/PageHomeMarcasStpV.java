@@ -30,51 +30,51 @@ public class PageHomeMarcasStpV {
 	public static BannerRebajas2019StpV bannerRebajas2019; 
 	public static BannerSpringIsHere2019StpV bannerSpringIsHere2019; 
 	
-    public enum TypeHome {Multimarca, PortadaLinea}
+	public enum TypeHome {Multimarca, PortadaLinea}
 
-    public PageHomeMarcasStpV(Channel channel, AppEcom app, WebDriver driver) {
-    	pageHomeMarcas = new PageHomeMarcas(app, driver);
-    	this.channel = channel;
-    	this.app = app;
-    	this.driver = driver;
-    }
-    
-    public void validateIsPageWithCorrectLineas(Pais pais) throws Exception {
-        AllPagesStpV.validateMainContentPais(pais, driver);
-        validateIsPageOk(pais);
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(channel, app, pais, driver);
-        secMenusStpV.validateLineas(pais);
-    }
-    
-    @Validation
-    public ChecksTM validateIsPageOk(Pais pais) {
-    	ChecksTM validations = ChecksTM.getNew();
-    	if (app!=AppEcom.outlet) {
+	public PageHomeMarcasStpV(Channel channel, AppEcom app, WebDriver driver) {
+		pageHomeMarcas = new PageHomeMarcas(app, driver);
+		this.channel = channel;
+		this.app = app;
+		this.driver = driver;
+	}
+	
+	public void validateIsPageWithCorrectLineas(Pais pais) throws Exception {
+		AllPagesStpV.validateMainContentPais(pais, driver);
+		validateIsPageOk(pais);
+		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(channel, app, pais, driver);
+		secMenusStpV.validateLineas(pais);
+	}
+	
+	@Validation
+	public ChecksTM validateIsPageOk(Pais pais) {
+		ChecksTM validations = ChecksTM.getNew();
+		if (app!=AppEcom.outlet) {
 			validations.add(
 				"Aparece la home de marcas/multimarcas según el país",
-				pageHomeMarcas.isHomeMarcasMultimarcasDependingCountry(pais), State.Warn);    
-    	}
+				pageHomeMarcas.isHomeMarcasMultimarcasDependingCountry(pais), State.Warn);	
+		}
 		validations.add(
 			"No aparece ningún tag de error",
 			!state(Present, By.xpath("//error"), driver).check(), State.Warn);
 		return validations;
-    }
-        
-    @Validation
-    public ChecksTM checkMsgNewsletterFooter(boolean salesOnInCountry, IdiomaPais idioma) {
-    	ChecksTM validations = ChecksTM.getNew();
-    	String percentageSymbol = UtilsTestMango.getPercentageSymbol(idioma);
-    	boolean isMsgWithPercentageSimbol = (new SecFooter(app, driver)).newsLetterMsgContains(percentageSymbol);
-    	if (salesOnInCountry) {
-	    	validations.add(
-	    		PrefixRebajas + "El mensaje de NewsLetter del Footer No contiene \"" + percentageSymbol + "\"",
-	    		!isMsgWithPercentageSimbol, State.Info, true);    
-    	} else {
-	    	validations.add(
-	    		PrefixRebajas + "El mensaje de NewsLetter del Footer Sí contiene \"" + percentageSymbol + "\"",
-	    		isMsgWithPercentageSimbol, State.Warn);    
-    	}
-    	
-    	return validations;
-    }
+	}
+		
+	@Validation
+	public ChecksTM checkMsgNewsletterFooter(boolean salesOnInCountry, IdiomaPais idioma) {
+		ChecksTM validations = ChecksTM.getNew();
+		String percentageSymbol = UtilsTestMango.getPercentageSymbol(idioma);
+		boolean isMsgWithPercentageSimbol = (new SecFooter(app, driver)).newsLetterMsgContains(percentageSymbol);
+		if (salesOnInCountry) {
+			validations.add(
+				PrefixRebajas + "El mensaje de NewsLetter del Footer No contiene \"" + percentageSymbol + "\"",
+				!isMsgWithPercentageSimbol, State.Info, true);	
+		} else {
+			validations.add(
+				PrefixRebajas + "El mensaje de NewsLetter del Footer Sí contiene \"" + percentageSymbol + "\"",
+				isMsgWithPercentageSimbol, State.Warn);	
+		}
+		
+		return validations;
+	}
 }

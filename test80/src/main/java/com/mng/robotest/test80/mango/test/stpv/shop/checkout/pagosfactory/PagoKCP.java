@@ -8,18 +8,18 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.Fro
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.kcp.PageKcpMainStpV;
 
 public class PagoKCP extends PagoStpV {
-    
-    public PagoKCP(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
-        super(dCtxSh, dCtxPago, driver);
-        super.isAvailableExecPay = true;
-    }
-    
-    @Override
-    public void testPagoFromCheckout(boolean execPay) throws Exception {
-        pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-        dCtxPago = checkoutFlow.checkout(From.MetodosPago);
-        PageKcpMainStpV pageKcpMainStpV = new PageKcpMainStpV(driver);
-        pageKcpMainStpV.isPage(30);
-        pageKcpMainStpV.isPresentTermAndConditions(30);
-    }    
+	
+	public PagoKCP(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
+		super(dCtxSh, dCtxPago, driver);
+		super.isAvailableExecPay = true;
+	}
+	
+	@Override
+	public void testPagoFromCheckout(boolean execPay) throws Exception {
+		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
+		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		PageKcpMainStpV pageKcpMainStpV = new PageKcpMainStpV(driver);
+		pageKcpMainStpV.isPage(30);
+		pageKcpMainStpV.isPresentTermAndConditions(30);
+	}	
 }

@@ -88,7 +88,7 @@ public class InputParamsMango extends InputParamsTM {
 			.hasArgs()
 			.valueSeparator(',')
 			.desc("List of lines comma separated (p.e. she,he,...)")
-			.build());        
+			.build());		
 
 		options.add(OptionTMaker.builder(InputParamsMango.PaymentsNameParam)
 			.required(false)
@@ -103,7 +103,7 @@ public class InputParamsMango extends InputParamsTM {
 			.hasArgs()
 			.pattern(patternUrl)
 			.desc("URL of the Backoffice of mangoshop (Manto application)")
-			.build());    
+			.build());	
  
 		options.add(OptionTMaker.builder(InputParamsMango.CallBackResourceParam)
 			.required(false)
@@ -116,33 +116,33 @@ public class InputParamsMango extends InputParamsTM {
 			.hasArgs()
 			.possibleValues(TypeCallBackMethod.class)
 			.desc("Method of the CallBack URL. Possible values: " + Arrays.asList(TypeCallBackMethod.values()))
-			.build());        
+			.build());		
 
 		options.add(OptionTMaker.builder(InputParamsMango.CallBackSchemaParam)
 			.required(false)
 			.hasArgs()
 			.possibleValues(TypeCallbackSchema.class)
 			.desc("Schema of the CallBack URL. Possible values: " + Arrays.asList(TypeCallbackSchema.values()))
-			.build());        
+			.build());		
 
 		options.add(OptionTMaker.builder(InputParamsMango.CallBackParamsParam)
 			.required(false)
 			.hasArgs()
 			.valueSeparator(',')
 			.desc("Params of the CallBack URL (in format param1:value1,param2:value2...)")
-			.build());        
+			.build());		
 
 		options.add(OptionTMaker.builder(InputParamsMango.CallBackUserParam)
 			.required(false)
 			.hasArgs()
 			.desc("User credential needed to invoke the CallBack URL")
-			.build());        
+			.build());		
 
 		options.add(OptionTMaker.builder(InputParamsMango.CallBackPasswordParam)
 			.required(false)
 			.hasArgs()
 			.desc("Password credential needed to invoke the CallBack URL")
-			.build());        
+			.build());		
 
 		return options;
 	}
@@ -329,16 +329,16 @@ public class InputParamsMango extends InputParamsTM {
 
 	public CallBack getCallBack() {
 		setCallBack();
-        return callBack;
+		return callBack;
 	}
 	
 	private void setCallBack() {
-        callBack.setCallBackResource(callBackResource);
-        callBack.setCallBackMethod(callBackMethod);
-        callBack.setCallBackUser(callBackSchema);
-        callBack.setCallBackPassword(callBackParams);
-        callBack.setCallBackSchema(callBackUser);
-        callBack.setCallBackParams(callBackPassword);
+		callBack.setCallBackResource(callBackResource);
+		callBack.setCallBackMethod(callBackMethod);
+		callBack.setCallBackUser(callBackSchema);
+		callBack.setCallBackPassword(callBackParams);
+		callBack.setCallBackSchema(callBackUser);
+		callBack.setCallBackParams(callBackPassword);
 	}
 
 	@Override

@@ -14,11 +14,11 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModNoStock {
 
-    static String XPathModalNoStock = "//div[@class='modalNoStock show']";
-    
-    public static boolean isModalNoStockVisibleFichaNew(int maxSeconds, WebDriver driver) {
-    	return (state(Visible, By.xpath(XPathModalNoStock), driver)
-    			.wait(maxSeconds).check());
+	static String XPathModalNoStock = "//div[@class='modalNoStock show']";
+	
+	public static boolean isModalNoStockVisibleFichaNew(int maxSeconds, WebDriver driver) {
+		return (state(Visible, By.xpath(XPathModalNoStock), driver)
+				.wait(maxSeconds).check());
 	}
-    
+	
 }

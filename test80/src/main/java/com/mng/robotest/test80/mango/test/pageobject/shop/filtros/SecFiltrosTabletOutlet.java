@@ -14,7 +14,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 
 public class SecFiltrosTabletOutlet extends PageObjTM implements SecFiltros {
-    
+	
 	private final static String TagOrdenacion = "@TagOrden";
 	private final static String TagColor = "@TagColor";
 	private final static String XPathLinkOrdenWithTag = "//a[text()[contains(.,'" + TagOrdenacion + "')]]";
@@ -41,32 +41,32 @@ public class SecFiltrosTabletOutlet extends PageObjTM implements SecFiltros {
 	}
 	
 	@Override
-    public void selectCollection(FilterCollection collection) {
+	public void selectCollection(FilterCollection collection) {
 		//TODO
-    }
-	
-    @Override
-    public boolean isCollectionFilterPresent() throws Exception {
-    	//TODO
-    	return false;
-    }
+	}
 	
 	@Override
-    public void selectOrdenacion(FilterOrdenacion ordenacion) {
-    	String xpathLink = getXPathLinkOrdenacion(ordenacion);
-    	click(By.xpath(xpathLink)).exec();
-    }
+	public boolean isCollectionFilterPresent() throws Exception {
+		//TODO
+		return false;
+	}
 	
 	@Override
-    public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception {
-        selectOrdenacion(typeOrden);
-        int maxSecondsToWait = 10;
-        int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(maxSecondsToWait);
-        return numArticles;
-    }
-    
+	public void selectOrdenacion(FilterOrdenacion ordenacion) {
+		String xpathLink = getXPathLinkOrdenacion(ordenacion);
+		click(By.xpath(xpathLink)).exec();
+	}
+	
 	@Override
-    public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToSelect) {
+	public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception {
+		selectOrdenacion(typeOrden);
+		int maxSecondsToWait = 10;
+		int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(maxSecondsToWait);
+		return numArticles;
+	}
+	
+	@Override
+	public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToSelect) {
 		for (Color color : colorsToSelect) {
 			String xpathLinkColor = getXPathLinkColor(color);
 			moveToElement(By.xpath(xpathLinkColor), driver);
@@ -82,10 +82,10 @@ public class SecFiltrosTabletOutlet extends PageObjTM implements SecFiltros {
 		return (state(Clickable, By.xpath(xpath), driver).wait(seconds).check());
 	}
 	
-    @Override
-    public void selectMenu2onLevel(List<String> listMenus) {
-    	//selectFiltrosAndWaitLoad(FiltroMobil.Familia, Arrays.asList(nameMenu));
-    	//TODO
-    }
+	@Override
+	public void selectMenu2onLevel(List<String> listMenus) {
+		//selectFiltrosAndWaitLoad(FiltroMobil.Familia, Arrays.asList(nameMenu));
+		//TODO
+	}
 
 }

@@ -94,18 +94,18 @@ public abstract class SecCabecera extends PageObjTM {
 		return (state(Present, By.xpath(xpathLogoIdiom)).check());
 	}
 
-    public int getNumArticulosBolsa() throws Exception {
-        int numArticulos = 0;
-        String numArtStr = getNumberArtIcono();
-        if (numArtStr.matches("\\d+$")) {
-            numArticulos = Integer.valueOf(numArtStr).intValue();
-        }
-        return numArticulos;
-    }    
-    
-    public boolean hayArticulosBolsa() throws Exception {
-        return (getNumArticulosBolsa() > 0);
-    }
+	public int getNumArticulosBolsa() throws Exception {
+		int numArticulos = 0;
+		String numArtStr = getNumberArtIcono();
+		if (numArtStr.matches("\\d+$")) {
+			numArticulos = Integer.valueOf(numArtStr).intValue();
+		}
+		return numArticulos;
+	}	
+	
+	public boolean hayArticulosBolsa() throws Exception {
+		return (getNumArticulosBolsa() > 0);
+	}
 
 	public String getNumberArtIcono() throws Exception {
 		String articulos = "0";
@@ -117,14 +117,14 @@ public abstract class SecCabecera extends PageObjTM {
 		return articulos;
 	}
 
-    //-- Específic functions for movil (Shop & Outlet)
-    
+	//-- Específic functions for movil (Shop & Outlet)
+	
 
-    private final static String XPathSmartBanner = XPathHeader + "/div[@id='smartbanner']";
-    private final static String XPathLinkCloseSmartBanner = XPathSmartBanner + "//a[@class='sb-close']";    
-    private final static String XPathIconoMenuHamburguesa = XPathHeader + "//div[@class[contains(.,'menu-open-button')]]";
+	private final static String XPathSmartBanner = XPathHeader + "/div[@id='smartbanner']";
+	private final static String XPathLinkCloseSmartBanner = XPathSmartBanner + "//a[@class='sb-close']";	
+	private final static String XPathIconoMenuHamburguesa = XPathHeader + "//div[@class[contains(.,'menu-open-button')]]";
 
-    
+	
 	/**
 	 * Si existe, cierra el banner de aviso en móvil (p.e. el que sale proponiendo la descarga de la App)
 	 */
@@ -134,31 +134,31 @@ public abstract class SecCabecera extends PageObjTM {
 		}
 	}
 
-    /**
-     * Función que abre/cierra el menú lateral de móvil según le indiquemos en el parámetro 'open'
-     * @param open: 'true'  queremos que el menú lateral de móvil se abra
-     *              'false' queremos que el menú lateral de móvil se cierre
-     */
-    public void clickIconoMenuHamburguerMobil(boolean toOpenMenus) {
-    	//SecMenuLateralMobil secMenuLateral = new SecMenuLateralMobil(app, driver);
-    	SecMenuLateralDevice secMenuLateral = new SecMenuLateralDevice(channel, app, driver);
-        boolean menuVisible = secMenuLateral.isMenuInStateUntil(toOpenMenus, 1);
-        int i=0;
-        TypeClick typeClick = TypeClick.webdriver;
-        while ((menuVisible!=toOpenMenus) && i<5) {
-            try {
-                isVisibleIconoMenuHamburguesaUntil(5);
-                clickIconoMenuHamburguesaWhenReady(typeClick);
-                typeClick = TypeClick.next(typeClick);
-                menuVisible = secMenuLateral.isMenuInStateUntil(toOpenMenus, 2);
-            }
-            catch (Exception e) {
-            	Log4jTM.getLogger().warn("Exception in click icono Hamburguer", e);
-            }
-            
-            i+=1;
-        }
-    }
+	/**
+	 * Función que abre/cierra el menú lateral de móvil según le indiquemos en el parámetro 'open'
+	 * @param open: 'true'  queremos que el menú lateral de móvil se abra
+	 *			  'false' queremos que el menú lateral de móvil se cierre
+	 */
+	public void clickIconoMenuHamburguerMobil(boolean toOpenMenus) {
+		//SecMenuLateralMobil secMenuLateral = new SecMenuLateralMobil(app, driver);
+		SecMenuLateralDevice secMenuLateral = new SecMenuLateralDevice(channel, app, driver);
+		boolean menuVisible = secMenuLateral.isMenuInStateUntil(toOpenMenus, 1);
+		int i=0;
+		TypeClick typeClick = TypeClick.webdriver;
+		while ((menuVisible!=toOpenMenus) && i<5) {
+			try {
+				isVisibleIconoMenuHamburguesaUntil(5);
+				clickIconoMenuHamburguesaWhenReady(typeClick);
+				typeClick = TypeClick.next(typeClick);
+				menuVisible = secMenuLateral.isMenuInStateUntil(toOpenMenus, 2);
+			}
+			catch (Exception e) {
+				Log4jTM.getLogger().warn("Exception in click icono Hamburguer", e);
+			}
+			
+			i+=1;
+		}
+	}
 
 	public boolean isVisibleIconoMenuHamburguesaUntil(int maxSeconds) {
 		return (state(Visible, By.xpath(XPathIconoMenuHamburguesa))

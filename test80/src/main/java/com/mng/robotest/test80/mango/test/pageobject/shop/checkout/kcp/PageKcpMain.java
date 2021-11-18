@@ -64,11 +64,11 @@ public class PageKcpMain extends PageObjTM {
 		leaveIframe();
 	}
 	
-    public static void goToIframe(WebDriver driver) {
-    	driver.switchTo().frame(driver.findElement(By.xpath(XPathIframePage)));
-    }
-    
-    protected void leaveIframe() {
-    	driver.switchTo().defaultContent();
-    }
+	public static void goToIframe(WebDriver driver) {
+		driver.switchTo().frame(driver.findElement(By.xpath(XPathIframePage)));
+	}
+	
+	protected void leaveIframe() {
+		driver.switchTo().defaultContent();
+	}
 }

@@ -89,56 +89,56 @@ public class Loyalty {
 		return dCtxSh;
 	}
 	
-    @Test (
-        groups={"Loyalty", "Canal:desktop,mobile_App:shop"},
-        description="Se realiza una compra mediante un usuario loyalty con Likes")
-    public void LOY001_Compra_LikesStored() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
-        dCtxSh.userConnected = UserTest.loy001.getEmail();
-        dCtxSh.userRegistered = true;
-        dCtxSh.passwordUser = GetterSecrets.factory()
-    			.getCredentials(SecretType.SHOP_STANDARD_USER)
-    			.getPassword();
+	@Test (
+		groups={"Loyalty", "Canal:desktop,mobile_App:shop"},
+		description="Se realiza una compra mediante un usuario loyalty con Likes")
+	public void LOY001_Compra_LikesStored() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		DataCtxShop dCtxSh = getCtxShForTest();
+		dCtxSh.userConnected = UserTest.loy001.getEmail();
+		dCtxSh.userRegistered = true;
+		dCtxSh.passwordUser = GetterSecrets.factory()
+				.getCredentials(SecretType.SHOP_STANDARD_USER)
+				.getPassword();
 
-        AccesoStpV.oneStep(dCtxSh, true, driver);
-        
-        //Queremos asegurarnos que obtenemos artículos no-rebajados para poder aplicarle el descuento por Loyalty Points
-        DataBag dataBag = addBagArticleNoRebajado(dCtxSh, driver);
-        
-        //Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
-        FlagsTestCkout FTCkout = new FlagsTestCkout();
-        FTCkout.validaPasarelas = true;  
-        FTCkout.validaPagos = true;
-        FTCkout.emailExist = true; 
-        FTCkout.loyaltyPoints = true;
-        DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
-        dCtxPago.setFTCkout(FTCkout);
-        dCtxPago.getDataPedido().setDataBag(dataBag);
-        
-        dCtxPago = new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver)
-        	.pago(dCtxSh.pais.getPago("VISA"))
-        	.build()
-        	.checkout(From.Bolsa);
-        
-        //Validación en Manto de los Pedidos (si existen)
-    	List<CheckPedido> listChecks = Arrays.asList(
-    		CheckPedido.consultarBolsa, 
-    		CheckPedido.consultarPedido);
-        DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
-        PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
-    }
-    
-    private DataBag addBagArticleNoRebajado(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	Menu1rstLevel menuNewCollection;
-    	menuNewCollection = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "nuevo"));
+		AccesoStpV.oneStep(dCtxSh, true, driver);
+		
+		//Queremos asegurarnos que obtenemos artículos no-rebajados para poder aplicarle el descuento por Loyalty Points
+		DataBag dataBag = addBagArticleNoRebajado(dCtxSh, driver);
+		
+		//Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
+		FlagsTestCkout FTCkout = new FlagsTestCkout();
+		FTCkout.validaPasarelas = true;  
+		FTCkout.validaPagos = true;
+		FTCkout.emailExist = true; 
+		FTCkout.loyaltyPoints = true;
+		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
+		dCtxPago.setFTCkout(FTCkout);
+		dCtxPago.getDataPedido().setDataBag(dataBag);
+		
+		dCtxPago = new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver)
+			.pago(dCtxSh.pais.getPago("VISA"))
+			.build()
+			.checkout(From.Bolsa);
+		
+		//Validación en Manto de los Pedidos (si existen)
+		List<CheckPedido> listChecks = Arrays.asList(
+			CheckPedido.consultarBolsa, 
+			CheckPedido.consultarPedido);
+		DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
+		PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
+	}
+	
+	private DataBag addBagArticleNoRebajado(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+		Menu1rstLevel menuNewCollection;
+		menuNewCollection = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "nuevo"));
 		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
 		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuNewCollection, dCtxSh);
 		//secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
 		DataBag dataBag = GaleriaNavigationsStpV.selectArticleAvailableFromGaleria(dCtxSh, driver);
 		return dataBag;
-    }
-    
+	}
+	
 	@Test (
 		groups={"Loyalty", "Canal:desktop,mobile_App:shop"},
 		description="Exchange mediante donación de Likes")
@@ -150,8 +150,8 @@ public class Loyalty {
 		if (isEntornoPro) {
 			dCtxSh.userConnected = userProWithLPoints;
 			dCtxSh.passwordUser = GetterSecrets.factory()
-	    			.getCredentials(SecretType.SHOP_STANDARD_USER)
-	    			.getPassword();
+					.getCredentials(SecretType.SHOP_STANDARD_USER)
+					.getPassword();
 		} else {
 			dCtxSh.userConnected = UserTest.loy002.getEmail();
 			dCtxSh.passwordUser = GetterSecrets.factory()
@@ -190,8 +190,8 @@ public class Loyalty {
 		if (isEntornoPro) {
 			dCtxSh.userConnected = userProWithLPoints;
 			dCtxSh.passwordUser = GetterSecrets.factory()
-	    			.getCredentials(SecretType.SHOP_STANDARD_USER)
-	    			.getPassword();
+					.getCredentials(SecretType.SHOP_STANDARD_USER)
+					.getPassword();
 		} else {
 			dCtxSh.userConnected = UserTest.loy003.getEmail();
 			dCtxSh.passwordUser = GetterSecrets.factory()

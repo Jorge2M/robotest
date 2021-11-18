@@ -8,20 +8,20 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.Fro
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.pasarelaotras.PagePasarelaOtrasStpV;
 
 public class PagoPasarelaOtras extends PagoStpV {
-    
-    public PagoPasarelaOtras(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
-        super(dCtxSh, dCtxPago, driver);
-        super.isAvailableExecPay = false;
-    }
-    
-    @Override
-    public void testPagoFromCheckout(boolean execPay) throws Exception {
-        pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-        dCtxPago = checkoutFlow.checkout(From.MetodosPago);
-        PagePasarelaOtrasStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver);
-        
-        if (execPay) {
-            throw new PaymethodWithoutTestPayImplemented(MsgNoPayImplemented);
-        }
-    }    
+	
+	public PagoPasarelaOtras(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
+		super(dCtxSh, dCtxPago, driver);
+		super.isAvailableExecPay = false;
+	}
+	
+	@Override
+	public void testPagoFromCheckout(boolean execPay) throws Exception {
+		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
+		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		PagePasarelaOtrasStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver);
+		
+		if (execPay) {
+			throw new PaymethodWithoutTestPayImplemented(MsgNoPayImplemented);
+		}
+	}	
 }

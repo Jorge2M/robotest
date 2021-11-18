@@ -65,72 +65,72 @@ public abstract class SecLineasMenuDesktop extends PageObjTM {
 		return (XPathLineaSpecificWithTag.replace(TagIdLinea, lineaIddom));
 	}
 
-    public String getXPathLineaSelected(LineaType lineaType) {
-    	String xpathLinea = getXPathLinea(lineaType);
-        return (xpathLinea + "//self::*[@class[contains(.,'selected')]]");    	
-    }
-    
-    public String getXPathLineaLink(LineaType lineaType) {
-    	String xpathLinea = getXPathLinea(lineaType);
-        return (xpathLinea + "/a");
-    }
+	public String getXPathLineaSelected(LineaType lineaType) {
+		String xpathLinea = getXPathLinea(lineaType);
+		return (xpathLinea + "//self::*[@class[contains(.,'selected')]]");		
+	}
+	
+	public String getXPathLineaLink(LineaType lineaType) {
+		String xpathLinea = getXPathLinea(lineaType);
+		return (xpathLinea + "/a");
+	}
 
-    public boolean isPresentLineasMenuWrapp() {
-    	return (state(Present, By.xpath(XPathLineasMenuWrapper)).check());
-    }
-    
-    public boolean isVisibleMenuSup() {
-    	return (state(Present, By.xpath(XPathLineasMenuWrapper)).check());
-    }
-    
-    public boolean isVisibleMenuSupUntil(int maxSeconds) {
-    	return (state(Visible, By.xpath(XPathLineasMenuWrapper)).wait(maxSeconds).check());
-    }    
-    
-    public boolean isInvisibleMenuSupUntil(int maxSeconds) {
-    	return (state(Invisible, By.xpath(XPathLineasMenuWrapper)).wait(maxSeconds).check());
-    }
-    
-    public void bringMenuBackground() throws Exception {
-    	String xpathToBringBack = "";
-    	switch (app) {
-    	case outlet:
-    		xpathToBringBack = XPathLineasMenuWrapper;
-    		break;
-    	case shop:
-    	default:
-    		xpathToBringBack = XPathMenuFatherWrapper;
-    	}
-    	
-    	WebElement menuWrapp = driver.findElement(By.xpath(xpathToBringBack));
-    	((JavascriptExecutor) driver).executeScript("arguments[0].style.position='relative';", menuWrapp);
-    	((JavascriptExecutor) driver).executeScript("arguments[0].style.zIndex=1;", menuWrapp);
-    	state(Invisible, By.xpath(xpathToBringBack)).wait(1).check();
-    }    
-    
-    public List<WebElement> getListaLineas() {
-        return (driver.findElements(By.xpath(XPathLinea)));
-    }
-    
-    public boolean isLineaPresent(LineaType lineaType) {
-        String xpathLinea = getXPathLineaLink(lineaType);
-        return (state(Present, By.xpath(xpathLinea)).check());
-    }
-    
-    public boolean isLineaPresentUntil(LineaType lineaType, int maxSeconds) {
-        String xpathLinea = getXPathLineaLink(lineaType);
-        return (state(Present, By.xpath(xpathLinea)).wait(maxSeconds).check());
-    }    
-    
-    public boolean isLineaVisible(LineaType lineaType) {
-    	String xpathLinea = getXPathLineaLink(lineaType);
-    	return (state(Present, By.xpath(xpathLinea)).check());
-    }
-    
-    public boolean isLineaSelected(LineaType lineaType) {
-        String xpathLinea = getXPathLineaSelected(lineaType);
-        return (state(Present, By.xpath(xpathLinea)).check()); 
-    }
+	public boolean isPresentLineasMenuWrapp() {
+		return (state(Present, By.xpath(XPathLineasMenuWrapper)).check());
+	}
+	
+	public boolean isVisibleMenuSup() {
+		return (state(Present, By.xpath(XPathLineasMenuWrapper)).check());
+	}
+	
+	public boolean isVisibleMenuSupUntil(int maxSeconds) {
+		return (state(Visible, By.xpath(XPathLineasMenuWrapper)).wait(maxSeconds).check());
+	}	
+	
+	public boolean isInvisibleMenuSupUntil(int maxSeconds) {
+		return (state(Invisible, By.xpath(XPathLineasMenuWrapper)).wait(maxSeconds).check());
+	}
+	
+	public void bringMenuBackground() throws Exception {
+		String xpathToBringBack = "";
+		switch (app) {
+		case outlet:
+			xpathToBringBack = XPathLineasMenuWrapper;
+			break;
+		case shop:
+		default:
+			xpathToBringBack = XPathMenuFatherWrapper;
+		}
+		
+		WebElement menuWrapp = driver.findElement(By.xpath(xpathToBringBack));
+		((JavascriptExecutor) driver).executeScript("arguments[0].style.position='relative';", menuWrapp);
+		((JavascriptExecutor) driver).executeScript("arguments[0].style.zIndex=1;", menuWrapp);
+		state(Invisible, By.xpath(xpathToBringBack)).wait(1).check();
+	}	
+	
+	public List<WebElement> getListaLineas() {
+		return (driver.findElements(By.xpath(XPathLinea)));
+	}
+	
+	public boolean isLineaPresent(LineaType lineaType) {
+		String xpathLinea = getXPathLineaLink(lineaType);
+		return (state(Present, By.xpath(xpathLinea)).check());
+	}
+	
+	public boolean isLineaPresentUntil(LineaType lineaType, int maxSeconds) {
+		String xpathLinea = getXPathLineaLink(lineaType);
+		return (state(Present, By.xpath(xpathLinea)).wait(maxSeconds).check());
+	}	
+	
+	public boolean isLineaVisible(LineaType lineaType) {
+		String xpathLinea = getXPathLineaLink(lineaType);
+		return (state(Present, By.xpath(xpathLinea)).check());
+	}
+	
+	public boolean isLineaSelected(LineaType lineaType) {
+		String xpathLinea = getXPathLineaSelected(lineaType);
+		return (state(Present, By.xpath(xpathLinea)).check()); 
+	}
 
 	public void selecLinea(Pais pais, LineaType lineaType) {
 		Linea linea = pais.getShoponline().getLinea(lineaType);
@@ -140,45 +140,45 @@ public abstract class SecLineasMenuDesktop extends PageObjTM {
 		}
 	}
 
-    private boolean isLineActiveToSelect(Pais pais, Linea linea) {
-    	//En el caso concreto de los países con únicamente la línea She -> Aparecen otras pestañas
-    	return (
-    		(app==AppEcom.outlet || 
-    		(pais.getShoponline().getNumLineasTiendas(app) > 1 || 
-    		 !pais.getShoponline().isLineaTienda(linea)))
-    	);
-    }
+	private boolean isLineActiveToSelect(Pais pais, Linea linea) {
+		//En el caso concreto de los países con únicamente la línea She -> Aparecen otras pestañas
+		return (
+			(app==AppEcom.outlet || 
+			(pais.getShoponline().getNumLineasTiendas(app) > 1 || 
+			 !pais.getShoponline().isLineaTienda(linea)))
+		);
+	}
 
-    public void hoverLineaAndWaitForMenus(LineaType lineaType, SublineaType sublineaType) {
-    	//Existe un problema aleatorio en Firefox que provoca que el Hover sobre la línea (mientras se está cargando la galería) 
-    	//ejecute realmente un hover contra la línea de la izquerda
-    	boolean isCapaMenusVisible = false;
-    	int i=0;
-    	do {
-	    	hoverLinea(lineaType, sublineaType);
-	    	int maxSecondsToWait = 2;
-	    	SecBloquesMenuDesktop secBloques = SecBloquesMenuDesktop.factory(app, driver);
-	    	isCapaMenusVisible = secBloques.isCapaMenusLineaVisibleUntil(lineaType, maxSecondsToWait);
-	    	if (!isCapaMenusVisible) {
-	    		Log4jTM.getLogger().warn("No se hacen visibles los menús después de Hover sobre línea " + lineaType);
-	    	}
-	    	i+=1;
-    	}
-    	while (!isCapaMenusVisible && i<2);
-    }
-    
-    public void hoverLinea(LineaType lineaType, SublineaType sublineaType) {
-    	if (sublineaType==null) {
-    		hoverLinea(lineaType);
-    	} else {
-    		selectSublinea(lineaType, sublineaType);
-    	}
-    }
-    
-    public void hoverLinea(LineaType lineaType) {
-        //Hover sobre la pestaña -> Hacemos visibles los menús/subimágenes
-        String xpathLinkLinea = getXPathLineaLink(lineaType);
-        state(Visible, By.xpath(xpathLinkLinea)).wait(1).check();
-        moveToElement(By.xpath(xpathLinkLinea), driver);
-    }
+	public void hoverLineaAndWaitForMenus(LineaType lineaType, SublineaType sublineaType) {
+		//Existe un problema aleatorio en Firefox que provoca que el Hover sobre la línea (mientras se está cargando la galería) 
+		//ejecute realmente un hover contra la línea de la izquerda
+		boolean isCapaMenusVisible = false;
+		int i=0;
+		do {
+			hoverLinea(lineaType, sublineaType);
+			int maxSecondsToWait = 2;
+			SecBloquesMenuDesktop secBloques = SecBloquesMenuDesktop.factory(app, driver);
+			isCapaMenusVisible = secBloques.isCapaMenusLineaVisibleUntil(lineaType, maxSecondsToWait);
+			if (!isCapaMenusVisible) {
+				Log4jTM.getLogger().warn("No se hacen visibles los menús después de Hover sobre línea " + lineaType);
+			}
+			i+=1;
+		}
+		while (!isCapaMenusVisible && i<2);
+	}
+	
+	public void hoverLinea(LineaType lineaType, SublineaType sublineaType) {
+		if (sublineaType==null) {
+			hoverLinea(lineaType);
+		} else {
+			selectSublinea(lineaType, sublineaType);
+		}
+	}
+	
+	public void hoverLinea(LineaType lineaType) {
+		//Hover sobre la pestaña -> Hacemos visibles los menús/subimágenes
+		String xpathLinkLinea = getXPathLineaLink(lineaType);
+		state(Visible, By.xpath(xpathLinkLinea)).wait(1).check();
+		moveToElement(By.xpath(xpathLinkLinea), driver);
+	}
 }

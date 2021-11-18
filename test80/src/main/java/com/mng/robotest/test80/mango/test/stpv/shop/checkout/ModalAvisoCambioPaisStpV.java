@@ -26,19 +26,19 @@ public class ModalAvisoCambioPaisStpV {
 	
 	@Step (
 		description="Seleccionar botón \"Confirmar cambio\"", 
-        expected="Aparece el modal para la introducción de la dirección de facturación")
-    public void clickConfirmar(Pais paisEnvio) throws Exception {
+		expected="Aparece el modal para la introducción de la dirección de facturación")
+	public void clickConfirmar(Pais paisEnvio) throws Exception {
 		modalAvisoCambioPais.clickConfirmarCambio();
-        checkConfirmacionCambio(paisEnvio);
-    }
+		checkConfirmacionCambio(paisEnvio);
+	}
 	
 	@Validation
 	private ChecksTM checkConfirmacionCambio(Pais paisEnvio) throws Exception {
-    	ChecksTM validations = ChecksTM.getNew();
-	    int maxSeconds = 10;
+		ChecksTM validations = ChecksTM.getNew();
+		int maxSeconds = 10;
 	 	validations.add(
 			"Desaparece el modal de aviso de cambio de país (lo esperamos hasta " + maxSeconds + " segundos)",
-			modalAvisoCambioPais.isInvisibleUntil(maxSeconds), State.Defect);    	
+			modalAvisoCambioPais.isInvisibleUntil(maxSeconds), State.Defect);		
 	 	
 	 	PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(Channel.desktop, app, driver);
 	 	validations.add(

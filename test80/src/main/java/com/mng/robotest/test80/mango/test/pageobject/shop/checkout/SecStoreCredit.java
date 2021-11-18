@@ -24,29 +24,29 @@ public class SecStoreCredit extends PageObjTM {
 		click(By.xpath(XPathStoreCreditOption)).exec();
 	}
 
-    public boolean isVisible() {
-    	return (state(Visible, By.xpath(XPathStoreCreditBlock)).check());
-    }
-    
-    public boolean isChecked() {
-        boolean isChecked = false;
-        if (isVisible()) {
-            WebElement optionStoreC = driver.findElement(By.xpath(XPathStoreCreditOption));
-            if (optionStoreC!=null && optionStoreC.getAttribute("class").contains("-checked")) {
-                isChecked = true;
-            }
-        }
-        
-        return isChecked;
-    }
-    
-    public float getImporte() {
-        float precioFloat = -1;
-        if (state(Visible, By.xpath(XPathImporteStoreCredit)).check()) {
-            String precioTotal = driver.findElement(By.xpath(XPathImporteStoreCredit)).getText();
-            precioFloat = ImporteScreen.getFloatFromImporteMangoScreen(precioTotal);
-        }
-        
-        return precioFloat;
-    }    
+	public boolean isVisible() {
+		return (state(Visible, By.xpath(XPathStoreCreditBlock)).check());
+	}
+	
+	public boolean isChecked() {
+		boolean isChecked = false;
+		if (isVisible()) {
+			WebElement optionStoreC = driver.findElement(By.xpath(XPathStoreCreditOption));
+			if (optionStoreC!=null && optionStoreC.getAttribute("class").contains("-checked")) {
+				isChecked = true;
+			}
+		}
+		
+		return isChecked;
+	}
+	
+	public float getImporte() {
+		float precioFloat = -1;
+		if (state(Visible, By.xpath(XPathImporteStoreCredit)).check()) {
+			String precioTotal = driver.findElement(By.xpath(XPathImporteStoreCredit)).getText();
+			precioFloat = ImporteScreen.getFloatFromImporteMangoScreen(precioTotal);
+		}
+		
+		return precioFloat;
+	}	
 }

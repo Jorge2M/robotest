@@ -61,36 +61,36 @@ public class SecMenusUserDevice extends PageObjTM {
 			return byNewMenu;
 		}
 	}
-    
-    public boolean isMenuInState(MenuUserDevice menu, State state) throws Exception {
-    	secCabecera.clickIconoMenuHamburguerMobil(true);
-    	return (state(state, menu.getBy(channel, app)).check());
-    }
-    
-    public boolean isMenuInStateUntil(MenuUserDevice menu, State state, int maxSeconds) {
-    	secCabecera.clickIconoMenuHamburguerMobil(true);
-    	return (state(state, menu.getBy(channel, app)).wait(maxSeconds).check());
-    }
-    
-    public void clickMenu(MenuUserDevice menu) {
-    	secCabecera.clickIconoMenuHamburguerMobil(true);
-    	click(menu.getBy(channel, app)).exec();
-    }
+	
+	public boolean isMenuInState(MenuUserDevice menu, State state) throws Exception {
+		secCabecera.clickIconoMenuHamburguerMobil(true);
+		return (state(state, menu.getBy(channel, app)).check());
+	}
+	
+	public boolean isMenuInStateUntil(MenuUserDevice menu, State state, int maxSeconds) {
+		secCabecera.clickIconoMenuHamburguerMobil(true);
+		return (state(state, menu.getBy(channel, app)).wait(maxSeconds).check());
+	}
+	
+	public void clickMenu(MenuUserDevice menu) {
+		secCabecera.clickIconoMenuHamburguerMobil(true);
+		click(menu.getBy(channel, app)).exec();
+	}
 
-    public boolean clickMenuIfinState(MenuUserDevice menu, State stateExpected) throws Exception {
-    	secCabecera.clickIconoMenuHamburguerMobil(true);
-        if (isMenuInState(menu, stateExpected)) {
-        	moveToElement(menu.getBy(channel, app), driver);
-            clickMenu(menu);
-            return true;
-        }
-        return false;
-    }    
-    
-    public void MoveAndclickMenu(MenuUserDevice menu) throws Exception {
-    	secCabecera.clickIconoMenuHamburguerMobil(true);
-    	moveToElement(menu.getBy(channel, app), driver);
-        clickMenu(menu);
-    }
+	public boolean clickMenuIfinState(MenuUserDevice menu, State stateExpected) throws Exception {
+		secCabecera.clickIconoMenuHamburguerMobil(true);
+		if (isMenuInState(menu, stateExpected)) {
+			moveToElement(menu.getBy(channel, app), driver);
+			clickMenu(menu);
+			return true;
+		}
+		return false;
+	}	
+	
+	public void MoveAndclickMenu(MenuUserDevice menu) throws Exception {
+		secCabecera.clickIconoMenuHamburguerMobil(true);
+		moveToElement(menu.getBy(channel, app), driver);
+		clickMenu(menu);
+	}
 
 }

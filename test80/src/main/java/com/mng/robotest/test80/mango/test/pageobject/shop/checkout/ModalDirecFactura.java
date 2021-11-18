@@ -11,20 +11,20 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalDirecFactura extends ModalDireccion {
 
-    private final static String XPathFormModal = "//form[@class[contains(.,'customFormIdFACT')]]";
-    private final static String XPathButtonUpdate = XPathFormModal + "//div[@class[contains(.,'updateButton')]]/input[@type='submit']";
-    
-    public ModalDirecFactura(WebDriver driver) {
-    	super(driver);
-    }
-    
-    public void sendDataToInputs(DataDireccion dataToSend) throws Exception {
-        sendDataToInputs(dataToSend, XPathFormModal);
-    }
-    
-    public void selectPoblacion(String poblacion) throws Exception {
-        selectPoblacion(poblacion, XPathFormModal);
-    }
+	private final static String XPathFormModal = "//form[@class[contains(.,'customFormIdFACT')]]";
+	private final static String XPathButtonUpdate = XPathFormModal + "//div[@class[contains(.,'updateButton')]]/input[@type='submit']";
+	
+	public ModalDirecFactura(WebDriver driver) {
+		super(driver);
+	}
+	
+	public void sendDataToInputs(DataDireccion dataToSend) throws Exception {
+		sendDataToInputs(dataToSend, XPathFormModal);
+	}
+	
+	public void selectPoblacion(String poblacion) throws Exception {
+		selectPoblacion(poblacion, XPathFormModal);
+	}
 
 	public void selectProvincia(String provincia) {
 		selectProvincia(provincia, XPathFormModal);

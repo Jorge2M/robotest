@@ -9,16 +9,16 @@ import org.openqa.selenium.WebDriver;
 
 public class PageReembolsosStpV {
 
-    @Validation
-    public static ChecksTM validateIsPage (WebDriver driver) {
-        ChecksTM validations = ChecksTM.getNew();
-        validations.add(
-        	"Aparece la página de Reembolsos",
-        	PageReembolsos.isPage(driver), State.Defect);
-        validations.add(
-        	"Aparecen los inputs de BANCO, TITULAR e IBAN",
-            (PageReembolsos.existsInputBanco(driver) && PageReembolsos.existsInputTitular(driver) && PageReembolsos.existsInputIBAN(driver)), 
-            State.Warn);
-        return validations;
-    }
+	@Validation
+	public static ChecksTM validateIsPage (WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
+		validations.add(
+			"Aparece la página de Reembolsos",
+			PageReembolsos.isPage(driver), State.Defect);
+		validations.add(
+			"Aparecen los inputs de BANCO, TITULAR e IBAN",
+			(PageReembolsos.existsInputBanco(driver) && PageReembolsos.existsInputTitular(driver) && PageReembolsos.existsInputIBAN(driver)), 
+			State.Warn);
+		return validations;
+	}
 }

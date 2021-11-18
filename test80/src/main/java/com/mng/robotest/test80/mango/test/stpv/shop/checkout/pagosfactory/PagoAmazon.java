@@ -9,20 +9,20 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.amazon.PageAmazonId
 
 public class PagoAmazon extends PagoStpV {
 
-    public PagoAmazon(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
-        super(dCtxSh, dCtxPago, driver);
-        super.isAvailableExecPay = false;
-    }
-    
-    @Override
-    public void testPagoFromCheckout(boolean execPay) throws Exception {
-        pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-        dCtxPago = checkoutFlow.checkout(From.MetodosPago);
-        PageAmazonIdentStpV.validateIsPage(dCtxSh.pais, dCtxSh.channel, dCtxPago.getDataPedido(), driver);
-        
-        if (execPay) {
-            throw new PaymethodWithoutTestPayImplemented(MsgNoPayImplemented);
-        }
-    }
-    
+	public PagoAmazon(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
+		super(dCtxSh, dCtxPago, driver);
+		super.isAvailableExecPay = false;
+	}
+	
+	@Override
+	public void testPagoFromCheckout(boolean execPay) throws Exception {
+		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
+		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		PageAmazonIdentStpV.validateIsPage(dCtxSh.pais, dCtxSh.channel, dCtxPago.getDataPedido(), driver);
+		
+		if (execPay) {
+			throw new PaymethodWithoutTestPayImplemented(MsgNoPayImplemented);
+		}
+	}
+	
 }

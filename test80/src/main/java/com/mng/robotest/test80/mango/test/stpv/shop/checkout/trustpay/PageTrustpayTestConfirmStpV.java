@@ -10,29 +10,29 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.trustpay.Page
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.trustpay.PageTrustpayTestConfirm.typeButtons;
 
 public class PageTrustpayTestConfirmStpV {
-    
+	
 	@Validation
-    public static ChecksTM validateIsPage(WebDriver driver) {
+	public static ChecksTM validateIsPage(WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
-    	validations.add(
-    		"Figura el botón \"OK\"",
-    		PageTrustpayTestConfirm.isPresentButton(typeButtons.OK, driver), State.Defect);
-    	validations.add(
-    		"Figura el botón \"ANNOUNCED\"",
-    		PageTrustpayTestConfirm.isPresentButton(typeButtons.ANNOUNCED, driver), State.Warn);
-    	validations.add(
-    		"Figura el botón \"FAIL\"",
-    		PageTrustpayTestConfirm.isPresentButton(typeButtons.FAIL, driver), State.Warn);
-    	validations.add(
-    		"Figura el botón \"PENDING\"",
-    		PageTrustpayTestConfirm.isPresentButton(typeButtons.PENDING, driver), State.Warn);
-    	return validations;
-    }
-    
+		validations.add(
+			"Figura el botón \"OK\"",
+			PageTrustpayTestConfirm.isPresentButton(typeButtons.OK, driver), State.Defect);
+		validations.add(
+			"Figura el botón \"ANNOUNCED\"",
+			PageTrustpayTestConfirm.isPresentButton(typeButtons.ANNOUNCED, driver), State.Warn);
+		validations.add(
+			"Figura el botón \"FAIL\"",
+			PageTrustpayTestConfirm.isPresentButton(typeButtons.FAIL, driver), State.Warn);
+		validations.add(
+			"Figura el botón \"PENDING\"",
+			PageTrustpayTestConfirm.isPresentButton(typeButtons.PENDING, driver), State.Warn);
+		return validations;
+	}
+	
 	@Step (
 		description="Seleccionar el botón para continuar con el pago", 
-        expected="El pago se completa correctamente")
-    public static void clickButtonOK(WebDriver driver) throws Exception {
+		expected="El pago se completa correctamente")
+	public static void clickButtonOK(WebDriver driver) throws Exception {
 		PageTrustpayTestConfirm.clickButton(typeButtons.OK, driver);
-    }
+	}
 }

@@ -38,16 +38,16 @@ public class PageComoMedirme {
 	}
 	
 	private boolean goToPageInNewTab(String windowFatherHandle) throws Exception {
-        String newPageHandle = switchToAnotherWindow(driver, windowFatherHandle);
-        if (newPageHandle.compareTo(windowFatherHandle)==0) {
-        	return false;
-        }
-        waitForPageLoaded(driver, 10);
-        return true;
+		String newPageHandle = switchToAnotherWindow(driver, windowFatherHandle);
+		if (newPageHandle.compareTo(windowFatherHandle)==0) {
+			return false;
+		}
+		waitForPageLoaded(driver, 10);
+		return true;
 	}
 	
 	private void close(String windowFatherHandle) {
-	    driver.close();
-	    driver.switchTo().window(windowFatherHandle);
+		driver.close();
+		driver.switchTo().window(windowFatherHandle);
 	}
 }

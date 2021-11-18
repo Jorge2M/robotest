@@ -8,10 +8,10 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.yandex.PageYandexMoneyResult;
 
 public class PageYandexMoneyResultStpV {
-    
+	
 	@Validation
-    public static ChecksTM validateIsResultOk(WebDriver driver) {
-    	ChecksTM validations = ChecksTM.getNew();
+	public static ChecksTM validateIsResultOk(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparece la página de resultado de Yandex Money",
 			PageYandexMoneyResult.isPage(driver), State.Defect);
@@ -19,5 +19,5 @@ public class PageYandexMoneyResultStpV {
 			"Aparece un mensaje de transferencia con éxito",
 			PageYandexMoneyResult.isVisibleMsgTransferOk(driver), State.Defect);
 		return validations;   
-    }
+	}
 }

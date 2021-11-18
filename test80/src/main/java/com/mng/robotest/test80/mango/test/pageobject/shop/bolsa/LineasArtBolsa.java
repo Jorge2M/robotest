@@ -78,16 +78,16 @@ public abstract class LineasArtBolsa extends PageObjTM {
 		return xpathLinWithTag.replace(TagReference, reference);
 	}
 	
-    public int getNumLinesArticles() {
+	public int getNumLinesArticles() {
 		String xpathLinea = getXPathLinea();
-    	return (driver.findElements(By.xpath(xpathLinea)).size());
-    }
+		return (driver.findElements(By.xpath(xpathLinea)).size());
+	}
 	
-    public WebElement getLineaArticuloByPosicion(int posicion) {
-    	String xpathArticle = getXPathLineaArticleByPosicion(posicion);
+	public WebElement getLineaArticuloByPosicion(int posicion) {
+		String xpathArticle = getXPathLineaArticleByPosicion(posicion);
 		return (driver.findElement(By.xpath(xpathArticle)));
-    }
-    
+	}
+	
 	public WebElement getLineaArticuloByReferencia(String reference) {
 		String xpathArticle = getXPathLineaArticleByReference(reference);
 		return (driver.findElement(By.xpath(xpathArticle)));
@@ -115,11 +115,11 @@ public abstract class LineasArtBolsa extends PageObjTM {
 	}
 	
 	private static String removeLitIzquierdaDosPuntosIfExists(String data) {
-        int finLiteral = data.indexOf(": ");
-        if (finLiteral > 0) {
-            return (data.substring(finLiteral + 2, data.length()));
-        }
-        return data;
+		int finLiteral = data.indexOf(": ");
+		if (finLiteral > 0) {
+			return (data.substring(finLiteral + 2, data.length()));
+		}
+		return data;
 	}
 	
 	private String getReferenciaArticle(WebElement lineaArticleWeb) {

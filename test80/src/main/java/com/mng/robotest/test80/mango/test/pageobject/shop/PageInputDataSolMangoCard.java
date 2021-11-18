@@ -42,14 +42,14 @@ public class PageInputDataSolMangoCard {
 		return (state(Present, By.xpath(XPathIsPage2), driver).check());
 	}
 
-    /**
-     * Posicionarse en el iframe central de la página 2 con los datos para la solicitud de la tarjeta mango
-     * @param driver
-     */
-    
-    public static void gotoiFramePage2(WebDriver driver) {
-        driver.switchTo().frame("ifcentral");
-    }
+	/**
+	 * Posicionarse en el iframe central de la página 2 con los datos para la solicitud de la tarjeta mango
+	 * @param driver
+	 */
+	
+	public static void gotoiFramePage2(WebDriver driver) {
+		driver.switchTo().frame("ifcentral");
+	}
 
 	public static boolean isPresentDatosPersonalesPage2(WebDriver driver) {
 		return (state(Present, By.xpath(XPathTextDatosPersonalesPage2), driver).check());
@@ -74,5 +74,5 @@ public class PageInputDataSolMangoCard {
 	public static boolean isPresentButtonContinuarPage2(WebDriver driver) {
 		return (state(Present, By.xpath(XPathButtonContinuarPage2), driver).check());
 	}
-    
+	
 }

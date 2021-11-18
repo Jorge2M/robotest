@@ -21,7 +21,7 @@ public class SecTMangoStpV {
 	}
 	
 	@Validation
-    public ChecksTM validateIsSectionOk() {
+	public ChecksTM validateIsSectionOk() {
 		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparece el bloque de selección de la forma de pago",
@@ -30,17 +30,17 @@ public class SecTMangoStpV {
 			"Aparece disponible la modalidad de pago:<br>" + secTMango.getDescripcionTipoPago(TipoPago.pagoHabitual), 
 			secTMango.isModalidadDisponible(SecTMango.TipoPago.pagoHabitual), State.Defect); 
 	 	return validations;
-    }
-    
-    /**
-     * @param literalTipoPago contiene uno de los valores de SecTMango.pagoHabitual, SecTMango.tresMeses...
-     */
+	}
+	
+	/**
+	 * @param literalTipoPago contiene uno de los valores de SecTMango.pagoHabitual, SecTMango.tresMeses...
+	 */
 	final static String tagDescrPago = "@tagTipoPago";
 	@Step (
 		description="Seleccionar la forma de pago \"" + tagDescrPago + "\"", 
-        expected="El resultado es correcto")
-    public void clickTipoPago(TipoPago tipoPago) {
+		expected="El resultado es correcto")
+	public void clickTipoPago(TipoPago tipoPago) {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagDescrPago, secTMango.getDescripcionTipoPago(tipoPago));
-        secTMango.clickModalidad(tipoPago);
-    }
+		secTMango.clickModalidad(tipoPago);
+	}
 }

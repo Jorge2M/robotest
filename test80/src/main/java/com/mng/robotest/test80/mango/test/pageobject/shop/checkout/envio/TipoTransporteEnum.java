@@ -158,7 +158,7 @@ public class TipoTransporteEnum {
 		 * 
 		 * @param tipo
 		 * @param byDefault
-		 *            el transporte por defecto si no se encuentra el principal
+		 *			el transporte por defecto si no se encuentra el principal
 		 * @return Tipo de transporte.
 		 */
 		public static TipoTransporte getTipoTransporte(final String tipo, final TipoTransporte byDefault) {

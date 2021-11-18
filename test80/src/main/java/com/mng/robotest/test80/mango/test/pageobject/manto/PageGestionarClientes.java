@@ -8,54 +8,54 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageGestionarClientes {
 
-    public enum TypeThirdButton {
-        Alta("alta"), Baja("baja");
-        
-        public String mensaje;
-        private TypeThirdButton(String mensaje) {
-            this.mensaje = mensaje;
-        }
-        
-        public String getMensaje() {
-            return this.mensaje;
-        }
-        
-        public TypeThirdButton buttonExpectedAfterClick() {
-            if (this==TypeThirdButton.Alta) {
-                return TypeThirdButton.Baja;
-            }
-            return TypeThirdButton.Alta;
-        }
-    } 
-    
-    
-    public static String titulo = "Gestionar Clientes";
-    static String XPathTitulo = "//td[@class='txt11B' and text()[contains(.,'" + titulo + "')]]";
-    static String XPathFormBuscarClientes = "//form[@id='formSelect']";
-    static String XPathFormTratarClientes = "//form[@id='formBlock']";
-    static String XPathInputDNI = XPathFormBuscarClientes + "//span[text()='DNI']/ancestor::td/following::td//input";
-    static String XPathBuscarButton = XPathFormBuscarClientes + "//input[@value='Buscar']";
-    static String XPathFormTabla = "//form[@id='formTabla']";
-    static String XPathFormTablaDetallesButton = XPathFormTabla + "//input[@value='Detalles']";
-    static String XPathSpanMensaje = "//span[text()[contains(.,'";
-    
-    public static String getXPathIdClienteFromXPathDni(String dni){
-    	String XPathDni = getXPathDniTabla(dni);
-    	return XPathDni + "/ancestor::tr/td[1]";
-    }
-    
-    public static String getXPathThirdButton(TypeThirdButton typeButton) {
-        return (XPathFormTabla + "//input[@value='" + typeButton + "']");
-    }
-    
-    public static String getXPathDniTabla(String dni){
-    	return XPathFormTabla + "//td[@title='" + dni + "']";
-    }
-    
-    private static String getXPathSpanMensajeThirdButton(String mensaje) {
+	public enum TypeThirdButton {
+		Alta("alta"), Baja("baja");
+		
+		public String mensaje;
+		private TypeThirdButton(String mensaje) {
+			this.mensaje = mensaje;
+		}
+		
+		public String getMensaje() {
+			return this.mensaje;
+		}
+		
+		public TypeThirdButton buttonExpectedAfterClick() {
+			if (this==TypeThirdButton.Alta) {
+				return TypeThirdButton.Baja;
+			}
+			return TypeThirdButton.Alta;
+		}
+	} 
+	
+	
+	public static String titulo = "Gestionar Clientes";
+	static String XPathTitulo = "//td[@class='txt11B' and text()[contains(.,'" + titulo + "')]]";
+	static String XPathFormBuscarClientes = "//form[@id='formSelect']";
+	static String XPathFormTratarClientes = "//form[@id='formBlock']";
+	static String XPathInputDNI = XPathFormBuscarClientes + "//span[text()='DNI']/ancestor::td/following::td//input";
+	static String XPathBuscarButton = XPathFormBuscarClientes + "//input[@value='Buscar']";
+	static String XPathFormTabla = "//form[@id='formTabla']";
+	static String XPathFormTablaDetallesButton = XPathFormTabla + "//input[@value='Detalles']";
+	static String XPathSpanMensaje = "//span[text()[contains(.,'";
+	
+	public static String getXPathIdClienteFromXPathDni(String dni){
+		String XPathDni = getXPathDniTabla(dni);
+		return XPathDni + "/ancestor::tr/td[1]";
+	}
+	
+	public static String getXPathThirdButton(TypeThirdButton typeButton) {
+		return (XPathFormTabla + "//input[@value='" + typeButton + "']");
+	}
+	
+	public static String getXPathDniTabla(String dni){
+		return XPathFormTabla + "//td[@title='" + dni + "']";
+	}
+	
+	private static String getXPathSpanMensajeThirdButton(String mensaje) {
 		return XPathSpanMensaje + mensaje + "')]]";
-    }
-    
+	}
+	
 	private static String getXPathDetallesClienteIdCliente(String idCliente) {
 		return "//td[@class='txt8'][text()[contains(.,'" + idCliente + "')]]";
 	}
@@ -81,13 +81,13 @@ public class PageGestionarClientes {
 		clickBuscarButtonAndWaitSeconds(waitSeconds, driver);
 	}
 
-    public static void inputDni(String dni, WebDriver driver) throws Exception {
-        driver.findElement(By.xpath(XPathInputDNI)).sendKeys(dni);
-    }
-    
-    public static void clickBuscarButtonAndWaitSeconds(int waitSeconds, WebDriver driver) throws Exception {
-    	driver.findElement(By.xpath(XPathBuscarButton)).click();
-    }
+	public static void inputDni(String dni, WebDriver driver) throws Exception {
+		driver.findElement(By.xpath(XPathInputDNI)).sendKeys(dni);
+	}
+	
+	public static void clickBuscarButtonAndWaitSeconds(int waitSeconds, WebDriver driver) throws Exception {
+		driver.findElement(By.xpath(XPathBuscarButton)).click();
+	}
 
 	public static boolean isVisibleTablaInformacion(WebDriver driver) {
 		return (state(Visible, By.xpath(XPathFormTabla), driver)
@@ -100,10 +100,10 @@ public class PageGestionarClientes {
 	}
 
 	public static TypeThirdButton getTypeThirdButton(WebDriver driver) {
-	    if (isVisibleThirdButtonUntil(TypeThirdButton.Alta, 0, driver)) {
-	        return (TypeThirdButton.Alta);
-	    }
-	    return (TypeThirdButton.Baja); 
+		if (isVisibleThirdButtonUntil(TypeThirdButton.Alta, 0, driver)) {
+			return (TypeThirdButton.Alta);
+		}
+		return (TypeThirdButton.Baja); 
 	}
 	
 	public static String getIdClienteTablaFromDni(String dni, WebDriver driver) {

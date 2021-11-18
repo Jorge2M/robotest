@@ -10,7 +10,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.epayment.Page
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paytrail.PagePaytrailEpayment;
 
 public class PagePaytrailEpaymentStpV {
-    
+	
 	private final WebDriver driver;
 	private final PageEpaymentIdent pageEpaymentIdent;
 	private final PagePaytrailEpayment pagePaytrailEpayment;
@@ -22,22 +22,22 @@ public class PagePaytrailEpaymentStpV {
 	}
 	
 	@Validation
-    public ChecksTM validateIsPage() { 
+	public ChecksTM validateIsPage() { 
 		ChecksTM validations = ChecksTM.getNew();
 	   	validations.add(
-    		"Aparece la página inicial de E-Payment",
-    		pageEpaymentIdent.isPage(), State.Warn);
+			"Aparece la página inicial de E-Payment",
+			pageEpaymentIdent.isPage(), State.Warn);
 	   	validations.add(
-    		"Figuran el input correspondientes al \"User ID\"",
-    		pageEpaymentIdent.isPresentInputUserTypePassword(), State.Warn);	   	
+			"Figuran el input correspondientes al \"User ID\"",
+			pageEpaymentIdent.isPresentInputUserTypePassword(), State.Warn);	   	
 	   	return validations;
-    }
-    
+	}
+	
 	@Step (
 		description="Click en el botón \"OK\" del apartado \"Code card\"", 
-        expected="Aparece la página de introducción del <b>ID de confirmación</b>")
-    public void clickCodeCardOK(String importeTotal, String codPais) {
+		expected="Aparece la página de introducción del <b>ID de confirmación</b>")
+	public void clickCodeCardOK(String importeTotal, String codPais) {
 		pagePaytrailEpayment.clickOkFromCodeCard();
-        PagePaytrailIdConfirmStpV.validateIsPage(importeTotal, codPais, driver);
-    }
+		PagePaytrailIdConfirmStpV.validateIsPage(importeTotal, codPais, driver);
+	}
 }

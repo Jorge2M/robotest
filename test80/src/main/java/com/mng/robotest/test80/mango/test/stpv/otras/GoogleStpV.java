@@ -23,42 +23,42 @@ public class GoogleStpV {
 	
 	@Step (
 		description="Accedemos a la URL de Google (http://www.google.es\") y buscamos \"MANGO\"", 
-        expected="Aparecen los links de Mango con contenido correcto",
-        saveHtmlPage=SaveWhen.IfProblem)
-    public void accessGoogleAndSearchMango() throws Exception {
-        pageGoogle.accessViaURL();
-        pageGoogle.acceptModalCookieIfExists();
-        pageGoogle.searchTextAndWait("MANGO");
-        checkLinksMango();
-    }
+		expected="Aparecen los links de Mango con contenido correcto",
+		saveHtmlPage=SaveWhen.IfProblem)
+	public void accessGoogleAndSearchMango() throws Exception {
+		pageGoogle.accessViaURL();
+		pageGoogle.acceptModalCookieIfExists();
+		pageGoogle.searchTextAndWait("MANGO");
+		checkLinksMango();
+	}
 	
 	@Validation
 	private ChecksTM checkLinksMango() {
 		ChecksTM validations = ChecksTM.getNew();
-        int maxSeconds = 3;
-    	validations.add(
-    		"El 1er link no-anuncio contiene \"MANGO\" (lo esperamos " + maxSeconds + " segundos)",
-    		pageGoogle.validaFirstLinkContainsUntil("Mango", maxSeconds), State.Defect);		
-    	validations.add(
-    		"El 1er link no-anuncion no contiene \"robots.txt\"",
-    		!pageGoogle.validaFirstLinkContainsUntil("robots.txt", 0), State.Warn);
-    	return validations;
+		int maxSeconds = 3;
+		validations.add(
+			"El 1er link no-anuncio contiene \"MANGO\" (lo esperamos " + maxSeconds + " segundos)",
+			pageGoogle.validaFirstLinkContainsUntil("Mango", maxSeconds), State.Defect);		
+		validations.add(
+			"El 1er link no-anuncion no contiene \"robots.txt\"",
+			!pageGoogle.validaFirstLinkContainsUntil("robots.txt", 0), State.Warn);
+		return validations;
 	}
 
 	@Step (
 		description="Seleccionamos el 1er link normal (sin publicidad)", 
-        expected="Aparece la página inicial de la shop de Mango")
-    public void selectFirstLinkSinPublicidad() throws Exception { 
+		expected="Aparece la página inicial de la shop de Mango")
+	public void selectFirstLinkSinPublicidad() throws Exception { 
 		pageGoogle.clickFirstLinkNoPubli();
 		checkInitialPageShop();
-    }
+	}
 	
 	@Validation (
 		description="Aparece la página de <b>Landing</b> o <b>Prehome</b>",
 		level=State.Defect)	
 	private boolean checkInitialPageShop() throws Exception {
-        boolean isPageLanding = (new PageLanding(driver)).isPage();
-        boolean isPagePrehome = PagePrehome.isPage(driver);
-        return (isPageLanding || isPagePrehome);
+		boolean isPageLanding = (new PageLanding(driver)).isPage();
+		boolean isPagePrehome = PagePrehome.isPage(driver);
+		return (isPageLanding || isPagePrehome);
 	}
 }

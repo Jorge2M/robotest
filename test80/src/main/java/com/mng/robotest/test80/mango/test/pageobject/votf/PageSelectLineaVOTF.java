@@ -11,37 +11,37 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageSelectLineaVOTF {
 
-    private static String getXPathLineaSection(LineaType linea) {
-        return ("//div[@id='" + linea.name() + "' and @class[contains(.,'section')]]");
-    }
-    
-    private static String getXPathLineaLink(LineaType linea) {
-        String xpathBanner = getXPathLineaSection(linea);
-        return (xpathBanner + "//div[@class='clickable']");
-    }
-    
-    private static String getXPathMenu(LineaType linea, int numMenu) {
-        String xpathMenu = getXPathMenu(linea);
-        return ("(" + xpathMenu + ")[" + numMenu + "]");
-    }
-    
-    private static String getXPathMenu(LineaType linea) {
-        String xpathBanner = getXPathLineaSection(linea);
-        return (xpathBanner + "/div[@class[contains(.,'subsection')]]/span/a");
-    }
-    
-    public static boolean isBannerPresent(LineaType linea, WebDriver driver) {
-        String xpathBanner = getXPathLineaSection(linea);
-        return (state(Present, By.xpath(xpathBanner), driver).check());
-    }
-    
-    public static void clickBanner(LineaType linea, WebDriver driver) {
-        String xpathLinkBanner = getXPathLineaLink(linea);
-        click(By.xpath(xpathLinkBanner), driver).exec();
-    }
-    
-    public static void clickMenu(LineaType linea, int numMenu, WebDriver driver) {
-        String xpathMenu = getXPathMenu(linea, numMenu);
-        click(By.xpath(xpathMenu), driver).exec();
-    }
+	private static String getXPathLineaSection(LineaType linea) {
+		return ("//div[@id='" + linea.name() + "' and @class[contains(.,'section')]]");
+	}
+	
+	private static String getXPathLineaLink(LineaType linea) {
+		String xpathBanner = getXPathLineaSection(linea);
+		return (xpathBanner + "//div[@class='clickable']");
+	}
+	
+	private static String getXPathMenu(LineaType linea, int numMenu) {
+		String xpathMenu = getXPathMenu(linea);
+		return ("(" + xpathMenu + ")[" + numMenu + "]");
+	}
+	
+	private static String getXPathMenu(LineaType linea) {
+		String xpathBanner = getXPathLineaSection(linea);
+		return (xpathBanner + "/div[@class[contains(.,'subsection')]]/span/a");
+	}
+	
+	public static boolean isBannerPresent(LineaType linea, WebDriver driver) {
+		String xpathBanner = getXPathLineaSection(linea);
+		return (state(Present, By.xpath(xpathBanner), driver).check());
+	}
+	
+	public static void clickBanner(LineaType linea, WebDriver driver) {
+		String xpathLinkBanner = getXPathLineaLink(linea);
+		click(By.xpath(xpathLinkBanner), driver).exec();
+	}
+	
+	public static void clickMenu(LineaType linea, int numMenu, WebDriver driver) {
+		String xpathMenu = getXPathMenu(linea, numMenu);
+		click(By.xpath(xpathMenu), driver).exec();
+	}
 }

@@ -27,14 +27,14 @@ public class ListSizesArticle {
 	
 	public String getListHtml() {
 		String listHtml = "";
-	    for (DataSizeArticle dataArticle : listSizesArticles) {
-	    	listHtml+=
-	    		(dataArticle.referencia + 
-	    		" (widthAttr=" + dataArticle.widthSrcImg + 
-	    		", realWidth=" + dataArticle.widthArticle + ")<br>");
-	    }
-	    
-	    return listHtml;
+		for (DataSizeArticle dataArticle : listSizesArticles) {
+			listHtml+=
+				(dataArticle.referencia + 
+				" (widthAttr=" + dataArticle.widthSrcImg + 
+				", realWidth=" + dataArticle.widthArticle + ")<br>");
+		}
+		
+		return listHtml;
 	}
 }
 

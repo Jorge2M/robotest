@@ -8,7 +8,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageTrabajaConNosotros extends PageObjTM implements PageFromFooter {
-    
+	
 	final String XPathIdFrame = "//iframe[@id='bodyFrame']";
 	final String XPathForIdPage = "//section[@id='all-jobs-link-section']";
 	

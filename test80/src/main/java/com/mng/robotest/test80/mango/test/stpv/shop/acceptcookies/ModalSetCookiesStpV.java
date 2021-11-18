@@ -19,16 +19,16 @@ public class ModalSetCookiesStpV {
 	@Validation (
 		description="Es visible el modal para el seteo de Cookies (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-    public boolean isVisible(int maxSeconds) {
+	public boolean isVisible(int maxSeconds) {
 		return (modalSetCookies.isVisible(maxSeconds));
-    }
+	}
 	
 	@Validation (
 		description="No es visible el modal para el seteo de Cookies (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
-    public boolean isInvisible(int maxSeconds) {
+	public boolean isInvisible(int maxSeconds) {
 		return (modalSetCookies.isInvisible(maxSeconds));
-    }
+	}
 	
 	@Step (
 		description="Seleccionamos la sección <b>#{section.getNombre()</b>}",

@@ -8,11 +8,11 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 
 public class PageConsultaTienda {
-    
-    static String XPathInputTienda = "//input[@id[contains(.,'ID_TIENDA')]]";
-    static String XPathBotonBuscar = "//input[@value[contains(.,'Buscar tienda')]]";
-    static String XPathTiendaNoExiste = "//li[text()[contains(.,'La tienda no existe')]]";
-    static String XPathTiendaExiste = "//span[text()[contains(.,'ID Tienda')]]";
+	
+	static String XPathInputTienda = "//input[@id[contains(.,'ID_TIENDA')]]";
+	static String XPathBotonBuscar = "//input[@value[contains(.,'Buscar tienda')]]";
+	static String XPathTiendaNoExiste = "//li[text()[contains(.,'La tienda no existe')]]";
+	static String XPathTiendaExiste = "//span[text()[contains(.,'ID Tienda')]]";
 
 	public static boolean isVisibleInputTienda(WebDriver driver) {
 		return (state(Visible, By.xpath(XPathInputTienda), driver).check());

@@ -16,7 +16,7 @@ public class SecCabecera {
 	public static String getLitTienda(WebDriver driver) {
 		String litTienda = "";
 		if (state(Present, By.xpath(XPathLitTienda), driver).check()) {
-			litTienda = driver.findElement(By.xpath(XPathLitTienda)).getText();    
+			litTienda = driver.findElement(By.xpath(XPathLitTienda)).getText();	
 		}
 		return litTienda;
 	}

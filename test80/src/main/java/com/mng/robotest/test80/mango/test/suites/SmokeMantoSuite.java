@@ -9,14 +9,14 @@ import com.github.jorge2m.testmaker.domain.SuiteMaker;
 import com.github.jorge2m.testmaker.domain.TestRunMaker;
 
 public class SmokeMantoSuite extends SuiteMaker {
-    
-    public SmokeMantoSuite(InputParamsMango inputParams) {
-    	super(inputParams);
-    	setParameters(SuiteMakerResources.getParametersSuiteShop(inputParams));
-    	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), Manto.class);
-    	testRun.setStorerErrorStep(new ErrorStorer());
-    	addTestRun(testRun);
-    	setParallelMode(ParallelMode.METHODS);
-    	setThreadCount(3);
-    }
+	
+	public SmokeMantoSuite(InputParamsMango inputParams) {
+		super(inputParams);
+		setParameters(SuiteMakerResources.getParametersSuiteShop(inputParams));
+		TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), Manto.class);
+		testRun.setStorerErrorStep(new ErrorStorer());
+		addTestRun(testRun);
+		setParallelMode(ParallelMode.METHODS);
+		setThreadCount(3);
+	}
 }

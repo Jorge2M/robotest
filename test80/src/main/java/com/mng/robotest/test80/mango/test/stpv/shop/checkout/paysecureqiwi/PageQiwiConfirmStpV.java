@@ -9,8 +9,8 @@ public class PageQiwiConfirmStpV {
 
 	@Step (
 		description="Seleccionar el botón \"Confirmar\" de la página de confirmación de Qiwi", 
-        expected="Aparece la página de resultado del pago de Mango")
+		expected="Aparece la página de resultado del pago de Mango")
 	public static void selectConfirmButton(WebDriver driver) throws Exception {
-		PagePaysecureConfirm.clickConfirmar(driver);         
-    }
+		PagePaysecureConfirm.clickConfirmar(driver);		 
+	}
 }

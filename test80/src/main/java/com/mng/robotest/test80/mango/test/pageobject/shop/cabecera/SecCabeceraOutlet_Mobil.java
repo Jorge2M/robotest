@@ -37,42 +37,42 @@ public class SecCabeceraOutlet_Mobil extends SecCabecera {
 		
 	//private final static String XPathNumArticles = "//span[@class[contains(.,'_cartNum')]]";
 
-    private SecCabeceraOutlet_Mobil(Channel channel, AppEcom app, WebDriver driver) {
-    	super(channel, app, driver);
-    }
-    
-    public static SecCabeceraOutlet_Mobil getNew(Channel channel, AppEcom app, WebDriver driver) {
-    	return (new SecCabeceraOutlet_Mobil(channel, app, driver));
-    }
-    
-    @Override
-    String getXPathNumberArtIcono() {
-    	return SecCabecera_MostFrequent.XPathNumArticlesBolsa;
-    }
-    
-    @Override
-    public boolean isInStateIconoBolsa(State state, int maxSeconds) {
-    	return (isElementInStateUntil(IconoCabOutletMobil.bolsa, state, maxSeconds));
-    }
-    
-    @Override
-    public void clickIconoBolsa() {
-    	click(IconoCabOutletMobil.bolsa);
-    }
-    
-    @Override
-    public void clickIconoBolsaWhenDisp(int maxSecondsToWait) {
-    	clickIfClickableUntil(IconoCabOutletMobil.bolsa, maxSecondsToWait);
-    }
-    
-    @Override
-    public void hoverIconoBolsa() {
-    	hoverIcono(IconoCabOutletMobil.bolsa);
-    }
-    
-    public boolean isElementInStateUntil(IconoCabOutletMobil icono, State state, int maxSeconds) {
-    	return (state(state, icono.getBy()).wait(maxSeconds).check());
-    }
+	private SecCabeceraOutlet_Mobil(Channel channel, AppEcom app, WebDriver driver) {
+		super(channel, app, driver);
+	}
+	
+	public static SecCabeceraOutlet_Mobil getNew(Channel channel, AppEcom app, WebDriver driver) {
+		return (new SecCabeceraOutlet_Mobil(channel, app, driver));
+	}
+	
+	@Override
+	String getXPathNumberArtIcono() {
+		return SecCabecera_MostFrequent.XPathNumArticlesBolsa;
+	}
+	
+	@Override
+	public boolean isInStateIconoBolsa(State state, int maxSeconds) {
+		return (isElementInStateUntil(IconoCabOutletMobil.bolsa, state, maxSeconds));
+	}
+	
+	@Override
+	public void clickIconoBolsa() {
+		click(IconoCabOutletMobil.bolsa);
+	}
+	
+	@Override
+	public void clickIconoBolsaWhenDisp(int maxSecondsToWait) {
+		clickIfClickableUntil(IconoCabOutletMobil.bolsa, maxSecondsToWait);
+	}
+	
+	@Override
+	public void hoverIconoBolsa() {
+		hoverIcono(IconoCabOutletMobil.bolsa);
+	}
+	
+	public boolean isElementInStateUntil(IconoCabOutletMobil icono, State state, int maxSeconds) {
+		return (state(state, icono.getBy()).wait(maxSeconds).check());
+	}
 
 	 public boolean isClickableUntil(IconoCabOutletMobil icono, int maxSeconds) {
 		return (state(Clickable, icono.getBy()).wait(maxSeconds).check());

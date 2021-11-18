@@ -11,35 +11,35 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paytrail.Page
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 public class PagePaytrail1rstStpV {
-    
+	
 	@Validation
-    public static ChecksTM validateIsPage(String importeTotal, String codPais, Channel channel, WebDriver driver) {
+	public static ChecksTM validateIsPage(String importeTotal, String codPais, Channel channel, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
 		String nombrePagoCabecera = "Finnish E-Banking";
 		int maxSecondsToWait = 2;
-    	validations.add(
-    		"Figura el bloque correspondiente al pago <b>" + nombrePagoCabecera + "</b>",
-    		PagePaytrail1rst.isPresentEntradaPago(nombrePagoCabecera, driver), State.Warn);
-    	
-    	State stateVal = State.Warn;
-        if (channel.isDevice()) {
-        	stateVal = State.Info;
-        }
-    	validations.add(
-    		"Aparece el importe de la compra: \" + importeTotal",
-    		ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal);  
-    	
+		validations.add(
+			"Figura el bloque correspondiente al pago <b>" + nombrePagoCabecera + "</b>",
+			PagePaytrail1rst.isPresentEntradaPago(nombrePagoCabecera, driver), State.Warn);
+		
+		State stateVal = State.Warn;
+		if (channel.isDevice()) {
+			stateVal = State.Info;
+		}
+		validations.add(
+			"Aparece el importe de la compra: \" + importeTotal",
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal);  
+		
 		if (channel==Channel.desktop) {
-	    	validations.add(
-        		"Es visible el desplegable de bancos (lo esperamos hasta " + maxSecondsToWait + " seconds)",
-        		PagePaytrail1rst.isVisibleSelectBancosUntil(maxSecondsToWait, driver), State.Warn);
-	    	validations.add(
-        		"Figura un botón de pago",
-        		PagePaytrail1rst.isPresentButtonPago(driver), State.Defect);
+			validations.add(
+				"Es visible el desplegable de bancos (lo esperamos hasta " + maxSecondsToWait + " seconds)",
+				PagePaytrail1rst.isVisibleSelectBancosUntil(maxSecondsToWait, driver), State.Warn);
+			validations.add(
+				"Figura un botón de pago",
+				PagePaytrail1rst.isPresentButtonPago(driver), State.Defect);
 		}
 		
 		return validations;
-    }
+	}
 
 	@Step (
 		description="Seleccionar el banco <b>Nordea</b> del desplegable y pulsar el botón \"Continue\"", 

@@ -11,11 +11,11 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.PageAm
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 public class PageAmexInputCipStpV {
-    
+	
 	@Validation
-    public static ChecksTM validateIsPageOk(String importeTotal, String codigoPais, WebDriver driver) {
+	public static ChecksTM validateIsPageOk(String importeTotal, String codigoPais, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
-        int maxSeconds = 5;
+		int maxSeconds = 5;
 	 	validations.add(
 			"Aparece la página de introducción del CIP (la esperamos hasta " + maxSeconds + " segundos)",
 			PageAmexInputCip.isPageUntil(maxSeconds, driver), State.Defect); 
@@ -23,14 +23,14 @@ public class PageAmexInputCipStpV {
 			"Aparece el importe de la operación " + importeTotal,
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codigoPais, driver), State.Warn);
 	 	return validations;
-    }
-    
+	}
+	
 	@Step (
 		description="Introducimos el CIP #{CIP} y pulsamos el botón \"Aceptar\"", 
-        expected="Aparece una página de la pasarela de resultado OK")
-    public static void inputCipAndAcceptButton(String CIP, String importeTotal, String codigoPais, WebDriver driver) {
-        PageAmexInputCip.inputCIP(CIP, driver);
-        PageAmexInputCip.clickAceptarButton(driver);
-        PageAmexResultStpV.validateIsPageOk(importeTotal, codigoPais, driver);
-    }
+		expected="Aparece una página de la pasarela de resultado OK")
+	public static void inputCipAndAcceptButton(String CIP, String importeTotal, String codigoPais, WebDriver driver) {
+		PageAmexInputCip.inputCIP(CIP, driver);
+		PageAmexInputCip.clickAceptarButton(driver);
+		PageAmexResultStpV.validateIsPageOk(importeTotal, codigoPais, driver);
+	}
 }

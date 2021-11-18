@@ -15,14 +15,14 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
  */
 public class PageEpsSelBanco {
 
-    static String XPathIconoEps = "//div[@class='header-logo']";
-    static String XPathIconoBanco = "//div[@class='loginlogo']";
+	static String XPathIconoEps = "//div[@class='header-logo']";
+	static String XPathIconoBanco = "//div[@class='loginlogo']";
 
-    public static boolean isPresentIconoEps(WebDriver driver) {
-    	return (state(Present, By.xpath(XPathIconoEps), driver).check());
-    }
-    
-    public static boolean isVisibleIconoBanco(WebDriver driver) {
-    	return (state(Present, By.xpath(XPathIconoBanco), driver).check());
-    }
+	public static boolean isPresentIconoEps(WebDriver driver) {
+		return (state(Present, By.xpath(XPathIconoEps), driver).check());
+	}
+	
+	public static boolean isVisibleIconoBanco(WebDriver driver) {
+		return (state(Present, By.xpath(XPathIconoBanco), driver).check());
+	}
 }

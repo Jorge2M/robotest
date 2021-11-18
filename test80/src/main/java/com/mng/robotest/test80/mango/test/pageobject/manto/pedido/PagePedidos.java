@@ -12,103 +12,103 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PagePedidos {
 
-    public enum TypeDetalle {bolsa, pedido} 
-    public enum Envio {STANDARD, TIENDA, ASM, PICKPOINT}
-    
-    public enum IdColumn {
-    	idpedido ("Id", true),
-    	almacen ("almacen", false),
-    	estado ("t.e", false),
-    	transporte ("transporte", false),
-    	votf ("votf", false),
-    	vtelf ("vtelf", false),
-    	malmacen ("malmacen", false),
-    	ew ("ew", false),
-    	fecha ("Fecha", false),
-    	pais ("Pais", true),
-    	nombre ("Nombre", false),
-    	apellido ("Apellido", false),
-    	apellido2 ("Apellido2", false),
-    	email ("Email", false),
-    	idregistro ("idRegistro", false),
-    	tpv ("Tpv", true),
-    	pf ("pf", false),
-    	trans ("Trans", false),
-    	tarjeta ("Tarjeta", false),
-    	totalprendas ("Total Prendas", false),
-    	total ("Total", true),
-    	tipovale ("Tipo Vale", false),
-    	valorvale ("valor vale", false),
-    	codigovale ("código vale", false),
-    	tipocheque ("Tipo Cheque", false),
-    	totaleuros ("Total Euros", false);
-    	
-    	public String textoColumna;
-    	public boolean isLink;
-    	private IdColumn(String textoColumna, boolean isLink) {
-    		this.textoColumna = textoColumna;
-    		this.isLink = isLink;
-    	}
-    }
-    
-    private static String tagLinCabecera = "@linCabecera";
-    private static String XPathTablaPedidos = "//table//span[text()='Tpv']/../../..";
-    private static String XPathCabeceraTablaPedidos = XPathTablaPedidos + "//tr[" + tagLinCabecera + "]";
-    private static String XPathLineaPedido = XPathTablaPedidos + "//input[@type='checkbox' and @title='Multi almacén']";
-    public static String XPathImporteLineaPedido = "//table//tr/td[22]";
-    private static String XPathMainForm = "//form[@action='/pedidos.faces']";
-    private static String XPathCapaLoading = "//div[@id[contains(.,'oading')]]";
-    private static String iniXPathIdRegistro = "//table//tr[";
-    private static String XPathLinkPaginaSiguientePedidos = "//a[text()='>']";
-    
-    private static String getXPathCabeceraTablePedidos(TypeDetalle typeDetalle) {
-    	switch (typeDetalle) {
-    	case bolsa:
-    		return (XPathCabeceraTablaPedidos.replace(tagLinCabecera, "3"));
-    	case pedido:
-    	default:
-    		return (XPathCabeceraTablaPedidos.replace(tagLinCabecera, "5"));
-    	}
-    }
-    
-    private static String getXPathTdCabeceraTablaPedidos(TypeDetalle typeDetalle) {
-    	String xpathCabecera = getXPathCabeceraTablePedidos(typeDetalle);
-    	return (xpathCabecera + "/td");
-    }
+	public enum TypeDetalle {bolsa, pedido} 
+	public enum Envio {STANDARD, TIENDA, ASM, PICKPOINT}
+	
+	public enum IdColumn {
+		idpedido ("Id", true),
+		almacen ("almacen", false),
+		estado ("t.e", false),
+		transporte ("transporte", false),
+		votf ("votf", false),
+		vtelf ("vtelf", false),
+		malmacen ("malmacen", false),
+		ew ("ew", false),
+		fecha ("Fecha", false),
+		pais ("Pais", true),
+		nombre ("Nombre", false),
+		apellido ("Apellido", false),
+		apellido2 ("Apellido2", false),
+		email ("Email", false),
+		idregistro ("idRegistro", false),
+		tpv ("Tpv", true),
+		pf ("pf", false),
+		trans ("Trans", false),
+		tarjeta ("Tarjeta", false),
+		totalprendas ("Total Prendas", false),
+		total ("Total", true),
+		tipovale ("Tipo Vale", false),
+		valorvale ("valor vale", false),
+		codigovale ("código vale", false),
+		tipocheque ("Tipo Cheque", false),
+		totaleuros ("Total Euros", false);
+		
+		public String textoColumna;
+		public boolean isLink;
+		private IdColumn(String textoColumna, boolean isLink) {
+			this.textoColumna = textoColumna;
+			this.isLink = isLink;
+		}
+	}
+	
+	private static String tagLinCabecera = "@linCabecera";
+	private static String XPathTablaPedidos = "//table//span[text()='Tpv']/../../..";
+	private static String XPathCabeceraTablaPedidos = XPathTablaPedidos + "//tr[" + tagLinCabecera + "]";
+	private static String XPathLineaPedido = XPathTablaPedidos + "//input[@type='checkbox' and @title='Multi almacén']";
+	public static String XPathImporteLineaPedido = "//table//tr/td[22]";
+	private static String XPathMainForm = "//form[@action='/pedidos.faces']";
+	private static String XPathCapaLoading = "//div[@id[contains(.,'oading')]]";
+	private static String iniXPathIdRegistro = "//table//tr[";
+	private static String XPathLinkPaginaSiguientePedidos = "//a[text()='>']";
+	
+	private static String getXPathCabeceraTablePedidos(TypeDetalle typeDetalle) {
+		switch (typeDetalle) {
+		case bolsa:
+			return (XPathCabeceraTablaPedidos.replace(tagLinCabecera, "3"));
+		case pedido:
+		default:
+			return (XPathCabeceraTablaPedidos.replace(tagLinCabecera, "5"));
+		}
+	}
+	
+	private static String getXPathTdCabeceraTablaPedidos(TypeDetalle typeDetalle) {
+		String xpathCabecera = getXPathCabeceraTablePedidos(typeDetalle);
+		return (xpathCabecera + "/td");
+	}
 
 
-    public static int getPosicionColumn(IdColumn idColumn, TypeDetalle typeDetalle, WebDriver driver) {
-    	String xpathTdCabeceraPedidos = getXPathTdCabeceraTablaPedidos(typeDetalle); 
-    	List<WebElement> listColumns = driver.findElements(By.xpath(xpathTdCabeceraPedidos));
-    	int i=0;
-    	for (WebElement tdColumn : listColumns) {
-    		i+=1;
-    		if (state(Present, tdColumn, driver).by(By.xpath("./span")).check() &&
-    			tdColumn.findElement(By.xpath("./span")).getText().compareTo(idColumn.textoColumna)==0) {
-    			return i;
-    		}
-    	}
-    	
-    	return i;
-    }
-    
-    public static String getXPathCeldaLineaPedido(IdColumn idColumn, TypeDetalle typeDetalle, WebDriver driver) {
-    	int posicColumn = getPosicionColumn(idColumn, typeDetalle, driver);
-    	String elem = "span";
-    	if (idColumn.isLink) {
-    		elem = "a";
-    	}
-    	return ("//table//tr/td[" + posicColumn + "]/" + elem); 
-    }
-    
-    public static String getXPathDataPedidoInLineas(IdColumn idColumn, String data, TypeDetalle typeDetalle, WebDriver driver) {
-    	String xpathCelda = getXPathCeldaLineaPedido(idColumn, typeDetalle, driver);
-    	return (
-    	    xpathCelda 
-    	    	+ "[text()[contains(.,'" + data + "')] or "
-    	    	+ "text()[contains(.,'" + data.toLowerCase() + "')] or "
-    	    	+ "text()[contains(.,'" + data.toUpperCase() + "')]]");
-    }
+	public static int getPosicionColumn(IdColumn idColumn, TypeDetalle typeDetalle, WebDriver driver) {
+		String xpathTdCabeceraPedidos = getXPathTdCabeceraTablaPedidos(typeDetalle); 
+		List<WebElement> listColumns = driver.findElements(By.xpath(xpathTdCabeceraPedidos));
+		int i=0;
+		for (WebElement tdColumn : listColumns) {
+			i+=1;
+			if (state(Present, tdColumn, driver).by(By.xpath("./span")).check() &&
+				tdColumn.findElement(By.xpath("./span")).getText().compareTo(idColumn.textoColumna)==0) {
+				return i;
+			}
+		}
+		
+		return i;
+	}
+	
+	public static String getXPathCeldaLineaPedido(IdColumn idColumn, TypeDetalle typeDetalle, WebDriver driver) {
+		int posicColumn = getPosicionColumn(idColumn, typeDetalle, driver);
+		String elem = "span";
+		if (idColumn.isLink) {
+			elem = "a";
+		}
+		return ("//table//tr/td[" + posicColumn + "]/" + elem); 
+	}
+	
+	public static String getXPathDataPedidoInLineas(IdColumn idColumn, String data, TypeDetalle typeDetalle, WebDriver driver) {
+		String xpathCelda = getXPathCeldaLineaPedido(idColumn, typeDetalle, driver);
+		return (
+			xpathCelda 
+				+ "[text()[contains(.,'" + data + "')] or "
+				+ "text()[contains(.,'" + data.toLowerCase() + "')] or "
+				+ "text()[contains(.,'" + data.toUpperCase() + "')]]");
+	}
 
 	public static boolean isPage(WebDriver driver) {
 		return (state(Present, By.xpath(XPathMainForm), driver).check());
@@ -119,17 +119,17 @@ public class PagePedidos {
 				.wait(maxSeconds).check());
 	}
 
-    /**
-     * @return el número de líneas de pedidos que aparecen en pantalla
-     */
-    public static int getNumLineas(WebDriver driver) {
-        return (driver.findElements(By.xpath(XPathLineaPedido)).size());
-    }
-    
-    public static void clickLinkPedidoInLineas(WebDriver driver, String codigoPedidoManto, TypeDetalle typeDetalle) {
-    	String xpath = getXPathDataPedidoInLineas(IdColumn.idpedido, codigoPedidoManto, typeDetalle, driver);
-    	click(By.xpath(xpath), driver).exec();
-    }
+	/**
+	 * @return el número de líneas de pedidos que aparecen en pantalla
+	 */
+	public static int getNumLineas(WebDriver driver) {
+		return (driver.findElements(By.xpath(XPathLineaPedido)).size());
+	}
+	
+	public static void clickLinkPedidoInLineas(WebDriver driver, String codigoPedidoManto, TypeDetalle typeDetalle) {
+		String xpath = getXPathDataPedidoInLineas(IdColumn.idpedido, codigoPedidoManto, typeDetalle, driver);
+		click(By.xpath(xpath), driver).exec();
+	}
 
 	public static boolean isPresentDataInPedido(
 			IdColumn idColumn, String data, TypeDetalle typeDetalle, int maxSeconds, WebDriver driver) {
@@ -144,7 +144,7 @@ public class PagePedidos {
 	 */
 	public static String getCodigoPedidoUsuarioRegistrado(int posicionPedidoActual, WebDriver driver) {
 		return driver.findElement(By.xpath(getPedidoForThisIdRegistro(getXPathIdRegistroForLine(posicionPedidoActual)))).getText();
-	}    
+	}	
 	
 	/**
 	 * @param linea
@@ -155,10 +155,10 @@ public class PagePedidos {
 		return XPathIdRegistro;
 	}
 
-    private static String getXPathLineaPedidoWithTypeEnvio(Envio envio, WebDriver driver) {
-    	String xpathCeldaTransporte = getXPathCeldaLineaPedido(IdColumn.transporte, TypeDetalle.pedido, driver);
-    	return (xpathCeldaTransporte + "//self::*[text()[contains(.,'" + envio + "')]]/../..");
-    }
+	private static String getXPathLineaPedidoWithTypeEnvio(Envio envio, WebDriver driver) {
+		String xpathCeldaTransporte = getXPathCeldaLineaPedido(IdColumn.transporte, TypeDetalle.pedido, driver);
+		return (xpathCeldaTransporte + "//self::*[text()[contains(.,'" + envio + "')]]/../..");
+	}
 	
 	/**
 	 * @param XPathIdRegistro

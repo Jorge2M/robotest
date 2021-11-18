@@ -53,43 +53,43 @@ public class ListMenusManto {
 		return listTests.toArray(new Object[listTests.size()]);
 	}
 	
-    /**
-     * Obtiene la lista con los nombres de las cabeceras de los grupos de menús de Manto
-     */
-    private ArrayList<String> getListCabecerasMenus(String urlBaseManto, ITestContext ctxTestRun) throws Exception { 
-    	TestRunTM testRun = TestMaker.getTestRun(ctxTestRun);
-    	InputParamsTM inputParams = TestMaker.getInputParamsSuite(ctxTestRun);
-    	WebDriver driver = 
-    		FactoryWebdriverMaker.make(testRun)
+	/**
+	 * Obtiene la lista con los nombres de las cabeceras de los grupos de menús de Manto
+	 */
+	private ArrayList<String> getListCabecerasMenus(String urlBaseManto, ITestContext ctxTestRun) throws Exception { 
+		TestRunTM testRun = TestMaker.getTestRun(ctxTestRun);
+		InputParamsTM inputParams = TestMaker.getInputParamsSuite(ctxTestRun);
+		WebDriver driver = 
+			FactoryWebdriverMaker.make(testRun)
 				.setChannel(Channel.desktop)
 				.setupDriverVersionFluent(inputParams.getDriverVersion())
 				.build(); 
 
-    	driver.manage().deleteAllCookies();
-    	driver.get(urlBaseManto);
-    
-    	Secret secret = GetterSecrets.factory().getCredentials(SecretType.MANTO_USER);
-    	goToMantoLoginAndSelectTienda(secret.getUser(), secret.getPassword(), driver);
-    	
-        ArrayList<String> listMenuNames = PageMenusManto.getListCabecerasMenusName(driver);
-        driver.quit();
-        return listMenuNames;
-    }
-    
-    private void goToMantoLoginAndSelectTienda(/*String urlManto, */String usrManto, String passManto, WebDriver driver) 
-    throws Exception {
-        String codigoEspanya = "001";
-        String almacenEspanya = "001";
-//    	driver.manage().deleteAllCookies();
-//        driver.get(urlManto);
-        PageJCAS.identication(driver, usrManto, passManto);
-        TiendaManto tienda = TiendaManto.getTienda(almacenEspanya, codigoEspanya, AppEcom.shop);
-        if (!PageSelTda.isPage(driver)) {
-        	SecCabecera.clickButtonSelTienda(driver);
-        }
-        if (!PageSelTda.isPage(driver)) {
-            SecCabecera.clickButtonSelTienda(driver);
-        }
-        PageSelTda.selectTienda(tienda, driver);
-    }
+		driver.manage().deleteAllCookies();
+		driver.get(urlBaseManto);
+	
+		Secret secret = GetterSecrets.factory().getCredentials(SecretType.MANTO_USER);
+		goToMantoLoginAndSelectTienda(secret.getUser(), secret.getPassword(), driver);
+		
+		ArrayList<String> listMenuNames = PageMenusManto.getListCabecerasMenusName(driver);
+		driver.quit();
+		return listMenuNames;
+	}
+	
+	private void goToMantoLoginAndSelectTienda(/*String urlManto, */String usrManto, String passManto, WebDriver driver) 
+	throws Exception {
+		String codigoEspanya = "001";
+		String almacenEspanya = "001";
+//		driver.manage().deleteAllCookies();
+//		driver.get(urlManto);
+		PageJCAS.identication(driver, usrManto, passManto);
+		TiendaManto tienda = TiendaManto.getTienda(almacenEspanya, codigoEspanya, AppEcom.shop);
+		if (!PageSelTda.isPage(driver)) {
+			SecCabecera.clickButtonSelTienda(driver);
+		}
+		if (!PageSelTda.isPage(driver)) {
+			SecCabecera.clickButtonSelTienda(driver);
+		}
+		PageSelTda.selectTienda(tienda, driver);
+	}
 }

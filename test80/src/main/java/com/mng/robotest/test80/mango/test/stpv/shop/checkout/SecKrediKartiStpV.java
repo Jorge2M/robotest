@@ -23,23 +23,23 @@ public class SecKrediKartiStpV {
 	
 	@Step (
 		description="Introducimos el número de cuenta #{numTarjeta}",
-        expected="Aparece la capa correspondiente a las opciones a plazo")
-    public void inputNumTarjeta(String numTarjeta) {
-        secKrediKarti.inputCardNumberAndTab(numTarjeta);
-        isVisibleCapaPagoAplazo(channel, 5, driver);
-    }
+		expected="Aparece la capa correspondiente a las opciones a plazo")
+	public void inputNumTarjeta(String numTarjeta) {
+		secKrediKarti.inputCardNumberAndTab(numTarjeta);
+		isVisibleCapaPagoAplazo(channel, 5, driver);
+	}
 	
 	@Validation (
 		description="Se carga la capa correspondiente al pago a plazos (en menos de #{maxSeconds} segundos)",
 		level=State.Defect)
 	private boolean isVisibleCapaPagoAplazo(Channel channel, int maxSeconds, WebDriver driver) {
-	    return (secKrediKarti.isVisiblePagoAPlazoUntil(maxSeconds));
+		return (secKrediKarti.isVisiblePagoAPlazoUntil(maxSeconds));
 	}
-    
+	
 	@Step (
 		description="Seleccionamos la #{numOpcion}a de las opciones de pago a plazo", 
-        expected="La opción se selecciona correctamente")
-    public void clickOpcionPagoAPlazo(int numOpcion) throws Exception {
+		expected="La opción se selecciona correctamente")
+	public void clickOpcionPagoAPlazo(int numOpcion) throws Exception {
 		secKrediKarti.clickRadioPagoAPlazo(numOpcion);
-    }
+	}
 }

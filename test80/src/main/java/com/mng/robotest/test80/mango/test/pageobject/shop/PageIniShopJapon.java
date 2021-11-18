@@ -12,15 +12,15 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
  */
 public class PageIniShopJapon extends SeleniumUtils {
 
-    public static String URL = "japan.mango.com";
-    public static String Title = "MANGO - マンゴ公式オンラインストア";
-    /**
-     * @param driver
-     * @return si se trata o no de la página inicial de la shop de Japón
-     */
-    public static boolean isPageUntil(int maxSecondsToWait, WebDriver driver) {
-        return (
-        	titleContainsUntil(driver, Title, maxSecondsToWait) &&
-        	driver.getCurrentUrl().contains(URL));
-    }
+	public static String URL = "japan.mango.com";
+	public static String Title = "MANGO - マンゴ公式オンラインストア";
+	/**
+	 * @param driver
+	 * @return si se trata o no de la página inicial de la shop de Japón
+	 */
+	public static boolean isPageUntil(int maxSecondsToWait, WebDriver driver) {
+		return (
+			titleContainsUntil(driver, Title, maxSecondsToWait) &&
+			driver.getCurrentUrl().contains(URL));
+	}
 }

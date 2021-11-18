@@ -9,8 +9,8 @@ public class PageAssistLastStpV {
 
 	@Step (
 		description="Seleccionar el botón de Submit", 
-        expected="Aparece la página de resultado de Mango")
-    public static void clickSubmit(WebDriver driver) throws Exception {
+		expected="Aparece la página de resultado de Mango")
+	public static void clickSubmit(WebDriver driver) throws Exception {
 		PageAssistLast.clickButtonSubmit(driver);
-    }
+	}
 }

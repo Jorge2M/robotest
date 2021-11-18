@@ -8,20 +8,20 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paysecureqiwi.PageQiwiInputTlfn;
 
 public class PageQiwiInputTlfnStpV {
-                 
+				 
 	@Validation (
 		description="Aparece una página con el campo de introducción del Qiwi Mobile Phone",
 		level=State.Warn)
-    public static boolean validateIsPage(WebDriver driver) { 
-        return (PageQiwiInputTlfn.isPresentInputPhone(driver));
-    }
-    
+	public static boolean validateIsPage(WebDriver driver) { 
+		return (PageQiwiInputTlfn.isPresentInputPhone(driver));
+	}
+	
 	@Step (
 		description="Introducimos el Qiwi Mobile Phone #{tlfnQiwi} y pulsamos el botón \"Aceptar\"", 
-        expected="Aparece la página de confirmación de Qiwi o la de resultado del pago de Mango")
+		expected="Aparece la página de confirmación de Qiwi o la de resultado del pago de Mango")
 	public static void inputTelefono(String tlfnQiwi, WebDriver driver) throws Exception {
-        PageQiwiInputTlfn.inputQiwiPhone(driver, tlfnQiwi);
-        checkIsVisibleAceptarButton(driver);
+		PageQiwiInputTlfn.inputQiwiPhone(driver, tlfnQiwi);
+		checkIsVisibleAceptarButton(driver);
 	}
 	
 	@Validation (
@@ -33,7 +33,7 @@ public class PageQiwiInputTlfnStpV {
 	@Step (
 		description="Seleccionar el link <b>Aceptar</b>",
 		expected="Aparece la página de confirmación del pago-Qiwi")
-    public static void clickConfirmarButton(WebDriver driver) throws Exception { 
-    	PageQiwiInputTlfn.clickLinkAceptar(driver);
-    }
+	public static void clickConfirmarButton(WebDriver driver) throws Exception { 
+		PageQiwiInputTlfn.clickLinkAceptar(driver);
+	}
 }

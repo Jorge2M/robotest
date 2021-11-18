@@ -16,18 +16,18 @@ public class PageHomeDonateLikes extends PageObjTM {
 		Button200likes(200),
 		Button800likes(1000);
 		
-    	int numLikes;
-    	ButtonLikes(int numLikes) {
-    		this.numLikes = numLikes;
-    	}
-    	
-    	public int getNumLikes() {
-    		return numLikes;
-    	}
-    	
-    	public By getBy() {
-    		return By.xpath("//button[text()[contains(.,'" + numLikes + "')]]");
-    	}
+		int numLikes;
+		ButtonLikes(int numLikes) {
+			this.numLikes = numLikes;
+		}
+		
+		public int getNumLikes() {
+			return numLikes;
+		}
+		
+		public By getBy() {
+			return By.xpath("//button[text()[contains(.,'" + numLikes + "')]]");
+		}
 	}
 	
 	final static String xpathPage = "//*[@class[contains(.,'loyalty_loyaltySpace')]]";

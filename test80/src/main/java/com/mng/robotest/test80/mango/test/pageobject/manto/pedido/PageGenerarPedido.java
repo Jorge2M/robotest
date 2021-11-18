@@ -12,21 +12,21 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.SelectEl
 public class PageGenerarPedido {
 
 	public static enum GestionPostCompra implements ElementPage {
-        EstadoPedidoSelect("//span[text()[contains(.,'Estado Pedido')]]/../..//select"),
-        InputPurchorderNum("//span[text()[contains(.,'PurchorderNum')]]/../..//input"),
-        GenerarFicheroButton("//input[@value='Generar Fichero Pedido']"),
-        MessageOkFicheroCreado("//span[text()[contains(.,'Fichero creado correctamente')]]");
+		EstadoPedidoSelect("//span[text()[contains(.,'Estado Pedido')]]/../..//select"),
+		InputPurchorderNum("//span[text()[contains(.,'PurchorderNum')]]/../..//input"),
+		GenerarFicheroButton("//input[@value='Generar Fichero Pedido']"),
+		MessageOkFicheroCreado("//span[text()[contains(.,'Fichero creado correctamente')]]");
 
-        private By by;
-        GestionPostCompra(String xPath) {
-            by = By.xpath(xPath);
-        }
+		private By by;
+		GestionPostCompra(String xPath) {
+			by = By.xpath(xPath);
+		}
 
-        @Override
-        public By getBy() {
-            return by;
-        }
-    }
+		@Override
+		public By getBy() {
+			return by;
+		}
+	}
 	
 	public static enum EstadoPedido {
 		OK(0),	

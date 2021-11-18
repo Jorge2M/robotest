@@ -16,11 +16,11 @@ public class PagePosftSelectPagoStpV {
 		ChecksTM validations = ChecksTM.getNew();
 		int maxSeconds = 5;
 	   	validations.add(
-    		"Aparece la 1a pantalla para la selección del método <b>" + nombrePago + "</b> (la esperamos hasta " + maxSeconds + " segundos)",
-    		PagePostfSelectPago.isPageUntil(nombrePago, maxSeconds, driver), State.Defect);
+			"Aparece la 1a pantalla para la selección del método <b>" + nombrePago + "</b> (la esperamos hasta " + maxSeconds + " segundos)",
+			PagePostfSelectPago.isPageUntil(nombrePago, maxSeconds, driver), State.Defect);
 	   	validations.add(
-    		"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
-    		ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
+			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
 		return validations;
 	}
 	

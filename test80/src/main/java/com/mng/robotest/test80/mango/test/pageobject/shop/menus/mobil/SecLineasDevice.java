@@ -146,12 +146,12 @@ public abstract class SecLineasDevice extends PageObjTM {
 	}
 	
 	private String getXPathLiSublineaNinos(SublineaType sublineaType) {
-		String xpathLinkSublinea = getXPathSublineaNinosLink(sublineaType);        
+		String xpathLinkSublinea = getXPathSublineaNinosLink(sublineaType);		
 		return (xpathLinkSublinea + "/..");
 	}
 	
 	private String getXPathBlockSublineasNinos(SublineaType sublineaType) {
-		String xpathSublineaLi = getXPathLiSublineaNinos(sublineaType);        
+		String xpathSublineaLi = getXPathLiSublineaNinos(sublineaType);		
 		return (xpathSublineaLi + "/..");
 	}
 	

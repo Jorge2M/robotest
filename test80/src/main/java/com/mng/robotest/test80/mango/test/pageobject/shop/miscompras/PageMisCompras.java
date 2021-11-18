@@ -30,7 +30,7 @@ public class PageMisCompras extends PageObjTM {
 	
 	private final static String XPathListTickets = 
 		"//*[@data-testid[contains(.,'activePurchases')] or " +
-		    "@data-testid[contains(.,'inactivePurchases')]]";
+			"@data-testid[contains(.,'inactivePurchases')]]";
 	
 	//private final static String XPathTicket = XPathListTickets + "//div[@class[contains(.,'purchase-card__border')]]";
 	private final static String XPathTicket = XPathListTickets + "//div[@class[contains(.,'layout-content')] and @class[contains(.,'card')]]";
@@ -75,10 +75,10 @@ public class PageMisCompras extends PageObjTM {
 		return false;
 	}
 	
-    private List<WebElement> getTicketsPage() {
-    	state(State.Visible, By.xpath(XPathTicket)).wait(2).check();
-        return (driver.findElements(By.xpath(XPathTicket)));
-    }
+	private List<WebElement> getTicketsPage() {
+		state(State.Visible, By.xpath(XPathTicket)).wait(2).check();
+		return (driver.findElements(By.xpath(XPathTicket)));
+	}
 	
 	private boolean isVisibleTicket(int maxSeconds) {
 		return (state(Visible, By.xpath(XPathTicket)).wait(maxSeconds).check());
@@ -104,10 +104,10 @@ public class PageMisCompras extends PageObjTM {
 		}
 	}
 
-    private String getXPathTicketLink(String id) {
-    	return (XPathTicket + "//img[@loading='lazy' and @alt[contains(.,'" + id + "')]]/..");
-    }
-    
+	private String getXPathTicketLink(String id) {
+		return (XPathTicket + "//img[@loading='lazy' and @alt[contains(.,'" + id + "')]]/..");
+	}
+	
 	public boolean isPageUntil(int maxSeconds) {
 		By byCapa = By.xpath(getXPathCapaContenedora());
 		return (state(Visible, byCapa).wait(maxSeconds).check());
@@ -132,21 +132,21 @@ public class PageMisCompras extends PageObjTM {
 	
 	private TypeTicket getTypeTicketPage(WebElement boxDataTicket) {
 		String idMangoTicket = getIdTicketPage(boxDataTicket);
-        if (StringUtils.isNumeric(idMangoTicket)) {
-            return TypeTicket.Tienda;
-        }
-        return TypeTicket.Online;
+		if (StringUtils.isNumeric(idMangoTicket)) {
+			return TypeTicket.Tienda;
+		}
+		return TypeTicket.Online;
 	}
 	
 	private final static String XPathIdRelativeTicket = ".//div[@class[contains(.,'card__info')]]/div/div";
 	private String getIdTicketPage(WebElement boxDataTicket) {
 		String lineaId = boxDataTicket.findElement(By.xpath(XPathIdRelativeTicket)).getText();
-        Pattern pattern = Pattern.compile("_*: (.*)"); boxDataTicket.getAttribute("innerHTML");
-        Matcher matcher = pattern.matcher(lineaId);
-        if (matcher.find()) {
-            return matcher.group(1);
-        }
-        return "";
+		Pattern pattern = Pattern.compile("_*: (.*)"); boxDataTicket.getAttribute("innerHTML");
+		Matcher matcher = pattern.matcher(lineaId);
+		if (matcher.find()) {
+			return matcher.group(1);
+		}
+		return "";
 	}
 	
 	private final static String XPathPriceRelativeTicket = ".//div[@class[contains(.,'sg-headline')]]";

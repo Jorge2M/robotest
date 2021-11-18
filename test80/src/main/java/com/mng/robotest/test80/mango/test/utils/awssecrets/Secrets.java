@@ -15,9 +15,9 @@ public class Secrets {
 	public List<Secret> getSecrets() {
 		return list;	
 	}
-    
-    public void setSecrets(List<Secret> secrets) {
-        this.list = secrets;
-    }
+	
+	public void setSecrets(List<Secret> secrets) {
+		this.list = secrets;
+	}
 	
 }

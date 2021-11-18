@@ -15,10 +15,10 @@ public class ConsolaVotfStpV {
 	@Step (
 		description="Nos hemos posicionado en la página inicial de VOTF",
 		expected="Aparece la página inicial de VOTF")
-    public static void accesoPagInicial(/*String urlVOTF,*/ WebDriver driver) {
-        //driver.get(urlVOTF);
-        checkAfterAccessInitialPage(driver);
-    }
+	public static void accesoPagInicial(/*String urlVOTF,*/ WebDriver driver) {
+		//driver.get(urlVOTF);
+		checkAfterAccessInitialPage(driver);
+	}
 	
 	@Validation
 	private static ChecksTM checkAfterAccessInitialPage(WebDriver driver) {
@@ -31,55 +31,55 @@ public class ConsolaVotfStpV {
 			PageConsola.existConsolaComVOTF(driver), State.Warn);
 		return validations;
 	}
-    
+	
 	@Step (
 		description="Seleccionamos el entorno de #{entorno} en los apartados \"Test servicios VOTF\" y \"Consola comandos VOTF\"",
 		expected="El entorno se selecciona correctamente",
 		saveErrorData=SaveWhen.Never)
-    public static void selectEntornoTestAndCons(String entorno, WebDriver driver) {
-        PageConsola.selectEntornoTestServ(driver, entorno);
-        PageConsola.selectEntornoConsolaCom(driver, entorno);
-    }
-    
+	public static void selectEntornoTestAndCons(String entorno, WebDriver driver) {
+		PageConsola.selectEntornoTestServ(driver, entorno);
+		PageConsola.selectEntornoConsolaCom(driver, entorno);
+	}
+	
 	@Step (
 		description=
 			"Introducimos el artículo disponible <b>#{articulo}</b> (a nivel de  artículo disponible y de compra) + la tienda <b>#{tienda}</b>",
 		expected=
 			"Aparecen datos correspondientes a " + PageConsola.msgConsTiposEnvioOK,
 		saveErrorData=SaveWhen.Never)
-    public static void inputArticleAndTiendaDisp(String articulo, String tienda, WebDriver driver) throws Exception {
-        PageConsola.inputArticDispYCompra(driver, articulo);
-        PageConsola.inputTiendas(tienda, driver);
-    }
-    
+	public static void inputArticleAndTiendaDisp(String articulo, String tienda, WebDriver driver) throws Exception {
+		PageConsola.inputArticDispYCompra(driver, articulo);
+		PageConsola.inputTiendas(tienda, driver);
+	}
+	
 	@Step (
 		description="Selección botón \"Consultar tipos de envío\"",
 		expected="Aparecen datos correspondientes a " + PageConsola.msgConsTiposEnvioOK,
 		saveErrorData=SaveWhen.Never)
-    public static void consultarTiposEnvio(WebDriver driver) {
+	public static void consultarTiposEnvio(WebDriver driver) {
 		PageConsola.clickButtonConsTiposEnvios(driver);
-        String paginaPadre = driver.getWindowHandle();
-        checkAfterConsultarTiposEnvio(paginaPadre, driver);
-    }
+		String paginaPadre = driver.getWindowHandle();
+		checkAfterConsultarTiposEnvio(paginaPadre, driver);
+	}
 	
 	@Validation (
 		description="En el bloque de \"Petición/Resultado\" aparece el literal \"" + PageConsola.msgConsTiposEnvioOK + "\"",
 		level=State.Warn)
 	private static boolean checkAfterConsultarTiposEnvio(String paginaPadre, WebDriver driver) {
 		boolean resultado = true;
-        try {
-            PageConsola.switchToResultIFrame(driver);
-            if (!IframeResult.resultadoContainsText(driver, PageConsola.msgConsTiposEnvioOK)) {
-                resultado = false;
-            }
-        } 
-        finally {
-            driver.switchTo().window(paginaPadre);
-        }
-        
-        return resultado;
+		try {
+			PageConsola.switchToResultIFrame(driver);
+			if (!IframeResult.resultadoContainsText(driver, PageConsola.msgConsTiposEnvioOK)) {
+				resultado = false;
+			}
+		} 
+		finally {
+			driver.switchTo().window(paginaPadre);
+		}
+		
+		return resultado;
 	}
-    
+	
 	@Step (
 		description=
 			"Introducimos el artículo <b>#{articulo}</b> (a nivel de  artículo disponible y de compra) + " + 
@@ -119,19 +119,19 @@ public class ConsolaVotfStpV {
 		description="Introducimos el artículo #{articulo} (a nivel de  artículo disponible y de compra) + Seleccionar el botón \"Consultar Disponibilidad Envío Tienda\"",
 		expected="Aparece el bloque de transportes y el tipo de stock",
 		saveErrorData=SaveWhen.Never)
-    public static void consultarDispEnvTienda(String articulo, WebDriver driver) {
-        PageConsola.inputArticDispYCompra(driver, articulo);
-        PageConsola.consDispEnvioTienda(driver);
-        String paginaPadre = driver.getWindowHandle();
-        checkAfterClickConsultDispEnvioTienda(paginaPadre, driver);
-    }
+	public static void consultarDispEnvTienda(String articulo, WebDriver driver) {
+		PageConsola.inputArticDispYCompra(driver, articulo);
+		PageConsola.consDispEnvioTienda(driver);
+		String paginaPadre = driver.getWindowHandle();
+		checkAfterClickConsultDispEnvioTienda(paginaPadre, driver);
+	}
 	
 	@Validation
 	private static ChecksTM checkAfterClickConsultDispEnvioTienda(String paginaPadre, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
-        paginaPadre = driver.getWindowHandle();
+		paginaPadre = driver.getWindowHandle();
 		try {
-	        PageConsola.switchToResultIFrame(driver);
+			PageConsola.switchToResultIFrame(driver);
 		 	validations.add(
 				"En el bloque de \"Petición/Resultado\" NO aparece una tabla \"transportes__content\"",
 				!IframeResult.existsTransportes(driver), State.Defect);
@@ -140,22 +140,22 @@ public class ConsolaVotfStpV {
 				IframeResult.isPresentTipoStock(driver), State.Defect);
 		}
 		finally {
-            driver.switchTo().window(paginaPadre);
-        }
+			driver.switchTo().window(paginaPadre);
+		}
 		
 		return validations;
 	}
-    
+	
 	@Step (
 		description="Seleccionar el botón \"Realizar Solicitud A Domicilio\"",
 		expected="El pedido se crea correctamente",
 		saveErrorData=SaveWhen.Never)
-    public static String realizarSolicitudTienda(String articulo, WebDriver driver) {
-        PageConsola.inputArticDispYCompra(driver, articulo);
-        PageConsola.clickButtonSolADomicilio(driver);
-        String codigoPedido = switchToIframeAndCheckAfterSolicitudAdomicilio(driver);
-        return codigoPedido;
-    }
+	public static String realizarSolicitudTienda(String articulo, WebDriver driver) {
+		PageConsola.inputArticDispYCompra(driver, articulo);
+		PageConsola.clickButtonSolADomicilio(driver);
+		String codigoPedido = switchToIframeAndCheckAfterSolicitudAdomicilio(driver);
+		return codigoPedido;
+	}
 	
 	private static String switchToIframeAndCheckAfterSolicitudAdomicilio(WebDriver driver) {
 		String paginaPadre = driver.getWindowHandle();
@@ -292,25 +292,25 @@ public class ConsolaVotfStpV {
 		description="Pulsar el botón \"Confirmar Pedido\"",
 		expected="Aparece el pedido confirmado",
 		saveErrorData=SaveWhen.Never)
-    public static void selectConfPedido(String codigoPedidoFull, WebDriver driver) throws Exception {
+	public static void selectConfPedido(String codigoPedidoFull, WebDriver driver) throws Exception {
 		PageConsola.clickButtonConfPedido(driver);
-        checkAfterConfirmarPedido(codigoPedidoFull, driver);
-    }
+		checkAfterConfirmarPedido(codigoPedidoFull, driver);
+	}
 	
 	@Validation
 	private static ChecksTM checkAfterConfirmarPedido(String codigoPedidoFull, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
-        String paginaPadre = driver.getWindowHandle();
-        try {
+		String paginaPadre = driver.getWindowHandle();
+		try {
 			PageConsola.switchToResultIFrame(driver);
 		 	validations.add(
 				"En el bloque de \"Petición/Resultado\" aparece una línea \"Confirmado: " + codigoPedidoFull + "\"", 
-				IframeResult.resConfPedidoOk(driver, codigoPedidoFull), State.Warn);     
-        }
-        finally {
-            driver.switchTo().window(paginaPadre);
-        }       
-        
-        return validations;
+				IframeResult.resConfPedidoOk(driver, codigoPedidoFull), State.Warn);	 
+		}
+		finally {
+			driver.switchTo().window(paginaPadre);
+		}	   
+		
+		return validations;
 	}
 }

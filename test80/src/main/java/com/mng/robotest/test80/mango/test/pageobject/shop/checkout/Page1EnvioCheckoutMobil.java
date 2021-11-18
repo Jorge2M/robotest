@@ -175,15 +175,15 @@ public class Page1EnvioCheckoutMobil extends PageObjTM {
 		return (state(Visible, By.xpath(XPathDescuentoEmpleado)).wait(maxSeconds).check());
 	}
 	
-    public boolean validateDiscountEmpleadoNotNull() throws Exception {
-    	String descuentoScreen = getImporteDescuentoEmpleado();
-    	if ("".compareTo(descuentoScreen)==0) {
-    		return false;
-    	}
-    	
-    	float descuentoFloat = ImporteScreen.getFloatFromImporteMangoScreen(descuentoScreen);
-    	return (descuentoFloat > 0);
-    }
+	public boolean validateDiscountEmpleadoNotNull() throws Exception {
+		String descuentoScreen = getImporteDescuentoEmpleado();
+		if ("".compareTo(descuentoScreen)==0) {
+			return false;
+		}
+		
+		float descuentoFloat = ImporteScreen.getFloatFromImporteMangoScreen(descuentoScreen);
+		return (descuentoFloat > 0);
+	}
 
 	public void selectMetodoAfterPositioningIn1Envio(TipoTransporte tipoTransporte)
 	throws Exception {

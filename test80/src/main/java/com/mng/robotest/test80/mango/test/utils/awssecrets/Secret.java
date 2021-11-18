@@ -82,35 +82,35 @@ public class Secret {
 		this.password = password;
 	}
 	
-    @XmlElement(name="user_standard") 
+	@XmlElement(name="user_standard") 
 	public void setUserStandard(String user_standard) {
 		this.user_standard = user_standard;
 	}
-    @XmlElement(name="password_standard") 
+	@XmlElement(name="password_standard") 
 	public void setPasswordStandard(String password_standard) {
 		this.password_standard = password_standard;
 	}
-    @XmlElement(name="user_jorge") 
+	@XmlElement(name="user_jorge") 
 	public void setUserJorge(String user_jorge) {
 		this.user_jorge = user_jorge;
 	}
-    @XmlElement(name="password_jorge") 
+	@XmlElement(name="password_jorge") 
 	public void setPasswordJorge(String password_jorge) {
 		this.password_jorge = password_jorge;
 	}
-    @XmlElement(name="user_robot") 
+	@XmlElement(name="user_robot") 
 	public void setUserRobot(String user_robot) {
 		this.user_robot = user_robot;
 	}
-    @XmlElement(name="password_robot") 
+	@XmlElement(name="password_robot") 
 	public void setPasswordRobot(String password_robot) {
 		this.password_robot = password_robot;
 	}
-    @XmlElement(name="user_francia") 
+	@XmlElement(name="user_francia") 
 	public void setUserFrancia(String user_francia) {
 		this.user_francia = user_francia;
 	}
-    @XmlElement(name="password_francia") 
+	@XmlElement(name="password_francia") 
 	public void setPasswordFrancia(String password_francia) {
 		this.password_francia = password_francia;
 	}

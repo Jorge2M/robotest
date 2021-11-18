@@ -74,34 +74,34 @@ public class DataScreenMenu implements Label, Comparable<DataScreenMenu> {
 	  return (dataGaLabel.compareTo(dataMenu.dataGaLabel));
 	}
 	
-    @Override
-    public boolean equals(Object o) { 
-        if (o == this) { 
-            return true; 
-        } 
-        if (!(o instanceof DataScreenMenu)) { 
-            return false; 
-        } 
-        DataScreenMenu c = (DataScreenMenu) o; 
-        return (
-        	c.dataGaLabel.compareTo(this.dataGaLabel)==0 &&
-        	c.getLabel().toLowerCase().compareTo(this.getLabel().toLowerCase())==0);
-    } 
-    
-    @Override
-    public int hashCode() {
-        return this.dataGaLabel.hashCode();
-    }
-    
-    @Override
-    public String toString() {
-    	String result = "";
-    	if (dataGaLabel.compareTo("")!=0) {
-    		result+=dataGaLabel;
-    	}
-    	if (getLabel().compareTo("")!=0) {
-    		result+=", " + getLabel();
-    	}
-    	return result;
-    }
+	@Override
+	public boolean equals(Object o) { 
+		if (o == this) { 
+			return true; 
+		} 
+		if (!(o instanceof DataScreenMenu)) { 
+			return false; 
+		} 
+		DataScreenMenu c = (DataScreenMenu) o; 
+		return (
+			c.dataGaLabel.compareTo(this.dataGaLabel)==0 &&
+			c.getLabel().toLowerCase().compareTo(this.getLabel().toLowerCase())==0);
+	} 
+	
+	@Override
+	public int hashCode() {
+		return this.dataGaLabel.hashCode();
+	}
+	
+	@Override
+	public String toString() {
+		String result = "";
+		if (dataGaLabel.compareTo("")!=0) {
+			result+=dataGaLabel;
+		}
+		if (getLabel().compareTo("")!=0) {
+			result+=", " + getLabel();
+		}
+		return result;
+	}
 }

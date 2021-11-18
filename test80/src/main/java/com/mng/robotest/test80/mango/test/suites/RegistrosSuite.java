@@ -28,22 +28,22 @@ public class RegistrosSuite extends SuiteMaker {
 		
 		public boolean register() {return register;}
 		public boolean loginAfterRegister() {return loginAfterRegister;}
-    }
+	}
 	
-    public RegistrosSuite(InputParamsMango inputParams) {
-    	super(inputParams);
-    	setParameters(getParametersSuiteShop(inputParams));
-    	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), ListRegistrosXPais.class);
-    	testRun.setStorerErrorStep(new ErrorStorer());
-    	testRun.addGroups(getSpecificGroups());
-    	addTestRun(testRun);
-    	setParallelMode(ParallelMode.METHODS);
-        setThreadCount(5);
-    }
+	public RegistrosSuite(InputParamsMango inputParams) {
+		super(inputParams);
+		setParameters(getParametersSuiteShop(inputParams));
+		TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), ListRegistrosXPais.class);
+		testRun.setStorerErrorStep(new ErrorStorer());
+		testRun.addGroups(getSpecificGroups());
+		addTestRun(testRun);
+		setParallelMode(ParallelMode.METHODS);
+		setThreadCount(5);
+	}
 	
-    private List<String> getSpecificGroups() {
-    	List<String> listReturn = new ArrayList<>();
-    	listReturn.add("SupportsFactoryCountrys");
-        return listReturn;
-    }
+	private List<String> getSpecificGroups() {
+		List<String> listReturn = new ArrayList<>();
+		listReturn.add("SupportsFactoryCountrys");
+		return listReturn;
+	}
 }

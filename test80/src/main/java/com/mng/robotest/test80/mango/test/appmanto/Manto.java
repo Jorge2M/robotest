@@ -56,30 +56,30 @@ public class Manto {
 		}
 	}
 	
-    @Test(
-    	groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
-        description="Compra en España")
-    public void MAN000_GenerarPedidoFicticioMANTO() throws Exception {
-    	setDataMantoAccess();
+	@Test(
+		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
+		description="Compra en España")
+	public void MAN000_GenerarPedidoFicticioMANTO() throws Exception {
+		setDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
-    	PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
-    	
-    	this.espanya.setCodigo_pais(codigoEspanya);
-    	this.espanya.setNombre_pais("España");
-    	this.dPedidoPrueba = new DataPedido(espanya);
+		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
+		
+		this.espanya.setCodigo_pais(codigoEspanya);
+		this.espanya.setNombre_pais("España");
+		this.dPedidoPrueba = new DataPedido(espanya);
 		this.dPedidoPrueba.setCodigopais(codigoEspanya);
 		this.dPagoPrueba.setNombre("");
 		this.dPedidoPrueba.setPago(dPagoPrueba);
 		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
-    	PageMenusMantoStpV.goToPedidos(driver);
-    	
-    	LocalDate dateSevenDaysAgo = LocalDate.now().minusDays(7);
-    	SecFiltrosMantoStpV.setFiltrosWithoutChequeRegaloYbuscar(dPedidoPrueba, TypeSearch.PEDIDO, dateSevenDaysAgo, driver);
-    	this.dPedidoPrueba = PagePedidosMantoStpV.getPedidoUsuarioRegistrado(dPedidoPrueba, driver);
-    	this.dPedidoPrueba = PagePedidosMantoStpV.getDataPedido(dPedidoPrueba, driver);
-    	this.dPedidoPrueba = PagePedidosMantoStpV.getDataCliente(dPedidoPrueba, driver);
-    	this.dPedidoPrueba = PagePedidosMantoStpV.getTiendaFisicaListaPedidos(dPedidoPrueba, driver);
-    }
+		PageMenusMantoStpV.goToPedidos(driver);
+		
+		LocalDate dateSevenDaysAgo = LocalDate.now().minusDays(7);
+		SecFiltrosMantoStpV.setFiltrosWithoutChequeRegaloYbuscar(dPedidoPrueba, TypeSearch.PEDIDO, dateSevenDaysAgo, driver);
+		this.dPedidoPrueba = PagePedidosMantoStpV.getPedidoUsuarioRegistrado(dPedidoPrueba, driver);
+		this.dPedidoPrueba = PagePedidosMantoStpV.getDataPedido(dPedidoPrueba, driver);
+		this.dPedidoPrueba = PagePedidosMantoStpV.getDataCliente(dPedidoPrueba, driver);
+		this.dPedidoPrueba = PagePedidosMantoStpV.getTiendaFisicaListaPedidos(dPedidoPrueba, driver);
+	}
 
 //	@Test(
 //		enabled=false, //El menú "Consultar tiendas" ha desaparecido
@@ -87,7 +87,7 @@ public class Manto {
 //		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 //		description="Consulta de varios una tienda existente y otra no existente")
 //	public void MAN001_ConsultaTiendas() throws Exception {
-//    	setDataMantoAccess();
+//		setDataMantoAccess();
 //		WebDriver driver = TestMaker.getDriverTestCase();
 //		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 //		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);

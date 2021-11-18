@@ -24,15 +24,15 @@ public class PageIdentPaymayaStpV {
 		return pageIdentPaymaya.isPage();
 	}
 	
-    @Step(
-        description=
-        	"Introducimos las credenciales del usuario PayMaya (<b>#{user}/#{password}</b>) y pulsamos \"Entrar\"",
-        expected=
-    		"Aparece la página de introducción del otp")
-    public PageOtpPaymayaStpV login(String user, String password) throws Exception {
-    	pageIdentPaymaya.login(user, password);
-    	PageOtpPaymayaStpV pageOtpPaymayaStpV = new PageOtpPaymayaStpV(driver);
-    	pageOtpPaymayaStpV.checkPage();
-    	return pageOtpPaymayaStpV;
-    }
+	@Step(
+		description=
+			"Introducimos las credenciales del usuario PayMaya (<b>#{user}/#{password}</b>) y pulsamos \"Entrar\"",
+		expected=
+			"Aparece la página de introducción del otp")
+	public PageOtpPaymayaStpV login(String user, String password) throws Exception {
+		pageIdentPaymaya.login(user, password);
+		PageOtpPaymayaStpV pageOtpPaymayaStpV = new PageOtpPaymayaStpV(driver);
+		pageOtpPaymayaStpV.checkPage();
+		return pageOtpPaymayaStpV;
+	}
 }

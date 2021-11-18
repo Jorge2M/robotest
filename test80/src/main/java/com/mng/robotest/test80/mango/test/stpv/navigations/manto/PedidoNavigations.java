@@ -43,84 +43,84 @@ public class PedidoNavigations {
 			testPedidosEnManto(dMantoAcc, dataCheckPedidos, driver);
 		}
 	}
-    
-    private static void testPedidosEnManto(DataMantoAccess dMantoAcc, DataCheckPedidos dataCheckPedidos, WebDriver driver) 
-    throws Exception {
-        TypeAccess typeAccess = ((InputParamsMango)TestMaker.getTestCase().getInputParamsSuite()).getTypeAccess();
-        if (dataCheckPedidos.areChecksToExecute() && typeAccess!=TypeAccess.Bat) {
-            PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
-            PedidoNavigations.validacionListPedidosStpVs(dataCheckPedidos, dMantoAcc.appE, driver);
-        }
-    }
-    
-    /**
-     * Partiendo de la página de menús, ejecutamos todos los pasos/validaciones para validar una lista de pedidos
-     * @param listPaisPedido lista de pedidos a validar
-     */
-    public static void validacionListPedidosStpVs(DataCheckPedidos dataCheckPedidos, AppEcom appE, WebDriver driver) 
-    throws Exception {
-    	List<CheckPedido> listChecks = dataCheckPedidos.getListChecks();
-        for (DataPedido dataPedido : dataCheckPedidos.getListPedidos()) {
-            if (dataPedido.isResultadoOk()) {
-                try {
-                    validaPedidoStpVs(dataPedido, listChecks, appE, driver);
-                }
-                catch (Exception e) {
-                	Log4jTM.getLogger().warn("Problem in validation of Pedido", e);
-                }      
-            }
-        }
-    }    
-    
-    /**
-     * Se ejecuta todo el flujo de pasos/validaciones para validar un pedido concreto y volvemos a la página de pedidos
-     */
-    public static void validaPedidoStpVs(DataPedido dataPedido, List<CheckPedido> listChecks, AppEcom app, WebDriver driver) 
-    throws Exception {
-        PageSelTdaMantoStpV.selectTienda(dataPedido.getCodigoAlmacen(), dataPedido.getCodigoPais(), app, driver);
-        if (listChecks.contains(CheckPedido.consultarBolsa)) {
-        	consultarBolsaStpV(dataPedido, app, driver);
-        }
-        
-        if (app!=AppEcom.votf) {
-	        if (listChecks.contains(CheckPedido.consultarPedido)) {
-	        	consultarPedidoStpV(dataPedido, app, driver);	
-	        }
-	        
-	        if (listChecks.contains(CheckPedido.anular)) {
-	        	anularPedidoStpV(dataPedido, app, driver);
-	        }
-        }
-        
-        if (listChecks.contains(CheckPedido.consultarBolsa)) {
-        	
-        }
-    }
-    
-    private static void consultarBolsaStpV(DataPedido dataPedido, AppEcom app, WebDriver driver) throws Exception {
-        PageMenusMantoStpV.goToBolsas(driver);
-        SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.BOLSA, driver);
-        boolean existLinkPedido = PageBolsasMantoStpV.validaLineaBolsa(dataPedido, app, driver).getExistsLinkCodPed();
-        if (existLinkPedido) {
-            PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.bolsa, app, driver);
-        }
-    }
-    
-    private static void consultarPedidoStpV(DataPedido dataPedido, AppEcom app, WebDriver driver) throws Exception {
-        PageMenusMantoStpV.goToPedidos(driver);
-        SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.PEDIDO, driver);
-        boolean existLinkPedido = PagePedidosMantoStpV.validaLineaPedido(dataPedido, app, driver).getExistsLinkCodPed();
-        if (existLinkPedido) { 
-            PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.pedido, app, driver);
-        }
-    }
-    
-    private static void anularPedidoStpV(DataPedido dataPedido, AppEcom app, WebDriver driver) throws Exception {
-    	if (!PageDetallePedido.isPage(dataPedido.getCodigoPedidoManto(), driver)) {
-    		consultarPedidoStpV(dataPedido, app, driver);
-    	}
-    	
-    	PageConsultaPedidoBolsaStpV.clickButtonIrAGenerar(dataPedido.getCodigoPedidoManto(), driver);
-    	PageGenerarPedidoStpV.changePedidoToEstado(ANULADO, driver);
-    }
+	
+	private static void testPedidosEnManto(DataMantoAccess dMantoAcc, DataCheckPedidos dataCheckPedidos, WebDriver driver) 
+	throws Exception {
+		TypeAccess typeAccess = ((InputParamsMango)TestMaker.getTestCase().getInputParamsSuite()).getTypeAccess();
+		if (dataCheckPedidos.areChecksToExecute() && typeAccess!=TypeAccess.Bat) {
+			PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
+			PedidoNavigations.validacionListPedidosStpVs(dataCheckPedidos, dMantoAcc.appE, driver);
+		}
+	}
+	
+	/**
+	 * Partiendo de la página de menús, ejecutamos todos los pasos/validaciones para validar una lista de pedidos
+	 * @param listPaisPedido lista de pedidos a validar
+	 */
+	public static void validacionListPedidosStpVs(DataCheckPedidos dataCheckPedidos, AppEcom appE, WebDriver driver) 
+	throws Exception {
+		List<CheckPedido> listChecks = dataCheckPedidos.getListChecks();
+		for (DataPedido dataPedido : dataCheckPedidos.getListPedidos()) {
+			if (dataPedido.isResultadoOk()) {
+				try {
+					validaPedidoStpVs(dataPedido, listChecks, appE, driver);
+				}
+				catch (Exception e) {
+					Log4jTM.getLogger().warn("Problem in validation of Pedido", e);
+				}	  
+			}
+		}
+	}	
+	
+	/**
+	 * Se ejecuta todo el flujo de pasos/validaciones para validar un pedido concreto y volvemos a la página de pedidos
+	 */
+	public static void validaPedidoStpVs(DataPedido dataPedido, List<CheckPedido> listChecks, AppEcom app, WebDriver driver) 
+	throws Exception {
+		PageSelTdaMantoStpV.selectTienda(dataPedido.getCodigoAlmacen(), dataPedido.getCodigoPais(), app, driver);
+		if (listChecks.contains(CheckPedido.consultarBolsa)) {
+			consultarBolsaStpV(dataPedido, app, driver);
+		}
+		
+		if (app!=AppEcom.votf) {
+			if (listChecks.contains(CheckPedido.consultarPedido)) {
+				consultarPedidoStpV(dataPedido, app, driver);	
+			}
+			
+			if (listChecks.contains(CheckPedido.anular)) {
+				anularPedidoStpV(dataPedido, app, driver);
+			}
+		}
+		
+		if (listChecks.contains(CheckPedido.consultarBolsa)) {
+			
+		}
+	}
+	
+	private static void consultarBolsaStpV(DataPedido dataPedido, AppEcom app, WebDriver driver) throws Exception {
+		PageMenusMantoStpV.goToBolsas(driver);
+		SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.BOLSA, driver);
+		boolean existLinkPedido = PageBolsasMantoStpV.validaLineaBolsa(dataPedido, app, driver).getExistsLinkCodPed();
+		if (existLinkPedido) {
+			PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.bolsa, app, driver);
+		}
+	}
+	
+	private static void consultarPedidoStpV(DataPedido dataPedido, AppEcom app, WebDriver driver) throws Exception {
+		PageMenusMantoStpV.goToPedidos(driver);
+		SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.PEDIDO, driver);
+		boolean existLinkPedido = PagePedidosMantoStpV.validaLineaPedido(dataPedido, app, driver).getExistsLinkCodPed();
+		if (existLinkPedido) { 
+			PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.pedido, app, driver);
+		}
+	}
+	
+	private static void anularPedidoStpV(DataPedido dataPedido, AppEcom app, WebDriver driver) throws Exception {
+		if (!PageDetallePedido.isPage(dataPedido.getCodigoPedidoManto(), driver)) {
+			consultarPedidoStpV(dataPedido, app, driver);
+		}
+		
+		PageConsultaPedidoBolsaStpV.clickButtonIrAGenerar(dataPedido.getCodigoPedidoManto(), driver);
+		PageGenerarPedidoStpV.changePedidoToEstado(ANULADO, driver);
+	}
 }

@@ -4,13 +4,13 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisComp
 
 public class Ticket {
 	
-    private String id;
-    //private String idMango;
-    private TypeTicket type;
-    private String precio;
-    private String fecha;
-    private int numItems;
-    
+	private String id;
+	//private String idMango;
+	private TypeTicket type;
+	private String precio;
+	private String fecha;
+	private int numItems;
+	
 	public String getId() {
 		return id;
 	}
@@ -47,5 +47,5 @@ public class Ticket {
 	public void setNumItems(int numItems) {
 		this.numItems = numItems;
 	}
-    
+	
 }

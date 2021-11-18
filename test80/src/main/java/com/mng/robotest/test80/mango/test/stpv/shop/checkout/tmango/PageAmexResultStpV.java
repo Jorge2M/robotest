@@ -12,9 +12,9 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PageAmexResultStpV {
 
 	@Validation
-    public static ChecksTM validateIsPageOk(String importeTotal, String codigoPais, WebDriver driver) {
+	public static ChecksTM validateIsPageOk(String importeTotal, String codigoPais, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
-    	int maxSeconds = 2;
+		int maxSeconds = 2;
 	 	validations.add(
 			"Aparece una página con un mensaje de OK (lo esperamos hasta " + maxSeconds + " segundos)",
 			PageAmexResult.isResultOkUntil(maxSeconds, driver), State.Defect); 
@@ -25,12 +25,12 @@ public class PageAmexResultStpV {
 			"Aparece un botón \"CONTINUAR\"",
 			PageAmexResult.isPresentContinueButton(driver), State.Defect);
 	 	return validations;
-    }
-    
-    @Step (
-    	description="Seleccionamos el botón \"Continuar\"", 
-        expected="Aparece la página de Mango de resultado OK del pago")
-    public static void clickContinuarButton(WebDriver driver) {
-    	PageAmexResult.clickContinuarButton(driver);
-    }
+	}
+	
+	@Step (
+		description="Seleccionamos el botón \"Continuar\"", 
+		expected="Aparece la página de Mango de resultado OK del pago")
+	public static void clickContinuarButton(WebDriver driver) {
+		PageAmexResult.clickContinuarButton(driver);
+	}
 }

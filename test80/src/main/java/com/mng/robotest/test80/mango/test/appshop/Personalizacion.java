@@ -19,14 +19,14 @@ import com.mng.robotest.test80.mango.test.utils.testab.TestABGoogleExpImpl;
 
 public class Personalizacion {
 
-    @Test (
-        groups={"Personalizacion", "Canal:desktop_App:shop"},
-        description="Checkea que la personalización está activa a nivel de las galerías de productos")
-    public void PER001_Galeria_Personalizada() throws Exception {
+	@Test (
+		groups={"Personalizacion", "Canal:desktop_App:shop"},
+		description="Checkea que la personalización está activa a nivel de las galerías de productos")
+	public void PER001_Galeria_Personalizada() throws Exception {
 
-    	WebDriver driver = TestMaker.getDriverTestCase();
-    	DataCtxShop dCtxSh = Test80.getDefaultDataShop();
-    	AccesoStpV.defaultAccess(driver);
+		WebDriver driver = TestMaker.getDriverTestCase();
+		DataCtxShop dCtxSh = Test80.getDefaultDataShop();
+		AccesoStpV.defaultAccess(driver);
 
 //		TestABmanagerStpV.activateTestAB_GoogleExp(
 //			TestABGoogleExpImpl.SHOP_296_PLP_Desktop_Personalizacion_en_listado, 1, dCtxSh.channel, dCtxSh.appE, driver);
@@ -39,6 +39,6 @@ public class Personalizacion {
 		
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		pageGaleriaStpV.scrollFromFirstPage(dCtxSh);
-    }
+	}
 	
 }

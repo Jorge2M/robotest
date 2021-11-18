@@ -43,157 +43,157 @@ public class Otras {
 		return dCtxSh;
 	}
 	
-    @Test (
-        groups={"Otras", "Canal:desktop_App:shop,outlet"}, 
-        description="Comprobar acceso url desde email")
-    public void OTR001_check_Redirects() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
-        dCtxSh.pais = españa;
-        dCtxSh.idioma = castellano;
-        dCtxSh.userRegistered = false;
-        AccesoStpV.oneStep(dCtxSh, false, driver);
-        
-        SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, driver);
-        secMenusDesktopStpV.checkURLRedirectParkasHeEspanya();
-        
-        dCtxSh.pais = francia;
-        dCtxSh.idioma = francia_frances;
-        AccesoStpV.goToInitialURL(driver);
-        AccesoStpV.oneStep(dCtxSh, false, driver);      
-        SecMenusDesktopStpV.checkURLRedirectFicha(francia, dCtxSh, driver);
-    }
+	@Test (
+		groups={"Otras", "Canal:desktop_App:shop,outlet"}, 
+		description="Comprobar acceso url desde email")
+	public void OTR001_check_Redirects() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		DataCtxShop dCtxSh = getCtxShForTest();
+		dCtxSh.pais = españa;
+		dCtxSh.idioma = castellano;
+		dCtxSh.userRegistered = false;
+		AccesoStpV.oneStep(dCtxSh, false, driver);
+		
+		SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, driver);
+		secMenusDesktopStpV.checkURLRedirectParkasHeEspanya();
+		
+		dCtxSh.pais = francia;
+		dCtxSh.idioma = francia_frances;
+		AccesoStpV.goToInitialURL(driver);
+		AccesoStpV.oneStep(dCtxSh, false, driver);	  
+		SecMenusDesktopStpV.checkURLRedirectFicha(francia, dCtxSh, driver);
+	}
 	
-    
-    @Test (
-        groups={"Otras", "Canal:desktop_App:shop"}, 
-        description="Verificar en google la existencia de referencia Mango")
-    public void OTR002_check_Busqueda_Google() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-    	GoogleStpV googleStpV = new GoogleStpV(driver);
-        googleStpV.accessGoogleAndSearchMango();
-        googleStpV.selectFirstLinkSinPublicidad();
-    }
-    
-    @Test (
-        groups={"Otras", "Canal:desktop_App:all"}, 
-        description="Verificar el cambio de país a través del modal")
-    public void OTR003_cambioPais() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
+	
+	@Test (
+		groups={"Otras", "Canal:desktop_App:shop"}, 
+		description="Verificar en google la existencia de referencia Mango")
+	public void OTR002_check_Busqueda_Google() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		GoogleStpV googleStpV = new GoogleStpV(driver);
+		googleStpV.accessGoogleAndSearchMango();
+		googleStpV.selectFirstLinkSinPublicidad();
+	}
+	
+	@Test (
+		groups={"Otras", "Canal:desktop_App:all"}, 
+		description="Verificar el cambio de país a través del modal")
+	public void OTR003_cambioPais() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		DataCtxShop dCtxSh = getCtxShForTest();
 
-        dCtxSh.pais = españa;
-        dCtxSh.idioma = castellano;
-        dCtxSh.userRegistered = false;
-        AccesoStpV.accesoPRYCambioPais(dCtxSh, francia, francia_frances, driver);
-    }
+		dCtxSh.pais = españa;
+		dCtxSh.idioma = castellano;
+		dCtxSh.userRegistered = false;
+		AccesoStpV.accesoPRYCambioPais(dCtxSh, francia, francia_frances, driver);
+	}
 
-    /**
-     * Caso de prueba que realiza el flujo de accesos vía URL/confirmaciones de país para certificar el correcto funcionamiento del modal de confirmación de país.
-     */
-    @Test (
-    	enabled=false, //Desactivado hasta que se corrija la incidencia https://jira.mangodev.net/jira/browse/GPS-975
-        groups={"Otras", "Canal:desktop_App:shop,outlet"}, 
-        description="Verificar el cambio de país a través de url")
-    public void OTR004_cambioPaisURL() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
-        InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
-        String urlBaseTest = inputParamsSuite.getUrlBase();
+	/**
+	 * Caso de prueba que realiza el flujo de accesos vía URL/confirmaciones de país para certificar el correcto funcionamiento del modal de confirmación de país.
+	 */
+	@Test (
+		enabled=false, //Desactivado hasta que se corrija la incidencia https://jira.mangodev.net/jira/browse/GPS-975
+		groups={"Otras", "Canal:desktop_App:shop,outlet"}, 
+		description="Verificar el cambio de país a través de url")
+	public void OTR004_cambioPaisURL() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		DataCtxShop dCtxSh = getCtxShForTest();
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		String urlBaseTest = inputParamsSuite.getUrlBase();
 
-        //Definimos la lista de los 3 países que pueden estar asociados a la IP del usuario
-        List<Pais> listPaisAsocIP = new ArrayList<>();
-        listPaisAsocIP.add(españa);
-        listPaisAsocIP.add(irlanda);
-        listPaisAsocIP.add(USA);
-            
-        //Acceso vía URL con:
-        //   país de acceso: suecia (no asociado a la IP del usuario)
-        //   país de acceso previo: ninguno (null)
-        //   país previamente confirmado: ninguno (null)
-        Pais paisAsocIP = AccesoStpV.accesoConURLPaisNoIP(urlBaseTest, suecia, null, null, 0, listPaisAsocIP, driver);
-                
-        //Acceso vía URL con:
-        //   país de acceso: francia (no asociado a la IP del usuario)
-        //   país de acceso previo: suecia
-        //   país previamente confirmado: ninguno (null)
-        AccesoStpV.accesoConURLPaisNoIP(urlBaseTest, francia, suecia, null, 0, listPaisAsocIP, driver);
-                    
-        //Step. Confirmamos el país del modal (España, Irlanda o USA... el de paisAsocIP)
-        AccesoStpV.selectConfirmPaisModal(driver);
+		//Definimos la lista de los 3 países que pueden estar asociados a la IP del usuario
+		List<Pais> listPaisAsocIP = new ArrayList<>();
+		listPaisAsocIP.add(españa);
+		listPaisAsocIP.add(irlanda);
+		listPaisAsocIP.add(USA);
+			
+		//Acceso vía URL con:
+		//   país de acceso: suecia (no asociado a la IP del usuario)
+		//   país de acceso previo: ninguno (null)
+		//   país previamente confirmado: ninguno (null)
+		Pais paisAsocIP = AccesoStpV.accesoConURLPaisNoIP(urlBaseTest, suecia, null, null, 0, listPaisAsocIP, driver);
+				
+		//Acceso vía URL con:
+		//   país de acceso: francia (no asociado a la IP del usuario)
+		//   país de acceso previo: suecia
+		//   país previamente confirmado: ninguno (null)
+		AccesoStpV.accesoConURLPaisNoIP(urlBaseTest, francia, suecia, null, 0, listPaisAsocIP, driver);
+					
+		//Step. Confirmamos el país del modal (España, Irlanda o USA... el de paisAsocIP)
+		AccesoStpV.selectConfirmPaisModal(driver);
 
-        //Acceso vía URL con:
-        //   país de acceso: francia (no asociado a la IP del usuario)
-        //   país de acceso previo: suecia
-        //   país previamente confirmado: paisAsocIp (España, Irlanda o USA)
-        //   número de veces confirmado: 1
-        AccesoStpV.accesoConURLPaisNoIP(urlBaseTest, francia, suecia, paisAsocIP, 1, listPaisAsocIP, driver);
-            
-        //Step. Confirmamos el país del modal (España, Irlanda o USA... el de paisAsocIP)
-        AccesoStpV.selectConfirmPaisModal(driver);
-            
-        //Acceso vía URL con:
-        //   país de acceso: suecia (no asociado a la IP del usuario)
-        //   país de acceso previo: francia
-        //   país previamente confirmado: paisAsocIp (España, Irlanda o USA)
-        //   número de veces confirmado: 2
-        AccesoStpV.accesoConURLPaisNoIP(urlBaseTest, suecia, francia, paisAsocIP, 2, listPaisAsocIP, driver);
-                
-        //Steps. Acabamos ejecutando la funcionalidad típica de cambio de país desde el footer
-        dCtxSh.pais = francia;
-        dCtxSh.idioma = francia_frances;
-        (new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver)).cambioPais(dCtxSh);
-    }
+		//Acceso vía URL con:
+		//   país de acceso: francia (no asociado a la IP del usuario)
+		//   país de acceso previo: suecia
+		//   país previamente confirmado: paisAsocIp (España, Irlanda o USA)
+		//   número de veces confirmado: 1
+		AccesoStpV.accesoConURLPaisNoIP(urlBaseTest, francia, suecia, paisAsocIP, 1, listPaisAsocIP, driver);
+			
+		//Step. Confirmamos el país del modal (España, Irlanda o USA... el de paisAsocIP)
+		AccesoStpV.selectConfirmPaisModal(driver);
+			
+		//Acceso vía URL con:
+		//   país de acceso: suecia (no asociado a la IP del usuario)
+		//   país de acceso previo: francia
+		//   país previamente confirmado: paisAsocIp (España, Irlanda o USA)
+		//   número de veces confirmado: 2
+		AccesoStpV.accesoConURLPaisNoIP(urlBaseTest, suecia, francia, paisAsocIP, 2, listPaisAsocIP, driver);
+				
+		//Steps. Acabamos ejecutando la funcionalidad típica de cambio de país desde el footer
+		dCtxSh.pais = francia;
+		dCtxSh.idioma = francia_frances;
+		(new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver)).cambioPais(dCtxSh);
+	}
 
-    
-    /**
-    /* Acceso a la prehome, selección de Japón/Japonés y validaciones de que aparece la portada de la shop específica de Japón
-     */
-    @Test (
-        groups={"Otras", "Canal:desktop_App:shop"}, 
-        description="Acceso al país Japón desde la preHome y comprobación de que redirige a la shop específica de este país")
-    public void OTR005_accesoJapon() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
+	
+	/**
+	/* Acceso a la prehome, selección de Japón/Japonés y validaciones de que aparece la portada de la shop específica de Japón
+	 */
+	@Test (
+		groups={"Otras", "Canal:desktop_App:shop"}, 
+		description="Acceso al país Japón desde la preHome y comprobación de que redirige a la shop específica de este país")
+	public void OTR005_accesoJapon() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		DataCtxShop dCtxSh = getCtxShForTest();
 
-        dCtxSh.pais = japon;
-        dCtxSh.idioma = japones;
-        PagePrehomeStpV pagePrehomeStpV = new PagePrehomeStpV(dCtxSh, driver);
-        pagePrehomeStpV.getPageObject().previousAccessShopSteps(true);
-        pagePrehomeStpV.seleccionPaisIdioma();
-        pagePrehomeStpV.entradaShopGivenPaisSeleccionado();
-        PageIniShopJaponStpV.validaPageIniJapon(2, driver);
-    }	
-    
-    //TODO cuando lo activen en Tablet añadir ese canal
-    @Test (
-        groups={"Otras", "Canal:desktop,mobile_App:shop"}, 
-        description="Chequear el ChatBot")
-    public void OTR006_chatBot() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
-        dCtxSh.pais = españa;
-        dCtxSh.idioma = castellano;
-        dCtxSh.userRegistered = false;
-        AccesoStpV.oneStep(dCtxSh, false, driver);
-        
-        ModalChatBotStpV chatBotStpV = new ModalChatBotStpV(driver);
-        if (!chatBotStpV.checkIconVisible()) {
-        	return;
-        }
-        if (!chatBotStpV.clickIcon()) {
-        	return;
-        }
-        
-        String option1 = "Estado de mi pedido";
-        chatBotStpV.isVisibleOption(option1, 5);
-        chatBotStpV.selectOption(option1);
-        
-        String option2 = "Retraso de mi pedido";
-        chatBotStpV.isVisibleOption(option2, 5);
-        chatBotStpV.selectOption(option2);
-        
-        chatBotStpV.checkResponseVisible("Si has recibido un e-mail de retraso de tu pedido no te preocupes", 3);
-        chatBotStpV.isVisibleButton("¡Sí, gracias!", 1);
-    }
+		dCtxSh.pais = japon;
+		dCtxSh.idioma = japones;
+		PagePrehomeStpV pagePrehomeStpV = new PagePrehomeStpV(dCtxSh, driver);
+		pagePrehomeStpV.getPageObject().previousAccessShopSteps(true);
+		pagePrehomeStpV.seleccionPaisIdioma();
+		pagePrehomeStpV.entradaShopGivenPaisSeleccionado();
+		PageIniShopJaponStpV.validaPageIniJapon(2, driver);
+	}	
+	
+	//TODO cuando lo activen en Tablet añadir ese canal
+	@Test (
+		groups={"Otras", "Canal:desktop,mobile_App:shop"}, 
+		description="Chequear el ChatBot")
+	public void OTR006_chatBot() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		DataCtxShop dCtxSh = getCtxShForTest();
+		dCtxSh.pais = españa;
+		dCtxSh.idioma = castellano;
+		dCtxSh.userRegistered = false;
+		AccesoStpV.oneStep(dCtxSh, false, driver);
+		
+		ModalChatBotStpV chatBotStpV = new ModalChatBotStpV(driver);
+		if (!chatBotStpV.checkIconVisible()) {
+			return;
+		}
+		if (!chatBotStpV.clickIcon()) {
+			return;
+		}
+		
+		String option1 = "Estado de mi pedido";
+		chatBotStpV.isVisibleOption(option1, 5);
+		chatBotStpV.selectOption(option1);
+		
+		String option2 = "Retraso de mi pedido";
+		chatBotStpV.isVisibleOption(option2, 5);
+		chatBotStpV.selectOption(option2);
+		
+		chatBotStpV.checkResponseVisible("Si has recibido un e-mail de retraso de tu pedido no te preocupes", 3);
+		chatBotStpV.isVisibleButton("¡Sí, gracias!", 1);
+	}
 }

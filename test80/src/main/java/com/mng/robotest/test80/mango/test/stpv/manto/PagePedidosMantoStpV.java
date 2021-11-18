@@ -28,10 +28,10 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PagePedidosMantoStpV {
 
 	@Validation
-    public static ChecksResultWithFlagLinkCodPed validaLineaPedido(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
-        ChecksResultWithFlagLinkCodPed validations = ChecksResultWithFlagLinkCodPed.getNew();
-    	
-        int maxSeconds = 30;
+	public static ChecksResultWithFlagLinkCodPed validaLineaPedido(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
+		ChecksResultWithFlagLinkCodPed validations = ChecksResultWithFlagLinkCodPed.getNew();
+		
+		int maxSeconds = 30;
 	 	validations.add(
 			"Desaparece la capa de Loading de \"Consultando\"" + " (lo esperamos hasta " + maxSeconds + " segundos)",
 			PagePedidos.isInvisibleCapaLoadingUntil(maxSeconds, driver), State.Defect);
@@ -43,13 +43,13 @@ public class PagePedidosMantoStpV {
 	 	validations.add(
 			"Aparece un solo pedido",
 			PagePedidos.getNumLineas(driver)==1, State.Warn);
-    	
-        if (appE!=AppEcom.outlet) {
-    	 	validations.add(
+		
+		if (appE!=AppEcom.outlet) {
+		 	validations.add(
 				"En la columna " + IdColumn.tpv.textoColumna + " Aparece el Tpv asociado: " + dataPedido.getPago().getTpv().getId(),
 				PagePedidos.isPresentDataInPedido(IdColumn.tpv, dataPedido.getPago().getTpv().getId(), TypeDetalle.pedido, 0, driver), 
 				State.Warn);
-        }
+		}
 
 	 	validations.add(
 			"En la columna " + IdColumn.email.textoColumna + " aparece el email asociado: " + dataPedido.getEmailCheckout(),
@@ -65,10 +65,10 @@ public class PagePedidosMantoStpV {
 			"En la columna " + IdColumn.tarjeta.textoColumna + " aparece el tipo de tarjeta: " + dataPedido.getCodtipopago(),
 			PagePedidos.isPresentDataInPedido(IdColumn.tarjeta, dataPedido.getCodtipopago(), TypeDetalle.pedido, 0, driver), 
 			State.Warn);
-        
-        return validations;
-    }
-    
+		
+		return validations;
+	}
+	
 	@Step (
 		description="Buscamos pedidos con id registro",
 		expected="Debemos obtener el ID del pedido",

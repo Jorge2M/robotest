@@ -24,8 +24,8 @@ public abstract class SecBolsa extends PageObjTM {
 
 	public enum StateBolsa {Open, Closed};
 	
-    final Channel channel;
-    final AppEcom app;
+	final Channel channel;
+	final AppEcom app;
 	
 	abstract String getXPathPanelBolsa();
 	abstract String getXPathBotonComprar();
@@ -36,12 +36,12 @@ public abstract class SecBolsa extends PageObjTM {
 	abstract public void setBolsaToStateIfNotYet(StateBolsa stateBolsaExpected);
 	abstract public LineasArtBolsa getLineasArtBolsa();
 	
-    private static final String XPathAspa = "//span[@class[contains(.,'outline-close')]]";
+	private static final String XPathAspa = "//span[@class[contains(.,'outline-close')]]";
 
-    public static SecBolsa make(DataCtxShop dCtxShop, WebDriver driver) {
-    	return make(dCtxShop.channel, dCtxShop.appE, dCtxShop.pais, driver);
-    }
-    
+	public static SecBolsa make(DataCtxShop dCtxShop, WebDriver driver) {
+		return make(dCtxShop.channel, dCtxShop.appE, dCtxShop.pais, driver);
+	}
+	
 	public static SecBolsa make(Channel channel, AppEcom app, Pais pais, WebDriver driver) {
 		if (app==AppEcom.outlet) {
 			if (channel==Channel.mobile) {
@@ -100,54 +100,54 @@ public abstract class SecBolsa extends PageObjTM {
 		state(State.Visible, By.xpath(xpathComprarBt)).wait(secondsWait).check();
 		click(By.xpath(xpathComprarBt), driver).type(TypeClick.javascript).exec();
 	}
-    
-    public String getNumberArtIcono(Channel channel, AppEcom app) throws Exception {
-    	return (SecCabecera.getNew(channel, app, driver).getNumberArtIcono());
-    }
-    
-    public boolean numberItemsIsUntil(String itemsMightHave, Channel channel, AppEcom app, int maxSecodsToWait) 
-    throws Exception {
-        for (int i=0; i<=maxSecodsToWait; i++) {
-            String itemsPantalla = getNumberArtIcono(channel, app);
-            if (itemsMightHave.compareTo(itemsPantalla)==0) {
-                return true;
-            }
-            Thread.sleep(1000);
-        }
-        
-        return false;
-    }
+	
+	public String getNumberArtIcono(Channel channel, AppEcom app) throws Exception {
+		return (SecCabecera.getNew(channel, app, driver).getNumberArtIcono());
+	}
+	
+	public boolean numberItemsIsUntil(String itemsMightHave, Channel channel, AppEcom app, int maxSecodsToWait) 
+	throws Exception {
+		for (int i=0; i<=maxSecodsToWait; i++) {
+			String itemsPantalla = getNumberArtIcono(channel, app);
+			if (itemsMightHave.compareTo(itemsPantalla)==0) {
+				return true;
+			}
+			Thread.sleep(1000);
+		}
+		
+		return false;
+	}
 
-    public String getPrecioSubtotalTextPant() {
-        String xpathImporte = getXPathPrecioSubTotal();
-        return (driver.findElement(By.xpath(xpathImporte)).getText());
-    }
-    
-    public float getPrecioSubTotalFloat() {
-        String precioTotal = getPrecioSubTotal();
-        return (ImporteScreen.getFloatFromImporteMangoScreen(precioTotal));
-    }
+	public String getPrecioSubtotalTextPant() {
+		String xpathImporte = getXPathPrecioSubTotal();
+		return (driver.findElement(By.xpath(xpathImporte)).getText());
+	}
+	
+	public float getPrecioSubTotalFloat() {
+		String precioTotal = getPrecioSubTotal();
+		return (ImporteScreen.getFloatFromImporteMangoScreen(precioTotal));
+	}
 
-    public float getPrecioTransporteFloat() {
-        String precioTotal = getPrecioTransporte();
-        return (ImporteScreen.getFloatFromImporteMangoScreen(precioTotal));
-    }
-    
-    /**
-     * @return si el importe total de la bolsa NO coincide con el pasado por parámetro (importe previamente capturado)
-     */
-    public boolean isNotThisImporteTotalUntil(String importeSubTotalPrevio, int maxSecondsToWait) 
-    throws Exception {
-        String xpathImporte = getXPathPrecioSubTotal();
-        try {
-            ExpectedCondition<Boolean> expected = ExpectedConditions.not(ExpectedConditions.textToBePresentInElementLocated(By.xpath(xpathImporte), importeSubTotalPrevio));
-            new WebDriverWait(driver, maxSecondsToWait).until(expected);
-            return true;
-        }
-        catch (Exception e) {
-            return false;
-        }
-    }
+	public float getPrecioTransporteFloat() {
+		String precioTotal = getPrecioTransporte();
+		return (ImporteScreen.getFloatFromImporteMangoScreen(precioTotal));
+	}
+	
+	/**
+	 * @return si el importe total de la bolsa NO coincide con el pasado por parámetro (importe previamente capturado)
+	 */
+	public boolean isNotThisImporteTotalUntil(String importeSubTotalPrevio, int maxSecondsToWait) 
+	throws Exception {
+		String xpathImporte = getXPathPrecioSubTotal();
+		try {
+			ExpectedCondition<Boolean> expected = ExpectedConditions.not(ExpectedConditions.textToBePresentInElementLocated(By.xpath(xpathImporte), importeSubTotalPrevio));
+			new WebDriverWait(driver, maxSecondsToWait).until(expected);
+			return true;
+		}
+		catch (Exception e) {
+			return false;
+		}
+	}
 
 	@SuppressWarnings("static-access")
 	public void clearArticulos() throws Exception {
@@ -183,12 +183,12 @@ public abstract class SecBolsa extends PageObjTM {
 
 		setBolsaToStateIfNotYet(StateBolsa.Closed);
 	}
-    
-    public void click1erArticuloBolsa() throws Exception {
-    	getLineasArtBolsa().clickArticle(1);
-        waitForPageLoaded(driver);
-    }
-    
+	
+	public void click1erArticuloBolsa() throws Exception {
+		getLineasArtBolsa().clickArticle(1);
+		waitForPageLoaded(driver);
+	}
+	
 	public void clickAspaMobil() {
 		click(By.xpath(XPathAspa), driver).exec();
 	}

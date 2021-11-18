@@ -28,7 +28,7 @@ public class Ayuda {
 		dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
 		return dCtxSh;
 	}
-    
+	
 //	@Test(
 //		groups = { "Ayuda", "Canal:all_App:shop" }, alwaysRun = true,
 //		description="Verificar que los elementos de la página ayuda están correctamente presentes")

@@ -19,10 +19,10 @@ public class PageChequeRegaloInputDataOld extends PageChequeRegaloInputData impl
 	private static final String XPathInputConfEmail = "//input[@name[contains(.,'email2')]]";
 	private static final String XPathInputMensaje = "//textarea[@name[contains(.,'mensaje')]]";
 	
-    public PageChequeRegaloInputDataOld(WebDriver driver) {
-    	super(driver);
-    }
-    
+	public PageChequeRegaloInputDataOld(WebDriver driver) {
+		super(driver);
+	}
+	
 	@Override
 	public boolean isPageCorrectUntil(int maxSeconds) {
 		return state(State.Present, By.xpath(XPathContent)).wait(maxSeconds).check();

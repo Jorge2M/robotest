@@ -13,37 +13,37 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecSoyNuevo {
 	
-    public enum ActionNewsL {activate, deactivate}
+	public enum ActionNewsL {activate, deactivate}
 
-    static String XPathFormIdent = "//div[@class='register' or @id='registerCheckOut']//form"; //desktop y mobil
-    static String XPathInputEmail = XPathFormIdent + "//input[@id[contains(.,'expMail')]]";
-    static String XPathInputContent = XPathFormIdent + "//span[@class='eac-cval']";
-    static String XPathBotonContinueMobil = "//div[@id='registerCheckOut']//div[@class='submit']/a";
-    static String XPathBotonContinueDesktop = "//div[@class='register']//div[@class='submit']/input";
-    private static String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
-    private static String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
-    
-    public static String getXPath_checkPubliNewsletter(Channel channel, boolean active) {
-        String sufix = "";
-        if (channel.isDevice()) {
-            if (active) {
-                sufix = " on";
-            }
-            return ("//div[@class[contains(.,'subscribe__checkbox" + sufix + "')]]");
-        }
-        
-        if (active) {
-            sufix = "active";
-        }
-        return ("//div[@id='publicidad']//div[@class[contains(.,'checkbox__image')] and @class[contains(.,'" + sufix + "')]]");
-    }
-    
-    public static String getXPath_BotonContinue(Channel channel) {
-        if (channel==Channel.mobile) {
-            return XPathBotonContinueMobil;
-        }
-        return XPathBotonContinueDesktop;
-    }
+	static String XPathFormIdent = "//div[@class='register' or @id='registerCheckOut']//form"; //desktop y mobil
+	static String XPathInputEmail = XPathFormIdent + "//input[@id[contains(.,'expMail')]]";
+	static String XPathInputContent = XPathFormIdent + "//span[@class='eac-cval']";
+	static String XPathBotonContinueMobil = "//div[@id='registerCheckOut']//div[@class='submit']/a";
+	static String XPathBotonContinueDesktop = "//div[@class='register']//div[@class='submit']/input";
+	private static String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
+	private static String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
+	
+	public static String getXPath_checkPubliNewsletter(Channel channel, boolean active) {
+		String sufix = "";
+		if (channel.isDevice()) {
+			if (active) {
+				sufix = " on";
+			}
+			return ("//div[@class[contains(.,'subscribe__checkbox" + sufix + "')]]");
+		}
+		
+		if (active) {
+			sufix = "active";
+		}
+		return ("//div[@id='publicidad']//div[@class[contains(.,'checkbox__image')] and @class[contains(.,'" + sufix + "')]]");
+	}
+	
+	public static String getXPath_BotonContinue(Channel channel) {
+		if (channel==Channel.mobile) {
+			return XPathBotonContinueMobil;
+		}
+		return XPathBotonContinueDesktop;
+	}
 
 	public static boolean isFormIdentUntil(WebDriver driver, int maxSeconds) { 
 		return (state(Present, By.xpath(XPathFormIdent), driver).wait(maxSeconds).check());
@@ -54,28 +54,28 @@ public class SecSoyNuevo {
 		return (state(Present, By.xpath(xpathCheckActive), driver).check());
 	}
 
-    /**
-     * Marca/desmarca el check de la publicidad (Newsletter)
-     */
-    public static void setCheckPubliNewsletter(WebDriver driver, ActionNewsL action, Channel channel) {
-        boolean isActivated = isCheckedPubliNewsletter(driver, channel);
-        switch (action) {
-        case activate:
-            if (!isActivated) {
-                String xpathCheck = getXPath_checkPubliNewsletter(channel, false/*active*/);
-                driver.findElement(By.xpath(xpathCheck)).click();
-            }
-            break;
-        case deactivate:
-            if (isActivated) {
-                String xpathCheck = getXPath_checkPubliNewsletter(channel, true/*active*/);
-                driver.findElement(By.xpath(xpathCheck)).click();
-            }
-            break;
-        default:
-            break;
-        }
-    }
+	/**
+	 * Marca/desmarca el check de la publicidad (Newsletter)
+	 */
+	public static void setCheckPubliNewsletter(WebDriver driver, ActionNewsL action, Channel channel) {
+		boolean isActivated = isCheckedPubliNewsletter(driver, channel);
+		switch (action) {
+		case activate:
+			if (!isActivated) {
+				String xpathCheck = getXPath_checkPubliNewsletter(channel, false/*active*/);
+				driver.findElement(By.xpath(xpathCheck)).click();
+			}
+			break;
+		case deactivate:
+			if (isActivated) {
+				String xpathCheck = getXPath_checkPubliNewsletter(channel, true/*active*/);
+				driver.findElement(By.xpath(xpathCheck)).click();
+			}
+			break;
+		default:
+			break;
+		}
+	}
 
 	public static void inputEmail(String email, Channel channel, WebDriver driver) {
 		inputEmailOneTime(email, driver);

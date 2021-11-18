@@ -17,57 +17,57 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
  */
 
 public class PageReembolsos {
-    
-    public enum TypeReembolso {Transferencia, StoreCredit}
+	
+	public enum TypeReembolso {Transferencia, StoreCredit}
 
-    static String XPathRefundsPanel = "//div[@id[contains(.,'refunds-panel')]]";
-    static String XPathInputBanco = "//input[@id[contains(.,'bankName')] and @type='text']";
-    static String XPathTextBancoAfterSave = "//div[@id='btBankDetails']//strong[1]";
-    static String XPathInputTitular = "//input[@id[contains(.,'accountHolder')] and @type='text']";
-    static String XPathTitularAfterSave = "//div[@id='btBankDetails']//strong[2]";
-    static String XPathInputIBAN = "//input[@id[contains(.,'completeAccount')] and @type='text']";
-    static String XPathInputPassport = "//input[@id[contains(.,'passport')] and @type='text']";
-    static String XPathBirthdayDayBlock = "//div[@class='birthdayDay']";
-    static String XPathSelectDayBirth = "//select[@id[contains(.,'dateOfBirth-day')]]";
-    static String XPathSelectMonthBirth = "//select[@id[contains(.,'dateOfBirth-month')]]";
-    static String XPathSelectYearBirth = "//select[@id[contains(.,'dateOfBirth-year')]]";
-    static String XPathTextIBANAfterSave = "//div[@id='btBankDetails']//strong[3]";
-    static String XPathButtonSaveTransf = "//button[@id[contains(.,'bankTransferSubmit')]]";
-    static String XPathModalConfTransf = "//div[@id[contains(.,'Pedidos:confirmation-modal')]]";
-    static String XPathRadioStoreCredit = "//div[@class[contains(.,'refund-check')]]//input[@value='store-credit']";
-    static String XPathRadioTransferencia = "//div[@class[contains(.,'refund-check')]]//input[@value='bank-transfer']";
-    static String XPathSaveButtonStoreCredit = "//button[@data-input-id='customer-balance']";
-    
-    public static String getXPathBlock(TypeReembolso typeReembolso) {
-    	return (getXPathRadio(typeReembolso) + "/..");
-    }
-    
-    public static String getXPathRadio(TypeReembolso typeReembolso) {
-        switch (typeReembolso) {
-        case StoreCredit:
-            return XPathRadioStoreCredit;
-        case Transferencia:
-            return XPathRadioTransferencia;
-        default:
-            return "";
-        }
-    }
-    
-    /**
-     * @return el elemento que contiene el texto con el saldo a nivel del StoreCredit
-     */
-    public static String getXPATH_textoImporteStoreCredit() {
-        //El tag no tiene ningún atributo así que el XPATH resultante no es muy elegante
-        return (getXPathRadio(TypeReembolso.StoreCredit) + "/../..//strong");
-    }
-    
-    /**
-     * @param checked indica si queremos el XPath de un div con un radio checkeado o no
-     */
-    public static String getXPath_divRadioCheckedTypeReembolso(TypeReembolso typeReembolso) {
-        String xpathRadio = getXPathRadio(typeReembolso);
-        return (xpathRadio + "/ancestor::div[@class[contains(.,'custom-radio--checked')]]");
-    }
+	static String XPathRefundsPanel = "//div[@id[contains(.,'refunds-panel')]]";
+	static String XPathInputBanco = "//input[@id[contains(.,'bankName')] and @type='text']";
+	static String XPathTextBancoAfterSave = "//div[@id='btBankDetails']//strong[1]";
+	static String XPathInputTitular = "//input[@id[contains(.,'accountHolder')] and @type='text']";
+	static String XPathTitularAfterSave = "//div[@id='btBankDetails']//strong[2]";
+	static String XPathInputIBAN = "//input[@id[contains(.,'completeAccount')] and @type='text']";
+	static String XPathInputPassport = "//input[@id[contains(.,'passport')] and @type='text']";
+	static String XPathBirthdayDayBlock = "//div[@class='birthdayDay']";
+	static String XPathSelectDayBirth = "//select[@id[contains(.,'dateOfBirth-day')]]";
+	static String XPathSelectMonthBirth = "//select[@id[contains(.,'dateOfBirth-month')]]";
+	static String XPathSelectYearBirth = "//select[@id[contains(.,'dateOfBirth-year')]]";
+	static String XPathTextIBANAfterSave = "//div[@id='btBankDetails']//strong[3]";
+	static String XPathButtonSaveTransf = "//button[@id[contains(.,'bankTransferSubmit')]]";
+	static String XPathModalConfTransf = "//div[@id[contains(.,'Pedidos:confirmation-modal')]]";
+	static String XPathRadioStoreCredit = "//div[@class[contains(.,'refund-check')]]//input[@value='store-credit']";
+	static String XPathRadioTransferencia = "//div[@class[contains(.,'refund-check')]]//input[@value='bank-transfer']";
+	static String XPathSaveButtonStoreCredit = "//button[@data-input-id='customer-balance']";
+	
+	public static String getXPathBlock(TypeReembolso typeReembolso) {
+		return (getXPathRadio(typeReembolso) + "/..");
+	}
+	
+	public static String getXPathRadio(TypeReembolso typeReembolso) {
+		switch (typeReembolso) {
+		case StoreCredit:
+			return XPathRadioStoreCredit;
+		case Transferencia:
+			return XPathRadioTransferencia;
+		default:
+			return "";
+		}
+	}
+	
+	/**
+	 * @return el elemento que contiene el texto con el saldo a nivel del StoreCredit
+	 */
+	public static String getXPATH_textoImporteStoreCredit() {
+		//El tag no tiene ningún atributo así que el XPATH resultante no es muy elegante
+		return (getXPathRadio(TypeReembolso.StoreCredit) + "/../..//strong");
+	}
+	
+	/**
+	 * @param checked indica si queremos el XPath de un div con un radio checkeado o no
+	 */
+	public static String getXPath_divRadioCheckedTypeReembolso(TypeReembolso typeReembolso) {
+		String xpathRadio = getXPathRadio(typeReembolso);
+		return (xpathRadio + "/ancestor::div[@class[contains(.,'custom-radio--checked')]]");
+	}
 
 	public static boolean isPage(WebDriver driver) {
 		return (state(Present, By.xpath(XPathRefundsPanel), driver).check());
@@ -81,10 +81,10 @@ public class PageReembolsos {
 		return (state(Visible, By.xpath(XPathInputBanco), driver).check());
 	}
 
-    public static void typeInputBanco(WebDriver driver, String banco) {
-        driver.findElement(By.xpath(XPathInputBanco)).clear();
-        driver.findElement(By.xpath(XPathInputBanco)).sendKeys(banco);
-    }
+	public static void typeInputBanco(WebDriver driver, String banco) {
+		driver.findElement(By.xpath(XPathInputBanco)).clear();
+		driver.findElement(By.xpath(XPathInputBanco)).sendKeys(banco);
+	}
 
 	public static boolean isVisibleTextBancoUntil(int maxSecondsToWait, WebDriver driver) {
 		return (state(Visible, By.xpath(XPathTextBancoAfterSave), driver)

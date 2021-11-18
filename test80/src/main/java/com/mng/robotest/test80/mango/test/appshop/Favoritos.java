@@ -94,7 +94,7 @@ public class Favoritos implements Serializable {
 		DataBag dataBolsa = new DataBag();
 
 		AccesoStpV.oneStep(dCtxSh, false, driver);
-    	SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
+		SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
 		secBolsaStpV.clear();
 
 		PageFavoritosStpV pageFavoritosStpV = PageFavoritosStpV.getNew(driver);

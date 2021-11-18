@@ -35,7 +35,7 @@ public class PageGestionarClientesStpV {
 		saveImagePage=SaveWhen.Always)
 	public static void inputDniAndClickBuscar(String dni, WebDriver driver) throws Exception {
 		int waitSeconds = 20;
-		PageGestionarClientes.inputDniAndClickBuscarButton(dni, waitSeconds, driver);     
+		PageGestionarClientes.inputDniAndClickBuscarButton(dni, waitSeconds, driver);	 
 		checkAfterSearchByDni(dni, driver);
 	}
 	
@@ -96,7 +96,7 @@ public class PageGestionarClientesStpV {
 		String idCliente;
 		int waitSeconds = 3;
 		idCliente = PageGestionarClientes.getIdClienteTablaFromDni(dni, driver);
-		PageGestionarClientes.clickDetallesButtonAndWaitSeconds(waitSeconds, driver);    
+		PageGestionarClientes.clickDetallesButtonAndWaitSeconds(waitSeconds, driver);	
 		checkAfterClickDetalles(dni, idCliente, driver);
 	}
 	

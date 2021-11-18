@@ -13,18 +13,18 @@ public class DataSearchDeliveryPoint {
 	public TipoTransporte tipoTransporte;
 		
 	public static DataSearchDeliveryPoint getInstance(Pago pago, AppEcom app, Pais pais) {
-        DataSearchDeliveryPoint dataDp = new DataSearchDeliveryPoint();
-        dataDp.tipoTransporte = pago.getTipoEnvioType(app);
-        dataDp.typeData = pago.getTipoEnvioType(app).getDataSearchDp();
-        switch (dataDp.typeData) {
-        case CodigoPostal:
-        	dataDp.data = pais.getCodpos();
-        	break;
-        case Provincia:
-        	dataDp.data = pago.getProvinciaEnvio();
-        	break;
-        }
-        
-        return dataDp;
+		DataSearchDeliveryPoint dataDp = new DataSearchDeliveryPoint();
+		dataDp.tipoTransporte = pago.getTipoEnvioType(app);
+		dataDp.typeData = pago.getTipoEnvioType(app).getDataSearchDp();
+		switch (dataDp.typeData) {
+		case CodigoPostal:
+			dataDp.data = pais.getCodpos();
+			break;
+		case Provincia:
+			dataDp.data = pago.getProvinciaEnvio();
+			break;
+		}
+		
+		return dataDp;
 	}
 }

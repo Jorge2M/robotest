@@ -11,16 +11,16 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecEps extends PageObjTM {
 
-    private final static String XPathInputBanco = "//div[@id='eps-bank-selector']";
-    private final static String iniXPathSelectOptionBanco = XPathInputBanco + "//option[text()[contains(.,'";
-    
-    public SecEps(WebDriver driver) {
-    	super(driver);
-    }
-    
-    private String getXPathSelectOptionBanco(String banco) {
-    	return iniXPathSelectOptionBanco + banco + "')]]";
-    }
+	private final static String XPathInputBanco = "//div[@id='eps-bank-selector']";
+	private final static String iniXPathSelectOptionBanco = XPathInputBanco + "//option[text()[contains(.,'";
+	
+	public SecEps(WebDriver driver) {
+		super(driver);
+	}
+	
+	private String getXPathSelectOptionBanco(String banco) {
+		return iniXPathSelectOptionBanco + banco + "')]]";
+	}
 
 	public void selectBanco(String nombreBanco) {
 		String XPathSelectOptionBanco = getXPathSelectOptionBanco(nombreBanco);

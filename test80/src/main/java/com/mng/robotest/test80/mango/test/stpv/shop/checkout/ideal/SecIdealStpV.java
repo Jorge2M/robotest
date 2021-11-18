@@ -20,18 +20,18 @@ public class SecIdealStpV {
 	@Validation (
 		description="Aparece el bloque de selección del banco",
 		level=State.Defect)
-    public boolean validateIsSectionOk() {
+	public boolean validateIsSectionOk() {
 		int maxSeconds = 1;
 		return (secIdeal.isVisibleSelectorOfBank(maxSeconds));
-    }
-    
-    /**
-     * @param el valor de las opciones del banco a seleccionar contiene el "value" del listBox...
-     */
+	}
+	
+	/**
+	 * @param el valor de las opciones del banco a seleccionar contiene el "value" del listBox...
+	 */
 	@Step (
 		description="Seleccionar el banco \"#{bancoSeleccionado}\"", 
-        expected="El resultado es correcto")
-    public void clickBanco(BancoSeleccionado bancoSeleccionado) {
+		expected="El resultado es correcto")
+	public void clickBanco(BancoSeleccionado bancoSeleccionado) {
 		secIdeal.clickBancoByValue(bancoSeleccionado);
-    }
+	}
 }

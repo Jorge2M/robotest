@@ -11,28 +11,28 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 
 public class PageConsultaIdEans {
-    
+	
 	static String XPathTituloPagina = "//form[@id='formTempl']//td[text()[contains(.,'s / EANS')]]";
-    static String XPathDivBusquedaExcel = "//div[@id='ExcelContent']";
-    static String XPathDivBusquedaRapida = "//div[@id='busquedaRapidaContent']";
-    
-    static String XPathBotonBuscarDatosContacto = "//input[@value[contains(.,'Buscar datos de contacto')]]";
-    static String XPathBotonBuscarIdentificadoresPedido = "//input[@value[contains(.,'Buscar identificadores de pedidos')]]";
-    static String XPathBotonBuscarTrackings = "//input[@value[contains(.,'Buscar trackings')]]";
-    static String XPathBotonBuscarDatosEan = "//input[@value[contains(.,'Buscar datos EAN')]]";
-    
-    static String XPathTextAreaBusquedaRapida = "//textarea[@name='form:j_id_1u']";
-    
-    static String XPathHeaderTablaID = "//table/thead/tr[1]/th[text()[contains(.,'ID')]]";
-    //static String iniXPathPedidosTabla = "//tbody[@id='form:j_id_30:tbody_element']/tr/td[text()[contains(.,'";
-    static String XPathLineaPedidoTablaID = XPathHeaderTablaID + "/../../../tbody/tr"; 
-    
-    
+	static String XPathDivBusquedaExcel = "//div[@id='ExcelContent']";
+	static String XPathDivBusquedaRapida = "//div[@id='busquedaRapidaContent']";
+	
+	static String XPathBotonBuscarDatosContacto = "//input[@value[contains(.,'Buscar datos de contacto')]]";
+	static String XPathBotonBuscarIdentificadoresPedido = "//input[@value[contains(.,'Buscar identificadores de pedidos')]]";
+	static String XPathBotonBuscarTrackings = "//input[@value[contains(.,'Buscar trackings')]]";
+	static String XPathBotonBuscarDatosEan = "//input[@value[contains(.,'Buscar datos EAN')]]";
+	
+	static String XPathTextAreaBusquedaRapida = "//textarea[@name='form:j_id_1u']";
+	
+	static String XPathHeaderTablaID = "//table/thead/tr[1]/th[text()[contains(.,'ID')]]";
+	//static String iniXPathPedidosTabla = "//tbody[@id='form:j_id_30:tbody_element']/tr/td[text()[contains(.,'";
+	static String XPathLineaPedidoTablaID = XPathHeaderTablaID + "/../../../tbody/tr"; 
+	
+	
   //######################  PARTE DATOS CONTACTO ###################### 
-    
-    public static String getXPathLineaPedido(String pedido) {
-        return (XPathLineaPedidoTablaID + "/td//self::*[text()[contains(.,'" + pedido + "')]]");
-    }
+	
+	public static String getXPathLineaPedido(String pedido) {
+		return (XPathLineaPedidoTablaID + "/td//self::*[text()[contains(.,'" + pedido + "')]]");
+	}
 
 	public static boolean isVisibleTituloPagina(WebDriver driver) {
 		return (state(Visible, By.xpath(XPathTituloPagina), driver).check());
@@ -52,24 +52,24 @@ public class PageConsultaIdEans {
 	}
 
 	public static void inputPedidosAndClickBuscarDatos(List<String> pedidosPrueba, WebDriver driver) {
-	    inputPedidos(pedidosPrueba, driver);
-	    clickBuscarDatosContactoButton(driver);
+		inputPedidos(pedidosPrueba, driver);
+		clickBuscarDatosContactoButton(driver);
 	}
 	
 	public static void inputPedidos(List<String> pedidosPrueba, WebDriver driver) {
-	    driver.findElement(By.xpath(XPathTextAreaBusquedaRapida)).clear();
-	    for (String pedido : pedidosPrueba) {
-	    	driver.findElement(By.xpath(XPathTextAreaBusquedaRapida)).sendKeys(pedido);
-	        driver.findElement(By.xpath(XPathTextAreaBusquedaRapida)).sendKeys(Keys.ENTER);
-	    }
+		driver.findElement(By.xpath(XPathTextAreaBusquedaRapida)).clear();
+		for (String pedido : pedidosPrueba) {
+			driver.findElement(By.xpath(XPathTextAreaBusquedaRapida)).sendKeys(pedido);
+			driver.findElement(By.xpath(XPathTextAreaBusquedaRapida)).sendKeys(Keys.ENTER);
+		}
 	}
 	
 	public static void clickBuscarDatosContactoButton(WebDriver driver) {
-            driver.findElement(By.xpath(XPathBotonBuscarDatosContacto)).click();
+			driver.findElement(By.xpath(XPathBotonBuscarDatosContacto)).click();
 	}
 
 	public static int getLineasPedido(WebDriver driver) {
-	    return (driver.findElements(By.xpath(XPathLineaPedidoTablaID)).size());
+		return (driver.findElements(By.xpath(XPathLineaPedidoTablaID)).size());
 	}
 
 	public static boolean isPedidosTablaCorrecto(List<String> pedidosPrueba, WebDriver driver) {
@@ -87,7 +87,7 @@ public class PageConsultaIdEans {
 
 	public static void inputPedidosAndClickBuscarIdentificadores (List<String> pedidosPrueba, WebDriver driver) {
 		inputPedidos(pedidosPrueba, driver);
-	    clickBuscarIdentificadoresPedidoButton(driver);
+		clickBuscarIdentificadoresPedidoButton(driver);
 	}
 	
 	private static void clickBuscarIdentificadoresPedidoButton(WebDriver driver) {
@@ -99,7 +99,7 @@ public class PageConsultaIdEans {
 
 	public static void inputPedidosAndClickBuscarTrackings(List<String> pedidosPrueba, WebDriver driver) {
 		inputPedidos(pedidosPrueba, driver);
-	    clickBuscarTrackingsButton(driver);
+		clickBuscarTrackingsButton(driver);
 	}
 	
 	private static void clickBuscarTrackingsButton(WebDriver driver) {

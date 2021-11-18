@@ -139,7 +139,7 @@ public class MenusUserWrapper extends PageObjTM {
 	}
 	
 	public LoyaltyData checkAndGetLoyaltyPointsUntil(int maxSeconds) throws Exception {
-    	//TODO Workarround for manage shadow-dom Elements. Remove when WebDriver supports shadow-dom
+		//TODO Workarround for manage shadow-dom Elements. Remove when WebDriver supports shadow-dom
 		LoyaltyData loyaltyData = new LoyaltyData(false, 0);
 		By byLoyaltyUserMenu = By.tagName("loyalty-user-menu");
 		for (int i=0; i<maxSeconds; i++) {
@@ -147,35 +147,35 @@ public class MenusUserWrapper extends PageObjTM {
 			if (blockLoyalty!=null) {
 				//if (WebdrvWrapp.isElementPresent(driver, byLoyaltyUserMenu)) {
 				//WebElement shadowHost = driver.findElement(byLoyaltyUserMenu);
-		    	Object shadowLoyaltyPoints = ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot", blockLoyalty);
-		    	//TODO pendiente el grupo de Loyalty nos proporcione un id
-		    	String innerHTML;
-		    	if (shadowLoyaltyPoints instanceof WebElement) {
-		    		//Caso de Chrome
-			    	WebElement loyaltyPoints = (WebElement)shadowLoyaltyPoints;
-			    	innerHTML = loyaltyPoints.getAttribute("innerHTML");
-		    	}
-		    	else {
-			    	//Caso de Firefox
-		    		innerHTML = shadowLoyaltyPoints.toString();
-		    	}
-		    	int numberBlocksLoyalty = driver.findElements(By.tagName("loyalty-user-menu")).size();
-		    	Log4jTM.getLogger().info("Contenido del elemento HTML loyalty-user-menu  " + innerHTML);
-		    	Log4jTM.getLogger().info("Número de bloques de Loyalty " + numberBlocksLoyalty);
-		        Pattern pattern = Pattern.compile("tienes (.*?) Likes");
-		        Matcher matcher = pattern.matcher(innerHTML);
-		    	if (matcher.find()) {
-		    		loyaltyData.isPresent = true;
-		    		float pointsFloat = ImporteScreen.getFloatFromImporteMangoScreen(matcher.group(1));
-		    		loyaltyData.numberPoints = (int)pointsFloat;
-		    		break;
-		    	}
-	    	}
+				Object shadowLoyaltyPoints = ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot", blockLoyalty);
+				//TODO pendiente el grupo de Loyalty nos proporcione un id
+				String innerHTML;
+				if (shadowLoyaltyPoints instanceof WebElement) {
+					//Caso de Chrome
+					WebElement loyaltyPoints = (WebElement)shadowLoyaltyPoints;
+					innerHTML = loyaltyPoints.getAttribute("innerHTML");
+				}
+				else {
+					//Caso de Firefox
+					innerHTML = shadowLoyaltyPoints.toString();
+				}
+				int numberBlocksLoyalty = driver.findElements(By.tagName("loyalty-user-menu")).size();
+				Log4jTM.getLogger().info("Contenido del elemento HTML loyalty-user-menu  " + innerHTML);
+				Log4jTM.getLogger().info("Número de bloques de Loyalty " + numberBlocksLoyalty);
+				Pattern pattern = Pattern.compile("tienes (.*?) Likes");
+				Matcher matcher = pattern.matcher(innerHTML);
+				if (matcher.find()) {
+					loyaltyData.isPresent = true;
+					float pointsFloat = ImporteScreen.getFloatFromImporteMangoScreen(matcher.group(1));
+					loyaltyData.numberPoints = (int)pointsFloat;
+					break;
+				}
+			}
 			
-	    	Thread.sleep(1000);
+			Thread.sleep(1000);
 		}
-    	
-    	return loyaltyData;
+		
+		return loyaltyData;
 	}
 	
 	public class LoyaltyData {

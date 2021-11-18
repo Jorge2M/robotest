@@ -42,11 +42,11 @@ public class SectionCookiesStpV {
 		
 		driver.manage().addCookie(
 			  new Cookie.Builder(cookie.getName(), newValueCookie)
-			    .domain(cookie.getDomain())
-			    .expiresOn(cookie.getExpiry())
-			    .path(cookie.getPath())
-			    .isSecure(cookie.isSecure())
-			    .build());
+				.domain(cookie.getDomain())
+				.expiresOn(cookie.getExpiry())
+				.path(cookie.getPath())
+				.isSecure(cookie.isSecure())
+				.build());
 	}
 	
 	@Step (
@@ -61,8 +61,8 @@ public class SectionCookiesStpV {
 	@Validation (
 		description="No es visible la sección inferior para la configuración de las cookies",
 		level=State.Warn)
-    public boolean checkSectionInvisible() {
+	public boolean checkSectionInvisible() {
 		return (sectionCookies.isInvisible(2));
-    }
+	}
 	
 }

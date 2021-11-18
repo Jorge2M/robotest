@@ -14,95 +14,95 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.footer.PageFromFooter;
 
 public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData implements PageFromFooter {
 
-    private enum ConsultaSaldo implements ElementPage {
-        ir("//button[@class='sg-t-btn' and text()[contains(.,'Consultar')]]"),
-        numeroTarjeta("//input[@id='cardNumber']"),
-        cvvTarjeta("//input[@id='cvvCode']"),
-        validar("//button[text()[contains(.,'Validar')]]"),
-        volver("//button[@class='gc-header-back']"),
-        cvvInputError("//span[@class[contains(.,'gc-error-message--show')]]"),
-        mensajeTarjetaSinSaldo("//span[@class[contains(.,'gc-error-message--show')] and text()[contains(.,'no tiene saldo')]]");
+	private enum ConsultaSaldo implements ElementPage {
+		ir("//button[@class='sg-t-btn' and text()[contains(.,'Consultar')]]"),
+		numeroTarjeta("//input[@id='cardNumber']"),
+		cvvTarjeta("//input[@id='cvvCode']"),
+		validar("//button[text()[contains(.,'Validar')]]"),
+		volver("//button[@class='gc-header-back']"),
+		cvvInputError("//span[@class[contains(.,'gc-error-message--show')]]"),
+		mensajeTarjetaSinSaldo("//span[@class[contains(.,'gc-error-message--show')] and text()[contains(.,'no tiene saldo')]]");
 
-        By by;
-        ConsultaSaldo(String xpath){
-            by = By.xpath(xpath);
-        }
+		By by;
+		ConsultaSaldo(String xpath){
+			by = By.xpath(xpath);
+		}
 
-        @Override
-        public By getBy() {
-            return by;
-        }
-    }
+		@Override
+		public By getBy() {
+			return by;
+		}
+	}
 
-    private enum ElementCheque implements ElementPage {
-    	titulo(
-    		"//h1[text()='Tarjeta Regalo']",
-    		null),
-        paginaForm(
-        	"//h1[text()[contains(.,'Tarjeta Regalo')]]",
-        	"//h1[text()[contains(.,'Tarjeta Regalo')]]"),
-        compraAhora(
-        	"//button[text()[contains(.,'Comprar ahora')]]",
-        	null);
+	private enum ElementCheque implements ElementPage {
+		titulo(
+			"//h1[text()='Tarjeta Regalo']",
+			null),
+		paginaForm(
+			"//h1[text()[contains(.,'Tarjeta Regalo')]]",
+			"//h1[text()[contains(.,'Tarjeta Regalo')]]"),
+		compraAhora(
+			"//button[text()[contains(.,'Comprar ahora')]]",
+			null);
 
-        By byDesktop;
-        By byMobil;
-        ElementCheque(String xpathDesktop, String xpathMobil) {
-            byDesktop = By.xpath(xpathDesktop);
-            if (xpathMobil!=null) {
-            	byMobil = By.xpath(xpathMobil);
-            }
-        }
+		By byDesktop;
+		By byMobil;
+		ElementCheque(String xpathDesktop, String xpathMobil) {
+			byDesktop = By.xpath(xpathDesktop);
+			if (xpathMobil!=null) {
+				byMobil = By.xpath(xpathMobil);
+			}
+		}
 
-        @Override
-        public By getBy() {
-            return byDesktop;
-        }
+		@Override
+		public By getBy() {
+			return byDesktop;
+		}
 
-        @Override
-        public By getBy(Channel channel) {
-            if (channel.isDevice() && this.byMobil != null) {
-                return byMobil;
-            }
-            return byDesktop;
-        }
-    }
+		@Override
+		public By getBy(Channel channel) {
+			if (channel.isDevice() && this.byMobil != null) {
+				return byMobil;
+			}
+			return byDesktop;
+		}
+	}
 
-    private enum InputCheque implements ElementPage {
-        dataProof("//p[text()[contains(.,'Rellena')]]"),
-        nombre("//input[@id='firstName']"),
-        apellidos("//input[@id='surnames']"),
-        email("//input[@id='email']"),
-        repetirEmail("//input[@id='email2']"),
-        mensaje("//textarea[@id='message']"),
-        comprar("//button[text()='Comprar ahora']");
+	private enum InputCheque implements ElementPage {
+		dataProof("//p[text()[contains(.,'Rellena')]]"),
+		nombre("//input[@id='firstName']"),
+		apellidos("//input[@id='surnames']"),
+		email("//input[@id='email']"),
+		repetirEmail("//input[@id='email2']"),
+		mensaje("//textarea[@id='message']"),
+		comprar("//button[text()='Comprar ahora']");
 
-        By by;
-        InputCheque(String xpath) {
-            by = By.xpath(xpath);
-        }
+		By by;
+		InputCheque(String xpath) {
+			by = By.xpath(xpath);
+		}
 
-        @Override
-        public By getBy() {
-            return by;
-        }
-    }
-    
-    public PageChequeRegaloInputDataNew(WebDriver driver) {
-    	super(driver);
-    }
-    
-    //Función específica
-    public void clickConsultaSaldo() {
-    	click(ConsultaSaldo.ir.getBy()).exec();
-    }
-    
-    //Función específica
-    public boolean isInputTarjetaVisible(int maxSeconds) {
-    	return state(Visible, ConsultaSaldo.numeroTarjeta.getBy()).wait(maxSeconds).check();
-    }
-    
-    //Función específica
+		@Override
+		public By getBy() {
+			return by;
+		}
+	}
+	
+	public PageChequeRegaloInputDataNew(WebDriver driver) {
+		super(driver);
+	}
+	
+	//Función específica
+	public void clickConsultaSaldo() {
+		click(ConsultaSaldo.ir.getBy()).exec();
+	}
+	
+	//Función específica
+	public boolean isInputTarjetaVisible(int maxSeconds) {
+		return state(Visible, ConsultaSaldo.numeroTarjeta.getBy()).wait(maxSeconds).check();
+	}
+	
+	//Función específica
 	public void introducirTarjetaConsultaSaldo(String numTarjeta) {
 		WebElement inputNumTarjeta = driver.findElement(ConsultaSaldo.numeroTarjeta.getBy());
 		inputNumTarjeta.clear();
@@ -183,12 +183,12 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 			}
 		}
 	}
-    
-    //----
-    
-    public static String getXPathRadioImporte(Importe importe) {
-        return ("//span[@class='gc-text' and text()[contains(.,'" + importe.getImporte() + "')]]");
-    }
+	
+	//----
+	
+	public static String getXPathRadioImporte(Importe importe) {
+		return ("//span[@class='gc-text' and text()[contains(.,'" + importe.getImporte() + "')]]");
+	}
 
 	@Override
 	public String getName() {

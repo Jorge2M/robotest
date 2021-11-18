@@ -5,10 +5,10 @@ import org.openqa.selenium.WebDriver;
 
 
 public class PageErrorPage {
-    static String XPathIpNode = "//h2[text()[contains(.,'IP :')]]/following-sibling::*[1]";
-    
-    public static String getIpNode(WebDriver driver) {
-        return (driver.findElement(By.xpath(XPathIpNode)).getText());
-    }
-    
+	static String XPathIpNode = "//h2[text()[contains(.,'IP :')]]/following-sibling::*[1]";
+	
+	public static String getIpNode(WebDriver driver) {
+		return (driver.findElement(By.xpath(XPathIpNode)).getText());
+	}
+	
 }

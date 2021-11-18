@@ -10,43 +10,43 @@ public class SecKrediKarti extends SecTarjetaPciInIframe {
 
 	private final Channel channel;
 	
-    final static String XPathCapaPagoPlazoMobil = "//table[@class[contains(.,'installment')]]";
-    final static String XPathRadioPagoPlazoMobil = XPathCapaPagoPlazoMobil + "//div[@class[contains(.,'installment-checkbox')]]";
-    final static String XPathCapaPagoPlazoDesktop = "//div[@class[contains(.,'installments-content')]]"; 
-    final static String XPathRadioPagoPlazoDesktop = XPathCapaPagoPlazoDesktop + "//input[@type='radio' and @name='installment']";
-    
-    private SecKrediKarti(Channel channel, WebDriver driver) {
-    	super(channel, driver);
-    	this.channel = channel;
-    }
-    
-    public static SecKrediKarti getNew(Channel channel, WebDriver driver) {
-    	return (new SecKrediKarti(channel, driver));
-    }
-    
-    private String getXPathCapaPagoPlazo() {
-    	switch (channel) {
-    	case desktop:
-    		return XPathCapaPagoPlazoDesktop;
-    	default:
-    	case mobile:
-    		return XPathCapaPagoPlazoMobil;
-    	}
-    }
-    
-    private String getXPathRadioPagoPlazo() {
-    	switch (channel) {
-    	case desktop:
-    		return XPathRadioPagoPlazoDesktop;
-    	default:
-    	case mobile:
-    		return XPathRadioPagoPlazoMobil;
-    	}
-    }
-    
-    private String getXPathRadioPagoAPlazo(int numRadio) {
-    	return ("(" + getXPathRadioPagoPlazo() + ")[" + numRadio + "]");
-    }
+	final static String XPathCapaPagoPlazoMobil = "//table[@class[contains(.,'installment')]]";
+	final static String XPathRadioPagoPlazoMobil = XPathCapaPagoPlazoMobil + "//div[@class[contains(.,'installment-checkbox')]]";
+	final static String XPathCapaPagoPlazoDesktop = "//div[@class[contains(.,'installments-content')]]"; 
+	final static String XPathRadioPagoPlazoDesktop = XPathCapaPagoPlazoDesktop + "//input[@type='radio' and @name='installment']";
+	
+	private SecKrediKarti(Channel channel, WebDriver driver) {
+		super(channel, driver);
+		this.channel = channel;
+	}
+	
+	public static SecKrediKarti getNew(Channel channel, WebDriver driver) {
+		return (new SecKrediKarti(channel, driver));
+	}
+	
+	private String getXPathCapaPagoPlazo() {
+		switch (channel) {
+		case desktop:
+			return XPathCapaPagoPlazoDesktop;
+		default:
+		case mobile:
+			return XPathCapaPagoPlazoMobil;
+		}
+	}
+	
+	private String getXPathRadioPagoPlazo() {
+		switch (channel) {
+		case desktop:
+			return XPathRadioPagoPlazoDesktop;
+		default:
+		case mobile:
+			return XPathRadioPagoPlazoMobil;
+		}
+	}
+	
+	private String getXPathRadioPagoAPlazo(int numRadio) {
+		return ("(" + getXPathRadioPagoPlazo() + ")[" + numRadio + "]");
+	}
 
 	public boolean isVisiblePagoAPlazoUntil(int maxSeconds) {
 		goToIframe();

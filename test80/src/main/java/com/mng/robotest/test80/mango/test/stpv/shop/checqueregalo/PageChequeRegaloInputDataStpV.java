@@ -88,7 +88,7 @@ public class PageChequeRegaloInputDataStpV extends PageObjTM {
 	
 	@Step (
 		description="Usamos el boton de volver",
-	    expected="Estamos en la página inicial de <b>Cheque Regalo</b>")
+		expected="Estamos en la página inicial de <b>Cheque Regalo</b>")
 	private void backToInitPageChequeRegalo() {
 		((PageChequeRegaloInputDataNew)pageChequeRegaloInputData).clickBotonVolver();
 		checkIsInitPage(2);

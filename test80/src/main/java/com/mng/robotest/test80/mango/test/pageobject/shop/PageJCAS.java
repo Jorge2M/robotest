@@ -34,13 +34,13 @@ public class PageJCAS {
 		return (driver.getTitle().contains("Central Authentication Service"));
 	}
 	
-    public static void identJCASifExists(WebDriver driver) {
-        waitForPageLoaded(driver);
-        if (thisPageIsShown(driver)) {
-        	Secret secret = GetterSecrets.factory().getCredentials(SecretType.MANTO_USER);
-            identication(driver, secret.getUser(), secret.getPassword());
-        }
-    }  
+	public static void identJCASifExists(WebDriver driver) {
+		waitForPageLoaded(driver);
+		if (thisPageIsShown(driver)) {
+			Secret secret = GetterSecrets.factory().getCredentials(SecretType.MANTO_USER);
+			identication(driver, secret.getUser(), secret.getPassword());
+		}
+	}  
 
 	/**
 	 * Realiza el proceso de identificación en la página de Jasig CAS

@@ -55,23 +55,23 @@ public class PageDevoluciones {
 		}
 	}
 	
-    private static String XPathIsPageDevoluciones = "//div[@class='devoluciones']";
-    private static String XPathButtonSolicitarRecogida = "//div[@class[contains(.,'devoluciones_button_container')]]/span";
+	private static String XPathIsPageDevoluciones = "//div[@class='devoluciones']";
+	private static String XPathButtonSolicitarRecogida = "//div[@class[contains(.,'devoluciones_button_container')]]/span";
 
 	public static boolean isPage(WebDriver driver) {
 		return (state(Present, By.xpath(XPathIsPageDevoluciones), driver).check());
 	}
 
-    public static void clickSolicitarRecogida(WebDriver driver) {
-    	click(By.xpath(XPathButtonSolicitarRecogida), driver).exec();
-        
-        //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un par de veces
-        for (int i=0; i<2; i++) {
-	        if (isVisibleSolicitarRecogidaButton(driver)) {
-	        	click(By.xpath(XPathButtonSolicitarRecogida), driver).type(TypeClick.javascript).exec();
-	        }
-        }
-    }
+	public static void clickSolicitarRecogida(WebDriver driver) {
+		click(By.xpath(XPathButtonSolicitarRecogida), driver).exec();
+		
+		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un par de veces
+		for (int i=0; i<2; i++) {
+			if (isVisibleSolicitarRecogidaButton(driver)) {
+				click(By.xpath(XPathButtonSolicitarRecogida), driver).type(TypeClick.javascript).exec();
+			}
+		}
+	}
 
 	public static boolean isVisibleSolicitarRecogidaButton(WebDriver driver) {
 		return (state(Visible, By.xpath(XPathButtonSolicitarRecogida), driver).check());

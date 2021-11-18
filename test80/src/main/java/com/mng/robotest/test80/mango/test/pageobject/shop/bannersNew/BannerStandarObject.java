@@ -16,9 +16,9 @@ public class BannerStandarObject extends BannerObject {
 	//final static String XPathWrapperBanner = "//div[@class[contains(.,'vsv-box')] and @data-id]";
 	final static String XPathWrapperBanner = "//div[@class[contains(.,'bannercontainer')] and @data-bannerid]";
 	final static String XPathBanner = XPathWrapperBanner + 
-	    "//div[@data-cta and not(@data-cta='') and " + 
-	    	  "@data-cta[not(contains(.,'op=ayuda'))] and " + 
-	    	  "not(@class='link')]";
+		"//div[@data-cta and not(@data-cta='') and " + 
+			  "@data-cta[not(contains(.,'op=ayuda'))] and " + 
+			  "not(@class='link')]";
 	final static String XPathImageRelativeBanner = "//img[@class='img-responsive']";
 	final static String XPathMainTextRelativeBanner = "//div[@class[contains(.,'mainText')]]";
 	
@@ -37,11 +37,11 @@ public class BannerStandarObject extends BannerObject {
 	}
 
 	@Override
-    protected String getSrcImageBanner(WebElement bannerScreen) {
-    	List<WebElement> listImgsBanner = UtilsMangoTest.findDisplayedElements(bannerScreen, By.xpath("." + XPathImageRelativeBanner));
-    	if (listImgsBanner.size() > 0) {
-    		return (listImgsBanner.get(0).getAttribute("src"));
-    	}
-    	return "";
-    }
+	protected String getSrcImageBanner(WebElement bannerScreen) {
+		List<WebElement> listImgsBanner = UtilsMangoTest.findDisplayedElements(bannerScreen, By.xpath("." + XPathImageRelativeBanner));
+		if (listImgsBanner.size() > 0) {
+			return (listImgsBanner.get(0).getAttribute("src"));
+		}
+		return "";
+	}
 }

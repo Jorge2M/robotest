@@ -9,9 +9,9 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageResultPagoTpv {
 	
-    static String XPathCabeceraConfCompra = "//div[@class[contains(.,'details')]]/h2";
-    static String XPathCodPedido = "//div[@id[contains(.,'num-pedido')]]/div[@class='valor']";
-    static String XPathGastosTransporte = "//div[@id='transporte']/div[@class='valor']";
+	static String XPathCabeceraConfCompra = "//div[@class[contains(.,'details')]]/h2";
+	static String XPathCodPedido = "//div[@id[contains(.,'num-pedido')]]/div[@class='valor']";
+	static String XPathGastosTransporte = "//div[@id='transporte']/div[@class='valor']";
 
 	public static boolean isPresentCabeceraConfCompra(WebDriver driver) {
 		return (state(Present, By.xpath(XPathCabeceraConfCompra), driver).check());
@@ -21,14 +21,14 @@ public class PageResultPagoTpv {
 		return (state(Visible, By.xpath(XPathCodPedido), driver).check());
 	}
 
-    public static String getCodigoPedido(WebDriver driver) {
-        if (isVisibleCodPedido(driver)) {
-            return (driver.findElement(By.xpath(XPathCodPedido)).getText());
-        }
-        return "";
-    }
-    
-    public static boolean isGastoTransporteAcero(WebDriver driver) {
-        return (driver.findElement(By.xpath(XPathGastosTransporte)).getText().compareTo("0 €")==0);
-    }
+	public static String getCodigoPedido(WebDriver driver) {
+		if (isVisibleCodPedido(driver)) {
+			return (driver.findElement(By.xpath(XPathCodPedido)).getText());
+		}
+		return "";
+	}
+	
+	public static boolean isGastoTransporteAcero(WebDriver driver) {
+		return (driver.findElement(By.xpath(XPathGastosTransporte)).getText().compareTo("0 €")==0);
+	}
 }

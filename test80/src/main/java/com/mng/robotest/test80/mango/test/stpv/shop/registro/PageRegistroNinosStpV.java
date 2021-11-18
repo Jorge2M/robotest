@@ -17,29 +17,29 @@ import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.
 
 
 public class PageRegistroNinosStpV {
-    
+	
 	@Validation
-    public static ChecksTM validaIsPageWithNinos(int numNinos, WebDriver driver) {
+	public static ChecksTM validaIsPageWithNinos(int numNinos, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
-        int maxSecondsToWait = 5;
-    	validations.add(
-    		"Aparece la página de introducción de datos del niño (la esperamos un máximo de " + maxSecondsToWait + " segundos)",
-    		PageRegistroNinos.isPageUntil(driver, maxSecondsToWait), State.Defect);
-    	validations.add(
-    		"Aparecen inputs para introducir <b>" + numNinos + "</b>",
+		int maxSecondsToWait = 5;
+		validations.add(
+			"Aparece la página de introducción de datos del niño (la esperamos un máximo de " + maxSecondsToWait + " segundos)",
+			PageRegistroNinos.isPageUntil(driver, maxSecondsToWait), State.Defect);
+		validations.add(
+			"Aparecen inputs para introducir <b>" + numNinos + "</b>",
 			PageRegistroNinos.getNumInputsNameNino(driver)==numNinos, State.Defect);
-    	return validations;        
-    }
-    
+		return validations;		
+	}
+	
 	@Step (
 		description="Introducir datos de los niños: <br>#{listaNinos.getFormattedHTMLData()}<br> y finalmente pulsar el botón \"Continuar\"", 
-        expected="Aparece la página de introducción de datos de la dirección")
-    public static void sendNinoDataAndContinue(ListDataNinos listaNinos, Pais pais, WebDriver driver) {
-        PageRegistroNinos.setDataNinoIfNotExists(listaNinos, 2, driver);
-        PageRegistroNinos.clickContinuar(driver);
-        PageRegistroDirecStpV.isPageFromPais(pais, driver);
+		expected="Aparece la página de introducción de datos de la dirección")
+	public static void sendNinoDataAndContinue(ListDataNinos listaNinos, Pais pais, WebDriver driver) {
+		PageRegistroNinos.setDataNinoIfNotExists(listaNinos, 2, driver);
+		PageRegistroNinos.clickContinuar(driver);
+		PageRegistroDirecStpV.isPageFromPais(pais, driver);
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.SEO, 
 				GenericCheck.Analitica)).checks(driver);
-    }
+	}
 }

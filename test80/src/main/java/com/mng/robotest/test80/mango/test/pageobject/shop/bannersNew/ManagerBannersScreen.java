@@ -53,13 +53,13 @@ public class ManagerBannersScreen {
 	}
 	
 	public void clearBannersData(List<BannerType> listBannerTypes) {
-        Iterator<DataBanner> itDataBanner = listDataBannersOrderedByPosition.iterator();
-        while (itDataBanner.hasNext()) {
-            DataBanner dataBanner = itDataBanner.next(); 
-            if (listBannerTypes.contains(dataBanner.getBannerType())) {
-                itDataBanner.remove();
-            }
-        }
+		Iterator<DataBanner> itDataBanner = listDataBannersOrderedByPosition.iterator();
+		while (itDataBanner.hasNext()) {
+			DataBanner dataBanner = itDataBanner.next(); 
+			if (listBannerTypes.contains(dataBanner.getBannerType())) {
+				itDataBanner.remove();
+			}
+		}
 	}
 	
 	public DataBanner getBanner(int position) {
@@ -85,7 +85,7 @@ public class ManagerBannersScreen {
 			listDataBannersOrderedByPosition, 
 			new Comparator<DataBanner>() {
 				@Override
-			    public int compare(DataBanner banner1, DataBanner banner2) {
+				public int compare(DataBanner banner1, DataBanner banner2) {
 					Point locationBanner1 = banner1.getLocation();
 					Point locationBanner2 = banner2.getLocation();
 					if (locationBanner1.y != locationBanner2.y) {
@@ -103,7 +103,7 @@ public class ManagerBannersScreen {
 					}
 					
 					return 0;
-			    }
+				}
 			}
 		);
 	}
@@ -122,26 +122,26 @@ public class ManagerBannersScreen {
 		}
 	}
 	
-    /**
-     * Función que indica si hay banners o no en el contenido de la página
-     */
-    public boolean existBanners() {
-        return (listDataBannersOrderedByPosition.size() > 0);
-    }
-    
-    public static boolean existBanners(WebDriver driver) {
-    	int maxBannersToLoad = 1;
-    	ManagerBannersScreen manager = new ManagerBannersScreen(maxBannersToLoad, driver);
-    	return (manager.existBanners());
-    }
-    
-    public void clickBannerAndWaitLoad(int posBanner, WebDriver driver) throws Exception {
-    	DataBanner dataBanner = getBanner(posBanner);
-    	clickBannerAndWaitLoad(dataBanner, driver);
-    }
-    
-    public void clickBannerAndWaitLoad(DataBanner dataBanner, WebDriver driver) throws Exception {
-    	BannerObject bannerObject = BannerObjectFactory.make(dataBanner.getBannerType());
-    	bannerObject.clickBannerAndWaitLoad(dataBanner, driver);
-    }
+	/**
+	 * Función que indica si hay banners o no en el contenido de la página
+	 */
+	public boolean existBanners() {
+		return (listDataBannersOrderedByPosition.size() > 0);
+	}
+	
+	public static boolean existBanners(WebDriver driver) {
+		int maxBannersToLoad = 1;
+		ManagerBannersScreen manager = new ManagerBannersScreen(maxBannersToLoad, driver);
+		return (manager.existBanners());
+	}
+	
+	public void clickBannerAndWaitLoad(int posBanner, WebDriver driver) throws Exception {
+		DataBanner dataBanner = getBanner(posBanner);
+		clickBannerAndWaitLoad(dataBanner, driver);
+	}
+	
+	public void clickBannerAndWaitLoad(DataBanner dataBanner, WebDriver driver) throws Exception {
+		BannerObject bannerObject = BannerObjectFactory.make(dataBanner.getBannerType());
+		bannerObject.clickBannerAndWaitLoad(dataBanner, driver);
+	}
 }

@@ -30,7 +30,7 @@ public class PageGoogle extends PageObjTM {
 	}
 
 	public String getXPath_linkWithText(String textContained) {
-		return (XPath_LinkNoPubliText + "[text()[contains(.,'" + textContained + "')]]");    
+		return (XPath_LinkNoPubliText + "[text()[contains(.,'" + textContained + "')]]");	
 	}
 
 	public void searchTextAndWait(String textToSearch) throws Exception {
@@ -47,13 +47,13 @@ public class PageGoogle extends PageObjTM {
 		}
 	}
 	
-    private boolean isVisibleModalCookie(int maxSeconds) {
-    	return state(Visible, By.xpath(XPath_ButtonAcceptModalCookie), driver).wait(maxSeconds).check();
-    }
-    
-    private void acceptModalCookie() {
-    	click(By.xpath(XPath_ButtonAcceptModalCookie), driver).exec();
-    }
+	private boolean isVisibleModalCookie(int maxSeconds) {
+		return state(Visible, By.xpath(XPath_ButtonAcceptModalCookie), driver).wait(maxSeconds).check();
+	}
+	
+	private void acceptModalCookie() {
+		click(By.xpath(XPath_ButtonAcceptModalCookie), driver).exec();
+	}
 
 	public boolean validaFirstLinkContains(String textToBeContained) {
 		WebElement headerText = driver.findElement(By.xpath(XPath_LinkNoPubliText));

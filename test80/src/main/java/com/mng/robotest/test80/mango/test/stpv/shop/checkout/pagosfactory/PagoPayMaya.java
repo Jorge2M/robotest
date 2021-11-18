@@ -14,34 +14,34 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.paymaya.PageResultP
 
 public class PagoPayMaya extends PagoStpV {
 	
-    public PagoPayMaya(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
-        super(dCtxSh, dCtxPago, driver);
-        super.isAvailableExecPay = true;
-    }
-    
-    @Override
-    public void testPagoFromCheckout(boolean execPay) throws Exception {
-        pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-        dCtxPago = checkoutFlow.checkout(From.MetodosPago);
-        
-        PageIdentPaymayaStpV pageIdentPaymayaStpV = new PageIdentPaymayaStpV(driver);
-        if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
-	        PageInitPaymayaStpV pageInitPaymayaStpV = new PageInitPaymayaStpV(driver);
-	        pageInitPaymayaStpV.checkPage();
-	        pageIdentPaymayaStpV = pageInitPaymayaStpV.clickPaymayaButton();
-    	} else {
-        	pageIdentPaymayaStpV.checkPage();
-    	}
-        
-        if (execPay) {
-            Pago pago = dCtxPago.getDataPedido().getPago();
-        	PageOtpPaymayaStpV pageOtpPaymayaStpV = 
-        		pageIdentPaymayaStpV.login(pago.getUsrpaymaya(), pago.getPasswordpaymaya());
-        	PageResultPaymayaStpV pageResultPaymanaStpV = 
-        		pageOtpPaymayaStpV.proceed(pago.getOtpdpaymaya());
-        	pageResultPaymanaStpV.confirmPayment();
-        	
-            dCtxPago.getDataPedido().setCodtipopago("F");
-        }
-    }    
+	public PagoPayMaya(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
+		super(dCtxSh, dCtxPago, driver);
+		super.isAvailableExecPay = true;
+	}
+	
+	@Override
+	public void testPagoFromCheckout(boolean execPay) throws Exception {
+		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
+		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		
+		PageIdentPaymayaStpV pageIdentPaymayaStpV = new PageIdentPaymayaStpV(driver);
+		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
+			PageInitPaymayaStpV pageInitPaymayaStpV = new PageInitPaymayaStpV(driver);
+			pageInitPaymayaStpV.checkPage();
+			pageIdentPaymayaStpV = pageInitPaymayaStpV.clickPaymayaButton();
+		} else {
+			pageIdentPaymayaStpV.checkPage();
+		}
+		
+		if (execPay) {
+			Pago pago = dCtxPago.getDataPedido().getPago();
+			PageOtpPaymayaStpV pageOtpPaymayaStpV = 
+				pageIdentPaymayaStpV.login(pago.getUsrpaymaya(), pago.getPasswordpaymaya());
+			PageResultPaymayaStpV pageResultPaymanaStpV = 
+				pageOtpPaymayaStpV.proceed(pago.getOtpdpaymaya());
+			pageResultPaymanaStpV.confirmPayment();
+			
+			dCtxPago.getDataPedido().setCodtipopago("F");
+		}
+	}	
 }

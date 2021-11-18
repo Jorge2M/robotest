@@ -21,33 +21,33 @@ public abstract class SecBolsaDesktop extends SecBolsa {
 		super(channel, app, driver);
 	}
 	
-    @Override
-    String getXPathPrecioTransporte() {
-        String xpathCapaBolsa = getXPathPanelBolsa();
-        return xpathCapaBolsa + "//*[@class='contenedor_precio_transporte']"; 
-    }
-    
 	@Override
-    public String getPrecioSubTotal() {
-        String precioTotal = "";
-        ListIterator<WebElement> itTotalEntero = null;
-        ListIterator<WebElement> itTotalDecimal = null;
-        String xpathCapaBolsa = getXPathPanelBolsa();
-        String xpathSubtotal = getXPathPrecioSubTotal();
-        By byTotalEntero = By.xpath(xpathCapaBolsa + xpathSubtotal + "//*[@class='bolsa_price_big']");
-        By byTotalDecimal = By.xpath(xpathCapaBolsa + xpathSubtotal + "//*[@class='bolsa_price_small']");
-        itTotalEntero = driver.findElements(byTotalEntero).listIterator();
-        itTotalDecimal = driver.findElements(byTotalDecimal).listIterator();
-        
-        while (itTotalEntero != null && itTotalEntero.hasNext()) {
-            precioTotal += itTotalEntero.next().getText();
-        }
-        while (itTotalDecimal != null && itTotalDecimal.hasNext()) {
-            precioTotal += itTotalDecimal.next().getText();
-        }
+	String getXPathPrecioTransporte() {
+		String xpathCapaBolsa = getXPathPanelBolsa();
+		return xpathCapaBolsa + "//*[@class='contenedor_precio_transporte']"; 
+	}
+	
+	@Override
+	public String getPrecioSubTotal() {
+		String precioTotal = "";
+		ListIterator<WebElement> itTotalEntero = null;
+		ListIterator<WebElement> itTotalDecimal = null;
+		String xpathCapaBolsa = getXPathPanelBolsa();
+		String xpathSubtotal = getXPathPrecioSubTotal();
+		By byTotalEntero = By.xpath(xpathCapaBolsa + xpathSubtotal + "//*[@class='bolsa_price_big']");
+		By byTotalDecimal = By.xpath(xpathCapaBolsa + xpathSubtotal + "//*[@class='bolsa_price_small']");
+		itTotalEntero = driver.findElements(byTotalEntero).listIterator();
+		itTotalDecimal = driver.findElements(byTotalDecimal).listIterator();
+		
+		while (itTotalEntero != null && itTotalEntero.hasNext()) {
+			precioTotal += itTotalEntero.next().getText();
+		}
+		while (itTotalDecimal != null && itTotalDecimal.hasNext()) {
+			precioTotal += itTotalDecimal.next().getText();
+		}
 
-        return (ImporteScreen.normalizeImportFromScreen(precioTotal));
-    } 
+		return (ImporteScreen.normalizeImportFromScreen(precioTotal));
+	} 
 	
 	@Override
 	public String getPrecioTransporte() {

@@ -30,27 +30,27 @@ import javax.xml.bind.annotation.XmlRegistry;
 public class ObjectFactory {
 
 
-    /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.mng.robotest.test80.mango.test.factoryes.jaxb.sitemap
-     * 
-     */
-    public ObjectFactory() {
-    }
+	/**
+	 * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.mng.robotest.test80.mango.test.factoryes.jaxb.sitemap
+	 * 
+	 */
+	public ObjectFactory() {
+	}
 
-    /**
-     * Create an instance of {@link Sitemapindex }
-     * 
-     */
-    public Sitemapindex createSitemapindex() {
-        return new Sitemapindex();
-    }
+	/**
+	 * Create an instance of {@link Sitemapindex }
+	 * 
+	 */
+	public Sitemapindex createSitemapindex() {
+		return new Sitemapindex();
+	}
 
-    /**
-     * Create an instance of {@link Sitemapindex.Sitemap }
-     * 
-     */
-    public Sitemapindex.Sitemap createSitemapindexSitemap() {
-        return new Sitemapindex.Sitemap();
-    }
+	/**
+	 * Create an instance of {@link Sitemapindex.Sitemap }
+	 * 
+	 */
+	public Sitemapindex.Sitemap createSitemapindexSitemap() {
+		return new Sitemapindex.Sitemap();
+	}
 
 }

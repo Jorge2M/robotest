@@ -28,7 +28,7 @@ public class PagoKlarna extends PagoStpV {
 		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
 		pageKlarnaStpV.checkIsPage(5);
 		pageKlarnaStpV.clickComprar();
-        pageKlarnaStpV.checkIsModalInputUserData(5);
+		pageKlarnaStpV.checkIsModalInputUserData(5);
 		
 		if (execPay) {
 			DataKlarna dataKlarna = getDataKlarna();

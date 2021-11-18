@@ -14,24 +14,24 @@ public class PageConsultaTiendaStpV {
 	@Validation (
 		description="Es visible el input para la introducción de la tienda",
 		level=State.Defect)
-    public static boolean validateIsPage(WebDriver driver) {
-        return (PageConsultaTienda.isVisibleInputTienda(driver));
-    }
+	public static boolean validateIsPage(WebDriver driver) {
+		return (PageConsultaTienda.isVisibleInputTienda(driver));
+	}
 
 	@Step (
 		description="Introducimos tienda #{tiendaNoExistente}</br>",
 		expected="No debe ser válida",
 		saveErrorData=SaveWhen.Never)
 	public static void consultaTiendaInexistente(String tiendaNoExistente, WebDriver driver) {
-        PageConsultaTienda.introducirTienda(tiendaNoExistente, driver);
-        checkIsVisibleMessageTiendaNotExits(driver);
+		PageConsultaTienda.introducirTienda(tiendaNoExistente, driver);
+		checkIsVisibleMessageTiendaNotExits(driver);
 	}
 	
 	@Validation (
 		description="Aparece el mensaje La tienda no existe",
 		level=State.Defect)
 	private static boolean checkIsVisibleMessageTiendaNotExits(WebDriver driver) {
-        return (PageConsultaTienda.apareceMensajeTiendaNoExiste(driver));
+		return (PageConsultaTienda.apareceMensajeTiendaNoExiste(driver));
 	}
 
 	@Step (
@@ -39,8 +39,8 @@ public class PageConsultaTiendaStpV {
 		expected="No debe ser válida",
 		saveErrorData=SaveWhen.Never)
 	public static void consultaTiendaExistente(String tiendaExistente, WebDriver driver) {
-        PageConsultaTienda.introducirTienda(tiendaExistente, driver);
-        checkAfterInputTienda(driver);
+		PageConsultaTienda.introducirTienda(tiendaExistente, driver);
+		checkAfterInputTienda(driver);
 	}
 	
 	@Validation

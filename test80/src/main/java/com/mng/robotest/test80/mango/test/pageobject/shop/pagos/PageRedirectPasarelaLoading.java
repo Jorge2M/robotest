@@ -9,15 +9,15 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageRedirectPasarelaLoading {
 
-    private static final String XPathIsPage = "//div[@class[contains(.,'payment-redirect')]]/div[@class='logo']";
-    
-    public static boolean isPageUntil(int maxSeconds, WebDriver driver) {
-    	return (state(Present, By.xpath(XPathIsPage), driver)
-    			.wait(maxSeconds).check());
-    }
-    
-    public static boolean isPageNotVisibleUntil(int maxSeconds, WebDriver driver) {
-    	return (state(Invisible, By.xpath(XPathIsPage), driver)
-    			.wait(maxSeconds).check());
-    }
+	private static final String XPathIsPage = "//div[@class[contains(.,'payment-redirect')]]/div[@class='logo']";
+	
+	public static boolean isPageUntil(int maxSeconds, WebDriver driver) {
+		return (state(Present, By.xpath(XPathIsPage), driver)
+				.wait(maxSeconds).check());
+	}
+	
+	public static boolean isPageNotVisibleUntil(int maxSeconds, WebDriver driver) {
+		return (state(Invisible, By.xpath(XPathIsPage), driver)
+				.wait(maxSeconds).check());
+	}
 }

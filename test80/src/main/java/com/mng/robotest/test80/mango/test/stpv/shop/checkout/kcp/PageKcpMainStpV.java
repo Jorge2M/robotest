@@ -17,15 +17,15 @@ public class PageKcpMainStpV {
 	@Validation (
 		description="Aparece la página inicial de KCP (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-    public boolean isPage(int maxSeconds) { 
+	public boolean isPage(int maxSeconds) { 
 		return (pageKcpMain.isPage(maxSeconds));
-    }
+	}
 	
 	@Validation (
 		description="Aparece el radiobutton para aceptar los términos y condiciones (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-    public boolean isPresentTermAndConditions(int maxSeconds) { 
+	public boolean isPresentTermAndConditions(int maxSeconds) { 
 		return (pageKcpMain.isVisibleTermAndConditions(maxSeconds));
-    }	
+	}	
 	
 }

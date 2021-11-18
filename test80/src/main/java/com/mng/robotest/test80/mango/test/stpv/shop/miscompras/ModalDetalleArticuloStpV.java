@@ -8,7 +8,7 @@ import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.ModalDetalleArticulo;
 
 public class ModalDetalleArticuloStpV {
-    
+	
 	private final ModalDetalleArticulo modalDetalleArticulo;
 	
 	private ModalDetalleArticuloStpV(ModalDetalleArticulo modalObject) {
@@ -17,33 +17,33 @@ public class ModalDetalleArticuloStpV {
 	public static ModalDetalleArticuloStpV getNew(ModalDetalleArticulo modalObject) {
 		return new ModalDetalleArticuloStpV(modalObject);
 	}
-    
-    @Validation
-    public ChecksTM validateIsOk(ArticuloScreen articulo) {
-        ChecksTM validations = ChecksTM.getNew();
-        int maxSeconds = 2;
-        validations.add(
-        	"Aparece el modal correspondiente al artículo (lo esperamos hasta " + maxSeconds + " segundos)",
-        	modalDetalleArticulo.isVisible(maxSeconds), State.Warn);
-        validations.add(
-        	"Se muestra la referencia " + articulo.getReferencia(),
-        	modalDetalleArticulo.getReferencia().compareTo(articulo.getReferencia())==0, State.Warn);
-        validations.add(
-        	"Se muestra el nombre " + articulo.getNombre(),
-        	modalDetalleArticulo.getNombre().compareTo(articulo.getNombre())==0, State.Warn);
-        validations.add(
-        	"Se muestra el precio " + articulo.getPrecio(),
-        	modalDetalleArticulo.getPrecio().contains(articulo.getPrecio()), State.Warn);
-        return validations;
-    }
+	
+	@Validation
+	public ChecksTM validateIsOk(ArticuloScreen articulo) {
+		ChecksTM validations = ChecksTM.getNew();
+		int maxSeconds = 2;
+		validations.add(
+			"Aparece el modal correspondiente al artículo (lo esperamos hasta " + maxSeconds + " segundos)",
+			modalDetalleArticulo.isVisible(maxSeconds), State.Warn);
+		validations.add(
+			"Se muestra la referencia " + articulo.getReferencia(),
+			modalDetalleArticulo.getReferencia().compareTo(articulo.getReferencia())==0, State.Warn);
+		validations.add(
+			"Se muestra el nombre " + articulo.getNombre(),
+			modalDetalleArticulo.getNombre().compareTo(articulo.getNombre())==0, State.Warn);
+		validations.add(
+			"Se muestra el precio " + articulo.getPrecio(),
+			modalDetalleArticulo.getPrecio().contains(articulo.getPrecio()), State.Warn);
+		return validations;
+	}
 	
 //	@Step (
 //		description="Damos click al botón de \"Buscar talla en tienda\"",
-//        expected="Aparece el modal de busqueda en tienda")
-//    public void clickBuscarTiendaButton_Desktop() {
+//		expected="Aparece el modal de busqueda en tienda")
+//	public void clickBuscarTiendaButton_Desktop() {
 //		modalDetalleMisCompras.getDesktopVersion().clickBuscarTallaTiendaButton();
 //		checkAppearsModalSearchTallaTienda(3);
-//    }
+//	}
 //	
 //	@Validation (
 //		description="Aparece el modal de búsqueda de talla en tienda (lo esperamos hasta #{maxSeconds} segundos)",

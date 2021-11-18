@@ -16,32 +16,32 @@ public abstract class PageChequeRegaloInputData extends PageObjTM {
 	public abstract void inputDataCheque(ChequeRegalo chequeRegalo);
 	public abstract void clickComprarFin(ChequeRegalo chequeRegalo);
 	
-    public enum Importe {
-    	euro25(25), 
-    	euro50(50), 
-    	euro100(100), 
-    	euro150(150), 
-    	euro200(200), 
-    	euro250(250);
-    	
-    	int importe;
-    	private Importe(int importe) {
-    		this.importe = importe;
-    	}
-    	public int getImporte() {
-    		return importe;
-    	}
-    }
-    
-    protected PageChequeRegaloInputData(WebDriver driver) {
-    	super(driver);
-    }
+	public enum Importe {
+		euro25(25), 
+		euro50(50), 
+		euro100(100), 
+		euro150(150), 
+		euro200(200), 
+		euro250(250);
+		
+		int importe;
+		private Importe(int importe) {
+			this.importe = importe;
+		}
+		public int getImporte() {
+			return importe;
+		}
+	}
+	
+	protected PageChequeRegaloInputData(WebDriver driver) {
+		super(driver);
+	}
 
-    public static PageChequeRegaloInputData make(Pais pais, WebDriver driver) {
-    	if ("001".compareTo(pais.getCodigo_pais())==0) {
-    		return new PageChequeRegaloInputDataNew(driver);
-    	}
-    	return new PageChequeRegaloInputDataOld(driver);
-    }
-    
+	public static PageChequeRegaloInputData make(Pais pais, WebDriver driver) {
+		if ("001".compareTo(pais.getCodigo_pais())==0) {
+			return new PageChequeRegaloInputDataNew(driver);
+		}
+		return new PageChequeRegaloInputDataOld(driver);
+	}
+	
 }

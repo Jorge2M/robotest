@@ -12,23 +12,23 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PageEpsSelBancoStpV {
 
 	@Validation
-    public static ChecksTM validateIsPage(String importeTotal, String codPais, Channel channel, WebDriver driver) {
+	public static ChecksTM validateIsPage(String importeTotal, String codPais, Channel channel, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
-    	validations.add(
-    		"Figura el icono correspondiente al pago <b>EPS</b>",
-    		PageEpsSelBanco.isPresentIconoEps(driver), State.Warn);
-    	
-    	State stateVal = State.Warn;
-        if (channel.isDevice()) {
-        	stateVal=State.Info;
-        }
-    	validations.add(
-    		"Aparece el importe de la compra: " + importeTotal,
-    		ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal);
-    	validations.add(
-    		"Aparece el logo del banco seleccionado",
-    		PageEpsSelBanco.isVisibleIconoBanco(driver), State.Warn);
-    	return validations;
-    }
+		validations.add(
+			"Figura el icono correspondiente al pago <b>EPS</b>",
+			PageEpsSelBanco.isPresentIconoEps(driver), State.Warn);
+		
+		State stateVal = State.Warn;
+		if (channel.isDevice()) {
+			stateVal=State.Info;
+		}
+		validations.add(
+			"Aparece el importe de la compra: " + importeTotal,
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal);
+		validations.add(
+			"Aparece el logo del banco seleccionado",
+			PageEpsSelBanco.isVisibleIconoBanco(driver), State.Warn);
+		return validations;
+	}
 }
-    
+	

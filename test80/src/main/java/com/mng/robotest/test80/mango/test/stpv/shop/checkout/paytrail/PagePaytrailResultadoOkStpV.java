@@ -10,23 +10,23 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paytrail.Page
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 public class PagePaytrailResultadoOkStpV {
-    
+	
 	@Validation
-    public static ChecksTM validateIsPage(String importeTotal, String codPais, WebDriver driver) {
+	public static ChecksTM validateIsPage(String importeTotal, String codPais, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
 	   	validations.add(
-    		"Aparece la página de resultado Ok de Paytrail",
-    		PagePaytrailResultadoOk.isPage(driver), State.Defect);
+			"Aparece la página de resultado Ok de Paytrail",
+			PagePaytrailResultadoOk.isPage(driver), State.Defect);
 	   	validations.add(
-    		"Aparece el importe de la compra: " + importeTotal,
-    		ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
+			"Aparece el importe de la compra: " + importeTotal,
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
 	   	return validations;
-    }
-    
+	}
+	
 	@Step (
 		description="Click el botón para volver a Mango", 
-        expected="Aparece la página de resultado Ok de Mango")
-    public static void clickVolverAMangoButton(WebDriver driver) {
+		expected="Aparece la página de resultado Ok de Mango")
+	public static void clickVolverAMangoButton(WebDriver driver) {
 		PagePaytrailResultadoOk.clickVolverAMangoButton(driver);
-    }
+	}
 }

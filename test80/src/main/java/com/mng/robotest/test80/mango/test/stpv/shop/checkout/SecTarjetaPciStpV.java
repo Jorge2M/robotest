@@ -27,19 +27,19 @@ public class SecTarjetaPciStpV {
 		PageCheckoutWrapper pageCheckoutStpV = new PageCheckoutWrapper(channel, app, driver);
 		this.secTarjetaPci = pageCheckoutStpV.getSecTarjetaPci();
 	}
-    
+	
 	@Validation
-    public ChecksTM validateIsSectionOk(Pago pago, Pais pais) {
-    	ChecksTM validations = ChecksTM.getNew();
-    	if (channel==Channel.desktop && pago.getTypePago()!=TypePago.KrediKarti) {
-            int maxSeconds = 5;
+	public ChecksTM validateIsSectionOk(Pago pago, Pais pais) {
+		ChecksTM validations = ChecksTM.getNew();
+		if (channel==Channel.desktop && pago.getTypePago()!=TypePago.KrediKarti) {
+			int maxSeconds = 5;
 		 	validations.add(
 				"Aparece el bloque correspondiente a la introducción de los datos del método de pago " + pago.getNombre(channel, app) + 
 				" (lo esperamos hasta " + maxSeconds + " segundo)",
 				secTarjetaPci.isVisiblePanelPagoUntil(pago.getNombre(channel, app), maxSeconds), 
-				State.Warn);    
-    	}
-    	
+				State.Warn);	
+		}
+		
 	 	validations.add(
 			"Aparecen los 4 campos <b>Número, Titular, Mes, Año</b> para la introducción de los datos de la tarjeta",
 			secTarjetaPci.isPresentInputNumberUntil(1) &&
@@ -52,11 +52,11 @@ public class SecTarjetaPciStpV {
 				"Aparece también el campo <b>CVC</b>",
 				secTarjetaPci.isPresentInputCvc(), State.Defect); 
 	 	}
-        if (pago.getDni()!=null && "".compareTo(pago.getDni())!=0) {
+		if (pago.getDni()!=null && "".compareTo(pago.getDni())!=0) {
 		 	validations.add(
 				"Aparece también el campo <b>DNI(C.C)</b>",
 				secTarjetaPci.isPresentInputDni(), State.Defect); 
-        }
-        return validations;
-    }
+		}
+		return validations;
+	}
 }

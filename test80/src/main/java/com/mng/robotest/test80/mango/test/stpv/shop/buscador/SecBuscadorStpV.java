@@ -75,7 +75,7 @@ public class SecBuscadorStpV {
 		expected="El resultado de la búsqueda es el correcto :-)")
 	public void busquedaCategoriaProducto(String categoriaABuscar, boolean categoriaExiste) throws Exception {
 		SecCabecera.buscarTexto(categoriaABuscar, channel, app, driver);
-		SeleniumUtils.waitForPageLoaded(driver);    
+		SeleniumUtils.waitForPageLoaded(driver);	
 		if (categoriaExiste) { 
 			areProducts(categoriaABuscar, 3);
 		} else {

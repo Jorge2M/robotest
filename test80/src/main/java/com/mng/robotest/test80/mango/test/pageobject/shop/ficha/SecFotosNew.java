@@ -19,42 +19,42 @@ public class SecFotosNew {
 
 	private final static String XPathCapa = "//div[@class[contains(.,'product-images')]]";
 	private final static String XPathLineFoto = XPathCapa + "//*[@class[contains(.,'columns')]]";
-    
-    private static String getXPathLineFotos(int line) {
-        return (XPathLineFoto + "[" + line + "]");
-    }
-    
-    private static String getXPathFoto(int line) {
-        String xpathLine = getXPathLineFotos(line);
-        return (xpathLine + "//img[@class[contains(.,'image')]]");
-    }
-    
-    private static String getXPathFoto(int line, int position) {
-        String xpathLine = getXPathFoto(line);
-        return (xpathLine + "[" + position + "]");
-    }
-    
-    public static DataFoto getDataFoto(int line, int position, WebDriver driver) {
-        String xpathFoto = getXPathFoto(line, position);
-        List<WebElement> listFotos = driver.findElements(By.xpath(xpathFoto));
-        if (listFotos.size() < 1) {
-            return null;
-        }
-        return (new DataFoto(listFotos.get(0).getAttribute("src")));
-    }
+	
+	private static String getXPathLineFotos(int line) {
+		return (XPathLineFoto + "[" + line + "]");
+	}
+	
+	private static String getXPathFoto(int line) {
+		String xpathLine = getXPathLineFotos(line);
+		return (xpathLine + "//img[@class[contains(.,'image')]]");
+	}
+	
+	private static String getXPathFoto(int line, int position) {
+		String xpathLine = getXPathFoto(line);
+		return (xpathLine + "[" + position + "]");
+	}
+	
+	public static DataFoto getDataFoto(int line, int position, WebDriver driver) {
+		String xpathFoto = getXPathFoto(line, position);
+		List<WebElement> listFotos = driver.findElements(By.xpath(xpathFoto));
+		if (listFotos.size() < 1) {
+			return null;
+		}
+		return (new DataFoto(listFotos.get(0).getAttribute("src")));
+	}
 
-    public static int getNumLinesFotos(WebDriver driver) {
-    	if (!state(Present, By.xpath(XPathLineFoto), driver).check()) {
-            return 0;
-        }
-        return (driver.findElements(By.xpath(XPathLineFoto)).size());
-    }
-        
-    public static int getNumFotosLine(int line, WebDriver driver) {
-        String xpathFotoLine = getXPathFoto(line);
-        if (!state(Present, By.xpath(xpathFotoLine), driver).check()) {
-            return 0;
-        }
-        return (driver.findElements(By.xpath(xpathFotoLine)).size());
-    }
+	public static int getNumLinesFotos(WebDriver driver) {
+		if (!state(Present, By.xpath(XPathLineFoto), driver).check()) {
+			return 0;
+		}
+		return (driver.findElements(By.xpath(XPathLineFoto)).size());
+	}
+		
+	public static int getNumFotosLine(int line, WebDriver driver) {
+		String xpathFotoLine = getXPathFoto(line);
+		if (!state(Present, By.xpath(xpathFotoLine), driver).check()) {
+			return 0;
+		}
+		return (driver.findElements(By.xpath(xpathFotoLine)).size());
+	}
 }

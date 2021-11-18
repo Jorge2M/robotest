@@ -171,7 +171,7 @@ public class BrowserStpV {
 		return validations;
 	}
 
-	public static Date removeTime(Date date) {    
+	public static Date removeTime(Date date) {	
 		Calendar cal = Calendar.getInstance();  
 		cal.setTime(date);  
 		cal.set(Calendar.HOUR_OF_DAY, 0);  

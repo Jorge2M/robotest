@@ -23,64 +23,64 @@ public class SecBolsaMobileOld extends SecBolsa {
 	
 	private final LineasArtBolsa lineasArtBolsa;
 	
-    private static final String XPathPanelBolsa = "//div[@class[contains(.,'m_bolsa')]]"; 
-    private static final String XPathBotonComprar = "//div[@class='comButton']/span"; 
-    private static final String XPathPrecioSubTotal = "//div[@class[contains(.,'totalPriceContainer')]]";
-    
-    
-    public SecBolsaMobileOld(AppEcom app, Pais pais, WebDriver driver) {
-    	super(Channel.mobile, app, driver);
-    	//List<String> countrysNewBag = Arrays.asList("001","011","005","010","060","009","066","092","007","003");
-    	//if (countrysNewBag.contains(pais.getCodigo_pais()) && app!=AppEcom.outlet) {
-    	//	lineasArtBolsa = new LineasArtBolsaNew(channel, driver);
-    	//} else {
-    		lineasArtBolsa = new LineasArtBolsaMobile(driver);
-    	//}
-    }
-    
-    @Override
-    String getXPathPanelBolsa() {
-    	return XPathPanelBolsa;
-    }
-    
-    @Override
-    String getXPathBotonComprar() {
-    	return XPathBotonComprar;
-    }
-    
-    @Override
-    String getXPathPrecioSubTotal() {
-    	return XPathPrecioSubTotal;
-    } 
-    
-    @Override
-    String getXPathPrecioTransporte() {
-        String xpathCapaBolsa = getXPathPanelBolsa();
-        return "(" + xpathCapaBolsa + "//div[@class[contains(.,'totalPriceContainer')]])[2]"; 
-    }
-    
-    @Override
-    public String getPrecioSubTotal() {
-        String precioTotal = "";
-        String xpathCapaBolsa = getXPathPanelBolsa();
-        String xpathSubtotal = getXPathPrecioSubTotal();
-        
-        By byTotalEntero = By.xpath("(" + xpathCapaBolsa + xpathSubtotal + ")[1]" + "//span[@style[not(contains(.,'padding'))]][1]");
-        By byTotalDecimal = By.xpath("(" + xpathCapaBolsa + xpathSubtotal + ")[1]" + "//span[@style[not(contains(.,'padding'))]][2]");
-        ListIterator<WebElement> itTotalEntero = driver.findElements(byTotalEntero).listIterator();
-        ListIterator<WebElement> itTotalDecimal = driver.findElements(byTotalDecimal).listIterator();
-        
-        while (itTotalEntero != null && itTotalEntero.hasNext()) {
-            precioTotal += itTotalEntero.next().getText();
-        }
-        while (itTotalDecimal != null && itTotalDecimal.hasNext()) {
-            precioTotal += itTotalDecimal.next().getText();
-        }
+	private static final String XPathPanelBolsa = "//div[@class[contains(.,'m_bolsa')]]"; 
+	private static final String XPathBotonComprar = "//div[@class='comButton']/span"; 
+	private static final String XPathPrecioSubTotal = "//div[@class[contains(.,'totalPriceContainer')]]";
+	
+	
+	public SecBolsaMobileOld(AppEcom app, Pais pais, WebDriver driver) {
+		super(Channel.mobile, app, driver);
+		//List<String> countrysNewBag = Arrays.asList("001","011","005","010","060","009","066","092","007","003");
+		//if (countrysNewBag.contains(pais.getCodigo_pais()) && app!=AppEcom.outlet) {
+		//	lineasArtBolsa = new LineasArtBolsaNew(channel, driver);
+		//} else {
+			lineasArtBolsa = new LineasArtBolsaMobile(driver);
+		//}
+	}
+	
+	@Override
+	String getXPathPanelBolsa() {
+		return XPathPanelBolsa;
+	}
+	
+	@Override
+	String getXPathBotonComprar() {
+		return XPathBotonComprar;
+	}
+	
+	@Override
+	String getXPathPrecioSubTotal() {
+		return XPathPrecioSubTotal;
+	} 
+	
+	@Override
+	String getXPathPrecioTransporte() {
+		String xpathCapaBolsa = getXPathPanelBolsa();
+		return "(" + xpathCapaBolsa + "//div[@class[contains(.,'totalPriceContainer')]])[2]"; 
+	}
+	
+	@Override
+	public String getPrecioSubTotal() {
+		String precioTotal = "";
+		String xpathCapaBolsa = getXPathPanelBolsa();
+		String xpathSubtotal = getXPathPrecioSubTotal();
+		
+		By byTotalEntero = By.xpath("(" + xpathCapaBolsa + xpathSubtotal + ")[1]" + "//span[@style[not(contains(.,'padding'))]][1]");
+		By byTotalDecimal = By.xpath("(" + xpathCapaBolsa + xpathSubtotal + ")[1]" + "//span[@style[not(contains(.,'padding'))]][2]");
+		ListIterator<WebElement> itTotalEntero = driver.findElements(byTotalEntero).listIterator();
+		ListIterator<WebElement> itTotalDecimal = driver.findElements(byTotalDecimal).listIterator();
+		
+		while (itTotalEntero != null && itTotalEntero.hasNext()) {
+			precioTotal += itTotalEntero.next().getText();
+		}
+		while (itTotalDecimal != null && itTotalDecimal.hasNext()) {
+			precioTotal += itTotalDecimal.next().getText();
+		}
 
-        return (ImporteScreen.normalizeImportFromScreen(precioTotal));
-    } 
-    
-    @Override
+		return (ImporteScreen.normalizeImportFromScreen(precioTotal));
+	} 
+	
+	@Override
 	public String getPrecioTransporte() {
 		String precioTotal = "0";
 		String xpathImpTransp = getXPathPrecioTransporte();
@@ -101,19 +101,19 @@ public class SecBolsaMobileOld extends SecBolsa {
 
 		return precioTotal;
 	}
-    
-    @Override
+	
+	@Override
 	public void setBolsaToStateIfNotYet(StateBolsa stateBolsaExpected) {
 		if (!isInStateUntil(stateBolsaExpected, 1)) {
 			setBolsaToState(stateBolsaExpected);
 		}
 	}
-    
+	
 	@Override
 	public LineasArtBolsa getLineasArtBolsa() {
 		return lineasArtBolsa;
 	}
-    
+	
 	private void setBolsaToState(StateBolsa stateBolsaExpected) {
 		if (stateBolsaExpected==StateBolsa.Open) {
 			SecCabecera secCabecera = SecCabecera.getNew(Channel.desktop, app, driver);

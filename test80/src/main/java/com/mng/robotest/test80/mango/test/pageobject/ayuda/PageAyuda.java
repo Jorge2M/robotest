@@ -21,58 +21,58 @@ public class PageAyuda extends PageObjTM {
 	
 	public final static String xPathCloseBuscar = "//div[@class[contains(.,'close-modal')]]";
 
-    private static JSONParser parser = new JSONParser();
-    private static JSONObject fileHAR = null;
+	private static JSONParser parser = new JSONParser();
+	private static JSONObject fileHAR = null;
 
 	public PageAyuda(WebDriver driver) {
 		super(driver);
 	}
-    
-    private JSONObject getFileJSON () throws Exception {
-        Reader reader = new InputStreamReader(PageAyuda.class.getResourceAsStream("/helpFooter.json"), "utf-8");
-        Object JSONFile = parser.parse(reader);
-        fileHAR = (JSONObject)JSONFile;
-        reader.close();
+	
+	private JSONObject getFileJSON () throws Exception {
+		Reader reader = new InputStreamReader(PageAyuda.class.getResourceAsStream("/helpFooter.json"), "utf-8");
+		Object JSONFile = parser.parse(reader);
+		fileHAR = (JSONObject)JSONFile;
+		reader.close();
 
-        return fileHAR;
-    }
+		return fileHAR;
+	}
 
-    public JSONArray getSectionFromJSON(String section) throws Exception{
-        return (JSONArray)getFileJSON().get(section);
-    }
+	public JSONArray getSectionFromJSON(String section) throws Exception{
+		return (JSONArray)getFileJSON().get(section);
+	}
 
-    public List<String> getKeysFromJSON () throws Exception {
-    	JSONObject jsonObject = getFileJSON();
-        ArrayList<String> keysFromJSON = new ArrayList<>();
-        for (Object key : jsonObject.keySet()) {
-            keysFromJSON.add((String) key);
-        }
-        return keysFromJSON;
-    }
+	public List<String> getKeysFromJSON () throws Exception {
+		JSONObject jsonObject = getFileJSON();
+		ArrayList<String> keysFromJSON = new ArrayList<>();
+		for (Object key : jsonObject.keySet()) {
+			keysFromJSON.add((String) key);
+		}
+		return keysFromJSON;
+	}
 
-    private String getXPath(String apartado) {
-        return ("//*[text()='" + apartado + "']");
-    }
-    
-    public void selectSection(String apartado) {
-    	By byElem = By.xpath(getXPath(apartado));
-    	click(byElem).type(javascript).exec();
-    }
-    
-    public boolean sectionInState(String apartado, State state) {
-    	By byElem = By.xpath(getXPath(apartado));
-    	return (state(state, byElem).wait(2).check());
-    }
-    
-    public void selectCloseBuscar() {
-    	click(By.xpath(xPathCloseBuscar)).exec();
-    }
-    
-    public enum StateApartado {	collapsed, expanded };
-    
-    private String getXPathApartado(String apartado, StateApartado stateApartado) {
-    	return ("//article[@class[contains(.,'" + stateApartado + "')]]" + getXPath(apartado));
-    }
+	private String getXPath(String apartado) {
+		return ("//*[text()='" + apartado + "']");
+	}
+	
+	public void selectSection(String apartado) {
+		By byElem = By.xpath(getXPath(apartado));
+		click(byElem).type(javascript).exec();
+	}
+	
+	public boolean sectionInState(String apartado, State state) {
+		By byElem = By.xpath(getXPath(apartado));
+		return (state(state, byElem).wait(2).check());
+	}
+	
+	public void selectCloseBuscar() {
+		click(By.xpath(xPathCloseBuscar)).exec();
+	}
+	
+	public enum StateApartado {	collapsed, expanded };
+	
+	private String getXPathApartado(String apartado, StateApartado stateApartado) {
+		return ("//article[@class[contains(.,'" + stateApartado + "')]]" + getXPath(apartado));
+	}
 
 	public boolean isApartadoInStateUntil(String apartado, StateApartado stateApartado, int maxSeconds) {
 		String xpathApartado = getXPathApartado(apartado, stateApartado);

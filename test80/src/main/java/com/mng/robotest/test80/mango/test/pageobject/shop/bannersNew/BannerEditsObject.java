@@ -25,16 +25,16 @@ public class BannerEditsObject extends BannerObject {
 	}
 	
 	@Override
-    protected String getUrlBanner(WebElement bannerScreen) {
-    	return (bannerScreen.getAttribute("href"));
-    }
-    
+	protected String getUrlBanner(WebElement bannerScreen) {
+		return (bannerScreen.getAttribute("href"));
+	}
+	
 	@Override
-    protected String getSrcImageBanner(WebElement bannerScreen) {
-    	List<WebElement> listImgsBanner = UtilsMangoTest.findDisplayedElements(bannerScreen, By.xpath(".//img"));
-    	if (listImgsBanner.size() > 0) {
-    		return (listImgsBanner.get(0).getAttribute("src"));
-    	}	
-    	return "";
-    }
+	protected String getSrcImageBanner(WebElement bannerScreen) {
+		List<WebElement> listImgsBanner = UtilsMangoTest.findDisplayedElements(bannerScreen, By.xpath(".//img"));
+		if (listImgsBanner.size() > 0) {
+			return (listImgsBanner.get(0).getAttribute("src"));
+		}	
+		return "";
+	}
 }

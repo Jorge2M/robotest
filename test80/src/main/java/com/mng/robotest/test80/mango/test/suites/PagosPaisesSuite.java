@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.factoryes.ListPrecompraPaises;
 
 public class PagosPaisesSuite extends SuiteMaker {
-    
+	
 	public enum VersionPagosSuite {
 		//TODO eliminar las que ya no son necesrias después de la elminia
 		V1(false, false, false, false),

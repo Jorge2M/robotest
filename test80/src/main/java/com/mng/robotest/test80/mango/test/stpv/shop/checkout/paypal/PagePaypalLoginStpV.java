@@ -12,18 +12,18 @@ public class PagePaypalLoginStpV {
 	@Validation (
 		description="Aparece la página de login (la esperamos hasta un máximo de #{maxSeconds} segundos)",
 		level=State.Defect)
-    public static boolean validateIsPageUntil(int maxSeconds, WebDriver driver) {
-        return (PagePaypalLogin.isPageUntil(maxSeconds, driver));
-    }
-    
+	public static boolean validateIsPageUntil(int maxSeconds, WebDriver driver) {
+		return (PagePaypalLogin.isPageUntil(maxSeconds, driver));
+	}
+	
 	@Step (
 		description="Introducimos las credenciales (#{userMail} - #{password}) y pulsamos el botón \"Iniciar sesión\"", 
-        expected="Aparece la página de inicio de sesión en Paypal")
-    public static void loginPaypal(String userMail, String password, WebDriver driver) {  
-        String paginaPadre = driver.getWindowHandle();
-        PagePaypalLogin.inputUserAndPassword(userMail, password, driver);
-        PagePaypalLogin.clickIniciarSesion(driver);
-        driver.switchTo().window(paginaPadre); //Salimos del iframe
-        PagePaypalSelectPagoStpV.validateIsPageUntil(20, driver);
-    }
+		expected="Aparece la página de inicio de sesión en Paypal")
+	public static void loginPaypal(String userMail, String password, WebDriver driver) {  
+		String paginaPadre = driver.getWindowHandle();
+		PagePaypalLogin.inputUserAndPassword(userMail, password, driver);
+		PagePaypalLogin.clickIniciarSesion(driver);
+		driver.switchTo().window(paginaPadre); //Salimos del iframe
+		PagePaypalSelectPagoStpV.validateIsPageUntil(20, driver);
+	}
 }

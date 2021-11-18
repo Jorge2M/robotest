@@ -11,14 +11,14 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 public class PageGestorCheques extends PageObjTM {
 	
-    public static String titulo = "Gestor de Cheques";
-    public static String tituloDetalles = "DETALLES CHEQUE REGALO";
-    static String iniXPathTitulo = "//td[@class='txt11B' and text()[contains(.,'";
-    static String XPathDivContent = "//div[@id='busquedaRapidaContent']";
-    static String XPathTextArea = XPathDivContent + "//textarea";
-    static String XPathCorreoReceptorButton = XPathDivContent + "//input[@value='Correo del receptor']";
-    static String XPathTabla = "//table[@class[contains(.,'grupotalla-table')]]";
-    static String XPathDetallesTablaChequeNumero = "//table//td[text()[contains(.,'CHEQUE NUMERO')]]";
+	public static String titulo = "Gestor de Cheques";
+	public static String tituloDetalles = "DETALLES CHEQUE REGALO";
+	static String iniXPathTitulo = "//td[@class='txt11B' and text()[contains(.,'";
+	static String XPathDivContent = "//div[@id='busquedaRapidaContent']";
+	static String XPathTextArea = XPathDivContent + "//textarea";
+	static String XPathCorreoReceptorButton = XPathDivContent + "//input[@value='Correo del receptor']";
+	static String XPathTabla = "//table[@class[contains(.,'grupotalla-table')]]";
+	static String XPathDetallesTablaChequeNumero = "//table//td[text()[contains(.,'CHEQUE NUMERO')]]";
 
 	public enum ButtonsCheque implements ElementPage {
 		editar("//input[@value='EDITAR']"),
@@ -75,43 +75,43 @@ public class PageGestorCheques extends PageObjTM {
 	public PageGestorCheques(WebDriver driver) {
 		super(driver);
 	}
-    
-    private String getXPathFila(int numFila) {
-        return (XPathTabla + "//tr[" + numFila + "]");
-    }
-    
-    private String getXPathMailFila(int numFila, String mail) {
-        String xpathFila = getXPathFila(numFila);
-        return (xpathFila + "//td[contains(.,'" + mail + "')]");
-    }
-    
-    private String getXPathTdPedido(int numFila, String mail) {
-        String xpathLinea = getXPathMailFila(numFila, mail);
-        return xpathLinea + "/../td[1]";
-    }
-    
-    private String getXPathLinkPedido(int numFila, String mail) {
-        String xpathLink = getXPathTdPedido(numFila, mail);
-        return xpathLink + "//a";
-    }    
-    
-    private String getTextPedidoFromXPath(int numFila, String mail) {
-    	String xpathLinea = getXPathLinkPedido(numFila, mail);
-        return driver.findElement(By.xpath(xpathLinea)).getText();
-    }
-    
-    private String getXPathTitulo(String title){
-    	return (iniXPathTitulo + title + "')]]");
-    }
-    
-    private String getXPathDetallesMail(String mail){
-    	return XPathDetallesTablaChequeNumero + "/ancestor::tr/following::tr//table//td[contains(.,'" + mail + "')]";
-    }
-    
-    private String getXPathDetallesPedido(String pedido){
-    	return XPathDetallesTablaChequeNumero + "/ancestor::tr/following::tr//table//td[contains(.,'" + pedido + "')]";
-    }
-    
+	
+	private String getXPathFila(int numFila) {
+		return (XPathTabla + "//tr[" + numFila + "]");
+	}
+	
+	private String getXPathMailFila(int numFila, String mail) {
+		String xpathFila = getXPathFila(numFila);
+		return (xpathFila + "//td[contains(.,'" + mail + "')]");
+	}
+	
+	private String getXPathTdPedido(int numFila, String mail) {
+		String xpathLinea = getXPathMailFila(numFila, mail);
+		return xpathLinea + "/../td[1]";
+	}
+	
+	private String getXPathLinkPedido(int numFila, String mail) {
+		String xpathLink = getXPathTdPedido(numFila, mail);
+		return xpathLink + "//a";
+	}	
+	
+	private String getTextPedidoFromXPath(int numFila, String mail) {
+		String xpathLinea = getXPathLinkPedido(numFila, mail);
+		return driver.findElement(By.xpath(xpathLinea)).getText();
+	}
+	
+	private String getXPathTitulo(String title){
+		return (iniXPathTitulo + title + "')]]");
+	}
+	
+	private String getXPathDetallesMail(String mail){
+		return XPathDetallesTablaChequeNumero + "/ancestor::tr/following::tr//table//td[contains(.,'" + mail + "')]";
+	}
+	
+	private String getXPathDetallesPedido(String pedido){
+		return XPathDetallesTablaChequeNumero + "/ancestor::tr/following::tr//table//td[contains(.,'" + pedido + "')]";
+	}
+	
 	public boolean isPage() {
 		return (state(Present, By.xpath(getXPathTitulo(titulo))).check());
 	}

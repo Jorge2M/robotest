@@ -10,9 +10,9 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.trustpay.Page
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 public class PageTrustPayResultStpV {
-    
+	
 	@Validation
-    public static ChecksTM validateIsPage(String importeTotal, String codPais, WebDriver driver) {
+	public static ChecksTM validateIsPage(String importeTotal, String codPais, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
 		String textHeader = "Payment In Progress";
 	 	validations.add(
@@ -25,8 +25,8 @@ public class PageTrustPayResultStpV {
 			"Figura el botón \"continue\"",
 			PageTrustPayResult.isPresentButtonContinue(driver), State.Defect); 
 	 	return validations;
-    }
-    
+	}
+	
 	@Step (
 		description="Seleccionar el botón para continuar con el pago", 
 		expected="El pago se completa correctamente")

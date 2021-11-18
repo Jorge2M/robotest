@@ -9,23 +9,23 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.Fro
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.ideal.PageIdealSimuladorStpV;
 
 public class PagoIdeal extends PagoStpV {
-    
-    public PagoIdeal(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
-        super(dCtxSh, dCtxPago, driver);
-        super.isAvailableExecPay = true;
-    }
-    
-    @SuppressWarnings("static-access")
+	
+	public PagoIdeal(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
+		super(dCtxSh, dCtxPago, driver);
+		super.isAvailableExecPay = true;
+	}
+	
+	@SuppressWarnings("static-access")
 	@Override
-    public void testPagoFromCheckout(boolean execPay) throws Exception {
-        pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, dCtxSh);
-        pageCheckoutWrapperStpV.getSecIdealStpV().validateIsSectionOk();
-        
-        if (execPay) {
-            pageCheckoutWrapperStpV.getSecIdealStpV().clickBanco(BancoSeleccionado.TestIssuer);
-            dCtxPago = checkoutFlow.checkout(From.MetodosPago);
-            PageIdealSimuladorStpV.validateIsPage(driver);
-            PageIdealSimuladorStpV.clickContinueButton(driver);
-        }
-    }
+	public void testPagoFromCheckout(boolean execPay) throws Exception {
+		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, dCtxSh);
+		pageCheckoutWrapperStpV.getSecIdealStpV().validateIsSectionOk();
+		
+		if (execPay) {
+			pageCheckoutWrapperStpV.getSecIdealStpV().clickBanco(BancoSeleccionado.TestIssuer);
+			dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+			PageIdealSimuladorStpV.validateIsPage(driver);
+			PageIdealSimuladorStpV.clickContinueButton(driver);
+		}
+	}
 }

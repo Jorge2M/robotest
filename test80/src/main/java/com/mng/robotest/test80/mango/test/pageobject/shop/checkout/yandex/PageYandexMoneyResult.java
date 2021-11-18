@@ -9,17 +9,17 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 
 public class PageYandexMoneyResult {
-    
-    public static String msgTransferOk = "Обработка завершена. Запрос выполнен успешно. Зачисление перевода проведено успешно";
-    static String XPathDivResultMsg = "//div[@class='docbook-para']";
-    
-    public static boolean isPage(WebDriver driver) {
-    	return (state(Visible, By.xpath(XPathDivResultMsg), driver).check());
-    }
-        
-    public static boolean isVisibleMsgTransferOk(WebDriver driver) {
-        WebElement divResult = driver.findElement(By.xpath(XPathDivResultMsg));
-        return (state(Visible, By.xpath(XPathDivResultMsg), driver).check() &&
-                divResult.getText().contains(msgTransferOk));
-    }
+	
+	public static String msgTransferOk = "Обработка завершена. Запрос выполнен успешно. Зачисление перевода проведено успешно";
+	static String XPathDivResultMsg = "//div[@class='docbook-para']";
+	
+	public static boolean isPage(WebDriver driver) {
+		return (state(Visible, By.xpath(XPathDivResultMsg), driver).check());
+	}
+		
+	public static boolean isVisibleMsgTransferOk(WebDriver driver) {
+		WebElement divResult = driver.findElement(By.xpath(XPathDivResultMsg));
+		return (state(Visible, By.xpath(XPathDivResultMsg), driver).check() &&
+				divResult.getText().contains(msgTransferOk));
+	}
 }

@@ -19,26 +19,26 @@ public class PageLoginVOTFStpV {
 		description=
 			"Acceder a la página de Login e identificarnos con un usuario de " + 
 			tagNombrePais + " (" + tagUsuarioVotf + " / " + tagPasswordVotf + ")") 
-    public static void goToAndLogin(String urlAcceso, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+	public static void goToAndLogin(String urlAcceso, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dCtxSh.pais));
-        String usuarioVOTF = accesoVOTF.getUsuario();
-        String passwordVOTF = accesoVOTF.getPassword();
-        
-        StepTM step = TestMaker.getCurrentStepInExecution();
-        step.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
-        step.replaceInDescription(tagUsuarioVotf, usuarioVOTF);
-        step.replaceInDescription(tagPasswordVotf, tagPasswordVotf);
+		String usuarioVOTF = accesoVOTF.getUsuario();
+		String passwordVOTF = accesoVOTF.getPassword();
+		
+		StepTM step = TestMaker.getCurrentStepInExecution();
+		step.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
+		step.replaceInDescription(tagUsuarioVotf, usuarioVOTF);
+		step.replaceInDescription(tagPasswordVotf, tagPasswordVotf);
 
-        int numIdiomas = dCtxSh.pais.getListIdiomas().size();
-        if (numIdiomas > 1) {
-            step.setResExpected("Aparece la página de selección del idioma");
-        } else {
-        	step.setResExpected("Aparece la página de selección de la línea");
-        }
-        
-        PageLoginVOTF.goToFromUrlAndSetTestABs(/*urlAcceso,*/ dCtxSh, driver);
-        PageLoginVOTF.inputUsuario(usuarioVOTF, driver);
-        PageLoginVOTF.inputPassword(passwordVOTF, driver);
-        PageLoginVOTF.clickButtonContinue(driver);
-    }
+		int numIdiomas = dCtxSh.pais.getListIdiomas().size();
+		if (numIdiomas > 1) {
+			step.setResExpected("Aparece la página de selección del idioma");
+		} else {
+			step.setResExpected("Aparece la página de selección de la línea");
+		}
+		
+		PageLoginVOTF.goToFromUrlAndSetTestABs(/*urlAcceso,*/ dCtxSh, driver);
+		PageLoginVOTF.inputUsuario(usuarioVOTF, driver);
+		PageLoginVOTF.inputPassword(passwordVOTF, driver);
+		PageLoginVOTF.clickButtonContinue(driver);
+	}
 }

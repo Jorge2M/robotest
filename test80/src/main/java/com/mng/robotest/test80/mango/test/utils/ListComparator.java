@@ -36,21 +36,21 @@ public class ListComparator {
 	
 	public String getHtml() {
 		String result = getHtmlHead();
-	    for (DuplaLabel dupla : matchedLists) {
-	    	result += getHtmlDupla(dupla);
-	    }
-	    return (result);
+		for (DuplaLabel dupla : matchedLists) {
+			result += getHtmlDupla(dupla);
+		}
+		return (result);
 	}
 	
 	private String getHtmlHead() {
-	    return (
-	    	"<div style=\"display:table;margin:3px;\">" +
-	    	"<div style=\"display:table-row;font-weight:bold;text-align:center;\">" +
-	    	"<div style=\"display:table-cell;border:solid;border-width:thin;padding-left:3px;padding-right:3px;\"> EXPECTED </div>" +
-	    	"<div style=\"display:table-cell;border:solid;border-width:thin;padding-left:3px;padding-right:3px;\"> OBTAINED </div>" +
-	    	"</div>");
+		return (
+			"<div style=\"display:table;margin:3px;\">" +
+			"<div style=\"display:table-row;font-weight:bold;text-align:center;\">" +
+			"<div style=\"display:table-cell;border:solid;border-width:thin;padding-left:3px;padding-right:3px;\"> EXPECTED </div>" +
+			"<div style=\"display:table-cell;border:solid;border-width:thin;padding-left:3px;padding-right:3px;\"> OBTAINED </div>" +
+			"</div>");
 	}
-	    
+		
 	private String getHtmlDupla(DuplaLabel dupla) {
 		String  divRow = "<div style=\"display:table-row;color:#000000;\">";
 		if (dupla.label1==null || dupla.label2==null ||
@@ -75,52 +75,52 @@ public class ListComparator {
 	
 	private List<DuplaLabel> getMatchLists() {
 		List<DuplaLabel> listReturn = new ArrayList<>();
-	    Iterator<? extends Label> itExpected = listExpected.iterator();
-	    Iterator<? extends Label> itObtained = listObtained.iterator();
-	    String labelExpectedAct = getNextLabel(itExpected);
-	    String labelObtainedAct = getNextLabel(itObtained);
+		Iterator<? extends Label> itExpected = listExpected.iterator();
+		Iterator<? extends Label> itObtained = listObtained.iterator();
+		String labelExpectedAct = getNextLabel(itExpected);
+		String labelObtainedAct = getNextLabel(itObtained);
 		do {
-		    Case caseObtained = getCase(labelExpectedAct, labelObtainedAct);
-		    switch (caseObtained) {
-		    case match: 
-	    		listReturn.add(DuplaLabel.getNew(labelExpectedAct, labelObtainedAct));
-	    		labelExpectedAct = getNextLabel(itExpected);
-	    		labelObtainedAct = getNextLabel(itObtained);
-	    		break;
-		    case nomatch_and_labelexpected_notexists_in_listobtained: 
-		    	listsMatch = false;
-    			listReturn.add(DuplaLabel.getNew(labelExpectedAct, null));
-    			labelExpectedAct = getNextLabel(itExpected);
-    			break;
-		    case nomatch_and_labelobtained_notexists_in_listexpected:
-		    	listsMatch = false;
-    			listReturn.add(DuplaLabel.getNew(null, labelObtainedAct));
-    			labelObtainedAct = getNextLabel(itObtained);
-    			break;
-		    case nomatch_but_labelexpected_exists_in_listobtained:
-		    	if (!surpassedList(labelObtainedAct)) {
-		    		labelObtainedAct = getNextLabel(itObtained);
-		    	} else {
-		    		labelExpectedAct = getNextLabel(itExpected);
-		    	}
-	    		break;
-		    case nomatch_but_labelobtained_exists_in_listexpected:
-		    	if (!surpassedList(labelExpectedAct)) {
-		    		labelExpectedAct = getNextLabel(itExpected);
-		    	} else {
-		    		labelObtainedAct = getNextLabel(itObtained);
-		    	}
+			Case caseObtained = getCase(labelExpectedAct, labelObtainedAct);
+			switch (caseObtained) {
+			case match: 
+				listReturn.add(DuplaLabel.getNew(labelExpectedAct, labelObtainedAct));
+				labelExpectedAct = getNextLabel(itExpected);
+				labelObtainedAct = getNextLabel(itObtained);
+				break;
+			case nomatch_and_labelexpected_notexists_in_listobtained: 
+				listsMatch = false;
+				listReturn.add(DuplaLabel.getNew(labelExpectedAct, null));
+				labelExpectedAct = getNextLabel(itExpected);
+				break;
+			case nomatch_and_labelobtained_notexists_in_listexpected:
+				listsMatch = false;
+				listReturn.add(DuplaLabel.getNew(null, labelObtainedAct));
+				labelObtainedAct = getNextLabel(itObtained);
+				break;
+			case nomatch_but_labelexpected_exists_in_listobtained:
+				if (!surpassedList(labelObtainedAct)) {
+					labelObtainedAct = getNextLabel(itObtained);
+				} else {
+					labelExpectedAct = getNextLabel(itExpected);
+				}
+				break;
+			case nomatch_but_labelobtained_exists_in_listexpected:
+				if (!surpassedList(labelExpectedAct)) {
+					labelExpectedAct = getNextLabel(itExpected);
+				} else {
+					labelObtainedAct = getNextLabel(itObtained);
+				}
 			}
-	    }
+		}
 		while (!surpassedList(labelExpectedAct) || !surpassedList(labelObtainedAct));
 
-	    return listReturn;
+		return listReturn;
 	}
 	
 	private Case getCase(String labelExpectedAct, String labelObtainedAct) {
-    	if (labelExpectedAct.compareTo(labelObtainedAct)==0) {
-    		return Case.match;
-    	} 
+		if (labelExpectedAct.compareTo(labelObtainedAct)==0) {
+			return Case.match;
+		} 
 		if (!surpassedList(labelExpectedAct) &&
 			!listContainsLabel(listObtained, labelExpectedAct)) {
 			return Case.nomatch_and_labelexpected_notexists_in_listobtained;

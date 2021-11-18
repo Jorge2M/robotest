@@ -15,15 +15,15 @@ public class PageMercpagoConfStpV {
 	@Validation (
 		description="Estamos en la página de confirmación del pago (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-    public static boolean validaIsPageUntil(int maxSeconds, Channel channel, WebDriver driver) {  
+	public static boolean validaIsPageUntil(int maxSeconds, Channel channel, WebDriver driver) {  
 		return (PageMercpagoConf.isPageUntil(channel, maxSeconds, driver));
-    }
-    
+	}
+	
 	@Step (
 		description="Seleccionar el botón \"Pagar\"", 
-        expected="Aparece la página de resultado")
-    public static void clickPagar(Channel channel, WebDriver driver) {
-        PageMercpagoConf.clickPagar(driver);
-        (new PageResultPagoStpV(TypePago.Mercadopago, channel, driver)).validaIsPageUntil(30);
-    }
+		expected="Aparece la página de resultado")
+	public static void clickPagar(Channel channel, WebDriver driver) {
+		PageMercpagoConf.clickPagar(driver);
+		(new PageResultPagoStpV(TypePago.Mercadopago, channel, driver)).validaIsPageUntil(30);
+	}
 }

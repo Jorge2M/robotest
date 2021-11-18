@@ -22,7 +22,7 @@ public class LineasArtBolsaDesktopOld extends LineasArtBolsa {
 	private final static String XPathPrecioEnteroRelativeArticle = ".//span[@class='bolsa_price_big' and (not(@style) or @style='')]";
 	private final static String XPathPrecioDecimalRelativeArticle = ".//span[@class='bolsa_price_small' and (not(@style) or @style='')]";
 	
-    private static final String TagRefArticle = "[TAGREF]";
+	private static final String TagRefArticle = "[TAGREF]";
 	private static final String XPathLinkBorrarArt = "//*[@class='boton_basura' and @onclick[contains(.,'" + TagRefArticle + "')]]/..";
 	
 	public LineasArtBolsaDesktopOld(Channel channel, WebDriver driver) {
@@ -66,11 +66,11 @@ public class LineasArtBolsaDesktopOld extends LineasArtBolsa {
 	}	
 	
 	@Override
-    public void clearArticuloAndWait(String refArticulo) throws Exception {
-        String xpathClearArt = getXPathLinkBorrarArt(refArticulo);
-        click(By.xpath(xpathClearArt)).exec();
-        waitForPageLoaded(driver); 
-    }
+	public void clearArticuloAndWait(String refArticulo) throws Exception {
+		String xpathClearArt = getXPathLinkBorrarArt(refArticulo);
+		click(By.xpath(xpathClearArt)).exec();
+		waitForPageLoaded(driver); 
+	}
 	
 	@Override
 	public void clickArticle(int position) {
@@ -91,16 +91,16 @@ public class LineasArtBolsaDesktopOld extends LineasArtBolsa {
 	public float getPrecioArticle(WebElement lineaArticleWeb) {
 		String parteEntera = getDataArticle(DataArtBolsa.PrecioEntero, lineaArticleWeb);
 		String parteDecimal = getDataArticle(DataArtBolsa.PrecioDecimal, lineaArticleWeb);
-		return (ImporteScreen.getFloatFromImporteMangoScreen(parteEntera + parteDecimal));        
+		return (ImporteScreen.getFloatFromImporteMangoScreen(parteEntera + parteDecimal));		
 	}
 	
 	private String getXPathItem(int position) {
 		return "(" + XPathLinea + ")[" + position + "]";
 	}
 	
-    private String getXPathLinkBorrarArt() {
-        return getXPathLinkBorrarArt("");
-    }
+	private String getXPathLinkBorrarArt() {
+		return getXPathLinkBorrarArt("");
+	}
 	
 	private String getXPathLinkBorrarArt(String refArticulo) {
 		return XPathLinkBorrarArt.replace(TagRefArticle, refArticulo);

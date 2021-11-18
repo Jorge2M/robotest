@@ -74,44 +74,44 @@ public class Page1EnvioCheckoutMobilStpV {
 			modalDroppoints.validaIsVisible(Channel.mobile, driver);
 		}
 	}
-    
-    @Validation (
-    	description="Queda seleccionado el bloque correspondiete a <b>#{tipoTransporte}</b> (lo esperamos hasta #{maxSeconds} segundos)",
-    	level=State.Warn)
-    public boolean validaBlockSelected(TipoTransporte tipoTransporte, int maxSeconds) throws Exception {
-        return (page1EnvioCheckoutMobil.isBlockSelectedUntil(tipoTransporte, maxSeconds));
-    }
-    
-    @Step (
-    	description="Seleccionar el botón \"Continuar\"", 
-        expected="Aparece la página asociada al Paso-2")
-    public void clickContinuarToMetodosPago(DataCtxShop dCtxSh, boolean saldoEnCuenta) throws Exception {
-    	page1EnvioCheckoutMobil.clickContinuar();
-        new PageCheckoutWrapperStpV(dCtxSh.channel, dCtxSh.appE, driver).validateLoadingDisappears(10);
-        checkAppearsStep2(dCtxSh.appE);
-        if (!saldoEnCuenta) {
-        	checkAppearsPageWithPaymentMethods(dCtxSh.pais, dCtxSh.appE);
-        }
-    }
-    
-    @Validation (
-    	description="Aparece la página asociada al Paso-2",
-    	level=State.Defect)
-    private boolean checkAppearsStep2(AppEcom app) {
-    	return (new Page2DatosPagoCheckoutMobil(Channel.mobile, app, driver).isPageUntil(3));
-    }
-    
-    @Validation (
-    	description="Están presentes los métodos de pago",
-    	level=State.Defect)
-    private boolean checkAppearsPageWithPaymentMethods(Pais pais, AppEcom app) {
-        return (new PageCheckoutWrapper(Channel.mobile, app, driver).isPresentMetodosPago());
-    }
-    
-    @Validation
-    public ChecksTM validaResultImputPromoEmpl() throws Exception {
-    	ChecksTM validations = ChecksTM.getNew();
-        int maxSeconds = 2;
+	
+	@Validation (
+		description="Queda seleccionado el bloque correspondiete a <b>#{tipoTransporte}</b> (lo esperamos hasta #{maxSeconds} segundos)",
+		level=State.Warn)
+	public boolean validaBlockSelected(TipoTransporte tipoTransporte, int maxSeconds) throws Exception {
+		return (page1EnvioCheckoutMobil.isBlockSelectedUntil(tipoTransporte, maxSeconds));
+	}
+	
+	@Step (
+		description="Seleccionar el botón \"Continuar\"", 
+		expected="Aparece la página asociada al Paso-2")
+	public void clickContinuarToMetodosPago(DataCtxShop dCtxSh, boolean saldoEnCuenta) throws Exception {
+		page1EnvioCheckoutMobil.clickContinuar();
+		new PageCheckoutWrapperStpV(dCtxSh.channel, dCtxSh.appE, driver).validateLoadingDisappears(10);
+		checkAppearsStep2(dCtxSh.appE);
+		if (!saldoEnCuenta) {
+			checkAppearsPageWithPaymentMethods(dCtxSh.pais, dCtxSh.appE);
+		}
+	}
+	
+	@Validation (
+		description="Aparece la página asociada al Paso-2",
+		level=State.Defect)
+	private boolean checkAppearsStep2(AppEcom app) {
+		return (new Page2DatosPagoCheckoutMobil(Channel.mobile, app, driver).isPageUntil(3));
+	}
+	
+	@Validation (
+		description="Están presentes los métodos de pago",
+		level=State.Defect)
+	private boolean checkAppearsPageWithPaymentMethods(Pais pais, AppEcom app) {
+		return (new PageCheckoutWrapper(Channel.mobile, app, driver).isPresentMetodosPago());
+	}
+	
+	@Validation
+	public ChecksTM validaResultImputPromoEmpl() throws Exception {
+		ChecksTM validations = ChecksTM.getNew();
+		int maxSeconds = 2;
 	 	validations.add(
 			"Aparece el descuento total aplicado al empleado (en menos de " + maxSeconds + " segundos)",
 			page1EnvioCheckoutMobil.isVisibleDescuentoEmpleadoUntil(maxSeconds), State.Warn);
@@ -119,12 +119,12 @@ public class Page1EnvioCheckoutMobilStpV {
 			"Aparece un descuento de empleado mayor que 0",
 			page1EnvioCheckoutMobil.validateDiscountEmpleadoNotNull(), State.Warn);
 	 	return validations;
-    }
-    
-    @Step (
-    	description="Seleccionamos la <b>#{posicion}a<b> franja horaria del envío \"Urgente - Horario personalizado\"</b>", 
-        expected="La franja horaria se selecciona correctamente")
-    public void selectFranjaHorariaUrgente(int posicion) {
-    	page1EnvioCheckoutMobil.selectFranjaHorariaUrgente(posicion);
-    }
+	}
+	
+	@Step (
+		description="Seleccionamos la <b>#{posicion}a<b> franja horaria del envío \"Urgente - Horario personalizado\"</b>", 
+		expected="La franja horaria se selecciona correctamente")
+	public void selectFranjaHorariaUrgente(int posicion) {
+		page1EnvioCheckoutMobil.selectFranjaHorariaUrgente(posicion);
+	}
 }
