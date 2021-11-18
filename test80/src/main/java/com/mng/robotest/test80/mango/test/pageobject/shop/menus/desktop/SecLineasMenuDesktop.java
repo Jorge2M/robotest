@@ -19,6 +19,7 @@ import com.mng.robotest.test80.mango.test.beans.Linea;
 import com.mng.robotest.test80.mango.test.beans.Pais;
 import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
+import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 
 public abstract class SecLineasMenuDesktop extends PageObjTM {
@@ -27,16 +28,16 @@ public abstract class SecLineasMenuDesktop extends PageObjTM {
 	
 	protected final AppEcom app;
 	
-    static String TagIdLinea = "@LineaId";
-    static String TagIdSublinea = "@SublineaId";
-    static String XPathMenuFatherWrapper = "//div[@id='navMain']";
-    static String XPathLineasMenuWrapper = "//div[@class='menu-section']";
-    static String XPathLinea = "//ul[@class[contains(.,'menu-section-brands')]]/li[@class[contains(.,'menu-item-brands')]]";
-    static String XPathLineaSpecificWithTag = 
-    	XPathLinea + 
-    	"//self::*[@id='" + TagIdLinea + "' or " +
-    			  "@id[contains(.,'sections_" + TagIdLinea + "')] or " +
-    			  "@id[contains(.,'sections-" + TagIdLinea + "')]]";
+	static String TagIdLinea = "@LineaId";
+	static String TagIdSublinea = "@SublineaId";
+	static String XPathMenuFatherWrapper = "//div[@id='navMain']";
+	static String XPathLineasMenuWrapper = "//div[@class='menu-section']";
+	static String XPathLinea = "//ul[@class[contains(.,'menu-section-brands')]]/li[@class[contains(.,'menu-item-brands')]]";
+	static String XPathLineaSpecificWithTag = 
+		XPathLinea + 
+		"//self::*[@id='" + TagIdLinea + "' or " +
+				  "@id[contains(.,'sections_" + TagIdLinea + "')] or " +
+				  "@id[contains(.,'sections-" + TagIdLinea + "')]]";
 
 	static String XPathSublineaLinkWithTag = 
 		"//div[" + 
@@ -50,17 +51,20 @@ public abstract class SecLineasMenuDesktop extends PageObjTM {
 	}
 	
 	public static SecLineasMenuDesktop factory(AppEcom app, WebDriver driver) {
-		if (app==AppEcom.outlet) {
+//		if (app==AppEcom.outlet ||
+//			//TODO temporalmente, de cara a BF2021 se ha restaurado en pro el menú antiguo
+//			//quitar esta línea cuando pase el BF
+//			UtilsMangoTest.isEntornoPRO(app, driver)) {
 			return new SecLineasMenuDesktopOld(app, driver);
-		}
-		return new SecLineasMenuDesktopNew(app, driver);
+//		}
+//		return new SecLineasMenuDesktopNew(app, driver);
 	}
 	
-    public String getXPathLinea(LineaType lineaType) {
-        String lineaIddom = SecMenusWrap.getIdLineaEnDOM(Channel.desktop, app, lineaType);
-        return (XPathLineaSpecificWithTag.replace(TagIdLinea, lineaIddom));
-    }
-    
+	public String getXPathLinea(LineaType lineaType) {
+		String lineaIddom = SecMenusWrap.getIdLineaEnDOM(Channel.desktop, app, lineaType);
+		return (XPathLineaSpecificWithTag.replace(TagIdLinea, lineaIddom));
+	}
+
     public String getXPathLineaSelected(LineaType lineaType) {
     	String xpathLinea = getXPathLinea(lineaType);
         return (xpathLinea + "//self::*[@class[contains(.,'selected')]]");    	
