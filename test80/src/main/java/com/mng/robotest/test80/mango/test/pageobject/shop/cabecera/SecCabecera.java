@@ -66,6 +66,7 @@ public abstract class SecCabecera extends PageObjTM {
 	
 	public static void buscarTexto(String referencia, Channel channel, AppEcom app, WebDriver driver) {
 		MenusUserWrapper menusUser = MenusUserWrapper.getNew(channel, app, driver);
+		menusUser.isMenuInStateUntil(UserMenu.lupa, State.Visible, 1);
 		menusUser.clickMenuAndWait(UserMenu.lupa);
 		SecSearch secSearch = SecSearch.getNew(channel, app, driver);
 		secSearch.search(referencia);

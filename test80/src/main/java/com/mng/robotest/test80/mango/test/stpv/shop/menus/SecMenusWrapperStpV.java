@@ -232,7 +232,7 @@ public class SecMenusWrapperStpV {
 		if (dCtxSh.channel.isDevice()) {
 			SecFiltrosStpV.selectFiltroMenus(app, channel, Arrays.asList(menu2onLevel), driver);
 		} else {
-			secMenusDesktopStpV.selectMenuLateral2oLevel(menu2onLevel, dCtxSh);
+			secMenusDesktopStpV.selectMenu2oLevel(menu2onLevel, dCtxSh);
 		}
 	}
 	

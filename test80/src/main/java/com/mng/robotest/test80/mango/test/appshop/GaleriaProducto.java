@@ -117,7 +117,7 @@ public class GaleriaProducto {
 		pageGaleriaStpV.selecColorFromArtGaleriaStep(1/*numArtConColores*/, 2/*posColor*/);
 		pageGaleriaStpV.selecArticuloGaleriaStep(1/*numArtConColores*/);
 	}
-	
+
 	@Test (
 		groups={"GaleriaProducto", "Canal:all_App:all"}, alwaysRun=true, 
 		description="[Usuario no registrado][Chrome] Acceder a galería camisas. Filtro color. Scroll")

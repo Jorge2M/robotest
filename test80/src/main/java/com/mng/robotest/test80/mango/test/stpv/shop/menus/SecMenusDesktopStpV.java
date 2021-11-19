@@ -100,18 +100,30 @@ public class SecMenusDesktopStpV {
 		validaSelecMenu(menu1rstLevel, dCtxSh);
 	}
 	
+	public void selectMenu2oLevel(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh) throws Exception {
+		if (app==AppEcom.outlet) {
+			selectMenuLateral2oLevel(menu2onLevel);
+		} else {
+			selectMenuSubfamilia(menu2onLevel, dCtxSh);
+		}
+		validaSelecMenu(menu2onLevel, dCtxSh);
+	}
+	
+	@Step (
+		description="Seleccionar la subfamília <b>#{menu2onLevel}</b>", 
+		expected="Aparecen artículos asociados al menú",
+		saveNettraffic=SaveWhen.Always)
+	private void selectMenuSubfamilia(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh) throws Exception {
+		PageGaleria pageGaleria = PageGaleriaDesktop.getNew(dCtxSh.channel, app, driver);
+		((PageGaleriaDesktop)pageGaleria).secSubmenusGallery.clickSubmenu(menu2onLevel.getNombre(), driver);
+	}
+	
 	@Step (
 		description="Seleccionar el menú lateral de 2o nivel <b>#{menu2onLevel}</b>", 
 		expected="Aparecen artículos asociados al menú",
 		saveNettraffic=SaveWhen.Always)
-	public void selectMenuLateral2oLevel(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh) throws Exception {
-		if (app==AppEcom.outlet) { 
-			secMenus.secMenuLateral.clickMenu(menu2onLevel);
-		} else {
-			PageGaleria pageGaleria = PageGaleriaDesktop.getNew(dCtxSh.channel, app, driver);
-			((PageGaleriaDesktop)pageGaleria).secSubmenusGallery.clickSubmenu(menu2onLevel.getNombre(), driver);
-		}
-		validaSelecMenu(menu2onLevel, dCtxSh);
+	private void selectMenuLateral2oLevel(Menu2onLevel menu2onLevel) throws Exception {
+		secMenus.secMenuLateral.clickMenu(menu2onLevel);
 	}
 	
 	/**

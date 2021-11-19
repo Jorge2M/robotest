@@ -30,6 +30,11 @@ public class SecLineasMenuDesktopOld extends SecLineasMenuDesktop {
 
 	private String getXPathSublineaLink(SublineaType sublineaType) {
 		String idSublineaEnDom = sublineaType.getId(app);
+		if (sublineaType==SublineaType.teen_nina ||
+			sublineaType==SublineaType.teen_nino) {
+			idSublineaEnDom = sublineaType.getId(AppEcom.outlet);
+		}
+		
 		return (XPathSublineaLinkWithTag.replace(TagIdSublinea, idSublineaEnDom));
 	}
 	
