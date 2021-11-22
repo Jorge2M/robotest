@@ -30,7 +30,7 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	final static String XPathWrapper = "//div[@id='stickyMenu']";
 	final static String XPathLinkOrdenWithTag = "//a[text()[contains(.,'" + TagOrdenacion + "')]]";
 	final static String XPathLinkColorWithTagOutlet = "//a[@aria-label[contains(.,'" + TagColor + "')]]";
-	final static String XPathLinkColorWithTagShop = "//label[@for[contains(.,'filtercolor')] and text()[contains(.,'" + TagColor + "')]]";
+	final static String XPathLinkColorWithTagShop = "//label[(@for[contains(.,'filtercolor')] or @for[contains(.,'multiSelectGroupsColors')]) and text()[contains(.,'" + TagColor + "')]]";
 	final static String XPathLinkColorWithTagTabletOutlet	 = "//label[@for[contains(.,'color_" + TagColor + "')]]";
 	
 	final PageGaleria pageGaleria;
@@ -144,7 +144,7 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	
 	//TODO hablar con Sergio Campillo para que añada algún id no-react
 	private static final String XPathCapaFiltersShop = "//div[@class[contains(.,'filters--')]]";
-	private static final String XPathLinkFiltrarShop = "//button[@id='filtersBtn']";
+	private static final String XPathLinkFiltrarShop = "//button[@id='filtersBtn' or @class[contains(.,'filters__button')]]";
 	public void showFilters() {
 		if (app!=AppEcom.outlet) {
 			if (!isFiltersShopVisible(1) &&

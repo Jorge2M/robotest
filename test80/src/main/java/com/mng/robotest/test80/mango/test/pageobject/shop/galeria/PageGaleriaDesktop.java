@@ -18,6 +18,8 @@ import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
@@ -590,9 +592,15 @@ public class PageGaleriaDesktop extends PageGaleria {
 	throws Exception {
 		//Click Sliders
 		for (TypeSlider typeSlider : typeSliderList) {
-			WebElement slider = hoverSliderUntilClickable(typeSlider, articulo);
-			slider.click();
-			waitForAjax(driver, 1/*timeoutInSeconds*/);
+			//WebElement slider = hoverSliderUntilClickable(typeSlider, articulo);
+			hoverArticle(articulo);
+			PageObjTM.waitMillis(500);
+			hoverArticle(articulo);
+			PageObjTM.waitMillis(500);
+			String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
+			//driver.findElement(By.xpath("//*[@id='g1704908099']/div/div[2]")).click();
+			click(articulo).by(By.xpath(xpathSlider)).exec();
+			waitForAjax(driver, 1);
 			Thread.sleep(1000);
 		}
 	}
@@ -612,33 +620,34 @@ public class PageGaleriaDesktop extends PageGaleria {
 		return (state(Present, article).by(By.xpath("." + xpathSlider)).check());
 	}
 	
-	public WebElement hoverSliderUntilClickable(TypeSlider typeSlider, WebElement article) {
-		String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
-		for (int i=0; i<5; i++) {
-			hoverArticle(article);
-			if (state(Clickable, article).by(By.xpath("." + xpathSlider)).wait(2).check()) {
-				break;
-			}
-			moveToElement(article.findElement(By.xpath("//a")), driver);
-		}
-		WebElement slider = article.findElement(By.xpath("." + xpathSlider));
-//		if (getTypeDriver(driver)!=WebDriverType.firefox) {
-//			isElementClickableUntil(driver, slider, 5);
-//		} else {
-//			//TODO En el caso de Firefox-Geckodriver hay problemas con los moveToElement. 
-//			//En este caso parece que se posiciona en la esquina superior izquierda
-//			//Cuando se solvente podremos eliminar este código específico
-//			Actions actions = new Actions(driver);
-//			int i=0;
-//			while (!isElementClickableUntil(driver, slider, 1) && i<5) {
-//				actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).build().perform();
-//				hoverArticle(article);
-//				i+=1;
-//			}
-//		}
-		
-		return slider;
-	}
+//	public WebElement hoverSliderUntilClickable(TypeSlider typeSlider, WebElement article) {
+//		String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
+////		for (int i=0; i<5; i++) {
+//			hoverArticle(article);
+//			waitMillis(500);
+////			if (state(Clickable, article).by(By.xpath("." + xpathSlider)).wait(2).check()) {
+////				break;
+////			}
+////			moveToElement(article.findElement(By.xpath("//a")), driver);
+////		}
+//		WebElement slider = article.findElement(By.xpath("." + xpathSlider));
+////		if (getTypeDriver(driver)!=WebDriverType.firefox) {
+////			isElementClickableUntil(driver, slider, 5);
+////		} else {
+////			//TODO En el caso de Firefox-Geckodriver hay problemas con los moveToElement. 
+////			//En este caso parece que se posiciona en la esquina superior izquierda
+////			//Cuando se solvente podremos eliminar este código específico
+////			Actions actions = new Actions(driver);
+////			int i=0;
+////			while (!isElementClickableUntil(driver, slider, 1) && i<5) {
+////				actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).build().perform();
+////				hoverArticle(article);
+////				i+=1;
+////			}
+////		}
+//		
+//		return slider;
+//	}
 	
 	public String getNombreArticulo(int numArticulo) {
 		return (driver.findElement(By.xpath("(" + XPathArticulo + ")[" + numArticulo + "]//span[" + classProductName + "]")).getText().trim());
