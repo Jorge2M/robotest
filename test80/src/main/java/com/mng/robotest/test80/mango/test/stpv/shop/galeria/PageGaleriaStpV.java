@@ -444,31 +444,31 @@ public class PageGaleriaStpV {
 		expected="Aparece el artículo original(" + tagNombreArt + ")")
 	public String clicksSliderArticuloConColores(int numArtConColores, List<TypeSlider> typeSliderList, String srcImageExpected) 
 	throws Exception {
-	   if (channel!=Channel.desktop) {
-		   throw new RuntimeException("Method clickSliderArticuloConColores doesn't support channel " + channel);
-	   }
-	   
-	   String slidersListStr = getStringSliderList(typeSliderList);
-	   StepTM stepTM = TestMaker.getCurrentStepInExecution();
-	   stepTM.replaceInDescription(tagSliderList, slidersListStr);
-	   
-	   //En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax. 
-	   //En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
-	   SeleniumUtils.waitForPageLoaded(driver, 2);
-	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-	   WebElement articuloColores = pageGaleriaDesktop.getArticuloConVariedadColoresAndHoverNoDoble(numArtConColores);
-	   stepTM.replaceInDescription(tagNombreArt, pageGaleria.getNombreArticulo(articuloColores));
-	   stepTM.replaceInExpected(tagNombreArt, pageGaleria.getNombreArticulo(articuloColores));
-	   String srcImg1erSlider = pageGaleria.getImagenArticulo(articuloColores);
-	   pageGaleriaDesktop.clickSliderAfterHoverArticle(articuloColores, typeSliderList);
-	   
-	   String srcImg2oSlider = pageGaleria.getImagenArticulo(articuloColores);
-	   checkImageSliderArticleHasChanged(srcImg1erSlider, srcImg2oSlider, typeSliderList.size());
-	   if ("".compareTo(srcImageExpected)!=0) {
-		   checkActualImgSliderIsTheExpected(srcImg2oSlider, srcImageExpected);
-	   }
-	   return srcImg2oSlider;
-   }
+		if (channel!=Channel.desktop) {
+			throw new RuntimeException("Method clickSliderArticuloConColores doesn't support channel " + channel);
+		}
+
+		String slidersListStr = getStringSliderList(typeSliderList);
+		StepTM stepTM = TestMaker.getCurrentStepInExecution();
+		stepTM.replaceInDescription(tagSliderList, slidersListStr);
+
+		//En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax. 
+		//En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
+		SeleniumUtils.waitForPageLoaded(driver, 2);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
+		WebElement articuloColores = pageGaleriaDesktop.getArticuloConVariedadColoresAndHoverNoDoble(numArtConColores);
+		stepTM.replaceInDescription(tagNombreArt, pageGaleria.getNombreArticulo(articuloColores));
+		stepTM.replaceInExpected(tagNombreArt, pageGaleria.getNombreArticulo(articuloColores));
+		String srcImg1erSlider = pageGaleria.getImagenArticulo(articuloColores);
+		pageGaleriaDesktop.clickSliderAfterHoverArticle(articuloColores, typeSliderList);
+		
+		String srcImg2oSlider = pageGaleria.getImagenArticulo(articuloColores);
+		checkImageSliderArticleHasChanged(srcImg1erSlider, srcImg2oSlider, typeSliderList.size());
+		if ("".compareTo(srcImageExpected)!=0) {
+			checkActualImgSliderIsTheExpected(srcImg2oSlider, srcImageExpected);
+		}
+		return srcImg2oSlider;
+	}
 
 	@Validation
 	private ChecksTM checkImageSliderArticleHasChanged(String srcImg1erSlider, String srcImg2oSlider, int numClicks) {

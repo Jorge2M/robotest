@@ -64,7 +64,10 @@ public class FichaProducto {
 		SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
 		PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
 		
-		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
+		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver)
+				.numProducts(80)
+				.build();
+		
 		List<FilterType> filterOnline = Arrays.asList(FilterType.Online);
 		Garment articleOnline = getterProducts.getOneFiltered(filterOnline);
 		if (articleOnline!=null) {

@@ -232,7 +232,7 @@
 <idioma acceso="al">IN</idioma>
 <tarifa>AL</tarifa>
 <codpos>1506</codpos>
-<telefono>665015122</telefono>
+<telefono>672020241</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>true</miscompras>
@@ -572,10 +572,9 @@
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-310;</pago>
-<!-- 
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
-	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-183;</pago> --><!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
+	nombre="НАЛОЖЕН ПЛАТЕЖ" testpasarela='s' testpago='s'>&TPV-183;</pago><!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
@@ -1289,7 +1288,7 @@
 <idioma acceso="ie">IN</idioma>
 <rgpd>S</rgpd>
 <tarifa>IR</tarifa>
-<codpos>08720</codpos>
+<codpos>A65 F4E2</codpos>
 <telefono>881234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
