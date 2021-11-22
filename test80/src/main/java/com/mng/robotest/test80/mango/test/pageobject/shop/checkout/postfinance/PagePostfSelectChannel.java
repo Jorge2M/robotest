@@ -10,15 +10,15 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 public class PagePostfSelectChannel extends PageObjTM {
 
 	public enum ChannelPF {
-		App("link-pfc"),
-		Card("link-classic");
+		App("opfc"),
+		Card("classic");
 		
 		private final String id;
 		private ChannelPF(String id) {
 			this.id = id;
 		}
-		public String getId() {
-			return id;
+		public String getXPath() {
+			return "//button[@onclick='" + id + "()']";
 		}
 	}
 	
@@ -27,10 +27,10 @@ public class PagePostfSelectChannel extends PageObjTM {
 	}
 	
 	public boolean isPage(int maxSeconds) {
-		return state(State.Visible, By.id(ChannelPF.Card.getId())).check();
+		return state(State.Visible, By.xpath(ChannelPF.Card.getXPath())).check();
 	}
 	
 	public void selectChannel(ChannelPF channelPF) {
-		click(By.id(channelPF.getId())).exec();
+		click(By.xpath(channelPF.getXPath())).exec();
 	}
 }

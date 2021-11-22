@@ -3,15 +3,20 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.postfinance;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PagePostfCodSeg {
+public class PagePostfCodSeg extends PageObjTM {
 
-	static String XPathAceptarButton = "//form/input[@id='btn_Accept']";
-	static String XPathInputCodSeg = "//input[@id='postfinanceCardId']";
-	static String XPathButtonWeiter = "//button[@class='efinance-button' and text()[contains(.,'Weiter')]]";
+	private final static String XPathAceptarButton = "//form/input[@id='btn_Accept']";
+	private final static String XPathInputCodSeg = "//input[@id='postfinanceCardId']";
+	private final static String XPathButtonWeiter = "//button[@class='efinance-button' and text()[contains(.,'Weiter')]]";
+	
+	public PagePostfCodSeg(WebDriver driver) {
+		super(driver);
+	}
 	
 	/**
 	 * @return si se trata de la pasarela de test
@@ -21,14 +26,14 @@ public class PagePostfCodSeg {
 	 *   PRE-Postfinance -> https://e-payment.postfinance.ch/ncol/test/orderstandard.asp
 	 *   PRO-PostFinance -> https://epayment.postfinance.ch/pfef/authentication/v2
 	 */ 
-	public static boolean isPasarelaTest(WebDriver driver) {
+	public boolean isPasarelaTest() {
 		return (driver.getCurrentUrl().contains("test"));
 	}
 	
 	/**
 	 * @return si se trata de la pasarela de Postfinance correcta de test (hay de 2 tipos "e-finance" y "Card")
 	 */
-	public static boolean isPasarelaPostfinanceTest(WebDriver driver, String metodoPago) {
+	public boolean isPasarelaPostfinanceTest(String metodoPago) {
 		boolean isPasarela = false;
 		if (metodoPago.toUpperCase().contains("E-FINANCE") && driver.getTitle().contains("e-finance")) {
 			isPasarela = true;
@@ -39,42 +44,29 @@ public class PagePostfCodSeg {
 		return isPasarela;
 	}
 	
-	/**
-	 * @return si se trata de la pasarela de Postfinance correcta de pro
-	 */
-	public static boolean isPasarelaPostfinanceProUntil(int maxSecondsToWait, WebDriver driver) {
+	public boolean isPasarelaPostfinanceProUntil(int maxSecondsToWait) {
 		return (titleContainsUntil(driver, "E-Payment", maxSecondsToWait));
 		//return (driver.getTitle().contains("E-Payment"));
 	}
 	
-	/**
-	 * @return si existe un botón "Aceptar" en la página1 de efinance y card
-	 */
-	public static boolean isPresentButtonAceptar(WebDriver driver) {
-		return (state(Present, By.xpath(XPathAceptarButton), driver).check());
+	public boolean isPresentButtonAceptar() {
+		return (state(Present, By.xpath(XPathAceptarButton)).check());
 	}
 
-	public static void clickAceptarButton(WebDriver driver) {
+	public void clickAceptarButton() {
 		click(By.xpath(XPathAceptarButton), driver).exec();
 	}
 	
-	/**
-	 * @return si existe o no el input del código de seguridad (en "e-finance" no existe y en "card" sí)
-	 */
-	public static boolean isPresentInputCodSeg(WebDriver driver) {
-		return (state(Present, By.xpath(XPathInputCodSeg), driver).check());
+	public boolean isPresentInputCodSeg() {
+		return (state(Present, By.xpath(XPathInputCodSeg)).check());
 	}
 	
-	public static boolean isPresentButtonWeiter(WebDriver driver) {
-		return (state(Present, By.xpath(XPathButtonWeiter), driver).check());
+	public boolean isPresentButtonWeiter() {
+		return (state(Present, By.xpath(XPathButtonWeiter)).check());
 	}
 	
-	public static void inputCodigoSeguridad(WebDriver driver, String codigoSeg) {
+	public void inputCodigoSeguridad(String codigoSeg) {
 		driver.findElement(By.xpath(XPathInputCodSeg)).sendKeys(codigoSeg);
 	}
 
-	public static void waitLoadPage() {
-		waitMillis(5000);
-	}
-	
 }

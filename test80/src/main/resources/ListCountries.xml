@@ -2189,10 +2189,12 @@
 	nombre="JCB" nombremovil="Jcb"    testpasarela='s'>&TPV-031;</pago>
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
-	nombre="ОПЛАТА ПРИ ПОЛУЧЕНИИ" namefilter="Russia_OMNATA MPN MONYYEHNN" testpasarela='s' testpago='s'>&TPV-148;</pago> 
+	nombre="ОПЛАТА ПРИ ПОЛУЧЕНИИ" namefilter="Russia_OMNATA MPN MONYYEHNN" testpasarela='s' testpago='s'>&TPV-148;</pago>
+<!--  
+select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <pago 
 	type="Yandex" tiendas="shop"
-	nombre="Наличными в терминалах Yandex" namefilter="Russia_Yandex" testpasarela='s' testpago='s'>&TPV-101;</pago> <!-- La hemos de poner la última porque provoca una excepción que envía a Portada -->
+	nombre="Наличными в терминалах Yandex" namefilter="Russia_Yandex" testpasarela='s' testpago='s'>&TPV-101;</pago>--> <!-- La hemos de poner la última porque provoca una excepción que envía a Portada -->
 <pago 
 	type="tpvvotf" tiendas="votf" 
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-196;</pago>
@@ -3743,9 +3745,10 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="DINERS" testpasarela='s'>&TPV-361;</pago>
+<!-- 
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
-	nombre="CONTRA ENTREGA EFECTIVO" testpasarela='s' testpago='s'>&TPV-183;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
+	nombre="CONTRA ENTREGA EFECTIVO" testpasarela='s' testpago='s'>&TPV-183;</pago>--> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <!-- 
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"

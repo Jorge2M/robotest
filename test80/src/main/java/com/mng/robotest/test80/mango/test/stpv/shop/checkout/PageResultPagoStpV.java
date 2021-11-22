@@ -65,16 +65,16 @@ public class PageResultPagoStpV {
 		ChecksTM validations = ChecksTM.getNew();
 		int maxSeconds1 = 10;
 		boolean isVisibleTextConfirmacion = pageResultPago.isVisibleTextoConfirmacionPago(maxSeconds1);
-	   	validations.add(
+		validations.add(
 			"Aparece un texto de confirmación del pago (lo esperamos hasta " + maxSeconds1 + " segundos)",
 			isVisibleTextConfirmacion, State.Warn);
-	   	if (!isVisibleTextConfirmacion) {
-   			int maxSeconds2 = 20;
-		   	validations.add(
+		if (!isVisibleTextConfirmacion) {
+			int maxSeconds2 = 20;
+			validations.add(
 				"Si no aparece lo esperamos " + maxSeconds2 + " segundos",
 				pageResultPago.isVisibleTextoConfirmacionPago(maxSeconds2), State.Defect);
-	   	}
-	   	return validations;
+		}
+		return validations;
 	}
 	
 	@Validation

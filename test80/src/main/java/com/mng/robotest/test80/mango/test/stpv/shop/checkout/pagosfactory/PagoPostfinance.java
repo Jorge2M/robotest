@@ -26,14 +26,20 @@ public class PagoPostfinance extends PagoStpV {
 		String nombrePago = dataPedido.getPago().getNombre(dCtxSh.channel, dCtxSh.appE);
 		String importeTotal = dataPedido.getImporteTotal();
 		String codPais = this.dCtxSh.pais.getCodigo_pais();
-		if (isPageSelectChannel(2)) {
+		if (isPageSelectChannel(5)) {
 			managePageSelectChannel();
 		}
-		PagePostfCodSegStpV.postfinanceValidate1rstPage(nombrePago, importeTotal, codPais, driver);
+		
+		PagePostfCodSegStpV pagePostfCodSegStpV = new PagePostfCodSegStpV(driver);
+		if (pagePostfCodSegStpV.getPageObj().isPasarelaTest()) {
+			pagePostfCodSegStpV.validateIsPageTest(nombrePago, importeTotal);
+		} else {
+			pagePostfCodSegStpV.validateIsPagePro(importeTotal, codPais);
+		}
 		
 		if (execPay) {
 			dataPedido.setCodtipopago("P");
-			PagePostfCodSegStpV.inputCodigoSeguridadAndAccept("11152", nombrePago, driver);
+			pagePostfCodSegStpV.inputCodigoSeguridadAndAccept("11152", nombrePago);
 		}
 	}	
 	

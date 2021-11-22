@@ -14,85 +14,79 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 public class PagePostfCodSegStpV {
 	
-	/**
-	 * Validación a nivel de la pasarela
-	 * Validamos la 1a página de Postfinance (la que contiene el input del código de seguridad en el caso de "PostFinance Card")
-	 * 
-	 * Para CI y PRE la pasarela de pago es diferente a la de PRO
-	 *   PRE/CI-Postfinance Card-> https://e-payment.postfinance.ch/ncol/test/orderstandard.asp
-	 *   PRO-PostFinance Card ->   https://epayment.postfinance.ch/pfcd/authentication/arh/cardIdForm
-	 *   PRE-Postfinance -> https://e-payment.postfinance.ch/ncol/test/orderstandard.asp
-	 *   PRO-PostFinance -> https://epayment.postfinance.ch/pfef/authentication/v2
-	 * @throws Exception 
-	 */
-	public static void postfinanceValidate1rstPage(String nombrePago, String importeTotal, String codPais, WebDriver driver) {
-		PagePostfCodSeg.waitLoadPage();
-		if (PagePostfCodSeg.isPasarelaTest(driver)) {
-			PagePostfCodSegStpV.validateIsPageTest(nombrePago, importeTotal, driver);
-		} else {
-			PagePostfCodSegStpV.validateIsPagePro(importeTotal, codPais, driver);
-		}
+	private final PagePostfCodSeg pagePostfCodSeg;
+	private final WebDriver driver;
+	
+	public PagePostfCodSegStpV(WebDriver driver) {
+		this.pagePostfCodSeg = new PagePostfCodSeg(driver);
+		this.driver = driver;
+	}
+	
+	public PagePostfCodSeg getPageObj() {
+		return pagePostfCodSeg;
 	}
 	
 	@Validation
-	public static ChecksTM validateIsPageTest(String nombrePago, String importeTotal, WebDriver driver) {
+	public ChecksTM validateIsPageTest(String nombrePago, String importeTotal) {
 		ChecksTM validations = ChecksTM.getNew();
-	   	validations.add(
+		validations.add(
 			"Aparece la pasarela de pagos de PostFinance E-Payment de Test",
-			PagePostfCodSeg.isPasarelaPostfinanceTest(driver, nombrePago), State.Defect);
-	   	validations.add(
+			pagePostfCodSeg.isPasarelaPostfinanceTest(nombrePago), State.Defect);
+		validations.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
-			PagePostfCodSeg.isPresentButtonAceptar(driver), State.Defect);
-	   	
-	   	boolean existsCode = PagePostfCodSeg.isPresentInputCodSeg(driver);
-	   	if (isPostfinanceEcard(nombrePago)) {
-		   	validations.add(
+			pagePostfCodSeg.isPresentButtonAceptar(), State.Defect);
+		
+		boolean existsCode = pagePostfCodSeg.isPresentInputCodSeg();
+		if (isPostfinanceEcard(nombrePago)) {
+			validations.add(
 				"SÍ existe el campo de introducción del código de seguridad",
 				existsCode, State.Defect);
-	   	} else {
-		   	validations.add(
+		} else {
+			validations.add(
 				"NO existe el campo de introducción del código de seguridad",
 				!existsCode, State.Defect);
-	   	}
-	   	
-	   	return validations;
+		}
+
+		return validations;
 	}
 	
 	@Validation
-	public static ChecksTM validateIsPagePro(String importeTotal, String codPais, WebDriver driver) {
+	public ChecksTM validateIsPagePro(String importeTotal, String codPais) {
 		ChecksTM validations = ChecksTM.getNew();
 		int maxSeconds = 5;
-	   	validations.add(
+		validations.add(
 			"Aparece la pasarela de pagos de PostFinance E-Payment (la esperamos hasta " + maxSeconds + " segundos)",
-			PagePostfCodSeg.isPasarelaPostfinanceProUntil(maxSeconds, driver), State.Defect);		
-	   	validations.add(
+			pagePostfCodSeg.isPasarelaPostfinanceProUntil(maxSeconds), State.Defect);		
+		validations.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);			  
-	   	validations.add(
+		validations.add(
 			"Aparece el botón Weiter (Aceptar)",
-			PagePostfCodSeg.isPresentButtonWeiter(driver), State.Defect);
-	   	return validations;
+			pagePostfCodSeg.isPresentButtonWeiter(), State.Defect);
+		return validations;
 	}
 	
 	@Step (
 		description="Seleccionar el botón Aceptar", 
 		expected="Aparece una página de redirección")
-	public static void inputCodigoSeguridadAndAccept(String codSeguridad, String nombreMetodo, WebDriver driver) {
+	public PagePostfRedirectStpV inputCodigoSeguridadAndAccept(String codSeguridad, String nombreMetodo) {
 		try {
 			if (isPostfinanceEcard(nombreMetodo)) {
 				//El código de seguridad sólo lo pide en el caso de "PostFinance Card" no en el de "PostFinance e-finance"
 				StepTM step = TestMaker.getCurrentStepInExecution();
 				step.setDescripcion("Introducir el código de seguridad " + codSeguridad + ". " + step.getDescripcion());
-				PagePostfCodSeg.inputCodigoSeguridad(driver, codSeguridad);
+				pagePostfCodSeg.inputCodigoSeguridad(codSeguridad);
 			}
 				  
-			PagePostfCodSeg.clickAceptarButton(driver);
+			pagePostfCodSeg.clickAceptarButton();
 		}
 		finally {
 			driver.switchTo().defaultContent(); 
 		}
 		
-		PagePostfRedirectStpV.isPageAndFinallyDisappears(driver);
+		PagePostfRedirectStpV pagePostfRedirectStpV = new PagePostfRedirectStpV(driver);
+		pagePostfRedirectStpV.isPageAndFinallyDisappears();
+		return pagePostfRedirectStpV;
 	}
 	
 	/**
