@@ -22,27 +22,27 @@ pipeline {
             }
         }
 
-        stage('Run Unit Tests') {
-            agent {
-                docker {
-                    image 'maven:3.5.4-jdk-8-alpine'
-                    args '-v /home/ubuntu/.m2:/root/.m2'
-                }
-            }
-            steps {
-	        	sh 'mvn clean'
-	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-	            	sh 'mvn --settings test80/infrastructure/ci/settings.xml test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
-	            }
-            }
-            post {
-                success {
-                    script {
-                        stash includes: 'test80/**/target/', name: 'target'
-                    }
-                }
-            }
-        }
+//        stage('Run Unit Tests') {
+//            agent {
+//                docker {
+//                    image 'maven:3.5.4-jdk-8-alpine'
+//                    args '-v /home/ubuntu/.m2:/root/.m2'
+//                }
+//            }
+//            steps {
+//	        	sh 'mvn clean'
+//	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+//	            	sh 'mvn --settings test80/infrastructure/ci/settings.xml test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
+//	            }
+//            }
+//            post {
+//                success {
+//                    script {
+//                        stash includes: 'test80/**/target/', name: 'target'
+//                    }
+//                }
+//            }
+//        }
         
         stage('Package') {
             agent {
