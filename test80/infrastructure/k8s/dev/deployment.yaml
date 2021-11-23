@@ -16,7 +16,7 @@ spec:
         # If the app requires AWS permissions request a new
         # iam role with the desired set of permissions and use
         # it here as hermes.services.<env>.k8s.mango
-        #iam.amazonaws.com/role: mangomanaged/hermes.dev.k8s.mango
+        iam.amazonaws.com/role: mangomanaged/robotest-hub.dev.k8s.mango
     spec:
       containers:
       - name: robotest-hub
