@@ -28,7 +28,7 @@ spec:
         ports:
         # do not use priviledged ports
         - name: http
-          containerPort: 80
+          containerPort: 8080
         readinessProbe:
           httpGet:
             path: /testserver
