@@ -43,6 +43,7 @@ spec:
           initialDelaySeconds: 40
           periodSeconds: 10
           timeoutSeconds: 10
+        securityContext:
           privileged: true
         resources:
           # Limits impose a restriction on how much of a given compute resource
