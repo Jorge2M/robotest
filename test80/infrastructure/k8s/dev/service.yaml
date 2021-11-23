@@ -6,9 +6,51 @@ metadata:
   labels:
     k8s-app: robotest-hub
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - protocol: TCP
       port: 80
   selector:
     k8s-app: robotest-hub
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: robotest-hub
+  namespace: mango
+  labels:
+    k8s-app: robotest-hub
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    external-dns.alpha.kubernetes.io/target: {{publicAccess}}
+spec:
+  rules:
+    - host: robotest-hub.dev.k8s.mango
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: robotest-hub
+              servicePort: http
+            pathType: ImplementationSpecific
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: internal-robotest-hub
+  namespace: mango
+  labels:
+    k8s-app: robotest-hub
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    external-dns.alpha.kubernetes.io/target: {{privateAccess}}
+spec:
+  rules:
+    - host: internal-robotest-hub.dev.k8s.mango
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: robotest-hub
+              servicePort: http
+            pathType: ImplementationSpecific

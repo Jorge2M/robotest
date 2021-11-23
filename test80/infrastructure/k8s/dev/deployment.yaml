@@ -43,5 +43,17 @@ spec:
           initialDelaySeconds: 40
           periodSeconds: 10
           timeoutSeconds: 10
-        securityContext:
           privileged: true
+        resources:
+          # Limits impose a restriction on how much of a given compute resource
+          # the container can get. If the limit is surpassed, the container
+          # might be terminated, depending on  the cluster available resources
+          limits:
+            cpu: 1000m
+            memory: 1024Mi
+          # Resources specify that a container will reserve the given amount of
+          # the given compute resource for itself. Those resources are not available
+          # for any other container in the whole cluster, even if not used
+          requests:
+            cpu: 750m
+            memory: 768Mi

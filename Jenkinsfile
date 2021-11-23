@@ -65,30 +65,30 @@ pipeline {
             }
         }
 
-        stage('Integration Tests') {
-            when { anyOf { branch 'master'; branch 'develop' } }
-            agent {
-                docker {
-                    image 'jorge2m/chrome-firefox-jdk8-maven:latest'
-                    args '--privileged --shm-size=1g -v /home/ubuntu/.m2:/root/.m2'
-                }
-            }
-
-            steps {
-	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
-	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-	            	sh "mvn --settings test80/infrastructure/ci/settings.xml -B verify -DskipUnitTests"
-	            }
-            }
-
-            post {
-                success {
-                    script {
-                        stash includes: '**/target/', name: 'server-package'
-                    }
-                }
-            }
-        }
+//        stage('Integration Tests') {
+//            when { anyOf { branch 'master'; branch 'develop' } }
+//            agent {
+//                docker {
+//                    image 'jorge2m/chrome-firefox-jdk8-maven:latest'
+//                    args '--privileged --shm-size=1g -v /home/ubuntu/.m2:/root/.m2'
+//                }
+//            }
+//
+//            steps {
+//	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
+//	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+//	            	sh "mvn --settings test80/infrastructure/ci/settings.xml -B verify -DskipUnitTests"
+//	            }
+//            }
+//
+//            post {
+//                success {
+//                    script {
+//                        stash includes: '**/target/', name: 'server-package'
+//                    }
+//                }
+//            }
+//        }
         
         stage('Publish') {
       		when { expression { return env.BRANCH_NAME.equals('master') || env.BRANCH_NAME.equals('develop') || env.BRANCH_NAME.contains('release') } }
@@ -98,90 +98,14 @@ pipeline {
         		sh './test80/infrastructure/aws/build-publish-docker.sh'
       		}
     	}
+    	
+        stage('Deploy to DEV') {
+            when { branch 'develop' }
+            steps {
+                k8sDeploy(templates: "./test80/infrastructure/k8s/dev/", stage: 'dev', imageTag: env.APP_VERSION)
+            }
+        }
 
-//        stage('Upload package to test S3') {
-//            when { anyOf { branch 'master'; branch 'develop' } }
-//            agent any
-//            steps {
-//                unstash 'server-package'
-//                sh "aws configure set default.s3.multipart_threshold 1024MB"
-//                sh "aws s3 cp target/ordernotifications-${NJORD_VERSION}.zip s3://test-mng-releases/code/ordernotifications-${NJORD_VERSION}.zip --grants full=id=3daf09e0a965fc4c87482cd9a3ca83031cf90941ecddfa61f262755808d8cc7e"
-//            }
-//        }
-
-//        stage('Deploy in TEST') {
-//            when { anyOf { branch 'develop' } }
-//            agent {
-//                docker {
-//                    image 'byrnedo/alpine-curl'
-//                    args '--entrypoint ""'
-//                }
-//            }
-//            steps {
-//                script {
-//                    corporateJenkins.call(
-//                            jobUrl: "https://citools.mangodev.net/jenkins/job/SYSOPS.DEPLOY_DEV/buildWithParameters",
-//                            authentication: "citools-jenkins",
-//                            params: [
-//                                    'ARTIFACT' : "ordernotifications-${NJORD_VERSION}",
-//                                    'GROUPNAME': "ordernotifications"
-//                            ],
-//                            numberOfRetries: 2)
-//                    applicationHealth.check(
-//                            url: "http://ordernotifications.dev.mango.com/info",
-//                            expectedVersionNumber: "${NJORD_VERSION}",
-//                            timeoutInMilliseconds: 30000,
-//                            sleepTimeBetweenStepsInMilliseconds: 5000)
-//                }
-//            }
-//        }
-
-//        stage('Promote package to PRE S3'){
-//            when { anyOf { branch 'master'; branch 'develop' } }
-//            agent any
-//            steps {
-//                httpRequest httpMode: 'POST',
-//                        url: "https://citools.mangodev.net/jenkins/job/SYSOPS.PROMOTE-S3_TEST_TO_PRE/buildWithParameters?ZIP_NAME=ordernotifications-${NJORD_VERSION}.zip&ARTIFACT=ordernotifications",
-//                        authentication: 'citools-jenkins'
-//            }
-//        }
-
-//        stage('Deploy in PRE') {
-//            when { anyOf { branch 'master'; branch 'develop' } }
-//            agent {
-//                docker {
-//                    image 'byrnedo/alpine-curl'
-//                    args '--entrypoint ""'
-//                }
-//            }
-//            steps {
-//                script {
-//                    corporateJenkins.call(
-//                            jobUrl: "https://citools.mangodev.net/jenkins/job/SYSOPS.DEPLOY_PRE/buildWithParameters",
-//                            authentication: "citools-jenkins",
-//                            params: [
-//                                    'ARTIFACT' : "ordernotifications-${NJORD_VERSION}",
-//                                    'GROUPNAME': "ordernotifications"
-//                            ],
-//                            numberOfRetries: 2)
-//                    applicationHealth.check(
-//                            url: "http://ordernotifications.pre.mango.com/info",
-//                            expectedVersionNumber: "${NJORD_VERSION}",
-//                            timeoutInMilliseconds: 30000,
-//                            sleepTimeBetweenStepsInMilliseconds: 5000)
-//                }
-//            }
-//        }
-
-//        stage('Promote package to PRO S3'){
-//            when { anyOf { branch 'master' } }
-//            agent any
-//            steps {
-//                httpRequest httpMode: 'POST',
-//                        url: "https://citools.mangodev.net/jenkins/job/SYSOPS.PROMOTE-S3_PRE_TO_PRO/buildWithParameters?ZIP_NAME=ordernotifications-${NJORD_VERSION}.zip&ARTIFACT=ordernotifications",
-//                        authentication: 'citools-jenkins'
-//            }
-//        }
     }
     post {
         cleanup {
