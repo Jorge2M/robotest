@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       k8s-app: robotest-hub
-  #replicas: 1
+  replicas: 1
   template:
     metadata:
       labels:
