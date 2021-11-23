@@ -86,7 +86,7 @@ public class SecFooterStpV {
 	@Validation
 	public ChecksTM validaPaginaAyuda() throws Exception {
 		ChecksTM validations = ChecksTM.getNew();
-		String telefono = "901 150 543";
+		String telefono = "900 150 543";
 		validations.add(
 			"Aparece \"Preguntas Frecuentes\" en la página",
 			PageAyuda.isPresentCabPreguntasFreq(channel, driver), State.Warn);	

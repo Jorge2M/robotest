@@ -8,7 +8,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageEmpresa extends PageObjTM implements PageFromFooter {
 	
-	final String XPathForIdPageNew = "//img[@src[contains(.,'edits_site_empresa')]]";
+	final String XPathForIdPageNew = "//img[@src[contains(.,'empresa-mango')]]";
 	
 	public PageEmpresa(WebDriver driver) {
 		super(driver);

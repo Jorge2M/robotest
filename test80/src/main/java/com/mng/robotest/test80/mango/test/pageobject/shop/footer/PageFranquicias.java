@@ -9,7 +9,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageFranquicias extends PageObjTM implements PageFromFooter {
 	
 	//final String XPathIdFrame = "//iframe[@id='bodyFrame']";
-	final String XPathForIdPage = "//div[text()[contains(.,'Forma parte de nuestra historia')]]";
+	final String XPathForIdPage = "//*[text()[contains(.,'Forma parte de nuestra historia')]]";
 	
 	public PageFranquicias(WebDriver driver) {
 		super(driver);

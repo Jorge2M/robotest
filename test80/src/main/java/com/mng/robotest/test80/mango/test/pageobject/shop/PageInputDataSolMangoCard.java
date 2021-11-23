@@ -2,6 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -16,14 +17,16 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
  */
 public class PageInputDataSolMangoCard {
 	
-	static String XPathbotonContinuarModal = "//div//button[text()[contains(.,'Continuar')]]";
-	static String XPathTextDatosPersonalesPage2 = "//div[@id='datospersonales']";
-	static String XPathIsPage2 = "//div/h2[text()[contains(.,'Solicitud de tu MANGO Card')]]";
-	static String XPathTextDatosBancariosPage2 = "//div/span[text()[contains(.,'Datos bancarios')]]";
-	static String XPathDatosContactoPage2 = "//div/span[text()[contains(.,'Datos de contacto')]]";
-	static String XPathDatosSocioeconomicosPage2 = "//div/span[text()[contains(.,'Datos socioeconómicos')]]";
-	static String XPathModalidadPagoPage2 = "//div/span[text()[contains(.,'Modalidad de pago')]]";
-	static String XPathButtonContinuarPage2 = "//button[@id='in-continuar']";
+	private final static String XPathbotonContinuarModal = "//div//button[text()[contains(.,'Continuar')]]";
+	private final static String XPathIsPage2 = "//div/span[text()[contains(.,'Solicitud de tu MANGO Card')]]";
+	private final static String XPathIframePage2 = "//div[@id='ifcentral']/iframe";
+	private final static String XPathTextDatosPersonalesPage2 = "//a[@data-i18n[contains(.,'datospersonales')]]";
+	private final static String XPathTextDatosBancariosPage2 = "//a[@data-i18n[contains(.,'datosbancarios')]]";
+	private final static String XPathDatosContactoPage2 = "//a[@data-i18n[contains(.,'datoscontacto')]]";
+	private final static String XPathDatosSocioeconomicosPage2 = "//a[@data-i18n[contains(.,'datossocioeconomicos')]]";
+	private final static String XPathModalidadPagoPage2 = "//a[@data-i18n[contains(.,'modalidadpago')]]";
+	private final static String XPathButtonContinuarPage2 = "//button[@id='in-continuar']";
+
 
 	/*
 	 * Funciones para la validación y interactuación con la segunda página de solicitud de tarjeta mango
@@ -48,7 +51,8 @@ public class PageInputDataSolMangoCard {
 	 */
 	
 	public static void gotoiFramePage2(WebDriver driver) {
-		driver.switchTo().frame("ifcentral");
+		WebElement frameElement = driver.findElement(By.xpath(XPathIframePage2));
+		driver.switchTo().frame(frameElement);
 	}
 
 	public static boolean isPresentDatosPersonalesPage2(WebDriver driver) {

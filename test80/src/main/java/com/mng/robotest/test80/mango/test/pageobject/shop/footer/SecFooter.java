@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -135,7 +136,10 @@ public class SecFooter extends PageObjTM {
 	public void clickLink(FooterLink footerType) {
 		ModalClubMangoLikes.closeModalIfVisible(driver);
 		moveToElement(By.xpath(footerType.getXPathRelativeCapa()), driver);
-		click(By.xpath(footerType.getXPathRelativeCapa())).exec();
+		
+		By byLink = By.xpath(footerType.getXPathRelativeCapa());
+		state(State.Visible, byLink).wait(2).check();
+		click(byLink).exec();
 	}
 	
 	public String clickLinkAndGetWindowFatherHandle(FooterLink footerType) throws Exception {
