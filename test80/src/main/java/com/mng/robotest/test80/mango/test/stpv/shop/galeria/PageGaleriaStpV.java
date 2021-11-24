@@ -929,7 +929,7 @@ public class PageGaleriaStpV {
 		if (app==AppEcom.shop) {
 			validations.add (
 				"El 1er artículo tiene 1 icono de favorito asociado (lo esperamos hasta " + maxSecondsToWaitIcon + " segundos)",
-				pageGaleria.isArticleWithHearthIconPresentUntil(1, maxSecondsToWaitIcon), State.Defect);
+				pageGaleria.isArticleWithHearthIconPresentUntil(1, maxSecondsToWaitIcon), State.Warn);
 			validations.add (
 				"Cada artículo tiene 1 icono de favoritos asociado",
 				pageGaleria.eachArticlesHasOneFavoriteIcon(), State.Info, true);
