@@ -59,9 +59,9 @@ metadata:
   namespace: mango
   labels:
     k8s-app: robotest-slave
-  #annotations:
-    #kubernetes.io/ingress.class: traefik
-    #external-dns.alpha.kubernetes.io/target: internal-alb-eks-internal-dev-1937715155.eu-west-1.elb.amazonaws.com
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    external-dns.alpha.kubernetes.io/target: internal-alb-eks-internal-dev-1937715155.eu-west-1.elb.amazonaws.com
 spec:
   rules:
     - host: internal-robotest-slave.dev.k8s.mango
