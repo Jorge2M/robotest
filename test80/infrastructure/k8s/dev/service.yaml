@@ -31,6 +31,23 @@ spec:
   selector:
     k8s-app: robotest-slave
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: robotest-slave2
+  namespace: mango
+  labels:
+    k8s-app: robotest-slave2
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      protocol: TCP
+      targetPort: 8080
+      port: 80
+  selector:
+    k8s-app: robotest-slave
+---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
