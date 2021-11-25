@@ -31,6 +31,7 @@ spec:
   selector:
     k8s-app: robotest-slave
 ---
+#Temporal for test
 apiVersion: v1
 kind: Service
 metadata:
@@ -47,6 +48,15 @@ spec:
       port: 80
   selector:
     k8s-app: robotest-slave
+  rules:
+    - host: internal-robotest-slave2.dev.k8s.mango
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: robotest-slave2
+              servicePort: http
+            pathType: ImplementationSpecific
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
