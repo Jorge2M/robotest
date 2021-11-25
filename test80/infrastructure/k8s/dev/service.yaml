@@ -20,7 +20,9 @@ metadata:
   name: robotest-slave
   namespace: mango
   annotations:
-    service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: '600'
+    #service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: '600'
+    service.beta.kubernetes.io/aws-load-balancer-connection-draining-enabled: "true"
+    service.beta.kubernetes.io/aws-load-balancer-connection-draining-timeout: "600"
   labels:
     k8s-app: robotest-slave
 spec:
