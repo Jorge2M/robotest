@@ -37,7 +37,7 @@ metadata:
   name: robotest-slave2
   namespace: mango
   labels:
-    k8s-app: robotest-slave2
+    k8s-app: robotest-slave
 spec:
   type: ClusterIP
   ports:
