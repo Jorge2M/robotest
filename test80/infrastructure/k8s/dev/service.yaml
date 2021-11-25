@@ -54,16 +54,16 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: internal-robotest-slave
+  name: robotest-slave
   namespace: mango
   labels:
     k8s-app: robotest-slave
   annotations:
     kubernetes.io/ingress.class: traefik
-    external-dns.alpha.kubernetes.io/target: internal-alb-eks-internal-dev-1937715155.eu-west-1.elb.amazonaws.com
+    external-dns.alpha.kubernetes.io/target: alb-eks-external-dev-884795006.eu-west-1.elb.amazonaws.com
 spec:
   rules:
-    - host: internal-robotest-slave.dev.k8s.mango
+    - host: robotest-slave.dev.k8s.mango
       http:
         paths:
           - path: /
