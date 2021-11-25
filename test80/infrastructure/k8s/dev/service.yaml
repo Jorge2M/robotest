@@ -19,6 +19,8 @@ kind: Service
 metadata:
   name: robotest-slave
   namespace: mango
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: 10
   labels:
     k8s-app: robotest-slave
 spec:
@@ -27,8 +29,6 @@ spec:
     - name: http
       targetPort: 8080
       port: 80
-  annotations:
-    service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: 10
   selector:
     k8s-app: robotest-slave
 ---
