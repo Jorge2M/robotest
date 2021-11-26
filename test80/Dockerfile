@@ -8,6 +8,8 @@ COPY target/test80.zip test80.zip
 RUN unzip test80.zip
 	
 COPY docker-entrypoint.sh /test80/docker-entrypoint.sh
+
+RUN apt-get update && apt-get install -y
 	
 WORKDIR /test80
 
