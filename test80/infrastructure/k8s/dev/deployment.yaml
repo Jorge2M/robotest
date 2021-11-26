@@ -28,6 +28,8 @@ spec:
         #    name: configmap-hermes
         # {{version_tag}} has to be replaced programmatically, e.g. using sed
         image: 495248209902.dkr.ecr.eu-west-1.amazonaws.com/mango/kamikazes/robotest-mango:latest
+        tty: true
+        stdin: true
         env:
         - name: URL_SLAVES
           #value: "http://robotest-slave.dev.k8s.mango"
