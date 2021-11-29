@@ -39,7 +39,7 @@ metadata:
   labels:
     k8s-app: robotest-hub
   annotations:
-    kubernetes.io/ingress.class: traefik
+    kubernetes.io/ingress.class: traefik  
     external-dns.alpha.kubernetes.io/target: alb-eks-external-dev-884795006.eu-west-1.elb.amazonaws.com
 spec:
   rules:
