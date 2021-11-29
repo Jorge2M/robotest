@@ -10,19 +10,6 @@ metadata:
   name: robotest-slave
   namespace: mango
 spec:
-  maxReplicas: 10
-  minReplicas: 5
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: robotest-slave-deployment
-  metrics:
-  - type: Resource
-    resource:
-      # Autoscaling algorithm:
-      #   TargetNumOfPods = ceil(sum(CurrentPodsCPUUtilization) / targetAverageUtilization)
-      name: cpu
-      targetAverageUtilization: 50
   behavior:
     scaleDown:
       stabilizationWindowSeconds: 300
@@ -36,3 +23,16 @@ spec:
       - type: Percent
         value: 100
         periodSeconds: 10
+  maxReplicas: 10
+  minReplicas: 5
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: robotest-slave-deployment
+  metrics:
+  - type: Resource
+    resource:
+      # Autoscaling algorithm:
+      #   TargetNumOfPods = ceil(sum(CurrentPodsCPUUtilization) / targetAverageUtilization)
+      name: cpu
+      targetAverageUtilization: 50
