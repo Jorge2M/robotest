@@ -92,14 +92,14 @@ pipeline {
 //            }
 //        }
         
-        stage('Publish') {
-      		when { expression { return env.BRANCH_NAME.equals('master') || env.BRANCH_NAME.equals('develop') || env.BRANCH_NAME.contains('release') } }
-      		steps {
-        		unstash 'target'
-        		sh 'chmod -R 777 ./test80/infrastructure/aws/build-publish-docker.sh'
-        		sh './test80/infrastructure/aws/build-publish-docker.sh'
-      		}
-    	}
+//        stage('Publish') {
+//      		when { expression { return env.BRANCH_NAME.equals('master') || env.BRANCH_NAME.equals('develop') || env.BRANCH_NAME.contains('release') } }
+//      		steps {
+//        		unstash 'target'
+//        		sh 'chmod -R 777 ./test80/infrastructure/aws/build-publish-docker.sh'
+//        		sh './test80/infrastructure/aws/build-publish-docker.sh'
+//      		}
+//    	}
     	
         stage('Deploy to DEV') {
             when { branch 'develop' }
