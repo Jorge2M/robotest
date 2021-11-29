@@ -44,27 +44,27 @@ pipeline {
 //            }
 //        }
         
-        stage('Package') {
-            agent {
-                docker {
-                    image 'maven:3.5.4-jdk-8-alpine'
-                    args '-v /home/ubuntu/.m2:/root/.m2'
-                }
-            }
-            steps {
-            	//unstash 'target'
-            	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-	            	sh "mvn --settings test80/infrastructure/ci/settings.xml -B package -DskipTests"
-	            }
-            }
-            post {
-                success {
-                    script {
-                        stash includes: 'test80/**/target/', name: 'target'
-                    }
-                }
-            }
-        }
+//        stage('Package') {
+//            agent {
+//                docker {
+//                    image 'maven:3.5.4-jdk-8-alpine'
+//                    args '-v /home/ubuntu/.m2:/root/.m2'
+//                }
+//            }
+//            steps {
+//            	//unstash 'target'
+//            	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+//	            	sh "mvn --settings test80/infrastructure/ci/settings.xml -B package -DskipTests"
+//	            }
+//            }
+//            post {
+//                success {
+//                    script {
+//                        stash includes: 'test80/**/target/', name: 'target'
+//                    }
+//                }
+//            }
+//        }
 
 //        stage('Integration Tests') {
 //            when { anyOf { branch 'master'; branch 'develop' } }
