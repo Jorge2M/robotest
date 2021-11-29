@@ -60,9 +60,6 @@ spec:
         - podSelector:
             matchLabels:
               k8s-app: robotest-hub
-          namespaceSelector:
-            matchLabels:
-              role: ingress
     - ports:
         - port: 8080
       from:
