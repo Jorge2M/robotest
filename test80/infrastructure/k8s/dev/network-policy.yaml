@@ -56,6 +56,16 @@ spec:
     - ports:
         - port: 8080
       from:
+        # Allow access from Robotest-Hub
+        - podSelector:
+            matchLabels:
+              k8s-app: robotest-hub
+          namespaceSelector:
+            matchLabels:
+              role: ingress
+    - ports:
+        - port: 8080
+      from:
         # Allow access from Traefik
         - podSelector:
             matchLabels:
