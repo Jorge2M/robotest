@@ -119,10 +119,10 @@ spec:
           # might be terminated, depending on  the cluster available resources
           limits:
             cpu: 1000m
-            memory: 1024Mi
+            memory: 2048Mi
           # Resources specify that a container will reserve the given amount of
           # the given compute resource for itself. Those resources are not available
           # for any other container in the whole cluster, even if not used
           requests:
             cpu: 750m
-            memory: 768Mi
+            memory: 1536Mi
