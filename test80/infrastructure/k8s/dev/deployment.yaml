@@ -31,7 +31,7 @@ spec:
         env:
         - name: URL_SLAVES
           #value: "http://robotest-slave.dev.k8s.mango"
-          value: "http://robotest-slave"
+          value: "http://robotest-aaaslave"
         ports:
         # do not use priviledged ports
         - name: http
