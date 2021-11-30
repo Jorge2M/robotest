@@ -81,6 +81,12 @@ spec:
         # it here as hermes.services.<env>.k8s.mango
         iam.amazonaws.com/role: nopermissions.services.dev.k8s.mango
     spec:
+      initContainers:
+      - name: wait-for-dependent-service
+        image: stefanevinance/wait-for-200
+        env:
+          - name: URL
+            value: http://robotest-hub.dev.k8s.mango
       containers:
       - name: robotest-slave
         #envFrom:
