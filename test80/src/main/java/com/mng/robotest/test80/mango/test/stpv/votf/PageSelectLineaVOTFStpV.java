@@ -52,6 +52,7 @@ public class PageSelectLineaVOTFStpV {
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
+				GenericCheck.TextsTraduced,
 				GenericCheck.Analitica)).checks(driver);
 	}
 }

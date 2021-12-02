@@ -249,6 +249,7 @@ public class PageGaleriaStpV {
 		listChecks.add(GenericCheck.SEO); 
 		listChecks.add(GenericCheck.JSerrors); 
 		listChecks.add(GenericCheck.Analitica);
+		listChecks.add(GenericCheck.TextsTraduced);
 		listChecks.add(GenericCheck.NetTraffic);
 		listChecks.add(GenericCheck.GoogleAnalytics);
 		if (dataForScroll.validaImgBroken) {
@@ -324,6 +325,7 @@ public class PageGaleriaStpV {
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.SEO,
 				GenericCheck.JSerrors,
+				GenericCheck.TextsTraduced,
 				GenericCheck.Analitica)).checks(driver);
 	   
 		return numArticulosPant;
@@ -524,6 +526,7 @@ public class PageGaleriaStpV {
 				GenericCheck.JSerrors,
 				GenericCheck.SEO,
 				GenericCheck.Analitica,
+				GenericCheck.TextsTraduced,
 				GenericCheck.NetTraffic)).checks(driver);	   
 	}
    

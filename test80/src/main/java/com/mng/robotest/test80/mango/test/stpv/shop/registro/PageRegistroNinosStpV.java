@@ -40,6 +40,7 @@ public class PageRegistroNinosStpV {
 		PageRegistroDirecStpV.isPageFromPais(pais, driver);
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.SEO, 
+				GenericCheck.TextsTraduced,
 				GenericCheck.Analitica)).checks(driver);
 	}
 }

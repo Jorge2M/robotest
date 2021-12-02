@@ -91,6 +91,7 @@ public class PagePrehomeStpV {
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.GoogleAnalytics,
 				GenericCheck.Analitica,
+				GenericCheck.TextsTraduced,
 				GenericCheck.NetTraffic)).checks(driver);
 		
 		if (execValidacs) {

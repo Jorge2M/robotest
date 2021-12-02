@@ -8,7 +8,7 @@ import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 public class SecLineasMobilShop extends SecLineasMobil {
 
 	static String IniXPathLinkLinea = XPathCapaLevelLinea + "//div[@class[contains(.,'brand-item')] and @id";
-	static String XPathLinkLineaMujer = IniXPathLinkLinea + "='she']";
+	static String XPathLinkLineaMujer = IniXPathLinkLinea + "='she' or @id='prendas_she']";
 	static String XPathLinkLineaHombre = IniXPathLinkLinea + "='he']";
 	static String XPathLinkLineaNina = IniXPathLinkLinea + "='kids']";
 	static String XPathLinkLineaNino = IniXPathLinkLinea + "='kids']";

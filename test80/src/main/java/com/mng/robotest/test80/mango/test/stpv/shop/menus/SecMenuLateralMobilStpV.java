@@ -67,6 +67,7 @@ public class SecMenuLateralMobilStpV {
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app, driver);
 		pageGaleriaStpV.validateGaleriaAfeterSelectMenu(app);
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.TextsTraduced,
 				GenericCheck.Analitica)).checks(driver);
 	}
 
@@ -172,6 +173,7 @@ public class SecMenuLateralMobilStpV {
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
 				GenericCheck.Analitica,
+				GenericCheck.TextsTraduced,
 				GenericCheck.ImgsBroken)).checks(driver);
 	}
 	

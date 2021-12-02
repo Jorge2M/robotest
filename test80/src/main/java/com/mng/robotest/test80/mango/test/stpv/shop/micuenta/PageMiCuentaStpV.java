@@ -57,6 +57,7 @@ public class PageMiCuentaStpV {
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
+				GenericCheck.TextsTraduced,
 				GenericCheck.Analitica)).checks(driver);
 	}
 
@@ -79,6 +80,10 @@ public class PageMiCuentaStpV {
 
 		PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(channel, app, driver);
 		pageMisComprasStpV.validateIsPage(pais);
+		
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.Analitica,
+				GenericCheck.TextsTraduced)).checks(driver);
 	}
  
 	public void goToMisDatosAndValidateData(Map<String,String> dataRegistro, String codPais) {
@@ -87,6 +92,7 @@ public class PageMiCuentaStpV {
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
+				GenericCheck.TextsTraduced,
 				GenericCheck.Analitica)).checks(driver);
 	}
 
@@ -105,6 +111,7 @@ public class PageMiCuentaStpV {
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
+				GenericCheck.TextsTraduced,
 				GenericCheck.Analitica)).checks(driver);
 	}
 	

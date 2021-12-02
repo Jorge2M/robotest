@@ -23,9 +23,19 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
+
+import net.lightbody.bmp.BrowserMobProxy;
+import net.lightbody.bmp.BrowserMobProxyServer;
+import net.lightbody.bmp.client.ClientUtil;
+
 import com.github.jorge2m.testmaker.service.TestMaker;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
+
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class Bolsa {
 	
@@ -42,10 +52,27 @@ public class Bolsa {
 		return dCtxSh;
 	}
 
+	public BrowserMobProxy forAllProxy()
+	{
+		BrowserMobProxy proxy = new BrowserMobProxyServer();
+	    try {
+	        String authHeader = "Basic " + Base64.getEncoder().encodeToString("webelement:click".getBytes("utf-8"));
+	        proxy.addHeader("checkauth", authHeader);
+	    }
+	    catch (UnsupportedEncodingException e)
+	    {
+	        System.err.println("the Authorization can not be passed");
+	        e.printStackTrace();
+	    }
+	    proxy.start(0);
+	    return proxy;
+	}
+	
 	@Test (
 		groups={"Bolsa", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
 		description="[Usuario no registrado] Añadir artículo a la bolsa")
 	public void BOR001_AddBolsaFromGaleria_NoReg() throws Exception {
+		
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
 		dCtxSh.userRegistered = false;

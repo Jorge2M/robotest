@@ -193,6 +193,7 @@ public class SecMenusWrapperStpV {
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
 				GenericCheck.Analitica,
+				GenericCheck.TextsTraduced,
 				GenericCheck.ImgsBroken)).checks(driver);
 	}
 

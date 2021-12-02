@@ -36,6 +36,7 @@ public class PageRecuperaPasswdStpV {
 		isPageCambioPassword(driver);
 		GenericChecks.from(Arrays.asList( 
 				GenericCheck.JSerrors, 
+				GenericCheck.TextsTraduced,
 				GenericCheck.Analitica)).checks(driver);
 	}
 	

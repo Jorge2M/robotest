@@ -22,6 +22,7 @@ public enum CodIdioma {
 	RO("Româna"),
 	RU("Русский"),
 	SE("Svenska"),
+	TH("Tai"),
 	TR("Türk"),
 	US("English"),
 	ZH("中文"),

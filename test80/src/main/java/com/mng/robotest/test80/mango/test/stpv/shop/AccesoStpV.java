@@ -87,7 +87,8 @@ public class AccesoStpV {
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.GoogleAnalytics, 
 				GenericCheck.JSerrors, 
-				GenericCheck.Analitica, //
+				GenericCheck.Analitica,
+				GenericCheck.TextsTraduced,
 				GenericCheck.NetTraffic)).checks(driver);
 	}
 	
@@ -188,6 +189,7 @@ public class AccesoStpV {
 		PageSelectLineaVOTFStpV.validateIsPage(driver);
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.Analitica, 
+				GenericCheck.TextsTraduced,
 				GenericCheck.JSerrors)).checks(driver);
 		
 		PageSelectLineaVOTFStpV.selectMenuAndLogoMango(1, dCtxSh, driver);

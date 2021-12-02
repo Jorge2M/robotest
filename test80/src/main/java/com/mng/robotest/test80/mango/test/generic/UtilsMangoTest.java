@@ -284,8 +284,9 @@ public class UtilsMangoTest {
 		}
 
 		//Indicador de si la línea es la única principal del país
-		boolean solo1Linea = pais.getShoponline().isLineaTienda(linea) && pais.getShoponline().getNumLineasTiendas(app) == 1;
-		return !solo1Linea;
+//		boolean solo1Linea = pais.getShoponline().isLineaTienda(linea) && pais.getShoponline().getNumLineasTiendas(app) == 1;
+//		return !solo1Linea;
+		return true;
 	}
 	
 	/**

@@ -109,6 +109,7 @@ public class CheckoutFlow {
 		if (dCtxSh.userRegistered) {
 			secBolsaStpV.clear();
 			GenericChecks.from(Arrays.asList(
+					GenericCheck.TextsTraduced,
 					GenericCheck.Analitica)).checks(driver);
 		}
 	
@@ -163,6 +164,7 @@ public class CheckoutFlow {
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.GoogleAnalytics, 
 				GenericCheck.NetTraffic, 
+				GenericCheck.TextsTraduced, 
 				GenericCheck.Analitica)).checks(driver);
 	}
 	
@@ -314,6 +316,7 @@ public class CheckoutFlow {
 				GenericChecks.from(Arrays.asList(
 						GenericCheck.GoogleAnalytics, 
 						GenericCheck.NetTraffic, 
+						GenericCheck.TextsTraduced,
 						GenericCheck.Analitica)).checks(driver);
 			}
 		}

@@ -137,6 +137,7 @@ public class SecMenusDesktopStpV {
 				GenericCheck.SEO,
 				GenericCheck.JSerrors,
 				GenericCheck.Analitica,
+				GenericCheck.TextsTraduced,
 				GenericCheck.GoogleAnalytics,
 				GenericCheck.NetTraffic)).checks(driver);
 	}
@@ -255,11 +256,6 @@ public class SecMenusDesktopStpV {
 		SecMenusWrap secMenus = SecMenusWrap.getNew(Channel.desktop, app, driver);
 		LineaType lineaResult = secMenus.getLineaResultAfterClickMenu(lineaMenu, menu1rstLevel.getNombre());
 		validateIsLineaSelected(lineaResult);
-		
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.GoogleAnalytics, 
-				GenericCheck.NetTraffic, 
-				GenericCheck.Analitica)).checks(driver);
 	}
 	
 	@Step (
@@ -318,6 +314,7 @@ public class SecMenusDesktopStpV {
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
 				GenericCheck.Analitica,
+				GenericCheck.TextsTraduced,
 				GenericCheck.ImgsBroken)).checks(driver);
 	}
 
@@ -471,6 +468,7 @@ public class SecMenusDesktopStpV {
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
 				GenericCheck.Analitica,
+				GenericCheck.TextsTraduced,
 				GenericCheck.ImgsBroken)).checks(driver);
 	}
 

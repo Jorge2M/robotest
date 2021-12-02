@@ -18,6 +18,7 @@ public class GenericChecks {
 		ImgsBroken(State.Warn),
 		Analitica(State.Defect),
 		NetTraffic(State.Warn),
+		TextsTraduced(State.Defect),
 		GoogleAnalytics(State.Warn);
 		
 		State state;
@@ -40,10 +41,13 @@ public class GenericChecks {
 	
 	public void checks(WebDriver driver) {
 		for (GenericCheck genericCheck : listChecks) {
-			Checker checker = Checker.make(genericCheck);
-			ChecksTM checks = checker.check(driver);
-			if (checks.size()>0) {
-				createValidation(checks);
+			//Quitar esta línea si se quiere activa la validación de textos no traducidos
+			if (genericCheck!=GenericCheck.TextsTraduced) {
+				Checker checker = Checker.make(genericCheck);
+				ChecksTM checks = checker.check(driver);
+				if (checks.size()>0) {
+					createValidation(checks);
+				}
 			}
 		}
 	}

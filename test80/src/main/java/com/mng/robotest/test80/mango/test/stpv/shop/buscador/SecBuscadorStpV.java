@@ -89,6 +89,7 @@ public class SecBuscadorStpV {
 		GenericChecks.from(Arrays.asList( 
 				GenericCheck.JSerrors, //
 				GenericCheck.Analitica,//
+				GenericCheck.TextsTraduced,
 				GenericCheck.ImgsBroken)).checks(driver);
 	}
 

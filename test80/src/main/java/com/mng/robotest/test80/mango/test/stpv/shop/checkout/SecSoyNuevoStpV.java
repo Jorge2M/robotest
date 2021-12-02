@@ -1,5 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
+import java.util.Arrays;
+
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -12,6 +14,8 @@ import com.mng.robotest.test80.mango.test.beans.Pais;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.SecSoyNuevo;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.SecSoyNuevo.ActionNewsL;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 
 public class SecSoyNuevoStpV {
 
@@ -30,6 +34,9 @@ public class SecSoyNuevoStpV {
 
 		Page2IdentCheckoutStpV page2IdentCheckoutStpV = new Page2IdentCheckoutStpV(channel, driver);
 		page2IdentCheckoutStpV.validateIsPage(emailExistsYet, 2);
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.Analitica,
+				GenericCheck.TextsTraduced)).checks(driver);
 	}
 
 	@SuppressWarnings("static-access")

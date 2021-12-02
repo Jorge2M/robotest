@@ -5526,8 +5526,8 @@ where
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
-<tiendas_online></tiendas_online>
-<miscompras>false</miscompras>
+<tiendas_online>shop,votf</tiendas_online>
+<miscompras>true</miscompras>
 <moneda>%@ TWD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda rebajas="n" she="s" he="n" touch="n" nina="s" nino="s" baby="s" violeta="n"></tienda>
@@ -5554,27 +5554,34 @@ where
 <marcamng>N</marcamng>
 </pais>
 
-<pais nombre_pais="Thailand" codigo="680">
+<pais nombre_pais="Tailandia" codigo="680">
 <codigo_pais>680</codigo_pais>
 <codigo_alf>TH</codigo_alf>
-<idioma acceso="th">IN</idioma>
+<idioma acceso="th">TH</idioma>
+<idioma acceso="th-en">IN</idioma>
 <tarifa>TH</tarifa>
-<codpos>08720</codpos>
+<codpos>10560</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
-<tiendas_online></tiendas_online>
+<tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>
 <moneda>%@ THB</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda rebajas="n" she="s" he="s" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
+<tienda rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="n"></tienda>
 <shoponline>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
 <linea id="she"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea id="he"        shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nina"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-564;</pago>
+<pago 
+	type="ContraReembolso" tiendas="shop,outlet"
+	nombre="เก็บเงินปลายทาง" namefilter="Tailandia_Contra_Reembolso" testpasarela='s' testpago='s'>&TPV-148;</pago>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>

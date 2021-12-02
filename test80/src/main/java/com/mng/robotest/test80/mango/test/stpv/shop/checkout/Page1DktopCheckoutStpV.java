@@ -118,6 +118,7 @@ public class Page1DktopCheckoutStpV {
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.GoogleAnalytics,
 				GenericCheck.Analitica,
+				GenericCheck.TextsTraduced,
 				GenericCheck.NetTraffic)).checks(driver);
 	}
 	

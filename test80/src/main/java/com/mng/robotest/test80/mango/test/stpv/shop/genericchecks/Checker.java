@@ -21,6 +21,8 @@ public interface Checker {
 			return new CheckerAnalitica();
 		case GoogleAnalytics:
 			return new CheckerGoogleAnalytics();
+		case TextsTraduced:
+			return new CheckerTextsTraduced();
 		case NetTraffic:
 			return new CheckerNetTraffic();
 		}

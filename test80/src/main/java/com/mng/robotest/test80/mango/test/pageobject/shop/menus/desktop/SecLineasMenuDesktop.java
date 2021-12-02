@@ -37,7 +37,8 @@ public abstract class SecLineasMenuDesktop extends PageObjTM {
 		XPathLinea + 
 		"//self::*[@id='" + TagIdLinea + "' or " +
 				  "@id[contains(.,'sections_" + TagIdLinea + "')] or " +
-				  "@id[contains(.,'sections-" + TagIdLinea + "')]]";
+				  "@id[contains(.,'sections-" + TagIdLinea + "')] or " +
+				  "@id[contains(.,'prendas_" + TagIdLinea + "')]]";
 
 	static String XPathSublineaLinkWithTag = 
 		"//div[" + 

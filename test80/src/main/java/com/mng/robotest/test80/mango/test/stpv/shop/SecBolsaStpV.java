@@ -192,6 +192,7 @@ public class SecBolsaStpV {
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.GoogleAnalytics,
 				GenericCheck.Analitica,
+				GenericCheck.TextsTraduced,
 				GenericCheck.NetTraffic)).checks(driver);
 	}
 
@@ -310,6 +311,10 @@ public class SecBolsaStpV {
 		} else {
 			int maxSeconds = 5;
 			Page1IdentCheckoutStpV.validateIsPage(maxSeconds, driver);
+			GenericChecks.from(Arrays.asList(
+					GenericCheck.Analitica,
+					GenericCheck.TextsTraduced)).checks(driver);
+			
 		}
 	}
 

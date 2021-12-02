@@ -42,10 +42,12 @@ public class Page2IdentCheckout extends PageObjTM {
 	private final static String XPathInputProvEstadoActive = "//input[@id[contains(.,':cfState')] and not(@disabled) and not(@readonly)]";
 	private final static String XPathInputPoblacionActive = "//input[@id[contains(.,':cfCity')] and not(@disabled) and not(@readonly)]";
 	private final static String XPathSelectPais = "//select[@id[contains(.,':pais')]]";
-	private final static String XPathSelectProvPais = "//select[@id[contains(.,'provinciaPais')]]";
+	private final static String XPathSelectProvPais = "//select[@id[contains(.,'provinciaPais')] or @id[contains(.,'nivelProvincia')]]";
 	private final static String XPathSelectEstadosPais = "//select[@id[contains(.,'estadosPais')] or @id[contains(.,':nivelCity')]]";
-	private final static String XPathSelectLocalidadesProvCity = "//select[@id[contains(.,'localidadesProvCity')] or @id[contains(.,':nivelCityArea')]]";
-	private final static String XPathSelectLocalidadesNeighbourhoodCity = "//select[@id[contains(.,'localidadesNeighbourhoodCity')]]";
+	private final static String XPathSelectLocalidadesProvCity = "//select[@id[contains(.,'localidadesProvCity')] or @id[contains(.,':nivelCityArea')] or @id[contains(.,'nivelLocalidad')]]";
+	private final static String XPathSelectDistrito = "//select[@id[contains(.,'nivelDistrito')]]";
+	private final static String XPathSelectLocalidadesNeighbourhoodCity = "//select[@id[contains(.,'localidadesNeighbourhoodCity')] or @id[contains(.,'nivelSubdistrito')]]";
+	private final static String XPathSelectCodPostal = "//select[@id[contains(.,'nivelCodigoPostal')]]";
 	private final static String XPathCheckHombre = "//div[@id[contains(.,':cfGener_H')]]";
 	private final static String XPathCheckCondiciones = "//input[@id[contains(.,':cfPriv')]]";
 	private final static String XPathBotonFindAddress = "//input[@class[contains(.,'load-button')] and @type='button']";
@@ -436,20 +438,31 @@ public class Page2IdentCheckout extends PageObjTM {
 		return "";
 	}
 	
-	private enum TypeLocalidad {ProvCity, NeighbourhoodCity}
+	private enum TypeLocalidad {ProvCity, Distrito, CodPostal, NeighbourhoodCity}
 	private String setSelectLocalidadesProvCity(int posInSelect) throws Exception {
 		return (setSelectLocalidades(TypeLocalidad.ProvCity, posInSelect));
 	}
 	private String setSelectLocalidadesNeighbourhoodCity(int posInSelect) throws Exception {
 		return (setSelectLocalidades(TypeLocalidad.NeighbourhoodCity, posInSelect));
 	}
-	
+	private String setSelectDistrito(int posInSelect) throws Exception {
+		return (setSelectLocalidades(TypeLocalidad.Distrito, posInSelect));
+	}
+	private String setSelectCodPostal(int posInSelect) throws Exception {
+		return (setSelectLocalidades(TypeLocalidad.CodPostal, posInSelect));
+	}
 	private String setSelectLocalidades(TypeLocalidad typeLocalidad, int posInSelect) throws Exception {
 		String datoSeteado = "";
 		String xpathSelect = "";
 		switch (typeLocalidad) {
 		case ProvCity:
 			xpathSelect = XPathSelectLocalidadesProvCity;
+			break;
+		case Distrito:
+			xpathSelect = XPathSelectDistrito;
+			break;
+		case CodPostal:
+			xpathSelect = XPathSelectCodPostal;
 			break;
 		case NeighbourhoodCity:
 			xpathSelect = XPathSelectLocalidadesNeighbourhoodCity;
@@ -489,6 +502,18 @@ public class Page2IdentCheckout extends PageObjTM {
 			datosRegistro.put("localidadesProvCity", datoSeteado);
 		}
 	}	 
+	public void setSelectDistrito(int posInSelect, HashMap<String,String> datosRegistro) throws Exception {
+		String datoSeteado = setSelectDistrito(posInSelect);
+		if ("".compareTo(datoSeteado)!=0) {
+			datosRegistro.put("distrito", datoSeteado);
+		}
+	}
+	public void setSelectCodPostal(int posInSelect, HashMap<String,String> datosRegistro) throws Exception {
+		String datoSeteado = setSelectCodPostal(posInSelect);
+		if ("".compareTo(datoSeteado)!=0) {
+			datosRegistro.put("selectCodPosta", datoSeteado);
+		}
+	}
 	public void setSelectLocalidadesNeighbourhoodCity(int posInSelect, HashMap<String,String> datosRegistro) throws Exception {
 		String datoSeteado = setSelectLocalidadesNeighbourhoodCity(posInSelect);
 		if ("".compareTo(datoSeteado)!=0) {
@@ -571,6 +596,8 @@ public class Page2IdentCheckout extends PageObjTM {
 			setSelectProvPaisIfVisible(datosSeteados, pais.getCodigo_pais(), channel); // Desplegable provincia país (p.e. Turquía)
 			setCheckCondicionesIfVisible(datosSeteados); // Selección aceptación de condiciones (actualmente sólo en Turquía)
 			setSelectLocalidadesProvCity(1, datosSeteados); // Desplegable específico de Turquía
+			setSelectDistrito(1, datosSeteados);
+			setSelectCodPostal(1, datosSeteados);
 			setSelectLocalidadesNeighbourhoodCity(1, datosSeteados); // Desplegable específico de Turquía
 			setInputProvEstadoIfVisible(cfState, datosSeteados);
 			setInputDniIfVisible(dni, datosSeteados);

@@ -111,6 +111,7 @@ public class SecMenusUserStpV {
 		checkIsVisibleLinkCerrarSesion();
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.SEO,  
+				GenericCheck.TextsTraduced,
 				GenericCheck.Analitica)).checks(driver);
 	}
 	
@@ -131,6 +132,10 @@ public class SecMenusUserStpV {
 		userMenus.clickMenuAndWait(UserMenu.miCuenta);	
 		PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(channel, app, driver);
 		pageMiCuentaStpV.validateIsPage(2);
+		
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.Analitica,
+				GenericCheck.TextsTraduced)).checks(driver);
 	}
 	
 	@Step (

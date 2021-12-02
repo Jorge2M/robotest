@@ -24,6 +24,7 @@ public class PageIdentificacionStpV {
 		checkTextoCredencialesKO(driver);
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.SEO, 
+				GenericCheck.TextsTraduced,
 				GenericCheck.Analitica)).checks(driver);	
 	}
 	
@@ -42,6 +43,7 @@ public class PageIdentificacionStpV {
 		PageRecuperaPasswdStpV.isPage(driver); 
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.SEO,  
+				GenericCheck.TextsTraduced,
 				GenericCheck.Analitica)).checks(driver);
 	}
 }
