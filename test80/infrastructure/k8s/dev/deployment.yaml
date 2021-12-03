@@ -28,6 +28,9 @@ spec:
         #    name: configmap-hermes
         # {{version_tag}} has to be replaced programmatically, e.g. using sed
         image: 495248209902.dkr.ecr.eu-west-1.amazonaws.com/mango/kamikazes/robotest-mango:latest
+        env:
+        - name: URL_INIT_SLAVE
+          value: "http://robotest-slave"
         ports:
         # do not use priviledged ports
         - name: http
@@ -94,9 +97,9 @@ spec:
         #    name: configmap-hermes
         # {{version_tag}} has to be replaced programmatically, e.g. using sed
         image: 495248209902.dkr.ecr.eu-west-1.amazonaws.com/mango/kamikazes/robotest-mango:latest
-        env:
-        - name: URL_HUB
-          value: "http://robotest-hub.dev.k8s.mango"
+        #env:
+        #- name: URL_HUB
+        #  value: "http://robotest-hub.dev.k8s.mango"
         ports:
         # do not use priviledged ports
         - name: http
