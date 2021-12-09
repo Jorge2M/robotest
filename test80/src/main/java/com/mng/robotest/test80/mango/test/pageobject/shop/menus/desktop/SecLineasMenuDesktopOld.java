@@ -6,13 +6,23 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 
 public class SecLineasMenuDesktopOld extends SecLineasMenuDesktop {
 
-	static String XPathImagesSublineaWithTags = 
+	private final static String XPathLinea = "//ul[@class[contains(.,'menu-section-brands')]]/li[@class[contains(.,'menu-item-brands')]]";
+	private final static String XPathLineaSpecificWithTag = 
+		XPathLinea + 
+		"//self::*[@id='" + TagIdLinea + "' or " +
+				  "@id[contains(.,'sections_" + TagIdLinea + "')] or " +
+				  "@id[contains(.,'sections-" + TagIdLinea + "')] or " +
+				  "@id[contains(.,'prendas_" + TagIdLinea + "')]]";
+	
+	private final static String XPathImagesSublineaWithTags = 
 			"//div[" + 
 				"@class='image-item' and @data-label[contains(.,'" + TagIdLinea + "')] and " +
 				"@data-label[contains(.,'" + TagIdSublinea + "')]" +
@@ -36,6 +46,17 @@ public class SecLineasMenuDesktopOld extends SecLineasMenuDesktop {
 		}
 		
 		return (XPathSublineaLinkWithTag.replace(TagIdSublinea, idSublineaEnDom));
+	}
+	
+	@Override
+	public String getXPathLinea() {
+		return XPathLinea;
+	}
+	
+	@Override
+	public String getXPathLinea(LineaType lineaType) {
+		String lineaIddom = SecMenusWrap.getIdLineaEnDOM(Channel.desktop, app, lineaType);
+		return (XPathLineaSpecificWithTag.replace(TagIdLinea, lineaIddom));
 	}
 	
 	@Override

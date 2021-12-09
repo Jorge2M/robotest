@@ -26,16 +26,16 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	private static final Map<String, String> storedMenus = new ConcurrentHashMap<>(); 
 	
 	//private final static String XPathContainerMenus = "//div[@class[contains(.,'section-detail-nav-container')]]";
-	private final static String XPathGroupItemWithMenus = "//div[@role='menuitem' and not(@class[contains(.,'item-link')]) and not(@id[contains(.,'nav-sections')])]";
-	private final static String XPathGroupItemLink = "//div[@role='menuitem' and @class[contains(.,'item-link')] and not(@id[contains(.,'nav-sections')])]";
-	private final static String XPathLinkMenuGroup = XPathGroupItemLink + "//a[@class[contains(.,'menu-item')]]";
+	private final static String XPathGroupItemWithMenus = "//ul[@class='JUhkW']/li[@class='iexVb']/span";
+	private final static String XPathGroupItemLink = "//ul[@class='JUhkW']/li[not(@class='iexVb')]";
+	private final static String XPathGroupItemGaleryLink = XPathGroupItemLink + "//a[@class[contains(.,'menu-item')]]/span";
 	
 	public SecBloquesMenuDesktopNew(AppEcom app, WebDriver driver) {
 		super(app, driver);
 	}
 	
 	private String getXPathLinkMenuGroup(Menu1rstLevel menu1rstLevel) {
-		return XPathLinkMenuGroup + "//self::*[@id='" + menu1rstLevel.getDataGaLabelMenuSuperiorDesktop().toLowerCase() + "']";
+		return XPathGroupItemGaleryLink + "//self::*[@id='" + menu1rstLevel.getDataGaLabelMenuSuperiorDesktop().toLowerCase() + "']";
 	}
 
 	@Override

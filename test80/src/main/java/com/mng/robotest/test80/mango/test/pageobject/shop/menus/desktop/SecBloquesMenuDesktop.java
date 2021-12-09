@@ -55,13 +55,13 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	}
 	
 	public static SecBloquesMenuDesktop factory(AppEcom app, WebDriver driver) {
-//		if (app==AppEcom.outlet || 
-//			//TODO temporalmente, de cara a BF2021 se ha restaurado en pro el menú antiguo
-//			//quitar esta línea cuando pase el BF
-//			UtilsMangoTest.isEntornoPRO(app, driver)) {
+		if (app==AppEcom.outlet || 
+			//TODO temporalmente, de cara a BF2021 se ha restaurado en pro el menú antiguo
+			//quitar esta línea cuando pase el BF
+			UtilsMangoTest.isEntornoPRO(app, driver)) {
 			return new SecBloquesMenuDesktopOld(app, driver);
-//		}
-//		return new SecBloquesMenuDesktopNew(app, driver);
+		}
+		return new SecBloquesMenuDesktopNew(app, driver);
 	}
 
 	private String getXPathContainerMenus() {
