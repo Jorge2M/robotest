@@ -40,7 +40,9 @@ import com.mng.robotest.test80.mango.test.utils.awssecrets.GetterSecrets.SecretT
 
 import static com.mng.robotest.test80.mango.test.stpv.navigations.shop.CheckoutFlow.BuilderCheckout;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
@@ -70,8 +72,8 @@ public class Compra {
 
 	@Test (
 		groups={"Compra", "Canal:desktop,mobile_App:shop,outlet"}, alwaysRun=true, priority=2, 
-		description="[Usuario registrado][Tarjeta guardada][Productos Home (Shop)][No aceptación cookies] Compra con descuento empleado. Verificar compra en sección 'Mis compras'") //Lo marcamos con prioridad 2 para dar tiempo a que otro caso de prueba registre la tarjeta 
-	public void COM001_Compra_HomeProducts_TrjSaved_Empl() throws Exception {
+		description="[Usuario registrado][Tarjeta guardada][Productos Home e Intimissimi (Shop)][No aceptación cookies] Compra con descuento empleado. Verificar compra en sección 'Mis compras'") //Lo marcamos con prioridad 2 para dar tiempo a que otro caso de prueba registre la tarjeta 
+	public void COM001_Compra_Home_Intimissimi_TrjSaved_Empl() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
 		
@@ -111,11 +113,28 @@ public class Compra {
 					.build()
 					.checkout(From.Prehome);
 		} else {
-			return new BuilderCheckout(dCtxSh, dCtxPago, driver)
-					.pago(españa.getPago("VISA"))
-					.listArticles(getArticlesHome(dCtxSh, driver).subList(0, 2))
-					.build()
-					.checkout(From.Prehome);
+			//TODO actualmente no funciona el buscador por referencia de productos Intimissimi
+			//confiamos que esté listo el 9-enero-2022
+			//cuando esté listo habrá que eliminar el 1er bloque del if
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date dateLimit = sdf.parse("2022-01-09");
+			Date dateToday = new Date();
+			if (dateToday.before(dateLimit)) {
+				return new BuilderCheckout(dCtxSh, dCtxPago, driver)
+						.pago(españa.getPago("VISA"))
+						.listArticles(getArticlesHome(dCtxSh, driver).subList(0, 2))
+						.build()
+						.checkout(From.Prehome);
+			} else {
+				List<Garment> listArticlesHome = getArticlesHome(dCtxSh, driver);
+				List<Garment> listArticlesIntimissimi = getArticlesIntimissimi(dCtxSh, driver);
+				List<Garment> listArticles = Arrays.asList(listArticlesHome.get(0), listArticlesIntimissimi.get(0));
+				return new BuilderCheckout(dCtxSh, dCtxPago, driver)
+						.pago(españa.getPago("VISA"))
+						.listArticles(listArticles)
+						.build()
+						.checkout(From.Prehome);
+			}
 		}
 	}
 	
@@ -130,6 +149,22 @@ public class Compra {
 					Menu.Albornoces, 
 					Menu.Toallas, 
 					Menu.Alfombras))
+			.build();
+		
+		return getterProducts.getFiltered(FilterType.Stock);
+	}
+	
+	private List<Garment> getArticlesIntimissimi(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+		if (dCtxSh.appE==AppEcom.outlet) {
+			return null;
+		}
+		
+		GetterProducts getterProducts = new GetterProducts.Builder(españa.getCodigo_alf(), dCtxSh.appE, driver)
+			.linea(LineaType.she)
+			.menusCandidates(Arrays.asList(
+					Menu.Sujetadores, 
+					Menu.Braguitas, 
+					Menu.Lenceria))
 			.build();
 		
 		return getterProducts.getFiltered(FilterType.Stock);

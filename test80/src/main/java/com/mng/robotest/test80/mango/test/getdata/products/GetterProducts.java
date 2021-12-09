@@ -187,6 +187,13 @@ public class GetterProducts extends JaxRsClient {
 	}
 	
 	private WebTarget getWebTargetProductlist(String urlBase, MenuProduct menu) throws Exception {
+		if ("intimissimi".compareTo(menu.getSeccion())==0) {
+			return getWebTargetProductlistIntimissimi(urlBase, menu); 
+		}
+		return getWebTargetProductlistStandard(urlBase, menu); 
+	}
+	
+	private WebTarget getWebTargetProductlistStandard(String urlBase, MenuProduct menu) throws Exception {
 		Client client = getClientIgnoreCertificates();
 		WebTarget webTarget = 
 			client
@@ -194,6 +201,27 @@ public class GetterProducts extends JaxRsClient {
 				.path(codigoPaisAlf)
 				.path(getLineaPath())
 				.path("sections_" + lineaType.name() + "." + menu.getSeccion() + "_" + lineaType.name())
+				.queryParam("idSubSection", menu.getGaleria() + "_" + lineaType.name())
+				.queryParam("menu", "familia;" + menu.getFamilia())
+				.queryParam("pageNum", pagina)
+				.queryParam("columnsPerRow", "1")
+				.queryParam("rowsPerPage", numProducts);
+		
+		if ("".compareTo(saleType)!=0) {
+			webTarget = webTarget.queryParam("saleType", saleType);
+		}
+		return webTarget;
+	}
+	
+	private WebTarget getWebTargetProductlistIntimissimi(String urlBase, MenuProduct menu) throws Exception {
+		Client client = getClientIgnoreCertificates();
+		WebTarget webTarget = 
+			client
+				.target(urlBase.replace("http:", "https:") + "ws-catalog-aggregator/desktop/product-list/products/v1")
+				.path(codigoPaisAlf)
+				.path(codigoPaisAlf.toLowerCase())
+				.path(getLineaPath())
+				.path("sections_" + lineaType.name() + "_Perfumes_imssm." + menu.getSeccion() + "_" + lineaType.name())
 				.queryParam("idSubSection", menu.getGaleria() + "_" + lineaType.name())
 				.queryParam("menu", "familia;" + menu.getFamilia())
 				.queryParam("pageNum", pagina)
