@@ -37,14 +37,14 @@ spec:
           containerPort: 8080
         readinessProbe:
           httpGet:
-            path: /testserver
+            path: /health
             port: http
           initialDelaySeconds: 40
           periodSeconds: 10
           timeoutSeconds: 10
         livenessProbe:
           httpGet:
-            path: /testserver
+            path: /health
             port: http
           initialDelaySeconds: 40
           periodSeconds: 10
@@ -106,7 +106,7 @@ spec:
           containerPort: 8080
         readinessProbe:
           httpGet:
-            path: /testserver
+            path: /health
             port: http
           initialDelaySeconds: 15
           periodSeconds: 10
