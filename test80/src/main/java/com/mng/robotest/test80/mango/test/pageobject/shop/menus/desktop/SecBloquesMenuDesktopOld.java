@@ -22,7 +22,8 @@ public class SecBloquesMenuDesktopOld extends SecBloquesMenuDesktop {
 	
 	private final static String XPathContainerMenus = "//div[@class[contains(.,'section-detail-container')]]";
 	private final static String XPathCapaMenusRelative = "//div[@class[contains(.,'section-detail-list')]]";
-	private final static String XPathMenuItem = "/li[@class[contains(.,'menu-item')] and not(@class[contains(.,'desktop-label-hidden')] or @class[contains(.,' label-hidden')])]/a"; 
+	private final static String XPathMenuItem = "/li[@class[contains(.,'menu-item')] and not(@class[contains(.,'desktop-label-hidden')] or @class[contains(.,' label-hidden')])]/a";
+	private final static String XPathEntradaMenuBloqueRelativeWithTag = "//ul/li/a[@data-label[contains(.,'" + TagIdBloque + "-')]]";
 	private final static String XPathEntradaMenuLineaRelativeToCapaWithTag = 
 		"//ul[@class[contains(.,'" + TagIdTypeMenu + "')]]" +
 		XPathMenuItem;
@@ -87,6 +88,14 @@ public class SecBloquesMenuDesktopOld extends SecBloquesMenuDesktop {
 	public void seleccionarMenuXHref(Menu1rstLevel menu1rstLevel) throws Exception {
 		secLineasMenu.hoverLineaAndWaitForMenus(menu1rstLevel.getLinea(), menu1rstLevel.getSublinea());
 		clickMenuInHref(menu1rstLevel);
+	}
+	
+	@Override
+	public List<WebElement> getListMenusLineaBloque(LineaType lineaType, GroupMenu bloque) throws Exception {
+		makeMenusGroupVisible(lineaType, bloque);
+		String xpathMenuLinea = getXPathCapaMenusLinea(lineaType);
+		String xpathEntradaMenu = XPathEntradaMenuBloqueRelativeWithTag.replace(TagIdBloque, bloque.toString());
+		return (driver.findElements(By.xpath(xpathMenuLinea + xpathEntradaMenu)));
 	}
 	
 	private List<WebElement> getListMenusLinea(LineaType lineaType, SublineaType sublineaType) throws Exception {

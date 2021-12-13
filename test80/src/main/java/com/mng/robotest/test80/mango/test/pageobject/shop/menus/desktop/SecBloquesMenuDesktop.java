@@ -32,6 +32,13 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	public abstract List<DataScreenMenu> getListDataScreenMenus(LineaType lineaType, SublineaType sublineaType) throws Exception;
 	public abstract void seleccionarMenuXHref(Menu1rstLevel menu1rstLevel) throws Exception;
 	
+	/**
+	 * @param linea she, he, kids, home, teen
+	 * @param bloque prendas, accesorios, colecciones...
+	 * @return los menús asociados a una línea/bloque concretos (por bloque entendemos prendas, accesorios, colecciones...)
+	 */
+	public abstract List<WebElement> getListMenusLineaBloque(LineaType lineaType, GroupMenu bloque) throws Exception;
+	
 	protected final AppEcom app;
 	protected final SecLineasMenuDesktop secLineasMenu;
 	
@@ -41,8 +48,7 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	protected final static String TagIdBloque = "@BloqueId"; //Prendas, Accesorios...
 	protected final static String TagIdTypeMenu = "@TypeMenu";
 
-	//TODO modificar!
-	protected final static String XPathEntradaMenuBloqueRelativeWithTag = "//ul/li/a[@data-label[contains(.,'" + TagIdBloque + "-')]]";
+
 
 	protected SecBloquesMenuDesktop(AppEcom app, WebDriver driver) {
 		super(driver);
@@ -60,7 +66,7 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 		return new SecBloquesMenuDesktopNew(app, driver);
 	}
 		
-	private String getXPathCapaMenusLinea(LineaType lineaId) {
+	protected String getXPathCapaMenusLinea(LineaType lineaId) {
 		String idLineaDom = SecMenusWrap.getIdLineaEnDOM(Channel.desktop, app, lineaId);
 		if (lineaId==LineaType.rebajas) {
 			idLineaDom = "sections_rebajas_step1";
@@ -138,19 +144,6 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 		}
 		return listDataMenus;
 	}
-
-	/**
-	 * @param linea she, he, kids, home, teen
-	 * @param bloque prendas, accesorios, colecciones...
-	 * @return los menús asociados a una línea/bloque concretos (por bloque entendemos prendas, accesorios, colecciones...)
-	 */
-	public List<WebElement> getListMenusLineaBloque(LineaType lineaType, GroupMenu bloque) throws Exception {
-		makeMenusGroupVisible(lineaType, bloque);
-		String xpathMenuLinea = getXPathCapaMenusLinea(lineaType);
-		String xpathEntradaMenu = XPathEntradaMenuBloqueRelativeWithTag.replace(TagIdBloque, bloque.toString());
-		return (driver.findElements(By.xpath(xpathMenuLinea + xpathEntradaMenu)));
-	}
-
 
 	protected void hoverLineaMenu(Menu1rstLevel menu1rstLevel) {
 		LineaType lineaMenu = menu1rstLevel.getLinea();

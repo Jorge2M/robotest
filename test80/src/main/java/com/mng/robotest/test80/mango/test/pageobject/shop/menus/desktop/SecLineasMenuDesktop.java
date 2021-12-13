@@ -22,6 +22,8 @@ import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 
 public abstract class SecLineasMenuDesktop extends PageObjTM {
 	
+	public abstract String getXPathMenuFatherWrapper();
+	public abstract String getXPathLineasMenuWrapper();
 	public abstract String getXPathLinea();
 	public abstract String getXPathLinea(LineaType lineaType);
 	public abstract void selectSublinea(LineaType lineaType, SublineaType sublineaType);
@@ -30,8 +32,7 @@ public abstract class SecLineasMenuDesktop extends PageObjTM {
 	
 	static String TagIdLinea = "@LineaId";
 	static String TagIdSublinea = "@SublineaId";
-	static String XPathMenuFatherWrapper = "//div[@id='navMain']";
-	static String XPathLineasMenuWrapper = "//div[@class='menu-section']";
+
 
 	static String XPathSublineaLinkWithTag = 
 		"//div[" + 
@@ -64,30 +65,30 @@ public abstract class SecLineasMenuDesktop extends PageObjTM {
 	}
 
 	public boolean isPresentLineasMenuWrapp() {
-		return (state(Present, By.xpath(XPathLineasMenuWrapper)).check());
+		return (state(Present, By.xpath(getXPathLineasMenuWrapper())).check());
 	}
 	
 	public boolean isVisibleMenuSup() {
-		return (state(Present, By.xpath(XPathLineasMenuWrapper)).check());
+		return (state(Present, By.xpath(getXPathLineasMenuWrapper())).check());
 	}
 	
 	public boolean isVisibleMenuSupUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathLineasMenuWrapper)).wait(maxSeconds).check());
+		return (state(Visible, By.xpath(getXPathLineasMenuWrapper())).wait(maxSeconds).check());
 	}	
 	
 	public boolean isInvisibleMenuSupUntil(int maxSeconds) {
-		return (state(Invisible, By.xpath(XPathLineasMenuWrapper)).wait(maxSeconds).check());
+		return (state(Invisible, By.xpath(getXPathLineasMenuWrapper())).wait(maxSeconds).check());
 	}
 	
 	public void bringMenuBackground() throws Exception {
 		String xpathToBringBack = "";
 		switch (app) {
 		case outlet:
-			xpathToBringBack = XPathLineasMenuWrapper;
+			xpathToBringBack = getXPathLineasMenuWrapper();
 			break;
 		case shop:
 		default:
-			xpathToBringBack = XPathMenuFatherWrapper;
+			xpathToBringBack = getXPathMenuFatherWrapper();
 		}
 		
 		WebElement menuWrapp = driver.findElement(By.xpath(xpathToBringBack));

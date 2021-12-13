@@ -14,6 +14,9 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 
 public class SecLineasMenuDesktopOld extends SecLineasMenuDesktop {
 
+	private static String XPathMenuFatherWrapper = "//div[@id='navMain']";
+	private static String XPathLineasMenuWrapper = "//div[@class='menu-section']";
+	
 	private final static String XPathLinea = "//ul[@class[contains(.,'menu-section-brands')]]/li[@class[contains(.,'menu-item-brands')]]";
 	private final static String XPathLineaSpecificWithTag = 
 		XPathLinea + 
@@ -46,6 +49,16 @@ public class SecLineasMenuDesktopOld extends SecLineasMenuDesktop {
 		}
 		
 		return (XPathSublineaLinkWithTag.replace(TagIdSublinea, idSublineaEnDom));
+	}
+	
+	@Override
+	public String getXPathMenuFatherWrapper() {
+		return XPathMenuFatherWrapper;
+	}
+	
+	@Override
+	public String getXPathLineasMenuWrapper() {
+		return XPathLineasMenuWrapper;
 	}
 	
 	@Override

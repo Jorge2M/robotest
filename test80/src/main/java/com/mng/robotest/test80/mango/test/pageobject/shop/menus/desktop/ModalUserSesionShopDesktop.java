@@ -11,7 +11,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalUserSesionShopDesktop extends PageObjTM { 
 	
-	final static String XPathCapaMenus = "//div[@class='user-icon-submenu']";
+	final static String XPathCapaMenus = "//div[@class[contains(.,'user-sub-menu')]]";
 	
 	public enum MenuUserDesktop implements ElementPage { 
 		iniciarSesion (XPathCapaMenus + "//div[@class[contains(.,'login-button')]]"),
