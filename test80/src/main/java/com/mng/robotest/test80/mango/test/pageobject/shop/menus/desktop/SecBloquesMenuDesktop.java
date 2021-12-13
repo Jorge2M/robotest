@@ -27,6 +27,8 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	public abstract boolean goToMenuAndCheckIsVisible(Menu1rstLevel menu1rstLevel) throws Exception;
 	public abstract void clickMenu(Menu1rstLevel menu1rstLevel);
 	public abstract void makeMenusGroupVisible(LineaType lineaType, GroupMenu bloque);
+	public abstract String getXPathCapaMenusLinea(String idLinea);
+	public abstract String getXPathLinkMenuSuperiorRelativeToCapa(TypeMenuDesktop typeMenu);
 	public abstract List<DataScreenMenu> getListDataScreenMenus(LineaType lineaType, SublineaType sublineaType) throws Exception;
 	public abstract void seleccionarMenuXHref(Menu1rstLevel menu1rstLevel) throws Exception;
 	
@@ -39,13 +41,7 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	protected final static String TagIdBloque = "@BloqueId"; //Prendas, Accesorios...
 	protected final static String TagIdTypeMenu = "@TypeMenu";
 
-	protected final static String XPathContainerMenus = "//div[@class[contains(.,'section-detail-container')]]";
-	protected final static String XPathCapaMenusRelative = "//div[@class[contains(.,'section-detail-list')]]";
-	protected final static String XPathMenuItem = "/li[@class[contains(.,'menu-item')] and not(@class[contains(.,'desktop-label-hidden')] or @class[contains(.,' label-hidden')])]/a"; 
-	protected final static String XPathEntradaMenuLineaRelativeToCapaWithTag = 
-		"//ul[@class[contains(.,'" + TagIdTypeMenu + "')]]" +
-		XPathMenuItem;
-		
+	//TODO modificar!
 	protected final static String XPathEntradaMenuBloqueRelativeWithTag = "//ul/li/a[@data-label[contains(.,'" + TagIdBloque + "-')]]";
 
 	protected SecBloquesMenuDesktop(AppEcom app, WebDriver driver) {
@@ -63,19 +59,7 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 		}
 		return new SecBloquesMenuDesktopNew(app, driver);
 	}
-
-	private String getXPathContainerMenus() {
-		return XPathContainerMenus;
-	}
-	
-	private String getXPathCapaMenus() {
-		return getXPathContainerMenus() + XPathCapaMenusRelative;
-	}
-	
-	private String getXPathCapaMenusLinea(String idLinea) {
-		return getXPathCapaMenus() + "//self::*[@data-brand[contains(.,'" + idLinea + "')]]";
-	}
-	
+		
 	private String getXPathCapaMenusLinea(LineaType lineaId) {
 		String idLineaDom = SecMenusWrap.getIdLineaEnDOM(Channel.desktop, app, lineaId);
 		if (lineaId==LineaType.rebajas) {
@@ -88,16 +72,6 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	private String getXPathCapaMenusSublinea(SublineaType sublineaType) {
 		LineaType parentLine = sublineaType.getParentLine();
 		return (getXPathCapaMenusLinea(parentLine));
-	}
-
-	private String getXPathLinkMenuSuperiorRelativeToCapa(TypeMenuDesktop typeMenu) {
-		switch (typeMenu) {
-		case Link:
-			return (XPathEntradaMenuLineaRelativeToCapaWithTag.replace(TagIdTypeMenu, "section-detail"));
-		case Banner:
-		default:
-			return (XPathEntradaMenuLineaRelativeToCapaWithTag.replace(TagIdTypeMenu, "section-image--single"));
-		}
 	}
 
 	protected String getXPathMenusSuperiorLinkVisibles(LineaType lineaType, SublineaType sublineaType, TypeMenuDesktop typeMenu) {

@@ -20,6 +20,13 @@ import com.mng.robotest.test80.mango.test.utils.checkmenus.DataScreenMenu;
 
 public class SecBloquesMenuDesktopOld extends SecBloquesMenuDesktop {
 	
+	private final static String XPathContainerMenus = "//div[@class[contains(.,'section-detail-container')]]";
+	private final static String XPathCapaMenusRelative = "//div[@class[contains(.,'section-detail-list')]]";
+	private final static String XPathMenuItem = "/li[@class[contains(.,'menu-item')] and not(@class[contains(.,'desktop-label-hidden')] or @class[contains(.,' label-hidden')])]/a"; 
+	private final static String XPathEntradaMenuLineaRelativeToCapaWithTag = 
+		"//ul[@class[contains(.,'" + TagIdTypeMenu + "')]]" +
+		XPathMenuItem;
+	
 	public SecBloquesMenuDesktopOld(AppEcom app, WebDriver driver) {
 		super(app, driver);
 	}
@@ -39,6 +46,26 @@ public class SecBloquesMenuDesktopOld extends SecBloquesMenuDesktop {
 	@Override
 	public void makeMenusGroupVisible(LineaType lineaType, GroupMenu bloque) {
 		secLineasMenu.hoverLineaAndWaitForMenus(lineaType, null);
+	}
+	
+	public String getXPathCapaMenus() {
+		return XPathContainerMenus + XPathCapaMenusRelative;
+	}
+	
+	@Override
+	public String getXPathCapaMenusLinea(String idLinea) {
+		return getXPathCapaMenus() + "//self::*[@data-brand[contains(.,'" + idLinea + "')]]";
+	}
+	
+	@Override
+	public String getXPathLinkMenuSuperiorRelativeToCapa(TypeMenuDesktop typeMenu) {
+		switch (typeMenu) {
+		case Link:
+			return (XPathEntradaMenuLineaRelativeToCapaWithTag.replace(TagIdTypeMenu, "section-detail"));
+		case Banner:
+		default:
+			return (XPathEntradaMenuLineaRelativeToCapaWithTag.replace(TagIdTypeMenu, "section-image--single"));
+		}
 	}
 	
 	@Override

@@ -25,17 +25,21 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	//Example row: "abrigos_she" / "prendas_she"
 	private static final Map<String, String> storedMenus = new ConcurrentHashMap<>(); 
 	
-	//private final static String XPathContainerMenus = "//div[@class[contains(.,'section-detail-nav-container')]]";
-	private final static String XPathGroupItemWithMenus = "//ul[@class='JUhkW']/li[@class='iexVb']/span";
-	private final static String XPathGroupItemLink = "//ul[@class='JUhkW']/li[not(@class='iexVb')]";
-	private final static String XPathGroupItemGaleryLink = XPathGroupItemLink + "//a[@class[contains(.,'menu-item')]]/span";
+	private final static String XPathContainerGroups = "//ul[" + 
+			"@class[contains(.,'Section__section')] or " + 
+			"@class[contains(.,'Section__last-section')]]";
+	private final static String XPathGroupSection = XPathContainerGroups + "/li[@data-testid='section']";
+	private final static String XPathGroupLink = XPathContainerGroups + "/li[@data-testid='link']";
+	private final static String XPathCapaMenus = "//ul[@class[contains(.,'Section__last-section')]]";
+
 	
 	public SecBloquesMenuDesktopNew(AppEcom app, WebDriver driver) {
 		super(app, driver);
 	}
 	
 	private String getXPathLinkMenuGroup(Menu1rstLevel menu1rstLevel) {
-		return XPathGroupItemGaleryLink + "//self::*[@id='" + menu1rstLevel.getDataGaLabelMenuSuperiorDesktop().toLowerCase() + "']";
+		String dataGaLabel = menu1rstLevel.getDataGaLabelMenuSuperiorDesktop().toLowerCase();
+		return XPathGroupLink + "//a[@data-testid[contains(.,'header-menu-link-" + dataGaLabel + "')]]";
 	}
 
 	@Override
@@ -64,11 +68,27 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	}
 	
 	@Override
+	public String getXPathCapaMenusLinea(String idLinea) {
+		return XPathCapaMenus + "//li[@id[contains(.,'_" + idLinea + "')]]/..";
+	}
+	
+	@Override
+	public String getXPathLinkMenuSuperiorRelativeToCapa(TypeMenuDesktop typeMenu) {
+		switch (typeMenu) {
+		case Link:
+			return "//li[@data-testid='link']//a";
+		case Banner:
+		default:
+			return "//a[@class[contains(.,'sectionImage')]]";
+		}
+	}
+	
+	@Override
 	public List<DataScreenMenu> getListDataScreenMenus(LineaType lineaType, SublineaType sublineaType) 
 	throws Exception {
 		secLineasMenu.hoverLineaAndWaitForMenus(lineaType, sublineaType);
 		List<DataScreenMenu> listMenus = new ArrayList<>();
-		List<WebElement> groups = driver.findElements(By.xpath(XPathGroupItemWithMenus));
+		List<WebElement> groups = driver.findElements(By.xpath(XPathGroupSection));
 		for (WebElement group : groups) {
 			List<WebElement> listMenusGroup = getMenusGroupAndStore(lineaType, sublineaType, group);
 			listMenus.addAll(getDataListMenus(listMenusGroup));
@@ -110,22 +130,20 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	}
 	
 	private void selectGroupMenu(String linea, String group_line) {
-		click(By.xpath(XPathGroupItemWithMenus + "//self::*[@data-brand='" + group_line + "']")).exec();
+		click(By.xpath(XPathGroupSection + "//self::*[@id='" + group_line + "']/span")).exec();
 	}
 	
 	private String getGroupMenu(Menu1rstLevel menu1rstLevel) throws Exception {		
-		String keyMenu = getKeyMenu(menu1rstLevel);
+		String keyMenu = getKeyMenu(menu1rstLevel);	
 		String group = storedMenus.get(keyMenu);
 		if (group==null) {
 			storeMenusGroups(menu1rstLevel.getLinea(), menu1rstLevel.getSublinea());
 		}
 		return storedMenus.get(keyMenu);
 	}
-
-	
 	
 	private void storeMenusGroups(LineaType lineaType, SublineaType sublineaType) throws Exception {
-		List<WebElement> groups = driver.findElements(By.xpath(XPathGroupItemWithMenus));
+		List<WebElement> groups = driver.findElements(By.xpath(XPathGroupSection));
 		for (WebElement group : groups) {
 			getMenusGroupAndStore(lineaType, sublineaType, group);
 		}
@@ -142,13 +160,15 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	}
 	
 	private List<WebElement> getListMenusLinea(LineaType lineaType, SublineaType sublineaType) throws Exception {
-		String XPathMenusVisibles = getXPathMenusSuperiorLinkVisibles(lineaType, sublineaType, TypeMenuDesktop.Link);
+		String XPathMenusVisibles = 
+				getXPathMenusSuperiorLinkVisibles(lineaType, sublineaType, TypeMenuDesktop.Link) + 
+				"/..";
 		return (driver.findElements(By.xpath(XPathMenusVisibles)));
 	}
 	
 	private void storeMenu(String linea, WebElement group, WebElement menu) {
 		String menu_linea = menu.getAttribute("id");
-		String group_linea = group.getAttribute("data-brand");
+		String group_linea = group.getAttribute("id");
 		storedMenus.put(menu_linea, group_linea);
 	}
 	
