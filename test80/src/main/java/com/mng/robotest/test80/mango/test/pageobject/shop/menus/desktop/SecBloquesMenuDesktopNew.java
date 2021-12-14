@@ -11,6 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
@@ -28,7 +29,7 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	private final static String XPathContainerGroups = "//ul[" + 
 			"@class[contains(.,'Section__section')] or " + 
 			"@class[contains(.,'Section__last-section')]]";
-	private final static String XPathGroupSection = XPathContainerGroups + "/li[@data-testid[contains(.,'section')]]";
+	private final static String XPathGroupSection = XPathContainerGroups + "/li[@data-testid[contains(.,'section')] and not(@id[contains(.,'section')])]";
 	private final static String XPathGroupLink = XPathContainerGroups + "/li[@data-testid[contains(.,'link')]]";
 	private final static String XPathCapaMenus = "//ul[@class[contains(.,'Section__last-section')]]";
 
@@ -135,6 +136,11 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 			xpathMenuVisible + 
 			"[@data-testid[contains(.,'" + dataGaLabelMenu + "')] or " + 
 			"@data-testid[contains(.,'" + dataGaLabelMenu.toLowerCase() + "')]]");
+	}
+	
+	@Override
+	public String getXPathCapaMenusLinea(LineaType lineaId) {
+		return getXPathCapaMenusLinea(lineaId.getId3());
 	}
 	
 //	private void makeMenusInvisible() {

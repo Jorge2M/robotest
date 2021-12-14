@@ -10,7 +10,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -18,7 +17,6 @@ import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.GroupMenu;
 import com.mng.robotest.test80.mango.test.utils.checkmenus.DataScreenMenu;
 
@@ -32,6 +30,7 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	public abstract List<DataScreenMenu> getListDataScreenMenus(LineaType lineaType, SublineaType sublineaType) throws Exception;
 	public abstract void seleccionarMenuXHref(Menu1rstLevel menu1rstLevel) throws Exception;
 	public abstract String getXPathMenuSuperiorLinkVisible(Menu1rstLevel menu1rstLevel);
+	public abstract String getXPathCapaMenusLinea(LineaType lineaId);
 	
 	/**
 	 * @param linea she, he, kids, home, teen
@@ -67,15 +66,6 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 		return new SecBloquesMenuDesktopNew(app, driver);
 	}
 		
-	protected String getXPathCapaMenusLinea(LineaType lineaId) {
-		String idLineaDom = SecMenusWrap.getIdLineaEnDOM(Channel.desktop, app, lineaId);
-		if (lineaId==LineaType.rebajas) {
-			idLineaDom = "sections_rebajas_step1";
-		}
-
-		return getXPathCapaMenusLinea(idLineaDom);
-	}
-
 	private String getXPathCapaMenusSublinea(SublineaType sublineaType) {
 		LineaType parentLine = sublineaType.getParentLine();
 		return (getXPathCapaMenusLinea(parentLine));
@@ -166,5 +156,4 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 		String xpathMenuLinea = getXPathMenusSuperiorLinkVisibles(lineaType, sublineaType, TypeMenuDesktop.Banner);
 		click(By.xpath(xpathMenuLinea)).exec();
 	}
-	
 }

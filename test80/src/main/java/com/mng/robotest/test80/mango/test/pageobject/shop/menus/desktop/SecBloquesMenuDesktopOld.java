@@ -10,11 +10,13 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.GroupMenu;
 import com.mng.robotest.test80.mango.test.utils.checkmenus.DataScreenMenu;
 
@@ -120,6 +122,16 @@ public class SecBloquesMenuDesktopOld extends SecBloquesMenuDesktop {
 			xpathMenuVisible + 
 			"[@data-label[contains(.,'" + dataGaLabelMenu + "')] or " + 
 			"@data-label[contains(.,'" + dataGaLabelMenu.toLowerCase() + "')]]");
+	}
+	
+	@Override
+	public String getXPathCapaMenusLinea(LineaType lineaId) {
+		String idLineaDom = SecMenusWrap.getIdLineaEnDOM(Channel.desktop, app, lineaId);
+		if (lineaId==LineaType.rebajas) {
+			idLineaDom = "sections_rebajas_step1";
+		}
+
+		return getXPathCapaMenusLinea(idLineaDom);
 	}
 	
 	private List<WebElement> getListMenusLinea(LineaType lineaType, SublineaType sublineaType) throws Exception {
