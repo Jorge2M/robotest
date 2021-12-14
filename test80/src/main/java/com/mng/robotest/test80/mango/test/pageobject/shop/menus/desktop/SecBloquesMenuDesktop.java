@@ -31,6 +31,7 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	public abstract void seleccionarMenuXHref(Menu1rstLevel menu1rstLevel) throws Exception;
 	public abstract String getXPathMenuSuperiorLinkVisible(Menu1rstLevel menu1rstLevel);
 	public abstract String getXPathCapaMenusLinea(LineaType lineaId);
+	public abstract String getXPathMenusSuperiorLinkVisibles(LineaType lineaType, SublineaType sublineaType, TypeMenuDesktop typeMenu);
 	
 	/**
 	 * @param linea she, he, kids, home, teen
@@ -66,21 +67,9 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 		return new SecBloquesMenuDesktopNew(app, driver);
 	}
 		
-	private String getXPathCapaMenusSublinea(SublineaType sublineaType) {
+	public String getXPathCapaMenusSublinea(SublineaType sublineaType) {
 		LineaType parentLine = sublineaType.getParentLine();
 		return (getXPathCapaMenusLinea(parentLine));
-	}
-
-	protected String getXPathMenusSuperiorLinkVisibles(LineaType lineaType, SublineaType sublineaType, TypeMenuDesktop typeMenu) {
-		String xpathCapaMenuLinea = "";
-		if (sublineaType==null) {
-			xpathCapaMenuLinea = getXPathCapaMenusLinea(lineaType);
-		} else {
-			xpathCapaMenuLinea = getXPathCapaMenusSublinea(sublineaType);
-		}
-
-		String xpathMenu = getXPathLinkMenuSuperiorRelativeToCapa(typeMenu);
-		return (xpathCapaMenuLinea + xpathMenu);
 	}
 
 	private String getXPathMenuVisibleByDataInHref(Menu1rstLevel menu1rstLevel) {

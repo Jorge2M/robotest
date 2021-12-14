@@ -134,6 +134,19 @@ public class SecBloquesMenuDesktopOld extends SecBloquesMenuDesktop {
 		return getXPathCapaMenusLinea(idLineaDom);
 	}
 	
+	@Override
+	public String getXPathMenusSuperiorLinkVisibles(LineaType lineaType, SublineaType sublineaType, TypeMenuDesktop typeMenu) {
+		String xpathCapaMenuLinea = "";
+		if (sublineaType==null) {
+			xpathCapaMenuLinea = getXPathCapaMenusLinea(lineaType);
+		} else {
+			xpathCapaMenuLinea = getXPathCapaMenusSublinea(sublineaType);
+		}
+
+		String xpathMenu = getXPathLinkMenuSuperiorRelativeToCapa(typeMenu);
+		return (xpathCapaMenuLinea + xpathMenu);
+	}
+	
 	private List<WebElement> getListMenusLinea(LineaType lineaType, SublineaType sublineaType) throws Exception {
 		secLineasMenu.hoverLineaAndWaitForMenus(lineaType, sublineaType);
 		String XPathMenusVisibles = getXPathMenusSuperiorLinkVisibles(lineaType, sublineaType, TypeMenuDesktop.Link);

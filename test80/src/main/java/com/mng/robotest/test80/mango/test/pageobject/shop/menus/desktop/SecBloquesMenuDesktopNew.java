@@ -17,6 +17,7 @@ import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.GroupMenu;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecBloquesMenuDesktop.TypeMenuDesktop;
 import com.mng.robotest.test80.mango.test.utils.checkmenus.DataScreenMenu;
 
 
@@ -141,6 +142,22 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	@Override
 	public String getXPathCapaMenusLinea(LineaType lineaId) {
 		return getXPathCapaMenusLinea(lineaId.getId3());
+	}
+	
+	@Override
+	public String getXPathMenusSuperiorLinkVisibles(LineaType lineaType, SublineaType sublineaType, TypeMenuDesktop typeMenu) {
+		String xpathCapaMenuLinea = "";
+		if (sublineaType==null) {
+			xpathCapaMenuLinea = getXPathCapaMenusLinea(lineaType);
+		} else {
+			xpathCapaMenuLinea = getXPathCapaMenusSublinea(sublineaType);
+		}
+
+		String xpathMenu = getXPathLinkMenuSuperiorRelativeToCapa(typeMenu);
+		if (typeMenu==TypeMenuDesktop.Link) { 
+			return (xpathCapaMenuLinea + xpathMenu);
+		}
+		return xpathMenu;
 	}
 	
 //	private void makeMenusInvisible() {
