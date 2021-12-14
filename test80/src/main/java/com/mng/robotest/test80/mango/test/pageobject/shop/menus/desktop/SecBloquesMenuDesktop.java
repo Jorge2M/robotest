@@ -26,6 +26,7 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	public abstract void clickMenu(Menu1rstLevel menu1rstLevel);
 	public abstract void makeMenusGroupVisible(LineaType lineaType, GroupMenu bloque);
 	public abstract String getXPathCapaMenusLinea(String idLinea);
+	public abstract String getXPathCapaMenusSublinea(SublineaType sublineaType);
 	public abstract String getXPathLinkMenuSuperiorRelativeToCapa(TypeMenuDesktop typeMenu);
 	public abstract List<DataScreenMenu> getListDataScreenMenus(LineaType lineaType, SublineaType sublineaType) throws Exception;
 	public abstract void seleccionarMenuXHref(Menu1rstLevel menu1rstLevel) throws Exception;
@@ -67,10 +68,7 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 		return new SecBloquesMenuDesktopNew(app, driver);
 	}
 		
-	public String getXPathCapaMenusSublinea(SublineaType sublineaType) {
-		LineaType parentLine = sublineaType.getParentLine();
-		return (getXPathCapaMenusLinea(parentLine));
-	}
+
 
 	private String getXPathMenuVisibleByDataInHref(Menu1rstLevel menu1rstLevel) {
 		LineaType lineaMenu = menu1rstLevel.getLinea();

@@ -61,6 +61,12 @@ public class SecBloquesMenuDesktopOld extends SecBloquesMenuDesktop {
 	}
 	
 	@Override
+	public String getXPathCapaMenusSublinea(SublineaType sublineaType) {
+		LineaType parentLine = sublineaType.getParentLine();
+		return (getXPathCapaMenusLinea(parentLine));
+	}
+	
+	@Override
 	public String getXPathLinkMenuSuperiorRelativeToCapa(TypeMenuDesktop typeMenu) {
 		switch (typeMenu) {
 		case Link:

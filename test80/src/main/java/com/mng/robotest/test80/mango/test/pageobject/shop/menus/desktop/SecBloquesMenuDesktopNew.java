@@ -17,7 +17,6 @@ import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.GroupMenu;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecBloquesMenuDesktop.TypeMenuDesktop;
 import com.mng.robotest.test80.mango.test.utils.checkmenus.DataScreenMenu;
 
 
@@ -109,7 +108,7 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	public List<WebElement> getListMenusLineaBloque(LineaType lineaType, GroupMenu bloque) throws Exception {
 		makeMenusGroupVisible(lineaType, bloque);
 		String xpathMenuLinea = getXPathCapaMenusLinea(lineaType);
-		String xpathEntradaMenu = "//self::*[@data-testid='section' and @id='" + bloque + "_" + lineaType.name() + "']/../li[@data-testid='link']/a";
+		String xpathEntradaMenu = "//li[@data-testid[contains(.,'section')] and @id='" + bloque + "_" + lineaType.name() + "']/../li[@data-testid[contains(.,'link')]]/a";
 		List<WebElement> listMenus = driver.findElements(By.xpath(xpathMenuLinea + xpathEntradaMenu));
 		//makeMenusInvisible();
 		return (listMenus);
@@ -142,6 +141,11 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	@Override
 	public String getXPathCapaMenusLinea(LineaType lineaId) {
 		return getXPathCapaMenusLinea(lineaId.getId3());
+	}
+	
+	@Override
+	public String getXPathCapaMenusSublinea(SublineaType sublineaType) {
+		return (getXPathCapaMenusLinea(sublineaType.getId(app)));
 	}
 	
 	@Override
