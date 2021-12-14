@@ -15,7 +15,7 @@ public class ModalUserSesionShopDesktop extends PageObjTM {
 	
 	public enum MenuUserDesktop implements ElementPage { 
 		iniciarSesion (XPathCapaMenus + "//div[@class[contains(.,'login-button')]]"),
-		registrate (XPathCapaMenus + "//span[@class='login-register-link']"),
+		registrate (XPathCapaMenus + "//span[@class='login-register-link' or @class[contains(.,'register-link')]]"),
 		miCuenta (XPathCapaMenus + "//div[@class[contains(.,'mi_cuenta')]]"),
 		misCompras (XPathCapaMenus + "//div[@class[contains(.,'mis_compras')]]"),	 
 		mangoLikesYou (XPathCapaMenus + "//div[@class[contains(.,'mango_likes_you')]]"),
