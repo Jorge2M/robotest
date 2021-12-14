@@ -28,8 +28,8 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	private final static String XPathContainerGroups = "//ul[" + 
 			"@class[contains(.,'Section__section')] or " + 
 			"@class[contains(.,'Section__last-section')]]";
-	private final static String XPathGroupSection = XPathContainerGroups + "/li[@data-testid='section']";
-	private final static String XPathGroupLink = XPathContainerGroups + "/li[@data-testid='link']";
+	private final static String XPathGroupSection = XPathContainerGroups + "/li[@data-testid[contains(.,'section')]]";
+	private final static String XPathGroupLink = XPathContainerGroups + "/li[@data-testid[contains(.,'link')]]";
 	private final static String XPathCapaMenus = "//ul[@class[contains(.,'Section__last-section')]]";
 
 	
@@ -76,7 +76,7 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	public String getXPathLinkMenuSuperiorRelativeToCapa(TypeMenuDesktop typeMenu) {
 		switch (typeMenu) {
 		case Link:
-			return "//li[@data-testid='link']//a";
+			return "//li[@data-testid[contains(.,'link')]]//a";
 		case Banner:
 		default:
 			return "//a[@class[contains(.,'sectionImage')]]";
@@ -89,7 +89,8 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 		secLineasMenu.hoverLineaAndWaitForMenus(lineaType, sublineaType);
 		List<DataScreenMenu> listMenus = new ArrayList<>();
 		List<WebElement> groups = driver.findElements(By.xpath(XPathGroupSection));
-		for (WebElement group : groups) {
+		for (int i=1; i<=groups.size(); i++) {
+			WebElement group = driver.findElement(By.xpath("(" + XPathGroupSection + ")[" + i + "]"));
 			List<WebElement> listMenusGroup = getMenusGroupAndStore(lineaType, sublineaType, group);
 			listMenus.addAll(getDataListMenus(listMenusGroup));
 		}

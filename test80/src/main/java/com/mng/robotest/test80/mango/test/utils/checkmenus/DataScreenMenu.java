@@ -16,7 +16,12 @@ public class DataScreenMenu implements Label, Comparable<DataScreenMenu> {
 	public static DataScreenMenu from(WebElement menu) {
 		DataScreenMenu dataMenu = new DataScreenMenu();
 		dataMenu.setId(menu.getAttribute("id"));
-		dataMenu.setDataGaLabel(menu.getAttribute("data-label"));
+		String data_label = menu.getAttribute("data-label");
+		if (data_label!=null) {
+			dataMenu.setDataGaLabel(menu.getAttribute("data-label"));
+		} else {
+			dataMenu.setDataGaLabel(menu.getAttribute("data-testid"));
+		}
 		if (dataMenu.isDataGaLabelValid()) {
 			dataMenu.setLabel(menu.getText().replace("New!", "").trim());
 		}
