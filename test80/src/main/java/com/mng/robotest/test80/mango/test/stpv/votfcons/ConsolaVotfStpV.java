@@ -15,8 +15,7 @@ public class ConsolaVotfStpV {
 	@Step (
 		description="Nos hemos posicionado en la página inicial de VOTF",
 		expected="Aparece la página inicial de VOTF")
-	public static void accesoPagInicial(/*String urlVOTF,*/ WebDriver driver) {
-		//driver.get(urlVOTF);
+	public static void accesoPagInicial(WebDriver driver) {
 		checkAfterAccessInitialPage(driver);
 	}
 	

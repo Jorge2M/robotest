@@ -27,10 +27,8 @@ public class ConsolaVotf {
 	public void VTF001_GenerarPedido() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
 
-		//InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
-		//String paginaIniVOTF = inputParamsSuite.getUrlBase();
-		ConsolaVotfStpV.accesoPagInicial(/*paginaIniVOTF, */driver);
-		ConsolaVotfStpV.selectEntornoTestAndCons("Preproducción", driver);
+		ConsolaVotfStpV.accesoPagInicial(driver);
+		ConsolaVotfStpV.selectEntornoTestAndCons("Prepro k8s", driver);
 		
 		int numProdsMax = 15;
 		List<Article> listArticles = getArticlesAvailable(numProdsMax, driver);
