@@ -31,6 +31,7 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	public abstract String getXPathLinkMenuSuperiorRelativeToCapa(TypeMenuDesktop typeMenu);
 	public abstract List<DataScreenMenu> getListDataScreenMenus(LineaType lineaType, SublineaType sublineaType) throws Exception;
 	public abstract void seleccionarMenuXHref(Menu1rstLevel menu1rstLevel) throws Exception;
+	public abstract String getXPathMenuSuperiorLinkVisible(Menu1rstLevel menu1rstLevel);
 	
 	/**
 	 * @param linea she, he, kids, home, teen
@@ -100,29 +101,6 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 			getXPathMenusSuperiorLinkVisibles(lineaMenu, sublineaMenu, TypeMenuDesktop.Link) + 
 			"[@href[contains(.,'/" + nombreMenuInLower + 
 			"')] and @href[not(contains(.,'/" + nombreMenuInLower + "/'))]]");
-	}
-
-	protected String getXPathMenuSuperiorLinkVisible(Menu1rstLevel menu1rstLevel) {
-		LineaType lineaMenu = menu1rstLevel.getLinea();
-		SublineaType sublineaMenu = menu1rstLevel.getSublinea();
-		String dataGaLabelMenu = menu1rstLevel.getDataGaLabelMenuSuperiorDesktop();
-		String xpathMenuVisible = getXPathMenusSuperiorLinkVisibles(lineaMenu, sublineaMenu, TypeMenuDesktop.Link);
-		if (dataGaLabelMenu.contains("'")) {
-			//En el caso de que el data_ga_label contenga ' 
-			//no parece existir carácter de escape, así que hemos de desglosar en 2 bloques y aplicar el 'contains' en cada uno
-			int posApostrophe = dataGaLabelMenu.indexOf("'");
-			String block1 = dataGaLabelMenu.substring(0, posApostrophe);
-			String block2 = dataGaLabelMenu.substring(posApostrophe + 1);
-			return (
-				xpathMenuVisible + 
-				"[@data-label[contains(.,'" + block1 + "')] and @data-label[contains(.,'" + 
-				block2 + "')]]");
-		}
-
-		return (
-			xpathMenuVisible + 
-			"[@data-label[contains(.,'" + dataGaLabelMenu + "')] or " + 
-			"@data-label[contains(.,'" + dataGaLabelMenu.toLowerCase() + "')]]");
 	}
 
 	public boolean isCapaMenusLineaVisibleUntil(LineaType lineaId, int maxSeconds) {

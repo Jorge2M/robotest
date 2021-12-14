@@ -112,6 +112,30 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 		return (listMenus);
 	}
 	
+	@Override
+	public String getXPathMenuSuperiorLinkVisible(Menu1rstLevel menu1rstLevel) {
+		LineaType lineaMenu = menu1rstLevel.getLinea();
+		SublineaType sublineaMenu = menu1rstLevel.getSublinea();
+		String dataGaLabelMenu = menu1rstLevel.getDataGaLabelMenuSuperiorDesktop();
+		String xpathMenuVisible = getXPathMenusSuperiorLinkVisibles(lineaMenu, sublineaMenu, TypeMenuDesktop.Link);
+		if (dataGaLabelMenu.contains("'")) {
+			//En el caso de que el data_ga_label contenga ' 
+			//no parece existir carácter de escape, así que hemos de desglosar en 2 bloques y aplicar el 'contains' en cada uno
+			int posApostrophe = dataGaLabelMenu.indexOf("'");
+			String block1 = dataGaLabelMenu.substring(0, posApostrophe);
+			String block2 = dataGaLabelMenu.substring(posApostrophe + 1);
+			return (
+				xpathMenuVisible + 
+				"[@data-testid[contains(.,'" + block1 + "')] and @data-testid[contains(.,'" + 
+				block2 + "')]]");
+		}
+
+		return (
+			xpathMenuVisible + 
+			"[@data-testid[contains(.,'" + dataGaLabelMenu + "')] or " + 
+			"@data-testid[contains(.,'" + dataGaLabelMenu.toLowerCase() + "')]]");
+	}
+	
 //	private void makeMenusInvisible() {
 //		WebElement wrapperMenus = driver.findElement(By.xpath(XPathWrapperGlobal));
 //		List<WebElement> elementsAbove = driver.findElements(with(By.tagName("div")).below(wrapperMenus));
