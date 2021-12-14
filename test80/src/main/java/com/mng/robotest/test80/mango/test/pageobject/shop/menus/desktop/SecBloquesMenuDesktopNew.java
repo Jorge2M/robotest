@@ -11,10 +11,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import static org.openqa.selenium.support.locators.RelativeLocator.with;
-
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
@@ -28,7 +24,7 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	//Example row: "abrigos_she" / "prendas_she"
 	private static final Map<String, String> storedMenus = new ConcurrentHashMap<>(); 
 	
-	private final static String XPathWrapperGlobal = "//div[@class[contains(.,'subMenuContainer')]]";
+//	private final static String XPathWrapperGlobal = "//div[@class[contains(.,'subMenuContainer')]]";
 	private final static String XPathContainerGroups = "//ul[" + 
 			"@class[contains(.,'Section__section')] or " + 
 			"@class[contains(.,'Section__last-section')]]";
