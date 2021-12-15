@@ -76,7 +76,7 @@ pipeline {
             }
 
             steps {
-            	unstash 'target'
+            	//unstash 'target'
 	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
 	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
 	            	sh "mvn --settings test80/infrastructure/ci/settings.xml -B verify -DskipUnitTests"
