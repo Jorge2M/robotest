@@ -56,7 +56,10 @@ public abstract class SecLineasMenuDesktop extends PageObjTM {
 
 	public String getXPathLineaSelected(LineaType lineaType) {
 		String xpathLinea = getXPathLinea(lineaType);
-		return (xpathLinea + "//self::*[@class[contains(.,'selected')]]");		
+		if (app==AppEcom.outlet) {
+			return (xpathLinea + "//self::*[@class[contains(.,'selected')]]");		
+		}
+		return (xpathLinea + "//a[@aria-expanded='true']");
 	}
 	
 	public String getXPathLineaLink(LineaType lineaType) {

@@ -25,13 +25,14 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	//Example row: "abrigos_she" / "prendas_she"
 	private static final Map<String, String> storedMenus = new ConcurrentHashMap<>(); 
 	
-//	private final static String XPathWrapperGlobal = "//div[@class[contains(.,'subMenuContainer')]]";
-	private final static String XPathContainerGroups = "//ul[" + 
-			"@class[contains(.,'Section__section')] or " + 
-			"@class[contains(.,'Section__last-section')]]";
+	//TODO React. 15-diciembre-2021: identificadores react solicitados a David Massa por Teams
+	private final static String XPathWrapperGlobal = "//div[@id='headerPortalContainer']";
+	private final static String XPathContainerGroups = XPathWrapperGlobal + "//ul[@class[contains(.,'JUhkW')]]";
 	private final static String XPathGroupSection = XPathContainerGroups + "/li[@data-testid[contains(.,'section')] and not(@id[contains(.,'section')])]";
 	private final static String XPathGroupLink = XPathContainerGroups + "/li[@data-testid[contains(.,'link')]]";
-	private final static String XPathCapaMenus = "//ul[@class[contains(.,'Section__last-section')]]";
+	private final static String XPathCapaMenus = "//ul[@class[contains(.,'o3ud7')]]";
+	private final static String XPathMenuLink = XPathCapaMenus + "/li[@data-testid[contains(.,'link')]]";
+	private final static String XPathRightImage = XPathWrapperGlobal + "//a/img/..";
 
 	
 	public SecBloquesMenuDesktopNew(AppEcom app, WebDriver driver) {
@@ -77,10 +78,10 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	public String getXPathLinkMenuSuperiorRelativeToCapa(TypeMenuDesktop typeMenu) {
 		switch (typeMenu) {
 		case Link:
-			return "//li[@data-testid[contains(.,'link')]]//a";
+			return XPathMenuLink + "//a";
 		case Banner:
 		default:
-			return "//a[@class[contains(.,'sectionImage')]]";
+			return XPathRightImage;
 		}
 	}
 	
@@ -150,18 +151,14 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	
 	@Override
 	public String getXPathMenusSuperiorLinkVisibles(LineaType lineaType, SublineaType sublineaType, TypeMenuDesktop typeMenu) {
-		String xpathCapaMenuLinea = "";
-		if (sublineaType==null) {
-			xpathCapaMenuLinea = getXPathCapaMenusLinea(lineaType);
-		} else {
-			xpathCapaMenuLinea = getXPathCapaMenusSublinea(sublineaType);
-		}
+//		String xpathCapaMenuLinea = "";
+//		if (sublineaType==null) {
+//			xpathCapaMenuLinea = getXPathCapaMenusLinea(lineaType);
+//		} else {
+//			xpathCapaMenuLinea = getXPathCapaMenusSublinea(sublineaType);
+//		}
 
-		String xpathMenu = getXPathLinkMenuSuperiorRelativeToCapa(typeMenu);
-		if (typeMenu==TypeMenuDesktop.Link) { 
-			return (xpathCapaMenuLinea + xpathMenu);
-		}
-		return xpathMenu;
+		return getXPathLinkMenuSuperiorRelativeToCapa(typeMenu);
 	}
 	
 //	private void makeMenusInvisible() {

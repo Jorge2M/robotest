@@ -9,13 +9,13 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecTallasArticuloDesktop extends PageObjTM {
 	
-	//private final AppEcom app;
+	private final AppEcom app;
 	private final String xpathArticulo;
 //	private OutletGalery outputGalery;
 	
 	public SecTallasArticuloDesktop(AppEcom app, String xpathArticulo, WebDriver driver) {
 		super(driver);
-		//this.app = app;
+		this.app = app;
 		this.xpathArticulo = xpathArticulo;
 	}
 
@@ -76,18 +76,13 @@ public class SecTallasArticuloDesktop extends PageObjTM {
 		return xpathCapaAdd + "//self::div[not(" + classCapaActive + ")]"; 
 	}
 
-//	private final String XPathTallaAvailableOutletOld = "//span[@data-id and not(@class[contains(.,'no-stock')])]";
-//	private final String XPathTallaAvailableOutletNew = "//button[not(@class[contains(.,'no-stock')])]";
-	private final String XPathTallaAvailableShop = 
-		"//button[@class[contains(.,'si-stock')] or " + 
-				 "@class[contains(.,'undefined')]]"; //TODO para outlet, eliminar cuando suban los cambios de maquetación
+	//TODO React. 15-diciembre-2021: solicitado a pistoleros data-testid vía Teams
+	private final String XPathTallaAvailableShop = "//button[not(@class[contains(.,'iMdOl')])]";
+	private final String XPathTallaAvailableOutlet = "//button[@class[contains(.,'undefined')]]";
 	private String getXPathTallaAvailable() {
-//		if (app==AppEcom.outlet) {
-//			if (getOutletGalery()==OutletGalery.old) {
-//				return XPathTallaAvailableOutletOld;
-//			}
-//			return XPathTallaAvailableOutletNew;
-//		}
+		if (app==AppEcom.outlet) {
+			return XPathTallaAvailableOutlet;
+		}
 		return XPathTallaAvailableShop;
 	}
 	public String getXPathArticleTallaAvailable(int posArticulo, int posTalla) {
