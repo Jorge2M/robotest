@@ -10,7 +10,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -18,7 +17,6 @@ import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.GroupMenu;
 import com.mng.robotest.test80.mango.test.utils.checkmenus.DataScreenMenu;
 
@@ -27,8 +25,21 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	public abstract boolean goToMenuAndCheckIsVisible(Menu1rstLevel menu1rstLevel) throws Exception;
 	public abstract void clickMenu(Menu1rstLevel menu1rstLevel);
 	public abstract void makeMenusGroupVisible(LineaType lineaType, GroupMenu bloque);
+	public abstract String getXPathCapaMenusLinea(String idLinea);
+	public abstract String getXPathCapaMenusSublinea(SublineaType sublineaType);
+	public abstract String getXPathLinkMenuSuperiorRelativeToCapa(TypeMenuDesktop typeMenu);
 	public abstract List<DataScreenMenu> getListDataScreenMenus(LineaType lineaType, SublineaType sublineaType) throws Exception;
 	public abstract void seleccionarMenuXHref(Menu1rstLevel menu1rstLevel) throws Exception;
+	public abstract String getXPathMenuSuperiorLinkVisible(Menu1rstLevel menu1rstLevel);
+	public abstract String getXPathCapaMenusLinea(LineaType lineaId);
+	public abstract String getXPathMenusSuperiorLinkVisibles(LineaType lineaType, SublineaType sublineaType, TypeMenuDesktop typeMenu);
+	
+	/**
+	 * @param linea she, he, kids, home, teen
+	 * @param bloque prendas, accesorios, colecciones...
+	 * @return los menús asociados a una línea/bloque concretos (por bloque entendemos prendas, accesorios, colecciones...)
+	 */
+	public abstract List<WebElement> getListMenusLineaBloque(LineaType lineaType, GroupMenu bloque) throws Exception;
 	
 	protected final AppEcom app;
 	protected final SecLineasMenuDesktop secLineasMenu;
@@ -39,14 +50,7 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	protected final static String TagIdBloque = "@BloqueId"; //Prendas, Accesorios...
 	protected final static String TagIdTypeMenu = "@TypeMenu";
 
-	protected final static String XPathContainerMenus = "//div[@class[contains(.,'section-detail-container')]]";
-	protected final static String XPathCapaMenusRelative = "//div[@class[contains(.,'section-detail-list')]]";
-	protected final static String XPathMenuItem = "/li[@class[contains(.,'menu-item')] and not(@class[contains(.,'desktop-label-hidden')] or @class[contains(.,' label-hidden')])]/a"; 
-	protected final static String XPathEntradaMenuLineaRelativeToCapaWithTag = 
-		"//ul[@class[contains(.,'" + TagIdTypeMenu + "')]]" +
-		XPathMenuItem;
-		
-	protected final static String XPathEntradaMenuBloqueRelativeWithTag = "//ul/li/a[@data-label[contains(.,'" + TagIdBloque + "-')]]";
+
 
 	protected SecBloquesMenuDesktop(AppEcom app, WebDriver driver) {
 		super(driver);
@@ -55,62 +59,16 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	}
 	
 	public static SecBloquesMenuDesktop factory(AppEcom app, WebDriver driver) {
-//		if (app==AppEcom.outlet || 
-//			//TODO temporalmente, de cara a BF2021 se ha restaurado en pro el menú antiguo
-//			//quitar esta línea cuando pase el BF
-//			UtilsMangoTest.isEntornoPRO(app, driver)) {
+		if (app==AppEcom.outlet || 
+			//TODO temporalmente, de cara a BF2021 se ha restaurado en pro el menú antiguo
+			//quitar esta línea cuando pase el BF
+			UtilsMangoTest.isEntornoPRO(app, driver)) {
 			return new SecBloquesMenuDesktopOld(app, driver);
-//		}
-//		return new SecBloquesMenuDesktopNew(app, driver);
-	}
-
-	private String getXPathContainerMenus() {
-		return XPathContainerMenus;
-	}
-	
-	private String getXPathCapaMenus() {
-		return getXPathContainerMenus() + XPathCapaMenusRelative;
-	}
-	
-	private String getXPathCapaMenusLinea(String idLinea) {
-		return getXPathCapaMenus() + "//self::*[@data-brand[contains(.,'" + idLinea + "')]]";
-	}
-	
-	private String getXPathCapaMenusLinea(LineaType lineaId) {
-		String idLineaDom = SecMenusWrap.getIdLineaEnDOM(Channel.desktop, app, lineaId);
-		if (lineaId==LineaType.rebajas) {
-			idLineaDom = "sections_rebajas_step1";
 		}
-
-		return getXPathCapaMenusLinea(idLineaDom);
+		return new SecBloquesMenuDesktopNew(app, driver);
 	}
+		
 
-	private String getXPathCapaMenusSublinea(SublineaType sublineaType) {
-		LineaType parentLine = sublineaType.getParentLine();
-		return (getXPathCapaMenusLinea(parentLine));
-	}
-
-	private String getXPathLinkMenuSuperiorRelativeToCapa(TypeMenuDesktop typeMenu) {
-		switch (typeMenu) {
-		case Link:
-			return (XPathEntradaMenuLineaRelativeToCapaWithTag.replace(TagIdTypeMenu, "section-detail"));
-		case Banner:
-		default:
-			return (XPathEntradaMenuLineaRelativeToCapaWithTag.replace(TagIdTypeMenu, "section-image--single"));
-		}
-	}
-
-	protected String getXPathMenusSuperiorLinkVisibles(LineaType lineaType, SublineaType sublineaType, TypeMenuDesktop typeMenu) {
-		String xpathCapaMenuLinea = "";
-		if (sublineaType==null) {
-			xpathCapaMenuLinea = getXPathCapaMenusLinea(lineaType);
-		} else {
-			xpathCapaMenuLinea = getXPathCapaMenusSublinea(sublineaType);
-		}
-
-		String xpathMenu = getXPathLinkMenuSuperiorRelativeToCapa(typeMenu);
-		return (xpathCapaMenuLinea + xpathMenu);
-	}
 
 	private String getXPathMenuVisibleByDataInHref(Menu1rstLevel menu1rstLevel) {
 		LineaType lineaMenu = menu1rstLevel.getLinea();
@@ -120,29 +78,6 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 			getXPathMenusSuperiorLinkVisibles(lineaMenu, sublineaMenu, TypeMenuDesktop.Link) + 
 			"[@href[contains(.,'/" + nombreMenuInLower + 
 			"')] and @href[not(contains(.,'/" + nombreMenuInLower + "/'))]]");
-	}
-
-	protected String getXPathMenuSuperiorLinkVisible(Menu1rstLevel menu1rstLevel) {
-		LineaType lineaMenu = menu1rstLevel.getLinea();
-		SublineaType sublineaMenu = menu1rstLevel.getSublinea();
-		String dataGaLabelMenu = menu1rstLevel.getDataGaLabelMenuSuperiorDesktop();
-		String xpathMenuVisible = getXPathMenusSuperiorLinkVisibles(lineaMenu, sublineaMenu, TypeMenuDesktop.Link);
-		if (dataGaLabelMenu.contains("'")) {
-			//En el caso de que el data_ga_label contenga ' 
-			//no parece existir carácter de escape, así que hemos de desglosar en 2 bloques y aplicar el 'contains' en cada uno
-			int posApostrophe = dataGaLabelMenu.indexOf("'");
-			String block1 = dataGaLabelMenu.substring(0, posApostrophe);
-			String block2 = dataGaLabelMenu.substring(posApostrophe + 1);
-			return (
-				xpathMenuVisible + 
-				"[@data-label[contains(.,'" + block1 + "')] and @data-label[contains(.,'" + 
-				block2 + "')]]");
-		}
-
-		return (
-			xpathMenuVisible + 
-			"[@data-label[contains(.,'" + dataGaLabelMenu + "')] or " + 
-			"@data-label[contains(.,'" + dataGaLabelMenu.toLowerCase() + "')]]");
 	}
 
 	public boolean isCapaMenusLineaVisibleUntil(LineaType lineaId, int maxSeconds) {
@@ -164,19 +99,6 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 		}
 		return listDataMenus;
 	}
-
-	/**
-	 * @param linea she, he, kids, home, teen
-	 * @param bloque prendas, accesorios, colecciones...
-	 * @return los menús asociados a una línea/bloque concretos (por bloque entendemos prendas, accesorios, colecciones...)
-	 */
-	public List<WebElement> getListMenusLineaBloque(LineaType lineaType, GroupMenu bloque) throws Exception {
-		makeMenusGroupVisible(lineaType, bloque);
-		String xpathMenuLinea = getXPathCapaMenusLinea(lineaType);
-		String xpathEntradaMenu = XPathEntradaMenuBloqueRelativeWithTag.replace(TagIdBloque, bloque.toString());
-		return (driver.findElements(By.xpath(xpathMenuLinea + xpathEntradaMenu)));
-	}
-
 
 	protected void hoverLineaMenu(Menu1rstLevel menu1rstLevel) {
 		LineaType lineaMenu = menu1rstLevel.getLinea();
@@ -221,5 +143,4 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 		String xpathMenuLinea = getXPathMenusSuperiorLinkVisibles(lineaType, sublineaType, TypeMenuDesktop.Banner);
 		click(By.xpath(xpathMenuLinea)).exec();
 	}
-	
 }

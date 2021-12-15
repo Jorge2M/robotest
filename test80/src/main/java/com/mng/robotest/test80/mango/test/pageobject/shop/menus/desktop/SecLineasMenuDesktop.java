@@ -7,7 +7,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
@@ -20,25 +19,20 @@ import com.mng.robotest.test80.mango.test.beans.Pais;
 import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 
 public abstract class SecLineasMenuDesktop extends PageObjTM {
 	
+	public abstract String getXPathMenuFatherWrapper();
+	public abstract String getXPathLineasMenuWrapper();
+	public abstract String getXPathLinea();
+	public abstract String getXPathLinea(LineaType lineaType);
 	public abstract void selectSublinea(LineaType lineaType, SublineaType sublineaType);
 	
 	protected final AppEcom app;
 	
 	static String TagIdLinea = "@LineaId";
 	static String TagIdSublinea = "@SublineaId";
-	static String XPathMenuFatherWrapper = "//div[@id='navMain']";
-	static String XPathLineasMenuWrapper = "//div[@class='menu-section']";
-	static String XPathLinea = "//ul[@class[contains(.,'menu-section-brands')]]/li[@class[contains(.,'menu-item-brands')]]";
-	static String XPathLineaSpecificWithTag = 
-		XPathLinea + 
-		"//self::*[@id='" + TagIdLinea + "' or " +
-				  "@id[contains(.,'sections_" + TagIdLinea + "')] or " +
-				  "@id[contains(.,'sections-" + TagIdLinea + "')] or " +
-				  "@id[contains(.,'prendas_" + TagIdLinea + "')]]";
+
 
 	static String XPathSublineaLinkWithTag = 
 		"//div[" + 
@@ -52,19 +46,13 @@ public abstract class SecLineasMenuDesktop extends PageObjTM {
 	}
 	
 	public static SecLineasMenuDesktop factory(AppEcom app, WebDriver driver) {
-//		if (app==AppEcom.outlet ||
-//			//TODO temporalmente, de cara a BF2021 se ha restaurado en pro el menú antiguo
-//			//quitar esta línea cuando pase el BF
-//			UtilsMangoTest.isEntornoPRO(app, driver)) {
+		if (app==AppEcom.outlet ||
+			UtilsMangoTest.isEntornoPRO(app, driver)) {
 			return new SecLineasMenuDesktopOld(app, driver);
-//		}
-//		return new SecLineasMenuDesktopNew(app, driver);
+		}
+		return new SecLineasMenuDesktopNew(app, driver);
 	}
-	
-	public String getXPathLinea(LineaType lineaType) {
-		String lineaIddom = SecMenusWrap.getIdLineaEnDOM(Channel.desktop, app, lineaType);
-		return (XPathLineaSpecificWithTag.replace(TagIdLinea, lineaIddom));
-	}
+
 
 	public String getXPathLineaSelected(LineaType lineaType) {
 		String xpathLinea = getXPathLinea(lineaType);
@@ -77,30 +65,30 @@ public abstract class SecLineasMenuDesktop extends PageObjTM {
 	}
 
 	public boolean isPresentLineasMenuWrapp() {
-		return (state(Present, By.xpath(XPathLineasMenuWrapper)).check());
+		return (state(Present, By.xpath(getXPathLineasMenuWrapper())).check());
 	}
 	
 	public boolean isVisibleMenuSup() {
-		return (state(Present, By.xpath(XPathLineasMenuWrapper)).check());
+		return (state(Present, By.xpath(getXPathLineasMenuWrapper())).check());
 	}
 	
 	public boolean isVisibleMenuSupUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathLineasMenuWrapper)).wait(maxSeconds).check());
+		return (state(Visible, By.xpath(getXPathLineasMenuWrapper())).wait(maxSeconds).check());
 	}	
 	
 	public boolean isInvisibleMenuSupUntil(int maxSeconds) {
-		return (state(Invisible, By.xpath(XPathLineasMenuWrapper)).wait(maxSeconds).check());
+		return (state(Invisible, By.xpath(getXPathLineasMenuWrapper())).wait(maxSeconds).check());
 	}
 	
 	public void bringMenuBackground() throws Exception {
 		String xpathToBringBack = "";
 		switch (app) {
 		case outlet:
-			xpathToBringBack = XPathLineasMenuWrapper;
+			xpathToBringBack = getXPathLineasMenuWrapper();
 			break;
 		case shop:
 		default:
-			xpathToBringBack = XPathMenuFatherWrapper;
+			xpathToBringBack = getXPathMenuFatherWrapper();
 		}
 		
 		WebElement menuWrapp = driver.findElement(By.xpath(xpathToBringBack));
@@ -110,7 +98,7 @@ public abstract class SecLineasMenuDesktop extends PageObjTM {
 	}	
 	
 	public List<WebElement> getListaLineas() {
-		return (driver.findElements(By.xpath(XPathLinea)));
+		return (driver.findElements(By.xpath(getXPathLinea())));
 	}
 	
 	public boolean isLineaPresent(LineaType lineaType) {

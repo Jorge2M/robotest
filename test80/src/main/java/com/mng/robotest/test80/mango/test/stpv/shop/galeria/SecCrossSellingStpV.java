@@ -38,9 +38,9 @@ public class SecCrossSellingStpV {
 		List<WebElement> listaMenusBloque = 
 			secMenus.secMenuSuperior.secBlockMenus.getListMenusLineaBloque(lineaType, GroupMenu.prendas);
 
-		String litMenu1 = listaMenusBloque.get(0).findElement(By.xpath("./span")).getAttribute("innerHTML");
-		String litMenu2 = listaMenusBloque.get(1).findElement(By.xpath("./span")).getAttribute("innerHTML");
-		String litMenu3 = listaMenusBloque.get(2).findElement(By.xpath("./span")).getAttribute("innerHTML");
+		String litMenu1 = listaMenusBloque.get(0).findElement(By.xpath("./span")).getText();
+		String litMenu2 = listaMenusBloque.get(1).findElement(By.xpath("./span")).getText();
+		String litMenu3 = listaMenusBloque.get(2).findElement(By.xpath("./span")).getText();
 		String hrefMenu1 = listaMenusBloque.get(0).getAttribute("href");
 		String hrefMenu2 = listaMenusBloque.get(1).getAttribute("href");
 		String hrefMenu3 = listaMenusBloque.get(2).getAttribute("href");

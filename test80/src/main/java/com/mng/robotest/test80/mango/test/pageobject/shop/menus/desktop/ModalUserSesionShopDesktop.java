@@ -11,11 +11,11 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalUserSesionShopDesktop extends PageObjTM { 
 	
-	final static String XPathCapaMenus = "//div[@class='user-icon-submenu']";
+	final static String XPathCapaMenus = "//div[@class[contains(.,'user-sub-menu')]]";
 	
 	public enum MenuUserDesktop implements ElementPage { 
 		iniciarSesion (XPathCapaMenus + "//div[@class[contains(.,'login-button')]]"),
-		registrate (XPathCapaMenus + "//span[@class='login-register-link']"),
+		registrate (XPathCapaMenus + "//span[@class='login-register-link' or @class[contains(.,'register-link')]]"),
 		miCuenta (XPathCapaMenus + "//div[@class[contains(.,'mi_cuenta')]]"),
 		misCompras (XPathCapaMenus + "//div[@class[contains(.,'mis_compras')]]"),	 
 		mangoLikesYou (XPathCapaMenus + "//div[@class[contains(.,'mango_likes_you')]]"),
