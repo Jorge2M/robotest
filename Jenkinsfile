@@ -52,7 +52,7 @@ pipeline {
                 }
             }
             steps {
-            	//unstash 'target'
+            	unstash 'target'
             	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
 	            	sh "mvn --settings test80/infrastructure/ci/settings.xml -B package -DskipTests"
 	            }
@@ -66,31 +66,31 @@ pipeline {
             }
         } 
 
-//        stage('Integration Tests') {
-//            when { anyOf { branch 'master'; branch 'develop' } }
-//            agent {
-//                docker {
-//                    image 'jorge2m/chrome-firefox-jdk8-maven:latest'
-//                    args '--privileged --shm-size=1g -v /home/ubuntu/.m2:/root/.m2'
-//                }
-//            }
-//
-//            steps {
-//            	unstash 'target'
-//	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
-//	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-//	            	sh "mvn --settings test80/infrastructure/ci/settings.xml -B verify -DskipUnitTests"
-//	            }
-//            }
-//
-//            post {
-//                success {
-//                    script {
-//                        stash includes: '**/target/', name: 'server-package'
-//                    }
-//                }
-//            }
-//        }
+        stage('Integration Tests') {
+            when { anyOf { branch 'master'; branch 'develop' } }
+            agent {
+                docker {
+                    image 'jorge2m/chrome-firefox-jdk8-maven:latest'
+                    args '--privileged --shm-size=1g -v /home/ubuntu/.m2:/root/.m2'
+                }
+            }
+
+            steps {
+            	unstash 'target'
+	        	//sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
+	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+	            	sh "mvn --settings test80/infrastructure/ci/settings.xml -B verify -DskipUnitTests"
+	            }
+            }
+
+            post {
+                success {
+                    script {
+                        stash includes: '**/target/', name: 'server-package'
+                    }
+                }
+            }
+        }
         
         stage('Publish') {
       		when { expression { return env.BRANCH_NAME.equals('master') || env.BRANCH_NAME.equals('develop') || env.BRANCH_NAME.contains('release') } }
