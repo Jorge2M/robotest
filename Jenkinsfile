@@ -70,6 +70,7 @@ pipeline {
             when { anyOf { branch 'master'; branch 'develop' } }
             agent {
                 docker {
+                 	alwaysPull true
                     image 'jorge2m/chrome-firefox-jdk8-maven:latest'
                     args '--privileged --shm-size=1g -v /home/ubuntu/.m2:/root/.m2'
                 }
