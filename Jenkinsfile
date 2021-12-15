@@ -66,32 +66,35 @@ pipeline {
             } 
         } 
 
-        stage('E2e Tests') {
-            when { anyOf { branch 'master'; branch 'develop' } }
-            agent {
-                docker {
-                 	alwaysPull true
-                    image 'jorge2m/chrome-firefox-jdk8-maven:latest'
-                    args '--privileged --shm-size=1g -v /home/ubuntu/.m2:/ubuntu/.m2'
-                }
-            }
+//        stage('E2e Tests') {
+//            when { anyOf { branch 'master'; branch 'develop' } }
+//            agent {
+//                docker {
+//                 	alwaysPull true
+//                    image 'jorge2m/chrome-firefox-jdk8-maven:latest'
 
-            steps {
-            	unstash 'target'
-	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
-	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-	            	sh "mvn --settings test80/infrastructure/ci/settings.xml -B verify -DskipUnitTests"
-	            }
-            }
-
-            post {
-                success {
-                    script {
-                        stash includes: '**/target/', name: 'server-package'
-                    }
-                }
-            }
-        }
+//					  Nota: da la impresión que no funciona cambiando el root por ubuntu,
+//					        pero no podemos dejar el root porque tiene afectación al Jenkins
+//                    args '--privileged --shm-size=1g -v /home/ubuntu/.m2:/root/.m2'
+//                }
+//            }
+//
+//            steps {
+//            	unstash 'target'
+//	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
+//	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+//	            	sh "mvn --settings test80/infrastructure/ci/settings.xml -B verify -DskipUnitTests"
+//	            }
+//            }
+//
+//            post {
+//                success {
+//                    script {
+//                        stash includes: '**/target/', name: 'server-package'
+//                    }
+//                }
+//            }
+//        }
         
         stage('Publish') {
       		when { expression { return env.BRANCH_NAME.equals('master') || env.BRANCH_NAME.equals('develop') || env.BRANCH_NAME.contains('release') } }
