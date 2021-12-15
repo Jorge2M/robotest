@@ -43,7 +43,11 @@ public class ArticuloNavigations {
 
 		articulo.setColorName(pageFicha.getSecDataProduct().getNombreColorSelected());
 		if (articleStock.getSize()!=null) {
-			pageFicha.selectTallaByValue(Talla.getTalla(articleStock.getSize().getId2Digits()));
+			String size = articleStock.getSize().getId2Digits();
+			if (articleStock.getSize().getLabel().matches("\\d+")) {
+				size = articleStock.getSize().getLabel();
+			}
+			pageFicha.selectTallaByValue(Talla.getTalla(size));
 		} else {
 			pageFicha.selectTallaByIndex(1);
 		}

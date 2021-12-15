@@ -60,7 +60,7 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 
 		@Override
 		public By getBy(Channel channel) {
-			if (channel==Channel.mobile) {
+			if (channel.isDevice()) {
 				return byMobile;
 			}
 			return byDesktop;
@@ -70,7 +70,7 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 			return getBy(channel);
 		}
 		public String getXPath(Channel channel) {
-			if (channel==Channel.mobile) {
+			if (channel.isDevice()) {
 				return xpathMobile;
 			}
 			return xpathDesktop;
