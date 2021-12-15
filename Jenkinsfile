@@ -22,49 +22,49 @@ pipeline {
             }
         }
 
-//        stage('Run Unit Tests') {
-//            agent {
-//                docker {
-//                    image 'maven:3.5.4-jdk-8-alpine'
-//                    args '-v /home/ubuntu/.m2:/root/.m2'
-//                }
-//            }
-//            steps {
-//	        	sh 'mvn clean'
-//	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-//	            	sh 'mvn --settings test80/infrastructure/ci/settings.xml test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
-//	            }
-//            }
-//            post {
-//                success {
-//                    script {
-//                        stash includes: 'test80/**/target/', name: 'target'
-//                    }
-//                }
-//            }
-//        }
-//        
-//        stage('Package') {
-//            agent {
-//                docker {
-//                    image 'maven:3.5.4-jdk-8-alpine'
-//                    args '-v /home/ubuntu/.m2:/root/.m2'
-//                }
-//            }
-//            steps {
-//            	unstash 'target'
-//            	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-//	            	sh "mvn --settings test80/infrastructure/ci/settings.xml -B package -DskipTests"
-//	            }
-//            }
-//            post {
-//                success {
-//                    script {
-//                        stash includes: 'test80/**/target/', name: 'target'
-//                    }
-//                }
-//            } 
-//        } 
+        stage('Run Unit Tests') {
+            agent {
+                docker {
+                    image 'maven:3.5.4-jdk-8-alpine'
+                    args '-v /home/ubuntu/.m2:/root/.m2'
+                }
+            }
+            steps {
+	        	sh 'mvn clean'
+	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+	            	sh 'mvn --settings test80/infrastructure/ci/settings.xml test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
+	            }
+            }
+            post {
+                success {
+                    script {
+                        stash includes: 'test80/**/target/', name: 'target'
+                    }
+                }
+            }
+        }
+        
+        stage('Package') {
+            agent {
+                docker {
+                    image 'maven:3.5.4-jdk-8-alpine'
+                    args '-v /home/ubuntu/.m2:/root/.m2'
+                }
+            }
+            steps {
+            	unstash 'target'
+            	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+	            	sh "mvn --settings test80/infrastructure/ci/settings.xml -B package -DskipTests"
+	            }
+            }
+            post {
+                success {
+                    script {
+                        stash includes: 'test80/**/target/', name: 'target'
+                    }
+                }
+            } 
+        } 
 
         stage('E2e Tests') {
             when { anyOf { branch 'master'; branch 'develop' } }
@@ -77,7 +77,7 @@ pipeline {
             }
 
             steps {
-            	//unstash 'target'
+            	unstash 'target'
 	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
 	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
 	            	sh "mvn --settings test80/infrastructure/ci/settings.xml -B verify -DskipUnitTests"
@@ -93,21 +93,21 @@ pipeline {
             }
         }
         
-//        stage('Publish') {
-//      		when { expression { return env.BRANCH_NAME.equals('master') || env.BRANCH_NAME.equals('develop') || env.BRANCH_NAME.contains('release') } }
-//      		steps {
-//        		unstash 'target'
-//        		sh 'chmod -R 777 ./test80/infrastructure/aws/build-publish-docker.sh'
-//        		sh './test80/infrastructure/aws/build-publish-docker.sh'
-//      		}
-//    	}
-//    	
-//        stage('Deploy to DEV') {
-//            when { branch 'develop' }
-//            steps {
-//                k8sDeploy(templates: "./test80/infrastructure/k8s/dev/", stage: 'dev', imageTag: env.APP_VERSION)
-//            }
-//        }
+        stage('Publish') {
+      		when { expression { return env.BRANCH_NAME.equals('master') || env.BRANCH_NAME.equals('develop') || env.BRANCH_NAME.contains('release') } }
+      		steps {
+        		unstash 'target'
+        		sh 'chmod -R 777 ./test80/infrastructure/aws/build-publish-docker.sh'
+        		sh './test80/infrastructure/aws/build-publish-docker.sh'
+      		}
+    	}
+    	
+        stage('Deploy to DEV') {
+            when { branch 'develop' }
+            steps {
+                k8sDeploy(templates: "./test80/infrastructure/k8s/dev/", stage: 'dev', imageTag: env.APP_VERSION)
+            }
+        }
 
     }
     post {
