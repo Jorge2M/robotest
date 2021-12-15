@@ -136,7 +136,7 @@ public class RobotestRestIT extends ServerRestIT {
 			step4.getDescripcion().contains("Se selecciona el botón"));
 		
 		assertTrue(step4.getResultSteps()==State.Ok || step4.getResultSteps()==State.Info || step4.getResultSteps()==State.Warn);
-		assertEquals(step4.getListChecksTM().size(), 2);
+		assertEquals(step4.getListChecksTM().size(), 3);
 		
 		//Check Validation1 (from Step4)
 		ChecksTM checkGroup1 = step4.getListChecksTM().get(1);
