@@ -26,7 +26,7 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3.5.4-jdk-8-alpine'
-                    args '-v /home/ubuntu/.m2:/root/.m2'
+                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
                 }
             }
             steps {
@@ -48,7 +48,7 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3.5.4-jdk-8-alpine'
-                    args '-v /home/ubuntu/.m2:/root/.m2'
+                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
                 }
             }
             steps {
@@ -72,7 +72,7 @@ pipeline {
                 docker {
                  	alwaysPull true
                     image 'jorge2m/chrome-firefox-jdk8-maven:latest'
-                    args '--privileged --shm-size=1g -v /home/ubuntu/.m2:/root/.m2'
+                    args '--privileged --shm-size=1g -v /home/ubuntu/.m2:/ubuntu/.m2'
                 }
             }
 
