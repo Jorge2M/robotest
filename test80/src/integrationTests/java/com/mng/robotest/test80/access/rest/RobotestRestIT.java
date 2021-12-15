@@ -141,7 +141,7 @@ public class RobotestRestIT extends ServerRestIT {
 		//Check Validation1 (from Step4)
 		ChecksTM checkGroup1 = step4.getListChecksTM().get(1);
 		assertTrue(checkGroup1.getStateValidation()==State.Ok || checkGroup1.getStateValidation()==State.Info || checkGroup1.getStateValidation()==State.Warn);
-		assertEquals(checkGroup1.getListChecks().size(), 2);
+		assertEquals(checkGroup1.getListChecks().size(), 1);
 		
 		checkReporsSuiteExists(suiteData);
 	
