@@ -67,13 +67,19 @@ pipeline {
 //        } 
 
         stage('E2e Tests') {
-            when { anyOf { branch 'master'; branch 'develop' } }
             agent {
                 docker {
-                    image 'jorge2m/chrome-firefox-jdk8-maven:latest'
-                    args '--privileged --shm-size=1g -v /home/ubuntu/.m2:/root/.m2'
+                    image 'maven:3.5.4-jdk-8-alpine'
+                    args '-v /home/ubuntu/.m2:/root/.m2'
                 }
             }
+//            when { anyOf { branch 'master'; branch 'develop' } }
+//            agent {
+//                docker {
+//                    image 'jorge2m/chrome-firefox-jdk8-maven:latest'
+//                    args '--privileged --shm-size=1g -v /home/ubuntu/.m2:/root/.m2'
+//                }
+//            }
 
             steps {
             	//unstash 'target'
