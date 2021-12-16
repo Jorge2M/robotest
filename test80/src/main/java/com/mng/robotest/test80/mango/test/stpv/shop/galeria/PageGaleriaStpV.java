@@ -461,7 +461,7 @@ public class PageGaleriaStpV {
 		WebElement articuloColores = pageGaleriaDesktop.getArticuloConVariedadColoresAndHoverNoDoble(numArtConColores);
 		stepTM.replaceInDescription(tagNombreArt, pageGaleria.getNombreArticulo(articuloColores));
 		stepTM.replaceInExpected(tagNombreArt, pageGaleria.getNombreArticulo(articuloColores));
-		String srcImg1erSlider = pageGaleria.getImagenArticulo(articuloColores); articuloColores.getAttribute("innerHTML")
+		String srcImg1erSlider = pageGaleria.getImagenArticulo(articuloColores);
 		pageGaleriaDesktop.clickSliderAfterHoverArticle(articuloColores, typeSliderList);
 		
 		String srcImg2oSlider = pageGaleria.getImagenArticulo(articuloColores);
