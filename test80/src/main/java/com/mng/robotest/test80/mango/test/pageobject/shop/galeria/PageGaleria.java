@@ -127,18 +127,16 @@ public abstract class PageGaleria extends PageObjTM {
 	final static String XPathArticuloDesktop = "//li[@id[contains(.,'product-key-id')]]";
 	
 	//TODO adaptar React (pendiente petición a Jesús Bermúdez 3-Marzo-2021)
-	final static String XPathArticuloDesktopBuscador = 
-		"//div[@class[contains(.,'product-list-item')] or @class[contains(.,'z0q8P')] or @class[contains(.,'_29n6N')]]";
-	//final static String XPathArticuloMobilOutlet = "//div[@class[contains(.,'product-list-item')] or @id[contains(.,'product-key-id')] or @class='product']";
-	//final static String XPathArticuloMobilOutlet = "//li[@class='product-list-item']";
+//	final static String XPathArticuloDesktopBuscador = 
+//		"//div[@class[contains(.,'product-list-item')] or @class[contains(.,'z0q8P')] or @class[contains(.,'_29n6N')]]";
 	final static String XPathArticuloDevice = "//li[@class='product']";
 	final static String XPathArticuloTabletOutlet = "//*[@class[contains(.,'product-list-item')]]";
 	private String getXPathArticulo() {
 		if (channel==Channel.desktop) {
-			if (from==From.menu) {
+//			if (from==From.menu) {
 				return XPathArticuloDesktop;
-			}
-			return XPathArticuloDesktopBuscador;
+//			}
+//			return XPathArticuloDesktopBuscador;
 		}
 		else {
 			if (app==AppEcom.outlet && channel==Channel.tablet) {

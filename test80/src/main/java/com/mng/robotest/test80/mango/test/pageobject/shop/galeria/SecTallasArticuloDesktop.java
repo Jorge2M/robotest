@@ -79,12 +79,24 @@ public class SecTallasArticuloDesktop extends PageObjTM {
 	//TODO React. 15-diciembre-2021: solicitado a pistoleros data-testid vía Teams
 	private final String XPathTallaAvailableShop = "//button[not(@class[contains(.,'iMdOl')])]";
 	private final String XPathTallaAvailableOutlet = "//button[@class[contains(.,'undefined')]]";
+	
+	private final String XPathTallaUnavailableShop = "//button[@class[contains(.,'iMdOl')]]";
+	private final String XPathTallaUnavailableOutlet = "//button[not(@class[contains(.,'undefined')])]";
+	
 	private String getXPathTallaAvailable() {
 		if (app==AppEcom.outlet) {
 			return XPathTallaAvailableOutlet;
 		}
 		return XPathTallaAvailableShop;
 	}
+	
+	private String getXPathTallaUnavailable() {
+		if (app==AppEcom.outlet) {
+			return XPathTallaUnavailableOutlet;
+		}
+		return XPathTallaUnavailableShop;
+	}
+	
 	public String getXPathArticleTallaAvailable(int posArticulo, int posTalla) {
 		String xpathCapaTallas = getXPathCapaTallas(posArticulo, true);
 		return "(" + xpathCapaTallas + getXPathTallaAvailable() + ")[" + posTalla + "]";
@@ -92,15 +104,15 @@ public class SecTallasArticuloDesktop extends PageObjTM {
 
 //	private final static String XpathTallaNoDisponibleArticuloOutletOld = "//span[@data-id and (@class[contains(.,'no-stock')])]";
 //	private final static String XpathTallaNoDisponibleArticuloOutletNew = "//button[@class[contains(.,'no-stock')]]";
-	private final static String XpathTallaNoDisponibleArticuloShop = "//button[@class[contains(.,'no-stock')]]";
+//	private final static String XpathTallaNoDisponibleArticuloShop = "//button[@class[contains(.,'no-stock')]]";
 	public String getXPathArticleTallaNotAvailable() {
-//		if (app==AppEcom.outlet) {
-//			if (getOutletGalery()==OutletGalery.old) {
-//				return  XpathTallaNoDisponibleArticuloOutletOld;
-//			}
-//			return XpathTallaNoDisponibleArticuloOutletNew;
-//		}
-		return XpathTallaNoDisponibleArticuloShop;
+////		if (app==AppEcom.outlet) {
+////			if (getOutletGalery()==OutletGalery.old) {
+////				return  XpathTallaNoDisponibleArticuloOutletOld;
+////			}
+////			return XpathTallaNoDisponibleArticuloOutletNew;
+////		}
+		return getXPathTallaUnavailable();
 	}
 	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSeconds) {
 		String xpathCapa = getXPathCapaTallas(posArticulo, true);

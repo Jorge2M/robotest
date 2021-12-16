@@ -19,7 +19,6 @@ import com.mng.robotest.test80.mango.test.data.Talla;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
@@ -593,6 +592,8 @@ public class PageGaleriaDesktop extends PageGaleria {
 		//Click Sliders
 		for (TypeSlider typeSlider : typeSliderList) {
 			//WebElement slider = hoverSliderUntilClickable(typeSlider, articulo);
+			SecCabecera secCabecera = SecCabecera.getNew(channel, app, driver);
+			secCabecera.hoverIconoBolsa();
 			hoverArticle(articulo);
 			PageObjTM.waitMillis(500);
 			hoverArticle(articulo);

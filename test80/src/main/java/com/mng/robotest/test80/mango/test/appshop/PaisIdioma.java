@@ -150,7 +150,7 @@ public class PaisIdioma implements Serializable {
 		switch (lineaType) {
 		case nina:
 		case nino:
-			menu = "camisetas";
+			menu = "camisas";
 			break;
 		case home:
 			menu = "mantas";

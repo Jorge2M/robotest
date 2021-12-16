@@ -26,7 +26,10 @@ public abstract class SecCabecera extends PageObjTM {
 	protected final SecSearch secSearch;
 
 	private final static String XPathHeader = "//header";
-	private final static String XPathLinkLogoMango = "//a[@class='logo-link' or @class[contains(.,'logo_')]]";
+	private final static String XPathLinkLogoMango = 
+			"//a[@class='logo-link' or " + 
+			"@class[contains(.,'logo_')] or" + 
+			"@title[contains(.,'MANGO Shop Online')]]";
 
 	abstract String getXPathNumberArtIcono();
 	public abstract boolean isInStateIconoBolsa(State state, int maxSeconds);

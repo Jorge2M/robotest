@@ -25,7 +25,9 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	
 	private final static String XPathDivNavTools = "//div[@id='navTools']";
 	private final static String XPathNumArticlesBolsaMobile = "//span[@class='icon-button-items']";
-	private final static String XPathNumArticlesBolsaDesktop = "//span[@class[contains(.,'UserIcon__num-items')]]";
+	
+	//TODO React. 16-diciembre-2021: Solicitado a David Masa via teams
+	private final static String XPathNumArticlesBolsaDesktop = "//span[@class[contains(.,'UxJ2P')]]";
 	
 	public enum IconoCabeceraShop_DesktopMobile implements ElementPage {
 		lupa(

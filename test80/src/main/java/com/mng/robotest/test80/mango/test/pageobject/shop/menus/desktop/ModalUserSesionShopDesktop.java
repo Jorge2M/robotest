@@ -11,16 +11,17 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalUserSesionShopDesktop extends PageObjTM { 
 	
-	final static String XPathCapaMenus = "//div[@class[contains(.,'user-sub-menu')]]";
+	private final static String XPathWrapperUserMenu = "//div[@data-testid[contains(.,'header-user-menu-login')]]";
+	private final static String XPathCapaMenus = XPathWrapperUserMenu + "/div[@role='button']";
 	
 	public enum MenuUserDesktop implements ElementPage { 
 		iniciarSesion (XPathCapaMenus + "//div[@class[contains(.,'login-button')]]"),
-		registrate (XPathCapaMenus + "//span[@class='login-register-link' or @class[contains(.,'register-link')]]"),
-		miCuenta (XPathCapaMenus + "//div[@class[contains(.,'mi_cuenta')]]"),
-		misCompras (XPathCapaMenus + "//div[@class[contains(.,'mis_compras')]]"),	 
-		mangoLikesYou (XPathCapaMenus + "//div[@class[contains(.,'mango_likes_you')]]"),
-		ayuda (XPathCapaMenus + "//div[@class[contains(.,'ayuda')]]"),   
-		cerrarSesion(XPathCapaMenus + "//div[@class[contains(.,'logout')]]");
+		registrate (XPathCapaMenus + "//span[@class='login-register-link' or @class[contains(.,'register-link')] or text()='Regístrate']"),
+		miCuenta (XPathCapaMenus + "//div[@data-testid[contains(.,'mi_cuenta')]]"),
+		misCompras (XPathCapaMenus + "//div[@data-testid[contains(.,'mis_compras')]]"),	 
+		mangoLikesYou (XPathCapaMenus + "//div[@data-testid[contains(.,'mango_likes_you')]]"),
+		ayuda (XPathCapaMenus + "//div[@data-testid[contains(.,'ayuda')]]"),   
+		cerrarSesion(XPathCapaMenus + "//div[@data-testid[contains(.,'logout')]]");
 		
 		By by;
 		private MenuUserDesktop(String xPath) {

@@ -26,6 +26,9 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	private static final Map<String, String> storedMenus = new ConcurrentHashMap<>(); 
 	
 	//TODO React. 15-diciembre-2021: identificadores react solicitados a David Massa por Teams
+	// están listos, cuando suban a PRE se podrán cambiar:
+	// -> JUhkW -> data-testid = 'section'
+	// -> o3ud7 -> data-testid = 'sub-familys'
 	private final static String XPathWrapperGlobal = "//div[@id='headerPortalContainer']";
 	private final static String XPathContainerGroups = XPathWrapperGlobal + "//ul[@class[contains(.,'JUhkW')]]";
 	private final static String XPathGroupSection = XPathContainerGroups + "/li[@data-testid[contains(.,'section')] and not(@id[contains(.,'section')])]";
