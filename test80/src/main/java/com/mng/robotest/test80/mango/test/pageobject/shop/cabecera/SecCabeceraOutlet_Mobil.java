@@ -21,8 +21,8 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 public class SecCabeceraOutlet_Mobil extends SecCabecera {
 	
 	public enum IconoCabOutletMobil implements ElementPage {
-		bolsa(IconoCabeceraShop_DesktopMobile.bolsa.getXPath(Channel.mobile)),
-		lupa(IconoCabeceraShop_DesktopMobile.lupa.getXPath(Channel.mobile));
+		bolsa(IconoCabeceraShop_DesktopMobile.bolsa.getXPath(Channel.mobile, AppEcom.outlet)),
+		lupa(IconoCabeceraShop_DesktopMobile.lupa.getXPath(Channel.mobile, AppEcom.outlet));
 		
 		private By by;
 		private IconoCabOutletMobil(String xpath) {
@@ -47,7 +47,7 @@ public class SecCabeceraOutlet_Mobil extends SecCabecera {
 	
 	@Override
 	String getXPathNumberArtIcono() {
-		return SecCabecera_MostFrequent.getXPathNumberArtIcono(Channel.mobile);
+		return SecCabecera_MostFrequent.getXPathNumberArtIcono(Channel.mobile, app);
 	}
 	
 	@Override

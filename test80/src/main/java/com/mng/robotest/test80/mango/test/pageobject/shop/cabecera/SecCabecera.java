@@ -1,9 +1,7 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.cabecera;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
@@ -55,7 +53,7 @@ public abstract class SecCabecera extends PageObjTM {
 		case desktop:
 		case mobile:
 		default:
-			return SecCabecera_MostFrequent.getNew(channel, driver);
+			return SecCabecera_MostFrequent.getNew(channel, app, driver);
 		}
 	}
 	

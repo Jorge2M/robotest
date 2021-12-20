@@ -26,25 +26,25 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	private final static String XPathDivNavTools = "//div[@id='navTools']";
 	private final static String XPathNumArticlesBolsaMobile = "//span[@class='icon-button-items']";
 	
-	//TODO React. 16-diciembre-2021: Solicitado a David Masa via teams
-	private final static String XPathNumArticlesBolsaDesktop = "//span[@class[contains(.,'UxJ2P')]]";
+	private final static String XPathNumArticlesBolsaDesktopShop = "//span[@data-testid[contains(.,'num-items')]]";
+	private final static String XPathNumArticlesBolsaDesktopOutletVotf = "//span[@class='icon-button-items']";
 	
 	public enum IconoCabeceraShop_DesktopMobile implements ElementPage {
 		lupa(
 			"//span[@class[contains(.,'-search')]]/..",
-			"//self::*[@data-testid[contains(.,'header-user-menu-searchIconButton')]]"),
+			"//self::*[@data-testid[contains(.,'header.userMenu.searchIconButton')]]"),
 		iniciarsesion(
 			"//self::*[@id='login_any' or @id='login_mobile_any']/span[@class[contains(.,'-account')]]/..",
-			"//self::*[@data-testid='header-user-menu-login_any']"),
+			"//self::*[@data-testid='header.userMenu.login_any']"),
 		micuenta(
 			"//self::*[@id='login' or @id='login_mobile']/span[@class[contains(.,'-account')]]/..",
-			"//self::*[@data-testid='header-user-menu-login']"),
+			"//self::*[@data-testid='header.userMenu.login']"),
 		favoritos(
 			"//span[@class[contains(.,'-favorites')]]/..",
-			"//self::*[@data-testid[contains(.,'header-user-menu-favorites')]]"),
+			"//self::*[@data-testid[contains(.,'header.userMenu.favorites')]]"),
 		bolsa(
 			"//span[@class[contains(.,'-bag')]]/..",
-			"//self::*[@data-testid[contains(.,'header-user-menu-bolsa')]]");
+			"//self::*[@data-testid[contains(.,'header.userMenu.bolsa')]]");
 
 		private By byMobile;
 		private String xpathMobile;
@@ -61,18 +61,15 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 		}
 
 		@Override
-		public By getBy(Channel channel) {
-			if (channel.isDevice()) {
+		public By getBy(Channel channel, Enum<?> app) {
+			if (channel.isDevice() || app==AppEcom.outlet) {
 				return byMobile;
 			}
 			return byDesktop;
 		}
-		@Override
-		public By getBy(Channel channel, Enum<?> app) {
-			return getBy(channel);
-		}
-		public String getXPath(Channel channel) {
-			if (channel.isDevice()) {
+
+		public String getXPath(Channel channel, Enum<?> app) {
+			if (channel.isDevice() || app==AppEcom.outlet) {
 				return xpathMobile;
 			}
 			return xpathDesktop;
@@ -84,13 +81,13 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 		}
 	}
 	
-	protected SecCabecera_MostFrequent(Channel channel, WebDriver driver) {
-		super(channel, AppEcom.shop, driver);
+	protected SecCabecera_MostFrequent(Channel channel, AppEcom app, WebDriver driver) {
+		super(channel, app, driver);
 		this.modalUserSesionShopDesktop = ModalUserSesionShopDesktop.getNew(driver);
 	}
 	
-	public static SecCabecera_MostFrequent getNew(Channel channel, WebDriver driver) {
-		return (new SecCabecera_MostFrequent(channel, driver));
+	public static SecCabecera_MostFrequent getNew(Channel channel, AppEcom app, WebDriver driver) {
+		return (new SecCabecera_MostFrequent(channel, app, driver));
 	}
 	
 	public ModalUserSesionShopDesktop getModalUserSesionDesktop() {
@@ -99,14 +96,17 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 
 	@Override
 	public String getXPathNumberArtIcono() {
-		return getXPathNumberArtIcono(channel);
+		return getXPathNumberArtIcono(channel, app);
 	}
 	
-	public static String getXPathNumberArtIcono(Channel channel) {
+	public static String getXPathNumberArtIcono(Channel channel, AppEcom app) {
 		if (channel==Channel.mobile) {
 			return (XPathNumArticlesBolsaMobile);
 		}
-		return XPathNumArticlesBolsaDesktop;
+		if (app==AppEcom.outlet || app==AppEcom.votf) {
+			return XPathNumArticlesBolsaDesktopOutletVotf;	
+		}
+		return XPathNumArticlesBolsaDesktopShop;
 	}
 	
 	@Override
@@ -126,7 +126,7 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 
 	@Override
 	public void clickIconoBolsaWhenDisp(int maxSeconds) {
-		boolean isIconoClickable = state(Clickable, IconoCabeceraShop_DesktopMobile.bolsa.getBy(channel)).wait(maxSeconds).check();
+		boolean isIconoClickable = state(Clickable, IconoCabeceraShop_DesktopMobile.bolsa.getBy(channel, app)).wait(maxSeconds).check();
 		if (isIconoClickable) {
 			clickIconoBolsa(); 
 		}
@@ -134,7 +134,7 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 
 	public void clickIconoAndWait(IconoCabeceraShop_DesktopMobile icono) {
 		isInStateIconoBolsa(State.Visible, 3); //Con los nuevos menús ahora tardan bastante en aparecer los iconos
-		click(icono.getBy(channel)).type(TypeClick.javascript).exec(); //TODO
+		click(icono.getBy(channel, app)).type(TypeClick.javascript).exec(); //TODO
 	}
 	
 	public boolean isIconoInState(IconoCabeceraShop_DesktopMobile icono, State state) {
@@ -142,17 +142,17 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	}
 	
 	public boolean isIconoInState(IconoCabeceraShop_DesktopMobile icono, State state, int maxSeconds) {
-		return (state(state, icono.getBy(channel)).wait(maxSeconds).check());
+		return (state(state, icono.getBy(channel, app)).wait(maxSeconds).check());
 	}
 	
 	public boolean isIconoInStateUntil(IconoCabeceraShop_DesktopMobile icono, State state, int maxSeconds) {
-		return (state(state, icono.getBy(channel)).wait(maxSeconds).check());
+		return (state(state, icono.getBy(channel, app)).wait(maxSeconds).check());
 	}
 	
 	public void hoverIcono(IconoCabeceraShop_DesktopMobile icono) {
 		isInStateIconoBolsa(State.Visible, 3); //Con los nuevos menús ahora tardan bastante en aparecer los iconos
-		moveToElement(By.xpath(icono.getXPath(channel) + "/*"), driver); //Workaround problema hover en Firefox
-		moveToElement(icono.getBy(channel), driver);
+		moveToElement(By.xpath(icono.getXPath(channel, app) + "/*"), driver); //Workaround problema hover en Firefox
+		moveToElement(icono.getBy(channel, app), driver);
 	}
 	
 	public void focusAwayBolsa(WebDriver driver) {

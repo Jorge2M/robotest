@@ -14,7 +14,7 @@ public class SecSearchDesktopShop extends PageObjTM implements SecSearch {
 	private final AppEcom app;
 	
 	private final static String XPathInputBuscadorOutlet = "//input[@class[contains(.,'search-input')]]";
-	private final static String XPathInputBuscadorShop	 = "//input[@data-testid='header-search-input']";
+	private final static String XPathInputBuscadorShop	 = "//input[@data-testid='header.search.input']";
 	private final static String XPathCloseAspa = "//span[@class[contains(.,'icon-outline-close')]]";
 
 	private SecSearchDesktopShop(AppEcom app, WebDriver driver) {

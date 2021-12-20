@@ -30,11 +30,13 @@ public interface GetterSecrets {
 		if (getterSecrets.isAvailable()) {
 			return getterSecrets;
 		}
-		getterSecrets = new GetterAwsSecrets();
-		if (getterSecrets.isAvailable()) {
-			return getterSecrets;
-		}
 		return new GetterHardCodeSecrets();
+		//TODO de momento desactivamos los secretos hasta que se consigan dar de alta en el 
+		//k8s-tools
+//		getterSecrets = new GetterAwsSecrets();
+//		if (getterSecrets.isAvailable()) {
+//			return getterSecrets;
+//		}
 	}
 	
 	public default boolean isAvailable() {
