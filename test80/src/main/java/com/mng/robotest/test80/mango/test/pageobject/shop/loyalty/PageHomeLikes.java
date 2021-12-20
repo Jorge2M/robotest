@@ -11,8 +11,8 @@ import org.openqa.selenium.WebDriver;
 
 public class PageHomeLikes extends PageObjTM {
 
-	String idLoyaltySpace = "loyaltySpace";
-	String xpathPoints = "//div[@class='vmPyL']"; //TODO pendiente Víctor gestione el cambio de la página
+	private final static String XPathWrappPage = "//micro-frontend[@id='loyaltySpace']";
+	private final static String XPathPoints = XPathWrappPage + "//div[@id='space-header']/div[3]"; 
 	
 	public enum ButtonUseLikes {
 		CompraConDescuento("//button[text()='Comprar con descuento']"),
@@ -38,12 +38,12 @@ public class PageHomeLikes extends PageObjTM {
 	}
 	
 	public boolean checkIsPageUntil(int maxSeconds) {
-		return (state(Visible, By.id(idLoyaltySpace)).wait(maxSeconds).check());
+		return (state(Visible, By.xpath(XPathWrappPage)).wait(maxSeconds).check());
 	}
 	
 	public int getPoints() {
-		if (state(Present, By.xpath(xpathPoints)).wait(2).check()) {
-			String textPoints = driver.findElement(By.xpath(xpathPoints)).getText();
+		if (state(Present, By.xpath(XPathPoints)).wait(2).check()) {
+			String textPoints = driver.findElement(By.xpath(XPathPoints)).getText();
 			Pattern pattern = Pattern.compile(" [0-9,.]+ ");
 			Matcher matcher = pattern.matcher(textPoints);
 			if (matcher.find()) {

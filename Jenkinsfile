@@ -105,12 +105,12 @@ pipeline {
       		}
     	}
     	
-        stage('Deploy to DEV') {
-            when { branch 'develop' }
-            steps {
-                k8sDeploy(templates: "./test80/infrastructure/k8s/dev/", stage: 'dev', imageTag: env.APP_VERSION)
-            }
-        }
+//        stage('Deploy to DEV') {
+//            when { branch 'develop' }
+//            steps {
+//                k8sDeploy(templates: "./test80/infrastructure/k8s/dev/", stage: 'dev', imageTag: env.APP_VERSION)
+//            }
+//        }
 
     }
     post {

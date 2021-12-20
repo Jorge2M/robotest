@@ -14,13 +14,12 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 public class SecLineasMenuDesktopNew extends SecLineasMenuDesktop {
 
 	private static String XPathMenuFatherWrapper = "//micro-frontend[@id='header']/div";
-	private static String XPathLineasMenuWrapper = "//ul/li[@data-testid[contains(.,'header-menu-item')]]/..";
-	
-	private final static String XPathLinea = "//li[@data-testid[contains(.,'header-menu-item')]]";
-	private final static String XPathLineaSpecificWithTag = XPathLinea + "//self::*[@data-testid[contains(.,'item-" + TagIdLinea + "')]]";
+	private final static String XPathLinea = "//li[@data-testid[contains(.,'header.menuItem')]]";
+	private static String XPathLineasMenuWrapper = XPathLinea + "/..";
+	private final static String XPathLineaSpecificWithTag = XPathLinea + "//self::*[@data-testid[contains(.,'Item." + TagIdLinea + "')]]";
 	
 	private final static String TagIdSublinea = "@SublineaId";
-	private final static String XPathSublineaWithTag = "//li[@data-testid[contains(.,'sections_" + TagIdSublinea+ "')]]";
+	private final static String XPathSublineaWithTag = "//li[@id[contains(.,'sections_" + TagIdSublinea+ "')]]";
 	
 	public SecLineasMenuDesktopNew(AppEcom app, WebDriver driver) {
 		super(app, driver);

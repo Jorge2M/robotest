@@ -41,7 +41,7 @@ public class GetterHardCodeSecrets extends GetterSecretsFromInputStream {
 			"	</secret>" + lineJump +
 			"</secrets>";
 		
-		return new ByteArrayInputStream(dataString.getBytes());
+		return new ByteArrayInputStream(dataString.getBytes("UTF-8"));
 	}
 	
 }

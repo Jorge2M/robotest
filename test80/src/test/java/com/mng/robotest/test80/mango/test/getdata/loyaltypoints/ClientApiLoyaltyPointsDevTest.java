@@ -11,7 +11,7 @@ import com.mng.robotest.test80.mango.test.getdata.loyaltypoints.data.ResultAddPo
 
 public class ClientApiLoyaltyPointsDevTest {
 
-	@Ignore
+	//@Ignore
 	@Test
 	public void testGetIdConsumer() throws Exception {
 		ClientApiLoyaltyPointsDev client = new ClientApiLoyaltyPointsDev();
@@ -19,7 +19,7 @@ public class ClientApiLoyaltyPointsDevTest {
 		assertTrue(idConsumer.compareTo("6875476978994042958")==0);
 	}
 	
-	@Ignore
+	//@Ignore
 	@Test
 	public void addLoyaltyPoints() throws Exception {
 		ClientApiLoyaltyPointsDev client = new ClientApiLoyaltyPointsDev();

@@ -86,9 +86,10 @@ public class ClientApiLoyaltyPointsDev extends JaxRsClient {
 			client
 				.target("https://api.loyal.guru/profiles")
 				.path(user.getContactId())
-				.path("give_score")
+				.path("give_score")	
 				.request(MediaType.APPLICATION_JSON_TYPE)
-				.header("Authorization", "Basic dmljdG9yLnBhcmVyYStwcmVAbWFuZ28uY29tOjMyNGU1MTQ0MmUyMDc0YzUwYjZlODFlOGU4MTE0Y2Fk")
+				//.header("Authorization", "Basic dmljdG9yLnBhcmVyYStwcmVAbWFuZ28uY29tOjMyNGU1MTQ0MmUyMDc0YzUwYjZlODFlOGU4MTE0Y2Fk")
+				.header("Authorization", "Basic dmljdG9yLnBhcmVyYStwcmVAbWFuZ28uY29tOmVjOWU0NmQ5NzIwMWNjN2U0Nzg0NTgxM2FkZWU1MTE4")
 				.post(Entity.json(transferPoints), ResultAddPoints.class);
 		
 		return result;

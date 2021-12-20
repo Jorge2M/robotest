@@ -13,7 +13,7 @@ public class PageSuscripciones {
 	public enum idNewsletters { she, he, kids, teen }
 	
 	static String XPathButtonGuardarCambios = "//input[@type='submit' and @value[contains(.,'Guardar')]]";
-	static String XPathPageResOK = "//*[text()[contains(.,'Tus preferencias han sido actualizadas')]]";
+	static String XPathPageResOK = "//*[text()[contains(.,'Preferencias actualizadas!')]]";
 	static String XPathCheckboxNewsletter = "//form/div[@class='checkboxContent'][1]//div[@class='multipleCheckbox']";
 	
 	public static String getXPath_newsletterDesmarcadas() {

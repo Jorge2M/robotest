@@ -26,7 +26,7 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	private final static String XPathDivNavTools = "//div[@id='navTools']";
 	private final static String XPathNumArticlesBolsaMobile = "//span[@class='icon-button-items']";
 	
-	private final static String XPathNumArticlesBolsaDesktopShop = "//span[@data-testid[contains(.,'num-items')]]";
+	private final static String XPathNumArticlesBolsaDesktopShop = "//span[@data-testid[contains(.,'numItems')]]";
 	private final static String XPathNumArticlesBolsaDesktopOutletVotf = "//span[@class='icon-button-items']";
 	
 	public enum IconoCabeceraShop_DesktopMobile implements ElementPage {
