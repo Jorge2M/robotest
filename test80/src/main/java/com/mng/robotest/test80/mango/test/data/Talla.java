@@ -1,6 +1,8 @@
 package com.mng.robotest.test80.mango.test.data;
 
+//TODO creo que esto ya no es necesario
 public enum Talla {
+	XXS("XXS", "18"),
 	XS("XS", "19"),
 	S("S", "20"),
 	M("M", "21"),

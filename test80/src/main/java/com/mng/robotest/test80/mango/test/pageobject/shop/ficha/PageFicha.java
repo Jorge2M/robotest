@@ -82,6 +82,10 @@ public abstract class PageFicha extends PageObjTM {
 		secDataProduct.getSecSelTallas().selectTallaByValue(talla);
 	}
 	
+	public void selectTallaByLabel(String tallaLabel) {
+		secDataProduct.getSecSelTallas().selectTallaByLabel(tallaLabel);
+	}
+	
 	public void selectTallaByIndex(int posicion) {
 		secDataProduct.getSecSelTallas().selectTallaByIndex(posicion);
 	}

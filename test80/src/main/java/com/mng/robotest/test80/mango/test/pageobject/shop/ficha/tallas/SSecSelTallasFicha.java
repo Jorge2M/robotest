@@ -17,6 +17,7 @@ public interface SSecSelTallasFicha {
 	public boolean isTallaAvailable(String talla);
 	public boolean isTallaUnica();
 	public void selectTallaByValue(String tallaValue);
+	public void selectTallaByLabel(String tallaLabel);
 	public void selectTallaByIndex(int posicionEnDesplegable);
 	public void selectFirstTallaAvailable();
 	public String getTallaAlfSelected(AppEcom app);
@@ -42,7 +43,6 @@ public interface SSecSelTallasFicha {
 	public default void selectTallaByValue(Talla talla) {
 		selectTallaByValue(talla.getTallaNum());
 	}
-	
 	
 	/**
 	 * @return talla eliminando el literal del tipo " [Almacen: 001]

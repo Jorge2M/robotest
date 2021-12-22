@@ -79,6 +79,11 @@ public class SSecSelTallasFichaOldDesktop extends PageObjTM implements SSecSelTa
 	}
 	
 	@Override
+	public void selectTallaByLabel(String tallaLabel) {
+		new Select(driver.findElement(By.xpath(XPathSelectTalla))).selectByVisibleText(tallaLabel);
+	}
+	
+	@Override
 	public void selectTallaByIndex(int posicionEnDesplegable) {
 		new Select(driver.findElement(By.xpath(XPathSelectTalla))).selectByIndex(posicionEnDesplegable);
 	}

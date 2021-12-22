@@ -306,8 +306,8 @@ public class GetterProducts extends JaxRsClient {
 		private Integer numProducts = 40;
 		private List<Menu> menusCandidates = 
 			Arrays.asList(
-				Menu.Camisas, 
 				Menu.Shorts, 
+				Menu.Camisas, 
 				Menu.Pijamas,
 				Menu.Faldas,
 				Menu.Fulares);

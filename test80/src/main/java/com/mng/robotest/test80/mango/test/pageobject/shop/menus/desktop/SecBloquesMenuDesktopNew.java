@@ -30,7 +30,7 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	// -> JUhkW -> data-testid = 'section'
 	// -> o3ud7 -> data-testid = 'sub-familys'
 	private final static String XPathWrapperGlobal = "//div[@id='headerPortalContainer']";
-	private final static String XPathContainerGroups = XPathWrapperGlobal + "//ul[@data-testid[contains(.,'section.family')]]";
+	private final static String XPathContainerGroups = XPathWrapperGlobal + "//ul[@data-testid[contains(.,'section.family')] or @data-testid[contains(.,'section.subfamily')]]/li[not(@id[contains(.,'sections')])]/..";
 	private final static String XPathGroupSection = XPathContainerGroups + "/li[@data-testid[contains(.,'section.menu')]]";
 	private final static String XPathGroupLink = XPathContainerGroups + "/li[@data-testid[contains(.,'section.link')]]";
 	private final static String XPathCapaMenus = "//ul[@data-testid[contains(.,'section.subfamily')] or @data-testid[contains(.,'section.family')]]";
@@ -43,8 +43,20 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	}
 	
 	private String getXPathLinkMenuGroup(Menu1rstLevel menu1rstLevel) {
-		String dataGaLabel = menu1rstLevel.getDataGaLabelMenuSuperiorDesktop().toLowerCase();
-		return XPathGroupLink + "//a[@data-testid[contains(.,'header.section.item." + dataGaLabel + "')]]";
+		String id = "";
+		if (menu1rstLevel.getId() != null) {
+			id = menu1rstLevel.getId();
+		} else {
+			id = menu1rstLevel.getDataGaLabelMenuSuperiorDesktop() + "_" + menu1rstLevel.getLinea();
+		}
+		
+		if (id.contains("nuevo_")) {
+			id = "nuevo";
+		}
+		
+		return XPathGroupLink + "//a[" + 
+			"@data-testid[contains(.,'header.section.link." + id + "')] or " +
+		    "@data-testid[contains(.,'header.section.link." + id.toLowerCase() + "')]]";
 	}
 
 	@Override
@@ -122,24 +134,28 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	public String getXPathMenuSuperiorLinkVisible(Menu1rstLevel menu1rstLevel) {
 		LineaType lineaMenu = menu1rstLevel.getLinea();
 		SublineaType sublineaMenu = menu1rstLevel.getSublinea();
-		String dataGaLabelMenu = menu1rstLevel.getDataGaLabelMenuSuperiorDesktop();
+		String id = menu1rstLevel.getId();
+		if (id == null) {
+			id = menu1rstLevel.getDataGaLabelMenuSuperiorDesktop();
+		}
 		String xpathMenuVisible = getXPathMenusSuperiorLinkVisibles(lineaMenu, sublineaMenu, TypeMenuDesktop.Link);
-		if (dataGaLabelMenu.contains("'")) {
+		if (id.contains("'")) {
 			//En el caso de que el data_ga_label contenga ' 
 			//no parece existir carácter de escape, así que hemos de desglosar en 2 bloques y aplicar el 'contains' en cada uno
-			int posApostrophe = dataGaLabelMenu.indexOf("'");
-			String block1 = dataGaLabelMenu.substring(0, posApostrophe);
-			String block2 = dataGaLabelMenu.substring(posApostrophe + 1);
+			int posApostrophe = id.indexOf("'");
+			String block1 = menu1rstLevel.getLinea() + "_" + id.substring(0, posApostrophe);
+			String block2 = id.substring(posApostrophe + 1);
 			return (
 				xpathMenuVisible + 
-				"[@data-testid[contains(.,'" + block1 + "')] and @data-testid[contains(.,'" + 
+				"[@id[contains(.,'" + block1 + "')] and @id[contains(.,'" + 
 				block2 + "')]]");
 		}
 
+		String idLineaMenu = menu1rstLevel.getLinea() + "_" + id;
 		return (
 			xpathMenuVisible + 
-			"[@data-testid[contains(.,'" + dataGaLabelMenu + "')] or " + 
-			"@data-testid[contains(.,'" + dataGaLabelMenu.toLowerCase() + "')]]");
+			"[@id[contains(.,'" + idLineaMenu + "')] or " + 
+			"@id[contains(.,'" + idLineaMenu.toLowerCase() + "')]]");
 	}
 	
 	@Override
