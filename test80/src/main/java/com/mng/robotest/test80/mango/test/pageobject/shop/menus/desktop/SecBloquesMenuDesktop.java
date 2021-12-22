@@ -15,7 +15,6 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
-import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.GroupMenu;
 import com.mng.robotest.test80.mango.test.utils.checkmenus.DataScreenMenu;
@@ -59,10 +58,10 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	}
 	
 	public static SecBloquesMenuDesktop factory(AppEcom app, WebDriver driver) {
-		if (app==AppEcom.outlet || 
+		if (app==AppEcom.outlet) {
 			//TODO temporalmente, de cara a BF2021 se ha restaurado en pro el menú antiguo
 			//quitar esta línea cuando pase el BF
-			UtilsMangoTest.isEntornoPRO(app, driver)) {
+			//UtilsMangoTest.isEntornoPRO(app, driver)) {
 			return new SecBloquesMenuDesktopOld(app, driver);
 		}
 		return new SecBloquesMenuDesktopNew(app, driver);

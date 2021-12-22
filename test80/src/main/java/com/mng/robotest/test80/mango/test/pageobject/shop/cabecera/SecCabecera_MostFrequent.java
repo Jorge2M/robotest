@@ -34,10 +34,10 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 			"//span[@class[contains(.,'-search')]]/..",
 			"//self::*[@data-testid[contains(.,'header.userMenu.searchIconButton')]]"),
 		iniciarsesion(
-			"//self::*[@id='login_any' or @id='login_mobile_any']/span[@class[contains(.,'-account')]]/..",
+			"//self::*[@id='login_any' or @id='login_mobile_any' or @id='login_tablet_any']/span[@class[contains(.,'-account')]]/..",
 			"//self::*[@data-testid='header.userMenu.login_any']"),
 		micuenta(
-			"//self::*[@id='login' or @id='login_mobile']/span[@class[contains(.,'-account')]]/..",
+			"//self::*[@id='login' or @id='login_mobile' or @id='login_tablet']/span[@class[contains(.,'-account')]]/..",
 			"//self::*[@data-testid='header.userMenu.login']"),
 		favoritos(
 			"//span[@class[contains(.,'-favorites')]]/..",
