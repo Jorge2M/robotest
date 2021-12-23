@@ -335,7 +335,7 @@ public class PageGaleriaDevice extends PageGaleria {
 		String xpathTalla = getXPathTallaAvailableArticle(posArticulo, posTalla);
 		WebElement tallaToSelect = driver.findElement(By.xpath(xpathTalla));
 		ArticuloScreen articulo = getArticuloObject(posArticulo);
-		articulo.setTalla(Talla.from(tallaToSelect.getText()));
+		articulo.setTalla(Talla.fromSize(tallaToSelect.getText()));
 		tallaToSelect.click();
 		return articulo;
 	}

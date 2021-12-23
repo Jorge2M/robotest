@@ -101,8 +101,8 @@ public class SSecSelTallasFichaOldDevice extends PageObjTM implements SSecSelTal
 	@Override
 	public void selectTallaByValue(String tallaNum) {
 		despliegaSelectTallas();
-		Talla talla = Talla.getTalla(tallaNum);
-		String xpathTalla = getXPathOptionTalla(talla.getName());
+		Talla talla = Talla.fromValue(tallaNum);
+		String xpathTalla = getXPathOptionTalla(talla.getSize());
 		state(State.Clickable, By.xpath(xpathTalla)).wait(2).check();
 		click(By.xpath(xpathTalla)).exec();
 	}

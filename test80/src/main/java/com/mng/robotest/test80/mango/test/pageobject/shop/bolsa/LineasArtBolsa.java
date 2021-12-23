@@ -158,7 +158,7 @@ public abstract class LineasArtBolsa extends PageObjTM {
 		articleData.referencia = getReferenciaArticle(lineaArticleWeb);
 		articleData.nombre = getDataArticle(DataArtBolsa.Nombre, lineaArticleWeb);
 		articleData.color = getDataArticle(DataArtBolsa.Color, lineaArticleWeb);
-		articleData.talla = Talla.from(getDataArticle(DataArtBolsa.Talla, lineaArticleWeb));
+		articleData.talla = Talla.fromSize(getDataArticle(DataArtBolsa.Talla, lineaArticleWeb));
 		articleData.cantidad = getDataArticle(DataArtBolsa.Cantidad, lineaArticleWeb);
 		articleData.precio = getPrecioArticle(lineaArticleWeb);
 		return articleData;

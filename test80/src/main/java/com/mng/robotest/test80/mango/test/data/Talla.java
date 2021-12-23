@@ -1,6 +1,5 @@
 package com.mng.robotest.test80.mango.test.data;
 
-//TODO creo que esto ya no es necesario
 public enum Talla {
 	XXS("XXS", "18"),
 	XS("XS", "19"),
@@ -10,6 +9,14 @@ public enum Talla {
 	XL("XL", "23"),
 	XXL("XXL", "24"),
 	U("U", "99"),
+	t1("1", "32"),
+	t2("2", "34"),
+	t4("4", "36"),
+	t6("6", "38"),
+	t8("8", "40"),
+	t10("10", "42"),
+	t12("12", "44"),
+	t14("14", "46"),
 	t32("32", "32"),
 	t33("33", "33"),
 	t34("34", "34"),
@@ -32,29 +39,29 @@ public enum Talla {
 	x90x150("90x150", "10"),
 	Undefined("Undefined", "0");
 	
-	private String name;
-	private String tallaNum;
-	private Talla(String name, String tallaNum) {
-		this.name = name;
-		this.tallaNum = tallaNum;
+	private String size;
+	private String value;
+	private Talla(String size, String value) {
+		this.size = size;
+		this.value = value;
 	}
-	public String getName() {
-		return name;
+	public String getSize() {
+		return size;
 	}
-	public String getTallaNum() {
-		return tallaNum;
+	public String getValue() {
+		return value;
 	}
-	public static Talla from(String tallaStr) {
+	public static Talla fromSize(String size) {
 		for (Talla talla : Talla.values()) {
-			if (talla.getName().compareTo(tallaStr)==0) {
+			if (talla.getSize().compareTo(size)==0) {
 				return talla;
 			}
 		}
 		return Undefined;
 	}
-	public static Talla getTalla(String tallaNum) {
+	public static Talla fromValue(String value) {
 		for (Talla talla : Talla.values()) {
-			if (talla.getTallaNum().compareTo(tallaNum)==0) {
+			if (talla.getValue().compareTo(value)==0) {
 				return talla;
 			}
 		}

@@ -43,20 +43,37 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	}
 	
 	private String getXPathLinkMenuGroup(Menu1rstLevel menu1rstLevel) {
+		String idMenu = getHtmlIdMenu(menu1rstLevel);
+		return XPathGroupLink + "//a[" + 
+			"@data-testid[contains(.,'header.section.link." + idMenu + "')] or " +
+		    "@data-testid[contains(.,'header.section.link." + idMenu.toLowerCase() + "')]]";
+	}
+	
+	private String getHtmlIdMenu(Menu1rstLevel menu1rstLevel) {
 		String id = "";
 		if (menu1rstLevel.getId() != null) {
 			id = menu1rstLevel.getId();
 		} else {
-			id = menu1rstLevel.getDataGaLabelMenuSuperiorDesktop() + "_" + menu1rstLevel.getLinea();
+			String labelLinea = getLabelLinea(menu1rstLevel.getLinea(), menu1rstLevel.getSublinea());
+			id = menu1rstLevel.getDataGaLabelMenuSuperiorDesktop() + "_" + labelLinea;
 		}
 		
 		if (id.contains("nuevo_")) {
-			id = "nuevo";
+			return  "nuevo";
 		}
-		
-		return XPathGroupLink + "//a[" + 
-			"@data-testid[contains(.,'header.section.link." + id + "')] or " +
-		    "@data-testid[contains(.,'header.section.link." + id.toLowerCase() + "')]]";
+		return id;
+	}
+	
+	private String getLabelLinea(LineaType linea, SublineaType sublinea) {
+		if (sublinea==null) {
+			return linea.name();
+		}
+
+		//Está mal en el HTML, los menús de Teen en shop tienen los ids de Outlet
+		if (sublinea==SublineaType.teen_nina || sublinea==SublineaType.teen_nino) {
+			return sublinea.getId(AppEcom.outlet);
+		} 
+		return sublinea.getId(app);
 	}
 
 	@Override

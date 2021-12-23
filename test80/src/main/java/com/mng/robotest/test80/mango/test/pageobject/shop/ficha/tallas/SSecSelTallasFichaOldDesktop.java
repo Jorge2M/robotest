@@ -118,7 +118,7 @@ public class SSecSelTallasFichaOldDesktop extends PageObjTM implements SSecSelTa
 		}
 		
 		//Tratamos el caso de talla única donde unificamos el valor a "U"
-		if (getTallaNumSelected().compareTo(Talla.U.getTallaNum())==0) {
+		if (getTallaNumSelected().compareTo(Talla.U.getValue())==0) {
 			tallaVisible = Talla.U.name();
 		}
 		

@@ -27,7 +27,7 @@ public class ArticuloScreen {
 		Article articleStock = productStock.getArticleWithMoreStock();
 		this.referencia = articleStock.getGarmentId();
 		this.codigoColor = articleStock.getColor().getId();
-		this.talla = Talla.getTalla(articleStock.getSize().getId2Digits());
+		this.talla = Talla.fromValue(articleStock.getSize().getId2Digits());
 		this.valePais = productStock.getValePais();
 	}
 

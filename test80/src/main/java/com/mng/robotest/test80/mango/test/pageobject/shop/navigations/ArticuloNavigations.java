@@ -47,7 +47,7 @@ public class ArticuloNavigations {
 			if (articleStock.getSize().getLabel().matches("\\d+")) {
 				size = articleStock.getSize().getLabel();
 			}
-			pageFicha.selectTallaByValue(Talla.getTalla(size));
+			pageFicha.selectTallaByValue(Talla.fromSize(size));
 		} else {
 			pageFicha.selectTallaByIndex(1);
 		}

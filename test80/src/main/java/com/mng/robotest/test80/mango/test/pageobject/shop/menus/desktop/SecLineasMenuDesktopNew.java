@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.beans.Sublinea.SublineaType;
@@ -57,6 +58,8 @@ public class SecLineasMenuDesktopNew extends SecLineasMenuDesktop {
 
 		//Esperamos que esté visible la sublínea y realizamos un Hover
 		state(Visible, By.xpath(xpathLinkSublinea)).wait(2).check();
+		moveToElement(By.xpath(xpathLinkSublinea), driver);
+		PageObjTM.waitMillis(500);
 		moveToElement(By.xpath(xpathLinkSublinea), driver);
 	}
 	

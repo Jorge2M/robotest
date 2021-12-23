@@ -31,6 +31,7 @@ import com.mng.robotest.test80.mango.test.utils.LevelPais;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -153,7 +154,7 @@ public class PaisIdioma implements Serializable {
 			menu = "camisas";
 			break;
 		case home:
-			menu = "mantas";
+			menu = "mantas_dormitorio";
 			break;
 		default:
 			menu = "pantalones";
