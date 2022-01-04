@@ -554,7 +554,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		if (state(State.Visible, byTalla).check()) {
 			WebElement tallaToSelect = driver.findElement(byTalla);
 			ArticuloScreen articulo = getArticuloObject(posArticulo);
-			articulo.setTalla(Talla.fromSize(tallaToSelect.getText()));
+			articulo.setTalla(Talla.fromLabel(tallaToSelect.getText()));
 			tallaToSelect.click();
 			return articulo;
 		}

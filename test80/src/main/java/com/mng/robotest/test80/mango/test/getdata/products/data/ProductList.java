@@ -30,6 +30,12 @@ public class ProductList {
 	public void setGroups(List<Group> groups) {
 		this.groups = groups;
 	}
+	public void addGroups(List<Group> groups) {
+		if (groups==null) {
+			this.groups = groups;
+		}
+		this.groups.addAll(groups);
+	}
 
 	public String getStockId() {
 		Pattern pattern = Pattern.compile("([0-9]{3}.\\w{2}.[0-9]{1}.(true|false).(true|false).v[0-9])");

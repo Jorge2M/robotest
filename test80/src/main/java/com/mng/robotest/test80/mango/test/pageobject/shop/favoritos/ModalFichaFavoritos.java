@@ -140,7 +140,7 @@ public class ModalFichaFavoritos {
 		}
 		
 		WebElement tallaDisponible = listTallasAvailable.get(posicionTalla - 1); 
-		Talla talla = Talla.fromSize(tallaDisponible.getText());
+		Talla talla = Talla.fromLabel(tallaDisponible.getText());
 		tallaDisponible.click();
 		return talla;
 	}	

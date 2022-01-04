@@ -5,6 +5,10 @@ import org.openqa.selenium.WebDriver;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -14,14 +18,14 @@ import com.mng.robotest.test80.mango.test.data.Talla;
 
 public class SSecSelTallasFichaOldDevice extends PageObjTM implements SSecSelTallasFicha {
 	
-	private Channel channel;
-	private AppEcom app;
+	private final Channel channel;
+	private final AppEcom app;
 	
 	private final static String XPathSelectorButton = "//*[@data-testid='sizeSelectorButton']";
 	private final static String XPathCapaTallas = "//div[@id='sizesContainerId']";
 	private final static String XPathOptionTalla = XPathCapaTallas + "//span[@class='size-text']";
 	private final static String XPathTallaSelected = XPathSelectorButton + "//span[@class[contains(.,'size-text')]]";
-	private final static String XPathOptionTallaUnica = "//button[@id='productFormSelect]" + "//span[@class='size-text']";
+	private final static String XPathOptionTallaUnica = "//button[@id='productFormSelect']//span[@class='one-size-text']";
 	
 	public SSecSelTallasFichaOldDevice(Channel channel, AppEcom app, WebDriver driver) {
 		super(driver);
@@ -39,8 +43,16 @@ public class SSecSelTallasFichaOldDevice extends PageObjTM implements SSecSelTal
 		return (xpathOption + "//self::*[text()[contains(.,'" + talla + "')]]");
 	}
 	
-	private String getXPathOptionTalla(String talla) {
-		return XPathOptionTalla + "//self::*[starts-with(text(),'" + talla + "')]";
+	String getXPathOptionTalla(Talla talla) {
+		return getXPathOptionTalla(talla.getLabels()); 
+	}
+	
+	private String getXPathOptionTalla(List<String> possibleLabels) {
+		String coreXPath = possibleLabels.stream()
+			.map(s -> "text()='" + s + "' or starts-with(text(),'" + s + " " + "')")
+			.collect(Collectors.joining(" or "));
+		
+		return XPathOptionTalla + "//self::*[" + coreXPath + "]"; 
 	}
 	
 	@Override
@@ -76,6 +88,9 @@ public class SSecSelTallasFichaOldDevice extends PageObjTM implements SSecSelTal
 	}
 	
 	private void despliegaSelectTallas() {
+		if (isTallaUnica()) {
+			return;
+		}
 		if (channel==Channel.tablet && app==AppEcom.votf) {
 			despliegaSelectTallasTabletVotf();
 		} else {
@@ -88,7 +103,7 @@ public class SSecSelTallasFichaOldDevice extends PageObjTM implements SSecSelTal
 		despliegaSelectTallasExec();
 	}
 	
-	public void despliegaSelectTallasExec() {
+	private void despliegaSelectTallasExec() {
 		for (int i=0; i<3; i++) {
 			state(State.Visible, By.xpath(XPathSelectorButton)).wait(2).check();
 			click(By.xpath(XPathSelectorButton)).exec();
@@ -100,29 +115,41 @@ public class SSecSelTallasFichaOldDevice extends PageObjTM implements SSecSelTal
 
 	@Override
 	public void selectTallaByValue(String tallaNum) {
+		if (isTallaUnica()) {
+			return;
+		}
 		despliegaSelectTallas();
 		Talla talla = Talla.fromValue(tallaNum);
-		String xpathTalla = getXPathOptionTalla(talla.getSize());
+		String xpathTalla = getXPathOptionTalla(talla);
 		state(State.Clickable, By.xpath(xpathTalla)).wait(2).check();
 		click(By.xpath(xpathTalla)).exec();
 	}
 
 	@Override
 	public void selectTallaByLabel(String tallaLabel) {
+		if (isTallaUnica()) {
+			return;
+		}
 		despliegaSelectTallas();
-		String xpathTalla = getXPathOptionTalla(tallaLabel);
+		String xpathTalla = getXPathOptionTalla(Arrays.asList(tallaLabel));
 		state(State.Clickable, By.xpath(xpathTalla)).wait(2).check();
 		click(By.xpath(xpathTalla)).exec();
 	}
 	
 	@Override
 	public void selectTallaByIndex(int posicionEnDesplegable) {
+		if (isTallaUnica()) {
+			return;
+		}
 		despliegaSelectTallas();
 		click(By.xpath("(" + By.xpath(XPathOptionTalla + ")[" + posicionEnDesplegable + "]"))).exec();
 	}
 
 	@Override
 	public void selectFirstTallaAvailable() {
+		if (isTallaUnica()) {
+			return;
+		}
 		despliegaSelectTallas();
 		String xpathTallaAvailable = getXPathOptionTallaSegunDisponible(true);
 		click(By.xpath(xpathTallaAvailable)).exec();

@@ -22,7 +22,7 @@ public class GetterHardCodeSecretsTest {
 		
 		assertTrue(secret.getNif()==null);
 		assertTrue(secret.getUser().compareTo("test.performance01@mango.com")==0);
-		assertTrue(secret.getPassword().compareTo("11111")==0);
+		assertTrue(secret.getPassword().compareTo("mango457")==0);
 		assertTrue(secret.getType().compareTo("SHOP_PERFORMANCE_USER")==0);
 	}
 	
@@ -32,7 +32,7 @@ public class GetterHardCodeSecretsTest {
 		
 		assertTrue(secret.getNif()==null);
 		assertTrue(secret.getUser().compareTo("ticket_digital_es@mango.com")==0);
-		assertTrue(secret.getPassword().compareTo("AAAAA")==0);
+		assertTrue(secret.getPassword().compareTo("mango457")==0);
 		assertTrue(secret.getType().compareTo("SHOP_STANDARD_USER")==0);
 	}
 	
@@ -42,7 +42,7 @@ public class GetterHardCodeSecretsTest {
 		
 		assertTrue(secret.getPassword()==null);
 		assertTrue(secret.getType().compareTo("EMPLOYEE_DATA")==0);
-		assertTrue(secret.getNif().compareTo("55555")==0);
+		assertTrue(secret.getNif().compareTo("32070858A")==0);
 	}
 	
 	@Test

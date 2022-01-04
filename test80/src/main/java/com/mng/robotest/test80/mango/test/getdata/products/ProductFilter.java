@@ -1,6 +1,9 @@
 package com.mng.robotest.test80.mango.test.getdata.products;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
@@ -22,10 +25,13 @@ public class ProductFilter {
 	}
 	
 	private List<Garment> getAll() {
-		return productList.getGroups().get(0).getGarments();
+		return productList.getGroups().stream()
+				.map(g -> g.getGarments())
+				.flatMap(Collection::stream)
+				.collect(Collectors.toList());
 	}
 	
-	public Garment getOneFiltered(List<FilterType> filters) throws Exception {
+	public Optional<Garment> getOneFiltered(List<FilterType> filters) throws Exception {
 		List<Garment> listFiltered = getAll();
 		for (int i=0; i<filters.size(); i++) {
 			FilterType filterType = filters.get(i);
@@ -35,10 +41,10 @@ public class ProductFilter {
 			}
 			listFiltered = filter.filter(listFiltered);
 			if (listFiltered==null || listFiltered.size()==0) {
-				return null;
+				return Optional.empty();
 			}
 		}
-		return null;
+		return Optional.empty();
 	}
 	
 	public List<Garment> getListFiltered(List<FilterType> filters) throws Exception {

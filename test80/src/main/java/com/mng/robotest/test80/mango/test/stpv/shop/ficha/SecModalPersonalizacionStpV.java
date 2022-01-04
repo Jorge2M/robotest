@@ -220,11 +220,7 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 		description="Seleccionar botón <b>Añadir a la bolsa</b>",
 		expected="El artículo se da de alta correctamente en la bolsa"	)
 	public void checkCustomizationProof () {
-		click(getBotonSiguienteVisible()).exec();
-		//click(ModalElement.Siguiente.getBy(dCtxSh.channel)).exec();
-//		if (dCtxSh.channel.isDevice()) {
-//			click(ModalElement.GoToBag.getBy(dCtxSh.channel)).exec();
-//		}
+		click(getBotonSiguienteVisible()).waitLoadPage(2).exec();
 		if (dCtxSh.channel.isDevice()) {
 			SecBolsa secBolsa = SecBolsa.make(dCtxSh, driver);
 			secBolsa.setBolsaToStateIfNotYet(StateBolsa.Open);

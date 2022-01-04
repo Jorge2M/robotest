@@ -11,7 +11,7 @@ import com.mng.robotest.test80.mango.test.getdata.loyaltypoints.data.ResultAddPo
 
 public class ClientApiLoyaltyPointsDevTest {
 
-	//@Ignore
+	@Ignore
 	@Test
 	public void testGetIdConsumer() throws Exception {
 		ClientApiLoyaltyPointsDev client = new ClientApiLoyaltyPointsDev();

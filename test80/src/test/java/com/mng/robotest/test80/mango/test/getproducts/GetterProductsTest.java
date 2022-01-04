@@ -3,6 +3,7 @@ package com.mng.robotest.test80.mango.test.getproducts;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 
@@ -57,10 +58,10 @@ public class GetterProductsTest {
 	@Test
 	public void testGetProductCompletaTuLook() throws Exception {
 		//When
-		Garment product = getterProducts.getOneFiltered(FilterType.TotalLook);
+		Optional<Garment> product = getterProducts.getOneFiltered(FilterType.TotalLook);
 		
 		//Then
-		assertTrue(product!=null);
+		assertTrue(product.isPresent());
 	}
 	
 	@Test

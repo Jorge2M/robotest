@@ -248,7 +248,7 @@ public class PageFavoritos extends PageObjTM {
 		}
 	   
 		WebElement tallaDisponible = listTallasAvailable.get(posicionTalla - 1); 
-		Talla talla = Talla.fromSize(tallaDisponible.getText());
+		Talla talla = Talla.fromLabel(tallaDisponible.getText());
 		tallaDisponible.click();
 		
 		//Wait to Div tallas disappears

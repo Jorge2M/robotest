@@ -37,7 +37,7 @@ public interface SSecSelTallasFicha {
 	}
 	
 	public default Talla getTallaSelected(AppEcom app) {
-		return Talla.fromSize(getTallaAlfSelected(app));
+		return Talla.fromLabel(getTallaAlfSelected(app));
 	}
 	
 	public default void selectTallaByValue(Talla talla) {

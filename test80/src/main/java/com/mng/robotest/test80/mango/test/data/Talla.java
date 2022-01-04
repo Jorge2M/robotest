@@ -1,70 +1,71 @@
 package com.mng.robotest.test80.mango.test.data;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 public enum Talla {
-	XXS("XXS", "18"),
-	XS("XS", "19"),
-	S("S", "20"),
-	M("M", "21"),
-	L("L", "22"),
-	XL("XL", "23"),
-	XXL("XXL", "24"),
-	U("U", "99"),
-	t1("1", "32"),
-	t2("2", "34"),
-	t4("4", "36"),
-	t6("6", "38"),
-	t8("8", "40"),
-	t10("10", "42"),
-	t12("12", "44"),
-	t14("14", "46"),
-	t32("32", "32"),
-	t33("33", "33"),
-	t34("34", "34"),
-	t35("35", "35"),
-	t36("36", "36"),
-	t37("37", "37"),
-	t38("38", "38"),
-	t39("39", "39"),
-	t40("40", "40"),
-	t41("41", "41"),
-	t42("42", "42"),
-	t43("43", "43"),
-	t44("44", "44"),
-	t45("45", "45"),
-	t46("46", "46"),
-	t47("47", "47"),
-	t48("48", "48"),
-	x30x50cm("30x50cm", "01"),
-	x50x90("50x90", "06"),
-	x90x150("90x150", "10"),
-	Undefined("Undefined", "0");
-	
-	private String size;
+
+	T00("0" , Arrays.asList("Undefined")),
+	T01("01", Arrays.asList("30x50cm")),
+	T06("06", Arrays.asList("50x90")),
+	T10("10", Arrays.asList("90x150")),
+	T18("18", Arrays.asList("XXS")),
+	T19("19", Arrays.asList("XS")),
+	T20("20", Arrays.asList("S")),
+	T21("21", Arrays.asList("M")),
+	T22("22", Arrays.asList("L")),
+	T23("23", Arrays.asList("XL")),
+	T24("24", Arrays.asList("XXL")),
+	T32("32", Arrays.asList("32","1","0")),
+	T33("33", Arrays.asList("33")),
+	T34("34", Arrays.asList("34","2","1")),
+	T35("35", Arrays.asList("35")),
+	T36("36", Arrays.asList("36","4","3")),
+	T37("37", Arrays.asList("37")),
+	T38("38", Arrays.asList("38","6","5")),
+	T39("39", Arrays.asList("39")),
+	T40("40", Arrays.asList("40","8","7")),
+	T41("41", Arrays.asList("41")),
+	T42("42", Arrays.asList("42","10","9")),
+	T43("43", Arrays.asList("43")),
+	T44("44", Arrays.asList("44","12","11")),
+	T45("45", Arrays.asList("45")),
+	T46("46", Arrays.asList("46","14","13")),
+	T47("47", Arrays.asList("47")),
+	T48("48", Arrays.asList("48")),
+	T99("99", Arrays.asList("U"));
+
+	private List<String> labels;
 	private String value;
-	private Talla(String size, String value) {
-		this.size = size;
+	private Talla(String value, List<String> labels) {
+		this.labels = labels;
 		this.value = value;
 	}
-	public String getSize() {
-		return size;
+	public List<String> getLabels() {
+		return labels;
 	}
 	public String getValue() {
 		return value;
 	}
-	public static Talla fromSize(String size) {
-		for (Talla talla : Talla.values()) {
-			if (talla.getSize().compareTo(size)==0) {
-				return talla;
-			}
+	public static Talla fromLabel(String label) {
+		Optional<Talla> talla = Arrays.asList(Talla.values()).stream()
+			.filter(e -> e.getLabels().contains(label))
+			.findAny();
+		
+		if (talla.isPresent()) {
+			return talla.get();
 		}
-		return Undefined;
+		return T00;
 	}
 	public static Talla fromValue(String value) {
-		for (Talla talla : Talla.values()) {
-			if (talla.getValue().compareTo(value)==0) {
-				return talla;
-			}
+		Optional<Talla> talla = Arrays.asList(Talla.values()).stream()
+				.filter(e -> e.getValue().compareTo(value)==0)
+				.findAny();
+		
+		if (talla.isPresent()) {
+			return talla.get();
 		}
-		return null;
+		return T00;
 	}
 }

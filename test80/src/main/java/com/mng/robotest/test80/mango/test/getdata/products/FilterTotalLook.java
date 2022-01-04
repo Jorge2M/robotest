@@ -2,6 +2,7 @@ package com.mng.robotest.test80.mango.test.getdata.products;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -38,13 +39,13 @@ public class FilterTotalLook implements Filter {
 	}
 	
 	@Override
-	public Garment getOne(List<Garment> garments) throws Exception {
+	public Optional<Garment> getOne(List<Garment> garments) throws Exception {
 		for (Garment garment : garments) {
 			if (getTotalLookGarment(garment)!=null) {
-				return garment;
+				return Optional.of(garment);
 			}
 		}
-		return null;
+		return Optional.empty();
 	}
 	
 	private GarmentDetails getTotalLookGarment(Garment product) throws Exception {

@@ -689,11 +689,12 @@ public abstract class PageGaleria extends PageObjTM {
 	public String openArticuloPestanyaAndGo(WebElement article, AppEcom app) 
 	throws Exception {
 		String galeryWindowHandle = driver.getWindowHandle();
-		
-		//En el caso de Firefox-Geckodriver el moveToElement (que se acaba realizando mediante el workarround basado en JavaScript) 
-		//nos posiciona en la esquina superior izquierda que queda debajo del menú superior... así que tenemos que enviar dicho menú al fondo
-		SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
-		secMenus.secMenuSuperior.secLineas.bringMenuBackground();
+		if (channel==Channel.desktop) {
+			//En el caso de Firefox-Geckodriver el moveToElement (que se acaba realizando mediante el workarround basado en JavaScript) 
+			//nos posiciona en la esquina superior izquierda que queda debajo del menú superior... así que tenemos que enviar dicho menú al fondo
+			SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
+			secMenus.secMenuSuperior.secLineas.bringMenuBackground();
+		}
 		
 		//WebElement articleName = article.findElement(By.xpath("." + getXPathLinkRelativeToArticle()));
 		UtilsMangoTest.openLinkInNewTab(driver, article/*articleName*/);

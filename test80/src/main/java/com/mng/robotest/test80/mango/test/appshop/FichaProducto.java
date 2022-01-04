@@ -2,9 +2,11 @@ package com.mng.robotest.test80.mango.test.appshop;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -42,6 +44,9 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalBuscadorTiendasStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
+
+import javassist.NotFoundException;
+
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.service.TestMaker;
@@ -69,19 +74,23 @@ public class FichaProducto {
 				.build();
 		
 		List<FilterType> filterOnline = Arrays.asList(FilterType.Online);
-		Garment articleOnline = getterProducts.getOneFiltered(filterOnline);
-		if (articleOnline!=null) {
-			secBuscadorStpV.searchArticulo(articleOnline, dCtxSh.pais, filterOnline);
-			pageFichaStpv.checkLinkDispTiendaInvisible();
+		Optional<Garment> articleOnline = getterProducts.getOneFiltered(filterOnline);
+		if (!articleOnline.isPresent()) {
+			throw new NotFoundException("Not found article of type " + filterOnline);
 		}
+		secBuscadorStpV.searchArticulo(articleOnline.get(), dCtxSh.pais, filterOnline);
+		pageFichaStpv.checkLinkDispTiendaInvisible();
 		
 		List<FilterType> filterNoOnlineWithColors = Arrays.asList(FilterType.NoOnline, FilterType.ManyColors); 
-		Garment articleNoOnlineWithColors = getterProducts.getOneFiltered(filterNoOnlineWithColors);
+		Optional<Garment> articleNoOnlineWithColors = getterProducts.getOneFiltered(filterNoOnlineWithColors);
+		if (!articleNoOnlineWithColors.isPresent()) {
+			List<String> filtersLabels = filterNoOnlineWithColors.stream().map(Object::toString).collect(Collectors.toList());
+			throw new NotFoundException("Not found article with filters " + String.join(",", filtersLabels));
+		}
 		
-		secBuscadorStpV.searchArticulo(articleNoOnlineWithColors, dCtxSh.pais, filterNoOnlineWithColors);
+		secBuscadorStpV.searchArticulo(articleNoOnlineWithColors.get(), dCtxSh.pais, filterNoOnlineWithColors);
 		boolean isTallaUnica = pageFichaStpv.selectAnadirALaBolsaTallaPrevNoSelected();
-
-		ArticuloScreen articulo = new ArticuloScreen(articleNoOnlineWithColors);
+		ArticuloScreen articulo = new ArticuloScreen(articleNoOnlineWithColors.get());
 		pageFichaStpv.selectColorAndSaveData(articulo);
 		pageFichaStpv.selectTallaAndSaveData(articulo);
 
@@ -114,9 +123,12 @@ public class FichaProducto {
 
 		AccesoStpV.oneStep(dCtxSh, false, driver);
 		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
-		Garment articleWithTotalLook = getterProducts.getOneFiltered(FilterType.TotalLook);
+		Optional<Garment> articleWithTotalLook = getterProducts.getOneFiltered(FilterType.TotalLook);
 		SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
-		secBuscadorStpV.searchArticulo(articleWithTotalLook, dCtxSh.pais);
+		if (!articleWithTotalLook.isPresent()) {
+			throw new NotFoundException("Not found article of type " + FilterType.TotalLook);
+		}
+		secBuscadorStpV.searchArticulo(articleWithTotalLook.get(), dCtxSh.pais);
 		
 		PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
 		if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {

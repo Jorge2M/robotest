@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
@@ -89,11 +90,11 @@ public class GetterProducts extends JaxRsClient {
 		return productFilter.getListFiltered(listFilters);
 	}
 	
-	public Garment getOneFiltered(FilterType filter) throws Exception {
+	public Optional<Garment> getOneFiltered(FilterType filter) throws Exception {
 		return getOneFiltered(Arrays.asList(filter));
 	}
 	
-	public Garment getOneFiltered(List<FilterType> listFilters) throws Exception {
+	public Optional<Garment> getOneFiltered(List<FilterType> listFilters) throws Exception {
 		return productFilter.getOneFiltered(listFilters);
 	}
 	
