@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -82,22 +83,39 @@ public abstract class SecLineasMenuDesktop extends PageObjTM {
 		return (state(Invisible, By.xpath(getXPathLineasMenuWrapper())).wait(maxSeconds).check());
 	}
 	
-	public void bringMenuBackground() throws Exception {
-		String xpathToBringBack = "";
+	
+	private enum BringTo {FRONT, BACKGROUND};
+	
+	public void bringMenuBackground() throws Exception {		
+		bringElement(BringTo.BACKGROUND);
+	}	
+	
+	public void bringMenuFront() throws Exception {
+		bringElement(BringTo.FRONT);	
+	}
+	
+	private String getXPathMenuWrapper() {
 		switch (app) {
 		case outlet:
-			xpathToBringBack = getXPathLineasMenuWrapper();
-			break;
+			return getXPathLineasMenuWrapper();
 		case shop:
 		default:
-			xpathToBringBack = getXPathMenuFatherWrapper();
+			return getXPathMenuFatherWrapper();
+		}
+	}	
+
+	private void bringElement(BringTo action) {
+		String display = "none";
+		State stateExpected = State.Invisible;
+		if (action==BringTo.FRONT) {
+			display = "block";
 		}
 		
+		String xpathToBringBack = getXPathMenuWrapper();		
 		WebElement menuWrapp = driver.findElement(By.xpath(xpathToBringBack));
-		((JavascriptExecutor) driver).executeScript("arguments[0].style.position='relative';", menuWrapp);
-		((JavascriptExecutor) driver).executeScript("arguments[0].style.zIndex=1;", menuWrapp);
-		state(Invisible, By.xpath(xpathToBringBack)).wait(1).check();
-	}	
+		((JavascriptExecutor) driver).executeScript("arguments[0].style.display='" + display + "';", menuWrapp);
+		state(stateExpected, By.xpath(xpathToBringBack)).wait(1).check();
+	}
 	
 	public List<WebElement> getListaLineas() {
 		return (driver.findElements(By.xpath(getXPathLinea())));

@@ -30,6 +30,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.SecFiltrosDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.SecFiltrosDesktop.Visibility;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecLineasMenuDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 
 /**getArticuloConVariedadColoresAndHover
@@ -67,6 +68,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		}
 	}
 	
+	private final static String XPathListArticles = "//div[@class[contains(.,'columns')] and @id='list']";
 	private final static String XPathImgRelativeArticle = 
 		"//img[@src and (" + 
 			   "@class[contains(.,'productListImg')] or " + 
@@ -308,6 +310,24 @@ public class PageGaleriaDesktop extends PageGaleria {
  
 	@Override
 	public int getLayoutNumColumnas() {
+		if (app==AppEcom.outlet) {
+			return getLayoutNumColumnasOutlet();
+		}
+		return getLayoutNumColumnasShop(); 
+	}	
+	
+	private int getLayoutNumColumnasShop() {
+		WebElement listArt = driver.findElement(By.xpath(XPathListArticles));
+		if (listArt.getAttribute("class").contains("columns3")) {
+			return 3;
+		}
+		if (listArt.getAttribute("class").contains("columns4")) {
+			return 4;
+		}
+		return 2;
+	}
+	
+	private int getLayoutNumColumnasOutlet() {
 		if (state(Present, By.xpath(XPathArticulo)).check()) {
 			String classArt = driver.findElement(By.xpath(XPathArticulo)).getAttribute("class");
 			if (classArt.contains("layout-3-columns")) {
@@ -326,7 +346,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		}
 		
 		return 2;
-	}	
+	}
 
 	@Override
 	public String getNombreArticulo(WebElement articulo) {
@@ -621,35 +641,6 @@ public class PageGaleriaDesktop extends PageGaleria {
 		return (state(Present, article).by(By.xpath("." + xpathSlider)).check());
 	}
 	
-//	public WebElement hoverSliderUntilClickable(TypeSlider typeSlider, WebElement article) {
-//		String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
-////		for (int i=0; i<5; i++) {
-//			hoverArticle(article);
-//			waitMillis(500);
-////			if (state(Clickable, article).by(By.xpath("." + xpathSlider)).wait(2).check()) {
-////				break;
-////			}
-////			moveToElement(article.findElement(By.xpath("//a")), driver);
-////		}
-//		WebElement slider = article.findElement(By.xpath("." + xpathSlider));
-////		if (getTypeDriver(driver)!=WebDriverType.firefox) {
-////			isElementClickableUntil(driver, slider, 5);
-////		} else {
-////			//TODO En el caso de Firefox-Geckodriver hay problemas con los moveToElement. 
-////			//En este caso parece que se posiciona en la esquina superior izquierda
-////			//Cuando se solvente podremos eliminar este código específico
-////			Actions actions = new Actions(driver);
-////			int i=0;
-////			while (!isElementClickableUntil(driver, slider, 1) && i<5) {
-////				actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).build().perform();
-////				hoverArticle(article);
-////				i+=1;
-////			}
-////		}
-//		
-//		return slider;
-//	}
-	
 	public String getNombreArticulo(int numArticulo) {
 		return (driver.findElement(By.xpath("(" + XPathArticulo + ")[" + numArticulo + "]//span[" + classProductName + "]")).getText().trim());
 	}
@@ -756,11 +747,22 @@ public class PageGaleriaDesktop extends PageGaleria {
 			hearthIcon.click();
 		} 
 		catch (ElementClickInterceptedException e) {
-			SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(channel, app, driver);
-			secFiltros.makeFilters(Visibility.Invisible);
-			hearthIcon.click();
-			secFiltros.makeFilters(Visibility.Visible);
+			clickHearthIconHiddindPossibleInterceptors(hearthIcon);
 		}
+	}
+	
+	private void clickHearthIconHiddindPossibleInterceptors(WebElement hearthIcon) throws Exception {
+		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(channel, app, driver);
+		secFiltros.makeFilters(Visibility.Invisible);
+		
+		SecLineasMenuDesktop secLineasMenuDesktop = SecLineasMenuDesktop.factory(app, driver);
+		secLineasMenuDesktop.bringMenuBackground();
+		
+		hearthIcon.click();
+		
+		secLineasMenuDesktop.bringMenuFront();
+		secFiltros.makeFilters(Visibility.Visible);
+
 	}
 	
 	@Override
@@ -778,9 +780,9 @@ public class PageGaleriaDesktop extends PageGaleria {
 		WebElement hearthIcon = driver.findElement(By.xpath(XPathIcon));
 		moveToElement(hearthIcon, driver);
 		
-		//Hacemos el menú superior transparente porque en ocasiones tapa el icono de favoritos
-		SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
-		secMenus.secMenuSuperior.secLineas.bringMenuBackground();
+//		//Hacemos el menú superior transparente porque en ocasiones tapa el icono de favoritos
+//		SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
+//		secMenus.secMenuSuperior.secLineas.bringMenuBackground();
 		
 		//Clicamos y esperamos a que el icono cambie de estado
 		StateFavorito estadoInicial = getStateHearthIcon(hearthIcon);

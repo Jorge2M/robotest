@@ -618,14 +618,9 @@ public class PageGaleriaStpV {
 		return (pageGaleria.iconsInCorrectState(posIconsSelected, actionFav));
 	}
    
-	@Step (
-		description="Seleccionar el link del listado a <b>#{numColumnas.name()} columnas</b>", 
-		expected="Aparece un listado de artículos a #{numColumnas.name()} columnas")
 	public ListDataArticleGalery selectListadoXColumnasDesktop(NumColumnas numColumnas, ListDataArticleGalery listArticlesGaleriaAnt) 
 	throws Exception {
-		((PageGaleriaDesktop)pageGaleria).clickLinkColumnas(numColumnas);
-		checkIsVisibleLayoutListadoXcolumns(numColumnas);
-	   
+		selectListadoXColumnasDesktop(numColumnas);
 		ListDataArticleGalery listArticlesGaleriaAct = pageGaleria.getListDataArticles();
 		if (listArticlesGaleriaAnt!=null) {
 			int articulosComprobar = 20;
@@ -633,6 +628,14 @@ public class PageGaleriaStpV {
 		}
 	   
 		return listArticlesGaleriaAct;
+	}
+	
+	@Step (
+		description="Seleccionar el link del listado a <b>#{numColumnas.name()} columnas</b>", 
+		expected="Aparece un listado de artículos a #{numColumnas.name()} columnas")
+	public void selectListadoXColumnasDesktop(NumColumnas numColumnas)	throws Exception {
+		((PageGaleriaDesktop)pageGaleria).clickLinkColumnas(numColumnas);
+		checkIsVisibleLayoutListadoXcolumns(numColumnas);
 	}
 	
 	@Validation
