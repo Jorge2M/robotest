@@ -53,11 +53,22 @@ public class SecLineasMenuDesktopNew extends SecLineasMenuDesktop {
 	
 	@Override
 	public void selectSublinea(LineaType lineaType, SublineaType sublineaType) {
-		hoverLinea(lineaType);
+		for (int i=0; i<3; i++) {
+			hoverLinea(lineaType);
+			if (!isVisibleSublineaUntil(sublineaType, 2)) {
+				break;
+			}
+		}
+		hoverSublinea(sublineaType);
+	}
+	
+	private boolean isVisibleSublineaUntil(SublineaType sublineaType, int maxSeconds) {
+		String xpathLinkSublinea = getXPathSublineaLink(sublineaType);	
+		return state(Visible, By.xpath(xpathLinkSublinea)).wait(maxSeconds).check();
+	}
+	
+	private void hoverSublinea(SublineaType sublineaType) {
 		String xpathLinkSublinea = getXPathSublineaLink(sublineaType);
-
-		//Esperamos que esté visible la sublínea y realizamos un Hover
-		state(Visible, By.xpath(xpathLinkSublinea)).wait(2).check();
 		moveToElement(By.xpath(xpathLinkSublinea), driver);
 		PageObjTM.waitMillis(500);
 		moveToElement(By.xpath(xpathLinkSublinea), driver);

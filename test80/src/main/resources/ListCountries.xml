@@ -2384,13 +2384,16 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda rebajas="n" she="s" he="s" nina="s" nino="s" baby="s" teen="s" violeta="s" home="s"></tienda>
 <shoponline> 
+<!-- 
 <linea    	  id="rebajas"   shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesrebaj"/>
 <linea    	  id="she" 	     shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+-->
 <linea    	  id="he" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="nina_bebe" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
+<!--
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="nino_bebe" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
@@ -2401,6 +2404,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="home"   	 shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+-->
 </shoponline>
 <!-- 
 <pago 

@@ -147,9 +147,8 @@ public abstract class SecLineasMenuDesktop extends PageObjTM {
 		int i=0;
 		do {
 			hoverLinea(lineaType, sublineaType);
-			int maxSecondsToWait = 2;
 			SecBloquesMenuDesktop secBloques = SecBloquesMenuDesktop.factory(app, driver);
-			isCapaMenusVisible = secBloques.isCapaMenusLineaVisibleUntil(lineaType, maxSecondsToWait);
+			isCapaMenusVisible = secBloques.isCapaMenusLineaVisibleUntil(lineaType, 2);
 			if (!isCapaMenusVisible) {
 				Log4jTM.getLogger().warn("No se hacen visibles los menús después de Hover sobre línea " + lineaType);
 			}
