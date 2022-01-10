@@ -3,6 +3,7 @@ package com.mng.robotest.test80.mango.test.appshop;
 import org.testng.annotations.*;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -106,7 +107,10 @@ public class Favoritos implements Serializable {
 		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh);
 
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-		pageGaleriaStpV.selectListadoXColumnasDesktop(NumColumnas.cuatro);
+		if (dCtxSh.channel==Channel.desktop) {
+			pageGaleriaStpV.selectListadoXColumnasDesktop(NumColumnas.cuatro);
+		}
+		
 		List<Integer> iconsToMark = Arrays.asList(2, 3, 5);  
 		pageGaleriaStpV.clickArticlesHearthIcons(iconsToMark, TypeActionFav.Marcar, dataFavoritos);
 
