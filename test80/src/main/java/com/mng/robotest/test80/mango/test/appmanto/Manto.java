@@ -46,7 +46,7 @@ public class Manto {
 	public void setDataMantoAccess() throws Exception {
 		if (dMantoAcc==null) {
 			dMantoAcc = new DataMantoAccess();
-			TestCaseTM testCase = TestMaker.getTestCase();
+			TestCaseTM testCase = TestMaker.getTestCase().get();
 			TestRunTM testRun = testCase.getTestRunParent();
 			InputParamsTM inputParams = testCase.getInputParamsSuite();
 			dMantoAcc.urlManto = inputParams.getUrlBase();

@@ -69,7 +69,7 @@ public class PaisIdioma implements Serializable {
 	  
 	public void beforeMethod() throws Exception {
 		if (dCtxSh==null) {
-			InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+			InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 			dCtxSh = new DataCtxShop();
 			dCtxSh.pais = españa;
 			dCtxSh.idioma = castellano;

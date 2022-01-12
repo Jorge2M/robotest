@@ -57,7 +57,7 @@ public class UtilsMangoTest {
 		// Seleccionamos el logo de MANGO
 		boolean existeLogo = SecCabecera.getNew(channel, app, driver).clickLogoMango();
 		if (!existeLogo) {
-			ITestContext ctx = TestMaker.getTestCase().getTestRunParent().getTestNgContext();
+			ITestContext ctx = TestMaker.getTestCase().get().getTestRunParent().getTestNgContext();
 			String urlPaginaPostAcceso = (String)ctx.getAttribute(Constantes.attrUrlPagPostAcceso); 
 			if (urlPaginaPostAcceso!=null) {
 				driver.get(urlPaginaPostAcceso);
@@ -216,7 +216,7 @@ public class UtilsMangoTest {
 	 * Determina si nos encontramos en un entorno de PRO
 	 */
 	public static boolean isEntornoPRO(AppEcom app, WebDriver driver) {
-		String urlBase = TestMaker.getTestCase().getInputParamsSuite().getUrlBase();
+		String urlBase = TestMaker.getInputParamsSuite().getUrlBase();
 		if (isEntornoPRO(app, urlBase)) {
 			return true;
 		}
@@ -244,7 +244,7 @@ public class UtilsMangoTest {
 	
 	public static boolean isEntornoCI(AppEcom app) {
 		if (app==AppEcom.shop) { //De momento sólo tenemos CI para Shop
-			String xmlURL = TestMaker.getTestCase().getInputParamsSuite().getUrlBase();
+			String xmlURL = TestMaker.getInputParamsSuite().getUrlBase();
 			if (xmlURL.contains("shop-ci.")) {
 				return true;
 			}

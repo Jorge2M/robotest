@@ -68,7 +68,7 @@ public class Registro implements Serializable {
 	}
 	
 	private DataCtxShop getCtxShForTest() throws Exception {
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
@@ -159,7 +159,7 @@ public class Registro implements Serializable {
 		DataCtxShop dCtxSh = getCtxShForTest();
 		WebDriver driver = TestMaker.getDriverTestCase();
 		TestCaseTM.addNameSufix(this.index_fact);
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		if (inputParamsSuite.getTypeAccess()==TypeAccess.Bat) {
 			return;
 		}
@@ -178,7 +178,7 @@ public class Registro implements Serializable {
 		description="Alta/Registro de un usuario (sin seleccionar el link de publicidad)")
 	public void REG003_RegistroOK_NoPubli() throws Exception {
 		TestCaseTM.addNameSufix(this.index_fact);
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		if (inputParamsSuite.getTypeAccess()==TypeAccess.Bat) {
 			return; 
 		}

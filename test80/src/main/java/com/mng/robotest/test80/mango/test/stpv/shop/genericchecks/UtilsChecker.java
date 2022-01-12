@@ -42,7 +42,7 @@ public class UtilsChecker {
 	}
 	
 	public static AppEcom getApp() {
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		return (AppEcom)inputParamsSuite.getApp();
 	}
 	

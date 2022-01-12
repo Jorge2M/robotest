@@ -373,7 +373,7 @@ public class CheckoutFlow {
 	
 	private List<Pago> getListPagosToTest(boolean isEmpl) {
 		List<Pago> listPagosToTest = new ArrayList<>();
-		ITestContext ctx = TestMaker.getTestCase().getTestRunContext();
+		ITestContext ctx = TestMaker.getTestCase().get().getTestRunContext();
 		List<Pago> listPagosPais = dCtxSh.pais.getListPagosForTest(dCtxSh.appE, isEmpl);
 		for (Pago pago : listPagosPais) {
 			if (pago.isNeededTestPasarelaDependingFilter(dCtxSh.channel, dCtxSh.appE, ctx)) {
@@ -391,11 +391,22 @@ public class CheckoutFlow {
 				pageCheckoutWrapperStpV.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
 			}
 			testPagoFromCheckoutToEnd(pago);
-			System.out.println("Compra realizada con código de pedido: " + dataPedido.getCodpedido());
+			updateInfoExecutionSuite(dataPedido.getCodpedido());
 		}
 		catch (Exception e) {
 			Log4jTM.getLogger().warn("Problem checking Payment {} from country {}", pago.getNombre(), dCtxSh.pais.getNombre_pais(), e);
 		}
+	}
+	
+	private void updateInfoExecutionSuite(String codigoPedido) {
+		System.out.println("Compra realizada con código de pedido: " + codigoPedido);	
+		String infoExecution = TestMaker.getSuite().getInfoExecution();
+		if (infoExecution==null  || "".compareTo(infoExecution)==0) {
+			infoExecution=codigoPedido;
+		} else {
+			infoExecution+="," + codigoPedido;
+		}
+		TestMaker.getSuite().setInfoExecution(infoExecution);
 	}
 	
 	/**
@@ -419,7 +430,7 @@ public class CheckoutFlow {
 	private boolean iCanExecPago(PagoStpV pagoStpV) {
 		boolean validaPagos = pagoStpV.dCtxPago.getFTCkout().validaPagos;
 		Pago pago = pagoStpV.dCtxPago.getDataPedido().getPago();
-		TypeAccess typeAccess = ((InputParamsMango)TestMaker.getTestCase().getInputParamsSuite()).getTypeAccess();
+		TypeAccess typeAccess = ((InputParamsMango)TestMaker.getInputParamsSuite()).getTypeAccess();
 		return (
 			//No estamos en el entorno productivo
 			!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver) &&

@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
 
 public class BannerStandarObject extends BannerObject {
 
@@ -24,7 +25,7 @@ public class BannerStandarObject extends BannerObject {
 	
 	public BannerStandarObject(BannerType bannerType) {
 		super(bannerType, XPathBanner);
-		this.driver = TestCaseTM.getTestCaseInExecution().getDriver();
+		this.driver = TestMaker.getTestCase().get().getDriver();
 	}
 	
 	@Override

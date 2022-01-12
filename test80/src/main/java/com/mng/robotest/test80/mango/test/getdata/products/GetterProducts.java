@@ -318,7 +318,7 @@ public class GetterProducts extends JaxRsClient {
 		private boolean retryPro = true;
 
 		public Builder(String codPaisAlf, AppEcom app, WebDriver driver) throws Exception {
-			this.url = ((InputParamsMango)TestMaker.getTestCase().getInputParamsSuite()).getUrlBase();
+			this.url = ((InputParamsMango)TestMaker.getInputParamsSuite()).getUrlBase();
 			this.codigoPaisAlf = codPaisAlf;
 			this.app = app;
 			this.driver = driver;

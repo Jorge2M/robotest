@@ -40,7 +40,7 @@ public class Menus implements Serializable {
 
 	public DataMantoAccess getDataMantoAccess() {
 		DataMantoAccess dMantoAcc = new DataMantoAccess();
-		TestCaseTM testCase = TestMaker.getTestCase();
+		TestCaseTM testCase = TestMaker.getTestCase().get();
 		TestRunTM testRun = testCase.getTestRunParent();
 		InputParamsTM inputParams = testCase.getInputParamsSuite();
 		dMantoAcc.urlManto = inputParams.getUrlBase();

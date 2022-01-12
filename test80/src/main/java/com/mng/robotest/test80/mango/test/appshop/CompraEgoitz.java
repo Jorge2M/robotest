@@ -70,7 +70,7 @@ public class CompraEgoitz {
 	}
 	
 	private DataCtxShop getCtxShForTest(Pais pais, IdiomaPais idioma) throws Exception {
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
@@ -82,7 +82,7 @@ public class CompraEgoitz {
 	private List<Garment> getListArticles() throws Exception {
 		List<Garment> listReturn = new ArrayList<>();
 		
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		String domain = inputParamsSuite.getDnsUrlAcceso();
 		
 		Garment garment1 = new Garment("87092508");

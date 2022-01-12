@@ -49,7 +49,7 @@ public class CheckerImgsBroken implements Checker {
 	 */
 	public static ResultadoErrores imagesBroken(WebDriver driver, Channel channel, int maxErrors) {
 		int maxImages = 500;
-		ITestContext ctx = TestMaker.getTestCase().getTestRunParent().getTestNgContext();
+		ITestContext ctx = TestMaker.getTestCase().get().getTestRunParent().getTestNgContext();
 				
 		//En el caso de móvil sólo procesaremos 200 imágenes para paliar el caso en el que el script se ejecuta contra un dispositivo físico y el rendimiento es limitado
 		if (channel.isDevice()) {

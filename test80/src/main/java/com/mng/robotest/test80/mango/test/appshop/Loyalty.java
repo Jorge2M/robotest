@@ -79,7 +79,7 @@ public class Loyalty {
 	}
 
 	private DataCtxShop getCtxShForTest() throws Exception {
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
@@ -221,7 +221,7 @@ public class Loyalty {
 //		groups={"Loyalty", "Canal:desktop,mobile_App:shop"},
 //		description="Registro nuevo usuario comprobando que funciona el vale de descuento MANGOLIKESYOU")
 //	public void LOY004_Registro_y_vale_MANGOLIKESYOU() throws Exception {
-//		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+//		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 //		if (inputParamsSuite.getTypeAccess()==TypeAccess.Bat) {
 //			return; 
 //		}

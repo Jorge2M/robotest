@@ -38,7 +38,7 @@ public class ErrorStorer extends EvidenceStorer {
 	 */
 	private String capturaErrorPage(StepTM step) throws Exception {
 		String htmlPageError = "";
-		InputParamsTM inputParams = TestMaker.getTestCase().getInputParamsSuite();
+		InputParamsTM inputParams = TestMaker.getInputParamsSuite();
 		String driverId = inputParams.getDriver();
 		if (driverId.compareTo(EmbeddedDriver.browserstack.name())!=0) {
 			//Cargamos la página errorPage en una pestaña aparte y nos posicionamos en ella

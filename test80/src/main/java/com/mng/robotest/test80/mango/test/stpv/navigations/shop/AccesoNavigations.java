@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.navigations.shop;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.beans.AccesoVOTF;
 import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
@@ -32,7 +32,7 @@ public class AccesoNavigations {
 		String canary = "";
 		//Temporal para test Canary!!!
 		//canary = "?canary=true";
-		String urlInitial = TestCaseTM.getTestCaseInExecution().getInputParamsSuite().getUrlBase() + canary;
+		String urlInitial = TestMaker.getInputParamsSuite().getUrlBase() + canary;
 		String currentUrl = driver.getCurrentUrl();
 		if (currentUrl.compareTo(urlInitial)!=0) {
 			driver.get(urlInitial);

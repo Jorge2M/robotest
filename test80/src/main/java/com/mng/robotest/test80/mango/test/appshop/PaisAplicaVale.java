@@ -86,7 +86,7 @@ public class PaisAplicaVale implements Serializable {
 //		WebDriver driver = TestMaker.getDriverTestCase();
 //		TestCaseTM.addNameSufix(this.index_fact);
 //		dCtxSh.userRegistered = false;
-//		//dCtxSh.urlAcceso = TestMaker.getTestCase().getInputParamsSuite().getUrlBase();
+//		//dCtxSh.urlAcceso = TestMaker.getInputParamsSuite().getUrlBase();
 //		DataCtxPago dCtxPago = new DataCtxPago(this.dCtxSh);
 //		FlagsTestCkout fTCkout = (FlagsTestCkout)fTCkoutIni.clone();
 //		fTCkout.emailExist = true; 

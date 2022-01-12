@@ -33,7 +33,7 @@ public class PedidoNavigations {
 	public static void testPedidosEnManto(DataCheckPedidos dataCheckPedidos, AppEcom appE, WebDriver driver) throws Exception {
 		//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
 		if (appE!=AppEcom.votf) {  
-			TestCaseTM testCase = TestMaker.getTestCase();
+			TestCaseTM testCase = TestMaker.getTestCase().get();
 			TestRunTM testRun = testCase.getTestRunParent();
 			DataMantoAccess dMantoAcc = new DataMantoAccess();
 			dMantoAcc.urlManto = testRun.getParameter(Constantes.paramUrlmanto);
@@ -46,7 +46,7 @@ public class PedidoNavigations {
 	
 	private static void testPedidosEnManto(DataMantoAccess dMantoAcc, DataCheckPedidos dataCheckPedidos, WebDriver driver) 
 	throws Exception {
-		TypeAccess typeAccess = ((InputParamsMango)TestMaker.getTestCase().getInputParamsSuite()).getTypeAccess();
+		TypeAccess typeAccess = ((InputParamsMango)TestMaker.getInputParamsSuite()).getTypeAccess();
 		if (dataCheckPedidos.areChecksToExecute() && typeAccess!=TypeAccess.Bat) {
 			PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 			PedidoNavigations.validacionListPedidosStpVs(dataCheckPedidos, dMantoAcc.appE, driver);

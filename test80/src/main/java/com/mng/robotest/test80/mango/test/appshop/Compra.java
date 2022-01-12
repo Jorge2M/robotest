@@ -60,7 +60,7 @@ public class Compra {
 	public Compra() {}
 
 	private DataCtxShop getCtxShForTest() throws Exception {
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
@@ -308,7 +308,7 @@ public class Compra {
 		
 		//No permitiremos la ejecución diaria de este tipo de checkout porque implica la ejecución 
 		//de un registro de usuario con el nuevo email introducido 
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		if (inputParamsSuite.getTypeAccess()!=TypeAccess.Bat) {
 			//Hasta página de Checkout
 			FlagsTestCkout FTCkout = new FlagsTestCkout();

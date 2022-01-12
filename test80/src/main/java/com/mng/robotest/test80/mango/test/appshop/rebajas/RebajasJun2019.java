@@ -59,7 +59,7 @@ public class RebajasJun2019 implements Serializable {
 	  
 	public void setInputParamsSuite() {
 		if (inputParamsSuite==null) {
-			inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+			inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		}
 	}
 	

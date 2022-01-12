@@ -53,7 +53,7 @@ public class RebajasJun2018 {
 
 	public void setInputParamsSuite() throws Exception {
 		if (inputParamsSuite==null) {
-			inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+			inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		}
 	}
 	

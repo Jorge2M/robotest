@@ -35,7 +35,7 @@ public class Otras {
 	private final static IdiomaPais japones = japon.getListIdiomas().get(0);
 
 	private DataCtxShop getCtxShForTest() throws Exception {
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
@@ -98,7 +98,7 @@ public class Otras {
 	public void OTR004_cambioPaisURL() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		String urlBaseTest = inputParamsSuite.getUrlBase();
 
 		//Definimos la lista de los 3 países que pueden estar asociados a la IP del usuario

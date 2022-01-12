@@ -18,7 +18,7 @@ public class SEO {
 	public SEO() {}
 
 	private DataCtxShop getCtxShForTest() throws Exception {
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
@@ -30,14 +30,14 @@ public class SEO {
 		groups = { "Otras", "Canal:desktop_App:shop,outlet"}, 
 		description="Comprobar existencia y contenido del fichero robots.txt")
 	public void SEO001_check_RobotsSitemap() throws Exception {
-		TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
+		TestCaseTM testCase = TestCaseTM.getTestCaseInExecution().get();
 		DataCtxShop dCtxSh = getCtxShForTest();
 		WebDriver driver = testCase.getDriver();
 		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
 			return;
 		}
 		
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		String urlBase = inputParamsSuite.getUrlBase();
 		if (testCase.getInputParamsSuite().getApp()==AppEcom.shop) {
 			BrowserStpV.inputRobotsURLandValidate(urlBase, dCtxSh.appE, driver);

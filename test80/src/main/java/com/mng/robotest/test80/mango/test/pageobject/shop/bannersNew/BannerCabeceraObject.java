@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 
 public class BannerCabeceraObject extends BannerObject {
@@ -20,7 +20,7 @@ public class BannerCabeceraObject extends BannerObject {
 	
 	public BannerCabeceraObject(BannerType bannerType) {
 		super(bannerType, XPathBanner);
-		this.driver = TestCaseTM.getTestCaseInExecution().getDriver();
+		this.driver = TestMaker.getTestCase().get().getDriver();
 	}
 	
 	@Override

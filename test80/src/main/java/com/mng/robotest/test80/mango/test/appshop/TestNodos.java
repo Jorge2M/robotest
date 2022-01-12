@@ -67,7 +67,7 @@ public class TestNodos implements Serializable {
 	}	  
 	
 	private DataCtxShop getCtxShForTest() throws Exception {
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite(); 
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite(); 
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
 		dCtxSh.setAppEcom(this.nodo.getAppEcom());

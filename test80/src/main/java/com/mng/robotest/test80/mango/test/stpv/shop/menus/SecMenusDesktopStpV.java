@@ -340,7 +340,7 @@ public class SecMenusDesktopStpV {
 		clave+=urlBase;	
 		
 		//Si están registrados en el contexto el número de pestañas y menús...
-		ITestContext ctx = TestMaker.getTestCase().getTestRunParent().getTestNgContext();
+		ITestContext ctx = TestMaker.getTestCase().get().getTestRunParent().getTestNgContext();
 		if (ctx.getAttribute("numPestanyas" + clave) != null && 
 			ctx.getAttribute("numMenus" + clave) != null) {
 			
@@ -537,7 +537,7 @@ public class SecMenusDesktopStpV {
 	@Validation
 	public ChecksTM checkErrorPageWithoutException() throws Exception {
 		ChecksTM validations = ChecksTM.getNew();
-		ITestContext ctx = TestMaker.getTestCase().getTestRunParent().getTestNgContext();
+		ITestContext ctx = TestMaker.getTestCase().get().getTestRunParent().getTestNgContext();
 		stackTrace exception = WebDriverMngUtils.stackTaceException(driver, ctx);
 		String excepcionDuplicada = "";
 		if (exception.getRepetida()) {
