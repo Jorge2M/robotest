@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -207,12 +208,23 @@ public class PageFavoritos extends PageObjTM {
 	}
 	
 	public void clickButtonAddToBagAndWait(String refProducto, String codigoColor) throws Exception {
-		String xpathAdd = getXPathButtonAddBolsa(refProducto, codigoColor);
-		driver.findElement(By.xpath(xpathAdd)).click();
+		clickButtonAddToBag(refProducto, codigoColor);
 		
 		//Wait to Div tallas appears
 		String xpathCapaTallas = getXPathCapaTallas(refProducto, codigoColor);
 		new WebDriverWait(driver, 1).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathCapaTallas)));
+	}
+	
+	private void clickButtonAddToBag(String refProducto, String codigoColor) {
+		String xpathAdd = getXPathButtonAddBolsa(refProducto, codigoColor);
+		try {
+			driver.findElement(By.xpath(xpathAdd)).click();
+		} catch (ElementClickInterceptedException e) {
+			//En ocasiones en el canal móvil se solapa el div del Asistente Online de ayuda
+			//así que esperamos un tiempo prudencial hasta que se pliegue
+			waitMillis(2000);
+			driver.findElement(By.xpath(xpathAdd)).click();
+		}
 	}
 	
 	public void clickImgProducto(String refProducto, String codigoColor) {

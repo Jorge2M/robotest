@@ -24,10 +24,8 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	private final ModalUserSesionShopDesktop modalUserSesionShopDesktop;
 	
 	private final static String XPathDivNavTools = "//div[@id='navTools']";
-	private final static String XPathNumArticlesBolsaMobile = "//span[@class='icon-button-items']";
-	
+	private final static String XPathNumArticlesManyLocations = "//*[@class='icon-button-items']";
 	private final static String XPathNumArticlesBolsaDesktopShop = "//span[@data-testid[contains(.,'numItems')]]";
-	private final static String XPathNumArticlesBolsaDesktopOutletVotf = "//span[@class='icon-button-items']";
 	
 	public enum IconoCabeceraShop_DesktopMobile implements ElementPage {
 		lupa(
@@ -100,13 +98,10 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	}
 	
 	public static String getXPathNumberArtIcono(Channel channel, AppEcom app) {
-		if (channel==Channel.mobile) {
-			return (XPathNumArticlesBolsaMobile);
+		if (channel==Channel.desktop && app==AppEcom.shop) {
+			return XPathNumArticlesBolsaDesktopShop;
 		}
-		if (app==AppEcom.outlet || app==AppEcom.votf) {
-			return XPathNumArticlesBolsaDesktopOutletVotf;	
-		}
-		return XPathNumArticlesBolsaDesktopShop;
+		return XPathNumArticlesManyLocations;
 	}
 	
 	@Override
