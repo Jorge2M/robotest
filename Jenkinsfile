@@ -7,6 +7,9 @@ library("k8s@1.0.0")
 
 pipeline {
     agent any
+    environment {
+        APP_VERSION = "v-$shortBranchName-$BUILD_NUMBER"
+    }
     options {
         buildDiscarder(logRotator(numToKeepStr: '5', daysToKeepStr: '30'))
     }
