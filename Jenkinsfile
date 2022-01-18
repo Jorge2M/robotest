@@ -8,6 +8,8 @@ library("k8s@1.0.0")
 pipeline {
     agent any
     environment {
+        CURRENT_DATE = sh(returnStdout: true, script: 'echo $(date -u +%Y%m%d%H%M%S) | tr -d "\n"')
+        LAST_COMMIT = sh(returnStdout: true, script: 'git rev-parse --short=10 HEAD | tr -d "\n"')
         APP_VERSION = "${CURRENT_DATE}-${LAST_COMMIT}"
     }
     options {
