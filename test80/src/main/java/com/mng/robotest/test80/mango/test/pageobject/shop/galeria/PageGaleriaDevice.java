@@ -104,6 +104,11 @@ public class PageGaleriaDevice extends PageGaleria {
 	public String getXPathCabeceraBusquedaProd() {
 		return ("//*[@id='buscador_cabecera2']");
 	}
+	
+	@Override
+	public void hideMenus() {
+		//TODO
+	}
 
 	//Número de páginas a partir del que consideramos que se requiere un scroll hasta el final de la galería
 	public static int scrollToLast = 20; 

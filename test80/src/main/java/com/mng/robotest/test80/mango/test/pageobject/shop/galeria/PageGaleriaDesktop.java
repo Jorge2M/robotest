@@ -11,6 +11,7 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.mng.robotest.test80.mango.test.beans.Linea;
 import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
@@ -112,6 +113,20 @@ public class PageGaleriaDesktop extends PageGaleria {
 	public boolean isPage() {
 		String xpath = "//div[@class[contains(.,'container-fluid catalog')]]";
 		return (state(Present, By.xpath(xpath)).check());
+	}
+	
+	@Override
+	public void hideMenus() {
+		SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
+    	Actions actions = new Actions(driver);
+		while (menusVisible(secMenus)) {
+			actions.moveByOffset(0, 50).build().perform();
+		}
+		waitMillis(500);
+	}
+	
+	private boolean menusVisible(SecMenusDesktop secMenus) {
+		return secMenus.secMenuSuperior.secBlockMenus.isCapaMenusLineaVisibleUntil(LineaType.she, 1);
 	}
 	
 	private String getXPathLabel(LabelArticle label) {

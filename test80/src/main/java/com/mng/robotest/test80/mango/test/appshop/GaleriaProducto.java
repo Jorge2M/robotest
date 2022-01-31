@@ -214,7 +214,7 @@ public class GaleriaProducto {
 	}
 	
 	private void selectMenuVestidos(SecMenusWrapperStpV secMenusStpV, DataCtxShop dCtxSh) throws Exception {
-		String menuToClick = "vestidos_y_monos";
+		String menuToClick = "vestidos";
 //		if (dCtxSh.appE==AppEcom.outlet) {
 //			menuToClick = "vestidos";
 //		}

@@ -25,15 +25,21 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	//Example row: "abrigos_she" / "prendas_she"
 	private static final Map<String, String> storedMenus = new ConcurrentHashMap<>(); 
 	
+	public enum MenusFromGroup {Family, Subfamily, All}
+	
 	//TODO React. 15-diciembre-2021: identificadores react solicitados a David Massa por Teams
 	// están listos, cuando suban a PRE se podrán cambiar:
 	// -> JUhkW -> data-testid = 'section'
 	// -> o3ud7 -> data-testid = 'sub-familys'
 	private final static String XPathWrapperGlobal = "//div[@id='headerPortalContainer']";
-	private final static String XPathContainerGroups = XPathWrapperGlobal + "//ul[@data-testid[contains(.,'section.family')] or @data-testid[contains(.,'section.subfamily')]]/li[not(@id[contains(.,'sections')])]/..";
+	
+	private final static String XPathCapaMenusFamily = "//ul[@data-testid[contains(.,'section.family')]]";
+	private final static String XPathCapaMenusSubfamily = "//ul[@data-testid[contains(.,'section.subfamily')]]";
+	private final static String XPathCapaMenus = "//ul[@data-testid[contains(.,'section.subfamily')] or @data-testid[contains(.,'section.family')]]";
+	private final static String XPathContainerGroups = XPathWrapperGlobal + XPathCapaMenus + "/li[not(@id[contains(.,'sections')])]/..";
+	
 	private final static String XPathGroupSection = XPathContainerGroups + "/li[@data-testid[contains(.,'section.menu')]]";
 	private final static String XPathGroupLink = XPathContainerGroups + "/li[@data-testid[contains(.,'section.link')]]";
-	private final static String XPathCapaMenus = "//ul[@data-testid[contains(.,'section.subfamily')] or @data-testid[contains(.,'section.family')]]";
 	private final static String XPathMenuLink = XPathCapaMenus + "/li[@data-testid[contains(.,'link')]]";
 	private final static String XPathRightImage = XPathWrapperGlobal + "//a/img/..";
 
@@ -103,7 +109,19 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	
 	@Override
 	public String getXPathCapaMenusLinea(String idLinea) {
-		return XPathCapaMenus + "//li[@id[contains(.,'_" + idLinea + "')]]/..";
+		return getXPathCapaMenusLinea(idLinea, MenusFromGroup.All);
+	}
+	
+	private String getXPathCapaMenusLinea(String idLinea, MenusFromGroup group) {
+		String liLinea = "//li[@id[contains(.,'_" + idLinea + "')]]/..";
+		switch (group) {
+		case Family:
+			return XPathCapaMenusFamily + liLinea; 
+		case Subfamily:
+			return XPathCapaMenusSubfamily + liLinea; 
+		default:
+			return XPathCapaMenus + liLinea;
+		}
 	}
 	
 	@Override
@@ -139,12 +157,15 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	
 	@Override
 	public List<WebElement> getListMenusLineaBloque(LineaType lineaType, GroupMenu bloque) throws Exception {
+		return getListMenusLineaBloque(lineaType, bloque, MenusFromGroup.All);
+	}
+
+	public List<WebElement> getListMenusLineaBloque(LineaType lineaType, GroupMenu bloque, MenusFromGroup group) throws Exception {
 		makeMenusGroupVisible(lineaType, bloque);
-		String xpathMenuLinea = getXPathCapaMenusLinea(lineaType);
+		String xpathMenuLinea = getXPathCapaMenusLinea(lineaType.name(), group);
 		String xpathEntradaMenu = "//li[@data-testid[contains(.,'section')] and @id='" + bloque + "_" + lineaType.name() + "']/../li[@data-testid[contains(.,'link')]]/a";
 		List<WebElement> listMenus = driver.findElements(By.xpath(xpathMenuLinea + xpathEntradaMenu));
-		//makeMenusInvisible();
-		return (listMenus);
+		return (listMenus);		
 	}
 	
 	@Override

@@ -79,6 +79,7 @@ public abstract class PageGaleria extends PageObjTM {
 	abstract public ArticuloScreen selectTallaAvailableArticle(int posArticulo, int posTalla) throws Exception;
 	abstract public StateFavorito getStateHearthIcon(WebElement hearthIcon);
 	abstract public void clickHearthIcon(WebElement hearthIcon) throws Exception;
+	abstract public void hideMenus();
 
 	
 	public static List<LabelArticle> listLabelsNew = Arrays.asList(
@@ -541,7 +542,7 @@ public abstract class PageGaleria extends PageObjTM {
 		initializeDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, pageToScroll + 10);
 		updateDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, lastPage);
 		SecFooter secFooter = new SecFooter(app, driver);
-		while (!secFooter.isVisible() && lastPage < pageToScroll) {
+		while (/*!secFooter.isVisible() && */lastPage < pageToScroll) {
 			goToLastPage();
 			int newLastPage = getNumLastPage();
 			updateDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, newLastPage);

@@ -17,6 +17,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDes
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.SecCrossSelling;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.GroupMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecBloquesMenuDesktopNew;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecBloquesMenuDesktopNew.MenusFromGroup;
 
 @SuppressWarnings({"static-access"})
 public class SecCrossSellingStpV {
@@ -36,7 +38,8 @@ public class SecCrossSellingStpV {
 		//Obtenemos la lista de menús de Mujer-Prendas
 		SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
 		List<WebElement> listaMenusBloque = 
-			secMenus.secMenuSuperior.secBlockMenus.getListMenusLineaBloque(lineaType, GroupMenu.prendas);
+			((SecBloquesMenuDesktopNew)secMenus.secMenuSuperior.secBlockMenus)
+				.getListMenusLineaBloque(lineaType, GroupMenu.prendas, MenusFromGroup.Subfamily);
 
 		String litMenu1 = listaMenusBloque.get(0).findElement(By.xpath("./span")).getText();
 		String litMenu2 = listaMenusBloque.get(1).findElement(By.xpath("./span")).getText();
@@ -48,6 +51,7 @@ public class SecCrossSellingStpV {
 		ChecksTM validations = ChecksTM.getNew();
 		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
 		if (!secCrossSelling.isSectionVisible()) {
+			pageGaleria.hideMenus();
 			pageGaleria.scrollToPageFromFirst(PageGaleriaDesktop.maxPageToScroll);
 		}
 		validations.add(
