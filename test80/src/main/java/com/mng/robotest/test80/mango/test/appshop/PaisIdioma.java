@@ -154,7 +154,12 @@ public class PaisIdioma implements Serializable {
 			menu = "camisas";
 			break;
 		case home:
-			menu = "mantas_dormitorio";
+			//En el caso de mobile el data-label es distinto
+			if (dCtxSh.channel==Channel.mobile) {
+				menu = "dormitorio-mantas";
+			} else {
+				menu = "mantas_dormitorio";
+			}
 			break;
 		default:
 			menu = "pantalones";
