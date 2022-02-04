@@ -602,8 +602,8 @@ public class Page1DktopCheckout extends PageObjTM {
 		click(By.xpath(XPathButtonAcceptVendedorVOTF)).exec();
 	}
 
-	public boolean isVisibleInputVendedorVOTF() {
-		return (state(Visible, By.xpath(XPathInputVendedorVOTF)).check());
+	public boolean isVisibleInputVendedorVOTF(int maxSeconds) {
+		return (state(Visible, By.xpath(XPathInputVendedorVOTF)).wait(maxSeconds).check());
 	}
 
 	public boolean isVisibleCodigoVendedorVOTF(String codigoVendedor) {

@@ -178,10 +178,11 @@ public class Page1DktopCheckoutStpV {
 	
 	@Validation
 	private ChecksTM checkAfterInputCodigoVendedor(String codigoVendedor) {
+		int maxSeconds = 3;
 		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
-			"Desaparece el campo de Input del código de vendedor",
-			!page1DktopCheckout.isVisibleInputVendedorVOTF(), State.Defect);
+			"Desaparece el campo de Input del código de vendedor (lo esperamos hasta " + maxSeconds + " segundos)",
+			!page1DktopCheckout.isVisibleInputVendedorVOTF(maxSeconds), State.Defect);
 	 	validations.add(
 			"En su lugar se pinta el código de vendedor " + codigoVendedor,
 			page1DktopCheckout.isVisibleCodigoVendedorVOTF(codigoVendedor), State.Defect);
