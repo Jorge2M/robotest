@@ -32,7 +32,7 @@ public class CorreoReport {
 		//Date fechaDesde = new Date(System.currentTimeMillis() - 168000000 /*48 horas*/);
 		Date fechaHasta = new Date(System.currentTimeMillis());
 		RepositoryI repository = TestMaker.getRepository();
-		List<SuiteBean> listSuites = repository.getListSuitesAfter(fechaDesde);
+		List<SuiteBean> listSuites = repository.getListSuitesBetween(fechaDesde, null);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
 
 		return
@@ -40,14 +40,13 @@ public class CorreoReport {
 			"Hola, <br><br>" +
 			"en las últimas 13 horas [" + sdf.format(fechaDesde) + " - " + sdf.format(fechaHasta) + "] se han ejecutado los siguientes scripts automáticos contra PRO:" +
 			"</p>" +
-			TestMaker.getHtmlStatsSuites(listSuites);
+			TestMaker.getHtmlStatsSuites(listSuites, null);
 	}
 	
 	private static void sendMailResult(String message) throws Exception {
 		ArrayList<AttachMail> listaAttachImages = new ArrayList<>(); 
 		  
 		//Se realiza el envío del correo
-		String from = "robottestmango@gmail.com";
 		//String from = "Robotest QA<jorge.munoz@mango.com>";
 		//String from = "jorge.munoz@mango.com";
 
@@ -62,7 +61,7 @@ public class CorreoReport {
 
 		//Envío del correo
 		Log4jTM.getGlobal().info("Procedemos a envío del correo!");
-		new MailClient().mail(from, myToList, myCcList, subject, message, listaAttachImages);
+		new MailClient().mail("robottestmango@gmail.com", "sirrobot", myToList, myCcList, subject, message, listaAttachImages);
 		Log4jTM.getGlobal().info("Correo enviado!");
 	}	
 }

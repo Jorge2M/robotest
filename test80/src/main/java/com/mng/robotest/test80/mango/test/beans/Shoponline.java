@@ -8,9 +8,9 @@ import java.util.List;
 
 import javax.xml.bind.annotation.*;
 
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.data.Constantes.ThreeState;
-import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 
 public class Shoponline implements Serializable {

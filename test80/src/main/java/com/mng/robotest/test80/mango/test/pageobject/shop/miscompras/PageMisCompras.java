@@ -33,7 +33,7 @@ public class PageMisCompras extends PageObjTM {
 			"@data-testid[contains(.,'inactivePurchases')]]";
 	
 	//private final static String XPathTicket = XPathListTickets + "//div[@class[contains(.,'purchase-card__border')]]";
-	private final static String XPathTicket = XPathListTickets + "//div[@class[contains(.,'layout-content')] and @class[contains(.,'card')]]";
+	private final static String XPathTicket = XPathListTickets + "/div[@class[contains(.,'layout-content')]]";
 
 	
 	public PageMisCompras(Channel channel, WebDriver driver) {
@@ -138,7 +138,9 @@ public class PageMisCompras extends PageObjTM {
 		return TypeTicket.Online;
 	}
 	
-	private final static String XPathIdRelativeTicket = ".//div[@class[contains(.,'card__info')]]/div/div";
+	//private final static String XPathIdRelativeTicket = ".//div[@class[contains(.,'card__info')]]/div/div";
+	//TODO solicitado data-testid a Carla (11-02-2022)
+	private final static String XPathIdRelativeTicket = ".//div[@class[contains(.,'layout-row')]]//div[@class[contains(.,'layout-placeholder')] and @class[contains(.,'sg-body-small')]]";
 	private String getIdTicketPage(WebElement boxDataTicket) {
 		String lineaId = boxDataTicket.findElement(By.xpath(XPathIdRelativeTicket)).getText();
 		Pattern pattern = Pattern.compile("_*: (.*)"); boxDataTicket.getAttribute("innerHTML");
@@ -154,7 +156,9 @@ public class PageMisCompras extends PageObjTM {
 		return (boxDataTicket.findElement(By.xpath(XPathPriceRelativeTicket)).getText());
 	}
 	
-	private final static String XPathItemsRelativeTicket = ".//div[@class[contains(.,'card__info')]]/div/div[2]";
+	//private final static String XPathItemsRelativeTicket = ".//div[@class[contains(.,'card__info')]]/div/div[2]";
+	//TODO solicitado data-testid a Carla (11-02-2022)
+	private final static String XPathItemsRelativeTicket = ".//div[@class[contains(.,'layout-row')]]//div[@class[contains(.,'layout-placeholder')] and @class[contains(.,'sg-body-small')]][2]";
 	private int getNumItemsTicketPage(WebElement boxDataTicket) {
 		String textLinea = "0" + boxDataTicket.findElement(By.xpath(XPathItemsRelativeTicket)).getText();
 		return (Integer.valueOf(textLinea.replaceAll("[^0-9]", "")));
