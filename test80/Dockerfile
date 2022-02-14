@@ -10,6 +10,7 @@ RUN unzip test80.zip
 COPY docker-entrypoint.sh /test80/docker-entrypoint.sh
 
 RUN apt-get update && apt-get install -y
+RUN sed 's/TLSv1, TLSv1.1,/ /' etc/java-8-openjdk/security/java.security -i
 	
 WORKDIR /test80
 

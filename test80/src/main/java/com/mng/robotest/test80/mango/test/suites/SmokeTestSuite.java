@@ -44,6 +44,7 @@ public class SmokeTestSuite extends SuiteMaker {
 		testRun.setStorerErrorStep(new ErrorStorer());
 		//testRun.setDriverMaker(new MyDriverMaker());
 		addTestRun(testRun);
+		
 		setParallelMode(ParallelMode.METHODS);
 		if (!isBrowserStack(inputParams.getDriver())) {
 			setThreadCount(3); 

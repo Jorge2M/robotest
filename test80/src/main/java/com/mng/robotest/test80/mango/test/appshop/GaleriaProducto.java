@@ -49,17 +49,7 @@ public class GaleriaProducto {
 	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
 		
 	public GaleriaProducto() {}
-	
-	private DataCtxShop getCtxShForTest() throws Exception {
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
-		DataCtxShop dCtxSh = new DataCtxShop();
-		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
-		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
-		dCtxSh.pais = this.españa;
-		dCtxSh.idioma = this.castellano;
-		return dCtxSh;
-	}
+
 	
 	@Test (
 		groups={"GaleriaProducto", "Canal:mobile,tablet_App:all"}, alwaysRun=true, 
@@ -288,5 +278,16 @@ public class GaleriaProducto {
 		pageGaleriaStpV.selectTallaNoDisponibleArticulo();
 		ModalArticleNotAvailableStpV modalArticleNotAvailableStpV = ModalArticleNotAvailableStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		modalArticleNotAvailableStpV.checkVisibleAvisame();
+	}
+	
+	private DataCtxShop getCtxShForTest() throws Exception {
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
+		DataCtxShop dCtxSh = new DataCtxShop();
+		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
+		dCtxSh.setChannel(inputParamsSuite.getChannel());
+		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+		dCtxSh.pais = this.españa;
+		dCtxSh.idioma = this.castellano;
+		return dCtxSh;
 	}
 }

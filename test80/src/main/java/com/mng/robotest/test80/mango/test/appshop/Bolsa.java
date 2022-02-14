@@ -38,33 +38,6 @@ public class Bolsa {
 	
 	public Bolsa() {}
 
-	private DataCtxShop getCtxShForTest() throws Exception {
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
-		DataCtxShop dCtxSh = new DataCtxShop();
-		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
-		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
-		dCtxSh.pais = PaisGetter.get(PaisShop.España);
-		dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
-		return dCtxSh;
-	}
-
-	public BrowserMobProxy forAllProxy()
-	{
-		BrowserMobProxy proxy = new BrowserMobProxyServer();
-	    try {
-	        String authHeader = "Basic " + Base64.getEncoder().encodeToString("webelement:click".getBytes("utf-8"));
-	        proxy.addHeader("checkauth", authHeader);
-	    }
-	    catch (UnsupportedEncodingException e)
-	    {
-	        System.err.println("the Authorization can not be passed");
-	        e.printStackTrace();
-	    }
-	    proxy.start(0);
-	    return proxy;
-	}
-	
 	@Test (
 		groups={"Bolsa", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
 		description="[Usuario no registrado] Añadir artículo a la bolsa")
@@ -165,5 +138,32 @@ public class Bolsa {
 		secBolsaStpV.clear1erArticuloBolsa(dataBag);								
 		secBolsaStpV.altaArticlosConColores(1, dataBag);
 		secBolsaStpV.click1erArticuloBolsa(dataBag);
+	}
+	
+	private DataCtxShop getCtxShForTest() throws Exception {
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
+		DataCtxShop dCtxSh = new DataCtxShop();
+		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
+		dCtxSh.setChannel(inputParamsSuite.getChannel());
+		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+		dCtxSh.pais = PaisGetter.get(PaisShop.España);
+		dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
+		return dCtxSh;
+	}
+
+	public BrowserMobProxy forAllProxy()
+	{
+		BrowserMobProxy proxy = new BrowserMobProxyServer();
+	    try {
+	        String authHeader = "Basic " + Base64.getEncoder().encodeToString("webelement:click".getBytes("utf-8"));
+	        proxy.addHeader("checkauth", authHeader);
+	    }
+	    catch (UnsupportedEncodingException e)
+	    {
+	        System.err.println("the Authorization can not be passed");
+	        e.printStackTrace();
+	    }
+	    proxy.start(0);
+	    return proxy;
 	}
 }
