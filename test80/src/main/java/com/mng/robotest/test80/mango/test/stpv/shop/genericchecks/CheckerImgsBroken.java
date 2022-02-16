@@ -41,7 +41,7 @@ public class CheckerImgsBroken implements Checker {
 		
 		boolean isCheckOk = 
 				resultadoImgs.getResultado()==OK || 
-				resultadoImgs.maxErroresReachedInAllImages() ||
+				maxErroresReachedInAllImages(resultadoImgs) ||
 				allImagesBrokenAreInWhitelist(resultadoImgs);
 		
 		ChecksTM checks = ChecksTM.getNew();
@@ -56,6 +56,10 @@ public class CheckerImgsBroken implements Checker {
 			}
 		}
 		return true;
+	}
+	
+	private boolean maxErroresReachedInAllImages(ResultadoErrores resultadoImgs) {
+		return (resultadoImgs.getResultado()==ResultadoErrores.Resultado.MAX_ERRORES);
 	}
 	
 	/**
