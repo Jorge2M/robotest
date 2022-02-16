@@ -75,8 +75,8 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 		String nombreMenuInLower = menu1rstLevel.getNombre().toLowerCase();
 		return (
 			getXPathMenusSuperiorLinkVisibles(lineaMenu, sublineaMenu, TypeMenuDesktop.Link) + 
-			"[@href[contains(.,'/" + nombreMenuInLower + 
-			"')] and @href[not(contains(.,'/" + nombreMenuInLower + "/'))]]");
+			"[(@href[contains(.,'/" + nombreMenuInLower +"')] or @href[contains(.,'/rebajas-" + nombreMenuInLower + "')]) and " + 
+			 "@href[not(contains(.,'/" + nombreMenuInLower + "/'))]]");
 	}
 
 	public boolean isCapaMenusLineaVisibleUntil(LineaType lineaId, int maxSeconds) {

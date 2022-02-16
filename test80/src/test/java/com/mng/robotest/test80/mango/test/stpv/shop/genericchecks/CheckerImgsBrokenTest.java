@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import static org.mockito.Matchers.*;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
 
@@ -16,10 +16,10 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores.Resultado;
 
-class CheckerImgsBrokenTest {
+public class CheckerImgsBrokenTest {
 
 	@Test
-	void testCheckImgBrokenInWhiteList() {
+	public void testCheckImgBrokenInWhiteList() {
 		//Given
 		CheckerImgsBroken checkerSpy = getCheckerSpy(new ArrayList<>(Arrays.asList(
 				"https://st.mngbcn.com/images/imgWar/loadingGif/teen.gif")));
@@ -32,7 +32,7 @@ class CheckerImgsBrokenTest {
 	}
 	
 	@Test
-	void testCheckImgBrokenNotInWhiteList() {
+	public void testCheckImgBrokenNotInWhiteList() {
 		//Given
 		CheckerImgsBroken checkerSpy = getCheckerSpy(new ArrayList<>(Arrays.asList(
 				"https://shop.mango.com/images/prueba.gif")));
@@ -45,7 +45,7 @@ class CheckerImgsBrokenTest {
 	}
 	
 	@Test
-	void testCheckImgBrokenMisedInWhiteList() {
+	public void testCheckImgBrokenMisedInWhiteList() {
 		//Given
 		CheckerImgsBroken checkerSpy = getCheckerSpy(new ArrayList<>(Arrays.asList(
 				"https://st.mngbcn.com/images/imgWar/loadingGif/teen.gif",
