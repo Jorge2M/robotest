@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.genericchecks;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -22,32 +23,46 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
 import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 
+import static com.github.jorge2m.testmaker.testreports.html.ResultadoErrores.Resultado.*;
+
 public class CheckerImgsBroken implements Checker {
 
+	private final static int MAX_ERRORES = 1;
+	private final static List<String> WHITELIST = Arrays.asList(
+			"https://st.mngbcn.com/images/imgWar/loadingGif/teen.gif");
+	
+	@Override
 	public ChecksTM check(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-		
-		int maxErrors = 1;
-		ResultadoErrores resultadoImgs = imagesBroken(driver, Channel.desktop, maxErrors);
-		boolean resultadoOK = (resultadoImgs.getResultado() == ResultadoErrores.Resultado.OK);
-		String descripValidac = "No hay ninguna imagen cortada";
-		if (!resultadoOK) {
+		ResultadoErrores resultadoImgs = imagesBroken(driver, Channel.desktop, MAX_ERRORES);
+		String descripValidac = "No hay imágenes cortadas";
+		if (resultadoImgs.getResultado()!=OK) {
 			descripValidac+=resultadoImgs.getlistaLogError().toString();
 		}
 		
-	 	//Sólo mostraremos warning en caso que alguno no se haya mostrado ya un máximo de veces durante el test
-		validations.add(
-			descripValidac,
-			resultadoOK || (resultadoImgs.getResultado()==ResultadoErrores.Resultado.MAX_ERRORES), GenericCheck.ImgsBroken.getLevel());
+		boolean isCheckOk = 
+				resultadoImgs.getResultado()==OK || 
+				resultadoImgs.maxErroresReachedInAllImages() ||
+				allImagesBrokenAreInWhitelist(resultadoImgs);
 		
-		return validations;
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(descripValidac, isCheckOk, GenericCheck.ImgsBroken.getLevel());
+		return checks;
+	}
+	
+	private boolean allImagesBrokenAreInWhitelist(ResultadoErrores resultadoImgs) {
+		for (String img : resultadoImgs.getlistaLogError()) {
+			if (!WHITELIST.contains(img)) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	/**
 	 * @param maxErrors máximo de errores a partir del cual ya no hemos de mostrar warning
 	 * @return recopilación de todos los problemas detectados
 	 */
-	public static ResultadoErrores imagesBroken(WebDriver driver, Channel channel, int maxErrors) {
+	ResultadoErrores imagesBroken(WebDriver driver, Channel channel, int maxErrors) {
 		int maxImages = 500;
 		ITestContext ctx = TestMaker.getTestCase().get().getTestRunParent().getTestNgContext();
 				
@@ -65,7 +80,7 @@ public class CheckerImgsBroken implements Checker {
 	 * @param maxErrors máximo de errores a partir del cual ya no hemos de mostrar warning
 	 * @return recopilación de todos los problemas detectados
 	 */
-	private static ResultadoErrores imagesBroken(WebDriver driver, int maxImages, int maxErrors, ITestContext ctx) {
+	private ResultadoErrores imagesBroken(WebDriver driver, int maxImages, int maxErrors, ITestContext ctx) {
 		ResultadoErrores resultado = new ResultadoErrores();
 		resultado.setResultado(ResultadoErrores.Resultado.OK);
 		ArrayList<String> listaImgBroken = new ArrayList<>();
@@ -152,7 +167,7 @@ public class CheckerImgsBroken implements Checker {
 		return resultado;
 	}
 	
-	private static String getImageSrc(WebElement image) {
+	private String getImageSrc(WebElement image) {
 		String src = "";
 		String data_src = "";
 		src = image.getAttribute("src");
@@ -169,7 +184,7 @@ public class CheckerImgsBroken implements Checker {
 	/**
 	 * Decide si se ha de revisar o no que la imagen esté cortada (hay URLs que cargan un píxel transparente pero que son válidas)
 	 */
-	private static boolean revisionBrokenHttp(final WebElement tagHttp) {
+	private boolean revisionBrokenHttp(final WebElement tagHttp) {
 		boolean broken = true;
 		try {
 			String src = getImageSrc(tagHttp);
@@ -206,7 +221,7 @@ public class CheckerImgsBroken implements Checker {
 		}
 	}
 	
-	private static boolean verifyImgHttpActive(WebElement imgElement) {
+	private boolean verifyImgHttpActive(WebElement imgElement) {
 		boolean imgActive = false;
 		try (CloseableHttpClient client = HttpClientBuilder.create().build()) {
 			HttpGet request = new HttpGet(getImageSrc(imgElement));

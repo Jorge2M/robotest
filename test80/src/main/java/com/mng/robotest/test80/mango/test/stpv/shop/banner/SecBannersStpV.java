@@ -1,6 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.banner;
 
 import java.net.URI;
+import java.util.Arrays;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -20,7 +22,10 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.ManagerBann
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.landing.PageLanding;
 import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.Checker;
 import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.CheckerImgsBroken;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test80.mango.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 
 
 public class SecBannersStpV {
@@ -113,13 +118,17 @@ public class SecBannersStpV {
 	 		"- El número de elementos DOM ha variado (en " + marginElements + " o más) con respecto al original (" + elementosPagPadre + ")",
 	 		(!urlEqual || !elemsEqual), State.Warn); 
 	 	
-	 	int maxErrors = 1;
-		ResultadoErrores resultadoImgs = CheckerImgsBroken.imagesBroken(driver, Channel.desktop, maxErrors);
-		if (resultadoImgs.getResultado() != ResultadoErrores.Resultado.OK) { // Si hay error lo pintamos en la descripción de la validación
-		 	validations.add(
-		 		"No hay imágenes cortadas" + resultadoImgs.getlistaLogError().toString(),
-		 		resultadoImgs.getResultado()==ResultadoErrores.Resultado.MAX_ERRORES, State.Defect);	 
-		}
+	 	Checker checkImagesBroken = Checker.make(GenericCheck.ImgsBroken);
+	 	ChecksTM checksImgs = checkImagesBroken.check(driver);
+	 	validations.add(checksImgs.get(0));
+	 	
+//	 	int maxErrors = 1;
+//		ResultadoErrores resultadoImgs = CheckerImgsBroken.imagesBroken(driver, Channel.desktop, maxErrors);
+//		if (resultadoImgs.getResultado() != ResultadoErrores.Resultado.OK) { // Si hay error lo pintamos en la descripción de la validación
+//		 	validations.add(
+//		 		"No hay imágenes cortadas" + resultadoImgs.getlistaLogError().toString(),
+//		 		resultadoImgs.getResultado()==ResultadoErrores.Resultado.MAX_ERRORES, State.Defect);	 
+//		}
 
 		String urlPagActual = driver.getCurrentUrl();
 		URI uriPagActual = new URI(urlPagActual);
