@@ -18,7 +18,7 @@ public abstract class GetterSecretsFromInputStream implements GetterSecrets {
 			return getCredentials_WithException(secretType);
 		}
 		catch (Exception e) {
-			Log4jTM.getLogger().warn("Problem retrieving Local Secret ", e);
+			Log4jTM.getLogger().info("Problem retrieving Local Secret {} ({})", secretType, e.getCause());
 			return null;
 		}
 	}
