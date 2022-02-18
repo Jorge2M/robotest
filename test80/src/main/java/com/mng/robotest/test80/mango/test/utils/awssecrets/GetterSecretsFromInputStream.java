@@ -26,7 +26,7 @@ public abstract class GetterSecretsFromInputStream implements GetterSecrets {
 	private Secret getCredentials_WithException(SecretType secretType) throws Exception {
 		JAXBContext jaxbContext = JAXBContext.newInstance( Secrets.class );
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-		Secrets secrets = (Secrets) jaxbUnmarshaller.unmarshal(getInputStreamSecrets());		
+		Secrets secrets = (Secrets) jaxbUnmarshaller.unmarshal(getInputStreamSecrets());
 		return getSecret(secrets, secretType);
 	}
 	
