@@ -3,6 +3,8 @@
 
 # Robotest
 
+Confluent Mango Page https://confluence.mango.com/display/TT/Robotest
+
 Project based on Open Source Artifact https://github.com/AubaySpain/testmaker
 
 Based on TestNG / Selenium 4 / Java8+
@@ -53,9 +55,11 @@ Covers the web channels: desktop, mobile, tablet
 
 	docker build -t jorge2m/test80:latest .
 	
-	docker run -d -p 80:8080 --privileged -v "output-library:/test80/output-library" jorge2m/test80:latest
+	docker run -d -p 80:8080 --privileged jorge2m/test80:latest
 	
-	For launch and consult the report the steps are the same that executing exposing a REST API Server.
+	Launch execution is analog to the previous case
+	
+	The html report can be viewed using the "idExecSuite" field returned by the previous POST call and executing the follow url in the browser: localhost/suiterun/{id_testrun}/report
     
 ### Run integration tests 
   
