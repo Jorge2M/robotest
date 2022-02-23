@@ -20,6 +20,7 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.utils.PagoGetter;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.InputParamsBasic;
+import com.github.jorge2m.testmaker.domain.testfilter.TestMethodData;
 import com.github.jorge2m.testmaker.restcontroller.RestApiTM;
 
 @Path("/")
@@ -33,11 +34,35 @@ public class RestApiMango extends RestApiTM {
 		return null;
 	}
 	
-	@POST
+	@Override
+	@GET
+	@Path("/suitetestcases_disabled")
+	@Produces("application/json")
+	public List<TestMethodData> getTestCasesFromSuite(@BeanParam InputParamsBasic inputParams) {
+		return null;
+	}
+	
+	@GET
 	@Path("/suiterun")
 	@Produces("application/json")
 	public Response newSuiteRunMango(@BeanParam InputParamsMango inputParams) {
 		return super.newSuiteRun(inputParams);
+	}
+	
+	@GET
+	@Path("/suite/testcases")
+	@Produces("application/json")
+	public List<TestMethodData> getTestCasesFromSuiteMango(
+			@QueryParam("suite") String suite,
+			@QueryParam("app") String app,
+			@QueryParam("channel") String channel,
+			@QueryParam("driver") String driver) throws Exception {
+		InputParamsMango inputParams = new InputParamsMango();
+		inputParams.setSuite(suite);
+		inputParams.setApp(app);
+		inputParams.setChannel(channel);
+		inputParams.setDriver(driver);
+		return super.getTestCasesFromSuite(inputParams);
 	}
 	
 	@GET

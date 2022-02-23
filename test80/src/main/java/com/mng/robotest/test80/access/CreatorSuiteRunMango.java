@@ -78,6 +78,7 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 			}
 		}
 		catch (IllegalArgumentException e) {
+			e.printStackTrace();
 			System.out.println("Suite Name not valid. Posible values: " + Arrays.asList(Suites.values()));
 		}
 
