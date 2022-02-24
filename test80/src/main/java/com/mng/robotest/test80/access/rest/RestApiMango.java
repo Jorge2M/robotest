@@ -42,7 +42,7 @@ public class RestApiMango extends RestApiTM {
 		return null;
 	}
 	
-	@GET
+	@POST
 	@Path("/suiterun")
 	@Produces("application/json")
 	public Response newSuiteRunMango(@BeanParam InputParamsMango inputParams) {
