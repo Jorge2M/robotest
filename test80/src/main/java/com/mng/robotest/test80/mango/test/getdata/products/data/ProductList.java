@@ -1,8 +1,10 @@
 package com.mng.robotest.test80.mango.test.getdata.products.data;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class ProductList {
 	
@@ -49,5 +51,13 @@ public class ProductList {
 				stockId.substring(6));
 		}
 		return null;
+	}
+	
+	public List<Garment> getAllGarments() {
+		return groups.stream()
+				.map(s -> s.getGarments())
+				.collect(Collectors.toList()).stream()
+				.flatMap(Collection::stream)
+				.collect(Collectors.toList());
 	}
 }

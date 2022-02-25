@@ -74,7 +74,7 @@ public class GetterProducts extends JaxRsClient {
 		this.method = method;
 		this.retryPro = retryPro;
 		this.driver = driver;
-		this.productList = getProductList();
+		this.productList = getProductList(3);
 		this.productFilter = new ProductFilter(productList, app, urlForJavaCall);
 	}
 	
@@ -117,25 +117,44 @@ public class GetterProducts extends JaxRsClient {
 		}
 	}
 	
-	private ProductList getProductList() throws Exception {
+	private ProductList getProductList(int minProducts) throws Exception {
+		ProductList productListReturn = null;
 		int sizeMenus = menusCandidates.size();
 		for (int i=0; i<sizeMenus; i++) {
-			MenuProduct menuCandidate = menusCandidates.get(i);
-			try {
-				ProductList productList = getProductList(menuCandidate);
-				if (productList!=null) {
-					Filter filterStock = new FilterStock();
-					if (!filterStock.filter(productList.getGroups().get(0).getGarments()).isEmpty() ||
-						(i+1) == sizeMenus) {
-						return productList;
-					}
+			boolean lastMenu = (i+1) == sizeMenus;
+			Optional<ProductList> productListMenu = getProductsFromMenu(menusCandidates.get(i), !lastMenu);
+			if (productListMenu.isPresent()) {
+				if (productListReturn==null) {
+					productListReturn = productListMenu.get();
+				} else {
+					productListReturn.addGroups(productListMenu.get().getGroups());
 				}
 			}
-			catch (Exception e) {
-				Log4jTM.getLogger().warn("Problem retriving articles of type " + menuCandidate + " for country " + codigoPaisAlf, e);
+			if (productListReturn.getAllGarments().size()>=minProducts) {
+				break;
 			}
 		}
-		return null;
+		return productListReturn;
+	}
+
+	private Optional<ProductList> getProductsFromMenu(MenuProduct menuCandidate, boolean withStock) {
+		try {
+			ProductList productList = getProductList(menuCandidate);
+			if (productList!=null) {
+				if (hasProductsWithStock(productList) || !withStock) {
+					return Optional.of(productList);
+				}
+			}
+		}
+		catch (Exception e) {
+			Log4jTM.getLogger().warn("Problem retriving articles of type " + menuCandidate + " for country " + codigoPaisAlf, e);
+		}
+		return Optional.empty();
+	}
+	
+	private boolean hasProductsWithStock(ProductList productList) throws Exception {
+		Filter filterStock = new FilterStock();
+		return !filterStock.filter(productList.getGroups().get(0).getGarments()).isEmpty();
 	}
 	
 	private ProductList getProductList(MenuProduct menu) throws Exception {
@@ -173,7 +192,7 @@ public class GetterProducts extends JaxRsClient {
 				method, 
 				false,
 				driver);
-		return getterPro.getProductList();
+		return getterPro.getProductList(3);
 	}
 
 	private String getNameCloudtestFromCookie(WebDriver driver) {

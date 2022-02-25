@@ -107,7 +107,7 @@ public class PageMiCuentaStpV {
 		expected = "Aparece la página de \"Suscripciones\"")
 	private void clickLinkSuscripciones() {
 		pageMiCuenta.clickSuscripciones();
-		PageSuscripcionesStpV.validaIsPage(driver);
+		PageSuscripcionesStpV.create(driver).validaIsPage();
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
@@ -117,7 +117,7 @@ public class PageMiCuentaStpV {
 	
 	public void goToSuscripcionesAndValidateData(Map<String,String> datosRegOk) {
 		goToSuscripciones();
-		PageSuscripcionesStpV.validaIsDataAssociatedToRegister(datosRegOk, driver);
+		PageSuscripcionesStpV.create(driver).validaIsDataAssociatedToRegister(datosRegOk);
 	}
 
 //	public void goToMisPedidos (String usrRegistrado) {

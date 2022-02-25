@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.beans.Pais;
 import com.mng.robotest.test80.mango.test.beans.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
-import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageSuscripciones.idNewsletters;
+import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageSuscripciones.NewsLetter;
 import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.PageMisCompras.TypeTicket;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.PagePrehomeStpV;
@@ -94,16 +94,12 @@ public class MiCuenta implements Serializable {
 		String nombreActual = pageMisDatosStpV.modificaNombreYGuarda();
 		pageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected);
 		pageMisDatosStpV.validaContenidoNombre(nombreActual);
-//		if (dCtxSh.appE==AppEcom.shop) {
 		pageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh.pais);
-//		} else {
-//			pageMiCuentaStpV.goToMisPedidos(dCtxSh.userConnected);
-//		}
 			
 		pageMiCuentaStpV.goToSuscripciones();
-		ArrayList<idNewsletters> listNewsletters = new ArrayList<>();
-		listNewsletters.add(idNewsletters.she);
-		PageSuscripcionesStpV.selectNewslettersAndGuarda(listNewsletters, driver);
+		ArrayList<NewsLetter> listNewsletters = new ArrayList<>();
+		listNewsletters.add(NewsLetter.she);
+		PageSuscripcionesStpV.create(driver).selectNewslettersAndGuarda(listNewsletters);
 		if (dCtxSh.appE!=AppEcom.outlet) {
 			pageMiCuentaStpV.goToDevoluciones();
 			PageDevolucionesStpV.solicitarRegogidaGratuitaADomicilio(driver);
