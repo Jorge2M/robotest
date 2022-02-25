@@ -65,10 +65,6 @@ public class PageGaleriaDevice extends PageGaleria {
 	final static String XPathColoresArticulo = "//div[@class[contains(.,'product-colors')]]";
 	final static String XPathColoresArticuloOutletTablet = "//div[@class[contains(.,'product-list-colors')]]";
 	
-	//TODO cuando suba el Outlet-Desktop-React a PRO podremos igualar este XPath con el XPathColoresArticuloShop (outlet=shop)
-	//final static String XPathArticleWithColorsOutlet = "//div[@class[contains(.,'product-list-info-color')] or @class[contains(.,'product-colors')]]/ancestor::li";	
-	//final static String XPathArticleWithColorsOutletTablet = "//div[@class[contains(.,'product-list-colors')]]/ancestor::li";
-	
 	String getXPathColoresArticle() {
 		if (channel==Channel.tablet && app==AppEcom.outlet) {
 			return XPathColoresArticuloOutletTablet;

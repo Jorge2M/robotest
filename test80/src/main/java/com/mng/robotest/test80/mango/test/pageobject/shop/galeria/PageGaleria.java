@@ -131,13 +131,11 @@ public abstract class PageGaleria extends PageObjTM {
 //	final static String XPathArticuloDesktopBuscador = 
 //		"//div[@class[contains(.,'product-list-item')] or @class[contains(.,'z0q8P')] or @class[contains(.,'_29n6N')]]";
 	final static String XPathArticuloDevice = "//li[@class='product']";
-	final static String XPathArticuloTabletOutlet = "//*[@class[contains(.,'product-list-item')]]";
+	//final static String XPathArticuloTabletOutlet = "//*[@class[contains(.,'product-list-item')]]";
+	final static String XPathArticuloTabletOutlet = XPathArticuloDesktop;
 	private String getXPathArticulo() {
 		if (channel==Channel.desktop) {
-//			if (from==From.menu) {
-				return XPathArticuloDesktop;
-//			}
-//			return XPathArticuloDesktopBuscador;
+			return XPathArticuloDesktop;
 		}
 		else {
 			if (app==AppEcom.outlet && channel==Channel.tablet) {

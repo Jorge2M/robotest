@@ -11,8 +11,8 @@ public class ModalDetalleArticuloDesktop extends ModalDetalleArticulo {
 	private static String XPathModalInfoArticulo = "//*[@data-testid[contains(.,'modal.overlay')]]";
 	private static String XPathAspaForClose = "//*[@data-testid[contains(.,'modal.close')]]";
 	//private static String XPathBuscarTallaTiendaButton = "//div[@id='findInShop']";
-	private static String XPathContainerItem = "//*[@data-testid[contains(.,'modal.container')]]";
-	private static String XPathContainerDescription = XPathContainerItem + "//*[@data-testid[contains(.,'modal.content')]]";
+	//private static String XPathContainerItem = "//*[@data-testid[contains(.,'modal.container')]]";
+	private static String XPathContainerDescription = "//*[@data-testid[contains(.,'modal.content')]]";
 	private static String XPathReferencia = XPathContainerDescription + "//div/div[3]";
 	private static String XPathNombre = XPathContainerDescription + "//div[@class[contains(.,'sg-headline')]]";
 	private static String XPathPrecio = XPathContainerDescription + "//*[@data-testid[contains(.,'product.paidPrice')]]";

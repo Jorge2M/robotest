@@ -12,9 +12,12 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	
 	private final SectionPrendas sectionPrendas;
 	
-	private static String XPathIdTicket = "//*[@data-testid[contains(.,'detail.orderId')]]"; 
+	//private static String XPathIdTicket = "//*[@data-testid[contains(.,'detail.orderId')]]"; 
+	private static String XPathIdTicket = "//*[@data-testid[contains(.,'purchaseNumber')]]";
 	private static String XPathImporte = "//*[@data-testid[contains(.,'detail.totalPrice')]]";
-	private static String XPathDireccionEnvio = XPathIdTicket + "/..";
+	
+	//TODO necesitaría un data-testid
+	private static String XPathDireccionEnvio = XPathIdTicket + "/../../../div[2]//div[@class[contains(.,'sg-body-small')]]";
 	private static String XPathLinkToMisCompras = "//*[@data-testid[contains(.,'detail.goBack')]]";
 	
 	public PageDetalleCompraDesktop(Channel channel, WebDriver driver) {
