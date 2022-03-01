@@ -166,7 +166,7 @@ public class SecMenuLateralDevice extends PageObjTM {
 	public void clickMenuLateral1rstLevel(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel, Pais pais) {
 		Linea linea = pais.getShoponline().getLinea(menu1rstLevel.getLinea());
 		secLineasDevice.selectLinea(linea, menu1rstLevel.getSublinea());
-		if (app==AppEcom.shop) {
+		if (app==AppEcom.shop || app==AppEcom.votf) {
 			unfoldMenuGroup(typeLocator, menu1rstLevel);
 			SeleniumUtils.waitMillis(500);
 		}

@@ -137,7 +137,7 @@ public class SecBolsaStpV {
 
 	final static String tagListaArt = "@TagListaArt";
 	@Step (
-		description="Buscar y dar de alta los siguientes productos en la bolsa:<br>" + tagListaArt, 
+		description="Utilizar el buscador para acceder a la ficha y dar de alta los siguientes productos en la bolsa:<br>" + tagListaArt, 
 		expected="Los productos se dan de alta en la bolsa correctamente",
 		saveNettraffic=SaveWhen.Always)
 	public void altaBolsaArticulos(List<Garment> listParaAlta, DataBag dataBag) throws Exception {
