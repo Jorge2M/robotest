@@ -6,9 +6,9 @@ import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MultivaluedMap;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.test80.access.InputParamsMango;
-import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.conftestmaker.Suites;
+import com.mng.robotest.access.InputParamsMango;
+import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conftestmaker.Suites;
 
 
 public class InputParamsRobotest {

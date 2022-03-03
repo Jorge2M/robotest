@@ -16,8 +16,8 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.domain.suitetree.SuiteBean;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseBean;
-import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.conftestmaker.Suites;
+import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conftestmaker.Suites;
 
 
 public class RobotestRestIT extends ServerRestIT {

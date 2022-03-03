@@ -1,0 +1,26 @@
+package com.mng.robotest.test.utils.testab;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.WebDriver;
+
+import com.github.jorge2m.testmaker.service.testab.TestABactData;
+import com.github.jorge2m.testmaker.service.testab.manager.TestABmanager;
+import com.mng.robotest.conftestmaker.AppEcom;
+import com.github.jorge2m.testmaker.conf.Channel;
+
+public class TestABactive {
+
+	public static void currentTestABsToActivate(Channel channel, AppEcom app, WebDriver driver) throws Exception {
+		List<TestABactData> listTestABsToActivate = new ArrayList<>();
+
+		listTestABsToActivate.add(TestABactData.getNew(TestABGoogleExpImpl.MVPCheckoutDesktop, 0));
+		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.Test_New_Menu_Desktop_PRE, 1));
+		
+		//TODO temporalmente, de cara a BF2021 se ha restaurado en pro el menú antiguo. Poner a 1 Cuando pase BF
+		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.Test_New_Menu_Desktop_PRO, 0));
+		
+		TestABmanager.activateTestsAB(listTestABsToActivate, channel, app, driver);
+	}
+}

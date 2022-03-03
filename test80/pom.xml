@@ -88,7 +88,7 @@
 							<!-- porque luego al construir el assembly copiaremos los .jar de las dependencias al directorio lib/-->
 							<classpathPrefix>lib/</classpathPrefix>
 							<!-- la clase que se ejecuta cuando se ejecute "java -jar test80.jar" -->
-							<mainClass>com.mng.robotest.test80.access.CmdRunTests</mainClass>
+							<mainClass>com.mng.robotest.access.CmdRunTests</mainClass>
 						</manifest>
 						<manifestEntries>
 							<!-- además de los nombres de las dependencias, agregar el directorio config al classpath del Manifest -->

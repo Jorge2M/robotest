@@ -15,6 +15,7 @@ import org.junit.BeforeClass;
 import com.github.jorge2m.testmaker.boundary.remotetest.JaxRsClient;
 import com.github.jorge2m.testmaker.domain.suitetree.SuiteBean;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseBean;
+import com.mng.robotest.access.rest.ServerRest;
 
 public class ServerRestIT {
 	

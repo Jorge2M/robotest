@@ -43,7 +43,7 @@ Covers the web channels: desktop, mobile, tablet
 	
 ### How execute locally exposing REST API Server
 	
-	java -cp test80/test80.jar com.mng.robotest.test80.access.rest.ServerRest -port 80
+	java -cp test80/test80.jar com.mng.robotest.access.rest.ServerRest -port 80
 	
 	curl -X POST localhost/suiterun/ -d "suite=SmokeTest&driver=chrome&channel=desktop&application=shop&asyncexec=false&url=https://shop.mango.com/preHome.faces&tcases=FIC001,BOR001"
 	
