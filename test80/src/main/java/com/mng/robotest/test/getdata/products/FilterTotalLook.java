@@ -3,8 +3,6 @@ package com.mng.robotest.test.getdata.products;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -13,9 +11,9 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.github.jorge2m.testmaker.service.TestMaker;
-import com.mng.robotest.access.InputParamsMango;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.test.getdata.UtilsData;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.products.data.GarmentDetails;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog.Article;
@@ -59,31 +57,19 @@ public class FilterTotalLook implements Filter {
 				.request(MediaType.APPLICATION_JSON)
 				.header("stock-id", stockId);
 		
-		String nameCloudTest = getNameCloudTest();
+		String nameCloudTest = UtilsData.getNameCloudTest();
 		if ("".compareTo(nameCloudTest)!=0) {
 			builder = builder.cookie("cloudtest-name", nameCloudTest);
 		}
 		Response response = builder.get();
-		
+
 		if (response.getStatus()==Response.Status.OK.getStatusCode()) {
 			return response.readEntity(GarmentDetails.class);
+		} else {
+			Log4jTM.getLogger().warn(String.format("Problem in call to %s. Status response %s", webTarget.getUri(), response.getStatus()));
+			return null;
 		}
-		return null;
-	}
-	
-	private static String getNameCloudTest() {
-		try {
-			String initialURL = ((InputParamsMango)TestMaker.getInputParamsSuite()).getUrlBase();
-			Pattern pattern = Pattern.compile(".*://.*name=(.*)");
-			Matcher match = pattern.matcher(initialURL);
-			if (match.find()) {
-				return match.group(1);
-			}
-		}
-		catch (Exception e) {
-			//
-		}
-		return "";
+
 	}
 	
 	private WebTarget getWebTargetTotalLookGarment(GarmentCatalog product) {

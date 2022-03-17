@@ -16,6 +16,7 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.test.getdata.JaxRsClient;
+import com.mng.robotest.test.getdata.UtilsData;
 import com.mng.robotest.test.getdata.garment.data.GarmentFicha;
 
 
@@ -23,7 +24,7 @@ public class GetterGarment extends JaxRsClient {
 
 	private final Client client = getClient();
 	private final String target;
-	private final String nameCloudTest = getNameCloudTest();
+	private final String nameCloudTest = UtilsData.getNameCloudTest();
 	private final String stockId;
 	
 	public GetterGarment(String stockId) {
@@ -85,16 +86,6 @@ public class GetterGarment extends JaxRsClient {
 		} catch (Exception e) {
 			return null;
 		}
-	}
-	
-	private static String getNameCloudTest() {
-		String initialURL = ((InputParamsMango)TestMaker.getInputParamsSuite()).getUrlBase();
-		Pattern pattern = Pattern.compile(".*://.*name=(.*)");
-		Matcher match = pattern.matcher(initialURL);
-		if (match.find()) {
-			return match.group(1);
-		}
-		return "";
 	}
 	
 }

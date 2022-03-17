@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Invocation;
@@ -24,6 +22,7 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.getdata.JaxRsClient;
+import com.mng.robotest.test.getdata.UtilsData;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.products.data.ProductList;
@@ -72,7 +71,7 @@ public class GetterProducts extends JaxRsClient {
 		
 		urlForJavaCall = getUrlForJavaCall(url, driver);
 		urlForBrowserCall = getUrlBase(url);
-		nameCloudTest = getNameCloudTest(url);
+		nameCloudTest = UtilsData.getNameCloudTest(url);
 		switch (app) {
 		case votf:
 			this.saleType = "V";
@@ -136,15 +135,6 @@ public class GetterProducts extends JaxRsClient {
 		} else {
 			return urlTmp + "/";
 		}
-	}
-	
-	private String getNameCloudTest(String initialURL) {
-		Pattern pattern = Pattern.compile(".*://.*name=(.*)");
-		Matcher match = pattern.matcher(initialURL);
-		if (match.find()) {
-			return match.group(1);
-		}
-		return "";
 	}
 	
 	public ProductList getProductList() throws Exception {
