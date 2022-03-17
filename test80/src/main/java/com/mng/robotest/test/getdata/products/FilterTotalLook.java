@@ -72,11 +72,16 @@ public class FilterTotalLook implements Filter {
 	}
 	
 	private static String getNameCloudTest() {
-		String initialURL = ((InputParamsMango)TestMaker.getInputParamsSuite()).getUrlBase();
-		Pattern pattern = Pattern.compile(".*://.*name=(.*)");
-		Matcher match = pattern.matcher(initialURL);
-		if (match.find()) {
-			return match.group(1);
+		try {
+			String initialURL = ((InputParamsMango)TestMaker.getInputParamsSuite()).getUrlBase();
+			Pattern pattern = Pattern.compile(".*://.*name=(.*)");
+			Matcher match = pattern.matcher(initialURL);
+			if (match.find()) {
+				return match.group(1);
+			}
+		}
+		catch (Exception e) {
+			//
 		}
 		return "";
 	}
