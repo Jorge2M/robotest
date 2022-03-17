@@ -20,7 +20,7 @@ import com.mng.robotest.test.generic.ChequeRegalo;
 import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.Menu;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
-import com.mng.robotest.test.getdata.products.data.Garment;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData.Importe;
@@ -87,6 +87,7 @@ public class Compra {
 		FlagsTestCkout FTCkout = new FlagsTestCkout();
 		FTCkout.validaPasarelas = true;  
 		FTCkout.validaPagos = true;
+		FTCkout.forceTestMisCompras = true;
 		FTCkout.emailExist = true; 
 		FTCkout.trjGuardada = true;
 		FTCkout.isEmpl = true;
@@ -126,9 +127,9 @@ public class Compra {
 						.build()
 						.checkout(From.Prehome);
 			} else {
-				List<Garment> listArticlesHome = getArticlesHome(dCtxSh, driver);
-				List<Garment> listArticlesIntimissimi = getArticlesIntimissimi(dCtxSh, driver);
-				List<Garment> listArticles = Arrays.asList(listArticlesHome.get(0), listArticlesIntimissimi.get(0));
+				List<GarmentCatalog> listArticlesHome = getArticlesHome(dCtxSh, driver);
+				List<GarmentCatalog> listArticlesIntimissimi = getArticlesIntimissimi(dCtxSh, driver);
+				List<GarmentCatalog> listArticles = Arrays.asList(listArticlesHome.get(0), listArticlesIntimissimi.get(0));
 				return new BuilderCheckout(dCtxSh, dCtxPago, driver)
 						.pago(españa.getPago("VISA"))
 						.listArticles(listArticles)
@@ -138,7 +139,7 @@ public class Compra {
 		}
 	}
 	
-	private List<Garment> getArticlesHome(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+	private List<GarmentCatalog> getArticlesHome(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		if (dCtxSh.appE==AppEcom.outlet) {
 			return null;
 		}
@@ -154,7 +155,7 @@ public class Compra {
 		return getterProducts.getFiltered(FilterType.Stock);
 	}
 	
-	private List<Garment> getArticlesIntimissimi(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+	private List<GarmentCatalog> getArticlesIntimissimi(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		if (dCtxSh.appE==AppEcom.outlet) {
 			return null;
 		}
@@ -242,6 +243,7 @@ public class Compra {
 		FlagsTestCkout fTCkout = new FlagsTestCkout();
 		fTCkout.validaPasarelas = true;  
 		fTCkout.validaPagos = true;
+		fTCkout.forceTestMisCompras = true;
 		fTCkout.validaPedidosEnManto = true;
 		fTCkout.emailExist = false; 
 		fTCkout.trjGuardada = false;
@@ -369,6 +371,7 @@ public class Compra {
 		FlagsTestCkout FTCkout = new FlagsTestCkout();
 		FTCkout.validaPasarelas = true;  
 		FTCkout.validaPagos = true;
+		FTCkout.forceTestMisCompras = true;
 		FTCkout.validaPedidosEnManto = true;
 		FTCkout.emailExist = true; 
 		FTCkout.trjGuardada = false;

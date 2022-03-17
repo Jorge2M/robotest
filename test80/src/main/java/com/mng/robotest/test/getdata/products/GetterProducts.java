@@ -5,14 +5,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.ws.rs.client.Client;
+import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -23,7 +25,7 @@ import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.getdata.JaxRsClient;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
-import com.mng.robotest.test.getdata.products.data.Garment;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.products.data.ProductList;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
@@ -36,6 +38,7 @@ public class GetterProducts extends JaxRsClient {
 	
 	private final String urlForJavaCall;
 	private final String urlForBrowserCall;
+	private final String nameCloudTest;
 	private final String saleType;
 	private final String codigoPaisAlf;
 	private final String codigoIdiomAlf;
@@ -69,6 +72,7 @@ public class GetterProducts extends JaxRsClient {
 		
 		urlForJavaCall = getUrlForJavaCall(url, driver);
 		urlForBrowserCall = getUrlBase(url);
+		nameCloudTest = getNameCloudTest(url);
 		switch (app) {
 		case votf:
 			this.saleType = "V";
@@ -92,34 +96,36 @@ public class GetterProducts extends JaxRsClient {
 		this.productFilter = new ProductFilter(productList, app, urlForJavaCall);
 	}
 	
-	public List<Garment> getAll() {
-		return productList.getAllGarments();
-		//return productList.getGroups().get(0).getGarments();
+	public List<GarmentCatalog> getAll() {
+		if (productList==null) {
+			return new ArrayList<>();
+		}
+		return productList.getAllGarments(); 
 	}
 	
-	public List<Garment> getFiltered(FilterType filter) throws Exception {
+	public List<GarmentCatalog> getFiltered(FilterType filter) throws Exception {
 		return getFiltered(Arrays.asList(filter));
 	}
 	
-	public List<Garment> getFiltered(List<FilterType> listFilters) throws Exception {
+	public List<GarmentCatalog> getFiltered(List<FilterType> listFilters) throws Exception {
 		return productFilter.getListFiltered(listFilters);
 	}
 	
-	public Optional<Garment> getOneFiltered(FilterType filter) throws Exception {
+	public Optional<GarmentCatalog> getOneFiltered(FilterType filter) throws Exception {
 		return getOneFiltered(Arrays.asList(filter));
 	}
 	
-	public Optional<Garment> getOneFiltered(List<FilterType> listFilters) throws Exception {
+	public Optional<GarmentCatalog> getOneFiltered(List<FilterType> listFilters) throws Exception {
 		return productFilter.getOneFiltered(listFilters);
 	}
 	
 	private String getUrlForJavaCall(String initialURL, WebDriver driver) throws Exception {
-		String cloudtestName = getNameCloudtestFromCookie(driver);
-		if (cloudtestName==null) {
+//		String cloudtestName = getNameCloudtestFromCookie(driver);
+//		if (cloudtestName==null) {
 			return getUrlBase(initialURL);
-		} else {
-			return "https://" + cloudtestName + ".dev.mango.com/";
-		}
+//		} else {
+//			return "https://" + cloudtestName + ".dev.mango.com/";
+//		}
 	}
 	
 	private String getUrlBase(String initialURL) throws Exception {
@@ -132,7 +138,19 @@ public class GetterProducts extends JaxRsClient {
 		}
 	}
 	
-	private ProductList getProductList() throws Exception {
+	private String getNameCloudTest(String initialURL) {
+		Pattern pattern = Pattern.compile(".*://.*name=(.*)");
+		Matcher match = pattern.matcher(initialURL);
+		if (match.find()) {
+			return match.group(1);
+		}
+		return "";
+	}
+	
+	public ProductList getProductList() throws Exception {
+		if (productList!=null) {
+			return productList;
+		}
 		ProductList productListReturn = null;
 		int sizeMenus = menusCandidates.size();
 		for (int i=0; i<sizeMenus; i++) {
@@ -145,7 +163,9 @@ public class GetterProducts extends JaxRsClient {
 					productListReturn.addGroups(productListMenu.get().getGroups());
 				}
 			}
-			if (productListReturn.getAllGarments().size()>=minProducts) {
+			if (productListReturn==null ||
+				productListReturn.getAllGarments()==null ||
+				productListReturn.getAllGarments().size()>=minProducts) {
 				break;
 			}
 		}
@@ -213,16 +233,16 @@ public class GetterProducts extends JaxRsClient {
 		return getterPro.getProductList();
 	}
 
-	private String getNameCloudtestFromCookie(WebDriver driver) {
-		if (driver==null) {
-			return null;
-		}
-		Cookie cookieName = driver.manage().getCookieNamed("cloudtest-name");
-		if (cookieName!=null) {
-			return cookieName.getValue();
-		}
-		return null;
-	}
+//	private String getNameCloudtestFromCookie(WebDriver driver) {
+//		if (driver==null) {
+//			return null;
+//		}
+//		Cookie cookieName = driver.manage().getCookieNamed("cloudtest-name");
+//		if (cookieName!=null) {
+//			return cookieName.getValue();
+//		}
+//		return null;
+//	}
 	
 	private WebTarget getWebTargetProductlist(String urlBase, MenuProduct menu) throws Exception {
 		if ("intimissimi".compareTo(menu.getSeccion())==0) {
@@ -237,15 +257,31 @@ public class GetterProducts extends JaxRsClient {
 			client
 				.target(urlBase.replace("http:", "https:") + "services/productlist/products")
 				.path(getPathPaisIdioma())
-				.path(getLineaPath())
-				.path("sections_" + lineaType.name() + "." + menu.getSeccion() + "_" + lineaType.name())
-				.queryParam("idSubSection", menu.getGaleria() + "_" + lineaType.name())
-				.queryParam("menu", "familia;" + menu.getFamilia())
-				.queryParam("pageNum", pagina)
-				.queryParam("columnsPerRow", "1")
-				.queryParam("rowsPerPage", numProducts);
+				.path(getLineaPath());
 		
-		if ("".compareTo(saleType)!=0) {
+		if (menu.getGaleria()!=null && "".compareTo(menu.getGaleria())!=0) {
+			webTarget = webTarget
+				.path("sections_" + lineaType.name() + "." + menu.getSeccion() + "_" + lineaType.name());
+		} else {
+			webTarget = webTarget
+				.path("sections_" + lineaType.name() + "." + menu.getSeccion());			
+		}
+		
+		if (menu.getFamilia()!=null && "".compareTo(menu.getFamilia())!=0) {
+			webTarget = webTarget
+				.queryParam("idSubSection", menu.getGaleria() + "_" + lineaType.name())
+				.queryParam("menu", "familia;" + menu.getFamilia());
+		}
+		
+		webTarget = webTarget
+			.queryParam("pageNum", pagina)
+			.queryParam("columnsPerRow", "1")
+			.queryParam("rowsPerPage", numProducts);
+		
+		if ("".compareTo(nameCloudTest)!=0) {
+			webTarget = webTarget.queryParam("name", nameCloudTest);
+		}
+		if ("".compareTo(saleType)!=0) { 
 			webTarget = webTarget.queryParam("saleType", saleType);
 		}
 		return webTarget;
@@ -281,7 +317,14 @@ public class GetterProducts extends JaxRsClient {
 	
 	private ProductList getProductsFromApiRest(MenuProduct menu) throws Exception {
 		WebTarget webTarget = getWebTargetProductlist(urlForJavaCall, menu);
-		Response response = webTarget.request(MediaType.APPLICATION_JSON).get();
+		Invocation.Builder builder = webTarget
+				.request(MediaType.APPLICATION_JSON);
+		
+		if ("".compareTo(nameCloudTest)!=0) {
+			builder = builder.cookie("cloudtest-name", nameCloudTest);
+		}
+		Response response = builder.get();
+		
 		if (response.getStatus()==Response.Status.OK.getStatusCode()) {
 			String productsJson = response.readEntity(String.class);
 			if (productsJson!=null && productsJson.contains("garments")) {

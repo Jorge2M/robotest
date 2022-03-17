@@ -19,7 +19,7 @@ import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.getdata.products.data.Garment;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 import com.mng.robotest.test.pageobject.shop.ficha.*;
@@ -71,7 +71,7 @@ public class PageFichaArtStpV {
 		return this.modEnvioYdevol;
 	}
 	
-	public void validateIsFichaAccordingTypeProduct(Garment product) throws Exception {			
+	public void validateIsFichaAccordingTypeProduct(GarmentCatalog product) throws Exception {			
 		validateIsFichaArtDisponible(product.getGarmentId(), 3);
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.SEO, 

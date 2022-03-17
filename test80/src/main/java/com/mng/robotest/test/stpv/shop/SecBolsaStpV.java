@@ -21,7 +21,7 @@ import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
-import com.mng.robotest.test.getdata.products.data.Garment;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test.pageobject.shop.bolsa.ValidatorContentBolsa;
 import com.mng.robotest.test.pageobject.shop.bolsa.LineasArtBolsa.DataArtBolsa;
@@ -113,7 +113,7 @@ public class SecBolsaStpV {
 
 	public void altaArticlosConColores(int numArticulos, DataBag dataBag) throws Exception {
 		GetterProducts getterProducts = new GetterProducts.Builder(pais.getCodigo_alf(), app, driver).build();
-		List<Garment> listParaAlta = getterProducts
+		List<GarmentCatalog> listParaAlta = getterProducts
 				.getFiltered(FilterType.ManyColors)
 				.subList(0, numArticulos);
 		
@@ -125,7 +125,7 @@ public class SecBolsaStpV {
 	 * @param listParaAlta lista de artículos que hay que dar de alta
 	 * @param listArtEnBolsa lista total de artículos que hay en la bolsa (y en la que se añadirán los nuevos)
 	 */
-	public void altaListaArticulosEnBolsa(List<Garment> listArticlesForAdd, DataBag dataBag) throws Exception {
+	public void altaListaArticulosEnBolsa(List<GarmentCatalog> listArticlesForAdd, DataBag dataBag) throws Exception {
 		if (listArticlesForAdd!=null && !listArticlesForAdd.isEmpty()) {
 			altaBolsaArticulos(listArticlesForAdd, dataBag);
 			validaAltaArtBolsa(dataBag);
@@ -140,10 +140,10 @@ public class SecBolsaStpV {
 		description="Utilizar el buscador para acceder a la ficha y dar de alta los siguientes productos en la bolsa:<br>" + tagListaArt, 
 		expected="Los productos se dan de alta en la bolsa correctamente",
 		saveNettraffic=SaveWhen.Always)
-	public void altaBolsaArticulos(List<Garment> listParaAlta, DataBag dataBag) throws Exception {
+	public void altaBolsaArticulos(List<GarmentCatalog> listParaAlta, DataBag dataBag) throws Exception {
 		includeListaArtInTestCaseDescription(listParaAlta);
 		for (int i=0; i<listParaAlta.size(); i++) {
-			Garment artTmp = listParaAlta.get(i);
+			GarmentCatalog artTmp = listParaAlta.get(i);
 			ArticuloScreen articulo = UtilsMangoTest.addArticuloBolsa(artTmp, app, channel, driver);
 			if (artTmp.isVale()) {
 				articulo.setVale(artTmp.getValePais());
@@ -158,11 +158,11 @@ public class SecBolsaStpV {
 		}
 	}
 
-	private void includeListaArtInTestCaseDescription(List<Garment> listParaAlta) {
+	private void includeListaArtInTestCaseDescription(List<GarmentCatalog> listParaAlta) {
 		//Obtener el literal con la lista de artículos a dar de alta en la bolsa
 		String listaArtStr = "";
 		for (int i=0; i<listParaAlta.size(); i++) {
-			Garment artTmp = listParaAlta.get(i);
+			GarmentCatalog artTmp = listParaAlta.get(i);
 			listaArtStr = listaArtStr + artTmp.getGarmentId();
 			if (artTmp.isVale()) {
 				listaArtStr = listaArtStr + " (le aplica el vale " + artTmp.getValePais().getCodigoVale() + ")";

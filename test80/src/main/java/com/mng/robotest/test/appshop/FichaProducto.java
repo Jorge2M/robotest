@@ -19,7 +19,7 @@ import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
-import com.mng.robotest.test.getdata.products.data.Garment;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.pageobject.shop.PagePrehome;
@@ -74,7 +74,7 @@ public class FichaProducto {
 				.build();
 		
 		List<FilterType> filterOnline = Arrays.asList(FilterType.Online);
-		Optional<Garment> articleOnline = getterProducts.getOneFiltered(filterOnline);
+		Optional<GarmentCatalog> articleOnline = getterProducts.getOneFiltered(filterOnline);
 		if (!articleOnline.isPresent()) {
 			throw new NotFoundException("Not found article of type " + filterOnline);
 		}
@@ -82,7 +82,7 @@ public class FichaProducto {
 		pageFichaStpv.checkLinkDispTiendaInvisible();
 		
 		List<FilterType> filterNoOnlineWithColors = Arrays.asList(FilterType.NoOnline, FilterType.ManyColors); 
-		Optional<Garment> articleNoOnlineWithColors = getterProducts.getOneFiltered(filterNoOnlineWithColors);
+		Optional<GarmentCatalog> articleNoOnlineWithColors = getterProducts.getOneFiltered(filterNoOnlineWithColors);
 		if (!articleNoOnlineWithColors.isPresent()) {
 			List<String> filtersLabels = filterNoOnlineWithColors.stream().map(Object::toString).collect(Collectors.toList());
 			throw new NotFoundException("Not found article with filters " + String.join(",", filtersLabels));
@@ -123,7 +123,7 @@ public class FichaProducto {
 
 		AccesoStpV.oneStep(dCtxSh, false, driver);
 		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
-		Optional<Garment> articleWithTotalLook = getterProducts.getOneFiltered(FilterType.TotalLook);
+		Optional<GarmentCatalog> articleWithTotalLook = getterProducts.getOneFiltered(FilterType.TotalLook);
 		SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
 		if (!articleWithTotalLook.isPresent()) {
 			throw new NotFoundException("Not found article of type " + FilterType.TotalLook);

@@ -3705,7 +3705,7 @@ where
 <telefono>3101234567</telefono>
 <dni>8001984561</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<miscompras>true</miscompras>
+<miscompras>true</miscompras>	
 <moneda>%@ COP</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"></tienda>

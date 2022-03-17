@@ -8,7 +8,7 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.getdata.products.GetterProducts;
-import com.mng.robotest.test.getdata.products.data.Garment;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test.stpv.shop.buscador.SecBuscadorStpV;
 import com.mng.robotest.test.stpv.shop.home.PageHomeMarcasStpV;
@@ -32,7 +32,7 @@ public class Buscador {
 		(new PageHomeMarcasStpV(dCtxSh.channel, dCtxSh.appE, driver)).validateIsPageWithCorrectLineas(dCtxSh.pais);
 		
 		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
-		Garment product = getterProducts.getAll().get(0);
+		GarmentCatalog product = getterProducts.getAll().get(0);
 		
 		secBuscadorStpV.searchArticulo(product, dCtxSh.pais);
 		secBuscadorStpV.busquedaCategoriaProducto(categoriaProdExistente, true);

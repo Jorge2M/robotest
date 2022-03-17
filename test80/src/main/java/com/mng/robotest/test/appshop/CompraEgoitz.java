@@ -18,7 +18,7 @@ import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test.getdata.products.data.Color;
-import com.mng.robotest.test.getdata.products.data.Garment;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.products.data.Size;
 import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow;
 import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow.From;
@@ -42,7 +42,7 @@ public class CompraEgoitz {
 		//Data For Test
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest(pais, idioma);
-		List<Garment> listArticles = getListArticles();
+		List<GarmentCatalog> listArticles = getListArticles();
 		
 		//Access and add articles
 		AccesoStpV.oneStep(dCtxSh, false, driver);
@@ -79,13 +79,13 @@ public class CompraEgoitz {
 		return dCtxSh;
 	}
 	
-	private List<Garment> getListArticles() throws Exception {
-		List<Garment> listReturn = new ArrayList<>();
+	private List<GarmentCatalog> getListArticles() throws Exception {
+		List<GarmentCatalog> listReturn = new ArrayList<>();
 		
 		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		String domain = inputParamsSuite.getDnsUrlAcceso();
 		
-		Garment garment1 = new Garment("87092508");
+		GarmentCatalog garment1 = new GarmentCatalog("87092508");
 		garment1.setUrlFicha(domain + "/es/mujer/braguita-brasilena-estilo-anos-80-confeccionada-en-encaje-forro-interior-100-algodon_91267934.html?c=99");
 		garment1.setStock(1000);
 		Color color1 = new Color();
@@ -98,7 +98,7 @@ public class CompraEgoitz {
 		garment1.setColors(Arrays.asList(color1));
 		listReturn.add(garment1);
 
-		Garment garment2 = new Garment("87092508");
+		GarmentCatalog garment2 = new GarmentCatalog("87092508");
 		garment2.setUrlFicha(domain + "/es/mujer/culotte-efecto-pantalon-corto-en-suave-y-liviano-algodon-natural--ideal-para-llevar-todos-los-dias_99483318.html?c=01");
 		garment2.setStock(1000);
 		Color color2 = new Color();

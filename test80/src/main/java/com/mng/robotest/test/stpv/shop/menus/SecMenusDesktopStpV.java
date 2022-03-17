@@ -22,8 +22,8 @@ import com.mng.robotest.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.generic.stackTrace;
 import com.mng.robotest.test.getdata.products.GetterProducts;
-import com.mng.robotest.test.getdata.products.data.Garment;
-import com.mng.robotest.test.getdata.products.data.Garment.Article;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog.Article;
 import com.mng.robotest.test.pageobject.shop.AllPages;
 import com.mng.robotest.test.pageobject.shop.bannersNew.ManagerBannersScreen;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterCollection;
@@ -424,7 +424,7 @@ public class SecMenusDesktopStpV {
 			"Aparece la ficha del producto " + tagRefArticle)
 	public static void checkURLRedirectFicha(Pais pais, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
-		Garment product = getterProducts.getAll().get(0);
+		GarmentCatalog product = getterProducts.getAll().get(0);
 		Article article = product.getArticleWithMoreStock();
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagRefArticle, article.getGarmentId());
 		TestMaker.getCurrentStepInExecution().replaceInExpected(tagRefArticle, article.getGarmentId());

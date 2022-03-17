@@ -19,7 +19,7 @@ import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test.getdata.products.data.Color;
-import com.mng.robotest.test.getdata.products.data.Garment;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.products.data.Size;
 import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow;
 import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow.From;
@@ -53,7 +53,7 @@ public class CompraLuque {
 		//Data For Test
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest(pais, idioma);
-		List<Garment> listArticles = getListArticles(pais);
+		List<GarmentCatalog> listArticles = getListArticles(pais);
 		
 		//Access and add articles
 		AccesoStpV.oneStep(dCtxSh, false, driver);
@@ -93,7 +93,7 @@ public class CompraLuque {
 		return dCtxSh;
 	}
 	
-	private List<Garment> getListArticles(Pais pais) {
+	private List<GarmentCatalog> getListArticles(Pais pais) {
 		PaisShop paisShop = PaisShop.getPais(pais.getCodigo_pais());
 		switch (paisShop) {
 		case USA:
@@ -120,14 +120,14 @@ public class CompraLuque {
 		return PaisGetter.get(listaPaises.get(randomNumber));
 	}
 	
-	private List<Garment> getArticles() {
-		List<Garment> listReturn = new ArrayList<>();
+	private List<GarmentCatalog> getArticles() {
+		List<GarmentCatalog> listReturn = new ArrayList<>();
 		
 		Random rn = new Random();
 		int randomNumber = rn.nextInt(2);
 
 		if (randomNumber>=0) {
-			Garment garment1 = new Garment("87092508");
+			GarmentCatalog garment1 = new GarmentCatalog("87092508");
 			garment1.setStock(1000);
 			Color color1 = new Color();
 			color1.setId("99");
@@ -141,7 +141,7 @@ public class CompraLuque {
 		}
 		
 		if (randomNumber>=1) {
-			Garment garment1 = new Garment("87092508");
+			GarmentCatalog garment1 = new GarmentCatalog("87092508");
 			garment1.setStock(1000);
 			Color color1 = new Color();
 			color1.setId("99");

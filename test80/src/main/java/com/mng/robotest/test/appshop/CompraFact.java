@@ -23,7 +23,7 @@ import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.generic.UtilsMangoTest;
-import com.mng.robotest.test.getdata.products.data.Garment;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.stpv.navigations.manto.PedidoNavigations;
@@ -126,7 +126,7 @@ public class CompraFact implements Serializable {
 		//TestAB.activateTestABcheckoutMovilEnNPasos(0, dCtxSh, dFTest.driver);
 
 		int maxArticlesAwayVale = 3;
-		List<Garment> listArticles = UtilsTestMango.getArticlesForTest(dCtxSh, maxArticlesAwayVale, this.testVale, driver);
+		List<GarmentCatalog> listArticles = UtilsTestMango.getArticlesForTest(dCtxSh, maxArticlesAwayVale, this.testVale, driver);
 		
 		if (!manyArticles) {
 			listArticles = Arrays.asList(listArticles.get(0));
@@ -140,6 +140,7 @@ public class CompraFact implements Serializable {
 		FlagsTestCkout fTCkout = new FlagsTestCkout();
 		fTCkout.validaPasarelas = true;  
 		fTCkout.validaPagos = true;
+		fTCkout.forceTestMisCompras = true;
 		fTCkout.validaPedidosEnManto = true;
 		fTCkout.emailExist = true; 
 		fTCkout.trjGuardada = false;

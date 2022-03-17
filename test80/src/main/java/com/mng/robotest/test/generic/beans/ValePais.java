@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.ValesData.Campanya;
-import com.mng.robotest.test.getdata.products.data.Garment;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 
 @XmlRootElement
 public class ValePais {
@@ -22,14 +22,14 @@ public class ValePais {
 	boolean filterCal = true;
 	Calendar fechaInicio;
 	Calendar fechaFin;
-	List<Garment> listExamplesArtSiAplica = new ArrayList<>();
-	List<Garment> listExamplesArtNoAplica = new ArrayList<>();
+	List<GarmentCatalog> listExamplesArtSiAplica = new ArrayList<>();
+	List<GarmentCatalog> listExamplesArtNoAplica = new ArrayList<>();
 	Campanya campanya;
 
-	public List<Garment> getArticlesFromVale() {
-		List<Garment> listArticlesReturn = new ArrayList<>();
+	public List<GarmentCatalog> getArticlesFromVale() {
+		List<GarmentCatalog> listArticlesReturn = new ArrayList<>();
 		listArticlesReturn.addAll(getListExamplesArtNoAplica());
-		for (Garment articleStock : getListExamplesArtSiAplica()) {
+		for (GarmentCatalog articleStock : getListExamplesArtSiAplica()) {
 			articleStock.setValePais(this);
 			listArticlesReturn.add(articleStock);
 		}
@@ -41,11 +41,11 @@ public class ValePais {
 		return this.activo;
 	}
 
-	public List<Garment> getListExamplesArtSiAplica() {
+	public List<GarmentCatalog> getListExamplesArtSiAplica() {
 		return this.listExamplesArtSiAplica;
 	}
 
-	public List<Garment> getListExamplesArtNoAplica() {
+	public List<GarmentCatalog> getListExamplesArtNoAplica() {
 		return this.listExamplesArtNoAplica;
 	}
 

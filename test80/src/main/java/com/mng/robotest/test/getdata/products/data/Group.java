@@ -5,7 +5,7 @@ import java.util.List;
 public class Group {
 
 	private boolean showSeparator;
-	private List<Garment> garments;
+	private List<GarmentCatalog> garments;
 	
 	public boolean isShowSeparator() {
 		return showSeparator;
@@ -13,10 +13,10 @@ public class Group {
 	public void setShowSeparator(boolean showSeparator) {
 		this.showSeparator = showSeparator;
 	}
-	public List<Garment> getGarments() {
+	public List<GarmentCatalog> getGarments() {
 		return garments;
 	}
-	public void setGarments(List<Garment> garments) {
+	public void setGarments(List<GarmentCatalog> garments) {
 		this.garments = garments;
 	}
 	

@@ -20,13 +20,14 @@ public class PagosPaisesSuite extends SuiteMaker {
 		//TODO eliminar las que ya no son necesrias después de la elminia
 		V1(false, false, false, false),
 		V2(true, false, false, false),
-		V3(true, true, false, false),
-		V4(true, true, true, false),
+		V3(true, true, false, true),
+		V4(true, true, true, true),
 		V5(false, false, false, false),
 		V6(true, false, false, false),
 		V7(true, true, false, false),
-		V8(true, true, true, false),
-		V9(true, true, false, true);
+		V8(true, true, true, true),
+		V9(true, true, false, true),
+		V10(true, true, false, false);
 		
 		boolean validaPasarelas;
 		boolean validaPagos;

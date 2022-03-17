@@ -12,7 +12,9 @@ import com.mng.robotest.domains.apiproduct.domain.entity.Size;
 import com.mng.robotest.domains.apiproduct.domain.entity.WashingRule;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -36,6 +38,7 @@ public class ProductRedis implements Serializable {
     List<String> washingRules;
     List<ColorRedis> colors; 
     List<RelatedModelRedis> relatedModels;
+    List<LabelRedis> labels;
     @JsonIgnore String countryId; 
     @JsonIgnore String languageId;
 
@@ -317,6 +320,19 @@ public class ProductRedis implements Serializable {
 	public List<ColorRedis> getColors() {
 		return colors;
 	}
+	
+	public List<ColorRedis> getColorsWithStock() {
+		List<ColorRedis> listColorsReturn = new ArrayList<>();
+		for (ColorRedis color : getColors()) {
+			for (SizeRedis size : color.getSizes()) {
+				if (size.getStockDetails()!=null) {
+					listColorsReturn.add(color);
+					break;
+				}
+			}
+		}
+		return listColorsReturn;
+	}
 
 	public void setColors(List<ColorRedis> colors) {
 		this.colors = colors;
@@ -324,6 +340,15 @@ public class ProductRedis implements Serializable {
 
 	public List<RelatedModelRedis> getRelatedModels() {
 		return relatedModels;
+	}
+	
+	public List<RelatedModelRedis> getRelatedModels(String type) {
+		if (getRelatedModels()==null) {
+			return null;
+		}
+		return getRelatedModels().stream()
+				.filter(s -> s.getType().compareTo(type)==0)
+				.collect(Collectors.toList()); 
 	}
 
 	public void setRelatedModels(List<RelatedModelRedis> relatedModels) {
@@ -344,6 +369,23 @@ public class ProductRedis implements Serializable {
 
 	public void setLanguageId(String languageId) {
 		this.languageId = languageId;
+	}
+
+	public List<LabelRedis> getLabels() {
+		return labels;
+	}
+	
+	public Optional<LabelRedis> getLabel(String id) {
+		if (getLabels()!=null) {
+			return getLabels().stream()
+					.filter(s -> s.getId().compareTo(id)==0)
+					.findFirst();
+		}
+		return Optional.empty();
+	}
+
+	public void setLabels(List<LabelRedis> labels) {
+		this.labels = labels;
 	}
 
 }

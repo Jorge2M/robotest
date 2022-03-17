@@ -14,7 +14,7 @@ import com.mng.robotest.test.generic.beans.FactoryVale;
 import com.mng.robotest.test.generic.beans.ValePais;
 import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
-import com.mng.robotest.test.getdata.products.data.Garment;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 
 
 public class UtilsTestMango {
@@ -110,11 +110,11 @@ public class UtilsTestMango {
 	}
 	
 	static int maxArticles = 99;
-	public static List<Garment> getArticlesForTest(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+	public static List<GarmentCatalog> getArticlesForTest(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		return (getArticlesForTestDependingVale(dCtxSh, maxArticles, driver));
 	}
 	
-	public static List<Garment> getArticlesForTest(DataCtxShop dCtxSh, int maxArticlesAwayVale, boolean withValeTest, WebDriver driver) 
+	public static List<GarmentCatalog> getArticlesForTest(DataCtxShop dCtxSh, int maxArticlesAwayVale, boolean withValeTest, WebDriver driver) 
 	throws Exception {
 		ValePais valeTest = null;
 		if (withValeTest) {
@@ -125,13 +125,13 @@ public class UtilsTestMango {
 		return (getArticlesForTestDependingVale(dCtxSh, maxArticlesAwayVale, driver));
 	}
 	
-	public static List<Garment> getArticlesForTestDependingVale(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+	public static List<GarmentCatalog> getArticlesForTestDependingVale(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		return (getArticlesForTestDependingVale(dCtxSh, maxArticles, driver));
 	}
 	
-	public static List<Garment> getArticlesForTestDependingVale(DataCtxShop dCtxSh, int maxArticlesAwayVale, WebDriver driver) 
+	public static List<GarmentCatalog> getArticlesForTestDependingVale(DataCtxShop dCtxSh, int maxArticlesAwayVale, WebDriver driver) 
 	throws Exception {
-		List<Garment> listProducts;
+		List<GarmentCatalog> listProducts;
 		if (dCtxSh.vale!=null) {
 			listProducts = dCtxSh.vale.getArticlesFromVale();
 			if (listProducts.size()>0) {
@@ -146,7 +146,7 @@ public class UtilsTestMango {
 		listProducts = getterProducts.getFiltered(FilterType.Stock);
 		
 		if (dCtxSh.vale!=null) {
-			for (Garment product : listProducts) {
+			for (GarmentCatalog product : listProducts) {
 				product.setValePais(dCtxSh.vale);
 			}
 		}

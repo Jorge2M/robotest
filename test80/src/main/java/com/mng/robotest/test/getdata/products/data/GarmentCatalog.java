@@ -4,10 +4,14 @@ import java.util.List;
 
 import com.mng.robotest.test.generic.beans.ValePais;
 
-public class Garment {
+public class GarmentCatalog {
 
 	private String garmentId;
+	
+	private String name;
+	private String shortDescription;
 	private int stock;
+	private String genre;
 	private List<Color> colors;
 	private Labels labels;
 	private AnalyticsEventsData analyticsEventsData;
@@ -15,8 +19,8 @@ public class Garment {
 	private ValePais valePais = null;
 	private String urlFicha;
 
-	public Garment() {}
-	public Garment(String garmentId) {
+	public GarmentCatalog() {}
+	public GarmentCatalog(String garmentId) {
 		this.garmentId = garmentId;
 	}
 	
@@ -81,6 +85,15 @@ public class Garment {
 	public List<Color> getColors() {
 		return colors;
 	}
+	public Color getColor(String id) {
+		for (Color color : getColors()) {
+			if (id.compareTo(color.getId())==0) {
+				return color;
+			}
+		}
+		return null;
+	}
+	
 	public void setColors(List<Color> colors) {
 		this.colors = colors;
 	}
@@ -151,5 +164,23 @@ public class Garment {
 		return "Garment [garmentId=" + garmentId + ", stock=" + stock + ", colors=" + colors + ", labels=" + labels
 				+ ", analyticsEventsData=" + analyticsEventsData + ", valePais=" + valePais + ", urlFicha=" + urlFicha
 				+ "]";
+	}
+	public String getGenre() {
+		return genre;
+	}
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getShortDescription() {
+		return shortDescription;
+	}
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
 	}
 }

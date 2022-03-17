@@ -33,7 +33,7 @@ import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.generic.beans.ValePais;
-import com.mng.robotest.test.getdata.products.data.Garment;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.pageobject.shop.checkout.DataDireccion;
 import com.mng.robotest.test.pageobject.shop.checkout.Page1EnvioCheckoutMobil;
 import com.mng.robotest.test.pageobject.shop.checkout.DataDireccion.DataDirType;
@@ -63,12 +63,12 @@ public class CheckoutFlow {
 	private final DataCtxPago dCtxPago;
 	private final Pago pago;
 	private final List<Pais> finalCountrys;
-	private final List<Garment> listArticles;
+	private final List<GarmentCatalog> listArticles;
 	
 	private SecBolsaStpV secBolsaStpV;
 	private final PageCheckoutWrapperStpV pageCheckoutWrapperStpV;
 	
-	private CheckoutFlow(WebDriver driver, DataCtxShop dCtxSh, DataCtxPago dCtxPago, Pago pago, List<Garment> listArticles, List<Pais> finalCountrys) {
+	private CheckoutFlow(WebDriver driver, DataCtxShop dCtxSh, DataCtxPago dCtxPago, Pago pago, List<GarmentCatalog> listArticles, List<Pais> finalCountrys) {
 		this.driver = driver;
 		this.finalCountrys = finalCountrys;
 		this.listArticles = listArticles;
@@ -301,8 +301,9 @@ public class CheckoutFlow {
 				if (pagoToTest.getTypePago()!=TypePago.TpvVotf) {
 					pageResultPagoStpV.validateIsPageOk(dCtxPago, dCtxSh);
 					if (dCtxSh.channel!=Channel.mobile && !dCtxPago.getFTCkout().isChequeRegalo) {
-//						if (testMisCompras()) {
+						if (dCtxPago.getFTCkout().forceTestMisCompras) {
 							pageResultPagoStpV.selectLinkMisComprasAndValidateCompra(dCtxPago, dCtxSh);
+						}
 //						} else {
 //							pageResultPagoStpV.selectLinkPedidoAndValidatePedido(dataPedido);
 //						}
@@ -473,7 +474,7 @@ public class CheckoutFlow {
 		private Pais country = PaisGetter.get(PaisShop.España);
 		private IdiomaPais idioma = country.getListIdiomas().get(0);
 		private ValePais vale = null;
-		private List<Garment> listArticles = null;
+		private List<GarmentCatalog> listArticles = null;
 		private List<Pais> finalCountrys = null;
 		private Pago pago = null;
 		
@@ -519,7 +520,7 @@ public class CheckoutFlow {
 			this.vale = vale;
 			return this;
 		}
-		public BuilderCheckout listArticles(List<Garment> listArticles) {
+		public BuilderCheckout listArticles(List<GarmentCatalog> listArticles) {
 			this.listArticles = listArticles;
 			return this;
 		}

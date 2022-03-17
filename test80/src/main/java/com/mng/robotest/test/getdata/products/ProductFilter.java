@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.getdata.products.data.Garment;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.products.data.ProductList;
 
 
@@ -24,15 +24,15 @@ public class ProductFilter {
 		this.urlForJavaCall = urlForJavaCall;
 	}
 	
-	private List<Garment> getAll() {
+	private List<GarmentCatalog> getAll() {
 		return productList.getGroups().stream()
 				.map(g -> g.getGarments())
 				.flatMap(Collection::stream)
 				.collect(Collectors.toList());
 	}
 	
-	public Optional<Garment> getOneFiltered(List<FilterType> filters) throws Exception {
-		List<Garment> listFiltered = getAll();
+	public Optional<GarmentCatalog> getOneFiltered(List<FilterType> filters) throws Exception {
+		List<GarmentCatalog> listFiltered = getAll();
 		for (int i=0; i<filters.size(); i++) {
 			FilterType filterType = filters.get(i);
 			Filter filter = factoryFilter(filterType);
@@ -47,8 +47,8 @@ public class ProductFilter {
 		return Optional.empty();
 	}
 	
-	public List<Garment> getListFiltered(List<FilterType> filters) throws Exception {
-		List<Garment> listFiltered = getAll();
+	public List<GarmentCatalog> getListFiltered(List<FilterType> filters) throws Exception {
+		List<GarmentCatalog> listFiltered = getAll();
 		for (FilterType filterType : filters) {
 			Filter filter = factoryFilter(filterType);
 			listFiltered = filter.filter(listFiltered);

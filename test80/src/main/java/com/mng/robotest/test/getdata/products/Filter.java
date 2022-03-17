@@ -3,13 +3,13 @@ package com.mng.robotest.test.getdata.products;
 import java.util.List;
 import java.util.Optional;
 
-import com.mng.robotest.test.getdata.products.data.Garment;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 
 public interface Filter {
 
-	public List<Garment> filter(List<Garment> garments) throws Exception;
+	public List<GarmentCatalog> filter(List<GarmentCatalog> garments) throws Exception;
 	
-	public default Optional<Garment> getOne(List<Garment> garments) throws Exception {
+	public default Optional<GarmentCatalog> getOne(List<GarmentCatalog> garments) throws Exception {
 		return filter(garments).stream().findFirst();
 	}
 	

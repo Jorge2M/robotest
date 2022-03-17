@@ -25,7 +25,7 @@ import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.DataMango;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.getdata.products.data.Garment;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.jdbc.dao.RebajasPaisDAO;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.ficha.PageFicha;
@@ -69,7 +69,7 @@ public class UtilsMangoTest {
 		}
 	}	
 
-	public static ArticuloScreen addArticuloBolsa(Garment selArticulo, AppEcom app, Channel channel, WebDriver driver) {
+	public static ArticuloScreen addArticuloBolsa(GarmentCatalog selArticulo, AppEcom app, Channel channel, WebDriver driver) {
 		ArticuloScreen articulo = ArticuloNavigations.selectArticuloTallaColorByRef(selArticulo, app, channel, driver);
 		PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
 		pageFicha.clickAnadirBolsaButtonAndWait(); 

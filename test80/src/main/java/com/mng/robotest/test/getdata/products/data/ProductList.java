@@ -53,7 +53,7 @@ public class ProductList {
 		return null;
 	}
 	
-	public List<Garment> getAllGarments() {
+	public List<GarmentCatalog> getAllGarments() {
 		return groups.stream()
 				.map(s -> s.getGarments())
 				.collect(Collectors.toList()).stream()

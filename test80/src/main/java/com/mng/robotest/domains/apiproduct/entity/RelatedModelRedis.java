@@ -10,6 +10,7 @@ public class RelatedModelRedis implements Serializable {
 	
 	private static final long serialVersionUID = -6011063467947550291L;
 	
+	String id;
 	String type;
     List<String> productIds;
     
@@ -32,5 +33,13 @@ public class RelatedModelRedis implements Serializable {
 	}
 	public void setProductIds(List<String> productIds) {
 		this.productIds = productIds;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }

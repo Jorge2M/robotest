@@ -3,7 +3,7 @@ package com.mng.robotest.test.getdata.products;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mng.robotest.test.getdata.products.data.Garment;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.products.data.ProductLabel;
 
 public class FilterOnline implements Filter {
@@ -19,9 +19,9 @@ public class FilterOnline implements Filter {
 	}
 	
 	@Override
-	public List<Garment> filter(List<Garment> garments) throws Exception {
-		List<Garment> listGarmentsNoOnline = new ArrayList<>();
-		for (Garment garment : garments) {
+	public List<GarmentCatalog> filter(List<GarmentCatalog> garments) throws Exception {
+		List<GarmentCatalog> listGarmentsNoOnline = new ArrayList<>();
+		for (GarmentCatalog garment : garments) {
 			if (fitsFilter(garment)) {
 				listGarmentsNoOnline.add(garment);
 			}
@@ -29,7 +29,7 @@ public class FilterOnline implements Filter {
 		return listGarmentsNoOnline;
 	}	
 	
-	private boolean fitsFilter(Garment garment) {
+	private boolean fitsFilter(GarmentCatalog garment) {
 		boolean online = isGarmentOnline(garment);
 		if (online && !reverse) {
 			return true;
@@ -40,7 +40,7 @@ public class FilterOnline implements Filter {
 		return false;
 	}
 	
-	private boolean isGarmentOnline(Garment garment) {
+	private boolean isGarmentOnline(GarmentCatalog garment) {
 		for (ProductLabel productLabel : garment.getLabels().getProductLabels()) {
 			if (productLabel!=null && "exclusivo_online".compareTo(productLabel.getKey())==0) {
 				return true;

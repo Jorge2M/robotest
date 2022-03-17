@@ -105,8 +105,8 @@ public class InputParamsMango extends InputParamsTM {
 			.required(false)
 			.hasArgs()
 			.valueSeparator(',')
-			.pattern("\\d{3}_[A-Z]{2}_[a-z]+_[a-z]+_[a-z]+_\\d{3}|X")
-			.desc("List of catalogs with format country_idiom_linea_section_galery_family (p.e. 001_ES_home_bano_albornoces_726")
+			.pattern("\\d{3}_[A-Z0-9]{2,3}_[a-z]+_[a-zA-Z0-9\\-]+_[a-z]+_\\d{1,3}([:\\d{1,3}]*)|X")
+			.desc("List of catalogs with format country_idiom_linea_section_galery_family (p.e. 001_ES_home_bano_albornoces_726:14")
 			.build());
 
 		String patternUrl = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";

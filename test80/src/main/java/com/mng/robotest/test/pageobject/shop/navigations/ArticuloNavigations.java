@@ -6,8 +6,8 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.getdata.products.data.Garment;
-import com.mng.robotest.test.getdata.products.data.Garment.Article;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog.Article;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.ficha.PageFicha;
 
@@ -17,7 +17,7 @@ public class ArticuloNavigations {
 	/**
 	 * Selecciona un artículo disponible a partir de su referencia (selecciona una talla/color que esté disponible)
 	 */
-	public static ArticuloScreen selectArticuloTallaColorByRef(Garment productStock, AppEcom app, Channel channel, WebDriver driver) {
+	public static ArticuloScreen selectArticuloTallaColorByRef(GarmentCatalog productStock, AppEcom app, Channel channel, WebDriver driver) {
 		ArticuloScreen articulo = new ArticuloScreen();
 		
 		Article articleStock = productStock.getArticleWithMoreStock();

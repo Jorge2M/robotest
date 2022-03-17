@@ -8,38 +8,36 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.domains.apiproduct.entity.ProductRedis;
 import com.mng.robotest.test.getdata.JaxRsClient;
 
 
 public class GetterProductApiCanonical extends JaxRsClient {
 
+	private final Client client = getClient();
 	private final String target = "https://internal-canonical-products.dev.k8s.mango/v1/products";
 	private final String codPaisAlf;
 	private final String codIdiomAlf;
-	private final String idProducto;
 	
-	public GetterProductApiCanonical(String codPaisAlf, String codIdiomAlf, String idProducto) {
-		this.codPaisAlf = codPaisAlf;
+	public GetterProductApiCanonical(String codPaisAlf, String codIdiomAlf) {
+		this.codPaisAlf = normalizeCodPais(codPaisAlf);
 		this.codIdiomAlf = codIdiomAlf;
-		this.idProducto = idProducto;
 	}
 	
-	public Optional<ProductRedis> getProduct() throws Exception {
-		WebTarget webTarget = getWebTarget();
+	public Optional<ProductRedis> getProduct(String idProducto) throws Exception {
+		WebTarget webTarget = getWebTarget(idProducto);
 		Response response = webTarget.request(MediaType.APPLICATION_JSON).get();
 		if (response.getStatus()==Response.Status.OK.getStatusCode()) {
 			String responseBody = response.readEntity(String.class);
 			ObjectMapper objectMapper = new ObjectMapper();
-			//objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			ProductRedis productRedis = objectMapper.readValue(responseBody, ProductRedis.class);
 			return Optional.of(productRedis);
 		}
 		return Optional.empty();
 	}
 	
-	private WebTarget getWebTarget() throws Exception {
-		Client client = getClientIgnoreCertificates();
+	private WebTarget getWebTarget(String idProducto) throws Exception {
 		WebTarget webTarget = 
 			client
 				.target(target)
@@ -50,5 +48,22 @@ public class GetterProductApiCanonical extends JaxRsClient {
 		return webTarget;
 	}	
 	
+	private Client getClient() {
+		try {
+			return getClientIgnoreCertificates();
+		} catch (Exception e) {
+			Log4jTM.getLogger().error("Exception getting rest client ", e);
+			return null;
+		}
+	}
+	
+	private String normalizeCodPais(String codPaisAlf) {
+		switch (codPaisAlf) {
+		case "ES1":
+			return "ES-CN";
+		default:
+			return codPaisAlf;
+		}
+	}
 	
 }

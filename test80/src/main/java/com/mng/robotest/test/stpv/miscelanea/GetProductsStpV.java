@@ -10,7 +10,7 @@ import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.Menu;
 import com.mng.robotest.test.getdata.products.GetterProducts.MethodGetter;
-import com.mng.robotest.test.getdata.products.data.Garment;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.utils.Test80;
 
 public class GetProductsStpV {
@@ -47,7 +47,7 @@ public class GetProductsStpV {
 	
 	private static int getNumArticlesPersonalized(GetterProducts getterProducts) {
 		int numArticlesPersonalized = 0;
-		for (Garment garment : getterProducts.getAll()) {
+		for (GarmentCatalog garment : getterProducts.getAll()) {
 			if (garment.getAnalyticsEventsData().isPersonalized()) {
 				numArticlesPersonalized+=1;
 			}

@@ -9,6 +9,8 @@ public class Color {
 	private boolean defaultColor;
 	private int stock;
 	private List<Size> sizes;
+	private List<Image> images;
+	private Price price;
 	
 	public Size getSizeWithMoreStock() {
 		int maxStock = -1;
@@ -52,5 +54,21 @@ public class Color {
 	public void setSizes(List<Size> sizes) {
 		this.sizes = sizes;
 	}
-	
+
+	public List<Image> getImages() {
+		return images;
+	}
+
+	public void setImages(List<Image> images) {
+		this.images = images;
+	}
+
+	public Price getPrice() {
+		return price;
+	}
+
+	public void setPrice(Price price) {
+		this.price = price;
+	}
+
 }

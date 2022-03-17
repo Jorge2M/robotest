@@ -8,7 +8,7 @@ import java.util.List;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.data.ValesData.Campanya;
 import com.mng.robotest.test.generic.beans.ValePais.EffectToArticle;
-import com.mng.robotest.test.getdata.products.data.Garment;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.utils.PaisGetter;
 
 public class FactoryVale {
@@ -69,12 +69,12 @@ public class FactoryVale {
 			case aplica:
 				vale.listExamplesArtSiAplica = new ArrayList<>();
 					for (String refArticle : listArticles) {
-						vale.listExamplesArtSiAplica.add(new Garment(refArticle));
+						vale.listExamplesArtSiAplica.add(new GarmentCatalog(refArticle));
 					}
 				break;
 			case noaplica:
 				for (String refArticle : listArticles) {
-					vale.listExamplesArtNoAplica.add(new Garment(refArticle));
+					vale.listExamplesArtNoAplica.add(new GarmentCatalog(refArticle));
 				}
 			}
 		}

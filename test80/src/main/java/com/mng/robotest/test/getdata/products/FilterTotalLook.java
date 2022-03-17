@@ -3,17 +3,22 @@ package com.mng.robotest.test.getdata.products;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.getdata.products.data.Garment;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.products.data.GarmentDetails;
-import com.mng.robotest.test.getdata.products.data.Garment.Article;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog.Article;
 
 public class FilterTotalLook implements Filter {
 
@@ -28,9 +33,9 @@ public class FilterTotalLook implements Filter {
 	}
 	
 	@Override
-	public List<Garment> filter(List<Garment> garments) throws Exception {
-		List<Garment> listFiltered = new ArrayList<>();
-		for (Garment garment : garments) {
+	public List<GarmentCatalog> filter(List<GarmentCatalog> garments) throws Exception {
+		List<GarmentCatalog> listFiltered = new ArrayList<>();
+		for (GarmentCatalog garment : garments) {
 			if (getTotalLookGarment(garment)!=null) {
 				listFiltered.add(garment);
 			}
@@ -39,8 +44,8 @@ public class FilterTotalLook implements Filter {
 	}
 	
 	@Override
-	public Optional<Garment> getOne(List<Garment> garments) throws Exception {
-		for (Garment garment : garments) {
+	public Optional<GarmentCatalog> getOne(List<GarmentCatalog> garments) throws Exception {
+		for (GarmentCatalog garment : garments) {
 			if (getTotalLookGarment(garment)!=null) {
 				return Optional.of(garment);
 			}
@@ -48,12 +53,17 @@ public class FilterTotalLook implements Filter {
 		return Optional.empty();
 	}
 	
-	private GarmentDetails getTotalLookGarment(Garment product) throws Exception {
+	private GarmentDetails getTotalLookGarment(GarmentCatalog product) throws Exception {
 		WebTarget webTarget = getWebTargetTotalLookGarment(product);
-		Response response = webTarget
+		Builder builder = webTarget
 				.request(MediaType.APPLICATION_JSON)
-				.header("stock-id", stockId)
-				.get();
+				.header("stock-id", stockId);
+		
+		String nameCloudTest = getNameCloudTest();
+		if ("".compareTo(nameCloudTest)!=0) {
+			builder = builder.cookie("cloudtest-name", nameCloudTest);
+		}
+		Response response = builder.get();
 		
 		if (response.getStatus()==Response.Status.OK.getStatusCode()) {
 			return response.readEntity(GarmentDetails.class);
@@ -61,7 +71,17 @@ public class FilterTotalLook implements Filter {
 		return null;
 	}
 	
-	private WebTarget getWebTargetTotalLookGarment(Garment product) {
+	private static String getNameCloudTest() {
+		String initialURL = ((InputParamsMango)TestMaker.getInputParamsSuite()).getUrlBase();
+		Pattern pattern = Pattern.compile(".*://.*name=(.*)");
+		Matcher match = pattern.matcher(initialURL);
+		if (match.find()) {
+			return match.group(1);
+		}
+		return "";
+	}
+	
+	private WebTarget getWebTargetTotalLookGarment(GarmentCatalog product) {
 		Article article = product.getArticleWithMoreStock();
 		Client client = ClientBuilder.newClient();
 		return ( 

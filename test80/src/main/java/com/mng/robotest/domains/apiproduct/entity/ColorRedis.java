@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ColorRedis implements Serializable {
@@ -53,6 +56,21 @@ public class ColorRedis implements Serializable {
 	}
 	public void setImages(List<ImageRedis> images) {
 		this.images = images;
+	}
+	public ImageRedis getImage(String pathImage) {
+		if (getImages()!=null) {
+			Pattern patternImage = Pattern.compile("(.*\\.jpg).*"); 
+			for (ImageRedis image : getImages()) {
+				Matcher mat = patternImage.matcher(pathImage);
+				if (mat.find()) {
+					String imageInput = mat.group(1);
+					if (image.getUrl().contains(imageInput)) {
+						return image;
+					}
+				}
+			}
+		}
+		return null;
 	}
 	public List<VideoRedis> getVideos() {
 		return videos;

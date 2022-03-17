@@ -13,8 +13,8 @@ import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.Menu;
-import com.mng.robotest.test.getdata.products.data.Garment;
-import com.mng.robotest.test.getdata.products.data.Garment.Article;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog.Article;
 import com.mng.robotest.test.stpv.votfcons.ConsolaVotfStpV;
 import com.mng.robotest.test.utils.PaisGetter;
 
@@ -61,7 +61,7 @@ public class ConsolaVotf {
 		
 		
 		List<Article> listArticles = new ArrayList<>();
-		for (Garment garment : getterProducts.getAll()) {
+		for (GarmentCatalog garment : getterProducts.getAll()) {
 			listArticles.add(garment.getArticleWithMoreStock());
 		}
 		return listArticles;

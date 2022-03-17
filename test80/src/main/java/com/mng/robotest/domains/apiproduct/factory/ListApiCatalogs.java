@@ -44,14 +44,27 @@ public class ListApiCatalogs {
 	private List<ParamsTest> getCatalogsFromParam(String catalogs) {
 		List<ParamsTest> listParamsTest = new ArrayList<>();
 		List<String> listCatalogs = Arrays.asList(catalogs.split(","));
-		Pattern pattern = Pattern.compile("(\\d{3})_([A-Z]{2})_([a-z]+)_([a-z]+)_([a-z]+)_(\\d{3})");
+		Pattern pattern = Pattern.compile("(\\d{3})_([A-Z0-9]{2,3})_([a-z]+)_([a-zA-Z0-9\\-]+)_([a-z]+)_(\\d{1,3})([:\\d{1,3}]*)");
 		for (String catalog : listCatalogs) {
 			Matcher matcher = pattern.matcher(catalog);
 			if (matcher.find()) {
 				String country = matcher.group(1);
 				String idiom = matcher.group(2);
 				String linea = matcher.group(3);
-				MenuI menu = MenuApi.from(matcher.group(4), matcher.group(5), matcher.group(6));
+				
+				String seccion = matcher.group(4).replace("-", "_");
+				String galeria = matcher.group(5);
+				if ("aaa".compareTo(galeria)==0) {
+					galeria = "";
+				}
+				String familias = matcher.group(6);
+				if ("000".compareTo(familias)==0) {
+					familias = "";
+				}
+				if (matcher.groupCount()>6 && matcher.group(7)!=null) {
+					familias += matcher.group(7).replace(":", ",");
+				}
+				MenuI menu = MenuApi.from(seccion, galeria, familias);
 				listParamsTest.add(new ParamsTest(country, idiom, linea, menu));
 			}
 		}

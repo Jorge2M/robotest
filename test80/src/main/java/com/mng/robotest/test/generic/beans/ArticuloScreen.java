@@ -3,8 +3,8 @@ package com.mng.robotest.test.generic.beans;
 import java.util.ArrayList;
 
 import com.mng.robotest.test.data.Talla;
-import com.mng.robotest.test.getdata.products.data.Garment;
-import com.mng.robotest.test.getdata.products.data.Garment.Article;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog.Article;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 
@@ -23,7 +23,7 @@ public class ArticuloScreen {
 
 	public ArticuloScreen() {}
 	
-	public ArticuloScreen(Garment productStock) {
+	public ArticuloScreen(GarmentCatalog productStock) {
 		Article articleStock = productStock.getArticleWithMoreStock();
 		this.referencia = articleStock.getGarmentId();
 		this.codigoColor = articleStock.getColor().getId();
