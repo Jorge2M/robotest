@@ -24,9 +24,10 @@ public class UtilsData {
 		Matcher match = pattern.matcher(initialURL);
 		if (match.find()) {
 			String url = match.group(1);
-			if (url.indexOf("&")!=0) {
+			if (url.indexOf("&")!=-1) {
 				return url.substring(0, url.indexOf("&"));
 			}
+			return url;
 		}
 		return "";
 	}
