@@ -8,7 +8,9 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalDetalleArticuloDesktop extends ModalDetalleArticulo {
 
-	private static String XPathModalInfoArticulo = "//*[@data-testid[contains(.,'modal.overlay')]]";
+	//private static String XPathModalInfoArticulo = "//*[@data-testid[contains(.,'modal.overlay')]]";
+	private static String XPathModalInfoArticulo = "//*[@aria-describedBy='modal-content-description']";
+	
 	private static String XPathAspaForClose = "//*[@data-testid[contains(.,'modal.close')]]";
 	//private static String XPathBuscarTallaTiendaButton = "//div[@id='findInShop']";
 	//private static String XPathContainerItem = "//*[@data-testid[contains(.,'modal.container')]]";

@@ -22,7 +22,8 @@ public class ModalBuscadorTiendasStpV {
 		ChecksTM validations = ChecksTM.getNew();
 		int maxSeconds = 5;
 	 	validations.add(
-			"La capa de búsqueda es visible",
+			"La capa de búsqueda es visible<br>" +
+			"Incidencia PRO (https://jira.mango.com/browse/CLAV-3853)",
 			modalBuscadorTiendas.isVisible(1), State.Warn);
 	 	validations.add(
 			"Se ha localizado alguna tienda (la esperamos hasta " + maxSeconds + " segundos)",

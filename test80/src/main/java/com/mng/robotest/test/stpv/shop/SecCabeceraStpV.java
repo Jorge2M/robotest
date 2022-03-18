@@ -39,7 +39,6 @@ public class SecCabeceraStpV {
 		expected="Se accede a la página principal de la línea")
 	public void selecLogo() throws Exception {
 		secCabecera.clickLogoMango();
-		(new PageLandingStpV(driver)).checkIsPage(5);
 	}
 
 	@Validation

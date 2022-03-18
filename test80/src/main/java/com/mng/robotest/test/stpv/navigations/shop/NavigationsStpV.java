@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test.stpv.shop.SecCabeceraStpV;
+import com.mng.robotest.test.stpv.shop.landing.PageLandingStpV;
 
 public class NavigationsStpV {
 
@@ -17,6 +18,8 @@ public class NavigationsStpV {
 		}
 		
 		secCabeceraStpV.selecLogo();
+		secCabeceraStpV.selecLogo();
+		(new PageLandingStpV(driver)).checkIsPage(5);
 	}
 	
 }

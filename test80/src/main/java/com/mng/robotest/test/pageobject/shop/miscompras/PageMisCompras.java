@@ -33,7 +33,7 @@ public class PageMisCompras extends PageObjTM {
 			"@data-testid[contains(.,'inactivePurchases')]]";
 	
 	//private final static String XPathTicket = XPathListTickets + "//div[@class[contains(.,'purchase-card__border')]]";
-	private final static String XPathTicket = XPathListTickets + "/div[@class[contains(.,'layout-content')]]";
+	private final static String XPathTicket = XPathListTickets + "//div[@class[contains(.,'layout-content')]]";
 
 	
 	public PageMisCompras(Channel channel, WebDriver driver) {

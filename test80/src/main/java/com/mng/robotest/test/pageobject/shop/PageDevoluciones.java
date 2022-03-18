@@ -24,10 +24,10 @@ public class PageDevoluciones {
 		private Devolucion(String literal) {
 			this.literal = literal;
 			String tagClass = "@tagClass";
-			String xpathBase = "//a[" + tagClass + " and text()[contains(.,'" + this.literal + "')]]";
-			this.xpathLink = xpathBase.replace(tagClass, "@class[contains(.,'txtSecciones')]");
-			this.xpathLinkPlegada = xpathBase.replace(tagClass, "@class='txtSecciones'");
-			this.xpathLinkDesplegada = xpathBase.replace(tagClass, "@class=''txtSecciones collapsed'");
+			String xpathBase = "//button[" + tagClass + " and text()[contains(.,'" + this.literal + "')]]";
+			this.xpathLink = xpathBase.replace(tagClass, "@class[contains(.,'panel-heading')]");
+			this.xpathLinkPlegada = xpathBase.replace(tagClass, "@class[contains(.,'opened')]]");
+			this.xpathLinkDesplegada = xpathBase.replace(tagClass, "@class[contains(.,'closed')]]");
 		}
 		
 		private String getXPath(boolean plegada) {
