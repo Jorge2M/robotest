@@ -471,6 +471,13 @@ public class ApiProduct {
 	}
 	
 	private Pair<Boolean, String> checkNumberSizes(ColorRedis colorApi, ColorGarment colorGarment) {
+		if (colorGarment.getSizes()==null) {
+			return Pair.of(
+					false, 
+					String.format(
+							"CheckNumberSizes.<br>ColorId: %s,<br><strong>NumberSizesApi</strong>: %s,<br><strong>NumberSizesGarment</strong>: %s", 
+							colorApi.getId(), colorApi.getSizes().size(), null));
+		}
 		return Pair.of(
 				colorApi.getSizes().size()==(colorGarment.getSizes().size()),
 				String.format(

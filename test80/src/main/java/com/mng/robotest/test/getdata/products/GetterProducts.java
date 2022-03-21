@@ -258,9 +258,13 @@ public class GetterProducts extends JaxRsClient {
 		}
 		
 		if (menu.getFamilia()!=null && "".compareTo(menu.getFamilia())!=0) {
+			String tag = "familia";
+			if (menu.getSeccion().contains("accesorio")) {
+				tag = "accesorio";
+			}
 			webTarget = webTarget
 				.queryParam("idSubSection", menu.getGaleria() + "_" + lineaType.name())
-				.queryParam("menu", "familia;" + menu.getFamilia());
+				.queryParam("menu", tag + ";" + menu.getFamilia());
 		}
 		
 		webTarget = webTarget

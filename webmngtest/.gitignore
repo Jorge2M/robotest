@@ -1,8 +1,0 @@
-target/
-/.classpath
-/.project
-.idea/
-*.iml
-*.lst
-/output-library
-!/output-library/sqlite/TESTSUITES_WS.sqlite
