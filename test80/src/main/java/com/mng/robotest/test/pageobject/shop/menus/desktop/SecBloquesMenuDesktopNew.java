@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
@@ -228,11 +229,7 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 //			}
 //		}
 //	}
-	
-	private void clickBlockMenu(Menu1rstLevel menu1rstLevel) {
-		String xpathMenu = getXPathLinkMenuGroup(menu1rstLevel);
-		click(By.xpath(xpathMenu)).exec();
-	}
+
 	
 	private boolean isMenuVisible(Menu1rstLevel menu1rstLevel, int maxSeconds) {
 		if (isMenuGroupVisible(menu1rstLevel)) {
@@ -241,9 +238,15 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 		return isMenuLinkVisible(menu1rstLevel, maxSeconds);
 	}
 	
+	
 	private boolean isMenuGroupVisible(Menu1rstLevel menu1rstLevel) {
 		String xpathMenu = getXPathLinkMenuGroup(menu1rstLevel);
 		return (state(Visible, By.xpath(xpathMenu)).check());
+	}
+	
+	private void clickBlockMenu(Menu1rstLevel menu1rstLevel) {
+		String xpathMenu = getXPathLinkMenuGroup(menu1rstLevel);
+		click(By.xpath(xpathMenu)).exec();
 	}
 	
 	private boolean isMenuLinkVisible(Menu1rstLevel menu1rstLevel, int maxSeconds) {
@@ -259,6 +262,7 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	}
 	
 	private void selectGroupMenu(String linea, String group_line) {
+		waitMillis(500);
 		click(By.xpath(XPathGroupSection + "//self::*[@id='" + group_line + "']/span")).exec();
 	}
 	

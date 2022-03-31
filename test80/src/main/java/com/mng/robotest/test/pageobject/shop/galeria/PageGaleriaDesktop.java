@@ -8,10 +8,13 @@ import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
+import org.openqa.selenium.JavascriptExecutor;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea;
@@ -27,6 +30,7 @@ import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils.HtmlLocator;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
@@ -116,15 +120,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	@Override
 	public void hideMenus() {
 		SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
-    	Actions actions = new Actions(driver);
-		while (menusVisible(secMenus)) {
-			actions.moveByOffset(0, 50).build().perform();
-		}
-		waitMillis(500);
-	}
-	
-	private boolean menusVisible(SecMenusDesktop secMenus) {
-		return secMenus.secMenuSuperior.secBlockMenus.isCapaMenusLineaVisibleUntil(LineaType.she, 1);
+		secMenus.hideMenus();
 	}
 	
 	private String getXPathLabel(LabelArticle label) {
