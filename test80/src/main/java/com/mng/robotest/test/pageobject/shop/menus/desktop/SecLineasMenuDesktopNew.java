@@ -21,7 +21,7 @@ public class SecLineasMenuDesktopNew extends SecLineasMenuDesktop {
 	private final static String XPathLineaSpecificWithTag = XPathLinea + "//self::*[@data-testid[contains(.,'Item." + TagIdLinea + "')]]";
 	
 	private final static String TagIdSublinea = "@SublineaId";
-	private final static String XPathSublineaWithTag = "//li[@id[contains(.,'sections_" + TagIdSublinea+ "')]]";
+	private final static String XPathSublineaWithTag = "//li[@id[contains(.,'" + TagIdSublinea+ "')] and @data-testid[contains(.,'section')]]";
 	
 	public SecLineasMenuDesktopNew(AppEcom app, WebDriver driver) {
 		super(app, driver);
