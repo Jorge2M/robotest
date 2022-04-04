@@ -14,8 +14,8 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	
 	private final SectionPrendas sectionPrendas;
 	
-	private static String XPathIdTicket = "//*[@data-testid[contains(.,'order.orderId')]]";
-	private static String XPathLineaImporte = "//*[@data-testid[contains(.,'order.price')]]";
+	private static String XPathIdTicket = "//*[@data-testid[contains(.,'purchaseDetail.purchaseNumber')]]";
+	private static String XPathLineaImporte = "//*[@data-testid[contains(.,'detail.totalPrice')]]";
 	private static String XPathLinkToMisCompras = "//button/*[@class[contains(.,'icon-fill-prev')]]/.."; 
 
 	

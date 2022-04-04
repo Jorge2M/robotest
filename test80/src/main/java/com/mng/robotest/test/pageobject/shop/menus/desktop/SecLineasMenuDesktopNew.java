@@ -56,7 +56,7 @@ public class SecLineasMenuDesktopNew extends SecLineasMenuDesktop {
 	public void selectSublinea(LineaType lineaType, SublineaType sublineaType) {
 		for (int i=0; i<3; i++) {
 			hoverLinea(lineaType);
-			if (!isVisibleSublineaUntil(sublineaType, 2)) {
+			if (isVisibleSublineaUntil(sublineaType, 2)) {
 				break;
 			}
 		}

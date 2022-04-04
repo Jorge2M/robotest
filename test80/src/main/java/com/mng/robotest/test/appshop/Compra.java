@@ -115,10 +115,10 @@ public class Compra {
 					.checkout(From.Prehome);
 		} else {
 			//TODO actualmente no funciona el buscador por referencia de productos Intimissimi
-			//confiamos que esté listo el 1-abril-2022
+			//confiamos que esté listo el 1-julio-2022
 			//cuando esté listo habrá que eliminar el 1er bloque del if
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date dateLimit = sdf.parse("2022-04-01");
+			Date dateLimit = sdf.parse("2022-07-01");
 			Date dateToday = new Date();
 			if (dateToday.before(dateLimit)) {
 				return new BuilderCheckout(dCtxSh, dCtxPago, driver)

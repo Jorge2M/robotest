@@ -27,7 +27,7 @@ public class ModalDetalleArticuloStpV {
 			modalDetalleArticulo.isVisible(maxSeconds), State.Warn);
 		validations.add(
 			"Se muestra la referencia " + articulo.getReferencia(),
-			modalDetalleArticulo.getReferencia().compareTo(articulo.getReferencia())==0, State.Warn);
+			modalDetalleArticulo.existsReferencia(articulo.getReferencia(), 1), State.Warn);
 		validations.add(
 			"Se muestra el nombre " + articulo.getNombre(),
 			modalDetalleArticulo.getNombre().compareTo(articulo.getNombre())==0, State.Warn);

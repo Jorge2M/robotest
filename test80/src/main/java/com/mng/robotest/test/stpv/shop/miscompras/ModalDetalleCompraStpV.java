@@ -66,7 +66,7 @@ public class ModalDetalleCompraStpV {
 			modalDetalleCompra.getIdTicket(compra.getType()).compareTo(compra.getId())==0, State.Warn);
 		validations.add(
 			"Figura el importe " + compra.getPrecio(),
-			modalDetalleCompra.getImporte().compareTo(compra.getPrecio())==0, State.Warn);
+			modalDetalleCompra.getImporte().contains(compra.getPrecio()), State.Warn);
 		validations.add(
 			"Existen " + compra.getNumItems() + " prendas",
 			modalDetalleCompra.getNumPrendas()==compra.getNumItems(), State.Warn);

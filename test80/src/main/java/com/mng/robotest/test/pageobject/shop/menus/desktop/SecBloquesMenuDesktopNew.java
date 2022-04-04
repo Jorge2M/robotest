@@ -186,15 +186,14 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 			String block2 = id.substring(posApostrophe + 1);
 			return (
 				xpathMenuVisible + 
-				"[@id[contains(.,'" + block1 + "')] and @id[contains(.,'" + 
-				block2 + "')]]");
+				"[@data-testid[contains(.,'" + block1 + "')] and @data-testid[contains(.,'" + block2 + "')]]");
 		}
 
-		String idLineaMenu = menu1rstLevel.getLinea() + "_" + id;
+		String idLineaMenu = id + "_" + menu1rstLevel.getLinea();
 		return (
 			xpathMenuVisible + 
-			"[@id[contains(.,'" + idLineaMenu + "')] or " + 
-			"@id[contains(.,'" + idLineaMenu.toLowerCase() + "')]]");
+			"[@data-testid[contains(.,'" + idLineaMenu + "')] or " + 
+			"@data-testid[contains(.,'" + idLineaMenu.toLowerCase() + "')]]");
 	}
 	
 	@Override

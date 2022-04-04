@@ -9,8 +9,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PagePaypalSelectPago {
 
-	private final static String XPathContinueButton = "//*[@class[contains(.,'ButtonPrimary')] or @id='payment-submit-btn']";
-	private final static String XPathMetPagos = "//section[@class[contains(.,'PayWith')]]";
+	private final static String XPathContinueButton = "//*[@id[contains(.,'confirmButton')]]";
+	private final static String XPathMetPagos = "//div[@class[contains(.,'paywith')]]";
 
 	public static boolean isPageUntil(int maxSeconds, WebDriver driver) {
 		return (state(Visible, By.xpath(XPathMetPagos), driver).wait(maxSeconds).check());
