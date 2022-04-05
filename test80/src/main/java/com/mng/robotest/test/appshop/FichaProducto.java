@@ -75,11 +75,10 @@ public class FichaProducto {
 		
 		List<FilterType> filterOnline = Arrays.asList(FilterType.Online);
 		Optional<GarmentCatalog> articleOnline = getterProducts.getOneFiltered(filterOnline);
-		if (!articleOnline.isPresent()) {
-			throw new NotFoundException("Not found article of type " + filterOnline);
+		if (articleOnline.isPresent()) {
+			secBuscadorStpV.searchArticulo(articleOnline.get(), dCtxSh.pais, filterOnline);
+			pageFichaStpv.checkLinkDispTiendaInvisible();
 		}
-		secBuscadorStpV.searchArticulo(articleOnline.get(), dCtxSh.pais, filterOnline);
-		pageFichaStpv.checkLinkDispTiendaInvisible();
 		
 		List<FilterType> filterNoOnlineWithColors = Arrays.asList(FilterType.NoOnline, FilterType.ManyColors); 
 		Optional<GarmentCatalog> articleNoOnlineWithColors = getterProducts.getOneFiltered(filterNoOnlineWithColors);
