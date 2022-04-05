@@ -122,12 +122,16 @@ public class FichaProducto {
 
 		AccesoStpV.oneStep(dCtxSh, false, driver);
 		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
+		
 		Optional<GarmentCatalog> articleWithTotalLook = getterProducts.getOneFiltered(FilterType.TotalLook);
-		SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
-		if (!articleWithTotalLook.isPresent()) {
-			throw new NotFoundException("Not found article of type " + FilterType.TotalLook);
+		GarmentCatalog garment = getterProducts.getAll().get(0);
+		boolean isTotalLook = false;
+		if (articleWithTotalLook.isPresent()) {
+			garment = articleWithTotalLook.get();
+			isTotalLook = true;
 		}
-		secBuscadorStpV.searchArticulo(articleWithTotalLook.get(), dCtxSh.pais);
+		SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
+		secBuscadorStpV.searchArticulo(garment, dCtxSh.pais);
 		
 		PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
 		if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {
@@ -164,7 +168,9 @@ public class FichaProducto {
 		} else {
 			boolean isFichaAccesorio = pageFichaStpV.getFicha().isFichaAccesorio(); 
 			pageFichaStpV.secFotosNew.validaLayoutFotosNew(isFichaAccesorio, driver);
-			pageFichaStpV.secTotalLook.checkIsVisible(driver);
+			if (isTotalLook) {
+				pageFichaStpV.secTotalLook.checkIsVisible(driver);
+			}
 
 			pageFichaStpV.secBolsaButtonAndLinksNew.selectEnvioYDevoluciones(driver);
 			pageFichaStpV.getModEnvioYdevol().clickAspaForClose();
@@ -179,7 +185,7 @@ public class FichaProducto {
 			pageFichaStpV.validateSliderIfExists(Slider.ElegidoParaTi);
 		}
 		
-		if (dCtxSh.appE!=AppEcom.outlet) {
+		if (dCtxSh.appE!=AppEcom.outlet && isTotalLook) {
 			pageFichaStpV.validateSliderIfExists(Slider.CompletaTuLook);
 		}
 	}
