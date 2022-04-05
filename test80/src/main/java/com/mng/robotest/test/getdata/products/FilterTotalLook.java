@@ -64,7 +64,13 @@ public class FilterTotalLook implements Filter {
 		Response response = builder.get();
 
 		if (response.getStatus()==Response.Status.OK.getStatusCode()) {
-			return response.readEntity(GarmentDetails.class);
+			try {
+				return response.readEntity(GarmentDetails.class);
+			}
+			catch (Exception e) {
+				Log4jTM.getLogger().warn(String.format("Problem in call to %s. Status response %s. Body %s", webTarget.getUri(), response.getStatus(), response.getEntity()));
+				return null;
+			}
 		} else {
 			Log4jTM.getLogger().warn(String.format("Problem in call to %s. Status response %s", webTarget.getUri(), response.getStatus()));
 			return null;
