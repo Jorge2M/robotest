@@ -81,7 +81,10 @@ public class SecTallasArticuloDesktop extends PageObjTM {
 	private final String XPathTallaAvailableShop = "//button[not(@class[contains(.,'iMdOl')])]";
 	private final String XPathTallaAvailableOutlet = "//button[@class[contains(.,'undefined')]]";
 	
-	private final String XPathTallaUnavailableShop = "//button[@class[contains(.,'iMdOl')]]";
+	//TODO 5-abril-2022. Cuando suban a PRO los nuevos filtros se podrá eliminar la parte del iMdOl 
+	private final String XPathTallaUnavailableShop = 
+			"//button[@class[contains(.,'iMdOl')] or @data-testid='no-stock']";
+	
 	private final String XPathTallaUnavailableOutlet = "//button[not(@class[contains(.,'undefined')])]";
 	
 	private String getXPathTallaAvailable() {
