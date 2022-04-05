@@ -39,7 +39,7 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	private final static String XPathCapaMenus = "//ul[@data-testid[contains(.,'section.subfamily')] or @data-testid[contains(.,'section.family')]]";
 	private final static String XPathContainerGroups = XPathWrapperGlobal + XPathCapaMenus + "/li[not(@id[contains(.,'sections')])]/..";
 	
-	private final static String XPathGroupSection = XPathContainerGroups + "/li[@data-testid[contains(.,'section.menu')]]";
+	private final static String XPathGroupSection = XPathContainerGroups + "/li[@data-testid[contains(.,'section.menu')]]/a/..";
 	private final static String XPathGroupLink = XPathContainerGroups + "/li[@data-testid[contains(.,'section.link')]]";
 	private final static String XPathMenuLink = XPathCapaMenus + "/li[@data-testid[contains(.,'link')]]";
 	private final static String XPathRightImage = XPathWrapperGlobal + "//a/img/..";
