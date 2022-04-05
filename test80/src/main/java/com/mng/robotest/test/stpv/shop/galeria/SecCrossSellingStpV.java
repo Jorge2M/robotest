@@ -12,6 +12,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
+import com.mng.robotest.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test.pageobject.shop.galeria.SecCrossSelling;
@@ -34,12 +35,12 @@ public class SecCrossSellingStpV {
 	}
 	
 	@Validation
-	public ChecksTM validaIsCorrect(LineaType lineaType) throws Exception {
+	public ChecksTM validaIsCorrect(LineaType lineaType, SublineaType sublineaType) throws Exception {
 		//Obtenemos la lista de menús de Mujer-Prendas
 		SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
 		List<WebElement> listaMenusBloque = 
 			((SecBloquesMenuDesktopNew)secMenus.secMenuSuperior.secBlockMenus)
-				.getListMenusLineaBloque(lineaType, GroupMenu.prendas, MenusFromGroup.Subfamily);
+				.getListMenusLineaBloque(lineaType, sublineaType, GroupMenu.prendas, MenusFromGroup.Subfamily);
 
 		String litMenu1 = listaMenusBloque.get(0).findElement(By.xpath("./span")).getText();
 		String litMenu2 = listaMenusBloque.get(1).findElement(By.xpath("./span")).getText();

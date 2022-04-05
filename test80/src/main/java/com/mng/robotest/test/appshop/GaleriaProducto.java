@@ -177,7 +177,7 @@ public class GaleriaProducto {
 		} else {
 			Menu1rstLevel menuNuevo = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "New Now"));
 			secMenusStpV.selectMenu1rstLevelTypeCatalog(menuNuevo, dCtxSh);
-			pageGaleriaStpV.secCrossSellingStpV.validaIsCorrect(LineaType.she);
+			pageGaleriaStpV.secCrossSellingStpV.validaIsCorrect(LineaType.she, null);
 			pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
 		}
 		
@@ -186,7 +186,7 @@ public class GaleriaProducto {
 		}
 
 		if (dCtxSh.appE!=AppEcom.outlet && !dCtxSh.channel.isDevice()) {
-			pageGaleriaStpV.secCrossSellingStpV.validaIsCorrect(LineaType.she);
+			pageGaleriaStpV.secCrossSellingStpV.validaIsCorrect(LineaType.she, null);
 			pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
 		}	
 		

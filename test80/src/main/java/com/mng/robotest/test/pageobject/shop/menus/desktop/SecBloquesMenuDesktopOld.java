@@ -47,8 +47,8 @@ public class SecBloquesMenuDesktopOld extends SecBloquesMenuDesktop {
 	}
 	
 	@Override
-	public void makeMenusGroupVisible(LineaType lineaType, GroupMenu bloque) {
-		secLineasMenu.hoverLineaAndWaitForMenus(lineaType, null);
+	public void makeMenusGroupVisible(LineaType lineaType, SublineaType sublineaType, GroupMenu bloque) {
+		secLineasMenu.hoverLineaAndWaitForMenus(lineaType, sublineaType);
 	}
 	
 	public String getXPathCapaMenus() {
@@ -99,8 +99,8 @@ public class SecBloquesMenuDesktopOld extends SecBloquesMenuDesktop {
 	}
 	
 	@Override
-	public List<WebElement> getListMenusLineaBloque(LineaType lineaType, GroupMenu bloque) throws Exception {
-		makeMenusGroupVisible(lineaType, bloque);
+	public List<WebElement> getListMenusLineaBloque(LineaType lineaType, SublineaType sublineaType, GroupMenu bloque) throws Exception {
+		makeMenusGroupVisible(lineaType, sublineaType, bloque);
 		String xpathMenuLinea = getXPathCapaMenusLinea(lineaType);
 		String xpathEntradaMenu = XPathEntradaMenuBloqueRelativeWithTag.replace(TagIdBloque, bloque.toString());
 		return (driver.findElements(By.xpath(xpathMenuLinea + xpathEntradaMenu)));

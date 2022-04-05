@@ -12,7 +12,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
@@ -39,7 +38,8 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	private final static String XPathCapaMenus = "//ul[@data-testid[contains(.,'section.subfamily')] or @data-testid[contains(.,'section.family')]]";
 	private final static String XPathContainerGroups = XPathWrapperGlobal + XPathCapaMenus + "/li[not(@id[contains(.,'sections')])]/..";
 	
-	private final static String XPathGroupSection = XPathContainerGroups + "/li[@data-testid[contains(.,'section.menu')]]/a/..";
+	private final static String XPathGroupSectionLinea = XPathContainerGroups + "/li[@data-testid[contains(.,'section.menu')]]/span/..";
+	private final static String XPathGroupSectionSublinea = XPathContainerGroups + "/../ul[2]/li[@data-testid[contains(.,'section.menu')]]/span/..";
 	private final static String XPathGroupLink = XPathContainerGroups + "/li[@data-testid[contains(.,'section.link')]]";
 	private final static String XPathMenuLink = XPathCapaMenus + "/li[@data-testid[contains(.,'link')]]";
 	private final static String XPathRightImage = XPathWrapperGlobal + "//a/img/..";
@@ -47,6 +47,13 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	
 	public SecBloquesMenuDesktopNew(AppEcom app, WebDriver driver) {
 		super(app, driver);
+	}
+	
+	private String getXPathGroupSection(LineaType lineaType, SublineaType sublineaType) {
+		if (sublineaType==null) {
+			return XPathGroupSectionLinea;
+		}
+		return XPathGroupSectionSublinea;
 	}
 	
 	private String getXPathLinkMenuGroup(Menu1rstLevel menu1rstLevel) {
@@ -103,9 +110,9 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	}
 	
 	@Override
-	public void makeMenusGroupVisible(LineaType lineaType, GroupMenu bloque) {
+	public void makeMenusGroupVisible(LineaType lineaType, SublineaType sublineaType, GroupMenu bloque) {
 		secLineasMenu.hoverLineaAndWaitForMenus(lineaType, null);
-		selectGroupMenu(lineaType.name(), bloque.name().toLowerCase() + "_" + lineaType.name().toLowerCase());
+		selectGroupMenu(lineaType, sublineaType, bloque.name().toLowerCase() + "_" + lineaType.name().toLowerCase());
 	}
 	
 	@Override
@@ -141,9 +148,10 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	throws Exception {
 		secLineasMenu.hoverLineaAndWaitForMenus(lineaType, sublineaType);
 		List<DataScreenMenu> listMenus = new ArrayList<>();
-		List<WebElement> groups = driver.findElements(By.xpath(XPathGroupSection));
+		String xpathGroupSection = getXPathGroupSection(lineaType, sublineaType);
+		List<WebElement> groups = driver.findElements(By.xpath(xpathGroupSection));
 		for (int i=1; i<=groups.size(); i++) {
-			WebElement group = driver.findElement(By.xpath("(" + XPathGroupSection + ")[" + i + "]"));
+			WebElement group = driver.findElement(By.xpath("(" + xpathGroupSection + ")[" + i + "]"));
 			List<WebElement> listMenusGroup = getMenusGroupAndStore(lineaType, sublineaType, group);
 			listMenus.addAll(getDataListMenus(listMenusGroup));
 		}
@@ -157,12 +165,12 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	}
 	
 	@Override
-	public List<WebElement> getListMenusLineaBloque(LineaType lineaType, GroupMenu bloque) throws Exception {
-		return getListMenusLineaBloque(lineaType, bloque, MenusFromGroup.All);
+	public List<WebElement> getListMenusLineaBloque(LineaType lineaType, SublineaType sublineaType, GroupMenu bloque) throws Exception {
+		return getListMenusLineaBloque(lineaType, sublineaType, bloque, MenusFromGroup.All);
 	}
 
-	public List<WebElement> getListMenusLineaBloque(LineaType lineaType, GroupMenu bloque, MenusFromGroup group) throws Exception {
-		makeMenusGroupVisible(lineaType, bloque);
+	public List<WebElement> getListMenusLineaBloque(LineaType lineaType, SublineaType sublineaType, GroupMenu bloque, MenusFromGroup group) throws Exception {
+		makeMenusGroupVisible(lineaType, sublineaType, bloque);
 		String xpathMenuLinea = getXPathCapaMenusLinea(lineaType.name(), group);
 		String xpathEntradaMenu = "//li[@data-testid[contains(.,'section')] and @id='" + bloque + "_" + lineaType.name() + "']/../li[@data-testid[contains(.,'link')]]/a";
 		List<WebElement> listMenus = driver.findElements(By.xpath(xpathMenuLinea + xpathEntradaMenu));
@@ -256,13 +264,14 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	private void selectGroupMenu(Menu1rstLevel menu1rstLevel) throws Exception {
 		String group_line = getGroupMenu(menu1rstLevel);
 		if (group_line!=null) {
-			selectGroupMenu(menu1rstLevel.getLinea().name(), group_line);
+			selectGroupMenu(menu1rstLevel.getLinea(), menu1rstLevel.getSublinea(), group_line);
 		}
 	}
 	
-	private void selectGroupMenu(String linea, String group_line) {
+	private void selectGroupMenu(LineaType lineaType, SublineaType sublineaType, String group_line) {
 		waitMillis(500);
-		click(By.xpath(XPathGroupSection + "//self::*[@id='" + group_line + "']/span")).exec();
+		String xpathGroupSection = getXPathGroupSection(lineaType, sublineaType);
+		click(By.xpath(xpathGroupSection + "//self::*[@id='" + group_line + "']/span")).exec();
 	}
 	
 	private String getGroupMenu(Menu1rstLevel menu1rstLevel) throws Exception {		
@@ -275,9 +284,10 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	}
 	
 	private void storeMenusGroups(LineaType lineaType, SublineaType sublineaType) throws Exception {
-		int numGroups = driver.findElements(By.xpath(XPathGroupSection)).size();
+		String xpathGroupSection = getXPathGroupSection(lineaType, sublineaType);
+		int numGroups = driver.findElements(By.xpath(xpathGroupSection)).size();
 		for (int i=1; i<=numGroups; i++) {
-			WebElement group = driver.findElement(By.xpath("(" + XPathGroupSection + ")[" + i + "]"));
+			WebElement group = driver.findElement(By.xpath("(" + xpathGroupSection + ")[" + i + "]"));
 			getMenusGroupAndStore(lineaType, sublineaType, group);
 		}
 	}

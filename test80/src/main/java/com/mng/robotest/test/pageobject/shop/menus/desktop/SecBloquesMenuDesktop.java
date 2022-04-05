@@ -23,7 +23,7 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 
 	public abstract boolean goToMenuAndCheckIsVisible(Menu1rstLevel menu1rstLevel) throws Exception;
 	public abstract void clickMenu(Menu1rstLevel menu1rstLevel);
-	public abstract void makeMenusGroupVisible(LineaType lineaType, GroupMenu bloque);
+	public abstract void makeMenusGroupVisible(LineaType lineaType, SublineaType sublineaType, GroupMenu bloque);
 	public abstract String getXPathCapaMenusLinea(String idLinea);
 	public abstract String getXPathCapaMenusSublinea(SublineaType sublineaType);
 	public abstract String getXPathLinkMenuSuperiorRelativeToCapa(TypeMenuDesktop typeMenu);
@@ -38,7 +38,7 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	 * @param bloque prendas, accesorios, colecciones...
 	 * @return los menús asociados a una línea/bloque concretos (por bloque entendemos prendas, accesorios, colecciones...)
 	 */
-	public abstract List<WebElement> getListMenusLineaBloque(LineaType lineaType, GroupMenu bloque) throws Exception;
+	public abstract List<WebElement> getListMenusLineaBloque(LineaType lineaType, SublineaType sublineaType, GroupMenu bloque) throws Exception;
 	
 	protected final AppEcom app;
 	protected final SecLineasMenuDesktop secLineasMenu;
