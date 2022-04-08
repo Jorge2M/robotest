@@ -14,7 +14,9 @@ public class ColorRedis implements Serializable {
 	private static final long serialVersionUID = -6753967195343511891L;
 	
 	String id; 
+	String nrf;
 	String description;
+	String descriptionEn;
     List<SizeRedis> sizes;
     List<ImageRedis> images;
     List<VideoRedis> videos;
@@ -89,6 +91,22 @@ public class ColorRedis implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getDescriptionEn() {
+		return descriptionEn;
+	}
+
+	public void setDescriptionEn(String descriptionEn) {
+		this.descriptionEn = descriptionEn;
+	}
+
+	public String getNrf() {
+		return nrf;
+	}
+
+	public void setNrf(String nrf) {
+		this.nrf = nrf;
 	}
 	
 }

@@ -20,16 +20,6 @@ public class SecMenuLateralDesktop extends PageObjTM {
 	
 	private static String TagConcatMenus = "[@TAG_CONCAT_MENUS]";
 	
-//	private static String XPathLinkMenuWithTagOutletOld = 
-//		"//div[@class[contains(.,'sidebar')]]" + 
-//		"//li[@data-ga-label[contains(.,'" + TagConcatMenus + "')]]" +
-//		"/a";
-//	private static String XPathLinkMenuWithTagOutletNew = 
-//		"//li[@class[contains(.,'element')]]" +  
-//		"/a[@href[contains(.,'" + TagConcatMenus + "')]]";
-//	private static String XPathSelectedRelativeMenuOutlet = 
-//		"//self::*[@class[contains(.,'--selected')]]";
-	
 	private static String XPathLinkMenuWithTagShop = 
 		"//li[not(@class) or @class='element']" +  
 		"/a[@href[contains(.,'" + TagConcatMenus + "')]]";

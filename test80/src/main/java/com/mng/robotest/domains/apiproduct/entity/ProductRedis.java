@@ -28,6 +28,7 @@ public class ProductRedis implements Serializable {
 	String style;
     String generic; 
     String collection;
+    String sizeGroup;
     @JsonProperty("type") String productType; 
     String dangerousMatterCode;
     GenderTypeRedis genderType; 
@@ -386,6 +387,18 @@ public class ProductRedis implements Serializable {
 
 	public void setLabels(List<LabelRedis> labels) {
 		this.labels = labels;
+	}
+
+	public String getSizeGroup() {
+		return sizeGroup;
+	}
+
+	public void setSizeGroup(String sizeGroup) {
+		this.sizeGroup = sizeGroup;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

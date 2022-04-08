@@ -23,6 +23,7 @@ public class SecMenusDesktop extends PageObjTM {
 	
 	private SecMenusDesktop(AppEcom app, WebDriver driver) {
 		super(driver);
+		//TODO normalizar
 		secBloquesMenu = SecBloquesMenuDesktop.factory(app, driver);
 		secMenuSuperior = SecMenuSuperiorDesktop.getNew(app, driver);
 		secMenusUser = ModalUserSesionShopDesktop.getNew(driver);

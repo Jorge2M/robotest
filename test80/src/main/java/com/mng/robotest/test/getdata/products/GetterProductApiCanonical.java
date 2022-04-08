@@ -16,7 +16,7 @@ import com.mng.robotest.test.getdata.JaxRsClient;
 public class GetterProductApiCanonical extends JaxRsClient {
 
 	private final Client client = getClient();
-	private final String target = "https://internal-canonical-products.dev.k8s.mango/v1/products";
+	private final String target = "https://internal-canonical-products.pre.k8s.mango/v1/products";
 	private final String codPaisAlf;
 	private final String codIdiomAlf;
 	

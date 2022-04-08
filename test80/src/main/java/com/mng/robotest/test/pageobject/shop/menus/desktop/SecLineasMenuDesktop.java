@@ -46,13 +46,8 @@ public abstract class SecLineasMenuDesktop extends PageObjTM {
 	}
 	
 	public static SecLineasMenuDesktop factory(AppEcom app, WebDriver driver) {
-		if (app==AppEcom.outlet) {
-			//UtilsMangoTest.isEntornoPRO(app, driver)) {
-			return new SecLineasMenuDesktopOld(app, driver);
-		}
 		return new SecLineasMenuDesktopNew(app, driver);
 	}
-
 
 	public String getXPathLineaSelected(LineaType lineaType) {
 		String xpathLinea = getXPathLinea(lineaType);

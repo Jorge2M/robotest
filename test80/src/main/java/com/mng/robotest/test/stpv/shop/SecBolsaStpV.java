@@ -27,13 +27,12 @@ import com.mng.robotest.test.pageobject.shop.bolsa.ValidatorContentBolsa;
 import com.mng.robotest.test.pageobject.shop.bolsa.LineasArtBolsa.DataArtBolsa;
 import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.mng.robotest.test.stpv.shop.checkout.Page1IdentCheckoutStpV;
 import com.mng.robotest.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 import com.mng.robotest.test.stpv.shop.ficha.PageFichaArtStpV;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusWrapperStpV;
+
 
 public class SecBolsaStpV {
 

@@ -13,6 +13,7 @@ public class DescriptionsRedis implements Serializable {
 	
 	@JsonProperty("short") String shortDescription;
     @JsonProperty("long") List<String> longDescription;
+    String shortEn;
     
     public DescriptionsRedis() { }
     
@@ -32,6 +33,14 @@ public class DescriptionsRedis implements Serializable {
 	}
 	public void setLongDescription(List<String> longDescription) {
 		this.longDescription = longDescription;
+	}
+
+	public String getShortEn() {
+		return shortEn;
+	}
+
+	public void setShortEn(String shortEn) {
+		this.shortEn = shortEn;
 	}
 	
 }

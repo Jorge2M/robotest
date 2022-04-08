@@ -12,6 +12,8 @@ public class SizeDescriptionsRedis implements Serializable {
 	
 	@JsonProperty("base") String baseDescription;
     @JsonProperty("further") String furtherDescription;
+    String baseEn;
+    String furtherEn;
     
     public SizeDescriptionsRedis() { }
     
@@ -32,6 +34,22 @@ public class SizeDescriptionsRedis implements Serializable {
 	}
 	public void setFurtherDescription(String furtherDescription) {
 		this.furtherDescription = furtherDescription;
+	}
+
+	public String getBaseEn() {
+		return baseEn;
+	}
+
+	public void setBaseEn(String baseEn) {
+		this.baseEn = baseEn;
+	}
+
+	public String getFurtherEn() {
+		return furtherEn;
+	}
+
+	public void setFurtherEn(String furtherEn) {
+		this.furtherEn = furtherEn;
 	}
 	
 }
