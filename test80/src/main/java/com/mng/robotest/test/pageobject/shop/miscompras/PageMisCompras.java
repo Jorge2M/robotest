@@ -138,9 +138,7 @@ public class PageMisCompras extends PageObjTM {
 		return TypeTicket.Online;
 	}
 	
-	//private final static String XPathIdRelativeTicket = ".//div[@class[contains(.,'card__info')]]/div/div";
-	//TODO solicitado data-testid a Carla (11-02-2022)
-	private final static String XPathIdRelativeTicket = ".//div[@class[contains(.,'layout-row')]]//div[@class[contains(.,'layout-placeholder')] and @class[contains(.,'sg-body-small')]]";
+	private final static String XPathIdRelativeTicket = ".//*[@data-testid[contains(.,'purchaseNumber')]]";
 	private String getIdTicketPage(WebElement boxDataTicket) {
 		String lineaId = boxDataTicket.findElement(By.xpath(XPathIdRelativeTicket)).getText();
 		Pattern pattern = Pattern.compile("_*: (.*)"); boxDataTicket.getAttribute("innerHTML");
@@ -158,7 +156,7 @@ public class PageMisCompras extends PageObjTM {
 	
 	//private final static String XPathItemsRelativeTicket = ".//div[@class[contains(.,'card__info')]]/div/div[2]";
 	//TODO solicitado data-testid a Carla (11-02-2022)
-	private final static String XPathItemsRelativeTicket = ".//div[@class[contains(.,'layout-row')]]//div[@class[contains(.,'layout-placeholder')] and @class[contains(.,'sg-body-small')]][2]";
+	private final static String XPathItemsRelativeTicket = ".//div[@class[contains(.,'layout-row')]]//div[@class[contains(.,'layout-placeholder')] and @class[contains(.,'sg-body-small')]]";
 	private int getNumItemsTicketPage(WebElement boxDataTicket) {
 		String textLinea = "0" + boxDataTicket.findElement(By.xpath(XPathItemsRelativeTicket)).getText();
 		return (Integer.valueOf(textLinea.replaceAll("[^0-9]", "")));
