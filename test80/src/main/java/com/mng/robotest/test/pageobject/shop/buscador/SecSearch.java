@@ -20,6 +20,6 @@ public interface SecSearch {
 			}
 			return SecSearchDeviceShop.getNew(driver);
 		}
-		return SecSearchDesktopShop.getNew(app, driver);
+		return SecSearchDesktop.getNew(driver);
 	}
 }
