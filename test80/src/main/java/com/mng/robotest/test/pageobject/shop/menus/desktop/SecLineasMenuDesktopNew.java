@@ -28,7 +28,7 @@ public class SecLineasMenuDesktopNew extends SecLineasMenuDesktop {
 	}
 	
 	private String getXPathSublineaLink(SublineaType sublineaType) {
-		return (XPathSublineaWithTag.replace(TagIdSublinea, sublineaType.getId(AppEcom.shop)) + "//span");
+		return (XPathSublineaWithTag.replace(TagIdSublinea, sublineaType.getId(app)) + "//span");
 	}
 	
 	@Override

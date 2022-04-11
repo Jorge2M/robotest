@@ -67,7 +67,7 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 		}
 
 		public String getXPath(Channel channel, Enum<?> app) {
-			if (channel.isDevice() || app==AppEcom.outlet) {
+			if (channel.isDevice()/* || app==AppEcom.outlet*/) {
 				return xpathMobile;
 			}
 			return xpathDesktop;
