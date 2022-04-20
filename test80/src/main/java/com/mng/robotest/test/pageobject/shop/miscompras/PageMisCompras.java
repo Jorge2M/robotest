@@ -15,6 +15,7 @@ import org.openqa.selenium.WebElement;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.micuenta.Ticket;
 
 public class PageMisCompras extends PageObjTM {
@@ -36,10 +37,10 @@ public class PageMisCompras extends PageObjTM {
 	private final static String XPathTicket = XPathListTickets + "//div[@class[contains(.,'layout-content')]]";
 
 	
-	public PageMisCompras(Channel channel, WebDriver driver) {
+	public PageMisCompras(Channel channel, AppEcom app, WebDriver driver) {
 		super(driver);
 		this.channel = channel;
-		this.modalDetalleCompra = PageDetalleCompra.make(channel, driver);
+		this.modalDetalleCompra = PageDetalleCompra.make(channel, app, driver);
 	}
 	
 	public PageDetalleCompra getModalDetalleCompra() {

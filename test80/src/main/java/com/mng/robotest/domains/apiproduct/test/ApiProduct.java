@@ -519,7 +519,7 @@ public class ApiProduct {
 		}
 		
 		String sizeGarmentStr = sizeGarment.getLabel();
-		if (sizeGarmentStr.indexOf("[")!=0) {
+		if (sizeGarmentStr.indexOf("[")>-1) {
 			sizeGarmentStr = sizeGarmentStr.substring(0,sizeGarmentStr.indexOf("[")-1);
 		}
 		return Pair.of(
@@ -559,7 +559,7 @@ public class ApiProduct {
 		return (Pair.of(
 				sizeApi.getStockDetails().get(0).getStock()==sizeGarment.getStock(),
 				String.format("CheckSizeStock. SizeId: %s,<br><strong>SizeApi-Stock</strong>: %s,<br><strong>SizeGarment-Stock</strong>: %s", 
-						sizeApi.getId(), sizeApi.getStockDetails(), sizeGarment.getStock())));
+						sizeApi.getId(), sizeApi.getStockDetails().get(0).getStock(), sizeGarment.getStock())));
 	}
 	
 	private Pair<Boolean, String> checkNumberRelatedModels(ProductRedis product, GarmentFicha garment) {

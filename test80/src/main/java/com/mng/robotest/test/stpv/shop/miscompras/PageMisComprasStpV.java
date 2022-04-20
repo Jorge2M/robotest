@@ -20,13 +20,15 @@ public class PageMisComprasStpV {
 	
 	private final WebDriver driver;
 	private final Channel channel;
+	private final AppEcom app;
 	private final PageMisCompras pageMisCompras;
 	private final ModalDetalleCompraStpV modalDetalleCompraStpV; 
 
 	private PageMisComprasStpV(Channel channel, AppEcom app, WebDriver driver) {
 		this.driver = driver;
 		this.channel = channel;
-		this.pageMisCompras = new PageMisCompras(channel, driver);
+		this.app = app;
+		this.pageMisCompras = new PageMisCompras(channel, app, driver);
 		PageDetalleCompra secDetalle = pageMisCompras.getModalDetalleCompra();
 		this.modalDetalleCompraStpV = ModalDetalleCompraStpV.getNew(secDetalle);
 
@@ -87,7 +89,7 @@ public class PageMisComprasStpV {
 		saveHtmlPage=SaveWhen.IfProblem)
 	public void selectCompraOnline(int posInLista, String codPais) {
 		Ticket ticket = pageMisCompras.selectTicket(TypeTicket.Online, posInLista);	   
-		PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(channel, driver);
+		PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(channel, app, driver);
 		pageDetPedidoStpV.validateIsPageOk(ticket, codPais, driver);	   
 	}
 	

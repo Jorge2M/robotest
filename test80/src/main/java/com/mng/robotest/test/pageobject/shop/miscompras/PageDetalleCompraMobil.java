@@ -6,6 +6,9 @@ import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.test.pageobject.shop.footer.SecFooter;
+import com.mng.robotest.test.pageobject.shop.footer.SecFooter.FooterLink;
 import com.mng.robotest.test.pageobject.shop.miscompras.PageMisCompras.TypeTicket;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -13,15 +16,16 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageDetalleCompraMobil extends PageDetalleCompra {
 	
 	private final SectionPrendas sectionPrendas;
+	private final AppEcom app;
 	
 	private static String XPathIdTicket = "//*[@data-testid[contains(.,'purchaseDetail.purchaseNumber')]]";
 	private static String XPathLineaImporte = "//*[@data-testid[contains(.,'detail.totalPrice')]]";
-	private static String XPathLinkToMisCompras = "//button/*[@class[contains(.,'icon-fill-prev')]]/.."; 
-
+	//private static String XPathLinkToMisCompras = "//button/*[@class[contains(.,'icon-fill-prev')]]/.."; 
 	
-	public PageDetalleCompraMobil(Channel channel, WebDriver driver) {
+	public PageDetalleCompraMobil(Channel channel, AppEcom app, WebDriver driver) {
 		super(channel, driver);
 		this.sectionPrendas = new SectionPrendas(driver);
+		this.app = app;
 	}
 	
 	@Override
@@ -81,6 +85,8 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	}
 	@Override
 	public void gotoListaMisCompras() {
-		click(By.xpath(XPathLinkToMisCompras)).exec();
+		SecFooter secFooter = new SecFooter(app, driver);
+		secFooter.clickLink(FooterLink.miscompras);
+		//click(By.xpath(XPathLinkToMisCompras)).exec();
 	}
 }

@@ -49,7 +49,10 @@ public class SSecSelTallasFichaOldDevice extends PageObjTM implements SSecSelTal
 	
 	private String getXPathOptionTalla(List<String> possibleLabels) {
 		String coreXPath = possibleLabels.stream()
-			.map(s -> "text()='" + s + "' or starts-with(text(),'" + s + " " + "')")
+			.map(s -> 
+				"text()='" + s + "' or " + 
+				"starts-with(text(),'" + s + " " + "') or " +
+				"starts-with(text(),'" + s + "cm" + "')")
 			.collect(Collectors.joining(" or "));
 		
 		return XPathOptionTalla + "//self::*[" + coreXPath + "]"; 

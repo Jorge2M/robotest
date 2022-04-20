@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.miscompras.PageMisCompras.TypeTicket;
 
@@ -32,13 +33,13 @@ public abstract class PageDetalleCompra extends PageObjTM implements PageDetalle
 	public abstract void selectArticulo(int posArticulo);
 	public abstract void gotoListaMisCompras();
 	
-	public static PageDetalleCompra make(Channel channel, WebDriver driver) {
+	public static PageDetalleCompra make(Channel channel, AppEcom app, WebDriver driver) {
 		switch (channel) {
 		case desktop:
 			return new PageDetalleCompraDesktop(channel, driver);
 		case mobile:
 		case tablet:
-			return new PageDetalleCompraMobil(channel, driver);
+			return new PageDetalleCompraMobil(channel, app, driver);
 		}
 		return null;
 	}

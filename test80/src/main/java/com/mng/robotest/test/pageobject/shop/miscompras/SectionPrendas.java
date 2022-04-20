@@ -10,7 +10,7 @@ public class SectionPrendas extends PageObjTM {
 	private static String XPathArticulo = "//*[@data-testid='myPurchases.detail.product']";
 	private static String XPathDataArticulo = "//*[@data-testid[contains(.,'detail.productInfo')]]/../..";
 	private static String XPathReferenciaArticulo = "//*[@data-testid[contains(.,'detail.reference')]]";
-	private static String XPathNombreArticulo = "//button[@class[contains(.,'sg-action')]]";
+	private static String XPathNombreArticulo = "//button[@class[contains(.,'text-title')]]";
 	private static String XPathPrecioArticulo = "//*[@data-testid[contains(.,'detail.productPrice')]]/div";
 	
 	public SectionPrendas(WebDriver driver) {

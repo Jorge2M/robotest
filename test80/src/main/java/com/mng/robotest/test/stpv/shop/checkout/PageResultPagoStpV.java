@@ -4,11 +4,9 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Pago.TypePago;
@@ -19,11 +17,8 @@ import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.checkout.PageResultPago;
 import com.mng.robotest.test.pageobject.shop.micuenta.PageAccesoMisCompras.TypeBlock;
-import com.mng.robotest.test.pageobject.shop.miscompras.PageListPedidosOld;
 import com.mng.robotest.test.stpv.shop.micuenta.PageAccesoMisComprasStpV;
 import com.mng.robotest.test.stpv.shop.miscompras.PageMisComprasStpV;
-import com.mng.robotest.test.stpv.shop.pedidos.PageInputPedidoStpV;
-import com.mng.robotest.test.stpv.shop.pedidos.PageListPedidosStpV;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 public class PageResultPagoStpV {
@@ -188,7 +183,7 @@ public class PageResultPagoStpV {
 		} else {
 			PageAccesoMisComprasStpV pageAccesoMisComprasStpV = PageAccesoMisComprasStpV.getNew(driver);
 			pageAccesoMisComprasStpV.clickBlock(TypeBlock.NoRegistrado);
-			pageAccesoMisComprasStpV.buscarPedidoForNoRegistrado(dCtxPago.getDataPedido(), dCtxSh.channel);
+			pageAccesoMisComprasStpV.buscarPedidoForNoRegistrado(dCtxPago.getDataPedido(), dCtxSh.channel, dCtxSh.appE);
 		}
 	}
 }

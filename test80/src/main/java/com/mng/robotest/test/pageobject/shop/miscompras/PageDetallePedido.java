@@ -3,6 +3,7 @@ package com.mng.robotest.test.pageobject.shop.miscompras;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.mng.robotest.conftestmaker.AppEcom;
 
 public interface PageDetallePedido {
 	
@@ -11,7 +12,7 @@ public interface PageDetallePedido {
 		Old,
 		New;
 		
-		public PageDetallePedido getPageObject(Channel channel, WebDriver driver) {
+		public PageDetallePedido getPageObject(Channel channel, AppEcom app, WebDriver driver) {
 			switch (this) {
 			case OldOld:
 				return (new PageDetalleCompraOldOld(driver));
@@ -19,7 +20,7 @@ public interface PageDetallePedido {
 				return (new PageDetalleCompraOld(driver));
 			case New:
 			default:
-				return PageDetalleCompra.make(channel, driver);
+				return PageDetalleCompra.make(channel, app, driver);
 			}	
 		} 
 	};

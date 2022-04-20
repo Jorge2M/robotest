@@ -6,6 +6,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
+import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.pageobject.shop.miscompras.PageInputPedido;
 
@@ -13,15 +14,17 @@ public class PageInputPedidoStpV {
 
 	private final WebDriver driver;
 	private final Channel channel;
+	private final AppEcom app;
 	private final PageInputPedido pageInputPedido;
 	
-	private PageInputPedidoStpV(Channel channel, WebDriver driver) {
+	private PageInputPedidoStpV(Channel channel, AppEcom app, WebDriver driver) {
 		this.channel = channel;
+		this.app = app;
 		this.driver = driver;
 		this.pageInputPedido = new PageInputPedido(driver);
 	}
-	public static PageInputPedidoStpV getNew(Channel channel, WebDriver driver) {
-		return new PageInputPedidoStpV(channel, driver);
+	public static PageInputPedidoStpV getNew(Channel channel, AppEcom app, WebDriver driver) {
+		return new PageInputPedidoStpV(channel, app, driver);
 	}
 	
 	@Validation (
@@ -43,7 +46,7 @@ public class PageInputPedidoStpV {
 		pageInputPedido.inputPedido(codPedido);
 		pageInputPedido.clickRecuperarDatos();
 
-		PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(channel, driver);
+		PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(channel, app, driver);
 		pageDetPedidoStpV.validateIsPageOk(dataPedido);
 	}
 }

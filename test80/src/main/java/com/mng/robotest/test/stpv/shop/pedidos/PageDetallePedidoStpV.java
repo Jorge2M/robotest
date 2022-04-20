@@ -7,6 +7,7 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.pageobject.shop.micuenta.Ticket;
 import com.mng.robotest.test.pageobject.shop.miscompras.PageDetallePedido;
@@ -17,17 +18,17 @@ public class PageDetallePedidoStpV {
 	private final WebDriver driver;
 	private final PageDetallePedido pageDetalle;
 	
-	public PageDetallePedidoStpV(Channel channel, WebDriver driver) {
+	public PageDetallePedidoStpV(Channel channel, AppEcom app, WebDriver driver) {
 		this.driver = driver;
-		PageDetallePedido pageDetalle = DetallePedido.New.getPageObject(channel, driver);
+		PageDetallePedido pageDetalle = DetallePedido.New.getPageObject(channel, app, driver);
 		if (pageDetalle.isPage()) {
 			this.pageDetalle = pageDetalle;
 		} else {
-			pageDetalle = DetallePedido.Old.getPageObject(channel, driver);
+			pageDetalle = DetallePedido.Old.getPageObject(channel, app, driver);
 			if (pageDetalle.isPage()) {
 				this.pageDetalle = pageDetalle;
 			} else {
-				this.pageDetalle = DetallePedido.OldOld.getPageObject(channel, driver);
+				this.pageDetalle = DetallePedido.OldOld.getPageObject(channel, app, driver);
 			}
 		}
 	}
