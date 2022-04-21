@@ -20,9 +20,9 @@ public class SSecSelTallasFichaOldDeviceTest {
 				"//div[@id='sizesContainerId']" + 
 				"//span[@class='size-text']" +
 				"//self::*[" +
-				"text()='32' or starts-with(text(),'32 ') or " +
-				"text()='4' or starts-with(text(),'4 ') or " + 
-				"text()='0' or starts-with(text(),'0 ')]";
+				"text()='32' or starts-with(text(),'32 ') or starts-with(text(),'32cm') or " +
+				"text()='4' or starts-with(text(),'4 ') or starts-with(text(),'4cm') or " + 
+				"text()='0' or starts-with(text(),'0 ') or starts-with(text(),'0cm')]";
 				
 		assertTrue(xpath.compareTo(xpathExpected)==0);
 	}
