@@ -143,8 +143,9 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	}
 	
 	//TODO hablar con Sergio Campillo para que añada algún id no-react
+	private static final String XPathLinkFiltrarShop = "//span[@class[contains(.,'icon-fill-filter')]]";
 	private static final String XPathCapaFiltersShop = "//div[@class[contains(.,'filters--')]]";
-	private static final String XPathLinkFiltrarShop = "//button[@id='filtersBtn' or @class[contains(.,'filters__button')]]";
+	private static final String XPathButtonFiltrarShop = XPathCapaFiltersShop + "//button[@class[contains(.,'primary')]]";
 	public void showFilters() {
 		if (app!=AppEcom.outlet) {
 			if (!isFiltersShopVisible(1) &&
@@ -163,7 +164,7 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	}
 	public void acceptFilters() {
 		if (app!=AppEcom.outlet) {
-			click(By.xpath(XPathLinkFiltrarShop)).exec();
+			click(By.xpath(XPathButtonFiltrarShop)).exec();
 		}
 	}
 	private boolean isFiltersShopVisible(int maxSeconds) {

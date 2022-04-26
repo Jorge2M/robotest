@@ -62,7 +62,8 @@ public class SecSelectorPreciosStpV {
 		dataFilter.minimoFinal = selectorPreciosDesktop.getImporteMinimo();
 		dataFilter.maximoFinal = selectorPreciosDesktop.getImporteMaximo();
 		if (channel==Channel.desktop) {
-			secFiltrosDesktop.hideFilters();
+			secFiltrosDesktop.acceptFilters();
+			//secFiltrosDesktop.hideFilters();
 		}
 		
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagMinimo, String.valueOf(dataFilter.minimoFinal));

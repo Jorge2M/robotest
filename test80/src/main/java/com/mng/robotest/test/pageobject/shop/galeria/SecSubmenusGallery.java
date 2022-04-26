@@ -28,14 +28,14 @@ public class SecSubmenusGallery {
 	
 	public static boolean isVisibleSubmenu(String nameMenu, WebDriver driver) {
 		String xpath = getXPathMenu(nameMenu);
-		return PageObjTM.state(State.Visible, By.xpath(xpath), driver).check();
+		return PageObjTM.state(State.Visible, By.xpath(xpath), driver).wait(1).check();
 	}
 	
 	public static boolean isMenuSelected(String nameMenu, WebDriver driver) {
 		if (isVisibleSubmenu(nameMenu, driver)) {
 			String xpath = getXPathMenu(nameMenu);
 			//TODO solicitar data-testid
-			return driver.findElement(By.xpath(xpath)).getAttribute("className").contains("_3alhc");
+			return driver.findElement(By.xpath(xpath)).getAttribute("className").contains("SwwoF");
 		}
 		return false;
 	}
