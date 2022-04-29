@@ -4520,6 +4520,7 @@ where
 <pais nombre_pais="Indonesia" codigo="700">
 <codigo_pais>700</codigo_pais>
 <codigo_alf>ID</codigo_alf>
+<idioma acceso="id">ID</idioma>
 <idioma acceso="id">IN</idioma>
 <tarifa>IN</tarifa>
 <codpos>10350</codpos>
@@ -4536,11 +4537,9 @@ where
 <linea 		  id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="nina_bebe" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nino_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="nino_bebe" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
@@ -5526,7 +5525,7 @@ where
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<!--<tiendas_online>shop,votf</tiendas_online>-->
 <miscompras>true</miscompras>
 <moneda>%@ TWD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
@@ -5535,17 +5534,17 @@ where
 <linea 		  id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
 <linea 		  id="she"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea 		  id="he"        shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea    	  id="nina" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
-	<sublinea id="nina_nina" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="nina_bebe" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+<linea    	  id="nina" 	 shop="n" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="nina_nina" shop="n" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="nina_bebe" shop="n" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
-<linea 		  id="nino"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
-	<sublinea id="nino_nino" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="nino_bebe" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+<linea 		  id="nino"      shop="n" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="nino_nino" shop="n" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="nino_bebe" shop="n" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
-<linea 		  id="teen" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
-	<sublinea id="teen_nina" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="teen_nino" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+<linea 		  id="teen" 	 shop="n" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="teen_nina" shop="n" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="teen_nino" shop="n" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
