@@ -360,7 +360,7 @@ public class Page1DktopCheckout extends PageObjTM {
 	public void despliegaMetodosPago() throws Exception {
 		if (areMetodosPagoPlegados()) {
 		   clickDesplegablePagos();
-		   metodosPagosInStateUntil(false, 2);
+		   metodosPagosInStateUntil(false, 5);
 		}
 	}
 
