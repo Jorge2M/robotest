@@ -1,16 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.mng</groupId>
+	<modelVersion>4.0.0</modelVersion> 
 	<artifactId>robotest</artifactId>
+	<groupId>com.mng</groupId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<modules>
-		<module>test80</module>
-		<!-- <module>webmngtest</module>
-		<module>sapfiori</module>-->
-    </modules>
-
+	<packaging>jar</packaging>
+	
 	<!-- 
 		-DskipTests skips both unit and integration tests
 		-DskipUnitTests skips unit tests but executes integration tests
@@ -22,7 +16,8 @@
         <skipIntegrationTests>${skipTests}</skipIntegrationTests>
         <nexus.url>https://nexus.sys.mango/nexus</nexus.url>
 	</properties>
-	
+
+
 	<distributionManagement>
         <repository>
             <id>nexus</id>
@@ -35,8 +30,44 @@
             <url>${nexus.url}/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
-
+  
 	<dependencies>
+		<dependency>
+			<groupId>com.github.jorge2m</groupId>
+			<artifactId>testmaker-core</artifactId>
+			<version>2.1.10</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>2.25.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		    <version>4.5.13</version>
+		</dependency>
+		<dependency>
+    		<groupId>com.sun.xml.bind</groupId>
+    		<artifactId>jaxb-impl</artifactId>
+    		<version>2.3.1</version>
+		</dependency>
+		<dependency>
+    		<groupId>com.sun.xml.bind</groupId>
+    		<artifactId>jaxb-core</artifactId>
+    		<version>3.0.2</version>
+		</dependency>
+		<dependency>
+    		<groupId>xerces</groupId>
+		    <artifactId>xercesImpl</artifactId>
+    		<version>2.8.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mango</groupId>
+			<artifactId>aws.secrets.client</artifactId>
+			<version>master-20200226-100233-85319be-14</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -60,7 +91,7 @@
 			<artifactId>powermock-module-junit4</artifactId>
 			<version>1.7.3</version>
 			<scope>test</scope>
-		</dependency>
+		</dependency>		
 	</dependencies>
 
 	<build>
@@ -72,8 +103,87 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
+			</plugin>		
+		 	
+			<!-- Seguramente si lo ejecuto sin testmaker se quejará de que no encuentra el aspectj en .m2 -->
+			<plugin>
+				<groupId>com.github.m50d</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<version>1.11.1</version>
+				<configuration>
+					<complianceLevel>1.8</complianceLevel>
+					<source>1.8</source>
+					<target>1.8</target>
+					<showWeaveInfo>false</showWeaveInfo>
+					<verbose>true</verbose>
+					<Xlint>ignore</Xlint>
+					<encoding>UTF-8 </encoding>
+					<weaveDependencies>
+						<weaveDependency> 
+							<groupId>com.github.jorge2m</groupId>
+							<artifactId>testmaker-core</artifactId>
+						</weaveDependency>
+					</weaveDependencies>
+				</configuration>
+				<executions>
+					<execution> 
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin> 
+			
+			<plugin>
+				<!-- Configuración extraída de: http://emystein.blogspot.com.es/2010/12/empaquetar-una-aplicacion-de-consola.html -->
+				<!-- Configuramos el plugin de JAR en el POM para que agregue el directorio src/main/config al classpath definido en el Manifest de la aplicación -->	
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<!-- esto hace que al crear el jar se nombre robotest.jar en vez de robotest-1.0.0.jar si la versión del artifact es 1.0.0 -->
+					<finalName>${project.artifactId}</finalName>
+					<archive>
+						<manifest>
+							<!-- agregar todos los .jar de las dependencias en el classpath del Manifest -->
+							<addClasspath>true</addClasspath>
+							<!-- vamos a agregar antes del nombre de cada .jar en el classpath del Manifest el prefijo lib/ -->
+							<!-- porque luego al construir el assembly copiaremos los .jar de las dependencias al directorio lib/-->
+							<classpathPrefix>lib/</classpathPrefix>
+							<!-- la clase que se ejecuta cuando se ejecute "java -jar robotest.jar" -->
+							<mainClass>com.mng.robotest.access.CmdRunTests</mainClass>
+						</manifest>
+						<manifestEntries>
+							<!-- además de los nombres de las dependencias, agregar el directorio config al classpath del Manifest -->
+							<Class-Path>config/</Class-Path>>
+						</manifestEntries>
+					</archive>
+				</configuration>
 			</plugin>
 			
+			<!-- Configuramos el plugin de Assembly para usar un descriptor llamado distribution.xml que el plugin tomará del directorio src/main/assembly -->	
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<finalName>${project.artifactId}</finalName>
+			 		<appendAssemblyId>false</appendAssemblyId>
+					<descriptors>
+						<!-- el descriptor contiene la información para armar el assembly -->
+						<descriptor>src/main/assembly/distribution.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<!-- ejecutar el goal 'single' del plugin de assembly al ejecutar mvn package -->
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>    
+			</plugin>	
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -133,8 +243,7 @@
 	                    </configuration>
 	                </execution>
 	            </executions>
-        	</plugin>
-			
-		</plugins>
-	</build>  
+        	</plugin>			
+		</plugins>  
+	</build>
 </project>
