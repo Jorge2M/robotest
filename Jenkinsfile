@@ -37,13 +37,13 @@ pipeline {
             steps {
 	        	sh 'mvn clean'
 	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-	            	sh 'mvn --settings test80/infrastructure/ci/settings.xml test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
+	            	sh 'mvn --settings infrastructure/ci/settings.xml test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
 	            }
             }
             post {
                 success {
                     script {
-                        stash includes: 'test80/**/target/', name: 'target'
+                        stash includes: '**/target/', name: 'target'
                     }
                 }
             }
@@ -59,13 +59,13 @@ pipeline {
             steps {
             	unstash 'target'
             	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-	            	sh "mvn --settings test80/infrastructure/ci/settings.xml -B package -DskipTests"
+	            	sh "mvn --settings infrastructure/ci/settings.xml -B package -DskipTests"
 	            }
             }
             post {
                 success {
                     script {
-                        stash includes: 'test80/**/target/', name: 'target'
+                        stash includes: '**/target/', name: 'target'
                     }
                 }
             } 
@@ -88,7 +88,7 @@ pipeline {
 //            	unstash 'target'
 //	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
 //	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-//	            	sh "mvn --settings test80/infrastructure/ci/settings.xml -B verify -DskipUnitTests"
+//	            	sh "mvn --settings infrastructure/ci/settings.xml -B verify -DskipUnitTests"
 //	            }
 //            }
 //
@@ -105,15 +105,15 @@ pipeline {
       		when { expression { return env.BRANCH_NAME.equals('master') || env.BRANCH_NAME.equals('develop') || env.BRANCH_NAME.contains('release') } }
       		steps {
         		unstash 'target'
-        		sh 'chmod -R 777 ./test80/infrastructure/aws/build-publish-docker.sh'
-        		sh './test80/infrastructure/aws/build-publish-docker.sh'
+        		sh 'chmod -R 777 ./infrastructure/aws/build-publish-docker.sh'
+        		sh './infrastructure/aws/build-publish-docker.sh'
       		}
     	}
     	
 //        stage('Deploy to DEV') {
 //            when { branch 'develop' }
 //            steps {
-//                k8sDeploy(templates: "./test80/infrastructure/k8s/dev/", stage: 'dev', imageTag: env.APP_VERSION)
+//                k8sDeploy(templates: "./infrastructure/k8s/dev/", stage: 'dev', imageTag: env.APP_VERSION)
 //            }
 //        }
 
