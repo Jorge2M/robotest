@@ -11,7 +11,6 @@ pipeline {
         CURRENT_DATE = sh(returnStdout: true, script: 'echo $(date -u +%Y%m%d%H%M%S) | tr -d "\n"')
         LAST_COMMIT = sh(returnStdout: true, script: 'git rev-parse --short=10 HEAD | tr -d "\n"')
         APP_VERSION = "${CURRENT_DATE}-${LAST_COMMIT}"
-        M2_CONFIG_FILE = "nexus"
     }
     options {
         buildDiscarder(logRotator(numToKeepStr: '5', daysToKeepStr: '30'))
@@ -29,19 +28,17 @@ pipeline {
         }
 
         stage('Run Unit Tests') {
-//            agent {
-//                docker {
-//                    image 'maven:3.5.4-jdk-8-alpine'
-//                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
-//                }
-//            }
+            agent {
+                docker {
+                    image 'maven:3.5.4-jdk-8-alpine'
+                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
+                }
+            }
             steps {
-                sh 'chmod -R 777 ./mvnw'
-	        	sh './mvnw clean'
-	        	configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
-	        	//withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-            	    sh './mvnw -s ${mavenSettings} test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
-            	}
+	        	sh 'mvn clean'
+	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+	            	sh 'mvn --settings infrastructure/ci/settings.xml test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
+	            }
             }
             post {
                 success {
@@ -53,19 +50,16 @@ pipeline {
         }
         
         stage('Package') {
-//            agent {
-//                docker {
-//                    image 'maven:3.5.4-jdk-8-alpine'
-//                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
-//                }
-//            }
+            agent {
+                docker {
+                    image 'maven:3.5.4-jdk-8-alpine'
+                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
+                }
+            }
             steps {
             	unstash 'target'
-            	sh 'chmod -R 777 ./mvnw'
-            	//withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-            	configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
-            	    //sh "./mvnw --settings infrastructure/ci/settings.xml -B package -DskipTests"
-            	    sh "./mvnw -s ${mavenSettings} -B package -DskipTests"
+            	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+	            	sh "mvn --settings infrastructure/ci/settings.xml -B package -DskipTests"
 	            }
             }
             post {
@@ -92,9 +86,9 @@ pipeline {
 //
 //            steps {
 //            	unstash 'target'
-//	        	sh "./mvnw -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
+//	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
 //	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-//	            	sh "./mvnw --settings infrastructure/ci/settings.xml -B verify -DskipUnitTests"
+//	            	sh "mvn --settings infrastructure/ci/settings.xml -B verify -DskipUnitTests"
 //	            }
 //            }
 //
