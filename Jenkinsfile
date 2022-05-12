@@ -37,8 +37,9 @@ pipeline {
             steps {
                 sh 'chmod -R 777 ./mvnw'
 	        	sh './mvnw clean'
-	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-            	    sh './mvnw --settings infrastructure/ci/settings.xml test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
+	        	configFileProvider([configFile(fileId: '6719719b-ea5a-4091-a5c2-6c894e12b99d', variable: 'mavenSettings')]) {
+	        	//withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+            	    sh './mvnw -s ${mavenSettings} test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
             	}
             }
             post {
