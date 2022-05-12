@@ -37,11 +37,9 @@ pipeline {
             steps {
                 sh 'chmod -R 777 ./mvnw'
 	        	sh './mvnw clean'
-	       	    configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
-		        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-	            	    sh './mvnw --settings infrastructure/ci/settings.xml test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris" -s ${mavenSettings}'
-	            	}
-	            }
+	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+            	    sh './mvnw --settings infrastructure/ci/settings.xml test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris" -s ${mavenSettings}'
+            	}
             }
             post {
                 success {
@@ -63,9 +61,7 @@ pipeline {
             	unstash 'target'
             	sh 'chmod -R 777 ./mvnw'
             	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-            	    configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
-	            	    sh "./mvnw --settings infrastructure/ci/settings.xml -B package -DskipTests -s ${mavenSettings}"
-	            	}
+            	    sh "./mvnw --settings infrastructure/ci/settings.xml -B package -DskipTests -s ${mavenSettings}"
 	            }
             }
             post {
