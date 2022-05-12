@@ -28,12 +28,12 @@ pipeline {
         }
 
         stage('Run Unit Tests') {
-            agent {
-                docker {
-                    image 'maven:3.5.4-jdk-8-alpine'
-                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
-                }
-            }
+//            agent {
+//                docker {
+//                    image 'maven:3.5.4-jdk-8-alpine'
+//                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
+//                }
+//            }
             steps {
 	        	sh './mvnw clean'
 	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
@@ -50,12 +50,12 @@ pipeline {
         }
         
         stage('Package') {
-            agent {
-                docker {
-                    image 'maven:3.5.4-jdk-8-alpine'
-                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
-                }
-            }
+//            agent {
+//                docker {
+//                    image 'maven:3.5.4-jdk-8-alpine'
+//                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
+//                }
+//            }
             steps {
             	unstash 'target'
             	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
