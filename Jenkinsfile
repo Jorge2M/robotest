@@ -30,7 +30,7 @@ pipeline {
         stage('Run Unit Tests') {
             agent {
                 docker {
-                    image 'maven:3.8.3-jdk-17'
+                    image 'maven:3.8.3-openjdk-17'
                     args '-v /home/ubuntu/.m2:/ubuntu/.m2'
                 }
             }
@@ -53,7 +53,7 @@ pipeline {
         stage('Package') {
             agent {
                 docker {
-                    image 'maven:3.8.3-jdk-17'
+                    image 'maven:3.8.3-openjdk-17'
                     args '-v /home/ubuntu/.m2:/ubuntu/.m2'
                 }
             }
