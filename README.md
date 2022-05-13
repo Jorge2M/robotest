@@ -7,7 +7,7 @@ Confluent Mango Page https://confluence.mango.com/display/TT/Robotest
 
 Project based on Open Source Artifact https://github.com/AubaySpain/testmaker
 
-Based on TestNG / Selenium 4 / Java8+
+Based on TestNG / Selenium 4 / Java17+
 
 Implements a library of E2E tests launched from real Chrome/Firefox Browsers. That library covers many functionalities of many ebusiness applications.
 
