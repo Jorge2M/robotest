@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.xerces.dom.ElementNSImpl;
+//import org.apache.xerces.dom.ElementNSImpl;
 import org.w3c.dom.NodeList;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -98,6 +98,8 @@ public class ColorGarment {
 	public List<? extends Object> getImages() {
 		return images;
 	}
+	
+	/**
 	public List<ImageGarment> getImagesGarment() {
 		List<ImageGarment> imagesReturn = new ArrayList<>();
 		if (images==null) {
@@ -128,6 +130,7 @@ public class ColorGarment {
 		}
 		return imagesReturn;
 	}
+	*/
 	public void setImages(List<? extends Object> images) {
 		this.images = images;
 	}

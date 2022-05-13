@@ -203,7 +203,7 @@ public class ApiProduct {
 							if (productApi.getRelatedModels("SIZE")==null) {
 								checks.add(Check.from(productId, checkNumberSizes(color1, color2)));
 							}
-							checks.add(Check.from(productId, checkColorImages(color1, color2)));
+							//checks.add(Check.from(productId, checkColorImages(color1, color2)));
 							
 							if (garmentFicha.isStock()) {
 								checks.add(Check.from(productId, checkColorPricesCurrency(color1, color2)));
@@ -496,6 +496,7 @@ public class ApiProduct {
 				String.format("CheckColorImages.<br><strong>ColorId</strong>: %s (Pendiente reportar)", colorApi.getId()));
 	}
 	
+	/*
 	private Pair<Boolean, String> checkColorImages(ColorRedis colorApi, ColorGarment colorGarment) {
 		List<ImageGarment> images = colorGarment.getImagesGarment();
 		for (ImageGarment imageGarment : images) {
@@ -507,6 +508,7 @@ public class ApiProduct {
 				String.format(
 						"CheckColorImages.<br><strong>ColorId</strong>: %s (Pendiente reportar)", colorApi.getId()));
 	}
+	*/
 	private Pair<Boolean, String> checkSizeId(SizeRedis sizeApi, SizeGarment sizeGarment) {
 		return Pair.of(
 				Integer.valueOf(sizeApi.getId())==Integer.valueOf(sizeGarment.getId()),

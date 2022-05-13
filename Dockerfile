@@ -2,7 +2,7 @@
 #example create image: docker build -t jorge2m/robotest:latest .
 #example container run: docker run -d -p 80:8080 -p 443:443 --privileged -v "%CD%/dockerresults:/robotest/output-library" jorge2m/robotest:latest
 #   -> In PowerShell replace %CD% by ${pwd}
-FROM jorge2m/chrome-firefox-jdk8-maven:latest
+FROM jorge2m/chrome-firefox-openjdk17-maven:latest
 
 COPY target/robotest.zip robotest.zip
 RUN unzip robotest.zip
@@ -10,7 +10,7 @@ RUN unzip robotest.zip
 COPY docker-entrypoint.sh /robotest/docker-entrypoint.sh
 
 RUN apt-get update && apt-get install -y
-RUN sed 's/TLSv1, TLSv1.1,/ /' etc/java-8-openjdk/security/java.security -i
+#RUN sed 's/TLSv1, TLSv1.1,/ /' etc/java-8-openjdk/security/java.security -i
 	
 WORKDIR /robotest
 
