@@ -29,7 +29,9 @@ Covers the web channels: desktop, mobile, tablet
     vim ~/.m2/setting.xml 
 
 ### Build and run unit tests
-
+	
+	Prerrequisite: install and use the OpenJdk17 
+	
     ./mvnw clean package -D skipUnitTests 
     ./mvnw test 
     
