@@ -1,4 +1,5 @@
 /bin/
+/robotest/
 target/
 /.classpath
 /.project
