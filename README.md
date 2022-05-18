@@ -39,7 +39,7 @@ Covers the web channels: desktop, mobile, tablet
 
 	unzip target/robotest.zip
 	
-	java -jar target/robotest/robotest.jar -suite SmokeTest -driver chrome -channel desktop -application shop -url https://shop.mango.com/preHome.faces -tcases FIC001,BOR001
+	java -jar robotest/robotest.jar -suite SmokeTest -driver chrome -channel desktop -application shop -url https://shop.mango.com/preHome.faces -tcases FIC001,BOR001
 	
 	The html report can be found in ./output-library/SmokeTest/{id_testrun}/ReportTSuite.html
 	
