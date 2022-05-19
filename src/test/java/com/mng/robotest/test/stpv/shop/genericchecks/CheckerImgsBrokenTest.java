@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.mockito.Matchers.*;
-
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +14,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores.Resultado;
-import com.mng.robotest.test.stpv.shop.genericchecks.CheckerImgsBroken;
+
 
 public class CheckerImgsBrokenTest {
 
@@ -63,6 +62,7 @@ public class CheckerImgsBrokenTest {
 		ResultadoErrores resultadoImgsBroken = new ResultadoErrores(); 
 		resultadoImgsBroken.setListaLogError(listBrokenImages);
 		resultadoImgsBroken.setResultado(Resultado.ERRORES);
+		
 		
 		CheckerImgsBroken checkerSpy = Mockito.spy(CheckerImgsBroken.class); 
 		Mockito.doReturn(resultadoImgsBroken).when(checkerSpy).imagesBroken(any(WebDriver.class), any(Channel.class), anyInt());

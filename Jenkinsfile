@@ -30,11 +30,12 @@ pipeline {
         stage('Run Unit Tests') {
             agent {
                 docker {
-                    image 'maven:3.5.4-jdk-8-alpine'
+                    image 'maven:3.8.4-openjdk-17'
                     args '-v /home/ubuntu/.m2:/ubuntu/.m2'
                 }
             }
             steps {
+            	sh 'mvn -version'
 	        	sh 'mvn clean'
 	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
 	            	sh 'mvn --settings infrastructure/ci/settings.xml test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
@@ -52,7 +53,7 @@ pipeline {
         stage('Package') {
             agent {
                 docker {
-                    image 'maven:3.5.4-jdk-8-alpine'
+                    image 'maven:3.8.4-openjdk-17'
                     args '-v /home/ubuntu/.m2:/ubuntu/.m2'
                 }
             }

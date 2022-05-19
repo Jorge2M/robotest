@@ -7,7 +7,7 @@ Confluent Mango Page https://confluence.mango.com/display/TT/Robotest
 
 Project based on Open Source Artifact https://github.com/AubaySpain/testmaker
 
-Based on TestNG / Selenium 4 / Java8+
+Based on TestNG / Selenium 4 / Java17+
 
 Implements a library of E2E tests launched from real Chrome/Firefox Browsers. That library covers many functionalities of many ebusiness applications.
 
@@ -29,7 +29,9 @@ Covers the web channels: desktop, mobile, tablet
     vim ~/.m2/setting.xml 
 
 ### Build and run unit tests
-
+	
+	Prerrequisite: install and use the OpenJdk17 
+	
     ./mvnw clean package -D skipUnitTests 
     ./mvnw test 
     
@@ -37,7 +39,7 @@ Covers the web channels: desktop, mobile, tablet
 
 	unzip target/robotest.zip
 	
-	java -jar robotest.jar -suite SmokeTest -driver chrome -channel desktop -application shop -url https://shop.mango.com/preHome.faces -tcases FIC001,BOR001
+	java -jar target/robotest/robotest.jar -suite SmokeTest -driver chrome -channel desktop -application shop -url https://shop.mango.com/preHome.faces -tcases FIC001,BOR001
 	
 	The html report can be found in ./output-library/SmokeTest/{id_testrun}/ReportTSuite.html
 	

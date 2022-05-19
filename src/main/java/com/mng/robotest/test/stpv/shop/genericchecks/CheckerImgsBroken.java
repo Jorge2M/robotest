@@ -30,6 +30,7 @@ public class CheckerImgsBroken implements Checker {
 	private final static int MAX_ERRORES = 1;
 	private final static List<String> WHITELIST = Arrays.asList(
 			"https://st.mngbcn.com/images/imgWar/loadingGif/teen.gif");
+
 	
 	@Override
 	public ChecksTM check(WebDriver driver) {
