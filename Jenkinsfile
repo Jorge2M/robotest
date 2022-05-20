@@ -35,12 +35,10 @@ pipeline {
                 }
             }
             steps {
-            	sh 'chmod -R 777 ./mvnw'
-            	sh './mvnw -version'
-	        	sh './mvnw clean'
+            	sh 'mvn -version'
+	        	sh 'mvn clean'
 	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-	        	    sh './mvnw --settings infrastructure/ci/settings.xml -version -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
-	            	sh 'unset MAVEN_CONFIG && ./mvnw --settings infrastructure/ci/settings.xml test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
+	            	sh 'mvn --settings infrastructure/ci/settings.xml test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
 	            }
             }
             post {
@@ -52,32 +50,17 @@ pipeline {
             }
         }
         
-        stage('Integration Tests') {
-//            agent {
-//                docker {
-//                    image 'maven:3.8.4-openjdk-17'
-//                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
-//                }
-//            }        
-            steps {
-            	unstash 'target'
-	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-	            	sh "./mvnw --settings infrastructure/ci/settings.xml -B verify -DskipUnitTests"
-	            }
-            }
-        }  
-        
         stage('Package') {
-//            agent {
-//                docker {
-//                    image 'maven:3.8.4-openjdk-17'
-//                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
-//                }
-//            }
+            agent {
+                docker {
+                    image 'maven:3.8.4-openjdk-17'
+                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
+                }
+            }
             steps {
             	unstash 'target'
             	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-	            	sh "./mvnw --settings infrastructure/ci/settings.xml -B package -DskipTests"
+	            	sh "mvn --settings infrastructure/ci/settings.xml -B package -DskipTests"
 	            }
             }
             post {
@@ -88,8 +71,6 @@ pipeline {
                 }
             } 
         } 
-
-      
 
 //        stage('E2e Tests') {
 //            when { anyOf { branch 'master'; branch 'develop' } }
