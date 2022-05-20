@@ -32,7 +32,7 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3.8.4-openjdk-17'
-                    args '-v /home/ubuntu/.m2:/root/.m2'
+                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
                 }
             }
             steps {
