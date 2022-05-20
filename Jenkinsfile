@@ -11,7 +11,6 @@ pipeline {
         CURRENT_DATE = sh(returnStdout: true, script: 'echo $(date -u +%Y%m%d%H%M%S) | tr -d "\n"')
         LAST_COMMIT = sh(returnStdout: true, script: 'git rev-parse --short=10 HEAD | tr -d "\n"')
         APP_VERSION = "${CURRENT_DATE}-${LAST_COMMIT}"
-        JAVA_HOME="/opt/jdk17"
     }
     options {
         buildDiscarder(logRotator(numToKeepStr: '5', daysToKeepStr: '30'))
