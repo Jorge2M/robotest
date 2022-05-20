@@ -2,6 +2,7 @@ package com.mng.robotest.domains.cookiescheck.idp;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.slf4j.Logger;
 
 import java.io.IOException;
@@ -28,19 +29,7 @@ public class IDPClientService {
     private final String baseUrl;
     private final HttpClient httpClient;
 
-    public static void executeIdpTmp() throws Exception {
-    	var idpCredentials = new IdpCredentials(
-    			"001ef8b226344441859f84dd913d0d5b",
-    			"97bFu9YETKpjCu3dx8RMRd9GvMdLcYl0"); 
-    	var idpClientService = new IDPClientService(
-    			"https://mango.my.onetrust.com/api/access/v1/", 
-    			idpCredentials);
-    	
-    	IdentityToken token = idpClientService.clientCredentialsToken();
-    	System.out.println(token.getAccess_token());
-    	System.out.println(token.getRefresh_token());
-    }
-    
+
     public IDPClientService(String baseUrl, IdpCredentials credentials) {
         this.baseUrl = baseUrl;
         httpClient = HttpClient.newBuilder()

@@ -1,5 +1,8 @@
 package com.mng.robotest.domains.cookiescheck.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Cookie {
 
 	private String cookieName;

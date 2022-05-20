@@ -50,6 +50,22 @@ pipeline {
             }
         }
         
+        stage('Integration Tests') {
+            agent {
+                docker {
+                    image 'maven:3.8.4-openjdk-17'
+                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
+                }
+            }        
+            steps {
+            	unstash 'target'
+	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
+	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+	            	sh "mvn --settings infrastructure/ci/settings.xml -B verify -DskipUnitTests"
+	            }
+            }
+        }  
+        
         stage('Package') {
             agent {
                 docker {
@@ -71,6 +87,8 @@ pipeline {
                 }
             } 
         } 
+
+      
 
 //        stage('E2e Tests') {
 //            when { anyOf { branch 'master'; branch 'develop' } }
