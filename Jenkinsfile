@@ -4,6 +4,10 @@ import java.time.format.DateTimeFormatter
 
 library("k8s@1.0.0")
 
+def outputFolders = [
+        build   : '**/build/',
+        test: '**/build/**/test/*.xml'
+]
 
 pipeline {
     agent any
@@ -42,6 +46,11 @@ pipeline {
 	            }
             }
             post {
+                always {
+                    script {
+                        junit outputFolders.test
+                    }
+                }            
                 success {
                     script {
                         stash includes: '**/target/', name: 'target'
@@ -64,6 +73,11 @@ pipeline {
 	            }
             }
             post {
+                always {
+                    script {
+                        junit outputFolders.test
+                    }
+                }            
                 success {
                     script {
                         stash includes: '**/target/', name: 'target'
