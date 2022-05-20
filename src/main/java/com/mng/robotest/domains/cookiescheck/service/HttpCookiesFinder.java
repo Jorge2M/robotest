@@ -63,10 +63,10 @@ public class HttpCookiesFinder implements CookiesRepository {
     
     private IdentityToken getIdentityToken() throws Exception {
     	//Credentials for obtain the READ Token for Cookie
-    	var idpCredentials = new IdpCredentials(
+    	IdpCredentials idpCredentials = new IdpCredentials(
     			"001ef8b226344441859f84dd913d0d5b",
     			"97bFu9YETKpjCu3dx8RMRd9GvMdLcYl0"); 
-    	var idpClientService = new IDPClientService(
+    	IDPClientService idpClientService = new IDPClientService(
     			"https://mango.my.onetrust.com/api/access/v1/", 
     			idpCredentials);
     	
