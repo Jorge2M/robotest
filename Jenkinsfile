@@ -35,6 +35,7 @@ pipeline {
                 }
             }
             steps {
+            	sh 'chmod -R 777 ./mvnw'
             	sh './mvnw -version'
 	        	sh './mvnw clean'
 	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
