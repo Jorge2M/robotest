@@ -50,6 +50,28 @@ pipeline {
             }
         }
         
+        stage('Run Integration Tests') {
+            agent {
+                docker {
+                    image 'maven:3.8.4-openjdk-17'
+                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
+                }
+            }
+            steps {
+                unstash 'target'
+	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+	            	sh "mvn --settings infrastructure/ci/settings.xml -B verify -DskipUnitTests"
+	            }
+            }
+            post {
+                success {
+                    script {
+                        stash includes: '**/target/', name: 'target'
+                    }
+                }
+            }
+        }
+        
         stage('Package') {
             agent {
                 docker {
