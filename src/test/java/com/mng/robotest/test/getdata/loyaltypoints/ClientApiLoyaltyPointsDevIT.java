@@ -10,7 +10,7 @@ import com.mng.robotest.test.appshop.Loyalty.UserTest;
 import com.mng.robotest.test.getdata.loyaltypoints.ClientApiLoyaltyPointsDev;
 import com.mng.robotest.test.getdata.loyaltypoints.data.ResultAddPoints;
 
-public class ClientApiLoyaltyPointsDevTest {
+public class ClientApiLoyaltyPointsDevIT {
 
 	@Ignore
 	@Test

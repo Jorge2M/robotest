@@ -18,12 +18,12 @@ import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.products.data.ProductLabel;
 import com.mng.robotest.test.utils.PaisGetter;
 
-public class GetterProductsTest {
+public class GetterProductsIT {
 	
 	private static GetterProducts getterProducts;
 	private final int numProducts = 20;
 	
-	public GetterProductsTest() throws Exception {
+	public GetterProductsIT() throws Exception {
 		if (getterProducts==null) {
 			Pais españa = PaisGetter.get(PaisShop.España);
 			getterProducts = new GetterProducts.Builder("https://shop.mango.com/", españa.getCodigo_alf(), AppEcom.shop, null)

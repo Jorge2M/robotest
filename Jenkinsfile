@@ -5,8 +5,9 @@ import java.time.format.DateTimeFormatter
 library("k8s@1.0.0")
 
 def outputFolders = [
-        build  : '**/target/**',
-        test   : '**/target/surefire-reports/*.xml',
+        build       : '**/target/**',
+        test        : '**/target/surefire-reports/*.xml',
+        integration : '**/target/failsafe-reports/*.xml'
 ]
 
 pipeline {
@@ -75,7 +76,7 @@ pipeline {
             post {
                 always {
                     script {
-                        junit outputFolders.test
+                        junit outputFolders.integration
                     }
                 }            
                 success {
