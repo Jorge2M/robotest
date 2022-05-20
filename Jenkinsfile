@@ -29,12 +29,12 @@ pipeline {
         }
 
         stage('Run Unit Tests') {
-//            agent {
-//                docker {
-//                    image 'maven:3.8.4-openjdk-17'
-//                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
-//                }
-//            }
+            agent {
+                docker {
+                    image 'maven:3.8.4-openjdk-17'
+                    args '-v /home/ubuntu/.m2:/root/.m2'
+                }
+            }
             steps {
             	sh 'chmod -R 777 ./mvnw'
             	sh './mvnw -version'
