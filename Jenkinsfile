@@ -35,10 +35,10 @@ pipeline {
                 }
             }
             steps {
-            	sh 'mvn -version'
-	        	sh 'mvn clean'
+            	sh './mvnw -version'
+	        	sh './mvnw clean'
 	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-	            	sh 'mvn --settings infrastructure/ci/settings.xml test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
+	            	sh './mvnw --settings infrastructure/ci/settings.xml test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
 	            }
             }
             post {
@@ -59,9 +59,8 @@ pipeline {
             }        
             steps {
             	unstash 'target'
-	        	sh "mvn -B versions:set -DnewVersion='${NJORD_VERSION}' -DgenerateBackupPoms=false"
 	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-	            	sh "mvn --settings infrastructure/ci/settings.xml -B verify -DskipUnitTests"
+	            	sh "./mvnw --settings infrastructure/ci/settings.xml -B verify -DskipUnitTests"
 	            }
             }
         }  
@@ -76,7 +75,7 @@ pipeline {
             steps {
             	unstash 'target'
             	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-	            	sh "mvn --settings infrastructure/ci/settings.xml -B package -DskipTests"
+	            	sh "./mvnw --settings infrastructure/ci/settings.xml -B package -DskipTests"
 	            }
             }
             post {
