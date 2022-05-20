@@ -11,6 +11,7 @@ pipeline {
         CURRENT_DATE = sh(returnStdout: true, script: 'echo $(date -u +%Y%m%d%H%M%S) | tr -d "\n"')
         LAST_COMMIT = sh(returnStdout: true, script: 'git rev-parse --short=10 HEAD | tr -d "\n"')
         APP_VERSION = "${CURRENT_DATE}-${LAST_COMMIT}"
+        JAVA_HOME="/opt/jdk17"
     }
     options {
         buildDiscarder(logRotator(numToKeepStr: '5', daysToKeepStr: '30'))
@@ -28,12 +29,12 @@ pipeline {
         }
 
         stage('Run Unit Tests') {
-            agent {
-                docker {
-                    image 'maven:3.8.4-openjdk-17'
-                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
-                }
-            }
+//            agent {
+//                docker {
+//                    image 'maven:3.8.4-openjdk-17'
+//                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
+//                }
+//            }
             steps {
             	sh 'chmod -R 777 ./mvnw'
             	sh './mvnw -version'
@@ -52,12 +53,12 @@ pipeline {
         }
         
         stage('Integration Tests') {
-            agent {
-                docker {
-                    image 'maven:3.8.4-openjdk-17'
-                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
-                }
-            }        
+//            agent {
+//                docker {
+//                    image 'maven:3.8.4-openjdk-17'
+//                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
+//                }
+//            }        
             steps {
             	unstash 'target'
 	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
@@ -67,12 +68,12 @@ pipeline {
         }  
         
         stage('Package') {
-            agent {
-                docker {
-                    image 'maven:3.8.4-openjdk-17'
-                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
-                }
-            }
+//            agent {
+//                docker {
+//                    image 'maven:3.8.4-openjdk-17'
+//                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
+//                }
+//            }
             steps {
             	unstash 'target'
             	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
