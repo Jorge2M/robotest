@@ -40,6 +40,7 @@ pipeline {
             	sh './mvnw -version'
 	        	sh './mvnw clean'
 	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+	        	    sh './mvnw --settings infrastructure/ci/settings.xml version -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
 	            	sh './mvnw --settings infrastructure/ci/settings.xml test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
 	            }
             }
