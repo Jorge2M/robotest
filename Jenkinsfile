@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter
 library("k8s@1.0.0")
 
 def outputFolders = [
-        build   : '**/build/',
-        test: '**/build/**/test/*.xml'
+        build  : '**/target/**',
+        test   : '**/target/surefire-reports/*.xml',
 ]
 
 pipeline {
