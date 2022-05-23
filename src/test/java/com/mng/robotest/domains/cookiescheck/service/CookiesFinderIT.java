@@ -4,16 +4,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import com.mng.robotest.domains.cookiescheck.entities.Cookie;
 
-class CookiesFinderIT {
+public class CookiesFinderIT {
 
 	@Test
-	void testGetCookies() throws Exception {
+	public void testGetCookies() throws Exception {
 		CookiesFinder cookieFinder = new CookiesFinder();
-		List<Cookie> cookies = cookieFinder.getCookies();
+		List<Cookie> cookies = cookieFinder.getAllowedCookies();
 		
 		assertTrue(cookies!=null && cookies.size()>0);
 		assertTrue(!cookieFinder.isNeededRefreshDataCookies(5));

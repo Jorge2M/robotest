@@ -17,7 +17,7 @@ public class CookiesFinder {
 	private static Calendar timeCapturedCookies;
 
 	
-    public synchronized List<Cookie> getCookies() throws Exception {
+    public synchronized List<Cookie> getAllowedCookies() {
     	if (isNeededRefreshDataCookies(SECONDS_PERSISTENCE)) {
    			listCookies = getCookiesFromHttp();
    			timeCapturedCookies = Calendar.getInstance();

@@ -6,8 +6,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Cookie {
 
 	private String cookieName;
+	private String host;
 	private String expiry;
 	private boolean thirdParty;
+	
+	public static Cookie from(String cookieName) {
+		Cookie cookie = new Cookie();
+		cookie.setCookieName(cookieName);
+		return cookie;
+	}
 	
 	public String getCookieName() {
 		return cookieName;
@@ -15,6 +22,12 @@ public class Cookie {
 	public void setCookieName(String cookieName) {
 		this.cookieName = cookieName;
 	}
+	public String getHost() {
+		return host;
+	}
+	public void setHost(String host) {
+		this.host = host;
+	}	
 	public String getExpiry() {
 		return expiry;
 	}
