@@ -18,6 +18,7 @@ import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.getdata.products.GetterProducts;
+import com.mng.robotest.test.getdata.products.Menu;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
@@ -29,7 +30,6 @@ import com.mng.robotest.test.pageobject.shop.ficha.Slider;
 import com.mng.robotest.test.pageobject.shop.ficha.PageFicha.TypeFicha;
 import com.mng.robotest.test.pageobject.shop.ficha.SecDataProduct.ProductNav;
 import com.mng.robotest.test.pageobject.shop.ficha.SecProductDescrOld.TypePanel;
-import com.mng.robotest.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
@@ -80,7 +80,9 @@ public class FichaProducto {
 			pageFichaStpv.checkLinkDispTiendaInvisible();
 		}
 		
-		List<FilterType> filterNoOnlineWithColors = Arrays.asList(FilterType.NoOnline, FilterType.ManyColors); 
+		List<FilterType> filterNoOnlineWithColors = Arrays.asList(
+				FilterType.NoOnline, 
+				FilterType.ManyColors); 
 		Optional<GarmentCatalog> articleNoOnlineWithColors = getterProducts.getOneFiltered(filterNoOnlineWithColors);
 		if (!articleNoOnlineWithColors.isPresent()) {
 			List<String> filtersLabels = filterNoOnlineWithColors.stream().map(Object::toString).collect(Collectors.toList());
@@ -239,16 +241,19 @@ public class FichaProducto {
 		DataCtxShop dCtxSh = getCtxShForTest(espana, castellano);
 
 		AccesoStpV.oneStep(dCtxSh, false, driver);
-		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-		Menu1rstLevel menuPersonalizacion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.he, null, "personalizacion"));
-		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
+		//PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		//Menu1rstLevel menuPersonalizacion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.he, null, "personalizacion"));
+		//SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
 		
 		//secMenusStpV.checkExistMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
-		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
-		secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
-		LocationArticle articleNum = LocationArticle.getInstanceInCatalog(1);
-		pageGaleriaStpV.selectArticulo(articleNum, dCtxSh);
-		
+		//secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
+		//secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
+		//LocationArticle articleNum = LocationArticle.getInstanceInCatalog(1);
+		//pageGaleriaStpV.selectArticulo(articleNum, dCtxSh);
+		GarmentCatalog articuloPersonalizable = getArticlePersonalizable(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver);
+		SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
+		secBuscadorStpV.searchArticulo(articuloPersonalizable, dCtxSh.pais);
+
 		PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
 		SecModalPersonalizacionStpV modalPersonalizacionStpV = SecModalPersonalizacionStpV.getNewOne(dCtxSh, driver); 
 		int numColors = pageFichaStpv.getFicha().getNumColors();
@@ -276,6 +281,24 @@ public class FichaProducto {
 		modalPersonalizacionStpV.selectSize();
 		modalPersonalizacionStpV.confirmCustomization();
 		modalPersonalizacionStpV.checkCustomizationProof();
+	}
+	
+	private GarmentCatalog getArticlePersonalizable(String codigoPais, AppEcom app, WebDriver driver) 
+			throws Exception {
+		
+		GetterProducts getterProducts = new GetterProducts.Builder(codigoPais, app, driver)
+				.linea(LineaType.he)
+				.menu(Menu.CamisasHE)
+				.numProducts(5)
+				.build();
+		
+		Optional<GarmentCatalog> articlePersonalizable = getterProducts.getOneFiltered(
+				Arrays.asList(FilterType.Personalizable));
+		
+		if (!articlePersonalizable.isPresent()) {
+			throw new NotFoundException("Not found article with filter " + FilterType.Personalizable);
+		}
+		return articlePersonalizable.get();
 	}
 	
 	private DataCtxShop getCtxShForTest(Pais pais, IdiomaPais idioma) {
