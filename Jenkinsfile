@@ -4,6 +4,11 @@ import java.time.format.DateTimeFormatter
 
 library("k8s@1.0.0")
 
+def outputFolders = [
+        build       : '**/target/**',
+        test        : '**/target/surefire-reports/*.xml',
+        integration : '**/target/failsafe-reports/*.xml'
+]
 
 pipeline {
     agent any
@@ -42,6 +47,38 @@ pipeline {
 	            }
             }
             post {
+                always {
+                    script {
+                        junit outputFolders.test
+                    }
+                }            
+                success {
+                    script {
+                        stash includes: '**/target/', name: 'target'
+                    }
+                }
+            }
+        }
+        
+        stage('Run Integration Tests') {
+            agent {
+                docker {
+                    image 'maven:3.8.4-openjdk-17'
+                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
+                }
+            }
+            steps {
+                unstash 'target'
+	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+	            	sh "mvn --settings infrastructure/ci/settings.xml -B verify -DskipUnitTests"
+	            }
+            }
+            post {
+                always {
+                    script {
+                        junit outputFolders.integration
+                    }
+                }            
                 success {
                     script {
                         stash includes: '**/target/', name: 'target'

@@ -87,6 +87,7 @@ public class SecBuscadorStpV {
 		}
 
 		GenericChecks.from(Arrays.asList( 
+				GenericCheck.CookiesAllowed,
 				GenericCheck.JSerrors, //
 				GenericCheck.Analitica,//
 				GenericCheck.TextsTraduced,

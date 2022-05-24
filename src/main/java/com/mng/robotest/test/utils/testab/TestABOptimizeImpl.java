@@ -45,7 +45,7 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(AppEcom.shop, AppEcom.votf)
 	),
 	
-	SHOP_260_Menu_Mobile_Nuevo_Diseño(
+	SHOP_260_Menu_Mobile_Nuevo_Diseno(
 		"SHOP-260 - Menu - Mobile - Nuevo Diseño",
 		"GTM-KWJ6XJ_OPT-KMZZV$",
 		Arrays.asList(0,1),

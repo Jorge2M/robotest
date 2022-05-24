@@ -30,7 +30,7 @@ public class PageGaleriaDevice extends PageGaleria {
 			 "(@class[contains(.,'productListImg')] or " + 
 			  "@class[contains(.,'product-list-image')] or " + 
 			  "@class[contains(.,'product-list-img')] or " +
-			  "@class[contains(.,'product-image')])]";
+			  "@id[contains(.,'product-image')])]";
 	final static String XPathImgCodColorWithTagColor = 
 		"//div[@class[contains(.,'color-container')] and @id='" + TagIdColor + "']/img";
 	final static String XPathPrecioRebajadoRelativeArticle = 
@@ -162,7 +162,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	public WebElement getImagenElementArticulo(WebElement articulo) {
 		moveToElement(articulo, driver);
 		By byImg = By.xpath("." + XPathImgRelativeArticle);
-		if (state(Clickable, byImg).wait(3).check()) {
+		if (state(Present, articulo).by(byImg).wait(3).check()) {
 			return (articulo.findElement(byImg));
 		}
 		return null;
@@ -411,14 +411,10 @@ public class PageGaleriaDevice extends PageGaleria {
 		return refWithColor;
 	}
 	
-//	private String getRefColorArticuloMethod1(WebElement articulo) {
-//		return (articulo.getAttribute("id"));
-//	}
-	
 	private String getRefColorArticuloMethod1(WebElement articulo) {
 		String xpathDivRelativeArticle = "//div[@id and @class='product-container-image']";
 		if (state(Present, articulo).by(By.xpath("." + xpathDivRelativeArticle)).check()) {
-			return (articulo.findElement(By.xpath(xpathDivRelativeArticle)).getAttribute("id"));
+			return (articulo.findElement(By.xpath("." + xpathDivRelativeArticle)).getAttribute("id"));
 		}
 		return "";
 	}

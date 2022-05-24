@@ -45,8 +45,8 @@ import java.util.List;
 @SuppressWarnings({"static-access"})
 public class GaleriaProducto {
 	
-	private final static Pais españa = PaisGetter.get(PaisShop.España);
-	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
+	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
+	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
 		
 	public GaleriaProducto() {}
 
@@ -286,7 +286,7 @@ public class GaleriaProducto {
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
 		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
-		dCtxSh.pais = this.españa;
+		dCtxSh.pais = this.espana;
 		dCtxSh.idioma = this.castellano;
 		return dCtxSh;
 	}

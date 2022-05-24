@@ -53,8 +53,8 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 
 public class FichaProducto {
 	
-	private final static Pais españa = PaisGetter.get(PaisShop.España);
-	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
+	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
+	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
 	
 	
 	@Test (
@@ -63,7 +63,7 @@ public class FichaProducto {
 	public void FIC001_FichaFromSearch_PrimaryFeatures_Reg() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
-		DataCtxShop dCtxSh = getCtxShForTest(españa, castellano, true, userShop.user, userShop.password);
+		DataCtxShop dCtxSh = getCtxShForTest(espana, castellano, true, userShop.user, userShop.password);
 
 		AccesoStpV.oneStep(dCtxSh, true, driver);
 		SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
@@ -118,7 +118,7 @@ public class FichaProducto {
 		description="[Usuario no registrado] Se testean las features secundarias de una ficha con origen el buscador: guía de tallas, carrusel imágenes, imagen central, panel de opciones, total look")
 	public void FIC002_FichaFromSearch_SecondaryFeatures_NoReg() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-		DataCtxShop dCtxSh = getCtxShForTest(españa, castellano);
+		DataCtxShop dCtxSh = getCtxShForTest(espana, castellano);
 
 		AccesoStpV.oneStep(dCtxSh, false, driver);
 		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
@@ -236,7 +236,7 @@ public class FichaProducto {
 		alwaysRun=true, description="[Usario no registrado] Testeo Personalización bordados")
 	public void FIC005_Articulo_Personalizable_Noreg() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-		DataCtxShop dCtxSh = getCtxShForTest(españa, castellano);
+		DataCtxShop dCtxSh = getCtxShForTest(espana, castellano);
 
 		AccesoStpV.oneStep(dCtxSh, false, driver);
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);

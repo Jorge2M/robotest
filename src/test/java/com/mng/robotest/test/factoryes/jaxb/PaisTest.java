@@ -17,10 +17,10 @@ public class PaisTest {
 	@Test
 	public void testGetListPagosForTest() {
 		//Given
-		Pais españa = PaisGetter.get(PaisShop.España);
+		Pais espana = PaisGetter.get(PaisShop.Espana);
 		
 		//When
-		List<Pago> pagosForTest = españa.getListPagosForTest(AppEcom.shop, false);
+		List<Pago> pagosForTest = espana.getListPagosForTest(AppEcom.shop, false);
 		
 		//Then
 		assertTrue(pagosForTest.get(0).getNombre().compareTo("VISA")==0);

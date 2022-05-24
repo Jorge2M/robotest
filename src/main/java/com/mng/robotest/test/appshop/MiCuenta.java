@@ -35,8 +35,8 @@ public class MiCuenta implements Serializable {
 	private String index_fact = "";
 	private Pais paisFactory = null;
 	private IdiomaPais idiomaFactory = null;
-	private final static Pais españa = PaisGetter.get(PaisShop.España);
-	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
+	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
+	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
 
 	public MiCuenta() {}
 
@@ -59,7 +59,7 @@ public class MiCuenta implements Serializable {
 
 		//Si el acceso es normal (no es desde una @Factory) utilizaremos el España/Castellano
 		if (this.paisFactory==null) {
-			dCtxSh.pais = españa;
+			dCtxSh.pais = espana;
 			dCtxSh.idioma = castellano;
 		} else {
 			dCtxSh.pais = this.paisFactory;

@@ -74,6 +74,7 @@ public class PageFichaArtStpV {
 	public void validateIsFichaAccordingTypeProduct(GarmentCatalog product) throws Exception {			
 		validateIsFichaArtDisponible(product.getGarmentId(), 3);
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
 				GenericCheck.ImgsBroken,

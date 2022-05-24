@@ -7,7 +7,7 @@ import org.junit.Test;
 import com.mng.robotest.test.pageobject.shop.ficha.DataFoto;
 import com.mng.robotest.test.pageobject.shop.ficha.TipoImagenProducto;
 
-public class TestDataFoto {
+public class DataFotoTest {
 
     static final String tagTemporada = "#temporada#";
     static final String tagSize = "#size#";

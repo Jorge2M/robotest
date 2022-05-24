@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.mng.robotest.test.getdata.products.data.ProductList;
 
-public class ProductListTest {
+public class ProductListIT {
 
 	@Test
 	public void testGetStockId() {

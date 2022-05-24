@@ -85,6 +85,7 @@ public class AccesoStpV {
 	public static void validaIdentificacionEnShop(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		checkLinksAfterLogin(dCtxSh, driver);
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.GoogleAnalytics, 
 				GenericCheck.JSerrors, 
 				GenericCheck.Analitica,
@@ -188,6 +189,7 @@ public class AccesoStpV {
 
 		PageSelectLineaVOTFStpV.validateIsPage(driver);
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.Analitica, 
 				GenericCheck.TextsTraduced,
 				GenericCheck.JSerrors)).checks(driver);

@@ -32,7 +32,7 @@ public class AccesoVOTF {
 
 	public static AccesoVOTF forCountry(PaisShop paisShop) {
 		switch (paisShop) {
-		case España:
+		case Espana:
 			return forSpain();
 		case France:
 			return forFrance();

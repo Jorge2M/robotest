@@ -55,6 +55,7 @@ public class PageMiCuentaStpV {
 		pageMiCuenta.clickMisDatos();
 		(new PageMisDatosStpV(driver)).validaIsPage(usuarioReg);
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
 				GenericCheck.TextsTraduced,
@@ -82,6 +83,7 @@ public class PageMiCuentaStpV {
 		pageMisComprasStpV.validateIsPage(pais);
 		
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.Analitica,
 				GenericCheck.TextsTraduced)).checks(driver);
 	}
@@ -90,6 +92,7 @@ public class PageMiCuentaStpV {
 		goToMisDatos(dataRegistro.get("cfEmail"));
 		(new PageMisDatosStpV(driver)).validaIsDataAssociatedToRegister(dataRegistro, codPais);
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
 				GenericCheck.TextsTraduced,
@@ -109,6 +112,7 @@ public class PageMiCuentaStpV {
 		pageMiCuenta.clickSuscripciones();
 		PageSuscripcionesStpV.create(driver).validaIsPage();
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
 				GenericCheck.TextsTraduced,

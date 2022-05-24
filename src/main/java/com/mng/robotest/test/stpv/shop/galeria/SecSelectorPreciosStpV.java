@@ -71,6 +71,7 @@ public class SecSelectorPreciosStpV {
 		checkResultSelectFiltro(dataFilter);
 
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO,
 				GenericCheck.JSerrors,
 				GenericCheck.TextsTraduced,
