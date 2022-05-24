@@ -116,6 +116,7 @@ public class Page1DktopCheckoutStpV {
 		}
 		
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.GoogleAnalytics,
 				GenericCheck.Analitica,
 				GenericCheck.TextsTraduced,

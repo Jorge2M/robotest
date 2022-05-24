@@ -45,7 +45,7 @@ import org.openqa.selenium.WebDriver;
 public class Reembolsos {
 	
 	//TODO mientras que tengamos problemas con el buscador en Arabia probaremos contra España
-//	private final static Pais arabia = PaisGetter.get(PaisShop.España);
+//	private final static Pais arabia = PaisGetter.get(PaisShop.Espana);
 //	private final static IdiomaPais arabia_arabe = arabia.getListIdiomas().get(0);
 	private final static Pais emiratos = PaisGetter.get(PaisShop.UnitedArabEmirates);
 	private final static IdiomaPais emiratos_arabe = emiratos.getListIdiomas().get(0);

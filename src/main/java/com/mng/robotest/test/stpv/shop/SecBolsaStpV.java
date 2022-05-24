@@ -14,7 +14,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.domains.cookiescheck.stpv.CheckAllowedCookies;
+import com.mng.robotest.domains.cookiescheck.stpv.CheckerAllowedCookies;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataBag;
@@ -189,10 +189,8 @@ public class SecBolsaStpV {
 
 		validaCuadranArticulosBolsa(dataBag);
 		
-		//TODO provisional
-		CheckAllowedCookies.check(driver);
-		
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.GoogleAnalytics,
 				GenericCheck.Analitica,
 				GenericCheck.TextsTraduced,
@@ -315,6 +313,7 @@ public class SecBolsaStpV {
 			int maxSeconds = 5;
 			Page1IdentCheckoutStpV.validateIsPage(maxSeconds, driver);
 			GenericChecks.from(Arrays.asList(
+					GenericCheck.CookiesAllowed,
 					GenericCheck.Analitica,
 					GenericCheck.TextsTraduced)).checks(driver);
 			

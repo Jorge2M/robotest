@@ -54,7 +54,7 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 		ChecksTM validations = ChecksTM.getNew();
 		validations.add(
 			"El artículo es personalizable (aparece el link \"Añadir bordado\")",
-			state(Present, ModalElement.AñadirBordadoLink.getBy(dCtxSh.channel)).wait(1).check(), 
+			state(Present, ModalElement.AnadirBordadoLink.getBy(dCtxSh.channel)).wait(1).check(), 
 			levelError);
 		return validations;
 	}
@@ -63,7 +63,7 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 		description="Seleccionamos el link <b>Añadir bordado</b>",
 		expected="Aparece el modal para la personalización de la prenda")
 	public void selectLinkPersonalizacion () throws Exception {
-		click(ModalElement.AñadirBordadoLink.getBy(dCtxSh.channel)).type(javascript).exec();
+		click(ModalElement.AnadirBordadoLink.getBy(dCtxSh.channel)).type(javascript).exec();
 		validateModal();
 	}
 	

@@ -66,6 +66,12 @@ public class ListDataArticleGalery {
 		return true;
 	}
 	
+	public boolean isPresentArticleWithReferencia(String referencia) {
+		return listNombreYRef.stream()
+		        .filter(a -> a.getReferencia().compareTo(referencia)==0)
+		        .findAny().isPresent();
+	}
+	
 	/**
 	/* Construye una tabla HTML mediante DIVs con 2 columnas que incluyan todos los artículos del nodo actual y el anterior
 	 */

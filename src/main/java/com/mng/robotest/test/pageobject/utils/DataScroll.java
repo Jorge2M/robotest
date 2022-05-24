@@ -8,5 +8,5 @@ public class DataScroll {
 	public int articulosMostrados;
 	public boolean finalAlcanzado;
 	public int articulosTotalesPagina;
-	public int articulosDobleTamaño;
+	public int articulosDobleTamano;
 }

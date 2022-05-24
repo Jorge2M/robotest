@@ -6,24 +6,23 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.Cookie;
 
-import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.cookiescheck.service.CookiesChecker;
+import com.mng.robotest.test.stpv.shop.genericchecks.Checker;
 
 
-public class CheckAllowedCookies {
+public class CheckerAllowedCookies implements Checker {
 
-	@Validation (
-		description="Todas las cookies existentes están permitidas",
-		level=State.Defect)
-	public static ChecksTM check(WebDriver driver) {
+	@Override
+	public ChecksTM check(WebDriver driver) {
 		CookiesChecker cookiesChecker = new CookiesChecker();
 		Pair<Boolean, List<Cookie>> resultCheck = cookiesChecker.check(driver);
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 				getTextValidation(resultCheck),
-				resultCheck.getLeft(), State.Defect);
+				//TODO temporalmente lo ponemos en INFO (avoidEvidences) para que pueda subir a PRO
+				resultCheck.getLeft(), State.Info, true);
 		
 		return checks;
 	}
@@ -32,10 +31,11 @@ public class CheckAllowedCookies {
 		String descripcion = 
 				"Se comprueba que todas las cookies existentes en la página están permitidas.";
 		if (!resultCheck.getLeft()) {
-			descripcion+="Se detectan las siguientes cookies no permitidas:";
+			descripcion+="Se detectan las siguientes cookies no permitidas:<ul>";
 			for (Cookie cookie : resultCheck.getRight()) {
-				descripcion+="<br><br>" + cookie.toString();
+				descripcion+="<li>" + cookie.toString() + "</li>";
 			}
+			descripcion+="</ul>";
 		}
 		return descripcion;
 	}

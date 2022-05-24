@@ -50,10 +50,10 @@ import org.openqa.selenium.WebDriver;
 
 public class Compra {
 	
-	private final static Pais españa = PaisGetter.get(PaisShop.España);
+	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
 	private final static Pais italia = PaisGetter.get(PaisShop.Italia);
 	private final static Pais francia = PaisGetter.get(PaisShop.France);
-	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
+	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
 	private final static IdiomaPais italiano = italia.getListIdiomas().get(0);
 
 
@@ -64,7 +64,7 @@ public class Compra {
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		dCtxSh.pais=españa;
+		dCtxSh.pais=espana;
 		dCtxSh.idioma=castellano;
 		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 		return dCtxSh;
@@ -110,7 +110,7 @@ public class Compra {
 		
 		if (dCtxSh.appE == AppEcom.outlet) {
 			return new BuilderCheckout(dCtxSh, dCtxPago, driver)
-					.pago(españa.getPago("VISA"))
+					.pago(espana.getPago("VISA"))
 					.build()
 					.checkout(From.Prehome);
 		} else {
@@ -122,7 +122,7 @@ public class Compra {
 			Date dateToday = new Date();
 			if (dateToday.before(dateLimit)) {
 				return new BuilderCheckout(dCtxSh, dCtxPago, driver)
-						.pago(españa.getPago("VISA"))
+						.pago(espana.getPago("VISA"))
 						.listArticles(getArticlesHome(dCtxSh, driver).subList(0, 2))
 						.build()
 						.checkout(From.Prehome);
@@ -131,7 +131,7 @@ public class Compra {
 				List<GarmentCatalog> listArticlesIntimissimi = getArticlesIntimissimi(dCtxSh, driver);
 				List<GarmentCatalog> listArticles = Arrays.asList(listArticlesHome.get(0), listArticlesIntimissimi.get(0));
 				return new BuilderCheckout(dCtxSh, dCtxPago, driver)
-						.pago(españa.getPago("VISA"))
+						.pago(espana.getPago("VISA"))
 						.listArticles(listArticles)
 						.build()
 						.checkout(From.Prehome);
@@ -144,7 +144,7 @@ public class Compra {
 			return null;
 		}
 		
-		GetterProducts getterProducts = new GetterProducts.Builder(españa.getCodigo_alf(), dCtxSh.appE, driver)
+		GetterProducts getterProducts = new GetterProducts.Builder(espana.getCodigo_alf(), dCtxSh.appE, driver)
 			.linea(LineaType.home)
 			.menusCandidates(Arrays.asList(
 					Menu.Albornoces, 
@@ -160,7 +160,7 @@ public class Compra {
 			return null;
 		}
 		
-		GetterProducts getterProducts = new GetterProducts.Builder(españa.getCodigo_alf(), dCtxSh.appE, driver)
+		GetterProducts getterProducts = new GetterProducts.Builder(espana.getCodigo_alf(), dCtxSh.appE, driver)
 			.linea(LineaType.she)
 			.menusCandidates(Arrays.asList(
 					Menu.Sujetadores, 
@@ -195,7 +195,7 @@ public class Compra {
 		dCtxSh.passwordUser = userShop.password;		
 		dCtxSh.userRegistered = true;
 		if (typeCheque==TypeCheque.New) {
-			dCtxSh.pais = españa;
+			dCtxSh.pais = espana;
 		} else {
 			dCtxSh.pais = francia;
 			
@@ -253,7 +253,7 @@ public class Compra {
 		dCtxPago.setFTCkout(fTCkout);
 
 		dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago, driver)
-			.pago(españa.getPago("VISA"))
+			.pago(espana.getPago("VISA"))
 			.build()
 			.checkout(From.Identification);
 		

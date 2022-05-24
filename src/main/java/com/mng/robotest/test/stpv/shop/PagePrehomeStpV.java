@@ -89,19 +89,17 @@ public class PagePrehomeStpV {
 		
 		pagePrehome.accesoShopViaPrehome(true);
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.GoogleAnalytics,
 				GenericCheck.Analitica,
+				GenericCheck.SEO,
+				GenericCheck.JSerrors,
 				GenericCheck.TextsTraduced,
 				GenericCheck.NetTraffic)).checks(driver);
 		
 		if (execValidacs) {
 			checkPagePostPreHome();
 		}
-		
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.SEO,
-				GenericCheck.Analitica,
-				GenericCheck.JSerrors)).checks(driver);
 	}	
 	
 	@Validation

@@ -50,6 +50,7 @@ public class PageSelectLineaVOTFStpV {
 		AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dCtxSh.pais));
 		SectionBarraSupVOTFStpV.validate(accesoVOTF.getUsuario(), driver);
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
 				GenericCheck.TextsTraduced,

@@ -111,9 +111,10 @@
 		 	
 			<!-- Seguramente si lo ejecuto sin testmaker se quejará de que no encuentra el aspectj en .m2 -->
 			<plugin>
-				<groupId>com.github.m50d</groupId>
+				<!--<groupId>com.github.m50d</groupId>-->
+				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
-				<version>1.11.1</version>
+				<version>1.14.0</version>
 				<configuration>
 					<complianceLevel>1.8</complianceLevel>
 					<source>1.8</source>
@@ -121,7 +122,7 @@
 					<showWeaveInfo>false</showWeaveInfo>
 					<verbose>true</verbose>
 					<Xlint>ignore</Xlint>
-					<encoding>UTF-8 </encoding>
+					<encoding>UTF-8</encoding>
 					<weaveDependencies>
 						<weaveDependency> 
 							<groupId>com.github.jorge2m</groupId>
@@ -137,7 +138,7 @@
 					</execution>
 				</executions>
 			</plugin> 
-			
+
 			<plugin>
 				<!-- Configuración extraída de: http://emystein.blogspot.com.es/2010/12/empaquetar-una-aplicacion-de-consola.html -->
 				<!-- Configuramos el plugin de JAR en el POM para que agregue el directorio src/main/config al classpath definido en el Manifest de la aplicación -->	

@@ -19,7 +19,8 @@ public class GenericChecks {
 		Analitica(State.Defect),
 		NetTraffic(State.Warn),
 		TextsTraduced(State.Defect),
-		GoogleAnalytics(State.Warn);
+		GoogleAnalytics(State.Warn),
+		CookiesAllowed(State.Defect);
 		
 		State state;
 		private GenericCheck(State state) {

@@ -24,13 +24,13 @@ import org.openqa.selenium.WebDriver;
 
 public class Otras {
 	
-	private final static Pais españa = PaisGetter.get(PaisShop.España);
+	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
 	private final static Pais francia = PaisGetter.get(PaisShop.France);
 	private final static Pais suecia = PaisGetter.get(PaisShop.Sweden);
 	private final static Pais irlanda = PaisGetter.get(PaisShop.Ireland);
 	private final static Pais USA = PaisGetter.get(PaisShop.USA);
-	private final static Pais japon = PaisGetter.get(PaisShop.Japón);
-	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
+	private final static Pais japon = PaisGetter.get(PaisShop.Japon);
+	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
 	private final static IdiomaPais francia_frances = francia.getListIdiomas().get(0);
 	private final static IdiomaPais japones = japon.getListIdiomas().get(0);
 
@@ -49,7 +49,7 @@ public class Otras {
 	public void OTR001_check_Redirects() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
-		dCtxSh.pais = españa;
+		dCtxSh.pais = espana;
 		dCtxSh.idioma = castellano;
 		dCtxSh.userRegistered = false;
 		AccesoStpV.oneStep(dCtxSh, false, driver);
@@ -82,7 +82,7 @@ public class Otras {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
 
-		dCtxSh.pais = españa;
+		dCtxSh.pais = espana;
 		dCtxSh.idioma = castellano;
 		dCtxSh.userRegistered = false;
 		AccesoStpV.accesoPRYCambioPais(dCtxSh, francia, francia_frances, driver);
@@ -103,7 +103,7 @@ public class Otras {
 
 		//Definimos la lista de los 3 países que pueden estar asociados a la IP del usuario
 		List<Pais> listPaisAsocIP = new ArrayList<>();
-		listPaisAsocIP.add(españa);
+		listPaisAsocIP.add(espana);
 		listPaisAsocIP.add(irlanda);
 		listPaisAsocIP.add(USA);
 			
@@ -172,7 +172,7 @@ public class Otras {
 	public void OTR006_chatBot() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
-		dCtxSh.pais = españa;
+		dCtxSh.pais = espana;
 		dCtxSh.idioma = castellano;
 		dCtxSh.userRegistered = false;
 		AccesoStpV.oneStep(dCtxSh, false, driver);

@@ -31,7 +31,6 @@ import com.mng.robotest.test.utils.LevelPais;
 import com.mng.robotest.test.utils.PaisGetter;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -46,8 +45,8 @@ public class PaisIdioma implements Serializable {
 	public int prioridad;
 	private FlagsNaviationLineas flagsNavigation;
 	private DataCtxShop dCtxSh;
-	private final static Pais españa = PaisGetter.get(PaisShop.España);
-	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
+	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
+	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
 
 	//Si añadimos un constructor para el @Factory hemos de añadir este constructor para la invocación desde SmokeTest
 	public PaisIdioma() {}
@@ -71,7 +70,7 @@ public class PaisIdioma implements Serializable {
 		if (dCtxSh==null) {
 			InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 			dCtxSh = new DataCtxShop();
-			dCtxSh.pais = españa;
+			dCtxSh.pais = espana;
 			dCtxSh.idioma = castellano;
 			dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 			dCtxSh.setChannel(inputParamsSuite.getChannel());

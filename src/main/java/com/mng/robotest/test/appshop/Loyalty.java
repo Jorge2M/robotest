@@ -44,8 +44,8 @@ import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
 public class Loyalty {
 	
-	private final static Pais españa = PaisGetter.get(PaisShop.España);
-	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
+	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
+	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
 
 	final static String userProWithLPoints = "ticket_digital_es@mango.com";
 
@@ -83,7 +83,7 @@ public class Loyalty {
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
 		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
-		dCtxSh.pais = españa;
+		dCtxSh.pais = espana;
 		dCtxSh.idioma = castellano;
 		return dCtxSh;
 	}
@@ -235,7 +235,7 @@ public class Loyalty {
 //		//Crear el vale
 //		ValePais vale = FactoryVale.makeWithArticles(
 //				Campanya.MANGOLIKESYOU, 
-//				PaisShop.España, 
+//				PaisShop.Espana, 
 //				10, 
 //				"01/01/2000 00:00", "01/01/2200 00:00", false, 
 //				Arrays.asList("67004418", "67004418", "67054412"), null);

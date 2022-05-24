@@ -23,6 +23,7 @@ public class PageIdentificacionStpV {
 		PageIdentificacion.iniciarSesion(usrExistente, password, channel, appE, driver);
 		checkTextoCredencialesKO(driver);
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO, 
 				GenericCheck.TextsTraduced,
 				GenericCheck.Analitica)).checks(driver);	
@@ -42,6 +43,7 @@ public class PageIdentificacionStpV {
 		PageIdentificacion.clickHasOlvidadoContrasenya(driver); 
 		PageRecuperaPasswdStpV.isPage(driver); 
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO,  
 				GenericCheck.TextsTraduced,
 				GenericCheck.Analitica)).checks(driver);

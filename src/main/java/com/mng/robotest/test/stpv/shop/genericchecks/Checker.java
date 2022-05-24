@@ -3,6 +3,7 @@ package com.mng.robotest.test.stpv.shop.genericchecks;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.cookiescheck.stpv.CheckerAllowedCookies;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 
 public interface Checker {
@@ -25,6 +26,8 @@ public interface Checker {
 			return new CheckerTextsTraduced();
 		case NetTraffic:
 			return new CheckerNetTraffic();
+		case CookiesAllowed:
+			return new CheckerAllowedCookies();
 		}
 		
 		throw new IllegalArgumentException("The para " + check + "is not covered by the method");

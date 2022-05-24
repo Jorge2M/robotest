@@ -1,6 +1,6 @@
 package com.mng.robotest.test.stpv.navigations.shop;
 
-import static com.mng.robotest.test.data.PaisShop.España;
+import static com.mng.robotest.test.data.PaisShop.Espana;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -109,6 +109,7 @@ public class CheckoutFlow {
 		if (dCtxSh.userRegistered) {
 			secBolsaStpV.clear();
 			GenericChecks.from(Arrays.asList(
+					GenericCheck.CookiesAllowed,
 					GenericCheck.TextsTraduced,
 					GenericCheck.Analitica)).checks(driver);
 		}
@@ -162,6 +163,7 @@ public class CheckoutFlow {
 		
 		page2IdentCheckoutStpV.clickContinuar(dCtxSh.userRegistered, dCtxSh.appE, dataBag);
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.GoogleAnalytics, 
 				GenericCheck.NetTraffic, 
 				GenericCheck.TextsTraduced, 
@@ -172,7 +174,7 @@ public class CheckoutFlow {
 		if ((dCtxPago.getFTCkout().testCodPromocional || dCtxPago.getFTCkout().isEmpl) && 
 			 dCtxSh.appE!=AppEcom.votf) {
 			DataBag dataBag = dCtxPago.getDataPedido().getDataBag();	
-			if (dCtxPago.getFTCkout().isEmpl && España.equals(dCtxSh.pais)) {
+			if (dCtxPago.getFTCkout().isEmpl && Espana.equals(dCtxSh.pais)) {
 				testInputCodPromoEmplSpain(dataBag);
 			} else {
 				if (dCtxSh.vale!=null) {
@@ -315,6 +317,7 @@ public class CheckoutFlow {
 				//Almacenamos el pedido en el contexto para la futura validación en Manto
 				pagoStpV.storePedidoForMantoAndResetData();
 				GenericChecks.from(Arrays.asList(
+						GenericCheck.CookiesAllowed,
 						GenericCheck.GoogleAnalytics, 
 						GenericCheck.NetTraffic, 
 						GenericCheck.TextsTraduced,
@@ -471,7 +474,7 @@ public class CheckoutFlow {
 		private final AppEcom app;
 		private String user = "";
 		private String password = "";
-		private Pais country = PaisGetter.get(PaisShop.España);
+		private Pais country = PaisGetter.get(PaisShop.Espana);
 		private IdiomaPais idioma = country.getListIdiomas().get(0);
 		private ValePais vale = null;
 		private List<GarmentCatalog> listArticles = null;
