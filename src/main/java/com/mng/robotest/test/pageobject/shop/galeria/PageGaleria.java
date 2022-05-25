@@ -736,6 +736,10 @@ public abstract class PageGaleria extends PageObjTM {
 		WebElement imagen = getImagenElementArticulo(articulo);
 		if (imagen!=null) {
 			try {
+				if (app==AppEcom.outlet) {
+					return imagen.getAttribute("src");
+				}
+				//TODO Test AB nueva variante. Si se mantiene la original igualar con Outlet
 				return imagen.getAttribute("original");
 			}
 			catch (StaleElementReferenceException e) {

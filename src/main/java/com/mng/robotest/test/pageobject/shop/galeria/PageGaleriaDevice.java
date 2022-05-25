@@ -30,6 +30,7 @@ public class PageGaleriaDevice extends PageGaleria {
 			 "(@class[contains(.,'productListImg')] or " + 
 			  "@class[contains(.,'product-list-image')] or " + 
 			  "@class[contains(.,'product-list-img')] or " +
+			  "@class[contains(.,'product-image')] or " +
 			  "@id[contains(.,'product-image')])]";
 	final static String XPathImgCodColorWithTagColor = 
 		"//div[@class[contains(.,'color-container')] and @id='" + TagIdColor + "']/img";
