@@ -67,6 +67,15 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	private final static String XPathListArticles = "//div[@class[contains(.,'columns')] and @id='list']";
+	private final static String XPathImgRelativeArticleOutlet = 
+			"//img[@src and (" + 
+				   "@class[contains(.,'productListImg')] or " + 
+				   "@class[contains(.,'product-list-image')] or " +
+				   "@class[contains(.,'product-image')] or " + 
+				   "@class[contains(.,'TaqRk')] or " + //TODO (Outlet) pendiente Sergio Campillo suba los cambios
+				   "@class[contains(.,'product-list-im')])]";
+	private final static String XPathImgSliderActiveRelativeArticleDesktopOutlet = 
+			"//div[@class[contains(.,'swiper-slide-active')]]" + XPathImgRelativeArticleOutlet;
 
 	private PageGaleriaDesktop(From from, Channel channel, AppEcom app, WebDriver driver) {
 		super(from, channel, app, driver);
@@ -244,6 +253,14 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	private String getXPathImgArticulo(WebElement article) {
+		if (app==AppEcom.outlet) {
+			return getXPathImgArticuloOutlet(article);
+		}
+		return getXPathImgArticuloShop(article);
+	}
+	
+	//TODO Test AB nueva variante. Si se mantiene la original igualar con Outlet
+	private String getXPathImgArticuloShop(WebElement article) {
 		String id = article.getAttribute("id");
 		Pattern pattern = Pattern.compile("product-key-id-(.*)");
 		Matcher matcher = pattern.matcher(id);
@@ -251,6 +268,14 @@ public class PageGaleriaDesktop extends PageGaleria {
 			return ".//img[@id='product-" + matcher.group(1) + "']" ;
 		}
 		return ".//img[contains(.,'product-')]";
+	}
+	
+	private String getXPathImgArticuloOutlet(WebElement article) {
+		if (isPresentSliderInArticle(TypeSlider.next, article)) {
+			return "." + XPathImgSliderActiveRelativeArticleDesktopOutlet;
+		} else {
+			return "." + XPathImgRelativeArticleOutlet;
+		}
 	}
 	
 
@@ -434,7 +459,13 @@ public class PageGaleriaDesktop extends PageGaleria {
 		By byImgArticle = By.xpath(getXPathImgArticulo(article));
 		if (state(Present, article).by(byImgArticle).check()) {
 			WebElement imgArticle = article.findElement(byImgArticle);
-			String srcImgArticle = imgArticle.getAttribute("original");
+			String srcImgArticle;
+			if (app==AppEcom.outlet) {
+				srcImgArticle = imgArticle.getAttribute("data-original");
+			} else {
+				//TODO Test AB nueva variante. Si se mantiene la original igualar con Outlet
+			    srcImgArticle = imgArticle.getAttribute("original");
+			}
 			if (srcImgArticle!=null) {
 				Pattern pattern = Pattern.compile("(.*?)width=(.*?)&(.*?)");
 				Matcher matcher = pattern.matcher(srcImgArticle);
