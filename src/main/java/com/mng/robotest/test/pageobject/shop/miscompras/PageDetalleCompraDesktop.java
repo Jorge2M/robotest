@@ -13,18 +13,19 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	
 	private final SectionPrendas sectionPrendas;
 	
-	//private static String XPathIdTicket = "//*[@data-testid[contains(.,'detail.orderId')]]"; 
-	private static String XPathIdTicket = "//*[@data-testid[contains(.,'purchaseNumber')]]";
+	//private static String XPathIdTicket = "//*[@data-testid[contains(.,'purchaseNumber')]]";
+	private static String XPathIdTicket = "//h2[@class[contains(.,'text-title-xl')]]/span";
 	private static String XPathImporte = "//*[@data-testid[contains(.,'detail.totalPrice')]]";
 	
 	//TODO necesitaría un data-testid
-	private static String XPathDireccionEnvio = XPathIdTicket + "/../../../div[2]//div[@class[contains(.,'sg-body-small')]]";
+	private static String XPathDireccionEnvioOnline = XPathIdTicket + "/../../../div[2]//div[@class[contains(.,'sg-body-small')]]";
 	private static String XPathLinkToMisCompras = "//*[@data-testid[contains(.,'detail.goBack')]]";
 	
 	public PageDetalleCompraDesktop(Channel channel, WebDriver driver) {
 		super(channel, driver);
 		this.sectionPrendas = new SectionPrendas(driver);
 	}
+
 
 	@Override
 	public boolean isPage() {
@@ -49,16 +50,16 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	}
 	@Override
 	public boolean isVisibleDataTicket(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathIdTicket)).wait(maxSeconds).check());
+		return (state(Visible, By.xpath(getXPathTicket())).wait(maxSeconds).check());
 	}
 	@Override
 	public String getIdTicket(TypeTicket typeTicket) {
-		String dataNumTicket = driver.findElement(By.xpath(XPathIdTicket)).getText();
+		String dataNumTicket = driver.findElement(By.xpath(getXPathTicket())).getText();
 		return (getDataRightFrom(":", dataNumTicket));
 	}
 	@Override
 	public boolean isVisibleIdTicket(int maxSeconds) {
-		return state(State.Visible, By.xpath(XPathIdTicket)).wait(maxSeconds).check();
+		return state(State.Visible, By.xpath(getXPathTicket())).wait(maxSeconds).check();
 	}
 	@Override
 	public String getImporte() {
@@ -91,8 +92,22 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 		}
 		click(By.xpath(XPathLinkToMisCompras)).exec();
 	}
+	
+	private String getXPathTicket() {
+//		if (getTypeTicket()==TypeTicket.Online) {
+//			return XPathIdTicketOnline;
+//		}
+		return XPathIdTicket;
+	}
+	
+//	TypeTicket getTypeTicket() {
+//		if (state(State.Visible, By.xpath(XPathIdTicketOnline)).wait(1).check()) {
+//			return TypeTicket.Online;
+//		}
+//		return TypeTicket.Tienda;
+//	}
 
-	public String getDireccionEnvio() {
-		return (driver.findElement(By.xpath(XPathDireccionEnvio)).getText());
+	public String getDireccionEnvioOnline() {
+		return (driver.findElement(By.xpath(XPathDireccionEnvioOnline)).getText());
 	}
 }

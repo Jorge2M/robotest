@@ -8,20 +8,19 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 
 public class ModalChatBot extends PageObjTM {
 
-	private final static String XPathRoot = "//div[@data-testid='chatbot']";
-	private final static String XPathIcon = XPathRoot + "//img";
-	private final static String XPathWebchat = XPathRoot + "//div[@id='botonic-webchat']";
+	private final static String XPathIcon = "//div[@id='iris-button']";
+	private final static String XPathWebchat = "//div[@id='snack-bubble']";
 	
 	public ModalChatBot(WebDriver driver) {
 		super(driver);
 	}
 	
 	private String getXPathOption(String text) {
-		return XPathWebchat + "//div[text()='" + text + "']";
+		return XPathWebchat + "//button[text()='" + text + "']";
 	}
 	
 	private String getXPathResponse(String text) {
-		return XPathWebchat + "//p[text()[contains(.,'" + text + "')]]";
+		return XPathWebchat + "//div[text()[contains(.,'" + text + "')] and @class[contains(.,'bubble')]]";
 	}
 	
 	private String getXPathButton(String text) {
