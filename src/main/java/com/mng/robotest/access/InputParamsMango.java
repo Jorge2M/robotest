@@ -12,8 +12,7 @@ import org.apache.commons.cli.CommandLine;
 
 import com.github.jorge2m.testmaker.boundary.access.OptionTMaker;
 import com.github.jorge2m.testmaker.domain.InputParamsTM;
-import com.mng.robotest.access.CmdRunTests.TypeCallBackMethod;
-import com.mng.robotest.access.CmdRunTests.TypeCallbackSchema;
+
 
 public class InputParamsMango extends InputParamsTM {
 
@@ -22,12 +21,6 @@ public class InputParamsMango extends InputParamsTM {
 	public static final String PaymentsNameParam = "payments";
 	public static final String CatalogsNameParam = "catalogs";
 	public static final String UrlMantoParam = "urlmanto";
-	public static final String CallBackResourceParam = "callbackresource";
-	public static final String CallBackMethodParam = "callbackmethod";
-	public static final String CallBackSchemaParam = "callbackschema";
-	public static final String CallBackParamsParam = "callbackparams";
-	public static final String CallBackUserParam = "callbackuser";
-	public static final String CallBackPasswordParam = "callbackpassword";
 
 	@FormParam(CountrysNameParam)
 	String listCountrysCommaSeparated;
@@ -44,26 +37,6 @@ public class InputParamsMango extends InputParamsTM {
 	@FormParam(UrlMantoParam)
 	String urlManto;
 	
-	@FormParam(CallBackResourceParam)
-	String callBackResource;
-	
-	@FormParam(CallBackMethodParam)
-	String callBackMethod;
-	
-	@FormParam(CallBackSchemaParam)
-	String callBackSchema;
-	
-	@FormParam(CallBackParamsParam)
-	String callBackParams;
-	
-	@FormParam(CallBackUserParam)
-	String callBackUser;
-	
-	@FormParam(CallBackPasswordParam)
-	String callBackPassword;
-	
-	private final CallBack callBack = new CallBack();
-
 	private static String lineSeparator = System.getProperty("line.separator");
 
 	public InputParamsMango() {
@@ -116,45 +89,6 @@ public class InputParamsMango extends InputParamsTM {
 			.pattern(patternUrl)
 			.desc("URL of the Backoffice of mangoshop (Manto application)")
 			.build());	
- 
-		options.add(OptionTMaker.builder(InputParamsMango.CallBackResourceParam)
-			.required(false)
-			.hasArgs()
-			.desc("CallBack URL (without schema and params) to invoke in the end of the TestSuite")
-			.build());
-
-		options.add(OptionTMaker.builder(InputParamsMango.CallBackMethodParam)
-			.required(false)
-			.hasArgs()
-			.possibleValues(TypeCallBackMethod.class)
-			.desc("Method of the CallBack URL. Possible values: " + Arrays.asList(TypeCallBackMethod.values()))
-			.build());		
-
-		options.add(OptionTMaker.builder(InputParamsMango.CallBackSchemaParam)
-			.required(false)
-			.hasArgs()
-			.possibleValues(TypeCallbackSchema.class)
-			.desc("Schema of the CallBack URL. Possible values: " + Arrays.asList(TypeCallbackSchema.values()))
-			.build());		
-
-		options.add(OptionTMaker.builder(InputParamsMango.CallBackParamsParam)
-			.required(false)
-			.hasArgs()
-			.valueSeparator(',')
-			.desc("Params of the CallBack URL (in format param1:value1,param2:value2...)")
-			.build());		
-
-		options.add(OptionTMaker.builder(InputParamsMango.CallBackUserParam)
-			.required(false)
-			.hasArgs()
-			.desc("User credential needed to invoke the CallBack URL")
-			.build());		
-
-		options.add(OptionTMaker.builder(InputParamsMango.CallBackPasswordParam)
-			.required(false)
-			.hasArgs()
-			.desc("Password credential needed to invoke the CallBack URL")
-			.build());		
 
 		return options;
 	}
@@ -166,14 +100,6 @@ public class InputParamsMango extends InputParamsTM {
 		setListaPayments(cmdLineData.getOptionValues(PaymentsNameParam));
 		setListaCatalogs(cmdLineData.getOptionValues(CatalogsNameParam));
 		setUrlManto(cmdLineData.getOptionValue(UrlMantoParam));
-		if (cmdLineData.getOptionValue(CallBackResourceParam)!=null) {
-			callBackResource = cmdLineData.getOptionValue(CallBackResourceParam);
-			callBackMethod = cmdLineData.getOptionValue(CallBackMethodParam);
-			callBackSchema = cmdLineData.getOptionValue(CallBackUserParam);
-			callBackParams = cmdLineData.getOptionValue(CallBackPasswordParam);
-			callBackUser = cmdLineData.getOptionValue(CallBackSchemaParam);
-			callBackPassword = cmdLineData.getOptionValue(CallBackParamsParam);
-		}
 	}
 
 	private enum ParamMango {
@@ -181,13 +107,7 @@ public class InputParamsMango extends InputParamsTM {
 		Lineas(LineasNameParam),
 		Payments(PaymentsNameParam),
 		Catalogs(CatalogsNameParam),
-		UrlManto(UrlMantoParam),
-		CallBackResource(CallBackResourceParam),
-		CallBackMethod(CallBackMethodParam),
-		CallBackSchema(CallBackSchemaParam),
-		CallBackParams(CallBackParamsParam),
-		CallBAckUser(CallBackUserParam),
-		CallBackPassword(CallBackPasswordParam);
+		UrlManto(UrlMantoParam);
 		
 		public String nameParam;
 		private ParamMango(String nameParam) {
@@ -219,18 +139,6 @@ public class InputParamsMango extends InputParamsTM {
 			return listCatalogsCommaSeparated;
 		case UrlManto:
 			return getUrlManto();
-		case CallBackResource:
-			return (getCallBack()==null? null : getCallBack().getCallBackResource());
-		case CallBackMethod:
-			return (getCallBack()==null? null : getCallBack().getCallBackMethod());
-		case CallBackSchema:
-			return (getCallBack()==null? null : getCallBack().getCallBackSchema());
-		case CallBackParams:
-			return (getCallBack()==null? null : getCallBack().getCallBackParams());
-		case CallBAckUser:
-			return (getCallBack()==null? null : getCallBack().getCallBackUser());
-		case CallBackPassword:
-			return (getCallBack()==null? null : getCallBack().getCallBackPassword());
 		}
 		return "";
 	}
@@ -281,24 +189,6 @@ public class InputParamsMango extends InputParamsTM {
 	}
 	public void setListCatalogsCommaSeparated(String listCatalogsCommaSeparated) {
 		this.listCatalogsCommaSeparated = listCatalogsCommaSeparated;
-	}
-	public void setCallBackResource(String callBackResource) {
-		this.callBackResource = callBackResource;
-	}
-	public void setCallBackMethod(String callBackMethod) {
-		this.callBackMethod = callBackMethod;
-	}
-	public void setCallBackSchema(String callBackSchema) {
-		this.callBackSchema = callBackSchema;
-	}
-	public void setCallBackParams(String callBackParams) {
-		this.callBackParams = callBackParams;
-	}
-	public void setCallBackUser(String callBackUser) {
-		this.callBackUser = callBackUser;
-	}
-	public void setCallBackPassword(String callBackPassword) {
-		this.callBackPassword = callBackPassword;
 	}
 
 	public List<String> getListaPaises() {
@@ -365,20 +255,6 @@ public class InputParamsMango extends InputParamsTM {
 
 	public void setUrlManto(String urlManto) {
 		this.urlManto = urlManto;
-	}
-
-	public CallBack getCallBack() {
-		setCallBack();
-		return callBack;
-	}
-	
-	private void setCallBack() {
-		callBack.setCallBackResource(callBackResource);
-		callBack.setCallBackMethod(callBackMethod);
-		callBack.setCallBackUser(callBackSchema);
-		callBack.setCallBackPassword(callBackParams);
-		callBack.setCallBackSchema(callBackUser);
-		callBack.setCallBackParams(callBackPassword);
 	}
 
 	@Override

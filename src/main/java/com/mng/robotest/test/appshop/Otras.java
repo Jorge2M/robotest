@@ -17,6 +17,7 @@ import com.mng.robotest.test.stpv.shop.PagePrehomeStpV;
 import com.mng.robotest.test.stpv.shop.SecFooterStpV;
 import com.mng.robotest.test.stpv.shop.menus.SecMenusDesktopStpV;
 import com.mng.robotest.test.stpv.shop.modales.ModalChatBotStpV;
+import com.mng.robotest.test.stpv.shop.modales.ModalNewsletterStpV;
 import com.mng.robotest.test.utils.PaisGetter;
 import com.github.jorge2m.testmaker.service.TestMaker;
 
@@ -176,6 +177,7 @@ public class Otras {
 		dCtxSh.idioma = castellano;
 		dCtxSh.userRegistered = false;
 		AccesoStpV.oneStep(dCtxSh, false, driver);
+		ModalNewsletterStpV.closeIfVisible(driver);
 		
 		ModalChatBotStpV chatBotStpV = new ModalChatBotStpV(driver);
 		if (!chatBotStpV.checkIconVisible()) {
