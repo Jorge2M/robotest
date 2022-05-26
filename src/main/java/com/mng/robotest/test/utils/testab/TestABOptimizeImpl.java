@@ -13,6 +13,17 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 	//El id está en el campo "ID d experimento" del detalle en Google Optimize
 	//Si se quiere activar hay que añadirlo en la clase TestABactive
 	
+	New_Registry_MLY_Desktop_PRO (
+		"NEW REGISTRY MLY - Desktop PRO",
+		"ZGeyWzMqTOerYK3fl5kfVw",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"V0-Original", 
+			"V1-Variante1"),
+		Arrays.asList(Channel.desktop),
+		Arrays.asList(AppEcom.shop)
+	),
+	
 	CLAV_4345_Optimizacion_Imagenes_PRE(
 		"[PDP][PLP][CLAV-4345] Optimización imágenes PRE",
 		"1ae9zzpfQ8G27RoiFxWePg",

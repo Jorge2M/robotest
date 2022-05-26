@@ -16,6 +16,7 @@ public class TestABactive {
 		List<TestABactData> listTestABsToActivate = new ArrayList<>();
 
 		listTestABsToActivate.add(TestABactData.getNew(TestABGoogleExpImpl.MVPCheckoutDesktop, 0));
+		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.New_Registry_MLY_Desktop_PRO, 0));
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.CLAV_4345_Optimizacion_Imagenes_PRE, 1));
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.CLAV_4345_Optimizacion_Imagenes_Desktop_PRO, 1));
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.CLAV_4345_Optimizacion_Imagenes_Mobile_PRO, 1));
