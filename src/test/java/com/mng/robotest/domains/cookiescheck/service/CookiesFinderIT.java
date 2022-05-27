@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.mng.robotest.domains.cookiescheck.entities.Cookie;
+import com.mng.robotest.domains.cookiescheck.services.CookiesFinder;
 
 public class CookiesFinderIT {
 
