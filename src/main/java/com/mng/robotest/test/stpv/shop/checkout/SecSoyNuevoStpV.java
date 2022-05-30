@@ -32,7 +32,7 @@ public class SecSoyNuevoStpV {
 		SecSoyNuevo.inputEmail(email, channel, driver);
 		SecSoyNuevo.clickContinue(channel, driver);
 
-		Page2IdentCheckoutStpV page2IdentCheckoutStpV = new Page2IdentCheckoutStpV(channel, driver);
+		Page2IdentCheckoutStpV page2IdentCheckoutStpV = new Page2IdentCheckoutStpV(channel, pais, driver);
 		page2IdentCheckoutStpV.validateIsPage(emailExistsYet, 2);
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.CookiesAllowed,

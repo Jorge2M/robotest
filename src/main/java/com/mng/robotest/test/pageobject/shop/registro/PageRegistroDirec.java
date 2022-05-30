@@ -8,12 +8,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.mng.robotest.test.beans.Pais;
+import com.mng.robotest.test.pageobject.shop.checkout.Page2IdentCheckout;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
-import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.pageobject.shop.checkout.Page2IdentCheckout;
 
 
 public class PageRegistroDirec {
@@ -35,7 +35,8 @@ public class PageRegistroDirec {
 	
 	public static void sendDataAccordingCountryToInputs(
 			Map<String,String> dataRegistro, Pais pais, Channel channel, WebDriver driver) throws Exception {
-		dataRegistro.putAll(new Page2IdentCheckout(driver).inputDataPorDefectoSegunPais(pais, dataRegistro.get("cfEmail"), false, false, channel));
+		dataRegistro.putAll(new Page2IdentCheckout(pais, driver)
+				.inputDataPorDefectoSegunPais(dataRegistro.get("cfEmail"), false, false, channel));
 	}
 	
 	public static void sendDataToInputs(ListDataRegistro dataToSend, WebDriver driver, int repeat) throws Exception {

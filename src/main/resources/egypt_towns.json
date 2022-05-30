@@ -1,0 +1,1007 @@
+{
+    "cities": [
+	    {
+		    "state": "BEHEIRA",
+			"city": "ABOU HOMUS"
+		},
+	    {
+		    "state": "BEHEIRA",
+			"city": "BEHERA"
+		},
+		{
+		    "state": "BEHEIRA",
+			"city": "DAMANHOUR"
+		},
+		{
+		    "state": "BEHEIRA",
+			"city": "EDKO"
+		},
+		{
+		    "state": "BEHEIRA",
+			"city": "EL DLINGAT"
+		},
+		{
+		    "state": "BEHEIRA",
+			"city": "EL NOBARIA"
+		},
+		{
+		    "state": "BEHEIRA",
+			"city": "ETAY EL BAROUD"
+		},
+		{
+		    "state": "BEHEIRA",
+			"city": "KAFR EL DAWAR"
+		},
+		{
+		    "state": "BEHEIRA",
+			"city": "KOM HAMADA"
+		},
+		{
+		    "state": "BEHEIRA",
+			"city": "MODEREYAT EL TAHRIR"
+		},
+		{
+		    "state": "BEHEIRA",
+			"city": "RASHID"
+		},
+		
+		{
+		    "state": "DAKAHLIA",
+			"city": "AGA"
+		},
+		{
+		    "state": "DAKAHLIA",
+			"city": "BELKAS"
+		},
+		{
+		    "state": "DAKAHLIA",
+			"city": "DAKAHLIA"
+		},
+		{
+		    "state": "DAKAHLIA",
+			"city": "DEKERNES"
+		},
+		{
+		    "state": "DAKAHLIA",
+			"city": "EL MATARIA"
+		},
+		{
+		    "state": "DAKAHLIA",
+			"city": "GAMASA"
+		},
+		{
+		    "state": "DAKAHLIA",
+			"city": "MANSOURA"
+		},
+		{
+		    "state": "DAKAHLIA",
+			"city": "MANZALA"
+		},
+		{
+		    "state": "DAKAHLIA",
+			"city": "MEET GHAMR"
+		},
+		{
+		    "state": "DAKAHLIA",
+			"city": "NABAROH"
+		},
+		{
+		    "state": "DAKAHLIA",
+			"city": "SEMBILAWEEN"
+		},
+		{
+		    "state": "DAKAHLIA",
+			"city": "SHERBEN"
+		},		
+		{
+		    "state": "DAKAHLIA",
+			"city": "TALKHA"
+		},
+
+		{
+		    "state": "FAYOUM",
+			"city": "DAR SALAM"
+		},
+		{
+		    "state": "FAYOUM",
+			"city": "EBSHWAY"
+		},
+		{
+		    "state": "FAYOUM",
+			"city": "EL LAHOUN"
+		},
+		{
+		    "state": "FAYOUM",
+			"city": "FAYOUM"
+		},
+		{
+		    "state": "FAYOUM",
+			"city": "SANOURES"
+		},
+		{
+		    "state": "FAYOUM",
+			"city": "WADI EL RAYAN"
+		},
+
+		{
+		    "state": "GHARBIA",
+			"city": "BASIOUN"
+		},
+		{
+		    "state": "GHARBIA",
+			"city": "EL SANTA"
+		},
+		{
+		    "state": "GHARBIA",
+			"city": "GHARBIA"
+		},
+		{
+		    "state": "GHARBIA",
+			"city": "KAFR EL ZAYAT"
+		},
+		{
+		    "state": "GHARBIA",
+			"city": "MAHALA EL KOBRA"
+		},
+		{
+		    "state": "GHARBIA",
+			"city": "QOTOUR"
+		},
+		{
+		    "state": "GHARBIA",
+			"city": "SAMANOUD"
+		},
+		{
+		    "state": "GHARBIA",
+			"city": "TANTA"
+		},
+		{
+		    "state": "GHARBIA",
+			"city": "ZEFTA"
+		},
+		
+		{
+		    "state": "MENYA",
+			"city": "ABOU KORKAS"
+		},
+		{
+		    "state": "MENYA",
+			"city": "BANI MAZAR"
+		},
+		{
+		    "state": "MENYA",
+			"city": "DIR MAWAS"
+		},
+		{
+		    "state": "MENYA",
+			"city": "EL ADWA"
+		},
+		{
+		    "state": "MENYA",
+			"city": "MAGHAGHA"
+		},
+		{
+		    "state": "MENYA",
+			"city": "MALLAWY"
+		},
+		{
+		    "state": "MENYA",
+			"city": "MATAY"
+		},
+		{
+		    "state": "MENYA",
+			"city": "MENYA"
+		},
+		{
+		    "state": "MENYA",
+			"city": "SAMALOUT"
+		},
+		
+		{
+		    "state": "MONUFIA",
+			"city": "ASHMOUN"
+		},
+		{
+		    "state": "MONUFIA",
+			"city": "BERKET EL SABA"
+		},
+		{
+		    "state": "MONUFIA",
+			"city": "EL BAGOUR"
+		},
+		{
+		    "state": "MONUFIA",
+			"city": "EL SADAT"
+		},
+		{
+		    "state": "MONUFIA",
+			"city": "EL SHOUHDA"
+		},
+		{
+		    "state": "MONUFIA",
+			"city": "MENOUF"
+		},
+		{
+		    "state": "MONUFIA",
+			"city": "MONOFIA"
+		},
+		{
+		    "state": "MONUFIA",
+			"city": "QUESNA"
+		},
+		{
+		    "state": "MONUFIA",
+			"city": "SADAT CITY"
+		},
+		{
+		    "state": "MONUFIA",
+			"city": "SHATANOUF"
+		},
+		{
+		    "state": "MONUFIA",
+			"city": "SHEBIN EL KOUM"
+		},		
+		{
+		    "state": "MONUFIA",
+			"city": "TALA"
+		},		
+		
+		{
+		    "state": "SHARQIA",
+			"city": "10TH OF RAMADAN"
+		},
+		{
+		    "state": "SHARQIA",
+			"city": "ABOU HAMAD"
+		},
+		{
+		    "state": "SHARQIA",
+			"city": "ABOU KABIR"
+		},
+		{
+		    "state": "SHARQIA",
+			"city": "AWLAD SAKR"
+		},
+		{
+		    "state": "SHARQIA",
+			"city": "BELBEIS"
+		},
+		{
+		    "state": "SHARQIA",
+			"city": "DIRB NIGM"
+		},
+		{
+		    "state": "SHARQIA",
+			"city": "EL HOSANIA"
+		},
+		{
+		    "state": "SHARQIA",
+			"city": "ENSHAS"
+		},
+		{
+		    "state": "SHARQIA",
+			"city": "FAKOUS"
+		},
+		{
+		    "state": "SHARQIA",
+			"city": "KAFR SAKR"
+		},
+		{
+		    "state": "SHARQIA",
+			"city": "MASHTOLSOK"
+		},
+		{
+		    "state": "SHARQIA",
+			"city": "MENA KAMH"
+		},
+		{
+		    "state": "SHARQIA",
+			"city": "SALHIA GADIDA"
+		},
+		{
+		    "state": "SHARQIA",
+			"city": "SHARKIA"
+		},
+		{
+		    "state": "SHARQIA",
+			"city": "ZAGAZIG"
+		},		
+
+		{
+		    "state": "ALEXANDRIA",
+			"city": "ABBARY"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "ABOU QIR"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "AL FATH"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "ALEXANDRIA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "ALX PORT"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "AMERYA FREE ZONE"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "ANFOUSHI"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "ASAFRA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "AZARITA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "BACOS"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "BOLKY"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "BORG EL ARAB"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "CAMP CHESAR"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "CHATBY"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "CLEOPATRA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "EL AGAMY"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "EL ATTARIN"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "EL BOUSTAN"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "EL DEKHELA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "EL GAMAA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "EL GOMROK"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "EL HEDAYA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "EL LABBAN"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "EL MANDARA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "EL MAX"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "EL NAHDA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "EL PHARANA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "FLEMING"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "GAMEA IBRAHIM"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "GANACLYS"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "GLYM"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "HADARA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "HANNOVIL"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "IBRAHIMIA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "KARMOUZ"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "KASR SAFA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "KOM EL DEKA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "LAURAN"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "MAAMOURA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "MANCHEYA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "MENA EL BASAL"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "MIAMI"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "MOHARAM BEIK"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "MONTAZAH"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "MOSTAFA KAMEL"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "MOSTAFA PACHA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "NORTH COAST"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "RAML STATION"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "RAS EL-SODA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "RAS EL-TIN"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "ROUSHDY"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "SABA PACHA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "SAFAR"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "SAN STEFANO"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "SARWAT"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "SEMOUHA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "SHABAB MOSLEMIN"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "SHUTS"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "SIDI BISHR"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "SIDI GABER"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "SIOUF"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "SOTER"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "SPORTING"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "STANLEY"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "VICTORIA"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "WARDIYAN"
+		},
+		{
+		    "state": "ALEXANDRIA",
+			"city": "ZIZINIA"
+		},		
+		
+		{
+		    "state": "ASWAN",
+			"city": "ABU SIMBEL"
+		},
+		{
+		    "state": "ASWAN",
+			"city": "ASWAN"
+		},
+		{
+		    "state": "ASWAN",
+			"city": "EDFOU"
+		},
+		{
+		    "state": "ASWAN",
+			"city": "EL BALANA"
+		},
+		{
+		    "state": "ASWAN",
+			"city": "KLABSHA"
+		},
+		{
+		    "state": "ASWAN",
+			"city": "KOUMUMBO"
+		},
+		{
+		    "state": "ASWAN",
+			"city": "NOUBA"
+		},
+		{
+		    "state": "ASWAN",
+			"city": "TOSHKA"
+		},
+
+		{
+		    "state": "ASYUT",
+			"city": "ABOU TIG"
+		},
+		{
+		    "state": "ASYUT",
+			"city": "ASSIUT"
+		},
+		{
+		    "state": "ASYUT",
+			"city": "DYROUT"
+		},
+		{
+		    "state": "ASYUT",
+			"city": "EL BADARY"
+		},
+		{
+		    "state": "ASYUT",
+			"city": "EL GHANAIM"
+		},
+		{
+		    "state": "ASYUT",
+			"city": "EL KOSIA"
+		},
+		{
+		    "state": "ASYUT",
+			"city": "MANFALOUT"
+		},
+		{
+		    "state": "ASYUT",
+			"city": "MANKABAD"
+		},
+		{
+		    "state": "ASYUT",
+			"city": "SEDFA"
+		},
+		
+		{
+		    "state": "BENI SUEF",
+			"city": "BEBA"
+		},
+		{
+		    "state": "BENI SUEF",
+			"city": "BENI SUEF"
+		},
+		{
+		    "state": "BENI SUEF",
+			"city": "BUSH"
+		},
+		{
+		    "state": "BENI SUEF",
+			"city": "EL FASHN"
+		},
+		{
+		    "state": "BENI SUEF",
+			"city": "EL WASTA"
+		},
+
+		{
+		    "state": "CAIRO",
+			"city": "15TH OF MAY"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "5TH SETTLEMENT"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "ABDEEN"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "AIN SHAMS"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "AMYRIA"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "BAB EL SHAIRYA"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "BOULAQ"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "CAIRO"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "DOWN TOWN"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "EL BASATIN"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "EL KHALIFA"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "EL MARG"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "EL MOSKI"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "EL NOZHA"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "EL REHAB"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "EL SAHEL"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "EL SALAM"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "EL WAYLI"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "EL-SHEROUK CITY"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "EZBIT EL-NAKHL"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "GARDEN CITY"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "HADAYEK"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "HELIOPOLIS"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "HELWAN"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "MAADI"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "MANIAL"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "MATAREYA"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "MOKATTAM"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "MONSHAET NASSER"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "NASR CITY"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "NEW CAIRO"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "OLD CAIRO"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "ROD EL FARAG"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "SAYEDA ZEINAB"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "SHARABIA"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "SHOUBRA"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "TEBEEN"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "ZAWYA EL HAMRA"
+		},
+		{
+		    "state": "CAIRO",
+			"city": "ZEITOUN"
+		},
+		
+		{
+		    "state": "DAMIETTA",
+			"city": "DAMIETTA"
+		},
+		{
+		    "state": "DAMIETTA",
+			"city": "DAMIETTA PORT"
+		},
+		{
+		    "state": "DAMIETTA",
+			"city": "FARASKOUR"
+		},
+		{
+		    "state": "DAMIETTA",
+			"city": "KAFR EL BATIKH"
+		},
+		{
+		    "state": "DAMIETTA",
+			"city": "RAS EL-BAR"
+		},
+		
+		{
+		    "state": "GIZA",
+			"city": "6TH OF OCTOBER"
+		},
+		{
+		    "state": "GIZA",
+			"city": "AGOUZA"
+		},
+		{
+		    "state": "GIZA",
+			"city": "AL HARAM"
+		},
+		{
+		    "state": "GIZA",
+			"city": "BADRASHEEN"
+		},
+		{
+		    "state": "GIZA",
+			"city": "DOKKI"
+		},
+		{
+		    "state": "GIZA",
+			"city": "EL KORIMAT"
+		},
+		{
+		    "state": "GIZA",
+			"city": "EMBABA"
+		},
+		{
+		    "state": "GIZA",
+			"city": "FAISAL"
+		},
+		{
+		    "state": "GIZA",
+			"city": "GIZA"
+		},
+		{
+		    "state": "GIZA",
+			"city": "HAWAMDIA"
+		},
+		{
+		    "state": "GIZA",
+			"city": "MEET OQBA"
+		},
+		{
+		    "state": "GIZA",
+			"city": "MOHANDESIN"
+		},
+		{
+		    "state": "GIZA",
+			"city": "ORMAN"
+		},
+		{
+		    "state": "GIZA",
+			"city": "SAKKARA"
+		},
+		{
+		    "state": "GIZA",
+			"city": "TAMOH"
+		},
+		{
+		    "state": "GIZA",
+			"city": "ZAMALEK"
+		},		
+		
+		{
+		    "state": "ISMAILIA",
+			"city": "ABOU SOUER"
+		},
+		{
+		    "state": "ISMAILIA",
+			"city": "ABOU SULTAN"
+		},
+		{
+		    "state": "ISMAILIA",
+			"city": "EL FERDAN"
+		},
+		{
+		    "state": "ISMAILIA",
+			"city": "FAYED"
+		},
+		{
+		    "state": "ISMAILIA",
+			"city": "ISMAILIA"
+		},
+		{
+		    "state": "ISMAILIA",
+			"city": "KASFARET"
+		},
+		{
+		    "state": "ISMAILIA",
+			"city": "KASSASIN"
+		},
+		{
+		    "state": "ISMAILIA",
+			"city": "QANATER SHARK"
+		},
+		{
+		    "state": "ISMAILIA",
+			"city": "QANTARA GHARB"
+		},
+		
+		{
+		    "state": "KAFR EL SHEIKH",
+			"city": "BALTEEM"
+		},
+		{
+		    "state": "KAFR EL SHEIKH",
+			"city": "BELA"
+		},
+		{
+		    "state": "KAFR EL SHEIKH",
+			"city": "DESOUK"
+		},
+		{
+		    "state": "KAFR EL SHEIKH",
+			"city": "EL HAMOUL"
+		},
+		{
+		    "state": "KAFR EL SHEIKH",
+			"city": "EL REYAD"
+		},
+		{
+		    "state": "KAFR EL SHEIKH",
+			"city": "KAFR EL SHEIKH"
+		},
+		{
+		    "state": "KAFR EL SHEIKH",
+			"city": "METOBAS"
+		},
+		{
+		    "state": "KAFR EL SHEIKH",
+			"city": "QELLIN"
+		},
+		{
+		    "state": "KAFR EL SHEIKH",
+			"city": "SIDI SALEM"
+		},
+		
+		{
+		    "state": "LUXOR",
+			"city": "LUXOR"
+		},
+
+		{
+		    "state": "MATROUH",
+			"city": "EL ALAMEEN"
+		},
+		{
+		    "state": "MATROUH",
+			"city": "MARSA MATROUH"
+		},
+		{
+		    "state": "MATROUH",
+			"city": "MATROUH"
+		}	
+		
+	]
+	
+}
