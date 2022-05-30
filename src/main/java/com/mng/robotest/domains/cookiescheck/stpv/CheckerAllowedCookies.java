@@ -110,7 +110,7 @@ public class CheckerAllowedCookies implements Checker {
 				resultCheck.getLeft(), State.Info, true);
 		
 		//TODO temporal!!!
-		sendNotification();
+		//sendNotification();
 		
 		return checks;
 	}
