@@ -1,4 +1,4 @@
-package com.mng.robotest.domains.cookiescheck.service;
+package com.mng.robotest.domains.cookiescheck.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
