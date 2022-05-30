@@ -1,4 +1,4 @@
-package com.mng.robotest.domains.cookiescheck.service;
+package com.mng.robotest.domains.cookiescheck.services;
 
 import java.util.Calendar;
 import java.util.List;
