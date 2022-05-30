@@ -109,6 +109,11 @@ public class UtilsTestMango {
 		return "";
 	}
 	
+	public static GarmentCatalog getArticleForTest(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+		List<GarmentCatalog> articles = getArticlesForTest(dCtxSh, driver);
+		return articles.get(0);
+	}
+	
 	static int maxArticles = 99;
 	public static List<GarmentCatalog> getArticlesForTest(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		return (getArticlesForTestDependingVale(dCtxSh, maxArticles, driver));
