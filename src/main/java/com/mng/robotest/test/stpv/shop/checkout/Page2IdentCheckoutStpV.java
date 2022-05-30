@@ -13,6 +13,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.datastored.DataBag;
+import com.mng.robotest.test.factoryes.entities.EgyptCity;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.pageobject.shop.checkout.Page2IdentCheckout;
 
@@ -22,8 +23,14 @@ public class Page2IdentCheckoutStpV {
 	private final Channel channel;
 	private final WebDriver driver;
 	
-	public Page2IdentCheckoutStpV(Channel channel, WebDriver driver) {
-		this.page2IdentCheckout = new Page2IdentCheckout(driver);
+	public Page2IdentCheckoutStpV(Channel channel, Pais pais, WebDriver driver) {
+		this.page2IdentCheckout = new Page2IdentCheckout(pais, driver);
+		this.channel = channel;
+		this.driver = driver;
+	}
+	
+	public Page2IdentCheckoutStpV(Channel channel, Pais pais, EgyptCity egyptCity, WebDriver driver) {
+		this.page2IdentCheckout = new Page2IdentCheckout(pais, egyptCity, driver);
 		this.channel = channel;
 		this.driver = driver;
 	}
@@ -51,9 +58,10 @@ public class Page2IdentCheckoutStpV {
 		description="Introducimos los datos del cliente según el país", 
 		expected="Se hace clickable el botón \"Continuar\"",
 		saveImagePage=SaveWhen.Always)
-	public HashMap<String, String> inputDataPorDefecto(Pais pais, String emailUsr, boolean inputDireccCharNoLatinos) throws Exception {
+	public HashMap<String, String> inputDataPorDefecto(String emailUsr, boolean inputDireccCharNoLatinos) 
+			throws Exception {
 		HashMap<String, String> datosRegistro = 
-			page2IdentCheckout.inputDataPorDefectoSegunPais(pais, emailUsr, inputDireccCharNoLatinos, false, channel);
+			page2IdentCheckout.inputDataPorDefectoSegunPais(emailUsr, inputDireccCharNoLatinos, false, channel);
 		
 		TestMaker.getCurrentStepInExecution().addDescriptionText(". Utilizando los datos: "+ UtilsMangoTest.listaCamposHTML(datosRegistro)); 
 		checkIsVisibleContiueButton(5);
