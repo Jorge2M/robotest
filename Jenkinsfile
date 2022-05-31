@@ -42,7 +42,7 @@ pipeline {
             steps {
             	sh 'mvn -version'
 	        	sh 'mvn clean'
-	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+	        	withCredentials([usernamePassword(credentialsId: 'svc_bitbucket_pro', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
 	            	sh 'mvn --settings infrastructure/ci/settings.xml test verify -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
 	            }
             }
