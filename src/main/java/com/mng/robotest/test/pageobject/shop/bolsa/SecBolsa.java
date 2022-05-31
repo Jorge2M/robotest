@@ -90,7 +90,7 @@ public abstract class SecBolsa extends PageObjTM {
 		return (state(Visible, By.xpath(xpathComprarBt), driver).check());
 	}
 
-	public boolean isVisibleBotonComprarUntil(int maxSeconds) {
+	public boolean isVisibleBotonComprarUntil(int maxSeconds) { 
 		String xpathBoton = getXPathBotonComprar();
 		return (state(Visible, By.xpath(xpathBoton), driver).wait(maxSeconds).check());
 	}
