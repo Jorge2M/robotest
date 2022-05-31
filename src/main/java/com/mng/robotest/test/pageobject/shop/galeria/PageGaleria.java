@@ -572,18 +572,20 @@ public abstract class PageGaleria extends PageObjTM {
 	}
 
 	public void goToInitPageAndWaitForArticle() throws Exception {
-		Object pagePositionObj = ((JavascriptExecutor) driver).executeScript("return window.pageYOffset;");
-		if (pagePositionObj instanceof Long) {
-			Long pagePosition = (Long)pagePositionObj;
-			if (pagePosition != 0) {
-				backTo1erArticulo();
-			}
-		} else {
-			Double pagePosition = (Double)pagePositionObj;
-			if (pagePosition != 0) {
-				backTo1erArticulo();
-			}
-		}
+//		Object pagePositionObj = ((JavascriptExecutor) driver).executeScript("return window.pageYOffset;");
+//		if (pagePositionObj instanceof Long) {
+//			Long pagePosition = (Long)pagePositionObj;
+//			if (pagePosition != 0) {
+//				backTo1erArticulo();
+//			}
+//		} else {
+//			Double pagePosition = (Double)pagePositionObj;
+//			if (pagePosition != 0) {
+//				backTo1erArticulo();
+//			}
+//		}
+		//TODO en estos momentos algo raro le pasa al menú Nuevo que requiere un refresh para funcionar ok
+		driver.navigate().refresh();
 		int maxSeconds = 2;
 		isVisibleArticleUntil(1, maxSeconds);
 	}

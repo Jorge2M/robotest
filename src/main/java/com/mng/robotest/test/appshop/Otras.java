@@ -196,6 +196,6 @@ public class Otras {
 		chatBotStpV.selectOption(option2);
 		
 		chatBotStpV.checkResponseVisible("Si has recibido un e-mail de retraso de tu pedido no te preocupes", 3);
-		chatBotStpV.isVisibleButton("¡Sí, gracias!", 1);
+		chatBotStpV.isVisibleButton("¡Sí, gracias!", 3);
 	}
 }

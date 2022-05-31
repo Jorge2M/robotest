@@ -133,7 +133,9 @@ public class Loyalty {
 		menuNewCollection = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "nuevo"));
 		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
 		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuNewCollection, dCtxSh);
-		//secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
+		//TODO en estos momentos algo raro le pasa al menú Nuevo que requiere un refresh para funcionar ok
+		driver.navigate().refresh();
+		
 		DataBag dataBag = GaleriaNavigationsStpV.selectArticleAvailableFromGaleria(dCtxSh, driver);
 		return dataBag;
 	}
