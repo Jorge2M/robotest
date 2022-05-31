@@ -36,7 +36,7 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 	),
 	
 	CLAV_4345_Optimizacion_Imagenes_Desktop_PRO(
-		"[PDP][PLP][CLAV-4345] Optimización imágenes PRE",
+		"[PDP][PLP][CLAV-4345] Optimización imágenes PRO",
 		"t-A4thioStqyXlc0mcG5CA",
 		Arrays.asList(0,1),
 		Arrays.asList(

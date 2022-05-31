@@ -1,4 +1,4 @@
-package com.mng.robotest.domains.cookiescheck.service;
+package com.mng.robotest.domains.cookiescheck.services;
 
 import java.io.IOException;
 import java.util.List;

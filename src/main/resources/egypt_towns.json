@@ -1000,8 +1000,239 @@
 		{
 		    "state": "MATROUH",
 			"city": "MATROUH"
-		}	
+		},
+
+		{
+		    "state": "EL WADI EL GEDID",
+			"city": "EL FARAFRA"
+		},
+		{
+		    "state": "EL WADI EL GEDID",
+			"city": "EL WADI EL GEDID"
+		},
+		{
+		    "state": "EL WADI EL GEDID",
+			"city": "WAHAT DAKHLA"
+		},
+		{
+		    "state": "EL WADI EL GEDID",
+			"city": "WAHAT KHARGA"
+		},
 		
+		{
+		    "state": "NORTH SINAI",
+			"city": "DIR AL ABD"
+		},
+		{
+		    "state": "NORTH SINAI",
+			"city": "NORTH SINAI"
+		},		
+		
+		{
+		    "state": "PORT SAID",
+			"city": "PORT FOUAD"
+		},
+		{
+		    "state": "PORT SAID",
+			"city": "PORT SAID"
+		},
+		{
+		    "state": "PORT SAID",
+			"city": "PORT SAID, EL JAMIL"
+		},				
+		
+		{
+		    "state": "QALUBIA",
+			"city": "BANHA"
+		},		
+		{
+		    "state": "QALUBIA",
+			"city": "EL KHANKA"
+		},		
+		{
+		    "state": "QALUBIA",
+			"city": "KAFR EL ARBAAEN"
+		},
+		{
+		    "state": "QALUBIA",
+			"city": "KAFR GAZAR"
+		},
+		{
+		    "state": "QALUBIA",
+			"city": "KAFR SHOKR"
+		},
+		{
+		    "state": "QALUBIA",
+			"city": "OBOUR CITY"
+		},
+		{
+		    "state": "QALUBIA",
+			"city": "QAHA"
+		},
+		{
+		    "state": "QALUBIA",
+			"city": "QALIOUB"
+		},
+		{
+		    "state": "QALUBIA",
+			"city": "QALIOUBIYA"
+		},
+		{
+		    "state": "QALUBIA",
+			"city": "QANATER KHAIREYA"
+		},
+		{
+		    "state": "QALUBIA",
+			"city": "SHOUBRA EL KHEIMA"
+		},
+		{
+		    "state": "QALUBIA",
+			"city": "TOUKH"
+		},		
+
+		{
+		    "state": "QENA",
+			"city": "ABOU TESHT"
+		},		
+		{
+		    "state": "QENA",
+			"city": "DESHNA"
+		},
+		{
+		    "state": "QENA",
+			"city": "ESNA"
+		},
+		{
+		    "state": "QENA",
+			"city": "FARSHOUT"
+		},
+		{
+		    "state": "QENA",
+			"city": "NAGA HAMDY"
+		},
+		{
+		    "state": "QENA",
+			"city": "NAQADA"
+		},
+		{
+		    "state": "QENA",
+			"city": "QEFT"
+		},
+		{
+		    "state": "QENA",
+			"city": "QENA"
+		},
+		{
+		    "state": "QENA",
+			"city": "QOUS"
+		},				
+														
+		{
+		    "state": "RED SEA",
+			"city": "EL KOUSIER"
+		},
+		{
+		    "state": "RED SEA",
+			"city": "HURGHADA"
+		},
+		{
+		    "state": "RED SEA",
+			"city": "MARSA ALAM"
+		},
+		{
+		    "state": "RED SEA",
+			"city": "RAS GHAREB"
+		},
+		{
+		    "state": "RED SEA",
+			"city": "RED SEA"
+		},
+		{
+		    "state": "RED SEA",
+			"city": "SAFAGA"
+		},
+		
+		{
+		    "state": "SOHAG",
+			"city": "AKHMEEM"
+		},
+		{
+		    "state": "SOHAG",
+			"city": "GIRGA"
+		},
+		{
+		    "state": "SOHAG",
+			"city": "SAQULTA"
+		},
+		{
+		    "state": "SOHAG",
+			"city": "SOHAG"
+		},
+		{
+		    "state": "SOHAG",
+			"city": "TAHTA"
+		},
+		{
+		    "state": "SOHAG",
+			"city": "TAMA"
+		},
+		{
+		    "state": "SOHAG",
+			"city": "TEMA"
+		},
+
+		{
+		    "state": "SOUTH SINAI",
+			"city": "AL TOOR"
+		},
+		{
+		    "state": "SOUTH SINAI",
+			"city": "DAHAB"
+		},
+		{
+		    "state": "SOUTH SINAI",
+			"city": "NUEBAA"
+		},
+		{
+		    "state": "SOUTH SINAI",
+			"city": "RAS SIDR"
+		},
+		{
+		    "state": "SOUTH SINAI",
+			"city": "SHARM EL SHEIKH"
+		},
+		{
+		    "state": "SOUTH SINAI",
+			"city": "SOUTH SINAI"
+		},
+		{
+		    "state": "SOUTH SINAI",
+			"city": "ST CATHRIN"
+		},
+		{
+		    "state": "SOUTH SINAI",
+			"city": "TABA"
+		},
+		
+		{
+		    "state": "SUEZ",
+			"city": "EL SOUKHNA"
+		},
+		{
+		    "state": "SUEZ",
+			"city": "EYON MOUSA"
+		},
+		{
+		    "state": "SUEZ",
+			"city": "KABREET"
+		},
+		{
+		    "state": "SUEZ",
+			"city": "SHALOUFA"
+		},
+		{
+		    "state": "SUEZ",
+			"city": "SUEZ"
+		}
 	]
-	
 }

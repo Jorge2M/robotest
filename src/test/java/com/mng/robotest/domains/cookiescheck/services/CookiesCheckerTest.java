@@ -1,4 +1,4 @@
-package com.mng.robotest.domains.cookiescheck.service;
+package com.mng.robotest.domains.cookiescheck.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 import org.junit.Test;
 
 import com.mng.robotest.domains.cookiescheck.entities.Cookie;
+import com.mng.robotest.domains.cookiescheck.services.CookiesChecker;
 
 public class CookiesCheckerTest {
 
