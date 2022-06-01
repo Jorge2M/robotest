@@ -36,10 +36,17 @@ public class HttpCookiesFinder implements CookiesRepository {
     }
 	
     @Override
-    public List<Cookie> retrieveCookies() {
+    public List<Cookie> retrieveCookies() throws IrretrievableCookies, IOException {
         try {
             HttpPost post = buildPostRequestWith(identityToken);
             HttpResponse response = httpClient.execute(post);
+            int status = response.getStatusLine().getStatusCode(); 
+            if (status != 200) {
+            	String message = String.format("Error %s calling GTM Cookies Service", response.getStatusLine().getStatusCode()); 
+                logger.error(message);
+                throw new IrretrievableCookies(message);
+            }
+            
             ObjectMapper mapper = new ObjectMapper();
             CookiesData cookiesData = mapper.readValue(response.getEntity().getContent(), CookiesData.class); 
             return cookiesData.getContent();

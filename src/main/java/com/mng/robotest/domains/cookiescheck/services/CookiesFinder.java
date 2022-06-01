@@ -2,6 +2,7 @@ package com.mng.robotest.domains.cookiescheck.services;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.logging.log4j.Logger;
 
@@ -13,11 +14,11 @@ public class CookiesFinder {
 	private static final Logger logger = Log4jTM.getLogger();
 	
 	private final static int SECONDS_PERSISTENCE = 3600; 
-	private static List<Cookie> listCookies;
+	private static Optional<List<Cookie>> listCookies;
 	private static Calendar timeCapturedCookies;
 
 	
-    public synchronized List<Cookie> getAllowedCookies() {
+    public synchronized Optional<List<Cookie>> getAllowedCookies() {
     	if (isNeededRefreshDataCookies(SECONDS_PERSISTENCE)) {
    			listCookies = getCookiesFromHttp();
    			timeCapturedCookies = Calendar.getInstance();
@@ -25,15 +26,20 @@ public class CookiesFinder {
     	return listCookies;
     }
     
-    List<Cookie> getCookiesFromHttp() {
+    Optional<List<Cookie>> getCookiesFromHttp() {
     	try {
 		    CookiesRepository cookiesRepo = new HttpCookiesFinder();
-		    List<Cookie> cookies = cookiesRepo.retrieveCookies();
+		    List<Cookie> cookies;
+		    try {
+		    	cookies = cookiesRepo.retrieveCookies();
+		    } catch (Exception e) {
+		    	return Optional.empty(); 
+		    }
 		    if (cookies==null || cookies.size()==0) {
 		    	logger.warn("Problem retrieving cookies from http service");
-		    	return null;
+		    	return Optional.empty();
 		    }
-		    return cookies;
+		    return Optional.of(cookies);
     	} catch (Exception e) {
     		logger.warn("Problem retrieving cookies from http service", e);
             return null;

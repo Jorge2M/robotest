@@ -8,4 +8,8 @@ public class IrretrievableCookies extends RuntimeException {
         super("Cookies could not be retrieved: " + e);
     }
 	
+	public IrretrievableCookies(String message) {
+        super(message);
+    }
+	
 }
