@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -176,6 +177,9 @@ public class PagePrehome extends PageObjTM {
 	}
 
 	public void accesoShopViaPrehome(boolean acceptCookies) throws Exception {
+		//TODO canary
+		String urlAcceso = TestMaker.getInputParamsSuite().getUrlBase();
+		driver.get(urlAcceso + "?canary=true");
 		previousAccessShopSteps(acceptCookies);
 		selecPaisIdiomaYAccede();
 		ModalLoyaltyAfterAccess.closeModalIfVisible(driver);
