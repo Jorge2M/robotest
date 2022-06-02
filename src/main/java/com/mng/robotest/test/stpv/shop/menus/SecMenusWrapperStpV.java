@@ -190,6 +190,7 @@ public class SecMenusWrapperStpV {
 		secMenusWrap.seleccionarMenuXHref(menu1rstLevel, dCtxSh.pais);
 		checkIsVisibleAarticle(dCtxSh, 3);
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
 				GenericCheck.Analitica,

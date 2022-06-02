@@ -1,6 +1,6 @@
 package com.mng.robotest.test.stpv.navigations.shop;
 
-import static com.mng.robotest.test.data.PaisShop.España;
+import static com.mng.robotest.test.data.PaisShop.Espana;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,6 +31,7 @@ import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.datastored.FlagsTestCkout;
+import com.mng.robotest.test.factoryes.entities.EgyptCity;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.generic.beans.ValePais;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
@@ -62,19 +63,28 @@ public class CheckoutFlow {
 	private final DataCtxShop dCtxSh;
 	private final DataCtxPago dCtxPago;
 	private final Pago pago;
+	private final EgyptCity egyptCity;
 	private final List<Pais> finalCountrys;
 	private final List<GarmentCatalog> listArticles;
 	
 	private SecBolsaStpV secBolsaStpV;
 	private final PageCheckoutWrapperStpV pageCheckoutWrapperStpV;
 	
-	private CheckoutFlow(WebDriver driver, DataCtxShop dCtxSh, DataCtxPago dCtxPago, Pago pago, List<GarmentCatalog> listArticles, List<Pais> finalCountrys) {
+	private CheckoutFlow(
+			WebDriver driver, 
+			DataCtxShop dCtxSh, 
+			DataCtxPago dCtxPago, 
+			Pago pago, 
+			List<GarmentCatalog> listArticles, 
+			List<Pais> finalCountrys,
+			EgyptCity egyptCity) {
 		this.driver = driver;
 		this.finalCountrys = finalCountrys;
 		this.listArticles = listArticles;
 		this.dCtxSh = dCtxSh;
 		this.dCtxPago = dCtxPago;
 		this.pago = pago;
+		this.egyptCity = egyptCity;
 		this.secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
 		this.pageCheckoutWrapperStpV = new PageCheckoutWrapperStpV(dCtxSh.channel, dCtxSh.appE, driver);
 	}
@@ -109,6 +119,7 @@ public class CheckoutFlow {
 		if (dCtxSh.userRegistered) {
 			secBolsaStpV.clear();
 			GenericChecks.from(Arrays.asList(
+					GenericCheck.CookiesAllowed,
 					GenericCheck.TextsTraduced,
 					GenericCheck.Analitica)).checks(driver);
 		}
@@ -144,7 +155,7 @@ public class CheckoutFlow {
 		dCtxPago.getDataPedido().setEmailCheckout(emailCheckout);
 
 		Page1IdentCheckoutStpV.secSoyNuevo.inputEmailAndContinue(emailCheckout, dCtxPago.getFTCkout().emailExist, dCtxSh.appE, dCtxSh.userRegistered, dCtxSh.pais, dCtxSh.channel, driver);
-		Page2IdentCheckoutStpV page2IdentCheckoutStpV = new Page2IdentCheckoutStpV(dCtxSh.channel, driver);
+		Page2IdentCheckoutStpV page2IdentCheckoutStpV = new Page2IdentCheckoutStpV(dCtxSh.channel, dCtxSh.pais, egyptCity, driver);
 		boolean emailOk = page2IdentCheckoutStpV.checkEmail(emailCheckout);
 		if (!emailOk) {
 			//Existe un problema según el cual en ocasiones no se propaga el email desde la página de identificación
@@ -152,16 +163,18 @@ public class CheckoutFlow {
 			Page1IdentCheckoutStpV.secSoyNuevo.inputEmailAndContinue(emailCheckout, dCtxPago.getFTCkout().emailExist, dCtxSh.appE, dCtxSh.userRegistered, dCtxSh.pais, dCtxSh.channel, driver);
 		}
 		
+		HashMap<String, String> datosRegistro;
+		datosRegistro = page2IdentCheckoutStpV.inputDataPorDefecto(emailCheckout, validaCharNoLatinos);
 		
-		HashMap<String, String> datosRegistro = page2IdentCheckoutStpV.inputDataPorDefecto(dCtxSh.pais, emailCheckout, validaCharNoLatinos);
 		dCtxPago.setDatosRegistro(datosRegistro);
 		if (validaCharNoLatinos) {
 			page2IdentCheckoutStpV.clickContinuarAndExpectAvisoDirecWithNoLatinCharacters();
-			datosRegistro = page2IdentCheckoutStpV.inputDataPorDefecto(dCtxSh.pais, emailCheckout, false);
+			datosRegistro = page2IdentCheckoutStpV.inputDataPorDefecto(emailCheckout, false);
 		}
 		
 		page2IdentCheckoutStpV.clickContinuar(dCtxSh.userRegistered, dCtxSh.appE, dataBag);
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.GoogleAnalytics, 
 				GenericCheck.NetTraffic, 
 				GenericCheck.TextsTraduced, 
@@ -172,7 +185,7 @@ public class CheckoutFlow {
 		if ((dCtxPago.getFTCkout().testCodPromocional || dCtxPago.getFTCkout().isEmpl) && 
 			 dCtxSh.appE!=AppEcom.votf) {
 			DataBag dataBag = dCtxPago.getDataPedido().getDataBag();	
-			if (dCtxPago.getFTCkout().isEmpl && España.equals(dCtxSh.pais)) {
+			if (dCtxPago.getFTCkout().isEmpl && Espana.equals(dCtxSh.pais)) {
 				testInputCodPromoEmplSpain(dataBag);
 			} else {
 				if (dCtxSh.vale!=null) {
@@ -315,6 +328,7 @@ public class CheckoutFlow {
 				//Almacenamos el pedido en el contexto para la futura validación en Manto
 				pagoStpV.storePedidoForMantoAndResetData();
 				GenericChecks.from(Arrays.asList(
+						GenericCheck.CookiesAllowed,
 						GenericCheck.GoogleAnalytics, 
 						GenericCheck.NetTraffic, 
 						GenericCheck.TextsTraduced,
@@ -471,12 +485,13 @@ public class CheckoutFlow {
 		private final AppEcom app;
 		private String user = "";
 		private String password = "";
-		private Pais country = PaisGetter.get(PaisShop.España);
+		private Pais country = PaisGetter.get(PaisShop.Espana);
 		private IdiomaPais idioma = country.getListIdiomas().get(0);
 		private ValePais vale = null;
 		private List<GarmentCatalog> listArticles = null;
 		private List<Pais> finalCountrys = null;
 		private Pago pago = null;
+		private EgyptCity egyptCity = null;
 		
 		private boolean validaPasarelas = false;  
 		private boolean validaPagos = false;
@@ -530,6 +545,10 @@ public class CheckoutFlow {
 		}
 		public BuilderCheckout pago(Pago pago) {
 			this.pago = pago;
+			return this;
+		}
+		public BuilderCheckout egyptCity(EgyptCity egyptCity) {
+			this.egyptCity = egyptCity;
 			return this;
 		}
 		
@@ -588,7 +607,14 @@ public class CheckoutFlow {
 			if (listArticles==null) {
 				listArticles = UtilsTestMango.getArticlesForTestDependingVale(getdCtxSh(), 2, driver);
 			}
-			return new CheckoutFlow(driver, getdCtxSh(), getDataCtxPago(), pago, listArticles, finalCountrys);
+			return new CheckoutFlow(
+					driver, 
+					getdCtxSh(), 
+					getDataCtxPago(), 
+					pago, 
+					listArticles, 
+					finalCountrys, 
+					egyptCity);
 		}
 		public void exec(From from) throws Exception {
 			build().checkout(from);

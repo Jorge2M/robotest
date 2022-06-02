@@ -10,17 +10,17 @@ import org.junit.Test;
 
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.utils.PaisGetter;
+
 
 public class PaisGetterTest {
 
 	@Test
 	public void testGetPais() throws Exception {
 		//When
-		Pais pais = PaisGetter.get(PaisShop.España);
+		Pais pais = PaisGetter.get(PaisShop.Espana);
 		
 		//Then
-		assertTrue(pais.getCodigo_pais().compareTo(PaisShop.España.getCodigoPais())==0);
+		assertTrue(pais.getCodigo_pais().compareTo(PaisShop.Espana.getCodigoPais())==0);
 	}
 
 	@Test

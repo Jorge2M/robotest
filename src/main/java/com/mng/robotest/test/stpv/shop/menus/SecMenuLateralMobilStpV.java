@@ -67,6 +67,7 @@ public class SecMenuLateralMobilStpV {
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app, driver);
 		pageGaleriaStpV.validateGaleriaAfeterSelectMenu(app);
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.TextsTraduced,
 				GenericCheck.Analitica)).checks(driver);
 	}
@@ -170,6 +171,7 @@ public class SecMenuLateralMobilStpV {
 	public void validaPaginaResultMenu2onLevel() throws Exception {
 		checkElementsAfterClickMenu2onLevel();
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
 				GenericCheck.Analitica,

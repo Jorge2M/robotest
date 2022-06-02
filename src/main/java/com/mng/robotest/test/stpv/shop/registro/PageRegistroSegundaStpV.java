@@ -113,6 +113,7 @@ public class PageRegistroSegundaStpV {
 		}
 		
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO, 
 				GenericCheck.TextsTraduced,
 				GenericCheck.Analitica)).checks(driver);

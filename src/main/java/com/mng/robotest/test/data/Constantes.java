@@ -19,7 +19,7 @@ public class Constantes {
 	public static final int BOTON_REGISTRATE = 1;
 	public static final int BOTON_CERRAR = 2;
    
-	public static final String CODIGO_ESPAÑA = "001";
+	public static final String CODIGO_ESPANA = "001";
 	
 	public static final int PORC_PANORAMICAS = 5;
 	

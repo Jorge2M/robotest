@@ -323,6 +323,7 @@ public class PageGaleriaStpV {
 		checkOrderListArticles(typeOrdenacion, numArticulosPant, numArticulosValidar);
  
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO,
 				GenericCheck.JSerrors,
 				GenericCheck.TextsTraduced,
@@ -522,6 +523,7 @@ public class PageGaleriaStpV {
 		checkIsFichaArticle(nombre1erArt, precio1erArt, maxSeconds);
 
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.GoogleAnalytics, 
 				GenericCheck.JSerrors,
 				GenericCheck.SEO,

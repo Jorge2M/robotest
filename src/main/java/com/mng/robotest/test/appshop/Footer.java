@@ -19,8 +19,8 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 
 public class Footer {
 
-	private final static Pais españa = PaisGetter.get(PaisShop.España);
-	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
+	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
+	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
 
 	public Footer() {}
 
@@ -30,7 +30,7 @@ public class Footer {
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
 		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
-		dCtxSh.pais = españa;
+		dCtxSh.pais = espana;
 		dCtxSh.idioma = castellano;
 		return dCtxSh;
 	}

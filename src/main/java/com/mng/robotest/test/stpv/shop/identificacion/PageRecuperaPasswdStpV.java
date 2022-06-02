@@ -35,6 +35,7 @@ public class PageRecuperaPasswdStpV {
 		PageRecuperaPasswd.clickEnviar(driver);
 		isPageCambioPassword(driver);
 		GenericChecks.from(Arrays.asList( 
+				GenericCheck.CookiesAllowed,
 				GenericCheck.JSerrors, 
 				GenericCheck.TextsTraduced,
 				GenericCheck.Analitica)).checks(driver);

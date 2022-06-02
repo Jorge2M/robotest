@@ -43,6 +43,7 @@ public class PageDevolucionesStpV {
 		PageDevoluciones.clickSolicitarRecogida(driver);
 		PageRecogidaDomicStpV.vaidaIsPageSinDevoluciones(driver);
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
 				GenericCheck.TextsTraduced,

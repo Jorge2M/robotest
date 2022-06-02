@@ -134,6 +134,7 @@ public class SecMenusDesktopStpV {
 		pageGaleriaStpV.validateGaleriaAfeterSelectMenu(dCtxSh.appE);
 		validationsSelecMenuEspecificDesktop(menu);
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO,
 				GenericCheck.JSerrors,
 				GenericCheck.Analitica,
@@ -311,6 +312,7 @@ public class SecMenusDesktopStpV {
 		}
 
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
 				GenericCheck.Analitica,
@@ -465,6 +467,7 @@ public class SecMenusDesktopStpV {
 		}
 		
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
 				GenericCheck.Analitica,

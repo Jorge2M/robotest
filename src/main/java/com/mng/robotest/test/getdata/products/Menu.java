@@ -4,6 +4,7 @@ import com.mng.robotest.conftestmaker.AppEcom;
 
 public enum Menu implements MenuI {
 	Camisas("prendas", "camisas", "14,414", "14", "14", "14"),
+	CamisasHE("prendas", "camisas", "120", "120", "120", "120"),
 	Toallas("bano", "toallas", "722", "722", "722", "722"),
 	Albornoces("bano", "albornoces", "726", "726", "726", "726"),
 	Alfombras("bano", "alfombras", "724", "724", "724", "724"),

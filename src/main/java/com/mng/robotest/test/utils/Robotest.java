@@ -10,15 +10,15 @@ import com.mng.robotest.test.data.PaisShop;
 
 public class Robotest {
 
-	private final static Pais españa = PaisGetter.get(PaisShop.España);
-	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
+	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
+	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
 	
 	public static DataCtxShop getDefaultDataShop() throws Exception {
 		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		dCtxSh.pais = españa;
+		dCtxSh.pais = espana;
 		dCtxSh.idioma = castellano;
 		return dCtxSh;
 	}

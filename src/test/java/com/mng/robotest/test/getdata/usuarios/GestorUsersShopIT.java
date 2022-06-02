@@ -12,7 +12,7 @@ import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop.StateUser;
 
-public class TestGestorUsersShop {
+public class GestorUsersShopIT {
 
     @Test
     public void testCheckoutFromGestorWithFreeUsers() {

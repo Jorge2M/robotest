@@ -5,15 +5,11 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	
-	<!-- 
-		-DskipTests skips both unit and integration tests
-		-DskipUnitTests skips unit tests but executes integration tests
-		-DskipIntegrationTests skips integration tests but executes unit tests -->
 	<properties>
+	    <maven.compiler.release>17</maven.compiler.release>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<skipUnitTests>${skipTests}</skipUnitTests>
-        <skipIntegrationTests>${skipTests}</skipIntegrationTests>
         <nexus.url>https://nexus.sys.mango/nexus</nexus.url>
 	</properties>
 
@@ -115,9 +111,10 @@
 		 	
 			<!-- Seguramente si lo ejecuto sin testmaker se quejará de que no encuentra el aspectj en .m2 -->
 			<plugin>
-				<groupId>com.github.m50d</groupId>
+				<!--<groupId>com.github.m50d</groupId>-->
+				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
-				<version>1.11.1</version>
+				<version>1.14.0</version>
 				<configuration>
 					<complianceLevel>1.8</complianceLevel>
 					<source>1.8</source>
@@ -125,7 +122,7 @@
 					<showWeaveInfo>false</showWeaveInfo>
 					<verbose>true</verbose>
 					<Xlint>ignore</Xlint>
-					<encoding>UTF-8 </encoding>
+					<encoding>UTF-8</encoding>
 					<weaveDependencies>
 						<weaveDependency> 
 							<groupId>com.github.jorge2m</groupId>
@@ -141,7 +138,7 @@
 					</execution>
 				</executions>
 			</plugin> 
-			
+
 			<plugin>
 				<!-- Configuración extraída de: http://emystein.blogspot.com.es/2010/12/empaquetar-una-aplicacion-de-consola.html -->
 				<!-- Configuramos el plugin de JAR en el POM para que agregue el directorio src/main/config al classpath definido en el Manifest de la aplicación -->	
@@ -199,6 +196,9 @@
 				<configuration>
 					<skipTests>${skipUnitTests}</skipTests>
 					<argLine>--add-opens java.base/java.lang=ALL-UNNAMED</argLine>
+					<includes>
+            			<!--<include>**/*Test.java</include>-->
+          			</includes>
 				</configuration>
 				<dependencies>
 					<dependency>
@@ -215,7 +215,9 @@
 				<version>3.0.0-M5</version>
 				<configuration>
         			<argLine>-Dfile.encoding=UTF-8</argLine>
-        			<skipTests>${skipIntegrationTests}</skipTests>
+        			<includes>
+            			<include>**/*IT.java</include>
+          			</includes>
     			</configuration>
 			    <executions>
 			        <execution>
@@ -233,26 +235,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-			
-			<plugin>
-	            <groupId>org.codehaus.mojo</groupId>
-	            <artifactId>build-helper-maven-plugin</artifactId>
-	            <version>3.2.0</version>
-	            <executions>
-	                <execution>
-	                    <id>add-integration-test-source-as-test-sources</id>
-	                    <phase>generate-test-sources</phase>
-	                    <goals>
-	                        <goal>add-test-source</goal>
-	                    </goals>
-	                    <configuration>
-	                        <sources>
-	                            <source>src/integrationTests/java</source>
-	                        </sources>
-	                    </configuration>
-	                </execution>
-	            </executions>
-        	</plugin>			
+
 		</plugins>  
 	</build>
 </project>

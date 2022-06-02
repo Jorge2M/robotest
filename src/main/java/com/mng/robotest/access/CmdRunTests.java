@@ -1,11 +1,9 @@
 package com.mng.robotest.access;
 
-import java.net.HttpURLConnection;
 import java.util.List;
 
 import com.github.jorge2m.testmaker.boundary.access.CmdLineMaker;
 import com.github.jorge2m.testmaker.domain.CreatorSuiteRun;
-import com.github.jorge2m.testmaker.domain.suitetree.SuiteTM;
 import com.github.jorge2m.testmaker.domain.testfilter.TestMethod;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -33,24 +31,7 @@ public class CmdRunTests {
 		execSuite(executor);
 	}
 	public static void execSuite(CreatorSuiteRun executor) throws Exception {
-		SuiteTM suite = TestMaker.execSuite(executor, false);
-		callBackIfNeeded(suite);
-	}
-
-	private static void callBackIfNeeded(SuiteTM suite) {
-		InputParamsMango inputParams = (InputParamsMango)suite.getInputParams();
-		CallBack callBack = inputParams.getCallBack();
-		if (callBack!=null) {
-			String reportTSuiteURL = suite.getDnsReportHtml();
-			callBack.setReportTSuiteURL(reportTSuiteURL);
-			try {
-				HttpURLConnection urlConnection = callBack.callURL();
-				suite.getLogger().error("Called CallbackURL" + urlConnection);
-			}
-			catch (Exception e) {
-				suite.getLogger().error("Problem procesing CallBack", e);
-			}
-		}
+		TestMaker.execSuite(executor, false);
 	}
 
 	public static List<TestMethod> getDataTestAnnotationsToExec(InputParamsMango inputParams) throws Exception {

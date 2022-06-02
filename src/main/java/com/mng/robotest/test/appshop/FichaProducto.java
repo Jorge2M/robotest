@@ -18,6 +18,7 @@ import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.getdata.products.GetterProducts;
+import com.mng.robotest.test.getdata.products.Menu;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
@@ -29,7 +30,6 @@ import com.mng.robotest.test.pageobject.shop.ficha.Slider;
 import com.mng.robotest.test.pageobject.shop.ficha.PageFicha.TypeFicha;
 import com.mng.robotest.test.pageobject.shop.ficha.SecDataProduct.ProductNav;
 import com.mng.robotest.test.pageobject.shop.ficha.SecProductDescrOld.TypePanel;
-import com.mng.robotest.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
@@ -53,8 +53,8 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 
 public class FichaProducto {
 	
-	private final static Pais españa = PaisGetter.get(PaisShop.España);
-	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
+	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
+	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
 	
 	
 	@Test (
@@ -63,7 +63,7 @@ public class FichaProducto {
 	public void FIC001_FichaFromSearch_PrimaryFeatures_Reg() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
-		DataCtxShop dCtxSh = getCtxShForTest(españa, castellano, true, userShop.user, userShop.password);
+		DataCtxShop dCtxSh = getCtxShForTest(espana, castellano, true, userShop.user, userShop.password);
 
 		AccesoStpV.oneStep(dCtxSh, true, driver);
 		SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
@@ -80,7 +80,9 @@ public class FichaProducto {
 			pageFichaStpv.checkLinkDispTiendaInvisible();
 		}
 		
-		List<FilterType> filterNoOnlineWithColors = Arrays.asList(FilterType.NoOnline, FilterType.ManyColors); 
+		List<FilterType> filterNoOnlineWithColors = Arrays.asList(
+				FilterType.NoOnline, 
+				FilterType.ManyColors); 
 		Optional<GarmentCatalog> articleNoOnlineWithColors = getterProducts.getOneFiltered(filterNoOnlineWithColors);
 		if (!articleNoOnlineWithColors.isPresent()) {
 			List<String> filtersLabels = filterNoOnlineWithColors.stream().map(Object::toString).collect(Collectors.toList());
@@ -118,7 +120,7 @@ public class FichaProducto {
 		description="[Usuario no registrado] Se testean las features secundarias de una ficha con origen el buscador: guía de tallas, carrusel imágenes, imagen central, panel de opciones, total look")
 	public void FIC002_FichaFromSearch_SecondaryFeatures_NoReg() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-		DataCtxShop dCtxSh = getCtxShForTest(españa, castellano);
+		DataCtxShop dCtxSh = getCtxShForTest(espana, castellano);
 
 		AccesoStpV.oneStep(dCtxSh, false, driver);
 		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
@@ -236,19 +238,22 @@ public class FichaProducto {
 		alwaysRun=true, description="[Usario no registrado] Testeo Personalización bordados")
 	public void FIC005_Articulo_Personalizable_Noreg() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-		DataCtxShop dCtxSh = getCtxShForTest(españa, castellano);
+		DataCtxShop dCtxSh = getCtxShForTest(espana, castellano);
 
 		AccesoStpV.oneStep(dCtxSh, false, driver);
-		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-		Menu1rstLevel menuPersonalizacion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.he, null, "personalizacion"));
-		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
+		//PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		//Menu1rstLevel menuPersonalizacion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.he, null, "personalizacion"));
+		//SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
 		
 		//secMenusStpV.checkExistMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
-		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
-		secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
-		LocationArticle articleNum = LocationArticle.getInstanceInCatalog(1);
-		pageGaleriaStpV.selectArticulo(articleNum, dCtxSh);
-		
+		//secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
+		//secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
+		//LocationArticle articleNum = LocationArticle.getInstanceInCatalog(1);
+		//pageGaleriaStpV.selectArticulo(articleNum, dCtxSh);
+		GarmentCatalog articuloPersonalizable = getArticlePersonalizable(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver);
+		SecBuscadorStpV secBuscadorStpV = new SecBuscadorStpV(dCtxSh.appE, dCtxSh.channel, driver);
+		secBuscadorStpV.searchArticulo(articuloPersonalizable, dCtxSh.pais);
+
 		PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
 		SecModalPersonalizacionStpV modalPersonalizacionStpV = SecModalPersonalizacionStpV.getNewOne(dCtxSh, driver); 
 		int numColors = pageFichaStpv.getFicha().getNumColors();
@@ -276,6 +281,24 @@ public class FichaProducto {
 		modalPersonalizacionStpV.selectSize();
 		modalPersonalizacionStpV.confirmCustomization();
 		modalPersonalizacionStpV.checkCustomizationProof();
+	}
+	
+	private GarmentCatalog getArticlePersonalizable(String codigoPais, AppEcom app, WebDriver driver) 
+			throws Exception {
+		
+		GetterProducts getterProducts = new GetterProducts.Builder(codigoPais, app, driver)
+				.linea(LineaType.he)
+				.menu(Menu.CamisasHE)
+				.numProducts(5)
+				.build();
+		
+		Optional<GarmentCatalog> articlePersonalizable = getterProducts.getOneFiltered(
+				Arrays.asList(FilterType.Personalizable));
+		
+		if (!articlePersonalizable.isPresent()) {
+			throw new NotFoundException("Not found article with filter " + FilterType.Personalizable);
+		}
+		return articlePersonalizable.get();
 	}
 	
 	private DataCtxShop getCtxShForTest(Pais pais, IdiomaPais idioma) {

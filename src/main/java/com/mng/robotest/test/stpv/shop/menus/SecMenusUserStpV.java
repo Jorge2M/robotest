@@ -110,6 +110,7 @@ public class SecMenusUserStpV {
 		PageIdentificacion.iniciarSesion(userConnect, userPassword, channel, app, driver);
 		checkIsVisibleLinkCerrarSesion();
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO,  
 				GenericCheck.TextsTraduced,
 				GenericCheck.Analitica)).checks(driver);
@@ -134,6 +135,7 @@ public class SecMenusUserStpV {
 		pageMiCuentaStpV.validateIsPage(2);
 		
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.Analitica,
 				GenericCheck.TextsTraduced)).checks(driver);
 	}

@@ -39,6 +39,7 @@ public class PageRegistroNinosStpV {
 		PageRegistroNinos.clickContinuar(driver);
 		PageRegistroDirecStpV.isPageFromPais(pais, driver);
 		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO, 
 				GenericCheck.TextsTraduced,
 				GenericCheck.Analitica)).checks(driver);

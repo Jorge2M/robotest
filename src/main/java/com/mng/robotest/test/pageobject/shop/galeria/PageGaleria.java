@@ -410,10 +410,11 @@ public abstract class PageGaleria extends PageObjTM {
 		
 		if (list.getArticlesRepeated().size()>0) {
 			//Obtener la imagen de cada artículo es muy costoso así que sólo lo hacemos en este caso
-			list = getListArticles(Arrays.asList(
-					AttributeArticle.Nombre, 
-					AttributeArticle.Referencia,
-					AttributeArticle.Imagen));
+			list = getListArticles(list.getArticlesRepeated(),
+					Arrays.asList(
+					    AttributeArticle.Nombre, 
+					    AttributeArticle.Referencia,
+					    AttributeArticle.Imagen));
 		}
 		
 		return (list.getArticlesRepeated());
@@ -426,13 +427,28 @@ public abstract class PageGaleria extends PageObjTM {
 	}
 	
 	private ListDataArticleGalery getListArticles(List<AttributeArticle> attributes) throws Exception {
+		return getListArticles(null, attributes);
+	}
+	
+	private ListDataArticleGalery getListArticles(
+			List<DataArticleGalery> filter,
+			List<AttributeArticle> attributes) throws Exception {
 		ListDataArticleGalery listReturn = new ListDataArticleGalery();
 		for (WebElement articulo : getListaArticulos()) {
-			listReturn.add(getDataArticulo(articulo, attributes)); 
+			String refColor = getRefColorArticulo(articulo);
+			if (filter==null ||	isPresentArticleWithReferencia(filter, refColor)) {
+				listReturn.add(getDataArticulo(articulo, attributes));
+			}
 		}
 		return listReturn;
 	}
-
+	
+	private boolean isPresentArticleWithReferencia(List<DataArticleGalery> listArticles, String referencia) {
+		return listArticles.stream()
+		        .filter(a -> a.getReferencia().compareTo(referencia)==0)
+		        .findAny().isPresent();
+	}
+	
 	private DataArticleGalery getDataArticulo(WebElement articulo, List<AttributeArticle> attributes) 
 	throws Exception {
 		DataArticleGalery dataArticle = new DataArticleGalery();
@@ -498,20 +514,6 @@ public abstract class PageGaleria extends PageObjTM {
 			return getNombreArticulo(articulo);
 		}
 		return "";
-		
-//		String articulo = "";
-//		
-//		//Obtenemos el xpath de los artículos eliminando el último carácter (]) pues hemos de insertar condiciones en el XPATH
-//		String xpathLitArticulos = XPathArticulo + "//*[" + classProductName + "]";
-//		xpathLitArticulos = xpathLitArticulos.substring(0, xpathLitArticulos.length() - 1);
-//		
-//		xpathLitArticulos = xpathLitArticulos + " and text()[contains(.,'" + name + "')]]"; 
-//		
-//		if (isElementVisibleUntil(driver, By.xpath(xpathLitArticulos), secondsWait)) {
-//			articulo = driver.findElement(By.xpath(xpathLitArticulos)).getText();
-//		}
-//		
-//		return articulo;
 	}
 	
 	public WebElement getArticleThatContainsLitUntil(String literal, int maxSeconds) {
@@ -557,7 +559,7 @@ public abstract class PageGaleria extends PageObjTM {
 		datosScroll.paginaFinal = lastPage;
 		datosScroll.finalAlcanzado = secFooter.isVisible();
 		datosScroll.articulosMostrados = getNumArticulos();
-		datosScroll.articulosDobleTamaño = getTotalNumArticles(numArticlesDoubleXpage);
+		datosScroll.articulosDobleTamano = getTotalNumArticles(numArticlesDoubleXpage);
 		datosScroll.articulosTotalesPagina = getTotalNumArticles(numArticlesXpage);
 		return (datosScroll);
 	}
@@ -570,18 +572,20 @@ public abstract class PageGaleria extends PageObjTM {
 	}
 
 	public void goToInitPageAndWaitForArticle() throws Exception {
-		Object pagePositionObj = ((JavascriptExecutor) driver).executeScript("return window.pageYOffset;");
-		if (pagePositionObj instanceof Long) {
-			Long pagePosition = (Long)pagePositionObj;
-			if (pagePosition != 0) {
-				backTo1erArticulo();
-			}
-		} else {
-			Double pagePosition = (Double)pagePositionObj;
-			if (pagePosition != 0) {
-				backTo1erArticulo();
-			}
-		}
+//		Object pagePositionObj = ((JavascriptExecutor) driver).executeScript("return window.pageYOffset;");
+//		if (pagePositionObj instanceof Long) {
+//			Long pagePosition = (Long)pagePositionObj;
+//			if (pagePosition != 0) {
+//				backTo1erArticulo();
+//			}
+//		} else {
+//			Double pagePosition = (Double)pagePositionObj;
+//			if (pagePosition != 0) {
+//				backTo1erArticulo();
+//			}
+//		}
+		//TODO en estos momentos algo raro le pasa al menú Nuevo que requiere un refresh para funcionar ok
+		driver.navigate().refresh();
 		int maxSeconds = 2;
 		isVisibleArticleUntil(1, maxSeconds);
 	}
@@ -734,7 +738,11 @@ public abstract class PageGaleria extends PageObjTM {
 		WebElement imagen = getImagenElementArticulo(articulo);
 		if (imagen!=null) {
 			try {
-				return imagen.getAttribute("src");
+				if (app==AppEcom.outlet) {
+					return imagen.getAttribute("src");
+				}
+				//TODO Test AB nueva variante. Si se mantiene la original igualar con Outlet
+				return imagen.getAttribute("original");
 			}
 			catch (StaleElementReferenceException e) {
 				imagen = getImagenElementArticulo(articulo);

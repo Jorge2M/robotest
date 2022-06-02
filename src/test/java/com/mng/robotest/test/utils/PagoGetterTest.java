@@ -18,7 +18,7 @@ public class PagoGetterTest {
 	public void testGetListLabelsPaymentsEstandar() {
 		//Given
 		List<String> listCodCountries = Arrays.asList(
-				España.getCodigoPais(), 
+				Espana.getCodigoPais(), 
 				Sweden.getCodigoPais());
 		
 		//When

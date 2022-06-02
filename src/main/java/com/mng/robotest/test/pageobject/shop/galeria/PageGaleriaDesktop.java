@@ -8,13 +8,9 @@ import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
-import org.openqa.selenium.JavascriptExecutor;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea;
@@ -30,7 +26,6 @@ import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils.HtmlLocator;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
@@ -72,15 +67,15 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	private final static String XPathListArticles = "//div[@class[contains(.,'columns')] and @id='list']";
-	private final static String XPathImgRelativeArticle = 
-		"//img[@src and (" + 
-			   "@class[contains(.,'productListImg')] or " + 
-			   "@class[contains(.,'product-list-image')] or " +
-			   "@class[contains(.,'product-image')] or " + 
-			   "@class[contains(.,'TaqRk')] or " + //TODO (Outlet) pendiente Sergio Campillo suba los cambios
-			   "@class[contains(.,'product-list-im')])]";
-	private final static String XPathImgSliderActiveRelativeArticleDesktop = 
-		"//div[@class[contains(.,'swiper-slide-active')]]" + XPathImgRelativeArticle;
+	private final static String XPathImgRelativeArticleOutlet = 
+			"//img[@src and (" + 
+				   "@class[contains(.,'productListImg')] or " + 
+				   "@class[contains(.,'product-list-image')] or " +
+				   "@class[contains(.,'product-image')] or " + 
+				   "@class[contains(.,'TaqRk')] or " + //TODO (Outlet) pendiente Sergio Campillo suba los cambios
+				   "@class[contains(.,'product-list-im')])]";
+	private final static String XPathImgSliderActiveRelativeArticleDesktopOutlet = 
+			"//div[@class[contains(.,'swiper-slide-active')]]" + XPathImgRelativeArticleOutlet;
 
 	private PageGaleriaDesktop(From from, Channel channel, AppEcom app, WebDriver driver) {
 		super(from, channel, app, driver);
@@ -250,19 +245,39 @@ public class PageGaleriaDesktop extends PageGaleria {
 	@Override
 	public WebElement getImagenElementArticulo(WebElement articulo) {
 		moveToElement(articulo, driver);
-		By byImg;
-		if (isPresentSliderInArticle(TypeSlider.next, articulo)) {
-			//hoverSliderUntilClickable(TypeSlider.next, articulo);
-			byImg = By.xpath("." + XPathImgSliderActiveRelativeArticleDesktop);
-		} else {
-			byImg = By.xpath("." + XPathImgRelativeArticle);
-		}
-			
+		By byImg = By.xpath(getXPathImgArticulo(articulo));			
 		if (state(State.Present, articulo).by(byImg).check()) {
 			return (articulo.findElement(byImg));
 		}
 		return null;
 	}
+	
+	private String getXPathImgArticulo(WebElement article) {
+		if (app==AppEcom.outlet) {
+			return getXPathImgArticuloOutlet(article);
+		}
+		return getXPathImgArticuloShop(article);
+	}
+	
+	//TODO Test AB nueva variante. Si se mantiene la original igualar con Outlet
+	private String getXPathImgArticuloShop(WebElement article) {
+		String id = article.getAttribute("id");
+		Pattern pattern = Pattern.compile("product-key-id-(.*)");
+		Matcher matcher = pattern.matcher(id);
+		if (matcher.find()) {
+			return ".//img[@id='product-" + matcher.group(1) + "']" ;
+		}
+		return ".//img[contains(.,'product-')]";
+	}
+	
+	private String getXPathImgArticuloOutlet(WebElement article) {
+		if (isPresentSliderInArticle(TypeSlider.next, article)) {
+			return "." + XPathImgSliderActiveRelativeArticleDesktopOutlet;
+		} else {
+			return "." + XPathImgRelativeArticleOutlet;
+		}
+	}
+	
 
 	@Override
 	public WebElement getColorArticulo(WebElement articulo, boolean selected, int numColor) {
@@ -441,10 +456,16 @@ public class PageGaleriaDesktop extends PageGaleria {
 	
 	private int getWidthFromAtricleSrcImg(WebElement article) {
 		int widthImg = 0;
-		By byImgArticle = By.xpath("." + XPathImgRelativeArticle);
+		By byImgArticle = By.xpath(getXPathImgArticulo(article));
 		if (state(Present, article).by(byImgArticle).check()) {
 			WebElement imgArticle = article.findElement(byImgArticle);
-			String srcImgArticle = imgArticle.getAttribute("data-original");
+			String srcImgArticle;
+			if (app==AppEcom.outlet) {
+				srcImgArticle = imgArticle.getAttribute("data-original");
+			} else {
+				//TODO Test AB nueva variante. Si se mantiene la original igualar con Outlet
+			    srcImgArticle = imgArticle.getAttribute("original");
+			}
 			if (srcImgArticle!=null) {
 				Pattern pattern = Pattern.compile("(.*?)width=(.*?)&(.*?)");
 				Matcher matcher = pattern.matcher(srcImgArticle);
@@ -561,9 +582,6 @@ public class PageGaleriaDesktop extends PageGaleria {
 		//Nos posicionamos en el artículo y clicamos la capa. 
 		//Es un click muy extraño porque cuando lo ejecutas automáticamente posiciona la capa en el top del navegador y queda oculta por el menú
 		moveToArticleAndGetObject(posArticulo);
-//		if (app==AppEcom.outlet) {
-//			secTallas.selectLinkAñadirOutlet(posArticulo);
-//		}
 	}
 
 	@Override
@@ -788,10 +806,6 @@ public class PageGaleriaDesktop extends PageGaleria {
 		String XPathIcon = getXPathArticleHearthIcon(posArticle);
 		WebElement hearthIcon = driver.findElement(By.xpath(XPathIcon));
 		moveToElement(hearthIcon, driver);
-		
-//		//Hacemos el menú superior transparente porque en ocasiones tapa el icono de favoritos
-//		SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
-//		secMenus.secMenuSuperior.secLineas.bringMenuBackground();
 		
 		//Clicamos y esperamos a que el icono cambie de estado
 		StateFavorito estadoInicial = getStateHearthIcon(hearthIcon);

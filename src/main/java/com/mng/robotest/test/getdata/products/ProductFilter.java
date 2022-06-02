@@ -12,7 +12,13 @@ import com.mng.robotest.test.getdata.products.data.ProductList;
 
 public class ProductFilter {
 
-	public enum FilterType {TotalLook, ManyColors, Online, NoOnline, Stock};
+	public enum FilterType {
+		TotalLook, 
+		ManyColors, 
+		Online, 
+		NoOnline, 
+		Stock,
+		Personalizable};
 	
 	private final ProductList productList;
 	private final AppEcom app;
@@ -71,6 +77,8 @@ public class ProductFilter {
 			return new FilterOnline(true);
 		case Stock:
 			return new FilterStock();
+		case Personalizable:
+			return new FilterPersonalizable();
 		default:
 			return null;
 		}

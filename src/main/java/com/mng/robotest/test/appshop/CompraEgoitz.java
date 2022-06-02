@@ -33,7 +33,7 @@ public class CompraEgoitz {
 		groups={"Compra", "Canal:desktop,mobile_App:all"}, alwaysRun=true,
 		description="Compra artículos intimissim partiendo de la URL de ficha")
 	public void EGO001_Compra() throws Exception {
-		Pais pais=PaisGetter.get(PaisShop.España);
+		Pais pais=PaisGetter.get(PaisShop.Espana);
 		IdiomaPais idioma = pais.getListIdiomas().get(0);
 		executePurchase(pais, idioma);
 	}

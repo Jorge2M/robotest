@@ -48,8 +48,8 @@ public class Registro implements Serializable {
 	
 	private static final long serialVersionUID = 9220128375933995114L;
 	
-	private final static Pais españa = PaisGetter.get(PaisShop.España);
-	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
+	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
+	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
 	
 	private String index_fact = "";
 	public int prioridad;
@@ -76,7 +76,7 @@ public class Registro implements Serializable {
 
 		//Si el acceso es normal (no es desde una @Factory) utilizaremos el España/Castellano
 		if (this.paisFactory==null) {
-			dCtxSh.pais = españa;
+			dCtxSh.pais = espana;
 			dCtxSh.idioma = castellano;
 		} else {
 			dCtxSh.pais = paisFactory;

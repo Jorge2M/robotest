@@ -9,7 +9,7 @@ public class SecModalPersonalizacion extends SeleniumUtils {
 
 	public enum ModalElement implements ElementPage {
 		Seccion("//div[@class='customization-form']"),
-		AñadirBordadoLink("//button[@class='customization-btn']", "//button[@id='productFormPersonalize']"),
+		AnadirBordadoLink("//button[@class='customization-btn']", "//button[@id='productFormPersonalize']"),
 		PantallaPrevia("div[@class='customization-action']"),
 		StepProof("//li[@class[contains(.,'breadcrumb--active')]]"),
 		Step1Proof("//*[text()[contains(.,'1. ')]]"),

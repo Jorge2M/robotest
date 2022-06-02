@@ -18,7 +18,7 @@ public class PagePaysecureQiwi1rst extends PageObjTM {
 		Card("card", "100:1"), 
 		Qiwi("qiwi", "36:2"), 
 		WebMoney("wm", "30:2"), 
-		Яндекс("ym", "32:2");
+		Yandex("ym", "32:2"); //Яндекс
 		
 		private String XPathIconoPro = "//div[@class[contains(.,'select-card')]]"; 
 		private String XPathIconoTest = "//input[@name='isSET']";

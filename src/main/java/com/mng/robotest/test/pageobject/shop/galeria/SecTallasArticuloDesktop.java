@@ -48,7 +48,7 @@ public class SecTallasArticuloDesktop extends PageObjTM {
 		return xpathArticuloX + XPathCapaTallasArticuloShop;
 	}
 
-	public String getXPathFirstCapaAñadirOutlet(int posArticulo, boolean capaVisible) {
+	public String getXPathFirstCapaAnadirOutlet(int posArticulo, boolean capaVisible) {
 		String xpathCapaAdd = getXPathArticleCapaInferiorDesktop(posArticulo);
 		String classSegunVisible = "not(@class[contains(.,'active')])";
 		if (capaVisible) {
