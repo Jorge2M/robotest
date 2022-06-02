@@ -82,7 +82,6 @@ public class Loyalty {
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 		dCtxSh.pais = espana;
 		dCtxSh.idioma = castellano;
 		return dCtxSh;

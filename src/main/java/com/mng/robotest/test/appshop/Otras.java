@@ -40,7 +40,6 @@ public class Otras {
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 		return dCtxSh;
 	}
 	

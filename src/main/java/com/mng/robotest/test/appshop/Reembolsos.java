@@ -55,7 +55,6 @@ public class Reembolsos {
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 		dCtxSh.pais = emiratos;
 		dCtxSh.idioma = emiratos_arabe;
 		return dCtxSh;

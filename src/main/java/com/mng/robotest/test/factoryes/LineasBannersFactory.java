@@ -39,7 +39,7 @@ public class LineasBannersFactory {
 					if (paisToTest(pais, app)) {
 						listaPaises.add(pais.getNombre_pais().trim());
 						List<Linea> lineasAprobar = Utilidades.getLinesToTest(pais, app, lineas);
-						DataCtxShop dCtxSh = new DataCtxShop(app, channel, pais, idioma/*, inputData.getUrlBase()*/);
+						DataCtxShop dCtxSh = new DataCtxShop(app, channel, pais, idioma);
 						UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
 						dCtxSh.userConnected = userShop.user;
 						dCtxSh.passwordUser = userShop.password;

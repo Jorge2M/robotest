@@ -285,7 +285,6 @@ public class GaleriaProducto {
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 		dCtxSh.pais = this.espana;
 		dCtxSh.idioma = this.castellano;
 		return dCtxSh;

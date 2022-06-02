@@ -66,7 +66,6 @@ public class Compra {
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
 		dCtxSh.pais=espana;
 		dCtxSh.idioma=castellano;
-		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 		return dCtxSh;
 	}
 

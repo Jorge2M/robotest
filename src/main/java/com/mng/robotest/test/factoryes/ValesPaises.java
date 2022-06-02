@@ -45,7 +45,7 @@ public class ValesPaises {
 			IdiomaPais idioma = pais.getListIdiomas().get(0);
 			List<ValePais> listaValesPais = listValesPais(pais.getCodigo_pais());
 			for (ValePais valePais : listaValesPais) {
-				DataCtxShop dCtxSh = new DataCtxShop((AppEcom)inputData.getApp(), Channel.desktop, pais, idioma, valePais/*, inputData.getUrlBase()*/);
+				DataCtxShop dCtxSh = new DataCtxShop((AppEcom)inputData.getApp(), Channel.desktop, pais, idioma, valePais);
 				listTests.add(new PaisAplicaVale(version, dCtxSh, prioridad));
 				prioridad+=1;
 								

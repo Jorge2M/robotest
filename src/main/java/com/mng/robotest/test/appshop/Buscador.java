@@ -37,7 +37,6 @@ public class Buscador {
 		secBuscadorStpV.searchArticulo(product, dCtxSh.pais);
 		secBuscadorStpV.busquedaCategoriaProducto(categoriaProdExistente, true);
 		
-		//TestABmanager.activateTestAB(TestABactData.getNew(TestABOptimizeImpl.ES_SHOP_XXX_EMP_vs_FH_Search_Desktop, 1), dCtxSh.channel, dCtxSh.appE, driver);
 		secBuscadorStpV.busquedaCategoriaProducto(catProdInexistente, false);
 	}
 	
@@ -46,7 +45,6 @@ public class Buscador {
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 		dCtxSh.pais = PaisGetter.get(PaisShop.Espana);
 		dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
 		return dCtxSh;

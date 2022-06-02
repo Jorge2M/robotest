@@ -79,20 +79,4 @@ public class PaisAplicaVale implements Serializable {
 		}
 	}
 	
-//	@Test (
-//			groups={"Pagos", "shop-movil-web", "Canal:desktop,mobile_App:all"}, alwaysRun=true, 
-//			description="Compra usuario no registrado. Fake")
-//		public void CHK002_CompraFake() throws Exception {
-//		WebDriver driver = TestMaker.getDriverTestCase();
-//		TestCaseTM.addNameSufix(this.index_fact);
-//		dCtxSh.userRegistered = false;
-//		//dCtxSh.urlAcceso = TestMaker.getInputParamsSuite().getUrlBase();
-//		DataCtxPago dCtxPago = new DataCtxPago(this.dCtxSh);
-//		FlagsTestCkout fTCkout = (FlagsTestCkout)fTCkoutIni.clone();
-//		fTCkout.emailExist = true; 
-//		fTCkout.trjGuardada = false;
-//		dCtxPago.setFTCkout(fTCkout);
-//
-//		PagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(this.dCtxSh, dCtxPago, driver);
-//	}
 }

@@ -177,9 +177,6 @@ public class PagePrehome extends PageObjTM {
 	}
 
 	public void accesoShopViaPrehome(boolean acceptCookies) throws Exception {
-		//TODO canary
-		String urlAcceso = TestMaker.getInputParamsSuite().getUrlBase();
-		driver.get(urlAcceso + "?canary=true");
 		previousAccessShopSteps(acceptCookies);
 		selecPaisIdiomaYAccede();
 		ModalLoyaltyAfterAccess.closeModalIfVisible(driver);

@@ -35,7 +35,7 @@ public class ListPrecompraPaises {
 				AppEcom app = (AppEcom)inputData.getApp();
 				Channel channel = inputData.getChannel();
 				if (UtilsTestMango.paisConCompra(pais, app)) {
-					DataCtxShop dCtxSh = new DataCtxShop(app, channel, pais, pais.getListIdiomas().get(0)/*, inputData.getUrlBase()*/);
+					DataCtxShop dCtxSh = new DataCtxShop(app, channel, pais, pais.getListIdiomas().get(0));
 					listTests.add(new PaisAplicaVale(version, dCtxSh, prioridad));
 					prioridad+=1;
 					System.out.println(
