@@ -31,7 +31,7 @@ public class AccesoNavigations {
 	public static void goToInitURL(WebDriver driver) {
 		String canary = "";
 		//Temporal para test Canary!!!
-		//canary = "?canary=true";
+		canary = "?canary=true";
 		String urlInitial = TestMaker.getInputParamsSuite().getUrlBase() + canary;
 		String currentUrl = driver.getCurrentUrl();
 		if (currentUrl.compareTo(urlInitial)!=0) {
