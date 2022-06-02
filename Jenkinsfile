@@ -40,7 +40,7 @@ pipeline {
                 }
             }
             steps {
-            	unstash 'target'
+            	//unstash 'target'
             	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
 	            	sh "mvn --settings infrastructure/ci/settings.xml -B package -DskipTests"
 	            }
@@ -87,7 +87,7 @@ pipeline {
         stage('Publish') {
       		when { expression { return env.BRANCH_NAME.equals('master') || env.BRANCH_NAME.equals('develop') || env.BRANCH_NAME.contains('release') } }
       		steps {
-        		//unstash 'target'
+        		unstash 'target'
         		sh 'chmod -R 777 ./infrastructure/aws/build-publish-docker.sh'
         		sh './infrastructure/aws/build-publish-docker.sh'
       		}
