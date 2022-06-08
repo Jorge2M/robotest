@@ -3,7 +3,6 @@ package com.mng.robotest.access;
 import java.util.Arrays;
 
 import com.mng.robotest.conftestmaker.Suites;
-import com.mng.robotest.domains.apiproduct.suite.ApiProductSuite;
 import com.mng.robotest.test.suites.CompraLuqueSuite;
 import com.mng.robotest.test.suites.ConsolaVotfSuite;
 import com.mng.robotest.test.suites.EgyptOrdersSuite;
@@ -78,8 +77,6 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 				return (new CompraLuqueSuite(inputParamsMango));
 			case EgyptOrders:
 				return (new EgyptOrdersSuite(inputParamsMango));				
-			case ApiProduct:
-				return (new ApiProductSuite(inputParamsMango));				
 			default:
 			}
 		}

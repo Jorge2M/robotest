@@ -11,6 +11,12 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<skipUnitTests>${skipTests}</skipUnitTests>
         <nexus.url>https://nexus.sys.mango/nexus</nexus.url>
+        
+        <sonar.host.url>https://sonarqube.pro-k8s-tools.sys.mango</sonar.host.url>
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <sonar.jacoco.reportPaths>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPaths>
+        <sonar.language>java</sonar.language>
 	</properties>
 
 
@@ -104,9 +110,7 @@
 				</configuration>
 			</plugin>		
 		 	
-			<!-- Seguramente si lo ejecuto sin testmaker se quejará de que no encuentra el aspectj en .m2 -->
 			<plugin>
-				<!--<groupId>com.github.m50d</groupId>-->
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
 				<version>1.14.0</version>
@@ -132,7 +136,34 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin> 
+			</plugin>
+			 
+			<plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.9.1.2184</version>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.8</version>
+                <executions>
+                    <execution>
+                        <id>default-prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>            
 
 			<plugin>
 				<!-- Configuración extraída de: http://emystein.blogspot.com.es/2010/12/empaquetar-una-aplicacion-de-consola.html -->
@@ -191,9 +222,6 @@
 				<configuration>
 					<skipTests>${skipUnitTests}</skipTests>
 					<argLine>--add-opens java.base/java.lang=ALL-UNNAMED</argLine>
-					<includes>
-            			<!--<include>**/*Test.java</include>-->
-          			</includes>
 				</configuration>
 				<dependencies>
 					<dependency>

@@ -79,10 +79,10 @@ public class RestApiMango extends RestApiTM {
 				throw new WebApplicationException("Parameter 'countrys' incorrect", Response.Status.BAD_REQUEST);
 			}
 		} 
-		if (!enumContains(Channel.class, channelInput)) {
+		if (!enumContainsValue(Channel.class, channelInput)) {
 			throw new WebApplicationException("Parameter 'channel' incorrect", Response.Status.BAD_REQUEST);
 		}
-		if (!enumContains(AppEcom.class, appInput)) {
+		if (!enumContainsValue(AppEcom.class, appInput)) {
 			throw new WebApplicationException("Parameter 'app' incorrect", Response.Status.BAD_REQUEST);
 		}
 		
@@ -107,7 +107,7 @@ public class RestApiMango extends RestApiTM {
 		return listLabelsJson;
 	}
 	
-	private boolean enumContains(Class<? extends Enum<?>> enumClass, String value) {
+	private boolean enumContainsValue(Class<? extends Enum<?>> enumClass, String value) {
 		for (Enum<?> enumItem : enumClass.getEnumConstants()) {
 			if (enumItem.name().compareTo(value)==0) {
 				return true;

@@ -8,7 +8,6 @@ import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.ErrorStorer;
-import com.mng.robotest.domains.apiproduct.test.ApiProduct;
 import com.mng.robotest.test.appshop.CompraEgoitz;
 import com.mng.robotest.test.appshop.CompraLuque;
 import com.github.jorge2m.testmaker.domain.SuiteMaker;
