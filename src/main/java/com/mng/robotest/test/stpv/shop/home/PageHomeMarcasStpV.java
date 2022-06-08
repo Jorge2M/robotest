@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
@@ -68,7 +69,7 @@ public class PageHomeMarcasStpV {
 		if (salesOnInCountry) {
 			validations.add(
 				PrefixRebajas + "El mensaje de NewsLetter del Footer No contiene \"" + percentageSymbol + "\"",
-				!isMsgWithPercentageSimbol, State.Info, true);	
+				!isMsgWithPercentageSimbol, State.Info, StoreType.None);	
 		} else {
 			validations.add(
 				PrefixRebajas + "El mensaje de NewsLetter del Footer Sí contiene \"" + percentageSymbol + "\"",

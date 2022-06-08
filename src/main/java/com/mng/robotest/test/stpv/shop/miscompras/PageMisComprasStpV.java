@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -65,14 +66,14 @@ public class PageMisComprasStpV {
 	public ChecksTM validateIsCompraOnline(String codPedido, boolean isChequeRegalo) {
 		ChecksTM validations = ChecksTM.getNew();
 		State stateVal = State.Warn;
-		boolean avoidEvidences = false;
+		StoreType store = StoreType.Evidences;
 		if (isChequeRegalo) {
 			stateVal = State.Info;
-			avoidEvidences = true;
+			store = StoreType.None;
 		}
 		validations.add(
 			"Es visible la compra " + TypeTicket.Online + " asociada al pedido <b>" + codPedido + "</b>",
-			pageMisCompras.isTicketOnline(codPedido), stateVal, avoidEvidences);
+			pageMisCompras.isTicketOnline(codPedido), stateVal, store);
 		return validations;
 	}
 	

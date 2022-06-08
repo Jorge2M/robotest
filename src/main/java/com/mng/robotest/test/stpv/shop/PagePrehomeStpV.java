@@ -7,6 +7,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -50,18 +51,18 @@ public class PagePrehomeStpV {
 		if (dCtxSh.channel==Channel.desktop) {
 			validations.add(
 				"Queda seleccionado el país con código " + dCtxSh.pais.getCodigo_pais() + " (" + dCtxSh.pais.getNombre_pais() + ")",
-				pagePrehome.isPaisSelectedDesktop(), State.Warn, true);
+				pagePrehome.isPaisSelectedDesktop(), State.Warn, StoreType.None);
 		}
 		
 		boolean isPaisWithMarcaCompra = pagePrehome.isPaisSelectedWithMarcaCompra();
 		if (dCtxSh.pais.isVentaOnline()) {
 			validations.add(
 				"El país <b>Sí</b> tiene la marca de venta online\"",
-				isPaisWithMarcaCompra, State.Warn, true);
+				isPaisWithMarcaCompra, State.Warn, StoreType.None);
 		} else {
 			validations.add(
 				"El país <b>No</b> tiene la marca de venta online\"",
-				!isPaisWithMarcaCompra, State.Warn, true);			
+				!isPaisWithMarcaCompra, State.Warn, StoreType.None);			
 		}
 		return validations;
 	}

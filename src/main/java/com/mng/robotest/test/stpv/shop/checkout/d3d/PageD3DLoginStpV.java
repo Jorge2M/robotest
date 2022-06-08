@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.StoreType;
 import com.mng.robotest.test.pageobject.shop.checkout.d3d.PageD3DLogin;
 import com.mng.robotest.test.utils.ImporteScreen;
 
@@ -21,7 +22,7 @@ public class PageD3DLoginStpV {
 	@Validation (
 		description="Aparece la página de identificación D3D (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Info,		
-		avoidEvidences=true)
+		store=StoreType.None)
 	public boolean validateIsD3D(int maxSeconds) {
 		return (pageD3DLogin.isPageUntil(maxSeconds));
 	}

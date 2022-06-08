@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -28,7 +29,7 @@ public class CheckerSEO implements Checker {
 		}
 		validations.add(
 			descripValidac,
-			resValidac.isOK(), GenericCheck.SEO.getLevel(), true);
+			resValidac.isOK(), GenericCheck.SEO.getLevel(), StoreType.None);
 		
 		return validations;
 	}

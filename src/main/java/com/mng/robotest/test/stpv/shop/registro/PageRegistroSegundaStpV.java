@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
@@ -61,12 +62,12 @@ public class PageRegistroSegundaStpV {
 			PageRegistroSegunda.isPageUntil(driver, maxSeconds), State.Warn);
 		validations.add(
 			"Se pueden seleccionar las colecciones " + lineasComaSeparated,
-			PageRegistroSegunda.isPresentInputForLineas(driver, lineasComaSeparated), State.Info, true);
+			PageRegistroSegunda.isPresentInputForLineas(driver, lineasComaSeparated), State.Info, StoreType.None);
 		
 		int numColecciones = PageRegistroSegunda.getNumColecciones(driver);
 		validations.add(
 			"Aparece un número de colecciones coincidente con el número de líneas (" + numLineas + ")",
-			numColecciones==numLineas, State.Info, true);
+			numColecciones==numLineas, State.Info, StoreType.None);
 		
 		return validations;
 	}

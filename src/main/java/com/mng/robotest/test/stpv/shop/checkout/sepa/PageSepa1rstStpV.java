@@ -7,6 +7,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.mng.robotest.test.pageobject.shop.checkout.sepa.PageSepa1rst;
@@ -23,14 +24,14 @@ public class PageSepa1rstStpV {
 			PageSepa1rst.isPresentIconoSepa(channel, driver), State.Warn);
 		
 		State stateVal = State.Warn;
-		boolean avoidEvidences = false;
+		StoreType store = StoreType.Evidences;
 		if (channel.isDevice()) {
 			stateVal = State.Info;
-			avoidEvidences = true;
+			store = StoreType.None;
 		}
 		validations.add(
 			"Aparece el importe de la compra: " + importeTotal,
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal, avoidEvidences);		
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal, store);		
 		validations.add(
 			"Aparece la cabecera indicando la 'etapa' del pago",
 			PageSepa1rst.isPresentCabeceraStep(driver), State.Warn);		

@@ -11,6 +11,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
@@ -550,7 +551,7 @@ public class PageGaleriaStpV {
 			"   - Precio " + precio1erArt,
 			nombreArtFicha.toUpperCase().contains(nombre1erArt.toUpperCase()) &&
 			precioArtFicha.replaceAll(" ", "").toUpperCase().contains(precio1erArt.replaceAll(" ", "").toUpperCase()),
-			State.Info, true);
+			State.Info, StoreType.None);
 		
 	  	return validations;
 	}
@@ -558,7 +559,7 @@ public class PageGaleriaStpV {
 	@Validation(
 		description = "Como mínimo el #{porcentaje} % de los productos son dobles",
 		level=State.Info,
-		avoidEvidences=true)
+		store=StoreType.None)
 	public boolean hayPanoramicasEnGaleriaDesktop(float porcentaje) {
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
 		float numArtTotal = pageGaleria.getNumArticulos();
@@ -769,7 +770,7 @@ public class PageGaleriaStpV {
 	 		filtrosCollection.isVisibleMenu(FilterCollection.sale), State.Warn);
 	 	validations.add(
 	 		"Aparece el filtro para la nueva temporada <b>Next season preview</b>",
-	 		filtrosCollection.isVisibleMenu(FilterCollection.nextSeason), State.Info, true);
+	 		filtrosCollection.isVisibleMenu(FilterCollection.nextSeason), State.Info, StoreType.None);
 	 	return validations;
 	}
 		  
@@ -818,34 +819,34 @@ public class PageGaleriaStpV {
 	 		temp1rstArticleOk, State.Warn);
 	 	
 	 	State stateValidac = State.Info;
-	 	boolean avoidEvidences = true;
+	 	StoreType store = StoreType.Evidences;
 	 	if (!temp1rstArticleOk) {
 		 	stateValidac = State.Warn;
-		 	avoidEvidences = false;
+		 	store = StoreType.None;
 	 	}
 	 	String notInOrder = pageGaleria.getAnyArticleNotInOrder(ordenType);
 	 	validations.add(
 	 		"Los artículos aparecen ordenados por <b>" + ordenType.toString() + "</b>",
-	 		"".compareTo(notInOrder)==0, stateValidac, avoidEvidences);
+	 		"".compareTo(notInOrder)==0, stateValidac, store);
 	   
 	 	return validations;
    }
    
-   public void validaArticlesOfTemporadas(List<Integer> listTemporadas, State levelError, boolean avoidEvidences) {
-	   validaArticlesOfTemporadas(listTemporadas, false, levelError, avoidEvidences);
+   public void validaArticlesOfTemporadas(List<Integer> listTemporadas, State levelError, StoreType store) {
+	   validaArticlesOfTemporadas(listTemporadas, false, levelError, store);
    }
    
    public void validaArticlesOfTemporadas(List<Integer> listTemporadas) {
-	   validaArticlesOfTemporadas(listTemporadas, false, State.Warn, false);
+	   validaArticlesOfTemporadas(listTemporadas, false, State.Warn, StoreType.Evidences);
    }
    
    public void validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles) {
-	   validaArticlesOfTemporadas(listTemporadas, validaNotNewArticles, State.Warn, false);
+	   validaArticlesOfTemporadas(listTemporadas, validaNotNewArticles, State.Warn, StoreType.Evidences);
    }
    
    @Validation
    public ChecksTM validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles, 
-		   										  State levelError, boolean avoidEvidences) {
+		   										  State levelError, StoreType store) {
 	   ChecksTM validations = ChecksTM.getNew();
 	   	
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
@@ -870,20 +871,20 @@ public class PageGaleriaStpV {
 	   validations.add(
 	   		"<b style=\"color:blue\">Rebajas</b></br>" +
 	   		"Todos los artículos pertenecen a las temporadas <b>" + listTemporadas.toString() + "</b>" + validaNotNewArticlesStr + infoWarning,
-	   		listArtWrong.size()==0, levelError, avoidEvidences);
+	   		listArtWrong.size()==0, levelError, store);
 	   	
 	   return validations;   
    }
    
    @Validation
-   public ChecksTM validaNotArticlesOfTypeDesktop(TypeArticle typeArticle, State levelError, boolean avoidEvidences) {
+   public ChecksTM validaNotArticlesOfTypeDesktop(TypeArticle typeArticle, State levelError, StoreType store) {
 	   	ChecksTM validations = ChecksTM.getNew();
 	   	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
 	   	List<String> listArtWrong = pageGaleriaDesktop.getArticlesOfType(typeArticle);
 	   	validations.add(
 	   		"<b style=\"color:blue\">Rebajas</b></br>" +
 	   		"No hay ningún artículo del tipo <b>" + typeArticle + "</b>",
-	   		listArtWrong.size()==0, levelError, avoidEvidences);
+	   		listArtWrong.size()==0, levelError, store);
    		if (listArtWrong.size() > 0) {
    			addInfoArtWrongToDescription(listArtWrong, typeArticle, validations.get(0));
    		}
@@ -940,7 +941,7 @@ public class PageGaleriaStpV {
 				pageGaleria.isArticleWithHearthIconPresentUntil(1, maxSecondsToWaitIcon), State.Warn);
 			validations.add (
 				"Cada artículo tiene 1 icono de favoritos asociado",
-				pageGaleria.eachArticlesHasOneFavoriteIcon(), State.Info, true);
+				pageGaleria.eachArticlesHasOneFavoriteIcon(), State.Info, StoreType.None);
 		}
 		/*
 		else {

@@ -5,13 +5,14 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.InputParamsTM;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
+
 
 public class CheckerAnalitica implements Checker {
 
@@ -24,7 +25,7 @@ public class CheckerAnalitica implements Checker {
 		String result = String.valueOf(resultLong);
 		validations.add(
 			"La siguiente sentencia Js retorna 1 \"" + commandJs + "\"",
-			stringIs(result, 1), getLevel(), true);
+			stringIs(result, 1), getLevel(), StoreType.None);
 		
 		return validations;
 	}

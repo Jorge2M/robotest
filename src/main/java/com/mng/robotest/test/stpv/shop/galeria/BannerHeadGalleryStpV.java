@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
@@ -94,7 +95,7 @@ public class BannerHeadGalleryStpV {
 		if (typeGalery==TypeGalery.Sales || !pais.isVentaOnline()) {
 		 	validations.add(
 		 		"El banner de cabecera no es lincable",
-		 		!bannerLincable, State.Info, true);
+		 		!bannerLincable, State.Info, StoreType.None);
 		}
 		else {
 		 	validations.add(

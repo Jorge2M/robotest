@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
@@ -163,7 +164,7 @@ public class RebajasJun2018 {
 				String dataGaMenuNuevaTemporada = getDataGaLabelNuevaTemporada(dCtxSh.pais.getCodigo_pais(), sublineaType);
 				menuNuevaTemp.setDataGaLabel(dataGaMenuNuevaTemporada);
 				secMenusDesktopStpV.stepEntradaMenuDesktop(menuNuevaTemp, "");
-				pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.rebajado, State.Defect, false);
+				pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.rebajado, State.Defect, StoreType.Evidences);
 				//PageGaleriaStpV.validaArticlesOfTemporadas(tempArticlesNextSeason, validaNotNewArticles, StepTestMaker, dFTest);
 			
 				secMenusStpV.selectMenu1rstLevelTypeCatalog(menuRebajas, dCtxSh);

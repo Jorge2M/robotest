@@ -4,6 +4,7 @@ import java.util.logging.Level;
 
 import org.openqa.selenium.WebDriver;
 
+import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.EmbeddedDriver;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
@@ -30,7 +31,7 @@ public class CheckerJSerrors implements Checker {
 			//Sólo mostraremos warning en caso que alguno no se haya mostrado ya un máximo de veces durante el test
 			validations.add(
 				descripValidac,
-				resultadoOK || (resultadoLogs.getResultado()==ResultadoErrores.Resultado.MAX_ERRORES), GenericCheck.JSerrors.getLevel(), true);
+				resultadoOK || (resultadoLogs.getResultado()==ResultadoErrores.Resultado.MAX_ERRORES), GenericCheck.JSerrors.getLevel(), StoreType.None);
 		}
 		
 		return validations;

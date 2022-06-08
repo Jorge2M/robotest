@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -197,7 +198,7 @@ public class PageRegistroIniStpV {
 		"<b style=\"color:blue\">Rebajas</b></br>" +
 		"1) El mensaje de NewsLetter no aparece o si aparece no contiene el símbolo de porcentaje",
 		level=State.Info,
-		avoidEvidences=true)
+		store=StoreType.None)
 	public boolean validaRebajasJun2018(IdiomaPais idioma) {
 		String percentageSymbol = UtilsTestMango.getPercentageSymbol(idioma);
 		return (!pageRegistroIni.newsLetterTitleContains(percentageSymbol));	   

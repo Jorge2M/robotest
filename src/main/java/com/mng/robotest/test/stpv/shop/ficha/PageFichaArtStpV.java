@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -414,7 +415,7 @@ public class PageFichaArtStpV {
 	@Validation (
 		description="Es visible el slider de artículos de tipo <b>#{typeSlider}</b>",
 		level=State.Info,
-		avoidEvidences=true)
+		store=StoreType.None)
 	public boolean checkSliderVisible(Slider typeSlider) {
 		return (pageFicha.isVisibleSlider(typeSlider));
 	}

@@ -7,6 +7,7 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
@@ -168,8 +169,8 @@ public class RebajasJun2019 implements Serializable {
 				menuNuevaTemp.setDataGaLabel(dataGaMenuNuevaTemporada);
 	
 				secMenusDesktopStpV.stepEntradaMenuDesktop(menuNuevaTemp, "");
-				pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.rebajado, State.Defect, false);
-				pageGaleriaStpV.validaArticlesOfTemporadas(FilterCollection.nextSeason.getListTempArticles(), State.Warn, true); //?
+				pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.rebajado, State.Defect, StoreType.Evidences);
+				pageGaleriaStpV.validaArticlesOfTemporadas(FilterCollection.nextSeason.getListTempArticles(), State.Warn, StoreType.None); //?
 			
 				secMenusStpV.selectMenu1rstLevelTypeCatalog(menuRebajas, dCtxSh);
 				pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, true, dCtxSh.pais, dCtxSh.idioma, linea.getType(), GroupMenu.prendas);

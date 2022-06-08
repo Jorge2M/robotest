@@ -13,6 +13,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea;
@@ -201,7 +202,7 @@ public class SecMenusWrapperStpV {
 	@Validation (
 		description="Como mínimo se obtiene 1 artículo (lo esperamos un máximo de #{maxSeconds} segundos)",
 		level=State.Warn,
-		avoidEvidences=true)
+		store=StoreType.None)
 	private boolean checkIsVisibleAarticle(DataCtxShop dCtxSh, int maxSeconds) throws Exception {
 		PageGaleria pageGaleria = PageGaleria.getNew(dCtxSh.channel, dCtxSh.appE, driver);
 		return (pageGaleria.isVisibleArticuloUntil(1, maxSeconds));
@@ -280,12 +281,12 @@ public class SecMenusWrapperStpV {
 			PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app, driver);
 			if (typeMenu == FilterCollection.sale) {
 				pageGaleriaStpV.validaArticlesOfTemporadas(typeMenu.getListTempArticles());
-				pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.norebajado, State.Warn, false);
+				pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.norebajado, State.Warn, StoreType.Evidences);
 			}
 			
 			if (typeMenu == FilterCollection.nextSeason) {
-				pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.rebajado, State.Info, true);
-				pageGaleriaStpV.validaArticlesOfTemporadas(typeMenu.getListTempArticles(), State.Info, true);
+				pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.rebajado, State.Info, StoreType.None);
+				pageGaleriaStpV.validaArticlesOfTemporadas(typeMenu.getListTempArticles(), State.Info, StoreType.None);
 			}
 		}
 	}	

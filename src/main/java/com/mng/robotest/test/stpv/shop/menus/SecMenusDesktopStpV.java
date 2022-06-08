@@ -13,6 +13,7 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea;
@@ -146,7 +147,7 @@ public class SecMenusDesktopStpV {
 	@Validation (
 		description="Está seleccionada la línea <b>#{lineaType}</b>",
 		level=State.Info,
-		avoidEvidences=true)
+		store=StoreType.None)
 	public boolean validateIsLineaSelected(LineaType lineaType) {
 		return (secMenus.secMenuSuperior.secLineas.isLineaSelected(lineaType));
 	}
@@ -530,7 +531,7 @@ public class SecMenusDesktopStpV {
 		 	if (!isTitleAccording) {
 			 	validations.add(
 					"El título no coincide -> Validamos que exista el header <b>" + menu.getNombre() + "</b> en el inicio de la galería",
-					pageGaleria.isHeaderArticlesVisible(menu.getNombre()), State.Warn, false);
+					pageGaleria.isHeaderArticlesVisible(menu.getNombre()), State.Warn, StoreType.Evidences);
 		 	}
 		}
 		
@@ -663,7 +664,7 @@ public class SecMenusDesktopStpV {
 			prefixSale +				   
 			"No hay artículos <b>de Temporada " + temporadaNew + "</b> con las 2 etiquetas <b>New Collection</b> y <b>New Now</b> " +
 			"(en sus correspondientes traducciones)" + warningMessage,
-			listArtWrong.size()==0, State.Info, true);
+			listArtWrong.size()==0, State.Info, StoreType.None);
 		return validations;	
 	}
 	

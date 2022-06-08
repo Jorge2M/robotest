@@ -8,6 +8,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.Descuento;
@@ -41,7 +42,7 @@ public class Page1DktopCheckoutStpV {
 		boolean isPageInitCheckout = page1DktopCheckout.isPageUntil(maxSeconds);
 	 	validations.add(
 			"Aparece la página inicial del Checkout (la esperamos un máximo de " + maxSeconds + " segundos)",
-			isPageInitCheckout, State.Warn, true);
+			isPageInitCheckout, State.Warn, StoreType.None);
 	 	if (!isPageInitCheckout) {
 		 	validations.add(
 				"Si no ha aparecido la esperamos " + (maxSeconds * 2) + " segundos más",

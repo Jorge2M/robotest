@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -20,14 +21,14 @@ public class PageDotpay1rstStpV {
 			PageDotpay1rst.isPresentEntradaPago(nombrePago, channel, driver), State.Warn);
 	  	
 	  	State stateVal = State.Warn;
-	  	boolean avoidEvidences = false;
+	  	StoreType store = StoreType.Evidences;
 		if (channel.isDevice()) {
 			stateVal = State.Info;
-			avoidEvidences = true;
+			store = StoreType.None;
 		}
 	  	validations.add(
 			"Aparece el importe de la compra: " + importeTotal,
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal, avoidEvidences);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal, store);
 	  	validations.add(
 			"Aparece la cabecera indicando la 'etapa' del pago",
 			PageDotpay1rst.isPresentCabeceraStep(nombrePago, channel, driver), State.Warn);
