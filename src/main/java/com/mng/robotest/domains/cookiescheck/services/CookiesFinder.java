@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.cookiescheck.services;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,14 +14,14 @@ public class CookiesFinder {
 	private static final Logger logger = Log4jTM.getLogger();
 	
 	private final static int SECONDS_PERSISTENCE = 3600; 
-	private static Optional<List<Cookie>> listCookies;
-	private static Calendar timeCapturedCookies;
+	private static Optional<List<Cookie>> listCookies = Optional.empty();
+	private static LocalDateTime timeCapturedCookies;
 
 	
     public synchronized Optional<List<Cookie>> getAllowedCookies() {
     	if (isNeededRefreshDataCookies(SECONDS_PERSISTENCE)) {
    			listCookies = getCookiesFromHttp();
-   			timeCapturedCookies = Calendar.getInstance();
+   			timeCapturedCookies = LocalDateTime.now();
     	}
     	return listCookies;
     }
@@ -42,17 +42,16 @@ public class CookiesFinder {
 		    return Optional.of(cookies);
     	} catch (Exception e) {
     		logger.warn("Problem retrieving cookies from http service", e);
-            return null;
+            return Optional.empty();
     	}
     }
     
     boolean isNeededRefreshDataCookies(int secondsPersistence) {
-    	if (listCookies==null) {
+    	if (listCookies.isEmpty()) {
     		return true;
     	}
-    	Calendar timeToCaptureCookies = (Calendar)timeCapturedCookies.clone();
-    	timeToCaptureCookies.add(Calendar.SECOND, secondsPersistence);
-    	return (Calendar.getInstance().after(timeToCaptureCookies));
+    	LocalDateTime timeToCaptureCookies = timeCapturedCookies.plusSeconds(secondsPersistence);
+    	return (LocalDateTime.now().compareTo(timeToCaptureCookies)>0);
     }	
 	
 }
