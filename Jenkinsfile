@@ -97,7 +97,7 @@ pipeline {
             steps {
             	unstash 'target'
             	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-	            	sh "mvn sonar:sonar"
+	            	sh "mvn --settings infrastructure/ci/settings.xml sonar:sonar"
 	            }
             }
         }
