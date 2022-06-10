@@ -53,7 +53,6 @@ import com.github.jorge2m.testmaker.domain.suitetree.SuiteBean;
 import com.github.jorge2m.testmaker.domain.suitetree.SuiteTM;
 import com.github.jorge2m.testmaker.domain.testfilter.TestMethodData;
 import com.github.jorge2m.testmaker.restcontroller.CreatorSuiteRunService;
-import com.github.jorge2m.testmaker.restcontroller.ServerRestTM;
 import com.github.jorge2m.testmaker.restcontroller.StringList;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.FilterSuites.SetSuiteRun;
