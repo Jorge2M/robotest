@@ -111,7 +111,7 @@ pipeline {
                 }
             }
             steps {
-            	unstash 'target'
+            	//unstash 'target'
             	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
 	            	sh "mvn --settings infrastructure/ci/settings.xml -B package -DskipTests"
 	            }
