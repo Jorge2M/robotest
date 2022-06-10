@@ -21,7 +21,7 @@ import com.mng.robotest.test.utils.PagoGetter;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.InputParamsBasic;
 import com.github.jorge2m.testmaker.domain.testfilter.TestMethodData;
-import com.github.jorge2m.testmaker.restcontroller.RestApiTM;
+
 
 @Path("/")
 public class RestApiMango extends RestApiTM {
