@@ -32,75 +32,75 @@ pipeline {
             }
         }
 
-//    	stage('Run Unit Tests') {
-//            agent {
-//                docker {
-//                    image 'maven:3.8.4-openjdk-17'
-//                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
-//                }
-//            }
-//            steps {
-//            	sh 'mvn -version'
-//	        	sh 'mvn clean'
-//	        	withCredentials([usernamePassword(credentialsId: 'svc_bitbucket_pro', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-//	            	sh 'mvn --settings infrastructure/ci/settings.xml test -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
-//	            }
-//            }
-//            post {
-//                always {
-//                    script {
-//                        junit outputFolders.test
-//                    }
-//                }            
-//                success {
-//                    script {
-//                        stash includes: '**/target/', name: 'target'
-//                    }
-//                }
-//            }
-//        }
-//        
-//        stage('Run Integration Tests') {
-//            agent {
-//                docker {
-//                    image 'maven:3.8.4-openjdk-17'
-//                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
-//                }
-//            }
-//            steps {
-//                unstash 'target'
-//	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-//	            	sh "mvn --settings infrastructure/ci/settings.xml -B verify -DskipUnitTests"
-//	            }
-//            }
-//            post {
-//                always {
-//                    script {
-//                        junit outputFolders.integration
-//                    }
-//                }            
-//                success {
-//                    script {
-//                        stash includes: '**/target/', name: 'target'
-//                    }
-//                }
-//            }
-//        }
-//        
-//        stage('Sonar') {
-//            agent {
-//                docker {
-//                    image 'maven:3.8.4-openjdk-17'
-//                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
-//                }
-//            }
-//            steps {
-//            	unstash 'target'
-//            	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-//	            	sh "mvn --settings infrastructure/ci/settings.xml sonar:sonar"
-//	            }
-//            }
-//        }
+    	stage('Run Unit Tests') {
+            agent {
+                docker {
+                    image 'maven:3.8.4-openjdk-17'
+                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
+                }
+            }
+            steps {
+            	sh 'mvn -version'
+	        	sh 'mvn clean'
+	        	withCredentials([usernamePassword(credentialsId: 'svc_bitbucket_pro', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+	            	sh 'mvn --settings infrastructure/ci/settings.xml test -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
+	            }
+            }
+            post {
+                always {
+                    script {
+                        junit outputFolders.test
+                    }
+                }            
+                success {
+                    script {
+                        stash includes: '**/target/', name: 'target'
+                    }
+                }
+            }
+        }
+        
+        stage('Run Integration Tests') {
+            agent {
+                docker {
+                    image 'maven:3.8.4-openjdk-17'
+                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
+                }
+            }
+            steps {
+                unstash 'target'
+	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+	            	sh "mvn --settings infrastructure/ci/settings.xml -B verify -DskipUnitTests"
+	            }
+            }
+            post {
+                always {
+                    script {
+                        junit outputFolders.integration
+                    }
+                }            
+                success {
+                    script {
+                        stash includes: '**/target/', name: 'target'
+                    }
+                }
+            }
+        }
+        
+        stage('Sonar') {
+            agent {
+                docker {
+                    image 'maven:3.8.4-openjdk-17'
+                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
+                }
+            }
+            steps {
+            	unstash 'target'
+            	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+	            	sh "mvn --settings infrastructure/ci/settings.xml sonar:sonar"
+	            }
+            }
+        }
 
               
         stage('Package') {
@@ -111,7 +111,7 @@ pipeline {
                 }
             }
             steps {
-            	//unstash 'target'
+            	unstash 'target'
             	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
 	            	sh "mvn --settings infrastructure/ci/settings.xml -B package -DskipTests"
 	            }
