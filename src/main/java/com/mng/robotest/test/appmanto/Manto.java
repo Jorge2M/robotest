@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
 import com.github.jorge2m.testmaker.domain.InputParamsTM;
-//import com.github.jorge2m.testmaker.domain.InputParamsTM;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.domain.suitetree.TestRunTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
@@ -18,12 +17,10 @@ import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.stpv.manto.DataMantoAccess;
 import com.mng.robotest.test.stpv.manto.PageConsultaIdEansStpV;
-import com.mng.robotest.test.stpv.manto.PageConsultaTiendaStpV;
 import com.mng.robotest.test.stpv.manto.PageGestionarClientesStpV;
 import com.mng.robotest.test.stpv.manto.PageGestorChequesStpV;
 import com.mng.robotest.test.stpv.manto.PageGestorConsultaCambioFamiliaStpV;
 import com.mng.robotest.test.stpv.manto.PageGestorEstadisticasPedidoStpV;
-import com.mng.robotest.test.stpv.manto.PageGestorSaldosTPVStpV;
 import com.mng.robotest.test.stpv.manto.PageLoginMantoStpV;
 import com.mng.robotest.test.stpv.manto.PageMenusMantoStpV;
 import com.mng.robotest.test.stpv.manto.PageOrdenacionDePrendasStpV;
@@ -31,6 +28,7 @@ import com.mng.robotest.test.stpv.manto.PageSelTdaMantoStpV;
 import com.mng.robotest.test.stpv.manto.SecFiltrosMantoStpV;
 import com.mng.robotest.test.stpv.manto.SecFiltrosMantoStpV.TypeSearch;
 import com.mng.robotest.test.stpv.manto.pedido.PagePedidosMantoStpV;
+import com.mng.robotest.test.exceptions.NotFoundException;
 
 public class Manto {
 
@@ -41,12 +39,11 @@ public class Manto {
 	
 	private String codigoEspanya = "001";
 	private String almacenEspanya = "001";
-	private String tpv;
 
 	public void setDataMantoAccess() throws Exception {
 		if (dMantoAcc==null) {
 			dMantoAcc = new DataMantoAccess();
-			TestCaseTM testCase = TestMaker.getTestCase().get();
+			TestCaseTM testCase = getTestCase();
 			TestRunTM testRun = testCase.getTestRunParent();
 			InputParamsTM inputParams = testCase.getInputParamsSuite();
 			dMantoAcc.urlManto = inputParams.getUrlBase();
@@ -54,6 +51,13 @@ public class Manto {
 			dMantoAcc.passManto = testRun.getParameter(Constantes.paramPasmanto);
 			dMantoAcc.appE = AppEcom.shop;
 		}
+	}
+	
+	private TestCaseTM getTestCase() throws NotFoundException {
+		if (TestMaker.getTestCase().isEmpty()) {
+		  throw new NotFoundException("Not found TestCase");
+		}
+		return TestMaker.getTestCase().get();
 	}
 	
 	@Test(

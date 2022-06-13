@@ -19,7 +19,7 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 
 public class Footer {
 
-	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
+	private final static Pais espana = PaisGetter.get(PaisShop.ESPANA);
 	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
 
 	public Footer() {}

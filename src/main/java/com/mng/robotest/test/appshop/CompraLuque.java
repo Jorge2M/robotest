@@ -1,5 +1,6 @@
 package com.mng.robotest.test.appshop;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,11 +41,15 @@ public class CompraLuque {
 		"T2M 1Y0",   //CAYYC
 		"V2P 7Y0");  //CAYVR
 	
+	private Random rand = SecureRandom.getInstanceStrong();
+	
+	public CompraLuque() throws Exception {}
+	
 	@Test (
 		groups={"Compra", "Canal:desktop,mobile_App:all"}, alwaysRun=true,
 		description="Compra USA o Irlanda")
 	public void LUQ001_Compra() throws Exception {
-		Pais pais=getPaisRandom(Arrays.asList(PaisShop.USA, PaisShop.Ireland));
+		Pais pais=getPaisRandom(Arrays.asList(PaisShop.USA, PaisShop.IRELAND));
 		IdiomaPais idioma = pais.getListIdiomas().get(0);
 		executePurchase(pais, idioma);
 	}
@@ -97,7 +102,7 @@ public class CompraLuque {
 		PaisShop paisShop = PaisShop.getPais(pais.getCodigo_pais());
 		switch (paisShop) {
 		case USA:
-		case Ireland:
+		case IRELAND:
 		default:
 			return getArticles();
 		}
@@ -106,26 +111,21 @@ public class CompraLuque {
 	private String getCodPostal(Pais pais) {
 		PaisShop paisShop = PaisShop.getPais(pais.getCodigo_pais());
 		switch (paisShop) {
-		case Canada:
-			Random rand = new Random(); 
-			return codPostalesCanada.get(rand.nextInt(codPostalesCanada.size())); 
+		case CANADA:
+			return codPostalesCanada.get(this.rand.nextInt(codPostalesCanada.size())); 
 		default:
 			return pais.getCodpos();
 		}
 	}
 	
 	private Pais getPaisRandom(List<PaisShop> listaPaises) {
-		Random rn = new Random();
-		int randomNumber = rn.nextInt(listaPaises.size());
+		int randomNumber = this.rand.nextInt(listaPaises.size());
 		return PaisGetter.get(listaPaises.get(randomNumber));
 	}
 	
 	private List<GarmentCatalog> getArticles() {
 		List<GarmentCatalog> listReturn = new ArrayList<>();
-		
-		Random rn = new Random();
-		int randomNumber = rn.nextInt(2);
-
+		int randomNumber = this.rand.nextInt(2);
 		if (randomNumber>=0) {
 			GarmentCatalog garment1 = new GarmentCatalog("87092508");
 			garment1.setStock(1000);

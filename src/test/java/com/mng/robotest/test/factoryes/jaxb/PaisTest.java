@@ -17,7 +17,7 @@ public class PaisTest {
 	@Test
 	public void testGetListPagosForTest() {
 		//Given
-		Pais espana = PaisGetter.get(PaisShop.Espana);
+		Pais espana = PaisGetter.get(PaisShop.ESPANA);
 		
 		//When
 		List<Pago> pagosForTest = espana.getListPagosForTest(AppEcom.shop, false);

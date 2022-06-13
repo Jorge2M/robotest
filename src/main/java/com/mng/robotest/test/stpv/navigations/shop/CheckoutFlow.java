@@ -1,6 +1,6 @@
 package com.mng.robotest.test.stpv.navigations.shop;
 
-import static com.mng.robotest.test.data.PaisShop.Espana;
+import static com.mng.robotest.test.data.PaisShop.ESPANA;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -185,7 +185,7 @@ public class CheckoutFlow {
 		if ((dCtxPago.getFTCkout().testCodPromocional || dCtxPago.getFTCkout().isEmpl) && 
 			 dCtxSh.appE!=AppEcom.votf) {
 			DataBag dataBag = dCtxPago.getDataPedido().getDataBag();	
-			if (dCtxPago.getFTCkout().isEmpl && Espana.equals(dCtxSh.pais)) {
+			if (dCtxPago.getFTCkout().isEmpl && ESPANA.equals(dCtxSh.pais)) {
 				testInputCodPromoEmplSpain(dataBag);
 			} else {
 				if (dCtxSh.vale!=null) {
@@ -485,7 +485,7 @@ public class CheckoutFlow {
 		private final AppEcom app;
 		private String user = "";
 		private String password = "";
-		private Pais country = PaisGetter.get(PaisShop.Espana);
+		private Pais country = PaisGetter.get(PaisShop.ESPANA);
 		private IdiomaPais idioma = country.getListIdiomas().get(0);
 		private ValePais vale = null;
 		private List<GarmentCatalog> listArticles = null;

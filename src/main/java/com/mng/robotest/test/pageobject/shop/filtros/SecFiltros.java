@@ -31,6 +31,7 @@ public interface SecFiltros {
 			if (app==AppEcom.outlet && channel==Channel.tablet) {
 				return SecFiltrosDesktop.getInstance(channel, app, driver);
 			}
+			return SecMultiFiltrosDevice.getInstance(app, driver);
 		default:
 			return SecMultiFiltrosDevice.getInstance(app, driver);
 		}

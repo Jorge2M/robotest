@@ -44,7 +44,7 @@ import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
 public class Loyalty {
 	
-	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
+	private final static Pais espana = PaisGetter.get(PaisShop.ESPANA);
 	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
 
 	final static String userProWithLPoints = "ticket_digital_es@mango.com";

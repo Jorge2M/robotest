@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.Constantes;
+import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.stpv.manto.DataMantoAccess;
 import com.mng.robotest.test.stpv.manto.PageLoginMantoStpV;
 import com.mng.robotest.test.stpv.manto.PageMenusMantoStpV;
@@ -40,7 +41,7 @@ public class Menus implements Serializable {
 
 	public DataMantoAccess getDataMantoAccess() {
 		DataMantoAccess dMantoAcc = new DataMantoAccess();
-		TestCaseTM testCase = TestMaker.getTestCase().get();
+		TestCaseTM testCase = getTestCase();
 		TestRunTM testRun = testCase.getTestRunParent();
 		InputParamsTM inputParams = testCase.getInputParamsSuite();
 		dMantoAcc.urlManto = inputParams.getUrlBase();
@@ -49,6 +50,13 @@ public class Menus implements Serializable {
 		dMantoAcc.channel = Channel.desktop;
 		dMantoAcc.appE = AppEcom.shop;
 		return dMantoAcc;
+	}
+	
+	private TestCaseTM getTestCase() throws NotFoundException {
+		if (TestMaker.getTestCase().isEmpty()) {
+		  throw new NotFoundException("Not found TestCase");
+		}
+		return TestMaker.getTestCase().get();
 	}
 
 	@Test(

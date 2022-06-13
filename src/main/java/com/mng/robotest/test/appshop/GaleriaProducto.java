@@ -45,7 +45,7 @@ import java.util.List;
 @SuppressWarnings({"static-access"})
 public class GaleriaProducto {
 	
-	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
+	private final static Pais espana = PaisGetter.get(PaisShop.ESPANA);
 	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
 		
 	public GaleriaProducto() {}

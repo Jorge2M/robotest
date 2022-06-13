@@ -25,7 +25,7 @@ public class GetterProductsIT {
 	
 	public GetterProductsIT() throws Exception {
 		if (getterProducts==null) {
-			Pais espana = PaisGetter.get(PaisShop.Espana);
+			Pais espana = PaisGetter.get(PaisShop.ESPANA);
 			getterProducts = new GetterProducts.Builder("https://shop.mango.com/", espana.getCodigo_alf(), AppEcom.shop, null)
 					.linea(LineaType.she)
 					.menu(Menu.Shorts)

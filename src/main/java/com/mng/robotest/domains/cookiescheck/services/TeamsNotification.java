@@ -3,9 +3,9 @@ package com.mng.robotest.domains.cookiescheck.services;
 import static org.apache.http.impl.client.HttpClients.createDefault;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
 
 import com.mng.robotest.domains.cookiescheck.exceptions.UnsendTeamsNotification;
 
@@ -16,8 +16,7 @@ public class TeamsNotification implements NotificationSender {
 	
 	@Override
 	public void send(String jsonMessage) {
-        try {
-        	HttpClient httpClient = createDefault();
+        try (CloseableHttpClient httpClient = createDefault()) {
             HttpPost post = new HttpPost(TEAMS_CHANNEL_URL);
             post.addHeader("Content-Type", "application/json");
             StringEntity entity = new StringEntity(jsonMessage);
