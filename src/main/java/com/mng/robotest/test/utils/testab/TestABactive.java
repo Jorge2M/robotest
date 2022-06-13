@@ -20,10 +20,8 @@ public class TestABactive {
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.CLAV_4345_Optimizacion_Imagenes_PRE, 1));
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.CLAV_4345_Optimizacion_Imagenes_Desktop_PRO, 1));
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.CLAV_4345_Optimizacion_Imagenes_Mobile_PRO, 1));
-		//listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.Test_New_Menu_Desktop_PRE, 1));
-		
-		//TODO temporalmente, de cara a BF2021 se ha restaurado en pro el menú antiguo. Poner a 1 Cuando pase BF
-		//listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.Test_New_Menu_Desktop_PRO, 0));
+		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.Legal_Policy_Checkout_Desktop, 0));
+		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.Legal_Policy_Checkout_Mobile, 0));
 		
 		TestABmanager.activateTestsAB(listTestABsToActivate, channel, app, driver);
 	}
