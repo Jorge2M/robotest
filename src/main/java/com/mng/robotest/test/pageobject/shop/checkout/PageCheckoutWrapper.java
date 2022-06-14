@@ -432,13 +432,13 @@ public class PageCheckoutWrapper extends PageObjTM {
 	}
 	
 	private boolean validateDiscountOverOriginalPrice(PreciosArticulo preciosArtScreen, int porcMinDiscount) {
-		float porcMinDiscountLessOne = porcMinDiscount - 1; //Restamos 1 por un tema de precisión
+		float porcMinDiscountLessOne = porcMinDiscount - 1f; //Restamos 1 por un tema de precisión
 		float importeDescMinTeorico = preciosArtScreen.original * (1 - (porcMinDiscountLessOne/100));
 		return (preciosArtScreen.definitivo <= importeDescMinTeorico);
 	}
 	
 	private boolean validateDiscountOverLastPriceOrSale(PreciosArticulo preciosArtScreen, int porcMinDiscount) {
-		float porcMinDiscountLessOne = porcMinDiscount - 1; //Restamos 1 por un tema de precisión
+		float porcMinDiscountLessOne = porcMinDiscount - 1f; //Restamos 1 por un tema de precisión
 		float importeDescMinTeorico = preciosArtScreen.ultimaRebaja * (1 - (porcMinDiscountLessOne/100));
 		return (preciosArtScreen.definitivo <= importeDescMinTeorico);
 	}

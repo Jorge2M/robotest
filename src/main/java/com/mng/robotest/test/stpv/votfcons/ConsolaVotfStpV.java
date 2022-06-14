@@ -128,7 +128,6 @@ public class ConsolaVotfStpV {
 	@Validation
 	private static ChecksTM checkAfterClickConsultDispEnvioTienda(String paginaPadre, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
-		paginaPadre = driver.getWindowHandle();
 		try {
 			PageConsola.switchToResultIFrame(driver);
 		 	validations.add(

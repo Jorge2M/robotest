@@ -3,6 +3,7 @@ package com.mng.robotest.test.stpv.shop.genericchecks;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -18,9 +19,11 @@ import org.testng.ITestContext;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
+import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 
 import static com.github.jorge2m.testmaker.testreports.html.ResultadoErrores.Resultado.*;
@@ -69,7 +72,7 @@ public class CheckerImgsBroken implements Checker {
 	 */
 	ResultadoErrores imagesBroken(WebDriver driver, Channel channel, int maxErrors) {
 		int maxImages = 500;
-		ITestContext ctx = TestMaker.getTestCase().get().getTestRunParent().getTestNgContext();
+		ITestContext ctx = getTestCase().getTestRunParent().getTestNgContext();
 				
 		//En el caso de móvil sólo procesaremos 200 imágenes para paliar el caso en el que el script se ejecuta contra un dispositivo físico y el rendimiento es limitado
 		if (channel.isDevice()) {
@@ -77,6 +80,14 @@ public class CheckerImgsBroken implements Checker {
 		}
 		
 		return (imagesBroken(driver, maxImages, maxErrors, ctx));
+	}
+	
+	private TestCaseTM getTestCase() throws NotFoundException {
+		Optional<TestCaseTM> testCaseOpt = TestMaker.getTestCase();
+		if (testCaseOpt.isEmpty()) {
+		  throw new NotFoundException("Not found TestCase");
+		}
+		return testCaseOpt.get();
 	}
 	
 	/**
@@ -174,15 +185,10 @@ public class CheckerImgsBroken implements Checker {
 	
 	private String getImageSrc(WebElement image) {
 		String src = "";
-		String data_src = "";
 		src = image.getAttribute("src");
 		if (src==null || "".compareTo(src)==0) {
-			data_src = image.getAttribute("data-src");
-			if (data_src!=null && "".compareTo(data_src)!=0) {
-				src = data_src;
-			}
+			src = image.getAttribute("data-src");
 		}
-		
 		return src;
 	}
 	

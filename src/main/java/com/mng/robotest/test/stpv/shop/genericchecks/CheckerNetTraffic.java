@@ -1,6 +1,7 @@
 package com.mng.robotest.test.stpv.shop.genericchecks;
 
 import java.util.Iterator;
+import java.util.Optional;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -11,6 +12,7 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.testreports.stepstore.GestorDatosHarJSON;
+import com.mng.robotest.test.exceptions.NotFoundException;
 
 public class CheckerNetTraffic implements Checker {
 
@@ -29,8 +31,11 @@ public class CheckerNetTraffic implements Checker {
 		ChecksTM validations = ChecksTM.getNew();
 		boolean peticionesOk = true;
 		String infoWarnings = "";
-		JSONArray listEntriesTotal = getListEntries(gestorHAR);
-		Iterator entriesJSON = listEntriesTotal.iterator();
+		Optional<JSONArray> listEntriesTotalOpt = getListEntries(gestorHAR);
+		if (listEntriesTotalOpt.isEmpty()) {
+			throw new NotFoundException("Not found entries in HAR");
+		}
+		Iterator entriesJSON = listEntriesTotalOpt.get().iterator();
 		while (entriesJSON.hasNext() && peticionesOk) {
 			JSONObject entrieJSON = (JSONObject)entriesJSON.next();
 			JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
@@ -53,14 +58,13 @@ public class CheckerNetTraffic implements Checker {
 	 	return validations;
 	}  
 	
-	private JSONArray getListEntries(GestorDatosHarJSON gestorHAR) {
+	private Optional<JSONArray> getListEntries(GestorDatosHarJSON gestorHAR) {
 		try {
-			return gestorHAR.getListEntriesFilterURL("", "");
+			return Optional.of(gestorHAR.getListEntriesFilterURL("", ""));
 		}
 		catch (Exception e) {
-			Log4jTM.getLogger().warn(
-				". Problem listing entries for NetTraffic", e);
-			return null;
+			Log4jTM.getLogger().warn(". Problem listing entries for NetTraffic", e);
+			return Optional.empty();
 		}
 	}
 

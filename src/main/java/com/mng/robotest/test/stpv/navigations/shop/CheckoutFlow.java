@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
@@ -17,6 +18,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.domain.InputParamsTM.TypeAccess;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -31,6 +33,7 @@ import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.datastored.FlagsTestCkout;
+import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.factoryes.entities.EgyptCity;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.generic.beans.ValePais;
@@ -185,7 +188,7 @@ public class CheckoutFlow {
 		if ((dCtxPago.getFTCkout().testCodPromocional || dCtxPago.getFTCkout().isEmpl) && 
 			 dCtxSh.appE!=AppEcom.votf) {
 			DataBag dataBag = dCtxPago.getDataPedido().getDataBag();	
-			if (dCtxPago.getFTCkout().isEmpl && ESPANA.equals(dCtxSh.pais)) {
+			if (dCtxPago.getFTCkout().isEmpl && ESPANA.isEquals(dCtxSh.pais)) {
 				testInputCodPromoEmplSpain(dataBag);
 			} else {
 				if (dCtxSh.vale!=null) {
@@ -388,7 +391,7 @@ public class CheckoutFlow {
 	
 	private List<Pago> getListPagosToTest(boolean isEmpl) {
 		List<Pago> listPagosToTest = new ArrayList<>();
-		ITestContext ctx = TestMaker.getTestCase().get().getTestRunContext();
+		ITestContext ctx = getTestCase().getTestRunContext();
 		List<Pago> listPagosPais = dCtxSh.pais.getListPagosForTest(dCtxSh.appE, isEmpl);
 		for (Pago pago : listPagosPais) {
 			if (pago.isNeededTestPasarelaDependingFilter(dCtxSh.channel, dCtxSh.appE, ctx)) {
@@ -396,6 +399,14 @@ public class CheckoutFlow {
 			}
 		}
 		return listPagosToTest;
+	}
+	
+	private TestCaseTM getTestCase() throws NotFoundException {
+		Optional<TestCaseTM> testCaseOpt = TestMaker.getTestCase();
+		if (testCaseOpt.isEmpty()) {
+		  throw new NotFoundException("Not found TestCase");
+		}
+		return testCaseOpt.get();
 	}
 
 	private void checkPasarelaPago() throws Exception {

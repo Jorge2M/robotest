@@ -12,7 +12,6 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.appshop.PaisIdioma;
 import com.mng.robotest.test.beans.*;
 import com.mng.robotest.test.data.DataCtxShop;
-import com.mng.robotest.test.factoryes.Utilidades;
 import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.suites.PaisIdiomaSuite.VersionPaisSuite;
@@ -56,7 +55,6 @@ public class LineasBannersFactory {
 			}
 		}
 		catch (Throwable e) {
-			e.printStackTrace();
 			throw e;
 		}		
 		

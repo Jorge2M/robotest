@@ -57,7 +57,6 @@ public class ListPagosEspana implements Serializable {
 			}
 		}
 		catch (Throwable e) {
-			e.printStackTrace();
 			throw e;
 		}
 	

@@ -109,7 +109,7 @@ public class InputParamsMango extends InputParamsTM {
 		Catalogs(CatalogsNameParam),
 		UrlManto(UrlMantoParam);
 		
-		public String nameParam;
+		public final String nameParam;
 		private ParamMango(String nameParam) {
 			this.nameParam = nameParam;
 		}
@@ -147,19 +147,19 @@ public class InputParamsMango extends InputParamsTM {
 	public String getMoreInfo() {
 		StringBuilder moreInfo = new StringBuilder();
 		List<String> listCountrys = getListaPaises();
-		if (listCountrys.size() > 0) {
+		if (!listCountrys.isEmpty()) {
 			moreInfo.append("List Countrys : " + "<br>");
 		}
 		List<String> listLineas = getListaLineas();
-		if (listLineas.size() > 0) {
+		if (!listLineas.isEmpty()) {
 			moreInfo.append("List Lines: " + "<br>");
 		}
 		List<String> listPayments = getListaPayments();
-		if (listPayments.size() > 0) {
+		if (!listPayments.isEmpty()) {
 			moreInfo.append("List Payments: " + listPayments);
 		}
 		List<String> listCatalogs = getListaCatalogs();
-		if (listCatalogs.size() > 0) {
+		if (!listCatalogs.isEmpty()) {
 			moreInfo.append("List Catalogs: " + listCatalogs);
 		}
 

@@ -95,7 +95,7 @@ public class ManagerBannersScreen {
 						return -1;
 					}
 					
-					if (locationBanner1.x != locationBanner1.x) {
+					if (locationBanner1.x != locationBanner2.x) {
 						if (locationBanner1.x > locationBanner2.x) {
 							return 1;
 						}
@@ -113,18 +113,16 @@ public class ManagerBannersScreen {
 		DataBanner dataBannerAnt = null;
 		for (DataBanner dataBanner : listDataBannersOrderedByPosition) {
 			dataBanner.setPosition(position++);
-			if (dataBanner.isOverlayedWith(dataBannerAnt)) {
-				dataBanner.isOverlayed=true;
-				dataBannerAnt.isOverlayed=true;
+			if (dataBannerAnt!=null) {
+				if (dataBanner.isOverlayedWith(dataBannerAnt)) {
+					dataBanner.isOverlayed=true;
+					dataBannerAnt.isOverlayed=true;
+				}
 			}
-			
 			dataBannerAnt = dataBanner;
 		}
 	}
 	
-	/**
-	 * Función que indica si hay banners o no en el contenido de la página
-	 */
 	public boolean existBanners() {
 		return (listDataBannersOrderedByPosition.size() > 0);
 	}

@@ -439,8 +439,8 @@ public class PageGaleriaStpV {
 	/**
 	 * @param srcImageExpected el src esperado para la imagen resultante de la secuencia de clicks en el slider. Si tiene valor "" no aplicamos validación
 	 */
-	static final String tagNombreArt = "@TagNombreArt";
-	static final String tagSliderList = "@TagSliderList";
+	private static final String tagNombreArt = "@TagNombreArt";
+	private static final String tagSliderList = "@TagSliderList";
 	@Step (
 		description=
 			"Clickar la siguiente secuencia de sliders: <b>" + tagSliderList + "</b> del #{numArtConColores}o " + 
@@ -675,7 +675,7 @@ public class PageGaleriaStpV {
    		validations.add(
 			"El número de artículos de la galería Nuevo (" + nodoAct.getArticlesNuevo().size() + ") es igual al del nodo " + 
 			nodoAnt.getIp() + " (" + nodoAnt.getArticlesNuevo().size() + ")",
-			nodoAct.getArticlesNuevo().size()==nodoAct.getArticlesNuevo().size(), State.Warn);
+			nodoAct.getArticlesNuevo().size()==nodoAnt.getArticlesNuevo().size(), State.Warn);
    		
    		DataArticleGalery articleGaleryActualNotFit = nodoAct.getArticleNuevoThatNotFitWith(nodoAnt);
    		String messageWarning = "";

@@ -28,9 +28,6 @@ public class PageHomeMarcasStpV {
 	public final AppEcom app;
 	public final WebDriver driver;
 	
-	public static BannerRebajas2019StpV bannerRebajas2019; 
-	public static BannerSpringIsHere2019StpV bannerSpringIsHere2019; 
-	
 	public enum TypeHome {Multimarca, PortadaLinea}
 
 	public PageHomeMarcasStpV(Channel channel, AppEcom app, WebDriver driver) {

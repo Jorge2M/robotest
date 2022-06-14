@@ -1,11 +1,7 @@
 package com.mng.robotest.test.getdata.garment.data;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-//import org.apache.xerces.dom.ElementNSImpl;
-import org.w3c.dom.NodeList;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -84,7 +80,7 @@ public class ColorGarment {
 			return Optional.empty();
 		}
 		return getSizes().stream()
-			.filter(s -> Integer.valueOf(s.getId())==id)
+			.filter(s -> Integer.valueOf(s.getId()).equals(id))
 			.findFirst();
 	}
 	

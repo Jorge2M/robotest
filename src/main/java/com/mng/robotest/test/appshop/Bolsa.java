@@ -24,15 +24,10 @@ import com.mng.robotest.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test.utils.PaisGetter;
 
-import net.lightbody.bmp.BrowserMobProxy;
-import net.lightbody.bmp.BrowserMobProxyServer;
-
 import com.github.jorge2m.testmaker.service.TestMaker;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Base64;
-
 import org.openqa.selenium.WebDriver;
+
 
 public class Bolsa {
 	
@@ -148,21 +143,5 @@ public class Bolsa {
 		dCtxSh.pais = PaisGetter.get(PaisShop.ESPANA);
 		dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
 		return dCtxSh;
-	}
-
-	public BrowserMobProxy forAllProxy()
-	{
-		BrowserMobProxy proxy = new BrowserMobProxyServer();
-	    try {
-	        String authHeader = "Basic " + Base64.getEncoder().encodeToString("webelement:click".getBytes("utf-8"));
-	        proxy.addHeader("checkauth", authHeader);
-	    }
-	    catch (UnsupportedEncodingException e)
-	    {
-	        System.err.println("the Authorization can not be passed");
-	        e.printStackTrace();
-	    }
-	    proxy.start(0);
-	    return proxy;
 	}
 }

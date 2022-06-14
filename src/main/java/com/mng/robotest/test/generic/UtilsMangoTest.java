@@ -3,12 +3,15 @@
 package com.mng.robotest.test.generic;
 
 import java.math.BigDecimal;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
 import org.openqa.selenium.By;
@@ -24,13 +27,14 @@ import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.DataMango;
+import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
-import com.mng.robotest.test.jdbc.dao.RebajasPaisDAO;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test.pageobject.shop.navigations.ArticuloNavigations;
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
@@ -56,7 +60,7 @@ public class UtilsMangoTest {
 		// Seleccionamos el logo de MANGO
 		boolean existeLogo = SecCabecera.getNew(channel, app, driver).clickLogoMango();
 		if (!existeLogo) {
-			ITestContext ctx = TestMaker.getTestCase().get().getTestRunParent().getTestNgContext();
+			ITestContext ctx = getTestCase().getTestRunParent().getTestNgContext();
 			String urlPaginaPostAcceso = (String)ctx.getAttribute(Constantes.attrUrlPagPostAcceso); 
 			if (urlPaginaPostAcceso!=null) {
 				driver.get(urlPaginaPostAcceso);
@@ -68,6 +72,14 @@ public class UtilsMangoTest {
 			}
 		}
 	}	
+	
+	private static TestCaseTM getTestCase() throws NotFoundException {
+		Optional<TestCaseTM> testCaseOpt = TestMaker.getTestCase();
+		if (testCaseOpt.isEmpty()) {
+		  throw new NotFoundException("Not found TestCase");
+		}
+		return testCaseOpt.get();
+	}
 
 	public static ArticuloScreen addArticuloBolsa(GarmentCatalog selArticulo, AppEcom app, Channel channel, WebDriver driver) {
 		ArticuloScreen articulo = ArticuloNavigations.selectArticuloTallaColorByRef(selArticulo, app, channel, driver);
@@ -171,23 +183,9 @@ public class UtilsMangoTest {
 		return resultado;
 	}
 
-	/**
-	 * Returns a pseudo-random number between min and max, inclusive. The difference between min and max can be at most <code>Integer.MAX_VALUE - 1</code>.
-	 * @param min Minimum value
-	 * @param max Maximum value. Must be greater than min.
-	 * @return Integer between min and max, inclusive.
-	 * @see java.util.Random#nextInt(int)
-	 */
-	public static int randInt(final int min, final int max) {
-		// NOTE: Usually this should be a field rather than a method
-		// variable so that it is not re-seeded every call.
-		Random rand = new Random();
-
-		// nextInt is normally exclusive of the top value,
-		// so add 1 to make it inclusive
-		int randomNum = rand.nextInt(max - min + 1) + min;
-
-		return randomNum;
+	public static int randInt(final int min, final int max) throws NoSuchAlgorithmException{
+		Random rand = SecureRandom.getInstanceStrong();
+		return rand.nextInt(max - min + 1) + min;
 	}
 	
 	/**

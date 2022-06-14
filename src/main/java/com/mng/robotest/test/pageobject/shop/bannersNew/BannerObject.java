@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.test.generic.UtilsMangoTest;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
@@ -68,8 +69,9 @@ public abstract class BannerObject {
 		try {
 			Thread.sleep(milliSeconds);
 		}
-		catch (Exception e) {
-			//
+		catch (InterruptedException e) {
+			Log4jTM.getGlobal().warn("Interrupted!", e);
+		    Thread.currentThread().interrupt();
 		}
 	}
 	

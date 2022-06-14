@@ -3,6 +3,8 @@ package com.mng.robotest.test.stpv.navigations.manto;
 import static com.mng.robotest.test.pageobject.manto.pedido.PageGenerarPedido.EstadoPedido.*;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.access.InputParamsMango;
@@ -11,6 +13,7 @@ import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
+import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.pageobject.manto.pedido.PageDetallePedido;
 import com.mng.robotest.test.pageobject.manto.pedido.PagePedidos.TypeDetalle;
 import com.mng.robotest.test.stpv.manto.DataMantoAccess;
@@ -34,8 +37,7 @@ public class PedidoNavigations {
 	public static void testPedidosEnManto(DataCheckPedidos dataCheckPedidos, AppEcom appE, WebDriver driver) throws Exception {
 		//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
 		if (appE!=AppEcom.votf) {  
-			TestCaseTM testCase = TestMaker.getTestCase().get();
-			TestRunTM testRun = testCase.getTestRunParent();
+			TestRunTM testRun = getTestCase().getTestRunParent();
 			DataMantoAccess dMantoAcc = new DataMantoAccess();
 			dMantoAcc.urlManto = testRun.getParameter(Constantes.paramUrlmanto);
 			dMantoAcc.userManto = testRun.getParameter(Constantes.paramUsrmanto);
@@ -43,6 +45,14 @@ public class PedidoNavigations {
 			dMantoAcc.appE = appE;
 			testPedidosEnManto(dMantoAcc, dataCheckPedidos, driver);
 		}
+	}
+	
+	private static TestCaseTM getTestCase() throws NotFoundException {
+		Optional<TestCaseTM> testCaseOpt = TestMaker.getTestCase();
+		if (testCaseOpt.isEmpty()) {
+		  throw new NotFoundException("Not found TestCase");
+		}
+		return testCaseOpt.get();
 	}
 	
 	private static void testPedidosEnManto(DataMantoAccess dMantoAcc, DataCheckPedidos dataCheckPedidos, WebDriver driver) 

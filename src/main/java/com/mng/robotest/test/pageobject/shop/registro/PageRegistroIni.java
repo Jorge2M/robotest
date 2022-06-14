@@ -95,9 +95,8 @@ public class PageRegistroIni extends PageObjTM {
 		case codpostal:
 			return (new InputDataXPath(XPathInputCodPostal, XPathDivErrorCodPostal, msgCodPostalInvalid));
 		case codpais:
-			return (new InputDataXPath("", "", ""));
 		default:
-			return null;
+			return (new InputDataXPath("", "", ""));
 		}
 	}
 	

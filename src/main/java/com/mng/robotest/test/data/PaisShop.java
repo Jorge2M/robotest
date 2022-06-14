@@ -157,7 +157,7 @@ public enum PaisShop {
 		return this.codigoPais;
 	}
 	
-	public boolean equals(Pais pais) {
+	public boolean isEquals(Pais pais) {
 		return this==getPais(pais.getCodigo_pais());
 	}
 	

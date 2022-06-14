@@ -3,6 +3,8 @@ package com.mng.robotest.test.appmanto;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
@@ -54,10 +56,11 @@ public class Manto {
 	}
 	
 	private TestCaseTM getTestCase() throws NotFoundException {
-		if (TestMaker.getTestCase().isEmpty()) {
+		Optional<TestCaseTM> testCaseOpt = TestMaker.getTestCase();
+		if (testCaseOpt.isEmpty()) {
 		  throw new NotFoundException("Not found TestCase");
 		}
-		return TestMaker.getTestCase().get();
+		return testCaseOpt.get();
 	}
 	
 	@Test(

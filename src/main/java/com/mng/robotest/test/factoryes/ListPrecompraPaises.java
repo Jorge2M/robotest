@@ -47,7 +47,6 @@ public class ListPrecompraPaises {
 			}
 		}
 		catch (Throwable e) {
-			e.printStackTrace();
 			throw e;
 		}
 

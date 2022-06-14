@@ -4,11 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.DataCtxShop;
-import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
@@ -49,7 +50,7 @@ public class PageIdentificacion {
 			driver.findElement(byInput).clear();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			Log4jTM.getLogger().error(e);
 		}
 		waitMillis(250);
 		driver.findElement(byInput).sendKeys(usuario);
@@ -87,36 +88,10 @@ public class PageIdentificacion {
 		ModalLoyaltyAfterLogin.closeModalIfVisible(driver);
 	}	
 	
-//	/**
-//	 * Permite superar el control de Akamai a nivel de las peticiones /login.faces?
-//	 */
-//	private static void clickButtonEntrar_BypassAkamai(AppEcom app, WebDriver driver) {
-//		if (UtilsMangoTest.isEntornoPRO(app, driver)) {
-//			clickButtonEntrarSync(driver);
-//		} else {
-//			clickButtonEntrar(driver);
-//		}
-//	}
-//	
-//	private static synchronized void clickButtonEntrarSync(WebDriver driver) {
-//		click(By.xpath(XPathSubmitButton), driver).waitLoadPage(10).exec(); 
-//		if (isButtonEntrarVisible(driver)) {
-//			click(By.xpath(XPathSubmitButton), driver).type(javascript).waitLoadPage(10).exec();
-//		}
-//	}
 	private static void clickButtonEntrar(WebDriver driver) {
 		click(By.xpath(XPathSubmitButton), driver).waitLoadPage(10).exec(); 
 		if (isButtonEntrarVisible(driver)) {
 			click(By.xpath(XPathSubmitButton), driver).type(javascript).waitLoadPage(10).exec();
-		}
-	}
-   
-	private static void normalizeLoginForDefeatAkamai(Channel channel, AppEcom app, WebDriver driver) {
-		if (channel==Channel.desktop && UtilsMangoTest.isEntornoPRO(app, driver)) {
-			String actualUrl = driver.getCurrentUrl();
-			if (actualUrl.contains("login.faces?")) {
-				driver.get(actualUrl.replace("login.faces?", "mobile/login.faces?"));
-			}
 		}
 	}
 	

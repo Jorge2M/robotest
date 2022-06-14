@@ -1,6 +1,7 @@
 package com.mng.robotest.test.appshop;
 
 import org.testng.annotations.*;
+import java.util.Optional;
 
 import com.github.jorge2m.testmaker.domain.InputParamsTM.TypeAccess;
 import com.github.jorge2m.testmaker.service.TestMaker;
@@ -37,6 +38,7 @@ import com.mng.robotest.test.stpv.shop.micuenta.PageMiCuentaStpV;
 import com.mng.robotest.test.utils.PaisGetter;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
+import com.mng.robotest.test.exceptions.NotFoundException;
 
 import static com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow.BuilderCheckout;
 
@@ -105,7 +107,7 @@ public class Compra {
 	}
 	
 	private DataCtxPago executeCheckoutForCOM001(DataCtxPago dCtxPago, DataCtxShop dCtxSh, WebDriver driver) 
-	throws Exception {
+			throws Exception {
 		
 		if (dCtxSh.appE == AppEcom.outlet) {
 			return new BuilderCheckout(dCtxSh, dCtxPago, driver)
@@ -119,16 +121,22 @@ public class Compra {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date dateLimit = sdf.parse("2022-07-01");
 			Date dateToday = new Date();
+			Optional<List<GarmentCatalog>> articlesHomeOpt = getArticlesHome(dCtxSh, driver);
+			if (articlesHomeOpt.isEmpty()) {
+				throw new NotFoundException("Home Garment Not Found");
+			}
 			if (dateToday.before(dateLimit)) {
 				return new BuilderCheckout(dCtxSh, dCtxPago, driver)
 						.pago(espana.getPago("VISA"))
-						.listArticles(getArticlesHome(dCtxSh, driver).subList(0, 2))
+						.listArticles(articlesHomeOpt.get().subList(0, 2))
 						.build()
 						.checkout(From.Prehome);
 			} else {
-				List<GarmentCatalog> listArticlesHome = getArticlesHome(dCtxSh, driver);
-				List<GarmentCatalog> listArticlesIntimissimi = getArticlesIntimissimi(dCtxSh, driver);
-				List<GarmentCatalog> listArticles = Arrays.asList(listArticlesHome.get(0), listArticlesIntimissimi.get(0));
+				Optional<List<GarmentCatalog>> articlesIntimissimiOpt = getArticlesIntimissimi(dCtxSh, driver);
+				if (articlesIntimissimiOpt.isEmpty()) {
+					throw new NotFoundException("Home Garment Not Found");
+				}
+				List<GarmentCatalog> listArticles = Arrays.asList(articlesHomeOpt.get().get(0), articlesIntimissimiOpt.get().get(0));
 				return new BuilderCheckout(dCtxSh, dCtxPago, driver)
 						.pago(espana.getPago("VISA"))
 						.listArticles(listArticles)
@@ -138,9 +146,10 @@ public class Compra {
 		}
 	}
 	
-	private List<GarmentCatalog> getArticlesHome(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+	private Optional<List<GarmentCatalog>> getArticlesHome(
+			DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		if (dCtxSh.appE==AppEcom.outlet) {
-			return null;
+			return Optional.empty();
 		}
 		
 		GetterProducts getterProducts = new GetterProducts.Builder(espana.getCodigo_alf(), dCtxSh.appE, driver)
@@ -151,12 +160,13 @@ public class Compra {
 					Menu.Alfombras))
 			.build();
 		
-		return getterProducts.getFiltered(FilterType.Stock);
+		return Optional.of(getterProducts.getFiltered(FilterType.Stock));
 	}
 	
-	private List<GarmentCatalog> getArticlesIntimissimi(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+	private Optional<List<GarmentCatalog>> getArticlesIntimissimi(DataCtxShop dCtxSh, WebDriver driver) 
+			throws Exception {
 		if (dCtxSh.appE==AppEcom.outlet) {
-			return null;
+			return Optional.empty();
 		}
 		
 		GetterProducts getterProducts = new GetterProducts.Builder(espana.getCodigo_alf(), dCtxSh.appE, driver)
@@ -167,7 +177,7 @@ public class Compra {
 					Menu.Lenceria))
 			.build();
 		
-		return getterProducts.getFiltered(FilterType.Stock);
+		return Optional.of(getterProducts.getFiltered(FilterType.Stock));
 	}
 
 	private enum TypeCheque {Old, New}

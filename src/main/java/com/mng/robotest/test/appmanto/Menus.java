@@ -1,6 +1,7 @@
 package com.mng.robotest.test.appmanto;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
@@ -53,10 +54,11 @@ public class Menus implements Serializable {
 	}
 	
 	private TestCaseTM getTestCase() throws NotFoundException {
-		if (TestMaker.getTestCase().isEmpty()) {
+		Optional<TestCaseTM> testCaseOpt = TestMaker.getTestCase();
+		if (testCaseOpt.isEmpty()) {
 		  throw new NotFoundException("Not found TestCase");
 		}
-		return TestMaker.getTestCase().get();
+		return testCaseOpt.get();
 	}
 
 	@Test(

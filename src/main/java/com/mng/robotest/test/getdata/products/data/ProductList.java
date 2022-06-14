@@ -33,7 +33,7 @@ public class ProductList {
 		this.groups = groups;
 	}
 	public void addGroups(List<Group> groups) {
-		if (groups==null) {
+		if (groups!=null) {
 			this.groups = groups;
 		}
 		this.groups.addAll(groups);

@@ -7,8 +7,12 @@ import org.openqa.selenium.WebElement;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import java.util.Optional;
+
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
+import com.mng.robotest.test.exceptions.NotFoundException;
 
 public class BannerCabeceraObject extends BannerObject {
 
@@ -20,7 +24,15 @@ public class BannerCabeceraObject extends BannerObject {
 	
 	public BannerCabeceraObject(BannerType bannerType) {
 		super(bannerType, XPathBanner);
-		this.driver = TestMaker.getTestCase().get().getDriver();
+		this.driver = getTestCase().getDriver();
+	}
+	
+	private TestCaseTM getTestCase() throws NotFoundException {
+		Optional<TestCaseTM> testCaseOpt = TestMaker.getTestCase();
+		if (testCaseOpt.isEmpty()) {
+		  throw new NotFoundException("Not found TestCase");
+		}
+		return testCaseOpt.get();
 	}
 	
 	@Override

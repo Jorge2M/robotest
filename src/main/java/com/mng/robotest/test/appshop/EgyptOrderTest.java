@@ -1,5 +1,6 @@
 package com.mng.robotest.test.appshop;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 import org.openqa.selenium.WebDriver;
@@ -23,8 +24,9 @@ import com.mng.robotest.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test.utils.PaisGetter;
 import com.mng.robotest.test.utils.UtilsTestMango;
 
-public class EgyptOrderTest {
+public class EgyptOrderTest implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private final EgyptCity egyptCity;
 	private String index_fact;
 	

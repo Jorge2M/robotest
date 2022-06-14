@@ -37,7 +37,6 @@ public class ListRegistrosXPais {
 			}
 		}
 		catch (Throwable e) {
-			e.printStackTrace();
 			throw e;
 		}
 	

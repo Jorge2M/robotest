@@ -1,12 +1,15 @@
 package com.mng.robotest.test.appshop;
 
 import java.net.URI;
+import java.util.Optional;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.DataCtxShop;
+import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.stpv.otras.BrowserStpV;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
@@ -29,7 +32,7 @@ public class SEO {
 		groups = { "Otras", "Canal:desktop_App:shop,outlet"}, 
 		description="Comprobar existencia y contenido del fichero robots.txt")
 	public void SEO001_check_RobotsSitemap() throws Exception {
-		TestCaseTM testCase = TestCaseTM.getTestCaseInExecution().get();
+		TestCaseTM testCase = getTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
 		WebDriver driver = testCase.getDriver();
 		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
@@ -45,5 +48,13 @@ public class SEO {
 		URI uriBase = new URI(urlBase);
 		String urlSitemap = urlBase.replace(uriBase.getPath(), "") + "/" + "sitemap.xml";
 		BrowserStpV.inputSitemapURLandValidate(urlSitemap, driver);
+	}
+	
+	private TestCaseTM getTestCase() throws NotFoundException {
+		Optional<TestCaseTM> testCaseOpt = TestMaker.getTestCase();
+		if (testCaseOpt.isEmpty()) {
+		  throw new NotFoundException("Not found TestCase");
+		}
+		return testCaseOpt.get();
 	}
 }

@@ -1,6 +1,7 @@
 package com.mng.robotest.test.getdata.products.data;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.mng.robotest.test.generic.beans.ValePais;
 
@@ -27,9 +28,12 @@ public class GarmentCatalog {
 	public Article getArticleDefaultColorAndMoreStock() {
 		Article articulo = new Article();
 		articulo.setGarmentId(garmentId);
-		Color colorDefault = getDefaultColor();
-		articulo.setColor(colorDefault);
-		articulo.setSize(colorDefault.getSizeWithMoreStock());
+		Optional<Color> colorDefaultOpt = getDefaultColor();
+		if (colorDefaultOpt.isEmpty()) {
+			return null;
+		}
+		articulo.setColor(colorDefaultOpt.get());
+		articulo.setSize(colorDefaultOpt.get().getSizeWithMoreStock());
 		return articulo;
 	}
 	
@@ -44,16 +48,16 @@ public class GarmentCatalog {
 		return articulo;
 	}
 	
-	private Color getDefaultColor() {
+	private Optional<Color> getDefaultColor() {
 		if (colors==null) {
-			return null;
+			return Optional.empty();
 		}
 		for (Color color : colors) {
 			if (color.isDefaultColor()) {
-				return color;
+				return Optional.of(color);
 			}
 		}
-		return colors.get(0);
+		return Optional.of(colors.get(0));
 	}
 	
 	private Color getColorWithMoreStock() {

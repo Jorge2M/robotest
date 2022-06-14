@@ -115,7 +115,7 @@ public class ArticuloScreen {
 	public float getPrecioDescontado() {
 		float precioDescontado = ImporteScreen.getFloatFromImporteMangoScreen(this.precio);
 		if (this.valePais!=null) {
-			precioDescontado = precioDescontado - (precioDescontado * (this.valePais.getPorcDescuento()/100));
+			precioDescontado = precioDescontado - (precioDescontado * (this.valePais.getPorcDescuento()/100f));
 		}
 		return precioDescontado;
 	}

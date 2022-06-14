@@ -12,7 +12,6 @@ import com.mng.robotest.test.suites.MenusPaisSuite;
 import com.mng.robotest.test.suites.NodosSuite;
 import com.mng.robotest.test.suites.PagosPaisesSuite;
 import com.mng.robotest.test.suites.PaisIdiomaSuite;
-import com.mng.robotest.test.suites.RebajasSuite;
 import com.mng.robotest.test.suites.RegistrosSuite;
 import com.mng.robotest.test.suites.SmokeMantoSuite;
 import com.mng.robotest.test.suites.SmokeTestSuite;
@@ -23,9 +22,6 @@ import com.github.jorge2m.testmaker.domain.SuiteMaker;
 
 
 public class CreatorSuiteRunMango extends CreatorSuiteRun {
-	
-//	private final String ChromeDriverVersionDefault = "90.0.4430.24";
-//	private final String GeckoDriverVersionDefault = "0.28.0";
 	
 	private CreatorSuiteRunMango() throws Exception {
 		super();
@@ -71,8 +67,6 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 				return (new GenericFactorySuite(inputParamsMango));
 			case RegistrosPaises:
 				return (new RegistrosSuite(inputParamsMango));
-			case RebajasPaises:
-				return (new RebajasSuite(inputParamsMango));
 			case CompraLuque:
 				return (new CompraLuqueSuite(inputParamsMango));
 			case EgyptOrders:
@@ -81,7 +75,6 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 			}
 		}
 		catch (IllegalArgumentException e) {
-			e.printStackTrace();
 			System.out.println("Suite Name not valid. Posible values: " + Arrays.asList(Suites.values()));
 		}
 

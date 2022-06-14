@@ -45,7 +45,6 @@ public class ListMenusManto {
 			}
 		}
 		catch (Exception e) {
-			e.printStackTrace();
 			throw e;
 		}
 	

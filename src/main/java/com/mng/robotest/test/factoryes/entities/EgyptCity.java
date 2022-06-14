@@ -1,7 +1,10 @@
 package com.mng.robotest.test.factoryes.entities;
 
-public class EgyptCity {
+import java.io.Serializable;
 
+public class EgyptCity implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private String state;
 	private String city;
 	

@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 
@@ -15,12 +17,14 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test.data.DataCtxShop;
+import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.generic.stackTrace;
 import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
@@ -343,7 +347,8 @@ public class SecMenusDesktopStpV {
 		clave+=urlBase;	
 		
 		//Si están registrados en el contexto el número de pestañas y menús...
-		ITestContext ctx = TestMaker.getTestCase().get().getTestRunParent().getTestNgContext();
+		TestCaseTM testCase = getTestCase();
+		ITestContext ctx = testCase.getTestRunParent().getTestNgContext();
 		if (ctx.getAttribute("numPestanyas" + clave) != null && 
 			ctx.getAttribute("numMenus" + clave) != null) {
 			
@@ -541,7 +546,8 @@ public class SecMenusDesktopStpV {
 	@Validation
 	public ChecksTM checkErrorPageWithoutException() throws Exception {
 		ChecksTM validations = ChecksTM.getNew();
-		ITestContext ctx = TestMaker.getTestCase().get().getTestRunParent().getTestNgContext();
+		TestCaseTM testCase = getTestCase();
+		ITestContext ctx = testCase.getTestRunParent().getTestNgContext();
 		stackTrace exception = WebDriverMngUtils.stackTaceException(driver, ctx);
 		String excepcionDuplicada = "";
 		if (exception.getRepetida()) {
@@ -552,6 +558,14 @@ public class SecMenusDesktopStpV {
 			"El errorPage.faces no devuelve una excepción" + excepcionDuplicada,
 			!exception.getExiste(), State.Warn);
 	 	return validations;
+	}
+	
+	private TestCaseTM getTestCase() throws NotFoundException {
+		Optional<TestCaseTM> testCaseOpt = TestMaker.getTestCase();
+		if (testCaseOpt.isEmpty()) {
+		  throw new NotFoundException("Not found TestCase");
+		}
+		return testCaseOpt.get();
 	}
 	
 	//Temporal para prueba fin rebajas en China

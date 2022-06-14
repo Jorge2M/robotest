@@ -1,5 +1,6 @@
 package com.mng.robotest.test.stpv.navigations.manto;
 
+import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +16,7 @@ import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.datastored.DataPedido;
+import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.pageobject.manto.pedido.PageDetallePedido;
 import com.mng.robotest.test.pageobject.manto.pedido.PagePedidos.TypeDetalle;
 import com.mng.robotest.test.stpv.manto.DataMantoAccess;
@@ -33,7 +35,7 @@ public class PedidosNavigations {
 	throws Exception {
 		//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
 		if (appE!=AppEcom.votf) {  
-			TestCaseTM testCase = TestMaker.getTestCase().get();
+			TestCaseTM testCase = getTestCase();
 			TestRunTM testRun = testCase.getTestRunParent();
 			DataMantoAccess dMantoAcc = new DataMantoAccess();
 			dMantoAcc.urlManto = testRun.getParameter(Constantes.paramUrlmanto);
@@ -42,6 +44,14 @@ public class PedidosNavigations {
 			dMantoAcc.appE = appE;
 			testPedidosEnManto(dMantoAcc, listPedidos, driver);
 		}
+	}
+	
+	private static TestCaseTM getTestCase() throws NotFoundException {
+		Optional<TestCaseTM> testCaseOpt = TestMaker.getTestCase();
+		if (testCaseOpt.isEmpty()) {
+		  throw new NotFoundException("Not found TestCase");
+		}
+		return testCaseOpt.get();
 	}
 	
 	private static void testPedidosEnManto(DataMantoAccess dMantoAcc, CopyOnWriteArrayList<DataPedido> listPedidos, WebDriver driver) 

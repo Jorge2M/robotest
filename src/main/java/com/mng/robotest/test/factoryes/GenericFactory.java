@@ -33,7 +33,6 @@ public class GenericFactory {
 			}
 		}
 		catch (Throwable e) {
-			e.printStackTrace();
 			throw e;
 		}
 	
