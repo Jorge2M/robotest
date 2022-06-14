@@ -39,9 +39,9 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 @SuppressWarnings({"static-access"})
 public class AccesoStpV {
 
-	final static String tagNombrePais = "@TagNombrePais";
-	final static String tagLiteralIdioma = "@TagLiteralIdioma";
-	final static String tagRegistro = "@TagRegistro";
+	static final String tagNombrePais = "@TagNombrePais";
+	static final String tagLiteralIdioma = "@TagLiteralIdioma";
+	static final String tagRegistro = "@TagRegistro";
 	
 	public static void defaultAccess(WebDriver driver) throws Exception {
 		DataCtxShop dCtxSh = Robotest.getDefaultDataShop();
@@ -198,11 +198,11 @@ public class AccesoStpV {
 	}
 
 
-	final static String tagNombrePaisOrigen = "@TagPaisOrigen";
-	final static String tagCodigoPaisOrigen = "@TagCodigoPaisOrigen";
-	final static String tagNombreIdiomaOrigen = "@TagIdiomaOrigen";
-	final static String tagNodoOrigen = "@TagNodoOrigen";
-	final static String tagNodoDestino = "@TagNodoDestino";
+	static final String tagNombrePaisOrigen = "@TagPaisOrigen";
+	static final String tagCodigoPaisOrigen = "@TagCodigoPaisOrigen";
+	static final String tagNombreIdiomaOrigen = "@TagIdiomaOrigen";
+	static final String tagNodoOrigen = "@TagNodoOrigen";
+	static final String tagNodoDestino = "@TagNodoDestino";
 	@Step (
 		description=
 			"Datos del cambio de país <br>" + 
@@ -241,8 +241,8 @@ public class AccesoStpV {
 	 * @param listPaisAsocIP lista de posibles países asociados a la IP del usuario (actualmente España, Irlanda o USA)
 	 * @return el país asociado a la IP (al que te proponen cambiar en el modal)
 	 */
-	final static String tagUrlAccesoPaisNoIp = "@TagUrlAccesoPaisNoIp";
-	final static String tagLiteralIdiomaOrigen = "@TagLiteralIdiomaOrigen";
+	static final String tagUrlAccesoPaisNoIp = "@TagUrlAccesoPaisNoIp";
+	static final String tagLiteralIdiomaOrigen = "@TagLiteralIdiomaOrigen";
 	@Step (
 		description="Acceder a la shop vía la URL <b>" + tagUrlAccesoPaisNoIp + "</b> (#{paisAccesoNoIP.getNombre_pais()} / " + tagLiteralIdiomaOrigen + ")", 
 		expected="Aparece un modal solicitando confirmación del país")
@@ -333,8 +333,8 @@ public class AccesoStpV {
 		return validations;
 	}
 	
-	final static String tagPaisBotonCambio = "@TagPaisBotonCambio";
-	final static String tagHrefBotonCambio = "@TagHrefBotonCambio";
+	static final String tagPaisBotonCambio = "@TagPaisBotonCambio";
+	static final String tagHrefBotonCambio = "@TagHrefBotonCambio";
 	@Step (
 		description="Confirmamos la propuesta de país del modal <b>" + tagPaisBotonCambio + "</b>", 
 		expected="Se redirige a la URL " + tagHrefBotonCambio)

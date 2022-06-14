@@ -17,17 +17,17 @@ public class PaisGetterTest {
 	@Test
 	public void testGetPais() throws Exception {
 		//When
-		Pais pais = PaisGetter.get(PaisShop.Espana);
+		Pais pais = PaisGetter.get(PaisShop.ESPANA);
 		
 		//Then
-		assertTrue(pais.getCodigo_pais().compareTo(PaisShop.Espana.getCodigoPais())==0);
+		assertTrue(pais.getCodigo_pais().compareTo(PaisShop.ESPANA.getCodigoPais())==0);
 	}
 
 	@Test
 	public void testException_WhenGetPaisThatNotExists() throws Exception {
 		//Then <- When
 		assertThrows(NoSuchElementException.class, () -> {
-			PaisGetter.get(PaisShop.FakeCountry);
+			PaisGetter.get(PaisShop.FAKE_COUNTRY);
 		});
 	}
 	

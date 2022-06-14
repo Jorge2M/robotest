@@ -25,13 +25,13 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
  */
 public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	
-	final static String TagOrdenacion = "@TagOrden";
-	final static String TagColor = "@TagColor";
-	final static String XPathWrapper = "//div[@id='stickyMenu']";
-	final static String XPathLinkOrdenWithTag = "//a[text()[contains(.,'" + TagOrdenacion + "')]]";
-	final static String XPathLinkColorWithTagOutlet = "//a[@aria-label[contains(.,'" + TagColor + "')]]";
-	final static String XPathLinkColorWithTagShop = "//label[(@for[contains(.,'filtercolor')] or @for[contains(.,'multiSelectGroupsColors')]) and text()[contains(.,'" + TagColor + "')]]";
-	final static String XPathLinkColorWithTagTabletOutlet	 = "//label[@for[contains(.,'color_" + TagColor + "')]]";
+	static final String TagOrdenacion = "@TagOrden";
+	static final String TagColor = "@TagColor";
+	static final String XPathWrapper = "//div[@id='stickyMenu']";
+	static final String XPathLinkOrdenWithTag = "//a[text()[contains(.,'" + TagOrdenacion + "')]]";
+	static final String XPathLinkColorWithTagOutlet = "//a[@aria-label[contains(.,'" + TagColor + "')]]";
+	static final String XPathLinkColorWithTagShop = "//label[(@for[contains(.,'filtercolor')] or @for[contains(.,'multiSelectGroupsColors')]) and text()[contains(.,'" + TagColor + "')]]";
+	static final String XPathLinkColorWithTagTabletOutlet	 = "//label[@for[contains(.,'color_" + TagColor + "')]]";
 	
 	final PageGaleria pageGaleria;
 	final Channel channel;

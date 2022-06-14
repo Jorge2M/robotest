@@ -19,9 +19,9 @@ import com.mng.robotest.test.data.PaisShop;
 
 public class PaisGetter {
 	
-	private final static String NameFileCountiesXml = "ListCountries.xml";
-	private final static List<Pais> listAllCountries = getListAllCountries();
-	private final static List<String> charactersAllCountries = Arrays.asList("*", "X", "");
+	private static final String NameFileCountiesXml = "ListCountries.xml";
+	private static final List<Pais> listAllCountries = getListAllCountries();
+	private static final List<String> charactersAllCountries = Arrays.asList("*", "X", "");
 
 	public static Pais get(PaisShop paisShop) throws NoSuchElementException {
 		return (get(paisShop.getCodigoPais()));

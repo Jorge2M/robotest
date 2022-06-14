@@ -31,18 +31,18 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	// están listos, cuando suban a PRE se podrán cambiar:
 	// -> JUhkW -> data-testid = 'section'
 	// -> o3ud7 -> data-testid = 'sub-familys'
-	private final static String XPathWrapperGlobal = "//div[@id='headerPortalContainer']";
+	private static final String XPathWrapperGlobal = "//div[@id='headerPortalContainer']";
 	
-	private final static String XPathCapaMenusFamily = "//ul[@data-testid[contains(.,'section.family')]]";
-	private final static String XPathCapaMenusSubfamily = "//ul[@data-testid[contains(.,'section.subfamily')]]";
-	private final static String XPathCapaMenus = "//ul[@data-testid[contains(.,'section.subfamily')] or @data-testid[contains(.,'section.family')]]";
-	private final static String XPathContainerGroups = XPathWrapperGlobal + XPathCapaMenus + "/li[not(@id[contains(.,'sections')])]/..";
+	private static final String XPathCapaMenusFamily = "//ul[@data-testid[contains(.,'section.family')]]";
+	private static final String XPathCapaMenusSubfamily = "//ul[@data-testid[contains(.,'section.subfamily')]]";
+	private static final String XPathCapaMenus = "//ul[@data-testid[contains(.,'section.subfamily')] or @data-testid[contains(.,'section.family')]]";
+	private static final String XPathContainerGroups = XPathWrapperGlobal + XPathCapaMenus + "/li[not(@id[contains(.,'sections')])]/..";
 	
-	private final static String XPathGroupSectionLinea = XPathContainerGroups + "/li[@data-testid[contains(.,'section.menu')]]/span/..";
-	private final static String XPathGroupSectionSublinea = XPathContainerGroups + "/../ul[2]/li[@data-testid[contains(.,'section.menu')]]/span/..";
-	private final static String XPathGroupLink = XPathContainerGroups + "/li[@data-testid[contains(.,'section.link')]]";
-	private final static String XPathMenuLink = XPathCapaMenus + "/li[@data-testid[contains(.,'link')]]";
-	private final static String XPathRightImage = XPathWrapperGlobal + "//a/img/..";
+	private static final String XPathGroupSectionLinea = XPathContainerGroups + "/li[@data-testid[contains(.,'section.menu')]]/span/..";
+	private static final String XPathGroupSectionSublinea = XPathContainerGroups + "/../ul[2]/li[@data-testid[contains(.,'section.menu')]]/span/..";
+	private static final String XPathGroupLink = XPathContainerGroups + "/li[@data-testid[contains(.,'section.link')]]";
+	private static final String XPathMenuLink = XPathCapaMenus + "/li[@data-testid[contains(.,'link')]]";
+	private static final String XPathRightImage = XPathWrapperGlobal + "//a/img/..";
 
 	
 	public SecBloquesMenuDesktopNew(AppEcom app, WebDriver driver) {

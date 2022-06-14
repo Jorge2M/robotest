@@ -11,8 +11,8 @@ public class SecColoresArticuloDesktop {
 				"@class[contains(.,'product-colors')] or " + 
 				"@class[contains(.,'_1nxc_')]" + //TODO (Outlet) A la espera que Sergio Campillo haga el cambio
 			"]";
-	final static String TagIdColor = "@TagIdColor";
-	final static String XPathImgCodColorWithTagColor = "//img[@class[contains(.,'other-color')] and @data-id='" + TagIdColor + "']";
+	static final String TagIdColor = "@TagIdColor";
+	static final String XPathImgCodColorWithTagColor = "//img[@class[contains(.,'other-color')] and @data-id='" + TagIdColor + "']";
 	
 	SecColoresArticuloDesktop(AppEcom app) {
 		this.app = app;

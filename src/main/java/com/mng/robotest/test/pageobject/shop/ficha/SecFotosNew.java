@@ -17,8 +17,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecFotosNew {
 
-	private final static String XPathCapa = "//div[@class[contains(.,'product-images')]]";
-	private final static String XPathLineFoto = XPathCapa + "//*[@class[contains(.,'columns')]]";
+	private static final String XPathCapa = "//div[@class[contains(.,'product-images')]]";
+	private static final String XPathLineFoto = XPathCapa + "//*[@class[contains(.,'columns')]]";
 	
 	private static String getXPathLineFotos(int line) {
 		return (XPathLineFoto + "[" + line + "]");

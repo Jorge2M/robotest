@@ -14,7 +14,7 @@ import com.mng.robotest.test.stpv.shop.checkout.mercadopago.PageMercpagoLoginStp
 
 public class PagoMercadopago extends PagoStpV {
 
-	private final static String codigoSeguridad = "123";
+	private static final String codigoSeguridad = "123";
 	
 	public PagoMercadopago(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
 		super(dCtxSh, dCtxPago, driver);

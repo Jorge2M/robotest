@@ -27,7 +27,7 @@ import com.mng.robotest.test.generic.UtilsMangoTest;
  */
 public class BrowserStpV {
 
-	final static String tagUrlRobots = "@TagUrlRobots";
+	static final String tagUrlRobots = "@TagUrlRobots";
 	@Step (
 		description="Ejecutamos la URL del robots: " + tagUrlRobots, 
 		expected="Se carga el contenido correcto")

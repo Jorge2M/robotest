@@ -135,7 +135,7 @@ public class SecBolsaStpV {
 		dataBag.setImporteTransp(secBolsa.getPrecioTransporte());
 	}
 
-	final static String tagListaArt = "@TagListaArt";
+	static final String tagListaArt = "@TagListaArt";
 	@Step (
 		description="Utilizar el buscador para acceder a la ficha y dar de alta los siguientes productos en la bolsa:<br>" + tagListaArt, 
 		expected="Los productos se dan de alta en la bolsa correctamente",

@@ -10,16 +10,16 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageGestorEstadisticasPedido {
 
 	public static String titulo = "ESTADISTICAS PEDIDOS";
-	private final static String iniXPathTitulo = "//td[@class='txt11B' and text()[contains(.,'";
-	private final static String XPathStartDate = "//input[@class='dateTimePicker']";
-	private final static String XPathEndDate = "//input[@class='dateTimePickerFin']";
-	private final static String XPathSelectOption = "//td[text()[contains(.,'Que informacion deseas?')]]/select";
-	private final static String XPathTodosLosZalandosOption = "//option[@value='allzalando']";
-	private final static String XPathMostrarPedidosButton = "//input[@id='form:consultar']";
-	private final static String XPathLoadPopupImage = "//img[@src='../images/loadingFonsNegre.gif']";
-	private final static String XPathTablaInformacion = "//td/table[@class='txt8' and @border='2']";
-	private final static String XPathRadiusButtonDiaAnterior = "//label[text()[contains(.,'Dia Anterior')]]/../input[@type='radio']";
-	private final static String XPathCompararButton = "//input[@id='form:comparar']";
+	private static final String iniXPathTitulo = "//td[@class='txt11B' and text()[contains(.,'";
+	private static final String XPathStartDate = "//input[@class='dateTimePicker']";
+	private static final String XPathEndDate = "//input[@class='dateTimePickerFin']";
+	private static final String XPathSelectOption = "//td[text()[contains(.,'Que informacion deseas?')]]/select";
+	private static final String XPathTodosLosZalandosOption = "//option[@value='allzalando']";
+	private static final String XPathMostrarPedidosButton = "//input[@id='form:consultar']";
+	private static final String XPathLoadPopupImage = "//img[@src='../images/loadingFonsNegre.gif']";
+	private static final String XPathTablaInformacion = "//td/table[@class='txt8' and @border='2']";
+	private static final String XPathRadiusButtonDiaAnterior = "//label[text()[contains(.,'Dia Anterior')]]/../input[@type='radio']";
+	private static final String XPathCompararButton = "//input[@id='form:comparar']";
 
 	public static String getXPathTitulo(String title){
 		return (iniXPathTitulo + title + "')]]");

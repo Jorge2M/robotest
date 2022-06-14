@@ -12,7 +12,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PagePostfRedirect extends PageObjTM {
 
-	private final static String XPathButtonOK = "//form/input[@type='button' and @value[contains(.,'OK')]]";
+	private static final String XPathButtonOK = "//form/input[@type='button' and @value[contains(.,'OK')]]";
 	
 	public PagePostfRedirect(WebDriver driver) {
 		super(driver);

@@ -36,15 +36,15 @@ public class PageFavoritos extends PageObjTM {
   
 	private final ModalFichaFavoritos modalFichaFavoritos;
 	
-	private final static String XPathBlockFavoritos = "//div[@data-pais and @class[contains(.,'favorites')]]";
-	private final static String XPathBlockFavWithArt = XPathBlockFavoritos + "//div[@class[contains(.,'content-garments')]]";
-	private final static String XPathArticulo = "//ul[@id='contentDataFavs']/li";
-	private final static String XPathButtonEmpty = "//a[@class='favorites-empty-btn']";
-	private final static String xPathShareModalButton = "//span[@id='shareIcon']";
-	private final static String xPathCloseShareModalButton = "//span[@onclick[contains(.,'showCloseModalShare')]]";
-	private final static String xPathWhatsAppShareButton = "//span[@class='modal-share-whatsapp-icon']";
-	private final static String xPathTelegramShareButton = "//span[@class='modal-share-telegram-icon']";
-	private final static String xPathUrlShareLabel = "//div[@id='linkShareButton']";
+	private static final String XPathBlockFavoritos = "//div[@data-pais and @class[contains(.,'favorites')]]";
+	private static final String XPathBlockFavWithArt = XPathBlockFavoritos + "//div[@class[contains(.,'content-garments')]]";
+	private static final String XPathArticulo = "//ul[@id='contentDataFavs']/li";
+	private static final String XPathButtonEmpty = "//a[@class='favorites-empty-btn']";
+	private static final String xPathShareModalButton = "//span[@id='shareIcon']";
+	private static final String xPathCloseShareModalButton = "//span[@onclick[contains(.,'showCloseModalShare')]]";
+	private static final String xPathWhatsAppShareButton = "//span[@class='modal-share-whatsapp-icon']";
+	private static final String xPathTelegramShareButton = "//span[@class='modal-share-telegram-icon']";
+	private static final String xPathUrlShareLabel = "//div[@id='linkShareButton']";
 	
 	private PageFavoritos(WebDriver driver) {
 		super(driver);

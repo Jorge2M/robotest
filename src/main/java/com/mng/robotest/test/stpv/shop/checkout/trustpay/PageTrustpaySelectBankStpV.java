@@ -44,7 +44,7 @@ public class PageTrustpaySelectBankStpV {
 		return validations;
 	}
 	
-	final static String tagPosibleBanks = "@TagPosibleBanks";
+	static final String tagPosibleBanks = "@TagPosibleBanks";
 	@Step (
 		description="Seleccionamos un banco de test (contiene alguno de los textos " + tagPosibleBanks + ") y pulsamos <b>Pay</b>", 
 		expected="Aparece la página de test para la confirmación")

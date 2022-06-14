@@ -107,10 +107,10 @@ public class PageReembolsosStpV {
 	   return (PageReembolsos.isVisibleInputsTransf(driver));
 	}
 	
-	final static String banco = "Banco de crédito Balear";
-	final static String titular = "Jorge Muñoz";
-	final static String IBAN = "ES8023100001180000012345";
-	final static String idPassport = "11111111";
+	static final String banco = "Banco de crédito Balear";
+	static final String titular = "Jorge Muñoz";
+	static final String IBAN = "ES8023100001180000012345";
+	static final String idPassport = "11111111";
 
 	@Step (
 		description="Informar el banco: " + banco + "<br>titular: " + titular + "<br>IBAN: " + IBAN + "<br>y pulsar el botón \"Save\"",

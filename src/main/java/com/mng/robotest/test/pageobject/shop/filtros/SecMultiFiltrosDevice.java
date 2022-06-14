@@ -27,8 +27,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
  */
 public class SecMultiFiltrosDevice extends PageObjTM implements SecFiltros {
 	
-	private final static String XPathFiltrarYOrdenarButton = "//button[@class[contains(.,'-filters-btn')]]";
-	private final static String XPathButtonAplicarFiltros = "//button[@class[contains(.,'filters-apply')]]";
+	private static final String XPathFiltrarYOrdenarButton = "//button[@class[contains(.,'-filters-btn')]]";
+	private static final String XPathButtonAplicarFiltros = "//button[@class[contains(.,'filters-apply')]]";
 	
 	PageGaleria pageGaleria = null;
 	

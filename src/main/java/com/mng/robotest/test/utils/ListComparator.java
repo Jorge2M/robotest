@@ -11,7 +11,7 @@ public class ListComparator {
 	private final List<? extends Label> listExpected;
 	private final List<? extends Label> listObtained;
 	private final List<DuplaLabel> matchedLists;
-	private final static String MarkSurpassedList = "###";
+	private static final String MarkSurpassedList = "###";
 	private boolean listsMatch = true;
 	
 	public enum Case {

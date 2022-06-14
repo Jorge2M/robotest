@@ -35,8 +35,8 @@ public class MiCuenta implements Serializable {
 	private String index_fact = "";
 	private Pais paisFactory = null;
 	private IdiomaPais idiomaFactory = null;
-	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
-	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
+	private static final Pais espana = PaisGetter.get(PaisShop.ESPANA);
+	private static final IdiomaPais castellano = espana.getListIdiomas().get(0);
 
 	public MiCuenta() {}
 

@@ -8,8 +8,8 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 
 public class PageOtpPaymaya extends PageObjTM {
 	
-	private final static String XPathInputOtp = "//input[@id='otp']";
-	private final static String XPathProceedButton = "//button[@id='btn-proceed']";
+	private static final String XPathInputOtp = "//input[@id='otp']";
+	private static final String XPathProceedButton = "//button[@id='btn-proceed']";
 	
 	public PageOtpPaymaya(WebDriver driver) {
 		super(driver);

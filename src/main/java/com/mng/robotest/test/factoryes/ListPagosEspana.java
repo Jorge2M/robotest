@@ -65,8 +65,8 @@ public class ListPagosEspana implements Serializable {
 	}
 	
 	private void getDataCountrys() throws Exception {
-		this.espana = PaisGetter.get(PaisShop.Espana);
-		this.francia = PaisGetter.get(PaisShop.France);
+		this.espana = PaisGetter.get(PaisShop.ESPANA);
+		this.francia = PaisGetter.get(PaisShop.FRANCE);
 		this.castellano = espana.getListIdiomas().get(0);
 		this.frances = francia.getListIdiomas().get(0);
 		this.USA = PaisGetter.get(PaisShop.USA);

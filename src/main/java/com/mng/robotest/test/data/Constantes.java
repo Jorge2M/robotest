@@ -53,5 +53,5 @@ public class Constantes {
 	public static final String paramCatalogs = "catalogs";
 
 	
-	public final static String PrefixRebajas = "<b style=\"color:blue\">Rebajas</b></br>";
+	public static final String PrefixRebajas = "<b style=\"color:blue\">Rebajas</b></br>";
 }

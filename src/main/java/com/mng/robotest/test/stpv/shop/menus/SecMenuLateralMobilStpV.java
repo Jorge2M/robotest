@@ -157,7 +157,7 @@ public class SecMenuLateralMobilStpV {
 	 	return validations;
 	}	
 	
-	final static String tagTextMenu = "@TagTextMenu";
+	static final String tagTextMenu = "@TagTextMenu";
 	@Step (
 		description="Selección del menú <b>" + tagTextMenu + "</b> (data-label contains #{menu1rstLevel.getDataGaLabelMenuSuperiorDesktop()})", 
 		expected="El menú se ejecuta correctamente")

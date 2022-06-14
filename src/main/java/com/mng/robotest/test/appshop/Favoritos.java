@@ -47,7 +47,7 @@ public class Favoritos implements Serializable {
 	private String index_fact = "";
 	private Pais paisFactory = null;
 	private IdiomaPais idiomaFactory = null;
-	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
+	private static final Pais espana = PaisGetter.get(PaisShop.ESPANA);
 
 	//Si añadimos un constructor para el @Factory hemos de añadir este constructor para la invocación desde SmokeTest
 	public Favoritos() {}

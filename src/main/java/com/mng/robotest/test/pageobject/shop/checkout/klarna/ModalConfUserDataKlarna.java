@@ -8,7 +8,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 
 public class ModalConfUserDataKlarna extends PageObjTM {
 
-	private final static String XPathButtonConfirmation = "//div[@id[contains(.,'footer-button-wrapper')]]//button";
+	private static final String XPathButtonConfirmation = "//div[@id[contains(.,'footer-button-wrapper')]]//button";
 	
 	public ModalConfUserDataKlarna(WebDriver driver) {
 		super(driver);

@@ -32,11 +32,11 @@ public class AccesoVOTF {
 
 	public static AccesoVOTF forCountry(PaisShop paisShop) {
 		switch (paisShop) {
-		case Espana:
+		case ESPANA:
 			return forSpain();
-		case France:
+		case FRANCE:
 			return forFrance();
-		case Italia:
+		case ITALIA:
 			return forItaly();
 		default:
 			throw new IllegalArgumentException("Unsuported country '" + paisShop + "' for retrieve credentials");

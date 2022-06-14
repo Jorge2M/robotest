@@ -37,8 +37,8 @@ public class SecProductDescrOldStpV {
 		return validations;
 	}
 	
-	final static String tagInitStatePanel = "@TagInitState";
-	final static String tagFinalStateExpected = "@TagFinalState";
+	static final String tagInitStatePanel = "@TagInitState";
+	static final String tagFinalStateExpected = "@TagFinalState";
 	@Step (
 		description="Seleccionar el panel <b>#{typePanel}</b> (en estado inicial: " + tagInitStatePanel + ")",
 		expected="La pestaña queda en estado " + tagFinalStateExpected)

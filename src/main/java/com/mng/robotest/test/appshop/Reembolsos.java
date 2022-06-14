@@ -1,7 +1,5 @@
 package com.mng.robotest.test.appshop;
 
-import org.testng.annotations.*;
-
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.IdiomaPais;
@@ -45,10 +43,10 @@ import org.openqa.selenium.WebDriver;
 public class Reembolsos {
 	
 	//TODO mientras que tengamos problemas con el buscador en Arabia probaremos contra España
-//	private final static Pais arabia = PaisGetter.get(PaisShop.Espana);
-//	private final static IdiomaPais arabia_arabe = arabia.getListIdiomas().get(0);
-	private final static Pais emiratos = PaisGetter.get(PaisShop.UnitedArabEmirates);
-	private final static IdiomaPais emiratos_arabe = emiratos.getListIdiomas().get(0);
+//	private static final Pais arabia = PaisGetter.get(PaisShop.Espana);
+//	private static final IdiomaPais arabia_arabe = arabia.getListIdiomas().get(0);
+	private static final Pais emiratos = PaisGetter.get(PaisShop.UNITED_ARAB_EMIRATES);
+	private static final IdiomaPais emiratos_arabe = emiratos.getListIdiomas().get(0);
 	
 	private DataCtxShop getCtxShForTest() throws Exception {
 		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();

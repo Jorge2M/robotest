@@ -7,7 +7,7 @@ import java.io.InputStream;
 
 public class GetterLocalFileSecrets extends GetterSecretsFromInputStream {
 
-	private final static String PATH_FILE = "C:\\mango\\ficheros\\secrets\\secrets.xml";
+	private static final String PATH_FILE = "C:\\mango\\ficheros\\secrets\\secrets.xml";
 	
 	@Override
 	InputStream getInputStreamSecrets() throws Exception {

@@ -25,7 +25,7 @@ public class SecConfirmDatosStpV {
 	}
 	
 	public static void setDataIfNeeded(String codigoPais,WebDriver driver) throws Exception {
-		if (PaisShop.Deutschland == PaisShop.getPais(codigoPais)) {
+		if (PaisShop.DEUTSCHLAND == PaisShop.getPais(codigoPais)) {
 			if (ModalDroppoints.secConfirmDatos.isVisibleInputPostNumberIdDeutschland(driver)) {
 				inputPostNumberId("0038594352", driver);
 			}

@@ -56,7 +56,7 @@ import com.mng.robotest.test.utils.WebDriverMngUtils;
 @SuppressWarnings({"static-access"})
 public class SecMenusDesktopStpV {
 
-	private final static String prefixSale = "<b style=\"color:blue\">Rebajas</b></br>";
+	private static final String prefixSale = "<b style=\"color:blue\">Rebajas</b></br>";
 	
 	private final Pais pais;
 	private final AppEcom app;
@@ -238,7 +238,7 @@ public class SecMenusDesktopStpV {
 	/**
 	 * Función que ejecuta el paso/validaciones correspondiente a la selección de una entrada el menú superior de Desktop
 	 */
-	final static String tagMenu = "@TagMenu";
+	static final String tagMenu = "@TagMenu";
 	@Step (
 		description="Selección del menú <b>" + tagMenu + "</b> (data-ga-label=#{menu1rstLevel.getDataGaLabelMenuSuperiorDesktop()})", 
 		expected="El menú se ejecuta correctamente",
@@ -392,7 +392,7 @@ public class SecMenusDesktopStpV {
 		return true;
 	}
 	
-	final static String tagUrlAcceso = "@TagUrlAcceso";
+	static final String tagUrlAcceso = "@TagUrlAcceso";
 	@Step (
 		description="Cargar la siguiente URL de redirect a <b>España / HE / Abrigos / Parkas </b>:<br>" + tagUrlAcceso,
 		expected="Aparece desplegada la página de Parkas (HE)")
@@ -418,7 +418,7 @@ public class SecMenusDesktopStpV {
 //		}
 	}
 	
-	final static String tagRefArticle = "@TagRefArticle";
+	static final String tagRefArticle = "@TagRefArticle";
 	@Step (
 		description=
 			"Cargar la siguiente URL de redirect a la ficha del producto <b>" + tagRefArticle + 

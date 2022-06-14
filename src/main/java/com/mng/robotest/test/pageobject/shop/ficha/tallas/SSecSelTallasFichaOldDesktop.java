@@ -16,9 +16,9 @@ import com.mng.robotest.test.data.Talla;
 
 public class SSecSelTallasFichaOldDesktop extends PageObjTM implements SSecSelTallasFicha {
 	
-	private final static String XPathSelectTalla = "//select[@id[contains(.,'productFormSelect')]]";
-	private final static String XPathOptionTallaUnica = XPathSelectTalla + "/option[@data-available='true' and @value[contains(.,'99')]]";
-	private final static String XPathOptionTalla = XPathSelectTalla + "/option[not(@data-text='0')]"; 
+	private static final String XPathSelectTalla = "//select[@id[contains(.,'productFormSelect')]]";
+	private static final String XPathOptionTallaUnica = XPathSelectTalla + "/option[@data-available='true' and @value[contains(.,'99')]]";
+	private static final String XPathOptionTalla = XPathSelectTalla + "/option[not(@data-text='0')]"; 
 	
 	public SSecSelTallasFichaOldDesktop(WebDriver driver) {
 		super(driver);

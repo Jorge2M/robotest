@@ -27,8 +27,8 @@ import static com.github.jorge2m.testmaker.testreports.html.ResultadoErrores.Res
 
 public class CheckerImgsBroken implements Checker {
 
-	private final static int MAX_ERRORES = 1;
-	private final static List<String> WHITELIST = Arrays.asList(
+	private static final int MAX_ERRORES = 1;
+	private static final List<String> WHITELIST = Arrays.asList(
 			"https://st.mngbcn.com/images/imgWar/loadingGif/teen.gif");
 
 	

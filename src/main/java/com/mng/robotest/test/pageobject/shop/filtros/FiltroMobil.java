@@ -7,7 +7,7 @@ public enum FiltroMobil {
 	Colores ("//nav//button[text()='Colores']//ancestor::nav"), 
 	Tallas ("//nav//button[text()='Tallas']//ancestor::nav");
 	
-	final static String XPathFiltroMulti = "//*[@class[contains(.,'orders-filters-scroll')]]";
+	static final String XPathFiltroMulti = "//*[@class[contains(.,'orders-filters-scroll')]]";
 	String xpathLineaFiltro;
 	private FiltroMobil(String xpathLineaFiltro) {
 		this.xpathLineaFiltro = xpathLineaFiltro;

@@ -9,12 +9,12 @@ import com.mng.robotest.test.beans.Pago;
 
 public class PageProcessOutInputTrj extends PageObjTM {
 
-	private final static String XPathFormularioTrj = "//div[@class[contains(.,'payment-section')]]";
-	private final static String XPathInputNameCard = "//input[@id='card-name']";
-	private final static String XPathInputTrj = "//input[@id='card-number']";
-	private final static String XPathInputExpiracion = "//input[@id='card-expiry']";
-	private final static String XPathInputCVC = "//input[@id='card-cvc']";
-	private final static String XPahtButtonPago = "//a[@class[contains(.,'form-submit')]]";
+	private static final String XPathFormularioTrj = "//div[@class[contains(.,'payment-section')]]";
+	private static final String XPathInputNameCard = "//input[@id='card-name']";
+	private static final String XPathInputTrj = "//input[@id='card-number']";
+	private static final String XPathInputExpiracion = "//input[@id='card-expiry']";
+	private static final String XPathInputCVC = "//input[@id='card-cvc']";
+	private static final String XPahtButtonPago = "//a[@class[contains(.,'form-submit')]]";
 	
 	public PageProcessOutInputTrj(WebDriver driver) {
 		super(driver);

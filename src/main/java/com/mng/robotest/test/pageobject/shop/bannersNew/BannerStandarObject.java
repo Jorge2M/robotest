@@ -14,14 +14,14 @@ public class BannerStandarObject extends BannerObject {
 
 	private final WebDriver driver;
 	
-	//final static String XPathWrapperBanner = "//div[@class[contains(.,'vsv-box')] and @data-id]";
-	final static String XPathWrapperBanner = "//div[@class[contains(.,'bannercontainer')] and @data-bannerid]";
-	final static String XPathBanner = XPathWrapperBanner + 
+	//static final String XPathWrapperBanner = "//div[@class[contains(.,'vsv-box')] and @data-id]";
+	static final String XPathWrapperBanner = "//div[@class[contains(.,'bannercontainer')] and @data-bannerid]";
+	static final String XPathBanner = XPathWrapperBanner + 
 		"//div[@data-cta and not(@data-cta='') and " + 
 			  "@data-cta[not(contains(.,'op=ayuda'))] and " + 
 			  "not(@class='link')]";
-	final static String XPathImageRelativeBanner = "//img[@class='img-responsive']";
-	final static String XPathMainTextRelativeBanner = "//div[@class[contains(.,'mainText')]]";
+	static final String XPathImageRelativeBanner = "//img[@class='img-responsive']";
+	static final String XPathMainTextRelativeBanner = "//div[@class[contains(.,'mainText')]]";
 	
 	public BannerStandarObject(BannerType bannerType) {
 		super(bannerType, XPathBanner);

@@ -16,9 +16,9 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
  */
 public class PopupFindAddress {
 
-	private final static String XPathInputBuscador = "//input[@id='region_name']";
-	private final static String XPathButtonLupa = "//button[@class='btn_search']";
-	private final static String XPathLinkDirecc = "//button[@class='link_post']";
+	private static final String XPathInputBuscador = "//input[@id='region_name']";
+	private static final String XPathButtonLupa = "//button[@class='btn_search']";
+	private static final String XPathLinkDirecc = "//button[@class='link_post']";
 	
 	public static String goToPopupAndWait(String mainWindowHandle, int maxSecondsToWait, WebDriver driver) throws Exception { 
 		String popupBuscador = switchToAnotherWindow(driver, mainWindowHandle);

@@ -11,14 +11,14 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageRegalarMisLikes extends PageObjTM {
 	
-	private final static String XPathWrapperPage = "//div[@id='loyaltyTransferLikes']";
-	private final static String XPathInputMensaje = "//input[@name='name']";
-	private final static String XPathInputEmailReceptor = "//input[@name='email']";
-	private final static String XPathBotonContinuar = "//button[@class[contains(.,'step1')]]";
-	private final static String XPathBlockCuantosLikes = "//div[@class='step2']";
-	private final static String XPathRadioInputNumLikes = "//label[@for='totalLikes']";
-	private final static String XPathInputNumLikes = "//input[@name='likesToBeTransferred']";
-	private final static String XPathBotonEnviarRegalo = "//button[@class[contains(.,'step2-form')]]";
+	private static final String XPathWrapperPage = "//div[@id='loyaltyTransferLikes']";
+	private static final String XPathInputMensaje = "//input[@name='name']";
+	private static final String XPathInputEmailReceptor = "//input[@name='email']";
+	private static final String XPathBotonContinuar = "//button[@class[contains(.,'step1')]]";
+	private static final String XPathBlockCuantosLikes = "//div[@class='step2']";
+	private static final String XPathRadioInputNumLikes = "//label[@for='totalLikes']";
+	private static final String XPathInputNumLikes = "//input[@name='likesToBeTransferred']";
+	private static final String XPathBotonEnviarRegalo = "//button[@class[contains(.,'step2-form')]]";
 	
 	public PageRegalarMisLikes(WebDriver driver) {
 		super(driver);

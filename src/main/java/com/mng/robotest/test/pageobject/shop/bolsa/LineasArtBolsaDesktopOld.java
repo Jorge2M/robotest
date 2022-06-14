@@ -12,16 +12,16 @@ import com.mng.robotest.test.utils.ImporteScreen;
 //TODO remove
 public class LineasArtBolsaDesktopOld /*extends LineasArtBolsa*/ {
 
-//	private final static String DivLinea = "div[@class[contains(.,'bagItem')]]";
-//	private final static String XPathLinea = "//" + DivLinea;
-//	private final static String XPathLinkRelativeArticle = ".//div[@class[contains(.,'itemImage')]]/a";
-//	private final static String XPathLineaWithTagRef = XPathLinkRelativeArticle + "//self::*[@href[contains(.,'" + TagReference + ".html')]]//ancestor::" + DivLinea;
-//	private final static String XPathNombreRelativeArticle = ".//*[@class='bolsa_descripcion']";
-//	private final static String XPathColorRelativeArticle = ".//*[@class='itemColor']";
-//	private final static String XPathTallaAlfRelativeArticle = ".//p[@class='itemSize']";
-//	private final static String XPathCantidadRelativeArticle = ".//p[@class='itemsQt']";
-//	private final static String XPathPrecioEnteroRelativeArticle = ".//span[@class='bolsa_price_big' and (not(@style) or @style='')]";
-//	private final static String XPathPrecioDecimalRelativeArticle = ".//span[@class='bolsa_price_small' and (not(@style) or @style='')]";
+//	private static final String DivLinea = "div[@class[contains(.,'bagItem')]]";
+//	private static final String XPathLinea = "//" + DivLinea;
+//	private static final String XPathLinkRelativeArticle = ".//div[@class[contains(.,'itemImage')]]/a";
+//	private static final String XPathLineaWithTagRef = XPathLinkRelativeArticle + "//self::*[@href[contains(.,'" + TagReference + ".html')]]//ancestor::" + DivLinea;
+//	private static final String XPathNombreRelativeArticle = ".//*[@class='bolsa_descripcion']";
+//	private static final String XPathColorRelativeArticle = ".//*[@class='itemColor']";
+//	private static final String XPathTallaAlfRelativeArticle = ".//p[@class='itemSize']";
+//	private static final String XPathCantidadRelativeArticle = ".//p[@class='itemsQt']";
+//	private static final String XPathPrecioEnteroRelativeArticle = ".//span[@class='bolsa_price_big' and (not(@style) or @style='')]";
+//	private static final String XPathPrecioDecimalRelativeArticle = ".//span[@class='bolsa_price_small' and (not(@style) or @style='')]";
 //	
 //	private static final String TagRefArticle = "[TAGREF]";
 //	private static final String XPathLinkBorrarArt = "//*[@class='boton_basura' and @onclick[contains(.,'" + TagRefArticle + "')]]/..";

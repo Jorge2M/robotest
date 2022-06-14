@@ -6,10 +6,10 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageMercpagoDatosTrjDesktop extends PageMercpagoDatosTrj {
 	
-	final static String XPathVisaIconNumTarj = "//span[@id='paymentmethod-logo']";
-	final static String XPathBotonContinuar = "//button[@id='submit']";
-	final static String XPathDivBancoToClick = "//div[@class[contains(.,'select-wrapper')]]";
-	//final static String XPathOpcionBanco = "//ul[@class[contains(.,'select')]]/li";
+	static final String XPathVisaIconNumTarj = "//span[@id='paymentmethod-logo']";
+	static final String XPathBotonContinuar = "//button[@id='submit']";
+	static final String XPathDivBancoToClick = "//div[@class[contains(.,'select-wrapper')]]";
+	//static final String XPathOpcionBanco = "//ul[@class[contains(.,'select')]]/li";
 	
 	private PageMercpagoDatosTrjDesktop(WebDriver driver) {
 		super(driver);

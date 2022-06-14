@@ -11,7 +11,7 @@ import com.mng.robotest.test.pageobject.shop.checkout.yandex.PageYandexMoney;
 
 public class PageYandexMoneyStpV {
 
-	final static String tagUrlYandex = "@TagUrlYandex";
+	static final String tagUrlYandex = "@TagUrlYandex";
 	@Step (
 		description="Accedemos a la URL de <b>YandexMoney</b>: " + tagUrlYandex, 
 		expected="Aparece la página de YandexMoney")

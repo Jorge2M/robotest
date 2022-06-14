@@ -51,7 +51,7 @@ public abstract class LineasArtBolsa extends PageObjTM {
 	
 	protected final Channel channel;
 	
-	final static String TagReference = "@Reference";
+	static final String TagReference = "@Reference";
 	
 	abstract String getXPathDataRelativeArticle(DataArtBolsa dataArt);
 	abstract String getXPathLinea();

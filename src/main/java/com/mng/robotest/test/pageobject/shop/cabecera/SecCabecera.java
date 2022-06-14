@@ -23,8 +23,8 @@ public abstract class SecCabecera extends PageObjTM {
 	protected final AppEcom app;
 	protected final SecSearch secSearch;
 
-	private final static String XPathHeader = "//header";
-	private final static String XPathLinkLogoMango = 
+	private static final String XPathHeader = "//header";
+	private static final String XPathLinkLogoMango = 
 			"//a[@class='logo-link' or " + 
 			"@class[contains(.,'logo_')] or" + 
 			"@title[contains(.,'MANGO Shop Online')]]";
@@ -122,9 +122,9 @@ public abstract class SecCabecera extends PageObjTM {
 	//-- Específic functions for movil (Shop & Outlet)
 	
 
-	private final static String XPathSmartBanner = XPathHeader + "/div[@id='smartbanner']";
-	private final static String XPathLinkCloseSmartBanner = XPathSmartBanner + "//a[@class='sb-close']";	
-	private final static String XPathIconoMenuHamburguesa = XPathHeader + "//div[@class[contains(.,'menu-open-button')]]";
+	private static final String XPathSmartBanner = XPathHeader + "/div[@id='smartbanner']";
+	private static final String XPathLinkCloseSmartBanner = XPathSmartBanner + "//a[@class='sb-close']";	
+	private static final String XPathIconoMenuHamburguesa = XPathHeader + "//div[@class[contains(.,'menu-open-button')]]";
 
 	
 	/**

@@ -39,7 +39,7 @@ public class PageCheckoutWrapper extends PageObjTM {
 	private final SecTarjetaPci secTarjetaPci;
 	
 	//Abarca cualquier div de loading
-	private final static String XPathDivLoading = "//div[@class[contains(.,'panel_loading')] or @class[contains(.,'container-full-centered-loading')] or @class[contains(.,'loading-panel')]]";
+	private static final String XPathDivLoading = "//div[@class[contains(.,'panel_loading')] or @class[contains(.,'container-full-centered-loading')] or @class[contains(.,'loading-panel')]]";
 	
 	public PageCheckoutWrapper(Channel channel, AppEcom app, WebDriver driver) {
 		super(driver);
@@ -147,7 +147,7 @@ public class PageCheckoutWrapper extends PageObjTM {
 		}
 	}	
 
-	private final static String XpathButtonForApplyLoyaltyPoints = "//button[@class[contains(.,'redeem-likes')] and @type='button']";
+	private static final String XpathButtonForApplyLoyaltyPoints = "//button[@class[contains(.,'redeem-likes')] and @type='button']";
 	public boolean isVisibleButtonForApplyLoyaltyPoints() {
 		return (state(Visible, By.xpath(XpathButtonForApplyLoyaltyPoints)).wait(2).check());
 	}
@@ -162,7 +162,7 @@ public class PageCheckoutWrapper extends PageObjTM {
 		return (ImporteScreen.getFloatFromImporteMangoScreen(importeButton));
 	}
 
-	private final static String XPathDiscountLoyaltyAppliedMobil = "//span[@class='redeem-likes__discount']";
+	private static final String XPathDiscountLoyaltyAppliedMobil = "//span[@class='redeem-likes__discount']";
 	public float getDiscountLoyaltyAppliedMobil() {
 		By byDiscountApplied = By.xpath(XPathDiscountLoyaltyAppliedMobil);
 		if (state(Visible, byDiscountApplied).check()) {

@@ -17,15 +17,15 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
  */
 public class PageInputDataSolMangoCard {
 	
-	private final static String XPathbotonContinuarModal = "//div//button[text()[contains(.,'Continuar')]]";
-	private final static String XPathIsPage2 = "//div/span[text()[contains(.,'Solicitud de tu MANGO Card')]]";
-	private final static String XPathIframePage2 = "//div[@id='ifcentral']/iframe";
-	private final static String XPathTextDatosPersonalesPage2 = "//a[@data-i18n[contains(.,'datospersonales')]]";
-	private final static String XPathTextDatosBancariosPage2 = "//a[@data-i18n[contains(.,'datosbancarios')]]";
-	private final static String XPathDatosContactoPage2 = "//a[@data-i18n[contains(.,'datoscontacto')]]";
-	private final static String XPathDatosSocioeconomicosPage2 = "//a[@data-i18n[contains(.,'datossocioeconomicos')]]";
-	private final static String XPathModalidadPagoPage2 = "//a[@data-i18n[contains(.,'modalidadpago')]]";
-	private final static String XPathButtonContinuarPage2 = "//button[@id='in-continuar']";
+	private static final String XPathbotonContinuarModal = "//div//button[text()[contains(.,'Continuar')]]";
+	private static final String XPathIsPage2 = "//div/span[text()[contains(.,'Solicitud de tu MANGO Card')]]";
+	private static final String XPathIframePage2 = "//div[@id='ifcentral']/iframe";
+	private static final String XPathTextDatosPersonalesPage2 = "//a[@data-i18n[contains(.,'datospersonales')]]";
+	private static final String XPathTextDatosBancariosPage2 = "//a[@data-i18n[contains(.,'datosbancarios')]]";
+	private static final String XPathDatosContactoPage2 = "//a[@data-i18n[contains(.,'datoscontacto')]]";
+	private static final String XPathDatosSocioeconomicosPage2 = "//a[@data-i18n[contains(.,'datossocioeconomicos')]]";
+	private static final String XPathModalidadPagoPage2 = "//a[@data-i18n[contains(.,'modalidadpago')]]";
+	private static final String XPathButtonContinuarPage2 = "//button[@id='in-continuar']";
 
 
 	/*

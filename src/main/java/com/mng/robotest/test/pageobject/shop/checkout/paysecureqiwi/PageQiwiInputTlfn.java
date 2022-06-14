@@ -9,8 +9,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageQiwiInputTlfn {
 
-	private final static String XPathInputPhone = "//input[@id='QIWIMobilePhone']";
-	private final static String XPathLinkAceptar = "//input[@name='Submit_Card_1' and not(@disabled)]";
+	private static final String XPathInputPhone = "//input[@id='QIWIMobilePhone']";
+	private static final String XPathLinkAceptar = "//input[@name='Submit_Card_1' and not(@disabled)]";
 	
 	public static void inputQiwiPhone(WebDriver driver, String phone) {
 		driver.findElement(By.xpath(XPathInputPhone)).sendKeys(phone);

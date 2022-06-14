@@ -11,14 +11,14 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SSecSelTallasFichaNew extends PageObjTM implements SSecSelTallasFicha {
 	
-	private final static String XPathCapaTallas = "//form/div[@class='sizes']";
-	private final static String XPathSelectorTallas = XPathCapaTallas + "/div[@class='selector']";
-	private final static String XPathListTallsForSelect = XPathSelectorTallas + "//div[@class[contains(.,'selector-list')]]";
-	private final static String XPathTallaItem = XPathCapaTallas + "//span[(@role='option' or @role='button') and not(@data-available='false')]";
-	private final static String XPathTallaAvailable = XPathTallaItem + "//self::span[@data-available='true' or @class='single-size']";
-	private final static String XPathTallaUnavailable = XPathTallaItem + "//self::span[not(@data-available) and not(@class='single-size')]";
-	private final static String XPathTallaSelected = XPathTallaItem + "//self::span[@class[contains(.,'selector-trigger')] or @class='single-size']";
-	private final static String XPathTallaUnica = XPathTallaItem + "//self::span[@class[contains(.,'single-size')]]";
+	private static final String XPathCapaTallas = "//form/div[@class='sizes']";
+	private static final String XPathSelectorTallas = XPathCapaTallas + "/div[@class='selector']";
+	private static final String XPathListTallsForSelect = XPathSelectorTallas + "//div[@class[contains(.,'selector-list')]]";
+	private static final String XPathTallaItem = XPathCapaTallas + "//span[(@role='option' or @role='button') and not(@data-available='false')]";
+	private static final String XPathTallaAvailable = XPathTallaItem + "//self::span[@data-available='true' or @class='single-size']";
+	private static final String XPathTallaUnavailable = XPathTallaItem + "//self::span[not(@data-available) and not(@class='single-size')]";
+	private static final String XPathTallaSelected = XPathTallaItem + "//self::span[@class[contains(.,'selector-trigger')] or @class='single-size']";
+	private static final String XPathTallaUnica = XPathTallaItem + "//self::span[@class[contains(.,'single-size')]]";
 	
 	public SSecSelTallasFichaNew(WebDriver driver) {
 		super(driver);

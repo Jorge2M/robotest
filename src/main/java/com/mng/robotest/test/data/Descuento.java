@@ -4,8 +4,8 @@ import com.mng.robotest.conftestmaker.AppEcom;
 
 public class Descuento {
 	
-	final static int percDescEmpleadoShop = 25;
-	final static int percDescEmpleadoOutlet = 10;
+	static final int percDescEmpleadoShop = 25;
+	static final int percDescEmpleadoOutlet = 10;
 	
 	public enum DiscountOver {
 		OriginalPrice("descuento sobre el precio original"), 

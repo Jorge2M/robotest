@@ -21,9 +21,9 @@ public class SecFooter extends PageObjTM {
 
 	private final AppEcom app;
 	
-	private final static String XPathCapaShop = "//div[@id='nav-footer']";
-	//private final static String XPathCapaOutlet = "//div[@class[contains(.,'footer__column footer__column')]]";
-	private final static String XPathCapaOutlet = "//footer[@id='footerMNG']";
+	private static final String XPathCapaShop = "//div[@id='nav-footer']";
+	//private static final String XPathCapaOutlet = "//div[@class[contains(.,'footer__column footer__column')]]";
+	private static final String XPathCapaOutlet = "//footer[@id='footerMNG']";
 	
 	private final SecNewsLetter secNewsLetter;
 	
@@ -92,9 +92,9 @@ public class SecFooter extends PageObjTM {
 	}
 	
 	
-	private final static String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
-	private final static String XPathCambioPaisShop = "//div[@class[contains(.,'modalCambioPaisShow')]]";
-	private final static String XPathCambioPaisOutlet = "//span[@class[contains(.,'countrySelector')]]";
+	private static final String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
+	private static final String XPathCambioPaisShop = "//div[@class[contains(.,'modalCambioPaisShow')]]";
+	private static final String XPathCambioPaisOutlet = "//span[@class[contains(.,'countrySelector')]]";
 	
 	public SecFooter(AppEcom app, WebDriver driver) {
 		super(driver);

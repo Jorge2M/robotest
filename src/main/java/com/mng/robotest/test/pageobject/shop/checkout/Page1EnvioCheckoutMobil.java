@@ -17,25 +17,25 @@ import com.mng.robotest.test.utils.ImporteScreen;
 
 public class Page1EnvioCheckoutMobil extends PageObjTM {
 	
-	private final static String XPathLink1Envio = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step1']";
-	private final static String XPathInputPromo = "//input[@id[contains(.,'oucherCode')]]";
-	private final static String XPathButtonAplicarPromo = "//button[@id[contains(.,'voucherCode')]]";
-	private final static String XPathLinkCancelarCodigo = "//p[@class='discount-total-amount']/a]";
-	private final static String XPathInputApellidoPromoEmpl = "//input[@id[contains(.,'employeeSurname')]]";
-	private final static String XPathInputDNIPromoEmpl = "//input[@id[contains(.,'employeeDNI')]]";
-	private final static String XPathDiaNaciPromoEmpl = "//select[@id[contains(.,'employeeBirthdateDay')]]";
-	private final static String XPathMesNaciPromoEmpl = "//select[@id[contains(.,'employeeBirthdateMonth')]]";
-	private final static String XPathAnyNaciPromoEmpl = "//select[@id[contains(.,'employeeBirthdateYear')]]";
-	private final static String XPathAceptarPromoEmpl = "//input[@id[contains(.,'confirmEmployeeData')]]";
-	private final static String XPathDescuentoEmpleado = "//div[@class[contains(.,'employee-discount')]]//p[@class='discount-total-amount']/strong";
-	private final static String XPathRadioEnvio = "//input[@data-testid[contains(.,'checkout.delivery.methods')]]";
-	private final static String XPathSelectFranjaHorariaMetodoUrgente = "//select[@data-component-id='time-range-sameday_nextday_franjas']";
-	private final static String XPathDireccionEnvio = "//div[@data-testid[contains(.,'delivery.methods.address')]]";
-	private final static String XPathLinkOtrosMetEnvioClosed = "//button[@data-testid[contains(.,'otherMethods.button')]]";
-	private final static String XPathLinkEditDirecEnvio = "//div[@id[contains(.,'addressBlock')]]//span[class='address']";
-	private final static String XPathBotonContinuar = "//button[@id[contains(.,'complete-step1')]]";
-	private final static String XPathErrorPromo = "//div[@data-component-id='error-voucherCode']";
-	private final static String XPathEnvioStandard = "//div[@data-analytics-id='standard' and @class[contains(.,'checked')]]";
+	private static final String XPathLink1Envio = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step1']";
+	private static final String XPathInputPromo = "//input[@id[contains(.,'oucherCode')]]";
+	private static final String XPathButtonAplicarPromo = "//button[@id[contains(.,'voucherCode')]]";
+	private static final String XPathLinkCancelarCodigo = "//p[@class='discount-total-amount']/a]";
+	private static final String XPathInputApellidoPromoEmpl = "//input[@id[contains(.,'employeeSurname')]]";
+	private static final String XPathInputDNIPromoEmpl = "//input[@id[contains(.,'employeeDNI')]]";
+	private static final String XPathDiaNaciPromoEmpl = "//select[@id[contains(.,'employeeBirthdateDay')]]";
+	private static final String XPathMesNaciPromoEmpl = "//select[@id[contains(.,'employeeBirthdateMonth')]]";
+	private static final String XPathAnyNaciPromoEmpl = "//select[@id[contains(.,'employeeBirthdateYear')]]";
+	private static final String XPathAceptarPromoEmpl = "//input[@id[contains(.,'confirmEmployeeData')]]";
+	private static final String XPathDescuentoEmpleado = "//div[@class[contains(.,'employee-discount')]]//p[@class='discount-total-amount']/strong";
+	private static final String XPathRadioEnvio = "//input[@data-testid[contains(.,'checkout.delivery.methods')]]";
+	private static final String XPathSelectFranjaHorariaMetodoUrgente = "//select[@data-component-id='time-range-sameday_nextday_franjas']";
+	private static final String XPathDireccionEnvio = "//div[@data-testid[contains(.,'delivery.methods.address')]]";
+	private static final String XPathLinkOtrosMetEnvioClosed = "//button[@data-testid[contains(.,'otherMethods.button')]]";
+	private static final String XPathLinkEditDirecEnvio = "//div[@id[contains(.,'addressBlock')]]//span[class='address']";
+	private static final String XPathBotonContinuar = "//button[@id[contains(.,'complete-step1')]]";
+	private static final String XPathErrorPromo = "//div[@data-component-id='error-voucherCode']";
+	private static final String XPathEnvioStandard = "//div[@data-analytics-id='standard' and @class[contains(.,'checked')]]";
 
 	
 	public Page1EnvioCheckoutMobil(WebDriver driver) {

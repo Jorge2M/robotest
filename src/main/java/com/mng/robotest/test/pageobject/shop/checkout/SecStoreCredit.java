@@ -12,9 +12,9 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecStoreCredit extends PageObjTM {
 
-	private final static String XPathStoreCreditBlock = "//div[@class='customer-balance']";
-	private final static String XPathStoreCreditOption = XPathStoreCreditBlock + "/div[@class[contains(.,'customer-balance-option')]]";
-	private final static String XPathImporteStoreCredit = "//p[@class='customer-balance-title']"; 
+	private static final String XPathStoreCreditBlock = "//div[@class='customer-balance']";
+	private static final String XPathStoreCreditOption = XPathStoreCreditBlock + "/div[@class[contains(.,'customer-balance-option')]]";
+	private static final String XPathImporteStoreCredit = "//p[@class='customer-balance-title']"; 
 
 	public SecStoreCredit(WebDriver driver) {
 		super(driver);

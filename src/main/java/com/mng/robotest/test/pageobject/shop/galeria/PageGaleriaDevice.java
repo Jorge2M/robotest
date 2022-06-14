@@ -22,37 +22,37 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
  */
 public class PageGaleriaDevice extends PageGaleria {
 	
-	final static String TagIdColor = "@TagIdColor";
-	final static String TagFlagSelected = "@TagFlagSelected";
+	static final String TagIdColor = "@TagIdColor";
+	static final String TagFlagSelected = "@TagFlagSelected";
 
-	final static String XPathImgRelativeArticle = 
+	static final String XPathImgRelativeArticle = 
 		"//img[@src and " + 
 			 "(@class[contains(.,'productListImg')] or " + 
 			  "@class[contains(.,'product-list-image')] or " + 
 			  "@class[contains(.,'product-list-img')] or " +
 			  "@class[contains(.,'product-image')] or " +
 			  "@id[contains(.,'product-image')])]";
-	final static String XPathImgCodColorWithTagColor = 
+	static final String XPathImgCodColorWithTagColor = 
 		"//div[@class[contains(.,'color-container')] and @id='" + TagIdColor + "']/img";
-	final static String XPathPrecioRebajadoRelativeArticle = 
+	static final String XPathPrecioRebajadoRelativeArticle = 
 		"//*[@class[contains(.,'product-list-sale-price')] or " + 
 			"@class[contains(.,'product-list-info-price-sale')] or " + 
 			"@class[contains(.,'product-price-crossed')]]";
-	final static String XPathPrecioOriginalRelativeArticle = 
+	static final String XPathPrecioOriginalRelativeArticle = 
 		"//*[@class[contains(.,'productList__price')] or " + 
 			"@class[contains(.,'productList__salePrice')] or " + 
 			"@class[contains(.,'product-list-info-price')] or " + 
 			"@class[contains(.,'product-list-price')] or " +
 			"@class[contains(.,'product-price')]]";
-	final static String XPathButtonAnyadirRelativeArticle = "//div[@class[contains(.,'product-add')]]/button";
-	final static String XPathCapaTallasRelativeArticle = "//div[@class[contains(.,'product-sizes-container')]]";
-	final static String XPathIconoUpGaleryMobile = "//div[@class[contains(.,'scroll-container--visible')]]";
-	final static String XPathIconoUpGaleryTablet = "//div[@class='scroll-top-step']";
-	final static String XPathFiltersDiv = "//div[@class='order-filters-fixed']";
-	final static String TagNumPagina = "@tagNumPagina";
-	final static String XPathPaginaWithTag = "//div[@id='page" + TagNumPagina + "']";
-	final static String XPathPaginaTabletOutletWithTag = "//div[@id='page" + TagNumPagina + "Height']";
-	final static String XPathHeaderArticles = "//h1[@class='catalog-title']";
+	static final String XPathButtonAnyadirRelativeArticle = "//div[@class[contains(.,'product-add')]]/button";
+	static final String XPathCapaTallasRelativeArticle = "//div[@class[contains(.,'product-sizes-container')]]";
+	static final String XPathIconoUpGaleryMobile = "//div[@class[contains(.,'scroll-container--visible')]]";
+	static final String XPathIconoUpGaleryTablet = "//div[@class='scroll-top-step']";
+	static final String XPathFiltersDiv = "//div[@class='order-filters-fixed']";
+	static final String TagNumPagina = "@tagNumPagina";
+	static final String XPathPaginaWithTag = "//div[@id='page" + TagNumPagina + "']";
+	static final String XPathPaginaTabletOutletWithTag = "//div[@id='page" + TagNumPagina + "Height']";
+	static final String XPathHeaderArticles = "//h1[@class='catalog-title']";
 	
 	static String classProductName = 
 			"(@class[contains(.,'productList__name')] or " +
@@ -61,10 +61,10 @@ public class PageGaleriaDevice extends PageGaleria {
 			 "@class='product-name')";
 	
 	//TODO cuando suba el Outlet-Desktop-React a PRO podremos igualar este XPath con el XPathColoresArticuloShop (outlet=shop)
-	final static String XPathColoresArticuloOutlet = "//div[@class[contains(.,'product-list-color--stock')] or @class[contains(.,'product-colors')]]";
+	static final String XPathColoresArticuloOutlet = "//div[@class[contains(.,'product-list-color--stock')] or @class[contains(.,'product-colors')]]";
 	
-	final static String XPathColoresArticulo = "//div[@class[contains(.,'product-colors')]]";
-	final static String XPathColoresArticuloOutletTablet = "//div[@class[contains(.,'product-list-colors')]]";
+	static final String XPathColoresArticulo = "//div[@class[contains(.,'product-colors')]]";
+	static final String XPathColoresArticuloOutletTablet = "//div[@class[contains(.,'product-list-colors')]]";
 	
 	String getXPathColoresArticle() {
 		if (channel==Channel.tablet && app==AppEcom.outlet) {

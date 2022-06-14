@@ -34,7 +34,7 @@ public class SecCabeceraOutlet_Mobil extends SecCabecera {
 		}
 	}
 		
-	//private final static String XPathNumArticles = "//span[@class[contains(.,'_cartNum')]]";
+	//private static final String XPathNumArticles = "//span[@class[contains(.,'_cartNum')]]";
 
 	private SecCabeceraOutlet_Mobil(Channel channel, AppEcom app, WebDriver driver) {
 		super(channel, app, driver);

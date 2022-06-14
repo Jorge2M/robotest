@@ -30,8 +30,8 @@ public class PageHomeDonateLikes extends PageObjTM {
 		}
 	}
 	
-	final static String xpathPage = "//*[@class[contains(.,'loyalty_loyaltySpace')]]";
-	final static String xpathIconOperationDone = "//*[@class[contains(.,'icon-outline-done')]]";
+	static final String xpathPage = "//*[@class[contains(.,'loyalty_loyaltySpace')]]";
+	static final String xpathIconOperationDone = "//*[@class[contains(.,'icon-outline-done')]]";
 
 	private PageHomeDonateLikes(WebDriver driver) {
 		super(driver);

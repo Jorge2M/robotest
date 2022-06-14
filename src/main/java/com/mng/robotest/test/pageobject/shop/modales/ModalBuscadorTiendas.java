@@ -14,10 +14,10 @@ public class ModalBuscadorTiendas extends PageObjTM implements PageFromFooter {
 
 	private final Channel channel;
 	
-	private final static String XPathContainer = "//*[@id[contains(.,'GarmentFinder')]]/div";
-	private final static String XPathTiendas = XPathContainer + "//div[@class[contains(.,'store-list')]]";
-	private final static String XPathAspaForCloseDesktop = "//button[@class[contains(.,'close-modal')]]";
-	private final static String XPahLeftArrowDevice = "//span[@class[contains(.,'close-modal')]]";
+	private static final String XPathContainer = "//*[@id[contains(.,'GarmentFinder')]]/div";
+	private static final String XPathTiendas = XPathContainer + "//div[@class[contains(.,'store-list')]]";
+	private static final String XPathAspaForCloseDesktop = "//button[@class[contains(.,'close-modal')]]";
+	private static final String XPahLeftArrowDevice = "//span[@class[contains(.,'close-modal')]]";
 	
 	public ModalBuscadorTiendas(Channel channel, WebDriver driver) {
 		super(driver);

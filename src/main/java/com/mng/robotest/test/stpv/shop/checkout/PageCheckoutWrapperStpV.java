@@ -246,8 +246,8 @@ public class PageCheckoutWrapperStpV {
 		return (pageCheckoutWrapper.getPage1DktopCheckout().isPresentButtonConfPago());
 	}
 	
-	final static String tagTipoTarj = "@TagTipoTarj";
-	final static String tagNumTarj = "@TagNumTarj";
+	static final String tagTipoTarj = "@TagTipoTarj";
+	static final String tagNumTarj = "@TagNumTarj";
 	@Step (
 		description="Introducimos los datos de la tarjeta (" + tagTipoTarj + ") " + tagNumTarj + " y pulsamos el botón \"Confirmar pago\"",
 		expected="Aparece la página de resultado OK")
@@ -342,7 +342,7 @@ public class PageCheckoutWrapperStpV {
 		PageRedirectPasarelaLoadingStpV.validateDisappeared(5, driver);
 	}	
 	
-	private final static String tagTarjeta = "@TagTarjeta";
+	private static final String tagTarjeta = "@TagTarjeta";
 	@Step (
 		description="Introducir la tarjeta de empleado " + tagTarjeta + " y pulsar el botón \"Aplicar\"", 
 		expected="Aparecen los datos para la introducción del 1er apellido y el nif")
@@ -379,7 +379,7 @@ public class PageCheckoutWrapperStpV {
 		return validations;
 	}
 	
-	final static String tag1erApellido = "@Tag1erApellido";
+	static final String tag1erApellido = "@Tag1erApellido";
 	@Step (
 		description="Introducir el primer apellido " + tag1erApellido + " y pulsar el botón \"Guardar\"", 
 		expected="Se aplican los descuentos correctamente")
@@ -410,7 +410,7 @@ public class PageCheckoutWrapperStpV {
 		page1DktopCheckStpV.validateIsVersionChequeRegalo(chequeRegalo);
 	}
 	
-	final static String tagNombreBanco = "@TagNombreBanco";
+	static final String tagNombreBanco = "@TagNombreBanco";
 	@Step (
 		description="Escogemos el banco \"" + tagNombreBanco + "\" en la pestaña de selección", 
 		expected="El banco aparece seleccionado")

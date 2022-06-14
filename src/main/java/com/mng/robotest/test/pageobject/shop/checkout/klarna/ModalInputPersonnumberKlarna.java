@@ -8,10 +8,10 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 
 public class ModalInputPersonnumberKlarna extends PageObjTM {
 
-	private final static String XPathInputPersonnumber = "//input[@id='invoice_kp-purchase-approval-form-national-identification-number']";
-	private final static String XPathInputFechaNacimiento = "//input[@id='invoice_kp-purchase-approval-form-date-of-birth']";
-	private final static String XPathButtonConf = "//button[@id='invoice_kp-purchase-approval-form-continue-button']";
-	private final static String XpathSecondButtonConf = "//div[@id='identification-dialog__footer-button-wrapper']//button";
+	private static final String XPathInputPersonnumber = "//input[@id='invoice_kp-purchase-approval-form-national-identification-number']";
+	private static final String XPathInputFechaNacimiento = "//input[@id='invoice_kp-purchase-approval-form-date-of-birth']";
+	private static final String XPathButtonConf = "//button[@id='invoice_kp-purchase-approval-form-continue-button']";
+	private static final String XpathSecondButtonConf = "//div[@id='identification-dialog__footer-button-wrapper']//button";
 	
 	private String getXPathInputPersonNumber() {
 		return XPathInputPersonnumber + " | " + XPathInputFechaNacimiento;

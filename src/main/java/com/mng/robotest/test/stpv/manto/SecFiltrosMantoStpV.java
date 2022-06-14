@@ -22,8 +22,8 @@ public class SecFiltrosMantoStpV {
 
 	public enum TypeSearch {BOLSA, PEDIDO} 
 	
-	final static String tagNombrePago = "@TagNombrePago";
-	final static String tagLitTienda = "@TagLitTienda";
+	static final String tagNombrePago = "@TagNombrePago";
+	static final String tagLitTienda = "@TagLitTienda";
 	
 	public static void setFiltrosHoyYbuscar(DataPedido dataPedido, TypeSearch typeSearch, WebDriver driver) throws Exception {
 		LocalDate fechaHoy = SecFiltros.getFechaHastaValue(driver);

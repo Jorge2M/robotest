@@ -9,9 +9,9 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalNewsLetterAfterAccess {
 
-	final static String XPathCapaGlobal = "//div[@id='listenerModal']"; 
-	final static String XPathCapaContainer = XPathCapaGlobal + "//div[@id='modalNewsletterSubscription']";
-	final static String XPathAspaForClose = XPathCapaContainer + "//button[@id='modalNewsletterSubscriptionClose']";
+	static final String XPathCapaGlobal = "//div[@id='listenerModal']"; 
+	static final String XPathCapaContainer = XPathCapaGlobal + "//div[@id='modalNewsletterSubscription']";
+	static final String XPathAspaForClose = XPathCapaContainer + "//button[@id='modalNewsletterSubscriptionClose']";
 	
 	public static boolean isModalVisibleUntil(int maxSeconds, WebDriver driver) {
 		return (state(Visible, By.xpath(XPathCapaContainer), driver).wait(maxSeconds).check());

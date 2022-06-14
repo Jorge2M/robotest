@@ -34,42 +34,42 @@ public class Page1DktopCheckout extends PageObjTM {
 	private final Channel channel;
 	private final AppEcom app;
 	
-	private final static String XPathConfPagoButtonDesktop = "//*[@id[contains(.,'btnCheckout')]]";
-	private final static String XPathAlmacenInNoProEntorns = "//span[@class='labelTestShowAlmacenStrong']";
-	private final static String XPathBlockCodigoPromo = "//div[@class[contains(.,'contenidoPromoCode')]]";
-	private final static String XPathErrorPromo = "//*[@class='labelIntroduceError']";
-	private final static String XPathLinkToViewBlockPromo = "SVBody:SVResumenPromociones:FExpandirVales";
-	private final static String xpathInputPromo = "//input[@class[contains(.,'inputVale')]]";
-	private final static String XPathButtonAplicarPromo = "//input[@id[contains(.,'PromocionesVales')] and @type='submit']";
-	private final static String XPathLinkEliminarPromo = "//span[@class[contains(.,'promoCodeConfirmar')]]";
-	private final static String XPathBotoneraEmplPromo = "//div[@class='botoneraEmpleado']";
-	private final static String XPathButtonCancelarPromo = XPathBotoneraEmplPromo + "//span[@class='botonNew claro']";
-	private final static String XPathButtonGuardarPromo = XPathBotoneraEmplPromo + "//span[@class='botonNew']";
-	private final static String XPathInputApellidoPromoEmpl = "//input[@id[contains(.,'primerApellido')]]";
-	private final static String XPathInputDNIPromoEmpl = "//input[@id[contains(.,'dniEmpleado')]]";
-	private final static String XPathDiaNaciPromoEmpl = "//select[@id[contains(.,'naciDia')]]";
-	private final static String XPathMesNaciPromoEmpl = "//select[@id[contains(.,'naciMes')]]";
-	private final static String XPathAnyNaciPromoEmpl = "//select[@id[contains(.,'naciAny')]]";
-	private final static String XPathAceptarPromoEmpl = "//div[@class[contains(.,'botoneraEmpleado')]]/span[@class='botonNew']";
-	private final static String XPathDescuentoEmpleado = "//p[@class[contains(.,'descuento-aplicado')]]//span[@class='price-format']";
+	private static final String XPathConfPagoButtonDesktop = "//*[@id[contains(.,'btnCheckout')]]";
+	private static final String XPathAlmacenInNoProEntorns = "//span[@class='labelTestShowAlmacenStrong']";
+	private static final String XPathBlockCodigoPromo = "//div[@class[contains(.,'contenidoPromoCode')]]";
+	private static final String XPathErrorPromo = "//*[@class='labelIntroduceError']";
+	private static final String XPathLinkToViewBlockPromo = "SVBody:SVResumenPromociones:FExpandirVales";
+	private static final String xpathInputPromo = "//input[@class[contains(.,'inputVale')]]";
+	private static final String XPathButtonAplicarPromo = "//input[@id[contains(.,'PromocionesVales')] and @type='submit']";
+	private static final String XPathLinkEliminarPromo = "//span[@class[contains(.,'promoCodeConfirmar')]]";
+	private static final String XPathBotoneraEmplPromo = "//div[@class='botoneraEmpleado']";
+	private static final String XPathButtonCancelarPromo = XPathBotoneraEmplPromo + "//span[@class='botonNew claro']";
+	private static final String XPathButtonGuardarPromo = XPathBotoneraEmplPromo + "//span[@class='botonNew']";
+	private static final String XPathInputApellidoPromoEmpl = "//input[@id[contains(.,'primerApellido')]]";
+	private static final String XPathInputDNIPromoEmpl = "//input[@id[contains(.,'dniEmpleado')]]";
+	private static final String XPathDiaNaciPromoEmpl = "//select[@id[contains(.,'naciDia')]]";
+	private static final String XPathMesNaciPromoEmpl = "//select[@id[contains(.,'naciMes')]]";
+	private static final String XPathAnyNaciPromoEmpl = "//select[@id[contains(.,'naciAny')]]";
+	private static final String XPathAceptarPromoEmpl = "//div[@class[contains(.,'botoneraEmpleado')]]/span[@class='botonNew']";
+	private static final String XPathDescuentoEmpleado = "//p[@class[contains(.,'descuento-aplicado')]]//span[@class='price-format']";
 
-	private final static String XPathPrecioRelArticle = "//div[@class[contains(.,'precioNormal')]]";
-	private final static String XPathPrecioNoTachadoRelArticle = XPathPrecioRelArticle + "//self::div[not(@class[contains(.,'tachado')])]";
-	private final static String XPathPrecioSiTachadoRelArticle = XPathPrecioRelArticle + "//self::div[@class[contains(.,'tachado')]]";
+	private static final String XPathPrecioRelArticle = "//div[@class[contains(.,'precioNormal')]]";
+	private static final String XPathPrecioNoTachadoRelArticle = XPathPrecioRelArticle + "//self::div[not(@class[contains(.,'tachado')])]";
+	private static final String XPathPrecioSiTachadoRelArticle = XPathPrecioRelArticle + "//self::div[@class[contains(.,'tachado')]]";
 	
-	private final static String XPathCantidadArticulos = "//div[@class[contains(.,'cantidadRes')]]";
-	private final static String XPathImporteTotal = "//*[@id='SVBody:SVResumenDesgloseImporteTotal:importeTotal']";
-	private final static String XPathClickDespliegaPagos = "//p[@class[contains(.,'anadirPago')]]";
-	private final static String XPathImporteTotalCompra = "//*[@id[contains(.,'importeTotalComprar')]]";
-	private final static String XPathOtrasFormasPago = "//div[@class[contains(.,'formasPago')]]";
-	private final static String XPathRedError = "//div[@class[contains(.,'errorbocatapago')]]";
-	private final static String XPathNombreEnvio = "//div[@class[contains(.,'nombreEnvio')]]"; 
-	private final static String XPathDirecionEnvio = "//div[@class[contains(.,'direccionEnvio')]]";
-	private final static String XPathPoblacionEnvio = "//div[@class[contains(.,'poblacionEnvio')]]";
-	private final static String XPathProvinciaEnvio = "//div[@class[contains(.,'provinciaEnvio')]]";
-	private final static String XPathPrecioSubTotal = "//div[@class='subTotal']/div/div[2]/span[@class='precioNormal']";
-	private final static String XPathPrecioTotal = "//span[@class[contains(.,'precioTotal')]]";
-	private final static String XPathBloquesPagoPosibles = 
+	private static final String XPathCantidadArticulos = "//div[@class[contains(.,'cantidadRes')]]";
+	private static final String XPathImporteTotal = "//*[@id='SVBody:SVResumenDesgloseImporteTotal:importeTotal']";
+	private static final String XPathClickDespliegaPagos = "//p[@class[contains(.,'anadirPago')]]";
+	private static final String XPathImporteTotalCompra = "//*[@id[contains(.,'importeTotalComprar')]]";
+	private static final String XPathOtrasFormasPago = "//div[@class[contains(.,'formasPago')]]";
+	private static final String XPathRedError = "//div[@class[contains(.,'errorbocatapago')]]";
+	private static final String XPathNombreEnvio = "//div[@class[contains(.,'nombreEnvio')]]"; 
+	private static final String XPathDirecionEnvio = "//div[@class[contains(.,'direccionEnvio')]]";
+	private static final String XPathPoblacionEnvio = "//div[@class[contains(.,'poblacionEnvio')]]";
+	private static final String XPathProvinciaEnvio = "//div[@class[contains(.,'provinciaEnvio')]]";
+	private static final String XPathPrecioSubTotal = "//div[@class='subTotal']/div/div[2]/span[@class='precioNormal']";
+	private static final String XPathPrecioTotal = "//span[@class[contains(.,'precioTotal')]]";
+	private static final String XPathBloquesPagoPosibles = 
 		"//div[@id='textoCondicionesTarjeta']//*[@id='CardName'] | " + 
 		"//div[@id='textoCondicionesTarjeta' and @class='paypalInfo'] | " +
 		"//div[@id='textoCondicionesTarjeta']//*[@id[contains(.,'yandex')]] | " +
@@ -80,36 +80,36 @@ public class Page1DktopCheckout extends PageObjTM {
 		"//div[@class[contains(.,'falconFormularioTarjeta')]] | " + 
 		"//div[@class[contains(.,'formasPago')]]"; 
 	
-	private final static String tagMetodoPago = "@TagMetodoPago";
-	private final static String XPathBlockTarjetaGuardadaPagoWithTag = "//div[@class[contains(.,'tarjetaGuardada')] and @data-analytics-value='" + tagMetodoPago + "']";
-	private final static String XPathRadioTrjGuardada = "//input[@class[contains(.,'guardadaInput')]]";
-	private final static String XPathCvcTrjGuardada = "//div[@class='storedCardForm']//input[@id='cvc']";
+	private static final String tagMetodoPago = "@TagMetodoPago";
+	private static final String XPathBlockTarjetaGuardadaPagoWithTag = "//div[@class[contains(.,'tarjetaGuardada')] and @data-analytics-value='" + tagMetodoPago + "']";
+	private static final String XPathRadioTrjGuardada = "//input[@class[contains(.,'guardadaInput')]]";
+	private static final String XPathCvcTrjGuardada = "//div[@class='storedCardForm']//input[@id='cvc']";
 	
-	private final static String XPathLinkSolicitarFactura = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
-	private final static String XPathLinkEditDirecEnvio = "//span[@class[contains(.,'cambiarDatosEnvio')]]";
-	private final static String XPathFirstArticulo = "//div[@class[contains(.,'firstArticulo')]]";
-	private final static String XPathInputVendedorVOTF = "//input[@class[contains(.,'codiDependenta')]]";
-	private final static String XPathButtonAcceptVendedorVOTF = "//span[@id[contains(.,'CodigoDependienta')]]";
+	private static final String XPathLinkSolicitarFactura = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
+	private static final String XPathLinkEditDirecEnvio = "//span[@class[contains(.,'cambiarDatosEnvio')]]";
+	private static final String XPathFirstArticulo = "//div[@class[contains(.,'firstArticulo')]]";
+	private static final String XPathInputVendedorVOTF = "//input[@class[contains(.,'codiDependenta')]]";
+	private static final String XPathButtonAcceptVendedorVOTF = "//span[@id[contains(.,'CodigoDependienta')]]";
 	
-	private final static String XPathContentChequeRegalo = "//div[@class[contains(.,'contentsChequeRegalo')]]";
-	private final static String XPathNombreChequeRegalo = "(" + XPathContentChequeRegalo + "//div[@class='span3'])[1]";
-	private final static String XPathEmailChequeRegalo = "(" + XPathContentChequeRegalo + "//div[@class='span3'])[2]";
-	private final static String XPathPrecioChequeRegalo = XPathContentChequeRegalo + "//div[@class='span2']";
-	private final static String XPathMensajeChequeRegalo = XPathContentChequeRegalo + "//div[@class='span4']";
+	private static final String XPathContentChequeRegalo = "//div[@class[contains(.,'contentsChequeRegalo')]]";
+	private static final String XPathNombreChequeRegalo = "(" + XPathContentChequeRegalo + "//div[@class='span3'])[1]";
+	private static final String XPathEmailChequeRegalo = "(" + XPathContentChequeRegalo + "//div[@class='span3'])[2]";
+	private static final String XPathPrecioChequeRegalo = XPathContentChequeRegalo + "//div[@class='span2']";
+	private static final String XPathMensajeChequeRegalo = XPathContentChequeRegalo + "//div[@class='span4']";
 	
-	private final static String TagMetodoPago = "@TagMetodoPago";
-	private final static String XPathRadioPagoWithTag = "//div[@class[contains(.,'cuadroPago')]]/input[@value='" + TagMetodoPago + "']/../input[@type='radio']";
-	private final static String TextKrediKarti = "KREDİ KARTI";
-	private final static String XPathPestanyaKrediKarti = "//div[@class[contains(.,'pmGroupTitle')]]/span[text()='" + TextKrediKarti + "']";
+	private static final String TagMetodoPago = "@TagMetodoPago";
+	private static final String XPathRadioPagoWithTag = "//div[@class[contains(.,'cuadroPago')]]/input[@value='" + TagMetodoPago + "']/../input[@type='radio']";
+	private static final String TextKrediKarti = "KREDİ KARTI";
+	private static final String XPathPestanyaKrediKarti = "//div[@class[contains(.,'pmGroupTitle')]]/span[text()='" + TextKrediKarti + "']";
 	
-	private final static String XPathMetodoPago = "//*[@class[contains(.,'cardBox')]]/div";
+	private static final String XPathMetodoPago = "//*[@class[contains(.,'cardBox')]]/div";
 	
-	private final static String tagReferencia = "@TagRef";
-	private final static String XPathLineaArticuloWithTag = 
+	private static final String tagReferencia = "@TagRef";
+	private static final String XPathLineaArticuloWithTag = 
 		"//div[@class[contains(.,'ref')] and text()[contains(.,'" + tagReferencia + "')]]/ancestor::div[@class[contains(.,'articuloResBody')]]";
 	
-	private final static String tagCodVendedor = "@TagCodVendedor";
-	private final static String XPathCodVendedorVotfWithTag = "//form[@id[contains(.,'Dependienta')]]//span[text()[contains(.,'" + tagCodVendedor + "')]]";
+	private static final String tagCodVendedor = "@TagCodVendedor";
+	private static final String XPathCodVendedorVotfWithTag = "//form[@id[contains(.,'Dependienta')]]//span[text()[contains(.,'" + tagCodVendedor + "')]]";
 	
 	public Page1DktopCheckout(Channel channel, AppEcom app, WebDriver driver) {
 		super(driver);
@@ -295,7 +295,7 @@ public class Page1DktopCheckout extends PageObjTM {
 		sendKeysWithRetry(codigoPromo, By.xpath(xpathInputPromo), 2, driver);
 	}
 
-	private final static String xpathTextValeCampaign = "//span[@class='texto_banner_promociones']";
+	private static final String xpathTextValeCampaign = "//span[@class='texto_banner_promociones']";
 	public boolean checkTextValeCampaingIs(String textoCampaingVale) {
 		if (state(Visible, By.xpath(xpathTextValeCampaign)).check()) {
 			return (driver.findElement(By.xpath(xpathTextValeCampaign)).getText().toLowerCase().contains(textoCampaingVale.toLowerCase()));

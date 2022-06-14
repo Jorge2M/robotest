@@ -13,14 +13,14 @@ public class SecNewsLetter extends PageObjTM {
 
 	private final AppEcom app;
 	
-	private final static String XPathCapaNewsLetter = "//micro-frontend[@name[contains(.,'newsletterSubscriptionFooter')]]";
-	//private final static String XPathCapaNewsLetterOutlet = "//div[@class[contains(.,'newsletterForm')]]";
+	private static final String XPathCapaNewsLetter = "//micro-frontend[@name[contains(.,'newsletterSubscriptionFooter')]]";
+	//private static final String XPathCapaNewsLetterOutlet = "//div[@class[contains(.,'newsletterForm')]]";
 	
-	private final static String XPathNewsLetterMsg = XPathCapaNewsLetter + "//p[@class[contains(.,'sg-text-action')]]";
-	//private final static String XPathNewsLetterMsgOutlet = XPathCapaNewsLetterOutlet + "//span[@class='newsletterForm__text']";
+	private static final String XPathNewsLetterMsg = XPathCapaNewsLetter + "//p[@class[contains(.,'sg-text-action')]]";
+	//private static final String XPathNewsLetterMsgOutlet = XPathCapaNewsLetterOutlet + "//span[@class='newsletterForm__text']";
 	
-	private final static String XPathTextAreaMailSuscripcion = XPathCapaNewsLetter + "//input[@name='mail' or @name='email']";
-	//private final static String XPathTextAreaMailSuscripcionOutlet = XPathCapaNewsLetterOutlet + "//input[@id[contains(.,'regExpMail')]]";
+	private static final String XPathTextAreaMailSuscripcion = XPathCapaNewsLetter + "//input[@name='mail' or @name='email']";
+	//private static final String XPathTextAreaMailSuscripcionOutlet = XPathCapaNewsLetterOutlet + "//input[@id[contains(.,'regExpMail')]]";
 	
 	public SecNewsLetter(AppEcom app, WebDriver driver) {
 		super(driver);

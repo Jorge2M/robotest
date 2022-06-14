@@ -19,16 +19,16 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageDetallePedido {
 
-	private final static String tagIdPedido = "@tagIdPedido";
-	public final static String XPathImporteTotal = "//span[text()[contains(.,'TOTAL:')]]/../following-sibling::*[1]";
-	private final static String XPathCodigoPais = "//table[1]/tbody/tr/td[2]//tr[11]";
-	private final static String XPathLinkEnvioTienda = "//td[text()[contains(.,'ENVIO A TIENDA')]]";
-	private final static String XPathLabelIdPedido = "//td/label[text()[contains(.,'" + tagIdPedido + "')]]";
-	private final static String XPathEstadoPedido = "//span[text()[contains(.,'res_banco')]]/../following-sibling::*[1]";
-	private final static String XPathTipoServicio = "//span[text()[contains(.,'tipo servicio')]]/../following-sibling::*[1]";
-	private final static String XPathLinkVolverPedidos = "//a[text()[contains(.,'volver a pedidos')]]";
-	private final static String XPathRefereciaArticulo = "//a[@onclick[contains(.,'var div =')]]";
-	private final static String XPathLinkDetallesCliente = "//input[@value='Detalles Cliente']";
+	private static final String tagIdPedido = "@tagIdPedido";
+	public static final String XPathImporteTotal = "//span[text()[contains(.,'TOTAL:')]]/../following-sibling::*[1]";
+	private static final String XPathCodigoPais = "//table[1]/tbody/tr/td[2]//tr[11]";
+	private static final String XPathLinkEnvioTienda = "//td[text()[contains(.,'ENVIO A TIENDA')]]";
+	private static final String XPathLabelIdPedido = "//td/label[text()[contains(.,'" + tagIdPedido + "')]]";
+	private static final String XPathEstadoPedido = "//span[text()[contains(.,'res_banco')]]/../following-sibling::*[1]";
+	private static final String XPathTipoServicio = "//span[text()[contains(.,'tipo servicio')]]/../following-sibling::*[1]";
+	private static final String XPathLinkVolverPedidos = "//a[text()[contains(.,'volver a pedidos')]]";
+	private static final String XPathRefereciaArticulo = "//a[@onclick[contains(.,'var div =')]]";
+	private static final String XPathLinkDetallesCliente = "//input[@value='Detalles Cliente']";
 	
 	public static enum RightButtons implements ElementPage {
 		IrAGenerar("//input[@value='ir a Generar']"),

@@ -53,8 +53,8 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 
 public class FichaProducto {
 	
-	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
-	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
+	private static final Pais espana = PaisGetter.get(PaisShop.ESPANA);
+	private static final IdiomaPais castellano = espana.getListIdiomas().get(0);
 	
 	
 	@Test (
@@ -198,7 +198,7 @@ public class FichaProducto {
 		description="[Usuario no registrado] Desde Corea/coreano, se testea una ficha con origen la Galería validando el panel KcSafety")
 	public void FIC003_FichaFromGalery_CheckKcSafety() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-		Pais corea = PaisGetter.get(PaisShop.CoreaDelSur);
+		Pais corea = PaisGetter.get(PaisShop.COREA_DEL_SUR);
 		DataCtxShop dCtxSh = getCtxShForTest(corea, corea.getListIdiomas().get(0));
 	 
 		AccesoStpV.oneStep(dCtxSh, false, driver);

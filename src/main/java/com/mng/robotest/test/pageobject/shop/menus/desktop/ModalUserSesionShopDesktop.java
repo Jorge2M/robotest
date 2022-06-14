@@ -11,10 +11,10 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalUserSesionShopDesktop extends PageObjTM { 
 	
-	private final static String XPathWrapperUserMenu = 
+	private static final String XPathWrapperUserMenu = 
 			"//div[@data-testid[contains(.,'header.userMenu.login')] or " + 
 			"@class[contains(.,'user-icon-button')]]";
-	private final static String XPathCapaMenus = XPathWrapperUserMenu + "/div[@role='button']";
+	private static final String XPathCapaMenus = XPathWrapperUserMenu + "/div[@role='button']";
 	
 	public enum MenuUserDesktop implements ElementPage { 
 		iniciarSesion (XPathCapaMenus + "//div[@class[contains(.,'login-button')]]"),

@@ -9,8 +9,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PagePaypalConfirmacion {
 
-	private final static String XPathReviewPage = "//div[@class[contains(.,'review-page')]]";
-	private final static String XPathContinueButton = "//input[@id='confirmButtonTop']";
+	private static final String XPathReviewPage = "//div[@class[contains(.,'review-page')]]";
+	private static final String XPathContinueButton = "//input[@id='confirmButtonTop']";
 
 	public static boolean isPageUntil(int maxSeconds, WebDriver driver) {
 		return (state(Visible, By.xpath(XPathReviewPage), driver)

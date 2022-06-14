@@ -30,7 +30,7 @@ public class SecStoreCreditStpV {
 		this.driver = driver;
 	}
 	
-	final static String tagNombrePago = "@TagNombrePago";
+	static final String tagNombrePago = "@TagNombrePago";
 	@Step (
 		description="Revisamos el bloque de \"Saldo en cuenta\"", 
 		expected="Sólo aparece el método de pago " + tagNombrePago)

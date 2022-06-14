@@ -17,16 +17,16 @@ import com.mng.robotest.test.pageobject.shop.checkout.DataDireccion.DataDirType;
 
 public abstract class ModalDireccion extends PageObjTM {
 
-	private final static String XPathInputNif = "//input[@id[contains(.,'cfDni')]]";
-	private final static String XPathInputName = "//input[@id[contains(.,'cfName')]]";
-	private final static String XPathInputApellidos = "//input[@id[contains(.,'cfSname')]]";
-	private final static String XPathInputDireccion = "//input[@id[contains(.,'cfDir1')]]";
-	private final static String XPathInputCodpostal = "//input[@id[contains(.,'cfCp')]]";
-	private final static String XPathInputEmail = "//input[@id[contains(.,'cfEmail')]]";
-	private final static String XPathInputTelefono = "//input[@id[contains(.,'cfTelf')]]";
-	private final static String XPathSelectPoblacion = "//select[@id[contains(.,':localidades')]]";
-	private final static String XPathSelectProvincia = "//select[@id[contains(.,':estadosPais')]]";
-	private final static String XPathSelectPais = "//select[@id[contains(.,':pais')]]";
+	private static final String XPathInputNif = "//input[@id[contains(.,'cfDni')]]";
+	private static final String XPathInputName = "//input[@id[contains(.,'cfName')]]";
+	private static final String XPathInputApellidos = "//input[@id[contains(.,'cfSname')]]";
+	private static final String XPathInputDireccion = "//input[@id[contains(.,'cfDir1')]]";
+	private static final String XPathInputCodpostal = "//input[@id[contains(.,'cfCp')]]";
+	private static final String XPathInputEmail = "//input[@id[contains(.,'cfEmail')]]";
+	private static final String XPathInputTelefono = "//input[@id[contains(.,'cfTelf')]]";
+	private static final String XPathSelectPoblacion = "//select[@id[contains(.,':localidades')]]";
+	private static final String XPathSelectProvincia = "//select[@id[contains(.,':estadosPais')]]";
+	private static final String XPathSelectPais = "//select[@id[contains(.,':pais')]]";
 	
 	public ModalDireccion(WebDriver driver) {
 		super(driver);

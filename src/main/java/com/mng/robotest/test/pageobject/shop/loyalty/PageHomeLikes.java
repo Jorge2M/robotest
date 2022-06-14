@@ -11,8 +11,8 @@ import org.openqa.selenium.WebDriver;
 
 public class PageHomeLikes extends PageObjTM {
 
-	private final static String XPathWrappPage = "//micro-frontend[@id='loyaltySpace']";
-	private final static String XPathPoints = XPathWrappPage + "//div[@id='space-header']/div[3]"; 
+	private static final String XPathWrappPage = "//micro-frontend[@id='loyaltySpace']";
+	private static final String XPathPoints = XPathWrappPage + "//div[@id='space-header']/div[3]"; 
 	
 	public enum ButtonUseLikes {
 		CompraConDescuento("//button[text()='Comprar con descuento']"),

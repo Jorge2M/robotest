@@ -16,12 +16,12 @@ public class SecLineasMenuDesktopNew extends SecLineasMenuDesktop {
 
 	//private static String XPathMenuFatherWrapper = "//micro-frontend[@id='header']/div";
 	private static String XPathMenuFatherWrapper = "//micro-frontend[@id='header']";
-	private final static String XPathLinea = "//li[@data-testid[contains(.,'header.menuItem')]]";
+	private static final String XPathLinea = "//li[@data-testid[contains(.,'header.menuItem')]]";
 	private static String XPathLineasMenuWrapper = XPathLinea + "/..";
-	private final static String XPathLineaSpecificWithTag = XPathLinea + "//self::*[@data-testid[contains(.,'Item." + TagIdLinea + "')]]";
+	private static final String XPathLineaSpecificWithTag = XPathLinea + "//self::*[@data-testid[contains(.,'Item." + TagIdLinea + "')]]";
 	
-	private final static String TagIdSublinea = "@SublineaId";
-	private final static String XPathSublineaWithTag = "//li[@id[contains(.,'" + TagIdSublinea+ "')] and @data-testid[contains(.,'section')]]";
+	private static final String TagIdSublinea = "@SublineaId";
+	private static final String XPathSublineaWithTag = "//li[@id[contains(.,'" + TagIdSublinea+ "')] and @data-testid[contains(.,'section')]]";
 	
 	public SecLineasMenuDesktopNew(AppEcom app, WebDriver driver) {
 		super(app, driver);

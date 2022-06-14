@@ -12,9 +12,9 @@ import com.mng.robotest.test.pageobject.votf.PageLoginVOTF;
 
 public class PageLoginVOTFStpV {
 
-	final static String tagNombrePais = "@TagNombrePais";
-	final static String tagUsuarioVotf = "@TagUsuarioVotf";
-	final static String tagPasswordVotf = "@TagPasswordVotf";
+	static final String tagNombrePais = "@TagNombrePais";
+	static final String tagUsuarioVotf = "@TagUsuarioVotf";
+	static final String tagPasswordVotf = "@TagPasswordVotf";
 	@Step (
 		description=
 			"Acceder a la página de Login e identificarnos con un usuario de " + 

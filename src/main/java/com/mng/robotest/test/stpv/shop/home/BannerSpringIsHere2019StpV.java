@@ -55,7 +55,7 @@ public class BannerSpringIsHere2019StpV {
 		return null;
 	}
 	
-	final static String csselectorSwipperCircle = "div.swiper-pagination-clickable circle.vsv-circle";
+	static final String csselectorSwipperCircle = "div.swiper-pagination-clickable circle.vsv-circle";
 	@Step (
 		description="Congelamos la campaña asociada al <b>#{circleAssociatedToCampaign}o</b> círculo",
 		expected="El carrusel queda parado en la campaña deseada")

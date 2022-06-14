@@ -17,7 +17,7 @@ import com.mng.robotest.test.stpv.shop.checkout.envio.DataSearchDeliveryPoint.Da
 @SuppressWarnings({"static-access"})
 public class SecSelectDPointStpV {
 	
-	final static String tagSearchDp = "@TagSearchDp";
+	static final String tagSearchDp = "@TagSearchDp";
 	@Step (
 		description="Introducimos la provincia <b>" + tagSearchDp + "</b> + Return", 
 		expected="Aparecen puntos de recogida de " + tagSearchDp)

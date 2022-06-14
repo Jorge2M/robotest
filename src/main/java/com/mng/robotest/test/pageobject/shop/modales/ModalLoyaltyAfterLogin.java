@@ -8,8 +8,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalLoyaltyAfterLogin {
 
-	final static String XPathCapaContainer = "//div[@class[contains(.,'modal-content')]]";
-	final static String XPathIrDeShoppingLink = XPathCapaContainer + "//a[@class[contains(.,'loyalty-irdeshopping')]]";
+	static final String XPathCapaContainer = "//div[@class[contains(.,'modal-content')]]";
+	static final String XPathIrDeShoppingLink = XPathCapaContainer + "//a[@class[contains(.,'loyalty-irdeshopping')]]";
 	
 	public static boolean isModalVisibleUntil(int maxSeconds, WebDriver driver) {
 		return (state(Visible, By.xpath(XPathIrDeShoppingLink), driver)

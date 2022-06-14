@@ -23,7 +23,7 @@ public class ClientApiLoyaltyPointsDevIT {
 	@Test
 	public void addLoyaltyPoints() throws Exception {
 		ClientApiLoyaltyPointsDev client = new ClientApiLoyaltyPointsDev();
-		ResultAddPoints result = client.addLoyaltyPoints(UserTest.loy002, 100);
+		ResultAddPoints result = client.addLoyaltyPoints(UserTest.LOY002, 100);
 		assertTrue("success".compareTo(result.getStatus())==0);
 	}
 }

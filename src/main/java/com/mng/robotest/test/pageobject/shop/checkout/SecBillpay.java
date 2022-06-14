@@ -14,17 +14,17 @@ public class SecBillpay extends PageObjTM {
 	
 	private final Channel channel;
 	
-	private final static String XPathBlockBillpayDesktop = "//div[@class[contains(.,'billpayFormulario')]]";
-	private final static String XPathBlockRechnungMobil = "//div[@class[contains(.,'billpayinvoice')] and @class[contains(.,'show')]]";
-	private final static String XPathBlockLastschriftMobil = "//div[@class[contains(.,'billpaydirectdebit')] and @class[contains(.,'show')]]";
-	private final static String XPathSelectBirthDay = "//select[@id[contains(.,'birthDay')]]";
-	private final static String XPathSelectBirthMonth = "//select[@id[contains(.,'birthMonth')]]";
-	private final static String XPathSelectBirthYear = "//select[@id[contains(.,'birthYear')]]";
-	private final static String XPathInputTitular = "//input[@id[contains(.,'accountHolderName')]]";
-	private final static String XPathInputIBAN = "//input[@id[contains(.,':iban')] or @id[contains(.,':billpay_iban')]]";
-	private final static String XPathInputBIC = "//input[@id[contains(.,':bic')] or @id[contains(.,':billpay_bic')]]";
-	private final static String XPathRadioAceptoMobil = "//div[@class[contains(.,'contenidoTarjetaBillpay')]]//div[@class[contains(.,'custom-check')]]"; 
-	private final static String XPathRadioAceptoDesktop = "//div[@class='legalText']/input[@type='checkbox']";			
+	private static final String XPathBlockBillpayDesktop = "//div[@class[contains(.,'billpayFormulario')]]";
+	private static final String XPathBlockRechnungMobil = "//div[@class[contains(.,'billpayinvoice')] and @class[contains(.,'show')]]";
+	private static final String XPathBlockLastschriftMobil = "//div[@class[contains(.,'billpaydirectdebit')] and @class[contains(.,'show')]]";
+	private static final String XPathSelectBirthDay = "//select[@id[contains(.,'birthDay')]]";
+	private static final String XPathSelectBirthMonth = "//select[@id[contains(.,'birthMonth')]]";
+	private static final String XPathSelectBirthYear = "//select[@id[contains(.,'birthYear')]]";
+	private static final String XPathInputTitular = "//input[@id[contains(.,'accountHolderName')]]";
+	private static final String XPathInputIBAN = "//input[@id[contains(.,':iban')] or @id[contains(.,':billpay_iban')]]";
+	private static final String XPathInputBIC = "//input[@id[contains(.,':bic')] or @id[contains(.,':billpay_bic')]]";
+	private static final String XPathRadioAceptoMobil = "//div[@class[contains(.,'contenidoTarjetaBillpay')]]//div[@class[contains(.,'custom-check')]]"; 
+	private static final String XPathRadioAceptoDesktop = "//div[@class='legalText']/input[@type='checkbox']";			
    
 	public SecBillpay(Channel channel, WebDriver driver) {
 		super(driver);

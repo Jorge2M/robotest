@@ -38,13 +38,13 @@ public class SecIdeal extends PageObjTM {
 
 	private final Channel channel;
 		
-	private final static String XPathCardConditions = "//div[@id='textoCondicionesTarjeta']";
-	private final static String XPathSelectorBankIdeal = XPathCardConditions + "//div[@id='ideal-bank-selector']";
-	private final static String XPathListBankIdeal = XPathSelectorBankIdeal + "//select[@name[contains(.,'panelTarjetasForm')] and @class='bank-select']";
+	private static final String XPathCardConditions = "//div[@id='textoCondicionesTarjeta']";
+	private static final String XPathSelectorBankIdeal = XPathCardConditions + "//div[@id='ideal-bank-selector']";
+	private static final String XPathListBankIdeal = XPathSelectorBankIdeal + "//select[@name[contains(.,'panelTarjetasForm')] and @class='bank-select']";
 	
-	private final static String XPathCardConditionsMobile = "//div[@id='avisoConfirmar']";
-	private final static String XPathSelectorBankIdealMobile = XPathCardConditionsMobile + "//div[@id='ideal-bank-selector']";
-	private final static String XPathListBankIdealMobile = "//select[@class[contains(.,'bank-select')]]";
+	private static final String XPathCardConditionsMobile = "//div[@id='avisoConfirmar']";
+	private static final String XPathSelectorBankIdealMobile = XPathCardConditionsMobile + "//div[@id='ideal-bank-selector']";
+	private static final String XPathListBankIdealMobile = "//select[@class[contains(.,'bank-select')]]";
 	
 	public SecIdeal(Channel channel, WebDriver driver) {
 		super(driver);

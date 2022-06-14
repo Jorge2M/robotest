@@ -73,7 +73,7 @@ public class PageAccesoMisComprasStpV {
 		pageMisComprasStpV.validateIsPage(pais);
 	}
 
-	final static String tagUsuario = "@TagUsuario";
+	static final String tagUsuario = "@TagUsuario";
 	@Step (
 		description=
 			"En el bloque de \"No Registrado\", introducir el usuario/núm pedido " + 

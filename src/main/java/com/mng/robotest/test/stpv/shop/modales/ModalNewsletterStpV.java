@@ -10,7 +10,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalNewsletterStpV {
 
-	private final static String XPathAspaClose = "//button[@data-testid='newsletterSubscriptionModal.nonModal.close']";
+	private static final String XPathAspaClose = "//button[@data-testid='newsletterSubscriptionModal.nonModal.close']";
 
 	public static void closeIfVisible(WebDriver driver) {
 		if (isVisible(driver)) {

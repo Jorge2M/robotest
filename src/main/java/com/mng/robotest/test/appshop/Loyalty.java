@@ -44,18 +44,18 @@ import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
 public class Loyalty {
 	
-	private final static Pais espana = PaisGetter.get(PaisShop.ESPANA);
-	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
+	private static final Pais espana = PaisGetter.get(PaisShop.ESPANA);
+	private static final IdiomaPais castellano = espana.getListIdiomas().get(0);
 
-	final static String userProWithLPoints = "ticket_digital_es@mango.com";
+	static final String USER_PRO_WITH_LOY_POINTS = "ticket_digital_es@mango.com";
 
 	
 	public static enum UserTest {
-		loy001(userProWithLPoints, "6051483560048388114", "ES"),
-		loy002("test.performance21@mango.com", "6877377061230042978", "ES"),
-		loy003("test.performance22@mango.com", "6876577027622042923", "ES"),
-		loy005_emisor("test.performance23@mango.com", "6875476978997042979", "ES"),
-		loy005_receptor("test.performance24@mango.com", "6876477022921042981", "ES");
+		LOY001(USER_PRO_WITH_LOY_POINTS, "6051483560048388114", "ES"),
+		LOY002("test.performance21@mango.com", "6877377061230042978", "ES"),
+		LOY003("test.performance22@mango.com", "6876577027622042923", "ES"),
+		LOY005_EMISOR("test.performance23@mango.com", "6875476978997042979", "ES"),
+		LOY005_RECEPTOR("test.performance24@mango.com", "6876477022921042981", "ES");
 		
 		private String email;
 		private String contactId;
@@ -93,7 +93,7 @@ public class Loyalty {
 	public void LOY001_Compra_LikesStored() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
-		dCtxSh.userConnected = UserTest.loy001.getEmail();
+		dCtxSh.userConnected = UserTest.LOY001.getEmail();
 		dCtxSh.userRegistered = true;
 		dCtxSh.passwordUser = GetterSecrets.factory()
 				.getCredentials(SecretType.SHOP_STANDARD_USER)
@@ -148,12 +148,12 @@ public class Loyalty {
 		boolean isEntornoPro = UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver);
 		dCtxSh.userRegistered = true;
 		if (isEntornoPro) {
-			dCtxSh.userConnected = userProWithLPoints;
+			dCtxSh.userConnected = USER_PRO_WITH_LOY_POINTS;
 			dCtxSh.passwordUser = GetterSecrets.factory()
 					.getCredentials(SecretType.SHOP_STANDARD_USER)
 					.getPassword();
 		} else {
-			dCtxSh.userConnected = UserTest.loy002.getEmail();
+			dCtxSh.userConnected = UserTest.LOY002.getEmail();
 			dCtxSh.passwordUser = GetterSecrets.factory()
 					.getCredentials(SecretType.SHOP_PERFORMANCE_USER)
 					.getPassword();
@@ -164,7 +164,7 @@ public class Loyalty {
 		int loyaltyPointsIni = secMenusUserStpV.clickMenuMangoLikesYou();
 		if (loyaltyPointsIni < 3000 && !isEntornoPro) {
 			ClientApiLoyaltyPointsDev client = new ClientApiLoyaltyPointsDev();
-			client.addLoyaltyPoints(UserTest.loy002, 25000);
+			client.addLoyaltyPoints(UserTest.LOY002, 25000);
 			loyaltyPointsIni = secMenusUserStpV.clickMenuMangoLikesYou();
 		}
 		
@@ -188,12 +188,12 @@ public class Loyalty {
 		boolean isEntornoPro = UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver);
 		dCtxSh.userRegistered = true;
 		if (isEntornoPro) {
-			dCtxSh.userConnected = userProWithLPoints;
+			dCtxSh.userConnected = USER_PRO_WITH_LOY_POINTS;
 			dCtxSh.passwordUser = GetterSecrets.factory()
 					.getCredentials(SecretType.SHOP_STANDARD_USER)
 					.getPassword();
 		} else {
-			dCtxSh.userConnected = UserTest.loy003.getEmail();
+			dCtxSh.userConnected = UserTest.LOY003.getEmail();
 			dCtxSh.passwordUser = GetterSecrets.factory()
 					.getCredentials(SecretType.SHOP_PERFORMANCE_USER)
 					.getPassword();
@@ -204,7 +204,7 @@ public class Loyalty {
 		int loyaltyPointsIni = secMenusUserStpV.clickMenuMangoLikesYou();
 		if (loyaltyPointsIni < 3000 && !isEntornoPro) {
 			ClientApiLoyaltyPointsDev client = new ClientApiLoyaltyPointsDev();
-			client.addLoyaltyPoints(UserTest.loy003, 25000);
+			client.addLoyaltyPoints(UserTest.LOY003, 25000);
 			loyaltyPointsIni = secMenusUserStpV.clickMenuMangoLikesYou();
 		}
 		
@@ -275,7 +275,7 @@ public class Loyalty {
 		String passwordTestPerformmance = GetterSecrets.factory()
 				.getCredentials(SecretType.SHOP_PERFORMANCE_USER)
 				.getPassword();
-		dCtxSh.userConnected = UserTest.loy005_receptor.getEmail();
+		dCtxSh.userConnected = UserTest.LOY005_RECEPTOR.getEmail();
 		dCtxSh.passwordUser = passwordTestPerformmance;
 		dCtxSh.userRegistered = true;
 		
@@ -283,11 +283,11 @@ public class Loyalty {
 		SecMenusUserStpV secMenusUserStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
 		int iniPointsReceptor = secMenusUserStpV.clickMenuMangoLikesYou();
 		
-		secMenusUserStpV.logoffLogin(UserTest.loy005_emisor.getEmail(), passwordTestPerformmance);
+		secMenusUserStpV.logoffLogin(UserTest.LOY005_EMISOR.getEmail(), passwordTestPerformmance);
 		int iniPointsEmisor = secMenusUserStpV.clickMenuMangoLikesYou();
 		if (iniPointsEmisor < pointsRegalar && !isEntornoPro) {
 			ClientApiLoyaltyPointsDev client = new ClientApiLoyaltyPointsDev();
-			client.addLoyaltyPoints(UserTest.loy005_emisor, 25000);
+			client.addLoyaltyPoints(UserTest.LOY005_EMISOR, 25000);
 			iniPointsEmisor = secMenusUserStpV.clickMenuMangoLikesYou();
 		}
 		PageRegalarMisLikesStpV pageRegalarMisLikesStpV = 
@@ -295,16 +295,16 @@ public class Loyalty {
 		
 		pageRegalarMisLikesStpV.inputReceptorAndClickContinuar(
 			"Regalo a mi usuario ficticio favorito",
-			UserTest.loy005_receptor.getEmail());
+			UserTest.LOY005_RECEPTOR.getEmail());
 		pageRegalarMisLikesStpV.inputNumLikesAndClickEnviarRegalo(pointsRegalar);
 		
 		int finPointsEmisor = secMenusUserStpV.clickMenuMangoLikesYou();
-		secMenusUserStpV.logoffLogin(UserTest.loy005_receptor.getEmail(), passwordTestPerformmance);
+		secMenusUserStpV.logoffLogin(UserTest.LOY005_RECEPTOR.getEmail(), passwordTestPerformmance);
 		int finPointsReceptor = secMenusUserStpV.clickMenuMangoLikesYou();
 		
 		DataRegaloPuntos dataPoints = new DataRegaloPuntos();
-		dataPoints.setClienteEmisor(UserTest.loy005_emisor.getEmail());
-		dataPoints.setClienteReceptor(UserTest.loy005_receptor.getEmail());
+		dataPoints.setClienteEmisor(UserTest.LOY005_EMISOR.getEmail());
+		dataPoints.setClienteReceptor(UserTest.LOY005_RECEPTOR.getEmail());
 		dataPoints.setPointsRegalados(pointsRegalar);
 		dataPoints.setIniPointsEmisor(iniPointsEmisor); 
 		dataPoints.setIniPointsReceptor(iniPointsReceptor);

@@ -9,9 +9,9 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalLoyaltyAfterAccess {
 
-	final static String XPathCapaGlobal = "//div[@id='adhesionModal']"; 
-	final static String XPathCapaContainer = XPathCapaGlobal + "//div[@class='modal-container']";
-	final static String XPathAspaForClose = XPathCapaContainer + "//span[@class='modal-close-icon']";
+	static final String XPathCapaGlobal = "//div[@id='adhesionModal']"; 
+	static final String XPathCapaContainer = XPathCapaGlobal + "//div[@class='modal-container']";
+	static final String XPathAspaForClose = XPathCapaContainer + "//span[@class='modal-close-icon']";
 	
 	public static boolean isModalVisibleUntil(int maxSeconds, WebDriver driver) {
 		return (state(Visible, By.xpath(XPathCapaContainer), driver).wait(maxSeconds).check());

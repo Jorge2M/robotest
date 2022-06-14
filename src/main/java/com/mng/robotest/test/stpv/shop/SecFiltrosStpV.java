@@ -21,7 +21,7 @@ import com.mng.robotest.test.stpv.shop.menus.SecMenuLateralMobilStpV;
 
 public class SecFiltrosStpV {
 
-	final static String tagLitColorsToSelect = "@TagLitColorsToSelect";
+	static final String tagLitColorsToSelect = "@TagLitColorsToSelect";
 	@Step (
 		description="Seleccionar los colores <b>" + tagLitColorsToSelect + "</b>", 
 		expected="Aparece la galería de imágenes",
@@ -60,7 +60,7 @@ public class SecFiltrosStpV {
 	 	return validations;
 	}
 	
-	final static String tagLitMenusToSelect = "@TagLitMenusToSelect";
+	static final String tagLitMenusToSelect = "@TagLitMenusToSelect";
 	@Step (
 		description="Seleccionar los menús <b>" + tagLitMenusToSelect + "</b>", 
 		expected="Aparece la galería de artículos",

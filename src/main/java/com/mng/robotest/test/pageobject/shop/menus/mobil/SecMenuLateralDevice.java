@@ -134,7 +134,7 @@ public class SecMenuLateralDevice extends PageObjTM {
 		}
 	}
 	
-	private final static String XPathLineaItem = "//ul[@class='menu-section-brands']/li[@class[contains(.,'menu-item')]]";
+	private static final String XPathLineaItem = "//ul[@class='menu-section-brands']/li[@class[contains(.,'menu-item')]]";
 	private boolean isMenuTabletInStateUntil(boolean open, int maxSeconds) {
 		if (open) {
 			return (state(Visible, By.xpath(XPathLineaItem)).wait(maxSeconds).check());

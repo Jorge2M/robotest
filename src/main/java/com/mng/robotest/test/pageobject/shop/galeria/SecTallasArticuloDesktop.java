@@ -106,9 +106,9 @@ public class SecTallasArticuloDesktop extends PageObjTM {
 		return "(" + xpathCapaTallas + getXPathTallaAvailable() + ")[" + posTalla + "]";
 	}
 
-//	private final static String XpathTallaNoDisponibleArticuloOutletOld = "//span[@data-id and (@class[contains(.,'no-stock')])]";
-//	private final static String XpathTallaNoDisponibleArticuloOutletNew = "//button[@class[contains(.,'no-stock')]]";
-//	private final static String XpathTallaNoDisponibleArticuloShop = "//button[@class[contains(.,'no-stock')]]";
+//	private static final String XpathTallaNoDisponibleArticuloOutletOld = "//span[@data-id and (@class[contains(.,'no-stock')])]";
+//	private static final String XpathTallaNoDisponibleArticuloOutletNew = "//button[@class[contains(.,'no-stock')]]";
+//	private static final String XpathTallaNoDisponibleArticuloShop = "//button[@class[contains(.,'no-stock')]]";
 	public String getXPathArticleTallaNotAvailable() {
 ////		if (app==AppEcom.outlet) {
 ////			if (getOutletGalery()==OutletGalery.old) {

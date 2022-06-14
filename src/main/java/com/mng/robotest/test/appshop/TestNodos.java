@@ -34,8 +34,8 @@ public class TestNodos implements Serializable {
 
 	private static final long serialVersionUID = 1986211132936039272L;
 	
-	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
-	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
+	private static final Pais espana = PaisGetter.get(PaisShop.ESPANA);
+	private static final IdiomaPais castellano = espana.getListIdiomas().get(0);
 	  
 	private String index_fact;
 	

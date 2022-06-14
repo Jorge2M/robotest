@@ -45,8 +45,8 @@ public class SecSelectorPreciosStpV {
 	 * Selecciona un intervalo de precio mínimo/precio máximo. 
 	 * No es posible pasar como parámetro el mínimo/máximo pues lo único que podemos hacer es 'click por la derecha' + 'click por la izquierda'
 	 */
-	final static String tagMinimo = "[MINIMO]";
-	final static String tagMaximo = "[MAXIMO]";
+	static final String tagMinimo = "[MINIMO]";
+	static final String tagMaximo = "[MAXIMO]";
 	@Step (
 		description="Utilizar el selector de precio: Mínimo=" + tagMinimo + " Máximo=" + tagMaximo, 
 		expected="Aparecen artículos con precio en el intervalo seleccionado")

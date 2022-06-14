@@ -23,9 +23,9 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	
 	private final ModalUserSesionShopDesktop modalUserSesionShopDesktop;
 	
-	private final static String XPathDivNavTools = "//div[@id='navTools']";
-	private final static String XPathNumArticlesManyLocations = "//*[@class='icon-button-items']";
-	private final static String XPathNumArticlesBolsaDesktop = "//span[@data-testid[contains(.,'numItems')]]";
+	private static final String XPathDivNavTools = "//div[@id='navTools']";
+	private static final String XPathNumArticlesManyLocations = "//*[@class='icon-button-items']";
+	private static final String XPathNumArticlesBolsaDesktop = "//span[@data-testid[contains(.,'numItems')]]";
 	
 	public enum IconoCabeceraShop_DesktopMobile implements ElementPage {
 		lupa(
@@ -49,7 +49,7 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 		private By byDesktop;
 		private String xpathDesktop;
 		
-		final static String XPathIconMobile = "//div[@class[contains(.,'user-icon-button')]]";
+		static final String XPathIconMobile = "//div[@class[contains(.,'user-icon-button')]]";
 		IconoCabeceraShop_DesktopMobile(String xPathMobile, String xPathDesktop) {
 			xpathMobile = XPathIconMobile + xPathMobile;
 			byMobile = By.xpath(XPathIconMobile + xPathMobile);

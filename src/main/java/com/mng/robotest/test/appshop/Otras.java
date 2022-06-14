@@ -25,15 +25,15 @@ import org.openqa.selenium.WebDriver;
 
 public class Otras {
 	
-	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
-	private final static Pais francia = PaisGetter.get(PaisShop.France);
-	private final static Pais suecia = PaisGetter.get(PaisShop.Sweden);
-	private final static Pais irlanda = PaisGetter.get(PaisShop.Ireland);
-	private final static Pais USA = PaisGetter.get(PaisShop.USA);
-	private final static Pais japon = PaisGetter.get(PaisShop.Japon);
-	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
-	private final static IdiomaPais francia_frances = francia.getListIdiomas().get(0);
-	private final static IdiomaPais japones = japon.getListIdiomas().get(0);
+	private static final Pais espana = PaisGetter.get(PaisShop.ESPANA);
+	private static final Pais francia = PaisGetter.get(PaisShop.FRANCE);
+	private static final Pais suecia = PaisGetter.get(PaisShop.SWEDEN);
+	private static final Pais irlanda = PaisGetter.get(PaisShop.IRELAND);
+	private static final Pais USA = PaisGetter.get(PaisShop.USA);
+	private static final Pais japon = PaisGetter.get(PaisShop.JAPON);
+	private static final IdiomaPais castellano = espana.getListIdiomas().get(0);
+	private static final IdiomaPais francia_frances = francia.getListIdiomas().get(0);
+	private static final IdiomaPais japones = japon.getListIdiomas().get(0);
 
 	private DataCtxShop getCtxShForTest() throws Exception {
 		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();

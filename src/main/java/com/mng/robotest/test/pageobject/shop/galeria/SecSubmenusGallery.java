@@ -9,11 +9,11 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 public class SecSubmenusGallery {
 
 	//TODO modificar cuando dispongamos del data-testid (React)
-	private final static String XPathCapa = "//div[@class[contains(.,'src-catalog-header-navigation')] or @class[contains(.,'XNV9w')]]";
+	private static final String XPathCapa = "//div[@class[contains(.,'src-catalog-header-navigation')] or @class[contains(.,'XNV9w')]]";
 	
-	private final static String TAG_NAME = "@TAG_NAME";
-	private final static String TAG2_NAME = "@TAG2_NAME";
-	private final static String XPathSubmenuItem = XPathCapa + "/a[text()='" + TAG_NAME + "' or text()='" + TAG2_NAME + "']";
+	private static final String TAG_NAME = "@TAG_NAME";
+	private static final String TAG2_NAME = "@TAG2_NAME";
+	private static final String XPathSubmenuItem = XPathCapa + "/a[text()='" + TAG_NAME + "' or text()='" + TAG2_NAME + "']";
 	
 	private static String getXPathMenu(String nameMenu) {
 		String nameMenuFirstCapital = nameMenu.substring(0, 1).toUpperCase() + nameMenu.substring(1);

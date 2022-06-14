@@ -21,9 +21,9 @@ public class ModalCambioPaisStpV {
 		return (ModalCambioPais.isVisibleModalUntil(driver, maxSeconds));
 	}
 	
-	final static String tagNombrePais = "@TagNombrePais";
-	final static String tagCodigoPais = "@TagCodigoPais";
-	final static String tagLiteralIdioma = "@TagLiteralIdioma";
+	static final String tagNombrePais = "@TagNombrePais";
+	static final String tagCodigoPais = "@TagCodigoPais";
+	static final String tagLiteralIdioma = "@TagLiteralIdioma";
 	@Step (
 		description="Cambiamos al país <b>" + tagNombrePais + "</b> (" + tagCodigoPais + "), idioma <b>" + tagLiteralIdioma + "</b>", 
 		expected="Se accede a la shop de " + tagNombrePais + " en " + tagLiteralIdioma)

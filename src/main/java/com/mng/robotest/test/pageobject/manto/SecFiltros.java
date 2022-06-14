@@ -12,14 +12,14 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecFiltros {
 
-	final static String XPathFiltroCodPedido = "//input[@id[contains(.,':id')]]";
-	final static String XPathFiltroCodPais = "//input[@id[contains(.,'pais')]]";
-	final static String XPathFiltroFDesde = "//input[@id[contains(.,'desde')]]";
-	final static String XPathFiltroFHasta = "//input[@id[contains(.,'hasta')]]";
-	final static String XPathFiltroImporteTotal = "//input[@id[contains(.,':total')]]";
-	final static String XPathButtonBuscar = "//input[@value='Buscar']";
+	static final String XPathFiltroCodPedido = "//input[@id[contains(.,':id')]]";
+	static final String XPathFiltroCodPais = "//input[@id[contains(.,'pais')]]";
+	static final String XPathFiltroFDesde = "//input[@id[contains(.,'desde')]]";
+	static final String XPathFiltroFHasta = "//input[@id[contains(.,'hasta')]]";
+	static final String XPathFiltroImporteTotal = "//input[@id[contains(.,':total')]]";
+	static final String XPathButtonBuscar = "//input[@value='Buscar']";
 	
-	final static DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	static final DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
 	public static void setFiltroCodPedido(String codigoPedidoManto, WebDriver driver) {
 		driver.findElement(By.xpath(XPathFiltroCodPedido)).clear();

@@ -35,7 +35,7 @@ public class SecTMangoStpV {
 	/**
 	 * @param literalTipoPago contiene uno de los valores de SecTMango.pagoHabitual, SecTMango.tresMeses...
 	 */
-	final static String tagDescrPago = "@tagTipoPago";
+	static final String tagDescrPago = "@tagTipoPago";
 	@Step (
 		description="Seleccionar la forma de pago \"" + tagDescrPago + "\"", 
 		expected="El resultado es correcto")

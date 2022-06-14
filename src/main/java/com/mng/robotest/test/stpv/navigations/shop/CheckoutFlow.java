@@ -460,7 +460,7 @@ public class CheckoutFlow {
 		);
 	}
 	
-	final static String tagLoginOrLogoff = "@TagLoginOfLogoff";
+	static final String tagLoginOrLogoff = "@TagLoginOfLogoff";
 	@Step (
 		description="Acceder a Mango " + tagLoginOrLogoff, 
 		expected="Se accede a Mango",

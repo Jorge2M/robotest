@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.utils.PagoGetter; 
+
 
 public class PagoGetterTest {
 
@@ -18,8 +18,8 @@ public class PagoGetterTest {
 	public void testGetListLabelsPaymentsEstandar() {
 		//Given
 		List<String> listCodCountries = Arrays.asList(
-				Espana.getCodigoPais(), 
-				Sweden.getCodigoPais());
+				ESPANA.getCodigoPais(), 
+				SWEDEN.getCodigoPais());
 		
 		//When
 		List<String> listPaymentsResult = PagoGetter.getLabelsPaymentsAlphabetically(
@@ -41,8 +41,8 @@ public class PagoGetterTest {
 	public void testGetListLabelsPaymentsSpecialConditions() {
 		//Given
 		List<String> listCodCountries = Arrays.asList(
-			ChannelIslands.getCodigoPais(),
-			Hungary.getCodigoPais()); 
+			CHANNEL_ISLANDS.getCodigoPais(),
+			HUNGARY.getCodigoPais()); 
 
 		//When
 		List<String> listPaymentsResult = PagoGetter.getLabelsPaymentsAlphabetically(

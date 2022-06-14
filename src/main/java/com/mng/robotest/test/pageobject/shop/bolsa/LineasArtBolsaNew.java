@@ -17,14 +17,14 @@ public class LineasArtBolsaNew extends LineasArtBolsa {
 	private static final String XPathItem = "//div[@class[contains(.,'layout-content')] and @class[contains(.,' card')]]";
 	
 	//TODO pendiente data-testid
-	//private final static String XPathLinkRelativeArticle = ".//a[@href[contains(.,'redirect.faces?')]]";
-	private final static String XPathLinkRelativeArticle = ".//img";
+	//private static final String XPathLinkRelativeArticle = ".//a[@href[contains(.,'redirect.faces?')]]";
+	private static final String XPathLinkRelativeArticle = ".//img";
 
-	private final static String XPathNombreRelativeArticle = ".//*[@data-testid='bag.item.title']";
-	private final static String XPathCantidadRelativeArticle = ".//*[@data-testid='bag.item.quantity']";
-	private final static String XPathTallaAlfRelativeArticle = ".//*[@data-testid='bag.item.size']";
-	private final static String XPathColorRelativeArticle = ".//*[@data-testid='bag.item.color']";
-	private final static String XPathPrecioRelativeArticle = ".//*[@data-testid='bag.item.finalPrice']";
+	private static final String XPathNombreRelativeArticle = ".//*[@data-testid='bag.item.title']";
+	private static final String XPathCantidadRelativeArticle = ".//*[@data-testid='bag.item.quantity']";
+	private static final String XPathTallaAlfRelativeArticle = ".//*[@data-testid='bag.item.size']";
+	private static final String XPathColorRelativeArticle = ".//*[@data-testid='bag.item.color']";
+	private static final String XPathPrecioRelativeArticle = ".//*[@data-testid='bag.item.finalPrice']";
 	
 	private static final String TagRef = "[TAGREF]";
 	private static final String XPathLinkItemRef = XPathItem + "//img[@src[contains(.,'" + TagRef + "')]]";

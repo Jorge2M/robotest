@@ -45,8 +45,8 @@ public class PaisIdioma implements Serializable {
 	public int prioridad;
 	private FlagsNaviationLineas flagsNavigation;
 	private DataCtxShop dCtxSh;
-	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
-	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
+	private static final Pais espana = PaisGetter.get(PaisShop.ESPANA);
+	private static final IdiomaPais castellano = espana.getListIdiomas().get(0);
 
 	//Si añadimos un constructor para el @Factory hemos de añadir este constructor para la invocación desde SmokeTest
 	public PaisIdioma() {}

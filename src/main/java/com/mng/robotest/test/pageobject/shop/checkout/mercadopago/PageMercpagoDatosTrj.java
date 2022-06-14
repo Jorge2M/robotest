@@ -10,10 +10,10 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public abstract class PageMercpagoDatosTrj extends PageObjTM {
 	
-	final static String XPathInputNumTarj = "//input[@name='cardNumber']";
-	final static String XPathInputFecCaducidad = "//input[@name='cardExpiration']";
-	final static String XPathInputCvc = "//input[@id='securityCode']";
-	final static String XPathBotonPagar = "//input[@type='submit']";
+	static final String XPathInputNumTarj = "//input[@name='cardNumber']";
+	static final String XPathInputFecCaducidad = "//input[@name='cardExpiration']";
+	static final String XPathInputCvc = "//input[@id='securityCode']";
+	static final String XPathBotonPagar = "//input[@type='submit']";
 	
 	public enum TypePant {inputDataTrjNew, inputCvcTrjSaved} 
 	

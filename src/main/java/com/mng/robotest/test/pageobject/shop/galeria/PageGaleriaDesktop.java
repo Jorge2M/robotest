@@ -66,15 +66,15 @@ public class PageGaleriaDesktop extends PageGaleria {
 		}
 	}
 	
-	private final static String XPathListArticles = "//div[@class[contains(.,'columns')] and @id='list']";
-	private final static String XPathImgRelativeArticleOutlet = 
+	private static final String XPathListArticles = "//div[@class[contains(.,'columns')] and @id='list']";
+	private static final String XPathImgRelativeArticleOutlet = 
 			"//img[@src and (" + 
 				   "@class[contains(.,'productListImg')] or " + 
 				   "@class[contains(.,'product-list-image')] or " +
 				   "@class[contains(.,'product-image')] or " + 
 				   "@class[contains(.,'TaqRk')] or " + //TODO (Outlet) pendiente Sergio Campillo suba los cambios
 				   "@class[contains(.,'product-list-im')])]";
-	private final static String XPathImgSliderActiveRelativeArticleDesktopOutlet = 
+	private static final String XPathImgSliderActiveRelativeArticleDesktopOutlet = 
 			"//div[@class[contains(.,'swiper-slide-active')]]" + XPathImgRelativeArticleOutlet;
 
 	private PageGaleriaDesktop(From from, Channel channel, AppEcom app, WebDriver driver) {
@@ -99,8 +99,8 @@ public class PageGaleriaDesktop extends PageGaleria {
 			getXPathAncestorArticulo());
 	}
 
-	private final static String XPpathIconoUpGalery = "//div[@id='scroll-top-step' or @id='iconFillUp']";
-	private final static String XPathHeaderArticles = "//div[@id[contains(.,'title')]]/h1";
+	private static final String XPpathIconoUpGalery = "//div[@id='scroll-top-step' or @id='iconFillUp']";
+	private static final String XPathHeaderArticles = "//div[@id[contains(.,'title')]]/h1";
 
 	@Override
 	public String getXPathLinkRelativeToArticle() {
@@ -174,7 +174,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		return ((XPathArticulo + sizeArticle.getXPathRelativeArticle()));
 	}
 
-	private final static String iniXPathPaginaGaleria = "//*[@id='page";
+	private static final String iniXPathPaginaGaleria = "//*[@id='page";
 
 	@Override
 	String getXPathPagina(int pagina) {

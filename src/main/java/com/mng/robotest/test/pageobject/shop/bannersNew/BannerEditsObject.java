@@ -9,16 +9,16 @@ import com.mng.robotest.test.generic.UtilsMangoTest;
 
 public class BannerEditsObject extends BannerObject {
 
-//	final static String tagAnalytics = "@data-analytics and not(@data-analytics='')";
-//	final static String XPathBannerV1 = "//div[@class[contains(.,'vsv-')] and " + tagAnalytics + "]//a";
-//	final static String XPathBannerV2 = "//div[@class[contains(.,'vsv-')]]//a[" + tagAnalytics + "]";
-//	final static String XPathBannerV3 = "//div[@class[contains(.,'swiper-slide-active')]]//a";
-//	final static String XPathBannerV4 = "//div[@class[contains(.,'vsv-openQuickLook')]]";
-//	final static String XPathBanner = "(" + XPathBannerV1 + " | " + XPathBannerV2 + "|" + XPathBannerV3 + "|" + XPathBannerV4 + ")";
+//	static final String tagAnalytics = "@data-analytics and not(@data-analytics='')";
+//	static final String XPathBannerV1 = "//div[@class[contains(.,'vsv-')] and " + tagAnalytics + "]//a";
+//	static final String XPathBannerV2 = "//div[@class[contains(.,'vsv-')]]//a[" + tagAnalytics + "]";
+//	static final String XPathBannerV3 = "//div[@class[contains(.,'swiper-slide-active')]]//a";
+//	static final String XPathBannerV4 = "//div[@class[contains(.,'vsv-openQuickLook')]]";
+//	static final String XPathBanner = "(" + XPathBannerV1 + " | " + XPathBannerV2 + "|" + XPathBannerV3 + "|" + XPathBannerV4 + ")";
 	
-	private final static String XPathBannerCarrusel = "//div[@class='heroSwiper']//div[@class='swiperImage']";
-	private final static String XPathBannerPestanyas = "//div[@class='masonryGrid']//div[@class='masonryItem']/a";
-	private final static String XPathBanner = "(" + XPathBannerCarrusel + " | " + XPathBannerPestanyas + ")";
+	private static final String XPathBannerCarrusel = "//div[@class='heroSwiper']//div[@class='swiperImage']";
+	private static final String XPathBannerPestanyas = "//div[@class='masonryGrid']//div[@class='masonryItem']/a";
+	private static final String XPathBanner = "(" + XPathBannerCarrusel + " | " + XPathBannerPestanyas + ")";
 	
 	public BannerEditsObject(BannerType bannerType) {
 		super(bannerType, XPathBanner);

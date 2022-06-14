@@ -25,11 +25,11 @@ public class ModalFichaFavoritos {
 	
 	private final WebDriver driver;
 	
-	private final static String XPathFichaProducto = "//div[@class='favorites-quickview']";
-	private final static String XPathColorSelectedFicha = 
+	private static final String XPathFichaProducto = "//div[@class='favorites-quickview']";
+	private static final String XPathColorSelectedFicha = 
 									XPathFichaProducto + 
 									"//div[@class[contains(.,'color-item')] and @class[contains(.,'active')]]";
-	private final static String XPathImgColorSelectedFicha = XPathColorSelectedFicha + "/img";
+	private static final String XPathImgColorSelectedFicha = XPathColorSelectedFicha + "/img";
 	
 	private ModalFichaFavoritos(WebDriver driver) {
 		this.driver = driver;

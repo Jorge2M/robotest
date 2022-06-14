@@ -31,33 +31,33 @@ public class Page2IdentCheckout extends PageObjTM {
 	private final Pais pais;
 	private final EgyptCity egyptCity;
 	
-	private final static String XPathMainForm = "//form[@action[contains(.,'/expressregister')]]";
-	private final static String XPathInputPassword = "//input[@id[contains(.,'cfPass')]]";
-	private final static String XPathInputNombreUsr = "//input[@id[contains(.,':cfName')]]";
-	private final static String XPathInputApellidosUsr = "//input[@id[contains(.,':cfSname')]]";
-	private final static String XPathInputMiddleNameUsr = "//input[@id[contains(.,':cfMiddleName')]]";
-	private final static String XPathInputTelefono = "//input[@id[contains(.,':cfTelf')]]";
-	private final static String XPathInputDireccion1 = "//input[@id[contains(.,':cfDir1')]]";
-	private final static String XPathInputDireccion2 = "//input[@id[contains(.,':cfDir2')]]";
-	private final static String XPathCheckPublicidad = "//input[@id[contains(.,':cfPubli')] or @id[contains(.,'_cfPubli')]]/..";
-	private final static String XPathInputEmail = "//input[@id[contains(.,':cfEmail')]]";
-	private final static String XPathInputDNI = "//input[@id[contains(.,':cfDni')]]";
-	private final static String XPathInputCodPost = "//input[@id[contains(.,':cfCp')]]";
-	private final static String XPathInputProvEstadoActive = "//input[@id[contains(.,':cfState')] and not(@disabled) and not(@readonly)]";
-	private final static String XPathInputPoblacionActive = "//input[@id[contains(.,':cfCity')] and not(@disabled) and not(@readonly)]";
-	private final static String XPathSelectPais = "//select[@id[contains(.,':pais')]]";
-	private final static String XPathSelectProvPais = "//select[@id[contains(.,'provinciaPais')] or @id[contains(.,'nivelProvincia')]]";
-	private final static String XPathSelectEstadosPais = "//select[@id[contains(.,'estadosPais')] or @id[contains(.,':nivelCity')]]";
-	private final static String XPathSelectLocalidadesProvCity = "//select[@id[contains(.,'localidadesProvCity')] or @id[contains(.,':nivelCityArea')] or @id[contains(.,'nivelLocalidad')]]";
-	private final static String XPathSelectDistrito = "//select[@id[contains(.,'nivelDistrito')]]";
-	private final static String XPathSelectLocalidadesNeighbourhoodCity = "//select[@id[contains(.,'localidadesNeighbourhoodCity')] or @id[contains(.,'nivelSubdistrito')]]";
-	private final static String XPathSelectCodPostal = "//select[@id[contains(.,'nivelCodigoPostal')]]";
-	private final static String XPathCheckHombre = "//div[@id[contains(.,':cfGener_H')]]";
-	private final static String XPathCheckCondiciones = "//input[@id[contains(.,':cfPriv')]]";
-	private final static String XPathBotonFindAddress = "//input[@class[contains(.,'load-button')] and @type='button']";
-	private final static String XPathBotonContinuar = "//div[@class='submitContent']/input[@type='submit']";
-	private final static String XPathMsgAduanas = "//div[@class='aduanas']";
-	private final static String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
+	private static final String XPathMainForm = "//form[@action[contains(.,'/expressregister')]]";
+	private static final String XPathInputPassword = "//input[@id[contains(.,'cfPass')]]";
+	private static final String XPathInputNombreUsr = "//input[@id[contains(.,':cfName')]]";
+	private static final String XPathInputApellidosUsr = "//input[@id[contains(.,':cfSname')]]";
+	private static final String XPathInputMiddleNameUsr = "//input[@id[contains(.,':cfMiddleName')]]";
+	private static final String XPathInputTelefono = "//input[@id[contains(.,':cfTelf')]]";
+	private static final String XPathInputDireccion1 = "//input[@id[contains(.,':cfDir1')]]";
+	private static final String XPathInputDireccion2 = "//input[@id[contains(.,':cfDir2')]]";
+	private static final String XPathCheckPublicidad = "//input[@id[contains(.,':cfPubli')] or @id[contains(.,'_cfPubli')]]/..";
+	private static final String XPathInputEmail = "//input[@id[contains(.,':cfEmail')]]";
+	private static final String XPathInputDNI = "//input[@id[contains(.,':cfDni')]]";
+	private static final String XPathInputCodPost = "//input[@id[contains(.,':cfCp')]]";
+	private static final String XPathInputProvEstadoActive = "//input[@id[contains(.,':cfState')] and not(@disabled) and not(@readonly)]";
+	private static final String XPathInputPoblacionActive = "//input[@id[contains(.,':cfCity')] and not(@disabled) and not(@readonly)]";
+	private static final String XPathSelectPais = "//select[@id[contains(.,':pais')]]";
+	private static final String XPathSelectProvPais = "//select[@id[contains(.,'provinciaPais')] or @id[contains(.,'nivelProvincia')]]";
+	private static final String XPathSelectEstadosPais = "//select[@id[contains(.,'estadosPais')] or @id[contains(.,':nivelCity')]]";
+	private static final String XPathSelectLocalidadesProvCity = "//select[@id[contains(.,'localidadesProvCity')] or @id[contains(.,':nivelCityArea')] or @id[contains(.,'nivelLocalidad')]]";
+	private static final String XPathSelectDistrito = "//select[@id[contains(.,'nivelDistrito')]]";
+	private static final String XPathSelectLocalidadesNeighbourhoodCity = "//select[@id[contains(.,'localidadesNeighbourhoodCity')] or @id[contains(.,'nivelSubdistrito')]]";
+	private static final String XPathSelectCodPostal = "//select[@id[contains(.,'nivelCodigoPostal')]]";
+	private static final String XPathCheckHombre = "//div[@id[contains(.,':cfGener_H')]]";
+	private static final String XPathCheckCondiciones = "//input[@id[contains(.,':cfPriv')]]";
+	private static final String XPathBotonFindAddress = "//input[@class[contains(.,'load-button')] and @type='button']";
+	private static final String XPathBotonContinuar = "//div[@class='submitContent']/input[@type='submit']";
+	private static final String XPathMsgAduanas = "//div[@class='aduanas']";
+	private static final String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
 	
 	//Con el substring simulamos un ends-with (que no está disponible en xpath 1.0)
 	private static String XPathSelectLocalidades = "//select[substring(@id, string-length(@id) - string-length('localidades') +1) = 'localidades']";
@@ -369,18 +369,18 @@ public class Page2IdentCheckout extends PageObjTM {
 	/**
 	 * @param posInSelect: elemento del desplegable que queremos desplegar (comenzando desde el 1)
 	 */
-	private final static String firstProvinciaUkranie = "Ananivskyi";
-	private final static String XPathOptionFirstProvUkranie = "//div[@class[contains(.,'choices')] and text()[contains(.,'" + firstProvinciaUkranie + "')]]";
+	private static final String firstProvinciaUkranie = "Ananivskyi";
+	private static final String XPathOptionFirstProvUkranie = "//div[@class[contains(.,'choices')] and text()[contains(.,'" + firstProvinciaUkranie + "')]]";
 	public String setSelectProv1PaisIfVisible(Channel channel) {
 		String datoSeteado = "";
 		WebElement provinciaPais = UtilsMangoTest.findElementPriorizingDisplayed(driver, By.xpath(XPathSelectProvPais));
 		if (provinciaPais!=null) {
 			switch (PaisShop.getPais(pais)) {
-			case Ukraine:
+			case UKRAINE:
 				if (channel==Channel.desktop) {
 					return selectProvinciaUkraineDesktop();
 				}
-			case Egypt:
+			case EGYPT:
 				if (egyptCity!=null) {
 				    return selectProvinciaEgyptCity(provinciaPais);
 				}
@@ -523,7 +523,7 @@ public class Page2IdentCheckout extends PageObjTM {
 	
 	private String selectLocalidad(WebElement localidad, int posInSelect) {
 		switch (PaisShop.getPais(pais)) {
-		case Egypt:
+		case EGYPT:
 			if (egyptCity!=null) {
 				new Select(localidad).selectByVisibleText(egyptCity.getCity());
 				return egyptCity.getCity();

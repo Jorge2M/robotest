@@ -10,12 +10,12 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageSofort4th extends PageObjTM {
 	
-	private final static String XPathSubmitButton = "//form//button[@class[contains(.,'primary')]]";
-	private final static String XPathInputUser = "//input[@id[contains(.,'LOGINNAMEUSERID')]]";
-	private final static String XPathInputPass = "//input[@id[contains(.,'USERPIN')] and @type='password']";
-	private final static String XPathFormSelCta = "//form[@action[contains(.,'select_account')]]";
-	private final static String XPathInputRadioCtas = "//input[@id[contains(.,'account')] and @type='radio']";
-	private final static String XPathInputTAN = "//input[(@id[contains(.,'BackendFormTAN')] or @id[contains(.,'BackendFormTan')]) and @type='text']";
+	private static final String XPathSubmitButton = "//form//button[@class[contains(.,'primary')]]";
+	private static final String XPathInputUser = "//input[@id[contains(.,'LOGINNAMEUSERID')]]";
+	private static final String XPathInputPass = "//input[@id[contains(.,'USERPIN')] and @type='password']";
+	private static final String XPathFormSelCta = "//form[@action[contains(.,'select_account')]]";
+	private static final String XPathInputRadioCtas = "//input[@id[contains(.,'account')] and @type='radio']";
+	private static final String XPathInputTAN = "//input[(@id[contains(.,'BackendFormTAN')] or @id[contains(.,'BackendFormTan')]) and @type='text']";
 	
 	public PageSofort4th(WebDriver driver) {
 		super(driver);

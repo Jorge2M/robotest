@@ -10,8 +10,8 @@ public class PageComoMedirme {
 
 	private final WebDriver driver;
 	
-	private final static String XPathBloqueGuiaTallas = "//div[@class[contains(.,'guiaTallas')]]";
-	//private final static String XPathBloqueTablaEquivalencias = "//div[@class[contains(.,'tablaEquivalencias')]]";
+	private static final String XPathBloqueGuiaTallas = "//div[@class[contains(.,'guiaTallas')]]";
+	//private static final String XPathBloqueTablaEquivalencias = "//div[@class[contains(.,'tablaEquivalencias')]]";
 	
 	private PageComoMedirme(WebDriver driver) {
 		this.driver = driver;

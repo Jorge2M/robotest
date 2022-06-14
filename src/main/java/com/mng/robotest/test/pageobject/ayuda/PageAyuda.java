@@ -19,7 +19,7 @@ import java.util.List;
 
 public class PageAyuda extends PageObjTM {
 	
-	public final static String xPathCloseBuscar = "//div[@class[contains(.,'close-modal')]]";
+	public static final String xPathCloseBuscar = "//div[@class[contains(.,'close-modal')]]";
 
 	private static JSONParser parser = new JSONParser();
 	private static JSONObject fileHAR = null;

@@ -21,11 +21,11 @@ public class SSecSelTallasFichaOldDevice extends PageObjTM implements SSecSelTal
 	private final Channel channel;
 	private final AppEcom app;
 	
-	private final static String XPathSelectorButton = "//*[@data-testid='sizeSelectorButton']";
-	private final static String XPathCapaTallas = "//div[@id='sizesContainerId']";
-	private final static String XPathOptionTalla = XPathCapaTallas + "//span[@class='size-text']";
-	private final static String XPathTallaSelected = XPathSelectorButton + "//span[@class[contains(.,'size-text')]]";
-	private final static String XPathOptionTallaUnica = "//button[@id='productFormSelect']//span[@class='one-size-text']";
+	private static final String XPathSelectorButton = "//*[@data-testid='sizeSelectorButton']";
+	private static final String XPathCapaTallas = "//div[@id='sizesContainerId']";
+	private static final String XPathOptionTalla = XPathCapaTallas + "//span[@class='size-text']";
+	private static final String XPathTallaSelected = XPathSelectorButton + "//span[@class[contains(.,'size-text')]]";
+	private static final String XPathOptionTallaUnica = "//button[@id='productFormSelect']//span[@class='one-size-text']";
 	
 	public SSecSelTallasFichaOldDevice(Channel channel, AppEcom app, WebDriver driver) {
 		super(driver);

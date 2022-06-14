@@ -11,10 +11,10 @@ public class SecKrediKarti extends SecTarjetaPciInIframe {
 
 	private final Channel channel;
 	
-	final static String XPathCapaPagoPlazoMobil = "//table[@class[contains(.,'installment')]]";
-	final static String XPathRadioPagoPlazoMobil = XPathCapaPagoPlazoMobil + "//div[@class[contains(.,'installment-checkbox')]]";
-	final static String XPathCapaPagoPlazoDesktop = "//div[@class[contains(.,'installments-content')]]"; 
-	final static String XPathRadioPagoPlazoDesktop = XPathCapaPagoPlazoDesktop + "//input[@type='radio' and @name='installment']";
+	static final String XPathCapaPagoPlazoMobil = "//table[@class[contains(.,'installment')]]";
+	static final String XPathRadioPagoPlazoMobil = XPathCapaPagoPlazoMobil + "//div[@class[contains(.,'installment-checkbox')]]";
+	static final String XPathCapaPagoPlazoDesktop = "//div[@class[contains(.,'installments-content')]]"; 
+	static final String XPathRadioPagoPlazoDesktop = XPathCapaPagoPlazoDesktop + "//input[@type='radio' and @name='installment']";
 	
 	private SecKrediKarti(Channel channel, WebDriver driver) {
 		super(channel, driver);

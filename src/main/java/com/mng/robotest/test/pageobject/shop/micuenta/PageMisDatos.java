@@ -9,23 +9,23 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageMisDatos extends PageObjTM {
 	
-	private final static String XPathIsPage = "//div[@class='myDetails']";
-	private final static String XPathTitleOk = "//h2[text()[contains(.,'Mis datos')]]";
-	private final static String XPathInputEmail = "//input[@id[contains(.,'cfEmail')]]";
-	private final static String XPathInputNombre = "//input[@id[contains(.,'cfName')]]";
-	private final static String XPathInputApellidos = "//input[@id[contains(.,'cfSname')]]";
-	private final static String XPathInputDireccion = "//input[@id[contains(.,'cfDir1')]]";
-	private final static String XPathInputCodPostal = "//input[@id[contains(.,'cfCp')]]";
-	private final static String XPathInputPoblacion = "//input[@id[contains(.,'cfCity')]]";
-	private final static String XPathBotonGuardarCambios = "//div[@class='submitContent']/input[@type='submit']";
-	//private final static String XPathPageResOKshop = "//span[@class[contains(.,'icon-fill-done')]]";
-	private final static String XPathPageResOK = "//span[text()[contains(.,'Tus datos han sido modificados en nuestra base de datos.')]]";
-	private final static String XPathInputPasswordTypePassword = "//input[@id[contains(.,'cfPass')] and @type='password']";
-	private final static String XPathInputContentVoid = "//div[@class='inputContent']/input[not(@value)]";
-	private final static String XPathSelectPais = "//select[@id[contains(.,':pais')]]";
-	private final static String XPathSelectProvincia = "//select[@id[contains(.,':estadosPais')]]";
-	private final static String XPathOptionPaisSelected = XPathSelectPais + "/option[@selected]";
-	private final static String XPathOptionProvinciaSelected = XPathSelectProvincia + "/option[@selected]";
+	private static final String XPathIsPage = "//div[@class='myDetails']";
+	private static final String XPathTitleOk = "//h2[text()[contains(.,'Mis datos')]]";
+	private static final String XPathInputEmail = "//input[@id[contains(.,'cfEmail')]]";
+	private static final String XPathInputNombre = "//input[@id[contains(.,'cfName')]]";
+	private static final String XPathInputApellidos = "//input[@id[contains(.,'cfSname')]]";
+	private static final String XPathInputDireccion = "//input[@id[contains(.,'cfDir1')]]";
+	private static final String XPathInputCodPostal = "//input[@id[contains(.,'cfCp')]]";
+	private static final String XPathInputPoblacion = "//input[@id[contains(.,'cfCity')]]";
+	private static final String XPathBotonGuardarCambios = "//div[@class='submitContent']/input[@type='submit']";
+	//private static final String XPathPageResOKshop = "//span[@class[contains(.,'icon-fill-done')]]";
+	private static final String XPathPageResOK = "//span[text()[contains(.,'Tus datos han sido modificados en nuestra base de datos.')]]";
+	private static final String XPathInputPasswordTypePassword = "//input[@id[contains(.,'cfPass')] and @type='password']";
+	private static final String XPathInputContentVoid = "//div[@class='inputContent']/input[not(@value)]";
+	private static final String XPathSelectPais = "//select[@id[contains(.,':pais')]]";
+	private static final String XPathSelectProvincia = "//select[@id[contains(.,':estadosPais')]]";
+	private static final String XPathOptionPaisSelected = XPathSelectPais + "/option[@selected]";
+	private static final String XPathOptionProvinciaSelected = XPathSelectProvincia + "/option[@selected]";
 	
 	public PageMisDatos(WebDriver driver) {
 		super(driver);

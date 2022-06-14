@@ -10,8 +10,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalAvisoCambioPais extends PageObjTM {
 
-	private final static String XPathModal = "//div[@aria-labelledby[contains(.,'changeCountryModal')]]";
-	private final static String XPathButtonConfCambio = XPathModal + "//button[@name='continue']";
+	private static final String XPathModal = "//div[@aria-labelledby[contains(.,'changeCountryModal')]]";
+	private static final String XPathButtonConfCambio = XPathModal + "//button[@name='continue']";
 	
 	public ModalAvisoCambioPais(WebDriver driver) {
 		super(driver);

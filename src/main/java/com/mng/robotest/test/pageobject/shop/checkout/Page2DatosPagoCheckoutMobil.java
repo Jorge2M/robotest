@@ -33,27 +33,27 @@ public class Page2DatosPagoCheckoutMobil extends PageObjTM {
 	private final SecTMango secTMango;
 	private final SecBillpay secBillpay;
 	
-	private final static String XPathLink2DatosPago = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step2']";
-	private final static String XPathButtonFinalizarCompra = 
+	private static final String XPathLink2DatosPago = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step2']";
+	private static final String XPathButtonFinalizarCompra = 
 		"//button[(@id[contains(.,'complete-step2')] or @id[contains(.,'complete-iframe-step2')]) and not(@class[contains(.,' hidden')])]";
-	private final static String XPathRedError = "//div[@class[contains(.,'step-error')]]/p";
+	private static final String XPathRedError = "//div[@class[contains(.,'step-error')]]/p";
 	
-	private final static String tagMetodoPago = "@TagMetodoPago";
-	private final static String tagMetodoPagoLowerCase = "@LowerCaseTagMetodoPago";
-	private final static String XPathBlockTarjetaGuardadaPagoWithTag = "//div[" + 
+	private static final String tagMetodoPago = "@TagMetodoPago";
+	private static final String tagMetodoPagoLowerCase = "@LowerCaseTagMetodoPago";
+	private static final String XPathBlockTarjetaGuardadaPagoWithTag = "//div[" + 
 		"@data-analytics-value='" + tagMetodoPago + "' or " + 
 		"@data-analytics-value='" + tagMetodoPagoLowerCase + "']";
-	private final static String XPathRadioTrjGuardada = "//div[@data-custom-radio-id[contains(.,'-saved')]]";
+	private static final String XPathRadioTrjGuardada = "//div[@data-custom-radio-id[contains(.,'-saved')]]";
 	
 	//Desconozco este XPath, de momento he puesto el de Desktop
-	private final static String XPathCvcTrjGuardada = "//div[@class='storedCardForm']//input[@id='cvc']"; 
+	private static final String XPathCvcTrjGuardada = "//div[@class='storedCardForm']//input[@id='cvc']"; 
 	
-	private final static String XPathLinkSolicitarFactura = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
-	private final static String XPathLinkFormasPago = "//div[@class[contains(.,'payment-method')]]//span[@class[contains(.,'others-title')]]"; 
-	private final static String XPathLineaPagoLayoutLinea = "//div[@class[contains(.,'payment-method')] and @data-id]";
+	private static final String XPathLinkSolicitarFactura = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
+	private static final String XPathLinkFormasPago = "//div[@class[contains(.,'payment-method')]]//span[@class[contains(.,'others-title')]]"; 
+	private static final String XPathLineaPagoLayoutLinea = "//div[@class[contains(.,'payment-method')] and @data-id]";
 	
 	//secciones de pagos (que se pueden mostrar/ocultar) disponibles en países como México
-	private final static String XPathSectionsPagosMobil = "//*[@class[contains(.,'group-card-js')]]"; 
+	private static final String XPathSectionsPagosMobil = "//*[@class[contains(.,'group-card-js')]]"; 
 	
 	public Page2DatosPagoCheckoutMobil(Channel channel, AppEcom app, WebDriver driver) {
 		super(driver);
@@ -351,9 +351,9 @@ public class Page2DatosPagoCheckoutMobil extends PageObjTM {
 			radio.getAttribute("checked").contains("true"));
 	}
 	
-	private final static String XPathPrecioTotal = "//div[@class[contains(.,'summary-total-price')]]/p";
-	private final static String XPathDescuento = "//div[@class[contains(.,'summary-subtotal-price')]]/p/span[@class='price-negative']/..";
-	private final static String XPathDireccionEnvioText = "//p[@class='address']";
+	private static final String XPathPrecioTotal = "//div[@class[contains(.,'summary-total-price')]]/p";
+	private static final String XPathDescuento = "//div[@class[contains(.,'summary-subtotal-price')]]/p/span[@class='price-negative']/..";
+	private static final String XPathDireccionEnvioText = "//p[@class='address']";
 
 	public void clickFinalizarCompraAndWait(int maxSecondsToWait) throws Exception {
 		clickButtonFinalizarCompra();

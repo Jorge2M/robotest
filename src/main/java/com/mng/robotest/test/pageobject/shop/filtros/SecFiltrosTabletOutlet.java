@@ -16,10 +16,10 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecFiltrosTabletOutlet extends PageObjTM implements SecFiltros {
 	
-	private final static String TagOrdenacion = "@TagOrden";
-	private final static String TagColor = "@TagColor";
-	private final static String XPathLinkOrdenWithTag = "//a[text()[contains(.,'" + TagOrdenacion + "')]]";
-	private final static String XPathLinkColorWithTag = "//label[@for='color_" + TagColor + "']/a";
+	private static final String TagOrdenacion = "@TagOrden";
+	private static final String TagColor = "@TagColor";
+	private static final String XPathLinkOrdenWithTag = "//a[text()[contains(.,'" + TagOrdenacion + "')]]";
+	private static final String XPathLinkColorWithTag = "//label[@for='color_" + TagColor + "']/a";
 	
 	private final PageGaleria pageGaleria;
 	

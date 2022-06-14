@@ -13,7 +13,7 @@ public class CookiesFinder {
 
 	private static final Logger logger = Log4jTM.getLogger();
 	
-	private final static int SECONDS_PERSISTENCE = 3600; 
+	private static final int SECONDS_PERSISTENCE = 3600; 
 	private static Optional<List<Cookie>> listCookies = Optional.empty();
 	private static LocalDateTime timeCapturedCookies;
 

@@ -10,13 +10,13 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageMultibanco1rst {
 	
-	final static String TagEmail = "@TagEmail";
-	final static String XPathListOfPayments = "//ul[@id='paymentMethods']";
-	final static String XPathCabeceraStep = "//h2[@id[contains(.,'stageheader')]]";
-	final static String XPathInputIconoMultibanco = "//input[@type='submit' and @name='brandName']";
-	final static String XPathButtonPagoDesktop = "//input[@class[contains(.,'paySubmit')] and @type='submit']";
-	final static String XPathButtonContinueMobil = "//input[@type='submit' and @value='continuar']";
-	final static String XPathInputEmailWithTag = "//input[@id[contains(.,'multibanco')] and @value[contains(.,'" + TagEmail + "')]]";
+	static final String TagEmail = "@TagEmail";
+	static final String XPathListOfPayments = "//ul[@id='paymentMethods']";
+	static final String XPathCabeceraStep = "//h2[@id[contains(.,'stageheader')]]";
+	static final String XPathInputIconoMultibanco = "//input[@type='submit' and @name='brandName']";
+	static final String XPathButtonPagoDesktop = "//input[@class[contains(.,'paySubmit')] and @type='submit']";
+	static final String XPathButtonContinueMobil = "//input[@type='submit' and @value='continuar']";
+	static final String XPathInputEmailWithTag = "//input[@id[contains(.,'multibanco')] and @value[contains(.,'" + TagEmail + "')]]";
 	
 	public static String getXPathEntradaPago(String nombrePago, Channel channel) {
 		if (channel.isDevice()) {

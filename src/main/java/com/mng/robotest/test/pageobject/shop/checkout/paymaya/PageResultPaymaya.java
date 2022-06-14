@@ -8,7 +8,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 
 public class PageResultPaymaya extends PageObjTM {
 
-	private final static String XPathConfirmButton = "//input[@id='confirm-button']";
+	private static final String XPathConfirmButton = "//input[@id='confirm-button']";
 	
 	public PageResultPaymaya(WebDriver driver) {
 		super(driver);

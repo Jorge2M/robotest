@@ -8,9 +8,9 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 
 public class PageInitPaymaya extends PageObjTM {
 
-	private final static String XPathWrapper = "//div[@class='paywith-paymaya-screen']";
-	private final static String XPathQr = "//div[@class='scan-section']//div[@class='qr']";
-	private final static String XPathButtonPayMaya = "//button[@class='button--paylink-btn']";
+	private static final String XPathWrapper = "//div[@class='paywith-paymaya-screen']";
+	private static final String XPathQr = "//div[@class='scan-section']//div[@class='qr']";
+	private static final String XPathButtonPayMaya = "//button[@class='button--paylink-btn']";
 	
 	public PageInitPaymaya(WebDriver driver) {
 		super(driver);

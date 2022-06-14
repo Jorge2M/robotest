@@ -21,8 +21,8 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 
 public class IniciarSesion {
 
-	private final static Pais espana = PaisGetter.get(PaisShop.ESPANA);
-	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
+	private static final Pais espana = PaisGetter.get(PaisShop.ESPANA);
+	private static final IdiomaPais castellano = espana.getListIdiomas().get(0);
 	
 	public IniciarSesion() {}   
 

@@ -125,8 +125,8 @@ public class DataBanner {
 			getSize().height==dataBanner2.getSize().height);
 	}
 	
-	private final static String TagLinea = "@TagLinea";
-	private final static String XPathLinkLineaWithTag = 
+	private static final String TagLinea = "@TagLinea";
+	private static final String XPathLinkLineaWithTag = 
 		".//a[@class[contains(.,'link')] and @data-cta[contains(.,'tiendaid=" + TagLinea + "')]]";
 	
 	private String getXPathLinkLinea(LineaType lineaType) {

@@ -13,8 +13,8 @@ public class PageKlarna extends PageObjTM {
 	private final ModalInputPersonnumberKlarna modalInputPersonnumber;
 	private final ModalInputPhoneKlarna modalInputPhone;
 	
-	private final static String XPathBuyButton = "//button[@id[contains(.,'buy-button')]]";
-	private final static String XPathIframe = "//iframe[@id[contains(.,'klarna-hpp-instance-fullscreen')]]";
+	private static final String XPathBuyButton = "//button[@id[contains(.,'buy-button')]]";
+	private static final String XPathIframe = "//iframe[@id[contains(.,'klarna-hpp-instance-fullscreen')]]";
 	
 	public PageKlarna(WebDriver driver) {
 		super(driver);

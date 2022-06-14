@@ -12,17 +12,17 @@ import com.mng.robotest.test.utils.ImporteScreen;
 
 public class LineasArtBolsaMobile extends LineasArtBolsa {
 
-	private final static String DivLinea = "div[@id[contains(.,'iteradorBolsa')]]/div[@class='comShipment']";
-	private final static String XPathLinea = "//" + DivLinea;
-	private final static String XPathLinkRelativeArticle = ".//div[@class[contains(.,'sbi-information-content')]]/a";
-	private final static String XPathLineaWithTagRef = XPathLinkRelativeArticle + "//self::*[@href[contains(.,'" + TagReference + ".html')]]//ancestor::" + DivLinea;
-	private final static String XPathNombreRelativeArticle = ".//span[@id[contains(.,'articuloDescrBolsa')]]";
-	private final static String XPathColorRelativeArticle = ".//p[@class[contains(.,'sbi-color')]]";
-	private final static String XPathTallaAlfRelativeArticle = ".//p[@class[contains(.,'sbi-size')]]";
-	private final static String XPathCantidadRelativeArticle = ".//p[@class[contains(.,'sbi-quantity')]]";
-	private final static String XPathPrecioRelativeArticle = ".//div[@class[contains(.,'sbi-price-content')]]//span[@style[not(contains(.,'padding'))]]";
-	private final static String XPathPrecioEnteroRelativeArticle = XPathPrecioRelativeArticle + "[1]";
-	private final static String XPathPrecioDecimalRelativeArticle = XPathPrecioRelativeArticle + "[2]";
+	private static final String DivLinea = "div[@id[contains(.,'iteradorBolsa')]]/div[@class='comShipment']";
+	private static final String XPathLinea = "//" + DivLinea;
+	private static final String XPathLinkRelativeArticle = ".//div[@class[contains(.,'sbi-information-content')]]/a";
+	private static final String XPathLineaWithTagRef = XPathLinkRelativeArticle + "//self::*[@href[contains(.,'" + TagReference + ".html')]]//ancestor::" + DivLinea;
+	private static final String XPathNombreRelativeArticle = ".//span[@id[contains(.,'articuloDescrBolsa')]]";
+	private static final String XPathColorRelativeArticle = ".//p[@class[contains(.,'sbi-color')]]";
+	private static final String XPathTallaAlfRelativeArticle = ".//p[@class[contains(.,'sbi-size')]]";
+	private static final String XPathCantidadRelativeArticle = ".//p[@class[contains(.,'sbi-quantity')]]";
+	private static final String XPathPrecioRelativeArticle = ".//div[@class[contains(.,'sbi-price-content')]]//span[@style[not(contains(.,'padding'))]]";
+	private static final String XPathPrecioEnteroRelativeArticle = XPathPrecioRelativeArticle + "[1]";
+	private static final String XPathPrecioDecimalRelativeArticle = XPathPrecioRelativeArticle + "[2]";
 	private static final String TagRefArticle = "[TAGREF]";
 	private static final String XPathLinkBorrarArt = "//*[@id[contains(.,'trashMobile')] and @onclick[contains(.,'" + TagRefArticle + "')]]";
 	

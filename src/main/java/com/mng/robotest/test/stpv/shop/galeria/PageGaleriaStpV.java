@@ -211,7 +211,7 @@ public class PageGaleriaStpV {
 	 * Escrollamos hasta llegar a la página indicada en toPage
 	 * @param toPage indica el número de página en el que nos queremos posicionar. Si es PageGaleria.scrollToLast asumimos que queremos llegar hasta el final del catálogo
 	 */
-	final static String tagIdPage = "@TagIdPage";
+	static final String tagIdPage = "@TagIdPage";
 	@Step (
 		description="Escrollar hasta posicionarse en la " + tagIdPage + " página", 
 		expected="Se escrolla correctamente",
@@ -389,9 +389,9 @@ public class PageGaleriaStpV {
 	 * @param numArtConColores posición del artículo entre el conjunto de artículos con variedad de colores
 	 * @return src de la imagen obtenida al ejecutar el click sobre el color
 	 */
-	final static String tagSrcPng2oColor = "@srcPng2oColor";
-	final static String tagNombre1erArtic = "@nombre1erArt";
-	final static String tagPrecio1erArtic = "@precio1erArt";
+	static final String tagSrcPng2oColor = "@srcPng2oColor";
+	static final String tagNombre1erArtic = "@nombre1erArt";
+	static final String tagPrecio1erArtic = "@precio1erArt";
 	@Step (
 		description=
 			"Seleccionar el #{posColor}o color (" + tagSrcPng2oColor +") no seleccionado del #{numArtConColores}o " + 
@@ -439,8 +439,8 @@ public class PageGaleriaStpV {
 	/**
 	 * @param srcImageExpected el src esperado para la imagen resultante de la secuencia de clicks en el slider. Si tiene valor "" no aplicamos validación
 	 */
-	final static String tagNombreArt = "@TagNombreArt";
-	final static String tagSliderList = "@TagSliderList";
+	static final String tagNombreArt = "@TagNombreArt";
+	static final String tagSliderList = "@TagSliderList";
 	@Step (
 		description=
 			"Clickar la siguiente secuencia de sliders: <b>" + tagSliderList + "</b> del #{numArtConColores}o " + 
@@ -503,9 +503,9 @@ public class PageGaleriaStpV {
 	   return listStr;
    }
 	
-   	final static String tagNumArtConColores = "@TagNumArtConColores";
-   	final static String tagNombre1erArt = "@TagNombre1erArt";
-   	final static String tagPrecio1erArt = "@TagPrecio1erArt";
+   	static final String tagNumArtConColores = "@TagNumArtConColores";
+   	static final String tagNombre1erArt = "@TagNombre1erArt";
+   	static final String tagPrecio1erArt = "@TagPrecio1erArt";
 	@Step (
 		description="Seleccionar el " + tagNumArtConColores + "o artículo con variedad de colores (" + tagNombre1erArt + " " + tagPrecio1erArt + ")", 
 		expected="Aparece el artículo original(" + tagNombre1erArt + " " + tagPrecio1erArt + ")",
@@ -589,7 +589,7 @@ public class PageGaleriaStpV {
 		return (pageGaleria.isVisibleArticleUntil(1, maxSeconds));
 	}   
    
-	final static String tagEstadoFinal = "@TagEstadoFinal";
+	static final String tagEstadoFinal = "@TagEstadoFinal";
 	@Step (
 		description="Seleccionamos (para <b>#{actionFav}</b>) los \"Hearth Icons\" asociados a los artículos con posiciones <b>#{posIconsToClick}</b>", 
 		expected="Los \"Hearth Icons\" quedan " + tagEstadoFinal)

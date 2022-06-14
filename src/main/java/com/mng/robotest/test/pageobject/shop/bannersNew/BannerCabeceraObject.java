@@ -14,9 +14,9 @@ public class BannerCabeceraObject extends BannerObject {
 
 	private final WebDriver driver;
 	
-	final static String XPathWrapperBanner = "//div[@class='vsv-binteriorwrap' or @class='vsv-bannercontainer']//div[@class='vsv-box' and @data-id]";
-	final static String XPathBanner = XPathWrapperBanner + "//div[@class[contains(.,'vsv-content-web')]]";
-	final static String XPathAncorRelativeBanner = "../a[@href]";
+	static final String XPathWrapperBanner = "//div[@class='vsv-binteriorwrap' or @class='vsv-bannercontainer']//div[@class='vsv-box' and @data-id]";
+	static final String XPathBanner = XPathWrapperBanner + "//div[@class[contains(.,'vsv-content-web')]]";
+	static final String XPathAncorRelativeBanner = "../a[@href]";
 	
 	public BannerCabeceraObject(BannerType bannerType) {
 		super(bannerType, XPathBanner);

@@ -66,7 +66,7 @@ public class EgyptOrderTest {
 		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		dCtxSh.pais = PaisGetter.get(PaisShop.Egypt);
+		dCtxSh.pais = PaisGetter.get(PaisShop.EGYPT);
 		dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
 		return dCtxSh;
 	}

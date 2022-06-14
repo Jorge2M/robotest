@@ -13,24 +13,24 @@ import com.mng.robotest.test.utils.ImporteScreen;
 public class LineasArtBolsaDesktopTmp extends LineasArtBolsa {
 
 
-//	private final static String XPathLinkRelativeArticle = ".//div[@class[contains(.,'itemImage')]]/a";
-//	private final static String XPathLineaWithTagRef = XPathLinkRelativeArticle + "//self::*[@href[contains(.,'" + TagReference + ".html')]]//ancestor::" + DivLinea;
-//	private final static String XPathNombreRelativeArticle = ".//*[@class='bolsa_descripcion']";
-//	private final static String XPathColorRelativeArticle = ".//*[@class='itemColor']";
-//	private final static String XPathTallaAlfRelativeArticle = ".//p[@class='itemSize']";
-//	private final static String XPathCantidadRelativeArticle = ".//p[@class='itemsQt']";
-//	private final static String XPathPrecioEnteroRelativeArticle = ".//span[@class='bolsa_price_big' and (not(@style) or @style='')]";
-//	private final static String XPathPrecioDecimalRelativeArticle = ".//span[@class='bolsa_price_small' and (not(@style) or @style='')]";
+//	private static final String XPathLinkRelativeArticle = ".//div[@class[contains(.,'itemImage')]]/a";
+//	private static final String XPathLineaWithTagRef = XPathLinkRelativeArticle + "//self::*[@href[contains(.,'" + TagReference + ".html')]]//ancestor::" + DivLinea;
+//	private static final String XPathNombreRelativeArticle = ".//*[@class='bolsa_descripcion']";
+//	private static final String XPathColorRelativeArticle = ".//*[@class='itemColor']";
+//	private static final String XPathTallaAlfRelativeArticle = ".//p[@class='itemSize']";
+//	private static final String XPathCantidadRelativeArticle = ".//p[@class='itemsQt']";
+//	private static final String XPathPrecioEnteroRelativeArticle = ".//span[@class='bolsa_price_big' and (not(@style) or @style='')]";
+//	private static final String XPathPrecioDecimalRelativeArticle = ".//span[@class='bolsa_price_small' and (not(@style) or @style='')]";
 	
 	private static final String XPathItem = "//*[@data-testid='bag.item']";
 	
 	//TODO pendiente data-testid
-	private final static String XPathLinkRelativeArticle = ".//a[@href[contains(.,'redirect.faces?')]]";
-	private final static String XPathNombreRelativeArticle = ".//div[@class[contains(.,'_1MMOd')]/div/div";
-	private final static String XPathColorRelativeArticle = ".//div[@class[contains(.,'hMucp')]]/div/div/div[3]/div/div";
-	private final static String XPathTallaAlfRelativeArticle = ".//div[@class[contains(.,'_3hjWl')]]/div[2]/div/div";
-	private final static String XPathCantidadRelativeArticle = ".//div[@class[contains(.,'_3hjWl')]]/div/div/div";
-	private final static String XPathPrecioRelativeArticle = ".//div[@data-testid[contains(.,'productPrice.price')]]";
+	private static final String XPathLinkRelativeArticle = ".//a[@href[contains(.,'redirect.faces?')]]";
+	private static final String XPathNombreRelativeArticle = ".//div[@class[contains(.,'_1MMOd')]/div/div";
+	private static final String XPathColorRelativeArticle = ".//div[@class[contains(.,'hMucp')]]/div/div/div[3]/div/div";
+	private static final String XPathTallaAlfRelativeArticle = ".//div[@class[contains(.,'_3hjWl')]]/div[2]/div/div";
+	private static final String XPathCantidadRelativeArticle = ".//div[@class[contains(.,'_3hjWl')]]/div/div/div";
+	private static final String XPathPrecioRelativeArticle = ".//div[@data-testid[contains(.,'productPrice.price')]]";
 	
 	private static final String TagRef = "[TAGREF]";
 	private static final String XPathLinkItemRef = XPathItem + "//a[@href[contains(.,'" + TagRef + "')]]";

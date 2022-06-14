@@ -28,7 +28,7 @@ public class ModalUserDataKlarna extends PageObjTM {
 		}
 	}
 	
-	private final static String XPathButtonContinue = "//button[@id='button-primary']";
+	private static final String XPathButtonContinue = "//button[@id='button-primary']";
 	
 	public ModalUserDataKlarna(WebDriver driver) {
 		super(driver);

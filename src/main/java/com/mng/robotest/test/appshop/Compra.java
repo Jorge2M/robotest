@@ -50,11 +50,11 @@ import org.openqa.selenium.WebDriver;
 
 public class Compra {
 	
-	private final static Pais espana = PaisGetter.get(PaisShop.ESPANA);
-	private final static Pais italia = PaisGetter.get(PaisShop.ITALIA);
-	private final static Pais francia = PaisGetter.get(PaisShop.FRANCE);
-	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
-	private final static IdiomaPais italiano = italia.getListIdiomas().get(0);
+	private static final Pais espana = PaisGetter.get(PaisShop.ESPANA);
+	private static final Pais italia = PaisGetter.get(PaisShop.ITALIA);
+	private static final Pais francia = PaisGetter.get(PaisShop.FRANCE);
+	private static final IdiomaPais castellano = espana.getListIdiomas().get(0);
+	private static final IdiomaPais italiano = italia.getListIdiomas().get(0);
 
 
 	public Compra() {}

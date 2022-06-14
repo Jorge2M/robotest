@@ -8,7 +8,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageResultadoRegaloLikes extends PageObjTM {
 	
-	private final static String XPathDoneIcon = "//img[@class='done-icon']";
+	private static final String XPathDoneIcon = "//img[@class='done-icon']";
 	
 	public PageResultadoRegaloLikes(WebDriver driver) {
 		super(driver);

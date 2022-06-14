@@ -51,7 +51,7 @@ public class ConsolaVotf {
 	}
 
 	private List<Article> getArticlesAvailable(int numProductsMax, WebDriver driver) throws Exception {
-		Pais espana = PaisGetter.get(PaisShop.Espana);
+		Pais espana = PaisGetter.get(PaisShop.ESPANA);
 		GetterProducts getterProducts = new GetterProducts.Builder("https://shop.mango.com/", espana.getCodigo_alf(), AppEcom.votf, driver).
 				linea(LineaType.she).
 				menu(Menu.Shorts).

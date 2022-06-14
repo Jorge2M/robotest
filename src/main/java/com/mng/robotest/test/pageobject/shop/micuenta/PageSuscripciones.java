@@ -13,9 +13,9 @@ public class PageSuscripciones extends PageObjTM {
 	//Los valores que permiten identificar los radios correspondientes a los newsletter seleccionables
 	public enum NewsLetter { she, he, kids, teen }
 	
-	private final static String XPathButtonGuardarCambios = "//input[@type='submit' and @value[contains(.,'Guardar')]]";
-	private final static String XPathPageResOK = "//*[text()[contains(.,'Preferencias actualizadas!')]]";
-	private final static String XPathCheckboxNewsletter = "//form/div[@class='checkboxContent'][1]//div[@class='multipleCheckbox']";
+	private static final String XPathButtonGuardarCambios = "//input[@type='submit' and @value[contains(.,'Guardar')]]";
+	private static final String XPathPageResOK = "//*[text()[contains(.,'Preferencias actualizadas!')]]";
+	private static final String XPathCheckboxNewsletter = "//form/div[@class='checkboxContent'][1]//div[@class='multipleCheckbox']";
 	
 	public PageSuscripciones(WebDriver driver) {
 		super(driver);

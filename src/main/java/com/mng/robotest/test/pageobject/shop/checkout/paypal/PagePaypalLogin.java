@@ -9,10 +9,10 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PagePaypalLogin {
 	
-	private final static String XPathContainer = "//div[@class[contains(.,'contentContainer')]]";
-	private final static String XPathInputLogin = XPathContainer + "//input[@id='email']";
-	private final static String XPathInputPassword = XPathContainer + "//input[@id='password' and not(@disabled='disabled')]";
-	private final static String XPathIniciarSesionButton = XPathContainer + "//div/button[@id='btnLogin' or @id='login']";
+	private static final String XPathContainer = "//div[@class[contains(.,'contentContainer')]]";
+	private static final String XPathInputLogin = XPathContainer + "//input[@id='email']";
+	private static final String XPathInputPassword = XPathContainer + "//input[@id='password' and not(@disabled='disabled')]";
+	private static final String XPathIniciarSesionButton = XPathContainer + "//div/button[@id='btnLogin' or @id='login']";
 	
 	public static boolean isPageUntil(int maxSeconds, WebDriver driver) {
 		return (state(Present, By.xpath(XPathInputPassword), driver)

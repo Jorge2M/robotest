@@ -87,14 +87,14 @@ public abstract class PageGaleria extends PageObjTM {
 			LabelArticle.NewNow, 
 			LabelArticle.NewCollection);
 	
-	final static String classProductItem = 
+	static final String classProductItem = 
 			"@class[contains(.,'productList__name')] or " + 
 			"@class[contains(.,'product-list-name')] or " + 
 			"@class='product-list-info-name' or " +
 			"@class[contains(.,'_1P8s4')] or " + //TODO (Outlet) a la espera que Sergio Campillo proporcione un identificador válido
 			"@class[contains(.,'product-name')]";
-	final static String XPathNombreRelativeToArticle = "//*[" + classProductItem + "]";
-	final static String XPathLinkRelativeToArticle = ".//a[@class='product-link']";
+	static final String XPathNombreRelativeToArticle = "//*[" + classProductItem + "]";
+	static final String XPathLinkRelativeToArticle = ".//a[@class='product-link']";
 
 	public static PageGaleria getNew(Channel channel, AppEcom app, WebDriver driver) {
 		return PageGaleria.getNew(From.menu, channel, app, driver);
@@ -125,14 +125,14 @@ public abstract class PageGaleria extends PageObjTM {
 		return secPrecios;
 	}
 	
-	final static String XPathArticuloDesktop = "//li[@id[contains(.,'product-key-id')]]";
+	static final String XPathArticuloDesktop = "//li[@id[contains(.,'product-key-id')]]";
 	
 	//TODO adaptar React (pendiente petición a Jesús Bermúdez 3-Marzo-2021)
-//	final static String XPathArticuloDesktopBuscador = 
+//	static final String XPathArticuloDesktopBuscador = 
 //		"//div[@class[contains(.,'product-list-item')] or @class[contains(.,'z0q8P')] or @class[contains(.,'_29n6N')]]";
-	final static String XPathArticuloDevice = "//li[@class='product']";
-	//final static String XPathArticuloTabletOutlet = "//*[@class[contains(.,'product-list-item')]]";
-	final static String XPathArticuloTabletOutlet = XPathArticuloDesktop;
+	static final String XPathArticuloDevice = "//li[@class='product']";
+	//static final String XPathArticuloTabletOutlet = "//*[@class[contains(.,'product-list-item')]]";
+	static final String XPathArticuloTabletOutlet = XPathArticuloDesktop;
 	private String getXPathArticulo() {
 		if (channel==Channel.desktop) {
 			return XPathArticuloDesktop;

@@ -17,8 +17,8 @@ public class SecTMango extends PageObjTM {
 	private final Channel channel;
 	private final AppEcom app;
 	
-	private final static String XPathSectionMobil = "//div[@class[contains(.,'mango_card')] and @class[contains(.,'show')]]"; 
-	private final static String XPathSectionDesktop = "//div[@id='mangoCardContent']"; 
+	private static final String XPathSectionMobil = "//div[@class[contains(.,'mango_card')] and @class[contains(.,'show')]]"; 
+	private static final String XPathSectionDesktop = "//div[@id='mangoCardContent']"; 
 	
 	public SecTMango(Channel channel, AppEcom app, WebDriver driver) {
 		super(driver);

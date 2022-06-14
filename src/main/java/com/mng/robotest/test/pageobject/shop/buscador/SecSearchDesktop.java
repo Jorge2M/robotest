@@ -10,8 +10,8 @@ import org.openqa.selenium.WebElement;
 
 public class SecSearchDesktop extends PageObjTM implements SecSearch {
 	
-	private final static String XPathInputBuscador = "//input[@data-testid='header.search.input']";
-	private final static String XPathCloseAspa = "//span[@class[contains(.,'icon-outline-close')]]";
+	private static final String XPathInputBuscador = "//input[@data-testid='header.search.input']";
+	private static final String XPathCloseAspa = "//span[@class[contains(.,'icon-outline-close')]]";
 
 	private SecSearchDesktop(WebDriver driver) {
 		super(driver);

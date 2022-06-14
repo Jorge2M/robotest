@@ -13,16 +13,16 @@ public class PageAccesoMisCompras extends PageObjTM implements PageFromFooter {
 
 	public enum TypeBlock {SiRegistrado, NoRegistrado}
 	
-	private final static String XPathContainerBlocks = "//*[@id='myPurchasesDesktop']"; //
-	private final static String XPathLinkSiRegistrado = "//button[@data-testid='login']"; //
-	private final static String XPathLinkNoRegistrado = "//button[@data-testid='orderForm']"; //
-	private final static String XPathInputUserBlockSi = "//input[@data-testid='mngLogin.LoginForm.emil']";
-	private final static String XpathInputPasswordBlockSi = "//input[@data-testid='mngLogin.LoginForm.password']";
-	private final static String XPathButtonEntrarBlockSi = "//button[@data-testid='mngLogin.LoginForm.button']";
+	private static final String XPathContainerBlocks = "//*[@id='myPurchasesDesktop']"; //
+	private static final String XPathLinkSiRegistrado = "//button[@data-testid='login']"; //
+	private static final String XPathLinkNoRegistrado = "//button[@data-testid='orderForm']"; //
+	private static final String XPathInputUserBlockSi = "//input[@data-testid='mngLogin.LoginForm.emil']";
+	private static final String XpathInputPasswordBlockSi = "//input[@data-testid='mngLogin.LoginForm.password']";
+	private static final String XPathButtonEntrarBlockSi = "//button[@data-testid='mngLogin.LoginForm.button']";
 	
-	private final static String XPathInputUserBlockNo = "//input[@data-testid[contains(.,'login.guest.email.input')]]";
-	private final static String XPathInputNumPedidoBlockNo = "//input[@data-testid[contains(.,'login.guest.orderId.input')]]";
-	private final static String XPathButtonBuscarPedidoBlockNo = "//button[@data-testid[contains(.,'login.guest.goToDetails')]]";
+	private static final String XPathInputUserBlockNo = "//input[@data-testid[contains(.,'login.guest.email.input')]]";
+	private static final String XPathInputNumPedidoBlockNo = "//input[@data-testid[contains(.,'login.guest.orderId.input')]]";
+	private static final String XPathButtonBuscarPedidoBlockNo = "//button[@data-testid[contains(.,'login.guest.goToDetails')]]";
 	
 	
 	public PageAccesoMisCompras(WebDriver driver) {

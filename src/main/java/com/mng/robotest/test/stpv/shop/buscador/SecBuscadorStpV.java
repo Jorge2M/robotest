@@ -38,7 +38,7 @@ public class SecBuscadorStpV {
 		this.app = app;
 	}
 	
-	private final static String TabHTML = "&emsp;";
+	private static final String TabHTML = "&emsp;";
 	@Step (
 		description=
 			"Buscar el artículo<br>"+ 
@@ -49,7 +49,7 @@ public class SecBuscadorStpV {
 		searchArticuloCommon(product, pais);
 	}
 	
-	private final static String TagValuesFilters = "@TagValuesFilters";
+	private static final String TagValuesFilters = "@TagValuesFilters";
 	@Step (
 		description=
 			"Buscar el artículo<br>"+ 

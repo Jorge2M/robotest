@@ -13,8 +13,8 @@ public class PageSofort1rst extends PageObjTM {
 	
 	private final Channel channel;
 	
-	private final static String xPathFigurasButtonDesktop = "//input[@class[contains(.,'paySubmit')]]";
-	private final static String xPathIconoSofort = "//input[@name='brandName' and @type='submit']";
+	private static final String xPathFigurasButtonDesktop = "//input[@class[contains(.,'paySubmit')]]";
+	private static final String xPathIconoSofort = "//input[@name='brandName' and @type='submit']";
 	
 	public PageSofort1rst(Channel channel, WebDriver driver) {
 		super(driver);

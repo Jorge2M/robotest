@@ -8,8 +8,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalDirecEnvio extends ModalDireccion {
 
-	private final static String XPathFormModal = "//form[@class[contains(.,'customFormIdENVIO')]]";
-	private final static String XPathButtonUpdate = XPathFormModal + "//div[@class[contains(.,'updateButton')]]/*[@class[contains(.,'modalConfirmar')]]";
+	private static final String XPathFormModal = "//form[@class[contains(.,'customFormIdENVIO')]]";
+	private static final String XPathButtonUpdate = XPathFormModal + "//div[@class[contains(.,'updateButton')]]/*[@class[contains(.,'modalConfirmar')]]";
 	
 	public ModalDirecEnvio(WebDriver driver) {
 		super(driver);

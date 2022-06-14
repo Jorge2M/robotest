@@ -8,7 +8,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecTotalLook {
 
-	private final static String XPathTotalLook = "//div[@id='lookTotal']";
+	private static final String XPathTotalLook = "//div[@id='lookTotal']";
 	
 	public static boolean isVisible(WebDriver driver) {
 		return (state(Visible, By.xpath(XPathTotalLook), driver).check());

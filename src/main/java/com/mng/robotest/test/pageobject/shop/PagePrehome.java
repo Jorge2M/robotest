@@ -36,13 +36,13 @@ public class PagePrehome extends PageObjTM {
 	
 	private final DataCtxShop dCtxSh;
 	
-	private final static String XPathSelectPaises = "//select[@id='countrySelect']";
+	private static final String XPathSelectPaises = "//select[@id='countrySelect']";
 	
 	//xpath correspondiente al div con el país seleccionado (cuyo click que permite desplegar la lista de países)
-	private final static String XPathDivPaisSeleccionado = "//div[@id='countrySelect_chosen']";
+	private static final String XPathDivPaisSeleccionado = "//div[@id='countrySelect_chosen']";
 	
-	private final static String XPathIconSalePaisSeleccionado = XPathDivPaisSeleccionado + "//span[@class[contains(.,'salesIcon')]]";
-	private final static String XPathInputPais = "//div[@class[contains(.,'chosen-search')]]/input";
+	private static final String XPathIconSalePaisSeleccionado = XPathDivPaisSeleccionado + "//span[@class[contains(.,'salesIcon')]]";
+	private static final String XPathInputPais = "//div[@class[contains(.,'chosen-search')]]/input";
 	
 	public PagePrehome(DataCtxShop dCtxSh, WebDriver driver) {
 		super(driver);

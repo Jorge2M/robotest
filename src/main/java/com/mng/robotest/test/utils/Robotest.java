@@ -10,8 +10,8 @@ import com.mng.robotest.test.data.PaisShop;
 
 public class Robotest {
 
-	private final static Pais espana = PaisGetter.get(PaisShop.Espana);
-	private final static IdiomaPais castellano = espana.getListIdiomas().get(0);
+	private static final Pais espana = PaisGetter.get(PaisShop.ESPANA);
+	private static final IdiomaPais castellano = espana.getListIdiomas().get(0);
 	
 	public static DataCtxShop getDefaultDataShop() throws Exception {
 		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();

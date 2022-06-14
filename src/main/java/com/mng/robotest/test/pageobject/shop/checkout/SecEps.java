@@ -11,8 +11,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecEps extends PageObjTM {
 
-	private final static String XPathInputBanco = "//div[@id='eps-bank-selector']";
-	private final static String iniXPathSelectOptionBanco = XPathInputBanco + "//option[text()[contains(.,'";
+	private static final String XPathInputBanco = "//div[@id='eps-bank-selector']";
+	private static final String iniXPathSelectOptionBanco = XPathInputBanco + "//option[text()[contains(.,'";
 	
 	public SecEps(WebDriver driver) {
 		super(driver);

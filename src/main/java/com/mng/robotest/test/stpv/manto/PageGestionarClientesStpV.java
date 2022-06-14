@@ -58,7 +58,7 @@ public class PageGestionarClientesStpV {
 	 	return validations;
 	}
 
-	final static String TagTypeButton = "@TagTypeButton";
+	static final String TagTypeButton = "@TagTypeButton";
 	@Step (
 		description="Tras haber introducido un DNI y haber dado al botón \"Buscar\", damos click al botón \"" + TagTypeButton + "\"",
 		expected="Aparece el mensaje correspondiente y el botón Alta",

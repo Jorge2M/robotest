@@ -13,14 +13,14 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageResultPago extends PageObjTM {
 	
 	private final Channel channel;
-	private final static String XpathTextConfirmacionPagoEstandar = "//*[@data-testid[contains(.,'confirmationText')] or @data-testid='purchaseConfirmation.confirmationText']";
-	public final static String XPathDescubrirLoUltimoButton = "//*[@data-testid[contains(.,'cta.goToMain')]]";
-	public final static String XPathDataPedido = "//*[@data-testid[contains(.,'purchaseData')]]"; 
-	public final static String XPathCodigoPedidoEstandar = XPathDataPedido + "//*[@data-testid[contains(.,'.orderId')]]";
-	public final static String XPathCodigoPedidoContrareembolsoDesktop = "//div[@class='labels']//*[@class[contains(.,'data')] and string-length(text())=6]";
-	public final static String XPathCodigoPedidoContrareembolsoMobil = "//div[@class[contains(.,'confirmation-summary-value')]]//p[string-length(text())=6]"; 
-	public final static String XPathButtonMisCompras = "//button[@data-testid[contains(.,'goToMyPurchases')]]";
-	public final static String XPathBlockNewLoyaltyPoints = "//*[@data-testid[contains(.,'loyaltyPointsBlock')]]";
+	private static final String XpathTextConfirmacionPagoEstandar = "//*[@data-testid[contains(.,'confirmationText')] or @data-testid='purchaseConfirmation.confirmationText']";
+	public static final String XPathDescubrirLoUltimoButton = "//*[@data-testid[contains(.,'cta.goToMain')]]";
+	public static final String XPathDataPedido = "//*[@data-testid[contains(.,'purchaseData')]]"; 
+	public static final String XPathCodigoPedidoEstandar = XPathDataPedido + "//*[@data-testid[contains(.,'.orderId')]]";
+	public static final String XPathCodigoPedidoContrareembolsoDesktop = "//div[@class='labels']//*[@class[contains(.,'data')] and string-length(text())=6]";
+	public static final String XPathCodigoPedidoContrareembolsoMobil = "//div[@class[contains(.,'confirmation-summary-value')]]//p[string-length(text())=6]"; 
+	public static final String XPathButtonMisCompras = "//button[@data-testid[contains(.,'goToMyPurchases')]]";
+	public static final String XPathBlockNewLoyaltyPoints = "//*[@data-testid[contains(.,'loyaltyPointsBlock')]]";
 
 	public PageResultPago(TypePago typePago, Channel channel, WebDriver driver) {
 		super(driver);

@@ -21,7 +21,7 @@ import com.mng.robotest.test.pageobject.shop.PageMenusManto;
 
 public class PageSelTdaMantoStpV {
 	
-	final static String TagTienda = "@TagTienda";
+	static final String TagTienda = "@TagTienda";
 	@Step (
 		description="Seleccionamos el entorno \"" + TagTienda + "\"", 
 		expected="Aparece la página de Menús",

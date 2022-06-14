@@ -8,10 +8,10 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 
 public class PageIdentPaymaya extends PageObjTM {
 
-	private final static String XPathWrapperLogin = "//div[@class[contains(.,'login-form-index')]]";
-	private final static String XPathInputUser = "//input[@id='identityValue']";
-	private final static String XPathInputPassword = "//input[@id='password']";
-	private final static String XPathLoginButton = "//input[@class[contains(.,'login-btn')]]";
+	private static final String XPathWrapperLogin = "//div[@class[contains(.,'login-form-index')]]";
+	private static final String XPathInputUser = "//input[@id='identityValue']";
+	private static final String XPathInputPassword = "//input[@id='password']";
+	private static final String XPathLoginButton = "//input[@class[contains(.,'login-btn')]]";
 	
 	public PageIdentPaymaya(WebDriver driver) {
 		super(driver);

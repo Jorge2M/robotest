@@ -145,7 +145,7 @@ public class Bolsa {
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		dCtxSh.pais = PaisGetter.get(PaisShop.Espana);
+		dCtxSh.pais = PaisGetter.get(PaisShop.ESPANA);
 		dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
 		return dCtxSh;
 	}

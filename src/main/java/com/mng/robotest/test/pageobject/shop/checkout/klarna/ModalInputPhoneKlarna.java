@@ -8,10 +8,10 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 
 public class ModalInputPhoneKlarna extends PageObjTM {
 
-	private final static String XPathInputPhoneNumber = "//input[@id='email_or_phone']";
-	private final static String XPathButtonContinue = "//span[@id[contains(.,'btn-continue')]]";
-	private final static String XPathInputOTP = "//input[@id='otp_field']";
-	private final static String XPathButtonConfirm = "//span[@id[contains(.,'kp-purchase-review-continue-button')]]";
+	private static final String XPathInputPhoneNumber = "//input[@id='email_or_phone']";
+	private static final String XPathButtonContinue = "//span[@id[contains(.,'btn-continue')]]";
+	private static final String XPathInputOTP = "//input[@id='otp_field']";
+	private static final String XPathButtonConfirm = "//span[@id[contains(.,'kp-purchase-review-continue-button')]]";
 	
 	public ModalInputPhoneKlarna(WebDriver driver) {
 		super(driver);

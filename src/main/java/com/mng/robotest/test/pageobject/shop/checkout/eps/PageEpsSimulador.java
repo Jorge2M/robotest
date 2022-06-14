@@ -21,9 +21,9 @@ public class PageEpsSimulador {
 		}
 	};
 	
-	final static String XPathLogoEps = "//img[@class='paymentMethodLogo' and @src[contains(.,'eps.png')]]";
-	final static String XPathContinueButton = "//button[@value='pendingauthorised']";
-	final static String XPathSelectDelayAuthorised = "//select[@name='delaySelector']";
+	static final String XPathLogoEps = "//img[@class='paymentMethodLogo' and @src[contains(.,'eps.png')]]";
+	static final String XPathContinueButton = "//button[@value='pendingauthorised']";
+	static final String XPathSelectDelayAuthorised = "//select[@name='delaySelector']";
 	static String getXPathOptionDelayAuthorised(TypeDelay typeDelay) {
 		return (XPathSelectDelayAuthorised + "//option[text()[contains(.,'" + typeDelay.minutes + " minute')]]");
 	}

@@ -10,9 +10,9 @@ import com.mng.robotest.test.pageobject.manto.pedido.PagePedidos;
 
 public class PageDetalleCliente extends PageObjTM {
 	
-	private final static String XPathUserDni = "//td[text()[contains(.,'DNI')]]/following::td/span";
-	private final static String XPathUserEmail = "//td[text()[contains(.,'MAIL:')]]/following::td/span";
-	private final static String XPathVolverPedidos = "//a[text()='volver a pedidos']";
+	private static final String XPathUserDni = "//td[text()[contains(.,'DNI')]]/following::td/span";
+	private static final String XPathUserEmail = "//td[text()[contains(.,'MAIL:')]]/following::td/span";
+	private static final String XPathVolverPedidos = "//a[text()='volver a pedidos']";
 
 	public PageDetalleCliente(WebDriver driver) {
 		super(driver);

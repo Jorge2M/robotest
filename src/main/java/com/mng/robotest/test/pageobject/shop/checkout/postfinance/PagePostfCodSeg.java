@@ -10,9 +10,9 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PagePostfCodSeg extends PageObjTM {
 
-	private final static String XPathAceptarButton = "//form/input[@id='btn_Accept']";
-	private final static String XPathInputCodSeg = "//input[@id='postfinanceCardId']";
-	private final static String XPathButtonWeiter = "//button[@class='efinance-button' and text()[contains(.,'Weiter')]]";
+	private static final String XPathAceptarButton = "//form/input[@id='btn_Accept']";
+	private static final String XPathInputCodSeg = "//input[@id='postfinanceCardId']";
+	private static final String XPathButtonWeiter = "//button[@class='efinance-button' and text()[contains(.,'Weiter')]]";
 	
 	public PagePostfCodSeg(WebDriver driver) {
 		super(driver);

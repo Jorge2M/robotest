@@ -149,7 +149,7 @@ public class SecMenusUserStpV {
 		ModalCambioPaisStpV.cambioPais(dCtxSh, driver);
 	}
 
-	private final static String TagPoints = "@TagPoints";
+	private static final String TagPoints = "@TagPoints";
 	@Step (
 		description=
 			"Seleccionar el link \"Mango Likes You\"<br>" + 
