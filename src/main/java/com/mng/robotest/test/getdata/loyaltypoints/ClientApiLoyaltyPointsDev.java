@@ -1,5 +1,7 @@
 package com.mng.robotest.test.getdata.loyaltypoints;
 
+import static org.apache.http.impl.client.HttpClients.createDefault;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,14 +9,29 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
+import org.apache.logging.log4j.Logger;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.test.appshop.Loyalty.UserTest;
-import com.mng.robotest.test.getdata.JaxRsClient;
+import com.mng.robotest.test.exceptions.NotFoundException;
+import com.mng.robotest.test.getdata.JaxRsClientV2;
 import com.mng.robotest.test.getdata.loyaltypoints.data.ListConsumers;
 import com.mng.robotest.test.getdata.loyaltypoints.data.ResultAddPoints;
 import com.mng.robotest.test.getdata.loyaltypoints.data.TransferPoints;
 
-public class ClientApiLoyaltyPointsDev extends JaxRsClient {
-	
+
+public class ClientApiLoyaltyPointsDev {
+
+    private final HttpClient httpClient = createDefault();
+	private static final Logger logger = Log4jTM.getLogger();
 	private static final Map<String,ListConsumers> consumerDataCache = new HashMap<>();
 	
 	public ClientApiLoyaltyPointsDev() {}
@@ -50,20 +67,30 @@ public class ClientApiLoyaltyPointsDev extends JaxRsClient {
 	}
 	
 	private ListConsumers getDataConsumerFromRest(String emailCustomer) throws Exception {
-		Client client = getClientIgnoreCertificates();
-		ListConsumers resultsEmail = 
-			client
-				.target("https://iosb.mango.com/osb/api/consumer/search")
-				.queryParam("originType", "12")
-				.queryParam("touchpoint", "10251")
-				.queryParam("owner", "1")
-				.queryParam("input", emailCustomer)
-				.queryParam("page", "1")
-				.queryParam("pageSize", 10)
-				.request(MediaType.APPLICATION_JSON)
-				.get(ListConsumers.class);
+		String url = "https://iosb.mango.com/osb/api/consumer/search";
+		URIBuilder builder = new URIBuilder(url);
+		builder
+			.setParameter("originType", "12")
+			.setParameter("touchpoint", "10251")
+			.setParameter("owner", "1")
+			.setParameter("input", emailCustomer)
+			.setParameter("page", "1")
+			.setParameter("pageSize", "10");
 		
-		return resultsEmail;
+		HttpGet get = new HttpGet(builder.build());
+	    get.addHeader("Content-Type", MediaType.APPLICATION_JSON);
+	    
+	    HttpResponse response = httpClient.execute(get);
+	    int status = response.getStatusLine().getStatusCode();
+	    if (status!=200) {
+        	String message = String.format("Error %s calling %s", response.getStatusLine().getStatusCode(), url); 
+            logger.error(message);
+            throw new NotFoundException(message);
+	    }
+	    
+        ObjectMapper mapper = new ObjectMapper();
+        ListConsumers listConsumers = mapper.readValue(response.getEntity().getContent(), ListConsumers.class);
+        return listConsumers;
 	}
 	
 	private ListConsumers getDataConsumerFromCache(String emailConsumer) {
@@ -81,17 +108,51 @@ public class ClientApiLoyaltyPointsDev extends JaxRsClient {
 		transferPoints.setLocation_id(11667);
 		transferPoints.setComments("hola");
 				
-		Client client = getClientIgnoreCertificates();
+		Client client = JaxRsClientV2.getClientIgnoreSSL();
 		ResultAddPoints result = 
 			client
 				.target("https://api.loyal.guru/profiles")
 				.path(user.getContactId())
 				.path("give_score")	
 				.request(MediaType.APPLICATION_JSON_TYPE)
-				//.header("Authorization", "Basic dmljdG9yLnBhcmVyYStwcmVAbWFuZ28uY29tOjMyNGU1MTQ0MmUyMDc0YzUwYjZlODFlOGU4MTE0Y2Fk")
 				.header("Authorization", "Basic dmljdG9yLnBhcmVyYStwcmVAbWFuZ28uY29tOmVjOWU0NmQ5NzIwMWNjN2U0Nzg0NTgxM2FkZWU1MTE4")
 				.post(Entity.json(transferPoints), ResultAddPoints.class);
 		
 		return result;
 	}
+
+//	public ResultAddPoints addLoyaltyPoints(int loyaltyPoints, UserTest user) 
+//			throws Exception {
+//		TransferPoints transferPoints = new TransferPoints();
+//		transferPoints.setScore(loyaltyPoints);
+//		transferPoints.setCountry(user.getCountry());
+//		transferPoints.setLocation_id(11667);
+//		transferPoints.setComments("hola");
+//		StringEntity requestEntity = new StringEntity(
+//				Entity.json(transferPoints).toString(), 
+//				ContentType.APPLICATION_JSON);
+//				
+//		String url = "https://api.loyal.guru/profiles";
+//		URIBuilder builder = new URIBuilder(url);
+//		builder
+//			.setPath(user.getContactId())
+//			.setPath("give_score");
+//		
+//		HttpPost post = new HttpPost(builder.build());
+//	    post.addHeader("Content-Type", MediaType.APPLICATION_JSON);
+//	    post.setHeader("Authorization", "Basic dmljdG9yLnBhcmVyYStwcmVAbWFuZ28uY29tOmVjOWU0NmQ5NzIwMWNjN2U0Nzg0NTgxM2FkZWU1MTE4");
+//	    post.setEntity(requestEntity);
+//	    
+//	    HttpResponse response = httpClient.execute(post);
+//	    int status = response.getStatusLine().getStatusCode();
+//	    if (status!=200) {
+//        	String message = String.format("Error %s calling %s", response.getStatusLine().getStatusCode(), url); 
+//            logger.error(message);
+//            throw new NotFoundException(message);
+//	    }
+//	    
+//        ObjectMapper mapper = new ObjectMapper();
+//        ResultAddPoints resultAddPoints = mapper.readValue(response.getEntity().getContent(), ResultAddPoints.class);
+//        return resultAddPoints;
+//	}
 }

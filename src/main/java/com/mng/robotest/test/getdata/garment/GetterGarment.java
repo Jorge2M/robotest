@@ -1,8 +1,6 @@
 package com.mng.robotest.test.getdata.garment;
 
 import java.net.URI;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Invocation.Builder;
@@ -15,12 +13,12 @@ import org.glassfish.jersey.client.ClientProperties;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
-import com.mng.robotest.test.getdata.JaxRsClient;
+import com.mng.robotest.test.getdata.JaxRsClientV2;
 import com.mng.robotest.test.getdata.UtilsData;
 import com.mng.robotest.test.getdata.garment.data.GarmentFicha;
 
 
-public class GetterGarment extends JaxRsClient {
+public class GetterGarment {
 
 	private final Client client = getClient();
 	private final String target;
@@ -67,7 +65,7 @@ public class GetterGarment extends JaxRsClient {
 	
 	private Client getClient() {
 		try {
-			return getClientIgnoreCertificates();
+			return JaxRsClientV2.getClientIgnoreSSL();
 		} catch (Exception e) {
 			Log4jTM.getLogger().error("Exception getting rest client ", e);
 			return null;

@@ -21,7 +21,7 @@ import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.generic.UtilsMangoTest;
-import com.mng.robotest.test.getdata.JaxRsClient;
+import com.mng.robotest.test.getdata.JaxRsClientV2;
 import com.mng.robotest.test.getdata.UtilsData;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
@@ -33,7 +33,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 
-public class GetterProducts extends JaxRsClient {
+public class GetterProducts {
 	
 	private final String urlForJavaCall;
 	private final String urlForBrowserCall;
@@ -242,7 +242,7 @@ public class GetterProducts extends JaxRsClient {
 	}
 	
 	private WebTarget getWebTargetProductlistStandard(String urlBase, MenuProduct menu) throws Exception {
-		Client client = getClientIgnoreCertificates();
+		Client client = JaxRsClientV2.getClientIgnoreSSL();
 		WebTarget webTarget = 
 			client
 				.target(urlBase.replace("http:", "https:") + "services/productlist/products")
@@ -289,7 +289,7 @@ public class GetterProducts extends JaxRsClient {
 	}
 	
 	private WebTarget getWebTargetProductlistIntimissimi(String urlBase, MenuProduct menu) throws Exception {
-		Client client = getClientIgnoreCertificates();
+		Client client = JaxRsClientV2.getClientIgnoreSSL();
 		WebTarget webTarget = 
 			client
 				.target(urlBase.replace("http:", "https:") + "ws-catalog-aggregator/desktop/product-list/products/v1")
