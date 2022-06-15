@@ -3,6 +3,7 @@ package com.mng.robotest.test.getdata.garment;
 import java.net.URI;
 
 import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
@@ -10,17 +11,15 @@ import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.client.ClientProperties;
 
-import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
-import com.mng.robotest.test.getdata.JaxRsClientV2;
 import com.mng.robotest.test.getdata.UtilsData;
 import com.mng.robotest.test.getdata.garment.data.GarmentFicha;
 
 
 public class GetterGarment {
 
-	private final Client client = getClient();
+	private final Client client = ClientBuilder.newBuilder().build();
 	private final String target;
 	private final String nameCloudTest = UtilsData.getNameCloudTest();
 	private final String stockId;
@@ -61,15 +60,6 @@ public class GetterGarment {
 				.property(ClientProperties.FOLLOW_REDIRECTS, Boolean.TRUE);
 				
 		return webTarget;
-	}
-	
-	private Client getClient() {
-		try {
-			return JaxRsClientV2.getClientIgnoreSSL();
-		} catch (Exception e) {
-			Log4jTM.getLogger().error("Exception getting rest client ", e);
-			return null;
-		}
 	}
 	
 	private static String getUrlBase(String initialURL) {

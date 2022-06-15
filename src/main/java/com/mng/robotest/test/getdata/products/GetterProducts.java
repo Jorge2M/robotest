@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
@@ -21,7 +22,6 @@ import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.generic.UtilsMangoTest;
-import com.mng.robotest.test.getdata.JaxRsClientV2;
 import com.mng.robotest.test.getdata.UtilsData;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
@@ -242,7 +242,7 @@ public class GetterProducts {
 	}
 	
 	private WebTarget getWebTargetProductlistStandard(String urlBase, MenuProduct menu) throws Exception {
-		Client client = JaxRsClientV2.getClientIgnoreSSL();
+		Client client = ClientBuilder.newBuilder().build();
 		WebTarget webTarget = 
 			client
 				.target(urlBase.replace("http:", "https:") + "services/productlist/products")
@@ -289,7 +289,7 @@ public class GetterProducts {
 	}
 	
 	private WebTarget getWebTargetProductlistIntimissimi(String urlBase, MenuProduct menu) throws Exception {
-		Client client = JaxRsClientV2.getClientIgnoreSSL();
+		Client client = ClientBuilder.newBuilder().build();
 		WebTarget webTarget = 
 			client
 				.target(urlBase.replace("http:", "https:") + "ws-catalog-aggregator/desktop/product-list/products/v1")

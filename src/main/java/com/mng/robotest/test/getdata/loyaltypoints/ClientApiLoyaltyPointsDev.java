@@ -6,23 +6,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
 import org.apache.logging.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.test.appshop.Loyalty.UserTest;
 import com.mng.robotest.test.exceptions.NotFoundException;
-import com.mng.robotest.test.getdata.JaxRsClientV2;
 import com.mng.robotest.test.getdata.loyaltypoints.data.ListConsumers;
 import com.mng.robotest.test.getdata.loyaltypoints.data.ResultAddPoints;
 import com.mng.robotest.test.getdata.loyaltypoints.data.TransferPoints;
@@ -108,7 +105,7 @@ public class ClientApiLoyaltyPointsDev {
 		transferPoints.setLocation_id(11667);
 		transferPoints.setComments("hola");
 				
-		Client client = JaxRsClientV2.getClientIgnoreSSL();
+		Client client = ClientBuilder.newBuilder().build();
 		ResultAddPoints result = 
 			client
 				.target("https://api.loyal.guru/profiles")
