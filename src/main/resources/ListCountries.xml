@@ -1163,9 +1163,10 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
+<!-- 
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet" empleado="n"
-	nombre="ΕΜΒΑΣΜΑ" namefilter="EMBAEMA" testpasarela='s' testpago='s'>&TPV-105;</pago>
+	nombre="ΕΜΒΑΣΜΑ" namefilter="EMBAEMA" testpasarela='s' testpago='s'>&TPV-105;</pago>-->
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
@@ -1381,6 +1382,9 @@
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="03" anycad="2030" cvc="7373">&TPV-555;</pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="POSTEPAY" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="03" anycad="2030" cvc="7373">&TPV-555;</pago>	
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
@@ -2292,10 +2296,11 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <!-- 
 <pago 
 	type="Trustpay" tiendas="shop,outlet" empleado="n" 
-	nombre="TRUSTPAY" testpasarela='s' testpago='s'>&TPV-121;</pago>-->
+	nombre="TRUSTPAY" testpasarela='s' testpago='s'>&TPV-121;</pago>
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet" empleado="n" 
-	nombre="BANK TRANSFER" testpasarela='s' testpago='s'>&TPV-100;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
+	nombre="BANK TRANSFER" testpasarela='s' testpago='s'>&TPV-100;</pago>
+--> 
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
@@ -3526,9 +3531,6 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-529;</pago>
-<pago 
-	type="Paypal" tiendas="shop,outlet"
-	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-604;</pago>
 </pais>
 
 <pais nombre_pais="USA" codigo="400">
@@ -3573,6 +3575,9 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="DINERS" testpasarela='s'>&TPV-093;</pago>
+<pago 
+	type="Klarna" tiendas="shop,outlet"
+	nombre="KLARNA" testpasarela='s' testpago='s' numperklarna='23.04.1974'>&TPV-208;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="DISCOVER" testpasarela='s'>&TPV-093;</pago>
@@ -3745,10 +3750,9 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="DINERS" testpasarela='s'>&TPV-361;</pago>
-<!-- 
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
-	nombre="CONTRA ENTREGA EFECTIVO" testpasarela='s' testpago='s'>&TPV-183;</pago>--> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
+	nombre="CONTRA ENTREGA EFECTIVO" testpasarela='s' testpago='s'>&TPV-183;</pago>
 <!-- 
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
@@ -5679,9 +5683,6 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-501;</pago>
-<pago 
-	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA ELECTRON" testpasarela='s'>&TPV-501;</pago>
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-165;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->

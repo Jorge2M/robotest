@@ -104,8 +104,8 @@ public class SecSoyNuevo {
 		click(By.xpath(xpathButton), driver).type(TypeClick.javascript).exec();
 	}
 
-	public static boolean isTextoRGPDVisible(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathTextRGPD), driver).check());
+	public static boolean isTextoRGPDVisible(int maxSeconds, WebDriver driver) {
+		return (state(Visible, By.xpath(XPathTextRGPD), driver).wait(maxSeconds).check());
 	}
 
 	public static boolean isTextoLegalRGPDVisible(WebDriver driver) {

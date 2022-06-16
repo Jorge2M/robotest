@@ -44,17 +44,19 @@ public class SecSoyNuevoStpV {
 	@Validation
 	public static ChecksTM validaRGPDText(DataCtxShop dCtxSh, WebDriver driver) {  
 		ChecksTM validations = ChecksTM.getNew();
+		int maxSeconds = 5;
 		if (dCtxSh.pais.getRgpd().equals("S")) {
 		 	validations.add(
-				"El texto de info de RGPD <b>SI</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + dCtxSh.pais.getCodigo_pais(),
-				Page1IdentCheckout.secSoyNuevo.isTextoRGPDVisible(driver), State.Defect);
+				"El texto de info de RGPD <b>SI</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + 
+				dCtxSh.pais.getCodigo_pais() + " lo esperamos hasta " + maxSeconds + " segundos",
+				Page1IdentCheckout.secSoyNuevo.isTextoRGPDVisible(maxSeconds, driver), State.Defect);
 		 	validations.add(
 				"El texto legal de RGPD <b>SI</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + dCtxSh.pais.getCodigo_pais(),
 				Page1IdentCheckout.secSoyNuevo.isTextoLegalRGPDVisible(driver), State.Defect);
 		} else {
 		 	validations.add(
 				"El texto de info de RGPD <b>NO</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + dCtxSh.pais.getCodigo_pais(),
-				!Page1IdentCheckout.secSoyNuevo.isTextoRGPDVisible(driver), State.Defect);			
+				!Page1IdentCheckout.secSoyNuevo.isTextoRGPDVisible(0, driver), State.Defect);			
 		 	validations.add(
 				"El texto legal de RGPD <b>NO</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + dCtxSh.pais.getCodigo_pais(),
 				!Page1IdentCheckout.secSoyNuevo.isTextoLegalRGPDVisible(driver), State.Defect);		
