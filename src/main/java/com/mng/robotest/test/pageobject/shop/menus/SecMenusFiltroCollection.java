@@ -9,9 +9,9 @@ import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenusFiltroCollect
 import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenusFiltroCollectionMobil;
 
 public interface SecMenusFiltroCollection {
-	abstract public boolean isVisible();
-	abstract public boolean isVisibleMenu(FilterCollection typeMenu);
-	abstract public void click(FilterCollection typeMenu);
+	public abstract boolean isVisible();
+	public abstract boolean isVisibleMenu(FilterCollection typeMenu);
+	public abstract void click(FilterCollection typeMenu);
 	
 	public static SecMenusFiltroCollection make(Channel channel, AppEcom app, WebDriver driver) {
 		switch (channel) {

@@ -135,12 +135,12 @@ public class PageGaleriaDevice extends PageGaleria {
 	}
 	
 	String getXPathButtonAnyadirArticle(int posArticulo) {
-		String xpathArticulo = "(" + XPathArticulo + ")[" + posArticulo + "]";
+		String xpathArticulo = "(" + xpathArticuloBase + ")[" + posArticulo + "]";
 		return (xpathArticulo + XPathButtonAnyadirRelativeArticle);
 	}
 	
 	String getXPathArticleCapaTallas(int posArticulo) {
-		String xpathArticulo = "(" + XPathArticulo + ")[" + posArticulo + "]";
+		String xpathArticulo = "(" + xpathArticuloBase + ")[" + posArticulo + "]";
 		return (xpathArticulo + XPathCapaTallasRelativeArticle);
 	}
 	
@@ -195,7 +195,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	
 	@Override
 	public ArticuloScreen getArticuloObject(int numArticulo) throws Exception {
-		WebElement artWElem = driver.findElements(By.xpath(XPathArticulo)).get(numArticulo-1);
+		WebElement artWElem = driver.findElements(By.xpath(xpathArticuloBase)).get(numArticulo-1);
 		ArticuloScreen articulo = new ArticuloScreen();
 		articulo.setReferencia(getRefArticulo(artWElem));
 		articulo.setNombre(getNombreArticulo(artWElem));
@@ -228,7 +228,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	
 	@Override
 	public String getCodColorArticulo(int numArticulo) throws Exception {
-		String xpathArticulo = "(" + XPathArticulo + ")[" + numArticulo + "]";
+		String xpathArticulo = "(" + xpathArticuloBase + ")[" + numArticulo + "]";
 		String image = getImagenArticulo(driver.findElement(By.xpath(xpathArticulo)));
 		return (UtilsPageGaleria.getCodColorFromSrcImg(image));
 	}
@@ -365,7 +365,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	
 	private String getXPathArticuloFromPagina(int pagina) {
 		String xpathPagina = getXPathPagina(pagina);
-		return  (xpathPagina + XPathArticulo);
+		return  (xpathPagina + xpathArticuloBase);
 	}
 	
 	private void moveToPagina(int numPagina) {

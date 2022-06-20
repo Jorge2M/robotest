@@ -13,21 +13,21 @@ public abstract class PageFicha extends PageObjTM {
 
 	public enum TypeFicha {Old, New}
 	
-	abstract public boolean isPageUntil(int maxSeconds);
-	abstract public boolean isFichaArticuloUntil(String refArticulo, int maxSecondsToWait);
-	abstract public void clickAnadirBolsaButtonAndWait();
-	abstract public void selectAnadirAFavoritosButton();
-	abstract public void selectRemoveFromFavoritosButton();
-	abstract public boolean isVisibleDivAnadiendoAFavoritosUntil(int maxSecondsToWait);
-	abstract public boolean isInvisibleDivAnadiendoAFavoritosUntil(int maxSecondsToWait);
-	abstract public boolean isVisibleButtonElimFavoritos();
-	abstract public boolean isVisibleButtonAnadirFavoritos();
-	abstract public String getNameLinkBuscarEnTienda();
-	abstract public void selectBuscarEnTiendaLink();
-	abstract public boolean isVisibleBuscarEnTiendaLink();
-	abstract public boolean isVisibleSlider(Slider typeSlider);
-	abstract public int getNumArtVisiblesSlider(Slider typeSlider);
-	abstract public boolean isModalNoStockVisible(int maxSecondsToWait);
+	public abstract boolean isPageUntil(int maxSeconds);
+	public abstract boolean isFichaArticuloUntil(String refArticulo, int maxSecondsToWait);
+	public abstract void clickAnadirBolsaButtonAndWait();
+	public abstract void selectAnadirAFavoritosButton();
+	public abstract void selectRemoveFromFavoritosButton();
+	public abstract boolean isVisibleDivAnadiendoAFavoritosUntil(int maxSecondsToWait);
+	public abstract boolean isInvisibleDivAnadiendoAFavoritosUntil(int maxSecondsToWait);
+	public abstract boolean isVisibleButtonElimFavoritos();
+	public abstract boolean isVisibleButtonAnadirFavoritos();
+	public abstract String getNameLinkBuscarEnTienda();
+	public abstract void selectBuscarEnTiendaLink();
+	public abstract boolean isVisibleBuscarEnTiendaLink();
+	public abstract boolean isVisibleSlider(Slider typeSlider);
+	public abstract int getNumArtVisiblesSlider(Slider typeSlider);
+	public abstract boolean isModalNoStockVisible(int maxSecondsToWait);
 	
 	protected final SecDataProduct secDataProduct; //Name, color, talla section
 	public static SecFitFinder secFitFinder; //Guía de tallas v.Fit Finder

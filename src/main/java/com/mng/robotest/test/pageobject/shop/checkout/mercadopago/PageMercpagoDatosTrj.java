@@ -17,9 +17,9 @@ public abstract class PageMercpagoDatosTrj extends PageObjTM {
 	
 	public enum TypePant {inputDataTrjNew, inputCvcTrjSaved} 
 	
-	abstract public boolean isPageUntil(int maxSecondsToWait);
-	abstract public void sendCvc(String cvc);
-	abstract public void sendCaducidadTarj(String fechaVencimiento);
+	public abstract boolean isPageUntil(int maxSecondsToWait);
+	public abstract void sendCvc(String cvc);
+	public abstract void sendCaducidadTarj(String fechaVencimiento);
 	
 	PageMercpagoDatosTrj(WebDriver driver) {
 		super(driver);

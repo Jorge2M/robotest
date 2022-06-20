@@ -34,13 +34,14 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public abstract class PageGaleria extends PageObjTM {
 	
-	public enum From {menu, buscador}
+	public enum From {MENU, BUSCADOR}
 	
-	public static int maxPageToScroll = 20; 
+	public static int MAX_PAGE_TO_SCROLL = 20;
+	
 	final Channel channel;
 	final AppEcom app;
 	final From from;
-	final String XPathArticulo;
+	final String xpathArticuloBase;
 	final SecPreciosArticulo secPrecios;
 
 	public PageGaleria(From from, Channel channel, AppEcom app, WebDriver driver) {
@@ -48,38 +49,38 @@ public abstract class PageGaleria extends PageObjTM {
 		this.from = from;
 		this.channel = channel;
 		this.app = app;
-		this.XPathArticulo = getXPathArticulo();
+		this.xpathArticuloBase = getXPathArticulo();
 		this.secPrecios = new SecPreciosArticulo(channel, app, driver);
 	}
 	
-	abstract public String getXPathLinkRelativeToArticle();
-	abstract public int getLayoutNumColumnas();
-	abstract public WebElement getArticuloConVariedadColoresAndHover(int numArticulo);
-	abstract public WebElement getImagenElementArticulo(WebElement articulo) throws Exception;
-	abstract public WebElement getColorArticulo(WebElement articulo, boolean selected, int numColor);
-	abstract public ArticuloScreen getArticuloObject(int numArticulo) throws Exception;
-	abstract public String getNombreArticulo(WebElement articulo);
-	abstract public String getPrecioArticulo(WebElement articulo);
-	abstract public boolean isArticleRebajado(WebElement articulo);
-	abstract public String getCodColorArticulo(int numArticulo) throws Exception;
-	abstract public String getNameColorFromCodigo(String codigoColor);
-	abstract public int getNumFavoritoIcons();
-	abstract public boolean eachArticlesHasOneFavoriteIcon();
-	abstract public ArrayList<ArticuloScreen> clickArticleHearthIcons(List<Integer> posIconsToClick) throws Exception;
-	abstract public boolean isArticleWithHearthIconPresentUntil(int posArticle, int maxSecondsToWait);
-	abstract public void clickHearhIcon(int posArticle) throws Exception;
-	abstract public String getRefColorArticulo(WebElement articulo);
-	abstract public boolean backTo1erArticulo() throws InterruptedException;
+	public abstract String getXPathLinkRelativeToArticle();
+	public abstract int getLayoutNumColumnas();
+	public abstract WebElement getArticuloConVariedadColoresAndHover(int numArticulo);
+	public abstract WebElement getImagenElementArticulo(WebElement articulo) throws Exception;
+	public abstract WebElement getColorArticulo(WebElement articulo, boolean selected, int numColor);
+	public abstract ArticuloScreen getArticuloObject(int numArticulo) throws Exception;
+	public abstract String getNombreArticulo(WebElement articulo);
+	public abstract String getPrecioArticulo(WebElement articulo);
+	public abstract boolean isArticleRebajado(WebElement articulo);
+	public abstract String getCodColorArticulo(int numArticulo) throws Exception;
+	public abstract String getNameColorFromCodigo(String codigoColor);
+	public abstract int getNumFavoritoIcons();
+	public abstract boolean eachArticlesHasOneFavoriteIcon();
+	public abstract ArrayList<ArticuloScreen> clickArticleHearthIcons(List<Integer> posIconsToClick) throws Exception;
+	public abstract boolean isArticleWithHearthIconPresentUntil(int posArticle, int maxSecondsToWait);
+	public abstract void clickHearhIcon(int posArticle) throws Exception;
+	public abstract String getRefColorArticulo(WebElement articulo);
+	public abstract boolean backTo1erArticulo() throws InterruptedException;
 	abstract String getXPathPagina(int pagina);
 	abstract int getNumArticulosFromPagina(int pagina, TypeArticleDesktop sizeArticle);
-	abstract public WebElement getArticleFromPagina(int numPagina, int numArticle);
-	abstract public boolean isHeaderArticlesVisible(String textHeader);
-	abstract public void showTallasArticulo(int posArticulo);
-	abstract public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSecondsToWait);
-	abstract public ArticuloScreen selectTallaAvailableArticle(int posArticulo, int posTalla) throws Exception;
-	abstract public StateFavorito getStateHearthIcon(WebElement hearthIcon);
-	abstract public void clickHearthIcon(WebElement hearthIcon) throws Exception;
-	abstract public void hideMenus();
+	public abstract WebElement getArticleFromPagina(int numPagina, int numArticle);
+	public abstract boolean isHeaderArticlesVisible(String textHeader);
+	public abstract void showTallasArticulo(int posArticulo);
+	public abstract boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSecondsToWait);
+	public abstract ArticuloScreen selectTallaAvailableArticle(int posArticulo, int posTalla) throws Exception;
+	public abstract StateFavorito getStateHearthIcon(WebElement hearthIcon);
+	public abstract void clickHearthIcon(WebElement hearthIcon) throws Exception;
+	public abstract void hideMenus();
 
 	
 	public static List<LabelArticle> listLabelsNew = Arrays.asList(
@@ -97,7 +98,7 @@ public abstract class PageGaleria extends PageObjTM {
 	static final String XPathLinkRelativeToArticle = ".//a[@class='product-link']";
 
 	public static PageGaleria getNew(Channel channel, AppEcom app, WebDriver driver) {
-		return PageGaleria.getNew(From.menu, channel, app, driver);
+		return PageGaleria.getNew(From.MENU, channel, app, driver);
 	}
 	public static PageGaleria getNew(From from, Channel channel, AppEcom app, WebDriver driver) {
 		switch (channel) {
@@ -158,18 +159,18 @@ public abstract class PageGaleria extends PageObjTM {
 	}
 	
 	String getXPathArticleHearthIcon(int posArticulo) {
-		String xpathArticulo = "(" + XPathArticulo + ")[" + posArticulo + "]";
+		String xpathArticulo = "(" + xpathArticuloBase + ")[" + posArticulo + "]";
 		return (xpathArticulo + getXPathHearthIconRelativeArticle());
 	}
 	
 	String getXPathArticuloNoDoble() {
 		return (
-			XPathArticulo + 
+			xpathArticuloBase + 
 			"//self::*[not(@class[contains(.,'layout-2-coumns-A2')])]");
 	}
 	
 	String getXPathAncestorArticulo() {
-		return (XPathArticulo.replaceFirst("//", "ancestor::"));
+		return (xpathArticuloBase.replaceFirst("//", "ancestor::"));
 	}
 	
 	static String classProductName = 
@@ -183,21 +184,21 @@ public abstract class PageGaleria extends PageObjTM {
 	}
 	
 	String getXPathLinkArticulo(int numArticulo) {
-		return ("(" + XPathArticulo + ")[" + numArticulo + "]//a");
+		return ("(" + xpathArticuloBase + ")[" + numArticulo + "]//a");
 	}  
 
 	public boolean isVisibleArticuloUntil(int numArticulo, int seconds) {
-		String xpathArticulo = XPathArticulo + "[" + numArticulo + "]"; 
+		String xpathArticulo = xpathArticuloBase + "[" + numArticulo + "]"; 
 		return (state(Visible, By.xpath(xpathArticulo)).wait(seconds).check());
 	}
 
 	public boolean isClickableArticuloUntil(int numArticulo, int seconds) {
-		String xpathArticulo = XPathArticulo + "[" + numArticulo + "]"; 
+		String xpathArticulo = xpathArticuloBase + "[" + numArticulo + "]"; 
 		return (state(Clickable, By.xpath(xpathArticulo)).wait(seconds).check());
 	}
 	
 	public List<WebElement> getListaArticulos() {
-		List<WebElement> listaArticulos = driver.findElements(By.xpath(XPathArticulo));
+		List<WebElement> listaArticulos = driver.findElements(By.xpath(xpathArticuloBase));
 		return listaArticulos;
 	}
 	
@@ -213,7 +214,7 @@ public abstract class PageGaleria extends PageObjTM {
 	 * @return número de artículos de la galería
 	 */
 	public int getNumArticulos() {
-		return (driver.findElements(By.xpath(XPathArticulo)).size());
+		return (driver.findElements(By.xpath(xpathArticuloBase)).size());
 	}	
 	
 	public int waitForArticleVisibleAndGetNumberOfThem(int maxSecondsToWait) {
@@ -238,12 +239,12 @@ public abstract class PageGaleria extends PageObjTM {
 	 */
 	public boolean isVisibleArticleUntil(int numArticulo, int seconds) {
 		//Esperamos a que esté la imagen del 1er artículo pintada
-		String xpathArtGaleria = "(" + XPathArticulo + ")[" + numArticulo + "]";
+		String xpathArtGaleria = "(" + xpathArticuloBase + ")[" + numArticulo + "]";
 		return (state(Visible, By.xpath(xpathArtGaleria)).wait(seconds).check());
 	}
 	
 	public boolean isFirstArticleOfType(LineaType lineaType) {
-		List<WebElement> listaArticulos = driver.findElements(By.xpath(XPathArticulo));
+		List<WebElement> listaArticulos = driver.findElements(By.xpath(xpathArticuloBase));
 		return (
 			listaArticulos.size() > 0 &&
 			state(Present, listaArticulos.get(0))
@@ -349,7 +350,7 @@ public abstract class PageGaleria extends PageObjTM {
 	}
 	
 	public List<WebElement> getArticulos() {
-		return (driver.findElements(By.xpath(XPathArticulo))); 
+		return (driver.findElements(By.xpath(xpathArticuloBase))); 
 	}
 	
 	
@@ -518,11 +519,11 @@ public abstract class PageGaleria extends PageObjTM {
 	
 	public WebElement getArticleThatContainsLitUntil(String literal, int maxSeconds) {
 		By byArticleName = By.xpath(
-				XPathArticulo + 
+				xpathArticuloBase + 
 				XPathNombreRelativeToArticle + 
 				"//self::*[text()[contains(.,'" + literal + "')]]");
 		if (state(Present, byArticleName).wait(maxSeconds).check()) {
-			return driver.findElement(By.xpath(XPathArticulo));
+			return driver.findElement(By.xpath(xpathArticuloBase));
 		}
 		return null;
 	}
@@ -565,8 +566,8 @@ public abstract class PageGaleria extends PageObjTM {
 	}
 	
 	private int getPageToScroll(int numPage) {
-		if (numPage > maxPageToScroll) {
-			return maxPageToScroll;
+		if (numPage > MAX_PAGE_TO_SCROLL) {
+			return MAX_PAGE_TO_SCROLL;
 		}
 		return numPage;
 	}

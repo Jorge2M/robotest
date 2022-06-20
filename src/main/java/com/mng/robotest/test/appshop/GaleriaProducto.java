@@ -79,14 +79,14 @@ public class GaleriaProducto {
 		//Pruebas a nivel del cambio de galería de 2<->4 columnas
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		if (dCtxSh.channel==Channel.desktop && dCtxSh.appE!=AppEcom.outlet) {
-			PageGaleriaDesktop pageGaleria = (PageGaleriaDesktop)PageGaleria.getNew(From.menu, Channel.desktop, dCtxSh.appE, driver);
+			PageGaleriaDesktop pageGaleria = (PageGaleriaDesktop)PageGaleria.getNew(From.MENU, Channel.desktop, dCtxSh.appE, driver);
 			ListDataArticleGalery listArticlesGaleria2Cols = pageGaleria.getListDataArticles();
 			listArticlesGaleria2Cols = pageGaleriaStpV.selectListadoXColumnasDesktop(NumColumnas.cuatro, listArticlesGaleria2Cols);
 			pageGaleriaStpV.selectListadoXColumnasDesktop(NumColumnas.dos, listArticlesGaleria2Cols);
 		}
 		
 		DataForScrollStep dataScroll = new DataForScrollStep();
-		dataScroll.numPageToScroll = PageGaleriaDesktop.maxPageToScroll;
+		dataScroll.numPageToScroll = PageGaleriaDesktop.MAX_PAGE_TO_SCROLL;
 		dataScroll.ordenacionExpected = FilterOrdenacion.NOordenado;
 		dataScroll.validateArticlesExpected = false;
 		dataScroll.validaImgBroken = true;
@@ -142,7 +142,7 @@ public class GaleriaProducto {
 		pageGaleriaStpV.selectArticuloEnPestanyaAndBack(loc1rsArticle1rstPage, dCtxSh.pais);
 		
 		//Scrollar hasta el final de la Galería
-		dataScroll.numPageToScroll = PageGaleriaDesktop.maxPageToScroll;
+		dataScroll.numPageToScroll = PageGaleriaDesktop.MAX_PAGE_TO_SCROLL;
 		DataScroll datosScrollFinalGaleria = pageGaleriaStpV.scrollFromFirstPage(dataScroll, dCtxSh);
 			
 		LocationArticle loc1rsArticleLastPage = LocationArticle.getInstanceInPage(datosScrollFinalGaleria.paginaFinal, 1);

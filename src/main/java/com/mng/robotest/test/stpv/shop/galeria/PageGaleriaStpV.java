@@ -225,17 +225,17 @@ public class PageGaleriaStpV {
 		}
 		
 		String idPage = pageToScroll + "a";
-		if (pageToScroll>=PageGaleriaDesktop.maxPageToScroll) {
+		if (pageToScroll>=PageGaleriaDesktop.MAX_PAGE_TO_SCROLL) {
 			idPage = "última";
 		}
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagIdPage, idPage);
 		int numArticulosInicio = pageGaleria.getNumArticulos();
 		datosScroll = pageGaleria.scrollToPageFromFirst(pageToScroll);
 		
-		if (pageToScroll>=PageGaleriaDesktop.maxPageToScroll) {
+		if (pageToScroll>=PageGaleriaDesktop.MAX_PAGE_TO_SCROLL) {
 			checkVisibilityFooter(pageToScroll, dCtxSh.appE);
 		}
-		if (pageToScroll < PageGaleriaDesktop.maxPageToScroll) {
+		if (pageToScroll < PageGaleriaDesktop.MAX_PAGE_TO_SCROLL) {
 			checkAreMoreArticlesThatInitially(datosScroll.articulosMostrados, numArticulosInicio);
 		}
 		if (dataForScroll.ordenacionExpected != FilterOrdenacion.NOordenado) {

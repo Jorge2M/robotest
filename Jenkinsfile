@@ -16,6 +16,7 @@ pipeline {
         CURRENT_DATE = sh(returnStdout: true, script: 'echo $(date -u +%Y%m%d%H%M%S) | tr -d "\n"')
         LAST_COMMIT = sh(returnStdout: true, script: 'git rev-parse --short=10 HEAD | tr -d "\n"')
         APP_VERSION = "${CURRENT_DATE}-${LAST_COMMIT}"
+        M2_CONFIG_FILE = "nexus"
     }
     options {
         buildDiscarder(logRotator(numToKeepStr: '5', daysToKeepStr: '30'))
@@ -42,8 +43,10 @@ pipeline {
             steps {
             	sh 'mvn -version'
 	        	sh 'mvn clean'
-	        	withCredentials([usernamePassword(credentialsId: 'svc_bitbucket_pro', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-	            	sh 'mvn --settings infrastructure/ci/settings.xml test -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
+	        	//withCredentials([usernamePassword(credentialsId: 'svc_bitbucket_pro', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+	        	configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
+	            	//sh 'mvn --settings infrastructure/ci/settings.xml test -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
+	            	sh 'mvn --settings ${mavenSettings} test -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
 	            }
             }
             post {
@@ -69,8 +72,10 @@ pipeline {
             }
             steps {
                 unstash 'target'
-	        	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-	            	sh "mvn --settings infrastructure/ci/settings.xml -B verify -DskipUnitTests"
+	        	//withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+	        	configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
+	            	//sh "mvn --settings infrastructure/ci/settings.xml -B verify -DskipUnitTests"
+	            	sh "mvn --settings ${mavenSettings} -B verify -DskipUnitTests"
 	            }
             }
             post {
@@ -96,8 +101,10 @@ pipeline {
             }
             steps {
             	unstash 'target'
-            	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-	            	sh "mvn --settings infrastructure/ci/settings.xml sonar:sonar"
+            	//withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+            	configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
+	            	//sh "mvn --settings infrastructure/ci/settings.xml sonar:sonar"
+	            	sh "mvn --settings ${mavenSettings} sonar:sonar"
 	            }
             }
         }
@@ -112,8 +119,10 @@ pipeline {
             }
             steps {
             	unstash 'target'
-            	withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-	            	sh "mvn --settings infrastructure/ci/settings.xml -B package -DskipTests"
+            	//withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+            	configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
+	            	//sh "mvn --settings infrastructure/ci/settings.xml -B package -DskipTests"
+	            	sh "mvn --settings ${mavenSettings} -B package -DskipTests"
 	            }
             }
             post {

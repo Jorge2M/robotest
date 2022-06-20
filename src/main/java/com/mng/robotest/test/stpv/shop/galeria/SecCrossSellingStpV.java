@@ -53,7 +53,7 @@ public class SecCrossSellingStpV {
 		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
 		if (!secCrossSelling.isSectionVisible()) {
 			pageGaleria.hideMenus();
-			pageGaleria.scrollToPageFromFirst(PageGaleriaDesktop.maxPageToScroll);
+			pageGaleria.scrollToPageFromFirst(PageGaleriaDesktop.MAX_PAGE_TO_SCROLL);
 		}
 		validations.add(
 			"La sección cross-selling existe (si de primeras no existe scrollamos hasta el final de la galería)",

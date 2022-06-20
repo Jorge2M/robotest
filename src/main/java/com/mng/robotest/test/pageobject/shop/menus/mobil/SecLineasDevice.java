@@ -17,7 +17,7 @@ import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 
 public abstract class SecLineasDevice extends PageObjTM {
 
-	abstract public String getXPathLineaLink(LineaType lineaType) throws IllegalArgumentException;
+	public abstract String getXPathLineaLink(LineaType lineaType) throws IllegalArgumentException;
 	
 	protected final Channel channel;
 	protected final AppEcom app;

@@ -32,7 +32,7 @@ public class SecBuscadorStpV {
 	private final AppEcom app;
 	
 	public SecBuscadorStpV(AppEcom app, Channel channel, WebDriver driver) {
-		this.pageGaleria = (PageGaleria)PageGaleria.getNew(From.buscador, channel, app, driver);
+		this.pageGaleria = (PageGaleria)PageGaleria.getNew(From.BUSCADOR, channel, app, driver);
 		this.driver = driver;
 		this.channel = channel;
 		this.app = app;

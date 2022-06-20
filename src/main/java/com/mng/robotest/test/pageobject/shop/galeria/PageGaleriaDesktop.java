@@ -80,7 +80,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	private PageGaleriaDesktop(From from, Channel channel, AppEcom app, WebDriver driver) {
 		super(from, channel, app, driver);
 		secColores = new SecColoresArticuloDesktop(app);
-		secTallas = new SecTallasArticuloDesktop(app, XPathArticulo, driver);
+		secTallas = new SecTallasArticuloDesktop(app, xpathArticuloBase, driver);
 	}
 	public static PageGaleriaDesktop getNew(From from, Channel channel, AppEcom app, WebDriver driver) {
 		return (new PageGaleriaDesktop(from, channel, app, driver));
@@ -90,7 +90,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	private final String XPathAncestorArticle = "//ancestor::div[@class[contains(.,'product-list-info')]]";
 	private String getXPathDataArticuloOfType(TypeArticle typeArticle) {
 		String xpathPrecio = secPrecios.getXPathPrecioArticulo(typeArticle);
-		return (XPathArticulo + xpathPrecio + XPathAncestorArticle);
+		return (xpathArticuloBase + xpathPrecio + XPathAncestorArticle);
 	}
 	
 	private String getXPathArticuloConColores() {
@@ -148,7 +148,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 
 	public enum ControlTemporada {articlesFrom, articlesFromOther};
 	String getXPathArticuloTemporadasX(ControlTemporada controlTemp, List<Integer> listTemporadas) {
-		String xpathResult = XPathArticulo + "/self::*[@id and ";
+		String xpathResult = xpathArticuloBase + "/self::*[@id and ";
 		for (int i=0; i<listTemporadas.size(); i++) {
 			int temporada = listTemporadas.get(i);
 			switch (controlTemp) {
@@ -171,7 +171,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 
 	String getXPathArticulo(TypeArticleDesktop sizeArticle) {
-		return ((XPathArticulo + sizeArticle.getXPathRelativeArticle()));
+		return ((xpathArticuloBase + sizeArticle.getXPathRelativeArticle()));
 	}
 
 	private static final String iniXPathPaginaGaleria = "//*[@id='page";
@@ -294,7 +294,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 
 	public String getXPATH_nombreArticuloWithString(String string) {
-		return (XPathArticulo + "//*[(" + classProductName + "]) and text()[contains(.,'" + string + "')]]");
+		return (xpathArticuloBase + "//*[(" + classProductName + "]) and text()[contains(.,'" + string + "')]]");
 	}
 	
 	public String getXPathLinkNumColumnas(NumColumnas numColumnas) {
@@ -352,8 +352,8 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	private int getLayoutNumColumnasOutlet() {
-		if (state(Present, By.xpath(XPathArticulo)).check()) {
-			String classArt = driver.findElement(By.xpath(XPathArticulo)).getAttribute("class");
+		if (state(Present, By.xpath(xpathArticuloBase)).check()) {
+			String classArt = driver.findElement(By.xpath(xpathArticuloBase)).getAttribute("class");
 			if (classArt.contains("layout-3-columns")) {
 				return 3;
 			}
@@ -615,7 +615,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 
 	public boolean isVisibleAnyArticle() {
-		return (state(Visible, By.xpath(XPathArticulo)).check());
+		return (state(Visible, By.xpath(xpathArticuloBase)).check());
 	}
 
 	public void clickArticulo(int numArticulo) {
@@ -669,7 +669,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	public String getNombreArticulo(int numArticulo) {
-		return (driver.findElement(By.xpath("(" + XPathArticulo + ")[" + numArticulo + "]//span[" + classProductName + "]")).getText().trim());
+		return (driver.findElement(By.xpath("(" + xpathArticuloBase + ")[" + numArticulo + "]//span[" + classProductName + "]")).getText().trim());
 	}
 
 	/**
@@ -682,7 +682,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	 */
 	public ArrayList<String> nombreArticuloNoValido(String[] nombrePosibles) throws Exception {
 		//Obtenemos el xpath de los artículos eliminando el último carácter (]) pues hemos de insertar condiciones en el XPATH
-		String xpathLitArticulos = XPathArticulo + "//*[" + classProductName + "]";
+		String xpathLitArticulos = xpathArticuloBase + "//*[" + classProductName + "]";
 		xpathLitArticulos = xpathLitArticulos.substring(0, xpathLitArticulos.length() - 1);
 		for (int i=0; i<nombrePosibles.length; i++) {
 			xpathLitArticulos +=  
@@ -701,7 +701,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 					List<WebElement> listTextosArticulosNoValidos = driver.findElements(By.xpath(xpathLitArticulos));
 					for (WebElement textoArticuloNoValido : listTextosArticulosNoValidos) {
 						String nombre = textoArticuloNoValido.getText();
-						String xpathArtWithoutDoubleSlash = this.XPathArticulo.substring(2);
+						String xpathArtWithoutDoubleSlash = this.xpathArticuloBase.substring(2);
 						//String referencia = textoArticuloNoValido.findElement(By.xpath("./ancestor::*[@class[contains(.,'product-list-item')]]")).getAttribute("id");
 						String referencia = textoArticuloNoValido.findElement(By.xpath("./ancestor::" + xpathArtWithoutDoubleSlash)).getAttribute("id");
 						listTxtArtNoValidos.add(nombre + " (" + referencia + ")");
@@ -720,7 +720,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	//Equivalent to Mobil
 	@Override
 	public ArticuloScreen getArticuloObject(int numArticulo) throws Exception {
-		WebElement artWElem = driver.findElements(By.xpath(XPathArticulo)).get(numArticulo-1);
+		WebElement artWElem = driver.findElements(By.xpath(xpathArticuloBase)).get(numArticulo-1);
 		moveToElement(artWElem, driver);
 		ArticuloScreen articulo = new ArticuloScreen();
 		articulo.setReferencia(getRefArticulo(artWElem));
@@ -736,7 +736,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	//Equivalent to Mobil
 	@Override
 	public String getCodColorArticulo(int numArticulo) throws Exception {
-		String xpathArticulo = "(" + XPathArticulo + ")[" + numArticulo + "]";
+		String xpathArticulo = "(" + xpathArticuloBase + ")[" + numArticulo + "]";
 		String image = getImagenArticulo(driver.findElement(By.xpath(xpathArticulo)));
 		return (UtilsPageGaleria.getCodColorFromSrcImg(image));
 	}

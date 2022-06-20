@@ -31,10 +31,10 @@ public abstract class SecBolsa extends PageObjTM {
 	abstract String getXPathBotonComprar();
 	abstract String getXPathPrecioSubTotal();
 	abstract String getXPathPrecioTransporte();
-	abstract public String getPrecioSubTotal();
-	abstract public String getPrecioTransporte();
-	abstract public void setBolsaToStateIfNotYet(StateBolsa stateBolsaExpected);
-	abstract public LineasArtBolsa getLineasArtBolsa();
+	public abstract String getPrecioSubTotal();
+	public abstract String getPrecioTransporte();
+	public abstract void setBolsaToStateIfNotYet(StateBolsa stateBolsaExpected);
+	public abstract LineasArtBolsa getLineasArtBolsa();
 	
 	private static final String XPathAspa = "//span[@class[contains(.,'outline-close')]]";
 

@@ -57,10 +57,10 @@ public abstract class LineasArtBolsa extends PageObjTM {
 	abstract String getXPathLinea();
 	abstract String getXPathLineaWithTagRef();
 	abstract String getXPathLinkRelativeArticle();
-	abstract public void clearArticuloAndWait(String refArticulo) throws Exception;
-	abstract public void clickArticle(int position);
-	abstract public void clickRemoveArticleIfExists();
-	abstract public float getPrecioArticle(WebElement lineaArticleWeb);
+	public abstract void clearArticuloAndWait(String refArticulo) throws Exception;
+	public abstract void clickArticle(int position);
+	public abstract void clickRemoveArticleIfExists();
+	public abstract float getPrecioArticle(WebElement lineaArticleWeb);
 	
 	
 	LineasArtBolsa(Channel channel, WebDriver driver) {

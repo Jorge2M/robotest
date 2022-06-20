@@ -8,15 +8,15 @@ import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
 
 public interface MenuLateralDesktop {
-	abstract public AppEcom getApp();
-	abstract public LineaType getLinea();
+	public abstract AppEcom getApp();
+	public abstract LineaType getLinea();
 	abstract SublineaType getSublinea();
 	abstract String getNombre();
 	abstract String getDataGaLabelMenuLateralDesktop();
 	abstract String getDataGaLabelMenuSuperiorDesktop();
-	abstract public boolean isMenuLateral();
-	abstract public boolean isDataForValidateArticleNames();
-	abstract public String[] getTextsArticlesGalery();
+	public abstract boolean isMenuLateral();
+	public abstract boolean isDataForValidateArticleNames();
+	public abstract String[] getTextsArticlesGalery();
 	abstract int getLevel();
 	
 	public enum Element {
