@@ -2431,9 +2431,11 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="s" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
+<!-- 
 <pago 
 	type="ContraReembolso" tiendas="outlet" empleado="n" 
 	nombre="TRANSFERENCIA BANCARIA" nombremovil="transferencia" testpasarela='s' testpago='s'>&TPV-102;</pago>
+-->
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n" 
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
@@ -2513,9 +2515,11 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="s" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
+<!-- 
 <pago 
 	type="ContraReembolso" tiendas="outlet" empleado="n" 
 	nombre="TRANSFERENCIA BANCARIA" nombremovil="transferencia" testpasarela='s' testpago='s'>&TPV-102;</pago>
+-->
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n" 
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
@@ -2580,9 +2584,11 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="s" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-605;</pago>
+<!-- 
 <pago 
 	type="ContraReembolso" tiendas="outlet" empleado="n" 
 	nombre="TRANSFERENCIA BANCARIA" nombremovil="transferencia" testpasarela='s' testpago='s'>&TPV-102;</pago>
+-->
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n" 
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
@@ -2643,9 +2649,11 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="s" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
+<!-- 
 <pago 
 	type="ContraReembolso" tiendas="outlet" empleado="n" 
 	nombre="TRANSFERENCIA BANCARIA" nombremovil="transferencia" testpasarela='s' testpago='s'>&TPV-102;</pago>
+-->
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n" 
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
