@@ -43,9 +43,7 @@ pipeline {
             steps {
             	sh 'mvn -version'
 	        	sh 'mvn clean'
-	        	//withCredentials([usernamePassword(credentialsId: 'svc_bitbucket_pro', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
 	        	configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
-	            	//sh 'mvn --settings infrastructure/ci/settings.xml test -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
 	            	sh 'mvn --settings ${mavenSettings} test -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
 	            }
             }
@@ -72,9 +70,7 @@ pipeline {
             }
             steps {
                 unstash 'target'
-	        	//withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
 	        	configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
-	            	//sh "mvn --settings infrastructure/ci/settings.xml -B verify -DskipUnitTests"
 	            	sh "mvn --settings ${mavenSettings} -B verify -DskipUnitTests"
 	            }
             }
@@ -101,9 +97,7 @@ pipeline {
             }
             steps {
             	unstash 'target'
-            	//withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
             	configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
-	            	//sh "mvn --settings infrastructure/ci/settings.xml sonar:sonar"
 	            	sh "mvn --settings ${mavenSettings} sonar:sonar"
 	            }
             }
@@ -119,9 +113,7 @@ pipeline {
             }
             steps {
             	unstash 'target'
-            	//withCredentials([usernamePassword(credentialsId: 'svc.bitbucket.dev', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
             	configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
-	            	//sh "mvn --settings infrastructure/ci/settings.xml -B package -DskipTests"
 	            	sh "mvn --settings ${mavenSettings} -B package -DskipTests"
 	            }
             }
