@@ -119,7 +119,7 @@ public class Compra {
 			//confiamos que esté listo el 1-julio-2022
 			//cuando esté listo habrá que eliminar el 1er bloque del if
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date dateLimit = sdf.parse("2022-07-01");
+			Date dateLimit = sdf.parse("2022-08-01");
 			Date dateToday = new Date();
 			Optional<List<GarmentCatalog>> articlesHomeOpt = getArticlesHome(dCtxSh, driver);
 			if (articlesHomeOpt.isEmpty()) {

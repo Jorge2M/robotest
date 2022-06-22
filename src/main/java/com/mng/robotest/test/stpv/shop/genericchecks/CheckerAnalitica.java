@@ -1,5 +1,8 @@
 package com.mng.robotest.test.stpv.shop.genericchecks;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.commons.lang3.math.NumberUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -36,6 +39,20 @@ public class CheckerAnalitica implements Checker {
 			inputParamsSuite.getApp()!=null &&
 			inputParamsSuite.getApp()==AppEcom.votf) {
 			return State.Info;
+		}
+		//TODO actualmente hay muchos errores -> reportar a Alberte
+		//mientras tanto lo ponemos en Warning
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date dateLimit = null;
+		try {
+			dateLimit = sdf.parse("2022-08-01");
+		}
+		catch (Exception e) {
+			//
+		}
+		Date dateToday = new Date();
+		if (dateToday.before(dateLimit)) {
+			return State.Warn;
 		}
 		return GenericCheck.Analitica.getLevel();
 	}
