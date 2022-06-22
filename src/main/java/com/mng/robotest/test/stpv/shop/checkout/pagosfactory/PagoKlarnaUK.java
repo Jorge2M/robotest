@@ -25,12 +25,14 @@ public class PagoKlarnaUK extends PagoStpV {
 		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
 		pageKlarnaStpV.checkIsPage(10);
 		pageKlarnaStpV.clickComprar();
-		pageKlarnaStpV.checkModalInputPhoneNumber(5);
 		
-		if (execPay) {
-			pageKlarnaStpV.inputDataPhoneAndConfirm(dCtxSh.pais.getTelefono(), "123456");
-			this.dCtxPago.getDataPedido().setCodtipopago("K");
-		}
+		//TODO estaría pendiente implementarlo, es bastante complejo
+//		pageKlarnaStpV.checkModalInputPhoneNumber(5);
+//		
+//		if (execPay) {
+//			pageKlarnaStpV.inputDataPhoneAndConfirm(dCtxSh.pais.getTelefono(), "123456");
+//			this.dCtxPago.getDataPedido().setCodtipopago("K");
+//		}
 	}
 
 }

@@ -2,6 +2,7 @@ package com.mng.robotest.test.pageobject.shop.checkout.klarna;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -9,7 +10,8 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 public class ModalInputPhoneKlarna extends PageObjTM {
 
 	private static final String XPathInputPhoneNumber = "//input[@id='email_or_phone']";
-	private static final String XPathButtonContinue = "//span[@id[contains(.,'btn-continue')]]";
+	//private static final String XPathButtonContinue = "//span[@id[contains(.,'btn-continue')]]";
+	private static final String XPathButtonContinue = "//span[@id[contains(.,'onContinue')]]";
 	private static final String XPathInputOTP = "//input[@id='otp_field']";
 	private static final String XPathButtonConfirm = "//span[@id[contains(.,'kp-purchase-review-continue-button')]]";
 	
@@ -18,11 +20,16 @@ public class ModalInputPhoneKlarna extends PageObjTM {
 	}
 	
 	public boolean isModal(int maxSeconds) {
-		return state(State.Visible, By.xpath(XPathInputPhoneNumber)).check();
+		return state(State.Visible, By.xpath(XPathInputPhoneNumber)).wait(maxSeconds).check();
 	}
 	
 	public void inputPhoneNumber(String phoneNumber) {
-		driver.findElement(By.xpath(XPathInputPhoneNumber)).sendKeys(phoneNumber);
+		WebElement input = driver.findElement(By.xpath(XPathInputPhoneNumber));
+		String actualValue = input.getAttribute("value"); 
+		if (actualValue.replace(" ", "").compareTo(phoneNumber)!=0) {
+			input.clear();
+			input.sendKeys(phoneNumber);
+		}
 	}
 	
 	public void clickButtonContinue() {

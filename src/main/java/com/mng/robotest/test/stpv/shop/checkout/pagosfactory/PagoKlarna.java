@@ -26,18 +26,34 @@ public class PagoKlarna extends PagoStpV {
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
 		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
-		pageKlarnaStpV.checkIsPage(5);
-		pageKlarnaStpV.clickComprar();
-		pageKlarnaStpV.checkIsModalInputUserData(5);
 		
-		if (execPay) {
-			DataKlarna dataKlarna = getDataKlarna();
-			pageKlarnaStpV.inputUserDataAndConfirm(dataKlarna);
-			if (pageKlarnaStpV.checkModalInputPersonNumber(2)) {
+		if (pageKlarnaStpV.getPageObject().isPage(10)) {
+			pageKlarnaStpV.checkIsPage(0);
+			pageKlarnaStpV.clickComprar();
+			if (execPay) {
+				DataKlarna dataKlarna = getDataKlarna();
 				pageKlarnaStpV.inputPersonNumberAndConfirm(dataKlarna.getPersonnumber());
+				this.dCtxPago.getDataPedido().setCodtipopago("K");
 			}
-			this.dCtxPago.getDataPedido().setCodtipopago("K");
+		} else {
+			pageKlarnaStpV.checkModalInputPhoneNumber(15);
+			if (execPay) {
+				pageKlarnaStpV.inputDataPhoneAndConfirm(dCtxSh.pais.getTelefono(), "123456");
+				this.dCtxPago.getDataPedido().setCodtipopago("K");
+			}
 		}
+
+		//pageKlarnaStpV.checkIsModalInputUserData(5);
+		
+//		if (execPay) {
+//			pageKlarnaStpV.inputDataPhoneAndConfirm(dCtxSh.pais.getTelefono(), "123456");
+//			DataKlarna dataKlarna = getDataKlarna();
+//			pageKlarnaStpV.inputUserDataAndConfirm(dataKlarna);
+//			if (pageKlarnaStpV.checkModalInputPersonNumber(2)) {
+//				pageKlarnaStpV.inputPersonNumberAndConfirm(dataKlarna.getPersonnumber());
+//			}
+//			this.dCtxPago.getDataPedido().setCodtipopago("K");
+//		}
 	}
 
 	private DataKlarna getDataKlarna() {

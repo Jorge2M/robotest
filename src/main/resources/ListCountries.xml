@@ -1048,10 +1048,10 @@
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-515;</pago>
+<!-- 
 <pago 
 	type="Sepa" tiendas="shop,outlet" empleado="n"
 	nombre="SEPA" testpasarela='s' testpago='s' numtarj="DE89370400440532013000">&TPV-050;</pago>
-<!-- 
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet" empleado="n"
 	nombre="BANKÜBERWEISUNG" namefilter="BANKUBERWEISUNG" testpasarela='s' testpago='s'>&TPV-107;</pago>
@@ -3550,6 +3550,7 @@ where
 <tarifa>UD</tarifa>
 <codpos>11231</codpos>
 <telefono>2014920975</telefono>
+<address>538 Clinton St #4</address>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <miscompras>false</miscompras>
@@ -3584,7 +3585,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="DINERS" testpasarela='s'>&TPV-093;</pago>
 <pago 
-	type="Klarna" tiendas="shop,outlet"
+	type="KlarnaUK" tiendas="shop,outlet"
 	nombre="KLARNA" testpasarela='s' testpago='s' numperklarna='23.04.1974'>&TPV-208;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"

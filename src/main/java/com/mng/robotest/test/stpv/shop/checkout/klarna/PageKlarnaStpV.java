@@ -24,6 +24,10 @@ public class PageKlarnaStpV {
 		return pageKlarna.isPage(maxSeconds);
 	}
 	
+	public PageKlarna getPageObject() {
+		return pageKlarna;
+	}
+	
 	@Step (
 		description="Seleccionamos el botón <b>Comprar</b>", 
 		expected="Aparece el modal de introducción de datos del usuario")
