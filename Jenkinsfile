@@ -42,7 +42,6 @@ pipeline {
             }
             steps {
             	sh 'mvn -version'
-            	sh 'mvn dependency:purge-local-repository'
 	        	sh 'mvn clean'
 	        	configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
 	            	sh 'mvn --settings ${mavenSettings} test -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
