@@ -2889,9 +2889,11 @@ where
 <linea 		  id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="home"   	 shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
+<!-- 
 <pago 
 	type="KlarnaUK" tiendas="shop,outlet"
 	nombre="KLARNA" testpasarela='s' testpago='s'>&TPV-208;</pago>
+-->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='COLLECT_PLUS' tipotarj="VISAD3D_JP" numtarj="4142621111111112" mescad="03" anycad="2030" cvc="737">&TPV-230;</pago>
