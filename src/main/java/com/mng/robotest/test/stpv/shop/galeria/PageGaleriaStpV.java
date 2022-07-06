@@ -460,7 +460,7 @@ public class PageGaleriaStpV {
 		//En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
 		SeleniumUtils.waitForPageLoaded(driver, 2);
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-		WebElement articuloColores = pageGaleriaDesktop.getArticuloConVariedadColoresAndHoverNoDoble(numArtConColores);
+		WebElement articuloColores = pageGaleriaDesktop.getArticuloConVariedadColoresAndHover(numArtConColores);
 		stepTM.replaceInDescription(tagNombreArt, pageGaleria.getNombreArticulo(articuloColores));
 		stepTM.replaceInExpected(tagNombreArt, pageGaleria.getNombreArticulo(articuloColores));
 		String srcImg1erSlider = pageGaleria.getImagenArticulo(articuloColores);

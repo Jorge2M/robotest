@@ -50,9 +50,6 @@ public class PageMisDatosStpV {
 			"Aparece un campo de contraseña de tipo password",
 			pageMisDatos.isVisiblePasswordTypePassword(), State.Defect);
 		validations.add(
-			"El resto de campos de tipo \"inputContent\" están informados",
-			pageMisDatos.emailIsDisabled(), State.Defect);
-		validations.add(
 			"El Nombre contiene el definido durante el registro: <b>" + nombre + "</b>",
 			!(pageMisDatos.getNumInputContentVoid() > 1), State.Defect);
 		validations.add(

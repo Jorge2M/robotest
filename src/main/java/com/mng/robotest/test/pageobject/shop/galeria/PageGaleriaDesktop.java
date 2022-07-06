@@ -13,7 +13,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.Talla;
@@ -66,16 +65,17 @@ public class PageGaleriaDesktop extends PageGaleria {
 		}
 	}
 	
-	private static final String XPathListArticles = "//div[@class[contains(.,'columns')] and @id='list']";
-	private static final String XPathImgRelativeArticleOutlet = 
+	private static final String XPATH_LIST_ARTICLES = "//div[@class[contains(.,'columns')] and @id='list']";
+	private static final String XPATH_IMG_RELATIVE_ARTICLE_OUTLET = 
 			"//img[@src and (" + 
 				   "@class[contains(.,'productListImg')] or " + 
 				   "@class[contains(.,'product-list-image')] or " +
 				   "@class[contains(.,'product-image')] or " + 
 				   "@class[contains(.,'TaqRk')] or " + //TODO (Outlet) pendiente Sergio Campillo suba los cambios
 				   "@class[contains(.,'product-list-im')])]";
-	private static final String XPathImgSliderActiveRelativeArticleDesktopOutlet = 
-			"//div[@class[contains(.,'swiper-slide-active')]]" + XPathImgRelativeArticleOutlet;
+	
+	private static final String XPATH_IMG_SLIDER_ACTIVE_RELATIVE_ARTICLE_DESKTOP_OUTLET = 
+			"//div[@class[contains(.,'swiper-slide-active')]]" + XPATH_IMG_RELATIVE_ARTICLE_OUTLET ;
 
 	private PageGaleriaDesktop(From from, Channel channel, AppEcom app, WebDriver driver) {
 		super(from, channel, app, driver);
@@ -99,8 +99,8 @@ public class PageGaleriaDesktop extends PageGaleria {
 			getXPathAncestorArticulo());
 	}
 
-	private static final String XPpathIconoUpGalery = "//div[@id='scroll-top-step' or @id='iconFillUp']";
-	private static final String XPathHeaderArticles = "//div[@id[contains(.,'title')]]/h1";
+	private static final String XPATH_ICONO_UP_GALERY = "//div[@id='scroll-top-step' or @id='iconFillUp']";
+	private static final String XPATH_HEADER_ARTICLES = "//div[@id[contains(.,'title')]]/h1";
 
 	@Override
 	public String getXPathLinkRelativeToArticle() {
@@ -171,18 +171,21 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 
 	String getXPathArticulo(TypeArticleDesktop sizeArticle) {
-		return ((xpathArticuloBase + sizeArticle.getXPathRelativeArticle()));
+		return (xpathArticuloBase + sizeArticle.getXPathRelativeArticle());
 	}
 
-	private static final String iniXPathPaginaGaleria = "//*[@id='page";
+	private static final String INI_XPATH_PAGINA_GALERIA = "//*[@id='page";
 
 	@Override
 	String getXPathPagina(int pagina) {
-		return (iniXPathPaginaGaleria + pagina + "']");
+		return (INI_XPATH_PAGINA_GALERIA + pagina + "']");
 	}
 
-	private static String getXPathSliderRelativeToArticle(TypeSlider typeSlider) {
-		return ("//*[@class[contains(.,'swiper-button-" + typeSlider + "')] and @role]");
+	private static String getXPathSliderRelativeToArticle(TypeSlider typeSlider, AppEcom app) {
+		if (app==AppEcom.outlet) {
+			return ("//*[@class[contains(.,'swiper-button-" + typeSlider + "')] and @role]");
+		}
+		return ("//*[@data-testid='." + typeSlider + "']");
 	}
 
 	private String getXPathArticuloConVariedadColores(int numArticulo) {
@@ -197,21 +200,10 @@ public class PageGaleriaDesktop extends PageGaleria {
 		return articulo;
 	}
 
-	public WebElement getArticuloConVariedadColoresAndHoverNoDoble(int numArticulo) {
-		String xpathArticulo = getXPathArticuloConVariedadColores(numArticulo);
-		WebElement articulo = driver.findElement(By.xpath(xpathArticulo)); 
-		hoverArticle(articulo);
-		return articulo;
-	}
-
 	public boolean isArticleFromLinea(int numArticle, LineaType lineaType) {
 		return (isArticleFromLinCarrusel(numArticle, lineaType.toString()));
 	}
 	
-	public boolean isArticleFromCarrusel(int numArticle, Linea linea, String idCarrusel) {
-		return (isArticleFromLinCarrusel(numArticle, idCarrusel));		
-	}
-
 	public boolean isArticleFromLinCarrusel(int numArticle, String idLinCarrusel) {
 		WebElement article = getArticulo(numArticle);
 		if (article==null) {
@@ -222,21 +214,18 @@ public class PageGaleriaDesktop extends PageGaleria {
 		String linea1rstCharCapital = idLinCarrusel.substring(0,1).toUpperCase() + idLinCarrusel.substring(1, idLinCarrusel.length());
 		String lastCharUpper = idLinCarrusel.substring(idLinCarrusel.length()-1,idLinCarrusel.length()).toUpperCase();
 		String lineaLastCharCapital = idLinCarrusel.substring(0,idLinCarrusel.length()-1) + lastCharUpper;
-		if (article!=null) {
-			if (state(Present, article).by(By.xpath(".//a[@href[contains(.,'" + idLinCarrusel + "')]]")).check() ||
-				state(Present, article).by(By.xpath(".//a[@href[contains(.,'s=" + linea1rstCharCapital + "')]]")).check() ||
-				state(Present, article).by(By.xpath(".//a[@href[contains(.,'_" + lineaLastCharCapital + "')]]")).check()) {
-				return true;
-			}
-			
-			//Los ids de carrusels para niño/niña son nino/nina pero a nivel del HTML de los artículos figura KidsA/KidsO
-			LineaType lineaType = LineaType.getLineaType(idLinCarrusel);
-			if (lineaType!=null && 
-			   (lineaType==LineaType.nina || lineaType==LineaType.nino)) {
-				if (state(Present, By.xpath(".//a[@href[contains(.,'" + lineaType.getId2() + "')]]")).check()) {
-					return true;
-				}
-			}
+		if (state(Present, article).by(By.xpath(".//a[@href[contains(.,'" + idLinCarrusel + "')]]")).check() ||
+			state(Present, article).by(By.xpath(".//a[@href[contains(.,'s=" + linea1rstCharCapital + "')]]")).check() ||
+			state(Present, article).by(By.xpath(".//a[@href[contains(.,'_" + lineaLastCharCapital + "')]]")).check()) {
+			return true;
+		}
+		
+		//Los ids de carrusels para niño/niña son nino/nina pero a nivel del HTML de los artículos figura KidsA/KidsO
+		LineaType lineaType = LineaType.getLineaType(idLinCarrusel);
+		if (lineaType!=null && 
+		   (lineaType==LineaType.nina || lineaType==LineaType.nino) &&
+		   (state(Present, By.xpath(".//a[@href[contains(.,'" + lineaType.getId2() + "')]]")).check())) {
+		    return true;
 		}
 		
 		return false;
@@ -272,9 +261,9 @@ public class PageGaleriaDesktop extends PageGaleria {
 	
 	private String getXPathImgArticuloOutlet(WebElement article) {
 		if (isPresentSliderInArticle(TypeSlider.next, article)) {
-			return "." + XPathImgSliderActiveRelativeArticleDesktopOutlet;
+			return "." + XPATH_IMG_SLIDER_ACTIVE_RELATIVE_ARTICLE_DESKTOP_OUTLET;
 		} else {
-			return "." + XPathImgRelativeArticleOutlet;
+			return "." + XPATH_IMG_RELATIVE_ARTICLE_OUTLET ;
 		}
 	}
 	
@@ -289,11 +278,12 @@ public class PageGaleriaDesktop extends PageGaleria {
 	 * @param categoriaProducto categoría de producto (p.e. "BOLSOS")
 	 * @return el xpath correspondiente a la cabecera de resultado de una búsqueda de una determinada categoría de producto
 	 */
+	@Override
 	public String getXPathCabeceraBusquedaProd() {
 		return ("//*[@id='buscador_cabecera2']");
 	}
 
-	public String getXPATH_nombreArticuloWithString(String string) {
+	public String getXPathNombreArticuloWithString(String string) {
 		return (xpathArticuloBase + "//*[(" + classProductName + "]) and text()[contains(.,'" + string + "')]]");
 	}
 	
@@ -328,7 +318,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
  
 	public boolean isArticuloWithStringInName(String string) {
-		String xpathArtWithString = getXPATH_nombreArticuloWithString(string);
+		String xpathArtWithString = getXPathNombreArticuloWithString(string);
 		return (state(Present, By.xpath(xpathArtWithString)).check());
 	}	
  
@@ -341,7 +331,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}	
 	
 	private int getLayoutNumColumnasShop() {
-		WebElement listArt = driver.findElement(By.xpath(XPathListArticles));
+		WebElement listArt = driver.findElement(By.xpath(XPATH_LIST_ARTICLES ));
 		if (listArt.getAttribute("class").contains("columns3")) {
 			return 3;
 		}
@@ -430,7 +420,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 
 	@Override
 	public boolean backTo1erArticulo() throws InterruptedException {
-		return backTo1erArticulo(XPpathIconoUpGalery);
+		return backTo1erArticulo(XPATH_ICONO_UP_GALERY);
 	}
 	
 	/**
@@ -482,8 +472,8 @@ public class PageGaleriaDesktop extends PageGaleria {
 		return (article.getSize().getWidth());
 	}
 	
-	public ArrayList<String> getArticlesRebajadosWithLiteralInLabel(List<LabelArticle> listLabels) {
-		ArrayList<String> dataTextArticles = new ArrayList<String>();
+	public List<String> getArticlesRebajadosWithLiteralInLabel(List<LabelArticle> listLabels) {
+		List<String> dataTextArticles = new ArrayList<>();
 		for (LabelArticle label : listLabels) {
 			String xpathLit = getXPathDataArticuloRebajadoWithLabel(label);
 			dataTextArticles.addAll(getDataFromArticlesLiteral(xpathLit));
@@ -506,7 +496,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	
 	public List<String> getArticles(TypeArticle typeArticle, List<Integer> listTemporadas) {
 		List<String> listArtOfType = getArticlesOfType(typeArticle);
-		if (listArtOfType.size()>0) {
+		if (!listArtOfType.isEmpty()) {
 			List<String> listArtTempX = getArticlesTemporadasX(ControlTemporada.articlesFrom, listTemporadas);
 			List<String> common = new ArrayList<String>(listArtTempX);
 			common.retainAll(listArtOfType);
@@ -645,7 +635,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 			PageObjTM.waitMillis(500);
 			hoverArticle(articulo);
 			PageObjTM.waitMillis(500);
-			String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
+			String xpathSlider = getXPathSliderRelativeToArticle(typeSlider, app);
 			//driver.findElement(By.xpath("//*[@id='g1704908099']/div/div[2]")).click();
 			click(articulo).by(By.xpath(xpathSlider)).exec();
 			waitForAjax(driver, 1);
@@ -664,7 +654,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	public boolean isPresentSliderInArticle(TypeSlider typeSlider, WebElement article) {
-		String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
+		String xpathSlider = getXPathSliderRelativeToArticle(typeSlider, app);
 		return (state(Present, article).by(By.xpath("." + xpathSlider)).check());
 	}
 	
@@ -825,7 +815,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 
 	@Override
 	public boolean isHeaderArticlesVisible(String textHeader) {
-		By byHeader = By.xpath(XPathHeaderArticles);
+		By byHeader = By.xpath(XPATH_HEADER_ARTICLES);
 		if (state(Visible, byHeader).check()) {
 			return (driver.findElement(byHeader).getText().toLowerCase().contains(textHeader.toLowerCase()));
 		}
