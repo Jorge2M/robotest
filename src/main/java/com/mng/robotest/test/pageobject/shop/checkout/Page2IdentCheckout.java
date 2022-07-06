@@ -57,7 +57,7 @@ public class Page2IdentCheckout extends PageObjTM {
 	private static final String XPathBotonFindAddress = "//input[@class[contains(.,'load-button')] and @type='button']";
 	private static final String XPathBotonContinuar = "//div[@class='submitContent']/input[@type='submit']";
 	private static final String XPathMsgAduanas = "//div[@class='aduanas']";
-	private static final String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
+	//private static final String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
 	
 	//Con el substring simulamos un ends-with (que no está disponible en xpath 1.0)
 	private static String XPathSelectLocalidades = "//select[substring(@id, string-length(@id) - string-length('localidades') +1) = 'localidades']";
@@ -665,7 +665,7 @@ public class Page2IdentCheckout extends PageObjTM {
 		return (state(Visible, By.xpath(XPathMsgAduanas)).wait(1).check());
 	}
 
-	public boolean isTextoRGPDVisible() {
-		return (state(Visible, By.xpath(XPathTextRGPD)).check());
-	}
+//	public boolean isTextoRGPDVisible() {
+//		return (state(Visible, By.xpath(XPathTextRGPD)).check());
+//	}
 }

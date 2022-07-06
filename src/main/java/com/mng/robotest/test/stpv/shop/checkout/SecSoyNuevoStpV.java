@@ -5,13 +5,9 @@ import java.util.Arrays;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.State;
-import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
-import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.pageobject.shop.checkout.SecSoyNuevo;
 import com.mng.robotest.test.pageobject.shop.checkout.SecSoyNuevo.ActionNewsL;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks;
@@ -40,28 +36,28 @@ public class SecSoyNuevoStpV {
 				GenericCheck.TextsTraduced)).checks(driver);
 	}
 
-	@SuppressWarnings("static-access")
-	@Validation
-	public static ChecksTM validaRGPDText(DataCtxShop dCtxSh, WebDriver driver) {  
-		ChecksTM validations = ChecksTM.getNew();
-		int maxSeconds = 5;
-		if (dCtxSh.pais.getRgpd().equals("S")) {
-		 	validations.add(
-				"El texto de info de RGPD <b>SI</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + 
-				dCtxSh.pais.getCodigo_pais() + " lo esperamos hasta " + maxSeconds + " segundos",
-				Page1IdentCheckout.secSoyNuevo.isTextoRGPDVisible(maxSeconds, driver), State.Defect);
-		 	validations.add(
-				"El texto legal de RGPD <b>SI</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + dCtxSh.pais.getCodigo_pais(),
-				Page1IdentCheckout.secSoyNuevo.isTextoLegalRGPDVisible(driver), State.Defect);
-		} else {
-		 	validations.add(
-				"El texto de info de RGPD <b>NO</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + dCtxSh.pais.getCodigo_pais(),
-				!Page1IdentCheckout.secSoyNuevo.isTextoRGPDVisible(0, driver), State.Defect);			
-		 	validations.add(
-				"El texto legal de RGPD <b>NO</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + dCtxSh.pais.getCodigo_pais(),
-				!Page1IdentCheckout.secSoyNuevo.isTextoLegalRGPDVisible(driver), State.Defect);		
-		}
-		
-		return validations;
-	}
+//	@SuppressWarnings("static-access")
+//	@Validation
+//	public static ChecksTM validaRGPDText(DataCtxShop dCtxSh, WebDriver driver) {  
+//		ChecksTM validations = ChecksTM.getNew();
+//		int maxSeconds = 5;
+//		if (dCtxSh.pais.getRgpd().equals("S")) {
+//		 	validations.add(
+//				"El texto de info de RGPD <b>SI</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + 
+//				dCtxSh.pais.getCodigo_pais() + " lo esperamos hasta " + maxSeconds + " segundos",
+//				Page1IdentCheckout.secSoyNuevo.isTextoRGPDVisible(maxSeconds, driver), State.Defect);
+//		 	validations.add(
+//				"El texto legal de RGPD <b>SI</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + dCtxSh.pais.getCodigo_pais(),
+//				Page1IdentCheckout.secSoyNuevo.isTextoLegalRGPDVisible(driver), State.Defect);
+//		} else {
+//		 	validations.add(
+//				"El texto de info de RGPD <b>NO</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + dCtxSh.pais.getCodigo_pais(),
+//				!Page1IdentCheckout.secSoyNuevo.isTextoRGPDVisible(0, driver), State.Defect);			
+//		 	validations.add(
+//				"El texto legal de RGPD <b>NO</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + dCtxSh.pais.getCodigo_pais(),
+//				!Page1IdentCheckout.secSoyNuevo.isTextoLegalRGPDVisible(driver), State.Defect);		
+//		}
+//		
+//		return validations;
+//	}
 }

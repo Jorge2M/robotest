@@ -14,7 +14,6 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.domains.cookiescheck.stpv.CheckerAllowedCookies;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataBag;
@@ -297,9 +296,9 @@ public class SecBolsaStpV {
 	public void selectButtonComprar(DataBag dataBag, DataCtxShop dCtxSh) throws Exception {
 		secBolsa.clickBotonComprar(10);
 		validaSelectButtonComprar(dataBag, dCtxSh);
-		if(!dCtxSh.userRegistered) {
-			Page1IdentCheckoutStpV.secSoyNuevo.validaRGPDText(dCtxSh, driver);
-		}
+//		if(!dCtxSh.userRegistered) {
+//			Page1IdentCheckoutStpV.secSoyNuevo.validaRGPDText(dCtxSh, driver);
+//		}
 	}
 
 	/**

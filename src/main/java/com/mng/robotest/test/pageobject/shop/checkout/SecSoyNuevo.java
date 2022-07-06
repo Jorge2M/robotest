@@ -20,8 +20,8 @@ public class SecSoyNuevo {
 	static String XPathInputContent = XPathFormIdent + "//span[@class='eac-cval']";
 	static String XPathBotonContinueMobil = "//div[@id='registerCheckOut']//div[@class='submit']/a";
 	static String XPathBotonContinueDesktop = "//div[@class='register']//div[@class='submit']/input";
-	private static String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
-	private static String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
+	//private static String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
+	//private static String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
 	
 	public static String getXPath_checkPubliNewsletter(Channel channel, boolean active) {
 		String sufix = "";
@@ -104,11 +104,11 @@ public class SecSoyNuevo {
 		click(By.xpath(xpathButton), driver).type(TypeClick.javascript).exec();
 	}
 
-	public static boolean isTextoRGPDVisible(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(XPathTextRGPD), driver).wait(maxSeconds).check());
-	}
-
-	public static boolean isTextoLegalRGPDVisible(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathLegalRGPD), driver).check());
-	}
+//	public static boolean isTextoRGPDVisible(int maxSeconds, WebDriver driver) {
+//		return (state(Visible, By.xpath(XPathTextRGPD), driver).wait(maxSeconds).check());
+//	}
+//
+//	public static boolean isTextoLegalRGPDVisible(WebDriver driver) {
+//		return (state(Visible, By.xpath(XPathLegalRGPD), driver).check());
+//	}
 }
