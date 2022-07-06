@@ -13,27 +13,27 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 	//El id está en el campo "ID d experimento" del detalle en Google Optimize
 	//Si se quiere activar hay que añadirlo en la clase TestABactive
 
-	Legal_Policy_Checkout_Desktop (
-		"PIUR-3434 legal policy checkout 1 Desktop",
-		"w9F_YC3SR2qhGWa97r8ouQ",
-		Arrays.asList(0,1),
-		Arrays.asList(
-			"V0-Original", 
-			"V1-Variante1"),
-		Arrays.asList(Channel.desktop),
-		Arrays.asList(AppEcom.shop)
-	),
-	
-	Legal_Policy_Checkout_Mobile (
-		"PIUR-3434 legal policy checkout 1 Mobile",
-		"IA1ctJL1QXiW22ib9GCdDw",
-		Arrays.asList(0,1),
-		Arrays.asList(
-			"V0-Original", 
-			"V1-Variante1"),
-		Arrays.asList(Channel.mobile),
-		Arrays.asList(AppEcom.shop)
-	),
+//	Legal_Policy_Checkout_Desktop (
+//		"PIUR-3434 legal policy checkout 1 Desktop",
+//		"w9F_YC3SR2qhGWa97r8ouQ",
+//		Arrays.asList(0,1),
+//		Arrays.asList(
+//			"V0-Original", 
+//			"V1-Variante1"),
+//		Arrays.asList(Channel.desktop),
+//		Arrays.asList(AppEcom.shop)
+//	),
+//	
+//	Legal_Policy_Checkout_Mobile (
+//		"PIUR-3434 legal policy checkout 1 Mobile",
+//		"IA1ctJL1QXiW22ib9GCdDw",
+//		Arrays.asList(0,1),
+//		Arrays.asList(
+//			"V0-Original", 
+//			"V1-Variante1"),
+//		Arrays.asList(Channel.mobile),
+//		Arrays.asList(AppEcom.shop)
+//	),
 	
 	New_Registry_MLY_Desktop_PRO (
 		"NEW REGISTRY MLY - Desktop PRO",
