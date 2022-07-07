@@ -15,11 +15,12 @@ public class SecSoyNuevo {
 	
 	public enum ActionNewsL {activate, deactivate}
 
-	static String XPathFormIdent = "//div[@class='register' or @id='registerCheckOut']//form"; //desktop y mobil
-	static String XPathInputEmail = XPathFormIdent + "//input[@id[contains(.,'expMail')]]";
-	static String XPathInputContent = XPathFormIdent + "//span[@class='eac-cval']";
-	static String XPathBotonContinueMobil = "//div[@id='registerCheckOut']//div[@class='submit']/a";
-	static String XPathBotonContinueDesktop = "//div[@class='register']//div[@class='submit']/input";
+	private static final String XPATH_FORM_IDENT = "//div[@class='register' or @id='registerCheckOut']//form"; //desktop y mobil
+	private static final String XPATH_INPUT_EMAIL = XPATH_FORM_IDENT + "//input[@id[contains(.,'expMail')]]";
+	private static final String XPATH_INPUT_CONTENT = XPATH_FORM_IDENT + "//span[@class='eac-cval']";
+	private static final String XPATH_BOTON_CONTINUE_MOBIL = "//div[@id='registerCheckOut']//div[@class='submit']/a";
+	private static final String XPATH_BOTON_CONTINUE_DESKTOP = "//div[@class='register']//div[@class='submit']/input";
+	private static final String XPATH_LINK_POLITICA_PRIVACIDAD = "//span[@data-testid='mng-link']";
 	//private static String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
 	//private static String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
 	
@@ -40,13 +41,13 @@ public class SecSoyNuevo {
 	
 	public static String getXPath_BotonContinue(Channel channel) {
 		if (channel==Channel.mobile) {
-			return XPathBotonContinueMobil;
+			return XPATH_BOTON_CONTINUE_MOBIL;
 		}
-		return XPathBotonContinueDesktop;
+		return XPATH_BOTON_CONTINUE_DESKTOP;
 	}
 
 	public static boolean isFormIdentUntil(WebDriver driver, int maxSeconds) { 
-		return (state(Present, By.xpath(XPathFormIdent), driver).wait(maxSeconds).check());
+		return (state(Present, By.xpath(XPATH_FORM_IDENT), driver).wait(maxSeconds).check());
 	}
 
 	public static boolean isCheckedPubliNewsletter(WebDriver driver, Channel channel) {
@@ -85,14 +86,14 @@ public class SecSoyNuevo {
 	}
 	private static boolean isInputWithText(String text, Channel channel, WebDriver driver) {
 		if (channel==Channel.desktop) {
-			return (driver.findElement(By.xpath(XPathInputContent)).getAttribute("innerHTML").compareTo(text)==0);
+			return (driver.findElement(By.xpath(XPATH_INPUT_CONTENT)).getAttribute("innerHTML").compareTo(text)==0);
 		} else {
-			return (driver.findElement(By.xpath(XPathInputEmail)).getAttribute("value").compareTo(text)==0);
+			return (driver.findElement(By.xpath(XPATH_INPUT_EMAIL)).getAttribute("value").compareTo(text)==0);
 		}
 	}
 
 	private static void inputEmailOneTime(String email, WebDriver driver) {
-		WebElement input = driver.findElement(By.xpath(XPathInputEmail));
+		WebElement input = driver.findElement(By.xpath(XPATH_INPUT_EMAIL));
 		input.clear();
 		input.sendKeys(email);
 		SeleniumUtils.waitMillis(500);
@@ -104,6 +105,10 @@ public class SecSoyNuevo {
 		click(By.xpath(xpathButton), driver).type(TypeClick.javascript).exec();
 	}
 
+	public static boolean isLinkPoliticaPrivacidad(int maxSeconds, WebDriver driver) {
+		return (state(Visible, By.xpath(XPATH_LINK_POLITICA_PRIVACIDAD), driver).wait(maxSeconds).check());
+	}
+	
 //	public static boolean isTextoRGPDVisible(int maxSeconds, WebDriver driver) {
 //		return (state(Visible, By.xpath(XPathTextRGPD), driver).wait(maxSeconds).check());
 //	}

@@ -37,7 +37,7 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 	
 	New_Registry_MLY_Desktop_PRO (
 		"NEW REGISTRY MLY - Desktop PRO",
-		"ZGeyWzMqTOerYK3fl5kfVw",
+		"7RVVwdg2Q0-tYl1ECEidvg",
 		Arrays.asList(0,1),
 		Arrays.asList(
 			"V0-Original", 

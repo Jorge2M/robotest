@@ -296,9 +296,9 @@ public class SecBolsaStpV {
 	public void selectButtonComprar(DataBag dataBag, DataCtxShop dCtxSh) throws Exception {
 		secBolsa.clickBotonComprar(10);
 		validaSelectButtonComprar(dataBag, dCtxSh);
-//		if(!dCtxSh.userRegistered) {
-//			Page1IdentCheckoutStpV.secSoyNuevo.validaRGPDText(dCtxSh, driver);
-//		}
+		if(!dCtxSh.userRegistered) {
+			Page1IdentCheckoutStpV.secSoyNuevo.validaRGPDText(dCtxSh, driver);
+		}
 	}
 
 	/**
