@@ -35,7 +35,7 @@ public class CookiesFinder {
 		    } catch (Exception e) {
 		    	return Optional.empty(); 
 		    }
-		    if (cookies==null || cookies.size()==0) {
+		    if (cookies==null || cookies.isEmpty()) {
 		    	logger.warn("Problem retrieving cookies from http service");
 		    	return Optional.empty();
 		    }

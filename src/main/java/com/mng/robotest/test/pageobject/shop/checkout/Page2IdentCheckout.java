@@ -31,36 +31,38 @@ public class Page2IdentCheckout extends PageObjTM {
 	private final Pais pais;
 	private final EgyptCity egyptCity;
 	
-	private static final String XPathMainForm = "//form[@action[contains(.,'/expressregister')]]";
-	private static final String XPathInputPassword = "//input[@id[contains(.,'cfPass')]]";
-	private static final String XPathInputNombreUsr = "//input[@id[contains(.,':cfName')]]";
-	private static final String XPathInputApellidosUsr = "//input[@id[contains(.,':cfSname')]]";
-	private static final String XPathInputMiddleNameUsr = "//input[@id[contains(.,':cfMiddleName')]]";
-	private static final String XPathInputTelefono = "//input[@id[contains(.,':cfTelf')]]";
-	private static final String XPathInputDireccion1 = "//input[@id[contains(.,':cfDir1')]]";
-	private static final String XPathInputDireccion2 = "//input[@id[contains(.,':cfDir2')]]";
-	private static final String XPathCheckPublicidad = "//input[@id[contains(.,':cfPubli')] or @id[contains(.,'_cfPubli')]]/..";
-	private static final String XPathInputEmail = "//input[@id[contains(.,':cfEmail')]]";
-	private static final String XPathInputDNI = "//input[@id[contains(.,':cfDni')]]";
-	private static final String XPathInputCodPost = "//input[@id[contains(.,':cfCp')]]";
-	private static final String XPathInputProvEstadoActive = "//input[@id[contains(.,':cfState')] and not(@disabled) and not(@readonly)]";
-	private static final String XPathInputPoblacionActive = "//input[@id[contains(.,':cfCity')] and not(@disabled) and not(@readonly)]";
-	private static final String XPathSelectPais = "//select[@id[contains(.,':pais')]]";
-	private static final String XPathSelectProvPais = "//select[@id[contains(.,'provinciaPais')] or @id[contains(.,'nivelProvincia')]]";
-	private static final String XPathSelectEstadosPais = "//select[@id[contains(.,'estadosPais')] or @id[contains(.,':nivelCity')]]";
-	private static final String XPathSelectLocalidadesProvCity = "//select[@id[contains(.,'localidadesProvCity')] or @id[contains(.,':nivelCityArea')] or @id[contains(.,'nivelLocalidad')]]";
-	private static final String XPathSelectDistrito = "//select[@id[contains(.,'nivelDistrito')]]";
-	private static final String XPathSelectLocalidadesNeighbourhoodCity = "//select[@id[contains(.,'localidadesNeighbourhoodCity')] or @id[contains(.,'nivelSubdistrito')]]";
-	private static final String XPathSelectCodPostal = "//select[@id[contains(.,'nivelCodigoPostal')]]";
-	private static final String XPathCheckHombre = "//div[@id[contains(.,':cfGener_H')]]";
-	private static final String XPathCheckCondiciones = "//input[@id[contains(.,':cfPriv')]]";
-	private static final String XPathBotonFindAddress = "//input[@class[contains(.,'load-button')] and @type='button']";
-	private static final String XPathBotonContinuar = "//div[@class='submitContent']/input[@type='submit']";
-	private static final String XPathMsgAduanas = "//div[@class='aduanas']";
+	private static final String VALUE = "value";
+	
+	private static final String XPATH_MAIN_FORM = "//form[@action[contains(.,'/expressregister')]]";
+	private static final String XPATH_INPUT_PASSWORD = "//input[@id[contains(.,'cfPass')]]";
+	private static final String XPATH_INPUT_NOMBRE_USR = "//input[@id[contains(.,':cfName')]]";
+	private static final String XPATH_INPUT_APELLIDOS_USR = "//input[@id[contains(.,':cfSname')]]";
+	private static final String XPATH_INPUT_MIDDLENAME_USR = "//input[@id[contains(.,':cfMiddleName')]]";
+	private static final String XPATH_INPUT_TELEFONO = "//input[@id[contains(.,':cfTelf')]]";
+	private static final String XPATH_INPUT_DIRECCION1 = "//input[@id[contains(.,':cfDir1')]]";
+	private static final String XPATH_INPUT_DIRECCION2 = "//input[@id[contains(.,':cfDir2')]]";
+	private static final String XPATH_CHECK_PUBLICIDAD = "//input[@id[contains(.,':cfPubli')] or @id[contains(.,'_cfPubli')]]/..";
+	private static final String XPATH_INPUT_EMAIL = "//input[@id[contains(.,':cfEmail')]]";
+	private static final String XPATH_INPUT_DNI = "//input[@id[contains(.,':cfDni')]]";
+	private static final String XPATH_INPUT_CODPOST = "//input[@id[contains(.,':cfCp')]]";
+	private static final String XPATH_INPUT_PROV_ESTADO_ACTIVE = "//input[@id[contains(.,':cfState')] and not(@disabled) and not(@readonly)]";
+	private static final String XPATH_INPUT_POBLACION_ACTIVE = "//input[@id[contains(.,':cfCity')] and not(@disabled) and not(@readonly)]";
+	private static final String XPATH_SELECT_PAIS = "//select[@id[contains(.,':pais')]]";
+	private static final String XPATH_SELECT_PROV_PAIS = "//select[@id[contains(.,'provinciaPais')] or @id[contains(.,'nivelProvincia')]]";
+	private static final String XPATH_SELECT_ESTADOS_PAIS = "//select[@id[contains(.,'estadosPais')] or @id[contains(.,':nivelCity')]]";
+	private static final String XPATH_SELECT_LOCALIDADES_PROVCITY = "//select[@id[contains(.,'localidadesProvCity')] or @id[contains(.,':nivelCityArea')] or @id[contains(.,'nivelLocalidad')]]";
+	private static final String XPATH_SELECT_DISTRITO = "//select[@id[contains(.,'nivelDistrito')]]";
+	private static final String XPATH_SELECT_LOCALIDADES_NEIGHBOURHOODCITY = "//select[@id[contains(.,'localidadesNeighbourhoodCity')] or @id[contains(.,'nivelSubdistrito')]]";
+	private static final String XPATH_SELECT_CODPOSTAL = "//select[@id[contains(.,'nivelCodigoPostal')]]";
+	private static final String XPATH_CHECK_HOMBRE = "//div[@id[contains(.,':cfGener_H')]]";
+	private static final String XPATH_CHECK_CONDICIONES = "//input[@id[contains(.,':cfPriv')]]";
+	private static final String XPATH_BOTON_FIND_ADDRESS = "//input[@class[contains(.,'load-button')] and @type='button']";
+	private static final String XPATH_BOTON_CONTINUAR = "//div[@class='submitContent']/input[@type='submit']";
+	private static final String XPATH_MSG_ADUANAS = "//div[@class='aduanas']";
 	//private static final String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
 	
 	//Con el substring simulamos un ends-with (que no está disponible en xpath 1.0)
-	private static String XPathSelectLocalidades = "//select[substring(@id, string-length(@id) - string-length('localidades') +1) = 'localidades']";
+	private static final String XPATH_SELECT_LOCALIDADES = "//select[substring(@id, string-length(@id) - string-length('localidades') +1) = 'localidades']";
 
 	public Page2IdentCheckout(Pais pais, WebDriver driver) {
 		super(driver);
@@ -75,13 +77,13 @@ public class Page2IdentCheckout extends PageObjTM {
 	}
 	
 	public boolean isPageUntil(int maxSeconds) {
-		return (state(Present, By.xpath(XPathMainForm)).wait(maxSeconds).check());
+		return (state(Present, By.xpath(XPATH_MAIN_FORM)).wait(maxSeconds).check());
 	}
 	
 	public boolean checkEmail(String email) {
-		By byEmail = By.xpath(XPathInputEmail);
+		By byEmail = By.xpath(XPATH_INPUT_EMAIL);
 		if (state(State.Visible, byEmail).check()) {
-			String emailScreen = driver.findElement(byEmail).getAttribute("value");
+			String emailScreen = driver.findElement(byEmail).getAttribute(VALUE);
 			if (emailScreen!=null) {
 				return (email.compareTo(emailScreen)==0);
 			}
@@ -90,21 +92,18 @@ public class Page2IdentCheckout extends PageObjTM {
 	}
 
 	public boolean isInputPasswordAccordingEmail(boolean emailYetExists) {
-		boolean isVisiblePassword = state(Visible, By.xpath(XPathInputPassword)).check();
-		if (emailYetExists==isVisiblePassword) {
-			return false;
-		}
-		return true;
+		boolean isVisiblePassword = state(Visible, By.xpath(XPATH_INPUT_PASSWORD)).check();
+		return (emailYetExists!=isVisiblePassword);
 	}
 
 	private boolean setInputIfVisible(String xpathInput, String valueToSet) {
 		boolean datoSeteado = false;
 		try {
 			List<WebElement> cfElementList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(xpathInput));
-			if (cfElementList.size() > 0) {
+			if (!cfElementList.isEmpty()) {
 				String cfElementReadonly = cfElementList.get(0).getAttribute("readonly");
 				if (cfElementReadonly == null || cfElementReadonly.compareTo("true")!=0) {
-					if (cfElementList.get(0).getAttribute("value").compareTo(valueToSet) != 0) {
+					if (cfElementList.get(0).getAttribute(VALUE).compareTo(valueToSet) != 0) {
 						cfElementList.get(0).clear();
 						cfElementList.get(0).sendKeys(valueToSet);
 						cfElementList.get(0).sendKeys(Keys.TAB);
@@ -124,35 +123,35 @@ public class Page2IdentCheckout extends PageObjTM {
 	}
 	
 	public void setNombreUsuarioIfVisible(String nombreUsr, HashMap<String,String> datosRegistro) {
-		boolean datoSeteado = setInputIfVisible(XPathInputNombreUsr, nombreUsr);
+		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_NOMBRE_USR, nombreUsr);
 		if (datoSeteado) {
 			datosRegistro.put("cfName", nombreUsr);
 		}
 	}
 	
 	public void setApellidosUsuarioIfVisible(String apellidosUsr, HashMap<String,String> dataPago) {
-		boolean datoSeteado = setInputIfVisible(XPathInputApellidosUsr, apellidosUsr);
+		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_APELLIDOS_USR, apellidosUsr);
 		if (datoSeteado) {
 			dataPago.put("cfSname", apellidosUsr);
 		}
 	}
 	
 	public void setMiddleNameUsuarioIfVisible(String middleNameUsr, HashMap<String,String> dataPago) {
-		boolean datoSeteado = setInputIfVisible(XPathInputMiddleNameUsr, middleNameUsr);
+		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_MIDDLENAME_USR, middleNameUsr);
 		if (datoSeteado) {
 			dataPago.put("cfMiddleName", middleNameUsr);
 		}
 	}
 	
 	public void setPasswordIfVisible(String password, HashMap<String,String> datosRegistro) {
-		boolean datoSeteado = setInputIfVisible(XPathInputPassword, password);
+		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_PASSWORD, password);
 		if (datoSeteado) {
 			datosRegistro.put("cfPass", password);
 		}
 	}
 	
 	public void setTelefonoIfVisible(String movil, HashMap<String,String> datosRegistro) {
-		boolean datoSeteado = setInputIfVisible(XPathInputTelefono, movil);
+		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_TELEFONO, movil);
 		if (datoSeteado) {
 			datosRegistro.put("cfTelf", movil);
 		}
@@ -160,39 +159,39 @@ public class Page2IdentCheckout extends PageObjTM {
 
 	public void setInputPoblacionIfVisible(String cfCity, HashMap<String,String> datosRegistro) throws Exception {
 		waitForPageLoaded(driver);
-		state(Clickable, By.xpath(XPathInputPoblacionActive)).wait(1).check();
-		boolean datoSeteado = setInputIfVisible(XPathInputPoblacionActive, cfCity);
+		state(Clickable, By.xpath(XPATH_INPUT_POBLACION_ACTIVE)).wait(1).check();
+		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_POBLACION_ACTIVE, cfCity);
 		if (datoSeteado) {
 			datosRegistro.put("cfCity", cfCity);
 		}
 	}
 
 	public void setInputDireccion1IfVisible(String direccion1) {
-		setInputIfVisible(XPathInputDireccion1, direccion1);
+		setInputIfVisible(XPATH_INPUT_DIRECCION1, direccion1);
 	}
 	
 	public void setInputDireccion1IfVisible(String direccion1, HashMap<String,String> datosRegistro) {
-		boolean datoSeteado = setInputIfVisible(XPathInputDireccion1, direccion1);
+		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_DIRECCION1, direccion1);
 		if (datoSeteado)
 			datosRegistro.put("cfDir1", direccion1);
 	}	
 	
 	public void setInputDireccion2IfVisible(String direccion1, HashMap<String,String> datosRegistro) {
-		boolean datoSeteado = setInputIfVisible(XPathInputDireccion2, direccion1);
+		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_DIRECCION2, direccion1);
 		if (datoSeteado) {
 			datosRegistro.put("cfDir2", direccion1);
 		}
 	}
 	
 	public void setInputProvEstadoIfVisible(String cfState, HashMap<String,String> datosRegistro) {
-		boolean datoSeteado = setInputIfVisible(XPathInputProvEstadoActive, cfState);
+		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_PROV_ESTADO_ACTIVE, cfState);
 		if (datoSeteado) {
 			datosRegistro.put("cfState", cfState);
 		}
 	}	
 
 	public void setInputDniIfVisible(String dni, HashMap<String,String> datosRegistro) {
-		boolean datoSeteado = setInputIfVisible(XPathInputDNI, dni);		
+		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_DNI, dni);		
 		if (datoSeteado) {
 			datosRegistro.put("cfDni", dni);
 		}
@@ -202,14 +201,14 @@ public class Page2IdentCheckout extends PageObjTM {
 	 * Se introduce el código postal y si se detectan un 'onkeyup' se espera un máximo de 2 segundos a que esté disponible la lista de poblaciones
 	 */
 	public boolean setCodPostalIfExistsAndWait(String codPostal) {
-		boolean datoSeteado = setInputIfVisible(XPathInputCodPost, codPostal);
+		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_CODPOST, codPostal);
 		if (datoSeteado) {			
-			List<WebElement> cfCodpostalList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathInputCodPost));
-			if (cfCodpostalList.size() > 0) {
+			List<WebElement> cfCodpostalList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_INPUT_CODPOST));
+			if (!cfCodpostalList.isEmpty()) {
 				//Si existe el tag 'onkeyup' (se desencadena petición Ajax) tenemos que esperaremos un máximo de 2 segundos hasta que aparezca el desplegable con las poblaciones
 				if (cfCodpostalList.get(0).getAttribute("onkeyup")!=null && 
 					cfCodpostalList.get(0).getAttribute("onkeyup").compareTo("")!=0) {
-					state(Visible, By.xpath(XPathSelectLocalidades)).wait(2).check();
+					state(Visible, By.xpath(XPATH_SELECT_LOCALIDADES)).wait(2).check();
 				}
 			}
 		}
@@ -231,16 +230,16 @@ public class Page2IdentCheckout extends PageObjTM {
 		String emailRegistro = email;
 		
 		// Revisamos si está visible el campo de input
-		List<WebElement> cfEmailList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathInputEmail));
-		if (cfEmailList.size() > 0) {
+		List<WebElement> cfEmailList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_INPUT_EMAIL));
+		if (!cfEmailList.isEmpty()) {
 			//Revisamos si está protegido el campo de input
 			String cfMailStatus = cfEmailList.get(0).getAttribute("disabled");
 			if (cfMailStatus != null && cfMailStatus.compareTo("true") == 0) {
-				emailRegistro = cfEmailList.get(0).getAttribute("value");
+				emailRegistro = cfEmailList.get(0).getAttribute(VALUE);
 			} else {
 				emailRegistro = email;
 				//Revisamos si el input ya está seteado con ese valor
-				if (cfEmailList.get(0).getAttribute("value").compareTo(emailRegistro) != 0) {
+				if (cfEmailList.get(0).getAttribute(VALUE).compareTo(emailRegistro) != 0) {
 					cfEmailList.get(0).clear();
 					cfEmailList.get(0).sendKeys(emailRegistro);
 					cfEmailList.get(0).sendKeys(Keys.TAB);
@@ -257,9 +256,9 @@ public class Page2IdentCheckout extends PageObjTM {
 
 	public boolean setPaisIfVisibleAndNotSelected() {
 		boolean datoSeteado = false;
-		List<WebElement> paisCf = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathSelectPais));
-		if (paisCf.size() > 0) {
-			String xpathSelectedPais = XPathSelectPais + "/option[@selected='selected' and @value='" + pais.getAddress() + "']";
+		List<WebElement> paisCf = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_SELECT_PAIS));
+		if (!paisCf.isEmpty()) {
+			String xpathSelectedPais = XPATH_SELECT_PAIS + "/option[@selected='selected' and @value='" + pais.getAddress() + "']";
 			if (state(Present, By.xpath(xpathSelectedPais)).check()) {
 				new Select(paisCf.get(0)).selectByValue(pais.getCodigo_pais());
 				datoSeteado = true;
@@ -277,7 +276,7 @@ public class Page2IdentCheckout extends PageObjTM {
 	}	
 	
 	public void clickBotonFindAddress() throws Exception {
-		driver.findElement(By.xpath(XPathBotonFindAddress)).click();
+		driver.findElement(By.xpath(XPATH_BOTON_FIND_ADDRESS)).click();
 		Thread.sleep(3000);
 	}
 
@@ -287,7 +286,7 @@ public class Page2IdentCheckout extends PageObjTM {
 	public void setDireccionWithFindAddressIfExists() throws Exception {
 		String codPostalSeteado = getCodigoPostal();
 		if (pais.getCodpos().compareTo(codPostalSeteado)!=0 &&
-			state(Visible, By.xpath(XPathBotonFindAddress)).check()) {
+			state(Visible, By.xpath(XPATH_BOTON_FIND_ADDRESS)).check()) {
 			clickBotonFindAddress();
 			String mainWindowHandle = driver.getWindowHandle();
 			try {
@@ -309,14 +308,14 @@ public class Page2IdentCheckout extends PageObjTM {
 	}
 
 	public String getCodigoPostal() {
-		if (state(Present, By.xpath(XPathInputCodPost)).check()) {
-			return (driver.findElement(By.xpath(XPathInputCodPost)).getAttribute("value"));
+		if (state(Present, By.xpath(XPATH_INPUT_CODPOST)).check()) {
+			return (driver.findElement(By.xpath(XPATH_INPUT_CODPOST)).getAttribute(VALUE));
 		}
 		return "";
 	}
 
 	public void clickPublicidadIfVisible(HashMap<String,String> datosRegistro) {
-		By byCheckPublic = By.xpath(XPathCheckPublicidad);
+		By byCheckPublic = By.xpath(XPATH_CHECK_PUBLICIDAD);
 		if (state(Present, byCheckPublic).check()) {
 			moveToElement(byCheckPublic, driver);
 			if (state(Visible, byCheckPublic, driver).check()) {
@@ -340,11 +339,11 @@ public class Page2IdentCheckout extends PageObjTM {
 		//Tenemos problemas aleatorios de StaleElementReferenceException con este elemento
 		//Probamos hasta 3 veces mientras que obtengamos la Excepción
 		while (staleElement && i<3 && "".compareTo(datoSeteado)==0) {
-			List<WebElement> localidadesList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathSelectLocalidades));
-			if (localidadesList.size() > 0) {
+			List<WebElement> localidadesList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_SELECT_LOCALIDADES));
+			if (!localidadesList.isEmpty()) {
 				try {
 					new Select(localidadesList.get(0)).selectByIndex(posInSelect);
-					datoSeteado = localidadesList.get(0).getAttribute("value");
+					datoSeteado = localidadesList.get(0).getAttribute(VALUE);
 					staleElement = false;
 				}
 				catch (StaleElementReferenceException e) {
@@ -373,7 +372,7 @@ public class Page2IdentCheckout extends PageObjTM {
 	private static final String XPathOptionFirstProvUkranie = "//div[@class[contains(.,'choices')] and text()[contains(.,'" + firstProvinciaUkranie + "')]]";
 	public String setSelectProv1PaisIfVisible(Channel channel) {
 		String datoSeteado = "";
-		WebElement provinciaPais = UtilsMangoTest.findElementPriorizingDisplayed(driver, By.xpath(XPathSelectProvPais));
+		WebElement provinciaPais = UtilsMangoTest.findElementPriorizingDisplayed(driver, By.xpath(XPATH_SELECT_PROV_PAIS));
 		if (provinciaPais!=null) {
 			switch (PaisShop.getPais(pais)) {
 			case UKRAINE:
@@ -386,7 +385,7 @@ public class Page2IdentCheckout extends PageObjTM {
 				}
 			default:
 				new Select(provinciaPais).selectByIndex(1);
-				datoSeteado = provinciaPais.getAttribute("value");
+				datoSeteado = provinciaPais.getAttribute(VALUE);
 				return datoSeteado;
 			}
 		}	  
@@ -399,7 +398,7 @@ public class Page2IdentCheckout extends PageObjTM {
 	}
 	
 	private String selectProvinciaUkraineDesktop() {
-		driver.findElement(By.xpath(XPathSelectProvPais + "/..")).click();
+		driver.findElement(By.xpath(XPATH_SELECT_PROV_PAIS + "/..")).click();
 		driver.findElement(By.xpath(XPathOptionFirstProvUkranie)).click();
 		return firstProvinciaUkranie;
 	}
@@ -419,13 +418,13 @@ public class Page2IdentCheckout extends PageObjTM {
 		boolean staleElement = true;
 		int i=0;
 		while (staleElement && i<3) {
-			List<WebElement> estadosPaisList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathSelectEstadosPais));
-			if (estadosPaisList.size() > 0) {
+			List<WebElement> estadosPaisList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_SELECT_ESTADOS_PAIS));
+			if (!estadosPaisList.isEmpty()) {
 				try {
 					Select select = new Select(estadosPaisList.get(0));
 					select.selectByIndex(1);
 					datoSeteado = select.getFirstSelectedOption().getText();
-					//datoSeteado = estadosPaisList.get(0).getAttribute("value");
+					//datoSeteado = estadosPaisList.get(0).getAttribute(VALUE);
 					staleElement = false;
 				}
 				catch (StaleElementReferenceException e) {
@@ -453,7 +452,7 @@ public class Page2IdentCheckout extends PageObjTM {
 	
 	public String setSeletEstadoEspanya(String provincia) throws Exception {
 		waitForPageLoaded(driver);
-		WebElement provinciaPais = UtilsMangoTest.findElementPriorizingDisplayed(driver, By.xpath(XPathSelectEstadosPais));
+		WebElement provinciaPais = UtilsMangoTest.findElementPriorizingDisplayed(driver, By.xpath(XPATH_SELECT_ESTADOS_PAIS));
 		if (provinciaPais!=null) {
 			String selected = new Select(provinciaPais).getFirstSelectedOption().getText();
 			if (selected.compareTo(provincia)!=0) {
@@ -482,16 +481,16 @@ public class Page2IdentCheckout extends PageObjTM {
 		String xpathSelect = "";
 		switch (typeLocalidad) {
 		case ProvCity:
-			xpathSelect = XPathSelectLocalidadesProvCity;
+			xpathSelect = XPATH_SELECT_LOCALIDADES_PROVCITY;
 			break;
 		case Distrito:
-			xpathSelect = XPathSelectDistrito;
+			xpathSelect = XPATH_SELECT_DISTRITO;
 			break;
 		case CodPostal:
-			xpathSelect = XPathSelectCodPostal;
+			xpathSelect = XPATH_SELECT_CODPOSTAL;
 			break;
 		case NeighbourhoodCity:
-			xpathSelect = XPathSelectLocalidadesNeighbourhoodCity;
+			xpathSelect = XPATH_SELECT_LOCALIDADES_NEIGHBOURHOODCITY;
 			break;
 		}
 
@@ -530,7 +529,7 @@ public class Page2IdentCheckout extends PageObjTM {
 			}
 		default:
 			new Select(localidad).selectByIndex(posInSelect);
-			return localidad.getAttribute("value");
+			return localidad.getAttribute(VALUE);
 		}
 	}
 
@@ -561,7 +560,7 @@ public class Page2IdentCheckout extends PageObjTM {
 	
 	public boolean setCheckHombreIfVisible() {
 		boolean datoSeteado = false;
-		List<WebElement> cfGener_HList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathCheckHombre));
+		List<WebElement> cfGener_HList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_CHECK_HOMBRE));
 		if (cfGener_HList.size() > 0) {
 			cfGener_HList.get(0).click();
 		}		
@@ -578,9 +577,9 @@ public class Page2IdentCheckout extends PageObjTM {
 	
 	public boolean setCheckCondicionesIfVisible() {
 		boolean datoSeteado = false;
-		List<WebElement> cfPriv = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathCheckCondiciones + "/../../div[@class='checkbox__image']"));
+		List<WebElement> cfPriv = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_CHECK_CONDICIONES + "/../../div[@class='checkbox__image']"));
 		if (cfPriv.size() > 0) { //Revisamos si el check NO está marcado 
-			driver.findElement(By.xpath(XPathCheckCondiciones)).click();
+			driver.findElement(By.xpath(XPATH_CHECK_CONDICIONES)).click();
 			datoSeteado = true;
 		}		
 		return datoSeteado;		
@@ -648,21 +647,21 @@ public class Page2IdentCheckout extends PageObjTM {
 	}
 
 	public boolean isContinuarClickableUntil(int maxSeconds) {
-		return (state(Clickable, By.xpath(XPathBotonContinuar)).wait(maxSeconds).check());
+		return (state(Clickable, By.xpath(XPATH_BOTON_CONTINUAR)).wait(maxSeconds).check());
 	}
 
 	public void clickBotonContinuarAndWait(int maxSeconds) {
-		click(By.xpath(XPathBotonContinuar)).waitLoadPage(maxSeconds).exec();
+		click(By.xpath(XPATH_BOTON_CONTINUAR)).waitLoadPage(maxSeconds).exec();
  
 		//Hay una especie de bug (p.e. en el caso de Turquía) que hace que en ocasiones el click no tenga efecto
-		if (state(Present, By.xpath(XPathBotonContinuar)).check()) {
+		if (state(Present, By.xpath(XPATH_BOTON_CONTINUAR)).check()) {
 			waitMillis(1500);
-			click(By.xpath(XPathBotonContinuar)).type(TypeClick.javascript).exec();
+			click(By.xpath(XPATH_BOTON_CONTINUAR)).type(TypeClick.javascript).exec();
 		}
 	}
 
 	public boolean isDisplayedAvisoAduanas() {
-		return (state(Visible, By.xpath(XPathMsgAduanas)).wait(1).check());
+		return (state(Visible, By.xpath(XPATH_MSG_ADUANAS)).wait(1).check());
 	}
 
 //	public boolean isTextoRGPDVisible() {

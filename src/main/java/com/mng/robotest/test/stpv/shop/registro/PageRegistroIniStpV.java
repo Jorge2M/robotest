@@ -22,7 +22,7 @@ import com.mng.robotest.test.pageobject.shop.registro.ListDataRegistro;
 import com.mng.robotest.test.pageobject.shop.registro.PageRegistroIni;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
-import com.mng.robotest.test.utils.UtilsTestMango;
+import com.mng.robotest.test.utils.UtilsTest;
 
 public class PageRegistroIniStpV {
 	
@@ -200,7 +200,7 @@ public class PageRegistroIniStpV {
 		level=State.Info,
 		store=StoreType.None)
 	public boolean validaRebajasJun2018(IdiomaPais idioma) {
-		String percentageSymbol = UtilsTestMango.getPercentageSymbol(idioma);
+		String percentageSymbol = UtilsTest.getPercentageSymbol(idioma);
 		return (!pageRegistroIni.newsLetterTitleContains(percentageSymbol));	   
 	}
 

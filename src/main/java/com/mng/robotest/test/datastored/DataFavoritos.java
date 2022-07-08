@@ -26,7 +26,7 @@ public class DataFavoritos {
 	}
 	
 	public boolean isEmpty() {
-		return (getListArticulos().size()==0);
+		return (getListArticulos().isEmpty());
 	}
 	
 	public void addArticulo(ArticuloScreen articulo) {

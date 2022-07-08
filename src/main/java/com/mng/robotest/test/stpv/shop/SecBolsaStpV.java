@@ -3,6 +3,7 @@ package com.mng.robotest.test.stpv.shop;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import com.mng.robotest.test.utils.UtilsTest;
 
 import org.openqa.selenium.WebDriver;
 
@@ -296,8 +297,10 @@ public class SecBolsaStpV {
 	public void selectButtonComprar(DataBag dataBag, DataCtxShop dCtxSh) throws Exception {
 		secBolsa.clickBotonComprar(10);
 		validaSelectButtonComprar(dataBag, dCtxSh);
-		if(!dCtxSh.userRegistered) {
-			Page1IdentCheckoutStpV.secSoyNuevo.validaRGPDText(dCtxSh, driver);
+		if (UtilsTest.dateReachToday("2022-08-01")) {
+			if(!dCtxSh.userRegistered) {
+				Page1IdentCheckoutStpV.secSoyNuevo.validaRGPDText(dCtxSh, driver);
+			}
 		}
 	}
 

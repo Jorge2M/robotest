@@ -19,7 +19,7 @@ import com.mng.robotest.test.pageobject.shop.PageHomeMarcas;
 import com.mng.robotest.test.pageobject.shop.footer.SecFooter;
 import com.mng.robotest.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test.stpv.shop.menus.SecMenusWrapperStpV;
-import com.mng.robotest.test.utils.UtilsTestMango;
+import com.mng.robotest.test.utils.UtilsTest;
 
 public class PageHomeMarcasStpV {
 	
@@ -61,7 +61,7 @@ public class PageHomeMarcasStpV {
 	@Validation
 	public ChecksTM checkMsgNewsletterFooter(boolean salesOnInCountry, IdiomaPais idioma) {
 		ChecksTM validations = ChecksTM.getNew();
-		String percentageSymbol = UtilsTestMango.getPercentageSymbol(idioma);
+		String percentageSymbol = UtilsTest.getPercentageSymbol(idioma);
 		boolean isMsgWithPercentageSimbol = (new SecFooter(app, driver)).newsLetterMsgContains(percentageSymbol);
 		if (salesOnInCountry) {
 			validations.add(

@@ -22,7 +22,7 @@ import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test.utils.PaisGetter;
-import com.mng.robotest.test.utils.UtilsTestMango;
+import com.mng.robotest.test.utils.UtilsTest;
 
 public class EgyptOrderTest implements Serializable {
 
@@ -49,7 +49,7 @@ public class EgyptOrderTest implements Serializable {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = makeEgyptDataTest();
 		AccesoStpV.oneStep(dCtxSh, false, driver);
-		GarmentCatalog article = UtilsTestMango.getArticleForTest(dCtxSh, driver);
+		GarmentCatalog article = UtilsTest.getArticleForTest(dCtxSh, driver);
 		
 		DataBag dataBag = new DataBag(); 
 		SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);

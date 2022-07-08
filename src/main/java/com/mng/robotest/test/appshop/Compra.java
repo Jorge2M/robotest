@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.github.jorge2m.testmaker.domain.InputParamsTM.TypeAccess;
 import com.github.jorge2m.testmaker.service.TestMaker;
+
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.IdiomaPais;
@@ -39,12 +40,11 @@ import com.mng.robotest.test.utils.PaisGetter;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 import com.mng.robotest.test.exceptions.NotFoundException;
+import com.mng.robotest.test.utils.UtilsTest;
 
 import static com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow.BuilderCheckout;
 
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
@@ -115,17 +115,15 @@ public class Compra {
 					.build()
 					.checkout(From.Prehome);
 		} else {
-			//TODO actualmente no funciona el buscador por referencia de productos Intimissimi
-			//confiamos que esté listo el 1-julio-2022
-			//cuando esté listo habrá que eliminar el 1er bloque del if
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date dateLimit = sdf.parse("2022-08-01");
-			Date dateToday = new Date();
 			Optional<List<GarmentCatalog>> articlesHomeOpt = getArticlesHome(dCtxSh, driver);
 			if (articlesHomeOpt.isEmpty()) {
 				throw new NotFoundException("Home Garment Not Found");
 			}
-			if (dateToday.before(dateLimit)) {
+			
+			//TODO actualmente no funciona el buscador por referencia de productos Intimissimi
+			//confiamos que esté listo el 1-julio-2022
+			//cuando esté listo habrá que eliminar el 1er bloque del if
+			if (UtilsTest.dateReachToday("2022-08-01")) {
 				return new BuilderCheckout(dCtxSh, dCtxPago, driver)
 						.pago(espana.getPago("VISA"))
 						.listArticles(articlesHomeOpt.get().subList(0, 2))

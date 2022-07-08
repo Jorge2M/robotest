@@ -46,7 +46,7 @@ public class ProductFilter {
 				return filter.getOne(listFiltered);
 			}
 			listFiltered = filter.filter(listFiltered);
-			if (listFiltered==null || listFiltered.size()==0) {
+			if (listFiltered==null || listFiltered.isEmpty()) {
 				return Optional.empty();
 			}
 		}
@@ -58,7 +58,7 @@ public class ProductFilter {
 		for (FilterType filterType : filters) {
 			Filter filter = factoryFilter(filterType);
 			listFiltered = filter.filter(listFiltered);
-			if (listFiltered==null || listFiltered.size()==0) {
+			if (listFiltered==null || listFiltered.isEmpty()) {
 				return listFiltered;
 			}
 		}

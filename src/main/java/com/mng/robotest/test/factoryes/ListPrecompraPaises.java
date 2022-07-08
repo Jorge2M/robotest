@@ -14,7 +14,7 @@ import com.mng.robotest.test.beans.*;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.suites.PagosPaisesSuite.VersionPagosSuite;
 import com.mng.robotest.test.utils.PaisGetter;
-import com.mng.robotest.test.utils.UtilsTestMango;
+import com.mng.robotest.test.utils.UtilsTest;
 
 public class ListPrecompraPaises {
 	
@@ -34,7 +34,7 @@ public class ListPrecompraPaises {
 				IdiomaPais primerIdioma = pais.getListIdiomas().get(0);
 				AppEcom app = (AppEcom)inputData.getApp();
 				Channel channel = inputData.getChannel();
-				if (UtilsTestMango.paisConCompra(pais, app)) {
+				if (UtilsTest.paisConCompra(pais, app)) {
 					DataCtxShop dCtxSh = new DataCtxShop(app, channel, pais, pais.getListIdiomas().get(0));
 					listTests.add(new PaisAplicaVale(version, dCtxSh, prioridad));
 					prioridad+=1;

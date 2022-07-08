@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.test.data.Talla;
-import com.mng.robotest.test.utils.UtilsTestMango;
+import com.mng.robotest.test.utils.UtilsTest;
 
 public abstract class LineasArtBolsa extends PageObjTM {
 	
@@ -129,9 +129,9 @@ public abstract class LineasArtBolsa extends PageObjTM {
 			return "";
 		}
 		if (link.getAttribute("href")!=null) {
-			return (UtilsTestMango.getReferenciaFromHref(link.getAttribute("href")));
+			return (UtilsTest.getReferenciaFromHref(link.getAttribute("href")));
 		} else {
-			return (UtilsTestMango.getReferenciaFromSrcImg(link.getAttribute("src")));
+			return (UtilsTest.getReferenciaFromSrcImg(link.getAttribute("src")));
 		}
 		
 	}

@@ -9,7 +9,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjT
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.test.beans.IdiomaPais;
-import com.mng.robotest.test.utils.UtilsTestMango;
+import com.mng.robotest.test.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
@@ -56,8 +56,8 @@ public class SecBannerHeadGallery {
 		boolean isVisibleBanner = isVisible(driver);
 		if (isVisibleBanner) {
 			String textBanner = getText(driver);
-			String saleTraduction = UtilsTestMango.getSaleTraduction(idioma);
-			if (UtilsTestMango.textContainsPercentage(textBanner, idioma) || textBanner.contains(saleTraduction)) {
+			String saleTraduction = UtilsTest.getSaleTraduction(idioma);
+			if (UtilsTest.textContainsPercentage(textBanner, idioma) || textBanner.contains(saleTraduction)) {
 				return true;
 			}
 		}

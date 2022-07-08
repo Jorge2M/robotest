@@ -331,7 +331,7 @@ public class Pais implements Serializable {
 	}
 
 	public boolean isVentaOnline() {
-		return getTiendasOnlineList().size()>0;
+		return !getTiendasOnlineList().isEmpty();
 	}
 
 	/**
@@ -466,7 +466,7 @@ public class Pais implements Serializable {
 		if (isPaisTop()) {
 			return LevelPais.top;
 		}
-		if (getTiendasOnlineList().size() > 0) {
+		if (!getTiendasOnlineList().isEmpty()) {
 			return LevelPais.conCompraNoTop;
 		}
 		return LevelPais.sinCompra;

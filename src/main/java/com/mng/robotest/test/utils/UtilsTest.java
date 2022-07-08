@@ -3,6 +3,9 @@ package com.mng.robotest.test.utils;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.text.ParseException;
 
 import org.openqa.selenium.WebDriver;
 
@@ -16,16 +19,35 @@ import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 
-public class UtilsTestMango {
+
+public class UtilsTest {
 	
-	/**
-	 * @return si se ha de crear un test para un país concreto
-	 */
+    private UtilsTest() {
+	    throw new IllegalStateException("Utility class");
+	}
+	
 	public static boolean paisConCompra(Pais pais, AppEcom appE) {
 		return (
 			"n".compareTo(pais.getExists())!=0 &&
 			pais.getTiendasOnlineList().contains(appE));
+	}
+	
+	/**
+	 * @param date format yyyy-MM-dd
+	 */
+	public static boolean dateReachToday(String date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date dateLimit = sdf.parse(date);
+			Date dateToday = new Date();
+			return (!dateToday.before(dateLimit));
+		} 
+		catch (ParseException e) {
+			Log4jTM.getLogger().error("Error parsing date " + date, e);
+			return false; 
+		}
 	}
 
 	public static String getSaleTraduction(IdiomaPais idioma) {
@@ -46,12 +68,10 @@ public class UtilsTestMango {
 	}
 
 	public static String getPercentageSymbol(IdiomaPais idioma) {
-		switch (idioma.getCodigo().name()) {
-		case "ZH": 
+		if ("ZH".compareTo(idioma.getCodigo().name())==0) {
 			return "折";
-		default:
-			return "%";
 		}
+		return "%";
 	}
 
 	public static String getSetenta(IdiomaPais idioma) {
@@ -84,14 +104,14 @@ public class UtilsTestMango {
 	}
 
 	public static String getReferenciaFromHref(String hrefArticulo) {
-		String referencia = getReferenciaFromHref_type1(hrefArticulo);
+		String referencia = getReferenciaFromHrefType1(hrefArticulo);
 		if ("".compareTo(referencia)!=0) {
 			return referencia;
 		}
-		return getReferenciaFromHref_type2(hrefArticulo);
+		return getReferenciaFromHrefType2(hrefArticulo);
 	}
 
-	private static String getReferenciaFromHref_type1(String hrefArticulo) {
+	private static String getReferenciaFromHrefType1(String hrefArticulo) {
 		Pattern pattern = Pattern.compile("(\\d+).html");
 		Matcher matcher = pattern.matcher(hrefArticulo);
 		if (matcher.find()) {
@@ -100,7 +120,7 @@ public class UtilsTestMango {
 		return "";
 	}
 	
-	private static String getReferenciaFromHref_type2(String hrefArticulo) {
+	private static String getReferenciaFromHrefType2(String hrefArticulo) {
 		Pattern pattern = Pattern.compile("\\?producto=(\\d+)\\&");
 		Matcher matcher = pattern.matcher(hrefArticulo);
 		if (matcher.find()) {
@@ -139,7 +159,7 @@ public class UtilsTestMango {
 		List<GarmentCatalog> listProducts;
 		if (dCtxSh.vale!=null) {
 			listProducts = dCtxSh.vale.getArticlesFromVale();
-			if (listProducts.size()>0) {
+			if (!listProducts.isEmpty()) {
 				return listProducts;
 			}
 		}

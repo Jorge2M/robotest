@@ -56,7 +56,7 @@ public abstract class BannerObject {
 		List<DataBanner> listBanners = new ArrayList<>();
 		for (int i=0; i<maxSeconds; i++) {
 			listBanners = getListBannersData(maxBannersToLoad, driver);
-			if (listBanners.size()>0) {
+			if (!listBanners.isEmpty()) {
 				break;
 			}
 			myWait(1000);
@@ -97,7 +97,7 @@ public abstract class BannerObject {
 	
 	public boolean isVisibleAnyBanner(WebDriver driver) {
 		List<WebElement> listBanners = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathBanner));
-		return (listBanners.size()>0);
+		return (!listBanners.isEmpty());
 	}
 	
 	protected List<WebElement> getDisplayedBannersInOrder(WebDriver driver) {

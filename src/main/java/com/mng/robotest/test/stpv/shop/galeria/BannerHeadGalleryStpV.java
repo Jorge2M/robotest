@@ -13,7 +13,7 @@ import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test.stpv.shop.galeria.PageGaleriaStpV.TypeGalery;
-import com.mng.robotest.test.utils.UtilsTestMango;
+import com.mng.robotest.test.utils.UtilsTest;
 
 public class BannerHeadGalleryStpV {
 
@@ -81,11 +81,11 @@ public class BannerHeadGalleryStpV {
 			"Es visible el banner de cabecera",
 			PageGaleriaDesktop.secBannerHead.isVisible(driver), State.Defect);
 		
-		String saleTraduction = UtilsTestMango.getSaleTraduction(idioma);
+		String saleTraduction = UtilsTest.getSaleTraduction(idioma);
 		String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
 		validations.add(
 			"El banner de cabecera es de rebajas  (contiene un símbolo de porcentaje o " + saleTraduction + ")",
-			UtilsTestMango.textContainsPercentage(textBanner, idioma) || textBanner.contains(saleTraduction), 
+			UtilsTest.textContainsPercentage(textBanner, idioma) || textBanner.contains(saleTraduction), 
 			State.Defect);
 		validations.add(
 			"El banner de cabecera contiene un link de \"Más info\"",
@@ -110,7 +110,7 @@ public class BannerHeadGalleryStpV {
 	@Validation
 	ChecksTM checkBannerHeadSalesOff(IdiomaPais idioma) {
 		ChecksTM validations = ChecksTM.getNew();
-		String saleTraduction = UtilsTestMango.getSaleTraduction(idioma);
+		String saleTraduction = UtilsTest.getSaleTraduction(idioma);
 		validations.add(
 			"<b style=\"color:blue\">Rebajas</b></br>" +
 			"El banner de cabecera NO es de rebajas  (NO contiene un símbolo de porcentaje o \"" + saleTraduction + "\")",

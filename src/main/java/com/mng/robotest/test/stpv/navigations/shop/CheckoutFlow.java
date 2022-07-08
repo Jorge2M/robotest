@@ -56,7 +56,7 @@ import com.mng.robotest.test.stpv.shop.checkout.pagosfactory.PagoStpV;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test.utils.PaisGetter;
-import com.mng.robotest.test.utils.UtilsTestMango;
+import com.mng.robotest.test.utils.UtilsTest;
 
 public class CheckoutFlow {
 
@@ -616,7 +616,7 @@ public class CheckoutFlow {
 		
 		public CheckoutFlow build() throws Exception {
 			if (listArticles==null) {
-				listArticles = UtilsTestMango.getArticlesForTestDependingVale(getdCtxSh(), 2, driver);
+				listArticles = UtilsTest.getArticlesForTestDependingVale(getdCtxSh(), 2, driver);
 			}
 			return new CheckoutFlow(
 					driver, 

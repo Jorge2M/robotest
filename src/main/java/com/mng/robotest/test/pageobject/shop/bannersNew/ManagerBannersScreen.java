@@ -124,7 +124,7 @@ public class ManagerBannersScreen {
 	}
 	
 	public boolean existBanners() {
-		return (listDataBannersOrderedByPosition.size() > 0);
+		return (!listDataBannersOrderedByPosition.isEmpty());
 	}
 	
 	public static boolean existBanners(WebDriver driver) {

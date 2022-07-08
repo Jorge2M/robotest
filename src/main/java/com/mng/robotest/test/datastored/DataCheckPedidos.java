@@ -29,7 +29,7 @@ public class DataCheckPedidos {
 	
 	public boolean areChecksToExecute() {
 		return (
-			listPedidos!=null && listPedidos.size()>0 &&
-			listChecks!=null && listChecks.size()>0);
+			listPedidos!=null && !listPedidos.isEmpty() &&
+			listChecks!=null && !listChecks.isEmpty());
 	}
 }

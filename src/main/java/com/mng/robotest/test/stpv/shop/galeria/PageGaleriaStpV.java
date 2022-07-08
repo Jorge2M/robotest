@@ -51,7 +51,7 @@ import com.mng.robotest.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test.stpv.shop.ficha.PageFichaArtStpV;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
-import com.mng.robotest.test.utils.UtilsTestMango;
+import com.mng.robotest.test.utils.UtilsTest;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 
@@ -595,7 +595,7 @@ public class PageGaleriaStpV {
 		expected="Los \"Hearth Icons\" quedan " + tagEstadoFinal)
 	public void clickArticlesHearthIcons(List<Integer> posIconsToClick, TypeActionFav actionFav, DataFavoritos dataFavoritos) 
 	throws Exception {
-		ArrayList<ArticuloScreen> listAddFav = pageGaleria.clickArticleHearthIcons(posIconsToClick);
+		List<ArticuloScreen> listAddFav = pageGaleria.clickArticleHearthIcons(posIconsToClick);
 		String estadoFinal = "";
 		switch (actionFav) {
 		case Marcar:
@@ -703,7 +703,7 @@ public class PageGaleriaStpV {
 	 	String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
 	 	validations.add(
 	 		"El banner de cabecera contiene el porcentaje de descuento<b>" + maxPercDiscount + "</b>",
-	 		UtilsTestMango.textContainsSetenta(textBanner, idioma), State.Warn);
+	 		UtilsTest.textContainsSetenta(textBanner, idioma), State.Warn);
 	 	
 	 	SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
 	 	int menusDescVisibles = secMenus.secMenusFiltroDiscount.getNumberOfVisibleMenus();

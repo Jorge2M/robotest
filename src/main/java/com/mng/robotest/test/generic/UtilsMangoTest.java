@@ -44,6 +44,10 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class UtilsMangoTest {
 
+    private UtilsMangoTest() {
+	    throw new IllegalStateException("Utility class");
+	}
+	
 	public static String getPageSource(WebDriver driver) {
 		String idWebKit = "webkit-xml-viewer-source-xml";
 		if (PageObjTM.state(Present, By.id(idWebKit), driver).check()) {
@@ -134,9 +138,9 @@ public class UtilsMangoTest {
 	
 	public static WebElement findElementPriorizingDisplayed(WebDriver webdriver, By locator) {
 		List<WebElement> elementOptions = webdriver.findElements(locator);
-		if (elementOptions.size() > 0) {
+		if (!elementOptions.isEmpty()) {
 			List<WebElement> displayedElements = getDisplayedElementsFromList(elementOptions);
-			if (displayedElements.size() > 0) {
+			if (!displayedElements.isEmpty()) {
 				return displayedElements.get(0);
 			}
 			return elementOptions.get(0);

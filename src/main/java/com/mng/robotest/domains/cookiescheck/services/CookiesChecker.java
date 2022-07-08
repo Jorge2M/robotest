@@ -26,7 +26,7 @@ public class CookiesChecker {
 	public Pair<Boolean, List<org.openqa.selenium.Cookie>> check(WebDriver driver) {
 		Set<org.openqa.selenium.Cookie> pageCookies = driver.manage().getCookies();
 		List<org.openqa.selenium.Cookie> listNotAllowedCookies = getNotAllowedCookies(pageCookies);
-		return Pair.of(listNotAllowedCookies.size()==0, listNotAllowedCookies);
+		return Pair.of(listNotAllowedCookies.isEmpty(), listNotAllowedCookies);
 	}
 	
 	List<org.openqa.selenium.Cookie> getNotAllowedCookies(

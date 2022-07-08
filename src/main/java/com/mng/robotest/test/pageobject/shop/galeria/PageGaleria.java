@@ -27,7 +27,7 @@ import com.mng.robotest.test.pageobject.utils.DataScroll;
 import com.mng.robotest.test.pageobject.utils.ListDataArticleGalery;
 import com.mng.robotest.test.stpv.shop.galeria.LocationArticle;
 import com.mng.robotest.test.stpv.shop.galeria.PageGaleriaStpV.TypeActionFav;
-import com.mng.robotest.test.utils.UtilsTestMango;
+import com.mng.robotest.test.utils.UtilsTest;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -66,7 +66,7 @@ public abstract class PageGaleria extends PageObjTM {
 	public abstract String getNameColorFromCodigo(String codigoColor);
 	public abstract int getNumFavoritoIcons();
 	public abstract boolean eachArticlesHasOneFavoriteIcon();
-	public abstract ArrayList<ArticuloScreen> clickArticleHearthIcons(List<Integer> posIconsToClick) throws Exception;
+	public abstract List<ArticuloScreen> clickArticleHearthIcons(List<Integer> posIconsToClick) throws Exception;
 	public abstract boolean isArticleWithHearthIconPresentUntil(int posArticle, int maxSecondsToWait);
 	public abstract void clickHearhIcon(int posArticle) throws Exception;
 	public abstract String getRefColorArticulo(WebElement articulo);
@@ -389,7 +389,7 @@ public abstract class PageGaleria extends PageObjTM {
 		
 		//Para el caso TestAB-1 se ejecutará este caso para conseguir los atributos del artículo
 		String href = articulo.findElement(By.xpath(XPathLinkRelativeToArticle)).getAttribute("href");
-		return (UtilsTestMango.getReferenciaFromHref(href));
+		return (UtilsTest.getReferenciaFromHref(href));
 	}
 
 	public boolean waitToHearthIconInState(WebElement hearthIcon, StateFavorito stateIcon, int maxSecondsToWait) {

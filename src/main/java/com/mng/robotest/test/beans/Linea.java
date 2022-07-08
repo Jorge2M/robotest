@@ -259,7 +259,7 @@ public class Linea implements Serializable {
 	}
 	
 	public boolean existsSublineas() {
-		return (getListSublineas().size() > 0);
+		return (!getListSublineas().isEmpty());
 	}
 	
 	public TypeContentDesk getContentDeskType() {

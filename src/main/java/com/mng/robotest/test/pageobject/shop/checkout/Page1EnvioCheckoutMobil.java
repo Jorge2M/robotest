@@ -253,7 +253,7 @@ public class Page1EnvioCheckoutMobil extends PageObjTM {
 
 	public String getTextDireccionEnvioCompleta() {
 		String direccion = "";
-		if (getElementsVisible(driver, By.xpath(XPathDireccionEnvio)).size() > 0) {
+		if (!getElementsVisible(driver, By.xpath(XPathDireccionEnvio)).isEmpty()) {
 			direccion = getElementsVisible(driver, By.xpath(XPathDireccionEnvio)).get(0).getText();
 		}
 		return direccion;

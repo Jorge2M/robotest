@@ -1,8 +1,5 @@
 package com.mng.robotest.test.stpv.shop.genericchecks;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.apache.commons.lang3.math.NumberUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +9,8 @@ import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.InputParamsTM;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
+
+import com.mng.robotest.test.utils.UtilsTest;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
@@ -40,18 +39,10 @@ public class CheckerAnalitica implements Checker {
 			inputParamsSuite.getApp()==AppEcom.votf) {
 			return State.Info;
 		}
+		
 		//TODO actualmente hay muchos errores -> reportar a Alberte
 		//mientras tanto lo ponemos en Warning
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date dateLimit = null;
-		try {
-			dateLimit = sdf.parse("2022-08-01");
-		}
-		catch (Exception e) {
-			//
-		}
-		Date dateToday = new Date();
-		if (dateToday.before(dateLimit)) {
+		if (UtilsTest.dateReachToday("2022-08-01")) {
 			return State.Warn;
 		}
 		return GenericCheck.Analitica.getLevel();

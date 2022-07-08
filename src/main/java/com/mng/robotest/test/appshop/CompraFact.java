@@ -31,7 +31,7 @@ import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test.stpv.shop.SecBolsaStpV;
-import com.mng.robotest.test.utils.UtilsTestMango;
+import com.mng.robotest.test.utils.UtilsTest;
 
 public class CompraFact implements Serializable {
 
@@ -125,7 +125,7 @@ public class CompraFact implements Serializable {
 		//TestAB.activateTestABcheckoutMovilEnNPasos(0, dCtxSh, dFTest.driver);
 
 		int maxArticlesAwayVale = 3;
-		List<GarmentCatalog> listArticles = UtilsTestMango.getArticlesForTest(dCtxSh, maxArticlesAwayVale, this.testVale, driver);
+		List<GarmentCatalog> listArticles = UtilsTest.getArticlesForTest(dCtxSh, maxArticlesAwayVale, this.testVale, driver);
 		
 		if (!manyArticles) {
 			listArticles = Arrays.asList(listArticles.get(0));
