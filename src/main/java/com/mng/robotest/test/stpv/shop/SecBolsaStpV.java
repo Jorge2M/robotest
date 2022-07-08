@@ -297,7 +297,7 @@ public class SecBolsaStpV {
 	public void selectButtonComprar(DataBag dataBag, DataCtxShop dCtxSh) throws Exception {
 		secBolsa.clickBotonComprar(10);
 		validaSelectButtonComprar(dataBag, dCtxSh);
-		if (UtilsTest.dateReachToday("2022-08-01")) {
+		if (!UtilsTest.dateBeforeToday("2022-08-01")) {
 			if(!dCtxSh.userRegistered) {
 				Page1IdentCheckoutStpV.secSoyNuevo.validaRGPDText(dCtxSh, driver);
 			}

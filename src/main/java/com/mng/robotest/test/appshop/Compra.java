@@ -123,7 +123,7 @@ public class Compra {
 			//TODO actualmente no funciona el buscador por referencia de productos Intimissimi
 			//confiamos que esté listo el 1-julio-2022
 			//cuando esté listo habrá que eliminar el 1er bloque del if
-			if (UtilsTest.dateReachToday("2022-08-01")) {
+			if (UtilsTest.dateBeforeToday("2022-08-01")) {
 				return new BuilderCheckout(dCtxSh, dCtxPago, driver)
 						.pago(espana.getPago("VISA"))
 						.listArticles(articlesHomeOpt.get().subList(0, 2))

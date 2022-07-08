@@ -37,12 +37,12 @@ public class UtilsTest {
 	/**
 	 * @param date format yyyy-MM-dd
 	 */
-	public static boolean dateReachToday(String date) {
+	public static boolean dateBeforeToday(String date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			Date dateLimit = sdf.parse(date);
 			Date dateToday = new Date();
-			return (!dateToday.before(dateLimit));
+			return (dateToday.before(dateLimit));
 		} 
 		catch (ParseException e) {
 			Log4jTM.getLogger().error("Error parsing date " + date, e);
