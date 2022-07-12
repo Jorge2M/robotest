@@ -20,12 +20,15 @@ import com.mng.robotest.test.stpv.shop.menus.SecMenusUserStpV;
  */
 public class PageReembolsosStpV {
 
+	private PageReembolsosStpV() {
+	}
+	
 	/**
 	 * Step (+validación) correspondiente a la selección del menú superior "Mi cuenta" + "Reembolsos"
 	 * @param paisConSaldoCta indica si el país tiene configurado el saldo en cuenta
 	 */
-	public static void gotoRefundsFromMenu(boolean paisConSaldoCta, AppEcom app, Channel channel, WebDriver driver) 
-	throws Exception {
+	public static void gotoRefundsFromMenu(
+			boolean paisConSaldoCta, AppEcom app, Channel channel, WebDriver driver) {
 		SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
 		userMenusStpV.clickMenuMiCuenta();
 		selectReembolsos(paisConSaldoCta, driver);
@@ -85,7 +88,7 @@ public class PageReembolsosStpV {
 	/**
 	 * Ejecuta los pasos necesarios para validar la configuración de los reembolsos mediante transferencia
 	 */
-	public static void testConfTransferencia(WebDriver driver) throws Exception {
+	public static void testConfTransferencia(WebDriver driver) {
 		PageReembolsosStpV.selectRadioTransferencia(driver);		
 		PageReembolsosStpV.informaDatosTransAndSave(driver);
 	}
@@ -93,7 +96,7 @@ public class PageReembolsosStpV {
 	@Step (
 		description="<b>Transferencias:</b> seleccionamos el radio asociado", 
 		expected="Los campos de input se hacen visibles")
-	public static void selectRadioTransferencia(WebDriver driver) throws Exception {	
+	public static void selectRadioTransferencia(WebDriver driver) {	
 		PageReembolsos.clickRadio(TypeReembolso.Transferencia, driver); 
 		
 		//Validations
@@ -107,16 +110,16 @@ public class PageReembolsosStpV {
 	   return (PageReembolsos.isVisibleInputsTransf(driver));
 	}
 	
-	static final String banco = "Banco de crédito Balear";
-	static final String titular = "Jorge Muñoz";
+	static final String BANCO = "Banco de crédito Balear";
+	static final String TITULAR = "Jorge Muñoz";
 	static final String IBAN = "ES8023100001180000012345";
-	static final String idPassport = "11111111";
+	static final String ID_PASSPORT = "11111111";
 
 	@Step (
-		description="Informar el banco: " + banco + "<br>titular: " + titular + "<br>IBAN: " + IBAN + "<br>y pulsar el botón \"Save\"",
+		description="Informar el banco: " + BANCO + "<br>titular: " + TITULAR + "<br>IBAN: " + IBAN + "<br>y pulsar el botón \"Save\"",
 		expected="La modificación de datos se realiza correctamente")
-	public static void informaDatosTransAndSave(WebDriver driver) throws Exception {
-		PageReembolsos.typeInputsTransf(driver, banco, titular, IBAN, idPassport);
+	public static void informaDatosTransAndSave(WebDriver driver) {
+		PageReembolsos.typeInputsTransf(driver, BANCO, TITULAR, IBAN, ID_PASSPORT);
 		PageReembolsos.clickButtonSaveTransfForce(driver);
 		checkAfterModifyDataTransferencia(driver);
 	}
@@ -164,12 +167,9 @@ public class PageReembolsosStpV {
 	@Step (
 		description="<b>Store Credit:</b> Seleccionamos el botón \"Save\"", 
 		expected="Desaparece el botón \"Save\"")
-	public static void clickSaveButtonStoreCredit(WebDriver driver) throws Exception {
+	public static void clickSaveButtonStoreCredit(WebDriver driver) {
 		PageReembolsos.clickSaveButtonStoreCredit(driver); 
-		
-		//Validaciones
-		int maxSeconds = 2;
-		checkButtonSaveDisappears(maxSeconds, driver);
+		checkButtonSaveDisappears(2, driver);
 	}
 	
 	@Validation (

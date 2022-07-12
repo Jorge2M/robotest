@@ -98,7 +98,7 @@ public abstract class PageGaleria extends PageObjTM {
 	static final String XPathLinkRelativeToArticle = ".//a[@class='product-link']";
 
 	public static PageGaleria getNew(Channel channel, AppEcom app, WebDriver driver) {
-		return PageGaleria.getNew(From.MENU, channel, app, driver);
+		return getNew(From.MENU, channel, app, driver);
 	}
 	public static PageGaleria getNew(From from, Channel channel, AppEcom app, WebDriver driver) {
 		switch (channel) {

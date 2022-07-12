@@ -60,7 +60,7 @@ import com.mng.robotest.test.utils.WebDriverMngUtils;
 @SuppressWarnings({"static-access"})
 public class SecMenusDesktopStpV {
 
-	private static final String prefixSale = "<b style=\"color:blue\">Rebajas</b></br>";
+	private static final String PREFIX_SALE = "<b style=\"color:blue\">Rebajas</b></br>";
 	
 	private final Pais pais;
 	private final AppEcom app;
@@ -118,7 +118,7 @@ public class SecMenusDesktopStpV {
 		description="Seleccionar la subfamília <b>#{menu2onLevel}</b>", 
 		expected="Aparecen artículos asociados al menú",
 		saveNettraffic=SaveWhen.Always)
-	private void selectMenuSubfamilia(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh) throws Exception {
+	private void selectMenuSubfamilia(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh) {
 		PageGaleria pageGaleria = PageGaleriaDesktop.getNew(dCtxSh.channel, app, driver);
 		((PageGaleriaDesktop)pageGaleria).secSubmenusGallery.clickSubmenu(menu2onLevel.getNombre(), driver);
 	}
@@ -127,7 +127,7 @@ public class SecMenusDesktopStpV {
 		description="Seleccionar el menú lateral de 2o nivel <b>#{menu2onLevel}</b>", 
 		expected="Aparecen artículos asociados al menú",
 		saveNettraffic=SaveWhen.Always)
-	private void selectMenuLateral2oLevel(Menu2onLevel menu2onLevel) throws Exception {
+	private void selectMenuLateral2oLevel(Menu2onLevel menu2onLevel) {
 		secMenus.secMenuLateral.clickMenu(menu2onLevel);
 	}
 	
@@ -582,7 +582,7 @@ public class SecMenusDesktopStpV {
 		}
 		
 		validations.add(
-			prefixSale +	 
+			PREFIX_SALE +	 
 			"No hay artículos con las siguientes características:<br>" + 
 			" * De temporadas T2 y T3 " + tempSale + warningMessage,
 			listArtWrong.size()==0, State.Defect);
@@ -614,7 +614,7 @@ public class SecMenusDesktopStpV {
 		}
 		
 		validations.add(
-			prefixSale +				   
+			PREFIX_SALE +				   
 			"No hay artículos con las siguientes características:<br>" + 
 			" * Rebajados</b><br>" +
 			" * De temporadas anteriores " + tempSales + "<br>" +
@@ -644,7 +644,7 @@ public class SecMenusDesktopStpV {
 		}
 		
 		validations.add(
-			prefixSale +				   
+			PREFIX_SALE +				   
 			"No hay artículos <b>de Temporada " + temporadaOldOldList + "</b> con alguna de las etiquetas <b>" + listLabelsWrong + "</b> " + 
 			"(en sus correspondientes traducciones)" + warningMessage,
 			listArtWrong.size()==0, State.Warn);
@@ -670,7 +670,7 @@ public class SecMenusDesktopStpV {
 		}
 		
 		validations.add(
-			prefixSale +				   
+			PREFIX_SALE +				   
 			"No hay artículos <b>de Temporada " + temporadaNew + "</b> con las 2 etiquetas <b>New Collection</b> y <b>New Now</b> " +
 			"(en sus correspondientes traducciones)" + warningMessage,
 			listArtWrong.size()==0, State.Info, StoreType.None);
@@ -678,14 +678,14 @@ public class SecMenusDesktopStpV {
 	}
 	
 	@Validation (
-		description=prefixSale + "1) No es visible el menú superior <b>#{menu1rstLevel.getNombre()}</b>",
+		description=PREFIX_SALE + "1) No es visible el menú superior <b>#{menu1rstLevel.getNombre()}</b>",
 		level=State.Warn)
 	public boolean isNotPresentMenuSuperior(Menu1rstLevel menu1rstLevel) throws Exception {
 		return (!secMenus.secBloquesMenu.isPresentMenuFirstLevel(menu1rstLevel));
 	}
 	
 	@Validation (
-		description=prefixSale + "1) Sí es visible el menú superior <b>#{menu1rstLevel.getNombre()}</b>",
+		description=PREFIX_SALE + "1) Sí es visible el menú superior <b>#{menu1rstLevel.getNombre()}</b>",
 		level=State.Warn)
 	public boolean isPresentMenuSuperior(Menu1rstLevel menu1rstLevel) throws Exception {
 		return (secMenus.secBloquesMenu.isPresentMenuFirstLevel(menu1rstLevel));

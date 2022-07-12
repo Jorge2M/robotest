@@ -9,20 +9,20 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecSlidersNew {
 
-	static String XPathCompletaTuLook = "//div[@id='lookTotal']";
-	static String XPathElegidoParaTi = "//div[@id='recommendations']";
-	static String XPathLoUltimoVisto = "//div[@id='garments']";
-	static String relativeXPathArticle = "//div[@class[contains(.,'slider-module-product')] and @data-id]";
+	private static final String XPATH_COMPLETA_TU_LOOK = "//div[@id='lookTotal']";
+	private static final String XPATH_ELEGIDO_PARA_TI = "//div[@id='recommendations']";
+	private static final String XPATH_LO_ULTIMO_VISTO = "//div[@id='garments']";
+	private static final String RELATIVE_XPATH_ARTICLE = "//div[@class[contains(.,'slider-module-product')] and @data-id]";
 
 	public static String getXPath(Slider sliderType) {
 		switch (sliderType) {
-		case CompletaTuLook:
-			return XPathCompletaTuLook;
-		case ElegidoParaTi:
-			return XPathElegidoParaTi;
-		case LoUltimoVisto:
+		case COMPLETA_TU_LOOK:
+			return XPATH_COMPLETA_TU_LOOK;
+		case ELEGIDO_PARA_TI:
+			return XPATH_ELEGIDO_PARA_TI;
+		case LO_ULTIMO_VISTO:
 		default:
-			return XPathLoUltimoVisto;
+			return XPATH_LO_ULTIMO_VISTO;
 		}
 	}
 	
@@ -33,7 +33,7 @@ public class SecSlidersNew {
 	
 	public static String getXPathArticle(Slider sliderType) {
 		String xpathSlider = getXPath(sliderType);
-		return xpathSlider + relativeXPathArticle;
+		return xpathSlider + RELATIVE_XPATH_ARTICLE;
 	}
 	
 	public static boolean isVisible(Slider sliderType, WebDriver driver) {

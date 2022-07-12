@@ -2,6 +2,7 @@ package com.mng.robotest.test.pageobject.shop.checkout;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -59,7 +60,6 @@ public class Page2IdentCheckout extends PageObjTM {
 	private static final String XPATH_BOTON_FIND_ADDRESS = "//input[@class[contains(.,'load-button')] and @type='button']";
 	private static final String XPATH_BOTON_CONTINUAR = "//div[@class='submitContent']/input[@type='submit']";
 	private static final String XPATH_MSG_ADUANAS = "//div[@class='aduanas']";
-	//private static final String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
 	
 	//Con el substring simulamos un ends-with (que no está disponible en xpath 1.0)
 	private static final String XPATH_SELECT_LOCALIDADES = "//select[substring(@id, string-length(@id) - string-length('localidades') +1) = 'localidades']";
@@ -122,42 +122,42 @@ public class Page2IdentCheckout extends PageObjTM {
 		return datoSeteado;
 	}
 	
-	public void setNombreUsuarioIfVisible(String nombreUsr, HashMap<String,String> datosRegistro) {
+	public void setNombreUsuarioIfVisible(String nombreUsr, Map<String,String> datosRegistro) {
 		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_NOMBRE_USR, nombreUsr);
 		if (datoSeteado) {
 			datosRegistro.put("cfName", nombreUsr);
 		}
 	}
 	
-	public void setApellidosUsuarioIfVisible(String apellidosUsr, HashMap<String,String> dataPago) {
+	public void setApellidosUsuarioIfVisible(String apellidosUsr, Map<String,String> dataPago) {
 		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_APELLIDOS_USR, apellidosUsr);
 		if (datoSeteado) {
 			dataPago.put("cfSname", apellidosUsr);
 		}
 	}
 	
-	public void setMiddleNameUsuarioIfVisible(String middleNameUsr, HashMap<String,String> dataPago) {
+	public void setMiddleNameUsuarioIfVisible(String middleNameUsr, Map<String,String> dataPago) {
 		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_MIDDLENAME_USR, middleNameUsr);
 		if (datoSeteado) {
 			dataPago.put("cfMiddleName", middleNameUsr);
 		}
 	}
 	
-	public void setPasswordIfVisible(String password, HashMap<String,String> datosRegistro) {
+	public void setPasswordIfVisible(String password, Map<String,String> datosRegistro) {
 		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_PASSWORD, password);
 		if (datoSeteado) {
 			datosRegistro.put("cfPass", password);
 		}
 	}
 	
-	public void setTelefonoIfVisible(String movil, HashMap<String,String> datosRegistro) {
+	public void setTelefonoIfVisible(String movil, Map<String,String> datosRegistro) {
 		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_TELEFONO, movil);
 		if (datoSeteado) {
 			datosRegistro.put("cfTelf", movil);
 		}
 	}	
 
-	public void setInputPoblacionIfVisible(String cfCity, HashMap<String,String> datosRegistro) throws Exception {
+	public void setInputPoblacionIfVisible(String cfCity, Map<String,String> datosRegistro) throws Exception {
 		waitForPageLoaded(driver);
 		state(Clickable, By.xpath(XPATH_INPUT_POBLACION_ACTIVE)).wait(1).check();
 		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_POBLACION_ACTIVE, cfCity);
@@ -170,27 +170,27 @@ public class Page2IdentCheckout extends PageObjTM {
 		setInputIfVisible(XPATH_INPUT_DIRECCION1, direccion1);
 	}
 	
-	public void setInputDireccion1IfVisible(String direccion1, HashMap<String,String> datosRegistro) {
+	public void setInputDireccion1IfVisible(String direccion1, Map<String,String> datosRegistro) {
 		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_DIRECCION1, direccion1);
 		if (datoSeteado)
 			datosRegistro.put("cfDir1", direccion1);
 	}	
 	
-	public void setInputDireccion2IfVisible(String direccion1, HashMap<String,String> datosRegistro) {
+	public void setInputDireccion2IfVisible(String direccion1, Map<String,String> datosRegistro) {
 		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_DIRECCION2, direccion1);
 		if (datoSeteado) {
 			datosRegistro.put("cfDir2", direccion1);
 		}
 	}
 	
-	public void setInputProvEstadoIfVisible(String cfState, HashMap<String,String> datosRegistro) {
+	public void setInputProvEstadoIfVisible(String cfState, Map<String,String> datosRegistro) {
 		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_PROV_ESTADO_ACTIVE, cfState);
 		if (datoSeteado) {
 			datosRegistro.put("cfState", cfState);
 		}
 	}	
 
-	public void setInputDniIfVisible(String dni, HashMap<String,String> datosRegistro) {
+	public void setInputDniIfVisible(String dni, Map<String,String> datosRegistro) {
 		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_DNI, dni);		
 		if (datoSeteado) {
 			datosRegistro.put("cfDni", dni);
@@ -204,19 +204,18 @@ public class Page2IdentCheckout extends PageObjTM {
 		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_CODPOST, codPostal);
 		if (datoSeteado) {			
 			List<WebElement> cfCodpostalList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_INPUT_CODPOST));
-			if (!cfCodpostalList.isEmpty()) {
+			if (!cfCodpostalList.isEmpty() &&
 				//Si existe el tag 'onkeyup' (se desencadena petición Ajax) tenemos que esperaremos un máximo de 2 segundos hasta que aparezca el desplegable con las poblaciones
-				if (cfCodpostalList.get(0).getAttribute("onkeyup")!=null && 
-					cfCodpostalList.get(0).getAttribute("onkeyup").compareTo("")!=0) {
+				cfCodpostalList.get(0).getAttribute("onkeyup")!=null && 
+				cfCodpostalList.get(0).getAttribute("onkeyup").compareTo("")!=0) {
 					state(Visible, By.xpath(XPATH_SELECT_LOCALIDADES)).wait(2).check();
-				}
 			}
 		}
 
 		return datoSeteado;
 	}
 
-	public void setCodPostalIfExistsAndWait(String codigoPostal, HashMap<String,String> datosRegistro) {
+	public void setCodPostalIfExistsAndWait(String codigoPostal, Map<String,String> datosRegistro) {
 		boolean datoSeteado = setCodPostalIfExistsAndWait(codigoPostal);
 		if (datoSeteado) {
 			datosRegistro.put("cfCp", codigoPostal);
@@ -250,7 +249,7 @@ public class Page2IdentCheckout extends PageObjTM {
 		return emailRegistro;
 	}
 	
-	public void setEmailIfExists(String email, HashMap<String,String> datosRegistro) {
+	public void setEmailIfExists(String email, Map<String,String> datosRegistro) {
 		datosRegistro.put("cfEmail", setEmailIfExists(email));
 	}
 
@@ -268,14 +267,14 @@ public class Page2IdentCheckout extends PageObjTM {
 		return datoSeteado;
 	}
 
-	public void setPaisIfVisibleAndNotSelected(HashMap<String,String> datosRegistro) {
+	public void setPaisIfVisibleAndNotSelected(Map<String,String> datosRegistro) {
 		boolean datoSeteado = setPaisIfVisibleAndNotSelected();
 		if (datoSeteado) {
 			datosRegistro.put(":pais", pais.getCodigo_pais());
 		}
 	}	
 	
-	public void clickBotonFindAddress() throws Exception {
+	public void clickBotonFindAddress() throws InterruptedException {
 		driver.findElement(By.xpath(XPATH_BOTON_FIND_ADDRESS)).click();
 		Thread.sleep(3000);
 	}
@@ -314,7 +313,7 @@ public class Page2IdentCheckout extends PageObjTM {
 		return "";
 	}
 
-	public void clickPublicidadIfVisible(HashMap<String,String> datosRegistro) {
+	public void clickPublicidadIfVisible(Map<String,String> datosRegistro) {
 		By byCheckPublic = By.xpath(XPATH_CHECK_PUBLICIDAD);
 		if (state(Present, byCheckPublic).check()) {
 			moveToElement(byCheckPublic, driver);
@@ -330,7 +329,7 @@ public class Page2IdentCheckout extends PageObjTM {
 	/**
 	 * @param posInSelect: elemento del desplegable que queremos desplegar (comenzando desde el 1)
 	 */
-	public String setSelectLocalidadesIfVisible(int posInSelect) throws Exception {
+	public String setSelectLocalidadesIfVisible(int posInSelect) throws InterruptedException {
 		String datoSeteado = "";
 		boolean staleElement = true;
 		int i=0;
@@ -358,7 +357,7 @@ public class Page2IdentCheckout extends PageObjTM {
 		return datoSeteado;
 	}
 	
-	public void setSelectLocalidadesIfVisible(int posInSelect, HashMap<String,String> datosRegistro) throws Exception {
+	public void setSelectLocalidadesIfVisible(int posInSelect, Map<String,String> datosRegistro) throws Exception {
 		String datoSeteado = setSelectLocalidadesIfVisible(posInSelect);
 		if ("".compareTo(datoSeteado)!=0) {
 			datosRegistro.put("cfCity", datoSeteado);
@@ -368,8 +367,9 @@ public class Page2IdentCheckout extends PageObjTM {
 	/**
 	 * @param posInSelect: elemento del desplegable que queremos desplegar (comenzando desde el 1)
 	 */
-	private static final String firstProvinciaUkranie = "Ananivskyi";
-	private static final String XPathOptionFirstProvUkranie = "//div[@class[contains(.,'choices')] and text()[contains(.,'" + firstProvinciaUkranie + "')]]";
+	private static final String FIRST_PROVINCIA_UKRANIE = "Ananivskyi";
+	private static final String XPATH_OPTION_FIRST_PROV_UKRANIE = "//div[@class[contains(.,'choices')] and text()[contains(.,'" + FIRST_PROVINCIA_UKRANIE + "')]]";
+	
 	public String setSelectProv1PaisIfVisible(Channel channel) {
 		String datoSeteado = "";
 		WebElement provinciaPais = UtilsMangoTest.findElementPriorizingDisplayed(driver, By.xpath(XPATH_SELECT_PROV_PAIS));
@@ -399,18 +399,18 @@ public class Page2IdentCheckout extends PageObjTM {
 	
 	private String selectProvinciaUkraineDesktop() {
 		driver.findElement(By.xpath(XPATH_SELECT_PROV_PAIS + "/..")).click();
-		driver.findElement(By.xpath(XPathOptionFirstProvUkranie)).click();
-		return firstProvinciaUkranie;
+		driver.findElement(By.xpath(XPATH_OPTION_FIRST_PROV_UKRANIE)).click();
+		return FIRST_PROVINCIA_UKRANIE;
 	}
 	
-	public void setSelectProvPaisIfVisible(HashMap<String,String> datosRegistro, Channel channel) {
+	public void setSelectProvPaisIfVisible(Map<String,String> datosRegistro, Channel channel) {
 		String datoSeteado = setSelectProv1PaisIfVisible(channel);
 		if ("".compareTo(datoSeteado)!=0) {
 			datosRegistro.put("provinciaPais", datoSeteado);
 		}
 	}   
 	
-	public String setSelectEstados1PaisIfVisible() throws Exception {
+	public String setSelectEstados1PaisIfVisible() throws InterruptedException {
 		String datoSeteado = "";
 		
 		//Tenemos problemas aleatorios de StaleElementReferenceException con este elemento
@@ -438,7 +438,7 @@ public class Page2IdentCheckout extends PageObjTM {
 		return datoSeteado;
 	}
 	
-	public void setSelectEstadosPaisIfVisible(HashMap<String,String> datosRegistro) throws Exception {
+	public void setSelectEstadosPaisIfVisible(Map<String,String> datosRegistro) throws InterruptedException {
 	   	String datoSeteado = "";
 		if ("001".compareTo(pais.getCodigo_pais())==0) {
 			datoSeteado = setSeletEstadoEspanya("Barcelona");
@@ -450,7 +450,7 @@ public class Page2IdentCheckout extends PageObjTM {
 		}
 	}	
 	
-	public String setSeletEstadoEspanya(String provincia) throws Exception {
+	public String setSeletEstadoEspanya(String provincia) throws InterruptedException {
 		waitForPageLoaded(driver);
 		WebElement provinciaPais = UtilsMangoTest.findElementPriorizingDisplayed(driver, By.xpath(XPATH_SELECT_ESTADOS_PAIS));
 		if (provinciaPais!=null) {
@@ -463,33 +463,34 @@ public class Page2IdentCheckout extends PageObjTM {
 		return "";
 	}
 	
-	private enum TypeLocalidad {ProvCity, Distrito, CodPostal, NeighbourhoodCity}
+	private enum TypeLocalidad { PROV_CITY, DISTRITO, COD_POSTAL, NEIGHBOURHOOD_CITY }
+	
 	private String setSelectLocalidadesProvCity(int posInSelect) throws Exception {
-		return (setSelectLocalidades(TypeLocalidad.ProvCity, posInSelect));
+		return (setSelectLocalidades(TypeLocalidad.PROV_CITY, posInSelect));
 	}
 	private String setSelectLocalidadesNeighbourhoodCity(int posInSelect) throws Exception {
-		return (setSelectLocalidades(TypeLocalidad.NeighbourhoodCity, posInSelect));
+		return (setSelectLocalidades(TypeLocalidad.NEIGHBOURHOOD_CITY, posInSelect));
 	}
 	private String setSelectDistrito(int posInSelect) throws Exception {
-		return (setSelectLocalidades(TypeLocalidad.Distrito, posInSelect));
+		return (setSelectLocalidades(TypeLocalidad.DISTRITO, posInSelect));
 	}
 	private String setSelectCodPostal(int posInSelect) throws Exception {
-		return (setSelectLocalidades(TypeLocalidad.CodPostal, posInSelect));
+		return (setSelectLocalidades(TypeLocalidad.COD_POSTAL, posInSelect));
 	}
 	private String setSelectLocalidades(TypeLocalidad typeLocalidad, int posInSelect) throws Exception {
 		String datoSeteado = "";
 		String xpathSelect = "";
 		switch (typeLocalidad) {
-		case ProvCity:
+		case PROV_CITY:
 			xpathSelect = XPATH_SELECT_LOCALIDADES_PROVCITY;
 			break;
-		case Distrito:
+		case DISTRITO:
 			xpathSelect = XPATH_SELECT_DISTRITO;
 			break;
-		case CodPostal:
+		case COD_POSTAL:
 			xpathSelect = XPATH_SELECT_CODPOSTAL;
 			break;
-		case NeighbourhoodCity:
+		case NEIGHBOURHOOD_CITY:
 			xpathSelect = XPATH_SELECT_LOCALIDADES_NEIGHBOURHOODCITY;
 			break;
 		}
@@ -533,25 +534,25 @@ public class Page2IdentCheckout extends PageObjTM {
 		}
 	}
 
-	public void setSelectLocalidadesProvCity(int posInSelect, HashMap<String,String> datosRegistro) throws Exception {
+	public void setSelectLocalidadesProvCity(int posInSelect, Map<String,String> datosRegistro) throws Exception {
 		String datoSeteado = setSelectLocalidadesProvCity(posInSelect);
 		if ("".compareTo(datoSeteado)!=0) {
 			datosRegistro.put("localidadesProvCity", datoSeteado);
 		}
 	}	 
-	public void setSelectDistrito(int posInSelect, HashMap<String,String> datosRegistro) throws Exception {
+	public void setSelectDistrito(int posInSelect, Map<String,String> datosRegistro) throws Exception {
 		String datoSeteado = setSelectDistrito(posInSelect);
 		if ("".compareTo(datoSeteado)!=0) {
 			datosRegistro.put("distrito", datoSeteado);
 		}
 	}
-	public void setSelectCodPostal(int posInSelect, HashMap<String,String> datosRegistro) throws Exception {
+	public void setSelectCodPostal(int posInSelect, Map<String,String> datosRegistro) throws Exception {
 		String datoSeteado = setSelectCodPostal(posInSelect);
 		if ("".compareTo(datoSeteado)!=0) {
 			datosRegistro.put("selectCodPosta", datoSeteado);
 		}
 	}
-	public void setSelectLocalidadesNeighbourhoodCity(int posInSelect, HashMap<String,String> datosRegistro) throws Exception {
+	public void setSelectLocalidadesNeighbourhoodCity(int posInSelect, Map<String,String> datosRegistro) throws Exception {
 		String datoSeteado = setSelectLocalidadesNeighbourhoodCity(posInSelect);
 		if ("".compareTo(datoSeteado)!=0) {
 			datosRegistro.put("localidadesNeighbourhoodCity", datoSeteado);
@@ -568,7 +569,7 @@ public class Page2IdentCheckout extends PageObjTM {
 		return datoSeteado;		
 	}
 	
-	public void setCheckHombreIfVisible(HashMap<String,String> datosRegistro) {
+	public void setCheckHombreIfVisible(Map<String,String> datosRegistro) {
 		boolean datoSeteado = setCheckHombreIfVisible();
 		if (datoSeteado) {
 			datosRegistro.put("cfGener", "H");
@@ -585,21 +586,21 @@ public class Page2IdentCheckout extends PageObjTM {
 		return datoSeteado;		
 	}
 	
-	public void setCheckCondicionesIfVisible(HashMap<String,String> datosRegistro) {
+	public void setCheckCondicionesIfVisible(Map<String,String> datosRegistro) {
 		boolean datoSeteado = setCheckCondicionesIfVisible();
 		if (datoSeteado) {
 			datosRegistro.put("cfPriv", "true");
 		}
 	}
 	
-	public HashMap<String,String> inputDataPorDefectoSegunPais(
+	public Map<String,String> inputDataPorDefectoSegunPais(
 			String emailUsr, boolean testCharNoLatinos, boolean clickPubli, Channel channel)
 					throws Exception {
-		HashMap<String,String> datosSeteados = new HashMap<>();
+		
+		Map<String,String> datosSeteados = new HashMap<>();
 		String nombreUsr = "Jorge";
 		String apellidosUsr = "Muñoz Martínez";
 		String middleNameUsr = "Sputnik";
-		String codigoPais = pais.getCodigo_pais();
 		String direccion1 = pais.getAddress();
 		if (testCharNoLatinos) {
 			direccion1 = pais.getDireccharnolatinos().getText();

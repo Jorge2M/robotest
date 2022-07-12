@@ -20,11 +20,11 @@ public class SecSlidersOld {
 
 	public static String getXPath(Slider sliderType) {
 		switch (sliderType) {
-		case CompletaTuLook:
+		case COMPLETA_TU_LOOK:
 			return XPathCompletaTuLook;
-		case ElegidoParaTi:
+		case ELEGIDO_PARA_TI:
 			return XPathElegidoParaTi;
-		case LoUltimoVisto:
+		case LO_ULTIMO_VISTO:
 		default:
 			return XPathLoUltimoVisto;
 		}
@@ -32,11 +32,11 @@ public class SecSlidersOld {
 	
 	public static String getXPathCabecera(Slider sliderType) {
 		switch (sliderType) {
-		case CompletaTuLook:
+		case COMPLETA_TU_LOOK:
 			return XPathCompletaTuLookCabecera;
-		case ElegidoParaTi:
+		case ELEGIDO_PARA_TI:
 			return XPathElegidoParaTiCabecera;
-		case LoUltimoVisto:
+		case LO_ULTIMO_VISTO:
 		default:
 			return XPathLoUltimoVistoCabecera;
 		}
@@ -44,11 +44,11 @@ public class SecSlidersOld {
 	
 	public static String getXPathArticle(Slider sliderType) {
 		switch (sliderType) {
-		case CompletaTuLook:
+		case COMPLETA_TU_LOOK:
 			return XPathArtCompletaTuLook;
-		case ElegidoParaTi:
+		case ELEGIDO_PARA_TI:
 			return XPathArtElegidoParaTi;
-		case LoUltimoVisto:
+		case LO_ULTIMO_VISTO:
 		default:
 			return XPathArtLoUltimoVisto;
 		}

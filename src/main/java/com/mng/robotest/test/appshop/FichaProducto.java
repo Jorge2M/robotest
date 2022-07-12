@@ -184,11 +184,11 @@ public class FichaProducto {
 			
 		pageFichaStpV.selectGuiaDeTallas(dCtxSh.appE);
 		if (dCtxSh.appE==AppEcom.shop) {
-			pageFichaStpV.validateSliderIfExists(Slider.ElegidoParaTi);
+			pageFichaStpV.validateSliderIfExists(Slider.ELEGIDO_PARA_TI);
 		}
 		
 		if (dCtxSh.appE!=AppEcom.outlet && isTotalLook) {
-			pageFichaStpV.validateSliderIfExists(Slider.CompletaTuLook);
+			pageFichaStpV.validateSliderIfExists(Slider.COMPLETA_TU_LOOK);
 		}
 	}
 	
