@@ -7,6 +7,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -29,6 +30,7 @@ public abstract class SecLineasMenuDesktop extends PageObjTM {
 	public abstract void selectSublinea(LineaType lineaType, SublineaType sublineaType);
 	
 	protected final AppEcom app;
+	protected final Channel channel;
 	
 	static String TagIdLinea = "@LineaId";
 	static String TagIdSublinea = "@SublineaId";
@@ -40,13 +42,14 @@ public abstract class SecLineasMenuDesktop extends PageObjTM {
 			 "@class[contains(.,'section-detail-list')]) " + //Caso países tipo Colombia con 1 sola sublínea 
 			"and @data-brand='" + TagIdSublinea + "']";
 
-	protected SecLineasMenuDesktop(AppEcom app, WebDriver driver) {
+	protected SecLineasMenuDesktop(AppEcom app, Channel channel, WebDriver driver) {
 		super(driver);
 		this.app = app;
+		this.channel = channel;
 	}
 	
-	public static SecLineasMenuDesktop factory(AppEcom app, WebDriver driver) {
-		return new SecLineasMenuDesktopNew(app, driver);
+	public static SecLineasMenuDesktop factory(AppEcom app, Channel channel, WebDriver driver) {
+		return new SecLineasMenuDesktopNew(app, channel, driver);
 	}
 
 	public String getXPathLineaSelected(LineaType lineaType) {
@@ -160,7 +163,7 @@ public abstract class SecLineasMenuDesktop extends PageObjTM {
 		int i=0;
 		do {
 			hoverLinea(lineaType, sublineaType);
-			SecBloquesMenuDesktop secBloques = SecBloquesMenuDesktop.factory(app, driver);
+			SecBloquesMenuDesktop secBloques = SecBloquesMenuDesktop.factory(app, channel, driver);
 			isCapaMenusVisible = secBloques.isCapaMenusLineaVisibleUntil(lineaType, 2);
 			if (!isCapaMenusVisible) {
 				Log4jTM.getLogger().warn("No se hacen visibles los menús después de Hover sobre línea " + lineaType);

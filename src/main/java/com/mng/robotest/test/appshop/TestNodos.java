@@ -101,7 +101,7 @@ public class TestNodos implements Serializable {
 			pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
 		}
 		
-		SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, driver);
+		SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, dCtxSh.channel, driver);
 		secMenusDesktopStpV.seleccionLinea(LineaType.she);
 		secMenusDesktopStpV.countSaveMenusEntorno(LineaType.she, null, nodo.getIp(), autAddr);
 		int maxBannersToLoad = 1;

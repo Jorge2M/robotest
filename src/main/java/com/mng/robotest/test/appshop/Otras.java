@@ -54,7 +54,7 @@ public class Otras {
 		dCtxSh.userRegistered = false;
 		AccesoStpV.oneStep(dCtxSh, false, driver);
 		
-		SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, driver);
+		SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, dCtxSh.channel, driver);
 		secMenusDesktopStpV.checkURLRedirectParkasHeEspanya();
 		
 		dCtxSh.pais = francia;

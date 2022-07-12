@@ -1,28 +1,39 @@
 package com.mng.robotest.test.utils.checkmenus;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import com.github.jorge2m.testmaker.conf.Channel;
 
 public class DataScreenMenu implements Label, Comparable<DataScreenMenu> {
 
-	private String dataGaLabel;
 	private String label;
 	private String id;
+	private String dataTestId;
+	private String href;
 	
-	private DataScreenMenu() {}
+	private DataScreenMenu() {
+	}
+	
 	public static DataScreenMenu getNew() {
 		return new DataScreenMenu();
 	}
 	
-	public static DataScreenMenu from(WebElement menu) {
+	public static DataScreenMenu from(WebElement menu, Channel channel) {
 		DataScreenMenu dataMenu = new DataScreenMenu();
 		dataMenu.setId(menu.getAttribute("id"));
-		String data_label = menu.getAttribute("data-label");
-		if (data_label!=null) {
-			dataMenu.setDataGaLabel(menu.getAttribute("data-label"));
+		if (channel==Channel.desktop) {
+			WebElement ancor = menu.findElement(By.xpath("./a"));
+			dataMenu.setDataTestId(ancor.getAttribute("data-testid"));
+			dataMenu.setHref(ancor.getAttribute("href"));
 		} else {
-			dataMenu.setDataGaLabel(menu.getAttribute("data-testid"));
+			dataMenu.setDataTestId(menu.getAttribute("data-label"));
+			if (dataMenu.isDataTestIdValid()) {
+				dataMenu.setLabel(menu.getText().replace("New!", "").trim());
+			}
+			dataMenu.setHref(menu.getAttribute("href"));
 		}
-		if (dataMenu.isDataGaLabelValid()) {
+		if (dataMenu.isDataTestIdValid()) {
 			dataMenu.setLabel(menu.getText().replace("New!", "").trim());
 		}
 		return dataMenu;
@@ -30,7 +41,7 @@ public class DataScreenMenu implements Label, Comparable<DataScreenMenu> {
 	
 	public static DataScreenMenu getNew(String dataGaLabel, String label) {
 		DataScreenMenu dataMenu = new DataScreenMenu();
-		dataMenu.setDataGaLabel(dataGaLabel);
+		dataMenu.setDataTestId(dataGaLabel);
 		dataMenu.setLabel(label);
 		return dataMenu;
 	}
@@ -41,8 +52,8 @@ public class DataScreenMenu implements Label, Comparable<DataScreenMenu> {
 		return dataMenu;
 	}
 	
-	public String getDataGaLabel() {
-		return this.dataGaLabel;
+	public String getDataTestId() {
+		return this.dataTestId;
 	}
 	
 	@Override
@@ -50,8 +61,16 @@ public class DataScreenMenu implements Label, Comparable<DataScreenMenu> {
 		return this.label;
 	}
 	
-	public void setDataGaLabel(String dataGaLabel) {
-		this.dataGaLabel = dataGaLabel;
+	public void setDataTestId(String dataTestId) {
+		this.dataTestId = dataTestId;
+	}
+	
+	public String getHref() {
+		return this.href;
+	}
+	
+	public void setHref(String href) {
+		this.href = href;
 	}
 	
 	public String getId() {
@@ -64,19 +83,19 @@ public class DataScreenMenu implements Label, Comparable<DataScreenMenu> {
 	
 	public void setLabel(String label) {
 		this.label = label;
-		if (!isDataGaLabelValid()) {
+		if (!isDataTestIdValid()) {
 			//setDataGaLabel("-" + label);
-			setDataGaLabel(label);
+			setDataTestId(label);
 		}
 	}
 	
-	public boolean isDataGaLabelValid() {
-		return (dataGaLabel!=null && dataGaLabel.compareTo("")!=0);
+	public boolean isDataTestIdValid() {
+		return (dataTestId!=null && dataTestId.compareTo("")!=0);
 	}
 	
 	@Override
 	public int compareTo(DataScreenMenu dataMenu) {
-	  return (dataGaLabel.compareTo(dataMenu.dataGaLabel));
+	  return (dataTestId.compareTo(dataMenu.dataTestId));
 	}
 	
 	@Override
@@ -89,20 +108,21 @@ public class DataScreenMenu implements Label, Comparable<DataScreenMenu> {
 		} 
 		DataScreenMenu c = (DataScreenMenu) o; 
 		return (
-			c.dataGaLabel.compareTo(this.dataGaLabel)==0 &&
-			c.getLabel().toLowerCase().compareTo(this.getLabel().toLowerCase())==0);
+			c.dataTestId.compareTo(this.dataTestId)==0 &&
+			c.getLabel().toLowerCase().compareTo(this.getLabel().toLowerCase())==0 &&
+			c.getDataTestId().compareTo(this.getDataTestId())==0);
 	} 
 	
 	@Override
 	public int hashCode() {
-		return this.dataGaLabel.hashCode();
+		return this.dataTestId.hashCode();
 	}
 	
 	@Override
 	public String toString() {
 		String result = "";
-		if (dataGaLabel.compareTo("")!=0) {
-			result+=dataGaLabel;
+		if (dataTestId.compareTo("")!=0) {
+			result+=dataTestId;
 		}
 		if (getLabel().compareTo("")!=0) {
 			result+=", " + getLabel();

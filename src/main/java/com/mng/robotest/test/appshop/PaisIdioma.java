@@ -125,7 +125,7 @@ public class PaisIdioma implements Serializable {
 		if (testMenus(linea, sublinea)) {
 			secMenusStpV.stepsMenusLinea(lineaType, sublineaType);
 			if (existsRightBannerMenu(linea, sublinea, dCtxSh.channel)) {
-				SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, driver);
+				SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, dCtxSh.channel, driver);
 				secMenusDesktopStpV.clickRightBanner(lineaType, sublineaType);
 			}
 		} else {

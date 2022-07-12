@@ -38,6 +38,7 @@ import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.ControlTemporada;
 import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
+import com.mng.robotest.test.pageobject.shop.menus.GroupMenu;
 import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.Menu2onLevel;
@@ -45,7 +46,6 @@ import com.mng.robotest.test.pageobject.shop.menus.MenuLateralDesktop;
 import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test.pageobject.shop.menus.MenuLateralDesktop.Element;
-import com.mng.robotest.test.pageobject.shop.menus.MenuLateralDesktop.GroupMenu;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
@@ -67,15 +67,15 @@ public class SecMenusDesktopStpV {
 	private final WebDriver driver;
 	private final SecMenusDesktop secMenus;
 	
-	private SecMenusDesktopStpV(Pais pais, AppEcom app, WebDriver driver) {
+	private SecMenusDesktopStpV(Pais pais, AppEcom app, Channel channel, WebDriver driver) {
 		this.pais = pais;
 		this.app = app;
 		this.driver = driver;
-		this.secMenus = SecMenusDesktop.getNew(app, driver);
+		this.secMenus = SecMenusDesktop.getNew(app, channel, driver);
 	}
 	
-	public static SecMenusDesktopStpV getNew(Pais pais, AppEcom app, WebDriver driver) {
-		return (new SecMenusDesktopStpV(pais, app, driver));
+	public static SecMenusDesktopStpV getNew(Pais pais, AppEcom app, Channel channel, WebDriver driver) {
+		return (new SecMenusDesktopStpV(pais, app, channel, driver));
 	}
 	
 	/**
@@ -244,7 +244,7 @@ public class SecMenusDesktopStpV {
 	 */
 	static final String tagMenu = "@TagMenu";
 	@Step (
-		description="Selección del menú <b>" + tagMenu + "</b> (data-ga-label=#{menu1rstLevel.getDataGaLabelMenuSuperiorDesktop()})", 
+		description="Selección del menú <b>" + tagMenu + "</b> (data-testid=#{menu1rstLevel.getDataTestIdMenuSuperiorDesktop()})", 
 		expected="El menú se ejecuta correctamente",
 		saveNettraffic=SaveWhen.Always)
 	public void stepEntradaMenuDesktop(Menu1rstLevel menu1rstLevel, String paginaLinea) throws Exception {
@@ -457,18 +457,13 @@ public class SecMenusDesktopStpV {
 	public void validaPaginaResultMenu(MenuLateralDesktop menu) throws Exception {
 		checkResultDependingMenuGroup(menu);
 		checkErrorPageWithoutException();
-		GroupMenu groupMenu = menu.getGroup();
+		GroupMenu groupMenu = menu.getGroup(Channel.desktop);
 		if (groupMenu.canContainElement(Element.article)) {
 			if (pais.isEspanya()) {
 				checkSizeDivImages();
 			}
 			Menu1rstLevel menuPromocion = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(menu.getLinea(), menu.getSublinea(), "promocion"));
 			menuPromocion.setDataGaLabel("promocion");
-
-			//TODO activar en época de rebajas
-//			if (dCtxSh.pais.getCodigo_pais().compareTo("720")==0) {
-//				validationsSpecificEndRebajasChina(dCtxSh, driver);
-//			}
 			validationsRebajas();
 		}
 		
@@ -513,9 +508,9 @@ public class SecMenusDesktopStpV {
 	@Validation
 	private ChecksTM checkResultDependingMenuGroup(MenuLateralDesktop menu) throws Exception {
 		ChecksTM validations = ChecksTM.getNew();
-		GroupMenu groupMenu = menu.getGroup();
+		GroupMenu groupMenu = menu.getGroup(Channel.desktop);
 		List<Element> elemsCanBeContained = groupMenu.getElementsCanBeContained();
-		boolean contentPageOk = (new PageLanding(driver)).isSomeElementVisibleInPage(elemsCanBeContained, app, 2);
+		boolean contentPageOk = (new PageLanding(driver)).isSomeElementVisibleInPage(elemsCanBeContained, app, Channel.desktop, 2);
 	 	validations.add(
 			"Aparecen alguno de los siguientes elementos: <b>" + elemsCanBeContained + "</b> (es un menú perteneciente al grupo <b>" + groupMenu + ")</b>",
 			contentPageOk, State.Warn);
@@ -528,7 +523,7 @@ public class SecMenusDesktopStpV {
 				!((PageGaleriaDesktop)pageGaleria).isArticuloWithStringInName(guiones), State.Warn);
 		}
 		
-		if (groupMenu.isTitleEquivalentToMenuName()) {
+		//if (groupMenu.isTitleEquivalentToMenuName()) {
 			boolean isTitleAccording = AllPages.isTitleAssociatedToMenu(menu.getNombre(), driver);
 		 	validations.add(
 				"El title de la página es el asociado al menú <b>" + menu.getNombre() + "</b>",
@@ -538,7 +533,7 @@ public class SecMenusDesktopStpV {
 					"El título no coincide -> Validamos que exista el header <b>" + menu.getNombre() + "</b> en el inicio de la galería",
 					pageGaleria.isHeaderArticlesVisible(menu.getNombre()), State.Warn, StoreType.Evidences);
 		 	}
-		}
+		//}
 		
 	 	return validations;
 	}	

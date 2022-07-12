@@ -1,6 +1,8 @@
 package com.mng.robotest.test.stpv.shop.menus;
 
 import java.util.Arrays;
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
@@ -10,17 +12,19 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Linea.TypeContentMobil;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
-import com.mng.robotest.test.pageobject.shop.bannersNew.ManagerBannersScreen;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
 import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.MenuLateralDesktop;
+import com.mng.robotest.test.pageobject.shop.menus.MenuLateralDesktop.Element;
+import com.mng.robotest.test.pageobject.shop.menus.GroupMenu;
 import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenuLateralDevice;
 import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenuLateralDevice.TypeLocator;
 import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
@@ -159,17 +163,17 @@ public class SecMenuLateralMobilStpV {
 	
 	static final String tagTextMenu = "@TagTextMenu";
 	@Step (
-		description="Selección del menú <b>" + tagTextMenu + "</b> (data-label contains #{menu1rstLevel.getDataGaLabelMenuSuperiorDesktop()})", 
+		description="Selección del menú <b>" + tagTextMenu + "</b> (data-label contains #{menu1rstLevel.getDataTestIdMenuSuperiorDesktop()})", 
 		expected="El menú se ejecuta correctamente")
 	public void stepClickMenu1rstLevel(Menu1rstLevel menu1rstLevel, Pais pais) throws Exception {
 		secMenuLateral.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais);
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagTextMenu, menu1rstLevel.getNombre());
 		ModalCambioPais.closeModalIfVisible(driver);
-		validaPaginaResultMenu2onLevel();
+		validaPaginaResultMenu2onLevel(menu1rstLevel);
 	}	
 	
-	public void validaPaginaResultMenu2onLevel() throws Exception {
-		checkElementsAfterClickMenu2onLevel();
+	public void validaPaginaResultMenu2onLevel(Menu1rstLevel menu1rstLevel) throws Exception {
+		checkResultDependingMenuGroup(menu1rstLevel);
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO, 
@@ -179,17 +183,17 @@ public class SecMenuLateralMobilStpV {
 				GenericCheck.ImgsBroken)).checks(driver);
 	}
 	
-	@Validation (
-		description="Aparecen artículos, banners, frames, maps o Sliders",
-		level=State.Warn)
-	private boolean checkElementsAfterClickMenu2onLevel() throws Exception {
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.mobile, app, driver);
-		PageLanding pageLanding = new PageLanding(driver);
-		return (
-			pageGaleria.isVisibleArticleUntil(1, 3) ||
-			pageLanding.hayIframes() ||
-			pageLanding.hayMaps() ||
-			pageLanding.haySliders() ||
-			ManagerBannersScreen.existBanners(driver));
+	@Validation
+	private ChecksTM checkResultDependingMenuGroup(Menu1rstLevel menu1rstLevel) 
+			throws Exception {
+		ChecksTM validations = ChecksTM.getNew();
+		GroupMenu groupMenu = menu1rstLevel.getGroup(Channel.mobile);
+		List<Element> elemsCanBeContained = groupMenu.getElementsCanBeContained();
+		boolean contentPageOk = (new PageLanding(driver)).isSomeElementVisibleInPage(elemsCanBeContained, app, Channel.mobile, 2);
+	 	validations.add(
+			"Aparecen alguno de los siguientes elementos: <b>" + elemsCanBeContained + "</b> (es un menú perteneciente al grupo <b>" + groupMenu + ")</b>",
+			contentPageOk, State.Warn);
+	 	
+	 	return validations;
 	}
 }

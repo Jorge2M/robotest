@@ -27,17 +27,19 @@ public class SecCrossSellingStpV {
 	private final SecCrossSelling secCrossSelling;
 	private final WebDriver driver;
 	private final AppEcom app;
+	private final Channel channel;
 	
 	public SecCrossSellingStpV(Channel channel, AppEcom app, WebDriver driver) {
 		this.secCrossSelling = new SecCrossSelling(channel, driver);
 		this.driver = driver;
 		this.app = app;
+		this.channel = channel;
 	}
 	
 	@Validation
 	public ChecksTM validaIsCorrect(LineaType lineaType, SublineaType sublineaType) throws Exception {
 		//Obtenemos la lista de menús de Mujer-Prendas
-		SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
+		SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, channel, driver);
 		List<WebElement> listaMenusBloque = 
 			((SecBloquesMenuDesktopNew)secMenus.secMenuSuperior.secBlockMenus)
 				.getListMenusLineaBloque(lineaType, sublineaType, GroupMenu.prendas, MenusFromGroup.Subfamily);

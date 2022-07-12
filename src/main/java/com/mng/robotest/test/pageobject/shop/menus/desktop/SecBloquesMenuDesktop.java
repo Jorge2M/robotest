@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -41,6 +42,8 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	public abstract List<WebElement> getListMenusLineaBloque(LineaType lineaType, SublineaType sublineaType, GroupMenu bloque) throws Exception;
 	
 	protected final AppEcom app;
+	protected final Channel channel;
+	
 	protected final SecLineasMenuDesktop secLineasMenu;
 	
 	public enum TypeMenuDesktop {Link, Banner}
@@ -51,14 +54,15 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 
 
 
-	protected SecBloquesMenuDesktop(AppEcom app, WebDriver driver) {
+	protected SecBloquesMenuDesktop(AppEcom app, Channel channel, WebDriver driver) {
 		super(driver);
 		this.app = app;
-		this.secLineasMenu = SecLineasMenuDesktop.factory(app, driver);
+		this.channel = channel;
+		this.secLineasMenu = SecLineasMenuDesktop.factory(app, channel, driver);
 	}
 	
-	public static SecBloquesMenuDesktop factory(AppEcom app, WebDriver driver) {
-		return new SecBloquesMenuDesktopNew(app, driver);
+	public static SecBloquesMenuDesktop factory(AppEcom app, Channel channel, WebDriver driver) {
+		return new SecBloquesMenuDesktopNew(app, channel, driver);
 	}
 		
 	private String getXPathMenuVisibleByDataInHref(Menu1rstLevel menu1rstLevel) {
@@ -82,10 +86,10 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 		waitForPageLoaded(driver);
 	}
 
-	protected List<DataScreenMenu> getDataListMenus(List<WebElement> listMenus) {
+	protected List<DataScreenMenu> getDataListMenus(List<WebElement> listMenus, Channel channel) {
 		List<DataScreenMenu> listDataMenus = new ArrayList<>();
 		for (int i=0; i<listMenus.size(); i++) {
-			DataScreenMenu dataMenu = DataScreenMenu.from(listMenus.get(i));
+			DataScreenMenu dataMenu = DataScreenMenu.from(listMenus.get(i), channel);
 			listDataMenus.add(dataMenu);
 		}
 		return listDataMenus;

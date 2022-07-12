@@ -705,7 +705,7 @@ public class PageGaleriaStpV {
 	 		"El banner de cabecera contiene el porcentaje de descuento<b>" + maxPercDiscount + "</b>",
 	 		UtilsTest.textContainsSetenta(textBanner, idioma), State.Warn);
 	 	
-	 	SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
+	 	SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, channel, driver);
 	 	int menusDescVisibles = secMenus.secMenusFiltroDiscount.getNumberOfVisibleMenus();
 	 	validations.add(
 	 		"No aparece ningún filtro de descuento",

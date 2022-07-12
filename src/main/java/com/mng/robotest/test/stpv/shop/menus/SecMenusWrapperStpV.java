@@ -60,7 +60,7 @@ public class SecMenusWrapperStpV {
 		this.driver = driver;
 		this.secMenusUserStpV = SecMenusUserStpV.getNew(channel, app, driver);
 		this.secMenuLateralMobilStpV = SecMenuLateralMobilStpV.getNew(channel, app, driver);
-		this.secMenusDesktopStpV = SecMenusDesktopStpV.getNew(pais, app, driver);
+		this.secMenusDesktopStpV = SecMenusDesktopStpV.getNew(pais, app, channel, driver);
 		this.secMenusWrap = SecMenusWrap.getNew(channel, app, driver);
 	}
 	

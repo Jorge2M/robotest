@@ -2,6 +2,7 @@ package com.mng.robotest.test.pageobject.shop.menus;
 
 import java.util.Objects;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
@@ -61,8 +62,8 @@ public class Menu2onLevel implements MenuLateralDesktop {
 	}
 	
 	@Override
-	public String getDataGaLabelMenuSuperiorDesktop() {
-		return (key.menu1rstLevel.getDataGaLabelMenuSuperiorDesktop());
+	public String getDataTestIdMenuSuperiorDesktop() {
+		return (key.menu1rstLevel.getDataTestIdMenuSuperiorDesktop());
 	}
 	
 	@Override
@@ -100,5 +101,10 @@ public class Menu2onLevel implements MenuLateralDesktop {
 	@Override
 	public String toString() {
 		return (key.toString());
+	}
+	
+	@Override
+	public GroupMenu getGroup(Channel channel) {
+		return GroupMenu.Articles;
 	}
 }

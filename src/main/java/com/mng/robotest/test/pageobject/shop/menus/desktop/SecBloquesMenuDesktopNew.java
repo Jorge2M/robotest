@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
@@ -45,8 +46,8 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	private static final String XPathRightImage = XPathWrapperGlobal + "//a/img/..";
 
 	
-	public SecBloquesMenuDesktopNew(AppEcom app, WebDriver driver) {
-		super(app, driver);
+	public SecBloquesMenuDesktopNew(AppEcom app, Channel channel, WebDriver driver) {
+		super(app, channel, driver);
 	}
 	
 	private String getXPathGroupSection(LineaType lineaType, SublineaType sublineaType) {
@@ -69,7 +70,7 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 			id = menu1rstLevel.getId();
 		} else {
 			String labelLinea = getLabelLinea(menu1rstLevel.getLinea(), menu1rstLevel.getSublinea());
-			id = menu1rstLevel.getDataGaLabelMenuSuperiorDesktop() + "_" + labelLinea;
+			id = menu1rstLevel.getDataTestIdMenuSuperiorDesktop() + "_" + labelLinea;
 		}
 		
 		if (id.contains("nuevo_")) {
@@ -158,7 +159,7 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 		for (int i=1; i<=groups.size(); i++) {
 			WebElement group = driver.findElement(By.xpath("(" + xpathGroupSection + ")[" + i + "]"));
 			List<WebElement> listMenusGroup = getMenusGroupAndStore(lineaType, sublineaType, group);
-			listMenus.addAll(getDataListMenus(listMenusGroup));
+			listMenus.addAll(getDataListMenus(listMenusGroup, channel));
 		}
 		return listMenus;
 	}
@@ -188,7 +189,7 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 		SublineaType sublineaMenu = menu1rstLevel.getSublinea();
 		String id = menu1rstLevel.getId();
 		if (id == null) {
-			id = menu1rstLevel.getDataGaLabelMenuSuperiorDesktop();
+			id = menu1rstLevel.getDataTestIdMenuSuperiorDesktop();
 		}
 		String xpathMenuVisible = getXPathMenusSuperiorLinkVisibles(lineaMenu, sublineaMenu, TypeMenuDesktop.Link);
 		if (id.contains("'")) {

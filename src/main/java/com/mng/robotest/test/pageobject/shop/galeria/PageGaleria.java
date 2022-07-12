@@ -696,7 +696,7 @@ public abstract class PageGaleria extends PageObjTM {
 		if (channel==Channel.desktop) {
 			//En el caso de Firefox-Geckodriver el moveToElement (que se acaba realizando mediante el workarround basado en JavaScript) 
 			//nos posiciona en la esquina superior izquierda que queda debajo del menú superior... así que tenemos que enviar dicho menú al fondo
-			SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
+			SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, channel, driver);
 			secMenus.secMenuSuperior.secLineas.bringMenuBackground();
 		}
 		

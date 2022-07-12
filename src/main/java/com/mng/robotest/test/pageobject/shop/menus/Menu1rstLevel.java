@@ -2,7 +2,10 @@ package com.mng.robotest.test.pageobject.shop.menus;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
@@ -74,8 +77,8 @@ public final class Menu1rstLevel implements MenuLateralDesktop {
 	}
 	
 	@Override
-	public String getDataGaLabelMenuSuperiorDesktop() {
-		return this.dataMenu.getDataGaLabel();
+	public String getDataTestIdMenuSuperiorDesktop() {
+		return this.dataMenu.getDataTestId();
 	}
 	
 	@Override
@@ -103,7 +106,7 @@ public final class Menu1rstLevel implements MenuLateralDesktop {
 	}
 
 	public void setDataGaLabel(String dataGaLabel) {
-		this.dataMenu.setDataGaLabel(dataGaLabel);
+		this.dataMenu.setDataTestId(dataGaLabel);
 	}
 	
 	public void addMenu2onLevel(Menu2onLevel menuToAdd) {
@@ -129,5 +132,39 @@ public final class Menu1rstLevel implements MenuLateralDesktop {
 	@Override
 	public String toString() {
 		return (key.toString());
+	}
+	
+	@Override
+	public GroupMenu getGroup(Channel channel) {
+		if (channel==Channel.desktop) {
+			getGroupDesktop();
+		}
+		return getGroupMobile();
+	}
+	
+	private GroupMenu getGroupMobile() {
+		String href = dataMenu.getHref();
+		if (isCampaignMobile(href)) {
+			return GroupMenu.Campaigns;
+		}
+		return GroupMenu.Articles;
+	}
+	
+	private boolean isCampaignMobile(String href) {
+		return href.contains("/edits/");
+	}
+	
+	private GroupMenu getGroupDesktop() {
+		String dataTestIdMenuSuperior = getDataTestIdMenuSuperiorDesktop();
+		if (isCampaignDesktop(dataTestIdMenuSuperior)) {
+			return GroupMenu.Campaigns;
+		}
+		return GroupMenu.Articles;
+	}
+	
+	static boolean isCampaignDesktop(String dataTestId) {
+		Pattern pattern = Pattern.compile("header\\.section\\.link\\.CAT.*");
+		Matcher matcher = pattern.matcher(dataTestId);
+		return matcher.matches();
 	}
 }

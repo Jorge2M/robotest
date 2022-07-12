@@ -66,10 +66,10 @@ public class SecMenuLateralDevice extends PageObjTM {
 		String xpath2oLevelMenuLink = getXPathLinksMenus(menu1rstLevel.getSublinea());
 		switch (typeLocator) {
 		case dataGaLabelPortion:
-			return xpath2oLevelMenuLink.replace("@href", "@data-label[contains(.,'" + menu1rstLevel.getDataGaLabelMenuSuperiorDesktop().toLowerCase() + "')]");			
+			return xpath2oLevelMenuLink.replace("@href", "@data-label[contains(.,'" + menu1rstLevel.getDataTestIdMenuSuperiorDesktop().toLowerCase() + "')]");			
 		case hrefPortion:
 		default:
-			return xpath2oLevelMenuLink.replace("@href", "@href[contains(.,'" + menu1rstLevel.getDataGaLabelMenuSuperiorDesktop().toLowerCase() + "')]");
+			return xpath2oLevelMenuLink.replace("@href", "@href[contains(.,'" + menu1rstLevel.getDataTestIdMenuSuperiorDesktop().toLowerCase() + "')]");
 		}
 	}
 
@@ -96,10 +96,9 @@ public class SecMenuLateralDevice extends PageObjTM {
 		List<DataScreenMenu> listDataMenus = new ArrayList<>();
 		List<WebElement> listMenus = getListMenusAfterSelectLinea(linea, sublineaType);
 		for (int i=0; i<listMenus.size(); i++) {
-			DataScreenMenu dataMenu = DataScreenMenu.getNew();
-			dataMenu.setDataGaLabel(listMenus.get(i).getAttribute("data-label"));
-			if (dataMenu.isDataGaLabelValid()) {
-				dataMenu.setLabel(listMenus.get(i).getText().replace("New!", "").trim());
+			DataScreenMenu dataMenu = DataScreenMenu.from(listMenus.get(i), channel);
+			dataMenu.setDataTestId(listMenus.get(i).getAttribute("data-label"));
+			if (dataMenu.isDataTestIdValid()) {
 				listDataMenus.add(dataMenu);
 			}
 		}

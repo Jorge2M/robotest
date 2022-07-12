@@ -150,10 +150,10 @@ public class PageLanding extends PageObjTM {
 //					 "//*[@class='celda'])")).check());
 	}
 	
-	public boolean isSomeElementVisibleInPage(List<Element> elementsCanBeContained, AppEcom app, int maxSeconds) 
+	public boolean isSomeElementVisibleInPage(List<Element> elementsCanBeContained, AppEcom app, Channel channel, int maxSeconds) 
 	throws Exception {
 		for (int i=0; i<maxSeconds; i++) {
-			if (isSomeElementVisibleInPage(elementsCanBeContained, app)) {
+			if (isSomeElementVisibleInPage(elementsCanBeContained, app, channel)) {
 				return true;
 			}
 			PageObjTM.waitMillis(1000);
@@ -161,13 +161,13 @@ public class PageLanding extends PageObjTM {
 		return false;
 	}
 		
-	private boolean isSomeElementVisibleInPage(List<Element> elementsCanBeContained, AppEcom app) 
+	private boolean isSomeElementVisibleInPage(List<Element> elementsCanBeContained, AppEcom app, Channel channel) 
 	throws Exception {
 		for (Element element : elementsCanBeContained) {
 			boolean elementContained = false;
 			switch (element) {
 			case article:
-				PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
+				PageGaleria pageGaleria = PageGaleria.getNew(channel, app, driver);
 				elementContained = pageGaleria.isVisibleArticleUntil(1, 3);
 				break;
 			case campaign:

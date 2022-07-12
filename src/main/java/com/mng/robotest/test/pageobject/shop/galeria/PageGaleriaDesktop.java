@@ -114,7 +114,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	
 	@Override
 	public void hideMenus() {
-		SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
+		SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, channel, driver);
 		secMenus.hideMenus();
 	}
 	
@@ -772,7 +772,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(channel, app, driver);
 		secFiltros.makeFilters(Visibility.Invisible);
 		
-		SecLineasMenuDesktop secLineasMenuDesktop = SecLineasMenuDesktop.factory(app, driver);
+		SecLineasMenuDesktop secLineasMenuDesktop = SecLineasMenuDesktop.factory(app, channel, driver);
 		secLineasMenuDesktop.bringMenuBackground();
 		
 		hearthIcon.click();

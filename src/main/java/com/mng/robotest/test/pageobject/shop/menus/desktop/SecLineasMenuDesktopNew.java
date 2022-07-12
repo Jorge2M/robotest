@@ -23,8 +23,8 @@ public class SecLineasMenuDesktopNew extends SecLineasMenuDesktop {
 	private static final String TagIdSublinea = "@SublineaId";
 	private static final String XPathSublineaWithTag = "//li[@id[contains(.,'" + TagIdSublinea+ "')] and @data-testid[contains(.,'section')]]";
 	
-	public SecLineasMenuDesktopNew(AppEcom app, WebDriver driver) {
-		super(app, driver);
+	public SecLineasMenuDesktopNew(AppEcom app, Channel channel, WebDriver driver) {
+		super(app, channel, driver);
 	}
 	
 	private String getXPathSublineaLink(SublineaType sublineaType) {

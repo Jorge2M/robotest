@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
@@ -21,18 +22,18 @@ public class SecMenusDesktop extends PageObjTM {
 	//public final SecMenusFiltroCollection secMenusFitroCollection;
 	public final SecMenusFiltroDiscount secMenusFiltroDiscount;
 	
-	private SecMenusDesktop(AppEcom app, WebDriver driver) {
+	private SecMenusDesktop(AppEcom app, Channel channel, WebDriver driver) {
 		super(driver);
 		//TODO normalizar
-		secBloquesMenu = SecBloquesMenuDesktop.factory(app, driver);
-		secMenuSuperior = SecMenuSuperiorDesktop.getNew(app, driver);
+		secBloquesMenu = SecBloquesMenuDesktop.factory(app, channel, driver);
+		secMenuSuperior = SecMenuSuperiorDesktop.getNew(app, channel, driver);
 		secMenusUser = ModalUserSesionShopDesktop.getNew(driver);
 		secMenuLateral = SecMenuLateralDesktop.getNew(app, driver);
 		secMenusFiltroDiscount = SecMenusFiltroDiscount.getNew(driver);
 	}
 	
-	public static SecMenusDesktop getNew(AppEcom app, WebDriver driver) {
-		return (new SecMenusDesktop(app, driver));
+	public static SecMenusDesktop getNew(AppEcom app, Channel channel, WebDriver driver) {
+		return (new SecMenusDesktop(app, channel, driver));
 	}
 	
 	public void hideMenus() {
