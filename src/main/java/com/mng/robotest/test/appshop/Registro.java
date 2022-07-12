@@ -195,7 +195,7 @@ public class Registro implements Serializable {
 		userMenusStpV.selectRegistrate(dCtxSh);
 		String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
 		PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(driver);
-		HashMap<String,String> dataRegistro = 
+		Map<String,String> dataRegistro = 
 				pageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, false, dCtxSh.channel);
 		pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, dCtxSh.appE, dataRegistro);
 		PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dCtxSh.channel, driver);

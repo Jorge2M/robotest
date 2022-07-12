@@ -180,7 +180,7 @@ public class SecMenusWrapperStpV {
 		List<DataScreenMenu> listMenus = secMenusWrap.getListDataScreenMenus(linea, sublineaType);
 		List<DataScreenMenu> listWithoutDuplicates = listMenus.stream()
 				.distinct()
-				.collect(Collectors.toList());
+				.toList();
 		return listWithoutDuplicates;
 	}
 

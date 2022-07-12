@@ -1,6 +1,7 @@
 package com.mng.robotest.test.datastored;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.mng.robotest.test.beans.Pago;
@@ -15,7 +16,7 @@ public class DataCtxPago {
 	boolean userWithStoreC = false;
 	float saldoCta = 0;
 	boolean okCheckChar;
-	HashMap<String, String> datosRegistro = new HashMap<>();
+	Map<String, String> datosRegistro = new HashMap<>();
 	
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
@@ -58,11 +59,11 @@ public class DataCtxPago {
 		this.okCheckChar = okCheckChar;
 	}
 	
-	public HashMap<String, String> getDatosRegistro() {
+	public Map<String, String> getDatosRegistro() {
 		return this.datosRegistro;
 	}
 	
-	public void setDatosRegistro(HashMap<String, String> datosRegistro) {
+	public void setDatosRegistro(Map<String, String> datosRegistro) {
 		this.datosRegistro = datosRegistro;
 	}	
 	

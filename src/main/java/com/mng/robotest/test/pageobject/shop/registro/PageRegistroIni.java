@@ -1,7 +1,7 @@
 package com.mng.robotest.test.pageobject.shop.registro;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
@@ -150,7 +150,7 @@ public class PageRegistroIni extends PageObjTM {
 		}
 	}
 	
-	public HashMap<String,String> sendDataAccordingCountryToInputs(
+	public Map<String,String> sendDataAccordingCountryToInputs(
 			Pais pais, String emailNonExistent, boolean clickPubli, Channel channel) throws Exception {
 		return (new Page2IdentCheckout(pais, driver)
 				.inputDataPorDefectoSegunPais(emailNonExistent, false, clickPubli, channel));

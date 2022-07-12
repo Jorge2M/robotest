@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.openqa.selenium.WebDriver;
@@ -166,7 +167,7 @@ public class CheckoutFlow {
 			Page1IdentCheckoutStpV.secSoyNuevo.inputEmailAndContinue(emailCheckout, dCtxPago.getFTCkout().emailExist, dCtxSh.appE, dCtxSh.userRegistered, dCtxSh.pais, dCtxSh.channel, driver);
 		}
 		
-		HashMap<String, String> datosRegistro;
+		Map<String, String> datosRegistro;
 		datosRegistro = page2IdentCheckoutStpV.inputDataPorDefecto(emailCheckout, validaCharNoLatinos);
 		
 		dCtxPago.setDatosRegistro(datosRegistro);

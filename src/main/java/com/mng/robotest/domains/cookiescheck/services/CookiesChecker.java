@@ -32,8 +32,8 @@ public class CookiesChecker {
 	List<org.openqa.selenium.Cookie> getNotAllowedCookies(
 			Set<org.openqa.selenium.Cookie> pageCookies) {
 		return pageCookies.stream()
-		        .filter(s -> notAllowed(s))
-		        .collect(Collectors.toList());
+		        .filter(this::notAllowed)
+		        .toList();
 	}
 	
 	private boolean notAllowed(org.openqa.selenium.Cookie cookie) {

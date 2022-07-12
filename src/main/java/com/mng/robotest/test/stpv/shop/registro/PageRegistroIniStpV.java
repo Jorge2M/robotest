@@ -54,9 +54,9 @@ public class PageRegistroIniStpV {
 			"  - El resto de datos específicos para el país \"#{pais.getNombre_pais()}\"", 
 		expected=
 			"No aparece ningún mensaje de dato incorrecto")
-	public HashMap<String,String> sendDataAccordingCountryToInputs(
+	public Map<String,String> sendDataAccordingCountryToInputs(
 			Pais pais, String emailNonExistent, boolean clickPubli, Channel channel) throws Exception {
-		HashMap<String,String> dataSended = new HashMap<>();
+		Map<String,String> dataSended = new HashMap<>();
 		dataSended = pageRegistroIni.sendDataAccordingCountryToInputs(pais, emailNonExistent, clickPubli, channel);
 		validateNotAreErrorMessageInCorrectFields();
 		return dataSended;

@@ -7,7 +7,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -176,7 +175,7 @@ public class UtilsMangoTest {
 	/**
 	 * Funciona que coge los datos de una hashmap y los formatea para mostrarlos en el report HTML
 	 */
-	public static String listaCamposHTML(final HashMap<String, String> datosRegistro) {
+	public static String listaCamposHTML(final Map<String, String> datosRegistro) {
 		String resultado = "";
 		Iterator<Map.Entry<String, String>> it = datosRegistro.entrySet().iterator();
 		while (it.hasNext()) {

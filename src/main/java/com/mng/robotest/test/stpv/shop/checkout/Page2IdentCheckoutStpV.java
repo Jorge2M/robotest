@@ -2,6 +2,7 @@ package com.mng.robotest.test.stpv.shop.checkout;
 
 import org.openqa.selenium.WebDriver;
 import java.util.HashMap;
+import java.util.Map;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -58,9 +59,9 @@ public class Page2IdentCheckoutStpV {
 		description="Introducimos los datos del cliente según el país", 
 		expected="Se hace clickable el botón \"Continuar\"",
 		saveImagePage=SaveWhen.Always)
-	public HashMap<String, String> inputDataPorDefecto(String emailUsr, boolean inputDireccCharNoLatinos) 
+	public Map<String, String> inputDataPorDefecto(String emailUsr, boolean inputDireccCharNoLatinos) 
 			throws Exception {
-		HashMap<String, String> datosRegistro = 
+		Map<String, String> datosRegistro = 
 			page2IdentCheckout.inputDataPorDefectoSegunPais(emailUsr, inputDireccCharNoLatinos, false, channel);
 		
 		TestMaker.getCurrentStepInExecution().addDescriptionText(". Utilizando los datos: "+ UtilsMangoTest.listaCamposHTML(datosRegistro)); 

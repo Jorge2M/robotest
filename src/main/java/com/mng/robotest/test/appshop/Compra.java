@@ -45,8 +45,9 @@ import com.mng.robotest.test.utils.UtilsTest;
 import static com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow.BuilderCheckout;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.openqa.selenium.WebDriver;
 
 
@@ -345,7 +346,7 @@ public class Compra {
 					
 				//Ejecutamos la consulta de Mis datos comprobando que son coherentes con los utilizados en el registro
 				PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
-				HashMap<String,String> datosRegistro = dCtxPago.getDatosRegistro();
+				Map<String,String> datosRegistro = dCtxPago.getDatosRegistro();
 				datosRegistro.put("cfEmail", usrEmail);
 				datosRegistro.put("cfPass", password);
 				datosRegistro.put("", "Barcelona");

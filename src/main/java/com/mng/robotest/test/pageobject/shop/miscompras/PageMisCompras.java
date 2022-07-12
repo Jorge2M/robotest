@@ -53,14 +53,14 @@ public class PageMisCompras extends PageObjTM {
 		waitMillis(1000);
 		return getTicketsPage().stream()
 				.map(item -> getTicket(item))
-				.collect(Collectors.toList());
+				.toList();
 	}
 	
 	public List<Ticket> getTickets(TypeTicket typeCompra) {
 		if (listTickets==null) {
 			listTickets = getTickets().stream()
 				.filter(ticket -> ticket.getType()==typeCompra)
-				.collect(Collectors.toList());
+				.toList();
 		}
 		return listTickets;
 	}
