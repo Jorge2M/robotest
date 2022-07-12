@@ -224,7 +224,7 @@ public class SecModalPersonalizacionStpV extends PageObjTM {
 		click(getBotonSiguienteVisible()).waitLoadPage(2).exec();
 		if (dCtxSh.channel.isDevice()) {
 			SecBolsa secBolsa = SecBolsa.make(dCtxSh, driver);
-			secBolsa.setBolsaToStateIfNotYet(StateBolsa.Open);
+			secBolsa.setBolsaToStateIfNotYet(StateBolsa.OPEN);
 		}
 		validateCustomizationProof(2);
 	}

@@ -89,7 +89,7 @@ public abstract class SecBolsaDesktop extends SecBolsa {
 	}
 	
 	private void setBolsaMobileToState(StateBolsa stateBolsaExpected) {
-		if (stateBolsaExpected==StateBolsa.Open) {
+		if (stateBolsaExpected==StateBolsa.OPEN) {
 			//SecCabecera secCabecera = SecCabecera.getNew(Channel.desktop, app, driver);
 			SecCabecera secCabecera = SecCabecera.getNew(Channel.mobile, app, driver);
 			secCabecera.clickIconoBolsaWhenDisp(2);

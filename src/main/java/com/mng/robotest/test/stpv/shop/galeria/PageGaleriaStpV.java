@@ -18,13 +18,11 @@ import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.factoryes.NodoStatus;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.jdbc.dao.RebajasPaisDAO;
 import com.mng.robotest.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test.pageobject.shop.ficha.PageFicha.TypeFicha;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterCollection;
@@ -41,7 +39,6 @@ import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeSlid
 import com.mng.robotest.test.pageobject.shop.galeria.SecBannerHeadGallery.TypeLinkInfo;
 import com.mng.robotest.test.pageobject.shop.menus.Menu2onLevel;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusFiltroCollection;
-import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap.GroupMenu;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test.pageobject.utils.DataArticleGalery;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
@@ -713,36 +710,6 @@ public class PageGaleriaStpV {
 	 	
 	 	return validations;
 	}
-   
-	public void validaRebajasJun2018Desktop(
-		boolean salesOnInCountry, boolean isGaleriaSale, Pais pais, IdiomaPais idioma, 
-		LineaType lineaType, GroupMenu menuType) throws Exception {
-		checkIsPageGaleria(driver);
-		if (salesOnInCountry) {
-			checkSalesOn(pais, idioma, lineaType, menuType, isGaleriaSale);
-		} else {
-			checkSalesOff(idioma);
-		}
-	}
-	
-	private void checkSalesOn(Pais pais, IdiomaPais idioma, LineaType lineaType, GroupMenu menuType, boolean isGaleriaSale) 
-	throws Exception {
-		bannerHead.checkBannerHeadSalesOn(pais, idioma);
-		SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(Channel.desktop, AppEcom.shop, driver);
-		if (!isGaleriaSale) {
-			checkFiltrosSalesOnInGalerySale(filtrosCollection);
-		} else {
-			checkFiltrosSaleInGaleryNoSale(filtrosCollection);
-		}	
-		
-		checkArticlesCountryWithSalesOn(pais, lineaType, menuType, isGaleriaSale);
-	}
-	
-	private void checkSalesOff(IdiomaPais idioma) throws Exception {
-		bannerHead.checkBannerHeadSalesOff(idioma);
-		SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(Channel.desktop, AppEcom.shop, driver);
-		checkFiltrosSalesOff(filtrosCollection);
-	}
 	
 	@Validation (
 		description="Estamos en la página de Galería",
@@ -791,47 +758,7 @@ public class PageGaleriaStpV {
 	private boolean checkFiltrosSalesOff(SecMenusFiltroCollection filtrosCollection) {
 		return (!filtrosCollection.isVisibleMenu(FilterCollection.sale)); 
 	}
-   
-	@Validation
-	private ChecksTM checkArticlesCountryWithSalesOn(Pais pais, LineaType lineaType, GroupMenu menuType, boolean isGaleriaSale) 
-	throws Exception {
-	   	ChecksTM validations = ChecksTM.getNew();
-	   	
-		FilterOrdenacion ordenType;
-		RebajasPaisDAO rebajasPaisDAO = new RebajasPaisDAO();
-		List<String> lineasInvertidas = rebajasPaisDAO.getLineasInvertidas(pais.getCodigo_pais(), menuType);
-		boolean temporadaInvertida = (lineasInvertidas!=null && lineasInvertidas.contains(lineaType.toString()));
-		if (!temporadaInvertida || isGaleriaSale) {
-			ordenType = FilterOrdenacion.BloqueTemporadas_3y4_despues_la_5;
-		} else {
-			ordenType = FilterOrdenacion.BloqueTemporada_5_despues_la_3y4;
-		}
-		
-		String ref1rstArticle = pageGaleria.getReferencia(1);
-		int temporada1rstArticle = 0;
-		if ("".compareTo(ref1rstArticle)!=0) {
-			temporada1rstArticle = Integer.valueOf(ref1rstArticle.substring(0,1));
-		}
-		boolean temp1rstArticleOk = ordenType.getTemporadasIniciales().contains(temporada1rstArticle);
-	 	validations.add(
-	 		"<b style=\"color:blue\">Rebajas</b></br>" +
-	 		"El 1er artículo pertenece alguna de las temporadas " + ordenType.getTemporadasIniciales(),
-	 		temp1rstArticleOk, State.Warn);
-	 	
-	 	State stateValidac = State.Info;
-	 	StoreType store = StoreType.Evidences;
-	 	if (!temp1rstArticleOk) {
-		 	stateValidac = State.Warn;
-		 	store = StoreType.None;
-	 	}
-	 	String notInOrder = pageGaleria.getAnyArticleNotInOrder(ordenType);
-	 	validations.add(
-	 		"Los artículos aparecen ordenados por <b>" + ordenType.toString() + "</b>",
-	 		"".compareTo(notInOrder)==0, stateValidac, store);
-	   
-	 	return validations;
-   }
-   
+  
    public void validaArticlesOfTemporadas(List<Integer> listTemporadas, State levelError, StoreType store) {
 	   validaArticlesOfTemporadas(listTemporadas, false, levelError, store);
    }

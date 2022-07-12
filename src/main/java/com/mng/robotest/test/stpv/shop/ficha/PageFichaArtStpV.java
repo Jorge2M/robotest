@@ -174,7 +174,7 @@ public class PageFichaArtStpV {
 		description="Seleccionar la talla con código <b>#{talla.name()}</b> (previamente, si está abierta, cerramos la capa de la bolsa)", 
 		expected="Se cambia la talla correctamente")
 	public void selectTalla(Talla talla) {
-		secBolsa.setBolsaToStateIfNotYet(StateBolsa.Closed);
+		secBolsa.setBolsaToStateIfNotYet(StateBolsa.CLOSED);
 		pageFicha.selectTallaByValue(talla);
 		checkTallaSelected(talla, 2);
 	}

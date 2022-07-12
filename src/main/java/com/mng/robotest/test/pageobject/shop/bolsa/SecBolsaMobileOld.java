@@ -116,7 +116,7 @@ public class SecBolsaMobileOld extends SecBolsa {
 	}
 	
 	private void setBolsaToState(StateBolsa stateBolsaExpected) {
-		if (stateBolsaExpected==StateBolsa.Open) {
+		if (stateBolsaExpected==StateBolsa.OPEN) {
 			SecCabecera secCabecera = SecCabecera.getNew(channel, app, driver);
 			secCabecera.clickIconoBolsaWhenDisp(2);
 		} else {

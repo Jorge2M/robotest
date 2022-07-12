@@ -22,7 +22,7 @@ import com.mng.robotest.test.utils.ImporteScreen;
 
 public abstract class SecBolsa extends PageObjTM {
 
-	public enum StateBolsa {Open, Closed};
+	public enum StateBolsa { OPEN, CLOSED };
 	
 	final Channel channel;
 	final AppEcom app;
@@ -36,29 +36,17 @@ public abstract class SecBolsa extends PageObjTM {
 	public abstract void setBolsaToStateIfNotYet(StateBolsa stateBolsaExpected);
 	public abstract LineasArtBolsa getLineasArtBolsa();
 	
-	private static final String XPathAspa = "//span[@class[contains(.,'outline-close')]]";
+	private static final String XPATH_ASPA = "//span[@class[contains(.,'outline-close')]]";
 
 	public static SecBolsa make(DataCtxShop dCtxShop, WebDriver driver) {
 		return make(dCtxShop.channel, dCtxShop.appE, dCtxShop.pais, driver);
 	}
 	
 	public static SecBolsa make(Channel channel, AppEcom app, Pais pais, WebDriver driver) {
-		//if (app==AppEcom.outlet) {
 		if (app==AppEcom.outlet && channel==Channel.mobile) {
 			return new SecBolsaMobileOld(app, pais, driver);
 		}
-		//return new SecBolsaDesktopOld(channel, app, driver);
-		//}
 		return new SecBolsaNew(channel, app, pais, driver);
-		
-//		if (channel==Channel.mobile) {
-//			return new SecBolsaMobile(app, pais, driver);
-//		}
-//		if (app==AppEcom.outlet) {
-//		//if (app==AppEcom.outlet || channel==Channel.tablet) {
-//			return new SecBolsaDesktopOld(channel, app, driver);
-//		}
-//		return new SecBolsaDesktopNew(channel, app, pais, driver);
 	}
 	
 	protected SecBolsa(Channel channel, AppEcom app, WebDriver driver) {
@@ -69,20 +57,10 @@ public abstract class SecBolsa extends PageObjTM {
 	
 	public boolean isInStateUntil(StateBolsa stateBolsaExpected, int maxSeconds) {
 		String xpath = getXPathPanelBolsa();
-		switch (stateBolsaExpected) {
-		case Open:
-			if (state(Visible, By.xpath(xpath), driver).wait(maxSeconds).check()) {
-				return true;
-			}
-			break;
-		case Closed:
-			if (state(Invisible, By.xpath(xpath), driver).wait(maxSeconds).check()) {
-				return true;
-			}
-			break;
+		if (stateBolsaExpected==StateBolsa.OPEN) {
+			return state(Visible, By.xpath(xpath), driver).wait(maxSeconds).check();
 		}
-		
-		return false;
+		return state(Invisible, By.xpath(xpath), driver).wait(maxSeconds).check();
 	}
 
 	public boolean isVisibleBotonComprar() {
@@ -136,12 +114,11 @@ public abstract class SecBolsa extends PageObjTM {
 	/**
 	 * @return si el importe total de la bolsa NO coincide con el pasado por parámetro (importe previamente capturado)
 	 */
-	public boolean isNotThisImporteTotalUntil(String importeSubTotalPrevio, int maxSecondsToWait) 
-	throws Exception {
+	public boolean isNotThisImporteTotalUntil(String importeSubTotalPrevio, int maxSeconds) {
 		String xpathImporte = getXPathPrecioSubTotal();
 		try {
 			ExpectedCondition<Boolean> expected = ExpectedConditions.not(ExpectedConditions.textToBePresentInElementLocated(By.xpath(xpathImporte), importeSubTotalPrevio));
-			new WebDriverWait(driver, maxSecondsToWait).until(expected);
+			new WebDriverWait(driver, maxSeconds).until(expected);
 			return true;
 		}
 		catch (Exception e) {
@@ -151,7 +128,7 @@ public abstract class SecBolsa extends PageObjTM {
 
 	@SuppressWarnings("static-access")
 	public void clearArticulos() throws Exception {
-		setBolsaToStateIfNotYet(StateBolsa.Open);
+		setBolsaToStateIfNotYet(StateBolsa.OPEN);
 		int ii = 0;
 		do {
 			int numArticulos = getLineasArtBolsa().getNumLinesArticles();
@@ -162,7 +139,7 @@ public abstract class SecBolsa extends PageObjTM {
 				} catch (Exception e) {
 					if (i==49) {
 						Log4jTM.getLogger().warn(
-							"Problem clearing articles from Bag. " + e.getClass().getName() + ". " + e.getMessage());
+							"Problem clearing articles from Bag. {}. {}", e.getClass().getName(), e.getMessage());
 					}
 				}
 
@@ -172,7 +149,7 @@ public abstract class SecBolsa extends PageObjTM {
 				} 
 				catch (Exception e) {
 					Log4jTM.getLogger().debug(
-						"Problem getting num articles in Bag. " + e.getClass().getName() + ". " + e.getMessage());
+						"Problem getting num articles in Bag. {}. {}" , e.getClass().getName(), e.getMessage());
 					numArticulos = 0;
 				}
 				i += 1;
@@ -181,16 +158,16 @@ public abstract class SecBolsa extends PageObjTM {
 		}
 		while (!numberItemsIsUntil("0", channel, app, 0) && ii<10);
 
-		setBolsaToStateIfNotYet(StateBolsa.Closed);
+		setBolsaToStateIfNotYet(StateBolsa.CLOSED);
 	}
 	
-	public void click1erArticuloBolsa() throws Exception {
+	public void click1erArticuloBolsa() {
 		getLineasArtBolsa().clickArticle(1);
 		waitForPageLoaded(driver);
 	}
 	
 	public void clickAspaMobil() {
-		click(By.xpath(XPathAspa), driver).exec();
+		click(By.xpath(XPATH_ASPA), driver).exec();
 	}
 	
 }

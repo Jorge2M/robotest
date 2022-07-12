@@ -34,7 +34,7 @@ public class ValidatorContentBolsa {
 	@SuppressWarnings("static-access")
 	private void storeArticlesFromScreen() throws Exception {
 		linesArticlesInScreen.clear();
-		secBolsa.setBolsaToStateIfNotYet(StateBolsa.Open);
+		secBolsa.setBolsaToStateIfNotYet(StateBolsa.OPEN);
 		int numArticles = secBolsa.getLineasArtBolsa().getNumLinesArticles();
 		for (int i=1; i<=numArticles; i++) {
 			ArticuloDataBolsaScreen dataArtScreen = secBolsa.getLineasArtBolsa().getArticuloDataByPosicion(i);

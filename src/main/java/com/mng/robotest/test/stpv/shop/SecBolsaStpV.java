@@ -73,7 +73,7 @@ public class SecBolsaStpV {
 		if (channel.isDevice()) {
 			clickAspaForCloseMobil();
 		} else {
-			forceStateBolsaTo(StateBolsa.Closed);
+			forceStateBolsaTo(StateBolsa.CLOSED);
 		}
 	}
 
@@ -89,7 +89,7 @@ public class SecBolsaStpV {
 		description="Desaparece la bolsa (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
 	private boolean checkBolsaDisappears(int maxSeconds) {
-		return (secBolsa.isInStateUntil(StateBolsa.Closed, maxSeconds));
+		return (secBolsa.isInStateUntil(StateBolsa.CLOSED, maxSeconds));
 	}
 
 	/**
@@ -154,7 +154,7 @@ public class SecBolsaStpV {
 
 		if (channel==Channel.desktop) {
 			int maxSecondsToWait = 10;
-			secBolsa.isInStateUntil(StateBolsa.Open,maxSecondsToWait);
+			secBolsa.isInStateUntil(StateBolsa.OPEN,maxSecondsToWait);
 		}
 	}
 
@@ -203,7 +203,7 @@ public class SecBolsaStpV {
 		int maxSeconds = 1;
 	 	validations.add(
 			"Es visible la capa/página correspondiente a la bolsa (la esperamos hasta " + maxSeconds + " segundos)",
-			secBolsa.isInStateUntil(StateBolsa.Open, maxSeconds), State.Defect);
+			secBolsa.isInStateUntil(StateBolsa.OPEN, maxSeconds), State.Defect);
 	 	validations.add(
 			"Aparece el botón \"Comprar\" (lo esperamos hasta " + maxSeconds + " segundos)",
 			secBolsa.isVisibleBotonComprarUntil(maxSeconds), State.Defect);
@@ -331,7 +331,7 @@ public class SecBolsaStpV {
 		description="Lincar con el artículo existente en la bolsa" + " #{articuloClickado.getReferencia()})", 
 		expected="El link al artículo es correcto")
 	public void clickArticuloBolsa(ArticuloScreen articuloClickado) throws Exception {
-		secBolsa.setBolsaToStateIfNotYet(StateBolsa.Open);
+		secBolsa.setBolsaToStateIfNotYet(StateBolsa.OPEN);
 		secBolsa.click1erArticuloBolsa();
 
 		String refArticulo = articuloClickado.getReferencia();

@@ -128,8 +128,8 @@ public class Bolsa {
 		
 		AccesoStpV.oneStep(dCtxSh, dCtxSh.userRegistered, driver);
 		secBolsaStpV.altaArticlosConColores(2, dataBag);
-		secBolsaStpV.forceStateBolsaTo(StateBolsa.Closed);
-		secBolsaStpV.forceStateBolsaTo(StateBolsa.Open); 
+		secBolsaStpV.forceStateBolsaTo(StateBolsa.CLOSED);
+		secBolsaStpV.forceStateBolsaTo(StateBolsa.OPEN); 
 		secBolsaStpV.clear1erArticuloBolsa(dataBag);								
 		secBolsaStpV.altaArticlosConColores(1, dataBag);
 		secBolsaStpV.click1erArticuloBolsa(dataBag);

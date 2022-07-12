@@ -39,7 +39,7 @@ public class PageMercpagoDatosTrjStpV {
 		return (pageMercpagoDatosTrj.isPageUntil(maxSeconds));
 	}	
 	
-	public void inputNumTarjeta(String numTarjeta) throws Exception {
+	public void inputNumTarjeta(String numTarjeta) {
 		switch (channel) {
 		case mobile:
 			inputNumTarjetaMobil(numTarjeta);
@@ -54,7 +54,7 @@ public class PageMercpagoDatosTrjStpV {
 	@Step (
 		description="Introducir el número de tarjeta #{numTarjeta}", 
 		expected="El \"Wrapper\" de la tarjeta se hace visible con los datos de la Visa")
-	public void inputNumTarjetaMobil(String numTarjeta) throws Exception {
+	public void inputNumTarjetaMobil(String numTarjeta) {
 		pageMercpagoDatosTrj.sendNumTarj(numTarjeta);
 		isWrapperTarjetaVisibleVisaDataMobil(2);
 	}
@@ -69,7 +69,7 @@ public class PageMercpagoDatosTrjStpV {
 	@Step (
 		description="Introducir el número de tarjeta #{numTarjeta})", 
 		expected="Aparece el icono de Visa a la derecha de la tarjeta introducida")
-	public void inputNumTarjetaDesktop(String numTarjeta) throws Exception {
+	public void inputNumTarjetaDesktop(String numTarjeta) {
 		pageMercpagoDatosTrj.sendNumTarj(numTarjeta);
 		isVisaIconAtRightTrjDesktop(2);
 	}
@@ -81,12 +81,12 @@ public class PageMercpagoDatosTrjStpV {
 		return (((PageMercpagoDatosTrjDesktop)pageMercpagoDatosTrj).isVisibleVisaIconUntil(maxSeconds));
 	}
 	
-	public void inputDataAndPay(InputData inputData) throws Exception {
+	public void inputDataAndPay(InputData inputData) {
 		inputData(inputData);
 		clickButtonForPay(false);
 	}
 	
-	public void inputCvcAndPay(String cvc) throws Exception {
+	public void inputCvcAndPay(String cvc) {
 		inputCvc(cvc);
 		clickButtonForPay(true);
 	}
@@ -98,7 +98,7 @@ public class PageMercpagoDatosTrjStpV {
 		pageMercpagoDatosTrj.sendCvc(cvc);
 	}
 	
-	private void inputData(InputData inputData) throws Exception {
+	private void inputData(InputData inputData) {
 		switch (channel) {
 		case mobile:
 			inputDataMobil(inputData);
@@ -110,7 +110,7 @@ public class PageMercpagoDatosTrjStpV {
 		}
 	}
 	
-	private void clickButtonForPay(boolean afterTrjGuardada) throws Exception {
+	private void clickButtonForPay(boolean afterTrjGuardada) {
 		switch (channel) {
 		case mobile:
 			clickButtonForPayMobil(afterTrjGuardada);
@@ -130,7 +130,7 @@ public class PageMercpagoDatosTrjStpV {
 			 "y confirmar", 
 		expected=
 			"Aparece la página de resultado")
-	public void inputDataMobil(InputData inputData) throws Exception {
+	public void inputDataMobil(InputData inputData) {
 		String fechaVencimiento = inputData.getMesVencimiento() + "/" + inputData.getAnyVencimiento();		
 		pageMercpagoDatosTrj.sendCaducidadTarj(fechaVencimiento);
 		pageMercpagoDatosTrj.sendCvc(inputData.codigoSeguridad);			
@@ -165,8 +165,7 @@ public class PageMercpagoDatosTrjStpV {
 			"y confirmar", 
 		expected=
 			"Los campos se informan correctamente")
-	public void inputDataDesktop(InputData inputData) 
-	throws Exception {
+	public void inputDataDesktop(InputData inputData) {
 		String fechaVencimiento = inputData.mesVencimiento + "/" + inputData.anyVencimiento;	
 		PageMercpagoDatosTrjDesktop pageDesktop = (PageMercpagoDatosTrjDesktop)pageMercpagoDatosTrj;
 		pageDesktop.sendCaducidadTarj(fechaVencimiento);

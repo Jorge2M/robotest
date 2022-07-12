@@ -68,10 +68,6 @@ public class BannerHeadGalleryStpV {
 		pageGaleriaParent.validaArtEnContenido(3);
 	}
 
-	public void checkBannerHeadSalesOn(Pais pais, IdiomaPais idioma) {
-		checkBannerSalesHead(TypeGalery.Sales, pais, idioma);
-	}
-
 	@SuppressWarnings("static-access")
 	@Validation
 	public ChecksTM checkBannerSalesHead(TypeGalery typeGalery, Pais pais, IdiomaPais idioma) {

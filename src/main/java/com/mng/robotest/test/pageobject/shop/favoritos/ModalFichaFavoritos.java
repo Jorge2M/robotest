@@ -116,7 +116,7 @@ public class ModalFichaFavoritos {
 		int maxSecondsToWait = 2;
 		
 		SecBolsa secBolsa = SecBolsa.make(channel, app, pais, driver);
-		secBolsa.isInStateUntil(StateBolsa.Open, maxSecondsToWait);
+		secBolsa.isInStateUntil(StateBolsa.OPEN, maxSecondsToWait);
 	}
 	
 	public String selectTalla(String refProducto, int posicionTalla) {
