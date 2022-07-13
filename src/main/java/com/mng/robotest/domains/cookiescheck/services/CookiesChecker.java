@@ -33,7 +33,7 @@ public class CookiesChecker {
 			Set<org.openqa.selenium.Cookie> pageCookies) {
 		return pageCookies.stream()
 		        .filter(this::notAllowed)
-		        .toList();
+		        .collect(Collectors.toList());
 	}
 	
 	private boolean notAllowed(org.openqa.selenium.Cookie cookie) {

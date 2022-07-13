@@ -58,6 +58,6 @@ public class ProductList {
 				.map(s -> s.getGarments())
 				.collect(Collectors.toList()).stream()
 				.flatMap(Collection::stream)
-				.toList();
+				.collect(Collectors.toList()); 
 	}
 }

@@ -85,7 +85,12 @@ public class FichaProducto {
 				FilterType.ManyColors); 
 		Optional<GarmentCatalog> articleNoOnlineWithColors = getterProducts.getOneFiltered(filterNoOnlineWithColors);
 		if (!articleNoOnlineWithColors.isPresent()) {
-			List<String> filtersLabels = filterNoOnlineWithColors.stream().map(Object::toString).toList();
+			List<String> filtersLabels = 
+					filterNoOnlineWithColors
+						.stream()
+						.map(Object::toString)
+						.collect(Collectors.toList());
+			
 			throw new NotFoundException("Not found article with filters " + String.join(",", filtersLabels));
 		}
 		

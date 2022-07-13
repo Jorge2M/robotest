@@ -47,7 +47,7 @@ public class PagoGetter {
 		List<String> listSortedAndWithoutDuplicates = listLabels.stream()
 			.distinct()
 			.sorted()
-			.toList();
+			.collect(Collectors.toList());
 		return listSortedAndWithoutDuplicates;
 	}
 	

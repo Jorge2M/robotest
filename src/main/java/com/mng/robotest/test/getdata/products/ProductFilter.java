@@ -34,7 +34,7 @@ public class ProductFilter {
 		return productList.getGroups().stream()
 				.map(g -> g.getGarments())
 				.flatMap(Collection::stream)
-				.toList();
+				.collect(Collectors.toList());
 	}
 	
 	public Optional<GarmentCatalog> getOneFiltered(List<FilterType> filters) throws Exception {
