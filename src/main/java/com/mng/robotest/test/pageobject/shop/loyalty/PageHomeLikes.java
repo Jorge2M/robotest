@@ -15,10 +15,10 @@ public class PageHomeLikes extends PageObjTM {
 	private static final String XPathPoints = XPathWrappPage + "//div[@id='space-header']/div[3]"; 
 	
 	public enum ButtonUseLikes {
-		CompraConDescuento("//button[text()='Comprar con descuento']"),
-		DonarMisLikes("//button[contains(text(), 'Donar Likes')]"),
-		ConseguirPor1200("//button[contains(text(), '1200 Likes')]"),
-		RegalarMisLikes("//button[text()[contains(.,'Regalar')]]");
+		CompraConDescuento("//button/span[text()='Comprar con descuento']"),
+		DonarMisLikes("//button/span[contains(text(), 'Donar Likes')]"),
+		ConseguirPor1200("//button/span[contains(text(), '1200 Likes')]"),
+		RegalarMisLikes("//button/span[text()[contains(.,'Regalar')]]");
 		
 		private By by;
 		private ButtonUseLikes(String xpath) {
