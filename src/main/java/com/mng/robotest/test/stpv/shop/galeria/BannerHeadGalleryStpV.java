@@ -88,7 +88,7 @@ public class BannerHeadGalleryStpV {
 			PageGaleriaDesktop.secBannerHead.isVisibleLinkInfoRebajas(driver), State.Warn);	
 		
 		boolean bannerLincable = PageGaleriaDesktop.secBannerHead.isLinkable(driver);
-		if (typeGalery==TypeGalery.Sales || !pais.isVentaOnline()) {
+		if (typeGalery==TypeGalery.SALES || !pais.isVentaOnline()) {
 		 	validations.add(
 		 		"El banner de cabecera no es lincable",
 		 		!bannerLincable, State.Info, StoreType.None);

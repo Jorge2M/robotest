@@ -26,7 +26,7 @@ public class PageHomeDonateLikes extends PageObjTM {
 		}
 		
 		public By getBy() {
-			return By.xpath("//button[text()[contains(.,'" + numLikes + "')]]");
+			return By.xpath("//button/span[text()[contains(.,'" + numLikes + "')]]");
 		}
 	}
 	

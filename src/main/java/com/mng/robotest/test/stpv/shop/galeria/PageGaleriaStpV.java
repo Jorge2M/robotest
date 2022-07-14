@@ -60,8 +60,8 @@ public class PageGaleriaStpV {
 	public final SecCrossSellingStpV secCrossSellingStpV;
 	public final BannerHeadGalleryStpV bannerHead;
 	
-	public enum TypeGalery {Sales, NoSales}
-	public enum TypeActionFav {Marcar, Desmarcar}
+	public enum TypeGalery { SALES, NO_SALES }
+	public enum TypeActionFav { MARCAR, DESMARCAR }
 	
 	final SecSelectorPreciosStpV secSelectorPreciosStpV;
 	final PageGaleria pageGaleria;
@@ -595,11 +595,11 @@ public class PageGaleriaStpV {
 		List<ArticuloScreen> listAddFav = pageGaleria.clickArticleHearthIcons(posIconsToClick);
 		String estadoFinal = "";
 		switch (actionFav) {
-		case Marcar:
+		case MARCAR:
 			estadoFinal = "Marcados";
 			dataFavoritos.addToLista(listAddFav);
 			break;
-		case Desmarcar:
+		case DESMARCAR:
 			estadoFinal = "Desmarcados";
 			dataFavoritos.removeFromLista(listAddFav);
 			break;

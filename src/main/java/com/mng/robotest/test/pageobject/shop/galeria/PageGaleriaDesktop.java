@@ -564,7 +564,9 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}	
 	
 	public void moveToArticleAndGetObject(int posArticulo) {
-		moveToElement(By.xpath(getXPathLinkArticulo(posArticulo) + "/.."), driver);
+		By byArticle = By.xpath(getXPathLinkArticulo(posArticulo) + "/..");
+		state(State.Visible, byArticle).wait(1).check();
+		moveToElement(byArticle, driver);
 	}
 
 	@Override

@@ -17,7 +17,7 @@ public class PageHomeLikes extends PageObjTM {
 	public enum ButtonUseLikes {
 		CompraConDescuento("//button/span[text()='Comprar con descuento']"),
 		DonarMisLikes("//button/span[contains(text(), 'Donar Likes')]"),
-		ConseguirPor1200("//button/span[contains(text(), '1200 Likes')]"),
+		SaberMas("//button/span[contains(text(), 'Saber más')]"),
 		RegalarMisLikes("//button/span[text()[contains(.,'Regalar')]]");
 		
 		private By by;

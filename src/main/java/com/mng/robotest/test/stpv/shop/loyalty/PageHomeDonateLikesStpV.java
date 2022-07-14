@@ -26,7 +26,7 @@ public class PageHomeDonateLikesStpV {
 	public ChecksTM checkIsPage(int maxSeconds) {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
-			"Aparece la pagina de <b>Donar Likes</b> (esperamos hasta " + maxSeconds + " segundos)",
+			"Aparece la pagina de <b>Donar Likes</b>",
 			pageHomeDonateLikes.checkIsPage(0), State.Defect);
 		
 		checks.add(

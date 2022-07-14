@@ -111,10 +111,10 @@ public class Favoritos implements Serializable {
 		}
 		
 		List<Integer> iconsToMark = Arrays.asList(2, 3, 5);  
-		pageGaleriaStpV.clickArticlesHearthIcons(iconsToMark, TypeActionFav.Marcar, dataFavoritos);
+		pageGaleriaStpV.clickArticlesHearthIcons(iconsToMark, TypeActionFav.MARCAR, dataFavoritos);
 
 		List<Integer> iconsToUnmark = Arrays.asList(3);
-		pageGaleriaStpV.clickArticlesHearthIcons(iconsToUnmark, TypeActionFav.Desmarcar, dataFavoritos);
+		pageGaleriaStpV.clickArticlesHearthIcons(iconsToUnmark, TypeActionFav.DESMARCAR, dataFavoritos);
 
 		secMenusStpV.getMenusUser().selectFavoritos(dataFavoritos);
 		ArticuloScreen artToPlay = dataFavoritos.getArticulo(0);

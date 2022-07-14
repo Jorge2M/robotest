@@ -33,7 +33,7 @@ public class PageHomeLikesStpV {
 			"Aparece la página de <b>Mango likes you</b> (esperamos hasta " + maxSeconds + " segundos)",
 			pageLikes.checkIsPageUntil(4), State.Defect);
 		
-		int maxSecondsButton = 3;
+		int maxSecondsButton = 7;
 		checks.add(
 			"Es visible el botón \"Compra con descuento\" (esperamos hasta " + maxSecondsButton + " segundos)",
 			pageLikes.isVisibleButton(ButtonUseLikes.CompraConDescuento, maxSecondsButton), State.Defect);
@@ -59,15 +59,15 @@ public class PageHomeLikesStpV {
 		expected="Aparece una página para donar mis Likes")
 	public void clickButtonDonarLikes() {
 		pageHomeLikes.clickButton(ButtonUseLikes.DonarMisLikes);
-		PageHomeDonateLikesStpV.getNew(driver).checkIsPage(2);
+		PageHomeDonateLikesStpV.getNew(driver).checkIsPage(5);
 	}
 	
 	@Step(
-		description="Seleccionar el 1er botón \"Conseguir por 1200 Likes\"",
+		description="Seleccionar el 1er botón \"Saber más Likes\"",
 		expected="Aparece una página para conseguir por 1200 Likes")
-	public void clickButtonConseguirPor1200Likes() {
-		pageHomeLikes.clickButton(ButtonUseLikes.ConseguirPor1200);
-		PageHomeConseguirPor1200LikesStpV.getNew(driver).checkIsPage(2);
+	public void clickSaberMas() {
+		pageHomeLikes.clickButton(ButtonUseLikes.SaberMas);
+		PageHomeConseguirPorLikesStpV.getNew(driver).checkIsPage(2);
 	}
 	
 	@Step(

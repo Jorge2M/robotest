@@ -30,7 +30,7 @@ import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow;
 import com.mng.robotest.test.stpv.navigations.shop.GaleriaNavigationsStpV;
 import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.loyalty.PageHomeConseguirPor1200LikesStpV;
+import com.mng.robotest.test.stpv.shop.loyalty.PageHomeConseguirPorLikesStpV;
 import com.mng.robotest.test.stpv.shop.loyalty.PageHomeDonateLikesStpV;
 import com.mng.robotest.test.stpv.shop.loyalty.PageHomeLikesStpV;
 import com.mng.robotest.test.stpv.shop.loyalty.PageRegalarMisLikesStpV;
@@ -181,7 +181,7 @@ public class Loyalty {
 
 	@Test (
 		groups={"Loyalty", "Canal:desktop,mobile_App:shop"},
-		description="Conseguir algo por 1200 likes")
+		description="Conseguir algo por likes")
 	public void LOY003_Exhange_Compra_Entrada() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
@@ -208,9 +208,9 @@ public class Loyalty {
 			loyaltyPointsIni = secMenusUserStpV.clickMenuMangoLikesYou();
 		}
 		
-		PageHomeLikesStpV.getNewInstance(driver).clickButtonConseguirPor1200Likes();
+		PageHomeLikesStpV.getNewInstance(driver).clickSaberMas();
 		if (!isEntornoPro) {
-			PageHomeConseguirPor1200LikesStpV pageHomeConseguirPor1200LikesStpV = PageHomeConseguirPor1200LikesStpV.getNew(driver);
+			PageHomeConseguirPorLikesStpV pageHomeConseguirPor1200LikesStpV = PageHomeConseguirPorLikesStpV.getNew(driver);
 			pageHomeConseguirPor1200LikesStpV.selectConseguirButton();
 			int loyaltyPointsFin = secMenusUserStpV.clickMenuMangoLikesYou();
 			secMenusUserStpV.checkLoyaltyPoints(loyaltyPointsIni, 1200, loyaltyPointsFin);

@@ -475,12 +475,12 @@ public abstract class PageGaleria extends PageObjTM {
 			String XPathIcon = getXPathArticleHearthIcon(posIcon);
 			WebElement hearthIcon = driver.findElement(By.xpath(XPathIcon));
 			switch (typeAction) {
-			case Marcar:
+			case MARCAR:
 				if (getStateHearthIcon(hearthIcon)!=StateFavorito.Marcado) {
 					return false;
 				}
 				break;
-			case Desmarcar:
+			case DESMARCAR:
 				if (getStateHearthIcon(hearthIcon)!=StateFavorito.Desmarcado) {
 					return false;
 				}
