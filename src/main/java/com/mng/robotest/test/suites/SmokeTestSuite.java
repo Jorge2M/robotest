@@ -10,7 +10,7 @@ import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.ErrorStorer;
-import com.mng.robotest.test.appshop.Ayuda;
+import com.mng.robotest.domains.ayuda.tests.Ayuda;
 import com.mng.robotest.test.appshop.Bolsa;
 import com.mng.robotest.test.appshop.Buscador;
 import com.mng.robotest.test.appshop.Compra;

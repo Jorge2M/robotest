@@ -1,4 +1,4 @@
-package com.mng.robotest.test.appshop;
+package com.mng.robotest.domains.votfconsole.tests;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.votfconsole.steps.ConsolaVotfSteps;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.data.PaisShop;
@@ -15,7 +16,6 @@ import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.Menu;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog.Article;
-import com.mng.robotest.test.stpv.votfcons.ConsolaVotfStpV;
 import com.mng.robotest.test.utils.PaisGetter;
 
 public class ConsolaVotf {
@@ -24,30 +24,36 @@ public class ConsolaVotf {
 		groups={"Canal:desktop_App:votf"},
 		description="[PRE] Generar pedido mediante la consola de VOTF")
 	public void VTF001_GenerarPedido() throws Exception {
-		WebDriver driver = TestMaker.getDriverTestCase();
-
-		ConsolaVotfStpV.accesoPagInicial(driver);
-		ConsolaVotfStpV.selectEntornoTestAndCons("Prepro k8s", driver);
 		
-		int numProdsMax = 15;
+		WebDriver driver = TestMaker.getDriverTestCase();
+		ConsolaVotfSteps consolaVotfSteps = new ConsolaVotfSteps(driver);  
+
+		consolaVotfSteps.accesoPagInicial();
+		consolaVotfSteps.selectEntornoTestAndCons("Prepro k8s");
+
+		String idArticle = searchForArticleAvailable(15, consolaVotfSteps, driver);
+		consolaVotfSteps.consultarDispEnvTienda(idArticle);
+		String codigoPedido = consolaVotfSteps.realizarSolicitudTienda(idArticle);
+		String codigoPedidoFull = consolaVotfSteps.obtenerPedidos(codigoPedido);
+		consolaVotfSteps.seleccionarPedido(codigoPedidoFull);
+		consolaVotfSteps.selectPreconfPedido(codigoPedidoFull);
+		consolaVotfSteps.selectConfPedido(codigoPedidoFull);
+	}
+
+	private String searchForArticleAvailable(int numProdsMax, ConsolaVotfSteps consolaVotfSteps, WebDriver driver) 
+			throws Exception {
 		List<Article> listArticles = getArticlesAvailable(numProdsMax, driver);
 		String idArticle = listArticles.get(0).getArticleId();
-		ConsolaVotfStpV.inputArticleAndTiendaDisp(idArticle, "00011459", driver);
-		ConsolaVotfStpV.consultarTiposEnvio(driver);
+		consolaVotfSteps.inputArticleAndTiendaDisp(idArticle, "00011459");
+		consolaVotfSteps.consultarTiposEnvio();
+		
 		for (int i=0; i<numProdsMax; i++) {
-			//Iteramos hasta que damos con un artículo que existe en la tienda
 			idArticle = listArticles.get(i).getArticleId();
-			if (ConsolaVotfStpV.consultarDispEnvDomic(idArticle, driver)) {
+			if (consolaVotfSteps.consultarDispEnvDomic(idArticle)) {
 				break;
 			}
 		}
-		
-		ConsolaVotfStpV.consultarDispEnvTienda(idArticle, driver);
-		String codigoPedido = ConsolaVotfStpV.realizarSolicitudTienda(idArticle, driver);
-		String codigoPedidoFull = ConsolaVotfStpV.obtenerPedidos(codigoPedido, driver);
-		ConsolaVotfStpV.seleccionarPedido(codigoPedidoFull, driver);
-		ConsolaVotfStpV.selectPreconfPedido(codigoPedidoFull, driver);
-		ConsolaVotfStpV.selectConfPedido(codigoPedidoFull, driver);
+		return idArticle;
 	}
 
 	private List<Article> getArticlesAvailable(int numProductsMax, WebDriver driver) throws Exception {
@@ -58,7 +64,6 @@ public class ConsolaVotf {
 				numProducts(numProductsMax).
 				pagina(1).
 				build();
-		
 		
 		List<Article> listArticles = new ArrayList<>();
 		for (GarmentCatalog garment : getterProducts.getAll()) {

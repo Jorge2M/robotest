@@ -13,7 +13,6 @@ public class DataCtxShop implements Cloneable, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	//public String urlAcceso = "";
 	public AppEcom appE = AppEcom.shop;
 	public Channel channel = Channel.desktop;
 	public Pais pais = null;
@@ -25,20 +24,19 @@ public class DataCtxShop implements Cloneable, Serializable {
 	
 	public DataCtxShop() { }
 	
-	public DataCtxShop(AppEcom appEI, Channel channelI, Pais paisI/*, String urlAcceso*/) {
+	public DataCtxShop(AppEcom appEI, Channel channelI, Pais paisI) {
 		this.appE = appEI;
 		this.channel = channelI;
 		this.pais = paisI;
-		//this.urlAcceso = urlAcceso;
 	}
 	
-	public DataCtxShop(AppEcom appEI, Channel channelI, Pais paisI, IdiomaPais idiomaI/*, String urlAcceso*/) {
-		this(appEI, channelI, paisI/*, urlAcceso*/);
+	public DataCtxShop(AppEcom appEI, Channel channelI, Pais paisI, IdiomaPais idiomaI) {
+		this(appEI, channelI, paisI);
 		this.idioma = idiomaI;
 	}
 	
-	public DataCtxShop(AppEcom appEI, Channel channelI, Pais paisI, IdiomaPais idiomaI, ValePais vale/*, String urlAcceso*/) {
-		this(appEI, channelI, paisI, idiomaI/*, urlAcceso*/);
+	public DataCtxShop(AppEcom appEI, Channel channelI, Pais paisI, IdiomaPais idiomaI, ValePais vale) {
+		this(appEI, channelI, paisI, idiomaI);
 		this.vale = vale;
 	}
 	
@@ -47,7 +45,6 @@ public class DataCtxShop implements Cloneable, Serializable {
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.appE = this.appE;
 		dCtxSh.channel = this.channel;
-		//dCtxSh.urlAcceso = this.urlAcceso;
 		dCtxSh.pais = this.pais;
 		dCtxSh.idioma = this.idioma;
 		dCtxSh.userRegistered = this.userRegistered;
@@ -86,13 +83,5 @@ public class DataCtxShop implements Cloneable, Serializable {
 	public String getPasswordUser() {
 		return this.passwordUser;
 	}
-	
-//	public String getUrlAcceso() {
-//		return this.urlAcceso;
-//	}
-//	public String getDnsUrlAcceso() throws URISyntaxException {
-//		URI uri = new URI(getUrlAcceso());
-//		return (uri.getScheme() + "://" + uri.getHost());
-//	}
 }
 
