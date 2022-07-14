@@ -1,4 +1,4 @@
-package com.mng.robotest.test.stpv.votfcons;
+package com.mng.robotest.domains.votfconsole.utils;
 
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
