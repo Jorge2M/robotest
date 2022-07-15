@@ -6,8 +6,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.mng.robotest.test.appshop.Loyalty.UserTest;
-import com.mng.robotest.test.getdata.loyaltypoints.data.ResultAddPoints;
+import com.mng.robotest.domains.loyalty.getdata.ClientApiLoyaltyPointsDev;
+import com.mng.robotest.domains.loyalty.getdata.data.ResultAddPoints;
+import com.mng.robotest.domains.loyalty.tests.Loy002;
+
 
 public class ClientApiLoyaltyPointsDevIT {
 
@@ -23,7 +25,7 @@ public class ClientApiLoyaltyPointsDevIT {
 	@Test
 	public void addLoyaltyPoints() throws Exception {
 		ClientApiLoyaltyPointsDev client = new ClientApiLoyaltyPointsDev();
-		ResultAddPoints result = client.addLoyaltyPoints(UserTest.LOY002, 100);
+		ResultAddPoints result = client.addLoyaltyPoints(Loy002.USER, 100);
 		assertTrue("success".compareTo(result.getStatus())==0);
 	}
 }

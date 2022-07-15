@@ -7,13 +7,13 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 
-public class PageAyuda extends PageObjTM {
+public class PagesAyuda extends PageObjTM {
 	
 	private static final String TAG = "@TAG";
 	private static final String XPATH_ICON_WITH_TAG = "//*[@data-testid='link-list-grid-item-icon']/..//*[text()='" + TAG + "']";
 	private static final String XPATH_QUESTION_WITH_TAG = "//p[@class[contains(.,'text-body')] and text()='" + TAG + "']";
 
-	public PageAyuda(WebDriver driver) {
+	public PagesAyuda(WebDriver driver) {
 		super(driver);
 	}
 	

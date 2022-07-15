@@ -1,24 +1,20 @@
-package com.mng.robotest.test.stpv.shop.loyalty;
+package com.mng.robotest.domains.loyalty.steps;
 
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
-import com.mng.robotest.test.pageobject.shop.loyalty.PageRegalarMisLikes;
+import com.mng.robotest.domains.loyalty.pageobjects.PageRegalarMisLikes;
 
-public class PageRegalarMisLikesStpV {
+public class PageRegalarMisLikesSteps {
 
 	final WebDriver driver;
 	final PageRegalarMisLikes pageRegalarMisLikes;
 	
-	private PageRegalarMisLikesStpV(WebDriver driver) {
+	public PageRegalarMisLikesSteps(WebDriver driver) {
 		this.driver = driver;
 		this.pageRegalarMisLikes = new PageRegalarMisLikes(driver);
-	}
-	
-	public static PageRegalarMisLikesStpV getNew(WebDriver driver) {
-		return new PageRegalarMisLikesStpV(driver);
 	}
 
 	@Validation (
@@ -47,11 +43,11 @@ public class PageRegalarMisLikesStpV {
 	@Step (
 		description="Introducir <b>#{numLikesToRegalar}</b> Likes para regalar y pulsar \"Enviar regalo\"",
 		expected="Aparece la página de resultado Ok")
-	public PageResultadoRegaloLikesStpV inputNumLikesAndClickEnviarRegalo(int numLikesToRegalar) {
+	public PageResultadoRegaloLikesSteps inputNumLikesAndClickEnviarRegalo(int numLikesToRegalar) {
 		pageRegalarMisLikes.inputLikesToRegalar(numLikesToRegalar);
 		pageRegalarMisLikes.clickEnviarRegalo();
 		
-		PageResultadoRegaloLikesStpV pageResult = new PageResultadoRegaloLikesStpV(driver);
+		PageResultadoRegaloLikesSteps pageResult = new PageResultadoRegaloLikesSteps(driver);
 		pageResult.checkIsEnvioLikesOk(3);
 		return pageResult;
 	}

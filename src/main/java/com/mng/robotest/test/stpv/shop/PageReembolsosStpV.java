@@ -11,13 +11,9 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.PageReembolsos;
 import com.mng.robotest.test.pageobject.shop.PageReembolsos.TypeReembolso;
 import com.mng.robotest.test.pageobject.shop.micuenta.PageMiCuenta;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusUserStpV;
+import com.mng.robotest.test.stpv.shop.menus.SecMenusUserSteps;
 
-/**
- * Clase que engloba los pasos/validaciones relacionados con la página de configuración de los Reembolsos
- * @author jorge.munoz
- *
- */
+
 public class PageReembolsosStpV {
 
 	private PageReembolsosStpV() {
@@ -29,7 +25,7 @@ public class PageReembolsosStpV {
 	 */
 	public static void gotoRefundsFromMenu(
 			boolean paisConSaldoCta, AppEcom app, Channel channel, WebDriver driver) {
-		SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
+		SecMenusUserSteps userMenusStpV = SecMenusUserSteps.getNew(channel, app, driver);
 		userMenusStpV.clickMenuMiCuenta();
 		selectReembolsos(paisConSaldoCta, driver);
 	}

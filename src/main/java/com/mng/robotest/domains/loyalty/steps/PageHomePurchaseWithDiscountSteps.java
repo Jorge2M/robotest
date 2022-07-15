@@ -1,21 +1,18 @@
-package com.mng.robotest.test.stpv.shop.loyalty;
+package com.mng.robotest.domains.loyalty.steps;
 
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.test.pageobject.shop.loyalty.PageHomePurchaseWithDiscount;
+import com.mng.robotest.domains.loyalty.pageobjects.PageHomePurchaseWithDiscount;
 
-public class PageHomePurchaseWithDiscountStpV {
+public class PageHomePurchaseWithDiscountSteps {
 
 	private final PageHomePurchaseWithDiscount pageHomePurchaseWithDiscount;
 	
-	private PageHomePurchaseWithDiscountStpV(WebDriver driver) {
-		pageHomePurchaseWithDiscount = PageHomePurchaseWithDiscount.getNewInstance(driver);
-	}
-	public static PageHomePurchaseWithDiscountStpV getNew(WebDriver driver) {
-		return new PageHomePurchaseWithDiscountStpV(driver);
+	public PageHomePurchaseWithDiscountSteps(WebDriver driver) {
+		pageHomePurchaseWithDiscount = new PageHomePurchaseWithDiscount(driver);
 	}
 	
 	@Validation

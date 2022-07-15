@@ -18,7 +18,7 @@ import com.mng.robotest.test.pageobject.shop.micuenta.PageSuscripciones.NewsLett
 import com.mng.robotest.test.pageobject.shop.miscompras.PageMisCompras.TypeTicket;
 import com.mng.robotest.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test.stpv.shop.PagePrehomeStpV;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusUserStpV;
+import com.mng.robotest.test.stpv.shop.menus.SecMenusUserSteps;
 import com.mng.robotest.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test.stpv.shop.micuenta.PageDevolucionesStpV;
 import com.mng.robotest.test.stpv.shop.micuenta.PageMiCuentaStpV;
@@ -138,7 +138,7 @@ public class MiCuenta implements Serializable {
 		//Test Compras en Tienda
 		dCtxSh.userConnected = userWithStorePurchases;
 		dCtxSh.passwordUser = passUserWithStorePurchases;
-		SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		SecMenusUserSteps userMenusStpV = SecMenusUserSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
 		userMenusStpV.logoff();
 		
 		//Existe un problema en por el cual si te vuelves a loginar manteniendo el navegador
