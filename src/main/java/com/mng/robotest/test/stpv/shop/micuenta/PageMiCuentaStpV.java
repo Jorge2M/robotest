@@ -13,7 +13,7 @@ import com.mng.robotest.test.pageobject.shop.micuenta.PageInfoNewMisComprasMovil
 import com.mng.robotest.test.pageobject.shop.micuenta.PageMiCuenta;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusUserStpV;
+import com.mng.robotest.test.stpv.shop.menus.SecMenusUserSteps;
 import com.mng.robotest.test.stpv.shop.miscompras.PageMisComprasStpV;
 
 import org.openqa.selenium.WebDriver;
@@ -43,7 +43,7 @@ public class PageMiCuentaStpV {
 	}
 
 	public void goToMisDatos(String usuarioReg) {
-		SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
+		SecMenusUserSteps userMenusStpV = SecMenusUserSteps.getNew(channel, app, driver);
 		userMenusStpV.clickMenuMiCuenta();
 		clickLinkMisDatos(usuarioReg);
 	}
@@ -63,7 +63,7 @@ public class PageMiCuentaStpV {
 	}
 
 	public void goToMisComprasFromMenu(Pais pais) {
-		SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
+		SecMenusUserSteps userMenusStpV = SecMenusUserSteps.getNew(channel, app, driver);
 		userMenusStpV.clickMenuMiCuenta();
 		goToMisComprasFromMenuAndValidate(pais);
 	}
@@ -100,7 +100,7 @@ public class PageMiCuentaStpV {
 	}
 
 	public void goToSuscripciones() {
-		SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
+		SecMenusUserSteps userMenusStpV = SecMenusUserSteps.getNew(channel, app, driver);
 		userMenusStpV.clickMenuMiCuenta();
 		clickLinkSuscripciones();
 	}
@@ -139,7 +139,7 @@ public class PageMiCuentaStpV {
 //	}
 
 	public void goToDevoluciones() {
-		SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
+		SecMenusUserSteps userMenusStpV = SecMenusUserSteps.getNew(channel, app, driver);
 		userMenusStpV.clickMenuMiCuenta();
 		clickLinkDevoluciones();
 	}
@@ -153,7 +153,7 @@ public class PageMiCuentaStpV {
 	}
 
 	public void goToReembolsos() {
-		SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
+		SecMenusUserSteps userMenusStpV = SecMenusUserSteps.getNew(channel, app, driver);
 		userMenusStpV.clickMenuMiCuenta();
 		clickLinkReembolsos();
 	}

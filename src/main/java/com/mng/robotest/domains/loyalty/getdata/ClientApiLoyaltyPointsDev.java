@@ -1,4 +1,4 @@
-package com.mng.robotest.test.getdata.loyaltypoints;
+package com.mng.robotest.domains.loyalty.getdata;
 
 import static org.apache.http.impl.client.HttpClients.createDefault;
 
@@ -18,11 +18,11 @@ import org.apache.logging.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.mng.robotest.test.appshop.Loyalty.UserTest;
+import com.mng.robotest.domains.loyalty.beans.User;
+import com.mng.robotest.domains.loyalty.getdata.data.ListConsumers;
+import com.mng.robotest.domains.loyalty.getdata.data.ResultAddPoints;
+import com.mng.robotest.domains.loyalty.getdata.data.TransferPoints;
 import com.mng.robotest.test.exceptions.NotFoundException;
-import com.mng.robotest.test.getdata.loyaltypoints.data.ListConsumers;
-import com.mng.robotest.test.getdata.loyaltypoints.data.ResultAddPoints;
-import com.mng.robotest.test.getdata.loyaltypoints.data.TransferPoints;
 
 
 public class ClientApiLoyaltyPointsDev {
@@ -33,7 +33,7 @@ public class ClientApiLoyaltyPointsDev {
 	
 	public ClientApiLoyaltyPointsDev() {}
 	
-	public ResultAddPoints addLoyaltyPoints(UserTest user, int loyaltyPoints) throws Exception {
+	public ResultAddPoints addLoyaltyPoints(User user, int loyaltyPoints) throws Exception {
 		//En los servidores de Robotest la llamada a consumer devuelve un 401
 		//String idConsumer = getContactIdConsumer(emailConsumer);
 		//String countryConsumer = getCountryConsumer(userTest.getEmail());
@@ -97,7 +97,7 @@ public class ClientApiLoyaltyPointsDev {
 		consumerDataCache.put(emailConsumer, listConsumers);
 	}
 	
-	public ResultAddPoints addLoyaltyPoints(int loyaltyPoints, UserTest user) 
+	public ResultAddPoints addLoyaltyPoints(int loyaltyPoints, User user) 
 	throws Exception {
 		TransferPoints transferPoints = new TransferPoints();
 		transferPoints.setScore(loyaltyPoints);

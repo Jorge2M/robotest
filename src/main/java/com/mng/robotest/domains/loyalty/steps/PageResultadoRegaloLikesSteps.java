@@ -1,16 +1,16 @@
-package com.mng.robotest.test.stpv.shop.loyalty;
+package com.mng.robotest.domains.loyalty.steps;
 
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
-import com.mng.robotest.test.pageobject.shop.loyalty.PageResultadoRegaloLikes;
+import com.mng.robotest.domains.loyalty.pageobjects.PageResultadoRegaloLikes;
 
-public class PageResultadoRegaloLikesStpV {
+public class PageResultadoRegaloLikesSteps {
 
 	private final PageResultadoRegaloLikes pageResultado;
 	
-	public PageResultadoRegaloLikesStpV(WebDriver driver) {
+	public PageResultadoRegaloLikesSteps(WebDriver driver) {
 		this.pageResultado = new PageResultadoRegaloLikes(driver);
 	}
 	

@@ -48,7 +48,7 @@ public class SecMenusWrapperStpV {
 	private final AppEcom app;
 	private final Pais pais;
 	private final WebDriver driver;
-	private final SecMenusUserStpV secMenusUserStpV;
+	private final SecMenusUserSteps secMenusUserStpV;
 	private final SecMenuLateralMobilStpV secMenuLateralMobilStpV;
 	private final SecMenusDesktopStpV secMenusDesktopStpV;
 	private final SecMenusWrap secMenusWrap;
@@ -58,7 +58,7 @@ public class SecMenusWrapperStpV {
 		this.app = app;
 		this.pais = pais;
 		this.driver = driver;
-		this.secMenusUserStpV = SecMenusUserStpV.getNew(channel, app, driver);
+		this.secMenusUserStpV = SecMenusUserSteps.getNew(channel, app, driver);
 		this.secMenuLateralMobilStpV = SecMenuLateralMobilStpV.getNew(channel, app, driver);
 		this.secMenusDesktopStpV = SecMenusDesktopStpV.getNew(pais, app, channel, driver);
 		this.secMenusWrap = SecMenusWrap.getNew(channel, app, driver);
@@ -72,7 +72,7 @@ public class SecMenusWrapperStpV {
 		return (getNew(dCtxSh.channel, dCtxSh.appE, dCtxSh.pais, driver));
 	}
 	
-	public SecMenusUserStpV getMenusUser() {
+	public SecMenusUserSteps getMenusUser() {
 		return this.secMenusUserStpV;
 	}
 	

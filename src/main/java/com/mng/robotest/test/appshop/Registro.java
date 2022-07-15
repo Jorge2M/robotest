@@ -25,7 +25,7 @@ import com.mng.robotest.test.pageobject.shop.registro.ListDataRegistro.PageData;
 import com.mng.robotest.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test.stpv.shop.SecCabeceraStpV;
 import com.mng.robotest.test.stpv.shop.SecFooterStpV;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusUserStpV;
+import com.mng.robotest.test.stpv.shop.menus.SecMenusUserSteps;
 import com.mng.robotest.test.stpv.shop.micuenta.PageMiCuentaStpV;
 import com.mng.robotest.test.stpv.shop.modales.ModalSuscripcionStpV;
 import com.mng.robotest.test.stpv.shop.registro.PageRegistroDirecStpV;
@@ -98,7 +98,7 @@ public class Registro implements Serializable {
 		}
 			
 		AccesoStpV.oneStep(dCtxSh, false, driver);
-		SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		SecMenusUserSteps userMenusStpV = SecMenusUserSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
 		userMenusStpV.selectRegistrate(dCtxSh);
 		
 		//Step. Click inicial a Registrate (sin haber introducido ningún dato) -> Aparecerán los correspondientes mensajes de error
@@ -191,7 +191,7 @@ public class Registro implements Serializable {
 	throws Exception {
 		dCtxSh.userRegistered = false;
 		AccesoStpV.oneStep(dCtxSh, false, driver);
-		SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		SecMenusUserSteps userMenusStpV = SecMenusUserSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
 		userMenusStpV.selectRegistrate(dCtxSh);
 		String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
 		PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(driver);
@@ -214,7 +214,7 @@ public class Registro implements Serializable {
 			ModalSuscripcionStpV.validaRGPDModal(dCtxSh, driver);
 		}
 		
-		SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		SecMenusUserSteps userMenusStpV = SecMenusUserSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
 		userMenusStpV.selectRegistrate(dCtxSh);
 		Map<String,String> dataRegistro = null;
 		SecFooterStpV secFooterStpV = new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver);

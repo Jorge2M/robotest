@@ -1,4 +1,4 @@
-package com.mng.robotest.test.stpv.shop.loyalty;
+package com.mng.robotest.domains.loyalty.steps;
 
 import org.openqa.selenium.WebDriver;
 
@@ -6,20 +6,16 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.test.pageobject.shop.loyalty.PageHomeDonateLikes;
-import com.mng.robotest.test.pageobject.shop.loyalty.PageHomeDonateLikes.ButtonLikes;
+import com.mng.robotest.domains.loyalty.pageobjects.PageHomeDonateLikes;
+import com.mng.robotest.domains.loyalty.pageobjects.PageHomeDonateLikes.ButtonLikes;
 
-public class PageHomeDonateLikesStpV {
+
+public class PageHomeDonateLikesSteps {
 	
 	final PageHomeDonateLikes pageHomeDonateLikes;
 	
-	private PageHomeDonateLikesStpV(WebDriver driver) {
+	public PageHomeDonateLikesSteps(WebDriver driver) {
 		this.pageHomeDonateLikes = PageHomeDonateLikes.getNew(driver);
-	}
-	
-	public static PageHomeDonateLikesStpV getNew(WebDriver driver) {
-		PageHomeDonateLikesStpV pageHomeDonateLikesStpV = new PageHomeDonateLikesStpV(driver);
-		return pageHomeDonateLikesStpV;
 	}
 	
 	@Validation
@@ -30,8 +26,8 @@ public class PageHomeDonateLikesStpV {
 			pageHomeDonateLikes.checkIsPage(0), State.Defect);
 		
 		checks.add(
-			"Aparece el botón para donar " + ButtonLikes.Button100likes.getNumLikes() + " Likes (esperamos hasta " + maxSeconds + " segundos)",
-			pageHomeDonateLikes.isVisible(ButtonLikes.Button100likes, maxSeconds), State.Defect);
+			"Aparece el botón para donar " + ButtonLikes.BUTTON_100_LIKES.getNumLikes() + " Likes (esperamos hasta " + maxSeconds + " segundos)",
+			pageHomeDonateLikes.isVisible(ButtonLikes.BUTTON_100_LIKES, maxSeconds), State.Defect);
 		
 		return checks;
 	}

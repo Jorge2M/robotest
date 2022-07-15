@@ -9,7 +9,8 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.registro.PageRegistroFin;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusUserStpV;
+import com.mng.robotest.test.stpv.shop.menus.SecMenusUserSteps;
+
 
 @SuppressWarnings({"static-access"})
 public class PageRegistroFinStpV {
@@ -32,7 +33,7 @@ public class PageRegistroFinStpV {
 	
 	public static void validateWeAreLogged(DataCtxShop dCtxSh, WebDriver driver) {
 		validateLogoGoesToPaisIdioma(dCtxSh, driver);
-		SecMenusUserStpV secMenusUserStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		SecMenusUserSteps secMenusUserStpV = SecMenusUserSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
 		secMenusUserStpV.checkIsVisibleLinkCerrarSesion();
 	}
 	

@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.loyalty;
+package com.mng.robotest.domains.loyalty.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,14 +8,14 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageResultadoRegaloLikes extends PageObjTM {
 	
-	private static final String XPathDoneIcon = "//img[@class='done-icon']";
+	private static final String XPATH_DONE_ICON = "//img[@class='done-icon']";
 	
 	public PageResultadoRegaloLikes(WebDriver driver) {
 		super(driver);
 	}
 	
 	public boolean isEnvioOk(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathDoneIcon)).wait(maxSeconds).check());
+		return (state(Visible, By.xpath(XPATH_DONE_ICON)).wait(maxSeconds).check());
 	}
 	
 }

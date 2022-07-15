@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.loyalty;
+package com.mng.robotest.domains.loyalty.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

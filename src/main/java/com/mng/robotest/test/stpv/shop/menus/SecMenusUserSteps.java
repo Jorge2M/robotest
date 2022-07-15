@@ -15,6 +15,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import java.util.Arrays;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.loyalty.steps.PageHomeLikesSteps;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.pageobject.shop.identificacion.PageIdentificacion;
@@ -26,7 +27,6 @@ import com.mng.robotest.test.pageobject.shop.registro.PageRegistroIni;
 import com.mng.robotest.test.stpv.shop.favoritos.PageFavoritosStpV;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
-import com.mng.robotest.test.stpv.shop.loyalty.PageHomeLikesStpV;
 import com.mng.robotest.test.stpv.shop.micuenta.PageMiCuentaStpV;
 import com.mng.robotest.test.stpv.shop.modales.ModalCambioPaisStpV;
 import com.mng.robotest.test.stpv.shop.registro.PageRegistroIniStpV;
@@ -42,22 +42,22 @@ import com.mng.robotest.test.stpv.shop.registro.PageRegistroIniStpV;
  *
  */
 @SuppressWarnings({"static-access"})
-public class SecMenusUserStpV {
+public class SecMenusUserSteps {
 	
 	private final WebDriver driver;
 	private final Channel channel;
 	private final AppEcom app;
 	private final MenusUserWrapper userMenus;
 	
-	private SecMenusUserStpV(Channel channel, AppEcom app, WebDriver driver) {
+	public SecMenusUserSteps(Channel channel, AppEcom app, WebDriver driver) {
 		this.driver = driver;
 		this.channel = channel;
 		this.app = app;
 		this.userMenus = SecMenusWrap.getNew(channel, app, driver).getMenusUser();
 	}
 	
-	public static SecMenusUserStpV getNew(Channel channel, AppEcom app, WebDriver driver) {
-		return (new SecMenusUserStpV(channel, app, driver));
+	public static SecMenusUserSteps getNew(Channel channel, AppEcom app, WebDriver driver) {
+		return (new SecMenusUserSteps(channel, app, driver));
 	}
 	
 	@Step (
@@ -157,7 +157,7 @@ public class SecMenusUserStpV {
 		expected="Aparece la página de \"Mi cuenta\"")
 	public int clickMenuMangoLikesYou() throws Exception {
 		userMenus.clickMenuAndWait(UserMenu.mangoLikesYou);
-		PageHomeLikesStpV pageHomeLikesStpV = PageHomeLikesStpV.getNewInstance(driver);
+		PageHomeLikesSteps pageHomeLikesStpV = new PageHomeLikesSteps(driver);
 		int numberPoints = pageHomeLikesStpV.checkIsPageOk().getNumberPoints();
 		
 		StepTM step = TestMaker.getCurrentStepInExecution();
@@ -227,7 +227,7 @@ public class SecMenusUserStpV {
 	
 	public static class ChecksResultWithNumberPoints extends ChecksTM {
 		int numberPoints ;
-		private ChecksResultWithNumberPoints() {
+		public ChecksResultWithNumberPoints() {
 			super();
 		}
 		public static ChecksResultWithNumberPoints getNew() {

@@ -1,4 +1,4 @@
-package com.mng.robotest.test.stpv.shop.loyalty;
+package com.mng.robotest.domains.loyalty.steps;
 
 import org.openqa.selenium.WebDriver;
 
@@ -6,20 +6,15 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.test.pageobject.shop.loyalty.PageHomeConseguirPorLikes;
+import com.mng.robotest.domains.loyalty.pageobjects.PageHomeConseguirPorLikes;
 
-public class PageHomeConseguirPorLikesStpV {
+public class PageHomeConseguirPorLikesSteps {
 
 	
 	final PageHomeConseguirPorLikes pageHomeConseguirPorLikes;
 	
-	private PageHomeConseguirPorLikesStpV(WebDriver driver) {
+	public PageHomeConseguirPorLikesSteps(WebDriver driver) {
 		this.pageHomeConseguirPorLikes = PageHomeConseguirPorLikes.getNew(driver);
-	}
-	
-	public static PageHomeConseguirPorLikesStpV getNew(WebDriver driver) {
-		PageHomeConseguirPorLikesStpV pageHomeConseguirPorLikesStpV = new PageHomeConseguirPorLikesStpV(driver);
-		return pageHomeConseguirPorLikesStpV;
 	}
 	
 	@Validation (

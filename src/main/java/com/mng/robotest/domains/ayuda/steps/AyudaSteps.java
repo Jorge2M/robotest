@@ -4,17 +4,17 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 
-import com.mng.robotest.domains.ayuda.pageobjects.PageAyuda;
+import com.mng.robotest.domains.ayuda.pageobjects.PagesAyuda;
 
 import org.openqa.selenium.WebDriver;
 
 
 public class AyudaSteps {
 	
-	private final PageAyuda pageAyuda; 
+	private final PagesAyuda pageAyuda; 
 	
 	public AyudaSteps(WebDriver driver) {
-		this.pageAyuda = new PageAyuda(driver);
+		this.pageAyuda = new PagesAyuda(driver);
 	}
 
 	@Step(

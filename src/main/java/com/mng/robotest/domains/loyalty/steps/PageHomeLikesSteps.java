@@ -1,32 +1,28 @@
-package com.mng.robotest.test.stpv.shop.loyalty;
+package com.mng.robotest.domains.loyalty.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
-import com.mng.robotest.test.pageobject.shop.loyalty.PageHomeLikes;
-import com.mng.robotest.test.pageobject.shop.loyalty.PageHomeLikes.ButtonUseLikes;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusUserStpV.ChecksResultWithNumberPoints;
+import com.mng.robotest.domains.loyalty.pageobjects.PageHomeLikes;
+import com.mng.robotest.domains.loyalty.pageobjects.PageHomeLikes.ButtonUseLikes;
+import com.mng.robotest.test.stpv.shop.menus.SecMenusUserSteps.ChecksResultWithNumberPoints;
 
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 
-public class PageHomeLikesStpV {
+public class PageHomeLikesSteps {
 
 	private final WebDriver driver;
 	private final PageHomeLikes pageHomeLikes;
 	
-	private PageHomeLikesStpV(WebDriver driver) {
+	public PageHomeLikesSteps(WebDriver driver) {
 		this.driver = driver;
 		this.pageHomeLikes = PageHomeLikes.getNew(driver);
 	}
 	
-	public static PageHomeLikesStpV getNewInstance(WebDriver driver) {
-		return (new PageHomeLikesStpV(driver));
-	}
-	
 	@Validation
 	public ChecksResultWithNumberPoints checkIsPageOk() {
-		ChecksResultWithNumberPoints checks = ChecksResultWithNumberPoints.getNew();
+		ChecksResultWithNumberPoints checks = new ChecksResultWithNumberPoints();
 		PageHomeLikes pageLikes = PageHomeLikes.getNew(driver);
 		int maxSeconds = 5;
 		checks.add(
@@ -36,7 +32,7 @@ public class PageHomeLikesStpV {
 		int maxSecondsButton = 7;
 		checks.add(
 			"Es visible el botón \"Compra con descuento\" (esperamos hasta " + maxSecondsButton + " segundos)",
-			pageLikes.isVisibleButton(ButtonUseLikes.CompraConDescuento, maxSecondsButton), State.Defect);
+			pageLikes.isVisibleButton(ButtonUseLikes.COMPRA_CON_DESCUENTO, maxSecondsButton), State.Defect);
 		
 		checks.setNumberPoints(pageLikes.getPoints());
 		checks.add(
@@ -49,8 +45,8 @@ public class PageHomeLikesStpV {
 		description="Seleccionar el link \"Compra un descuento\"",
 		expected="Aparece la página de \"Compra con descuento\"")
 	public void clickOpcionCompraUnDescuento() throws Exception {
-		pageHomeLikes.clickButton(ButtonUseLikes.CompraConDescuento);
-		PageHomePurchaseWithDiscountStpV.getNew(driver)
+		pageHomeLikes.clickButton(ButtonUseLikes.COMPRA_CON_DESCUENTO);
+		new PageHomePurchaseWithDiscountSteps(driver)
 			.checkHomePurchaseWithDiscountPageOk();
 	}
 
@@ -58,24 +54,24 @@ public class PageHomeLikesStpV {
 		description="Seleccionar el 1er botón \"Donar Likes\"",
 		expected="Aparece una página para donar mis Likes")
 	public void clickButtonDonarLikes() {
-		pageHomeLikes.clickButton(ButtonUseLikes.DonarMisLikes);
-		PageHomeDonateLikesStpV.getNew(driver).checkIsPage(5);
+		pageHomeLikes.clickButton(ButtonUseLikes.DONAR_MIS_LIKES);
+		new PageHomeDonateLikesSteps(driver).checkIsPage(5);
 	}
 	
 	@Step(
 		description="Seleccionar el 1er botón \"Saber más Likes\"",
 		expected="Aparece una página para conseguir por 1200 Likes")
 	public void clickSaberMas() {
-		pageHomeLikes.clickButton(ButtonUseLikes.SaberMas);
-		PageHomeConseguirPorLikesStpV.getNew(driver).checkIsPage(2);
+		pageHomeLikes.clickButton(ButtonUseLikes.SABER_MAS);
+		new PageHomeConseguirPorLikesSteps(driver).checkIsPage(2);
 	}
 	
 	@Step(
 		description="Seleccionar el 1er botón \"Regalar mis Likes\"",
 		expected="Aparece la página para regalar mis Likes")
-	public PageRegalarMisLikesStpV clickButtonRegalarMisLikes() {
-		pageHomeLikes.clickButton(ButtonUseLikes.RegalarMisLikes);
-		PageRegalarMisLikesStpV pageRegalarStpV = PageRegalarMisLikesStpV.getNew(driver);
+	public PageRegalarMisLikesSteps clickButtonRegalarMisLikes() {
+		pageHomeLikes.clickButton(ButtonUseLikes.REGALAR_MIS_LIKES);
+		PageRegalarMisLikesSteps pageRegalarStpV = new PageRegalarMisLikesSteps(driver);
 		pageRegalarStpV.checkIsPage();
 		return pageRegalarStpV;
 	}

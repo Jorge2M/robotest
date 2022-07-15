@@ -1,4 +1,4 @@
-package com.mng.robotest.test.getdata.loyaltypoints.data;
+package com.mng.robotest.domains.loyalty.getdata.data;
 
 public class TransferPoints {
 
