@@ -121,7 +121,7 @@ public class Compra {
 				throw new NotFoundException("Home Garment Not Found");
 			}
 			
-			//TODO actualmente no funciona el buscador por referencia de productos Intimissimi
+			//TODO actualmente no funciona el buscador por referencia de productos Intimissimi (CFIT-1265)
 			//confiamos que esté listo el 1-julio-2022
 			//cuando esté listo habrá que eliminar el 1er bloque del if
 			if (UtilsTest.dateBeforeToday("2022-08-01")) {
