@@ -14,10 +14,10 @@ public class ModalBuscadorTiendas extends PageObjTM implements PageFromFooter {
 
 	private final Channel channel;
 	
-	private static final String XPathContainer = "//*[@id[contains(.,'GarmentFinder')]]/div";
-	private static final String XPathTiendas = XPathContainer + "//div[@class[contains(.,'store-list')]]";
-	private static final String XPathAspaForCloseDesktop = "//button[@class[contains(.,'close-modal')]]";
-	private static final String XPahLeftArrowDevice = "//span[@class[contains(.,'close-modal')]]";
+	private static final String XPATH_CONTAINER = "//micro-frontend[@id='storeLocator']";
+	private static final String XPATH_TIENDAS = XPATH_CONTAINER + "//div[@class[contains(.,'store-list')]]";
+	private static final String XPATH_ASPA_FOR_CLOSE_DESKTOP = "//*[@class[contains(.,'icon')] and @class[contains(.,'close-modal')]]";
+	private static final String XPATH_LEFT_ARROW_DEVICE = XPATH_CONTAINER + "//span[@role='button']";
 	
 	public ModalBuscadorTiendas(Channel channel, WebDriver driver) {
 		super(driver);
@@ -39,18 +39,18 @@ public class ModalBuscadorTiendas extends PageObjTM implements PageFromFooter {
 	}
 	
 	public boolean isVisible(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathContainer)).wait(maxSeconds).check());
+		return (state(Visible, By.xpath(XPATH_CONTAINER)).wait(maxSeconds).check());
 	}
 	
 	public boolean isPresentAnyTiendaUntil(int maxSeconds) {
-		return (state(Present, By.xpath(XPathTiendas)).wait(maxSeconds).check());
+		return (state(Present, By.xpath(XPATH_TIENDAS)).wait(maxSeconds).check());
 	}
 	
 	public void clickAspaForClose() {
 		if (channel.isDevice()) {
-			click(By.xpath(XPahLeftArrowDevice)).exec();
+			click(By.xpath(XPATH_LEFT_ARROW_DEVICE)).exec();
 		} else {
-			click(By.xpath(XPathAspaForCloseDesktop)).exec();
+			click(By.xpath(XPATH_ASPA_FOR_CLOSE_DESKTOP)).exec();
 		}
 	}
 }

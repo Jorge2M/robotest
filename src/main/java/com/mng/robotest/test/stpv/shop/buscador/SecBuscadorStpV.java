@@ -13,6 +13,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
@@ -20,7 +21,6 @@ import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria.From;
 import com.mng.robotest.test.pageobject.shop.navigations.ArticuloNavigations;
-import com.mng.robotest.test.stpv.shop.ficha.PageFichaArtStpV;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 
@@ -66,7 +66,7 @@ public class SecBuscadorStpV {
 	private void searchArticuloCommon(GarmentCatalog product, Pais pais) throws Exception {
 		ArticuloNavigations.buscarArticulo(product.getArticleWithMoreStock(), channel, app, driver);
 		SeleniumUtils.waitForPageLoaded(driver);  
-		PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel, pais);
+		PageFichaArtSteps pageFichaStpV = new PageFichaArtSteps(app, channel, pais);
 		pageFichaStpV.validateIsFichaAccordingTypeProduct(product);
 	}
 

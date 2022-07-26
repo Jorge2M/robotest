@@ -15,6 +15,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataBag;
@@ -30,7 +31,6 @@ import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.stpv.shop.checkout.Page1IdentCheckoutStpV;
 import com.mng.robotest.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
-import com.mng.robotest.test.stpv.shop.ficha.PageFichaArtStpV;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 
@@ -335,7 +335,7 @@ public class SecBolsaStpV {
 		secBolsa.click1erArticuloBolsa();
 
 		String refArticulo = articuloClickado.getReferencia();
-		PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(app, channel, pais);
+		PageFichaArtSteps pageFichaStpv = new PageFichaArtSteps(app, channel, pais);
 		pageFichaStpv.validateIsFichaArtDisponible(refArticulo, 3);
 	}
 }

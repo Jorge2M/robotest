@@ -19,6 +19,7 @@ import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
@@ -51,7 +52,6 @@ import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
 import com.mng.robotest.test.stpv.shop.SecCabeceraStpV;
 import com.mng.robotest.test.stpv.shop.banner.SecBannersStpV;
-import com.mng.robotest.test.stpv.shop.ficha.PageFichaArtStpV;
 import com.mng.robotest.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
@@ -450,7 +450,7 @@ public class SecMenusDesktopStpV {
 		driver.navigate().to(urlAccesoCorreo);
 
 		DataFichaArt datosArticulo = new DataFichaArt(article.getGarmentId(), "");
-		PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
+		PageFichaArtSteps pageFichaStpV = new PageFichaArtSteps(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
 		pageFichaStpV.validaDetallesProducto(datosArticulo);
 	}
 	

@@ -16,6 +16,9 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
+import com.mng.robotest.domains.ficha.pageobjects.PageFicha.TypeFicha;
+import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataCtxShop;
@@ -23,8 +26,6 @@ import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.factoryes.NodoStatus;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.pageobject.shop.ficha.PageFicha;
-import com.mng.robotest.test.pageobject.shop.ficha.PageFicha.TypeFicha;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltros;
@@ -45,7 +46,6 @@ import com.mng.robotest.test.pageobject.utils.DataFichaArt;
 import com.mng.robotest.test.pageobject.utils.DataScroll;
 import com.mng.robotest.test.pageobject.utils.ListDataArticleGalery;
 import com.mng.robotest.test.stpv.shop.SecBolsaStpV;
-import com.mng.robotest.test.stpv.shop.ficha.PageFichaArtStpV;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test.utils.UtilsTest;
@@ -100,7 +100,7 @@ public class PageGaleriaStpV {
 		datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
 
 		String detailWindowHandle = pageGaleria.openArticuloPestanyaAndGo(articulo, app);
-		PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel, pais);
+		PageFichaArtSteps pageFichaStpV = new PageFichaArtSteps(app, channel, pais);
 		pageFichaStpV.validaDetallesProducto(datosArticulo);
 
 		if (detailWindowHandle.compareTo(galeryWindowHandle)!=0) {
@@ -124,13 +124,13 @@ public class PageGaleriaStpV {
 		datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
 
 		pageGaleria.clickArticulo(articulo);
-		PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
+		PageFichaArtSteps pageFichaStpV = new PageFichaArtSteps(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
 		pageFichaStpV.validaDetallesProducto(datosArticulo);
 		pageFichaStpV.validaPrevNext(locationArt, dCtxSh);
 
 		//Validaciones sección BreadCrumb + Next
 		if (dCtxSh.channel==Channel.desktop) {
-			if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {
+			if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.OLD) {
 				pageFichaStpV.validaBreadCrumbFichaOld(urlGaleria);
 			}
 		}

@@ -5,9 +5,8 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.mng.robotest.domains.loyalty.beans.User;
+import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.Linea.LineaType;
-import com.mng.robotest.test.data.DataCtxShop;
-import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test.datastored.DataCtxPago;
@@ -25,17 +24,25 @@ import com.mng.robotest.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
-import com.mng.robotest.utils.DataTest;
 
 
-public class Loy001 extends LoyaltyTestBase {
+public class Loy001 extends TestBase {
 
-	private final static User USER = new User(USER_PRO_WITH_LOY_POINTS, "6051483560048388114", "ES");
-	private final DataCtxShop dataTest;
+	final User USER = LoyaltyCommons.USER_PRO_WITH_LOY_POINTS;
+	final Menu1rstLevel menuNewCollection;
+	
+	SecMenusWrapperStpV secMenusSteps = SecMenusWrapperStpV.getNew(dataTest, driver);
 	
 	public Loy001() throws Exception {
 		super();
-		dataTest = getDataTest();
+		
+		dataTest.userConnected = USER.getEmail();
+		dataTest.userRegistered = true;
+		dataTest.passwordUser = GetterSecrets.factory()
+				.getCredentials(SecretType.SHOP_STANDARD_USER)
+				.getPassword();
+		
+		menuNewCollection = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.she, null, "nuevo"));
 	}
 	
 	@Override
@@ -46,22 +53,9 @@ public class Loy001 extends LoyaltyTestBase {
 		checkPedidosManto(dCtxPago.getListPedidos());
 	}
 	
-	private DataCtxShop getDataTest() throws Exception {
-		DataCtxShop dataTest = DataTest.getData(PaisShop.ESPANA);
-		dataTest.userConnected = USER.getEmail();
-		dataTest.userRegistered = true;
-		dataTest.passwordUser = GetterSecrets.factory()
-				.getCredentials(SecretType.SHOP_STANDARD_USER)
-				.getPassword();
-		return dataTest;
-	}
-	
 	private DataBag addBagArticleNoRebajado() throws Exception {
+		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuNewCollection, dataTest);
 		
-		Menu1rstLevel menuNewCollection;
-		menuNewCollection = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.she, null, "nuevo"));
-		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dataTest, driver);
-		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuNewCollection, dataTest);
 		//TODO en estos momentos algo raro le pasa al menú Nuevo que requiere un refresh para funcionar ok
 		driver.navigate().refresh();
 		

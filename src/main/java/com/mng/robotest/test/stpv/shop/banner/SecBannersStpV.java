@@ -13,14 +13,14 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
+import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.pageobject.shop.AllPages;
 import com.mng.robotest.test.pageobject.shop.bannersNew.DataBanner;
 import com.mng.robotest.test.pageobject.shop.bannersNew.ManagerBannersScreen;
-import com.mng.robotest.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
-import com.mng.robotest.test.stpv.shop.ficha.PageFichaArtStpV;
 import com.mng.robotest.test.stpv.shop.genericchecks.Checker;
 import com.mng.robotest.test.stpv.shop.genericchecks.CheckerImgsBroken;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks;
@@ -84,7 +84,7 @@ public class SecBannersStpV {
 			validacionesGeneralesBanner(urlPagPrincipal, uriPagPrincipal, elementosPagPrincipal);
 			switch (dataBanner.getDestinoType()) {
 			case Ficha:
-				PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel, pais);
+				PageFichaArtSteps pageFichaStpV = new PageFichaArtSteps(app, channel, pais);
 				pageFichaStpV.validateIsFichaCualquierArticulo();
 				break;
 			default:				

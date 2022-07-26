@@ -7,6 +7,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
@@ -24,7 +25,6 @@ import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test.stpv.shop.favoritos.PageFavoritosStpV;
-import com.mng.robotest.test.stpv.shop.ficha.PageFichaArtStpV;
 import com.mng.robotest.test.stpv.shop.galeria.LocationArticle;
 import com.mng.robotest.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test.stpv.shop.galeria.PageGaleriaStpV.TypeActionFav;
@@ -156,7 +156,7 @@ public class Favoritos implements Serializable {
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		pageGaleriaStpV.selectArticulo(article1, dCtxSh);
 
-		PageFichaArtStpV pageFichaArtStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
+		PageFichaArtSteps pageFichaArtStpv = new PageFichaArtSteps(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
 		pageFichaArtStpv.selectAnadirAFavoritos(dataFavoritos);
 
 		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
