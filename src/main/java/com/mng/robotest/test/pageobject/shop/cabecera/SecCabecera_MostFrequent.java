@@ -26,6 +26,8 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	private static final String XPathDivNavTools = "//div[@id='navTools']";
 	private static final String XPathNumArticlesManyLocations = "//*[@class='icon-button-items']";
 	private static final String XPathNumArticlesBolsaDesktop = "//span[@data-testid[contains(.,'numItems')]]";
+//	private static final String XPathNumArticlesBolsaPre = "//*[@data-testid='bag.header.totalItems']";
+//	private static final String XPathNumArticlesBolsaPro = "//*[@data-testid='header.userMenu.bolsa_any.numItems']";			
 	
 	public enum IconoCabeceraShop_DesktopMobile implements ElementPage {
 		lupa(
@@ -98,6 +100,7 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	}
 	
 	public static String getXPathNumberArtIcono(Channel channel, AppEcom app) {
+//		return XPathNumArticlesBolsaPre + " | " + XPathNumArticlesBolsaPro;
 		if (channel==Channel.desktop/* && app==AppEcom.shop*/) {
 			return XPathNumArticlesBolsaDesktop;
 		}

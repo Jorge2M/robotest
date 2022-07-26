@@ -857,7 +857,7 @@ public class PageGaleriaStpV {
 	@Validation
 	public ChecksTM validateGaleriaAfeterSelectMenu(AppEcom app) {
 		ChecksTM validations = ChecksTM.getNew();
-		int maxSecondsToWaitArticle = 3;
+		int maxSecondsToWaitArticle = 8;
 		int maxSecondsToWaitIcon = 2;
 		validations.add (
 			"Como mínimo se obtiene un artículo (lo esperamos hasta " + maxSecondsToWaitArticle + " segundos)",
@@ -870,12 +870,6 @@ public class PageGaleriaStpV {
 				"Cada artículo tiene 1 icono de favoritos asociado",
 				pageGaleria.eachArticlesHasOneFavoriteIcon(), State.Info, StoreType.None);
 		}
-		/*
-		else {
-			validations.add (
-				"No aparece ningún icono de favoritos asociado a ningún artículo",
-				pageGaleria.getNumFavoritoIcons() == 0, State.Defect);
-		}*/
 		
 		return validations;
 	}

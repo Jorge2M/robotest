@@ -1,6 +1,6 @@
 package com.mng.robotest.test.generic.beans;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
@@ -135,7 +135,7 @@ public class ArticuloScreen {
 		return iguales;
 	}
 	
-	public boolean isPresentInList(ArrayList<ArticuloScreen> listaArticulos) {
+	public boolean isPresentInList(List<ArticuloScreen> listaArticulos) {
 		for (ArticuloScreen articulo : listaArticulos) {
 			if (isTheSame(articulo)) {
 				return true;

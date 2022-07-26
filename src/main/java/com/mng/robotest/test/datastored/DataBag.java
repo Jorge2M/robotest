@@ -2,6 +2,7 @@ package com.mng.robotest.test.datastored;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ListIterator;
 
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
@@ -67,11 +68,8 @@ public class DataBag {
 		return this.listArticulos.get(index);
 	}
 	
-	/**
-	 * Retorna una lista de artículos al modo de lo visualizado en la capa de la bolsa: si tenemos varios artículos iguales (misma referencia, talla y color) los comprimimos en 1 sola línea
-	 */
-	public ArrayList<ArticuloScreen> getListArticlesTypeViewInBolsa() throws Exception {
-		ArrayList<ArticuloScreen> listToReturn = new ArrayList<>();
+	public List<ArticuloScreen> getListArticlesTypeViewInBolsa() throws Exception {
+		List<ArticuloScreen> listToReturn = new ArrayList<>();
 		ListIterator<ArticuloScreen> it = this.listArticulos.listIterator();
 		while (it.hasNext()) {
 			ArticuloScreen articulo = it.next();

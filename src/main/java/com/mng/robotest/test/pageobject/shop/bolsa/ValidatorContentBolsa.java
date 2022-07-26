@@ -18,8 +18,8 @@ public class ValidatorContentBolsa {
 	
 	private final SecBolsa secBolsa;
 	
-	private final ArrayList<ArticuloScreen> linesArticlesExpected;
-	private final ArrayList<ArticuloDataBolsaScreen> linesArticlesInScreen = new ArrayList<>();
+	private final List<ArticuloScreen> linesArticlesExpected;
+	private final List<ArticuloDataBolsaScreen> linesArticlesInScreen = new ArrayList<>();
 	private final Channel channel;
 
 	
