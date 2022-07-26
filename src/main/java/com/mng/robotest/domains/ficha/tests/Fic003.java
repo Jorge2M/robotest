@@ -69,11 +69,11 @@ public class Fic003 extends TestBase {
 	private void kcSafetyTest() throws Exception {
 		if (pageFichaSteps.getFicha().getTypeFicha()==TypeFicha.OLD) {
 			if (TypePanel.KC_SAFETY.getListApps().contains(app)) {
-				pageFichaSteps.secProductDescOld.selectPanel(TypePanel.KC_SAFETY);
+				pageFichaSteps.getSecProductDescOldSteps().selectPanel(TypePanel.KC_SAFETY);
 			}
 		} else {
 			if (TypePanel.KC_SAFETY.getListApps().contains(app)) {
-				pageFichaSteps.secBolsaButtonAndLinksNew.selectDetalleDelProducto(app, LineaType.nina, driver);
+				pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectDetalleDelProducto(app, LineaType.nina);
 			}
 		}
 	}

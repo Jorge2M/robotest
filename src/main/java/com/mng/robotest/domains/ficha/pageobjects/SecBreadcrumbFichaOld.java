@@ -11,7 +11,7 @@ public class SecBreadcrumbFichaOld {
 	
 	public enum ItemBCrumb { LINE, GROUP, GALERY }
 	
-	private static final String XPATH_LINEA = "//nav[@class='nav-product']";
+	//private static final String XPATH_LINEA = "//nav[@class='nav-product']";
 	private static final String XPATH_BREAD_CRUMB = "//ol[@typeof='BreadcrumbList']";
 	private static final String XPATH_BREAD_CRUMB_ITEM = XPATH_BREAD_CRUMB + "/li[@typeof='ListItem']";
 	

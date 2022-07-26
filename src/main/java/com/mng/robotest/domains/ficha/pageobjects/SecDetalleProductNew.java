@@ -22,8 +22,8 @@ public class SecDetalleProductNew {
 	private static final String XPATH_CAPA_DESCRIPTION = "//div[@class='product-info-block'][1]";
 	private static final String XPATH_BREAD_CRUMBS = XPATH_CAPA_DESCRIPTION + "//ol[@class='breadcrumbs']";
 	private static final String XPATH_BREAD_CRUMB_ITEM_LINK = XPATH_BREAD_CRUMBS + "//a[@class='breadcrumbs-link']";
-	private static final String XPATH_CAPA_COMPOSICION_Y_LAVADO = "//div[@class='product-info-block'][2]";
-	private static final String XPATH_ICON_COMP_Y_LAVADO = XPATH_CAPA_COMPOSICION_Y_LAVADO + "//img[@class='product-info-icon']";
+	//private static final String XPATH_CAPA_COMPOSICION_Y_LAVADO = "//div[@class='product-info-block'][2]";
+	//private static final String XPATH_ICON_COMP_Y_LAVADO = XPATH_CAPA_COMPOSICION_Y_LAVADO + "//img[@class='product-info-icon']";
 	private static final String XPATH_BLOCK_KC_SAFETY = XPATH_WRAPPER + "//div[@id='KoreaKC']";
 	
 	public static String getXPathBreadcrumbItem(int position) {

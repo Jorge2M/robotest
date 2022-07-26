@@ -9,21 +9,27 @@ import com.mng.robotest.domains.ficha.pageobjects.SecFitFinder;
 
 public class SecFitFinderSteps {
 	
+	private final SecFitFinder secFitFinder;
+	
+	public SecFitFinderSteps(WebDriver driver) {
+		secFitFinder = new SecFitFinder(driver);
+	}
+	
 	@Validation
-	public static ChecksTM validateIsOkAndClose(WebDriver driver) {
+	public ChecksTM validateIsOkAndClose() {
 		ChecksTM validations = ChecksTM.getNew();
 		int maxSeconds = 2;
 	  	validations.add(
 			"Es visible el Wrapper con la guía de tallas (lo esperamos hasta " + maxSeconds + " seconds)",
-			SecFitFinder.isVisibleUntil(maxSeconds, driver), State.Defect);
+			secFitFinder.isVisibleUntil(maxSeconds), State.Defect);
 	  	validations.add(
 			"Es visible el input para la introducción de la altura",
-			SecFitFinder.isVisibleInputAltura(driver), State.Warn);
+			secFitFinder.isVisibleInputAltura(), State.Warn);
 	  	validations.add(
 			"Es visible el input para la introducción del peso",
-			SecFitFinder.isVisibleInputPeso(driver), State.Warn);
+			secFitFinder.isVisibleInputPeso(), State.Warn);
 
-		SecFitFinder.clickAspaForCloseAndWait(driver);
+		secFitFinder.clickAspaForCloseAndWait();
 		return validations;
 	}
 }

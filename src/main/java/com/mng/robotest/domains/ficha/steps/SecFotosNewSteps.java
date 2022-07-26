@@ -11,15 +11,21 @@ import com.mng.robotest.domains.ficha.pageobjects.TipoImagenProducto;
 
 public class SecFotosNewSteps {
 
-	public static void validaLayoutFotosNew(boolean isFichaAccesorios, WebDriver driver) {
-		checkTypeOfFirstFoto(driver);
-		checkLayoutFicha(isFichaAccesorios, driver);
+	private final SecFotosNew secFotosNew;
+	
+	public SecFotosNewSteps(WebDriver driver) {
+		secFotosNew = new SecFotosNew(driver);
+	}
+	
+	public void validaLayoutFotosNew(boolean isFichaAccesorios) {
+		checkTypeOfFirstFoto();
+		checkLayoutFicha(isFichaAccesorios);
 	}
 	
 	@Validation
-	private static ChecksTM checkTypeOfFirstFoto(WebDriver driver) {
+	private ChecksTM checkTypeOfFirstFoto() {
 		ChecksTM validations = ChecksTM.getNew();
-		DataFoto dataFoto = SecFotosNew.getDataFoto(1, 1, driver);
+		DataFoto dataFoto = secFotosNew.getDataFoto(1, 1);
 	 	validations.add(
 			"La 1a foto es de tipo <b>" + TipoImagenProducto.DETALLES + " o " + 
 										  TipoImagenProducto.DETALLES_9 + " o " +
@@ -35,7 +41,7 @@ public class SecFotosNewSteps {
 	}
 		  
 	@Validation 
-	private static ChecksTM checkLayoutFicha(boolean isFichaAccesorios, WebDriver driver) {
+	private ChecksTM checkLayoutFicha(boolean isFichaAccesorios) {
 		ChecksTM validations = ChecksTM.getNew();
 		int numFotosExpected1rstLine_A = 1;
 		int numFotosExpected1rstLine_B = 2;
@@ -44,15 +50,15 @@ public class SecFotosNewSteps {
 			numFotosExpected1rstLine_B = 2;
 		}
 		
-		int numFotos1rstLine = SecFotosNew.getNumFotosLine(1, driver);
+		int numFotos1rstLine = secFotosNew.getNumFotosLine(1);
 	 	validations.add(
 			"La 1a línea tiene " + numFotosExpected1rstLine_A + " o " + numFotosExpected1rstLine_B + " fotos",
 			numFotos1rstLine==numFotosExpected1rstLine_A || numFotos1rstLine==numFotosExpected1rstLine_B, State.Warn);
 	 	
-	 	int numLinesFotos = SecFotosNew.getNumLinesFotos(driver);
+	 	int numLinesFotos = secFotosNew.getNumLinesFotos();
 	 	int numFotosLastLine = 0;
 		if (numLinesFotos>1) {
-			numFotosLastLine = SecFotosNew.getNumFotosLine(numLinesFotos, driver); 
+			numFotosLastLine = secFotosNew.getNumFotosLine(numLinesFotos); 
 		}
 		int minFotosExpectedLastLine = 5;
 	 	validations.add(
@@ -62,7 +68,7 @@ public class SecFotosNewSteps {
 	 	if (numLinesFotos > 2) {
 	 		boolean allLinesWith2fotos = true;
 			for (int i=2; i<numLinesFotos; i++) {
-				int numFotosLine = SecFotosNew.getNumFotosLine(i, driver);
+				int numFotosLine = secFotosNew.getNumFotosLine(i);
 				if (numFotosLine!=2) {
 					allLinesWith2fotos = false;
 					break;

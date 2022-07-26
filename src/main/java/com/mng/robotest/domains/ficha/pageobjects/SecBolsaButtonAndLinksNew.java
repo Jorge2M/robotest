@@ -3,19 +3,14 @@ package com.mng.robotest.domains.ficha.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-/**
- * Section of Page Ficha that contains the button bolsa and the links below (Favoritos, Detalle del producto, Disponibilidad en tienda, Envio y devoluciones y Compartir)
- * @author jorge.munoz
- *
- */
 
-public class SecBolsaButtonAndLinksNew {
+public class SecBolsaButtonAndLinksNew extends PageObjTM {
 
 	public enum LinksAfterBolsa { DETALLE_PRODUCTO, DISPONIBILIDAD_TIENDA, ENVIO_GRATIS_TIENDA, COMPARTIR }
 	public enum ActionFavButton { ADD, REMOVE }
@@ -26,7 +21,7 @@ public class SecBolsaButtonAndLinksNew {
 	private static final String XPATH_BUTTON_FAVORITOS_FOR_ADD = INI_XPATH_BUTTON_FAVORITOS + " and @data-fav='false']";
 	private static final String XPATH_BUTTON_FAVORITOS_FOR_REMOVE = INI_XPATH_BUTTON_FAVORITOS + " and @data-fav='true']";
 	private static final String XPATH_DIV_ANADIENDO_FAVORITOS = "//div[@id='favoriteBanner']";
-	private static final String XPATH_BUSCAR_EN_TIENDA_BUTTON = "//button[@class[contains(.,'garment-finder')]]";
+	//private static final String XPATH_BUSCAR_EN_TIENDA_BUTTON = "//button[@class[contains(.,'garment-finder')]]";
 	private static final String XPATH_LINK_ENVIO_GRATIS_TIENDA = "//button[@class[contains(.,'freeShipping')]]";
 	private static final String XPATH_LINK_DISPONIBILIDAD_TIENDA = "//button[@id='garmentFinderOption']";
 	private static final String XPATH_LINK_DETALLE_PRODUCTO = "//button[@id='productDetailOption']";
@@ -56,41 +51,45 @@ public class SecBolsaButtonAndLinksNew {
 		}
 	}
 	
-	public static void clickAnadirBolsaButtonAndWait(WebDriver driver) {
-		click(By.xpath(XPATH_BUTTON_ADD_BOLSA), driver).type(javascript).exec();
-	}
-
-	public static boolean isVisibleButtonFavoritos(WebDriver driver) {
-		return (state(Visible, By.xpath(XPATH_BUTTON_FAVORITOS), driver).check());
-	}
-
-	public static boolean isVisibleButtonFavoritos(ActionFavButton actionButton, WebDriver driver) {
-		String xpathButtonFav = getXPathButtonFavoritos(actionButton);
-		return (state(Visible, By.xpath(xpathButtonFav), driver).wait(2).check());
-	}
-
-	public static void selectFavoritosButton(ActionFavButton actionButton, WebDriver driver) {
-		String xpathButtonFav = getXPathButtonFavoritos(actionButton);
-		click(By.xpath(xpathButtonFav), driver).exec();
-	}
-
-	public static boolean isVisibleDivAnadiendoAFavoritosUntil(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(XPATH_DIV_ANADIENDO_FAVORITOS), driver)
-				.wait(maxSeconds).check());
-	}
-
-	public static boolean isInvisibleDivAnadiendoAFavoritosUntil(int maxSeconds, WebDriver driver) {
-		return (state(Invisible, By.xpath(XPATH_DIV_ANADIENDO_FAVORITOS), driver)
-				.wait(maxSeconds).check());
-	}
-
-	public static void clickLinkAndWaitLoad(LinksAfterBolsa linkType, WebDriver driver) {
-		String xpathLink = getXPathLink(linkType);
-		click(By.xpath(xpathLink), driver).exec();
+	public SecBolsaButtonAndLinksNew(WebDriver driver) {
+		super(driver);
 	}
 	
-	public static boolean checkLinkInState(LinksAfterBolsa linkType, State state, WebDriver driver) {
+	public void clickAnadirBolsaButtonAndWait() {
+		click(By.xpath(XPATH_BUTTON_ADD_BOLSA)).type(javascript).exec();
+	}
+
+	public boolean isVisibleButtonFavoritos() {
+		return (state(Visible, By.xpath(XPATH_BUTTON_FAVORITOS)).check());
+	}
+
+	public boolean isVisibleButtonFavoritos(ActionFavButton actionButton) {
+		String xpathButtonFav = getXPathButtonFavoritos(actionButton);
+		return (state(Visible, By.xpath(xpathButtonFav)).wait(2).check());
+	}
+
+	public void selectFavoritosButton(ActionFavButton actionButton) {
+		String xpathButtonFav = getXPathButtonFavoritos(actionButton);
+		click(By.xpath(xpathButtonFav)).exec();
+	}
+
+	public boolean isVisibleDivAnadiendoAFavoritosUntil(int maxSeconds) {
+		return (state(Visible, By.xpath(XPATH_DIV_ANADIENDO_FAVORITOS))
+				.wait(maxSeconds).check());
+	}
+
+	public boolean isInvisibleDivAnadiendoAFavoritosUntil(int maxSeconds) {
+		return (state(Invisible, By.xpath(XPATH_DIV_ANADIENDO_FAVORITOS))
+				.wait(maxSeconds).check());
+	}
+
+	public void clickLinkAndWaitLoad(LinksAfterBolsa linkType) {
 		String xpathLink = getXPathLink(linkType);
-		return (state(state, By.xpath(xpathLink), driver).check());
+		click(By.xpath(xpathLink)).exec();
+	}
+	
+	public boolean checkLinkInState(LinksAfterBolsa linkType, State state) {
+		String xpathLink = getXPathLink(linkType);
+		return (state(state, By.xpath(xpathLink)).check());
 	}
 }

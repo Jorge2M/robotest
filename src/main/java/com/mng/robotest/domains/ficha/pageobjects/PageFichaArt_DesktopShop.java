@@ -58,37 +58,37 @@ public class PageFichaArt_DesktopShop extends PageFicha {
 	
 	@Override
 	public void clickAnadirBolsaButtonAndWait() {
-		secBolsaButtonAndLinks.clickAnadirBolsaButtonAndWait(this.driver);
+		secBolsaButtonAndLinks.clickAnadirBolsaButtonAndWait();
 	}
 	
 	@Override
 	public void selectAnadirAFavoritosButton() {
-		secBolsaButtonAndLinks.selectFavoritosButton(ActionFavButton.ADD, driver);
+		secBolsaButtonAndLinks.selectFavoritosButton(ActionFavButton.ADD);
 	}
 	
 	@Override
 	public void selectRemoveFromFavoritosButton() {
-		secBolsaButtonAndLinks.selectFavoritosButton(ActionFavButton.REMOVE, driver);
+		secBolsaButtonAndLinks.selectFavoritosButton(ActionFavButton.REMOVE);
 	}	
 	
 	@Override
 	public boolean isVisibleDivAnadiendoAFavoritosUntil(int maxSecondsToWait) {	
-		return (secBolsaButtonAndLinks.isVisibleDivAnadiendoAFavoritosUntil(maxSecondsToWait, driver));
+		return (secBolsaButtonAndLinks.isVisibleDivAnadiendoAFavoritosUntil(maxSecondsToWait));
 	}
 	
 	@Override
 	public boolean isInvisibleDivAnadiendoAFavoritosUntil(int maxSecondsToWait) {	
-		return (secBolsaButtonAndLinks.isInvisibleDivAnadiendoAFavoritosUntil(maxSecondsToWait, driver));		
+		return (secBolsaButtonAndLinks.isInvisibleDivAnadiendoAFavoritosUntil(maxSecondsToWait));		
 	}
 	
 	@Override
 	public boolean isVisibleButtonElimFavoritos() {
-		return (secBolsaButtonAndLinks.isVisibleButtonFavoritos(ActionFavButton.REMOVE, this.driver));
+		return (secBolsaButtonAndLinks.isVisibleButtonFavoritos(ActionFavButton.REMOVE));
 	}
 	
 	@Override
 	public boolean isVisibleButtonAnadirFavoritos() {
-		return (secBolsaButtonAndLinks.isVisibleButtonFavoritos(ActionFavButton.ADD, this.driver));
+		return (secBolsaButtonAndLinks.isVisibleButtonFavoritos(ActionFavButton.ADD));
 	}	
 	
 	@Override
@@ -98,12 +98,12 @@ public class PageFichaArt_DesktopShop extends PageFicha {
 	
 	@Override
 	public boolean isVisibleBuscarEnTiendaLink() {
-		return secBolsaButtonAndLinks.checkLinkInState(LinksAfterBolsa.DISPONIBILIDAD_TIENDA, State.Visible, driver);
+		return secBolsaButtonAndLinks.checkLinkInState(LinksAfterBolsa.DISPONIBILIDAD_TIENDA, State.Visible);
 	}
 	
 	@Override
 	public void selectBuscarEnTiendaLink() {
-		secBolsaButtonAndLinks.clickLinkAndWaitLoad(LinksAfterBolsa.DISPONIBILIDAD_TIENDA, this.driver);
+		secBolsaButtonAndLinks.clickLinkAndWaitLoad(LinksAfterBolsa.DISPONIBILIDAD_TIENDA);
 	}
 	
 	@Override

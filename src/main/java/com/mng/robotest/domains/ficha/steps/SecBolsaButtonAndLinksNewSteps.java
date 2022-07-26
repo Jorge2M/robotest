@@ -16,41 +16,48 @@ import com.mng.robotest.domains.ficha.pageobjects.SecDetalleProductNew.ItemBread
 import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel;
 import com.mng.robotest.test.beans.Linea.LineaType;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class SecBolsaButtonAndLinksNewSteps {
 
+	private final SecBolsaButtonAndLinksNew secBolsaButtonAndLinksNew;
+	private final WebDriver driver;
+	
+	public SecBolsaButtonAndLinksNewSteps(WebDriver driver) {
+		this.secBolsaButtonAndLinksNew = new SecBolsaButtonAndLinksNew(driver);
+		this.driver = driver;
+	}
+	
 	@Step (
 		description="Seleccionar el link <b>Envío gratis a tienda</b>",
 		expected="Aparece el modal con los datos a nivel de envío y devolución")
-	public static void selectEnvioYDevoluciones(WebDriver driver) throws Exception {
-		SecBolsaButtonAndLinksNew.clickLinkAndWaitLoad(LinksAfterBolsa.ENVIO_GRATIS_TIENDA, driver);
+	public void selectEnvioYDevoluciones() throws Exception {
+		secBolsaButtonAndLinksNew.clickLinkAndWaitLoad(LinksAfterBolsa.ENVIO_GRATIS_TIENDA);
 		(new ModEnvioYdevolNewSteps(driver)).checkIsVisible();
 	}
 
 	@Step (
 		description="Seleccionar el link <b>Detalle del producto</b>",
 		expected="Se scrolla hasta el apartado de \"Descripción\"")
-	public static void selectDetalleDelProducto(AppEcom app, LineaType lineaType, WebDriver driver) throws Exception {
-		SecBolsaButtonAndLinksNew.clickLinkAndWaitLoad(LinksAfterBolsa.DETALLE_PRODUCTO, driver);
-		checkScrollToDescription(driver);
-		checkBreadCrumbs(driver);
+	public void selectDetalleDelProducto(AppEcom app, LineaType lineaType) throws Exception {
+		secBolsaButtonAndLinksNew.clickLinkAndWaitLoad(LinksAfterBolsa.DETALLE_PRODUCTO);
+		checkScrollToDescription();
+		checkBreadCrumbs();
 		if (TypePanel.KC_SAFETY.getListApps().contains(app) &&
 			(lineaType==LineaType.nina || lineaType==LineaType.nino)) {
-			checkKcSafety(driver);
+			checkKcSafety();
 		}
 	}
 	
 	@Validation (
 		description="Se scrolla hasta el apartado de \"Descriptión\"",
 		level=State.Defect)
-	private static boolean checkScrollToDescription(WebDriver driver) {
+	private boolean checkScrollToDescription() {
 		int maxSecondsToWait = 3;
 		return (SecDetalleProductNew.isVisibleUntil(maxSecondsToWait, driver));
 	}
 	
 	@Validation
-	private static ChecksTM checkBreadCrumbs(WebDriver driver) {
+	private ChecksTM checkBreadCrumbs() {
 		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Figura el bloque de BreadCrumbs",
@@ -70,20 +77,20 @@ public class SecBolsaButtonAndLinksNewSteps {
 	@Validation (
 		description="Aparece el bloque de \"KcSafety\"",
 		level=State.Defect)
-	private static boolean checkKcSafety(WebDriver driver) {
+	private boolean checkKcSafety() {
 		return (SecDetalleProductNew.isVisibleBlockKcSafety(driver));
 	}
 
 	@Step (
 		description="Seleccionar el link <b>Compartir</b>",
 		expected="Aparece el modal para compartir el enlace")
-	public static void selectLinkCompartir(String codigoPais, WebDriver driver) throws Exception {
-		SecBolsaButtonAndLinksNew.clickLinkAndWaitLoad(LinksAfterBolsa.COMPARTIR, driver);
-		checkAppearsModalShareSocial(codigoPais, driver);
+	public void selectLinkCompartir(String codigoPais) throws Exception {
+		secBolsaButtonAndLinksNew.clickLinkAndWaitLoad(LinksAfterBolsa.COMPARTIR);
+		checkAppearsModalShareSocial(codigoPais);
 	}
 	
 	@Validation
-	private static ChecksTM checkAppearsModalShareSocial(String codigoPais, WebDriver driver) {
+	private ChecksTM checkAppearsModalShareSocial(String codigoPais) {
 		ChecksTM validations = ChecksTM.getNew();
 		int maxSeconds = 1;
 	 	validations.add(

@@ -20,7 +20,7 @@ public class AyudaSteps {
 	@Step(
 		description = "Seleccionamos el icono de <b>#{textIcon}</b>",
 		expected = "Aparecen las preguntas asociadas")
-	public void clickIcon(String textIcon) throws Exception {
+	public void clickIcon(String textIcon) {
 		pageAyuda.selectIcon(textIcon);
 	}
 	
@@ -34,7 +34,7 @@ public class AyudaSteps {
 	@Step(
 		description = "Seleccionamos la pregunta <b>#{questionText}</b>",
 		expected = "Aparecen la respuesta correcta")
-	public void clickQuestion(String questionText) throws Exception {
+	public void clickQuestion(String questionText) {
 		pageAyuda.clickQuestion(questionText);
 	}
 

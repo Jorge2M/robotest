@@ -1,7 +1,5 @@
 package com.mng.robotest.domains.ayuda.tests;
 
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.domains.ayuda.steps.AyudaSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.pageobject.shop.footer.SecFooter;
@@ -21,10 +19,10 @@ public class Ayu001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		AccesoStpV.oneStep(dataTest, false, driver);
-		checkAyuda(driver);
+		checkAyuda();
 	}
 	
-	private void checkAyuda(WebDriver driver) throws Exception {
+	private void checkAyuda() throws Exception {
 		secFooterSteps.clickLinkFooter(SecFooter.FooterLink.ayuda, false);
 		ayudaSteps.clickIcon("Devoluciones, cambios y reembolsos");
 		String question = "¿Cómo puedo cambiar o devolver una compra online de artículos Mango?";

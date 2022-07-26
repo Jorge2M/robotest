@@ -48,15 +48,15 @@ public class PageFichaArtSteps {
 	WebDriver driver;
 	Channel channel;
 	AppEcom app;
+	
 	private final PageFicha pageFicha;
 	private final SecBolsa secBolsa;
-	private final ModEnvioYdevolNewSteps modEnvioYdevol;
-	public final SecProductDescrOldSteps secProductDescOld;
-	
-	public static SecBolsaButtonAndLinksNewSteps secBolsaButtonAndLinksNew;
-	public static SecFotosNewSteps secFotosNew;
-	public static SecFitFinderSteps secFitFinder;
-	public static SecTotalLookSteps secTotalLook;
+	private final ModEnvioYdevolNewSteps modEnvioYdevolSteps;
+	private final SecProductDescrOldSteps secProductDescOldSteps;
+	private final SecBolsaButtonAndLinksNewSteps secBolsaButtonAndLinksNewSteps;
+	private final SecFotosNewSteps secFotosNewSteps;
+	private final SecFitFinderSteps secFitFinderSteps;
+	private final SecTotalLookSteps secTotalLookSteps;
 	
 	public PageFichaArtSteps(AppEcom appE, Channel channel, Pais pais) {
 		this.driver = TestMaker.getDriverTestCase();
@@ -64,15 +64,16 @@ public class PageFichaArtSteps {
 		this.app = appE;
 		this.pageFicha = PageFicha.newInstance(channel, appE, driver);
 		this.secBolsa = SecBolsa.make(channel, app, pais, driver);
-		this.modEnvioYdevol = new ModEnvioYdevolNewSteps(driver);
-		this.secProductDescOld = new SecProductDescrOldSteps(channel, appE, driver);
+		this.modEnvioYdevolSteps = new ModEnvioYdevolNewSteps(driver);
+		this.secProductDescOldSteps = new SecProductDescrOldSteps(channel, appE, driver);
+		this.secTotalLookSteps = new SecTotalLookSteps(driver);
+		this.secFitFinderSteps = new SecFitFinderSteps(driver);
+		this.secBolsaButtonAndLinksNewSteps = new SecBolsaButtonAndLinksNewSteps(driver);
+		this.secFotosNewSteps = new SecFotosNewSteps(driver);
 	}
 	
 	public PageFicha getFicha() {
 		return this.pageFicha;
-	}
-	public ModEnvioYdevolNewSteps getModEnvioYdevol() {
-		return this.modEnvioYdevol;
 	}
 	
 	public void validateIsFichaAccordingTypeProduct(GarmentCatalog product) throws Exception {			
@@ -403,7 +404,7 @@ public class PageFichaArtSteps {
 				break;
 			case shop:
 			default:
-				secFitFinder.validateIsOkAndClose(driver);
+				secFitFinderSteps.validateIsOkAndClose();
 			}
 		}
 	}
@@ -543,4 +544,30 @@ public class PageFichaArtSteps {
 	 		urlGaleryOrigin.contains(urlGaleryBC), State.Warn); 
 	 	return validations;
 	}
+
+	public SecProductDescrOldSteps getSecProductDescOldSteps() {
+		return secProductDescOldSteps;
+	}
+
+	public SecBolsaButtonAndLinksNewSteps getSecBolsaButtonAndLinksNewSteps() {
+		return secBolsaButtonAndLinksNewSteps;
+	}
+
+	public SecFotosNewSteps getSecFotosNewSteps() {
+		return secFotosNewSteps;
+	}
+
+	public SecFitFinderSteps getSecFitFinderSteps() {
+		return secFitFinderSteps;
+	}
+
+	public SecTotalLookSteps getSecTotalLookSteps() {
+		return secTotalLookSteps;
+	}
+	
+	public ModEnvioYdevolNewSteps getModEnvioYdevolSteps() {
+		return this.modEnvioYdevolSteps;
+	}
+
+
 }

@@ -19,6 +19,8 @@ public class SecSlidersOld {
 	private static final String XPATH_LO_ULTIMO_VISTO_CABECERA = XPATH_LO_ULTIMO_VISTO + "/span";
 	private static final String XPART_ART_LO_ULTIMO_VISTO = XPATH_LO_ULTIMO_VISTO + "//div[@class[contains(.,'last-viewed-product')]]";
 
+	private SecSlidersOld() {}
+	
 	public static String getXPath(Slider sliderType) {
 		switch (sliderType) {
 		case COMPLETA_TU_LOOK:

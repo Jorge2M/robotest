@@ -5,10 +5,10 @@ import java.util.regex.Pattern;
 
 
 public class DataFoto {
-	private final static String SRC_REGEX_GENERAL = ".*?rcs/pics/static/T(.\\d?)/fotos(|/pasarela|/outfit)/S(.\\d?)/(|A\\d/)(.\\d+)_(\\w{2})_*(.*|.?).(jpg|png).*";
-	private final static String SRC_REGEX_PROPIOS = ".*?rcs/pics/static/T(.\\d?)/colv3/(.\\d+)_(.\\d+)_*(.*|.?).(jpg|png).*";
-	private final static String SRC_REGEX_VIDEOS = ".*?rcs/pics/static/T(.\\d?)/videos/(.*)/(.\\d+)_(.\\d+).(mp4|avi).*";
-	private final static String SRC_REGEX_BASE = ".*?/col_nrf_v3/(.\\d+)_(.\\d+).(jpg|png).*";
+	private static final String SRC_REGEX_GENERAL = ".*?rcs/pics/static/T(.\\d?)/fotos(|/pasarela|/outfit)/S(.\\d?)/(|A\\d/)(.\\d+)_(\\w{2})_*(.*|.?).(jpg|png).*";
+	private static final String SRC_REGEX_PROPIOS = ".*?rcs/pics/static/T(.\\d?)/colv3/(.\\d+)_(.\\d+)_*(.*|.?).(jpg|png).*";
+	private static final String SRC_REGEX_VIDEOS = ".*?rcs/pics/static/T(.\\d?)/videos/(.*)/(.\\d+)_(.\\d+).(mp4|avi).*";
+	private static final String SRC_REGEX_BASE = ".*?/col_nrf_v3/(.\\d+)_(.\\d+).(jpg|png).*";
 	
 	public String srcFoto = "";
 	public String temporada = ""; 

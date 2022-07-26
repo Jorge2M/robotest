@@ -67,23 +67,23 @@ public class Fic002 extends TestBase {
 
 	private void pageFichaNewTest() throws Exception {
 		boolean isFichaAccesorio = pageFichaSteps.getFicha().isFichaAccesorio(); 
-		pageFichaSteps.secFotosNew.validaLayoutFotosNew(isFichaAccesorio, driver);
+		pageFichaSteps.getSecFotosNewSteps().validaLayoutFotosNew(isFichaAccesorio);
 		if (isTotalLook) {
-			pageFichaSteps.secTotalLook.checkIsVisible(driver);
+			pageFichaSteps.getSecTotalLookSteps().checkIsVisible();
 		}
 
-		pageFichaSteps.secBolsaButtonAndLinksNew.selectEnvioYDevoluciones(driver);
-		pageFichaSteps.getModEnvioYdevol().clickAspaForClose();
+		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectEnvioYDevoluciones();
+		pageFichaSteps.getModEnvioYdevolSteps().clickAspaForClose();
 		
-		pageFichaSteps.secBolsaButtonAndLinksNew.selectDetalleDelProducto(app, LineaType.she, driver);
-		pageFichaSteps.secBolsaButtonAndLinksNew.selectLinkCompartir(dataTest.pais.getCodigo_pais(), driver);
+		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectDetalleDelProducto(app, LineaType.she);
+		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectLinkCompartir(dataTest.pais.getCodigo_pais());
 	}
 
 	private void pageFichaOldTest() throws Exception {
 		if (app==AppEcom.outlet && channel!=Channel.mobile) {
 			pageFichaSteps.validaExistsImgsCarruselIzqFichaOld();
 		}
-		pageFichaSteps.secProductDescOld.validateAreInStateInitial(app);
+		pageFichaSteps.getSecProductDescOldSteps().validateAreInStateInitial(app);
 		PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
 		if (((PageFichaArtOld)pageFicha).getNumImgsCarruselIzq() > 2) {
 			pageFichaSteps.selectImgCarruselIzqFichaOld(2);
@@ -97,17 +97,17 @@ public class Fic002 extends TestBase {
 		}
 		if (TypePanel.DESCRIPTION.getListApps().contains(app) &&
 			!channel.isDevice()) {
-			pageFichaSteps.secProductDescOld.selectPanel(TypePanel.DESCRIPTION);
+			pageFichaSteps.getSecProductDescOldSteps().selectPanel(TypePanel.DESCRIPTION);
 		}
 		if (TypePanel.COMPOSITION.getListApps().contains(app)) {
-			pageFichaSteps.secProductDescOld.selectPanel(TypePanel.COMPOSITION);
+			pageFichaSteps.getSecProductDescOldSteps().selectPanel(TypePanel.COMPOSITION);
 		}
 		if (TypePanel.RETURNS.getListApps().contains(app)) {
-			pageFichaSteps.secProductDescOld.selectPanel(TypePanel.RETURNS);
+			pageFichaSteps.getSecProductDescOldSteps().selectPanel(TypePanel.RETURNS);
 		}
 		if (TypePanel.SHIPMENT.getListApps().contains(app) &&
 			!channel.isDevice()) {
-			pageFichaSteps.secProductDescOld.selectPanel(TypePanel.SHIPMENT);  
+			pageFichaSteps.getSecProductDescOldSteps().selectPanel(TypePanel.SHIPMENT);  
 		}
 	}
 

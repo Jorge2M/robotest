@@ -8,10 +8,16 @@ import com.mng.robotest.domains.ficha.pageobjects.SecTotalLook;
 
 public class SecTotalLookSteps {
 
+	private final SecTotalLook secTotalLook;
+	
+	public SecTotalLookSteps(WebDriver driver) {
+		secTotalLook = new SecTotalLook(driver);
+	}
+	
 	@Validation (
 		description="Es visible el bloque de artículos correspondiente al Total Look",
 		level=State.Warn)
-	public static boolean checkIsVisible(WebDriver driver) {
-		return (SecTotalLook.isVisible(driver));
+	public boolean checkIsVisible() {
+		return (secTotalLook.isVisible());
 	}
 }
