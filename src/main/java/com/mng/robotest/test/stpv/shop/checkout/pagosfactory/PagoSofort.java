@@ -21,7 +21,7 @@ public class PagoSofort extends PagoStpV {
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		boolean isPageIconoSofort = new PageSofort1rst(dCtxSh.channel, driver).isPageVisibleUntil(3);
 		
 		//En ocasiones se salta desde la página de Checkout-Mango hasta la página de selección del banco

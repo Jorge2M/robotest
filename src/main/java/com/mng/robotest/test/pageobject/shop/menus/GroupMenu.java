@@ -7,9 +7,9 @@ import com.mng.robotest.test.pageobject.shop.menus.MenuLateralDesktop.Element;
 
 public enum GroupMenu {
 	
-	Articles(Arrays.asList(Element.article)),
-	Campaigns(Arrays.asList(Element.article, Element.campaign)),
-	Unknown(Arrays.asList(Element.article, Element.campaign, Element.slider, Element.map, Element.iframe));
+	ARTICLES(Arrays.asList(Element.article)),
+	CAMPAIGNS(Arrays.asList(Element.article, Element.campaign)),
+	UNKNOWN(Arrays.asList(Element.article, Element.campaign, Element.slider, Element.map, Element.iframe));
 	
 	private List<Element> elementsCanBeContained;
 	private GroupMenu(List<Element> elementsCanBeContained) {

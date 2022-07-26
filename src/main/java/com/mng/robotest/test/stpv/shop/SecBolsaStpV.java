@@ -285,7 +285,7 @@ public class SecBolsaStpV {
 	@Validation (
 		description="El importe total se acaba modificando (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
-	private boolean checkImporteIsModified(String importeTotalOrig, int maxSeconds) 	throws Exception {
+	private boolean checkImporteIsModified(String importeTotalOrig, int maxSeconds) {
 		return (secBolsa.isNotThisImporteTotalUntil(importeTotalOrig, maxSeconds));
 	}
 
@@ -297,10 +297,9 @@ public class SecBolsaStpV {
 	public void selectButtonComprar(DataBag dataBag, DataCtxShop dCtxSh) throws Exception {
 		secBolsa.clickBotonComprar(10);
 		validaSelectButtonComprar(dataBag, dCtxSh);
-		if (!UtilsTest.dateBeforeToday("2022-08-01")) {
-			if(!dCtxSh.userRegistered) {
-				Page1IdentCheckoutStpV.secSoyNuevo.validaRGPDText(dCtxSh, driver);
-			}
+		if (!UtilsTest.dateBeforeToday("2022-08-01") &&
+			!dCtxSh.userRegistered) {
+			Page1IdentCheckoutStpV.secSoyNuevo.validaRGPDText(dCtxSh, driver);
 		}
 	}
 
@@ -330,7 +329,7 @@ public class SecBolsaStpV {
 	@Step (
 		description="Lincar con el artículo existente en la bolsa" + " #{articuloClickado.getReferencia()})", 
 		expected="El link al artículo es correcto")
-	public void clickArticuloBolsa(ArticuloScreen articuloClickado) throws Exception {
+	public void clickArticuloBolsa(ArticuloScreen articuloClickado) {
 		secBolsa.setBolsaToStateIfNotYet(StateBolsa.OPEN);
 		secBolsa.click1erArticuloBolsa();
 

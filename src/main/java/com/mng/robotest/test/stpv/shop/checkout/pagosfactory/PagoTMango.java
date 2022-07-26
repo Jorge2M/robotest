@@ -25,7 +25,7 @@ public class PagoTMango extends PagoStpV {
 		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
 		pageCheckoutWrapperStpV.getSecTMangoStpV().validateIsSectionOk();
 		pageCheckoutWrapperStpV.getSecTMangoStpV().clickTipoPago(SecTMango.TipoPago.pagoHabitual);
-		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		PageAmexInputTarjetaStpV.validateIsPageOk(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), driver);
 		
 		if (execPay) {

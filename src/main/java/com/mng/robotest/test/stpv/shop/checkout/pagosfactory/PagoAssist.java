@@ -18,7 +18,7 @@ public class PagoAssist extends PagoStpV {
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		PageAssist1rstStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver);
 		
 		if (execPay) {

@@ -57,7 +57,7 @@ public class ConsolaVotfSteps {
 		expected=
 			"Aparecen datos correspondientes a " + PageConsola.MSG_CONS_TIPOS_ENVIO_OK,
 		saveErrorData=SaveWhen.Never)
-	public void inputArticleAndTiendaDisp(String articulo, String tienda) throws Exception {
+	public void inputArticleAndTiendaDisp(String articulo, String tienda) {
 		pageConsola.inputArticDispYCompra(articulo);
 		pageConsola.inputTiendas(tienda);
 	}
@@ -165,8 +165,7 @@ public class ConsolaVotfSteps {
 	public String realizarSolicitudTienda(String articulo) {
 		pageConsola.inputArticDispYCompra(articulo);
 		pageConsola.clickButtonSolADomicilio();
-		String codigoPedido = switchToIframeAndCheckAfterSolicitudAdomicilio();
-		return codigoPedido;
+		return switchToIframeAndCheckAfterSolicitudAdomicilio();
 	}
 	
 	private String switchToIframeAndCheckAfterSolicitudAdomicilio() {
@@ -195,6 +194,7 @@ public class ConsolaVotfSteps {
 		validations.add(
 			"Aparece el literal \"Resultado creación pedido: (0) Total\"",
 			iframeResult.resCreacionPedidoOk(), State.Warn);
+		
 	 	return validations;
 	}
 
@@ -204,8 +204,7 @@ public class ConsolaVotfSteps {
 		saveErrorData=SaveWhen.Never)
 	public String obtenerPedidos(String codigoPedido) {
 		pageConsola.clickButtonObtenerPedidos();
-		String codigoPedidoFull = switchToIframeAndCheckAfterObtenerPedidos(codigoPedido);
-		return codigoPedidoFull;
+		return switchToIframeAndCheckAfterObtenerPedidos(codigoPedido);
 	}
 	
 	private String switchToIframeAndCheckAfterObtenerPedidos(String codigoPedido) {
@@ -306,7 +305,7 @@ public class ConsolaVotfSteps {
 		description="Pulsar el botón \"Confirmar Pedido\"",
 		expected="Aparece el pedido confirmado",
 		saveErrorData=SaveWhen.Never)
-	public void selectConfPedido(String codigoPedidoFull) throws Exception {
+	public void selectConfPedido(String codigoPedidoFull) {
 		pageConsola.clickButtonConfPedido();
 		checkAfterConfirmarPedido(codigoPedidoFull);
 	}

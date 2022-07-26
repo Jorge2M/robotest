@@ -19,12 +19,13 @@ public abstract class TestBase {
 	protected final Channel channel;
 	protected final AppEcom app;
 	protected final DataCtxShop dataTest;
+	protected final InputParamsMango inputParamsSuite;
 	
-	public TestBase() throws Exception {
+	protected TestBase() throws Exception {
 		this.driver = TestMaker.getDriverTestCase();
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
+		this.inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		this.app = (AppEcom)inputParamsSuite.getApp();
-		this.channel = (Channel)inputParamsSuite.getChannel();
+		this.channel = inputParamsSuite.getChannel();
 		this.dataTest = DataTest.getData(PaisShop.ESPANA);
 	}
 }

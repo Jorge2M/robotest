@@ -28,7 +28,7 @@ import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
 public class Loy001 extends TestBase {
 
-	final User USER = LoyaltyCommons.USER_PRO_WITH_LOY_POINTS;
+	static final User USER = LoyaltyCommons.USER_PRO_WITH_LOY_POINTS;
 	final Menu1rstLevel menuNewCollection;
 	
 	SecMenusWrapperStpV secMenusSteps = SecMenusWrapperStpV.getNew(dataTest, driver);
@@ -59,26 +59,25 @@ public class Loy001 extends TestBase {
 		//TODO en estos momentos algo raro le pasa al menú Nuevo que requiere un refresh para funcionar ok
 		driver.navigate().refresh();
 		
-		DataBag dataBag = GaleriaNavigationsStpV.selectArticleAvailableFromGaleria(dataTest, driver);
-		return dataBag;
+		return GaleriaNavigationsStpV.selectArticleAvailableFromGaleria(dataTest, driver);
 	}
 	
 	private DataCtxPago checkoutExecution(DataBag dataBag) throws Exception {
 		
-		FlagsTestCkout FTCkout = new FlagsTestCkout();
-		FTCkout.validaPasarelas = true;  
-		FTCkout.validaPagos = true;
-		FTCkout.emailExist = true; 
-		FTCkout.loyaltyPoints = true;
+		FlagsTestCkout fTCkout = new FlagsTestCkout();
+		fTCkout.validaPasarelas = true;  
+		fTCkout.validaPagos = true;
+		fTCkout.emailExist = true; 
+		fTCkout.loyaltyPoints = true;
 		
 		DataCtxPago dCtxPago = new DataCtxPago(dataTest);
-		dCtxPago.setFTCkout(FTCkout);
+		dCtxPago.setFTCkout(fTCkout);
 		dCtxPago.getDataPedido().setDataBag(dataBag);
 		
 		dCtxPago = new CheckoutFlow.BuilderCheckout(dataTest, dCtxPago, driver)
 			.pago(dataTest.pais.getPago("VISA"))
 			.build()
-			.checkout(From.Bolsa);
+			.checkout(From.BOLSA);
 		
 		return dCtxPago;
 	}

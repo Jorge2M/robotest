@@ -25,7 +25,7 @@ public class PagoMercadopago extends PagoStpV {
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		DataPedido dataPedido = this.dCtxPago.getDataPedido();
 		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		int maxSeconds = 5;
 		PageMercpago1rstStpV.validateIsPageUntil(maxSeconds, driver);
 		PageMercpago1rstStpV.clickLinkRegistration(driver);
@@ -43,8 +43,8 @@ public class PagoMercadopago extends PagoStpV {
 		}
 	}
 	
-	private void fluxFromInputDataTrj(DataPedido dataPedido, PageMercpagoDatosTrjStpV pageMercpagoDatosTrjStpV) 
-	throws Exception {
+	private void fluxFromInputDataTrj(
+			DataPedido dataPedido, PageMercpagoDatosTrjStpV pageMercpagoDatosTrjStpV) {
 		pageMercpagoDatosTrjStpV.inputNumTarjeta(dataPedido.getPago().getNumtarj());
 		PageMercpagoDatosTrjStpV.InputData inputData = new PageMercpagoDatosTrjStpV.InputData();
 		inputData.setMesVencimiento(dataPedido.getPago().getMescad());

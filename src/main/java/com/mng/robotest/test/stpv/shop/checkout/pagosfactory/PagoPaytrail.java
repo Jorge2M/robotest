@@ -20,7 +20,7 @@ public class PagoPaytrail extends PagoStpV {
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		PagePaytrail1rstStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
 		PagePaytrail1rstStpV.selectBancoAndContinue(dCtxSh.channel, driver);
 		

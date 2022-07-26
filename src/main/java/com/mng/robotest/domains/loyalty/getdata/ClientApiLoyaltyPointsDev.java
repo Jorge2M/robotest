@@ -86,8 +86,7 @@ public class ClientApiLoyaltyPointsDev {
 	    }
 	    
         ObjectMapper mapper = new ObjectMapper();
-        ListConsumers listConsumers = mapper.readValue(response.getEntity().getContent(), ListConsumers.class);
-        return listConsumers;
+        return mapper.readValue(response.getEntity().getContent(), ListConsumers.class);
 	}
 	
 	private ListConsumers getDataConsumerFromCache(String emailConsumer) {
@@ -97,8 +96,7 @@ public class ClientApiLoyaltyPointsDev {
 		consumerDataCache.put(emailConsumer, listConsumers);
 	}
 	
-	public ResultAddPoints addLoyaltyPoints(int loyaltyPoints, User user) 
-	throws Exception {
+	public ResultAddPoints addLoyaltyPoints(int loyaltyPoints, User user) {
 		TransferPoints transferPoints = new TransferPoints();
 		transferPoints.setScore(loyaltyPoints);
 		transferPoints.setCountry(user.getCountry());
@@ -117,39 +115,4 @@ public class ClientApiLoyaltyPointsDev {
 		
 		return result;
 	}
-
-//	public ResultAddPoints addLoyaltyPoints(int loyaltyPoints, UserTest user) 
-//			throws Exception {
-//		TransferPoints transferPoints = new TransferPoints();
-//		transferPoints.setScore(loyaltyPoints);
-//		transferPoints.setCountry(user.getCountry());
-//		transferPoints.setLocation_id(11667);
-//		transferPoints.setComments("hola");
-//		StringEntity requestEntity = new StringEntity(
-//				Entity.json(transferPoints).toString(), 
-//				ContentType.APPLICATION_JSON);
-//				
-//		String url = "https://api.loyal.guru/profiles";
-//		URIBuilder builder = new URIBuilder(url);
-//		builder
-//			.setPath(user.getContactId())
-//			.setPath("give_score");
-//		
-//		HttpPost post = new HttpPost(builder.build());
-//	    post.addHeader("Content-Type", MediaType.APPLICATION_JSON);
-//	    post.setHeader("Authorization", "Basic dmljdG9yLnBhcmVyYStwcmVAbWFuZ28uY29tOmVjOWU0NmQ5NzIwMWNjN2U0Nzg0NTgxM2FkZWU1MTE4");
-//	    post.setEntity(requestEntity);
-//	    
-//	    HttpResponse response = httpClient.execute(post);
-//	    int status = response.getStatusLine().getStatusCode();
-//	    if (status!=200) {
-//        	String message = String.format("Error %s calling %s", response.getStatusLine().getStatusCode(), url); 
-//            logger.error(message);
-//            throw new NotFoundException(message);
-//	    }
-//	    
-//        ObjectMapper mapper = new ObjectMapper();
-//        ResultAddPoints resultAddPoints = mapper.readValue(response.getEntity().getContent(), ResultAddPoints.class);
-//        return resultAddPoints;
-//	}
 }

@@ -34,11 +34,6 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 
-/**
- * Script correspondiente a las pruebas de reembolsos
- * @author jorge.munoz
- *
- */
 
 public class Reembolsos {
 	
@@ -161,7 +156,7 @@ public class Reembolsos {
 		dCtxPago = new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver)
 			.pago(pagoStoreCredit)
 			.build()
-			.checkout(From.Bolsa);
+			.checkout(From.BOLSA);
 		
 		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
 			//Volvemos a la portada (Seleccionamos el link "Seguir de shopping" o el icono de Mango)

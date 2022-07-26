@@ -28,7 +28,7 @@ public class PagoBillpay extends PagoStpV {
 		}
 		
 		if (execPay) {
-			dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+			dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 			throw new PaymethodWithoutTestPayImplemented(MsgNoPayImplemented);
 		}
 	}	

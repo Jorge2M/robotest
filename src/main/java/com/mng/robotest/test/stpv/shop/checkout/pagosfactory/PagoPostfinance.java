@@ -22,7 +22,7 @@ public class PagoPostfinance extends PagoStpV {
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		DataPedido dataPedido = dCtxPago.getDataPedido();
 		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		String nombrePago = dataPedido.getPago().getNombre(dCtxSh.channel, dCtxSh.appE);
 		String importeTotal = dataPedido.getImporteTotal();
 		String codPais = this.dCtxSh.pais.getCodigo_pais();

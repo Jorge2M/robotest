@@ -1,7 +1,6 @@
 package com.mng.robotest.test.stpv.shop.checkout;
 
 import org.openqa.selenium.WebDriver;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -17,6 +16,7 @@ import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.factoryes.entities.EgyptCity;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.pageobject.shop.checkout.Page2IdentCheckout;
+
 
 public class Page2IdentCheckoutStpV {
 	

@@ -11,7 +11,7 @@ import com.mng.robotest.test.stpv.shop.menus.SecMenusUserSteps;
 
 public class LoyaltyCommons {
 	
-	public final static User USER_PRO_WITH_LOY_POINTS = 
+	public static final User USER_PRO_WITH_LOY_POINTS = 
 			new User("ticket_digital_es@mango.com", "6051483560048388114", "ES");
 
 	private LoyaltyCommons() {}

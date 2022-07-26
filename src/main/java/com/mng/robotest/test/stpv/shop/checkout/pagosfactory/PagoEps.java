@@ -25,7 +25,7 @@ public class PagoEps extends PagoStpV {
 		
 		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
 		pageCheckoutWrapperStpV.selectBancoEPS(dCtxSh);
-		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
 			PageEpsSimuladorStpV.validateIsPage(driver);
 			PageEpsSimuladorStpV.selectDelay(TypeDelay.OneMinutes, driver);

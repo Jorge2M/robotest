@@ -20,7 +20,7 @@ public class PagoPaysecureQiwi extends PagoStpV {
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		
 		PagePaysecureQiwi1rstStpV pagePaysecureQiwi1rstStpV = new PagePaysecureQiwi1rstStpV(dCtxSh.appE, driver);
 		pagePaysecureQiwi1rstStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dCtxSh.channel);

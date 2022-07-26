@@ -145,9 +145,9 @@ public final class Menu1rstLevel implements MenuLateralDesktop {
 	private GroupMenu getGroupMobile() {
 		String href = dataMenu.getHref();
 		if (isCampaignMobile(href)) {
-			return GroupMenu.Campaigns;
+			return GroupMenu.CAMPAIGNS;
 		}
-		return GroupMenu.Articles;
+		return GroupMenu.ARTICLES;
 	}
 	
 	private boolean isCampaignMobile(String href) {
@@ -157,9 +157,9 @@ public final class Menu1rstLevel implements MenuLateralDesktop {
 	private GroupMenu getGroupDesktop() {
 		String dataTestIdMenuSuperior = getDataTestIdMenuSuperiorDesktop();
 		if (isCampaignDesktop(dataTestIdMenuSuperior)) {
-			return GroupMenu.Campaigns;
+			return GroupMenu.CAMPAIGNS;
 		}
-		return GroupMenu.Articles;
+		return GroupMenu.ARTICLES;
 	}
 	
 	static boolean isCampaignDesktop(String dataTestId) {

@@ -20,7 +20,7 @@ public class PagoSepa extends PagoStpV {
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		Pago pago = this.dCtxPago.getDataPedido().getPago();
 		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, dCtxSh);
-		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		String importeTotal = dCtxPago.getDataPedido().getImporteTotal();
 		PageSepa1rstStpV.validateIsPage(pago.getNombre(dCtxSh.channel, dCtxSh.appE), importeTotal, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
 		

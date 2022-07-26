@@ -66,7 +66,7 @@ public class CompraEgoitz {
 		new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver)
 			.pago(dCtxSh.pais.getPago("PAYPAL"))
 			.build()
-			.checkout(From.Bolsa);
+			.checkout(From.BOLSA);
 	}
 	
 	private DataCtxShop getCtxShForTest(Pais pais, IdiomaPais idioma) throws Exception {

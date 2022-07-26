@@ -23,7 +23,7 @@ public class PagoIdeal extends PagoStpV {
 		
 		if (execPay) {
 			pageCheckoutWrapperStpV.getSecIdealStpV().clickBanco(BancoSeleccionado.TestIssuer);
-			dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+			dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 			PageIdealSimuladorStpV.validateIsPage(driver);
 			PageIdealSimuladorStpV.clickContinueButton(driver);
 		}

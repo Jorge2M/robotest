@@ -14,8 +14,8 @@ import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
 public class Loy005 extends TestBase {
 
-	final static User EMISOR_USER = new User("test.performance23@mango.com", "6875476978997042979", "ES");
-	final static User RECEPTOR_USER = new User("test.performance24@mango.com", "6876477022921042981", "ES");
+	static final User EMISOR_USER = new User("test.performance23@mango.com", "6875476978997042979", "ES");
+	static final User RECEPTOR_USER = new User("test.performance24@mango.com", "6876477022921042981", "ES");
 	final boolean isPro = LoyaltyCommons.isPro(app, driver);
 	
 	final PageHomeLikesSteps pageHomeLikesSteps = new PageHomeLikesSteps(driver);
@@ -86,6 +86,6 @@ public class Loy005 extends TestBase {
 	
 	private void login(User user, String password) throws Exception {
 		SecMenusUserSteps secMenusUserStpV = new SecMenusUserSteps(channel, app, driver);
-		secMenusUserStpV.logoffLogin(user.getEmail(), dataTest.passwordUser);
+		secMenusUserStpV.logoffLogin(user.getEmail(), password);
 	}
 }

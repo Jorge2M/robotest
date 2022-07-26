@@ -35,11 +35,11 @@ public class PageConsola extends PageObjTM {
 		super (driver);
 	}
 	
-	private String getXPath_optionSelectTestServ(String textOption) {
+	private String getXPathOptionSelectTestServ(String textOption) {
 		return (XPATH_SELECT_TEST_SERV + "/option[text()[contains(.,'" + textOption + "')]]");
 	}
 	
-	private String getXPath_optionSelectConsolaCom(String textOption) {
+	private String getXPathOptionSelectConsolaCom(String textOption) {
 		return (XPATH_SELECT_TEST_SERV + "/option[text()[contains(.,'" + textOption + "')]]");
 	}
 	
@@ -57,23 +57,23 @@ public class PageConsola extends PageObjTM {
 		return (state(Present, By.xpath(xpath)).check());
 	}
 	
-	public String getText_optionSelectTestServ(String textOption) {
-		String xpathOption = getXPath_optionSelectTestServ(textOption);
+	public String getTextOptionSelectTestServ(String textOption) {
+		String xpathOption = getXPathOptionSelectTestServ(textOption);
 		return (driver.findElement(By.xpath(xpathOption)).getText());
 	}
 	
-	public String getText_optionSelectConsolaCom(String textOption) {
-		String xpathOption = getXPath_optionSelectConsolaCom(textOption);
+	public String getTextOptionSelectConsolaCom(String textOption) {
+		String xpathOption = getXPathOptionSelectConsolaCom(textOption);
 		return (driver.findElement(By.xpath(xpathOption)).getText());
 	}	
 	
 	public void selectEntornoTestServ(String entorno) {
-		String optionTestPRE = getText_optionSelectTestServ(entorno);
+		String optionTestPRE = getTextOptionSelectTestServ(entorno);
 		new Select(driver.findElement(By.xpath(XPATH_SELECT_TEST_SERV))).selectByVisibleText(optionTestPRE);
 	}
 	
 	public void selectEntornoConsolaCom(String entorno) {
-		String optionTestPRE = getText_optionSelectConsolaCom(entorno);
+		String optionTestPRE = getTextOptionSelectConsolaCom(entorno);
 		new Select(driver.findElement(By.xpath(XPATH_SELECT_CONSOLA_COM))).selectByVisibleText(optionTestPRE);
 	}	
 	

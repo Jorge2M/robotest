@@ -152,7 +152,7 @@ public class CompraFact implements Serializable {
 		dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago, driver)
 			.pago(this.pago)
 			.build()
-			.checkout(From.Bolsa);
+			.checkout(From.BOLSA);
 		
 		//Validación en Manto de los Pedidos (si existen)
 		if (dCtxPago.getFTCkout().validaPedidosEnManto) {

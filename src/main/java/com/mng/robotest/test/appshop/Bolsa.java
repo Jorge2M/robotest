@@ -60,7 +60,7 @@ public class Bolsa {
 		dCtxPago.setFTCkout(FTCkout);
 		dCtxPago.getDataPedido().setDataBag(dataBag);
 		
-		new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver).build().checkout(From.Bolsa);
+		new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver).build().checkout(From.BOLSA);
 	}
 
 	@Test (
@@ -105,7 +105,7 @@ public class Bolsa {
 		dCtxPago.setFTCkout(FTCkout);
 		dCtxPago.getDataPedido().setDataBag(dataBag);
 		
-		new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver).build().checkout(From.Bolsa);
+		new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver).build().checkout(From.BOLSA);
 	}
 
 	@Test (

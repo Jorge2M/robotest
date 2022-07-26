@@ -60,7 +60,7 @@ public class EgyptOrderTest implements Serializable {
 			.pago(dCtxSh.pais.getPago("VISA"))
 			.egyptCity(egyptCity)
 			.build()
-			.checkout(From.Bolsa);
+			.checkout(From.BOLSA);
 	}
 
 	DataCtxShop makeEgyptDataTest() {

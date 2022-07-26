@@ -19,7 +19,7 @@ public class PagoTpvVotf extends PagoStpV {
 		String nombrePago = this.dCtxPago.getDataPedido().getPago().getNombre(dCtxSh.channel, dCtxSh.appE);
 		pageCheckoutWrapperStpV.noClickIconoVotf(nombrePago);
 		if (execPay) {
-			dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+			dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		}
 	}	
 }

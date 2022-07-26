@@ -45,7 +45,7 @@ public class UtilsTest {
 			return (dateToday.before(dateLimit));
 		} 
 		catch (ParseException e) {
-			Log4jTM.getLogger().error("Error parsing date " + date, e);
+			Log4jTM.getLogger().error("Error parsing date {}", date, e);
 			return false; 
 		}
 	}

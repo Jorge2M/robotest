@@ -26,7 +26,7 @@ public class PagoPaypal extends PagoStpV {
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		int maxSeconds = 10;
 		ModalPreloaderSppinerStpV.validateAppearsAndDisappears(driver);
 		switch (getInitPagePaypal(driver)) {

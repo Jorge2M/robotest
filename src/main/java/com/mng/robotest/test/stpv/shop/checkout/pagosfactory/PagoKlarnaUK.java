@@ -22,7 +22,7 @@ public class PagoKlarnaUK extends PagoStpV {
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		pageKlarnaStpV.checkIsPage(10);
 		pageKlarnaStpV.clickComprar();
 		

@@ -22,7 +22,7 @@ public class PagoPayMaya extends PagoStpV {
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		
 		PageIdentPaymayaStpV pageIdentPaymayaStpV = new PageIdentPaymayaStpV(driver);
 		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {

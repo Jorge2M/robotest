@@ -12,7 +12,7 @@ import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
 public class Loy003 extends TestBase {
 
-	final static User USER = new User("test.performance22@mango.com", "6876577027622042923", "ES");
+	static final User USER = new User("test.performance22@mango.com", "6876577027622042923", "ES");
 	final boolean isPro = LoyaltyCommons.isPro(app, driver);
 	
 	final SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps(channel, app, driver);

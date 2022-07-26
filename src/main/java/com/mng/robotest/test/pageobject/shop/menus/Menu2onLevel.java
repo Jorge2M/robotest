@@ -105,6 +105,6 @@ public class Menu2onLevel implements MenuLateralDesktop {
 	
 	@Override
 	public GroupMenu getGroup(Channel channel) {
-		return GroupMenu.Articles;
+		return GroupMenu.ARTICLES;
 	}
 }

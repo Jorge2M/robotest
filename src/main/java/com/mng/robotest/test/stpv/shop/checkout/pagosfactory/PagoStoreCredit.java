@@ -22,7 +22,7 @@ public class PagoStoreCredit extends PagoStpV {
 		pageCheckoutWrapperStpV.getSecStoreCreditStpV().selectSaldoEnCuentaBlock(dCtxSh.pais, dCtxPago, dCtxSh.appE);
 		
 		if (execPay) {
-			dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+			dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 			this.dCtxPago.getDataPedido().setCodtipopago("U");
 		}
 	}

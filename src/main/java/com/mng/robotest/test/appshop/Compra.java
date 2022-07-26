@@ -114,7 +114,7 @@ public class Compra {
 			return new BuilderCheckout(dCtxSh, dCtxPago, driver)
 					.pago(espana.getPago("VISA"))
 					.build()
-					.checkout(From.Prehome);
+					.checkout(From.PREHOME);
 		} else {
 			Optional<List<GarmentCatalog>> articlesHomeOpt = getArticlesHome(dCtxSh, driver);
 			if (articlesHomeOpt.isEmpty()) {
@@ -129,7 +129,7 @@ public class Compra {
 						.pago(espana.getPago("VISA"))
 						.listArticles(articlesHomeOpt.get().subList(0, 2))
 						.build()
-						.checkout(From.Prehome);
+						.checkout(From.PREHOME);
 			} else {
 				Optional<List<GarmentCatalog>> articlesIntimissimiOpt = getArticlesIntimissimi(dCtxSh, driver);
 				if (articlesIntimissimiOpt.isEmpty()) {
@@ -140,7 +140,7 @@ public class Compra {
 						.pago(espana.getPago("VISA"))
 						.listArticles(listArticles)
 						.build()
-						.checkout(From.Prehome);
+						.checkout(From.PREHOME);
 			}
 		}
 	}
@@ -263,7 +263,7 @@ public class Compra {
 		dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago, driver)
 			.pago(espana.getPago("VISA"))
 			.build()
-			.checkout(From.Identification);
+			.checkout(From.IDENTIFICATION);
 		
 		if (dCtxPago.getFTCkout().validaPedidosEnManto) {
 			List<CheckPedido> listChecks = Arrays.asList(
@@ -296,7 +296,7 @@ public class Compra {
 		dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago, driver)
 			.finalCountrys(Arrays.asList(francia))
 			.build()
-			.checkout(From.Prehome);
+			.checkout(From.PREHOME);
 		
 		if (dCtxPago.getFTCkout().validaPedidosEnManto) {
 			List<CheckPedido> listChecks = Arrays.asList(
@@ -332,7 +332,7 @@ public class Compra {
 			
 			dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago, driver)
 				.build()
-				.checkout(From.Prehome);
+				.checkout(From.PREHOME);
 					
 			//Seleccionamos el logo de Mango (necesitamos acceder a una página con los links del menú superior)
 			NavigationsStpV.gotoPortada(dCtxSh, driver);
@@ -389,7 +389,7 @@ public class Compra {
 		
 		dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago, driver)
 			.build()
-			.checkout(From.Prehome);
+			.checkout(From.PREHOME);
 		
 		if (dCtxPago.getFTCkout().validaPedidosEnManto) {
 			List<CheckPedido> listChecks = Arrays.asList(

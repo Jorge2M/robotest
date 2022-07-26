@@ -4,7 +4,6 @@ import static com.mng.robotest.test.data.PaisShop.ESPANA;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -61,7 +60,7 @@ import com.mng.robotest.test.utils.UtilsTest;
 
 public class CheckoutFlow {
 
-	public enum From {Prehome, Bolsa, Identification, Checkout, MetodosPago}
+	public enum From { PREHOME, BOLSA, IDENTIFICATION, CHECKOUT, METODOSPAGO }
 	
 	private final WebDriver driver;
 	private final DataCtxShop dCtxSh;
@@ -94,23 +93,23 @@ public class CheckoutFlow {
 	}
 	
 	public DataCtxPago checkout(From from) throws Exception {
-		if (from==From.MetodosPago) {
+		if (from==From.METODOSPAGO) {
 			aceptarCompraDesdeMetodosPago();
 			return dCtxPago;
 		}
-		if (from==From.Prehome) {
+		if (from==From.PREHOME) {
 			testFromPrehomeToBolsa();
 		}
 		
-		if (from==From.Bolsa || from==From.Prehome) {
+		if (from==From.BOLSA || from==From.PREHOME) {
 			secBolsaStpV.selectButtonComprar(dCtxPago.getDataPedido().getDataBag(), dCtxSh);
 		}
 		
-		if (from==From.Identification || from==From.Bolsa || from==From.Prehome) {
+		if (from==From.IDENTIFICATION || from==From.BOLSA || from==From.PREHOME) {
 			testFromIdentificationToMetodosPago();
 		}
 		
-		if (from==From.Checkout || from==From.Identification || from==From.Bolsa || from==From.Prehome) {
+		if (from==From.CHECKOUT || from==From.IDENTIFICATION || from==From.BOLSA || from==From.PREHOME) {
 			if (dCtxSh.pais.getListPagosForTest(dCtxSh.appE, dCtxPago.getFTCkout().isEmpl).size() > 0) {
 				checkMetodosPagos(finalCountrys);
 			}

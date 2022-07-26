@@ -17,7 +17,7 @@ public class PagoKCP extends PagoStpV {
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		PageKcpMainStpV pageKcpMainStpV = new PageKcpMainStpV(driver);
 		pageKcpMainStpV.isPage(30);
 		pageKcpMainStpV.isPresentTermAndConditions(30);

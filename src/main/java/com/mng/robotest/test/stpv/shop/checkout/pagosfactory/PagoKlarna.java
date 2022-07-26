@@ -25,7 +25,7 @@ public class PagoKlarna extends PagoStpV {
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-		dCtxPago = checkoutFlow.checkout(From.MetodosPago);
+		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		
 		if (pageKlarnaStpV.getPageObject().isPage(10)) {
 			pageKlarnaStpV.checkIsPage(0);
@@ -42,18 +42,6 @@ public class PagoKlarna extends PagoStpV {
 				this.dCtxPago.getDataPedido().setCodtipopago("K");
 			}
 		}
-
-		//pageKlarnaStpV.checkIsModalInputUserData(5);
-		
-//		if (execPay) {
-//			pageKlarnaStpV.inputDataPhoneAndConfirm(dCtxSh.pais.getTelefono(), "123456");
-//			DataKlarna dataKlarna = getDataKlarna();
-//			pageKlarnaStpV.inputUserDataAndConfirm(dataKlarna);
-//			if (pageKlarnaStpV.checkModalInputPersonNumber(2)) {
-//				pageKlarnaStpV.inputPersonNumberAndConfirm(dataKlarna.getPersonnumber());
-//			}
-//			this.dCtxPago.getDataPedido().setCodtipopago("K");
-//		}
 	}
 
 	private DataKlarna getDataKlarna() {
