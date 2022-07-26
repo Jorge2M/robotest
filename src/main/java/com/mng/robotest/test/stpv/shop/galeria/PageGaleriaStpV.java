@@ -284,7 +284,7 @@ public class PageGaleriaStpV {
 	@Validation
 	private ChecksTM checkNotRepeatedArticles() throws Exception {
 		ChecksTM validations = ChecksTM.getNew();
-		ArrayList<DataArticleGalery> productsRepeated = pageGaleria.searchArticleRepeatedInGallery();
+		List<DataArticleGalery> productsRepeated = pageGaleria.searchArticleRepeatedInGallery();
 		String producRepeatedWarning = "";
 		if (productsRepeated!=null && productsRepeated.size()>0) {
 			producRepeatedWarning+=

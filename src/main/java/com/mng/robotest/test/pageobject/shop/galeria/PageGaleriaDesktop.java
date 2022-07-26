@@ -804,11 +804,11 @@ public class PageGaleriaDesktop extends PageGaleria {
 		clickHearthIcon(hearthIcon);
 		int maxSecondsToWait = 2;
 		switch (estadoInicial) {
-		case Marcado:
-			waitToHearthIconInState(hearthIcon, StateFavorito.Desmarcado, maxSecondsToWait);
+		case MARCADO:
+			waitToHearthIconInState(hearthIcon, StateFavorito.DESMARCADO, maxSecondsToWait);
 			break;
-		case Desmarcado:
-			waitToHearthIconInState(hearthIcon, StateFavorito.Marcado, maxSecondsToWait);
+		case DESMARCADO:
+			waitToHearthIconInState(hearthIcon, StateFavorito.MARCADO, maxSecondsToWait);
 			break;
 		default:
 			break;
@@ -827,9 +827,9 @@ public class PageGaleriaDesktop extends PageGaleria {
 	@Override
 	public StateFavorito getStateHearthIcon(WebElement hearthIcon) {
 		if (hearthIcon.getAttribute("class").contains("icon-fill")) {
-			return StateFavorito.Marcado;
+			return StateFavorito.MARCADO;
 		}
-		return StateFavorito.Desmarcado;
+		return StateFavorito.DESMARCADO;
 	}
 
 	public void clickLinkColumnas(NumColumnas numColumnas) {

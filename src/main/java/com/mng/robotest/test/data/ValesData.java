@@ -9,7 +9,6 @@ import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.generic.beans.FactoryVale;
 import com.mng.robotest.test.generic.beans.ValePais;
 
-//TODO refactorizar para que cada campaña sea una clase
 public class ValesData {
 	
 	public enum Campanya {

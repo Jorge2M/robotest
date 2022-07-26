@@ -275,11 +275,11 @@ public class PageGaleriaDevice extends PageGaleria {
 		clickHearthIconPreventingOverlapping(hearthIcon);
 		int maxSecondsToWait = 2;
 		switch (estadoInicial) {
-		case Marcado:
-			waitToHearthIconInState(hearthIcon, StateFavorito.Desmarcado, maxSecondsToWait);
+		case MARCADO:
+			waitToHearthIconInState(hearthIcon, StateFavorito.DESMARCADO, maxSecondsToWait);
 			break;
-		case Desmarcado:
-			waitToHearthIconInState(hearthIcon, StateFavorito.Marcado, maxSecondsToWait);
+		case DESMARCADO:
+			waitToHearthIconInState(hearthIcon, StateFavorito.MARCADO, maxSecondsToWait);
 			break;
 		default:
 			break;
@@ -345,9 +345,9 @@ public class PageGaleriaDevice extends PageGaleria {
 	@Override
 	public StateFavorito getStateHearthIcon(WebElement hearthIcon) {
 		if (hearthIcon.getAttribute("class").contains("favorite--active")) {
-			return StateFavorito.Marcado;
+			return StateFavorito.MARCADO;
 		}
-		return StateFavorito.Desmarcado;
+		return StateFavorito.DESMARCADO;
 	}
 
 	@Override

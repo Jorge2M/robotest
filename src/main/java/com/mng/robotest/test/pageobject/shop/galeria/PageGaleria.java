@@ -126,35 +126,32 @@ public abstract class PageGaleria extends PageObjTM {
 		return secPrecios;
 	}
 	
-	static final String XPathArticuloDesktop = "//li[@id[contains(.,'product-key-id')]]";
+	static final String XPATH_ARTICULO_DESKTOP = "//li[@id[contains(.,'product-key-id')]]";
 	
 	//TODO adaptar React (pendiente petición a Jesús Bermúdez 3-Marzo-2021)
-//	static final String XPathArticuloDesktopBuscador = 
-//		"//div[@class[contains(.,'product-list-item')] or @class[contains(.,'z0q8P')] or @class[contains(.,'_29n6N')]]";
-	static final String XPathArticuloDevice = "//li[@class='product']";
-	//static final String XPathArticuloTabletOutlet = "//*[@class[contains(.,'product-list-item')]]";
-	static final String XPathArticuloTabletOutlet = XPathArticuloDesktop;
+	private static final String XPATH_ARTICULO_DEVICE = "//li[@class='product']";
+	private static final String XPATH_ARTICULO_TABLET_OUTLET = XPATH_ARTICULO_DESKTOP;
 	private String getXPathArticulo() {
 		if (channel==Channel.desktop) {
-			return XPathArticuloDesktop;
+			return XPATH_ARTICULO_DESKTOP;
 		}
 		else {
 			if (app==AppEcom.outlet && channel==Channel.tablet) {
-				return XPathArticuloTabletOutlet;
+				return XPATH_ARTICULO_TABLET_OUTLET;
 			}
-			return XPathArticuloDevice;
+			return XPATH_ARTICULO_DEVICE;
 		}
 	}
 	
-	String XPathHearthIconRelativeArticleDesktop = "//span[@class[contains(.,'icon-favorite')]]";
-	String XPathHearthIconRelativeArticleMovil = "//span[@class[contains(.,'product-favorite')]]";
+	private static final String XPATH_HEARTH_ICON_RELATIVE_ARTICLE_DESKTOP = "//span[@class[contains(.,'icon-favorite')]]";
+	private static final String XPATH_HEARTH_ICON_RELATIVE_ARTICLE_MOVIL = "//span[@class[contains(.,'product-favorite')]]";
 	String getXPathHearthIconRelativeArticle() {
 		switch (channel) {
 		case desktop:
-			return XPathHearthIconRelativeArticleDesktop;
+			return XPATH_HEARTH_ICON_RELATIVE_ARTICLE_DESKTOP;
 		case mobile:
 		default:
-			return XPathHearthIconRelativeArticleMovil;
+			return XPATH_HEARTH_ICON_RELATIVE_ARTICLE_MOVIL;
 		}
 	}
 	
@@ -198,8 +195,7 @@ public abstract class PageGaleria extends PageObjTM {
 	}
 	
 	public List<WebElement> getListaArticulos() {
-		List<WebElement> listaArticulos = driver.findElements(By.xpath(xpathArticuloBase));
-		return listaArticulos;
+		return driver.findElements(By.xpath(xpathArticuloBase));
 	}
 	
 	public boolean articlesInOrder(FilterOrdenacion typeOrden) throws Exception {
@@ -246,7 +242,7 @@ public abstract class PageGaleria extends PageObjTM {
 	public boolean isFirstArticleOfType(LineaType lineaType) {
 		List<WebElement> listaArticulos = driver.findElements(By.xpath(xpathArticuloBase));
 		return (
-			listaArticulos.size() > 0 &&
+			!listaArticulos.isEmpty() &&
 			state(Present, listaArticulos.get(0))
 				.by(By.xpath("//a[@href[contains(.,'" + lineaType + "')]]")).check());
 	}
@@ -291,14 +287,14 @@ public abstract class PageGaleria extends PageObjTM {
 
 	
 	public String getAnyRefNotInOrderTemporada(FilterOrdenacion typeOrden) {
-		ArrayList<String> listaReferencias = getListaReferenciasPrendas();
+		List<String> listaReferencias = getListaReferenciasPrendas();
 		String refAnterior="";
 		for (String refActual : listaReferencias) {
 			String tempActual = refActual.substring(0,1);
 			if ("".compareTo(refAnterior)!=0) {
 				String tempAnterior = refAnterior.substring(0,1);
-				int tempActualInt = Integer.valueOf(tempActual).intValue();
-				int tempAnteriorInt = Integer.valueOf(tempAnterior).intValue();
+				int tempActualInt = Integer.parseInt(tempActual);
+				int tempAnteriorInt = Integer.parseInt(tempAnterior);
 				switch (typeOrden) {
 				case TemporadaDesc:
 					if (tempActualInt > tempAnteriorInt) {
@@ -333,8 +329,8 @@ public abstract class PageGaleria extends PageObjTM {
 	/**
 	 * @return la lista de elementos que contienen la referencia del artículo
 	 */
-	public ArrayList<String> getListaReferenciasPrendas() {
-		ArrayList<String> listaReferencias = new ArrayList<>();
+	public List<String> getListaReferenciasPrendas() {
+		List<String> listaReferencias = new ArrayList<>();
 		List<WebElement> listaArticulos = getArticulos();
 		for (WebElement articulo : listaArticulos)
 			listaReferencias.add(getRefArticulo(articulo));
@@ -343,7 +339,7 @@ public abstract class PageGaleria extends PageObjTM {
 	}
 	
 	public String getReferencia(int posArticle) {
-		if (getListaReferenciasPrendas().size()>0) {
+		if (!getListaReferenciasPrendas().isEmpty()) {
 			return (getListaReferenciasPrendas().get(posArticle-1));
 		}
 		return "";
@@ -402,20 +398,20 @@ public abstract class PageGaleria extends PageObjTM {
 		return false;
 	}
 
-	private enum AttributeArticle {Nombre, Referencia, Imagen}
+	private enum AttributeArticle { NOMBRE, REFERENCIA, IMAGEN }
 	
-	public ArrayList<DataArticleGalery> searchArticleRepeatedInGallery() throws Exception {
+	public List<DataArticleGalery> searchArticleRepeatedInGallery() throws Exception {
 		ListDataArticleGalery list = getListArticles(Arrays.asList(
-				AttributeArticle.Nombre, 
-				AttributeArticle.Referencia));
+				AttributeArticle.NOMBRE, 
+				AttributeArticle.REFERENCIA));
 		
-		if (list.getArticlesRepeated().size()>0) {
+		if (!list.getArticlesRepeated().isEmpty()) {
 			//Obtener la imagen de cada artículo es muy costoso así que sólo lo hacemos en este caso
 			list = getListArticles(list.getArticlesRepeated(),
 					Arrays.asList(
-					    AttributeArticle.Nombre, 
-					    AttributeArticle.Referencia,
-					    AttributeArticle.Imagen));
+					    AttributeArticle.NOMBRE, 
+					    AttributeArticle.REFERENCIA,
+					    AttributeArticle.IMAGEN));
 		}
 		
 		return (list.getArticlesRepeated());
@@ -423,8 +419,8 @@ public abstract class PageGaleria extends PageObjTM {
 	
 	public ListDataArticleGalery getListDataArticles() throws Exception {
 		return getListArticles(Arrays.asList(
-				AttributeArticle.Nombre, 
-				AttributeArticle.Referencia));
+				AttributeArticle.NOMBRE, 
+				AttributeArticle.REFERENCIA));
 	}
 	
 	private ListDataArticleGalery getListArticles(List<AttributeArticle> attributes) throws Exception {
@@ -446,8 +442,7 @@ public abstract class PageGaleria extends PageObjTM {
 	
 	private boolean isPresentArticleWithReferencia(List<DataArticleGalery> listArticles, String referencia) {
 		return listArticles.stream()
-		        .filter(a -> a.getReferencia().compareTo(referencia)==0)
-		        .findAny().isPresent();
+				.anyMatch(a -> a.getReferencia().compareTo(referencia)==0);
 	}
 	
 	private DataArticleGalery getDataArticulo(WebElement articulo, List<AttributeArticle> attributes) 
@@ -455,13 +450,13 @@ public abstract class PageGaleria extends PageObjTM {
 		DataArticleGalery dataArticle = new DataArticleGalery();
 		for (AttributeArticle attribute : attributes) {
 			switch (attribute) {
-			case Nombre:
+			case NOMBRE:
 				dataArticle.setNombre(getNombreArticulo(articulo));
 				break;
-			case Referencia:
+			case REFERENCIA:
 				dataArticle.setReferencia(getRefColorArticulo(articulo));
 				break;
-			case Imagen:
+			case IMAGEN:
 				dataArticle.setImagen(getImagenArticulo(articulo));
 				break;
 			}
@@ -469,19 +464,19 @@ public abstract class PageGaleria extends PageObjTM {
 		return dataArticle;
 	}
 
-	public enum StateFavorito {Marcado, Desmarcado} 
+	public enum StateFavorito { MARCADO, DESMARCADO } 
 	public boolean iconsInCorrectState(List<Integer> posIconosFav, TypeActionFav typeAction) {
 		for (int posIcon : posIconosFav) {
-			String XPathIcon = getXPathArticleHearthIcon(posIcon);
-			WebElement hearthIcon = driver.findElement(By.xpath(XPathIcon));
+			String xPathIcon = getXPathArticleHearthIcon(posIcon);
+			WebElement hearthIcon = driver.findElement(By.xpath(xPathIcon));
 			switch (typeAction) {
 			case MARCAR:
-				if (getStateHearthIcon(hearthIcon)!=StateFavorito.Marcado) {
+				if (getStateHearthIcon(hearthIcon)!=StateFavorito.MARCADO) {
 					return false;
 				}
 				break;
 			case DESMARCAR:
-				if (getStateHearthIcon(hearthIcon)!=StateFavorito.Desmarcado) {
+				if (getStateHearthIcon(hearthIcon)!=StateFavorito.DESMARCADO) {
 					return false;
 				}
 				break;
@@ -572,19 +567,7 @@ public abstract class PageGaleria extends PageObjTM {
 		return numPage;
 	}
 
-	public void goToInitPageAndWaitForArticle() throws Exception {
-//		Object pagePositionObj = ((JavascriptExecutor) driver).executeScript("return window.pageYOffset;");
-//		if (pagePositionObj instanceof Long) {
-//			Long pagePosition = (Long)pagePositionObj;
-//			if (pagePosition != 0) {
-//				backTo1erArticulo();
-//			}
-//		} else {
-//			Double pagePosition = (Double)pagePositionObj;
-//			if (pagePosition != 0) {
-//				backTo1erArticulo();
-//			}
-//		}
+	public void goToInitPageAndWaitForArticle() {
 		//TODO en estos momentos algo raro le pasa al menú Nuevo que requiere un refresh para funcionar ok
 		driver.navigate().refresh();
 		int maxSeconds = 2;
@@ -631,7 +614,7 @@ public abstract class PageGaleria extends PageObjTM {
 		goToPage(99);
 	}
 	
-	private void goToPage(int numPageToGo) throws Exception {
+	private void goToPage(int numPageToGo) {
 		boolean lastPageReached = false;
 		int paginaActual = 1;
 		while (!lastPageReached && paginaActual<numPageToGo) {
@@ -681,12 +664,8 @@ public abstract class PageGaleria extends PageObjTM {
 	}
 
 	public void clickArticulo(WebElement articulo) {
-		//SeleniumUtils.waitMillis(2000);
 		moveToElement(articulo, driver);
-		//state(State.Clickable, articulo).wait(10).check();
-		//SeleniumUtils.waitMillis(2000);
 		click(articulo).waitLoadPage(30).exec();
-		//SeleniumUtils.waitMillis(10);
 	}
 
 	@SuppressWarnings("static-access")
@@ -700,7 +679,6 @@ public abstract class PageGaleria extends PageObjTM {
 			secMenus.secMenuSuperior.secLineas.bringMenuBackground();
 		}
 		
-		//WebElement articleName = article.findElement(By.xpath("." + getXPathLinkRelativeToArticle()));
 		UtilsMangoTest.openLinkInNewTab(driver, article/*articleName*/);
 		
 		//Cambiamos el foco de driver a la nueva pestaña que hemos creado y esperamos hasta que está disponible
