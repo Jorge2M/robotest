@@ -3,45 +3,49 @@ package com.mng.robotest.test.pageobject.votf;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.test.beans.Linea.LineaType;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageSelectLineaVOTF {
+public class PageSelectLineaVOTF extends PageObjTM {
 
-	private static String getXPathLineaSection(LineaType linea) {
+	public PageSelectLineaVOTF(WebDriver driver) {
+		super(driver);
+	}
+	
+	private String getXPathLineaSection(LineaType linea) {
 		return ("//div[@id='" + linea.name() + "' and @class[contains(.,'section')]]");
 	}
 	
-	private static String getXPathLineaLink(LineaType linea) {
+	private String getXPathLineaLink(LineaType linea) {
 		String xpathBanner = getXPathLineaSection(linea);
 		return (xpathBanner + "//div[@class='clickable']");
 	}
 	
-	private static String getXPathMenu(LineaType linea, int numMenu) {
+	private String getXPathMenu(LineaType linea, int numMenu) {
 		String xpathMenu = getXPathMenu(linea);
 		return ("(" + xpathMenu + ")[" + numMenu + "]");
 	}
 	
-	private static String getXPathMenu(LineaType linea) {
+	private String getXPathMenu(LineaType linea) {
 		String xpathBanner = getXPathLineaSection(linea);
 		return (xpathBanner + "/div[@class[contains(.,'subsection')]]/span/a");
 	}
 	
-	public static boolean isBannerPresent(LineaType linea, WebDriver driver) {
+	public boolean isBannerPresent(LineaType linea) {
 		String xpathBanner = getXPathLineaSection(linea);
-		return (state(Present, By.xpath(xpathBanner), driver).check());
+		return (state(Present, By.xpath(xpathBanner)).check());
 	}
 	
-	public static void clickBanner(LineaType linea, WebDriver driver) {
+	public void clickBanner(LineaType linea) {
 		String xpathLinkBanner = getXPathLineaLink(linea);
-		click(By.xpath(xpathLinkBanner), driver).exec();
+		click(By.xpath(xpathLinkBanner)).exec();
 	}
 	
-	public static void clickMenu(LineaType linea, int numMenu, WebDriver driver) {
+	public void clickMenu(LineaType linea, int numMenu) {
 		String xpathMenu = getXPathMenu(linea, numMenu);
-		click(By.xpath(xpathMenu), driver).exec();
+		click(By.xpath(xpathMenu)).exec();
 	}
 }

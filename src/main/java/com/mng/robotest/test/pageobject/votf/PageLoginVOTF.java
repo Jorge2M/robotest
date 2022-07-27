@@ -4,38 +4,41 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.utils.testab.TestABactive;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 
-public class PageLoginVOTF {
+public class PageLoginVOTF extends PageObjTM {
 
-	private static final String XPathInputUsuario = "//input[@class='username']";
-	private static final String XPathInputPassword = "//input[@class='pwd']";
-	private static final String XPathButtonContinue = "//input[@class[contains(.,'button submit')]]";
+	private static final String XPATH_INPUT_USUARIO = "//input[@class='username']";
+	private static final String XPATH_INPUT_PASSWORD = "//input[@class='pwd']";
+	private static final String XPATH_BUTTON_CONTINUE = "//input[@class[contains(.,'button submit')]]";
 	
-	public static void goToFromUrlAndSetTestABs(/*String urlLogin,*/ DataCtxShop dCtxSh, WebDriver driver) throws Exception {	
-		//AccesoNavigations.goToInitURL(/*urlLogin,*/ driver);
-		waitForPageLoaded(driver);
-		activateTestsABs(dCtxSh.channel, dCtxSh.appE, driver);
+	public PageLoginVOTF(WebDriver driver) {
+		super(driver);
 	}
 	
-	private static void activateTestsABs(Channel channel, AppEcom app, WebDriver driver) throws Exception {
+	public void goToFromUrlAndSetTestABs(DataCtxShop dCtxSh) throws Exception {	
+		waitForPageLoaded(driver);
+		activateTestsABs(dCtxSh.channel, dCtxSh.appE);
+	}
+	
+	private void activateTestsABs(Channel channel, AppEcom app) throws Exception {
 		TestABactive.currentTestABsToActivate(channel, app, driver);
 		driver.navigate().refresh();
 	}
 	
-	public static void inputUsuario(String usuario, WebDriver driver) {
-		driver.findElement(By.xpath(XPathInputUsuario)).sendKeys(usuario);
+	public void inputUsuario(String usuario) {
+		driver.findElement(By.xpath(XPATH_INPUT_USUARIO)).sendKeys(usuario);
 	}
 	
-	public static void inputPassword(String password, WebDriver driver) {
-		driver.findElement(By.xpath(XPathInputPassword)).sendKeys(password);
+	public void inputPassword(String password) {
+		driver.findElement(By.xpath(XPATH_INPUT_PASSWORD)).sendKeys(password);
 	}
 
-	public static void clickButtonContinue(WebDriver driver) {
-		click(By.xpath(XPathButtonContinue), driver).exec();
+	public void clickButtonContinue() {
+		click(By.xpath(XPATH_BUTTON_CONTINUE)).exec();
 	}
 }

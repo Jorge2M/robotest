@@ -3,20 +3,25 @@ package com.mng.robotest.test.pageobject.votf;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageAlertaVOTF {
+public class PageAlertaVOTF extends PageObjTM {
 	
-	private static final String XPathCapaAlerta = "//div[@class='alert']";
-	private static final String XPathButtonContinuar = "//div[@class='alert']//span[@class='button']";
+	private static final String XPATH_CAPA_ALERTA = "//div[@class='alert']";
+	private static final String XPATH_BUTTON_CONTINUAR = "//div[@class='alert']//span[@class='button']";
 
-	public static boolean isPage(WebDriver driver) {
-		return (state(Present, By.xpath(XPathCapaAlerta), driver).check());
+	public PageAlertaVOTF(WebDriver driver) {
+		super(driver);
+	}
+	
+	public boolean isPage() {
+		return (state(Present, By.xpath(XPATH_CAPA_ALERTA)).check());
 	}
 	 
-	public static void clickButtonContinuar(WebDriver driver) {
-		click(By.xpath(XPathButtonContinuar), driver).exec();
+	public void clickButtonContinuar() {
+		click(By.xpath(XPATH_BUTTON_CONTINUAR)).exec();
 	}
 }

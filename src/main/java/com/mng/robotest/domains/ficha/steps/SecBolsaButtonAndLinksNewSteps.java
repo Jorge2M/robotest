@@ -20,10 +20,12 @@ import com.mng.robotest.test.beans.Linea.LineaType;
 public class SecBolsaButtonAndLinksNewSteps {
 
 	private final SecBolsaButtonAndLinksNew secBolsaButtonAndLinksNew;
+	private final SecDetalleProductNew secDetalleProductNew;
 	private final WebDriver driver;
 	
 	public SecBolsaButtonAndLinksNewSteps(WebDriver driver) {
 		this.secBolsaButtonAndLinksNew = new SecBolsaButtonAndLinksNew(driver);
+		this.secDetalleProductNew = new SecDetalleProductNew(driver);
 		this.driver = driver;
 	}
 	
@@ -53,7 +55,7 @@ public class SecBolsaButtonAndLinksNewSteps {
 		level=State.Defect)
 	private boolean checkScrollToDescription() {
 		int maxSecondsToWait = 3;
-		return (SecDetalleProductNew.isVisibleUntil(maxSecondsToWait, driver));
+		return (secDetalleProductNew.isVisibleUntil(maxSecondsToWait));
 	}
 	
 	@Validation
@@ -61,16 +63,16 @@ public class SecBolsaButtonAndLinksNewSteps {
 		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Figura el bloque de BreadCrumbs",
-			SecDetalleProductNew.isVisibleBreadcrumbs(0, driver), State.Warn);
+			secDetalleProductNew.isVisibleBreadcrumbs(0), State.Warn);
 	 	validations.add(
 			"Es visible el item " + ItemBreadcrumb.LINEA,
-			SecDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.LINEA, driver), State.Warn);
+			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.LINEA), State.Warn);
 	 	validations.add(
 			"Es visible el item " + ItemBreadcrumb.GRUPO,
-			SecDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.GRUPO, driver), State.Warn);
+			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.GRUPO), State.Warn);
 	 	validations.add(
 			"Es visible el item " + ItemBreadcrumb.GALERIA,
-			SecDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.GALERIA, driver), State.Warn);
+			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.GALERIA), State.Warn);
 	 	return validations;
 	}
 	
@@ -78,7 +80,7 @@ public class SecBolsaButtonAndLinksNewSteps {
 		description="Aparece el bloque de \"KcSafety\"",
 		level=State.Defect)
 	private boolean checkKcSafety() {
-		return (SecDetalleProductNew.isVisibleBlockKcSafety(driver));
+		return (secDetalleProductNew.isVisibleBlockKcSafety());
 	}
 
 	@Step (

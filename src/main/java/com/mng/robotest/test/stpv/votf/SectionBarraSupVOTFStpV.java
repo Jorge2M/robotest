@@ -8,10 +8,16 @@ import com.mng.robotest.test.pageobject.votf.SectionBarraSupVOTF;
 
 public class SectionBarraSupVOTFStpV {
 
+	private final SectionBarraSupVOTF sectionBarraSupVOTF;
+	
+	public SectionBarraSupVOTFStpV(WebDriver driver) {
+		sectionBarraSupVOTF = new SectionBarraSupVOTF(driver);
+	}
+	
 	@Validation (
-		description="En la barra superior figura un \"" + SectionBarraSupVOTF.titleUserName + "#{usuarioVOTF}" + "\"",
+		description="En la barra superior figura un \"" + SectionBarraSupVOTF.TITLE_USERNAME + "#{usuarioVOTF}" + "\"",
 		level=State.Warn)
-	public static boolean validate(String usuarioVOTF, WebDriver driver) {
-		return (SectionBarraSupVOTF.isPresentUsuario(usuarioVOTF, driver));
+	public boolean validate(String usuarioVOTF) {
+		return (sectionBarraSupVOTF.isPresentUsuario(usuarioVOTF));
 	}	
 }

@@ -27,24 +27,20 @@ import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-/**
- * Clase que define la automatización de las diferentes funcionalidades de la sección de "Wishlist"
- * @author jorge.munoz
- *
- */
+
 public class PageFavoritos extends PageObjTM {
   
 	private final ModalFichaFavoritos modalFichaFavoritos;
 	
-	private static final String XPathBlockFavoritos = "//div[@data-pais and @class[contains(.,'favorites')]]";
-	private static final String XPathBlockFavWithArt = XPathBlockFavoritos + "//div[@class[contains(.,'content-garments')]]";
-	private static final String XPathArticulo = "//ul[@id='contentDataFavs']/li";
-	private static final String XPathButtonEmpty = "//a[@class='favorites-empty-btn']";
-	private static final String xPathShareModalButton = "//span[@id='shareIcon']";
-	private static final String xPathCloseShareModalButton = "//span[@onclick[contains(.,'showCloseModalShare')]]";
-	private static final String xPathWhatsAppShareButton = "//span[@class='modal-share-whatsapp-icon']";
-	private static final String xPathTelegramShareButton = "//span[@class='modal-share-telegram-icon']";
-	private static final String xPathUrlShareLabel = "//div[@id='linkShareButton']";
+	private static final String XPATH_BLOCK_FAVORITOS = "//div[@data-pais and @class[contains(.,'favorites')]]";
+	private static final String XPATH_BLOCK_FAV_WITH_ART = XPATH_BLOCK_FAVORITOS + "//div[@class[contains(.,'content-garments')]]";
+	private static final String XPATH_ARTICULO = "//ul[@id='contentDataFavs']/li";
+	private static final String XPATH_BUTTON_EMPTY = "//a[@class='favorites-empty-btn']";
+	private static final String XPATH_SHARE_MODAL_BUTTON = "//span[@id='shareIcon']";
+	private static final String XPATH_CLOSE_SHARE_MODAL_BUTTON = "//span[@onclick[contains(.,'showCloseModalShare')]]";
+	private static final String XPATH_WHATSAPP_SHARE_BUTTON = "//span[@class='modal-share-whatsapp-icon']";
+	private static final String XPATH_TELEGRAM_SHARE_BUTTON = "//span[@class='modal-share-telegram-icon']";
+	private static final String XPATH_URL_SHARE_LABEL = "//div[@id='linkShareButton']";
 	
 	private PageFavoritos(WebDriver driver) {
 		super(driver);
@@ -60,11 +56,8 @@ public class PageFavoritos extends PageObjTM {
 	}
 	
 	private String getXPathArticle(String refProducto, String codigoColor) {
-		//Cuando el cambio sobre favoritos suba a PRO se podrá eliminar el xpathOld
-		//String xpathOld = "@src[contains(.,'" + refProducto + "_" + codigoColor + "')]"; //img
 		String xpathNew = "@style[contains(.,'" + refProducto + "_" + codigoColor + "')]"; //div
-		//return (XPathArticulo + "//*[" + xpathOld + " or " + xpathNew + "]/ancestor::li");  
-		return (XPathArticulo + "//*[" + xpathNew + "]/ancestor::li");
+		return (XPATH_ARTICULO + "//*[" + xpathNew + "]/ancestor::li");
 	}
 	
 	private String getXPathButtonAddBolsa(String refProducto, String codigoColor) {
@@ -90,50 +83,50 @@ public class PageFavoritos extends PageObjTM {
 	// Funcionalidad de Share Favorites (pre)
 	
 	private String getXPathWithIdItem(int numArticulo) {
-		String idItem = driver.findElement(By.xpath("(" + XPathArticulo + ")[" + numArticulo + "]")).getAttribute("id");
-		return (XPathArticulo + "[@id='" + idItem + "']");
+		String idItem = driver.findElement(By.xpath("(" + XPATH_ARTICULO + ")[" + numArticulo + "]")).getAttribute("id");
+		return (XPATH_ARTICULO + "[@id='" + idItem + "']");
 	}
 	
 	public void openShareModal() {
-		driver.findElement(By.xpath(xPathShareModalButton)).click();
+		driver.findElement(By.xpath(XPATH_SHARE_MODAL_BUTTON)).click();
 	}
 
 	public void closeShareModal() {
-		click(By.xpath(xPathCloseShareModalButton)).type(javascript).exec();
+		click(By.xpath(XPATH_CLOSE_SHARE_MODAL_BUTTON)).type(javascript).exec();
 	}
 
 	public boolean checkShareModalUntill(int maxSeconds) {
-		return (state(Visible, By.xpath(xPathCloseShareModalButton), driver)
+		return (state(Visible, By.xpath(XPATH_CLOSE_SHARE_MODAL_BUTTON), driver)
 				.wait(maxSeconds).check());
 	}
 	
 	public boolean isShareFavoritesVisible() {
-		return (state(Visible, By.xpath(xPathShareModalButton), driver).check());
+		return (state(Visible, By.xpath(XPATH_SHARE_MODAL_BUTTON), driver).check());
 	}
 	
 	public boolean isShareWhatsappFavoritesVisible() {
-		return (state(Visible, By.xpath(xPathWhatsAppShareButton), driver).check());
+		return (state(Visible, By.xpath(XPATH_WHATSAPP_SHARE_BUTTON), driver).check());
 	}
 	
 	public boolean isShareTelegramFavoritesVisible() {
-		return (state(Visible, By.xpath(xPathTelegramShareButton), driver).check());
+		return (state(Visible, By.xpath(XPATH_TELEGRAM_SHARE_BUTTON), driver).check());
 	}
 	
 	public boolean isShareUrlFavoritesVisible() {
-		return (state(Visible, By.xpath(xPathUrlShareLabel), driver).check());
+		return (state(Visible, By.xpath(XPATH_URL_SHARE_LABEL), driver).check());
 	}
 	
 	public boolean checkShareModalInvisible(int maxSeconds) {
-		return (state(Invisible, By.xpath(xPathCloseShareModalButton), driver)
+		return (state(Invisible, By.xpath(XPATH_CLOSE_SHARE_MODAL_BUTTON), driver)
 				.wait(maxSeconds).check());
 	}
 
 	public boolean isSectionVisible() {
-		return (state(Visible, By.xpath(XPathBlockFavoritos), driver).check());
+		return (state(Visible, By.xpath(XPATH_BLOCK_FAVORITOS), driver).check());
 	}
 	
 	public boolean isSectionArticlesVisibleUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathBlockFavWithArt), driver)
+		return (state(Visible, By.xpath(XPATH_BLOCK_FAV_WITH_ART), driver)
 				.wait(maxSeconds).check());
 	}
 	
@@ -165,7 +158,7 @@ public class PageFavoritos extends PageObjTM {
 	}
 	
 	public boolean hayArticulos() {
-		return (state(Present, By.xpath(XPathArticulo), driver).check());
+		return (state(Present, By.xpath(XPATH_ARTICULO), driver).check());
 	}
 	
 	public boolean areVisibleArticlesUntil(DataFavoritos dataFavoritos, int maxSecondsToWait) {
@@ -271,6 +264,6 @@ public class PageFavoritos extends PageObjTM {
 	}
 	
 	public boolean isVisibleButtonEmpty() {
-		return (state(Visible, By.xpath(XPathButtonEmpty), driver).check());
+		return (state(Visible, By.xpath(XPATH_BUTTON_EMPTY), driver).check());
 	}
 }

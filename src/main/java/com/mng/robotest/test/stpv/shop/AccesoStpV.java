@@ -182,19 +182,21 @@ public class AccesoStpV {
 	public static void accesoVOTFtoHOME(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		String urlAcceso = TestMaker.getInputParamsSuite().getUrlBase();
 		int numIdiomas = dCtxSh.pais.getListIdiomas().size();
-		PageLoginVOTFStpV.goToAndLogin(urlAcceso, dCtxSh, driver);
+		
+		new PageLoginVOTFStpV(driver).goToAndLogin(urlAcceso, dCtxSh);
 		if (numIdiomas > 1) {
-			PageSelectIdiomaVOTFStpV.selectIdiomaAndContinue(dCtxSh.idioma, driver);
+			new PageSelectIdiomaVOTFStpV(driver).selectIdiomaAndContinue(dCtxSh.idioma);
 		}
 
-		PageSelectLineaVOTFStpV.validateIsPage(driver);
+		PageSelectLineaVOTFStpV pageSelectLineaVOTFStpV = new PageSelectLineaVOTFStpV(driver);
+		pageSelectLineaVOTFStpV.validateIsPage();
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.CookiesAllowed,
 				GenericCheck.Analitica, 
 				GenericCheck.TextsTraduced,
 				GenericCheck.JSerrors)).checks(driver);
 		
-		PageSelectLineaVOTFStpV.selectMenuAndLogoMango(1, dCtxSh, driver);
+		pageSelectLineaVOTFStpV.selectMenuAndLogoMango(1, dCtxSh);
 	}
 
 

@@ -21,34 +21,42 @@ import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 
 public class PageSelectLineaVOTFStpV {
 
+	private final PageSelectLineaVOTF pageSelectLineaVOTF;
+	
+	public PageSelectLineaVOTFStpV(WebDriver driver) {
+		pageSelectLineaVOTF = new PageSelectLineaVOTF(driver);
+	}
+	
 	@Validation
-	public static ChecksTM validateIsPage(WebDriver driver) { 
+	public ChecksTM validateIsPage() { 
 		ChecksTM validations = ChecksTM.getNew();
 		validations.add(
 			"Aparece el banner correspondiente a SHE",
-			PageSelectLineaVOTF.isBannerPresent(LineaType.she, driver), State.Warn);
+			pageSelectLineaVOTF.isBannerPresent(LineaType.she), State.Warn);
 		validations.add(
 			"Aparece el banner correspondiente a MAN",
-			PageSelectLineaVOTF.isBannerPresent(LineaType.he, driver), State.Warn);
+			pageSelectLineaVOTF.isBannerPresent(LineaType.he), State.Warn);
 		validations.add(
 			"Aparece el banner correspondiente a NIÑAS",
-			PageSelectLineaVOTF.isBannerPresent(LineaType.nina, driver), State.Warn);
+			pageSelectLineaVOTF.isBannerPresent(LineaType.nina), State.Warn);
 		validations.add(
 			"Aparece el banner correspondiente a NIÑOS",
-			PageSelectLineaVOTF.isBannerPresent(LineaType.nino, driver), State.Warn);
+			pageSelectLineaVOTF.isBannerPresent(LineaType.nino), State.Warn);
 		return validations;
 	}
 	
 	@Step (
 		description="Seleccionar el #{umMenu}o menu de Mujer y finalmente seleccionar el logo de Mango",
 		expected="Aparece la página inicial de SHE")
-	public static void selectMenuAndLogoMango(int numMenu, DataCtxShop dCtxSh, WebDriver driver) {
-		PageSelectLineaVOTF.clickBanner(LineaType.she, driver);
-		PageSelectLineaVOTF.clickMenu(LineaType.she, numMenu, driver);
-		SecCabecera.getNew(Channel.desktop, AppEcom.votf, driver).clickLogoMango();
+	public void selectMenuAndLogoMango(int numMenu, DataCtxShop dCtxSh) {
+		pageSelectLineaVOTF.clickBanner(LineaType.she);
+		pageSelectLineaVOTF.clickMenu(LineaType.she, numMenu);
 		
+		WebDriver driver = pageSelectLineaVOTF.driver;
+		SecCabecera.getNew(Channel.desktop, AppEcom.votf, driver).clickLogoMango();
 		AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dCtxSh.pais));
-		SectionBarraSupVOTFStpV.validate(accesoVOTF.getUsuario(), driver);
+		new SectionBarraSupVOTFStpV(driver).validate(accesoVOTF.getUsuario());
+		
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO, 

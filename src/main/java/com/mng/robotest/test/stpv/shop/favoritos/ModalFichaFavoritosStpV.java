@@ -4,8 +4,6 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -24,12 +22,10 @@ import com.mng.robotest.test.stpv.shop.SecBolsaStpV;
 @SuppressWarnings({"static-access"})
 public class ModalFichaFavoritosStpV {
 	
-	private final WebDriver driver;
 	private final ModalFichaFavoritos modalFichaFavoritos;
 	
 	private ModalFichaFavoritosStpV(ModalFichaFavoritos modalFichaFavoritos) {
 		this.modalFichaFavoritos = modalFichaFavoritos;
-		this.driver = modalFichaFavoritos.getWebDriver();
 	}
 	
 	public static ModalFichaFavoritosStpV getNew(ModalFichaFavoritos modalFichaFavoritos) {
@@ -58,7 +54,7 @@ public class ModalFichaFavoritosStpV {
 		Talla tallaSelected = modalFichaFavoritos.addArticleToBag(refProductoToAdd, 1, channel, app, pais);
 		artToAddBolsa.setTalla(tallaSelected);
 		dataBolsa.addArticulo(artToAddBolsa);
-		SecBolsaStpV secBolsaStpV = new SecBolsaStpV(channel, app, pais, driver);
+		SecBolsaStpV secBolsaStpV = new SecBolsaStpV(channel, app, pais, modalFichaFavoritos.driver);
 		
 		switch (channel) {
 		case desktop:

@@ -14,27 +14,28 @@ import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.Link
 
 
 @SuppressWarnings({"static-access"})
-/**
- * Clase que define la automatización de las diferentes funcionalidades de la página de "GALERÍA DE PRODUCTOS"
- * @author jorge.munoz
- */
 public class PageFichaArt_DesktopShop extends PageFicha {
 
-	public static SecBolsaButtonAndLinksNew secBolsaButtonAndLinks; //Button bolsa and UnderLinks "Detalle Producto"...
-	public static ModEnvioYdevolNew modEnvioYdevolNew; //Modal que aparece al seleccionar el link "Envío y devoluciones"
-	public static SecFotosNew secFotos; //Foto central y líneas inferiores
-	public static SecDetalleProductNew secProductInfo; //Apartado con la descripción y la composición/lavado
-	public static SecSlidersNew secSliders; //Completa Tu Look, Elegido para ti, Lo último que has visto
-	public static ModNoStock modNoStock; //Modal que aparece cuando no hay stock
-	public static SecModalPersonalizacion secModalPersonalizacion; //Modal para la personalización de bordados
+	public final SecBolsaButtonAndLinksNew secBolsaButtonAndLinks;
+	public final ModEnvioYdevolNew modEnvioYdevolNew;
+	public final SecFotosNew secFotos;
+	public final SecDetalleProductNew secProductInfo;
+	public final SecSlidersNew secSliders;
+	
+	public SecModalPersonalizacion secModalPersonalizacion;
+	public ModNoStock modNoStock;
 	
 	private static final String XPATH_HTML_FICHA = "//html[@class[contains(.,'ficha')]]";
 	
 	private PageFichaArt_DesktopShop(Channel channel, AppEcom app, WebDriver driver) {
 		super(TypeFicha.NEW, channel, app, driver);
+		this.secBolsaButtonAndLinks = new SecBolsaButtonAndLinksNew(driver);
+		this.modEnvioYdevolNew = new ModEnvioYdevolNew(driver);
+		this.secFotos = new SecFotosNew(driver);
+		this.secProductInfo = new SecDetalleProductNew(driver);
+		this.secSliders = new SecSlidersNew(driver);
 	}
 	
-	//Static constructor
 	public static PageFichaArt_DesktopShop getNewInstance(Channel channel, AppEcom app, WebDriver driver) {
 		return (new PageFichaArt_DesktopShop(channel, app, driver));
 	}
@@ -108,16 +109,16 @@ public class PageFichaArt_DesktopShop extends PageFicha {
 	
 	@Override
 	public boolean isVisibleSlider(Slider typeSlider) {
-		return (secSliders.isVisible(typeSlider, this.driver));
+		return (secSliders.isVisible(typeSlider));
 	}
 	
 	@Override
 	public int getNumArtVisiblesSlider(Slider typeSlider) {
-		return (secSliders.getNumVisibleArticles(typeSlider, driver));
+		return (secSliders.getNumVisibleArticles(typeSlider));
 	}
 	
 	@Override
 	public boolean isModalNoStockVisible(int maxSecondsToWait) {
-		return modNoStock.isModalNoStockVisibleFichaNew(maxSecondsToWait, driver);
+		return modNoStock.isModalNoStockVisibleFichaNew(maxSecondsToWait);
 	}
 }

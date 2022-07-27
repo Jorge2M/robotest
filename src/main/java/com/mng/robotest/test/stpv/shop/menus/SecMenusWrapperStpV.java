@@ -189,7 +189,7 @@ public class SecMenusWrapperStpV {
 		expected="Se obtiene el catálogo de artículos asociados al menú")
 	public void accesoMenuXRef(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
 		secMenusWrap.seleccionarMenuXHref(menu1rstLevel, dCtxSh.pais);
-		checkIsVisibleAarticle(dCtxSh, 3);
+		checkIsVisibleAarticle(dCtxSh, 5);
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO, 

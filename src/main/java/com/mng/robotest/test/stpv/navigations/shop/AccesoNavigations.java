@@ -59,8 +59,9 @@ public class AccesoNavigations {
 	}
 	
 	public static void goFromLineasToMultimarcaVOTF(DataCtxShop dCtxSh, WebDriver driver) {
-		PageSelectLineaVOTF.clickBanner(LineaType.she, driver);
-		PageSelectLineaVOTF.clickMenu(LineaType.she, 1/*numMenu*/, driver);
+		PageSelectLineaVOTF pageSelectLineaVOTF = new PageSelectLineaVOTF(driver);
+		pageSelectLineaVOTF.clickBanner(LineaType.she);
+		pageSelectLineaVOTF.clickMenu(LineaType.she, 1);
 		
 		//Cuando se selecciona el icono de Mango deja de tener efecto el forzado del TestAB de la cabecera que habíamos ejecutado previamente
 		SecCabecera.getNew(Channel.desktop, AppEcom.votf, driver).clickLogoMango();
@@ -70,19 +71,22 @@ public class AccesoNavigations {
 	 * Acceso a VOTF (login + selección de idioma)
 	 */
 	public static void accesoVOTF(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-		PageLoginVOTF.goToFromUrlAndSetTestABs(dCtxSh, driver);
+		PageLoginVOTF pageLoginVOTF = new PageLoginVOTF(driver);
+		pageLoginVOTF.goToFromUrlAndSetTestABs(dCtxSh);
 		PageJCAS.identJCASifExists(driver);
 		AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dCtxSh.pais));
-		PageLoginVOTF.inputUsuario(accesoVOTF.getUsuario(), driver);
-		PageLoginVOTF.inputPassword(accesoVOTF.getPassword(), driver);
-		PageLoginVOTF.clickButtonContinue(driver);
+		pageLoginVOTF.inputUsuario(accesoVOTF.getUsuario());
+		pageLoginVOTF.inputPassword(accesoVOTF.getPassword());
+		pageLoginVOTF.clickButtonContinue();
 		if (dCtxSh.pais.getListIdiomas().size() > 1) {
-			PageSelectIdiomaVOTF.selectIdioma(dCtxSh.idioma.getCodigo(), driver);
-			PageSelectIdiomaVOTF.clickButtonAceptar(driver);
+			PageSelectIdiomaVOTF pageSelectIdiomaVOTF = new PageSelectIdiomaVOTF(driver);
+			pageSelectIdiomaVOTF.selectIdioma(dCtxSh.idioma.getCodigo());
+			pageSelectIdiomaVOTF.clickButtonAceptar();
 		}
 
-		if (PageAlertaVOTF.isPage(driver)) {
-			PageAlertaVOTF.clickButtonContinuar(driver);
+		PageAlertaVOTF pageAlertaVOTF = new PageAlertaVOTF(driver);
+		if (pageAlertaVOTF.isPage()) {
+			pageAlertaVOTF.clickButtonContinuar();
 		}
 	}	
 	

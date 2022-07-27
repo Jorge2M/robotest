@@ -12,22 +12,29 @@ import com.mng.robotest.test.pageobject.votf.PageLoginVOTF;
 
 public class PageLoginVOTFStpV {
 
-	static final String tagNombrePais = "@TagNombrePais";
-	static final String tagUsuarioVotf = "@TagUsuarioVotf";
-	static final String tagPasswordVotf = "@TagPasswordVotf";
+	private static final String TAG_NOMBRE_PAIS = "@TagNombrePais";
+	private static final String TAG_USUARIO_VOTF = "@TagUsuarioVotf";
+	private static final String TAG_PASSWORD_VOTF = "@TagPasswordVotf";
+	
+	private final PageLoginVOTF pageLoginVOTF;
+	
+	public PageLoginVOTFStpV(WebDriver driver) {
+		pageLoginVOTF = new PageLoginVOTF(driver);
+	}
+	
 	@Step (
 		description=
 			"Acceder a la página de Login e identificarnos con un usuario de " + 
-			tagNombrePais + " (" + tagUsuarioVotf + " / " + tagPasswordVotf + ")") 
-	public static void goToAndLogin(String urlAcceso, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+			TAG_NOMBRE_PAIS + " (" + TAG_USUARIO_VOTF + " / " + TAG_PASSWORD_VOTF + ")") 
+	public void goToAndLogin(String urlAcceso, DataCtxShop dCtxSh) throws Exception {
 		AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dCtxSh.pais));
 		String usuarioVOTF = accesoVOTF.getUsuario();
 		String passwordVOTF = accesoVOTF.getPassword();
 		
 		StepTM step = TestMaker.getCurrentStepInExecution();
-		step.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
-		step.replaceInDescription(tagUsuarioVotf, usuarioVOTF);
-		step.replaceInDescription(tagPasswordVotf, tagPasswordVotf);
+		step.replaceInDescription(TAG_NOMBRE_PAIS, dCtxSh.pais.getNombre_pais());
+		step.replaceInDescription(TAG_USUARIO_VOTF, usuarioVOTF);
+		step.replaceInDescription(TAG_PASSWORD_VOTF, TAG_PASSWORD_VOTF);
 
 		int numIdiomas = dCtxSh.pais.getListIdiomas().size();
 		if (numIdiomas > 1) {
@@ -36,9 +43,9 @@ public class PageLoginVOTFStpV {
 			step.setResExpected("Aparece la página de selección de la línea");
 		}
 		
-		PageLoginVOTF.goToFromUrlAndSetTestABs(/*urlAcceso,*/ dCtxSh, driver);
-		PageLoginVOTF.inputUsuario(usuarioVOTF, driver);
-		PageLoginVOTF.inputPassword(passwordVOTF, driver);
-		PageLoginVOTF.clickButtonContinue(driver);
+		pageLoginVOTF.goToFromUrlAndSetTestABs(dCtxSh);
+		pageLoginVOTF.inputUsuario(usuarioVOTF);
+		pageLoginVOTF.inputPassword(passwordVOTF);
+		pageLoginVOTF.clickButtonContinue();
 	}
 }

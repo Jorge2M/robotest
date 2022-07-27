@@ -3,7 +3,8 @@ package com.mng.robotest.domains.ficha.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
@@ -14,7 +15,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
  *
  */
 
-public class SecDetalleProductNew {
+public class SecDetalleProductNew extends PageObjTM {
 
 	public enum ItemBreadcrumb { LINEA, GRUPO, GALERIA }
 	
@@ -22,15 +23,17 @@ public class SecDetalleProductNew {
 	private static final String XPATH_CAPA_DESCRIPTION = "//div[@class='product-info-block'][1]";
 	private static final String XPATH_BREAD_CRUMBS = XPATH_CAPA_DESCRIPTION + "//ol[@class='breadcrumbs']";
 	private static final String XPATH_BREAD_CRUMB_ITEM_LINK = XPATH_BREAD_CRUMBS + "//a[@class='breadcrumbs-link']";
-	//private static final String XPATH_CAPA_COMPOSICION_Y_LAVADO = "//div[@class='product-info-block'][2]";
-	//private static final String XPATH_ICON_COMP_Y_LAVADO = XPATH_CAPA_COMPOSICION_Y_LAVADO + "//img[@class='product-info-icon']";
 	private static final String XPATH_BLOCK_KC_SAFETY = XPATH_WRAPPER + "//div[@id='KoreaKC']";
 	
-	public static String getXPathBreadcrumbItem(int position) {
+	public SecDetalleProductNew(WebDriver driver) {
+		super(driver);
+	}
+	
+	private String getXPathBreadcrumbItem(int position) {
 		return "(" + XPATH_BREAD_CRUMB_ITEM_LINK + ")[" + position + "]";
 	}
 	
-	public static String getXPathBreadcrumbItemLink(ItemBreadcrumb itemBc) {
+	private String getXPathBreadcrumbItemLink(ItemBreadcrumb itemBc) {
 		switch (itemBc) {
 		case LINEA:
 			return getXPathBreadcrumbItem(1); 
@@ -42,23 +45,23 @@ public class SecDetalleProductNew {
 		}
 	}
 	
-	public static boolean isVisibleUntil(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(XPATH_WRAPPER), driver)
+	public boolean isVisibleUntil(int maxSeconds) {
+		return (state(Visible, By.xpath(XPATH_WRAPPER))
 				.wait(maxSeconds).check());
 	}
 	
-	public static boolean isVisibleBreadcrumbs(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(XPATH_BREAD_CRUMBS), driver)
+	public boolean isVisibleBreadcrumbs(int maxSeconds) {
+		return (state(Visible, By.xpath(XPATH_BREAD_CRUMBS))
 				.wait(maxSeconds).check());
 	}
 	
-	public static boolean isVisibleItemBreadCrumb(ItemBreadcrumb itemBCrumb, WebDriver driver) {
+	public boolean isVisibleItemBreadCrumb(ItemBreadcrumb itemBCrumb) {
 		String xpathItem = getXPathBreadcrumbItemLink(itemBCrumb);
-		return (state(Visible, By.xpath(xpathItem), driver).check());
+		return (state(Visible, By.xpath(xpathItem)).check());
 	}
 	
-	public static boolean isVisibleBlockKcSafety(WebDriver driver) {
-		return (state(Visible, By.xpath(XPATH_BLOCK_KC_SAFETY), driver).check());
+	public boolean isVisibleBlockKcSafety() {
+		return (state(Visible, By.xpath(XPATH_BLOCK_KC_SAFETY)).check());
 	}
 	
 }

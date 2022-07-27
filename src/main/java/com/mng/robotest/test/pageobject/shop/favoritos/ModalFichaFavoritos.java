@@ -10,7 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -21,30 +22,23 @@ import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 
 
-public class ModalFichaFavoritos {
+public class ModalFichaFavoritos extends PageObjTM {
 	
-	private final WebDriver driver;
-	
-	private static final String XPathFichaProducto = "//div[@class='favorites-quickview']";
-	private static final String XPathColorSelectedFicha = 
-									XPathFichaProducto + 
-									"//div[@class[contains(.,'color-item')] and @class[contains(.,'active')]]";
-	private static final String XPathImgColorSelectedFicha = XPathColorSelectedFicha + "/img";
+	private static final String XPATH_FICHA_PRODUCTO = "//div[@class='favorites-quickview']";
+	private static final String XPATH_COLOR_SELECTED_FICHA = XPATH_FICHA_PRODUCTO + 
+			"//div[@class[contains(.,'color-item')] and @class[contains(.,'active')]]";
+	private static final String XPATH_IMG_COLOR_SELECTED_FICHA = XPATH_COLOR_SELECTED_FICHA + "/img";
 	
 	private ModalFichaFavoritos(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 	}
 	
 	public static ModalFichaFavoritos getNew(WebDriver driver) {
 		return new ModalFichaFavoritos(driver);
 	}
 	
-	public WebDriver getWebDriver() {
-		return this.driver;
-	}
-	
 	private String getXPathFichaProducto(String refProducto) {
-		return (XPathFichaProducto + "//img[@src[contains(.,'" + refProducto + "')]]/ancestor::div[@class='favorites-quickview']");
+		return (XPATH_FICHA_PRODUCTO + "//img[@src[contains(.,'" + refProducto + "')]]/ancestor::div[@class='favorites-quickview']");
 	}
 	
 	private String getXPathButtonAddBolsa(String refProducto) {
@@ -68,15 +62,15 @@ public class ModalFichaFavoritos {
 	}
 	
 	public String getNombreColorSelectedFicha() {
-		if (state(Visible, By.xpath(XPathImgColorSelectedFicha), driver).check()) {
-			return (driver.findElement(By.xpath(XPathImgColorSelectedFicha)).getAttribute("title"));
+		if (state(Visible, By.xpath(XPATH_IMG_COLOR_SELECTED_FICHA), driver).check()) {
+			return (driver.findElement(By.xpath(XPATH_IMG_COLOR_SELECTED_FICHA)).getAttribute("title"));
 		}
 		return "";
 	}
 	
 	public String getCodigoColorSelectedFicha() {
-		if (state(Visible, By.xpath(XPathColorSelectedFicha), driver).check()) {
-			String id = driver.findElement(By.xpath(XPathColorSelectedFicha)).getAttribute("id");
+		if (state(Visible, By.xpath(XPATH_COLOR_SELECTED_FICHA), driver).check()) {
+			String id = driver.findElement(By.xpath(XPATH_COLOR_SELECTED_FICHA)).getAttribute("id");
 			if (!id.isEmpty()) {
 				return (id.replace("color_", ""));
 			}

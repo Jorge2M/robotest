@@ -9,14 +9,22 @@ import com.mng.robotest.test.pageobject.votf.PageSelectIdiomaVOTF;
 
 public class PageSelectIdiomaVOTFStpV {
 
+	private final PageSelectIdiomaVOTF pageSelectIdiomaVOTF;
+	private final PageAlertaVOTF pageAlertaVOTF;
+	
+	public PageSelectIdiomaVOTFStpV(WebDriver driver) {
+		pageSelectIdiomaVOTF = new PageSelectIdiomaVOTF(driver);
+		pageAlertaVOTF = new PageAlertaVOTF(driver);
+	}
+	
 	@Step (
 		description="Seleccionar el idioma <b>#{idioma.getLiteral()}</b> y pulsar \"Aceptar\" (si aparece una página de alerta la aceptamos)",
 		expected="Aparece la página de selección de la línea")
-	public static void selectIdiomaAndContinue(IdiomaPais idioma, WebDriver driver) {
-		PageSelectIdiomaVOTF.selectIdioma(idioma.getCodigo(), driver);
-		PageSelectIdiomaVOTF.clickButtonAceptar(driver);
-		if (PageAlertaVOTF.isPage(driver)) {
-			PageAlertaVOTF.clickButtonContinuar(driver);
+	public void selectIdiomaAndContinue(IdiomaPais idioma) {
+		pageSelectIdiomaVOTF.selectIdioma(idioma.getCodigo());
+		pageSelectIdiomaVOTF.clickButtonAceptar();
+		if (pageAlertaVOTF.isPage()) {
+			pageAlertaVOTF.clickButtonContinuar();
 		}
 	}
 }
