@@ -1,4 +1,4 @@
-package com.mng.robotest.test.stpv.shop.registro;
+package com.mng.robotest.domains.registro.steps;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -14,28 +14,24 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.registro.pageobjects.PageRegistroIni;
+import com.mng.robotest.domains.registro.pageobjects.beans.DataRegistro;
+import com.mng.robotest.domains.registro.pageobjects.beans.ListDataRegistro;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataCtxShop;
-import com.mng.robotest.test.pageobject.shop.registro.DataRegistro;
-import com.mng.robotest.test.pageobject.shop.registro.ListDataRegistro;
-import com.mng.robotest.test.pageobject.shop.registro.PageRegistroIni;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test.utils.UtilsTest;
 
-public class PageRegistroIniStpV {
+public class PageRegistroIniSteps {
 	
 	private final WebDriver driver;
 	private final PageRegistroIni pageRegistroIni;
 	
-	private PageRegistroIniStpV(WebDriver driver) {
+	public PageRegistroIniSteps(WebDriver driver) {
 		this.driver = driver;
-		this.pageRegistroIni = PageRegistroIni.getNew(driver);
-	}
-	
-	public static PageRegistroIniStpV getNew(WebDriver driver) {
-		return new PageRegistroIniStpV(driver);
+		this.pageRegistroIni = new PageRegistroIni(driver);
 	}
 
 	@Validation (
@@ -118,7 +114,8 @@ public class PageRegistroIniStpV {
 		
 		switch (errorExpected) {
 		case None:
-			PageRegistroSegundaStpV.validaIsPageRegistroOK(paisRegistro, app, dataRegistro, driver);
+			new PageRegistroSegundaSteps(driver)
+				.validaIsPageRegistroOK(paisRegistro, app, dataRegistro);
 			break;
 		case InputWarnings:
 			int numInputsObligatoriosNoInf = pageRegistroIni.getNumInputsObligatoriosNoInformados();
@@ -133,18 +130,6 @@ public class PageRegistroIniStpV {
 			validaEmailIncorrectShown(5);
 			break;
 		}
-		
-//		if (usrExists || pageRegistroIni.getNumInputsObligatoriosNoInformados() > 0) {
-//			if (usrExists) {
-//				validaEmailYaRegistradoShown(5);
-//			}
-//			int numInputsObligatoriosNoInf = pageRegistroIni.getNumInputsObligatoriosNoInformados();
-//			if (numInputsObligatoriosNoInf > 0) {
-//				validateAreInputsWithErrorMessageAssociated(numInputsObligatoriosNoInf, paisRegistro);  
-//			}
-//		} else {
-//			PageRegistroSegundaStpV.validaIsPageRegistroOK(paisRegistro, app, dataRegistro, driver);
-//		}
 		
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.CookiesAllowed,

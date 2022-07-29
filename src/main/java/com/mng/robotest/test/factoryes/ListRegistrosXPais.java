@@ -6,7 +6,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.appshop.Registro;
+import com.mng.robotest.domains.registro.tests.Registro;
 import com.mng.robotest.test.beans.*;
 import com.mng.robotest.test.utils.PaisGetter;
 import com.github.jorge2m.testmaker.service.TestMaker;

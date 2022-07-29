@@ -1,6 +1,6 @@
-package com.mng.robotest.test.pageobject.shop.registro;
+package com.mng.robotest.domains.registro.pageobjects.beans;
 
-import com.mng.robotest.test.pageobject.shop.registro.ListDataRegistro.DataRegType;
+import com.mng.robotest.domains.registro.pageobjects.beans.ListDataRegistro.DataRegType;
 
 
 public class DataRegistro {

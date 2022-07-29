@@ -16,6 +16,8 @@ import java.util.Arrays;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.loyalty.steps.PageHomeLikesSteps;
+import com.mng.robotest.domains.registro.pageobjects.PageRegistroIni;
+import com.mng.robotest.domains.registro.steps.PageRegistroIniSteps;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.pageobject.shop.identificacion.PageIdentificacion;
@@ -23,13 +25,11 @@ import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper.LoyaltyData;
-import com.mng.robotest.test.pageobject.shop.registro.PageRegistroIni;
 import com.mng.robotest.test.stpv.shop.favoritos.PageFavoritosStpV;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test.stpv.shop.micuenta.PageMiCuentaStpV;
 import com.mng.robotest.test.stpv.shop.modales.ModalCambioPaisStpV;
-import com.mng.robotest.test.stpv.shop.registro.PageRegistroIniStpV;
 
 /**
  * Clase que contiene los pasos/validaciones asociados al menú desplegable del frame superior que contiene las opciones del usuario:
@@ -75,10 +75,10 @@ public class SecMenusUserSteps {
 		saveHtmlPage=SaveWhen.Always)
 	public void selectRegistrate(DataCtxShop dCtxSh) throws Exception {
 		userMenus.clickMenuAndWait(UserMenu.registrate);
-		PageRegistroIni pageRegistroIni = PageRegistroIni.getNew(driver);  
+		PageRegistroIni pageRegistroIni = new PageRegistroIni(driver);  
 		pageRegistroIni.clickRegisterTab(driver);
 		
-		PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(driver);
+		PageRegistroIniSteps pageRegistroIniStpV = new PageRegistroIniSteps(driver);
 		pageRegistroIniStpV.validaIsPageUntil(5);
 		pageRegistroIniStpV.validaIsRGPDVisible(dCtxSh);
 	}

@@ -122,6 +122,10 @@ public class Page2IdentCheckout extends PageObjTM {
 		return datoSeteado;
 	}
 	
+	public boolean isNombreUsuarioVisible(int maxSeconds) {
+		return state(State.Visible, By.xpath(XPATH_INPUT_NOMBRE_USR)).wait(maxSeconds).check();
+	}
+	
 	public void setNombreUsuarioIfVisible(String nombreUsr, Map<String,String> datosRegistro) {
 		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_NOMBRE_USR, nombreUsr);
 		if (datoSeteado) {
@@ -615,6 +619,7 @@ public class Page2IdentCheckout extends PageObjTM {
 		String passStandard = GetterSecrets.factory().getCredentials(SecretType.SHOP_STANDARD_USER).getPassword();
 		
 		// Lo repetimos 2 veces porque el sendKeys sufre un bug ocasional que envía los datos a inputs incorrectos
+		isNombreUsuarioVisible(3);
 		for (int i = 0; i < 2; i++) {
 			setNombreUsuarioIfVisible(nombreUsr, datosSeteados);
 			setApellidosUsuarioIfVisible(apellidosUsr, datosSeteados);

@@ -1,4 +1,4 @@
-package com.mng.robotest.test.stpv.shop.registro;
+package com.mng.robotest.domains.registro.steps;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -13,18 +13,24 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.registro.pageobjects.PageRegistroSegunda;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.data.Constantes.ThreeState;
-import com.mng.robotest.test.pageobject.shop.registro.PageRegistroSegunda;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
 
 
-public class PageRegistroSegundaStpV {
+public class PageRegistroSegundaSteps {
+	
+	private PageRegistroSegunda pageRegistroSegunda;
+	
+	public PageRegistroSegundaSteps(WebDriver driver) {
+		pageRegistroSegunda = new PageRegistroSegunda(driver);
+	}
 	
 	@Validation
-	public static ChecksTM validaIsPageRegistroOK(Pais paisRegistro, AppEcom app, Map<String,String> dataRegistro, WebDriver driver) {
+	public ChecksTM validaIsPageRegistroOK(Pais paisRegistro, AppEcom app, Map<String,String> dataRegistro) {
 		ChecksTM validations = ChecksTM.getNew();
 		String lineasComaSeparated = "";
 		int numLineas = 0;
@@ -59,12 +65,12 @@ public class PageRegistroSegundaStpV {
 		int maxSeconds = 5;
 		validations.add(
 			"Aparece la 2ª página de introducción de datos (la esperamos hasta " + maxSeconds + " segs)",
-			PageRegistroSegunda.isPageUntil(driver, maxSeconds), State.Warn);
+			pageRegistroSegunda.isPageUntil(maxSeconds), State.Warn);
 		validations.add(
 			"Se pueden seleccionar las colecciones " + lineasComaSeparated,
-			PageRegistroSegunda.isPresentInputForLineas(driver, lineasComaSeparated), State.Info, StoreType.None);
+			pageRegistroSegunda.isPresentInputForLineas(lineasComaSeparated), State.Info, StoreType.None);
 		
-		int numColecciones = PageRegistroSegunda.getNumColecciones(driver);
+		int numColecciones = pageRegistroSegunda.getNumColecciones();
 		validations.add(
 			"Aparece un número de colecciones coincidente con el número de líneas (" + numLineas + ")",
 			numColecciones==numLineas, State.Info, StoreType.None);
@@ -79,8 +85,9 @@ public class PageRegistroSegundaStpV {
 	@Step (
 		description="@rewritable",
 		expected="Aparece la página de introducción de datos del niño o la de datos de la dirección (según se podían o no seleccionar niños)")
-	public static void setDataAndLineasRandom(String fechaNacimiento, boolean paisConNinos, int numNinos, Pais pais, Map<String,String> dataRegistroOK, WebDriver driver) 
-	throws Exception {
+	public void setDataAndLineasRandom(
+			String fechaNacimiento, boolean paisConNinos, int numNinos, Pais pais, Map<String,String> dataRegistroOK) 
+					throws Exception {
 		String tagListaRandom = "@lineasRandom";
 		String stepDescription = 
 			"Introducir datos adicionales y pulsar \"Continue\" si no existen niños: <br>" +
@@ -96,21 +103,21 @@ public class PageRegistroSegundaStpV {
 		StepTM step = TestMaker.getCurrentStepInExecution();
 		step.setDescripcion(stepDescription);
 
-		PageRegistroSegunda.setFechaNacimiento(driver, fechaNacimiento);
-		String lineasDesmarcadas = PageRegistroSegunda.desmarcarLineasRandom(driver, dataRegistroOK.get("lineascomaseparated"));
+		pageRegistroSegunda.setFechaNacimiento(fechaNacimiento);
+		String lineasDesmarcadas = pageRegistroSegunda.desmarcarLineasRandom(dataRegistroOK.get("lineascomaseparated"));
 		step.setDescripcion(step.getDescripcion().replace(tagListaRandom, lineasDesmarcadas));
 		dataRegistroOK.put("clicklineas", lineasDesmarcadas);
 		if (paisConNinos) {
-			PageRegistroSegunda.setNumeroNinos(numNinos, driver);
+			pageRegistroSegunda.setNumeroNinos(numNinos);
 		} else {
-			PageRegistroSegunda.clickButtonContinuar(driver);
+			pageRegistroSegunda.clickButtonContinuar();
 		}				
 
-		//Validaciones.
+		WebDriver driver = pageRegistroSegunda.driver;
 		if (paisConNinos) {
-			PageRegistroNinosStpV.validaIsPageWithNinos(numNinos, driver);
+			new PageRegistroNinosSteps(driver).validaIsPageWithNinos(numNinos);
 		} else {
-			PageRegistroDirecStpV.isPageFromPais(pais, driver);
+			new PageRegistroDirecSteps(driver).isPageFromPais(pais);
 		}
 		
 		GenericChecks.from(Arrays.asList(

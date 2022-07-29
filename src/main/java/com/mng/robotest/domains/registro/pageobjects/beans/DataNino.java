@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.registro;
+package com.mng.robotest.domains.registro.pageobjects.beans;
 
 
 public class DataNino {
