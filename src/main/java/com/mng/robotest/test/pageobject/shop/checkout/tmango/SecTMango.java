@@ -5,85 +5,79 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.mng.robotest.conftestmaker.AppEcom;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 public class SecTMango extends PageObjTM {
 
-	public enum TipoPago {pagoHabitual, tresMeses, seisMeses, pagoUnico}
+	public enum TipoPago { PAGO_HABITUAL, TRES_MESES, SEIS_MESES, PAGO_UNICO }
 	
 	private final Channel channel;
-	private final AppEcom app;
 	
-	private static final String XPathSectionMobil = "//div[@class[contains(.,'mango_card')] and @class[contains(.,'show')]]"; 
-	private static final String XPathSectionDesktop = "//div[@id='mangoCardContent']"; 
+	private static final String XPATH_SECTION_MOBIL = "//div[@data-id='mango_card']"; 
+	private static final String XPATH_SECTION_DESKTOP = "//div[@id='mangoCardContent']"; 
 	
-	public SecTMango(Channel channel, AppEcom app, WebDriver driver) {
+	public SecTMango(Channel channel, WebDriver driver) {
 		super(driver);
 		this.channel = channel;
-		this.app = app;
 	}
 	
 	public String getDescripcionTipoPago(TipoPago tipoPago) {
 		switch (tipoPago) {
-		case pagoHabitual:
+		case PAGO_HABITUAL:
 			return "La modalidad de pago habitual que tengas elegida para tu Tarjeta MANGO";
-		case tresMeses:
+		case TRES_MESES:
 			return "3 meses sin intereses";
-		case seisMeses:
+		case SEIS_MESES:
 			return "6 meses sin intereses";
-		case pagoUnico:
+		case PAGO_UNICO:
 			return "Pago único a final de mes";
 		default:
 			return "";
 		}
 	}
 	
-	public String getXPath_section() {
-		//if (channel.isDevice() && !(channel==Channel.tablet && app==AppEcom.outlet)) {
+	private String getXPathSection() {
 		if (channel==Channel.mobile) {
-			return XPathSectionMobil;
+			return XPATH_SECTION_MOBIL;
 		}
-		return XPathSectionDesktop;
+		return XPATH_SECTION_DESKTOP;
 	}
 	
-	public String getXPATH_labelsCheckModalidad() {
-		String xpathSection = getXPath_section(); 
-		//if (channel.isDevice() && !(channel==Channel.tablet && app==AppEcom.outlet)) {
+	private String getXPathLabelsCheckModalidad() {
+		String xpathSection = getXPathSection(); 
 		if (channel==Channel.mobile) {
 			return (xpathSection + "//p[@class='method-name']");
 		}
 		return (xpathSection + "//input/../label/span");
 	}
 	
-	public String getXPATH_labelModalidad(TipoPago tipoPago) {
+	public String getXPathLabelModalidad(TipoPago tipoPago) {
 		String litModalidad = getDescripcionTipoPago(tipoPago);
-		String xpathLabelsMod = getXPATH_labelsCheckModalidad();
-		return (xpathLabelsMod + "[text()[contains(.,'" + litModalidad + "')]]");
+		String xpathLabelsMod = getXPathLabelsCheckModalidad();
+		return (xpathLabelsMod + "//self::*[text()[contains(.,'" + litModalidad + "')]]");
 	}
 	
-	public String getXPATH_clickModalidad(TipoPago tipoPago) {
-		String xpathLabelMod = getXPATH_labelModalidad(tipoPago);
-		//if (channel.isDevice() && !(channel==Channel.tablet && app==AppEcom.outlet)) {
+	public String getXPathClickModalidad(TipoPago tipoPago) {
+		String xpathLabelMod = getXPathLabelModalidad(tipoPago);
 		if (channel==Channel.mobile) {
-			return (xpathLabelMod + "/..");
+			return (xpathLabelMod);
 		}
 		return (xpathLabelMod + "/../../input");
 	}
 	
 	public boolean isVisibleUntil(int maxSeconds) {
-		String xpath = getXPath_section();
+		String xpath = getXPathSection();
 		return (state(Visible, By.xpath(xpath)).wait(maxSeconds).check());
 	}
 	
 	public boolean isModalidadDisponible(TipoPago tipoPago) {
-		String xpath = getXPATH_labelModalidad(tipoPago);
+		String xpath = getXPathLabelModalidad(tipoPago);
 		return (state(Present, By.xpath(xpath)).check());
 	}
 	
 	public void clickModalidad(TipoPago tipoPago) {
-		driver.findElement(By.xpath(getXPATH_clickModalidad(tipoPago))).click();
+		driver.findElement(By.xpath(getXPathClickModalidad(tipoPago))).click();
 	}
 }

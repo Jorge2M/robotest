@@ -18,6 +18,7 @@ public class PageHomeLikes extends PageObjTM {
 		COMPRA_CON_DESCUENTO("//button/span[text()='Comprar con descuento']"),
 		DONAR_MIS_LIKES("//button/span[contains(text(), 'Donar Likes')]"),
 		SABER_MAS("//button/span[contains(text(), 'Saber más')]"),
+		LIKES_1200("//button/span[contains(text(), '1200 Likes')]"),
 		REGALAR_MIS_LIKES("//button/span[text()[contains(.,'Regalar')]]");
 		
 		private By by;

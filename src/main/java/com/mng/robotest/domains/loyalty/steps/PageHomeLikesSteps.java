@@ -58,11 +58,27 @@ public class PageHomeLikesSteps {
 		new PageHomeDonateLikesSteps(driver).checkIsPage(5);
 	}
 	
+	public void clickConseguirPorLikesButton() {
+		if (pageHomeLikes.isVisibleButton(ButtonUseLikes.LIKES_1200, 0)) {
+			click1200Likes();
+		} else {
+			clickSaberMas();
+		}
+	}
+	
 	@Step(
 		description="Seleccionar el 1er botón \"Saber más Likes\"",
 		expected="Aparece una página para conseguir por 1200 Likes")
-	public void clickSaberMas() {
+	private void clickSaberMas() {
 		pageHomeLikes.clickButton(ButtonUseLikes.SABER_MAS);
+		new PageHomeConseguirPorLikesSteps(driver).checkIsPage(2);
+	}
+	
+	@Step(
+		description="Seleccionar el 1er botón \"1200 Likes\"",
+		expected="Aparece una página para conseguir por 1200 Likes")
+	private void click1200Likes() {
+		pageHomeLikes.clickButton(ButtonUseLikes.LIKES_1200);
 		new PageHomeConseguirPorLikesSteps(driver).checkIsPage(2);
 	}
 	

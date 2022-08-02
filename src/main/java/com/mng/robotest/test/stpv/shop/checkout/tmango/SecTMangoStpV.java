@@ -8,7 +8,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.mng.robotest.conftestmaker.AppEcom;
+
 import com.mng.robotest.test.pageobject.shop.checkout.tmango.SecTMango;
 import com.mng.robotest.test.pageobject.shop.checkout.tmango.SecTMango.TipoPago;
 
@@ -16,8 +16,8 @@ public class SecTMangoStpV {
 
 	private final SecTMango secTMango;
 	
-	public SecTMangoStpV(Channel channel, AppEcom app, WebDriver driver) {
-		secTMango = new SecTMango(channel, app, driver);
+	public SecTMangoStpV(Channel channel, WebDriver driver) {
+		secTMango = new SecTMango(channel, driver);
 	}
 	
 	@Validation
@@ -27,8 +27,8 @@ public class SecTMangoStpV {
 			"Aparece el bloque de selección de la forma de pago",
 			secTMango.isVisibleUntil(0), State.Defect); 
 	 	validations.add(
-			"Aparece disponible la modalidad de pago:<br>" + secTMango.getDescripcionTipoPago(TipoPago.pagoHabitual), 
-			secTMango.isModalidadDisponible(SecTMango.TipoPago.pagoHabitual), State.Defect); 
+			"Aparece disponible la modalidad de pago:<br>" + secTMango.getDescripcionTipoPago(TipoPago.PAGO_HABITUAL), 
+			secTMango.isModalidadDisponible(SecTMango.TipoPago.PAGO_HABITUAL), State.Defect); 
 	 	return validations;
 	}
 	

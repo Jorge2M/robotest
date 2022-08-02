@@ -124,7 +124,7 @@ public class Compra {
 			//TODO actualmente no funciona el buscador por referencia de productos Intimissimi (CFIT-1265)
 			//confiamos que esté listo el 1-julio-2022
 			//cuando esté listo habrá que eliminar el 1er bloque del if
-			if (UtilsTest.dateBeforeToday("2022-08-01")) {
+			if (UtilsTest.dateBeforeToday("2022-11-01")) {
 				return new BuilderCheckout(dCtxSh, dCtxPago, driver)
 						.pago(espana.getPago("VISA"))
 						.listArticles(articlesHomeOpt.get().subList(0, 2))

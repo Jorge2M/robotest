@@ -61,7 +61,7 @@ public class PageCheckoutWrapperStpV {
 		this.modalDirecEnvioStpV = new ModalDirecEnvioStpV(channel, app, driver);
 		this.secMetodoEnvioDesktopStpV = new SecMetodoEnvioDesktopStpV(channel, app, driver);
 		this.secStoreCreditStpV = new SecStoreCreditStpV(channel, app, driver);
-		this.secTMangoStpV = new SecTMangoStpV(channel, app, driver);
+		this.secTMangoStpV = new SecTMangoStpV(channel, driver);
 		this.secKrediKartiStpV = new SecKrediKartiStpV(channel, driver); 
 		this.secBillpayStpV = new SecBillpayStpV(channel, driver);
 		this.modalDirecFacturaStpV = new ModalDirecFacturaStpV(channel, app, driver);
@@ -332,8 +332,7 @@ public class PageCheckoutWrapperStpV {
 		saveImagePage=SaveWhen.Always)
 	public void pasoBotonConfirmarPagoCheckout3Mobil() throws Exception {
 		try {
-			int maxSecondsToWait = 20;
-			pageCheckoutWrapper.getPage2MobilCheckout().clickFinalizarCompraAndWait(maxSecondsToWait);
+			pageCheckoutWrapper.getPage2MobilCheckout().clickFinalizarCompraAndWait(20);
 		}
 		catch (Exception e) {
 			Log4jTM.getLogger().warn("Problem in click Confirm payment button", e);

@@ -3,25 +3,30 @@ package com.mng.robotest.test.pageobject.shop.checkout.tmango;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageAmexResult {
+public class PageAmexResult extends PageObjTM {
 
-	static String XPathSectionOK = "//div[@class[contains(.,'code ok')]]";
-	static String XPathContinueButton = "//input[@class[contains(.,'btn-continue')]]";
+	private static final String XPATH_SECTION_OK = "//div[@class[contains(.,'code ok')]]";
+	private static final String XPATH_CONTINUE_BUTTON = "//input[@class[contains(.,'btn-continue')]]";
 	
-	public static boolean isResultOkUntil(int maxSeconds, WebDriver driver) {
-		return (state(Present, By.xpath(XPathSectionOK), driver)
+	public PageAmexResult(WebDriver driver) {
+		super(driver);
+	}
+	
+	public boolean isResultOkUntil(int maxSeconds) {
+		return (state(Present, By.xpath(XPATH_SECTION_OK))
 				.wait(maxSeconds).check());
 	}
 	
-	public static boolean isPresentContinueButton(WebDriver driver) {
-		return (state(Present, By.xpath(XPathContinueButton), driver).check());
+	public boolean isPresentContinueButton() {
+		return (state(Present, By.xpath(XPATH_CONTINUE_BUTTON)).check());
 	}
 
-	public static void clickContinuarButton(WebDriver driver) {
-		click(By.xpath(XPathContinueButton), driver).exec();
+	public void clickContinuarButton() {
+		click(By.xpath(XPATH_CONTINUE_BUTTON)).exec();
 	}
 }

@@ -44,7 +44,7 @@ public class Loy003 extends TestBase {
 		if (loyaltyPointsIni < 3000 && !isPro) {
 			loyaltyPointsIni = LoyaltyCommons.addLoyaltyPoints(USER, channel, app, driver);
 		}
-		pageHomeLikesSteps.clickSaberMas();
+		pageHomeLikesSteps.clickConseguirPorLikesButton();
 		
 		if (!isPro) {
 			pageHomeConseguirPorLikesSteps.selectConseguirButton();

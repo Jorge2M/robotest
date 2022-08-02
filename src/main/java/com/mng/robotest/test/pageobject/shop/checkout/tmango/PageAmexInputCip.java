@@ -3,25 +3,30 @@ package com.mng.robotest.test.pageobject.shop.checkout.tmango;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageAmexInputCip {
+public class PageAmexInputCip extends PageObjTM {
 
-	static String XPathInputCIP = "//input[@name='pin']";
-	static String XPathAcceptButton = "//img[@src[contains(.,'daceptar.gif')]]/../../a";
+	private static final String XPATH_INPUT_CIP = "//input[@name='pin']";
+	private static final String XPATH_ACCEPT_BUTTON = "//img[@src[contains(.,'daceptar.gif')]]/../../a";
 	
-	public static boolean isPageUntil(int maxSeconds, WebDriver driver) {
-		return (state(Present, By.xpath(XPathInputCIP), driver)
+	public PageAmexInputCip(WebDriver driver) {
+		super(driver);
+	}
+	
+	public boolean isPageUntil(int maxSeconds) {
+		return (state(Present, By.xpath(XPATH_INPUT_CIP))
 				.wait(maxSeconds).check());
 	}
 	
-	public static void inputCIP(String CIP, WebDriver driver) {
-		driver.findElement(By.xpath(XPathInputCIP)).sendKeys(CIP);
+	public void inputCIP(String CIP) {
+		driver.findElement(By.xpath(XPATH_INPUT_CIP)).sendKeys(CIP);
 	}
 
-	public static void clickAceptarButton(WebDriver driver) {
-		click(By.xpath(XPathAcceptButton), driver).exec();
+	public void clickAceptarButton() {
+		click(By.xpath(XPATH_ACCEPT_BUTTON)).exec();
 	}
 }

@@ -59,7 +59,7 @@ public class Page2DatosPagoCheckoutMobil extends PageObjTM {
 		super(driver);
 		this.channel = channel;
 		this.app = app;
-		this.secTMango = new SecTMango(channel, app, driver);
+		this.secTMango = new SecTMango(channel, driver);
 		this.secBillpay = new SecBillpay(channel, driver);
 	}
 	

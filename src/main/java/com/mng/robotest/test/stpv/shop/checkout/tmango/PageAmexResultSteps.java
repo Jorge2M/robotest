@@ -9,28 +9,34 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test.pageobject.shop.checkout.tmango.PageAmexResult;
 import com.mng.robotest.test.utils.ImporteScreen;
 
-public class PageAmexResultStpV {
+public class PageAmexResultSteps {
+	
+	private final PageAmexResult pageAmexResult;
+	
+	public PageAmexResultSteps(WebDriver driver) {
+		pageAmexResult = new PageAmexResult(driver);
+	}
 
 	@Validation
-	public static ChecksTM validateIsPageOk(String importeTotal, String codigoPais, WebDriver driver) {
+	public ChecksTM validateIsPageOk(String importeTotal, String codigoPais) {
 		ChecksTM validations = ChecksTM.getNew();
 		int maxSeconds = 2;
 	 	validations.add(
 			"Aparece una página con un mensaje de OK (lo esperamos hasta " + maxSeconds + " segundos)",
-			PageAmexResult.isResultOkUntil(maxSeconds, driver), State.Defect); 
+			pageAmexResult.isResultOkUntil(maxSeconds), State.Defect); 
 	 	validations.add(
 			"Aparece el importe de la operación " + importeTotal,
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codigoPais, driver), State.Warn); 
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codigoPais, pageAmexResult.driver), State.Warn); 
 	 	validations.add(
 			"Aparece un botón \"CONTINUAR\"",
-			PageAmexResult.isPresentContinueButton(driver), State.Defect);
+			pageAmexResult.isPresentContinueButton(), State.Defect);
 	 	return validations;
 	}
 	
 	@Step (
 		description="Seleccionamos el botón \"Continuar\"", 
 		expected="Aparece la página de Mango de resultado OK del pago")
-	public static void clickContinuarButton(WebDriver driver) {
-		PageAmexResult.clickContinuarButton(driver);
+	public void clickContinuarButton() {
+		pageAmexResult.clickContinuarButton();
 	}
 }

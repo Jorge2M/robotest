@@ -18,15 +18,15 @@ public class PageRedsysSimStpV {
 	@Validation(
 		description="Aparece la página de Simulador Pago RedSys",
 		level=State.Defect)
-	public boolean checkPage(WebDriver driver) {
+	public boolean checkPage() {
 		return pageRedsysSim.isPage();
 	}
 	
 	@Step (
 		description="Seleccionamos el botón \"Enviar\"", 
 		expected="Aparece la página de resultado Ok de la pasarela Redsys")
-	public void clickEnviar(String CIP, String importeTotal, String codigoPais, WebDriver driver) {
+	public void clickEnviar(String CIP, String importeTotal, String codigoPais) {
 		pageRedsysSim.clickEnviar();
-		PageAmexResultStpV.validateIsPageOk(importeTotal, codigoPais, driver);
+		new PageAmexResultSteps(pageRedsysSim.driver).validateIsPageOk(importeTotal, codigoPais);
 	}
 }

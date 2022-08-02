@@ -7,8 +7,8 @@ import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.pageobject.shop.checkout.tmango.SecTMango;
 import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow.From;
-import com.mng.robotest.test.stpv.shop.checkout.tmango.PageAmexInputTarjetaStpV;
-import com.mng.robotest.test.stpv.shop.checkout.tmango.PageAmexResultStpV;
+import com.mng.robotest.test.stpv.shop.checkout.tmango.PageAmexInputTarjetaSteps;
+import com.mng.robotest.test.stpv.shop.checkout.tmango.PageAmexResultSteps;
 import com.mng.robotest.test.stpv.shop.checkout.tmango.PageRedsysSimStpV;
 
 public class PagoTMango extends PagoStpV {
@@ -24,23 +24,25 @@ public class PagoTMango extends PagoStpV {
 		DataPedido dataPedido = this.dCtxPago.getDataPedido();
 		pageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
 		pageCheckoutWrapperStpV.getSecTMangoStpV().validateIsSectionOk();
-		pageCheckoutWrapperStpV.getSecTMangoStpV().clickTipoPago(SecTMango.TipoPago.pagoHabitual);
+		pageCheckoutWrapperStpV.getSecTMangoStpV().clickTipoPago(SecTMango.TipoPago.PAGO_HABITUAL);
 		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
-		PageAmexInputTarjetaStpV.validateIsPageOk(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), driver);
+		
+		PageAmexInputTarjetaSteps pageAmexInputTarjetaSteps = new PageAmexInputTarjetaSteps(driver);
+		pageAmexInputTarjetaSteps.validateIsPageOk(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais());
 		
 		if (execPay) {
 			dataPedido.setCodtipopago("M");
 			PageRedsysSimStpV pageRedsysSimStpV = 
-				PageAmexInputTarjetaStpV.inputTarjetaAndPayButton(
+				pageAmexInputTarjetaSteps.inputTarjetaAndPayButton(
 					dataPedido.getPago().getNumtarj(), 
 					dataPedido.getPago().getMescad(), 
 					dataPedido.getPago().getAnycad(), 
 					dataPedido.getPago().getCvc(), 
 					dataPedido.getImporteTotal(), 
-					dCtxSh.pais.getCodigo_pais(), driver);
+					dCtxSh.pais.getCodigo_pais());
 			
-			pageRedsysSimStpV.clickEnviar(dataPedido.getPago().getCip(), dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), driver);
-			PageAmexResultStpV.clickContinuarButton(driver);
+			pageRedsysSimStpV.clickEnviar(dataPedido.getPago().getCip(), dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais());
+			new PageAmexResultSteps(driver).clickContinuarButton();
 		}
 	}
 }
