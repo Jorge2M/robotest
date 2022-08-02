@@ -4,6 +4,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 
 import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputDataNew;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputDataOld;
 import com.mng.robotest.test.pageobject.shop.footer.SecFooter.FooterLink;
@@ -13,7 +14,7 @@ import com.mng.robotest.test.pageobject.shop.modales.ModalBuscadorTiendas;
 
 public class FactoryPageFromFooter {
 	
-	public static PageFromFooter make(FooterLink typeFooterLink, Channel channel, WebDriver driver) {
+	public static PageFromFooter make(FooterLink typeFooterLink, Channel channel, AppEcom app, WebDriver driver) {
 		switch (typeFooterLink) {
 		case ayuda:
 			return (new PagePregFrecuentes(driver));
@@ -22,7 +23,7 @@ public class FactoryPageFromFooter {
 		case devoluciones:
 			return (new PageCambiosYdevoluciones(driver));
 		case tiendas: 
-			return (new ModalBuscadorTiendas(channel, driver));
+			return (new ModalBuscadorTiendas(channel, app, driver));
 		case mango_card:
 			return (new PageMangoCard(driver));
 		case cheque_regalo:

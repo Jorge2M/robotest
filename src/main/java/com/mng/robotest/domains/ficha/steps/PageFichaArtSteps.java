@@ -388,7 +388,7 @@ public class PageFichaArtSteps {
 	public void selectBuscarEnTiendaButton() {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagNameLink, pageFicha.getNameLinkBuscarEnTienda());
 		pageFicha.selectBuscarEnTiendaLink();
-		new ModalBuscadorTiendasSteps(channel, driver).validaBusquedaConResultados();
+		new ModalBuscadorTiendasSteps(channel, app, driver).validaBusquedaConResultados();
 	}
 
 	@Step (

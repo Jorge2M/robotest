@@ -80,7 +80,7 @@ public class Fic001 extends TestBase {
 
 		articulo = pageFichaSteps.getFicha().getArticuloObject();
 		pageFichaSteps.selectBuscarEnTiendaButton();
-		new ModalBuscadorTiendasSteps(channel, driver).close();
+		new ModalBuscadorTiendasSteps(channel, app, driver).close();
 		if (app==AppEcom.shop) {
 			pageFichaSteps.selectAnadirAFavoritos();
 			pageFichaSteps.changeColorGarment();

@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.footer.PageFromFooter;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -13,15 +14,18 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class ModalBuscadorTiendas extends PageObjTM implements PageFromFooter {
 
 	private final Channel channel;
+	private final AppEcom app;
 	
 	private static final String XPATH_CONTAINER = "//micro-frontend[@id='storeLocator']";
 	private static final String XPATH_TIENDAS = XPATH_CONTAINER + "//div[@class[contains(.,'store-list')]]";
-	private static final String XPATH_ASPA_FOR_CLOSE_DESKTOP = "//*[@class[contains(.,'icon')] and @class[contains(.,'close-modal')]]";
+	private static final String XPATH_CLOSE_DESKTOP_NOOUTLET = "//*[@class[contains(.,'icon')] and @class[contains(.,'close-modal')]]";
+	private static final String XPATH_CLOSE_DESKTOP_OUTLET = "//button[@class[contains(.,'close-modal')]]";
 	private static final String XPATH_LEFT_ARROW_DEVICE = XPATH_CONTAINER + "//span[@role='button']";
 	
-	public ModalBuscadorTiendas(Channel channel, WebDriver driver) {
+	public ModalBuscadorTiendas(Channel channel, AppEcom app, WebDriver driver) {
 		super(driver);
 		this.channel = channel;
+		this.app = app;
 	}
 	
 	@Override
@@ -50,7 +54,11 @@ public class ModalBuscadorTiendas extends PageObjTM implements PageFromFooter {
 		if (channel.isDevice()) {
 			click(By.xpath(XPATH_LEFT_ARROW_DEVICE)).exec();
 		} else {
-			click(By.xpath(XPATH_ASPA_FOR_CLOSE_DESKTOP)).exec();
+			if (app==AppEcom.outlet) {
+				click(By.xpath(XPATH_CLOSE_DESKTOP_OUTLET)).exec();
+			} else {
+				click(By.xpath(XPATH_CLOSE_DESKTOP_NOOUTLET)).exec();
+			}
 		}
 	}
 }

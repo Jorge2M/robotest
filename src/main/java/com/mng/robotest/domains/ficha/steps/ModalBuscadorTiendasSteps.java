@@ -7,14 +7,15 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.modales.ModalBuscadorTiendas;
 
 public class ModalBuscadorTiendasSteps {
 
 	private final ModalBuscadorTiendas modalBuscadorTiendas;
 	
-	public ModalBuscadorTiendasSteps(Channel channel, WebDriver driver) {
-		modalBuscadorTiendas = new ModalBuscadorTiendas(channel, driver);
+	public ModalBuscadorTiendasSteps(Channel channel, AppEcom app, WebDriver driver) {
+		modalBuscadorTiendas = new ModalBuscadorTiendas(channel, app, driver);
 	}
 	
 	@Validation

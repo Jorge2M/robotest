@@ -57,7 +57,7 @@ public class SecFooterStpV {
 	@Validation
 	private ChecksTM checkPageCorrectAfterSelectLinkFooter(String windowFatherHandle, FooterLink typeFooter, boolean closeAtEnd) {
 		ChecksTM validations = ChecksTM.getNew();
-		PageFromFooter pageObject = FactoryPageFromFooter.make(typeFooter, channel, driver);
+		PageFromFooter pageObject = FactoryPageFromFooter.make(typeFooter, channel, app, driver);
 		String windowActualHandle = driver.getWindowHandle();
 		boolean newWindowInNewTab = (windowActualHandle.compareTo(windowFatherHandle)!=0);
 		int maxSeconds = 5;
