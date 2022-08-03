@@ -2,8 +2,6 @@ package com.mng.robotest.test.stpv.navigations.manto;
 
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
@@ -26,8 +24,8 @@ import com.mng.robotest.test.stpv.manto.PageLoginMantoStpV;
 import com.mng.robotest.test.stpv.manto.PageMenusMantoStpV;
 import com.mng.robotest.test.stpv.manto.PagePedidosMantoStpV;
 import com.mng.robotest.test.stpv.manto.PageSelTdaMantoStpV;
-import com.mng.robotest.test.stpv.manto.SecFiltrosMantoStpV;
-import com.mng.robotest.test.stpv.manto.SecFiltrosMantoStpV.TypeSearch;
+import com.mng.robotest.test.stpv.manto.SecFiltrosMantoSteps;
+import com.mng.robotest.test.stpv.manto.SecFiltrosMantoSteps.TypeSearch;
 
 public class PedidosNavigations {
 
@@ -98,7 +96,8 @@ public class PedidosNavigations {
 		
 		//Establecemos los filtros de las bolsas con el día de hoy + el pedido + el código de país asociado al pedido y pulsamos "Buscar"
 		PageMenusMantoStpV.goToBolsas(driver);
-		SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.BOLSA, driver);
+		SecFiltrosMantoSteps secFiltrosMantoSteps = new SecFiltrosMantoSteps(driver);
+		secFiltrosMantoSteps.setFiltrosYbuscar(dataPedido, TypeSearch.BOLSA);
 		boolean existLinkPedido = PageBolsasMantoStpV.validaLineaBolsa(dataPedido, appE, driver).getExistsLinkCodPed();
 		if (existLinkPedido) {
 			PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.bolsa, appE, driver);
@@ -106,7 +105,7 @@ public class PedidosNavigations {
 		
 		if (appE!=AppEcom.votf) {
 			PageMenusMantoStpV.goToPedidos(driver);
-			SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.PEDIDO, driver);
+			secFiltrosMantoSteps.setFiltrosYbuscar(dataPedido, TypeSearch.PEDIDO);
 			boolean existsLinkCodPed = PagePedidosMantoStpV.validaLineaPedido(dataPedido, appE, driver).getExistsLinkCodPed();	
 			if (existsLinkCodPed) {
 				PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.pedido, appE, driver);

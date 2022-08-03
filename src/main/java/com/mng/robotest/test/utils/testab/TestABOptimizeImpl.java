@@ -90,6 +90,17 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(AppEcom.shop)
 	),
 	
+	GPS_NEW_MENU_MOBILE_PRE(
+		"GPS - New Menu Mobile (1)",
+		"Y9Ad5nDkQtGXnU11J4DtrQ",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"V0-Original", 
+			"V1-New Menu"),
+		Arrays.asList(Channel.mobile),
+		Arrays.asList(AppEcom.shop)
+	),
+	
 	Test_New_Menu_Desktop_PRO(
 			"Test - New Menú - Desktop PRO",
 			"_0pE_bPVTCa9mB5wgaENww",

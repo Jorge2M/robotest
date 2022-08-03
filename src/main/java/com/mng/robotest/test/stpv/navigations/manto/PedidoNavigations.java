@@ -21,8 +21,8 @@ import com.mng.robotest.test.stpv.manto.PageBolsasMantoStpV;
 import com.mng.robotest.test.stpv.manto.PageLoginMantoStpV;
 import com.mng.robotest.test.stpv.manto.PageMenusMantoStpV;
 import com.mng.robotest.test.stpv.manto.PageSelTdaMantoStpV;
-import com.mng.robotest.test.stpv.manto.SecFiltrosMantoStpV;
-import com.mng.robotest.test.stpv.manto.SecFiltrosMantoStpV.TypeSearch;
+import com.mng.robotest.test.stpv.manto.SecFiltrosMantoSteps;
+import com.mng.robotest.test.stpv.manto.SecFiltrosMantoSteps.TypeSearch;
 import com.mng.robotest.test.stpv.manto.pedido.PageConsultaPedidoBolsaStpV;
 import com.mng.robotest.test.stpv.manto.pedido.PageGenerarPedidoStpV;
 import com.mng.robotest.test.stpv.manto.pedido.PagePedidosMantoStpV;
@@ -110,7 +110,7 @@ public class PedidoNavigations {
 	
 	private static void consultarBolsaStpV(DataPedido dataPedido, AppEcom app, WebDriver driver) throws Exception {
 		PageMenusMantoStpV.goToBolsas(driver);
-		SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.BOLSA, driver);
+		new SecFiltrosMantoSteps(driver).setFiltrosYbuscar(dataPedido, TypeSearch.BOLSA);
 		boolean existLinkPedido = PageBolsasMantoStpV.validaLineaBolsa(dataPedido, app, driver).getExistsLinkCodPed();
 		if (existLinkPedido) {
 			PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.bolsa, app, driver);
@@ -119,7 +119,7 @@ public class PedidoNavigations {
 	
 	private static void consultarPedidoStpV(DataPedido dataPedido, AppEcom app, WebDriver driver) throws Exception {
 		PageMenusMantoStpV.goToPedidos(driver);
-		SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.PEDIDO, driver);
+		new SecFiltrosMantoSteps(driver).setFiltrosYbuscar(dataPedido, TypeSearch.PEDIDO);
 		boolean existLinkPedido = PagePedidosMantoStpV.validaLineaPedido(dataPedido, app, driver).getExistsLinkCodPed();
 		if (existLinkPedido) { 
 			PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.pedido, app, driver);

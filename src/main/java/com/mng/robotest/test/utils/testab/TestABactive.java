@@ -20,8 +20,7 @@ public class TestABactive {
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.CLAV_4345_Optimizacion_Imagenes_PRE, 1));
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.CLAV_4345_Optimizacion_Imagenes_Desktop_PRO, 1));
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.CLAV_4345_Optimizacion_Imagenes_Mobile_PRO, 1));
-//		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.Legal_Policy_Checkout_Desktop, 0));
-//		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.Legal_Policy_Checkout_Mobile, 0));
+		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.GPS_NEW_MENU_MOBILE_PRE, 0));
 		
 		TestABmanager.activateTestsAB(listTestABsToActivate, channel, app, driver);
 	}

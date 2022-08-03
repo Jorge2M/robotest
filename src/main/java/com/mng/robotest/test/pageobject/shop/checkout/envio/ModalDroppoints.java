@@ -39,6 +39,11 @@ public class ModalDroppoints {
 		return (state(Visible, By.xpath(xpathPanelGeneral), driver).wait(maxSeconds).check());
 	}
 	
+	public static boolean isInvisibleUntil(int maxSeconds, Channel channel, WebDriver driver) {
+		String xpathPanelGeneral = getXPathPanelGeneral(channel);
+		return (state(Invisible, By.xpath(xpathPanelGeneral), driver).wait(maxSeconds).check());
+	}
+	
 	public static boolean isInvisibleCargandoMsgUntil(int maxSeconds, WebDriver driver) {
 		return (state(Invisible, By.xpath(XPathMsgCargando), driver).wait(maxSeconds).check());
 	}

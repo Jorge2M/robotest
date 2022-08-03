@@ -51,9 +51,10 @@ public class SecConfirmDatosStpV {
 	@Validation
 	private static ChecksTM checkConfirmacionCambioDireccionEnvio(DataPedido dataPedido, Channel channel, AppEcom app, WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
+		int maxSeconds = 2;
 		validations.add(
-			"Desaparece la capa de Droppoints",
-			!ModalDroppoints.isVisible(channel, driver), State.Warn);
+			"Desaparece la capa de Droppoints (lo esperamos hasta " + maxSeconds + " segundos)",
+			ModalDroppoints.isInvisibleUntil(maxSeconds, channel, driver), State.Warn);
 		
 		DataDeliveryPoint dataDp = dataPedido.getDataDeliveryPoint();
 		String textDireccionEnvioCompleta = new PageCheckoutWrapper(channel, app, driver).getTextDireccionEnvioCompleta();

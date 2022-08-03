@@ -27,8 +27,8 @@ import com.mng.robotest.test.stpv.manto.PageLoginMantoStpV;
 import com.mng.robotest.test.stpv.manto.PageMenusMantoStpV;
 import com.mng.robotest.test.stpv.manto.PageOrdenacionDePrendasStpV;
 import com.mng.robotest.test.stpv.manto.PageSelTdaMantoStpV;
-import com.mng.robotest.test.stpv.manto.SecFiltrosMantoStpV;
-import com.mng.robotest.test.stpv.manto.SecFiltrosMantoStpV.TypeSearch;
+import com.mng.robotest.test.stpv.manto.SecFiltrosMantoSteps;
+import com.mng.robotest.test.stpv.manto.SecFiltrosMantoSteps.TypeSearch;
 import com.mng.robotest.test.stpv.manto.pedido.PagePedidosMantoStpV;
 import com.mng.robotest.test.exceptions.NotFoundException;
 
@@ -81,7 +81,7 @@ public class Manto {
 		PageMenusMantoStpV.goToPedidos(driver);
 		
 		LocalDate dateSevenDaysAgo = LocalDate.now().minusDays(7);
-		SecFiltrosMantoStpV.setFiltrosWithoutChequeRegaloYbuscar(dPedidoPrueba, TypeSearch.PEDIDO, dateSevenDaysAgo, driver);
+		new SecFiltrosMantoSteps(driver).setFiltrosWithoutChequeRegaloYbuscar(dPedidoPrueba, TypeSearch.PEDIDO, dateSevenDaysAgo);
 		this.dPedidoPrueba = PagePedidosMantoStpV.getPedidoUsuarioRegistrado(dPedidoPrueba, driver);
 		this.dPedidoPrueba = PagePedidosMantoStpV.getDataPedido(dPedidoPrueba, driver);
 		this.dPedidoPrueba = PagePedidosMantoStpV.getDataCliente(dPedidoPrueba, driver);

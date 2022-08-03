@@ -6,59 +6,64 @@ import java.time.format.DateTimeFormatter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecFiltros {
+public class SecFiltros extends PageObjTM {
 
-	static final String XPathFiltroCodPedido = "//input[@id[contains(.,':id')]]";
-	static final String XPathFiltroCodPais = "//input[@id[contains(.,'pais')]]";
-	static final String XPathFiltroFDesde = "//input[@id[contains(.,'desde')]]";
-	static final String XPathFiltroFHasta = "//input[@id[contains(.,'hasta')]]";
-	static final String XPathFiltroImporteTotal = "//input[@id[contains(.,':total')]]";
-	static final String XPathButtonBuscar = "//input[@value='Buscar']";
+	private static final String XPATH_FILTRO_COD_PEDIDO = "//input[@id[contains(.,':id')]]";
+	private static final String XPATH_FILTRO_COD_PAIS = "//input[@id[contains(.,'pais')]]";
+	private static final String XPATH_FILTRO_FDESDE = "//input[@id[contains(.,'desde')]]";
+	private static final String XPATH_FILTRO_FHASTA = "//input[@id[contains(.,'hasta')]]";
+	private static final String XPATH_FILTRO_IMPORTE_TOTAL = "//input[@id[contains(.,':total')]]";
+	private static final String XPATH_BUTTON_BUSCAR = "//input[@value='Buscar']";
 	
-	static final DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	private static final DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	
+	public SecFiltros(WebDriver driver) {
+		super(driver);
+	}
 
-	public static void setFiltroCodPedido(String codigoPedidoManto, WebDriver driver) {
-		driver.findElement(By.xpath(XPathFiltroCodPedido)).clear();
-		driver.findElement(By.xpath(XPathFiltroCodPedido)).sendKeys(codigoPedidoManto);
+	public void setFiltroCodPedido(String codigoPedidoManto) {
+		driver.findElement(By.xpath(XPATH_FILTRO_COD_PEDIDO)).clear();
+		driver.findElement(By.xpath(XPATH_FILTRO_COD_PEDIDO)).sendKeys(codigoPedidoManto);
 	}
 	
-	public static void setFiltroFDesde(LocalDate fechaDesde, WebDriver driver) {
+	public void setFiltroFDesde(LocalDate fechaDesde) {
 		String fechaDesdeInput = fechaDesde.format(formatDate);
-		driver.findElement(By.xpath(XPathFiltroFDesde)).clear();
-		driver.findElement(By.xpath(XPathFiltroFDesde)).sendKeys(fechaDesdeInput);
+		driver.findElement(By.xpath(XPATH_FILTRO_FDESDE)).clear();
+		driver.findElement(By.xpath(XPATH_FILTRO_FDESDE)).sendKeys(fechaDesdeInput);
 	}
 	
-	public static void setFiltroImporteTotal(String importeTotal, WebDriver driver) {
-		driver.findElement(By.xpath(XPathFiltroImporteTotal)).clear();
-		driver.findElement(By.xpath(XPathFiltroImporteTotal)).sendKeys(importeTotal);
+	public void setFiltroImporteTotal(String importeTotal) {
+		driver.findElement(By.xpath(XPATH_FILTRO_IMPORTE_TOTAL)).clear();
+		driver.findElement(By.xpath(XPATH_FILTRO_IMPORTE_TOTAL)).sendKeys(importeTotal);
 	}
 	
-	public static void setFiltroFHasta(WebDriver driver, String fechaHasta) {
-		driver.findElement(By.xpath(XPathFiltroFHasta)).clear();
-		driver.findElement(By.xpath(XPathFiltroFHasta)).sendKeys(fechaHasta);
+	public void setFiltroFHasta(String fechaHasta) {
+		driver.findElement(By.xpath(XPATH_FILTRO_FHASTA)).clear();
+		driver.findElement(By.xpath(XPATH_FILTRO_FHASTA)).sendKeys(fechaHasta);
 	}
 
-	public static void setFiltroCodPaisIfExists(WebDriver driver, String codigoPais) {
-		if (state(Present, By.xpath(XPathFiltroCodPais), driver).check()) {
-			driver.findElement(By.xpath(XPathFiltroCodPais)).clear();
-			driver.findElement(By.xpath(XPathFiltroCodPais)).sendKeys(codigoPais);
+	public void setFiltroCodPaisIfExists(String codigoPais) {
+		if (state(Present, By.xpath(XPATH_FILTRO_COD_PAIS), driver).check()) {
+			driver.findElement(By.xpath(XPATH_FILTRO_COD_PAIS)).clear();
+			driver.findElement(By.xpath(XPATH_FILTRO_COD_PAIS)).sendKeys(codigoPais);
 		}
 	}
 
-	public static String getFechaDesdeValue(WebDriver driver) {
-		return (driver.findElement(By.xpath(XPathFiltroFDesde)).getAttribute("value"));
+	public String getFechaDesdeValue() {
+		return (driver.findElement(By.xpath(XPATH_FILTRO_FDESDE)).getAttribute("value"));
 	}
 
-	public static LocalDate getFechaHastaValue(WebDriver driver) {
-		String fechaHastaScreen = driver.findElement(By.xpath(XPathFiltroFHasta)).getAttribute("value");
+	public LocalDate getFechaHastaValue() {
+		String fechaHastaScreen = driver.findElement(By.xpath(XPATH_FILTRO_FHASTA)).getAttribute("value");
 		return LocalDate.parse(fechaHastaScreen, formatDate);
 	}
 
-	public static void clickButtonBuscar(WebDriver driver) {
-		click(By.xpath(XPathButtonBuscar), driver).exec();
+	public void clickButtonBuscar() {
+		click(By.xpath(XPATH_BUTTON_BUSCAR)).exec();
 	}
 }
