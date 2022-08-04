@@ -42,9 +42,10 @@ public class SecFiltros extends PageObjTM {
 		driver.findElement(By.xpath(XPATH_FILTRO_IMPORTE_TOTAL)).sendKeys(importeTotal);
 	}
 	
-	public void setFiltroFHasta(String fechaHasta) {
+	public void setFiltroFHasta(LocalDate fechaHasta) {
+		String fechaHastaInput = fechaHasta.format(formatDate);
 		driver.findElement(By.xpath(XPATH_FILTRO_FHASTA)).clear();
-		driver.findElement(By.xpath(XPATH_FILTRO_FHASTA)).sendKeys(fechaHasta);
+		driver.findElement(By.xpath(XPATH_FILTRO_FHASTA)).sendKeys(fechaHastaInput);
 	}
 
 	public void setFiltroCodPaisIfExists(String codigoPais) {

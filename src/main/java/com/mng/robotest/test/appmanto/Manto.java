@@ -81,7 +81,7 @@ public class Manto {
 		PageMenusMantoStpV.goToPedidos(driver);
 		
 		LocalDate dateSevenDaysAgo = LocalDate.now().minusDays(7);
-		new SecFiltrosMantoSteps(driver).setFiltrosWithoutChequeRegaloYbuscar(dPedidoPrueba, TypeSearch.PEDIDO, dateSevenDaysAgo);
+		new SecFiltrosMantoSteps(driver).setFiltrosWithoutChequeRegaloYbuscar(dPedidoPrueba, TypeSearch.PEDIDO, dateSevenDaysAgo, LocalDate.now());
 		this.dPedidoPrueba = PagePedidosMantoStpV.getPedidoUsuarioRegistrado(dPedidoPrueba, driver);
 		this.dPedidoPrueba = PagePedidosMantoStpV.getDataPedido(dPedidoPrueba, driver);
 		this.dPedidoPrueba = PagePedidosMantoStpV.getDataCliente(dPedidoPrueba, driver);

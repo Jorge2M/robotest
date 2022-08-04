@@ -28,7 +28,8 @@ public class SecFiltrosMantoSteps {
 	
 	public void setFiltrosYbuscar(DataPedido dataPedido, TypeSearch typeSearch) throws Exception {
 		LocalDate fechaHoy = secFiltros.getFechaHastaValue();
-		setFiltrosYbuscar(dataPedido, typeSearch, fechaHoy.minusDays(1));
+		LocalDate fechaManyana = fechaHoy.plusDays(1);
+		setFiltrosYbuscar(dataPedido, typeSearch, fechaHoy, fechaManyana);
 	}
 	
 	@Step (
@@ -37,11 +38,13 @@ public class SecFiltrosMantoSteps {
 			"- Método pago: <b>" + TAG_NOMBRE_PAGO + "</b><br>" +
 			"- Tienda: <b>" + TAG_LIT_TIENDA + "</b><br>" +
 			"- País: <b>#{dataPedido.getNombrePais()}</b> (#{dataPedido.getCodigoPais()})<br>" +
-			"- Fecha desde: #{fechaDesde.toString()}",
+			"- Fecha desde: #{fechaDesde.toString()}<br>" +
+			"- Fecha hasta: #{fechaHasta.toString()}",
 		expected="La búsqueda es correcta",
 		saveErrorData=SaveWhen.Never)
-	public void setFiltrosYbuscar(DataPedido dataPedido, @SuppressWarnings("unused") TypeSearch typeSearch, LocalDate fechaDesde) 
-			throws Exception {
+	public void setFiltrosYbuscar(
+			DataPedido dataPedido, @SuppressWarnings("unused") TypeSearch typeSearch, LocalDate fechaDesde, LocalDate fechaHasta) 
+					throws Exception {
 		StepTM step = TestMaker.getCurrentStepInExecution();
 		step.replaceInDescription(TAG_NOMBRE_PAGO, dataPedido.getPago().getNombre());
 		step.replaceInDescription(TAG_LIT_TIENDA, SecCabecera.getLitTienda(secFiltros.driver));
@@ -51,13 +54,14 @@ public class SecFiltrosMantoSteps {
 		}
 		secFiltros.setFiltroCodPaisIfExists(dataPedido.getCodigoPais());
 		secFiltros.setFiltroFDesde(fechaDesde);
+		secFiltros.setFiltroFHasta(fechaHasta);
 		secFiltros.clickButtonBuscar();
 	}
 	
-	public void setFiltrosWithoutChequeRegaloYbuscar(DataPedido dataPedido, TypeSearch typeSearch, LocalDate fechaDesde) 
+	public void setFiltrosWithoutChequeRegaloYbuscar(DataPedido dataPedido, TypeSearch typeSearch, LocalDate fechaDesde, LocalDate fechaHasta) 
 			throws Exception {
 		setFiltroForAvoidChequeRegalo();
-		setFiltrosYbuscar(dataPedido, typeSearch, fechaDesde);
+		setFiltrosYbuscar(dataPedido, typeSearch, fechaDesde, fechaHasta);
 	}
 	
 	@Step (
