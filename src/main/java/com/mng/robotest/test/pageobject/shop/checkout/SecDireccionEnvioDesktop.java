@@ -53,7 +53,7 @@ public class SecDireccionEnvioDesktop extends PageObjTM {
 	
 	private boolean isNewSection() {
 		By bySectionNew = By.xpath(XPath.SECTION.getXPathNew());
-		return state(State.Present, bySectionNew).check();
+		return state(State.Visible, bySectionNew).check();
 	}
 	
 	public SecDireccionEnvioDesktop(WebDriver driver) {
@@ -71,7 +71,11 @@ public class SecDireccionEnvioDesktop extends PageObjTM {
 	
 	public String getTextDireccionEnvio() {
 		if (isNewSection()) {
-			return (driver.findElement(By.xpath(getXPath(XPath.DIRECCION_ENVIO))).getText());
+			By byDireccion = By.xpath(getXPath(XPath.DIRECCION_ENVIO));
+			if (state(State.Present, byDireccion).check()) {
+				return (driver.findElement(By.xpath(getXPath(XPath.DIRECCION_ENVIO))).getText());
+			}
+			return "";
 		}
 		if (state(State.Present, By.xpath(XPATH_DIRECCION_ENVIO_OLD)).check()) {
 			return (
