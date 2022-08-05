@@ -12,9 +12,9 @@ import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.identificacion.PageIdentificacionStpV;
-import com.mng.robotest.test.stpv.shop.identificacion.PageRecuperaPasswdStpV;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.identificacion.PageIdentificacionSteps;
+import com.mng.robotest.test.steps.shop.identificacion.PageRecuperaPasswdSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 import com.github.jorge2m.testmaker.service.TestMaker;
 
@@ -44,12 +44,12 @@ public class IniciarSesion {
 		DataCtxShop dCtxSh = getCtxShForTest();
 		dCtxSh.userRegistered = false;
 					
-		AccesoStpV.oneStep(dCtxSh, false, driver);
-		PageIdentificacionStpV.inicioSesionDatosKO("usuarioKeNoExiste@mango.com", "chuflapassw", dCtxSh.channel, dCtxSh.appE, driver);
-		PageIdentificacionStpV.inicioSesionDatosKO(Constantes.MAIL_PERSONAL, "chuflapassw", dCtxSh.channel, dCtxSh.appE, driver);
-		PageIdentificacionStpV.selectHasOlvidadoTuContrasenya(driver);
+		AccesoSteps.oneStep(dCtxSh, false, driver);
+		PageIdentificacionSteps.inicioSesionDatosKO("usuarioKeNoExiste@mango.com", "chuflapassw", dCtxSh.channel, dCtxSh.appE, driver);
+		PageIdentificacionSteps.inicioSesionDatosKO(Constantes.MAIL_PERSONAL, "chuflapassw", dCtxSh.channel, dCtxSh.appE, driver);
+		PageIdentificacionSteps.selectHasOlvidadoTuContrasenya(driver);
 		String emailQA = "eqp.ecommerce.qamango@mango.com";
-		PageRecuperaPasswdStpV.inputMailAndClickEnviar(emailQA, driver);
+		PageRecuperaPasswdSteps.inputMailAndClickEnviar(emailQA, driver);
 	}
 
 	@Test (
@@ -63,6 +63,6 @@ public class IniciarSesion {
 		dCtxSh.passwordUser = userShop.password;
 		dCtxSh.userRegistered = true;
 			
-		AccesoStpV.manySteps(dCtxSh, driver);
+		AccesoSteps.manySteps(dCtxSh, driver);
 	}
 }

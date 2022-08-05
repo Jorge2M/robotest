@@ -5,8 +5,8 @@ import com.mng.robotest.domains.loyalty.pageobjects.PageHomeDonateLikes.ButtonLi
 import com.mng.robotest.domains.loyalty.steps.PageHomeDonateLikesSteps;
 import com.mng.robotest.domains.loyalty.steps.PageHomeLikesSteps;
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusUserSteps;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
@@ -40,7 +40,7 @@ public class Loy002 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		AccesoStpV.oneStep(dataTest, false, driver);
+		AccesoSteps.oneStep(dataTest, false, driver);
 		
 		int loyaltyPointsIni = LoyaltyCommons.clickMangoLikesYou(channel, app, driver);
 		if (loyaltyPointsIni < 3000 && !isPro) {

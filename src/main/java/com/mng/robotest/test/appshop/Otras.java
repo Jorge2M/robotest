@@ -10,14 +10,14 @@ import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.stpv.otras.GoogleStpV;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.PageIniShopJaponStpV;
-import com.mng.robotest.test.stpv.shop.PagePrehomeStpV;
-import com.mng.robotest.test.stpv.shop.SecFooterStpV;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusDesktopStpV;
-import com.mng.robotest.test.stpv.shop.modales.ModalChatBotStpV;
-import com.mng.robotest.test.stpv.shop.modales.ModalNewsletterStpV;
+import com.mng.robotest.test.steps.otras.GoogleSteps;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.PageIniShopJaponSteps;
+import com.mng.robotest.test.steps.shop.PagePrehomeSteps;
+import com.mng.robotest.test.steps.shop.SecFooterSteps;
+import com.mng.robotest.test.steps.shop.menus.SecMenusDesktopSteps;
+import com.mng.robotest.test.steps.shop.modales.ModalChatBotSteps;
+import com.mng.robotest.test.steps.shop.modales.ModalNewsletterSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 import com.github.jorge2m.testmaker.service.TestMaker;
 
@@ -52,16 +52,16 @@ public class Otras {
 		dCtxSh.pais = espana;
 		dCtxSh.idioma = castellano;
 		dCtxSh.userRegistered = false;
-		AccesoStpV.oneStep(dCtxSh, false, driver);
+		AccesoSteps.oneStep(dCtxSh, false, driver);
 		
-		SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, dCtxSh.channel, driver);
-		secMenusDesktopStpV.checkURLRedirectParkasHeEspanya();
+		SecMenusDesktopSteps secMenusDesktopSteps = SecMenusDesktopSteps.getNew(dCtxSh.pais, dCtxSh.appE, dCtxSh.channel, driver);
+		secMenusDesktopSteps.checkURLRedirectParkasHeEspanya();
 		
 		dCtxSh.pais = francia;
 		dCtxSh.idioma = francia_frances;
-		AccesoStpV.goToInitialURL(driver);
-		AccesoStpV.oneStep(dCtxSh, false, driver);	  
-		SecMenusDesktopStpV.checkURLRedirectFicha(francia, dCtxSh, driver);
+		AccesoSteps.goToInitialURL(driver);
+		AccesoSteps.oneStep(dCtxSh, false, driver);	  
+		SecMenusDesktopSteps.checkURLRedirectFicha(francia, dCtxSh, driver);
 	}
 	
 	
@@ -70,9 +70,9 @@ public class Otras {
 		description="Verificar en google la existencia de referencia Mango")
 	public void OTR002_check_Busqueda_Google() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-		GoogleStpV googleStpV = new GoogleStpV(driver);
-		googleStpV.accessGoogleAndSearchMango();
-		googleStpV.selectFirstLinkSinPublicidad();
+		GoogleSteps googleSteps = new GoogleSteps(driver);
+		googleSteps.accessGoogleAndSearchMango();
+		googleSteps.selectFirstLinkSinPublicidad();
 	}
 	
 	@Test (
@@ -85,7 +85,7 @@ public class Otras {
 		dCtxSh.pais = espana;
 		dCtxSh.idioma = castellano;
 		dCtxSh.userRegistered = false;
-		AccesoStpV.accesoPRYCambioPais(dCtxSh, francia, francia_frances, driver);
+		AccesoSteps.accesoPRYCambioPais(dCtxSh, francia, francia_frances, driver);
 	}
 
 	/**
@@ -111,38 +111,38 @@ public class Otras {
 		//   país de acceso: suecia (no asociado a la IP del usuario)
 		//   país de acceso previo: ninguno (null)
 		//   país previamente confirmado: ninguno (null)
-		Pais paisAsocIP = AccesoStpV.accesoConURLPaisNoIP(urlBaseTest, suecia, null, null, 0, listPaisAsocIP, driver);
+		Pais paisAsocIP = AccesoSteps.accesoConURLPaisNoIP(urlBaseTest, suecia, null, null, 0, listPaisAsocIP, driver);
 				
 		//Acceso vía URL con:
 		//   país de acceso: francia (no asociado a la IP del usuario)
 		//   país de acceso previo: suecia
 		//   país previamente confirmado: ninguno (null)
-		AccesoStpV.accesoConURLPaisNoIP(urlBaseTest, francia, suecia, null, 0, listPaisAsocIP, driver);
+		AccesoSteps.accesoConURLPaisNoIP(urlBaseTest, francia, suecia, null, 0, listPaisAsocIP, driver);
 					
 		//Step. Confirmamos el país del modal (España, Irlanda o USA... el de paisAsocIP)
-		AccesoStpV.selectConfirmPaisModal(driver);
+		AccesoSteps.selectConfirmPaisModal(driver);
 
 		//Acceso vía URL con:
 		//   país de acceso: francia (no asociado a la IP del usuario)
 		//   país de acceso previo: suecia
 		//   país previamente confirmado: paisAsocIp (España, Irlanda o USA)
 		//   número de veces confirmado: 1
-		AccesoStpV.accesoConURLPaisNoIP(urlBaseTest, francia, suecia, paisAsocIP, 1, listPaisAsocIP, driver);
+		AccesoSteps.accesoConURLPaisNoIP(urlBaseTest, francia, suecia, paisAsocIP, 1, listPaisAsocIP, driver);
 			
 		//Step. Confirmamos el país del modal (España, Irlanda o USA... el de paisAsocIP)
-		AccesoStpV.selectConfirmPaisModal(driver);
+		AccesoSteps.selectConfirmPaisModal(driver);
 			
 		//Acceso vía URL con:
 		//   país de acceso: suecia (no asociado a la IP del usuario)
 		//   país de acceso previo: francia
 		//   país previamente confirmado: paisAsocIp (España, Irlanda o USA)
 		//   número de veces confirmado: 2
-		AccesoStpV.accesoConURLPaisNoIP(urlBaseTest, suecia, francia, paisAsocIP, 2, listPaisAsocIP, driver);
+		AccesoSteps.accesoConURLPaisNoIP(urlBaseTest, suecia, francia, paisAsocIP, 2, listPaisAsocIP, driver);
 				
 		//Steps. Acabamos ejecutando la funcionalidad típica de cambio de país desde el footer
 		dCtxSh.pais = francia;
 		dCtxSh.idioma = francia_frances;
-		(new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver)).cambioPais(dCtxSh);
+		(new SecFooterSteps(dCtxSh.channel, dCtxSh.appE, driver)).cambioPais(dCtxSh);
 	}
 
 	
@@ -158,11 +158,11 @@ public class Otras {
 
 		dCtxSh.pais = japon;
 		dCtxSh.idioma = japones;
-		PagePrehomeStpV pagePrehomeStpV = new PagePrehomeStpV(dCtxSh, driver);
-		pagePrehomeStpV.getPageObject().previousAccessShopSteps(true);
-		pagePrehomeStpV.seleccionPaisIdioma();
-		pagePrehomeStpV.entradaShopGivenPaisSeleccionado();
-		PageIniShopJaponStpV.validaPageIniJapon(2, driver);
+		PagePrehomeSteps pagePrehomeSteps = new PagePrehomeSteps(dCtxSh, driver);
+		pagePrehomeSteps.getPageObject().previousAccessShopSteps(true);
+		pagePrehomeSteps.seleccionPaisIdioma();
+		pagePrehomeSteps.entradaShopGivenPaisSeleccionado();
+		PageIniShopJaponSteps.validaPageIniJapon(2, driver);
 	}	
 	
 	//TODO cuando lo activen en Tablet añadir ese canal
@@ -175,26 +175,26 @@ public class Otras {
 		dCtxSh.pais = espana;
 		dCtxSh.idioma = castellano;
 		dCtxSh.userRegistered = false;
-		AccesoStpV.oneStep(dCtxSh, false, driver);
-		ModalNewsletterStpV.closeIfVisible(driver);
+		AccesoSteps.oneStep(dCtxSh, false, driver);
+		ModalNewsletterSteps.closeIfVisible(driver);
 		
-		ModalChatBotStpV chatBotStpV = new ModalChatBotStpV(driver);
-		if (!chatBotStpV.checkIconVisible()) {
+		ModalChatBotSteps chatBotSteps = new ModalChatBotSteps(driver);
+		if (!chatBotSteps.checkIconVisible()) {
 			return;
 		}
-		if (!chatBotStpV.clickIcon()) {
+		if (!chatBotSteps.clickIcon()) {
 			return;
 		}
 		
 		String option1 = "Estado de mi pedido";
-		chatBotStpV.isVisibleOption(option1, 5);
-		chatBotStpV.selectOption(option1);
+		chatBotSteps.isVisibleOption(option1, 5);
+		chatBotSteps.selectOption(option1);
 		
 		String option2 = "Retraso de mi pedido";
-		chatBotStpV.isVisibleOption(option2, 5);
-		chatBotStpV.selectOption(option2);
+		chatBotSteps.isVisibleOption(option2, 5);
+		chatBotSteps.selectOption(option2);
 		
-		chatBotStpV.checkResponseVisible("Si has recibido un e-mail de retraso de tu pedido no te preocupes", 3);
-		chatBotStpV.isVisibleButton("¡Sí, gracias!", 3);
+		chatBotSteps.checkResponseVisible("Si has recibido un e-mail de retraso de tu pedido no te preocupes", 3);
+		chatBotSteps.isVisibleButton("¡Sí, gracias!", 3);
 	}
 }

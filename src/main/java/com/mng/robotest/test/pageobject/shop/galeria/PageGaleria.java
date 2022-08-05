@@ -25,8 +25,8 @@ import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test.pageobject.utils.DataArticleGalery;
 import com.mng.robotest.test.pageobject.utils.DataScroll;
 import com.mng.robotest.test.pageobject.utils.ListDataArticleGalery;
-import com.mng.robotest.test.stpv.shop.galeria.LocationArticle;
-import com.mng.robotest.test.stpv.shop.galeria.PageGaleriaStpV.TypeActionFav;
+import com.mng.robotest.test.steps.shop.galeria.LocationArticle;
+import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps.TypeActionFav;
 import com.mng.robotest.test.utils.UtilsTest;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 

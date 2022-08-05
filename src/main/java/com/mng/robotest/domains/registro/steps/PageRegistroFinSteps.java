@@ -9,7 +9,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroFin;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusUserSteps;
+import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
 
 
 @SuppressWarnings({"static-access"})
@@ -41,17 +41,17 @@ public class PageRegistroFinSteps {
 	
 	public void validateWeAreLogged() {
 		validateLogoGoesToPaisIdioma();
-		SecMenusUserSteps secMenusUserStpV = SecMenusUserSteps.getNew(dataTest.channel, dataTest.appE, pageRegistroFin.driver);
-		secMenusUserStpV.checkIsVisibleLinkCerrarSesion();
+		SecMenusUserSteps secMenusUserSteps = SecMenusUserSteps.getNew(dataTest.channel, dataTest.appE, pageRegistroFin.driver);
+		secMenusUserSteps.checkIsVisibleLinkCerrarSesion();
 	}
 	
 	@Validation
 	public ChecksTM validateLogoGoesToPaisIdioma() {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"El logo de Mango redirige al país/idioma origen: " + dataTest.idioma.getAcceso(),
 			SecCabecera.getNew(dataTest.channel, dataTest.appE, pageRegistroFin.driver)
 				.validaLogoMangoGoesToIdioma(dataTest.idioma), State.Warn);
-		return validations;		
+		return checks;		
 	}
 }

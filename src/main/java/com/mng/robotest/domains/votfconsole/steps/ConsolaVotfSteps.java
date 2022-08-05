@@ -30,16 +30,16 @@ public class ConsolaVotfSteps {
 	
 	@Validation
 	private ChecksTM checkAfterAccessInitialPage() {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Aparece el apartado \"Test servicios VOTF\"",
 			pageConsola.existTestServVOTF(), State.Warn);
 	 	
-	 	validations.add(
+	 	checks.add(
 			"Aparece el apartado \"Consola comandos VOTF\"",
 			pageConsola.existConsolaComVOTF(), State.Warn);
 	 	
-		return validations;
+		return checks;
 	}
 	
 	@Step (
@@ -105,26 +105,26 @@ public class ConsolaVotfSteps {
 	
 	@Validation
 	private ChecksTM checkAfterClickConsultDispEnvioDomicilio() {
-		ChecksTM validations = ChecksResultWithStringData.getNew();
+		ChecksTM checks = ChecksResultWithStringData.getNew();
 		String paginaPadre = pageConsola.driver.getWindowHandle();
 		try {
 			pageConsola.switchToResultIFrame();
-			validations.add(
+			checks.add(
 				"En el bloque de \"Petición/Resultado\" aparece una tabla \"Transportes\"",
 				iframeResult.existsTransportes(), State.Defect);
 			
-			validations.add(
+			checks.add(
 				"En el bloque de \"Petición/Resultado\" aparece una tabla \"Disponibilidad\"",
 				iframeResult.existsDisponibilidad(), State.Defect);
 			
-		 	validations.add(
+		 	checks.add(
 				"En la tabla \"Disponibilidad\" figura el campo <b>Disponible=true</b>",
 				iframeResult.flagDisponibleIsTrue(), State.Defect);
 		}
 		finally {
 			pageConsola.driver.switchTo().window(paginaPadre);
 		}
-		return validations;
+		return checks;
 	}
 	
 	@Step (
@@ -140,14 +140,14 @@ public class ConsolaVotfSteps {
 	
 	@Validation
 	private ChecksTM checkAfterClickConsultDispEnvioTienda(String paginaPadre) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		try {
 			pageConsola.switchToResultIFrame();
-		 	validations.add(
+		 	checks.add(
 				"En el bloque de \"Petición/Resultado\" NO aparece una tabla \"transportes__content\"",
 				!iframeResult.existsTransportes(), State.Defect);
 		 	
-		 	validations.add(
+		 	checks.add(
 				"Aparece una línea de \"TipoStock:\" con contenido",
 				iframeResult.isPresentTipoStock(), State.Defect);
 		}
@@ -155,7 +155,7 @@ public class ConsolaVotfSteps {
 			pageConsola.driver.switchTo().window(paginaPadre);
 		}
 		
-		return validations;
+		return checks;
 	}
 	
 	@Step (
@@ -178,24 +178,24 @@ public class ConsolaVotfSteps {
 	
 	@Validation
 	private ChecksResultWithStringData checkAfterSolicitudAdomicilioInIframe() {
-		ChecksResultWithStringData validations = ChecksResultWithStringData.getNew();
+		ChecksResultWithStringData checks = ChecksResultWithStringData.getNew();
 		int maxSeconds = 5;
-		validations.add(
+		checks.add(
 			"En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Código de pedido\"" + 
 			"(la esperamos hasta " + maxSeconds + " segundos)",
 			iframeResult.isPresentCodigoPedido(maxSeconds), State.Warn);
 		
 		String codigoPedido = iframeResult.getCodigoPedido();
-		validations.setData(codigoPedido);
-		validations.add(
+		checks.setData(codigoPedido);
+		checks.add(
 			"Aparece un código de pedido",
 			"".compareTo(codigoPedido)!=0, State.Defect);
 		
-		validations.add(
+		checks.add(
 			"Aparece el literal \"Resultado creación pedido: (0) Total\"",
 			iframeResult.resCreacionPedidoOk(), State.Warn);
 		
-	 	return validations;
+	 	return checks;
 	}
 
 	@Step (
@@ -282,15 +282,15 @@ public class ConsolaVotfSteps {
 	
 	@Validation
 	private ChecksTM checkAfterPreconfirmarPedido(String codigoPedidoFull) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		String paginaPadre = pageConsola.driver.getWindowHandle();
 		try {
 			pageConsola.switchToResultIFrame();
-		 	validations.add(
+		 	checks.add(
 				"En el bloque de \"Petición/Resultado\" aparece una línea \"Preconfirmado\"", 
 				iframeResult.isLineaPreconfirmado(), State.Warn);
 		 	
-		 	validations.add(
+		 	checks.add(
 				"Aparece un XML con el dato \"&lt;pedido&gt;" + codigoPedidoFull + "&lt;/pedido&gt;\"",
 				iframeResult.isPedidoInXML(codigoPedidoFull), State.Defect);
 		}
@@ -298,7 +298,7 @@ public class ConsolaVotfSteps {
 			pageConsola.driver.switchTo().window(paginaPadre);
 		}
 
-		return validations;
+		return checks;
 	}
 
 	@Step (
@@ -312,11 +312,11 @@ public class ConsolaVotfSteps {
 	
 	@Validation
 	private ChecksTM checkAfterConfirmarPedido(String codigoPedidoFull) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		String paginaPadre = pageConsola.driver.getWindowHandle();
 		try {
 			pageConsola.switchToResultIFrame();
-		 	validations.add(
+		 	checks.add(
 				"En el bloque de \"Petición/Resultado\" aparece una línea \"Confirmado: " + codigoPedidoFull + "\"", 
 				iframeResult.resConfPedidoOk(codigoPedidoFull), State.Warn);	 
 		}
@@ -324,6 +324,6 @@ public class ConsolaVotfSteps {
 			pageConsola.driver.switchTo().window(paginaPadre);
 		}	   
 		
-		return validations;
+		return checks;
 	}
 }

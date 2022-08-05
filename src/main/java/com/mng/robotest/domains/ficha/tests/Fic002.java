@@ -15,8 +15,8 @@ import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.buscador.SecBuscadorStpV;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.buscador.SecBuscadorSteps;
 
 
 public class Fic002 extends TestBase {
@@ -24,7 +24,7 @@ public class Fic002 extends TestBase {
 	final GarmentCatalog garment;
 	final boolean isTotalLook;
 	
-	final SecBuscadorStpV secBuscadorSteps = new SecBuscadorStpV(app, channel, driver);
+	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps(app, channel, driver);
 	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(app, channel, dataTest.pais);
 	
 	public Fic002() throws Exception {
@@ -45,7 +45,7 @@ public class Fic002 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 
-		AccesoStpV.oneStep(dataTest, false, driver);
+		AccesoSteps.oneStep(dataTest, false, driver);
 		secBuscadorSteps.searchArticulo(garment, dataTest.pais);
 		
 		if (pageFichaSteps.getFicha().getTypeFicha()==TypeFicha.OLD) {

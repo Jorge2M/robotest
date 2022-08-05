@@ -60,20 +60,20 @@ public class SecBolsaButtonAndLinksNewSteps {
 	
 	@Validation
 	private ChecksTM checkBreadCrumbs() {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Figura el bloque de BreadCrumbs",
 			secDetalleProductNew.isVisibleBreadcrumbs(0), State.Warn);
-	 	validations.add(
+	 	checks.add(
 			"Es visible el item " + ItemBreadcrumb.LINEA,
 			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.LINEA), State.Warn);
-	 	validations.add(
+	 	checks.add(
 			"Es visible el item " + ItemBreadcrumb.GRUPO,
 			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.GRUPO), State.Warn);
-	 	validations.add(
+	 	checks.add(
 			"Es visible el item " + ItemBreadcrumb.GALERIA,
 			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.GALERIA), State.Warn);
-	 	return validations;
+	 	return checks;
 	}
 	
 	@Validation (
@@ -93,9 +93,9 @@ public class SecBolsaButtonAndLinksNewSteps {
 	
 	@Validation
 	private ChecksTM checkAppearsModalShareSocial(String codigoPais) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 1;
-	 	validations.add(
+	 	checks.add(
 	 		"Aparece el modal para compartir a nivel social (lo esperamos hasta " + maxSeconds + " segundos) ",
 	 		ModCompartirNew.isVisibleUntil(maxSeconds, driver), State.Defect);
 		
@@ -103,16 +103,16 @@ public class SecBolsaButtonAndLinksNewSteps {
 		for (IconSocial icon : IconSocial.values()) {
 			boolean isVisibleIcon = ModCompartirNew.isVisibleIcon(icon, driver);
 			if (isPaisChina != icon.isSpecificChina()) {
-			 	validations.add(
+			 	checks.add(
 			 		"No es visible el icono de " + icon,
 			 		!isVisibleIcon, State.Warn);
 			} else {
-			 	validations.add(
+			 	checks.add(
 			 		"Sí es visible el icono de " + icon,
 			 		isVisibleIcon, State.Warn);
 			}
 		}
 
-		return validations;
+		return checks;
 	}
 }

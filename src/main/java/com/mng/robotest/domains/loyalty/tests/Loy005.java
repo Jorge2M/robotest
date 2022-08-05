@@ -6,8 +6,8 @@ import com.mng.robotest.domains.loyalty.steps.PageHomeLikesSteps;
 import com.mng.robotest.domains.loyalty.steps.PageRegalarMisLikesSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.loyalty.steps.PageHomeLikesSteps.DataRegaloPuntos;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusUserSteps;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
@@ -38,7 +38,7 @@ public class Loy005 extends TestBase {
 			return;
 		}
 		
-		AccesoStpV.oneStep(dataTest, false, driver);
+		AccesoSteps.oneStep(dataTest, false, driver);
 		int iniPointsReceptor = clickMangoLikesYou();
 		
 		login(EMISOR_USER, dataTest.passwordUser);
@@ -85,7 +85,7 @@ public class Loy005 extends TestBase {
 	}
 	
 	private void login(User user, String password) throws Exception {
-		SecMenusUserSteps secMenusUserStpV = new SecMenusUserSteps(channel, app, driver);
-		secMenusUserStpV.logoffLogin(user.getEmail(), password);
+		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps(channel, app, driver);
+		secMenusUserSteps.logoffLogin(user.getEmail(), password);
 	}
 }

@@ -1,76 +1,75 @@
 package com.mng.robotest.test.pageobject.shop.checkout.sepa;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageSepa1rst {
+public class PageSepa1rst extends PageObjTM {
 	
-	static String XPathListOfPayments = "//ul[@id='paymentMethods']";
-	static String XPathCabeceraStep = "//h2[@id[contains(.,'stageheader')]]";
-	static String XPathButtonPagoDesktop = "//input[@class[contains(.,'paySubmit')] and @type='submit']";
-	static String XPathButtonContinueMobil = "//input[@type='submit' and @id='mainSubmit']";
-	static String XPathInputTitular = "//input[@id[contains(.,'ownerName')]]";
-	static String XPathInputCuenta = "//input[@id[contains(.,'bankAccountNumber')]]";
-	static String XPathRadioAcepto = "//input[@id[contains(.,'acceptDirectDebit')]]";
-	static String XPathIconoSepaMobil = XPathListOfPayments + "//input[@class[contains(.,'sepa')]]"; 
-	static String XPathIconoSepaDesktop = XPathListOfPayments + "/li[@data-variant[contains(.,'sepa')]]";
+	private static String XPATH_LIST_OF_PAYMENTS = "//ul[@id='paymentMethods']";
+	private static String XPATH_CABECERA_STEP = "//h2[@id[contains(.,'stageheader')]]";
+	private static String XPATH_BUTTON_PAGO_DESKTOP = "//input[@class[contains(.,'paySubmit')] and @type='submit']";
+	private static String XPATH_BUTTON_CONTINUE_MOBIL = "//input[@type='submit' and @id='mainSubmit']";
+	private static String XPATH_INPUT_TITULAR = "//input[@id[contains(.,'ownerName')]]";
+	private static String XPATH_INPUT_CUENTA = "//input[@id[contains(.,'bankAccountNumber')]]";
+	private static String XPATH_RADIO_ACEPTO = "//input[@id[contains(.,'acceptDirectDebit')]]";
+	private static String XPATH_ICONO_SEPA_MOBIL = XPATH_LIST_OF_PAYMENTS + "//input[@class[contains(.,'sepa')]]"; 
+	private static String XPATH_ICONO_SEPA_DESKTOP = XPATH_LIST_OF_PAYMENTS + "/li[@data-variant[contains(.,'sepa')]]";
 	
-	public static String getXPathIconoSepa(Channel channel) {
+	private String getXPathIconoSepa(Channel channel) {
 		if (channel.isDevice()) {
-			return XPathIconoSepaMobil;
+			return XPATH_ICONO_SEPA_MOBIL;
 		}
-		return XPathIconoSepaDesktop;
+		return XPATH_ICONO_SEPA_DESKTOP;
 	}
 	
-	public static boolean isPresentIconoSepa(Channel channel, WebDriver driver) {
+	public boolean isPresentIconoSepa(Channel channel) {
 		String xpathPago = getXPathIconoSepa(channel);
 		return (state(Present, By.xpath(xpathPago), driver).check());
 	}
 
-	public static void clickIconoSepa(Channel channel, WebDriver driver) {
+	public void clickIconoSepa(Channel channel) {
 		String xpathPago = getXPathIconoSepa(channel);
-		click(By.xpath(xpathPago), driver).exec();
+		click(By.xpath(xpathPago)).exec();
 	}
 
-	public static boolean isPresentCabeceraStep(WebDriver driver) {
-		return (state(Present, By.xpath(XPathCabeceraStep), driver).check());
+	public boolean isPresentCabeceraStep() {
+		return (state(Present, By.xpath(XPATH_CABECERA_STEP)).check());
 	}
 	
-	public static boolean isPresentButtonPagoDesktop(WebDriver driver) {
-		return (state(Present, By.xpath(XPathButtonPagoDesktop), driver).check());
+	public boolean isPresentButtonPagoDesktop() {
+		return (state(Present, By.xpath(XPATH_BUTTON_PAGO_DESKTOP)).check());
 	}
 
-	public static void clickButtonContinuePago(Channel channel, WebDriver driver) {
+	public void clickButtonContinuePago(Channel channel) {
 		if (channel.isDevice()) {
-			click(By.xpath(XPathButtonContinueMobil), driver).exec();
+			click(By.xpath(XPATH_BUTTON_CONTINUE_MOBIL)).exec();
 		} else {
-			click(By.xpath(XPathButtonPagoDesktop), driver).exec();
+			click(By.xpath(XPATH_BUTTON_PAGO_DESKTOP)).exec();
 		}
 	}
 	
-	public static boolean isPresentInputTitular(WebDriver driver) { 
-		return (state(Present, By.xpath(XPathInputTitular), driver).check());
+	public boolean isPresentInputTitular() { 
+		return (state(Present, By.xpath(XPATH_INPUT_TITULAR)).check());
 	}
 
-	public static boolean isPresentInputCuenta(WebDriver driver) { 
-		return (state(Present, By.xpath(XPathInputCuenta), driver).check());
+	public boolean isPresentInputCuenta() { 
+		return (state(Present, By.xpath(XPATH_INPUT_CUENTA)).check());
 	}
 	
-	public static void inputTitular(String titular, WebDriver driver) {
-		driver.findElement(By.xpath(XPathInputTitular)).sendKeys(titular);
+	public void inputTitular(String titular) {
+		driver.findElement(By.xpath(XPATH_INPUT_TITULAR)).sendKeys(titular);
 	}
 	
-	public static void inputCuenta(String cuenta, WebDriver driver) {
-		driver.findElement(By.xpath(XPathInputCuenta)).sendKeys(cuenta);
+	public void inputCuenta(String cuenta) {
+		driver.findElement(By.xpath(XPATH_INPUT_CUENTA)).sendKeys(cuenta);
 	}
 	
-	public static void clickAcepto(WebDriver driver) {
-		driver.findElement(By.xpath(XPathRadioAcepto)).click();
+	public void clickAcepto() {
+		driver.findElement(By.xpath(XPATH_RADIO_ACEPTO)).click();
 	}
 }

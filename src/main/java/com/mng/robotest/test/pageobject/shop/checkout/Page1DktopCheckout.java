@@ -102,8 +102,7 @@ public class Page1DktopCheckout extends PageObjTM {
 	private static final String TAG_COD_VENDEDOR = "@TagCodVendedor";
 	private static final String XPATH_COD_VENDEDOR_VOTF_WITH_TAG = "//form[@id[contains(.,'Dependienta')]]//span[text()[contains(.,'" + TAG_COD_VENDEDOR + "')]]";
 	
-	public Page1DktopCheckout(Channel channel, AppEcom app, WebDriver driver) {
-		super(driver);
+	public Page1DktopCheckout(Channel channel, AppEcom app) {
 		this.channel = channel;
 		this.app = app;
 		this.secDireccionEnvio = new SecDireccionEnvioDesktop(driver);

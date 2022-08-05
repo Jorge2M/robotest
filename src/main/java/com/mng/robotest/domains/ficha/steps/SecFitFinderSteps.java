@@ -17,19 +17,19 @@ public class SecFitFinderSteps {
 	
 	@Validation
 	public ChecksTM validateIsOkAndClose() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 2;
-	  	validations.add(
+	  	checks.add(
 			"Es visible el Wrapper con la guía de tallas (lo esperamos hasta " + maxSeconds + " seconds)",
 			secFitFinder.isVisibleUntil(maxSeconds), State.Defect);
-	  	validations.add(
+	  	checks.add(
 			"Es visible el input para la introducción de la altura",
 			secFitFinder.isVisibleInputAltura(), State.Warn);
-	  	validations.add(
+	  	checks.add(
 			"Es visible el input para la introducción del peso",
 			secFitFinder.isVisibleInputPeso(), State.Warn);
 
 		secFitFinder.clickAspaForCloseAndWait();
-		return validations;
+		return checks;
 	}
 }

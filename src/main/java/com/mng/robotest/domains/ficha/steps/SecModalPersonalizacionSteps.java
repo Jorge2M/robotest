@@ -51,12 +51,12 @@ public class SecModalPersonalizacionSteps extends PageObjTM {
 	
 	@Validation
 	private ChecksTM checkAreArticleCustomizable(State levelError) {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"El artículo es personalizable (aparece el link \"Añadir bordado\")",
 			state(Present, ModalElement.ANADIR_BORDADO_LINK.getBy(dCtxSh.channel)).wait(1).check(), 
 			levelError);
-		return validations;
+		return checks;
 	}
 
 	@Step(
@@ -70,17 +70,17 @@ public class SecModalPersonalizacionSteps extends PageObjTM {
 	@Validation
 	private ChecksTM validateModal() {
 		int maxSeconds = 3;
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Aparece el modal de personalización con el botón <b>Siguiente</b> (lo esperamos hasta " + maxSeconds + " segundos)",
 			isBotonSiguienteVisible(maxSeconds), 
 			State.Warn);
-		validations.add(
+		checks.add(
 			"Aparece la opción <b>Un icono</b> (la esperamos hasta " + maxSeconds + " segundos)",
 			state(Visible, ModalElement.BUTTON_UN_ICONO.getBy(dCtxSh.channel)).wait(maxSeconds).check(), 
 			State.Warn);
 	
-		return validations;
+		return checks;
 	}
 
 	@Validation(
@@ -118,18 +118,18 @@ public class SecModalPersonalizacionSteps extends PageObjTM {
 
 	@Validation
 	public ChecksTM validateIconSelectedDesktop() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 3;
-		validations.add(
+		checks.add(
 			"Aparece seleccionado el primer icono",
 			state(Visible, ModalElement.ICON_SELECTION.getBy()).wait(maxSeconds).check(), 
 			State.Warn);
-		validations.add(
+		checks.add(
 			"Podemos confirmar nuestra seleccion",
 			isBotonSiguienteVisible(maxSeconds),
 			//state(Visible, ModalElement.Siguiente.getBy(dCtxSh.channel)).wait(maxSeconds).check(),
 			State.Warn);
-		return validations;
+		return checks;
 	}
 
 	@Step(
@@ -155,33 +155,33 @@ public class SecModalPersonalizacionSteps extends PageObjTM {
 
 	@Validation
 	public ChecksTM validateWhereDesktop() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 3;
-		validations.add(
+		checks.add(
 			"Aparecen las opciones correspondientes a la ubicación del bordado",
 			state(Visible, ModalElement.POSITION_BUTTON.getBy()).wait(maxSeconds).check(),
 			State.Warn);
-		validations.add(
+		checks.add(
 			"Podemos confirmar nuestra seleccion",
 			isBotonSiguienteVisible(maxSeconds),
 			//state(Visible, ModalElement.Siguiente.getBy()).wait(maxSeconds).check(),
 			State.Warn);
-		return validations;
+		return checks;
 	}
 
 	@Validation
 	public ChecksTM validateSelectionColor() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 3;
-		validations.add(
+		checks.add(
 			"Aparecen los botones correspondientes a los colores",
 			state(Visible, ModalElement.COLORS_CONTAINER.getBy()).wait(maxSeconds).check(),
 			State.Warn);
-		validations.add(
+		checks.add(
 			"Aparece el botón de \"Confirmar\"",
 			state(Present, ModalElement.SIGUIENTE.getBy()).wait(maxSeconds).check(),
 			State.Warn);
-		return validations;
+		return checks;
 	}
 
 	@Step(

@@ -17,10 +17,10 @@ import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test.factoryes.entities.EgyptCity;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
-import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow.BuilderCheckout;
-import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow.From;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.SecBolsaStpV;
+import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
+import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.SecBolsaSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 import com.mng.robotest.test.utils.UtilsTest;
 
@@ -48,12 +48,12 @@ public class EgyptOrderTest implements Serializable {
 		
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = makeEgyptDataTest();
-		AccesoStpV.oneStep(dCtxSh, false, driver);
+		AccesoSteps.oneStep(dCtxSh, false, driver);
 		GarmentCatalog article = UtilsTest.getArticleForTest(dCtxSh, driver);
 		
 		DataBag dataBag = new DataBag(); 
-		SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
-		secBolsaStpV.altaListaArticulosEnBolsa(Arrays.asList(article), dataBag);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh, driver);
+		secBolsaSteps.altaListaArticulosEnBolsa(Arrays.asList(article), dataBag);
 		
 		DataCtxPago dCtxPago = makeDataPayment(dCtxSh, dataBag);
 		dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago, driver)

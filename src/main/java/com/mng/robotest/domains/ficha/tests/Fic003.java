@@ -14,10 +14,10 @@ import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.galeria.LocationArticle;
-import com.mng.robotest.test.stpv.shop.galeria.PageGaleriaStpV;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusWrapperStpV;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.galeria.LocationArticle;
+import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
+import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 
 
@@ -26,8 +26,8 @@ public class Fic003 extends TestBase {
 	final Menu1rstLevel menuPantalonesNina;
 	
 	final Pais corea = PaisGetter.get(PaisShop.COREA_DEL_SUR);
-	final SecMenusWrapperStpV secMenusSteps = SecMenusWrapperStpV.getNew(dataTest, driver);
-	final PageGaleriaStpV pageGaleriaSteps = PageGaleriaStpV.getInstance(channel, app, driver);
+	final SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dataTest, driver);
+	final PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(channel, app, driver);
 	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(app, channel, corea);;
 	
 	public Fic003() throws Exception {
@@ -46,7 +46,7 @@ public class Fic003 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 
-		AccesoStpV.oneStep(dataTest, false, driver);
+		AccesoSteps.oneStep(dataTest, false, driver);
 		closeModalNewsLetterIfExists();
 		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuPantalonesNina, dataTest);
 		DataFichaArt dataArtOrigin = selectFirstArticleInGalery();

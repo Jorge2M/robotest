@@ -3,13 +3,13 @@ package com.mng.robotest.domains.ayuda.tests;
 import com.mng.robotest.domains.ayuda.steps.AyudaSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.pageobject.shop.footer.SecFooter;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.SecFooterStpV;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.SecFooterSteps;
 
 
 public class Ayu001 extends TestBase {
 
-	final SecFooterStpV secFooterSteps = new SecFooterStpV(channel, app, driver);
+	final SecFooterSteps secFooterSteps = new SecFooterSteps(channel, app, driver);
 	final AyudaSteps ayudaSteps = new AyudaSteps(driver);
 	
 	public Ayu001() throws Exception {
@@ -18,7 +18,7 @@ public class Ayu001 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		AccesoStpV.oneStep(dataTest, false, driver);
+		AccesoSteps.oneStep(dataTest, false, driver);
 		checkAyuda();
 	}
 	

@@ -26,11 +26,11 @@ import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop;
-import com.mng.robotest.test.stpv.navigations.manto.PedidoNavigations;
-import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow.BuilderCheckout;
-import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow.From;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.SecBolsaStpV;
+import com.mng.robotest.test.steps.navigations.manto.PedidoNavigations;
+import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
+import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.SecBolsaSteps;
 import com.mng.robotest.test.utils.UtilsTest;
 
 public class CompraFact implements Serializable {
@@ -121,7 +121,7 @@ public class CompraFact implements Serializable {
 		}
 		
 		//TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-		AccesoStpV.oneStep(dCtxSh, this.usrRegistrado, driver);
+		AccesoSteps.oneStep(dCtxSh, this.usrRegistrado, driver);
 		//TestAB.activateTestABcheckoutMovilEnNPasos(0, dCtxSh, dFTest.driver);
 
 		int maxArticlesAwayVale = 3;
@@ -132,8 +132,8 @@ public class CompraFact implements Serializable {
 		}
 		
 		DataBag dataBag = new DataBag(); 
-		SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
-		secBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh, driver);
+		secBolsaSteps.altaListaArticulosEnBolsa(listArticles, dataBag);
 		
 		//Hasta página Checkout
 		FlagsTestCkout fTCkout = new FlagsTestCkout();

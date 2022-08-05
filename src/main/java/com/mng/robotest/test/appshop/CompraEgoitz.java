@@ -20,10 +20,10 @@ import com.mng.robotest.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test.getdata.products.data.Color;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.products.data.Size;
-import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow;
-import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow.From;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.SecBolsaStpV;
+import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow;
+import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.SecBolsaSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 
 public class CompraEgoitz {
@@ -45,10 +45,10 @@ public class CompraEgoitz {
 		List<GarmentCatalog> listArticles = getListArticles();
 		
 		//Access and add articles
-		AccesoStpV.oneStep(dCtxSh, false, driver);
+		AccesoSteps.oneStep(dCtxSh, false, driver);
 		DataBag dataBag = new DataBag();
-		SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
-		secBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh, driver);
+		secBolsaSteps.altaListaArticulosEnBolsa(listArticles, dataBag);
 		
 		//To checkout Page
 		FlagsTestCkout fTCkout = new FlagsTestCkout();

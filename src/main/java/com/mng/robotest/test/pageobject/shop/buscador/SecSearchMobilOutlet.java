@@ -10,8 +10,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecSearchMobilOutlet extends PageObjTM implements SecSearch {
 	
-	private static final String XPathInputBuscador = "//form[not(@class)]/input[@class[contains(.,'search-input')]]";
-	private static final String XPathCancelarLink = "//div[@class='search-cancel']";
+	private static final String XPATH_INPUT_BUSCADOR = "//form[not(@class)]/input[@class[contains(.,'search-input')]]";
+	private static final String XPATH_CANCELAR_LINK = "//div[@class='search-cancel']";
 	
 	private SecSearchMobilOutlet(WebDriver driver) {
 		super(driver);
@@ -23,7 +23,7 @@ public class SecSearchMobilOutlet extends PageObjTM implements SecSearch {
 	
 	@Override
 	public void search(String text) {
-		WebElement input = getElementVisible(driver, By.xpath(XPathInputBuscador));
+		WebElement input = getElementVisible(driver, By.xpath(XPATH_INPUT_BUSCADOR));
 		input.clear();
 		input.sendKeys(text);
 		//sendKeysWithRetry(5, input, text);
@@ -32,11 +32,11 @@ public class SecSearchMobilOutlet extends PageObjTM implements SecSearch {
 	
 	@Override
 	public void close() {
-		click(By.xpath(XPathCancelarLink)).exec();
+		click(By.xpath(XPATH_CANCELAR_LINK)).exec();
 	}
 
 	public boolean isBuscadorVisibleUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathInputBuscador))
+		return (state(Visible, By.xpath(XPATH_INPUT_BUSCADOR))
 				.wait(maxSeconds).check());
 	}
 }

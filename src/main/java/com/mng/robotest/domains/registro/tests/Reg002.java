@@ -18,26 +18,26 @@ import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.data.DataMango;
 import com.mng.robotest.test.data.Constantes.ThreeState;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.SecCabeceraStpV;
-import com.mng.robotest.test.stpv.shop.SecFooterStpV;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusUserSteps;
-import com.mng.robotest.test.stpv.shop.micuenta.PageMiCuentaStpV;
-import com.mng.robotest.test.stpv.shop.modales.ModalSuscripcionStpV;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.SecCabeceraSteps;
+import com.mng.robotest.test.steps.shop.SecFooterSteps;
+import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
+import com.mng.robotest.test.steps.shop.micuenta.PageMiCuentaSteps;
+import com.mng.robotest.test.steps.shop.modales.ModalSuscripcionSteps;
 import com.mng.robotest.test.suites.RegistrosSuite.VersionRegistroSuite;
 
 
 public class Reg002 extends TestBase {
 
 	private final SecMenusUserSteps userMenusSteps = SecMenusUserSteps.getNew(channel, app, driver);
-	private final SecFooterStpV secFooterSteps = new SecFooterStpV(channel, app, driver);
+	private final SecFooterSteps secFooterSteps = new SecFooterSteps(channel, app, driver);
 	private final PageRegistroIniSteps pageRegistroIniSteps = new PageRegistroIniSteps(driver);
 	private final PageRegistroSegundaSteps pageRegistroSegundaSteps = new PageRegistroSegundaSteps(driver);;
-	private final PageMiCuentaStpV pageMiCuentaSteps = PageMiCuentaStpV.getNew(channel, app, driver);
+	private final PageMiCuentaSteps pageMiCuentaSteps = PageMiCuentaSteps.getNew(channel, app, driver);
 	private final PageRegistroNinosSteps pageRegistroNinosSteps = new PageRegistroNinosSteps(driver);
 	private final PageRegistroDirecSteps pageRegistroDirecSteps = new PageRegistroDirecSteps(driver);
 	private final PageRegistroFinSteps pageRegistroFinSteps;
-	private final SecCabeceraStpV secCabeceraSteps = SecCabeceraStpV.getNew(dataTest.pais, channel, app, driver);
+	private final SecCabeceraSteps secCabeceraSteps = SecCabeceraSteps.getNew(dataTest.pais, channel, app, driver);
 	
 	private final VersionRegistroSuite version;
 	private Map<String, String> dataRegister = new HashMap<>();
@@ -63,8 +63,8 @@ public class Reg002 extends TestBase {
 			return;
 		}
 		
-		AccesoStpV.oneStep(dataTest, false, driver);
-		ModalSuscripcionStpV.validaRGPDModal(dataTest, driver);
+		AccesoSteps.oneStep(dataTest, false, driver);
+		ModalSuscripcionSteps.validaRGPDModal(dataTest, driver);
 		
 		userMenusSteps.selectRegistrate(dataTest);
 		if(version.register()) {

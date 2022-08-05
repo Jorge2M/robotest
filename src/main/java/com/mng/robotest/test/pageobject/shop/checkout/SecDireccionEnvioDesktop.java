@@ -14,7 +14,7 @@ public class SecDireccionEnvioDesktop extends PageObjTM {
 	private static final String XPATH_NOMBRE_ENVIO_NEW = XPATH_SECTION_NEW + "//div[@class[contains(.,'tpavy')]]"; 
 	private static final String XPATH_DIRECCION_ENVIO_NEW = "//*[@data-testid='checkout.delivery.address']";
 	
-	//TODO eliminar a partir del 9-08-2022 que sube la release a pro
+	//TODO eliminar cuando suba a pro la nueva versión
 	private static final String XPATH_SECTION_OLD = "//div[@class[contains(.,'bloqueEnvio')]]";
 	private static final String XPATH_EDIT_DIRECCION_BUTTON_OLD = XPATH_SECTION_OLD + "//span[@class[contains(.,'cambiarDatosEnvio')]]";
 	private static final String XPATH_NOMBRE_ENVIO_OLD = XPATH_SECTION_OLD + "//div[@class[contains(.,'nombreEnvio')]]";

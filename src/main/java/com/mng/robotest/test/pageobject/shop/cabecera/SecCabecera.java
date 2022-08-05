@@ -23,8 +23,8 @@ public abstract class SecCabecera extends PageObjTM {
 	protected final AppEcom app;
 	protected final SecSearch secSearch;
 
-	private static final String XPathHeader = "//header";
-	private static final String XPathLinkLogoMango = 
+	private static final String XPATH_HEADER = "//header";
+	private static final String XPATH_LINK_LOGO_MANGO = 
 			"//a[@class='logo-link' or " + 
 			"@class[contains(.,'logo_')] or" + 
 			"@title[contains(.,'MANGO Shop Online')]]";
@@ -75,24 +75,24 @@ public abstract class SecCabecera extends PageObjTM {
 	
 	public boolean clickLogoMango() {
 		if (isPresentLogoMango(2)) {
-			click(By.xpath(XPathLinkLogoMango)).exec();
+			click(By.xpath(XPATH_LINK_LOGO_MANGO)).exec();
 			return true;
 		}
 		return false;
 	}
 	
 	public boolean isPresentLogoMango(int maxSeconds) {
-		return state(Present, By.xpath(XPathLinkLogoMango)).wait(maxSeconds).check();
+		return state(Present, By.xpath(XPATH_LINK_LOGO_MANGO)).wait(maxSeconds).check();
 	}
 
 	public void hoverLogoMango() throws Exception {
-		if (state(Present, By.xpath(XPathLinkLogoMango)).check()) {
-			moveToElement(By.xpath(XPathLinkLogoMango), driver);
+		if (state(Present, By.xpath(XPATH_LINK_LOGO_MANGO)).check()) {
+			moveToElement(By.xpath(XPATH_LINK_LOGO_MANGO), driver);
 		}
 	}
 
 	public boolean validaLogoMangoGoesToIdioma(IdiomaPais idioma) {
-		String xpathLogoIdiom = XPathLinkLogoMango + "[@href[contains(.,'/" + idioma.getAcceso() + "')]]";
+		String xpathLogoIdiom = XPATH_LINK_LOGO_MANGO + "[@href[contains(.,'/" + idioma.getAcceso() + "')]]";
 		return (state(Present, By.xpath(xpathLogoIdiom)).check());
 	}
 
@@ -122,9 +122,9 @@ public abstract class SecCabecera extends PageObjTM {
 	//-- Específic functions for movil (Shop & Outlet)
 	
 
-	private static final String XPathSmartBanner = XPathHeader + "/div[@id='smartbanner']";
+	private static final String XPathSmartBanner = XPATH_HEADER + "/div[@id='smartbanner']";
 	private static final String XPathLinkCloseSmartBanner = XPathSmartBanner + "//a[@class='sb-close']";	
-	private static final String XPathIconoMenuHamburguesa = XPathHeader + "//div[@class[contains(.,'menu-open-button')]]";
+	private static final String XPathIconoMenuHamburguesa = XPATH_HEADER + "//div[@class[contains(.,'menu-open-button')]]";
 
 	
 	/**

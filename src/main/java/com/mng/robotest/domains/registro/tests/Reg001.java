@@ -13,8 +13,8 @@ import com.mng.robotest.domains.registro.steps.PageRegistroIniSteps.ErrorRegiste
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusUserSteps;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.Secret;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
@@ -40,7 +40,7 @@ public class Reg001 extends TestBase {
 			return;
 		}
 			
-		AccesoStpV.oneStep(dataTest, false, driver);
+		AccesoSteps.oneStep(dataTest, false, driver);
 		userMenusSteps.selectRegistrate(dataTest);
 		
 		registerWithoutInputData();

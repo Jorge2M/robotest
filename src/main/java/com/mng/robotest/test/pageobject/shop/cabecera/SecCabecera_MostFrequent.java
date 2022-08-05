@@ -23,11 +23,9 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	
 	private final ModalUserSesionShopDesktop modalUserSesionShopDesktop;
 	
-	private static final String XPathDivNavTools = "//div[@id='navTools']";
-	private static final String XPathNumArticlesManyLocations = "//*[@class='icon-button-items']";
-	private static final String XPathNumArticlesBolsaDesktop = "//span[@data-testid[contains(.,'numItems')]]";
-//	private static final String XPathNumArticlesBolsaPre = "//*[@data-testid='bag.header.totalItems']";
-//	private static final String XPathNumArticlesBolsaPro = "//*[@data-testid='header.userMenu.bolsa_any.numItems']";			
+	private static final String XPATH_DIV_NAV_TOOLS = "//div[@id='navTools']";
+	private static final String XPATH_NUM_ARTICLES_MANY_LOCATIONS = "//*[@class='icon-button-items']";
+	private static final String XPATH_NUM_ARTICLES_BOLSA_DESKTOP = "//span[@data-testid[contains(.,'numItems')]]";
 	
 	public enum IconoCabeceraShop_DesktopMobile implements ElementPage {
 		lupa(
@@ -102,9 +100,9 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	public static String getXPathNumberArtIcono(Channel channel, AppEcom app) {
 //		return XPathNumArticlesBolsaPre + " | " + XPathNumArticlesBolsaPro;
 		if (channel==Channel.desktop/* && app==AppEcom.shop*/) {
-			return XPathNumArticlesBolsaDesktop;
+			return XPATH_NUM_ARTICLES_BOLSA_DESKTOP;
 		}
-		return XPathNumArticlesManyLocations;
+		return XPATH_NUM_ARTICLES_MANY_LOCATIONS;
 	}
 	
 	@Override
@@ -155,7 +153,7 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	
 	public void focusAwayBolsa(WebDriver driver) {
 		//The moveElement doens't works properly for hide the Bolsa-Modal
-		driver.findElement(By.xpath(XPathDivNavTools)).click();
+		driver.findElement(By.xpath(XPATH_DIV_NAV_TOOLS)).click();
 	}
 	
 	public void hoverIconForShowUserMenuDesktop() {

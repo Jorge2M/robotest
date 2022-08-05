@@ -20,16 +20,16 @@ public class ModalBuscadorTiendasSteps {
 	
 	@Validation
 	public ChecksTM validaBusquedaConResultados() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 5;
-	 	validations.add(
+	 	checks.add(
 			"La capa de búsqueda es visible<br>" +
 			"Incidencia PRO (https://jira.mango.com/browse/CLAV-3853)",
 			modalBuscadorTiendas.isVisible(1), State.Warn);
-	 	validations.add(
+	 	checks.add(
 			"Se ha localizado alguna tienda (la esperamos hasta " + maxSeconds + " segundos)",
 			modalBuscadorTiendas.isPresentAnyTiendaUntil(maxSeconds), State.Warn);
-		return validations;
+		return checks;
 	}
 	
 	@Step (

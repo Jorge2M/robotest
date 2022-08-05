@@ -12,8 +12,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjT
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.mng.robotest.test.stpv.shop.checkout.envio.DataDeliveryPoint;
-import com.mng.robotest.test.stpv.shop.checkout.envio.DataSearchDeliveryPoint;
+import com.mng.robotest.test.steps.shop.checkout.envio.DataDeliveryPoint;
+import com.mng.robotest.test.steps.shop.checkout.envio.DataSearchDeliveryPoint;
 
 
 public class SecSelectDPoint {

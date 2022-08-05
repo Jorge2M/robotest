@@ -12,8 +12,8 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroNinos;
 import com.mng.robotest.domains.registro.pageobjects.beans.ListDataNinos;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
+import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 
 public class PageRegistroNinosSteps {
@@ -26,15 +26,15 @@ public class PageRegistroNinosSteps {
 	
 	@Validation
 	public ChecksTM validaIsPageWithNinos(int numNinos) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSecondsToWait = 5;
-		validations.add(
+		checks.add(
 			"Aparece la página de introducción de datos del niño (la esperamos un máximo de " + maxSecondsToWait + " segundos)",
 			pageRegistroNinos.isPageUntil(maxSecondsToWait), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparecen inputs para introducir <b>" + numNinos + "</b>",
 			pageRegistroNinos.getNumInputsNameNino()==numNinos, State.Defect);
-		return validations;		
+		return checks;		
 	}
 	
 	@Step (

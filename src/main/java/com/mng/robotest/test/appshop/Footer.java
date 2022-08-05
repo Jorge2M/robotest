@@ -12,8 +12,8 @@ import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.pageobject.shop.footer.SecFooter.FooterLink;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.SecFooterStpV;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.SecFooterSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 import com.github.jorge2m.testmaker.service.TestMaker;
 
@@ -42,25 +42,25 @@ public class Footer {
 		DataCtxShop dCtxSh = getCtxShForTest();
 		dCtxSh.userRegistered = false;
 
-		AccesoStpV.oneStep(dCtxSh, false, driver);
+		AccesoSteps.oneStep(dCtxSh, false, driver);
 		String urlInitialPage = driver.getCurrentUrl();
-		SecFooterStpV secFooterStpV = new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver);
-		secFooterStpV.validaLinksFooter();
+		SecFooterSteps secFooterSteps = new SecFooterSteps(dCtxSh.channel, dCtxSh.appE, driver);
+		secFooterSteps.validaLinksFooter();
 		
 		List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinksFiltered(dCtxSh.appE, dCtxSh.channel);
 		//List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinks(dCtxSh.appE, dCtxSh.channel);
 		for (FooterLink footerLinkToValidate : listFooterLinksToValidate) {
 			switch (footerLinkToValidate) {
 			case ayuda:
-				secFooterStpV.clickLinkFooter(footerLinkToValidate, false);
-				secFooterStpV.validaPaginaAyuda();
+				secFooterSteps.clickLinkFooter(footerLinkToValidate, false);
+				secFooterSteps.validaPaginaAyuda();
 				break;
 			case mango_card:
-				secFooterStpV.clickLinkFooter(footerLinkToValidate, false);
-				secFooterStpV.checkSolicitarTarjeta();
+				secFooterSteps.clickLinkFooter(footerLinkToValidate, false);
+				secFooterSteps.checkSolicitarTarjeta();
 				break;
 			default:
-				secFooterStpV.clickLinkFooter(footerLinkToValidate, true);
+				secFooterSteps.clickLinkFooter(footerLinkToValidate, true);
 				driver.get(urlInitialPage);
 			}
 			

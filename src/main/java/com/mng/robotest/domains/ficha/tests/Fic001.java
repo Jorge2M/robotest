@@ -15,9 +15,9 @@ import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.SecBolsaStpV;
-import com.mng.robotest.test.stpv.shop.buscador.SecBuscadorStpV;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.SecBolsaSteps;
+import com.mng.robotest.test.steps.shop.buscador.SecBuscadorSteps;
 
 import javassist.NotFoundException;
 
@@ -29,7 +29,7 @@ public class Fic001 extends TestBase {
 	final List<FilterType> filterNoOnlineWithColors;
 	final Optional<GarmentCatalog> articleNoOnlineWithColors;
 	
-	final SecBuscadorStpV secBuscadorSteps = new SecBuscadorStpV(app, channel, driver);
+	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps(app, channel, driver);
 	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(app, channel, dataTest.pais);
 	
 	public Fic001() throws Exception {
@@ -55,7 +55,7 @@ public class Fic001 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		AccesoStpV.oneStep(dataTest, true, driver);
+		AccesoSteps.oneStep(dataTest, true, driver);
 		if (articleOnline.isPresent()) {
 			articleOnlineTest();
 		}
@@ -106,8 +106,8 @@ public class Fic001 extends TestBase {
 		//Si es talla única -> Significa que lo dimos de alta en la bolsa cuando seleccionamos el click "Añadir a la bolsa"
 		//-> Lo damos de baja
 		if (isTallaUnica) {
-			SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dataTest, driver);
-			secBolsaStpV.clear();
+			SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dataTest, driver);
+			secBolsaSteps.clear();
 		}
 	}
 

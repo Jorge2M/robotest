@@ -11,7 +11,7 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.generic.UtilsMangoTest;
-import com.mng.robotest.test.stpv.otras.BrowserStpV;
+import com.mng.robotest.test.steps.otras.BrowserSteps;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 
@@ -42,12 +42,12 @@ public class SEO {
 		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		String urlBase = inputParamsSuite.getUrlBase();
 		if (testCase.getInputParamsSuite().getApp()==AppEcom.shop) {
-			BrowserStpV.inputRobotsURLandValidate(urlBase, dCtxSh.appE, driver);
+			BrowserSteps.inputRobotsURLandValidate(urlBase, dCtxSh.appE, driver);
 		}
 
 		URI uriBase = new URI(urlBase);
 		String urlSitemap = urlBase.replace(uriBase.getPath(), "") + "/" + "sitemap.xml";
-		BrowserStpV.inputSitemapURLandValidate(urlSitemap, driver);
+		BrowserSteps.inputSitemapURLandValidate(urlSitemap, driver);
 	}
 	
 	private TestCaseTM getTestCase() throws NotFoundException {

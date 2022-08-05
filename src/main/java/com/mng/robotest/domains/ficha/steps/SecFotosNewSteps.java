@@ -24,9 +24,9 @@ public class SecFotosNewSteps {
 	
 	@Validation
 	private ChecksTM checkTypeOfFirstFoto() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		DataFoto dataFoto = secFotosNew.getDataFoto(1, 1);
-	 	validations.add(
+	 	checks.add(
 			"La 1a foto es de tipo <b>" + TipoImagenProducto.DETALLES + " o " + 
 										  TipoImagenProducto.DETALLES_9 + " o " +
 										  TipoImagenProducto.OUTFIT + " o " + 
@@ -37,12 +37,12 @@ public class SecFotosNewSteps {
 			dataFoto.typeImage==TipoImagenProducto.OUTFIT || 
 			dataFoto.typeImage==TipoImagenProducto.BODEGON), State.Defect);
 	 	
-	 	return validations;
+	 	return checks;
 	}
 		  
 	@Validation 
 	private ChecksTM checkLayoutFicha(boolean isFichaAccesorios) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int numFotosExpected1rstLine_A = 1;
 		int numFotosExpected1rstLine_B = 2;
 		if (isFichaAccesorios) {
@@ -51,7 +51,7 @@ public class SecFotosNewSteps {
 		}
 		
 		int numFotos1rstLine = secFotosNew.getNumFotosLine(1);
-	 	validations.add(
+	 	checks.add(
 			"La 1a línea tiene " + numFotosExpected1rstLine_A + " o " + numFotosExpected1rstLine_B + " fotos",
 			numFotos1rstLine==numFotosExpected1rstLine_A || numFotos1rstLine==numFotosExpected1rstLine_B, State.Warn);
 	 	
@@ -61,7 +61,7 @@ public class SecFotosNewSteps {
 			numFotosLastLine = secFotosNew.getNumFotosLine(numLinesFotos); 
 		}
 		int minFotosExpectedLastLine = 5;
-	 	validations.add(
+	 	checks.add(
 			"La última línea tiene < " + minFotosExpectedLastLine + " fotos",
 			numFotosLastLine<minFotosExpectedLastLine, State.Warn);
 	 	
@@ -74,11 +74,11 @@ public class SecFotosNewSteps {
 					break;
 				}
 			}
-		 	validations.add(
+		 	checks.add(
 				"Las líneas intermedias tienen 2 fotos",
 				allLinesWith2fotos, State.Warn);
 	 	}	
 	 	
-	 	return validations;
+	 	return checks;
 	}
 }

@@ -1,22 +1,22 @@
 package com.mng.robotest.test.pageobject.shop.checkout.sepa;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageSepaResultMobil {
+public class PageSepaResultMobil extends PageObjTM {
 
-	static String XPathButtonPay = "//input[@type='submit' and @id='mainSubmit']";
-	static String XPathStage3Header = "//h2[@id='stageheader' and text()[contains(.,'3:')]]";
+	private static final String XPATH_BUTTON_PAY = "//input[@type='submit' and @id='mainSubmit']";
+	private static final String XPATH_STAGE_3HEADER = "//h2[@id='stageheader' and text()[contains(.,'3:')]]";
 
-	public static boolean isPage(WebDriver driver) {
-		return (state(Present, By.xpath(XPathStage3Header), driver).check());
+	public boolean isPage() {
+		return (state(Present, By.xpath(XPATH_STAGE_3HEADER)).check());
 	}
 
-	public static void clickButtonPay(WebDriver driver) {
-		click(By.xpath(XPathButtonPay), driver).exec();
+	public void clickButtonPay() {
+		click(By.xpath(XPATH_BUTTON_PAY)).exec();
 	}
 }

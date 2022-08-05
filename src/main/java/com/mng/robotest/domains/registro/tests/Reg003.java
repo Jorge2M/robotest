@@ -11,8 +11,8 @@ import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataMango;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusUserSteps;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
 
 
 public class Reg003 extends TestBase {
@@ -40,7 +40,7 @@ public class Reg003 extends TestBase {
 			return; 
 		}
 		
-		AccesoStpV.oneStep(dataTest, false, driver);
+		AccesoSteps.oneStep(dataTest, false, driver);
 		userMenusSteps.selectRegistrate(dataTest);
 		registerAndGoShoppingNoPubli();		
 	}

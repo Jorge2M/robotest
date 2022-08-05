@@ -16,12 +16,12 @@ import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
-import com.mng.robotest.test.stpv.navigations.manto.PedidoNavigations;
-import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow;
-import com.mng.robotest.test.stpv.navigations.shop.GaleriaNavigationsStpV;
-import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow.From;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusWrapperStpV;
+import com.mng.robotest.test.steps.navigations.manto.PedidoNavigations;
+import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow;
+import com.mng.robotest.test.steps.navigations.shop.GaleriaNavigationsSteps;
+import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
@@ -31,7 +31,7 @@ public class Loy001 extends TestBase {
 	static final User USER = LoyaltyCommons.USER_PRO_WITH_LOY_POINTS;
 	final Menu1rstLevel menuNewCollection;
 	
-	private final SecMenusWrapperStpV secMenusSteps = SecMenusWrapperStpV.getNew(dataTest, driver);
+	private final SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dataTest, driver);
 	
 	public Loy001() throws Exception {
 		super();
@@ -47,7 +47,7 @@ public class Loy001 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		AccesoStpV.oneStep(dataTest, true, driver);
+		AccesoSteps.oneStep(dataTest, true, driver);
 		DataBag dataBag = addBagArticleNoRebajado();
 		DataCtxPago dCtxPago = checkoutExecution(dataBag);
 		checkPedidosManto(dCtxPago.getListPedidos());
@@ -59,7 +59,7 @@ public class Loy001 extends TestBase {
 		//TODO en estos momentos algo raro le pasa al menú Nuevo que requiere un refresh para funcionar ok
 		driver.navigate().refresh();
 		
-		return GaleriaNavigationsStpV.selectArticleAvailableFromGaleria(dataTest, driver);
+		return GaleriaNavigationsSteps.selectArticleAvailableFromGaleria(dataTest, driver);
 	}
 	
 	private DataCtxPago checkoutExecution(DataBag dataBag) throws Exception {

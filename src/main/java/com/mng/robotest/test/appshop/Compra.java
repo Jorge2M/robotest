@@ -27,22 +27,22 @@ import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData.Importe;
 import com.mng.robotest.test.pageobject.shop.footer.SecFooter.FooterLink;
-import com.mng.robotest.test.stpv.navigations.manto.PedidoNavigations;
-import com.mng.robotest.test.stpv.navigations.shop.NavigationsStpV;
-import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow.From;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.SecBolsaStpV;
-import com.mng.robotest.test.stpv.shop.SecFooterStpV;
-import com.mng.robotest.test.stpv.shop.checqueregalo.PageChequeRegaloInputDataStpV;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusWrapperStpV;
-import com.mng.robotest.test.stpv.shop.micuenta.PageMiCuentaStpV;
+import com.mng.robotest.test.steps.navigations.manto.PedidoNavigations;
+import com.mng.robotest.test.steps.navigations.shop.NavigationsSteps;
+import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.SecBolsaSteps;
+import com.mng.robotest.test.steps.shop.SecFooterSteps;
+import com.mng.robotest.test.steps.shop.checqueregalo.PageChequeRegaloInputDataSteps;
+import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
+import com.mng.robotest.test.steps.shop.micuenta.PageMiCuentaSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.utils.UtilsTest;
 
-import static com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow.BuilderCheckout;
+import static com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 
 import java.util.Arrays;
 import java.util.List;
@@ -216,27 +216,27 @@ public class Compra {
 		//Creamos una estructura para ir almacenando los datos del proceso de pagos
 		String nTarjeta;
 		String cvvTarjeta = "";
-		AccesoStpV.oneStep(dCtxSh, false, driver);
-		new SecBolsaStpV(dCtxSh, driver).clear();
-		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-		secMenusStpV.seleccionLinea(LineaType.she, null, dCtxSh);
+		AccesoSteps.oneStep(dCtxSh, false, driver);
+		new SecBolsaSteps(dCtxSh, driver).clear();
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+		secMenusSteps.seleccionLinea(LineaType.she, null, dCtxSh);
 		
-		PageChequeRegaloInputDataStpV pageChequeRegaloInputDataStpV = new PageChequeRegaloInputDataStpV(dCtxSh.pais, driver);
-		SecFooterStpV secFooterStpV = new SecFooterStpV(dCtxSh.channel, dCtxSh.appE, driver);
+		PageChequeRegaloInputDataSteps pageChequeRegaloInputDataSteps = new PageChequeRegaloInputDataSteps(dCtxSh.pais, driver);
+		SecFooterSteps secFooterSteps = new SecFooterSteps(dCtxSh.channel, dCtxSh.appE, driver);
 		if (typeCheque==TypeCheque.Old) {
-			secFooterStpV.clickLinkFooter(FooterLink.cheque_regalo_old, false);
-			pageChequeRegaloInputDataStpV.clickQuieroComprarChequeRegalo();
-			pageChequeRegaloInputDataStpV.seleccionarCantidades(Importe.euro50);
+			secFooterSteps.clickLinkFooter(FooterLink.cheque_regalo_old, false);
+			pageChequeRegaloInputDataSteps.clickQuieroComprarChequeRegalo();
+			pageChequeRegaloInputDataSteps.seleccionarCantidades(Importe.euro50);
 		} else {
-			secFooterStpV.clickLinkFooter(FooterLink.cheque_regalo, false);
+			secFooterSteps.clickLinkFooter(FooterLink.cheque_regalo, false);
 			if(dCtxSh.channel.isDevice()){
 				nTarjeta = "100000040043";
 				cvvTarjeta = "618";
-				pageChequeRegaloInputDataStpV.paginaConsultarSaldo(nTarjeta);
-				pageChequeRegaloInputDataStpV.insertCVVConsultaSaldo(cvvTarjeta);
+				pageChequeRegaloInputDataSteps.paginaConsultarSaldo(nTarjeta);
+				pageChequeRegaloInputDataSteps.insertCVVConsultaSaldo(cvvTarjeta);
 			}
-			pageChequeRegaloInputDataStpV.seleccionarCantidades(Importe.euro50);
-			pageChequeRegaloInputDataStpV.clickQuieroComprarChequeRegalo();
+			pageChequeRegaloInputDataSteps.seleccionarCantidades(Importe.euro50);
+			pageChequeRegaloInputDataSteps.clickQuieroComprarChequeRegalo();
 		}
 
 		ChequeRegalo chequeRegalo = new ChequeRegalo();
@@ -245,7 +245,7 @@ public class Compra {
 		chequeRegalo.setEmail(Constantes.MAIL_PERSONAL);
 		chequeRegalo.setImporte(Importe.euro50);
 		chequeRegalo.setMensaje("Te conocía aún antes de haberte formado en el vientre de tu madre");
-		pageChequeRegaloInputDataStpV.inputDataAndClickComprar(dCtxSh.channel, dCtxSh.appE, chequeRegalo);
+		pageChequeRegaloInputDataSteps.inputDataAndClickComprar(dCtxSh.channel, dCtxSh.appE, chequeRegalo);
 
 		//Ejecutar el pago
 		FlagsTestCkout fTCkout = new FlagsTestCkout();
@@ -335,23 +335,23 @@ public class Compra {
 				.checkout(From.PREHOME);
 					
 			//Seleccionamos el logo de Mango (necesitamos acceder a una página con los links del menú superior)
-			NavigationsStpV.gotoPortada(dCtxSh, driver);
+			NavigationsSteps.gotoPortada(dCtxSh, driver);
 			
 			if (dCtxSh.appE!=AppEcom.votf) {
 				//Cerramos sesión y nos volvemos a identificar con los datos del registro
 				String usrEmail = dCtxPago.getDatosRegistro().get("cfEmail");
 				String password = dCtxPago.getDatosRegistro().get("cfPass");
-				SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-				secMenusStpV.getMenusUser().logoffLogin(usrEmail, password);
+				SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+				secMenusSteps.getMenusUser().logoffLogin(usrEmail, password);
 					
 				//Ejecutamos la consulta de Mis datos comprobando que son coherentes con los utilizados en el registro
-				PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+				PageMiCuentaSteps pageMiCuentaSteps = PageMiCuentaSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
 				Map<String,String> datosRegistro = dCtxPago.getDatosRegistro();
 				datosRegistro.put("cfEmail", usrEmail);
 				datosRegistro.put("cfPass", password);
 				datosRegistro.put("", "Barcelona");
 				datosRegistro.put("provinciaPais", "Barcelona");
-				pageMiCuentaStpV.goToMisDatosAndValidateData(datosRegistro, dCtxSh.pais.getCodigo_pais());
+				pageMiCuentaSteps.goToMisDatosAndValidateData(datosRegistro, dCtxSh.pais.getCodigo_pais());
 			}			
 			
 			//Validación en Manto de los Pedidos (si existen)

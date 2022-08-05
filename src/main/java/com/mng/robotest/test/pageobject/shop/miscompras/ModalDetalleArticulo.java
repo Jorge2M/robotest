@@ -22,6 +22,7 @@ public abstract class ModalDetalleArticulo extends PageObjTM {
 		case desktop:
 			return new ModalDetalleArticuloDesktop(driver);
 		case mobile:
+		case tablet:
 			return new ModalDetalleArticuloMobile(driver);
 		}
 		return null;

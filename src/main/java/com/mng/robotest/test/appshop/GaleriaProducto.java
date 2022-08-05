@@ -27,14 +27,14 @@ import com.mng.robotest.test.pageobject.shop.menus.Menu2onLevel;
 import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test.pageobject.utils.DataScroll;
 import com.mng.robotest.test.pageobject.utils.ListDataArticleGalery;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.AllPagesStpV;
-import com.mng.robotest.test.stpv.shop.SecFiltrosStpV;
-import com.mng.robotest.test.stpv.shop.galeria.DataForScrollStep;
-import com.mng.robotest.test.stpv.shop.galeria.LocationArticle;
-import com.mng.robotest.test.stpv.shop.galeria.ModalArticleNotAvailableStpV;
-import com.mng.robotest.test.stpv.shop.galeria.PageGaleriaStpV;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusWrapperStpV;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.AllPagesSteps;
+import com.mng.robotest.test.steps.shop.SecFiltrosSteps;
+import com.mng.robotest.test.steps.shop.galeria.DataForScrollStep;
+import com.mng.robotest.test.steps.shop.galeria.LocationArticle;
+import com.mng.robotest.test.steps.shop.galeria.ModalArticleNotAvailableSteps;
+import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
+import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 
 import org.openqa.selenium.WebDriver;
@@ -63,10 +63,10 @@ public class GaleriaProducto {
 		dCtxSh.userRegistered = true;
 		String tipoPrendasGaleria = "camisa";
 			
-		AccesoStpV.oneStep(dCtxSh, false/*clearArticulos*/, driver);
+		AccesoSteps.oneStep(dCtxSh, false/*clearArticulos*/, driver);
 		Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
-		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
 		
 		List<Color> colorsToFilter = new ArrayList<>();
 		colorsToFilter.add(Color.Blanco);
@@ -74,15 +74,15 @@ public class GaleriaProducto {
 		if (!(dCtxSh.appE==AppEcom.outlet && dCtxSh.channel.isDevice())) {
 			colorsToFilter.add(Color.Azul);
 		}
-		SecFiltrosStpV.selectFiltroColoresStep(dCtxSh.appE, dCtxSh.channel, true, "Camisas", colorsToFilter, driver);
+		SecFiltrosSteps.selectFiltroColoresStep(dCtxSh.appE, dCtxSh.channel, true, "Camisas", colorsToFilter, driver);
 
 		//Pruebas a nivel del cambio de galería de 2<->4 columnas
-		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		if (dCtxSh.channel==Channel.desktop && dCtxSh.appE!=AppEcom.outlet) {
 			PageGaleriaDesktop pageGaleria = (PageGaleriaDesktop)PageGaleria.getNew(From.MENU, Channel.desktop, dCtxSh.appE, driver);
 			ListDataArticleGalery listArticlesGaleria2Cols = pageGaleria.getListDataArticles();
-			listArticlesGaleria2Cols = pageGaleriaStpV.selectListadoXColumnasDesktop(NumColumnas.cuatro, listArticlesGaleria2Cols);
-			pageGaleriaStpV.selectListadoXColumnasDesktop(NumColumnas.dos, listArticlesGaleria2Cols);
+			listArticlesGaleria2Cols = pageGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.cuatro, listArticlesGaleria2Cols);
+			pageGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.dos, listArticlesGaleria2Cols);
 		}
 		
 		DataForScrollStep dataScroll = new DataForScrollStep();
@@ -90,22 +90,22 @@ public class GaleriaProducto {
 		dataScroll.ordenacionExpected = FilterOrdenacion.NOordenado;
 		dataScroll.validateArticlesExpected = false;
 		dataScroll.validaImgBroken = true;
-		DataScroll datosScrollFinalGaleria = pageGaleriaStpV.scrollFromFirstPage(dataScroll, dCtxSh);
+		DataScroll datosScrollFinalGaleria = pageGaleriaSteps.scrollFromFirstPage(dataScroll, dCtxSh);
 		
 		if (dCtxSh.channel.isDevice()) {
-			pageGaleriaStpV.backTo1erArticleMobilStep(dCtxSh);
+			pageGaleriaSteps.backTo1erArticleMobilStep(dCtxSh);
 		}
 		int numArticulosPantalla = 
-			pageGaleriaStpV.seleccionaOrdenacionGaleria(FilterOrdenacion.PrecioDesc, tipoPrendasGaleria, -1, dCtxSh);
+			pageGaleriaSteps.seleccionaOrdenacionGaleria(FilterOrdenacion.PrecioDesc, tipoPrendasGaleria, -1, dCtxSh);
 		
 		dataScroll.validateArticlesExpected = true;
 		dataScroll.numArticlesExpected = datosScrollFinalGaleria.articulosTotalesPagina;
-		pageGaleriaStpV.scrollFromFirstPage(dataScroll, dCtxSh);	
+		pageGaleriaSteps.scrollFromFirstPage(dataScroll, dCtxSh);	
 		
-		pageGaleriaStpV.seleccionaOrdenacionGaleria(FilterOrdenacion.PrecioAsc, tipoPrendasGaleria, numArticulosPantalla, dCtxSh);
-		pageGaleriaStpV.scrollFromFirstPage(dataScroll, dCtxSh);
-		pageGaleriaStpV.selecColorFromArtGaleriaStep(1/*numArtConColores*/, 2/*posColor*/);
-		pageGaleriaStpV.selecArticuloGaleriaStep(1/*numArtConColores*/);
+		pageGaleriaSteps.seleccionaOrdenacionGaleria(FilterOrdenacion.PrecioAsc, tipoPrendasGaleria, numArticulosPantalla, dCtxSh);
+		pageGaleriaSteps.scrollFromFirstPage(dataScroll, dCtxSh);
+		pageGaleriaSteps.selecColorFromArtGaleriaStep(1/*numArtConColores*/, 2/*posColor*/);
+		pageGaleriaSteps.selecArticuloGaleriaStep(1/*numArtConColores*/);
 	}
 
 	@Test (
@@ -116,10 +116,10 @@ public class GaleriaProducto {
 		DataCtxShop dCtxSh = getCtxShForTest();
 		dCtxSh.userRegistered = false;
 
-		AccesoStpV.oneStep(dCtxSh, false, driver);
+		AccesoSteps.oneStep(dCtxSh, false, driver);
 		Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
-		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
 
 		List<Color> colorsToFilter = new ArrayList<>();
 		colorsToFilter.add(Color.Blanco);
@@ -128,32 +128,32 @@ public class GaleriaProducto {
 			colorsToFilter.add(Color.Negro);
 			colorsToFilter.add(Color.Azul);
 		}
-		SecFiltrosStpV.selectFiltroColoresStep(dCtxSh.appE, dCtxSh.channel, false, "Camisas", colorsToFilter, driver);
+		SecFiltrosSteps.selectFiltroColoresStep(dCtxSh.appE, dCtxSh.channel, false, "Camisas", colorsToFilter, driver);
 			
 		//Scrollar hasta la 3a página
-		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		DataForScrollStep dataScroll = new DataForScrollStep();
 		dataScroll.numPageToScroll = 3;
 		dataScroll.ordenacionExpected = FilterOrdenacion.NOordenado;
 		dataScroll.validateArticlesExpected = false;
 		dataScroll.validaImgBroken = true;
-		pageGaleriaStpV.scrollFromFirstPage(dataScroll, dCtxSh);
+		pageGaleriaSteps.scrollFromFirstPage(dataScroll, dCtxSh);
 		LocationArticle loc1rsArticle1rstPage = LocationArticle.getInstanceInPage(2, 1);
-		pageGaleriaStpV.selectArticuloEnPestanyaAndBack(loc1rsArticle1rstPage, dCtxSh.pais);
+		pageGaleriaSteps.selectArticuloEnPestanyaAndBack(loc1rsArticle1rstPage, dCtxSh.pais);
 		
 		//Scrollar hasta el final de la Galería
 		dataScroll.numPageToScroll = PageGaleriaDesktop.MAX_PAGE_TO_SCROLL;
-		DataScroll datosScrollFinalGaleria = pageGaleriaStpV.scrollFromFirstPage(dataScroll, dCtxSh);
+		DataScroll datosScrollFinalGaleria = pageGaleriaSteps.scrollFromFirstPage(dataScroll, dCtxSh);
 			
 		LocationArticle loc1rsArticleLastPage = LocationArticle.getInstanceInPage(datosScrollFinalGaleria.paginaFinal, 1);
-		pageGaleriaStpV.selectArticulo(loc1rsArticleLastPage, dCtxSh);
-		AllPagesStpV.backNagegador(driver);
+		pageGaleriaSteps.selectArticulo(loc1rsArticleLastPage, dCtxSh);
+		AllPagesSteps.backNagegador(driver);
 
 		//Scrollar hasta el final de la Galería (comprobaremos que el número de artículos es el mismo que en el anterior scroll hasta el final)
 		dataScroll.validateArticlesExpected = true;
 		dataScroll.numArticlesExpected = datosScrollFinalGaleria.articulosTotalesPagina;
 		dataScroll.validaImgBroken = false;
-		pageGaleriaStpV.scrollFromFirstPage(dataScroll, dCtxSh);
+		pageGaleriaSteps.scrollFromFirstPage(dataScroll, dCtxSh);
 	}
 	
 	@Test (
@@ -167,49 +167,49 @@ public class GaleriaProducto {
 		dCtxSh.passwordUser = userShop.password;
 		dCtxSh.userRegistered = true;
 	
-		AccesoStpV.oneStep(dCtxSh, false, driver);
-		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		AccesoSteps.oneStep(dCtxSh, false, driver);
+		PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
 		Menu1rstLevel menuCardigans = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "cardigans-y-jerseis"));
-		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
 		if (dCtxSh.appE==AppEcom.outlet || dCtxSh.channel.isDevice()) {
-			secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCardigans, dCtxSh);
+			secMenusSteps.selectMenu1rstLevelTypeCatalog(menuCardigans, dCtxSh);
 		} else {
 			Menu1rstLevel menuNuevo = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "New Now"));
-			secMenusStpV.selectMenu1rstLevelTypeCatalog(menuNuevo, dCtxSh);
-			pageGaleriaStpV.secCrossSellingStpV.validaIsCorrect(LineaType.she, null);
-			pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
+			secMenusSteps.selectMenu1rstLevelTypeCatalog(menuNuevo, dCtxSh);
+			pageGaleriaSteps.secCrossSellingSteps.validaIsCorrect(LineaType.she, null);
+			pageGaleriaSteps.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
 		}
 		
 		if (!dCtxSh.channel.isDevice()) {
-			pageGaleriaStpV.getSecSelectorPreciosStpV().seleccionaIntervalo();
+			pageGaleriaSteps.getSecSelectorPreciosSteps().seleccionaIntervalo();
 		}
 
 		if (dCtxSh.appE!=AppEcom.outlet && !dCtxSh.channel.isDevice()) {
-			pageGaleriaStpV.secCrossSellingStpV.validaIsCorrect(LineaType.she, null);
-			pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
+			pageGaleriaSteps.secCrossSellingSteps.validaIsCorrect(LineaType.she, null);
+			pageGaleriaSteps.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
 		}	
 		
-		selectMenuVestidos(secMenusStpV, dCtxSh);
+		selectMenuVestidos(secMenusSteps, dCtxSh);
 		
 		if (dCtxSh.appE==AppEcom.outlet || dCtxSh.channel.isDevice()) {
-			secMenusStpV.selectMenuLateral1erLevelTypeCatalog(menuCardigans, dCtxSh);
+			secMenusSteps.selectMenuLateral1erLevelTypeCatalog(menuCardigans, dCtxSh);
 			Menu2onLevel menuCardigansJerseis = MenuTreeApp.getMenuLevel2From(menuCardigans, "jerseis");
-			secMenusStpV.selectMenu2onLevel(menuCardigansJerseis, dCtxSh);
+			secMenusSteps.selectMenu2onLevel(menuCardigansJerseis, dCtxSh);
 		} else {
-			secMenusStpV.selectMenuLateral1erLevelTypeCatalog(menuCamisas, dCtxSh);
+			secMenusSteps.selectMenuLateral1erLevelTypeCatalog(menuCamisas, dCtxSh);
 			Menu2onLevel menuCamisasBasicas = MenuTreeApp.getMenuLevel2From(menuCamisas, "básicas");
-			secMenusStpV.selectMenu2onLevel(menuCamisasBasicas, dCtxSh);
+			secMenusSteps.selectMenu2onLevel(menuCamisasBasicas, dCtxSh);
 		}
 	}
 	
-	private void selectMenuVestidos(SecMenusWrapperStpV secMenusStpV, DataCtxShop dCtxSh) throws Exception {
+	private void selectMenuVestidos(SecMenusWrapperSteps secMenusSteps, DataCtxShop dCtxSh) throws Exception {
 		String menuToClick = "vestidos";
 //		if (dCtxSh.appE==AppEcom.outlet) {
 //			menuToClick = "vestidos";
 //		}
 		Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, menuToClick));
-		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh);
+		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh);
 	}
 	
 	@Test (
@@ -223,37 +223,37 @@ public class GaleriaProducto {
 		dCtxSh.userRegistered = false;
 	
 		//Ini script
-		AccesoStpV.oneStep(dCtxSh, false, driver);
+		AccesoSteps.oneStep(dCtxSh, false, driver);
 		Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
-		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
 				
-		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		ArrayList<TypeSlider> typeSliderList = new ArrayList<>();
 		typeSliderList.add(TypeSlider.next);
-		String src2onImage = pageGaleriaStpV.clicksSliderArticuloConColores(1, typeSliderList);
+		String src2onImage = pageGaleriaSteps.clicksSliderArticuloConColores(1, typeSliderList);
 		
 		typeSliderList.clear();
 		typeSliderList.add(TypeSlider.prev);
 		int numArtConColores = 1;
-		pageGaleriaStpV.clicksSliderArticuloConColores(numArtConColores, typeSliderList);
+		pageGaleriaSteps.clicksSliderArticuloConColores(numArtConColores, typeSliderList);
 		
 		typeSliderList.clear();
 		typeSliderList.add(TypeSlider.next);
-		pageGaleriaStpV.clicksSliderArticuloConColores(numArtConColores, typeSliderList, src2onImage);
+		pageGaleriaSteps.clicksSliderArticuloConColores(numArtConColores, typeSliderList, src2onImage);
 		
 		//Seleccionar el 2o color del artículo
-		String srcImgAfterClickColor = pageGaleriaStpV.selecColorFromArtGaleriaStep(numArtConColores, 2);
+		String srcImgAfterClickColor = pageGaleriaSteps.selecColorFromArtGaleriaStep(numArtConColores, 2);
 		
 		typeSliderList.clear();
 		typeSliderList.add(TypeSlider.next);
 		typeSliderList.add(TypeSlider.next);
-		pageGaleriaStpV.clicksSliderArticuloConColores(numArtConColores, typeSliderList);
+		pageGaleriaSteps.clicksSliderArticuloConColores(numArtConColores, typeSliderList);
 		
 		typeSliderList.clear();
 		typeSliderList.add(TypeSlider.prev);
 		typeSliderList.add(TypeSlider.prev);
-		pageGaleriaStpV.clicksSliderArticuloConColores(numArtConColores, typeSliderList, srcImgAfterClickColor);
+		pageGaleriaSteps.clicksSliderArticuloConColores(numArtConColores, typeSliderList, srcImgAfterClickColor);
 	}
 
 	@Test (
@@ -268,16 +268,16 @@ public class GaleriaProducto {
 		dCtxSh.userRegistered = true;
 
 		// Abrir listado de mujer camisas
-		AccesoStpV.oneStep(dCtxSh, false/*clearArticulos*/, driver);
+		AccesoSteps.oneStep(dCtxSh, false/*clearArticulos*/, driver);
 		Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
-		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
 
 		// Abrir avisame desde el listado buscando primera talla sin stock y comprobar que se abierto y que contiene texto RGPD
-		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-		pageGaleriaStpV.selectTallaNoDisponibleArticulo();
-		ModalArticleNotAvailableStpV modalArticleNotAvailableStpV = ModalArticleNotAvailableStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-		modalArticleNotAvailableStpV.checkVisibleAvisame();
+		PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		pageGaleriaSteps.selectTallaNoDisponibleArticulo();
+		ModalArticleNotAvailableSteps modalArticleNotAvailableSteps = ModalArticleNotAvailableSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		modalArticleNotAvailableSteps.checkVisibleAvisame();
 	}
 	
 	private DataCtxShop getCtxShForTest() throws Exception {

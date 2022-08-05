@@ -22,8 +22,8 @@ import com.mng.robotest.test.pageobject.shop.acceptcookies.ModalSetCookies.Secti
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraOutlet_Mobil;
 import com.mng.robotest.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
 import com.mng.robotest.test.pageobject.utils.LocalStorage;
-import com.mng.robotest.test.stpv.shop.acceptcookies.ModalSetCookiesStpV;
-import com.mng.robotest.test.stpv.shop.acceptcookies.SectionCookiesStpV;
+import com.mng.robotest.test.steps.shop.acceptcookies.ModalSetCookiesSteps;
+import com.mng.robotest.test.steps.shop.acceptcookies.SectionCookiesSteps;
 import com.mng.robotest.test.utils.testab.TestABactive;
 
 /**
@@ -190,23 +190,23 @@ public class PagePrehome extends PageObjTM {
 	
 	public void previousAccessShopSteps(boolean acceptCookies) throws Exception {
 		reloadIfServiceUnavailable();
-		PageJCAS.identJCASifExists(driver);
+		new PageJCAS(driver).identJCASifExists();
 		TestABactive.currentTestABsToActivate(dCtxSh.channel, dCtxSh.appE, driver);
 		manageCookies(acceptCookies);
 	}
 	
 	private void manageCookies(boolean acceptCookies) {
 		SectionCookies sectionCookies = new SectionCookies(driver);
-		SectionCookiesStpV sectionCookiesStpV = new SectionCookiesStpV(driver);
+		SectionCookiesSteps sectionCookiesSteps = new SectionCookiesSteps(driver);
 		if (acceptCookies) {
 			if (sectionCookies.isVisible(2)) {
-				sectionCookiesStpV.accept();
+				sectionCookiesSteps.accept();
 				//changeCookie_OptanonConsent();
 				//setupCookies();
 			}
 		} else {
-			ModalSetCookiesStpV modalSetCookiesStpV = sectionCookiesStpV.setCookies();
-			modalSetCookiesStpV.saveConfiguration();
+			ModalSetCookiesSteps modalSetCookiesSteps = sectionCookiesSteps.setCookies();
+			modalSetCookiesSteps.saveConfiguration();
 		}
 	}
 	
@@ -217,28 +217,28 @@ public class PagePrehome extends PageObjTM {
 	}
 	
 	private void changeCookie_OptanonConsent() {
-		SectionCookiesStpV sectionCookiesStpV = new SectionCookiesStpV(driver);
-		sectionCookiesStpV.changeCookie_OptanonConsent();
+		SectionCookiesSteps sectionCookiesSteps = new SectionCookiesSteps(driver);
+		sectionCookiesSteps.changeCookie_OptanonConsent();
 	}
 	
 	private void setupCookies() {
-		SectionCookiesStpV sectionCookiesStpV = new SectionCookiesStpV(driver);
-		ModalSetCookiesStpV modalSetCookiesStpV = 
-			sectionCookiesStpV.setCookies();
-		modalSetCookiesStpV.select(SectionConfCookies.Cookies_dirigidas);
+		SectionCookiesSteps sectionCookiesSteps = new SectionCookiesSteps(driver);
+		ModalSetCookiesSteps modalSetCookiesSteps = 
+			sectionCookiesSteps.setCookies();
+		modalSetCookiesSteps.select(SectionConfCookies.Cookies_dirigidas);
 		((JavascriptExecutor) driver).executeScript("document.getElementsByClassName('ot-tgl')[0].style.display='block'");	
-		modalSetCookiesStpV.disableSwitchCookies();
+		modalSetCookiesSteps.disableSwitchCookies();
 		
-		modalSetCookiesStpV.select(SectionConfCookies.Cookies_de_redes_sociales);
-		modalSetCookiesStpV.disableSwitchCookies();
+		modalSetCookiesSteps.select(SectionConfCookies.Cookies_de_redes_sociales);
+		modalSetCookiesSteps.disableSwitchCookies();
 		
-		modalSetCookiesStpV.select(SectionConfCookies.Cookies_funcionales);
-		modalSetCookiesStpV.disableSwitchCookies();
+		modalSetCookiesSteps.select(SectionConfCookies.Cookies_funcionales);
+		modalSetCookiesSteps.disableSwitchCookies();
 		
-		modalSetCookiesStpV.select(SectionConfCookies.Cookies_de_rendimiento);
-		modalSetCookiesStpV.disableSwitchCookies();
+		modalSetCookiesSteps.select(SectionConfCookies.Cookies_de_rendimiento);
+		modalSetCookiesSteps.disableSwitchCookies();
 		
-		modalSetCookiesStpV.saveConfiguration();
+		modalSetCookiesSteps.saveConfiguration();
 	}
 	
 	public void selecPaisIdiomaYAccede() throws Exception {

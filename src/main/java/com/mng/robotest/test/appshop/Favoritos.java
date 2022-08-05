@@ -22,13 +22,13 @@ import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.NumColum
 import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.SecBolsaStpV;
-import com.mng.robotest.test.stpv.shop.favoritos.PageFavoritosStpV;
-import com.mng.robotest.test.stpv.shop.galeria.LocationArticle;
-import com.mng.robotest.test.stpv.shop.galeria.PageGaleriaStpV;
-import com.mng.robotest.test.stpv.shop.galeria.PageGaleriaStpV.TypeActionFav;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusWrapperStpV;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.SecBolsaSteps;
+import com.mng.robotest.test.steps.shop.favoritos.PageFavoritosSteps;
+import com.mng.robotest.test.steps.shop.galeria.LocationArticle;
+import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
+import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps.TypeActionFav;
+import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 
 import java.io.Serializable;
@@ -94,38 +94,38 @@ public class Favoritos implements Serializable {
 		DataFavoritos dataFavoritos = new DataFavoritos();
 		DataBag dataBolsa = new DataBag();
 
-		AccesoStpV.oneStep(dCtxSh, false, driver);
-		SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
-		secBolsaStpV.clear();
+		AccesoSteps.oneStep(dCtxSh, false, driver);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh, driver);
+		secBolsaSteps.clear();
 
-		PageFavoritosStpV pageFavoritosStpV = PageFavoritosStpV.getNew(driver);
-		pageFavoritosStpV.clearAll(dataFavoritos, dCtxSh);
+		PageFavoritosSteps pageFavoritosSteps = PageFavoritosSteps.getNew(driver);
+		pageFavoritosSteps.clearAll(dataFavoritos, dCtxSh);
 
 		Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "Vestidos"));
-		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh);
 
-		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		if (dCtxSh.channel==Channel.desktop) {
-			pageGaleriaStpV.selectListadoXColumnasDesktop(NumColumnas.cuatro);
+			pageGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.cuatro);
 		}
 		
 		List<Integer> iconsToMark = Arrays.asList(2, 3, 5);  
-		pageGaleriaStpV.clickArticlesHearthIcons(iconsToMark, TypeActionFav.MARCAR, dataFavoritos);
+		pageGaleriaSteps.clickArticlesHearthIcons(iconsToMark, TypeActionFav.MARCAR, dataFavoritos);
 
 		List<Integer> iconsToUnmark = Arrays.asList(3);
-		pageGaleriaStpV.clickArticlesHearthIcons(iconsToUnmark, TypeActionFav.DESMARCAR, dataFavoritos);
+		pageGaleriaSteps.clickArticlesHearthIcons(iconsToUnmark, TypeActionFav.DESMARCAR, dataFavoritos);
 
-		secMenusStpV.getMenusUser().selectFavoritos(dataFavoritos);
+		secMenusSteps.getMenusUser().selectFavoritos(dataFavoritos);
 		ArticuloScreen artToPlay = dataFavoritos.getArticulo(0);
-		pageFavoritosStpV.addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel, dCtxSh.appE, dCtxSh.pais);
+		pageFavoritosSteps.addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel, dCtxSh.appE, dCtxSh.pais);
 		if (dCtxSh.channel.isDevice()) {
-			secBolsaStpV.clickAspaForCloseMobil();
-			pageFavoritosStpV.validaIsPageOK(dataFavoritos);
+			secBolsaSteps.clickAspaForCloseMobil();
+			pageFavoritosSteps.validaIsPageOK(dataFavoritos);
 		}
 
-		pageFavoritosStpV.clear(artToPlay, dataFavoritos);
-		pageFavoritosStpV.clearAll(dataFavoritos, dCtxSh);
+		pageFavoritosSteps.clear(artToPlay, dataFavoritos);
+		pageFavoritosSteps.clearAll(dataFavoritos, dCtxSh);
 	}
 
 	@Test(
@@ -140,21 +140,21 @@ public class Favoritos implements Serializable {
 		DataFavoritos dataFavoritos = new DataFavoritos();
 		DataBag dataBolsa = new DataBag();
 
-		AccesoStpV.oneStep(dCtxSh, false, driver);
+		AccesoSteps.oneStep(dCtxSh, false, driver);
 		
-		SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
-		secBolsaStpV.clear();
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh, driver);
+		secBolsaSteps.clear();
 
-		PageFavoritosStpV pageFavoritosStpV = PageFavoritosStpV.getNew(driver);
-		pageFavoritosStpV.clearAll(dataFavoritos, dCtxSh);
+		PageFavoritosSteps pageFavoritosSteps = PageFavoritosSteps.getNew(driver);
+		pageFavoritosSteps.clearAll(dataFavoritos, dCtxSh);
 
 
-		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-		secMenusStpV.selectMenu1rstLevelTypeCatalog(getMenu(dCtxSh.appE), dCtxSh);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+		secMenusSteps.selectMenu1rstLevelTypeCatalog(getMenu(dCtxSh.appE), dCtxSh);
 		LocationArticle article1 = LocationArticle.getInstanceInCatalog(1);
 
-		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-		pageGaleriaStpV.selectArticulo(article1, dCtxSh);
+		PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		pageGaleriaSteps.selectArticulo(article1, dCtxSh);
 
 		PageFichaArtSteps pageFichaArtStpv = new PageFichaArtSteps(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
 		pageFichaArtStpv.selectAnadirAFavoritos(dataFavoritos);
@@ -162,28 +162,28 @@ public class Favoritos implements Serializable {
 		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
 		dCtxSh.userConnected = userShop.user;
 		dCtxSh.passwordUser = userShop.password;
-		AccesoStpV.identificacionEnMango(dCtxSh, driver);
+		AccesoSteps.identificacionEnMango(dCtxSh, driver);
 		//TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
 		
-		secBolsaStpV.clear();
-		secMenusStpV.getMenusUser().selectFavoritos(dataFavoritos);
+		secBolsaSteps.clear();
+		secMenusSteps.getMenusUser().selectFavoritos(dataFavoritos);
 
-		pageFavoritosStpV.clickShareIsOk();
-		pageFavoritosStpV.closeShareModal();
+		pageFavoritosSteps.clickShareIsOk();
+		pageFavoritosSteps.closeShareModal();
 
 		ArticuloScreen artToPlay = dataFavoritos.getArticulo(0);
-		pageFavoritosStpV.clickArticuloImg(artToPlay);
-		pageFavoritosStpV
-			.getModalFichaFavoritosStpV()
+		pageFavoritosSteps.clickArticuloImg(artToPlay);
+		pageFavoritosSteps
+			.getModalFichaFavoritosSteps()
 			.addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel, dCtxSh.appE, dCtxSh.pais);
 		
 		if (dCtxSh.channel.isDevice()) {
-			pageFavoritosStpV.validaIsPageOK(dataFavoritos);
+			pageFavoritosSteps.validaIsPageOK(dataFavoritos);
 		} else {
-			pageFavoritosStpV.getModalFichaFavoritosStpV().closeFicha(artToPlay);
+			pageFavoritosSteps.getModalFichaFavoritosSteps().closeFicha(artToPlay);
 		}
 
-		pageFavoritosStpV.clear(artToPlay, dataFavoritos);
+		pageFavoritosSteps.clear(artToPlay, dataFavoritos);
 	}
 	
 	private Menu1rstLevel getMenu(AppEcom app) {

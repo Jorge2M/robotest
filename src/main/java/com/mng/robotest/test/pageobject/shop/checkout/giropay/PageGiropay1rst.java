@@ -4,92 +4,69 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageGiropay1rst {
+public class PageGiropay1rst extends PageObjTM {
 	
-	static String XPathListOfPayments = "//ul[@id='paymentMethods']";
-	static String XPathCabeceraStep = "//h2[@id[contains(.,'stageheader')]]";
-	static String XPathButtonPagoDesktop = "//input[@class[contains(.,'paySubmit')] and @type='submit']";
-	static String XPathButtonContinueMobil = "//input[@type='submit' and @id='mainSubmit']";
-	static String XPathIconoGiropayMobil = XPathListOfPayments + "//input[@class[contains(.,'giropay')]]";
-	static String XPathIconoGiropayDesktop = XPathListOfPayments + "/li[@data-variant[contains(.,'giropay')]]";
+	private static final String XPATH_LIST_OF_PAYMENTS = "//ul[@id='paymentMethods']";
+	private static final String XPATH_CABECERA_STEP = "//h2[@id[contains(.,'stageheader')]]";
+	private static final String XPATH_BUTTON_PAGO_DESKTOP = "//input[@class[contains(.,'paySubmit')] and @type='submit']";
+	private static final String XPATH_BUTTON_CONTINUE_MOBIL = "//input[@type='submit' and @id='mainSubmit']";
+	private static final String XPATH_ICONO_GIROPAY_MOBIL = XPATH_LIST_OF_PAYMENTS + "//input[@class[contains(.,'giropay')]]";
+	private static final String XPATH_ICONO_GIROPAY_DESKTOP = XPATH_LIST_OF_PAYMENTS + "/li[@data-variant[contains(.,'giropay')]]";
 	
-	public static String getXPathIconoGiropay(Channel channel) {
-		if (channel.isDevice()) {
-			return XPathIconoGiropayMobil;
-		}
-		return XPathIconoGiropayDesktop;
+	private final Channel channel;
+	
+	public PageGiropay1rst(Channel channel) {
+		this.channel = channel;
 	}
 	
-	public static String getXPath_rowListWithBank(String bank) {
+	private String getXPathIconoGiropay() {
+		if (channel.isDevice()) {
+			return XPATH_ICONO_GIROPAY_MOBIL;
+		}
+		return XPATH_ICONO_GIROPAY_DESKTOP;
+	}
+	
+	private String getXPathRowListWithBank(String bank) {
 		return ("//ul[@id='giropaysuggestionlist']/li[@data-bankname[contains(.,'" + bank + "')]]");
 	}
 	
-	public static boolean isPresentIconoGiropay(Channel channel, WebDriver driver) {
-		String xpathPago = getXPathIconoGiropay(channel);
-		return (state(Present, By.xpath(xpathPago), driver).check());
+	public boolean isPresentIconoGiropay() {
+		String xpathPago = getXPathIconoGiropay();
+		return (state(Present, By.xpath(xpathPago)).check());
 	}
 	
-	public static boolean isPresentCabeceraStep(WebDriver driver) {
-		return (state(Present, By.xpath(XPathCabeceraStep), driver).check());
+	public boolean isPresentCabeceraStep() {
+		return (state(Present, By.xpath(XPATH_CABECERA_STEP)).check());
 	}
 	
-	public static boolean isPresentButtonPagoDesktopUntil(int maxSeconds, WebDriver driver) {
-		return (state(Present, By.xpath(XPathButtonPagoDesktop), driver)
-				.wait(maxSeconds).check());
+	public boolean isPresentButtonPagoDesktopUntil(int maxSeconds) {
+		return (state(Present, By.xpath(XPATH_BUTTON_PAGO_DESKTOP)).wait(maxSeconds).check());
 	}
 
-//	public static boolean isVisibleInputBankUntil(int maxSecondsToWait, WebDriver driver) {
-//		return (isElementVisibleUntil(driver, By.xpath(XPathInputBank), maxSecondsToWait));
-//	}
-//	
-//	public static void inputBank(String bank, Channel channel, WebDriver driver) throws Exception {
-//		if (channel.isDevice()) {
-//			if (!isElementVisible(driver, By.xpath(XPathInputBank))) {
-//				clickIconoGiropay(channel, driver);
-//			}
-//		}
-//		
-//		driver.findElement(By.xpath(XPathInputBank)).sendKeys(bank);
-//		waitForPageLoaded(driver, 1/*waitSeconds*/);
-//	}
-//	
-//	public static void inputTabInBank(WebDriver driver) throws Exception {
-//		driver.findElement(By.xpath(XPathInputBank)).sendKeys(Keys.TAB);
-//		waitForPageLoaded(driver, 1/*waitSeconds*/);		
-//	}
-
-	public static void clickIconoGiropay(Channel channel, WebDriver driver) {
-		String xpathPago = getXPathIconoGiropay(channel);
-		click(By.xpath(xpathPago), driver).exec();
+	public void clickIconoGiropay(WebDriver driver) {
+		String xpathPago = getXPathIconoGiropay();
+		click(By.xpath(xpathPago)).exec();
 	}
 
-	public static void clickButtonContinuePay(Channel channel, WebDriver driver) {
+	public void clickButtonContinuePay() {
 		if (channel.isDevice()) {
-			clickButtonContinueMobil(driver);
+			clickButtonContinueMobil();
 		} else {
-			clickButtonPagoDesktop(driver);
+			clickButtonPagoDesktop();
 		}
 	}
 
-	public static void clickButtonPagoDesktop(WebDriver driver) {
-		click(By.xpath(XPathButtonPagoDesktop), driver).exec();
+	public void clickButtonPagoDesktop() {
+		click(By.xpath(XPATH_BUTTON_PAGO_DESKTOP)).exec();
 	}
 
-	public static void clickButtonContinueMobil(WebDriver driver) {
-		click(By.xpath(XPathButtonContinueMobil), driver).exec();
+	public void clickButtonContinueMobil() {
+		click(By.xpath(XPATH_BUTTON_CONTINUE_MOBIL)).exec();
 	}
-//	
-//	public static boolean isVisibleBankInListUntil(String bank, int maxSecondsToWait, WebDriver driver) {
-//		String xpathRow = getXPath_rowListWithBank(bank);
-//		return (isElementVisibleUntil(driver, By.xpath(xpathRow), maxSecondsToWait));
-//	}
-//	
-//	public static boolean isInvisibleBankInListUntil(String bank, int maxSecondsToWait, WebDriver driver) {
-//		String xpathRow = getXPath_rowListWithBank(bank);
-//		return (isElementInvisibleUntil(driver, By.xpath(xpathRow), maxSecondsToWait));
-//	}	
+	
 }

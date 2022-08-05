@@ -9,10 +9,10 @@ import org.testng.annotations.Test;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.exceptions.NotFoundException;
-import com.mng.robotest.test.stpv.manto.DataMantoAccess;
-import com.mng.robotest.test.stpv.manto.PageLoginMantoStpV;
-import com.mng.robotest.test.stpv.manto.PageMenusMantoStpV;
-import com.mng.robotest.test.stpv.manto.PageSelTdaMantoStpV;
+import com.mng.robotest.test.steps.manto.DataMantoAccess;
+import com.mng.robotest.test.steps.manto.PageLoginMantoSteps;
+import com.mng.robotest.test.steps.manto.PageMenusMantoSteps;
+import com.mng.robotest.test.steps.manto.PageSelTdaMantoSteps;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.InputParamsTM;
 //import com.github.jorge2m.testmaker.domain.InputParamsTM;
@@ -68,10 +68,10 @@ public class Menus implements Serializable {
 		TestCaseTM.addNameSufix(this.index_fact);
 		DataMantoAccess dMantoAcc = getDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
-		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
+		PageLoginMantoSteps.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		String codigoEspanya = "001";
 		String codigoAlmacenEspanya = "001";
-		PageSelTdaMantoStpV.selectTienda(codigoAlmacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
-		PageMenusMantoStpV.comprobarMenusManto(cabeceraName, cabeceraNameNext, driver);
+		PageSelTdaMantoSteps.selectTienda(codigoAlmacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
+		PageMenusMantoSteps.comprobarMenusManto(cabeceraName, cabeceraNameNext, driver);
 	}
 }

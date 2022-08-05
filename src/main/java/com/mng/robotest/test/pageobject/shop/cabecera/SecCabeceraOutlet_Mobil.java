@@ -20,8 +20,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class SecCabeceraOutlet_Mobil extends SecCabecera {
 	
 	public enum IconoCabOutletMobil implements ElementPage {
-		bolsa(IconoCabeceraShop_DesktopMobile.bolsa.getXPath(Channel.mobile, AppEcom.outlet)),
-		lupa(IconoCabeceraShop_DesktopMobile.lupa.getXPath(Channel.mobile, AppEcom.outlet));
+		BOLSA(IconoCabeceraShop_DesktopMobile.bolsa.getXPath(Channel.mobile, AppEcom.outlet)),
+		LUPA(IconoCabeceraShop_DesktopMobile.lupa.getXPath(Channel.mobile, AppEcom.outlet));
 		
 		private By by;
 		private IconoCabOutletMobil(String xpath) {
@@ -51,22 +51,22 @@ public class SecCabeceraOutlet_Mobil extends SecCabecera {
 	
 	@Override
 	public boolean isInStateIconoBolsa(State state, int maxSeconds) {
-		return (isElementInStateUntil(IconoCabOutletMobil.bolsa, state, maxSeconds));
+		return (isElementInStateUntil(IconoCabOutletMobil.BOLSA, state, maxSeconds));
 	}
 	
 	@Override
 	public void clickIconoBolsa() {
-		click(IconoCabOutletMobil.bolsa);
+		click(IconoCabOutletMobil.BOLSA);
 	}
 	
 	@Override
 	public void clickIconoBolsaWhenDisp(int maxSecondsToWait) {
-		clickIfClickableUntil(IconoCabOutletMobil.bolsa, maxSecondsToWait);
+		clickIfClickableUntil(IconoCabOutletMobil.BOLSA, maxSecondsToWait);
 	}
 	
 	@Override
 	public void hoverIconoBolsa() {
-		hoverIcono(IconoCabOutletMobil.bolsa);
+		hoverIcono(IconoCabOutletMobil.BOLSA);
 	}
 	
 	public boolean isElementInStateUntil(IconoCabOutletMobil icono, State state, int maxSeconds) {

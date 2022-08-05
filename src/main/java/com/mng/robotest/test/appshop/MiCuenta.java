@@ -16,15 +16,15 @@ import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.pageobject.shop.micuenta.PageSuscripciones.NewsLetter;
 import com.mng.robotest.test.pageobject.shop.miscompras.PageMisCompras.TypeTicket;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.PagePrehomeStpV;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusUserSteps;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusWrapperStpV;
-import com.mng.robotest.test.stpv.shop.micuenta.PageDevolucionesStpV;
-import com.mng.robotest.test.stpv.shop.micuenta.PageMiCuentaStpV;
-import com.mng.robotest.test.stpv.shop.micuenta.PageMisDatosStpV;
-import com.mng.robotest.test.stpv.shop.micuenta.PageSuscripcionesStpV;
-import com.mng.robotest.test.stpv.shop.miscompras.PageMisComprasStpV;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.PagePrehomeSteps;
+import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
+import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
+import com.mng.robotest.test.steps.shop.micuenta.PageDevolucionesSteps;
+import com.mng.robotest.test.steps.shop.micuenta.PageMiCuentaSteps;
+import com.mng.robotest.test.steps.shop.micuenta.PageMisDatosSteps;
+import com.mng.robotest.test.steps.shop.micuenta.PageSuscripcionesSteps;
+import com.mng.robotest.test.steps.shop.miscompras.PageMisComprasSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 
 public class MiCuenta implements Serializable {
@@ -79,30 +79,30 @@ public class MiCuenta implements Serializable {
 		dCtxSh.userConnected = userConDevolucionPeroNoEnPRO;
 		dCtxSh.passwordUser = passwordUserConDevolucion;
 			
-		new PagePrehomeStpV(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
+		new PagePrehomeSteps(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
 		dCtxSh.userRegistered = false;
-		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-		secMenusStpV.seleccionLinea(LineaType.she, null, dCtxSh);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+		secMenusSteps.seleccionLinea(LineaType.she, null, dCtxSh);
 		dCtxSh.userRegistered = true;
-		AccesoStpV.identificacionEnMango(dCtxSh, driver);
+		AccesoSteps.identificacionEnMango(dCtxSh, driver);
 		
-		PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
-		pageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected);
+		PageMiCuentaSteps pageMiCuentaSteps = PageMiCuentaSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		pageMiCuentaSteps.goToMisDatos(dCtxSh.userConnected);
 		
-		PageMisDatosStpV pageMisDatosStpV = new PageMisDatosStpV(driver);
-		String nombreActual = pageMisDatosStpV.modificaNombreYGuarda();
-		pageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected);
-		pageMisDatosStpV.validaContenidoNombre(nombreActual);
-		pageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh.pais);
+		PageMisDatosSteps pageMisDatosSteps = new PageMisDatosSteps(driver);
+		String nombreActual = pageMisDatosSteps.modificaNombreYGuarda();
+		pageMiCuentaSteps.goToMisDatos(dCtxSh.userConnected);
+		pageMisDatosSteps.validaContenidoNombre(nombreActual);
+		pageMiCuentaSteps.goToMisComprasFromMenu(dCtxSh.pais);
 			
-		pageMiCuentaStpV.goToSuscripciones();
+		pageMiCuentaSteps.goToSuscripciones();
 		ArrayList<NewsLetter> listNewsletters = new ArrayList<>();
 		listNewsletters.add(NewsLetter.she);
-		PageSuscripcionesStpV.create(driver).selectNewslettersAndGuarda(listNewsletters);
+		PageSuscripcionesSteps.create(driver).selectNewslettersAndGuarda(listNewsletters);
 		if (dCtxSh.appE!=AppEcom.outlet) {
-			pageMiCuentaStpV.goToDevoluciones();
-			PageDevolucionesStpV.solicitarRegogidaGratuitaADomicilio(driver);
-			pageMiCuentaStpV.goToReembolsos();
+			pageMiCuentaSteps.goToDevoluciones();
+			PageDevolucionesSteps.solicitarRegogidaGratuitaADomicilio(driver);
+			pageMiCuentaSteps.goToReembolsos();
 		}
 	}
 	
@@ -124,34 +124,34 @@ public class MiCuenta implements Serializable {
 		dCtxSh.userConnected = userWithOnlinePurchases;
 		dCtxSh.passwordUser = passUserWithOnlinePurchases;
 		dCtxSh.userRegistered = true;
-		new PagePrehomeStpV(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
-		AccesoStpV.identificacionEnMango(dCtxSh, driver);
+		new PagePrehomeSteps(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
+		AccesoSteps.identificacionEnMango(dCtxSh, driver);
 		
-		PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
-		pageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh.pais);
-		PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
-		pageMisComprasStpV.validateIsCompraOfType(TypeTicket.Online, 3);
-		pageMisComprasStpV.selectCompraOnline(1, dCtxSh.pais.getCodigo_pais());
-		pageMisComprasStpV.clickDetalleArticulo(1);
-		pageMisComprasStpV.gotoMisComprasFromDetalleCompra();
+		PageMiCuentaSteps pageMiCuentaSteps = PageMiCuentaSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		pageMiCuentaSteps.goToMisComprasFromMenu(dCtxSh.pais);
+		PageMisComprasSteps pageMisComprasSteps = PageMisComprasSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		pageMisComprasSteps.validateIsCompraOfType(TypeTicket.Online, 3);
+		pageMisComprasSteps.selectCompraOnline(1, dCtxSh.pais.getCodigo_pais());
+		pageMisComprasSteps.clickDetalleArticulo(1);
+		pageMisComprasSteps.gotoMisComprasFromDetalleCompra();
 		
 		//Test Compras en Tienda
 		dCtxSh.userConnected = userWithStorePurchases;
 		dCtxSh.passwordUser = passUserWithStorePurchases;
-		SecMenusUserSteps userMenusStpV = SecMenusUserSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
-		userMenusStpV.logoff();
+		SecMenusUserSteps userMenusSteps = SecMenusUserSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		userMenusSteps.logoff();
 		
 		//Existe un problema en por el cual si te vuelves a loginar manteniendo el navegador
 		//se muestran las compras del anterior usuario
 		driver = TestMaker.renewDriverTestCase();
-		pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
-		new PagePrehomeStpV(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
-		AccesoStpV.identificacionEnMango(dCtxSh, driver);
+		pageMiCuentaSteps = PageMiCuentaSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		new PagePrehomeSteps(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
+		AccesoSteps.identificacionEnMango(dCtxSh, driver);
 		
-		pageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh.pais);
-		pageMisComprasStpV = PageMisComprasStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
-		pageMisComprasStpV.validateIsCompraOfType(TypeTicket.Tienda, 3);
-		pageMisComprasStpV.selectCompraTienda(1);
-		pageMisComprasStpV.clickDetalleArticulo(1);
+		pageMiCuentaSteps.goToMisComprasFromMenu(dCtxSh.pais);
+		pageMisComprasSteps = PageMisComprasSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		pageMisComprasSteps.validateIsCompraOfType(TypeTicket.Tienda, 3);
+		pageMisComprasSteps.selectCompraTienda(1);
+		pageMisComprasSteps.clickDetalleArticulo(1);
 	}
 }

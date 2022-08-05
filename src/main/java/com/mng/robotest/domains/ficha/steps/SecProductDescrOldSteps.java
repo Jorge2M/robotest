@@ -24,17 +24,17 @@ public class SecProductDescrOldSteps {
 	
 	@Validation
 	public ChecksTM validateAreInStateInitial(AppEcom appE) throws Exception {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		for (TypePanel typePanel : TypePanel.values()) {
 			TypeStatePanel stateExpected = TypeStatePanel.MISSING;
 			if (typePanel.getListApps().contains(appE)) {
 				stateExpected = typePanel.getStateInitial();
 			}
-		  	validations.add(
+		  	checks.add(
 				"El panel <b>" + typePanel + "</b> está en estado <b>" + stateExpected + "</b>",
 				secProductDescrOld.getStatePanel(typePanel)==stateExpected, State.Defect);
 		}
-		return validations;
+		return checks;
 	}
 	
 	static final String tagInitStatePanel = "@TagInitState";

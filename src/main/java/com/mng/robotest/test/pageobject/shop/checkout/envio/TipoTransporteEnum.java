@@ -1,9 +1,9 @@
 package com.mng.robotest.test.pageobject.shop.checkout.envio;
 
-import static com.mng.robotest.test.stpv.shop.checkout.envio.DataSearchDeliveryPoint.DataSearchDp.*;
+import static com.mng.robotest.test.steps.shop.checkout.envio.DataSearchDeliveryPoint.DataSearchDp.*;
 
 import com.mng.robotest.test.pageobject.shop.checkout.envio.SecSelectDPoint.TypeDeliveryPoint;
-import com.mng.robotest.test.stpv.shop.checkout.envio.DataSearchDeliveryPoint.DataSearchDp;
+import com.mng.robotest.test.steps.shop.checkout.envio.DataSearchDeliveryPoint.DataSearchDp;
 
 public class TipoTransporteEnum {
 

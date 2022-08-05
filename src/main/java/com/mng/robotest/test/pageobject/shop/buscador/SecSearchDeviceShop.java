@@ -10,8 +10,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecSearchDeviceShop extends PageObjTM implements SecSearch {
 	
-	private static final String XPathInputBuscador = "//div[@class='search-component']//form[not(@class)]/input[@class[contains(.,'search-input')]]";
-	private static final String XPathCancelarLink = "//div[@class[contains(.,'search-cancel')]]";
+	private static final String XPATH_INPUT_BUSCADOR = "//div[@class='search-component']//form[not(@class)]/input[@class[contains(.,'search-input')]]";
+	private static final String XPATH_CANCELAR_LINK = "//div[@class[contains(.,'search-cancel')]]";
 	
 	private SecSearchDeviceShop(WebDriver driver) {
 		super(driver);
@@ -23,8 +23,8 @@ public class SecSearchDeviceShop extends PageObjTM implements SecSearch {
 	
 	@Override
 	public void search(String text) {
-		state(Visible, By.xpath(XPathInputBuscador)).wait(2).check();
-		WebElement input = driver.findElement(By.xpath(XPathInputBuscador));
+		state(Visible, By.xpath(XPATH_INPUT_BUSCADOR)).wait(2).check();
+		WebElement input = driver.findElement(By.xpath(XPATH_INPUT_BUSCADOR));
 		input.clear();
 		input.sendKeys(text);
 		input.sendKeys(Keys.RETURN);
@@ -32,6 +32,6 @@ public class SecSearchDeviceShop extends PageObjTM implements SecSearch {
 	
 	@Override
 	public void close() {
-		click(By.xpath(XPathCancelarLink)).exec();
+		click(By.xpath(XPATH_CANCELAR_LINK)).exec();
 	}
 }

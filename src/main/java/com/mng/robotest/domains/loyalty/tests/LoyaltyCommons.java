@@ -7,7 +7,7 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.loyalty.beans.User;
 import com.mng.robotest.domains.loyalty.getdata.ClientApiLoyaltyPointsDev;
 import com.mng.robotest.test.generic.UtilsMangoTest;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusUserSteps;
+import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
 
 public class LoyaltyCommons {
 	
@@ -21,8 +21,8 @@ public class LoyaltyCommons {
 	}
 	
 	public static int clickMangoLikesYou(Channel channel, AppEcom app, WebDriver driver) throws Exception {
-		SecMenusUserSteps secMenusUserStpV = new SecMenusUserSteps(channel, app, driver);
-		return secMenusUserStpV.clickMenuMangoLikesYou();
+		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps(channel, app, driver);
+		return secMenusUserSteps.clickMenuMangoLikesYou();
 	}
 	
 	public static int addLoyaltyPoints(User user, Channel channel, AppEcom app, WebDriver driver) 

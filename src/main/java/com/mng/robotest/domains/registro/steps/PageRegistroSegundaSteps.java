@@ -9,6 +9,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
+import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
@@ -17,8 +18,8 @@ import com.mng.robotest.domains.registro.pageobjects.PageRegistroSegunda;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.data.Constantes.ThreeState;
-import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
+import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 
 public class PageRegistroSegundaSteps {
@@ -31,7 +32,7 @@ public class PageRegistroSegundaSteps {
 	
 	@Validation
 	public ChecksTM validaIsPageRegistroOK(Pais paisRegistro, AppEcom app, Map<String,String> dataRegistro) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		String lineasComaSeparated = "";
 		int numLineas = 0;
 		if (paisRegistro.getShoponline().stateLinea(LineaType.she, app)==ThreeState.TRUE) {
@@ -63,19 +64,23 @@ public class PageRegistroSegundaSteps {
 		dataRegistro.put("numlineas", String.valueOf(numLineas));
 		dataRegistro.put("lineascomaseparated", lineasComaSeparated);
 		int maxSeconds = 5;
-		validations.add(
+		checks.add(
 			"Aparece la 2ª página de introducción de datos (la esperamos hasta " + maxSeconds + " segs)",
 			pageRegistroSegunda.isPageUntil(maxSeconds), State.Warn);
-		validations.add(
-			"Se pueden seleccionar las colecciones " + lineasComaSeparated,
-			pageRegistroSegunda.isPresentInputForLineas(lineasComaSeparated), State.Info, StoreType.None);
+		checks.add(
+			Check.make(
+			    "Se pueden seleccionar las colecciones " + lineasComaSeparated,
+			    pageRegistroSegunda.isPresentInputForLineas(lineasComaSeparated), State.Info)
+			.store(StoreType.None).build());
 		
 		int numColecciones = pageRegistroSegunda.getNumColecciones();
-		validations.add(
-			"Aparece un número de colecciones coincidente con el número de líneas (" + numLineas + ")",
-			numColecciones==numLineas, State.Info, StoreType.None);
+		checks.add(
+			Check.make(
+			    "Aparece un número de colecciones coincidente con el número de líneas (" + numLineas + ")",
+			    numColecciones==numLineas, State.Info)
+			.store(StoreType.None).build());
 		
-		return validations;
+		return checks;
 	}
 	
 	/**

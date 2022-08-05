@@ -16,13 +16,13 @@ import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.pageobject.shop.PageReembolsos;
 import com.mng.robotest.test.pageobject.shop.PageReembolsos.TypeReembolso;
-import com.mng.robotest.test.stpv.navigations.manto.PedidoNavigations;
-import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow;
-import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow.From;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.PageReembolsosStpV;
-import com.mng.robotest.test.stpv.shop.SecBolsaStpV;
-import com.mng.robotest.test.stpv.shop.checkout.PageResultPagoStpV;
+import com.mng.robotest.test.steps.navigations.manto.PedidoNavigations;
+import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow;
+import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.PageReembolsosSteps;
+import com.mng.robotest.test.steps.shop.SecBolsaSteps;
+import com.mng.robotest.test.steps.shop.checkout.PageResultPagoSteps;
 import com.mng.robotest.test.utils.ImporteScreen;
 import com.mng.robotest.test.utils.PaisGetter;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
@@ -81,15 +81,15 @@ public class Reembolsos {
 			dCtxSh.passwordUser = dCtxSh.pais.getPassuser();
 		}
 			
-		AccesoStpV.oneStep(dCtxSh, false, driver);
-		PageReembolsosStpV.gotoRefundsFromMenu(paisConSaldoCta, dCtxSh.appE, dCtxSh.channel, driver);
+		AccesoSteps.oneStep(dCtxSh, false, driver);
+		PageReembolsosSteps.gotoRefundsFromMenu(paisConSaldoCta, dCtxSh.appE, dCtxSh.channel, driver);
 		if (paisConSaldoCta) {
 			if (PageReembolsos.isCheckedRadio(TypeReembolso.StoreCredit, driver)) {
-				PageReembolsosStpV.testConfTransferencia(driver);
-				PageReembolsosStpV.selectRadioSalCtaAndRefresh(driver);
+				PageReembolsosSteps.testConfTransferencia(driver);
+				PageReembolsosSteps.selectRadioSalCtaAndRefresh(driver);
 			} else {
-				PageReembolsosStpV.selectRadioSalCtaAndRefresh(driver);
-				PageReembolsosStpV.testConfTransferencia(driver);
+				PageReembolsosSteps.selectRadioSalCtaAndRefresh(driver);
+				PageReembolsosSteps.testConfTransferencia(driver);
 			}
 		}	 
 	}
@@ -120,17 +120,17 @@ public class Reembolsos {
 			dCtxSh.passwordUser = dCtxSh.pais.getPassuser();
 		}
 		
-		AccesoStpV.oneStep(dCtxSh, true, driver);
-		PageReembolsosStpV.gotoRefundsFromMenu(dCtxSh.pais.existsPagoStoreCredit(), dCtxSh.appE, dCtxSh.channel, driver);
-		PageReembolsosStpV.selectRadioSalCtaAndRefresh(driver);
+		AccesoSteps.oneStep(dCtxSh, true, driver);
+		PageReembolsosSteps.gotoRefundsFromMenu(dCtxSh.pais.existsPagoStoreCredit(), dCtxSh.appE, dCtxSh.channel, driver);
+		PageReembolsosSteps.selectRadioSalCtaAndRefresh(driver);
 		if (PageReembolsos.isVisibleSaveButtonStoreCredit(driver)) {
-			PageReembolsosStpV.clickSaveButtonStoreCredit(driver);
+			PageReembolsosSteps.clickSaveButtonStoreCredit(driver);
 		}
 		float saldoCtaIni = PageReembolsos.getImporteStoreCredit(driver);
 		
 		DataBag dataBag = new DataBag(); 
-		SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
-		secBolsaStpV.altaArticlosConColores(1, dataBag);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh, driver);
+		secBolsaSteps.altaArticlosConColores(1, dataBag);
 		
 		//Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
 		FlagsTestCkout FTCkout = new FlagsTestCkout();
@@ -160,8 +160,8 @@ public class Reembolsos {
 		
 		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
 			//Volvemos a la portada (Seleccionamos el link "Seguir de shopping" o el icono de Mango)
-			PageResultPagoStpV pageResultPagoStpV = new PageResultPagoStpV(pagoStoreCredit.getTypePago(), dCtxSh.channel, driver);
-			pageResultPagoStpV.selectSeguirDeShopping(dCtxSh.appE);
+			PageResultPagoSteps pageResultPagoSteps = new PageResultPagoSteps(pagoStoreCredit.getTypePago(), dCtxSh.channel, driver);
+			pageResultPagoSteps.selectSeguirDeShopping(dCtxSh.appE);
 			
 			//Calculamos el saldo en cuenta que debería quedar (según si se ha realizado o no el pago);
 			float saldoCtaEsperado;
@@ -175,7 +175,7 @@ public class Reembolsos {
 			}
 			
 			//Step (+validaciones) selección menú "Mi cuenta" + "Reembolsos"
-			PageReembolsosStpV.gotoRefundsFromMenuAndValidaSalCta(dCtxSh.pais.existsPagoStoreCredit(), saldoCtaEsperado, dCtxSh.appE, dCtxSh.channel, driver);
+			PageReembolsosSteps.gotoRefundsFromMenuAndValidaSalCta(dCtxSh.pais.existsPagoStoreCredit(), saldoCtaEsperado, dCtxSh.appE, dCtxSh.channel, driver);
 			
 			//Validación en Manto de los Pedidos (si existen)
 			List<CheckPedido> listChecks = Arrays.asList(

@@ -19,12 +19,12 @@ import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
-import com.mng.robotest.test.stpv.shop.PagePrehomeStpV;
-import com.mng.robotest.test.stpv.shop.banner.SecBannersStpV;
-import com.mng.robotest.test.stpv.shop.galeria.PageGaleriaStpV;
-import com.mng.robotest.test.stpv.shop.home.PageHomeMarcasStpV;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusDesktopStpV;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusWrapperStpV;
+import com.mng.robotest.test.steps.shop.PagePrehomeSteps;
+import com.mng.robotest.test.steps.shop.banner.SecBannersSteps;
+import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
+import com.mng.robotest.test.steps.shop.home.PageHomeMarcasSteps;
+import com.mng.robotest.test.steps.shop.menus.SecMenusDesktopSteps;
+import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 import com.mng.robotest.test.suites.FlagsNaviationLineas;
 import com.mng.robotest.test.suites.PaisIdiomaSuite.VersionPaisSuite;
 import com.mng.robotest.test.utils.LevelPais;
@@ -91,8 +91,8 @@ public class PaisIdioma implements Serializable {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		TestCaseTM.addNameSufix(this.index_fact);
 		
-		new PagePrehomeStpV(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
-		(new PageHomeMarcasStpV(dCtxSh.channel, dCtxSh.appE, driver)).validateIsPageWithCorrectLineas(dCtxSh.pais);
+		new PagePrehomeSteps(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
+		(new PageHomeMarcasSteps(dCtxSh.channel, dCtxSh.appE, driver)).validateIsPageWithCorrectLineas(dCtxSh.pais);
 		for (Linea linea : linesToTest) {
 			if (UtilsMangoTest.validarLinea(dCtxSh.pais, linea, dCtxSh.channel, dCtxSh.appE)) {
 				validaLinea(linea, null, driver);
@@ -111,33 +111,33 @@ public class PaisIdioma implements Serializable {
 			sublineaType = sublinea.getTypeSublinea();
 		}
 		
-		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-		secMenusStpV.seleccionLinea(lineaType, sublineaType, dCtxSh);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+		secMenusSteps.seleccionLinea(lineaType, sublineaType, dCtxSh);
 		if (sublinea==null) {
 			testSpecificFeaturesForLinea(linea, driver);
 		}
 			
 		if (flagsNavigation.testOrderAndTranslationMenus()) {
-			secMenusStpV.checkOrderAndTranslationMenus(linea, dCtxSh.idioma.getCodigo());
+			secMenusSteps.checkOrderAndTranslationMenus(linea, dCtxSh.idioma.getCodigo());
 		}
 		
 		//Validamos si hemos de ejecutar los pasos correspondientes al recorrido de los menús
 		if (testMenus(linea, sublinea)) {
-			secMenusStpV.stepsMenusLinea(lineaType, sublineaType);
+			secMenusSteps.stepsMenusLinea(lineaType, sublineaType);
 			if (existsRightBannerMenu(linea, sublinea, dCtxSh.channel)) {
-				SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, dCtxSh.channel, driver);
-				secMenusDesktopStpV.clickRightBanner(lineaType, sublineaType);
+				SecMenusDesktopSteps secMenusDesktopSteps = SecMenusDesktopSteps.getNew(dCtxSh.pais, dCtxSh.appE, dCtxSh.channel, driver);
+				secMenusDesktopSteps.clickRightBanner(lineaType, sublineaType);
 			}
 		} else {
 			SecMenusWrap secMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver);
 			if (secMenus.canClickMenuArticles(dCtxSh.pais, linea, sublinea)) {
 				Menu1rstLevel menu = getMenu(lineaType, sublineaType);
-				secMenusStpV.selectMenu1rstLevelTypeCatalog(menu, dCtxSh);
+				secMenusSteps.selectMenu1rstLevelTypeCatalog(menu, dCtxSh);
 				if (flagsNavigation.testMenus()) {
-					PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+					PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 					boolean bannerIsLincable = PageGaleriaDesktop.secBannerHead.isLinkable(driver);
 					if (bannerIsLincable) {
-						pageGaleriaStpV.bannerHead.clickBannerSuperiorIfLinkableDesktop();
+						pageGaleriaSteps.bannerHead.clickBannerSuperiorIfLinkableDesktop();
 					}
 				}
 			}
@@ -173,8 +173,8 @@ public class PaisIdioma implements Serializable {
 	public void testSpecificFeaturesForLinea(Linea linea, WebDriver driver) throws Exception {
 		if (testBanners(linea)) {
 			int maxBannersToTest = getMaxBannersToTest(dCtxSh.pais, dCtxSh.appE);
-			SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToTest, driver);
-			secBannersStpV.testPageBanners(dCtxSh, maxBannersToTest);
+			SecBannersSteps secBannersSteps = new SecBannersSteps(maxBannersToTest, driver);
+			secBannersSteps.testPageBanners(dCtxSh, maxBannersToTest);
 		}
 	}
 	

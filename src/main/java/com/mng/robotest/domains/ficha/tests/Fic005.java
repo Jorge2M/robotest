@@ -15,8 +15,8 @@ import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.Menu;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.buscador.SecBuscadorStpV;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.buscador.SecBuscadorSteps;
 
 import javassist.NotFoundException;
 
@@ -25,7 +25,7 @@ public class Fic005 extends TestBase {
 
 	final GarmentCatalog articlePersonalizable;
 	
-	final SecBuscadorStpV secBuscadorSteps = new SecBuscadorStpV(app, channel, driver);
+	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps(app, channel, driver);
 	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(app, channel, dataTest.pais);
 	final SecModalPersonalizacionSteps modalPersonalizacionSteps = SecModalPersonalizacionSteps.getNewOne(dataTest, driver);
 	
@@ -37,7 +37,7 @@ public class Fic005 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		AccesoStpV.oneStep(dataTest, false, driver);
+		AccesoSteps.oneStep(dataTest, false, driver);
  		searchAndCheckArticlePersonalizable();
 		
 		pageFichaSteps.selectFirstTallaAvailable();

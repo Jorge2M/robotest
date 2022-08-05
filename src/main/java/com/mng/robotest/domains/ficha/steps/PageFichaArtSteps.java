@@ -33,10 +33,10 @@ import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
-import com.mng.robotest.test.stpv.shop.SecBolsaStpV;
-import com.mng.robotest.test.stpv.shop.galeria.LocationArticle;
-import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.stpv.shop.genericchecks.GenericChecks.GenericCheck;
+import com.mng.robotest.test.steps.shop.SecBolsaSteps;
+import com.mng.robotest.test.steps.shop.galeria.LocationArticle;
+import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
+import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 import java.util.Arrays;
 import java.util.List;
@@ -96,14 +96,14 @@ public class PageFichaArtSteps {
 	
 	@Validation
 	public ChecksTM validateIsFichaArtAlgunoColorNoDisponible(String refArticulo) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Aparece la página correspondiente a la ficha del artículo " + refArticulo,
 			pageFicha.isFichaArticuloUntil(refArticulo, 0), State.Defect); 
-	 	validations.add(
+	 	checks.add(
 			"Aparece algún color no disponible",
 			state(Present, ColorType.UNAVAILABLE.getBy(), driver).check(), State.Defect); 
-	 	return validations;
+	 	return checks;
 	}
 	
 	@Validation (
@@ -115,10 +115,10 @@ public class PageFichaArtSteps {
 	
 	@Validation
 	public ChecksTM validaDetallesProducto(DataFichaArt datosArticulo) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		if (datosArticulo.availableReferencia()) {
 			int maxSeconds = 3;
-		 	validations.add(
+		 	checks.add(
 				"Aparece la página con los datos de la ficha del producto " + datosArticulo.getReferencia() +
 				"(la esperamos hasta " + maxSeconds + " segundos)",
 				pageFicha.isFichaArticuloUntil(datosArticulo.getReferencia(), maxSeconds), State.Defect);
@@ -126,12 +126,12 @@ public class PageFichaArtSteps {
 			
 		if (datosArticulo.availableNombre()) {
 			String nombreArtFicha = pageFicha.getSecDataProduct().getTituloArt().trim();
-		 	validations.add(
+		 	checks.add(
 				"Como nombre del artículo aparece el seleccionado: " + datosArticulo.getNombre(),
 				datosArticulo.getNombre().toLowerCase().compareTo(nombreArtFicha.toLowerCase())==0, State.Warn); 
 		}
 		
-		return validations;
+		return checks;
 	}
 
 	public void selectColorAndSaveData(ArticuloScreen articulo) {
@@ -207,15 +207,15 @@ public class PageFichaArtSteps {
 	
 	@Validation
 	public ChecksTM checkAppearsCapaAvisame() {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"No aparece el botón \"COMPRAR\"",
 			!secBolsa.isVisibleBotonComprar(), State.Defect);
 	 	boolean isVisibleAvisame = pageFicha.getSecDataProduct().isVisibleCapaAvisame();
-	 	validations.add(
+	 	checks.add(
 			"Aparece la capa de introducción de avísame",
 			isVisibleAvisame, State.Defect);
-	 	return validations;
+	 	return checks;
 	}
 	
 	@Step (
@@ -244,18 +244,18 @@ public class PageFichaArtSteps {
 	
 	@Validation
 	public ChecksTM checkAvisoTallaUnica(boolean isTallaUnica, TypeFicha typeFichaAct) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		boolean isVisibleAviso = pageFicha.getSecDataProduct().isVisibleAvisoSeleccionTalla();
 		if (isTallaUnica || typeFichaAct==TypeFicha.NEW) {
-		 	validations.add(
+		 	checks.add(
 		 		"NO aparece un aviso indicando que hay que seleccionar la talla",
 		 		!isVisibleAviso, State.Defect);
 		} else {
-		 	validations.add(
+		 	checks.add(
 		 		"SÍ aparece un aviso indicando que hay que seleccionar la talla",
 		 		isVisibleAviso, State.Defect);
 		}
-		return validations;
+		return checks;
 	}
 	
 	@Validation (
@@ -274,8 +274,8 @@ public class PageFichaArtSteps {
 		DataBag dataBag = new DataBag();
 		dataBag.addArticulo(articulo);
 		
-		SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
-		secBolsaStpV.validaAltaArtBolsa(dataBag);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh, driver);
+		secBolsaSteps.validaAltaArtBolsa(dataBag);
 	}	
 
 	public void selectAnadirAFavoritos() throws Exception {
@@ -333,16 +333,16 @@ public class PageFichaArtSteps {
 	
 	@Validation
 	private ChecksTM checkCapaAltaFavoritos() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds1 = 3;
-	 	validations.add(
+	 	checks.add(
 			"Aparece una capa superior de \"Añadiendo artículo a favoritos...\" (lo esperamos hasta " + maxSeconds1 + " segundos)",
 			pageFicha.isVisibleDivAnadiendoAFavoritosUntil(maxSeconds1), State.Info);
 		int maxSeconds2 = 3;
-	 	validations.add(
+	 	checks.add(
 			"La capa superior acaba desapareciendo (lo esperamos hasta " + maxSeconds2 + " segundos)",
 			pageFicha.isInvisibleDivAnadiendoAFavoritosUntil(maxSeconds2), State.Warn);
-		return validations;
+		return checks;
 	}
 
 	@Step (
@@ -399,8 +399,8 @@ public class PageFichaArtSteps {
 		if (isVisibleLink) {
 			switch (app) {
 			case outlet:
-				PageComoMedirmeSteps pageComoMedirmeStpV = PageComoMedirmeSteps.getNew(driver);
-				pageComoMedirmeStpV.isPageInNewTab();
+				PageComoMedirmeSteps pageComoMedirmeSteps = PageComoMedirmeSteps.getNew(driver);
+				pageComoMedirmeSteps.isPageInNewTab();
 				break;
 			case shop:
 			default:
@@ -433,25 +433,25 @@ public class PageFichaArtSteps {
 	
 	@Validation
 	public ChecksTM validaPrevNext(LocationArticle locationArt, DataCtxShop dCtxSh) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 5;
 		boolean isVisiblePrevLink = pageFicha.getSecDataProduct().isVisiblePrevNextUntil(ProductNav.PREV, maxSeconds);
 		if (locationArt.isFirstInGalery()) {
-		 	validations.add(
+		 	checks.add(
 		 		"No es visible el link <b>Prev</b> (lo esperamos hasta " + maxSeconds + " segundos)",
 		 		!isVisiblePrevLink, State.Warn);
 		} else {
-		 	validations.add(
+		 	checks.add(
 		 		"Sí es visible el link <b>Prev</b> (lo esperamos hasta " + maxSeconds + " segundos)",
 		 		isVisiblePrevLink, State.Warn);
 		}
 		if (dCtxSh.appE==AppEcom.outlet || dCtxSh.channel==Channel.desktop) {
-		 	validations.add(
+		 	checks.add(
 		 		"Es visible el link <b>Next</b>",
 		 		pageFicha.getSecDataProduct().isVisiblePrevNextUntil(ProductNav.NEXT, 0), State.Warn);
 		}
 		
-		return validations;
+		return checks;
 	}
 	
 	@Step (
@@ -508,14 +508,14 @@ public class PageFichaArtSteps {
 	
 	@Validation
 	public ChecksTM checkImgCentralAfterZoom(String pngImgCentralOriginal) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 	 		"Se aplica un Zoom sobre la imagen central",
 	 		((PageFichaArtOld)pageFicha).isVisibleFichaConZoom(), State.Defect);
-	 	validations.add(
+	 	checks.add(
 	 		"La imagen central con Zoom sigue conteniendo la imagen original: " + pngImgCentralOriginal,
 	 		((PageFichaArtOld)pageFicha).srcImagenCentralConZoomContains(pngImgCentralOriginal), State.Defect);
-	 	return validations;
+	 	return checks;
 	}
 	
 	@Step (
@@ -534,15 +534,15 @@ public class PageFichaArtSteps {
 	
 	@Validation
 	public ChecksTM validaBreadCrumbFichaOld(String urlGaleryOrigin) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 	 		"Existen el bloque correspondiente a las <b>BreadCrumb</b>",
 	 		SecBreadcrumbFichaOld.isVisibleBreadCrumb(driver), State.Defect);		
 	 	String urlGaleryBC = SecBreadcrumbFichaOld.getUrlItemBreadCrumb(ItemBCrumb.GALERY, driver);
-	 	validations.add(
+	 	checks.add(
 	 		"El link correspondiente a la Galería del artículo linca a la URL " + urlGaleryOrigin,
 	 		urlGaleryOrigin.contains(urlGaleryBC), State.Warn); 
-	 	return validations;
+	 	return checks;
 	}
 
 	public SecProductDescrOldSteps getSecProductDescOldSteps() {

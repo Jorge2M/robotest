@@ -26,16 +26,16 @@ public class PageRegistroDirecSteps {
 	
 	@Validation
 	public ChecksTM isPageFromPais(Pais pais) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 3;
-		validations.add(
+		checks.add(
 			"Aparece la página de introducción de datos de la dirección (la esperamos un máximo de " + maxSeconds + " segundos)",
 			pageRegistroAddressData.isPageUntil(maxSeconds), State.Warn);
-		validations.add(
+		checks.add(
 			"Si existe el desplebagle de países, en él aparece el país con código " + pais.getCodigo_pais() + " (" + pais.getNombre_pais() + ")",
 			!pageRegistroAddressData.existsDesplegablePaises() || 
 			pageRegistroAddressData.isOptionPaisSelected(pais.getCodigo_pais()), State.Warn);
-		return validations;
+		return checks;
 	}
 	
 	@Step (

@@ -120,7 +120,7 @@ public class MenuUserItem {
 	
 	private ElementPage getMenuLupa() {
 		if (app==AppEcom.outlet && channel==Channel.mobile) {
-			return IconoCabOutletMobil.lupa;
+			return IconoCabOutletMobil.LUPA;
 		}
 		return IconoCabeceraShop_DesktopMobile.lupa;
 	}

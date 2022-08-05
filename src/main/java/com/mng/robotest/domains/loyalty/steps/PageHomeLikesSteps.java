@@ -3,7 +3,7 @@ package com.mng.robotest.domains.loyalty.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.mng.robotest.domains.loyalty.pageobjects.PageHomeLikes;
 import com.mng.robotest.domains.loyalty.pageobjects.PageHomeLikes.ButtonUseLikes;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusUserSteps.ChecksResultWithNumberPoints;
+import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps.ChecksResultWithNumberPoints;
 
 import org.openqa.selenium.WebDriver;
 
@@ -87,9 +87,9 @@ public class PageHomeLikesSteps {
 		expected="Aparece la página para regalar mis Likes")
 	public PageRegalarMisLikesSteps clickButtonRegalarMisLikes() {
 		pageHomeLikes.clickButton(ButtonUseLikes.REGALAR_MIS_LIKES);
-		PageRegalarMisLikesSteps pageRegalarStpV = new PageRegalarMisLikesSteps(driver);
-		pageRegalarStpV.checkIsPage();
-		return pageRegalarStpV;
+		PageRegalarMisLikesSteps pageRegalarSteps = new PageRegalarMisLikesSteps(driver);
+		pageRegalarSteps.checkIsPage();
+		return pageRegalarSteps;
 	}
 	
 	@Validation (

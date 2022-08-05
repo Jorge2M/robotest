@@ -17,14 +17,14 @@ public class PageHomePurchaseWithDiscountSteps {
 	
 	@Validation
 	public ChecksTM checkHomePurchaseWithDiscountPageOk() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		
-		validations.add(
+		checks.add(
 			"Aparece la página de <b>Descuento Mango likes you</b>",
 			pageHomePurchaseWithDiscount.checkIsPage(), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece el boton que permite <b>comprar ahora</b>",
 			pageHomePurchaseWithDiscount.areVisibleButtonPurchaseNow(), State.Defect);
-		return validations;
+		return checks;
 	}
 }

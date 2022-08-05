@@ -16,12 +16,12 @@ import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
-import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow;
-import com.mng.robotest.test.stpv.navigations.shop.GaleriaNavigationsStpV;
-import com.mng.robotest.test.stpv.navigations.shop.CheckoutFlow.From;
-import com.mng.robotest.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test.stpv.shop.SecBolsaStpV;
-import com.mng.robotest.test.stpv.shop.menus.SecMenusWrapperStpV;
+import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow;
+import com.mng.robotest.test.steps.navigations.shop.GaleriaNavigationsSteps;
+import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.SecBolsaSteps;
+import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
@@ -42,11 +42,11 @@ public class Bolsa {
 		DataCtxShop dCtxSh = getCtxShForTest();
 		dCtxSh.userRegistered = false;
 		
-		AccesoStpV.manySteps(dCtxSh, driver);
-		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
+		AccesoSteps.manySteps(dCtxSh, driver);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
 		Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
-		secMenusStpV.accesoMenuXRef(menuVestidos, dCtxSh);
-		DataBag dataBag = GaleriaNavigationsStpV.selectArticleAvailableFromGaleria(dCtxSh, driver);
+		secMenusSteps.accesoMenuXRef(menuVestidos, dCtxSh);
+		DataBag dataBag = GaleriaNavigationsSteps.selectArticleAvailableFromGaleria(dCtxSh, driver);
 
 		FlagsTestCkout FTCkout = new FlagsTestCkout();
 		FTCkout.validaPasarelas = false;  
@@ -85,13 +85,13 @@ public class Bolsa {
 		dCtxSh.userRegistered = true;
 		DataBag dataBag = new DataBag();
 		
-		AccesoStpV.manySteps(dCtxSh, driver);
-		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
+		AccesoSteps.manySteps(dCtxSh, driver);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
 		Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
-		secMenusStpV.accesoMenuXRef(menuVestidos, dCtxSh);
+		secMenusSteps.accesoMenuXRef(menuVestidos, dCtxSh);
 		
-		SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
-		secBolsaStpV.altaArticlosConColores(1, dataBag);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh, driver);
+		secBolsaSteps.altaArticlosConColores(1, dataBag);
 		
 		//Hasta página de Checkout
 		FlagsTestCkout FTCkout = new FlagsTestCkout();
@@ -123,16 +123,16 @@ public class Bolsa {
 
 	public static void BOR005_6_Gest_Prod_Bolsa(DataCtxShop dCtxSh, WebDriver driver) 
 	throws Exception {
-		SecBolsaStpV secBolsaStpV = new SecBolsaStpV(dCtxSh, driver);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh, driver);
 		DataBag dataBag = new DataBag();
 		
-		AccesoStpV.oneStep(dCtxSh, dCtxSh.userRegistered, driver);
-		secBolsaStpV.altaArticlosConColores(2, dataBag);
-		secBolsaStpV.forceStateBolsaTo(StateBolsa.CLOSED);
-		secBolsaStpV.forceStateBolsaTo(StateBolsa.OPEN); 
-		secBolsaStpV.clear1erArticuloBolsa(dataBag);								
-		secBolsaStpV.altaArticlosConColores(1, dataBag);
-		secBolsaStpV.click1erArticuloBolsa(dataBag);
+		AccesoSteps.oneStep(dCtxSh, dCtxSh.userRegistered, driver);
+		secBolsaSteps.altaArticlosConColores(2, dataBag);
+		secBolsaSteps.forceStateBolsaTo(StateBolsa.CLOSED);
+		secBolsaSteps.forceStateBolsaTo(StateBolsa.OPEN); 
+		secBolsaSteps.clear1erArticuloBolsa(dataBag);								
+		secBolsaSteps.altaArticlosConColores(1, dataBag);
+		secBolsaSteps.click1erArticuloBolsa(dataBag);
 	}
 	
 	private DataCtxShop getCtxShForTest() throws Exception {

@@ -7,117 +7,118 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-/**
- * Se trata de un objeto que intenta englobar todas las páginas de pasarelas diversas que permiten la introducción de datos de tarjetas
- * @author jorge.munoz
- *
- */
-public class PageAssist1rst {
+public class PageAssist1rst extends PageObjTM {
 
-	static String XPathLogoAssistDesktop = "//div[@id[contains(.,'AssistLogo')]]";
-	static String XPathLogoAssistMobil = "//div[@class='Logo']/img";
-	static String XPathInputNumTrjDesktop = "//input[@id='CardNumber']";
-	static String XPathInputMMCaducDesktop = "//input[@id='ExpireMonth']";
-	static String XPathInputAACaducDesktop = "//input[@id='ExpireYear']";
-	static String XPathInputNumTrjMovil = "//input[@id='CardNumber']";
-	static String XPathSelectMMCaducMovil = "//select[@id='ExpireMonth']";
-	static String XPathSelectAACaducMovil = "//select[@id='ExpireYear']";
-	static String XPathInputTitular = "//input[@id='Cardholder']";
-	static String XPathInputCvc = "//input[@id[contains(.,'CVC2')] or @id[contains(.,'psw_CVC2')]]";
-	static String XPathBotonPagoDesktopAvailable = "//input[@class[contains(.,'button_pay')] and not(@disabled)]";
-	static String XPathBotonPagoMovilAvailable = "//input[@type='Submit' and not(@disabled)]";
-	static String XPathBotonPagoDesktop = "//input[@class[contains(.,'button_pay')]]";
-	static String XPathBotonPagoMobil = "//input[@type='Submit' and not(@disabled)]";
+	private static final String XPATH_LOGO_ASSIST_DESKTOP = "//div[@id[contains(.,'AssistLogo')]]";
+	private static final String XPATH_LOGO_ASSIST_MOBIL = "//div[@class='Logo']/img";
+	private static final String XPATH_INPUT_NUM_TRJ_DESKTOP = "//input[@id='CardNumber']";
+	private static final String XPATH_INPUT_MM_CADUC_DESKTOP = "//input[@id='ExpireMonth']";
+	private static final String XPATH_INPUT_AA_CADUC_DESKTOP = "//input[@id='ExpireYear']";
+	private static final String XPATH_INPUT_NUM_TRJ_MOVIL = "//input[@id='CardNumber']";
+	private static final String XPATH_SELECT_MM_CADUC_MOVIL = "//select[@id='ExpireMonth']";
+	private static final String XPATH_SELECT_AA_CADUC_MOVIL = "//select[@id='ExpireYear']";
+	private static final String XPATH_INPUT_TITULAR = "//input[@id='Cardholder']";
+	private static final String XPATH_INPUT_CVC = "//input[@id[contains(.,'CVC2')] or @id[contains(.,'psw_CVC2')]]";
+	private static final String XPATH_BOTON_PAGO_DESKTOP_AVAILABLE = "//input[@class[contains(.,'button_pay')] and not(@disabled)]";
+	private static final String XPATH_BOTON_PAGO_MOVIL_AVAILABLE = "//input[@type='Submit' and not(@disabled)]";
+	private static final String XPATH_BOTON_PAGO_DESKTOP = "//input[@class[contains(.,'button_pay')]]";
+	private static final String XPATH_BOTON_PAGO_MOBIL = "//input[@type='Submit' and not(@disabled)]";
+	
+	private final Channel channel;
 
-	public static String getXPath_LogoAssist(Channel channel) {
+	public PageAssist1rst(Channel channel, WebDriver driver) {
+		super(driver);
+		this.channel = channel;
+	}
+	
+	private String getXPathLogoAssist() {
 		if (channel.isDevice()) {
-			return XPathLogoAssistMobil; 
+			return XPATH_LOGO_ASSIST_MOBIL; 
 		}
-		return XPathLogoAssistDesktop;
+		return XPATH_LOGO_ASSIST_DESKTOP;
 	}
 	
-	public static String getXPath_buttonPago(Channel channel) {
+	private String getXPathButtonPago() {
 		if (channel.isDevice()) {
-			return XPathBotonPagoMovilAvailable;
+			return XPATH_BOTON_PAGO_MOVIL_AVAILABLE;
 		}
-		return XPathBotonPagoDesktopAvailable;
+		return XPATH_BOTON_PAGO_DESKTOP_AVAILABLE;
 	}
 	
-	public static boolean isPresentLogoAssist(Channel channel, WebDriver driver) {
-		String xpathLogo = getXPath_LogoAssist(channel);
-		return (state(Present, By.xpath(xpathLogo), driver).check());
+	public boolean isPresentLogoAssist() {
+		String xpathLogo = getXPathLogoAssist();
+		return (state(Present, By.xpath(xpathLogo)).check());
 	}
 	
-	public static boolean isPresentInputsForTrjData(Channel channel, WebDriver driver) {
+	public boolean isPresentInputsForTrjData() {
 		boolean inputsOk = true;
 		if (channel.isDevice()) {
-			if (!state(Present, By.xpath(XPathInputNumTrjMovil), driver).check() ||
-				!state(Present, By.xpath(XPathSelectMMCaducMovil), driver).check() ||
-				!state(Present, By.xpath(XPathSelectAACaducMovil), driver).check()) {
+			if (!state(Present, By.xpath(XPATH_INPUT_NUM_TRJ_MOVIL)).check() ||
+				!state(Present, By.xpath(XPATH_SELECT_MM_CADUC_MOVIL)).check() ||
+				!state(Present, By.xpath(XPATH_SELECT_AA_CADUC_MOVIL)).check()) {
 				inputsOk = false;
 			}
 		} else {
-			if (!state(Present, By.xpath(XPathInputNumTrjDesktop), driver).check() ||
-				!state(Present, By.xpath(XPathInputMMCaducDesktop), driver).check() ||
-				!state(Present, By.xpath(XPathInputAACaducDesktop), driver).check()) {
+			if (!state(Present, By.xpath(XPATH_INPUT_NUM_TRJ_DESKTOP)).check() ||
+				!state(Present, By.xpath(XPATH_INPUT_MM_CADUC_DESKTOP)).check() ||
+				!state(Present, By.xpath(XPATH_INPUT_AA_CADUC_DESKTOP)).check()) {
 				inputsOk = false;
 			}
 		}
 		
-		if (!state(Present, By.xpath(XPathInputTitular), driver).check() ||
-			!state(Present, By.xpath(XPathInputCvc), driver).check()) {
+		if (!state(Present, By.xpath(XPATH_INPUT_TITULAR)).check() ||
+			!state(Present, By.xpath(XPATH_INPUT_CVC)).check()) {
 			inputsOk = false;
 		}
 		
 		return inputsOk;
 	}
 	
-	public static void inputDataPagoAndWaitSubmitAvailable(Pago pago, Channel channel, WebDriver driver) throws Exception {
+	public void inputDataPagoAndWaitSubmitAvailable(Pago pago) throws Exception {
 		//Input data
 		if (channel.isDevice()) {
-			driver.findElement(By.xpath(XPathInputNumTrjMovil)).sendKeys(pago.getNumtarj());
-			new Select(driver.findElement(By.xpath(XPathSelectMMCaducMovil))).selectByValue(pago.getMescad());
-			new Select(driver.findElement(By.xpath(XPathSelectAACaducMovil))).selectByValue("20" + pago.getAnycad()); //Atención con el efecto 2100!!!
+			driver.findElement(By.xpath(XPATH_INPUT_NUM_TRJ_MOVIL)).sendKeys(pago.getNumtarj());
+			new Select(driver.findElement(By.xpath(XPATH_SELECT_MM_CADUC_MOVIL))).selectByValue(pago.getMescad());
+			new Select(driver.findElement(By.xpath(XPATH_SELECT_AA_CADUC_MOVIL))).selectByValue("20" + pago.getAnycad()); //Atención con el efecto 2100!!!
 		} else {
-			driver.findElement(By.xpath(XPathInputNumTrjDesktop)).sendKeys(pago.getNumtarj());
+			driver.findElement(By.xpath(XPATH_INPUT_NUM_TRJ_DESKTOP)).sendKeys(pago.getNumtarj());
 			waitForPageLoaded(driver);
-			driver.findElement(By.xpath(XPathInputMMCaducDesktop)).sendKeys(pago.getMescad());
-			driver.findElement(By.xpath(XPathInputAACaducDesktop)).sendKeys(pago.getAnycad());
+			driver.findElement(By.xpath(XPATH_INPUT_MM_CADUC_DESKTOP)).sendKeys(pago.getMescad());
+			driver.findElement(By.xpath(XPATH_INPUT_AA_CADUC_DESKTOP)).sendKeys(pago.getAnycad());
 			waitForPageLoaded(driver);
 		}
 		
-		driver.findElement(By.xpath(XPathInputTitular)).sendKeys(pago.getTitular());
-		UtilsMangoTest.findDisplayedElement(driver, By.xpath(XPathInputCvc)).sendKeys(pago.getCvc());
+		driver.findElement(By.xpath(XPATH_INPUT_TITULAR)).sendKeys(pago.getTitular());
+		UtilsMangoTest.findDisplayedElement(driver, By.xpath(XPATH_INPUT_CVC)).sendKeys(pago.getCvc());
 		waitForPageLoaded(driver);
 		
 		//Wait for button available
-		waitForBotonAvailable(channel, 1/*maxSecondsToWait*/, driver);
+		waitForBotonAvailable(1);
 	}
 	
-	public static void clickBotonPago(Channel channel, WebDriver driver) {
+	public void clickBotonPago() {
 		if (channel.isDevice()) {
-			click(By.xpath(XPathBotonPagoMobil), driver).exec();
+			click(By.xpath(XPATH_BOTON_PAGO_MOBIL)).exec();
 		} else {
-			click(By.xpath(XPathBotonPagoDesktop), driver).exec();
+			click(By.xpath(XPATH_BOTON_PAGO_DESKTOP)).exec();
 		}
 	}
 
-	public static void waitForBotonAvailable(Channel channel, int maxSecondsToWait, WebDriver driver) {
-		String xpathBoton = getXPath_buttonPago(channel);
+	public void waitForBotonAvailable(int maxSecondsToWait) {
+		String xpathBoton = getXPathButtonPago();
 		new WebDriverWait(driver, maxSecondsToWait).until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathBoton)));
 	}
 	
-	public static boolean invisibilityBotonPagoUntil(int maxSeconds, Channel channel, WebDriver driver) {
-		String xpathBoton = getXPath_buttonPago(channel);
-		return (state(Invisible, By.xpath(xpathBoton), driver)
-				.wait(maxSeconds).check());
+	public boolean invisibilityBotonPagoUntil(int maxSeconds) {
+		String xpathBoton = getXPathButtonPago();
+		return (state(Invisible, By.xpath(xpathBoton)).wait(maxSeconds).check());
 	 }
 }
 
