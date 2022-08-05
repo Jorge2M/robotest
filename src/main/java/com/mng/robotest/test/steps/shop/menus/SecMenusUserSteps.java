@@ -31,33 +31,18 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 import com.mng.robotest.test.steps.shop.micuenta.PageMiCuentaSteps;
 import com.mng.robotest.test.steps.shop.modales.ModalCambioPaisSteps;
 
-/**
- * Clase que contiene los pasos/validaciones asociados al menú desplegable del frame superior que contiene las opciones del usuario:
- *	  iniciar sesión
- *	  regístrate
- *	  pedidos
- *	  ayuda
- *	  ...
- * @author jorge.munoz
- *
- */
 @SuppressWarnings({"static-access"})
 public class SecMenusUserSteps {
 	
-	private final WebDriver driver;
+	private final WebDriver driver = TestMaker.getDriverTestCase();
 	private final Channel channel;
 	private final AppEcom app;
 	private final MenusUserWrapper userMenus;
 	
-	public SecMenusUserSteps(Channel channel, AppEcom app, WebDriver driver) {
-		this.driver = driver;
+	public SecMenusUserSteps(Channel channel, AppEcom app) {
 		this.channel = channel;
 		this.app = app;
-		this.userMenus = SecMenusWrap.getNew(channel, app, driver).getMenusUser();
-	}
-	
-	public static SecMenusUserSteps getNew(Channel channel, AppEcom app, WebDriver driver) {
-		return (new SecMenusUserSteps(channel, app, driver));
+		this.userMenus = new SecMenusWrap(channel, app).getMenusUser();
 	}
 	
 	@Step (
@@ -65,7 +50,7 @@ public class SecMenusUserSteps {
 		expected="Aparece la página de gestión de favoritos con los artículos correctos")
 	public void selectFavoritos(DataFavoritos dataFavoritos) throws Exception {
 		userMenus.clickMenuAndWait(UserMenu.favoritos);
-		PageFavoritosSteps pageFavoritosSteps = PageFavoritosSteps.getNew(driver);
+		PageFavoritosSteps pageFavoritosSteps = new PageFavoritosSteps();
 		pageFavoritosSteps.validaIsPageOK(dataFavoritos);
 	}
 
@@ -107,7 +92,7 @@ public class SecMenusUserSteps {
 		description="Identificarse con los datos del registro (#{userConnect})", 
 		expected="La nueva identificación es correcta")
 	public void identification(String userConnect, String userPassword) throws Exception {
-		PageIdentificacion.iniciarSesion(userConnect, userPassword, channel, app, driver);
+		new PageIdentificacion().iniciarSesion(userConnect, userPassword, channel, app);
 		checkIsVisibleLinkCerrarSesion();
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.CookiesAllowed,

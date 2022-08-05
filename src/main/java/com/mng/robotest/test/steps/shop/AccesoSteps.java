@@ -69,11 +69,11 @@ public class AccesoSteps {
 
 		AccesoNavigations.accesoHomeAppWeb(dCtxSh, driver);
 		if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf) {
-			PageIdentificacion.iniciarSesion(dCtxSh, driver);
+			new PageIdentificacion().iniciarSesion(dCtxSh);
 		}
 
 		if (clearArticulos) {
-			SecBolsa secBolsa = SecBolsa.make(dCtxSh, driver);
+			SecBolsa secBolsa = SecBolsa.make(dCtxSh);
 			secBolsa.clearArticulos();
 		}
 
@@ -97,7 +97,7 @@ public class AccesoSteps {
 	private static ChecksTM checkLinksAfterLogin(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 5;
-		MenusUserWrapper userMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver).getMenusUser();
+		MenusUserWrapper userMenus = new SecMenusWrap(dCtxSh.channel, dCtxSh.appE).getMenusUser();
 		checks.add(
 			"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + maxSeconds + " segundos)",
 			userMenus.isMenuInStateUntil(UserMenu.miCuenta, Present, maxSeconds), State.Defect);
@@ -135,7 +135,7 @@ public class AccesoSteps {
 		}
 		
 		if (dCtxSh.channel==Channel.desktop) {
-			SecMenusDesktop secMenus = SecMenusDesktop.getNew(dCtxSh.appE, dCtxSh.channel, driver);
+			SecMenusDesktop secMenus = new SecMenusDesktop(dCtxSh.appE, dCtxSh.channel);
 			checks.add(
 				"Aparece una página con menús de MANGO",
 				secMenus.secMenuSuperior.secLineas.isPresentLineasMenuWrapp(), State.Warn);
@@ -155,14 +155,14 @@ public class AccesoSteps {
 			new PagePrehomeSteps(dCtxSh, driver).seleccionPaisIdiomaAndEnter(false);
 			if (dCtxSh.userRegistered) {
 				identificacionEnMango(dCtxSh, driver);
-				SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh, driver);
+				SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh);
 				secBolsaSteps.clear();
 			}
 		}
 	}
 
 	public static void identificacionEnMango(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-		MenusUserWrapper userMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver).getMenusUser();
+		MenusUserWrapper userMenus = new SecMenusWrap(dCtxSh.channel, dCtxSh.appE).getMenusUser();
 		if (!userMenus.isMenuInState(UserMenu.cerrarSesion, Present)) {
 			iniciarSesion(dCtxSh, driver);
 		}
@@ -174,7 +174,7 @@ public class AccesoSteps {
 		saveHtmlPage=SaveWhen.Always,
 		saveNettraffic=SaveWhen.Always)
 	private static void iniciarSesion(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-		PageIdentificacion.iniciarSesion(dCtxSh, driver);
+		new PageIdentificacion().iniciarSesion(dCtxSh);
 		validaIdentificacionEnShop(dCtxSh, driver);
 	}
 

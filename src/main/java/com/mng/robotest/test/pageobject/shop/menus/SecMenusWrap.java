@@ -2,8 +2,6 @@ package com.mng.robotest.test.pageobject.shop.menus;
 
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -17,6 +15,7 @@ import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenuLateralDevice;
 import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenuLateralDevice.TypeLocator;
 import com.mng.robotest.test.utils.checkmenus.DataScreenMenu;
+
 
 @SuppressWarnings({"static-access"}) 
 /**
@@ -34,16 +33,12 @@ public class SecMenusWrap {
 	
 	public enum GroupMenu {prendas, accesorios, colecciones}
 	
-	private SecMenusWrap(Channel channel, AppEcom app, WebDriver driver) {
+	public SecMenusWrap(Channel channel, AppEcom app) {
 		this.channel = channel;
 		this.app = app;
 		this.secMenusUser = MenusUserWrapper.getNew(channel, app);
 		this.secMenuLateralDevice = new SecMenuLateralDevice(channel, app);
-		this.secMenusDesktop = SecMenusDesktop.getNew(app, channel, driver);
-	}
-	
-	public static SecMenusWrap getNew(Channel channel, AppEcom app, WebDriver driver) {
-		return (new SecMenusWrap(channel, app, driver));
+		this.secMenusDesktop = new SecMenusDesktop(app, channel);
 	}
 	
 	public MenusUserWrapper getMenusUser() {

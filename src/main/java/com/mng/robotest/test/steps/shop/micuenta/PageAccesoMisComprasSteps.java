@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop.micuenta;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -16,10 +14,10 @@ import com.mng.robotest.test.pageobject.shop.micuenta.PageAccesoMisCompras.TypeB
 import com.mng.robotest.test.steps.shop.miscompras.PageMisComprasSteps;
 import com.mng.robotest.test.steps.shop.pedidos.PageDetallePedidoSteps;
 
+
 public class PageAccesoMisComprasSteps {
 
 	private final PageAccesoMisCompras pageAccesoMisCompras = new PageAccesoMisCompras();
-	private final WebDriver driver = pageAccesoMisCompras.driver;
 	
 	@Validation
 	public ChecksTM validateIsPage() {
@@ -61,7 +59,7 @@ public class PageAccesoMisComprasSteps {
 	public void enterForSiRegistrado(String usuario, String password, Channel channel, AppEcom app, Pais pais) {
 		pageAccesoMisCompras.inputUserPasswordBlockSi(usuario, password); 
 		pageAccesoMisCompras.clickEntrarBlockSi();
-		PageMisComprasSteps pageMisComprasSteps = PageMisComprasSteps.getNew(channel, app, driver);
+		PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps(channel, app);
 		pageMisComprasSteps.validateIsPage(pais);
 	}
 
@@ -79,7 +77,7 @@ public class PageAccesoMisComprasSteps {
 		pageAccesoMisCompras.inputUserAndNumPedidoBlockNo(usuario, dataPedido.getCodpedido()); 
 		pageAccesoMisCompras.clickBuscarPedidoBlockNo(); 
 
-		PageDetallePedidoSteps pageDetPedidoSteps = new PageDetallePedidoSteps(channel, app, driver);
+		PageDetallePedidoSteps pageDetPedidoSteps = new PageDetallePedidoSteps(channel, app);
 		pageDetPedidoSteps.validateIsPageOk(dataPedido);
 	}
 }

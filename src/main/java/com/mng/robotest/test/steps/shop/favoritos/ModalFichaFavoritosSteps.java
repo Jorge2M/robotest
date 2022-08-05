@@ -22,15 +22,7 @@ import com.mng.robotest.test.steps.shop.SecBolsaSteps;
 @SuppressWarnings({"static-access"})
 public class ModalFichaFavoritosSteps {
 	
-	private final ModalFichaFavoritos modalFichaFavoritos;
-	
-	private ModalFichaFavoritosSteps(ModalFichaFavoritos modalFichaFavoritos) {
-		this.modalFichaFavoritos = modalFichaFavoritos;
-	}
-	
-	public static ModalFichaFavoritosSteps getNew(ModalFichaFavoritos modalFichaFavoritos) {
-		return new ModalFichaFavoritosSteps(modalFichaFavoritos);
-	}
+	private final ModalFichaFavoritos modalFichaFavoritos = new ModalFichaFavoritos();
 	
 	@Validation
 	public ChecksTM validaIsVisibleFicha(ArticuloScreen articulo) { 
@@ -54,7 +46,7 @@ public class ModalFichaFavoritosSteps {
 		Talla tallaSelected = modalFichaFavoritos.addArticleToBag(refProductoToAdd, 1, channel, app, pais);
 		artToAddBolsa.setTalla(tallaSelected);
 		dataBolsa.addArticulo(artToAddBolsa);
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(channel, app, pais, modalFichaFavoritos.driver);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(channel, app, pais);
 		
 		switch (channel) {
 		case desktop:

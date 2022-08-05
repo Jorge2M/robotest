@@ -17,7 +17,7 @@ import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
 
 public class Reg003 extends TestBase {
 	
-	private final SecMenusUserSteps userMenusSteps = SecMenusUserSteps.getNew(channel, app, driver);
+	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps(channel, app);
 	private final PageRegistroIniSteps pageRegistroIniSteps = new PageRegistroIniSteps();
 	private final PageRegistroDirecSteps pageRegistroDirecSteps = new PageRegistroDirecSteps();
 	private final PageRegistroFinSteps pageRegistroFinSteps; 

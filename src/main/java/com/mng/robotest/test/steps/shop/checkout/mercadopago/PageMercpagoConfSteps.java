@@ -24,6 +24,6 @@ public class PageMercpagoConfSteps {
 		expected="Aparece la página de resultado")
 	public static void clickPagar(Channel channel, WebDriver driver) {
 		PageMercpagoConf.clickPagar(driver);
-		(new PageResultPagoSteps(TypePago.Mercadopago, channel, driver)).validaIsPageUntil(30);
+		(new PageResultPagoSteps(TypePago.Mercadopago, channel)).validaIsPageUntil(30);
 	}
 }

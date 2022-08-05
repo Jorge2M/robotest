@@ -65,7 +65,7 @@ public class GaleriaProducto {
 			
 		AccesoSteps.oneStep(dCtxSh, false/*clearArticulos*/, driver);
 		Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
-		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh);
 		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
 		
 		List<Color> colorsToFilter = new ArrayList<>();
@@ -118,7 +118,7 @@ public class GaleriaProducto {
 
 		AccesoSteps.oneStep(dCtxSh, false, driver);
 		Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
-		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh);
 		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
 
 		List<Color> colorsToFilter = new ArrayList<>();
@@ -171,7 +171,7 @@ public class GaleriaProducto {
 		PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
 		Menu1rstLevel menuCardigans = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "cardigans-y-jerseis"));
-		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh);
 		if (dCtxSh.appE==AppEcom.outlet || dCtxSh.channel.isDevice()) {
 			secMenusSteps.selectMenu1rstLevelTypeCatalog(menuCardigans, dCtxSh);
 		} else {
@@ -225,7 +225,7 @@ public class GaleriaProducto {
 		//Ini script
 		AccesoSteps.oneStep(dCtxSh, false, driver);
 		Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
-		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh);
 		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
 				
 		PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
@@ -270,7 +270,7 @@ public class GaleriaProducto {
 		// Abrir listado de mujer camisas
 		AccesoSteps.oneStep(dCtxSh, false/*clearArticulos*/, driver);
 		Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
-		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh);
 		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
 
 		// Abrir avisame desde el listado buscando primera talla sin stock y comprobar que se abierto y que contiene texto RGPD

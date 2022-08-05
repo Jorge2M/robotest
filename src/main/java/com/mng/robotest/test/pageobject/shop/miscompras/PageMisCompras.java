@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -26,21 +25,19 @@ public class PageMisCompras extends PageObjTM {
 	final Channel channel;
 	private List<Ticket> listTickets = null;
 	
-	private static final String XPathCapaContenedoraDesktop = "//micro-frontend[@id='myPurchasesDesktop']";
-	private static final String XPathCapaContenedoraMobile = "//micro-frontend[@id='myPurchasesMobile']";
+	private static final String XPATH_CAPA_CONTENEDORA_DESKTOP = "//micro-frontend[@id='myPurchasesDesktop']";
+	private static final String XPATH_CAPA_CONTENEDORA_MOBILE = "//micro-frontend[@id='myPurchasesMobile']";
 	
-	private static final String XPathListTickets = 
+	private static final String XPATH_LIST_TICKETS = 
 		"//*[@data-testid[contains(.,'activePurchases')] or " +
 			"@data-testid[contains(.,'inactivePurchases')]]";
 	
-	//private static final String XPathTicket = XPathListTickets + "//div[@class[contains(.,'purchase-card__border')]]";
-	private static final String XPathTicket = XPathListTickets + "//div[@class[contains(.,'layout-content')]]";
+	private static final String XPATH_TICKET = XPATH_LIST_TICKETS + "//div[@class[contains(.,'layout-content')]]";
 
 	
-	public PageMisCompras(Channel channel, AppEcom app, WebDriver driver) {
-		super(driver);
+	public PageMisCompras(Channel channel, AppEcom app) {
 		this.channel = channel;
-		this.modalDetalleCompra = PageDetalleCompra.make(channel, app, driver);
+		this.modalDetalleCompra = PageDetalleCompra.make(channel, app);
 	}
 	
 	public PageDetalleCompra getModalDetalleCompra() {
@@ -77,12 +74,12 @@ public class PageMisCompras extends PageObjTM {
 	}
 	
 	private List<WebElement> getTicketsPage() {
-		state(State.Visible, By.xpath(XPathTicket)).wait(2).check();
-		return (driver.findElements(By.xpath(XPathTicket)));
+		state(State.Visible, By.xpath(XPATH_TICKET)).wait(2).check();
+		return (driver.findElements(By.xpath(XPATH_TICKET)));
 	}
 	
 	private boolean isVisibleTicket(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathTicket)).wait(maxSeconds).check());
+		return (state(Visible, By.xpath(XPATH_TICKET)).wait(maxSeconds).check());
 	}
 
 	
@@ -99,14 +96,14 @@ public class PageMisCompras extends PageObjTM {
 	private String getXPathCapaContenedora() {
 		switch (channel) {
 		case mobile:
-			return XPathCapaContenedoraMobile;
+			return XPATH_CAPA_CONTENEDORA_MOBILE;
 		default:
-			return XPathCapaContenedoraDesktop;
+			return XPATH_CAPA_CONTENEDORA_DESKTOP;
 		}
 	}
 
 	private String getXPathTicketLink(String id) {
-		return (XPathTicket + "//img[@loading='lazy' and @alt[contains(.,'" + id + "')]]/..");
+		return (XPATH_TICKET + "//img[@loading='lazy' and @alt[contains(.,'" + id + "')]]/..");
 	}
 	
 	public boolean isPageUntil(int maxSeconds) {

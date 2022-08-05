@@ -3,7 +3,6 @@ package com.mng.robotest.test.pageobject.shop.bolsa;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -32,8 +31,8 @@ public class LineasArtBolsaNew extends LineasArtBolsa {
 	private static final String XPathItemRefMobile = XPathLinkItemRef + "/ancestor::*[@class[contains(.,'layout-content')]]/..";
 	
 	
-	public LineasArtBolsaNew(Channel channel, WebDriver driver) {
-		super(channel, driver);
+	public LineasArtBolsaNew(Channel channel) {
+		super(channel);
 	}
 	
 	private String getXPathLinkBorrarArt(String refArticulo) {

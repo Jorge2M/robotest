@@ -3,8 +3,6 @@ package com.mng.robotest.test.pageobject.shop.bolsa;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.Constantes;
@@ -13,6 +11,7 @@ import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.bolsa.LineasArtBolsa.DataArtBolsa;
 import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 import com.github.jorge2m.testmaker.conf.Channel;
+
 
 public class ValidatorContentBolsa {
 	
@@ -23,9 +22,9 @@ public class ValidatorContentBolsa {
 	private final Channel channel;
 
 	
-	public ValidatorContentBolsa(DataBag contentBagExpected, AppEcom app, Channel channel, Pais pais, WebDriver driver) 
-	throws Exception {
-		this.secBolsa = SecBolsa.make(channel, app, pais, driver);
+	public ValidatorContentBolsa(DataBag contentBagExpected, AppEcom app, Channel channel, Pais pais) 
+			throws Exception {
+		this.secBolsa = SecBolsa.make(channel, app, pais);
 		this.linesArticlesExpected = contentBagExpected.getListArticlesTypeViewInBolsa();
 		this.channel = channel;
 		storeArticlesFromScreen();

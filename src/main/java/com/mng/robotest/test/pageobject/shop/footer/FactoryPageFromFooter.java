@@ -46,7 +46,7 @@ public class FactoryPageFromFooter {
 		case preguntas_frecuentes:
 			return (new PagePreguntasFreq(driver));
 		case pedidos:
-			return (new PageInputPedido(driver));
+			return (new PageInputPedido());
 		case envio:
 			return (new PageEnvio(driver));
 		case formas_de_pago:

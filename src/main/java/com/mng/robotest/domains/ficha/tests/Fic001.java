@@ -106,7 +106,7 @@ public class Fic001 extends TestBase {
 		//Si es talla única -> Significa que lo dimos de alta en la bolsa cuando seleccionamos el click "Añadir a la bolsa"
 		//-> Lo damos de baja
 		if (isTallaUnica) {
-			SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dataTest, driver);
+			SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dataTest);
 			secBolsaSteps.clear();
 		}
 	}

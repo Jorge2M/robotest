@@ -41,7 +41,7 @@ public class PageHomeMarcasSteps {
 	public void validateIsPageWithCorrectLineas(Pais pais) throws Exception {
 		AllPagesSteps.validateMainContentPais(pais, driver);
 		validateIsPageOk(pais);
-		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(channel, app, pais, driver);
+		SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps(channel, app, pais);
 		secMenusSteps.validateLineas(pais);
 	}
 	

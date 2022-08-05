@@ -41,7 +41,7 @@ public class PageRegistroFinSteps {
 	
 	public void validateWeAreLogged() {
 		validateLogoGoesToPaisIdioma();
-		SecMenusUserSteps secMenusUserSteps = SecMenusUserSteps.getNew(dataTest.channel, dataTest.appE, pageRegistroFin.driver);
+		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps(dataTest.channel, dataTest.appE);
 		secMenusUserSteps.checkIsVisibleLinkCerrarSesion();
 	}
 	

@@ -20,16 +20,16 @@ public class LoyaltyCommons {
 		return UtilsMangoTest.isEntornoPRO(app, driver);
 	}
 	
-	public static int clickMangoLikesYou(Channel channel, AppEcom app, WebDriver driver) throws Exception {
-		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps(channel, app, driver);
+	public static int clickMangoLikesYou(Channel channel, AppEcom app) throws Exception {
+		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps(channel, app);
 		return secMenusUserSteps.clickMenuMangoLikesYou();
 	}
 	
-	public static int addLoyaltyPoints(User user, Channel channel, AppEcom app, WebDriver driver) 
+	public static int addLoyaltyPoints(User user, Channel channel, AppEcom app) 
 			throws Exception {
 		ClientApiLoyaltyPointsDev client = new ClientApiLoyaltyPointsDev();
 		client.addLoyaltyPoints(user, 25000);
-		return clickMangoLikesYou(channel, app, driver);
+		return clickMangoLikesYou(channel, app);
 	}
 
 }

@@ -29,7 +29,7 @@ import com.mng.robotest.test.suites.RegistrosSuite.VersionRegistroSuite;
 
 public class Reg002 extends TestBase {
 
-	private final SecMenusUserSteps userMenusSteps = SecMenusUserSteps.getNew(channel, app, driver);
+	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps(channel, app);
 	private final SecFooterSteps secFooterSteps = new SecFooterSteps(channel, app, driver);
 	private final PageRegistroIniSteps pageRegistroIniSteps = new PageRegistroIniSteps();
 	private final PageRegistroSegundaSteps pageRegistroSegundaSteps = new PageRegistroSegundaSteps();;

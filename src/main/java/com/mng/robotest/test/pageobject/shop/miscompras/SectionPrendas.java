@@ -1,28 +1,23 @@
 package com.mng.robotest.test.pageobject.shop.miscompras;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 
 public class SectionPrendas extends PageObjTM {
 
-	private static String XPathArticulo = "//*[@data-testid='myPurchases.detail.product']";
-	private static String XPathDataArticulo = "//*[@data-testid[contains(.,'detail.productInfo')]]/../..";
-	private static String XPathReferenciaArticulo = "//*[@data-testid[contains(.,'detail.reference')]]";
-	private static String XPathNombreArticulo = "//button[@class[contains(.,'text-title')]]";
-	private static String XPathPrecioArticulo = "//*[@data-testid[contains(.,'detail.productPrice')]]/div";
-	
-	public SectionPrendas(WebDriver driver) {
-		super(driver);
-	}
+	private final static String XPATH_ARTICULO = "//*[@data-testid='myPurchases.detail.product']";
+	private final static String XPATH_DATA_ARTICULO = "//*[@data-testid[contains(.,'detail.productInfo')]]/../..";
+	private final static String XPATH_REFERENCIA_ARTICULO = "//*[@data-testid[contains(.,'detail.reference')]]";
+	private final static String XPATH_NOMBRE_ARTICULO = "//button[@class[contains(.,'text-title')]]";
+	private final static String XPATH_PRECIO_ARTICULO = "//*[@data-testid[contains(.,'detail.productPrice')]]/div";
 	
 	public int getNumPrendas() {
-		return (driver.findElements(By.xpath(XPathArticulo)).size());
+		return (driver.findElements(By.xpath(XPATH_ARTICULO)).size());
 	}
 	
 	private String getXPathArticulo(int position) {
-		return "(" + XPathArticulo + ")[" + position + "]";
+		return "(" + XPATH_ARTICULO + ")[" + position + "]";
 	}
 	private String getXPathLinkArticulo(int position) {
 		String xpathArticulo = getXPathArticulo(position);
@@ -30,19 +25,19 @@ public class SectionPrendas extends PageObjTM {
 	}
 	private String getXPathDataArticulo(int position) {
 		String xpathArticulo = getXPathArticulo(position);
-		return xpathArticulo + XPathDataArticulo;
+		return xpathArticulo + XPATH_DATA_ARTICULO;
 	}
 	private String getXPathReferenciaArticulo(int posArticulo) {
 		String xpathDataArticulo = getXPathDataArticulo(posArticulo);
-		return (xpathDataArticulo + XPathReferenciaArticulo);
+		return (xpathDataArticulo + XPATH_REFERENCIA_ARTICULO);
 	}
 	private String getXPathNombreArticulo(int posArticulo) {
 		String xpathDataArticulo = getXPathDataArticulo(posArticulo);
-		return (xpathDataArticulo + XPathNombreArticulo);
+		return (xpathDataArticulo + XPATH_NOMBRE_ARTICULO);
 	}	
 	private String getXPathPrecioArticulo(int posArticulo) {
 		String xpathDataArticulo = getXPathDataArticulo(posArticulo);
-		return (xpathDataArticulo + XPathPrecioArticulo);
+		return (xpathDataArticulo + XPATH_PRECIO_ARTICULO);
 	}
 	
 	public String getReferenciaArticulo(int posArticulo) {

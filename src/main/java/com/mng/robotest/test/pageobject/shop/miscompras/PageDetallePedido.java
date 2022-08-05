@@ -1,7 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.miscompras;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 
@@ -12,15 +10,15 @@ public interface PageDetallePedido {
 		Old,
 		New;
 		
-		public PageDetallePedido getPageObject(Channel channel, AppEcom app, WebDriver driver) {
+		public PageDetallePedido getPageObject(Channel channel, AppEcom app) {
 			switch (this) {
 			case OldOld:
-				return (new PageDetalleCompraOldOld(driver));
+				return (new PageDetalleCompraOldOld());
 			case Old:
-				return (new PageDetalleCompraOld(driver));
+				return (new PageDetalleCompraOld());
 			case New:
 			default:
-				return PageDetalleCompra.make(channel, app, driver);
+				return PageDetalleCompra.make(channel, app);
 			}	
 		} 
 	};

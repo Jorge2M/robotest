@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop.miscompras;
 
-
-import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
@@ -18,25 +16,20 @@ import com.mng.robotest.test.pageobject.shop.miscompras.PageMisCompras;
 import com.mng.robotest.test.pageobject.shop.miscompras.PageMisCompras.TypeTicket;
 import com.mng.robotest.test.steps.shop.pedidos.PageDetallePedidoSteps;
 
+
 public class PageMisComprasSteps {
 	
-	private final WebDriver driver;
 	private final Channel channel;
 	private final AppEcom app;
 	private final PageMisCompras pageMisCompras;
 	private final ModalDetalleCompraSteps modalDetalleCompraSteps; 
 
-	private PageMisComprasSteps(Channel channel, AppEcom app, WebDriver driver) {
-		this.driver = driver;
+	public PageMisComprasSteps(Channel channel, AppEcom app) {
 		this.channel = channel;
 		this.app = app;
-		this.pageMisCompras = new PageMisCompras(channel, app, driver);
+		this.pageMisCompras = new PageMisCompras(channel, app);
 		PageDetalleCompra secDetalle = pageMisCompras.getModalDetalleCompra();
 		this.modalDetalleCompraSteps = ModalDetalleCompraSteps.getNew(secDetalle);
-
-	}
-	public static PageMisComprasSteps getNew(Channel channel, AppEcom app, WebDriver driver) {
-		return new PageMisComprasSteps(channel, app, driver);
 	}
 	
 	public ModalDetalleCompraSteps getModalDetalleCompra() {
@@ -94,8 +87,8 @@ public class PageMisComprasSteps {
 		saveHtmlPage=SaveWhen.IfProblem)
 	public void selectCompraOnline(int posInLista, String codPais) {
 		Ticket ticket = pageMisCompras.selectTicket(TypeTicket.Online, posInLista);	   
-		PageDetallePedidoSteps pageDetPedidoSteps = new PageDetallePedidoSteps(channel, app, driver);
-		pageDetPedidoSteps.validateIsPageOk(ticket, codPais, driver);	   
+		PageDetallePedidoSteps pageDetPedidoSteps = new PageDetallePedidoSteps(channel, app);
+		pageDetPedidoSteps.validateIsPageOk(ticket, codPais);	   
 	}
 	
 	@SuppressWarnings("static-access")

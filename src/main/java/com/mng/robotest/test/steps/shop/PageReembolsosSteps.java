@@ -25,7 +25,7 @@ public class PageReembolsosSteps {
 	 */
 	public static void gotoRefundsFromMenu(
 			boolean paisConSaldoCta, AppEcom app, Channel channel, WebDriver driver) {
-		SecMenusUserSteps userMenusSteps = SecMenusUserSteps.getNew(channel, app, driver);
+		SecMenusUserSteps userMenusSteps = new SecMenusUserSteps(channel, app);
 		userMenusSteps.clickMenuMiCuenta();
 		selectReembolsos(paisConSaldoCta, driver);
 	}

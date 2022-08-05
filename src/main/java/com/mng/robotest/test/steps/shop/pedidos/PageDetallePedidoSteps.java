@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -15,20 +16,19 @@ import com.mng.robotest.test.pageobject.shop.miscompras.PageDetallePedido.Detall
 
 public class PageDetallePedidoSteps {
 	
-	private final WebDriver driver;
 	private final PageDetallePedido pageDetalle;
+	private final WebDriver driver = TestMaker.getDriverTestCase();
 	
-	public PageDetallePedidoSteps(Channel channel, AppEcom app, WebDriver driver) {
-		this.driver = driver;
-		PageDetallePedido pageDetalle = DetallePedido.New.getPageObject(channel, app, driver);
+	public PageDetallePedidoSteps(Channel channel, AppEcom app) {
+		PageDetallePedido pageDetalle = DetallePedido.New.getPageObject(channel, app);
 		if (pageDetalle.isPage()) {
 			this.pageDetalle = pageDetalle;
 		} else {
-			pageDetalle = DetallePedido.Old.getPageObject(channel, app, driver);
+			pageDetalle = DetallePedido.Old.getPageObject(channel, app);
 			if (pageDetalle.isPage()) {
 				this.pageDetalle = pageDetalle;
 			} else {
-				this.pageDetalle = DetallePedido.OldOld.getPageObject(channel, app, driver);
+				this.pageDetalle = DetallePedido.OldOld.getPageObject(channel, app);
 			}
 		}
 	}
@@ -37,7 +37,7 @@ public class PageDetallePedidoSteps {
 		return this.pageDetalle;
 	}
 	
-	public void validateIsPageOk(Ticket compra, String codPais, WebDriver driver) {
+	public void validateIsPageOk(Ticket compra, String codPais) {
 		String importeTotal = compra.getPrecio().replaceAll("[^\\d.,]", "");  //Eliminamos la divisa;
 		validateIsPageOk(compra.getId(), importeTotal, codPais);
 		areOkPrendasOnline(compra.getNumItems());

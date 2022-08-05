@@ -42,19 +42,17 @@ public class SecBolsaSteps {
 	private final Channel channel;
 	private final AppEcom app;
 	private final Pais pais;
-	private final WebDriver driver;
+	private final WebDriver driver = TestMaker.getDriverTestCase();
 	
-	public SecBolsaSteps(DataCtxShop dCtxSh, WebDriver driver) {
-		this.secBolsa = SecBolsa.make(dCtxSh, driver);
-		this.driver = driver;
+	public SecBolsaSteps(DataCtxShop dCtxSh) {
+		this.secBolsa = SecBolsa.make(dCtxSh);
 		this.channel = dCtxSh.channel;
 		this.app = dCtxSh.appE;
 		this.pais = dCtxSh.pais;
 	}
 	
-	public SecBolsaSteps(Channel channel, AppEcom app, Pais pais, WebDriver driver) {
-		this.secBolsa = SecBolsa.make(channel, app, pais, driver);
-		this.driver = driver;
+	public SecBolsaSteps(Channel channel, AppEcom app, Pais pais) {
+		this.secBolsa = SecBolsa.make(channel, app, pais);
 		this.channel = channel;
 		this.app = app;
 		this.pais = pais;
@@ -224,7 +222,7 @@ public class SecBolsaSteps {
 	@Validation
 	public ChecksTM validaCuadranArticulosBolsa(DataBag dataBag) throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		ValidatorContentBolsa validatorBolsa = new ValidatorContentBolsa(dataBag, app, channel, pais, driver);
+		ValidatorContentBolsa validatorBolsa = new ValidatorContentBolsa(dataBag, app, channel, pais);
 		checks.add(
 			"Cuadra el número de artículos existentes en la bolsa",
 			validatorBolsa.numArticlesIsCorrect(), State.Warn);

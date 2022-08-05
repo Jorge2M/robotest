@@ -81,7 +81,7 @@ public class MiCuenta implements Serializable {
 			
 		new PagePrehomeSteps(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
 		dCtxSh.userRegistered = false;
-		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh);
 		secMenusSteps.seleccionLinea(LineaType.she, null, dCtxSh);
 		dCtxSh.userRegistered = true;
 		AccesoSteps.identificacionEnMango(dCtxSh, driver);
@@ -129,7 +129,7 @@ public class MiCuenta implements Serializable {
 		
 		PageMiCuentaSteps pageMiCuentaSteps = PageMiCuentaSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
 		pageMiCuentaSteps.goToMisComprasFromMenu(dCtxSh.pais);
-		PageMisComprasSteps pageMisComprasSteps = PageMisComprasSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps(dCtxSh.channel, dCtxSh.appE);
 		pageMisComprasSteps.validateIsCompraOfType(TypeTicket.Online, 3);
 		pageMisComprasSteps.selectCompraOnline(1, dCtxSh.pais.getCodigo_pais());
 		pageMisComprasSteps.clickDetalleArticulo(1);
@@ -138,7 +138,7 @@ public class MiCuenta implements Serializable {
 		//Test Compras en Tienda
 		dCtxSh.userConnected = userWithStorePurchases;
 		dCtxSh.passwordUser = passUserWithStorePurchases;
-		SecMenusUserSteps userMenusSteps = SecMenusUserSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		SecMenusUserSteps userMenusSteps = new SecMenusUserSteps(dCtxSh.channel, dCtxSh.appE);
 		userMenusSteps.logoff();
 		
 		//Existe un problema en por el cual si te vuelves a loginar manteniendo el navegador
@@ -149,7 +149,7 @@ public class MiCuenta implements Serializable {
 		AccesoSteps.identificacionEnMango(dCtxSh, driver);
 		
 		pageMiCuentaSteps.goToMisComprasFromMenu(dCtxSh.pais);
-		pageMisComprasSteps = PageMisComprasSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		pageMisComprasSteps = new PageMisComprasSteps(dCtxSh.channel, dCtxSh.appE);
 		pageMisComprasSteps.validateIsCompraOfType(TypeTicket.Tienda, 3);
 		pageMisComprasSteps.selectCompraTienda(1);
 		pageMisComprasSteps.clickDetalleArticulo(1);

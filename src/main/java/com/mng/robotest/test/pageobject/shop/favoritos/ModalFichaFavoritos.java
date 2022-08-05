@@ -88,19 +88,19 @@ public class ModalFichaFavoritos extends PageObjTM {
 	}
 	
 	public Talla addArticleToBag(String refProducto, int posicionTalla, Channel channel, AppEcom app, Pais pais) 
-	throws Exception {
+			throws Exception {
 		Talla tallaSelected = selectTallaAvailable(refProducto, posicionTalla);
 		clickButtonAddToBagAndWait(refProducto, channel, app, pais);
 		return tallaSelected;
 	}
 	
 	public void clickButtonAddToBagAndWait(String refProducto, Channel channel, AppEcom app, Pais pais) 
-	throws Exception {
+			throws Exception {
 		String xpathAdd = getXPathButtonAddBolsa(refProducto);
 		driver.findElement(By.xpath(xpathAdd)).click();
 		int maxSecondsToWait = 2;
 		
-		SecBolsa secBolsa = SecBolsa.make(channel, app, pais, driver);
+		SecBolsa secBolsa = SecBolsa.make(channel, app, pais);
 		secBolsa.isInStateUntil(StateBolsa.OPEN, maxSecondsToWait);
 	}
 	

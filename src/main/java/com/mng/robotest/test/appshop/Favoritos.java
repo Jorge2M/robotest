@@ -95,14 +95,14 @@ public class Favoritos implements Serializable {
 		DataBag dataBolsa = new DataBag();
 
 		AccesoSteps.oneStep(dCtxSh, false, driver);
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh, driver);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh);
 		secBolsaSteps.clear();
 
-		PageFavoritosSteps pageFavoritosSteps = PageFavoritosSteps.getNew(driver);
+		PageFavoritosSteps pageFavoritosSteps = new PageFavoritosSteps();
 		pageFavoritosSteps.clearAll(dataFavoritos, dCtxSh);
 
 		Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "Vestidos"));
-		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh);
 		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh);
 
 		PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
@@ -142,14 +142,14 @@ public class Favoritos implements Serializable {
 
 		AccesoSteps.oneStep(dCtxSh, false, driver);
 		
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh, driver);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh);
 		secBolsaSteps.clear();
 
-		PageFavoritosSteps pageFavoritosSteps = PageFavoritosSteps.getNew(driver);
+		PageFavoritosSteps pageFavoritosSteps = new PageFavoritosSteps();
 		pageFavoritosSteps.clearAll(dataFavoritos, dCtxSh);
 
 
-		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh);
 		secMenusSteps.selectMenu1rstLevelTypeCatalog(getMenu(dCtxSh.appE), dCtxSh);
 		LocationArticle article1 = LocationArticle.getInstanceInCatalog(1);
 

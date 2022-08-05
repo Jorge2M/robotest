@@ -45,7 +45,7 @@ import java.util.List;
 @SuppressWarnings({"static-access"})
 public class PageFichaArtSteps {
 	
-	WebDriver driver;
+	private final WebDriver driver = TestMaker.getDriverTestCase();
 	Channel channel;
 	AppEcom app;
 	
@@ -59,11 +59,10 @@ public class PageFichaArtSteps {
 	private final SecTotalLookSteps secTotalLookSteps;
 	
 	public PageFichaArtSteps(AppEcom appE, Channel channel, Pais pais) {
-		this.driver = TestMaker.getDriverTestCase();
 		this.channel = channel;
 		this.app = appE;
 		this.pageFicha = PageFicha.newInstance(channel, appE);
-		this.secBolsa = SecBolsa.make(channel, app, pais, driver);
+		this.secBolsa = SecBolsa.make(channel, app, pais);
 		this.modEnvioYdevolSteps = new ModEnvioYdevolNewSteps();
 		this.secProductDescOldSteps = new SecProductDescrOldSteps(channel, appE);
 		this.secTotalLookSteps = new SecTotalLookSteps();
@@ -274,7 +273,7 @@ public class PageFichaArtSteps {
 		DataBag dataBag = new DataBag();
 		dataBag.addArticulo(articulo);
 		
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh, driver);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh);
 		secBolsaSteps.validaAltaArtBolsa(dataBag);
 	}	
 

@@ -18,7 +18,7 @@ public class Loy002 extends TestBase {
 
 	private final PageHomeLikesSteps pageHomeLikesSteps = new PageHomeLikesSteps();
 	private final PageHomeDonateLikesSteps pageHomeDonateLikesSteps = new PageHomeDonateLikesSteps();
-	private final SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps(channel, app, driver);
+	private final SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps(channel, app);
 	
 	public Loy002() throws Exception {
 		super();
@@ -42,9 +42,9 @@ public class Loy002 extends TestBase {
 	public void execute() throws Exception {
 		AccesoSteps.oneStep(dataTest, false, driver);
 		
-		int loyaltyPointsIni = LoyaltyCommons.clickMangoLikesYou(channel, app, driver);
+		int loyaltyPointsIni = LoyaltyCommons.clickMangoLikesYou(channel, app);
 		if (loyaltyPointsIni < 3000 && !isPro) {
-			loyaltyPointsIni = LoyaltyCommons.addLoyaltyPoints(USER, channel, app, driver);
+			loyaltyPointsIni = LoyaltyCommons.addLoyaltyPoints(USER, channel, app);
 		}
 		pageHomeLikesSteps.clickButtonDonarLikes();
 		

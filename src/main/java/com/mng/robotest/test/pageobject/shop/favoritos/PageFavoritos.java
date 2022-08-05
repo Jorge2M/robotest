@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -30,7 +29,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageFavoritos extends PageObjTM {
   
-	private final ModalFichaFavoritos modalFichaFavoritos;
+	private final ModalFichaFavoritos modalFichaFavoritos = new ModalFichaFavoritos();
 	
 	private static final String XPATH_BLOCK_FAVORITOS = "//div[@data-pais and @class[contains(.,'favorites')]]";
 	private static final String XPATH_BLOCK_FAV_WITH_ART = XPATH_BLOCK_FAVORITOS + "//div[@class[contains(.,'content-garments')]]";
@@ -41,15 +40,6 @@ public class PageFavoritos extends PageObjTM {
 	private static final String XPATH_WHATSAPP_SHARE_BUTTON = "//span[@class='modal-share-whatsapp-icon']";
 	private static final String XPATH_TELEGRAM_SHARE_BUTTON = "//span[@class='modal-share-telegram-icon']";
 	private static final String XPATH_URL_SHARE_LABEL = "//div[@id='linkShareButton']";
-	
-	private PageFavoritos(WebDriver driver) {
-		super(driver);
-		this.modalFichaFavoritos = new ModalFichaFavoritos();
-	}
-	
-	public static PageFavoritos getNew(WebDriver driver) {
-		return new PageFavoritos(driver);
-	}
 	
 	public ModalFichaFavoritos getModalFichaFavoritos() {
 		return this.modalFichaFavoritos;
@@ -147,7 +137,7 @@ public class PageFavoritos extends PageObjTM {
 	public void clearAllArticulos(Channel channel, AppEcom appE) {
 		//Si la sección no es visible clickamos en favoritos
 		if (!isSectionVisible()) {
-			SecMenusWrap secMenus = SecMenusWrap.getNew(channel, appE, driver);
+			SecMenusWrap secMenus = new SecMenusWrap(channel, appE);
 			secMenus.getMenusUser().clickMenuAndWait(UserMenu.favoritos);
 		}
 		int i=0; //Para evitar posibles bucles infinitos
@@ -237,7 +227,7 @@ public class PageFavoritos extends PageObjTM {
 		talla.click();
 		int maxSecondsToWait = 2;
 		
-		SecBolsa secBolsa = SecBolsa.make(channel, app, pais, driver);
+		SecBolsa secBolsa = SecBolsa.make(channel, app, pais);
 		secBolsa.isInStateUntil(StateBolsa.OPEN, maxSecondsToWait);
 		return litTalla;
 	}

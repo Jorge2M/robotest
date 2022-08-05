@@ -4,8 +4,6 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -18,22 +16,12 @@ import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.favoritos.PageFavoritos;
 import com.mng.robotest.test.steps.shop.SecBolsaSteps;
 
+
 @SuppressWarnings({"static-access"})
 public class PageFavoritosSteps {
 	
-	private final PageFavoritos pageFavoritos;
-	private final ModalFichaFavoritosSteps modalFichaFavoritosSteps;
-	private final WebDriver driver;
-	
-	private PageFavoritosSteps(WebDriver driver) {
-		this.pageFavoritos = PageFavoritos.getNew(driver);
-		this.modalFichaFavoritosSteps = ModalFichaFavoritosSteps.getNew(pageFavoritos.getModalFichaFavoritos());
-		this.driver = driver;
-	}
-	
-	public static PageFavoritosSteps getNew(WebDriver driver) {
-		return new PageFavoritosSteps(driver);
-	}
+	private final PageFavoritos pageFavoritos = new PageFavoritos();
+	private final ModalFichaFavoritosSteps modalFichaFavoritosSteps = new ModalFichaFavoritosSteps();
 	
 	public PageFavoritos getPageFavoritos() {
 		return pageFavoritos;
@@ -157,7 +145,7 @@ public class PageFavoritosSteps {
 		artToAddBolsa.setTalla(tallaSelected);
 		dataBolsa.addArticulo(artToAddBolsa);
 		
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(channel, app, pais, driver);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(channel, app, pais);
 		secBolsaSteps.validaAltaArtBolsa(dataBolsa);
 	}
 	

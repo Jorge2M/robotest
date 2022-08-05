@@ -14,11 +14,11 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.utils.ImporteScreen;
 
+
 public abstract class SecBolsaDesktop extends SecBolsa {
 
-
-	public SecBolsaDesktop(Channel channel, AppEcom app, WebDriver driver) {
-		super(channel, app, driver);
+	public SecBolsaDesktop(Channel channel, AppEcom app) {
+		super(channel, app);
 	}
 	
 	@Override

@@ -111,7 +111,7 @@ public class PaisIdioma implements Serializable {
 			sublineaType = sublinea.getTypeSublinea();
 		}
 		
-		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh);
 		secMenusSteps.seleccionLinea(lineaType, sublineaType, dCtxSh);
 		if (sublinea==null) {
 			testSpecificFeaturesForLinea(linea, driver);
@@ -125,11 +125,11 @@ public class PaisIdioma implements Serializable {
 		if (testMenus(linea, sublinea)) {
 			secMenusSteps.stepsMenusLinea(lineaType, sublineaType);
 			if (existsRightBannerMenu(linea, sublinea, dCtxSh.channel)) {
-				SecMenusDesktopSteps secMenusDesktopSteps = SecMenusDesktopSteps.getNew(dCtxSh.pais, dCtxSh.appE, dCtxSh.channel, driver);
+				SecMenusDesktopSteps secMenusDesktopSteps = new SecMenusDesktopSteps(dCtxSh.pais, dCtxSh.appE, dCtxSh.channel);
 				secMenusDesktopSteps.clickRightBanner(lineaType, sublineaType);
 			}
 		} else {
-			SecMenusWrap secMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+			SecMenusWrap secMenus = new SecMenusWrap(dCtxSh.channel, dCtxSh.appE);
 			if (secMenus.canClickMenuArticles(dCtxSh.pais, linea, sublinea)) {
 				Menu1rstLevel menu = getMenu(lineaType, sublineaType);
 				secMenusSteps.selectMenu1rstLevelTypeCatalog(menu, dCtxSh);

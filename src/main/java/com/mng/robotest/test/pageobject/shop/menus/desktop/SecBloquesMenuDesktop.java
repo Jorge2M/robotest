@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -19,6 +18,7 @@ import com.mng.robotest.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap.GroupMenu;
 import com.mng.robotest.test.utils.checkmenus.DataScreenMenu;
+
 
 public abstract class SecBloquesMenuDesktop extends PageObjTM {
 
@@ -52,17 +52,14 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	protected static final String TagIdBloque = "@BloqueId"; //Prendas, Accesorios...
 	protected static final String TagIdTypeMenu = "@TypeMenu";
 
-
-
-	protected SecBloquesMenuDesktop(AppEcom app, Channel channel, WebDriver driver) {
-		super(driver);
+	protected SecBloquesMenuDesktop(AppEcom app, Channel channel) {
 		this.app = app;
 		this.channel = channel;
 		this.secLineasMenu = SecLineasMenuDesktop.factory(app, channel, driver);
 	}
 	
-	public static SecBloquesMenuDesktop factory(AppEcom app, Channel channel, WebDriver driver) {
-		return new SecBloquesMenuDesktopNew(app, channel, driver);
+	public static SecBloquesMenuDesktop factory(AppEcom app, Channel channel) {
+		return new SecBloquesMenuDesktopNew(app, channel);
 	}
 		
 	private String getXPathMenuVisibleByDataInHref(Menu1rstLevel menu1rstLevel) {

@@ -1,7 +1,6 @@
 package com.mng.robotest.test.pageobject.shop.miscompras;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
@@ -15,16 +14,14 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageDetalleCompraMobil extends PageDetalleCompra {
 	
-	private final SectionPrendas sectionPrendas;
+	private final SectionPrendas sectionPrendas = new SectionPrendas();
 	private final AppEcom app;
 	
 	private static String XPathIdTicket = "//*[@data-testid[contains(.,'purchaseDetail.purchaseNumber')]]";
 	private static String XPathLineaImporte = "//*[@data-testid[contains(.,'detail.totalPrice')]]";
-	//private static String XPathLinkToMisCompras = "//button/*[@class[contains(.,'icon-fill-prev')]]/.."; 
 	
-	public PageDetalleCompraMobil(Channel channel, AppEcom app, WebDriver driver) {
-		super(channel, driver);
-		this.sectionPrendas = new SectionPrendas(driver);
+	public PageDetalleCompraMobil(Channel channel, AppEcom app) {
+		super(channel);
 		this.app = app;
 	}
 	

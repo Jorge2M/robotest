@@ -26,7 +26,7 @@ public class Fic003 extends TestBase {
 	final Menu1rstLevel menuPantalonesNina;
 	
 	final Pais corea = PaisGetter.get(PaisShop.COREA_DEL_SUR);
-	final SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dataTest, driver);
+	final SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dataTest);
 	final PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(channel, app, driver);
 	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(app, channel, corea);;
 	

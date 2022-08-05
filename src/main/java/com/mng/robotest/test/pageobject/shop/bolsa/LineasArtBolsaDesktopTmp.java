@@ -3,7 +3,6 @@ package com.mng.robotest.test.pageobject.shop.bolsa;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -13,47 +12,38 @@ import com.mng.robotest.test.utils.ImporteScreen;
 public class LineasArtBolsaDesktopTmp extends LineasArtBolsa {
 
 
-//	private static final String XPathLinkRelativeArticle = ".//div[@class[contains(.,'itemImage')]]/a";
-//	private static final String XPathLineaWithTagRef = XPathLinkRelativeArticle + "//self::*[@href[contains(.,'" + TagReference + ".html')]]//ancestor::" + DivLinea;
-//	private static final String XPathNombreRelativeArticle = ".//*[@class='bolsa_descripcion']";
-//	private static final String XPathColorRelativeArticle = ".//*[@class='itemColor']";
-//	private static final String XPathTallaAlfRelativeArticle = ".//p[@class='itemSize']";
-//	private static final String XPathCantidadRelativeArticle = ".//p[@class='itemsQt']";
-//	private static final String XPathPrecioEnteroRelativeArticle = ".//span[@class='bolsa_price_big' and (not(@style) or @style='')]";
-//	private static final String XPathPrecioDecimalRelativeArticle = ".//span[@class='bolsa_price_small' and (not(@style) or @style='')]";
-	
-	private static final String XPathItem = "//*[@data-testid='bag.item']";
+	private static final String XPATH_ITEM = "//*[@data-testid='bag.item']";
 	
 	//TODO pendiente data-testid
-	private static final String XPathLinkRelativeArticle = ".//a[@href[contains(.,'redirect.faces?')]]";
-	private static final String XPathNombreRelativeArticle = ".//div[@class[contains(.,'_1MMOd')]/div/div";
-	private static final String XPathColorRelativeArticle = ".//div[@class[contains(.,'hMucp')]]/div/div/div[3]/div/div";
-	private static final String XPathTallaAlfRelativeArticle = ".//div[@class[contains(.,'_3hjWl')]]/div[2]/div/div";
-	private static final String XPathCantidadRelativeArticle = ".//div[@class[contains(.,'_3hjWl')]]/div/div/div";
-	private static final String XPathPrecioRelativeArticle = ".//div[@data-testid[contains(.,'productPrice.price')]]";
+	private static final String XPATH_LINK_RELATIVE_ARTICLE = ".//a[@href[contains(.,'redirect.faces?')]]";
+	private static final String XPATH_NOMBRE_RELATIVE_ARTICLE = ".//div[@class[contains(.,'_1MMOd')]/div/div";
+	private static final String XPATH_COLOR_RELATIVE_ARTICLE = ".//div[@class[contains(.,'hMucp')]]/div/div/div[3]/div/div";
+	private static final String XPATH_TALLA_ALF_RELATIVE_ARTICLE = ".//div[@class[contains(.,'_3hjWl')]]/div[2]/div/div";
+	private static final String XPATH_CANTIDAD_RELATIVE_ARTICLE = ".//div[@class[contains(.,'_3hjWl')]]/div/div/div";
+	private static final String XPATH_PRECIO_RELATIVE_ARTICLE = ".//div[@data-testid[contains(.,'productPrice.price')]]";
 	
-	private static final String TagRef = "[TAGREF]";
-	private static final String XPathLinkItemRef = XPathItem + "//a[@href[contains(.,'" + TagRef + "')]]";
-	private static final String XPathItemRef = XPathLinkItemRef + "/ancestor::*[@data-testid='bag.item']";
-	private static final String XPathLinkBorrarArtRef = XPathItemRef + "//*[@data-testid[contains(.,'removeItem.button')]]";
+	private static final String TAG_REF = "[TAGREF]";
+	private static final String XPATH_LINK_ITEM_REF = XPATH_ITEM + "//a[@href[contains(.,'" + TAG_REF + "')]]";
+	private static final String XPATH_ITEM_REF = XPATH_LINK_ITEM_REF + "/ancestor::*[@data-testid='bag.item']";
+	private static final String XPATH_LINK_BORRAR_ART_REF = XPATH_ITEM_REF + "//*[@data-testid[contains(.,'removeItem.button')]]";
 	
-	public LineasArtBolsaDesktopTmp(Channel channel, WebDriver driver) {
-		super(channel, driver);
+	public LineasArtBolsaDesktopTmp(Channel channel) {
+		super(channel);
 	}
 
 	@Override
 	String getXPathDataRelativeArticle(DataArtBolsa dataArt) {
 		switch (dataArt) {
 		case Nombre:
-			return XPathNombreRelativeArticle;
+			return XPATH_NOMBRE_RELATIVE_ARTICLE;
 		case Color:
-			return XPathColorRelativeArticle;
+			return XPATH_COLOR_RELATIVE_ARTICLE;
 		case Talla:
-			return XPathTallaAlfRelativeArticle;
+			return XPATH_TALLA_ALF_RELATIVE_ARTICLE;
 		case Cantidad:
-			return XPathCantidadRelativeArticle;
+			return XPATH_CANTIDAD_RELATIVE_ARTICLE;
 		case Precio:
-			return XPathPrecioRelativeArticle;
+			return XPATH_PRECIO_RELATIVE_ARTICLE;
 		default:
 			return "";
 		}
@@ -61,17 +51,17 @@ public class LineasArtBolsaDesktopTmp extends LineasArtBolsa {
 	
 	@Override
 	String getXPathLinea() {
-		return XPathItem;
+		return XPATH_ITEM;
 	}
 	
 	@Override
 	String getXPathLineaWithTagRef() {
-		return XPathItemRef;
+		return XPATH_ITEM_REF;
 	}
 	
 	@Override
 	String getXPathLinkRelativeArticle() {
-		return XPathLinkRelativeArticle;
+		return XPATH_LINK_RELATIVE_ARTICLE;
 	}	
 	
 	@Override
@@ -85,7 +75,7 @@ public class LineasArtBolsaDesktopTmp extends LineasArtBolsa {
 	public void clickArticle(int position) {
 		By byArticle = By.xpath(getXPathItem(position));
 		WebElement article = driver.findElement(byArticle);
-		click(article).by(By.xpath(XPathLinkRelativeArticle)).exec();
+		click(article).by(By.xpath(XPATH_LINK_RELATIVE_ARTICLE)).exec();
 	}
 	
 	@Override
@@ -103,7 +93,7 @@ public class LineasArtBolsaDesktopTmp extends LineasArtBolsa {
 	}
 	
 	private String getXPathItem(int position) {
-		return "(" + XPathItem + ")[" + position + "]";
+		return "(" + XPATH_ITEM + ")[" + position + "]";
 	}
 	
 	private String getXPathLinkBorrarArt() {
@@ -111,7 +101,7 @@ public class LineasArtBolsaDesktopTmp extends LineasArtBolsa {
 	}
 	
 	private String getXPathLinkBorrarArt(String refArticulo) {
-		return XPathLinkBorrarArtRef.replace(TagRef, refArticulo);
+		return XPATH_LINK_BORRAR_ART_REF.replace(TAG_REF, refArticulo);
 	}
 	
 }

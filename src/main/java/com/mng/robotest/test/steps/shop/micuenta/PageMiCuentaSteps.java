@@ -43,7 +43,7 @@ public class PageMiCuentaSteps {
 	}
 
 	public void goToMisDatos(String usuarioReg) {
-		SecMenusUserSteps userMenusSteps = SecMenusUserSteps.getNew(channel, app, driver);
+		SecMenusUserSteps userMenusSteps = new SecMenusUserSteps(channel, app);
 		userMenusSteps.clickMenuMiCuenta();
 		clickLinkMisDatos(usuarioReg);
 	}
@@ -63,7 +63,7 @@ public class PageMiCuentaSteps {
 	}
 
 	public void goToMisComprasFromMenu(Pais pais) {
-		SecMenusUserSteps userMenusSteps = SecMenusUserSteps.getNew(channel, app, driver);
+		SecMenusUserSteps userMenusSteps = new SecMenusUserSteps(channel, app);
 		userMenusSteps.clickMenuMiCuenta();
 		goToMisComprasFromMenuAndValidate(pais);
 	}
@@ -79,7 +79,7 @@ public class PageMiCuentaSteps {
 			PageInfoNewMisComprasMovilSteps.clickButtonToMisComprasAndNoValidate(driver);
 		}
 
-		PageMisComprasSteps pageMisComprasSteps = PageMisComprasSteps.getNew(channel, app, driver);
+		PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps(channel, app);
 		pageMisComprasSteps.validateIsPage(pais);
 		
 		GenericChecks.from(Arrays.asList(
@@ -100,7 +100,7 @@ public class PageMiCuentaSteps {
 	}
 
 	public void goToSuscripciones() {
-		SecMenusUserSteps userMenusSteps = SecMenusUserSteps.getNew(channel, app, driver);
+		SecMenusUserSteps userMenusSteps = new SecMenusUserSteps(channel, app);
 		userMenusSteps.clickMenuMiCuenta();
 		clickLinkSuscripciones();
 	}
@@ -124,22 +124,8 @@ public class PageMiCuentaSteps {
 		PageSuscripcionesSteps.create(driver).validaIsDataAssociatedToRegister(datosRegOk);
 	}
 
-//	public void goToMisPedidos (String usrRegistrado) {
-//		SecMenusUserSteps userMenusSteps = SecMenusUserSteps.getNew(channel, app, driver);
-//		userMenusSteps.clickMenuMiCuenta();
-//		clickLinkMisPedidos(usrRegistrado);
-//	}
-
-//	@Step(
-//		description = "Seleccionar el link \"Mis pedidos\"",
-//		expected = "Aparece la página de \"Mis pedidos\" sin pedidos")
-//	private void clickLinkMisPedidos(String usrRegistrado) {
-//		pageMiCuenta.clickMisPedidos();
-//		PagePedidosSteps.validaIsPageSinPedidos(usrRegistrado, driver);
-//	}
-
 	public void goToDevoluciones() {
-		SecMenusUserSteps userMenusSteps = SecMenusUserSteps.getNew(channel, app, driver);
+		SecMenusUserSteps userMenusSteps = new SecMenusUserSteps(channel, app);
 		userMenusSteps.clickMenuMiCuenta();
 		clickLinkDevoluciones();
 	}
@@ -153,7 +139,7 @@ public class PageMiCuentaSteps {
 	}
 
 	public void goToReembolsos() {
-		SecMenusUserSteps userMenusSteps = SecMenusUserSteps.getNew(channel, app, driver);
+		SecMenusUserSteps userMenusSteps = new SecMenusUserSteps(channel, app);
 		userMenusSteps.clickMenuMiCuenta();
 		clickLinkReembolsos();
 	}

@@ -47,7 +47,7 @@ public class CompraEgoitz {
 		//Access and add articles
 		AccesoSteps.oneStep(dCtxSh, false, driver);
 		DataBag dataBag = new DataBag();
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh, driver);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh);
 		secBolsaSteps.altaListaArticulosEnBolsa(listArticles, dataBag);
 		
 		//To checkout Page

@@ -52,7 +52,7 @@ public class EgyptOrderTest implements Serializable {
 		GarmentCatalog article = UtilsTest.getArticleForTest(dCtxSh, driver);
 		
 		DataBag dataBag = new DataBag(); 
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh, driver);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh);
 		secBolsaSteps.altaListaArticulosEnBolsa(Arrays.asList(article), dataBag);
 		
 		DataCtxPago dCtxPago = makeDataPayment(dCtxSh, dataBag);

@@ -1,7 +1,6 @@
 package com.mng.robotest.test.pageobject.shop.miscompras;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
@@ -12,13 +11,9 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageDetalleCompraOld extends PageObjTM implements PageDetallePedido {
 	
-	private static final String XPathDivDetalle = "//div[@id='myPurchasesPage']";
-	private static final String XPathLineaPrenda = "//div[@class[contains(.,'small-box-container')]]";
-	private static final String XPathBackButton = "//div[@class[contains(.,'shopping-breadcrumbs')]]";
-	
-	public PageDetalleCompraOld(WebDriver driver) {
-		super(driver);
-	}
+	private static final String XPATH_DIV_DETALLE = "//div[@id='myPurchasesPage']";
+	private static final String XPATH_LINEA_PRENDA = "//div[@class[contains(.,'small-box-container')]]";
+	private static final String XPATH_BACK_BUTTON = "//div[@class[contains(.,'shopping-breadcrumbs')]]";
 	
 	@Override
 	public DetallePedido getTypeDetalle() {
@@ -27,7 +22,7 @@ public class PageDetalleCompraOld extends PageObjTM implements PageDetallePedido
 	
 	@Override
 	public boolean isPage() {
-		return (state(Present, By.xpath(XPathDivDetalle)).check());
+		return (state(Present, By.xpath(XPATH_DIV_DETALLE)).check());
 	}
 	
 	@Override
@@ -37,16 +32,16 @@ public class PageDetalleCompraOld extends PageObjTM implements PageDetallePedido
 	
 	@Override
 	public boolean isVisiblePrendaUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathLineaPrenda)).wait(maxSeconds).check());
+		return (state(Visible, By.xpath(XPATH_LINEA_PRENDA)).wait(maxSeconds).check());
 	}
 	
 	@Override
 	public int getNumPrendas() {
-		return (driver.findElements(By.xpath(XPathLineaPrenda)).size());
+		return (driver.findElements(By.xpath(XPATH_LINEA_PRENDA)).size());
 	}
 	
 	@Override
 	public void clickBackButton(Channel channel) {
-		click(By.xpath(XPathBackButton)).exec();
+		click(By.xpath(XPATH_BACK_BUTTON)).exec();
 	}
 }

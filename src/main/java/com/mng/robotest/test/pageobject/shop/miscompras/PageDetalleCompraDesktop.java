@@ -1,7 +1,6 @@
 package com.mng.robotest.test.pageobject.shop.miscompras;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -11,9 +10,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	
-	private final SectionPrendas sectionPrendas;
+	private final SectionPrendas sectionPrendas = new SectionPrendas();
 	
-	//private static String XPathIdTicket = "//*[@data-testid[contains(.,'purchaseNumber')]]";
 	private static String XPathIdTicket = "//h2[@class[contains(.,'text-title-xl')]]/span";
 	private static String XPathImporte = "//*[@data-testid[contains(.,'detail.totalPrice')]]";
 	
@@ -21,9 +19,8 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	private static String XPathDireccionEnvioOnline = XPathIdTicket + "/../../../div[2]//div[@class[contains(.,'sg-body-small')]]";
 	private static String XPathLinkToMisCompras = "//*[@data-testid[contains(.,'detail.goBack')]]";
 	
-	public PageDetalleCompraDesktop(Channel channel, WebDriver driver) {
-		super(channel, driver);
-		this.sectionPrendas = new SectionPrendas(driver);
+	public PageDetalleCompraDesktop(Channel channel) {
+		super(channel);
 	}
 
 

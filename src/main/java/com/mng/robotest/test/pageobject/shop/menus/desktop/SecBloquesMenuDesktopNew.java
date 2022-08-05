@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -45,9 +44,8 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	private static final String XPathMenuLink = XPathCapaMenus + "/li[@data-testid[contains(.,'link')]]";
 	private static final String XPathRightImage = XPathWrapperGlobal + "//a/img/..";
 
-	
-	public SecBloquesMenuDesktopNew(AppEcom app, Channel channel, WebDriver driver) {
-		super(app, channel, driver);
+	public SecBloquesMenuDesktopNew(AppEcom app, Channel channel) {
+		super(app, channel);
 	}
 	
 	private String getXPathGroupSection(LineaType lineaType, SublineaType sublineaType) {

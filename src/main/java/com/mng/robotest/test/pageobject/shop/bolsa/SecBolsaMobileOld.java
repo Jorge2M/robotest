@@ -3,7 +3,6 @@ package com.mng.robotest.test.pageobject.shop.bolsa;
 import java.util.ListIterator;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -15,43 +14,33 @@ import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.utils.ImporteScreen;
 
-/**
- * Clase que define la automatización de las diferentes funcionalidades de la sección de "Bolsa"
- * @author jorge.munoz
- *
- */
+
 public class SecBolsaMobileOld extends SecBolsa {
 	
 	private final LineasArtBolsa lineasArtBolsa;
 	
-	private static final String XPathPanelBolsa = "//div[@class[contains(.,'m_bolsa')]]"; 
-	private static final String XPathBotonComprar = "//div[@class='comButton']/span"; 
-	private static final String XPathPrecioSubTotal = "//div[@class[contains(.,'totalPriceContainer')]]";
+	private static final String XPATH_PANEL_BOLSA = "//div[@class[contains(.,'m_bolsa')]]"; 
+	private static final String XPATH_BOTON_COMPRAR = "//div[@class='comButton']/span"; 
+	private static final String XPATH_PRECIO_SUB_TOTAL = "//div[@class[contains(.,'totalPriceContainer')]]";
 	
-	
-	public SecBolsaMobileOld(AppEcom app, Pais pais, WebDriver driver) {
-		super(Channel.mobile, app, driver);
-		//List<String> countrysNewBag = Arrays.asList("001","011","005","010","060","009","066","092","007","003");
-		//if (countrysNewBag.contains(pais.getCodigo_pais()) && app!=AppEcom.outlet) {
-		//	lineasArtBolsa = new LineasArtBolsaNew(channel, driver);
-		//} else {
-			lineasArtBolsa = new LineasArtBolsaMobile(driver);
-		//}
+	public SecBolsaMobileOld(AppEcom app, Pais pais) {
+		super(Channel.mobile, app);
+		lineasArtBolsa = new LineasArtBolsaMobile();
 	}
 	
 	@Override
 	String getXPathPanelBolsa() {
-		return XPathPanelBolsa;
+		return XPATH_PANEL_BOLSA;
 	}
 	
 	@Override
 	String getXPathBotonComprar() {
-		return XPathBotonComprar;
+		return XPATH_BOTON_COMPRAR;
 	}
 	
 	@Override
 	String getXPathPrecioSubTotal() {
-		return XPathPrecioSubTotal;
+		return XPATH_PRECIO_SUB_TOTAL;
 	} 
 	
 	@Override

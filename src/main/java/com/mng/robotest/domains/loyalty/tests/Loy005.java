@@ -64,7 +64,7 @@ public class Loy005 extends TestBase {
 	}
 
 	private int clickMangoLikesYou() throws Exception {
-		return LoyaltyCommons.clickMangoLikesYou(channel, app, driver);
+		return LoyaltyCommons.clickMangoLikesYou(channel, app);
 	}
 	
 	private int givePoints(int pointsRegalar, int iniPointsEmisor) throws Exception {
@@ -85,7 +85,7 @@ public class Loy005 extends TestBase {
 	}
 	
 	private void login(User user, String password) throws Exception {
-		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps(channel, app, driver);
+		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps(channel, app);
 		secMenusUserSteps.logoffLogin(user.getEmail(), password);
 	}
 }

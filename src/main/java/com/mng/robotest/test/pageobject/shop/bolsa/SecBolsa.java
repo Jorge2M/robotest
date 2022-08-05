@@ -38,19 +38,18 @@ public abstract class SecBolsa extends PageObjTM {
 	
 	private static final String XPATH_ASPA = "//span[@class[contains(.,'outline-close')]]";
 
-	public static SecBolsa make(DataCtxShop dCtxShop, WebDriver driver) {
-		return make(dCtxShop.channel, dCtxShop.appE, dCtxShop.pais, driver);
+	public static SecBolsa make(DataCtxShop dCtxShop) {
+		return make(dCtxShop.channel, dCtxShop.appE, dCtxShop.pais);
 	}
 	
-	public static SecBolsa make(Channel channel, AppEcom app, Pais pais, WebDriver driver) {
+	public static SecBolsa make(Channel channel, AppEcom app, Pais pais) {
 		if (app==AppEcom.outlet && channel==Channel.mobile) {
-			return new SecBolsaMobileOld(app, pais, driver);
+			return new SecBolsaMobileOld(app, pais);
 		}
-		return new SecBolsaNew(channel, app, pais, driver);
+		return new SecBolsaNew(channel, app, pais);
 	}
 	
-	protected SecBolsa(Channel channel, AppEcom app, WebDriver driver) {
-		super(driver);
+	protected SecBolsa(Channel channel, AppEcom app) {
 		this.channel = channel;
 		this.app = app;
 	}

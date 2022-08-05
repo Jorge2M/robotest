@@ -1,7 +1,6 @@
 package com.mng.robotest.test.pageobject.shop.miscompras;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.test.pageobject.shop.footer.PageFromFooter;
@@ -11,13 +10,9 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageInputPedido extends PageObjTM implements PageFromFooter {
 	
-	private static final String XPathInputPedido = "//input[@id[contains(.,'pedidoId')]]";
-	private static final String XPathInputEmailUsr = "//input[@id[contains(.,'mailPedido')]]";
-	private static final String XPathLinkRecuperarDatos = "//*[@onclick[contains(.,'FPedidoMail')]]";
-	
-	public PageInputPedido(WebDriver driver) {
-		super(driver);
-	}
+	private static final String XPATH_INPUT_PEDIDO = "//input[@id[contains(.,'pedidoId')]]";
+	private static final String XPATH_INPUT_EMAIL_USR = "//input[@id[contains(.,'mailPedido')]]";
+	private static final String XPATH_LINK_RECUPERAR_DATOS = "//*[@onclick[contains(.,'FPedidoMail')]]";
 	
 	@Override
 	public String getName() {
@@ -26,24 +21,24 @@ public class PageInputPedido extends PageObjTM implements PageFromFooter {
 	
 	@Override
 	public boolean isPageCorrectUntil(int maxSeconds) {
-		return (state(Present, By.xpath(XPathInputPedido)).wait(maxSeconds).check());
+		return (state(Present, By.xpath(XPATH_INPUT_PEDIDO)).wait(maxSeconds).check());
 	}
 	
 	public boolean isVisibleInputPedido() {
-		return (state(Visible, By.xpath(XPathInputPedido)).check());
+		return (state(Visible, By.xpath(XPATH_INPUT_PEDIDO)).check());
 	}
 	
 	public void inputPedido(String codPedido) {
-		driver.findElement(By.xpath(XPathInputPedido)).clear();
-		driver.findElement(By.xpath(XPathInputPedido)).sendKeys(codPedido);
+		driver.findElement(By.xpath(XPATH_INPUT_PEDIDO)).clear();
+		driver.findElement(By.xpath(XPATH_INPUT_PEDIDO)).sendKeys(codPedido);
 	}
 	
 	public void inputEmailUsr(String emailUsr) {
-		driver.findElement(By.xpath(XPathInputEmailUsr)).clear();
-		driver.findElement(By.xpath(XPathInputEmailUsr)).sendKeys(emailUsr);
+		driver.findElement(By.xpath(XPATH_INPUT_EMAIL_USR)).clear();
+		driver.findElement(By.xpath(XPATH_INPUT_EMAIL_USR)).sendKeys(emailUsr);
 	}
 	
 	public void clickRecuperarDatos() {
-		click(By.xpath(XPathLinkRecuperarDatos)).exec();
+		click(By.xpath(XPATH_LINK_RECUPERAR_DATOS)).exec();
 	}
 }

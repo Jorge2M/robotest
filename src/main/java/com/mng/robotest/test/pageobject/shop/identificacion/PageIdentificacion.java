@@ -1,10 +1,10 @@
 package com.mng.robotest.test.pageobject.shop.identificacion;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
@@ -17,35 +17,28 @@ import com.mng.robotest.test.pageobject.shop.modales.ModalActPoliticaPrivacidad;
 import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test.pageobject.shop.modales.ModalLoyaltyAfterLogin;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-/**
- * Clase que define la automatización de las diferentes funcionalidades de la página de autentificación de 
- * Jasig CAS que aparece en los entornos de test cuando se accede desde fuera 
- * @author jorge.munoz
- *
- */
-public class PageIdentificacion {
+
+public class PageIdentificacion extends PageObjTM {
 	
-	private static String avisoCredencialesKO = "Tu e-mail o contraseña no son correctos";
-	static String XPathErrorCredencialesKO = "//div[@class='formErrors']//li[text()[contains(.,'" + avisoCredencialesKO + "')]]";
-	static String XPathHasOlvidadoContrasenya = "//span[text()[contains(.,'¿Has olvidado tu contraseña?')]]/../../a";
-	static String XPathInputUser = "//input[@id[contains(.,'userMail')]]";
-	static String XPathInputPassword = "//input[@id[contains(.,'chkPwd')]]";
-	static String XPathSubmitButton = "//div[@class='submitContent']/input[@type='submit']";
+	private static final String AVISO_CREDENCIALES_KO = "Tu e-mail o contraseña no son correctos";
+	private static final String XPATH_ERROR_CREDENCIALES_KO = "//div[@class='formErrors']//li[text()[contains(.,'" + AVISO_CREDENCIALES_KO + "')]]";
+	private static final String XPATH_HAS_OLVIDADO_CONTRASENYA = "//span[text()[contains(.,'¿Has olvidado tu contraseña?')]]/../../a";
+	private static final String XPATH_INPUT_USER = "//input[@id[contains(.,'userMail')]]";
+	private static final String XPATH_INPUT_PASSWORD = "//input[@id[contains(.,'chkPwd')]]";
+	private static final String XPATH_SUBMIT_BUTTON = "//div[@class='submitContent']/input[@type='submit']";
 
-	public static boolean isVisibleUserUntil(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(XPathInputUser), driver)
-				.wait(maxSeconds).check());
+	public boolean isVisibleUserUntil(int maxSeconds) {
+		return (state(Visible, By.xpath(XPATH_INPUT_USER)).wait(maxSeconds).check());
 	}
 
-	public static String getLiteralAvisiCredencialesKO() {
-		return avisoCredencialesKO;
+	public String getLiteralAvisiCredencialesKO() {
+		return AVISO_CREDENCIALES_KO;
 	}
 
-	public static void inputUserPassword(String usuario, String password, WebDriver driver) {
-		By byInput = By.xpath(XPathInputUser);
+	public void inputUserPassword(String usuario, String password) {
+		By byInput = By.xpath(XPATH_INPUT_USER);
 		try {
 			driver.findElement(byInput).clear();
 		}
@@ -55,55 +48,49 @@ public class PageIdentificacion {
 		waitMillis(250);
 		driver.findElement(byInput).sendKeys(usuario);
 		waitMillis(250);
-		driver.findElement(By.xpath(XPathInputPassword)).sendKeys(password);
+		driver.findElement(By.xpath(XPATH_INPUT_PASSWORD)).sendKeys(password);
 	}
 
-	/**
-	 * Realizamos un login/logoff según el parámetro 'accUsrReg' que identifica si es preciso que el usuario esté logado
-	 */
-	public static void loginOrLogoff(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+	public void loginOrLogoff(DataCtxShop dCtxSh) throws Exception {
 		if (dCtxSh.userRegistered) {
-			iniciarSesion(dCtxSh, driver);
+			iniciarSesion(dCtxSh);
 		} else {
-			SecMenusWrap secMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+			SecMenusWrap secMenus = new SecMenusWrap(dCtxSh.channel, dCtxSh.appE);
 			secMenus.closeSessionIfUserLogged();
 		}
 	}
 	
-	/**
-	 * Función que ejecuta la identificación del usuario. Introduce las credenciales del usuario y seleccióna el botón de submit
-	 */
-	public static void iniciarSesion(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-		iniciarSesion(dCtxSh.userConnected, dCtxSh.passwordUser, dCtxSh.channel, dCtxSh.appE, driver);
+	public void iniciarSesion(DataCtxShop dCtxSh) throws Exception {
+		iniciarSesion(dCtxSh.userConnected, dCtxSh.passwordUser, dCtxSh.channel, dCtxSh.appE);
 	}
 	 
-	public static void iniciarSesion(String user, String password, Channel channel, AppEcom app, WebDriver driver) {
-		clickIniciarSesionAndWait(channel, app, driver);
-		isVisibleUserUntil(10, driver);
+	public void iniciarSesion(String user, String password, Channel channel, AppEcom app) {
+		clickIniciarSesionAndWait(channel, app);
+		isVisibleUserUntil(10);
 		//normalizeLoginForDefeatAkamai(channel, app, driver);
-		PageIdentificacion.inputUserPassword(user, password, driver);
-		clickButtonEntrar(driver);
+		new PageIdentificacion().inputUserPassword(user, password);
+		clickButtonEntrar();
 		ModalCambioPais.closeModalIfVisible(driver);
 		ModalActPoliticaPrivacidad.clickOkIfVisible(driver);
 		ModalLoyaltyAfterLogin.closeModalIfVisible(driver);
 	}	
 	
-	private static void clickButtonEntrar(WebDriver driver) {
-		click(By.xpath(XPathSubmitButton), driver).waitLoadPage(10).exec(); 
-		if (isButtonEntrarVisible(driver)) {
-			click(By.xpath(XPathSubmitButton), driver).type(javascript).waitLoadPage(10).exec();
+	private void clickButtonEntrar() {
+		click(By.xpath(XPATH_SUBMIT_BUTTON)).waitLoadPage(10).exec(); 
+		if (isButtonEntrarVisible()) {
+			click(By.xpath(XPATH_SUBMIT_BUTTON)).type(javascript).waitLoadPage(10).exec();
 		}
 	}
 	
-	public static boolean isButtonEntrarVisible(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathSubmitButton), driver).check());
+	public boolean isButtonEntrarVisible() {
+		return (state(Visible, By.xpath(XPATH_SUBMIT_BUTTON), driver).check());
 	}
 
 	/**
 	 * Seleccionamos el link "Iniciar Sesión" y esperamos a que los campos de input estén disponibles
 	 */
 	@SuppressWarnings("static-access")
-	public static void clickIniciarSesionAndWait(Channel channel, AppEcom app, WebDriver driver) {
+	public void clickIniciarSesionAndWait(Channel channel, AppEcom app) {
 		if (channel.isDevice()) {
 			//En el caso de mobile nos tenemos que asegurar que están desplegados los menús
 			SecCabecera secCabeceraDevice = SecCabecera.getNew(channel, app);
@@ -112,7 +99,7 @@ public class PageIdentificacion {
 			
 			// Si existe, nos posicionamos y seleccionamos el link \"CERRAR SESIÓN\" 
 			// En el caso de iPhone parece que mantiene la sesión abierta después de un caso de prueba 
-			SecMenusWrap secMenus = SecMenusWrap.getNew(channel, app, driver);
+			SecMenusWrap secMenus = new SecMenusWrap(channel, app);
 			boolean menuClicado = secMenus.getMenusUser().clickMenuIfInState(UserMenu.cerrarSesion, Clickable);
 			
 			//Si hemos clicado el menú 'Cerrar Sesión' volvemos a abrir los menús
@@ -121,15 +108,15 @@ public class PageIdentificacion {
 			}
 		}
 		
-		SecMenusWrap secMenus = SecMenusWrap.getNew(channel, app, driver);
+		SecMenusWrap secMenus = new SecMenusWrap(channel, app);
 		secMenus.getMenusUser().moveAndClick(UserMenu.iniciarSesion);
 	}
 	
-	public static boolean isErrorEmailoPasswordKO(WebDriver driver) {
-		return (state(Present, By.xpath(XPathErrorCredencialesKO), driver).check());
+	public boolean isErrorEmailoPasswordKO() {
+		return (state(Present, By.xpath(XPATH_ERROR_CREDENCIALES_KO)).check());
 	}
 
-	public static void clickHasOlvidadoContrasenya(WebDriver driver) {
-		click(By.xpath(XPathHasOlvidadoContrasenya), driver).exec();
+	public void clickHasOlvidadoContrasenya() {
+		click(By.xpath(XPATH_HAS_OLVIDADO_CONTRASENYA)).exec();
 	}
 }

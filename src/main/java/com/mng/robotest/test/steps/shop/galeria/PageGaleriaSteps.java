@@ -174,14 +174,14 @@ public class PageGaleriaSteps {
 		expected="Se da de alta correctamente el artículo en la bolsa",
 		saveHtmlPage=SaveWhen.Always)
 	public boolean selectTallaAvailableArticulo(int posArticulo, int posTalla, DataBag dataBag, DataCtxShop dCtxSh) 
-	throws Exception {
+			throws Exception {
 		ArticuloScreen articulo = pageGaleria.selectTallaAvailableArticle(posArticulo, posTalla);
 		boolean tallaVisible = (articulo!=null);
 		//ModalArticleNotAvailableSteps modalArticleNotAvailableSteps = ModalArticleNotAvailableSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		//boolean notVisibleAvisame = modalArticleNotAvailableSteps.validateState(1, StateModal.notvisible, driver);
 		if (tallaVisible) {
 			dataBag.addArticulo(articulo);
-			SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh, driver);
+			SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh);
 			secBolsaSteps.validaAltaArtBolsa(dataBag);
 		}
 
@@ -705,7 +705,7 @@ public class PageGaleriaSteps {
 	 		"El banner de cabecera contiene el porcentaje de descuento<b>" + maxPercDiscount + "</b>",
 	 		UtilsTest.textContainsSetenta(textBanner, idioma), State.Warn);
 	 	
-	 	SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, channel, driver);
+	 	SecMenusDesktop secMenus = new SecMenusDesktop(app, channel);
 	 	int menusDescVisibles = secMenus.secMenusFiltroDiscount.getNumberOfVisibleMenus();
 	 	checks.add(
 	 		"No aparece ningún filtro de descuento",

@@ -88,7 +88,7 @@ public class CheckoutFlow {
 		this.dCtxPago = dCtxPago;
 		this.pago = pago;
 		this.egyptCity = egyptCity;
-		this.secBolsaSteps = new SecBolsaSteps(dCtxSh, driver);
+		this.secBolsaSteps = new SecBolsaSteps(dCtxSh);
 		this.pageCheckoutWrapperSteps = new PageCheckoutWrapperSteps(dCtxSh.channel, dCtxSh.appE, driver);
 	}
 	
@@ -309,7 +309,7 @@ public class CheckoutFlow {
 		pagoSteps.testPagoFromCheckout(execPay);
 		dataPedido = dCtxPago.getDataPedido();
 		if (execPay) {
-			PageResultPagoSteps pageResultPagoSteps = new PageResultPagoSteps(pagoToTest.getTypePago(), dCtxSh.channel, driver);
+			PageResultPagoSteps pageResultPagoSteps = new PageResultPagoSteps(pagoToTest.getTypePago(), dCtxSh.channel);
 			if (dCtxPago.getFTCkout().stressMode) {
 				pageResultPagoSteps.checkUrl(10);
 			}
@@ -487,7 +487,7 @@ public class CheckoutFlow {
 		}
 		
 		AccesoNavigations.accesoHomeAppWeb(dCtxSh, dCtxPago.getFTCkout().acceptCookies, driver);
-		PageIdentificacion.loginOrLogoff(dCtxSh, driver);
+		new PageIdentificacion().loginOrLogoff(dCtxSh);
 	}
 	
 	public static class BuilderCheckout {

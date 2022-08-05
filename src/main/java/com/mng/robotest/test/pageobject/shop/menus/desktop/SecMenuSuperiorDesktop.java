@@ -12,7 +12,7 @@ public class SecMenuSuperiorDesktop {
 	
 	private SecMenuSuperiorDesktop(AppEcom app, Channel channel, WebDriver driver) {
 		secLineas = SecLineasMenuDesktop.factory(app, channel, driver);
-		secBlockMenus = SecBloquesMenuDesktop.factory(app, channel, driver);
+		secBlockMenus = SecBloquesMenuDesktop.factory(app, channel);
 	}
 	
 	public static SecMenuSuperiorDesktop getNew(AppEcom app, Channel channel, WebDriver driver) {

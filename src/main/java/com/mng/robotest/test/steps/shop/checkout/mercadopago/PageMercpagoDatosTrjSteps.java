@@ -150,7 +150,7 @@ public class PageMercpagoDatosTrjSteps {
 	public void clickButtonForPayMobil(boolean afterTrjGuardada) {
 		((PageMercpagoDatosTrjMobil)pageMercpagoDatosTrj).clickButtonForPay();
 		if (afterTrjGuardada) {
-			(new PageResultPagoSteps(TypePago.Mercadopago, channel, driver)).validaIsPageUntil(30);
+			(new PageResultPagoSteps(TypePago.Mercadopago, channel)).validaIsPageUntil(30);
 		}
 		else {
 			PageMercpagoConfSteps.validaIsPageUntil(5, Channel.mobile, driver);
@@ -179,7 +179,7 @@ public class PageMercpagoDatosTrjSteps {
 		PageMercpagoDatosTrjDesktop pageDesktop = (PageMercpagoDatosTrjDesktop)pageMercpagoDatosTrj;
 		pageDesktop.clickBotonForContinue();
 		if (afterTrjGuardada) {
-			(new PageResultPagoSteps(TypePago.Mercadopago, channel, driver)).validaIsPageUntil(30);
+			(new PageResultPagoSteps(TypePago.Mercadopago, channel)).validaIsPageUntil(30);
 		}
 		else {
 			PageMercpagoConfSteps.validaIsPageUntil(10, Channel.desktop, driver);

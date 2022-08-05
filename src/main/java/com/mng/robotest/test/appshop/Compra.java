@@ -217,8 +217,8 @@ public class Compra {
 		String nTarjeta;
 		String cvvTarjeta = "";
 		AccesoSteps.oneStep(dCtxSh, false, driver);
-		new SecBolsaSteps(dCtxSh, driver).clear();
-		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+		new SecBolsaSteps(dCtxSh).clear();
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh);
 		secMenusSteps.seleccionLinea(LineaType.she, null, dCtxSh);
 		
 		PageChequeRegaloInputDataSteps pageChequeRegaloInputDataSteps = new PageChequeRegaloInputDataSteps(dCtxSh.pais, driver);
@@ -341,7 +341,7 @@ public class Compra {
 				//Cerramos sesión y nos volvemos a identificar con los datos del registro
 				String usrEmail = dCtxPago.getDatosRegistro().get("cfEmail");
 				String password = dCtxPago.getDatosRegistro().get("cfPass");
-				SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+				SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh);
 				secMenusSteps.getMenusUser().logoffLogin(usrEmail, password);
 					
 				//Ejecutamos la consulta de Mis datos comprobando que son coherentes con los utilizados en el registro

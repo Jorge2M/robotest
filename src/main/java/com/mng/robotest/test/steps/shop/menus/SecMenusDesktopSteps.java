@@ -63,20 +63,15 @@ public class SecMenusDesktopSteps {
 
 	private static final String PREFIX_SALE = "<b style=\"color:blue\">Rebajas</b></br>";
 	
+	private final WebDriver driver = TestMaker.getDriverTestCase();
 	private final Pais pais;
 	private final AppEcom app;
-	private final WebDriver driver;
 	private final SecMenusDesktop secMenus;
 	
-	private SecMenusDesktopSteps(Pais pais, AppEcom app, Channel channel, WebDriver driver) {
+	public SecMenusDesktopSteps(Pais pais, AppEcom app, Channel channel) {
 		this.pais = pais;
 		this.app = app;
-		this.driver = driver;
-		this.secMenus = SecMenusDesktop.getNew(app, channel, driver);
-	}
-	
-	public static SecMenusDesktopSteps getNew(Pais pais, AppEcom app, Channel channel, WebDriver driver) {
-		return (new SecMenusDesktopSteps(pais, app, channel, driver));
+		this.secMenus = new SecMenusDesktop(app, channel);
 	}
 	
 	/**
@@ -185,7 +180,7 @@ public class SecMenusDesktopSteps {
 		}
 		
 		pageGaleriaSteps.getSecSelectorPreciosSteps().validaIsSelector();
-		SecMenusWrap secMenus = SecMenusWrap.getNew(Channel.desktop, app, driver);
+		SecMenusWrap secMenus = new SecMenusWrap(Channel.desktop, app);
 		LineaType lineaResult = secMenus.getLineaResultAfterClickMenu(menu.getLinea(), menu.getNombre());
 		validateIsLineaSelected(lineaResult);	
 	}
@@ -260,7 +255,7 @@ public class SecMenusDesktopSteps {
 		
 		validaPaginaResultMenu(menu1rstLevel);
 		
-		SecMenusWrap secMenus = SecMenusWrap.getNew(Channel.desktop, app, driver);
+		SecMenusWrap secMenus = new SecMenusWrap(Channel.desktop, app);
 		LineaType lineaResult = secMenus.getLineaResultAfterClickMenu(lineaMenu, menu1rstLevel.getNombre());
 		validateIsLineaSelected(lineaResult);
 	}

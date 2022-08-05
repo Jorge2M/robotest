@@ -15,7 +15,7 @@ public class Loy003 extends TestBase {
 	static final User USER = new User("test.performance22@mango.com", "6876577027622042923", "ES");
 	final boolean isPro = LoyaltyCommons.isPro(app, driver);
 	
-	private final SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps(channel, app, driver);
+	private final SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps(channel, app);
 	private final PageHomeLikesSteps pageHomeLikesSteps = new PageHomeLikesSteps();
 	private final PageHomeConseguirPorLikesSteps pageHomeConseguirPorLikesSteps = new PageHomeConseguirPorLikesSteps();
 	
@@ -40,9 +40,9 @@ public class Loy003 extends TestBase {
 	public void execute() throws Exception {
 		AccesoSteps.oneStep(dataTest, false, driver);
 		
-		int loyaltyPointsIni = LoyaltyCommons.clickMangoLikesYou(channel, app, driver);
+		int loyaltyPointsIni = LoyaltyCommons.clickMangoLikesYou(channel, app);
 		if (loyaltyPointsIni < 3000 && !isPro) {
-			loyaltyPointsIni = LoyaltyCommons.addLoyaltyPoints(USER, channel, app, driver);
+			loyaltyPointsIni = LoyaltyCommons.addLoyaltyPoints(USER, channel, app);
 		}
 		pageHomeLikesSteps.clickConseguirPorLikesButton();
 		

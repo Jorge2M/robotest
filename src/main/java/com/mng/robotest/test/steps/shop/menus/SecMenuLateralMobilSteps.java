@@ -33,16 +33,15 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 public class SecMenuLateralMobilSteps {
-	
+
+	private final WebDriver driver = TestMaker.getDriverTestCase(); 
 	private final Channel channel;
 	private final AppEcom app;
-	private final WebDriver driver;
 	private final SecMenuLateralDevice secMenuLateral;
 	
-	public SecMenuLateralMobilSteps(Channel channel, AppEcom app, WebDriver driver) {
+	public SecMenuLateralMobilSteps(Channel channel, AppEcom app) {
 		this.channel = channel;
 		this.app = app;
-		this.driver = driver;
 		secMenuLateral = new SecMenuLateralDevice(channel, app);
 	}
 	

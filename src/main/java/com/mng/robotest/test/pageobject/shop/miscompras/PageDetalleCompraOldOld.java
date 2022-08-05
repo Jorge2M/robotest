@@ -1,7 +1,6 @@
 package com.mng.robotest.test.pageobject.shop.miscompras;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
@@ -12,14 +11,10 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageDetalleCompraOldOld extends PageObjTM implements PageDetallePedido {
 	
-	private static final String XPathDivDetalle = "//div[@class[contains(.,'detallePedido')]]";
-	private static final String XPathLineaPrenda = "//tr/td[@align='left' and @height='30']/..";
-	private static final String XPathIrATiendaButton = "(//div[@id[contains(.,'ListaDetail')]])[1]";
-	private static final String XPathBackButton = "(//div[@id[contains(.,'ListaDetail')]])[2]";
-	
-	public PageDetalleCompraOldOld(WebDriver driver) {
-		super(driver);
-	}
+	private static final String XPATH_DIV_DETALLE = "//div[@class[contains(.,'detallePedido')]]";
+	private static final String XPATH_LINEA_PRENDA = "//tr/td[@align='left' and @height='30']/..";
+	private static final String XPATH_IR_A_TIENDA_BUTTON = "(//div[@id[contains(.,'ListaDetail')]])[1]";
+	private static final String XPATH_BACK_BUTTON = "(//div[@id[contains(.,'ListaDetail')]])[2]";
 	
 	@Override
 	public DetallePedido getTypeDetalle() {
@@ -28,7 +23,7 @@ public class PageDetalleCompraOldOld extends PageObjTM implements PageDetallePed
 	
 	@Override
 	public boolean isPage() {
-		return (state(Present, By.xpath(XPathDivDetalle)).check());
+		return (state(Present, By.xpath(XPATH_DIV_DETALLE)).check());
 	}
 	
 	@Override
@@ -38,20 +33,20 @@ public class PageDetalleCompraOldOld extends PageObjTM implements PageDetallePed
 	
 	@Override
 	public boolean isVisiblePrendaUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathLineaPrenda)).wait(maxSeconds).check());
+		return (state(Visible, By.xpath(XPATH_LINEA_PRENDA)).wait(maxSeconds).check());
 	}
 	
 	@Override
 	public int getNumPrendas() {
-		return (driver.findElements(By.xpath(XPathLineaPrenda)).size());
+		return (driver.findElements(By.xpath(XPATH_LINEA_PRENDA)).size());
 	}
 	
 	@Override
 	public void clickBackButton(Channel channel) {
-		click(By.xpath(XPathBackButton)).exec();
+		click(By.xpath(XPATH_BACK_BUTTON)).exec();
 	}
 	
 	public void clickIrATiendaButton() {
-		click(By.xpath(XPathIrATiendaButton)).exec();
+		click(By.xpath(XPATH_IR_A_TIENDA_BUTTON)).exec();
 	}	
 }

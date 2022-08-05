@@ -129,7 +129,7 @@ public class Reembolsos {
 		float saldoCtaIni = PageReembolsos.getImporteStoreCredit(driver);
 		
 		DataBag dataBag = new DataBag(); 
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh, driver);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh);
 		secBolsaSteps.altaArticlosConColores(1, dataBag);
 		
 		//Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
@@ -160,7 +160,7 @@ public class Reembolsos {
 		
 		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
 			//Volvemos a la portada (Seleccionamos el link "Seguir de shopping" o el icono de Mango)
-			PageResultPagoSteps pageResultPagoSteps = new PageResultPagoSteps(pagoStoreCredit.getTypePago(), dCtxSh.channel, driver);
+			PageResultPagoSteps pageResultPagoSteps = new PageResultPagoSteps(pagoStoreCredit.getTypePago(), dCtxSh.channel);
 			pageResultPagoSteps.selectSeguirDeShopping(dCtxSh.appE);
 			
 			//Calculamos el saldo en cuenta que debería quedar (según si se ha realizado o no el pago);

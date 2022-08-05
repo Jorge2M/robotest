@@ -132,7 +132,7 @@ public class CompraFact implements Serializable {
 		}
 		
 		DataBag dataBag = new DataBag(); 
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh, driver);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh);
 		secBolsaSteps.altaListaArticulosEnBolsa(listArticles, dataBag);
 		
 		//Hasta página Checkout

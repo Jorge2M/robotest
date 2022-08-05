@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop.pedidos;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -10,21 +8,16 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.pageobject.shop.miscompras.PageInputPedido;
 
+
 public class PageInputPedidoSteps {
 
-	private final WebDriver driver;
 	private final Channel channel;
 	private final AppEcom app;
-	private final PageInputPedido pageInputPedido;
+	private final PageInputPedido pageInputPedido = new PageInputPedido();
 	
-	private PageInputPedidoSteps(Channel channel, AppEcom app, WebDriver driver) {
+	private PageInputPedidoSteps(Channel channel, AppEcom app) {
 		this.channel = channel;
 		this.app = app;
-		this.driver = driver;
-		this.pageInputPedido = new PageInputPedido(driver);
-	}
-	public static PageInputPedidoSteps getNew(Channel channel, AppEcom app, WebDriver driver) {
-		return new PageInputPedidoSteps(channel, app, driver);
 	}
 	
 	@Validation (
@@ -46,7 +39,7 @@ public class PageInputPedidoSteps {
 		pageInputPedido.inputPedido(codPedido);
 		pageInputPedido.clickRecuperarDatos();
 
-		PageDetallePedidoSteps pageDetPedidoSteps = new PageDetallePedidoSteps(channel, app, driver);
+		PageDetallePedidoSteps pageDetPedidoSteps = new PageDetallePedidoSteps(channel, app);
 		pageDetPedidoSteps.validateIsPageOk(dataPedido);
 	}
 }

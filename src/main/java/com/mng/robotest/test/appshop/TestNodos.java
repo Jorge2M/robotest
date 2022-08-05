@@ -87,7 +87,7 @@ public class TestNodos implements Serializable {
 		NodoStatus nodoAnt = findNodoForCompareStatus(listaNodos, nodo);
 
 		new PagePrehomeSteps(dCtxSh, driver).seleccionPaisIdiomaAndEnter(true);
-		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh);
 		if (appE==AppEcom.shop) {
 			selectMenuPantalones(dCtxSh, driver);
 			PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, dCtxSh.appE, driver);
@@ -101,7 +101,7 @@ public class TestNodos implements Serializable {
 			pageGaleriaSteps.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
 		}
 		
-		SecMenusDesktopSteps secMenusDesktopSteps = SecMenusDesktopSteps.getNew(dCtxSh.pais, dCtxSh.appE, dCtxSh.channel, driver);
+		SecMenusDesktopSteps secMenusDesktopSteps = new SecMenusDesktopSteps(dCtxSh.pais, dCtxSh.appE, dCtxSh.channel);
 		secMenusDesktopSteps.seleccionLinea(LineaType.she);
 		secMenusDesktopSteps.countSaveMenusEntorno(LineaType.she, null, nodo.getIp(), autAddr);
 		int maxBannersToLoad = 1;
@@ -125,7 +125,7 @@ public class TestNodos implements Serializable {
 				dCtxSh.appE, KeyMenu1rstLevel.from(
 					LineaType.nina, 
 					SublineaType.nina_nina, "pantalones"));
-			SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh, driver);
+			SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh);
 			secMenusSteps.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh);
 	}
 	

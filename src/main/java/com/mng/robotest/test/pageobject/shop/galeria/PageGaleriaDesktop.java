@@ -110,7 +110,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	
 	@Override
 	public void hideMenus() {
-		SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, channel, driver);
+		SecMenusDesktop secMenus = new SecMenusDesktop(app, channel);
 		secMenus.hideMenus();
 	}
 	

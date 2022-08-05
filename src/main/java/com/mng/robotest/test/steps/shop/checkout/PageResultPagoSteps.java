@@ -7,6 +7,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Pago.TypePago;
@@ -24,12 +25,11 @@ import com.mng.robotest.test.utils.ImporteScreen;
 public class PageResultPagoSteps {
 
 	private final PageResultPago pageResultPago;
-	private final WebDriver driver;
+	private final WebDriver driver = TestMaker.getDriverTestCase();
 	private final Channel channel;
 	
-	public PageResultPagoSteps(TypePago typePago, Channel channel, WebDriver driver) {
+	public PageResultPagoSteps(TypePago typePago, Channel channel) {
 		this.pageResultPago = new PageResultPago(typePago, channel, driver);
-		this.driver = driver;
 		this.channel = channel;
 	}
 	
@@ -121,20 +121,6 @@ public class PageResultPagoSteps {
 		return (pageResultPago.isVisibleBlockNewLoyaltyPoints());
 	}
 	
-//	@Step (
-//		description="Seleccionar el link \"Mis pedidos\"", 
-//		expected="Apareca la página de identificación del pedido")
-//	public void selectMisPedidos(DataPedido dataPedido) throws Exception {
-//		pageResultPago.clickMisPedidos();	  
-//								
-//		//Validations. Puede aparecer la página con la lista de pedidos o la de introducción de los datos del pedido
-//		if (PageListPedidosOld.isPage(driver)) {
-//			PageListPedidosSteps.validateIsPage(dataPedido.getCodpedido(), driver);
-//		} else {
-//			PageInputPedidoSteps.getNew(channel, driver).validateIsPage();
-//		}
-//	}	
-	
 	@Step (
 		description="Seleccionar el link \"Mis Compras\"",
 		expected="Aparece la página de \"Mis compras\" o la de \"Acceso a Mis compras\" según si el usuario está o no loginado")
@@ -142,7 +128,7 @@ public class PageResultPagoSteps {
 	throws Exception {
 		pageResultPago.clickMisCompras();	 
 		if (userRegistered) {
-			PageMisComprasSteps pageMisComprasSteps = PageMisComprasSteps.getNew(channel, app, driver);
+			PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps(channel, app);
 			pageMisComprasSteps.validateIsPage(pais);
 		} else {
 			new PageAccesoMisComprasSteps().validateIsPage();
@@ -160,25 +146,12 @@ public class PageResultPagoSteps {
 		}
 	}
 	
-//	public void selectLinkPedidoAndValidatePedido(DataPedido dataPedido) 
-//	throws Exception {
-//		selectMisPedidos(dataPedido);
-//		StepTM StepTestMaker = TestMaker.getLastStep();
-//		if (StepTestMaker.getResultSteps()==State.Ok) {
-//			if (PageListPedidosOld.isPage(driver)) {
-//				PageListPedidosSteps.selectPedido(dataPedido.getCodpedido(), driver);
-//			} else {
-//				PageInputPedidoSteps.getNew(channel, driver).inputPedidoAndSubmit(dataPedido);
-//			}
-//		}
-//	}
-	
 	public void selectLinkMisComprasAndValidateCompra(DataCtxPago dCtxPago, DataCtxShop dCtxSh) 
 	throws Exception {		
 		selectMisCompras(dCtxSh.userRegistered, dCtxSh.appE, dCtxSh.pais);
 		DataPedido dataPedido = dCtxPago.getDataPedido();
 		if (dCtxSh.userRegistered) {
-			PageMisComprasSteps pageMisComprasSteps = PageMisComprasSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+			PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps(dCtxSh.channel, dCtxSh.appE);
 			pageMisComprasSteps.validateIsCompraOnline(dataPedido.getCodpedido(), dCtxPago.getFTCkout().isChequeRegalo);
 		} else {
 			PageAccesoMisComprasSteps pageAccesoMisComprasSteps = new PageAccesoMisComprasSteps();

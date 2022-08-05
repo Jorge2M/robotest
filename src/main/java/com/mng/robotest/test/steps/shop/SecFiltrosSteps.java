@@ -71,7 +71,7 @@ public class SecFiltrosSteps {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagLitMenusToSelect, StringUtils.join(menusToSelect, ","));
 		SecFiltros secFiltros = SecFiltros.make(channel, app, driver);
 		secFiltros.selectMenu2onLevel(listMenus);		
-		new SecMenuLateralMobilSteps(channel, app, driver).validaSelecMenu(menusToSelect.get(0));
+		new SecMenuLateralMobilSteps(channel, app).validaSelecMenu(menusToSelect.get(0));
 	}
 	
 	private static List<String> getListMenusStr(List<MenuLateralDesktop> listMenus) {

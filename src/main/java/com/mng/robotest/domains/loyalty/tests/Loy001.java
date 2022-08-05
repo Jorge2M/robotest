@@ -31,7 +31,7 @@ public class Loy001 extends TestBase {
 	static final User USER = LoyaltyCommons.USER_PRO_WITH_LOY_POINTS;
 	final Menu1rstLevel menuNewCollection;
 	
-	private final SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dataTest, driver);
+	private final SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dataTest);
 	
 	public Loy001() throws Exception {
 		super();

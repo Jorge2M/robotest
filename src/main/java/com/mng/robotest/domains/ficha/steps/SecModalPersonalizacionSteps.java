@@ -223,7 +223,7 @@ public class SecModalPersonalizacionSteps extends PageObjTM {
 	public void checkCustomizationProof () {
 		click(getBotonSiguienteVisible()).waitLoadPage(2).exec();
 		if (dCtxSh.channel.isDevice()) {
-			SecBolsa secBolsa = SecBolsa.make(dCtxSh, driver);
+			SecBolsa secBolsa = SecBolsa.make(dCtxSh);
 			secBolsa.setBolsaToStateIfNotYet(StateBolsa.OPEN);
 		}
 		validateCustomizationProof(2);

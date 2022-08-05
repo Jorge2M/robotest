@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -62,9 +61,7 @@ public abstract class LineasArtBolsa extends PageObjTM {
 	public abstract void clickRemoveArticleIfExists();
 	public abstract float getPrecioArticle(WebElement lineaArticleWeb);
 	
-	
-	LineasArtBolsa(Channel channel, WebDriver driver) {
-		super(driver);
+	LineasArtBolsa(Channel channel) {
 		this.channel = channel;
 	}
 	

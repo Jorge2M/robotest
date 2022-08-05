@@ -15,6 +15,7 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Pais;
@@ -43,33 +44,28 @@ import com.mng.robotest.test.utils.checkmenus.Label;
 import com.mng.robotest.test.utils.checkmenus.MenuTraduc;
 
 public class SecMenusWrapperSteps {
-	
+
+	private final WebDriver driver = TestMaker.getDriverTestCase();
 	private final Channel channel;
 	private final AppEcom app;
 	private final Pais pais;
-	private final WebDriver driver;
 	private final SecMenusUserSteps secMenusUserSteps;
 	private final SecMenuLateralMobilSteps secMenuLateralMobilSteps;
 	private final SecMenusDesktopSteps secMenusDesktopSteps;
 	private final SecMenusWrap secMenusWrap;
 	
-	private SecMenusWrapperSteps(Channel channel, AppEcom app, Pais pais, WebDriver driver) {
+	public SecMenusWrapperSteps(Channel channel, AppEcom app, Pais pais) {
 		this.channel = channel;
 		this.app = app;
 		this.pais = pais;
-		this.driver = driver;
-		this.secMenusUserSteps = SecMenusUserSteps.getNew(channel, app, driver);
-		this.secMenuLateralMobilSteps = new SecMenuLateralMobilSteps(channel, app, driver);
-		this.secMenusDesktopSteps = SecMenusDesktopSteps.getNew(pais, app, channel, driver);
-		this.secMenusWrap = SecMenusWrap.getNew(channel, app, driver);
+		this.secMenusUserSteps = new SecMenusUserSteps(channel, app);
+		this.secMenuLateralMobilSteps = new SecMenuLateralMobilSteps(channel, app);
+		this.secMenusDesktopSteps = new SecMenusDesktopSteps(pais, app, channel);
+		this.secMenusWrap = new SecMenusWrap(channel, app);
 	}
 	
-	public static SecMenusWrapperSteps getNew(Channel channel, AppEcom app, Pais pais, WebDriver driver) {
-		return (new SecMenusWrapperSteps(channel, app, pais, driver));
-	}
-	
-	public static SecMenusWrapperSteps getNew(DataCtxShop dCtxSh, WebDriver driver) {
-		return (getNew(dCtxSh.channel, dCtxSh.appE, dCtxSh.pais, driver));
+	public static SecMenusWrapperSteps getNew(DataCtxShop dCtxSh) {
+		return new SecMenusWrapperSteps(dCtxSh.channel, dCtxSh.appE, dCtxSh.pais);
 	}
 	
 	public SecMenusUserSteps getMenusUser() {
