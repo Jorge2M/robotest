@@ -38,14 +38,13 @@ public abstract class PageGaleria extends PageObjTM {
 	
 	public static int MAX_PAGE_TO_SCROLL = 20;
 	
-	final Channel channel;
-	final AppEcom app;
-	final From from;
-	final String xpathArticuloBase;
-	final SecPreciosArticulo secPrecios;
+	protected final Channel channel;
+	protected final AppEcom app;
+	protected final From from;
+	protected final String xpathArticuloBase;
+	protected final SecPreciosArticulo secPrecios;
 
-	public PageGaleria(From from, Channel channel, AppEcom app, WebDriver driver) {
-		super(driver);
+	public PageGaleria(From from, Channel channel, AppEcom app) {
 		this.from = from;
 		this.channel = channel;
 		this.app = app;
@@ -82,20 +81,19 @@ public abstract class PageGaleria extends PageObjTM {
 	public abstract void clickHearthIcon(WebElement hearthIcon) throws Exception;
 	public abstract void hideMenus();
 
-	
 	public static List<LabelArticle> listLabelsNew = Arrays.asList(
 			LabelArticle.ComingSoon, 
 			LabelArticle.NewNow, 
 			LabelArticle.NewCollection);
 	
-	static final String classProductItem = 
+	static final String CLASS_PRODUCT_ITEM = 
 			"@class[contains(.,'productList__name')] or " + 
 			"@class[contains(.,'product-list-name')] or " + 
 			"@class='product-list-info-name' or " +
 			"@class[contains(.,'_1P8s4')] or " + //TODO (Outlet) a la espera que Sergio Campillo proporcione un identificador válido
 			"@class[contains(.,'product-name')]";
-	static final String XPathNombreRelativeToArticle = "//*[" + classProductItem + "]";
-	static final String XPathLinkRelativeToArticle = ".//a[@class='product-link']";
+	static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE = "//*[" + CLASS_PRODUCT_ITEM + "]";
+	static final String XPATH_LINK_RELATIVE_TO_ARTICLE = ".//a[@class='product-link']";
 
 	public static PageGaleria getNew(Channel channel, AppEcom app, WebDriver driver) {
 		return getNew(From.MENU, channel, app, driver);
@@ -106,9 +104,6 @@ public abstract class PageGaleria extends PageObjTM {
 			return (PageGaleriaDesktop.getNew(from, channel, app, driver));
 		case mobile:
 		case tablet:
-//			if (app==AppEcom.outlet) {
-//				return (PageGaleriaDesktop.getNew(from, channel, app, driver));
-//			}
 		default:
 			return (PageGaleriaDevice.getNew(from, channel, app, driver));
 		}
@@ -384,7 +379,7 @@ public abstract class PageGaleria extends PageObjTM {
 		}
 		
 		//Para el caso TestAB-1 se ejecutará este caso para conseguir los atributos del artículo
-		String href = articulo.findElement(By.xpath(XPathLinkRelativeToArticle)).getAttribute("href");
+		String href = articulo.findElement(By.xpath(XPATH_LINK_RELATIVE_TO_ARTICLE)).getAttribute("href");
 		return (UtilsTest.getReferenciaFromHref(href));
 	}
 
@@ -515,7 +510,7 @@ public abstract class PageGaleria extends PageObjTM {
 	public WebElement getArticleThatContainsLitUntil(String literal, int maxSeconds) {
 		By byArticleName = By.xpath(
 				xpathArticuloBase + 
-				XPathNombreRelativeToArticle + 
+				XPATH_NOMBRE_RELATIVE_TO_ARTICLE + 
 				"//self::*[text()[contains(.,'" + literal + "')]]");
 		if (state(Present, byArticleName).wait(maxSeconds).check()) {
 			return driver.findElement(By.xpath(xpathArticuloBase));

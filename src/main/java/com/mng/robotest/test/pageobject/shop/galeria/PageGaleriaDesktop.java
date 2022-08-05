@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -77,15 +76,12 @@ public class PageGaleriaDesktop extends PageGaleria {
 	private static final String XPATH_IMG_SLIDER_ACTIVE_RELATIVE_ARTICLE_DESKTOP_OUTLET = 
 			"//div[@class[contains(.,'swiper-slide-active')]]" + XPATH_IMG_RELATIVE_ARTICLE_OUTLET ;
 
-	private PageGaleriaDesktop(From from, Channel channel, AppEcom app, WebDriver driver) {
-		super(from, channel, app, driver);
+	private PageGaleriaDesktop(From from, Channel channel, AppEcom app) {
+		super(from, channel, app);
 		secColores = new SecColoresArticuloDesktop(app);
-		secTallas = new SecTallasArticuloDesktop(app, xpathArticuloBase, driver);
+		secTallas = new SecTallasArticuloDesktop(app, xpathArticuloBase);
 	}
-	public static PageGaleriaDesktop getNew(From from, Channel channel, AppEcom app, WebDriver driver) {
-		return (new PageGaleriaDesktop(from, channel, app, driver));
-	}
-
+	
 	public enum TypeArticle {rebajado, norebajado};
 	private final String XPathAncestorArticle = "//ancestor::div[@class[contains(.,'product-list-info')]]";
 	private String getXPathDataArticuloOfType(TypeArticle typeArticle) {
@@ -104,7 +100,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 
 	@Override
 	public String getXPathLinkRelativeToArticle() {
-		return XPathNombreRelativeToArticle;
+		return XPATH_NOMBRE_RELATIVE_TO_ARTICLE;
 	}
 
 	public boolean isPage() {
@@ -364,7 +360,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 
 	@Override
 	public String getNombreArticulo(WebElement articulo) {
-		return (articulo.findElement(By.xpath("." + XPathNombreRelativeToArticle)).getText());
+		return (articulo.findElement(By.xpath("." + XPATH_NOMBRE_RELATIVE_TO_ARTICLE)).getText());
 	}
 
 	@Override

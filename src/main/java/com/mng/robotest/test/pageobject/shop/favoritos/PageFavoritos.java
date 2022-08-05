@@ -44,7 +44,7 @@ public class PageFavoritos extends PageObjTM {
 	
 	private PageFavoritos(WebDriver driver) {
 		super(driver);
-		this.modalFichaFavoritos = ModalFichaFavoritos.getNew(driver);
+		this.modalFichaFavoritos = new ModalFichaFavoritos();
 	}
 	
 	public static PageFavoritos getNew(WebDriver driver) {

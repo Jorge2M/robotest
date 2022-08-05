@@ -13,13 +13,13 @@ public interface SecSearch {
 	public static SecSearch getNew(Channel channel, AppEcom app, WebDriver driver) {
 		if (channel.isDevice()) {
 			if (channel==Channel.tablet) {
-				return SecSearchDeviceShop.getNew(driver);
+				return new SecSearchDeviceShop();
 			}
 			if (app==AppEcom.outlet) {
-				return SecSearchMobilOutlet.getNew(driver);
+				return new SecSearchMobilOutlet();
 			}
-			return SecSearchDeviceShop.getNew(driver);
+			return new SecSearchDeviceShop();
 		}
-		return SecSearchDesktop.getNew(driver);
+		return new SecSearchDesktop();
 	}
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
@@ -16,61 +15,48 @@ import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArti
 import com.github.jorge2m.testmaker.conf.Channel;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-/**
- * Clase que define la automatización de las diferentes funcionalidades de la página de "GALERÍA DE PRODUCTOS"
- * @author jorge.munoz
- */
+
 public class PageGaleriaDevice extends PageGaleria {
 	
-	static final String TagIdColor = "@TagIdColor";
-	static final String TagFlagSelected = "@TagFlagSelected";
+	private static final String TAG_ID_COLOR = "@TagIdColor";
+	private static final String TAG_FLAG_SELECTED = "@TagFlagSelected";
 
-	static final String XPathImgRelativeArticle = 
+	private static final String XPATH_IMG_RELATIVE_ARTICLE = 
 		"//img[@src and " + 
 			 "(@class[contains(.,'productListImg')] or " + 
 			  "@class[contains(.,'product-list-image')] or " + 
 			  "@class[contains(.,'product-list-img')] or " +
 			  "@class[contains(.,'product-image')] or " +
 			  "@id[contains(.,'product-image')])]";
-	static final String XPathImgCodColorWithTagColor = 
-		"//div[@class[contains(.,'color-container')] and @id='" + TagIdColor + "']/img";
-	static final String XPathPrecioRebajadoRelativeArticle = 
+	private static final String XPATH_IMG_COD_COLOR_WITH_TAG_COLOR = 
+		"//div[@class[contains(.,'color-container')] and @id='" + TAG_ID_COLOR + "']/img";
+	private static final String XPATH_PRECIO_REBAJADO_RELATIVE_ARTICLE = 
 		"//*[@class[contains(.,'product-list-sale-price')] or " + 
 			"@class[contains(.,'product-list-info-price-sale')] or " + 
 			"@class[contains(.,'product-price-crossed')]]";
-	static final String XPathPrecioOriginalRelativeArticle = 
+	private static final String XPATH_PRECIO_ORIGINAL_RELATIVE_ARTICLE = 
 		"//*[@class[contains(.,'productList__price')] or " + 
 			"@class[contains(.,'productList__salePrice')] or " + 
 			"@class[contains(.,'product-list-info-price')] or " + 
 			"@class[contains(.,'product-list-price')] or " +
 			"@class[contains(.,'product-price')]]";
-	static final String XPathButtonAnyadirRelativeArticle = "//div[@class[contains(.,'product-add')]]/button";
-	static final String XPathCapaTallasRelativeArticle = "//div[@class[contains(.,'product-sizes-container')]]";
-	static final String XPathIconoUpGaleryMobile = "//div[@class[contains(.,'scroll-container--visible')]]";
-	static final String XPathIconoUpGaleryTablet = "//div[@class='scroll-top-step']";
-	static final String XPathFiltersDiv = "//div[@class='order-filters-fixed']";
-	static final String TagNumPagina = "@tagNumPagina";
-	static final String XPathPaginaWithTag = "//div[@id='page" + TagNumPagina + "']";
-	static final String XPathPaginaTabletOutletWithTag = "//div[@id='page" + TagNumPagina + "Height']";
-	static final String XPathHeaderArticles = "//h1[@class='catalog-title']";
+	private static final String XPATH_BUTTON_ANYADIR_RELATIVE_ARTICLE = "//div[@class[contains(.,'product-add')]]/button";
+	private static final String XPATH_CAPA_TALLAS_RELATIVE_ARTICLE = "//div[@class[contains(.,'product-sizes-container')]]";
+	private static final String XPATH_ICONO_GALERY_MOBILE = "//div[@class[contains(.,'scroll-container--visible')]]";
+	private static final String XPATH_ICONO_UP_GALERY_TABLET = "//div[@class='scroll-top-step']";
+	private static final String TAG_NUM_PAGINA = "@tagNumPagina";
+	private static final String XPATH_PAGINA_WITH_TAG = "//div[@id='page" + TAG_NUM_PAGINA + "']";
+	private static final String XPATH_PAGINA_TABLET_OUTLET_WITH_TAG = "//div[@id='page" + TAG_NUM_PAGINA + "Height']";
+	private static final String XPATH_HEADER_ARTICLES = "//h1[@class='catalog-title']";
 	
-	static String classProductName = 
-			"(@class[contains(.,'productList__name')] or " +
-			 "@class[contains(.,'product-list-name')] or " + 
-			 "@class='product-list-info-name' or " +
-			 "@class='product-name')";
-	
-	//TODO cuando suba el Outlet-Desktop-React a PRO podremos igualar este XPath con el XPathColoresArticuloShop (outlet=shop)
-	static final String XPathColoresArticuloOutlet = "//div[@class[contains(.,'product-list-color--stock')] or @class[contains(.,'product-colors')]]";
-	
-	static final String XPathColoresArticulo = "//div[@class[contains(.,'product-colors')]]";
-	static final String XPathColoresArticuloOutletTablet = "//div[@class[contains(.,'product-list-colors')]]";
+	private static final String XPATH_COLORES_ARTICULO = "//div[@class[contains(.,'product-colors')]]";
+	private static final String XPATH_COLORES_ARTICULO_OUTLET_TABLET = "//div[@class[contains(.,'product-list-colors')]]";
 	
 	String getXPathColoresArticle() {
 		if (channel==Channel.tablet && app==AppEcom.outlet) {
-			return XPathColoresArticuloOutletTablet;
+			return XPATH_COLORES_ARTICULO_OUTLET_TABLET;
 		}
-		return XPathColoresArticulo;
+		return XPATH_COLORES_ARTICULO;
 	}
 
 	String getXPathArticuloConColores() {
@@ -80,17 +66,17 @@ public class PageGaleriaDevice extends PageGaleria {
 	String getXPpathIconoUpGalery() {
 		switch (channel) {
 		case mobile:
-			return XPathIconoUpGaleryMobile;
+			return XPATH_ICONO_GALERY_MOBILE;
 		case tablet:
 		default:
-			return XPathIconoUpGaleryTablet;
+			return XPATH_ICONO_UP_GALERY_TABLET;
 		}
 	}
 	
 	String getXPathImgColorRelativeArticleWithTagSelected() {
 		return (
 			getXPathColoresArticle() + 
-			"//self::*[@class[contains(.,'" + TagFlagSelected + "')]]//img");
+			"//self::*[@class[contains(.,'" + TAG_FLAG_SELECTED + "')]]//img");
 	}
 	
 	@Override
@@ -108,14 +94,10 @@ public class PageGaleriaDevice extends PageGaleria {
 	}
 
 	//Número de páginas a partir del que consideramos que se requiere un scroll hasta el final de la galería
-	public static int scrollToLast = 20; 
+	public static int SCROLL_TO_LAST = 20; 
 	
-	private PageGaleriaDevice(From from, Channel channel, AppEcom app, WebDriver driver) {
-		super(from, channel, app, driver);
-	}
-	
-	public static PageGaleriaDevice getNew(From from, Channel channel, AppEcom app, WebDriver driver) {
-		return (new PageGaleriaDevice(from, channel, app, driver)); 
+	public PageGaleriaDevice(From from, Channel channel, AppEcom app) {
+		super(from, channel, app);
 	}
 	
 	String getXPathArticuloConVariedadColores(int numArticulo) {
@@ -123,7 +105,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	}
 	
 	String getXPathImgCodigoColor(String codigoColor) {
-		return XPathImgCodColorWithTagColor.replace(TagIdColor, codigoColor);
+		return XPATH_IMG_COD_COLOR_WITH_TAG_COLOR.replace(TAG_ID_COLOR, codigoColor);
 	}
 	
 	String getXPathImgColorRelativeArticle(boolean selected) {
@@ -131,24 +113,24 @@ public class PageGaleriaDevice extends PageGaleria {
 		if (selected) {
 			selectedStr = "selected";
 		}
-		return (getXPathImgColorRelativeArticleWithTagSelected().replace(TagFlagSelected, selectedStr));
+		return (getXPathImgColorRelativeArticleWithTagSelected().replace(TAG_FLAG_SELECTED, selectedStr));
 	}
 	
 	String getXPathButtonAnyadirArticle(int posArticulo) {
 		String xpathArticulo = "(" + xpathArticuloBase + ")[" + posArticulo + "]";
-		return (xpathArticulo + XPathButtonAnyadirRelativeArticle);
+		return (xpathArticulo + XPATH_BUTTON_ANYADIR_RELATIVE_ARTICLE);
 	}
 	
 	String getXPathArticleCapaTallas(int posArticulo) {
 		String xpathArticulo = "(" + xpathArticuloBase + ")[" + posArticulo + "]";
-		return (xpathArticulo + XPathCapaTallasRelativeArticle);
+		return (xpathArticulo + XPATH_CAPA_TALLAS_RELATIVE_ARTICLE);
 	}
 	
 	String getXPathPagina(int pagina) {
 		if (channel==Channel.tablet && app==AppEcom.outlet ) {
-			return (XPathPaginaTabletOutletWithTag.replace(TagNumPagina, String.valueOf(pagina)));
+			return (XPATH_PAGINA_TABLET_OUTLET_WITH_TAG.replace(TAG_NUM_PAGINA, String.valueOf(pagina)));
 		}
-		return (XPathPaginaWithTag.replace(TagNumPagina, String.valueOf(pagina)));
+		return (XPATH_PAGINA_WITH_TAG.replace(TAG_NUM_PAGINA, String.valueOf(pagina)));
 	}
 	
 	@Override
@@ -162,7 +144,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	@Override
 	public WebElement getImagenElementArticulo(WebElement articulo) {
 		moveToElement(articulo, driver);
-		By byImg = By.xpath("." + XPathImgRelativeArticle);
+		By byImg = By.xpath("." + XPATH_IMG_RELATIVE_ARTICLE);
 		if (state(Present, articulo).by(byImg).wait(3).check()) {
 			return (articulo.findElement(byImg));
 		}
@@ -209,21 +191,21 @@ public class PageGaleriaDevice extends PageGaleria {
 
 	@Override
 	public String getNombreArticulo(WebElement articulo) {
-		return (articulo.findElement(By.xpath("." + XPathNombreRelativeToArticle)).getText());
+		return (articulo.findElement(By.xpath("." + XPATH_NOMBRE_RELATIVE_TO_ARTICLE)).getText());
 	}
  
 	@Override
 	public String getPrecioArticulo(WebElement articulo) {
 		if (isArticleRebajado(articulo)) {
-			return (articulo.findElement(By.xpath("." + XPathPrecioRebajadoRelativeArticle)).getText());	
+			return (articulo.findElement(By.xpath("." + XPATH_PRECIO_REBAJADO_RELATIVE_ARTICLE)).getText());	
 		}
-		return (articulo.findElement(By.xpath("." + XPathPrecioOriginalRelativeArticle)).getText());
+		return (articulo.findElement(By.xpath("." + XPATH_PRECIO_ORIGINAL_RELATIVE_ARTICLE)).getText());
 	}	
 	
 	@Override
 	public boolean isArticleRebajado(WebElement articulo) {
 		return (state(Present, articulo)
-				.by(By.xpath("." + XPathPrecioRebajadoRelativeArticle)).check());
+				.by(By.xpath("." + XPATH_PRECIO_REBAJADO_RELATIVE_ARTICLE)).check());
 	}
 	
 	@Override
@@ -302,7 +284,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	
 	@Override
 	public boolean isHeaderArticlesVisible(String textHeader) {
-		By byHeader = By.xpath(XPathHeaderArticles);
+		By byHeader = By.xpath(XPATH_HEADER_ARTICLES);
 		if (state(Visible, byHeader).check()) {
 			return (driver.findElement(byHeader).getText().contains(textHeader));
 		}

@@ -1,51 +1,30 @@
 package com.mng.robotest.test.pageobject.shop.galeria;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+
 public class SecTallasArticuloDesktop extends PageObjTM {
 	
 	private final AppEcom app;
-	private final String xpathArticulo;
-//	private OutletGalery outputGalery;
 	
-	public SecTallasArticuloDesktop(AppEcom app, String xpathArticulo, WebDriver driver) {
-		super(driver);
-		this.app = app;
-		this.xpathArticulo = xpathArticulo;
-	}
-
-//	private OutletGalery getOutletGalery() {
-//		if (outputGalery==null) {
-//			if (app==AppEcom.outlet) {
-//				outputGalery = PageGaleriaDesktop.getOutletVersion(driver);
-//			} else {
-//				outputGalery = OutletGalery.newwithreact;
-//			}
-//		}
-//		return outputGalery;
-//	}
-	
-	//final String XPathCapaTallasArticuloOutletOld = "//div[@class[contains(.,'add-cart')] and @data-stock]";
-	//final String XPathCapaTallasArticuloOutletNew = "//div[@class[contains(.,'sizes__container')]]";
-	final String XPathCapaTallasArticuloShop = 
+	private final String XPATH_ARTICULO;
+	private final String XPATH_CAPA_TALLAS_ARTICULO_SHOP = 
 			"//div[@class[contains(.,'sizes-container')] or " + 
 				  "@class[contains(.,'_1BBIV')]]"; //TODO eliminar cuando suban los cambios desde maquetación
 	
+	public SecTallasArticuloDesktop(AppEcom app, String xpathArticulo) {
+		this.app = app;
+		this.XPATH_ARTICULO = xpathArticulo;
+	}
+	
 	private String getXPathArticleCapaInferiorDesktop(int posArticulo) {
-		String xpathArticuloX = "(" + xpathArticulo + ")[" + posArticulo + "]";
-//		if (app==AppEcom.outlet) {
-//			if (getOutletGalery()==OutletGalery.old) {
-//				return xpathArticuloX + XPathCapaTallasArticuloOutletOld;
-//			}
-//			return xpathArticuloX + XPathCapaTallasArticuloOutletNew;
-//		}
-		return xpathArticuloX + XPathCapaTallasArticuloShop;
+		String xpathArticuloX = "(" + XPATH_ARTICULO + ")[" + posArticulo + "]";
+		return xpathArticuloX + XPATH_CAPA_TALLAS_ARTICULO_SHOP;
 	}
 
 	public String getXPathFirstCapaAnadirOutlet(int posArticulo, boolean capaVisible) {
@@ -57,15 +36,11 @@ public class SecTallasArticuloDesktop extends PageObjTM {
 		return (xpathCapaAdd + "//p[@class[contains(.,'first-step')] and " + classSegunVisible + "]");
 	}
 
-	//final String classCapaActiveOutlet = "@class[contains(.,'active')]";
-	final String classCapaActiveShop = 
+	private final static String CLASS_CAPA_ACTIVE_SHOP = 
 			"@class[contains(.,'active')] or " + 
 			"@class[contains(.,'_2yZ7h')]"; //Para Outlet -> Eliminar cuando suban los cambios desde maquetación
 	private String getClassCapaTallasActive() {
-//		if (app==AppEcom.outlet) {
-//			return classCapaActiveOutlet;
-//		}
-		return classCapaActiveShop;
+		return CLASS_CAPA_ACTIVE_SHOP;
 	}
 	
 	public String getXPathCapaTallas(int posArticulo, boolean capaVisible) {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,15 +27,7 @@ public class ModalFichaFavoritos extends PageObjTM {
 	private static final String XPATH_COLOR_SELECTED_FICHA = XPATH_FICHA_PRODUCTO + 
 			"//div[@class[contains(.,'color-item')] and @class[contains(.,'active')]]";
 	private static final String XPATH_IMG_COLOR_SELECTED_FICHA = XPATH_COLOR_SELECTED_FICHA + "/img";
-	
-	private ModalFichaFavoritos(WebDriver driver) {
-		super(driver);
-	}
-	
-	public static ModalFichaFavoritos getNew(WebDriver driver) {
-		return new ModalFichaFavoritos(driver);
-	}
-	
+
 	private String getXPathFichaProducto(String refProducto) {
 		return (XPATH_FICHA_PRODUCTO + "//img[@src[contains(.,'" + refProducto + "')]]/ancestor::div[@class='favorites-quickview']");
 	}
