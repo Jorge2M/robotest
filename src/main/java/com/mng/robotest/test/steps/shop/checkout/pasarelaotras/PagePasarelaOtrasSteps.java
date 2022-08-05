@@ -16,16 +16,16 @@ public class PagePasarelaOtrasSteps {
 	
 	@Validation
 	public static ChecksTM validateIsPage(String importeTotal, Pais pais, Channel channel, AppEcom app, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		if (channel==Channel.desktop) {
-		   	validations.add(
+		   	checks.add(
 				"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
 				ImporteScreen.isPresentImporteInScreen(importeTotal, pais.getCodigo_pais(), driver), State.Warn);
 		}
-	   	validations.add(
+	   	checks.add(
 			"No se trata de la página de precompra (no aparece los logos de formas de pago)",
 			new PageCheckoutWrapper(channel, app, driver).isPresentMetodosPago(), State.Defect);
 	   	
-	   	return validations;
+	   	return checks;
 	}
 }

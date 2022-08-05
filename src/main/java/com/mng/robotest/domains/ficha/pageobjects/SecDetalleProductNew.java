@@ -1,7 +1,6 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
@@ -24,10 +23,6 @@ public class SecDetalleProductNew extends PageObjTM {
 	private static final String XPATH_BREAD_CRUMBS = XPATH_CAPA_DESCRIPTION + "//ol[@class='breadcrumbs']";
 	private static final String XPATH_BREAD_CRUMB_ITEM_LINK = XPATH_BREAD_CRUMBS + "//a[@class='breadcrumbs-link']";
 	private static final String XPATH_BLOCK_KC_SAFETY = XPATH_WRAPPER + "//div[@id='KoreaKC']";
-	
-	public SecDetalleProductNew(WebDriver driver) {
-		super(driver);
-	}
 	
 	private String getXPathBreadcrumbItem(int position) {
 		return "(" + XPATH_BREAD_CRUMB_ITEM_LINK + ")[" + position + "]";

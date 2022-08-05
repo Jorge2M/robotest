@@ -45,13 +45,13 @@ public class PageConsultaTiendaSteps {
 	
 	@Validation
 	private static ChecksTM checkAfterInputTienda(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Aparece la información de la tienda",
 			PageConsultaTienda.apareceInformacionTienda(driver), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"No aparece el mensaje de tienda no existe",
 			!PageConsultaTienda.apareceMensajeTiendaNoExiste(driver), State.Defect);
-	 	return validations;
+	 	return checks;
 	}
 }

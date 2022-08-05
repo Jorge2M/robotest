@@ -51,16 +51,16 @@ public class SecCrossSellingSteps {
 		String hrefMenu2 = listaMenusBloque.get(1).getAttribute("href");
 		String hrefMenu3 = listaMenusBloque.get(2).getAttribute("href");
 
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
 		if (!secCrossSelling.isSectionVisible()) {
 			pageGaleria.hideMenus();
 			pageGaleria.scrollToPageFromFirst(PageGaleriaDesktop.MAX_PAGE_TO_SCROLL);
 		}
-		validations.add(
+		checks.add(
 			"La sección cross-selling existe (si de primeras no existe scrollamos hasta el final de la galería)",
 			secCrossSelling.isSectionVisible(), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparecen los links correspondientes a los 3 primeros menús de Mujer-Prendas:<br>" + 
 			litMenu1 + " (" + hrefMenu1 + "),<br> " + 
 			litMenu2 + " (" + hrefMenu2 + "),<br>" + 
@@ -70,6 +70,6 @@ public class SecCrossSellingSteps {
 			secCrossSelling.linkAssociatedToMenu(3, litMenu3, hrefMenu3), State.Defect);
 		
 		pageGaleria.goToInitPageAndWaitForArticle();
-		return validations;
+		return checks;
 	}
 }

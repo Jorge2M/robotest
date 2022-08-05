@@ -92,7 +92,7 @@ public abstract class SecLineasDevice extends PageObjTM {
 
 	public void selectLinea(Linea linea) {
 		boolean toOpenMenus = true;
-		SecCabecera secCabecera = SecCabecera.getNew(channel, app, driver);
+		SecCabecera secCabecera = SecCabecera.getNew(channel, app);
 		secCabecera.clickIconoMenuHamburguerMobil(toOpenMenus);
 		if ("n".compareTo(linea.getExtended())==0) {
 			By byElem = By.xpath(getXPathLineaLink(linea.getType()));

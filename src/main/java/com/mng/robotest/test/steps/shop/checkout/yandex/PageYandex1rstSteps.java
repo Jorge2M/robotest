@@ -15,17 +15,17 @@ public class PageYandex1rstSteps {
 	@Validation
 	public static ChecksTM validateIsPage(String emailUsr, String importeTotal, String codPais, WebDriver driver) {
 		//Esta validación debería hacerse en un punto posterior, una vez se ha intentado enviar el input que es cuando se genera el botón retry.
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Aparece la página inicial de Yandex",
 			PageYandex1rst.isPage(driver), State.Warn);
-	 	validations.add(
+	 	checks.add(
 			"Figura preinformado el email del usuario: " + emailUsr,
 			PageYandex1rst.isValueEmail(emailUsr, driver), State.Warn);
-	 	validations.add(
+	 	checks.add(
 			"Aparece el importe de la compra por pantalla: " + importeTotal,
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
-		return validations;
+		return checks;
 	}
 	
 	@Step (

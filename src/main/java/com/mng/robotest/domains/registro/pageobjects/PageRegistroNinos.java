@@ -3,7 +3,6 @@ package com.mng.robotest.domains.registro.pageobjects;
 import java.util.StringTokenizer;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
@@ -21,10 +20,6 @@ public class PageRegistroNinos extends PageObjTM {
 	private static final String XPATH_SELECT_ANY_NACIMIENTO = "//select[@id[contains(.,'naciAny')]]";
 	private static final String XPATH_BOTON_CONTINUAR = 
 		"//div[@class[contains(.,'registerStepsModal')]]//div[@class='submitContent']//input[@type='submit']";
-	
-	public PageRegistroNinos(WebDriver driver) {
-		super(driver);
-	}
 	
 	public boolean isPageUntil(int maxSeconds) {
 		String xpath = "//form[@id[contains(.,'cfKids')]]";

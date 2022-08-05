@@ -19,10 +19,6 @@ public class PageJCAS extends PageObjTM {
 	private static final String XPATH_RADIO_CAPTCHA_WITHIN_IFRAME = "//span[@id='recaptcha-anchor']/div";
 	private static final String XPATH_RECAPTCHA_CHECKED_WITHIN_IFRAME = "//span[@class[contains(.,'recaptcha-checkbox-checked')]]";
 	private static final String XPATH_BUTTON_LOGIN = "//input[@value='INICIAR SESIÓN' or @value='LOGIN']";
-	
-	public PageJCAS(WebDriver driver) {
-		super(driver);
-	}
 
 	public boolean thisPageIsShown() {
 		return (driver.getTitle().contains("Central Authentication Service"));

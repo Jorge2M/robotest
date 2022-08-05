@@ -64,7 +64,7 @@ public class AccesoNavigations {
 		pageSelectLineaVOTF.clickMenu(LineaType.she, 1);
 		
 		//Cuando se selecciona el icono de Mango deja de tener efecto el forzado del TestAB de la cabecera que habíamos ejecutado previamente
-		SecCabecera.getNew(Channel.desktop, AppEcom.votf, driver).clickLogoMango();
+		SecCabecera.getNew(Channel.desktop, AppEcom.votf).clickLogoMango();
 	}
 	
 	/**
@@ -73,7 +73,7 @@ public class AccesoNavigations {
 	public static void accesoVOTF(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		PageLoginVOTF pageLoginVOTF = new PageLoginVOTF(driver);
 		pageLoginVOTF.goToFromUrlAndSetTestABs(dCtxSh);
-		new PageJCAS(driver).identJCASifExists();
+		new PageJCAS().identJCASifExists();
 		AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dCtxSh.pais));
 		pageLoginVOTF.inputUsuario(accesoVOTF.getUsuario());
 		pageLoginVOTF.inputPassword(accesoVOTF.getPassword());

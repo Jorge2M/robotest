@@ -287,7 +287,7 @@ public class SecMenusDesktopSteps {
 	}	
 	
 	public void validaSelecLinea(LineaType lineaType, SublineaType sublineaType) throws Exception {
-		SecCabeceraSteps secCabeceraSteps = SecCabeceraSteps.getNew(pais, Channel.desktop, app, driver);
+		SecCabeceraSteps secCabeceraSteps = new SecCabeceraSteps(pais, Channel.desktop, app);
 		if (sublineaType==null) {
 			validateIsLineaSelected(lineaType);
 		}

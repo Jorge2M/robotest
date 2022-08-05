@@ -23,14 +23,14 @@ public class PageYandexMoneySteps {
 	
 	@Validation
 	private static ChecksTM checkIsPage(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Aparece el input para el <b>Payment Code</b>",
 			PageYandexMoney.isVisibleInputPaymentCode(driver), State.Warn);
-	 	validations.add(
+	 	checks.add(
 			"Aparece el input para el importe",
 			PageYandexMoney.isVisibleInputImport(driver), State.Warn);
-	 	return validations;
+	 	return checks;
 	}
 	
 	@Step (

@@ -41,7 +41,7 @@ public class PagePrehomeSteps {
 	public void seleccionPaisIdioma() 
 	throws Exception {
 		AccesoNavigations.goToInitURL(driver);
-		new PageJCAS(driver).identJCASifExists();
+		new PageJCAS().identJCASifExists();
 		pagePrehome.selecionPais();
 		checkPaisSelected();
 	}

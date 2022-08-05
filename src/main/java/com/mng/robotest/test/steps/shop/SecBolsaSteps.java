@@ -64,7 +64,7 @@ public class SecBolsaSteps {
 		description="Eliminamos los posibles artículos existentes en la Bolsa",
 		expected="La bolsa queda vacía")
 	public void clear() throws Exception {
-		if (SecCabecera.getNew(channel, app, driver).hayArticulosBolsa()) {
+		if (SecCabecera.getNew(channel, app).hayArticulosBolsa()) {
 			secBolsa.clearArticulos();
 		}
 	}
@@ -199,51 +199,51 @@ public class SecBolsaSteps {
 
 	@Validation
 	private ChecksTM checkIsBolsaVisibleInDesktop() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 1;
-	 	validations.add(
+	 	checks.add(
 			"Es visible la capa/página correspondiente a la bolsa (la esperamos hasta " + maxSeconds + " segundos)",
 			secBolsa.isInStateUntil(StateBolsa.OPEN, maxSeconds), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"Aparece el botón \"Comprar\" (lo esperamos hasta " + maxSeconds + " segundos)",
 			secBolsa.isVisibleBotonComprarUntil(maxSeconds), State.Defect);
-		return validations;
+		return checks;
 	}
 
 	@Validation
 	public ChecksTM validaNumArtEnBolsa(DataBag dataBag) throws Exception {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 3;
 		String itemsSaved = String.valueOf(dataBag.getListArticulos().size());
-	 	validations.add(
+	 	checks.add(
 			"Existen " + dataBag.getListArticulos().size() + " elementos dados de alta en la bolsa (los esperamos hasta " + maxSeconds + " segundos)",
 			secBolsa.numberItemsIsUntil(itemsSaved, channel, app, maxSeconds), State.Warn);
-	 	return validations;
+	 	return checks;
 	}
 
 	@Validation
 	public ChecksTM validaCuadranArticulosBolsa(DataBag dataBag) throws Exception {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		ValidatorContentBolsa validatorBolsa = new ValidatorContentBolsa(dataBag, app, channel, pais, driver);
-		validations.add(
+		checks.add(
 			"Cuadra el número de artículos existentes en la bolsa",
 			validatorBolsa.numArticlesIsCorrect(), State.Warn);
 		
 		ArrayList<DataArtBolsa> listDataToValidate = new ArrayList<>();
 		listDataToValidate.add(DataArtBolsa.Referencia);
-		validations.add(
+		checks.add(
 			"Cuadran las referencias de los artículos existentes en la bolsa",
 			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), State.Warn);
 		
 		listDataToValidate.clear();
 		listDataToValidate.add(DataArtBolsa.Nombre);
-		validations.add(
+		checks.add(
 			"Cuadran los nombres de los artículos existentes en la bolsa",
 			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), State.Warn);
 		
 		listDataToValidate.clear();
 		listDataToValidate.add(DataArtBolsa.Color);
-		validations.add(
+		checks.add(
 			"Cuadran los colores de los artículos existentes en la bolsa",
 			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), State.Warn);
 		
@@ -253,17 +253,17 @@ public class SecBolsaSteps {
 		listDataToValidate.clear();
 		listDataToValidate.add(DataArtBolsa.Talla);
 		boolean tallaAlfOk = validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate);
-		validations.add(
+		checks.add(
 			"Cuadran las tallas de los artículos existentes en la bolsa",
 			tallaNumOk || tallaAlfOk, State.Warn);
 		
 		listDataToValidate.clear();
 		listDataToValidate.add(DataArtBolsa.PrecioTotal);
-		validations.add(
+		checks.add(
 			"Cuadran los precios de los artículos existentes en la bolsa",
 			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), State.Warn);
 		
-		return validations;
+		return checks;
 	}
 
 	public void clear1erArticuloBolsa(DataBag dataBag) throws Exception {

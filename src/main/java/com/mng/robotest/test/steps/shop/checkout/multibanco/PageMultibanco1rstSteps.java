@@ -14,8 +14,8 @@ public class PageMultibanco1rstSteps {
 	
 	@Validation
 	public static ChecksTM validateIsPage(String nombrePago, String importeTotal, String emailUsr, String codPais, Channel channel, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	   	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	   	checks.add(
 			"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b>",
 			PageMultibanco1rst.isPresentEntradaPago(nombrePago, channel, driver), State.Warn);
 	   	
@@ -23,23 +23,23 @@ public class PageMultibanco1rstSteps {
 		if (channel.isDevice()) {
 			stateVal = State.Info;
 		}
-	   	validations.add(
+	   	checks.add(
 			"Aparece el importe de la compra: " + importeTotal,
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal);
-	   	validations.add(
+	   	checks.add(
 			"Aparece la cabecera indicando la 'etapa' del pago",
 			PageMultibanco1rst.isPresentCabeceraStep(driver), State.Warn);
 	   	
 		if (channel==Channel.desktop) {
-		   	validations.add(
+		   	checks.add(
 				"Aparece un campo de introducción de email (informado con <b>" + emailUsr + "</b>)",
 				PageMultibanco1rst.isPresentEmailUsr(emailUsr, driver), State.Warn);
-		   	validations.add(
+		   	checks.add(
 				"Figura un botón de pago",
 				PageMultibanco1rst.isPresentButtonPagoDesktop(driver), State.Defect);		   	
 		}
 		
-		return validations;
+		return checks;
 	}
 	
 	@Step (

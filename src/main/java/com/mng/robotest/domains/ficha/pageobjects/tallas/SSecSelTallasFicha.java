@@ -3,8 +3,6 @@ package com.mng.robotest.domains.ficha.pageobjects.tallas;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha.TypeFicha;
@@ -26,14 +24,14 @@ public interface SSecSelTallasFicha {
 	public boolean isVisibleSelectorTallasUntil(int maxSeconds);
 	public boolean isVisibleListTallasForSelectUntil(int maxSeconds);
 	
-	public static SSecSelTallasFicha make(TypeFicha typeFicha, Channel channel, AppEcom app, WebDriver driver) {
+	public static SSecSelTallasFicha make(TypeFicha typeFicha, Channel channel, AppEcom app) {
 		if (typeFicha==TypeFicha.OLD) {
 			if (channel.isDevice() && app!=AppEcom.outlet) {
-				return new SSecSelTallasFichaOldDevice(channel, app, driver);
+				return new SSecSelTallasFichaOldDevice(channel, app);
 			}
-			return new SSecSelTallasFichaOldDesktop(driver);
+			return new SSecSelTallasFichaOldDesktop();
 		}
-		return new SSecSelTallasFichaNew(driver);
+		return new SSecSelTallasFichaNew();
 	}
 	
 	public default Talla getTallaSelected(AppEcom app) {

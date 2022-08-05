@@ -11,13 +11,13 @@ public class PageYandexMoneyResultSteps {
 	
 	@Validation
 	public static ChecksTM validateIsResultOk(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Aparece la página de resultado de Yandex Money",
 			PageYandexMoneyResult.isPage(driver), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"Aparece un mensaje de transferencia con éxito",
 			PageYandexMoneyResult.isVisibleMsgTransferOk(driver), State.Defect);
-		return validations;   
+		return checks;   
 	}
 }

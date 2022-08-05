@@ -29,29 +29,29 @@ public class PageAssist1rstSteps {
 	
 	@Validation
 	public ChecksTM validateIsPage(String importeTotal, Pais pais) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Está presente el logo de Assist",
 			pageAssist1rst.isPresentLogoAssist(), State.Warn);
-	 	validations.add(
+	 	checks.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
 			ImporteScreen.isPresentImporteInScreen(importeTotal, pais.getCodigo_pais(), pageAssist1rst.driver), State.Warn);
-	 	validations.add(
+	 	checks.add(
 			"No se trata de la página de precompra (no aparece los logos de formas de pago)",
 			!new PageCheckoutWrapper(channel, app, pageAssist1rst.driver).isPresentMetodosPago(), State.Defect);
 	 	
 	 	boolean inputsTrjOk = pageAssist1rst.isPresentInputsForTrjData();
 		if (channel.isDevice()) {
-		 	validations.add(
+		 	checks.add(
 				"Figuran 5 campos de input para los datos de la tarjeta: 1 para el número de tarjeta, 2 para la fecha de caducidad, 1 para el titular y 1 para el CVC",
 				inputsTrjOk, State.Warn);
 		} else {
-		 	validations.add(
+		 	checks.add(
 				"Figuran 5 campos de input para los datos de la tarjeta: 4 para el número de tarjeta, 2 para la fecha de caducidad, 1 para el titular y 1 para el CVC",
 				inputsTrjOk, State.Warn);
 		}
 		
-		return validations;
+		return checks;
 	}
 	
 	@Step (
@@ -65,14 +65,14 @@ public class PageAssist1rstSteps {
 	
 	@Validation
 	private ChecksTM checkAfterClickPayButton() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 10;
-	 	validations.add(
+	 	checks.add(
 			"Desaparece la página con el botón de pago (lo esperamos hasta " + maxSeconds + " segundos)",
 			pageAssist1rst.invisibilityBotonPagoUntil(maxSeconds), State.Warn);
-	 	validations.add(
+	 	checks.add(
 			"Aparece una página intermedia con un botón de submit",
 			PageAssistLast.isPage(pageAssist1rst.driver), State.Warn);
-	 	return validations;
+	 	return checks;
 	}
 }

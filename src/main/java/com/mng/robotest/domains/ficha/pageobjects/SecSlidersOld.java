@@ -1,13 +1,11 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecSlidersOld {
+public class SecSlidersOld extends PageObjTM {
 	
 	private static final String XPATH_ELEGIDO_PARA_TI = "//div[@class='recommendations']";
 	private static final String XPATH_ELEGIDO_PARA_TI_CABECERA = XPATH_ELEGIDO_PARA_TI + "/p";
@@ -19,9 +17,7 @@ public class SecSlidersOld {
 	private static final String XPATH_LO_ULTIMO_VISTO_CABECERA = XPATH_LO_ULTIMO_VISTO + "/span";
 	private static final String XPART_ART_LO_ULTIMO_VISTO = XPATH_LO_ULTIMO_VISTO + "//div[@class[contains(.,'last-viewed-product')]]";
 
-	private SecSlidersOld() {}
-	
-	public static String getXPath(Slider sliderType) {
+	public String getXPath(Slider sliderType) {
 		switch (sliderType) {
 		case COMPLETA_TU_LOOK:
 			return XPATH_COMPLETA_TU_LOOK;
@@ -33,7 +29,7 @@ public class SecSlidersOld {
 		}
 	}
 	
-	public static String getXPathCabecera(Slider sliderType) {
+	public String getXPathCabecera(Slider sliderType) {
 		switch (sliderType) {
 		case COMPLETA_TU_LOOK:
 			return XPATH_COMPLETA_TU_LOOK_CABECERAR;
@@ -45,7 +41,7 @@ public class SecSlidersOld {
 		}
 	}
 	
-	public static String getXPathArticle(Slider sliderType) {
+	public String getXPathArticle(Slider sliderType) {
 		switch (sliderType) {
 		case COMPLETA_TU_LOOK:
 			return XPATH_ART_COMPLETA_TU_LOOK;
@@ -57,12 +53,12 @@ public class SecSlidersOld {
 		}
 	}
 	
-	public static boolean isVisible(Slider sliderType, WebDriver driver) {
+	public boolean isVisible(Slider sliderType) {
 		String xpathSlider = getXPath(sliderType);
-		return (state(Visible, By.xpath(xpathSlider), driver).check());
+		return (state(Visible, By.xpath(xpathSlider)).check());
 	}
 	
-	public static int getNumVisibleArticles(Slider sliderType, WebDriver driver) {
+	public int getNumVisibleArticles(Slider sliderType) {
 		String xpathArticle = getXPathArticle(sliderType);
 		return (getNumElementsVisible(driver, By.xpath(xpathArticle)));
 	}

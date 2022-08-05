@@ -19,15 +19,15 @@ public class PageMercpagoLoginSteps {
 
 	@Validation
 	public static ChecksTM validateIsPage(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Aparece la página de identificación de Mercadopago",
 			PageMercpagoLogin.isPage(driver), State.Defect);
-		validations.add(
+		checks.add(
 			"En la página figuran los campos de identificación (email + password)",
 			PageMercpagoLogin.isInputUserVisible(driver) &&
 			PageMercpagoLogin.isInputPasswordVisible(driver), State.Defect);
-		return validations;
+		return checks;
 	}
 	
 	@Step (

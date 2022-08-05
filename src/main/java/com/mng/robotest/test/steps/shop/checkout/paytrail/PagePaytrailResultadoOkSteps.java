@@ -13,14 +13,14 @@ public class PagePaytrailResultadoOkSteps {
 	
 	@Validation
 	public static ChecksTM validateIsPage(String importeTotal, String codPais, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	   	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	   	checks.add(
 			"Aparece la página de resultado Ok de Paytrail",
 			PagePaytrailResultadoOk.isPage(driver), State.Defect);
-	   	validations.add(
+	   	checks.add(
 			"Aparece el importe de la compra: " + importeTotal,
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
-	   	return validations;
+	   	return checks;
 	}
 	
 	@Step (

@@ -1,7 +1,6 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -49,10 +48,6 @@ public class SecBolsaButtonAndLinksNew extends PageObjTM {
 		default:
 			return XPATH_LINK_COMPARTIR;
 		}
-	}
-	
-	public SecBolsaButtonAndLinksNew(WebDriver driver) {
-		super(driver);
 	}
 	
 	public void clickAnadirBolsaButtonAndWait() {

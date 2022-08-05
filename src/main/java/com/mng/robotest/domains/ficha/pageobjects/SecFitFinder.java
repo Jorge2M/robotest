@@ -1,8 +1,6 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -14,10 +12,6 @@ public class SecFitFinder extends PageObjTM {
 	private static final String XPATH_INPUT_ALTURA = XPATH_WRAPPER + "//div[@data-ref='height']//input";
 	private static final String XPATH_INPUT_PESO = XPATH_WRAPPER + "//div[@data-ref='weight']//input";
 	private static final String XPATH_ASPA_FOR_CLOSE = XPATH_WRAPPER + "//div[@data-ref='close']";
-	
-	public SecFitFinder(WebDriver driver) {
-		super(driver);
-	}
 	
 	public boolean isVisibleUntil(int maxSeconds) {
 		return (state(Visible, By.xpath(XPATH_INPUT_ALTURA))

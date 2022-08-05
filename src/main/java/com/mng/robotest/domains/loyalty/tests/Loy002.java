@@ -16,9 +16,9 @@ public class Loy002 extends TestBase {
 	public static final User USER = new User("test.performance21@mango.com", "6877377061230042978", "ES");
 	final boolean isPro = LoyaltyCommons.isPro(app, driver);
 
-	final PageHomeLikesSteps pageHomeLikesSteps = new PageHomeLikesSteps(driver);
-	final PageHomeDonateLikesSteps pageHomeDonateLikesSteps = new PageHomeDonateLikesSteps(driver);
-	final SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps(channel, app, driver);
+	private final PageHomeLikesSteps pageHomeLikesSteps = new PageHomeLikesSteps();
+	private final PageHomeDonateLikesSteps pageHomeDonateLikesSteps = new PageHomeDonateLikesSteps();
+	private final SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps(channel, app, driver);
 	
 	public Loy002() throws Exception {
 		super();

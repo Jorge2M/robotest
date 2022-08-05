@@ -84,7 +84,7 @@ public class Fic002 extends TestBase {
 			pageFichaSteps.validaExistsImgsCarruselIzqFichaOld();
 		}
 		pageFichaSteps.getSecProductDescOldSteps().validateAreInStateInitial(app);
-		PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
+		PageFicha pageFicha = PageFicha.newInstance(channel, app);
 		if (((PageFichaArtOld)pageFicha).getNumImgsCarruselIzq() > 2) {
 			pageFichaSteps.selectImgCarruselIzqFichaOld(2);
 		}

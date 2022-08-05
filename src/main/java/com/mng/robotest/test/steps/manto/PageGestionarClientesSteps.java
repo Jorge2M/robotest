@@ -15,17 +15,17 @@ public class PageGestionarClientesSteps {
 
 	@Validation
 	public static ChecksTM validateIsPage(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Estamos en la página " + PageGestionarClientes.titulo,
 			PageGestionarClientes.isPage(driver), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"Aparece el apartado de \"Buscar clientes\"",
 			PageGestionarClientes.isVisibleFormBuscarClientes(driver), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"Aparece el apartado de \"Tratar clientes\"",
 			PageGestionarClientes.isVisibleFormTratarClientes(driver), State.Defect);
-		return validations;
+		return checks;
 	}
 
 	@Step (
@@ -41,21 +41,21 @@ public class PageGestionarClientesSteps {
 	
 	@Validation
 	private static ChecksTM checkAfterSearchByDni(String dni, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Se muestra la tabla de información",
 			PageGestionarClientes.isVisibleTablaInformacion(driver), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"Aparece el DNI <b>" + dni + "</b> en la tabla",
 			PageGestionarClientes.getDniTabla(dni, driver), State.Defect);
 		int maxSecondsToWait = 1;
-	 	validations.add(
+	 	checks.add(
 			"Aparece el botón de Alta o Baja (los esperamos un máximo de " + maxSecondsToWait + " segundos)",
 			PageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.Baja, maxSecondsToWait, driver) ||
 			PageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.Alta, maxSecondsToWait, driver), 
 			State.Defect);
 	 	
-	 	return validations;
+	 	return checks;
 	}
 
 	static final String TagTypeButton = "@TagTypeButton";
@@ -74,18 +74,18 @@ public class PageGestionarClientesSteps {
 	
 	@Validation
 	private static ChecksTM checkAfterClickButton(TypeThirdButton typeButton, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Aparece el mensaje <b>" + typeButton.getMensaje() + "</b>",
 			PageGestionarClientes.isVisibleMensajeClickThirdButton(typeButton, driver), State.Defect);
 	 	
 		int maxSeconds = 2;
 		TypeThirdButton buttonExpected = typeButton.buttonExpectedAfterClick();
-	 	validations.add(
+	 	checks.add(
 			"Aparece el botón \"Alta\" (lo esperamos hasta " + maxSeconds + " segundos)",
 			PageGestionarClientes.isVisibleThirdButtonUntil(buttonExpected, maxSeconds, driver), State.Defect);
 		
-	 	return validations;
+	 	return checks;
 	}
 
 	@Step(
@@ -102,14 +102,14 @@ public class PageGestionarClientesSteps {
 	
 	@Validation
 	private static ChecksTM checkAfterClickDetalles(String dni, String idCliente, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Aparece el id del cliente <b>" + idCliente + "</b>",
 			PageGestionarClientes.isVisibleIdClienteClickDetallesButton(idCliente, driver), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"Aparece el dni del cliente <b>" + dni + "</b>",
 			PageGestionarClientes.isVisibleDniClickDetallesButton(dni, driver), State.Defect);
 	 	
-	 	return validations;
+	 	return checks;
 	}
 }

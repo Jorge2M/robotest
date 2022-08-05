@@ -5,25 +5,18 @@ import com.mng.robotest.domains.loyalty.pageobjects.PageHomeLikes;
 import com.mng.robotest.domains.loyalty.pageobjects.PageHomeLikes.ButtonUseLikes;
 import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps.ChecksResultWithNumberPoints;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 
+
 public class PageHomeLikesSteps {
 
-	private final WebDriver driver;
-	private final PageHomeLikes pageHomeLikes;
-	
-	public PageHomeLikesSteps(WebDriver driver) {
-		this.driver = driver;
-		this.pageHomeLikes = PageHomeLikes.getNew(driver);
-	}
+	private final PageHomeLikes pageHomeLikes = new PageHomeLikes();
 	
 	@Validation
 	public ChecksResultWithNumberPoints checkIsPageOk() {
 		ChecksResultWithNumberPoints checks = new ChecksResultWithNumberPoints();
-		PageHomeLikes pageLikes = PageHomeLikes.getNew(driver);
+		PageHomeLikes pageLikes = new PageHomeLikes();
 		int maxSeconds = 5;
 		checks.add(
 			"Aparece la página de <b>Mango likes you</b> (esperamos hasta " + maxSeconds + " segundos)",
@@ -46,7 +39,7 @@ public class PageHomeLikesSteps {
 		expected="Aparece la página de \"Compra con descuento\"")
 	public void clickOpcionCompraUnDescuento() throws Exception {
 		pageHomeLikes.clickButton(ButtonUseLikes.COMPRA_CON_DESCUENTO);
-		new PageHomePurchaseWithDiscountSteps(driver)
+		new PageHomePurchaseWithDiscountSteps()
 			.checkHomePurchaseWithDiscountPageOk();
 	}
 
@@ -55,7 +48,7 @@ public class PageHomeLikesSteps {
 		expected="Aparece una página para donar mis Likes")
 	public void clickButtonDonarLikes() {
 		pageHomeLikes.clickButton(ButtonUseLikes.DONAR_MIS_LIKES);
-		new PageHomeDonateLikesSteps(driver).checkIsPage(5);
+		new PageHomeDonateLikesSteps().checkIsPage(5);
 	}
 	
 	public void clickConseguirPorLikesButton() {
@@ -71,7 +64,7 @@ public class PageHomeLikesSteps {
 		expected="Aparece una página para conseguir por 1200 Likes")
 	private void clickSaberMas() {
 		pageHomeLikes.clickButton(ButtonUseLikes.SABER_MAS);
-		new PageHomeConseguirPorLikesSteps(driver).checkIsPage(2);
+		new PageHomeConseguirPorLikesSteps().checkIsPage(2);
 	}
 	
 	@Step(
@@ -79,7 +72,7 @@ public class PageHomeLikesSteps {
 		expected="Aparece una página para conseguir por 1200 Likes")
 	private void click1200Likes() {
 		pageHomeLikes.clickButton(ButtonUseLikes.LIKES_1200);
-		new PageHomeConseguirPorLikesSteps(driver).checkIsPage(2);
+		new PageHomeConseguirPorLikesSteps().checkIsPage(2);
 	}
 	
 	@Step(
@@ -87,7 +80,7 @@ public class PageHomeLikesSteps {
 		expected="Aparece la página para regalar mis Likes")
 	public PageRegalarMisLikesSteps clickButtonRegalarMisLikes() {
 		pageHomeLikes.clickButton(ButtonUseLikes.REGALAR_MIS_LIKES);
-		PageRegalarMisLikesSteps pageRegalarSteps = new PageRegalarMisLikesSteps(driver);
+		PageRegalarMisLikesSteps pageRegalarSteps = new PageRegalarMisLikesSteps();
 		pageRegalarSteps.checkIsPage();
 		return pageRegalarSteps;
 	}

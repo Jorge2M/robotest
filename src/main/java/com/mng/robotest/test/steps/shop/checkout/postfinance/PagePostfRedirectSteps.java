@@ -17,14 +17,14 @@ public class PagePostfRedirectSteps {
 	
 	@Validation
 	public ChecksTM isPageAndFinallyDisappears() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 10;
-		validations.add(
+		checks.add(
 			"Aparece una página de redirección con un botón OK",
 			pagePostfRedirect.isPresentButtonOk(), State.Defect);
-		validations.add(
+		checks.add(
 			"La página de redirección acaba desapareciendo (esperamos hasta " + maxSeconds + " segundos)",
 			pagePostfRedirect.isInvisibleButtonOkUntil(maxSeconds), State.Defect);
-		return validations;
+		return checks;
 	}
 }

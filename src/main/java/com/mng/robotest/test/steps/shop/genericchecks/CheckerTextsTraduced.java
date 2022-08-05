@@ -14,14 +14,14 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 public class CheckerTextsTraduced implements Checker {
 
 	public ChecksTM check(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		List<String> listElemsWithoutTraduction = getTextsWithSostenido(driver);
-		validations.add(
+		checks.add(
 			"No hay textos sin traducir (que comiencen por \"#\")<br>" + 
 			getFormatHtmlListMessages(listElemsWithoutTraduction),
 			listElemsWithoutTraduction.size()==0, GenericCheck.TextsTraduced.getLevel());
 		
-		return validations;
+		return checks;
 	}
 	
 	private List<String> getTextsWithSostenido(WebDriver driver) {

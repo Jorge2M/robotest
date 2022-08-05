@@ -1,7 +1,6 @@
 package com.mng.robotest.domains.registro.pageobjects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
@@ -11,26 +10,22 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageRegistroFin extends PageObjTM {
 
-	private static final String xpathButtonIrShopping = "//div[@class[contains(.,'ir-de-shopping')]]/input[@type='submit']";
-
-	public PageRegistroFin(WebDriver driver) {
-		super(driver);
-	}
+	private static final String XPATH_BUTTON_IR_SHOPPING = "//div[@class[contains(.,'ir-de-shopping')]]/input[@type='submit']";
 	
 	public boolean isPageUntil(int maxSeconds) {
-		return (state(Present, By.xpath(xpathButtonIrShopping))
+		return (state(Present, By.xpath(XPATH_BUTTON_IR_SHOPPING))
 				.wait(maxSeconds).check());
 	}
 	
 	public void clickIrDeShopping() {
 		waitForPageLoaded(driver); //Para evitar StaleElement Exception
-		click(By.xpath(xpathButtonIrShopping)).type(javascript).exec();
+		click(By.xpath(XPATH_BUTTON_IR_SHOPPING)).type(javascript).exec();
 		if (isVisibleButtonIrDeShopping()) {
-			click(By.xpath(xpathButtonIrShopping)).exec();
+			click(By.xpath(XPATH_BUTTON_IR_SHOPPING)).exec();
 		}
 	}
 	
 	public boolean isVisibleButtonIrDeShopping() {
-		return (state(Visible, By.xpath(xpathButtonIrShopping), driver).check());
+		return (state(Visible, By.xpath(XPATH_BUTTON_IR_SHOPPING), driver).check());
 	}
 }

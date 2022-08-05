@@ -13,14 +13,14 @@ public class PageGestorSaldosTPVSteps {
 
 	@Validation
 	public static ChecksTM validateIsPage(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Estamos en la página " + PageGestorSaldosTPV.titulo,
 			PageGestorSaldosTPV.isPage(driver), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"Aparece el input de fecha de TPV",
 			PageGestorSaldosTPV.isVisibleTPVInput(driver), State.Defect);
-	 	return validations;
+	 	return checks;
 	}
 	
 	@Step (
@@ -34,14 +34,14 @@ public class PageGestorSaldosTPVSteps {
 	
 	@Validation
 	private static ChecksTM checkAfterConsultSaldosTpv(String tpv, WebDriver driver) throws Exception {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Aparece la tabla de saldos",
 			PageGestorSaldosTPV.isTablaSaldosVisible(driver), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"Aparece el ID de la TPV <b>" + tpv + "</b> en la tabla",
 			PageGestorSaldosTPV.isTPVIDVisible(tpv, driver), State.Defect);
-		return validations;
+		return checks;
 	}
 	
 	@Step (

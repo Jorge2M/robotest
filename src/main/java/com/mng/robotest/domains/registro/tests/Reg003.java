@@ -18,8 +18,8 @@ import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
 public class Reg003 extends TestBase {
 	
 	private final SecMenusUserSteps userMenusSteps = SecMenusUserSteps.getNew(channel, app, driver);
-	private final PageRegistroIniSteps pageRegistroIniSteps = new PageRegistroIniSteps(driver);
-	private final PageRegistroDirecSteps pageRegistroDirecSteps = new PageRegistroDirecSteps(driver);
+	private final PageRegistroIniSteps pageRegistroIniSteps = new PageRegistroIniSteps();
+	private final PageRegistroDirecSteps pageRegistroDirecSteps = new PageRegistroDirecSteps();
 	private final PageRegistroFinSteps pageRegistroFinSteps; 
 	
 	private final String emailNonExistent = DataMango.getEmailNonExistentTimestamp();

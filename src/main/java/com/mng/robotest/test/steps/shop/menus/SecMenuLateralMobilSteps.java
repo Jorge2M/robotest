@@ -39,15 +39,11 @@ public class SecMenuLateralMobilSteps {
 	private final WebDriver driver;
 	private final SecMenuLateralDevice secMenuLateral;
 	
-	private SecMenuLateralMobilSteps(Channel channel, AppEcom app, WebDriver driver) {
+	public SecMenuLateralMobilSteps(Channel channel, AppEcom app, WebDriver driver) {
 		this.channel = channel;
 		this.app = app;
 		this.driver = driver;
-		secMenuLateral = new SecMenuLateralDevice(channel, app, driver);
-	}
-	
-	public static SecMenuLateralMobilSteps getNew(Channel channel, AppEcom app, WebDriver driver) {
-		return (new SecMenuLateralMobilSteps(channel, app, driver));
+		secMenuLateral = new SecMenuLateralDevice(channel, app);
 	}
 	
 	@Step (
@@ -78,14 +74,14 @@ public class SecMenuLateralMobilSteps {
 
 	@Validation
 	private ChecksTM checkGaleriaAfterSelectNuevo() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		PageGaleria pageGaleria = PageGaleria.getNew(Channel.mobile, app, driver);
 		int maxSeconds = 3;
-		validations.add(
+		checks.add(
 			"Aparece algún artículo (esperamos " + maxSeconds + " segundos)",
 			pageGaleria.isVisibleArticleUntil(1, maxSeconds), State.Warn);
 
-		return validations;   
+		return checks;   
 	}
 	
 	@Step (
@@ -139,26 +135,26 @@ public class SecMenuLateralMobilSteps {
 		
 	@Validation
 	public ChecksTM validaSelecLineaNinosWithSublineas(LineaType lineaNinosType) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Está seleccionada la línea <b>" + lineaNinosType + "</b>",
 			secMenuLateral.getSecLineasDevice().isSelectedLinea(lineaNinosType), State.Warn);
-	 	validations.add(
+	 	checks.add(
 			"Es visible el bloque con las sublíneas de " + lineaNinosType,
 			secMenuLateral.getSecLineasDevice().isVisibleBlockSublineasNinos(lineaNinosType), State.Warn);
-	 	return validations;
+	 	return checks;
 	}
 	
 	@Validation
 	public ChecksTM validaSelecLineaWithMenus2onLevelAssociated(LineaType lineaType, SublineaType sublineaType) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Está seleccionada la línea <b>" + lineaType + "</b>",
 			secMenuLateral.getSecLineasDevice().isSelectedLinea(lineaType), State.Warn);
-	 	validations.add(
+	 	checks.add(
 			"Son visibles links de Menú de 2o nivel",
 			secMenuLateral.isMenus2onLevelDisplayed(sublineaType), State.Warn);
-	 	return validations;
+	 	return checks;
 	}	
 	
 	static final String tagTextMenu = "@TagTextMenu";
@@ -186,14 +182,14 @@ public class SecMenuLateralMobilSteps {
 	@Validation
 	private ChecksTM checkResultDependingMenuGroup(Menu1rstLevel menu1rstLevel) 
 			throws Exception {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		GroupMenu groupMenu = menu1rstLevel.getGroup(Channel.mobile);
 		List<Element> elemsCanBeContained = groupMenu.getElementsCanBeContained();
 		boolean contentPageOk = (new PageLanding(driver)).isSomeElementVisibleInPage(elemsCanBeContained, app, Channel.mobile, 2);
-	 	validations.add(
+	 	checks.add(
 			"Aparecen alguno de los siguientes elementos: <b>" + elemsCanBeContained + "</b> (es un menú perteneciente al grupo <b>" + groupMenu + ")</b>",
 			contentPageOk, State.Warn);
 	 	
-	 	return validations;
+	 	return checks;
 	}
 }

@@ -45,16 +45,16 @@ public class PageFavoritosSteps {
 	
 	@Validation
 	public ChecksTM validaIsPageOK(DataFavoritos dataFavoritos) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSecondsToWaitCapa = 3;
 		int maxSecondsToWaitArticles = 1;
-		validations.add(
+		checks.add(
 			"Está visible la capa de favoritos con artículos (la esperamos hasta " + maxSecondsToWaitCapa + " segundos)",
 			pageFavoritos.isSectionArticlesVisibleUntil(maxSecondsToWaitCapa), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparecen los artículos (los esperamos hasta " + maxSecondsToWaitArticles + " segundos): <br>" + dataFavoritos.getListArtDescHTML(),
 			pageFavoritos.areVisibleArticlesUntil(dataFavoritos, maxSecondsToWaitArticles), State.Defect);
-		return validations;
+		return checks;
 	}
 	
 	public void clearAll(DataFavoritos dataFavoritos, DataCtxShop dCtxSh) throws Exception {
@@ -77,21 +77,21 @@ public class PageFavoritosSteps {
 	
 	@Validation
 	public ChecksTM checkShareIsOk() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int secondsToWait = 5;
-		validations.add(
+		checks.add(
 			"Aparece el modal de favoritos compartidos",
 			pageFavoritos.checkShareModalUntill(secondsToWait), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece el boton de compartir por Telegram",
 			pageFavoritos.isShareTelegramFavoritesVisible(), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece el boton de compartir por WhatsApp",
 			pageFavoritos.isShareWhatsappFavoritesVisible(), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece la url para copiarla y compartir como texto", 
 			pageFavoritos.isShareUrlFavoritesVisible(), State.Defect);
-		return validations;
+		return checks;
 	}
 	
 	@Step (
@@ -136,14 +136,14 @@ public class PageFavoritosSteps {
 	
 	@Validation
 	public ChecksTM checkFavoritosWithoutArticles() {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"No queda ningún artículo en Favoritos",
 			!pageFavoritos.hayArticulos(), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece el botón \"Inspírate con lo último\"",
 			pageFavoritos.isVisibleButtonEmpty(), State.Warn);
-		return validations;
+		return checks;
 	}  
 	
 	@Step (

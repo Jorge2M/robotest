@@ -1,7 +1,6 @@
 package com.mng.robotest.test.pageobject.shop.micuenta;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.test.pageobject.shop.footer.PageFromFooter;
@@ -11,36 +10,31 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageAccesoMisCompras extends PageObjTM implements PageFromFooter {
 
-	public enum TypeBlock {SiRegistrado, NoRegistrado}
+	public enum TypeBlock { SI_REGISTRADO, NO_REGISTRADO }
 	
-	private static final String XPathContainerBlocks = "//*[@id='myPurchasesDesktop']"; //
-	private static final String XPathLinkSiRegistrado = "//button[@data-testid='login']"; //
-	private static final String XPathLinkNoRegistrado = "//button[@data-testid='orderForm']"; //
-	private static final String XPathInputUserBlockSi = "//input[@data-testid='mngLogin.LoginForm.emil']";
-	private static final String XpathInputPasswordBlockSi = "//input[@data-testid='mngLogin.LoginForm.password']";
-	private static final String XPathButtonEntrarBlockSi = "//button[@data-testid='mngLogin.LoginForm.button']";
+	private static final String XPATH_CONTAINER_BLOCKS = "//*[@id='myPurchasesDesktop']"; //
+	private static final String XPATH_LINK_SI_REGISTRADO = "//button[@data-testid='login']"; //
+	private static final String XPATH_LINK_NO_REGISTRADO = "//button[@data-testid='orderForm']"; //
+	private static final String XPATH_INPUT_USER_BLOCK_SI = "//input[@data-testid='mngLogin.LoginForm.emil']";
+	private static final String XPATH_INPUT_PASSWORD_BLOCK_SI = "//input[@data-testid='mngLogin.LoginForm.password']";
+	private static final String XPATH_BUTTON_ENTRAR_BLOCK_SI = "//button[@data-testid='mngLogin.LoginForm.button']";
 	
-	private static final String XPathInputUserBlockNo = "//input[@data-testid[contains(.,'login.guest.email.input')]]";
-	private static final String XPathInputNumPedidoBlockNo = "//input[@data-testid[contains(.,'login.guest.orderId.input')]]";
-	private static final String XPathButtonBuscarPedidoBlockNo = "//button[@data-testid[contains(.,'login.guest.goToDetails')]]";
+	private static final String XPATH_INPUT_USER_BLOCK_NO = "//input[@data-testid[contains(.,'login.guest.email.input')]]";
+	private static final String XPPATH_INPUT_NUM_PEDIDO_BLOCK_NO = "//input[@data-testid[contains(.,'login.guest.orderId.input')]]";
+	private static final String XPATH_BUTTON_BUSCAR_PEDIDO_BLOCK_NO = "//button[@data-testid[contains(.,'login.guest.goToDetails')]]";
 	
-	
-	public PageAccesoMisCompras(WebDriver driver) {
-		super(driver);
-	}
-	
-	public String getXPathLinkBlock(TypeBlock typeBlock) {
+	private String getXPathLinkBlock(TypeBlock typeBlock) {
 		switch (typeBlock) {
-		case SiRegistrado:
-			return XPathLinkSiRegistrado;
-		case NoRegistrado:
+		case SI_REGISTRADO:
+			return XPATH_LINK_SI_REGISTRADO;
+		case NO_REGISTRADO:
 		default:
-			return XPathLinkNoRegistrado;
+			return XPATH_LINK_NO_REGISTRADO;
 		}
 	}	
 	
-	public static String getXPathIsPage() {
-		return XPathContainerBlocks;
+	private String getXPathIsPage() {
+		return XPATH_CONTAINER_BLOCKS;
 	}
 	
 	@Override
@@ -79,13 +73,13 @@ public class PageAccesoMisCompras extends PageObjTM implements PageFromFooter {
 	}
 	
 	public void inputUserBlockSi(String usuario) {
-		driver.findElement(By.xpath(XPathInputUserBlockSi)).clear();
-		driver.findElement(By.xpath(XPathInputUserBlockSi)).sendKeys(usuario);
+		driver.findElement(By.xpath(XPATH_INPUT_USER_BLOCK_SI)).clear();
+		driver.findElement(By.xpath(XPATH_INPUT_USER_BLOCK_SI)).sendKeys(usuario);
 	}
 	
 	public void inputPasswordBlockSi(String password) {
-		driver.findElement(By.xpath(XpathInputPasswordBlockSi)).clear();
-		driver.findElement(By.xpath(XpathInputPasswordBlockSi)).sendKeys(password);
+		driver.findElement(By.xpath(XPATH_INPUT_PASSWORD_BLOCK_SI)).clear();
+		driver.findElement(By.xpath(XPATH_INPUT_PASSWORD_BLOCK_SI)).sendKeys(password);
 	}	
 	
 	public void inputUserPasswordBlockSi(String usuario, String password) {
@@ -94,16 +88,16 @@ public class PageAccesoMisCompras extends PageObjTM implements PageFromFooter {
 	}
 	
 	public void clickEntrarBlockSi() {
-		click(By.xpath(XPathButtonEntrarBlockSi)).exec();
+		click(By.xpath(XPATH_BUTTON_ENTRAR_BLOCK_SI)).exec();
 	}
 	
 	public void inputUserBlockNo(String usuario) {
-		sendKeysWithRetry(usuario, By.xpath(XPathInputUserBlockNo), 2, driver);
+		sendKeysWithRetry(usuario, By.xpath(XPATH_INPUT_USER_BLOCK_NO), 2, driver);
 	}
 	
 	public void inputNumPedidoBlockNo(String numPedido) {
-		driver.findElement(By.xpath(XPathInputNumPedidoBlockNo)).clear();
-		driver.findElement(By.xpath(XPathInputNumPedidoBlockNo)).sendKeys(numPedido);
+		driver.findElement(By.xpath(XPPATH_INPUT_NUM_PEDIDO_BLOCK_NO)).clear();
+		driver.findElement(By.xpath(XPPATH_INPUT_NUM_PEDIDO_BLOCK_NO)).sendKeys(numPedido);
 	}
 	
 	public void inputUserAndNumPedidoBlockNo(String usuario, String numPedido) {
@@ -112,9 +106,9 @@ public class PageAccesoMisCompras extends PageObjTM implements PageFromFooter {
 	}
 	
 	public void clickBuscarPedidoBlockNo() {
-		click(By.xpath(XPathButtonBuscarPedidoBlockNo)).exec();
-		if (!state(Invisible, By.xpath(XPathButtonBuscarPedidoBlockNo)).wait(2).check()) {
-			click(By.xpath(XPathButtonBuscarPedidoBlockNo)).exec();
+		click(By.xpath(XPATH_BUTTON_BUSCAR_PEDIDO_BLOCK_NO)).exec();
+		if (!state(Invisible, By.xpath(XPATH_BUTTON_BUSCAR_PEDIDO_BLOCK_NO)).wait(2).check()) {
+			click(By.xpath(XPATH_BUTTON_BUSCAR_PEDIDO_BLOCK_NO)).exec();
 		}
 	}
 }

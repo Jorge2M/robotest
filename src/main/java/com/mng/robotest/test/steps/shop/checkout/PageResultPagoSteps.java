@@ -57,24 +57,24 @@ public class PageResultPagoSteps {
 	
 	@Validation
 	public ChecksTM validateTextConfirmacionPago() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds1 = 10;
 		boolean isVisibleTextConfirmacion = pageResultPago.isVisibleTextoConfirmacionPago(maxSeconds1);
-		validations.add(
+		checks.add(
 			"Aparece un texto de confirmación del pago (lo esperamos hasta " + maxSeconds1 + " segundos)",
 			isVisibleTextConfirmacion, State.Warn);
 		if (!isVisibleTextConfirmacion) {
 			int maxSeconds2 = 20;
-			validations.add(
+			checks.add(
 				"Si no aparece lo esperamos " + maxSeconds2 + " segundos",
 				pageResultPago.isVisibleTextoConfirmacionPago(maxSeconds2), State.Defect);
 		}
-		return validations;
+		return checks;
 	}
 	
 	@Validation
 	public ChecksTM validateDataPedido(DataCtxPago dCtxPago, DataCtxShop dCtxSh) throws Exception {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		String importeTotal = "";
 		DataBag dataBag = dCtxPago.getDataPedido().getDataBag(); 
 		if (dataBag!=null && "".compareTo(dataBag.getImporteTotal())!=0) {
@@ -82,17 +82,17 @@ public class PageResultPagoSteps {
 		} else {
 			importeTotal = dCtxPago.getDataPedido().getImporteTotal();
 		}
-	  	validations.add(
+	  	checks.add(
 	  		"Aparece el importe " + importeTotal + " de la operación",
 	  		ImporteScreen.isPresentImporteInScreen(importeTotal, dCtxSh.pais.getCodigo_pais(), driver), State.Warn);
 		
 		if (dCtxSh.channel==Channel.desktop) {
 //			if (dCtxSh.appE==AppEcom.shop) {
-				validations.add(
+				checks.add(
 			  		"Aparece el link hacia las compras",
 			  		pageResultPago.isButtonMisCompras(), State.Warn);
 //			} else {
-//				validations.add(
+//				checks.add(
 //			  		"Aparece el link hacia los pedidos",
 //			  		pageResultPago.isLinkPedidos(), State.Warn);
 //			}
@@ -101,7 +101,7 @@ public class PageResultPagoSteps {
 		int maxSeconds = 5;
 		String codigoPed = pageResultPago.getCodigoPedido(maxSeconds);
 		boolean isCodPedidoVisible = "".compareTo(codigoPed)!=0;
-		validations.add(
+		checks.add(
 	  		"Aparece el código de pedido (" + codigoPed + ") (lo esperamos hasta " + maxSeconds + " segundos)",
 	  		isCodPedidoVisible, State.Defect);
 		
@@ -111,7 +111,7 @@ public class PageResultPagoSteps {
 		}
 		dataPedido.setCodpedido(codigoPed);
 		
-		return validations;
+		return checks;
 	}
 	
 	@Validation (
@@ -145,7 +145,7 @@ public class PageResultPagoSteps {
 			PageMisComprasSteps pageMisComprasSteps = PageMisComprasSteps.getNew(channel, app, driver);
 			pageMisComprasSteps.validateIsPage(pais);
 		} else {
-			PageAccesoMisComprasSteps.getNew(driver).validateIsPage();
+			new PageAccesoMisComprasSteps().validateIsPage();
 		}
 	}	
 	
@@ -156,7 +156,7 @@ public class PageResultPagoSteps {
 		if (pageResultPago.isVisibleDescubrirLoUltimo()) {
 			pageResultPago.clickDescubrirLoUltimo();
 		} else {
-			SecCabecera.getNew(channel, app, driver).clickLogoMango();
+			SecCabecera.getNew(channel, app).clickLogoMango();
 		}
 	}
 	
@@ -181,8 +181,8 @@ public class PageResultPagoSteps {
 			PageMisComprasSteps pageMisComprasSteps = PageMisComprasSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
 			pageMisComprasSteps.validateIsCompraOnline(dataPedido.getCodpedido(), dCtxPago.getFTCkout().isChequeRegalo);
 		} else {
-			PageAccesoMisComprasSteps pageAccesoMisComprasSteps = PageAccesoMisComprasSteps.getNew(driver);
-			pageAccesoMisComprasSteps.clickBlock(TypeBlock.NoRegistrado);
+			PageAccesoMisComprasSteps pageAccesoMisComprasSteps = new PageAccesoMisComprasSteps();
+			pageAccesoMisComprasSteps.clickBlock(TypeBlock.NO_REGISTRADO);
 			pageAccesoMisComprasSteps.buscarPedidoForNoRegistrado(dCtxPago.getDataPedido(), dCtxSh.channel, dCtxSh.appE);
 		}
 	}

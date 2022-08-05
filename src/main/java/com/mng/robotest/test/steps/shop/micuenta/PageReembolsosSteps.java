@@ -12,14 +12,14 @@ public class PageReembolsosSteps {
 
 	@Validation
 	public static ChecksTM validateIsPage (WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Aparece la página de Reembolsos",
 			PageReembolsos.isPage(driver), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparecen los inputs de BANCO, TITULAR e IBAN",
 			(PageReembolsos.existsInputBanco(driver) && PageReembolsos.existsInputTitular(driver) && PageReembolsos.existsInputIBAN(driver)), 
 			State.Warn);
-		return validations;
+		return checks;
 	}
 }

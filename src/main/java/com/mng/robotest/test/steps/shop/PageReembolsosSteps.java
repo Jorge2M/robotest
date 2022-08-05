@@ -41,8 +41,8 @@ public class PageReembolsosSteps {
 	
 	@Validation
 	private static ChecksTM checkClickReembolsos(boolean paisConSaldoCta, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Aparece la página de reembolsos",
 			PageReembolsos.isPage(driver), State.Defect);		
 		
@@ -50,16 +50,16 @@ public class PageReembolsosSteps {
 		boolean isVisibleTransferenciaSection = PageReembolsos.isVisibleTransferenciaSectionUntil(maxSecondsToWait, driver);
 		boolean isVisibleStoreCreditSection = PageReembolsos.isVisibleStorecreditSection(driver);
 		if (paisConSaldoCta) {
-			validations.add(
+			checks.add(
 				"El país SÍ tiene asociado Saldo en Cuenta -> Aparecen las secciones de \"Saldo en cuenta\" y \"Transferencia bancaria\"",
 				isVisibleTransferenciaSection && isVisibleStoreCreditSection, State.Defect);
 		} else {
-			validations.add(
+			checks.add(
 				"El país NO tiene asociado Saldo en Cuenta -> Aparece la sección de \"Transferencia bancaria\" y no la de \"Saldo en cuenta\"",
 				isVisibleTransferenciaSection && !isVisibleStoreCreditSection, State.Defect);
 		}
 		
-		return validations;
+		return checks;
 	}
 	
 	/**
@@ -122,17 +122,17 @@ public class PageReembolsosSteps {
 
 	@Validation
 	private static ChecksTM checkAfterModifyDataTransferencia(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSecondsToWait = 15;
-		validations.add(
+		checks.add(
 			"Aparecen establecidos los datos de banco, titular e IBAN (lo esperamos hasta " + maxSecondsToWait + " segundos)",
 			PageReembolsos.isVisibleTextBancoUntil(maxSecondsToWait, driver) &&
 			PageReembolsos.isVisibleTextTitular(driver) &&
 			PageReembolsos.isVisibleTextIBAN(driver), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece seleccionado el radiobutton de \"Transferencia bancaria\"",
 			PageReembolsos.isCheckedRadio(TypeReembolso.Transferencia, driver), State.Warn);
-		return validations;
+		return checks;
 	}
 	
 	@Step (
@@ -147,14 +147,14 @@ public class PageReembolsosSteps {
 	
 	@Validation
 	private static ChecksTM checkAfterSelectStoreCredit(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	   	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	   	checks.add(
 			"Aparece seleccionado el radiobutton de \"Store Credit\"",
 			PageReembolsos.isCheckedRadio(TypeReembolso.StoreCredit, driver), State.Warn);
-	   	validations.add(
+	   	checks.add(
 			"Aparece un saldo >= 0",
 			PageReembolsos.getImporteStoreCredit(driver) >= 0, State.Defect);
-	   	return validations;
+	   	return checks;
 	}
 	
 	/**

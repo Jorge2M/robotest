@@ -14,15 +14,15 @@ public class PageSepaResultMobilSteps {
 	
 	@Validation
 	public ChecksTM validateIsPage(String importeTotal, String codPais) {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Aparece la página de resultado de SEPA para móvil",
 			pageSepaResultMobil.isPage(), State.Warn);	
-		validations.add(
+		checks.add(
 			"Aparece el importe de la compra: " + importeTotal,
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, pageSepaResultMobil.driver), 
 			State.Warn);	
-		return validations;
+		return checks;
 	}
 	
 	@Step (

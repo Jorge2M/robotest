@@ -38,31 +38,31 @@ public class SecSelectDPointSteps {
 	@Validation
 	private static ChecksTM checkDroppointSelectedContainsDirecc(DataSearchDeliveryPoint dataSearchDp, WebDriver driver) 
 	throws Exception {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 5;
 		State stateVal = State.Warn;
 		if (dataSearchDp.typeData==DataSearchDp.CodigoPostal) {
 			stateVal = State.Info;
 		}
-	 	validations.add(
+	 	checks.add(
 			"La dirección del droppoint seleccionado contiene <b>" + dataSearchDp.data + 
 			"</b> (lo esperamos hasta " + maxSeconds + " segundos)",
 			ModalDroppoints.secSelectDPoint.
 				deliveryPointSelectedContainsPoblacionUntil(dataSearchDp, maxSeconds, driver), stateVal);
-		return validations;
+		return checks;
 	}
 	
 	@Validation
 	public static ChecksTM validaDeliveryPointOfType(TypeDeliveryPoint typeDp, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 3;
-	 	validations.add(
+	 	checks.add(
 			"Es visible el 1er delivery point de la lista (lo esperamos hasta " + maxSeconds + " segundos)",
 			ModalDroppoints.secSelectDPoint.isDroppointVisibleUntil(1, maxSeconds, driver), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"El 1er delivery point de la lista es de tipo <b>" + typeDp + "</b>",
 			ModalDroppoints.secSelectDPoint.getTypeDeliveryPoint(1, driver)==typeDp, State.Defect);
-	 	return validations;
+	 	return checks;
 	}
 	
 	@Step (

@@ -43,7 +43,7 @@ public class BrowserSteps {
 
 	@Validation
 	private static ChecksTM checkPageRobotsTxt(String urlSitemap, AppEcom app, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 
 		String contRobots1 = 
 			"User-Agent: *\n" +
@@ -108,22 +108,22 @@ public class BrowserSteps {
 
 		String contRobots4 = "sitemap: " + urlSitemap; 
 
-		validations.add(
+		checks.add(
 			"Figura el siguiente contenido: <br>" + contRobots1.replace("\n", "<br>"),
 			driver.getPageSource().toLowerCase().contains(contRobots1.toLowerCase()), State.Defect);
 		if (app==AppEcom.outlet) {
-			validations.add(
+			checks.add(
 				"Figura el siguiente contenido: <br>" + contRobots2.replace("\n", "<br>"),
 				driver.getPageSource().contains(contRobots2), State.Defect);
 		}
-		validations.add(
+		checks.add(
 			"Figura el siguiente contenido: <br>" + contRobots3.replace("\n", "<br>"),
 			driver.getPageSource().contains(contRobots3), State.Defect);
-		validations.add(
+		checks.add(
 			"Figura el siguiente contenido: <br>" + contRobots4.replace("\n", "<br>"),
 			driver.getPageSource().contains(contRobots4), State.Defect);
 		
-		return validations;
+		return checks;
 	}
 
 	@Step (
@@ -136,7 +136,7 @@ public class BrowserSteps {
 
 	@Validation
 	private static ChecksTM checkResultUrlSitemal(WebDriver driver) throws Exception {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		
 		Sitemapindex sitemapIndex = null;
 		try {
@@ -146,7 +146,7 @@ public class BrowserSteps {
 			sitemapIndex = (Sitemapindex) jaxbUnmarshaller.unmarshal(reader);
 		}
 		catch (Exception e) {}
-		validations.add(
+		checks.add(
 			"Obtenemos un XML con formato de sitemap",
 			sitemapIndex!=null, State.Defect);
 		
@@ -163,12 +163,12 @@ public class BrowserSteps {
 					break;
 				}
 			}
-			validations.add(
+			checks.add(
 				"Todos los tags <b>lastmod</b> contienen la fecha del día: " + currentDay,
 				lastModsContainsCurrentDay, State.Defect);
 		}
 		
-		return validations;
+		return checks;
 	}
 
 	public static Date removeTime(Date date) {	

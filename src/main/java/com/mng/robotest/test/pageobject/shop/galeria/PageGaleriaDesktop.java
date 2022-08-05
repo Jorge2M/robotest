@@ -630,15 +630,13 @@ public class PageGaleriaDesktop extends PageGaleria {
 	throws Exception {
 		//Click Sliders
 		for (TypeSlider typeSlider : typeSliderList) {
-			//WebElement slider = hoverSliderUntilClickable(typeSlider, articulo);
-			SecCabecera secCabecera = SecCabecera.getNew(channel, app, driver);
+			SecCabecera secCabecera = SecCabecera.getNew(channel, app);
 			secCabecera.hoverIconoBolsa();
 			hoverArticle(articulo);
 			PageObjTM.waitMillis(500);
 			hoverArticle(articulo);
 			PageObjTM.waitMillis(500);
 			String xpathSlider = getXPathSliderRelativeToArticle(typeSlider, app);
-			//driver.findElement(By.xpath("//*[@id='g1704908099']/div/div[2]")).click();
 			click(articulo).by(By.xpath(xpathSlider)).exec();
 			waitForAjax(driver, 1);
 			Thread.sleep(1000);

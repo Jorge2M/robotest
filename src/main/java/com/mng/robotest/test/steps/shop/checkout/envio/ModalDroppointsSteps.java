@@ -19,18 +19,18 @@ public class ModalDroppointsSteps {
 	@SuppressWarnings("static-access")
 	@Validation
 	public static ChecksTM validaIsVisible(Channel channel, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 3;
-	  	validations.add(
+	  	checks.add(
 			"Desaparece el mensaje de \"Cargando...\" (lo esperamos hasta " + maxSeconds + " segundos)",
 			ModalDroppoints.isInvisibleCargandoMsgUntil(maxSeconds, driver), State.Warn);
-	  	validations.add(
+	  	checks.add(
 			"Aparece un 1er Droppoint visible (lo esperamos hasta " + maxSeconds + " segundos)",
 			ModalDroppoints.secSelectDPoint.isDroppointVisibleUntil(1, maxSeconds, driver), State.Info);
-	  	validations.add(
+	  	checks.add(
 			"Sí aparece el modal con el mapa de Droppoints",
 			ModalDroppoints.isVisible(channel, driver), State.Defect);
-	  	return validations;
+	  	return checks;
 	}
 	
 	@Validation (

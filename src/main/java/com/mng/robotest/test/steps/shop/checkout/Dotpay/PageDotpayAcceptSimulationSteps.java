@@ -12,14 +12,14 @@ public class PageDotpayAcceptSimulationSteps {
 	
 	@Validation
 	public static ChecksTM validateIsPage(int maxSeconds, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	  	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	  	checks.add(
 			"Aparece la página para la aceptación de la simulación (la esperamos hasta " + maxSeconds + " segundos)",
 			PageDotpayAcceptSimulation.isPage(maxSeconds, driver), State.Warn);
-	  	validations.add(
+	  	checks.add(
 			"Figura un botón de aceptar rojo",
 			PageDotpayAcceptSimulation.isPresentRedButtonAceptar(driver), State.Defect);
-	  	return validations;
+	  	return checks;
 	}
 	
 	@Step (

@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+
 
 public class PageHomeLikes extends PageObjTM {
 
@@ -28,14 +28,6 @@ public class PageHomeLikes extends PageObjTM {
 		public By getBy() {
 			return by;
 		}
-	}
-	
-	private PageHomeLikes(WebDriver driver) {
-		super(driver);
-	}
-	
-	public static PageHomeLikes getNew(WebDriver driver) {
-		return (new PageHomeLikes(driver));
 	}
 	
 	public boolean checkIsPageUntil(int maxSeconds) {

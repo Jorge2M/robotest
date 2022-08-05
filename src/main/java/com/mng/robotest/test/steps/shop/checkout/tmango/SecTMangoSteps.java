@@ -22,14 +22,14 @@ public class SecTMangoSteps {
 	
 	@Validation
 	public ChecksTM validateIsSectionOk() {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Aparece el bloque de selección de la forma de pago",
 			secTMango.isVisibleUntil(0), State.Defect); 
-	 	validations.add(
+	 	checks.add(
 			"Aparece disponible la modalidad de pago:<br>" + secTMango.getDescripcionTipoPago(TipoPago.PAGO_HABITUAL), 
 			secTMango.isModalidadDisponible(SecTMango.TipoPago.PAGO_HABITUAL), State.Defect); 
-	 	return validations;
+	 	return checks;
 	}
 	
 	/**

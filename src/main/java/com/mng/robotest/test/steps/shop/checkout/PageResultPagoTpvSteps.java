@@ -13,13 +13,13 @@ public class PageResultPagoTpvSteps {
 	
 	@Validation
 	public static ChecksTM validateIsPageOk(DataPedido dataPedido, String codPais, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Aparece un texto de confirmación de la compra",
 			PageResultPagoTpv.isPresentCabeceraConfCompra(driver), State.Warn);
 	 	
 		String importeTotal = dataPedido.getImporteTotal();
-	 	validations.add(
+	 	checks.add(
 			"Aparece el importe " + importeTotal + " de la operación",
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
 	 	
@@ -28,13 +28,13 @@ public class PageResultPagoTpvSteps {
 	 	if (isVisibleCodPedido) {
 	 		codPedido = PageResultPagoTpv.getCodigoPedido(driver);
 	 	}
-	 	validations.add(
+	 	checks.add(
 			"Aparece el código de pedido <b>" + codPedido + "</b>",
 			isVisibleCodPedido, State.Defect);
 	 	
 		dataPedido.setCodpedido(codPedido); 
 		dataPedido.setResejecucion(State.Ok);
 		
-		return validations;
+		return checks;
 	}
 }

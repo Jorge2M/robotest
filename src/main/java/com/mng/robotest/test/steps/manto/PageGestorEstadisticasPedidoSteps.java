@@ -13,17 +13,17 @@ public class PageGestorEstadisticasPedidoSteps {
 
 	@Validation
 	public static ChecksTM validateIsPage(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Estamos en la página " + PageGestorEstadisticasPedido.titulo,
 			PageGestorEstadisticasPedido.isPage(driver), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"Aparece el input de fecha de inicio",
 			PageGestorEstadisticasPedido.isVisibleStartDateInput(driver), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"Aparece el input de fecha fin",
 			PageGestorEstadisticasPedido.isVisibleEndDateInput(driver), State.Defect);
-	 	return validations;
+	 	return checks;
 	}
 	
 	@Step (
@@ -37,17 +37,17 @@ public class PageGestorEstadisticasPedidoSteps {
 	
 	@Validation
 	private static ChecksTM checkAfterSelectMostrarPedidosZalandos(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Aparece la tabla de información",
 			PageGestorEstadisticasPedido.isTablaInformacionVisible(driver), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"Las columnas de comparación en verde contienen \"0 €\"",
 			PageGestorEstadisticasPedido.isColumnaCompararVerdeZero(driver), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"Las columnas de comparación en rojo contienen \"0 %\"",
 			PageGestorEstadisticasPedido.isColumnaCompararRojoZero(driver), State.Defect);
-	 	return validations;
+	 	return checks;
 	}
 
 	@Step (
@@ -61,13 +61,13 @@ public class PageGestorEstadisticasPedidoSteps {
 	
 	@Validation
 	private static ChecksTM checkAfterCompararDias(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Las columnas de comparación en verde no contienen \"0 €\"",
 			PageGestorEstadisticasPedido.isColumnaCompararVerdeNoZero(driver), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"Las columnas de comparación en rojo no contienen \"0 %\"",
 			PageGestorEstadisticasPedido.isColumnaCompararRojaNoZero(driver), State.Defect);
-		return validations;
+		return checks;
 	}
 }

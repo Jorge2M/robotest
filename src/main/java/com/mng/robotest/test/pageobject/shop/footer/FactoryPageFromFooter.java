@@ -19,7 +19,7 @@ public class FactoryPageFromFooter {
 		case ayuda:
 			return (new PagePregFrecuentes(driver));
 		case miscompras:
-			return (new PageAccesoMisCompras(driver)); 
+			return (new PageAccesoMisCompras()); 
 		case devoluciones:
 			return (new PageCambiosYdevoluciones(driver));
 		case tiendas: 

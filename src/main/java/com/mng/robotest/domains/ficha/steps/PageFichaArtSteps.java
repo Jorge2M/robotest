@@ -62,14 +62,14 @@ public class PageFichaArtSteps {
 		this.driver = TestMaker.getDriverTestCase();
 		this.channel = channel;
 		this.app = appE;
-		this.pageFicha = PageFicha.newInstance(channel, appE, driver);
+		this.pageFicha = PageFicha.newInstance(channel, appE);
 		this.secBolsa = SecBolsa.make(channel, app, pais, driver);
-		this.modEnvioYdevolSteps = new ModEnvioYdevolNewSteps(driver);
-		this.secProductDescOldSteps = new SecProductDescrOldSteps(channel, appE, driver);
-		this.secTotalLookSteps = new SecTotalLookSteps(driver);
-		this.secFitFinderSteps = new SecFitFinderSteps(driver);
-		this.secBolsaButtonAndLinksNewSteps = new SecBolsaButtonAndLinksNewSteps(driver);
-		this.secFotosNewSteps = new SecFotosNewSteps(driver);
+		this.modEnvioYdevolSteps = new ModEnvioYdevolNewSteps();
+		this.secProductDescOldSteps = new SecProductDescrOldSteps(channel, appE);
+		this.secTotalLookSteps = new SecTotalLookSteps();
+		this.secFitFinderSteps = new SecFitFinderSteps();
+		this.secBolsaButtonAndLinksNewSteps = new SecBolsaButtonAndLinksNewSteps();
+		this.secFotosNewSteps = new SecFotosNewSteps();
 	}
 	
 	public PageFicha getFicha() {
@@ -399,7 +399,7 @@ public class PageFichaArtSteps {
 		if (isVisibleLink) {
 			switch (app) {
 			case outlet:
-				PageComoMedirmeSteps pageComoMedirmeSteps = PageComoMedirmeSteps.getNew(driver);
+				PageComoMedirmeSteps pageComoMedirmeSteps = new PageComoMedirmeSteps();
 				pageComoMedirmeSteps.isPageInNewTab();
 				break;
 			case shop:

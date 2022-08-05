@@ -20,53 +20,49 @@ import com.mng.robotest.test.pageobject.manto.pedido.PagePedidos.TypeDetalle;
 import com.mng.robotest.test.steps.shop.checkout.envio.DataDeliveryPoint;
 import com.mng.robotest.test.utils.ImporteScreen;
 
-/**
- * Clase que implementa los diferentes steps/validations asociados asociados a la página de Pedidos en Manto
- * @author jorge.munoz
- *
- */
+
 public class PagePedidosMantoSteps {
 
 	@Validation
 	public static ChecksResultWithFlagLinkCodPed validaLineaPedido(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
-		ChecksResultWithFlagLinkCodPed validations = ChecksResultWithFlagLinkCodPed.getNew();
+		ChecksResultWithFlagLinkCodPed checks = ChecksResultWithFlagLinkCodPed.getNew();
 		
 		int maxSeconds = 30;
-	 	validations.add(
+	 	checks.add(
 			"Desaparece la capa de Loading de \"Consultando\"" + " (lo esperamos hasta " + maxSeconds + " segundos)",
 			PagePedidos.isInvisibleCapaLoadingUntil(maxSeconds, driver), State.Defect);
 	 	
-	 	validations.setExistsLinkCodPed(PagePedidos.isPresentDataInPedido(IdColumn.idpedido, dataPedido.getCodigoPedidoManto(), TypeDetalle.pedido, 0, driver));
-	 	validations.add(
+	 	checks.setExistsLinkCodPed(PagePedidos.isPresentDataInPedido(IdColumn.idpedido, dataPedido.getCodigoPedidoManto(), TypeDetalle.pedido, 0, driver));
+	 	checks.add(
 			"En la columna " + IdColumn.idpedido.textoColumna + " aparece el código de pedido: " + dataPedido.getCodigoPedidoManto(),
-			validations.getExistsLinkCodPed(), State.Warn);
-	 	validations.add(
+			checks.getExistsLinkCodPed(), State.Warn);
+	 	checks.add(
 			"Aparece un solo pedido",
 			PagePedidos.getNumLineas(driver)==1, State.Warn);
 		
 		if (appE!=AppEcom.outlet) {
-		 	validations.add(
+		 	checks.add(
 				"En la columna " + IdColumn.tpv.textoColumna + " Aparece el Tpv asociado: " + dataPedido.getPago().getTpv().getId(),
 				PagePedidos.isPresentDataInPedido(IdColumn.tpv, dataPedido.getPago().getTpv().getId(), TypeDetalle.pedido, 0, driver), 
 				State.Warn);
 		}
 
-	 	validations.add(
+	 	checks.add(
 			"En la columna " + IdColumn.email.textoColumna + " aparece el email asociado: " + dataPedido.getEmailCheckout(),
 			PagePedidos.isPresentDataInPedido(IdColumn.email, dataPedido.getEmailCheckout(), TypeDetalle.pedido, 0, driver), 
 			State.Warn);
 	 	
 	 	String xpathCeldaImporte = PagePedidos.getXPathCeldaLineaPedido(IdColumn.total, TypeDetalle.pedido, driver);
-	 	validations.add(
+	 	checks.add(
 			"En pantalla aparece el importe asociado: " +  dataPedido.getImporteTotalManto(),
 			ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), xpathCeldaImporte, driver), 
 			State.Warn);
-	 	validations.add(
+	 	checks.add(
 			"En la columna " + IdColumn.tarjeta.textoColumna + " aparece el tipo de tarjeta: " + dataPedido.getCodtipopago(),
 			PagePedidos.isPresentDataInPedido(IdColumn.tarjeta, dataPedido.getCodtipopago(), TypeDetalle.pedido, 0, driver), 
 			State.Warn);
 		
-		return validations;
+		return checks;
 	}
 	
 	@Step (
@@ -147,14 +143,14 @@ public class PagePedidosMantoSteps {
 
 	@Validation
 	private static ChecksTM checkAfterSearchPedido(DataPedido dPedidoPrueba, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Tenemos el DNI del cliente " + dPedidoPrueba.getPago().getDni(),
 			!dPedidoPrueba.getPago().getDni().equals(""), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"Tenemos el Email del cliente " + dPedidoPrueba.getPago().getUseremail(),
 			!dPedidoPrueba.getPago().getUseremail().equals(""), State.Defect);
-	 	return validations;
+	 	return checks;
 	}
 	
 	@Step (

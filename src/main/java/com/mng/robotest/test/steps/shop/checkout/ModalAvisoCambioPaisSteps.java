@@ -34,16 +34,16 @@ public class ModalAvisoCambioPaisSteps {
 	
 	@Validation
 	private ChecksTM checkConfirmacionCambio(Pais paisEnvio) throws Exception {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 10;
-	 	validations.add(
+	 	checks.add(
 			"Desaparece el modal de aviso de cambio de país (lo esperamos hasta " + maxSeconds + " segundos)",
 			modalAvisoCambioPais.isInvisibleUntil(maxSeconds), State.Defect);		
 	 	
 	 	PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(Channel.desktop, app, driver);
-	 	validations.add(
+	 	checks.add(
 			"En la dirección de envió aparece el país " + paisEnvio.getNombre_pais(),
 			pageCheckoutWrapper.direcEnvioContainsPais(paisEnvio.getNombre_pais()), State.Defect);   
-		return validations;
+		return checks;
 	}
 }

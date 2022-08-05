@@ -31,13 +31,13 @@ public class Reg002 extends TestBase {
 
 	private final SecMenusUserSteps userMenusSteps = SecMenusUserSteps.getNew(channel, app, driver);
 	private final SecFooterSteps secFooterSteps = new SecFooterSteps(channel, app, driver);
-	private final PageRegistroIniSteps pageRegistroIniSteps = new PageRegistroIniSteps(driver);
-	private final PageRegistroSegundaSteps pageRegistroSegundaSteps = new PageRegistroSegundaSteps(driver);;
+	private final PageRegistroIniSteps pageRegistroIniSteps = new PageRegistroIniSteps();
+	private final PageRegistroSegundaSteps pageRegistroSegundaSteps = new PageRegistroSegundaSteps();;
 	private final PageMiCuentaSteps pageMiCuentaSteps = PageMiCuentaSteps.getNew(channel, app, driver);
-	private final PageRegistroNinosSteps pageRegistroNinosSteps = new PageRegistroNinosSteps(driver);
-	private final PageRegistroDirecSteps pageRegistroDirecSteps = new PageRegistroDirecSteps(driver);
+	private final PageRegistroNinosSteps pageRegistroNinosSteps = new PageRegistroNinosSteps();
+	private final PageRegistroDirecSteps pageRegistroDirecSteps = new PageRegistroDirecSteps();
 	private final PageRegistroFinSteps pageRegistroFinSteps;
-	private final SecCabeceraSteps secCabeceraSteps = SecCabeceraSteps.getNew(dataTest.pais, channel, app, driver);
+	private final SecCabeceraSteps secCabeceraSteps = new SecCabeceraSteps(dataTest.pais, channel, app);
 	
 	private final VersionRegistroSuite version;
 	private Map<String, String> dataRegister = new HashMap<>();

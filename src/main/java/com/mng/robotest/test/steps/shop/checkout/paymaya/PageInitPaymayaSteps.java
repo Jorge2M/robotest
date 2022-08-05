@@ -20,14 +20,14 @@ public class PageInitPaymayaSteps {
 	
 	@Validation
 	public ChecksTM checkPage() {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Aparece la página inicial de PayMaya",
 			pageInitPaymaya.isPage(), State.Warn); 
-	 	validations.add(
+	 	checks.add(
 			"Aparece la imagen del QR",
 			pageInitPaymaya.isQrVisible(), State.Defect);
-	 	return validations;
+	 	return checks;
 	}
 	
 	@Step(

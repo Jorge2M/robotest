@@ -1,19 +1,14 @@
 package com.mng.robotest.domains.ficha.steps;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.ficha.pageobjects.ModEnvioYdevolNew;
 
+
 public class ModEnvioYdevolNewSteps {
 
-	private final ModEnvioYdevolNew modEnvioYdev;
-	
-	public ModEnvioYdevolNewSteps(WebDriver driver) {
-		modEnvioYdev = new ModEnvioYdevolNew(driver);
-	}
+	private final ModEnvioYdevolNew modEnvioYdev = new ModEnvioYdevolNew();
 	
 	@Validation (
 		description="Aparece el modal con los datos a nivel de envío y devolución",

@@ -23,7 +23,7 @@ import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 public class Reg001 extends TestBase {
 
 	private final SecMenusUserSteps userMenusSteps = SecMenusUserSteps.getNew(channel, app, driver);
-	private final PageRegistroIniSteps pageRegistroIniSteps = new PageRegistroIniSteps(driver);
+	private final PageRegistroIniSteps pageRegistroIniSteps = new PageRegistroIniSteps();
 	
 	private final Map<String, String> dataRegister = new HashMap<>();
 	

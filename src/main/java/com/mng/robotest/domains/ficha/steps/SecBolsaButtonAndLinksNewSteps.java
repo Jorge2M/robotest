@@ -19,22 +19,16 @@ import com.mng.robotest.test.beans.Linea.LineaType;
 
 public class SecBolsaButtonAndLinksNewSteps {
 
-	private final SecBolsaButtonAndLinksNew secBolsaButtonAndLinksNew;
-	private final SecDetalleProductNew secDetalleProductNew;
-	private final WebDriver driver;
-	
-	public SecBolsaButtonAndLinksNewSteps(WebDriver driver) {
-		this.secBolsaButtonAndLinksNew = new SecBolsaButtonAndLinksNew(driver);
-		this.secDetalleProductNew = new SecDetalleProductNew(driver);
-		this.driver = driver;
-	}
+	private final SecBolsaButtonAndLinksNew secBolsaButtonAndLinksNew = new SecBolsaButtonAndLinksNew();
+	private final SecDetalleProductNew secDetalleProductNew = new SecDetalleProductNew();
+	private final WebDriver driver = secDetalleProductNew.driver;
 	
 	@Step (
 		description="Seleccionar el link <b>Envío gratis a tienda</b>",
 		expected="Aparece el modal con los datos a nivel de envío y devolución")
 	public void selectEnvioYDevoluciones() throws Exception {
 		secBolsaButtonAndLinksNew.clickLinkAndWaitLoad(LinksAfterBolsa.ENVIO_GRATIS_TIENDA);
-		(new ModEnvioYdevolNewSteps(driver)).checkIsVisible();
+		(new ModEnvioYdevolNewSteps()).checkIsVisible();
 	}
 
 	@Step (

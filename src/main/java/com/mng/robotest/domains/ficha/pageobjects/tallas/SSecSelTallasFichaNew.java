@@ -1,7 +1,6 @@
 package com.mng.robotest.domains.ficha.pageobjects.tallas;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -19,10 +18,6 @@ public class SSecSelTallasFichaNew extends PageObjTM implements SSecSelTallasFic
 	private static final String XPathTallaUnavailable = XPathTallaItem + "//self::span[not(@data-available) and not(@class='single-size')]";
 	private static final String XPathTallaSelected = XPathTallaItem + "//self::span[@class[contains(.,'selector-trigger')] or @class='single-size']";
 	private static final String XPathTallaUnica = XPathTallaItem + "//self::span[@class[contains(.,'single-size')]]";
-	
-	public SSecSelTallasFichaNew(WebDriver driver) {
-		super(driver);
-	}
 	
 	private String getXPathTallaByCodigo(String codigoNumericoTalla) {
 		int numTalla = Integer.valueOf(codigoNumericoTalla);

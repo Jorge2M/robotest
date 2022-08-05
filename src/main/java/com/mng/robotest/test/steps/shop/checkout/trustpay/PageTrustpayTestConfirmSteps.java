@@ -13,20 +13,20 @@ public class PageTrustpayTestConfirmSteps {
 	
 	@Validation
 	public static ChecksTM validateIsPage(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Figura el botón \"OK\"",
 			PageTrustpayTestConfirm.isPresentButton(typeButtons.OK, driver), State.Defect);
-		validations.add(
+		checks.add(
 			"Figura el botón \"ANNOUNCED\"",
 			PageTrustpayTestConfirm.isPresentButton(typeButtons.ANNOUNCED, driver), State.Warn);
-		validations.add(
+		checks.add(
 			"Figura el botón \"FAIL\"",
 			PageTrustpayTestConfirm.isPresentButton(typeButtons.FAIL, driver), State.Warn);
-		validations.add(
+		checks.add(
 			"Figura el botón \"PENDING\"",
 			PageTrustpayTestConfirm.isPresentButton(typeButtons.PENDING, driver), State.Warn);
-		return validations;
+		return checks;
 	}
 	
 	@Step (

@@ -37,8 +37,8 @@ public class SecMenusWrap {
 	private SecMenusWrap(Channel channel, AppEcom app, WebDriver driver) {
 		this.channel = channel;
 		this.app = app;
-		this.secMenusUser = MenusUserWrapper.getNew(channel, app, driver);
-		this.secMenuLateralDevice = new SecMenuLateralDevice(channel, app, driver);
+		this.secMenusUser = MenusUserWrapper.getNew(channel, app);
+		this.secMenuLateralDevice = new SecMenuLateralDevice(channel, app);
 		this.secMenusDesktop = SecMenusDesktop.getNew(app, channel, driver);
 	}
 	

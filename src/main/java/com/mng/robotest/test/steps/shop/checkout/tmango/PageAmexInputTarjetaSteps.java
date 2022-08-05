@@ -19,24 +19,24 @@ public class PageAmexInputTarjetaSteps {
 
 	@Validation
 	public ChecksTM validateIsPageOk(String importeTotal, String codPais) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 5;
-	 	validations.add(
+	 	checks.add(
 			"Aparece la pasarela de pagos de RedSys (la esperamos hasta " + maxSeconds + " segundos)",
 			pageAmexInputTarjeta.isPasarelaRedSysUntil(maxSeconds), State.Defect); 
-	 	validations.add(
+	 	checks.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, pageAmexInputTarjeta.driver), State.Warn); 
-	 	validations.add(
+	 	checks.add(
 			"Aparecen los campos de introducción de tarjeta, fecha caducidad y código de seguridad",
 			pageAmexInputTarjeta.isPresentNumTarj() &&
 			pageAmexInputTarjeta.isPresentInputMesCad() &&
 			pageAmexInputTarjeta.isPresentInputAnyCad() &&
 			pageAmexInputTarjeta.isPresentInputCvc(), State.Warn); 
-	 	validations.add(
+	 	checks.add(
 			"Figura un botón de Aceptar",
 			pageAmexInputTarjeta.isPresentPagarButton(), State.Defect); 
-	 	return validations;
+	 	return checks;
 	}
 	
 	@Step (

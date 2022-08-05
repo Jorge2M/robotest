@@ -5,7 +5,6 @@ import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -31,16 +30,15 @@ public class MenusUserWrapper extends PageObjTM {
 	final SecCabecera secCabecera;
 	final SecMenuLateralDevice secMenuLateralMobil;
 	
-	private MenusUserWrapper(Channel channel, AppEcom app, WebDriver driver) {
-		super(driver);
+	private MenusUserWrapper(Channel channel, AppEcom app) {
 		this.channel = channel;
 		this.app = app;
-		this.secCabecera = SecCabecera.getNew(channel, app, driver);
-		this.secMenuLateralMobil = new SecMenuLateralDevice(channel, app, driver);
+		this.secCabecera = SecCabecera.getNew(channel, app);
+		this.secMenuLateralMobil = new SecMenuLateralDevice(channel, app);
 	}
 	
-	public static MenusUserWrapper getNew(Channel channel, AppEcom app, WebDriver driver) {
-		return (new MenusUserWrapper(channel, app, driver));
+	public static MenusUserWrapper getNew(Channel channel, AppEcom app) {
+		return (new MenusUserWrapper(channel, app));
 	}
 	
 	public boolean isMenuInState(UserMenu menu, State state) throws Exception {

@@ -1,7 +1,6 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -27,17 +26,17 @@ public class PageFichaArt_DesktopShop extends PageFicha {
 	
 	private static final String XPATH_HTML_FICHA = "//html[@class[contains(.,'ficha')]]";
 	
-	private PageFichaArt_DesktopShop(Channel channel, AppEcom app, WebDriver driver) {
-		super(TypeFicha.NEW, channel, app, driver);
-		this.secBolsaButtonAndLinks = new SecBolsaButtonAndLinksNew(driver);
-		this.modEnvioYdevolNew = new ModEnvioYdevolNew(driver);
-		this.secFotos = new SecFotosNew(driver);
-		this.secProductInfo = new SecDetalleProductNew(driver);
-		this.secSliders = new SecSlidersNew(driver);
+	private PageFichaArt_DesktopShop(Channel channel, AppEcom app) {
+		super(TypeFicha.NEW, channel, app);
+		this.secBolsaButtonAndLinks = new SecBolsaButtonAndLinksNew();
+		this.modEnvioYdevolNew = new ModEnvioYdevolNew();
+		this.secFotos = new SecFotosNew();
+		this.secProductInfo = new SecDetalleProductNew();
+		this.secSliders = new SecSlidersNew();
 	}
 	
-	public static PageFichaArt_DesktopShop getNewInstance(Channel channel, AppEcom app, WebDriver driver) {
-		return (new PageFichaArt_DesktopShop(channel, app, driver));
+	public static PageFichaArt_DesktopShop getNewInstance(Channel channel, AppEcom app) {
+		return (new PageFichaArt_DesktopShop(channel, app));
 	}
 	
 	private String getXPathIsPage(String referencia) {

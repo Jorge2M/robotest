@@ -44,15 +44,15 @@ public class ModalArticleNotAvailableSteps {
 
 	@Validation
 	public ChecksTM checkVisibleAvisame() throws Exception {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		boolean isVisibleModal = ModalArticleNotAvailable.isVisibleUntil(2, driver);
 		boolean isVisibleRPGD = ModalArticleNotAvailable.isVisibleRPGD(2, driver);
-		validations.add(
+		checks.add(
 			"Si aparece el modal de avisame",
 			isVisibleModal, State.Defect);
-		validations.add(
+		checks.add(
 			"Si aparece la descripcion de RPGD de usuario",
 			isVisibleRPGD, State.Defect);
-		return validations;
+		return checks;
 	}
 }

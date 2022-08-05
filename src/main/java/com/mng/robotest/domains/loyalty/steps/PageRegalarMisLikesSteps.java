@@ -9,13 +9,7 @@ import com.mng.robotest.domains.loyalty.pageobjects.PageRegalarMisLikes;
 
 public class PageRegalarMisLikesSteps {
 
-	final WebDriver driver;
-	final PageRegalarMisLikes pageRegalarMisLikes;
-	
-	public PageRegalarMisLikesSteps(WebDriver driver) {
-		this.driver = driver;
-		this.pageRegalarMisLikes = new PageRegalarMisLikes(driver);
-	}
+	private final PageRegalarMisLikes pageRegalarMisLikes = new PageRegalarMisLikes();
 
 	@Validation (
 		description="Estamos en la página de \"Regalar Likes\"")
@@ -47,7 +41,7 @@ public class PageRegalarMisLikesSteps {
 		pageRegalarMisLikes.inputLikesToRegalar(numLikesToRegalar);
 		pageRegalarMisLikes.clickEnviarRegalo();
 		
-		PageResultadoRegaloLikesSteps pageResult = new PageResultadoRegaloLikesSteps(driver);
+		PageResultadoRegaloLikesSteps pageResult = new PageResultadoRegaloLikesSteps();
 		pageResult.checkIsEnvioLikesOk(3);
 		return pageResult;
 	}

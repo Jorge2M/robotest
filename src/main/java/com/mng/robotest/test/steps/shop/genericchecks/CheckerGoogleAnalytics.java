@@ -17,7 +17,7 @@ import com.mng.robotest.test.exceptions.NotFoundException;
 public class CheckerGoogleAnalytics implements Checker {
 
 	public ChecksTM check(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		
 		GestorDatosHarJSON gestorHAR = UtilsChecker.getGestorHar(driver);
 		if (gestorHAR!=null) {
@@ -27,7 +27,7 @@ public class CheckerGoogleAnalytics implements Checker {
 			}
 			int numLineas = listEntriesFilteredPageOpt.get().size(); 
 			String urlGoogleAnalytics = "://www.google-analytics.com/collect";
-		 	validations.add(
+		 	checks.add(
 				"Está lanzándose 1 petición que contiene <b>" + urlGoogleAnalytics + "</b> y el parámetro <b>\"t=pageview\"</b>",
 				numLineas==1, State.Warn);
 		 	
@@ -36,10 +36,10 @@ public class CheckerGoogleAnalytics implements Checker {
 				JSONObject requestJSON = (JSONObject)entrieJSON.get("request");
 				JSONObject paramTid = gestorHAR.getParameterFromRequestQuery(requestJSON, "tid");
 				JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
-			 	validations.add(
+			 	checks.add(
 					"La petición es de tipo <b>\"GET\"</b>",
 					requestJSON.get("method").toString().compareTo("GET")!=0, State.Warn);
-			 	validations.add(
+			 	checks.add(
 					"El response status de la petición es de tipo <b>2xx</b>",
 					responseJSON.get("status").toString().matches("2\\d\\d"), State.Warn);
 			 	
@@ -51,7 +51,7 @@ public class CheckerGoogleAnalytics implements Checker {
 					valueTid2 = "UA-855910-5";
 					valueTid2 = "UA-855910-5";
 				}
-			 	validations.add(
+			 	checks.add(
 					"En la petición figura el parámetro <b>\"tid=" + valueTid1 + "\" o \"tid=" + valueTid2 + "\" o o \"tid=" + valueTid3 + "\"</b>",
 					paramTid!=null && 
 					(((String)paramTid.get("value")).compareTo(valueTid1)==0 || 
@@ -60,7 +60,7 @@ public class CheckerGoogleAnalytics implements Checker {
 		 	}	 
 		}
 		
-	 	return validations; 
+	 	return checks; 
 	}
 	
 	private Optional<JSONArray> getListEntries(GestorDatosHarJSON gestorHAR) {

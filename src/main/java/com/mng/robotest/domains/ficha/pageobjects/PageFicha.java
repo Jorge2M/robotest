@@ -1,12 +1,11 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 
 @SuppressWarnings({"static-access"})
 public abstract class PageFicha extends PageObjTM {
@@ -36,9 +35,8 @@ public abstract class PageFicha extends PageObjTM {
 	final Channel channel;
 	final AppEcom appE;
 	
-	public PageFicha(TypeFicha typeFicha, Channel channel, AppEcom app, WebDriver driver) {
-		super(driver);
-		this.secDataProduct = new SecDataProduct(typeFicha, channel, app, driver);
+	public PageFicha(TypeFicha typeFicha, Channel channel, AppEcom app) {
+		this.secDataProduct = new SecDataProduct(typeFicha, channel, app);
 		this.typeFicha = typeFicha;
 		this.channel = channel;
 		this.appE = app;
@@ -52,18 +50,18 @@ public abstract class PageFicha extends PageObjTM {
 		return secDataProduct;
 	}
 	
-	public static PageFicha newInstance(Channel channel, AppEcom app, WebDriver driver) {
+	public static PageFicha newInstance(Channel channel, AppEcom app) {
 		PageFicha pageFicha;
 		if (app==AppEcom.outlet || channel.isDevice()) {
-			pageFicha = PageFichaArtOld.getNewInstance(channel, app, driver);
+			pageFicha = PageFichaArtOld.getNewInstance(channel, app);
 		} else {
-			pageFicha = PageFichaArt_DesktopShop.getNewInstance(channel, app, driver);
+			pageFicha = PageFichaArt_DesktopShop.getNewInstance(channel, app);
 		}
 		return pageFicha;
 	}
 	
-	public static PageFicha newInstanceFichaNew(Channel channel, AppEcom app, WebDriver driver) {
-		return PageFichaArt_DesktopShop.getNewInstance(channel, app, driver);
+	public static PageFicha newInstanceFichaNew(Channel channel, AppEcom app) {
+		return PageFichaArt_DesktopShop.getNewInstance(channel, app);
 	}
 	
 	public ArticuloScreen getArticuloObject() {

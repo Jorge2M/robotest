@@ -11,16 +11,16 @@ public class PagePedidosSteps {
 
 	@Validation
 	public static ChecksTM validaIsPageSinPedidos (String usrRegistrado, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Aparece la página de \"Mis Pedidos\"",
 			PageMispedidos.isPage(driver), State.Defect);
-		validations.add(
+		checks.add(
 			"La página contiene " + usrRegistrado ,
 			PageMispedidos.elementContainsText(driver, usrRegistrado), State.Warn);
-		validations.add(
+		checks.add(
 			"La lista de pedidos está vacía",
 			PageMispedidos.listaPedidosVacia(driver), State.Warn);
-		return validations;
+		return checks;
 	}
 }

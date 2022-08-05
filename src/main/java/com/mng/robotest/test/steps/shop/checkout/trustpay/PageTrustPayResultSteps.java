@@ -13,18 +13,18 @@ public class PageTrustPayResultSteps {
 	
 	@Validation
 	public static ChecksTM validateIsPage(String importeTotal, String codPais, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		String textHeader = "Payment In Progress";
-	 	validations.add(
+	 	checks.add(
 			"Figura el encabezamiento \"" + textHeader,
 			PageTrustPayResult.headerContains(textHeader, driver), State.Defect); 
-	 	validations.add(
+	 	checks.add(
 			"Figura el importe total de la compra (" + importeTotal + ")",
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn); 
-	 	validations.add(
+	 	checks.add(
 			"Figura el botón \"continue\"",
 			PageTrustPayResult.isPresentButtonContinue(driver), State.Defect); 
-	 	return validations;
+	 	return checks;
 	}
 	
 	@Step (

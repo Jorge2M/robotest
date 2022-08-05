@@ -39,38 +39,38 @@ public class ModalDetalleCompraSteps {
 	@SuppressWarnings("static-access")
 	@Validation
 	private ChecksTM checkIsDataVisible() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 1;
-		validations.add(
+		checks.add(
 			"Es visible la capa correspondiente al detalle del tícket de compra (la esperamos hasta " + maxSeconds + " segundos)",
 			modalDetalleCompra.isVisibleDataTicket(maxSeconds), State.Defect);
 		maxSeconds = 2;
-		validations.add(
+		checks.add(
 			"Son visibles los datos del tícket (los esperamos hasta " + maxSeconds + " segundos)",
 			modalDetalleCompra.isVisibleDataTicket(maxSeconds), State.Defect);
-		validations.add(
+		checks.add(
 			"Figura un id de tícket (lo esperamos hasta " + maxSeconds + " segundos)",
 			modalDetalleCompra.isVisibleIdTicket(maxSeconds), State.Defect);
-		validations.add(
+		checks.add(
 			"Figura alguna prenda (la esperamos hasta " + maxSeconds + " segundos)",
 			modalDetalleCompra.isVisiblePrendaUntil(maxSeconds), State.Warn);
-		return validations;
+		return checks;
 	}
 	
 	@SuppressWarnings("static-access")
 	@Validation
 	private ChecksTM checkDataContent(Ticket compra) {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Figura un id de tícket " + compra.getId(),
 			modalDetalleCompra.getIdTicket(compra.getType()).compareTo(compra.getId())==0, State.Warn);
-		validations.add(
+		checks.add(
 			"Figura el importe " + compra.getPrecio(),
 			modalDetalleCompra.getImporte().contains(compra.getPrecio()), State.Warn);
-		validations.add(
+		checks.add(
 			"Existen " + compra.getNumItems() + " prendas",
 			modalDetalleCompra.getNumPrendas()==compra.getNumItems(), State.Warn);
-		return validations;
+		return checks;
 	}
 	
 //	@SuppressWarnings("static-access")

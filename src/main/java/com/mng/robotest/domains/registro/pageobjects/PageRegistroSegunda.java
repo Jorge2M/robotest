@@ -3,7 +3,6 @@ package com.mng.robotest.domains.registro.pageobjects;
 import java.util.StringTokenizer;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
@@ -22,10 +21,6 @@ public class PageRegistroSegunda extends PageObjTM {
 	private static final String XPATH_SELECT_ANY_NACIM = "//select[@id[contains(.,'naciAny')]]";
 	private static final String XPATH_BUTTON_CONTINUAR = 
 		"//div[@class[contains(.,'registerStepsModal')]]//div[@class='submitContent']//input[@type='submit']";	
-	
-	public PageRegistroSegunda(WebDriver driver) {
-		super(driver);
-	}
 	
 	private String getXPath_checkboxLinea(String linea) {
 		return ("//input[@type='checkbox' and @id[contains(.,':" + linea + "')]]");

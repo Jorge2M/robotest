@@ -1,7 +1,6 @@
 package com.mng.robotest.domains.ficha.pageobjects.tallas;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -27,8 +26,7 @@ public class SSecSelTallasFichaOldDevice extends PageObjTM implements SSecSelTal
 	private static final String XPathTallaSelected = XPathSelectorButton + "//span[@class[contains(.,'size-text')]]";
 	private static final String XPathOptionTallaUnica = "//button[@id='productFormSelect']//span[@class='one-size-text']";
 	
-	public SSecSelTallasFichaOldDevice(Channel channel, AppEcom app, WebDriver driver) {
-		super(driver);
+	public SSecSelTallasFichaOldDevice(Channel channel, AppEcom app) {
 		this.channel = channel;
 		this.app = app;
 	}

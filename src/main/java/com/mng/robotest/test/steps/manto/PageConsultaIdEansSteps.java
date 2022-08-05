@@ -14,17 +14,17 @@ public class PageConsultaIdEansSteps {
 
 	@Validation
 	public static ChecksTM validateIsPage(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Es visible el contenido de la pestaña Busqueda Excel",
 			PageConsultaIdEans.isVisibleDivBusquedaExcel(driver), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"Es visible el contenido de la pestaña Busqueda Rapida",
 			PageConsultaIdEans.isVisibleDivBusquedaRapida(driver), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"Es visible el título de página correcto",
 			PageConsultaIdEans.isVisibleTituloPagina(driver), State.Defect);
-	 	return validations;
+	 	return checks;
 	}
 
 	@Step (
@@ -38,18 +38,18 @@ public class PageConsultaIdEansSteps {
 	
 	@Validation
 	private static ChecksTM checkAfterConsultContact(List<String> pedidosPrueba, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 2;
-		validations.add(
+		checks.add(
 			"Se muestra la tabla de información (la esperamos un máximo de " + maxSeconds + " segundos)",
 			PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSeconds, driver), State.Defect);
-		validations.add(
+		checks.add(
 			"El número de líneas de pedido es " + pedidosPrueba.size(),
 			PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSeconds, driver), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.size(),
 			PageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba, driver), State.Defect);
-		return validations;
+		return checks;
 	}
 
 	@Step (
@@ -63,18 +63,18 @@ public class PageConsultaIdEansSteps {
 	
 	@Validation
 	private static ChecksTM checkAfterConsultaIdentPedidos(List<String> pedidosPrueba, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSecondsToWait = 2;
-		validations.add(
+		checks.add(
 			"Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)",
 			PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait, driver), State.Defect);
-		validations.add(
+		checks.add(
 			"El número de líneas de pedido es " + pedidosPrueba.size(),
 			PageConsultaIdEans.getLineasPedido(driver)==pedidosPrueba.size(), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.toString(),
 			PageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba, driver), State.Defect);		
-		return validations;
+		return checks;
 	}
 	
 	@Step (
@@ -104,17 +104,17 @@ public class PageConsultaIdEansSteps {
 	
 	@Validation
 	private static ChecksTM checkAfterConsultEAN(List<String> articulosPrueba, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSecondsToWait = 2;
-		validations.add(
+		checks.add(
 			"Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)",
 			PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait, driver), State.Defect);
-		validations.add(
+		checks.add(
 			"El número de líneas de artículos es " + articulosPrueba.size(),
 			PageConsultaIdEans.getLineasPedido(driver)==articulosPrueba.size(), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece una línea por cada uno de los artículos <b>" + articulosPrueba.toString(),
 			PageConsultaIdEans.isArticulosTablaCorrecto(articulosPrueba, driver), State.Defect);
-		return validations;
+		return checks;
 	}
 }

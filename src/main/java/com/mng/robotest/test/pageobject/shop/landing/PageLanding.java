@@ -132,7 +132,7 @@ public class PageLanding extends PageObjTM {
 			return true;
 		}
 
-		PageFicha pageFicha = PageFicha.newInstance(Channel.desktop, app, driver);
+		PageFicha pageFicha = PageFicha.newInstance(Channel.desktop, app);
 		if (pageFicha.isPageUntil(0)) {
 			return true;
 		}

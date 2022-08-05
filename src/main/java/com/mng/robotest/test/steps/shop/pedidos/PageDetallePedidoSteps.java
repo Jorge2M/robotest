@@ -45,15 +45,15 @@ public class PageDetallePedidoSteps {
 	
 	@Validation
 	public ChecksTM areOkPrendasOnline(int numPrendasCompraOnline) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 2;
-	  	validations.add(
+	  	checks.add(
 	  		"Es visible alguna prenda (la esperamos hasta " + maxSeconds + " segundos)",
 	  		pageDetalle.isVisiblePrendaUntil(maxSeconds), State.Info);	
-	  	validations.add(
+	  	checks.add(
 	  		"Aparecen " + numPrendasCompraOnline + " prendas",
 	  		pageDetalle.getNumPrendas()==numPrendasCompraOnline, State.Warn);	
-		return validations;
+		return checks;
 	}
 	
 	public void validateIsPageOk(DataPedido dataPedido) {
@@ -69,17 +69,17 @@ public class PageDetallePedidoSteps {
 	
 	@Validation
 	private ChecksTM validateIsPageOk(String codPedido, String importeTotalWithoutCurrency, String codPais) {
-		ChecksTM validations = ChecksTM.getNew();
-	  	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	  	checks.add(
 	  		"Aparece la página de detalle del pedido",
 	  		pageDetalle.isPage(), State.Warn);	   
-	  	validations.add(
+	  	checks.add(
 	  		"En la página figura el Nº de pedido: " + codPedido,
 	  		driver.getPageSource().contains(codPedido), State.Info);	
-	  	validations.add(
+	  	checks.add(
 	  		"Como total figura el importe: " + importeTotalWithoutCurrency,
 	  		pageDetalle.isPresentImporteTotal(importeTotalWithoutCurrency, codPais), State.Info);
-	  	return validations;
+	  	return checks;
 	}
 	
 	@Step (

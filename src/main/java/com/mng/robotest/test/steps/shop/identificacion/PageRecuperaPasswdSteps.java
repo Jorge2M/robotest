@@ -16,15 +16,15 @@ public class PageRecuperaPasswdSteps {
 	
 	@Validation
 	public static ChecksTM isPage(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSecondsToWait = 2;
-		validations.add(
+		checks.add(
 			"Aparece la pantalla de recuperación de la contraseña (la esperamos hasta " + maxSecondsToWait + " segundos)",
 			PageRecuperaPasswd.isPageUntil(maxSecondsToWait, driver), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece el campo para la introducción del correo",
 			PageRecuperaPasswd.isPresentInputCorreo(driver), State.Defect);
-		return validations;
+		return checks;
 	}
 	
 	@Step (
@@ -43,14 +43,14 @@ public class PageRecuperaPasswdSteps {
 	
 	@Validation
 	private static ChecksTM isPageCambioPassword(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSecondsToWait = 2;
-		validations.add(
+		checks.add(
 			"Aparece el mensaje de \"Revisa tu email\" (lo esperamos hasta " + maxSecondsToWait + " segundos)",
 			PageRecuperaPasswd.isVisibleRevisaTuEmailUntil(maxSecondsToWait, driver), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece el botón \"Ir de Shopping\"",
 			PageRecuperaPasswd.isVisibleButtonIrDeShopping(driver), State.Defect);
-		return validations;
+		return checks;
 	}
 }

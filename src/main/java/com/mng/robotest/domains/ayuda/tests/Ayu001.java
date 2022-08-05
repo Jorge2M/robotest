@@ -10,7 +10,7 @@ import com.mng.robotest.test.steps.shop.SecFooterSteps;
 public class Ayu001 extends TestBase {
 
 	final SecFooterSteps secFooterSteps = new SecFooterSteps(channel, app, driver);
-	final AyudaSteps ayudaSteps = new AyudaSteps(driver);
+	final AyudaSteps ayudaSteps = new AyudaSteps();
 	
 	public Ayu001() throws Exception {
 		super();

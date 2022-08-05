@@ -1,13 +1,13 @@
 package com.mng.robotest.domains.loyalty.pageobjects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 
 public class PageRegalarMisLikes extends PageObjTM {
 	
@@ -19,10 +19,6 @@ public class PageRegalarMisLikes extends PageObjTM {
 	private static final String XPATH_RADIO_INPUT_NUM_LIKES = "//label[@for='totalLikes']";
 	private static final String XPATH_INPUT_NUM_LIKES = "//input[@name='likesToBeTransferred']";
 	private static final String XPATH_BOTON_ENVIAR_REGALO = "//button[@class[contains(.,'step2-form')]]";
-	
-	public PageRegalarMisLikes(WebDriver driver) {
-		super(driver);
-	}
 	
 	public boolean checkIsPage() {
 		return (state(Visible, By.xpath(XPATH_WRAPPER_PAGE)).check());

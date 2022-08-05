@@ -1,7 +1,6 @@
 package com.mng.robotest.test.steps.shop.banner;
 
 import java.net.URI;
-import java.util.Arrays;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,10 +21,7 @@ import com.mng.robotest.test.pageobject.shop.bannersNew.DataBanner;
 import com.mng.robotest.test.pageobject.shop.bannersNew.ManagerBannersScreen;
 import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
 import com.mng.robotest.test.steps.shop.genericchecks.Checker;
-import com.mng.robotest.test.steps.shop.genericchecks.CheckerImgsBroken;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
-import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
 
 
 public class SecBannersSteps {
@@ -98,11 +94,11 @@ public class SecBannersSteps {
 	@Validation
 	public ChecksTM validacionesGeneralesBanner(String urlPagPadre, URI uriPagPadre, int elementosPagPadre) 
 	throws Exception {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds1 = 3;
 		int marginElements = 2;
 		int maxSeconds2 = 1;
-	 	validations.add(
+	 	checks.add(
 	 		"La URL de la página cambia (lo esperamos hasta un máximo de " + maxSeconds1 + " segundos)",
 	 		AllPages.validateUrlNotMatchUntil(urlPagPadre, maxSeconds1, driver), State.Defect);  
 	 	
@@ -112,7 +108,7 @@ public class SecBannersSteps {
 	 		urlEqual = true;
 	 		elemsEqual = !AllPages.validateElementsNotEqualsUntil(elementosPagPadre, marginElements, maxSeconds2, driver);
 	 	}
-	 	validations.add(
+	 	checks.add(
 	 		"La página cambia: <br>" + 
 	 		"- La URL cambia o <br>" + 
 	 		"- El número de elementos DOM ha variado (en " + marginElements + " o más) con respecto al original (" + elementosPagPadre + ")",
@@ -120,23 +116,23 @@ public class SecBannersSteps {
 	 	
 	 	Checker checkImagesBroken = Checker.make(GenericCheck.ImgsBroken);
 	 	ChecksTM checksImgs = checkImagesBroken.check(driver);
-	 	validations.add(checksImgs.get(0));
+	 	checks.add(checksImgs.get(0));
 	 	
 //	 	int maxErrors = 1;
 //		ResultadoErrores resultadoImgs = CheckerImgsBroken.imagesBroken(driver, Channel.desktop, maxErrors);
 //		if (resultadoImgs.getResultado() != ResultadoErrores.Resultado.OK) { // Si hay error lo pintamos en la descripción de la validación
-//		 	validations.add(
+//		 	checks.add(
 //		 		"No hay imágenes cortadas" + resultadoImgs.getlistaLogError().toString(),
 //		 		resultadoImgs.getResultado()==ResultadoErrores.Resultado.MAX_ERRORES, State.Defect);	 
 //		}
 
 		String urlPagActual = driver.getCurrentUrl();
 		URI uriPagActual = new URI(urlPagActual);
-	 	validations.add(
+	 	checks.add(
 	 		"El dominio de la página se corresponde con el de la página padre:" + uriPagPadre.getHost(),
 	 		uriPagPadre.getHost().compareTo(uriPagActual.getHost())==0, State.Defect);	
 	 	
-	 	return validations;
+	 	return checks;
 	}
 
 	@Validation (
@@ -160,7 +156,7 @@ public class SecBannersSteps {
 	private boolean validacionesBannerEstandar(Channel channel, AppEcom app) throws Exception {
 		if (!pageLanding.haySecc_Art_Banners(app)) {
 			if (!pageLanding.hayImgsEnContenido()) {
-				PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
+				PageFicha pageFicha = PageFicha.newInstance(channel, app);
 				return pageFicha.isPageUntil(0);
 			}
 		}

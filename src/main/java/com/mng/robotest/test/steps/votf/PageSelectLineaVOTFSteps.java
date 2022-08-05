@@ -29,20 +29,20 @@ public class PageSelectLineaVOTFSteps {
 	
 	@Validation
 	public ChecksTM validateIsPage() { 
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Aparece el banner correspondiente a SHE",
 			pageSelectLineaVOTF.isBannerPresent(LineaType.she), State.Warn);
-		validations.add(
+		checks.add(
 			"Aparece el banner correspondiente a MAN",
 			pageSelectLineaVOTF.isBannerPresent(LineaType.he), State.Warn);
-		validations.add(
+		checks.add(
 			"Aparece el banner correspondiente a NIÑAS",
 			pageSelectLineaVOTF.isBannerPresent(LineaType.nina), State.Warn);
-		validations.add(
+		checks.add(
 			"Aparece el banner correspondiente a NIÑOS",
 			pageSelectLineaVOTF.isBannerPresent(LineaType.nino), State.Warn);
-		return validations;
+		return checks;
 	}
 	
 	@Step (
@@ -53,7 +53,7 @@ public class PageSelectLineaVOTFSteps {
 		pageSelectLineaVOTF.clickMenu(LineaType.she, numMenu);
 		
 		WebDriver driver = pageSelectLineaVOTF.driver;
-		SecCabecera.getNew(Channel.desktop, AppEcom.votf, driver).clickLogoMango();
+		SecCabecera.getNew(Channel.desktop, AppEcom.votf).clickLogoMango();
 		AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dCtxSh.pais));
 		new SectionBarraSupVOTFSteps(driver).validate(accesoVOTF.getUsuario());
 		

@@ -1,24 +1,14 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class PageComoMedirme {
+public class PageComoMedirme extends PageObjTM {
 
-	private final WebDriver driver;
-	
 	private static final String XPATH_BLOQUE_GUIA_TALLAS = "//div[@class[contains(.,'guiaTallas')]]";
-	
-	private PageComoMedirme(WebDriver driver) {
-		this.driver = driver;
-	}
-	
-	public static PageComoMedirme getNew(WebDriver driver) {
-		return new PageComoMedirme(driver);
-	}
 	
 	public boolean goToPageInNewTabCheckAndClose() throws Exception {
 		String windowFatherHandle = driver.getWindowHandle();
@@ -33,7 +23,7 @@ public class PageComoMedirme {
 	}
 	
 	private boolean isPage() {
-		return (state(Visible, By.xpath(XPATH_BLOQUE_GUIA_TALLAS), driver).check());
+		return (state(Visible, By.xpath(XPATH_BLOQUE_GUIA_TALLAS)).check());
 	}
 	
 	private boolean goToPageInNewTab(String windowFatherHandle) throws Exception {

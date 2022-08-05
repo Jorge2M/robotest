@@ -14,10 +14,10 @@ public class PagePaytrail1rstSteps {
 	
 	@Validation
 	public static ChecksTM validateIsPage(String importeTotal, String codPais, Channel channel, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		String nombrePagoCabecera = "Finnish E-Banking";
 		int maxSecondsToWait = 2;
-		validations.add(
+		checks.add(
 			"Figura el bloque correspondiente al pago <b>" + nombrePagoCabecera + "</b>",
 			PagePaytrail1rst.isPresentEntradaPago(nombrePagoCabecera, driver), State.Warn);
 		
@@ -25,20 +25,20 @@ public class PagePaytrail1rstSteps {
 		if (channel.isDevice()) {
 			stateVal = State.Info;
 		}
-		validations.add(
+		checks.add(
 			"Aparece el importe de la compra: \" + importeTotal",
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal);  
 		
 		if (channel==Channel.desktop) {
-			validations.add(
+			checks.add(
 				"Es visible el desplegable de bancos (lo esperamos hasta " + maxSecondsToWait + " seconds)",
 				PagePaytrail1rst.isVisibleSelectBancosUntil(maxSecondsToWait, driver), State.Warn);
-			validations.add(
+			checks.add(
 				"Figura un botón de pago",
 				PagePaytrail1rst.isPresentButtonPago(driver), State.Defect);
 		}
 		
-		return validations;
+		return checks;
 	}
 
 	@Step (

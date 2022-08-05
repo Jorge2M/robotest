@@ -6,17 +6,11 @@ import com.github.jorge2m.testmaker.conf.State;
 
 import com.mng.robotest.domains.ayuda.pageobjects.PagesAyuda;
 
-import org.openqa.selenium.WebDriver;
-
 
 public class AyudaSteps {
 	
-	private final PagesAyuda pageAyuda; 
+	private final PagesAyuda pageAyuda = new PagesAyuda(); 
 	
-	public AyudaSteps(WebDriver driver) {
-		this.pageAyuda = new PagesAyuda(driver);
-	}
-
 	@Step(
 		description = "Seleccionamos el icono de <b>#{textIcon}</b>",
 		expected = "Aparecen las preguntas asociadas")
@@ -44,6 +38,4 @@ public class AyudaSteps {
 	public boolean checkIsTextVisible(String text) {
 		return pageAyuda.isTextVisible(text);
 	}
-
-	
 }

@@ -17,18 +17,18 @@ import com.mng.robotest.test.exceptions.NotFoundException;
 public class CheckerNetTraffic implements Checker {
 
 	public ChecksTM check(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		GestorDatosHarJSON gestorHAR = UtilsChecker.getGestorHar(driver);
 		if (gestorHAR!=null) {
 			validaNetTraffic(gestorHAR);												  
 		}
-		return validations;
+		return checks;
 	}
 	
 	@SuppressWarnings({ "rawtypes" })
 	@Validation
 	private ChecksTM validaNetTraffic(GestorDatosHarJSON gestorHAR) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		boolean peticionesOk = true;
 		String infoWarnings = "";
 		Optional<JSONArray> listEntriesTotalOpt = getListEntries(gestorHAR);
@@ -51,11 +51,11 @@ public class CheckerNetTraffic implements Checker {
 				}
 			}
 		}
-	 	validations.add(
+	 	checks.add(
 			"En el tráfico de red no existe ninguna sin respuesta o con status KO" + infoWarnings,
 			peticionesOk, State.Warn);
 		
-	 	return validations;
+	 	return checks;
 	}  
 	
 	private Optional<JSONArray> getListEntries(GestorDatosHarJSON gestorHAR) {

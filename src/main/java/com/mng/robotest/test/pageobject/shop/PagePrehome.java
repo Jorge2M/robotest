@@ -180,9 +180,8 @@ public class PagePrehome extends PageObjTM {
 		previousAccessShopSteps(acceptCookies);
 		selecPaisIdiomaYAccede();
 		ModalLoyaltyAfterAccess.closeModalIfVisible(driver);
-		//ModalNewsLetterAfterAccess.closeModalIfVisible(driver);
 		if (dCtxSh.channel.isDevice()) {
-			SecCabeceraOutlet_Mobil secCabecera = (SecCabeceraOutlet_Mobil)SecCabeceraOutlet_Mobil.getNew(Channel.mobile, dCtxSh.appE, driver);
+			SecCabeceraOutlet_Mobil secCabecera = new SecCabeceraOutlet_Mobil(Channel.mobile, dCtxSh.appE);
 			secCabecera.closeSmartBannerIfExistsMobil();
 		}
 		
@@ -190,7 +189,7 @@ public class PagePrehome extends PageObjTM {
 	
 	public void previousAccessShopSteps(boolean acceptCookies) throws Exception {
 		reloadIfServiceUnavailable();
-		new PageJCAS(driver).identJCASifExists();
+		new PageJCAS().identJCASifExists();
 		TestABactive.currentTestABsToActivate(dCtxSh.channel, dCtxSh.appE, driver);
 		manageCookies(acceptCookies);
 	}

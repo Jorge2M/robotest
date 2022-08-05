@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
@@ -26,14 +24,8 @@ import com.mng.robotest.test.utils.UtilsTest;
 
 public class PageRegistroIniSteps {
 	
-	private final WebDriver driver;
-	private final PageRegistroIni pageRegistroIni;
+	private final PageRegistroIni pageRegistroIni = new PageRegistroIni();
 	
-	public PageRegistroIniSteps(WebDriver driver) {
-		this.driver = driver;
-		this.pageRegistroIni = new PageRegistroIni(driver);
-	}
-
 	@Validation (
 		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
@@ -114,7 +106,7 @@ public class PageRegistroIniSteps {
 		
 		switch (errorExpected) {
 		case None:
-			new PageRegistroSegundaSteps(driver)
+			new PageRegistroSegundaSteps()
 				.validaIsPageRegistroOK(paisRegistro, app, dataRegistro);
 			break;
 		case InputWarnings:
@@ -136,7 +128,7 @@ public class PageRegistroIniSteps {
 				GenericCheck.SEO, 
 				GenericCheck.JSerrors, 
 				GenericCheck.TextsTraduced,
-				GenericCheck.Analitica)).checks(driver);
+				GenericCheck.Analitica)).checks(pageRegistroIni.driver);
 	}
 	
 	@Validation (

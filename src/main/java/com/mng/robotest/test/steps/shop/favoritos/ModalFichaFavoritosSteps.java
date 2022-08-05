@@ -34,15 +34,15 @@ public class ModalFichaFavoritosSteps {
 	
 	@Validation
 	public ChecksTM validaIsVisibleFicha(ArticuloScreen articulo) { 
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 2;
-		validations.add(
+		checks.add(
 			"En Favoritos es visible el modal de la ficha del producto " + articulo.getRefProducto() + " (lo esperamos hasta " + maxSeconds + " segundos)",
 			modalFichaFavoritos.isVisibleFichaUntil(articulo.getRefProducto(), maxSeconds), State.Warn);
-		validations.add(
+		checks.add(
 			"Aparece seleccionado el color <b>" + articulo.getColor() + "</b>",
 			modalFichaFavoritos.isColorSelectedInFicha(articulo.getColor()), State.Warn);
-		return validations;
+		return checks;
 	}  
 	
 	@Step(

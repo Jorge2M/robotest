@@ -1,8 +1,6 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -14,10 +12,6 @@ public class SecSlidersNew extends PageObjTM {
 	private static final String XPATH_ELEGIDO_PARA_TI = "//div[@id='recommendations']";
 	private static final String XPATH_LO_ULTIMO_VISTO = "//div[@id='garments']";
 	private static final String RELATIVE_XPATH_ARTICLE = "//div[@class[contains(.,'slider-module-product')] and @data-id]";
-
-	public SecSlidersNew(WebDriver driver) {
-		super(driver);
-	}
 	
 	private String getXPath(Slider sliderType) {
 		switch (sliderType) {

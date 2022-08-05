@@ -6,7 +6,6 @@ import java.util.Map;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
@@ -70,10 +69,6 @@ public class PageRegistroIni extends PageObjTM {
 	private static final String MSG_USR_DUPLICADO_POST_CLICK = "Email ya registrado";
 	private static final String MSG_EMAIL_INCORRECTO_POST_CLICK = "Introduce un e-mail válido";
 	
-	public PageRegistroIni(WebDriver driver) {
-		super(driver);
-	}
-	
 	private String getXPath_mensajeErrorFormulario(String mensajeError) {
 		return ("//div[@class='formErrors']//li[text()[contains(.,'" + mensajeError + "')]]");
 	}
@@ -98,7 +93,7 @@ public class PageRegistroIni extends PageObjTM {
 		}
 	}
 	
-	public void clickRegisterTab(WebDriver driver) {
+	public void clickRegisterTab() {
 		driver.findElement(By.xpath(XPATH_PESTANYA_REGISTRO)).click();
 	}
 	
@@ -155,7 +150,7 @@ public class PageRegistroIni extends PageObjTM {
 	}
 	
 	public void sendDataToInputs(ListDataRegistro dataToSend) {
-		clickRegisterTab(driver);
+		clickRegisterTab();
 		for (DataRegistro dataInput : dataToSend.getDataPageInicial()) {
 			if (dataInput.dataRegType!=DataRegType.codpais) {
 				sendKeysToInput(dataInput.dataRegType, dataInput.data);

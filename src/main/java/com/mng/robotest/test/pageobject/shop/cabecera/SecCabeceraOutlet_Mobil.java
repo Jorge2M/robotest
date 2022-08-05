@@ -1,7 +1,6 @@
 package com.mng.robotest.test.pageobject.shop.cabecera;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
@@ -33,15 +32,9 @@ public class SecCabeceraOutlet_Mobil extends SecCabecera {
 			return by;
 		}
 	}
-		
-	//private static final String XPathNumArticles = "//span[@class[contains(.,'_cartNum')]]";
 
-	private SecCabeceraOutlet_Mobil(Channel channel, AppEcom app, WebDriver driver) {
-		super(channel, app, driver);
-	}
-	
-	public static SecCabeceraOutlet_Mobil getNew(Channel channel, AppEcom app, WebDriver driver) {
-		return (new SecCabeceraOutlet_Mobil(channel, app, driver));
+	public SecCabeceraOutlet_Mobil(Channel channel, AppEcom app) {
+		super(channel, app);
 	}
 	
 	@Override

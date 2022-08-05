@@ -19,7 +19,7 @@ public class PageLoginMantoSteps {
 	public static void login(String urlManto, String usrManto, String passManto, WebDriver driver) throws Exception {
 		goToMantoIfNotYet(urlManto, driver);
 		if (!PageSelTda.isPage(driver)) {
-			identFromJasigCasPage(usrManto, passManto, driver);
+			identFromJasigCasPage(usrManto, passManto);
 		}
 		checkIsPageSelectTienda(25, driver);
 	}
@@ -43,8 +43,8 @@ public class PageLoginMantoSteps {
 		description="Identificarse desde la página de Jasig CAS con #{usrManto}",
 		expected="Aparece la página de selección de la tienda",
 		saveErrorData=SaveWhen.Never)
-	public static void identFromJasigCasPage(String usrManto, String passManto, WebDriver driver) throws Exception {
-		new PageJCAS(driver).identication(usrManto, passManto);
+	public static void identFromJasigCasPage(String usrManto, String passManto) throws Exception {
+		new PageJCAS().identication(usrManto, passManto);
 	}
 
 	@Validation (

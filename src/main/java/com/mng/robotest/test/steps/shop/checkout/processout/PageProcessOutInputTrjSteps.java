@@ -22,18 +22,18 @@ public class PageProcessOutInputTrjSteps {
 	
 	@Validation
 	public ChecksTM checkIsPage(String importeTotal, String codPais) {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Estamos en la página con el formulario para la introducción de los datos de la tarjeta",
 			pageObject.checkIsPage(), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece el importe de la compra: " + importeTotal,
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
-		validations.add(
+		checks.add(
 			"Figura un botón de pago",
 			pageObject.isPresentButtonPago(), State.Defect);
 		
-		return validations;
+		return checks;
 	}
 
 	@Step(

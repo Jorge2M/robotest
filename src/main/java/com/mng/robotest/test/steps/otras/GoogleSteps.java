@@ -34,15 +34,15 @@ public class GoogleSteps {
 	
 	@Validation
 	private ChecksTM checkLinksMango() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 3;
-		validations.add(
+		checks.add(
 			"El 1er link no-anuncio contiene \"MANGO\" (lo esperamos " + maxSeconds + " segundos)",
 			pageGoogle.validaFirstLinkContainsUntil("Mango", maxSeconds), State.Defect);		
-		validations.add(
+		checks.add(
 			"El 1er link no-anuncion no contiene \"robots.txt\"",
 			!pageGoogle.validaFirstLinkContainsUntil("robots.txt", 0), State.Warn);
-		return validations;
+		return checks;
 	}
 
 	@Step (

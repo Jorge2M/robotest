@@ -18,34 +18,26 @@ import com.mng.robotest.test.steps.shop.pedidos.PageDetallePedidoSteps;
 
 public class PageAccesoMisComprasSteps {
 
-	private final WebDriver driver;
-	private final PageAccesoMisCompras pageAccesoMisCompras;
-	
-	private PageAccesoMisComprasSteps(WebDriver driver) {
-		this.driver = driver;
-		this.pageAccesoMisCompras = new PageAccesoMisCompras(driver);
-	}
-	public static PageAccesoMisComprasSteps getNew(WebDriver driver) {
-		return new PageAccesoMisComprasSteps(driver);
-	}
+	private final PageAccesoMisCompras pageAccesoMisCompras = new PageAccesoMisCompras();
+	private final WebDriver driver = pageAccesoMisCompras.driver;
 	
 	@Validation
 	public ChecksTM validateIsPage() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 2;
-		validations.add(
+		checks.add(
 			"Aparece la página de \"Acceso a Mis Compras\" (la esperamos hasta " + maxSeconds + " segundos)",
 			pageAccesoMisCompras.isPage(maxSeconds), State.Warn);
 		
 		maxSeconds = 3;
-		validations.add(
+		checks.add(
 			"Aparece el bloque \"Ya estoy registrado\" (lo esperamos hasta " + maxSeconds + "segundos)",
-			pageAccesoMisCompras.isPresentBlock(TypeBlock.SiRegistrado, maxSeconds), State.Warn);
+			pageAccesoMisCompras.isPresentBlock(TypeBlock.SI_REGISTRADO, maxSeconds), State.Warn);
 		
-		validations.add(
+		checks.add(
 			"Aparece el bloque de \"No estoy registrado\"",
-			pageAccesoMisCompras.isPresentBlock(TypeBlock.NoRegistrado), State.Warn);
-		return validations;
+			pageAccesoMisCompras.isPresentBlock(TypeBlock.NO_REGISTRADO), State.Warn);
+		return checks;
 	}
 	
 	@Step (

@@ -24,17 +24,17 @@ public class PagePaysecureQiwi1rstSteps {
 	
 	@Validation
 	public ChecksTM validateIsPage(String importeTotal, String codPais, Channel channel) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Aparece la página inicial de la pasarela PaySecure",
 			pagePaysecureQiwi.isPage(), State.Warn);
-	 	validations.add(
+	 	checks.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
-	 	validations.add(
+	 	checks.add(
 			"Aparece el icono de Qiwi",
 			pagePaysecureQiwi.isPresentIcon(PaysecureGateway.Qiwi), State.Warn);
-	 	return validations;
+	 	return checks;
 	}
 
 	@Step (

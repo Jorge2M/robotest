@@ -35,14 +35,14 @@ public class GetProductsSteps {
 	
 	@Validation
 	public static ChecksTM isPersonalization(int minArticles, int maxArticles, GetterProducts getterProducts) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int numArticlesPersonalized = getNumArticlesPersonalized(getterProducts);
-	 	validations.add(
+	 	checks.add(
 	 		"El número de artículos personalizados está entre " + minArticles + " y " + maxArticles + 
 	 		" (se acaban localizando <b>" + numArticlesPersonalized + " artículos</b>)",
 	 		numArticlesPersonalized >= minArticles && numArticlesPersonalized <= maxArticles, 
 	 		State.Defect);
-	 	return validations;
+	 	return checks;
 	}
 	
 	private static int getNumArticlesPersonalized(GetterProducts getterProducts) {

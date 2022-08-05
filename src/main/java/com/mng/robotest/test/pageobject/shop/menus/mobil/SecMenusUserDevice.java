@@ -1,14 +1,15 @@
 package com.mng.robotest.test.pageobject.shop.menus.mobil;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
+
 
 public class SecMenusUserDevice extends PageObjTM {
 
@@ -16,15 +17,10 @@ public class SecMenusUserDevice extends PageObjTM {
 	final AppEcom app;
 	final SecCabecera secCabecera;
 	
-	private SecMenusUserDevice(Channel channel, AppEcom app, WebDriver driver) {
-		super(driver);
+	public SecMenusUserDevice(Channel channel, AppEcom app) {
 		this.channel = channel;
 		this.app = app;
-		this.secCabecera = SecCabecera.getNew(channel, app, driver);
-	}
-	
-	public static SecMenusUserDevice getNew(Channel channel, AppEcom app, WebDriver driver) {
-		return (new SecMenusUserDevice(channel, app, driver));
+		this.secCabecera = SecCabecera.getNew(channel, app);
 	}
 	
 	public enum MenuUserDevice implements ElementPage {

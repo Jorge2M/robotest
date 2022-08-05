@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -27,10 +26,6 @@ public class PageRegistroDirec extends PageObjTM {
 	private final static String XPATH_SELECT_POBLACION = "//select[@id[contains(.,':localidades')]]";
 	private final static String XPATH_SELECT_PROVINCIA = "//select[@id[contains(.,':estadosPais')]]";
 	private final static String XPATH_FINALIZAR_BUTTON = "//form[@id[contains(.,'Step')]]//input[@type='submit']";
-	
-	public PageRegistroDirec(WebDriver driver) {
-		super(driver);
-	}
 	
 	public int getNumberMsgInputInvalid() {
 		return (getNumElementsVisible(driver, By.xpath(XPATH_DIV_ERROR)));

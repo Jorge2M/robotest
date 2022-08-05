@@ -80,7 +80,7 @@ public class ListMenusManto {
 		String almacenEspanya = "001";
 //		driver.manage().deleteAllCookies();
 //		driver.get(urlManto);
-		new PageJCAS(driver).identication(usrManto, passManto);
+		new PageJCAS().identication(usrManto, passManto);
 		TiendaManto tienda = TiendaManto.getTienda(almacenEspanya, codigoEspanya, AppEcom.shop);
 		if (!PageSelTda.isPage(driver)) {
 			SecCabecera.clickButtonSelTienda(driver);

@@ -44,19 +44,19 @@ public class SecSoyNuevoSteps {
 	@SuppressWarnings("static-access")
 	@Validation
 	public static ChecksTM validaRGPDText(DataCtxShop dCtxSh, WebDriver driver) {  
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 5;
 		if (dCtxSh.pais.getRgpd().equals("S")) {
-		 	validations.add(
+		 	checks.add(
 				"El link de política de privacidad existe para el pais " + 
 				dCtxSh.pais.getCodigo_pais() + " lo esperamos hasta " + maxSeconds + " segundos",
 				Page1IdentCheckout.secSoyNuevo.isLinkPoliticaPrivacidad(maxSeconds, driver), State.Defect);
 		} else {
-		 	validations.add(
+		 	checks.add(
 				"El lik de política de privacidad no exite para el pais " + dCtxSh.pais.getCodigo_pais(),
 				!Page1IdentCheckout.secSoyNuevo.isLinkPoliticaPrivacidad(0, driver), State.Defect);			
 		}
 		
-		return validations;
+		return checks;
 	}
 }

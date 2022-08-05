@@ -41,23 +41,23 @@ public class SecFiltrosSteps {
 	@Validation
 	private static ChecksTM checkAfterSelectFiltroColores(List<Color> colorsSelected, String litMenu, 
 															  int numArticulos1page, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSecondsToWait = 1;
 		List<String> listCodColors = Color.getListCodigosColor(colorsSelected);
 		String currentUrl = driver.getCurrentUrl();
-	 	validations.add(
+	 	checks.add(
 			"En la URL (*) aparece el parámetro c= que contiene los códigos de color <b>" + 
 			listCodColors.toString() + "</b> (lo esperamos hasta " + maxSecondsToWait + " segundos)" + 
 			"(*) " + currentUrl + "<br>",
 			SecFiltros.checkUrlAfterFilterContainsColors(colorsSelected, currentUrl), State.Warn);		
 		
-	 	validations.add(
+	 	checks.add(
 			"Aparece una pantalla en la que el title contiene \"" + litMenu.toUpperCase(),
 			driver.getTitle().toUpperCase().contains(litMenu.toUpperCase()), State.Warn);		
-	 	validations.add(
+	 	checks.add(
 			"En pantalla aparecen >1 artículos (están apareciendo " + numArticulos1page + ")",
 			numArticulos1page>1, State.Warn);   
-	 	return validations;
+	 	return checks;
 	}
 	
 	static final String tagLitMenusToSelect = "@TagLitMenusToSelect";
@@ -71,7 +71,7 @@ public class SecFiltrosSteps {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagLitMenusToSelect, StringUtils.join(menusToSelect, ","));
 		SecFiltros secFiltros = SecFiltros.make(channel, app, driver);
 		secFiltros.selectMenu2onLevel(listMenus);		
-		SecMenuLateralMobilSteps.getNew(channel, app, driver).validaSelecMenu(menusToSelect.get(0));
+		new SecMenuLateralMobilSteps(channel, app, driver).validaSelecMenu(menusToSelect.get(0));
 	}
 	
 	private static List<String> getListMenusStr(List<MenuLateralDesktop> listMenus) {

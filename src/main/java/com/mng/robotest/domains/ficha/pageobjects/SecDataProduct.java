@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -42,11 +41,10 @@ public class SecDataProduct extends PageObjTM {
 	//Existe un Test A/B que hace que el nombre del artículo salga debajo del botón de "Añadir a la bolsa" o en la cabecera, por eso el or.
 	private static final String XPATH_NOMBRE_ARTICULO_MOBIL = "//*[@class[contains(.,'product-info-name')] or @class='headerMobile__text']";
 	
-	public SecDataProduct(TypeFicha typeFicha, Channel channel, AppEcom app, WebDriver driver) {
-		super(driver);
+	public SecDataProduct(TypeFicha typeFicha, Channel channel, AppEcom app) {
 		this.channel = channel;
 		this.app = app;
-		this.secSelTallas = SSecSelTallasFicha.make(typeFicha, channel, app, driver);
+		this.secSelTallas = SSecSelTallasFicha.make(typeFicha, channel, app);
 	}
 	
 	public SSecSelTallasFicha getSecSelTallas() {

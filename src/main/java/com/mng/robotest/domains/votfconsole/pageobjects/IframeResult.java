@@ -23,10 +23,6 @@ public class IframeResult extends PageObjTM {
 	private static final String XPATH_BLOCK_CODIGO_PEDIDO = XPATH_BLOCK_RESULT_PEDIDO + "/span";
 	private static final String XPATH_BLOCK_LIST_PEDIDOS = XPATH_BLOCK_RESULTADO + "//div[@id[contains(.,'obtencionPedidos')]]";
 	private static final String XPATH_BLOCK_LISTA_PEDIDOS_FULL= XPATH_BLOCK_RESULTADO + "//span[@class='pedido']";
-
-	public IframeResult(WebDriver driver) {
-		super(driver);
-	}
 	
 	public boolean resultadoContainsText(String text) {
 		if (state(Present, By.xpath(XPATH_BLOCK_RESULTADO), driver).check()) {

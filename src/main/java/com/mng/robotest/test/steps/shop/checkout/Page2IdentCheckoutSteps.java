@@ -38,14 +38,14 @@ public class Page2IdentCheckoutSteps {
 	
 	@Validation
 	public ChecksTM validateIsPage(boolean emailYetExists, int maxSeconds) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Aparece la página-2 de introducción de datos de la dirección del cliente (la esperamos hasta " + maxSeconds + " segundos)",
 			page2IdentCheckout.isPageUntil(maxSeconds), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"Es <b>" + !emailYetExists + "</b> que aparece el input para la introducción de la contraseña",
 			page2IdentCheckout.isInputPasswordAccordingEmail(emailYetExists), State.Warn);
-	 	return validations;
+	 	return checks;
 	}
 	
 	@Validation (

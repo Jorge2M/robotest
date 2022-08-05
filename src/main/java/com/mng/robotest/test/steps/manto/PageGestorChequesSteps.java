@@ -48,14 +48,14 @@ public class PageGestorChequesSteps extends PageObjTM {
 
 	@Validation
 	public ChecksTM validateInitData(int numPedidos, String mail) {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Aparecen más de \"" + numPedidos + "\" pedidos",
 			pageGestorCheques.comprobarNumeroPedidos(numPedidos), State.Defect);
-		validations.add(
+		checks.add(
 			"La columna correo de la primera línea es \""+ mail +"\"",
 			pageGestorCheques.isMailCorrecto(mail), State.Defect);
-		return validations;
+		return checks;
 	}
 
 	@Step(
@@ -71,16 +71,16 @@ public class PageGestorChequesSteps extends PageObjTM {
 
 	@Validation
 	public ChecksTM validateDetailsCheques(String pedido, String mail) {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Aparece la página de" + PageGestorCheques.tituloDetalles,
 			pageGestorCheques.isPageDetalles(), State.Defect);
-		validations.add(
+		checks.add(
 			"Como email del apartado \"Cheque número\" aparece" + mail,
 			pageGestorCheques.comprobarMailDetallesCheque(mail), State.Defect);
-		validations.add("Como id del pedido aparece\"" + pedido  + "\"",
+		checks.add("Como id del pedido aparece\"" + pedido  + "\"",
 			pageGestorCheques.comprobarPedidoDetallesCheque(pedido), State.Defect);
-		return validations;
+		return checks;
 	}
 
 	@Step(
@@ -94,35 +94,35 @@ public class PageGestorChequesSteps extends PageObjTM {
 
 	@Validation
 	public ChecksTM validateButtons() {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Existe el botón de <b>Id del pedido</b>",
 			state(Present, ButtonsCheque.idPedido.getBy()).wait(3).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"Existe el botón de <b>Numero de cheque</b>",
 			state(Present, ButtonsCheque.numCheque.getBy()).wait(3).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"Existe el botón de <b>Id de compra</b>",
 			state(Clickable, ButtonsCheque.idCompra.getBy()).wait(3).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"Existe el botón de <b>Correo del receptor</b>",
 			state(Clickable, ButtonsCheque.correoReceptor.getBy()).wait(3).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"Existe el botón de <b>Correo del comprador</b>",
 			state(Clickable, ButtonsCheque.correoComprador.getBy()).wait(3).check(), State.Defect);
-		return validations;
+		return checks;
 	}
 
 	@Validation
 	public ChecksTM validateSecondDataCheque() {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"En la tabla activo existe un apartado para <b>ACTIVO</b>",
 			state(Present, TablaCheque.activo.getBy()).wait(3).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"En la tabla activo existe un apartado para <b>CHARGEBACK</b>",
 			state(Present, TablaCheque.chargeBack.getBy()).wait(3).check(), State.Defect);
-		return validations;
+		return checks;
 	}
 
 	@Validation(
@@ -134,65 +134,65 @@ public class PageGestorChequesSteps extends PageObjTM {
 
 	@Validation
 	public ChecksTM validateThirdDataCheque() {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"En la tabla divisa existe un apartado para <b>DIVISA</b>",
 			state(Present, TablaCheque.divisa.getBy()).wait(3).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"En la tabla divisa existe un apartado para <b>VALOR TOTAL</b>",
 			state(Present, TablaCheque.valorTotal.getBy()).wait(3).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"En la tabla divisa existe un apartado para <b>SALDO</b>",
 			state(Clickable, TablaCheque.saldo.getBy()).wait(3).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"En la tabla divisa existe un apartado para <b>FECHA DE COMPRA</b>",
 			state(Clickable, TablaCheque.fechaCompra.getBy()).wait(3).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"En la tabla divisa existe un apartado para <b>VALIDEZ</b>",
 			state(Clickable, TablaCheque.validez.getBy()).wait(3).check(), State.Defect);
-		return validations;
+		return checks;
 	}
 
 	@Validation
 	public ChecksTM validatePedidosData() {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Id</b>",
 			state(Present, TablaCheque.idPedidos.getBy()).wait(3).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Fecha</b>",
 			state(Present, TablaCheque.fechaPedidos.getBy()).wait(3).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Total</b>",
 			state(Present, TablaCheque.totalPedidos.getBy()).wait(3).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Usuario</b>",
 			state(Present, TablaCheque.usuarioPedidos.getBy()).wait(3).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Accion</b>",
 			state(Present, TablaCheque.activoPedidos.getBy()).wait(3).check(), State.Defect);
-		return validations;
+		return checks;
 	}
 
 	@Validation
 	public ChecksTM validateButtonsDataCheque() {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Existe el boton para <b>Modificar</b>",
 			state(Present, ButtonsCheque.modificar.getBy()).wait(3).check(), State.Defect);
-//		validations.add(
+//		checks.add(
 //			"Existe el boton para <b>Añadir</b>",
 //			state(Present, ButtonsCheque.add.getBy()).wait(3).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"Existe el boton para <b>Reenviar</b>",
 			state(Present, ButtonsCheque.reenviar.getBy()).wait(3).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"Existe el boton para <b>Editar</b>",
 			state(Present, ButtonsCheque.editar.getBy()).wait(3).check(), State.Defect);
-//		validations.add(
+//		checks.add(
 //			"Existe el boton para <b>Desactivar</b>",
 //			state(Present, ButtonsCheque.desactivar.getBy()).wait(3).check(), State.Defect);
-		return validations;
+		return checks;
 	}
 
 	public void validateDataFromCheque () {
@@ -239,19 +239,19 @@ public class PageGestorChequesSteps extends PageObjTM {
 
 	@Validation
 	public ChecksTM validateInitDataCheque() {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Existe la tabla que contiene <b>Activo</b>",
 			state(Present, TablaCheque.activo.getBy()).wait(3).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"Existe la tabla que contiene <b>Divisa</b>",
 			state(Present, TablaCheque.divisa.getBy()).wait(3).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"Existe la tabla que contiene <b>Pedidos Realizados</b>",
 			state(Present, TablaCheque.pedidosRealizados.getBy()).wait(3).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"Existe la tabla que contiene <b>Pedidos Eliminados</b>",
 			state(Present, TablaCheque.pedidosEliminados.getBy()).wait(3).check(), State.Defect);
-		return validations;
+		return checks;
 	}
 }

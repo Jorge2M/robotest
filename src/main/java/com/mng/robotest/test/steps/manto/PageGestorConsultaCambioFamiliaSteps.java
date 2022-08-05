@@ -13,17 +13,17 @@ public class PageGestorConsultaCambioFamiliaSteps {
 
 	@Validation
 	public static ChecksTM validateIsPage(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Estamos en la página " + PageGestorConsultaCambioFamilia.titulo,
 			PageGestorConsultaCambioFamilia.isPage(driver), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"Aparece la tabla de \"Consulta\"",
 			PageGestorConsultaCambioFamilia.isVisibleConsultaTable(driver), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"El botón \"Consulta está\" \"disabled\"",
 			PageGestorConsultaCambioFamilia.isDisabledConsultaButton(driver), State.Defect);
-		return validations;
+		return checks;
 	}
 	
 	@Step (
@@ -37,14 +37,14 @@ public class PageGestorConsultaCambioFamiliaSteps {
 	
 	@Validation
 	private static ChecksTM checkAfterSearchProductXfamilia(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Aparece la tabla con los productos",
 			PageGestorConsultaCambioFamilia.isTablaProductosVisible(driver), State.Defect);
-		validations.add(
+		checks.add(
 			"El campo de la tabla \"Traducción familia principal\" de la primera fila contiene el atributo \"Accesorios\"",
 			PageGestorConsultaCambioFamilia.checkFirstRowProductIsRight(driver), State.Defect);
-		return validations;
+		return checks;
 	}
 
 	@Step (
@@ -58,13 +58,13 @@ public class PageGestorConsultaCambioFamiliaSteps {
 	
 	@Validation
 	private static ChecksTM checkAfeterClickCambioFamilia(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Aparece la tabla con las opciones para los cambios de familia",
 			PageGestorConsultaCambioFamilia.isTablaCambioFamiliaVisible(driver), State.Defect);
-		validations.add(
+		checks.add(
 			"El botón \"Consulta\" ya no está \"disabled\"",
 			!PageGestorConsultaCambioFamilia.isDisabledConsultaButton(driver), State.Defect);
-		return validations;
+		return checks;
 	}
 }

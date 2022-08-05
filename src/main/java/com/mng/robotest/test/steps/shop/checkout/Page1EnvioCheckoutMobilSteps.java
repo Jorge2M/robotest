@@ -37,21 +37,21 @@ public class Page1EnvioCheckoutMobilSteps {
 
 	@Validation
 	public ChecksTM validateIsPage(boolean userLogged) {
-		ChecksTM validations = ChecksTM.getNew();
-			validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+			checks.add(
 			"Aparece la página correspondiente al paso-1",
 			page1EnvioCheckoutMobil.isPageUntil(1), State.Warn);
 			//WebdrvWrapp.isElementPresent(driver, By.xpath("//h2[@data-toggle='step1']")), State.Warn);
-			validations.add(
+			checks.add(
 			"Aparece el botón de introducción del código promocional",
 			page1EnvioCheckoutMobil.isVisibleInputCodigoPromoUntil(0), State.Defect);
 			if (!userLogged) {
-				validations.add(
+				checks.add(
 				"Aparece seleccionado el método de envío \"Estándar\"",
 				page1EnvioCheckoutMobil.isPresentEnvioStandard(), State.Warn);
 			}
 			
-			return validations;
+			return checks;
 	}
 
 	@SuppressWarnings("static-access")
@@ -110,15 +110,15 @@ public class Page1EnvioCheckoutMobilSteps {
 	
 	@Validation
 	public ChecksTM validaResultImputPromoEmpl() throws Exception {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 2;
-	 	validations.add(
+	 	checks.add(
 			"Aparece el descuento total aplicado al empleado (en menos de " + maxSeconds + " segundos)",
 			page1EnvioCheckoutMobil.isVisibleDescuentoEmpleadoUntil(maxSeconds), State.Warn);
-	 	validations.add(
+	 	checks.add(
 			"Aparece un descuento de empleado mayor que 0",
 			page1EnvioCheckoutMobil.validateDiscountEmpleadoNotNull(), State.Warn);
-	 	return validations;
+	 	return checks;
 	}
 	
 	@Step (

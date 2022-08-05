@@ -79,18 +79,18 @@ public class SecStoreCreditSteps {
    
 	@Validation
 	public ChecksTM validaBloqueSaldoEnCuenta(boolean checkedSaldoEnCta, DataCtxPago dCtxPago) throws Exception {
-		ChecksTM validations = ChecksTM.getNew();
-	  	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	  	checks.add(
 			"Es visible el bloque correspondiente al pago mediante \"Saldo en cuenta\"",
 			secStoreCredit.isVisible(), State.Defect);
 	  	
 	  	boolean isCheckedBlock = secStoreCredit.isChecked();
 	  	if (checkedSaldoEnCta) {
-		  	validations.add(
+		  	checks.add(
 				"Está marcado el radio del bloque de \"Saldo en cuenta\"",
 				isCheckedBlock, State.Defect);
 	  	} else {
-		  	validations.add(
+		  	checks.add(
 				"No está marcado el radio del bloque de \"Saldo en cuenta\"",
 				!isCheckedBlock, State.Warn);
 	  	}
@@ -98,16 +98,16 @@ public class SecStoreCreditSteps {
 	  	if (checkedSaldoEnCta/* || channel==Channel.desktop*/) {
 			String impTotResumen = new PageCheckoutWrapper(channel, app, driver).getPrecioTotalFromResumen();
 			float impFloat = ImporteScreen.getFloatFromImporteMangoScreen(impTotResumen);
-		  	validations.add(
+		  	checks.add(
 				"Figura un importe total de 0",
 				impFloat==0.0, State.Warn);
 	  	}
 
 		float saldoCta = dCtxPago.getSaldoCta();
-	  	validations.add(
+	  	checks.add(
 			"Figura un saldo en cuenta de: " + saldoCta,
 			secStoreCredit.getImporte()==saldoCta, State.Warn);
 	  	
-	  	return validations;
+	  	return checks;
 	}
 }

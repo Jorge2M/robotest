@@ -38,12 +38,11 @@ public class SecMenuLateralDevice extends PageObjTM {
 		"/li[not(@class[contains(.,'mobile-label-hidden')] or @class[contains(.,' label-hidden')] or @class[contains(.,' gap ')])]" +
 		"/a[@class[contains(.,'menu-item-label')] and @href]";
 
-	public SecMenuLateralDevice(Channel channel, AppEcom app, WebDriver driver) {
-		super(driver);
+	public SecMenuLateralDevice(Channel channel, AppEcom app) {
 		this.channel = channel;
 		this.app = app;
 		this.secLineasDevice = SecLineasDevice.make(channel, app, driver);
-		this.secUserMenu = SecMenusUserDevice.getNew(channel, app, driver);
+		this.secUserMenu = new SecMenusUserDevice(channel, app);
 	}
 
 	public SecLineasDevice getSecLineasDevice() {

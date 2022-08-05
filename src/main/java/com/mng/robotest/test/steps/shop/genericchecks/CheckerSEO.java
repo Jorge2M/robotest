@@ -102,7 +102,7 @@ public class CheckerSEO implements Checker {
 		ArrayList<String> listaErrorsInHtmlFormat = new ArrayList<>();
 		if (!AllPages.isPresentTagCanonical(driver)) {
 			//El canonical ha de aparecer como mínimo en las páginas de Portada, Catálogo y Ficha
-			PageFicha pageFicha = PageFicha.newInstanceFichaNew(Channel.desktop, AppEcom.shop, driver);
+			PageFicha pageFicha = PageFicha.newInstanceFichaNew(Channel.desktop, AppEcom.shop);
 			PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, AppEcom.shop, driver);
 			if ((new PageLanding(driver)).isPage() || 
 				((PageGaleriaDesktop)pageGaleria).isPage() || 

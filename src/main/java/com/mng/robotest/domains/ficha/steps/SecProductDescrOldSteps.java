@@ -1,7 +1,5 @@
 package com.mng.robotest.domains.ficha.steps;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -14,12 +12,13 @@ import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld;
 import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel;
 import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypeStatePanel;
 
+
 public class SecProductDescrOldSteps {
 	
 	private final SecProductDescrOld secProductDescrOld;
 	
-	public SecProductDescrOldSteps(Channel channel, AppEcom app, WebDriver driver) {
-		secProductDescrOld = new SecProductDescrOld(channel, app, driver);
+	public SecProductDescrOldSteps(Channel channel, AppEcom app) {
+		secProductDescrOld = new SecProductDescrOld(channel, app);
 	}
 	
 	@Validation

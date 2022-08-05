@@ -2,8 +2,6 @@ package com.mng.robotest.domains.registro.steps;
 
 import java.util.Map;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -14,15 +12,11 @@ import com.mng.robotest.domains.registro.pageobjects.PageRegistroDirec;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataCtxShop;
 
+
 public class PageRegistroDirecSteps {
 	
-	private final PageRegistroAddressData pageRegistroAddressData;
-	private final PageRegistroDirec pageRegistroDirec;
-	
-	public PageRegistroDirecSteps(WebDriver driver) {
-		pageRegistroAddressData = new PageRegistroAddressData(driver);
-		pageRegistroDirec = new PageRegistroDirec(driver);
-	}
+	private final PageRegistroAddressData pageRegistroAddressData = new PageRegistroAddressData();
+	private final PageRegistroDirec pageRegistroDirec = new PageRegistroDirec();
 	
 	@Validation
 	public ChecksTM isPageFromPais(Pais pais) {

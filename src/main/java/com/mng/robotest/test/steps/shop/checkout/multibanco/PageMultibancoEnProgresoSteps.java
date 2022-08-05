@@ -12,15 +12,15 @@ public class PageMultibancoEnProgresoSteps {
 	
 	@Validation
 	public static ChecksTM validateIsPage(WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSecondsToWait = 3;
-	   	validations.add(
+	   	checks.add(
 			"Aparece la cabecera <b>Pagamento em progreso</b> (la esperamos hasta " + maxSecondsToWait + " segundos",
 			PageMultibancoEnProgreso.isPageUntil(maxSecondsToWait, driver), State.Warn);
-	   	validations.add(
+	   	checks.add(
 			"Figura un botón para ir al siguiente paso",
 			PageMultibancoEnProgreso.isButonNextStep(driver), State.Defect);
-	   	return validations;
+	   	return checks;
 	}
 	
 	@Step (

@@ -16,8 +16,8 @@ public class PageDotpay1rstSteps {
 	
 	@Validation
 	public static ChecksTM validateIsPage(String nombrePago, String importeTotal, String codPais, Channel channel, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	  	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	  	checks.add(
 			"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b>",
 			PageDotpay1rst.isPresentEntradaPago(nombrePago, channel, driver), State.Warn);
 	  	
@@ -27,23 +27,23 @@ public class PageDotpay1rstSteps {
 			stateVal = State.Info;
 			store = StoreType.None;
 		}
-	  	validations.add(
+	  	checks.add(
 	  		Check.make(
 	  		    "Aparece el importe de la compra: " + importeTotal,
 			    ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal)
 	  		.store(store).build());
 	  	
-	  	validations.add(
+	  	checks.add(
 			"Aparece la cabecera indicando la 'etapa' del pago",
 			PageDotpay1rst.isPresentCabeceraStep(nombrePago, channel, driver), State.Warn);
 	  	
 	  	if (channel==Channel.desktop) {
-		  	validations.add(
+		  	checks.add(
 				"Figura un botón de pago",
 				PageDotpay1rst.isPresentButtonPago(driver), State.Defect);
 	  	}
 	  	
-	  	return validations;
+	  	return checks;
 	}
 	
 	@Step (

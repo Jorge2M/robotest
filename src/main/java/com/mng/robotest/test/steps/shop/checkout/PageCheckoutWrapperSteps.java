@@ -138,30 +138,30 @@ public class PageCheckoutWrapperSteps {
 	
 	@Validation
 	private ChecksTM checkAvailablePagos(Pais pais, boolean isEmpl) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país (" + pais.getListPagosForTest(app, isEmpl).size() + ")",
 			pageCheckoutWrapper.isNumMetodosPagoOK(pais, isEmpl), State.Defect);		
-		return validations;
+		return checks;
 	}
 	
 	@Validation
 	private ChecksTM checkLogosPagos(Pais pais, boolean isEmpl) { 
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		List<Pago> listPagos = pais.getListPagosForTest(app, isEmpl);
 		if (listPagos.size()==1 && channel.isDevice()) {
-			return validations;
+			return checks;
 		}
 		for (int i=0; i<listPagos.size(); i++) {
 			if (listPagos.get(i).getTypePago()!=TypePago.TpvVotf) {
 				String pagoNameExpected = listPagos.get(i).getNombre(channel, app);
-			 	validations.add(
+			 	checks.add(
 					"Aparece el logo/pestaña asociado al pago <b>" + pagoNameExpected + "</b>",
 					pageCheckoutWrapper.isMetodoPagoPresent(pagoNameExpected), State.Defect);	
 			}
 		}   
 		
-		return validations;
+		return checks;
 	}
 	
 	@Step (
@@ -353,29 +353,29 @@ public class PageCheckoutWrapperSteps {
 	
 	@Validation
 	private ChecksTM checkAfterInputTarjetaEmpleado(Pais pais, AccesoEmpl accesoEmpl) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 5;
-	 	validations.add(
+	 	checks.add(
 			"Aparece el campo de introducción del primer apellido (lo esperamos hasta " + maxSeconds + " segundos)",
 			pageCheckoutWrapper.isPresentInputApellidoPromoEmplUntil(maxSeconds), State.Defect);
 		
 		boolean isPresentInputDni = pageCheckoutWrapper.isPresentInputDNIPromoEmpl();
 		if (accesoEmpl.getNif()!=null) {
-		 	validations.add(
+		 	checks.add(
 				"Aparece el campo de introducción del DNI/Pasaporte",
 				isPresentInputDni, State.Defect);
 		} else {
-		 	validations.add(
+		 	checks.add(
 				"Noparece el campo de introducción del DNI/Pasaporte",
 				!isPresentInputDni, State.Defect);
 		}
 		
 		boolean isPresentInputFechaNac = pageCheckoutWrapper.isPresentDiaNaciPromoEmpl();
-	 	validations.add(
+	 	checks.add(
 			"No aparece el campo de introducción de la fecha de nacimiento",
 			!isPresentInputFechaNac, State.Defect);	
 		
-		return validations;
+		return checks;
 	}
 	
 	static final String tag1erApellido = "@Tag1erApellido";

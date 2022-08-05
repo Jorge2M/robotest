@@ -7,8 +7,6 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
 import java.util.Arrays;
 
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroNinos;
 import com.mng.robotest.domains.registro.pageobjects.beans.ListDataNinos;
 import com.mng.robotest.test.beans.Pais;
@@ -18,11 +16,7 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 
 public class PageRegistroNinosSteps {
 	
-	PageRegistroNinos pageRegistroNinos;
-	
-	public PageRegistroNinosSteps(WebDriver driver) {
-		pageRegistroNinos = new PageRegistroNinos(driver);
-	}
+	PageRegistroNinos pageRegistroNinos = new PageRegistroNinos();
 	
 	@Validation
 	public ChecksTM validaIsPageWithNinos(int numNinos) {
@@ -43,7 +37,7 @@ public class PageRegistroNinosSteps {
 	public void sendNinoDataAndContinue(ListDataNinos listaNinos, Pais pais) {
 		pageRegistroNinos.setDataNinoIfNotExists(listaNinos, 2);
 		pageRegistroNinos.clickContinuar();
-		new PageRegistroDirecSteps(pageRegistroNinos.driver).isPageFromPais(pais);
+		new PageRegistroDirecSteps().isPageFromPais(pais);
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO, 

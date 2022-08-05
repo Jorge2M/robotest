@@ -12,14 +12,14 @@ public class PageListPedidosSteps {
 
 //	@Validation
 //	public static ChecksTM validateIsPage(String codigoPedido, WebDriver driver) {
-//		ChecksTM validations = ChecksTM.getNew();
-//	  	validations.add(
+//		ChecksTM checks = ChecksTM.getNew();
+//	  	checks.add(
 //	  		"La página contiene el bloque correspondiente a la lista de pedidos",
 //	  		PageListPedidosOld.isPage(driver), State.Defect);	
-//	  	validations.add(
+//	  	checks.add(
 //	  		"Figura la línea correspondiente al pedido " + codigoPedido,
 //	  		PageListPedidosOld.isVisibleCodPedido(codigoPedido, driver), State.Info);	
-//		return validations;
+//		return checks;
 //	}
 //	
 //	@Step (

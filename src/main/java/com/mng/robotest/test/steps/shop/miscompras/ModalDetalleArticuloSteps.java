@@ -20,21 +20,21 @@ public class ModalDetalleArticuloSteps {
 	
 	@Validation
 	public ChecksTM validateIsOk(ArticuloScreen articulo) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 2;
-		validations.add(
+		checks.add(
 			"Aparece el modal correspondiente al artículo (lo esperamos hasta " + maxSeconds + " segundos)",
 			modalDetalleArticulo.isVisible(maxSeconds), State.Warn);
-		validations.add(
+		checks.add(
 			"Se muestra la referencia " + articulo.getReferencia(),
 			modalDetalleArticulo.existsReferencia(articulo.getReferencia(), 1), State.Warn);
-		validations.add(
+		checks.add(
 			"Se muestra el nombre " + articulo.getNombre(),
 			modalDetalleArticulo.getNombre().compareTo(articulo.getNombre())==0, State.Warn);
-		validations.add(
+		checks.add(
 			"Se muestra el precio " + articulo.getPrecio(),
 			modalDetalleArticulo.getPrecio().contains(articulo.getPrecio()), State.Warn);
-		return validations;
+		return checks;
 	}
 	
 //	@Step (

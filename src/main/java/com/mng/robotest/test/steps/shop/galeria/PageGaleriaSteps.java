@@ -536,7 +536,7 @@ public class PageGaleriaSteps {
 	private ChecksTM checkIsFichaArticle(String nombre1erArt, String precio1erArt, int maxSeconds) {
 		ChecksTM checks = ChecksTM.getNew();
 		
-		PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
+		PageFicha pageFicha = PageFicha.newInstance(channel, app);
 	  	checks.add(
 			"Aparece la página de ficha (la esperamos hasta " + maxSeconds + " segundos)",
 			pageFicha.isPageUntil(maxSeconds), State.Warn);

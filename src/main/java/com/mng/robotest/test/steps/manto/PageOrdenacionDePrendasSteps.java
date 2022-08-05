@@ -39,17 +39,17 @@ public class PageOrdenacionDePrendasSteps extends PageObjTM {
 
 	@Validation
 	public ChecksTM validateIsPage() {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Estamos en la página " + Orden.titulo.getXPath(),
 			state(Visible, Orden.initialTitulo.getBy()).wait(10).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece el desplegable de tiendas",
 			state(Visible, Orden.desplegableTiendas.getBy()).wait(10).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"El botón <b>Ver Tiendas</b> está en la página",
 			state(Visible, Orden.verTiendas.getBy()).wait(10).check(), State.Defect);
-		return validations;
+		return checks;
 	}
 
 	@Step(
@@ -64,20 +64,20 @@ public class PageOrdenacionDePrendasSteps extends PageObjTM {
 
 	@Validation
 	private ChecksTM validatePreProductionElements() {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Está presente el enlace de <b>She</b>",
 			state(Visible, Section.She.getBy()).wait(10).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"Está presente el enlace de <b>He</b>",
 			state(Visible, Section.He.getBy()).wait(10).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"Está presente el enlace de <b>Nina</b>",
 			state(Visible, Section.Nina.getBy()).wait(10).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece correctamente el boton de <b>cancelar</b>",
 			state(Visible, Section.Nino.getBy()).wait(10).check(), State.Defect);
-		return validations;
+		return checks;
 	}
 
 	@Step(
@@ -107,14 +107,14 @@ public class PageOrdenacionDePrendasSteps extends PageObjTM {
 
 	@Validation
 	private ChecksTM validateSectionPrenda() {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Se vuelve visible el selector de tipo de <b>Prendas</b>",
 			state(Visible, Orden.selectorPrendas.getBy()).wait(13).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"Podemos ver el <b>botón</b> para ver las prendas",
 			state(Visible, Orden.verPrendas.getBy()).wait(13).check(), State.Defect);
-		return validations;
+		return checks;
 	}
 
 	@Step(
@@ -130,15 +130,15 @@ public class PageOrdenacionDePrendasSteps extends PageObjTM {
 
 	@Validation
 	private ChecksTM validateTipoPrenda() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 20;
-		validations.add(
+		checks.add(
 			"Aparecen imagenes en la nueva página (lo esperamos hasta " + maxSeconds + " segundos)",
 			state(Visible, Orden.pruebaImagen.getBy()).wait(maxSeconds).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"Estamos en la sección que corresponde <b>camisas</b>",
 			state(Visible, Orden.pruebaCamisa.getBy()).wait(maxSeconds).check(), State.Defect);
-		return validations;
+		return checks;
 	}
 
 	@Step(
@@ -154,14 +154,14 @@ public class PageOrdenacionDePrendasSteps extends PageObjTM {
 
 	@Validation
 	private ChecksTM validateBajarPrenda(int maxSeconds) {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Se sigue viendo la segunda prenda",
 			state(Visible, Orden.segundaPrenda.getBy()).wait(maxSeconds).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"La primera prenda no se corresponde con la que había inicialmente",
 			state(Visible, Orden.primeraPrenda.getBy()).wait(maxSeconds).check(), State.Defect);
-		return validations;
+		return checks;
 	}
 
 	@Step(
@@ -175,20 +175,20 @@ public class PageOrdenacionDePrendasSteps extends PageObjTM {
 
 	@Validation
 	private ChecksTM validateAplicarOrden() {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Aparece correctamente el modal de confirmacion",
 			state(Visible, Modal.container.getBy()).wait(15).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece correctamente el boton de <b>aplicar general</b>",
 			state(Visible, Modal.applyGeneric.getBy()).wait(15).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece correctamente el boton de <b>aplicar pais</b>",
 			state(Visible, Modal.applyCountry.getBy()).wait(15).check(), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece correctamente el boton de <b>cancelar</b>",
 			state(Visible, Modal.cancel.getBy()).wait(15).check(), State.Defect);
-		return validations;
+		return checks;
 	}
 
 	@Step(

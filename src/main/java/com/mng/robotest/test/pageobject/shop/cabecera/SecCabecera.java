@@ -35,16 +35,15 @@ public abstract class SecCabecera extends PageObjTM {
 	public abstract void clickIconoBolsaWhenDisp(int maxSecondsToWait);
 	public abstract void hoverIconoBolsa();
 	
-	protected SecCabecera(Channel channel, AppEcom app, WebDriver driver) {
-		super(driver);
+	protected SecCabecera(Channel channel, AppEcom app) {
 		this.channel = channel;
 		this.app = app;
 		this.secSearch = SecSearch.getNew(channel, app, driver);
 	}
 	
-	public static SecCabecera getNew(Channel channel, AppEcom app, WebDriver driver) {
+	public static SecCabecera getNew(Channel channel, AppEcom app) {
 		if (channel==Channel.mobile && app==AppEcom.outlet) {
-			return SecCabeceraOutlet_Mobil.getNew(channel, app, driver);
+			return SecCabeceraOutlet_Mobil.getNew(channel, app);
 		}
 		
 		switch (channel) {
@@ -53,7 +52,7 @@ public abstract class SecCabecera extends PageObjTM {
 		case desktop:
 		case mobile:
 		default:
-			return SecCabecera_MostFrequent.getNew(channel, app, driver);
+			return SecCabecera_MostFrequent.getNew(channel, app);
 		}
 	}
 	
@@ -66,7 +65,7 @@ public abstract class SecCabecera extends PageObjTM {
 	}
 	
 	public static void buscarTexto(String referencia, Channel channel, AppEcom app, WebDriver driver) {
-		MenusUserWrapper menusUser = MenusUserWrapper.getNew(channel, app, driver);
+		MenusUserWrapper menusUser = MenusUserWrapper.getNew(channel, app);
 		menusUser.isMenuInStateUntil(UserMenu.lupa, State.Visible, 1);
 		menusUser.clickMenuAndWait(UserMenu.lupa);
 		SecSearch secSearch = SecSearch.getNew(channel, app, driver);
@@ -143,7 +142,7 @@ public abstract class SecCabecera extends PageObjTM {
 	 */
 	public void clickIconoMenuHamburguerMobil(boolean toOpenMenus) {
 		//SecMenuLateralMobil secMenuLateral = new SecMenuLateralMobil(app, driver);
-		SecMenuLateralDevice secMenuLateral = new SecMenuLateralDevice(channel, app, driver);
+		SecMenuLateralDevice secMenuLateral = new SecMenuLateralDevice(channel, app);
 		boolean menuVisible = secMenuLateral.isMenuInStateUntil(toOpenMenus, 1);
 		int i=0;
 		TypeClick typeClick = TypeClick.webdriver;

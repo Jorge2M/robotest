@@ -3,7 +3,6 @@ package com.mng.robotest.domains.ficha.pageobjects;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
@@ -28,10 +27,6 @@ public class SecFotosNew extends PageObjTM {
 	private static String getXPathFoto(int line, int position) {
 		String xpathLine = getXPathFoto(line);
 		return (xpathLine + "[" + position + "]");
-	}
-	
-	public SecFotosNew(WebDriver driver) {
-		super(driver);
 	}
 	
 	public DataFoto getDataFoto(int line, int position) {

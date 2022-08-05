@@ -3,7 +3,6 @@ package com.mng.robotest.domains.ficha.pageobjects.tallas;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
@@ -19,10 +18,6 @@ public class SSecSelTallasFichaOldDesktop extends PageObjTM implements SSecSelTa
 	private static final String XPathSelectTalla = "//select[@id[contains(.,'productFormSelect')]]";
 	private static final String XPathOptionTallaUnica = XPathSelectTalla + "/option[@data-available='true' and @value[contains(.,'99')]]";
 	private static final String XPathOptionTalla = XPathSelectTalla + "/option[not(@data-text='0')]"; 
-	
-	public SSecSelTallasFichaOldDesktop(WebDriver driver) {
-		super(driver);
-	}
 	
 	private String getXPathOptionTallaSegunDisponible(boolean disponible) {
 		String disponibleStr = String.valueOf(disponible);

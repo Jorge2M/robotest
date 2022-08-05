@@ -1,7 +1,6 @@
 package com.mng.robotest.domains.votfconsole.pageobjects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
@@ -30,10 +29,6 @@ public class PageConsola extends PageObjTM {
 	private static final String XPATH_BUTTON_SELECT_PEDIDO = "//a[@id='seleccionPedidos']";
 	private static final String XPATH_BUTTON_PRECONF_PEDIDO = "//a[@id='preconfirmarPedidos']";
 	private static final String XPATH_BUTTON_CONF_PEDIDO = "//a[@id='confirmarPedidos']";
-	
-	public PageConsola(WebDriver driver) {
-		super (driver);
-	}
 	
 	private String getXPathOptionSelectTestServ(String textOption) {
 		return (XPATH_SELECT_TEST_SERV + "/option[text()[contains(.,'" + textOption + "')]]");

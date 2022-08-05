@@ -19,7 +19,7 @@ public class PageRegistroFinSteps {
 	private final DataCtxShop dataTest;
 	
 	public PageRegistroFinSteps(DataCtxShop dataTest, WebDriver driver) {
-		this.pageRegistroFin = new PageRegistroFin(driver);
+		this.pageRegistroFin = new PageRegistroFin();
 		this.dataTest = dataTest;
 	}
 	
@@ -35,7 +35,7 @@ public class PageRegistroFinSteps {
 		expected="Se accede a la shop correctamente")
 	public void clickIrDeShoppingButton() {
 		pageRegistroFin.clickIrDeShopping();
-		SecCabecera.getNew(dataTest.channel, dataTest.appE, pageRegistroFin.driver).clickLogoMango();
+		SecCabecera.getNew(dataTest.channel, dataTest.appE).clickLogoMango();
 		validateWeAreLogged();
 	}
 	
@@ -50,7 +50,7 @@ public class PageRegistroFinSteps {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 			"El logo de Mango redirige al país/idioma origen: " + dataTest.idioma.getAcceso(),
-			SecCabecera.getNew(dataTest.channel, dataTest.appE, pageRegistroFin.driver)
+			SecCabecera.getNew(dataTest.channel, dataTest.appE)
 				.validaLogoMangoGoesToIdioma(dataTest.idioma), State.Warn);
 		return checks;		
 	}

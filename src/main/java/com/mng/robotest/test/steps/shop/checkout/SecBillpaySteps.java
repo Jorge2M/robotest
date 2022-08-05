@@ -19,17 +19,17 @@ public class SecBillpaySteps {
 	
 	@Validation
 	public ChecksTM validateIsSectionOk() {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Aparecen 3 desplegables para la selección de la fecha de nacimiento",
 			secBillpay.isPresentSelectBirthBirthYear() &&
 			secBillpay.isPresentSelectBirthMonth() &&
 			secBillpay.isPresentSelectBirthDay(), 
 			State.Defect); 
-	 	validations.add(
+	 	checks.add(
 			"Aparece el check de \"Acepto\"",
 			secBillpay.isPresentRadioAcepto(), State.Defect); 
-	 	return validations;
+	 	return checks;
 	}
 	
 	/**
@@ -48,17 +48,17 @@ public class SecBillpaySteps {
 	
 	@Validation
 	private ChecksTM checkLastschriftAfterAccept() {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 			"Aparece el campo para la introducción del titular",
 			secBillpay.isPresentInputTitular(), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"Aparece el campo para la introducción del IBAN",
 	 		secBillpay.isPresentInputIBAN(), State.Defect);
-	 	validations.add(
+	 	checks.add(
 			"Aparece el campo para la introducción del BIC",
 			secBillpay.isPresentInputBIC(), State.Defect);
-	 	return validations;
+	 	return checks;
 	}
 	
 	@Step (

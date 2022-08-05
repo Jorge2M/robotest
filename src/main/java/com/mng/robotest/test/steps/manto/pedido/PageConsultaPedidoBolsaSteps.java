@@ -50,9 +50,9 @@ public class PageConsultaPedidoBolsaSteps {
 	
 	@Validation
 	public static ChecksTM validaDatosEnvioPedido(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		TipoTransporte tipoTransporte = dataPedido.getPago().getTipoEnvioType(appE);
-		validations.add(
+		checks.add(
 			"El campo \"tipo servicio\" contiene el valor <b>" + tipoTransporte.getCodigoIntercambio() + "</b> (asociado al tipo de envío " + tipoTransporte + ")",
 			PageDetallePedido.getTipoServicio(driver).compareTo(tipoTransporte.getCodigoIntercambio())==0, State.Info);		
 		
@@ -60,27 +60,27 @@ public class PageConsultaPedidoBolsaSteps {
 			dataPedido.getTypeEnvio()==TipoTransporte.TIENDA && 
 			dataPedido.getDataDeliveryPoint()!=null) {
 			String textEnvioTienda = dataPedido.getDataDeliveryPoint().getCodigo();
-			validations.add(
+			checks.add(
 				"En los datos de envío aparece el texto <b>ENVIO A TIENDA " + textEnvioTienda + "</b>",
 				PageDetallePedido.get1rstLineDatosEnvioText(driver).contains(textEnvioTienda), State.Defect);			  
 		}
 		
-		return validations;
+		return checks;
 	}
 	
 	@Validation
 	public static ChecksTM validaDatosGeneralesPedido(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Aparece la pantalla de detalle del pedido",
 			PageDetallePedido.isPage(driver), State.Warn);
-		validations.add(
+		checks.add(
 			"Aparece un TOTAL de: " + dataPedido.getImporteTotalManto(),
 			ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), PageDetallePedido.XPathImporteTotal, driver), State.Warn);
-		validations.add(
+		checks.add(
 			"Las 3 líneas de la dirección de envío figuran en la dirección del pedido (" + dataPedido.getDireccionEnvio() +")",
 			PageDetallePedido.isDireccionPedido(driver, dataPedido.getDireccionEnvio()), State.Warn);
-		validations.add(
+		checks.add(
 			"Figura el código de país (" + dataPedido.getCodigoPais() + ")",
 			PageDetallePedido.isCodPaisPedido(driver, dataPedido.getCodigoPais()), State.Warn);
 		
@@ -90,17 +90,17 @@ public class PageConsultaPedidoBolsaSteps {
 			appE!=AppEcom.votf) {
 			boolean isPedidoInStateTpv = PageDetallePedido.isStateInTpvStates(driver, dataPedido);
 			boolean pedidoInStateMenos1Null = PageDetallePedido.isPedidoInStateMenos1NULL(driver);
-			validations.add(
+			checks.add(
 				"Aparece uno de los resultados posibles según el TPV: " + pago.getTpv().getEstado(),
 				isPedidoInStateTpv, State.Warn);
 			if (!isPedidoInStateTpv) {
-				validations.add(
+				checks.add(
 					"El pedido no está en estado -1-NULL",
 					!pedidoInStateMenos1Null, State.Defect);
 			}
 		}  
 		
-		return validations;
+		return checks;
 	}
 	
 	@Step (

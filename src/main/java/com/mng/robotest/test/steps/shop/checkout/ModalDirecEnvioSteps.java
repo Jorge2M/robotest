@@ -29,15 +29,15 @@ public class ModalDirecEnvioSteps {
 	
 	@Validation
 	public ChecksTM validateIsOk() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 5;
-	 	validations.add(
+	 	checks.add(
 			"Es visible el formulario para la introducción de la \"Dirección de envío\" (lo esperamos hasta #{maxSeconds} seconds)",
 			modalDirecEnvio.isVisibleFormUntil(maxSeconds), State.Defect); 
-	 	validations.add(
+	 	checks.add(
 			"Es visible el botón \"Actualizar\"",
 			modalDirecEnvio.isVisibleButtonActualizar(), State.Defect); 
-	 	return validations;
+	 	return checks;
 	}
 
 	@Step (
@@ -53,15 +53,15 @@ public class ModalDirecEnvioSteps {
 	@SuppressWarnings("static-access")
 	@Validation
 	private ChecksTM checkAfterUpdateData() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		Page1DktopCheckout page1DktopCheckout = new Page1DktopCheckout(channel, app);
 		int maxSeconds = 2; 
-		validations.add(
+		checks.add(
 			"Aparece un modal de alerta alertando de un posible cambio de precios (lo esperamos hasta " + maxSeconds + " segundos)",
 			page1DktopCheckout.getModalAvisoCambioPais().isVisibleUntil(maxSeconds), State.Warn); 
-		validations.add(
+		checks.add(
 			"Desaparece la capa de Loading (lo esperamos hasta " + maxSeconds + "segundos", 
 			(new PageCheckoutWrapper(channel, app, driver)).waitUntilNoDivLoading(maxSeconds), State.Warn);
-		return validations;
+		return checks;
 	}
 }

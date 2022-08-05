@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -73,8 +72,7 @@ public class SecProductDescrOld extends PageObjTM {
 		}
 	}
 	
-	public SecProductDescrOld(Channel channel, AppEcom app, WebDriver driver) {
-		super(driver);
+	public SecProductDescrOld(Channel channel, AppEcom app) {
 		this.channel = channel;
 		this.app = app;
 	}

@@ -59,7 +59,7 @@ public class SecMenusWrapperSteps {
 		this.pais = pais;
 		this.driver = driver;
 		this.secMenusUserSteps = SecMenusUserSteps.getNew(channel, app, driver);
-		this.secMenuLateralMobilSteps = SecMenuLateralMobilSteps.getNew(channel, app, driver);
+		this.secMenuLateralMobilSteps = new SecMenuLateralMobilSteps(channel, app, driver);
 		this.secMenusDesktopSteps = SecMenusDesktopSteps.getNew(pais, app, channel, driver);
 		this.secMenusWrap = SecMenusWrap.getNew(channel, app, driver);
 	}
@@ -78,7 +78,7 @@ public class SecMenusWrapperSteps {
 	
 	@Validation
 	public ChecksTM validateLineas(Pais pais) throws Exception {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		LineaType[] lineasToTest = Linea.LineaType.values();
 		for (LineaType lineaType : lineasToTest) {
 			if (lineaType.isActiveIn(channel)) {
@@ -94,11 +94,11 @@ public class SecMenusWrapperSteps {
 					
 					boolean isLineaPresent = isLineaPresent(lineaType);
 					if (apareceLinea==ThreeState.TRUE) {
-						validations.add (
+						checks.add (
 							"<b>Sí</b> aparece el link de la línea <b>" + lineaType + "</b>",
 							isLineaPresent, State.Warn);
 					} else {
-						validations.add (
+						checks.add (
 							"<b>No</b> aparece el link de la línea <b>" + lineaType + "</b>",
 							!isLineaPresent, State.Warn);
 					}
@@ -106,7 +106,7 @@ public class SecMenusWrapperSteps {
 			}
 		}
 			
-		return validations;
+		return checks;
 	}
 	
 	private boolean isLineaPresent(LineaType lineaType) {
@@ -120,7 +120,7 @@ public class SecMenusWrapperSteps {
 	
 	@Validation
 	public ChecksTM checkOrderAndTranslationMenus(Linea linea, CodIdioma codIdioma) throws Exception {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		List<Label> menuInOrderTraduc = MenuTraduc.getLabels(linea.getType(), codIdioma);
 		List<DataScreenMenu> listMenusScreen = secMenusWrap.getListDataScreenMenus(linea, null);
 		ListComparator comparator = ListComparator.getNew(menuInOrderTraduc, listMenusScreen);
@@ -129,29 +129,29 @@ public class SecMenusWrapperSteps {
 		if (!menusMatch) {
 			html = "<br>" + comparator.getHtml();
 		}
-		validations.add(
+		checks.add(
 			"Los menús tienen la label y el orden esperado" + html,
 			menusMatch, State.Warn);
 
-		return validations;
+		return checks;
 	}
 	
 	@Validation
 	public ChecksTM checkLineaRebajas(boolean salesOnInCountry, DataCtxShop dCtxSh) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 3;
 		boolean isPresentLinRebajas = secMenusWrap.isLineaPresentUntil(LineaType.rebajas, maxSeconds);
 		if (salesOnInCountry && dCtxSh.pais.isVentaOnline()) {
-			validations.add(
+			checks.add(
 				PrefixRebajas + "Aparece la línea \"Rebajas\" (lo esperamos hasta " + maxSeconds + " segundos)",
 				isPresentLinRebajas, State.Defect);
 		} else {
-			validations.add(
+			checks.add(
 				PrefixRebajas + "No aparece la línea \"Rebajas\"",
 				!isPresentLinRebajas, State.Defect);
 		}
 	   
-		return validations;
+		return checks;
 	}
 
 	/**

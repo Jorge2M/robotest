@@ -1,7 +1,5 @@
 package com.mng.robotest.domains.loyalty.steps;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
@@ -12,11 +10,7 @@ import com.mng.robotest.domains.loyalty.pageobjects.PageHomeDonateLikes.ButtonLi
 
 public class PageHomeDonateLikesSteps {
 	
-	final PageHomeDonateLikes pageHomeDonateLikes;
-	
-	public PageHomeDonateLikesSteps(WebDriver driver) {
-		this.pageHomeDonateLikes = PageHomeDonateLikes.getNew(driver);
-	}
+	private final PageHomeDonateLikes pageHomeDonateLikes = new PageHomeDonateLikes();
 	
 	@Validation
 	public ChecksTM checkIsPage(int maxSeconds) {

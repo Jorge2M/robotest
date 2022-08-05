@@ -10,17 +10,17 @@ public class PageRecogidaDomicSteps {
 
 	@Validation
 	public static ChecksTM vaidaIsPageSinDevoluciones (WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Aparece la página de Recogida a Domicilio",
 			PageRecADomic.isPage(driver), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece la tabla de devoluciones",
 			PageRecADomic.isTableDevoluciones(driver), State.Defect);
-		validations.add(
+		checks.add(
 			"No aparece ningún pedido",
 			 !PageRecADomic.hayPedidos(driver), State.Info);
 
-		return validations;
+		return checks;
 	}
 }

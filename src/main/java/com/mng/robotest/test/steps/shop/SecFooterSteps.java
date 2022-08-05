@@ -38,12 +38,12 @@ public class SecFooterSteps {
 	
 	@Validation 
 	public ChecksTM validaLinksFooter() throws Exception { 
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinksFiltered(app, channel);
-		validations.add(
+		checks.add(
 			"Aparecen los siguientes links en el footer <b>" + listFooterLinksToValidate + "</b>",
 			secFooter.checkFooters(listFooterLinksToValidate), State.Defect);
-		return validations;
+		return checks;
 	}
 
 	@Step (
@@ -56,17 +56,17 @@ public class SecFooterSteps {
 	 
 	@Validation
 	private ChecksTM checkPageCorrectAfterSelectLinkFooter(String windowFatherHandle, FooterLink typeFooter, boolean closeAtEnd) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		PageFromFooter pageObject = FactoryPageFromFooter.make(typeFooter, channel, app, driver);
 		String windowActualHandle = driver.getWindowHandle();
 		boolean newWindowInNewTab = (windowActualHandle.compareTo(windowFatherHandle)!=0);
 		int maxSeconds = 5;
 		try {
-			validations.add(
+			checks.add(
 				"Aparece la página <b>" + pageObject.getName() + "</b> (la esperamos hasta " + maxSeconds + " segundos)",
 				pageObject.isPageCorrectUntil(maxSeconds), State.Warn);
 			if (typeFooter.pageInNewTab()) {
-				validations.add(
+				checks.add(
 					"Aparece la página en una ventana aparte",
 					newWindowInNewTab, State.Warn);		
 			}
@@ -80,20 +80,20 @@ public class SecFooterSteps {
 			}
 		}		
 		
-		return validations;
+		return checks;
 	}
 	 
 	@Validation
 	public ChecksTM validaPaginaAyuda() throws Exception {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		String telefono = "900 150 543";
-		validations.add(
+		checks.add(
 			"Aparece \"Preguntas Frecuentes\" en la página",
 			PageAyuda.isPresentCabPreguntasFreq(channel, driver), State.Warn);	
-		validations.add(
+		checks.add(
 			"Aparece la sección \"Contáctanos\" con el número de teléfono " + telefono,
 			PageAyuda.isPresentTelefono(driver, telefono), State.Warn);
-		return validations;
+		return checks;
 	}
 		
 	 public void checkSolicitarTarjeta () throws Exception {
@@ -117,26 +117,26 @@ public class SecFooterSteps {
 	 @Validation
 	 private ChecksTM checkAfterClickLoQuieroAhoraButton() {
 		 PageMangoCard pageMangoCard = new PageMangoCard(driver);
-		 ChecksTM validations = ChecksTM.getNew();
-		 validations.add(
+		 ChecksTM checks = ChecksTM.getNew();
+		 checks.add(
 			"Aparece el campo <b>Nombre</b>",
 	 		pageMangoCard.isPresentNameField(), State.Warn);	
-		 validations.add(
+		 checks.add(
 	 		"Aparece el campo <b>Primer Apellido</b>",
 	 		pageMangoCard.isPresentFirstSurnameField(), State.Warn);	
-		 validations.add(
+		 checks.add(
 	 		"Aparece el campo <b>Segundo Apellido</b>",
 	 		pageMangoCard.isPresentSecondSurnameField(), State.Warn);	
-		 validations.add(
+		 checks.add(
 	 		"Aparece el campo <b>Movil</b>",
 	 		pageMangoCard.isPresentMobileField(), State.Warn);
-		 validations.add(
+		 checks.add(
 	 		"Aparece el campo <b>Mail</b>",
 	 		pageMangoCard.isPresentMailField(), State.Warn);
-		 validations.add(
+		 checks.add(
 	 		"Aparece el botón <b>¡Lo quiero ahora!</b>",
 	 		pageMangoCard.isPresentButtonSolMangoCardNow(), State.Warn);
-	 	return validations;
+	 	return checks;
 	 }
 	 
 	 @Step (
@@ -151,20 +151,20 @@ public class SecFooterSteps {
 	 
 	 @Validation
 	 private ChecksTM checkAfterClickLoQuieroAhoraUnderForm() {
-  		ChecksTM validations = ChecksTM.getNew();
+  		ChecksTM checks = ChecksTM.getNew();
 		String ventanaPadre = driver.getWindowHandle();
 		SeleniumUtils.switchToAnotherWindow(driver, ventanaPadre);	
 		waitMillis(1000); //El javascript lanzado por "waitForPageLoaded" rompe la carga de la página -> hemos de aplicar wait explícito previo
 		SeleniumUtils.waitForPageLoaded(driver, 10);
-	 	validations.add(
+	 	checks.add(
 	 		"Aparece una nueva ventana",
 	 		true, State.Warn);	
 	 	
 		int maxSeconds = 3;
-	 	validations.add(
+	 	checks.add(
 	 		"Aparece un modal de aviso de trámite de la solicitud con un botón \"Continuar\" (la esperamos hasta " + maxSeconds + " segundos)",
 	 		PageInputDataSolMangoCard.isPresentBotonContinuarModalUntil(maxSeconds, driver), State.Warn);
-	 	return validations;
+	 	return checks;
 	 }
 	 
 	 @Step (
@@ -177,30 +177,30 @@ public class SecFooterSteps {
 	 
 	 @Validation
 	 private ChecksTM checkValidPageTarjetaMango(String ventanaOriginal) {
-  		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
+  		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
 	 		"Aparece la página de Solicitud de tu Tarjeta MANGO",
 	 		PageInputDataSolMangoCard.isPage2(driver), State.Defect);
 	 	
 	 	try {
 			//Nos posicionamos en el iframe central para recorrer contenido (datos personales y datos bancarios).
 			PageInputDataSolMangoCard.gotoiFramePage2(driver);
-		 	validations.add(
+		 	checks.add(
 		 		"Aparece el apartado \"Datos personales\"",
 		 		PageInputDataSolMangoCard.isPresentDatosPersonalesPage2(driver), State.Warn);	
-		 	validations.add(
+		 	checks.add(
 		 		"Aparece el apartado \"Datos bancarios\"",
 		 		PageInputDataSolMangoCard.isPresentDatosBancariosPage2(driver), State.Defect);	
-		 	validations.add(
+		 	checks.add(
 		 		"Aparece el apartado \"Datos de contacto\"",
 		 		PageInputDataSolMangoCard.isPresentDatosContactoPage2(driver), State.Warn);	
-		 	validations.add(
+		 	checks.add(
 		 		"Aparece el apartado \"Datos socioeconómicos\"",
 		 		PageInputDataSolMangoCard.isPresentDatosSocioeconomicosPage2(driver), State.Warn);	
-		 	validations.add(
+		 	checks.add(
 		 		"Aparece el apartado \"Modalidad de pago de tu MANGO Card\"",
 		 		PageInputDataSolMangoCard.isPresentModalidadpagoPage2(driver), State.Warn);	
-		 	validations.add(
+		 	checks.add(
 		 		"Aparece el botón \"Continuar\"",
 		 		PageInputDataSolMangoCard.isPresentButtonContinuarPage2(driver), State.Warn);	
 	 	}
@@ -209,7 +209,7 @@ public class SecFooterSteps {
 			driver.switchTo().window(ventanaOriginal);
 		}   
 		 
-	  	return validations;
+	  	return checks;
 	 }
 	 
 	 @Step (
@@ -235,7 +235,7 @@ public class SecFooterSteps {
 		expected="Aparecen los textos legales de RGPD")
 	public void validaRGPDFooter(Boolean clickRegister, DataCtxShop dCtxSh) throws Exception {
  		if (!clickRegister) {
- 			SecCabecera.getNew(dCtxSh.channel, dCtxSh.appE, driver).clickLogoMango();
+ 			SecCabecera.getNew(dCtxSh.channel, dCtxSh.appE).clickLogoMango();
  		}
 		secFooter.clickFooterSuscripcion();
  		if (dCtxSh.pais.getRgpd().equals("S")) {

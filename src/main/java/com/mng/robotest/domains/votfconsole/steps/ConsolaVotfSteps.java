@@ -1,7 +1,5 @@
 package com.mng.robotest.domains.votfconsole.steps;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
@@ -11,15 +9,11 @@ import com.mng.robotest.domains.votfconsole.pageobjects.PageConsola;
 import com.mng.robotest.domains.votfconsole.utils.ChecksResultWithStringData;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 
+
 public class ConsolaVotfSteps {
 
-	private final PageConsola pageConsola;
-	private final IframeResult iframeResult;
-	
-	public ConsolaVotfSteps(WebDriver driver) {
-		this.pageConsola = new PageConsola(driver);
-		this.iframeResult = new IframeResult(driver);
-	}
+	private final PageConsola pageConsola = new PageConsola();
+	private final IframeResult iframeResult = new IframeResult();
 	
 	@Step (
 		description="Nos hemos posicionado en la página inicial de VOTF",

@@ -23,14 +23,14 @@ public class PagePaytrailEpaymentSteps {
 	
 	@Validation
 	public ChecksTM validateIsPage() { 
-		ChecksTM validations = ChecksTM.getNew();
-	   	validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+	   	checks.add(
 			"Aparece la página inicial de E-Payment",
 			pageEpaymentIdent.isPage(), State.Warn);
-	   	validations.add(
+	   	checks.add(
 			"Figuran el input correspondientes al \"User ID\"",
 			pageEpaymentIdent.isPresentInputUserTypePassword(), State.Warn);	   	
-	   	return validations;
+	   	return checks;
 	}
 	
 	@Step (

@@ -20,19 +20,19 @@ public class PageMisDatosSteps {
 	
 	@Validation
 	public ChecksTM validaIsPage (String usuarioReg) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 2;
-		validations.add(
+		checks.add(
 			"Aparece una página con el la cabecera \"Mis datos\" (esperamos hasta " + maxSeconds + " segundos)",
 			pageMisDatos.isPage(maxSeconds), State.Warn);
-		validations.add(
+		checks.add(
 			"El campo de email está bloqueado",
 			pageMisDatos.emailIsDisabled(), State.Warn);
-		validations.add(
+		checks.add(
 			"El campo de email contiene " + usuarioReg,
 			pageMisDatos.getValueEmailInput().compareTo(usuarioReg.toUpperCase())==0, State.Warn);
 
-		return validations;
+		return checks;
 	}
 
 	@Validation
@@ -45,38 +45,38 @@ public class PageMisDatosSteps {
 		String poblacion = datosRegOk.get("cfCity");
 		String provincia = datosRegOk.get("estadosPais");
 
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Aparece un campo de contraseña de tipo password",
 			pageMisDatos.isVisiblePasswordTypePassword(), State.Defect);
-		validations.add(
+		checks.add(
 			"El Nombre contiene el definido durante el registro: <b>" + nombre + "</b>",
 			!(pageMisDatos.getNumInputContentVoid() > 1), State.Defect);
-		validations.add(
+		checks.add(
 			"El Apellidos contiene el definido durante el registro: <b>" + apellidos + "</b>",
 			(pageMisDatos.getText_inputNombre().compareTo(nombre)==0), State.Defect);
-		validations.add(
+		checks.add(
 			"El Email contiene el definido durante el registro: <b>" + email + "</b>",
 			(pageMisDatos.getText_inputEmail().toLowerCase().compareTo(email.toLowerCase())==0), State.Defect);
-		validations.add(
+		checks.add(
 			"La Dirección contiene la definida durante el registro: <b>" + direccion + "</b>",
 			(pageMisDatos.getText_inputDireccion().compareTo(direccion)==0), State.Defect);
-		validations.add(
+		checks.add(
 			"El Código postal contiene el definido durante el registro: <b>" + codpostal + "</b>",
 			(pageMisDatos.getText_inputCodPostal().compareTo(codpostal)==0), State.Defect);
-		validations.add(
+		checks.add(
 			"La población contiene la definida durante el registro: <b>" + poblacion + "</b>",
 			(pageMisDatos.getText_inputPoblacion().compareTo(poblacion)==0), State.Defect);
-		validations.add(
+		checks.add(
 			"Está seleccionado el país definido durante el registro: <b>" + codpais + "</b>",
 			(pageMisDatos.getCodPaisSelected().compareTo(codpais)==0), State.Defect);
 		if (provincia != null) {
-			validations.add(
+			checks.add(
 				"Está seleccionada la provincia definida durante el registro: <b>" + provincia + "</b>",
 				(pageMisDatos.getProvinciaSelected().compareTo(provincia)==0), State.Defect);
 		}
 
-		return validations;
+		return checks;
 	}
 
 	@Step(

@@ -75,10 +75,10 @@ public class SecMenusUserSteps {
 		saveHtmlPage=SaveWhen.Always)
 	public void selectRegistrate(DataCtxShop dCtxSh) throws Exception {
 		userMenus.clickMenuAndWait(UserMenu.registrate);
-		PageRegistroIni pageRegistroIni = new PageRegistroIni(driver);  
-		pageRegistroIni.clickRegisterTab(driver);
+		PageRegistroIni pageRegistroIni = new PageRegistroIni();  
+		pageRegistroIni.clickRegisterTab();
 		
-		PageRegistroIniSteps pageRegistroIniSteps = new PageRegistroIniSteps(driver);
+		PageRegistroIniSteps pageRegistroIniSteps = new PageRegistroIniSteps();
 		pageRegistroIniSteps.validaIsPageUntil(5);
 		pageRegistroIniSteps.validaIsRGPDVisible(dCtxSh);
 	}
@@ -157,7 +157,7 @@ public class SecMenusUserSteps {
 		expected="Aparece la página de \"Mi cuenta\"")
 	public int clickMenuMangoLikesYou() throws Exception {
 		userMenus.clickMenuAndWait(UserMenu.mangoLikesYou);
-		PageHomeLikesSteps pageHomeLikesSteps = new PageHomeLikesSteps(driver);
+		PageHomeLikesSteps pageHomeLikesSteps = new PageHomeLikesSteps();
 		int numberPoints = pageHomeLikesSteps.checkIsPageOk().getNumberPoints();
 		
 		StepTM step = TestMaker.getCurrentStepInExecution();

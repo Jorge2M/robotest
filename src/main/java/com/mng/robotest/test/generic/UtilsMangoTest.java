@@ -61,7 +61,7 @@ public class UtilsMangoTest {
 	public static void goToPaginaInicio(Channel channel, AppEcom app, WebDriver driver) 
 	throws Exception {
 		// Seleccionamos el logo de MANGO
-		boolean existeLogo = SecCabecera.getNew(channel, app, driver).clickLogoMango();
+		boolean existeLogo = SecCabecera.getNew(channel, app).clickLogoMango();
 		if (!existeLogo) {
 			ITestContext ctx = getTestCase().getTestRunParent().getTestNgContext();
 			String urlPaginaPostAcceso = (String)ctx.getAttribute(Constantes.attrUrlPagPostAcceso); 
@@ -86,7 +86,7 @@ public class UtilsMangoTest {
 
 	public static ArticuloScreen addArticuloBolsa(GarmentCatalog selArticulo, AppEcom app, Channel channel, WebDriver driver) {
 		ArticuloScreen articulo = ArticuloNavigations.selectArticuloTallaColorByRef(selArticulo, app, channel, driver);
-		PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
+		PageFicha pageFicha = PageFicha.newInstance(channel, app);
 		pageFicha.clickAnadirBolsaButtonAndWait(); 
 		return articulo;
 	}

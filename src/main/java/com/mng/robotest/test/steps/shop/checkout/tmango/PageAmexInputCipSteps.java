@@ -20,15 +20,15 @@ public class PageAmexInputCipSteps {
 	
 	@Validation
 	public ChecksTM validateIsPageOk(String importeTotal, String codigoPais) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 5;
-	 	validations.add(
+	 	checks.add(
 			"Aparece la página de introducción del CIP (la esperamos hasta " + maxSeconds + " segundos)",
 			pageAmexInputCip.isPageUntil(maxSeconds), State.Defect); 
-	 	validations.add(
+	 	checks.add(
 			"Aparece el importe de la operación " + importeTotal,
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codigoPais, pageAmexInputCip.driver), State.Warn);
-	 	return validations;
+	 	return checks;
 	}
 	
 	@Step (

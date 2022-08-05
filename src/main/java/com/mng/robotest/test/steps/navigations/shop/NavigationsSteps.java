@@ -10,7 +10,7 @@ import com.mng.robotest.test.steps.shop.landing.PageLandingSteps;
 public class NavigationsSteps {
 
 	public static void gotoPortada(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-		SecCabeceraSteps secCabeceraSteps = SecCabeceraSteps.getNew(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver);
+		SecCabeceraSteps secCabeceraSteps =	new SecCabeceraSteps(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE);
 		int i=0;
 		while (!secCabeceraSteps.getSecCabecera().isPresentLogoMango(1) && i<5) {
 			AllPagesSteps.backNagegador(driver);

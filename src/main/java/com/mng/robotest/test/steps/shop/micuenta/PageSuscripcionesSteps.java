@@ -39,20 +39,20 @@ public class PageSuscripcionesSteps {
 		StringTokenizer tokensLinDesmarcadas = new StringTokenizer(lineasUnchecked, ",");
 		int numLinDesmarcadas = tokensLinDesmarcadas.countTokens();
 
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Aparecen "  + numLineasTotales + " Newsletter",
 			pageSuscripciones.getNumNewsletters()==numLineasTotales, State.Warn);
-		validations.add(
+		checks.add(
 			"Aparecen "  + numLinDesmarcadas + " suscripciones desmarcadas",
 			pageSuscripciones.getNumNewslettersDesmarcadas()==numLinDesmarcadas, State.Warn);
 		while (tokensLinDesmarcadas.hasMoreElements()) {
 			String lineaStr = tokensLinDesmarcadas.nextToken();
-			validations.add(
+			checks.add(
 				"Aparecen desmarcadas las suscripciones de: " + lineasUnchecked,
 				pageSuscripciones.isNewsletterDesmarcada(lineaStr), State.Warn);
 		}
-		return validations;
+		return checks;
 	}
 
 	@Step(

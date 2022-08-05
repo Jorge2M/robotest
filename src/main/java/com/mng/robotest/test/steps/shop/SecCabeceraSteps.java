@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -12,22 +10,16 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test.steps.shop.landing.PageLandingSteps;
+
 
 public class SecCabeceraSteps {
 
 	private final SecCabecera secCabecera;
-	private final WebDriver driver;
 	private final Pais pais;
 	
-	private SecCabeceraSteps(Pais pais, Channel channel, AppEcom app, WebDriver driver) {
+	public SecCabeceraSteps(Pais pais, Channel channel, AppEcom app) {
 		this.pais = pais;
-		this.secCabecera = SecCabecera.getNew(channel, app, driver);
-		this.driver = driver;
-	}
-	
-	public static SecCabeceraSteps getNew(Pais pais, Channel channel, AppEcom app, WebDriver driver) {
-		return (new SecCabeceraSteps(pais, channel, app, driver));
+		this.secCabecera = SecCabecera.getNew(channel, app);
 	}
 	
 	public SecCabecera getSecCabecera() {
@@ -43,18 +35,18 @@ public class SecCabeceraSteps {
 
 	@Validation
 	public ChecksTM validateIconoBolsa() {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		boolean isVisibleIconoBolsa = secCabecera.isInStateIconoBolsa(Visible, 2);
 		if (pais.isVentaOnline()) {
-			validations.add(
+			checks.add(
 				"<b>Sí</b> es posible comprar (aparece la capa relacionada con la bolsa)",
 				isVisibleIconoBolsa, State.Warn);
 		} else {
-			validations.add(
+			checks.add(
 				"<b>No</b> es posible comprar (aparece la capa relacionada con la bolsa)",
 				!isVisibleIconoBolsa, State.Warn);
 		}
-		return validations;
+		return checks;
 	}
 	
 	@Step (

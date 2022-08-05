@@ -17,20 +17,20 @@ public class PageDevolucionesSteps {
 
 	@Validation
 	public static ChecksTM validaIsPage (WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Aparece la página de devoluciones",
 			PageDevoluciones.isPage(driver), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece la opción de " + Devolucion.EnTienda.getLiteral(),
 			Devolucion.EnTienda.isPresentLink(driver), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece la opcion de " + Devolucion.EnDomicilio.getLiteral(),
 			Devolucion.EnDomicilio.isPresentLink(driver), State.Defect);
-		validations.add(
+		checks.add(
 			"Aparece la opción de " + Devolucion.PuntoCeleritas.getLiteral(),
 			Devolucion.EnDomicilio.isPresentLink(driver), State.Defect);
-		return validations;
+		return checks;
 	}
 
 	@Step(

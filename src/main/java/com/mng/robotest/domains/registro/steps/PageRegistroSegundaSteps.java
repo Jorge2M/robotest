@@ -24,11 +24,7 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 
 public class PageRegistroSegundaSteps {
 	
-	private PageRegistroSegunda pageRegistroSegunda;
-	
-	public PageRegistroSegundaSteps(WebDriver driver) {
-		pageRegistroSegunda = new PageRegistroSegunda(driver);
-	}
+	private PageRegistroSegunda pageRegistroSegunda = new PageRegistroSegunda();
 	
 	@Validation
 	public ChecksTM validaIsPageRegistroOK(Pais paisRegistro, AppEcom app, Map<String,String> dataRegistro) {
@@ -120,9 +116,9 @@ public class PageRegistroSegundaSteps {
 
 		WebDriver driver = pageRegistroSegunda.driver;
 		if (paisConNinos) {
-			new PageRegistroNinosSteps(driver).validaIsPageWithNinos(numNinos);
+			new PageRegistroNinosSteps().validaIsPageWithNinos(numNinos);
 		} else {
-			new PageRegistroDirecSteps(driver).isPageFromPais(pais);
+			new PageRegistroDirecSteps().isPageFromPais(pais);
 		}
 		
 		GenericChecks.from(Arrays.asList(

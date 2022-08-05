@@ -20,18 +20,18 @@ public class AllPagesSteps {
 
 	@Validation
 	public static ChecksTM validatePageWithFooter(Pais pais, AppEcom app, WebDriver driver) throws Exception {
-		ChecksTM validations = ChecksTM.getNew();
-		validations.add(
+		ChecksTM checks = ChecksTM.getNew();
+		checks.add(
 			"Aparece el footer",
 			(new SecFooter(app, driver)).isPresent(), State.Warn);
 		
 		if (pais!=null) {
-			validations.add(
+			checks.add(
 				"Aparece el div de contenido asociado al país " + pais.getCodigo_pais(),
 				state(Present, By.xpath("//div[@class[contains(.,'main-content')] and @data-pais='" + pais.getCodigo_pais() + "']"), driver).check(),
 				State.Warn);
 		}
-		return validations;
+		return checks;
 	}
 	
 	@Validation (

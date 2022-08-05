@@ -80,7 +80,7 @@ public abstract class SecBolsa extends PageObjTM {
 	}
 	
 	public String getNumberArtIcono(Channel channel, AppEcom app) throws Exception {
-		return (SecCabecera.getNew(channel, app, driver).getNumberArtIcono());
+		return (SecCabecera.getNew(channel, app).getNumberArtIcono());
 	}
 	
 	public boolean numberItemsIsUntil(String itemsMightHave, Channel channel, AppEcom app, int maxSecodsToWait) 

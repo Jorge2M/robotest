@@ -28,7 +28,7 @@ public class SecModalPersonalizacionSteps extends PageObjTM {
 	private SecModalPersonalizacionSteps(DataCtxShop dCtxSh, WebDriver driver) {
 		super(driver);
 		this.dCtxSh = dCtxSh;
-		this.pageFichaWrap = PageFicha.newInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		this.pageFichaWrap = PageFicha.newInstance(dCtxSh.channel, dCtxSh.appE);
 	}
 	
 	public static SecModalPersonalizacionSteps getNewOne(DataCtxShop dCtxSh, WebDriver driver) {

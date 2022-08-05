@@ -4,7 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -46,12 +45,12 @@ public class PageFichaArtOld extends PageFicha {
 	private static final String XPATH_MODAL_NO_STOCK = "//div[@class='modalNoStock show']";
 	private static final String XPATH_IMAGEN_CARRUSEL_IZQ = "//div[@class='carousel-img-container']//img[@class[contains(.,'carousel-img')]]";
 	
-	private PageFichaArtOld(Channel channel, AppEcom app, WebDriver driver) {
-		super(TypeFicha.OLD, channel, app, driver);
+	private PageFichaArtOld(Channel channel, AppEcom app) {
+		super(TypeFicha.OLD, channel, app);
 	}
 	
-	public static PageFichaArtOld getNewInstance(Channel channel, AppEcom app, WebDriver driver) {
-		return (new PageFichaArtOld(channel, app, driver));
+	public static PageFichaArtOld getNewInstance(Channel channel, AppEcom app) {
+		return (new PageFichaArtOld(channel, app));
 	}
 	
 	private String getXPathIsPage(String referencia, Channel channel) {
@@ -148,12 +147,12 @@ public class PageFichaArtOld extends PageFicha {
 
 	@Override
 	public boolean isVisibleSlider(Slider typeSlider) {
-		return (secSliders.isVisible(typeSlider, this.driver));
+		return (secSliders.isVisible(typeSlider));
 	}
 	
 	@Override
 	public int getNumArtVisiblesSlider(Slider typeSlider) {
-		return (secSliders.getNumVisibleArticles(typeSlider, this.driver));
+		return (secSliders.getNumVisibleArticles(typeSlider));
 	}
 	
 	@Override

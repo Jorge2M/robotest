@@ -50,21 +50,21 @@ public class SecConfirmDatosSteps {
 	
 	@Validation
 	private static ChecksTM checkConfirmacionCambioDireccionEnvio(DataPedido dataPedido, Channel channel, AppEcom app, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 2;
-		validations.add(
+		checks.add(
 			"Desaparece la capa de Droppoints (lo esperamos hasta " + maxSeconds + " segundos)",
 			ModalDroppoints.isInvisibleUntil(maxSeconds, channel, driver), State.Warn);
 		
 		DataDeliveryPoint dataDp = dataPedido.getDataDeliveryPoint();
 		String textDireccionEnvioCompleta = new PageCheckoutWrapper(channel, app, driver).getTextDireccionEnvioCompleta();
 		dataPedido.setDireccionEnvio(textDireccionEnvioCompleta);
-		validations.add(
+		checks.add(
 			"Se modifica la dirección de envío por la del Delivery Point (" + dataDp.getDireccion() + ")",
 			textDireccionEnvioCompleta.contains(dataDp.getDireccion()), State.Defect);
-		validations.add(
+		checks.add(
 			"Se modifica el código postal de envío por el del Delivery Point (" + dataDp.getCPandPoblacion() + ")",
 			textDireccionEnvioCompleta.contains(dataDp.getCPandPoblacion()), State.Defect);
-		return validations;
+		return checks;
 	}
 }
