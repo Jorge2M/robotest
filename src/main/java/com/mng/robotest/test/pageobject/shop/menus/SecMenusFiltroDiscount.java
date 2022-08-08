@@ -1,7 +1,6 @@
 package com.mng.robotest.test.pageobject.shop.menus;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -9,36 +8,28 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecMenusFiltroDiscount extends PageObjTM {
 	
-	public enum TypeMenuDiscount {UpTo50, UpTo60, Between50y60, off60, From60, From70}
+	public enum TypeMenuDiscount { UP_TO_50, UP_TO_60, BETWEEN_50_60, OFF_60, FROM_60, FROM_70 }
 	static String XPathDivMenus = "//nav[@id='descuentoFilter']";
 	
-	private SecMenusFiltroDiscount(WebDriver driver) {
-		super(driver);
-	}
-
-	public static SecMenusFiltroDiscount getNew(WebDriver driver) {
-		return (new SecMenusFiltroDiscount(driver));
-	}
-
 	private static String getXPathMenu(TypeMenuDiscount typeMenu) {
 		String valuesParamTemporada1 = "";
 		switch (typeMenu) {
-		case UpTo50:
+		case UP_TO_50:
 			valuesParamTemporada1 = "1/49";
 			break;
-		case UpTo60:
+		case UP_TO_60:
 			valuesParamTemporada1 = "1/59";
 			break;
-		case Between50y60:
+		case BETWEEN_50_60:
 			valuesParamTemporada1 = "50/59";
 			break;
-		case off60:
+		case OFF_60:
 			valuesParamTemporada1 = "60/69";
 			break;			
-		case From60:
+		case FROM_60:
 			valuesParamTemporada1 = "60/90";
 			break;
-		case From70:
+		case FROM_70:
 		default:
 			valuesParamTemporada1 = "70/90";
 			break;

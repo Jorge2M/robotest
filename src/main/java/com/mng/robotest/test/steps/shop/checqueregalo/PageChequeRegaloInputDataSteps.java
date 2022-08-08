@@ -22,7 +22,7 @@ public class PageChequeRegaloInputDataSteps extends PageObjTM {
 	
 	public PageChequeRegaloInputDataSteps(Pais pais, WebDriver driver) {
 		super(driver);
-		this.pageChequeRegaloInputData = PageChequeRegaloInputData.make(pais, driver);
+		this.pageChequeRegaloInputData = PageChequeRegaloInputData.make(pais);
 	}
 	
 	public void paginaConsultarSaldo(String numTarjeta) throws Exception {

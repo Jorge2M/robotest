@@ -226,7 +226,7 @@ public class Compra {
 		if (typeCheque==TypeCheque.Old) {
 			secFooterSteps.clickLinkFooter(FooterLink.CHEQUE_REGALO_OLD, false);
 			pageChequeRegaloInputDataSteps.clickQuieroComprarChequeRegalo();
-			pageChequeRegaloInputDataSteps.seleccionarCantidades(Importe.euro50);
+			pageChequeRegaloInputDataSteps.seleccionarCantidades(Importe.EURO_50);
 		} else {
 			secFooterSteps.clickLinkFooter(FooterLink.CHEQUE_REGALO, false);
 			if(dCtxSh.channel.isDevice()){
@@ -235,7 +235,7 @@ public class Compra {
 				pageChequeRegaloInputDataSteps.paginaConsultarSaldo(nTarjeta);
 				pageChequeRegaloInputDataSteps.insertCVVConsultaSaldo(cvvTarjeta);
 			}
-			pageChequeRegaloInputDataSteps.seleccionarCantidades(Importe.euro50);
+			pageChequeRegaloInputDataSteps.seleccionarCantidades(Importe.EURO_50);
 			pageChequeRegaloInputDataSteps.clickQuieroComprarChequeRegalo();
 		}
 
@@ -243,7 +243,7 @@ public class Compra {
 		chequeRegalo.setNombre("Jorge");
 		chequeRegalo.setApellidos("Muñoz Martínez");
 		chequeRegalo.setEmail(Constantes.MAIL_PERSONAL);
-		chequeRegalo.setImporte(Importe.euro50);
+		chequeRegalo.setImporte(Importe.EURO_50);
 		chequeRegalo.setMensaje("Te conocía aún antes de haberte formado en el vientre de tu madre");
 		pageChequeRegaloInputDataSteps.inputDataAndClickComprar(dCtxSh.channel, dCtxSh.appE, chequeRegalo);
 

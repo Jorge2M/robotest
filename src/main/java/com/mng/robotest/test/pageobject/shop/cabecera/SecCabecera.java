@@ -43,7 +43,7 @@ public abstract class SecCabecera extends PageObjTM {
 	
 	public static SecCabecera getNew(Channel channel, AppEcom app) {
 		if (channel==Channel.mobile && app==AppEcom.outlet) {
-			return SecCabeceraOutlet_Mobil.getNew(channel, app);
+			return new SecCabeceraOutlet_Mobil(channel, app);
 		}
 		
 		switch (channel) {

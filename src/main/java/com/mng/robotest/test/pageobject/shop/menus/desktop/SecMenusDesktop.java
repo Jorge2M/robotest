@@ -25,7 +25,7 @@ public class SecMenusDesktop extends PageObjTM {
 		secMenuSuperior = SecMenuSuperiorDesktop.getNew(app, channel);
 		secMenusUser = ModalUserSesionShopDesktop.getNew(driver);
 		secMenuLateral = SecMenuLateralDesktop.getNew(app);
-		secMenusFiltroDiscount = SecMenusFiltroDiscount.getNew(driver);
+		secMenusFiltroDiscount = new SecMenusFiltroDiscount();
 	}
 	
 	public void hideMenus() {

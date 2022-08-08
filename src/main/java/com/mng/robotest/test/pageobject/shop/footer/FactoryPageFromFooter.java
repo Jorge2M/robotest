@@ -27,9 +27,9 @@ public class FactoryPageFromFooter {
 		case MANGO_CARD:
 			return (new PageMangoCard(driver));
 		case CHEQUE_REGALO:
-			return (new PageChequeRegaloInputDataNew(driver));
+			return (new PageChequeRegaloInputDataNew());
 		case CHEQUE_REGALO_OLD:
-			return (new PageChequeRegaloInputDataOld(driver));
+			return (new PageChequeRegaloInputDataOld());
 		case APPS:
 			return (new PageMangoShoppingApp(driver));
 		case EMPRESA:

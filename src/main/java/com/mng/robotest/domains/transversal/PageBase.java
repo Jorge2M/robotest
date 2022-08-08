@@ -28,5 +28,18 @@ public class PageBase extends PageObjTM {
 		this.app = (AppEcom)inputParamsSuite.getApp();
 		this.channel = inputParamsSuite.getChannel();
 	}
+	
+	public PageBase(Channel channel, AppEcom app) {
+		super();
+		InputParamsMango inputParams = null;
+		try {
+			inputParams = (InputParamsMango)TestMaker.getInputParamsSuite();
+		} catch (Exception e) {
+			inputParams = null;
+		}
+		this.inputParamsSuite = inputParams;
+		this.channel = channel;
+		this.app = app;
+	}	
 
 }
