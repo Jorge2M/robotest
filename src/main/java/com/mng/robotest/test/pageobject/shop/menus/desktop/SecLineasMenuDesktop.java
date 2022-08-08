@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -20,6 +19,7 @@ import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
+
 
 public abstract class SecLineasMenuDesktop extends PageObjTM {
 	
@@ -42,14 +42,13 @@ public abstract class SecLineasMenuDesktop extends PageObjTM {
 			 "@class[contains(.,'section-detail-list')]) " + //Caso países tipo Colombia con 1 sola sublínea 
 			"and @data-brand='" + TagIdSublinea + "']";
 
-	protected SecLineasMenuDesktop(AppEcom app, Channel channel, WebDriver driver) {
-		super(driver);
+	protected SecLineasMenuDesktop(AppEcom app, Channel channel) {
 		this.app = app;
 		this.channel = channel;
 	}
 	
-	public static SecLineasMenuDesktop factory(AppEcom app, Channel channel, WebDriver driver) {
-		return new SecLineasMenuDesktopNew(app, channel, driver);
+	public static SecLineasMenuDesktop factory(AppEcom app, Channel channel) {
+		return new SecLineasMenuDesktopNew(app, channel);
 	}
 
 	public String getXPathLineaSelected(LineaType lineaType) {

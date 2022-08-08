@@ -14,42 +14,41 @@ import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
 
 public class SecLineasMenuDesktopNew extends SecLineasMenuDesktop {
 
-	//private static String XPathMenuFatherWrapper = "//micro-frontend[@id='header']/div";
-	private static String XPathMenuFatherWrapper = "//micro-frontend[@id='header']";
-	private static final String XPathLinea = "//li[@data-testid[contains(.,'header.menuItem')]]";
-	private static String XPathLineasMenuWrapper = XPathLinea + "/..";
-	private static final String XPathLineaSpecificWithTag = XPathLinea + "//self::*[@data-testid[contains(.,'Item." + TagIdLinea + "')]]";
+	private static final String XPATH_MENU_FATHER_WRAPPER = "//micro-frontend[@id='header']";
+	private static final String XPATH_LINEA = "//li[@data-testid[contains(.,'header.menuItem')]]";
+	private static final String XPATH_LINEAS_MENU_WRAPPER = XPATH_LINEA + "/..";
+	private static final String XPATH_LINEA_SPECIFIC_WITH_TAG = XPATH_LINEA + "//self::*[@data-testid[contains(.,'Item." + TagIdLinea + "')]]";
 	
-	private static final String TagIdSublinea = "@SublineaId";
-	private static final String XPathSublineaWithTag = "//li[@id[contains(.,'" + TagIdSublinea+ "')] and @data-testid[contains(.,'section')]]";
+	private static final String TAG_ID_SUBLINEA = "@SublineaId";
+	private static final String XPATH_SUBLINEA_WITH_TAG = "//li[@id[contains(.,'" + TAG_ID_SUBLINEA+ "')] and @data-testid[contains(.,'section')]]";
 	
-	public SecLineasMenuDesktopNew(AppEcom app, Channel channel, WebDriver driver) {
-		super(app, channel, driver);
+	public SecLineasMenuDesktopNew(AppEcom app, Channel channel) {
+		super(app, channel);
 	}
 	
 	private String getXPathSublineaLink(SublineaType sublineaType) {
-		return (XPathSublineaWithTag.replace(TagIdSublinea, sublineaType.getId(app)) + "//span");
+		return (XPATH_SUBLINEA_WITH_TAG.replace(TAG_ID_SUBLINEA, sublineaType.getId(app)) + "//span");
 	}
 	
 	@Override
 	public String getXPathMenuFatherWrapper() {
-		return XPathMenuFatherWrapper;
+		return XPATH_MENU_FATHER_WRAPPER;
 	}
 	
 	@Override
 	public String getXPathLineasMenuWrapper() {
-		return XPathLineasMenuWrapper;
+		return XPATH_LINEAS_MENU_WRAPPER;
 	}
 	
 	@Override
 	public String getXPathLinea() {
-		return XPathLinea;
+		return XPATH_LINEA;
 	}
 	
 	@Override
 	public String getXPathLinea(LineaType lineaType) {
 		String lineaIddom = SecMenusWrap.getIdLineaEnDOM(Channel.desktop, app, lineaType);
-		return (XPathLineaSpecificWithTag.replace(TagIdLinea, lineaIddom));
+		return (XPATH_LINEA_SPECIFIC_WITH_TAG.replace(TagIdLinea, lineaIddom));
 	}
 	
 	@Override

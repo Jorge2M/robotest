@@ -768,7 +768,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(channel, app, driver);
 		secFiltros.makeFilters(Visibility.Invisible);
 		
-		SecLineasMenuDesktop secLineasMenuDesktop = SecLineasMenuDesktop.factory(app, channel, driver);
+		SecLineasMenuDesktop secLineasMenuDesktop = SecLineasMenuDesktop.factory(app, channel);
 		secLineasMenuDesktop.bringMenuBackground();
 		
 		hearthIcon.click();

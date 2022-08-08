@@ -55,7 +55,7 @@ public abstract class SecBloquesMenuDesktop extends PageObjTM {
 	protected SecBloquesMenuDesktop(AppEcom app, Channel channel) {
 		this.app = app;
 		this.channel = channel;
-		this.secLineasMenu = SecLineasMenuDesktop.factory(app, channel, driver);
+		this.secLineasMenu = SecLineasMenuDesktop.factory(app, channel);
 	}
 	
 	public static SecBloquesMenuDesktop factory(AppEcom app, Channel channel) {
