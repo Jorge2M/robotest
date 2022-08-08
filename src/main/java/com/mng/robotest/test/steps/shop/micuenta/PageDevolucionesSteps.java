@@ -41,7 +41,7 @@ public class PageDevolucionesSteps {
 		Devolucion.EnDomicilio.click(driver);
 		Devolucion.EnDomicilio.waitForInState(desplegada, 2, driver);
 		PageDevoluciones.clickSolicitarRecogida(driver);
-		PageRecogidaDomicSteps.vaidaIsPageSinDevoluciones(driver);
+		new PageRecogidaDomicSteps().vaidaIsPageSinDevoluciones();
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO, 

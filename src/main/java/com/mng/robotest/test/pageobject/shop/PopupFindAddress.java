@@ -1,29 +1,23 @@
 package com.mng.robotest.test.pageobject.shop;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-/**
- * Implementa la API para el pupup que aparece cuando seleccionamos el botón "Find Address" desde la página de introducción de datos del usuario (actualmente sólo existe en Corea del Sur)
- * @author jorge.munoz
- *
- */
-public class PopupFindAddress {
+public class PopupFindAddress extends PageObjTM {
 
-	private static final String XPathInputBuscador = "//input[@id='region_name']";
-	private static final String XPathButtonLupa = "//button[@class='btn_search']";
-	private static final String XPathLinkDirecc = "//button[@class='link_post']";
+	private static final String XPATH_INPUT_BUSCADOR = "//input[@id='region_name']";
+	private static final String XPATH_BUTTON_LUPA = "//button[@class='btn_search']";
+	private static final String XPATH_LINK_DIRECC = "//button[@class='link_post']";
 	
-	public static String goToPopupAndWait(String mainWindowHandle, int maxSecondsToWait, WebDriver driver) throws Exception { 
+	public String goToPopupAndWait(String mainWindowHandle, int maxSecondsToWait) throws Exception { 
 		String popupBuscador = switchToAnotherWindow(driver, mainWindowHandle);
 		try {
-			isIFrameUntil(maxSecondsToWait, driver);
+			isIFrameUntil(maxSecondsToWait);
 		}
 		catch (Exception e) {
 			Log4jTM.getLogger().warn("Exception going to Find Address Popup. ", e);
@@ -31,29 +25,27 @@ public class PopupFindAddress {
 		return popupBuscador;
 	}
 
-	public static boolean isIFrameUntil(int maxSeconds, WebDriver driver) {
-		return (state(Present, By.xpath("//iframe"), driver)
-				.wait(maxSeconds).check());
+	public boolean isIFrameUntil(int maxSeconds) {
+		return (state(Present, By.xpath("//iframe")).wait(maxSeconds).check());
 	}
 
-	public static boolean isBuscadorClickableUntil(int maxSeconds, WebDriver driver) {
-		return (state(Clickable, By.xpath(XPathInputBuscador), driver)
-				.wait(maxSeconds).check());
+	public boolean isBuscadorClickableUntil(int maxSeconds) {
+		return (state(Clickable, By.xpath(XPATH_INPUT_BUSCADOR)).wait(maxSeconds).check());
 	}
 
-	public static void setDataBuscador(WebDriver driver, String data) {
-		driver.findElement(By.xpath(XPathInputBuscador)).sendKeys(data);
+	public void setDataBuscador(String data) {
+		driver.findElement(By.xpath(XPATH_INPUT_BUSCADOR)).sendKeys(data);
 	}
 
-	public static void clickButtonLupa(WebDriver driver) {
-		click(By.xpath(XPathButtonLupa), driver).exec();
+	public void clickButtonLupa() {
+		click(By.xpath(XPATH_BUTTON_LUPA)).exec();
 	}
 
-	public static void clickFirstDirecc(WebDriver driver) {
-		driver.findElement(By.xpath(XPathLinkDirecc)).click();
+	public void clickFirstDirecc() {
+		driver.findElement(By.xpath(XPATH_LINK_DIRECC)).click();
 	}
 	
-	public static void switchToIFrame(WebDriver driver) {
+	public void switchToIFrame() {
 		driver.switchTo().frame(0);
 	}
 }

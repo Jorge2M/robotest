@@ -100,7 +100,7 @@ public class PageGaleriaSteps {
 		datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
 
 		String detailWindowHandle = pageGaleria.openArticuloPestanyaAndGo(articulo, app);
-		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(app, channel, pais);
+		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(pais);
 		pageFichaSteps.validaDetallesProducto(datosArticulo);
 
 		if (detailWindowHandle.compareTo(galeryWindowHandle)!=0) {
@@ -124,7 +124,7 @@ public class PageGaleriaSteps {
 		datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
 
 		pageGaleria.clickArticulo(articulo);
-		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
+		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(dCtxSh.pais);
 		pageFichaSteps.validaDetallesProducto(datosArticulo);
 		pageFichaSteps.validaPrevNext(locationArt, dCtxSh);
 

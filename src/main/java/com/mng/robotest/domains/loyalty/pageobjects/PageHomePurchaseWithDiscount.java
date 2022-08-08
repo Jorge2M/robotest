@@ -1,11 +1,11 @@
 package com.mng.robotest.domains.loyalty.pageobjects;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import org.openqa.selenium.By;
 
 
-public class PageHomePurchaseWithDiscount extends PageObjTM {
+public class PageHomePurchaseWithDiscount extends PageBase {
 
 	private static final String ID_BLOCK_LOYALTY = "loyaltyLoyaltySpace";
 	private static final String XPATH_BUTTON_PURCHASE_NOW = "//a[text()='Comprar ahora']";

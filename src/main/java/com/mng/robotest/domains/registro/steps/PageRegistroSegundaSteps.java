@@ -15,6 +15,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroSegunda;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.data.Constantes.ThreeState;
@@ -22,12 +23,12 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 
-public class PageRegistroSegundaSteps {
+public class PageRegistroSegundaSteps extends StepBase {
 	
 	private PageRegistroSegunda pageRegistroSegunda = new PageRegistroSegunda();
 	
 	@Validation
-	public ChecksTM validaIsPageRegistroOK(Pais paisRegistro, AppEcom app, Map<String,String> dataRegistro) {
+	public ChecksTM validaIsPageRegistroOK(Pais paisRegistro, Map<String,String> dataRegistro) {
 		ChecksTM checks = ChecksTM.getNew();
 		String lineasComaSeparated = "";
 		int numLineas = 0;

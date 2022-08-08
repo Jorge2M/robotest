@@ -4,11 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecSearchMobilOutlet extends PageObjTM implements SecSearch {
+public class SecSearchMobilOutlet extends PageBase implements SecSearch {
 	
 	private static final String XPATH_INPUT_BUSCADOR = "//form[not(@class)]/input[@class[contains(.,'search-input')]]";
 	private static final String XPATH_CANCELAR_LINK = "//div[@class='search-cancel']";

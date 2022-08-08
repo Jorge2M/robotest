@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.buscador.pageobjects;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import org.openqa.selenium.By;
@@ -8,7 +8,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 
-public class SecSearchDesktop extends PageObjTM implements SecSearch {
+public class SecSearchDesktop extends PageBase implements SecSearch {
 	
 	private static final String XPATH_INPUT_BUSCADOR = "//input[@data-testid='header.search.input']";
 	private static final String XPATH_CLOSE_ASPA = "//span[@class[contains(.,'icon-outline-close')]]";

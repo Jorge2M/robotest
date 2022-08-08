@@ -332,7 +332,7 @@ public class SecBolsaSteps {
 		secBolsa.click1erArticuloBolsa();
 
 		String refArticulo = articuloClickado.getReferencia();
-		PageFichaArtSteps pageFichaStpv = new PageFichaArtSteps(app, channel, pais);
+		PageFichaArtSteps pageFichaStpv = new PageFichaArtSteps(pais);
 		pageFichaStpv.validateIsFichaArtDisponible(refArticulo, 3);
 	}
 }

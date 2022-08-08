@@ -4,13 +4,14 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.domains.votfconsole.pageobjects.IframeResult;
 import com.mng.robotest.domains.votfconsole.pageobjects.PageConsola;
 import com.mng.robotest.domains.votfconsole.utils.ChecksResultWithStringData;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 
 
-public class ConsolaVotfSteps {
+public class ConsolaVotfSteps extends StepBase {
 
 	private final PageConsola pageConsola = new PageConsola();
 	private final IframeResult iframeResult = new IframeResult();

@@ -64,8 +64,7 @@ public class Page2IdentCheckout extends PageObjTM {
 	//Con el substring simulamos un ends-with (que no está disponible en xpath 1.0)
 	private static final String XPATH_SELECT_LOCALIDADES = "//select[substring(@id, string-length(@id) - string-length('localidades') +1) = 'localidades']";
 
-	public Page2IdentCheckout(Pais pais, WebDriver driver) {
-		super(driver);
+	public Page2IdentCheckout(Pais pais) {
 		this.pais = pais;
 		this.egyptCity = null;
 	}
@@ -293,13 +292,14 @@ public class Page2IdentCheckout extends PageObjTM {
 			clickBotonFindAddress();
 			String mainWindowHandle = driver.getWindowHandle();
 			try {
-				String popupBuscador = PopupFindAddress.goToPopupAndWait(mainWindowHandle, 5, driver);
-				if ("".compareTo(popupBuscador)!=0 && PopupFindAddress.isIFrameUntil(0, driver)) {
-					PopupFindAddress.switchToIFrame(driver);
-					if (PopupFindAddress.isBuscadorClickableUntil(2/*maxSecondsToWait*/, driver)) {
-						PopupFindAddress.setDataBuscador(driver, pais.getCodpos());
-						PopupFindAddress.clickButtonLupa(driver);
-						PopupFindAddress.clickFirstDirecc(driver);
+				PopupFindAddress popupFindAddress = new PopupFindAddress();
+				String popupBuscador = popupFindAddress.goToPopupAndWait(mainWindowHandle, 5);
+				if ("".compareTo(popupBuscador)!=0 && popupFindAddress.isIFrameUntil(0)) {
+					popupFindAddress.switchToIFrame();
+					if (popupFindAddress.isBuscadorClickableUntil(2)) {
+						popupFindAddress.setDataBuscador(pais.getCodpos());
+						popupFindAddress.clickButtonLupa();
+						popupFindAddress.clickFirstDirecc();
 					}
 				}
 			}

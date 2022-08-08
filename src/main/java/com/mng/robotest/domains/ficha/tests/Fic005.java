@@ -25,8 +25,8 @@ public class Fic005 extends TestBase {
 
 	final GarmentCatalog articlePersonalizable;
 	
-	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps(app, channel);
-	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(app, channel, dataTest.pais);
+	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
+	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(dataTest.pais);
 	final SecModalPersonalizacionSteps modalPersonalizacionSteps = SecModalPersonalizacionSteps.getNewOne(dataTest, driver);
 	
 	public Fic005() throws Exception {

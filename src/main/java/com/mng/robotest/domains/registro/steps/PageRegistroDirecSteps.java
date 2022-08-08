@@ -2,18 +2,18 @@ package com.mng.robotest.domains.registro.steps;
 
 import java.util.Map;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroAddressData;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroDirec;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataCtxShop;
 
 
-public class PageRegistroDirecSteps {
+public class PageRegistroDirecSteps extends StepBase {
 	
 	private final PageRegistroAddressData pageRegistroAddressData = new PageRegistroAddressData();
 	private final PageRegistroDirec pageRegistroDirec = new PageRegistroDirec();
@@ -35,9 +35,9 @@ public class PageRegistroDirecSteps {
 	@Step (
 		description="Introducir los datos correctos para el país #{pais.getNombre_pais()}", 
 		expected="No aparece ningún mensaje de error")
-	public void sendDataAccordingCountryToInputs(Map<String,String> dataRegistro, Pais pais, Channel channel) 
+	public void sendDataAccordingCountryToInputs(Map<String,String> dataRegistro, Pais pais) 
 			throws Exception {
-		pageRegistroDirec.sendDataAccordingCountryToInputs(dataRegistro, pais, channel);
+		pageRegistroDirec.sendDataAccordingCountryToInputs(dataRegistro, pais);
 		validateInputDataOk();
 	}
 

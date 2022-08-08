@@ -6,12 +6,12 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class IframeResult extends PageObjTM {
+public class IframeResult extends PageBase {
 	
 	private static final String XPATH_BLOCK_RESULTADO = "//*[@class[contains(.,'response__content')]]";
 	private static final String XPATH_BLOCK_TRANSPORTES = "//div[@class[contains(.,'transportes__content')]]";

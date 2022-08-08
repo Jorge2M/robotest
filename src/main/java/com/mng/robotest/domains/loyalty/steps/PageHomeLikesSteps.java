@@ -3,13 +3,14 @@ package com.mng.robotest.domains.loyalty.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.mng.robotest.domains.loyalty.pageobjects.PageHomeLikes;
 import com.mng.robotest.domains.loyalty.pageobjects.PageHomeLikes.ButtonUseLikes;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps.ChecksResultWithNumberPoints;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 
 
-public class PageHomeLikesSteps {
+public class PageHomeLikesSteps extends StepBase {
 
 	private final PageHomeLikes pageHomeLikes = new PageHomeLikes();
 	

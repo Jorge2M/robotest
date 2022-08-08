@@ -2,13 +2,13 @@ package com.mng.robotest.domains.ficha.pageobjects.tallas;
 
 import org.openqa.selenium.By;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SSecSelTallasFichaNew extends PageObjTM implements SSecSelTallasFicha {
+public class SSecSelTallasFichaNew extends PageBase implements SSecSelTallasFicha {
 	
 	private static final String XPathCapaTallas = "//form/div[@class='sizes']";
 	private static final String XPathSelectorTallas = XPathCapaTallas + "/div[@class='selector']";

@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -25,7 +25,7 @@ import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.checkout.Page2IdentCheckout;
 
 
-public class PageRegistroIni extends PageObjTM {
+public class PageRegistroIni extends PageBase {
 	
 	private static final String XPATH_PESTANYA_REGISTRO = "//*[@class[contains(.,'registerTab')]]";
 	private static final String XPATH_HEADER_NEWS = "//div[@class[contains(.,'registerModal')]]//div[@class='info']";
@@ -145,7 +145,7 @@ public class PageRegistroIni extends PageObjTM {
 	
 	public Map<String,String> sendDataAccordingCountryToInputs(
 			Pais pais, String emailNonExistent, boolean clickPubli, Channel channel) throws Exception {
-		return (new Page2IdentCheckout(pais, driver)
+		return (new Page2IdentCheckout(pais)
 				.inputDataPorDefectoSegunPais(emailNonExistent, false, clickPubli, channel));
 	}
 	

@@ -1,11 +1,11 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
 import org.openqa.selenium.By;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecSlidersOld extends PageObjTM {
+public class SecSlidersOld extends PageBase {
 	
 	private static final String XPATH_ELEGIDO_PARA_TI = "//div[@class='recommendations']";
 	private static final String XPATH_ELEGIDO_PARA_TI_CABECERA = XPATH_ELEGIDO_PARA_TI + "/p";

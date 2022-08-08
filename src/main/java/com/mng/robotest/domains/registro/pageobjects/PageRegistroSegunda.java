@@ -6,12 +6,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageRegistroSegunda extends PageObjTM {
+public class PageRegistroSegunda extends PageBase {
 
 	private static final String XPATH_NEWSLETTER_TITLE = "//div[@class[contains(.,'additionalData')]]//span[@class='info']";
 	private static final String XPATH_FORM_STEP2 = "//form[@class[contains(.,'customFormIdSTEP2')]]";

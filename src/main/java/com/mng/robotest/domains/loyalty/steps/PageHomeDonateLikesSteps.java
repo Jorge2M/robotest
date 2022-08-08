@@ -6,9 +6,10 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.loyalty.pageobjects.PageHomeDonateLikes;
 import com.mng.robotest.domains.loyalty.pageobjects.PageHomeDonateLikes.ButtonLikes;
+import com.mng.robotest.domains.transversal.StepBase;
 
 
-public class PageHomeDonateLikesSteps {
+public class PageHomeDonateLikesSteps extends StepBase {
 	
 	private final PageHomeDonateLikes pageHomeDonateLikes = new PageHomeDonateLikes();
 	

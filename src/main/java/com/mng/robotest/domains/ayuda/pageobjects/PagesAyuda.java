@@ -2,11 +2,11 @@ package com.mng.robotest.domains.ayuda.pageobjects;
 
 import org.openqa.selenium.By;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 
-public class PagesAyuda extends PageObjTM {
+public class PagesAyuda extends PageBase {
 	
 	private static final String TAG = "@TAG";
 	private static final String XPATH_ICON_WITH_TAG = "//*[@data-testid='link-list-grid-item-icon']/..//*[text()='" + TAG + "']";

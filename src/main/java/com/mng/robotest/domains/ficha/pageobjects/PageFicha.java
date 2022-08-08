@@ -4,13 +4,13 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 
 @SuppressWarnings({"static-access"})
-public abstract class PageFicha extends PageObjTM {
+public abstract class PageFicha extends PageBase {
 
-	public enum TypeFicha {OLD, NEW}
+	public enum TypeFicha { OLD, NEW }
 	
 	public abstract boolean isPageUntil(int maxSeconds);
 	public abstract boolean isFichaArticuloUntil(String refArticulo, int maxSecondsToWait);
@@ -32,14 +32,10 @@ public abstract class PageFicha extends PageObjTM {
 	public static SecFitFinder secFitFinder; //Guía de tallas v.Fit Finder
 	
 	private final TypeFicha typeFicha;
-	final Channel channel;
-	final AppEcom appE;
 	
-	public PageFicha(TypeFicha typeFicha, Channel channel, AppEcom app) {
-		this.secDataProduct = new SecDataProduct(typeFicha, channel, app);
+	public PageFicha(TypeFicha typeFicha) {
+		this.secDataProduct = new SecDataProduct(typeFicha);
 		this.typeFicha = typeFicha;
-		this.channel = channel;
-		this.appE = app;
 	}
 	
 	public TypeFicha getTypeFicha() {
@@ -53,15 +49,15 @@ public abstract class PageFicha extends PageObjTM {
 	public static PageFicha newInstance(Channel channel, AppEcom app) {
 		PageFicha pageFicha;
 		if (app==AppEcom.outlet || channel.isDevice()) {
-			pageFicha = PageFichaArtOld.getNewInstance(channel, app);
+			pageFicha = PageFichaArtOld.getNewInstance();
 		} else {
-			pageFicha = PageFichaArt_DesktopShop.getNewInstance(channel, app);
+			pageFicha = PageFichaArt_DesktopShop.getNewInstance();
 		}
 		return pageFicha;
 	}
 	
-	public static PageFicha newInstanceFichaNew(Channel channel, AppEcom app) {
-		return PageFichaArt_DesktopShop.getNewInstance(channel, app);
+	public static PageFicha newInstanceFichaNew() {
+		return PageFichaArt_DesktopShop.getNewInstance();
 	}
 	
 	public ArticuloScreen getArticuloObject() {
@@ -73,7 +69,7 @@ public abstract class PageFicha extends PageObjTM {
 	}
 	
 	public Talla getTallaSelected() {
-		return (secDataProduct.getSecSelTallas().getTallaSelected(appE));
+		return (secDataProduct.getSecSelTallas().getTallaSelected(app));
 	}
 	
 	public void selectTallaByValue(Talla talla) {

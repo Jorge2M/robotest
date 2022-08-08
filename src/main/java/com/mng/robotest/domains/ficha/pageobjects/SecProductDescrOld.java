@@ -9,16 +9,13 @@ import org.openqa.selenium.WebElement;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 
 
-public class SecProductDescrOld extends PageObjTM {
+public class SecProductDescrOld extends PageBase {
 
-	private final Channel channel;
-	private final AppEcom app;
-	
 	public enum TypeStatePanel { FOLDED, UNFOLDED, MISSING }
 	public enum TypePanel {
 		DESCRIPTION(
@@ -70,11 +67,6 @@ public class SecProductDescrOld extends PageObjTM {
 		public TypeStatePanel getStateInitial() {
 			return this.stateInitial;
 		}
-	}
-	
-	public SecProductDescrOld(Channel channel, AppEcom app) {
-		this.channel = channel;
-		this.app = app;
 	}
 	
 	public TypeStatePanel getStatePanelAfterClick(TypeStatePanel stateOriginal) {

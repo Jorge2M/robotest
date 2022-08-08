@@ -47,10 +47,10 @@ public class Reg003 extends TestBase {
 
 	private void registerAndGoShoppingNoPubli() throws Exception {
 		dataRegister = 
-				pageRegistroIniSteps.sendDataAccordingCountryToInputs(dataTest.pais, emailNonExistent, false, channel);
+				pageRegistroIniSteps.sendDataAccordingCountryToInputs(dataTest.pais, emailNonExistent, false);
 		
-		pageRegistroIniSteps.clickRegistrateButton(dataTest.pais, app, dataRegister);
-		pageRegistroDirecSteps.sendDataAccordingCountryToInputs(dataRegister, dataTest.pais, channel);
+		pageRegistroIniSteps.clickRegistrateButton(dataTest.pais, dataRegister);
+		pageRegistroDirecSteps.sendDataAccordingCountryToInputs(dataRegister, dataTest.pais);
 		pageRegistroDirecSteps.clickFinalizarButton(dataTest);
 		pageRegistroFinSteps.clickIrDeShoppingButton();
 		userMenusSteps.checkVisibilityLinkMangoLikesYou();

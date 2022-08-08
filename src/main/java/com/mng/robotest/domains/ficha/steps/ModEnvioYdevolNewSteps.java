@@ -4,9 +4,10 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.ficha.pageobjects.ModEnvioYdevolNew;
+import com.mng.robotest.domains.transversal.StepBase;
 
 
-public class ModEnvioYdevolNewSteps {
+public class ModEnvioYdevolNewSteps extends StepBase {
 
 	private final ModEnvioYdevolNew modEnvioYdev = new ModEnvioYdevolNew();
 	

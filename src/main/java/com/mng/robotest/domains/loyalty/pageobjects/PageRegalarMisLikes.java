@@ -3,13 +3,13 @@ package com.mng.robotest.domains.loyalty.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageRegalarMisLikes extends PageObjTM {
+public class PageRegalarMisLikes extends PageBase {
 	
 	private static final String XPATH_WRAPPER_PAGE = "//div[@id='loyaltyTransferLikes']";
 	private static final String XPATH_INPUT_MESSAGE = "//input[@name='name']";

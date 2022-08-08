@@ -6,7 +6,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -20,7 +20,7 @@ import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class SecModalPersonalizacionSteps extends PageObjTM {
+public class SecModalPersonalizacionSteps extends PageBase {
 
 	DataCtxShop dCtxSh;
 	PageFicha pageFichaWrap;

@@ -1,12 +1,12 @@
 package com.mng.robotest.domains.registro.pageobjects;
 
 import org.openqa.selenium.By;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageRegistroAddressData extends PageObjTM {
+public class PageRegistroAddressData extends PageBase {
 
 	private static final String XPATH_TITLE_ADDRESS_STEPS = "//div[@class[contains(.,'addressData')]]";
 	private static final String XPATH_DESPLEGABLE_PAISES = "//select[@id[contains(.,'pais')]]";

@@ -17,7 +17,7 @@ import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.utils.ImporteScreen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -28,22 +28,18 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
  *
  */
 @SuppressWarnings({"static-access"})
-public class SecDataProduct extends PageObjTM {
+public class SecDataProduct extends PageBase {
 	
 	public enum ProductNav { PREV, NEXT }
 	
 	private final SSecSelTallasFicha secSelTallas;
-	private final Channel channel;
-	private final AppEcom app;
 
 	private static final String XPATH_NOMBRE_ARTICULO_DESKTOP = "//h1[@itemprop='name']";
 	
 	//Existe un Test A/B que hace que el nombre del artículo salga debajo del botón de "Añadir a la bolsa" o en la cabecera, por eso el or.
 	private static final String XPATH_NOMBRE_ARTICULO_MOBIL = "//*[@class[contains(.,'product-info-name')] or @class='headerMobile__text']";
 	
-	public SecDataProduct(TypeFicha typeFicha, Channel channel, AppEcom app) {
-		this.channel = channel;
-		this.app = app;
+	public SecDataProduct(TypeFicha typeFicha) {
 		this.secSelTallas = SSecSelTallasFicha.make(typeFicha, channel, app);
 	}
 	

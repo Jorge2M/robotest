@@ -1,7 +1,5 @@
 package com.mng.robotest.domains.ficha.steps;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
@@ -18,6 +16,7 @@ import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.ficha.pageobjects.PageFichaArtOld;
 import com.mng.robotest.domains.ficha.pageobjects.SecBreadcrumbFichaOld;
 import com.mng.robotest.domains.ficha.pageobjects.Slider;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha.TypeFicha;
 import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.ActionFavButton;
 import com.mng.robotest.domains.ficha.pageobjects.SecBreadcrumbFichaOld.ItemBCrumb;
@@ -43,11 +42,7 @@ import java.util.List;
 
 
 @SuppressWarnings({"static-access"})
-public class PageFichaArtSteps {
-	
-	private final WebDriver driver = TestMaker.getDriverTestCase();
-	Channel channel;
-	AppEcom app;
+public class PageFichaArtSteps extends StepBase {
 	
 	private final PageFicha pageFicha;
 	private final SecBolsa secBolsa;
@@ -58,13 +53,11 @@ public class PageFichaArtSteps {
 	private final SecFitFinderSteps secFitFinderSteps;
 	private final SecTotalLookSteps secTotalLookSteps;
 	
-	public PageFichaArtSteps(AppEcom appE, Channel channel, Pais pais) {
-		this.channel = channel;
-		this.app = appE;
-		this.pageFicha = PageFicha.newInstance(channel, appE);
+	public PageFichaArtSteps(Pais pais) {
+		this.pageFicha = PageFicha.newInstance(channel, app);
 		this.secBolsa = SecBolsa.make(channel, app, pais);
 		this.modEnvioYdevolSteps = new ModEnvioYdevolNewSteps();
-		this.secProductDescOldSteps = new SecProductDescrOldSteps(channel, appE);
+		this.secProductDescOldSteps = new SecProductDescrOldSteps();
 		this.secTotalLookSteps = new SecTotalLookSteps();
 		this.secFitFinderSteps = new SecFitFinderSteps();
 		this.secBolsaButtonAndLinksNewSteps = new SecBolsaButtonAndLinksNewSteps();
@@ -387,7 +380,7 @@ public class PageFichaArtSteps {
 	public void selectBuscarEnTiendaButton() {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagNameLink, pageFicha.getNameLinkBuscarEnTienda());
 		pageFicha.selectBuscarEnTiendaLink();
-		new ModalBuscadorTiendasSteps(channel, app, driver).validaBusquedaConResultados();
+		new ModalBuscadorTiendasSteps().validaBusquedaConResultados();
 	}
 
 	@Step (

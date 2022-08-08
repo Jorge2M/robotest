@@ -1,25 +1,27 @@
 package com.mng.robotest.test.steps.shop.micuenta;
 
-import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test.pageobject.shop.PageRecADomic;
 
+
 public class PageRecogidaDomicSteps {
 
+	private final PageRecADomic pageRecADomic = new PageRecADomic();
+	
 	@Validation
-	public static ChecksTM vaidaIsPageSinDevoluciones (WebDriver driver) {
+	public ChecksTM vaidaIsPageSinDevoluciones () {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de Recogida a Domicilio",
-			PageRecADomic.isPage(driver), State.Defect);
+			pageRecADomic.isPage(), State.Defect);
 		checks.add(
 			"Aparece la tabla de devoluciones",
-			PageRecADomic.isTableDevoluciones(driver), State.Defect);
+			pageRecADomic.isTableDevoluciones(), State.Defect);
 		checks.add(
 			"No aparece ningún pedido",
-			 !PageRecADomic.hayPedidos(driver), State.Info);
+			 !pageRecADomic.hayPedidos(), State.Info);
 
 		return checks;
 	}

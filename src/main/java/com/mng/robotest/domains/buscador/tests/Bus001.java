@@ -13,7 +13,7 @@ public class Bus001 extends TestBase {
 	private final String categoriaProdExistente; 
 	private final String catProdInexistente;
 	
-	private final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps(app, channel);
+	private final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
 	private final PageHomeMarcasSteps pageHomeMarcasSteps = new PageHomeMarcasSteps(channel, app);
 	
 	public Bus001(String categoriaProdExistente, String catProdInexistente) throws Exception {

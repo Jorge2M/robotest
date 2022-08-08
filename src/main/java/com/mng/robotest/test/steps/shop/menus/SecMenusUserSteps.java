@@ -65,7 +65,7 @@ public class SecMenusUserSteps {
 		
 		PageRegistroIniSteps pageRegistroIniSteps = new PageRegistroIniSteps();
 		pageRegistroIniSteps.validaIsPageUntil(5);
-		pageRegistroIniSteps.validaIsRGPDVisible(dCtxSh);
+		pageRegistroIniSteps.validaIsRGPDVisible(dCtxSh.pais);
 	}
 
 	@Step (

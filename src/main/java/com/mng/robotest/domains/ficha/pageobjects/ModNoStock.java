@@ -2,7 +2,7 @@ package com.mng.robotest.domains.ficha.pageobjects;
 
 import org.openqa.selenium.By;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -12,7 +12,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
  *
  */
 
-public class ModNoStock extends PageObjTM {
+public class ModNoStock extends PageBase {
 
 	private static final String XPATH_MODAL_NO_STOCK = "//div[@class='modalNoStock show']";
 	

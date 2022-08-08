@@ -5,9 +5,10 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.loyalty.pageobjects.PageHomeConseguirPorLikes;
+import com.mng.robotest.domains.transversal.StepBase;
 
 
-public class PageHomeConseguirPorLikesSteps {
+public class PageHomeConseguirPorLikesSteps extends StepBase {
 
 	private final PageHomeConseguirPorLikes pageHomeConseguirPorLikes = new PageHomeConseguirPorLikes();
 	

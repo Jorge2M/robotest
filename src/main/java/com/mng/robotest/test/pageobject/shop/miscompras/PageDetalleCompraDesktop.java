@@ -12,12 +12,12 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	
 	private final SectionPrendas sectionPrendas = new SectionPrendas();
 	
-	private static String XPathIdTicket = "//h2[@class[contains(.,'text-title-xl')]]/span";
-	private static String XPathImporte = "//*[@data-testid[contains(.,'detail.totalPrice')]]";
+	private static final String XPATH_ID_TICKET = "//h2[@class[contains(.,'text-title-xl')]]/span";
+	private static final String XPATH_IMPORTE = "//*[@data-testid[contains(.,'detail.totalPrice')]]";
 	
 	//TODO necesitaría un data-testid
-	private static String XPathDireccionEnvioOnline = XPathIdTicket + "/../../../div[2]//div[@class[contains(.,'sg-body-small')]]";
-	private static String XPathLinkToMisCompras = "//*[@data-testid[contains(.,'detail.goBack')]]";
+	private static final String XPATH_DIRECCION_ENVIO_ONLINE = XPATH_ID_TICKET + "/../../../div[2]//div[@class[contains(.,'sg-body-small')]]";
+	private static final String XPATH_LINK_TO_MIS_COMPRAS = "//*[@data-testid[contains(.,'detail.goBack')]]";
 	
 	public PageDetalleCompraDesktop(Channel channel) {
 		super(channel);
@@ -60,8 +60,8 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	}
 	@Override
 	public String getImporte() {
-		state(State.Visible, By.xpath(XPathImporte)).wait(2).check();
-		String importe = driver.findElement(By.xpath(XPathImporte)).getText();
+		state(State.Visible, By.xpath(XPATH_IMPORTE)).wait(2).check();
+		String importe = driver.findElement(By.xpath(XPATH_IMPORTE)).getText();
 		return importe.replaceAll("[^\\d.,]", "");  //Eliminamos la divisa;
 	}
 	@Override
@@ -87,24 +87,14 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 			modalArticulo.clickAspaForClose();
 			modalArticulo.isInvisible(2);
 		}
-		click(By.xpath(XPathLinkToMisCompras)).exec();
+		click(By.xpath(XPATH_LINK_TO_MIS_COMPRAS)).exec();
 	}
 	
 	private String getXPathTicket() {
-//		if (getTypeTicket()==TypeTicket.Online) {
-//			return XPathIdTicketOnline;
-//		}
-		return XPathIdTicket;
+		return XPATH_ID_TICKET;
 	}
-	
-//	TypeTicket getTypeTicket() {
-//		if (state(State.Visible, By.xpath(XPathIdTicketOnline)).wait(1).check()) {
-//			return TypeTicket.Online;
-//		}
-//		return TypeTicket.Tienda;
-//	}
 
 	public String getDireccionEnvioOnline() {
-		return (driver.findElement(By.xpath(XPathDireccionEnvioOnline)).getText());
+		return (driver.findElement(By.xpath(XPATH_DIRECCION_ENVIO_ONLINE)).getText());
 	}
 }

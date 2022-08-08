@@ -5,14 +5,14 @@ import java.util.StringTokenizer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.domains.registro.pageobjects.beans.DataNino;
 import com.mng.robotest.domains.registro.pageobjects.beans.ListDataNinos;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageRegistroNinos extends PageObjTM {
+public class PageRegistroNinos extends PageBase {
 	
 	private static final String XPATH_INPUT_NOMBRE = "//input[@id[contains(.,'cfNameKid')]]";
 	private static final String XPATH_SELECT_DIA_NACIMIENTO = "//select[@id[contains(.,'naciDia')]]";

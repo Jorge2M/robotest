@@ -5,13 +5,15 @@ import com.mng.robotest.conftestmaker.AppEcom;
 
 public class Sublinea extends Linea {
 
+	private static final long serialVersionUID = 1L;
+
 	public static enum SublineaType { 
-		teen_nina("teenA", "teenA", "nina", LineaType.teen),
-		teen_nino("teenP", "teenO", "nino", LineaType.teen),
-		nina_nina("nina", "outletA", "nina", LineaType.nina), 
-		nina_bebe("babyNina", "outletBA", "bebe", LineaType.nina),
-		nino_nino("nino", "outletO", "nino", LineaType.nino), 
-		nino_bebe("babyNino", "outletBO", "bebe", LineaType.nino); 
+		TEEN_NINA("teenA", "teenA", "nina", LineaType.teen),
+		TEEN_NINO("teenO", "teenO", "nino", LineaType.teen),
+		NINA_NINA("nina", "outletA", "nina", LineaType.nina), 
+		NINA_BEBE("babyNina", "outletBA", "bebe", LineaType.nina),
+		NINO_NINO("nino", "outletO", "nino", LineaType.nino), 
+		NINO_BEBE("babyNino", "outletBO", "bebe", LineaType.nino); 
 		
 		String idShop = "";
 		String idOutlet = "";

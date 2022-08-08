@@ -1,27 +1,26 @@
 package com.mng.robotest.test.pageobject.shop;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageRecADomic {
+public class PageRecADomic extends PageObjTM {
 
-	static String XPathIsPageRecogida ="//h1[text()[contains(.,'RECOGIDA A DOMICILIO')]]";
-	static String XPathTableDevoluciones = "//table[@class[contains(.,'devoluciones_table')]]";
-	static String XPathNoHayPedidos = "//p[text()[contains(.,'no tienes ningún pedido')]]";
+	private static final String XPATH_IS_PAGE_RECOGIDA ="//h1[text()[contains(.,'RECOGIDA A DOMICILIO')]]";
+	private static final String XPATH_TABLE_DEVOLUCIONES = "//table[@class[contains(.,'devoluciones_table')]]";
+	private static final String XPATH_NO_HAY_PEDIDOS = "//p[text()[contains(.,'no tienes ningún pedido')]]";
 
-	public static boolean isPage(WebDriver driver) {
-		return (state(Present, By.xpath(XPathIsPageRecogida), driver).check());
+	public boolean isPage() {
+		return (state(Present, By.xpath(XPATH_IS_PAGE_RECOGIDA)).check());
 	}
 
-	public static boolean isTableDevoluciones(WebDriver driver) {
-		return (state(Present, By.xpath(XPathTableDevoluciones), driver).check());
+	public boolean isTableDevoluciones() {
+		return (state(Present, By.xpath(XPATH_TABLE_DEVOLUCIONES)).check());
 	}
 
-	public static boolean hayPedidos(WebDriver driver) {
-		return (state(Present, By.xpath(XPathNoHayPedidos), driver).check());
+	public boolean hayPedidos() {
+		return (state(Present, By.xpath(XPATH_NO_HAY_PEDIDOS)).check());
 	}
 }

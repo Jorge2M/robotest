@@ -1,20 +1,18 @@
 package com.mng.robotest.domains.ficha.steps;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.modales.ModalBuscadorTiendas;
 
-public class ModalBuscadorTiendasSteps {
+
+public class ModalBuscadorTiendasSteps extends StepBase {
 
 	private final ModalBuscadorTiendas modalBuscadorTiendas;
 	
-	public ModalBuscadorTiendasSteps(Channel channel, AppEcom app, WebDriver driver) {
+	public ModalBuscadorTiendasSteps() {
 		modalBuscadorTiendas = new ModalBuscadorTiendas(channel, app, driver);
 	}
 	

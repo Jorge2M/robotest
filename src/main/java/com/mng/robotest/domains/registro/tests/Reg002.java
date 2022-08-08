@@ -88,8 +88,8 @@ public class Reg002 extends TestBase {
 	private void firstPageRegister() throws Exception {
 		String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
 		dataRegister = 
-			pageRegistroIniSteps.sendDataAccordingCountryToInputs(dataTest.pais, emailNonExistent, true, channel);
-		pageRegistroIniSteps.clickRegistrateButton(dataTest.pais, app, dataRegister);
+			pageRegistroIniSteps.sendDataAccordingCountryToInputs(dataTest.pais, emailNonExistent, true);
+		pageRegistroIniSteps.clickRegistrateButton(dataTest.pais, dataRegister);
 	}
 	
 	private void secondPageRegister() throws Exception {
@@ -104,7 +104,7 @@ public class Reg002 extends TestBase {
 	}	
 	
 	private void thirdPageRegister() throws Exception {
-		pageRegistroDirecSteps.sendDataAccordingCountryToInputs(dataRegister, dataTest.pais, channel);
+		pageRegistroDirecSteps.sendDataAccordingCountryToInputs(dataRegister, dataTest.pais);
 		pageRegistroDirecSteps.clickFinalizarButton(dataTest);
 	}
 	

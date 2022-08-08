@@ -2,7 +2,7 @@ package com.mng.robotest.domains.ficha.pageobjects;
 
 import org.openqa.selenium.By;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 /**
@@ -11,7 +11,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
  *
  */
 
-public class ModEnvioYdevolNew extends PageObjTM {
+public class ModEnvioYdevolNew extends PageBase {
 
 	private static final String XPATH_WRAPPER = "//div[@class='handling-modal-wrapper']";
 	private static final String XPATH_ASPA_FOR_CLOSE = XPATH_WRAPPER + "//span[@class[contains(.,'modal-close')]]";

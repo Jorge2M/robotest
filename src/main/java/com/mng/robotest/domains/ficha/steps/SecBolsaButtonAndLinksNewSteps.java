@@ -6,7 +6,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.ModCompartirNew;
 import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew;
 import com.mng.robotest.domains.ficha.pageobjects.SecDetalleProductNew;
@@ -14,10 +13,11 @@ import com.mng.robotest.domains.ficha.pageobjects.ModCompartirNew.IconSocial;
 import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.LinksAfterBolsa;
 import com.mng.robotest.domains.ficha.pageobjects.SecDetalleProductNew.ItemBreadcrumb;
 import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Linea.LineaType;
 
 
-public class SecBolsaButtonAndLinksNewSteps {
+public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 
 	private final SecBolsaButtonAndLinksNew secBolsaButtonAndLinksNew = new SecBolsaButtonAndLinksNew();
 	private final SecDetalleProductNew secDetalleProductNew = new SecDetalleProductNew();
@@ -34,7 +34,7 @@ public class SecBolsaButtonAndLinksNewSteps {
 	@Step (
 		description="Seleccionar el link <b>Detalle del producto</b>",
 		expected="Se scrolla hasta el apartado de \"Descripción\"")
-	public void selectDetalleDelProducto(AppEcom app, LineaType lineaType) throws Exception {
+	public void selectDetalleDelProducto(LineaType lineaType) throws Exception {
 		secBolsaButtonAndLinksNew.clickLinkAndWaitLoad(LinksAfterBolsa.DETALLE_PRODUCTO);
 		checkScrollToDescription();
 		checkBreadCrumbs();

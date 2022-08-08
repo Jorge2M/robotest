@@ -28,7 +28,7 @@ public class Fic003 extends TestBase {
 	final Pais corea = PaisGetter.get(PaisShop.COREA_DEL_SUR);
 	final SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dataTest);
 	final PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(channel, app, driver);
-	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(app, channel, corea);;
+	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(corea);;
 	
 	public Fic003() throws Exception {
 		super();
@@ -40,7 +40,7 @@ public class Fic003 extends TestBase {
 		menuPantalonesNina = MenuTreeApp.getMenuLevel1From(
 				app, KeyMenu1rstLevel.from(
 					LineaType.nina, 
-					SublineaType.nina_nina, "pantalones"));
+					SublineaType.NINA_NINA, "pantalones"));
 	}
 	
 	@Override
@@ -73,7 +73,7 @@ public class Fic003 extends TestBase {
 			}
 		} else {
 			if (TypePanel.KC_SAFETY.getListApps().contains(app)) {
-				pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectDetalleDelProducto(app, LineaType.nina);
+				pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectDetalleDelProducto(LineaType.nina);
 			}
 		}
 	}

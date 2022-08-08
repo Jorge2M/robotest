@@ -156,7 +156,7 @@ public class Favoritos implements Serializable {
 		PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		pageGaleriaSteps.selectArticulo(article1, dCtxSh);
 
-		PageFichaArtSteps pageFichaArtStpv = new PageFichaArtSteps(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
+		PageFichaArtSteps pageFichaArtStpv = new PageFichaArtSteps(dCtxSh.pais);
 		pageFichaArtStpv.selectAnadirAFavoritos(dataFavoritos);
 
 		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();

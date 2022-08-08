@@ -6,8 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.Select;
 
-import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.domains.registro.pageobjects.beans.DataRegistro;
 import com.mng.robotest.domains.registro.pageobjects.beans.ListDataRegistro;
 import com.mng.robotest.test.beans.Pais;
@@ -17,7 +16,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClic
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageRegistroDirec extends PageObjTM {
+public class PageRegistroDirec extends PageBase {
 
 	private final static String XPATH_DIV_ERROR = "//div[@class='errorValidation']";
 	private final static String XPATH_INPUT_DIREC = "//input[@id[contains(.,':cfDir1')]]";
@@ -32,8 +31,8 @@ public class PageRegistroDirec extends PageObjTM {
 	}
 	
 	public void sendDataAccordingCountryToInputs(
-			Map<String,String> dataRegistro, Pais pais, Channel channel) throws Exception {
-		dataRegistro.putAll(new Page2IdentCheckout(pais, driver)
+			Map<String,String> dataRegistro, Pais pais) throws Exception {
+		dataRegistro.putAll(new Page2IdentCheckout(pais)
 				.inputDataPorDefectoSegunPais(dataRegistro.get("cfEmail"), false, false, channel));
 	}
 	

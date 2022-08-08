@@ -4,9 +4,10 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.loyalty.pageobjects.PageRegalarMisLikes;
+import com.mng.robotest.domains.transversal.StepBase;
 
 
-public class PageRegalarMisLikesSteps {
+public class PageRegalarMisLikesSteps extends StepBase {
 
 	private final PageRegalarMisLikes pageRegalarMisLikes = new PageRegalarMisLikes();
 

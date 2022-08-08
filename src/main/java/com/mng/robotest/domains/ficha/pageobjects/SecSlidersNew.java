@@ -1,12 +1,12 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
 import org.openqa.selenium.By;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecSlidersNew extends PageObjTM {
+public class SecSlidersNew extends PageBase {
 
 	private static final String XPATH_COMPLETA_TU_LOOK = "//div[@id='lookTotal']";
 	private static final String XPATH_ELEGIDO_PARA_TI = "//div[@id='recommendations']";

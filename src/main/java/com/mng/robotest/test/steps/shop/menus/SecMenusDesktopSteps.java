@@ -446,7 +446,7 @@ public class SecMenusDesktopSteps {
 		driver.navigate().to(urlAccesoCorreo);
 
 		DataFichaArt datosArticulo = new DataFichaArt(article.getGarmentId(), "");
-		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
+		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(dCtxSh.pais);
 		pageFichaSteps.validaDetallesProducto(datosArticulo);
 	}
 	

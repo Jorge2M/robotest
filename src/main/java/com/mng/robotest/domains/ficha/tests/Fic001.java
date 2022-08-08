@@ -29,8 +29,8 @@ public class Fic001 extends TestBase {
 	final List<FilterType> filterNoOnlineWithColors;
 	final Optional<GarmentCatalog> articleNoOnlineWithColors;
 	
-	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps(app, channel);
-	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(app, channel, dataTest.pais);
+	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
+	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(dataTest.pais);
 	
 	public Fic001() throws Exception {
 		super();
@@ -80,7 +80,7 @@ public class Fic001 extends TestBase {
 
 		articulo = pageFichaSteps.getFicha().getArticuloObject();
 		pageFichaSteps.selectBuscarEnTiendaButton();
-		new ModalBuscadorTiendasSteps(channel, app, driver).close();
+		new ModalBuscadorTiendasSteps().close();
 		if (app==AppEcom.shop) {
 			pageFichaSteps.selectAnadirAFavoritos();
 			pageFichaSteps.changeColorGarment();

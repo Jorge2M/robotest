@@ -1,14 +1,14 @@
 package com.mng.robotest.domains.loyalty.pageobjects;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import org.openqa.selenium.By;
 
 
-public class PageHomeDonateLikes extends PageObjTM {
+public class PageHomeDonateLikes extends PageBase {
 
 	public enum ButtonLikes implements ElementPage {
 		BUTTON_50_LIKES(50), 

@@ -2,7 +2,7 @@ package com.mng.robotest.domains.ficha.pageobjects;
 
 import org.openqa.selenium.By;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -14,7 +14,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
  *
  */
 
-public class SecDetalleProductNew extends PageObjTM {
+public class SecDetalleProductNew extends PageBase {
 
 	public enum ItemBreadcrumb { LINEA, GRUPO, GALERIA }
 	

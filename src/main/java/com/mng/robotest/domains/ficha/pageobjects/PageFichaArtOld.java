@@ -7,11 +7,10 @@ import org.openqa.selenium.By;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
-import com.mng.robotest.conftestmaker.AppEcom;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
-
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 
 @SuppressWarnings({"static-access"})
 /**
@@ -45,12 +44,12 @@ public class PageFichaArtOld extends PageFicha {
 	private static final String XPATH_MODAL_NO_STOCK = "//div[@class='modalNoStock show']";
 	private static final String XPATH_IMAGEN_CARRUSEL_IZQ = "//div[@class='carousel-img-container']//img[@class[contains(.,'carousel-img')]]";
 	
-	private PageFichaArtOld(Channel channel, AppEcom app) {
-		super(TypeFicha.OLD, channel, app);
+	private PageFichaArtOld() {
+		super(TypeFicha.OLD);
 	}
 	
-	public static PageFichaArtOld getNewInstance(Channel channel, AppEcom app) {
-		return (new PageFichaArtOld(channel, app));
+	public static PageFichaArtOld getNewInstance() {
+		return (new PageFichaArtOld());
 	}
 	
 	private String getXPathIsPage(String referencia, Channel channel) {

@@ -3,9 +3,10 @@ package com.mng.robotest.domains.ficha.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.ficha.pageobjects.PageComoMedirme;
+import com.mng.robotest.domains.transversal.StepBase;
 
 
-public class PageComoMedirmeSteps {
+public class PageComoMedirmeSteps extends StepBase {
 
 	private final PageComoMedirme pageComoMedirme = new PageComoMedirme();
 	

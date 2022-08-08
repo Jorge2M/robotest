@@ -1,15 +1,11 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
 import org.openqa.selenium.By;
-
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
-
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.ActionFavButton;
 import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.LinksAfterBolsa;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
 @SuppressWarnings({"static-access"})
@@ -26,8 +22,8 @@ public class PageFichaArt_DesktopShop extends PageFicha {
 	
 	private static final String XPATH_HTML_FICHA = "//html[@class[contains(.,'ficha')]]";
 	
-	private PageFichaArt_DesktopShop(Channel channel, AppEcom app) {
-		super(TypeFicha.NEW, channel, app);
+	private PageFichaArt_DesktopShop() {
+		super(TypeFicha.NEW);
 		this.secBolsaButtonAndLinks = new SecBolsaButtonAndLinksNew();
 		this.modEnvioYdevolNew = new ModEnvioYdevolNew();
 		this.secFotos = new SecFotosNew();
@@ -35,8 +31,8 @@ public class PageFichaArt_DesktopShop extends PageFicha {
 		this.secSliders = new SecSlidersNew();
 	}
 	
-	public static PageFichaArt_DesktopShop getNewInstance(Channel channel, AppEcom app) {
-		return (new PageFichaArt_DesktopShop(channel, app));
+	public static PageFichaArt_DesktopShop getNewInstance() {
+		return (new PageFichaArt_DesktopShop());
 	}
 	
 	private String getXPathIsPage(String referencia) {

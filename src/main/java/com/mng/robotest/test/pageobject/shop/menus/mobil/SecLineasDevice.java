@@ -51,17 +51,17 @@ public abstract class SecLineasDevice extends PageObjTM {
 	
 	public String getXPathSublineaNinosLink(SublineaType sublineaType) {
 		switch (sublineaType) {
-		case nina_nina:
+		case NINA_NINA:
 			return getXPathCapaMenus() + XPathLinkSublineaNina;
-		case teen_nina:
+		case TEEN_NINA:
 			return getXPathCapaMenus() + XPathLinkSublineaTeenNina;
-		case nina_bebe:
+		case NINA_BEBE:
 			return getXPathCapaMenus() + XPathLinkSublineaBebeNina;
-		case nino_nino:
+		case NINO_NINO:
 			return getXPathCapaMenus() + XPathLinkSublineaNino;
-		case teen_nino:
+		case TEEN_NINO:
 			return getXPathCapaMenus() + XPathLinkSublineaTeenNino;
-		case nino_bebe:
+		case NINO_BEBE:
 		default:
 			return getXPathCapaMenus() + XPathLinkSublineaBebeNino;
 		}
@@ -132,14 +132,14 @@ public abstract class SecLineasDevice extends PageObjTM {
 		String xpathBlockSublineas = "";
 		switch (lineaNinosType) {
 		case nina: 
-			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaType.nina_nina);
+			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaType.NINA_NINA);
 			break;
 		case teen:
-			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaType.teen_nina);
+			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaType.TEEN_NINA);
 			break;
 		default:
 		case nino:
-			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaType.nino_nino);
+			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaType.NINO_NINO);
 			break;
 		}
 		return (state(Visible, By.xpath(xpathBlockSublineas)).check());

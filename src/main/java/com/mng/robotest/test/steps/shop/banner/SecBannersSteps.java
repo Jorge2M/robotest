@@ -80,7 +80,7 @@ public class SecBannersSteps {
 			validacionesGeneralesBanner(urlPagPrincipal, uriPagPrincipal, elementosPagPrincipal);
 			switch (dataBanner.getDestinoType()) {
 			case Ficha:
-				PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(app, channel, pais);
+				PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(pais);
 				pageFichaSteps.validateIsFichaCualquierArticulo();
 				break;
 			default:				

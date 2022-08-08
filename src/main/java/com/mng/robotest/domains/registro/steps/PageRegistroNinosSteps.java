@@ -9,12 +9,13 @@ import java.util.Arrays;
 
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroNinos;
 import com.mng.robotest.domains.registro.pageobjects.beans.ListDataNinos;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 
-public class PageRegistroNinosSteps {
+public class PageRegistroNinosSteps extends StepBase {
 	
 	PageRegistroNinos pageRegistroNinos = new PageRegistroNinos();
 	

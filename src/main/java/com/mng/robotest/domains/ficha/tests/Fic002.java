@@ -24,8 +24,8 @@ public class Fic002 extends TestBase {
 	final GarmentCatalog garment;
 	final boolean isTotalLook;
 	
-	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps(app, channel);
-	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(app, channel, dataTest.pais);
+	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
+	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(dataTest.pais);
 	
 	public Fic002() throws Exception {
 		super();
@@ -75,7 +75,7 @@ public class Fic002 extends TestBase {
 		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectEnvioYDevoluciones();
 		pageFichaSteps.getModEnvioYdevolSteps().clickAspaForClose();
 		
-		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectDetalleDelProducto(app, LineaType.she);
+		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectDetalleDelProducto(LineaType.she);
 		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectLinkCompartir(dataTest.pais.getCodigo_pais());
 	}
 

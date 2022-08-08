@@ -6,14 +6,13 @@ import java.util.stream.Collectors;
 
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
@@ -25,18 +24,14 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 
-public class SecBuscadorSteps {
+public class SecBuscadorSteps extends StepBase {
 
 	private final PageGaleria pageGaleria;
 	private final WebDriver driver;
-	private final Channel channel;
-	private final AppEcom app;
 	
-	public SecBuscadorSteps(AppEcom app, Channel channel) {
+	public SecBuscadorSteps() {
 		this.pageGaleria = PageGaleria.getNew(From.BUSCADOR, channel, app);
 		this.driver = pageGaleria.driver;
-		this.channel = channel;
-		this.app = app;
 	}
 	
 	private static final String TabHTML = "&emsp;";
@@ -67,7 +62,7 @@ public class SecBuscadorSteps {
 	private void searchArticuloCommon(GarmentCatalog product, Pais pais) throws Exception {
 		ArticuloNavigations.buscarArticulo(product.getArticleWithMoreStock(), channel, app, driver);
 		SeleniumUtils.waitForPageLoaded(driver);  
-		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(app, channel, pais);
+		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(pais);
 		pageFichaSteps.validateIsFichaAccordingTypeProduct(product);
 	}
 

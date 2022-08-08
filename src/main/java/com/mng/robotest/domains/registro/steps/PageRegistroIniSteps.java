@@ -4,25 +4,24 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroIni;
 import com.mng.robotest.domains.registro.pageobjects.beans.DataRegistro;
 import com.mng.robotest.domains.registro.pageobjects.beans.ListDataRegistro;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test.utils.UtilsTest;
 
-public class PageRegistroIniSteps {
+
+public class PageRegistroIniSteps extends StepBase {
 	
 	private final PageRegistroIni pageRegistroIni = new PageRegistroIni();
 	
@@ -42,8 +41,8 @@ public class PageRegistroIniSteps {
 			"  - El resto de datos específicos para el país \"#{pais.getNombre_pais()}\"", 
 		expected=
 			"No aparece ningún mensaje de dato incorrecto")
-	public Map<String,String> sendDataAccordingCountryToInputs(
-			Pais pais, String emailNonExistent, boolean clickPubli, Channel channel) throws Exception {
+	public Map<String,String> sendDataAccordingCountryToInputs(Pais pais, String emailNonExistent, boolean clickPubli) 
+			throws Exception {
 		Map<String,String> dataSended = new HashMap<>();
 		dataSended = pageRegistroIni.sendDataAccordingCountryToInputs(pais, emailNonExistent, clickPubli, channel);
 		validateNotAreErrorMessageInCorrectFields();
@@ -91,23 +90,22 @@ public class PageRegistroIniSteps {
 		UsrNoExistsInGmail
 	}
 	
-	public void clickRegistrateButton(
-			Pais paisRegistro, AppEcom app, Map<String,String> dataRegistro) {
-		clickRegistrateButton(paisRegistro, app, dataRegistro, ErrorRegister.None);
+	public void clickRegistrateButton(Pais paisRegistro, Map<String,String> dataRegistro) {
+		clickRegistrateButton(paisRegistro, dataRegistro, ErrorRegister.None);
 	}
 	
 	@Step (
 		description="Seleccionar el botón <b>Regístrate</b>")
 	public void clickRegistrateButton(
-			Pais paisRegistro, AppEcom app, Map<String,String> dataRegistro, ErrorRegister errorExpected) {
+			Pais paisRegistro, Map<String,String> dataRegistro, ErrorRegister errorExpected) {
 		pageRegistroIni.clickButtonRegistrate();
-		PageObjTM.waitMillis(1000);
+		PageBase.waitMillis(1000);
 		validaIsInvisibleCapaLoading(15);
 		
 		switch (errorExpected) {
 		case None:
 			new PageRegistroSegundaSteps()
-				.validaIsPageRegistroOK(paisRegistro, app, dataRegistro);
+				.validaIsPageRegistroOK(paisRegistro, dataRegistro);
 			break;
 		case InputWarnings:
 			int numInputsObligatoriosNoInf = pageRegistroIni.getNumInputsObligatoriosNoInformados();
@@ -181,44 +179,44 @@ public class PageRegistroIniSteps {
 		return (!pageRegistroIni.newsLetterTitleContains(percentageSymbol));	   
 	}
 
-	public void validaIsRGPDVisible(DataCtxShop dCtxSh) {
-		if (dCtxSh.pais.getRgpd().equals("S")) {
-			validateRGPD_inCountryWithRgpd(dCtxSh);
+	public void validaIsRGPDVisible(Pais pais) {
+		if (pais.getRgpd().equals("S")) {
+			validateRGPD_inCountryWithRgpd(pais.getCodigo_alf());
 		} else {
-			validateRGPD_inCountryWithoutRgpd(dCtxSh);
+			validateRGPD_inCountryWithoutRgpd(pais.getCodigo_pais());
 		}
 	}  
 	
 	@Validation
-	public ChecksTM validateRGPD_inCountryWithRgpd(DataCtxShop dCtxSh) {
+	public ChecksTM validateRGPD_inCountryWithRgpd(String codigoPais) {
 		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 1;
 		checks.add(
-			"El texto de info de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais(),
+			"El texto de info de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + codigoPais,
 			pageRegistroIni.isTextoRGPDVisible(), State.Defect);
 		checks.add(
-			"El texto legal de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais(),
+			"El texto legal de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + codigoPais,
 			pageRegistroIni.isTextoLegalRGPDVisible(), State.Defect);
 		checks.add(
 			"<b>SI</b> está presente el checkbox para recibir promociones e información personalizada para el pais" +
-			dCtxSh.pais.getCodigo_pais() + " (lo esperamos hasta " + maxSeconds + " segundos)",
+			codigoPais + " (lo esperamos hasta " + maxSeconds + " segundos)",
 			pageRegistroIni.isCheckboxRecibirInfoPresentUntil(maxSeconds), State.Defect);
 		return checks;
 	}
 	
 	@Validation
-	public ChecksTM validateRGPD_inCountryWithoutRgpd(DataCtxShop dCtxSh) {
+	public ChecksTM validateRGPD_inCountryWithoutRgpd(String codigoPais) {
 		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 1;
 		checks.add(
-			"El texto de info de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais(),
+			"El texto de info de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + codigoPais,
 			!pageRegistroIni.isTextoRGPDVisible(), State.Defect);
 		checks.add(
-			"El texto legal de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais(),
+			"El texto legal de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + codigoPais,
 			!pageRegistroIni.isTextoLegalRGPDVisible(), State.Defect);
 		checks.add(
 			"<b>NO</b> es visible el checkbox para recibir promociones e información personalizada para el pais " + 
-			dCtxSh.pais.getCodigo_pais() + " (lo esperamos hasta " + maxSeconds + " segundos)",
+			codigoPais + " (lo esperamos hasta " + maxSeconds + " segundos)",
 			!pageRegistroIni.isCheckboxRecibirInfoPresentUntil(maxSeconds), State.Defect);
 		return checks;
 	}

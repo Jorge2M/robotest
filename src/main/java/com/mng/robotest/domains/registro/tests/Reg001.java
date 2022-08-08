@@ -3,7 +3,7 @@ package com.mng.robotest.domains.registro.tests;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.registro.pageobjects.beans.ListDataRegistro;
 import com.mng.robotest.domains.registro.pageobjects.beans.ListDataRegistro.DataRegType;
@@ -50,7 +50,7 @@ public class Reg001 extends TestBase {
 	}
 	
 	private void registerWithoutInputData() {
-		pageRegistroIniSteps.clickRegistrateButton(dataTest.pais, app, dataRegister, ErrorRegister.InputWarnings);
+		pageRegistroIniSteps.clickRegistrateButton(dataTest.pais, dataRegister, ErrorRegister.InputWarnings);
 	}
 	
 	private void registerWithIncorrectInputData() {
@@ -68,7 +68,7 @@ public class Reg001 extends TestBase {
 	
 	private void registerWithNonExistentEmail() {
 		driver.navigate().refresh();
-		PageObjTM.waitMillis(1000);
+		PageBase.waitMillis(1000);
 		ListDataRegistro dataToSend = new ListDataRegistro(); 
 		dataToSend.add(DataRegType.name, "Jorge", true);
 		dataToSend.add(DataRegType.apellidos, "Muñoz Martínez", true);
@@ -79,12 +79,12 @@ public class Reg001 extends TestBase {
 		
 		String dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.pageInicial);
 		pageRegistroIniSteps.sendFixedDataToInputs(dataToSend, dataToSendInHtmlFormat);
-		pageRegistroIniSteps.clickRegistrateButton(dataTest.pais, app, dataRegister, ErrorRegister.UsrNoExistsInGmail);
+		pageRegistroIniSteps.clickRegistrateButton(dataTest.pais, dataRegister, ErrorRegister.UsrNoExistsInGmail);
 	}
 
 	private void registerWithExistentEmail() {
 		driver.navigate().refresh();
-		PageObjTM.waitMillis(1000);
+		PageBase.waitMillis(1000);
 		ListDataRegistro dataToSend = new ListDataRegistro(); 
 		dataToSend.add(DataRegType.name, "Jorge", true);
 		dataToSend.add(DataRegType.apellidos, "Muñoz Martínez", true);
@@ -98,6 +98,6 @@ public class Reg001 extends TestBase {
 		String dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.pageInicial);
 		
 		pageRegistroIniSteps.sendFixedDataToInputs(dataToSend, dataToSendInHtmlFormat);
-		pageRegistroIniSteps.clickRegistrateButton(dataTest.pais, app, dataRegister, ErrorRegister.UsrExistsInMango);
+		pageRegistroIniSteps.clickRegistrateButton(dataTest.pais, dataRegister, ErrorRegister.UsrExistsInMango);
 	}
 }

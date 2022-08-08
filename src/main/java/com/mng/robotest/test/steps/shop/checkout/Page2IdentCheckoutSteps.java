@@ -25,7 +25,7 @@ public class Page2IdentCheckoutSteps {
 	private final WebDriver driver;
 	
 	public Page2IdentCheckoutSteps(Channel channel, Pais pais, WebDriver driver) {
-		this.page2IdentCheckout = new Page2IdentCheckout(pais, driver);
+		this.page2IdentCheckout = new Page2IdentCheckout(pais);
 		this.channel = channel;
 		this.driver = driver;
 	}

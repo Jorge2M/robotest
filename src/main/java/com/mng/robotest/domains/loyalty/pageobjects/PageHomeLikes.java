@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.loyalty.pageobjects;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import java.util.regex.Matcher;
@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 
 
-public class PageHomeLikes extends PageObjTM {
+public class PageHomeLikes extends PageBase {
 
 	private static final String XPATH_WRAPP_PAGE = "//micro-frontend[@id='loyaltySpace']";
 	private static final String XPATH_POINTS = XPATH_WRAPP_PAGE + "//div[@id='space-header']/div[3]"; 

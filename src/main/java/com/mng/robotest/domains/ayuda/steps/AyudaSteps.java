@@ -5,9 +5,10 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 
 import com.mng.robotest.domains.ayuda.pageobjects.PagesAyuda;
+import com.mng.robotest.domains.transversal.StepBase;
 
 
-public class AyudaSteps {
+public class AyudaSteps extends StepBase {
 	
 	private final PagesAyuda pageAyuda = new PagesAyuda(); 
 	
