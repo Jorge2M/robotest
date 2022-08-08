@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.buscador.steps.SecBuscadorSteps;
 import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
 import com.mng.robotest.domains.ficha.steps.SecModalPersonalizacionSteps;
 import com.mng.robotest.domains.transversal.TestBase;
@@ -16,7 +17,6 @@ import com.mng.robotest.test.getdata.products.Menu;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
-import com.mng.robotest.test.steps.shop.buscador.SecBuscadorSteps;
 
 import javassist.NotFoundException;
 
@@ -25,7 +25,7 @@ public class Fic005 extends TestBase {
 
 	final GarmentCatalog articlePersonalizable;
 	
-	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps(app, channel, driver);
+	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps(app, channel);
 	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(app, channel, dataTest.pais);
 	final SecModalPersonalizacionSteps modalPersonalizacionSteps = SecModalPersonalizacionSteps.getNewOne(dataTest, driver);
 	

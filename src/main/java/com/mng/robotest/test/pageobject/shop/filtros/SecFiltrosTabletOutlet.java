@@ -1,6 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.filtros;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -14,12 +13,13 @@ import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+
 public class SecFiltrosTabletOutlet extends PageObjTM implements SecFiltros {
 	
-	private static final String TagOrdenacion = "@TagOrden";
-	private static final String TagColor = "@TagColor";
-	private static final String XPathLinkOrdenWithTag = "//a[text()[contains(.,'" + TagOrdenacion + "')]]";
-	private static final String XPathLinkColorWithTag = "//label[@for='color_" + TagColor + "']/a";
+	private static final String TAG_ORDENACION = "@TagOrden";
+	private static final String TAG_COLOR = "@TagColor";
+	private static final String XPATH_LINK_ORDEN_WITH_TAG = "//a[text()[contains(.,'" + TAG_ORDENACION + "')]]";
+	private static final String XPATH_LINK_COLOR_WITH_TAG = "//label[@for='color_" + TAG_COLOR + "']/a";
 	
 	private final PageGaleria pageGaleria;
 	
@@ -29,16 +29,16 @@ public class SecFiltrosTabletOutlet extends PageObjTM implements SecFiltros {
 	}
 	
 	public static SecFiltrosTabletOutlet getInstance(WebDriver driver) {
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.tablet, AppEcom.outlet, driver);
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.tablet, AppEcom.outlet);
 		return (new SecFiltrosTabletOutlet(driver, pageGaleria));
 	}
 	
 	private String getXPathLinkOrdenacion(FilterOrdenacion ordenacion) {
-		return (XPathLinkOrdenWithTag.replace(TagOrdenacion, ordenacion.getValueForDesktop()));
+		return (XPATH_LINK_ORDEN_WITH_TAG.replace(TAG_ORDENACION, ordenacion.getValueForDesktop()));
 	}
 	
 	private String getXPathLinkColor(Color color) {
-		return (XPathLinkColorWithTag.replace(TagColor, color.getNameFiltro()));
+		return (XPATH_LINK_COLOR_WITH_TAG.replace(TAG_COLOR, color.getNameFiltro()));
 	}
 	
 	@Override

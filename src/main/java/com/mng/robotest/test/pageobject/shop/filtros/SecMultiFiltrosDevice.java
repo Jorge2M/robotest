@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -20,30 +19,24 @@ import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-/**
- * Clase que define la automatización de las diferentes funcionalidades de la sección correspondiente a los "Filtros"
- * @author jorge.munoz
- *
- */
 public class SecMultiFiltrosDevice extends PageObjTM implements SecFiltros {
 	
-	private static final String XPathFiltrarYOrdenarButton = "//button[@class[contains(.,'-filters-btn')]]";
-	private static final String XPathButtonAplicarFiltros = "//button[@class[contains(.,'filters-apply')]]";
+	private static final String XPATH_FILTRAR_Y_ORDENAR_BUTTON = "//button[@class[contains(.,'-filters-btn')]]";
+	private static final String XPATH_BUTTON_APLICAR_FILTROS = "//button[@class[contains(.,'filters-apply')]]";
 	
 	PageGaleria pageGaleria = null;
 	
-	private SecMultiFiltrosDevice(WebDriver driver, PageGaleria pageGaleria) {
-		super(driver);
+	private SecMultiFiltrosDevice(PageGaleria pageGaleria) {
 		this.pageGaleria = pageGaleria;
 	}
 	
-	public static SecMultiFiltrosDevice getInstance(AppEcom app, WebDriver driver) {
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.mobile, app, driver);
-		return (new SecMultiFiltrosDevice(driver, pageGaleria));
+	public static SecMultiFiltrosDevice getInstance(AppEcom app) {
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.mobile, app);
+		return (new SecMultiFiltrosDevice(pageGaleria));
 	}
 	
-	public static SecMultiFiltrosDevice getInstance(WebDriver driver, PageGaleria pageGaleria) {
-		return (new SecMultiFiltrosDevice(driver, pageGaleria));
+	public static SecMultiFiltrosDevice getInstance(PageGaleria pageGaleria) {
+		return (new SecMultiFiltrosDevice(pageGaleria));
 	}
 	
 	@Override
@@ -88,7 +81,7 @@ public class SecMultiFiltrosDevice extends PageObjTM implements SecFiltros {
 	
 	@Override
 	public boolean isClickableFiltroUntil(int seconds) {
-		return (state(Clickable, By.xpath(XPathFiltrarYOrdenarButton)).wait(seconds).check());
+		return (state(Clickable, By.xpath(XPATH_FILTRAR_Y_ORDENAR_BUTTON)).wait(seconds).check());
 	}	
 	
 	@Override
@@ -136,12 +129,12 @@ public class SecMultiFiltrosDevice extends PageObjTM implements SecFiltros {
 	}
 	
 	private void clickApplicarFiltrosButton() {
-		click(By.xpath(XPathButtonAplicarFiltros)).exec();
+		click(By.xpath(XPATH_BUTTON_APLICAR_FILTROS)).exec();
 	}
 	
 	private void goAndClickFiltroButton() {
-		if (state(Visible, By.xpath(XPathFiltrarYOrdenarButton), driver).check()) {
-			moveToElement(By.xpath(XPathFiltrarYOrdenarButton), driver);
+		if (state(Visible, By.xpath(XPATH_FILTRAR_Y_ORDENAR_BUTTON), driver).check()) {
+			moveToElement(By.xpath(XPATH_FILTRAR_Y_ORDENAR_BUTTON), driver);
 			waitMillis(500);
 			
 			//Scrollamos un poquito hacia arriba para asegurar
@@ -153,8 +146,8 @@ public class SecMultiFiltrosDevice extends PageObjTM implements SecFiltros {
 	
 	private void waitAndClickFiltroButton(int maxSeconds) {
 		if (!isOpenFiltrosUntil(0)) {
-			state(Clickable, By.xpath(XPathFiltrarYOrdenarButton), driver).wait(maxSeconds).check();
-			click(By.xpath(XPathFiltrarYOrdenarButton)).type(javascript).exec();
+			state(Clickable, By.xpath(XPATH_FILTRAR_Y_ORDENAR_BUTTON), driver).wait(maxSeconds).check();
+			click(By.xpath(XPATH_FILTRAR_Y_ORDENAR_BUTTON)).type(javascript).exec();
 			isOpenFiltrosUntil(maxSeconds);
 		}		
 	}

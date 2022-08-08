@@ -51,11 +51,11 @@ public class Footer {
 		//List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinks(dCtxSh.appE, dCtxSh.channel);
 		for (FooterLink footerLinkToValidate : listFooterLinksToValidate) {
 			switch (footerLinkToValidate) {
-			case ayuda:
+			case AYUDA:
 				secFooterSteps.clickLinkFooter(footerLinkToValidate, false);
 				secFooterSteps.validaPaginaAyuda();
 				break;
-			case mango_card:
+			case MANGO_CARD:
 				secFooterSteps.clickLinkFooter(footerLinkToValidate, false);
 				secFooterSteps.checkSolicitarTarjeta();
 				break;

@@ -81,30 +81,13 @@ public class CheckerSEO implements Checker {
 		return listaErrorsInHtmlFormat;
 	}
 	
-//	/**
-//	 * @return lista de errores en formato HTML referidos al meta "Description" 
-//	 */
-//	private ArrayList<String> validaMetaDescription(WebDriver driver) {
-//		ArrayList<String> listaErrorsInHtmlFormat = new ArrayList<>();
-//		
-//		String xpath = "//meta[@name='description' and @content]";
-//		if (state(Present, By.xpath(xpath), driver).check() ||
-//			driver.findElement(By.xpath("//meta[@name='description' and @content]")).getAttribute("content").compareTo("") == 0) {
-//			listaErrorsInHtmlFormat.add("<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">No existe el meta 'description' o tiene el atributo 'content' a nulo</c>");
-//		}
-//		return listaErrorsInHtmlFormat;
-//	}
-	
-	/**
-	 * @return lista de errores en formato HTML referidos al "canonical"
-	 */
 	private ArrayList<String> validaCanonical(WebDriver driver) throws Exception {
 		ArrayList<String> listaErrorsInHtmlFormat = new ArrayList<>();
 		if (!AllPages.isPresentTagCanonical(driver)) {
 			//El canonical ha de aparecer como mínimo en las páginas de Portada, Catálogo y Ficha
 			PageFicha pageFicha = PageFicha.newInstanceFichaNew(Channel.desktop, AppEcom.shop);
-			PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, AppEcom.shop, driver);
-			if ((new PageLanding(driver)).isPage() || 
+			PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, AppEcom.shop);
+			if ((new PageLanding()).isPage() || 
 				((PageGaleriaDesktop)pageGaleria).isPage() || 
 				pageFicha.isPageUntil(0)) {
 				String currentURL = driver.getCurrentUrl(); 

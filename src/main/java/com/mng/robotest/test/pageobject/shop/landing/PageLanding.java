@@ -3,7 +3,6 @@ package com.mng.robotest.test.pageobject.shop.landing;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,41 +23,32 @@ import com.mng.robotest.test.pageobject.shop.menus.MenuLateralDesktop.Element;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-/**
- * Clase que define la automatización de las diferentes funcionalidades de la página HOME o HOMEMARCAS (la página inicial multimarca o la asociada a cada pestaña)
- * @author jorge.munoz
- *
- */
 public class PageLanding extends PageObjTM {
 	
-	private static String XPathMainContentPais = "//div[@class[contains(.,'main-content')] and @data-pais]";
-	private static String XPathContenido = "//div[@class[contains(.,'container-fluid home')]]";
-	private static String XPathSlider = "//section[@class='entitieswrapper']//div[@class[contains(.,'vsv-slide')]]";
-	private static String XPathEditItem = "//div[@class[contains(.,'item-edit')] and @data-id]";
-	private static String XPathMapT1 = "//map[@name[contains(.,'item_')]]/..";
-	private static String XPathMapT2 = "//img[@class[contains(.,'responsive')] and @hidefocus='true']";
+	private static String XPATH_MAIN_CONTENT_PAIS = "//div[@class[contains(.,'main-content')] and @data-pais]";
+	private static String XPATH_CONTENIDO = "//div[@class[contains(.,'container-fluid home')]]";
+	private static String XPATH_SLIDER = "//section[@class='entitieswrapper']//div[@class[contains(.,'vsv-slide')]]";
+	private static String XPATH_EDIT_ITEM = "//div[@class[contains(.,'item-edit')] and @data-id]";
+	private static String XPATH_MAP_T1 = "//map[@name[contains(.,'item_')]]/..";
+	private static String XPATH_MAP_T2 = "//img[@class[contains(.,'responsive')] and @hidefocus='true']";
 
-	public PageLanding(WebDriver driver) {
-		super(driver);
-	}
-	
 	public boolean isPage() {
 		return (isPageUntil(0));
 	}
 	
 	public boolean isPageUntil(int maxSeconds) {
-		return (state(Present, By.xpath(XPathContenido)).wait(maxSeconds).check());
+		return (state(Present, By.xpath(XPATH_CONTENIDO)).wait(maxSeconds).check());
 	}
 	
 	public String getCodigoPais() {
-		if (state(Present, By.xpath(XPathMainContentPais)).check()) {
-			return (driver.findElement(By.xpath(XPathMainContentPais)).getAttribute("data-pais"));
+		if (state(Present, By.xpath(XPATH_MAIN_CONTENT_PAIS)).check()) {
+			return (driver.findElement(By.xpath(XPATH_MAIN_CONTENT_PAIS)).getAttribute("data-pais"));
 		}
 		return "";
 	}
 	
 	public boolean haySliders() {
-		return (state(Visible, By.xpath(XPathSlider)).check());
+		return (state(Visible, By.xpath(XPATH_SLIDER)).check());
 	}
 	
 	public boolean hayMaps() {
@@ -74,14 +64,14 @@ public class PageLanding extends PageObjTM {
 	public List<WebElement> getListaMaps() {
 		// Seleccionamos cada uno de los banners visibles
 		List<WebElement> listMaps;
-		listMaps = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathMapT1));
-		listMaps.addAll(UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathMapT2)));
+		listMaps = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_MAP_T1));
+		listMaps.addAll(UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_MAP_T2)));
 		return listMaps;
 	}
 	
 	public List<WebElement> getListaItemsEdit() {
 		List<WebElement> listItemsEdits;
-		listItemsEdits = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathEditItem));
+		listItemsEdits = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_EDIT_ITEM));
 		return listItemsEdits;		
 	}
 	
@@ -127,7 +117,7 @@ public class PageLanding extends PageObjTM {
 	}
 
 	public boolean haySecc_Art_Banners(AppEcom app) throws Exception {
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app);
 		if (((PageGaleriaDesktop)pageGaleria).isVisibleAnyArticle()) {
 			return true;
 		}
@@ -167,7 +157,7 @@ public class PageLanding extends PageObjTM {
 			boolean elementContained = false;
 			switch (element) {
 			case article:
-				PageGaleria pageGaleria = PageGaleria.getNew(channel, app, driver);
+				PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
 				elementContained = pageGaleria.isVisibleArticleUntil(1, 3);
 				break;
 			case campaign:

@@ -39,7 +39,7 @@ public class SecSelectorPrecios extends PageObjTM {
 	public boolean isVisible() {
 		By byLineaFiltro = By.xpath(XPathLineaFiltroShop);
 		if (channel==Channel.desktop) {
-			PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
+			PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app);
 			SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(pageGaleria, driver);
 			secFiltros.showFilters();
 			boolean visible = state(Visible, byLineaFiltro).check();

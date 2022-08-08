@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.buscador;
+package com.mng.robotest.domains.buscador.pageobjects;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 

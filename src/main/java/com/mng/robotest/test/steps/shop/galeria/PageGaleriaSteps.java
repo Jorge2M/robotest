@@ -76,7 +76,7 @@ public class PageGaleriaSteps {
 		this.secCrossSellingSteps = new SecCrossSellingSteps(channel, app, driver);
 		this.secSelectorPreciosSteps = new SecSelectorPreciosSteps(app, channel, driver);
 		this.bannerHead = BannerHeadGallerySteps.newInstance(this, driver);
-		this.pageGaleria = PageGaleria.getNew(channel, app, driver);
+		this.pageGaleria = PageGaleria.getNew(channel, app);
 	}
 	
 	public static PageGaleriaSteps getInstance(Channel channel, AppEcom app, WebDriver driver) {
@@ -262,7 +262,7 @@ public class PageGaleriaSteps {
 		description="Sí aparece el footer",
 		level=State.Warn)
 	private boolean checkVisibilityFooter(int pageToScroll, AppEcom app) throws Exception {
-		return (new SecFooter(app, driver)).isVisible();
+		return (new SecFooter(app)).isVisible();
 	}
 
 	@Validation (

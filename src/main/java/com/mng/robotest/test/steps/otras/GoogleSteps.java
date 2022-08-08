@@ -13,13 +13,8 @@ import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
 
 public class GoogleSteps {
 
-	private final WebDriver driver;
-	private final PageGoogle pageGoogle;
-	
-	public GoogleSteps(WebDriver driver) {
-		this.driver = driver;
-		this.pageGoogle = new PageGoogle(driver);
-	}
+	private final PageGoogle pageGoogle = new PageGoogle();
+	private final WebDriver driver = pageGoogle.driver;
 	
 	@Step (
 		description="Accedemos a la URL de Google (http://www.google.es\") y buscamos \"MANGO\"", 
@@ -57,7 +52,7 @@ public class GoogleSteps {
 		description="Aparece la página de <b>Landing</b> o <b>Prehome</b>",
 		level=State.Defect)	
 	private boolean checkInitialPageShop() throws Exception {
-		boolean isPageLanding = (new PageLanding(driver)).isPage();
+		boolean isPageLanding = (new PageLanding()).isPage();
 		boolean isPagePrehome = PagePrehome.isPage(driver);
 		return (isPageLanding || isPagePrehome);
 	}

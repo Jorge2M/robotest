@@ -25,15 +25,15 @@ import org.openqa.selenium.WebDriver;
 
 public class Otras {
 	
-	private static final Pais espana = PaisGetter.get(PaisShop.ESPANA);
-	private static final Pais francia = PaisGetter.get(PaisShop.FRANCE);
-	private static final Pais suecia = PaisGetter.get(PaisShop.SWEDEN);
-	private static final Pais irlanda = PaisGetter.get(PaisShop.IRELAND);
+	private static final Pais ESPANA = PaisGetter.get(PaisShop.ESPANA);
+	private static final Pais FRANCIA = PaisGetter.get(PaisShop.FRANCE);
+	private static final Pais SUECIA = PaisGetter.get(PaisShop.SWEDEN);
+	private static final Pais IRLANDA = PaisGetter.get(PaisShop.IRELAND);
 	private static final Pais USA = PaisGetter.get(PaisShop.USA);
-	private static final Pais japon = PaisGetter.get(PaisShop.JAPON);
-	private static final IdiomaPais castellano = espana.getListIdiomas().get(0);
-	private static final IdiomaPais francia_frances = francia.getListIdiomas().get(0);
-	private static final IdiomaPais japones = japon.getListIdiomas().get(0);
+	private static final Pais JAPON = PaisGetter.get(PaisShop.JAPON);
+	private static final IdiomaPais CASTELLANO = ESPANA.getListIdiomas().get(0);
+	private static final IdiomaPais FRANCIA_FRANCES = FRANCIA.getListIdiomas().get(0);
+	private static final IdiomaPais JAPONES = JAPON.getListIdiomas().get(0);
 
 	private DataCtxShop getCtxShForTest() throws Exception {
 		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
@@ -49,19 +49,19 @@ public class Otras {
 	public void OTR001_check_Redirects() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
-		dCtxSh.pais = espana;
-		dCtxSh.idioma = castellano;
+		dCtxSh.pais = ESPANA;
+		dCtxSh.idioma = CASTELLANO;
 		dCtxSh.userRegistered = false;
 		AccesoSteps.oneStep(dCtxSh, false, driver);
 		
 		SecMenusDesktopSteps secMenusDesktopSteps = new SecMenusDesktopSteps(dCtxSh.pais, dCtxSh.appE, dCtxSh.channel);
 		secMenusDesktopSteps.checkURLRedirectParkasHeEspanya();
 		
-		dCtxSh.pais = francia;
-		dCtxSh.idioma = francia_frances;
+		dCtxSh.pais = FRANCIA;
+		dCtxSh.idioma = FRANCIA_FRANCES;
 		AccesoSteps.goToInitialURL(driver);
 		AccesoSteps.oneStep(dCtxSh, false, driver);	  
-		SecMenusDesktopSteps.checkURLRedirectFicha(francia, dCtxSh, driver);
+		SecMenusDesktopSteps.checkURLRedirectFicha(FRANCIA, dCtxSh, driver);
 	}
 	
 	
@@ -69,8 +69,7 @@ public class Otras {
 		groups={"Otras", "Canal:desktop_App:shop"}, 
 		description="Verificar en google la existencia de referencia Mango")
 	public void OTR002_check_Busqueda_Google() throws Exception {
-		WebDriver driver = TestMaker.getDriverTestCase();
-		GoogleSteps googleSteps = new GoogleSteps(driver);
+		GoogleSteps googleSteps = new GoogleSteps();
 		googleSteps.accessGoogleAndSearchMango();
 		googleSteps.selectFirstLinkSinPublicidad();
 	}
@@ -82,10 +81,10 @@ public class Otras {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
 
-		dCtxSh.pais = espana;
-		dCtxSh.idioma = castellano;
+		dCtxSh.pais = ESPANA;
+		dCtxSh.idioma = CASTELLANO;
 		dCtxSh.userRegistered = false;
-		AccesoSteps.accesoPRYCambioPais(dCtxSh, francia, francia_frances, driver);
+		AccesoSteps.accesoPRYCambioPais(dCtxSh, FRANCIA, FRANCIA_FRANCES, driver);
 	}
 
 	/**
@@ -103,21 +102,21 @@ public class Otras {
 
 		//Definimos la lista de los 3 países que pueden estar asociados a la IP del usuario
 		List<Pais> listPaisAsocIP = new ArrayList<>();
-		listPaisAsocIP.add(espana);
-		listPaisAsocIP.add(irlanda);
+		listPaisAsocIP.add(ESPANA);
+		listPaisAsocIP.add(IRLANDA);
 		listPaisAsocIP.add(USA);
 			
 		//Acceso vía URL con:
 		//   país de acceso: suecia (no asociado a la IP del usuario)
 		//   país de acceso previo: ninguno (null)
 		//   país previamente confirmado: ninguno (null)
-		Pais paisAsocIP = AccesoSteps.accesoConURLPaisNoIP(urlBaseTest, suecia, null, null, 0, listPaisAsocIP, driver);
+		Pais paisAsocIP = AccesoSteps.accesoConURLPaisNoIP(urlBaseTest, SUECIA, null, null, 0, listPaisAsocIP, driver);
 				
 		//Acceso vía URL con:
 		//   país de acceso: francia (no asociado a la IP del usuario)
 		//   país de acceso previo: suecia
 		//   país previamente confirmado: ninguno (null)
-		AccesoSteps.accesoConURLPaisNoIP(urlBaseTest, francia, suecia, null, 0, listPaisAsocIP, driver);
+		AccesoSteps.accesoConURLPaisNoIP(urlBaseTest, FRANCIA, SUECIA, null, 0, listPaisAsocIP, driver);
 					
 		//Step. Confirmamos el país del modal (España, Irlanda o USA... el de paisAsocIP)
 		AccesoSteps.selectConfirmPaisModal(driver);
@@ -127,7 +126,7 @@ public class Otras {
 		//   país de acceso previo: suecia
 		//   país previamente confirmado: paisAsocIp (España, Irlanda o USA)
 		//   número de veces confirmado: 1
-		AccesoSteps.accesoConURLPaisNoIP(urlBaseTest, francia, suecia, paisAsocIP, 1, listPaisAsocIP, driver);
+		AccesoSteps.accesoConURLPaisNoIP(urlBaseTest, FRANCIA, SUECIA, paisAsocIP, 1, listPaisAsocIP, driver);
 			
 		//Step. Confirmamos el país del modal (España, Irlanda o USA... el de paisAsocIP)
 		AccesoSteps.selectConfirmPaisModal(driver);
@@ -137,11 +136,11 @@ public class Otras {
 		//   país de acceso previo: francia
 		//   país previamente confirmado: paisAsocIp (España, Irlanda o USA)
 		//   número de veces confirmado: 2
-		AccesoSteps.accesoConURLPaisNoIP(urlBaseTest, suecia, francia, paisAsocIP, 2, listPaisAsocIP, driver);
+		AccesoSteps.accesoConURLPaisNoIP(urlBaseTest, SUECIA, FRANCIA, paisAsocIP, 2, listPaisAsocIP, driver);
 				
 		//Steps. Acabamos ejecutando la funcionalidad típica de cambio de país desde el footer
-		dCtxSh.pais = francia;
-		dCtxSh.idioma = francia_frances;
+		dCtxSh.pais = FRANCIA;
+		dCtxSh.idioma = FRANCIA_FRANCES;
 		(new SecFooterSteps(dCtxSh.channel, dCtxSh.appE, driver)).cambioPais(dCtxSh);
 	}
 
@@ -156,8 +155,8 @@ public class Otras {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
 
-		dCtxSh.pais = japon;
-		dCtxSh.idioma = japones;
+		dCtxSh.pais = JAPON;
+		dCtxSh.idioma = JAPONES;
 		PagePrehomeSteps pagePrehomeSteps = new PagePrehomeSteps(dCtxSh, driver);
 		pagePrehomeSteps.getPageObject().previousAccessShopSteps(true);
 		pagePrehomeSteps.seleccionPaisIdioma();
@@ -172,8 +171,8 @@ public class Otras {
 	public void OTR006_chatBot() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
-		dCtxSh.pais = espana;
-		dCtxSh.idioma = castellano;
+		dCtxSh.pais = ESPANA;
+		dCtxSh.idioma = CASTELLANO;
 		dCtxSh.userRegistered = false;
 		AccesoSteps.oneStep(dCtxSh, false, driver);
 		ModalNewsletterSteps.closeIfVisible(driver);

@@ -24,18 +24,18 @@ import com.mng.robotest.test.utils.UtilsTest;
 
 public class PageHomeMarcasSteps {
 	
-	public final PageHomeMarcas pageHomeMarcas;
-	public final Channel channel;
-	public final AppEcom app;
+	private final PageHomeMarcas pageHomeMarcas;
+	private final Channel channel;
+	private final AppEcom app;
 	public final WebDriver driver;
 	
 	public enum TypeHome {Multimarca, PortadaLinea}
 
-	public PageHomeMarcasSteps(Channel channel, AppEcom app, WebDriver driver) {
-		pageHomeMarcas = new PageHomeMarcas(app, driver);
+	public PageHomeMarcasSteps(Channel channel, AppEcom app) {
+		this.pageHomeMarcas = new PageHomeMarcas(app);
+		this.driver = pageHomeMarcas.driver; 
 		this.channel = channel;
 		this.app = app;
-		this.driver = driver;
 	}
 	
 	public void validateIsPageWithCorrectLineas(Pais pais) throws Exception {
@@ -63,7 +63,7 @@ public class PageHomeMarcasSteps {
 	public ChecksTM checkMsgNewsletterFooter(boolean salesOnInCountry, IdiomaPais idioma) {
 		ChecksTM checks = ChecksTM.getNew();
 		String percentageSymbol = UtilsTest.getPercentageSymbol(idioma);
-		boolean isMsgWithPercentageSimbol = (new SecFooter(app, driver)).newsLetterMsgContains(percentageSymbol);
+		boolean isMsgWithPercentageSimbol = (new SecFooter(app)).newsLetterMsgContains(percentageSymbol);
 		if (salesOnInCountry) {
 			checks.add(
 				Check.make(

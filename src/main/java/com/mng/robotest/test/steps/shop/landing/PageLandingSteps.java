@@ -1,17 +1,16 @@
 package com.mng.robotest.test.steps.shop.landing;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
+
 
 public class PageLandingSteps {
 
 	private final PageLanding pageLanding;
 	
-	public PageLandingSteps(WebDriver driver) {
-		pageLanding = new PageLanding(driver);
+	public PageLandingSteps() {
+		pageLanding = new PageLanding();
 	}
 	
 	@Validation (

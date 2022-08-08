@@ -30,7 +30,7 @@ public class SecFooterSteps {
 	private final WebDriver driver;
 	
 	public SecFooterSteps(Channel channel, AppEcom app, WebDriver driver) {
-		this.secFooter = new SecFooter(app, driver);
+		this.secFooter = new SecFooter(app);
 		this.channel = channel;
 		this.app = app;
 		this.driver = driver;

@@ -2,7 +2,6 @@ package com.mng.robotest.test.pageobject.otras;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
@@ -11,32 +10,28 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageGoogle extends PageObjTM {
 
-	private static final String URLacceso = "http://www.google.es";
-	static final String XPath_inputText = "//input[@type='text']";
-	static final String XPath_linkNoPubli = "//div[@class='g']//a";
-	static final String XPath_LinkNoPubliText = XPath_linkNoPubli + "//h3";
-	static final String XPath_ButtonAcceptModalCookie = "//button[@id='L2AGLb']";
+	private static final String URL_ACCESO = "http://www.google.es";
+	private static final String XPATH_INPUT_TEXT = "//input[@type='text']";
+	private static final String XPATH_LINK_NO_PUBLI = "//div[@class='g']//a";
+	private static final String XPATH_LINK_NO_PUBLI_TEXT = XPATH_LINK_NO_PUBLI + "//h3";
+	private static final String XPATH_BUTTON_ACCEPT_MODAL_COOKIE = "//button[@id='L2AGLb']";
 
-	public PageGoogle(WebDriver driver) {
-		super(driver);
-	}
-	
 	public void accessViaURL() {
-		driver.get(URLacceso);
+		driver.get(URL_ACCESO);
 	}
 
 	public String getUrlAcceso() {
-		return URLacceso;
+		return URL_ACCESO;
 	}
 
 	public String getXPath_linkWithText(String textContained) {
-		return (XPath_LinkNoPubliText + "[text()[contains(.,'" + textContained + "')]]");	
+		return (XPATH_LINK_NO_PUBLI_TEXT + "[text()[contains(.,'" + textContained + "')]]");	
 	}
 
 	public void searchTextAndWait(String textToSearch) throws Exception {
-		driver.findElement(By.xpath(XPath_inputText)).clear(); 
-		driver.findElement(By.xpath(XPath_inputText)).sendKeys(textToSearch); 
-		driver.findElement(By.xpath(XPath_inputText)).sendKeys(Keys.RETURN);
+		driver.findElement(By.xpath(XPATH_INPUT_TEXT)).clear(); 
+		driver.findElement(By.xpath(XPATH_INPUT_TEXT)).sendKeys(textToSearch); 
+		driver.findElement(By.xpath(XPATH_INPUT_TEXT)).sendKeys(Keys.RETURN);
 		waitForPageLoaded(driver);
 	}
 	
@@ -48,15 +43,15 @@ public class PageGoogle extends PageObjTM {
 	}
 	
 	private boolean isVisibleModalCookie(int maxSeconds) {
-		return state(Visible, By.xpath(XPath_ButtonAcceptModalCookie), driver).wait(maxSeconds).check();
+		return state(Visible, By.xpath(XPATH_BUTTON_ACCEPT_MODAL_COOKIE)).wait(maxSeconds).check();
 	}
 	
 	private void acceptModalCookie() {
-		click(By.xpath(XPath_ButtonAcceptModalCookie), driver).exec();
+		click(By.xpath(XPATH_BUTTON_ACCEPT_MODAL_COOKIE)).exec();
 	}
 
 	public boolean validaFirstLinkContains(String textToBeContained) {
-		WebElement headerText = driver.findElement(By.xpath(XPath_LinkNoPubliText));
+		WebElement headerText = driver.findElement(By.xpath(XPATH_LINK_NO_PUBLI_TEXT));
 		if (headerText!=null) {
 			String textHeader = headerText.getText();
 			if (textHeader.contains(textToBeContained) || 
@@ -79,7 +74,7 @@ public class PageGoogle extends PageObjTM {
 	}
 
 	public void clickFirstLinkNoPubli() {
-		click(By.xpath(XPath_linkNoPubli), driver).exec();
+		click(By.xpath(XPATH_LINK_NO_PUBLI)).exec();
 	}
 
 }

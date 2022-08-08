@@ -74,7 +74,7 @@ public class SecMenuLateralMobilSteps {
 	@Validation
 	private ChecksTM checkGaleriaAfterSelectNuevo() {
 		ChecksTM checks = ChecksTM.getNew();
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.mobile, app, driver);
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.mobile, app);
 		int maxSeconds = 3;
 		checks.add(
 			"Aparece algún artículo (esperamos " + maxSeconds + " segundos)",
@@ -184,7 +184,7 @@ public class SecMenuLateralMobilSteps {
 		ChecksTM checks = ChecksTM.getNew();
 		GroupMenu groupMenu = menu1rstLevel.getGroup(Channel.mobile);
 		List<Element> elemsCanBeContained = groupMenu.getElementsCanBeContained();
-		boolean contentPageOk = (new PageLanding(driver)).isSomeElementVisibleInPage(elemsCanBeContained, app, Channel.mobile, 2);
+		boolean contentPageOk = (new PageLanding()).isSomeElementVisibleInPage(elemsCanBeContained, app, Channel.mobile, 2);
 	 	checks.add(
 			"Aparecen alguno de los siguientes elementos: <b>" + elemsCanBeContained + "</b> (es un menú perteneciente al grupo <b>" + groupMenu + ")</b>",
 			contentPageOk, State.Warn);

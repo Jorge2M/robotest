@@ -16,44 +16,44 @@ public class FactoryPageFromFooter {
 	
 	public static PageFromFooter make(FooterLink typeFooterLink, Channel channel, AppEcom app, WebDriver driver) {
 		switch (typeFooterLink) {
-		case ayuda:
+		case AYUDA:
 			return (new PagePregFrecuentes(driver));
-		case miscompras:
+		case MIS_COMPRAS:
 			return (new PageAccesoMisCompras()); 
-		case devoluciones:
+		case DEVOLUCIONES:
 			return (new PageCambiosYdevoluciones(driver));
-		case tiendas: 
+		case TIENDAS: 
 			return (new ModalBuscadorTiendas(channel, app, driver));
-		case mango_card:
+		case MANGO_CARD:
 			return (new PageMangoCard(driver));
-		case cheque_regalo:
+		case CHEQUE_REGALO:
 			return (new PageChequeRegaloInputDataNew(driver));
-		case cheque_regalo_old:
+		case CHEQUE_REGALO_OLD:
 			return (new PageChequeRegaloInputDataOld(driver));
-		case apps:
+		case APPS:
 			return (new PageMangoShoppingApp(driver));
-		case empresa:
+		case EMPRESA:
 			return (new PageEmpresa(driver));
-		case franquicias:
+		case FRANQUICIAS:
 			return (new PageFranquicias(driver));
-		case trabaja_con_nosotros_shop:
-		case trabaja_con_nosotros_outlet:
+		case TRABAJA_CON_NOSOTROS_SHOP:
+		case TRABAJA_CON_NOSOTROS_OUTLET:
 			return (new PageTrabajaConNosotros(driver));
-		case prensa:
+		case PRENSA:
 			return (new PageNotasPrensa(driver));
-		case mango_outlet:
+		case MANGO_OUTLET:
 			return (new PageMultimarcasOutlet(driver));
-		case preguntas_frecuentes:
+		case PREGUNTAS_FRECUENTES:
 			return (new PagePreguntasFreq(driver));
-		case pedidos:
+		case PEDIDOS:
 			return (new PageInputPedido());
-		case envio:
+		case ENVIO:
 			return (new PageEnvio(driver));
-		case formas_de_pago:
+		case FORMAS_DE_PAGO:
 			return (new PageFormasDePago(driver));
-		case guia_de_tallas:
+		case GUIA_DE_TALLAS:
 			return (new PageGuiaDeTallas(driver));
-		case mango:
+		case MANGO:
 			return (new PageMultimarcasShop(driver));		
 		default:
 			return null;

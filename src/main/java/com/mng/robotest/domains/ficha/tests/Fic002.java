@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.buscador.steps.SecBuscadorSteps;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.ficha.pageobjects.PageFichaArtOld;
 import com.mng.robotest.domains.ficha.pageobjects.Slider;
@@ -16,7 +17,6 @@ import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
-import com.mng.robotest.test.steps.shop.buscador.SecBuscadorSteps;
 
 
 public class Fic002 extends TestBase {
@@ -24,7 +24,7 @@ public class Fic002 extends TestBase {
 	final GarmentCatalog garment;
 	final boolean isTotalLook;
 	
-	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps(app, channel, driver);
+	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps(app, channel);
 	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(app, channel, dataTest.pais);
 	
 	public Fic002() throws Exception {

@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.buscador.steps.SecBuscadorSteps;
 import com.mng.robotest.domains.ficha.steps.ModalBuscadorTiendasSteps;
 import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
 import com.mng.robotest.domains.transversal.TestBase;
@@ -17,7 +18,6 @@ import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.SecBolsaSteps;
-import com.mng.robotest.test.steps.shop.buscador.SecBuscadorSteps;
 
 import javassist.NotFoundException;
 
@@ -29,7 +29,7 @@ public class Fic001 extends TestBase {
 	final List<FilterType> filterNoOnlineWithColors;
 	final Optional<GarmentCatalog> articleNoOnlineWithColors;
 	
-	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps(app, channel, driver);
+	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps(app, channel);
 	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(app, channel, dataTest.pais);
 	
 	public Fic001() throws Exception {

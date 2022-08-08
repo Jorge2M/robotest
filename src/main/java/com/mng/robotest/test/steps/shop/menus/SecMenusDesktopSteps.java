@@ -115,7 +115,7 @@ public class SecMenusDesktopSteps {
 		expected="Aparecen artículos asociados al menú",
 		saveNettraffic=SaveWhen.Always)
 	private void selectMenuSubfamilia(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh) {
-		PageGaleria pageGaleria = PageGaleriaDesktop.getNew(dCtxSh.channel, app, driver);
+		PageGaleria pageGaleria = PageGaleriaDesktop.getNew(dCtxSh.channel, app);
 		((PageGaleriaDesktop)pageGaleria).secSubmenusGallery.clickSubmenu(menu2onLevel.getNombre(), driver);
 	}
 	
@@ -190,7 +190,7 @@ public class SecMenusDesktopSteps {
 		level=State.Warn)
 	private boolean checkIsSelectedLateralMenu(MenuLateralDesktop menu, int maxSeconds) {
 		if (app!=AppEcom.outlet && menu instanceof Menu2onLevel) {
-			PageGaleria pageGaleria = PageGaleriaDesktop.getNew(Channel.desktop, app, driver);
+			PageGaleria pageGaleria = PageGaleriaDesktop.getNew(Channel.desktop, app);
 			return ((PageGaleriaDesktop)pageGaleria).secSubmenusGallery.isMenuSelected(menu.getNombre(), driver);
 		}
 		return (secMenus.secMenuLateral.isSelectedMenu(menu, maxSeconds));
@@ -215,7 +215,7 @@ public class SecMenusDesktopSteps {
 		for (int i=0; i<textsArticlesGalery.length; i++) {
 			litsToContain+= "<br>" + textsArticlesGalery[i];
 		}
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app);
 		ArrayList<String> listTxtArtNoValidos = pageGaleriaDesktop.nombreArticuloNoValido(textsArticlesGalery);
 		String articlesWrongWarning = "";
 		if (listTxtArtNoValidos.size() > 0) {
@@ -380,8 +380,8 @@ public class SecMenusDesktopSteps {
 		description="Aparece una página con banners, artículos, iframes, maps o sliders",
 		level=State.Warn)
 	private boolean checkAreValidMangoObjectsInPage() throws Exception {
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
-		PageLanding pageLanding = new PageLanding(driver);
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app);
+		PageLanding pageLanding = new PageLanding();
 		if (!pageGaleria.isVisibleArticleUntil(1, 3) &&
 			!pageLanding.hayIframes() &&
 			!pageLanding.hayMaps() &&
@@ -475,7 +475,7 @@ public class SecMenusDesktopSteps {
 	@Validation
 	private ChecksTM checkSizeDivImages() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app);
 		int numPage = 1; 
 		double marginPercError = 2;
 		ListSizesArticle listArtWrong1rstPage = pageGaleriaDesktop.getArticlesWithWrongSize(numPage, marginPercError);
@@ -506,12 +506,12 @@ public class SecMenusDesktopSteps {
 		ChecksTM checks = ChecksTM.getNew();
 		GroupMenu groupMenu = menu.getGroup(Channel.desktop);
 		List<Element> elemsCanBeContained = groupMenu.getElementsCanBeContained();
-		boolean contentPageOk = (new PageLanding(driver)).isSomeElementVisibleInPage(elemsCanBeContained, app, Channel.desktop, 2);
+		boolean contentPageOk = (new PageLanding()).isSomeElementVisibleInPage(elemsCanBeContained, app, Channel.desktop, 2);
 	 	checks.add(
 			"Aparecen alguno de los siguientes elementos: <b>" + elemsCanBeContained + "</b> (es un menú perteneciente al grupo <b>" + groupMenu + ")</b>",
 			contentPageOk, State.Warn);
 		
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app);
 		if (groupMenu.canContainElement(Element.article)) {
 		 	String guiones = "--";
 		 	checks.add(
@@ -564,7 +564,7 @@ public class SecMenusDesktopSteps {
 	@Validation
 	public ChecksTM checksSpecificEndRebajasChina() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app);
 	  	List<Integer> tempSale = FilterCollection.sale.getListTempArticles();
 	  	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.articlesFrom, tempSale);
 	  	String warningMessage = "";
@@ -595,7 +595,7 @@ public class SecMenusDesktopSteps {
 	@Validation
 	private ChecksTM checkNoArticlesRebajadosWithLabelIncorrect() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app);
 		List<LabelArticle> listLabelsWrong = PageGaleria.listLabelsNew;
 		List<Integer> tempSales = FilterCollection.sale.getListTempArticles();
 		List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaxRebajadosWithLiteralInLabel(tempSales, listLabelsWrong);
@@ -627,7 +627,7 @@ public class SecMenusDesktopSteps {
 		Integer temporadaOldOld = FilterCollection.sale.getListTempArticles().get(0);
 		ArrayList<Integer> temporadaOldOldList = new ArrayList<Integer>(Arrays.asList(temporadaOldOld));  
 	   	List<LabelArticle> listLabelsWrong = PageGaleria.listLabelsNew;
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app);
 	   	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaOldOldList, listLabelsWrong);
 		String warningMessage = "";
 		if (listArtWrong.size() > 0) {
@@ -653,7 +653,7 @@ public class SecMenusDesktopSteps {
 		ChecksTM checks = ChecksTM.getNew();
 		
 		List<Integer> temporadaNew = FilterCollection.nextSeason.getListTempArticles();
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app);
 		List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaNew, LabelArticle.NewNow, LabelArticle.NewCollection);
 		String warningMessage = "";
 		if (listArtWrong.size() > 0) {

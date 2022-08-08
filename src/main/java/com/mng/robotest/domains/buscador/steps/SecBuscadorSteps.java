@@ -1,4 +1,4 @@
-package com.mng.robotest.test.steps.shop.buscador;
+package com.mng.robotest.domains.buscador.steps;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,6 +24,7 @@ import com.mng.robotest.test.pageobject.shop.navigations.ArticuloNavigations;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
+
 public class SecBuscadorSteps {
 
 	private final PageGaleria pageGaleria;
@@ -31,9 +32,9 @@ public class SecBuscadorSteps {
 	private final Channel channel;
 	private final AppEcom app;
 	
-	public SecBuscadorSteps(AppEcom app, Channel channel, WebDriver driver) {
-		this.pageGaleria = PageGaleria.getNew(From.BUSCADOR, channel, app, driver);
-		this.driver = driver;
+	public SecBuscadorSteps(AppEcom app, Channel channel) {
+		this.pageGaleria = PageGaleria.getNew(From.BUSCADOR, channel, app);
+		this.driver = pageGaleria.driver;
 		this.channel = channel;
 		this.app = app;
 	}
@@ -79,11 +80,7 @@ public class SecBuscadorSteps {
 		if (categoriaExiste) { 
 			areProducts(categoriaABuscar, 3);
 		} else {
-//			if (app!=AppEcom.outlet) {
 			areProducts(3);
-//			} else {
-//				appearsSearchErrorPage(categoriaABuscar, driver);
-//			}
 		}
 
 		GenericChecks.from(Arrays.asList( 
@@ -108,11 +105,4 @@ public class SecBuscadorSteps {
 	private boolean areProducts(int maxSeconds) {
 		return pageGaleria.isVisibleArticleUntil(1, maxSeconds);
 	}
-	
-//	@Validation (
-//		description="Aparece la página de error en la búsqueda con el encabezado <b>#{categoriaABuscar}</b>",
-//		level=State.Warn)
-//	private static boolean appearsSearchErrorPage(String categoriaABuscar, WebDriver driver) {
-//		return (PageErrorBusqueda.isCabeceraResBusqueda(driver, categoriaABuscar));
-//	}
 }

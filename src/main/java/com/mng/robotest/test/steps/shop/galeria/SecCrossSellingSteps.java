@@ -25,13 +25,11 @@ import com.mng.robotest.test.pageobject.shop.menus.desktop.SecBloquesMenuDesktop
 public class SecCrossSellingSteps {
 
 	private final SecCrossSelling secCrossSelling;
-	private final WebDriver driver;
 	private final AppEcom app;
 	private final Channel channel;
 	
 	public SecCrossSellingSteps(Channel channel, AppEcom app, WebDriver driver) {
 		this.secCrossSelling = new SecCrossSelling(channel, driver);
-		this.driver = driver;
 		this.app = app;
 		this.channel = channel;
 	}
@@ -52,7 +50,7 @@ public class SecCrossSellingSteps {
 		String hrefMenu3 = listaMenusBloque.get(2).getAttribute("href");
 
 		ChecksTM checks = ChecksTM.getNew();
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app);
 		if (!secCrossSelling.isSectionVisible()) {
 			pageGaleria.hideMenus();
 			pageGaleria.scrollToPageFromFirst(PageGaleriaDesktop.MAX_PAGE_TO_SCROLL);

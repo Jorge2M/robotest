@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.buscador;
+package com.mng.robotest.domains.buscador.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;

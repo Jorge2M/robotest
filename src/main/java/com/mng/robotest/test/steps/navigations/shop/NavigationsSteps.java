@@ -19,7 +19,7 @@ public class NavigationsSteps {
 		
 		secCabeceraSteps.selecLogo();
 		secCabeceraSteps.selecLogo();
-		(new PageLandingSteps(driver)).checkIsPage(5);
+		(new PageLandingSteps()).checkIsPage(5);
 	}
 	
 }

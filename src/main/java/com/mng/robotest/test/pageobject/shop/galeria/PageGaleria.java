@@ -7,7 +7,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Locatable;
 
@@ -29,6 +28,7 @@ import com.mng.robotest.test.steps.shop.galeria.LocationArticle;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps.TypeActionFav;
 import com.mng.robotest.test.utils.UtilsTest;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -95,10 +95,10 @@ public abstract class PageGaleria extends PageObjTM {
 	static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE = "//*[" + CLASS_PRODUCT_ITEM + "]";
 	static final String XPATH_LINK_RELATIVE_TO_ARTICLE = ".//a[@class='product-link']";
 
-	public static PageGaleria getNew(Channel channel, AppEcom app, WebDriver driver) {
-		return getNew(From.MENU, channel, app, driver);
+	public static PageGaleria getNew(Channel channel, AppEcom app) {
+		return getNew(From.MENU, channel, app);
 	}
-	public static PageGaleria getNew(From from, Channel channel, AppEcom app, WebDriver driver) {
+	public static PageGaleria getNew(From from, Channel channel, AppEcom app) {
 		switch (channel) {
 		case desktop:
 			return (new PageGaleriaDesktop(from, channel, app));
@@ -532,8 +532,8 @@ public abstract class PageGaleria extends PageObjTM {
 		List<Integer> numArticlesDoubleXpage = new ArrayList<>();
 		initializeDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, pageToScroll + 10);
 		updateDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, lastPage);
-		SecFooter secFooter = new SecFooter(app, driver);
-		while (/*!secFooter.isVisible() && */lastPage < pageToScroll) {
+		SecFooter secFooter = new SecFooter(app);
+		while (lastPage < pageToScroll) {
 			goToLastPage();
 			int newLastPage = getNumLastPage();
 			updateDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, newLastPage);

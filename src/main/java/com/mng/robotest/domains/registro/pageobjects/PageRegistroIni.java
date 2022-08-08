@@ -67,7 +67,7 @@ public class PageRegistroIni extends PageObjTM {
 	
 	private static final String MSG_CAMPO_OBLIGATORIO = "Este campo es obligatorio";
 	private static final String MSG_USR_DUPLICADO_POST_CLICK = "Email ya registrado";
-	private static final String MSG_EMAIL_INCORRECTO_POST_CLICK = "Introduce un e-mail válido";
+
 	
 	private String getXPath_mensajeErrorFormulario(String mensajeError) {
 		return ("//div[@class='formErrors']//li[text()[contains(.,'" + mensajeError + "')]]");

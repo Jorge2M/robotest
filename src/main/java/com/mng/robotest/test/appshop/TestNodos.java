@@ -90,7 +90,7 @@ public class TestNodos implements Serializable {
 		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh);
 		if (appE==AppEcom.shop) {
 			selectMenuPantalones(dCtxSh, driver);
-			PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, dCtxSh.appE, driver);
+			PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, dCtxSh.appE);
 			ListDataArticleGalery listArticlesPant = pageGaleria.getListDataArticles();
 			this.nodo.setArticlesNuevo(listArticlesPant);
 			PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);

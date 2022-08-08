@@ -79,7 +79,7 @@ public class GaleriaProducto {
 		//Pruebas a nivel del cambio de galería de 2<->4 columnas
 		PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		if (dCtxSh.channel==Channel.desktop && dCtxSh.appE!=AppEcom.outlet) {
-			PageGaleriaDesktop pageGaleria = (PageGaleriaDesktop)PageGaleria.getNew(From.MENU, Channel.desktop, dCtxSh.appE, driver);
+			PageGaleriaDesktop pageGaleria = (PageGaleriaDesktop)PageGaleria.getNew(From.MENU, Channel.desktop, dCtxSh.appE);
 			ListDataArticleGalery listArticlesGaleria2Cols = pageGaleria.getListDataArticles();
 			listArticlesGaleria2Cols = pageGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.cuatro, listArticlesGaleria2Cols);
 			pageGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.dos, listArticlesGaleria2Cols);

@@ -18,20 +18,15 @@ import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenuLateralDesktop
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-/**
- * Clase que define la automatización de las diferentes funcionalidades de la sección correspondiente a los "Filtros" en Desktop
- * @author jorge.munoz
- *
- */
 public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	
-	static final String TagOrdenacion = "@TagOrden";
-	static final String TagColor = "@TagColor";
-	static final String XPathWrapper = "//div[@id='stickyMenu']";
-	static final String XPathLinkOrdenWithTag = "//a[text()[contains(.,'" + TagOrdenacion + "')]]";
-	static final String XPathLinkColorWithTagOutlet = "//a[@aria-label[contains(.,'" + TagColor + "')]]";
-	static final String XPathLinkColorWithTagShop = "//label[(@for[contains(.,'filtercolor')] or @for[contains(.,'multiSelectGroupsColors')]) and text()[contains(.,'" + TagColor + "')]]";
-	static final String XPathLinkColorWithTagTabletOutlet	 = "//label[@for[contains(.,'color_" + TagColor + "')]]";
+	private static final String TAG_ORDENACION = "@TagOrden";
+	private static final String TAG_COLOR = "@TagColor";
+	private static final String XPATH_WRAPPER = "//div[@id='stickyMenu']";
+	private static final String XPATH_LINK_ORDEN_WITH_TAG = "//a[text()[contains(.,'" + TAG_ORDENACION + "')]]";
+	private static final String XPATH_LINK_COLOR_WITH_TAG_OUTLET = "//a[@aria-label[contains(.,'" + TAG_COLOR + "')]]";
+	private static final String XPATH_LINK_COLOR_WITH_TAG_SHOP = "//label[(@for[contains(.,'filtercolor')] or @for[contains(.,'multiSelectGroupsColors')]) and text()[contains(.,'" + TAG_COLOR + "')]]";
+	private static final String XPATH_LINK_COLOR_WITH_TAG_TABLET_OUTLET	 = "//label[@for[contains(.,'color_" + TAG_COLOR + "')]]";
 	
 	final PageGaleria pageGaleria;
 	final Channel channel;
@@ -45,7 +40,7 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	}
 	
 	public static SecFiltrosDesktop getInstance(Channel channel, AppEcom app, WebDriver driver) {
-		PageGaleria pageGaleria = PageGaleria.getNew(channel, app, driver);
+		PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
 		return (new SecFiltrosDesktop(pageGaleria, driver));
 	}
 	
@@ -54,17 +49,17 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	}
 	
 	private String getXPathLinkOrdenacion(FilterOrdenacion ordenacion) {
-		return (XPathLinkOrdenWithTag.replace(TagOrdenacion, ordenacion.getValueForDesktop()));
+		return (XPATH_LINK_ORDEN_WITH_TAG.replace(TAG_ORDENACION, ordenacion.getValueForDesktop()));
 	}
 	
 	private String getXPathLinkColor(Color color) {
 		if (app==AppEcom.outlet) {
 			if (channel==Channel.tablet) {
-				return XPathLinkColorWithTagTabletOutlet.replace(TagColor, color.getNameFiltro());
+				return XPATH_LINK_COLOR_WITH_TAG_TABLET_OUTLET.replace(TAG_COLOR, color.getNameFiltro());
 			}
-			return (XPathLinkColorWithTagOutlet.replace(TagColor, color.getNameFiltro()));
+			return (XPATH_LINK_COLOR_WITH_TAG_OUTLET.replace(TAG_COLOR, color.getNameFiltro()));
 		}
-		return (XPathLinkColorWithTagShop.replace(TagColor, color.getNameFiltro()));
+		return (XPATH_LINK_COLOR_WITH_TAG_SHOP.replace(TAG_COLOR, color.getNameFiltro()));
 	}
 	
 	@Override
@@ -111,7 +106,7 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	
 	@Override
 	public boolean isClickableFiltroUntil(int seconds) {
-		return (state(Clickable, By.xpath(XPathLinkOrdenWithTag), driver)
+		return (state(Clickable, By.xpath(XPATH_LINK_ORDEN_WITH_TAG), driver)
 				.wait(seconds).check());
 	}
 	
@@ -124,7 +119,7 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	
 	public void makeFilters(Visibility visibility) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		WebElement element = driver.findElement(By.xpath(XPathWrapper));
+		WebElement element = driver.findElement(By.xpath(XPATH_WRAPPER));
 		String style = "block";
 		if (visibility == Visibility.Invisible) {
 			style = "none";
@@ -135,7 +130,7 @@ public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
 	private static final String XPathLinkCollectionShop = "//div[@id='navigationContainer']/button";
 	public void showLateralMenus() {
 		if (app!=AppEcom.outlet) {
-			SecMenuLateralDesktop secMenuLateral = SecMenuLateralDesktop.getNew(AppEcom.shop, driver);
+			SecMenuLateralDesktop secMenuLateral = SecMenuLateralDesktop.getNew(AppEcom.shop);
 			if (!secMenuLateral.isVisibleCapaMenus(1)) {
 				click(By.xpath(XPathLinkCollectionShop)).exec();
 			}

@@ -200,7 +200,7 @@ public class SecMenusWrapperSteps {
 		level=State.Warn,
 		store=StoreType.None)
 	private boolean checkIsVisibleAarticle(DataCtxShop dCtxSh, int maxSeconds) throws Exception {
-		PageGaleria pageGaleria = PageGaleria.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		PageGaleria pageGaleria = PageGaleria.getNew(dCtxSh.channel, dCtxSh.appE);
 		return (pageGaleria.isVisibleArticuloUntil(1, maxSeconds));
 	}
 	

@@ -84,13 +84,16 @@ public class SecSelectorPreciosSteps {
 		checks.add(
 			"El nuevo mínimo es mayor que el anterior. Era de <b>" + dataFilter.minimoOrig + "</b> y ahora es <b>" + dataFilter.minimoFinal + "</b>",
 			dataFilter.minimoFinal > dataFilter.minimoOrig, State.Warn);
+		
 		checks.add(
 			"El nuevo máximo es menor que el anterior. Era de <b>" + dataFilter.maximoOrig + "</b> y ahora es <b>" + dataFilter.maximoFinal + "</b>",
 			dataFilter.maximoFinal < dataFilter.maximoOrig, State.Warn);
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
+		
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app);
 		checks.add(
 			"Todos los precios están en el intervalo [" + dataFilter.minimoFinal + ", " + dataFilter.maximoFinal + "]",
 			pageGaleria.preciosInIntervalo(dataFilter.minimoFinal, dataFilter.maximoFinal), State.Warn);
+		
 		return checks;
 	}
 }

@@ -82,8 +82,7 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	}
 	@Override
 	public void gotoListaMisCompras() {
-		SecFooter secFooter = new SecFooter(app, driver);
-		secFooter.clickLink(FooterLink.miscompras);
-		//click(By.xpath(XPathLinkToMisCompras)).exec();
+		SecFooter secFooter = new SecFooter(app);
+		secFooter.clickLink(FooterLink.MIS_COMPRAS);
 	}
 }

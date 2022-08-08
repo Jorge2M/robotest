@@ -224,11 +224,11 @@ public class Compra {
 		PageChequeRegaloInputDataSteps pageChequeRegaloInputDataSteps = new PageChequeRegaloInputDataSteps(dCtxSh.pais, driver);
 		SecFooterSteps secFooterSteps = new SecFooterSteps(dCtxSh.channel, dCtxSh.appE, driver);
 		if (typeCheque==TypeCheque.Old) {
-			secFooterSteps.clickLinkFooter(FooterLink.cheque_regalo_old, false);
+			secFooterSteps.clickLinkFooter(FooterLink.CHEQUE_REGALO_OLD, false);
 			pageChequeRegaloInputDataSteps.clickQuieroComprarChequeRegalo();
 			pageChequeRegaloInputDataSteps.seleccionarCantidades(Importe.euro50);
 		} else {
-			secFooterSteps.clickLinkFooter(FooterLink.cheque_regalo, false);
+			secFooterSteps.clickLinkFooter(FooterLink.CHEQUE_REGALO, false);
 			if(dCtxSh.channel.isDevice()){
 				nTarjeta = "100000040043";
 				cvvTarjeta = "618";

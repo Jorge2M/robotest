@@ -34,7 +34,7 @@ public class SecBannersSteps {
 	public SecBannersSteps(int maxBannersToLoad, WebDriver driver) {
 		this.driver = driver;
 		managerBannersScreen = new ManagerBannersScreen(maxBannersToLoad, driver);
-		pageLanding = new PageLanding(driver);
+		pageLanding = new PageLanding();
 	}
 	
 	public ManagerBannersScreen getManagerBannerScreen() {

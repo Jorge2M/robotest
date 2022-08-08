@@ -1,7 +1,5 @@
 package com.mng.robotest.test.pageobject.shop;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Pais;
@@ -11,8 +9,7 @@ public class PageHomeMarcas extends PageObjTM {
 
 	private final AppEcom app;
 	
-	public PageHomeMarcas(AppEcom app, WebDriver driver) {
-		super(driver);
+	public PageHomeMarcas(AppEcom app) {
 		this.app = app;
 	}	
 	

@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
@@ -21,9 +20,8 @@ public class SecFooter extends PageObjTM {
 
 	private final AppEcom app;
 	
-	private static final String XPathCapaShop = "//div[@id='nav-footer']";
-	//private static final String XPathCapaOutlet = "//div[@class[contains(.,'footer__column footer__column')]]";
-	private static final String XPathCapaOutlet = "//footer[@id='footerMNG']";
+	private static final String XPATH_CAPA_SHOP = "//div[@id='nav-footer']";
+	private static final String XPATH_CAPA_OUTLET = "//footer[@id='footerMNG']";
 	
 	private final SecNewsLetter secNewsLetter;
 	
@@ -36,27 +34,27 @@ public class SecFooter extends PageObjTM {
 	static List<Channel> channelAll = Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet);	
 	
 	public static enum FooterLink {
-		ayuda(footerShop, channelAll, "//a[@data-ga-label='ayuda' and text()[contains(.,'Ayuda')]]", false), 
-		miscompras(footerShop, channelAll, "//a[@data-ga-label='miscompras']", false), 
-		devoluciones(footerAll, channelAll, "//a[@data-ga-label='devoluciones' and text()[contains(.,'Devoluciones')]]", false), 
-		tiendas(footerShop, channelAll, "//a[@data-ga-label='buscarTiendas']", false),
-		mango_card(footerShop, channelAll, "//a[@data-ga-label='tarjetaMango' and text()[contains(.,'Mango Card')]]", false),
-		cheque_regalo(footerShop, channelDesktop, "//a[@data-ga-label='cheques' and text()[contains(.,'egalo')]]", false),
-		cheque_regalo_old(footerShop, channelDesktop, "//a[@data-ga-label='cheques']", false),
-		apps(footerShop, channelAll, "//a[@data-ga-label='apps' and text()[contains(.,'Apps')]]", false), 
-		empresa(footerAll, channelDesktop, "//a[@data-ga-label='pieEmpresa' and text()[contains(.,'Empresa')]]", true), 
-		franquicias(footerShop, channelDesktop, "//a[@data-ga-label='pieFranquicias' and text()[contains(.,'Franquicias')]]", true), 
-		trabaja_con_nosotros_shop(footerShop, channelAll, "//a[@data-ga-label[contains(.,'pieTrabajar')] and text()[contains(.,'Trabaja')]]", true), 
-		prensa(footerShop, channelDesktop, "//a[@data-ga-label='pressroom' and text()[contains(.,'Prensa')]]", true), 
-		mango_outlet(footerShop, channelAll, "//a[@data-ga-label='outlet' and text()[contains(.,'Mango Outlet')]]", true),
+		AYUDA(footerShop, channelAll, "//a[@data-ga-label='ayuda' and text()[contains(.,'Ayuda')]]", false), 
+		MIS_COMPRAS(footerShop, channelAll, "//a[@data-ga-label='miscompras']", false), 
+		DEVOLUCIONES(footerAll, channelAll, "//a[@data-ga-label='devoluciones' and text()[contains(.,'Devoluciones')]]", false), 
+		TIENDAS(footerShop, channelAll, "//a[@data-ga-label='buscarTiendas']", false),
+		MANGO_CARD(footerShop, channelAll, "//a[@data-ga-label='tarjetaMango' and text()[contains(.,'Mango Card')]]", false),
+		CHEQUE_REGALO(footerShop, channelDesktop, "//a[@data-ga-label='cheques' and text()[contains(.,'egalo')]]", false),
+		CHEQUE_REGALO_OLD(footerShop, channelDesktop, "//a[@data-ga-label='cheques']", false),
+		APPS(footerShop, channelAll, "//a[@data-ga-label='apps' and text()[contains(.,'Apps')]]", false), 
+		EMPRESA(footerAll, channelDesktop, "//a[@data-ga-label='pieEmpresa' and text()[contains(.,'Empresa')]]", true), 
+		FRANQUICIAS(footerShop, channelDesktop, "//a[@data-ga-label='pieFranquicias' and text()[contains(.,'Franquicias')]]", true), 
+		TRABAJA_CON_NOSOTROS_SHOP(footerShop, channelAll, "//a[@data-ga-label[contains(.,'pieTrabajar')] and text()[contains(.,'Trabaja')]]", true), 
+		PRENSA(footerShop, channelDesktop, "//a[@data-ga-label='pressroom' and text()[contains(.,'Prensa')]]", true), 
+		MANGO_OUTLET(footerShop, channelAll, "//a[@data-ga-label='outlet' and text()[contains(.,'Mango Outlet')]]", true),
 		
-		preguntas_frecuentes(footerOutlet, channelAll, "//a[@data-ga-label='ayuda' and text()[contains(.,'Preguntas Frecuentes')]]", false), 
-		pedidos(footerOutlet, channelAll, "//a[@data-ga-label='pedidos' and text()[contains(.,'Pedidos')]]", false), 
-		envio(footerOutlet, channelAll, "//a[@data-ga-label='envio' and text()[contains(.,'Envío')]]", false), 
-		formas_de_pago(footerOutlet, channelAll, "//a[@data-ga-label='pago' and text()[contains(.,'Formas de pago')]]", false), 
-		guia_de_tallas(footerOutlet, channelAll, "//a[@data-ga-label='guiaTallas']", true),
-		mango(footerOutlet, channelAll, "//a[@data-ga-label='shop' and (text()[contains(.,'MANGO')] or text()[contains(.,'Mango')])]", true), 
-		trabaja_con_nosotros_outlet(footerOutlet, channelAll, "//a[@data-ga-label='pieTrabajarNew' and text()[contains(.,'Trabaja')]]", true);
+		PREGUNTAS_FRECUENTES(footerOutlet, channelAll, "//a[@data-ga-label='ayuda' and text()[contains(.,'Preguntas Frecuentes')]]", false), 
+		PEDIDOS(footerOutlet, channelAll, "//a[@data-ga-label='pedidos' and text()[contains(.,'Pedidos')]]", false), 
+		ENVIO(footerOutlet, channelAll, "//a[@data-ga-label='envio' and text()[contains(.,'Envío')]]", false), 
+		FORMAS_DE_PAGO(footerOutlet, channelAll, "//a[@data-ga-label='pago' and text()[contains(.,'Formas de pago')]]", false), 
+		GUIA_DE_TALLAS(footerOutlet, channelAll, "//a[@data-ga-label='guiaTallas']", true),
+		MANGO(footerOutlet, channelAll, "//a[@data-ga-label='shop' and (text()[contains(.,'MANGO')] or text()[contains(.,'Mango')])]", true), 
+		TRABAJA_CON_NOSOTROS_OUTLET(footerOutlet, channelAll, "//a[@data-ga-label='pieTrabajarNew' and text()[contains(.,'Trabaja')]]", true);
 		
 		List<AppEcom> appList;
 		List<Channel> channel;
@@ -92,23 +90,22 @@ public class SecFooter extends PageObjTM {
 	}
 	
 	
-	private static final String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
-	private static final String XPathCambioPaisShop = "//div[@class[contains(.,'modalCambioPaisShow')]]";
-	private static final String XPathCambioPaisOutlet = "//span[@class[contains(.,'countrySelector')]]";
+	private static final String XPATH_LEGA_LRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
+	private static final String XPATH_CAMBIO_PAIS_SHOP = "//div[@class[contains(.,'modalCambioPaisShow')]]";
+	private static final String XPATH_CAMBIO_PAIS_OUTLET = "//span[@class[contains(.,'countrySelector')]]";
 	
-	public SecFooter(AppEcom app, WebDriver driver) {
-		super(driver);
+	public SecFooter(AppEcom app) {
 		this.app = app;
-		this.secNewsLetter = new SecNewsLetter(app, driver);
+		this.secNewsLetter = new SecNewsLetter(app);
 	}
 	
 	private String getXPathCapaFooter() {
 		switch (app) {
 		case outlet:
-			return XPathCapaOutlet;
+			return XPATH_CAPA_OUTLET;
 		case shop:
 		default:
-			return XPathCapaShop;
+			return XPATH_CAPA_SHOP;
 		}
 	}
 	
@@ -118,9 +115,9 @@ public class SecFooter extends PageObjTM {
 	
 	private String getXPathLinkCambioPais() {
 		if (app==AppEcom.outlet) {
-			return XPathCambioPaisOutlet;
+			return XPATH_CAMBIO_PAIS_OUTLET;
 		}
-		return XPathCambioPaisShop;
+		return XPATH_CAMBIO_PAIS_SHOP;
 	}
 	
 	public boolean isPresent() {
@@ -169,7 +166,7 @@ public class SecFooter extends PageObjTM {
 	}
 	
 	public boolean isTextoLegalRGPDPresent() {
-		return (state(Present, By.xpath(XPathLegalRGPD)).check());
+		return (state(Present, By.xpath(XPATH_LEGA_LRGPD)).check());
 	}
 	
 	public void moveTo() {
