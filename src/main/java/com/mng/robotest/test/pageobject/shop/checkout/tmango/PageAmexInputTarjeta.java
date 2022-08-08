@@ -3,12 +3,12 @@ package com.mng.robotest.test.pageobject.shop.checkout.tmango;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageAmexInputTarjeta extends PageObjTM {
+public class PageAmexInputTarjeta extends PageBase {
 
 	private static final String XPATH_PAGE_REDSYS = "//title[text()='Redsys']";
 	private static final String XPATH_INPUT_NUM_TARJ = "//input[@id[contains(.,'inputCard')]]";

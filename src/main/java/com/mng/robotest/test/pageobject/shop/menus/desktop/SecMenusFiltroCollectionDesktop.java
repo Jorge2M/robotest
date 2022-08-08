@@ -3,14 +3,14 @@ package com.mng.robotest.test.pageobject.shop.menus.desktop;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusFiltroCollection;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecMenusFiltroCollectionDesktop extends PageObjTM implements SecMenusFiltroCollection {
+public class SecMenusFiltroCollectionDesktop extends PageBase implements SecMenusFiltroCollection {
 
 	private static String XPathDivMenusDesktop = "//div[@id='nuevaTemporadaFilter']";
 	

@@ -3,10 +3,10 @@ package com.mng.robotest.test.pageobject.shop.checkout.tmango;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
-public class PageRedsysSim extends PageObjTM {
+public class PageRedsysSim extends PageBase {
 
 	public enum OptionRedSys {
 		Autenticacion_con_exito("AUTENTICADA"),

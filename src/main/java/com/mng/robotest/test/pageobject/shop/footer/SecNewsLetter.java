@@ -3,13 +3,13 @@ package com.mng.robotest.test.pageobject.shop.footer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.modales.ModalClubMangoLikes;
 
 
-public class SecNewsLetter extends PageObjTM {
+public class SecNewsLetter extends PageBase {
 
 	private final AppEcom app;
 	

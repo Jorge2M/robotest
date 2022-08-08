@@ -3,11 +3,11 @@ package com.mng.robotest.test.pageobject.shop.checkout.d3d;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 
 
-public class PageD3DLogin extends PageObjTM {
+public class PageD3DLogin extends PageBase {
 	
 	static String XPathInputUser = "//input[@id='username']";
 	static String XPathInputPassword = "//input[@id='password']";

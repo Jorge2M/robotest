@@ -3,12 +3,12 @@ package com.mng.robotest.test.pageobject.shop.micuenta;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageSuscripciones extends PageObjTM {
+public class PageSuscripciones extends PageBase {
 
 	//Los valores que permiten identificar los radios correspondientes a los newsletter seleccionables
 	public enum NewsLetter { she, he, kids, teen }

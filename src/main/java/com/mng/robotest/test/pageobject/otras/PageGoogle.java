@@ -4,11 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageGoogle extends PageObjTM {
+public class PageGoogle extends PageBase {
 
 	private static final String URL_ACCESO = "http://www.google.es";
 	private static final String XPATH_INPUT_TEXT = "//input[@type='text']";

@@ -28,7 +28,7 @@ import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.products.data.ProductList;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
@@ -337,11 +337,11 @@ public class GetterProducts {
 		String body = null;
 		try {
 			SeleniumUtils.loadUrlInAnotherTabTitle(urlGetProducts, nameTab, driver);
-			if (PageObjTM.state(State.Visible, By.id("rawdata-tab"), driver).check()) {
-				PageObjTM.click(By.id("rawdata-tab"), driver).exec();
+			if (PageBase.state(State.Visible, By.id("rawdata-tab"), driver).check()) {
+				PageBase.click(By.id("rawdata-tab"), driver).exec();
 			}
 			By bodyPreBy = By.xpath("//body//pre");
-			if (PageObjTM.state(State.Present, bodyPreBy, driver).check()) {
+			if (PageBase.state(State.Present, bodyPreBy, driver).check()) {
 				body = driver.findElement(bodyPreBy).getText();
 			}
 		} 

@@ -1,13 +1,13 @@
 package com.mng.robotest.test.pageobject.shop.miscompras;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.miscompras.PageMisCompras.TypeTicket;
 
 
-public abstract class PageDetalleCompra extends PageObjTM implements PageDetallePedido {
+public abstract class PageDetalleCompra extends PageBase implements PageDetallePedido {
 
 	private final ModalDetalleArticulo modalDetalleArticulo;
 	
@@ -44,7 +44,7 @@ public abstract class PageDetalleCompra extends PageObjTM implements PageDetalle
 	}
 	
 	public PageDetalleCompra(Channel channel) {
-		modalDetalleArticulo = ModalDetalleArticulo.make(channel, driver);
+		modalDetalleArticulo = ModalDetalleArticulo.make(channel);
 	}
 	
 	public ModalDetalleArticulo getModalDetalleArticulo() {

@@ -1,26 +1,21 @@
-package com.mng.robotest.test.steps.shop.favoritos;
+package com.mng.robotest.domains.favoritos.steps;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.favoritos.pageobjects.ModalFichaFavoritos;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.pageobject.shop.favoritos.ModalFichaFavoritos;
 import com.mng.robotest.test.steps.shop.SecBolsaSteps;
 
-/**
- * Clase que implementa los diferentes steps/validations asociados asociados al modal con la ficha de producto que aparece en la página de Favoritos
- * @author jorge.munoz
- *
- */
+
 @SuppressWarnings({"static-access"})
-public class ModalFichaFavoritosSteps {
+public class ModalFichaFavoritosSteps extends StepBase {
 	
 	private final ModalFichaFavoritos modalFichaFavoritos = new ModalFichaFavoritos();
 	
@@ -40,10 +35,10 @@ public class ModalFichaFavoritosSteps {
 	@Step(
 		description="Desde Favoritos añadimos el artículo <b>#{artToAddBolsa.getRefProducto()}</b> (1a talla disponible) a la bolsa",
 		expected="El artículo aparece en la bolsa")
-	public void addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa, Channel channel, AppEcom app, Pais pais) 
+	public void addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa, Pais pais) 
 	throws Exception {
 		String refProductoToAdd = artToAddBolsa.getRefProducto();
-		Talla tallaSelected = modalFichaFavoritos.addArticleToBag(refProductoToAdd, 1, channel, app, pais);
+		Talla tallaSelected = modalFichaFavoritos.addArticleToBag(refProductoToAdd, 1, pais);
 		artToAddBolsa.setTalla(tallaSelected);
 		dataBolsa.addArticulo(artToAddBolsa);
 		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(channel, app, pais);
@@ -66,10 +61,7 @@ public class ModalFichaFavoritosSteps {
 	public void closeFicha(ArticuloScreen articulo) {
 		String refProductoToClose = articulo.getRefProducto();
 		modalFichaFavoritos.closeFicha(refProductoToClose);
-		
-		//Validaciones
-		int maxSeconds = 2;
-		checkFichaDisappearsFromFavorites(articulo.getRefProducto(), maxSeconds);
+		checkFichaDisappearsFromFavorites(articulo.getRefProducto(), 2);
 	}
 	
 	@Validation (

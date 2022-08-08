@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.favoritos;
+package com.mng.robotest.domains.favoritos.pageobjects;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
-
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen.Color;
@@ -21,7 +18,7 @@ import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 
 
-public class ModalFichaFavoritos extends PageObjTM {
+public class ModalFichaFavoritos extends PageBase {
 	
 	private static final String XPATH_FICHA_PRODUCTO = "//div[@class='favorites-quickview']";
 	private static final String XPATH_COLOR_SELECTED_FICHA = XPATH_FICHA_PRODUCTO + 
@@ -87,14 +84,14 @@ public class ModalFichaFavoritos extends PageObjTM {
 		return (getNombreColorSelectedFicha().compareTo(color.getColorName())==0);
 	}
 	
-	public Talla addArticleToBag(String refProducto, int posicionTalla, Channel channel, AppEcom app, Pais pais) 
+	public Talla addArticleToBag(String refProducto, int posicionTalla, Pais pais) 
 			throws Exception {
 		Talla tallaSelected = selectTallaAvailable(refProducto, posicionTalla);
-		clickButtonAddToBagAndWait(refProducto, channel, app, pais);
+		clickButtonAddToBagAndWait(refProducto, pais);
 		return tallaSelected;
 	}
 	
-	public void clickButtonAddToBagAndWait(String refProducto, Channel channel, AppEcom app, Pais pais) 
+	public void clickButtonAddToBagAndWait(String refProducto, Pais pais) 
 			throws Exception {
 		String xpathAdd = getXPathButtonAddBolsa(refProducto);
 		driver.findElement(By.xpath(xpathAdd)).click();

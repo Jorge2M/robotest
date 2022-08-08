@@ -4,13 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.utils.testab.TestABactive;
 
 
-public class PageLoginVOTF extends PageObjTM {
+public class PageLoginVOTF extends PageBase {
 
 	private static final String XPATH_INPUT_USUARIO = "//input[@class='username']";
 	private static final String XPATH_INPUT_PASSWORD = "//input[@class='pwd']";

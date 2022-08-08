@@ -2,10 +2,10 @@ package com.mng.robotest.test.pageobject.chequeregalo;
 
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.generic.ChequeRegalo;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 
-public abstract class PageChequeRegaloInputData extends PageObjTM {
+public abstract class PageChequeRegaloInputData extends PageBase {
 	
 	public abstract boolean isPageCorrectUntil(int maxSeconds);
 	public abstract void clickImporteCheque(Importe importeToClick);

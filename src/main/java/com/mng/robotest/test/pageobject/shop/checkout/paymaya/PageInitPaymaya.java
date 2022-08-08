@@ -3,10 +3,10 @@ package com.mng.robotest.test.pageobject.shop.checkout.paymaya;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
-public class PageInitPaymaya extends PageObjTM {
+public class PageInitPaymaya extends PageBase {
 
 	private static final String XPathWrapper = "//div[@class='paywith-paymaya-screen']";
 	private static final String XPathQr = "//div[@class='scan-section']//div[@class='qr']";

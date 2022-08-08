@@ -3,11 +3,11 @@ package com.mng.robotest.test.pageobject.shop.checkout.processout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test.beans.Pago;
 
-public class PageProcessOutInputTrj extends PageObjTM {
+public class PageProcessOutInputTrj extends PageBase {
 
 	private static final String XPathFormularioTrj = "//div[@class[contains(.,'payment-section')]]";
 	private static final String XPathInputNameCard = "//input[@id='card-name']";

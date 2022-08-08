@@ -3,13 +3,13 @@ package com.mng.robotest.test.pageobject.shop.micuenta;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageMiCuenta extends PageObjTM {
+public class PageMiCuenta extends PageBase {
 	
 	private static String XPathLinkMisDatos = "//a[@href[contains(.,'account/personalinfo')]]";
 //	private static String XPathLinkMisPedidos = "//a[@href[contains(.,'account/orders')]]";

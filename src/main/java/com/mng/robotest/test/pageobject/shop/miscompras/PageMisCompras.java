@@ -12,12 +12,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.micuenta.Ticket;
 
-public class PageMisCompras extends PageObjTM {
+public class PageMisCompras extends PageBase {
 
 	private final PageDetalleCompra modalDetalleCompra;
 	

@@ -3,7 +3,6 @@ package com.mng.robotest.test.pageobject.shop.miscompras;
 import org.openqa.selenium.By;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.footer.SecFooter;
@@ -11,6 +10,7 @@ import com.mng.robotest.test.pageobject.shop.footer.SecFooter.FooterLink;
 import com.mng.robotest.test.pageobject.shop.miscompras.PageMisCompras.TypeTicket;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 
 public class PageDetalleCompraMobil extends PageDetalleCompra {
 	
@@ -57,12 +57,12 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	}
 	@Override
 	public String getIdTicket(TypeTicket typeTicket) {
-		return PageObjTM.getElementWeb(By.xpath(XPathIdTicket), driver).getText();
+		return getElementWeb(By.xpath(XPathIdTicket), driver).getText();
 	}
 	@Override
 	public String getImporte() {
 		state(State.Visible, By.xpath(XPathLineaImporte)).wait(2).check();
-		return PageObjTM.getElementWeb(By.xpath(XPathLineaImporte), driver).getText();
+		return getElementWeb(By.xpath(XPathLineaImporte), driver).getText();
 	}
 	@Override
 	public String getReferenciaArticulo(int posArticulo) {

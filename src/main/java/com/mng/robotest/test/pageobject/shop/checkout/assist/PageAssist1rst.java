@@ -7,14 +7,14 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageAssist1rst extends PageObjTM {
+public class PageAssist1rst extends PageBase {
 
 	private static final String XPATH_LOGO_ASSIST_DESKTOP = "//div[@id[contains(.,'AssistLogo')]]";
 	private static final String XPATH_LOGO_ASSIST_MOBIL = "//div[@class='Logo']/img";

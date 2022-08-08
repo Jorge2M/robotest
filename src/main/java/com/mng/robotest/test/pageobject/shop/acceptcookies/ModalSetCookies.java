@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
-public class ModalSetCookies extends PageObjTM {
+public class ModalSetCookies extends PageBase {
 	
 	public enum SectionConfCookies {
 		Tu_privacidad("ot-pvcy-txt"),
@@ -62,7 +62,7 @@ public class ModalSetCookies extends PageObjTM {
 	
 	public boolean isSectionUnfold(SectionConfCookies section) {
 		String xpathMenu = getXPathMenuSection(section);
-		WebElement menuSection = PageObjTM.getElementWeb(By.xpath(xpathMenu), driver);
+		WebElement menuSection = getElementWeb(By.xpath(xpathMenu), driver);
 		return (
 			menuSection!=null && 
 			menuSection.getAttribute("aria-selected").compareTo("true")==0);
@@ -81,12 +81,12 @@ public class ModalSetCookies extends PageObjTM {
 	}
 	
 	public boolean isSwitchEnabled() {
-		WebElement wrapperSwitch = PageObjTM.getElementVisible(driver, By.xpath(XPathWrapperSwitch));
+		WebElement wrapperSwitch = getElementVisible(driver, By.xpath(XPathWrapperSwitch));
 		return state(State.Present, wrapperSwitch).by(By.xpath(XPathInputSwitchHandler + "//self::*[@checked]")).check();
 	}
 	
 	public void clickSwitchCookies() {
-		WebElement switchElem = PageObjTM.getElementVisible(driver, By.xpath(XPathSwitchCookies));
+		WebElement switchElem = getElementVisible(driver, By.xpath(XPathSwitchCookies));
 		click(switchElem).exec();
 	}
 }

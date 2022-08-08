@@ -3,11 +3,11 @@ package com.mng.robotest.test.pageobject.shop.checkout.klarna;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 
-public class ModalUserDataKlarna extends PageObjTM {
+public class ModalUserDataKlarna extends PageBase {
 
 	public static enum InputKlarna {
 		Email("billing-dialog-email"),

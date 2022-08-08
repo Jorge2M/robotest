@@ -3,10 +3,10 @@ package com.mng.robotest.test.pageobject.shop.modales;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
-public class ModalChatBot extends PageObjTM {
+public class ModalChatBot extends PageBase {
 
 	private static final String XPathIcon = "//div[@id='iris-button']";
 	private static final String XPathWebchat = "//div[@id='snack-bubble']";

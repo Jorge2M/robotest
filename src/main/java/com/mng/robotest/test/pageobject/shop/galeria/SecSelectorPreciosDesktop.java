@@ -7,7 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
@@ -16,7 +16,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
  * @author jorge.munoz
  *
  */
-public class SecSelectorPreciosDesktop extends PageObjTM {
+public class SecSelectorPreciosDesktop extends PageBase {
 	
 	public enum TypeClick {left, right}
 	

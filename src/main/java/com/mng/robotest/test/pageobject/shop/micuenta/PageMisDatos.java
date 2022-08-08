@@ -3,11 +3,11 @@ package com.mng.robotest.test.pageobject.shop.micuenta;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageMisDatos extends PageObjTM {
+public class PageMisDatos extends PageBase {
 	
 	private static final String XPathIsPage = "//div[@class='myDetails']";
 	private static final String XPathTitleOk = "//h2[text()[contains(.,'Mis datos')]]";

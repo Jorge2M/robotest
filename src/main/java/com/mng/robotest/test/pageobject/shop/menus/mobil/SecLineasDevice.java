@@ -8,14 +8,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 
-public abstract class SecLineasDevice extends PageObjTM {
+public abstract class SecLineasDevice extends PageBase {
 
 	public abstract String getXPathLineaLink(LineaType lineaType) throws IllegalArgumentException;
 	
@@ -51,17 +51,17 @@ public abstract class SecLineasDevice extends PageObjTM {
 	
 	public String getXPathSublineaNinosLink(SublineaType sublineaType) {
 		switch (sublineaType) {
-		case NINA_NINA:
+		case nina_nina:
 			return getXPathCapaMenus() + XPathLinkSublineaNina;
-		case TEEN_NINA:
+		case teen_nina:
 			return getXPathCapaMenus() + XPathLinkSublineaTeenNina;
-		case NINA_BEBE:
+		case nina_bebe:
 			return getXPathCapaMenus() + XPathLinkSublineaBebeNina;
-		case NINO_NINO:
+		case nino_nino:
 			return getXPathCapaMenus() + XPathLinkSublineaNino;
-		case TEEN_NINO:
+		case teen_nino:
 			return getXPathCapaMenus() + XPathLinkSublineaTeenNino;
-		case NINO_BEBE:
+		case nino_bebe:
 		default:
 			return getXPathCapaMenus() + XPathLinkSublineaBebeNino;
 		}
@@ -132,14 +132,14 @@ public abstract class SecLineasDevice extends PageObjTM {
 		String xpathBlockSublineas = "";
 		switch (lineaNinosType) {
 		case nina: 
-			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaType.NINA_NINA);
+			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaType.nina_nina);
 			break;
 		case teen:
-			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaType.TEEN_NINA);
+			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaType.teen_nina);
 			break;
 		default:
 		case nino:
-			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaType.NINO_NINO);
+			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaType.nino_nino);
 			break;
 		}
 		return (state(Visible, By.xpath(xpathBlockSublineas)).check());

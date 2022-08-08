@@ -3,12 +3,12 @@ package com.mng.robotest.test.pageobject.shop.checkout.sofort;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageSofort4th extends PageObjTM {
+public class PageSofort4th extends PageBase {
 	
 	private static final String XPathSubmitButton = "//form//button[@class[contains(.,'primary')]]";
 	private static final String XPathInputUser = "//input[@id[contains(.,'LOGINNAMEUSERID')]]";

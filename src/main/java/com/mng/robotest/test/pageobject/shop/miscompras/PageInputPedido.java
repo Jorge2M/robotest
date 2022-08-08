@@ -2,13 +2,13 @@ package com.mng.robotest.test.pageobject.shop.miscompras;
 
 import org.openqa.selenium.By;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.footer.PageFromFooter;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageInputPedido extends PageObjTM implements PageFromFooter {
+public class PageInputPedido extends PageBase implements PageFromFooter {
 	
 	private static final String XPATH_INPUT_PEDIDO = "//input[@id[contains(.,'pedidoId')]]";
 	private static final String XPATH_INPUT_EMAIL_USR = "//input[@id[contains(.,'mailPedido')]]";

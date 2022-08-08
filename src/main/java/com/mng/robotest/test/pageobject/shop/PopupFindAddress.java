@@ -3,12 +3,12 @@ package com.mng.robotest.test.pageobject.shop;
 import org.openqa.selenium.By;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PopupFindAddress extends PageObjTM {
+public class PopupFindAddress extends PageBase {
 
 	private static final String XPATH_INPUT_BUSCADOR = "//input[@id='region_name']";
 	private static final String XPATH_BUTTON_LUPA = "//button[@class='btn_search']";

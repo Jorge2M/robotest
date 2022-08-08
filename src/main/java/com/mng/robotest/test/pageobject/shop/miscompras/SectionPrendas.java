@@ -1,10 +1,10 @@
 package com.mng.robotest.test.pageobject.shop.miscompras;
 
 import org.openqa.selenium.By;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 
-public class SectionPrendas extends PageObjTM {
+public class SectionPrendas extends PageBase {
 
 	private final static String XPATH_ARTICULO = "//*[@data-testid='myPurchases.detail.product']";
 	private final static String XPATH_DATA_ARTICULO = "//*[@data-testid[contains(.,'detail.productInfo')]]/../..";

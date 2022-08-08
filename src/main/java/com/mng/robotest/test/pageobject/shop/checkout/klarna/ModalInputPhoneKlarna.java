@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
-public class ModalInputPhoneKlarna extends PageObjTM {
+public class ModalInputPhoneKlarna extends PageBase {
 
 	private static final String XPathInputPhoneNumber = "//input[@id='email_or_phone']";
 	//private static final String XPathButtonContinue = "//span[@id[contains(.,'btn-continue')]]";

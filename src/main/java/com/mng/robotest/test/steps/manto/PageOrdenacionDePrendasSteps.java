@@ -5,7 +5,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.manto.PageOrdenacionDePrendas.*;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 
@@ -13,7 +13,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.SelectEl
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageOrdenacionDePrendasSteps extends PageObjTM {
+public class PageOrdenacionDePrendasSteps extends PageBase {
 
 	static String refPrenda = "";
 	

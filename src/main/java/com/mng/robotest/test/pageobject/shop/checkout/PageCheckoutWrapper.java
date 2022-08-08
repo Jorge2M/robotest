@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Pago;
@@ -27,7 +27,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
  * Clase que define la automatización de las diferentes funcionalidades de la página de "CHECKOUT"
  * @author jorge.munoz 
  */
-public class PageCheckoutWrapper extends PageObjTM {
+public class PageCheckoutWrapper extends PageBase {
  
 	private final Channel channel;
 	private final AppEcom app;

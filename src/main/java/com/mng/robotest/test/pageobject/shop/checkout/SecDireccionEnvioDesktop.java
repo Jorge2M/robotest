@@ -3,11 +3,11 @@ package com.mng.robotest.test.pageobject.shop.checkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 
-public class SecDireccionEnvioDesktop extends PageObjTM {
+public class SecDireccionEnvioDesktop extends PageBase {
 
 	private static final String XPATH_SECTION_NEW = "//micro-frontend[@id='checkoutDeliveryAddressDesktop']";
 	private static final String XPATH_EDIT_DIRECCION_BUTTON_NEW = XPATH_SECTION_NEW + "//button";

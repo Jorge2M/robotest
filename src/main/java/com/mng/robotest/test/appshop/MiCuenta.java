@@ -101,7 +101,7 @@ public class MiCuenta implements Serializable {
 		PageSuscripcionesSteps.create(driver).selectNewslettersAndGuarda(listNewsletters);
 		if (dCtxSh.appE!=AppEcom.outlet) {
 			pageMiCuentaSteps.goToDevoluciones();
-			PageDevolucionesSteps.solicitarRegogidaGratuitaADomicilio(driver);
+			new PageDevolucionesSteps().solicitarRegogidaGratuitaADomicilio();
 			pageMiCuentaSteps.goToReembolsos();
 		}
 	}

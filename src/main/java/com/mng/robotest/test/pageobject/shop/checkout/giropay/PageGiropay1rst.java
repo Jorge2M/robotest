@@ -4,12 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageGiropay1rst extends PageObjTM {
+public class PageGiropay1rst extends PageBase {
 	
 	private static final String XPATH_LIST_OF_PAYMENTS = "//ul[@id='paymentMethods']";
 	private static final String XPATH_CABECERA_STEP = "//h2[@id[contains(.,'stageheader')]]";

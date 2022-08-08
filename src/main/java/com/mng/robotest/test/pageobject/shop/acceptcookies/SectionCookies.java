@@ -3,10 +3,10 @@ package com.mng.robotest.test.pageobject.shop.acceptcookies;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
-public class SectionCookies extends PageObjTM {
+public class SectionCookies extends PageBase {
 
 	private static final String XPathAcceptButton = "//button[@id[contains(.,'accept-btn')]]";
 	private static final String XPathSetCookiesButton = "//button[@id[contains(.,'pc-btn')]]";

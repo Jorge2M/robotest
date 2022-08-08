@@ -1,12 +1,12 @@
 package com.mng.robotest.test.pageobject.shop;
 
 import org.openqa.selenium.By;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageMispedidos extends PageObjTM {
+public class PageMispedidos extends PageBase {
 
 	private final static String XPATH_PANEL_PEDIDOS = "//div[@id[contains(.,'panelPedidos')]]";
 	

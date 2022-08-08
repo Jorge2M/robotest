@@ -11,8 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
-import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -26,23 +25,17 @@ import com.mng.robotest.test.steps.shop.acceptcookies.ModalSetCookiesSteps;
 import com.mng.robotest.test.steps.shop.acceptcookies.SectionCookiesSteps;
 import com.mng.robotest.test.utils.testab.TestABactive;
 
-/**
- * Clase que define la automatización de las diferentes funcionalidades de la página de "GALERÍA DE PRODUCTOS"
- * @author jorge.munoz
- */
-public class PagePrehome extends PageObjTM {
 
-	enum ButtonEnter {Enter, Continuar};
+public class PagePrehome extends PageBase {
+
+	enum ButtonEnter { ENTER, CONTINUAR };
 	
 	private final DataCtxShop dCtxSh;
 	
-	private static final String XPathSelectPaises = "//select[@id='countrySelect']";
-	
-	//xpath correspondiente al div con el país seleccionado (cuyo click que permite desplegar la lista de países)
-	private static final String XPathDivPaisSeleccionado = "//div[@id='countrySelect_chosen']";
-	
-	private static final String XPathIconSalePaisSeleccionado = XPathDivPaisSeleccionado + "//span[@class[contains(.,'salesIcon')]]";
-	private static final String XPathInputPais = "//div[@class[contains(.,'chosen-search')]]/input";
+	private static final String XPATH_SELECT_PAISES = "//select[@id='countrySelect']";
+	private static final String XPATH_DIV_PAIS_SELECCIONADO = "//div[@id='countrySelect_chosen']";
+	private static final String XPATH_ICON_SALE_PAIS_SELECCIONADO = XPATH_DIV_PAIS_SELECCIONADO + "//span[@class[contains(.,'salesIcon')]]";
+	private static final String XPATH_INPUT_PAIS = "//div[@class[contains(.,'chosen-search')]]/input";
 	
 	public PagePrehome(DataCtxShop dCtxSh, WebDriver driver) {
 		super(driver);
@@ -50,7 +43,7 @@ public class PagePrehome extends PageObjTM {
 	}
 	
 	private String getXPath_optionPaisFromName(String nombrePais) {
-		return (XPathSelectPaises + "//option[@data-alt-spellings[contains(.,'" + nombrePais + "')]]");
+		return (XPATH_SELECT_PAISES + "//option[@data-alt-spellings[contains(.,'" + nombrePais + "')]]");
 	}   
 	
 	private String getXPathButtonIdioma(String codigoPais, String nombreIdioma) {
@@ -59,9 +52,9 @@ public class PagePrehome extends PageObjTM {
 	
 	private String getXPathButtonForEnter(ButtonEnter button, String codigoPais) {
 		switch (button) {
-		case Enter:
+		case ENTER:
 			return ("//div[@id='lang_" + codigoPais + "']/div[@class[contains(.,'phFormEnter')]]");
-		case Continuar:
+		case CONTINUAR:
 		default:
 			return("//div[@id='lang_" + codigoPais + "']/div[@class[contains(.,'modalFormEnter')]]");
 		}
@@ -71,11 +64,11 @@ public class PagePrehome extends PageObjTM {
 		return isPage(driver);
 	}
 	public static boolean isPage(WebDriver driver) {
-		return (PageObjTM.state(Present, By.xpath(XPathDivPaisSeleccionado), driver).check());
+		return (PageBase.state(Present, By.xpath(XPATH_DIV_PAIS_SELECCIONADO), driver).check());
 	}
 
 	public boolean isNotPageUntil(int maxSeconds) {
-		return (state(Invisible, By.xpath(XPathDivPaisSeleccionado)).wait(maxSeconds).check());
+		return (state(Invisible, By.xpath(XPATH_DIV_PAIS_SELECCIONADO)).wait(maxSeconds).check());
 	}
 
 	/**
@@ -88,17 +81,17 @@ public class PagePrehome extends PageObjTM {
 	}
 
 	public boolean isPaisSelectedWithMarcaCompra() {
-		return (state(Visible, By.xpath(XPathIconSalePaisSeleccionado), driver).check());
+		return (state(Visible, By.xpath(XPATH_ICON_SALE_PAIS_SELECCIONADO), driver).check());
 	}
 
 	public boolean isPaisSelectedDesktop() {
 		String nombrePais = dCtxSh.pais.getNombre_pais();
-		return (driver.findElement(By.xpath(XPathDivPaisSeleccionado)).getText().contains(nombrePais));
+		return (driver.findElement(By.xpath(XPATH_DIV_PAIS_SELECCIONADO)).getText().contains(nombrePais));
 	}
 
 	public void desplieguaListaPaises() {
-		moveToElement(By.xpath(XPathDivPaisSeleccionado), driver);
-		driver.findElement(By.xpath(XPathDivPaisSeleccionado + "/a")).click();
+		moveToElement(By.xpath(XPATH_DIV_PAIS_SELECCIONADO), driver);
+		driver.findElement(By.xpath(XPATH_DIV_PAIS_SELECCIONADO + "/a")).click();
 	}
 
 	public void seleccionaIdioma(String nombrePais, String nombreIdioma) {
@@ -114,14 +107,14 @@ public class PagePrehome extends PageObjTM {
 		String codigoPais = getCodigoPais(nombrePais);
 		if (!dCtxSh.channel.isDevice()) {
 			new WebDriverWait(driver, 5).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@class[contains(.,'chosen-with-drop')]]")));
-			driver.findElement(By.xpath(XPathInputPais)).sendKeys(nombrePais);
+			driver.findElement(By.xpath(XPATH_INPUT_PAIS)).sendKeys(nombrePais);
 			
 			// Seleccionamos el país encontrado
 			driver.findElement(By.xpath("//div[@class='chosen-drop']/ul/li")).click();		
 		} else {
 			//En el caso de mobile no ejecutamos los despliegues porque es muy complejo tratar con los desplegables nativos del dispositivo
 			//Seleccionamos el país a partir de su código de país
-			driver.findElement(By.xpath(XPathSelectPaises + "/option[@value='" + codigoPais + "']")).click();
+			driver.findElement(By.xpath(XPATH_SELECT_PAISES + "/option[@value='" + codigoPais + "']")).click();
 		}
 	}
 	
@@ -130,9 +123,9 @@ public class PagePrehome extends PageObjTM {
 	 */
 	public void selectButtonForEnter(String codigoPais) {
 		try {
-			boolean buttonEnterSelected = clickButtonForEnterIfExists(ButtonEnter.Enter, codigoPais); 
+			boolean buttonEnterSelected = clickButtonForEnterIfExists(ButtonEnter.ENTER, codigoPais); 
 			if (!buttonEnterSelected) {
-				clickButtonForEnterIfExists(ButtonEnter.Continuar, codigoPais);
+				clickButtonForEnterIfExists(ButtonEnter.CONTINUAR, codigoPais);
 			}
 		} 
 		catch (Exception e) {
@@ -246,7 +239,7 @@ public class PagePrehome extends PageObjTM {
 	}
 	
 	public void selecionPais() throws Exception {
-		new WebDriverWait(driver, 5).until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPathSelectPaises)));
+		new WebDriverWait(driver, 5).until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPATH_SELECT_PAISES)));
 		
 		//Damos de alta la cookie de newsLetter porque no podemos gestionar correctamente el cierre 
 		//del modal en la página de portada (es aleatorio y aparece en un intervalo de 0 a 5 segundos)

@@ -3,10 +3,10 @@ package com.mng.robotest.test.pageobject.shop.checkout.klarna;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
-public class ModalInputPersonnumberKlarna extends PageObjTM {
+public class ModalInputPersonnumberKlarna extends PageBase {
 
 	private static final String XPathInputPersonnumber = "//input[@id='invoice_kp-purchase-approval-form-national-identification-number']";
 	private static final String XPathInputFechaNacimiento = "//input[@id='invoice_kp-purchase-approval-form-date-of-birth']";

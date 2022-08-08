@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
@@ -22,7 +22,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClic
  * PageObject asociado a la página-2 del checkout de móvil ("Datos de Pago" con los métodos de pago)
  * @author jorge.munoz
  */
-public class Page2DatosPagoCheckoutMobil extends PageObjTM {
+public class Page2DatosPagoCheckoutMobil extends PageBase {
 	
 	public enum StateMethod {unselected, selecting, selected}
 	enum TypeActionLinkFP {PlegarPagos, DesplegarPagos}

@@ -2,13 +2,13 @@ package com.mng.robotest.test.pageobject.shop.micuenta;
 
 import org.openqa.selenium.By;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.footer.PageFromFooter;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageAccesoMisCompras extends PageObjTM implements PageFromFooter {
+public class PageAccesoMisCompras extends PageBase implements PageFromFooter {
 
 	public enum TypeBlock { SI_REGISTRADO, NO_REGISTRADO }
 	

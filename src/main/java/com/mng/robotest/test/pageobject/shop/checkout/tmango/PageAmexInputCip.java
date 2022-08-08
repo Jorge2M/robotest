@@ -3,12 +3,12 @@ package com.mng.robotest.test.pageobject.shop.checkout.tmango;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageAmexInputCip extends PageObjTM {
+public class PageAmexInputCip extends PageBase {
 
 	private static final String XPATH_INPUT_CIP = "//input[@name='pin']";
 	private static final String XPATH_ACCEPT_BUTTON = "//img[@src[contains(.,'daceptar.gif')]]/../../a";

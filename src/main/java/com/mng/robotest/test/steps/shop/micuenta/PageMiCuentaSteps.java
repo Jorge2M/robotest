@@ -135,7 +135,7 @@ public class PageMiCuentaSteps {
 		expected = "Aparece la página de \"Devoluciones\"")
 	private void clickLinkDevoluciones() {
 		pageMiCuenta.clickDevoluciones();
-		PageDevolucionesSteps.validaIsPage(driver);
+		new PageDevolucionesSteps().validaIsPage();
 	}
 
 	public void goToReembolsos() {

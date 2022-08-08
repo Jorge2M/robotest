@@ -3,12 +3,12 @@ package com.mng.robotest.test.pageobject.shop.checkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class ModalAvisoCambioPais extends PageObjTM {
+public class ModalAvisoCambioPais extends PageBase {
 
 	private static final String XPathModal = "//div[@aria-labelledby[contains(.,'changeCountryModal')]]";
 	private static final String XPathButtonConfCambio = XPathModal + "//button[@name='continue']";

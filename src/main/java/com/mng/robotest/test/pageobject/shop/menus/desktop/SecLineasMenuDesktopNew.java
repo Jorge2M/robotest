@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
@@ -70,7 +70,7 @@ public class SecLineasMenuDesktopNew extends SecLineasMenuDesktop {
 	private void hoverSublinea(SublineaType sublineaType) {
 		String xpathLinkSublinea = getXPathSublineaLink(sublineaType);
 		moveToElement(By.xpath(xpathLinkSublinea), driver);
-		PageObjTM.waitMillis(500);
+		waitMillis(500);
 		moveToElement(By.xpath(xpathLinkSublinea), driver);
 	}
 	

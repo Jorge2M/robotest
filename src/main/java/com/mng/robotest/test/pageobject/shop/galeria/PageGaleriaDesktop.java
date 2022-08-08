@@ -23,16 +23,12 @@ import com.mng.robotest.test.pageobject.shop.menus.desktop.SecLineasMenuDesktop;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-/**getArticuloConVariedadColoresAndHover
- * Clase que define la automatización de las diferentes funcionalidades de la página de "GALERÍA DE PRODUCTOS"
- * @author jorge.munoz
- */
+
 public class PageGaleriaDesktop extends PageGaleria {
 	
 	public static SecBannerHeadGallery secBannerHead;
@@ -629,9 +625,9 @@ public class PageGaleriaDesktop extends PageGaleria {
 			SecCabecera secCabecera = SecCabecera.getNew(channel, app);
 			secCabecera.hoverIconoBolsa();
 			hoverArticle(articulo);
-			PageObjTM.waitMillis(500);
+			waitMillis(500);
 			hoverArticle(articulo);
-			PageObjTM.waitMillis(500);
+			waitMillis(500);
 			String xpathSlider = getXPathSliderRelativeToArticle(typeSlider, app);
 			click(articulo).by(By.xpath(xpathSlider)).exec();
 			waitForAjax(driver, 1);

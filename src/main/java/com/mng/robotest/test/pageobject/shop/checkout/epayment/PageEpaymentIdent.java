@@ -3,12 +3,12 @@ package com.mng.robotest.test.pageobject.shop.checkout.epayment;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageEpaymentIdent extends PageObjTM {
+public class PageEpaymentIdent extends PageBase {
 
 	static String XPathInputUser = "//input[@name[contains(.,'USERID')] and @type='password']";
 	static String XPathInputCode = "//input[@name[contains(.,'IDNBR')] and @type='password']";

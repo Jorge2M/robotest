@@ -1,11 +1,11 @@
 package com.mng.robotest.test.pageobject.shop;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Pais;
 
 
-public class PageHomeMarcas extends PageObjTM {
+public class PageHomeMarcas extends PageBase {
 
 	private final AppEcom app;
 	

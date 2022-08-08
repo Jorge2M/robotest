@@ -40,7 +40,7 @@ public class Fic003 extends TestBase {
 		menuPantalonesNina = MenuTreeApp.getMenuLevel1From(
 				app, KeyMenu1rstLevel.from(
 					LineaType.nina, 
-					SublineaType.NINA_NINA, "pantalones"));
+					SublineaType.nina_nina, "pantalones"));
 	}
 	
 	@Override

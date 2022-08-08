@@ -3,12 +3,12 @@ package com.mng.robotest.test.pageobject.shop.checkout.postfinance;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PagePostfCodSeg extends PageObjTM {
+public class PagePostfCodSeg extends PageBase {
 
 	private static final String XPathAceptarButton = "//form/input[@id='btn_Accept']";
 	private static final String XPathInputCodSeg = "//input[@id='postfinanceCardId']";

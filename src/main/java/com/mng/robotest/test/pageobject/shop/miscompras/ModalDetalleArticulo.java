@@ -1,12 +1,10 @@
 package com.mng.robotest.test.pageobject.shop.miscompras;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 
-public abstract class ModalDetalleArticulo extends PageObjTM {
+public abstract class ModalDetalleArticulo extends PageBase {
 
 	public abstract boolean isVisible(int maxSeconds);
 	public abstract boolean isInvisible(int maxSeconds);
@@ -17,18 +15,15 @@ public abstract class ModalDetalleArticulo extends PageObjTM {
 	public abstract boolean isReferenciaValidaModal(String idArticulo);
 
 	
-	public static ModalDetalleArticulo make(Channel channel, WebDriver driver) {
+	public static ModalDetalleArticulo make(Channel channel) {
 		switch (channel) {
 		case desktop:
-			return new ModalDetalleArticuloDesktop(driver);
+			return new ModalDetalleArticuloDesktop();
 		case mobile:
 		case tablet:
-			return new ModalDetalleArticuloMobile(driver);
+			return new ModalDetalleArticuloMobile();
 		}
 		return null;
-	}
-	ModalDetalleArticulo(WebDriver driver) {
-		super(driver);
 	}
 	
 	public ModalDetalleArticuloDesktop getDesktopVersion() {

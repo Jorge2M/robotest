@@ -4,7 +4,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.manto.PageGestorCheques;
 import com.mng.robotest.test.pageobject.manto.PageGestorCheques.ButtonsCheque;
 import com.mng.robotest.test.pageobject.manto.PageGestorCheques.TablaCheque;
@@ -16,7 +16,7 @@ import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 
 
-public class PageGestorChequesSteps extends PageObjTM {
+public class PageGestorChequesSteps extends PageBase {
 	
 	private final PageGestorCheques pageGestorCheques;
 	

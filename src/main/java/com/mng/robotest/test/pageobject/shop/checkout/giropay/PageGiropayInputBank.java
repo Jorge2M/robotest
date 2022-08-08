@@ -3,11 +3,11 @@ package com.mng.robotest.test.pageobject.shop.checkout.giropay;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class PageGiropayInputBank extends PageObjTM {
+public class PageGiropayInputBank extends PageBase {
 
 	private static final String XPathInputBank = "//input[@placeholder[contains(.,'Bankname')]]";
 	private static final String XPathLinkBakOption = "//a[@class='ui-menu-item-wrapper']";

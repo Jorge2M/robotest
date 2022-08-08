@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
@@ -21,7 +21,7 @@ import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
 
 
-public abstract class SecLineasMenuDesktop extends PageObjTM {
+public abstract class SecLineasMenuDesktop extends PageBase {
 	
 	public abstract String getXPathMenuFatherWrapper();
 	public abstract String getXPathLineasMenuWrapper();

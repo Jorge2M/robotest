@@ -3,12 +3,12 @@ package com.mng.robotest.test.pageobject.shop.checkout.tmango;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageAmexResult extends PageObjTM {
+public class PageAmexResult extends PageBase {
 
 	private static final String XPATH_SECTION_OK = "//div[@class[contains(.,'code ok')]]";
 	private static final String XPATH_CONTINUE_BUTTON = "//input[@class[contains(.,'btn-continue')]]";

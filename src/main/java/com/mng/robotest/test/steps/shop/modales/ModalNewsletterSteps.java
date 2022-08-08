@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -19,13 +19,13 @@ public class ModalNewsletterSteps {
 	}
 	
 	private static boolean isVisible(WebDriver driver) {
-		return PageObjTM.state(Visible, By.xpath(XPathAspaClose), driver).check();
+		return PageBase.state(Visible, By.xpath(XPathAspaClose), driver).check();
 	}
 	
 	@Step (
 		description="Cerramos el modal de la Newsletter", 
 		expected="La capa correspondiente a la búsqueda desaparece")
 	public static void close(WebDriver driver) {
-		PageObjTM.click(By.xpath(XPathAspaClose), driver).exec();
+		PageBase.click(By.xpath(XPathAspaClose), driver).exec();
 	}
 }

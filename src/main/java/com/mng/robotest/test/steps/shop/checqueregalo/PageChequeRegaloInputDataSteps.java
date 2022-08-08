@@ -6,7 +6,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.generic.ChequeRegalo;
@@ -16,7 +16,7 @@ import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData.*
 import com.mng.robotest.test.steps.shop.checkout.PageCheckoutWrapperSteps;
 
 
-public class PageChequeRegaloInputDataSteps extends PageObjTM {
+public class PageChequeRegaloInputDataSteps extends PageBase {
 
 	private final PageChequeRegaloInputData pageChequeRegaloInputData;
 	

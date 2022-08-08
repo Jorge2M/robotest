@@ -1,24 +1,22 @@
-package com.mng.robotest.test.steps.shop.favoritos;
+package com.mng.robotest.domains.favoritos.steps;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.favoritos.pageobjects.PageFavoritos;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.pageobject.shop.favoritos.PageFavoritos;
 import com.mng.robotest.test.steps.shop.SecBolsaSteps;
 
 
 @SuppressWarnings({"static-access"})
-public class PageFavoritosSteps {
+public class PageFavoritosSteps extends StepBase {
 	
 	private final PageFavoritos pageFavoritos = new PageFavoritos();
 	private final ModalFichaFavoritosSteps modalFichaFavoritosSteps = new ModalFichaFavoritosSteps();
@@ -45,9 +43,9 @@ public class PageFavoritosSteps {
 		return checks;
 	}
 	
-	public void clearAll(DataFavoritos dataFavoritos, DataCtxShop dCtxSh) throws Exception {
+	public void clearAll(DataFavoritos dataFavoritos) throws Exception {
 		dataFavoritos.clear();
-		clearAll(dCtxSh);
+		clearAll();
 	}
 	
 	public void clear(ArticuloScreen articulo, DataFavoritos dataFavoritos) throws Exception {
@@ -86,9 +84,7 @@ public class PageFavoritosSteps {
 		description="Cerramos el modal de favoritos compartidos",
 		expected="El modal de favoritos compartidos desaparece correctamente")
 	public void closeShareModal() {
-		pageFavoritos.closeShareModal();
-		int maxSeconds = 2;
-		checkShareIsClosedUntil(maxSeconds);
+		checkShareIsClosedUntil(2);
 	}
 	
 	@Validation (
@@ -103,8 +99,7 @@ public class PageFavoritosSteps {
 		expected="El artículo desaparece de Favoritos")
 	public void clear(String refArticulo, String codColor) {
 		pageFavoritos.clearArticuloAndWait(refArticulo, codColor);
-		int maxSeconds = 5;
-		checkArticleDisappearsFromFavoritesUntil(refArticulo, codColor, maxSeconds);
+		checkArticleDisappearsFromFavoritesUntil(refArticulo, codColor, 5);
 	}
 	
 	@Validation (
@@ -117,8 +112,8 @@ public class PageFavoritosSteps {
 	@Step (
 		description="Eliminamos de Favoritos los posibles artículos existentes",
 		expected="No queda ningún artículo en Favoritos")
-	public void clearAll(DataCtxShop dCtxSh) throws Exception {
-		pageFavoritos.clearAllArticulos(dCtxSh.channel, dCtxSh.appE);
+	public void clearAll() throws Exception {
+		pageFavoritos.clearAllArticulos();
 		checkFavoritosWithoutArticles();
 	}
 	
@@ -137,7 +132,7 @@ public class PageFavoritosSteps {
 	@Step (
 		description="Desde Favoritos añadimos el artículo <b>#{artToAddBolsa.getRefProducto()}</b> (1a talla disponible) a la bolsa",
 		expected="El artículo aparece en la bolsa")
-	public void addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa, Channel channel, AppEcom app, Pais pais) 
+	public void addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa, Pais pais) 
 	throws Exception {
 		String refProductoToAdd = artToAddBolsa.getRefProducto();
 		String codigoColor = artToAddBolsa.getCodigoColor();

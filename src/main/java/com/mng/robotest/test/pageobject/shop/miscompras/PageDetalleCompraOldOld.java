@@ -3,13 +3,13 @@ package com.mng.robotest.test.pageobject.shop.miscompras;
 import org.openqa.selenium.By;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageDetalleCompraOldOld extends PageObjTM implements PageDetallePedido {
+public class PageDetalleCompraOldOld extends PageBase implements PageDetallePedido {
 	
 	private static final String XPATH_DIV_DETALLE = "//div[@class[contains(.,'detallePedido')]]";
 	private static final String XPATH_LINEA_PRENDA = "//tr/td[@align='left' and @height='30']/..";

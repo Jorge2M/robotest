@@ -6,13 +6,13 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusFiltroDiscount;
 
 
-public class SecMenusDesktop extends PageObjTM {
+public class SecMenusDesktop extends PageBase {
 	
 	public final SecBloquesMenuDesktop secBloquesMenu;
 	public final SecMenuSuperiorDesktop secMenuSuperior;

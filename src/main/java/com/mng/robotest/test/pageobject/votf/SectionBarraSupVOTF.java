@@ -3,12 +3,12 @@ package com.mng.robotest.test.pageobject.votf;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SectionBarraSupVOTF extends PageObjTM {
+public class SectionBarraSupVOTF extends PageBase {
 
 	public static final String TITLE_USERNAME = "USERNAME: "; 
 	private static final String XPATH_BARRA = "//div[@class[contains(.,'barraTele')]]";

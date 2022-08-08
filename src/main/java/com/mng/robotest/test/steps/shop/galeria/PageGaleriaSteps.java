@@ -902,7 +902,7 @@ public class PageGaleriaSteps {
 		for (Menu2onLevel menu2oNivelTmp : menus2onLevel) {
 			checks.add(
 				"Aparece el submenú <b>" + menu2oNivelTmp.getNombre() + "</b>",
-				((PageGaleriaDesktop)pageGaleria).secSubmenusGallery.isVisibleSubmenu(menu2oNivelTmp.getNombre(), driver), 
+				((PageGaleriaDesktop)pageGaleria).secSubmenusGallery.isVisibleSubmenu(menu2oNivelTmp.getNombre()), 
 				State.Warn);
 		}
 		return checks;

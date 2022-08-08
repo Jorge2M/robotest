@@ -7,11 +7,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class SecTarjetaPciInIframe extends PageObjTM implements SecTarjetaPci {
+public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	
 	private final Channel channel;
 	

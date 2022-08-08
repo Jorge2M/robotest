@@ -137,7 +137,7 @@ public class PagePedidosMantoSteps {
 		saveErrorData=SaveWhen.Never)
 	public static DataPedido getDataCliente(DataPedido dPedidoPrueba, WebDriver driver) throws Exception {
 		PageDetallePedido.clickLinkDetallesCliente(driver);
-		PageDetalleCliente pageDetalleCliente = new PageDetalleCliente(driver);
+		PageDetalleCliente pageDetalleCliente = new PageDetalleCliente();
 		dPedidoPrueba.getPago().setDni(pageDetalleCliente.getUserDniText());
 		if (dPedidoPrueba.getPago().getDni().equals("")) {
 			dPedidoPrueba.getPago().setDni("41507612h");

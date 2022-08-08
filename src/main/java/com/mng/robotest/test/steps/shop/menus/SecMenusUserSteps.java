@@ -15,6 +15,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import java.util.Arrays;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.domains.loyalty.steps.PageHomeLikesSteps;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroIni;
 import com.mng.robotest.domains.registro.steps.PageRegistroIniSteps;
@@ -25,7 +26,6 @@ import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper.LoyaltyData;
-import com.mng.robotest.test.steps.shop.favoritos.PageFavoritosSteps;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test.steps.shop.micuenta.PageMiCuentaSteps;

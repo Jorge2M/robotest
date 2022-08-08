@@ -3,10 +3,10 @@ package com.mng.robotest.test.pageobject.shop.checkout.paymaya;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
-public class PageIdentPaymaya extends PageObjTM {
+public class PageIdentPaymaya extends PageBase {
 
 	private static final String XPathWrapperLogin = "//div[@class[contains(.,'login-form-index')]]";
 	private static final String XPathInputUser = "//input[@id='identityValue']";

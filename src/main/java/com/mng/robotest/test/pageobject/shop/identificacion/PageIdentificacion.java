@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
@@ -20,7 +20,7 @@ import com.mng.robotest.test.pageobject.shop.modales.ModalLoyaltyAfterLogin;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageIdentificacion extends PageObjTM {
+public class PageIdentificacion extends PageBase {
 	
 	private static final String AVISO_CREDENCIALES_KO = "Tu e-mail o contraseña no son correctos";
 	private static final String XPATH_ERROR_CREDENCIALES_KO = "//div[@class='formErrors']//li[text()[contains(.,'" + AVISO_CREDENCIALES_KO + "')]]";

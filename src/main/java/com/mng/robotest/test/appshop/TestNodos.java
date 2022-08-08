@@ -112,10 +112,10 @@ public class TestNodos implements Serializable {
 		
 		secMenusSteps.seleccionLinea(LineaType.he, null, dCtxSh);
 		secMenusDesktopSteps.countSaveMenusEntorno (LineaType.he, null, nodo.getIp(), autAddr);
-		secMenusSteps.seleccionLinea(LineaType.nina, SublineaType.NINA_NINA, dCtxSh);	
-		secMenusDesktopSteps.countSaveMenusEntorno(LineaType.nina, SublineaType.NINA_NINA, nodo.getIp(), autAddr);
-		secMenusSteps.seleccionLinea(LineaType.nino, SublineaType.NINO_BEBE, dCtxSh);	 
-		secMenusDesktopSteps.countSaveMenusEntorno(LineaType.nino, SublineaType.NINO_BEBE, nodo.getIp(), autAddr);
+		secMenusSteps.seleccionLinea(LineaType.nina, SublineaType.nina_nina, dCtxSh);	
+		secMenusDesktopSteps.countSaveMenusEntorno(LineaType.nina, SublineaType.nina_nina, nodo.getIp(), autAddr);
+		secMenusSteps.seleccionLinea(LineaType.nino, SublineaType.nino_bebe, dCtxSh);	 
+		secMenusDesktopSteps.countSaveMenusEntorno(LineaType.nino, SublineaType.nino_bebe, nodo.getIp(), autAddr);
 
 		this.nodo.setTested(true);
 	}
@@ -124,7 +124,7 @@ public class TestNodos implements Serializable {
 		Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(
 				dCtxSh.appE, KeyMenu1rstLevel.from(
 					LineaType.nina, 
-					SublineaType.NINA_NINA, "pantalones"));
+					SublineaType.nina_nina, "pantalones"));
 			SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh);
 			secMenusSteps.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh);
 	}

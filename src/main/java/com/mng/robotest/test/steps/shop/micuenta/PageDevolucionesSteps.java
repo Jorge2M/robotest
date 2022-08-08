@@ -4,6 +4,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.PageDevoluciones;
 import com.mng.robotest.test.pageobject.shop.PageDevoluciones.Devolucion;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
@@ -11,36 +12,37 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 
 import java.util.Arrays;
 
-import org.openqa.selenium.WebDriver;
 
-public class PageDevolucionesSteps {
+public class PageDevolucionesSteps extends StepBase {
 
+	PageDevoluciones pageDevoluciones = new PageDevoluciones();
+	
 	@Validation
-	public static ChecksTM validaIsPage (WebDriver driver) {
+	public ChecksTM validaIsPage () {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de devoluciones",
-			PageDevoluciones.isPage(driver), State.Defect);
+			pageDevoluciones.isPage(), State.Defect);
 		checks.add(
-			"Aparece la opción de " + Devolucion.EnTienda.getLiteral(),
-			Devolucion.EnTienda.isPresentLink(driver), State.Defect);
+			"Aparece la opción de " + Devolucion.EN_TIENDA.getLiteral(),
+			Devolucion.EN_TIENDA.isPresentLink(driver), State.Defect);
 		checks.add(
-			"Aparece la opcion de " + Devolucion.EnDomicilio.getLiteral(),
-			Devolucion.EnDomicilio.isPresentLink(driver), State.Defect);
+			"Aparece la opcion de " + Devolucion.EN_DOMICILIO.getLiteral(),
+			Devolucion.EN_DOMICILIO.isPresentLink(driver), State.Defect);
 		checks.add(
-			"Aparece la opción de " + Devolucion.PuntoCeleritas.getLiteral(),
-			Devolucion.EnDomicilio.isPresentLink(driver), State.Defect);
+			"Aparece la opción de " + Devolucion.PUNTO_CELERITAS.getLiteral(),
+			Devolucion.EN_DOMICILIO.isPresentLink(driver), State.Defect);
 		return checks;
 	}
 
 	@Step(
 		description = "Pulsar \"Recogida gratuíta a domicilio\" + \"Solicitar Recogida\"",
 		expected = "Aparece la tabla devoluciones sin ningún pedido")
-	public static void solicitarRegogidaGratuitaADomicilio(WebDriver driver) {
+	public void solicitarRegogidaGratuitaADomicilio() {
 		boolean desplegada = true;
-		Devolucion.EnDomicilio.click(driver);
-		Devolucion.EnDomicilio.waitForInState(desplegada, 2, driver);
-		PageDevoluciones.clickSolicitarRecogida(driver);
+		Devolucion.EN_DOMICILIO.click(driver);
+		Devolucion.EN_DOMICILIO.waitForInState(desplegada, 2, driver);
+		pageDevoluciones.clickSolicitarRecogida();
 		new PageRecogidaDomicSteps().vaidaIsPageSinDevoluciones();
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.CookiesAllowed,

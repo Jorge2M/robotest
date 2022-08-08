@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
@@ -23,7 +23,7 @@ import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenusUserDevice.Menu
 import com.mng.robotest.test.utils.ImporteScreen;
 
 
-public class MenusUserWrapper extends PageObjTM {
+public class MenusUserWrapper extends PageBase {
 	
 	final Channel channel;
 	final AppEcom app;

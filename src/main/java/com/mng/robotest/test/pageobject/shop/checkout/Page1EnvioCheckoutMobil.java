@@ -10,12 +10,12 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.test.utils.ImporteScreen;
 
-public class Page1EnvioCheckoutMobil extends PageObjTM {
+public class Page1EnvioCheckoutMobil extends PageBase {
 	
 	private static final String XPathLink1Envio = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step1']";
 	private static final String XPathInputPromo = "//input[@id[contains(.,'oucherCode')]]";

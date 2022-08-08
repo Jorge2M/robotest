@@ -1,12 +1,12 @@
 package com.mng.robotest.test.pageobject.shop;
 
 import org.openqa.selenium.By;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageRecADomic extends PageObjTM {
+public class PageRecADomic extends PageBase {
 
 	private static final String XPATH_IS_PAGE_RECOGIDA ="//h1[text()[contains(.,'RECOGIDA A DOMICILIO')]]";
 	private static final String XPATH_TABLE_DEVOLUCIONES = "//table[@class[contains(.,'devoluciones_table')]]";

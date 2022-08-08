@@ -11,11 +11,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.checkout.DataDireccion.DataDirType;
 
 
-public abstract class ModalDireccion extends PageObjTM {
+public abstract class ModalDireccion extends PageBase {
 
 	private static final String XPathInputNif = "//input[@id[contains(.,'cfDni')]]";
 	private static final String XPathInputName = "//input[@id[contains(.,'cfName')]]";

@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
@@ -14,7 +14,7 @@ import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecFiltrosTabletOutlet extends PageObjTM implements SecFiltros {
+public class SecFiltrosTabletOutlet extends PageBase implements SecFiltros {
 	
 	private static final String TAG_ORDENACION = "@TagOrden";
 	private static final String TAG_COLOR = "@TagColor";

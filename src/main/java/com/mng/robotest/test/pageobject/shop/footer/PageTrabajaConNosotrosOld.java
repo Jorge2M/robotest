@@ -3,10 +3,10 @@ package com.mng.robotest.test.pageobject.shop.footer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class PageTrabajaConNosotrosOld extends PageObjTM implements PageFromFooter {
+public class PageTrabajaConNosotrosOld extends PageBase implements PageFromFooter {
 	
 	final String XPathIdFrame = "//iframe[@id='bodyFrame']";
 	final String XPathForIdPage = "//li[@class='first']/a[text()[contains(.,'Nuestro ADN')]]";

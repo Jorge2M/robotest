@@ -83,12 +83,12 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 		}
 
 		//Está mal en el HTML, los menús de Bebe en outlet tienen los ids de Shop
-		if (sublinea==SublineaType.NINA_BEBE || sublinea==SublineaType.NINO_BEBE) {
+		if (sublinea==SublineaType.nina_bebe || sublinea==SublineaType.nino_bebe) {
 			return sublinea.getId(AppEcom.shop);
 		}
 		
 		//Está mal en el HTML, los menús de Teen en shop tienen los ids de Outlet
-		if (sublinea==SublineaType.TEEN_NINA || sublinea==SublineaType.TEEN_NINO) {
+		if (sublinea==SublineaType.teen_nina || sublinea==SublineaType.teen_nino) {
 			return sublinea.getId(AppEcom.outlet);
 		}
 		return sublinea.getId(app);

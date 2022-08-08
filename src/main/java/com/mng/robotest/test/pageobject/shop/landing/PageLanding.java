@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.test.generic.UtilsMangoTest;
@@ -23,7 +23,7 @@ import com.mng.robotest.test.pageobject.shop.menus.MenuLateralDesktop.Element;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageLanding extends PageObjTM {
+public class PageLanding extends PageBase {
 	
 	private static String XPATH_MAIN_CONTENT_PAIS = "//div[@class[contains(.,'main-content')] and @data-pais]";
 	private static String XPATH_CONTENIDO = "//div[@class[contains(.,'container-fluid home')]]";
@@ -146,7 +146,7 @@ public class PageLanding extends PageObjTM {
 			if (isSomeElementVisibleInPage(elementsCanBeContained, app, channel)) {
 				return true;
 			}
-			PageObjTM.waitMillis(1000);
+			waitMillis(1000);
 		}
 		return false;
 	}

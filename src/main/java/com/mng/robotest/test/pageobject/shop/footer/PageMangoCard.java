@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class PageMangoCard extends PageObjTM implements PageFromFooter {
+public class PageMangoCard extends PageBase implements PageFromFooter {
 	
 	static String XPathGoMangoCardButton = "//span[@class='menu-link-button']";
 	static String XPathGoMangoCardButtonMobile = "//a[@id='getCardLink']";

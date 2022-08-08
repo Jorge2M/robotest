@@ -3,19 +3,19 @@ package com.mng.robotest.test.pageobject.shop;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class PageDevoluciones {
+
+public class PageDevoluciones extends PageBase {
 	
 	public enum Devolucion {
-		EnTienda("DEVOLUCIÓN GRATUITA EN TIENDA"),
-		EnDomicilio("RECOGIDA GRATUITA A DOMICILIO"),
-		PorCorreo("DEVOLUCIÓN POR CORREO"),
-		PuntoCeleritas("DEVOLUCIÓN GRATUITA PUNTO CELERITAS");
+		EN_TIENDA("DEVOLUCIÓN GRATUITA EN TIENDA"),
+		EN_DOMICILIO("RECOGIDA GRATUITA A DOMICILIO"),
+		POR_CORREO("DEVOLUCIÓN POR CORREO"),
+		PUNTO_CELERITAS("DEVOLUCIÓN GRATUITA PUNTO CELERITAS");
 		
 		String literal;
 		String xpathLink;
@@ -46,7 +46,7 @@ public class PageDevoluciones {
 		}
 
 		public void click(WebDriver driver) {
-			PageObjTM.click(By.xpath(xpathLink), driver).exec();
+			PageBase.click(By.xpath(xpathLink), driver).exec();
 		}
 		
 		public void waitForInState(boolean plegada, int maxSeconds, WebDriver driver) {
@@ -55,25 +55,25 @@ public class PageDevoluciones {
 		}
 	}
 	
-	private static String XPathIsPageDevoluciones = "//div[@class='devoluciones']";
-	private static String XPathButtonSolicitarRecogida = "//div[@class[contains(.,'devoluciones_button_container')]]/span";
+	private static final String XPATH_IS_PAGE_DEVOLUCIONES = "//div[@class='devoluciones']";
+	private static final String XPATH_BUTTON_SOLICITAR_RECOGIDA = "//div[@class[contains(.,'devoluciones_button_container')]]/span";
 
-	public static boolean isPage(WebDriver driver) {
-		return (state(Present, By.xpath(XPathIsPageDevoluciones), driver).check());
+	public boolean isPage() {
+		return (state(Present, By.xpath(XPATH_IS_PAGE_DEVOLUCIONES)).check());
 	}
 
-	public static void clickSolicitarRecogida(WebDriver driver) {
-		click(By.xpath(XPathButtonSolicitarRecogida), driver).exec();
+	public void clickSolicitarRecogida() {
+		click(By.xpath(XPATH_BUTTON_SOLICITAR_RECOGIDA)).exec();
 		
 		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un par de veces
 		for (int i=0; i<2; i++) {
-			if (isVisibleSolicitarRecogidaButton(driver)) {
-				click(By.xpath(XPathButtonSolicitarRecogida), driver).type(TypeClick.javascript).exec();
+			if (isVisibleSolicitarRecogidaButton()) {
+				click(By.xpath(XPATH_BUTTON_SOLICITAR_RECOGIDA)).type(TypeClick.javascript).exec();
 			}
 		}
 	}
 
-	public static boolean isVisibleSolicitarRecogidaButton(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathButtonSolicitarRecogida), driver).check());
+	public boolean isVisibleSolicitarRecogidaButton() {
+		return (state(Visible, By.xpath(XPATH_BUTTON_SOLICITAR_RECOGIDA)).check());
 	}
 }

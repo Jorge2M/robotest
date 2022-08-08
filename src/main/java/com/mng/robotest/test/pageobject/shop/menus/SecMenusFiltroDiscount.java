@@ -2,11 +2,11 @@ package com.mng.robotest.test.pageobject.shop.menus;
 
 import org.openqa.selenium.By;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecMenusFiltroDiscount extends PageObjTM {
+public class SecMenusFiltroDiscount extends PageBase {
 	
 	public enum TypeMenuDiscount { UP_TO_50, UP_TO_60, BETWEEN_50_60, OFF_60, FROM_60, FROM_70 }
 	static String XPathDivMenus = "//nav[@id='descuentoFilter']";

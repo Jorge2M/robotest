@@ -3,10 +3,10 @@ package com.mng.robotest.test.pageobject.shop.checkout.klarna;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
-public class PageKlarna extends PageObjTM {
+public class PageKlarna extends PageBase {
 
 	private final ModalUserDataKlarna modalUserData;
 	private final ModalConfUserDataKlarna modalConfUserData;

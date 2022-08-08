@@ -6,12 +6,12 @@ import java.time.format.DateTimeFormatter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecFiltros extends PageObjTM {
+public class SecFiltros extends PageBase {
 
 	private static final String XPATH_FILTRO_COD_PEDIDO = "//input[@id[contains(.,':id')]]";
 	private static final String XPATH_FILTRO_COD_PAIS = "//input[@id[contains(.,'pais')]]";

@@ -4,12 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class ModalUserSesionShopDesktop extends PageObjTM { 
+public class ModalUserSesionShopDesktop extends PageBase { 
 	
 	private static final String XPathWrapperUserMenu = 
 			"//div[@data-testid[contains(.,'header.userMenu.login')] or " + 

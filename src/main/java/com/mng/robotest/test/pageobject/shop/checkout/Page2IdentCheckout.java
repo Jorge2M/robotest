@@ -14,7 +14,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.test.beans.Pais;
@@ -27,7 +27,7 @@ import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class Page2IdentCheckout extends PageObjTM {
+public class Page2IdentCheckout extends PageBase {
 
 	private final Pais pais;
 	private final EgyptCity egyptCity;

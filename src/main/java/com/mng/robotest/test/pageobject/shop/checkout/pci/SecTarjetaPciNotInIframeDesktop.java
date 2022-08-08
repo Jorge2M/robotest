@@ -3,12 +3,12 @@ package com.mng.robotest.test.pageobject.shop.checkout.pci;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.SelectElement.TypeSelect.*;
 
 
-public class SecTarjetaPciNotInIframeDesktop extends PageObjTM implements SecTarjetaPci {
+public class SecTarjetaPciNotInIframeDesktop extends PageBase implements SecTarjetaPci {
 
 	static String XPathBlock = "//span[@id[contains(.,'panelTarjetasForm')]]";
 	static String XPathInputNumber = XPathBlock + "//input[@id[contains(.,'cardNumber')] or @id[contains(.,'cardnumber')] or @id[contains(.,'msu_cardpan')]]";

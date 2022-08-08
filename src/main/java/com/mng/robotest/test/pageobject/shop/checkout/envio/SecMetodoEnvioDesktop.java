@@ -6,11 +6,11 @@ import org.openqa.selenium.support.ui.Select;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 
 
-public class SecMetodoEnvioDesktop extends PageObjTM {
+public class SecMetodoEnvioDesktop extends PageBase {
 	
 
 	public static ModalDroppoints modalDroppoints;

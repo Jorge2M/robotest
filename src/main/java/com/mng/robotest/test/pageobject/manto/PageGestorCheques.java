@@ -6,10 +6,10 @@ import org.openqa.selenium.WebDriver;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 
-public class PageGestorCheques extends PageObjTM {
+public class PageGestorCheques extends PageBase {
 	
 	public static String titulo = "Gestor de Cheques";
 	public static String tituloDetalles = "DETALLES CHEQUE REGALO";

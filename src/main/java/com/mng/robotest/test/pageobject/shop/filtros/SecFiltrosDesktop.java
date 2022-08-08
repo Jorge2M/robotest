@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.Color;
@@ -18,7 +18,7 @@ import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenuLateralDesktop
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecFiltrosDesktop extends PageObjTM implements SecFiltros {
+public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	
 	private static final String TAG_ORDENACION = "@TagOrden";
 	private static final String TAG_COLOR = "@TagColor";

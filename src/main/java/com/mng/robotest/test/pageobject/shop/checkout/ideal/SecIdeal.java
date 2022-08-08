@@ -4,11 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class SecIdeal extends PageObjTM {
+public class SecIdeal extends PageBase {
 	
 	//HAY QUE AÑADIR LAS OPCIONES DE PRE Y QUITAR LAS DE PRO
 	public enum BancoSeleccionado {

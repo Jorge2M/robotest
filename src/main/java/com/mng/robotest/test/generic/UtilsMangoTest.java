@@ -35,7 +35,7 @@ import com.mng.robotest.test.pageobject.shop.navigations.ArticuloNavigations;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -49,7 +49,7 @@ public class UtilsMangoTest {
 	
 	public static String getPageSource(WebDriver driver) {
 		String idWebKit = "webkit-xml-viewer-source-xml";
-		if (PageObjTM.state(Present, By.id(idWebKit), driver).check()) {
+		if (PageBase.state(Present, By.id(idWebKit), driver).check()) {
 			return driver.findElement(By.id(idWebKit)).getAttribute("innerHTML");
 		}
 		return driver.getPageSource();
@@ -68,7 +68,7 @@ public class UtilsMangoTest {
 			if (urlPaginaPostAcceso!=null) {
 				driver.get(urlPaginaPostAcceso);
 			} else {
-				if (PageObjTM.state(Present, By.xpath("//base"), driver).check()) {
+				if (PageBase.state(Present, By.xpath("//base"), driver).check()) {
 					String urlBase = driver.findElement(By.xpath("//base")).getAttribute("href");
 					driver.get(urlBase);
 				}
@@ -260,10 +260,10 @@ public class UtilsMangoTest {
 		if (criterio1 != null && !criterio1.isEmpty() && "".compareTo(criterio1)!=0) {
 			if (criterio2 != null && !criterio2.isEmpty() && "".compareTo(criterio2)!=0) {
 				By byElem = By.xpath("//a[text()[contains(.,'" + criterio1 + "') and contains(.,'" + criterio2 + "')]]");
-				PageObjTM.click(byElem, driver).exec();
+				PageBase.click(byElem, driver).exec();
 			} else {
 				By byElem = By.xpath("//a[text()[contains(.,'" + criterio1 + "')]]");
-				PageObjTM.click(byElem, driver).exec();
+				PageBase.click(byElem, driver).exec();
 			}
 		}
 		

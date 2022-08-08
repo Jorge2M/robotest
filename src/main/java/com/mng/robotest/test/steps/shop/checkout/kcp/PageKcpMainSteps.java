@@ -1,18 +1,14 @@
 package com.mng.robotest.test.steps.shop.checkout.kcp;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.kcp.PageKcpMain;
 
-public class PageKcpMainSteps {
 
-	private final PageKcpMain pageKcpMain;
-	
-	public PageKcpMainSteps(WebDriver driver) {
-		pageKcpMain = new PageKcpMain(driver);
-	}
+public class PageKcpMainSteps extends StepBase {
+
+	private final PageKcpMain pageKcpMain = new PageKcpMain();
 	
 	@Validation (
 		description="Aparece la página inicial de KCP (la esperamos hasta #{maxSeconds} segundos)",
