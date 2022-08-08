@@ -76,7 +76,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	private static final String XPATH_IMG_SLIDER_ACTIVE_RELATIVE_ARTICLE_DESKTOP_OUTLET = 
 			"//div[@class[contains(.,'swiper-slide-active')]]" + XPATH_IMG_RELATIVE_ARTICLE_OUTLET ;
 
-	private PageGaleriaDesktop(From from, Channel channel, AppEcom app) {
+	public PageGaleriaDesktop(From from, Channel channel, AppEcom app) {
 		super(from, channel, app);
 		secColores = new SecColoresArticuloDesktop(app);
 		secTallas = new SecTallasArticuloDesktop(app, xpathArticuloBase);
