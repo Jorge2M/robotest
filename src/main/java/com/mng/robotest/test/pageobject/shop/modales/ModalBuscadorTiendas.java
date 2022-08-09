@@ -15,7 +15,8 @@ public class ModalBuscadorTiendas extends PageBase implements PageFromFooter {
 	private static final String XPATH_TIENDAS = XPATH_CONTAINER + "//div[@class[contains(.,'store-list')]]";
 	private static final String XPATH_CLOSE_DESKTOP_NOOUTLET = "//*[@class[contains(.,'icon')] and @class[contains(.,'close-modal')]]";
 	private static final String XPATH_CLOSE_DESKTOP_OUTLET = "//button[@class[contains(.,'close-modal')]]";
-	private static final String XPATH_LEFT_ARROW_DEVICE = XPATH_CONTAINER + "//span[@role='button']";
+	private static final String XPATH_CLOSE_TABLET = "//div[@class[contains(.,'close-modal')]]";
+	private static final String XPATH_LEFT_ARROW_MOBILE = XPATH_CONTAINER + "//span[@role='button']";
 	
 	@Override
 	public String getName() {
@@ -40,22 +41,23 @@ public class ModalBuscadorTiendas extends PageBase implements PageFromFooter {
 	}
 	
 	public void close() {
-		if (channel==Channel.tablet) {
-			clickAspaForClose();
-		} else {
-			clickAspaForClose();
-		}
+		clickAspaForClose();
 	}
 	
 	private void clickAspaForClose() {
-		if (channel.isDevice()) {
-			click(By.xpath(XPATH_LEFT_ARROW_DEVICE)).exec();
+		if (channel==Channel.mobile) {
+			click(By.xpath(XPATH_LEFT_ARROW_MOBILE)).exec();
+			return;
+		} 
+		if (channel==Channel.tablet) {
+			click(By.xpath(XPATH_CLOSE_TABLET)).exec();
+			return;			
+		}
+		
+		if (app==AppEcom.outlet) {
+			click(By.xpath(XPATH_CLOSE_DESKTOP_OUTLET)).exec();
 		} else {
-			if (app==AppEcom.outlet) {
-				
-			} else {
-				click(By.xpath(XPATH_CLOSE_DESKTOP_NOOUTLET)).exec();
-			}
+			click(By.xpath(XPATH_CLOSE_DESKTOP_NOOUTLET)).exec();
 		}
 	}
 }
