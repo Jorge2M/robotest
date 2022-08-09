@@ -89,7 +89,7 @@ public class Fav001 extends TestBase {
 		Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.she, null, "Vestidos"));
 		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuVestidos, dataTest);
 		if (channel==Channel.desktop) {
-			pageGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.cuatro);
+			pageGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.CUATRO);
 		}
 	}
 

@@ -31,23 +31,22 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageGaleriaDesktop extends PageGaleria {
 	
-	public static SecBannerHeadGallery secBannerHead;
-	public static SecSubmenusGallery secSubmenusGallery;
-	public static SecSelectorPreciosDesktop secSelectorPreciosDesktop;
-	public static SecCrossSelling secCrossSelling;
-	
 	private final SecColoresArticuloDesktop secColores;
 	private final SecTallasArticuloDesktop secTallas;
+	private final SecSubmenusGallery secSubmenusGallery;
+	private final SecBannerHeadGallery secBannerHead;
+	private final SecCrossSelling secCrossSelling;	
+	private final SecSelectorPreciosDesktop secSelectorPreciosDesktop;
 	
-	public enum NumColumnas {dos, tres, cuatro}
-	public enum TypeSlider {prev, next}
-	public enum TypeColor {codigo, nombre}
+	public enum NumColumnas { DOS, TRES, CUATRO }
+	public enum TypeSlider { PREV, NEXT }
+	public enum TypeColor { CODIGO, NOMBRE }
 	public enum TypeArticleDesktop {
-		Simple (
+		SIMPLE (
 			"//self::*[@data-imgsize='A1' or @class[contains(.,'_2zQ2a')]]"), //TODO (Outlet) a la espera de los cambios de Sergio Campillo
-		Doble (
+		DOBLE (
 			"//self::*[@data-imgsize='A2' or @class[contains(.,'_3QWF_')]]"), //TODO (Outlet) a la espera de los cambios de Sergio Campillo
-		Video (
+		VIDEO (
 			"//video");
 		
 		String xpathRelativeArticle;
@@ -72,10 +71,24 @@ public class PageGaleriaDesktop extends PageGaleria {
 	private static final String XPATH_IMG_SLIDER_ACTIVE_RELATIVE_ARTICLE_DESKTOP_OUTLET = 
 			"//div[@class[contains(.,'swiper-slide-active')]]" + XPATH_IMG_RELATIVE_ARTICLE_OUTLET ;
 
+	public PageGaleriaDesktop() {
+		super();
+		secColores = new SecColoresArticuloDesktop(app);
+		secTallas = new SecTallasArticuloDesktop(app, xpathArticuloBase);
+		secSubmenusGallery = new SecSubmenusGallery();
+		secBannerHead = new SecBannerHeadGallery();
+		secCrossSelling = new SecCrossSelling();	
+		secSelectorPreciosDesktop = new SecSelectorPreciosDesktop();
+	}
+	
 	public PageGaleriaDesktop(From from, Channel channel, AppEcom app) {
 		super(from, channel, app);
 		secColores = new SecColoresArticuloDesktop(app);
 		secTallas = new SecTallasArticuloDesktop(app, xpathArticuloBase);
+		secSubmenusGallery = new SecSubmenusGallery();
+		secBannerHead = new SecBannerHeadGallery();
+		secCrossSelling = new SecCrossSelling();	
+		secSelectorPreciosDesktop = new SecSelectorPreciosDesktop();
 	}
 	
 	public enum TypeArticle {rebajado, norebajado};
@@ -252,7 +265,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	private String getXPathImgArticuloOutlet(WebElement article) {
-		if (isPresentSliderInArticle(TypeSlider.next, article)) {
+		if (isPresentSliderInArticle(TypeSlider.NEXT, article)) {
 			return "." + XPATH_IMG_SLIDER_ACTIVE_RELATIVE_ARTICLE_DESKTOP_OUTLET;
 		} else {
 			return "." + XPATH_IMG_RELATIVE_ARTICLE_OUTLET ;
@@ -285,11 +298,11 @@ public class PageGaleriaDesktop extends PageGaleria {
 	
 	public int getNumColumnas(NumColumnas numColumnas) {
 		switch (numColumnas) {
-		case dos:
+		case DOS:
 			return 2;
-		case tres:
+		case TRES:
 			return 3;
-		case cuatro:
+		case CUATRO:
 			return 4;
 		default:
 			return -1;
@@ -406,7 +419,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	private List<WebElement> getListArticulosFromPagina(int numPagina) {
-		By byArticulo = By.xpath(getXPathArticuloFromPagina(numPagina, TypeArticleDesktop.Simple));
+		By byArticulo = By.xpath(getXPathArticuloFromPagina(numPagina, TypeArticleDesktop.SIMPLE));
 		return (driver.findElements(byArticulo));
 	}
 
@@ -830,5 +843,21 @@ public class PageGaleriaDesktop extends PageGaleria {
 	public boolean isPresentAnyArticle(TypeArticleDesktop typeArticle) {
 		String xpathVideo = getXPathArticulo(typeArticle);
 		return (state(Present, By.xpath(xpathVideo)).check());
+	}
+
+	public SecSubmenusGallery getSecSubmenusGallery() {
+		return secSubmenusGallery;
+	}
+
+	public SecBannerHeadGallery getSecBannerHead() {
+		return secBannerHead;
+	}
+
+	public SecCrossSelling getSecCrossSelling() {
+		return secCrossSelling;
+	}
+
+	public SecSelectorPreciosDesktop getSecSelectorPreciosDesktop() {
+		return secSelectorPreciosDesktop;
 	}
 }

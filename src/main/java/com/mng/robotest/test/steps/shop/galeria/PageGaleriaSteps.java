@@ -37,6 +37,7 @@ import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.NumColum
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticle;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeSlider;
+import com.mng.robotest.test.pageobject.shop.galeria.SecBannerHeadGallery;
 import com.mng.robotest.test.pageobject.shop.galeria.SecBannerHeadGallery.TypeLinkInfo;
 import com.mng.robotest.test.pageobject.shop.menus.Menu2onLevel;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusFiltroCollection;
@@ -73,7 +74,7 @@ public class PageGaleriaSteps {
 		this.driver = driver;
 		this.channel = channel;
 		this.app = app;
-		this.secCrossSellingSteps = new SecCrossSellingSteps(channel, app, driver);
+		this.secCrossSellingSteps = new SecCrossSellingSteps(channel, app);
 		this.secSelectorPreciosSteps = new SecSelectorPreciosSteps(app, channel, driver);
 		this.bannerHead = BannerHeadGallerySteps.newInstance(this, driver);
 		this.pageGaleria = PageGaleria.getNew(channel, app);
@@ -563,7 +564,7 @@ public class PageGaleriaSteps {
 	public boolean hayPanoramicasEnGaleriaDesktop(float porcentaje) {
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
 		float numArtTotal = pageGaleria.getNumArticulos();
-		float numArtDobles = pageGaleriaDesktop.getNumArticulos(TypeArticleDesktop.Doble);
+		float numArtDobles = pageGaleriaDesktop.getNumArticulos(TypeArticleDesktop.DOBLE);
 		return (!articlesUnderPercentage(numArtTotal, numArtDobles, porcentaje));
 	}
 
@@ -579,7 +580,7 @@ public class PageGaleriaSteps {
 		level=State.Warn)
 	public boolean validaHayVideoEnGaleria() {
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-	  	return (pageGaleriaDesktop.isPresentAnyArticle(TypeArticleDesktop.Video));
+	  	return (pageGaleriaDesktop.isPresentAnyArticle(TypeArticleDesktop.VIDEO));
 	}
    
 	@Validation (
@@ -697,10 +698,10 @@ public class PageGaleriaSteps {
 	 	checks.add(
 	 		"<b style=\"color:blue\">Rebajas</b></br>" +
 	 		"Es visible el banner de cabecera",
-	 		PageGaleriaDesktop.secBannerHead.isVisible(driver), State.Defect);
+	 		new PageGaleriaDesktop().getSecBannerHead().isVisible(), State.Defect);
 	 	
 	 	String maxPercDiscount = "70";
-	 	String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
+	 	String textBanner = new PageGaleriaDesktop().getSecBannerHead().getText();
 	 	checks.add(
 	 		"El banner de cabecera contiene el porcentaje de descuento<b>" + maxPercDiscount + "</b>",
 	 		UtilsTest.textContainsSetenta(textBanner, idioma), State.Warn);
@@ -850,7 +851,7 @@ public class PageGaleriaSteps {
 		description="Seleccionamos el link <b>Más Info</b>", 
 		expected="Se hace visible el aviso legal")
 	public static void clickMoreInfoBannerRebajasJun2018(WebDriver driver) {
-		PageGaleriaDesktop.secBannerHead.clickLinkInfoRebajas(driver);
+		new PageGaleriaDesktop().getSecBannerHead().clickLinkInfoRebajas();
 		checkAfterClickInfoRebajas(driver);
 	}
 	
@@ -858,15 +859,16 @@ public class PageGaleriaSteps {
 	@Validation
 	private static ChecksTM checkAfterClickInfoRebajas(WebDriver driver) {
 		ChecksTM checks = ChecksTM.getNew();
+		SecBannerHeadGallery secBannerHead = new PageGaleriaDesktop().getSecBannerHead();
 		int maxSecondsToWait = 1;
 		checks.add(
 			"<b style=\"color:blue\">Rebajas</b></br>" +
 			"Se despliega la información relativa a las rebajas (lo esperamos hasta " + maxSecondsToWait + " segundos)",
-			PageGaleriaDesktop.secBannerHead.isVisibleInfoRebajasUntil(maxSecondsToWait, driver), State.Warn);
+			secBannerHead.isVisibleInfoRebajasUntil(maxSecondsToWait), State.Warn);
 		
 		checks.add(
 			"Aparece el link de <b>Menos info</b>",
-			PageGaleriaDesktop.secBannerHead.isVisibleLinkTextInfoRebajas(TypeLinkInfo.less, driver), State.Warn);
+			secBannerHead.isVisibleLinkTextInfoRebajas(TypeLinkInfo.LESS), State.Warn);
 		
 		return checks;
 	}
@@ -902,7 +904,7 @@ public class PageGaleriaSteps {
 		for (Menu2onLevel menu2oNivelTmp : menus2onLevel) {
 			checks.add(
 				"Aparece el submenú <b>" + menu2oNivelTmp.getNombre() + "</b>",
-				((PageGaleriaDesktop)pageGaleria).secSubmenusGallery.isVisibleSubmenu(menu2oNivelTmp.getNombre()), 
+				((PageGaleriaDesktop)pageGaleria).getSecSubmenusGallery().isVisibleSubmenu(menu2oNivelTmp.getNombre()), 
 				State.Warn);
 		}
 		return checks;

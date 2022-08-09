@@ -228,35 +228,35 @@ public class SecBolsaSteps {
 			validatorBolsa.numArticlesIsCorrect(), State.Warn);
 		
 		ArrayList<DataArtBolsa> listDataToValidate = new ArrayList<>();
-		listDataToValidate.add(DataArtBolsa.Referencia);
+		listDataToValidate.add(DataArtBolsa.REFERENCIA);
 		checks.add(
 			"Cuadran las referencias de los artículos existentes en la bolsa",
 			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), State.Warn);
 		
 		listDataToValidate.clear();
-		listDataToValidate.add(DataArtBolsa.Nombre);
+		listDataToValidate.add(DataArtBolsa.NOMBRE);
 		checks.add(
 			"Cuadran los nombres de los artículos existentes en la bolsa",
 			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), State.Warn);
 		
 		listDataToValidate.clear();
-		listDataToValidate.add(DataArtBolsa.Color);
+		listDataToValidate.add(DataArtBolsa.COLOR);
 		checks.add(
 			"Cuadran los colores de los artículos existentes en la bolsa",
 			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), State.Warn);
 		
 		listDataToValidate.clear();
-		listDataToValidate.add(DataArtBolsa.Talla);
+		listDataToValidate.add(DataArtBolsa.TALLA);
 		boolean tallaNumOk = validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate);
 		listDataToValidate.clear();
-		listDataToValidate.add(DataArtBolsa.Talla);
+		listDataToValidate.add(DataArtBolsa.TALLA);
 		boolean tallaAlfOk = validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate);
 		checks.add(
 			"Cuadran las tallas de los artículos existentes en la bolsa",
 			tallaNumOk || tallaAlfOk, State.Warn);
 		
 		listDataToValidate.clear();
-		listDataToValidate.add(DataArtBolsa.PrecioTotal);
+		listDataToValidate.add(DataArtBolsa.PRECIO_TOTAL);
 		checks.add(
 			"Cuadran los precios de los artículos existentes en la bolsa",
 			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), State.Warn);

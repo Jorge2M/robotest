@@ -27,7 +27,7 @@ public class SecSelectorPreciosSteps {
 	private final Channel channel;
 	
 	public SecSelectorPreciosSteps(AppEcom app, Channel channel, WebDriver driver) {
-		this.selectorPreciosDesktop = new SecSelectorPreciosDesktop(app, driver);
+		this.selectorPreciosDesktop = new SecSelectorPreciosDesktop();
 		this.secFiltrosDesktop = SecFiltrosDesktop.getInstance(channel, app, driver);
 		this.driver = driver;
 		this.app = app;

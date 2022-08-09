@@ -32,17 +32,17 @@ public class LineasArtBolsaMobile extends LineasArtBolsa {
 	@Override
 	String getXPathDataRelativeArticle(DataArtBolsa dataArt) {
 		switch (dataArt) {
-		case Nombre:
+		case NOMBRE:
 			return XPATH_NOMBRE_RELATIVE_ARTICLE;
-		case Color:
+		case COLOR:
 			return XPATH_COLOR_RELATIVE_ARTICLE;
-		case Talla:
+		case TALLA:
 			return XPATH_TALLA_ALF_RELATIVE_ARTICLE;
-		case Cantidad:
+		case CANTIDAD:
 			return XPATH_CANTIDAD_RELATIVE_ARTICLE;
-		case PrecioEntero:
+		case PRECIO_ENTERO:
 			return XPATH_PRECIO_ENTERO_RELATIVE_ARTICLE;
-		case PrecioDecimal:
+		case PRECIO_DECIMAL:
 			return XPATH_PRECIO_DECIMAL_RELATIVE_ARTICLE;
 		default:
 			return "";
@@ -89,8 +89,8 @@ public class LineasArtBolsaMobile extends LineasArtBolsa {
 	
 	@Override
 	public float getPrecioArticle(WebElement lineaArticleWeb) {
-		String parteEntera = getDataArticle(DataArtBolsa.PrecioEntero, lineaArticleWeb);
-		String parteDecimal = getDataArticle(DataArtBolsa.PrecioDecimal, lineaArticleWeb);
+		String parteEntera = getDataArticle(DataArtBolsa.PRECIO_ENTERO, lineaArticleWeb);
+		String parteDecimal = getDataArticle(DataArtBolsa.PRECIO_DECIMAL, lineaArticleWeb);
 		return (ImporteScreen.getFloatFromImporteMangoScreen(parteEntera + parteDecimal));		
 	}
 	

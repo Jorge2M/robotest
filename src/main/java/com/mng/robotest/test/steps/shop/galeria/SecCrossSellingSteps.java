@@ -3,7 +3,6 @@ package com.mng.robotest.test.steps.shop.galeria;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -21,6 +20,7 @@ import com.mng.robotest.test.pageobject.shop.menus.desktop.SecBloquesMenuDesktop
 import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.SecBloquesMenuDesktopNew.MenusFromGroup;
 
+
 @SuppressWarnings({"static-access"})
 public class SecCrossSellingSteps {
 
@@ -28,8 +28,8 @@ public class SecCrossSellingSteps {
 	private final AppEcom app;
 	private final Channel channel;
 	
-	public SecCrossSellingSteps(Channel channel, AppEcom app, WebDriver driver) {
-		this.secCrossSelling = new SecCrossSelling(channel, driver);
+	public SecCrossSellingSteps(Channel channel, AppEcom app) {
+		this.secCrossSelling = new SecCrossSelling();
 		this.app = app;
 		this.channel = channel;
 	}

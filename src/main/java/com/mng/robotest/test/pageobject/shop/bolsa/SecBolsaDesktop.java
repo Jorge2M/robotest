@@ -6,7 +6,6 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import java.util.ListIterator;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;

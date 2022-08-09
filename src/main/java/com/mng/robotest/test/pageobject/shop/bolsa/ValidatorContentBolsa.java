@@ -83,30 +83,30 @@ public class ValidatorContentBolsa {
 	@SuppressWarnings("incomplete-switch")
 	private boolean articleInScreenMatchArticleData(ArticuloScreen articleExpected, ArticuloDataBolsaScreen articuloScreen, DataArtBolsa typeDataToMatch) {
 		switch (typeDataToMatch) {
-		case Referencia:
+		case REFERENCIA:
 			break;
-		case Nombre:
+		case NOMBRE:
 			if (!articleExpected.getNombre().contains(articuloScreen.nombre)) {
 				return false;
 			}
 			break;
-		case Color:
+		case COLOR:
 			if (articleExpected.getColorName().toLowerCase().compareTo(articuloScreen.color.toLowerCase())!=0 &&
 				articleExpected.getColorName().compareTo(Constantes.colorDesconocido)!=0) {
 				return false;
 			}
 			break;
-		case Talla:
+		case TALLA:
 			if (articleExpected.getTalla()!=articuloScreen.talla) {
 				return false;
 			}
 			break;					
-		case Cantidad:
+		case CANTIDAD:
 			if (articleExpected.getNumero()!=Integer.valueOf(articuloScreen.cantidad)) {
 				return false;
 			}
 			break;
-		case PrecioTotal:
+		case PRECIO_TOTAL:
 			float precioArticulosExpected = articleExpected.getPrecioDescontado() * articleExpected.getNumero();
 			if (precioArticulosExpected!=articuloScreen.precio) {
 				return false;

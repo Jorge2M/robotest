@@ -81,8 +81,8 @@ public class GaleriaProducto {
 		if (dCtxSh.channel==Channel.desktop && dCtxSh.appE!=AppEcom.outlet) {
 			PageGaleriaDesktop pageGaleria = (PageGaleriaDesktop)PageGaleria.getNew(From.MENU, Channel.desktop, dCtxSh.appE);
 			ListDataArticleGalery listArticlesGaleria2Cols = pageGaleria.getListDataArticles();
-			listArticlesGaleria2Cols = pageGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.cuatro, listArticlesGaleria2Cols);
-			pageGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.dos, listArticlesGaleria2Cols);
+			listArticlesGaleria2Cols = pageGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.CUATRO, listArticlesGaleria2Cols);
+			pageGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.DOS, listArticlesGaleria2Cols);
 		}
 		
 		DataForScrollStep dataScroll = new DataForScrollStep();
@@ -230,29 +230,29 @@ public class GaleriaProducto {
 				
 		PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		ArrayList<TypeSlider> typeSliderList = new ArrayList<>();
-		typeSliderList.add(TypeSlider.next);
+		typeSliderList.add(TypeSlider.NEXT);
 		String src2onImage = pageGaleriaSteps.clicksSliderArticuloConColores(1, typeSliderList);
 		
 		typeSliderList.clear();
-		typeSliderList.add(TypeSlider.prev);
+		typeSliderList.add(TypeSlider.PREV);
 		int numArtConColores = 1;
 		pageGaleriaSteps.clicksSliderArticuloConColores(numArtConColores, typeSliderList);
 		
 		typeSliderList.clear();
-		typeSliderList.add(TypeSlider.next);
+		typeSliderList.add(TypeSlider.NEXT);
 		pageGaleriaSteps.clicksSliderArticuloConColores(numArtConColores, typeSliderList, src2onImage);
 		
 		//Seleccionar el 2o color del artículo
 		String srcImgAfterClickColor = pageGaleriaSteps.selecColorFromArtGaleriaStep(numArtConColores, 2);
 		
 		typeSliderList.clear();
-		typeSliderList.add(TypeSlider.next);
-		typeSliderList.add(TypeSlider.next);
+		typeSliderList.add(TypeSlider.NEXT);
+		typeSliderList.add(TypeSlider.NEXT);
 		pageGaleriaSteps.clicksSliderArticuloConColores(numArtConColores, typeSliderList);
 		
 		typeSliderList.clear();
-		typeSliderList.add(TypeSlider.prev);
-		typeSliderList.add(TypeSlider.prev);
+		typeSliderList.add(TypeSlider.PREV);
+		typeSliderList.add(TypeSlider.PREV);
 		pageGaleriaSteps.clicksSliderArticuloConColores(numArtConColores, typeSliderList, srcImgAfterClickColor);
 	}
 

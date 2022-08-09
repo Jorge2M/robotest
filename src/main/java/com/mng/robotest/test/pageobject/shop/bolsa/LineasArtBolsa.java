@@ -17,15 +17,15 @@ public abstract class LineasArtBolsa extends PageBase {
 	
 	
 	public enum DataArtBolsa {
-		Referencia(true), 
-		Nombre(true), 
-		Color(true), 
-		Talla(true), 
-		Cantidad(true), 
-		PrecioEntero(true), 
-		Precio(false),
-		PrecioDecimal(true), 
-		PrecioTotal(true);
+		REFERENCIA(true), 
+		NOMBRE(true), 
+		COLOR(true), 
+		TALLA(true), 
+		CANTIDAD(true), 
+		PRECIO_ENTERO(true), 
+		PRECIO(false),
+		PRECIO_DECIMAL(true), 
+		PRECIO_TOTAL(true);
 		
 		boolean validMobilWeb = true;
 		DataArtBolsa(boolean validMobilWeb) {
@@ -153,10 +153,10 @@ public abstract class LineasArtBolsa extends PageBase {
 		
 		ArticuloDataBolsaScreen articleData = new ArticuloDataBolsaScreen();
 		articleData.referencia = getReferenciaArticle(lineaArticleWeb);
-		articleData.nombre = getDataArticle(DataArtBolsa.Nombre, lineaArticleWeb);
-		articleData.color = getDataArticle(DataArtBolsa.Color, lineaArticleWeb);
-		articleData.talla = Talla.fromLabel(getDataArticle(DataArtBolsa.Talla, lineaArticleWeb));
-		articleData.cantidad = getDataArticle(DataArtBolsa.Cantidad, lineaArticleWeb);
+		articleData.nombre = getDataArticle(DataArtBolsa.NOMBRE, lineaArticleWeb);
+		articleData.color = getDataArticle(DataArtBolsa.COLOR, lineaArticleWeb);
+		articleData.talla = Talla.fromLabel(getDataArticle(DataArtBolsa.TALLA, lineaArticleWeb));
+		articleData.cantidad = getDataArticle(DataArtBolsa.CANTIDAD, lineaArticleWeb);
 		articleData.precio = getPrecioArticle(lineaArticleWeb);
 		return articleData;
 	}

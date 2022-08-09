@@ -2,49 +2,50 @@ package com.mng.robotest.test.pageobject.shop.galeria;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 
-public class SecBannerHeadGallery {
-	public enum TypeLinkInfo {more, less};
-	static String XPathBanner = "//div[@class='bannerHead' or @class='firstBanner' or @class='innerBanner' or @class='_2mOAS']"; //React
-	static String XPathBannerWithVideo = XPathBanner + "//div[@data-video]";
-	static String XPathBannerWithBackgroundImage = XPathBanner + "//div[@style[contains(.,'background-image')]]";
+public class SecBannerHeadGallery extends PageBase {
 	
-	static String XPathText = XPathBanner +	"//*[" + 
+	public enum TypeLinkInfo { MORE, LESS };
+	
+	private static final String XPATH_BANNER = "//div[@class='bannerHead' or @class='firstBanner' or @class='innerBanner' or @class='_2mOAS']"; //React
+	private static final String XPATH_BANNER_WITH_VIDEO = XPATH_BANNER + "//div[@data-video]";
+	private static final String XPATH_BANNER_WITH_BACKGROUND_IMAGE = XPATH_BANNER + "//div[@style[contains(.,'background-image')]]";
+	
+	private static final String XPATH_TEXT = XPATH_BANNER +	"//*[" + 
 			"@class[contains(.,'textinfo')] or " + 
 			"@class[contains(.,'vsv-text')] or " + 
 			"@class='vsv-content-text' or " +
 			"@class[contains(.,'vsv-display')] or " +
 			"@class[contains(.,'text-subtitle')]]";
 	
-	static String XPathTextLinkInfoRebajas = XPathBanner + "//div[@class[contains(.,'infotext')]]";
-	static String XPathTextLinkMoreInfoRebajas = XPathTextLinkInfoRebajas + "//self::*[@class[contains(.,'max')]]";
-	static String XPathTextLinkLessInfoRebajas = XPathTextLinkInfoRebajas + "//self::*[@class[contains(.,'min')]]";
-	static String XPathTextInfoRebajas = XPathBanner + "//div[@class[contains(.,'text3')]]";
+	private static final String XPATH_TEXT_LINK_INFO_REBAJAS = XPATH_BANNER + "//div[@class[contains(.,'infotext')]]";
+	private static final String XPATH_TEXT_LINK_MORE_INFO_REBAJAS = XPATH_TEXT_LINK_INFO_REBAJAS + "//self::*[@class[contains(.,'max')]]";
+	private static final String XPATH_TEXT_LINK_LESS_INFO_REBAJAS = XPATH_TEXT_LINK_INFO_REBAJAS + "//self::*[@class[contains(.,'min')]]";
+	private static final String XPATH_TEXT_INFO_REBAJAS = XPATH_BANNER + "//div[@class[contains(.,'text3')]]";
 	
-	public static String getXPathTextInfoRebajas(TypeLinkInfo typeLink) {
+	private static String getXPathTextInfoRebajas(TypeLinkInfo typeLink) {
 		switch (typeLink) {
-		case more:
-			return XPathTextLinkMoreInfoRebajas;
-		case less:
+		case MORE:
+			return XPATH_TEXT_LINK_MORE_INFO_REBAJAS;
+		case LESS:
 		default:
-			return XPathTextLinkLessInfoRebajas;
+			return XPATH_TEXT_LINK_LESS_INFO_REBAJAS;
 		}
 	}
 	
-	public static boolean isVisible(WebDriver driver) {
-		if (state(Visible, By.xpath(XPathBanner), driver).check()) {
-			Dimension bannerSize = driver.findElement(By.xpath(XPathBanner)).getSize(); 
+	public boolean isVisible() {
+		if (state(Visible, By.xpath(XPATH_BANNER)).check()) {
+			Dimension bannerSize = driver.findElement(By.xpath(XPATH_BANNER)).getSize(); 
 			if (bannerSize.height>0 && bannerSize.width>0) {
 				return true;
 			}
@@ -52,10 +53,10 @@ public class SecBannerHeadGallery {
 		return false;
 	}
 	
-	public static boolean isSalesBanner(IdiomaPais idioma, WebDriver driver) {
-		boolean isVisibleBanner = isVisible(driver);
+	public boolean isSalesBanner(IdiomaPais idioma) {
+		boolean isVisibleBanner = isVisible();
 		if (isVisibleBanner) {
-			String textBanner = getText(driver);
+			String textBanner = getText();
 			String saleTraduction = UtilsTest.getSaleTraduction(idioma);
 			if (UtilsTest.textContainsPercentage(textBanner, idioma) || textBanner.contains(saleTraduction)) {
 				return true;
@@ -65,49 +66,46 @@ public class SecBannerHeadGallery {
 		return false;
 	}
 	
-	public static boolean isBannerWithoutTextAccesible(WebDriver driver) {
-		String xpath = XPathBannerWithVideo + " | " + XPathBannerWithBackgroundImage;
+	public boolean isBannerWithoutTextAccesible() {
+		String xpath = XPATH_BANNER_WITH_VIDEO + " | " + XPATH_BANNER_WITH_BACKGROUND_IMAGE;
 		return (state(Visible, By.xpath(xpath), driver).check());
 	}
 	
-	public static boolean isLinkable(WebDriver driver) {
-		if (state(Present, By.xpath(XPathBanner), driver).check()) {
-			WebElement banner = driver.findElement(By.xpath(XPathBanner));
-			return (state(Clickable, banner, driver)
-					.by(By.xpath(".//a[@href]")).check());
+	public boolean isLinkable() {
+		if (state(Present, By.xpath(XPATH_BANNER)).check()) {
+			WebElement banner = driver.findElement(By.xpath(XPATH_BANNER));
+			return (state(Clickable, banner).by(By.xpath(".//a[@href]")).check());
 		}
-		
 		return false;
 	}
 	
-	public static void clickBannerIfClickable(WebDriver driver) {
-		if (isLinkable(driver)) {
-			click(By.xpath(XPathBanner), driver).exec();
+	public void clickBannerIfClickable() {
+		if (isLinkable()) {
+			click(By.xpath(XPATH_BANNER)).exec();
 		}
 	}
 	
-	public static String getText(WebDriver driver) {
-		if (state(Present, By.xpath(XPathText), driver).check()) {
-			return (driver.findElement(By.xpath(XPathBanner)).getText());
+	public String getText() {
+		if (state(Present, By.xpath(XPATH_TEXT)).check()) {
+			return (driver.findElement(By.xpath(XPATH_BANNER)).getText());
 		}
 		return "";
 	}
 	
-	public static boolean isVisibleLinkInfoRebajas(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathTextLinkInfoRebajas), driver).check());
+	public boolean isVisibleLinkInfoRebajas() {
+		return (state(Visible, By.xpath(XPATH_TEXT_LINK_INFO_REBAJAS)).check());
 	}
 
-	public static void clickLinkInfoRebajas(WebDriver driver) {
-		click(By.xpath(XPathTextLinkInfoRebajas), driver).type(javascript).exec();
+	public void clickLinkInfoRebajas() {
+		click(By.xpath(XPATH_TEXT_LINK_INFO_REBAJAS)).type(javascript).exec();
 	}
 
-	public static boolean isVisibleLinkTextInfoRebajas(TypeLinkInfo typeLink, WebDriver driver) {
+	public boolean isVisibleLinkTextInfoRebajas(TypeLinkInfo typeLink) {
 		String xpathText = getXPathTextInfoRebajas(typeLink);
-		return (state(Visible, By.xpath(xpathText), driver).check());
+		return (state(Visible, By.xpath(xpathText)).check());
 	}
 	
-	public static boolean isVisibleInfoRebajasUntil(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(XPathTextInfoRebajas), driver)
-				.wait(maxSeconds).check());
+	public boolean isVisibleInfoRebajasUntil(int maxSeconds) {
+		return (state(Visible, By.xpath(XPATH_TEXT_INFO_REBAJAS)).wait(maxSeconds).check());
 	}
 }

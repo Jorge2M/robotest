@@ -38,16 +38,20 @@ public abstract class PageGaleria extends PageBase {
 	
 	public static int MAX_PAGE_TO_SCROLL = 20;
 	
-	protected final Channel channel;
-	protected final AppEcom app;
 	protected final From from;
 	protected final String xpathArticuloBase;
 	protected final SecPreciosArticulo secPrecios;
 
+	public PageGaleria() {
+		super();
+		this.from = From.MENU;
+		this.xpathArticuloBase = getXPathArticulo();
+		this.secPrecios = new SecPreciosArticulo(channel, app, driver);
+	}
+	
 	public PageGaleria(From from, Channel channel, AppEcom app) {
+		super(channel, app);
 		this.from = from;
-		this.channel = channel;
-		this.app = app;
 		this.xpathArticuloBase = getXPathArticulo();
 		this.secPrecios = new SecPreciosArticulo(channel, app, driver);
 	}
@@ -582,12 +586,12 @@ public abstract class PageGaleria extends PageBase {
 		while (page>0) { 
 			if (isPresentPagina(page)) {
 				if (numArticlesDoubleXpage.get(page)==0) {
-					int numArticlesPage = getNumArticulosFromPagina(page, TypeArticleDesktop.Doble);
+					int numArticlesPage = getNumArticulosFromPagina(page, TypeArticleDesktop.DOBLE);
 					numArticlesDoubleXpage.set(page, numArticlesPage);
 				}
 			
 				if (numArticlesXpage.get(page)==0) {
-					int numArticlesPage = getNumArticulosFromPagina(page, TypeArticleDesktop.Simple) + 
+					int numArticlesPage = getNumArticulosFromPagina(page, TypeArticleDesktop.SIMPLE) + 
 										  numArticlesDoubleXpage.get(page);
 					numArticlesXpage.set(page, numArticlesPage);
 				}

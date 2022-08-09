@@ -135,7 +135,7 @@ public class PaisIdioma implements Serializable {
 				secMenusSteps.selectMenu1rstLevelTypeCatalog(menu, dCtxSh);
 				if (flagsNavigation.testMenus()) {
 					PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-					boolean bannerIsLincable = PageGaleriaDesktop.secBannerHead.isLinkable(driver);
+					boolean bannerIsLincable = new PageGaleriaDesktop().getSecBannerHead().isLinkable();
 					if (bannerIsLincable) {
 						pageGaleriaSteps.bannerHead.clickBannerSuperiorIfLinkableDesktop();
 					}

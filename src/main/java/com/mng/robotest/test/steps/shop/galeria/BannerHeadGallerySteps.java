@@ -13,16 +13,19 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;
+import com.mng.robotest.test.pageobject.shop.galeria.SecBannerHeadGallery;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps.TypeGalery;
 import com.mng.robotest.test.utils.UtilsTest;
 
 public class BannerHeadGallerySteps {
 
 	final PageGaleriaSteps pageGaleriaParent;
+	final SecBannerHeadGallery secBannerHeadDesktop;
 	final WebDriver driver;
 	
 	private BannerHeadGallerySteps(PageGaleriaSteps pageGaleriaParent, WebDriver driver) {
 		this.pageGaleriaParent = pageGaleriaParent;
+		this.secBannerHeadDesktop = new PageGaleriaDesktop().getSecBannerHead();
 		this.driver = driver;
 	}
 	
@@ -32,9 +35,9 @@ public class BannerHeadGallerySteps {
 	
 	@SuppressWarnings("static-access")
 	public void validateBannerSuperiorIfExistsDesktop() {
-		boolean bannerIsVisible = PageGaleriaDesktop.secBannerHead.isVisible(driver);
+		boolean bannerIsVisible = secBannerHeadDesktop.isVisible();
 		if (bannerIsVisible) {
-			if (!PageGaleriaDesktop.secBannerHead.isBannerWithoutTextAccesible(driver)) {
+			if (!secBannerHeadDesktop.isBannerWithoutTextAccesible()) {
 				checkBannerContainsSomeText();
 			}
 		}
@@ -45,7 +48,7 @@ public class BannerHeadGallerySteps {
 		description="El Banner de Cabecera contiene algún texto",
 		level=State.Warn)
 	public boolean checkBannerContainsSomeText() {
-		String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
+		String textBanner = secBannerHeadDesktop.getText();
 		return ("".compareTo(textBanner)!=0);
 	}
 
@@ -53,7 +56,7 @@ public class BannerHeadGallerySteps {
 	@SuppressWarnings("static-access")
 	public ChecksTM checkBannerContainsText(List<String> possibleTexts) {
 		ChecksTM checks = ChecksTM.getNew();
-		String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
+		String textBanner = secBannerHeadDesktop.getText();
 		checks.add(
 			"El banner de cabecera contiene el texto <b>" + possibleTexts.get(0) + "</b>",
 			textBannersContainsPossibleText(textBanner, possibleTexts), State.Defect);
@@ -65,7 +68,7 @@ public class BannerHeadGallerySteps {
 		description="Seleccionar el banner superior de la Galería", 
 		expected="Aparece una galería de artículos")
 	public void clickBannerSuperiorIfLinkableDesktop() {
-		PageGaleriaDesktop.secBannerHead.clickBannerIfClickable(driver);
+		secBannerHeadDesktop.clickBannerIfClickable();
 		pageGaleriaParent.validaArtEnContenido(3);
 	}
 
@@ -76,19 +79,19 @@ public class BannerHeadGallerySteps {
 		checks.add(
 			"<b style=\"color:blue\">Rebajas</b></br>" +
 			"Es visible el banner de cabecera",
-			PageGaleriaDesktop.secBannerHead.isVisible(driver), State.Defect);
+			secBannerHeadDesktop.isVisible(), State.Defect);
 		
 		String saleTraduction = UtilsTest.getSaleTraduction(idioma);
-		String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
+		String textBanner = secBannerHeadDesktop.getText();
 		checks.add(
 			"El banner de cabecera es de rebajas  (contiene un símbolo de porcentaje o " + saleTraduction + ")",
 			UtilsTest.textContainsPercentage(textBanner, idioma) || textBanner.contains(saleTraduction), 
 			State.Defect);
 		checks.add(
 			"El banner de cabecera contiene un link de \"Más info\"",
-			PageGaleriaDesktop.secBannerHead.isVisibleLinkInfoRebajas(driver), State.Warn);	
+			secBannerHeadDesktop.isVisibleLinkInfoRebajas(), State.Warn);	
 		
-		boolean bannerLincable = PageGaleriaDesktop.secBannerHead.isLinkable(driver);
+		boolean bannerLincable = secBannerHeadDesktop.isLinkable();
 		if (typeGalery==TypeGalery.SALES || !pais.isVentaOnline()) {
 		 	checks.add(
 		 	    Check.make(
@@ -113,7 +116,7 @@ public class BannerHeadGallerySteps {
 		checks.add(
 			"<b style=\"color:blue\">Rebajas</b></br>" +
 			"El banner de cabecera NO es de rebajas  (NO contiene un símbolo de porcentaje o \"" + saleTraduction + "\")",
-			!PageGaleriaDesktop.secBannerHead.isSalesBanner(idioma, driver), State.Defect);
+			!secBannerHeadDesktop.isSalesBanner(idioma), State.Defect);
 		
 		return checks;
 	}

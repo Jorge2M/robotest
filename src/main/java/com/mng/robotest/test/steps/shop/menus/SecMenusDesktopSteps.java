@@ -116,7 +116,7 @@ public class SecMenusDesktopSteps {
 		saveNettraffic=SaveWhen.Always)
 	private void selectMenuSubfamilia(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh) {
 		PageGaleria pageGaleria = PageGaleriaDesktop.getNew(dCtxSh.channel, app);
-		((PageGaleriaDesktop)pageGaleria).secSubmenusGallery.clickSubmenu(menu2onLevel.getNombre());
+		((PageGaleriaDesktop)pageGaleria).getSecSubmenusGallery().clickSubmenu(menu2onLevel.getNombre());
 	}
 	
 	@Step (
@@ -191,7 +191,7 @@ public class SecMenusDesktopSteps {
 	private boolean checkIsSelectedLateralMenu(MenuLateralDesktop menu, int maxSeconds) {
 		if (app!=AppEcom.outlet && menu instanceof Menu2onLevel) {
 			PageGaleria pageGaleria = PageGaleriaDesktop.getNew(Channel.desktop, app);
-			return ((PageGaleriaDesktop)pageGaleria).secSubmenusGallery.isMenuSelected(menu.getNombre());
+			return ((PageGaleriaDesktop)pageGaleria).getSecSubmenusGallery().isMenuSelected(menu.getNombre());
 		}
 		return (secMenus.secMenuLateral.isSelectedMenu(menu, maxSeconds));
 	}

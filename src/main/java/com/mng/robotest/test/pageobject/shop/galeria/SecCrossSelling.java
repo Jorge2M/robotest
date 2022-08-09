@@ -1,33 +1,24 @@
 package com.mng.robotest.test.pageobject.shop.galeria;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.conf.Channel;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.mng.robotest.domains.transversal.PageBase;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecCrossSelling {
+public class SecCrossSelling extends PageBase {
 	
-	private final Channel channel;
-	private final WebDriver driver;
-	
-	private static String XPathSectionMovil = "//section[@class='cross-selling']";
-	private static String XPathSectionDesktop = "//section[@id='crossSelling']";
+	private static final String XPATH_SECTION_MOVIL = "//section[@class='cross-selling']";
+	private static final String XPATH_SECTION_DESKTOP = "//section[@id='crossSelling']";
 
-	public SecCrossSelling(Channel channel, WebDriver driver) {
-		this.channel = channel;
-		this.driver = driver;
-	}
-	
 	private String getXPathSection() {
 		switch (channel) {
 		case desktop:
-			return XPathSectionDesktop;
+			return XPATH_SECTION_DESKTOP;
 		default:
-			return XPathSectionMovil;
+			return XPATH_SECTION_MOVIL;
 		}
 	}
 	
