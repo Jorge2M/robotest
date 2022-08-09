@@ -3,6 +3,7 @@ package com.mng.robotest.test.pageobject.shop.modales;
 import org.openqa.selenium.By;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.footer.PageFromFooter;
 
@@ -50,8 +51,7 @@ public class ModalBuscadorTiendas extends PageBase implements PageFromFooter {
 			return;
 		} 
 		if (channel==Channel.tablet) {
-			click(By.xpath(XPATH_CLOSE_TABLET)).exec();
-			return;			
+			click(By.xpath(XPATH_CLOSE_TABLET)).type(TypeClick.javascript).exec();
 		}
 		
 		if (app==AppEcom.outlet) {
