@@ -84,6 +84,7 @@ public class PageFavoritosSteps extends StepBase {
 		description="Cerramos el modal de favoritos compartidos",
 		expected="El modal de favoritos compartidos desaparece correctamente")
 	public void closeShareModal() {
+		pageFavoritos.closeSharedModal();
 		checkShareIsClosedUntil(2);
 	}
 	

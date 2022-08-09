@@ -1,44 +1,42 @@
 package com.mng.robotest.test.pageobject.shop.checkout.dotpay;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageDotpayPaymentChannel {
+public class PageDotpayPaymentChannel extends PageBase {
 
-	static String XPathSectionPaymentChannels = "//section[@id='payment-channels']";
-	static String XPathBlockInputData = "//div[@id='personal-data-form']";
-	static String XPathInputFirstName = XPathBlockInputData + "//input[@name='dp-firstname']";
-	static String XPathInputLastName = XPathBlockInputData + "//input[@name='dp-lastname']";
-	static String XPathButtonConfirmar = XPathBlockInputData + "//button[@type='submit' and @id='payment-form-submit-dp']";
+	private static final String XPATH_SECTION_PAYMENT_CHANNELS = "//section[@id='payment-channels']";
+	private static final String XPATH_BLOCK_INPUT_DATA = "//div[@id='personal-data-form']";
+	private static final String XPATH_INPUT_FIRST_NAME = XPATH_BLOCK_INPUT_DATA + "//input[@name='dp-firstname']";
+	private static final String XPATH_INPUT_LAST_NAME = XPATH_BLOCK_INPUT_DATA + "//input[@name='dp-lastname']";
+	private static final String XPATH_BUTTON_CONFIRMAR = XPATH_BLOCK_INPUT_DATA + "//button[@type='submit' and @id='payment-form-submit-dp']";
 	
-	public static String getXPathPaymentChannelLink(int numPayment) {
+	public String getXPathPaymentChannelLink(int numPayment) {
 		return "//img[@id='channel_image_" + numPayment + "']";
 	}
 	
-	public static boolean isPage(WebDriver driver) {
-		return (state(Present, By.xpath(XPathSectionPaymentChannels), driver).check());
+	public boolean isPage() {
+		return (state(Present, By.xpath(XPATH_SECTION_PAYMENT_CHANNELS)).check());
 	}
 
-	public static void clickPayment(int numPayment, WebDriver driver) {
+	public void clickPayment(int numPayment) {
 		String xpathPayment = getXPathPaymentChannelLink(numPayment);
-		click(By.xpath(xpathPayment), driver).exec();
+		click(By.xpath(xpathPayment)).exec();
 	}
 
-	public static void sendInputNombre(String firstName, String lastName, WebDriver driver) {
-		driver.findElement(By.xpath(XPathInputFirstName)).sendKeys(firstName);
-		driver.findElement(By.xpath(XPathInputLastName)).sendKeys(lastName);
+	public void sendInputNombre(String firstName, String lastName) {
+		driver.findElement(By.xpath(XPATH_INPUT_FIRST_NAME)).sendKeys(firstName);
+		driver.findElement(By.xpath(XPATH_INPUT_LAST_NAME)).sendKeys(lastName);
 	}
 
-	public static void clickButtonConfirm(WebDriver driver) {
-		click(By.xpath(XPathButtonConfirmar), driver).exec();
+	public void clickButtonConfirm() {
+		click(By.xpath(XPATH_BUTTON_CONFIRMAR)).exec();
 	}
 
-	public static boolean isVisibleBlockInputDataUntil(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(XPathBlockInputData), driver)
-				.wait(maxSeconds).check());
+	public boolean isVisibleBlockInputDataUntil(int maxSeconds) {
+		return (state(Visible, By.xpath(XPATH_BLOCK_INPUT_DATA)).wait(maxSeconds).check());
 	}
 }

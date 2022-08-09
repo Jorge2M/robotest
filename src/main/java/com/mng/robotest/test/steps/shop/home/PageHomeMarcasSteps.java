@@ -63,7 +63,7 @@ public class PageHomeMarcasSteps {
 	public ChecksTM checkMsgNewsletterFooter(boolean salesOnInCountry, IdiomaPais idioma) {
 		ChecksTM checks = ChecksTM.getNew();
 		String percentageSymbol = UtilsTest.getPercentageSymbol(idioma);
-		boolean isMsgWithPercentageSimbol = (new SecFooter(app)).newsLetterMsgContains(percentageSymbol);
+		boolean isMsgWithPercentageSimbol = (new SecFooter()).newsLetterMsgContains(percentageSymbol);
 		if (salesOnInCountry) {
 			checks.add(
 				Check.make(

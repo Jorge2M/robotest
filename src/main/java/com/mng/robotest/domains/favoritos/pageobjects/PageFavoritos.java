@@ -95,15 +95,19 @@ public class PageFavoritos extends PageBase {
 	}
 	
 	public boolean isShareTelegramFavoritesVisible() {
-		return (state(Visible, By.xpath(XPATH_TELEGRAM_SHARE_BUTTON)).check());
+		return state(Visible, By.xpath(XPATH_TELEGRAM_SHARE_BUTTON)).check();
 	}
 	
 	public boolean isShareUrlFavoritesVisible() {
-		return (state(Visible, By.xpath(XPATH_URL_SHARE_LABEL)).check());
+		return state(Visible, By.xpath(XPATH_URL_SHARE_LABEL)).check();
+	}
+	
+	public void closeSharedModal() {
+		click(By.xpath(XPATH_CLOSE_SHARE_MODAL_BUTTON)).exec();
 	}
 	
 	public boolean checkShareModalInvisible(int maxSeconds) {
-		return (state(Invisible, By.xpath(XPATH_CLOSE_SHARE_MODAL_BUTTON)).wait(maxSeconds).check());
+		return state(Invisible, By.xpath(XPATH_CLOSE_SHARE_MODAL_BUTTON)).wait(maxSeconds).check();
 	}
 
 	public boolean isSectionVisible() {

@@ -1,19 +1,14 @@
 package com.mng.robotest.test.pageobject.shop.footer;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.domains.transversal.PageBase;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 
 public class PageFranquicias extends PageBase implements PageFromFooter {
 	
-	//final String XPathIdFrame = "//iframe[@id='bodyFrame']";
-	final String XPathForIdPage = "//*[text()[contains(.,'Forma parte de nuestra historia')]]";
-	
-	public PageFranquicias(WebDriver driver) {
-		super(driver);
-	}
+	private static final String XPATH_FOR_ID_PAGE = "//*[text()[contains(.,'Forma parte de nuestra historia')]]";
 	
 	@Override
 	public String getName() {
@@ -23,6 +18,6 @@ public class PageFranquicias extends PageBase implements PageFromFooter {
 	@Override
 	public boolean isPageCorrectUntil(int maxSeconds) {
 		//driver.switchTo().frame(driver.findElement(By.xpath(XPathIdFrame)));
-		return (state(Present, By.xpath(XPathForIdPage)).wait(maxSeconds).check());
+		return (state(Present, By.xpath(XPATH_FOR_ID_PAGE)).wait(maxSeconds).check());
 	}
 }

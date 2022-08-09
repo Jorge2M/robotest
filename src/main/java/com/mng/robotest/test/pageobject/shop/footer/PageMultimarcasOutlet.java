@@ -1,18 +1,14 @@
 package com.mng.robotest.test.pageobject.shop.footer;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.domains.transversal.PageBase;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 
 public class PageMultimarcasOutlet extends PageBase implements PageFromFooter {
 	
-	final String XPathForIdPage = "//title[text()[contains(.,'OUTLET')] or text()[contains(.,'Outlet')]]";
-	
-	public PageMultimarcasOutlet(WebDriver driver) {
-		super(driver);
-	}
+	private static final String XPATH_FOR_IDPAGE = "//title[text()[contains(.,'OUTLET')] or text()[contains(.,'Outlet')]]";
 	
 	@Override
 	public String getName() {
@@ -21,7 +17,6 @@ public class PageMultimarcasOutlet extends PageBase implements PageFromFooter {
 	
 	@Override
 	public boolean isPageCorrectUntil(int maxSeconds) {
-		return (state(Present, By.xpath(XPathForIdPage), driver)
-				.wait(maxSeconds).check());
+		return (state(Present, By.xpath(XPATH_FOR_IDPAGE)).wait(maxSeconds).check());
 	}
 }

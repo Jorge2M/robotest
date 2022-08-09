@@ -157,13 +157,14 @@ public class CheckoutFlow {
 		String emailCheckout = UtilsMangoTest.getEmailForCheckout(dCtxSh.pais, dCtxPago.getFTCkout().emailExist); 
 		dCtxPago.getDataPedido().setEmailCheckout(emailCheckout);
 
-		Page1IdentCheckoutSteps.secSoyNuevo.inputEmailAndContinue(emailCheckout, dCtxPago.getFTCkout().emailExist, dCtxSh.appE, dCtxSh.userRegistered, dCtxSh.pais, dCtxSh.channel, driver);
+		Page1IdentCheckoutSteps page1IdentCheckoutSteps = new Page1IdentCheckoutSteps();
+		page1IdentCheckoutSteps.inputEmailAndContinue(emailCheckout, dCtxPago.getFTCkout().emailExist, dCtxSh.userRegistered, dCtxSh.pais);
 		Page2IdentCheckoutSteps page2IdentCheckoutSteps = new Page2IdentCheckoutSteps(dCtxSh.channel, dCtxSh.pais, egyptCity, driver);
 		boolean emailOk = page2IdentCheckoutSteps.checkEmail(emailCheckout);
 		if (!emailOk) {
 			//Existe un problema según el cual en ocasiones no se propaga el email desde la página de identificación
 			AllPagesSteps.backNagegador(driver);
-			Page1IdentCheckoutSteps.secSoyNuevo.inputEmailAndContinue(emailCheckout, dCtxPago.getFTCkout().emailExist, dCtxSh.appE, dCtxSh.userRegistered, dCtxSh.pais, dCtxSh.channel, driver);
+			page1IdentCheckoutSteps.inputEmailAndContinue(emailCheckout, dCtxPago.getFTCkout().emailExist, dCtxSh.userRegistered, dCtxSh.pais);
 		}
 		
 		Map<String, String> datosRegistro;

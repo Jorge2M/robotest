@@ -263,7 +263,7 @@ public class PageGaleriaSteps {
 		description="Sí aparece el footer",
 		level=State.Warn)
 	private boolean checkVisibilityFooter(int pageToScroll, AppEcom app) throws Exception {
-		return (new SecFooter(app)).isVisible();
+		return (new SecFooter()).isVisible();
 	}
 
 	@Validation (

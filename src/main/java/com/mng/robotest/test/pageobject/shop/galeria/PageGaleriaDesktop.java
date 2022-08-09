@@ -190,7 +190,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		if (app==AppEcom.outlet) {
 			return ("//*[@class[contains(.,'swiper-button-" + typeSlider + "')] and @role]");
 		}
-		return ("//*[@data-testid='." + typeSlider + "']");
+		return ("//*[@data-testid='." + typeSlider.name().toLowerCase() + "']");
 	}
 
 	private String getXPathArticuloConVariedadColores(int numArticulo) {

@@ -13,15 +13,11 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 
 @SuppressWarnings({"static-access"})
-/**
- * Clase que define la automatización de las diferentes funcionalidades de la página de "GALERÍA DE PRODUCTOS"
- * @author jorge.munoz
- */
 public class PageFichaArtOld extends PageFicha {
 
-	public static SecBreadcrumbFichaOld secBreadcrumbAndNextOld;
-	public static SecProductDescrOld secProductDescr;
-	public static SecSlidersOld secSliders; //Completa Tu Look, Elegido para ti, Lo último que has visto
+	private final SecBreadcrumbFichaOld secBreadcrumbAndNextOld = new SecBreadcrumbFichaOld();
+	private final SecProductDescrOld secProductDescr = new SecProductDescrOld();
+	private final SecSlidersOld secSliders = new SecSlidersOld(); 
 	
 	private static final String XPATH_CONTAINER_FICHA = "//*[@class='product-detail']";
 	

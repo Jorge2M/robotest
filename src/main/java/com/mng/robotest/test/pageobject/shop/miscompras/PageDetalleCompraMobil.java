@@ -82,7 +82,7 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	}
 	@Override
 	public void gotoListaMisCompras() {
-		SecFooter secFooter = new SecFooter(app);
+		SecFooter secFooter = new SecFooter();
 		secFooter.clickLink(FooterLink.MIS_COMPRAS);
 	}
 }

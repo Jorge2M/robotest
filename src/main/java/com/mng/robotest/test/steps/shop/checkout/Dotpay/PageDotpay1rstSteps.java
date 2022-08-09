@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop.checkout.Dotpay;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
@@ -9,17 +7,21 @@ import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.dotpay.PageDotpay1rst;
 import com.mng.robotest.test.utils.ImporteScreen;
 
-public class PageDotpay1rstSteps {
+
+public class PageDotpay1rstSteps extends StepBase {
+	
+	private final PageDotpay1rst pageDotpay1rst = new PageDotpay1rst();
 	
 	@Validation
-	public static ChecksTM validateIsPage(String nombrePago, String importeTotal, String codPais, Channel channel, WebDriver driver) {
+	public ChecksTM validateIsPage(String nombrePago, String importeTotal, String codPais) {
 		ChecksTM checks = ChecksTM.getNew();
 	  	checks.add(
 			"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b>",
-			PageDotpay1rst.isPresentEntradaPago(nombrePago, channel, driver), State.Warn);
+			pageDotpay1rst.isPresentEntradaPago(nombrePago), State.Warn);
 	  	
 	  	State stateVal = State.Warn;
 	  	StoreType store = StoreType.Evidences;
@@ -35,12 +37,12 @@ public class PageDotpay1rstSteps {
 	  	
 	  	checks.add(
 			"Aparece la cabecera indicando la 'etapa' del pago",
-			PageDotpay1rst.isPresentCabeceraStep(nombrePago, channel, driver), State.Warn);
+			pageDotpay1rst.isPresentCabeceraStep(nombrePago), State.Warn);
 	  	
 	  	if (channel==Channel.desktop) {
 		  	checks.add(
 				"Figura un botón de pago",
-				PageDotpay1rst.isPresentButtonPago(driver), State.Defect);
+				pageDotpay1rst.isPresentButtonPago(), State.Defect);
 	  	}
 	  	
 	  	return checks;
@@ -49,8 +51,8 @@ public class PageDotpay1rstSteps {
 	@Step (
 		description="Seleccionar el link hacia el Pago", 
 		expected="Aparece la página de selección del canal de pago")
-	public static void clickToPay(String importeTotal, String codPais, Channel channel, WebDriver driver) throws Exception {
-		PageDotpay1rst.clickToPay(channel, driver);
-		PageDotpayPaymentChannelSteps.validateIsPage(importeTotal, codPais, driver);
+	public void clickToPay(String importeTotal, String codPais) throws Exception {
+		pageDotpay1rst.clickToPay();
+		new PageDotpayPaymentChannelSteps().validateIsPage(importeTotal, codPais);
 	}
 }

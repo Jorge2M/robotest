@@ -10,11 +10,7 @@ import com.mng.robotest.test.pageobject.shop.modales.ModalBuscadorTiendas;
 
 public class ModalBuscadorTiendasSteps extends StepBase {
 
-	private final ModalBuscadorTiendas modalBuscadorTiendas;
-	
-	public ModalBuscadorTiendasSteps() {
-		modalBuscadorTiendas = new ModalBuscadorTiendas(channel, app, driver);
-	}
+	private final ModalBuscadorTiendas modalBuscadorTiendas = new ModalBuscadorTiendas();
 	
 	@Validation
 	public ChecksTM validaBusquedaConResultados() {
@@ -24,9 +20,11 @@ public class ModalBuscadorTiendasSteps extends StepBase {
 			"La capa de búsqueda es visible<br>" +
 			"Incidencia PRO (https://jira.mango.com/browse/CLAV-3853)",
 			modalBuscadorTiendas.isVisible(1), State.Warn);
+	 	
 	 	checks.add(
 			"Se ha localizado alguna tienda (la esperamos hasta " + maxSeconds + " segundos)",
 			modalBuscadorTiendas.isPresentAnyTiendaUntil(maxSeconds), State.Warn);
+	 	
 		return checks;
 	}
 	
@@ -34,7 +32,7 @@ public class ModalBuscadorTiendasSteps extends StepBase {
 		description="Cerramos la capa correspondiente al resultado del buscador", 
 		expected="La capa correspondiente a la búsqueda desaparece")
 	public void close() {
-		modalBuscadorTiendas.clickAspaForClose();
+		modalBuscadorTiendas.close();
 		checkModalSearchInvisible();
 	}
 	

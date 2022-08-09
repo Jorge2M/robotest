@@ -1,18 +1,14 @@
 package com.mng.robotest.test.pageobject.shop.footer;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.domains.transversal.PageBase;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 
 public class PageEmpresa extends PageBase implements PageFromFooter {
 	
-	final String XPathForIdPageNew = "//img[@src[contains(.,'empresa-mango')]]";
-	
-	public PageEmpresa(WebDriver driver) {
-		super(driver);
-	}
+	private static final String XPATH_FOR_ID_PAGE_NEW = "//img[@src[contains(.,'empresa-mango')]]";
 	
 	@Override
 	public String getName() {
@@ -21,6 +17,6 @@ public class PageEmpresa extends PageBase implements PageFromFooter {
 	
 	@Override
 	public boolean isPageCorrectUntil(int maxSeconds) {
-		return (state(Present, By.xpath(XPathForIdPageNew)).wait(maxSeconds).check());
+		return (state(Present, By.xpath(XPATH_FOR_ID_PAGE_NEW)).wait(maxSeconds).check());
 	}
 }

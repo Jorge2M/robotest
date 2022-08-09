@@ -527,13 +527,16 @@ public class PageFichaArtSteps extends StepBase {
 	@Validation
 	public ChecksTM validaBreadCrumbFichaOld(String urlGaleryOrigin) {
 		ChecksTM checks = ChecksTM.getNew();
+		SecBreadcrumbFichaOld secBreadcrumbFichaOld = new SecBreadcrumbFichaOld();
 	 	checks.add(
 	 		"Existen el bloque correspondiente a las <b>BreadCrumb</b>",
-	 		SecBreadcrumbFichaOld.isVisibleBreadCrumb(driver), State.Defect);		
-	 	String urlGaleryBC = SecBreadcrumbFichaOld.getUrlItemBreadCrumb(ItemBCrumb.GALERY, driver);
+	 		secBreadcrumbFichaOld.isVisibleBreadCrumb(), State.Defect);
+	 	
+	 	String urlGaleryBC = secBreadcrumbFichaOld.getUrlItemBreadCrumb(ItemBCrumb.GALERY);
 	 	checks.add(
 	 		"El link correspondiente a la Galería del artículo linca a la URL " + urlGaleryOrigin,
-	 		urlGaleryOrigin.contains(urlGaleryBC), State.Warn); 
+	 		urlGaleryOrigin.contains(urlGaleryBC), State.Warn);
+	 	
 	 	return checks;
 	}
 

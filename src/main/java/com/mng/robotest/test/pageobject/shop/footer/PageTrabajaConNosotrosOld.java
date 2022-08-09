@@ -1,19 +1,15 @@
 package com.mng.robotest.test.pageobject.shop.footer;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.domains.transversal.PageBase;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 
 public class PageTrabajaConNosotrosOld extends PageBase implements PageFromFooter {
 	
-	final String XPathIdFrame = "//iframe[@id='bodyFrame']";
-	final String XPathForIdPage = "//li[@class='first']/a[text()[contains(.,'Nuestro ADN')]]";
-	
-	public PageTrabajaConNosotrosOld(WebDriver driver) {
-		super(driver);
-	}
+	private static final String XPATH_ID_FRAME = "//iframe[@id='bodyFrame']";
+	private static final String XPATH_FOR_IDPAGE = "//li[@class='first']/a[text()[contains(.,'Nuestro ADN')]]";
 	
 	@Override
 	public String getName() {
@@ -22,7 +18,7 @@ public class PageTrabajaConNosotrosOld extends PageBase implements PageFromFoote
 	
 	@Override
 	public boolean isPageCorrectUntil(int maxSeconds) {
-		driver.switchTo().frame(driver.findElement(By.xpath(XPathIdFrame)));
-		return (state(Present, By.xpath(XPathForIdPage)).wait(maxSeconds).check());
+		driver.switchTo().frame(driver.findElement(By.xpath(XPATH_ID_FRAME)));
+		return (state(Present, By.xpath(XPATH_FOR_IDPAGE)).wait(maxSeconds).check());
 	}
 }

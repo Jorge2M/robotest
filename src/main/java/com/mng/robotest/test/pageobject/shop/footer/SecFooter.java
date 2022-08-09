@@ -18,43 +18,41 @@ import com.mng.robotest.test.pageobject.shop.modales.ModalClubMangoLikes;
 
 public class SecFooter extends PageBase {
 
-	private final AppEcom app;
-	
 	private static final String XPATH_CAPA_SHOP = "//div[@id='nav-footer']";
 	private static final String XPATH_CAPA_OUTLET = "//footer[@id='footerMNG']";
 	
-	private final SecNewsLetter secNewsLetter;
+	private final SecNewsLetter secNewsLetter = new SecNewsLetter();
 	
-	static List<AppEcom> footerShop = Arrays.asList(AppEcom.shop);
-	static List<AppEcom> footerOutlet = Arrays.asList(AppEcom.outlet);
-	static List<AppEcom> footerAll = Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf);
+	private static final List<AppEcom> FOOTER_SHOP = Arrays.asList(AppEcom.shop);
+	private static final List<AppEcom> FOOTER_OUTLET = Arrays.asList(AppEcom.outlet);
+	private static final List<AppEcom> FOOTER_ALL = Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf);
 	
-	static List<Channel> channelDesktop = Arrays.asList(Channel.desktop);
-	static List<Channel> channelMobile = Arrays.asList(Channel.mobile, Channel.tablet);
-	static List<Channel> channelAll = Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet);	
+	private static final List<Channel> CHANNEL_DESKTOP = Arrays.asList(Channel.desktop);
+	private static final List<Channel> CHANNEL_MOBILE = Arrays.asList(Channel.mobile, Channel.tablet);
+	private static final List<Channel> CHANNEL_ALL = Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet);	
 	
 	public static enum FooterLink {
-		AYUDA(footerShop, channelAll, "//a[@data-ga-label='ayuda' and text()[contains(.,'Ayuda')]]", false), 
-		MIS_COMPRAS(footerShop, channelAll, "//a[@data-ga-label='miscompras']", false), 
-		DEVOLUCIONES(footerAll, channelAll, "//a[@data-ga-label='devoluciones' and text()[contains(.,'Devoluciones')]]", false), 
-		TIENDAS(footerShop, channelAll, "//a[@data-ga-label='buscarTiendas']", false),
-		MANGO_CARD(footerShop, channelAll, "//a[@data-ga-label='tarjetaMango' and text()[contains(.,'Mango Card')]]", false),
-		CHEQUE_REGALO(footerShop, channelDesktop, "//a[@data-ga-label='cheques' and text()[contains(.,'egalo')]]", false),
-		CHEQUE_REGALO_OLD(footerShop, channelDesktop, "//a[@data-ga-label='cheques']", false),
-		APPS(footerShop, channelAll, "//a[@data-ga-label='apps' and text()[contains(.,'Apps')]]", false), 
-		EMPRESA(footerAll, channelDesktop, "//a[@data-ga-label='pieEmpresa' and text()[contains(.,'Empresa')]]", true), 
-		FRANQUICIAS(footerShop, channelDesktop, "//a[@data-ga-label='pieFranquicias' and text()[contains(.,'Franquicias')]]", true), 
-		TRABAJA_CON_NOSOTROS_SHOP(footerShop, channelAll, "//a[@data-ga-label[contains(.,'pieTrabajar')] and text()[contains(.,'Trabaja')]]", true), 
-		PRENSA(footerShop, channelDesktop, "//a[@data-ga-label='pressroom' and text()[contains(.,'Prensa')]]", true), 
-		MANGO_OUTLET(footerShop, channelAll, "//a[@data-ga-label='outlet' and text()[contains(.,'Mango Outlet')]]", true),
+		AYUDA(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label='ayuda' and text()[contains(.,'Ayuda')]]", false), 
+		MIS_COMPRAS(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label='miscompras']", false), 
+		DEVOLUCIONES(FOOTER_ALL, CHANNEL_ALL, "//a[@data-ga-label='devoluciones' and text()[contains(.,'Devoluciones')]]", false), 
+		TIENDAS(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label='buscarTiendas']", false),
+		MANGO_CARD(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label='tarjetaMango' and text()[contains(.,'Mango Card')]]", false),
+		CHEQUE_REGALO(FOOTER_SHOP, CHANNEL_DESKTOP, "//a[@data-ga-label='cheques' and text()[contains(.,'egalo')]]", false),
+		CHEQUE_REGALO_OLD(FOOTER_SHOP, CHANNEL_DESKTOP, "//a[@data-ga-label='cheques']", false),
+		APPS(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label='apps' and text()[contains(.,'Apps')]]", false), 
+		EMPRESA(FOOTER_ALL, CHANNEL_DESKTOP, "//a[@data-ga-label='pieEmpresa' and text()[contains(.,'Empresa')]]", true), 
+		FRANQUICIAS(FOOTER_SHOP, CHANNEL_DESKTOP, "//a[@data-ga-label='pieFranquicias' and text()[contains(.,'Franquicias')]]", true), 
+		TRABAJA_CON_NOSOTROS_SHOP(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label[contains(.,'pieTrabajar')] and text()[contains(.,'Trabaja')]]", true), 
+		PRENSA(FOOTER_SHOP, CHANNEL_DESKTOP, "//a[@data-ga-label='pressroom' and text()[contains(.,'Prensa')]]", true), 
+		MANGO_OUTLET(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label='outlet' and text()[contains(.,'Mango Outlet')]]", true),
 		
-		PREGUNTAS_FRECUENTES(footerOutlet, channelAll, "//a[@data-ga-label='ayuda' and text()[contains(.,'Preguntas Frecuentes')]]", false), 
-		PEDIDOS(footerOutlet, channelAll, "//a[@data-ga-label='pedidos' and text()[contains(.,'Pedidos')]]", false), 
-		ENVIO(footerOutlet, channelAll, "//a[@data-ga-label='envio' and text()[contains(.,'Envío')]]", false), 
-		FORMAS_DE_PAGO(footerOutlet, channelAll, "//a[@data-ga-label='pago' and text()[contains(.,'Formas de pago')]]", false), 
-		GUIA_DE_TALLAS(footerOutlet, channelAll, "//a[@data-ga-label='guiaTallas']", true),
-		MANGO(footerOutlet, channelAll, "//a[@data-ga-label='shop' and (text()[contains(.,'MANGO')] or text()[contains(.,'Mango')])]", true), 
-		TRABAJA_CON_NOSOTROS_OUTLET(footerOutlet, channelAll, "//a[@data-ga-label='pieTrabajarNew' and text()[contains(.,'Trabaja')]]", true);
+		PREGUNTAS_FRECUENTES(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='ayuda' and text()[contains(.,'Preguntas Frecuentes')]]", false), 
+		PEDIDOS(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='pedidos' and text()[contains(.,'Pedidos')]]", false), 
+		ENVIO(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='envio' and text()[contains(.,'Envío')]]", false), 
+		FORMAS_DE_PAGO(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='pago' and text()[contains(.,'Formas de pago')]]", false), 
+		GUIA_DE_TALLAS(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='guiaTallas']", true),
+		MANGO(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='shop' and (text()[contains(.,'MANGO')] or text()[contains(.,'Mango')])]", true), 
+		TRABAJA_CON_NOSOTROS_OUTLET(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='pieTrabajarNew' and text()[contains(.,'Trabaja')]]", true);
 		
 		List<AppEcom> appList;
 		List<Channel> channel;
@@ -93,11 +91,6 @@ public class SecFooter extends PageBase {
 	private static final String XPATH_LEGA_LRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
 	private static final String XPATH_CAMBIO_PAIS_SHOP = "//div[@class[contains(.,'modalCambioPaisShow')]]";
 	private static final String XPATH_CAMBIO_PAIS_OUTLET = "//span[@class[contains(.,'countrySelector')]]";
-	
-	public SecFooter(AppEcom app) {
-		this.app = app;
-		this.secNewsLetter = new SecNewsLetter(app);
-	}
 	
 	private String getXPathCapaFooter() {
 		switch (app) {

@@ -3,14 +3,13 @@ package com.mng.robotest.test.pageobject.shop.menus.desktop;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
+
 
 public class SecLineasMenuDesktopNew extends SecLineasMenuDesktop {
 
@@ -21,13 +20,24 @@ public class SecLineasMenuDesktopNew extends SecLineasMenuDesktop {
 	
 	private static final String TAG_ID_SUBLINEA = "@SublineaId";
 	private static final String XPATH_SUBLINEA_WITH_TAG = "//li[@id[contains(.,'" + TAG_ID_SUBLINEA+ "')] and @data-testid[contains(.,'section')]]";
+	private static final String TAG_ID_SUBLINEA2 = "@2SublineaId";
+	private static final String XPATH_SUBLINEA_WITH_2TAG = "//li[(@id[contains(.,'" + TAG_ID_SUBLINEA+ "')] or @id[contains(.,'" + TAG_ID_SUBLINEA2 + "')]) and @data-testid[contains(.,'section')]]";
 	
 	public SecLineasMenuDesktopNew(AppEcom app, Channel channel) {
 		super(app, channel);
 	}
 	
 	private String getXPathSublineaLink(SublineaType sublineaType) {
-		return (XPATH_SUBLINEA_WITH_TAG.replace(TAG_ID_SUBLINEA, sublineaType.getId(app)) + "//span");
+		if (sublineaType==SublineaType.teen_nino) {
+			//Existe un problema en la página y a veces es TeenO y otras veces TeenP
+			return XPATH_SUBLINEA_WITH_2TAG
+					.replace(TAG_ID_SUBLINEA, sublineaType.getId(app))
+					.replace(TAG_ID_SUBLINEA2, "teenP") + 
+					"//span";
+		}
+		return XPATH_SUBLINEA_WITH_TAG
+				.replace(TAG_ID_SUBLINEA, sublineaType.getId(app)) + 
+				"//span";
 	}
 	
 	@Override

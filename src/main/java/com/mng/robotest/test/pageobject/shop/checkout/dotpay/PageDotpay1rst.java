@@ -1,46 +1,43 @@
 package com.mng.robotest.test.pageobject.shop.checkout.dotpay;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import com.github.jorge2m.testmaker.conf.Channel;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageDotpay1rst {
+public class PageDotpay1rst extends PageBase {
 	
-	static String XPathListOfPayments = "//ul[@id='paymentMethods']";
-	static String XPathCabeceraStep = "//h2[@id[contains(.,'stageheader')]]";
-	static String XPathInputIconoDotpay = "//input[@type='submit' and @name='brandName']";
-	static String XPathButtonPago = "//input[@name='pay' and @type='submit']";
+	private static final String XPATH_LIST_OF_PAYMENTS = "//ul[@id='paymentMethods']";
+	private static final String XPATH_INPUT_ICONO_DOTPAY = "//input[@type='submit' and @name='brandName']";
+	private static final String XPATH_BUTTON_PAGO = "//input[@name='pay' and @type='submit']";
 	
-	public static String getXPathEntradaPago(String nombrePago, Channel channel) {
+	private String getXPathEntradaPago(String nombrePago) {
 		if (channel.isDevice()) {
-			return (XPathListOfPayments + "/li/input[@class[contains(.,'" + nombrePago.toLowerCase() + "')]]");
+			return (XPATH_LIST_OF_PAYMENTS + "/li/input[@class[contains(.,'" + nombrePago.toLowerCase() + "')]]");
 		}
-		return (XPathListOfPayments + "/li[@data-variant[contains(.,'" + nombrePago.toLowerCase() + "')]]");
+		return (XPATH_LIST_OF_PAYMENTS + "/li[@data-variant[contains(.,'" + nombrePago.toLowerCase() + "')]]");
 	}
 	
-	public static boolean isPresentEntradaPago(String nombrePago, Channel channel, WebDriver driver) {
-		String xpathPago = getXPathEntradaPago(nombrePago, channel);
-		return (state(Present, By.xpath(xpathPago), driver).check());
+	public boolean isPresentEntradaPago(String nombrePago) {
+		String xpathPago = getXPathEntradaPago(nombrePago);
+		return (state(Present, By.xpath(xpathPago)).check());
 	}
 	
-	public static boolean isPresentCabeceraStep(String nombrePago, Channel channel, WebDriver driver) {
-		String xpathCab = getXPathEntradaPago(nombrePago, channel);
-		return (state(Present, By.xpath(xpathCab), driver).check());
+	public boolean isPresentCabeceraStep(String nombrePago) {
+		String xpathCab = getXPathEntradaPago(nombrePago);
+		return state(Present, By.xpath(xpathCab)).check();
 	}
 
-	public static boolean isPresentButtonPago(WebDriver driver) {
-		return (state(Present, By.xpath(XPathButtonPago), driver).check());
+	public boolean isPresentButtonPago() {
+		return (state(Present, By.xpath(XPATH_BUTTON_PAGO)).check());
 	}
 
-	public static void clickToPay(Channel channel, WebDriver driver) {
+	public void clickToPay() {
 		if (channel.isDevice()) {
-			click(By.xpath(XPathInputIconoDotpay), driver).exec();
+			click(By.xpath(XPATH_INPUT_ICONO_DOTPAY)).exec();
 		} else {
-			click(By.xpath(XPathButtonPago), driver).exec();
+			click(By.xpath(XPATH_BUTTON_PAGO)).exec();
 		}
 	}
 }

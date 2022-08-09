@@ -12,6 +12,10 @@ import com.mng.robotest.test.steps.shop.checkout.Dotpay.PageDotpayPaymentChannel
 
 public class PagoDotpay extends PagoSteps {
 	
+	private final PageDotpay1rstSteps pageDotpay1rstSteps = new PageDotpay1rstSteps();
+	private final PageDotpayPaymentChannelSteps pageDotpayPaymentChannelSteps = new PageDotpayPaymentChannelSteps();
+	private final PageDotpayAcceptSimulationSteps pageDotpayAcceptSimulationSteps = new PageDotpayAcceptSimulationSteps();
+	
 	public PagoDotpay(DataCtxShop dCtxSh, DataCtxPago dataPago, WebDriver driver) throws Exception {
 		super(dCtxSh, dataPago, driver);
 		super.isAvailableExecPay = true;
@@ -23,13 +27,13 @@ public class PagoDotpay extends PagoSteps {
 		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		DataPedido dataPedido = dCtxPago.getDataPedido(); 
 		String nombrePago = dataPedido.getPago().getNombre(dCtxSh.channel, dCtxSh.appE);
-		PageDotpay1rstSteps.validateIsPage(nombrePago, dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
+		pageDotpay1rstSteps.validateIsPage(nombrePago, dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais());
 		
 		if (execPay) {
-			PageDotpay1rstSteps.clickToPay(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
-			PageDotpayPaymentChannelSteps.selectPayment(1, driver);
-			PageDotpayPaymentChannelSteps.inputNameAndConfirm("Jorge", "Muñoz", driver);
-			PageDotpayAcceptSimulationSteps.clickRedButtonAceptar(driver);
+			pageDotpay1rstSteps.clickToPay(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais());
+			pageDotpayPaymentChannelSteps.selectPayment(1);
+			pageDotpayPaymentChannelSteps.inputNameAndConfirm("Jorge", "Muñoz");
+			pageDotpayAcceptSimulationSteps.clickRedButtonAceptar();
 			dataPedido.setCodtipopago("F");
 		}
 	}

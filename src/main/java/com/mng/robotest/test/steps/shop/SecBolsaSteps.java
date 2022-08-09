@@ -297,20 +297,16 @@ public class SecBolsaSteps {
 		validaSelectButtonComprar(dataBag, dCtxSh);
 		if (!UtilsTest.dateBeforeToday("2022-08-01") &&
 			!dCtxSh.userRegistered) {
-			Page1IdentCheckoutSteps.secSoyNuevo.validaRGPDText(dCtxSh, driver);
+			new Page1IdentCheckoutSteps().validaRGPDText(dCtxSh);
 		}
 	}
 
-	/**
-	 * Validaciones resultado de seleccionar el botón "Comprar" de la bolsa
-	 * @param accUsrReg si la operación se está realizando con un usuario registrado
-	 */
 	public void validaSelectButtonComprar(DataBag dataBag, DataCtxShop dCtxSh) throws Exception {
 		if (dCtxSh.userRegistered) {
 			new PageCheckoutWrapperSteps(dCtxSh.channel, dCtxSh.appE, driver).validateIsFirstPage(dCtxSh.userRegistered, dataBag);
 		} else {
 			int maxSeconds = 5;
-			Page1IdentCheckoutSteps.validateIsPage(maxSeconds, driver);
+			new Page1IdentCheckoutSteps().validateIsPage(maxSeconds);
 			GenericChecks.from(Arrays.asList(
 					GenericCheck.CookiesAllowed,
 					GenericCheck.Analitica,

@@ -5,21 +5,14 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.modales.ModalClubMangoLikes;
 
 
 public class SecNewsLetter extends PageBase {
 
-	private final AppEcom app;
-	
 	private static final String XPATH_CAPA_NEWS_LETTER = "//micro-frontend[@name[contains(.,'newsletterSubscriptionFooter')]]";
 	private static final String XPATH_NEWS_LETTER_MSG = XPATH_CAPA_NEWS_LETTER + "//p[@class[contains(.,'sg-text-action')]]";
 	private static final String XPATH_TEXT_AREA_MAIL_SUSCRIPTION = XPATH_CAPA_NEWS_LETTER + "//input[@name='mail' or @name='email']";
-	
-	public SecNewsLetter(AppEcom app) {
-		this.app = app;
-	}
 	
 	public String getNewsLetterMsgText() {
 		By byMsg = By.xpath(XPATH_NEWS_LETTER_MSG);
@@ -41,7 +34,7 @@ public class SecNewsLetter extends PageBase {
 
 	public void clickFooterSuscripcion() throws Exception {
 		ModalClubMangoLikes.closeModalIfVisible(driver);
-		SecFooter secFooter = new SecFooter(app);
+		SecFooter secFooter = new SecFooter();
 		secFooter.moveTo();
 		
 		By byLink = By.xpath(XPATH_TEXT_AREA_MAIL_SUSCRIPTION);

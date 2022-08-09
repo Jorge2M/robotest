@@ -30,7 +30,7 @@ public class SecFooterSteps {
 	private final WebDriver driver;
 	
 	public SecFooterSteps(Channel channel, AppEcom app, WebDriver driver) {
-		this.secFooter = new SecFooter(app);
+		this.secFooter = new SecFooter();
 		this.channel = channel;
 		this.app = app;
 		this.driver = driver;
@@ -57,7 +57,7 @@ public class SecFooterSteps {
 	@Validation
 	private ChecksTM checkPageCorrectAfterSelectLinkFooter(String windowFatherHandle, FooterLink typeFooter, boolean closeAtEnd) {
 		ChecksTM checks = ChecksTM.getNew();
-		PageFromFooter pageObject = FactoryPageFromFooter.make(typeFooter, channel, app, driver);
+		PageFromFooter pageObject = FactoryPageFromFooter.make(typeFooter);
 		String windowActualHandle = driver.getWindowHandle();
 		boolean newWindowInNewTab = (windowActualHandle.compareTo(windowFatherHandle)!=0);
 		int maxSeconds = 5;
@@ -104,7 +104,7 @@ public class SecFooterSteps {
 		description="Seleccionar el botón con fondo negro \"¡La quiero ahora!\"",
 		expected="La página hace scroll hasta el formulario previo de solicitud de la tarjeta")
 	 public void selectLoQuieroAhoraButton() {
-		 PageMangoCard pageMangoCard = new PageMangoCard(driver);
+		 PageMangoCard pageMangoCard = new PageMangoCard();
 		 String ventanaOriginal = driver.getWindowHandle();
 		 pageMangoCard.clickOnWantMangoCardNow(channel);
 		 if(!driver.getCurrentUrl().contains("shop-ci")) {
@@ -116,7 +116,7 @@ public class SecFooterSteps {
 	 
 	 @Validation
 	 private ChecksTM checkAfterClickLoQuieroAhoraButton() {
-		 PageMangoCard pageMangoCard = new PageMangoCard(driver);
+		 PageMangoCard pageMangoCard = new PageMangoCard();
 		 ChecksTM checks = ChecksTM.getNew();
 		 checks.add(
 			"Aparece el campo <b>Nombre</b>",
@@ -143,7 +143,7 @@ public class SecFooterSteps {
 		description="Seleccionamos el botón \"¡Lo quiero ahora!\" que aparece debajo del formulario",
 		expected="Se abre una nueva pestaña del Banc Sabadell con un modal y texto \"Solicitud de tu MANGO Card\"")
 	 public void selectLoQuieroAhoraUnderForm() {
-		 PageMangoCard pageMangoCard = new PageMangoCard(driver);
+		 PageMangoCard pageMangoCard = new PageMangoCard();
 		 pageMangoCard.clickToGoSecondMangoCardPage();
 		 waitMillis(1000);
 		 checkAfterClickLoQuieroAhoraUnderForm();

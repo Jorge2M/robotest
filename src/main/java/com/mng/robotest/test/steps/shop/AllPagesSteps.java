@@ -23,7 +23,7 @@ public class AllPagesSteps {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece el footer",
-			(new SecFooter(app)).isPresent(), State.Warn);
+			(new SecFooter()).isPresent(), State.Warn);
 		
 		if (pais!=null) {
 			checks.add(

@@ -536,7 +536,7 @@ public abstract class PageGaleria extends PageBase {
 		List<Integer> numArticlesDoubleXpage = new ArrayList<>();
 		initializeDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, pageToScroll + 10);
 		updateDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, lastPage);
-		SecFooter secFooter = new SecFooter(app);
+		SecFooter secFooter = new SecFooter();
 		while (lastPage < pageToScroll) {
 			goToLastPage();
 			int newLastPage = getNumLastPage();
