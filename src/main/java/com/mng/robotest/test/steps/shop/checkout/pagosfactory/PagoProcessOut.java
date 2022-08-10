@@ -1,17 +1,16 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.steps.shop.checkout.processout.PageProcessOutInputTrjSteps;
 
+
 public class PagoProcessOut extends PagoSteps {
 
-	public PagoProcessOut(DataCtxShop dCtxSh, DataCtxPago dataPago, WebDriver driver) throws Exception {
-		super(dCtxSh, dataPago, driver);
+	public PagoProcessOut(DataCtxShop dCtxSh, DataCtxPago dataPago) throws Exception {
+		super(dCtxSh, dataPago);
 		super.isAvailableExecPay = true;
 	}
 

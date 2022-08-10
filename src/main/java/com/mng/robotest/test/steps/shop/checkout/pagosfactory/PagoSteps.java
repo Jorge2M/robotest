@@ -2,8 +2,7 @@ package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
 import static com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 
-import org.openqa.selenium.WebDriver;
-
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.datastored.DataPedido;
@@ -11,22 +10,20 @@ import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow;
 import com.mng.robotest.test.steps.shop.checkout.PageCheckoutWrapperSteps;
 
 
-public abstract class PagoSteps {
+public abstract class PagoSteps extends StepBase {
 	
 	final CheckoutFlow checkoutFlow;
 	final PageCheckoutWrapperSteps pageCheckoutWrapperSteps;
 	
 	public DataCtxShop dCtxSh;
 	public DataCtxPago dCtxPago;
-	public WebDriver driver;
 	public static String MsgNoPayImplemented = "No está diponible la parte del test que permite completar/ejecutar el pago";
 
 	public boolean isAvailableExecPay = false;
 
-	public PagoSteps(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
+	public PagoSteps(DataCtxShop dCtxSh, DataCtxPago dCtxPago) throws Exception {
 		this.dCtxSh = dCtxSh;
 		this.dCtxPago = dCtxPago;
-		this.driver = driver;
 		this.checkoutFlow = new BuilderCheckout(dCtxSh, dCtxPago, driver).build();
 		this.pageCheckoutWrapperSteps = new PageCheckoutWrapperSteps(dCtxSh.channel, dCtxSh.appE, driver);
 	}
@@ -35,10 +32,6 @@ public abstract class PagoSteps {
 		return this.isAvailableExecPay;
 	}
 
-	/**
-	 * @param execPay indica si, además de las pruebas iniciales de la pasarela, hemos de ejecutar el último/s pasos que confirman el pago y generan un pedido
-	 * @return
-	 */
 	public abstract void testPagoFromCheckout(boolean execPay) throws Exception;
 
 	public void storePedidoForMantoAndResetData() {

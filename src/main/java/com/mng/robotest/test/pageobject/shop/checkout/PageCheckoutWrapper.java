@@ -418,7 +418,7 @@ public class PageCheckoutWrapper extends PageBase {
 		if (channel==Channel.mobile) {
 			return page1MobilCheckout.isPresentBlockMetodo(tipoTransporte);
 		}
-		return new SecMetodoEnvioDesktop(driver).isPresentBlockMetodo(tipoTransporte);
+		return new SecMetodoEnvioDesktop().isPresentBlockMetodo(tipoTransporte);
 	}
 	
 	public boolean validateDiscountOk(PreciosArticulo preciosArtScreen, Descuento descuento) {

@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pago.TypeTarj;
 import com.mng.robotest.test.data.DataCtxShop;
@@ -9,10 +7,11 @@ import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.steps.shop.checkout.d3d.PageD3DLoginSteps;
 
+
 public class PagoBancontact extends PagoSteps {
 	
-	public PagoBancontact(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
-		super(dCtxSh, dCtxPago, driver);
+	public PagoBancontact(DataCtxShop dCtxSh, DataCtxPago dCtxPago) throws Exception {
+		super(dCtxSh, dCtxPago);
 		super.isAvailableExecPay = true;
 	}
 	
@@ -20,7 +19,6 @@ public class PagoBancontact extends PagoSteps {
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		boolean isD3D = true;
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
-		this.dCtxPago.getFTCkout().trjGuardada = false;
 		
 		if (execPay) {
 			pageCheckoutWrapperSteps.inputDataTrjAndConfirmPago(this.dCtxPago);

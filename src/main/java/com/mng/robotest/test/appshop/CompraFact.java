@@ -13,25 +13,25 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.compra.beans.ConfigCheckout;
+import com.mng.robotest.domains.compra.tests.CompraCommons;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataBag;
-import com.mng.robotest.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test.datastored.DataCtxPago;
-import com.mng.robotest.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop;
-import com.mng.robotest.test.steps.navigations.manto.PedidoNavigations;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.SecBolsaSteps;
 import com.mng.robotest.test.utils.UtilsTest;
+
 
 public class CompraFact implements Serializable {
 
@@ -136,34 +136,30 @@ public class CompraFact implements Serializable {
 		secBolsaSteps.altaListaArticulosEnBolsa(listArticles, dataBag);
 		
 		//Hasta página Checkout
-		FlagsTestCkout fTCkout = new FlagsTestCkout();
-		fTCkout.validaPasarelas = true;  
-		fTCkout.validaPagos = true;
-		fTCkout.forceTestMisCompras = true;
-		fTCkout.validaPedidosEnManto = true;
-		fTCkout.emailExist = true; 
-		fTCkout.trjGuardada = false;
-		fTCkout.isEmpl = this.empleado;
-		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
-		dCtxPago.setFTCkout(fTCkout);
-		dCtxPago.getDataPedido().setDataBag(dataBag);
-		dCtxPago.getFTCkout().testCodPromocional = this.testVale || this.empleado;
+		ConfigCheckout configCheckout = ConfigCheckout.config()
+				.checkMisCompras()
+				.checkManto()
+				.emaiExists()
+				.checkPromotionalCode(this.testVale || this.empleado)
+				.userIsEmployee(this.empleado).build();
 		
+		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh, configCheckout);
+		
+		dCtxPago.getDataPedido().setDataBag(dataBag);
 		dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago, driver)
 			.pago(this.pago)
 			.build()
 			.checkout(From.BOLSA);
 		
-		//Validación en Manto de los Pedidos (si existen)
-		if (dCtxPago.getFTCkout().validaPedidosEnManto) {
+		if (dCtxPago.getFTCkout().checkManto) {
 			List<CheckPedido> listChecks = new ArrayList<CheckPedido>(Arrays.asList(
 				CheckPedido.consultarBolsa, 
 				CheckPedido.consultarPedido));
 			if (checkAnulaPedido) {
 				listChecks.add(CheckPedido.anular);
 			}
-			DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
-			PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
+			
+			CompraCommons.checkPedidosManto(listChecks, dCtxPago.getListPedidos(), dCtxSh.appE, driver);
 		}
 	}
 	

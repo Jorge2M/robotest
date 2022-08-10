@@ -1,32 +1,21 @@
 package com.mng.robotest.test.pageobject.manto.pedido;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.SelectElement.TypeSelect.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
 
-public class PageGenerarPedido {
 
-	public static enum GestionPostCompra implements ElementPage {
-		EstadoPedidoSelect("//span[text()[contains(.,'Estado Pedido')]]/../..//select"),
-		InputPurchorderNum("//span[text()[contains(.,'PurchorderNum')]]/../..//input"),
-		GenerarFicheroButton("//input[@value='Generar Fichero Pedido']"),
-		MessageOkFicheroCreado("//span[text()[contains(.,'Fichero creado correctamente')]]");
+public class PageGenerarPedido extends PageBase {
 
-		private By by;
-		GestionPostCompra(String xPath) {
-			by = By.xpath(xPath);
-		}
-
-		@Override
-		public By getBy() {
-			return by;
-		}
-	}
+	private static final String XPATH_ESTADO_PEDIDO_SELECT = "//span[text()[contains(.,'Estado Pedido')]]/../..//select";
+	private static final String XPATH_INPUT_PURCHORDER_NUM = "//span[text()[contains(.,'PurchorderNum')]]/../..//input";
+	private static final String XPATH_GENERAR_FICHERO_BUTTON = "//input[@value='Generar Fichero Pedido']";
+	private static final String XPATH_MESSAGE_OK_FICHERO_CREADO = "//span[text()[contains(.,'Fichero creado correctamente')]]";
+	private static final String XPATH_RADIO_INFORMA_BANCO = "//input[@id[contains(.,'devolucionBanco')]]";
 	
 	public static enum EstadoPedido {
 		OK(0),	
@@ -48,21 +37,40 @@ public class PageGenerarPedido {
 		}
 	}
 	
-	public static boolean isPage(String idPedido, WebDriver driver) {
-		WebElement inputIdPedido = getElementWeb(GestionPostCompra.InputPurchorderNum.getBy(), driver);
+	public boolean isPage(String idPedido) {
+		WebElement inputIdPedido = getElementWeb(By.xpath(XPATH_INPUT_PURCHORDER_NUM), driver);
 		if (inputIdPedido!=null) {
 			String valueInput = inputIdPedido.getAttribute("value");
 			if (valueInput!=null) {
 				return (valueInput.contains(idPedido));
 			}
 		}
-		
 		return false;
 	}
 	
-	public static void selectEstado(EstadoPedido estado, WebDriver driver) {
+	public void selectEstado(EstadoPedido estado) {
 		String value = String.valueOf(estado.value);
-		select(GestionPostCompra.EstadoPedidoSelect.getBy(), value, driver)
+		select(By.xpath(XPATH_ESTADO_PEDIDO_SELECT), value)
 			.type(Value).wait(30).exec();
+	}
+	
+	public EstadoPedido getEstadoPedido() {
+		String estado = driver
+				.findElement(By.xpath(XPATH_ESTADO_PEDIDO_SELECT + "/option[@selected]"))
+				.getAttribute("value");
+		
+		return EstadoPedido.valueOf(estado);
+	}
+	
+	public void clickGenerarFicheroPedido() {
+		click(By.xpath(XPATH_GENERAR_FICHERO_BUTTON)).exec();
+	}
+	
+	public boolean isVisibleMessageFileCreated() {
+		return state(Visible, By.xpath(XPATH_MESSAGE_OK_FICHERO_CREADO)).check();
+	}
+	
+	public void clickInformarBancoEnCasoCancelacionAlGenerarPedido() {
+		click(By.xpath(XPATH_RADIO_INFORMA_BANCO)).exec();
 	}
 }

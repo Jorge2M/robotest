@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.data.DataCtxShop;
 
 
 public class DataCtxPago {
 
-	FlagsTestCkout FTCkout;
+	ConfigCheckout FTCkout;
 	DataPedido dataPedido;
 	CopyOnWriteArrayList<DataPedido> listPedidos = new CopyOnWriteArrayList<>();
 	boolean userWithStoreC = false;
@@ -27,11 +28,16 @@ public class DataCtxPago {
 		this.dataPedido = new DataPedido(dCtxSh.pais);
 	}
 	
-	public FlagsTestCkout getFTCkout() {
+	public DataCtxPago(DataCtxShop dCtxSh, ConfigCheckout FTCkout) {
+		this(dCtxSh);
+		setFTCkout(FTCkout);
+	}
+	
+	public ConfigCheckout getFTCkout() {
 		return this.FTCkout;
 	}
 	
-	public void setFTCkout(FlagsTestCkout FTCkout) {
+	public void setFTCkout(ConfigCheckout FTCkout) {
 		this.FTCkout = FTCkout;
 	}
 	

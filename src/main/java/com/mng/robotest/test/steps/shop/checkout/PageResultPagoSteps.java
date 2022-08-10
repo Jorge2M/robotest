@@ -43,7 +43,7 @@ public class PageResultPagoSteps {
 	public void validateIsPageOk(DataCtxPago dCtxPago, DataCtxShop dCtxSh) throws Exception {
 		validateTextConfirmacionPago();
 		validateDataPedido(dCtxPago, dCtxSh);
-		if (dCtxPago.getFTCkout().loyaltyPoints) {
+		if (dCtxPago.getFTCkout().checkLoyaltyPoints) {
 			validateBlockNewLoyaltyPoints();
 		}
 	}
@@ -152,7 +152,7 @@ public class PageResultPagoSteps {
 		DataPedido dataPedido = dCtxPago.getDataPedido();
 		if (dCtxSh.userRegistered) {
 			PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps(dCtxSh.channel, dCtxSh.appE);
-			pageMisComprasSteps.validateIsCompraOnline(dataPedido.getCodpedido(), dCtxPago.getFTCkout().isChequeRegalo);
+			pageMisComprasSteps.validateIsCompraOnline(dataPedido.getCodpedido(), dCtxPago.getFTCkout().chequeRegalo);
 		} else {
 			PageAccesoMisComprasSteps pageAccesoMisComprasSteps = new PageAccesoMisComprasSteps();
 			pageAccesoMisComprasSteps.clickBlock(TypeBlock.NO_REGISTRADO);

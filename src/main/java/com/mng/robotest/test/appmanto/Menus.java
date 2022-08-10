@@ -71,7 +71,7 @@ public class Menus implements Serializable {
 		PageLoginMantoSteps.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		String codigoEspanya = "001";
 		String codigoAlmacenEspanya = "001";
-		PageSelTdaMantoSteps.selectTienda(codigoAlmacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
-		PageMenusMantoSteps.comprobarMenusManto(cabeceraName, cabeceraNameNext, driver);
+		new PageSelTdaMantoSteps().selectTienda(codigoAlmacenEspanya, codigoEspanya);
+		new PageMenusMantoSteps().comprobarMenusManto(cabeceraName, cabeceraNameNext);
 	}
 }

@@ -1,29 +1,35 @@
 package com.mng.robotest.test.steps.manto;
 
 import java.util.List;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.manto.PageConsultaIdEans;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 
-public class PageConsultaIdEansSteps {
 
+public class PageConsultaIdEansSteps extends StepBase {
+
+	private final PageConsultaIdEans pageConsultaIdEans = new PageConsultaIdEans();
+	
 	@Validation
-	public static ChecksTM validateIsPage(WebDriver driver) {
+	public ChecksTM validateIsPage() {
 		ChecksTM checks = ChecksTM.getNew();
 	 	checks.add(
 			"Es visible el contenido de la pestaña Busqueda Excel",
-			PageConsultaIdEans.isVisibleDivBusquedaExcel(driver), State.Defect);
+			pageConsultaIdEans.isVisibleDivBusquedaExcel(), State.Defect);
+	 	
 	 	checks.add(
 			"Es visible el contenido de la pestaña Busqueda Rapida",
-			PageConsultaIdEans.isVisibleDivBusquedaRapida(driver), State.Defect);
+			pageConsultaIdEans.isVisibleDivBusquedaRapida(), State.Defect);
+	 	
 	 	checks.add(
 			"Es visible el título de página correcto",
-			PageConsultaIdEans.isVisibleTituloPagina(driver), State.Defect);
+			pageConsultaIdEans.isVisibleTituloPagina(), State.Defect);
+	 	
 	 	return checks;
 	}
 
@@ -31,24 +37,27 @@ public class PageConsultaIdEansSteps {
 		description="Introducimos datos de pedidos válidos #{pedidosPrueba} y consultamos los datos de contacto", 
 		expected="Deben mostrar la información de contacto",
 		saveErrorData=SaveWhen.Never)
-	public static void consultaDatosContacto(List<String> pedidosPrueba, WebDriver driver) {
-		PageConsultaIdEans.inputPedidosAndClickBuscarDatos(pedidosPrueba, driver);
-		checkAfterConsultContact(pedidosPrueba, driver);
+	public void consultaDatosContacto(List<String> pedidosPrueba) {
+		pageConsultaIdEans.inputPedidosAndClickBuscarDatos(pedidosPrueba);
+		checkAfterConsultContact(pedidosPrueba);
 	}
 	
 	@Validation
-	private static ChecksTM checkAfterConsultContact(List<String> pedidosPrueba, WebDriver driver) {
+	private ChecksTM checkAfterConsultContact(List<String> pedidosPrueba) {
 		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 2;
 		checks.add(
 			"Se muestra la tabla de información (la esperamos un máximo de " + maxSeconds + " segundos)",
-			PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSeconds, driver), State.Defect);
+			pageConsultaIdEans.isVisibleTablaInformacionUntil(maxSeconds), State.Defect);
+		
 		checks.add(
 			"El número de líneas de pedido es " + pedidosPrueba.size(),
-			PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSeconds, driver), State.Defect);
+			pageConsultaIdEans.isVisibleTablaInformacionUntil(maxSeconds), State.Defect);
+		
 		checks.add(
 			"Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.size(),
-			PageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba, driver), State.Defect);
+			pageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba), State.Defect);
+		
 		return checks;
 	}
 
@@ -56,24 +65,27 @@ public class PageConsultaIdEansSteps {
 		description="Introducimos datos de pedidos válidos #{pedidosPrueba} y consultamos los Identificadores que tiene",
 		expected="Debe mostrar los identificadores del pedido",
 		saveErrorData=SaveWhen.Never)
-	public static void consultaIdentificadoresPedido(List<String> pedidosPrueba, WebDriver driver) {
-		PageConsultaIdEans.inputPedidosAndClickBuscarIdentificadores(pedidosPrueba, driver);
-		checkAfterConsultaIdentPedidos(pedidosPrueba, driver);
+	public void consultaIdentificadoresPedido(List<String> pedidosPrueba) {
+		pageConsultaIdEans.inputPedidosAndClickBuscarIdentificadores(pedidosPrueba);
+		checkAfterConsultaIdentPedidos(pedidosPrueba);
 	}
 	
 	@Validation
-	private static ChecksTM checkAfterConsultaIdentPedidos(List<String> pedidosPrueba, WebDriver driver) {
+	private ChecksTM checkAfterConsultaIdentPedidos(List<String> pedidosPrueba) {
 		ChecksTM checks = ChecksTM.getNew();
 		int maxSecondsToWait = 2;
 		checks.add(
 			"Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)",
-			PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait, driver), State.Defect);
+			pageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait), State.Defect);
+		
 		checks.add(
 			"El número de líneas de pedido es " + pedidosPrueba.size(),
-			PageConsultaIdEans.getLineasPedido(driver)==pedidosPrueba.size(), State.Defect);
+			pageConsultaIdEans.getLineasPedido()==pedidosPrueba.size(), State.Defect);
+		
 		checks.add(
 			"Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.toString(),
-			PageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba, driver), State.Defect);		
+			pageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba), State.Defect);
+		
 		return checks;
 	}
 	
@@ -81,40 +93,43 @@ public class PageConsultaIdEansSteps {
 		description="Introducimos datos de pedidos válidos #{pedidosPrueba} y consultamos el trackings",
 		expected="Debe mostrar el tracking",
 		saveErrorData=SaveWhen.Never)
-	public static void consultaTrackings(List<String> pedidosPrueba, WebDriver driver) {
-		PageConsultaIdEans.inputPedidosAndClickBuscarTrackings(pedidosPrueba, driver);
-		checkIsTableTrackingsInformation(2, driver);
+	public void consultaTrackings(List<String> pedidosPrueba) {
+		pageConsultaIdEans.inputPedidosAndClickBuscarTrackings(pedidosPrueba);
+		checkIsTableTrackingsInformation(2);
 	}
 	
 	@Validation (
 		description="Se muestra la tabla de información (la esperamos un máximo de #{maxSeconds} segundos)",
 		level=State.Defect)
-	private static boolean checkIsTableTrackingsInformation(int maxSeconds, WebDriver driver) {
-		return (PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSeconds, driver));
+	private boolean checkIsTableTrackingsInformation(int maxSeconds) {
+		return pageConsultaIdEans.isVisibleTablaInformacionUntil(maxSeconds);
 	}
 
 	@Step (
 		description="Introducimos artículos válidos #{articulosPrueba} y consultamos el EAN",
 		expected="Debe mostrar el EAN",
 		saveErrorData=SaveWhen.Never)
-	public static void consultaDatosEan(List<String> articulosPrueba, WebDriver driver) {
-		PageConsultaIdEans.inputArticulosAndClickBuscarDatosEan(articulosPrueba, driver);
-		checkAfterConsultEAN(articulosPrueba, driver);
+	public void consultaDatosEan(List<String> articulosPrueba) {
+		pageConsultaIdEans.inputArticulosAndClickBuscarDatosEan(articulosPrueba);
+		checkAfterConsultEAN(articulosPrueba);
 	}
 	
 	@Validation
-	private static ChecksTM checkAfterConsultEAN(List<String> articulosPrueba, WebDriver driver) {
+	private ChecksTM checkAfterConsultEAN(List<String> articulosPrueba) {
 		ChecksTM checks = ChecksTM.getNew();
 		int maxSecondsToWait = 2;
 		checks.add(
 			"Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)",
-			PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait, driver), State.Defect);
+			pageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait), State.Defect);
+		
 		checks.add(
 			"El número de líneas de artículos es " + articulosPrueba.size(),
-			PageConsultaIdEans.getLineasPedido(driver)==articulosPrueba.size(), State.Defect);
+			pageConsultaIdEans.getLineasPedido()==articulosPrueba.size(), State.Defect);
+		
 		checks.add(
 			"Aparece una línea por cada uno de los artículos <b>" + articulosPrueba.toString(),
-			PageConsultaIdEans.isArticulosTablaCorrecto(articulosPrueba, driver), State.Defect);
+			pageConsultaIdEans.isArticulosTablaCorrecto(articulosPrueba), State.Defect);
+		
 		return checks;
 	}
 }

@@ -1,14 +1,12 @@
 package com.mng.robotest.test.steps.shop.checkout.envio;
 
-import org.openqa.selenium.WebDriver;
-
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataCtxPago;
@@ -18,21 +16,13 @@ import com.mng.robotest.test.pageobject.shop.checkout.envio.SecMetodoEnvioDeskto
 import com.mng.robotest.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.test.steps.shop.checkout.Page1EnvioCheckoutMobilSteps;
 
-public class SecMetodoEnvioDesktopSteps {
 
-	private final SecMetodoEnvioDesktop secMetodoEnvioDesktop;
-	public static ModalDroppointsSteps modalDroppoints;
+public class SecMetodoEnvioDesktopSteps extends StepBase {
+
+	private final SecMetodoEnvioDesktop secMetodoEnvioDesktop = new SecMetodoEnvioDesktop();
+	private final ModalDroppoints modalDroppoints = new ModalDroppoints();
 	
-	private final WebDriver driver;
-	private final Channel channel;
-	private final AppEcom app;
-	
-	public SecMetodoEnvioDesktopSteps(Channel channel, AppEcom app, WebDriver driver) {
-		this.secMetodoEnvioDesktop = new SecMetodoEnvioDesktop(driver);
-		this.driver = driver;
-		this.channel = channel;
-		this.app = app;
-	}
+	private final ModalDroppointsSteps modalDroppointsSteps = new ModalDroppointsSteps();
 	
 	@SuppressWarnings({ "static-access", "unused" })
 	@Step (
@@ -41,16 +31,16 @@ public class SecMetodoEnvioDesktopSteps {
 	public void selectMetodoEnvio(TipoTransporte tipoTransporte, String nombrePago, DataCtxPago dCtxPago) {
 		secMetodoEnvioDesktop.selectMetodo(tipoTransporte);
 		if (!tipoTransporte.isEntregaDomicilio()) {
-			if (ModalDroppoints.isErrorMessageVisibleUntil(driver)) {
-				ModalDroppoints.searchAgainByUserCp(dCtxPago.getDatosRegistro().get("cfCp"), driver);
+			if (modalDroppoints.isErrorMessageVisibleUntil()) {
+				modalDroppoints.searchAgainByUserCp(dCtxPago.getDatosRegistro().get("cfCp"));
 			}
 		}
 
 		validaBlockSelectedDesktop(tipoTransporte);
 		if (tipoTransporte.isEntregaDomicilio()) {
-			modalDroppoints.validaIsNotVisible(Channel.desktop, driver);
+			modalDroppointsSteps.validaIsNotVisible();
 		} else {
-			modalDroppoints.validaIsVisible(Channel.desktop, driver);
+			modalDroppointsSteps.validaIsVisible();
 		}
 	}
 	
@@ -85,7 +75,7 @@ public class SecMetodoEnvioDesktopSteps {
 			selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago);
 			break;
 		case mobile:
-			new Page1EnvioCheckoutMobilSteps(driver).selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago);
+			new Page1EnvioCheckoutMobilSteps().selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago);
 			break;
 		}
 	}
@@ -99,7 +89,7 @@ public class SecMetodoEnvioDesktopSteps {
 			pagoPintado = true;
 			TipoTransporte tipoEnvio = pago.getTipoEnvioType(dCtxSh.appE);
 			if (tipoEnvio.isDroppoint()) {
-				ModalDroppointsSteps.fluxSelectDroppoint(dCtxPago, dCtxSh, driver);
+				modalDroppointsSteps.fluxSelectDroppoint(dCtxPago, dCtxSh);
 			}
 			if (tipoEnvio.isFranjaHoraria()) {
 				selectFranjaHorariaUrgente();
@@ -116,7 +106,7 @@ public class SecMetodoEnvioDesktopSteps {
 			selectFranjaHorariaUrgente(1);
 			break;
 		case mobile:
-			new Page1EnvioCheckoutMobilSteps(driver).selectFranjaHorariaUrgente(1);
+			new Page1EnvioCheckoutMobilSteps().selectFranjaHorariaUrgente(1);
 		}	
 	}
 	
@@ -132,7 +122,7 @@ public class SecMetodoEnvioDesktopSteps {
 	private void alterTypeEnviosTiendaStandar(DataCtxPago dCtxPago) {
 		//If employee and Spain not "Recogida en Tienda"
 		Pago pago = dCtxPago.getDataPedido().getPago();
-		if (dCtxPago.getFTCkout().isEmpl && 
+		if (dCtxPago.getFTCkout().userIsEmployee && 
 			"001".compareTo(dCtxPago.getDataPedido().getCodigoPais())==0) {
 			if (pago.getTipoEnvioType(app)==TipoTransporte.TIENDA) {
 				pago.setTipoEnvioShop(TipoTransporte.STANDARD);

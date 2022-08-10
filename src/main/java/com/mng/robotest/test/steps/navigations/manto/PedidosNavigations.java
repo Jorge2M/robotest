@@ -87,31 +87,28 @@ public class PedidosNavigations {
 		}
 	}	
 	
-	/**
-	 * Se ejecuta todo el flujo de pasos/validaciones para validar un pedido concreto y volvemos a la página de pedidos
-	 */
 	public static void validaPedidoStepss(DataPedido dataPedido, AppEcom appE, WebDriver driver) throws Exception {
-		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
-		PageSelTdaMantoSteps.selectTienda(dataPedido.getCodigoAlmacen(), dataPedido.getCodigoPais(), appE, driver);
+		new PageSelTdaMantoSteps().selectTienda(dataPedido.getCodigoAlmacen(), dataPedido.getCodigoPais());
 		
-		//Establecemos los filtros de las bolsas con el día de hoy + el pedido + el código de país asociado al pedido y pulsamos "Buscar"
-		PageMenusMantoSteps.goToBolsas(driver);
+		new PageMenusMantoSteps().goToBolsas();
 		SecFiltrosMantoSteps secFiltrosMantoSteps = new SecFiltrosMantoSteps(driver);
 		secFiltrosMantoSteps.setFiltrosYbuscar(dataPedido, TypeSearch.BOLSA);
-		boolean existLinkPedido = PageBolsasMantoSteps.validaLineaBolsa(dataPedido, appE, driver).getExistsLinkCodPed();
+		boolean existLinkPedido = new PageBolsasMantoSteps().validaLineaBolsa(dataPedido).getExistsLinkCodPed();
+		
+		PageConsultaPedidoBolsaSteps pageConsultaPedidoBolsaSteps = new PageConsultaPedidoBolsaSteps();
 		if (existLinkPedido) {
-			PageConsultaPedidoBolsaSteps.detalleFromListaPedBol(dataPedido, TypeDetalle.bolsa, appE, driver);
+			pageConsultaPedidoBolsaSteps.detalleFromListaPedBol(dataPedido, TypeDetalle.BOLSA);
 		}
 		
 		if (appE!=AppEcom.votf) {
-			PageMenusMantoSteps.goToPedidos(driver);
+			new PageMenusMantoSteps().goToPedidos();
 			secFiltrosMantoSteps.setFiltrosYbuscar(dataPedido, TypeSearch.PEDIDO);
-			boolean existsLinkCodPed = PagePedidosMantoSteps.validaLineaPedido(dataPedido, appE, driver).getExistsLinkCodPed();	
+			boolean existsLinkCodPed = new PagePedidosMantoSteps().validaLineaPedido(dataPedido).getExistsLinkCodPed();	
 			if (existsLinkCodPed) {
-				PageConsultaPedidoBolsaSteps.detalleFromListaPedBol(dataPedido, TypeDetalle.pedido, appE, driver);
+				pageConsultaPedidoBolsaSteps.detalleFromListaPedBol(dataPedido, TypeDetalle.PEDIDO);
 			}
 		}
 		
-		PageDetallePedido.gotoListaPedidos(driver);
+		new PageDetallePedido().gotoListaPedidos();
 	}
 }

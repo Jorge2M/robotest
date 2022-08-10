@@ -1,22 +1,15 @@
 package com.mng.robotest.test.steps.shop.checkout.paymaya;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test.pageobject.shop.checkout.paymaya.PageInitPaymaya;
 
+
 public class PageInitPaymayaSteps {
 
-	private PageInitPaymaya pageInitPaymaya;
-	private WebDriver driver;
-	
-	public PageInitPaymayaSteps(WebDriver driver) {
-		pageInitPaymaya = new PageInitPaymaya(driver);
-		this.driver = driver;
-	}
+	private PageInitPaymaya pageInitPaymaya = new PageInitPaymaya();
 	
 	@Validation
 	public ChecksTM checkPage() {
@@ -35,7 +28,7 @@ public class PageInitPaymayaSteps {
 		expected="Aparece la página de identificación de PayMaya")
 	public PageIdentPaymayaSteps clickPaymayaButton() throws Exception {
 		pageInitPaymaya.clickButtonPayMaya();
-		PageIdentPaymayaSteps pageIdentPaymayaSteps = new PageIdentPaymayaSteps(driver);
+		PageIdentPaymayaSteps pageIdentPaymayaSteps = new PageIdentPaymayaSteps();
 		pageIdentPaymayaSteps.checkPage();
 		return pageIdentPaymayaSteps;
 	}

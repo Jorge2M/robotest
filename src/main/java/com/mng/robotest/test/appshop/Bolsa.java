@@ -4,12 +4,12 @@ import org.testng.annotations.*;
 
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataCtxPago;
-import com.mng.robotest.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
@@ -48,16 +48,13 @@ public class Bolsa {
 		secMenusSteps.accesoMenuXRef(menuVestidos, dCtxSh);
 		DataBag dataBag = GaleriaNavigationsSteps.selectArticleAvailableFromGaleria(dCtxSh, driver);
 
-		FlagsTestCkout FTCkout = new FlagsTestCkout();
-		FTCkout.validaPasarelas = false;  
-		FTCkout.validaPagos = false;
-		FTCkout.validaPedidosEnManto = false;
-		FTCkout.emailExist = true; 
-		FTCkout.trjGuardada = true;
-		FTCkout.isEmpl = true;
-		FTCkout.testCodPromocional = false;
-		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
-		dCtxPago.setFTCkout(FTCkout);
+		ConfigCheckout configCheckout = ConfigCheckout.config()
+				.emaiExists()
+				.checkSavedCard()
+				.userIsEmployee().build();
+		
+		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh, configCheckout);
+
 		dCtxPago.getDataPedido().setDataBag(dataBag);
 		
 		new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver).build().checkout(From.BOLSA);
@@ -94,15 +91,13 @@ public class Bolsa {
 		secBolsaSteps.altaArticlosConColores(1, dataBag);
 		
 		//Hasta página de Checkout
-		FlagsTestCkout FTCkout = new FlagsTestCkout();
-		FTCkout.validaPasarelas = false;  
-		FTCkout.validaPagos = false;
-		FTCkout.emailExist = true; 
-		FTCkout.trjGuardada = true;
-		FTCkout.isEmpl = false;
-		FTCkout.testCodPromocional = false;
-		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
-		dCtxPago.setFTCkout(FTCkout);
+		ConfigCheckout configCheckout = ConfigCheckout.config()
+				.emaiExists()
+				.checkSavedCard()
+				.userIsEmployee().build();
+		
+		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh, configCheckout);
+		
 		dCtxPago.getDataPedido().setDataBag(dataBag);
 		
 		new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver).build().checkout(From.BOLSA);

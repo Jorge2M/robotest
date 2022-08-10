@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataCtxPago;
@@ -11,10 +9,11 @@ import com.mng.robotest.test.steps.shop.checkout.sofort.PageSofort2onSteps;
 import com.mng.robotest.test.steps.shop.checkout.sofort.PageSofort4thSteps;
 import com.mng.robotest.test.steps.shop.checkout.sofort.PageSofortIconosBancoSteps;
 
+
 public class PagoSofort extends PagoSteps {
 	
-	public PagoSofort(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
-		super(dCtxSh, dCtxPago, driver);
+	public PagoSofort(DataCtxShop dCtxSh, DataCtxPago dCtxPago) throws Exception {
+		super(dCtxSh, dCtxPago);
 		super.isAvailableExecPay = true;
 	}
 	

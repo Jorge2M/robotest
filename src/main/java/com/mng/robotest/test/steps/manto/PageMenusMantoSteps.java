@@ -1,159 +1,125 @@
 package com.mng.robotest.test.steps.manto;
 
-import java.util.ArrayList;
-import org.openqa.selenium.WebDriver;
+import java.util.List;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.manto.PageBolsas;
 import com.mng.robotest.test.pageobject.manto.SecCabecera;
 import com.mng.robotest.test.pageobject.manto.pedido.PagePedidos;
 import com.mng.robotest.test.pageobject.shop.PageMenusManto;
 
-/**
- * Clase que implementa los diferentes steps/validations asociados asociados a la página de Menús en Manto
- * @author jorge.munoz
- *
- */
 
-public class PageMenusMantoSteps {
+public class PageMenusMantoSteps extends PageBase {
 
+	private final PageMenusManto pageMenusManto = new PageMenusManto();
+	
 	@Step (
 		description="Desde la página de menús, seleccionamos el menú \"#{subMenu}\"", 
 		expected="Aparece la página al menú seleccionado",
 		saveErrorData=SaveWhen.Never)
-	public static void goToMainMenusAndClickMenu(String subMenu, WebDriver driver) throws Exception {
-		if (!PageMenusManto.isPage(driver)) {
+	public void goToMainMenusAndClickMenu(String subMenu) throws Exception {
+		if (!pageMenusManto.isPage()) {
 			Thread.sleep(1000);
 			SecCabecera.clickLinkVolverMenuAndWait(driver, 60);
 		}
-		String textAlert = PageMenusManto.clickMenuAndAcceptAlertIfExists(subMenu, driver);
-		checkIsPageOfSubmenu(subMenu, textAlert, driver);
+		String textAlert = pageMenusManto.clickMenuAndAcceptAlertIfExists(subMenu);
+		checkIsPageOfSubmenu(subMenu, textAlert);
 	}
 	
 	@Validation
-	private static ChecksTM checkIsPageOfSubmenu(String subMenu, String textAlertObtained, WebDriver driver) {
+	private ChecksTM checkIsPageOfSubmenu(String subMenu, String textAlertObtained) {
 		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 2;
 	 	checks.add(
 			"Aparece la página asociada al menú <b>" + subMenu + "</b> (la esperamos hasta " + maxSeconds + " segundos)",
-			PageMenusManto.validateIsPage(subMenu, maxSeconds, driver), State.Defect);
+			pageMenusManto.validateIsPage(subMenu, maxSeconds), State.Defect);
+	 	
 	 	checks.add(
 			"No aparece ninguna ventana de alerta",
 			"".compareTo(textAlertObtained)==0, State.Warn);
+	 	
 	 	return checks;
 	}
 	
-	/**
-	 * Se accede a la opción de menú de "Bolsas" (sólo en caso de que no estemos ya en ella)
-	 */
-	public static void goToBolsas(WebDriver driver) throws Exception {
-		if (!PageBolsas.isPage(driver)) {
-			goToMainMenusAndClickMenu("Bolsas", driver);
-			checkIsVisiblePageBolsas(driver); 
+	public void goToBolsas() throws Exception {
+		if (!new PageBolsas().isPage()) {
+			goToMainMenusAndClickMenu("Bolsas");
+			checkIsVisiblePageBolsas(); 
 		}
 	}
 	
 	@Validation (
 		description="Aparece la página de Bolsas",
 		level=State.Defect)
-	private static boolean checkIsVisiblePageBolsas(WebDriver driver) {
-		return (PageBolsas.isPage(driver));
+	private boolean checkIsVisiblePageBolsas() {
+		return new PageBolsas().isPage();
 	}
 	
-	public static void goToPedidos(WebDriver driver) throws Exception {
-		//Si ya estamos en la página en cuestión no hacemos nada
-		if (!PagePedidos.isPage(driver)) {
-			goToMainMenusAndClickMenu("Pedidos", driver);
-			checkIsVisiblePagePedidos(driver);
+	public void goToPedidos() throws Exception {
+		if (!new PagePedidos().isPage()) {
+			goToMainMenusAndClickMenu("Pedidos");
+			checkIsVisiblePagePedidos();
 		}		
 	}	
 	
 	@Validation (
 		description="Aparece la página de Pedidos",
 		level=State.Defect)
-	private static boolean checkIsVisiblePagePedidos(WebDriver driver) {
-		return (PagePedidos.isPage(driver));
+	private boolean checkIsVisiblePagePedidos() {
+		return new PagePedidos().isPage();
 	}
 	
-	public static void goToConsultarTiendas(WebDriver driver) throws Exception {
-		goToMainMenusAndClickMenu("Consultar Tiendas", driver);
-		PageConsultaTiendaSteps.validateIsPage(driver);
+	public void goToConsultarTiendas() throws Exception {
+		goToMainMenusAndClickMenu("Consultar Tiendas");
+		new PageConsultaTiendaSteps().validateIsPage();
 	}
 
-	/**
-	 * Se accede a la opción de menú de "ID/EANS" (sólo en caso de que no estemos ya en ella)
-	 */
-	public static void goToIdEans(WebDriver driver)  throws Exception{
-		goToMainMenusAndClickMenu("EANS", driver);
-		PageConsultaIdEansSteps.validateIsPage(driver);
+	public void goToIdEans()  throws Exception{
+		goToMainMenusAndClickMenu("EANS");
+		new PageConsultaIdEansSteps().validateIsPage();
 	}
 
-	/**
-	 * Se accede a la opción de menú de "Gestionar Clientes" (sólo en caso de que no estemos ya en ella)
-	 */
-	public static void goToGestionarClientes(WebDriver driver) throws Exception{
-		goToMainMenusAndClickMenu("Gestionar Clientes", driver);
-		PageGestionarClientesSteps.validateIsPage(driver);
+	public void goToGestionarClientes() throws Exception{
+		goToMainMenusAndClickMenu("Gestionar Clientes");
+		new PageGestionarClientesSteps().validateIsPage();
 	}
 	
-	/**
-	 * Se accede a la opción de menú de "Gestor de Cheques" (sólo en caso de que no estemos ya en ella)
-	 * @throws Exception 
-	 */
-	public static void goToGestorCheques(WebDriver driver) throws Exception {
-		goToMainMenusAndClickMenu("Gestor de Cheques", driver);
+	public void goToGestorCheques() throws Exception {
+		goToMainMenusAndClickMenu("Gestor de Cheques");
 		PageGestorChequesSteps pageGestorSteps = new PageGestorChequesSteps(driver);
 		pageGestorSteps.validateIsPage();
 	}
 	
-	/**
-	 * Se accede a la opción de menú de "Estadísticas Pedidos" (sólo en caso de que no estemos ya en ella)
-	 * @throws Exception 
-	 */
-	public static void goToGestorEstadisticasPedido(WebDriver driver) throws Exception {
-		goToMainMenusAndClickMenu("Estadisticas Pedidos", driver);
+	public void goToGestorEstadisticasPedido() throws Exception {
+		goToMainMenusAndClickMenu("Estadisticas Pedidos");
 		PageGestorEstadisticasPedidoSteps.validateIsPage(driver);
 	}
 	
-	
-	/**
-	 * Se accede a la opción de menú de "Gestor de Saldos de TPV" (sólo en caso de que no estemos ya en ella)
-	 * @throws Exception 
-	 */
-	public static void goToGestorSaldosTPV(WebDriver driver) throws Exception {
-		goToMainMenusAndClickMenu("Gestor de Saldos de TPV", driver);
+	public void goToGestorSaldosTPV() throws Exception {
+		goToMainMenusAndClickMenu("Gestor de Saldos de TPV");
 		PageGestorSaldosTPVSteps.validateIsPage(driver);
 	}
 	
-	/**
-	 * Se accede a la opción de menú de "Consulta y cambio de familia" (sólo en caso de que no estemos ya en ella)
-	 * @throws Exception 
-	 */
-	public static void goToGestorConsultaCambioFamilia(WebDriver driver) throws Exception {
-		goToMainMenusAndClickMenu("Gestor de familias", driver);
+	public void goToGestorConsultaCambioFamilia() throws Exception {
+		goToMainMenusAndClickMenu("Gestor de familias");
 		PageGestorConsultaCambioFamiliaSteps.validateIsPage(driver);
-		
 	}
 	
-	/**
-	 * Se accede a la opción de menú de "Ordenacion de prendas" (sólo en caso de que no estemos ya en ella)
-	 * @throws Exception 
-	 */
-	
-	public static void goToOrdenadorDePrendas(WebDriver driver) throws Exception {
-		goToMainMenusAndClickMenu("Ordenador de Prendas", driver);
+	public void goToOrdenadorDePrendas() throws Exception {
+		goToMainMenusAndClickMenu("Ordenador de Prendas");
 		new PageOrdenacionDePrendasSteps(driver).validateIsPage();
 	}
 	
-	public static void comprobarMenusManto(String cabeceraName, String cabeceraNameNext, WebDriver driver) 
-	throws Exception {
-		ArrayList<String> listSubMenuNames = PageMenusManto.getListSubMenusName(cabeceraName, cabeceraNameNext, driver);
+	public void comprobarMenusManto(String cabeceraName, String cabeceraNameNext) 
+			throws Exception {
+		List<String> listSubMenuNames = pageMenusManto.getListSubMenusName(cabeceraName, cabeceraNameNext);
 		for (String subMenu : listSubMenuNames) {
-			goToMainMenusAndClickMenu(subMenu, driver);
+			goToMainMenusAndClickMenu(subMenu);
 		}
 	}
 }

@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.manto;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
@@ -11,20 +9,26 @@ import com.mng.robotest.test.pageobject.manto.PageGestionarClientes;
 import com.mng.robotest.test.pageobject.manto.PageGestionarClientes.TypeThirdButton;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 
+
 public class PageGestionarClientesSteps {
 
+	private final PageGestionarClientes pageGestionarClientes = new PageGestionarClientes();
+	
 	@Validation
-	public static ChecksTM validateIsPage(WebDriver driver) {
+	public ChecksTM validateIsPage() {
 		ChecksTM checks = ChecksTM.getNew();
 	 	checks.add(
-			"Estamos en la página " + PageGestionarClientes.titulo,
-			PageGestionarClientes.isPage(driver), State.Defect);
+			"Estamos en la página " + PageGestionarClientes.TITULO,
+			pageGestionarClientes.isPage(), State.Defect);
+	 	
 	 	checks.add(
 			"Aparece el apartado de \"Buscar clientes\"",
-			PageGestionarClientes.isVisibleFormBuscarClientes(driver), State.Defect);
+			pageGestionarClientes.isVisibleFormBuscarClientes(), State.Defect);
+	 	
 	 	checks.add(
 			"Aparece el apartado de \"Tratar clientes\"",
-			PageGestionarClientes.isVisibleFormTratarClientes(driver), State.Defect);
+			pageGestionarClientes.isVisibleFormTratarClientes(), State.Defect);
+	 	
 		return checks;
 	}
 
@@ -33,26 +37,27 @@ public class PageGestionarClientesSteps {
 		expected="Aparece una lista de clientes válida",
 		saveErrorData=SaveWhen.Never,
 		saveImagePage=SaveWhen.Always)
-	public static void inputDniAndClickBuscar(String dni, WebDriver driver) throws Exception {
-		int waitSeconds = 20;
-		PageGestionarClientes.inputDniAndClickBuscarButton(dni, waitSeconds, driver);	 
-		checkAfterSearchByDni(dni, driver);
+	public void inputDniAndClickBuscar(String dni) throws Exception {
+		pageGestionarClientes.inputDniAndClickBuscarButton(dni, 20);	 
+		checkAfterSearchByDni(dni);
 	}
 	
 	@Validation
-	private static ChecksTM checkAfterSearchByDni(String dni, WebDriver driver) {
+	private ChecksTM checkAfterSearchByDni(String dni) {
 		ChecksTM checks = ChecksTM.getNew();
 	 	checks.add(
 			"Se muestra la tabla de información",
-			PageGestionarClientes.isVisibleTablaInformacion(driver), State.Defect);
+			pageGestionarClientes.isVisibleTablaInformacion(), State.Defect);
+	 	
 	 	checks.add(
 			"Aparece el DNI <b>" + dni + "</b> en la tabla",
-			PageGestionarClientes.getDniTabla(dni, driver), State.Defect);
+			pageGestionarClientes.getDniTabla(dni), State.Defect);
+	 	
 		int maxSecondsToWait = 1;
 	 	checks.add(
 			"Aparece el botón de Alta o Baja (los esperamos un máximo de " + maxSecondsToWait + " segundos)",
-			PageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.Baja, maxSecondsToWait, driver) ||
-			PageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.Alta, maxSecondsToWait, driver), 
+			pageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.Baja, maxSecondsToWait) ||
+			pageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.Alta, maxSecondsToWait), 
 			State.Defect);
 	 	
 	 	return checks;
@@ -63,27 +68,25 @@ public class PageGestionarClientesSteps {
 		description="Tras haber introducido un DNI y haber dado al botón \"Buscar\", damos click al botón \"" + TagTypeButton + "\"",
 		expected="Aparece el mensaje correspondiente y el botón Alta",
 		saveErrorData=SaveWhen.Never)
-	public static void clickThirdButton(WebDriver driver) throws Exception {
-		TypeThirdButton typeButton = PageGestionarClientes.getTypeThirdButton(driver);	
+	public void clickThirdButton() throws Exception {
+		TypeThirdButton typeButton = pageGestionarClientes.getTypeThirdButton();	
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TagTypeButton, typeButton.toString());
-		
-		int waitSeconds = 3;
-		PageGestionarClientes.clickThirdButtonAndWaitSeconds(typeButton, waitSeconds, driver);   
-		checkAfterClickButton(typeButton, driver);
+		pageGestionarClientes.clickThirdButtonAndWaitSeconds(typeButton, 3);   
+		checkAfterClickButton(typeButton);
 	}
 	
 	@Validation
-	private static ChecksTM checkAfterClickButton(TypeThirdButton typeButton, WebDriver driver) {
+	private ChecksTM checkAfterClickButton(TypeThirdButton typeButton) {
 		ChecksTM checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece el mensaje <b>" + typeButton.getMensaje() + "</b>",
-			PageGestionarClientes.isVisibleMensajeClickThirdButton(typeButton, driver), State.Defect);
+			pageGestionarClientes.isVisibleMensajeClickThirdButton(typeButton), State.Defect);
 	 	
 		int maxSeconds = 2;
 		TypeThirdButton buttonExpected = typeButton.buttonExpectedAfterClick();
 	 	checks.add(
 			"Aparece el botón \"Alta\" (lo esperamos hasta " + maxSeconds + " segundos)",
-			PageGestionarClientes.isVisibleThirdButtonUntil(buttonExpected, maxSeconds, driver), State.Defect);
+			pageGestionarClientes.isVisibleThirdButtonUntil(buttonExpected, maxSeconds), State.Defect);
 		
 	 	return checks;
 	}
@@ -92,23 +95,24 @@ public class PageGestionarClientesSteps {
 		description="Tras haber introducido un DNI y haber dado al botón \"Buscar\", damos click al botón \"Detalles\"",
 		expected="Muestra los detalles del cliente correctamente",
 		saveErrorData=SaveWhen.Never)
-	public static void clickDetallesButton(String dni, WebDriver driver) throws Exception {
+	public void clickDetallesButton(String dni) throws Exception {
 		String idCliente;
 		int waitSeconds = 3;
-		idCliente = PageGestionarClientes.getIdClienteTablaFromDni(dni, driver);
-		PageGestionarClientes.clickDetallesButtonAndWaitSeconds(waitSeconds, driver);	
-		checkAfterClickDetalles(dni, idCliente, driver);
+		idCliente = pageGestionarClientes.getIdClienteTablaFromDni(dni);
+		pageGestionarClientes.clickDetallesButtonAndWaitSeconds(waitSeconds);	
+		checkAfterClickDetalles(dni, idCliente);
 	}
 	
 	@Validation
-	private static ChecksTM checkAfterClickDetalles(String dni, String idCliente, WebDriver driver) {
+	private ChecksTM checkAfterClickDetalles(String dni, String idCliente) {
 		ChecksTM checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece el id del cliente <b>" + idCliente + "</b>",
-			PageGestionarClientes.isVisibleIdClienteClickDetallesButton(idCliente, driver), State.Defect);
+			pageGestionarClientes.isVisibleIdClienteClickDetallesButton(idCliente), State.Defect);
+	 	
 	 	checks.add(
 			"Aparece el dni del cliente <b>" + dni + "</b>",
-			PageGestionarClientes.isVisibleDniClickDetallesButton(dni, driver), State.Defect);
+			pageGestionarClientes.isVisibleDniClickDetallesButton(dni), State.Defect);
 	 	
 	 	return checks;
 	}

@@ -18,8 +18,14 @@ import com.mng.robotest.test.steps.shop.checkout.paypal.PagePaypalSelectPagoStep
 
 public class PagoPaypal extends PagoSteps {
 	
-	public PagoPaypal(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
-		super(dCtxSh, dCtxPago, driver);
+	private final PagePaypalLoginSteps pagePaypalLoginSteps = new PagePaypalLoginSteps(); 
+	private final ModalPreloaderSppinerSteps modalPreloaderSppinerSteps = new ModalPreloaderSppinerSteps();
+	private final PagePaypalCreacionCuentaSteps pagePaypalCreacionCuentaSteps = new PagePaypalCreacionCuentaSteps();
+	private final PagePaypalSelectPagoSteps pagePaypalSelectPagoSteps = new PagePaypalSelectPagoSteps();
+	private final PagePaypalConfirmacionSteps pagePaypalConfirmacionSteps = new PagePaypalConfirmacionSteps();
+	
+	public PagoPaypal(DataCtxShop dCtxSh, DataCtxPago dCtxPago) throws Exception {
+		super(dCtxSh, dCtxPago);
 		super.isAvailableExecPay = true;
 	}
 	
@@ -28,34 +34,34 @@ public class PagoPaypal extends PagoSteps {
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
 		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		int maxSeconds = 10;
-		ModalPreloaderSppinerSteps.validateAppearsAndDisappears(driver);
+		modalPreloaderSppinerSteps.validateAppearsAndDisappears();
 		switch (getInitPagePaypal(driver)) {
 		case Login:
-			PagePaypalLoginSteps.validateIsPageUntil(0, driver);
+			pagePaypalLoginSteps.validateIsPageUntil(0);
 			break;
 		case CreacionCuenta:
-			PagePaypalCreacionCuentaSteps.clickButtonIniciarSesion(driver);
+			pagePaypalCreacionCuentaSteps.clickButtonIniciarSesion();
 			break;
 		}
 		
 		if (execPay) {
 			DataPedido dataPedido = this.dCtxPago.getDataPedido();
 			dataPedido.setCodtipopago("P");
-			ModalPreloaderSppinerSteps.validateIsVanished(maxSeconds, driver);
-			if (PagePaypalLogin.isPageUntil(0, driver)) {
-				PagePaypalLoginSteps.loginPaypal(dataPedido.getPago().getUseremail(), dataPedido.getPago().getPasswordemail(), driver);
+			modalPreloaderSppinerSteps.validateIsVanished(maxSeconds);
+			if (new PagePaypalLogin().isPage()) {
+				pagePaypalLoginSteps.loginPaypal(dataPedido.getPago().getUseremail(), dataPedido.getPago().getPasswordemail());
 			}
 			
-			ModalPreloaderSppinerSteps.validateIsVanished(maxSeconds, driver);
+			modalPreloaderSppinerSteps.validateIsVanished(maxSeconds);
 			if (getPostLoginPagePaypal()==PostLoginPagePaypal.SelectPago) {
-				PagePaypalSelectPagoSteps.validateIsPageUntil(0, driver);
-				PagePaypalSelectPagoSteps.clickContinuarButton(driver);	  
+				pagePaypalSelectPagoSteps.validateIsPageUntil(0);
+				pagePaypalSelectPagoSteps.clickContinuarButton();	  
 			}
 			
 			maxSeconds = 3;
-			if (PagePaypalConfirmacion.isPageUntil(maxSeconds, driver)) {
-				PagePaypalConfirmacionSteps.validateIsPageUntil(0, driver);
-				PagePaypalConfirmacionSteps.clickContinuarButton(driver);
+			if (new PagePaypalConfirmacion().isPageUntil(maxSeconds)) {
+				pagePaypalConfirmacionSteps.validateIsPageUntil(0);
+				pagePaypalConfirmacionSteps.clickContinuarButton();
 			}
 		}
 	}
@@ -65,11 +71,11 @@ public class PagoPaypal extends PagoSteps {
 	
 	private InitPagePaypal getInitPagePaypal(WebDriver driver) {
 		int maxSeconds = 5;
-		if (PagePaypalLogin.isPageUntil(maxSeconds, driver)) {
+		if (new PagePaypalLogin().isPageUntil(maxSeconds)) {
 			return InitPagePaypal.Login;
 		}
 		
-		if (PagePaypalCreacionCuenta.isPageUntil(1, driver)) {
+		if (new PagePaypalCreacionCuenta().isPageUntil(1)) {
 			return InitPagePaypal.CreacionCuenta;
 		}
 		
@@ -78,10 +84,10 @@ public class PagoPaypal extends PagoSteps {
 	
 	private PostLoginPagePaypal getPostLoginPagePaypal() {
 		int maxSeconds = 5;
-		if (PagePaypalSelectPago.isPageUntil(maxSeconds, driver)) {
+		if (new PagePaypalSelectPago().isPageUntil(maxSeconds)) {
 			return PostLoginPagePaypal.SelectPago;
 		}
-		if (PagePaypalConfirmacion.isPageUntil(0, driver)) {
+		if (new PagePaypalConfirmacion().isPageUntil(0)) {
 			return PostLoginPagePaypal.Confirmacion;
 		}
 

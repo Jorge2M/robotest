@@ -1,36 +1,36 @@
 package com.mng.robotest.test.pageobject.manto;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.mng.robotest.domains.transversal.PageBase;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageConsultaTienda {
+public class PageConsultaTienda extends PageBase {
 	
-	static String XPathInputTienda = "//input[@id[contains(.,'ID_TIENDA')]]";
-	static String XPathBotonBuscar = "//input[@value[contains(.,'Buscar tienda')]]";
-	static String XPathTiendaNoExiste = "//li[text()[contains(.,'La tienda no existe')]]";
-	static String XPathTiendaExiste = "//span[text()[contains(.,'ID Tienda')]]";
+	private static final String XPATH_INPUT_TIENDA = "//input[@id[contains(.,'ID_TIENDA')]]";
+	private static final String XPATH_BOTON_BUSCAR = "//input[@value[contains(.,'Buscar tienda')]]";
+	private static final String XPATH_TIENDA_NO_EXISTE = "//li[text()[contains(.,'La tienda no existe')]]";
+	private static final String XPATH_TIENDA_EXISTE = "//span[text()[contains(.,'ID Tienda')]]";
 
-	public static boolean isVisibleInputTienda(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathInputTienda), driver).check());
+	public boolean isVisibleInputTienda() {
+		return state(Visible, By.xpath(XPATH_INPUT_TIENDA)).check();
 	}
 
-	public static void introducirTienda(String tiendaNoExistente, WebDriver driver) {
-		driver.findElement(By.xpath(XPathInputTienda)).click();
-		driver.findElement(By.xpath(XPathInputTienda)).clear();
-		driver.findElement(By.xpath(XPathInputTienda)).sendKeys(tiendaNoExistente);
-		driver.findElement(By.xpath(XPathBotonBuscar)).click();
+	public void introducirTienda(String tiendaNoExistente) {
+		driver.findElement(By.xpath(XPATH_INPUT_TIENDA)).click();
+		driver.findElement(By.xpath(XPATH_INPUT_TIENDA)).clear();
+		driver.findElement(By.xpath(XPATH_INPUT_TIENDA)).sendKeys(tiendaNoExistente);
+		driver.findElement(By.xpath(XPATH_BOTON_BUSCAR)).click();
 	}
 
-	public static boolean apareceMensajeTiendaNoExiste(WebDriver driver) {
-		return (state(Present, By.xpath(XPathTiendaNoExiste), driver).check());
+	public boolean apareceMensajeTiendaNoExiste() {
+		return (state(Present, By.xpath(XPATH_TIENDA_NO_EXISTE)).check());
 	}
 
-	public static boolean apareceInformacionTienda(WebDriver driver) {
-		return (state(Present, By.xpath(XPathTiendaExiste), driver).check());
+	public boolean apareceInformacionTienda() {
+		return state(Present, By.xpath(XPATH_TIENDA_EXISTE)).check();
 	}
 
 }

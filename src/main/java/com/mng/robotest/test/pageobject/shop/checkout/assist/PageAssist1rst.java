@@ -1,12 +1,10 @@
 package com.mng.robotest.test.pageobject.shop.checkout.assist;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.generic.UtilsMangoTest;
@@ -30,13 +28,6 @@ public class PageAssist1rst extends PageBase {
 	private static final String XPATH_BOTON_PAGO_MOVIL_AVAILABLE = "//input[@type='Submit' and not(@disabled)]";
 	private static final String XPATH_BOTON_PAGO_DESKTOP = "//input[@class[contains(.,'button_pay')]]";
 	private static final String XPATH_BOTON_PAGO_MOBIL = "//input[@type='Submit' and not(@disabled)]";
-	
-	private final Channel channel;
-
-	public PageAssist1rst(Channel channel, WebDriver driver) {
-		super(driver);
-		this.channel = channel;
-	}
 	
 	private String getXPathLogoAssist() {
 		if (channel.isDevice()) {

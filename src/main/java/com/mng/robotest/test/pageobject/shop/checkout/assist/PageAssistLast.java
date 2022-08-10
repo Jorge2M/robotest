@@ -1,21 +1,20 @@
 package com.mng.robotest.test.pageobject.shop.checkout.assist;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageAssistLast {
+public class PageAssistLast extends PageBase {
 
-	static String XPathButtonSubmit = "//button[@type='submit']";
+	private static final String XPATH_BUTTON_SUBMIT = "//button[@type='submit']";
 
-	public static boolean isPage(WebDriver driver) {
-		return (state(Present, By.xpath(XPathButtonSubmit), driver).check());
+	public boolean isPage() {
+		return (state(Present, By.xpath(XPATH_BUTTON_SUBMIT)).check());
 	}
 
-	public static void clickButtonSubmit(WebDriver driver) {
-		click(By.xpath(XPathButtonSubmit), driver).exec();
+	public void clickButtonSubmit() {
+		click(By.xpath(XPATH_BUTTON_SUBMIT)).exec();
 	}
 }

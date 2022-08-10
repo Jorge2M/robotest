@@ -2,61 +2,98 @@ package com.mng.robotest.test.pageobject.shop.checkout.envio;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.conf.Channel;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.test.pageobject.shop.checkout.envio.SecSelectDPoint.TypeDeliveryPoint;
+import com.mng.robotest.test.steps.shop.checkout.envio.DataDeliveryPoint;
+import com.mng.robotest.test.steps.shop.checkout.envio.DataSearchDeliveryPoint;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class ModalDroppoints {
+public class ModalDroppoints extends PageBase {
 	
-	public static SecSelectDPoint secSelectDPoint;
-	public static SecConfirmDatos secConfirmDatos;
+	private final SecSelectDPoint secSelectDPoint = new SecSelectDPoint();
+	private final SecConfirmDatos secConfirmDatos = new SecConfirmDatos();
 	
-	static String XPathPanelGeneralDesktop = "//span[@id[contains(.,'panelDroppointsGeneral')]]";
-	static String XPathPanelGeneralMovil = "//span[@id[contains(.,'panelDroppointsMenuMobile')]]";
-	static String XPathMsgCargando = "//div[@class='loading-panel']";
-	static String XPathErrorMessage = "//div[@class='errorNotFound']";
-	static String XPathCpInputBox = "//div[@class='list__container']//input[@class[contains(.,searchBoxInput)]]";
+	private static final String XPATH_PANEL_GENERAL_DESKTOP = "//span[@id[contains(.,'panelDroppointsGeneral')]]";
+	private static final String XPATH_PANEL_GENERAL_MOVIL = "//span[@id[contains(.,'panelDroppointsMenuMobile')]]";
+	private static final String XPATH_MSG_CARGANDO = "//div[@class='loading-panel']";
+	private static final String XPATH_ERROR_MESSAGE = "//div[@class='errorNotFound']";
+	private static final String XPATH_CP_INPUT_BOX = "//div[@class='list__container']//input[@class[contains(.,searchBoxInput)]]";
 	
-	public static String getXPathPanelGeneral(Channel channel) {
+	private String getXPathPanelGeneral() {
 		switch (channel) {
 		case desktop:
-			return XPathPanelGeneralDesktop;
+			return XPATH_PANEL_GENERAL_DESKTOP;
 		default:
 		case mobile:
-			return XPathPanelGeneralMovil;
+			return XPATH_PANEL_GENERAL_MOVIL;
 		}
 	}
 	
-	public static boolean isVisible(Channel channel, WebDriver driver) {
-		return isVisibleUntil(0, channel, driver);
+	public boolean isVisible() {
+		return isVisibleUntil(0);
 	}
 	
-	public static boolean isVisibleUntil(int maxSeconds, Channel channel, WebDriver driver) {
-		String xpathPanelGeneral = getXPathPanelGeneral(channel);
-		return (state(Visible, By.xpath(xpathPanelGeneral), driver).wait(maxSeconds).check());
+	public boolean isVisibleUntil(int maxSeconds) {
+		String xpathPanelGeneral = getXPathPanelGeneral();
+		return (state(Visible, By.xpath(xpathPanelGeneral)).wait(maxSeconds).check());
 	}
 	
-	public static boolean isInvisibleUntil(int maxSeconds, Channel channel, WebDriver driver) {
-		String xpathPanelGeneral = getXPathPanelGeneral(channel);
-		return (state(Invisible, By.xpath(xpathPanelGeneral), driver).wait(maxSeconds).check());
+	public boolean isInvisibleUntil(int maxSeconds) {
+		String xpathPanelGeneral = getXPathPanelGeneral();
+		return (state(Invisible, By.xpath(xpathPanelGeneral)).wait(maxSeconds).check());
 	}
 	
-	public static boolean isInvisibleCargandoMsgUntil(int maxSeconds, WebDriver driver) {
-		return (state(Invisible, By.xpath(XPathMsgCargando), driver).wait(maxSeconds).check());
+	public boolean isInvisibleCargandoMsgUntil(int maxSeconds) {
+		return (state(Invisible, By.xpath(XPATH_MSG_CARGANDO)).wait(maxSeconds).check());
 	}
 	
+	public boolean isErrorMessageVisibleUntil() {
+		return (state(Visible, By.xpath(XPATH_ERROR_MESSAGE)).wait(2).check());
+	}
+	
+	public void sendProvincia(String provincia) {
+		secSelectDPoint.sendProvincia(provincia);
+	}
+	
+	public boolean deliveryPointSelectedContainsPoblacionUntil(DataSearchDeliveryPoint dataSearchDp, int maxSecondsToWait) 
+			throws Exception {
+		return secSelectDPoint.deliveryPointSelectedContainsPoblacionUntil(dataSearchDp, maxSecondsToWait);
+	}
+	
+	public boolean isDroppointVisibleUntil(int position, int maxSeconds) {
+		return secSelectDPoint.isDroppointVisibleUntil(position, maxSeconds);
+	}
+	
+	public TypeDeliveryPoint getTypeDeliveryPoint(int maxSeconds) {
+		return secSelectDPoint.getTypeDeliveryPoint(maxSeconds);
+	}
+	
+	public DataDeliveryPoint clickDeliveryPointAndGetData(int position) throws Exception {
+		return secSelectDPoint.clickDeliveryPointAndGetData(position);
+	}
+	
+	public boolean isDroppointSelected(int position) {
+		return secSelectDPoint.isDroppointSelected(position);
+	}
+	
+	public void clickSelectButtonAndWait(int maxSeconds) {
+		secSelectDPoint.clickSelectButtonAndWait(maxSeconds);
+	}
 
-	public static boolean isErrorMessageVisibleUntil(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathErrorMessage), driver)
-				.wait(2).check());
+	public void searchAgainByUserCp(String cp) {
+		driver.findElement(By.xpath(XPATH_CP_INPUT_BOX)).clear();
+		driver.findElement(By.xpath(XPATH_CP_INPUT_BOX)).sendKeys(cp);
+		driver.findElement(By.xpath(XPATH_CP_INPUT_BOX)).sendKeys(Keys.ENTER);
 	}
 
-	public static void searchAgainByUserCp(String cp, WebDriver driver) {
-		driver.findElement(By.xpath(XPathCpInputBox)).clear();
-		driver.findElement(By.xpath(XPathCpInputBox)).sendKeys(cp);
-		driver.findElement(By.xpath(XPathCpInputBox)).sendKeys(Keys.ENTER);
+	public SecSelectDPoint getSecSelectDPoint() {
+		return secSelectDPoint;
+	}
+
+	public SecConfirmDatos getSecConfirmDatos() {
+		return secConfirmDatos;
 	}
 }

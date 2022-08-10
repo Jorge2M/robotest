@@ -22,7 +22,7 @@ public class PageDetalleCliente extends PageBase {
 
 	public void clickLinkVolverPedidos() {
 		click(By.xpath(XPATH_VOLVER_PEDIDOS)).waitLoadPage(20).exec();
-		while (!PagePedidos.isPage(driver)) {
+		while (!new PagePedidos().isPage()) {
 			waitMillis(200);
 		}
 	}

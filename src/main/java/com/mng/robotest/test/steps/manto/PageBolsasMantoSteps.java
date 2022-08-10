@@ -1,27 +1,24 @@
 package com.mng.robotest.test.steps.manto;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.pageobject.manto.PageBolsas;
 
-/**
- * Clase que implementa los diferentes steps/validations asociados asociados a la página de Bolsas en Manto
- * @author jorge.munoz
- *
- */
-public class PageBolsasMantoSteps {
 
+public class PageBolsasMantoSteps extends StepBase {
+
+	private final PageBolsas pageBolsas = new PageBolsas();
+	
 	@Validation
-	public static ChecksResultWithFlagLinkCodPed validaLineaBolsa(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
+	public ChecksResultWithFlagLinkCodPed validaLineaBolsa(DataPedido dataPedido) {
 		ChecksResultWithFlagLinkCodPed checks = ChecksResultWithFlagLinkCodPed.getNew();
 		int maxSeconds = 10;
-		boolean isPresentLinkPedido = PageBolsas.presentLinkPedidoInBolsaUntil(dataPedido.getCodigoPedidoManto(), maxSeconds, driver);
+		boolean isPresentLinkPedido = pageBolsas.presentLinkPedidoInBolsaUntil(dataPedido.getCodigoPedidoManto(), maxSeconds);
 	 	if (isPresentLinkPedido) {
-	 		dataPedido.setIdCompra(PageBolsas.getIdCompra(dataPedido.getCodigoPedidoManto(), driver));
+	 		dataPedido.setIdCompra(pageBolsas.getIdCompra(dataPedido.getCodigoPedidoManto()));
 	 	}
 		checks.setExistsLinkCodPed(isPresentLinkPedido);
 	 	checks.add(
@@ -30,19 +27,19 @@ public class PageBolsasMantoSteps {
 	 	
 	 	checks.add(
 			"Aparece una sola bolsa",
-			PageBolsas.getNumLineas(driver)==1, State.Warn);
+			pageBolsas.getNumLineas()==1, State.Warn);
 	 	
 	 	//En el caso de Outlet no tenemos la información del TPV que toca
-	 	if (appE!=AppEcom.outlet) {
+	 	if (app!=AppEcom.outlet) {
 	 		String idTpv = dataPedido.getPago().getTpv().getId();
 		 	checks.add(
 				"En la columna 8 Aparece el Tpv asociado: " + idTpv,
-				PageBolsas.presentIdTpvInBolsa(driver, idTpv), State.Warn);
+				pageBolsas.presentIdTpvInBolsa(idTpv), State.Warn);
 	 	}
 	 	
 	 	checks.add(
 			"En la columna 7 aparece el email asociado: " + dataPedido.getEmailCheckout(),
-			PageBolsas.presentCorreoInBolsa(driver, dataPedido.getEmailCheckout()), State.Warn);
+			pageBolsas.presentCorreoInBolsa(dataPedido.getEmailCheckout()), State.Warn);
 		
 		return checks;
 	}

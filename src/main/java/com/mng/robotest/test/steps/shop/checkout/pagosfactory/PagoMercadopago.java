@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.datastored.DataPedido;
@@ -12,12 +10,13 @@ import com.mng.robotest.test.steps.shop.checkout.mercadopago.PageMercpagoConfSte
 import com.mng.robotest.test.steps.shop.checkout.mercadopago.PageMercpagoDatosTrjSteps;
 import com.mng.robotest.test.steps.shop.checkout.mercadopago.PageMercpagoLoginSteps;
 
+
 public class PagoMercadopago extends PagoSteps {
 
 	private static final String codigoSeguridad = "123";
 	
-	public PagoMercadopago(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
-		super(dCtxSh, dCtxPago, driver);
+	public PagoMercadopago(DataCtxShop dCtxSh, DataCtxPago dCtxPago) throws Exception {
+		super(dCtxSh, dCtxPago);
 		super.isAvailableExecPay = true;
 	}
 	

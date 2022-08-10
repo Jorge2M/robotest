@@ -2,21 +2,19 @@ package com.mng.robotest.test.appshop;
 
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.compra.beans.ConfigCheckout;
+import com.mng.robotest.domains.compra.tests.CompraCommons;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataBag;
-import com.mng.robotest.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.datastored.DataPedido;
-import com.mng.robotest.test.datastored.FlagsTestCkout;
-import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.pageobject.shop.PageReembolsos;
 import com.mng.robotest.test.pageobject.shop.PageReembolsos.TypeReembolso;
-import com.mng.robotest.test.steps.navigations.manto.PedidoNavigations;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
@@ -28,9 +26,6 @@ import com.mng.robotest.test.utils.PaisGetter;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 import com.github.jorge2m.testmaker.service.TestMaker;
-
-import java.util.Arrays;
-import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 
@@ -133,23 +128,20 @@ public class Reembolsos {
 		secBolsaSteps.altaArticlosConColores(1, dataBag);
 		
 		//Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
-		FlagsTestCkout FTCkout = new FlagsTestCkout();
-		FTCkout.isStoreCredit = true;
-		FTCkout.validaPasarelas = false;  
-		FTCkout.validaPagos = false;
-		FTCkout.emailExist = true; 
-		FTCkout.trjGuardada = false;
-		FTCkout.isEmpl = false;
-		FTCkout.testCodPromocional = true;
-		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
-		dCtxPago.setFTCkout(FTCkout);
+
+		ConfigCheckout configCheckout = ConfigCheckout.config()
+				.checkPagos()
+				.storeCredit()
+				.emaiExists()
+				.checkPromotionalCode().build();
+		
+		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh, configCheckout);
 		dCtxPago.getDataPedido().setDataBag(dataBag);
 		
 		//Informamos datos varios necesarios para el proceso de pagos de modo que se pruebe el pago StoreCredit
 		dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
 		dCtxPago.setUserWithStoreC(true);
 		dCtxPago.setSaldoCta(saldoCtaIni);
-		dCtxPago.getFTCkout().validaPagos = true;
 		Pago pagoStoreCredit = dCtxSh.pais.getPago("STORECREDIT");
 		dCtxPago.getDataPedido().setDataBag(dataBag);
 		
@@ -174,15 +166,9 @@ public class Reembolsos {
 				saldoCtaEsperado = saldoCtaIni;
 			}
 			
-			//Step (+validaciones) selección menú "Mi cuenta" + "Reembolsos"
 			PageReembolsosSteps.gotoRefundsFromMenuAndValidaSalCta(dCtxSh.pais.existsPagoStoreCredit(), saldoCtaEsperado, dCtxSh.appE, dCtxSh.channel, driver);
 			
-			//Validación en Manto de los Pedidos (si existen)
-			List<CheckPedido> listChecks = Arrays.asList(
-				CheckPedido.consultarBolsa, 
-				CheckPedido.consultarPedido);
-			DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
-			PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
+			CompraCommons.checkPedidosManto(dCtxPago.getListPedidos(), dCtxSh.appE, driver);
 		}
 	}
 }

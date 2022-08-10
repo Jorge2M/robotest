@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.datastored.DataPedido;
@@ -11,10 +9,11 @@ import com.mng.robotest.test.steps.shop.checkout.tmango.PageAmexInputTarjetaStep
 import com.mng.robotest.test.steps.shop.checkout.tmango.PageAmexResultSteps;
 import com.mng.robotest.test.steps.shop.checkout.tmango.PageRedsysSimSteps;
 
+
 public class PagoTMango extends PagoSteps {
 
-	public PagoTMango(DataCtxShop dCtxSh, DataCtxPago dataPago, WebDriver driver) throws Exception {
-		super(dCtxSh, dataPago, driver);
+	public PagoTMango(DataCtxShop dCtxSh, DataCtxPago dataPago) throws Exception {
+		super(dCtxSh, dataPago);
 		super.isAvailableExecPay = true;
 	}
 	

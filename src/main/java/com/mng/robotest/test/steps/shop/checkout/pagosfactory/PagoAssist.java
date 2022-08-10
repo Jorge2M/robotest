@@ -1,21 +1,20 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.steps.shop.checkout.assist.PageAssist1rstSteps;
 import com.mng.robotest.test.steps.shop.checkout.assist.PageAssistLastSteps;
 
+
 public class PagoAssist extends PagoSteps {
 	
-	private final PageAssist1rstSteps pageAssist1rstSteps;
+	private final PageAssist1rstSteps pageAssist1rstSteps = new PageAssist1rstSteps();
+	private final PageAssistLastSteps pageAssistLastSteps = new PageAssistLastSteps();
 	
-	public PagoAssist(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
-		super(dCtxSh, dCtxPago, driver);
+	public PagoAssist(DataCtxShop dCtxSh, DataCtxPago dCtxPago) throws Exception {
+		super(dCtxSh, dCtxPago);
 		super.isAvailableExecPay = true;
-		pageAssist1rstSteps = new PageAssist1rstSteps(dCtxSh.channel, dCtxSh.appE, driver);
 	}
 	
 	@Override
@@ -26,7 +25,7 @@ public class PagoAssist extends PagoSteps {
 		
 		if (execPay) {
 			pageAssist1rstSteps.inputDataTarjAndPay(this.dCtxPago.getDataPedido().getPago());			
-			PageAssistLastSteps.clickSubmit(driver);
+			pageAssistLastSteps.clickSubmit();
 		}
 	}
 }

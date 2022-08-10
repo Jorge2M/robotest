@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataCtxPago;
@@ -12,10 +10,16 @@ import com.mng.robotest.test.steps.shop.checkout.paymaya.PageInitPaymayaSteps;
 import com.mng.robotest.test.steps.shop.checkout.paymaya.PageOtpPaymayaSteps;
 import com.mng.robotest.test.steps.shop.checkout.paymaya.PageResultPaymayaSteps;
 
+
 public class PagoPayMaya extends PagoSteps {
 	
-	public PagoPayMaya(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
-		super(dCtxSh, dCtxPago, driver);
+	private final PageIdentPaymayaSteps pageIdentPaymayaSteps = new PageIdentPaymayaSteps();
+	private final PageInitPaymayaSteps pageInitPaymayaSteps = new PageInitPaymayaSteps();
+	private final PageOtpPaymayaSteps pageOtpPaymayaSteps = new PageOtpPaymayaSteps();
+	private final PageResultPaymayaSteps pageResultPaymayaSteps = new PageResultPaymayaSteps();
+	
+	public PagoPayMaya(DataCtxShop dCtxSh, DataCtxPago dCtxPago) throws Exception {
+		super(dCtxSh, dCtxPago);
 		super.isAvailableExecPay = true;
 	}
 	
@@ -24,22 +28,18 @@ public class PagoPayMaya extends PagoSteps {
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
 		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		
-		PageIdentPaymayaSteps pageIdentPaymayaSteps = new PageIdentPaymayaSteps(driver);
 		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
-			PageInitPaymayaSteps pageInitPaymayaSteps = new PageInitPaymayaSteps(driver);
 			pageInitPaymayaSteps.checkPage();
-			pageIdentPaymayaSteps = pageInitPaymayaSteps.clickPaymayaButton();
+			pageInitPaymayaSteps.clickPaymayaButton();
 		} else {
 			pageIdentPaymayaSteps.checkPage();
 		}
 		
 		if (execPay) {
 			Pago pago = dCtxPago.getDataPedido().getPago();
-			PageOtpPaymayaSteps pageOtpPaymayaSteps = 
-				pageIdentPaymayaSteps.login(pago.getUsrpaymaya(), pago.getPasswordpaymaya());
-			PageResultPaymayaSteps pageResultPaymanaSteps = 
-				pageOtpPaymayaSteps.proceed(pago.getOtpdpaymaya());
-			pageResultPaymanaSteps.confirmPayment();
+			pageIdentPaymayaSteps.login(pago.getUsrpaymaya(), pago.getPasswordpaymaya());
+			pageOtpPaymayaSteps.proceed(pago.getOtpdpaymaya());
+			pageResultPaymayaSteps.confirmPayment();
 			
 			dCtxPago.getDataPedido().setCodtipopago("F");
 		}

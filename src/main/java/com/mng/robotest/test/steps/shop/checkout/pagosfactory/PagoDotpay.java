@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.datastored.DataPedido;
@@ -10,14 +8,15 @@ import com.mng.robotest.test.steps.shop.checkout.Dotpay.PageDotpay1rstSteps;
 import com.mng.robotest.test.steps.shop.checkout.Dotpay.PageDotpayAcceptSimulationSteps;
 import com.mng.robotest.test.steps.shop.checkout.Dotpay.PageDotpayPaymentChannelSteps;
 
+
 public class PagoDotpay extends PagoSteps {
 	
 	private final PageDotpay1rstSteps pageDotpay1rstSteps = new PageDotpay1rstSteps();
 	private final PageDotpayPaymentChannelSteps pageDotpayPaymentChannelSteps = new PageDotpayPaymentChannelSteps();
 	private final PageDotpayAcceptSimulationSteps pageDotpayAcceptSimulationSteps = new PageDotpayAcceptSimulationSteps();
 	
-	public PagoDotpay(DataCtxShop dCtxSh, DataCtxPago dataPago, WebDriver driver) throws Exception {
-		super(dCtxSh, dataPago, driver);
+	public PagoDotpay(DataCtxShop dCtxSh, DataCtxPago dataPago) throws Exception {
+		super(dCtxSh, dataPago);
 		super.isAvailableExecPay = true;
 	}
 	

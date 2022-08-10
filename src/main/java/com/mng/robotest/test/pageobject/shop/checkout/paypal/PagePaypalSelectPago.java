@@ -1,22 +1,21 @@
 package com.mng.robotest.test.pageobject.shop.checkout.paypal;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PagePaypalSelectPago {
+public class PagePaypalSelectPago extends PageBase {
 
-	private static final String XPathContinueButton = "//*[@data-testid='submit-button-initial']";
-	private static final String XPathMetPagos = "//section[@data-testid='pay-with']";
+	private static final String XPATH_CONTINUE_BUTTON = "//*[@data-testid='submit-button-initial']";
+	private static final String XPATH_MET_PAGOS = "//section[@data-testid='pay-with']";
 
-	public static boolean isPageUntil(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(XPathMetPagos), driver).wait(maxSeconds).check());
+	public boolean isPageUntil(int maxSeconds) {
+		return (state(Visible, By.xpath(XPATH_MET_PAGOS)).wait(maxSeconds).check());
 	}
 
-	public static void clickContinuarButton(WebDriver driver) {
-		click(By.xpath(XPathContinueButton), driver).exec();
+	public void clickContinuarButton() {
+		click(By.xpath(XPATH_CONTINUE_BUTTON)).exec();
 	}
 }

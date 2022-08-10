@@ -90,10 +90,6 @@ public class SecBolsaSteps {
 		return (secBolsa.isInStateUntil(StateBolsa.CLOSED, maxSeconds));
 	}
 
-	/**
-	 * Seleccionamos el icono superior de la bolsa para abrirla/cerrar
-	 * @param forOpen indica si lo clicamos para abrir (porque está cerrada) o para cerrar (porque está abierta)
-	 */
 	@Step (
 		description="Mediante click o hover conseguir que la bolsa quede en estado #{stateBolsaExpected}", 
 		expected="La bolsa queda en estado #{stateBolsaExpected}")

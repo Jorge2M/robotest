@@ -1,31 +1,34 @@
 package com.mng.robotest.test.steps.shop.checkout.paypal;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.paypal.ModalPreloaderSpinner;
 
-public class ModalPreloaderSppinerSteps {
-	public static void validateAppearsAndDisappears(WebDriver driver) {
-		validateIsVisible(2, driver);
-		validateIsVanished(10, driver);
+
+public class ModalPreloaderSppinerSteps extends StepBase {
+	
+	private final ModalPreloaderSpinner modalPreloaderSpinner = new ModalPreloaderSpinner();
+	
+	public void validateAppearsAndDisappears() {
+		validateIsVisible(2);
+		validateIsVanished(10);
 	}
 	
 	@Validation (
 		description="Aparece el icono del candado de \"Cargando\" (lo esperamos un máximo de #{maxSeconds})",
 		level=State.Info,
 		store=StoreType.None)
-	public static boolean validateIsVisible(int maxSeconds, WebDriver driver) {
-		return (ModalPreloaderSpinner.isVisibleUntil(maxSeconds, driver));
+	public boolean validateIsVisible(int maxSeconds) {
+		return (modalPreloaderSpinner.isVisibleUntil(maxSeconds));
 	}
 	
 	@Validation (
 		description="Desaparece el icono del candado de \"Cargando\" (lo esperamos un máximo de #{maxSeconds})",
 		level=State.Info,
 		store=StoreType.None)
-	public static boolean validateIsVanished(int maxSeconds, WebDriver driver) {
-		return (ModalPreloaderSpinner.isNotVisibleUntil(maxSeconds, driver));
+	public boolean validateIsVanished(int maxSeconds) {
+		return (modalPreloaderSpinner.isNotVisibleUntil(maxSeconds));
 	}
 }

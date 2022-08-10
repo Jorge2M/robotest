@@ -32,7 +32,7 @@ public class ListMenusManto {
 		ArrayList<Menus> listTests = new ArrayList<Menus>();
 		AppEcom appEcom = (AppEcom)inputData.getApp();
 		try {
-			ArrayList<String> listCabeceraMenus = getListCabecerasMenus(inputData.getUrlBase(), ctxTestRun);
+			List<String> listCabeceraMenus = getListCabecerasMenus(inputData.getUrlBase(), ctxTestRun);
 			int prioridad=0;
 			for (int i=0; i<listCabeceraMenus.size(); i++) {
 				System.out.println("Creado Test con datos: URL=" + inputData.getUrlBase() + ", cabeceraMenuName=" + listCabeceraMenus.get(i));
@@ -51,10 +51,7 @@ public class ListMenusManto {
 		return listTests.toArray(new Object[listTests.size()]);
 	}
 	
-	/**
-	 * Obtiene la lista con los nombres de las cabeceras de los grupos de menús de Manto
-	 */
-	private ArrayList<String> getListCabecerasMenus(String urlBaseManto, ITestContext ctxTestRun) throws Exception { 
+	private List<String> getListCabecerasMenus(String urlBaseManto, ITestContext ctxTestRun) throws Exception { 
 		TestRunTM testRun = TestMaker.getTestRun(ctxTestRun);
 		InputParamsTM inputParams = TestMaker.getInputParamsSuite(ctxTestRun);
 		WebDriver driver = 
@@ -69,7 +66,7 @@ public class ListMenusManto {
 		Secret secret = GetterSecrets.factory().getCredentials(SecretType.MANTO_USER);
 		goToMantoLoginAndSelectTienda(secret.getUser(), secret.getPassword(), driver);
 		
-		ArrayList<String> listMenuNames = PageMenusManto.getListCabecerasMenusName(driver);
+		List<String> listMenuNames = new PageMenusManto().getListCabecerasMenusName();
 		driver.quit();
 		return listMenuNames;
 	}

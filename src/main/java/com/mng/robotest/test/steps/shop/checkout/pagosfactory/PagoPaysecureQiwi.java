@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.pageobject.shop.checkout.paysecureqiwi.PagePaysecureConfirm;
@@ -10,10 +8,11 @@ import com.mng.robotest.test.steps.shop.checkout.paysecureqiwi.PagePaysecureQiwi
 import com.mng.robotest.test.steps.shop.checkout.paysecureqiwi.PageQiwiConfirmSteps;
 import com.mng.robotest.test.steps.shop.checkout.paysecureqiwi.PageQiwiInputTlfnSteps;
 
+
 public class PagoPaysecureQiwi extends PagoSteps {
 
-	public PagoPaysecureQiwi(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
-		super(dCtxSh, dCtxPago, driver);
+	public PagoPaysecureQiwi(DataCtxShop dCtxSh, DataCtxPago dCtxPago) throws Exception {
+		super(dCtxSh, dCtxPago);
 		super.isAvailableExecPay = true;
 	}
 	

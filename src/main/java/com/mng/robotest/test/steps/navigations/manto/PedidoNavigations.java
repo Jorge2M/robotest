@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.navigations.manto;
 
-import static com.mng.robotest.test.pageobject.manto.pedido.PageGenerarPedido.EstadoPedido.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +32,10 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 
 public class PedidoNavigations {
 
-	public static void testPedidosEnManto(DataCheckPedidos dataCheckPedidos, AppEcom appE, WebDriver driver) throws Exception {
+	private PedidoNavigations() {}
+	
+	public static void testPedidosEnManto(DataCheckPedidos dataCheckPedidos, AppEcom appE, WebDriver driver) 
+			throws Exception {
 		//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
 		if (appE!=AppEcom.votf) {  
 			TestRunTM testRun = getTestCase().getTestRunParent();
@@ -64,10 +65,6 @@ public class PedidoNavigations {
 		}
 	}
 	
-	/**
-	 * Partiendo de la página de menús, ejecutamos todos los pasos/validaciones para validar una lista de pedidos
-	 * @param listPaisPedido lista de pedidos a validar
-	 */
 	public static void validacionListPedidosStepss(DataCheckPedidos dataCheckPedidos, AppEcom appE, WebDriver driver) 
 	throws Exception {
 		List<CheckPedido> listChecks = dataCheckPedidos.getListChecks();
@@ -83,12 +80,9 @@ public class PedidoNavigations {
 		}
 	}	
 	
-	/**
-	 * Se ejecuta todo el flujo de pasos/validaciones para validar un pedido concreto y volvemos a la página de pedidos
-	 */
 	public static void validaPedidoStepss(DataPedido dataPedido, List<CheckPedido> listChecks, AppEcom app, WebDriver driver) 
-	throws Exception {
-		PageSelTdaMantoSteps.selectTienda(dataPedido.getCodigoAlmacen(), dataPedido.getCodigoPais(), app, driver);
+			throws Exception {
+		new PageSelTdaMantoSteps().selectTienda(dataPedido.getCodigoAlmacen(), dataPedido.getCodigoPais());
 		if (listChecks.contains(CheckPedido.consultarBolsa)) {
 			consultarBolsaSteps(dataPedido, app, driver);
 		}
@@ -109,29 +103,29 @@ public class PedidoNavigations {
 	}
 	
 	private static void consultarBolsaSteps(DataPedido dataPedido, AppEcom app, WebDriver driver) throws Exception {
-		PageMenusMantoSteps.goToBolsas(driver);
+		new PageMenusMantoSteps().goToBolsas();
 		new SecFiltrosMantoSteps(driver).setFiltrosYbuscar(dataPedido, TypeSearch.BOLSA);
-		boolean existLinkPedido = PageBolsasMantoSteps.validaLineaBolsa(dataPedido, app, driver).getExistsLinkCodPed();
+		boolean existLinkPedido = new PageBolsasMantoSteps().validaLineaBolsa(dataPedido).getExistsLinkCodPed();
 		if (existLinkPedido) {
-			PageConsultaPedidoBolsaSteps.detalleFromListaPedBol(dataPedido, TypeDetalle.bolsa, app, driver);
+			new PageConsultaPedidoBolsaSteps().detalleFromListaPedBol(dataPedido, TypeDetalle.BOLSA);
 		}
 	}
 	
 	private static void consultarPedidoSteps(DataPedido dataPedido, AppEcom app, WebDriver driver) throws Exception {
-		PageMenusMantoSteps.goToPedidos(driver);
+		new PageMenusMantoSteps().goToPedidos();
 		new SecFiltrosMantoSteps(driver).setFiltrosYbuscar(dataPedido, TypeSearch.PEDIDO);
-		boolean existLinkPedido = PagePedidosMantoSteps.validaLineaPedido(dataPedido, app, driver).getExistsLinkCodPed();
+		boolean existLinkPedido = new PagePedidosMantoSteps().validaLineaPedido(dataPedido).getExistsLinkCodPed();
 		if (existLinkPedido) { 
-			PageConsultaPedidoBolsaSteps.detalleFromListaPedBol(dataPedido, TypeDetalle.pedido, app, driver);
+			new PageConsultaPedidoBolsaSteps().detalleFromListaPedBol(dataPedido, TypeDetalle.PEDIDO);
 		}
 	}
 	
 	private static void anularPedidoSteps(DataPedido dataPedido, AppEcom app, WebDriver driver) throws Exception {
-		if (!PageDetallePedido.isPage(dataPedido.getCodigoPedidoManto(), driver)) {
+		if (!new PageDetallePedido().isPage(dataPedido.getCodigoPedidoManto())) {
 			consultarPedidoSteps(dataPedido, app, driver);
 		}
 		
-		PageConsultaPedidoBolsaSteps.clickButtonIrAGenerar(dataPedido.getCodigoPedidoManto(), driver);
-		PageGenerarPedidoSteps.changePedidoToEstado(ANULADO, driver);
+		new PageConsultaPedidoBolsaSteps().clickButtonIrAGenerar(dataPedido.getCodigoPedidoManto());
+		new PageGenerarPedidoSteps().anulaPedido();
 	}
 }

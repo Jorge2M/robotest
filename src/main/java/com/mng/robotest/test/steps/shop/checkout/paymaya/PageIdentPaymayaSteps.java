@@ -1,21 +1,15 @@
 package com.mng.robotest.test.steps.shop.checkout.paymaya;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.checkout.paymaya.PageIdentPaymaya;
 
-public class PageIdentPaymayaSteps {
 
-	private final PageIdentPaymaya pageIdentPaymaya;
-	private final WebDriver driver;
-	
-	public PageIdentPaymayaSteps(WebDriver driver) {
-		pageIdentPaymaya = new PageIdentPaymaya(driver);
-		this.driver = driver;
-	}
+public class PageIdentPaymayaSteps extends PageBase {
+
+	private final PageIdentPaymaya pageIdentPaymaya = new PageIdentPaymaya();
 	
 	@Validation (
 		description="Aparece la página de identificación en PayMaya",
@@ -31,7 +25,7 @@ public class PageIdentPaymayaSteps {
 			"Aparece la página de introducción del otp")
 	public PageOtpPaymayaSteps login(String user, String password) throws Exception {
 		pageIdentPaymaya.login(user, password);
-		PageOtpPaymayaSteps pageOtpPaymayaSteps = new PageOtpPaymayaSteps(driver);
+		PageOtpPaymayaSteps pageOtpPaymayaSteps = new PageOtpPaymayaSteps();
 		pageOtpPaymayaSteps.checkPage();
 		return pageOtpPaymayaSteps;
 	}

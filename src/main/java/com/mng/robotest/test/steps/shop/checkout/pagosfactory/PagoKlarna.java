@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.DataCtxShop;
@@ -15,8 +13,8 @@ public class PagoKlarna extends PagoSteps {
 	
 	private final PageKlarnaSteps pageKlarnaSteps;
 
-	public PagoKlarna(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
-		super(dCtxSh, dCtxPago, driver);
+	public PagoKlarna(DataCtxShop dCtxSh, DataCtxPago dCtxPago) throws Exception {
+		super(dCtxSh, dCtxPago);
 		super.isAvailableExecPay = true;
 		pageKlarnaSteps = new PageKlarnaSteps(driver);
 	}

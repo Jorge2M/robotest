@@ -1,38 +1,40 @@
 package com.mng.robotest.test.pageobject.shop.checkout.paypal;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.mng.robotest.domains.transversal.PageBase;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PagePaypalLogin {
+public class PagePaypalLogin extends PageBase {
 	
-	private static final String XPathContainer = "//div[@class[contains(.,'contentContainer')]]";
-	private static final String XPathInputLogin = XPathContainer + "//input[@id='email']";
-	private static final String XPathInputPassword = XPathContainer + "//input[@id='password' and not(@disabled='disabled')]";
-	private static final String XPathIniciarSesionButton = XPathContainer + "//div/button[@id='btnLogin' or @id='login']";
+	private static final String XPATH_CONTAINER = "//div[@class[contains(.,'contentContainer')]]";
+	private static final String XPATH_INPUT_LOGIN = XPATH_CONTAINER + "//input[@id='email']";
+	private static final String XPATH_INPUT_PASSWORD = XPATH_CONTAINER + "//input[@id='password' and not(@disabled='disabled')]";
+	private static final String XPATH_INICIAR_SESION_BUTTON = XPATH_CONTAINER + "//div/button[@id='btnLogin' or @id='login']";
 	
-	public static boolean isPageUntil(int maxSeconds, WebDriver driver) {
-		return (state(Present, By.xpath(XPathInputPassword), driver)
-				.wait(maxSeconds).check());
+	public boolean isPage() {
+		return isPageUntil(0);
+	}
+	public boolean isPageUntil(int maxSeconds) {
+		return (state(Present, By.xpath(XPATH_INPUT_PASSWORD)).wait(maxSeconds).check());
 	}
 	
-	public static void inputUserAndPassword(String userMail, String password, WebDriver driver) {
+	public void inputUserAndPassword(String userMail, String password) {
 		waitForPageLoaded(driver); //For avoid StaleElementReferenceException
-		sendKeysWithRetry(userMail, By.xpath(XPathInputLogin), 2, driver);
-		if (state(Visible, By.xpath(XPathInputPassword), driver).check()) {
-			driver.findElement(By.xpath(XPathInputPassword)).sendKeys(password);
+		sendKeysWithRetry(userMail, By.xpath(XPATH_INPUT_LOGIN), 2, driver);
+		if (state(Visible, By.xpath(XPATH_INPUT_PASSWORD)).check()) {
+			driver.findElement(By.xpath(XPATH_INPUT_PASSWORD)).sendKeys(password);
 		} else {
-			PagePaypalLogin.clickIniciarSesion(driver);
-			if (state(Visible, By.xpath(XPathInputPassword), driver).wait(3).check()) {
-				driver.findElement(By.xpath(XPathInputPassword)).sendKeys(password);
+			new PagePaypalLogin().clickIniciarSesion();
+			if (state(Visible, By.xpath(XPATH_INPUT_PASSWORD)).wait(3).check()) {
+				driver.findElement(By.xpath(XPATH_INPUT_PASSWORD)).sendKeys(password);
 			}
 		}
 	}
 
-	public static void clickIniciarSesion(WebDriver driver) {
-		click(By.xpath(XPathIniciarSesionButton), driver).exec();
+	public void clickIniciarSesion() {
+		click(By.xpath(XPATH_INICIAR_SESION_BUTTON)).exec();
 	}
 }

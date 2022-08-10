@@ -585,7 +585,7 @@ public class Page1DktopCheckout extends PageBase {
 	public boolean isDataChequeRegalo(ChequeRegalo chequeRegalo) {
 		if (!driver.findElement(By.xpath(XPATH_NOMBRE_CHEQUE_REGALO)).getText().contains(chequeRegalo.getNombre()) ||
 			!driver.findElement(By.xpath(XPATH_NOMBRE_CHEQUE_REGALO)).getText().contains(chequeRegalo.getApellidos()) ||
-			!driver.findElement(By.xpath(XPATH_PRECIO_CHEQUE_REGALO)).getText().contains(chequeRegalo.getImporte().toString().replace("euro", "")) ||
+			!driver.findElement(By.xpath(XPATH_PRECIO_CHEQUE_REGALO)).getText().contains(chequeRegalo.getImporte().toString().replace("EURO_", "")) ||
 			!driver.findElement(By.xpath(XPATH_MENSAJE_CHEQUE_REGALO)).getText().contains(chequeRegalo.getMensaje())) {
 			return false;
 		}

@@ -1,43 +1,44 @@
 package com.mng.robotest.test.steps.shop.checkout.envio;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.envio.ModalDroppoints;
 import com.mng.robotest.test.pageobject.shop.checkout.envio.SecSelectDPoint.TypeDeliveryPoint;
 import com.mng.robotest.test.steps.shop.checkout.envio.DataSearchDeliveryPoint.DataSearchDp;
 
+
 @SuppressWarnings({"static-access"})
-public class SecSelectDPointSteps {
+public class SecSelectDPointSteps extends StepBase {
 	
-	static final String tagSearchDp = "@TagSearchDp";
+	private final ModalDroppoints modalDroppoints = new ModalDroppoints();
+	
+	private static final String TAG_SEARCH_DP = "@TagSearchDp";
+	
 	@Step (
-		description="Introducimos la provincia <b>" + tagSearchDp + "</b> + Return", 
-		expected="Aparecen puntos de recogida de " + tagSearchDp)
-	public static void searchPoblacion(DataSearchDeliveryPoint dataSearchDp, WebDriver driver) 
-	throws Exception {
+		description="Introducimos la provincia <b>" + TAG_SEARCH_DP + "</b> + Return", 
+		expected="Aparecen puntos de recogida de " + TAG_SEARCH_DP)
+	public void searchPoblacion(DataSearchDeliveryPoint dataSearchDp) throws Exception {
 		StepTM step = TestMaker.getCurrentStepInExecution();
-		step.replaceInDescription(tagSearchDp, dataSearchDp.data);
-		step.replaceInExpected(tagSearchDp, dataSearchDp.data);
+		step.replaceInDescription(TAG_SEARCH_DP, dataSearchDp.data);
+		step.replaceInExpected(TAG_SEARCH_DP, dataSearchDp.data);
 		
 		TypeDeliveryPoint typeDp = dataSearchDp.tipoTransporte.getTypeDeliveryPoint();
-		ModalDroppoints.secSelectDPoint.sendProvincia(dataSearchDp.data, driver);
+		modalDroppoints.sendProvincia(dataSearchDp.data);
 		SeleniumUtils.waitForPageLoaded(driver, 5);   
 
-		checkDroppointSelectedContainsDirecc(dataSearchDp, driver);
-		validaDeliveryPointOfType(typeDp, driver);
+		checkDroppointSelectedContainsDirecc(dataSearchDp);
+		validaDeliveryPointOfType(typeDp);
 	}
 	
 	@Validation
-	private static ChecksTM checkDroppointSelectedContainsDirecc(DataSearchDeliveryPoint dataSearchDp, WebDriver driver) 
-	throws Exception {
+	private ChecksTM checkDroppointSelectedContainsDirecc(DataSearchDeliveryPoint dataSearchDp) 
+			throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 5;
 		State stateVal = State.Warn;
@@ -47,46 +48,48 @@ public class SecSelectDPointSteps {
 	 	checks.add(
 			"La dirección del droppoint seleccionado contiene <b>" + dataSearchDp.data + 
 			"</b> (lo esperamos hasta " + maxSeconds + " segundos)",
-			ModalDroppoints.secSelectDPoint.
-				deliveryPointSelectedContainsPoblacionUntil(dataSearchDp, maxSeconds, driver), stateVal);
+			modalDroppoints.deliveryPointSelectedContainsPoblacionUntil(dataSearchDp, maxSeconds), stateVal);
+	 	
 		return checks;
 	}
 	
 	@Validation
-	public static ChecksTM validaDeliveryPointOfType(TypeDeliveryPoint typeDp, WebDriver driver) {
+	public ChecksTM validaDeliveryPointOfType(TypeDeliveryPoint typeDp) {
 		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 3;
 	 	checks.add(
 			"Es visible el 1er delivery point de la lista (lo esperamos hasta " + maxSeconds + " segundos)",
-			ModalDroppoints.secSelectDPoint.isDroppointVisibleUntil(1, maxSeconds, driver), State.Defect);
+			modalDroppoints.isDroppointVisibleUntil(1, maxSeconds), State.Defect);
+	 	
 	 	checks.add(
 			"El 1er delivery point de la lista es de tipo <b>" + typeDp + "</b>",
-			ModalDroppoints.secSelectDPoint.getTypeDeliveryPoint(1, driver)==typeDp, State.Defect);
+			modalDroppoints.getTypeDeliveryPoint(1)==typeDp, State.Defect);
+	 	
 	 	return checks;
 	}
 	
 	@Step (
 		description="Clickamos en el <b>#{position}º</b> droppoint", 
 		expected="El droppoint queda seleccionado")
-	public static DataDeliveryPoint clickDeliveryPointAndGetData(int position, WebDriver driver) throws Exception {
-		DataDeliveryPoint dataDpToReturn = ModalDroppoints.secSelectDPoint.clickDeliveryPointAndGetData(position, driver);
-		checkIsSelectedDroppoint(position, driver);
+	public DataDeliveryPoint clickDeliveryPointAndGetData(int position) throws Exception {
+		DataDeliveryPoint dataDpToReturn = modalDroppoints.clickDeliveryPointAndGetData(position);
+		checkIsSelectedDroppoint(position);
 		return dataDpToReturn;
 	}
 	
 	@Validation (
 		description="Queda seleccionado el Droppoint #{position}",
 		level=State.Defect)
-	private static boolean checkIsSelectedDroppoint(int position, WebDriver driver) {
-		return (ModalDroppoints.secSelectDPoint.isDroppointSelected(position, driver));
+	private boolean checkIsSelectedDroppoint(int position) {
+		return modalDroppoints.isDroppointSelected(position);
 	}
 	
 	@Step (
 		description="Clickamos el botón de \"Select\" de la capa de Droppoints", 
 		expected="Desaparece al capa de droppoint")
-	public static void clickSelectButton(Channel channel, WebDriver driver) {
+	public void clickSelectButton() {
 		int maxSeconds = 5;
-		ModalDroppoints.secSelectDPoint.clickSelectButtonAndWait(maxSeconds, driver);
-		ModalDroppointsSteps.secConfirmDatos.validateIsVisible(3, channel, driver);
+		modalDroppoints.clickSelectButtonAndWait(maxSeconds);
+		new ModalDroppointsSteps().getSecConfirmDatosSteps().validateIsVisible(3);
 	}
 }

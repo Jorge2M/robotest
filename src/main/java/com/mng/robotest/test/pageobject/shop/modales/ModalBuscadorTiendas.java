@@ -51,6 +51,7 @@ public class ModalBuscadorTiendas extends PageBase implements PageFromFooter {
 			return;
 		} 
 		if (channel==Channel.tablet) {
+			
 			click(By.xpath(XPATH_CLOSE_TABLET)).type(TypeClick.javascript).exec();
 		}
 		

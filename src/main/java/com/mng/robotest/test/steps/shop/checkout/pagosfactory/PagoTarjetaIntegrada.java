@@ -1,17 +1,16 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.steps.shop.checkout.d3d.PageD3DJPTestSelectOptionSteps;
 import com.mng.robotest.test.steps.shop.checkout.d3d.PageD3DLoginSteps;
 
+
 public class PagoTarjetaIntegrada extends PagoSteps {
 
-	public PagoTarjetaIntegrada(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
-		super(dCtxSh, dCtxPago, driver);
+	public PagoTarjetaIntegrada(DataCtxShop dCtxSh, DataCtxPago dCtxPago) throws Exception {
+		super(dCtxSh, dCtxPago);
 		super.isAvailableExecPay = true;
 	}
 	
@@ -23,7 +22,7 @@ public class PagoTarjetaIntegrada extends PagoSteps {
 		if (execPay) {
 			dataPedido.setCodtipopago("U");
 			String metodoPago = dCtxPago.getDataPedido().getPago().getNombre();
-			if (dCtxPago.getFTCkout().trjGuardada && 
+			if (dCtxPago.getFTCkout().checkSavedCard && 
 				pageCheckoutWrapperSteps.isTarjetaGuardadaAvailable(metodoPago)) {
 				pageCheckoutWrapperSteps.selectTrjGuardadaAndConfirmPago(dCtxPago, "737");
 			} else {
@@ -41,11 +40,12 @@ public class PagoTarjetaIntegrada extends PagoSteps {
 				
 				break;
 			case VISAD3D_JP:
-				boolean isD3DJP = PageD3DJPTestSelectOptionSteps.validateIsD3D(1, driver);
-				PageD3DJPTestSelectOptionSteps.isImporteVisible(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), driver);
+				PageD3DJPTestSelectOptionSteps pageD3DJPTestSelectOptionSteps = new PageD3DJPTestSelectOptionSteps();
+				boolean isD3DJP = pageD3DJPTestSelectOptionSteps.validateIsD3D(1);
+				pageD3DJPTestSelectOptionSteps.isImporteVisible(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais());
 				dataPedido.setCodtipopago("Y");
 				if (isD3DJP) {
-					PageD3DJPTestSelectOptionSteps.clickSubmitButton(driver);
+					pageD3DJPTestSelectOptionSteps.clickSubmitButton();
 				}
 				
 				break;

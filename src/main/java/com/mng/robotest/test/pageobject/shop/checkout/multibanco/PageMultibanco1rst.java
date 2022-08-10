@@ -1,78 +1,76 @@
 package com.mng.robotest.test.pageobject.shop.checkout.multibanco;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import com.github.jorge2m.testmaker.conf.Channel;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageMultibanco1rst {
+public class PageMultibanco1rst extends PageBase {
 	
-	static final String TagEmail = "@TagEmail";
-	static final String XPathListOfPayments = "//ul[@id='paymentMethods']";
-	static final String XPathCabeceraStep = "//h2[@id[contains(.,'stageheader')]]";
-	static final String XPathInputIconoMultibanco = "//input[@type='submit' and @name='brandName']";
-	static final String XPathButtonPagoDesktop = "//input[@class[contains(.,'paySubmit')] and @type='submit']";
-	static final String XPathButtonContinueMobil = "//input[@type='submit' and @value='continuar']";
-	static final String XPathInputEmailWithTag = "//input[@id[contains(.,'multibanco')] and @value[contains(.,'" + TagEmail + "')]]";
+	private static final String TAG_EMAIL = "@TagEmail";
+	private static final String XPATH_LIST_OF_PAYMENTS = "//ul[@id='paymentMethods']";
+	private static final String XPATH_CABECERA_STEP = "//h2[@id[contains(.,'stageheader')]]";
+	private static final String XPATH_INPUT_ICONO_MULTIBANCO = "//input[@type='submit' and @name='brandName']";
+	private static final String XPATH_BUTTON_PAGO_DESKTOP = "//input[@class[contains(.,'paySubmit')] and @type='submit']";
+	private static final String XPATH_BUTTON_CONTINUE_MOBIL = "//input[@type='submit' and @value='continuar']";
+	private static final String XPATH_INPUT_EMAIL_WITH_TAG = "//input[@id[contains(.,'multibanco')] and @value[contains(.,'" + TAG_EMAIL + "')]]";
 	
-	public static String getXPathEntradaPago(String nombrePago, Channel channel) {
+	private String getXPathEntradaPago(String nombrePago) {
 		if (channel.isDevice()) {
-			return (XPathListOfPayments + "//input[@class[contains(.,'" + nombrePago.toLowerCase() + "')]]");
+			return (XPATH_LIST_OF_PAYMENTS + "//input[@class[contains(.,'" + nombrePago.toLowerCase() + "')]]");
 		}
-		return (XPathListOfPayments + "/li[@data-variant[contains(.,'" + nombrePago.toLowerCase() + "')]]");
+		return (XPATH_LIST_OF_PAYMENTS + "/li[@data-variant[contains(.,'" + nombrePago.toLowerCase() + "')]]");
 	}
 	
-	public static String getXPathButtonContinuePay(Channel channel) {
+	private String getXPathButtonContinuePay() {
 		if (channel.isDevice()) {
-			return XPathButtonContinueMobil;
+			return XPATH_BUTTON_CONTINUE_MOBIL;
 		}
-		return XPathButtonPagoDesktop;
+		return XPATH_BUTTON_PAGO_DESKTOP;
 	}
 	
-	public static String getXPathInputEmail(String email) {
-		return XPathInputEmailWithTag.replace(TagEmail, email);
+	private String getXPathInputEmail(String email) {
+		return XPATH_INPUT_EMAIL_WITH_TAG.replace(TAG_EMAIL, email);
 	}
 	
-	public static boolean isPresentEntradaPago(String nombrePago, Channel channel, WebDriver driver) {
-		String xpathPago = getXPathEntradaPago(nombrePago, channel);
-		return (state(Present, By.xpath(xpathPago), driver).check());
+	public boolean isPresentEntradaPago(String nombrePago) {
+		String xpathPago = getXPathEntradaPago(nombrePago);
+		return state(Present, By.xpath(xpathPago)).check();
 	}
 	
-	public static boolean isPresentCabeceraStep(WebDriver driver) {
-		return (state(Present, By.xpath(XPathCabeceraStep), driver).check());
+	public boolean isPresentCabeceraStep() {
+		return (state(Present, By.xpath(XPATH_CABECERA_STEP)).check());
 	}
 	
-	public static boolean isPresentButtonPagoDesktop(WebDriver driver) {
-		return (state(Present, By.xpath(XPathButtonPagoDesktop), driver).check());
+	public boolean isPresentButtonPagoDesktop() {
+		return (state(Present, By.xpath(XPATH_BUTTON_PAGO_DESKTOP)).check());
 	}
 	
-	public static boolean isPresentEmailUsr(String emailUsr, WebDriver driver) {
+	public boolean isPresentEmailUsr(String emailUsr) {
 		String xpathEmail = getXPathInputEmail(emailUsr);
-		return (state(Present, By.xpath(xpathEmail), driver).check());
+		return (state(Present, By.xpath(xpathEmail)).check());
 	}
 
-	public static void continueToNextPage(Channel channel, WebDriver driver) {
+	public void continueToNextPage() {
 		//En el caso de móvil hemos de seleccionar el icono de banco para visualizar el botón de continue
 		if (channel.isDevice()) {
-			String xpathButton = getXPathButtonContinuePay(channel);
-			if (!state(Visible, By.xpath(xpathButton), driver).check()) {
-				clickIconoBanco(driver);
+			String xpathButton = getXPathButtonContinuePay();
+			if (!state(Visible, By.xpath(xpathButton)).check()) {
+				clickIconoBanco();
 			}
 		}
 		
-		clickButtonContinuePay(channel, driver);
+		clickButtonContinuePay();
 	}
 
-	public static void clickIconoBanco(WebDriver driver) {
-		click(By.xpath(XPathInputIconoMultibanco), driver).exec();
+	public void clickIconoBanco() {
+		click(By.xpath(XPATH_INPUT_ICONO_MULTIBANCO)).exec();
 	}
 
-	public static void clickButtonContinuePay(Channel channel, WebDriver driver) {
-		String xpathButton = getXPathButtonContinuePay(channel);
-		click(By.xpath(xpathButton), driver).exec();
+	public void clickButtonContinuePay() {
+		String xpathButton = getXPathButtonContinuePay();
+		click(By.xpath(xpathButton)).exec();
 	}
 
 }

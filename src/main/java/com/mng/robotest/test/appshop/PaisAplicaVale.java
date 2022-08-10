@@ -6,10 +6,11 @@ import java.util.List;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.domains.compra.beans.ConfigCheckout;
+import com.mng.robotest.domains.compra.tests.CompraCommons;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test.datastored.DataCtxPago;
-import com.mng.robotest.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.steps.navigations.manto.PedidoNavigations;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow;
@@ -25,18 +26,24 @@ public class PaisAplicaVale implements Serializable {
 	
 	private String index_fact;
 	public int prioridad;
-	private FlagsTestCkout fTCkoutIni;
+	private ConfigCheckout fTCkoutIni;
 	private DataCtxShop dCtxSh;
 
 	public PaisAplicaVale(VersionPagosSuite version, DataCtxShop dCtxSh, int prioridad) {
 		this.prioridad = prioridad;
-		this.fTCkoutIni = FlagsTestCkout.getNew(version);
+		this.fTCkoutIni = ConfigCheckout.config()
+				.emaiExists()
+				.version(version).build();
+		
 		setDataFromConstruct(dCtxSh);
 	}
 
 	public PaisAplicaVale(VersionValesSuite version, DataCtxShop dCtxSh, int prioridad) {
 		this.prioridad = prioridad;
-		this.fTCkoutIni = FlagsTestCkout.getNew(version);
+		this.fTCkoutIni = ConfigCheckout.config()
+				.emaiExists()
+				.version(version).build();
+		
 		setDataFromConstruct(dCtxSh);
 	}
 
@@ -58,24 +65,15 @@ public class PaisAplicaVale implements Serializable {
 	public void CHK001_Compra() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		TestCaseTM.addNameSufix(this.index_fact);
-		
 		dCtxSh.userRegistered = false;
-		DataCtxPago dCtxPago = new DataCtxPago(this.dCtxSh);
-		FlagsTestCkout fTCkout = (FlagsTestCkout)fTCkoutIni.clone();
-		fTCkout.emailExist = true; 
-		fTCkout.trjGuardada = false;
-		dCtxPago.setFTCkout(fTCkout);
+		DataCtxPago dCtxPago = new DataCtxPago(this.dCtxSh, fTCkoutIni);
 		
 		dCtxPago = new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver)
 			.build()
 			.checkout(From.PREHOME);
 		
-		if (dCtxPago.getFTCkout().validaPedidosEnManto) {
-			List<CheckPedido> listChecks = Arrays.asList(
-				CheckPedido.consultarBolsa, 
-				CheckPedido.consultarPedido);
-			DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
-			PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
+		if (dCtxPago.getFTCkout().checkManto) {
+			CompraCommons.checkPedidosManto(dCtxPago.getListPedidos(), dCtxSh.appE, driver);
 		}
 	}
 	

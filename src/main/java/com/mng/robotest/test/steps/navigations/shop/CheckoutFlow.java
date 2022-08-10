@@ -22,6 +22,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.test.beans.AccesoEmpl;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pago;
@@ -32,7 +33,6 @@ import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.datastored.DataPedido;
-import com.mng.robotest.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.factoryes.entities.EgyptCity;
 import com.mng.robotest.test.generic.UtilsMangoTest;
@@ -110,7 +110,7 @@ public class CheckoutFlow {
 		}
 		
 		if (from==From.CHECKOUT || from==From.IDENTIFICATION || from==From.BOLSA || from==From.PREHOME) {
-			if (dCtxSh.pais.getListPagosForTest(dCtxSh.appE, dCtxPago.getFTCkout().isEmpl).size() > 0) {
+			if (dCtxSh.pais.getListPagosForTest(dCtxSh.appE, dCtxPago.getFTCkout().userIsEmployee).size() > 0) {
 				checkMetodosPagos(finalCountrys);
 			}
 		}
@@ -129,7 +129,6 @@ public class CheckoutFlow {
 	
 		DataBag dataBag = dCtxPago.getDataPedido().getDataBag();
 		secBolsaSteps.altaListaArticulosEnBolsa(listArticles, dataBag);
-		dCtxPago.getFTCkout().testCodPromocional = true;
 	}
 	
 	private void testFromIdentificationToMetodosPago() throws Exception {
@@ -141,7 +140,7 @@ public class CheckoutFlow {
 		
 		test1rstPageCheckout();
 		if (dCtxSh.channel==Channel.mobile) {
-			boolean isSaldoEnCuenta = dCtxPago.getFTCkout().isStoreCredit;
+			boolean isSaldoEnCuenta = dCtxPago.getFTCkout().storeCredit;
 			pageCheckoutWrapperSteps.getPage1CheckoutMobilSteps()
 				.clickContinuarToMetodosPago(dCtxSh, isSaldoEnCuenta);
 		}
@@ -154,17 +153,17 @@ public class CheckoutFlow {
 	private void testFromIdentToCheckoutIni() throws Exception {
 		boolean validaCharNoLatinos = (dCtxSh.pais!=null && dCtxSh.pais.getDireccharnolatinos().check() && dCtxSh.appE!=AppEcom.votf);
 		DataBag dataBag = dCtxPago.getDataPedido().getDataBag();
-		String emailCheckout = UtilsMangoTest.getEmailForCheckout(dCtxSh.pais, dCtxPago.getFTCkout().emailExist); 
+		String emailCheckout = UtilsMangoTest.getEmailForCheckout(dCtxSh.pais, dCtxPago.getFTCkout().emailExists); 
 		dCtxPago.getDataPedido().setEmailCheckout(emailCheckout);
 
 		Page1IdentCheckoutSteps page1IdentCheckoutSteps = new Page1IdentCheckoutSteps();
-		page1IdentCheckoutSteps.inputEmailAndContinue(emailCheckout, dCtxPago.getFTCkout().emailExist, dCtxSh.userRegistered, dCtxSh.pais);
+		page1IdentCheckoutSteps.inputEmailAndContinue(emailCheckout, dCtxPago.getFTCkout().emailExists, dCtxSh.userRegistered, dCtxSh.pais);
 		Page2IdentCheckoutSteps page2IdentCheckoutSteps = new Page2IdentCheckoutSteps(dCtxSh.channel, dCtxSh.pais, egyptCity, driver);
 		boolean emailOk = page2IdentCheckoutSteps.checkEmail(emailCheckout);
 		if (!emailOk) {
 			//Existe un problema según el cual en ocasiones no se propaga el email desde la página de identificación
 			AllPagesSteps.backNagegador(driver);
-			page1IdentCheckoutSteps.inputEmailAndContinue(emailCheckout, dCtxPago.getFTCkout().emailExist, dCtxSh.userRegistered, dCtxSh.pais);
+			page1IdentCheckoutSteps.inputEmailAndContinue(emailCheckout, dCtxPago.getFTCkout().emailExists, dCtxSh.userRegistered, dCtxSh.pais);
 		}
 		
 		Map<String, String> datosRegistro;
@@ -186,10 +185,10 @@ public class CheckoutFlow {
 	}
 	
 	private void test1rstPageCheckout() throws Exception {
-		if ((dCtxPago.getFTCkout().testCodPromocional || dCtxPago.getFTCkout().isEmpl) && 
+		if ((dCtxPago.getFTCkout().checkPromotionalCode || dCtxPago.getFTCkout().userIsEmployee) && 
 			 dCtxSh.appE!=AppEcom.votf) {
 			DataBag dataBag = dCtxPago.getDataPedido().getDataBag();	
-			if (dCtxPago.getFTCkout().isEmpl && ESPANA.isEquals(dCtxSh.pais)) {
+			if (dCtxPago.getFTCkout().userIsEmployee && ESPANA.isEquals(dCtxSh.pais)) {
 				testInputCodPromoEmplSpain(dataBag);
 			} else {
 				if (dCtxSh.vale!=null) {
@@ -206,7 +205,7 @@ public class CheckoutFlow {
 			new Page1DktopCheckoutSteps(dCtxSh.channel, dCtxSh.appE).stepIntroduceCodigoVendedorVOTF("111111");
 		}
 		
-		if (dCtxPago.getFTCkout().loyaltyPoints) {
+		if (dCtxPago.getFTCkout().checkLoyaltyPoints) {
 			pageCheckoutWrapperSteps.validateBlockLoyalty();
 			pageCheckoutWrapperSteps.loyaltyPointsApply();
 		}
@@ -229,10 +228,10 @@ public class CheckoutFlow {
 				pageCheckoutWrapperSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
 			}
 				
-			if (!dCtxPago.getFTCkout().isChequeRegalo) {
-				pageCheckoutWrapperSteps.despliegaYValidaMetodosPago(dCtxSh.pais, dCtxPago.getFTCkout().isEmpl);
+			if (!dCtxPago.getFTCkout().chequeRegalo) {
+				pageCheckoutWrapperSteps.despliegaYValidaMetodosPago(dCtxSh.pais, dCtxPago.getFTCkout().userIsEmployee);
 			}
-			if (dCtxPago.getFTCkout().validaPasarelas) {
+			if (dCtxPago.getFTCkout().checkPasarelas) {
 				if (pago==null) { 
 					validaPasarelasPagoPais();
 				} else {
@@ -276,7 +275,7 @@ public class CheckoutFlow {
 						dataDirEnvio.put(DataDirType.telefono, "665015122");
 						pageCheckoutWrapperSteps.getModalDirecEnvioSteps().inputDataAndActualizar(dataDirEnvio);
 						pageCheckoutWrapperSteps.getModalAvisoCambioPaisSteps().clickConfirmar(paisChange);
-						pageCheckoutWrapperSteps.validaMetodosPagoDisponibles(paisChange, dCtxPago.getFTCkout().isEmpl);
+						pageCheckoutWrapperSteps.validaMetodosPagoDisponibles(paisChange, dCtxPago.getFTCkout().userIsEmployee);
 					}
 				}
 			}
@@ -317,8 +316,8 @@ public class CheckoutFlow {
 			else {
 				if (pagoToTest.getTypePago()!=TypePago.TpvVotf) {
 					pageResultPagoSteps.validateIsPageOk(dCtxPago, dCtxSh);
-					if (dCtxSh.channel!=Channel.mobile && !dCtxPago.getFTCkout().isChequeRegalo) {
-						if (dCtxPago.getFTCkout().forceTestMisCompras) {
+					if (dCtxSh.channel!=Channel.mobile && !dCtxPago.getFTCkout().chequeRegalo) {
+						if (dCtxPago.getFTCkout().checkMisCompras) {
 							pageResultPagoSteps.selectLinkMisComprasAndValidateCompra(dCtxPago, dCtxSh);
 						}
 //						} else {
@@ -360,7 +359,6 @@ public class CheckoutFlow {
 		actionsWhenSessionLoss();
 		
 		secBolsaSteps.altaArticlosConColores(1, dataBag);
-		dCtxPago.getFTCkout().testCodPromocional = false;
 		secBolsaSteps.selectButtonComprar(dCtxPago.getDataPedido().getDataBag(), dCtxSh);
 		testFromIdentificationToMetodosPago();
 		if (dCtxSh.channel!=Channel.mobile) {
@@ -374,7 +372,7 @@ public class CheckoutFlow {
 	}
 	
 	private void validaPasarelasPagoPais() throws Exception {
-		List<Pago> listPagosToTest = getListPagosToTest(dCtxPago.getFTCkout().isEmpl);
+		List<Pago> listPagosToTest = getListPagosToTest(dCtxPago.getFTCkout().userIsEmployee);
 		for (Iterator<Pago> it = listPagosToTest.iterator(); it.hasNext(); ) {
 			Pago pagoToTest = it.next();
 			dCtxPago.getDataPedido().setPago(pagoToTest);
@@ -455,7 +453,7 @@ public class CheckoutFlow {
 	}
 	
 	private boolean iCanExecPago(PagoSteps pagoSteps) {
-		boolean validaPagos = pagoSteps.dCtxPago.getFTCkout().validaPagos;
+		boolean validaPagos = pagoSteps.dCtxPago.getFTCkout().checkPagos;
 		Pago pago = pagoSteps.dCtxPago.getDataPedido().getPago();
 		TypeAccess typeAccess = ((InputParamsMango)TestMaker.getInputParamsSuite()).getTypeAccess();
 		return (
@@ -593,15 +591,15 @@ public class CheckoutFlow {
 			if (dCtxPago!=null) {
 				return dCtxPago;
 			}
-			FlagsTestCkout FTCkout = new FlagsTestCkout();
-			FTCkout.validaPasarelas = validaPasarelas;  
-			FTCkout.validaPagos = validaPagos;
-			FTCkout.emailExist = emailExist; 
-			FTCkout.trjGuardada = trjGuardada;
-			FTCkout.validaPedidosEnManto = validaPedidosEnManto;
-			FTCkout.isEmpl = isEmpl;
-			DataCtxPago dCtxPago = new DataCtxPago(getdCtxSh());
-			dCtxPago.setFTCkout(FTCkout);
+			ConfigCheckout configCheckout = ConfigCheckout.config()
+					.checkPasarelas(validaPasarelas)
+					.checkPagos(validaPagos)
+					.emaiExists(emailExist)
+					.checkSavedCard(trjGuardada)
+					.checkManto(validaPedidosEnManto)
+					.userIsEmployee(isEmpl).build();
+			
+			DataCtxPago dCtxPago = new DataCtxPago(getdCtxSh(), configCheckout);
 			if (pago!=null) {
 				dCtxPago.getDataPedido().setPago(pago);
 			}

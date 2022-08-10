@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.datastored.DataPedido;
@@ -10,10 +8,11 @@ import com.mng.robotest.test.steps.shop.checkout.yandex.PageYandex1rstSteps;
 import com.mng.robotest.test.steps.shop.checkout.yandex.PageYandexMoneySteps;
 import com.mng.robotest.test.steps.shop.checkout.yandex.PageYandexPayingByCodeSteps;
 
+
 public class PagoYandex extends PagoSteps {
 	
-	public PagoYandex(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
-		super(dCtxSh, dCtxPago, driver);
+	public PagoYandex(DataCtxShop dCtxSh, DataCtxPago dCtxPago) throws Exception {
+		super(dCtxSh, dCtxPago);
 		super.isAvailableExecPay = true;
 	}
 	

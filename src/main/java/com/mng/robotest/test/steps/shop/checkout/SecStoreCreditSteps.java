@@ -56,7 +56,7 @@ public class SecStoreCreditSteps {
 		pageCheckoutWrapperSteps.validateLoadingDisappears(5);
 		validaBloqueSaldoEnCuenta(!marcadoInicialmente, dCtxPago);
 		if (marcadoInicialmente) {
-			boolean isEmpl = dCtxPago.getFTCkout().isEmpl;
+			boolean isEmpl = dCtxPago.getFTCkout().userIsEmployee;
 			pageCheckoutWrapperSteps.validaMetodosPagoDisponibles(pais, isEmpl);
 			dCtxPago.getDataPedido().setImporteTotalSinSaldoCta(
 					pageCheckoutWrapper.getPrecioTotalSinSaldoEnCuenta());

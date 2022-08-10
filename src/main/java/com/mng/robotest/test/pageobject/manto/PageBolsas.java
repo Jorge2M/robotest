@@ -1,72 +1,59 @@
 package com.mng.robotest.test.pageobject.manto;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageBolsas {
+public class PageBolsas extends PageBase {
 
-	static String XPathLinea = "//table[@width='100%']/tbody/tr[5]/td/input[@class='botones']";
-	static String XPathMainForm = "//form[@action='/bolsas.faces']";
+	private static final String XPATH_LINEA = "//table[@width='100%']/tbody/tr[5]/td/input[@class='botones']";
+	private static final String XPATH_MAIN_FORM = "//form[@action='/bolsas.faces']";
 	
-	public static String getXpath_linkPedidoInBolsa(String pedidoManto) {
-		return ("//table//tr/td[1]/a[text()[contains(.,'" + pedidoManto + "')]]");
+	private String getXpathLinkPedidoInBolsa(String pedidoManto) {
+		return "//table//tr/td[1]/a[text()[contains(.,'" + pedidoManto + "')]]";
 	}
 	
-	public static String getXpath_linkIdCompraInBolsa(String pedidoManto) {
-		String xpathPedido = getXpath_linkPedidoInBolsa(pedidoManto);
-		return (xpathPedido + "/../a[2]");
+	public String getXpathLinkIdCompraInBolsa(String pedidoManto) {
+		String xpathPedido = getXpathLinkPedidoInBolsa(pedidoManto);
+		return xpathPedido + "/../a[2]";
 	}
 		
-	/**
-	 * @param idTpv
-	 * @return el xpath correspondiente al elemento de un tpv concreto en la lista de bolsas
-	 */
-	public static String getXpath_idTpvInBolsa(String idTpv) {
-		return ("//table//tr/td[8]/span[text()[contains(.,'" + idTpv + "')]]");
+	public String getXpathIdTpvInBolsa(String idTpv) {
+		return "//table//tr/td[8]/span[text()[contains(.,'" + idTpv + "')]]";
 	}
 	
-	/**
-	 * @param correo
-	 * @return el xpath correspondiente al elemento de un correo concreto en la lista de bolsas
-	 */
-	public static String getXpath_correoInBolsa(String correo) {
-		return ("//table//tr/td[7]/span[text()[contains(.,'" + correo.toLowerCase() + "')] or text()[contains(.,'" + correo.toUpperCase() + "')]]");
+	public String getXpath_correoInBolsa(String correo) {
+		return "//table//tr/td[7]/span[text()[contains(.,'" + correo.toLowerCase() + "')] or text()[contains(.,'" + correo.toUpperCase() + "')]]";
 	}
 
-	public static boolean isPage(WebDriver driver) {
-		return (state(Present, By.xpath(XPathMainForm), driver).check());
+	public boolean isPage() {
+		return (state(Present, By.xpath(XPATH_MAIN_FORM)).check());
 	}
 
-	/**
-	 * @return el número de líneas de bolsa que aparecen en pantalla
-	 */
-	public static int getNumLineas(WebDriver driver) {
-		return (driver.findElements(By.xpath(XPathLinea)).size());
+	public int getNumLineas() {
+		return (driver.findElements(By.xpath(XPATH_LINEA)).size());
 	}
 	
-	public static boolean presentLinkPedidoInBolsaUntil(String codigoPedido, int maxSecondsToWait, WebDriver driver) {
-		String xpath = getXpath_linkPedidoInBolsa(codigoPedido);
-		return (state(Present, By.xpath(xpath), driver)
-				.wait(maxSecondsToWait).check());
+	public boolean presentLinkPedidoInBolsaUntil(String codigoPedido, int maxSecondsToWait) {
+		String xpath = getXpathLinkPedidoInBolsa(codigoPedido);
+		return (state(Present, By.xpath(xpath)).wait(maxSecondsToWait).check());
 	}
 
-	public static boolean presentIdTpvInBolsa(WebDriver driver, String idTpv) {
-		String xpath = getXpath_idTpvInBolsa(idTpv);
-		return (state(Present, By.xpath(xpath), driver).check());
+	public boolean presentIdTpvInBolsa(String idTpv) {
+		String xpath = getXpathIdTpvInBolsa(idTpv);
+		return state(Present, By.xpath(xpath)).check();
 	}
 
-	public static boolean presentCorreoInBolsa(WebDriver driver, String correo) {
+	public boolean presentCorreoInBolsa(String correo) {
 		String xpath = getXpath_correoInBolsa(correo);
-		return (state(Present, By.xpath(xpath), driver).check());
+		return state(Present, By.xpath(xpath)).check();
 	}
 
-	public static String getIdCompra(String idPedido, WebDriver driver) {
-		String xpathIdCompra = getXpath_linkIdCompraInBolsa(idPedido);
-		if (state(Present, By.xpath(xpathIdCompra), driver).check()) {
+	public String getIdCompra(String idPedido) {
+		String xpathIdCompra = getXpathLinkIdCompraInBolsa(idPedido);
+		if (state(Present, By.xpath(xpathIdCompra)).check()) {
 			String textIdCompra = driver.findElement(By.xpath(xpathIdCompra)).getText();
 			return (textIdCompra.substring(0, textIdCompra.indexOf(" ")));
 		}

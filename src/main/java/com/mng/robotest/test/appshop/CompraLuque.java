@@ -12,13 +12,13 @@ import org.testng.annotations.Test;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataCtxPago;
-import com.mng.robotest.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test.getdata.products.data.Color;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.products.data.Size;
@@ -65,21 +65,13 @@ public class CompraLuque {
 		DataBag dataBag = new DataBag();
 		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh);
 		secBolsaSteps.altaListaArticulosEnBolsa(listArticles, dataBag);
-		
-		//Modify Postal Code
 		pais.setCodpos(getCodPostal(pais));
 		
-		//To checkout Page
-		FlagsTestCkout fTCkout = new FlagsTestCkout();
-		fTCkout.validaPasarelas = true;  
-		fTCkout.validaPagos = true;
-		fTCkout.validaPedidosEnManto = false;
-		fTCkout.emailExist = false; 
-		fTCkout.trjGuardada = false;
-		fTCkout.isEmpl = false;
-		fTCkout.stressMode = true;
-		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
-		dCtxPago.setFTCkout(fTCkout);
+		ConfigCheckout configCheckout = ConfigCheckout.config()
+				.checkManto()
+				.stressMode().build();
+		
+		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh, configCheckout);
 		dCtxPago.getDataPedido().setDataBag(dataBag);
 		
 		new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver)

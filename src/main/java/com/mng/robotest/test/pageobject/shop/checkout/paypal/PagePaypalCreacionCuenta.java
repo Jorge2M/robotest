@@ -1,25 +1,25 @@
 package com.mng.robotest.test.pageobject.shop.checkout.paypal;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class PagePaypalCreacionCuenta {
+
+public class PagePaypalCreacionCuenta extends PageBase {
  
-	static String XPathButtonIniciarSesion = "//div[@class[contains(.,'LoginButton')]]/a";
-	static String XPathButtonAceptarYPagar = "//input[@track-submit='signup']";
-	static String XPathButtonPagarAhora = "//input[@track-submit='guest_xo']";
+	private static final String XPATH_BUTTON_INICIAR_SESION = "//div[@class[contains(.,'LoginButton')]]/a";
+	private static final String XPATH_BUTTON_ACEPTAR_Y_PAGAR = "//input[@track-submit='signup']";
+	private static final String XPATH_BUTTON_PAGAR_AHORA = "//input[@track-submit='guest_xo']";
 	
-	public static boolean isPageUntil(int maxSeconds, WebDriver driver) {
-		String xpath = "(" + XPathButtonAceptarYPagar + ") | (" + XPathButtonPagarAhora + ") | (" + XPathButtonIniciarSesion + ")";
-		return (state(Present, By.xpath(xpath), driver).wait(maxSeconds).check());
+	public boolean isPageUntil(int maxSeconds) {
+		String xpath = "(" + XPATH_BUTTON_ACEPTAR_Y_PAGAR + ") | (" + XPATH_BUTTON_PAGAR_AHORA + ") | (" + XPATH_BUTTON_INICIAR_SESION + ")";
+		return (state(Present, By.xpath(xpath)).wait(maxSeconds).check());
 	}
 
-	public static void clickButtonIniciarSesion(WebDriver driver) {
-		click(By.xpath(XPathButtonIniciarSesion), driver).type(TypeClick.javascript).exec();
+	public void clickButtonIniciarSesion() {
+		click(By.xpath(XPATH_BUTTON_INICIAR_SESION)).type(TypeClick.javascript).exec();
 	}
 }

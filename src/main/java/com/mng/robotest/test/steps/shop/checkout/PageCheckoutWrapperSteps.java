@@ -59,7 +59,7 @@ public class PageCheckoutWrapperSteps {
 		this.pageCheckoutWrapper = new PageCheckoutWrapper(channel, app, driver);
 		
 		this.modalDirecEnvioSteps = new ModalDirecEnvioSteps(channel, app, driver);
-		this.secMetodoEnvioDesktopSteps = new SecMetodoEnvioDesktopSteps(channel, app, driver);
+		this.secMetodoEnvioDesktopSteps = new SecMetodoEnvioDesktopSteps();
 		this.secStoreCreditSteps = new SecStoreCreditSteps(channel, app, driver);
 		this.secTMangoSteps = new SecTMangoSteps(channel, driver);
 		this.secKrediKartiSteps = new SecKrediKartiSteps(channel, driver); 
@@ -67,7 +67,7 @@ public class PageCheckoutWrapperSteps {
 		this.modalDirecFacturaSteps = new ModalDirecFacturaSteps(channel, app, driver);
 		this.modalAvisoCambioPaisSteps = new ModalAvisoCambioPaisSteps(app, driver);
 		this.page1DktopCheckSteps = new Page1DktopCheckoutSteps(channel, app);
-		this.page1MobilCheckSteps = new Page1EnvioCheckoutMobilSteps(driver);
+		this.page1MobilCheckSteps = new Page1EnvioCheckoutMobilSteps();
 		this.secIdealSteps = new SecIdealSteps(channel, driver);
 		this.secTarjetaPciSteps = new SecTarjetaPciSteps(channel, app, driver);
 	}
@@ -176,7 +176,7 @@ public class PageCheckoutWrapperSteps {
 	 */
 	public void fluxSelectEnvioAndClickPaymentMethod(DataCtxPago dCtxPago, DataCtxShop dCtxSh) throws Exception {
 		boolean pagoPintado = false;
-		if (!dCtxPago.getFTCkout().isChequeRegalo) {
+		if (!dCtxPago.getFTCkout().chequeRegalo) {
 			pagoPintado = secMetodoEnvioDesktopSteps.fluxSelectEnvio(dCtxPago, dCtxSh);
 		}
 		boolean methodSelectedOK = forceClickIconoPagoAndWait(dCtxSh.pais, dCtxPago.getDataPedido().getPago(), !pagoPintado);

@@ -1,46 +1,43 @@
 package com.mng.robotest.test.pageobject.shop.checkout.envio;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import com.github.jorge2m.testmaker.conf.Channel;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class SecConfirmDatos {
+public class SecConfirmDatos extends PageBase {
 
-	static String XPathDivGeneralDesktop = "//div[@class[contains(.,'fixedConfirm')]]";
-	static String XPathDivGeneralMovil = "//div[@class[contains(.,'dp-confirm-page')]]";
-	static String XPathConfirmDatosButton = "//span[@id[contains(.,'confirmButton')]]";
-	static String XPathInputPostNumberIdDeutschland = "//input[@placeholder[contains(.,'Post Number ID')]]";
+	private static final String XPATH_DIV_GENERAL_DESKTOP = "//div[@class[contains(.,'fixedConfirm')]]";
+	private static final String XPATH_DIV_GENERAL_MOVIL = "//div[@class[contains(.,'dp-confirm-page')]]";
+	private static final String XPATH_CONFIRM_DATOS_BUTTON = "//span[@id[contains(.,'confirmButton')]]";
+	private static final String XPATH_INPUT_POST_NUMBER_ID_DEUTSCHLAND = "//input[@placeholder[contains(.,'Post Number ID')]]";
 	
-	public static String getXPathDivGeneral(Channel channel) {
+	private String getXPathDivGeneral() {
 		switch (channel) {
 		case desktop:
 		case tablet:
-			return XPathDivGeneralDesktop;
+			return XPATH_DIV_GENERAL_DESKTOP;
 		case mobile:
 		default:
-			return XPathDivGeneralMovil;
+			return XPATH_DIV_GENERAL_MOVIL;
 		}
 	}
 	
-	public static boolean isVisibleUntil(int maxSeconds, Channel channel, WebDriver driver) {
-		String xpathDivGeneral = getXPathDivGeneral(channel);
-		return (state(Visible, By.xpath(xpathDivGeneral), driver)
-				.wait(maxSeconds).check());
+	public boolean isVisibleUntil(int maxSeconds) {
+		String xpathDivGeneral = getXPathDivGeneral();
+		return (state(Visible, By.xpath(xpathDivGeneral)).wait(maxSeconds).check());
 	}
 	
-	public static boolean isVisibleInputPostNumberIdDeutschland(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathInputPostNumberIdDeutschland), driver).check());
+	public boolean isVisibleInputPostNumberIdDeutschland() {
+		return (state(Visible, By.xpath(XPATH_INPUT_POST_NUMBER_ID_DEUTSCHLAND)).check());
 	}
 	
-	public static void sendDataInputPostNumberIdDeutschland(String data, WebDriver driver) throws Exception {
-		sendKeysWithRetry(data, By.xpath(XPathInputPostNumberIdDeutschland), 2, driver);
+	public void sendDataInputPostNumberIdDeutschland(String data) throws Exception {
+		sendKeysWithRetry(data, By.xpath(XPATH_INPUT_POST_NUMBER_ID_DEUTSCHLAND), 2, driver);
 	}
 
-	public static void clickConfirmarDatosButtonAndWait(int maxSeconds, WebDriver driver) {
-		click(By.xpath(XPathConfirmDatosButton), driver).waitLoadPage(maxSeconds).exec();
+	public void clickConfirmarDatosButtonAndWait(int maxSeconds) {
+		click(By.xpath(XPATH_CONFIRM_DATOS_BUTTON)).waitLoadPage(maxSeconds).exec();
 	}
 }

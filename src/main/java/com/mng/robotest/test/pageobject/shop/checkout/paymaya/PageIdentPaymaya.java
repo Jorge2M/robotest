@@ -1,29 +1,25 @@
 package com.mng.robotest.test.pageobject.shop.checkout.paymaya;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
+
 public class PageIdentPaymaya extends PageBase {
 
-	private static final String XPathWrapperLogin = "//div[@class[contains(.,'login-form-index')]]";
-	private static final String XPathInputUser = "//input[@id='identityValue']";
-	private static final String XPathInputPassword = "//input[@id='password']";
-	private static final String XPathLoginButton = "//input[@class[contains(.,'login-btn')]]";
-	
-	public PageIdentPaymaya(WebDriver driver) {
-		super(driver);
-	}
+	private static final String XPATH_WRAPPER_LOGIN = "//div[@class[contains(.,'login-form-index')]]";
+	private static final String XPATH_INPUT_USER = "//input[@id='identityValue']";
+	private static final String XPATH_INPUT_PASSWORD = "//input[@id='password']";
+	private static final String XPATH_LOGIN_BUTTON = "//input[@class[contains(.,'login-btn')]]";
 	
 	public boolean isPage() {
-		return state(State.Visible, By.xpath(XPathWrapperLogin)).check();
+		return state(State.Visible, By.xpath(XPATH_WRAPPER_LOGIN)).check();
 	}
 	
 	public void login(String user, String password) {
-		driver.findElement(By.xpath(XPathInputUser)).sendKeys(user);
-		driver.findElement(By.xpath(XPathInputPassword)).sendKeys(password);
-		click(By.xpath(XPathLoginButton)).exec();
+		driver.findElement(By.xpath(XPATH_INPUT_USER)).sendKeys(user);
+		driver.findElement(By.xpath(XPATH_INPUT_PASSWORD)).sendKeys(password);
+		click(By.xpath(XPATH_LOGIN_BUTTON)).exec();
 	}
 }

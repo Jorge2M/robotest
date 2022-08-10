@@ -10,11 +10,11 @@ import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataCtxPago;
-import com.mng.robotest.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test.factoryes.entities.EgyptCity;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
@@ -74,12 +74,10 @@ public class EgyptOrderTest implements Serializable {
 	}
 	
 	private DataCtxPago makeDataPayment(DataCtxShop dCtxSh, DataBag dataBag) {
-		FlagsTestCkout fTCkout = new FlagsTestCkout();
-		fTCkout.validaPasarelas = true;  
-		fTCkout.validaPagos = true;
-		fTCkout.trjGuardada = false;
-		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
-		dCtxPago.setFTCkout(fTCkout);
+		ConfigCheckout configCheckout = ConfigCheckout.config()
+				.checkPagos().build();
+		
+		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh, configCheckout);
 		dCtxPago.getDataPedido().setDataBag(dataBag);
 		return dCtxPago;
 	}	

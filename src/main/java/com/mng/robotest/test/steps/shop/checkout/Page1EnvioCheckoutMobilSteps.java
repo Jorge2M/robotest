@@ -1,13 +1,12 @@
 package com.mng.robotest.test.steps.shop.checkout;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataCtxPago;
@@ -18,40 +17,29 @@ import com.mng.robotest.test.pageobject.shop.checkout.envio.ModalDroppoints;
 import com.mng.robotest.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.test.steps.shop.checkout.envio.ModalDroppointsSteps;
 
-/**
- * @author jorge.munoz
-/* Pasos/Validaciones correspondientes a la página-1 del checkout (1. Envío) en móvil-web
- */
 
-public class Page1EnvioCheckoutMobilSteps {
+public class Page1EnvioCheckoutMobilSteps extends StepBase {
 
-	private final Page1EnvioCheckoutMobil page1EnvioCheckoutMobil;
-	public static ModalDroppointsSteps modalDroppoints;
+	private final Page1EnvioCheckoutMobil page1EnvioCheckoutMobil = new Page1EnvioCheckoutMobil(driver);
+	public static ModalDroppointsSteps modalDroppointsSteps = new ModalDroppointsSteps();
 	
-	private final WebDriver driver;
-	
-	public Page1EnvioCheckoutMobilSteps(WebDriver driver) {
-		this.page1EnvioCheckoutMobil = new Page1EnvioCheckoutMobil(driver);
-		this.driver = driver;
-	}
-
 	@Validation
 	public ChecksTM validateIsPage(boolean userLogged) {
 		ChecksTM checks = ChecksTM.getNew();
-			checks.add(
+		checks.add(
 			"Aparece la página correspondiente al paso-1",
 			page1EnvioCheckoutMobil.isPageUntil(1), State.Warn);
-			//WebdrvWrapp.isElementPresent(driver, By.xpath("//h2[@data-toggle='step1']")), State.Warn);
-			checks.add(
+		
+		checks.add(
 			"Aparece el botón de introducción del código promocional",
 			page1EnvioCheckoutMobil.isVisibleInputCodigoPromoUntil(0), State.Defect);
-			if (!userLogged) {
-				checks.add(
+		
+		if (!userLogged) {
+			checks.add(
 				"Aparece seleccionado el método de envío \"Estándar\"",
 				page1EnvioCheckoutMobil.isPresentEnvioStandard(), State.Warn);
-			}
-			
-			return checks;
+		}
+		return checks;
 	}
 
 	@SuppressWarnings("static-access")
@@ -62,16 +50,17 @@ public class Page1EnvioCheckoutMobilSteps {
 			TipoTransporte tipoTransporte, @SuppressWarnings("unused") String nombrePago, DataCtxPago dCtxPago) throws Exception {
 		page1EnvioCheckoutMobil.selectMetodoAfterPositioningIn1Envio(tipoTransporte);
 		if (!tipoTransporte.isEntregaDomicilio()) {
-			if (ModalDroppoints.isErrorMessageVisibleUntil(driver)) {
-				ModalDroppoints.searchAgainByUserCp(dCtxPago.getDatosRegistro().get("cfCp"), driver);
+			ModalDroppoints modalDroppoints = new ModalDroppoints();
+			if (modalDroppoints.isErrorMessageVisibleUntil()) {
+				modalDroppoints.searchAgainByUserCp(dCtxPago.getDatosRegistro().get("cfCp"));
 			}
 		}
 
 		validaBlockSelected(tipoTransporte, 3);
 		if (tipoTransporte.isEntregaDomicilio()) {
-			modalDroppoints.validaIsNotVisible(Channel.mobile, driver);
+			modalDroppointsSteps.validaIsNotVisible();
 		} else {
-			modalDroppoints.validaIsVisible(Channel.mobile, driver);
+			modalDroppointsSteps.validaIsVisible();
 		}
 	}
 	

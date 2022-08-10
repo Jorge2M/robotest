@@ -1,19 +1,15 @@
 package com.mng.robotest.test.steps.shop.checkout.paymaya;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.paymaya.PageResultPaymaya;
 
-public class PageResultPaymayaSteps {
 
-	private final PageResultPaymaya pageResultPaymaya;
-	
-	public PageResultPaymayaSteps(WebDriver driver) {
-		this.pageResultPaymaya = new PageResultPaymaya(driver);
-	}
+public class PageResultPaymayaSteps extends StepBase {
+
+	private final PageResultPaymaya pageResultPaymaya = new PageResultPaymaya();
 	
 	@Validation (
 		description="Aparece la página de introducción resultado de Paymaya",
