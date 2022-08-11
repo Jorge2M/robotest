@@ -26,8 +26,7 @@ public class SecBillpay extends PageBase {
 	private static final String XPathRadioAceptoMobil = "//div[@class[contains(.,'contenidoTarjetaBillpay')]]//div[@class[contains(.,'custom-check')]]"; 
 	private static final String XPathRadioAceptoDesktop = "//div[@class='legalText']/input[@type='checkbox']";			
    
-	public SecBillpay(Channel channel, WebDriver driver) {
-		super(driver);
+	public SecBillpay(Channel channel) {
 		this.channel = channel;
 	}
 	

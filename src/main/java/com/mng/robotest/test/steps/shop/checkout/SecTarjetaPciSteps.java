@@ -24,7 +24,7 @@ public class SecTarjetaPciSteps {
 		this.driver = driver;
 		this.channel = channel;
 		this.app = app;
-		PageCheckoutWrapper pageCheckoutSteps = new PageCheckoutWrapper(channel, app, driver);
+		PageCheckoutWrapper pageCheckoutSteps = new PageCheckoutWrapper(channel, app);
 		this.secTarjetaPci = pageCheckoutSteps.getSecTarjetaPci();
 	}
 	

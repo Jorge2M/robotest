@@ -105,12 +105,12 @@ public class Page1DktopCheckout extends PageBase {
 	public Page1DktopCheckout(Channel channel, AppEcom app) {
 		this.channel = channel;
 		this.app = app;
-		this.secDireccionEnvio = new SecDireccionEnvioDesktop(driver);
-		this.secStoreCredit = new SecStoreCredit(driver);
+		this.secDireccionEnvio = new SecDireccionEnvioDesktop();
+		this.secStoreCredit = new SecStoreCredit();
 		this.secTMango = new SecTMango(channel, driver);
-		this.secBillpay = new SecBillpay(channel, driver);
-		this.secEps = new SecEps(driver);
-		this.modalAvisoCambioPais = new ModalAvisoCambioPais(driver);
+		this.secBillpay = new SecBillpay(channel);
+		this.secEps = new SecEps();
+		this.modalAvisoCambioPais = new ModalAvisoCambioPais();
 	}
 	
 	public SecStoreCredit getSecStoreCredit() {
@@ -171,7 +171,7 @@ public class Page1DktopCheckout extends PageBase {
 		if (metodoPago.compareTo("KLARNA")==0) {
 			return "//div[@class[contains(.,'cuadroPago')]]/input[@value='klarna' and @type='radio']";
 		}
-		String metodoPagoClick = (new PageCheckoutWrapper(channel, app, driver)).getMethodInputValue(metodoPago);
+		String metodoPagoClick = (new PageCheckoutWrapper(channel, app)).getMethodInputValue(metodoPago);
 		return (XPATH_RADIO_PAGO_WITH_TAG.replace(TAG_METODO_PAGO, metodoPagoClick));
 	}
 
@@ -339,7 +339,7 @@ public class Page1DktopCheckout extends PageBase {
 	 * Realizamos las acciones necesarias para forzar el click sobre un método de pago y esperamos a que desaparezcan las capas de loading
 	 */
 	public void forceClickMetodoPagoAndWait(String metodoPago, Pais pais) throws Exception {
-		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app, driver);
+		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app);
 		despliegaMetodosPago();
 		pageCheckoutWrapper.waitUntilNoDivLoading(2);
 		moveToMetodosPago();
@@ -402,7 +402,7 @@ public class Page1DktopCheckout extends PageBase {
 	}	
 	
 	public String getPrecioTotalFromResumen() throws Exception {
-		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app, driver);
+		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app);
 		String precioTotal = pageCheckoutWrapper.formateaPrecioTotal(XPATH_PRECIO_TOTAL);
 		return (ImporteScreen.normalizeImportFromScreen(precioTotal));
 	}
@@ -449,7 +449,7 @@ public class Page1DktopCheckout extends PageBase {
 			}
 			
 			PreciosArticulo preciosArticuloScreen = getPreciosArticuloResumen(lineaArticulo);
-			PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app, driver);
+			PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app);
 			if (articulo.getValePais()!=null) {
 				if (!pageCheckoutWrapper.validateDiscountOk(preciosArticuloScreen, descuento)) {
 					return false;
@@ -466,7 +466,7 @@ public class Page1DktopCheckout extends PageBase {
 	}
 	
 	public String getPrecioSubTotalFromResumen() throws Exception {
-		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app, driver);
+		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app);
 		return pageCheckoutWrapper.formateaPrecioTotal(XPATH_PRECIO_SUBTOTAL);
 	}
 	

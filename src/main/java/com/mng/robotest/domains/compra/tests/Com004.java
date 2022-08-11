@@ -84,7 +84,7 @@ public class Com004 extends TestBase {
 	}	
 	
 	private void checkoutChequeRegalo() throws Exception {
-		new BuilderCheckout(dataTest, dataPago, driver)
+		new BuilderCheckout(dataTest, dataPago)
 			.pago(dataTest.pais.getPago("VISA"))
 			.build()
 			.checkout(From.IDENTIFICATION);

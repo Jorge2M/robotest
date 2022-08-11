@@ -56,7 +56,7 @@ public class EgyptOrderTest implements Serializable {
 		secBolsaSteps.altaListaArticulosEnBolsa(Arrays.asList(article), dataBag);
 		
 		DataCtxPago dCtxPago = makeDataPayment(dCtxSh, dataBag);
-		dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago, driver)
+		dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago)
 			.pago(dCtxSh.pais.getPago("VISA"))
 			.egyptCity(egyptCity)
 			.build()

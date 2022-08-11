@@ -59,7 +59,7 @@ public class CompraEgoitz {
 		
 		dCtxPago.getDataPedido().setDataBag(dataBag);
 		
-		new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver)
+		new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago)
 			.pago(dCtxSh.pais.getPago("PAYPAL"))
 			.build()
 			.checkout(From.BOLSA);

@@ -17,7 +17,6 @@ public class ModalDroppointsSteps extends PageBase {
 	private final SecSelectDPointSteps secSelectDPointSteps = new SecSelectDPointSteps();
 	private final SecConfirmDatosSteps secConfirmDatosSteps = new SecConfirmDatosSteps();
 	
-	@SuppressWarnings("static-access")
 	@Validation
 	public ChecksTM validaIsVisible() {
 		ChecksTM checks = ChecksTM.getNew();
@@ -44,7 +43,6 @@ public class ModalDroppointsSteps extends PageBase {
 		return (!modalDroppoints.isVisible());
 	}
 	
-	@SuppressWarnings("static-access")
 	public void fluxSelectDroppoint(DataCtxPago dCtxPago, DataCtxShop dCtxSh) throws Exception {
 		Pago pago = dCtxPago.getDataPedido().getPago();
 		DataSearchDeliveryPoint dataSearchDp = DataSearchDeliveryPoint.getInstance(pago, dCtxSh.appE, dCtxSh.pais);

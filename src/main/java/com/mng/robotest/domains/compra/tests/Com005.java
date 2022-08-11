@@ -34,7 +34,7 @@ public class Com005 extends TestBase {
 	private DataCtxPago fromPrehomeToCheckout() throws Exception {
 		ConfigCheckout configCheckout = ConfigCheckout.config().build();
 		DataCtxPago dCtxPago = new DataCtxPago(dataTest, configCheckout);
-		dCtxPago = new BuilderCheckout(dataTest, dCtxPago, driver)
+		dCtxPago = new BuilderCheckout(dataTest, dCtxPago)
 			.build()
 			.checkout(From.PREHOME);
 		return dCtxPago;

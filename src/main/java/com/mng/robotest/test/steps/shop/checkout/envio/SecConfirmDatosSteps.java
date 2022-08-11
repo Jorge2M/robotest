@@ -59,7 +59,7 @@ public class SecConfirmDatosSteps extends StepBase {
 			modalDroppoints.isInvisibleUntil(maxSeconds), State.Warn);
 		
 		DataDeliveryPoint dataDp = dataPedido.getDataDeliveryPoint();
-		String textDireccionEnvioCompleta = new PageCheckoutWrapper(channel, app, driver).getTextDireccionEnvioCompleta();
+		String textDireccionEnvioCompleta = new PageCheckoutWrapper(channel, app).getTextDireccionEnvioCompleta();
 		dataPedido.setDireccionEnvio(textDireccionEnvioCompleta);
 		checks.add(
 			"Se modifica la dirección de envío por la del Delivery Point (" + dataDp.getDireccion() + ")",

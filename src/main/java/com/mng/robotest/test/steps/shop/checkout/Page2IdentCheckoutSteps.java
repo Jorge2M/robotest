@@ -1,6 +1,5 @@
 package com.mng.robotest.test.steps.shop.checkout;
 
-import org.openqa.selenium.WebDriver;
 import java.util.Map;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -11,6 +10,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.factoryes.entities.EgyptCity;
@@ -18,22 +18,19 @@ import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.pageobject.shop.checkout.Page2IdentCheckout;
 
 
-public class Page2IdentCheckoutSteps {
+public class Page2IdentCheckoutSteps extends StepBase {
 	
 	private final Page2IdentCheckout page2IdentCheckout;
 	private final Channel channel;
-	private final WebDriver driver;
 	
-	public Page2IdentCheckoutSteps(Channel channel, Pais pais, WebDriver driver) {
+	public Page2IdentCheckoutSteps(Channel channel, Pais pais) {
 		this.page2IdentCheckout = new Page2IdentCheckout(pais);
 		this.channel = channel;
-		this.driver = driver;
 	}
 	
-	public Page2IdentCheckoutSteps(Channel channel, Pais pais, EgyptCity egyptCity, WebDriver driver) {
-		this.page2IdentCheckout = new Page2IdentCheckout(pais, egyptCity, driver);
+	public Page2IdentCheckoutSteps(Channel channel, Pais pais, EgyptCity egyptCity) {
+		this.page2IdentCheckout = new Page2IdentCheckout(pais, egyptCity);
 		this.channel = channel;
-		this.driver = driver;
 	}
 	
 	@Validation
@@ -84,7 +81,7 @@ public class Page2IdentCheckoutSteps {
 	throws Exception {
 		int maxSecondsToWait = 20;
 		page2IdentCheckout.clickBotonContinuarAndWait(maxSecondsToWait);   
-		new PageCheckoutWrapperSteps(channel, app, driver).validateIsFirstPage(userRegistered, dataBag);
+		new PageCheckoutWrapperSteps(channel, app).validateIsFirstPage(userRegistered, dataBag);
 	}
 	
 	@Step (

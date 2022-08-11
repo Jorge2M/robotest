@@ -22,8 +22,7 @@ public class PageResultPago extends PageBase {
 	public static final String XPathButtonMisCompras = "//button[@data-testid[contains(.,'goToMyPurchases')]]";
 	public static final String XPathBlockNewLoyaltyPoints = "//*[@data-testid[contains(.,'loyaltyPointsBlock')]]";
 
-	public PageResultPago(TypePago typePago, Channel channel, WebDriver driver) {
-		super(driver);
+	public PageResultPago(TypePago typePago, Channel channel) {
 		this.channel = channel;
 	}
 

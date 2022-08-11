@@ -299,7 +299,7 @@ public class SecBolsaSteps {
 
 	public void validaSelectButtonComprar(DataBag dataBag, DataCtxShop dCtxSh) throws Exception {
 		if (dCtxSh.userRegistered) {
-			new PageCheckoutWrapperSteps(dCtxSh.channel, dCtxSh.appE, driver).validateIsFirstPage(dCtxSh.userRegistered, dataBag);
+			new PageCheckoutWrapperSteps(dCtxSh.channel, dCtxSh.appE).validateIsFirstPage(dCtxSh.userRegistered, dataBag);
 		} else {
 			int maxSeconds = 5;
 			new Page1IdentCheckoutSteps().validateIsPage(maxSeconds);

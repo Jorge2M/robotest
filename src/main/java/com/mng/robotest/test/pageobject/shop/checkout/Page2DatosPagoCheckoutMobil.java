@@ -55,12 +55,11 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	//secciones de pagos (que se pueden mostrar/ocultar) disponibles en países como México
 	private static final String XPathSectionsPagosMobil = "//*[@class[contains(.,'group-card-js')]]"; 
 	
-	public Page2DatosPagoCheckoutMobil(Channel channel, AppEcom app, WebDriver driver) {
-		super(driver);
+	public Page2DatosPagoCheckoutMobil(Channel channel, AppEcom app) {
 		this.channel = channel;
 		this.app = app;
 		this.secTMango = new SecTMango(channel, driver);
-		this.secBillpay = new SecBillpay(channel, driver);
+		this.secBillpay = new SecBillpay(channel);
 	}
 	
 	private String getXPathBlockTarjetaGuardada(String metodoPago) {
@@ -80,7 +79,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	
 	private String getXPathRadioPago(String nombrePago) {
 		if (nombrePago.contains("mercadopago")) {
-			PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app, driver);
+			PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app);
 			String methodRadioName = pageCheckoutWrapper.getMethodInputValue(nombrePago);
 			return ("//div[@data-custom-radio-id='" + methodRadioName + "']"); 
 		}
@@ -190,7 +189,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		int i=0;
 		while (!isPageUntil(1) && i<3) {
 			i+=1;
-			Page1EnvioCheckoutMobil page1 = new Page1EnvioCheckoutMobil(driver);
+			Page1EnvioCheckoutMobil page1 = new Page1EnvioCheckoutMobil();
 			if (page1.isPageUntil(0)) {
 				page1.clickContinuarAndWaitPage2(app);
 			} else {
@@ -207,7 +206,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		despliegaMetodosPago();
 		moveToFirstMetodoPagoLine();
 		
-		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app, driver);
+		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app);
 		pageCheckoutWrapper.waitUntilNoDivLoading(2);
 		clickMetodoPagoAndWait(pais, nombrePago);
 		pageCheckoutWrapper.waitUntilNoDivLoading(10);
@@ -371,7 +370,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	
 	public String getPrecioTotalFromResumen() throws Exception {
 		String precioTotal = "";
-		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app, driver);
+		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app);
 		precioTotal = pageCheckoutWrapper.formateaPrecioTotal(XPathPrecioTotal);
 //		if (precioTotal.indexOf("0")==0) {
 //			//Si el total es 0 podríamos estar en el caso de saldo en cuenta (el importe total = importe del descuento)
@@ -383,7 +382,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	
 	public String getPrecioTotalSinSaldoEnCuenta() throws Exception {
 		String precioTotal = "";
-		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app, driver);
+		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app);
 		precioTotal = pageCheckoutWrapper.formateaPrecioTotal(XPathPrecioTotal);
 		if (precioTotal.indexOf("0")==0) {
 			//Si el total es 0 podríamos estar en el caso de saldo en cuenta (el importe total = importe del descuento)

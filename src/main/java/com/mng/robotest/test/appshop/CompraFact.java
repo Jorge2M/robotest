@@ -117,7 +117,7 @@ public class CompraFact implements Serializable {
 		if (dCtxSh.userRegistered) {
 			UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
 			dCtxSh.userConnected = userShop.user;
-			dCtxSh.passwordUser = userShop.password;;
+			dCtxSh.passwordUser = userShop.password;
 		}
 		
 		//TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
@@ -146,7 +146,7 @@ public class CompraFact implements Serializable {
 		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh, configCheckout);
 		
 		dCtxPago.getDataPedido().setDataBag(dataBag);
-		dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago, driver)
+		dCtxPago = new BuilderCheckout(dCtxSh, dCtxPago)
 			.pago(this.pago)
 			.build()
 			.checkout(From.BOLSA);

@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
@@ -23,6 +22,7 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.AccesoEmpl;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pago;
@@ -58,11 +58,10 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 import com.mng.robotest.test.utils.PaisGetter;
 import com.mng.robotest.test.utils.UtilsTest;
 
-public class CheckoutFlow {
+public class CheckoutFlow extends StepBase {
 
 	public enum From { PREHOME, BOLSA, IDENTIFICATION, CHECKOUT, METODOSPAGO }
 	
-	private final WebDriver driver;
 	private final DataCtxShop dCtxSh;
 	private final DataCtxPago dCtxPago;
 	private final Pago pago;
@@ -74,14 +73,12 @@ public class CheckoutFlow {
 	private final PageCheckoutWrapperSteps pageCheckoutWrapperSteps;
 	
 	private CheckoutFlow(
-			WebDriver driver, 
 			DataCtxShop dCtxSh, 
 			DataCtxPago dCtxPago, 
 			Pago pago, 
 			List<GarmentCatalog> listArticles, 
 			List<Pais> finalCountrys,
 			EgyptCity egyptCity) {
-		this.driver = driver;
 		this.finalCountrys = finalCountrys;
 		this.listArticles = listArticles;
 		this.dCtxSh = dCtxSh;
@@ -89,7 +86,7 @@ public class CheckoutFlow {
 		this.pago = pago;
 		this.egyptCity = egyptCity;
 		this.secBolsaSteps = new SecBolsaSteps(dCtxSh);
-		this.pageCheckoutWrapperSteps = new PageCheckoutWrapperSteps(dCtxSh.channel, dCtxSh.appE, driver);
+		this.pageCheckoutWrapperSteps = new PageCheckoutWrapperSteps(dCtxSh.channel, dCtxSh.appE);
 	}
 	
 	public DataCtxPago checkout(From from) throws Exception {
@@ -146,10 +143,6 @@ public class CheckoutFlow {
 		}
 	}
 	
-	/**
-	 * Testea desde la página inicial de identificación hasta la 1a página de checkout 
-	 */
-	@SuppressWarnings("static-access")
 	private void testFromIdentToCheckoutIni() throws Exception {
 		boolean validaCharNoLatinos = (dCtxSh.pais!=null && dCtxSh.pais.getDireccharnolatinos().check() && dCtxSh.appE!=AppEcom.votf);
 		DataBag dataBag = dCtxPago.getDataPedido().getDataBag();
@@ -158,7 +151,7 @@ public class CheckoutFlow {
 
 		Page1IdentCheckoutSteps page1IdentCheckoutSteps = new Page1IdentCheckoutSteps();
 		page1IdentCheckoutSteps.inputEmailAndContinue(emailCheckout, dCtxPago.getFTCkout().emailExists, dCtxSh.userRegistered, dCtxSh.pais);
-		Page2IdentCheckoutSteps page2IdentCheckoutSteps = new Page2IdentCheckoutSteps(dCtxSh.channel, dCtxSh.pais, egyptCity, driver);
+		Page2IdentCheckoutSteps page2IdentCheckoutSteps = new Page2IdentCheckoutSteps(dCtxSh.channel, dCtxSh.pais, egyptCity);
 		boolean emailOk = page2IdentCheckoutSteps.checkEmail(emailCheckout);
 		if (!emailOk) {
 			//Existe un problema según el cual en ocasiones no se propaga el email desde la página de identificación
@@ -193,7 +186,7 @@ public class CheckoutFlow {
 			} else {
 				if (dCtxSh.vale!=null) {
 					if (dCtxSh.channel==Channel.mobile) {
-						(new Page1EnvioCheckoutMobil(driver)).inputCodigoPromo(dCtxSh.vale.getCodigoVale());
+						new Page1EnvioCheckoutMobil().inputCodigoPromo(dCtxSh.vale.getCodigoVale());
 					} else {
 						testValeDescuento(dCtxSh.vale, dataBag);
 					}
@@ -258,7 +251,7 @@ public class CheckoutFlow {
 						dataDirFactura.put(DataDirType.email, "crp1974@hotmail.com");
 						dataDirFactura.put(DataDirType.telefono, "665015122");
 						dataDirFactura.put(DataDirType.poblacion, "PEREPAU");
-						new PageCheckoutWrapperSteps(dCtxSh.channel, dCtxSh.appE, driver).getModalDirecFacturaSteps()
+						new PageCheckoutWrapperSteps(dCtxSh.channel, dCtxSh.appE).getModalDirecFacturaSteps()
 							.inputDataAndActualizar(dataDirFactura);
 					}
 					
@@ -490,7 +483,6 @@ public class CheckoutFlow {
 	}
 	
 	public static class BuilderCheckout {
-		private final WebDriver driver;
 		private final Channel channel;
 		private final AppEcom app;
 		private String user = "";
@@ -511,13 +503,11 @@ public class CheckoutFlow {
 		private boolean isEmpl = false;
 		private DataCtxPago dCtxPago = null;
 		
-		public BuilderCheckout(Channel channel, AppEcom app, WebDriver driver) {
-			this.driver = driver;
+		public BuilderCheckout(Channel channel, AppEcom app) {
 			this.channel = channel;
 			this.app = app;
 		}
-		public BuilderCheckout(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
-			this.driver = driver;
+		public BuilderCheckout(DataCtxShop dCtxSh, DataCtxPago dCtxPago) {
 			this.channel = dCtxSh.channel;
 			this.app = dCtxSh.appE;
 			this.user = dCtxSh.userConnected;
@@ -615,10 +605,9 @@ public class CheckoutFlow {
 		
 		public CheckoutFlow build() throws Exception {
 			if (listArticles==null) {
-				listArticles = UtilsTest.getArticlesForTestDependingVale(getdCtxSh(), 2, driver);
+				listArticles = UtilsTest.getArticlesForTestDependingVale(getdCtxSh(), 2, TestMaker.getDriverTestCase());
 			}
 			return new CheckoutFlow(
-					driver, 
 					getdCtxSh(), 
 					getDataCtxPago(), 
 					pago, 

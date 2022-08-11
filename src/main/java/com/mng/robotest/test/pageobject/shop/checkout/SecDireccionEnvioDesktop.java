@@ -56,10 +56,6 @@ public class SecDireccionEnvioDesktop extends PageBase {
 		return state(State.Visible, bySectionNew).check();
 	}
 	
-	public SecDireccionEnvioDesktop(WebDriver driver) {
-		super(driver);
-	}
-	
 	public void clickEditDireccion() {
 		waitForPageLoaded(driver); //For avoid StaleElementReferenceException
 		click(By.xpath(getXPath(XPath.EDIT_DIRECCION_BUTTON))).exec();

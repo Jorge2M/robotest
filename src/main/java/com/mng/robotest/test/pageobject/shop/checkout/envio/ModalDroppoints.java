@@ -2,7 +2,9 @@ package com.mng.robotest.test.pageobject.shop.checkout.envio;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.checkout.envio.SecSelectDPoint.TypeDeliveryPoint;
 import com.mng.robotest.test.steps.shop.checkout.envio.DataDeliveryPoint;
@@ -37,21 +39,29 @@ public class ModalDroppoints extends PageBase {
 	}
 	
 	public boolean isVisibleUntil(int maxSeconds) {
+		//TODO hay un problema muy extraño que hace que se produzcan problemas en esta clase cuando
+		//se invoca desde la factoría de COM010. Es como si cuando se crea el PageObjTM se cruzase 
+		//el WebDriver de los diferentes hilos de ejecución.
+		WebDriver driver = TestMaker.getDriverTestCase();
+		
 		String xpathPanelGeneral = getXPathPanelGeneral();
-		return (state(Visible, By.xpath(xpathPanelGeneral)).wait(maxSeconds).check());
+		return (state(Visible, By.xpath(xpathPanelGeneral), driver).wait(maxSeconds).check());
 	}
 	
 	public boolean isInvisibleUntil(int maxSeconds) {
 		String xpathPanelGeneral = getXPathPanelGeneral();
-		return (state(Invisible, By.xpath(xpathPanelGeneral)).wait(maxSeconds).check());
+		WebDriver driver = TestMaker.getDriverTestCase();
+		return (state(Invisible, By.xpath(xpathPanelGeneral), driver).wait(maxSeconds).check());
 	}
 	
 	public boolean isInvisibleCargandoMsgUntil(int maxSeconds) {
-		return (state(Invisible, By.xpath(XPATH_MSG_CARGANDO)).wait(maxSeconds).check());
+		WebDriver driver = TestMaker.getDriverTestCase();
+		return (state(Invisible, By.xpath(XPATH_MSG_CARGANDO), driver).wait(maxSeconds).check());
 	}
 	
 	public boolean isErrorMessageVisibleUntil() {
-		return (state(Visible, By.xpath(XPATH_ERROR_MESSAGE)).wait(2).check());
+		WebDriver driver = TestMaker.getDriverTestCase();
+		return (state(Visible, By.xpath(XPATH_ERROR_MESSAGE), driver).wait(2).check());
 	}
 	
 	public void sendProvincia(String provincia) {
@@ -84,6 +94,7 @@ public class ModalDroppoints extends PageBase {
 	}
 
 	public void searchAgainByUserCp(String cp) {
+		WebDriver driver = TestMaker.getDriverTestCase();
 		driver.findElement(By.xpath(XPATH_CP_INPUT_BOX)).clear();
 		driver.findElement(By.xpath(XPATH_CP_INPUT_BOX)).sendKeys(cp);
 		driver.findElement(By.xpath(XPATH_CP_INPUT_BOX)).sendKeys(Keys.ENTER);

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -22,15 +21,9 @@ import com.mng.robotest.test.utils.ImporteScreen;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-@SuppressWarnings({"static-access"})
-/**
- * Clase que define la automatización de las diferentes funcionalidades de la página de "CHECKOUT"
- * @author jorge.munoz 
- */
 public class PageCheckoutWrapper extends PageBase {
  
 	private final Channel channel;
-	private final AppEcom app;
 	
 	private final Page1DktopCheckout page1DktopCheckout;
 	private final Page1EnvioCheckoutMobil page1MobilCheckout;
@@ -41,14 +34,12 @@ public class PageCheckoutWrapper extends PageBase {
 	//Abarca cualquier div de loading
 	private static final String XPathDivLoading = "//div[@class[contains(.,'panel_loading')] or @class[contains(.,'container-full-centered-loading')] or @class[contains(.,'loading-panel')]]";
 	
-	public PageCheckoutWrapper(Channel channel, AppEcom app, WebDriver driver) {
-		super(driver);
+	public PageCheckoutWrapper(Channel channel, AppEcom app) {
 		this.channel = channel;
-		this.app = app;
 		this.page1DktopCheckout = new Page1DktopCheckout(channel, app);
-		this.page1MobilCheckout = new Page1EnvioCheckoutMobil(driver);
-		this.page2MobilCheckout = new Page2DatosPagoCheckoutMobil(channel, app, driver);
-		this.modalAvisoCambioPais = new ModalAvisoCambioPais(driver);
+		this.page1MobilCheckout = new Page1EnvioCheckoutMobil();
+		this.page2MobilCheckout = new Page2DatosPagoCheckoutMobil(channel, app);
+		this.modalAvisoCambioPais = new ModalAvisoCambioPais();
 		this.secTarjetaPci = SecTarjetaPci.makeSecTarjetaPci(channel, driver);
 	}
 
@@ -493,10 +484,10 @@ public class PageCheckoutWrapper extends PageBase {
 	}
 	
 	public void selectBancoEPS(String nombreBanco) {
-		(new SecEps(driver)).selectBanco(nombreBanco);
+		new SecEps().selectBanco(nombreBanco);
 	}
 
 	public boolean isBancoSeleccionado(String nombreBanco) {
-		return (new SecEps(driver)).isBancoSeleccionado(nombreBanco);
+		return new SecEps().isBancoSeleccionado(nombreBanco);
 	}
 }

@@ -1,27 +1,25 @@
 package com.mng.robotest.test.steps.shop.checkout;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.checkout.ModalAvisoCambioPais;
 import com.mng.robotest.test.pageobject.shop.checkout.PageCheckoutWrapper;
 
-public class ModalAvisoCambioPaisSteps {
+
+public class ModalAvisoCambioPaisSteps extends StepBase {
 
 	private final ModalAvisoCambioPais modalAvisoCambioPais;
-	private final WebDriver driver;
 	private final AppEcom app;
 	
-	public ModalAvisoCambioPaisSteps(AppEcom app, WebDriver driver) {
-		this.modalAvisoCambioPais = new ModalAvisoCambioPais(driver);
+	public ModalAvisoCambioPaisSteps(AppEcom app) {
+		this.modalAvisoCambioPais = new ModalAvisoCambioPais();
 		this.app = app;
-		this.driver = driver;
 	}
 	
 	@Step (
@@ -40,7 +38,7 @@ public class ModalAvisoCambioPaisSteps {
 			"Desaparece el modal de aviso de cambio de país (lo esperamos hasta " + maxSeconds + " segundos)",
 			modalAvisoCambioPais.isInvisibleUntil(maxSeconds), State.Defect);		
 	 	
-	 	PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(Channel.desktop, app, driver);
+	 	PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(Channel.desktop, app);
 	 	checks.add(
 			"En la dirección de envió aparece el país " + paisEnvio.getNombre_pais(),
 			pageCheckoutWrapper.direcEnvioContainsPais(paisEnvio.getNombre_pais()), State.Defect);   

@@ -145,7 +145,7 @@ public class Reembolsos {
 		Pago pagoStoreCredit = dCtxSh.pais.getPago("STORECREDIT");
 		dCtxPago.getDataPedido().setDataBag(dataBag);
 		
-		dCtxPago = new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver)
+		dCtxPago = new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago)
 			.pago(pagoStoreCredit)
 			.build()
 			.checkout(From.BOLSA);

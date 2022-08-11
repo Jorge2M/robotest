@@ -24,8 +24,8 @@ public abstract class PagoSteps extends StepBase {
 	public PagoSteps(DataCtxShop dCtxSh, DataCtxPago dCtxPago) throws Exception {
 		this.dCtxSh = dCtxSh;
 		this.dCtxPago = dCtxPago;
-		this.checkoutFlow = new BuilderCheckout(dCtxSh, dCtxPago, driver).build();
-		this.pageCheckoutWrapperSteps = new PageCheckoutWrapperSteps(dCtxSh.channel, dCtxSh.appE, driver);
+		this.checkoutFlow = new BuilderCheckout(dCtxSh, dCtxPago).build();
+		this.pageCheckoutWrapperSteps = new PageCheckoutWrapperSteps(dCtxSh.channel, dCtxSh.appE);
 	}
 
 	public boolean isAvailableExecPay() {

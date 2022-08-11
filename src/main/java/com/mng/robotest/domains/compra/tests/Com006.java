@@ -36,7 +36,7 @@ public class Com006 extends TestBase {
 	}
 
 	private void fromPrehomeToCheckout() throws Exception {
-		new BuilderCheckout(dataTest, dataPago, driver)
+		new BuilderCheckout(dataTest, dataPago)
 			.build()
 			.checkout(From.PREHOME);
 	}

@@ -2,7 +2,6 @@ package com.mng.robotest.test.steps.shop.checkout;
 
 import java.util.List;
 import java.util.StringTokenizer;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -14,6 +13,7 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.AccesoEmpl;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
@@ -28,8 +28,7 @@ import com.mng.robotest.test.steps.shop.checkout.envio.SecMetodoEnvioDesktopStep
 import com.mng.robotest.test.steps.shop.checkout.ideal.SecIdealSteps;
 import com.mng.robotest.test.steps.shop.checkout.tmango.SecTMangoSteps;
 
-@SuppressWarnings({"static-access"})
-public class PageCheckoutWrapperSteps {
+public class PageCheckoutWrapperSteps extends StepBase {
 
 	private final PageCheckoutWrapper pageCheckoutWrapper; 
 	
@@ -46,26 +45,24 @@ public class PageCheckoutWrapperSteps {
 	private final SecIdealSteps secIdealSteps;
 	private final SecTarjetaPciSteps secTarjetaPciSteps;
 	
-	private final WebDriver driver;
 	private final Channel channel;
 	private final AppEcom app;
 
 
-	public PageCheckoutWrapperSteps(Channel channel, AppEcom app, WebDriver driver) {
-		this.driver = driver;
+	public PageCheckoutWrapperSteps(Channel channel, AppEcom app) {
 		this.channel = channel;
 		this.app = app;
 		
-		this.pageCheckoutWrapper = new PageCheckoutWrapper(channel, app, driver);
+		this.pageCheckoutWrapper = new PageCheckoutWrapper(channel, app);
 		
-		this.modalDirecEnvioSteps = new ModalDirecEnvioSteps(channel, app, driver);
+		this.modalDirecEnvioSteps = new ModalDirecEnvioSteps(channel, app);
 		this.secMetodoEnvioDesktopSteps = new SecMetodoEnvioDesktopSteps();
 		this.secStoreCreditSteps = new SecStoreCreditSteps(channel, app, driver);
 		this.secTMangoSteps = new SecTMangoSteps(channel, driver);
 		this.secKrediKartiSteps = new SecKrediKartiSteps(channel, driver); 
-		this.secBillpaySteps = new SecBillpaySteps(channel, driver);
-		this.modalDirecFacturaSteps = new ModalDirecFacturaSteps(channel, app, driver);
-		this.modalAvisoCambioPaisSteps = new ModalAvisoCambioPaisSteps(app, driver);
+		this.secBillpaySteps = new SecBillpaySteps(channel);
+		this.modalDirecFacturaSteps = new ModalDirecFacturaSteps(channel, app);
+		this.modalAvisoCambioPaisSteps = new ModalAvisoCambioPaisSteps(app);
 		this.page1DktopCheckSteps = new Page1DktopCheckoutSteps(channel, app);
 		this.page1MobilCheckSteps = new Page1EnvioCheckoutMobilSteps();
 		this.secIdealSteps = new SecIdealSteps(channel, driver);

@@ -14,10 +14,6 @@ public class SecEps extends PageBase {
 	private static final String XPathInputBanco = "//div[@id='eps-bank-selector']";
 	private static final String iniXPathSelectOptionBanco = XPathInputBanco + "//option[text()[contains(.,'";
 	
-	public SecEps(WebDriver driver) {
-		super(driver);
-	}
-	
 	private String getXPathSelectOptionBanco(String banco) {
 		return iniXPathSelectOptionBanco + banco + "')]]";
 	}

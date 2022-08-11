@@ -24,7 +24,7 @@ public class PagePasarelaOtrasSteps {
 		}
 	   	checks.add(
 			"No se trata de la página de precompra (no aparece los logos de formas de pago)",
-			new PageCheckoutWrapper(channel, app, driver).isPresentMetodosPago(), State.Defect);
+			new PageCheckoutWrapper(channel, app).isPresentMetodosPago(), State.Defect);
 	   	
 	   	return checks;
 	}

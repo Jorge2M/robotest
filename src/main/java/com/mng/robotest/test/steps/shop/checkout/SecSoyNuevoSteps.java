@@ -33,7 +33,7 @@ public class SecSoyNuevoSteps extends StepBase {
 		secSoyNuevo.inputEmail(email);
 		secSoyNuevo.clickContinue();
 
-		Page2IdentCheckoutSteps page2IdentCheckoutSteps = new Page2IdentCheckoutSteps(channel, pais, driver);
+		Page2IdentCheckoutSteps page2IdentCheckoutSteps = new Page2IdentCheckoutSteps(channel, pais);
 		page2IdentCheckoutSteps.validateIsPage(emailExistsYet, 2);
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.CookiesAllowed,

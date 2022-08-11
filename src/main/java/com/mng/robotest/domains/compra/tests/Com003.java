@@ -20,7 +20,7 @@ public class Com003 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		DataCtxPago dCtxPago = new DataCtxPago(dataTest, configCheckout);
-		dCtxPago = new BuilderCheckout(dataTest, dCtxPago, driver)
+		dCtxPago = new BuilderCheckout(dataTest, dCtxPago)
 			.finalCountrys(Arrays.asList(PaisGetter.get(PaisShop.FRANCE)))
 			.build()
 			.checkout(From.PREHOME);		

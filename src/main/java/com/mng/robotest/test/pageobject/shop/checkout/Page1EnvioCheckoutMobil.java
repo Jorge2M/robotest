@@ -3,7 +3,6 @@ package com.mng.robotest.test.pageobject.shop.checkout;
 import java.util.StringTokenizer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -14,6 +13,7 @@ import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.test.utils.ImporteScreen;
+
 
 public class Page1EnvioCheckoutMobil extends PageBase {
 	
@@ -36,11 +36,6 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	private static final String XPathBotonContinuar = "//button[@id[contains(.,'complete-step1')]]";
 	private static final String XPathErrorPromo = "//div[@data-component-id='error-voucherCode']";
 	private static final String XPathEnvioStandard = "//div[@data-analytics-id='standard' and @class[contains(.,'checked')]]";
-
-	
-	public Page1EnvioCheckoutMobil(WebDriver driver) {
-		super(driver);
-	}
 	
 	private String getXPathBlockMetodo(TipoTransporte tipoTransporte) {
 		return ("//label[@for='selection-" + tipoTransporte.getCodigo() + "']");
@@ -275,7 +270,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 
 	public void clickContinuarAndWaitPage2(AppEcom app) {
 		clickContinuar();
-		(new Page2DatosPagoCheckoutMobil(Channel.mobile, app, driver)).isPageUntil(2);
+		(new Page2DatosPagoCheckoutMobil(Channel.mobile, app)).isPageUntil(2);
 	}
 	
 	public boolean isVisibleButtonContinuarUntil(int maxSeconds) {

@@ -1,28 +1,26 @@
 package com.mng.robotest.test.steps.shop.checkout;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.DataDireccion;
 import com.mng.robotest.test.pageobject.shop.checkout.ModalDirecEnvio;
 import com.mng.robotest.test.pageobject.shop.checkout.Page1DktopCheckout;
 import com.mng.robotest.test.pageobject.shop.checkout.PageCheckoutWrapper;
 
-public class ModalDirecEnvioSteps {
+
+public class ModalDirecEnvioSteps extends StepBase {
 	
 	private final ModalDirecEnvio modalDirecEnvio;
-	private final WebDriver driver;
 	private final Channel channel;
 	private final AppEcom app;
 	
-	public ModalDirecEnvioSteps(Channel channel, AppEcom app, WebDriver driver) {
-		this.modalDirecEnvio = new ModalDirecEnvio(driver);
-		this.driver = driver;
+	public ModalDirecEnvioSteps(Channel channel, AppEcom app) {
+		this.modalDirecEnvio = new ModalDirecEnvio();
 		this.channel = channel;
 		this.app = app;
 	}
@@ -61,7 +59,7 @@ public class ModalDirecEnvioSteps {
 			page1DktopCheckout.getModalAvisoCambioPais().isVisibleUntil(maxSeconds), State.Warn); 
 		checks.add(
 			"Desaparece la capa de Loading (lo esperamos hasta " + maxSeconds + "segundos", 
-			(new PageCheckoutWrapper(channel, app, driver)).waitUntilNoDivLoading(maxSeconds), State.Warn);
+			new PageCheckoutWrapper(channel, app).waitUntilNoDivLoading(maxSeconds), State.Warn);
 		return checks;
 	}
 }

@@ -31,7 +31,7 @@ public class Com002 extends TestBase {
 	}
 	
 	private void checkout() throws Exception {
-		new BuilderCheckout(dataTest, dataPago, driver)
+		new BuilderCheckout(dataTest, dataPago)
 				.pago(getPagoRealCard())
 				.build()
 				.checkout(From.PREHOME);

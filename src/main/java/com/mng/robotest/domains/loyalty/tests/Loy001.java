@@ -1,7 +1,5 @@
 package com.mng.robotest.domains.loyalty.tests;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
@@ -10,14 +8,11 @@ import com.mng.robotest.domains.loyalty.beans.User;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.datastored.DataBag;
-import com.mng.robotest.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.datastored.DataPedido;
-import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
-import com.mng.robotest.test.steps.navigations.manto.PedidoNavigations;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow;
 import com.mng.robotest.test.steps.navigations.shop.GaleriaNavigationsSteps;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
@@ -74,7 +69,7 @@ public class Loy001 extends TestBase {
 		
 		dCtxPago.getDataPedido().setDataBag(dataBag);
 		
-		dCtxPago = new CheckoutFlow.BuilderCheckout(dataTest, dCtxPago, driver)
+		dCtxPago = new CheckoutFlow.BuilderCheckout(dataTest, dCtxPago)
 			.pago(dataTest.pais.getPago("VISA"))
 			.build()
 			.checkout(From.BOLSA);

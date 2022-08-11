@@ -112,7 +112,7 @@ public class Page1DktopCheckoutSteps {
 		expected="Aparece la página de resumen de artículos con los descuentos correctamente aplicados",
 		saveNettraffic=SaveWhen.Always)
 	public void inputValeDescuento(ValePais valePais, DataBag dataBag) throws Exception { 
-		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app, driver);
+		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app);
 		pageCheckoutWrapper.inputCodigoPromoAndAccept(valePais.getCodigoVale());
 		dataBag.setImporteTotal(pageCheckoutWrapper.getPrecioTotalFromResumen());	
 		checkAfterInputDiscountVale(valePais);
@@ -162,7 +162,7 @@ public class Page1DktopCheckoutSteps {
 		description="Si existe -> seleccionar el link \"Eliminar\" asociado al vale", 
 		expected="El vale desaparece")
 	public void clearValeIfLinkExists() throws Exception {
-		new PageCheckoutWrapper(channel, app, driver).clickEliminarValeIfExists();
+		new PageCheckoutWrapper(channel, app).clickEliminarValeIfExists();
 		checkIsVisibleInputVale(1);
 	}
 	

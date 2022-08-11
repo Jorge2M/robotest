@@ -24,7 +24,7 @@ public class SecStoreCreditSteps {
 	private final WebDriver driver;
 	
 	public SecStoreCreditSteps(Channel channel, AppEcom app, WebDriver driver) {
-		this.secStoreCredit = new SecStoreCredit(driver);
+		this.secStoreCredit = new SecStoreCredit();
 		this.channel = channel;
 		this.app = app;
 		this.driver = driver;
@@ -39,7 +39,7 @@ public class SecStoreCreditSteps {
 		TestMaker.getCurrentStepInExecution().replaceInExpected(tagNombrePago, nombrePago);
 		
 		dCtxPago.getDataPedido().setImporteTotal(
-				new PageCheckoutWrapper(channel, app, driver).getPrecioTotalFromResumen());
+				new PageCheckoutWrapper(channel, app).getPrecioTotalFromResumen());
 		
 		validaBloqueSaldoEnCuenta(true, dCtxPago);
 	}
@@ -51,7 +51,7 @@ public class SecStoreCreditSteps {
 		boolean marcadoInicialmente = secStoreCredit.isChecked();
 		secStoreCredit.selectSaldoEnCuenta();
 		
-		PageCheckoutWrapperSteps pageCheckoutWrapperSteps = new PageCheckoutWrapperSteps(channel, app, driver);
+		PageCheckoutWrapperSteps pageCheckoutWrapperSteps = new PageCheckoutWrapperSteps(channel, app);
 		PageCheckoutWrapper pageCheckoutWrapper = pageCheckoutWrapperSteps.getPageCheckoutWrapper();
 		pageCheckoutWrapperSteps.validateLoadingDisappears(5);
 		validaBloqueSaldoEnCuenta(!marcadoInicialmente, dCtxPago);
@@ -96,7 +96,7 @@ public class SecStoreCreditSteps {
 	  	}
 	  	
 	  	if (checkedSaldoEnCta/* || channel==Channel.desktop*/) {
-			String impTotResumen = new PageCheckoutWrapper(channel, app, driver).getPrecioTotalFromResumen();
+			String impTotResumen = new PageCheckoutWrapper(channel, app).getPrecioTotalFromResumen();
 			float impFloat = ImporteScreen.getFloatFromImporteMangoScreen(impTotResumen);
 		  	checks.add(
 				"Figura un importe total de 0",

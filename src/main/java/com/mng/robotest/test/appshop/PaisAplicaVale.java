@@ -68,7 +68,7 @@ public class PaisAplicaVale implements Serializable {
 		dCtxSh.userRegistered = false;
 		DataCtxPago dCtxPago = new DataCtxPago(this.dCtxSh, fTCkoutIni);
 		
-		dCtxPago = new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver)
+		dCtxPago = new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago)
 			.build()
 			.checkout(From.PREHOME);
 		

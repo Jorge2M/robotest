@@ -28,10 +28,6 @@ public abstract class ModalDireccion extends PageBase {
 	private static final String XPathSelectProvincia = "//select[@id[contains(.,':estadosPais')]]";
 	private static final String XPathSelectPais = "//select[@id[contains(.,':pais')]]";
 	
-	public ModalDireccion(WebDriver driver) {
-		super(driver);
-	}
-	
 	private String getXPathInput(DataDirType inputType) {
 		switch (inputType) {
 		case nif:

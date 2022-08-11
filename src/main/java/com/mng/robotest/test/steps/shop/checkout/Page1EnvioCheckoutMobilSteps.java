@@ -20,7 +20,7 @@ import com.mng.robotest.test.steps.shop.checkout.envio.ModalDroppointsSteps;
 
 public class Page1EnvioCheckoutMobilSteps extends StepBase {
 
-	private final Page1EnvioCheckoutMobil page1EnvioCheckoutMobil = new Page1EnvioCheckoutMobil(driver);
+	private final Page1EnvioCheckoutMobil page1EnvioCheckoutMobil = new Page1EnvioCheckoutMobil();
 	public static ModalDroppointsSteps modalDroppointsSteps = new ModalDroppointsSteps();
 	
 	@Validation
@@ -76,7 +76,7 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 		expected="Aparece la página asociada al Paso-2")
 	public void clickContinuarToMetodosPago(DataCtxShop dCtxSh, boolean saldoEnCuenta) throws Exception {
 		page1EnvioCheckoutMobil.clickContinuar();
-		new PageCheckoutWrapperSteps(dCtxSh.channel, dCtxSh.appE, driver).validateLoadingDisappears(10);
+		new PageCheckoutWrapperSteps(dCtxSh.channel, dCtxSh.appE).validateLoadingDisappears(10);
 		checkAppearsStep2(dCtxSh.appE);
 		if (!saldoEnCuenta) {
 			checkAppearsPageWithPaymentMethods(dCtxSh.pais, dCtxSh.appE);
@@ -87,14 +87,14 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 		description="Aparece la página asociada al Paso-2",
 		level=State.Defect)
 	private boolean checkAppearsStep2(AppEcom app) {
-		return (new Page2DatosPagoCheckoutMobil(Channel.mobile, app, driver).isPageUntil(3));
+		return (new Page2DatosPagoCheckoutMobil(Channel.mobile, app).isPageUntil(3));
 	}
 	
 	@Validation (
 		description="Están presentes los métodos de pago",
 		level=State.Defect)
 	private boolean checkAppearsPageWithPaymentMethods(Pais pais, AppEcom app) {
-		return (new PageCheckoutWrapper(Channel.mobile, app, driver).isPresentMetodosPago());
+		return (new PageCheckoutWrapper(Channel.mobile, app).isPresentMetodosPago());
 	}
 	
 	@Validation

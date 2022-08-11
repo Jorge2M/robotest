@@ -49,13 +49,13 @@ public class Com001 extends TestBase {
 
 	private void checkout() throws Exception {
 		if (app == AppEcom.outlet) {
-			new BuilderCheckout(dataTest, dataPago, driver)
+			new BuilderCheckout(dataTest, dataPago)
 					.pago(dataTest.pais.getPago("VISA"))
 					.build()
 					.checkout(From.PREHOME);
 		} else {
 			List<GarmentCatalog> articlesShop = getArticlesShop();
-			new BuilderCheckout(dataTest, dataPago, driver)
+			new BuilderCheckout(dataTest, dataPago)
 					.pago(dataTest.pais.getPago("VISA"))
 					.listArticles(articlesShop)
 					.build()

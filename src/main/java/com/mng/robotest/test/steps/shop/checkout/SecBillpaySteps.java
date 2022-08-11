@@ -1,20 +1,20 @@
 package com.mng.robotest.test.steps.shop.checkout;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.SecBillpay;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 
-public class SecBillpaySteps {
+
+public class SecBillpaySteps extends StepBase {
 	
 	private final SecBillpay secBillpay;
 	
-	public SecBillpaySteps(Channel channel, WebDriver driver) {
-		this.secBillpay = new SecBillpay(channel, driver);
+	public SecBillpaySteps(Channel channel) {
+		this.secBillpay = new SecBillpay(channel);
 	}
 	
 	@Validation

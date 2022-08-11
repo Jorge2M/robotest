@@ -74,7 +74,7 @@ public class CompraLuque {
 		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh, configCheckout);
 		dCtxPago.getDataPedido().setDataBag(dataBag);
 		
-		new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver)
+		new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago)
 			.pago(dCtxSh.pais.getPago("VISA"))
 			.build()
 			.checkout(From.BOLSA);

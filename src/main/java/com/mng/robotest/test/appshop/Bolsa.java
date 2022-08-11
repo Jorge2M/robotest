@@ -57,7 +57,7 @@ public class Bolsa {
 
 		dCtxPago.getDataPedido().setDataBag(dataBag);
 		
-		new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver).build().checkout(From.BOLSA);
+		new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago).build().checkout(From.BOLSA);
 	}
 
 	@Test (
@@ -100,7 +100,7 @@ public class Bolsa {
 		
 		dCtxPago.getDataPedido().setDataBag(dataBag);
 		
-		new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago, driver).build().checkout(From.BOLSA);
+		new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago).build().checkout(From.BOLSA);
 	}
 
 	@Test (

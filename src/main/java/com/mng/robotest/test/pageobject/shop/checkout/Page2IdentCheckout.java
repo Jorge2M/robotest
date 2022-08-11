@@ -69,8 +69,7 @@ public class Page2IdentCheckout extends PageBase {
 		this.egyptCity = null;
 	}
 	
-	public Page2IdentCheckout(Pais pais, EgyptCity egyptCity, WebDriver driver) {
-		super(driver);
+	public Page2IdentCheckout(Pais pais, EgyptCity egyptCity) {
 		this.pais = pais;
 		this.egyptCity = egyptCity;
 	}

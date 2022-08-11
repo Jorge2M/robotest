@@ -9,6 +9,7 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Pago.TypePago;
 import com.mng.robotest.test.data.DataCtxShop;
@@ -22,14 +23,14 @@ import com.mng.robotest.test.steps.shop.micuenta.PageAccesoMisComprasSteps;
 import com.mng.robotest.test.steps.shop.miscompras.PageMisComprasSteps;
 import com.mng.robotest.test.utils.ImporteScreen;
 
-public class PageResultPagoSteps {
+public class PageResultPagoSteps extends StepBase {
 
 	private final PageResultPago pageResultPago;
 	private final WebDriver driver = TestMaker.getDriverTestCase();
 	private final Channel channel;
 	
 	public PageResultPagoSteps(TypePago typePago, Channel channel) {
-		this.pageResultPago = new PageResultPago(typePago, channel, driver);
+		this.pageResultPago = new PageResultPago(typePago, channel);
 		this.channel = channel;
 	}
 	

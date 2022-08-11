@@ -31,7 +31,7 @@ public class PageAssist1rstSteps extends StepBase {
 	 	
 	 	checks.add(
 			"No se trata de la página de precompra (no aparece los logos de formas de pago)",
-			!new PageCheckoutWrapper(channel, app, pageAssist1rst.driver).isPresentMetodosPago(), State.Defect);
+			!new PageCheckoutWrapper(channel, app).isPresentMetodosPago(), State.Defect);
 	 	
 	 	boolean inputsTrjOk = pageAssist1rst.isPresentInputsForTrjData();
 		if (channel.isDevice()) {

@@ -10,10 +10,6 @@ public class ModalDirecEnvio extends ModalDireccion {
 
 	private static final String XPathFormModal = "//form[@class[contains(.,'customFormIdENVIO')]]";
 	private static final String XPathButtonUpdate = XPathFormModal + "//div[@class[contains(.,'updateButton')]]/*[@class[contains(.,'modalConfirmar')]]";
-	
-	public ModalDirecEnvio(WebDriver driver) {
-		super(driver);
-	}
 
 	public void sendDataToInputsNTimesAndWait(DataDireccion dataToSend, int nTimes) throws Exception {
 		sendDataToInputsNTimes(dataToSend, nTimes, XPathFormModal);
