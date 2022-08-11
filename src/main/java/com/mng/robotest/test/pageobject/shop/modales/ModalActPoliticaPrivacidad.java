@@ -1,27 +1,27 @@
 package com.mng.robotest.test.pageobject.shop.modales;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class ModalActPoliticaPrivacidad {
 
-	static String XPathModal = "//div[@class='modal-info-gdpr']";
-	static String XPathButtonOk = XPathModal + "//input[@type='submit']";
+public class ModalActPoliticaPrivacidad extends PageBase {
+
+	private static final String XPATH_MODAL = "//div[@class='modal-info-gdpr']";
+	private static final String XPATH_BUTTON_OK = XPATH_MODAL + "//input[@type='submit']";
 	
-	public static boolean isVisible(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathModal), driver).check());
+	public boolean isVisible() {
+		return (state(Visible, By.xpath(XPATH_MODAL)).check());
 	}
 	
-	public static void clickOk(WebDriver driver) {
-		click(By.xpath(XPathButtonOk), driver).exec();
+	public void clickOk() {
+		click(By.xpath(XPATH_BUTTON_OK)).exec();
 	}
 	
-	public static void clickOkIfVisible(WebDriver driver) {
-		if (isVisible(driver)) {
-			clickOk(driver);
+	public void clickOkIfVisible() {
+		if (isVisible()) {
+			clickOk();
 		}
 	}
 }

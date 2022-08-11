@@ -163,7 +163,7 @@ public class SecMenuLateralMobilSteps {
 	public void stepClickMenu1rstLevel(Menu1rstLevel menu1rstLevel, Pais pais) throws Exception {
 		secMenuLateral.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais);
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagTextMenu, menu1rstLevel.getNombre());
-		ModalCambioPais.closeModalIfVisible(driver);
+		new ModalCambioPais().closeModalIfVisible();
 		validaPaginaResultMenu2onLevel(menu1rstLevel);
 	}	
 	

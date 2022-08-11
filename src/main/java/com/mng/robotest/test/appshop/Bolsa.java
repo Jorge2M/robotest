@@ -91,13 +91,10 @@ public class Bolsa {
 		
 		//Hasta página de Checkout
 		ConfigCheckout configCheckout = ConfigCheckout.config()
-				.emaiExists()
-				.userIsEmployee().build();
+				.emaiExists().build();
 		
 		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh, configCheckout);
-		
 		dCtxPago.getDataPedido().setDataBag(dataBag);
-		
 		new CheckoutFlow.BuilderCheckout(dCtxSh, dCtxPago).build().checkout(From.BOLSA);
 	}
 

@@ -251,7 +251,7 @@ public class SecMenusDesktopSteps {
 		}
 		secMenus.secMenuSuperior.secBlockMenus.gotoAndClickMenu(menu1rstLevel);
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagMenu, menu1rstLevel.getNombre());
-		ModalCambioPais.closeModalIfVisible(driver);
+		new ModalCambioPais().closeModalIfVisible();
 		
 		validaPaginaResultMenu(menu1rstLevel);
 		

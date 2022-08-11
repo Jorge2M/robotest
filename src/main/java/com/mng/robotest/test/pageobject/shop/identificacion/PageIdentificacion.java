@@ -70,8 +70,8 @@ public class PageIdentificacion extends PageBase {
 		//normalizeLoginForDefeatAkamai(channel, app, driver);
 		new PageIdentificacion().inputUserPassword(user, password);
 		clickButtonEntrar();
-		ModalCambioPais.closeModalIfVisible(driver);
-		ModalActPoliticaPrivacidad.clickOkIfVisible(driver);
+		new ModalCambioPais().closeModalIfVisible();
+		new ModalActPoliticaPrivacidad().clickOkIfVisible();
 		ModalLoyaltyAfterLogin.closeModalIfVisible(driver);
 	}	
 	

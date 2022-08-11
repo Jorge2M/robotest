@@ -360,7 +360,7 @@ public class CheckoutFlow extends StepBase {
 	}	
 	
 	private void actionsWhenSessionLoss() throws Exception {
-		ModalCambioPais.closeModalIfVisible(driver);
+		new ModalCambioPais().closeModalIfVisible();
 		AccesoNavigations.cambioPaisFromHomeIfNeeded(dCtxSh, driver);
 	}
 	

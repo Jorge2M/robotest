@@ -18,7 +18,7 @@ public class ModalCambioPaisSteps {
 		description="Aparece el modal de selección de país (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
 	public static boolean validateIsVisible(int maxSeconds, WebDriver driver) {
-		return (ModalCambioPais.isVisibleModalUntil(driver, maxSeconds));
+		return (new ModalCambioPais().isVisibleModalUntil(maxSeconds));
 	}
 	
 	static final String tagNombrePais = "@TagNombrePais";
