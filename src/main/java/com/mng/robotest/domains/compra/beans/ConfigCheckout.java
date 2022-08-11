@@ -114,12 +114,10 @@ public class ConfigCheckout implements Cloneable, Serializable {
 			return this;
 		}		
 		public Builder checkMisCompras() {
-			checkPagos();
 			this.checkMisCompras = true;
 			return this;
 		}
 		public Builder checkSavedCard() {
-			checkPagos();
 			this.checkSavedCard = true;
 			return this;
 		}

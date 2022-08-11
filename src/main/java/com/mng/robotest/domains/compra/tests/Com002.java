@@ -18,6 +18,7 @@ public class Com002 extends TestBase {
 	
 	public Com002() throws Exception {
 		ConfigCheckout configCheckout = ConfigCheckout.config()
+				.checkPagos()
 				.checkMisCompras()
 				.emaiExists().build();
 		

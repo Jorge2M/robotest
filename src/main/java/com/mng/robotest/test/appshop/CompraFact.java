@@ -137,6 +137,7 @@ public class CompraFact implements Serializable {
 		
 		//Hasta página Checkout
 		ConfigCheckout configCheckout = ConfigCheckout.config()
+				.checkPagos()
 				.checkMisCompras()
 				.checkManto()
 				.emaiExists()

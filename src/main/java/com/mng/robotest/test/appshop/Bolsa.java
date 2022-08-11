@@ -50,7 +50,6 @@ public class Bolsa {
 
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.emaiExists()
-				.checkSavedCard()
 				.userIsEmployee().build();
 		
 		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh, configCheckout);
@@ -93,7 +92,6 @@ public class Bolsa {
 		//Hasta página de Checkout
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.emaiExists()
-				.checkSavedCard()
 				.userIsEmployee().build();
 		
 		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh, configCheckout);
