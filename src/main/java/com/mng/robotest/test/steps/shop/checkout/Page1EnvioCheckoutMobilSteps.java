@@ -21,7 +21,7 @@ import com.mng.robotest.test.steps.shop.checkout.envio.ModalDroppointsSteps;
 public class Page1EnvioCheckoutMobilSteps extends StepBase {
 
 	private final Page1EnvioCheckoutMobil page1EnvioCheckoutMobil = new Page1EnvioCheckoutMobil();
-	public static ModalDroppointsSteps modalDroppointsSteps = new ModalDroppointsSteps();
+	public final ModalDroppointsSteps modalDroppointsSteps = new ModalDroppointsSteps();
 	
 	@Validation
 	public ChecksTM validateIsPage(boolean userLogged) {

@@ -39,24 +39,17 @@ public class ModalDroppoints extends PageBase {
 	}
 	
 	public boolean isVisibleUntil(int maxSeconds) {
-		//TODO hay un problema muy extraño que hace que se produzcan problemas en esta clase cuando
-		//se invoca desde la factoría de COM010. Es como si cuando se crea el PageObjTM se cruzase 
-		//el WebDriver de los diferentes hilos de ejecución.
-		WebDriver driver = TestMaker.getDriverTestCase();
-		
 		String xpathPanelGeneral = getXPathPanelGeneral();
-		return (state(Visible, By.xpath(xpathPanelGeneral), driver).wait(maxSeconds).check());
+		return (state(Visible, By.xpath(xpathPanelGeneral)).wait(maxSeconds).check());
 	}
 	
 	public boolean isInvisibleUntil(int maxSeconds) {
 		String xpathPanelGeneral = getXPathPanelGeneral();
-		WebDriver driver = TestMaker.getDriverTestCase();
-		return (state(Invisible, By.xpath(xpathPanelGeneral), driver).wait(maxSeconds).check());
+		return (state(Invisible, By.xpath(xpathPanelGeneral)).wait(maxSeconds).check());
 	}
 	
 	public boolean isInvisibleCargandoMsgUntil(int maxSeconds) {
-		WebDriver driver = TestMaker.getDriverTestCase();
-		return (state(Invisible, By.xpath(XPATH_MSG_CARGANDO), driver).wait(maxSeconds).check());
+		return (state(Invisible, By.xpath(XPATH_MSG_CARGANDO)).wait(maxSeconds).check());
 	}
 	
 	public boolean isErrorMessageVisibleUntil() {
@@ -94,7 +87,6 @@ public class ModalDroppoints extends PageBase {
 	}
 
 	public void searchAgainByUserCp(String cp) {
-		WebDriver driver = TestMaker.getDriverTestCase();
 		driver.findElement(By.xpath(XPATH_CP_INPUT_BOX)).clear();
 		driver.findElement(By.xpath(XPATH_CP_INPUT_BOX)).sendKeys(cp);
 		driver.findElement(By.xpath(XPATH_CP_INPUT_BOX)).sendKeys(Keys.ENTER);
