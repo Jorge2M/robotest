@@ -2,36 +2,28 @@ package com.mng.robotest.test.steps.shop.galeria;
 
 import java.util.Arrays;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test.pageobject.shop.galeria.SecSelectorPreciosDesktop;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
-@SuppressWarnings({"static-access"})
-public class SecSelectorPreciosSteps {
+
+public class SecSelectorPreciosSteps extends StepBase {
 
 	private final SecSelectorPreciosDesktop selectorPreciosDesktop;
 	private final SecFiltrosDesktop secFiltrosDesktop;
-	private final WebDriver driver;
-	private final AppEcom app;
-	private final Channel channel;
-	
-	public SecSelectorPreciosSteps(AppEcom app, Channel channel, WebDriver driver) {
+
+	public SecSelectorPreciosSteps() {
 		this.selectorPreciosDesktop = new SecSelectorPreciosDesktop();
-		this.secFiltrosDesktop = SecFiltrosDesktop.getInstance(channel, app, driver);
-		this.driver = driver;
-		this.app = app;
-		this.channel = channel;
+		this.secFiltrosDesktop = SecFiltrosDesktop.getInstance(channel, app);
 	}
 	
 	@Validation (
@@ -45,10 +37,10 @@ public class SecSelectorPreciosSteps {
 	 * Selecciona un intervalo de precio mínimo/precio máximo. 
 	 * No es posible pasar como parámetro el mínimo/máximo pues lo único que podemos hacer es 'click por la derecha' + 'click por la izquierda'
 	 */
-	static final String tagMinimo = "[MINIMO]";
-	static final String tagMaximo = "[MAXIMO]";
+	private static final String TAG_MINIMO = "[MINIMO]";
+	private static final String TAG_MAXIMO = "[MAXIMO]";
 	@Step (
-		description="Utilizar el selector de precio: Mínimo=" + tagMinimo + " Máximo=" + tagMaximo, 
+		description="Utilizar el selector de precio: Mínimo=" + TAG_MINIMO + " Máximo=" + TAG_MAXIMO, 
 		expected="Aparecen artículos con precio en el intervalo seleccionado")
 	public void seleccionaIntervalo() throws Exception {
 		DataFilterPrecios dataFilter = new DataFilterPrecios();
@@ -66,8 +58,8 @@ public class SecSelectorPreciosSteps {
 			//secFiltrosDesktop.hideFilters();
 		}
 		
-		TestMaker.getCurrentStepInExecution().replaceInDescription(tagMinimo, String.valueOf(dataFilter.minimoFinal));
-		TestMaker.getCurrentStepInExecution().replaceInDescription(tagMaximo, String.valueOf(dataFilter.maximoFinal));	
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_MINIMO, String.valueOf(dataFilter.minimoFinal));
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_MAXIMO, String.valueOf(dataFilter.maximoFinal));	
 		checkResultSelectFiltro(dataFilter);
 
 		GenericChecks.from(Arrays.asList(

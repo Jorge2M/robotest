@@ -774,7 +774,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	private void clickHearthIconHiddindPossibleInterceptors(WebElement hearthIcon) throws Exception {
-		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(channel, app, driver);
+		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(channel, app);
 		secFiltros.makeFilters(Visibility.Invisible);
 		
 		SecLineasMenuDesktop secLineasMenuDesktop = SecLineasMenuDesktop.factory(app, channel);

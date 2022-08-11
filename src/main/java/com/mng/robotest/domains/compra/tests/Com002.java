@@ -51,7 +51,7 @@ public class Com002 extends TestBase {
 //		pago.setNumtarj("4940197085392651");
 //		pago.setMescad("09");
 //		pago.setAnycad("2022");
-//		pago.setCvc("564");
+//		pago.setCvc("XXX");
 		pago.setNumtarj("5555444433331111");
 		pago.setMescad("03");
 		pago.setAnycad("2030");

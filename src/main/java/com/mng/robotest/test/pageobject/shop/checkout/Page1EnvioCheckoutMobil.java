@@ -17,32 +17,32 @@ import com.mng.robotest.test.utils.ImporteScreen;
 
 public class Page1EnvioCheckoutMobil extends PageBase {
 	
-	private static final String XPathLink1Envio = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step1']";
-	private static final String XPathInputPromo = "//input[@id[contains(.,'oucherCode')]]";
-	private static final String XPathButtonAplicarPromo = "//button[@id[contains(.,'voucherCode')]]";
-	private static final String XPathLinkCancelarCodigo = "//p[@class='discount-total-amount']/a]";
-	private static final String XPathInputApellidoPromoEmpl = "//input[@id[contains(.,'employeeSurname')]]";
-	private static final String XPathInputDNIPromoEmpl = "//input[@id[contains(.,'employeeDNI')]]";
-	private static final String XPathDiaNaciPromoEmpl = "//select[@id[contains(.,'employeeBirthdateDay')]]";
-	private static final String XPathMesNaciPromoEmpl = "//select[@id[contains(.,'employeeBirthdateMonth')]]";
-	private static final String XPathAnyNaciPromoEmpl = "//select[@id[contains(.,'employeeBirthdateYear')]]";
-	private static final String XPathAceptarPromoEmpl = "//input[@id[contains(.,'confirmEmployeeData')]]";
-	private static final String XPathDescuentoEmpleado = "//div[@class[contains(.,'employee-discount')]]//p[@class='discount-total-amount']/strong";
-	private static final String XPathRadioEnvio = "//input[@data-testid[contains(.,'checkout.delivery.methods')]]";
-	private static final String XPathSelectFranjaHorariaMetodoUrgente = "//select[@data-component-id='time-range-sameday_nextday_franjas']";
-	private static final String XPathDireccionEnvio = "//*[@data-testid[contains(.,'delivery.methods.address')]]";
-	private static final String XPathLinkOtrosMetEnvioClosed = "//button[@data-testid[contains(.,'otherMethods.button')]]";
-	private static final String XPathLinkEditDirecEnvio = "//div[@id[contains(.,'addressBlock')]]//span[class='address']";
-	private static final String XPathBotonContinuar = "//button[@id[contains(.,'complete-step1')]]";
-	private static final String XPathErrorPromo = "//div[@data-component-id='error-voucherCode']";
-	private static final String XPathEnvioStandard = "//div[@data-analytics-id='standard' and @class[contains(.,'checked')]]";
+	private static final String XPATH_LINK1_ENVIO = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step1']";
+	private static final String XPATH_INPUT_PROMO = "//input[@id[contains(.,'oucherCode')]]";
+	private static final String XPATH_BUTTON_APLICAR_PROMO = "//button[@id[contains(.,'voucherCode')]]";
+	private static final String XPATH_LINK_CANCELAR_CODIGO = "//p[@class='discount-total-amount']/a]";
+	private static final String XPATH_INPUT_APELLIDO_PROMO_EMPL = "//input[@id[contains(.,'employeeSurname')]]";
+	private static final String XPATH_INPUT_DNI_PROMO_EMPL = "//input[@id[contains(.,'employeeDNI')]]";
+	private static final String XPATH_DIA_NACI_PROMO_EMPL = "//select[@id[contains(.,'employeeBirthdateDay')]]";
+	private static final String XPATH_MES_NACI_PROMO_EMPL = "//select[@id[contains(.,'employeeBirthdateMonth')]]";
+	private static final String XPATH_ANY_NACI_PROMO_EMPL = "//select[@id[contains(.,'employeeBirthdateYear')]]";
+	private static final String XPATH_ACEPTAR_PROMO_EMPL = "//input[@id[contains(.,'confirmEmployeeData')]]";
+	private static final String XPATH_DESCUENTO_EMPLEADO = "//div[@class[contains(.,'employee-discount')]]//p[@class='discount-total-amount']/strong";
+	private static final String XPATH_RADIO_ENVIO = "//input[@data-testid[contains(.,'checkout.delivery.methods')]]";
+	private static final String XPATH_SELECT_FRANJA_HORARIA_METODO_URGENTE = "//select[@data-component-id='time-range-sameday_nextday_franjas']";
+	private static final String XPATH_DIRECCION_ENVIO = "//*[@data-testid[contains(.,'delivery.methods.address')]]";
+	private static final String XPATH_LINK_OTROS_MET_ENVIO_CLOSED = "//button[@data-testid[contains(.,'otherMethods.button')]]";
+	private static final String XPATH_LINK_EDIT_DIREC_ENVIO = "//div[@id[contains(.,'addressBlock')]]//span[class='address']";
+	private static final String XPATH_BOTON_CONTINUAR = "//button[@id[contains(.,'complete-step1')]]";
+	private static final String XPATH_ERROR_PROMO = "//div[@data-component-id='error-voucherCode']";
+	private static final String XPATH_ENVIO_STANDARD = "//div[@data-analytics-id='standard' and @class[contains(.,'checked')]]";
 	
 	private String getXPathBlockMetodo(TipoTransporte tipoTransporte) {
 		return ("//label[@for='selection-" + tipoTransporte.getCodigo() + "']");
 	}
 
 	private String getXPathRadioMetodo(TipoTransporte tipoTransporte) {
-		return getXPathBlockMetodo(tipoTransporte) + XPathRadioEnvio;
+		return getXPathBlockMetodo(tipoTransporte) + XPATH_RADIO_ENVIO;
 	}
 
 	public boolean isPageUntil(int maxSecondsToWait) {
@@ -50,40 +50,40 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	}
 	
 	public boolean isPresentEnvioStandard() {
-		return state(Present, By.xpath(XPathEnvioStandard)).check();
+		return state(Present, By.xpath(XPATH_ENVIO_STANDARD)).check();
 	}
 
 	public boolean isVisibleLink1EnvioUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathLink1Envio)).wait(maxSeconds).check());
+		return (state(Visible, By.xpath(XPATH_LINK1_ENVIO)).wait(maxSeconds).check());
 	}
 
 	public void clickLink1EnvioAndWaitForPage() {
-		driver.findElement(By.xpath(XPathLink1Envio)).click();
+		driver.findElement(By.xpath(XPATH_LINK1_ENVIO)).click();
 		isPageUntil(2);
 	}
 
 	public boolean isPresentInputApellidoPromoEmplUntil(int maxSeconds) {
-		return (state(Present, By.xpath(XPathInputApellidoPromoEmpl)).wait(maxSeconds).check());
+		return (state(Present, By.xpath(XPATH_INPUT_APELLIDO_PROMO_EMPL)).wait(maxSeconds).check());
 	}
 
 	public void inputApellidoPromoEmpl(String apellido) {
-		driver.findElement(By.xpath(XPathInputApellidoPromoEmpl)).sendKeys(apellido);
+		driver.findElement(By.xpath(XPATH_INPUT_APELLIDO_PROMO_EMPL)).sendKeys(apellido);
 	}
 
 	public boolean isPresentInputDNIPromoEmpl() {
-		return (state(Present, By.xpath(XPathInputDNIPromoEmpl)).check());
+		return (state(Present, By.xpath(XPATH_INPUT_DNI_PROMO_EMPL)).check());
 	}
 
 	public boolean isPresentDiaNaciPromoEmpl() {
-		return (state(Present, By.xpath(XPathDiaNaciPromoEmpl)).check());
+		return (state(Present, By.xpath(XPATH_DIA_NACI_PROMO_EMPL)).check());
 	}
 
 	public boolean isPresentMesNaciPromoEmpl() {
-		return (state(Present, By.xpath(XPathMesNaciPromoEmpl)).check());
+		return (state(Present, By.xpath(XPATH_MES_NACI_PROMO_EMPL)).check());
 	}
 
 	public boolean isPresentAnyNaciPromoEmpl() {
-		return (state(Present, By.xpath(XPathAnyNaciPromoEmpl)).check());
+		return (state(Present, By.xpath(XPATH_ANY_NACI_PROMO_EMPL)).check());
 	}
 
 	/**
@@ -97,36 +97,29 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	}
 
 	public void selectDiaNacPromoEmpl(String value) {
-		new Select(driver.findElement(By.xpath(XPathDiaNaciPromoEmpl))).selectByValue(value);
+		new Select(driver.findElement(By.xpath(XPATH_DIA_NACI_PROMO_EMPL))).selectByValue(value);
 	}
 
 	public void selectMesNacPromoEmpl(String value) {
-		new Select(driver.findElement(By.xpath(XPathMesNaciPromoEmpl))).selectByValue(value);
+		new Select(driver.findElement(By.xpath(XPATH_MES_NACI_PROMO_EMPL))).selectByValue(value);
 	}
 
 	public void selectAnyNacPromoEmpl(String value) {
-		new Select(driver.findElement(By.xpath(XPathAnyNaciPromoEmpl))).selectByValue(value);
+		new Select(driver.findElement(By.xpath(XPATH_ANY_NACI_PROMO_EMPL))).selectByValue(value);
 	}
 
 	public void inputDNIPromoEmpl(String dni) throws Exception {
 		waitForPageLoaded(driver);
-		driver.findElement(By.xpath(XPathInputDNIPromoEmpl)).sendKeys(dni);
+		driver.findElement(By.xpath(XPATH_INPUT_DNI_PROMO_EMPL)).sendKeys(dni);
 	}
 
 	public boolean isVisibleButtonAceptarPromoEmpl() {
-		return (state(Visible, By.xpath(XPathAceptarPromoEmpl)).check());
+		return (state(Visible, By.xpath(XPATH_ACEPTAR_PROMO_EMPL)).check());
 	}
 
 	public void clickButtonAceptarPromoEmpl() {
 		waitForPageLoaded(driver); //For avoid StaleElement exception
-		click(By.xpath(XPathAceptarPromoEmpl)).exec();
-
-		// Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no
-		// funciona así que ejecutamos un 2o
-//		Thread.sleep(200);
-//		if (isVisibleButtonAceptarPromoEmpl(driver)) {
-//			clickAndWaitLoad(driver, By.xpath(XPathAceptarPromoEmpl));
-//		}
+		click(By.xpath(XPATH_ACEPTAR_PROMO_EMPL)).exec();
 	}
 
 	public void inputCodigoPromoAndAccept(String codigoPromo) throws Exception {
@@ -135,39 +128,33 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	}
 
 	public boolean isVisibleInputCodigoPromoUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathInputPromo)).wait(maxSeconds).check());
+		return (state(Visible, By.xpath(XPATH_INPUT_PROMO)).wait(maxSeconds).check());
 	}
 
 	public void inputCodigoPromo(String codigoPromo) {
-		driver.findElement(By.xpath(XPathInputPromo)).clear();
-		driver.findElement(By.xpath(XPathInputPromo)).sendKeys(codigoPromo);
+		driver.findElement(By.xpath(XPATH_INPUT_PROMO)).clear();
+		driver.findElement(By.xpath(XPATH_INPUT_PROMO)).sendKeys(codigoPromo);
 	}
 
 	public void clickAceptarPromo() {
-		click(By.xpath(XPathButtonAplicarPromo)).exec();
-		
-//		// Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no
-//		// funciona así que ejecutamos un 2o
-//		if (WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(XPathButtonAplicarPromo), 2)) {
-//			clickAndWaitLoad(driver, By.xpath(XPathButtonAplicarPromo), TypeOfClick.javascript);
-//		}
+		click(By.xpath(XPATH_BUTTON_APLICAR_PROMO)).exec();
 	}
 	
 	public void clickEliminarValeIfExists() {
-		By byEliminar = By.xpath(XPathLinkCancelarCodigo);
+		By byEliminar = By.xpath(XPATH_LINK_CANCELAR_CODIGO);
 		if (state(Visible, byEliminar).check()) {
 			click(byEliminar).exec();
 		}
 	}
 	public String getImporteDescuentoEmpleado() {
-		if (state(Present, By.xpath(XPathDescuentoEmpleado)).check()) {
-			return (driver.findElement(By.xpath(XPathDescuentoEmpleado)).getText());
+		if (state(Present, By.xpath(XPATH_DESCUENTO_EMPLEADO)).check()) {
+			return (driver.findElement(By.xpath(XPATH_DESCUENTO_EMPLEADO)).getText());
 		}
 		return "";
 	}
 
 	public boolean isVisibleDescuentoEmpleadoUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathDescuentoEmpleado)).wait(maxSeconds).check());
+		return (state(Visible, By.xpath(XPATH_DESCUENTO_EMPLEADO)).wait(maxSeconds).check());
 	}
 	
 	public boolean validateDiscountEmpleadoNotNull() throws Exception {
@@ -215,12 +202,12 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 
 	public void openOtrosMetodosDeEnvio() {
 		if (isClosedOtrosMetodos()) {
-			click(By.xpath(XPathLinkOtrosMetEnvioClosed)).type(javascript).exec();
+			click(By.xpath(XPATH_LINK_OTROS_MET_ENVIO_CLOSED)).type(javascript).exec();
 		}
 	}
 
 	public boolean isClosedOtrosMetodos() {
-		return (state(Visible, By.xpath(XPathLinkOtrosMetEnvioClosed)).check());
+		return (state(Visible, By.xpath(XPATH_LINK_OTROS_MET_ENVIO_CLOSED)).check());
 	}
 
 	public boolean isBlockSelectedUntil(TipoTransporte tipoTransporte, int maxSecondsToWait)
@@ -243,28 +230,28 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	}
 
 	public String getDireccionEntrega() {
-		return (driver.findElement(By.xpath(XPathDireccionEnvio)).getText());
+		return (driver.findElement(By.xpath(XPATH_DIRECCION_ENVIO)).getText());
 	}
 
 	public String getTextDireccionEnvioCompleta() {
 		String direccion = "";
-		if (!getElementsVisible(driver, By.xpath(XPathDireccionEnvio)).isEmpty()) {
-			direccion = getElementsVisible(driver, By.xpath(XPathDireccionEnvio)).get(0).getText();
+		if (!getElementsVisible(driver, By.xpath(XPATH_DIRECCION_ENVIO)).isEmpty()) {
+			direccion = getElementsVisible(driver, By.xpath(XPATH_DIRECCION_ENVIO)).get(0).getText();
 		}
 		return direccion;
 	}
 
 	public void clickEditDirecEnvio() {
-		driver.findElement(By.xpath(XPathLinkEditDirecEnvio)).click();
+		driver.findElement(By.xpath(XPATH_LINK_EDIT_DIREC_ENVIO)).click();
 	}
 
 	public void clickContinuar() {
-		click(By.xpath(XPathBotonContinuar)).exec();
+		click(By.xpath(XPATH_BOTON_CONTINUAR)).exec();
 
 		// Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no
 		// funciona así que ejecutamos un 2o
 		if (isVisibleButtonContinuarUntil(2)) {
-			click(By.xpath(XPathBotonContinuar)).type(javascript).exec();
+			click(By.xpath(XPATH_BOTON_CONTINUAR)).type(javascript).exec();
 		}
 	}
 
@@ -274,15 +261,15 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	}
 	
 	public boolean isVisibleButtonContinuarUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathBotonContinuar)).wait(maxSeconds).check());
+		return (state(Visible, By.xpath(XPATH_BOTON_CONTINUAR)).wait(maxSeconds).check());
 	}
 
 	public boolean isVisibleErrorPromoUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathErrorPromo)).wait(maxSeconds).check());
+		return (state(Visible, By.xpath(XPATH_ERROR_PROMO)).wait(maxSeconds).check());
 	}
 
 	public void selectFranjaHorariaUrgente(int posicion) {
-		Select selectHorario = new Select(driver.findElement(By.xpath(XPathSelectFranjaHorariaMetodoUrgente)));
+		Select selectHorario = new Select(driver.findElement(By.xpath(XPATH_SELECT_FRANJA_HORARIA_METODO_URGENTE)));
 		selectHorario.selectByIndex(posicion);
 	}
 }

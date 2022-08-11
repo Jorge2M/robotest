@@ -67,7 +67,7 @@ public class SecMenuLateralDesktop extends PageBase {
 
 	public boolean isSelectedMenu(MenuLateralDesktop menu, int maxSeconds) {
 		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app);
-		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(pageGaleria, driver);
+		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(pageGaleria);
 		secFiltros.showLateralMenus();
 		String linkMenuSel = getXPathLinkMenuSelected(menu) ;
 		return (state(Visible, By.xpath(linkMenuSel)).wait(maxSeconds).check());
@@ -84,7 +84,7 @@ public class SecMenuLateralDesktop extends PageBase {
 	 */
 	public boolean isVisibleMenu(MenuLateralDesktop menu) throws Exception {
 		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app);
-		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(pageGaleria, driver);
+		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(pageGaleria);
 		secFiltros.showLateralMenus();
 		String xpathMenu = getXPathLinkMenu(menu);
 		return (state(Visible, By.xpath(xpathMenu)).check());

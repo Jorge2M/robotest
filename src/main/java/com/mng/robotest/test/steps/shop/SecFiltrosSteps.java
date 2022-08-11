@@ -29,7 +29,7 @@ public class SecFiltrosSteps {
 	public static int selectFiltroColoresStep (AppEcom app, Channel channel, boolean validaciones, String litMenu, List<Color> colorsToSelect, WebDriver driver) 
 	throws Exception {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagLitColorsToSelect, Color.getListNamesFiltros(colorsToSelect).toString());
-		SecFiltros secFiltros = SecFiltros.make(channel, app, driver);
+		SecFiltros secFiltros = SecFiltros.make(channel, app);
 		int numArticulos1page = secFiltros.selecFiltroColoresAndReturnNumArticles(colorsToSelect);			
 		if (validaciones) {
 			checkAfterSelectFiltroColores(colorsToSelect, litMenu, numArticulos1page, driver);
@@ -69,7 +69,7 @@ public class SecFiltrosSteps {
 	throws Exception {
 		List<String> listMenus = getListMenusStr(menusToSelect);
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagLitMenusToSelect, StringUtils.join(menusToSelect, ","));
-		SecFiltros secFiltros = SecFiltros.make(channel, app, driver);
+		SecFiltros secFiltros = SecFiltros.make(channel, app);
 		secFiltros.selectMenu2onLevel(listMenus);		
 		new SecMenuLateralMobilSteps(channel, app).validaSelecMenu(menusToSelect.get(0));
 	}

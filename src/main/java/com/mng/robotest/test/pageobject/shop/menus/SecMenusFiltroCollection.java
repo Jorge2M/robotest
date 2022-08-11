@@ -8,6 +8,7 @@ import com.mng.robotest.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenusFiltroCollectionDesktop;
 import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenusFiltroCollectionMobil;
 
+
 public interface SecMenusFiltroCollection {
 	public abstract boolean isVisible();
 	public abstract boolean isVisibleMenu(FilterCollection typeMenu);
@@ -16,7 +17,7 @@ public interface SecMenusFiltroCollection {
 	public static SecMenusFiltroCollection make(Channel channel, AppEcom app, WebDriver driver) {
 		switch (channel) {
 		case mobile:
-			return new SecMenusFiltroCollectionMobil(app, driver);
+			return new SecMenusFiltroCollectionMobil(app);
 		case desktop:
 		default:
 			return new SecMenusFiltroCollectionDesktop(driver);

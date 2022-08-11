@@ -23,7 +23,7 @@ public class SecSelectorPreciosDesktop extends PageBase {
 	public boolean isVisible() {
 		By byLineaFiltro = By.xpath(XPATH_LINEA_FILTRO_SHOP);
 		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app);
-		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(pageGaleria, driver);
+		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(pageGaleria);
 		secFiltros.showFilters();
 		boolean visible = state(Visible, byLineaFiltro).check();
 		secFiltros.hideFilters();

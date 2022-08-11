@@ -75,7 +75,7 @@ public class PageGaleriaSteps {
 		this.channel = channel;
 		this.app = app;
 		this.secCrossSellingSteps = new SecCrossSellingSteps(channel, app);
-		this.secSelectorPreciosSteps = new SecSelectorPreciosSteps(app, channel, driver);
+		this.secSelectorPreciosSteps = new SecSelectorPreciosSteps();
 		this.bannerHead = BannerHeadGallerySteps.newInstance(this, driver);
 		this.pageGaleria = PageGaleria.getNew(channel, app);
 	}
@@ -314,7 +314,7 @@ public class PageGaleriaSteps {
 		expected="Los artículos se ordenan correctamente")
 	public int seleccionaOrdenacionGaleria(FilterOrdenacion typeOrdenacion, String tipoPrendasGaleria, int numArticulosValidar, 
 		   								   DataCtxShop dCtxSh) throws Exception {
-		SecFiltros secFiltros = SecFiltros.make(dCtxSh.channel, dCtxSh.appE, driver);
+		SecFiltros secFiltros = SecFiltros.make(dCtxSh.channel, dCtxSh.appE);
 		secFiltros.selecOrdenacionAndReturnNumArticles(typeOrdenacion);	
 		
 		checkIsVisiblePageWithTitle(tipoPrendasGaleria);
@@ -372,7 +372,7 @@ public class PageGaleriaSteps {
 			"Es clickable el 1er elemento de la lista",
 			pageGaleria.isClickableArticuloUntil(1, 0), State.Warn);
 	  	
-		SecFiltros secFiltros = SecFiltros.make(dCtxSh.channel, dCtxSh.appE, driver);
+		SecFiltros secFiltros = SecFiltros.make(dCtxSh.channel, dCtxSh.appE);
 		int maxSeconds = 2;
 	  	checks.add(
 			"Es clickable el bloque de filtros (esperamos hasta " + maxSeconds + " segundos)",

@@ -1,8 +1,10 @@
 package com.mng.robotest.test.pageobject.manto.pedido;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.SelectElement.TypeSelect.*;
@@ -35,6 +37,14 @@ public class PageGenerarPedido extends PageBase {
 		EstadoPedido(int value) {
 			this.value = value;
 		}
+		public static EstadoPedido getEstado(int value) {
+			for (EstadoPedido item : EstadoPedido.values()) {
+				if (item.value==value) {
+					return item;
+				}
+			}
+			return NULL;
+		}
 	}
 	
 	public boolean isPage(String idPedido) {
@@ -49,6 +59,16 @@ public class PageGenerarPedido extends PageBase {
 	}
 	
 	public void selectEstado(EstadoPedido estado) {
+		try {
+			selectEstadoStaleUnsafe(estado);
+		} 
+		catch (StaleElementReferenceException e) {
+			PageObjTM.waitMillis(1000);
+			selectEstadoStaleUnsafe(estado);
+		}
+	}
+	
+	private void selectEstadoStaleUnsafe(EstadoPedido estado) {
 		String value = String.valueOf(estado.value);
 		select(By.xpath(XPATH_ESTADO_PEDIDO_SELECT), value)
 			.type(Value).wait(30).exec();
@@ -59,7 +79,7 @@ public class PageGenerarPedido extends PageBase {
 				.findElement(By.xpath(XPATH_ESTADO_PEDIDO_SELECT + "/option[@selected]"))
 				.getAttribute("value");
 		
-		return EstadoPedido.valueOf(estado);
+		return EstadoPedido.getEstado(Integer.valueOf(estado));
 	}
 	
 	public void clickGenerarFicheroPedido() {

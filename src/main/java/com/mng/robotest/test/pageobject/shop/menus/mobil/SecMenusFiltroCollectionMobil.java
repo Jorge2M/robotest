@@ -1,7 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.menus.mobil;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -14,8 +12,8 @@ public class SecMenusFiltroCollectionMobil extends SeleniumUtils implements SecM
 
 	private final SecFiltros secFiltros;
 	
-	public SecMenusFiltroCollectionMobil(AppEcom app, WebDriver driver) {
-		this.secFiltros = SecFiltros.make(Channel.mobile, app, driver);
+	public SecMenusFiltroCollectionMobil(AppEcom app) {
+		this.secFiltros = SecFiltros.make(Channel.mobile, app);
 	}
 	
 	@Override

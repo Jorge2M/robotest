@@ -3,7 +3,6 @@ package com.mng.robotest.test.pageobject.shop.filtros;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.transversal.PageBase;
@@ -23,14 +22,13 @@ public class SecFiltrosTabletOutlet extends PageBase implements SecFiltros {
 	
 	private final PageGaleria pageGaleria;
 	
-	private SecFiltrosTabletOutlet(WebDriver driver, PageGaleria pageGaleria) {
-		super(driver);
+	private SecFiltrosTabletOutlet(PageGaleria pageGaleria) {
 		this.pageGaleria = pageGaleria;
 	}
 	
-	public static SecFiltrosTabletOutlet getInstance(WebDriver driver) {
+	public static SecFiltrosTabletOutlet getInstance() {
 		PageGaleria pageGaleria = PageGaleria.getNew(Channel.tablet, AppEcom.outlet);
-		return (new SecFiltrosTabletOutlet(driver, pageGaleria));
+		return (new SecFiltrosTabletOutlet(pageGaleria));
 	}
 	
 	private String getXPathLinkOrdenacion(FilterOrdenacion ordenacion) {

@@ -6,11 +6,10 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.Color;
+
 
 public interface SecFiltros {
 	
@@ -22,14 +21,14 @@ public interface SecFiltros {
 	public boolean isClickableFiltroUntil(int seconds);
 	public boolean isCollectionFilterPresent() throws Exception;
 	
-	public static SecFiltros make(Channel channel, AppEcom app, WebDriver driver) {
+	public static SecFiltros make(Channel channel, AppEcom app) {
 		switch (channel) {
 		case desktop:
-			return SecFiltrosDesktop.getInstance(channel, app, driver);
+			return SecFiltrosDesktop.getInstance(channel, app);
 		case mobile:
 		case tablet:
 			if (app==AppEcom.outlet && channel==Channel.tablet) {
-				return SecFiltrosDesktop.getInstance(channel, app, driver);
+				return SecFiltrosDesktop.getInstance(channel, app);
 			}
 			return SecMultiFiltrosDevice.getInstance(app);
 		default:

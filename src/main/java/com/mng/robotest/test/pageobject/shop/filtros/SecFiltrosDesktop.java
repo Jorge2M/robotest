@@ -32,20 +32,19 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	final Channel channel;
 	final AppEcom app;
 	
-	private SecFiltrosDesktop(PageGaleria pageGaleria, WebDriver driver) {
-		super(driver);
+	private SecFiltrosDesktop(PageGaleria pageGaleria) {
 		this.pageGaleria = pageGaleria;
 		this.channel = pageGaleria.getChannel();
 		this.app = pageGaleria.getApp();
 	}
 	
-	public static SecFiltrosDesktop getInstance(Channel channel, AppEcom app, WebDriver driver) {
+	public static SecFiltrosDesktop getInstance(Channel channel, AppEcom app) {
 		PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
-		return (new SecFiltrosDesktop(pageGaleria, driver));
+		return new SecFiltrosDesktop(pageGaleria);
 	}
 	
-	public static SecFiltrosDesktop getInstance(PageGaleria pageGaleria, WebDriver driver) {
-		return (new SecFiltrosDesktop(pageGaleria, driver));
+	public static SecFiltrosDesktop getInstance(PageGaleria pageGaleria) {
+		return new SecFiltrosDesktop(pageGaleria);
 	}
 	
 	private String getXPathLinkOrdenacion(FilterOrdenacion ordenacion) {
