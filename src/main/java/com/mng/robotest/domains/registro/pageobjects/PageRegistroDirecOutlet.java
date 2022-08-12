@@ -16,7 +16,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClic
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageRegistroDirec extends PageBase {
+public class PageRegistroDirecOutlet extends PageBase {
 
 	private final static String XPATH_DIV_ERROR = "//div[@class='errorValidation']";
 	private final static String XPATH_INPUT_DIREC = "//input[@id[contains(.,':cfDir1')]]";

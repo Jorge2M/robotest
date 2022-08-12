@@ -11,7 +11,7 @@ import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.mng.robotest.domains.registro.pageobjects.PageRegistroIni;
+import com.mng.robotest.domains.registro.pageobjects.PageRegistroIniOutlet;
 import com.mng.robotest.domains.registro.pageobjects.beans.DataRegistro;
 import com.mng.robotest.domains.registro.pageobjects.beans.ListDataRegistro;
 import com.mng.robotest.test.beans.IdiomaPais;
@@ -21,9 +21,9 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 import com.mng.robotest.test.utils.UtilsTest;
 
 
-public class PageRegistroIniSteps extends StepBase {
+public class PageRegistroIniStepsOutlet extends StepBase {
 	
-	private final PageRegistroIni pageRegistroIni = new PageRegistroIni();
+	private final PageRegistroIniOutlet pageRegistroIni = new PageRegistroIniOutlet();
 	
 	@Validation (
 		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{maxSeconds} segundos)",
@@ -104,7 +104,7 @@ public class PageRegistroIniSteps extends StepBase {
 		
 		switch (errorExpected) {
 		case None:
-			new PageRegistroSegundaSteps()
+			new PageRegistroSegundaStepsOutlet()
 				.validaIsPageRegistroOK(paisRegistro, dataRegistro);
 			break;
 		case InputWarnings:

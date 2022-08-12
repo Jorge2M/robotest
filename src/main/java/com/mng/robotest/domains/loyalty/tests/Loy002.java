@@ -18,7 +18,7 @@ public class Loy002 extends TestBase {
 
 	private final PageHomeLikesSteps pageHomeLikesSteps = new PageHomeLikesSteps();
 	private final PageHomeDonateLikesSteps pageHomeDonateLikesSteps = new PageHomeDonateLikesSteps();
-	private final SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps(channel, app);
+	private final SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps();
 	
 	public Loy002() throws Exception {
 		super();

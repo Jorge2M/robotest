@@ -25,8 +25,7 @@ public class PageReembolsosSteps {
 	 */
 	public static void gotoRefundsFromMenu(
 			boolean paisConSaldoCta, AppEcom app, Channel channel, WebDriver driver) {
-		SecMenusUserSteps userMenusSteps = new SecMenusUserSteps(channel, app);
-		userMenusSteps.clickMenuMiCuenta();
+		new SecMenusUserSteps().clickMenuMiCuenta();
 		selectReembolsos(paisConSaldoCta, driver);
 	}
 	
@@ -34,8 +33,7 @@ public class PageReembolsosSteps {
 		description="Seleccionar la opción \"Reembolsos\"", 
 		expected="Aparece la página de reembolsos")
 	public static void selectReembolsos(boolean paisConSaldoCta, WebDriver driver) {
-		PageMiCuenta pageMiCuenta = PageMiCuenta.getNew(driver);
-		pageMiCuenta.clickReembolsos();
+		new PageMiCuenta().clickReembolsos();
 		checkClickReembolsos(paisConSaldoCta, driver);
 	}
 	

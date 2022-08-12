@@ -1,25 +1,22 @@
 package com.mng.robotest.domains.registro.steps;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.domains.registro.pageobjects.PageRegistroFin;
+import com.mng.robotest.domains.registro.pageobjects.PageRegistroFinOutlet;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
 
 
-@SuppressWarnings({"static-access"})
-public class PageRegistroFinSteps {
+public class PageRegistroFinStepsOutlet {
 	
-	private final PageRegistroFin pageRegistroFin;
+	private final PageRegistroFinOutlet pageRegistroFin;
 	private final DataCtxShop dataTest;
 	
-	public PageRegistroFinSteps(DataCtxShop dataTest, WebDriver driver) {
-		this.pageRegistroFin = new PageRegistroFin();
+	public PageRegistroFinStepsOutlet(DataCtxShop dataTest) {
+		this.pageRegistroFin = new PageRegistroFinOutlet();
 		this.dataTest = dataTest;
 	}
 	
@@ -41,7 +38,7 @@ public class PageRegistroFinSteps {
 	
 	public void validateWeAreLogged() {
 		validateLogoGoesToPaisIdioma();
-		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps(dataTest.channel, dataTest.appE);
+		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps();
 		secMenusUserSteps.checkIsVisibleLinkCerrarSesion();
 	}
 	

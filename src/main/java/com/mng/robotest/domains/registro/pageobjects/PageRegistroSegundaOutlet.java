@@ -11,7 +11,7 @@ import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageRegistroSegunda extends PageBase {
+public class PageRegistroSegundaOutlet extends PageBase {
 
 	private static final String XPATH_NEWSLETTER_TITLE = "//div[@class[contains(.,'additionalData')]]//span[@class='info']";
 	private static final String XPATH_FORM_STEP2 = "//form[@class[contains(.,'customFormIdSTEP2')]]";

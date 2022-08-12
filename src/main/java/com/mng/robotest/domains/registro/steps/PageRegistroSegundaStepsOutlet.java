@@ -14,7 +14,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.domains.registro.pageobjects.PageRegistroSegunda;
+import com.mng.robotest.domains.registro.pageobjects.PageRegistroSegundaOutlet;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
@@ -23,9 +23,9 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 
-public class PageRegistroSegundaSteps extends StepBase {
+public class PageRegistroSegundaStepsOutlet extends StepBase {
 	
-	private PageRegistroSegunda pageRegistroSegunda = new PageRegistroSegunda();
+	private PageRegistroSegundaOutlet pageRegistroSegunda = new PageRegistroSegundaOutlet();
 	
 	@Validation
 	public ChecksTM validaIsPageRegistroOK(Pais paisRegistro, Map<String,String> dataRegistro) {
@@ -117,9 +117,9 @@ public class PageRegistroSegundaSteps extends StepBase {
 
 		WebDriver driver = pageRegistroSegunda.driver;
 		if (paisConNinos) {
-			new PageRegistroNinosSteps().validaIsPageWithNinos(numNinos);
+			new PageRegistroNinosStepsOutlet().validaIsPageWithNinos(numNinos);
 		} else {
-			new PageRegistroDirecSteps().isPageFromPais(pais);
+			new PageRegistroDirecStepsOutlet().isPageFromPais(pais);
 		}
 		
 		GenericChecks.from(Arrays.asList(

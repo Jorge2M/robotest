@@ -25,7 +25,7 @@ import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.checkout.Page2IdentCheckout;
 
 
-public class PageRegistroIni extends PageBase {
+public class PageRegistroIniOutlet extends PageBase {
 	
 	private static final String XPATH_PESTANYA_REGISTRO = "//*[@class[contains(.,'registerTab')]]";
 	private static final String XPATH_HEADER_NEWS = "//div[@class[contains(.,'registerModal')]]//div[@class='info']";

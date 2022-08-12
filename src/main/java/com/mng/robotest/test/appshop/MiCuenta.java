@@ -86,7 +86,7 @@ public class MiCuenta implements Serializable {
 		dCtxSh.userRegistered = true;
 		AccesoSteps.identificacionEnMango(dCtxSh, driver);
 		
-		PageMiCuentaSteps pageMiCuentaSteps = PageMiCuentaSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		PageMiCuentaSteps pageMiCuentaSteps = new PageMiCuentaSteps();
 		pageMiCuentaSteps.goToMisDatos(dCtxSh.userConnected);
 		
 		PageMisDatosSteps pageMisDatosSteps = new PageMisDatosSteps(driver);
@@ -127,7 +127,7 @@ public class MiCuenta implements Serializable {
 		new PagePrehomeSteps(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
 		AccesoSteps.identificacionEnMango(dCtxSh, driver);
 		
-		PageMiCuentaSteps pageMiCuentaSteps = PageMiCuentaSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		PageMiCuentaSteps pageMiCuentaSteps = new PageMiCuentaSteps();
 		pageMiCuentaSteps.goToMisComprasFromMenu(dCtxSh.pais);
 		PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps(dCtxSh.channel, dCtxSh.appE);
 		pageMisComprasSteps.validateIsCompraOfType(TypeTicket.Online, 3);
@@ -138,13 +138,12 @@ public class MiCuenta implements Serializable {
 		//Test Compras en Tienda
 		dCtxSh.userConnected = userWithStorePurchases;
 		dCtxSh.passwordUser = passUserWithStorePurchases;
-		SecMenusUserSteps userMenusSteps = new SecMenusUserSteps(dCtxSh.channel, dCtxSh.appE);
-		userMenusSteps.logoff();
+		new SecMenusUserSteps().logoff();
 		
 		//Existe un problema en por el cual si te vuelves a loginar manteniendo el navegador
 		//se muestran las compras del anterior usuario
 		driver = TestMaker.renewDriverTestCase();
-		pageMiCuentaSteps = PageMiCuentaSteps.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		pageMiCuentaSteps = new PageMiCuentaSteps();
 		new PagePrehomeSteps(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
 		AccesoSteps.identificacionEnMango(dCtxSh, driver);
 		

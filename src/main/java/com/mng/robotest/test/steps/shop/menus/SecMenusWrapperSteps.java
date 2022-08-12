@@ -58,7 +58,7 @@ public class SecMenusWrapperSteps {
 		this.channel = channel;
 		this.app = app;
 		this.pais = pais;
-		this.secMenusUserSteps = new SecMenusUserSteps(channel, app);
+		this.secMenusUserSteps = new SecMenusUserSteps();
 		this.secMenuLateralMobilSteps = new SecMenuLateralMobilSteps(channel, app);
 		this.secMenusDesktopSteps = new SecMenusDesktopSteps(pais, app, channel);
 		this.secMenusWrap = new SecMenusWrap(channel, app);

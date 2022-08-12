@@ -6,7 +6,7 @@ import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageRegistroAddressData extends PageBase {
+public class PageRegistroAddressDataOutlet extends PageBase {
 
 	private static final String XPATH_TITLE_ADDRESS_STEPS = "//div[@class[contains(.,'addressData')]]";
 	private static final String XPATH_DESPLEGABLE_PAISES = "//select[@id[contains(.,'pais')]]";

@@ -8,7 +8,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClic
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageRegistroFin extends PageBase {
+public class PageRegistroFinOutlet extends PageBase {
 
 	private static final String XPATH_BUTTON_IR_SHOPPING = "//div[@class[contains(.,'ir-de-shopping')]]/input[@type='submit']";
 	

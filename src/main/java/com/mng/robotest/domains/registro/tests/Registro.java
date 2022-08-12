@@ -32,27 +32,34 @@ public class Registro implements Serializable {
 		this.accessFromFactory = true;
 	}
 	
+//	@Test (
+//		groups={"Registro", "Canal:all_App:shop"},
+//		description="Alta/Registro de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
+//	public void REG001_NewRegisterOK() throws Exception {
+//		new Reg001().execute();
+//	}
+	
 	@Test (
-		groups={"Registro", "Canal:all_App:all"},
+		groups={"Registro", "Canal:all_App:outlet"},
 		description="Registro con errores en la introducción de los datos")
-	public void REG001_RegistroNOK() throws Exception {
+	public void REG002_RegistroNOK() throws Exception {
 		TestCaseTM.addNameSufix(this.index_fact);
-		new Reg001(pais, idioma).execute();
+		new Reg002(pais, idioma).execute();
 	}
 
 	@Test (
-		groups={"Registro", "Canal:desktop,mobile_App:shop,outlet", "SupportsFactoryCountrys"}, alwaysRun=true, 
+		groups={"Registro", "Canal:desktop,mobile_App:outlet", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="Alta/Registro de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
-	public void REG002_RegistroOK_publi() throws Exception {
+	public void REG003_RegistroOK_publi() throws Exception {
 		TestCaseTM.addNameSufix(this.index_fact);
-		new Reg002(pais, idioma, accessFromFactory).execute();
+		new Reg003(pais, idioma, accessFromFactory).execute();
 	}
 	
 	@Test (
 		groups={"Registro", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
 		description="Alta/Registro de un usuario (sin seleccionar el link de publicidad)")
-	public void REG003_RegistroOK_NoPubli() throws Exception {
+	public void REG004_RegistroOK_NoPubli() throws Exception {
 		TestCaseTM.addNameSufix(this.index_fact);
-		new Reg003(pais, idioma).execute();
+		new Reg004(pais, idioma).execute();
 	}
 }

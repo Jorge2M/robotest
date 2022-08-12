@@ -21,7 +21,7 @@ public class LoyaltyCommons {
 	}
 	
 	public static int clickMangoLikesYou(Channel channel, AppEcom app) throws Exception {
-		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps(channel, app);
+		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps();
 		return secMenusUserSteps.clickMenuMangoLikesYou();
 	}
 	

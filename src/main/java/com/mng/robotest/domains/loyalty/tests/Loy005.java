@@ -85,7 +85,7 @@ public class Loy005 extends TestBase {
 	}
 	
 	private void login(User user, String password) throws Exception {
-		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps(channel, app);
+		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps();
 		secMenusUserSteps.logoffLogin(user.getEmail(), password);
 	}
 }

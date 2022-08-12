@@ -102,8 +102,8 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 	),
 	
 	GPS_NEW_MENU_MOBILE_PRO(
-		"GPS - New Menu Mobile",
-		"AMKQVYAtQJKsX2I-fzTCAw",
+		"GPS - New Menu Mobile (1)",
+		"gQCjFHmhQNSesWF4pIgdOA",
 		Arrays.asList(0,1),
 		Arrays.asList(
 			"V0-Original", 

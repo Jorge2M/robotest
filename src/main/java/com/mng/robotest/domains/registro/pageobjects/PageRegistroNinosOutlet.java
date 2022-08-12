@@ -12,7 +12,7 @@ import com.mng.robotest.domains.registro.pageobjects.beans.ListDataNinos;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageRegistroNinos extends PageBase {
+public class PageRegistroNinosOutlet extends PageBase {
 	
 	private static final String XPATH_INPUT_NOMBRE = "//input[@id[contains(.,'cfNameKid')]]";
 	private static final String XPATH_SELECT_DIA_NACIMIENTO = "//select[@id[contains(.,'naciDia')]]";

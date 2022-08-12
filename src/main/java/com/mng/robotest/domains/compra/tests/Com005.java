@@ -50,12 +50,12 @@ public class Com005 extends TestBase {
 	}	
 	
 	private void checkMisDatos(DataCtxPago dataPago, String usrEmail, String password) {
-		PageMiCuentaSteps pageMiCuentaSteps = PageMiCuentaSteps.getNew(channel, app, driver);
 		Map<String,String> datosRegistro = dataPago.getDatosRegistro();
 		datosRegistro.put("cfEmail", usrEmail);
 		datosRegistro.put("cfPass", password);
 		datosRegistro.put("", "Barcelona");
 		datosRegistro.put("provinciaPais", "Barcelona");
-		pageMiCuentaSteps.goToMisDatosAndValidateData(datosRegistro, dataTest.pais.getCodigo_pais());
+		new PageMiCuentaSteps()
+			.goToMisDatosAndValidateData(datosRegistro, dataTest.pais.getCodigo_pais());
 	}	
 }

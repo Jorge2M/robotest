@@ -6,17 +6,17 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.mng.robotest.domains.registro.pageobjects.PageRegistroAddressData;
-import com.mng.robotest.domains.registro.pageobjects.PageRegistroDirec;
+import com.mng.robotest.domains.registro.pageobjects.PageRegistroAddressDataOutlet;
+import com.mng.robotest.domains.registro.pageobjects.PageRegistroDirecOutlet;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataCtxShop;
 
 
-public class PageRegistroDirecSteps extends StepBase {
+public class PageRegistroDirecStepsOutlet extends StepBase {
 	
-	private final PageRegistroAddressData pageRegistroAddressData = new PageRegistroAddressData();
-	private final PageRegistroDirec pageRegistroDirec = new PageRegistroDirec();
+	private final PageRegistroAddressDataOutlet pageRegistroAddressData = new PageRegistroAddressDataOutlet();
+	private final PageRegistroDirecOutlet pageRegistroDirec = new PageRegistroDirecOutlet();
 	
 	@Validation
 	public ChecksTM isPageFromPais(Pais pais) {
@@ -53,6 +53,6 @@ public class PageRegistroDirecSteps extends StepBase {
 		expected="Aparece la página final del proceso de registro")
 	public void clickFinalizarButton(DataCtxShop dataTest) {
 		pageRegistroDirec.clickFinalizarButton();
-		new PageRegistroFinSteps(dataTest, pageRegistroDirec.driver).isPageUntil(5);
+		new PageRegistroFinStepsOutlet(dataTest).isPageUntil(5);
 	}
 }

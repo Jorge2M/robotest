@@ -7,7 +7,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
 import java.util.Arrays;
 
-import com.mng.robotest.domains.registro.pageobjects.PageRegistroNinos;
+import com.mng.robotest.domains.registro.pageobjects.PageRegistroNinosOutlet;
 import com.mng.robotest.domains.registro.pageobjects.beans.ListDataNinos;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
@@ -15,9 +15,9 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 
-public class PageRegistroNinosSteps extends StepBase {
+public class PageRegistroNinosStepsOutlet extends StepBase {
 	
-	PageRegistroNinos pageRegistroNinos = new PageRegistroNinos();
+	PageRegistroNinosOutlet pageRegistroNinos = new PageRegistroNinosOutlet();
 	
 	@Validation
 	public ChecksTM validaIsPageWithNinos(int numNinos) {
@@ -38,7 +38,7 @@ public class PageRegistroNinosSteps extends StepBase {
 	public void sendNinoDataAndContinue(ListDataNinos listaNinos, Pais pais) {
 		pageRegistroNinos.setDataNinoIfNotExists(listaNinos, 2);
 		pageRegistroNinos.clickContinuar();
-		new PageRegistroDirecSteps().isPageFromPais(pais);
+		new PageRegistroDirecStepsOutlet().isPageFromPais(pais);
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.CookiesAllowed,
 				GenericCheck.SEO, 

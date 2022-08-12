@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop.menus;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
@@ -17,8 +15,9 @@ import java.util.Arrays;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.domains.loyalty.steps.PageHomeLikesSteps;
-import com.mng.robotest.domains.registro.pageobjects.PageRegistroIni;
-import com.mng.robotest.domains.registro.steps.PageRegistroIniSteps;
+import com.mng.robotest.domains.registro.pageobjects.PageRegistroIniOutlet;
+import com.mng.robotest.domains.registro.steps.PageRegistroIniStepsOutlet;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.pageobject.shop.identificacion.PageIdentificacion;
@@ -31,19 +30,10 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 import com.mng.robotest.test.steps.shop.micuenta.PageMiCuentaSteps;
 import com.mng.robotest.test.steps.shop.modales.ModalCambioPaisSteps;
 
-@SuppressWarnings({"static-access"})
-public class SecMenusUserSteps {
+
+public class SecMenusUserSteps extends StepBase {
 	
-	private final WebDriver driver = TestMaker.getDriverTestCase();
-	private final Channel channel;
-	private final AppEcom app;
-	private final MenusUserWrapper userMenus;
-	
-	public SecMenusUserSteps(Channel channel, AppEcom app) {
-		this.channel = channel;
-		this.app = app;
-		this.userMenus = new SecMenusWrap(channel, app).getMenusUser();
-	}
+	private final MenusUserWrapper userMenus = new SecMenusWrap(channel, app).getMenusUser();
 	
 	@Step (
 		description="Seleccionar el menú de usuario \"Favoritos\"", 
@@ -60,10 +50,10 @@ public class SecMenusUserSteps {
 		saveHtmlPage=SaveWhen.Always)
 	public void selectRegistrate(DataCtxShop dCtxSh) throws Exception {
 		userMenus.clickMenuAndWait(UserMenu.registrate);
-		PageRegistroIni pageRegistroIni = new PageRegistroIni();  
+		PageRegistroIniOutlet pageRegistroIni = new PageRegistroIniOutlet();  
 		pageRegistroIni.clickRegisterTab();
 		
-		PageRegistroIniSteps pageRegistroIniSteps = new PageRegistroIniSteps();
+		PageRegistroIniStepsOutlet pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
 		pageRegistroIniSteps.validaIsPageUntil(5);
 		pageRegistroIniSteps.validaIsRGPDVisible(dCtxSh.pais);
 	}
@@ -116,8 +106,7 @@ public class SecMenusUserSteps {
 		expected="Aparece la página de \"Mi cuenta\"")
 	public void clickMenuMiCuenta() {
 		userMenus.clickMenuAndWait(UserMenu.miCuenta);	
-		PageMiCuentaSteps pageMiCuentaSteps = PageMiCuentaSteps.getNew(channel, app, driver);
-		pageMiCuentaSteps.validateIsPage(2);
+		new PageMiCuentaSteps().validateIsPage(2);
 		
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.CookiesAllowed,

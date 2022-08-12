@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.micuenta.PageInfoNewMisComprasMovil;
 import com.mng.robotest.test.pageobject.shop.micuenta.PageMiCuenta;
@@ -16,24 +15,11 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
 import com.mng.robotest.test.steps.shop.miscompras.PageMisComprasSteps;
 
-import org.openqa.selenium.WebDriver;
 
-public class PageMiCuentaSteps {
+public class PageMiCuentaSteps extends StepBase {
 	
-	private final PageMiCuenta pageMiCuenta;
-	private final WebDriver driver;
-	private final Channel channel;
-	private final AppEcom app;
-	
-	private PageMiCuentaSteps(Channel channel, AppEcom app, WebDriver driver) {
-		pageMiCuenta = PageMiCuenta.getNew(driver);
-		this.driver = driver;
-		this.channel = channel;
-		this.app = app;
-	}
-	public static PageMiCuentaSteps getNew(Channel channel, AppEcom app, WebDriver driver) {
-		return new PageMiCuentaSteps(channel, app, driver);
-	}
+	private final PageMiCuenta pageMiCuenta = new PageMiCuenta();
+	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
 	
 	@Validation(
 		description="1) Aparece la página de \"Mi cuenta\" (la esperamos hasta #{maxSecondsToWait} segundos)",
@@ -43,7 +29,6 @@ public class PageMiCuentaSteps {
 	}
 
 	public void goToMisDatos(String usuarioReg) {
-		SecMenusUserSteps userMenusSteps = new SecMenusUserSteps(channel, app);
 		userMenusSteps.clickMenuMiCuenta();
 		clickLinkMisDatos(usuarioReg);
 	}
@@ -63,7 +48,6 @@ public class PageMiCuentaSteps {
 	}
 
 	public void goToMisComprasFromMenu(Pais pais) {
-		SecMenusUserSteps userMenusSteps = new SecMenusUserSteps(channel, app);
 		userMenusSteps.clickMenuMiCuenta();
 		goToMisComprasFromMenuAndValidate(pais);
 	}
@@ -100,7 +84,6 @@ public class PageMiCuentaSteps {
 	}
 
 	public void goToSuscripciones() {
-		SecMenusUserSteps userMenusSteps = new SecMenusUserSteps(channel, app);
 		userMenusSteps.clickMenuMiCuenta();
 		clickLinkSuscripciones();
 	}
@@ -125,7 +108,6 @@ public class PageMiCuentaSteps {
 	}
 
 	public void goToDevoluciones() {
-		SecMenusUserSteps userMenusSteps = new SecMenusUserSteps(channel, app);
 		userMenusSteps.clickMenuMiCuenta();
 		clickLinkDevoluciones();
 	}
@@ -139,7 +121,6 @@ public class PageMiCuentaSteps {
 	}
 
 	public void goToReembolsos() {
-		SecMenusUserSteps userMenusSteps = new SecMenusUserSteps(channel, app);
 		userMenusSteps.clickMenuMiCuenta();
 		clickLinkReembolsos();
 	}

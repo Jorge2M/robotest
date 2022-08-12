@@ -1,7 +1,6 @@
 package com.mng.robotest.test.pageobject.shop.micuenta;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.domains.transversal.PageBase;
 
@@ -11,45 +10,33 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageMiCuenta extends PageBase {
 	
-	private static String XPathLinkMisDatos = "//a[@href[contains(.,'account/personalinfo')]]";
-//	private static String XPathLinkMisPedidos = "//a[@href[contains(.,'account/orders')]]";
-	private static String XPathLinkMisCompras = "//a[@href[contains(.,'/mypurchases')]]";
-	private static String XPathLinkSuscripciones = "//a[@href[contains(.,'account/suscriptions')]]";
-	private static String XPathLinkDevoluciones = "//span[@data-event-category='devoluciones']";
-	private static String XPathLinkReembolsos = "//a[@data-event-category='mi-cuenta-reembolsos']";
-	
-	private PageMiCuenta(WebDriver driver) {
-		super(driver);
-	}
-	public static PageMiCuenta getNew(WebDriver driver) {
-		return (new PageMiCuenta(driver));
-	}
+	private static String XPATH_LINK_MIS_DATOS = "//a[@href[contains(.,'account/personalinfo')]]";
+	private static String XPATH_LINK_MIS_COMPRAS = "//a[@href[contains(.,'/mypurchases')]]";
+	private static String XPATH_LINK_SUSCRIPCIONES = "//a[@href[contains(.,'account/suscriptions')]]";
+	private static String XPATH_LINK_DEVOLUCIONES = "//span[@data-event-category='devoluciones']";
+	private static String XPATH_LINK_REEMBOLSOS = "//a[@data-event-category='mi-cuenta-reembolsos']";
 	
 	public boolean isPageUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathLinkMisDatos)).wait(maxSeconds).check());
+		return (state(Visible, By.xpath(XPATH_LINK_MIS_DATOS)).wait(maxSeconds).check());
 	}
 	
-//	public void clickMisPedidos() {
-//		click(By.xpath(XPathLinkMisPedidos)).exec();
-//	}
-	
 	public void clickMisCompras() {
-		click(By.xpath(XPathLinkMisCompras)).exec();
+		click(By.xpath(XPATH_LINK_MIS_COMPRAS)).exec();
 	}
 	
 	public void clickSuscripciones() {
-		click(By.xpath(XPathLinkSuscripciones)).exec();
+		click(By.xpath(XPATH_LINK_SUSCRIPCIONES)).exec();
 	}
 	
 	public void clickDevoluciones() {
-		click(By.xpath(XPathLinkDevoluciones)).exec();
+		click(By.xpath(XPATH_LINK_DEVOLUCIONES)).exec();
 	}
 	
 	public void clickReembolsos() {
-		click(By.xpath(XPathLinkReembolsos)).type(javascript).exec();
+		click(By.xpath(XPATH_LINK_REEMBOLSOS)).type(javascript).exec();
 	}
 	
 	public void clickMisDatos() {
-		click(By.xpath(XPathLinkMisDatos)).exec();
+		click(By.xpath(XPATH_LINK_MIS_DATOS)).exec();
 	}	
 }
