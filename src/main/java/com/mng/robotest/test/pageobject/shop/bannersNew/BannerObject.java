@@ -5,18 +5,17 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public abstract class BannerObject {
+public abstract class BannerObject extends PageBase {
 
 	public BannerType bannerType;
 	public String XPathBanner;
@@ -29,9 +28,9 @@ public abstract class BannerObject {
 	abstract protected String getUrlBanner(WebElement bannerScreen);
 	abstract protected String getSrcImageBanner(WebElement bannerScreen);
 	
-	public List<DataBanner> getListBannersData(int maxBannersToLoad, WebDriver driver) {
+	public List<DataBanner> getListBannersData(int maxBannersToLoad) {
 		List<DataBanner> listDataBannersReturn = new ArrayList<>();
-		List<WebElement> listBannersScreen = getDisplayedBannersInOrder(driver);
+		List<WebElement> listBannersScreen = getDisplayedBannersInOrder();
 		Iterator<WebElement> itBannerScreen = listBannersScreen.iterator();
 		int i=0;
 		while (itBannerScreen.hasNext() && i<maxBannersToLoad) {
@@ -52,10 +51,10 @@ public abstract class BannerObject {
 		return listDataBannersReturn;
 	}
 	
-	public List<DataBanner> getListBannersDataUntil(int maxBannersToLoad, int maxSeconds, WebDriver driver) {
+	public List<DataBanner> getListBannersDataUntil(int maxBannersToLoad, int maxSeconds) {
 		List<DataBanner> listBanners = new ArrayList<>();
 		for (int i=0; i<maxSeconds; i++) {
-			listBanners = getListBannersData(maxBannersToLoad, driver);
+			listBanners = getListBannersData(maxBannersToLoad);
 			if (!listBanners.isEmpty()) {
 				break;
 			}
@@ -95,19 +94,19 @@ public abstract class BannerObject {
 		return texto;
 	}
 	
-	public boolean isVisibleAnyBanner(WebDriver driver) {
+	public boolean isVisibleAnyBanner() {
 		List<WebElement> listBanners = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathBanner));
-		return (!listBanners.isEmpty());
+		return !listBanners.isEmpty();
 	}
 	
-	protected List<WebElement> getDisplayedBannersInOrder(WebDriver driver) {
+	protected List<WebElement> getDisplayedBannersInOrder() {
 		List<WebElement> listBanners = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathBanner));
 		SeleniumUtils.orderElementsByPositionInScreen(listBanners);
 		return listBanners;
 	}
 
-	protected String getUrlDestinoSearchingForAnchor(WebElement banner, WebDriver driver) {
-		if (state(Present, banner, driver).by(By.xpath(".//a")).check()) {
+	protected String getUrlDestinoSearchingForAnchor(WebElement banner) {
+		if (state(Present, banner).by(By.xpath(".//a")).check()) {
 			return (banner.findElement(By.xpath(".//a")).getAttribute("href"));
 		}
 		return "";
@@ -117,7 +116,7 @@ public abstract class BannerObject {
 		return this.bannerType;
 	}
 
-	public void clickBannerAndWaitLoad(DataBanner dataBanner, WebDriver driver) throws Exception {
+	public void clickBannerAndWaitLoad(DataBanner dataBanner) throws Exception {
 		WebElement bannerWeb = dataBanner.getBannerWeb();
 		click(bannerWeb, driver).type(TypeClick.javascript).waitLoadPage(10).exec();
 	}

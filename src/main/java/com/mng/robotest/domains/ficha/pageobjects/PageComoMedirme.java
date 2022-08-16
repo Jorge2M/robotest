@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
-import org.openqa.selenium.By;
+
 
 import com.mng.robotest.domains.transversal.PageBase;
 
@@ -23,7 +23,7 @@ public class PageComoMedirme extends PageBase {
 	}
 	
 	private boolean isPage() {
-		return (state(Visible, By.xpath(XPATH_BLOQUE_GUIA_TALLAS)).check());
+		return state(Visible, XPATH_BLOQUE_GUIA_TALLAS).check();
 	}
 	
 	private boolean goToPageInNewTab(String windowFatherHandle) throws Exception {

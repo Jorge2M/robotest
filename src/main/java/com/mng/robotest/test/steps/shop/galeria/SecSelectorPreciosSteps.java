@@ -62,12 +62,7 @@ public class SecSelectorPreciosSteps extends StepBase {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_MAXIMO, String.valueOf(dataFilter.maximoFinal));	
 		checkResultSelectFiltro(dataFilter);
 
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.SEO,
-				GenericCheck.JSerrors,
-				GenericCheck.TextsTraduced,
-				GenericCheck.Analitica)).checks(driver);
+		GenericChecks.checkDefault(driver);
 	}
 	
 	@Validation

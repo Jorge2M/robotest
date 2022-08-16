@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.domains.registro.pageobjects.beans.ListDataRegistro;
-import com.mng.robotest.domains.registro.pageobjects.beans.ListDataRegistro.DataRegType;
-import com.mng.robotest.domains.registro.pageobjects.beans.ListDataRegistro.PageData;
+import com.mng.robotest.domains.registro.beans.ListDataRegistro;
+import com.mng.robotest.domains.registro.beans.ListDataRegistro.DataRegType;
+import com.mng.robotest.domains.registro.beans.ListDataRegistro.PageData;
 import com.mng.robotest.domains.registro.steps.PageRegistroIniStepsOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroIniStepsOutlet.ErrorRegister;
 import com.mng.robotest.domains.transversal.TestBase;

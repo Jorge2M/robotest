@@ -32,12 +32,12 @@ public class Registro implements Serializable {
 		this.accessFromFactory = true;
 	}
 	
-//	@Test (
-//		groups={"Registro", "Canal:all_App:shop"},
-//		description="Alta/Registro de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
-//	public void REG001_NewRegisterOK() throws Exception {
-//		new Reg001().execute();
-//	}
+	@Test (
+		groups={"Registro", "Canal:all_App:shop"},
+		description="Alta/Registro de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
+	public void REG001_NewRegisterOK() throws Exception {
+		new Reg001().execute();
+	}
 	
 	@Test (
 		groups={"Registro", "Canal:all_App:outlet"},

@@ -17,6 +17,8 @@ import com.mng.robotest.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.domains.loyalty.steps.PageHomeLikesSteps;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroIniOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroIniStepsOutlet;
+import com.mng.robotest.domains.registro.steps.PageRegistroInitialShopSteps;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataFavoritos;
@@ -53,9 +55,15 @@ public class SecMenusUserSteps extends StepBase {
 		PageRegistroIniOutlet pageRegistroIni = new PageRegistroIniOutlet();  
 		pageRegistroIni.clickRegisterTab();
 		
-		PageRegistroIniStepsOutlet pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
-		pageRegistroIniSteps.validaIsPageUntil(5);
-		pageRegistroIniSteps.validaIsRGPDVisible(dCtxSh.pais);
+		if (app==AppEcom.outlet) {
+			PageRegistroIniStepsOutlet pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
+			pageRegistroIniSteps.validaIsPageUntil(5);
+			pageRegistroIniSteps.validaIsRGPDVisible(dCtxSh.pais);
+		} else {
+			PageRegistroInitialShopSteps pageRegistroIniSteps = new PageRegistroInitialShopSteps();
+			pageRegistroIniSteps.checkIsPageUntil(5);
+		}
+
 	}
 
 	@Step (
@@ -84,17 +92,43 @@ public class SecMenusUserSteps extends StepBase {
 	public void identification(String userConnect, String userPassword) throws Exception {
 		new PageIdentificacion().iniciarSesion(userConnect, userPassword, channel, app);
 		checkIsVisibleLinkCerrarSesion();
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.SEO,  
-				GenericCheck.TextsTraduced,
-				GenericCheck.Analitica)).checks(driver);
+		GenericChecks.checkDefault(driver);
 	}
 	
 	@Validation (
 		description="Aparece el link superior de \"Cerrar Sesión\" (estamos loginados)",
 		level=State.Defect)
 	public boolean checkIsVisibleLinkCerrarSesion() {	
+		return isVisibleLinkCerrarSesion();
+	}
+	
+	@Validation (
+		description=
+			"Aparece el link superior de \"Cerrar Sesión\" (estamos loginados). " + 
+			"Lo esperamos hasta #{seconds} segundos",
+		level=State.Defect)	
+	public boolean checkIsVisibleLinkCerrarSesionUntil(int seconds) {
+		if (isVisibleLinkCerrarSesionExceptionSafe()) {
+			return true;
+		}
+		for (int i=0; i<seconds;i++) {
+			if (isVisibleLinkCerrarSesionExceptionSafe()) {
+				return true;
+			}
+			PageBase.waitMillis(1000);
+		}
+		return false;
+	}
+	private boolean isVisibleLinkCerrarSesionExceptionSafe() {
+		try {
+			return isVisibleLinkCerrarSesion();
+		} 
+		catch (Exception e) {
+			return false;
+		}
+	}
+	
+	private boolean isVisibleLinkCerrarSesion() {
 		if (channel==Channel.desktop) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
@@ -107,11 +141,7 @@ public class SecMenusUserSteps extends StepBase {
 	public void clickMenuMiCuenta() {
 		userMenus.clickMenuAndWait(UserMenu.miCuenta);	
 		new PageMiCuentaSteps().validateIsPage(2);
-		
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.Analitica,
-				GenericCheck.TextsTraduced)).checks(driver);
+		GenericChecks.checkDefault(driver);
 	}
 	
 	@Step (

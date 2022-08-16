@@ -34,11 +34,7 @@ public class PageRecuperaPasswdSteps {
 		PageRecuperaPasswd.inputEmail(email, driver);
 		PageRecuperaPasswd.clickEnviar(driver);
 		isPageCambioPassword(driver);
-		GenericChecks.from(Arrays.asList( 
-				GenericCheck.CookiesAllowed,
-				GenericCheck.JSerrors, 
-				GenericCheck.TextsTraduced,
-				GenericCheck.Analitica)).checks(driver);
+		GenericChecks.checkDefault(driver);
 	}
 	
 	@Validation

@@ -89,8 +89,8 @@ public class MiCuenta implements Serializable {
 		PageMiCuentaSteps pageMiCuentaSteps = new PageMiCuentaSteps();
 		pageMiCuentaSteps.goToMisDatos(dCtxSh.userConnected);
 		
-		PageMisDatosSteps pageMisDatosSteps = new PageMisDatosSteps(driver);
-		String nombreActual = pageMisDatosSteps.modificaNombreYGuarda();
+		PageMisDatosSteps pageMisDatosSteps = new PageMisDatosSteps();
+		String nombreActual = pageMisDatosSteps.modificaNombreYGuarda("Jorge", "George");
 		pageMiCuentaSteps.goToMisDatos(dCtxSh.userConnected);
 		pageMisDatosSteps.validaContenidoNombre(nombreActual);
 		pageMiCuentaSteps.goToMisComprasFromMenu(dCtxSh.pais);
@@ -98,7 +98,7 @@ public class MiCuenta implements Serializable {
 		pageMiCuentaSteps.goToSuscripciones();
 		ArrayList<NewsLetter> listNewsletters = new ArrayList<>();
 		listNewsletters.add(NewsLetter.she);
-		PageSuscripcionesSteps.create(driver).selectNewslettersAndGuarda(listNewsletters);
+		new PageSuscripcionesSteps().selectNewslettersAndGuarda(listNewsletters);
 		if (dCtxSh.appE!=AppEcom.outlet) {
 			pageMiCuentaSteps.goToDevoluciones();
 			new PageDevolucionesSteps().solicitarRegogidaGratuitaADomicilio();

@@ -1,39 +1,33 @@
 package com.mng.robotest.test.steps.shop.micuenta;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.registro.pageobjects.PageRegistroPersonalizacionShop;
+import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.pageobject.shop.micuenta.PageSuscripciones;
 import com.mng.robotest.test.pageobject.shop.micuenta.PageSuscripciones.NewsLetter;
 
+public class PageSuscripcionesSteps extends StepBase {
 
-public class PageSuscripcionesSteps {
-
-	private final PageSuscripciones pageSuscripciones;
-	
-	private PageSuscripcionesSteps(WebDriver driver) { 
-		this.pageSuscripciones = new PageSuscripciones(driver);
-	}
-	
-	public static PageSuscripcionesSteps create(WebDriver driver) {
-		return new PageSuscripcionesSteps(driver);
-	}
+	private final PageSuscripciones pageSuscripciones = new PageSuscripciones();
 	
 	@Validation(
 		description="1) Aparece la página de \"Suscripciones\"",
 		level=State.Warn)
 	public boolean validaIsPage () {
-		return (pageSuscripciones.isPage());
+		return pageSuscripciones.isPage();
 	}
 
 	@Validation
-	public ChecksTM validaIsDataAssociatedToRegister (Map<String,String> datosRegOk) {
+	public ChecksTM validaIsDataAssociatedToRegister(Map<String,String> datosRegOk) {
 		int numLineasTotales = Integer.valueOf(datosRegOk.get("numlineas")).intValue();
 		String lineasUnchecked = datosRegOk.get("clicklineas");
 		StringTokenizer tokensLinDesmarcadas = new StringTokenizer(lineasUnchecked, ",");
@@ -43,14 +37,40 @@ public class PageSuscripcionesSteps {
 		checks.add(
 			"Aparecen "  + numLineasTotales + " Newsletter",
 			pageSuscripciones.getNumNewsletters()==numLineasTotales, State.Warn);
+		
 		checks.add(
 			"Aparecen "  + numLinDesmarcadas + " suscripciones desmarcadas",
 			pageSuscripciones.getNumNewslettersDesmarcadas()==numLinDesmarcadas, State.Warn);
+		
 		while (tokensLinDesmarcadas.hasMoreElements()) {
 			String lineaStr = tokensLinDesmarcadas.nextToken();
 			checks.add(
 				"Aparecen desmarcadas las suscripciones de: " + lineasUnchecked,
 				pageSuscripciones.isNewsletterDesmarcada(lineaStr), State.Warn);
+		}
+		return checks;
+	}
+	
+	@Validation
+	public ChecksTM validaIsDataAssociatedToRegister(List<LineaType> linesMarked) {
+		ChecksTM checks = ChecksTM.getNew();
+		
+		List<LineaType> linesAll = PageRegistroPersonalizacionShop.ALL_LINEAS;
+		int numLineasTotales = PageRegistroPersonalizacionShop.ALL_LINEAS.size();
+		checks.add(
+				"Aparecen "  + PageRegistroPersonalizacionShop.ALL_LINEAS.size() + " Newsletter",
+				pageSuscripciones.getNumNewsletters()==numLineasTotales, State.Warn);
+		
+		for (LineaType linea : linesAll) {
+			if (linesMarked.contains(linea)) {
+				checks.add(
+				    "Aparecen marcada la suscripción de <b>" + linea + "</b>",
+				    pageSuscripciones.isNewsletterMarcada(linea.name()), State.Defect);
+			} else {
+				checks.add(
+					"Aparecen desmarcada la suscripción de <b>" + linea + "</b>",
+					pageSuscripciones.isNewsletterDesmarcada(linea.name()), State.Warn);				
+			}
 		}
 		return checks;
 	}
@@ -70,7 +90,7 @@ public class PageSuscripcionesSteps {
 	@Validation(
 		description="1) Aparece una pantalla de resultado OK (la esperamos hasta #{maxSecondsToWait} segundos)",
 		level=State.Defect)
-	private boolean validateIsPageResult (int maxSecondsToWait) {
-		return (pageSuscripciones.isPageResOKUntil(maxSecondsToWait));
+	private boolean validateIsPageResult (int seconds) {
+		return pageSuscripciones.isPageResOKUntil(seconds);
 	}
 }

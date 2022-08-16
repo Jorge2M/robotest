@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.ficha.pageobjects.tallas;
 
-import org.openqa.selenium.By;
+
 
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -10,41 +10,41 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SSecSelTallasFichaNew extends PageBase implements SSecSelTallasFicha {
 	
-	private static final String XPathCapaTallas = "//form/div[@class='sizes']";
-	private static final String XPathSelectorTallas = XPathCapaTallas + "/div[@class='selector']";
-	private static final String XPathListTallsForSelect = XPathSelectorTallas + "//div[@class[contains(.,'selector-list')]]";
-	private static final String XPathTallaItem = XPathCapaTallas + "//span[(@role='option' or @role='button') and not(@data-available='false')]";
-	private static final String XPathTallaAvailable = XPathTallaItem + "//self::span[@data-available='true' or @class='single-size']";
-	private static final String XPathTallaUnavailable = XPathTallaItem + "//self::span[not(@data-available) and not(@class='single-size')]";
-	private static final String XPathTallaSelected = XPathTallaItem + "//self::span[@class[contains(.,'selector-trigger')] or @class='single-size']";
-	private static final String XPathTallaUnica = XPathTallaItem + "//self::span[@class[contains(.,'single-size')]]";
+	private static final String XPATH_CAPA_TALLAS = "//form/div[@class='sizes']";
+	private static final String XPATH_SELECTOR_TALLAS = XPATH_CAPA_TALLAS + "/div[@class='selector']";
+	private static final String XPATH_LIST_TALLAS_FOR_SELECT = XPATH_SELECTOR_TALLAS + "//div[@class[contains(.,'selector-list')]]";
+	private static final String XPATH_TALLA_ITEM = XPATH_CAPA_TALLAS + "//span[(@role='option' or @role='button') and not(@data-available='false')]";
+	private static final String XPATH_TALLA_AVAILABLE = XPATH_TALLA_ITEM + "//self::span[@data-available='true' or @class='single-size']";
+	private static final String XPATH_TALLA_UNAVAILABLE = XPATH_TALLA_ITEM + "//self::span[not(@data-available) and not(@class='single-size')]";
+	private static final String XPATH_TALLA_SELECTED = XPATH_TALLA_ITEM + "//self::span[@class[contains(.,'selector-trigger')] or @class='single-size']";
+	private static final String XPATH_TALLA_UNICA = XPATH_TALLA_ITEM + "//self::span[@class[contains(.,'single-size')]]";
 	
 	private String getXPathTallaByCodigo(String codigoNumericoTalla) {
 		int numTalla = Integer.valueOf(codigoNumericoTalla);
-		return (XPathTallaItem + "//self::span[@data-value='" + codigoNumericoTalla + "' or @data-value='" + numTalla + "']"); 
+		return (XPATH_TALLA_ITEM + "//self::span[@data-value='" + codigoNumericoTalla + "' or @data-value='" + numTalla + "']"); 
 	}
 	
 	private String getXPathTallaByLabel(String labelTalla) {
-		return (XPathTallaItem + "//self::span[text()='" + labelTalla + "']"); 
+		return (XPATH_TALLA_ITEM + "//self::span[text()='" + labelTalla + "']"); 
 	}
 	
 	private String getXPathTallaAvailable(String talla) {
-		return (XPathTallaAvailable + "//::*[text()[contains(.,'" + talla + "')]]");
+		return (XPATH_TALLA_AVAILABLE + "//::*[text()[contains(.,'" + talla + "')]]");
 	}
 
 	@Override
 	public boolean isVisibleSelectorTallasUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathSelectorTallas)).wait(maxSeconds).check());
+		return (state(Visible, XPATH_SELECTOR_TALLAS).wait(maxSeconds).check());
 	}
 	
 	@Override
 	public String getTallaAlfSelected(AppEcom app) {
-		if (state(Present, By.xpath(XPathTallaSelected)).check()) {
+		if (state(Present, XPATH_TALLA_SELECTED).check()) {
 			if (isTallaUnica()) {
 			   return "unitalla";
 			}
 			
-			String textTalla = driver.findElement(By.xpath(XPathTallaSelected)).getText();
+			String textTalla = getElement(XPATH_TALLA_SELECTED).getText();
 			textTalla = removeAlmacenFromTalla(textTalla);
 			return textTalla;
 		}
@@ -54,32 +54,32 @@ public class SSecSelTallasFichaNew extends PageBase implements SSecSelTallasFich
 	
 	@Override
 	public String getTallaAlf(int posicion) {
-		String xpathTalla = "(" + XPathTallaItem + ")[" + posicion + "]";
-		if (state(Present, By.xpath(xpathTalla)).check()) {
-			return (driver.findElement(By.xpath(xpathTalla)).getAttribute("innerHTML"));
+		String xpathTalla = "(" + XPATH_TALLA_ITEM + ")[" + posicion + "]";
+		if (state(Present, xpathTalla).check()) {
+			return getElement(xpathTalla).getAttribute("innerHTML");
 		}
 		return "";
 	}
 	
 	@Override
 	public String getTallaCodNum(int posicion) {
-		String xpathTalla = "(" + XPathTallaItem + ")[" + posicion + "]";
-		if (state(Present, By.xpath(xpathTalla)).check()) {
-			return (driver.findElement(By.xpath(xpathTalla)).getAttribute("data-value"));
+		String xpathTalla = "(" + XPATH_TALLA_ITEM + ")[" + posicion + "]";
+		if (state(Present, xpathTalla).check()) {
+			return getElement(xpathTalla).getAttribute("data-value");
 		}
 		return "";
 	}
 
 	@Override
 	public boolean isTallaUnica() {
-		return (state(Present, By.xpath(XPathTallaUnica)).check());
+		return state(Present, XPATH_TALLA_UNICA).check();
 	}
 	
 	private boolean unfoldListTallasIfNotYet() {
-		if (!state(Visible, By.xpath(XPathListTallsForSelect)).check()) {
+		if (!state(Visible, XPATH_LIST_TALLAS_FOR_SELECT).check()) {
 			//En el caso de talla única no existe XPathSelectorTallas
-			if (state(Visible, By.xpath(XPathSelectorTallas)).check()) {
-				driver.findElement(By.xpath(XPathSelectorTallas)).click();
+			if (state(Visible, XPATH_SELECTOR_TALLAS).check()) {
+				getElement(XPATH_SELECTOR_TALLAS).click();
 			} else {
 				return true;
 			}
@@ -91,15 +91,15 @@ public class SSecSelTallasFichaNew extends PageBase implements SSecSelTallasFich
 	
 	@Override
 	public boolean isVisibleListTallasForSelectUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathListTallsForSelect)).wait(maxSeconds).check());
+		return (state(Visible, XPATH_LIST_TALLAS_FOR_SELECT).wait(maxSeconds).check());
 	}
 	
 	@Override
 	public void selectTallaByValue(String codigoNumericoTalla) {
 		unfoldListTallasIfNotYet();
 		String xpathTalla = getXPathTallaByCodigo(codigoNumericoTalla);
-		if (state(Clickable, By.xpath(xpathTalla)).check()) {
-			driver.findElement(By.xpath(xpathTalla)).click();
+		if (state(Clickable, xpathTalla).check()) {
+			getElement(xpathTalla).click();
 		}
 	}
 	
@@ -107,41 +107,41 @@ public class SSecSelTallasFichaNew extends PageBase implements SSecSelTallasFich
 	public void selectTallaByLabel(String tallaLabel) {
 		unfoldListTallasIfNotYet();
 		String xpathTalla = getXPathTallaByLabel(tallaLabel);
-		if (state(Clickable, By.xpath(xpathTalla)).check()) {
-			driver.findElement(By.xpath(xpathTalla)).click();
+		if (state(Clickable, xpathTalla).check()) {
+			getElement(xpathTalla).click();
 		}
 	}
 	
 	@Override
 	public void selectTallaByIndex(int posicion) {
 		unfoldListTallasIfNotYet();
-		String xpathTallaByPos = "(" + XPathTallaItem + ")[" + posicion + "]";
-		if (state(Clickable, By.xpath(xpathTallaByPos)).check()) {
-			driver.findElement(By.xpath(xpathTallaByPos)).click();
+		String xpathTallaByPos = "(" + XPATH_TALLA_ITEM + ")[" + posicion + "]";
+		if (state(Clickable, xpathTallaByPos).check()) {
+			getElement(xpathTallaByPos).click();
 		}
 	}
 	
 	@Override
 	public void selectFirstTallaAvailable() {
 		unfoldListTallasIfNotYet();
-		if (state(Clickable, By.xpath(XPathTallaAvailable)).check()) {
-			driver.findElement(By.xpath(XPathTallaAvailable)).click();
+		if (state(Clickable, XPATH_TALLA_AVAILABLE).check()) {
+			getElement(XPATH_TALLA_AVAILABLE).click();
 		}
 	}
 	
 	@Override
 	public int getNumOptionsTallasNoDisponibles() {
-		return (driver.findElements(By.xpath(XPathTallaUnavailable)).size());
+		return getElements(XPATH_TALLA_UNAVAILABLE).size();
 	}	
 	
 	@Override
 	public boolean isTallaAvailable(String talla) {
 		String xpathTalla = getXPathTallaAvailable(talla);
-		return (state(Present, By.xpath(xpathTalla)).check());
+		return state(Present, xpathTalla).check();
 	}
 	
 	@Override
 	public int getNumOptionsTallas() {
-		return (driver.findElements(By.xpath(XPathTallaItem)).size());
+		return getElements(XPATH_TALLA_ITEM).size();
 	}	
 }

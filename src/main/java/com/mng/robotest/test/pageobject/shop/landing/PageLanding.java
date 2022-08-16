@@ -128,7 +128,7 @@ public class PageLanding extends PageBase {
 		}
 		
 		BannerObject banners = BannerObjectFactory.make(BannerType.Standar);
-		if (banners.isVisibleAnyBanner(driver)) {
+		if (banners.isVisibleAnyBanner()) {
 			return true;
 		}
 		
@@ -161,7 +161,7 @@ public class PageLanding extends PageBase {
 				elementContained = pageGaleria.isVisibleArticleUntil(1, 3);
 				break;
 			case campaign:
-				elementContained = ManagerBannersScreen.existBanners(driver);
+				elementContained = ManagerBannersScreen.isBanners();
 				break;
 			case slider:
 				elementContained = haySliders();

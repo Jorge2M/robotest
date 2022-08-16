@@ -77,13 +77,8 @@ public class SecBuscadorSteps extends StepBase {
 		} else {
 			areProducts(3);
 		}
-
-		GenericChecks.from(Arrays.asList( 
-				GenericCheck.CookiesAllowed,
-				GenericCheck.JSerrors, //
-				GenericCheck.Analitica,//
-				GenericCheck.TextsTraduced,
-				GenericCheck.ImgsBroken)).checks(driver);
+		GenericChecks.checkDefault(driver);
+		GenericChecks.from(Arrays.asList(GenericCheck.ImgsBroken)).checks(driver);
 	}
 
 	@Validation (

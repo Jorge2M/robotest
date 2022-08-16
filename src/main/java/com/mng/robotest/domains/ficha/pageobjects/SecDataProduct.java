@@ -84,8 +84,8 @@ public class SecDataProduct extends PageBase {
 		public String getXPath() {
 			return xpath;
 		}
-		public By getByIcon() {
-			return By.xpath(xpath + "/img");
+		public String getXpathIcon() {
+			return xpath + "/img";
 		}
 	}
 	
@@ -152,14 +152,13 @@ public class SecDataProduct extends PageBase {
 	
 	public String getTituloArt() {
 		String xpathNombreArt = getXPathNombreArt();
-		List<WebElement> listArticles = getElementsVisible(driver, By.xpath(xpathNombreArt));
+		List<WebElement> listArticles = getElementsVisible(xpathNombreArt);
 		if (listArticles.size()>0) {
 			WebElement tituloArt = listArticles.get(0);
 			if (tituloArt!=null) {
 				return (tituloArt.getText());
 			}
 		}
-		
 		return "";
 	}
 	
@@ -175,16 +174,16 @@ public class SecDataProduct extends PageBase {
 	}
 	
 	private List<WebElement> getListColors() {
-		return driver.findElements(ColorType.AVAILABLE.getBy());
+		return getElements(ColorType.AVAILABLE.getXPath());
 	}
 	
 	public String getCodeColor(ColorType colorType) {
-		WebElement color = getElementWeb(colorType.getBy(), driver);
+		WebElement color = getElementWeb(colorType.getXPath());
 		return (color.getAttribute("id"));
 	}
 	
 	public String getNombreColorMobil(ColorType colorType) {
-		WebElement color = getElementWeb(colorType.getBy(), driver);
+		WebElement color = getElementWeb(colorType.getXPath());
 		if (color!=null) {
 			return (color.getAttribute("title"));
 		}
@@ -194,8 +193,8 @@ public class SecDataProduct extends PageBase {
 	public String getNombreColorSelected() {
 		switch (channel) {
 		case desktop:
-			if (state(Present, By.xpath(XPATH_NOMBRE_COLOR_SELECTED_DESKTOP)).check()) {
-				return (driver.findElement(By.xpath(XPATH_NOMBRE_COLOR_SELECTED_DESKTOP)).getAttribute("alt"));
+			if (state(Present, XPATH_NOMBRE_COLOR_SELECTED_DESKTOP).check()) {
+				return getElement(XPATH_NOMBRE_COLOR_SELECTED_DESKTOP).getAttribute("alt");
 			}
 			return Constantes.colorDesconocido;
 		case mobile:
@@ -205,26 +204,26 @@ public class SecDataProduct extends PageBase {
 	}
 
 	public boolean checkPotatoe () {
-		return (state(Present, By.xpath(XPATH_NOMBRE_COLOR_SELECTED_DESKTOP)).check());
+		return state(Present, XPATH_NOMBRE_COLOR_SELECTED_DESKTOP).check();
 	}
 
 	public void selectColorWaitingForAvailability(String codigoColor) {
-		By byColor = By.xpath(getXPathPastillaColorClick(codigoColor));
+		String xpathColor = getXPathPastillaColorClick(codigoColor);
 		int maxSecondsToWaitColor = 3;
 		int maxSecondsToWaitLoadPage = 5;
-		click(byColor)
+		click(xpathColor)
 			.type(TypeClick.javascript)
 			.waitLink(maxSecondsToWaitColor).waitLoadPage(maxSecondsToWaitLoadPage).exec();
 	}
 	
 	public boolean isClickableColor(String codigoColor) {
 		String xpathColor = getXPathPastillaColorClick(codigoColor);
-		return (state(Clickable, By.xpath(xpathColor)).check());
+		return state(Clickable, xpathColor).check();
 	}
 	
 //Funciones referentes a los precios
 	public String getPrecioFinalArticulo() {
-		List<WebElement> listElemsPrecio = driver.findElements(By.xpath(XPATH_ITEMS_PRECIO_FINAL_ART));
+		List<WebElement> listElemsPrecio = getElements(XPATH_ITEMS_PRECIO_FINAL_ART);
 		ListIterator<WebElement> itPrecioVenta = listElemsPrecio.listIterator();
 		String precioArticulo = "";
 		while (itPrecioVenta != null && itPrecioVenta.hasNext())
@@ -237,36 +236,34 @@ public class SecDataProduct extends PageBase {
 	 * Extrae (si existe) el precio rebajado de la página de ficha de producto. Si no existe devuelve ""
 	 */
 	public String getPrecioTachadoFromFichaArt() {
-		if (state(Present, By.xpath(XPATH_ITEMS_PRECIO_SIN_DESC)).check()) {
+		if (state(Present, XPATH_ITEMS_PRECIO_SIN_DESC).check()) {
 			// Entero
-			String precioSinDesc = driver.findElement(By.xpath(XPATH_ITEMS_PRECIO_SIN_DESC + "[1]")).getText();
+			String precioSinDesc = getElement(XPATH_ITEMS_PRECIO_SIN_DESC + "[1]").getText();
 	
 			// Decimales
-			if (state(Present, By.xpath(XPATH_ITEMS_PRECIO_SIN_DESC + "[2]")).check()) {
-				precioSinDesc += driver.findElement(By.xpath(XPATH_ITEMS_PRECIO_SIN_DESC + "[2]")).getText();
+			if (state(Present, XPATH_ITEMS_PRECIO_SIN_DESC + "[2]").check()) {
+				precioSinDesc += getElement(XPATH_ITEMS_PRECIO_SIN_DESC + "[2]").getText();
 			}
 			return (ImporteScreen.normalizeImportFromScreen(precioSinDesc));
 		}
-		
 		return "";
 	}	
 	
 //Funciones referentes a las tallas (en algunas se actúa a modo de Wrapper)
 	public boolean isVisibleCapaAvisame() {
-		return (state(Visible, By.xpath(XPATH_CAPA_AVISAME)).check());
+		return state(Visible, XPATH_CAPA_AVISAME).check();
 	}
 	
 	public boolean isVisibleAvisoSeleccionTalla() {
-		String xpathAviso = getXPathMsgAvisoTalla();
-		return (state(Visible, By.xpath(xpathAviso)).check());
+		return state(Visible, getXPathMsgAvisoTalla()).check();
 	}
 
 	public void selectGuiaDeTallasLink() {
-		click(By.xpath(XPATH_GUIA_DE_TALLAS_LINK)).exec();
+		click(XPATH_GUIA_DE_TALLAS_LINK).exec();
 	}
 
 	public boolean selectGuiaDeTallasIfVisible() {
-		boolean isVisible = state(Visible, By.xpath(XPATH_GUIA_DE_TALLAS_LINK)).check();
+		boolean isVisible = state(Visible, XPATH_GUIA_DE_TALLAS_LINK).check();
 		if (isVisible) {
 			selectGuiaDeTallasLink();
 		}
@@ -278,19 +275,19 @@ public class SecDataProduct extends PageBase {
 //Funciones referentes al prev/next
 	public boolean isVisiblePrevNextUntil(ProductNav productNav, int maxSeconds) {
 		String xpathLink = getXPathLinkProductNav(productNav);
-		return (state(Visible, By.xpath(xpathLink)).wait(maxSeconds).check());
+		return state(Visible, xpathLink).wait(maxSeconds).check();
 	}
 
 	public void selectLinkNavigation(ProductNav productNav) {
 		String xpathLink = getXPathLinkProductNav(productNav);
-		click(By.xpath(xpathLink)).waitLink(2).exec();
+		click(xpathLink).waitLink(2).exec();
 	}
 
 	//zona de colores dentro de la ficha
 
 	public ArrayList<String> getColorsGarment() {
 		ArrayList<String> colors = new ArrayList<>();
-		for (WebElement element : driver.findElements(By.xpath(XPATH_COLORES_PRENDA_SIN_IDENTIFICAR))) {
+		for (WebElement element : getElements(XPATH_COLORES_PRENDA_SIN_IDENTIFICAR)) {
 			colors.add(element.getAttribute("id"));
 		}
 		return colors;
@@ -298,6 +295,6 @@ public class SecDataProduct extends PageBase {
 
 	public void selectColor(String codeColor) {
 		String path = getXPathPastillaColorClick(codeColor);
-		click(By.xpath(path)).exec();
+		click(path).exec();
 	}
 }

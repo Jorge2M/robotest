@@ -118,10 +118,7 @@ public class CheckoutFlow extends StepBase {
 		accessShopAndLoginOrLogoff();
 		if (dCtxSh.userRegistered) {
 			secBolsaSteps.clear();
-			GenericChecks.from(Arrays.asList(
-					GenericCheck.CookiesAllowed,
-					GenericCheck.TextsTraduced,
-					GenericCheck.Analitica)).checks(driver);
+			GenericChecks.checkDefault(driver);
 		}
 	
 		DataBag dataBag = dCtxPago.getDataPedido().getDataBag();
@@ -169,12 +166,10 @@ public class CheckoutFlow extends StepBase {
 		}
 		
 		page2IdentCheckoutSteps.clickContinuar(dCtxSh.userRegistered, dCtxSh.appE, dataBag);
+		GenericChecks.checkDefault(driver);
 		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
 				GenericCheck.GoogleAnalytics, 
-				GenericCheck.NetTraffic, 
-				GenericCheck.TextsTraduced, 
-				GenericCheck.Analitica)).checks(driver);
+				GenericCheck.NetTraffic)).checks(driver);
 	}
 	
 	private void test1rstPageCheckout() throws Exception {
@@ -323,12 +318,10 @@ public class CheckoutFlow extends StepBase {
 				
 				//Almacenamos el pedido en el contexto para la futura validación en Manto
 				pagoSteps.storePedidoForMantoAndResetData();
+				GenericChecks.checkDefault(driver);
 				GenericChecks.from(Arrays.asList(
-						GenericCheck.CookiesAllowed,
-						GenericCheck.GoogleAnalytics, 
-						GenericCheck.NetTraffic, 
-						GenericCheck.TextsTraduced,
-						GenericCheck.Analitica)).checks(driver);
+						GenericCheck.GoogleAnalytics,
+						GenericCheck.NetTraffic)).checks(driver);
 			}
 		}
 	}

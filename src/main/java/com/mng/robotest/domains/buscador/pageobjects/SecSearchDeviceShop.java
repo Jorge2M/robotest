@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.buscador.pageobjects;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
@@ -15,8 +14,8 @@ public class SecSearchDeviceShop extends PageBase implements SecSearch {
 	
 	@Override
 	public void search(String text) {
-		state(Visible, By.xpath(XPATH_INPUT_BUSCADOR)).wait(2).check();
-		WebElement input = driver.findElement(By.xpath(XPATH_INPUT_BUSCADOR));
+		state(Visible, XPATH_INPUT_BUSCADOR).wait(2).check();
+		WebElement input = getElement(XPATH_INPUT_BUSCADOR);
 		input.clear();
 		input.sendKeys(text);
 		input.sendKeys(Keys.RETURN);
@@ -24,6 +23,6 @@ public class SecSearchDeviceShop extends PageBase implements SecSearch {
 	
 	@Override
 	public void close() {
-		click(By.xpath(XPATH_CANCELAR_LINK)).exec();
+		click(XPATH_CANCELAR_LINK).exec();
 	}
 }

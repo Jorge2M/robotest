@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
-import org.openqa.selenium.By;
+
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -31,21 +31,21 @@ public class SecBreadcrumbFichaOld extends PageBase {
 	}
 	
 	public boolean isVisibleBreadCrumb() {
-		return (state(Visible, By.xpath(XPATH_BREAD_CRUMB)).check());
+		return state(Visible, XPATH_BREAD_CRUMB).check();
 	}
 	
 	public String getUrlItemBreadCrumb(ItemBCrumb itemBCrumb) {
 		String xpathItem = getXPathBreadCrumbItem(itemBCrumb) + "//a";
-		if (state(Visible, By.xpath(xpathItem)).check()) {
-			return driver.findElement(By.xpath(xpathItem)).getAttribute("href");
+		if (state(Visible, xpathItem).check()) {
+			return getElement(xpathItem).getAttribute("href");
 		}
 		return "";
 	}
 	
 	public String getNameItemBreadCrumb(ItemBCrumb itemBCrumb) {
 		String xpathItem = getXPathBreadCrumbItem(itemBCrumb) + "//span";
-		if (state(Visible, By.xpath(xpathItem)).check()) {
-			return driver.findElement(By.xpath(xpathItem)).getAttribute("innerHTML");
+		if (state(Visible, xpathItem).check()) {
+			return getElement(xpathItem).getAttribute("innerHTML");
 		}
 		return "";
 	}

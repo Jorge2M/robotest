@@ -1,7 +1,5 @@
 package com.mng.robotest.domains.ayuda.pageobjects;
 
-import org.openqa.selenium.By;
-
 import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
@@ -21,22 +19,19 @@ public class PagesAyuda extends PageBase {
 	}
 	
 	public void selectIcon(String textIcon) {
-		By byIcon = By.xpath(getXPathIcon(textIcon));
-		click(byIcon).exec();
+		click(getXPathIcon(textIcon)).exec();
 	}
 	
 	public boolean isQuestionVisible(String textQuestion) {
-		By byQuestion = By.xpath(getXPathQuestion(textQuestion));
-		return state(State.Visible, byQuestion).check();
+		return state(State.Visible, getXPathQuestion(textQuestion)).check();
 	}
 	
 	public void clickQuestion(String textQuestion) {
-		By byQuestion = By.xpath(getXPathQuestion(textQuestion));
-		click(byQuestion).exec();
+		click(getXPathQuestion(textQuestion)).exec();
 	}
 	
 	public boolean isTextVisible(String text) {
-		By byText = By.xpath("//*[text()[contains(.,'" + text + "')]]");
-		return state(State.Visible, byText).check();
+		String xpathText = "//*[text()[contains(.,'" + text + "')]]";
+		return state(State.Visible, xpathText).check();
 	}
 }

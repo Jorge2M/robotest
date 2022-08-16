@@ -1,7 +1,5 @@
 package com.mng.robotest.domains.ficha.steps;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
@@ -16,12 +14,10 @@ import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Linea.LineaType;
 
-
 public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 
 	private final SecBolsaButtonAndLinksNew secBolsaButtonAndLinksNew = new SecBolsaButtonAndLinksNew();
 	private final SecDetalleProductNew secDetalleProductNew = new SecDetalleProductNew();
-	private final WebDriver driver = secDetalleProductNew.driver;
 	
 	@Step (
 		description="Seleccionar el link <b>Envío gratis a tienda</b>",
@@ -91,11 +87,11 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 		int maxSeconds = 1;
 	 	checks.add(
 	 		"Aparece el modal para compartir a nivel social (lo esperamos hasta " + maxSeconds + " segundos) ",
-	 		ModCompartirNew.isVisibleUntil(maxSeconds, driver), State.Defect);
+	 		new ModCompartirNew().isVisibleUntil(maxSeconds), State.Defect);
 		
 		boolean isPaisChina = (codigoPais.compareTo("720")==0);
 		for (IconSocial icon : IconSocial.values()) {
-			boolean isVisibleIcon = ModCompartirNew.isVisibleIcon(icon, driver);
+			boolean isVisibleIcon = new ModCompartirNew().isVisibleIcon(icon);
 			if (isPaisChina != icon.isSpecificChina()) {
 			 	checks.add(
 			 		"No es visible el icono de " + icon,

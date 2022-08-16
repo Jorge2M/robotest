@@ -1,18 +1,10 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-/**
- * Modal para compartir el enlace que aparece al seleccionar el link "Compartir" de la nueva Ficha
- * @author jorge.munoz
- *
- */
-
-public class ModCompartirNew {
+public class ModCompartirNew extends PageBase {
 
 	//El valor es el que figura en el data-ga del ancor
 	public enum IconSocial {
@@ -39,17 +31,16 @@ public class ModCompartirNew {
 	private static final String XPATH_WRAPPER = "//div[@id='productSocial']";
 	private static final String XPATH_ICON = "//a[@class='icon']";
 	
-	public static String getXPathIcon(IconSocial icon) {
+	private String getXPathIcon(IconSocial icon) {
 		return (XPATH_ICON + "//self::*[@data-ga='" + icon + "']");
 	}
 	
-	public static boolean isVisibleUntil(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(XPATH_WRAPPER), driver)
-				.wait(maxSeconds).check());
+	public boolean isVisibleUntil(int maxSeconds) {
+		return state(Visible, XPATH_WRAPPER).wait(maxSeconds).check();
 	}
 	
-	public static boolean isVisibleIcon(IconSocial icon, WebDriver driver) {
+	public boolean isVisibleIcon(IconSocial icon) {
 		String xpathIcon = getXPathIcon(icon);
-		return (state(Visible, By.xpath(xpathIcon), driver).check());
+		return state(Visible, xpathIcon).check();
 	}
 }

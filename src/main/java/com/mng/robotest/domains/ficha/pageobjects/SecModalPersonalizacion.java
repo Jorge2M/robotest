@@ -1,4 +1,6 @@
 package com.mng.robotest.domains.ficha.pageobjects;
+
+
 import org.openqa.selenium.By;
 
 import com.github.jorge2m.testmaker.conf.Channel;

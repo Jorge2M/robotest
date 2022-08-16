@@ -1,50 +1,31 @@
 package com.mng.robotest.test.pageobject.shop.bannersNew;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
-import java.util.Optional;
-
-import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
-import com.mng.robotest.test.exceptions.NotFoundException;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class BannerCabeceraObject extends BannerObject {
 
-	private final WebDriver driver;
-	
-	static final String XPathWrapperBanner = "//div[@class='vsv-binteriorwrap' or @class='vsv-bannercontainer']//div[@class='vsv-box' and @data-id]";
-	static final String XPathBanner = XPathWrapperBanner + "//div[@class[contains(.,'vsv-content-web')]]";
-	static final String XPathAncorRelativeBanner = "../a[@href]";
+	private static final String XPATH_WRAPPER_BANNER = "//div[@class='vsv-binteriorwrap' or @class='vsv-bannercontainer']//div[@class='vsv-box' and @data-id]";
+	private static final String XPATH_BANNER = XPATH_WRAPPER_BANNER + "//div[@class[contains(.,'vsv-content-web')]]";
+	private static final String XPATH_ANCOR_RELATIVE_BANNER = "../a[@href]";
 	
 	public BannerCabeceraObject(BannerType bannerType) {
-		super(bannerType, XPathBanner);
-		this.driver = getTestCase().getDriver();
-	}
-	
-	private TestCaseTM getTestCase() throws NotFoundException {
-		Optional<TestCaseTM> testCaseOpt = TestMaker.getTestCase();
-		if (testCaseOpt.isEmpty()) {
-		  throw new NotFoundException("Not found TestCase");
-		}
-		return testCaseOpt.get();
+		super(bannerType, XPATH_BANNER);
 	}
 	
 	@Override
 	protected String getUrlBanner(WebElement bannerScreen) {
 		String urlBanner = "";
-		if (state(Present, bannerScreen, driver).by(By.xpath(XPathAncorRelativeBanner)).check()) {
-			WebElement ancor = bannerScreen.findElement(By.xpath(XPathAncorRelativeBanner));
+		if (state(Present, bannerScreen, driver).by(By.xpath(XPATH_ANCOR_RELATIVE_BANNER)).check()) {
+			WebElement ancor = bannerScreen.findElement(By.xpath(XPATH_ANCOR_RELATIVE_BANNER));
 			urlBanner = ancor.getAttribute("href");
 		}
 		
 		if (urlBanner==null || "".compareTo(urlBanner)==0) {
-			urlBanner = getUrlDestinoSearchingForAnchor(bannerScreen, driver);
+			urlBanner = getUrlDestinoSearchingForAnchor(bannerScreen);
 		}
 		return urlBanner;
 	}
@@ -55,9 +36,9 @@ public class BannerCabeceraObject extends BannerObject {
 	}
 	
 	@Override
-	public void clickBannerAndWaitLoad(DataBanner dataBanner, WebDriver driver) throws Exception {
+	public void clickBannerAndWaitLoad(DataBanner dataBanner) throws Exception {
 		WebElement bannerWeb = dataBanner.getBannerWeb();
-		By byLink = By.xpath(XPathAncorRelativeBanner);
+		By byLink = By.xpath(XPATH_ANCOR_RELATIVE_BANNER);
 		WebElement bannerLink;
 		if (state(Present, bannerWeb, driver).by(byLink).check()) {
 			bannerLink = bannerWeb.findElement(byLink);

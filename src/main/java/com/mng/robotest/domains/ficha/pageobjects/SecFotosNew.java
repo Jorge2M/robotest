@@ -2,7 +2,7 @@ package com.mng.robotest.domains.ficha.pageobjects;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.domains.transversal.PageBase;
@@ -31,7 +31,7 @@ public class SecFotosNew extends PageBase {
 	
 	public DataFoto getDataFoto(int line, int position) {
 		String xpathFoto = getXPathFoto(line, position);
-		List<WebElement> listFotos = driver.findElements(By.xpath(xpathFoto));
+		List<WebElement> listFotos = getElements(xpathFoto);
 		if (listFotos.size() < 1) {
 			return null;
 		}
@@ -39,17 +39,17 @@ public class SecFotosNew extends PageBase {
 	}
 
 	public int getNumLinesFotos() {
-		if (!state(Present, By.xpath(XPATH_LINE_FOTO)).check()) {
+		if (!state(Present, XPATH_LINE_FOTO).check()) {
 			return 0;
 		}
-		return (driver.findElements(By.xpath(XPATH_LINE_FOTO)).size());
+		return getElements(XPATH_LINE_FOTO).size();
 	}
 		
 	public int getNumFotosLine(int line) {
 		String xpathFotoLine = getXPathFoto(line);
-		if (!state(Present, By.xpath(xpathFotoLine)).check()) {
+		if (!state(Present, xpathFotoLine).check()) {
 			return 0;
 		}
-		return (driver.findElements(By.xpath(xpathFotoLine)).size());
+		return getElements(xpathFotoLine).size();
 	}
 }

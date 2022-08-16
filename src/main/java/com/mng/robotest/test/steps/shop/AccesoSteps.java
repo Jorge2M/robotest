@@ -84,12 +84,9 @@ public class AccesoSteps {
 
 	public static void validaIdentificacionEnShop(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		checkLinksAfterLogin(dCtxSh, driver);
+		GenericChecks.checkDefault(driver);
 		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
 				GenericCheck.GoogleAnalytics, 
-				GenericCheck.JSerrors, 
-				GenericCheck.Analitica,
-				GenericCheck.TextsTraduced,
 				GenericCheck.NetTraffic)).checks(driver);
 	}
 	
@@ -190,11 +187,7 @@ public class AccesoSteps {
 
 		PageSelectLineaVOTFSteps pageSelectLineaVOTFSteps = new PageSelectLineaVOTFSteps(driver);
 		pageSelectLineaVOTFSteps.validateIsPage();
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.Analitica, 
-				GenericCheck.TextsTraduced,
-				GenericCheck.JSerrors)).checks(driver);
+		GenericChecks.checkDefault(driver);
 		
 		pageSelectLineaVOTFSteps.selectMenuAndLogoMango(1, dCtxSh);
 	}

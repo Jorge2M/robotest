@@ -120,11 +120,9 @@ public class Page1DktopCheckoutSteps {
 			checkValeDiscountIsCorrect(valePais, dataBag);
 		}
 		
+		GenericChecks.checkDefault(driver);
 		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
 				GenericCheck.GoogleAnalytics,
-				GenericCheck.Analitica,
-				GenericCheck.TextsTraduced,
 				GenericCheck.NetTraffic)).checks(driver);
 	}
 	

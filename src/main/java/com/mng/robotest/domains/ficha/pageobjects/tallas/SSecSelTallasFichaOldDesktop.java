@@ -2,7 +2,7 @@ package com.mng.robotest.domains.ficha.pageobjects.tallas;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
@@ -12,16 +12,15 @@ import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.Talla;
 
-
 public class SSecSelTallasFichaOldDesktop extends PageBase implements SSecSelTallasFicha {
 	
-	private static final String XPathSelectTalla = "//select[@id[contains(.,'productFormSelect')]]";
-	private static final String XPathOptionTallaUnica = XPathSelectTalla + "/option[@data-available='true' and @value[contains(.,'99')]]";
-	private static final String XPathOptionTalla = XPathSelectTalla + "/option[not(@data-text='0')]"; 
+	private static final String XPATH_SELECT_TALLA = "//select[@id[contains(.,'productFormSelect')]]";
+	private static final String XPATH_OPTION_TALLA_UNICA = XPATH_SELECT_TALLA + "/option[@data-available='true' and @value[contains(.,'99')]]";
+	private static final String XPATH_OPTION_TALLA = XPATH_SELECT_TALLA + "/option[not(@data-text='0')]"; 
 	
 	private String getXPathOptionTallaSegunDisponible(boolean disponible) {
 		String disponibleStr = String.valueOf(disponible);
-		return (XPathOptionTalla + "[@data-available='" + disponibleStr + "']");
+		return (XPATH_OPTION_TALLA + "[@data-available='" + disponibleStr + "']");
 	}
 	
 	private String getXPathOptionTallaSegunDisponible(boolean disponible, String talla) {
@@ -31,38 +30,38 @@ public class SSecSelTallasFichaOldDesktop extends PageBase implements SSecSelTal
 	
 	@Override
 	public boolean isVisibleSelectorTallasUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathSelectTalla)).wait(maxSeconds).check());
+		return (state(Visible, XPATH_SELECT_TALLA).wait(maxSeconds).check());
 	}
 	
 	@Override
 	public int getNumOptionsTallas() {
-		return (driver.findElements(By.xpath(XPathOptionTalla)).size());
+		return getElements(XPATH_OPTION_TALLA).size();
 	}
 	
 	@Override
 	public int getNumOptionsTallasNoDisponibles() {
 		String xpathOptions = getXPathOptionTallaSegunDisponible(false);
-		return (driver.findElements(By.xpath(xpathOptions)).size());
+		return getElements(xpathOptions).size();
 	}
 	
 	@Override
 	public boolean isTallaAvailable(String talla) {
 		String xpathTalla = getXPathOptionTallaSegunDisponible(true, talla);
-		return (state(Present, By.xpath(xpathTalla)).check());
+		return state(Present, xpathTalla).check();
 	}
 	
 	@Override
 	public boolean isTallaUnica() {
-		return (state(Present, By.xpath(XPathOptionTallaUnica)).check());
+		return state(Present, XPATH_OPTION_TALLA_UNICA).check();
 	}
 	
 	@Override
 	public boolean isVisibleListTallasForSelectUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathOptionTalla)).wait(maxSeconds).check());
+		return state(Visible, XPATH_OPTION_TALLA).wait(maxSeconds).check();
 	}
 
 	private Select despliegaSelectTallas() {
-		return (new Select(driver.findElement(By.xpath(XPathSelectTalla))));
+		return new Select(getElement(XPATH_SELECT_TALLA));
 	}
 	
 	/**
@@ -70,17 +69,17 @@ public class SSecSelTallasFichaOldDesktop extends PageBase implements SSecSelTal
 	 */
 	@Override
 	public void selectTallaByValue(String tallaValue) {
-		new Select(driver.findElement(By.xpath(XPathSelectTalla))).selectByValue(String.valueOf(tallaValue));
+		new Select(getElement(XPATH_SELECT_TALLA)).selectByValue(String.valueOf(tallaValue));
 	}
 	
 	@Override
 	public void selectTallaByLabel(String tallaLabel) {
-		new Select(driver.findElement(By.xpath(XPathSelectTalla))).selectByVisibleText(tallaLabel);
+		new Select(getElement(XPATH_SELECT_TALLA)).selectByVisibleText(tallaLabel);
 	}
 	
 	@Override
 	public void selectTallaByIndex(int posicionEnDesplegable) {
-		new Select(driver.findElement(By.xpath(XPathSelectTalla))).selectByIndex(posicionEnDesplegable);
+		new Select(getElement(XPATH_SELECT_TALLA)).selectByIndex(posicionEnDesplegable);
 	}
 	
 	@Override
@@ -130,18 +129,18 @@ public class SSecSelTallasFichaOldDesktop extends PageBase implements SSecSelTal
 	
 	@Override
 	public String getTallaAlf(int posicion) {
-		String xpathTalla = "(" + XPathOptionTalla + ")[" + posicion + "]";
-		if (state(Present, By.xpath(xpathTalla), driver).check()) {
-			return (driver.findElement(By.xpath(xpathTalla)).getText());
+		String xpathTalla = "(" + XPATH_OPTION_TALLA + ")[" + posicion + "]";
+		if (state(Present, xpathTalla).check()) {
+			return getElement(xpathTalla).getText();
 		}
 		return "";
 	}
 	
 	@Override
 	public String getTallaCodNum(int posicion) {
-		String xpathTalla = "(" + XPathOptionTalla + ")[" + posicion + "]";
-		if (state(Present, By.xpath(xpathTalla), driver).check()) {
-			return (driver.findElement(By.xpath(xpathTalla)).getAttribute("value"));
+		String xpathTalla = "(" + XPATH_OPTION_TALLA + ")[" + posicion + "]";
+		if (state(Present, xpathTalla).check()) {
+			return getElement(xpathTalla).getAttribute("value");
 		}
 		return "";
 	}

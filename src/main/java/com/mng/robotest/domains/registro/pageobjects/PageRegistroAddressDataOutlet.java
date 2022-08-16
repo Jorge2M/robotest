@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.registro.pageobjects;
 
-import org.openqa.selenium.By;
+
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -18,24 +18,23 @@ public class PageRegistroAddressDataOutlet extends PageBase {
 	}
 
 	public boolean isPageUntil(int secondsWait) {
-		return (state(Present, By.xpath(XPATH_TITLE_ADDRESS_STEPS))
-				.wait(secondsWait).check());
+		return state(Present, XPATH_TITLE_ADDRESS_STEPS).wait(secondsWait).check();
 	}
 
 	public boolean existsDesplegablePaises() {
-		return (state(Present, By.xpath(XPATH_DESPLEGABLE_PAISES)).check());
+		return state(Present, XPATH_DESPLEGABLE_PAISES).check();
 	}
 
 	public boolean isOptionPaisSelected(String codigoPais) {
 		String xpathOptionPaisSelected = getXPathOptionPaisSelected(codigoPais);
-		return (state(Present, By.xpath(xpathOptionPaisSelected)).check());
+		return state(Present, xpathOptionPaisSelected).check();
 	}
 
 	public void clickButtonFinalizar() {
-		click(By.xpath(XPATH_BUTTON_FINALIZAR)).exec();
+		click(XPATH_BUTTON_FINALIZAR).exec();
 	}
 
 	public boolean isVisibleErrorInputDireccion() {
-		return (state(Visible, By.xpath(XPATH_ERROR_INPUT_DIRECCION)).check());
+		return state(Visible, XPATH_ERROR_INPUT_DIRECCION).check();
 	}
 }

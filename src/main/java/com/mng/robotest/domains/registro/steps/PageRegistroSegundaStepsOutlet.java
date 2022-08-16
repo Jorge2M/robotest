@@ -122,10 +122,6 @@ public class PageRegistroSegundaStepsOutlet extends StepBase {
 			new PageRegistroDirecStepsOutlet().isPageFromPais(pais);
 		}
 		
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.SEO, 
-				GenericCheck.TextsTraduced,
-				GenericCheck.Analitica)).checks(driver);
+		GenericChecks.checkDefault(driver);
 	}
 }

@@ -1,10 +1,19 @@
 package com.mng.robotest.domains.transversal;
 
+
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.ClickElement.BuilderClick;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.SelectElement.BuilderSelect;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.BuilderState;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
 
@@ -41,5 +50,47 @@ public class PageBase extends PageObjTM {
 		this.channel = channel;
 		this.app = app;
 	}	
+	
+	public BuilderClick click(String xpath) {
+		return new BuilderClick(By.xpath(xpath), driver);
+	}
+	
+	public BuilderState state(State state, String xpath) {
+		return new BuilderState(state, By.xpath(xpath), driver);
+	}
+	
+	public BuilderSelect select(String xpath, String value) {
+		return new BuilderSelect(By.xpath(xpath), value, driver);
+	}
+	
+	public WebElement getElement(String xpath) {
+		return driver.findElement(By.xpath(xpath));
+	}
+
+	public List<WebElement> getElements(String xpath) {
+		return driver.findElements(By.xpath(xpath));
+	}	
+	
+	public WebElement getElementVisible(String xpath) {
+		return getElementVisible(driver, By.xpath(xpath));
+	}
+	
+	public List<WebElement> getElementsVisible(String xpath) {
+		return getElementsVisible(driver, By.xpath(xpath));
+	}
+	
+	public int getNumElementsVisible(String xpath) {
+		return getNumElementsVisible(driver, By.xpath(xpath));
+	}
+	
+	
+	public WebElement getElementWeb(String xpath) {
+		return getElementWeb(By.xpath(xpath), driver);
+	}
+	
+    public void moveToElement(String xpath) {
+        WebElement webElem = driver.findElement(By.xpath(xpath));
+        moveToElement(webElem, driver);
+    }
 
 }

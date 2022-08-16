@@ -65,10 +65,7 @@ public class SecMenuLateralMobilSteps {
 	public void validaSelecMenu(MenuLateralDesktop menu) throws Exception {
 		PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(channel, app, driver);
 		pageGaleriaSteps.validateGaleriaAfeterSelectMenu(app);
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.TextsTraduced,
-				GenericCheck.Analitica)).checks(driver);
+		GenericChecks.checkDefault(driver);
 	}
 
 	@Validation
@@ -169,13 +166,8 @@ public class SecMenuLateralMobilSteps {
 	
 	public void validaPaginaResultMenu2onLevel(Menu1rstLevel menu1rstLevel) throws Exception {
 		checkResultDependingMenuGroup(menu1rstLevel);
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.SEO, 
-				GenericCheck.JSerrors, 
-				GenericCheck.Analitica,
-				GenericCheck.TextsTraduced,
-				GenericCheck.ImgsBroken)).checks(driver);
+		GenericChecks.checkDefault(driver);
+		GenericChecks.from(Arrays.asList(GenericCheck.ImgsBroken)).checks(driver);
 	}
 	
 	@Validation

@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
-import org.openqa.selenium.By;
+
 
 import com.mng.robotest.domains.transversal.PageBase;
 
@@ -41,22 +41,20 @@ public class SecDetalleProductNew extends PageBase {
 	}
 	
 	public boolean isVisibleUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPATH_WRAPPER))
-				.wait(maxSeconds).check());
+		return state(Visible, XPATH_WRAPPER).wait(maxSeconds).check();
 	}
 	
 	public boolean isVisibleBreadcrumbs(int maxSeconds) {
-		return (state(Visible, By.xpath(XPATH_BREAD_CRUMBS))
-				.wait(maxSeconds).check());
+		return state(Visible, XPATH_BREAD_CRUMBS).wait(maxSeconds).check();
 	}
 	
 	public boolean isVisibleItemBreadCrumb(ItemBreadcrumb itemBCrumb) {
 		String xpathItem = getXPathBreadcrumbItemLink(itemBCrumb);
-		return (state(Visible, By.xpath(xpathItem)).check());
+		return state(Visible, xpathItem).check();
 	}
 	
 	public boolean isVisibleBlockKcSafety() {
-		return (state(Visible, By.xpath(XPATH_BLOCK_KC_SAFETY)).check());
+		return state(Visible, XPATH_BLOCK_KC_SAFETY).check();
 	}
 	
 }

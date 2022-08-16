@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.registro.steps;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,12 +11,11 @@ import com.mng.robotest.domains.transversal.StepBase;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroIniOutlet;
-import com.mng.robotest.domains.registro.pageobjects.beans.DataRegistro;
-import com.mng.robotest.domains.registro.pageobjects.beans.ListDataRegistro;
+import com.mng.robotest.domains.registro.beans.DataRegistro;
+import com.mng.robotest.domains.registro.beans.ListDataRegistro;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test.utils.UtilsTest;
 
 
@@ -56,7 +54,6 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 		return (!pageRegistroIni.isVisibleAnyInputErrorMessage());
 	}
 
-	@SuppressWarnings("unused")
 	@Step (
 		description="Introducir los datos:<br>#{dataToSendInHtmlFormat}",
 		expected="En los datos incorrectos aparece error y en los correctos no")
@@ -120,13 +117,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 			validaEmailIncorrectShown(5);
 			break;
 		}
-		
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.SEO, 
-				GenericCheck.JSerrors, 
-				GenericCheck.TextsTraduced,
-				GenericCheck.Analitica)).checks(pageRegistroIni.driver);
+		GenericChecks.checkDefault(driver);
 	}
 	
 	@Validation (

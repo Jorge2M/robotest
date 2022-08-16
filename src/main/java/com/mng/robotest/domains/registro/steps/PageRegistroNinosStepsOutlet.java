@@ -8,7 +8,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import java.util.Arrays;
 
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroNinosOutlet;
-import com.mng.robotest.domains.registro.pageobjects.beans.ListDataNinos;
+import com.mng.robotest.domains.registro.beans.ListDataNinos;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
@@ -39,10 +39,6 @@ public class PageRegistroNinosStepsOutlet extends StepBase {
 		pageRegistroNinos.setDataNinoIfNotExists(listaNinos, 2);
 		pageRegistroNinos.clickContinuar();
 		new PageRegistroDirecStepsOutlet().isPageFromPais(pais);
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.SEO, 
-				GenericCheck.TextsTraduced,
-				GenericCheck.Analitica)).checks(pageRegistroNinos.driver);
+		GenericChecks.checkDefault(driver);
 	}
 }

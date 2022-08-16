@@ -186,13 +186,9 @@ public class SecMenusWrapperSteps {
 	public void accesoMenuXRef(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
 		secMenusWrap.seleccionarMenuXHref(menu1rstLevel, dCtxSh.pais);
 		checkIsVisibleAarticle(dCtxSh, 5);
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.SEO, 
-				GenericCheck.JSerrors, 
-				GenericCheck.Analitica,
-				GenericCheck.TextsTraduced,
-				GenericCheck.ImgsBroken)).checks(driver);
+		
+		GenericChecks.checkDefault(driver);
+		GenericChecks.from(Arrays.asList(GenericCheck.ImgsBroken)).checks(driver);
 	}
 
 	@Validation (

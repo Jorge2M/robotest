@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
-import org.openqa.selenium.By;
+
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.ActionFavButton;
 import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.LinksAfterBolsa;
@@ -41,7 +41,7 @@ public class PageFichaArt_DesktopShop extends PageFicha {
 	
 	@Override
 	public boolean isPageUntil(int maxSeconds) {
-		return (state(Present, By.xpath(XPATH_HTML_FICHA)).wait(maxSeconds).check() &&
+		return (state(Present, XPATH_HTML_FICHA).wait(maxSeconds).check() &&
 				secDataProduct.getSecSelTallas().isVisibleSelectorTallasUntil(maxSeconds));
 	}
 	
@@ -49,7 +49,7 @@ public class PageFichaArt_DesktopShop extends PageFicha {
 	public boolean isFichaArticuloUntil(String refArticulo, int maxSeconds) {
 		String refSinColor = refArticulo.substring(0,8); 
 		String xpathFichaRef = getXPathIsPage(refSinColor);
-		return (state(Visible, By.xpath(xpathFichaRef)).wait(maxSeconds).check());
+		return state(Visible, xpathFichaRef).wait(maxSeconds).check();
 	}
 	
 	@Override

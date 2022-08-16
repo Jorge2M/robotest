@@ -6,7 +6,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.openqa.selenium.By;
+
 
 
 public class PageHomeLikes extends PageBase {
@@ -21,22 +21,22 @@ public class PageHomeLikes extends PageBase {
 		LIKES_1200("//button/span[contains(text(), '1200 Likes')]"),
 		REGALAR_MIS_LIKES("//button/span[text()[contains(.,'Regalar')]]");
 		
-		private By by;
+		private String xpath;
 		private ButtonUseLikes(String xpath) {
-			this.by = By.xpath(xpath);
+			this.xpath = xpath;
 		}
-		public By getBy() {
-			return by;
+		public String xpath() {
+			return xpath;
 		}
 	}
 	
 	public boolean checkIsPageUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPATH_WRAPP_PAGE)).wait(maxSeconds).check());
+		return state(Visible, XPATH_WRAPP_PAGE).wait(maxSeconds).check();
 	}
 	
 	public int getPoints() {
-		if (state(Present, By.xpath(XPATH_POINTS)).wait(2).check()) {
-			String textPoints = driver.findElement(By.xpath(XPATH_POINTS)).getText();
+		if (state(Present, XPATH_POINTS).wait(2).check()) {
+			String textPoints = getElement(XPATH_POINTS).getText();
 			Pattern pattern = Pattern.compile(" [0-9,.]+ ");
 			Matcher matcher = pattern.matcher(textPoints);
 			if (matcher.find()) {
@@ -51,10 +51,10 @@ public class PageHomeLikes extends PageBase {
 	}
 
 	public boolean isVisibleButton(ButtonUseLikes button, int maxSeconds) {
-		return (state(Visible, button.getBy()).wait(maxSeconds).check());
+		return state(Visible, button.xpath()).wait(maxSeconds).check();
 	}
 
 	public void clickButton(ButtonUseLikes button) {
-		click(button.getBy()).exec();
+		click(button.xpath()).exec();
 	}
 }

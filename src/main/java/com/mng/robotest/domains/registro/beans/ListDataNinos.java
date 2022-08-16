@@ -1,4 +1,4 @@
-package com.mng.robotest.domains.registro.pageobjects.beans;
+package com.mng.robotest.domains.registro.beans;
 
 import java.util.ArrayList;
 

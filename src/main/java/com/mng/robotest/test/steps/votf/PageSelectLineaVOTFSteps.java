@@ -57,11 +57,6 @@ public class PageSelectLineaVOTFSteps {
 		AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dCtxSh.pais));
 		new SectionBarraSupVOTFSteps(driver).validate(accesoVOTF.getUsuario());
 		
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.SEO, 
-				GenericCheck.JSerrors, 
-				GenericCheck.TextsTraduced,
-				GenericCheck.Analitica)).checks(driver);
+		GenericChecks.checkDefault(driver);
 	}
 }

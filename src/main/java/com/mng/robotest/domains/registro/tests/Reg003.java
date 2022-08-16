@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.github.jorge2m.testmaker.domain.InputParamsTM.TypeAccess;
-import com.mng.robotest.domains.registro.pageobjects.beans.DataNino;
-import com.mng.robotest.domains.registro.pageobjects.beans.ListDataNinos;
-import com.mng.robotest.domains.registro.pageobjects.beans.DataNino.sexoType;
+import com.mng.robotest.domains.registro.beans.DataNino;
+import com.mng.robotest.domains.registro.beans.ListDataNinos;
+import com.mng.robotest.domains.registro.beans.DataNino.sexoType;
 import com.mng.robotest.domains.registro.steps.PageRegistroDirecStepsOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroFinStepsOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroIniStepsOutlet;

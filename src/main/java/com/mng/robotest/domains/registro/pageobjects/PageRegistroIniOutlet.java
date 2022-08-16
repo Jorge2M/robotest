@@ -17,10 +17,10 @@ import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import com.mng.robotest.domains.registro.pageobjects.beans.DataRegistro;
-import com.mng.robotest.domains.registro.pageobjects.beans.InputDataXPath;
-import com.mng.robotest.domains.registro.pageobjects.beans.ListDataRegistro;
-import com.mng.robotest.domains.registro.pageobjects.beans.ListDataRegistro.DataRegType;
+import com.mng.robotest.domains.registro.beans.DataRegistro;
+import com.mng.robotest.domains.registro.beans.InputDataXPath;
+import com.mng.robotest.domains.registro.beans.ListDataRegistro;
+import com.mng.robotest.domains.registro.beans.ListDataRegistro.DataRegType;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.checkout.Page2IdentCheckout;
 
@@ -94,22 +94,22 @@ public class PageRegistroIniOutlet extends PageBase {
 	}
 	
 	public void clickRegisterTab() {
-		driver.findElement(By.xpath(XPATH_PESTANYA_REGISTRO)).click();
+		getElement(XPATH_PESTANYA_REGISTRO).click();
 	}
 	
 	public boolean isPageUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPATH_PESTANYA_REGISTRO)).wait(maxSeconds).check());
+		return state(Visible, XPATH_PESTANYA_REGISTRO).wait(maxSeconds).check();
 	}
 	
 	public boolean isCapaLoadingInvisibleUntil(int maxSeconds) {
-		return (state(Invisible, By.xpath(XPATH_CAPA_LOADING)).wait(maxSeconds).check());
+		return state(Invisible, XPATH_CAPA_LOADING).wait(maxSeconds).check();
 	}
 	
 	public String getNewsLetterTitleText() {
 		try {
-			WebElement titleNws = driver.findElement(By.xpath(XPATH_NEWSLETTER_TITLE));
+			WebElement titleNws = getElement(XPATH_NEWSLETTER_TITLE);
 			if (titleNws!=null) {
-				return driver.findElement(By.xpath(XPATH_NEWSLETTER_TITLE)).getText();
+				return getElement(XPATH_NEWSLETTER_TITLE).getText();
 			}
 		}
 		catch (Exception e) {
@@ -125,7 +125,7 @@ public class PageRegistroIniOutlet extends PageBase {
 			
 	public int getNumInputsObligatoriosNoInformados() {
 		String xpathInput = XPATH_INPUT_OBLIGATORIO_NO_INFORMADO;
-		List<WebElement> inputsObligatorios = driver.findElements(By.xpath(xpathInput));
+		List<WebElement> inputsObligatorios = getElements(xpathInput);
 		return (inputsObligatorios.size());
 	}
 
@@ -159,41 +159,41 @@ public class PageRegistroIniOutlet extends PageBase {
 			}
 		}
 		
-		driver.findElement(By.xpath("//body")).sendKeys(Keys.TAB);
+		getElement("//body").sendKeys(Keys.TAB);
 	}
 	
 	public void selectPais(String codPais) {
-		new Select(driver.findElement(By.xpath(XPATH_SELECT_PAIS))).selectByValue(codPais);
+		new Select(getElement(XPATH_SELECT_PAIS)).selectByValue(codPais);
 	}
 	
 	public boolean isVisibleMsgInputInvalid(DataRegType inputType) {
 		String xpath = getXPathDataInput(inputType).getXPathDivError();
-		return (state(Present, By.xpath(xpath)).check());
+		return state(Present, xpath).check();
 	}
 	
 	public int getNumberMsgInputInvalid(DataRegType inputType) {
 		String xpathError = getXPathDataInput(inputType).getXPathDivError() + "//span";
-		if (state(Present, By.xpath(xpathError)).check()) {
-			return (getNumElementsVisible(driver, By.xpath(xpathError)));
+		if (state(Present, xpathError).check()) {
+			return (getNumElementsVisible(xpathError));
 		}
 		return 0;
 	}
 	
 	public boolean isVisibleAnyInputErrorMessage() {
-		return (state(Visible, By.xpath(XPATH_DIV_ERROR_NAME)).check());
+		return state(Visible, XPATH_DIV_ERROR_NAME).check();
 	}
 
 	public boolean isButtonRegistrateVisible() {
-		return (state(Visible, By.xpath(XPATH_BUTTON_REGISTRATE)).check());
+		return state(Visible, XPATH_BUTTON_REGISTRATE).check();
 	}
 	
 	public void clickButtonRegistrate() {
-		click(By.xpath(XPATH_BUTTON_REGISTRATE)).exec();
+		click(XPATH_BUTTON_REGISTRATE).exec();
 		
 		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
 		if (isButtonRegistrateVisible()) {
 			try {
-				click(By.xpath(XPATH_BUTTON_REGISTRATE)).type(javascript).exec();
+				click(XPATH_BUTTON_REGISTRATE).type(javascript).exec();
 			}
 			catch (Exception e) {
 				Log4jTM.getLogger().info("Problem in second click to Registrate Button", e);
@@ -203,7 +203,7 @@ public class PageRegistroIniOutlet extends PageBase {
 	
 	public boolean isVisibleErrorUsrDuplicadoUntil(int maxSeconds) {
 		String xpathError = getXPath_mensajeErrorFormulario(MSG_USR_DUPLICADO_POST_CLICK);
-		return (state(Present, By.xpath(xpathError)).wait(maxSeconds).check());
+		return state(Present, xpathError).wait(maxSeconds).check();
 	}	
 	
 	public boolean isVisibleErrorEmailIncorrecto(int maxSeconds) {
@@ -212,20 +212,20 @@ public class PageRegistroIniOutlet extends PageBase {
 	
 	public int getNumberMsgCampoObligatorio() {
 		String xpathError = "//div[@class='errorValidation']/span[text()[contains(.,'" + MSG_CAMPO_OBLIGATORIO + "')]]";
-		return (getNumElementsVisible(driver, By.xpath(xpathError)));
+		return getNumElementsVisible(xpathError);
 	}	
 	
 	public int getNumberInputsTypePassword() {
-		return (getNumElementsVisible(driver, By.xpath("//input[@type='password']")));
+		return getNumElementsVisible("//input[@type='password']");
 	}
 	
 	public boolean isVisibleSelectPais() {
-		return (state(Visible, By.xpath(XPATH_SELECT_PAIS)).check());
+		return state(Visible, XPATH_SELECT_PAIS).check();
 	}
 	
 	public boolean isSelectedOptionPais(String codigoPais) {
 		String xpathOption = XPATH_SELECT_PAIS + "/option[@selected='selected' and @value='" + codigoPais + "']"; 
-		return (state(Present, By.xpath(xpathOption)).check());
+		return state(Present, xpathOption).check();
 	}
 
 	public boolean isTextoRGPDVisible() {
@@ -249,6 +249,6 @@ public class PageRegistroIniOutlet extends PageBase {
 	}
 
 	public boolean isCheckboxRecibirInfoPresentUntil(int maxSeconds) {
-		return (state(Present, By.xpath(XPATH_CHECKBOX_PUBLI)).wait(maxSeconds).check());
+		return state(Present, XPATH_CHECKBOX_PUBLI).wait(maxSeconds).check();
 	}
 }

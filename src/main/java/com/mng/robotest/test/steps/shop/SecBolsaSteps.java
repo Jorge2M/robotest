@@ -183,12 +183,8 @@ public class SecBolsaSteps {
 
 		validaCuadranArticulosBolsa(dataBag);
 		
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.GoogleAnalytics,
-				GenericCheck.Analitica,
-				GenericCheck.TextsTraduced,
-				GenericCheck.NetTraffic)).checks(driver);
+		GenericChecks.checkDefault(driver);
+		GenericChecks.from(Arrays.asList(GenericCheck.GoogleAnalytics)).checks(driver);
 	}
 
 	@Validation
@@ -303,10 +299,7 @@ public class SecBolsaSteps {
 		} else {
 			int maxSeconds = 5;
 			new Page1IdentCheckoutSteps().validateIsPage(maxSeconds);
-			GenericChecks.from(Arrays.asList(
-					GenericCheck.CookiesAllowed,
-					GenericCheck.Analitica,
-					GenericCheck.TextsTraduced)).checks(driver);
+			GenericChecks.checkDefault(driver);
 			
 		}
 	}

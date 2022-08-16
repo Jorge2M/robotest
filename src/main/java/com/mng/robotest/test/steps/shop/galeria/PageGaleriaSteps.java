@@ -321,12 +321,7 @@ public class PageGaleriaSteps {
 		int numArticulosPant = pageGaleria.getNumArticulos() + pageGaleria.getNumArticulos();
 		checkOrderListArticles(typeOrdenacion, numArticulosPant, numArticulosValidar);
  
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.SEO,
-				GenericCheck.JSerrors,
-				GenericCheck.TextsTraduced,
-				GenericCheck.Analitica)).checks(driver);
+		GenericChecks.checkDefault(driver);
 	   
 		return numArticulosPant;
 	}
@@ -522,13 +517,9 @@ public class PageGaleriaSteps {
 		int maxSeconds = 3;
 		checkIsFichaArticle(nombre1erArt, precio1erArt, maxSeconds);
 
+		GenericChecks.checkDefault(driver);
 		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
 				GenericCheck.GoogleAnalytics, 
-				GenericCheck.JSerrors,
-				GenericCheck.SEO,
-				GenericCheck.Analitica,
-				GenericCheck.TextsTraduced,
 				GenericCheck.NetTraffic)).checks(driver);	   
 	}
    

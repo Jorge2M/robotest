@@ -50,15 +50,15 @@ public class ModalFichaFavoritos extends PageBase {
 	}
 	
 	public String getNombreColorSelectedFicha() {
-		if (state(Visible, By.xpath(XPATH_IMG_COLOR_SELECTED_FICHA), driver).check()) {
-			return (driver.findElement(By.xpath(XPATH_IMG_COLOR_SELECTED_FICHA)).getAttribute("title"));
+		if (state(Visible, XPATH_IMG_COLOR_SELECTED_FICHA).check()) {
+			return (getElement(XPATH_IMG_COLOR_SELECTED_FICHA).getAttribute("title"));
 		}
 		return "";
 	}
 	
 	public String getCodigoColorSelectedFicha() {
-		if (state(Visible, By.xpath(XPATH_COLOR_SELECTED_FICHA), driver).check()) {
-			String id = driver.findElement(By.xpath(XPATH_COLOR_SELECTED_FICHA)).getAttribute("id");
+		if (state(Visible, XPATH_COLOR_SELECTED_FICHA).check()) {
+			String id = getElement(XPATH_COLOR_SELECTED_FICHA).getAttribute("id");
 			if (!id.isEmpty()) {
 				return (id.replace("color_", ""));
 			}
@@ -68,13 +68,12 @@ public class ModalFichaFavoritos extends PageBase {
 	
 	public boolean isVisibleFichaUntil(String refProducto, int maxSeconds) {
 		String xpathFicha = getXPathFichaProducto(refProducto);
-		return (state(Visible, By.xpath(xpathFicha), driver).wait(maxSeconds).check());
+		return (state(Visible, xpathFicha).wait(maxSeconds).check());
 	}
 	
 	public boolean isInvisibleFichaUntil(String refProducto, int maxSeconds) {
 		String xpathFicha = getXPathFichaProducto(refProducto);
-		return (state(Invisible, By.xpath(xpathFicha), driver)
-				.wait(maxSeconds).check());
+		return (state(Invisible, xpathFicha).wait(maxSeconds).check());
 	}
 	
 	public boolean isColorSelectedInFicha(Color color) {
@@ -94,7 +93,7 @@ public class ModalFichaFavoritos extends PageBase {
 	public void clickButtonAddToBagAndWait(String refProducto, Pais pais) 
 			throws Exception {
 		String xpathAdd = getXPathButtonAddBolsa(refProducto);
-		driver.findElement(By.xpath(xpathAdd)).click();
+		getElement(xpathAdd).click();
 		int maxSecondsToWait = 2;
 		
 		SecBolsa secBolsa = SecBolsa.make(channel, app, pais);
@@ -116,7 +115,7 @@ public class ModalFichaFavoritos extends PageBase {
 		//Filtramos y nos quedamos sólo con las tallas disponibles
 		List<WebElement> listTallasAvailable = new ArrayList<>();
 		for (WebElement talla : listTallas) {
-			if (!state(Present, talla, driver).by(By.xpath("./span")).check()) {
+			if (!state(Present, talla).by(By.xpath("./span")).check()) {
 				listTallasAvailable.add(talla);
 			}
 		}

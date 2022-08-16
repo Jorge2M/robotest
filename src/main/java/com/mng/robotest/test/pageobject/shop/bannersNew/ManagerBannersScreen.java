@@ -9,37 +9,38 @@ import java.util.List;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 
-public class ManagerBannersScreen {
+import com.mng.robotest.domains.transversal.PageBase;
+
+public class ManagerBannersScreen extends PageBase {
 	
-	List<DataBanner> listDataBannersOrderedByPosition = new ArrayList<>();
-	int maxBannersToLoad = 100;
+	private List<DataBanner> listDataBannersOrderedByPosition = new ArrayList<>();
+	private int maxBannersToLoad = 100;
 	
-	public ManagerBannersScreen(int maxBannersToLoad, WebDriver driver) {
+	public ManagerBannersScreen(int maxBannersToLoad) {
 		this.maxBannersToLoad = maxBannersToLoad;
-		clearAndStoreNewBannersDataFromScreen(driver);
+		clearAndStoreNewBannersDataFromScreen();
 	}
 	
-	public ManagerBannersScreen(WebDriver driver) {
-		clearAndStoreNewBannersDataFromScreen(driver);
+	public ManagerBannersScreen() {
+		clearAndStoreNewBannersDataFromScreen();
 	}
 	
 	public List<DataBanner> getListDataBanners() {
 		return listDataBannersOrderedByPosition;
 	}
 	
-	public void reloadBanners(WebDriver driver) {
-		clearAndStoreNewBannersDataFromScreen(driver);
+	public void reloadBanners() {
+		clearAndStoreNewBannersDataFromScreen();
 	}
 	
-	public void clearAndStoreNewBannersDataFromScreen(WebDriver driver) {
+	public void clearAndStoreNewBannersDataFromScreen() {
 		List<BannerType> listTypeBannersToStore = Arrays.asList(BannerType.values());
-		clearAndStoreNewBannersDataFromScreen(listTypeBannersToStore, driver);
+		clearAndStoreNewBannersDataFromScreen(listTypeBannersToStore);
 	}
 	
-	public void clearAndStoreNewBannersDataFromScreen(List<BannerType> listBannerTypes, WebDriver driver) {
+	public void clearAndStoreNewBannersDataFromScreen(List<BannerType> listBannerTypes) {
 		clearBannersData(listBannerTypes);
 		for (BannerType bannerType : listBannerTypes) {
 			BannerObject bannerObject = BannerObjectFactory.make(bannerType);
@@ -47,7 +48,7 @@ public class ManagerBannersScreen {
 				//Para recopilar este tipo de banners hemos de paginar para asegurarnos que se visualizan todos
 				new Actions(driver).sendKeys(Keys.PAGE_DOWN).perform();
 			}
-			List<DataBanner> listBannersOfType = bannerObject.getListBannersDataUntil(maxBannersToLoad, 1, driver);
+			List<DataBanner> listBannersOfType = bannerObject.getListBannersDataUntil(maxBannersToLoad, 1);
 			addBanners(listBannersOfType);
 		}
 	}
@@ -127,19 +128,19 @@ public class ManagerBannersScreen {
 		return (!listDataBannersOrderedByPosition.isEmpty());
 	}
 	
-	public static boolean existBanners(WebDriver driver) {
+	public static boolean isBanners() {
 		int maxBannersToLoad = 1;
-		ManagerBannersScreen manager = new ManagerBannersScreen(maxBannersToLoad, driver);
-		return (manager.existBanners());
+		ManagerBannersScreen manager = new ManagerBannersScreen(maxBannersToLoad);
+		return manager.existBanners();
 	}
 	
-	public void clickBannerAndWaitLoad(int posBanner, WebDriver driver) throws Exception {
+	public void clickBannerAndWaitLoad(int posBanner) throws Exception {
 		DataBanner dataBanner = getBanner(posBanner);
-		clickBannerAndWaitLoad(dataBanner, driver);
+		clickBannerAndWaitLoad(dataBanner);
 	}
 	
-	public void clickBannerAndWaitLoad(DataBanner dataBanner, WebDriver driver) throws Exception {
+	public void clickBannerAndWaitLoad(DataBanner dataBanner) throws Exception {
 		BannerObject bannerObject = BannerObjectFactory.make(dataBanner.getBannerType());
-		bannerObject.clickBannerAndWaitLoad(dataBanner, driver);
+		bannerObject.clickBannerAndWaitLoad(dataBanner);
 	}
 }

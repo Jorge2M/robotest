@@ -2,8 +2,6 @@ package com.mng.robotest.domains.loyalty.pageobjects;
 
 import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import org.openqa.selenium.By;
-
 
 public class PageHomePurchaseWithDiscount extends PageBase {
 
@@ -11,10 +9,10 @@ public class PageHomePurchaseWithDiscount extends PageBase {
 	private static final String XPATH_BUTTON_PURCHASE_NOW = "//a[text()='Comprar ahora']";
 	
 	public boolean checkIsPage() {
-		return (state(Visible, By.id(ID_BLOCK_LOYALTY)).check());
+		return state(Visible, ID_BLOCK_LOYALTY).check();
 	}
 
 	public boolean areVisibleButtonPurchaseNow() {
-		return (state(Visible, By.xpath(XPATH_BUTTON_PURCHASE_NOW)).wait(2).check());
+		return state(Visible, XPATH_BUTTON_PURCHASE_NOW).wait(2).check();
 	}
 }

@@ -3,7 +3,7 @@ package com.mng.robotest.domains.votfconsole.pageobjects;
 import java.util.Iterator;
 import java.util.List;
 
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.domains.transversal.PageBase;
@@ -24,23 +24,23 @@ public class IframeResult extends PageBase {
 	private static final String XPATH_BLOCK_LISTA_PEDIDOS_FULL= XPATH_BLOCK_RESULTADO + "//span[@class='pedido']";
 	
 	public boolean resultadoContainsText(String text) {
-		if (state(Present, By.xpath(XPATH_BLOCK_RESULTADO), driver).check()) {
-			return (driver.findElement(By.xpath(XPATH_BLOCK_RESULTADO)).getText().contains(text));
+		if (state(Present, XPATH_BLOCK_RESULTADO).check()) {
+			return getElement(XPATH_BLOCK_RESULTADO).getText().contains(text);
 		}
 		return false;
 	}
 
 	public boolean existsTransportes() {
-		return state(Present, By.xpath(XPATH_BLOCK_TRANSPORTES)).check();
+		return state(Present, XPATH_BLOCK_TRANSPORTES).check();
 	}	
 	
 	public boolean existsDisponibilidad() {
-		return state(Present, By.xpath(XPATH_BLOCK_DISPONIBILIDAD)).check();
+		return state(Present, XPATH_BLOCK_DISPONIBILIDAD).check();
 	}	
 	
 	public boolean flagDisponibleIsTrue() {
-		if (state(Present, By.xpath(XPATH_CAMPO_DISPONIBLE)).check()) {
-			return ("true".compareTo(driver.findElement(By.xpath(XPATH_CAMPO_DISPONIBLE)).getText())==0);
+		if (state(Present, XPATH_CAMPO_DISPONIBLE).check()) {
+			return ("true".compareTo(getElement(XPATH_CAMPO_DISPONIBLE).getText())==0);
 		}
 		return false;
 	}
@@ -50,7 +50,7 @@ public class IframeResult extends PageBase {
 		String[] listTrans = codigosTransporte.trim().split("\n");
 		for (int i=0; i<listTrans.length; i++) {
 			String xpath = XPATH_BLOCK_TRANSPORTES + "//table//tr[" + (i+3) + "]/td[1][text()='" + listTrans[i] + "']";
-			if (!state(Present, By.xpath(xpath), driver).check()) { 
+			if (!state(Present, xpath).check()) { 
 			   contains = false;
 			}
 		}
@@ -58,20 +58,20 @@ public class IframeResult extends PageBase {
 	}
 	
 	public boolean isPresentTipoStock() { 
-		return (state(Present, By.xpath(XPATH_LINT_TIPO_STOCK)).check());
+		return state(Present, XPATH_LINT_TIPO_STOCK).check();
 	}
 	
 	public boolean isPresentCodigoPedido(int maxSeconds) {
-		if (!state(Present, By.xpath(XPATH_BLOCK_RESULT_PEDIDO)).wait(maxSeconds).check()) {
+		if (!state(Present, XPATH_BLOCK_RESULT_PEDIDO).wait(maxSeconds).check()) {
 			return false;
 		}
-		return driver.findElement(By.xpath(XPATH_BLOCK_RESULT_PEDIDO)).getText().contains("Código pedido"); 
+		return getElement(XPATH_BLOCK_RESULT_PEDIDO).getText().contains("Código pedido"); 
 	}
 	
 	public String getCodigoPedido() {
 		String codigoPedido = "";
-		if (state(Present, By.xpath(XPATH_BLOCK_CODIGO_PEDIDO)).check()) {
-			codigoPedido = driver.findElement(By.xpath(XPATH_BLOCK_CODIGO_PEDIDO)).getText();
+		if (state(Present, XPATH_BLOCK_CODIGO_PEDIDO).check()) {
+			codigoPedido = getElement(XPATH_BLOCK_CODIGO_PEDIDO).getText();
 		}
 		return codigoPedido;
 	}
@@ -91,7 +91,7 @@ public class IframeResult extends PageBase {
 	private String getPedidoFromListaPedidos(String codPedidoShort) {
 		String pedidoFull = "";
 		waitForPageLoaded(driver);
-		List<WebElement> listPedidos = driver.findElements(By.xpath(XPATH_BLOCK_LISTA_PEDIDOS_FULL));
+		List<WebElement> listPedidos = getElements(XPATH_BLOCK_LISTA_PEDIDOS_FULL);
 
 		//En cada elemento buscamos el pedido en formato corto
 		Iterator<WebElement> it = listPedidos.iterator();
@@ -106,46 +106,48 @@ public class IframeResult extends PageBase {
 
 	public boolean resCreacionPedidoOk() { 
 		boolean resultado = false;
-		if (state(Present, By.xpath(XPATH_BLOCK_RESULTADO)).check()) {
-			resultado = driver.findElement(By.xpath(XPATH_BLOCK_RESULTADO)).getText().contains("Resultado creación pedido: (0) Total");
+		if (state(Present, XPATH_BLOCK_RESULTADO).check()) {
+			resultado = getElement(XPATH_BLOCK_RESULTADO).getText().contains("Resultado creación pedido: (0) Total");
 		}
 		return resultado;
 	}
 
 	public boolean isPresentListaPedidosUntil(int maxSeconds) {
-		if (!state(Present, By.xpath(XPATH_BLOCK_LIST_PEDIDOS)).wait(maxSeconds).check()) {
+		if (!state(Present, XPATH_BLOCK_LIST_PEDIDOS).wait(maxSeconds).check()) {
 			return false;
 		}
-		return driver.findElement(By.xpath(XPATH_BLOCK_LIST_PEDIDOS)).getText().contains("Pedidos:");
+		return getElement(XPATH_BLOCK_LIST_PEDIDOS).getText().contains("Pedidos:");
 	}
 	
 	public boolean resSelectPedidoOk(String codigoPedidoFull) {
 		boolean resultado = false;
-		if (state(Present, By.xpath(XPATH_BLOCK_RESULT_PEDIDO)).check()) {
-			resultado = driver.findElement(By.xpath(XPATH_BLOCK_RESULT_PEDIDO)).getText().contains("Seleccionado: " + codigoPedidoFull);
+		if (state(Present, XPATH_BLOCK_RESULT_PEDIDO).check()) {
+			resultado = getElement(XPATH_BLOCK_RESULT_PEDIDO).getText().contains("Seleccionado: " + codigoPedidoFull);
 		}
 		return resultado;
 	}
 
 	public boolean isLineaPreconfirmado() {
-		if (state(Present, By.xpath(XPATH_BLOCK_RESULTADO)).wait(1).check()) {
-			return driver.findElement(By.xpath(XPATH_BLOCK_RESULTADO)).getText().contains("Preconfirmado");
+		if (state(Present, XPATH_BLOCK_RESULTADO).wait(1).check()) {
+			return getElement(XPATH_BLOCK_RESULTADO).getText().contains("Preconfirmado");
 		}
 		return false;
 	}
 
 	public boolean isPedidoInXML(String codigoPedidoFull) {
-		if (state(Present, By.xpath(XPATH_BLOCK_RESULTADO)).check()) {
-			return driver.findElement(By.xpath(XPATH_BLOCK_RESULTADO + "//span")).getText().contains("<pedido>" + codigoPedidoFull + "</pedido>");
+		if (state(Present, XPATH_BLOCK_RESULTADO).check()) {
+			return getElement(XPATH_BLOCK_RESULTADO + "//span").getText()
+					.contains("<pedido>" + codigoPedidoFull + "</pedido>");
 		}
 		return false;
 	}
 
 	public boolean resConfPedidoOk(String codigoPedidoFull) {
 		boolean resultado = false;
-		if (state(Present, By.xpath(XPATH_BLOCK_RESULTADO)).check()) {
+		if (state(Present, XPATH_BLOCK_RESULTADO).check()) {
 			//En el bloque de "Petición/Resultado" aparece una línea "Confirmado: + codigoPedidoFull"
-			resultado = driver.findElement(By.xpath(XPATH_BLOCK_RESULTADO)).getText().contains("Confirmado: " + codigoPedidoFull);
+			resultado = getElement(XPATH_BLOCK_RESULTADO).getText()
+					.contains("Confirmado: " + codigoPedidoFull);
 		}
 		return resultado;
 	}

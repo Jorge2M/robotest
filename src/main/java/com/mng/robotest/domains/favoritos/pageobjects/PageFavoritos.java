@@ -70,67 +70,66 @@ public class PageFavoritos extends PageBase {
 	// Funcionalidad de Share Favorites (pre)
 	
 	private String getXPathWithIdItem(int numArticulo) {
-		String idItem = driver.findElement(By.xpath("(" + XPATH_ARTICULO + ")[" + numArticulo + "]")).getAttribute("id");
+		String idItem = getElement("(" + XPATH_ARTICULO + ")[" + numArticulo + "]").getAttribute("id");
 		return (XPATH_ARTICULO + "[@id='" + idItem + "']");
 	}
 	
 	public void openShareModal() {
-		driver.findElement(By.xpath(XPATH_SHARE_MODAL_BUTTON)).click();
+		click(XPATH_SHARE_MODAL_BUTTON).exec();
 	}
 
 	public void closeShareModal() {
-		click(By.xpath(XPATH_CLOSE_SHARE_MODAL_BUTTON)).type(javascript).exec();
+		click(XPATH_CLOSE_SHARE_MODAL_BUTTON).type(javascript).exec();
 	}
 
 	public boolean checkShareModalUntill(int maxSeconds) {
-		return (state(Visible, By.xpath(XPATH_CLOSE_SHARE_MODAL_BUTTON)).wait(maxSeconds).check());
+		return state(Visible, XPATH_CLOSE_SHARE_MODAL_BUTTON).wait(maxSeconds).check();
 	}
 	
 	public boolean isShareFavoritesVisible() {
-		return (state(Visible, By.xpath(XPATH_SHARE_MODAL_BUTTON)).check());
+		return state(Visible, XPATH_SHARE_MODAL_BUTTON).check();
 	}
 	
 	public boolean isShareWhatsappFavoritesVisible() {
-		return (state(Visible, By.xpath(XPATH_WHATSAPP_SHARE_BUTTON)).check());
+		return state(Visible, XPATH_WHATSAPP_SHARE_BUTTON).check();
 	}
 	
 	public boolean isShareTelegramFavoritesVisible() {
-		return state(Visible, By.xpath(XPATH_TELEGRAM_SHARE_BUTTON)).check();
+		return state(Visible, XPATH_TELEGRAM_SHARE_BUTTON).check();
 	}
 	
 	public boolean isShareUrlFavoritesVisible() {
-		return state(Visible, By.xpath(XPATH_URL_SHARE_LABEL)).check();
+		return state(Visible, XPATH_URL_SHARE_LABEL).check();
 	}
 	
 	public void closeSharedModal() {
-		click(By.xpath(XPATH_CLOSE_SHARE_MODAL_BUTTON)).exec();
+		click(XPATH_CLOSE_SHARE_MODAL_BUTTON).exec();
 	}
 	
 	public boolean checkShareModalInvisible(int maxSeconds) {
-		return state(Invisible, By.xpath(XPATH_CLOSE_SHARE_MODAL_BUTTON)).wait(maxSeconds).check();
+		return state(Invisible, XPATH_CLOSE_SHARE_MODAL_BUTTON).wait(maxSeconds).check();
 	}
 
 	public boolean isSectionVisible() {
-		return (state(Visible, By.xpath(XPATH_BLOCK_FAVORITOS)).check());
+		return state(Visible, XPATH_BLOCK_FAVORITOS).check();
 	}
 	
 	public boolean isSectionArticlesVisibleUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPATH_BLOCK_FAV_WITH_ART)).wait(maxSeconds).check());
+		return state(Visible, XPATH_BLOCK_FAV_WITH_ART).wait(maxSeconds).check();
 	}
 	
 	public void clearArticuloAndWait(String refArticulo, String codColorArticulo) {
 		String xpathBorrar = getXPathAspaBorrar(refArticulo, codColorArticulo);
 		
 		//Ejecutamos el click mediante JavaScript porque en el caso de móvil en ocasiones el aspa de cerrado queda por debajo de la cabecera
-		click(By.xpath(xpathBorrar)).type(javascript).exec();
+		click(xpathBorrar).type(javascript).exec();
 	}
 	
 	public boolean isInvisibleArticleUntil(String referencia, String codColor, int maxSeconds) {
 		String xpathArticulo = getXPathArticle(referencia, codColor);
-		return (state(Invisible, By.xpath(xpathArticulo)).wait(maxSeconds).check());
+		return state(Invisible, xpathArticulo).wait(maxSeconds).check();
 	}
 	
-	@SuppressWarnings("static-access")
 	public void clearAllArticulos() {
 		if (!isSectionVisible()) {
 			SecMenusWrap secMenus = new SecMenusWrap(channel, app);
@@ -144,7 +143,7 @@ public class PageFavoritos extends PageBase {
 	}
 	
 	public boolean hayArticulos() {
-		return (state(Present, By.xpath(XPATH_ARTICULO)).check());
+		return state(Present, XPATH_ARTICULO).check();
 	}
 	
 	public boolean areVisibleArticlesUntil(DataFavoritos dataFavoritos, int maxSecondsToWait) {
@@ -165,7 +164,7 @@ public class PageFavoritos extends PageBase {
 	
 	public boolean isVisibleArticleUntil(String refArticulo, String codigoColor, int maxSeconds) {
 		String xpathArt = getXPathArticle(refArticulo, codigoColor);
-		return (state(Visible, By.xpath(xpathArt)).wait(maxSeconds).check());
+		return state(Visible, xpathArt).wait(maxSeconds).check();
 	}
 	
 	public void clear1rstArticuloAndWait() {
@@ -173,8 +172,8 @@ public class PageFavoritos extends PageBase {
 			String xpathArtWithIdItem = getXPathWithIdItem(1);
 			
 			//Ejecutamos el click mediante JavaScript porque en el caso de móvil en ocasiones el aspa de cerrado queda por debajo de la cabecera
-			By byElem = By.xpath(xpathArtWithIdItem + "//span[@class[contains(.,'icofav-eliminar')]]");
-			click(byElem).type(javascript).exec();
+			String xpath = xpathArtWithIdItem + "//span[@class[contains(.,'icofav-eliminar')]]";
+			click(xpath).type(javascript).exec();
 			new WebDriverWait(driver, 3).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpathArtWithIdItem)));
 		}
 	}

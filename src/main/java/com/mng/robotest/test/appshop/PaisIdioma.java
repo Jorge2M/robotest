@@ -173,7 +173,7 @@ public class PaisIdioma implements Serializable {
 	public void testSpecificFeaturesForLinea(Linea linea, WebDriver driver) throws Exception {
 		if (testBanners(linea)) {
 			int maxBannersToTest = getMaxBannersToTest(dCtxSh.pais, dCtxSh.appE);
-			SecBannersSteps secBannersSteps = new SecBannersSteps(maxBannersToTest, driver);
+			SecBannersSteps secBannersSteps = new SecBannersSteps(maxBannersToTest);
 			secBannersSteps.testPageBanners(dCtxSh, maxBannersToTest);
 		}
 	}

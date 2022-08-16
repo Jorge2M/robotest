@@ -44,11 +44,6 @@ public class PageDevolucionesSteps extends StepBase {
 		Devolucion.EN_DOMICILIO.waitForInState(desplegada, 2, driver);
 		pageDevoluciones.clickSolicitarRecogida();
 		new PageRecogidaDomicSteps().vaidaIsPageSinDevoluciones();
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.SEO, 
-				GenericCheck.JSerrors, 
-				GenericCheck.TextsTraduced,
-				GenericCheck.Analitica)).checks(driver);
+		GenericChecks.checkDefault(driver);
 	}
 }

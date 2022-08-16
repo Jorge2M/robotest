@@ -2,13 +2,13 @@ package com.mng.robotest.domains.registro.pageobjects;
 
 import java.util.Map;
 
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.domains.registro.pageobjects.beans.DataRegistro;
-import com.mng.robotest.domains.registro.pageobjects.beans.ListDataRegistro;
+import com.mng.robotest.domains.registro.beans.DataRegistro;
+import com.mng.robotest.domains.registro.beans.ListDataRegistro;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.checkout.Page2IdentCheckout;
 
@@ -27,7 +27,7 @@ public class PageRegistroDirecOutlet extends PageBase {
 	private final static String XPATH_FINALIZAR_BUTTON = "//form[@id[contains(.,'Step')]]//input[@type='submit']";
 	
 	public int getNumberMsgInputInvalid() {
-		return (getNumElementsVisible(driver, By.xpath(XPATH_DIV_ERROR)));
+		return getNumElementsVisible(XPATH_DIV_ERROR);
 	}
 	
 	public void sendDataAccordingCountryToInputs(
@@ -70,8 +70,8 @@ public class PageRegistroDirecOutlet extends PageBase {
 	
 	public void sendDataToPaisIfNotExist(String codigoPais) {
 		String xpathSelectedPais = XPATH_SELECT_PAIS + "/option[@selected='selected' and @value='" + codigoPais + "']";
-		if (state(Present, By.xpath(xpathSelectedPais)).check()) {
-			new Select(driver.findElement(By.xpath(XPATH_SELECT_PAIS))).selectByValue(codigoPais);
+		if (state(Present, xpathSelectedPais).check()) {
+			new Select(getElement(XPATH_SELECT_PAIS)).selectByValue(codigoPais);
 		}
 	}	
 	
@@ -80,32 +80,32 @@ public class PageRegistroDirecOutlet extends PageBase {
 	}
 	
 	public void sendDataToPoblacion(String poblacion) {
-		new Select(driver.findElement(By.xpath(XPATH_SELECT_POBLACION))).selectByValue(poblacion);
+		new Select(getElement(XPATH_SELECT_POBLACION)).selectByValue(poblacion);
 	}
 	
 	public void sendDataToProvincia(String provincia) {
-		String valueProvincia = driver.findElement(By.xpath(XPATH_SELECT_PROVINCIA + "/option[text()='" + provincia + "']")).getAttribute("value");
-		new Select(driver.findElement(By.xpath(XPATH_SELECT_PROVINCIA))).selectByValue(valueProvincia);
+		String valueProvincia = getElement(XPATH_SELECT_PROVINCIA + "/option[text()='" + provincia + "']").getAttribute("value");
+		new Select(getElement(XPATH_SELECT_PROVINCIA)).selectByValue(valueProvincia);
 	}
 	
 	public boolean isVisibleFinalizarButton() {
-		return (state(Visible, By.xpath(XPATH_FINALIZAR_BUTTON)).check());
+		return state(Visible, XPATH_FINALIZAR_BUTTON).check();
 	}
 	
 	public void clickFinalizarButton() {
-		click(By.xpath(XPATH_FINALIZAR_BUTTON)).exec();
+		click(XPATH_FINALIZAR_BUTTON).exec();
 		
 		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
 		if (isVisibleFinalizarButton()) {
-			click(By.xpath(XPATH_FINALIZAR_BUTTON)).type(javascript).exec();
+			click(XPATH_FINALIZAR_BUTTON).type(javascript).exec();
 		}
 	}
 	
 	private void sendKeysToInputIfNotExist(String dataToSend, String xpathInput) {
-		if (driver.findElement(By.xpath(xpathInput)).getAttribute("value").compareTo(dataToSend)!=0) {
-			driver.findElement(By.xpath(xpathInput)).clear();
-			driver.findElement(By.xpath(xpathInput)).sendKeys(dataToSend);
-			driver.findElement(By.xpath(xpathInput)).sendKeys(Keys.TAB);
+		if (getElement(xpathInput).getAttribute("value").compareTo(dataToSend)!=0) {
+			getElement(xpathInput).clear();
+			getElement(xpathInput).sendKeys(dataToSend);
+			getElement(xpathInput).sendKeys(Keys.TAB);
 		}
 	}
 }

@@ -1,8 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.micuenta;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -10,63 +7,65 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageSuscripciones extends PageBase {
 
-	//Los valores que permiten identificar los radios correspondientes a los newsletter seleccionables
 	public enum NewsLetter { she, he, kids, teen }
 	
-	private static final String XPathButtonGuardarCambios = "//input[@type='submit' and @value[contains(.,'Guardar')]]";
-	private static final String XPathPageResOK = "//*[text()[contains(.,'Preferencias actualizadas!')]]";
-	private static final String XPathCheckboxNewsletter = "//form/div[@class='checkboxContent'][1]//div[@class='multipleCheckbox']";
+	private static final String XPATH_BUTTON_GUARDAR_CAMBIOS = "//input[@type='submit' and @value[contains(.,'Guardar')]]";
+	private static final String XPATH_PAGE_RES_OK = "//*[text()[contains(.,'Preferencias actualizadas!')]]";
+	private static final String XPATH_CHECKBOX_NEWSLETTER = "//form/div[@class='checkboxContent'][1]//div[@class='multipleCheckbox']";
 	
-	public PageSuscripciones(WebDriver driver) {
-		super(driver);
+	private String getXPathNewsletterDesmarcadas() {
+		return (getXPathNewsletterDesmarcadas(""));
 	}
 	
-	private String getXPath_newsletterDesmarcadas() {
-		return (getXPath_newsletterDesmarcadas(""));
-	}
-	
-	private String getXPATH_radioNewsletterClickable(NewsLetter idRadio) {
+	private String getXPathRadioNewsletterClickable(NewsLetter idRadio) {
 		return ("//input[@data-component-id='SUBS_" + idRadio.toString() + "']/..");
 	}
 	
-	private String getXPath_newsletterDesmarcadas(String linea) {
-		return (XPathCheckboxNewsletter + "//input[not(@checked) and @data-component-id[contains(.,'_" + linea + "')]]");
+	private String getXPathNewsletterDesmarcadas(String linea) {
+		return (XPATH_CHECKBOX_NEWSLETTER + "//input[not(@checked) and @data-component-id[contains(.,'_" + linea + "')]]");
 	}
+	private String getXPathNewsletterMarcadas(String linea) {
+		return (XPATH_CHECKBOX_NEWSLETTER + "//input[@checked and @data-component-id[contains(.,'_" + linea + "')]]");
+	}	
 	
 	public boolean isPage() {
-		return (state(Visible, By.xpath("//div[@class[contains(.,'Subscriptions')]]"), driver).check());
+		return state(Visible, "//div[@class[contains(.,'Subscriptions')]]").check();
 	}
 	
 	private boolean isRadioNewsletterSelected(NewsLetter idRadio) {
-		By byRadio = By.xpath(getXPATH_radioNewsletterClickable(idRadio));
-		return driver.findElement(byRadio).getAttribute("class").contains("active");
+		String xpathRadio = getXPathRadioNewsletterClickable(idRadio);
+		return getElement(xpathRadio).getAttribute("class").contains("active");
 	}
 	
 	public void selectRadioNewsletter(NewsLetter idRadio) {
 		if (!isRadioNewsletterSelected(idRadio)) {
-			driver.findElement(By.xpath(getXPATH_radioNewsletterClickable(idRadio))).click();
+			getElement(getXPathRadioNewsletterClickable(idRadio)).click();
 		}
 	}
 	
 	public void clickGuardarCambios() {
-		click(By.xpath(XPathButtonGuardarCambios), driver).exec();
+		click(XPATH_BUTTON_GUARDAR_CAMBIOS).exec();
 	}
 	
 	public boolean isPageResOKUntil(int maxSeconds) { 
-		return (state(Present, By.xpath(XPathPageResOK), driver).wait(maxSeconds).check());
+		return state(Present, XPATH_PAGE_RES_OK).wait(maxSeconds).check();
 	}
 	
 	public int getNumNewsletters() {
-		return (driver.findElements(By.xpath(XPathCheckboxNewsletter)).size());
+		return getElements(XPATH_CHECKBOX_NEWSLETTER).size();
 	}
 	
 	public int getNumNewslettersDesmarcadas() {
-		String xpathLineas = getXPath_newsletterDesmarcadas();
-		return (driver.findElements(By.xpath(xpathLineas)).size());
+		String xpathLineas = getXPathNewsletterDesmarcadas();
+		return getElements(xpathLineas).size();
 	}
 	
 	public boolean isNewsletterDesmarcada(String linea) {
-		String xpathLinDesmarcada = getXPath_newsletterDesmarcadas(linea);
-		return (state(Present, By.xpath(xpathLinDesmarcada), driver).check());
+		String xpathLinDesmarcada = getXPathNewsletterDesmarcadas(linea);
+		return state(Present, xpathLinDesmarcada).check();
 	}
+	public boolean isNewsletterMarcada(String linea) {
+		String xpathLinMarcada = getXPathNewsletterMarcadas(linea);
+		return state(Present, xpathLinMarcada).check();
+	}	
 }

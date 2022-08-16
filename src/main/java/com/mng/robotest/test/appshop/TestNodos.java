@@ -105,7 +105,7 @@ public class TestNodos implements Serializable {
 		secMenusDesktopSteps.seleccionLinea(LineaType.she);
 		secMenusDesktopSteps.countSaveMenusEntorno(LineaType.she, null, nodo.getIp(), autAddr);
 		int maxBannersToLoad = 1;
-		SecBannersSteps secBannersSteps = new SecBannersSteps(maxBannersToLoad, driver);
+		SecBannersSteps secBannersSteps = new SecBannersSteps(maxBannersToLoad);
 		secBannersSteps.testPageBanners(dCtxSh, 1);
 		Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
 		secMenusSteps.accesoMenuXRef(menuVestidos, dCtxSh);

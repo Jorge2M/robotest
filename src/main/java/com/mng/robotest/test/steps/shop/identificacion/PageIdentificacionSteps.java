@@ -22,11 +22,7 @@ public class PageIdentificacionSteps {
 			throws Exception {
 		new PageIdentificacion().iniciarSesion(usrExistente, password, channel, appE);
 		checkTextoCredencialesKO();
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.SEO, 
-				GenericCheck.TextsTraduced,
-				GenericCheck.Analitica)).checks(driver);	
+		GenericChecks.checkDefault(driver);	
 	}
 	
 	@Validation (
@@ -41,11 +37,7 @@ public class PageIdentificacionSteps {
 		expected="Aparece la página de cambio de contraseña")
 	public static void selectHasOlvidadoTuContrasenya(WebDriver driver) {
 		new PageIdentificacion().clickHasOlvidadoContrasenya(); 
-		PageRecuperaPasswdSteps.isPage(driver); 
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.SEO,  
-				GenericCheck.TextsTraduced,
-				GenericCheck.Analitica)).checks(driver);
+		PageRecuperaPasswdSteps.isPage(driver);
+		GenericChecks.checkDefault(driver);
 	}
 }

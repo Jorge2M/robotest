@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
-import org.openqa.selenium.By;
+
 import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -55,11 +55,11 @@ public class SecSlidersOld extends PageBase {
 	
 	public boolean isVisible(Slider sliderType) {
 		String xpathSlider = getXPath(sliderType);
-		return (state(Visible, By.xpath(xpathSlider)).check());
+		return state(Visible, xpathSlider).check();
 	}
 	
 	public int getNumVisibleArticles(Slider sliderType) {
 		String xpathArticle = getXPathArticle(sliderType);
-		return (getNumElementsVisible(driver, By.xpath(xpathArticle)));
+		return getNumElementsVisible(xpathArticle);
 	}
 }

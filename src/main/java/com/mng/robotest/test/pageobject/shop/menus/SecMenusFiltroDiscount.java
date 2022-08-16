@@ -62,11 +62,11 @@ public class SecMenusFiltroDiscount extends PageBase {
 		return numberMenusVisibles;
 	}
 	
-	public void click(String typeMenu) {
-		click(TypeMenuDiscount.valueOf(typeMenu));
+	public void clickTypeMenu(String typeMenu) {
+		clickTypeMenu(TypeMenuDiscount.valueOf(typeMenu));
 	}
 
-	public void click(TypeMenuDiscount typeMenu) {
+	public void clickTypeMenu(TypeMenuDiscount typeMenu) {
 		String xpathMenu = getXPathMenu(typeMenu);
 		click(By.xpath(xpathMenu)).exec();
 	}

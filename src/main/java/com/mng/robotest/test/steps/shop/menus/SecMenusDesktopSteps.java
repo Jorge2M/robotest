@@ -134,12 +134,9 @@ public class SecMenusDesktopSteps {
 		PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		pageGaleriaSteps.validateGaleriaAfeterSelectMenu(dCtxSh.appE);
 		checksSelecMenuEspecificDesktop(menu);
+		
+		GenericChecks.checkDefault(driver);
 		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.SEO,
-				GenericCheck.JSerrors,
-				GenericCheck.Analitica,
-				GenericCheck.TextsTraduced,
 				GenericCheck.GoogleAnalytics,
 				GenericCheck.NetTraffic)).checks(driver);
 	}
@@ -303,7 +300,7 @@ public class SecMenusDesktopSteps {
 			break;
 		case banners:
 			int maxBannersToLoad = 1;
-			SecBannersSteps secBannersSteps = new SecBannersSteps(maxBannersToLoad, driver);
+			SecBannersSteps secBannersSteps = new SecBannersSteps(maxBannersToLoad);
 			secBannersSteps.validaBannEnContenido();
 			break;
 		case vacio:
@@ -312,13 +309,8 @@ public class SecMenusDesktopSteps {
 			break;
 		}
 
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.SEO, 
-				GenericCheck.JSerrors, 
-				GenericCheck.Analitica,
-				GenericCheck.TextsTraduced,
-				GenericCheck.ImgsBroken)).checks(driver);
+		GenericChecks.checkDefault(driver);
+		GenericChecks.from(Arrays.asList(GenericCheck.ImgsBroken)).checks(driver);
 	}
 
 	@Step (
@@ -387,7 +379,7 @@ public class SecMenusDesktopSteps {
 			!pageLanding.hayMaps() &&
 			!pageLanding.haySliders()) {
 			int maxBannersToLoad = 1;
-			ManagerBannersScreen managerBanners = new ManagerBannersScreen(maxBannersToLoad, driver);
+			ManagerBannersScreen managerBanners = new ManagerBannersScreen(maxBannersToLoad);
 			return (managerBanners.existBanners());
 		}
 		return true;
@@ -463,13 +455,8 @@ public class SecMenusDesktopSteps {
 			checksRebajas();
 		}
 		
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.SEO, 
-				GenericCheck.JSerrors, 
-				GenericCheck.Analitica,
-				GenericCheck.TextsTraduced,
-				GenericCheck.ImgsBroken)).checks(driver);
+		GenericChecks.checkDefault(driver);
+		GenericChecks.from(Arrays.asList(GenericCheck.ImgsBroken)).checks(driver);
 	}
 
 	@Validation

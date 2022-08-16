@@ -45,8 +45,11 @@ public class ModalUserSesionShopDesktop extends PageBase {
 	}
 	
 	public boolean isVisible() {
-		return (state(Visible, By.xpath(XPathCapaMenus)).check());
+		return isVisibleUntil(0);
 	}
+	public boolean isVisibleUntil(int seconds) {
+		return (state(Visible, By.xpath(XPathCapaMenus)).wait(seconds).check());
+	}	
 	
 	public boolean isMenuInState(MenuUserDesktop menu, State state) {
 		return (state(state, menu.getBy()).check());

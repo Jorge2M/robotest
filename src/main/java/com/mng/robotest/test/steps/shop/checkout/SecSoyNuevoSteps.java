@@ -35,10 +35,8 @@ public class SecSoyNuevoSteps extends StepBase {
 
 		Page2IdentCheckoutSteps page2IdentCheckoutSteps = new Page2IdentCheckoutSteps(channel, pais);
 		page2IdentCheckoutSteps.validateIsPage(emailExistsYet, 2);
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.Analitica,
-				GenericCheck.TextsTraduced)).checks(driver);
+		
+		GenericChecks.checkDefault(driver);
 	}
 
 	@SuppressWarnings("static-access")

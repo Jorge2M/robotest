@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.buscador.pageobjects;
 
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
@@ -16,7 +16,7 @@ public class SecSearchMobilOutlet extends PageBase implements SecSearch {
 
 	@Override
 	public void search(String text) {
-		WebElement input = getElementVisible(driver, By.xpath(XPATH_INPUT_BUSCADOR));
+		WebElement input = getElementVisible(XPATH_INPUT_BUSCADOR);
 		input.clear();
 		input.sendKeys(text);
 		input.sendKeys(Keys.RETURN);
@@ -24,11 +24,10 @@ public class SecSearchMobilOutlet extends PageBase implements SecSearch {
 	
 	@Override
 	public void close() {
-		click(By.xpath(XPATH_CANCELAR_LINK)).exec();
+		click(XPATH_CANCELAR_LINK).exec();
 	}
 
 	public boolean isBuscadorVisibleUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPATH_INPUT_BUSCADOR))
-				.wait(maxSeconds).check());
+		return (state(Visible, XPATH_INPUT_BUSCADOR).wait(maxSeconds).check());
 	}
 }

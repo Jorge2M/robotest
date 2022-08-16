@@ -1,5 +1,6 @@
 package com.mng.robotest.test.steps.shop.genericchecks;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -38,6 +39,14 @@ public class GenericChecks {
 	
 	public static GenericChecks from(List<GenericCheck> listChecks) {
 		return new GenericChecks(listChecks);
+	}
+	
+	public static void checkDefault(WebDriver driver) {
+		GenericChecks.from(Arrays.asList(
+				GenericCheck.CookiesAllowed,
+				GenericCheck.JSerrors, 
+				GenericCheck.TextsTraduced,
+				GenericCheck.Analitica)).checks(driver);
 	}
 	
 	public void checks(WebDriver driver) {

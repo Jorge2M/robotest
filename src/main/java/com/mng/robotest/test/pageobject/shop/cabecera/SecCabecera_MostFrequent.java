@@ -146,14 +146,14 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	}
 	
 	public void hoverIcono(IconoCabeceraShop_DesktopMobile icono) {
-		isInStateIconoBolsa(State.Visible, 3); //Con los nuevos menús ahora tardan bastante en aparecer los iconos
+		isInStateIconoBolsa(State.Visible, 5); //Con los nuevos menús ahora tardan bastante en aparecer los iconos
 		moveToElement(By.xpath(icono.getXPath(channel, app) + "/*"), driver); //Workaround problema hover en Firefox
 		moveToElement(icono.getBy(channel, app), driver);
 	}
 	
 	public void focusAwayBolsa(WebDriver driver) {
 		//The moveElement doens't works properly for hide the Bolsa-Modal
-		driver.findElement(By.xpath(XPATH_DIV_NAV_TOOLS)).click();
+		click(XPATH_DIV_NAV_TOOLS).exec();
 	}
 	
 	public void hoverIconForShowUserMenuDesktop() {

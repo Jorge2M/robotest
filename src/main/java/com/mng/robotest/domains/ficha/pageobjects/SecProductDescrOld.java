@@ -85,11 +85,11 @@ public class SecProductDescrOld extends PageBase {
 	public TypeStatePanel getStatePanel(TypePanel typePanel) {
 		waitMillis(200);
 		String xpathPanel = typePanel.getXPath(channel, app);
-		if (!state(Present, By.xpath(xpathPanel), driver).check()) {
+		if (!state(Present, xpathPanel).check()) {
 			return TypeStatePanel.MISSING;
 		}
 		
-		WebElement panel = driver.findElement(By.xpath(xpathPanel));
+		WebElement panel = getElement(xpathPanel);
 		if (channel==Channel.mobile || (channel==Channel.tablet && app!=AppEcom.outlet)) {
 			By byCapa = By.xpath(".//div[@class[contains(.,'collapsible-info-body')]]");
 			if (state(State.Present, panel).by(byCapa).check()) {
@@ -122,6 +122,6 @@ public class SecProductDescrOld extends PageBase {
 
 	public void clickPanel(TypePanel typePanel) {
 		String xpathPanelLink = typePanel.getXPathLink(channel, app);
-		click(By.xpath(xpathPanelLink), driver).exec();
+		click(xpathPanelLink).exec();
 	}
 }

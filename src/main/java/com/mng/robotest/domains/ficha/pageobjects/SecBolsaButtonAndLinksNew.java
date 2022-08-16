@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
-import org.openqa.selenium.By;
+
 
 import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -51,40 +51,38 @@ public class SecBolsaButtonAndLinksNew extends PageBase {
 	}
 	
 	public void clickAnadirBolsaButtonAndWait() {
-		click(By.xpath(XPATH_BUTTON_ADD_BOLSA)).type(javascript).exec();
+		click(XPATH_BUTTON_ADD_BOLSA).type(javascript).exec();
 	}
 
 	public boolean isVisibleButtonFavoritos() {
-		return (state(Visible, By.xpath(XPATH_BUTTON_FAVORITOS)).check());
+		return state(Visible, XPATH_BUTTON_FAVORITOS).check();
 	}
 
 	public boolean isVisibleButtonFavoritos(ActionFavButton actionButton) {
 		String xpathButtonFav = getXPathButtonFavoritos(actionButton);
-		return (state(Visible, By.xpath(xpathButtonFav)).wait(2).check());
+		return (state(Visible, xpathButtonFav).wait(2).check());
 	}
 
 	public void selectFavoritosButton(ActionFavButton actionButton) {
 		String xpathButtonFav = getXPathButtonFavoritos(actionButton);
-		click(By.xpath(xpathButtonFav)).exec();
+		click(xpathButtonFav).exec();
 	}
 
 	public boolean isVisibleDivAnadiendoAFavoritosUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPATH_DIV_ANADIENDO_FAVORITOS))
-				.wait(maxSeconds).check());
+		return state(Visible, XPATH_DIV_ANADIENDO_FAVORITOS).wait(maxSeconds).check();
 	}
 
 	public boolean isInvisibleDivAnadiendoAFavoritosUntil(int maxSeconds) {
-		return (state(Invisible, By.xpath(XPATH_DIV_ANADIENDO_FAVORITOS))
-				.wait(maxSeconds).check());
+		return state(Invisible, XPATH_DIV_ANADIENDO_FAVORITOS).wait(maxSeconds).check();
 	}
 
 	public void clickLinkAndWaitLoad(LinksAfterBolsa linkType) {
 		String xpathLink = getXPathLink(linkType);
-		click(By.xpath(xpathLink)).exec();
+		click(xpathLink).exec();
 	}
 	
 	public boolean checkLinkInState(LinksAfterBolsa linkType, State state) {
 		String xpathLink = getXPathLink(linkType);
-		return (state(state, By.xpath(xpathLink)).check());
+		return state(state, xpathLink).check();
 	}
 }

@@ -8,6 +8,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import org.openqa.selenium.By;
 
 
+
+
 public class PageHomeDonateLikes extends PageBase {
 
 	public enum ButtonLikes implements ElementPage {
@@ -20,13 +22,15 @@ public class PageHomeDonateLikes extends PageBase {
 		ButtonLikes(int numLikes) {
 			this.numLikes = numLikes;
 		}
-		
 		public int getNumLikes() {
 			return numLikes;
 		}
+		public String getXPath() {
+			return "//button/span[text()[contains(.,'" + numLikes + "')]]";
+		}
 		
 		public By getBy() {
-			return By.xpath("//button/span[text()[contains(.,'" + numLikes + "')]]");
+			return By.xpath(getXPath());
 		}
 	}
 	
@@ -34,18 +38,18 @@ public class PageHomeDonateLikes extends PageBase {
 	private static final String XPATH_ICON_OPERATION_DONE = "//*[@class[contains(.,'icon-outline-done')]]";
 
 	public boolean checkIsPage(int maxSeconds) {
-		return (state(Visible, By.xpath(XPATH_PAGE)).wait(maxSeconds).check());
+		return state(Visible, XPATH_PAGE).wait(maxSeconds).check();
 	}
 	
 	public boolean isVisible(ButtonLikes buttonLikes, int maxSeconds) {
-		return (state(Visible, buttonLikes.getBy()).wait(maxSeconds).check());
+		return state(Visible, buttonLikes.getXPath()).wait(maxSeconds).check();
 	}
 	
 	public void clickButton(ButtonLikes buttonLikes) {
-		click(buttonLikes.getBy()).exec();
+		click(buttonLikes.getXPath()).exec();
 	}
 	
 	public boolean isVisibleIconOperationDoneUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPATH_ICON_OPERATION_DONE)).wait(maxSeconds).check());
+		return state(Visible, XPATH_ICON_OPERATION_DONE).wait(maxSeconds).check();
 	}
 }

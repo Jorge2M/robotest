@@ -2,7 +2,7 @@ package com.mng.robotest.domains.registro.pageobjects;
 
 import java.util.StringTokenizer;
 
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
@@ -32,9 +32,9 @@ public class PageRegistroSegundaOutlet extends PageBase {
 	
 	public String getNewsLetterTitleText() {
 		try {
-			WebElement titleNws = driver.findElement(By.xpath(XPATH_NEWSLETTER_TITLE));
+			WebElement titleNws = getElement(XPATH_NEWSLETTER_TITLE);
 			if (titleNws!=null) {
-				return driver.findElement(By.xpath(XPATH_NEWSLETTER_TITLE)).getText();
+				return getElement(XPATH_NEWSLETTER_TITLE).getText();
 			}
 		}
 		catch (Exception e) {
@@ -45,19 +45,19 @@ public class PageRegistroSegundaOutlet extends PageBase {
 	}
 	
 	public boolean newsLetterTitleContains(String literal) {
-		return (getNewsLetterTitleText().contains(literal));
+		return getNewsLetterTitleText().contains(literal);
 	}
 	
 	String getXPath_radioNinosInFamily(int numNinos) {
-		return ("//div[@class='radiobuttonBtn']/input[@value='" + numNinos + "']");
+		return "//div[@class='radiobuttonBtn']/input[@value='" + numNinos + "']";
 	}
 	
 	public boolean isPageUntil(int maxSeconds) {
-		return (state(Present, By.xpath(XPATH_FORM_STEP2)).wait(maxSeconds).check());
+		return state(Present, XPATH_FORM_STEP2).wait(maxSeconds).check();
 	}
 	
 	public int getNumColecciones() {
-		return (driver.findElements(By.xpath(XPATH_CHECKBOX_LINEA)).size());
+		return getElements(XPATH_CHECKBOX_LINEA).size();
 	}
 	
 	/**
@@ -70,7 +70,7 @@ public class PageRegistroSegundaOutlet extends PageBase {
 	
 	public void setNumeroNinos(int numNinos) {
 		String xpathRadio = getXPath_radioNinosInFamily(numNinos);
-		driver.findElement(By.xpath(xpathRadio)).click();
+		getElement(xpathRadio).click();
 	}
 	
 	public void setFechaNacimiento(String dia, String mes, String any) {
@@ -80,22 +80,19 @@ public class PageRegistroSegundaOutlet extends PageBase {
 	}
 	
 	public boolean isPresentSelectDiaNacim() {
-		return (state(Present, By.xpath(XPATH_SELECT_DIA_NACIM)).check());
+		return state(Present, XPATH_SELECT_DIA_NACIM).check();
 	}
 	
 	public void selectDiaNacimByText(String dia) {
-		new Select(driver.findElement(By.xpath(XPATH_SELECT_DIA_NACIM)))
-			.selectByVisibleText(dia);
+		new Select(getElement(XPATH_SELECT_DIA_NACIM)).selectByVisibleText(dia);
 	}
 	
 	public void selectMesNacimByText(String mes) {
-		new Select(driver.findElement(By.xpath(XPATH_SELECT_MES_NACIM)))
-			.selectByValue(mes);
+		new Select(getElement(XPATH_SELECT_MES_NACIM)).selectByValue(mes);
 	}
 	
 	public void selectAnyNacimByText(String any) {
-		new Select(driver.findElement(By.xpath(XPATH_SELECT_ANY_NACIM)))
-			.selectByVisibleText(any);
+		new Select(getElement(XPATH_SELECT_ANY_NACIM)).selectByVisibleText(any);
 	}
 	
 	/**
@@ -107,7 +104,7 @@ public class PageRegistroSegundaOutlet extends PageBase {
 		while (tokensLinea.hasMoreElements()) {
 			String lineaStr=tokensLinea.nextToken();
 			String xpathCheckboxLinea = getXPath_checkboxLinea(lineaStr);
-			if (!state(Present, By.xpath(xpathCheckboxLinea)).check()) {
+			if (!state(Present, xpathCheckboxLinea).check()) {
 				isPresentInputs = false;
 				break;
 			}
@@ -128,8 +125,8 @@ public class PageRegistroSegundaOutlet extends PageBase {
 			String lineaStr=tokensLin.nextToken();
 			if (Math.random() < 0.5) {
 				String xpathLineaClick = getXPath_checkboxLineaClickable(lineaStr);
-				if (state(Present, By.xpath(xpathLineaClick)).check()) {
-					click(By.xpath(xpathLineaClick)).exec();
+				if (state(Present, xpathLineaClick).check()) {
+					click(xpathLineaClick).exec();
 				}
 						
 				//Las líneas que desmarcamos las guardamos
@@ -145,6 +142,6 @@ public class PageRegistroSegundaOutlet extends PageBase {
 	}
 	
 	public void clickButtonContinuar() {
-		click(By.xpath(XPATH_BUTTON_CONTINUAR)).exec();
+		click(XPATH_BUTTON_CONTINUAR).exec();
 	}
 }
