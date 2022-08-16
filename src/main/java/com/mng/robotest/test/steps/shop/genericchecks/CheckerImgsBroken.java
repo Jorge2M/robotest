@@ -18,6 +18,7 @@ import org.testng.ITestContext;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
@@ -39,8 +40,10 @@ public class CheckerImgsBroken implements Checker {
 	public ChecksTM check(WebDriver driver) {
 		ResultadoErrores resultadoImgs = imagesBroken(driver, Channel.desktop, MAX_ERRORES);
 		String descripValidac = "No hay imágenes cortadas";
-		if (resultadoImgs.getResultado()!=OK) {
-			descripValidac+=resultadoImgs.getlistaLogError().toString();
+		String infoExecution = "";
+		boolean resultadoOk = resultadoImgs.getResultado()==OK;
+		if (!resultadoOk) {
+			infoExecution=resultadoImgs.getlistaLogError().toString();
 		}
 		
 		boolean isCheckOk = 
@@ -49,7 +52,10 @@ public class CheckerImgsBroken implements Checker {
 				allImagesBrokenAreInWhitelist(resultadoImgs);
 		
 		ChecksTM checks = ChecksTM.getNew();
-		checks.add(descripValidac, isCheckOk, GenericCheck.ImgsBroken.getLevel());
+		checks.add(
+			Check.make(descripValidac, isCheckOk, GenericCheck.ImgsBroken.getLevel())
+				.info(infoExecution).build());
+		
 		return checks;
 	}
 	
@@ -192,28 +198,27 @@ public class CheckerImgsBroken implements Checker {
 		return src;
 	}
 	
-	/**
-	 * Decide si se ha de revisar o no que la imagen esté cortada (hay URLs que cargan un píxel transparente pero que son válidas)
-	 */
 	private boolean revisionBrokenHttp(final WebElement tagHttp) {
 		boolean broken = true;
 		try {
 			String src = getImageSrc(tagHttp);
 			String id = tagHttp.getAttribute("id");
 
-			// Hay un caso concreto de imágenes que se utilizan en Reino Unido y Nederlands que implementan redirecciones pero que son válidas
-			ArrayList<String> dominiosOK = new ArrayList<>();
-			dominiosOK.add("ib.adnxs.com");
-			dominiosOK.add("ad.yieldlab.net");
-			dominiosOK.add("pixel.prfct.co");
-			dominiosOK.add("doubleclick.net");
-			dominiosOK.add("adnxs.com");
-			dominiosOK.add("bat.r.msn.com");
-			dominiosOK.add("bat.bing.com");
-			dominiosOK.add("trc.taboola.com");
-			dominiosOK.add("ads.admized.com");
-			dominiosOK.add("sync.rhythmxchange.com");
-			dominiosOK.add("pixel-geo.prfct.co");
+			List<String> dominiosOK = Arrays.asList(
+			    "ib.adnxs.com",
+			    "ad.yieldlab.net",
+			    "pixel.prfct.co",
+			    "doubleclick.net",
+			    "adnxs.com",
+			    "bat.r.msn.com",
+			    "bat.bing.com",
+			    "trc.taboola.com",
+			    "ads.admized.com",
+			    "sync.rhythmxchange.com",
+			    "pixel-geo.prfct.co",
+			    "us.creativecdn.com",
+			    "nova.collect.igodigital.com");
+			
 			for (int i = 0; i < dominiosOK.size(); i++) {
 				if (src.contains(dominiosOK.get(i))) {
 					broken = false;

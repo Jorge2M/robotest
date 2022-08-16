@@ -42,7 +42,8 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 			"//self::*[@data-testid[contains(.,'header.userMenu.favorites')]]"),
 		bolsa(
 			"//span[@class[contains(.,'-bag')]]/..",
-			"//self::*[@data-testid[contains(.,'header.userMenu.bolsa')]]");
+			"//self::*[@data-testid[contains(.,'header.userMenu.bolsa')] or " + //TODO eliminar cuando todos los países vayan por la nueva bolsa 
+			          "@data-testid='header-user-menu-bag-icon']"); 
 
 		private By byMobile;
 		private String xpathMobile;
@@ -60,7 +61,7 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 
 		@Override
 		public By getBy(Channel channel, Enum<?> app) {
-			if (channel.isDevice()/* || app==AppEcom.outlet*/) {
+			if (channel.isDevice()) {
 				return byMobile;
 			}
 			return byDesktop;
