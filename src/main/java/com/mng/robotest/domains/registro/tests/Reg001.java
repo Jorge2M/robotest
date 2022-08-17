@@ -34,8 +34,6 @@ public class Reg001 extends TestBase {
 			GenderOption.MASCULINO,
 			Arrays.asList(LineaType.she, LineaType.he, LineaType.kids));
 
-	public Reg001() throws Exception {}
-	
 	@Override
 	public void execute() throws Exception {
 		accesoAndClickRegistrate();

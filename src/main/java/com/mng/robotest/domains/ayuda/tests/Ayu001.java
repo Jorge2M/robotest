@@ -6,15 +6,10 @@ import com.mng.robotest.test.pageobject.shop.footer.SecFooter;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.SecFooterSteps;
 
-
 public class Ayu001 extends TestBase {
 
-	final SecFooterSteps secFooterSteps = new SecFooterSteps(channel, app, driver);
-	final AyudaSteps ayudaSteps = new AyudaSteps();
-	
-	public Ayu001() throws Exception {
-		super();
-	}
+	private final AyudaSteps ayudaSteps = new AyudaSteps();
+	private final SecFooterSteps secFooterSteps = new SecFooterSteps(channel, app, driver);
 	
 	@Override
 	public void execute() throws Exception {

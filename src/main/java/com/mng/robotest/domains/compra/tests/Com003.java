@@ -15,8 +15,6 @@ public class Com003 extends TestBase {
 
 	private final ConfigCheckout configCheckout = ConfigCheckout.config().emaiExists().build(); 
 	
-	public Com003() throws Exception {}
-	
 	@Override
 	public void execute() throws Exception {
 		DataCtxPago dCtxPago = new DataCtxPago(dataTest, configCheckout);

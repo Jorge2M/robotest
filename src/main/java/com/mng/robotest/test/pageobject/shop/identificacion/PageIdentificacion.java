@@ -1,7 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.identificacion;
 
-import org.openqa.selenium.By;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.domains.transversal.PageBase;
@@ -19,7 +17,6 @@ import com.mng.robotest.test.pageobject.shop.modales.ModalLoyaltyAfterLogin;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
 public class PageIdentificacion extends PageBase {
 	
 	private static final String AVISO_CREDENCIALES_KO = "Tu e-mail o contraseña no son correctos";
@@ -30,7 +27,7 @@ public class PageIdentificacion extends PageBase {
 	private static final String XPATH_SUBMIT_BUTTON = "//div[@class='submitContent']/input[@type='submit']";
 
 	public boolean isVisibleUserUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPATH_INPUT_USER)).wait(maxSeconds).check());
+		return state(Visible, XPATH_INPUT_USER).wait(maxSeconds).check();
 	}
 
 	public String getLiteralAvisiCredencialesKO() {
@@ -38,17 +35,16 @@ public class PageIdentificacion extends PageBase {
 	}
 
 	public void inputUserPassword(String usuario, String password) {
-		By byInput = By.xpath(XPATH_INPUT_USER);
 		try {
-			driver.findElement(byInput).clear();
+			getElement(XPATH_INPUT_USER).clear();
 		}
 		catch (Exception e) {
 			Log4jTM.getLogger().error(e);
 		}
 		waitMillis(250);
-		driver.findElement(byInput).sendKeys(usuario);
+		getElement(XPATH_INPUT_USER).sendKeys(usuario);
 		waitMillis(250);
-		driver.findElement(By.xpath(XPATH_INPUT_PASSWORD)).sendKeys(password);
+		getElement(XPATH_INPUT_PASSWORD).sendKeys(password);
 	}
 
 	public void loginOrLogoff(DataCtxShop dCtxSh) throws Exception {
@@ -76,20 +72,16 @@ public class PageIdentificacion extends PageBase {
 	}	
 	
 	private void clickButtonEntrar() {
-		click(By.xpath(XPATH_SUBMIT_BUTTON)).waitLoadPage(10).exec(); 
+		click(XPATH_SUBMIT_BUTTON).waitLoadPage(10).exec(); 
 		if (isButtonEntrarVisible()) {
-			click(By.xpath(XPATH_SUBMIT_BUTTON)).type(javascript).waitLoadPage(10).exec();
+			click(XPATH_SUBMIT_BUTTON).type(javascript).waitLoadPage(10).exec();
 		}
 	}
 	
 	public boolean isButtonEntrarVisible() {
-		return (state(Visible, By.xpath(XPATH_SUBMIT_BUTTON), driver).check());
+		return state(Visible, XPATH_SUBMIT_BUTTON).check();
 	}
 
-	/**
-	 * Seleccionamos el link "Iniciar Sesión" y esperamos a que los campos de input estén disponibles
-	 */
-	@SuppressWarnings("static-access")
 	public void clickIniciarSesionAndWait(Channel channel, AppEcom app) {
 		if (channel.isDevice()) {
 			//En el caso de mobile nos tenemos que asegurar que están desplegados los menús
@@ -113,10 +105,10 @@ public class PageIdentificacion extends PageBase {
 	}
 	
 	public boolean isErrorEmailoPasswordKO() {
-		return (state(Present, By.xpath(XPATH_ERROR_CREDENCIALES_KO)).check());
+		return state(Present, XPATH_ERROR_CREDENCIALES_KO).check();
 	}
 
 	public void clickHasOlvidadoContrasenya() {
-		click(By.xpath(XPATH_HAS_OLVIDADO_CONTRASENYA)).exec();
+		click(XPATH_HAS_OLVIDADO_CONTRASENYA).exec();
 	}
 }

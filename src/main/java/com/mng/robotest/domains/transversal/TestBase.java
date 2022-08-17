@@ -21,7 +21,7 @@ public abstract class TestBase {
 	protected final DataCtxShop dataTest;
 	protected final InputParamsMango inputParamsSuite;
 	
-	protected TestBase() throws Exception {
+	protected TestBase() {
 		this.driver = TestMaker.getDriverTestCase();
 		this.inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		this.app = (AppEcom)inputParamsSuite.getApp();

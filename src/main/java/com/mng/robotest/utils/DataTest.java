@@ -11,7 +11,7 @@ public class DataTest {
 
 	private DataTest() {}
 	
-	public static DataCtxShop getData(PaisShop paisShop) throws Exception {
+	public static DataCtxShop getData(PaisShop paisShop) {
 		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());

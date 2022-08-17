@@ -25,7 +25,6 @@ public class CheckerAllowedCookies implements Checker {
 		checks.add(
 			Check.make(
 				"Se comprueba que todas las cookies existentes en la página están permitidas",
-				//TODO temporalmente lo ponemos en INFO (avoidEvidences) para que pueda subir a PRO
 				resultCheck.getLeft(), State.Info)
 			.info(getInfoError(resultCheck))
 			.store(StoreType.None)

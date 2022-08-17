@@ -15,8 +15,6 @@ import com.mng.robotest.test.steps.shop.micuenta.PageMiCuentaSteps;
 
 public class Com005 extends TestBase {
 	
-	public Com005() throws Exception {}
-	
 	@Override
 	public void execute() throws Exception {
 		DataCtxPago dataPago = fromPrehomeToCheckout();

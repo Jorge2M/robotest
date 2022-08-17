@@ -90,9 +90,11 @@ public class PageFichaArtSteps extends StepBase {
 	 	checks.add(
 			"Aparece la página correspondiente a la ficha del artículo " + refArticulo,
 			pageFicha.isFichaArticuloUntil(refArticulo, 0), State.Defect); 
+	 	
 	 	checks.add(
 			"Aparece algún color no disponible",
 			state(Present, ColorType.UNAVAILABLE.getBy(), driver).check(), State.Defect); 
+	 	
 	 	return checks;
 	}
 	
@@ -201,10 +203,12 @@ public class PageFichaArtSteps extends StepBase {
 	 	checks.add(
 			"No aparece el botón \"COMPRAR\"",
 			!secBolsa.isVisibleBotonComprar(), State.Defect);
+	 	
 	 	boolean isVisibleAvisame = pageFicha.getSecDataProduct().isVisibleCapaAvisame();
 	 	checks.add(
 			"Aparece la capa de introducción de avísame",
 			isVisibleAvisame, State.Defect);
+	 	
 	 	return checks;
 	}
 	
@@ -328,10 +332,12 @@ public class PageFichaArtSteps extends StepBase {
 	 	checks.add(
 			"Aparece una capa superior de \"Añadiendo artículo a favoritos...\" (lo esperamos hasta " + maxSeconds1 + " segundos)",
 			pageFicha.isVisibleDivAnadiendoAFavoritosUntil(maxSeconds1), State.Info);
+	 	
 		int maxSeconds2 = 3;
 	 	checks.add(
 			"La capa superior acaba desapareciendo (lo esperamos hasta " + maxSeconds2 + " segundos)",
 			pageFicha.isInvisibleDivAnadiendoAFavoritosUntil(maxSeconds2), State.Warn);
+	 	
 		return checks;
 	}
 
@@ -355,7 +361,6 @@ public class PageFichaArtSteps extends StepBase {
 			return (pageFicha.isVisibleButtonAnadirFavoritos());
 		}
 	}
-
 
 	@Validation (
 		description="Es visible el link de <b>Disponibilidad en Tienda</b>",
@@ -440,7 +445,6 @@ public class PageFichaArtSteps extends StepBase {
 		 		"Es visible el link <b>Next</b>",
 		 		pageFicha.getSecDataProduct().isVisiblePrevNextUntil(ProductNav.NEXT, 0), State.Warn);
 		}
-		
 		return checks;
 	}
 	
@@ -502,9 +506,11 @@ public class PageFichaArtSteps extends StepBase {
 	 	checks.add(
 	 		"Se aplica un Zoom sobre la imagen central",
 	 		((PageFichaArtOld)pageFicha).isVisibleFichaConZoom(), State.Defect);
+	 	
 	 	checks.add(
 	 		"La imagen central con Zoom sigue conteniendo la imagen original: " + pngImgCentralOriginal,
 	 		((PageFichaArtOld)pageFicha).srcImagenCentralConZoomContains(pngImgCentralOriginal), State.Defect);
+	 	
 	 	return checks;
 	}
 	
@@ -561,6 +567,4 @@ public class PageFichaArtSteps extends StepBase {
 	public ModEnvioYdevolNewSteps getModEnvioYdevolSteps() {
 		return this.modEnvioYdevolSteps;
 	}
-
-
 }

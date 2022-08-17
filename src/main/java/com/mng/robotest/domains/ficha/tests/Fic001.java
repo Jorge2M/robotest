@@ -25,8 +25,8 @@ import javassist.NotFoundException;
 public class Fic001 extends TestBase {
 
 	final Optional<GarmentCatalog> articleOnline;
-	final List<FilterType> filterOnline;
-	final List<FilterType> filterNoOnlineWithColors;
+	final List<FilterType> filterOnline = Arrays.asList(FilterType.Online);
+	final List<FilterType> filterNoOnlineWithColors = Arrays.asList(FilterType.NoOnline, FilterType.ManyColors);
 	final Optional<GarmentCatalog> articleNoOnlineWithColors;
 	
 	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
@@ -44,11 +44,6 @@ public class Fic001 extends TestBase {
 				.numProducts(80)
 				.build();
 
-		filterOnline = Arrays.asList(FilterType.Online);
-		filterNoOnlineWithColors = Arrays.asList(
-				FilterType.NoOnline, 
-				FilterType.ManyColors);
-		
 		articleOnline = getterProducts.getOneFiltered(filterOnline);
 		articleNoOnlineWithColors = getterProducts.getOneFiltered(filterNoOnlineWithColors);
 	}

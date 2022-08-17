@@ -66,7 +66,7 @@ public class ConfigCheckout implements Cloneable, Serializable {
 		private boolean emailExists; 
 		private boolean checkSavedCard;
 		private boolean userIsEmployee;
-		private boolean acceptCookies;
+		private boolean acceptCookies = true;
 		private boolean checkPromotionalCode;
 		private boolean chequeRegalo;
 		private boolean storeCredit;
@@ -158,6 +158,10 @@ public class ConfigCheckout implements Cloneable, Serializable {
 			this.acceptCookies = true;
 			return this;
 		}
+		public Builder acceptCookies(boolean check) {
+			this.acceptCookies = check;
+			return this;
+		}		
 		public Builder chequeRegalo() {
 			this.chequeRegalo = true;
 			return this;

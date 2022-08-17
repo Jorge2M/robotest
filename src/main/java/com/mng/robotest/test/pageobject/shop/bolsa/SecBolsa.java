@@ -56,25 +56,25 @@ public abstract class SecBolsa extends PageBase {
 	public boolean isInStateUntil(StateBolsa stateBolsaExpected, int maxSeconds) {
 		String xpath = getXPathPanelBolsa();
 		if (stateBolsaExpected==StateBolsa.OPEN) {
-			return state(Visible, By.xpath(xpath), driver).wait(maxSeconds).check();
+			return state(Visible, xpath).wait(maxSeconds).check();
 		}
-		return state(Invisible, By.xpath(xpath), driver).wait(maxSeconds).check();
+		return state(Invisible, xpath).wait(maxSeconds).check();
 	}
 
 	public boolean isVisibleBotonComprar() {
 		String xpathComprarBt = getXPathBotonComprar();
-		return (state(Visible, By.xpath(xpathComprarBt), driver).check());
+		return state(Visible, xpathComprarBt).check();
 	}
 
 	public boolean isVisibleBotonComprarUntil(int maxSeconds) { 
 		String xpathBoton = getXPathBotonComprar();
-		return (state(Visible, By.xpath(xpathBoton), driver).wait(maxSeconds).check());
+		return state(Visible, xpathBoton).wait(maxSeconds).check();
 	}
 
 	public void clickBotonComprar( int secondsWait) {
 		String xpathComprarBt = getXPathBotonComprar();
 		state(State.Visible, By.xpath(xpathComprarBt)).wait(secondsWait).check();
-		click(By.xpath(xpathComprarBt), driver).type(TypeClick.javascript).exec();
+		click(xpathComprarBt).type(TypeClick.javascript).exec();
 	}
 	
 	public String getNumberArtIcono(Channel channel, AppEcom app) throws Exception {
@@ -90,13 +90,12 @@ public abstract class SecBolsa extends PageBase {
 			}
 			Thread.sleep(1000);
 		}
-		
 		return false;
 	}
 
 	public String getPrecioSubtotalTextPant() {
 		String xpathImporte = getXPathPrecioSubTotal();
-		return (driver.findElement(By.xpath(xpathImporte)).getText());
+		return getElement(xpathImporte).getText();
 	}
 	
 	public float getPrecioSubTotalFloat() {
@@ -109,9 +108,6 @@ public abstract class SecBolsa extends PageBase {
 		return (ImporteScreen.getFloatFromImporteMangoScreen(precioTotal));
 	}
 	
-	/**
-	 * @return si el importe total de la bolsa NO coincide con el pasado por parámetro (importe previamente capturado)
-	 */
 	public boolean isNotThisImporteTotalUntil(String importeSubTotalPrevio, int maxSeconds) {
 		String xpathImporte = getXPathPrecioSubTotal();
 		try {
@@ -124,7 +120,6 @@ public abstract class SecBolsa extends PageBase {
 		}
 	}
 
-	@SuppressWarnings("static-access")
 	public void clearArticulos() throws Exception {
 		setBolsaToStateIfNotYet(StateBolsa.OPEN);
 		int ii = 0;
@@ -165,7 +160,7 @@ public abstract class SecBolsa extends PageBase {
 	}
 	
 	public void clickAspaMobil() {
-		click(By.xpath(XPATH_ASPA), driver).exec();
+		click(XPATH_ASPA).exec();
 	}
 	
 }

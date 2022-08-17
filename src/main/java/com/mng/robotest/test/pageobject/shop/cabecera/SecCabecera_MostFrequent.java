@@ -62,6 +62,9 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 		@Override
 		public By getBy(Channel channel, Enum<?> app) {
 			if (channel.isDevice()) {
+				if (app==AppEcom.shop && this==iniciarsesion) {
+					return By.xpath("//span[@data-testid='header.menuItem.userIcon']");
+				}
 				return byMobile;
 			}
 			return byDesktop;

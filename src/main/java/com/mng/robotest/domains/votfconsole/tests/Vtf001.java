@@ -19,11 +19,7 @@ import com.mng.robotest.test.utils.PaisGetter;
 
 public class Vtf001 extends TestBase {
 
-	ConsolaVotfSteps consolaVotfSteps = new ConsolaVotfSteps();  
-	
-	public Vtf001() throws Exception {
-		super();
-	}
+	private final ConsolaVotfSteps consolaVotfSteps = new ConsolaVotfSteps();  
 	
 	@Override
 	public void execute() throws Exception {
