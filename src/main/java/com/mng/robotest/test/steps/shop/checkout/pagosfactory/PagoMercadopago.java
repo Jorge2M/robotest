@@ -23,7 +23,7 @@ public class PagoMercadopago extends PagoSteps {
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		DataPedido dataPedido = this.dCtxPago.getDataPedido();
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh.pais);
 		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		int maxSeconds = 5;
 		PageMercpago1rstSteps.validateIsPageUntil(maxSeconds, driver);

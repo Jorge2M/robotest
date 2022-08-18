@@ -36,6 +36,9 @@ public abstract class SecBolsa extends PageBase {
 		if (app==AppEcom.outlet && channel==Channel.mobile) {
 			return new SecBolsaMobileOld();
 		}
+		if (app==AppEcom.shop) {
+			return new SecBolsaNewNew();
+		}
 		return new SecBolsaNew();
 	}
 	

@@ -31,7 +31,7 @@ public class PagoPaypal extends PagoSteps {
 	
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh.pais);
 		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		int maxSeconds = 10;
 		modalPreloaderSppinerSteps.validateAppearsAndDisappears();

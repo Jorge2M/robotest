@@ -17,7 +17,7 @@ public class PagoTarjetaIntegrada extends PagoSteps {
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		DataPedido dataPedido = this.dCtxPago.getDataPedido();
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh.pais);
 		
 		if (execPay) {
 			dataPedido.setCodtipopago("U");

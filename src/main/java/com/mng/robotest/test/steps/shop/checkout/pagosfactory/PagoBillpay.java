@@ -17,9 +17,9 @@ public class PagoBillpay extends PagoSteps {
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		DataPedido dataPedido = this.dCtxPago.getDataPedido();
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh.pais);
 		pageCheckoutWrapperSteps.getSecBillpaySteps().validateIsSectionOk();
-		String nombrePago = dataPedido.getPago().getNombre(dCtxSh.channel, dCtxSh.appE);
+		String nombrePago = dataPedido.getPago().getNombre(channel, app);
 		pageCheckoutWrapperSteps.getSecBillpaySteps().inputDiaNacAndCheckAcepto("23-04-1974", nombrePago);
 		if (nombrePago.compareTo("Lastschrift")==0) {
 			pageCheckoutWrapperSteps.getSecBillpaySteps().inputDataInLastschrift(dataPedido.getPago().getIban(), dataPedido.getPago().getBic(), dataPedido.getPago().getTitular());

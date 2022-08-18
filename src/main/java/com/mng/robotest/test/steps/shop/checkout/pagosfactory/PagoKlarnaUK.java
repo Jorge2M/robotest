@@ -19,7 +19,7 @@ public class PagoKlarnaUK extends PagoSteps {
 	@SuppressWarnings("static-access")
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh.pais);
 		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		pageKlarnaSteps.checkIsPage(10);
 		pageKlarnaSteps.clickComprar();

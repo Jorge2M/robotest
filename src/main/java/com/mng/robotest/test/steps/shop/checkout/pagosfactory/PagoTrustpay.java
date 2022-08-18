@@ -16,7 +16,7 @@ public class PagoTrustpay extends PagoSteps {
 	
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh.pais);
 		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		String importeTotal = this.dCtxPago.getDataPedido().getImporteTotal();
 		PageTrustpaySelectBankSteps.validateIsPage(dCtxPago.getDataPedido().getPago().getNombre(dCtxSh.channel, dCtxSh.appE), importeTotal, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);

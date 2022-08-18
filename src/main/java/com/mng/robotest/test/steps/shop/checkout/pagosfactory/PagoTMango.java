@@ -21,7 +21,7 @@ public class PagoTMango extends PagoSteps {
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		DataPedido dataPedido = this.dCtxPago.getDataPedido();
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh.pais);
 		pageCheckoutWrapperSteps.getSecTMangoSteps().validateIsSectionOk();
 		pageCheckoutWrapperSteps.getSecTMangoSteps().clickTipoPago(SecTMango.TipoPago.PAGO_HABITUAL);
 		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);

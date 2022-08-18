@@ -19,7 +19,7 @@ public class PagoMultibanco extends PagoSteps {
 	
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh.pais);
 		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		DataPedido dataPedido = this.dCtxPago.getDataPedido(); 
 		String nombrePago = dataPedido.getPago().getNombre(dCtxSh.channel, dCtxSh.appE);

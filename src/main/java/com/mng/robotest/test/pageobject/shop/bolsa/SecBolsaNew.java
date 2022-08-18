@@ -6,7 +6,7 @@ public class SecBolsaNew extends SecBolsaDesktop {
  
 	private final LineasArtBolsa lineasArtBolsa = new LineasArtBolsaNew();
 	
-	private static final String XPATH_PANEL_BOLSA_DESKTOP = "//div[@id='openedShoppingBag']";
+	private static final String XPATH_PANEL_BOLSA_DESKTOP = "//*[@id='openedShoppingBag']";
 	private static final String XPATH_PANEL_BOLSA_MOBILE = "//div[@class[contains(.,'m_bolsa')]]";
 	
 	//TODO eliminar el 1o cuando suba a PRO

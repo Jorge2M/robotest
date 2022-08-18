@@ -18,7 +18,7 @@ public class PagoBancontact extends PagoSteps {
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		boolean isD3D = true;
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh.pais);
 		
 		if (execPay) {
 			pageCheckoutWrapperSteps.inputDataTrjAndConfirmPago(this.dCtxPago);

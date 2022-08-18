@@ -25,7 +25,7 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	
 	private static final String XPATH_DIV_NAV_TOOLS = "//div[@id='navTools']";
 	private static final String XPATH_NUM_ARTICLES_MANY_LOCATIONS = "//*[@class='icon-button-items']";
-	private static final String XPATH_NUM_ARTICLES_BOLSA_DESKTOP = "//span[@data-testid[contains(.,'numItems')]]";
+	private static final String XPATH_NUM_ARTICLES_BOLSA_DESKTOP = "//span[@data-testid[contains(.,'numItems')] or @data-testid[contains(.,'totalItems')]]";
 	
 	public enum IconoCabeceraShop_DesktopMobile implements ElementPage {
 		lupa(

@@ -65,7 +65,7 @@ public class Com004 extends TestBase {
 	}	
 	
 	private void inputDataChequeRegalo() throws Exception {
-		if(dataTest.channel.isDevice()){
+		if(channel.isDevice()){
 			String nTarjeta = "100000040043";
 			String cvvTarjeta = "618";
 			pageChequeRegaloInputDataSteps.paginaConsultarSaldo(nTarjeta);

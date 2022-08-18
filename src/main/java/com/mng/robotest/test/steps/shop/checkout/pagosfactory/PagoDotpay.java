@@ -22,10 +22,10 @@ public class PagoDotpay extends PagoSteps {
 	
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh.pais);
 		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
 		DataPedido dataPedido = dCtxPago.getDataPedido(); 
-		String nombrePago = dataPedido.getPago().getNombre(dCtxSh.channel, dCtxSh.appE);
+		String nombrePago = dataPedido.getPago().getNombre(channel, app);
 		pageDotpay1rstSteps.validateIsPage(nombrePago, dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais());
 		
 		if (execPay) {

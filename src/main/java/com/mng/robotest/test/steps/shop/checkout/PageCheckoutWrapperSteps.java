@@ -171,16 +171,16 @@ public class PageCheckoutWrapperSteps extends StepBase {
 	/**
 	 * Realiza una navegación (conjunto de pasos/validaciones) mediante la que se selecciona el método de envío y finalmente el método de pago 
 	 */
-	public void fluxSelectEnvioAndClickPaymentMethod(DataCtxPago dCtxPago, DataCtxShop dCtxSh) throws Exception {
+	public void fluxSelectEnvioAndClickPaymentMethod(DataCtxPago dCtxPago, Pais pais) throws Exception {
 		boolean pagoPintado = false;
 		if (!dCtxPago.getFTCkout().chequeRegalo) {
-			pagoPintado = secMetodoEnvioDesktopSteps.fluxSelectEnvio(dCtxPago, dCtxSh);
+			pagoPintado = secMetodoEnvioDesktopSteps.fluxSelectEnvio(dCtxPago, pais);
 		}
-		boolean methodSelectedOK = forceClickIconoPagoAndWait(dCtxSh.pais, dCtxPago.getDataPedido().getPago(), !pagoPintado);
+		boolean methodSelectedOK = forceClickIconoPagoAndWait(pais, dCtxPago.getDataPedido().getPago(), !pagoPintado);
 		if (!methodSelectedOK) {
 			//En caso de no conseguir seleccionar correctamente el pago no nos podemos arriesgar a continuar con el pago
 			//porque quizás esté seleccionado otro método de pago del tipo Contrareembolso y un "Confirmar Pago" desencadenaría la compra en PRO
-			throw new RuntimeException("Problem selecting payment method " + dCtxPago.getDataPedido().getPago().getNombre() + " in country " + dCtxSh.pais.getNombre_pais());
+			throw new RuntimeException("Problem selecting payment method " + dCtxPago.getDataPedido().getPago().getNombre() + " in country " + pais.getNombre_pais());
 		}
 	}
 	

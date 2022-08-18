@@ -1,19 +1,16 @@
 package com.mng.robotest.test.pageobject.shop.checkout.eps;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
-public class PageEpsSimulador {
+public class PageEpsSimulador extends PageBase {
 
 	public enum TypeDelay {
-		OneMinutes(1), 
-		FiveMinutes(5), 
-		FifteenMinutes(15), 
-		SixtyMinutes(60);
+		ONE_MINUTES(1), 
+		FIVE_MINUTES(5), 
+		FIFTEEN_MINUTES(15), 
+		SIXTY_MINUTES(60);
 		
 		public int minutes;
 		private TypeDelay(int minutes) {
@@ -21,23 +18,24 @@ public class PageEpsSimulador {
 		}
 	};
 	
-	static final String XPathLogoEps = "//img[@class='paymentMethodLogo' and @src[contains(.,'eps.png')]]";
-	static final String XPathContinueButton = "//button[@value='pendingauthorised']";
-	static final String XPathSelectDelayAuthorised = "//select[@name='delaySelector']";
-	static String getXPathOptionDelayAuthorised(TypeDelay typeDelay) {
-		return (XPathSelectDelayAuthorised + "//option[text()[contains(.,'" + typeDelay.minutes + " minute')]]");
+	private static final String XPATH_LOGO_EPS = "//img[@class='paymentMethodLogo' and @src[contains(.,'eps.png')]]";
+	private static final String XPATH_CONTINUE_BUTTON = "//button[@value='pendingauthorised']";
+	private static final String XPATH_SELECT_DELAY_AUTHORISED = "//select[@name='delaySelector']";
+	
+	private String getXPathOptionDelayAuthorised(TypeDelay typeDelay) {
+		return (XPATH_SELECT_DELAY_AUTHORISED + "//option[text()[contains(.,'" + typeDelay.minutes + " minute')]]");
 	}
 	
-	public static boolean isPage(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathLogoEps), driver).check());
+	public boolean isPage() {
+		return state(Visible, XPATH_LOGO_EPS).check();
 	}
 	
-	public static void selectDelayAuthorised(TypeDelay typeDelay, WebDriver driver) {
+	public void selectDelayAuthorised(TypeDelay typeDelay) {
 		String xpathOption = getXPathOptionDelayAuthorised(typeDelay);
-		driver.findElement(By.xpath(xpathOption)).click();
+		getElement(xpathOption).click();
 	}
 
-	public static void clickButtonContinue(WebDriver driver) {
-		click(By.xpath(XPathContinueButton), driver).exec();
+	public void clickButtonContinue() {
+		click(XPATH_CONTINUE_BUTTON).exec();
 	}
 }

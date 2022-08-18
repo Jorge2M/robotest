@@ -8,14 +8,13 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pago;
-import com.mng.robotest.test.data.DataCtxShop;
+import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.datastored.DataCtxPago;
 import com.mng.robotest.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test.pageobject.shop.checkout.envio.ModalDroppoints;
 import com.mng.robotest.test.pageobject.shop.checkout.envio.SecMetodoEnvioDesktop;
 import com.mng.robotest.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.test.steps.shop.checkout.Page1EnvioCheckoutMobilSteps;
-
 
 public class SecMetodoEnvioDesktopSteps extends StepBase {
 
@@ -51,9 +50,11 @@ public class SecMetodoEnvioDesktopSteps extends StepBase {
 	  	checks.add(
 			"Desaparece la capa de Loading  (lo esperamos hasta " + maxSeconds + " segundos)",
 			new PageCheckoutWrapper(channel, app).waitUntilNoDivLoading(maxSeconds), State.Warn);
+	  	
 	  	checks.add(
 			"Queda seleccionado el bloque correspondiete a <b>" + tipoTransporte + "</b>",
 			secMetodoEnvioDesktop.isBlockSelectedUntil(tipoTransporte, maxSeconds), State.Warn);
+	  	
 	  	return checks;
 	}
 	
@@ -80,16 +81,16 @@ public class SecMetodoEnvioDesktopSteps extends StepBase {
 		}
 	}
 	
-	public boolean fluxSelectEnvio(DataCtxPago dCtxPago, DataCtxShop dCtxSh) throws Exception {
+	public boolean fluxSelectEnvio(DataCtxPago dCtxPago, Pais pais) throws Exception {
 		boolean pagoPintado = false;
 		Pago pago = dCtxPago.getDataPedido().getPago();
-		if (pago.getTipoEnvio(dCtxSh.appE)!=null) {
-			String nombrePago = dCtxPago.getDataPedido().getPago().getNombre(dCtxSh.channel, dCtxSh.appE);
+		if (pago.getTipoEnvio(app)!=null) {
+			String nombrePago = dCtxPago.getDataPedido().getPago().getNombre(channel, app);
 			selectMetodoEnvio(dCtxPago, nombrePago);
 			pagoPintado = true;
-			TipoTransporte tipoEnvio = pago.getTipoEnvioType(dCtxSh.appE);
+			TipoTransporte tipoEnvio = pago.getTipoEnvioType(app);
 			if (tipoEnvio.isDroppoint()) {
-				modalDroppointsSteps.fluxSelectDroppoint(dCtxPago, dCtxSh);
+				modalDroppointsSteps.fluxSelectDroppoint(dCtxPago, pais);
 			}
 			if (tipoEnvio.isFranjaHoraria()) {
 				selectFranjaHorariaUrgente();

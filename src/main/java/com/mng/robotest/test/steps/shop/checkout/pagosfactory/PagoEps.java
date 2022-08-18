@@ -11,6 +11,8 @@ import com.mng.robotest.test.steps.shop.checkout.eps.PageEpsSimuladorSteps;
 
 public class PagoEps extends PagoSteps {
 
+	PageEpsSimuladorSteps pageEpsSimuladorSteps = new PageEpsSimuladorSteps();
+	
 	public PagoEps(DataCtxShop dCtxSh, DataCtxPago dCtxPago) throws Exception {
 		super(dCtxSh, dCtxPago);
 		super.isAvailableExecPay = true;
@@ -22,19 +24,19 @@ public class PagoEps extends PagoSteps {
 		//activateTestABforMethodEPS();
 		driver.navigate().refresh();
 		
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh.pais);
 		pageCheckoutWrapperSteps.selectBancoEPS(dCtxSh);
 		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
-		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
-			PageEpsSimuladorSteps.validateIsPage(driver);
-			PageEpsSimuladorSteps.selectDelay(TypeDelay.OneMinutes, driver);
+		if (!UtilsMangoTest.isEntornoPRO(app, driver)) {
+			pageEpsSimuladorSteps.validateIsPage();
+			pageEpsSimuladorSteps.selectDelay(TypeDelay.ONE_MINUTES);
 		} else {
-			PageEpsSelBancoSteps.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
+			new PageEpsSelBancoSteps().validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais.getCodigo_pais());
 		}
 		
 		if (execPay) {
 			this.dCtxPago.getDataPedido().setCodtipopago("F");
-			PageEpsSimuladorSteps.clickContinueButton(driver);
+			pageEpsSimuladorSteps.clickContinueButton();
 		}
 	}
 }
