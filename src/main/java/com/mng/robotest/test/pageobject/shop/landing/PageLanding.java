@@ -122,7 +122,7 @@ public class PageLanding extends PageBase {
 			return true;
 		}
 
-		PageFicha pageFicha = PageFicha.newInstance(Channel.desktop, app);
+		PageFicha pageFicha = PageFicha.of(Channel.desktop, app);
 		if (pageFicha.isPageUntil(0)) {
 			return true;
 		}

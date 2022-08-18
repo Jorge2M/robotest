@@ -14,17 +14,12 @@ import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 public abstract class SecBolsa extends PageBase {
 
 	public enum StateBolsa { OPEN, CLOSED };
-	
-	final Channel channel;
-	final AppEcom app;
 	
 	abstract String getXPathPanelBolsa();
 	abstract String getXPathBotonComprar();
@@ -36,21 +31,12 @@ public abstract class SecBolsa extends PageBase {
 	public abstract LineasArtBolsa getLineasArtBolsa();
 	
 	private static final String XPATH_ASPA = "//span[@class[contains(.,'outline-close')]]";
-
-	public static SecBolsa make(DataCtxShop dCtxShop) {
-		return make(dCtxShop.channel, dCtxShop.appE, dCtxShop.pais);
-	}
 	
-	public static SecBolsa make(Channel channel, AppEcom app, Pais pais) {
+	public static SecBolsa make(Channel channel, AppEcom app) {
 		if (app==AppEcom.outlet && channel==Channel.mobile) {
-			return new SecBolsaMobileOld(app, pais);
+			return new SecBolsaMobileOld();
 		}
-		return new SecBolsaNew(channel, app, pais);
-	}
-	
-	protected SecBolsa(Channel channel, AppEcom app) {
-		this.channel = channel;
-		this.app = app;
+		return new SecBolsaNew();
 	}
 	
 	public boolean isInStateUntil(StateBolsa stateBolsaExpected, int maxSeconds) {

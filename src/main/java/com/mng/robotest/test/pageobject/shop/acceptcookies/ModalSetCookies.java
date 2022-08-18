@@ -1,7 +1,6 @@
 package com.mng.robotest.test.pageobject.shop.acceptcookies;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.domains.transversal.PageBase;
@@ -10,12 +9,12 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 public class ModalSetCookies extends PageBase {
 	
 	public enum SectionConfCookies {
-		Tu_privacidad("ot-pvcy-txt"),
-		Cookies_estrictamente_necesarias("ot-header-id-C0001"),
-		Cookies_funcionales("ot-header-id-C0003"),
-		Cookies_de_rendimiento("ot-header-id-C0002"),
-		Cookies_dirigidas("ot-header-id-C0004"),
-		Cookies_de_redes_sociales("ot-header-id-C0005");
+		TU_PRIVACIDAD("ot-pvcy-txt"),
+		COOKIES_ESTRICTAMENTE_NECESARIAS("ot-header-id-C0001"),
+		COOKIES_FUNCIONOALES("ot-header-id-C0003"),
+		COOKIES_DE_RENDIMIENTO("ot-header-id-C0002"),
+		COOKIES_DIRIGIDAS("ot-header-id-C0004"),
+		COOKIES_DE_REDES_SOCIALES("ot-header-id-C0005");
 		
 		private String id;
 		private SectionConfCookies(String id) {
@@ -29,31 +28,25 @@ public class ModalSetCookies extends PageBase {
 		}
 	}
 	
-	private final String XPathSaveConfButton = "//button[@class[contains(.,'save-preference')]]";
-	private final String XPathWrapperSwitch = "//div[@class='ot-tgl']";
-	private final String XPathInputSwitchHandler = ".//input[@class='category-switch-handler']";
-	private final String XPathSwitchCookies = "//span[@class='ot-switch-nob']";
+	private static final String XPATH_SAVE_CONF_BUTTON = "//button[@class[contains(.,'save-preference')]]";
+	private static final String XPATH_WRAPPER_SWITCH = "//div[@class='ot-tgl']";
+	private static final String XPATH_INPUT_SWITCH_HANDLER = ".//input[@class='category-switch-handler']";
+	private static final String XPATH_SWITCH_COOKIES = "//span[@class='ot-switch-nob']";
 	
 	private String getXPathMenuSection(SectionConfCookies section) {
-		return ("//*[@id='" + section.getId() + "']/..");
-	}
-	
-	public ModalSetCookies(WebDriver driver) {
-		super(driver);
+		return "//*[@id='" + section.getId() + "']/..";
 	}
 	
 	public boolean isVisible(int maxSeconds) {
-		By bySave = By.xpath(XPathSaveConfButton);
-		return state(State.Visible, bySave).wait(maxSeconds).check();
+		return state(State.Visible, XPATH_SAVE_CONF_BUTTON).wait(maxSeconds).check();
 	}
 	
 	public boolean isInvisible(int maxSeconds) {
-		By bySave = By.xpath(XPathSaveConfButton);
-		return state(State.Invisible, bySave).wait(maxSeconds).check();
+		return state(State.Invisible, XPATH_SAVE_CONF_BUTTON).wait(maxSeconds).check();
 	}
 	
 	public void saveConfiguration() {
-		click(By.xpath(XPathSaveConfButton)).exec();
+		click(XPATH_SAVE_CONF_BUTTON).exec();
 	}
 	
 	public void clickSection(SectionConfCookies section) {
@@ -62,7 +55,7 @@ public class ModalSetCookies extends PageBase {
 	
 	public boolean isSectionUnfold(SectionConfCookies section) {
 		String xpathMenu = getXPathMenuSection(section);
-		WebElement menuSection = getElementWeb(By.xpath(xpathMenu), driver);
+		WebElement menuSection = getElementWeb(xpathMenu);
 		return (
 			menuSection!=null && 
 			menuSection.getAttribute("aria-selected").compareTo("true")==0);
@@ -81,12 +74,12 @@ public class ModalSetCookies extends PageBase {
 	}
 	
 	public boolean isSwitchEnabled() {
-		WebElement wrapperSwitch = getElementVisible(driver, By.xpath(XPathWrapperSwitch));
-		return state(State.Present, wrapperSwitch).by(By.xpath(XPathInputSwitchHandler + "//self::*[@checked]")).check();
+		WebElement wrapperSwitch = getElementVisible(XPATH_WRAPPER_SWITCH);
+		return state(State.Present, wrapperSwitch).by(By.xpath(XPATH_INPUT_SWITCH_HANDLER + "//self::*[@checked]")).check();
 	}
 	
 	public void clickSwitchCookies() {
-		WebElement switchElem = getElementVisible(driver, By.xpath(XPathSwitchCookies));
+		WebElement switchElem = getElementVisible(XPATH_SWITCH_COOKIES);
 		click(switchElem).exec();
 	}
 }

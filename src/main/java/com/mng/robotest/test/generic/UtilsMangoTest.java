@@ -86,8 +86,7 @@ public class UtilsMangoTest {
 
 	public static ArticuloScreen addArticuloBolsa(GarmentCatalog selArticulo, AppEcom app, Channel channel, WebDriver driver) {
 		ArticuloScreen articulo = ArticuloNavigations.selectArticuloTallaColorByRef(selArticulo, app, channel, driver);
-		PageFicha pageFicha = PageFicha.newInstance(channel, app);
-		pageFicha.clickAnadirBolsaButtonAndWait(); 
+		PageFicha.of(channel, app).clickAnadirBolsaButtonAndWait(); 
 		return articulo;
 	}
 	

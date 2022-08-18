@@ -5,6 +5,7 @@ import java.util.List;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Sublinea;
@@ -16,30 +17,13 @@ import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenuLateralDevice;
 import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenuLateralDevice.TypeLocator;
 import com.mng.robotest.test.utils.checkmenus.DataScreenMenu;
 
-
-@SuppressWarnings({"static-access"}) 
-/**
- * Clase que define la automatización de las diferentes funcionalidades de la sección de "Menús" (de Desktop y Movil)
- * @author jorge.munoz
- *
- */
-public class SecMenusWrap {
+public class SecMenusWrap extends PageBase {
 	
-	private final MenusUserWrapper secMenusUser;
-	private final SecMenuLateralDevice secMenuLateralDevice;
-	private final SecMenusDesktop secMenusDesktop;
-	private final Channel channel;
-	private final AppEcom app;
+	private final MenusUserWrapper secMenusUser = MenusUserWrapper.getNew(channel, app);
+	private final SecMenuLateralDevice secMenuLateralDevice = new SecMenuLateralDevice(channel, app);
+	private final SecMenusDesktop secMenusDesktop = new SecMenusDesktop(app, channel);
 	
-	public enum GroupMenu {prendas, accesorios, colecciones}
-	
-	public SecMenusWrap(Channel channel, AppEcom app) {
-		this.channel = channel;
-		this.app = app;
-		this.secMenusUser = MenusUserWrapper.getNew(channel, app);
-		this.secMenuLateralDevice = new SecMenuLateralDevice(channel, app);
-		this.secMenusDesktop = new SecMenusDesktop(app, channel);
-	}
+	public enum GroupMenu { prendas, accesorios, colecciones }
 	
 	public MenusUserWrapper getMenusUser() {
 		return this.secMenusUser;

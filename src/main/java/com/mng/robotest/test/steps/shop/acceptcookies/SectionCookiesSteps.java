@@ -1,24 +1,17 @@
 package com.mng.robotest.test.steps.shop.acceptcookies;
 
 import org.openqa.selenium.Cookie;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.acceptcookies.SectionCookies;
 
-public class SectionCookiesSteps {
+public class SectionCookiesSteps extends StepBase {
 
-	private final SectionCookies sectionCookies;
-	private final ModalSetCookiesSteps modalSetCookiesSteps;
-	private final WebDriver driver;
-	
-	public SectionCookiesSteps(WebDriver driver) {
-		sectionCookies = new SectionCookies(driver);
-		modalSetCookiesSteps = new ModalSetCookiesSteps(driver);
-		this.driver = driver;
-	}
+	private final SectionCookies sectionCookies = new SectionCookies();
+	private final ModalSetCookiesSteps modalSetCookiesSteps = new ModalSetCookiesSteps();
 	
 	@Step (
 		description="Seleccionamos el botón \"Aceptar\" de la sección inferior de configuración de cookies",

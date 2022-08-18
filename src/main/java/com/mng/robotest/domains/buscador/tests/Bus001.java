@@ -24,7 +24,7 @@ public class Bus001 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		AccesoSteps.oneStep(dataTest, false, driver);
+		new AccesoSteps().oneStep(dataTest, false);
 		pageHomeMarcasSteps.validateIsPageWithCorrectLineas(dataTest.pais);
 		GarmentCatalog product = getProduct();
 		

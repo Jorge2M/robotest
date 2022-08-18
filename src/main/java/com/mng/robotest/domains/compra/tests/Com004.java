@@ -53,8 +53,8 @@ public class Com004 extends TestBase {
 	}
 
 	private void loginAndClearBolsa() throws Exception {
-		AccesoSteps.oneStep(dataTest, false, driver);
-		new SecBolsaSteps(dataTest).clear();
+		new AccesoSteps().oneStep(dataTest, false);
+		new SecBolsaSteps(dataTest.pais).clear();
 	}
 	
 	private void selectFooterLinkChequeRegalo() throws Exception {

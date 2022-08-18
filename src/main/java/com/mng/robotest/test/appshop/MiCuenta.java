@@ -3,7 +3,6 @@ package com.mng.robotest.test.appshop;
 import java.io.Serializable;
 import java.util.ArrayList;
 import org.testng.annotations.*;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
@@ -73,18 +72,17 @@ public class MiCuenta implements Serializable {
 	@Parameters({"userConDevolucionPeroSoloEnPRO", "passwordUserConDevolucion"})
 	public void MIC001_Opciones_Mi_Cuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion) 
 	throws Exception {
-		WebDriver driver = TestMaker.getDriverTestCase();
 		TestCaseTM.addNameSufix(this.index_fact);
 		DataCtxShop dCtxSh = getCtxShForTest();
 		dCtxSh.userConnected = userConDevolucionPeroNoEnPRO;
 		dCtxSh.passwordUser = passwordUserConDevolucion;
 			
-		new PagePrehomeSteps(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
+		new PagePrehomeSteps(dCtxSh.pais, dCtxSh.idioma).seleccionPaisIdiomaAndEnter();
 		dCtxSh.userRegistered = false;
 		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh);
 		secMenusSteps.seleccionLinea(LineaType.she, null, dCtxSh);
 		dCtxSh.userRegistered = true;
-		AccesoSteps.identificacionEnMango(dCtxSh, driver);
+		new AccesoSteps().identificacionEnMango(dCtxSh);
 		
 		PageMiCuentaSteps pageMiCuentaSteps = new PageMiCuentaSteps();
 		pageMiCuentaSteps.goToMisDatos(dCtxSh.userConnected);
@@ -116,16 +114,16 @@ public class MiCuenta implements Serializable {
 	public void MIC002_CheckConsultaMisCompras(
 			String userWithOnlinePurchases, String userWithStorePurchases, 
 			String passUserWithOnlinePurchases, String passUserWithStorePurchases) throws Exception {
+		
 		TestCaseTM.addNameSufix(this.index_fact);
-		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
 		
 		//Test Compras Online
 		dCtxSh.userConnected = userWithOnlinePurchases;
 		dCtxSh.passwordUser = passUserWithOnlinePurchases;
 		dCtxSh.userRegistered = true;
-		new PagePrehomeSteps(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
-		AccesoSteps.identificacionEnMango(dCtxSh, driver);
+		new PagePrehomeSteps(dCtxSh.pais, dCtxSh.idioma).seleccionPaisIdiomaAndEnter();
+		new AccesoSteps().identificacionEnMango(dCtxSh);
 		
 		PageMiCuentaSteps pageMiCuentaSteps = new PageMiCuentaSteps();
 		pageMiCuentaSteps.goToMisComprasFromMenu(dCtxSh.pais);
@@ -142,10 +140,10 @@ public class MiCuenta implements Serializable {
 		
 		//Existe un problema en por el cual si te vuelves a loginar manteniendo el navegador
 		//se muestran las compras del anterior usuario
-		driver = TestMaker.renewDriverTestCase();
+		TestMaker.renewDriverTestCase();
 		pageMiCuentaSteps = new PageMiCuentaSteps();
-		new PagePrehomeSteps(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
-		AccesoSteps.identificacionEnMango(dCtxSh, driver);
+		new PagePrehomeSteps(dCtxSh.pais, dCtxSh.idioma).seleccionPaisIdiomaAndEnter();
+		new AccesoSteps().identificacionEnMango(dCtxSh);
 		
 		pageMiCuentaSteps.goToMisComprasFromMenu(dCtxSh.pais);
 		pageMisComprasSteps = new PageMisComprasSteps(dCtxSh.channel, dCtxSh.appE);

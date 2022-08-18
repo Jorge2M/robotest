@@ -141,7 +141,7 @@ public class PageFavoritosSteps extends StepBase {
 		artToAddBolsa.setTalla(tallaSelected);
 		dataBolsa.addArticulo(artToAddBolsa);
 		
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(channel, app, pais);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(pais);
 		secBolsaSteps.validaAltaArtBolsa(dataBolsa);
 	}
 	

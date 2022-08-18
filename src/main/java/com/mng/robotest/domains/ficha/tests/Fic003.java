@@ -45,8 +45,7 @@ public class Fic003 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-
-		AccesoSteps.oneStep(dataTest, false, driver);
+		new AccesoSteps().oneStep(dataTest, false);
 		closeModalNewsLetterIfExists();
 		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuPantalonesNina, dataTest);
 		DataFichaArt dataArtOrigin = selectFirstArticleInGalery();
@@ -57,7 +56,7 @@ public class Fic003 extends TestBase {
 	}
 
 	private void closeModalNewsLetterIfExists() {
-		(new PagePrehome(dataTest, driver)).closeModalNewsLetterIfExists();
+		new PagePrehome(dataTest.pais, dataTest.idioma).closeModalNewsLetterIfExists();
 	}
 
 	private DataFichaArt selectFirstArticleInGalery() {

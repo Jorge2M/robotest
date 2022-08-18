@@ -177,7 +177,7 @@ public class SecMenusDesktopSteps {
 		}
 		
 		pageGaleriaSteps.getSecSelectorPreciosSteps().validaIsSelector();
-		SecMenusWrap secMenus = new SecMenusWrap(Channel.desktop, app);
+		SecMenusWrap secMenus = new SecMenusWrap();
 		LineaType lineaResult = secMenus.getLineaResultAfterClickMenu(menu.getLinea(), menu.getNombre());
 		validateIsLineaSelected(lineaResult);	
 	}
@@ -252,7 +252,7 @@ public class SecMenusDesktopSteps {
 		
 		validaPaginaResultMenu(menu1rstLevel);
 		
-		SecMenusWrap secMenus = new SecMenusWrap(Channel.desktop, app);
+		SecMenusWrap secMenus = new SecMenusWrap();
 		LineaType lineaResult = secMenus.getLineaResultAfterClickMenu(lineaMenu, menu1rstLevel.getNombre());
 		validateIsLineaSelected(lineaResult);
 	}

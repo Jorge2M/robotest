@@ -27,7 +27,7 @@ public class Fic005 extends TestBase {
 	
 	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
 	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(dataTest.pais);
-	final SecModalPersonalizacionSteps modalPersonalizacionSteps = SecModalPersonalizacionSteps.getNewOne(dataTest, driver);
+	final SecModalPersonalizacionSteps modalPersonalizacionSteps = new SecModalPersonalizacionSteps();
 	
 	public Fic005() throws Exception {
 		super();
@@ -37,7 +37,7 @@ public class Fic005 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		AccesoSteps.oneStep(dataTest, false, driver);
+		new AccesoSteps().oneStep(dataTest, false);
  		searchAndCheckArticlePersonalizable();
 		
 		pageFichaSteps.selectFirstTallaAvailable();

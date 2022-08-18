@@ -7,11 +7,9 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
@@ -22,7 +20,6 @@ import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class PageFavoritos extends PageBase {
   
@@ -132,7 +129,7 @@ public class PageFavoritos extends PageBase {
 	
 	public void clearAllArticulos() {
 		if (!isSectionVisible()) {
-			SecMenusWrap secMenus = new SecMenusWrap(channel, app);
+			SecMenusWrap secMenus = new SecMenusWrap();
 			secMenus.getMenusUser().clickMenuAndWait(UserMenu.favoritos);
 		}
 		int i=0; //Para evitar posibles bucles infinitos
@@ -174,7 +171,7 @@ public class PageFavoritos extends PageBase {
 			//Ejecutamos el click mediante JavaScript porque en el caso de móvil en ocasiones el aspa de cerrado queda por debajo de la cabecera
 			String xpath = xpathArtWithIdItem + "//span[@class[contains(.,'icofav-eliminar')]]";
 			click(xpath).type(javascript).exec();
-			new WebDriverWait(driver, 3).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpathArtWithIdItem)));
+			state(State.Invisible, xpathArtWithIdItem).wait(3).build();
 		}
 	}
 
@@ -186,10 +183,8 @@ public class PageFavoritos extends PageBase {
 	
 	public void clickButtonAddToBagAndWait(String refProducto, String codigoColor) throws Exception {
 		clickButtonAddToBag(refProducto, codigoColor);
-		
-		//Wait to Div tallas appears
 		String xpathCapaTallas = getXPathCapaTallas(refProducto, codigoColor);
-		new WebDriverWait(driver, 1).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathCapaTallas)));
+		state(State.Visible, xpathCapaTallas).wait(1).build();
 	}
 	
 	private void clickButtonAddToBag(String refProducto, String codigoColor) {
@@ -200,28 +195,28 @@ public class PageFavoritos extends PageBase {
 			//En ocasiones en el canal móvil se solapa el div del Asistente Online de ayuda
 			//así que esperamos un tiempo prudencial hasta que se pliegue
 			waitMillis(2000);
-			driver.findElement(By.xpath(xpathAdd)).click();
+			getElement(xpathAdd).click();
 		}
 	}
 	
 	public void clickImgProducto(String refProducto, String codigoColor) {
 		String xpathImg = getXPathImgProducto(refProducto, codigoColor);
-		driver.findElement(By.xpath(xpathImg)).click();
+		getElement(xpathImg).click();
 	}
 	
 	public List<WebElement> getListaTallas(String refProducto, String codigoColor) {
 		String xpathTalla = getXPathTalla(refProducto, codigoColor);
-		return (driver.findElements(By.xpath(xpathTalla)));
+		return getElements(xpathTalla);
 	}
 	
-	public String selectTallaAndWait(String refProducto, String codigoColor, int posicionTalla, Pais pais) {
+	public String selectTallaAndWait(String refProducto, String codigoColor, int posicionTalla) {
 		List<WebElement> listaTallas = getListaTallas(refProducto, codigoColor);
 		WebElement talla = listaTallas.get(posicionTalla);
 		String litTalla = talla.getText();
 		talla.click();
 		int maxSecondsToWait = 2;
 		
-		SecBolsa secBolsa = SecBolsa.make(channel, app, pais);
+		SecBolsa secBolsa = SecBolsa.make(channel, app);
 		secBolsa.isInStateUntil(StateBolsa.OPEN, maxSecondsToWait);
 		return litTalla;
 	}
@@ -239,10 +234,8 @@ public class PageFavoritos extends PageBase {
 		WebElement tallaDisponible = listTallasAvailable.get(posicionTalla - 1); 
 		Talla talla = Talla.fromLabel(tallaDisponible.getText());
 		tallaDisponible.click();
-		
-		//Wait to Div tallas disappears
 		String xpathCapaTallas = getXPathCapaTallas(refProducto, codigoColor);
-		new WebDriverWait(driver, 1).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpathCapaTallas)));
+		state(State.Invisible, xpathCapaTallas).wait(1).build();
 		
 		return talla;
 	}

@@ -14,8 +14,8 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataCtxShop;
@@ -32,58 +32,50 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 import com.mng.robotest.test.steps.votf.PageLoginVOTFSteps;
 import com.mng.robotest.test.steps.votf.PageSelectIdiomaVOTFSteps;
 import com.mng.robotest.test.steps.votf.PageSelectLineaVOTFSteps;
-import com.mng.robotest.test.utils.Robotest;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
-@SuppressWarnings({"static-access"})
-public class AccesoSteps {
+public class AccesoSteps extends StepBase {
 
-	static final String tagNombrePais = "@TagNombrePais";
-	static final String tagLiteralIdioma = "@TagLiteralIdioma";
-	static final String tagRegistro = "@TagRegistro";
-	
-	public static void defaultAccess(WebDriver driver) throws Exception {
-		DataCtxShop dCtxSh = Robotest.getDefaultDataShop();
-		oneStep(dCtxSh, false, driver);
-	}
+	private static final String TAG_NOMBRE_PAIS = "@TagNombrePais";
+	private static final String TAG_LITERAL_IDIOMA = "@TagLiteralIdioma";
+	private static final String TAG_REGISTRO = "@TagRegistro";
 	
 	@Step (
-		description="Acceder a Mango (" + tagNombrePais + "/" + tagLiteralIdioma + ")<br>" + tagRegistro, 
+		description="Acceder a Mango (" + TAG_NOMBRE_PAIS + "/" + TAG_LITERAL_IDIOMA + ")<br>" + TAG_REGISTRO, 
 		expected="Se accede correctamente",
 		saveNettraffic=SaveWhen.Always)
-	public static void oneStep(DataCtxShop dCtxSh, boolean clearArticulos, WebDriver driver) 
-	throws Exception {
+	public void oneStep(DataCtxShop dataTest, boolean clearArticulos) throws Exception {
 		String registro = "";
-		if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf) {
-			registro = "Identificarse con el usuario <b>" + dCtxSh.userConnected + "</b><br>"; 
+		if (dataTest.userRegistered && app!=AppEcom.votf) {
+			registro = "Identificarse con el usuario <b>" + dataTest.userConnected + "</b><br>"; 
 		}
 		if (clearArticulos) {
 			registro+= "Borrar la Bolsa<br>";
 		}
 
 		StepTM StepTestMaker = TestMaker.getCurrentStepInExecution();
-		StepTestMaker.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
-		StepTestMaker.replaceInDescription(tagLiteralIdioma, dCtxSh.idioma.getCodigo().getLiteral());
-		StepTestMaker.replaceInDescription(tagRegistro, registro);
+		StepTestMaker.replaceInDescription(TAG_NOMBRE_PAIS, dataTest.pais.getNombre_pais());
+		StepTestMaker.replaceInDescription(TAG_LITERAL_IDIOMA, dataTest.idioma.getCodigo().getLiteral());
+		StepTestMaker.replaceInDescription(TAG_REGISTRO, registro);
 
-		AccesoNavigations.accesoHomeAppWeb(dCtxSh, driver);
-		if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf) {
-			new PageIdentificacion().iniciarSesion(dCtxSh);
+		AccesoNavigations.accesoHomeAppWeb(dataTest, driver);
+		if (dataTest.userRegistered && app!=AppEcom.votf) {
+			new PageIdentificacion().iniciarSesion(dataTest);
 		}
 
 		if (clearArticulos) {
-			SecBolsa secBolsa = SecBolsa.make(dCtxSh);
+			SecBolsa secBolsa = SecBolsa.make(channel, app);
 			secBolsa.clearArticulos();
 		}
 
-		if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf) {
-			validaIdentificacionEnShop(dCtxSh, driver);
+		if (dataTest.userRegistered && app!=AppEcom.votf) {
+			validaIdentificacionEnShop(dataTest);
 		}
 	}
 
-	public static void validaIdentificacionEnShop(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-		checkLinksAfterLogin(dCtxSh, driver);
+	public void validaIdentificacionEnShop(DataCtxShop dCtxSh) throws Exception {
+		checkLinksAfterLogin();
 		GenericChecks.checkDefault(driver);
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.GoogleAnalytics, 
@@ -91,38 +83,33 @@ public class AccesoSteps {
 	}
 	
 	@Validation
-	private static ChecksTM checkLinksAfterLogin(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+	private ChecksTM checkLinksAfterLogin() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 5;
-		MenusUserWrapper userMenus = new SecMenusWrap(dCtxSh.channel, dCtxSh.appE).getMenusUser();
+		MenusUserWrapper userMenus = new SecMenusWrap().getMenusUser();
 		checks.add(
 			"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + maxSeconds + " segundos)",
 			userMenus.isMenuInStateUntil(UserMenu.miCuenta, Present, maxSeconds), State.Defect);
 		
 		boolean isVisibleMenuFav = userMenus.isMenuInStateUntil(UserMenu.favoritos, Present, 0);
-		if (dCtxSh.appE==AppEcom.outlet) { 
+		if (app==AppEcom.outlet) { 
 			checks.add(
 				"NO aparece el link \"Favoritos\"",
 				!isVisibleMenuFav, State.Defect);
-//			if (dCtxSh.channel.isDevice()) {
-//				checks.add(
-//					"Aparece el link \"Mis Pedidos\"",
-//					userMenus.isMenuInState(UserMenu.pedidos, Present), State.Defect);
-//			}
 		} else {
 			checks.add(
 				"Aparece el link \"Favoritos\"",
 				isVisibleMenuFav, State.Defect);
 		}
 		
-		if (dCtxSh.channel!=Channel.desktop) {
+		if (channel!=Channel.desktop) {
 			boolean isPresentLinkMisCompras = userMenus.isMenuInState(UserMenu.misCompras, Present);
 			checks.add(
 				"Aparece el link \"Mis Compras\"",
 				isPresentLinkMisCompras, State.Defect);
 		}
 		
-		if (dCtxSh.channel!=Channel.desktop) {
+		if (channel!=Channel.desktop) {
 			checks.add(
 				"Aparece el link \"Ayuda\"",
 				userMenus.isMenuInState(UserMenu.ayuda, Visible), State.Defect);
@@ -131,8 +118,8 @@ public class AccesoSteps {
 				userMenus.isMenuInState(UserMenu.cerrarSesion, Present), State.Defect);
 		}
 		
-		if (dCtxSh.channel==Channel.desktop) {
-			SecMenusDesktop secMenus = new SecMenusDesktop(dCtxSh.appE, dCtxSh.channel);
+		if (channel==Channel.desktop) {
+			SecMenusDesktop secMenus = new SecMenusDesktop(app, channel);
 			checks.add(
 				"Aparece una página con menús de MANGO",
 				secMenus.secMenuSuperior.secLineas.isPresentLineasMenuWrapp(), State.Warn);
@@ -145,23 +132,23 @@ public class AccesoSteps {
 	 * Accedemos a la aplicación (shop/outlet/votf)
 	 * Se ejecutan cada acción en un paso
 	 */
-	public static void manySteps(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-		if (dCtxSh.appE==AppEcom.votf && !dCtxSh.userRegistered) { //En VOTF no tiene sentido identificarte con las credenciales del cliente
-			AccesoSteps.accesoVOTFtoHOME(dCtxSh, driver);					
+	public void manySteps(DataCtxShop dataTest) throws Exception {
+		if (app==AppEcom.votf && !dataTest.userRegistered) { //En VOTF no tiene sentido identificarte con las credenciales del cliente
+			accesoVOTFtoHOME(dataTest);					
 		} else {
-			new PagePrehomeSteps(dCtxSh, driver).seleccionPaisIdiomaAndEnter(false);
-			if (dCtxSh.userRegistered) {
-				identificacionEnMango(dCtxSh, driver);
-				SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh);
+			new PagePrehomeSteps(dataTest.pais, dataTest.idioma).seleccionPaisIdiomaAndEnter(false);
+			if (dataTest.userRegistered) {
+				identificacionEnMango(dataTest);
+				SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dataTest.pais);
 				secBolsaSteps.clear();
 			}
 		}
 	}
 
-	public static void identificacionEnMango(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-		MenusUserWrapper userMenus = new SecMenusWrap(dCtxSh.channel, dCtxSh.appE).getMenusUser();
+	public void identificacionEnMango(DataCtxShop dCtxSh) throws Exception {
+		MenusUserWrapper userMenus = new SecMenusWrap().getMenusUser();
 		if (!userMenus.isMenuInState(UserMenu.cerrarSesion, Present)) {
-			iniciarSesion(dCtxSh, driver);
+			iniciarSesion(dCtxSh);
 		}
 	}
 
@@ -170,19 +157,18 @@ public class AccesoSteps {
 		expected="La identificación es correcta",
 		saveHtmlPage=SaveWhen.Always,
 		saveNettraffic=SaveWhen.Always)
-	private static void iniciarSesion(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+	private void iniciarSesion(DataCtxShop dCtxSh) throws Exception {
 		new PageIdentificacion().iniciarSesion(dCtxSh);
-		validaIdentificacionEnShop(dCtxSh, driver);
+		validaIdentificacionEnShop(dCtxSh);
 	}
 
-	//Acceso a VOTF (identificación + selección idioma + HOME she)
-	public static void accesoVOTFtoHOME(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-		String urlAcceso = TestMaker.getInputParamsSuite().getUrlBase();
+	public void accesoVOTFtoHOME(DataCtxShop dCtxSh) throws Exception {
+		String urlAcceso = inputParamsSuite.getUrlBase();
 		int numIdiomas = dCtxSh.pais.getListIdiomas().size();
 		
-		new PageLoginVOTFSteps(driver).goToAndLogin(urlAcceso, dCtxSh);
+		new PageLoginVOTFSteps().goToAndLogin(urlAcceso, dCtxSh.pais);
 		if (numIdiomas > 1) {
-			new PageSelectIdiomaVOTFSteps(driver).selectIdiomaAndContinue(dCtxSh.idioma);
+			new PageSelectIdiomaVOTFSteps().selectIdiomaAndContinue(dCtxSh.idioma);
 		}
 
 		PageSelectLineaVOTFSteps pageSelectLineaVOTFSteps = new PageSelectLineaVOTFSteps(driver);
@@ -206,14 +192,13 @@ public class AccesoSteps {
 		expected=
 			"Se accede a la shop de #{paisDestino.getNombre_pais()} en #{idiomaDestino.getLiteral()}",
 		saveHtmlPage=SaveWhen.Always)
-	public static void accesoPRYCambioPais(DataCtxShop dCtxSh, Pais paisDestino, IdiomaPais idiomaDestino, WebDriver driver) 
-	throws Exception {
+	public void accesoPRYCambioPais(DataCtxShop dCtxSh, Pais paisDestino, IdiomaPais idiomaDestino) throws Exception {
 		StepTM StepTestMaker = TestMaker.getCurrentStepInExecution();
 		StepTestMaker.replaceInDescription(tagNombrePaisOrigen, dCtxSh.pais.getNombre_pais());
 		StepTestMaker.replaceInDescription(tagCodigoPaisOrigen, dCtxSh.pais.getCodigo_pais());
 		StepTestMaker.replaceInDescription(tagNombreIdiomaOrigen, dCtxSh.idioma.getLiteral());
 	
-		AccesoSteps.manySteps(dCtxSh, driver);
+		manySteps(dCtxSh);
 
 		Pais paisOriginal = dCtxSh.pais;
 		IdiomaPais idiomaOriginal = dCtxSh.idioma;
@@ -362,8 +347,7 @@ public class AccesoSteps {
 	@Step (
 		description="Cargar la URL inicial", 
 		expected="La URL se carga correctamente")
-	public static void goToInitialURL(WebDriver driver) {
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
+	public void goToInitialURL() {
 		driver.get(inputParamsSuite.getUrlBase());
 	}
 

@@ -54,8 +54,8 @@ public class PageFichaArtSteps extends StepBase {
 	private final SecTotalLookSteps secTotalLookSteps;
 	
 	public PageFichaArtSteps(Pais pais) {
-		this.pageFicha = PageFicha.newInstance(channel, app);
-		this.secBolsa = SecBolsa.make(channel, app, pais);
+		this.pageFicha = PageFicha.of(channel, app);
+		this.secBolsa = SecBolsa.make(channel, app);
 		this.modEnvioYdevolSteps = new ModEnvioYdevolNewSteps();
 		this.secProductDescOldSteps = new SecProductDescrOldSteps();
 		this.secTotalLookSteps = new SecTotalLookSteps();
@@ -268,7 +268,7 @@ public class PageFichaArtSteps extends StepBase {
 		DataBag dataBag = new DataBag();
 		dataBag.addArticulo(articulo);
 		
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh.pais);
 		secBolsaSteps.validaAltaArtBolsa(dataBag);
 	}	
 
@@ -440,7 +440,7 @@ public class PageFichaArtSteps extends StepBase {
 		 		"Sí es visible el link <b>Prev</b> (lo esperamos hasta " + maxSeconds + " segundos)",
 		 		isVisiblePrevLink, State.Warn);
 		}
-		if (dCtxSh.appE==AppEcom.outlet || dCtxSh.channel==Channel.desktop) {
+		if (app==AppEcom.outlet || channel==Channel.desktop) {
 		 	checks.add(
 		 		"Es visible el link <b>Next</b>",
 		 		pageFicha.getSecDataProduct().isVisiblePrevNextUntil(ProductNav.NEXT, 0), State.Warn);

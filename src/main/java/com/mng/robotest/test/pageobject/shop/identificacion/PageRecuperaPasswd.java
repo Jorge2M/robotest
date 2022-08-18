@@ -1,45 +1,40 @@
 package com.mng.robotest.test.pageobject.shop.identificacion;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.AllPages;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
-public class PageRecuperaPasswd {
+public class PageRecuperaPasswd extends PageBase {
 	
-	static String xpathInputCorreo = "//input[@type='text' and @id[contains(.,'RPemail')]]";
-	static String xpathButtonEnviar = "//input[@type='submit' and @id[contains(.,'ResetPassword')]]";
-	static String xpathMsgRevisaTuEmail = "//div[text()[contains(.,'REVISA TU EMAIL')]]";
-	static String xpathButtonIrDeShopping = "//div[@id[contains(.,'IrShopping')]]/a";
+	private static final String XPATH_INPUT_CORREO = "//input[@type='text' and @id[contains(.,'RPemail')]]";
+	private static final String XPATH_BUTTON_ENVIAR = "//input[@type='submit' and @id[contains(.,'ResetPassword')]]";
+	private static final String XPATH_MSG_REVISA_TU_EMAIL = "//div[text()[contains(.,'REVISA TU EMAIL')]]";
+	private static final String XPATH_BUTTON_IR_DE_SHOPPING = "//div[@id[contains(.,'IrShopping')]]/a";
 	
-	public static boolean isPageUntil(int maxSecondsToWait, WebDriver driver) {
+	public boolean isPageUntil(int maxSecondsToWait) {
 		return AllPages.isPresentElementWithTextUntil("RECUPERA TU CONTRASEÑA", maxSecondsToWait, driver);
 	}
 	
-	public static boolean isPresentInputCorreo(WebDriver driver) {
-		return (state(Present, By.xpath(xpathInputCorreo), driver).check());
+	public boolean isPresentInputCorreo() {
+		return state(Present, XPATH_INPUT_CORREO).check();
 	}
 	
-	public static void inputEmail(String email, WebDriver driver) {
-		driver.findElement(By.xpath(xpathInputCorreo)).clear();
-		driver.findElement(By.xpath(xpathInputCorreo)).sendKeys(email);
+	public void inputEmail(String email) {
+		getElement(XPATH_INPUT_CORREO).clear();
+		getElement(XPATH_INPUT_CORREO).sendKeys(email);
 	}
 
-	public static void clickEnviar(WebDriver driver) {
-		click(By.xpath(xpathButtonEnviar), driver).exec();
+	public void clickEnviar() {
+		click(XPATH_BUTTON_ENVIAR).exec();
 	}
 
-	public static boolean isVisibleRevisaTuEmailUntil(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(xpathMsgRevisaTuEmail), driver)
-				.wait(maxSeconds).check());
+	public boolean isVisibleRevisaTuEmailUntil(int maxSeconds) {
+		return state(Visible, XPATH_MSG_REVISA_TU_EMAIL).wait(maxSeconds).check();
 	}
 
-	public static boolean isVisibleButtonIrDeShopping(WebDriver driver) {
-		return (state(Visible, By.xpath(xpathButtonIrDeShopping), driver).check());
+	public boolean isVisibleButtonIrDeShopping() {
+		return state(Visible, XPATH_BUTTON_IR_DE_SHOPPING).check();
 	}
 		
 }

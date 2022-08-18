@@ -30,11 +30,6 @@ public class LineasArtBolsaNew extends LineasArtBolsa {
 	private static final String XPathItemRefDesktop = XPathLinkItemRef + "/ancestor::*[@class[contains(.,'layout-content')]]";
 	private static final String XPathItemRefMobile = XPathLinkItemRef + "/ancestor::*[@class[contains(.,'layout-content')]]/..";
 	
-	
-	public LineasArtBolsaNew(Channel channel) {
-		super(channel);
-	}
-	
 	private String getXPathLinkBorrarArt(String refArticulo) {
 		String xpathItemWithTag = getXPathLineaWithTagRef();
 		String xpathLinkBorrarArtRef = xpathItemWithTag + "//*[@data-testid[contains(.,'removeItem.button')]]";

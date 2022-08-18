@@ -33,7 +33,7 @@ public class Reg003 extends TestBase {
 	private final PageRegistroSegundaStepsOutlet pageRegistroSegundaSteps = new PageRegistroSegundaStepsOutlet();	
 	private final PageRegistroNinosStepsOutlet pageRegistroNinosSteps = new PageRegistroNinosStepsOutlet();
 	private final PageRegistroDirecStepsOutlet pageRegistroDirecSteps = new PageRegistroDirecStepsOutlet();
-	private final PageRegistroFinStepsOutlet pageRegistroFinSteps = new PageRegistroFinStepsOutlet(dataTest);
+	private final PageRegistroFinStepsOutlet pageRegistroFinSteps; 
 
 	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
 	private final SecFooterSteps secFooterSteps = new SecFooterSteps(channel, app, driver);
@@ -49,6 +49,8 @@ public class Reg003 extends TestBase {
 		dataTest.idioma = idioma;
 		dataTest.userRegistered = false;
 		
+		pageRegistroFinSteps = new PageRegistroFinStepsOutlet(dataTest.idioma);
+		
 		if (accessFromFactory) {
 			version = VersionRegistroSuite.valueOf(inputParamsSuite.getVersion());
 		} else {
@@ -62,7 +64,7 @@ public class Reg003 extends TestBase {
 			return;
 		}
 		
-		AccesoSteps.oneStep(dataTest, false, driver);
+		new AccesoSteps().oneStep(dataTest, false);
 		ModalSuscripcionSteps.validaRGPDModal(dataTest, driver);
 		
 		userMenusSteps.selectRegistrate(dataTest);
@@ -104,7 +106,7 @@ public class Reg003 extends TestBase {
 	
 	private void thirdPageRegister() throws Exception {
 		pageRegistroDirecSteps.sendDataAccordingCountryToInputs(dataRegister, dataTest.pais);
-		pageRegistroDirecSteps.clickFinalizarButton(dataTest);
+		pageRegistroDirecSteps.clickFinalizarButton(dataTest.idioma);
 	}
 	
 	private void goToShopping() throws Exception {

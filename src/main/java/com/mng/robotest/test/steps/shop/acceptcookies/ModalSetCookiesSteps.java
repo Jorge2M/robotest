@@ -1,33 +1,28 @@
 package com.mng.robotest.test.steps.shop.acceptcookies;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.acceptcookies.ModalSetCookies;
 import com.mng.robotest.test.pageobject.shop.acceptcookies.ModalSetCookies.SectionConfCookies;
 
-public class ModalSetCookiesSteps {
+public class ModalSetCookiesSteps extends StepBase {
 
-	private final ModalSetCookies modalSetCookies;
-	
-	public ModalSetCookiesSteps(WebDriver driver) {
-		modalSetCookies = new ModalSetCookies(driver);
-	}
+	private final ModalSetCookies modalSetCookies = new ModalSetCookies();
 	
 	@Validation (
 		description="Es visible el modal para el seteo de Cookies (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
 	public boolean isVisible(int maxSeconds) {
-		return (modalSetCookies.isVisible(maxSeconds));
+		return modalSetCookies.isVisible(maxSeconds);
 	}
 	
 	@Validation (
 		description="No es visible el modal para el seteo de Cookies (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
 	public boolean isInvisible(int maxSeconds) {
-		return (modalSetCookies.isInvisible(maxSeconds));
+		return modalSetCookies.isInvisible(maxSeconds);
 	}
 	
 	@Step (

@@ -10,8 +10,6 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import java.util.Arrays;
-
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.domains.loyalty.steps.PageHomeLikesSteps;
@@ -28,14 +26,12 @@ import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper.LoyaltyData;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test.steps.shop.micuenta.PageMiCuentaSteps;
 import com.mng.robotest.test.steps.shop.modales.ModalCambioPaisSteps;
 
-
 public class SecMenusUserSteps extends StepBase {
 	
-	private final MenusUserWrapper userMenus = new SecMenusWrap(channel, app).getMenusUser();
+	private final MenusUserWrapper userMenus = new SecMenusWrap().getMenusUser();
 	
 	@Step (
 		description="Seleccionar el menú de usuario \"Favoritos\"", 
@@ -90,7 +86,7 @@ public class SecMenusUserSteps extends StepBase {
 		description="Identificarse con los datos del registro (#{userConnect})", 
 		expected="La nueva identificación es correcta")
 	public void identification(String userConnect, String userPassword) throws Exception {
-		new PageIdentificacion().iniciarSesion(userConnect, userPassword, channel, app);
+		new PageIdentificacion().iniciarSesion(userConnect, userPassword);
 		checkIsVisibleLinkCerrarSesion();
 		GenericChecks.checkDefault(driver);
 	}

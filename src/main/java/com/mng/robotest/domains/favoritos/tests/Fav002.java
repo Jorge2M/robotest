@@ -25,7 +25,7 @@ import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 public class Fav002 extends TestBase {
 
 	private final PageFavoritosSteps pageFavoritosSteps = new PageFavoritosSteps();
-	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dataTest);;
+	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dataTest.pais);
 	private final SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dataTest);
 	private final PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(channel, app, driver);
 	
@@ -78,7 +78,7 @@ public class Fav002 extends TestBase {
 		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
 		dataTest.userConnected = userShop.user;
 		dataTest.passwordUser = userShop.password;
-		AccesoSteps.identificacionEnMango(dataTest, driver);
+		new AccesoSteps().identificacionEnMango(dataTest);
 		secBolsaSteps.clear();
 	}
 
@@ -95,7 +95,7 @@ public class Fav002 extends TestBase {
 
 	private void accessWithoutLoginAndClearData() throws Exception {
 		dataTest.userRegistered=false;
-		AccesoSteps.oneStep(dataTest, false, driver);
+		new AccesoSteps().oneStep(dataTest, false);
 		secBolsaSteps.clear();
 		pageFavoritosSteps.clearAll(dataFavoritos);
 	}

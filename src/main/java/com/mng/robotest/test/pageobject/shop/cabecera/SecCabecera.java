@@ -19,8 +19,6 @@ import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenuLateralDevice;
 
 public abstract class SecCabecera extends PageBase {
 	
-	protected final Channel channel;
-	protected final AppEcom app;
 	protected final SecSearch secSearch;
 
 	private static final String XPATH_HEADER = "//header";
@@ -35,15 +33,13 @@ public abstract class SecCabecera extends PageBase {
 	public abstract void clickIconoBolsaWhenDisp(int maxSecondsToWait);
 	public abstract void hoverIconoBolsa();
 	
-	protected SecCabecera(Channel channel, AppEcom app) {
-		this.channel = channel;
-		this.app = app;
+	protected SecCabecera() {
 		this.secSearch = SecSearch.getNew(channel, app, driver);
 	}
 	
 	public static SecCabecera getNew(Channel channel, AppEcom app) {
 		if (channel==Channel.mobile && app==AppEcom.outlet) {
-			return new SecCabeceraOutlet_Mobil(channel, app);
+			return new SecCabeceraOutlet_Mobil();
 		}
 		
 		switch (channel) {

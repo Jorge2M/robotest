@@ -5,12 +5,9 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test.utils.ImporteScreen;
 
-
 public class LineasArtBolsaDesktopTmp extends LineasArtBolsa {
-
 
 	private static final String XPATH_ITEM = "//*[@data-testid='bag.item']";
 	
@@ -26,10 +23,6 @@ public class LineasArtBolsaDesktopTmp extends LineasArtBolsa {
 	private static final String XPATH_LINK_ITEM_REF = XPATH_ITEM + "//a[@href[contains(.,'" + TAG_REF + "')]]";
 	private static final String XPATH_ITEM_REF = XPATH_LINK_ITEM_REF + "/ancestor::*[@data-testid='bag.item']";
 	private static final String XPATH_LINK_BORRAR_ART_REF = XPATH_ITEM_REF + "//*[@data-testid[contains(.,'removeItem.button')]]";
-	
-	public LineasArtBolsaDesktopTmp(Channel channel) {
-		super(channel);
-	}
 
 	@Override
 	String getXPathDataRelativeArticle(DataArtBolsa dataArt) {

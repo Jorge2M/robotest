@@ -51,16 +51,16 @@ public class PageIdentificacion extends PageBase {
 		if (dCtxSh.userRegistered) {
 			iniciarSesion(dCtxSh);
 		} else {
-			SecMenusWrap secMenus = new SecMenusWrap(dCtxSh.channel, dCtxSh.appE);
+			SecMenusWrap secMenus = new SecMenusWrap();
 			secMenus.closeSessionIfUserLogged();
 		}
 	}
 	
-	public void iniciarSesion(DataCtxShop dCtxSh) throws Exception {
-		iniciarSesion(dCtxSh.userConnected, dCtxSh.passwordUser, dCtxSh.channel, dCtxSh.appE);
+	public void iniciarSesion(DataCtxShop dataTest) throws Exception {
+		iniciarSesion(dataTest.userConnected, dataTest.passwordUser);
 	}
 	 
-	public void iniciarSesion(String user, String password, Channel channel, AppEcom app) {
+	public void iniciarSesion(String user, String password) {
 		clickIniciarSesionAndWait(channel, app);
 		isVisibleUserUntil(10);
 		//normalizeLoginForDefeatAkamai(channel, app, driver);
@@ -91,7 +91,7 @@ public class PageIdentificacion extends PageBase {
 			
 			// Si existe, nos posicionamos y seleccionamos el link \"CERRAR SESIÓN\" 
 			// En el caso de iPhone parece que mantiene la sesión abierta después de un caso de prueba 
-			SecMenusWrap secMenus = new SecMenusWrap(channel, app);
+			SecMenusWrap secMenus = new SecMenusWrap();
 			boolean menuClicado = secMenus.getMenusUser().clickMenuIfInState(UserMenu.cerrarSesion, Clickable);
 			
 			//Si hemos clicado el menú 'Cerrar Sesión' volvemos a abrir los menús
@@ -100,7 +100,7 @@ public class PageIdentificacion extends PageBase {
 			}
 		}
 		
-		SecMenusWrap secMenus = new SecMenusWrap(channel, app);
+		SecMenusWrap secMenus = new SecMenusWrap();
 		secMenus.getMenusUser().moveAndClick(UserMenu.iniciarSesion);
 	}
 	

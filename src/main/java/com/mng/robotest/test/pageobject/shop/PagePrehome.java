@@ -15,7 +15,8 @@ import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import com.mng.robotest.test.data.DataCtxShop;
+import com.mng.robotest.test.beans.IdiomaPais;
+import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.acceptcookies.SectionCookies;
 import com.mng.robotest.test.pageobject.shop.acceptcookies.ModalSetCookies.SectionConfCookies;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraOutlet_Mobil;
@@ -30,20 +31,21 @@ public class PagePrehome extends PageBase {
 
 	enum ButtonEnter { ENTER, CONTINUAR };
 	
-	private final DataCtxShop dCtxSh;
+	private final Pais pais;
+	private final IdiomaPais idioma;
 	
 	private static final String XPATH_SELECT_PAISES = "//select[@id='countrySelect']";
 	private static final String XPATH_DIV_PAIS_SELECCIONADO = "//div[@id='countrySelect_chosen']";
 	private static final String XPATH_ICON_SALE_PAIS_SELECCIONADO = XPATH_DIV_PAIS_SELECCIONADO + "//span[@class[contains(.,'salesIcon')]]";
 	private static final String XPATH_INPUT_PAIS = "//div[@class[contains(.,'chosen-search')]]/input";
 	
-	public PagePrehome(DataCtxShop dCtxSh, WebDriver driver) {
-		super(driver);
-		this.dCtxSh = dCtxSh;
+	public PagePrehome(Pais pais, IdiomaPais idioma) {
+		this.pais = pais;
+		this.idioma = idioma;
 	}
 	
-	private String getXPath_optionPaisFromName(String nombrePais) {
-		return (XPATH_SELECT_PAISES + "//option[@data-alt-spellings[contains(.,'" + nombrePais + "')]]");
+	private String getXPathOptionPaisFromName(String nombrePais) {
+		return XPATH_SELECT_PAISES + "//option[@data-alt-spellings[contains(.,'" + nombrePais + "')]]";
 	}   
 	
 	private String getXPathButtonIdioma(String codigoPais, String nombreIdioma) {
@@ -60,67 +62,59 @@ public class PagePrehome extends PageBase {
 		}
 	}
 
+	public static boolean isPage(WebDriver driver) {
+		return PageBase.state(Present, By.xpath(XPATH_DIV_PAIS_SELECCIONADO), driver).check();
+	}
+	
 	public boolean isPage() {
 		return isPage(driver);
 	}
-	public static boolean isPage(WebDriver driver) {
-		return (PageBase.state(Present, By.xpath(XPATH_DIV_PAIS_SELECCIONADO), driver).check());
-	}
 
 	public boolean isNotPageUntil(int maxSeconds) {
-		return (state(Invisible, By.xpath(XPATH_DIV_PAIS_SELECCIONADO)).wait(maxSeconds).check());
+		return state(Invisible, XPATH_DIV_PAIS_SELECCIONADO).wait(maxSeconds).check();
 	}
 
-	/**
-	 * @return el código de país que existe en pantalla en base a su nombre
-	 */
 	public String getCodigoPais(String nombrePais) {
-		String xpathOptionPais = getXPath_optionPaisFromName(nombrePais);
-		String codigoPais = driver.findElement(By.xpath(xpathOptionPais)).getAttribute("value");
+		String xpathOptionPais = getXPathOptionPaisFromName(nombrePais);
+		String codigoPais = getElement(xpathOptionPais).getAttribute("value");
 		return codigoPais;
 	}
 
 	public boolean isPaisSelectedWithMarcaCompra() {
-		return (state(Visible, By.xpath(XPATH_ICON_SALE_PAIS_SELECCIONADO), driver).check());
+		return state(Visible, XPATH_ICON_SALE_PAIS_SELECCIONADO).check();
 	}
 
 	public boolean isPaisSelectedDesktop() {
-		String nombrePais = dCtxSh.pais.getNombre_pais();
-		return (driver.findElement(By.xpath(XPATH_DIV_PAIS_SELECCIONADO)).getText().contains(nombrePais));
+		String nombrePais = pais.getNombre_pais();
+		return getElement(XPATH_DIV_PAIS_SELECCIONADO).getText().contains(nombrePais);
 	}
 
 	public void desplieguaListaPaises() {
 		moveToElement(By.xpath(XPATH_DIV_PAIS_SELECCIONADO), driver);
-		driver.findElement(By.xpath(XPATH_DIV_PAIS_SELECCIONADO + "/a")).click();
+		getElement(XPATH_DIV_PAIS_SELECCIONADO + "/a").click();
 	}
 
 	public void seleccionaIdioma(String nombrePais, String nombreIdioma) {
 		String codigoPais = getCodigoPais(nombrePais);
 		String xpathButtonIdioma = getXPathButtonIdioma(codigoPais, nombreIdioma);
-		click(By.xpath(xpathButtonIdioma), driver).type(TypeClick.javascript).exec();
+		click(xpathButtonIdioma).type(TypeClick.javascript).exec();
 	}
 
-	/**
-	 * Introducimos el nombre del país en el campo de input de "Busca tu país..." y lo seleccionamos
-	 */
 	public void inputPaisAndSelect(String nombrePais) throws Exception {
 		String codigoPais = getCodigoPais(nombrePais);
-		if (!dCtxSh.channel.isDevice()) {
+		if (!channel.isDevice()) {
 			new WebDriverWait(driver, 5).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@class[contains(.,'chosen-with-drop')]]")));
-			driver.findElement(By.xpath(XPATH_INPUT_PAIS)).sendKeys(nombrePais);
+			getElement(XPATH_INPUT_PAIS).sendKeys(nombrePais);
 			
 			// Seleccionamos el país encontrado
-			driver.findElement(By.xpath("//div[@class='chosen-drop']/ul/li")).click();		
+			getElement("//div[@class='chosen-drop']/ul/li").click();		
 		} else {
 			//En el caso de mobile no ejecutamos los despliegues porque es muy complejo tratar con los desplegables nativos del dispositivo
 			//Seleccionamos el país a partir de su código de país
-			driver.findElement(By.xpath(XPATH_SELECT_PAISES + "/option[@value='" + codigoPais + "']")).click();
+			getElement(XPATH_SELECT_PAISES + "/option[@value='" + codigoPais + "']").click();
 		}
 	}
 	
-	/**
-	 * Selecciona el botón para acceder a la shop (soporta desktop/móvil y prehome/modal)
-	 */
 	public void selectButtonForEnter(String codigoPais) {
 		try {
 			boolean buttonEnterSelected = clickButtonForEnterIfExists(ButtonEnter.ENTER, codigoPais); 
@@ -135,18 +129,16 @@ public class PagePrehome extends PageBase {
 
 	public boolean clickButtonForEnterIfExists(ButtonEnter buttonEnter, String codigoPais) {
 		String xpathButton = getXPathButtonForEnter(buttonEnter, codigoPais);
-		if (state(Present, By.xpath(xpathButton), driver).check() && 
-			driver.findElement(By.xpath(xpathButton)).isDisplayed()) {
+		if (state(Present, xpathButton).check() && 
+			getElement(xpathButton).isDisplayed()) {
 			moveToElement(By.xpath(xpathButton), driver);
-			click(By.xpath(xpathButton + "/a"), driver).type(TypeClick.javascript).exec();
+			click(xpathButton + "/a").type(TypeClick.javascript).exec();
 			return true;
 		}
 		return false;
 	}
 
-	@SuppressWarnings("unchecked")
 	public void closeModalNewsLetterIfExists() {
-		//Capturamos la variable JavaScript "sessionObjectJson"
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		Object result = js.executeScript("return sessionObjectsJson");
 		if (result!=null) {
@@ -155,9 +147,9 @@ public class PagePrehome extends PageBase {
 			//Si figura para lanzar la llamada JSON de NewsLetter
 			if (resultMap.entrySet().toString().contains("modalRegistroNewsletter")) {
 				String xpathDivModal = "//div[@id='modalNewsletter']";
-				if (state(Visible, By.xpath(xpathDivModal), driver).wait(5).check()) {
+				if (state(Visible, xpathDivModal).wait(5).check()) {
 					//Clickamos al aspa para cerrar el modal
-					driver.findElement(By.xpath(xpathDivModal + "//div[@id='modalClose']")).click();
+					getElement(xpathDivModal + "//div[@id='modalClose']").click();
 				}
 			}
 		}
@@ -173,25 +165,23 @@ public class PagePrehome extends PageBase {
 		previousAccessShopSteps(acceptCookies);
 		selecPaisIdiomaYAccede();
 		ModalLoyaltyAfterAccess.closeModalIfVisible(driver);
-		if (dCtxSh.channel.isDevice()) {
-			SecCabeceraOutlet_Mobil secCabecera = new SecCabeceraOutlet_Mobil(Channel.mobile, dCtxSh.appE);
+		if (channel.isDevice()) {
+			SecCabeceraOutlet_Mobil secCabecera = new SecCabeceraOutlet_Mobil();
 			secCabecera.closeSmartBannerIfExistsMobil();
 		}
-		
 	}
 	
 	public void previousAccessShopSteps(boolean acceptCookies) throws Exception {
 		reloadIfServiceUnavailable();
 		new PageJCAS().identJCASifExists();
-		TestABactive.currentTestABsToActivate(dCtxSh.channel, dCtxSh.appE, driver);
+		TestABactive.currentTestABsToActivate(channel, app, driver);
 		manageCookies(acceptCookies);
 	}
 	
 	private void manageCookies(boolean acceptCookies) {
-		SectionCookies sectionCookies = new SectionCookies(driver);
-		SectionCookiesSteps sectionCookiesSteps = new SectionCookiesSteps(driver);
+		SectionCookiesSteps sectionCookiesSteps = new SectionCookiesSteps();
 		if (acceptCookies) {
-			if (sectionCookies.isVisible(2)) {
+			if (new SectionCookies().isVisible(2)) {
 				sectionCookiesSteps.accept();
 				//changeCookie_OptanonConsent();
 				//setupCookies();
@@ -209,25 +199,22 @@ public class PagePrehome extends PageBase {
 	}
 	
 	private void changeCookie_OptanonConsent() {
-		SectionCookiesSteps sectionCookiesSteps = new SectionCookiesSteps(driver);
-		sectionCookiesSteps.changeCookie_OptanonConsent();
+		new SectionCookiesSteps().changeCookie_OptanonConsent();
 	}
 	
 	private void setupCookies() {
-		SectionCookiesSteps sectionCookiesSteps = new SectionCookiesSteps(driver);
-		ModalSetCookiesSteps modalSetCookiesSteps = 
-			sectionCookiesSteps.setCookies();
-		modalSetCookiesSteps.select(SectionConfCookies.Cookies_dirigidas);
+		ModalSetCookiesSteps modalSetCookiesSteps = new SectionCookiesSteps().setCookies();
+		modalSetCookiesSteps.select(SectionConfCookies.COOKIES_DIRIGIDAS);
 		((JavascriptExecutor) driver).executeScript("document.getElementsByClassName('ot-tgl')[0].style.display='block'");	
 		modalSetCookiesSteps.disableSwitchCookies();
 		
-		modalSetCookiesSteps.select(SectionConfCookies.Cookies_de_redes_sociales);
+		modalSetCookiesSteps.select(SectionConfCookies.COOKIES_DE_REDES_SOCIALES);
 		modalSetCookiesSteps.disableSwitchCookies();
 		
-		modalSetCookiesSteps.select(SectionConfCookies.Cookies_funcionales);
+		modalSetCookiesSteps.select(SectionConfCookies.COOKIES_FUNCIONOALES);
 		modalSetCookiesSteps.disableSwitchCookies();
 		
-		modalSetCookiesSteps.select(SectionConfCookies.Cookies_de_rendimiento);
+		modalSetCookiesSteps.select(SectionConfCookies.COOKIES_DE_RENDIMIENTO);
 		modalSetCookiesSteps.disableSwitchCookies();
 		
 		modalSetCookiesSteps.saveConfiguration();
@@ -244,24 +231,24 @@ public class PagePrehome extends PageBase {
 		//Damos de alta la cookie de newsLetter porque no podemos gestionar correctamente el cierre 
 		//del modal en la página de portada (es aleatorio y aparece en un intervalo de 0 a 5 segundos)
 		setInitialModalsOff();
-		if (dCtxSh.channel.isDevice() ||
+		if (channel.isDevice() ||
 			!isPaisSelectedDesktop()) {
-			if (!dCtxSh.channel.isDevice()) {
+			if (!channel.isDevice()) {
 				//Nos posicionamos y desplegamos la lista de países (en el caso de mobile no desplegamos 
 				//porque entonces es complejo manejar el desplegable que aparece en este tipo de dispositivos)
 				desplieguaListaPaises();
 			}
 			
-			inputPaisAndSelect(dCtxSh.pais.getNombre_pais());
+			inputPaisAndSelect(pais.getNombre_pais());
 		}
 	}
 	
 	public void selecionIdiomaAndEnter() throws Exception { 
-		if (dCtxSh.pais.getListIdiomas().size() > 1) {
+		if (pais.getListIdiomas().size() > 1) {
 			//Si el país tiene más de 1 idioma seleccionar el que nos llega como parámetro
-			seleccionaIdioma(dCtxSh.pais.getNombre_pais(), dCtxSh.idioma.getCodigo().getLiteral());
+			seleccionaIdioma(pais.getNombre_pais(), idioma.getCodigo().getLiteral());
 		} else {
-			String codigoPais = getCodigoPais(dCtxSh.pais.getNombre_pais());
+			String codigoPais = getCodigoPais(pais.getNombre_pais());
 			selectButtonForEnter(codigoPais);
 		}
 	

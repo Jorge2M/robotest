@@ -43,7 +43,7 @@ public class Reg001 extends TestBase {
 	}
 
 	private void accesoAndClickRegistrate() throws Exception {
-		AccesoSteps.oneStep(dataTest, false, driver);
+		new AccesoSteps().oneStep(dataTest, false);
 		new SecMenusUserSteps().selectRegistrate(dataTest);
 	}	
 	

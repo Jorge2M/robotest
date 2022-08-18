@@ -96,7 +96,7 @@ public class ListAllNodes {
 				
 			//Creamos un nodo y lo almacenamos en la lista
 				NodoStatus nodo = new NodoStatus();
-				nodo.setIp(PageErrorPage.getIpNode(driver));
+				nodo.setIp(new PageErrorPage().getIpNode());
 				nodo.setCookies(driver.manage().getCookies());
 				nodo.setAppEcom(appE);
 				nodo.setSourceDataURL(urlErrorpage);

@@ -1,18 +1,13 @@
 package com.mng.robotest.test.appshop;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.compra.tests.CompraCommons;
 import com.mng.robotest.test.data.DataCtxShop;
-import com.mng.robotest.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test.datastored.DataCtxPago;
-import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
-import com.mng.robotest.test.steps.navigations.manto.PedidoNavigations;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.suites.PagosPaisesSuite.VersionPagosSuite;

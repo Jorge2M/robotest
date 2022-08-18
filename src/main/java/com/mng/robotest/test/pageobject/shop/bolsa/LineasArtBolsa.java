@@ -48,8 +48,6 @@ public abstract class LineasArtBolsa extends PageBase {
 		}
 	};
 	
-	protected final Channel channel;
-	
 	static final String TagReference = "@Reference";
 	
 	abstract String getXPathDataRelativeArticle(DataArtBolsa dataArt);
@@ -60,10 +58,6 @@ public abstract class LineasArtBolsa extends PageBase {
 	public abstract void clickArticle(int position);
 	public abstract void clickRemoveArticleIfExists();
 	public abstract float getPrecioArticle(WebElement lineaArticleWeb);
-	
-	LineasArtBolsa(Channel channel) {
-		this.channel = channel;
-	}
 	
 	private String getXPathLineaArticleByPosicion(int posicion) {
 		String xpathLinea = getXPathLinea();

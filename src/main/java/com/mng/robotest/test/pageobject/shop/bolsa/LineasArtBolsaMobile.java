@@ -5,9 +5,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test.utils.ImporteScreen;
-
 
 public class LineasArtBolsaMobile extends LineasArtBolsa {
 
@@ -24,10 +22,6 @@ public class LineasArtBolsaMobile extends LineasArtBolsa {
 	private static final String XPATH_PRECIO_DECIMAL_RELATIVE_ARTICLE = XPATH_PRECIO_RELATIVE_ARTICLE + "[2]";
 	private static final String TAG_REF_ARTICLE = "[TAGREF]";
 	private static final String XPATH_LINK_BORRAR_ART = "//*[@id[contains(.,'trashMobile')] and @onclick[contains(.,'" + TAG_REF_ARTICLE + "')]]";
-	
-	public LineasArtBolsaMobile() {
-		super(Channel.mobile);
-	}
 	
 	@Override
 	String getXPathDataRelativeArticle(DataArtBolsa dataArt) {

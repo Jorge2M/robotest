@@ -9,9 +9,8 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroAddressDataOutlet;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroDirecOutlet;
 import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.DataCtxShop;
-
 
 public class PageRegistroDirecStepsOutlet extends StepBase {
 	
@@ -51,8 +50,8 @@ public class PageRegistroDirecStepsOutlet extends StepBase {
 	@Step (
 		description= "Seleccionar el botón \"<b>Finalizar</b>\"", 
 		expected="Aparece la página final del proceso de registro")
-	public void clickFinalizarButton(DataCtxShop dataTest) {
+	public void clickFinalizarButton(IdiomaPais idioma) {
 		pageRegistroDirec.clickFinalizarButton();
-		new PageRegistroFinStepsOutlet(dataTest).isPageUntil(5);
+		new PageRegistroFinStepsOutlet(idioma).isPageUntil(5);
 	}
 }

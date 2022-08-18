@@ -36,7 +36,7 @@ public class ModalCambioPaisSteps {
 		step.replaceInDescription(tagLiteralIdioma, dCtxSh.idioma.getCodigo().getLiteral());
 		step.replaceInExpected(tagLiteralIdioma, dCtxSh.idioma.getCodigo().getLiteral());
 		
-		new PagePrehome(dCtxSh, driver).selecPaisIdiomaYAccede();
+		new PagePrehome(dCtxSh.pais, dCtxSh.idioma).selecPaisIdiomaYAccede();
 		(new PageHomeMarcasSteps(dCtxSh.channel, dCtxSh.appE))
 			.validateIsPageWithCorrectLineas(dCtxSh.pais);
 	}

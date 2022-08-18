@@ -11,30 +11,14 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClic
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.ficha.pageobjects.SecModalPersonalizacion.ModalElement;
-import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class SecModalPersonalizacionSteps extends PageBase {
 
-	DataCtxShop dCtxSh;
-	PageFicha pageFichaWrap;
-
-	private SecModalPersonalizacionSteps(DataCtxShop dCtxSh, WebDriver driver) {
-		super(driver);
-		this.dCtxSh = dCtxSh;
-		this.pageFichaWrap = PageFicha.newInstance(dCtxSh.channel, dCtxSh.appE);
-	}
-	
-	public static SecModalPersonalizacionSteps getNewOne(DataCtxShop dCtxSh, WebDriver driver) {
-		return (new SecModalPersonalizacionSteps(dCtxSh, driver));
-	}
-	
 	public boolean checkArticleCustomizable() {
 		return checkArticleCustomizable(State.Defect);
 	}
@@ -54,7 +38,7 @@ public class SecModalPersonalizacionSteps extends PageBase {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 			"El artículo es personalizable (aparece el link \"Añadir bordado\")",
-			state(Present, ModalElement.ANADIR_BORDADO_LINK.getBy(dCtxSh.channel)).wait(1).check(), 
+			state(Present, ModalElement.ANADIR_BORDADO_LINK.getBy(channel)).wait(1).check(), 
 			levelError);
 		return checks;
 	}
@@ -63,7 +47,7 @@ public class SecModalPersonalizacionSteps extends PageBase {
 		description="Seleccionamos el link <b>Añadir bordado</b>",
 		expected="Aparece el modal para la personalización de la prenda")
 	public void selectLinkPersonalizacion () throws Exception {
-		click(ModalElement.ANADIR_BORDADO_LINK.getBy(dCtxSh.channel)).type(javascript).exec();
+		click(ModalElement.ANADIR_BORDADO_LINK.getBy(channel)).type(javascript).exec();
 		validateModal();
 	}
 	
@@ -77,7 +61,7 @@ public class SecModalPersonalizacionSteps extends PageBase {
 			State.Warn);
 		checks.add(
 			"Aparece la opción <b>Un icono</b> (la esperamos hasta " + maxSeconds + " segundos)",
-			state(Visible, ModalElement.BUTTON_UN_ICONO.getBy(dCtxSh.channel)).wait(maxSeconds).check(), 
+			state(Visible, ModalElement.BUTTON_UN_ICONO.getBy(channel)).wait(maxSeconds).check(), 
 			State.Warn);
 	
 		return checks;
@@ -87,14 +71,14 @@ public class SecModalPersonalizacionSteps extends PageBase {
 		description="1) Aparece la cabecera correspondiente a la personalizacion de la prenda",
 		level=State.Warn)
 	private boolean validationInitMblCustomization(int maxSeconds, ModalElement element) {
-		return (state(Visible, element.getBy(dCtxSh.channel)).wait(maxSeconds).check());
+		return (state(Visible, element.getBy(channel)).wait(maxSeconds).check());
 	}
 
 	@Step(
 		description="Seleccionamos la opción <b>Un icono</b>",
 		expected="Aparece la lista de iconos")
 	public void selectIconCustomization() {
-		click(ModalElement.BUTTON_UN_ICONO.getBy(dCtxSh.channel)).type(javascript).exec();
+		click(ModalElement.BUTTON_UN_ICONO.getBy(channel)).type(javascript).exec();
 		validationIconSelection(2);
 	}
 
@@ -102,17 +86,17 @@ public class SecModalPersonalizacionSteps extends PageBase {
 		description="1) Aparece la lista de iconos seleccionables",
 		level=State.Warn)
 	public boolean validationIconSelection(int maxSeconds) {
-		return (state(Visible, ModalElement.ICON_SELECTION.getBy(dCtxSh.channel)).wait(maxSeconds).check());
+		return (state(Visible, ModalElement.ICON_SELECTION.getBy(channel)).wait(maxSeconds).check());
 	}
 
 	@Step(
 		description="Seleccionamos el primer icono",
 		expected="La selección es correcta")
 	public void selectFirstIcon() {
-		if (dCtxSh.channel == Channel.desktop) {
-			click(ModalElement.ICON_SELECTION.getBy(dCtxSh.channel)).exec();
+		if (channel == Channel.desktop) {
+			click(ModalElement.ICON_SELECTION.getBy(channel)).exec();
 		} else {
-			click(ModalElement.ICON_SELECTION.getBy(dCtxSh.channel)).type(javascript).exec();
+			click(ModalElement.ICON_SELECTION.getBy(channel)).type(javascript).exec();
 		}
 	}
 
@@ -137,11 +121,10 @@ public class SecModalPersonalizacionSteps extends PageBase {
 		expected="Se hace visible el paso-2")
 	public void selectConfirmarButton () {
 		click(getBotonSiguienteVisible()).exec();
-		//click(ModalElement.Siguiente.getBy(dCtxSh.channel)).exec();
 	}
 	
 	private WebElement getBotonSiguienteVisible() {
-		return getElementVisible(driver, ModalElement.SIGUIENTE.getBy(dCtxSh.channel));
+		return getElementVisible(driver, ModalElement.SIGUIENTE.getBy(channel));
 	}
 	private boolean isBotonSiguienteVisible(int maxSeconds) {
 		for (int i=0; i<maxSeconds; i++) {
@@ -197,7 +180,7 @@ public class SecModalPersonalizacionSteps extends PageBase {
 		description="1) Aparecen los botones con los posibles tamaños del bordado",
 		level=State.Warn)
 	private boolean validateSizeList(int maxSeconds) {
-		return (state(Visible, ModalElement.SIZE_CONTAINER.getBy(dCtxSh.channel)).wait(maxSeconds).check());
+		return (state(Visible, ModalElement.SIZE_CONTAINER.getBy(channel)).wait(maxSeconds).check());
 	}
 
 	@Step(
@@ -222,8 +205,8 @@ public class SecModalPersonalizacionSteps extends PageBase {
 		expected="El artículo se da de alta correctamente en la bolsa"	)
 	public void checkCustomizationProof () {
 		click(getBotonSiguienteVisible()).waitLoadPage(2).exec();
-		if (dCtxSh.channel.isDevice()) {
-			SecBolsa secBolsa = SecBolsa.make(dCtxSh);
+		if (channel.isDevice()) {
+			SecBolsa secBolsa = SecBolsa.make(channel, app);
 			secBolsa.setBolsaToStateIfNotYet(StateBolsa.OPEN);
 		}
 		validateCustomizationProof(2);
@@ -233,7 +216,7 @@ public class SecModalPersonalizacionSteps extends PageBase {
 		description="1) En la bolsa aparece el apartado correspondiente a la personalización (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
 	private boolean validateCustomizationProof(int maxSeconds) {
-		return (state(Visible, ModalElement.BOLSA_PROOF.getBy(dCtxSh.channel)).wait(maxSeconds).check());
+		return (state(Visible, ModalElement.BOLSA_PROOF.getBy(channel)).wait(maxSeconds).check());
 	}
 
 	@Validation(

@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
@@ -56,14 +55,13 @@ public class CompraLuque {
 	
 	private void executePurchase(Pais pais, IdiomaPais idioma) throws Exception {
 		//Data For Test
-		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest(pais, idioma);
 		List<GarmentCatalog> listArticles = getListArticles(pais);
 		
 		//Access and add articles
-		AccesoSteps.oneStep(dCtxSh, false, driver);
+		new AccesoSteps().oneStep(dCtxSh, false);
 		DataBag dataBag = new DataBag();
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh.pais);
 		secBolsaSteps.altaListaArticulosEnBolsa(listArticles, dataBag);
 		pais.setCodpos(getCodPostal(pais));
 		

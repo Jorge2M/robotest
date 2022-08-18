@@ -182,7 +182,7 @@ public class PageGaleriaSteps {
 		//boolean notVisibleAvisame = modalArticleNotAvailableSteps.validateState(1, StateModal.notvisible, driver);
 		if (tallaVisible) {
 			dataBag.addArticulo(articulo);
-			SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh);
+			SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh.pais);
 			secBolsaSteps.validaAltaArtBolsa(dataBag);
 		}
 
@@ -528,7 +528,7 @@ public class PageGaleriaSteps {
 	private ChecksTM checkIsFichaArticle(String nombre1erArt, String precio1erArt, int maxSeconds) {
 		ChecksTM checks = ChecksTM.getNew();
 		
-		PageFicha pageFicha = PageFicha.newInstance(channel, app);
+		PageFicha pageFicha = PageFicha.of(channel, app);
 	  	checks.add(
 			"Aparece la página de ficha (la esperamos hasta " + maxSeconds + " segundos)",
 			pageFicha.isPageUntil(maxSeconds), State.Warn);
@@ -888,7 +888,6 @@ public class PageGaleriaSteps {
 		return checks;
 	}
 	
-	@SuppressWarnings("static-access")
 	@Validation
 	public ChecksTM checkVisibilitySubmenus(List<Menu2onLevel> menus2onLevel) {
 		ChecksTM checks = ChecksTM.getNew();

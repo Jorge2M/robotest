@@ -91,7 +91,7 @@ public class PaisIdioma implements Serializable {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		TestCaseTM.addNameSufix(this.index_fact);
 		
-		new PagePrehomeSteps(dCtxSh, driver).seleccionPaisIdiomaAndEnter();
+		new PagePrehomeSteps(dCtxSh.pais, dCtxSh.idioma).seleccionPaisIdiomaAndEnter();
 		(new PageHomeMarcasSteps(dCtxSh.channel, dCtxSh.appE)).validateIsPageWithCorrectLineas(dCtxSh.pais);
 		for (Linea linea : linesToTest) {
 			if (UtilsMangoTest.validarLinea(dCtxSh.pais, linea, dCtxSh.channel, dCtxSh.appE)) {
@@ -129,7 +129,7 @@ public class PaisIdioma implements Serializable {
 				secMenusDesktopSteps.clickRightBanner(lineaType, sublineaType);
 			}
 		} else {
-			SecMenusWrap secMenus = new SecMenusWrap(dCtxSh.channel, dCtxSh.appE);
+			SecMenusWrap secMenus = new SecMenusWrap();
 			if (secMenus.canClickMenuArticles(dCtxSh.pais, linea, sublinea)) {
 				Menu1rstLevel menu = getMenu(lineaType, sublineaType);
 				secMenusSteps.selectMenu1rstLevelTypeCatalog(menu, dCtxSh);

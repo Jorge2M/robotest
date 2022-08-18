@@ -10,6 +10,7 @@ import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.data.PaisShop;
+import com.mng.robotest.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test.steps.otras.GoogleSteps;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.PageIniShopJaponSteps;
@@ -52,15 +53,15 @@ public class Otras {
 		dCtxSh.pais = ESPANA;
 		dCtxSh.idioma = CASTELLANO;
 		dCtxSh.userRegistered = false;
-		AccesoSteps.oneStep(dCtxSh, false, driver);
+		new AccesoSteps().oneStep(dCtxSh, false);
 		
 		SecMenusDesktopSteps secMenusDesktopSteps = new SecMenusDesktopSteps(dCtxSh.pais, dCtxSh.appE, dCtxSh.channel);
 		secMenusDesktopSteps.checkURLRedirectParkasHeEspanya();
 		
 		dCtxSh.pais = FRANCIA;
 		dCtxSh.idioma = FRANCIA_FRANCES;
-		AccesoSteps.goToInitialURL(driver);
-		AccesoSteps.oneStep(dCtxSh, false, driver);	  
+		new AccesoSteps().goToInitialURL();
+		new AccesoSteps().oneStep(dCtxSh, false);	  
 		SecMenusDesktopSteps.checkURLRedirectFicha(FRANCIA, dCtxSh, driver);
 	}
 	
@@ -78,13 +79,11 @@ public class Otras {
 		groups={"Otras", "Canal:desktop_App:all"}, 
 		description="Verificar el cambio de país a través del modal")
 	public void OTR003_cambioPais() throws Exception {
-		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
-
 		dCtxSh.pais = ESPANA;
 		dCtxSh.idioma = CASTELLANO;
 		dCtxSh.userRegistered = false;
-		AccesoSteps.accesoPRYCambioPais(dCtxSh, FRANCIA, FRANCIA_FRANCES, driver);
+		new AccesoSteps().accesoPRYCambioPais(dCtxSh, FRANCIA, FRANCIA_FRANCES);
 	}
 
 	/**
@@ -157,8 +156,8 @@ public class Otras {
 
 		dCtxSh.pais = JAPON;
 		dCtxSh.idioma = JAPONES;
-		PagePrehomeSteps pagePrehomeSteps = new PagePrehomeSteps(dCtxSh, driver);
-		pagePrehomeSteps.getPageObject().previousAccessShopSteps(true);
+		PagePrehomeSteps pagePrehomeSteps = new PagePrehomeSteps(dCtxSh.pais, dCtxSh.idioma);
+		new PagePrehome(dCtxSh.pais, dCtxSh.idioma).previousAccessShopSteps(true);
 		pagePrehomeSteps.seleccionPaisIdioma();
 		pagePrehomeSteps.entradaShopGivenPaisSeleccionado();
 		PageIniShopJaponSteps.validaPageIniJapon(2, driver);
@@ -174,7 +173,7 @@ public class Otras {
 		dCtxSh.pais = ESPANA;
 		dCtxSh.idioma = CASTELLANO;
 		dCtxSh.userRegistered = false;
-		AccesoSteps.oneStep(dCtxSh, false, driver);
+		new AccesoSteps().oneStep(dCtxSh, false);
 		ModalNewsletterSteps.closeIfVisible(driver);
 		
 		ModalChatBotSteps chatBotSteps = new ModalChatBotSteps(driver);

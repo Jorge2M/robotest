@@ -85,7 +85,7 @@ public class CheckoutFlow extends StepBase {
 		this.dCtxPago = dCtxPago;
 		this.pago = pago;
 		this.egyptCity = egyptCity;
-		this.secBolsaSteps = new SecBolsaSteps(dCtxSh);
+		this.secBolsaSteps = new SecBolsaSteps(dCtxSh.pais);
 		this.pageCheckoutWrapperSteps = new PageCheckoutWrapperSteps(dCtxSh.channel, dCtxSh.appE);
 	}
 	

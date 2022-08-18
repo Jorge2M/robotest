@@ -86,7 +86,7 @@ public class TestNodos implements Serializable {
 		AppEcom appE = nodo.getAppEcom();
 		NodoStatus nodoAnt = findNodoForCompareStatus(listaNodos, nodo);
 
-		new PagePrehomeSteps(dCtxSh, driver).seleccionPaisIdiomaAndEnter(true);
+		new PagePrehomeSteps(dCtxSh.pais, dCtxSh.idioma).seleccionPaisIdiomaAndEnter(true);
 		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh);
 		if (appE==AppEcom.shop) {
 			selectMenuPantalones(dCtxSh, driver);

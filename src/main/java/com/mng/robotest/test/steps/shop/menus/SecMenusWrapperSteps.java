@@ -61,7 +61,7 @@ public class SecMenusWrapperSteps {
 		this.secMenusUserSteps = new SecMenusUserSteps();
 		this.secMenuLateralMobilSteps = new SecMenuLateralMobilSteps(channel, app);
 		this.secMenusDesktopSteps = new SecMenusDesktopSteps(pais, app, channel);
-		this.secMenusWrap = new SecMenusWrap(channel, app);
+		this.secMenusWrap = new SecMenusWrap();
 	}
 	
 	public static SecMenusWrapperSteps getNew(DataCtxShop dCtxSh) {

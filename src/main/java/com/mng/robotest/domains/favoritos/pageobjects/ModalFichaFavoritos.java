@@ -5,18 +5,15 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen.Color;
 import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
-
 
 public class ModalFichaFavoritos extends PageBase {
 	
@@ -83,20 +80,18 @@ public class ModalFichaFavoritos extends PageBase {
 		return (getNombreColorSelectedFicha().compareTo(color.getColorName())==0);
 	}
 	
-	public Talla addArticleToBag(String refProducto, int posicionTalla, Pais pais) 
-			throws Exception {
+	public Talla addArticleToBag(String refProducto, int posicionTalla) throws Exception {
 		Talla tallaSelected = selectTallaAvailable(refProducto, posicionTalla);
-		clickButtonAddToBagAndWait(refProducto, pais);
+		clickButtonAddToBagAndWait(refProducto);
 		return tallaSelected;
 	}
 	
-	public void clickButtonAddToBagAndWait(String refProducto, Pais pais) 
-			throws Exception {
+	public void clickButtonAddToBagAndWait(String refProducto) throws Exception {
 		String xpathAdd = getXPathButtonAddBolsa(refProducto);
 		getElement(xpathAdd).click();
 		int maxSecondsToWait = 2;
 		
-		SecBolsa secBolsa = SecBolsa.make(channel, app, pais);
+		SecBolsa secBolsa = SecBolsa.make(channel, app);
 		secBolsa.isInStateUntil(StateBolsa.OPEN, maxSecondsToWait);
 	}
 	
@@ -135,7 +130,7 @@ public class ModalFichaFavoritos extends PageBase {
 		String xpathSelector = getXPathSelectorTalla(refProducto);
 		driver.findElement(By.xpath(xpathSelector)).click();
 		String xpathCapaTallas = getXPathCapaTallas(refProducto);
-		new WebDriverWait(driver, 1).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathCapaTallas)));
+		state(State.Visible, xpathCapaTallas).wait(1).build();
 	}
 	
 	public void closeFicha(String refProducto) {

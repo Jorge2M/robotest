@@ -1,12 +1,9 @@
 package com.mng.robotest.test.pageobject.shop;
 
-import org.openqa.selenium.By;
-
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class PopupFindAddress extends PageBase {
 
@@ -26,23 +23,23 @@ public class PopupFindAddress extends PageBase {
 	}
 
 	public boolean isIFrameUntil(int maxSeconds) {
-		return (state(Present, By.xpath("//iframe")).wait(maxSeconds).check());
+		return state(Present, "//iframe").wait(maxSeconds).check();
 	}
 
 	public boolean isBuscadorClickableUntil(int maxSeconds) {
-		return (state(Clickable, By.xpath(XPATH_INPUT_BUSCADOR)).wait(maxSeconds).check());
+		return state(Clickable, XPATH_INPUT_BUSCADOR).wait(maxSeconds).check();
 	}
 
 	public void setDataBuscador(String data) {
-		driver.findElement(By.xpath(XPATH_INPUT_BUSCADOR)).sendKeys(data);
+		getElement(XPATH_INPUT_BUSCADOR).sendKeys(data);
 	}
 
 	public void clickButtonLupa() {
-		click(By.xpath(XPATH_BUTTON_LUPA)).exec();
+		click(XPATH_BUTTON_LUPA).exec();
 	}
 
 	public void clickFirstDirecc() {
-		driver.findElement(By.xpath(XPATH_LINK_DIRECC)).click();
+		getElement(XPATH_LINK_DIRECC).click();
 	}
 	
 	public void switchToIFrame() {

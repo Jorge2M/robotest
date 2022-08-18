@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import com.mng.robotest.test.utils.UtilsTest;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
@@ -14,8 +12,8 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataBag;
@@ -34,27 +32,13 @@ import com.mng.robotest.test.steps.shop.checkout.PageCheckoutWrapperSteps;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
+public class SecBolsaSteps extends StepBase {
 
-public class SecBolsaSteps {
-
-	private final SecBolsa secBolsa;
+	private final SecBolsa secBolsa = SecBolsa.make(channel, app);
 	
-	private final Channel channel;
-	private final AppEcom app;
 	private final Pais pais;
-	private final WebDriver driver = TestMaker.getDriverTestCase();
 	
-	public SecBolsaSteps(DataCtxShop dCtxSh) {
-		this.secBolsa = SecBolsa.make(dCtxSh);
-		this.channel = dCtxSh.channel;
-		this.app = dCtxSh.appE;
-		this.pais = dCtxSh.pais;
-	}
-	
-	public SecBolsaSteps(Channel channel, AppEcom app, Pais pais) {
-		this.secBolsa = SecBolsa.make(channel, app, pais);
-		this.channel = channel;
-		this.app = app;
+	public SecBolsaSteps(Pais pais) {
 		this.pais = pais;
 	}
 	
@@ -194,9 +178,11 @@ public class SecBolsaSteps {
 	 	checks.add(
 			"Es visible la capa/página correspondiente a la bolsa (la esperamos hasta " + maxSeconds + " segundos)",
 			secBolsa.isInStateUntil(StateBolsa.OPEN, maxSeconds), State.Defect);
+	 	
 	 	checks.add(
 			"Aparece el botón \"Comprar\" (lo esperamos hasta " + maxSeconds + " segundos)",
 			secBolsa.isVisibleBotonComprarUntil(maxSeconds), State.Defect);
+	 	
 		return checks;
 	}
 
@@ -208,13 +194,14 @@ public class SecBolsaSteps {
 	 	checks.add(
 			"Existen " + dataBag.getListArticulos().size() + " elementos dados de alta en la bolsa (los esperamos hasta " + maxSeconds + " segundos)",
 			secBolsa.numberItemsIsUntil(itemsSaved, channel, app, maxSeconds), State.Warn);
+	 	
 	 	return checks;
 	}
 
 	@Validation
 	public ChecksTM validaCuadranArticulosBolsa(DataBag dataBag) throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		ValidatorContentBolsa validatorBolsa = new ValidatorContentBolsa(dataBag, app, channel, pais);
+		ValidatorContentBolsa validatorBolsa = new ValidatorContentBolsa(dataBag);
 		checks.add(
 			"Cuadra el número de artículos existentes en la bolsa",
 			validatorBolsa.numArticlesIsCorrect(), State.Warn);

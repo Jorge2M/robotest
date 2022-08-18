@@ -43,7 +43,7 @@ public class Loy001 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		AccesoSteps.oneStep(dataTest, true, driver);
+		new AccesoSteps().oneStep(dataTest, true);
 		DataBag dataBag = addBagArticleNoRebajado();
 		DataCtxPago dCtxPago = checkoutExecution(dataBag);
 		checkPedidosManto(dCtxPago.getListPedidos());

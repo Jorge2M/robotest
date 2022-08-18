@@ -1,14 +1,13 @@
 package com.mng.robotest.test.pageobject.shop;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-
-public class PageErrorPage {
-	static String XPathIpNode = "//h2[text()[contains(.,'IP :')]]/following-sibling::*[1]";
+public class PageErrorPage extends PageBase {
 	
-	public static String getIpNode(WebDriver driver) {
-		return (driver.findElement(By.xpath(XPathIpNode)).getText());
+	private static final String XPATH_IP_NODE = "//h2[text()[contains(.,'IP :')]]/following-sibling::*[1]";
+	
+	public String getIpNode() {
+		return getElement(XPATH_IP_NODE).getText();
 	}
 	
 }

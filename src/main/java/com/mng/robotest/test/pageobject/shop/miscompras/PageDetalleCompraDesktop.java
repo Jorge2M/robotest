@@ -13,7 +13,7 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	private final SectionPrendas sectionPrendas = new SectionPrendas();
 	
 	private static final String XPATH_ID_TICKET = "//h2[@class[contains(.,'text-title-xl')]]/span";
-	private static final String XPATH_IMPORTE = "//*[@data-testid[contains(.,'detail.totalPrice')]]";
+	private static final String XPATH_IMPORTE = "//*[@data-testid='price']";
 	
 	//TODO necesitaría un data-testid
 	private static final String XPATH_DIRECCION_ENVIO_ONLINE = XPATH_ID_TICKET + "/../../../div[2]//div[@class[contains(.,'sg-body-small')]]";
@@ -60,8 +60,8 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	}
 	@Override
 	public String getImporte() {
-		state(State.Visible, By.xpath(XPATH_IMPORTE)).wait(2).check();
-		String importe = driver.findElement(By.xpath(XPATH_IMPORTE)).getText();
+		state(State.Visible, XPATH_IMPORTE).wait(2).check();
+		String importe = getElement(XPATH_IMPORTE).getText();
 		return importe.replaceAll("[^\\d.,]", "");  //Eliminamos la divisa;
 	}
 	@Override

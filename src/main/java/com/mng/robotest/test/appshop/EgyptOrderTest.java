@@ -48,11 +48,11 @@ public class EgyptOrderTest implements Serializable {
 		
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = makeEgyptDataTest();
-		AccesoSteps.oneStep(dCtxSh, false, driver);
+		new AccesoSteps().oneStep(dCtxSh, false);
 		GarmentCatalog article = UtilsTest.getArticleForTest(dCtxSh, driver);
 		
 		DataBag dataBag = new DataBag(); 
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh.pais);
 		secBolsaSteps.altaListaArticulosEnBolsa(Arrays.asList(article), dataBag);
 		
 		DataCtxPago dCtxPago = makeDataPayment(dCtxSh, dataBag);

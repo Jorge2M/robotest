@@ -11,11 +11,6 @@ import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera_MostFrequent.I
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-/**
- * Clase que define la automatización de las diferentes funcionalidades de la sección de "Cabecera" (de Desktop y Movil)
- * @author jorge.munoz
- *
- */
 public class SecCabeceraOutlet_Mobil extends SecCabecera {
 	
 	public enum IconoCabOutletMobil implements ElementPage {
@@ -33,8 +28,8 @@ public class SecCabeceraOutlet_Mobil extends SecCabecera {
 		}
 	}
 
-	public SecCabeceraOutlet_Mobil(Channel channel, AppEcom app) {
-		super(channel, app);
+	public SecCabeceraOutlet_Mobil() {
+		super();
 	}
 	
 	@Override

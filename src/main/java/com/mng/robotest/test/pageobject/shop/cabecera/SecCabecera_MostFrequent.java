@@ -83,13 +83,13 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 		}
 	}
 	
-	protected SecCabecera_MostFrequent(Channel channel, AppEcom app) {
-		super(channel, app);
+	protected SecCabecera_MostFrequent() {
+		super();
 		this.modalUserSesionShopDesktop = ModalUserSesionShopDesktop.getNew(driver);
 	}
 	
 	public static SecCabecera_MostFrequent getNew(Channel channel, AppEcom app) {
-		return (new SecCabecera_MostFrequent(channel, app));
+		return (new SecCabecera_MostFrequent());
 	}
 	
 	public ModalUserSesionShopDesktop getModalUserSesionDesktop() {

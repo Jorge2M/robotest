@@ -3,34 +3,27 @@ package com.mng.robotest.test.pageobject.shop.bolsa;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.beans.Pais;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.bolsa.LineasArtBolsa.DataArtBolsa;
 import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
-import com.github.jorge2m.testmaker.conf.Channel;
 
-
-public class ValidatorContentBolsa {
+public class ValidatorContentBolsa extends PageBase {
 	
 	private final SecBolsa secBolsa;
 	
 	private final List<ArticuloScreen> linesArticlesExpected;
 	private final List<ArticuloDataBolsaScreen> linesArticlesInScreen = new ArrayList<>();
-	private final Channel channel;
 
-	
-	public ValidatorContentBolsa(DataBag contentBagExpected, AppEcom app, Channel channel, Pais pais) 
-			throws Exception {
-		this.secBolsa = SecBolsa.make(channel, app, pais);
+	public ValidatorContentBolsa(DataBag contentBagExpected) throws Exception {
+		super();
+		this.secBolsa = SecBolsa.make(channel, app);
 		this.linesArticlesExpected = contentBagExpected.getListArticlesTypeViewInBolsa();
-		this.channel = channel;
 		storeArticlesFromScreen();
 	}
 	
-	@SuppressWarnings("static-access")
 	private void storeArticlesFromScreen() throws Exception {
 		linesArticlesInScreen.clear();
 		secBolsa.setBolsaToStateIfNotYet(StateBolsa.OPEN);

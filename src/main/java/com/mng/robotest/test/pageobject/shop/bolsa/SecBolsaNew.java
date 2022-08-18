@@ -1,13 +1,10 @@
 package com.mng.robotest.test.pageobject.shop.bolsa;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.beans.Pais;
-
 
 public class SecBolsaNew extends SecBolsaDesktop {
  
-	private final LineasArtBolsa lineasArtBolsa;
+	private final LineasArtBolsa lineasArtBolsa = new LineasArtBolsaNew();
 	
 	private static final String XPATH_PANEL_BOLSA_DESKTOP = "//div[@id='openedShoppingBag']";
 	private static final String XPATH_PANEL_BOLSA_MOBILE = "//div[@class[contains(.,'m_bolsa')]]";
@@ -16,13 +13,6 @@ public class SecBolsaNew extends SecBolsaDesktop {
 	private static final String XPATH_BOTON_COMPRAR = 
 		"//button[@data-testid='bag.fullpage.checkout.button' or @data-testid='bag.preview.checkout.button']";
 
-
-	public SecBolsaNew(Channel channel, AppEcom app, Pais pais) {
-		super(channel, app);
-		lineasArtBolsa = new LineasArtBolsaNew(channel);
-	}
-
-	
 	@Override
 	String getXPathPanelBolsa() {
 		if (channel==Channel.mobile) {

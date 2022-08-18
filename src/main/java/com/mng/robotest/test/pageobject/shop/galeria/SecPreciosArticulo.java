@@ -18,25 +18,25 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class SecPreciosArticulo extends PageBase {
 	
 	public enum TipoPrecio {
-		precio_inicial_tachado (
+		PRECIO_INICIAL_TACHADO (
 			"//span[@class[contains(.,'price-crossed-1')]]",
 			"//span[@class[contains(.,'price-crossed-1')] or @class='tAcLx']",
 			"//span[@class[contains(.,'product-price-crossed')]]",
 			"//span[@class[contains(.,'price-text--through')]]",
 			"//span[@class[contains(.,'product-list-price')] and @class[contains(.,'line-through')]]"),
-		precio_2o_tachado (
+		PRECIO_2O_TACHADO (
 			"//span[@class[contains(.,'price-crossed-2')]]",
 			"//span[@class[contains(.,'price-crossed-2')]]", //?
 			"//span[@class[contains(.,'product-price-crossed')]][2]",
 			"//span[@class[contains(.,'price-text--through')]][2]",
 			"//span[@class[contains(.,'product-list-price')] and @class[contains(.,'line-through')]]"),
-		precio_rebajado_definitivo (
+		PRECIO_REBAJADO_DEFINITIVO (
 			"//div[@class[contains(.,'prices-container')]]//span[@class[contains(.,'price-sale')]]",
 			"//span[@class='B16Le']", 
 			"//div[@class[contains(.,'prices--cross')]]/span[@class='product-price']",
 			"//span[@class[contains(.,'info-price-sale')] or @class='product-price']",
 			"//span[@class='product-list-sale-price']"),
-		precio_no_rebajado_definitivo (
+		PRECIO_NO_REBAJADO_DEFINITIVO (
 			"//div[@class='_3wfbJ' or not(@class)]/span[@class[contains(.,'price-sale')]]", //El not(@class) es debido al nuevo desarrollo en Cloud (04-febrero-2020)
 			"//div[@class='_3wfbJ' or not(@class)]/span[@class[contains(.,'price-sale')]]", //El not(@class) es debido al nuevo desarrollo en Cloud (04-febrero-2020)
 			"//div[@class='product-prices']/span[@class='product-price']",
@@ -89,10 +89,10 @@ public class SecPreciosArticulo extends PageBase {
 	public String getXPathPrecioArticulo(TypeArticle typeArticle) {
 		switch (typeArticle) {
 		case rebajado:
-			return TipoPrecio.precio_rebajado_definitivo.getXPath(channel, app);
+			return TipoPrecio.PRECIO_REBAJADO_DEFINITIVO.getXPath(channel, app);
 		case norebajado:
 		default:
-			return TipoPrecio.precio_no_rebajado_definitivo.getXPath(channel, app);
+			return TipoPrecio.PRECIO_NO_REBAJADO_DEFINITIVO.getXPath(channel, app);
 		}
 	}
 	
@@ -101,18 +101,18 @@ public class SecPreciosArticulo extends PageBase {
 	}
 	public WebElement getPrecioDefinitivoElem(WebElement articulo) {
 		if (isArticleRebajado(articulo)) {
-			return getPrecioElem(articulo, TipoPrecio.precio_rebajado_definitivo);
+			return getPrecioElem(articulo, TipoPrecio.PRECIO_REBAJADO_DEFINITIVO);
 		}
-		return getPrecioElem(articulo, TipoPrecio.precio_no_rebajado_definitivo);
+		return getPrecioElem(articulo, TipoPrecio.PRECIO_NO_REBAJADO_DEFINITIVO);
 	}
 	public WebElement getPrecioElem(WebElement articulo, TipoPrecio tipoPrecio) {
-		By byPrecio = By.xpath("." + tipoPrecio.getXPath(channel, app));
-		return (articulo.findElement(byPrecio));
+		String xpathPrecio = "." + tipoPrecio.getXPath(channel, app);
+		return getElement(xpathPrecio);
 	}
 	
 	public boolean isArticleRebajado(WebElement articulo) {
-		By byPrecioRebajado = By.xpath("." + TipoPrecio.precio_rebajado_definitivo.getXPath(channel, app));
-		return (state(Present, articulo).by(byPrecioRebajado).check());
+		By byPrecioRebajado = By.xpath("." + TipoPrecio.PRECIO_REBAJADO_DEFINITIVO.getXPath(channel, app));
+		return state(Present, articulo).by(byPrecioRebajado).check();
 	}
 
 	public List<WebElement> getListaPreciosPrendas(List<WebElement> listArticles) throws Exception {
@@ -164,7 +164,6 @@ public class SecPreciosArticulo extends PageBase {
 				return false;
 			}
 		}
-
 		return true;
 	}
 }

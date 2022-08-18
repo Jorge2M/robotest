@@ -38,7 +38,7 @@ public class Loy005 extends TestBase {
 			return;
 		}
 		
-		AccesoSteps.oneStep(dataTest, false, driver);
+		new AccesoSteps().oneStep(dataTest, false);
 		int iniPointsReceptor = clickMangoLikesYou();
 		
 		login(EMISOR_USER, dataTest.passwordUser);

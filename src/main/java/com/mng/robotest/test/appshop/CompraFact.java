@@ -120,19 +120,14 @@ public class CompraFact implements Serializable {
 			dCtxSh.passwordUser = userShop.password;
 		}
 		
-		//TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-		AccesoSteps.oneStep(dCtxSh, this.usrRegistrado, driver);
-		//TestAB.activateTestABcheckoutMovilEnNPasos(0, dCtxSh, dFTest.driver);
-
-		int maxArticlesAwayVale = 3;
-		List<GarmentCatalog> listArticles = UtilsTest.getArticlesForTest(dCtxSh, maxArticlesAwayVale, this.testVale, driver);
-		
+		new AccesoSteps().oneStep(dCtxSh, this.usrRegistrado);
+		List<GarmentCatalog> listArticles = UtilsTest.getArticlesForTest(dCtxSh, 3, this.testVale, driver);
 		if (!manyArticles) {
 			listArticles = Arrays.asList(listArticles.get(0));
 		}
 		
 		DataBag dataBag = new DataBag(); 
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh.pais);
 		secBolsaSteps.altaListaArticulosEnBolsa(listArticles, dataBag);
 		
 		//Hasta página Checkout

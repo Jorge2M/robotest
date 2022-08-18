@@ -147,7 +147,7 @@ public class PageMisCompras extends PageBase {
 		return "";
 	}
 	
-	private static final String XPathPriceRelativeTicket = ".//div[@class[contains(.,'sg-headline')]]";
+	private static final String XPathPriceRelativeTicket = ".//*[@data-testid='price']";
 	private String getPrecioTicketPage(WebElement boxDataTicket) {
 		return (boxDataTicket.findElement(By.xpath(XPathPriceRelativeTicket)).getText());
 	}

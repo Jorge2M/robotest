@@ -19,7 +19,7 @@ public class Reg004 extends TestBase {
 	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
 	private final PageRegistroIniStepsOutlet pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
 	private final PageRegistroDirecStepsOutlet pageRegistroDirecSteps = new PageRegistroDirecStepsOutlet();
-	private final PageRegistroFinStepsOutlet pageRegistroFinSteps = new PageRegistroFinStepsOutlet(dataTest); 
+	private final PageRegistroFinStepsOutlet pageRegistroFinSteps; 
 	
 	private final String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
 	private Map<String, String> dataRegister = new HashMap<>();
@@ -29,6 +29,8 @@ public class Reg004 extends TestBase {
 		dataTest.pais = pais;
 		dataTest.idioma = idioma;
 		dataTest.userRegistered = false;
+		
+		pageRegistroFinSteps = new PageRegistroFinStepsOutlet(dataTest.idioma);
 	}
 	
 	@Override
@@ -38,7 +40,7 @@ public class Reg004 extends TestBase {
 	}
 
 	private void accessAndClickRegistrate() throws Exception {
-		AccesoSteps.oneStep(dataTest, false, driver);
+		new AccesoSteps().oneStep(dataTest, false);
 		userMenusSteps.selectRegistrate(dataTest);
 	}
 
@@ -48,7 +50,7 @@ public class Reg004 extends TestBase {
 		
 		pageRegistroIniSteps.clickRegistrateButton(dataTest.pais, dataRegister);
 		pageRegistroDirecSteps.sendDataAccordingCountryToInputs(dataRegister, dataTest.pais);
-		pageRegistroDirecSteps.clickFinalizarButton(dataTest);
+		pageRegistroDirecSteps.clickFinalizarButton(dataTest.idioma);
 		pageRegistroFinSteps.clickIrDeShoppingButton();
 		userMenusSteps.checkVisibilityLinkMangoLikesYou();
 	}

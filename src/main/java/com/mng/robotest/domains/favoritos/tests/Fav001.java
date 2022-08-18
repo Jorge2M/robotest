@@ -45,7 +45,7 @@ public class Fav001 extends TestBase {
 		dataTest.passwordUser = userShop.password;
 		dataTest.userRegistered=true;
 		
-		secBolsaSteps = new SecBolsaSteps(dataTest);
+		secBolsaSteps = new SecBolsaSteps(dataTest.pais);
 		secMenusSteps = SecMenusWrapperSteps.getNew(dataTest);
 	}
 	
@@ -94,7 +94,7 @@ public class Fav001 extends TestBase {
 	}
 
 	private void loginAndClearData() throws Exception {
-		AccesoSteps.oneStep(dataTest, false, driver);
+		new AccesoSteps().oneStep(dataTest, false);
 		secBolsaSteps.clear();
 		pageFavoritosSteps.clearAll(dataFavoritos);
 	}

@@ -1,20 +1,18 @@
 package com.mng.robotest.test.steps.otras;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.otras.PageGoogle;
 import com.mng.robotest.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
 
-public class GoogleSteps {
+public class GoogleSteps extends PageBase {
 
 	private final PageGoogle pageGoogle = new PageGoogle();
-	private final WebDriver driver = pageGoogle.driver;
 	
 	@Step (
 		description="Accedemos a la URL de Google (http://www.google.es\") y buscamos \"MANGO\"", 
@@ -33,10 +31,12 @@ public class GoogleSteps {
 		int maxSeconds = 3;
 		checks.add(
 			"El 1er link no-anuncio contiene \"MANGO\" (lo esperamos " + maxSeconds + " segundos)",
-			pageGoogle.validaFirstLinkContainsUntil("Mango", maxSeconds), State.Defect);		
+			pageGoogle.validaFirstLinkContainsUntil("Mango", maxSeconds), State.Defect);	
+		
 		checks.add(
 			"El 1er link no-anuncion no contiene \"robots.txt\"",
 			!pageGoogle.validaFirstLinkContainsUntil("robots.txt", 0), State.Warn);
+		
 		return checks;
 	}
 

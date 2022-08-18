@@ -38,7 +38,7 @@ public class Loy003 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		AccesoSteps.oneStep(dataTest, false, driver);
+		new AccesoSteps().oneStep(dataTest, false);
 		
 		int loyaltyPointsIni = LoyaltyCommons.clickMangoLikesYou(channel, app);
 		if (loyaltyPointsIni < 3000 && !isPro) {

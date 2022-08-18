@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.votf;
 
-import java.util.Arrays;
-
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -17,7 +15,6 @@ import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.votf.PageSelectLineaVOTF;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 public class PageSelectLineaVOTFSteps {
 

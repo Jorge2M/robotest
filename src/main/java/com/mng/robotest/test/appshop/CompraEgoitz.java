@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
@@ -40,14 +39,13 @@ public class CompraEgoitz {
 	
 	private void executePurchase(Pais pais, IdiomaPais idioma) throws Exception {
 		//Data For Test
-		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest(pais, idioma);
 		List<GarmentCatalog> listArticles = getListArticles();
 		
 		//Access and add articles
-		AccesoSteps.oneStep(dCtxSh, false, driver);
+		new AccesoSteps().oneStep(dCtxSh, false);
 		DataBag dataBag = new DataBag();
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh.pais);
 		secBolsaSteps.altaListaArticulosEnBolsa(listArticles, dataBag);
 		
 		//To checkout Page

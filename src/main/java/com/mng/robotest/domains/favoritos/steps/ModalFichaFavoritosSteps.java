@@ -36,12 +36,12 @@ public class ModalFichaFavoritosSteps extends StepBase {
 		description="Desde Favoritos añadimos el artículo <b>#{artToAddBolsa.getRefProducto()}</b> (1a talla disponible) a la bolsa",
 		expected="El artículo aparece en la bolsa")
 	public void addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa, Pais pais) 
-	throws Exception {
+			throws Exception {
 		String refProductoToAdd = artToAddBolsa.getRefProducto();
-		Talla tallaSelected = modalFichaFavoritos.addArticleToBag(refProductoToAdd, 1, pais);
+		Talla tallaSelected = modalFichaFavoritos.addArticleToBag(refProductoToAdd, 1);
 		artToAddBolsa.setTalla(tallaSelected);
 		dataBolsa.addArticulo(artToAddBolsa);
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(channel, app, pais);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(pais);
 		
 		switch (channel) {
 		case desktop:

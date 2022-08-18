@@ -9,17 +9,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.utils.ImporteScreen;
 
-
 public abstract class SecBolsaDesktop extends SecBolsa {
 
-	public SecBolsaDesktop(Channel channel, AppEcom app) {
-		super(channel, app);
-	}
-	
 	@Override
 	String getXPathPrecioTransporte() {
 		String xpathCapaBolsa = getXPathPanelBolsa();

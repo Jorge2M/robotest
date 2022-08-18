@@ -6,7 +6,9 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.AccesoVOTF;
+import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Linea.LineaType;
+import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.pageobject.shop.PageJCAS;
@@ -20,12 +22,6 @@ import com.mng.robotest.test.pageobject.votf.PageSelectLineaVOTF;
 import com.mng.robotest.test.steps.shop.SecFooterSteps;
 import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 
-/**
- * Clase que implementa los diferentes steps/validations asociados asociados a la página de Login de Manto
- * @author jorge.munoz
- *
- */
-@SuppressWarnings({"static-access"})
 public class AccesoNavigations {
 
 	public static void goToInitURL(WebDriver driver) {
@@ -48,9 +44,9 @@ public class AccesoNavigations {
 	 */
 	public static void accesoHomeAppWeb(DataCtxShop dCtxSh, boolean acceptCookies, WebDriver driver) 
 	throws Exception {
-		PagePrehome pagePrehome = new PagePrehome(dCtxSh, driver);
+		PagePrehome pagePrehome = new PagePrehome(dCtxSh.pais, dCtxSh.idioma);
 		if (dCtxSh.appE==AppEcom.votf) {
-			accesoVOTF(dCtxSh, driver);
+			accesoVOTF(dCtxSh.pais, dCtxSh.idioma);
 			goFromLineasToMultimarcaVOTF(dCtxSh, driver);
 			pagePrehome.previousAccessShopSteps(acceptCookies);
 		} else {
@@ -67,24 +63,21 @@ public class AccesoNavigations {
 		SecCabecera.getNew(Channel.desktop, AppEcom.votf).clickLogoMango();
 	}
 	
-	/**
-	 * Acceso a VOTF (login + selección de idioma)
-	 */
-	public static void accesoVOTF(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-		PageLoginVOTF pageLoginVOTF = new PageLoginVOTF(driver);
-		pageLoginVOTF.goToFromUrlAndSetTestABs(dCtxSh);
+	public static void accesoVOTF(Pais pais, IdiomaPais idioma) throws Exception {
+		PageLoginVOTF pageLoginVOTF = new PageLoginVOTF();
+		pageLoginVOTF.goToFromUrlAndSetTestABs();
 		new PageJCAS().identJCASifExists();
-		AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dCtxSh.pais));
+		AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(pais));
 		pageLoginVOTF.inputUsuario(accesoVOTF.getUsuario());
 		pageLoginVOTF.inputPassword(accesoVOTF.getPassword());
 		pageLoginVOTF.clickButtonContinue();
-		if (dCtxSh.pais.getListIdiomas().size() > 1) {
-			PageSelectIdiomaVOTF pageSelectIdiomaVOTF = new PageSelectIdiomaVOTF(driver);
-			pageSelectIdiomaVOTF.selectIdioma(dCtxSh.idioma.getCodigo());
+		if (pais.getListIdiomas().size() > 1) {
+			PageSelectIdiomaVOTF pageSelectIdiomaVOTF = new PageSelectIdiomaVOTF();
+			pageSelectIdiomaVOTF.selectIdioma(idioma.getCodigo());
 			pageSelectIdiomaVOTF.clickButtonAceptar();
 		}
 
-		PageAlertaVOTF pageAlertaVOTF = new PageAlertaVOTF(driver);
+		PageAlertaVOTF pageAlertaVOTF = new PageAlertaVOTF();
 		if (pageAlertaVOTF.isPage()) {
 			pageAlertaVOTF.clickButtonContinuar();
 		}

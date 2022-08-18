@@ -42,7 +42,7 @@ public class Bolsa {
 		DataCtxShop dCtxSh = getCtxShForTest();
 		dCtxSh.userRegistered = false;
 		
-		AccesoSteps.manySteps(dCtxSh, driver);
+		new AccesoSteps().manySteps(dCtxSh);
 		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh);
 		Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
 		secMenusSteps.accesoMenuXRef(menuVestidos, dCtxSh);
@@ -73,7 +73,6 @@ public class Bolsa {
 		groups={"Bolsa", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
 		description="[Usuario registrado] Añadir artículo a la bolsa")
 	public void BOR002_AnyadirBolsa_yCompra_SiReg() throws Exception {
-		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
 		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
 		dCtxSh.userConnected = userShop.user;
@@ -81,12 +80,12 @@ public class Bolsa {
 		dCtxSh.userRegistered = true;
 		DataBag dataBag = new DataBag();
 		
-		AccesoSteps.manySteps(dCtxSh, driver);
+		new AccesoSteps().manySteps(dCtxSh);
 		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh);
 		Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
 		secMenusSteps.accesoMenuXRef(menuVestidos, dCtxSh);
 		
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh.pais);
 		secBolsaSteps.altaArticlosConColores(1, dataBag);
 		
 		//Hasta página de Checkout
@@ -113,10 +112,10 @@ public class Bolsa {
 
 	public static void BOR005_6_Gest_Prod_Bolsa(DataCtxShop dCtxSh, WebDriver driver) 
 	throws Exception {
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh.pais);
 		DataBag dataBag = new DataBag();
 		
-		AccesoSteps.oneStep(dCtxSh, dCtxSh.userRegistered, driver);
+		new AccesoSteps().oneStep(dCtxSh, dCtxSh.userRegistered);
 		secBolsaSteps.altaArticlosConColores(2, dataBag);
 		secBolsaSteps.forceStateBolsaTo(StateBolsa.CLOSED);
 		secBolsaSteps.forceStateBolsaTo(StateBolsa.OPEN); 

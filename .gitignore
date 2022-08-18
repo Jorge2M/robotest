@@ -8,3 +8,4 @@ target/
 *.iml
 /output-library
 /debug.log
+/hs_err_pid15572.log

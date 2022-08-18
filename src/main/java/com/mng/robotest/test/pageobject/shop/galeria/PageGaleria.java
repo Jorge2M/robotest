@@ -683,7 +683,7 @@ public abstract class PageGaleria extends PageBase {
 		//Cambiamos el foco de driver a la nueva pestaña que hemos creado y esperamos hasta que está disponible
 		String detailWindowHandle = switchToAnotherWindow(driver, galeryWindowHandle);
 		
-		PageFicha pageFicha = PageFicha.newInstance(Channel.desktop, app);
+		PageFicha pageFicha = PageFicha.of(Channel.desktop, app);
 		pageFicha.isPageUntil(10);
 		
 		return detailWindowHandle;

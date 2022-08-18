@@ -1,7 +1,6 @@
 package com.mng.robotest.test.steps.shop;
 
 import java.util.Arrays;
-import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
@@ -12,34 +11,32 @@ import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.data.DataCtxShop;
+import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.test.beans.IdiomaPais;
+import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.PageJCAS;
 import com.mng.robotest.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test.steps.navigations.shop.AccesoNavigations;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
-public class PagePrehomeSteps {
+public class PagePrehomeSteps extends StepBase {
 	
-	private final WebDriver driver;
-	private final DataCtxShop dCtxSh;
+	private final Pais pais;
+	private final IdiomaPais idioma;
+	
 	private final PagePrehome pagePrehome;
 	
-	public PagePrehomeSteps(DataCtxShop dCtxSh, WebDriver driver) {
-		this.driver = driver;
-		this.dCtxSh = dCtxSh;
-		this.pagePrehome = new PagePrehome(dCtxSh, driver);
-	}
-	
-	public PagePrehome getPageObject() {
-		return this.pagePrehome;
+	public PagePrehomeSteps(Pais pais, IdiomaPais idioma) {
+		this.pais = pais;
+		this.idioma = idioma;
+		this.pagePrehome = new PagePrehome(pais, idioma);
 	}
 	
 	@Step (
 		description="Acceder a la página de inicio y seleccionar el país <b>#{dCtxSh.getNombrePais()}</b>",
 		expected="Se selecciona el país/idioma correctamente")
-	public void seleccionPaisIdioma() 
-	throws Exception {
+	public void seleccionPaisIdioma() throws Exception {
 		AccesoNavigations.goToInitURL(driver);
 		new PageJCAS().identJCASifExists();
 		pagePrehome.selecionPais();
@@ -49,16 +46,16 @@ public class PagePrehomeSteps {
 	@Validation
 	private ChecksTM checkPaisSelected() {
 		ChecksTM checks = ChecksTM.getNew();
-		if (dCtxSh.channel==Channel.desktop) {
+		if (channel==Channel.desktop) {
 			checks.add(
 			    Check.make(
-				    "Queda seleccionado el país con código " + dCtxSh.pais.getCodigo_pais() + " (" + dCtxSh.pais.getNombre_pais() + ")",
+				    "Queda seleccionado el país con código " + pais.getCodigo_pais() + " (" + pais.getNombre_pais() + ")",
 				    pagePrehome.isPaisSelectedDesktop(), State.Warn)
 			    .store(StoreType.None).build());
 		}
 		
 		boolean isPaisWithMarcaCompra = pagePrehome.isPaisSelectedWithMarcaCompra();
-		if (dCtxSh.pais.isVentaOnline()) {
+		if (pais.isVentaOnline()) {
 			checks.add(
 			    Check.make(
 				    "El país <b>Sí</b> tiene la marca de venta online\"",
@@ -92,8 +89,8 @@ public class PagePrehomeSteps {
 		expected="Se accede correctamente al pais / idioma seleccionados",
 		saveNettraffic=SaveWhen.Always)
 	public void seleccionPaisIdiomaAndEnter(boolean execValidacs) throws Exception {
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TagPais, dCtxSh.getNombrePais());
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TagIdioma, dCtxSh.getLiteralIdioma());
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TagPais, pais.getNombre_pais());
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TagIdioma, idioma.getLiteral());
 		
 		pagePrehome.accesoShopViaPrehome(true);
 		
@@ -111,7 +108,7 @@ public class PagePrehomeSteps {
 	private ChecksTM checkPagePostPreHome() {
 		ChecksTM checks = ChecksTM.getNew();
 		String title = driver.getTitle().toLowerCase();
-		if (dCtxSh.appE==AppEcom.outlet) {
+		if (app==AppEcom.outlet) {
 			checks.add(
 				"Aparece una pantalla en la que el título contiene <b>outlet</b>",
 				title.contains("outlet"), State.Defect);

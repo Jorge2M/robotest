@@ -44,8 +44,7 @@ public class Fic002 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-
-		AccesoSteps.oneStep(dataTest, false, driver);
+		new AccesoSteps().oneStep(dataTest, false);
 		secBuscadorSteps.searchArticulo(garment, dataTest.pais);
 		
 		if (pageFichaSteps.getFicha().getTypeFicha()==TypeFicha.OLD) {
@@ -84,7 +83,7 @@ public class Fic002 extends TestBase {
 			pageFichaSteps.validaExistsImgsCarruselIzqFichaOld();
 		}
 		pageFichaSteps.getSecProductDescOldSteps().validateAreInStateInitial(app);
-		PageFicha pageFicha = PageFicha.newInstance(channel, app);
+		PageFicha pageFicha = PageFicha.of(channel, app);
 		if (((PageFichaArtOld)pageFicha).getNumImgsCarruselIzq() > 2) {
 			pageFichaSteps.selectImgCarruselIzqFichaOld(2);
 		}

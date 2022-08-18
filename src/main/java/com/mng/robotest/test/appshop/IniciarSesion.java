@@ -1,6 +1,5 @@
 package com.mng.robotest.test.appshop;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
 import com.mng.robotest.access.InputParamsMango;
@@ -17,7 +16,6 @@ import com.mng.robotest.test.steps.shop.identificacion.PageIdentificacionSteps;
 import com.mng.robotest.test.steps.shop.identificacion.PageRecuperaPasswdSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 import com.github.jorge2m.testmaker.service.TestMaker;
-
 
 public class IniciarSesion {
 
@@ -40,29 +38,29 @@ public class IniciarSesion {
 		groups={"IniciarSesion", "Canal:desktop_App:shop,outlet"}, /*dependsOnMethods = {"SES002_Registro_OK"},*/ alwaysRun=true, 
 		description="Verificar inicio sesión con usuario incorrecto")
 	public void SES001_IniciarSesion_NOK() throws Exception {
-		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
 		dCtxSh.userRegistered = false;
-					
-		AccesoSteps.oneStep(dCtxSh, false, driver);
-		PageIdentificacionSteps.inicioSesionDatosKO("usuarioKeNoExiste@mango.com", "chuflapassw", dCtxSh.channel, dCtxSh.appE, driver);
-		PageIdentificacionSteps.inicioSesionDatosKO(Constantes.MAIL_PERSONAL, "chuflapassw", dCtxSh.channel, dCtxSh.appE, driver);
-		PageIdentificacionSteps.selectHasOlvidadoTuContrasenya(driver);
+		new AccesoSteps().oneStep(dCtxSh, false);
+		
+		PageIdentificacionSteps pageIdentificacionSteps = new PageIdentificacionSteps();
+		pageIdentificacionSteps.inicioSesionDatosKO("usuarioKeNoExiste@mango.com", "chuflapassw");
+		pageIdentificacionSteps.inicioSesionDatosKO(Constantes.MAIL_PERSONAL, "chuflapassw");
+		pageIdentificacionSteps.selectHasOlvidadoTuContrasenya();
+		
 		String emailQA = "eqp.ecommerce.qamango@mango.com";
-		PageRecuperaPasswdSteps.inputMailAndClickEnviar(emailQA, driver);
+		new PageRecuperaPasswdSteps().inputMailAndClickEnviar(emailQA);
 	}
 
 	@Test (
 		groups={"IniciarSesion", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
 		description="[Usuario registrado] Verificar inicio sesión")
 	public void SES002_IniciarSesion_OK() throws Exception {
-		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
 		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
 		dCtxSh.userConnected = userShop.user;
 		dCtxSh.passwordUser = userShop.password;
 		dCtxSh.userRegistered = true;
 			
-		AccesoSteps.manySteps(dCtxSh, driver);
+		new AccesoSteps().manySteps(dCtxSh);
 	}
 }

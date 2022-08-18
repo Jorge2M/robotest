@@ -132,8 +132,7 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 	
 	@Override
 	public void clickImporteCheque(Importe importeToClick) {
-		By byElem = By.xpath(getXPathRadioImporte(importeToClick));
-		click(byElem).exec();
+		click(getXPathRadioImporte(importeToClick)).exec();
 	}
 	
 	@Override

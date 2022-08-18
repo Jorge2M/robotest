@@ -1,7 +1,6 @@
 package com.mng.robotest.test.pageobject.votf;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.domains.transversal.PageBase;
@@ -9,15 +8,10 @@ import com.mng.robotest.test.data.CodIdioma;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
 public class PageSelectIdiomaVOTF extends PageBase {
 
 	private static final String XPATH_SELECT_IDIOMA = "//select[@name[contains(.,'country')]]";
 	private static final String XPATH_BUTTON_ACEPTAR = "//span[@class[contains(.,'button submit')]]";
-	
-	public PageSelectIdiomaVOTF(WebDriver driver) {
-		super(driver);
-	}
 	
 	public void selectIdioma(CodIdioma codigoIdioma) {
 		new Select(driver.findElement(By.xpath(XPATH_SELECT_IDIOMA))).selectByValue(codigoIdioma.toString());

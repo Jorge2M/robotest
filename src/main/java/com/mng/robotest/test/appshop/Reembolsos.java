@@ -76,7 +76,7 @@ public class Reembolsos {
 			dCtxSh.passwordUser = dCtxSh.pais.getPassuser();
 		}
 			
-		AccesoSteps.oneStep(dCtxSh, false, driver);
+		new AccesoSteps().oneStep(dCtxSh, false);
 		PageReembolsosSteps.gotoRefundsFromMenu(paisConSaldoCta, dCtxSh.appE, dCtxSh.channel, driver);
 		if (paisConSaldoCta) {
 			if (PageReembolsos.isCheckedRadio(TypeReembolso.StoreCredit, driver)) {
@@ -115,7 +115,7 @@ public class Reembolsos {
 			dCtxSh.passwordUser = dCtxSh.pais.getPassuser();
 		}
 		
-		AccesoSteps.oneStep(dCtxSh, true, driver);
+		new AccesoSteps().oneStep(dCtxSh, true);
 		PageReembolsosSteps.gotoRefundsFromMenu(dCtxSh.pais.existsPagoStoreCredit(), dCtxSh.appE, dCtxSh.channel, driver);
 		PageReembolsosSteps.selectRadioSalCtaAndRefresh(driver);
 		if (PageReembolsos.isVisibleSaveButtonStoreCredit(driver)) {
@@ -124,7 +124,7 @@ public class Reembolsos {
 		float saldoCtaIni = PageReembolsos.getImporteStoreCredit(driver);
 		
 		DataBag dataBag = new DataBag(); 
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh.pais);
 		secBolsaSteps.altaArticlosConColores(1, dataBag);
 		
 		//Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
