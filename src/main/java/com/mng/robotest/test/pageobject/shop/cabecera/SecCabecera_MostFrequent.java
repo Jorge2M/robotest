@@ -43,14 +43,14 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 		bolsa(
 			"//span[@class[contains(.,'-bag')]]/..",
 			"//self::*[@data-testid[contains(.,'header.userMenu.bolsa')] or " + //TODO eliminar cuando todos los países vayan por la nueva bolsa 
-			          "@data-testid='header-user-menu-bag-icon']"); 
+			          "@data-testid[contains(.,'header-user-menu-bag')]]"); 
 
 		private By byMobile;
 		private String xpathMobile;
 		private By byDesktop;
 		private String xpathDesktop;
 		
-		static final String XPathIconMobile = "//div[@class[contains(.,'user-icon-button')]]";
+		static final String XPathIconMobile = "//*[@class[contains(.,'user-icon-button')]]";
 		IconoCabeceraShop_DesktopMobile(String xPathMobile, String xPathDesktop) {
 			xpathMobile = XPathIconMobile + xPathMobile;
 			byMobile = By.xpath(XPathIconMobile + xPathMobile);

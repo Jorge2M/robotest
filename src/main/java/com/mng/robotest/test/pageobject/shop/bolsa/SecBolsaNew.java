@@ -9,9 +9,10 @@ public class SecBolsaNew extends SecBolsaDesktop {
 	private static final String XPATH_PANEL_BOLSA_DESKTOP = "//*[@id='openedShoppingBag']";
 	private static final String XPATH_PANEL_BOLSA_MOBILE = "//div[@class[contains(.,'m_bolsa')]]";
 	
-	//TODO eliminar el 1o cuando suba a PRO
+	private static final String DATAID_TABLET = "bag.fullPage.checkout.button";
+	private static final String DATAID_DESKTOP = "bag.preview.checkout.button";
 	private static final String XPATH_BOTON_COMPRAR = 
-		"//button[@data-testid='bag.fullpage.checkout.button' or @data-testid='bag.preview.checkout.button']";
+			"//button[@data-testid='" + DATAID_TABLET + "' or @data-testid='" + DATAID_DESKTOP + "']";
 
 	@Override
 	String getXPathPanelBolsa() {

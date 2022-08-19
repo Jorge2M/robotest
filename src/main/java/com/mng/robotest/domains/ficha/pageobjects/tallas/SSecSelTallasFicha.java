@@ -10,6 +10,7 @@ import com.mng.robotest.test.data.Talla;
 
 public interface SSecSelTallasFicha {
 
+	public boolean isSectionUntil(int maxSeconds);
 	public int getNumOptionsTallas();
 	public int getNumOptionsTallasNoDisponibles();
 	public boolean isTallaAvailable(String talla);

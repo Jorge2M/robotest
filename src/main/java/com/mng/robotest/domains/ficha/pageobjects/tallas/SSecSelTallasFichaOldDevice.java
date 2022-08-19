@@ -53,8 +53,26 @@ public class SSecSelTallasFichaOldDevice extends PageBase implements SSecSelTall
 	}
 	
 	@Override
+	public boolean isSectionUntil(int maxSeconds) {
+		for (int i=0; i<maxSeconds; i++) {
+			if (isVisibleSelectorTallasUntil(0)) {
+				return true;
+			}
+			if (isVisibleSelectorButtonUntil(0)) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
+	}
+	
+	@Override
 	public boolean isVisibleSelectorTallasUntil(int maxSeconds) {
-		return (state(Visible, XPATH_CAPA_TALLAS).wait(maxSeconds).check());
+		return state(Visible, XPATH_CAPA_TALLAS).wait(maxSeconds).check();
+	}
+	
+	public boolean isVisibleSelectorButtonUntil(int maxSeconds) {
+		return state(Visible, XPATH_SELECTOR_BUTTON).wait(maxSeconds).check();
 	}
 	
 	@Override

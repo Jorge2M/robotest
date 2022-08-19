@@ -27,7 +27,7 @@ public class ModalChatBotSteps {
 		expected="Aparece la capa del webchat")
 	public boolean clickIcon() {
 		modalChatBot.clickIcon();
-		return checkWebchatVisible(2);
+		return checkWebchatVisible(3);
 	}
 	
 	@Validation (

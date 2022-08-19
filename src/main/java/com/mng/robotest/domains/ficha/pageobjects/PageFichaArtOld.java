@@ -76,7 +76,8 @@ public class PageFichaArtOld extends PageFicha {
 	public boolean isPageUntil(int maxSeconds) {
 		return (
 			state(Present, XPATH_CONTAINER_FICHA).wait(maxSeconds).check() &&
-			secDataProduct.getSecSelTallas().isVisibleSelectorTallasUntil(maxSeconds)
+			//secDataProduct.getSecSelTallas().isVisibleSelectorTallasUntil(maxSeconds)
+			secDataProduct.getSecSelTallas().isSectionUntil(maxSeconds)
 		);
 	}
 	

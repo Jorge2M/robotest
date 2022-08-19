@@ -33,6 +33,11 @@ public class SSecSelTallasFichaNew extends PageBase implements SSecSelTallasFich
 	}
 
 	@Override
+	public boolean isSectionUntil(int maxSeconds) {
+		return isVisibleSelectorTallasUntil(maxSeconds);
+	}
+	
+	@Override
 	public boolean isVisibleSelectorTallasUntil(int maxSeconds) {
 		return (state(Visible, XPATH_SELECTOR_TALLAS).wait(maxSeconds).check());
 	}

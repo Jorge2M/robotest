@@ -56,7 +56,7 @@ public class Registro implements Serializable {
 	}
 	
 	@Test (
-		groups={"Registro", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
+		groups={"Registro", "Canal:desktop_App:outlet"}, alwaysRun=true, 
 		description="Alta/Registro de un usuario (sin seleccionar el link de publicidad)")
 	public void REG004_RegistroOK_NoPubli() throws Exception {
 		TestCaseTM.addNameSufix(this.index_fact);

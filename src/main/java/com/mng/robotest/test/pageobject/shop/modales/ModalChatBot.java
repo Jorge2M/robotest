@@ -45,6 +45,7 @@ public class ModalChatBot extends PageBase {
 	}
 	
 	public void clickOption(String text) {
+		waitMillis(100); //Avoid strange Sonia´s case: capa in vertical unfold process
 		String xpath = getXPathOption(text);
 		click(By.xpath(xpath)).exec();
 	}
