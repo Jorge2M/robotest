@@ -19,7 +19,7 @@ public class Compra {
 	}
 	
 	@Test (
-		groups={"Compra", "Canal:all_App:all"}, alwaysRun=true,
+		groups={"Compra", "Canal:all_App:shop,outlet"}, alwaysRun=true,
 		description="[Usuario no registrado] Compra sin permitir todas las cookies y con tarjeta real")
 	public void COM002_Compra_Tarjeta_Real_No_Cookies() throws Exception {
 		new Com002().execute();

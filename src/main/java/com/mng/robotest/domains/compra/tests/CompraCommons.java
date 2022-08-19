@@ -29,7 +29,10 @@ public class CompraCommons {
 	public static void checkPedidosManto(
 			List<CheckPedido> listChecks, CopyOnWriteArrayList<DataPedido> listPedidos, AppEcom app, WebDriver driver) 
 					throws Exception {
-		DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(listPedidos, listChecks);
-		PedidoNavigations.testPedidosEnManto(checksPedidos, app, driver);
+		//TODO activar cuando desde k8s-tools-pro funcione correctamente el acceso al manto de pre
+		if (false) {
+			DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(listPedidos, listChecks);
+			PedidoNavigations.testPedidosEnManto(checksPedidos, app, driver);
+		}
 	}
 }

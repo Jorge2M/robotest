@@ -83,6 +83,12 @@ public class MenusUserWrapper extends PageBase {
 	}
 	
 	public void moveAndClick(UserMenu menu) {
+		//TODO eliminar en un futuro. Actualmente existe un TestAB en el icono de 
+		// identificación de usuario que provoca que en ocasiones tarde del orden de 5 segundos en aparecer
+		if (menu==UserMenu.iniciarSesion) {
+			isMenuInStateUntil(menu, State.Visible, 5);
+		}
+		
 		moveToMenu(menu);
 		clickMenuAndWait(menu);
 	}
