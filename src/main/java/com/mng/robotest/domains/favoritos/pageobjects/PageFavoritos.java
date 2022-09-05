@@ -101,6 +101,9 @@ public class PageFavoritos extends PageBase {
 	
 	public void closeSharedModal() {
 		click(XPATH_CLOSE_SHARE_MODAL_BUTTON).exec();
+		if (!checkShareModalInvisible(1)) {
+			click(XPATH_CLOSE_SHARE_MODAL_BUTTON).exec();
+		}
 	}
 	
 	public boolean checkShareModalInvisible(int maxSeconds) {
