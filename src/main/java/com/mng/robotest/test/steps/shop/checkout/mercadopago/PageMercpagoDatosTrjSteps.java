@@ -153,7 +153,7 @@ public class PageMercpagoDatosTrjSteps {
 			(new PageResultPagoSteps(TypePago.Mercadopago, channel)).validaIsPageUntil(30);
 		}
 		else {
-			PageMercpagoConfSteps.validaIsPageUntil(5, Channel.mobile, driver);
+			PageMercpagoConfSteps.validaIsPageUntil(5, channel, driver);
 		}
 	}	
 	

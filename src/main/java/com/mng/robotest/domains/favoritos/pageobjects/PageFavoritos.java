@@ -241,6 +241,6 @@ public class PageFavoritos extends PageBase {
 	}
 	
 	public boolean isVisibleButtonEmpty() {
-		return (state(Visible, By.xpath(XPATH_BUTTON_EMPTY)).check());
+		return state(Visible, XPATH_BUTTON_EMPTY).check();
 	}
 }

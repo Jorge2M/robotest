@@ -24,13 +24,13 @@ import javassist.NotFoundException;
 
 public class Fic001 extends TestBase {
 
-	final Optional<GarmentCatalog> articleOnline;
-	final List<FilterType> filterOnline = Arrays.asList(FilterType.Online);
-	final List<FilterType> filterNoOnlineWithColors = Arrays.asList(FilterType.NoOnline, FilterType.ManyColors);
-	final Optional<GarmentCatalog> articleNoOnlineWithColors;
+	private final Optional<GarmentCatalog> articleOnline;
+	private final List<FilterType> filterOnline = Arrays.asList(FilterType.Online);
+	private final List<FilterType> filterNoOnlineWithColors = Arrays.asList(FilterType.NoOnline, FilterType.ManyColors);
+	private final Optional<GarmentCatalog> articleNoOnlineWithColors;
 	
-	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
-	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(dataTest.pais);
+	private final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
+	private final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps();
 	
 	public Fic001() throws Exception {
 		super();
@@ -50,7 +50,7 @@ public class Fic001 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		new AccesoSteps().oneStep(dataTest, true);
+		new AccesoSteps().oneStep(true);
 		if (articleOnline.isPresent()) {
 			articleOnlineTest();
 		}
@@ -60,12 +60,12 @@ public class Fic001 extends TestBase {
 	}
 
 	private void articleOnlineTest() throws Exception {
-		secBuscadorSteps.searchArticulo(articleOnline.get(), dataTest.pais, filterOnline);
+		secBuscadorSteps.searchArticulo(articleOnline.get(), filterOnline);
 		pageFichaSteps.checkLinkDispTiendaInvisible();
 	}
 	
 	private void articleNoOnlineTest() throws Exception {
-		secBuscadorSteps.searchArticulo(articleNoOnlineWithColors.get(), dataTest.pais, filterNoOnlineWithColors);
+		secBuscadorSteps.searchArticulo(articleNoOnlineWithColors.get(), filterNoOnlineWithColors);
 		boolean isTallaUnica = pageFichaSteps.selectAnadirALaBolsaTallaPrevNoSelected();
 		ArticuloScreen articulo = new ArticuloScreen(articleNoOnlineWithColors.get());
 		pageFichaSteps.selectColorAndSaveData(articulo);
@@ -82,7 +82,7 @@ public class Fic001 extends TestBase {
 			pageFichaSteps.selectRemoveFromFavoritos();
 		}
 
-		pageFichaSteps.selectAnadirALaBolsaTallaPrevSiSelected(articulo, dataTest);
+		pageFichaSteps.selectAnadirALaBolsaTallaPrevSiSelected(articulo);
 	}
 
 	private void stopIfNoPresentArticleNoOnlineWithColors() throws NotFoundException {
@@ -101,7 +101,7 @@ public class Fic001 extends TestBase {
 		//Si es talla única -> Significa que lo dimos de alta en la bolsa cuando seleccionamos el click "Añadir a la bolsa"
 		//-> Lo damos de baja
 		if (isTallaUnica) {
-			SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dataTest.pais);
+			SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 			secBolsaSteps.clear();
 		}
 	}

@@ -40,20 +40,18 @@ public abstract class PageGaleria extends PageBase {
 	
 	protected final From from;
 	protected final String xpathArticuloBase;
-	protected final SecPreciosArticulo secPrecios;
+	protected final SecPreciosArticulo secPrecios = new SecPreciosArticulo();
 
 	public PageGaleria() {
 		super();
 		this.from = From.MENU;
 		this.xpathArticuloBase = getXPathArticulo();
-		this.secPrecios = new SecPreciosArticulo(channel, app, driver);
 	}
 	
 	public PageGaleria(From from, Channel channel, AppEcom app) {
 		super(channel, app);
 		this.from = from;
 		this.xpathArticuloBase = getXPathArticulo();
-		this.secPrecios = new SecPreciosArticulo(channel, app, driver);
 	}
 	
 	public abstract String getXPathLinkRelativeToArticle();
@@ -678,12 +676,12 @@ public abstract class PageGaleria extends PageBase {
 			secMenus.secMenuSuperior.secLineas.bringMenuBackground();
 		}
 		
-		UtilsMangoTest.openLinkInNewTab(driver, article/*articleName*/);
+		new UtilsMangoTest().openLinkInNewTab(article);
 		
 		//Cambiamos el foco de driver a la nueva pestaña que hemos creado y esperamos hasta que está disponible
 		String detailWindowHandle = switchToAnotherWindow(driver, galeryWindowHandle);
 		
-		PageFicha pageFicha = PageFicha.of(Channel.desktop, app);
+		PageFicha pageFicha = PageFicha.of(channel);
 		pageFicha.isPageUntil(10);
 		
 		return detailWindowHandle;

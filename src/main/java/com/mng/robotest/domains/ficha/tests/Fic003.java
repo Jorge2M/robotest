@@ -26,9 +26,9 @@ public class Fic003 extends TestBase {
 	final Menu1rstLevel menuPantalonesNina;
 	
 	final Pais corea = PaisGetter.get(PaisShop.COREA_DEL_SUR);
-	final SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dataTest);
-	final PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(channel, app, driver);
-	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(corea);;
+	final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
+	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps();
+	final SecMenusWrapperSteps secMenusSteps;
 	
 	public Fic003() throws Exception {
 		super();
@@ -41,27 +41,29 @@ public class Fic003 extends TestBase {
 				app, KeyMenu1rstLevel.from(
 					LineaType.nina, 
 					SublineaType.nina_nina, "pantalones"));
+		
+		secMenusSteps = new SecMenusWrapperSteps();		
 	}
 	
 	@Override
 	public void execute() throws Exception {
-		new AccesoSteps().oneStep(dataTest, false);
+		new AccesoSteps().oneStep(false);
 		closeModalNewsLetterIfExists();
-		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuPantalonesNina, dataTest);
+		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuPantalonesNina);
 		DataFichaArt dataArtOrigin = selectFirstArticleInGalery();
 		
 		kcSafetyTest();
-		pageFichaSteps.selectLinkNavigation(ProductNav.NEXT, dataTest, dataArtOrigin.getReferencia());
-		pageFichaSteps.selectLinkNavigation(ProductNav.PREV, dataTest, dataArtOrigin.getReferencia());
+		pageFichaSteps.selectLinkNavigation(ProductNav.NEXT, dataArtOrigin.getReferencia());
+		pageFichaSteps.selectLinkNavigation(ProductNav.PREV, dataArtOrigin.getReferencia());
 	}
 
 	private void closeModalNewsLetterIfExists() {
-		new PagePrehome(dataTest.pais, dataTest.idioma).closeModalNewsLetterIfExists();
+		new PagePrehome().closeModalNewsLetterIfExists();
 	}
 
 	private DataFichaArt selectFirstArticleInGalery() {
 		LocationArticle location1rstArticle = LocationArticle.getInstanceInCatalog(1);
-		DataFichaArt dataArtOrigin = pageGaleriaSteps.selectArticulo(location1rstArticle, dataTest);
+		DataFichaArt dataArtOrigin = pageGaleriaSteps.selectArticulo(location1rstArticle);
 		return dataArtOrigin;
 	}
 

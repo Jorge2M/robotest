@@ -1,28 +1,26 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import com.mng.robotest.test.data.DataCtxShop;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.steps.shop.checkout.trustpay.PageTrustPayResultSteps;
 import com.mng.robotest.test.steps.shop.checkout.trustpay.PageTrustpaySelectBankSteps;
 
-
 public class PagoTrustpay extends PagoSteps {
 
-	public PagoTrustpay(DataCtxShop dCtxSh, DataCtxPago dCtxPago) throws Exception {
-		super(dCtxSh, dCtxPago);
+	public PagoTrustpay(DataPago dataPago) throws Exception {
+		super(dataPago);
 		super.isAvailableExecPay = true;
 	}
 	
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh.pais);
-		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
-		String importeTotal = this.dCtxPago.getDataPedido().getImporteTotal();
-		PageTrustpaySelectBankSteps.validateIsPage(dCtxPago.getDataPedido().getPago().getNombre(dCtxSh.channel, dCtxSh.appE), importeTotal, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
+		String importeTotal = this.dataPago.getDataPedido().getImporteTotal();
+		PageTrustpaySelectBankSteps.validateIsPage(dataPago.getDataPedido().getPago().getNombre(channel, app), importeTotal, dataTest.pais.getCodigo_pais(), channel, driver);
 		
 		if (execPay) {
-			PageTrustpaySelectBankSteps.selectTestBankAndPay(importeTotal, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
+			PageTrustpaySelectBankSteps.selectTestBankAndPay(importeTotal, dataTest.pais.getCodigo_pais(), channel, driver);
 			PageTrustPayResultSteps.clickButtonContinue(driver);
 		}
 	}	

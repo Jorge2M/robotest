@@ -9,10 +9,10 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.micuenta.beans.Ticket;
+import com.mng.robotest.domains.micuenta.pageobjects.PageDetallePedido;
+import com.mng.robotest.domains.micuenta.pageobjects.PageDetallePedido.DetallePedido;
 import com.mng.robotest.test.datastored.DataPedido;
-import com.mng.robotest.test.pageobject.shop.micuenta.Ticket;
-import com.mng.robotest.test.pageobject.shop.miscompras.PageDetallePedido;
-import com.mng.robotest.test.pageobject.shop.miscompras.PageDetallePedido.DetallePedido;
 
 public class PageDetallePedidoSteps {
 	

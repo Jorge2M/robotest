@@ -498,7 +498,7 @@ public class GetterProducts {
 		}
 		
 		private boolean isPro(AppEcom app, String urlBase) {
-			return UtilsMangoTest.isEntornoPRO(app, urlBase);
+			return new UtilsMangoTest().isEntornoPRO();
 		}
 	}
 }

@@ -19,9 +19,9 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha.TypeFicha;
 import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.factoryes.NodoStatus;
@@ -55,34 +55,16 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjT
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
-public class PageGaleriaSteps {
+public class PageGaleriaSteps extends StepBase {
 
 
-	public final SecCrossSellingSteps secCrossSellingSteps;
-	public final BannerHeadGallerySteps bannerHead;
+	public final SecCrossSellingSteps secCrossSellingSteps = new SecCrossSellingSteps();
+	public final BannerHeadGallerySteps bannerHead = BannerHeadGallerySteps.newInstance(this, driver);
+	private final SecSelectorPreciosSteps secSelectorPreciosSteps = new SecSelectorPreciosSteps();
+	private final PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
 	
 	public enum TypeGalery { SALES, NO_SALES }
 	public enum TypeActionFav { MARCAR, DESMARCAR }
-	
-	final SecSelectorPreciosSteps secSelectorPreciosSteps;
-	final PageGaleria pageGaleria;
-	final WebDriver driver;
-	final Channel channel;
-	final AppEcom app;
-	
-	private PageGaleriaSteps(Channel channel, AppEcom app, WebDriver driver) {
-		this.driver = driver;
-		this.channel = channel;
-		this.app = app;
-		this.secCrossSellingSteps = new SecCrossSellingSteps(channel, app);
-		this.secSelectorPreciosSteps = new SecSelectorPreciosSteps();
-		this.bannerHead = BannerHeadGallerySteps.newInstance(this, driver);
-		this.pageGaleria = PageGaleria.getNew(channel, app);
-	}
-	
-	public static PageGaleriaSteps getInstance(Channel channel, AppEcom app, WebDriver driver) {
-		return (new PageGaleriaSteps(channel, app, driver));
-	}
 	
 	public SecSelectorPreciosSteps getSecSelectorPreciosSteps() {
 		return secSelectorPreciosSteps;
@@ -101,7 +83,7 @@ public class PageGaleriaSteps {
 		datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
 
 		String detailWindowHandle = pageGaleria.openArticuloPestanyaAndGo(articulo, app);
-		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(pais);
+		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps();
 		pageFichaSteps.validaDetallesProducto(datosArticulo);
 
 		if (detailWindowHandle.compareTo(galeryWindowHandle)!=0) {
@@ -115,7 +97,7 @@ public class PageGaleriaSteps {
 	@Step (
 		description="Seleccionar el artículo #{locationArt}", 
 		expected="Aparece la ficha del artículo seleccionado")
-	public DataFichaArt selectArticulo(LocationArticle locationArt, DataCtxShop dCtxSh) {
+	public DataFichaArt selectArticulo(LocationArticle locationArt) {
 		DataFichaArt datosArticulo = new DataFichaArt();
 		String urlGaleria = driver.getCurrentUrl();
 		
@@ -125,12 +107,12 @@ public class PageGaleriaSteps {
 		datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
 
 		pageGaleria.clickArticulo(articulo);
-		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(dCtxSh.pais);
+		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps();
 		pageFichaSteps.validaDetallesProducto(datosArticulo);
-		pageFichaSteps.validaPrevNext(locationArt, dCtxSh);
+		pageFichaSteps.validaPrevNext(locationArt);
 
 		//Validaciones sección BreadCrumb + Next
-		if (dCtxSh.channel==Channel.desktop) {
+		if (channel==Channel.desktop) {
 			if (pageFichaSteps.getFicha().getTypeFicha()==TypeFicha.OLD) {
 				pageFichaSteps.validaBreadCrumbFichaOld(urlGaleria);
 			}
@@ -174,15 +156,14 @@ public class PageGaleriaSteps {
 		description="Del #{posArticulo}o artículo, seleccionamos la #{posTalla}a talla disponible", 
 		expected="Se da de alta correctamente el artículo en la bolsa",
 		saveHtmlPage=SaveWhen.Always)
-	public boolean selectTallaAvailableArticulo(int posArticulo, int posTalla, DataBag dataBag, DataCtxShop dCtxSh) 
+	public boolean selectTallaAvailableArticulo(int posArticulo, int posTalla, DataBag dataBag, Pais pais) 
 			throws Exception {
+		
 		ArticuloScreen articulo = pageGaleria.selectTallaAvailableArticle(posArticulo, posTalla);
 		boolean tallaVisible = (articulo!=null);
-		//ModalArticleNotAvailableSteps modalArticleNotAvailableSteps = ModalArticleNotAvailableSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-		//boolean notVisibleAvisame = modalArticleNotAvailableSteps.validateState(1, StateModal.notvisible, driver);
 		if (tallaVisible) {
 			dataBag.addArticulo(articulo);
-			SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh.pais);
+			SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 			secBolsaSteps.validaAltaArtBolsa(dataBag);
 		}
 
@@ -198,11 +179,11 @@ public class PageGaleriaSteps {
 		pageGaleriaDesktop.selectTallaArticleNotAvalaible();
 	}
 	
-	public DataScroll scrollFromFirstPage(DataCtxShop dCtxSh) throws Exception {
+	public DataScroll scrollFromFirstPage() throws Exception {
 		DataForScrollStep data = new DataForScrollStep();
 		data.numPageToScroll = 99;
 		data.ordenacionExpected = FilterOrdenacion.NOordenado;
-		return scrollFromFirstPage(data, dCtxSh);
+		return scrollFromFirstPage(data);
 	}
 	
 	/**
@@ -214,11 +195,11 @@ public class PageGaleriaSteps {
 		description="Escrollar hasta posicionarse en la " + tagIdPage + " página", 
 		expected="Se escrolla correctamente",
 		saveNettraffic=SaveWhen.Always)
-	public DataScroll scrollFromFirstPage(DataForScrollStep dataForScroll, DataCtxShop dCtxSh) 
-	throws Exception {
+	public DataScroll scrollFromFirstPage(DataForScrollStep dataForScroll) throws Exception {
+		
 		DataScroll datosScroll = null;
 		int pageToScroll = dataForScroll.numPageToScroll;
-		if (dCtxSh.channel.isDevice()) {
+		if (channel.isDevice()) {
 			pageToScroll = 3;
 		}
 		
@@ -231,7 +212,7 @@ public class PageGaleriaSteps {
 		datosScroll = pageGaleria.scrollToPageFromFirst(pageToScroll);
 		
 		if (pageToScroll>=PageGaleriaDesktop.MAX_PAGE_TO_SCROLL) {
-			checkVisibilityFooter(pageToScroll, dCtxSh.appE);
+			checkVisibilityFooter(pageToScroll, app);
 		}
 		if (pageToScroll < PageGaleriaDesktop.MAX_PAGE_TO_SCROLL) {
 			checkAreMoreArticlesThatInitially(datosScroll.articulosMostrados, numArticulosInicio);
@@ -312,9 +293,10 @@ public class PageGaleriaSteps {
 	@Step (
 		description="Seleccionar la ordenación #{typeOrdenacion}", 
 		expected="Los artículos se ordenan correctamente")
-	public int seleccionaOrdenacionGaleria(FilterOrdenacion typeOrdenacion, String tipoPrendasGaleria, int numArticulosValidar, 
-		   								   DataCtxShop dCtxSh) throws Exception {
-		SecFiltros secFiltros = SecFiltros.make(dCtxSh.channel, dCtxSh.appE);
+	public int seleccionaOrdenacionGaleria(
+			FilterOrdenacion typeOrdenacion, String tipoPrendasGaleria, int numArticulosValidar) throws Exception {
+		
+		SecFiltros secFiltros = SecFiltros.make(channel, app);
 		secFiltros.selecOrdenacionAndReturnNumArticles(typeOrdenacion);	
 		
 		checkIsVisiblePageWithTitle(tipoPrendasGaleria);
@@ -355,19 +337,19 @@ public class PageGaleriaSteps {
 	@Step (
 		description="Volver al 1er artículo de la galería (mediante selección del icono de la flecha Up)", 
 		expected="Se visualiza el 1er elemento")
-	public void backTo1erArticleMobilStep(DataCtxShop dCtxSh) throws Exception {
+	public void backTo1erArticleMobilStep() throws Exception {
 		pageGaleria.backTo1erArticulo();
-		checkBackTo1ersElementOk(dCtxSh);
+		checkBackTo1ersElementOk();
 	}
 	
 	@Validation
-	private ChecksTM checkBackTo1ersElementOk(DataCtxShop dCtxSh) throws Exception {
+	private ChecksTM checkBackTo1ersElementOk() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
 	  	checks.add(
 			"Es clickable el 1er elemento de la lista",
 			pageGaleria.isClickableArticuloUntil(1, 0), State.Warn);
 	  	
-		SecFiltros secFiltros = SecFiltros.make(dCtxSh.channel, dCtxSh.appE);
+		SecFiltros secFiltros = SecFiltros.make(channel, app);
 		int maxSeconds = 2;
 	  	checks.add(
 			"Es clickable el bloque de filtros (esperamos hasta " + maxSeconds + " segundos)",
@@ -424,7 +406,7 @@ public class PageGaleriaSteps {
 	/**
 	 * @return src de la imagen obtenida al ejecutar los clicks
 	 */
-	public String clicksSliderArticuloConColores(int numArtConColores, ArrayList<TypeSlider> typeSliderList) 
+	public String clicksSliderArticuloConColores(int numArtConColores, List<TypeSlider> typeSliderList) 
 	throws Exception {
 		return (clicksSliderArticuloConColores(numArtConColores, typeSliderList, ""));		
 	}
@@ -528,7 +510,7 @@ public class PageGaleriaSteps {
 	private ChecksTM checkIsFichaArticle(String nombre1erArt, String precio1erArt, int maxSeconds) {
 		ChecksTM checks = ChecksTM.getNew();
 		
-		PageFicha pageFicha = PageFicha.of(channel, app);
+		PageFicha pageFicha = PageFicha.of(channel);
 	  	checks.add(
 			"Aparece la página de ficha (la esperamos hasta " + maxSeconds + " segundos)",
 			pageFicha.isPageUntil(maxSeconds), State.Warn);
@@ -865,7 +847,7 @@ public class PageGaleriaSteps {
 	}
 	
 	@Validation
-	public ChecksTM validateGaleriaAfeterSelectMenu(AppEcom app) {
+	public ChecksTM validateGaleriaAfeterSelectMenu() {
 		ChecksTM checks = ChecksTM.getNew();
 		int maxSecondsToWaitArticle = 8;
 		int maxSecondsToWaitIcon = 2;

@@ -1,23 +1,21 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import com.mng.robotest.test.data.DataCtxShop;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
-
 
 public class PagoContraReembolso extends PagoSteps {
 	
-	public PagoContraReembolso(DataCtxShop dCtxSh, DataCtxPago dCtxPago) throws Exception {
-		super(dCtxSh, dCtxPago);
+	public PagoContraReembolso(DataPago dataPago) throws Exception {
+		super(dataPago);
 		super.isAvailableExecPay = true;
 	}
 	
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh.pais);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
 		if (execPay) {
-			dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
-			this.dCtxPago.getDataPedido().setCodtipopago("U");
+			dataPago = checkoutFlow.checkout(From.METODOSPAGO);
+			this.dataPago.getDataPedido().setCodtipopago("U");
 		}
 	}
 }

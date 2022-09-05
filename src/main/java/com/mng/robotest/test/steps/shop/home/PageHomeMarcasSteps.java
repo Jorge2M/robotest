@@ -1,9 +1,6 @@
 package com.mng.robotest.test.steps.shop.home;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
@@ -14,44 +11,33 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import static com.mng.robotest.test.data.Constantes.PrefixRebajas;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.IdiomaPais;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.PageHomeMarcas;
 import com.mng.robotest.test.pageobject.shop.footer.SecFooter;
 import com.mng.robotest.test.steps.shop.AllPagesSteps;
 import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 import com.mng.robotest.test.utils.UtilsTest;
 
-public class PageHomeMarcasSteps {
+public class PageHomeMarcasSteps extends StepBase {
 	
-	private final PageHomeMarcas pageHomeMarcas;
-	private final Channel channel;
-	private final AppEcom app;
-	public final WebDriver driver;
+	private final PageHomeMarcas pageHomeMarcas = new PageHomeMarcas();
 	
-	public enum TypeHome {Multimarca, PortadaLinea}
+	public enum TypeHome { MULTIMARCA, PORTADA_LINEA }
 
-	public PageHomeMarcasSteps(Channel channel, AppEcom app) {
-		this.pageHomeMarcas = new PageHomeMarcas(app);
-		this.driver = pageHomeMarcas.driver; 
-		this.channel = channel;
-		this.app = app;
-	}
-	
-	public void validateIsPageWithCorrectLineas(Pais pais) throws Exception {
-		AllPagesSteps.validateMainContentPais(pais, driver);
-		validateIsPageOk(pais);
-		SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps(channel, app, pais);
-		secMenusSteps.validateLineas(pais);
+	public void validateIsPageWithCorrectLineas() throws Exception {
+		AllPagesSteps.validateMainContentPais(dataTest.pais, driver);
+		validateIsPageOk();
+		new SecMenusWrapperSteps().validateLineas();
 	}
 	
 	@Validation
-	public ChecksTM validateIsPageOk(Pais pais) {
+	public ChecksTM validateIsPageOk() {
 		ChecksTM checks = ChecksTM.getNew();
 		if (app!=AppEcom.outlet) {
 			checks.add(
 				"Aparece la home de marcas/multimarcas según el país",
-				pageHomeMarcas.isHomeMarcasMultimarcasDependingCountry(pais), State.Warn);	
+				pageHomeMarcas.isHomeMarcasMultimarcasDependingCountry(), State.Warn);	
 		}
 		checks.add(
 			"No aparece ningún tag de error",

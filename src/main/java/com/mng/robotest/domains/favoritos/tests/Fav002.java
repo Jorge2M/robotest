@@ -25,9 +25,9 @@ import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 public class Fav002 extends TestBase {
 
 	private final PageFavoritosSteps pageFavoritosSteps = new PageFavoritosSteps();
-	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dataTest.pais);
-	private final SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dataTest);
-	private final PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(channel, app, driver);
+	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
+	private final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
+	private final SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps();
 	
 	private final DataFavoritos dataFavoritos = new DataFavoritos();
 	private final DataBag dataBolsa = new DataBag();
@@ -59,7 +59,7 @@ public class Fav002 extends TestBase {
 		pageFavoritosSteps.clickArticuloImg(artToPlay);
 		pageFavoritosSteps
 			.getModalFichaFavoritosSteps()
-			.addArticuloToBag(artToPlay, dataBolsa, dataTest.pais);
+			.addArticuloToBag(artToPlay, dataBolsa);
 		
 		if (channel.isDevice()) {
 			pageFavoritosSteps.validaIsPageOK(dataFavoritos);
@@ -78,24 +78,24 @@ public class Fav002 extends TestBase {
 		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
 		dataTest.userConnected = userShop.user;
 		dataTest.passwordUser = userShop.password;
-		new AccesoSteps().identificacionEnMango(dataTest);
+		new AccesoSteps().identificacionEnMango();
 		secBolsaSteps.clear();
 	}
 
 	private void clickFavoritesInFicha() throws Exception {
-		PageFichaArtSteps pageFichaArtStpv = new PageFichaArtSteps(dataTest.pais);
+		PageFichaArtSteps pageFichaArtStpv = new PageFichaArtSteps();
 		pageFichaArtStpv.selectAnadirAFavoritos(dataFavoritos);
 	}
 
 	private void goToGaleryAndSelectArticle() throws Exception {
-		secMenusSteps.selectMenu1rstLevelTypeCatalog(getMenu(app), dataTest);
+		secMenusSteps.selectMenu1rstLevelTypeCatalog(getMenu(app));
 		LocationArticle article1 = LocationArticle.getInstanceInCatalog(1);
-		pageGaleriaSteps.selectArticulo(article1, dataTest);
+		pageGaleriaSteps.selectArticulo(article1);
 	}
 
 	private void accessWithoutLoginAndClearData() throws Exception {
 		dataTest.userRegistered=false;
-		new AccesoSteps().oneStep(dataTest, false);
+		new AccesoSteps().oneStep(false);
 		secBolsaSteps.clear();
 		pageFavoritosSteps.clearAll(dataFavoritos);
 	}

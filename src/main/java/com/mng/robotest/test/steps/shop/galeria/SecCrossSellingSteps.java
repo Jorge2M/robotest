@@ -5,11 +5,10 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
@@ -20,19 +19,9 @@ import com.mng.robotest.test.pageobject.shop.menus.desktop.SecBloquesMenuDesktop
 import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.SecBloquesMenuDesktopNew.MenusFromGroup;
 
+public class SecCrossSellingSteps extends StepBase {
 
-@SuppressWarnings({"static-access"})
-public class SecCrossSellingSteps {
-
-	private final SecCrossSelling secCrossSelling;
-	private final AppEcom app;
-	private final Channel channel;
-	
-	public SecCrossSellingSteps(Channel channel, AppEcom app) {
-		this.secCrossSelling = new SecCrossSelling();
-		this.app = app;
-		this.channel = channel;
-	}
+	private final SecCrossSelling secCrossSelling = new SecCrossSelling();
 	
 	@Validation
 	public ChecksTM validaIsCorrect(LineaType lineaType, SublineaType sublineaType) throws Exception {
@@ -50,7 +39,7 @@ public class SecCrossSellingSteps {
 		String hrefMenu3 = listaMenusBloque.get(2).getAttribute("href");
 
 		ChecksTM checks = ChecksTM.getNew();
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app);
+		PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
 		if (!secCrossSelling.isSectionVisible()) {
 			pageGaleria.hideMenus();
 			pageGaleria.scrollToPageFromFirst(PageGaleriaDesktop.MAX_PAGE_TO_SCROLL);

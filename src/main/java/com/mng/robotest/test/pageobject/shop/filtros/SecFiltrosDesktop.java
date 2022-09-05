@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -16,7 +15,6 @@ import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenuLateralDesktop;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	
@@ -129,7 +127,7 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	private static final String XPathLinkCollectionShop = "//div[@id='navigationContainer']/button";
 	public void showLateralMenus() {
 		if (app!=AppEcom.outlet) {
-			SecMenuLateralDesktop secMenuLateral = SecMenuLateralDesktop.getNew(AppEcom.shop);
+			SecMenuLateralDesktop secMenuLateral = SecMenuLateralDesktop.getNew(app);
 			if (!secMenuLateral.isVisibleCapaMenus(1)) {
 				click(By.xpath(XPathLinkCollectionShop)).exec();
 			}

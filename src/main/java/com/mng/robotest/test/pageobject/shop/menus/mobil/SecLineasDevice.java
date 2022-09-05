@@ -19,9 +19,6 @@ public abstract class SecLineasDevice extends PageBase {
 
 	public abstract String getXPathLineaLink(LineaType lineaType) throws IllegalArgumentException;
 	
-	protected final Channel channel;
-	protected final AppEcom app;
-	
 	static String XPathCapaMenuLineasTablet = "//div[@class='menu-section-brands']";
 	static String XPathCapaMenuLineasMobil = "//div[@class='section-detail-list']"; 
 	
@@ -32,12 +29,6 @@ public abstract class SecLineasDevice extends PageBase {
 	static String XPathLinkSublineaNino = IniXPathLinkSublinea + "nino')]]";
 	static String XPathLinkSublineaBebeNino = IniXPathLinkSublinea + "bebe_nino')]]";
 	static String XPathLinkSublineaTeenNino = IniXPathLinkSublinea + "chico')]]";
-	
-	public SecLineasDevice(Channel channel, AppEcom app, WebDriver driver) {
-		super(driver);
-		this.channel = channel;
-		this.app = app;
-	}
 	
 	public static SecLineasDevice make(Channel channel, AppEcom app, WebDriver driver) {
 		switch (channel) {

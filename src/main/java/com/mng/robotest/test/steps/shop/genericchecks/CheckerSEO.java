@@ -12,13 +12,14 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.AllPages;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
-public class CheckerSEO implements Checker {
+public class CheckerSEO extends PageBase implements Checker {
 
 	public ChecksTM check(WebDriver driver) {
 		ChecksTM checks = ChecksTM.getNew();
@@ -85,7 +86,7 @@ public class CheckerSEO implements Checker {
 		ArrayList<String> listaErrorsInHtmlFormat = new ArrayList<>();
 		if (!AllPages.isPresentTagCanonical(driver)) {
 			//El canonical ha de aparecer como mínimo en las páginas de Portada, Catálogo y Ficha
-			PageFicha pageFicha = PageFicha.newInstanceFichaNew();
+			PageFicha pageFicha = PageFicha.of(channel);
 			PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, AppEcom.shop);
 			if ((new PageLanding()).isPage() || 
 				((PageGaleriaDesktop)pageGaleria).isPage() || 

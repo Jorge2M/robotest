@@ -1,23 +1,21 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import com.mng.robotest.test.data.DataCtxShop;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.steps.shop.checkout.pasarelaotras.PagePasarelaOtrasSteps;
 
-
 public class PagoPasarelaOtras extends PagoSteps {
 	
-	public PagoPasarelaOtras(DataCtxShop dCtxSh, DataCtxPago dCtxPago) throws Exception {
-		super(dCtxSh, dCtxPago);
+	public PagoPasarelaOtras(DataPago dataPago) throws Exception {
+		super(dataPago);
 		super.isAvailableExecPay = false;
 	}
 	
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh.pais);
-		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
-		PagePasarelaOtrasSteps.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
+		PagePasarelaOtrasSteps.validateIsPage(dataPago.getDataPedido().getImporteTotal(), dataTest.pais, channel, app, driver);
 		
 		if (execPay) {
 			throw new PaymethodWithoutTestPayImplemented(MsgNoPayImplemented);

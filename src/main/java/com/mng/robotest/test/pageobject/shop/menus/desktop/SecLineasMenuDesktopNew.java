@@ -57,7 +57,7 @@ public class SecLineasMenuDesktopNew extends SecLineasMenuDesktop {
 	
 	@Override
 	public String getXPathLinea(LineaType lineaType) {
-		String lineaIddom = SecMenusWrap.getIdLineaEnDOM(Channel.desktop, app, lineaType);
+		String lineaIddom = SecMenusWrap.getIdLineaEnDOM(channel, app, lineaType);
 		return (XPATH_LINEA_SPECIFIC_WITH_TAG.replace(TagIdLinea, lineaIddom));
 	}
 	

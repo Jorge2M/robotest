@@ -19,7 +19,7 @@ public class Reg004 extends TestBase {
 	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
 	private final PageRegistroIniStepsOutlet pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
 	private final PageRegistroDirecStepsOutlet pageRegistroDirecSteps = new PageRegistroDirecStepsOutlet();
-	private final PageRegistroFinStepsOutlet pageRegistroFinSteps; 
+	private final PageRegistroFinStepsOutlet pageRegistroFinSteps = new PageRegistroFinStepsOutlet(); 
 	
 	private final String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
 	private Map<String, String> dataRegister = new HashMap<>();
@@ -29,8 +29,6 @@ public class Reg004 extends TestBase {
 		dataTest.pais = pais;
 		dataTest.idioma = idioma;
 		dataTest.userRegistered = false;
-		
-		pageRegistroFinSteps = new PageRegistroFinStepsOutlet(dataTest.idioma);
 	}
 	
 	@Override
@@ -40,17 +38,15 @@ public class Reg004 extends TestBase {
 	}
 
 	private void accessAndClickRegistrate() throws Exception {
-		new AccesoSteps().oneStep(dataTest, false);
-		userMenusSteps.selectRegistrate(dataTest);
+		new AccesoSteps().oneStep(false);
+		userMenusSteps.selectRegistrate();
 	}
 
 	private void registerAndGoShoppingNoPubli() throws Exception {
-		dataRegister = 
-				pageRegistroIniSteps.sendDataAccordingCountryToInputs(dataTest.pais, emailNonExistent, false);
-		
-		pageRegistroIniSteps.clickRegistrateButton(dataTest.pais, dataRegister);
-		pageRegistroDirecSteps.sendDataAccordingCountryToInputs(dataRegister, dataTest.pais);
-		pageRegistroDirecSteps.clickFinalizarButton(dataTest.idioma);
+		dataRegister = pageRegistroIniSteps.sendDataAccordingCountryToInputs(emailNonExistent, false);
+		pageRegistroIniSteps.clickRegistrateButton(dataRegister);
+		pageRegistroDirecSteps.sendDataAccordingCountryToInputs(dataRegister);
+		pageRegistroDirecSteps.clickFinalizarButton();
 		pageRegistroFinSteps.clickIrDeShoppingButton();
 		userMenusSteps.checkVisibilityLinkMangoLikesYou();
 	}

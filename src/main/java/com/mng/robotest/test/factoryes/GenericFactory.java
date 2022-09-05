@@ -8,7 +8,7 @@ import org.testng.annotations.*;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.conftestmaker.Suites;
 import com.mng.robotest.domains.favoritos.tests.Favoritos;
-import com.mng.robotest.test.appshop.MiCuenta;
+import com.mng.robotest.domains.micuenta.tests.MiCuenta;
 import com.mng.robotest.test.beans.*;
 import com.mng.robotest.test.utils.PaisGetter;
 import com.github.jorge2m.testmaker.service.TestMaker;

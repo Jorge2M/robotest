@@ -1,9 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.menus.mobil;
 
-
-import org.openqa.selenium.WebDriver;
-
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
 
 public class SecLineasMobilShop extends SecLineasMobil {
@@ -18,10 +14,6 @@ public class SecLineasMobilShop extends SecLineasMobil {
 	static String XPathLinkLineaVioleta = IniXPathLinkLinea + "='violeta']";
 	static String XPathLinkLineaHome = IniXPathLinkLinea + "='home']";
 
-	public SecLineasMobilShop(WebDriver driver) {
-		super(AppEcom.shop, driver);
-	}
-	
 	@Override
 	public String getXPathLineaLink(LineaType lineaType) throws IllegalArgumentException {
 		switch (lineaType) {

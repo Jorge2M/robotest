@@ -13,7 +13,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjT
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
-import com.mng.robotest.domains.ficha.pageobjects.PageFichaArtOld;
+import com.mng.robotest.domains.ficha.pageobjects.PageFichaDevice;
 import com.mng.robotest.domains.ficha.pageobjects.SecBreadcrumbFichaOld;
 import com.mng.robotest.domains.ficha.pageobjects.Slider;
 import com.mng.robotest.domains.transversal.StepBase;
@@ -22,8 +22,6 @@ import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.Acti
 import com.mng.robotest.domains.ficha.pageobjects.SecBreadcrumbFichaOld.ItemBCrumb;
 import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ColorType;
 import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ProductNav;
-import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataFavoritos;
@@ -40,8 +38,6 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 import java.util.Arrays;
 import java.util.List;
 
-
-@SuppressWarnings({"static-access"})
 public class PageFichaArtSteps extends StepBase {
 	
 	private final PageFicha pageFicha;
@@ -53,8 +49,8 @@ public class PageFichaArtSteps extends StepBase {
 	private final SecFitFinderSteps secFitFinderSteps;
 	private final SecTotalLookSteps secTotalLookSteps;
 	
-	public PageFichaArtSteps(Pais pais) {
-		this.pageFicha = PageFicha.of(channel, app);
+	public PageFichaArtSteps() {
+		this.pageFicha = PageFicha.of(channel);
 		this.secBolsa = SecBolsa.make(channel, app);
 		this.modEnvioYdevolSteps = new ModEnvioYdevolNewSteps();
 		this.secProductDescOldSteps = new SecProductDescrOldSteps();
@@ -262,13 +258,12 @@ public class PageFichaArtSteps extends StepBase {
 	/**
 	 * Selección del botón "Añadir a la bolsa" en un contexto en el que previamente SÍ se ha seleccionado una talla
 	 */
-	public void selectAnadirALaBolsaTallaPrevSiSelected(ArticuloScreen articulo, DataCtxShop dCtxSh) 
-	throws Exception {
+	public void selectAnadirALaBolsaTallaPrevSiSelected(ArticuloScreen articulo) throws Exception {
 		selectAnadirALaBolsaStep();
 		DataBag dataBag = new DataBag();
 		dataBag.addArticulo(articulo);
 		
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dCtxSh.pais);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 		secBolsaSteps.validaAltaArtBolsa(dataBag);
 	}	
 
@@ -427,7 +422,7 @@ public class PageFichaArtSteps extends StepBase {
 	}
 	
 	@Validation
-	public ChecksTM validaPrevNext(LocationArticle locationArt, DataCtxShop dCtxSh) {
+	public ChecksTM validaPrevNext(LocationArticle locationArt) {
 		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 5;
 		boolean isVisiblePrevLink = pageFicha.getSecDataProduct().isVisiblePrevNextUntil(ProductNav.PREV, maxSeconds);
@@ -451,7 +446,7 @@ public class PageFichaArtSteps extends StepBase {
 	@Step (
 		description="Seleccionamos el link #{productNav}</b>", 
 		expected="Aparece una página de ficha correcta")
-	public void selectLinkNavigation(ProductNav productNav, DataCtxShop dCtxSh, String refProductOrigin) {
+	public void selectLinkNavigation(ProductNav productNav, String refProductOrigin) {
 		pageFicha.getSecDataProduct().selectLinkNavigation(productNav);
 		if (productNav==ProductNav.PREV) {
 			validateIsFichaArtDisponible(refProductOrigin, 3);
@@ -459,7 +454,7 @@ public class PageFichaArtSteps extends StepBase {
 		
 		if (productNav==ProductNav.NEXT) {
 			LocationArticle location2onArticle = LocationArticle.getInstanceInCatalog(2);
-			validaPrevNext(location2onArticle, dCtxSh);
+			validaPrevNext(location2onArticle);
 		}
 	}
 	
@@ -470,15 +465,15 @@ public class PageFichaArtSteps extends StepBase {
 		description="Existe más de una imagen de carrusel a la izquierda de la imagen principal",
 		level=State.Warn)
 	public boolean validaExistsImgsCarruselIzqFichaOld() {
-		return (((PageFichaArtOld)pageFicha).getNumImgsCarruselIzq() >= 2);
+		return (((PageFichaDevice)pageFicha).getNumImgsCarruselIzq() >= 2);
 	}
 	
 	@Step (
 		description="Seleccionar la #{numImagen}a imagen del carrusel izquierdo", 
 		expected="La imagen se carga aumentada en la imagen central")
 	public void selectImgCarruselIzqFichaOld(int numImagen) throws Exception { 
-		String pngImagenCarrusel = ((PageFichaArtOld)pageFicha).getSrcImgCarruselIzq(numImagen);
-		((PageFichaArtOld)pageFicha).clickImgCarruselIzq(numImagen);		   
+		String pngImagenCarrusel = ((PageFichaDevice)pageFicha).getSrcImgCarruselIzq(numImagen);
+		((PageFichaDevice)pageFicha).clickImgCarruselIzq(numImagen);		   
 					
 		//Validaciones
 		checkImgCentralIsAssociatedToCarruselSelect(pngImagenCarrusel);
@@ -488,15 +483,15 @@ public class PageFichaArtSteps extends StepBase {
 		description="La imagen central se corresponde con la imagen del carrusel seleccionada (<b>#{pngImagenCarrusel}</b>)",
 		level=State.Defect)
 	private boolean checkImgCentralIsAssociatedToCarruselSelect(String pngImagenCarrusel) {
-		return (((PageFichaArtOld)pageFicha).srcImagenCentralCorrespondsToImgCarrusel(pngImagenCarrusel));
+		return (((PageFichaDevice)pageFicha).srcImagenCentralCorrespondsToImgCarrusel(pngImagenCarrusel));
 	}
 	
 	@Step (
 		description="Seleccionar la imagen/ficha central", 
 		expected="Se produce un zoom sobre la imagen")
 	public void selectImagenCentralFichaOld() {
-		String pngImgCentralOriginal = ((PageFichaArtOld)pageFicha).getSrcImagenCentral();
-		((PageFichaArtOld)pageFicha).clickImagenFichaCentral();
+		String pngImgCentralOriginal = ((PageFichaDevice)pageFicha).getSrcImagenCentral();
+		((PageFichaDevice)pageFicha).clickImagenFichaCentral();
 		checkImgCentralAfterZoom(pngImgCentralOriginal);
 	}	
 	
@@ -505,11 +500,11 @@ public class PageFichaArtSteps extends StepBase {
 		ChecksTM checks = ChecksTM.getNew();
 	 	checks.add(
 	 		"Se aplica un Zoom sobre la imagen central",
-	 		((PageFichaArtOld)pageFicha).isVisibleFichaConZoom(), State.Defect);
+	 		((PageFichaDevice)pageFicha).isVisibleFichaConZoom(), State.Defect);
 	 	
 	 	checks.add(
 	 		"La imagen central con Zoom sigue conteniendo la imagen original: " + pngImgCentralOriginal,
-	 		((PageFichaArtOld)pageFicha).srcImagenCentralConZoomContains(pngImgCentralOriginal), State.Defect);
+	 		((PageFichaDevice)pageFicha).srcImagenCentralConZoomContains(pngImgCentralOriginal), State.Defect);
 	 	
 	 	return checks;
 	}
@@ -518,14 +513,14 @@ public class PageFichaArtSteps extends StepBase {
 		description="Seleccionar el aspa para cerrar la imagen central con Zoom", 
 		expected="La imagen con Zoom desaparece")
 	public void closeZoomImageCentralDevice() {
-		((PageFichaArtOld)pageFicha).closeZoomImageCentralDevice();
+		((PageFichaDevice)pageFicha).closeZoomImageCentralDevice();
 	}
 	
 	@Validation (
 		description="La imagen central se corresponde con la imagen del carrusel seleccionada (<b>#{pngImagenCarrusel}</b>)",
 		level=State.Defect)
 	private boolean checkZoomImageCentralDissapeared() {
-		return !((PageFichaArtOld)pageFicha).isVisibleFichaConZoom();
+		return !((PageFichaDevice)pageFicha).isVisibleFichaConZoom();
 	}
 	
 	@Validation

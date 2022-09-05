@@ -6,7 +6,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.buscador.steps.SecBuscadorSteps;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
-import com.mng.robotest.domains.ficha.pageobjects.PageFichaArtOld;
+import com.mng.robotest.domains.ficha.pageobjects.PageFichaDevice;
 import com.mng.robotest.domains.ficha.pageobjects.Slider;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha.TypeFicha;
 import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel;
@@ -25,7 +25,7 @@ public class Fic002 extends TestBase {
 	final boolean isTotalLook;
 	
 	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
-	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(dataTest.pais);
+	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps();
 	
 	public Fic002() throws Exception {
 		super();
@@ -44,8 +44,8 @@ public class Fic002 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		new AccesoSteps().oneStep(dataTest, false);
-		secBuscadorSteps.searchArticulo(garment, dataTest.pais);
+		new AccesoSteps().oneStep(false);
+		secBuscadorSteps.searchArticulo(garment);
 		
 		if (pageFichaSteps.getFicha().getTypeFicha()==TypeFicha.OLD) {
 			pageFichaOldTest();
@@ -83,8 +83,8 @@ public class Fic002 extends TestBase {
 			pageFichaSteps.validaExistsImgsCarruselIzqFichaOld();
 		}
 		pageFichaSteps.getSecProductDescOldSteps().validateAreInStateInitial(app);
-		PageFicha pageFicha = PageFicha.of(channel, app);
-		if (((PageFichaArtOld)pageFicha).getNumImgsCarruselIzq() > 2) {
+		PageFicha pageFicha = PageFicha.of(channel);
+		if (((PageFichaDevice)pageFicha).getNumImgsCarruselIzq() > 2) {
 			pageFichaSteps.selectImgCarruselIzqFichaOld(2);
 		}
 		

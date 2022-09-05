@@ -11,7 +11,6 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
-import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.pageobject.shop.bannersNew.BannerObject;
 import com.mng.robotest.test.pageobject.shop.bannersNew.BannerObjectFactory;
 import com.mng.robotest.test.pageobject.shop.bannersNew.BannerType;
@@ -21,7 +20,6 @@ import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test.pageobject.shop.menus.MenuLateralDesktop.Element;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class PageLanding extends PageBase {
 	
@@ -64,28 +62,22 @@ public class PageLanding extends PageBase {
 	public List<WebElement> getListaMaps() {
 		// Seleccionamos cada uno de los banners visibles
 		List<WebElement> listMaps;
-		listMaps = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_MAP_T1));
-		listMaps.addAll(UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_MAP_T2)));
+		listMaps = getElementsVisible(XPATH_MAP_T1);
+		listMaps.addAll(getElementsVisible(XPATH_MAP_T2));
 		return listMaps;
 	}
 	
 	public List<WebElement> getListaItemsEdit() {
 		List<WebElement> listItemsEdits;
-		listItemsEdits = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_EDIT_ITEM));
+		listItemsEdits = getElementsVisible(XPATH_EDIT_ITEM);
 		return listItemsEdits;		
 	}
 	
-	/**
-	 * Función que indica si hay secciones de vídeo
-	 */
 	public boolean hayIframes() {
-		List<WebElement> listaIFrames = UtilsMangoTest.findDisplayedElements(driver, By.xpath("//iframe"));
+		List<WebElement> listaIFrames = getElementsVisible("//iframe");
 		return (listaIFrames!=null && listaIFrames.size()>0);
 	}
 	
-	/**
-	 * Función que indica si hay imágenes o no en el contenido de la página
-	 */
 	public boolean hayImgsEnContenido() {
 		boolean banners = true;
 		String xpathImg = "";
@@ -117,12 +109,12 @@ public class PageLanding extends PageBase {
 	}
 
 	public boolean haySecc_Art_Banners(AppEcom app) throws Exception {
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app);
+		PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
 		if (((PageGaleriaDesktop)pageGaleria).isVisibleAnyArticle()) {
 			return true;
 		}
 
-		PageFicha pageFicha = PageFicha.of(Channel.desktop, app);
+		PageFicha pageFicha = PageFicha.of(Channel.desktop);
 		if (pageFicha.isPageUntil(0)) {
 			return true;
 		}

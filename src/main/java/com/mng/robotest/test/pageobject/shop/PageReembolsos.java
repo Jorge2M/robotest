@@ -1,207 +1,183 @@
 package com.mng.robotest.test.pageobject.shop;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.github.jorge2m.testmaker.conf.Channel;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.utils.ImporteScreen;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
-/**
- * Define las interacciones vía XPATH con la página de Reembolsos 
- * @author jorge.munoz
- *
- */
-
-public class PageReembolsos {
+public class PageReembolsos extends PageBase {
 	
-	public enum TypeReembolso {Transferencia, StoreCredit}
+	public enum TypeReembolso {TRANSFERENCIA, STORE_CREDIT}
 
-	static String XPathRefundsPanel = "//div[@id[contains(.,'refunds-panel')]]";
-	static String XPathInputBanco = "//input[@id[contains(.,'bankName')] and @type='text']";
-	static String XPathTextBancoAfterSave = "//div[@id='btBankDetails']//strong[1]";
-	static String XPathInputTitular = "//input[@id[contains(.,'accountHolder')] and @type='text']";
-	static String XPathTitularAfterSave = "//div[@id='btBankDetails']//strong[2]";
-	static String XPathInputIBAN = "//input[@id[contains(.,'completeAccount')] and @type='text']";
-	static String XPathInputPassport = "//input[@id[contains(.,'passport')] and @type='text']";
-	static String XPathBirthdayDayBlock = "//div[@class='birthdayDay']";
-	static String XPathSelectDayBirth = "//select[@id[contains(.,'dateOfBirth-day')]]";
-	static String XPathSelectMonthBirth = "//select[@id[contains(.,'dateOfBirth-month')]]";
-	static String XPathSelectYearBirth = "//select[@id[contains(.,'dateOfBirth-year')]]";
-	static String XPathTextIBANAfterSave = "//div[@id='btBankDetails']//strong[3]";
-	static String XPathButtonSaveTransf = "//button[@id[contains(.,'bankTransferSubmit')]]";
-	static String XPathModalConfTransf = "//div[@id[contains(.,'Pedidos:confirmation-modal')]]";
-	static String XPathRadioStoreCredit = "//div[@class[contains(.,'refund-check')]]//input[@value='store-credit']";
-	static String XPathRadioTransferencia = "//div[@class[contains(.,'refund-check')]]//input[@value='bank-transfer']";
-	static String XPathSaveButtonStoreCredit = "//button[@data-input-id='customer-balance']";
+	private static final String XPATH_REFUNDS_PANEL = "//div[@id[contains(.,'refunds-panel')]]";
+	private static final String XPATH_INPUT_BANCO = "//input[@id[contains(.,'bankName')] and @type='text']";
+	private static final String XPATH_TEXT_BANCO_AFTER_SAVE = "//div[@id='btBankDetails']//strong[1]";
+	private static final String XPATH_INPUT_TITULAR = "//input[@id[contains(.,'accountHolder')] and @type='text']";
+	private static final String XPATH_TITULAR_AFTER_SAVE = "//div[@id='btBankDetails']//strong[2]";
+	private static final String XPATH_INPUT_IBAN = "//input[@id[contains(.,'completeAccount')] and @type='text']";
+	private static final String XPATH_INPUT_PASSPORT = "//input[@id[contains(.,'passport')] and @type='text']";
+	private static final String XPATH_BIRTHDAY_DAY_BLOCK = "//div[@class='birthdayDay']";
+	private static final String XPATH_SELECT_DAY_BIRTH = "//select[@id[contains(.,'dateOfBirth-day')]]";
+	private static final String XPATH_SELECT_MONTH_BIRTH = "//select[@id[contains(.,'dateOfBirth-month')]]";
+	private static final String XPATH_SELECT_YEAR_BIRTH = "//select[@id[contains(.,'dateOfBirth-year')]]";
+	private static final String XPATH_TEXT_IBANA_AFTER_SAVE = "//div[@id='btBankDetails']//strong[3]";
+	private static final String XPATH_BUTTON_SAVE_TRANSF = "//button[@id[contains(.,'bankTransferSubmit')]]";
+	private static final String XPATH_MODAL_CONF_TRANS = "//div[@id[contains(.,'Pedidos:confirmation-modal')]]";
+	private static final String XPATH_RADIO_STORE_CREDIT = "//div[@class[contains(.,'refund-check')]]//input[@value='store-credit']";
+	private static final String XPATH_RADIO_TRANSFERENCIA = "//div[@class[contains(.,'refund-check')]]//input[@value='bank-transfer']";
+	private static final String XPATH_SAVE_BUTTON_STORE_CREDIT = "//button[@data-input-id='customer-balance']";
 	
-	public static String getXPathBlock(TypeReembolso typeReembolso) {
+	private String getXPathBlock(TypeReembolso typeReembolso) {
 		return (getXPathRadio(typeReembolso) + "/..");
 	}
 	
-	public static String getXPathRadio(TypeReembolso typeReembolso) {
+	private String getXPathRadio(TypeReembolso typeReembolso) {
 		switch (typeReembolso) {
-		case StoreCredit:
-			return XPathRadioStoreCredit;
-		case Transferencia:
-			return XPathRadioTransferencia;
+		case STORE_CREDIT:
+			return XPATH_RADIO_STORE_CREDIT;
+		case TRANSFERENCIA:
+			return XPATH_RADIO_TRANSFERENCIA;
 		default:
 			return "";
 		}
 	}
 	
-	/**
-	 * @return el elemento que contiene el texto con el saldo a nivel del StoreCredit
-	 */
-	public static String getXPATH_textoImporteStoreCredit() {
+	public String getXPathTextoImporteStoreCredit() {
 		//El tag no tiene ningún atributo así que el XPATH resultante no es muy elegante
-		return (getXPathRadio(TypeReembolso.StoreCredit) + "/../..//strong");
+		return (getXPathRadio(TypeReembolso.STORE_CREDIT) + "/../..//strong");
 	}
 	
-	/**
-	 * @param checked indica si queremos el XPath de un div con un radio checkeado o no
-	 */
-	public static String getXPath_divRadioCheckedTypeReembolso(TypeReembolso typeReembolso) {
+	public String getXPath_divRadioCheckedTypeReembolso(TypeReembolso typeReembolso) {
 		String xpathRadio = getXPathRadio(typeReembolso);
 		return (xpathRadio + "/ancestor::div[@class[contains(.,'custom-radio--checked')]]");
 	}
 
-	public static boolean isPage(WebDriver driver) {
-		return (state(Present, By.xpath(XPathRefundsPanel), driver).check());
+	public boolean isPage() {
+		return state(Present, XPATH_REFUNDS_PANEL).check();
 	}
 
-	public static boolean existsInputBanco(WebDriver driver) {
-		return (state(Present, By.xpath(XPathInputBanco), driver).check());
+	public boolean existsInputBanco() {
+		return state(Present, XPATH_INPUT_BANCO).check();
 	}
 
-	public static boolean isVisibleInputBanco(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathInputBanco), driver).check());
+	public boolean isVisibleInputBanco() {
+		return state(Visible, XPATH_INPUT_BANCO).check();
 	}
 
-	public static void typeInputBanco(WebDriver driver, String banco) {
-		driver.findElement(By.xpath(XPathInputBanco)).clear();
-		driver.findElement(By.xpath(XPathInputBanco)).sendKeys(banco);
+	public void typeInputBanco(String banco) {
+		getElement(XPATH_INPUT_BANCO).clear();
+		getElement(XPATH_INPUT_BANCO).sendKeys(banco);
 	}
 
-	public static boolean isVisibleTextBancoUntil(int maxSecondsToWait, WebDriver driver) {
-		return (state(Visible, By.xpath(XPathTextBancoAfterSave), driver)
-				.wait(maxSecondsToWait).check());
+	public boolean isVisibleTextBancoUntil(int maxSecondsToWait) {
+		return (state(Visible, XPATH_TEXT_BANCO_AFTER_SAVE).wait(maxSecondsToWait).check());
 	}
 
-	public static boolean existsInputTitular(WebDriver driver) {
-		return (state(Present, By.xpath(XPathInputTitular), driver).check());
+	public boolean existsInputTitular() {
+		return state(Present, XPATH_INPUT_TITULAR).check();
 	}
 
-	public static boolean isVisibleInputTitular(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathInputTitular), driver).check());
+	public boolean isVisibleInputTitular() {
+		return state(Visible, XPATH_INPUT_TITULAR).check();
 	}
 
-	public static void typeInputTitular(WebDriver driver, String titular) {
-		driver.findElement(By.xpath(XPathInputTitular)).clear();
-		driver.findElement(By.xpath(XPathInputTitular)).sendKeys(titular);
+	public void typeInputTitular(String titular) {
+		getElement(XPATH_INPUT_TITULAR).clear();
+		getElement(XPATH_INPUT_TITULAR).sendKeys(titular);
 	}
 
-	public static boolean isVisibleTextTitular(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathTitularAfterSave), driver).check());
+	public boolean isVisibleTextTitular() {
+		return state(Visible, XPATH_TITULAR_AFTER_SAVE).check();
 	}
 
-	public static boolean existsInputIBAN(WebDriver driver) {
-		return (state(Present, By.xpath(XPathInputIBAN), driver).check());
+	public boolean existsInputIBAN() {
+		return state(Present, XPATH_INPUT_IBAN).check();
 	}
 
-	public static boolean isVisibleInputIBAN(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathInputIBAN), driver).check());
+	public boolean isVisibleInputIBAN() {
+		return state(Visible, XPATH_INPUT_IBAN).check();
 	}
 
-	public static boolean isVisibleTextIBAN(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathTextIBANAfterSave), driver).check());
+	public boolean isVisibleTextIBAN() {
+		return state(Visible, XPATH_TEXT_IBANA_AFTER_SAVE).check();
 	}
 
-	public static void typeInputIBAN(WebDriver driver, String IBAN) {
-		driver.findElement(By.xpath(XPathInputIBAN)).clear();
-		driver.findElement(By.xpath(XPathInputIBAN)).sendKeys(IBAN);
+	public void typeInputIBAN(String IBAN) {
+		getElement(XPATH_INPUT_IBAN).clear();
+		getElement(XPATH_INPUT_IBAN).sendKeys(IBAN);
 	}
 
-	public static void typeIdPassportIfInputExists(WebDriver driver, String idPassport) {
-		By byInput = By.xpath(XPathInputPassport);
-		if (state(Visible, byInput, driver).check()) {
-			driver.findElement(byInput).clear();
-			driver.findElement(byInput).sendKeys(idPassport);
+	public void typeIdPassportIfInputExists(String idPassport) {
+		if (state(Visible, XPATH_INPUT_PASSPORT).check()) {
+			getElement(XPATH_INPUT_PASSPORT).clear();
+			getElement(XPATH_INPUT_PASSPORT).sendKeys(idPassport);
 		}
 	}
 	
-	public static void typeDateOfBirthIfInputExists(WebDriver driver, int day, int month, int year) {
-		if (state(Visible, By.xpath(XPathBirthdayDayBlock), driver).check()) {
-			new Select(driver.findElement(By.xpath(XPathSelectDayBirth))).selectByValue(String.valueOf(day));
-			new Select(driver.findElement(By.xpath(XPathSelectMonthBirth))).selectByValue(String.valueOf(month));
-			new Select(driver.findElement(By.xpath(XPathSelectYearBirth))).selectByValue(String.valueOf(year));
+	public void typeDateOfBirthIfInputExists(int day, int month, int year) {
+		if (state(Visible, XPATH_BIRTHDAY_DAY_BLOCK).check()) {
+			new Select(getElement(XPATH_SELECT_DAY_BIRTH)).selectByValue(String.valueOf(day));
+			new Select(getElement(XPATH_SELECT_MONTH_BIRTH)).selectByValue(String.valueOf(month));
+			new Select(getElement(XPATH_SELECT_YEAR_BIRTH)).selectByValue(String.valueOf(year));
 		}
 	}
 
-	/**
-	 * @return si son visible los 3 inputs para configurar el reembolso por transferencia: banco, titular e iban
-	 */
-	public static boolean isVisibleInputsTransf(WebDriver driver) {
+	public boolean isVisibleInputsTransf() {
 		return (
-			isVisibleInputBanco(driver) && 
-			isVisibleInputTitular(driver) && 
-			isVisibleInputIBAN(driver));
+			isVisibleInputBanco() && 
+			isVisibleInputTitular() && 
+			isVisibleInputIBAN());
 	}
 
-	public static void typeInputsTransf(WebDriver driver, String banco, String titular, String IBAN, String idPassport) {
-		typeInputBanco(driver, banco);
-		typeInputTitular(driver, titular);
-		typeInputIBAN(driver, IBAN);
-		typeIdPassportIfInputExists(driver, idPassport);
-		typeDateOfBirthIfInputExists(driver, 23, 4, 1974);
+	public void typeInputsTransf(String banco, String titular, String IBAN, String idPassport) {
+		typeInputBanco(banco);
+		typeInputTitular(titular);
+		typeInputIBAN(IBAN);
+		typeIdPassportIfInputExists(idPassport);
+		typeDateOfBirthIfInputExists(23, 4, 1974);
 	}
 
-	public static boolean isVisibleTransferenciaSectionUntil(int maxSeconds, WebDriver driver) {
-		String xpathBlock = getXPathBlock(TypeReembolso.Transferencia);
-		return (state(Visible, By.xpath(xpathBlock), driver).wait(maxSeconds).check());
+	public boolean isVisibleTransferenciaSectionUntil(int maxSeconds) {
+		String xpathBlock = getXPathBlock(TypeReembolso.TRANSFERENCIA);
+		return state(Visible, xpathBlock).wait(maxSeconds).check();
 	}
 
-	public static boolean isVisibleStorecreditSection(WebDriver driver) {
-		String xpathBlock = getXPathBlock(TypeReembolso.StoreCredit);
-		return (state(Visible, By.xpath(xpathBlock), driver).check());
+	public boolean isVisibleStorecreditSection() {
+		String xpathBlock = getXPathBlock(TypeReembolso.STORE_CREDIT);
+		return state(Visible, xpathBlock).check();
 	}
 
-	/**
-	 * @return determina si está seleccionado o no el radio de la opción de "Transferencia Bancaria"
-	 */
-	public static boolean isCheckedRadio(TypeReembolso typeReembolso, WebDriver driver) {
+	public boolean isCheckedRadio(TypeReembolso typeReembolso) {
 		String xpathDiv = getXPath_divRadioCheckedTypeReembolso(typeReembolso);
-		return (state(Present, By.xpath(xpathDiv), driver).check());
+		return state(Present, xpathDiv).check();
 	}
 
-	public static void clickRadio(TypeReembolso typeReembolso, WebDriver driver) {
-		driver.findElement(By.xpath(getXPathRadio(typeReembolso) + "/..")).click();
+	public void clickRadio(TypeReembolso typeReembolso) {
+		getElement(getXPathRadio(typeReembolso) + "/..").click();
 	}
 
 	/**
 	 * En ocasiones un sólo click en el botón "Save" no tiene efecto. 
 	 * Forzamos a que funcione mediante la siguiente estrategia: lo pulsamos, esperamos a que desaparezca y en caso negativo lo volvemos a pulsar
 	 */
-	public static void clickButtonSaveTransfForce(WebDriver driver) {
-		click(By.xpath(XPathButtonSaveTransf), driver).exec();
-		if (state(Present, By.xpath(XPathButtonSaveTransf), driver).check()) {
-			click(By.xpath(XPathButtonSaveTransf), driver).exec();
+	public void clickButtonSaveTransfForce() {
+		click(XPATH_BUTTON_SAVE_TRANSF).exec();
+		if (state(Present, XPATH_BUTTON_SAVE_TRANSF).check()) {
+			click(XPATH_BUTTON_SAVE_TRANSF).exec();
 		}
 	}
 
-	public static void clickButtonSaveTransf(WebDriver driver) {
-		click(By.xpath(XPathButtonSaveTransf), driver).exec();
+	public void clickButtonSaveTransf() {
+		click(XPATH_BUTTON_SAVE_TRANSF).exec();
 	}
 
-	public static boolean isVisibleModalConfTransf(WebDriver driver, Channel channel, int seconds) throws Exception {
+	public boolean isVisibleModalConfTransf(int seconds) throws Exception {
 		//En el caso de móvil el div se oculta desplazándolo x píxeles por debajo de la coordenada 0Y
 		if (channel.isDevice()) {
 			for (int i=0; i<seconds; i++) {
-				if (driver.findElement(By.xpath(XPathModalConfTransf)).getLocation().getY()>0) {
+				if (getElement(XPATH_MODAL_CONF_TRANS).getLocation().getY()>0) {
 					return (true);
 				}
 				Thread.sleep(1000);
@@ -210,15 +186,14 @@ public class PageReembolsos {
 		}
 
 		//En el caso de Desktop la capa se oculta normalmente
-		return (state(Visible, By.xpath(XPathModalConfTransf), driver)
-				.wait(seconds).check());
+		return state(Visible, XPATH_MODAL_CONF_TRANS).wait(seconds).check();
 	}
 
-	public static boolean isNotVisibleModalConfTransf(WebDriver driver, Channel channel, int seconds) throws Exception {
+	public boolean isNotVisibleModalConfTransf(int seconds) throws Exception {
 		//En el caso de móvil el div se oculta desplazándolo x píxeles por debajo de la coordenada 0Y
 		if (channel.isDevice()) {
 			for (int i=0; i<seconds; i++) {
-				if (driver.findElement(By.xpath(XPathModalConfTransf)).getLocation().getY()<20) {
+				if (getElement(XPATH_MODAL_CONF_TRANS).getLocation().getY()<20) {
 					return (true);
 				}
 				Thread.sleep(1000);
@@ -227,35 +202,32 @@ public class PageReembolsos {
 		}
 
 		//En el caso de Desktop la capa se oculta normalmente
-		return (state(Invisible, By.xpath(XPathModalConfTransf), driver)
-				.wait(seconds).check());
+		return state(Invisible, XPATH_MODAL_CONF_TRANS).wait(seconds).check();
 	}
 	
-	public static float getImporteStoreCredit(WebDriver driver) {
+	public float getImporteStoreCredit() {
 		float precioFloat = -1;
-		String xpath = getXPATH_textoImporteStoreCredit();
-		if (state(Visible, By.xpath(xpath), driver).check()) {
-			String precioTotal = driver.findElement(By.xpath(getXPATH_textoImporteStoreCredit())).getText();
+		if (state(Visible, getXPathTextoImporteStoreCredit()).check()) {
+			String precioTotal = getElement(getXPathTextoImporteStoreCredit()).getText();
 			precioFloat = ImporteScreen.getFloatFromImporteMangoScreen(precioTotal);
 		}
 		return precioFloat;
 	}
 
-	public static boolean isVisibleSaveButtonStoreCredit(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathSaveButtonStoreCredit), driver).check());
+	public boolean isVisibleSaveButtonStoreCredit() {
+		return state(Visible, XPATH_SAVE_BUTTON_STORE_CREDIT).check();
 	}
 
-	public static boolean isVisibleSaveButtonStoreCreditUntil(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(XPathSaveButtonStoreCredit), driver)
-				.wait(maxSeconds).check());
+	public boolean isVisibleSaveButtonStoreCreditUntil(int maxSeconds) {
+		return state(Visible, XPATH_SAVE_BUTTON_STORE_CREDIT).wait(maxSeconds).check();
 	}
 
-	public static void clickSaveButtonStoreCredit(WebDriver driver) {
-		click(By.xpath(XPathSaveButtonStoreCredit), driver).exec();
+	public void clickSaveButtonStoreCredit() {
+		click(XPATH_SAVE_BUTTON_STORE_CREDIT).exec();
 
 		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
-		if (isVisibleSaveButtonStoreCredit(driver)) {
-			click(By.xpath(XPathSaveButtonStoreCredit), driver).exec();
+		if (isVisibleSaveButtonStoreCredit()) {
+			click(XPATH_SAVE_BUTTON_STORE_CREDIT).exec();
 		}
 	}
 }

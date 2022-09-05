@@ -43,10 +43,7 @@ public class SecMenusWrap extends PageBase {
 		return secMenusDesktop.secMenuSuperior.secLineas.isLineaPresentUntil(lineaType, maxSeconds);
 	}	
 	
-	/**
-	 * @return la línea a la que se debería acceder cuando se selecciona el menú
-	 */
-	public static LineaType getLineaResultAfterClickMenu(LineaType lineaType, String nombre) { 
+	public LineaType getLineaResultAfterClickMenu(LineaType lineaType, String nombre) { 
 		switch (nombre) {
 		case "rebajas":
 //		case "-rebajas":			

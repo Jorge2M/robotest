@@ -9,9 +9,8 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.InputParamsTM;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.appshop.PaisAplicaVale;
+import com.mng.robotest.test.appshop.paisaplicavale.PaisAplicaVale;
 import com.mng.robotest.test.beans.*;
-import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.suites.PagosPaisesSuite.VersionPagosSuite;
 import com.mng.robotest.test.utils.PaisGetter;
 import com.mng.robotest.test.utils.UtilsTest;
@@ -35,8 +34,7 @@ public class ListPrecompraPaises {
 				AppEcom app = (AppEcom)inputData.getApp();
 				Channel channel = inputData.getChannel();
 				if (UtilsTest.paisConCompra(pais, app)) {
-					DataCtxShop dCtxSh = new DataCtxShop(app, channel, pais, pais.getListIdiomas().get(0));
-					listTests.add(new PaisAplicaVale(version, dCtxSh, prioridad));
+					listTests.add(new PaisAplicaVale(version, pais, primerIdioma, prioridad));
 					prioridad+=1;
 					System.out.println(
 						"Creado Test con datos: " +

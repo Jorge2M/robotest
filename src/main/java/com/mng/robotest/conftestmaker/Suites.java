@@ -6,7 +6,6 @@ public enum Suites implements SuiteTest {
 	SmokeTest(8),
 	SmokeManto(8),
 	PagosPaises(10), 
-	ValesPaises(10), 
 	PaisIdiomaBanner(10), 
 	Campanas(10),
 	MenusPais(10), 

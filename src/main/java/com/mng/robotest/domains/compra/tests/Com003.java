@@ -5,7 +5,7 @@ import java.util.Arrays;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.utils.PaisGetter;
@@ -17,8 +17,8 @@ public class Com003 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		DataCtxPago dCtxPago = new DataCtxPago(dataTest, configCheckout);
-		dCtxPago = new BuilderCheckout(dataTest, dCtxPago)
+		DataPago dataPago = new DataPago(configCheckout);
+		dataPago = new BuilderCheckout(dataPago)
 			.finalCountrys(Arrays.asList(PaisGetter.get(PaisShop.FRANCE)))
 			.build()
 			.checkout(From.PREHOME);		

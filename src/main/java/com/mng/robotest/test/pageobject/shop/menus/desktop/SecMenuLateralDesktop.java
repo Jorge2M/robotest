@@ -2,7 +2,6 @@ package com.mng.robotest.test.pageobject.shop.menus.desktop;
 
 import org.openqa.selenium.By;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
@@ -66,7 +65,7 @@ public class SecMenuLateralDesktop extends PageBase {
 	}
 
 	public boolean isSelectedMenu(MenuLateralDesktop menu, int maxSeconds) {
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app);
+		PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
 		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(pageGaleria);
 		secFiltros.showLateralMenus();
 		String linkMenuSel = getXPathLinkMenuSelected(menu) ;
@@ -83,7 +82,7 @@ public class SecMenuLateralDesktop extends PageBase {
 	 * @return si es o no visible un menú lateral de 1er (menu2oNivel=null) o 2o nivel (menu2oNivel!=null)
 	 */
 	public boolean isVisibleMenu(MenuLateralDesktop menu) throws Exception {
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app);
+		PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
 		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(pageGaleria);
 		secFiltros.showLateralMenus();
 		String xpathMenu = getXPathLinkMenu(menu);

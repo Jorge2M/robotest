@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
@@ -95,12 +94,11 @@ public abstract class BannerObject extends PageBase {
 	}
 	
 	public boolean isVisibleAnyBanner() {
-		List<WebElement> listBanners = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathBanner));
-		return !listBanners.isEmpty();
+		return !getElementsVisible(XPathBanner).isEmpty();
 	}
 	
 	protected List<WebElement> getDisplayedBannersInOrder() {
-		List<WebElement> listBanners = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathBanner));
+		List<WebElement> listBanners = getElementsVisible(XPathBanner);
 		SeleniumUtils.orderElementsByPositionInScreen(listBanners);
 		return listBanners;
 	}

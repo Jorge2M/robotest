@@ -28,9 +28,9 @@ import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 public class Fav001 extends TestBase {
 
 	private final PageFavoritosSteps pageFavoritosSteps = new PageFavoritosSteps();
-	private final PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(channel, app, driver);
-	private final SecBolsaSteps secBolsaSteps;
-	private final SecMenusWrapperSteps secMenusSteps;
+	private final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
+	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
+	private final SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps();
 	
 	private final DataFavoritos dataFavoritos = new DataFavoritos();
 	private final DataBag dataBolsa = new DataBag();
@@ -43,10 +43,9 @@ public class Fav001 extends TestBase {
 		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
 		dataTest.userConnected = userShop.user;
 		dataTest.passwordUser = userShop.password;
+//		dataTest.userConnected = "test.performance50@mango.com";
+//		dataTest.passwordUser = "mango457";		
 		dataTest.userRegistered=true;
-		
-		secBolsaSteps = new SecBolsaSteps(dataTest.pais);
-		secMenusSteps = SecMenusWrapperSteps.getNew(dataTest);
 	}
 	
 	@Override
@@ -66,9 +65,9 @@ public class Fav001 extends TestBase {
 	}
 
 	private void addFavoriteToBag(ArticuloScreen artToPlay) throws Exception {
-		pageFavoritosSteps.addArticuloToBag(artToPlay, dataBolsa, dataTest.pais);
+		pageFavoritosSteps.addArticuloToBag(artToPlay, dataBolsa);
 		if (channel.isDevice()) {
-			secBolsaSteps.clickAspaForCloseMobil();
+			secBolsaSteps.closeInMobil();
 			pageFavoritosSteps.validaIsPageOK(dataFavoritos);
 		}
 	}
@@ -87,14 +86,14 @@ public class Fav001 extends TestBase {
 
 	private void goToVestidosGalery() throws Exception {
 		Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.she, null, "Vestidos"));
-		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuVestidos, dataTest);
+		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuVestidos);
 		if (channel==Channel.desktop) {
 			pageGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.CUATRO);
 		}
 	}
 
 	private void loginAndClearData() throws Exception {
-		new AccesoSteps().oneStep(dataTest, false);
+		new AccesoSteps().oneStep(false);
 		secBolsaSteps.clear();
 		pageFavoritosSteps.clearAll(dataFavoritos);
 	}

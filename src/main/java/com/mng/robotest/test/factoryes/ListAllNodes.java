@@ -13,7 +13,7 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.appshop.TestNodos;
+import com.mng.robotest.test.appshop.nodos.TestNodos;
 import com.mng.robotest.test.pageobject.shop.PageErrorPage;
 
 public class ListAllNodes {

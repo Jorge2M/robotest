@@ -1,52 +1,42 @@
 package com.mng.robotest.test.steps.shop;
 
-import org.openqa.selenium.WebDriver;
-
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.micuenta.pageobjects.PageMiCuenta;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.PageReembolsos;
 import com.mng.robotest.test.pageobject.shop.PageReembolsos.TypeReembolso;
-import com.mng.robotest.test.pageobject.shop.micuenta.PageMiCuenta;
 import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
 
+public class PageReembolsosSteps extends StepBase {
 
-public class PageReembolsosSteps {
-
-	private PageReembolsosSteps() {
-	}
+	private final PageReembolsos pageReembolsos = new PageReembolsos(); 
 	
-	/**
-	 * Step (+validación) correspondiente a la selección del menú superior "Mi cuenta" + "Reembolsos"
-	 * @param paisConSaldoCta indica si el país tiene configurado el saldo en cuenta
-	 */
-	public static void gotoRefundsFromMenu(
-			boolean paisConSaldoCta, AppEcom app, Channel channel, WebDriver driver) {
+	public void gotoRefundsFromMenu(boolean paisConSaldoCta) {
 		new SecMenusUserSteps().clickMenuMiCuenta();
-		selectReembolsos(paisConSaldoCta, driver);
+		selectReembolsos(paisConSaldoCta);
 	}
 	
 	@Step (
 		description="Seleccionar la opción \"Reembolsos\"", 
 		expected="Aparece la página de reembolsos")
-	public static void selectReembolsos(boolean paisConSaldoCta, WebDriver driver) {
+	public void selectReembolsos(boolean paisConSaldoCta) {
 		new PageMiCuenta().clickReembolsos();
-		checkClickReembolsos(paisConSaldoCta, driver);
+		checkClickReembolsos(paisConSaldoCta);
 	}
 	
 	@Validation
-	private static ChecksTM checkClickReembolsos(boolean paisConSaldoCta, WebDriver driver) {
+	private ChecksTM checkClickReembolsos(boolean paisConSaldoCta) {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de reembolsos",
-			PageReembolsos.isPage(driver), State.Defect);		
+			pageReembolsos.isPage(), State.Defect);		
 		
 		int maxSecondsToWait = 5;
-		boolean isVisibleTransferenciaSection = PageReembolsos.isVisibleTransferenciaSectionUntil(maxSecondsToWait, driver);
-		boolean isVisibleStoreCreditSection = PageReembolsos.isVisibleStorecreditSection(driver);
+		boolean isVisibleTransferenciaSection = pageReembolsos.isVisibleTransferenciaSectionUntil(maxSecondsToWait);
+		boolean isVisibleStoreCreditSection = pageReembolsos.isVisibleStorecreditSection();
 		if (paisConSaldoCta) {
 			checks.add(
 				"El país SÍ tiene asociado Saldo en Cuenta -> Aparecen las secciones de \"Saldo en cuenta\" y \"Transferencia bancaria\"",
@@ -56,7 +46,6 @@ public class PageReembolsosSteps {
 				"El país NO tiene asociado Saldo en Cuenta -> Aparece la sección de \"Transferencia bancaria\" y no la de \"Saldo en cuenta\"",
 				isVisibleTransferenciaSection && !isVisibleStoreCreditSection, State.Defect);
 		}
-		
 		return checks;
 	}
 	
@@ -65,43 +54,37 @@ public class PageReembolsosSteps {
 	 * @param webdriver
 	 * @param saldoEsperado saldo que validaremos exista en el apartado de "Saldo en cuenta" de la página de configuración del reembolso
 	 */
-	public static void gotoRefundsFromMenuAndValidaSalCta(boolean paisConSaldoCta, float saldoCtaEsperado, AppEcom app, Channel channel, WebDriver driver) 
-	throws Exception {
-		PageReembolsosSteps.gotoRefundsFromMenu(paisConSaldoCta, app, channel, driver);
-		checkIsOkSaldoEnCuenta(saldoCtaEsperado, driver);
+	public void gotoRefundsFromMenuAndValidaSalCta(boolean paisConSaldoCta, float saldoCtaEsperado) throws Exception {
+		gotoRefundsFromMenu(paisConSaldoCta);
+		checkIsOkSaldoEnCuenta(saldoCtaEsperado);
 	}
 	
 	@Validation (
 		description="Aparece el saldo en cuenta que esperamos: <b>#{saldoCtaEsperado}</b>",
 		level=State.Defect)
-	private static boolean checkIsOkSaldoEnCuenta(float saldoCtaEsperado, WebDriver driver) {
-		float saldoCtaPage = PageReembolsos.getImporteStoreCredit(driver);
+	private boolean checkIsOkSaldoEnCuenta(float saldoCtaEsperado) {
+		float saldoCtaPage = pageReembolsos.getImporteStoreCredit();
 		return (saldoCtaEsperado==saldoCtaPage);
 	}
 
-	/**
-	 * Ejecuta los pasos necesarios para validar la configuración de los reembolsos mediante transferencia
-	 */
-	public static void testConfTransferencia(WebDriver driver) {
-		PageReembolsosSteps.selectRadioTransferencia(driver);		
-		PageReembolsosSteps.informaDatosTransAndSave(driver);
+	public void testConfTransferencia() {
+		selectRadioTransferencia();		
+		informaDatosTransAndSave();
 	}
 	
 	@Step (
 		description="<b>Transferencias:</b> seleccionamos el radio asociado", 
 		expected="Los campos de input se hacen visibles")
-	public static void selectRadioTransferencia(WebDriver driver) {	
-		PageReembolsos.clickRadio(TypeReembolso.Transferencia, driver); 
-		
-		//Validations
-		checkInputsVisiblesAfterClickTransferencia(driver);
+	public void selectRadioTransferencia() {	
+		pageReembolsos.clickRadio(TypeReembolso.TRANSFERENCIA); 
+		checkInputsVisiblesAfterClickTransferencia();
 	}
 	
 	@Validation (
 		description="Los campos de input Banco, Titular e IBAN se hacen visibles",
 		level=State.Defect)
-	private static boolean checkInputsVisiblesAfterClickTransferencia(WebDriver driver) {
-	   return (PageReembolsos.isVisibleInputsTransf(driver));
+	private boolean checkInputsVisiblesAfterClickTransferencia() {
+	   return pageReembolsos.isVisibleInputsTransf();
 	}
 	
 	static final String BANCO = "Banco de crédito Balear";
@@ -112,64 +95,63 @@ public class PageReembolsosSteps {
 	@Step (
 		description="Informar el banco: " + BANCO + "<br>titular: " + TITULAR + "<br>IBAN: " + IBAN + "<br>y pulsar el botón \"Save\"",
 		expected="La modificación de datos se realiza correctamente")
-	public static void informaDatosTransAndSave(WebDriver driver) {
-		PageReembolsos.typeInputsTransf(driver, BANCO, TITULAR, IBAN, ID_PASSPORT);
-		PageReembolsos.clickButtonSaveTransfForce(driver);
-		checkAfterModifyDataTransferencia(driver);
+	public void informaDatosTransAndSave() {
+		pageReembolsos.typeInputsTransf(BANCO, TITULAR, IBAN, ID_PASSPORT);
+		pageReembolsos.clickButtonSaveTransfForce();
+		checkAfterModifyDataTransferencia();
 	}
 
 	@Validation
-	private static ChecksTM checkAfterModifyDataTransferencia(WebDriver driver) {
+	private ChecksTM checkAfterModifyDataTransferencia() {
 		ChecksTM checks = ChecksTM.getNew();
 		int maxSecondsToWait = 15;
 		checks.add(
 			"Aparecen establecidos los datos de banco, titular e IBAN (lo esperamos hasta " + maxSecondsToWait + " segundos)",
-			PageReembolsos.isVisibleTextBancoUntil(maxSecondsToWait, driver) &&
-			PageReembolsos.isVisibleTextTitular(driver) &&
-			PageReembolsos.isVisibleTextIBAN(driver), State.Defect);
+			pageReembolsos.isVisibleTextBancoUntil(maxSecondsToWait) &&
+			pageReembolsos.isVisibleTextTitular() &&
+			pageReembolsos.isVisibleTextIBAN(), State.Defect);
+		
 		checks.add(
 			"Aparece seleccionado el radiobutton de \"Transferencia bancaria\"",
-			PageReembolsos.isCheckedRadio(TypeReembolso.Transferencia, driver), State.Warn);
+			pageReembolsos.isCheckedRadio(TypeReembolso.TRANSFERENCIA), State.Warn);
+		
 		return checks;
 	}
 	
 	@Step (
 		description="<b>Store Credit:</b> seleccionamos el radio asociado y ejecutamos un refresh de la página", 
 		expected="El checkbox de \"Store Credit\" acaba marcado")
-	public static void selectRadioSalCtaAndRefresh(WebDriver driver) {
-		PageReembolsos.clickRadio(TypeReembolso.StoreCredit, driver); 
-		
-		//Validaciones
-		checkAfterSelectStoreCredit(driver);
+	public void selectRadioSalCtaAndRefresh() {
+		pageReembolsos.clickRadio(TypeReembolso.STORE_CREDIT); 
+		checkAfterSelectStoreCredit();
 	}
 	
 	@Validation
-	private static ChecksTM checkAfterSelectStoreCredit(WebDriver driver) {
+	private ChecksTM checkAfterSelectStoreCredit() {
 		ChecksTM checks = ChecksTM.getNew();
 	   	checks.add(
 			"Aparece seleccionado el radiobutton de \"Store Credit\"",
-			PageReembolsos.isCheckedRadio(TypeReembolso.StoreCredit, driver), State.Warn);
+			pageReembolsos.isCheckedRadio(TypeReembolso.STORE_CREDIT), State.Warn);
+	   	
 	   	checks.add(
 			"Aparece un saldo >= 0",
-			PageReembolsos.getImporteStoreCredit(driver) >= 0, State.Defect);
+			pageReembolsos.getImporteStoreCredit()>=0, State.Defect);
+	   	
 	   	return checks;
 	}
 	
-	/**
-	 * En ocasiones (principalmente en el casdo del mock) existe un botón "Guardar" que hay que seleccionar para que se active el saldo en cuenta
-	 */
 	@Step (
 		description="<b>Store Credit:</b> Seleccionamos el botón \"Save\"", 
 		expected="Desaparece el botón \"Save\"")
-	public static void clickSaveButtonStoreCredit(WebDriver driver) {
-		PageReembolsos.clickSaveButtonStoreCredit(driver); 
-		checkButtonSaveDisappears(2, driver);
+	public void clickSaveButtonStoreCredit() {
+		pageReembolsos.clickSaveButtonStoreCredit(); 
+		checkButtonSaveDisappears(2);
 	}
 	
 	@Validation (
 		description="Desaparece el botón \"Save\" de Store Credit (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
-	private static boolean checkButtonSaveDisappears(int maxSeconds, WebDriver driver) {
-		return (!PageReembolsos.isVisibleSaveButtonStoreCreditUntil(maxSeconds, driver));
+	private boolean checkButtonSaveDisappears(int maxSeconds) {
+		return !pageReembolsos.isVisibleSaveButtonStoreCreditUntil(maxSeconds);
 	}
 }

@@ -1,16 +1,13 @@
 package com.mng.robotest.test.pageobject.shop.checkout.assist;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Pago;
-import com.mng.robotest.test.generic.UtilsMangoTest;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class PageAssist1rst extends PageBase {
 
@@ -87,7 +84,7 @@ public class PageAssist1rst extends PageBase {
 		}
 		
 		driver.findElement(By.xpath(XPATH_INPUT_TITULAR)).sendKeys(pago.getTitular());
-		UtilsMangoTest.findDisplayedElement(driver, By.xpath(XPATH_INPUT_CVC)).sendKeys(pago.getCvc());
+		getElementVisible(XPATH_INPUT_CVC).sendKeys(pago.getCvc());
 		waitForPageLoaded(driver);
 		
 		//Wait for button available
@@ -102,9 +99,9 @@ public class PageAssist1rst extends PageBase {
 		}
 	}
 
-	public void waitForBotonAvailable(int maxSecondsToWait) {
+	public void waitForBotonAvailable(int seconds) {
 		String xpathBoton = getXPathButtonPago();
-		new WebDriverWait(driver, maxSecondsToWait).until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathBoton)));
+		state(State.Present, xpathBoton).wait(seconds);
 	}
 	
 	public boolean invisibilityBotonPagoUntil(int maxSeconds) {

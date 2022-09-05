@@ -6,8 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -15,14 +13,13 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test.data.CodIdioma;
-import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.data.Constantes.ThreeState;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterCollection;
@@ -43,37 +40,21 @@ import com.mng.robotest.test.utils.checkmenus.DataScreenMenu;
 import com.mng.robotest.test.utils.checkmenus.Label;
 import com.mng.robotest.test.utils.checkmenus.MenuTraduc;
 
-public class SecMenusWrapperSteps {
+public class SecMenusWrapperSteps extends StepBase {
 
-	private final WebDriver driver = TestMaker.getDriverTestCase();
-	private final Channel channel;
-	private final AppEcom app;
-	private final Pais pais;
-	private final SecMenusUserSteps secMenusUserSteps;
-	private final SecMenuLateralMobilSteps secMenuLateralMobilSteps;
-	private final SecMenusDesktopSteps secMenusDesktopSteps;
-	private final SecMenusWrap secMenusWrap;
+	private final SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps();
+	private final SecMenuLateralMobilSteps secMenuLateralMobilSteps = new SecMenuLateralMobilSteps(channel, app);
+	private final SecMenusWrap secMenusWrap = new SecMenusWrap();
+	private final SecMenusDesktopSteps secMenusDesktopSteps = new SecMenusDesktopSteps();
 	
-	public SecMenusWrapperSteps(Channel channel, AppEcom app, Pais pais) {
-		this.channel = channel;
-		this.app = app;
-		this.pais = pais;
-		this.secMenusUserSteps = new SecMenusUserSteps();
-		this.secMenuLateralMobilSteps = new SecMenuLateralMobilSteps(channel, app);
-		this.secMenusDesktopSteps = new SecMenusDesktopSteps(pais, app, channel);
-		this.secMenusWrap = new SecMenusWrap();
-	}
-	
-	public static SecMenusWrapperSteps getNew(DataCtxShop dCtxSh) {
-		return new SecMenusWrapperSteps(dCtxSh.channel, dCtxSh.appE, dCtxSh.pais);
-	}
+	private final Pais pais = dataTest.pais;
 	
 	public SecMenusUserSteps getMenusUser() {
 		return this.secMenusUserSteps;
 	}
 	
 	@Validation
-	public ChecksTM validateLineas(Pais pais) throws Exception {
+	public ChecksTM validateLineas() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
 		LineaType[] lineasToTest = Linea.LineaType.values();
 		for (LineaType lineaType : lineasToTest) {
@@ -133,11 +114,11 @@ public class SecMenusWrapperSteps {
 	}
 	
 	@Validation
-	public ChecksTM checkLineaRebajas(boolean salesOnInCountry, DataCtxShop dCtxSh) {
+	public ChecksTM checkLineaRebajas(boolean salesOnInCountry) {
 		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 3;
 		boolean isPresentLinRebajas = secMenusWrap.isLineaPresentUntil(LineaType.rebajas, maxSeconds);
-		if (salesOnInCountry && dCtxSh.pais.isVentaOnline()) {
+		if (salesOnInCountry && pais.isVentaOnline()) {
 			checks.add(
 				PrefixRebajas + "Aparece la línea \"Rebajas\" (lo esperamos hasta " + maxSeconds + " segundos)",
 				isPresentLinRebajas, State.Defect);
@@ -183,10 +164,9 @@ public class SecMenusWrapperSteps {
 	@Step (
 		description="Seleccionar el menú <b>#{menu1rstLevel}</b>",
 		expected="Se obtiene el catálogo de artículos asociados al menú")
-	public void accesoMenuXRef(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
-		secMenusWrap.seleccionarMenuXHref(menu1rstLevel, dCtxSh.pais);
-		checkIsVisibleAarticle(dCtxSh, 5);
-		
+	public void accesoMenuXRef(Menu1rstLevel menu1rstLevel) throws Exception {
+		secMenusWrap.seleccionarMenuXHref(menu1rstLevel, pais);
+		checkIsVisibleAarticle(5);
 		GenericChecks.checkDefault(driver);
 		GenericChecks.from(Arrays.asList(GenericCheck.ImgsBroken)).checks(driver);
 	}
@@ -195,47 +175,47 @@ public class SecMenusWrapperSteps {
 		description="Como mínimo se obtiene 1 artículo (lo esperamos un máximo de #{maxSeconds} segundos)",
 		level=State.Warn,
 		store=StoreType.None)
-	private boolean checkIsVisibleAarticle(DataCtxShop dCtxSh, int maxSeconds) throws Exception {
-		PageGaleria pageGaleria = PageGaleria.getNew(dCtxSh.channel, dCtxSh.appE);
+	private boolean checkIsVisibleAarticle(int maxSeconds) throws Exception {
+		PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
 		return (pageGaleria.isVisibleArticuloUntil(1, maxSeconds));
 	}
 	
-	public void selectMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
-		if (dCtxSh.channel.isDevice()) {
-			secMenuLateralMobilSteps.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh.pais);
+	public void selectMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel) throws Exception {
+		if (channel.isDevice()) {
+			secMenuLateralMobilSteps.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, pais);
 		} else {	
-			secMenusDesktopSteps.selectMenuSuperiorTypeCatalog(menu1rstLevel, dCtxSh);
+			secMenusDesktopSteps.selectMenuSuperiorTypeCatalog(menu1rstLevel);
 		}
 	}
-	public boolean checkExistMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
-		if (dCtxSh.channel.isDevice()) {
-			return secMenuLateralMobilSteps.checkNotExistsMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh.pais);
+	public boolean checkExistMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel) throws Exception {
+		if (channel.isDevice()) {
+			return secMenuLateralMobilSteps.checkNotExistsMenuLateral1rstLevelTypeCatalog(menu1rstLevel, pais);
 		} else {	
 			return secMenusDesktopSteps.checkNotExistsMenuSuperiorTypeCatalog(menu1rstLevel);
 		}
 	}
 	
-	public void selectMenuLateral1erLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
-		if (dCtxSh.channel.isDevice()) {
-			secMenuLateralMobilSteps.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh.pais); 
+	public void selectMenuLateral1erLevelTypeCatalog(Menu1rstLevel menu1rstLevel) throws Exception {
+		if (channel.isDevice()) {
+			secMenuLateralMobilSteps.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, pais); 
 		} else {
-			secMenusDesktopSteps.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh);		
+			secMenusDesktopSteps.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel);		
 		}
 	}
 	
-	public void selectMenu2onLevel(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh) throws Exception {
-		if (dCtxSh.channel.isDevice()) {
-			SecFiltrosSteps.selectFiltroMenus(app, channel, Arrays.asList(menu2onLevel), driver);
+	public void selectMenu2onLevel(Menu2onLevel menu2onLevel) throws Exception {
+		if (channel.isDevice()) {
+			new SecFiltrosSteps().selectFiltroMenus(Arrays.asList(menu2onLevel));
 		} else {
-			secMenusDesktopSteps.selectMenu2oLevel(menu2onLevel, dCtxSh);
+			secMenusDesktopSteps.selectMenu2oLevel(menu2onLevel);
 		}
 	}
 	
-	public void seleccionLinea(LineaType lineaType, SublineaType sublineaType, DataCtxShop dCtxSh) throws Exception {
+	public void seleccionLinea(LineaType lineaType, SublineaType sublineaType) throws Exception {
 		if (sublineaType==null) {
 			seleccionLinea(lineaType);
 		} else {
-			seleccionSublinea(lineaType, sublineaType, dCtxSh);
+			seleccionSublinea(lineaType, sublineaType);
 		}
 	}
 	
@@ -247,9 +227,8 @@ public class SecMenusWrapperSteps {
 		}
 	}
 	
-	public void seleccionSublinea(LineaType lineaType, SublineaType sublineaType, DataCtxShop dCtxSh)
-	throws Exception {
-		if (dCtxSh.channel.isDevice()) {
+	public void seleccionSublinea(LineaType lineaType, SublineaType sublineaType) throws Exception {
+		if (channel.isDevice()) {
 			secMenuLateralMobilSteps.seleccionSublineaNinos(lineaType, sublineaType, pais);
 		} else {
 			secMenusDesktopSteps.seleccionSublinea(lineaType, sublineaType);
@@ -270,7 +249,7 @@ public class SecMenusWrapperSteps {
 		SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(channel, app, driver);
 		filtrosCollection.click(typeMenu);
 		if (channel==Channel.desktop) {
-			PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(channel, app, driver);
+			PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
 			if (typeMenu == FilterCollection.sale) {
 				pageGaleriaSteps.validaArticlesOfTemporadas(typeMenu.getListTempArticles());
 				pageGaleriaSteps.validaNotArticlesOfTypeDesktop(TypeArticle.norebajado, State.Warn, StoreType.Evidences);

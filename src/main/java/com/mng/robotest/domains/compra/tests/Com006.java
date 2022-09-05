@@ -5,7 +5,7 @@ import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.utils.PaisGetter;
@@ -16,7 +16,7 @@ public class Com006 extends TestBase {
 	private static final Pais ITALIA = PaisGetter.get(PaisShop.ITALIA);
 	private static final IdiomaPais ITALIANO = ITALIA.getListIdiomas().get(0);
 	
-	private final DataCtxPago dataPago;
+	private final DataPago dataPago;
 	
 	public Com006() throws Exception {
 		dataTest.pais=ITALIA;
@@ -26,7 +26,7 @@ public class Com006 extends TestBase {
 				.checkMisCompras()
 				.emaiExists().build();
 		
-		dataPago = new DataCtxPago(dataTest, configCheckout);
+		dataPago = new DataPago(configCheckout);
 	}
 	
 	@Override
@@ -36,7 +36,7 @@ public class Com006 extends TestBase {
 	}
 
 	private void fromPrehomeToCheckout() throws Exception {
-		new BuilderCheckout(dataTest, dataPago)
+		new BuilderCheckout(dataPago)
 			.build()
 			.checkout(From.PREHOME);
 	}

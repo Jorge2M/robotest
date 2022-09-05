@@ -22,22 +22,16 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 
 public class PagePrehomeSteps extends StepBase {
 	
-	private final Pais pais;
-	private final IdiomaPais idioma;
+	private final Pais pais = dataTest.pais;
+	private final IdiomaPais idioma = dataTest.idioma;
 	
-	private final PagePrehome pagePrehome;
-	
-	public PagePrehomeSteps(Pais pais, IdiomaPais idioma) {
-		this.pais = pais;
-		this.idioma = idioma;
-		this.pagePrehome = new PagePrehome(pais, idioma);
-	}
+	private final PagePrehome pagePrehome = new PagePrehome();
 	
 	@Step (
-		description="Acceder a la página de inicio y seleccionar el país <b>#{dCtxSh.getNombrePais()}</b>",
+		description="Acceder a la página de inicio y seleccionar el país <b>#{dataTest.getNombrePais()}</b>",
 		expected="Se selecciona el país/idioma correctamente")
 	public void seleccionPaisIdioma() throws Exception {
-		AccesoNavigations.goToInitURL(driver);
+		new AccesoNavigations().goToInitURL();
 		new PageJCAS().identJCASifExists();
 		pagePrehome.selecionPais();
 		checkPaisSelected();

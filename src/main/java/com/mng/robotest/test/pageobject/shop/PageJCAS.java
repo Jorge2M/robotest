@@ -1,7 +1,6 @@
 package com.mng.robotest.test.pageobject.shop;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
@@ -9,7 +8,6 @@ import com.mng.robotest.test.utils.awssecrets.Secret;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class PageJCAS extends PageBase {
 	

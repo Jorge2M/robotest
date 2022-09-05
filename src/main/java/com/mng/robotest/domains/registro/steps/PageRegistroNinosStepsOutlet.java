@@ -5,15 +5,10 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
-import java.util.Arrays;
-
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroNinosOutlet;
 import com.mng.robotest.domains.registro.beans.ListDataNinos;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
-
 
 public class PageRegistroNinosStepsOutlet extends StepBase {
 	
@@ -35,10 +30,10 @@ public class PageRegistroNinosStepsOutlet extends StepBase {
 	@Step (
 		description="Introducir datos de los niños: <br>#{listaNinos.getFormattedHTMLData()}<br> y finalmente pulsar el botón \"Continuar\"", 
 		expected="Aparece la página de introducción de datos de la dirección")
-	public void sendNinoDataAndContinue(ListDataNinos listaNinos, Pais pais) {
+	public void sendNinoDataAndContinue(ListDataNinos listaNinos) {
 		pageRegistroNinos.setDataNinoIfNotExists(listaNinos, 2);
 		pageRegistroNinos.clickContinuar();
-		new PageRegistroDirecStepsOutlet().isPageFromPais(pais);
+		new PageRegistroDirecStepsOutlet().isPageFromPais();
 		GenericChecks.checkDefault(driver);
 	}
 }

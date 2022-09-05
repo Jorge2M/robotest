@@ -607,22 +607,21 @@ public class PageGaleriaDesktop extends PageGaleria {
 
 	public void selectTallaArticleNotAvalaible() {
 		String xpathTallaNoDipo = secTallas.getXPathArticleTallaNotAvailable();
-		By byTallaToSelect = By.xpath(xpathTallaNoDipo);
-		click(byTallaToSelect).exec();
+		click(xpathTallaNoDipo).exec();
 	}
 
 	public boolean isVisibleAnyArticle() {
-		return (state(Visible, By.xpath(xpathArticuloBase)).check());
+		return (state(Visible, xpathArticuloBase).check());
 	}
 
 	public void clickArticulo(int numArticulo) {
-		By byArticulo = By.xpath(getXPathLinkArticulo(numArticulo));
-		click(byArticulo).exec();
+		String xpathArticulo = getXPathLinkArticulo(numArticulo);
+		click(xpathArticulo).exec();
 		
 		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
-		if (state(Visible, byArticulo).check()) {
+		if (state(Visible, xpathArticulo).check()) {
 			try {
-				click(byArticulo).type(javascript).exec();
+				click(xpathArticulo).type(javascript).exec();
 			}
 			catch (Exception e) {
 				//Hay un caso en el que el artículo justo desaparece y se clicka -> 

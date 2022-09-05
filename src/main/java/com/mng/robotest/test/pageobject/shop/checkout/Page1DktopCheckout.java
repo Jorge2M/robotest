@@ -146,7 +146,6 @@ public class Page1DktopCheckout extends PageBase {
 		return (xpathMethod + XPATH_RADIO_TRJ_GUARDADA);
 	}
 
-	@SuppressWarnings("static-access")
 	public boolean isVisibleBloquePagoNoTRJIntegradaUntil(Pago pago, int maxSeconds) {
 		switch (pago.getTypePago()) {
 		case TMango:
@@ -154,7 +153,7 @@ public class Page1DktopCheckout extends PageBase {
 		case Billpay:
 			return (secBillpay.isVisibleUntil(maxSeconds));
 		default:
-			String nameExpected = pago.getNombreInCheckout(Channel.desktop, app).toLowerCase();
+			String nameExpected = pago.getNombreInCheckout(channel, app).toLowerCase();
 			return (
 				state(Visible, By.xpath(XPATH_BLOQUES_PAGO_POSIBLES), driver).wait(maxSeconds).check() &&
 				driver.findElement(By.xpath(XPATH_BLOQUES_PAGO_POSIBLES)).getAttribute("innerHTML").toLowerCase().contains(nameExpected)

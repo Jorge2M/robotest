@@ -17,7 +17,7 @@ public class ArticuloScreen {
 	Talla talla;
 	String precio = "";
 	String precioSinDesc = "";
-	ValePais valePais=null;
+	ValeDiscount valePais=null;
 
 	int numero = 1;
 
@@ -99,11 +99,11 @@ public class ArticuloScreen {
 		this.numero = numero;
 	}
 	
-	public ValePais getValePais() {
+	public ValeDiscount getValePais() {
 		return this.valePais;
 	}
 	
-	public void setVale(ValePais vale) {
+	public void setVale(ValeDiscount vale) {
 		this.valePais = vale;
 	}
 	

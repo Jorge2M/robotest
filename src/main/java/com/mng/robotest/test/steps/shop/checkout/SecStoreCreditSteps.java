@@ -1,69 +1,55 @@
 package com.mng.robotest.test.steps.shop.checkout;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test.pageobject.shop.checkout.SecStoreCredit;
 import com.mng.robotest.test.utils.ImporteScreen; 
 
-@SuppressWarnings({"static-access"})
-public class SecStoreCreditSteps { 
+public class SecStoreCreditSteps extends StepBase { 
 	
-	private final SecStoreCredit secStoreCredit;
-	private final Channel channel;
-	private final AppEcom app;
-	private final WebDriver driver;
+	private final SecStoreCredit secStoreCredit = new SecStoreCredit();
 	
-	public SecStoreCreditSteps(Channel channel, AppEcom app, WebDriver driver) {
-		this.secStoreCredit = new SecStoreCredit();
-		this.channel = channel;
-		this.app = app;
-		this.driver = driver;
-	}
-	
-	static final String tagNombrePago = "@TagNombrePago";
+	private static final String TAG_NOMBRE_PAGO = "@TagNombrePago";
 	@Step (
 		description="Revisamos el bloque de \"Saldo en cuenta\"", 
-		expected="Sólo aparece el método de pago " + tagNombrePago)
-	public void validateInitialStateOk(DataCtxPago dCtxPago) throws Exception {
-		String nombrePago = dCtxPago.getDataPedido().getPago().getNombre(channel, app);
-		TestMaker.getCurrentStepInExecution().replaceInExpected(tagNombrePago, nombrePago);
+		expected="Sólo aparece el método de pago " + TAG_NOMBRE_PAGO)
+	public void validateInitialStateOk(DataPago dataPago) throws Exception {
+		String nombrePago = dataPago.getDataPedido().getPago().getNombre(channel, app);
+		TestMaker.getCurrentStepInExecution().replaceInExpected(TAG_NOMBRE_PAGO, nombrePago);
 		
-		dCtxPago.getDataPedido().setImporteTotal(
+		dataPago.getDataPedido().setImporteTotal(
 				new PageCheckoutWrapper(channel, app).getPrecioTotalFromResumen());
 		
-		validaBloqueSaldoEnCuenta(true, dCtxPago);
+		validaBloqueSaldoEnCuenta(true, dataPago);
 	}
 
 	@Step (
 		description="Seleccionamos el bloque de \"Saldo en cuenta\"", 
 		expected="El marcado o desmarcado es correcto")
-	public void selectSaldoEnCuentaBlock(Pais pais, DataCtxPago dCtxPago, AppEcom app) throws Exception {
+	public void selectSaldoEnCuentaBlock(Pais pais, DataPago dataPago) throws Exception {
 		boolean marcadoInicialmente = secStoreCredit.isChecked();
 		secStoreCredit.selectSaldoEnCuenta();
 		
-		PageCheckoutWrapperSteps pageCheckoutWrapperSteps = new PageCheckoutWrapperSteps(channel, app);
+		PageCheckoutWrapperSteps pageCheckoutWrapperSteps = new PageCheckoutWrapperSteps();
 		PageCheckoutWrapper pageCheckoutWrapper = pageCheckoutWrapperSteps.getPageCheckoutWrapper();
 		pageCheckoutWrapperSteps.validateLoadingDisappears(5);
-		validaBloqueSaldoEnCuenta(!marcadoInicialmente, dCtxPago);
+		validaBloqueSaldoEnCuenta(!marcadoInicialmente, dataPago);
 		if (marcadoInicialmente) {
-			boolean isEmpl = dCtxPago.getFTCkout().userIsEmployee;
+			boolean isEmpl = dataPago.getFTCkout().userIsEmployee;
 			pageCheckoutWrapperSteps.validaMetodosPagoDisponibles(pais, isEmpl);
-			dCtxPago.getDataPedido().setImporteTotalSinSaldoCta(
+			dataPago.getDataPedido().setImporteTotalSinSaldoCta(
 					pageCheckoutWrapper.getPrecioTotalSinSaldoEnCuenta());
 		} else {
 			checkAfterMarkSaldoEnCuenta(pais, pageCheckoutWrapper);
 			if (channel.isDevice()) {
-				dCtxPago.getDataPedido().setImporteTotalSinSaldoCta(
+				dataPago.getDataPedido().setImporteTotalSinSaldoCta(
 						pageCheckoutWrapper.getPrecioTotalSinSaldoEnCuenta());
 			}
 		}
@@ -78,7 +64,7 @@ public class SecStoreCreditSteps {
 	}
    
 	@Validation
-	public ChecksTM validaBloqueSaldoEnCuenta(boolean checkedSaldoEnCta, DataCtxPago dCtxPago) throws Exception {
+	public ChecksTM validaBloqueSaldoEnCuenta(boolean checkedSaldoEnCta, DataPago dataPago) throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
 	  	checks.add(
 			"Es visible el bloque correspondiente al pago mediante \"Saldo en cuenta\"",
@@ -103,7 +89,7 @@ public class SecStoreCreditSteps {
 				impFloat==0.0, State.Warn);
 	  	}
 
-		float saldoCta = dCtxPago.getSaldoCta();
+		float saldoCta = dataPago.getSaldoCta();
 	  	checks.add(
 			"Figura un saldo en cuenta de: " + saldoCta,
 			secStoreCredit.getImporte()==saldoCta, State.Warn);

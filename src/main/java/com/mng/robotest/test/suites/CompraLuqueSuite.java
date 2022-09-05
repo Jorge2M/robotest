@@ -8,8 +8,7 @@ import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.ErrorStorer;
-import com.mng.robotest.test.appshop.CompraEgoitz;
-import com.mng.robotest.test.appshop.CompraLuque;
+import com.mng.robotest.test.appshop.compraluque.CompraLuque;
 import com.github.jorge2m.testmaker.domain.SuiteMaker;
 import com.github.jorge2m.testmaker.domain.TestRunMaker;
 
@@ -28,8 +27,6 @@ public class CompraLuqueSuite extends SuiteMaker {
 	}
 
 	private static List<Class<?>> getClasses() {
-		return Arrays.asList(
-			CompraLuque.class,
-			CompraEgoitz.class);
+		return Arrays.asList(CompraLuque.class);
 	}
 }

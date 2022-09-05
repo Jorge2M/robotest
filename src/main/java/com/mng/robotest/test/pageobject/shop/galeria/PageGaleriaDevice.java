@@ -12,6 +12,7 @@ import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticleDesktop;
+import com.mng.robotest.test.pageobject.shop.galeria.SecPreciosArticulo.TipoPrecio;
 import com.github.jorge2m.testmaker.conf.Channel;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -30,16 +31,16 @@ public class PageGaleriaDevice extends PageGaleria {
 			  "@id[contains(.,'product-image')])]";
 	private static final String XPATH_IMG_COD_COLOR_WITH_TAG_COLOR = 
 		"//div[@class[contains(.,'color-container')] and @id='" + TAG_ID_COLOR + "']/img";
-	private static final String XPATH_PRECIO_REBAJADO_RELATIVE_ARTICLE = 
-		"//*[@class[contains(.,'product-list-sale-price')] or " + 
-			"@class[contains(.,'product-list-info-price-sale')] or " + 
-			"@class[contains(.,'product-price-crossed')]]";
-	private static final String XPATH_PRECIO_ORIGINAL_RELATIVE_ARTICLE = 
-		"//*[@class[contains(.,'productList__price')] or " + 
-			"@class[contains(.,'productList__salePrice')] or " + 
-			"@class[contains(.,'product-list-info-price')] or " + 
-			"@class[contains(.,'product-list-price')] or " +
-			"@class[contains(.,'product-price')]]";
+//	private static final String XPATH_PRECIO_REBAJADO_RELATIVE_ARTICLE = 
+//		"//*[@class[contains(.,'product-list-sale-price')] or " + 
+//			"@class[contains(.,'product-list-info-price-sale')] or " + 
+//			"@class[contains(.,'product-price-crossed')]]";
+//	private static final String XPATH_PRECIO_ORIGINAL_RELATIVE_ARTICLE = 
+//		"//*[@class[contains(.,'productList__price')] or " + 
+//			"@class[contains(.,'productList__salePrice')] or " + 
+//			"@class[contains(.,'product-list-info-price')] or " + 
+//			"@class[contains(.,'product-list-price')] or " +
+//			"@class[contains(.,'product-price')]]";
 	private static final String XPATH_BUTTON_ANYADIR_RELATIVE_ARTICLE = "//div[@class[contains(.,'product-add')]]/button";
 	private static final String XPATH_CAPA_TALLAS_RELATIVE_ARTICLE = "//div[@class[contains(.,'product-sizes-container')]]";
 	private static final String XPATH_ICONO_GALERY_MOBILE = "//div[@class[contains(.,'scroll-container--visible')]]";
@@ -197,15 +198,16 @@ public class PageGaleriaDevice extends PageGaleria {
 	@Override
 	public String getPrecioArticulo(WebElement articulo) {
 		if (isArticleRebajado(articulo)) {
-			return (articulo.findElement(By.xpath("." + XPATH_PRECIO_REBAJADO_RELATIVE_ARTICLE)).getText());	
+			//return (articulo.findElement(By.xpath("." + XPATH_PRECIO_REBAJADO_RELATIVE_ARTICLE)).getText());
+			return articulo.findElement(By.xpath("." + TipoPrecio.PRECIO_REBAJADO_DEFINITIVO.getXPath())).getText();
 		}
-		return (articulo.findElement(By.xpath("." + XPATH_PRECIO_ORIGINAL_RELATIVE_ARTICLE)).getText());
+		return articulo.findElement(By.xpath("." + TipoPrecio.PRECIO_NO_REBAJADO_DEFINITIVO.getXPath())).getText();
 	}	
 	
 	@Override
 	public boolean isArticleRebajado(WebElement articulo) {
 		return (state(Present, articulo)
-				.by(By.xpath("." + XPATH_PRECIO_REBAJADO_RELATIVE_ARTICLE)).check());
+				.by(By.xpath("." + TipoPrecio.PRECIO_INICIAL_TACHADO.getXPath())).check());
 	}
 	
 	@Override

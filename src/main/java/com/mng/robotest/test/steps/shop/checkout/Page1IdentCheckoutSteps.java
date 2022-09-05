@@ -4,7 +4,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.DataCtxShop;
+import com.mng.robotest.test.data.DataTest;
 
 
 public class Page1IdentCheckoutSteps extends StepBase {
@@ -25,7 +25,7 @@ public class Page1IdentCheckoutSteps extends StepBase {
 		secSoyNuevoSteps.inputEmailAndContinue(email, emailExistsYet, userRegistered, pais);
 	}
 	
-	public void validaRGPDText(DataCtxShop dataTest) {
-		secSoyNuevoSteps.validaRGPDText(dataTest); 
+	public void validaRGPDText() {
+		secSoyNuevoSteps.validaRGPDText(); 
 	}
 }

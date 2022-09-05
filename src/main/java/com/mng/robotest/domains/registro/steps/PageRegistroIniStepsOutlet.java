@@ -13,15 +13,14 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroIniOutlet;
 import com.mng.robotest.domains.registro.beans.DataRegistro;
 import com.mng.robotest.domains.registro.beans.ListDataRegistro;
-import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.utils.UtilsTest;
 
-
 public class PageRegistroIniStepsOutlet extends StepBase {
 	
 	private final PageRegistroIniOutlet pageRegistroIni = new PageRegistroIniOutlet();
+	private final Pais pais = dataTest.pais;
 	
 	@Validation (
 		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{maxSeconds} segundos)",
@@ -39,10 +38,10 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 			"  - El resto de datos específicos para el país \"#{pais.getNombre_pais()}\"", 
 		expected=
 			"No aparece ningún mensaje de dato incorrecto")
-	public Map<String,String> sendDataAccordingCountryToInputs(Pais pais, String emailNonExistent, boolean clickPubli) 
+	public Map<String,String> sendDataAccordingCountryToInputs(String emailNonExistent, boolean clickPubli) 
 			throws Exception {
 		Map<String,String> dataSended = new HashMap<>();
-		dataSended = pageRegistroIni.sendDataAccordingCountryToInputs(pais, emailNonExistent, clickPubli, channel);
+		dataSended = pageRegistroIni.sendDataAccordingCountryToInputs(emailNonExistent, clickPubli, channel);
 		validateNotAreErrorMessageInCorrectFields();
 		return dataSended;
 	}
@@ -87,27 +86,25 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 		UsrNoExistsInGmail
 	}
 	
-	public void clickRegistrateButton(Pais paisRegistro, Map<String,String> dataRegistro) {
-		clickRegistrateButton(paisRegistro, dataRegistro, ErrorRegister.None);
+	public void clickRegistrateButton(Map<String,String> dataRegistro) {
+		clickRegistrateButton(dataRegistro, ErrorRegister.None);
 	}
 	
 	@Step (
 		description="Seleccionar el botón <b>Regístrate</b>")
-	public void clickRegistrateButton(
-			Pais paisRegistro, Map<String,String> dataRegistro, ErrorRegister errorExpected) {
+	public void clickRegistrateButton(Map<String,String> dataRegistro, ErrorRegister errorExpected) {
 		pageRegistroIni.clickButtonRegistrate();
 		PageBase.waitMillis(1000);
 		validaIsInvisibleCapaLoading(15);
 		
 		switch (errorExpected) {
 		case None:
-			new PageRegistroSegundaStepsOutlet()
-				.validaIsPageRegistroOK(paisRegistro, dataRegistro);
+			new PageRegistroSegundaStepsOutlet().validaIsPageRegistroOK(dataRegistro);
 			break;
 		case InputWarnings:
 			int numInputsObligatoriosNoInf = pageRegistroIni.getNumInputsObligatoriosNoInformados();
 			if (numInputsObligatoriosNoInf > 0) {
-				validateAreInputsWithErrorMessageAssociated(numInputsObligatoriosNoInf, paisRegistro);  
+				validateAreInputsWithErrorMessageAssociated(numInputsObligatoriosNoInf);  
 			}
 			break;
 		case UsrExistsInMango:
@@ -142,7 +139,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	}
 	
 	@Validation
-	public ChecksTM validateAreInputsWithErrorMessageAssociated(int numInputsObligatoriosNoInf, Pais pais) {
+	public ChecksTM validateAreInputsWithErrorMessageAssociated(int numInputsObligatoriosNoInf) {
 		ChecksTM checks = ChecksTM.getNew();
 		int numInputsTypePassrod = pageRegistroIni.getNumberInputsTypePassword();
 		int numErrCampObligatorio = pageRegistroIni.getNumberMsgCampoObligatorio();
@@ -165,12 +162,12 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 		"1) El mensaje de NewsLetter no aparece o si aparece no contiene el símbolo de porcentaje",
 		level=State.Info,
 		store=StoreType.None)
-	public boolean validaRebajasJun2018(IdiomaPais idioma) {
-		String percentageSymbol = UtilsTest.getPercentageSymbol(idioma);
+	public boolean validaRebajasJun2018() {
+		String percentageSymbol = UtilsTest.getPercentageSymbol(dataTest.idioma);
 		return (!pageRegistroIni.newsLetterTitleContains(percentageSymbol));	   
 	}
 
-	public void validaIsRGPDVisible(Pais pais) {
+	public void validaIsRGPDVisible() {
 		if (pais.getRgpd().equals("S")) {
 			validateRGPD_inCountryWithRgpd(pais.getCodigo_alf());
 		} else {

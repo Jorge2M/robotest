@@ -6,7 +6,6 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Linea.LineaType;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.Menu;
 import com.mng.robotest.test.getdata.products.GetterProducts.MethodGetter;
@@ -20,8 +19,8 @@ public class GetProductsSteps extends StepBase {
 			"con personalización", 
 		expected=
 			"Aparece el flag de personalización en mínimo 2 y máximo 4 productos")
-	public void callProductListService(LineaType linea, Pais pais, String seccion, String galeria, String familia) throws Exception {
-		GetterProducts getterProducts = new GetterProducts.Builder(pais.getCodigo_alf(), app, driver)
+	public void callProductListService(LineaType linea, String seccion, String galeria, String familia) throws Exception {
+		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.pais.getCodigo_alf(), app, driver)
 			.method(MethodGetter.WebDriver)
 			.linea(LineaType.she)
 			.menu(Menu.Vaqueros)

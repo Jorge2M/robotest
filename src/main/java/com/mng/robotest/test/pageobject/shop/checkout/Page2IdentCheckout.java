@@ -8,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
@@ -20,7 +19,6 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.factoryes.entities.EgyptCity;
-import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.pageobject.shop.PopupFindAddress;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
@@ -29,7 +27,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class Page2IdentCheckout extends PageBase {
 
-	private final Pais pais;
+	private final Pais pais = dataTest.pais;
 	private final EgyptCity egyptCity;
 	
 	private static final String VALUE = "value";
@@ -64,13 +62,11 @@ public class Page2IdentCheckout extends PageBase {
 	//Con el substring simulamos un ends-with (que no está disponible en xpath 1.0)
 	private static final String XPATH_SELECT_LOCALIDADES = "//select[substring(@id, string-length(@id) - string-length('localidades') +1) = 'localidades']";
 
-	public Page2IdentCheckout(Pais pais) {
-		this.pais = pais;
+	public Page2IdentCheckout() {
 		this.egyptCity = null;
 	}
 	
-	public Page2IdentCheckout(Pais pais, EgyptCity egyptCity) {
-		this.pais = pais;
+	public Page2IdentCheckout(EgyptCity egyptCity) {
 		this.egyptCity = egyptCity;
 	}
 	
@@ -97,7 +93,7 @@ public class Page2IdentCheckout extends PageBase {
 	private boolean setInputIfVisible(String xpathInput, String valueToSet) {
 		boolean datoSeteado = false;
 		try {
-			List<WebElement> cfElementList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(xpathInput));
+			List<WebElement> cfElementList = getElementsVisible(xpathInput);			
 			if (!cfElementList.isEmpty()) {
 				String cfElementReadonly = cfElementList.get(0).getAttribute("readonly");
 				if (cfElementReadonly == null || cfElementReadonly.compareTo("true")!=0) {
@@ -205,7 +201,7 @@ public class Page2IdentCheckout extends PageBase {
 	public boolean setCodPostalIfExistsAndWait(String codPostal) {
 		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_CODPOST, codPostal);
 		if (datoSeteado) {			
-			List<WebElement> cfCodpostalList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_INPUT_CODPOST));
+			List<WebElement> cfCodpostalList = getElementsVisible(XPATH_INPUT_CODPOST);
 			if (!cfCodpostalList.isEmpty() &&
 				//Si existe el tag 'onkeyup' (se desencadena petición Ajax) tenemos que esperaremos un máximo de 2 segundos hasta que aparezca el desplegable con las poblaciones
 				cfCodpostalList.get(0).getAttribute("onkeyup")!=null && 
@@ -231,7 +227,7 @@ public class Page2IdentCheckout extends PageBase {
 		String emailRegistro = email;
 		
 		// Revisamos si está visible el campo de input
-		List<WebElement> cfEmailList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_INPUT_EMAIL));
+		List<WebElement> cfEmailList = getElementsVisible(XPATH_INPUT_EMAIL);
 		if (!cfEmailList.isEmpty()) {
 			//Revisamos si está protegido el campo de input
 			String cfMailStatus = cfEmailList.get(0).getAttribute("disabled");
@@ -257,7 +253,7 @@ public class Page2IdentCheckout extends PageBase {
 
 	public boolean setPaisIfVisibleAndNotSelected() {
 		boolean datoSeteado = false;
-		List<WebElement> paisCf = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_SELECT_PAIS));
+		List<WebElement> paisCf = getElementsVisible(XPATH_SELECT_PAIS);
 		if (!paisCf.isEmpty()) {
 			String xpathSelectedPais = XPATH_SELECT_PAIS + "/option[@selected='selected' and @value='" + pais.getAddress() + "']";
 			if (state(Present, By.xpath(xpathSelectedPais)).check()) {
@@ -341,7 +337,7 @@ public class Page2IdentCheckout extends PageBase {
 		//Tenemos problemas aleatorios de StaleElementReferenceException con este elemento
 		//Probamos hasta 3 veces mientras que obtengamos la Excepción
 		while (staleElement && i<3 && "".compareTo(datoSeteado)==0) {
-			List<WebElement> localidadesList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_SELECT_LOCALIDADES));
+			List<WebElement> localidadesList = getElementsVisible(XPATH_SELECT_LOCALIDADES);
 			if (!localidadesList.isEmpty()) {
 				try {
 					new Select(localidadesList.get(0)).selectByIndex(posInSelect);
@@ -375,7 +371,7 @@ public class Page2IdentCheckout extends PageBase {
 	
 	public String setSelectProv1PaisIfVisible(Channel channel) {
 		String datoSeteado = "";
-		WebElement provinciaPais = UtilsMangoTest.findElementPriorizingDisplayed(driver, By.xpath(XPATH_SELECT_PROV_PAIS));
+		WebElement provinciaPais = getElementPriorizingDisplayed(XPATH_SELECT_PROV_PAIS);
 		if (provinciaPais!=null) {
 			switch (PaisShop.getPais(pais)) {
 			case UKRAINE:
@@ -421,7 +417,7 @@ public class Page2IdentCheckout extends PageBase {
 		boolean staleElement = true;
 		int i=0;
 		while (staleElement && i<3) {
-			List<WebElement> estadosPaisList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_SELECT_ESTADOS_PAIS));
+			List<WebElement> estadosPaisList = getElementsVisible(XPATH_SELECT_ESTADOS_PAIS);
 			if (!estadosPaisList.isEmpty()) {
 				try {
 					Select select = new Select(estadosPaisList.get(0));
@@ -455,7 +451,7 @@ public class Page2IdentCheckout extends PageBase {
 	
 	public String setSeletEstadoEspanya(String provincia) throws InterruptedException {
 		waitForPageLoaded(driver);
-		WebElement provinciaPais = UtilsMangoTest.findElementPriorizingDisplayed(driver, By.xpath(XPATH_SELECT_ESTADOS_PAIS));
+		WebElement provinciaPais = getElementPriorizingDisplayed(XPATH_SELECT_ESTADOS_PAIS);
 		if (provinciaPais!=null) {
 			String selected = new Select(provinciaPais).getFirstSelectedOption().getText();
 			if (selected.compareTo(provincia)!=0) {
@@ -503,7 +499,7 @@ public class Page2IdentCheckout extends PageBase {
 		boolean staleElement = true;
 		int i=0;
 		while (staleElement && i<3) {
-			List<WebElement> localidadesList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(xpathSelect));
+			List<WebElement> localidadesList = getElementsVisible(xpathSelect);
 			if (localidadesList.size() > 0) {
 				try {
 					datoSeteado = selectLocalidad(localidadesList.get(0), posInSelect);
@@ -564,7 +560,7 @@ public class Page2IdentCheckout extends PageBase {
 	
 	public boolean setCheckHombreIfVisible() {
 		boolean datoSeteado = false;
-		List<WebElement> cfGener_HList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_CHECK_HOMBRE));
+		List<WebElement> cfGener_HList = getElementsVisible(XPATH_CHECK_HOMBRE);
 		if (cfGener_HList.size() > 0) {
 			cfGener_HList.get(0).click();
 		}		
@@ -581,7 +577,7 @@ public class Page2IdentCheckout extends PageBase {
 	
 	public boolean setCheckCondicionesIfVisible() {
 		boolean datoSeteado = false;
-		List<WebElement> cfPriv = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPATH_CHECK_CONDICIONES + "/../../div[@class='checkbox__image']"));
+		List<WebElement> cfPriv = getElementsVisible(XPATH_CHECK_CONDICIONES + "/../../div[@class='checkbox__image']");
 		if (cfPriv.size() > 0) { //Revisamos si el check NO está marcado 
 			driver.findElement(By.xpath(XPATH_CHECK_CONDICIONES)).click();
 			datoSeteado = true;

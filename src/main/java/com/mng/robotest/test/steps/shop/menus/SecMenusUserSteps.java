@@ -13,12 +13,14 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.domains.loyalty.steps.PageHomeLikesSteps;
+import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroIniOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroIniStepsOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.data.DataCtxShop;
+import com.mng.robotest.test.beans.IdiomaPais;
+import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.pageobject.shop.identificacion.PageIdentificacion;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
@@ -26,7 +28,6 @@ import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper.LoyaltyData;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.steps.shop.micuenta.PageMiCuentaSteps;
 import com.mng.robotest.test.steps.shop.modales.ModalCambioPaisSteps;
 
 public class SecMenusUserSteps extends StepBase {
@@ -46,7 +47,7 @@ public class SecMenusUserSteps extends StepBase {
 		description="Seleccionar el menú de usuario \"Regístrate\" y la pestaña \"Regístrate\"", 
 		expected="Aparece al página inicial del registro",
 		saveHtmlPage=SaveWhen.Always)
-	public void selectRegistrate(DataCtxShop dCtxSh) throws Exception {
+	public void selectRegistrate() throws Exception {
 		userMenus.clickMenuAndWait(UserMenu.registrate);
 		PageRegistroIniOutlet pageRegistroIni = new PageRegistroIniOutlet();  
 		pageRegistroIni.clickRegisterTab();
@@ -54,7 +55,7 @@ public class SecMenusUserSteps extends StepBase {
 		if (app==AppEcom.outlet) {
 			PageRegistroIniStepsOutlet pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
 			pageRegistroIniSteps.validaIsPageUntil(5);
-			pageRegistroIniSteps.validaIsRGPDVisible(dCtxSh.pais);
+			pageRegistroIniSteps.validaIsRGPDVisible();
 		} else {
 			PageRegistroInitialShopSteps pageRegistroIniSteps = new PageRegistroInitialShopSteps();
 			pageRegistroIniSteps.checkIsPageUntil(5);
@@ -143,10 +144,11 @@ public class SecMenusUserSteps extends StepBase {
 	@Step (
 		description="Se selecciona el menú para el cambio de país", 
 		expected="Aparece el modal para el cambio de país")
-	public void cambioPaisMobil(DataCtxShop dCtxSh) throws Exception {
+	public void cambioPaisMobil(Pais newPais, IdiomaPais newIdioma) throws Exception {
 		userMenus.clickMenuAndWait(UserMenu.cambioPais);
-		ModalCambioPaisSteps.validateIsVisible(5, driver); 
-		ModalCambioPaisSteps.cambioPais(dCtxSh, driver);
+		ModalCambioPaisSteps modalCambioPaisSteps = new ModalCambioPaisSteps();
+		modalCambioPaisSteps.validateIsVisible(5); 
+		modalCambioPaisSteps.cambioPais(newPais, newIdioma);
 	}
 
 	private static final String TagPoints = "@TagPoints";

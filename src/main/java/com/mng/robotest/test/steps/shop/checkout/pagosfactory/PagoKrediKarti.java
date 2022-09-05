@@ -1,23 +1,21 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import com.mng.robotest.test.data.DataCtxShop;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.steps.shop.checkout.SecKrediKartiSteps;
 
-
 public class PagoKrediKarti extends PagoSteps {
 	
-	public PagoKrediKarti(DataCtxShop dCtxSh, DataCtxPago dCtxPago) throws Exception {
-		super(dCtxSh, dCtxPago);
+	public PagoKrediKarti(DataPago dataPago) throws Exception {
+		super(dataPago);
 		super.isAvailableExecPay = true;
 	}
 	
 	@SuppressWarnings("static-access")
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
-		DataPedido dataPedido = dCtxPago.getDataPedido();
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh.pais);
+		DataPedido dataPedido = dataPago.getDataPedido();
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
 		
 		SecKrediKartiSteps secKrediKartiSteps = pageCheckoutWrapperSteps.getSecKrediKartiSteps();
 		secKrediKartiSteps.inputNumTarjeta(dataPedido.getPago().getNumtarj());
@@ -25,7 +23,7 @@ public class PagoKrediKarti extends PagoSteps {
 		
 		if (execPay) {
 			dataPedido.setCodtipopago("O");
-			pageCheckoutWrapperSteps.inputDataTrjAndConfirmPago(dCtxPago);
+			pageCheckoutWrapperSteps.inputDataTrjAndConfirmPago(dataPago);
 		}
 	}	
 }

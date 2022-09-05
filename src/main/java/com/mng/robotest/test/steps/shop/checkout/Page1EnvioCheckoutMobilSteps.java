@@ -1,6 +1,5 @@
 package com.mng.robotest.test.steps.shop.checkout;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -8,15 +7,13 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.DataCtxShop;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.pageobject.shop.checkout.Page1EnvioCheckoutMobil;
 import com.mng.robotest.test.pageobject.shop.checkout.Page2DatosPagoCheckoutMobil;
 import com.mng.robotest.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test.pageobject.shop.checkout.envio.ModalDroppoints;
 import com.mng.robotest.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.test.steps.shop.checkout.envio.ModalDroppointsSteps;
-
 
 public class Page1EnvioCheckoutMobilSteps extends StepBase {
 
@@ -47,12 +44,12 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 		description="<b style=\"color:blue;\">#{nombrePago}</b>:Seleccionamos el método de envío <b>#{tipoTransporte}</b> (previamente, si no lo estamos, nos posicionamos en el apartado \"1. Envio\")", 
 		expected="Se selecciona el método de envío correctamente")
 	public void selectMetodoEnvio(
-			TipoTransporte tipoTransporte, @SuppressWarnings("unused") String nombrePago, DataCtxPago dCtxPago) throws Exception {
+			TipoTransporte tipoTransporte, @SuppressWarnings("unused") String nombrePago, DataPago dataPago) throws Exception {
 		page1EnvioCheckoutMobil.selectMetodoAfterPositioningIn1Envio(tipoTransporte);
 		if (!tipoTransporte.isEntregaDomicilio()) {
 			ModalDroppoints modalDroppoints = new ModalDroppoints();
 			if (modalDroppoints.isErrorMessageVisibleUntil()) {
-				modalDroppoints.searchAgainByUserCp(dCtxPago.getDatosRegistro().get("cfCp"));
+				modalDroppoints.searchAgainByUserCp(dataPago.getDatosRegistro().get("cfCp"));
 			}
 		}
 
@@ -74,12 +71,12 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 	@Step (
 		description="Seleccionar el botón \"Continuar\"", 
 		expected="Aparece la página asociada al Paso-2")
-	public void clickContinuarToMetodosPago(DataCtxShop dCtxSh, boolean saldoEnCuenta) throws Exception {
+	public void clickContinuarToMetodosPago(Pais pais, boolean saldoEnCuenta) throws Exception {
 		page1EnvioCheckoutMobil.clickContinuar();
-		new PageCheckoutWrapperSteps(dCtxSh.channel, dCtxSh.appE).validateLoadingDisappears(10);
-		checkAppearsStep2(dCtxSh.appE);
+		new PageCheckoutWrapperSteps().validateLoadingDisappears(10);
+		checkAppearsStep2(app);
 		if (!saldoEnCuenta) {
-			checkAppearsPageWithPaymentMethods(dCtxSh.pais, dCtxSh.appE);
+			checkAppearsPageWithPaymentMethods(pais, app);
 		}
 	}
 	
@@ -87,14 +84,14 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 		description="Aparece la página asociada al Paso-2",
 		level=State.Defect)
 	private boolean checkAppearsStep2(AppEcom app) {
-		return (new Page2DatosPagoCheckoutMobil(Channel.mobile, app).isPageUntil(3));
+		return (new Page2DatosPagoCheckoutMobil(channel, app).isPageUntil(3));
 	}
 	
 	@Validation (
 		description="Están presentes los métodos de pago",
 		level=State.Defect)
 	private boolean checkAppearsPageWithPaymentMethods(Pais pais, AppEcom app) {
-		return (new PageCheckoutWrapper(Channel.mobile, app).isPresentMetodosPago());
+		return (new PageCheckoutWrapper(channel, app).isPresentMetodosPago());
 	}
 	
 	@Validation
@@ -104,9 +101,11 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 	 	checks.add(
 			"Aparece el descuento total aplicado al empleado (en menos de " + maxSeconds + " segundos)",
 			page1EnvioCheckoutMobil.isVisibleDescuentoEmpleadoUntil(maxSeconds), State.Warn);
+	 	
 	 	checks.add(
 			"Aparece un descuento de empleado mayor que 0",
 			page1EnvioCheckoutMobil.validateDiscountEmpleadoNotNull(), State.Warn);
+	 	
 	 	return checks;
 	}
 	

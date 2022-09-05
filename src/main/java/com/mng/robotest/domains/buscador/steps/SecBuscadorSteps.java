@@ -41,8 +41,8 @@ public class SecBuscadorSteps extends StepBase {
 			TabHTML + "id: <b>#{product.getGarmentId()}</b><br>" + 
 			TabHTML + "color: <b>#{product.getArticleWithMoreStock().getColorLabel()}</b>", 
 		expected="Aparece la ficha del producto")
-	public void searchArticulo(GarmentCatalog product, Pais pais) throws Exception {
-		searchArticuloCommon(product, pais);
+	public void searchArticulo(GarmentCatalog product) throws Exception {
+		searchArticuloCommon(product);
 	}
 	
 	private static final String TagValuesFilters = "@TagValuesFilters";
@@ -53,16 +53,16 @@ public class SecBuscadorSteps extends StepBase {
 			TabHTML + "color: <b>#{product.getArticleWithMoreStock().getColorLabel()}</b><br>" +
 			TabHTML + "filters: <b>" + TagValuesFilters + "</b>", 
 		expected="Aparece la ficha del producto")
-	public void searchArticulo(GarmentCatalog product, Pais pais, List<FilterType> infoFilters) throws Exception {
+	public void searchArticulo(GarmentCatalog product, List<FilterType> infoFilters) throws Exception {
 		String filterValues = infoFilters.stream().map(FilterType::name).collect(Collectors.joining(","));
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TagValuesFilters, filterValues);
-		searchArticuloCommon(product, pais);
+		searchArticuloCommon(product);
 	}
 	
-	private void searchArticuloCommon(GarmentCatalog product, Pais pais) throws Exception {
+	private void searchArticuloCommon(GarmentCatalog product) throws Exception {
 		ArticuloNavigations.buscarArticulo(product.getArticleWithMoreStock(), channel, app, driver);
 		SeleniumUtils.waitForPageLoaded(driver);  
-		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(pais);
+		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps();
 		pageFichaSteps.validateIsFichaAccordingTypeProduct(product);
 	}
 

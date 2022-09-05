@@ -5,8 +5,8 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.micuenta.pageobjects.PageInputPedido;
 import com.mng.robotest.test.datastored.DataPedido;
-import com.mng.robotest.test.pageobject.shop.miscompras.PageInputPedido;
 
 
 public class PageInputPedidoSteps {

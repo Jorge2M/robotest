@@ -13,8 +13,6 @@ import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.steps.shop.SecBolsaSteps;
 
-
-@SuppressWarnings({"static-access"})
 public class ModalFichaFavoritosSteps extends StepBase {
 	
 	private final ModalFichaFavoritos modalFichaFavoritos = new ModalFichaFavoritos();
@@ -26,22 +24,23 @@ public class ModalFichaFavoritosSteps extends StepBase {
 		checks.add(
 			"En Favoritos es visible el modal de la ficha del producto " + articulo.getRefProducto() + " (lo esperamos hasta " + maxSeconds + " segundos)",
 			modalFichaFavoritos.isVisibleFichaUntil(articulo.getRefProducto(), maxSeconds), State.Warn);
+		
 		checks.add(
 			"Aparece seleccionado el color <b>" + articulo.getColor() + "</b>",
 			modalFichaFavoritos.isColorSelectedInFicha(articulo.getColor()), State.Warn);
+		
 		return checks;
 	}  
 	
 	@Step(
 		description="Desde Favoritos añadimos el artículo <b>#{artToAddBolsa.getRefProducto()}</b> (1a talla disponible) a la bolsa",
 		expected="El artículo aparece en la bolsa")
-	public void addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa, Pais pais) 
-			throws Exception {
+	public void addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa) throws Exception {
 		String refProductoToAdd = artToAddBolsa.getRefProducto();
 		Talla tallaSelected = modalFichaFavoritos.addArticleToBag(refProductoToAdd, 1);
 		artToAddBolsa.setTalla(tallaSelected);
 		dataBolsa.addArticulo(artToAddBolsa);
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps(pais);
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 		
 		switch (channel) {
 		case desktop:

@@ -1,7 +1,5 @@
 package com.mng.robotest.domains.loyalty.tests;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.loyalty.beans.User;
@@ -16,8 +14,8 @@ public class LoyaltyCommons {
 
 	private LoyaltyCommons() {}
 	
-	public static boolean isPro(AppEcom app, WebDriver driver) {
-		return UtilsMangoTest.isEntornoPRO(app, driver);
+	public static boolean isPro() {
+		return new UtilsMangoTest().isEntornoPRO();
 	}
 	
 	public static int clickMangoLikesYou(Channel channel, AppEcom app) throws Exception {

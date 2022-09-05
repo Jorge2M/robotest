@@ -2,6 +2,7 @@ package com.mng.robotest.domains.registro.tests;
 
 import java.util.Arrays;
 
+import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroPersonalizacionShop.GenderOption;
 import com.mng.robotest.domains.registro.steps.PageRegistroInitialShopSteps;
@@ -11,7 +12,6 @@ import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.data.DataMango;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
-import com.mng.robotest.test.steps.shop.micuenta.PageMiCuentaSteps;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
@@ -43,8 +43,8 @@ public class Reg001 extends TestBase {
 	}
 
 	private void accesoAndClickRegistrate() throws Exception {
-		new AccesoSteps().oneStep(dataTest, false);
-		new SecMenusUserSteps().selectRegistrate(dataTest);
+		new AccesoSteps().oneStep(false);
+		new SecMenusUserSteps().selectRegistrate();
 	}	
 	
 	private void inputInitialDataAndClickCreate() {

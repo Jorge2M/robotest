@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.Select;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.domains.registro.beans.DataRegistro;
 import com.mng.robotest.domains.registro.beans.ListDataRegistro;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.checkout.Page2IdentCheckout;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
@@ -30,9 +29,9 @@ public class PageRegistroDirecOutlet extends PageBase {
 		return getNumElementsVisible(XPATH_DIV_ERROR);
 	}
 	
-	public void sendDataAccordingCountryToInputs(
-			Map<String,String> dataRegistro, Pais pais) throws Exception {
-		dataRegistro.putAll(new Page2IdentCheckout(pais)
+	public void sendDataAccordingCountryToInputs(Map<String,String> dataRegistro) 
+			throws Exception {
+		dataRegistro.putAll(new Page2IdentCheckout()
 				.inputDataPorDefectoSegunPais(dataRegistro.get("cfEmail"), false, false, channel));
 	}
 	

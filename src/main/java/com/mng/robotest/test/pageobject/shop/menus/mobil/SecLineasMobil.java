@@ -5,7 +5,6 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
 
@@ -19,14 +18,14 @@ public abstract class SecLineasMobil extends SecLineasDevice {
 	public static SecLineasMobil getNew(AppEcom app, WebDriver driver) {
 		switch (app) {
 		case outlet:
-			return new SecLineasMobilOutlet(driver);
+			return new SecLineasMobilOutlet();
 		default:
-			return new SecLineasMobilShop(driver);
+			return new SecLineasMobilShop();
 		}
 	}
 	
-	public SecLineasMobil(AppEcom app, WebDriver driver) {
-		super(Channel.mobile, app, driver);
+	public SecLineasMobil() {
+		super();
 	}
 	
 	public String getXPathHeaderMobile() {

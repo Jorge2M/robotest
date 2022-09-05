@@ -16,17 +16,17 @@ import com.mng.robotest.domains.compra.tests.Compra;
 import com.mng.robotest.domains.favoritos.tests.Favoritos;
 import com.mng.robotest.domains.ficha.tests.FichaProducto;
 import com.mng.robotest.domains.loyalty.tests.Loyalty;
+import com.mng.robotest.domains.micuenta.tests.MiCuenta;
 import com.mng.robotest.domains.personalizacion.tests.Personalizacion;
 import com.mng.robotest.domains.registro.tests.Registro;
-import com.mng.robotest.test.appshop.Bolsa;
-import com.mng.robotest.test.appshop.Footer;
-import com.mng.robotest.test.appshop.GaleriaProducto;
-import com.mng.robotest.test.appshop.IniciarSesion;
-import com.mng.robotest.test.appshop.MiCuenta;
-import com.mng.robotest.test.appshop.Otras;
-import com.mng.robotest.test.appshop.PaisIdioma;
-import com.mng.robotest.test.appshop.Reembolsos;
-import com.mng.robotest.test.appshop.SEO;
+import com.mng.robotest.test.appshop.bolsa.Bolsa;
+import com.mng.robotest.test.appshop.footer.Footer;
+import com.mng.robotest.test.appshop.galeria.GaleriaProducto;
+import com.mng.robotest.test.appshop.otras.Otras;
+import com.mng.robotest.test.appshop.paisidioma.PaisIdioma;
+import com.mng.robotest.test.appshop.reembolsos.Reembolsos;
+import com.mng.robotest.test.appshop.seo.Seo;
+import com.mng.robotest.test.appshop.sesion.Sesion;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.factoryes.ListPagosEspana;
 import com.github.jorge2m.testmaker.domain.SuiteMaker;
@@ -55,8 +55,8 @@ public class SmokeTestSuite extends SuiteMaker {
 	private static List<Class<?>> getClasses() {
 		return Arrays.asList(
 			Otras.class,
-			SEO.class,
-			IniciarSesion.class,
+			Seo.class,
+			Sesion.class,
 			Bolsa.class,
 			FichaProducto.class,
 			Ayuda.class,

@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.domains.transversal.PageBase;
@@ -31,18 +30,13 @@ public class PagePrehome extends PageBase {
 
 	enum ButtonEnter { ENTER, CONTINUAR };
 	
-	private final Pais pais;
-	private final IdiomaPais idioma;
+	private final Pais pais = dataTest.pais;
+	private final IdiomaPais idioma = dataTest.idioma;
 	
 	private static final String XPATH_SELECT_PAISES = "//select[@id='countrySelect']";
 	private static final String XPATH_DIV_PAIS_SELECCIONADO = "//div[@id='countrySelect_chosen']";
 	private static final String XPATH_ICON_SALE_PAIS_SELECCIONADO = XPATH_DIV_PAIS_SELECCIONADO + "//span[@class[contains(.,'salesIcon')]]";
 	private static final String XPATH_INPUT_PAIS = "//div[@class[contains(.,'chosen-search')]]/input";
-	
-	public PagePrehome(Pais pais, IdiomaPais idioma) {
-		this.pais = pais;
-		this.idioma = idioma;
-	}
 	
 	private String getXPathOptionPaisFromName(String nombrePais) {
 		return XPATH_SELECT_PAISES + "//option[@data-alt-spellings[contains(.,'" + nombrePais + "')]]";

@@ -14,7 +14,7 @@ public class Bus001 extends TestBase {
 	private final String catProdInexistente;
 	
 	private final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
-	private final PageHomeMarcasSteps pageHomeMarcasSteps = new PageHomeMarcasSteps(channel, app);
+	private final PageHomeMarcasSteps pageHomeMarcasSteps = new PageHomeMarcasSteps();
 	
 	public Bus001(String categoriaProdExistente, String catProdInexistente) throws Exception {
 		super();
@@ -24,11 +24,11 @@ public class Bus001 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		new AccesoSteps().oneStep(dataTest, false);
-		pageHomeMarcasSteps.validateIsPageWithCorrectLineas(dataTest.pais);
+		new AccesoSteps().oneStep(false);
+		pageHomeMarcasSteps.validateIsPageWithCorrectLineas();
 		GarmentCatalog product = getProduct();
 		
-		secBuscadorSteps.searchArticulo(product, dataTest.pais);
+		secBuscadorSteps.searchArticulo(product);
 		secBuscadorSteps.busquedaCategoriaProducto(categoriaProdExistente, true);
 		secBuscadorSteps.busquedaCategoriaProducto(catProdInexistente, false);			
 	}

@@ -135,6 +135,6 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 	public void inputDataAndClickComprar(Channel channel, AppEcom app, ChequeRegalo chequeRegalo) {
 		pageChequeRegaloInputData.inputDataCheque(chequeRegalo);
 		pageChequeRegaloInputData.clickComprarFin(chequeRegalo);
-		new PageCheckoutWrapperSteps(channel, app).validaIsVersionChequeRegalo(chequeRegalo);
+		new PageCheckoutWrapperSteps().validaIsVersionChequeRegalo(chequeRegalo);
 	}
 }

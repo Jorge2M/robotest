@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.registro.steps;
 
-import java.util.Arrays;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
@@ -20,35 +19,34 @@ import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.data.Constantes.ThreeState;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
-
 
 public class PageRegistroSegundaStepsOutlet extends StepBase {
 	
 	private PageRegistroSegundaOutlet pageRegistroSegunda = new PageRegistroSegundaOutlet();
+	private final Pais pais = dataTest.pais;
 	
 	@Validation
-	public ChecksTM validaIsPageRegistroOK(Pais paisRegistro, Map<String,String> dataRegistro) {
+	public ChecksTM validaIsPageRegistroOK(Map<String,String> dataRegistro) {
 		ChecksTM checks = ChecksTM.getNew();
 		String lineasComaSeparated = "";
 		int numLineas = 0;
-		if (paisRegistro.getShoponline().stateLinea(LineaType.she, app)==ThreeState.TRUE) {
+		if (pais.getShoponline().stateLinea(LineaType.she, app)==ThreeState.TRUE) {
 			lineasComaSeparated = LineaType.she.name();
 			numLineas+=1;
 		}
 		
-		if (paisRegistro.getShoponline().stateLinea(LineaType.he, app)==ThreeState.TRUE) {
+		if (pais.getShoponline().stateLinea(LineaType.he, app)==ThreeState.TRUE) {
 			lineasComaSeparated+="," + LineaType.he.name();
 			numLineas+=1;
 		}
 		
-		if (paisRegistro.getShoponline().stateLinea(LineaType.nina, app)==ThreeState.TRUE ||
-			paisRegistro.getShoponline().stateLinea(LineaType.nino, app)==ThreeState.TRUE) {
+		if (pais.getShoponline().stateLinea(LineaType.nina, app)==ThreeState.TRUE ||
+			pais.getShoponline().stateLinea(LineaType.nino, app)==ThreeState.TRUE) {
 			lineasComaSeparated+="," + LineaType.kids.name();
 			numLineas+=1;
 		}
 		
-		if (paisRegistro.getShoponline().stateLinea(LineaType.violeta, app)==ThreeState.TRUE) {
+		if (pais.getShoponline().stateLinea(LineaType.violeta, app)==ThreeState.TRUE) {
 			lineasComaSeparated+="," + LineaType.violeta.name();
 			numLineas+=1;
 		}
@@ -88,7 +86,7 @@ public class PageRegistroSegundaStepsOutlet extends StepBase {
 		description="@rewritable",
 		expected="Aparece la página de introducción de datos del niño o la de datos de la dirección (según se podían o no seleccionar niños)")
 	public void setDataAndLineasRandom(
-			String fechaNacimiento, boolean paisConNinos, int numNinos, Pais pais, Map<String,String> dataRegistroOK) 
+			String fechaNacimiento, boolean paisConNinos, int numNinos, Map<String,String> dataRegistroOK) 
 					throws Exception {
 		String tagListaRandom = "@lineasRandom";
 		String stepDescription = 
@@ -119,7 +117,7 @@ public class PageRegistroSegundaStepsOutlet extends StepBase {
 		if (paisConNinos) {
 			new PageRegistroNinosStepsOutlet().validaIsPageWithNinos(numNinos);
 		} else {
-			new PageRegistroDirecStepsOutlet().isPageFromPais(pais);
+			new PageRegistroDirecStepsOutlet().isPageFromPais();
 		}
 		
 		GenericChecks.checkDefault(driver);

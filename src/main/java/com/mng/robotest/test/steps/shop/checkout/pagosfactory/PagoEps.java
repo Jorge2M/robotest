@@ -1,20 +1,18 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import com.mng.robotest.test.data.DataCtxShop;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.pageobject.shop.checkout.eps.PageEpsSimulador.TypeDelay;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.steps.shop.checkout.eps.PageEpsSelBancoSteps;
 import com.mng.robotest.test.steps.shop.checkout.eps.PageEpsSimuladorSteps;
 
-
 public class PagoEps extends PagoSteps {
 
 	PageEpsSimuladorSteps pageEpsSimuladorSteps = new PageEpsSimuladorSteps();
 	
-	public PagoEps(DataCtxShop dCtxSh, DataCtxPago dCtxPago) throws Exception {
-		super(dCtxSh, dCtxPago);
+	public PagoEps(DataPago dataPago) throws Exception {
+		super(dataPago);
 		super.isAvailableExecPay = true;
 	}
 	
@@ -24,18 +22,18 @@ public class PagoEps extends PagoSteps {
 		//activateTestABforMethodEPS();
 		driver.navigate().refresh();
 		
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh.pais);
-		pageCheckoutWrapperSteps.selectBancoEPS(dCtxSh);
-		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
-		if (!UtilsMangoTest.isEntornoPRO(app, driver)) {
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		pageCheckoutWrapperSteps.selectBancoEPS();
+		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
+		if (!new UtilsMangoTest().isEntornoPRO()) {
 			pageEpsSimuladorSteps.validateIsPage();
 			pageEpsSimuladorSteps.selectDelay(TypeDelay.ONE_MINUTES);
 		} else {
-			new PageEpsSelBancoSteps().validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais.getCodigo_pais());
+			new PageEpsSelBancoSteps().validateIsPage(dataPago.getDataPedido().getImporteTotal(), dataTest.pais.getCodigo_pais());
 		}
 		
 		if (execPay) {
-			this.dCtxPago.getDataPedido().setCodtipopago("F");
+			this.dataPago.getDataPedido().setCodtipopago("F");
 			pageEpsSimuladorSteps.clickContinueButton();
 		}
 	}

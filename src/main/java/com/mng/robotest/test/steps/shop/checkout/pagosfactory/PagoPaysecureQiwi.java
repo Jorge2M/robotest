@@ -1,32 +1,30 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import com.mng.robotest.test.data.DataCtxShop;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.pageobject.shop.checkout.paysecureqiwi.PagePaysecureConfirm;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.steps.shop.checkout.paysecureqiwi.PagePaysecureQiwi1rstSteps;
 import com.mng.robotest.test.steps.shop.checkout.paysecureqiwi.PageQiwiConfirmSteps;
 import com.mng.robotest.test.steps.shop.checkout.paysecureqiwi.PageQiwiInputTlfnSteps;
 
-
 public class PagoPaysecureQiwi extends PagoSteps {
 
-	public PagoPaysecureQiwi(DataCtxShop dCtxSh, DataCtxPago dCtxPago) throws Exception {
-		super(dCtxSh, dCtxPago);
+	public PagoPaysecureQiwi(DataPago dataPago) throws Exception {
+		super(dataPago);
 		super.isAvailableExecPay = true;
 	}
 	
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh.pais);
-		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		
-		PagePaysecureQiwi1rstSteps pagePaysecureQiwi1rstSteps = new PagePaysecureQiwi1rstSteps(dCtxSh.appE, driver);
-		pagePaysecureQiwi1rstSteps.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dCtxSh.channel);
-		pagePaysecureQiwi1rstSteps.clickIconPasarelaQiwi(dCtxSh.channel);
+		PagePaysecureQiwi1rstSteps pagePaysecureQiwi1rstSteps = new PagePaysecureQiwi1rstSteps();
+		pagePaysecureQiwi1rstSteps.validateIsPage(dataPago.getDataPedido().getImporteTotal(), dataTest.pais.getCodigo_pais(), channel);
+		pagePaysecureQiwi1rstSteps.clickIconPasarelaQiwi(channel);
 		
 		if (execPay) {
-			String tlfQiwi = dCtxPago.getDataPedido().getPago().getTelefqiwi();
+			String tlfQiwi = dataPago.getDataPedido().getPago().getTelefqiwi();
 			PageQiwiInputTlfnSteps.inputTelefono(tlfQiwi, driver);
 			PageQiwiInputTlfnSteps.clickConfirmarButton(driver);
 			if (PagePaysecureConfirm.isPage(driver)) {

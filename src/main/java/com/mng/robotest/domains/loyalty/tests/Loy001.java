@@ -8,7 +8,7 @@ import com.mng.robotest.domains.loyalty.beans.User;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.datastored.DataBag;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
@@ -27,7 +27,7 @@ public class Loy001 extends TestBase {
 	static final User USER = LoyaltyCommons.USER_PRO_WITH_LOY_POINTS;
 	final Menu1rstLevel menuNewCollection;
 	
-	private final SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dataTest);
+	private final SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps();
 	
 	public Loy001() throws Exception {
 		super();
@@ -43,38 +43,37 @@ public class Loy001 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		new AccesoSteps().oneStep(dataTest, true);
+		new AccesoSteps().oneStep(true);
 		DataBag dataBag = addBagArticleNoRebajado();
-		DataCtxPago dCtxPago = checkoutExecution(dataBag);
-		checkPedidosManto(dCtxPago.getListPedidos());
+		DataPago dataPago = checkoutExecution(dataBag);
+		checkPedidosManto(dataPago.getListPedidos());
 	}
 	
 	private DataBag addBagArticleNoRebajado() throws Exception {
-		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuNewCollection, dataTest);
+		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuNewCollection);
 		
 		//TODO en estos momentos algo raro le pasa al menú Nuevo que requiere un refresh para funcionar ok
 		driver.navigate().refresh();
 		
-		return GaleriaNavigationsSteps.selectArticleAvailableFromGaleria(dataTest, driver);
+		return new GaleriaNavigationsSteps().selectArticleAvailableFromGaleria(dataTest.pais);
 	}
 	
-	private DataCtxPago checkoutExecution(DataBag dataBag) throws Exception {
+	private DataPago checkoutExecution(DataBag dataBag) throws Exception {
 		
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.checkPagos()
 				.emaiExists()
 				.checkLoyaltyPoints().build();		
 		
-		DataCtxPago dCtxPago = new DataCtxPago(dataTest, configCheckout);
+		DataPago dataPago = new DataPago(configCheckout);
+		dataPago.getDataPedido().setDataBag(dataBag);
 		
-		dCtxPago.getDataPedido().setDataBag(dataBag);
-		
-		dCtxPago = new CheckoutFlow.BuilderCheckout(dataTest, dCtxPago)
+		dataPago = new CheckoutFlow.BuilderCheckout(dataPago)
 			.pago(dataTest.pais.getPago("VISA"))
 			.build()
 			.checkout(From.BOLSA);
 		
-		return dCtxPago;
+		return dataPago;
 	}
 
 	private void checkPedidosManto(CopyOnWriteArrayList<DataPedido> pedidos) throws Exception {

@@ -1,68 +1,42 @@
 package com.mng.robotest.test.pageobject.shop;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.mng.robotest.domains.transversal.PageBase;
 
+public class SecKrediKartiCheckout extends PageBase {
 
-public class SecKrediKartiCheckout {
-
-	static String XPathFormularioTarjeta = "//div[@class='msuFormularioTarjeta']";
-	static String XPathInputCardNumber = XPathFormularioTarjeta + "//input[@id[contains(.,'cardNumber')] or @id[contains(.,'msu_cardpan')] or @id[contains(.,'number-card')]]";
-	static String XPathCapaPagoPlazoMobil = "//table[@class[contains(.,'installment-msu')]]";
-	static String XPathCapaPagoPlazoDesktop = "//div[@class[contains(.,'installmentsTable')]]";			
+	private static final String XPATH_FORMULARIO_TARJETA = "//div[@class='msuFormularioTarjeta']";
+	private static final String XPATH_INPUT_CARD_NUMBER = XPATH_FORMULARIO_TARJETA + "//input[@id[contains(.,'cardNumber')] or @id[contains(.,'msu_cardpan')] or @id[contains(.,'number-card')]]";
+	private static final String XPATH_CAPA_PAGO_PLAZO_MOBIL = "//table[@class[contains(.,'installment-msu')]]";
+	private static final String XPATH_CAPA_PAGO_PLAZO_DESKTOP = "//div[@class[contains(.,'installmentsTable')]]";			
 	
-	public static String getXPATH_capaPagoPlazo(Channel channel) {
+	private String getXPathCapaPagoPlazo() {
 		if (channel.isDevice()) {
-			return XPathCapaPagoPlazoMobil;
+			return XPATH_CAPA_PAGO_PLAZO_MOBIL;
 		}
-		return XPathCapaPagoPlazoDesktop;
+		return XPATH_CAPA_PAGO_PLAZO_DESKTOP;
 	}
 	
-	/**
-	 * XPATH correspondiente a uno de los radiobuttons asociados a las opciones de pago a plazo
-	 * @param posicion: posición de la opción en la lista
-	 */	
-	public static String getXPATH_checkPlazos(int posicion, Channel channel) {
-		String xpathDivPlazo = getXPATH_capaPagoPlazo(channel);
+	private String getXPathCheckPlazos(int posicion) {
+		String xpathDivPlazo = getXPathCapaPagoPlazo();
 		if (channel.isDevice()) {
 			return xpathDivPlazo + "//div[@class[contains(.,'custom-radio')] and @data-custom-radio-id][" + posicion + "]";
 		}
 		return xpathDivPlazo + "//input[@type='radio' and @name='installment'][" + posicion + "]"; 
 	}
  
-	/**
-	 * Introduce un número de tarjeta y ejecuta un TAB
-	 */
-	public static void inputCardNumberAndTab(WebDriver driver, String numTarj) {
-		driver.findElement(By.xpath(XPathInputCardNumber)).sendKeys(numTarj, Keys.TAB);
+	public void inputCardNumberAndTab(String numTarj) {
+		getElement(XPATH_INPUT_CARD_NUMBER).sendKeys(numTarj, Keys.TAB);
 	}
 	
-	/**
-	 * Nos dice si está visible la capa de pago a plazos (la que aparece después de introducir el número de tarjeta)
-	 */
-	public static boolean isVisiblePagoAPlazoUntil(WebDriver driver, Channel channel, int seconds) {
-		boolean isVisible = true;
-		String xpathCapaPlazo = getXPATH_capaPagoPlazo(channel);
-		try {
-			new WebDriverWait(driver, seconds).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathCapaPlazo)));
-		}
-		catch (Exception e) {
-			isVisible = false;
-		}
-		
-		return isVisible;
+	public boolean isVisiblePagoAPlazoUntil(int seconds) {
+		String xpathCapaPlazo = getXPathCapaPagoPlazo();
+		return state(State.Visible, xpathCapaPlazo).wait(seconds).check();
 	}
 	
-	/**
-	 * Selecciona uno de los radiobuttons asociados a las opciones de pago a plazo
-	 * @param posicion: posición de la opción en la lista
-	 */
-	public static void clickRadioPlazo(WebDriver driver, int posicion, Channel channel) {
-		driver.findElement(By.xpath(getXPATH_checkPlazos(posicion, channel))).click();
+	public void clickRadioPlazo(int posicion) {
+		getElement(getXPathCheckPlazos(posicion)).click();
 	}
 }

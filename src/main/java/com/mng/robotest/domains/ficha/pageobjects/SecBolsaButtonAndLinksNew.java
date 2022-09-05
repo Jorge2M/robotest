@@ -14,11 +14,11 @@ public class SecBolsaButtonAndLinksNew extends PageBase {
 	public enum LinksAfterBolsa { DETALLE_PRODUCTO, DISPONIBILIDAD_TIENDA, ENVIO_GRATIS_TIENDA, COMPARTIR }
 	public enum ActionFavButton { ADD, REMOVE }
 
+	private static final String XPATH_WRAPPER = "//div[@class='product-actions']";
 	private static final String XPATH_BUTTON_ADD_BOLSA = "//div[@id='addCartContainer']//button[@id='productFormAdd']";
-	private static final String INI_XPATH_BUTTON_FAVORITOS = "//div[@class='add-cart-container']//button[@id='productFormFavorites'";
-	private static final String XPATH_BUTTON_FAVORITOS = INI_XPATH_BUTTON_FAVORITOS + "]";
-	private static final String XPATH_BUTTON_FAVORITOS_FOR_ADD = INI_XPATH_BUTTON_FAVORITOS + " and @data-fav='false']";
-	private static final String XPATH_BUTTON_FAVORITOS_FOR_REMOVE = INI_XPATH_BUTTON_FAVORITOS + " and @data-fav='true']";
+	private static final String XPATH_BUTTON_FAVORITOS = XPATH_WRAPPER + "//*[@data-testid='button-icon']";
+	private static final String XPATH_BUTTON_FAVORITOS_FOR_ADD = XPATH_BUTTON_FAVORITOS + "//self::*[@class[contains(.,'outline')]]";
+	private static final String XPATH_BUTTON_FAVORITOS_FOR_REMOVE = XPATH_BUTTON_FAVORITOS + "//self::*[@class[contains(.,'fill')]]";
 	private static final String XPATH_DIV_ANADIENDO_FAVORITOS = "//div[@id='favoriteBanner']";
 	//private static final String XPATH_BUSCAR_EN_TIENDA_BUTTON = "//button[@class[contains(.,'garment-finder')]]";
 	private static final String XPATH_LINK_ENVIO_GRATIS_TIENDA = "//button[@class[contains(.,'freeShipping')]]";

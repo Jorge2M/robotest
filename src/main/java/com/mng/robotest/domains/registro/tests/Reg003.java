@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.github.jorge2m.testmaker.domain.InputParamsTM.TypeAccess;
+import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.domains.registro.beans.DataNino;
 import com.mng.robotest.domains.registro.beans.ListDataNinos;
 import com.mng.robotest.domains.registro.beans.DataNino.sexoType;
@@ -22,7 +23,6 @@ import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.SecCabeceraSteps;
 import com.mng.robotest.test.steps.shop.SecFooterSteps;
 import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
-import com.mng.robotest.test.steps.shop.micuenta.PageMiCuentaSteps;
 import com.mng.robotest.test.steps.shop.modales.ModalSuscripcionSteps;
 import com.mng.robotest.test.suites.RegistrosSuite.VersionRegistroSuite;
 
@@ -36,9 +36,8 @@ public class Reg003 extends TestBase {
 	private final PageRegistroFinStepsOutlet pageRegistroFinSteps; 
 
 	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
-	private final SecFooterSteps secFooterSteps = new SecFooterSteps(channel, app, driver);
 	private final PageMiCuentaSteps pageMiCuentaSteps = new PageMiCuentaSteps();
-	private final SecCabeceraSteps secCabeceraSteps = new SecCabeceraSteps(dataTest.pais, channel, app);
+	private final SecCabeceraSteps secCabeceraSteps = new SecCabeceraSteps();
 	
 	private final VersionRegistroSuite version;
 	private Map<String, String> dataRegister = new HashMap<>();
@@ -49,7 +48,7 @@ public class Reg003 extends TestBase {
 		dataTest.idioma = idioma;
 		dataTest.userRegistered = false;
 		
-		pageRegistroFinSteps = new PageRegistroFinStepsOutlet(dataTest.idioma);
+		pageRegistroFinSteps = new PageRegistroFinStepsOutlet();
 		
 		if (accessFromFactory) {
 			version = VersionRegistroSuite.valueOf(inputParamsSuite.getVersion());
@@ -64,14 +63,14 @@ public class Reg003 extends TestBase {
 			return;
 		}
 		
-		new AccesoSteps().oneStep(dataTest, false);
-		ModalSuscripcionSteps.validaRGPDModal(dataTest, driver);
+		new AccesoSteps().oneStep(false);
+		new ModalSuscripcionSteps().validaRGPDModal();
 		
-		userMenusSteps.selectRegistrate(dataTest);
+		userMenusSteps.selectRegistrate();
 		if(version.register()) {
 			registerAndGoShoppingSiPubli();
 		} else {
-			secFooterSteps.validaRGPDFooter(version.register(), dataTest);
+			new SecFooterSteps().validaRGPDFooter(version.register());
 		}
 
 	}
@@ -89,30 +88,30 @@ public class Reg003 extends TestBase {
 	private void firstPageRegister() throws Exception {
 		String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
 		dataRegister = 
-			pageRegistroIniSteps.sendDataAccordingCountryToInputs(dataTest.pais, emailNonExistent, true);
-		pageRegistroIniSteps.clickRegistrateButton(dataTest.pais, dataRegister);
+			pageRegistroIniSteps.sendDataAccordingCountryToInputs(emailNonExistent, true);
+		pageRegistroIniSteps.clickRegistrateButton(dataRegister);
 	}
 	
 	private void secondPageRegister() throws Exception {
 		boolean paisConNinos = dataTest.pais.getShoponline().stateLinea(LineaType.nina, app)==ThreeState.TRUE;
-		pageRegistroSegundaSteps.setDataAndLineasRandom("23/4/1974", paisConNinos, 2, dataTest.pais, dataRegister);
+		pageRegistroSegundaSteps.setDataAndLineasRandom("23/4/1974", paisConNinos, 2, dataRegister);
 		if (paisConNinos) {
 			ListDataNinos listaNinos = new ListDataNinos();
 			listaNinos.add(new DataNino(sexoType.nina, "Martina Muñoz Rancaño", "11/10/2010"));
 			listaNinos.add(new DataNino(sexoType.nina, "Irene Muñoz Rancaño", "29/8/2016"));
-			pageRegistroNinosSteps.sendNinoDataAndContinue(listaNinos, dataTest.pais);
+			pageRegistroNinosSteps.sendNinoDataAndContinue(listaNinos);
 		}
 	}	
 	
 	private void thirdPageRegister() throws Exception {
-		pageRegistroDirecSteps.sendDataAccordingCountryToInputs(dataRegister, dataTest.pais);
-		pageRegistroDirecSteps.clickFinalizarButton(dataTest.idioma);
+		pageRegistroDirecSteps.sendDataAccordingCountryToInputs(dataRegister);
+		pageRegistroDirecSteps.clickFinalizarButton();
 	}
 	
 	private void goToShopping() throws Exception {
 		pageRegistroFinSteps.clickIrDeShoppingButton();
 		secCabeceraSteps.selecLogo();
-		secFooterSteps.validaRGPDFooter(version.register(), dataTest);
+		new SecFooterSteps().validaRGPDFooter(version.register());
 	}
 	
 	private void loginAfterRegister() throws Exception {

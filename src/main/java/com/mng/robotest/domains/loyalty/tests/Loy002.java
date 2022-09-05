@@ -14,7 +14,7 @@ import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 public class Loy002 extends TestBase {
 
 	public static final User USER = new User("test.performance21@mango.com", "6877377061230042978", "ES");
-	final boolean isPro = LoyaltyCommons.isPro(app, driver);
+	final boolean isPro = LoyaltyCommons.isPro();
 
 	private final PageHomeLikesSteps pageHomeLikesSteps = new PageHomeLikesSteps();
 	private final PageHomeDonateLikesSteps pageHomeDonateLikesSteps = new PageHomeDonateLikesSteps();
@@ -40,7 +40,7 @@ public class Loy002 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		new AccesoSteps().oneStep(dataTest, false);
+		new AccesoSteps().oneStep(false);
 		
 		int loyaltyPointsIni = LoyaltyCommons.clickMangoLikesYou(channel, app);
 		if (loyaltyPointsIni < 3000 && !isPro) {

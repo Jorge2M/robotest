@@ -18,7 +18,7 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.DataCtxShop;
+import com.mng.robotest.test.data.DataTest;
 import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test.pageobject.shop.identificacion.PageIdentificacion;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
@@ -45,7 +45,7 @@ public class AccesoSteps extends StepBase {
 		description="Acceder a Mango (" + TAG_NOMBRE_PAIS + "/" + TAG_LITERAL_IDIOMA + ")<br>" + TAG_REGISTRO, 
 		expected="Se accede correctamente",
 		saveNettraffic=SaveWhen.Always)
-	public void oneStep(DataCtxShop dataTest, boolean clearArticulos) throws Exception {
+	public void oneStep(boolean clearArticulos) throws Exception {
 		String registro = "";
 		if (dataTest.userRegistered && app!=AppEcom.votf) {
 			registro = "Identificarse con el usuario <b>" + dataTest.userConnected + "</b><br>"; 
@@ -59,9 +59,9 @@ public class AccesoSteps extends StepBase {
 		StepTestMaker.replaceInDescription(TAG_LITERAL_IDIOMA, dataTest.idioma.getCodigo().getLiteral());
 		StepTestMaker.replaceInDescription(TAG_REGISTRO, registro);
 
-		AccesoNavigations.accesoHomeAppWeb(dataTest, driver);
+		new AccesoNavigations().accesoHomeAppWeb();
 		if (dataTest.userRegistered && app!=AppEcom.votf) {
-			new PageIdentificacion().iniciarSesion(dataTest);
+			new PageIdentificacion().iniciarSesion(dataTest.userConnected, dataTest.passwordUser);
 		}
 
 		if (clearArticulos) {
@@ -70,11 +70,11 @@ public class AccesoSteps extends StepBase {
 		}
 
 		if (dataTest.userRegistered && app!=AppEcom.votf) {
-			validaIdentificacionEnShop(dataTest);
+			validaIdentificacionEnShop();
 		}
 	}
 
-	public void validaIdentificacionEnShop(DataCtxShop dCtxSh) throws Exception {
+	public void validaIdentificacionEnShop() throws Exception {
 		checkLinksAfterLogin();
 		GenericChecks.checkDefault(driver);
 		GenericChecks.from(Arrays.asList(
@@ -132,50 +132,50 @@ public class AccesoSteps extends StepBase {
 	 * Accedemos a la aplicación (shop/outlet/votf)
 	 * Se ejecutan cada acción en un paso
 	 */
-	public void manySteps(DataCtxShop dataTest) throws Exception {
+	public void manySteps(DataTest dataTest) throws Exception {
 		if (app==AppEcom.votf && !dataTest.userRegistered) { //En VOTF no tiene sentido identificarte con las credenciales del cliente
-			accesoVOTFtoHOME(dataTest);					
+			accesoVOTFtoHOME();					
 		} else {
-			new PagePrehomeSteps(dataTest.pais, dataTest.idioma).seleccionPaisIdiomaAndEnter(false);
+			new PagePrehomeSteps().seleccionPaisIdiomaAndEnter(false);
 			if (dataTest.userRegistered) {
-				identificacionEnMango(dataTest);
-				SecBolsaSteps secBolsaSteps = new SecBolsaSteps(dataTest.pais);
+				identificacionEnMango();
+				SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 				secBolsaSteps.clear();
 			}
 		}
 	}
 
-	public void identificacionEnMango(DataCtxShop dCtxSh) throws Exception {
+	public void identificacionEnMango() throws Exception {
 		MenusUserWrapper userMenus = new SecMenusWrap().getMenusUser();
 		if (!userMenus.isMenuInState(UserMenu.cerrarSesion, Present)) {
-			iniciarSesion(dCtxSh);
+			iniciarSesion();
 		}
 	}
 
 	@Step (
-		description="Seleccionar \"Iniciar Sesión\" e identificarse con #{dCtxSh.getUserConnected()}", 
+		description="Seleccionar \"Iniciar Sesión\" e identificarse con #{dataTest.getUserConnected()}", 
 		expected="La identificación es correcta",
 		saveHtmlPage=SaveWhen.Always,
 		saveNettraffic=SaveWhen.Always)
-	private void iniciarSesion(DataCtxShop dCtxSh) throws Exception {
-		new PageIdentificacion().iniciarSesion(dCtxSh);
-		validaIdentificacionEnShop(dCtxSh);
+	private void iniciarSesion() throws Exception {
+		new PageIdentificacion().iniciarSesion(dataTest.userConnected, dataTest.passwordUser);
+		validaIdentificacionEnShop();
 	}
 
-	public void accesoVOTFtoHOME(DataCtxShop dCtxSh) throws Exception {
+	public void accesoVOTFtoHOME() throws Exception {
 		String urlAcceso = inputParamsSuite.getUrlBase();
-		int numIdiomas = dCtxSh.pais.getListIdiomas().size();
+		int numIdiomas = dataTest.pais.getListIdiomas().size();
 		
-		new PageLoginVOTFSteps().goToAndLogin(urlAcceso, dCtxSh.pais);
+		new PageLoginVOTFSteps().goToAndLogin(urlAcceso, dataTest.pais);
 		if (numIdiomas > 1) {
-			new PageSelectIdiomaVOTFSteps().selectIdiomaAndContinue(dCtxSh.idioma);
+			new PageSelectIdiomaVOTFSteps().selectIdiomaAndContinue(dataTest.idioma);
 		}
 
-		PageSelectLineaVOTFSteps pageSelectLineaVOTFSteps = new PageSelectLineaVOTFSteps(driver);
+		PageSelectLineaVOTFSteps pageSelectLineaVOTFSteps = new PageSelectLineaVOTFSteps();
 		pageSelectLineaVOTFSteps.validateIsPage();
 		GenericChecks.checkDefault(driver);
 		
-		pageSelectLineaVOTFSteps.selectMenuAndLogoMango(1, dCtxSh);
+		pageSelectLineaVOTFSteps.selectMenuAndLogoMango(1);
 	}
 
 
@@ -192,21 +192,21 @@ public class AccesoSteps extends StepBase {
 		expected=
 			"Se accede a la shop de #{paisDestino.getNombre_pais()} en #{idiomaDestino.getLiteral()}",
 		saveHtmlPage=SaveWhen.Always)
-	public void accesoPRYCambioPais(DataCtxShop dCtxSh, Pais paisDestino, IdiomaPais idiomaDestino) throws Exception {
+	public void accesoPRYCambioPais(Pais paisDestino, IdiomaPais idiomaDestino) throws Exception {
 		StepTM StepTestMaker = TestMaker.getCurrentStepInExecution();
-		StepTestMaker.replaceInDescription(tagNombrePaisOrigen, dCtxSh.pais.getNombre_pais());
-		StepTestMaker.replaceInDescription(tagCodigoPaisOrigen, dCtxSh.pais.getCodigo_pais());
-		StepTestMaker.replaceInDescription(tagNombreIdiomaOrigen, dCtxSh.idioma.getLiteral());
+		StepTestMaker.replaceInDescription(tagNombrePaisOrigen, dataTest.pais.getNombre_pais());
+		StepTestMaker.replaceInDescription(tagCodigoPaisOrigen, dataTest.pais.getCodigo_pais());
+		StepTestMaker.replaceInDescription(tagNombreIdiomaOrigen, dataTest.idioma.getLiteral());
 	
-		manySteps(dCtxSh);
+		manySteps(dataTest);
 
-		Pais paisOriginal = dCtxSh.pais;
-		IdiomaPais idiomaOriginal = dCtxSh.idioma;
-		dCtxSh.pais = paisDestino;
-		dCtxSh.idioma = idiomaDestino;
-		(new SecFooterSteps(dCtxSh.channel, dCtxSh.appE, driver)).cambioPais(dCtxSh);
-		dCtxSh.pais = paisOriginal;
-		dCtxSh.idioma = idiomaOriginal;
+		Pais paisOriginal = dataTest.pais;
+		IdiomaPais idiomaOriginal = dataTest.idioma;
+		dataTest.pais = paisDestino;
+		dataTest.idioma = idiomaDestino;
+		new SecFooterSteps().cambioPais(dataTest.pais, dataTest.idioma);
+		dataTest.pais = paisOriginal;
+		dataTest.idioma = idiomaOriginal;
 
 		//No hacemos nada, simplemente es un paso informativo
 	}

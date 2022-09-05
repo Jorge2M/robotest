@@ -257,7 +257,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 
 	public void clickContinuarAndWaitPage2(AppEcom app) {
 		clickContinuar();
-		(new Page2DatosPagoCheckoutMobil(Channel.mobile, app)).isPageUntil(2);
+		(new Page2DatosPagoCheckoutMobil(channel, app)).isPageUntil(2);
 	}
 	
 	public boolean isVisibleButtonContinuarUntil(int maxSeconds) {

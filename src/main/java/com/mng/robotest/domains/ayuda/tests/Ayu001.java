@@ -9,11 +9,11 @@ import com.mng.robotest.test.steps.shop.SecFooterSteps;
 public class Ayu001 extends TestBase {
 
 	private final AyudaSteps ayudaSteps = new AyudaSteps();
-	private final SecFooterSteps secFooterSteps = new SecFooterSteps(channel, app, driver);
+	private final SecFooterSteps secFooterSteps = new SecFooterSteps();
 	
 	@Override
 	public void execute() throws Exception {
-		new AccesoSteps().oneStep(dataTest, false);
+		new AccesoSteps().oneStep(false);
 		checkAyuda();
 	}
 	

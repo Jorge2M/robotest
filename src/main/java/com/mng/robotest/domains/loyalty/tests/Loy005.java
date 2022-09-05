@@ -16,7 +16,7 @@ public class Loy005 extends TestBase {
 
 	static final User EMISOR_USER = new User("test.performance23@mango.com", "6875476978997042979", "ES");
 	static final User RECEPTOR_USER = new User("test.performance24@mango.com", "6876477022921042981", "ES");
-	final boolean isPro = LoyaltyCommons.isPro(app, driver);
+	final boolean isPro = LoyaltyCommons.isPro();
 	
 	private final PageHomeLikesSteps pageHomeLikesSteps = new PageHomeLikesSteps();
 	private final PageRegalarMisLikesSteps pageRegalarMisLikesSteps = new PageRegalarMisLikesSteps();
@@ -38,7 +38,7 @@ public class Loy005 extends TestBase {
 			return;
 		}
 		
-		new AccesoSteps().oneStep(dataTest, false);
+		new AccesoSteps().oneStep(false);
 		int iniPointsReceptor = clickMangoLikesYou();
 		
 		login(EMISOR_USER, dataTest.passwordUser);

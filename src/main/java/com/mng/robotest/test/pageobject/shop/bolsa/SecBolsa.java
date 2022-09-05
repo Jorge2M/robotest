@@ -33,19 +33,22 @@ public abstract class SecBolsa extends PageBase {
 	private static final String XPATH_ASPA = "//span[@class[contains(.,'outline-close')]]";
 	
 	public static SecBolsa make(Channel channel, AppEcom app) {
-		if (app==AppEcom.outlet && channel==Channel.mobile) {
-			return new SecBolsaMobileOld();
+		if (app==AppEcom.outlet) {
+			if (channel==Channel.mobile) {
+				return new SecBolsaMobileOutlet();
+			}
+			return new SecBolsaDesktopOutlet();
 		}
-		if (app==AppEcom.shop) {
-			return new SecBolsaNewNew();
-		}
-		return new SecBolsaNew();
+		return new SecBolsaShop();
 	}
 	
 	public boolean isInStateUntil(StateBolsa stateBolsaExpected, int maxSeconds) {
 		String xpath = getXPathPanelBolsa();
 		if (stateBolsaExpected==StateBolsa.OPEN) {
 			return state(Visible, xpath).wait(maxSeconds).check();
+//			if (channel==Channel.mobile && app==AppEcom.shop) {
+//				return (capaVisible && )
+//			}
 		}
 		return state(Invisible, xpath).wait(maxSeconds).check();
 	}
@@ -148,8 +151,12 @@ public abstract class SecBolsa extends PageBase {
 		waitForPageLoaded(driver);
 	}
 	
-	public void clickAspaMobil() {
-		click(XPATH_ASPA).exec();
+	public void closeInMobil() {
+		if (app==AppEcom.outlet) {
+			click(XPATH_ASPA).exec();
+		} else {
+			setBolsaToStateIfNotYet(StateBolsa.CLOSED);
+		}
 	}
 	
 }

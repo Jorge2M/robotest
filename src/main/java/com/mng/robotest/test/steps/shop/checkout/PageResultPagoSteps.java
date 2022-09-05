@@ -9,18 +9,16 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.micuenta.pageobjects.PageAccesoMisCompras.TypeBlock;
+import com.mng.robotest.domains.micuenta.steps.PageAccesoMisComprasSteps;
+import com.mng.robotest.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Pago.TypePago;
-import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataBag;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.checkout.PageResultPago;
-import com.mng.robotest.test.pageobject.shop.micuenta.PageAccesoMisCompras.TypeBlock;
-import com.mng.robotest.test.steps.shop.micuenta.PageAccesoMisComprasSteps;
-import com.mng.robotest.test.steps.shop.miscompras.PageMisComprasSteps;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 public class PageResultPagoSteps extends StepBase {
@@ -41,10 +39,10 @@ public class PageResultPagoSteps extends StepBase {
 		return (pageResultPago.isVisibleTextoConfirmacionPago(maxSecondsToWait));
 	}
 	
-	public void validateIsPageOk(DataCtxPago dCtxPago, DataCtxShop dCtxSh) throws Exception {
+	public void validateIsPageOk(DataPago dataPago) throws Exception {
 		validateTextConfirmacionPago();
-		validateDataPedido(dCtxPago, dCtxSh);
-		if (dCtxPago.getFTCkout().checkLoyaltyPoints) {
+		validateDataPedido(dataPago);
+		if (dataPago.getFTCkout().checkLoyaltyPoints) {
 			validateBlockNewLoyaltyPoints();
 		}
 	}
@@ -74,21 +72,21 @@ public class PageResultPagoSteps extends StepBase {
 	}
 	
 	@Validation
-	public ChecksTM validateDataPedido(DataCtxPago dCtxPago, DataCtxShop dCtxSh) throws Exception {
+	public ChecksTM validateDataPedido(DataPago dataPago) throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
 		String importeTotal = "";
-		DataBag dataBag = dCtxPago.getDataPedido().getDataBag(); 
+		DataBag dataBag = dataPago.getDataPedido().getDataBag(); 
 		if (dataBag!=null && "".compareTo(dataBag.getImporteTotal())!=0) {
 			importeTotal = dataBag.getImporteTotal();
 		} else {
-			importeTotal = dCtxPago.getDataPedido().getImporteTotal();
+			importeTotal = dataPago.getDataPedido().getImporteTotal();
 		}
 	  	checks.add(
 	  		"Aparece el importe " + importeTotal + " de la operación",
-	  		ImporteScreen.isPresentImporteInScreen(importeTotal, dCtxSh.pais.getCodigo_pais(), driver), State.Warn);
+	  		ImporteScreen.isPresentImporteInScreen(importeTotal, dataTest.pais.getCodigo_pais(), driver), State.Warn);
 		
-		if (dCtxSh.channel==Channel.desktop) {
-//			if (dCtxSh.appE==AppEcom.shop) {
+		if (channel==Channel.desktop) {
+//			if (dataTest.appE==AppEcom.shop) {
 				checks.add(
 			  		"Aparece el link hacia las compras",
 			  		pageResultPago.isButtonMisCompras(), State.Warn);
@@ -106,7 +104,7 @@ public class PageResultPagoSteps extends StepBase {
 	  		"Aparece el código de pedido (" + codigoPed + ") (lo esperamos hasta " + maxSeconds + " segundos)",
 	  		isCodPedidoVisible, State.Defect);
 		
-		DataPedido dataPedido = dCtxPago.getDataPedido();
+		DataPedido dataPedido = dataPago.getDataPedido();
 		if (isCodPedidoVisible) {
 			dataPedido.setResejecucion(State.Ok);
 		}
@@ -125,12 +123,10 @@ public class PageResultPagoSteps extends StepBase {
 	@Step (
 		description="Seleccionar el link \"Mis Compras\"",
 		expected="Aparece la página de \"Mis compras\" o la de \"Acceso a Mis compras\" según si el usuario está o no loginado")
-	public void selectMisCompras(boolean userRegistered, AppEcom app, Pais pais) 
-	throws Exception {
+	public void selectMisCompras(boolean userRegistered) throws Exception {
 		pageResultPago.clickMisCompras();	 
 		if (userRegistered) {
-			PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps(channel, app);
-			pageMisComprasSteps.validateIsPage(pais);
+			new PageMisComprasSteps().validateIsPage();
 		} else {
 			new PageAccesoMisComprasSteps().validateIsPage();
 		}
@@ -147,17 +143,16 @@ public class PageResultPagoSteps extends StepBase {
 		}
 	}
 	
-	public void selectLinkMisComprasAndValidateCompra(DataCtxPago dCtxPago, DataCtxShop dCtxSh) 
-	throws Exception {		
-		selectMisCompras(dCtxSh.userRegistered, dCtxSh.appE, dCtxSh.pais);
-		DataPedido dataPedido = dCtxPago.getDataPedido();
-		if (dCtxSh.userRegistered) {
-			PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps(dCtxSh.channel, dCtxSh.appE);
-			pageMisComprasSteps.validateIsCompraOnline(dataPedido.getCodpedido(), dCtxPago.getFTCkout().chequeRegalo);
+	public void selectLinkMisComprasAndValidateCompra(DataPago dataPago) throws Exception {		
+		selectMisCompras(dataTest.userRegistered);
+		DataPedido dataPedido = dataPago.getDataPedido();
+		if (dataTest.userRegistered) {
+			new PageMisComprasSteps().validateIsCompraOnline(
+					dataPedido.getCodpedido(), dataPago.getFTCkout().chequeRegalo);
 		} else {
 			PageAccesoMisComprasSteps pageAccesoMisComprasSteps = new PageAccesoMisComprasSteps();
 			pageAccesoMisComprasSteps.clickBlock(TypeBlock.NO_REGISTRADO);
-			pageAccesoMisComprasSteps.buscarPedidoForNoRegistrado(dCtxPago.getDataPedido(), dCtxSh.channel, dCtxSh.appE);
+			pageAccesoMisComprasSteps.buscarPedidoForNoRegistrado(dataPago.getDataPedido());
 		}
 	}
 }

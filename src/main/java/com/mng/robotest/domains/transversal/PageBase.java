@@ -1,6 +1,7 @@
 package com.mng.robotest.domains.transversal;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -16,6 +17,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.Bu
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.test.data.DataTest;
 
 
 public class PageBase extends PageObjTM {
@@ -23,6 +25,7 @@ public class PageBase extends PageObjTM {
 	protected final Channel channel;
 	protected final AppEcom app;
 	protected final InputParamsMango inputParamsSuite;
+	protected final DataTest dataTest = TestBase.DATA_TEST.get();
 	
 	public PageBase() {
 		super();
@@ -83,7 +86,28 @@ public class PageBase extends PageObjTM {
 		return getNumElementsVisible(driver, By.xpath(xpath));
 	}
 	
-	
+    public List<WebElement> getElementsVisible(WebElement elementInput, String xpath) {
+    	List<WebElement> listaReturn = new ArrayList<>();
+        for (WebElement element : elementInput.findElements(By.xpath(xpath))) {
+            if (element.isDisplayed()) {
+                listaReturn.add(element);
+            }
+        }
+        return listaReturn;
+    }	
+
+	public WebElement getElementPriorizingDisplayed(String xpath) {
+		List<WebElement> elementsVisible = getElementsVisible(xpath);
+		if (!elementsVisible.isEmpty()) {
+			return elementsVisible.get(0);
+		}
+		List<WebElement> elementsPresent = getElements(xpath);
+		if (!elementsPresent.isEmpty()) {
+			return elementsPresent.get(0);
+		}
+		return null;
+	}
+
 	public WebElement getElementWeb(String xpath) {
 		return getElementWeb(By.xpath(xpath), driver);
 	}

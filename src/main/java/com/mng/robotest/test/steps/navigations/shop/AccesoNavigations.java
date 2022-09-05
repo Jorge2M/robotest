@@ -1,15 +1,12 @@
 package com.mng.robotest.test.steps.navigations.shop;
 
-import org.openqa.selenium.WebDriver;
-
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.AccesoVOTF;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.pageobject.shop.PageJCAS;
 import com.mng.robotest.test.pageobject.shop.PagePrehome;
@@ -22,9 +19,12 @@ import com.mng.robotest.test.pageobject.votf.PageSelectLineaVOTF;
 import com.mng.robotest.test.steps.shop.SecFooterSteps;
 import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 
-public class AccesoNavigations {
+public class AccesoNavigations extends StepBase {
 
-	public static void goToInitURL(WebDriver driver) {
+	private final Pais pais = dataTest.pais;
+	private final IdiomaPais idioma = dataTest.idioma;
+	
+	public void goToInitURL() {
 		String canary = "";
 		//Temporal para test Canary!!!
 		//canary = "?canary=true";
@@ -35,35 +35,31 @@ public class AccesoNavigations {
 		}
 	}
 	
-	public static void accesoHomeAppWeb(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-		accesoHomeAppWeb(dCtxSh, true, driver); 
+	public void accesoHomeAppWeb() throws Exception {
+		accesoHomeAppWeb(true); 
 	}
 	
-	/**
-	/* Acceso a la página inicial (home) de la APP Web (shop o VOTF)
-	 */
-	public static void accesoHomeAppWeb(DataCtxShop dCtxSh, boolean acceptCookies, WebDriver driver) 
-	throws Exception {
-		PagePrehome pagePrehome = new PagePrehome(dCtxSh.pais, dCtxSh.idioma);
-		if (dCtxSh.appE==AppEcom.votf) {
-			accesoVOTF(dCtxSh.pais, dCtxSh.idioma);
-			goFromLineasToMultimarcaVOTF(dCtxSh, driver);
+	public void accesoHomeAppWeb(boolean acceptCookies) throws Exception {
+		PagePrehome pagePrehome = new PagePrehome();
+		if (app==AppEcom.votf) {
+			accesoVOTF();
+			goFromLineasToMultimarcaVOTF();
 			pagePrehome.previousAccessShopSteps(acceptCookies);
 		} else {
 			pagePrehome.accesoShopViaPrehome(acceptCookies);
 		}
 	}
 	
-	public static void goFromLineasToMultimarcaVOTF(DataCtxShop dCtxSh, WebDriver driver) {
-		PageSelectLineaVOTF pageSelectLineaVOTF = new PageSelectLineaVOTF(driver);
+	public void goFromLineasToMultimarcaVOTF() {
+		PageSelectLineaVOTF pageSelectLineaVOTF = new PageSelectLineaVOTF();
 		pageSelectLineaVOTF.clickBanner(LineaType.she);
 		pageSelectLineaVOTF.clickMenu(LineaType.she, 1);
 		
 		//Cuando se selecciona el icono de Mango deja de tener efecto el forzado del TestAB de la cabecera que habíamos ejecutado previamente
-		SecCabecera.getNew(Channel.desktop, AppEcom.votf).clickLogoMango();
+		SecCabecera.getNew(channel, AppEcom.votf).clickLogoMango();
 	}
 	
-	public static void accesoVOTF(Pais pais, IdiomaPais idioma) throws Exception {
+	public void accesoVOTF() throws Exception {
 		PageLoginVOTF pageLoginVOTF = new PageLoginVOTF();
 		pageLoginVOTF.goToFromUrlAndSetTestABs();
 		new PageJCAS().identJCASifExists();
@@ -83,21 +79,19 @@ public class AccesoNavigations {
 		}
 	}	
 	
-	public static void cambioPaisFromHomeIfNeeded(DataCtxShop dCtxSh, WebDriver driver) 
-	throws Exception {
-		String codigoPais = (new PageLanding()).getCodigoPais();
-		if (dCtxSh.pais.getCodigo_pais().compareTo(codigoPais)!=0) {
-			cambioPais(dCtxSh, driver);
+	public void cambioPaisFromHomeIfNeeded(Pais newPais, IdiomaPais newIdioma) throws Exception {
+		String codigoPaisActual = (new PageLanding()).getCodigoPais();
+		if (newPais.getCodigo_pais().compareTo(codigoPaisActual)!=0) {
+			cambioPais(newPais, newIdioma);
 		}
 	}
 	
-	public static void cambioPais(DataCtxShop dCtxSh, WebDriver driver) 
-	throws Exception {
-		if (dCtxSh.channel.isDevice() && dCtxSh.appE==AppEcom.outlet) {
-			SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dCtxSh);
-			secMenusSteps.getMenusUser().cambioPaisMobil(dCtxSh);
+	public void cambioPais(Pais newPais, IdiomaPais newIdioma) throws Exception {
+		if (channel.isDevice() && app==AppEcom.outlet) {
+			SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps();
+			secMenusSteps.getMenusUser().cambioPaisMobil(newPais, newIdioma);
 		} else {
-			(new SecFooterSteps(dCtxSh.channel, dCtxSh.appE, driver)).cambioPais(dCtxSh);
+			new SecFooterSteps().cambioPais(newPais, newIdioma);
 		}
 	}
 		

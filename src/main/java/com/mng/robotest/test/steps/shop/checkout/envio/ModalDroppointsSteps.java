@@ -6,7 +6,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.pageobject.shop.checkout.envio.ModalDroppoints;
 
 public class ModalDroppointsSteps extends StepBase {
@@ -42,16 +42,16 @@ public class ModalDroppointsSteps extends StepBase {
 		return (!modalDroppoints.isVisible());
 	}
 	
-	public void fluxSelectDroppoint(DataCtxPago dCtxPago, Pais pais) throws Exception {
-		Pago pago = dCtxPago.getDataPedido().getPago();
+	public void fluxSelectDroppoint(DataPago dataPago, Pais pais) throws Exception {
+		Pago pago = dataPago.getDataPedido().getPago();
 		DataSearchDeliveryPoint dataSearchDp = DataSearchDeliveryPoint.getInstance(pago, app, pais);
 		secSelectDPointSteps.searchPoblacion(dataSearchDp);
 		DataDeliveryPoint dataDp = secSelectDPointSteps.clickDeliveryPointAndGetData(2);
-		dCtxPago.getDataPedido().setTypeEnvio(pago.getTipoEnvioType(app));
-		dCtxPago.getDataPedido().setDataDeliveryPoint(dataDp);
+		dataPago.getDataPedido().setTypeEnvio(pago.getTipoEnvioType(app));
+		dataPago.getDataPedido().setDataDeliveryPoint(dataDp);
 		secSelectDPointSteps.clickSelectButton();
 		secConfirmDatosSteps.setDataIfNeeded(pais.getCodigo_pais());
-		secConfirmDatosSteps.clickConfirmarDatosButton(dCtxPago.getDataPedido());				
+		secConfirmDatosSteps.clickConfirmarDatosButton(dataPago.getDataPedido());				
 	}
 
 	public SecSelectDPointSteps getSecSelectDPointSteps() {

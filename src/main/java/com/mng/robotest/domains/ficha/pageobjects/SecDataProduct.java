@@ -22,12 +22,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-/**
- * Sección de la página de Ficha que incluye los datos del artículo: nombre, precio, referencia, colores disponibles y selector de tallas
- * @author jorge.munoz
- *
- */
-@SuppressWarnings({"static-access"})
+
 public class SecDataProduct extends PageBase {
 	
 	public enum ProductNav { PREV, NEXT }

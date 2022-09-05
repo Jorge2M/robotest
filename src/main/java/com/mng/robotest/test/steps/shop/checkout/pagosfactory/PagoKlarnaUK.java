@@ -1,17 +1,15 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import com.mng.robotest.test.data.DataCtxShop;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.steps.shop.checkout.klarna.PageKlarnaSteps;
-
 
 public class PagoKlarnaUK extends PagoSteps {
 	
 	private final PageKlarnaSteps pageKlarnaSteps;
 
-	public PagoKlarnaUK(DataCtxShop dCtxSh, DataCtxPago dCtxPago) throws Exception {
-		super(dCtxSh, dCtxPago);
+	public PagoKlarnaUK(DataPago dataPago) throws Exception {
+		super(dataPago);
 		super.isAvailableExecPay = true;
 		pageKlarnaSteps = new PageKlarnaSteps(driver);
 	}
@@ -19,8 +17,8 @@ public class PagoKlarnaUK extends PagoSteps {
 	@SuppressWarnings("static-access")
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh.pais);
-		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		pageKlarnaSteps.checkIsPage(10);
 		pageKlarnaSteps.clickComprar();
 		
@@ -28,8 +26,8 @@ public class PagoKlarnaUK extends PagoSteps {
 //		pageKlarnaSteps.checkModalInputPhoneNumber(5);
 //		
 //		if (execPay) {
-//			pageKlarnaSteps.inputDataPhoneAndConfirm(dCtxSh.pais.getTelefono(), "123456");
-//			this.dCtxPago.getDataPedido().setCodtipopago("K");
+//			pageKlarnaSteps.inputDataPhoneAndConfirm(dataTest.pais.getTelefono(), "123456");
+//			this.dataPago.getDataPedido().setCodtipopago("K");
 //		}
 	}
 

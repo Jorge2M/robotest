@@ -7,7 +7,6 @@ import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
@@ -47,19 +46,16 @@ public class PageIdentificacion extends PageBase {
 		getElement(XPATH_INPUT_PASSWORD).sendKeys(password);
 	}
 
-	public void loginOrLogoff(DataCtxShop dCtxSh) throws Exception {
-		if (dCtxSh.userRegistered) {
-			iniciarSesion(dCtxSh);
-		} else {
-			SecMenusWrap secMenus = new SecMenusWrap();
-			secMenus.closeSessionIfUserLogged();
-		}
+	public void login(String user, String password) throws Exception {
+		iniciarSesion(user, password);
 	}
 	
-	public void iniciarSesion(DataCtxShop dataTest) throws Exception {
-		iniciarSesion(dataTest.userConnected, dataTest.passwordUser);
+	public void logoff() throws Exception {
+		SecMenusWrap secMenus = new SecMenusWrap();
+		secMenus.closeSessionIfUserLogged();
 	}
-	 
+
+	
 	public void iniciarSesion(String user, String password) {
 		clickIniciarSesionAndWait(channel, app);
 		isVisibleUserUntil(10);

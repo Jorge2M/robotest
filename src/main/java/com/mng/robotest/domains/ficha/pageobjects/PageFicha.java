@@ -1,16 +1,10 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.TestMaker;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.domains.transversal.PageBase;
 
-
-@SuppressWarnings({"static-access"})
 public abstract class PageFicha extends PageBase {
 
 	public enum TypeFicha { OLD, NEW }
@@ -49,31 +43,23 @@ public abstract class PageFicha extends PageBase {
 		return secDataProduct;
 	}
 	
-	public static PageFicha of(Channel channel, AppEcom app) {
-		//TODO modificar después de que suba la nueva versión de la ficha el 23-agosto-2022
-		WebDriver driver = TestMaker.getDriverTestCase();
-		PageFichaArt_DesktopShop pageFichaNew = PageFichaArt_DesktopShop.getNewInstance();
-		PageFichaArtOld pageFichaOld = PageFichaArtOld.getNewInstance();
-		for (int i=0; i<5; i++) {
-			if (pageFichaNew.isPageUntil(1)) {
-				return pageFichaNew;
-			}
-			if (pageFichaOld.isPageUntil(1)) {
-				return pageFichaOld;
-			}
-		}
-		return pageFichaNew;
-//		PageFicha pageFicha;
-//		if (app==AppEcom.outlet || channel.isDevice()) {
-//			pageFicha = PageFichaArtOld.getNewInstance();
-//		} else {
-//			pageFicha = PageFichaArt_DesktopShop.getNewInstance();
+	public static PageFicha of(Channel channel) {
+//		PageFichaArt_DesktopShop pageFichaNew = PageFichaArt_DesktopShop.getNewInstance();
+//		PageFichaArtOld pageFichaOld = PageFichaArtOld.getNewInstance();
+//		for (int i=0; i<5; i++) {
+//			if (pageFichaNew.isPageUntil(1)) {
+//				return pageFichaNew;
+//			}
+//			if (pageFichaOld.isPageUntil(1)) {
+//				return pageFichaOld;
+//			}
 //		}
-//		return pageFicha;
-	}
-	
-	public static PageFicha newInstanceFichaNew() {
-		return PageFichaArt_DesktopShop.getNewInstance();
+//		return pageFichaNew;
+		if (channel.isDevice()) {
+			return new PageFichaDevice();
+		} else {
+			return new PageFichaDesktop();
+		}
 	}
 	
 	public ArticuloScreen getArticuloObject() {

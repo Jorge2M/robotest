@@ -6,31 +6,24 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.factoryes.entities.EgyptCity;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.pageobject.shop.checkout.Page2IdentCheckout;
 
-
 public class Page2IdentCheckoutSteps extends StepBase {
 	
 	private final Page2IdentCheckout page2IdentCheckout;
-	private final Channel channel;
 	
-	public Page2IdentCheckoutSteps(Channel channel, Pais pais) {
-		this.page2IdentCheckout = new Page2IdentCheckout(pais);
-		this.channel = channel;
+	public Page2IdentCheckoutSteps() {
+		this.page2IdentCheckout = new Page2IdentCheckout();
 	}
 	
-	public Page2IdentCheckoutSteps(Channel channel, Pais pais, EgyptCity egyptCity) {
-		this.page2IdentCheckout = new Page2IdentCheckout(pais, egyptCity);
-		this.channel = channel;
+	public Page2IdentCheckoutSteps(EgyptCity egyptCity) {
+		this.page2IdentCheckout = new Page2IdentCheckout(egyptCity);
 	}
 	
 	@Validation
@@ -77,11 +70,10 @@ public class Page2IdentCheckoutSteps extends StepBase {
 		description="Seleccionamos el botón \"Continuar\"",
 		expected="Aparece la página de Checkout",
 		saveImagePage=SaveWhen.Always)
-	public void clickContinuar(boolean userRegistered, AppEcom app, DataBag dataBag)
+	public void clickContinuar(boolean userRegistered, DataBag dataBag)
 	throws Exception {
-		int maxSecondsToWait = 20;
-		page2IdentCheckout.clickBotonContinuarAndWait(maxSecondsToWait);   
-		new PageCheckoutWrapperSteps(channel, app).validateIsFirstPage(userRegistered, dataBag);
+		page2IdentCheckout.clickBotonContinuarAndWait(20);   
+		new PageCheckoutWrapperSteps().validateIsFirstPage(userRegistered, dataBag);
 	}
 	
 	@Step (

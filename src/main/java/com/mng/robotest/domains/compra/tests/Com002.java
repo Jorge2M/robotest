@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
@@ -14,7 +14,7 @@ import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 
 public class Com002 extends TestBase {
 
-	private final DataCtxPago dataPago;
+	private final DataPago dataPago;
 	
 	public Com002() throws Exception {
 		ConfigCheckout configCheckout = ConfigCheckout.config()
@@ -23,7 +23,7 @@ public class Com002 extends TestBase {
 				.checkMisCompras()
 				.emaiExists().build();
 		
-		dataPago = new DataCtxPago(dataTest, configCheckout);
+		dataPago = new DataPago(configCheckout);
 	}
 	
 	@Override
@@ -33,7 +33,7 @@ public class Com002 extends TestBase {
 	}
 	
 	private void checkout() throws Exception {
-		new BuilderCheckout(dataTest, dataPago)
+		new BuilderCheckout(dataPago)
 				.pago(getPagoRealCard())
 				.build()
 				.checkout(From.PREHOME);

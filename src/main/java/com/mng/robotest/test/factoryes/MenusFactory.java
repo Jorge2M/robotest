@@ -5,13 +5,10 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.InputParamsTM;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.appshop.PaisIdioma;
+import com.mng.robotest.test.appshop.paisidioma.PaisIdioma;
 import com.mng.robotest.test.beans.*;
-import com.mng.robotest.test.data.DataCtxShop;
-import com.mng.robotest.test.factoryes.Utilidades;
 import com.mng.robotest.test.suites.MenusPaisSuite.VersionMenusPais;
 import com.mng.robotest.test.utils.PaisGetter;
 
@@ -23,7 +20,6 @@ public class MenusFactory {
 		ArrayList<PaisIdioma> listTests = new ArrayList<>();
 		InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
 		AppEcom app = (AppEcom)inputData.getApp();
-		Channel channel = inputData.getChannel();
 		VersionMenusPais version = VersionMenusPais.valueOf(inputData.getVersion());
 		List<Pais> listCountrys = PaisGetter.getFromCommaSeparatedCountries(countrysStr);
 		int prioridad=0;
@@ -37,8 +33,7 @@ public class MenusFactory {
 					if (Utilidades.lineaToTest(linea, app)) {
 						List<Linea> lineasAprobar = new ArrayList<>();
 						lineasAprobar.add(linea);
-		   				DataCtxShop dCtxSh = new DataCtxShop(app, channel, pais, idioma); 
-						listTests.add(new PaisIdioma(version, dCtxSh, lineasAprobar, prioridad));
+						listTests.add(new PaisIdioma(version, pais, idioma, lineasAprobar, prioridad));
 						prioridad+=1;					
 						System.out.println(
 							"Creado Test \"PaisIdioma\" con datos: " +

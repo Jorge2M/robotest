@@ -5,7 +5,6 @@ package com.mng.robotest.test.generic;
 import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.ITestContext;
@@ -32,7 +30,6 @@ import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.navigations.ArticuloNavigations;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.domains.transversal.PageBase;
@@ -41,26 +38,17 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class UtilsMangoTest {
+public class UtilsMangoTest extends PageBase {
 
-    private UtilsMangoTest() {
-	    throw new IllegalStateException("Utility class");
-	}
-	
-	public static String getPageSource(WebDriver driver) {
+	public String getPageSource() {
 		String idWebKit = "webkit-xml-viewer-source-xml";
-		if (PageBase.state(Present, By.id(idWebKit), driver).check()) {
-			return driver.findElement(By.id(idWebKit)).getAttribute("innerHTML");
+		if (state(Present, idWebKit).check()) {
+			return getElement(idWebKit).getAttribute("innerHTML");
 		}
 		return driver.getPageSource();
 	}
 
-	/**
-	 * Usa diferentes métodos para posicionarse en la página inicial
-	 */
-	public static void goToPaginaInicio(Channel channel, AppEcom app, WebDriver driver) 
-	throws Exception {
-		// Seleccionamos el logo de MANGO
+	public void goToPaginaInicio() throws Exception {
 		boolean existeLogo = SecCabecera.getNew(channel, app).clickLogoMango();
 		if (!existeLogo) {
 			ITestContext ctx = getTestCase().getTestRunParent().getTestNgContext();
@@ -68,15 +56,15 @@ public class UtilsMangoTest {
 			if (urlPaginaPostAcceso!=null) {
 				driver.get(urlPaginaPostAcceso);
 			} else {
-				if (PageBase.state(Present, By.xpath("//base"), driver).check()) {
-					String urlBase = driver.findElement(By.xpath("//base")).getAttribute("href");
+				if (state(Present, "//base").check()) {
+					String urlBase = getElement("//base").getAttribute("href");
 					driver.get(urlBase);
 				}
 			}
 		}
 	}	
 	
-	private static TestCaseTM getTestCase() throws NotFoundException {
+	private TestCaseTM getTestCase() throws NotFoundException {
 		Optional<TestCaseTM> testCaseOpt = TestMaker.getTestCase();
 		if (testCaseOpt.isEmpty()) {
 		  throw new NotFoundException("Not found TestCase");
@@ -84,9 +72,9 @@ public class UtilsMangoTest {
 		return testCaseOpt.get();
 	}
 
-	public static ArticuloScreen addArticuloBolsa(GarmentCatalog selArticulo, AppEcom app, Channel channel, WebDriver driver) {
+	public ArticuloScreen addArticuloBolsa(GarmentCatalog selArticulo) {
 		ArticuloScreen articulo = ArticuloNavigations.selectArticuloTallaColorByRef(selArticulo, app, channel, driver);
-		PageFicha.of(channel, app).clickAnadirBolsaButtonAndWait(); 
+		PageFicha.of(channel).clickAnadirBolsaButtonAndWait(); 
 		return articulo;
 	}
 	
@@ -120,57 +108,7 @@ public class UtilsMangoTest {
 		return enIntervalo;
 	}
 
-
-	public static WebElement findDisplayedElement(WebDriver driver, By locator) {
-		List<WebElement> listElements = findDisplayedElements(driver, locator);
-		return listElements.get(0);
-	}
 	
-	/**
-	 * Obtenemos sólo los elementos visibles
-	 */
-	public static List<WebElement> findDisplayedElements(WebDriver webdriver, By locator) {
-		List<WebElement> elementOptions = webdriver.findElements(locator);
-		return (getDisplayedElementsFromList(elementOptions));
-	}
-	
-	public static WebElement findElementPriorizingDisplayed(WebDriver webdriver, By locator) {
-		List<WebElement> elementOptions = webdriver.findElements(locator);
-		if (!elementOptions.isEmpty()) {
-			List<WebElement> displayedElements = getDisplayedElementsFromList(elementOptions);
-			if (!displayedElements.isEmpty()) {
-				return displayedElements.get(0);
-			}
-			return elementOptions.get(0);
-		}
-		
-		return null;
-	}
-	
-	/**
-	 * Obtenemos sólo los elementos visibles
-	 */
-	public static List<WebElement> findDisplayedElements(WebElement element, final By locator) {
-		List<WebElement> elementOptions = element.findElements(locator);
-		return (getDisplayedElementsFromList(elementOptions));
-	}
-	
-	private static List<WebElement> getDisplayedElementsFromList(List<WebElement> elementOptions) {
-		List<WebElement> displayedOptions = new ArrayList<>();
-		try {
-			for (WebElement option : elementOptions) {
-				if (option.isDisplayed()) {
-					displayedOptions.add(option);
-				}
-			}
-		}
-		catch (org.openqa.selenium.StaleElementReferenceException e) {
-			//
-		}
-		
-		return displayedOptions;
-	}
-
 	/**
 	 * Funciona que coge los datos de una hashmap y los formatea para mostrarlos en el report HTML
 	 */
@@ -193,12 +131,12 @@ public class UtilsMangoTest {
 	/**
 	 * Abrimos un enlacen en una nueva pestaña
 	 */
-	public static void openLinkInNewTab(WebDriver driver, By by) throws Exception {
+	public void openLinkInNewTab(By by) throws Exception {
 		WebElement element = driver.findElement(by);
-		openLinkInNewTab(driver, element);
+		openLinkInNewTab(element);
 	}
 	
-	public static void openLinkInNewTab(WebDriver driver, WebElement element) throws Exception {
+	public void openLinkInNewTab(WebElement element) throws Exception {
 		Actions a = new Actions(driver);
 		SeleniumUtils.moveToElement(element, driver);
 		Thread.sleep(500);
@@ -211,18 +149,15 @@ public class UtilsMangoTest {
 		Thread.sleep(500);
 	}
 	
-	/**
-	 * Determina si nos encontramos en un entorno de PRO
-	 */
-	public static boolean isEntornoPRO(AppEcom app, WebDriver driver) {
+	public boolean isEntornoPRO() {
 		String urlBase = TestMaker.getInputParamsSuite().getUrlBase();
-		if (isEntornoPRO(app, urlBase)) {
+		if (isEntornoPRO(urlBase)) {
 			return true;
 		}
-		return isEntornoPRO(app, driver.getCurrentUrl());
+		return isEntornoPRO(driver.getCurrentUrl());
 	}
 	
-	public static boolean isEntornoPRO(AppEcom app, String url) {
+	public boolean isEntornoPRO(String url) {
 		List<String> URLsProShop   = Arrays.asList("shop.mango.com", "shoptest.pro.mango.com");
 		List<String> URLsProOutlet = Arrays.asList("www.mangooutlet.com", "outlettest.pro.mango.com");
 		Iterator<String> itURLsPRO = null;
@@ -241,38 +176,34 @@ public class UtilsMangoTest {
 		return false;
 	}
 	
-	public static boolean isEntornoCI(AppEcom app) {
+	public boolean isEntornoCI() {
 		if (app==AppEcom.shop) { //De momento sólo tenemos CI para Shop
 			String xmlURL = TestMaker.getInputParamsSuite().getUrlBase();
 			if (xmlURL.contains("shop-ci.")) {
 				return true;
 			}
 		}
-		
 		return false;
 	}
 
 	/** Metodo de acceso a cualquier menú de la pantalla principal de Manto.
 	 * Requiere de por lo menos un criterio de búsqueda, hasta dos opcionales (y en modo AND lógico) y el WebDriver para hacer un waitForPageLoaded 
 	 */
-	public static void accesoMenusManto(WebDriver driver, String criterio1, String criterio2) {
+	public void accesoMenusManto(String criterio1, String criterio2) {
 		if (criterio1 != null && !criterio1.isEmpty() && "".compareTo(criterio1)!=0) {
 			if (criterio2 != null && !criterio2.isEmpty() && "".compareTo(criterio2)!=0) {
-				By byElem = By.xpath("//a[text()[contains(.,'" + criterio1 + "') and contains(.,'" + criterio2 + "')]]");
-				PageBase.click(byElem, driver).exec();
+				String xpathElem = "//a[text()[contains(.,'" + criterio1 + "') and contains(.,'" + criterio2 + "')]]";
+				click(xpathElem).exec();
 			} else {
-				By byElem = By.xpath("//a[text()[contains(.,'" + criterio1 + "')]]");
-				PageBase.click(byElem, driver).exec();
+				String xpathElem = "//a[text()[contains(.,'" + criterio1 + "')]]";
+				click(xpathElem).exec();
 			}
 		}
 		
 		SeleniumUtils.waitForPageLoaded(driver, 5);
 	}
 	
-	/**
-	 * @return indica si se ha de probar o no una determinada línea
-	 */
-	public static boolean validarLinea(Pais pais, Linea linea, Channel channel, AppEcom app) throws Exception {
+	public boolean validarLinea(Pais pais, Linea linea) throws Exception {
 		if (!linea.isActiveIn(channel)) {
 			return false;
 		}
@@ -288,9 +219,6 @@ public class UtilsMangoTest {
 		return true;
 	}
 	
-	/**
-	 * @return indica si se ha de probar o no la línea de rebajas
-	 */
 	public static boolean validarLineaRebajas(Pais pais) throws Exception {
 //		boolean validarPestRebajas = false;
 //		if (validarPestRebajas) {
@@ -302,9 +230,6 @@ public class UtilsMangoTest {
 		return false;
 	}
 	
-	/**
-	 * Nos retorna un mail adecuado para el proceso de Checkout
-	 */
 	public static String getEmailForCheckout(Pais pais, boolean emailThatExists) {
 		String emailCheckout = "";
 		if (pais != null && pais.getEmailuser() != null && pais.getEmailuser().trim().compareTo("") != 0) {

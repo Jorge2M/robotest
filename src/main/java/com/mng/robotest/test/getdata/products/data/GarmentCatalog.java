@@ -3,7 +3,7 @@ package com.mng.robotest.test.getdata.products.data;
 import java.util.List;
 import java.util.Optional;
 
-import com.mng.robotest.test.generic.beans.ValePais;
+import com.mng.robotest.test.generic.beans.ValeDiscount;
 
 public class GarmentCatalog {
 
@@ -17,7 +17,7 @@ public class GarmentCatalog {
 	private Labels labels;
 	private AnalyticsEventsData analyticsEventsData;
 	
-	private ValePais valePais = null;
+	private ValeDiscount valePais = null;
 	private String urlFicha;
 
 	public GarmentCatalog() {}
@@ -108,10 +108,10 @@ public class GarmentCatalog {
 		this.labels = labels;
 	}
 	
-	public void setValePais(ValePais valePais) {
+	public void setValePais(ValeDiscount valePais) {
 		this.valePais = valePais;
 	}
-	public ValePais getValePais() {
+	public ValeDiscount getValePais() {
 		return valePais;
 	}
 	public boolean isVale() {

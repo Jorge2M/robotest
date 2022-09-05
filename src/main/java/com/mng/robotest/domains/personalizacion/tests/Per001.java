@@ -19,19 +19,18 @@ public class Per001 extends TestBase {
 	}
 
 	private void accessShop() throws Exception {
-		new AccesoSteps().oneStep(dataTest, false);
+		new AccesoSteps().oneStep(false);
 	}
 	
 	private void selectCamisasAndCheckProducts() throws Exception {
-		SecMenusWrapperSteps.getNew(dataTest).selectMenu1rstLevelTypeCatalog(
-				MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.she, null, "camisas")), dataTest);
+		new SecMenusWrapperSteps().selectMenu1rstLevelTypeCatalog(
+				MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.she, null, "camisas")));
 		
-		new GetProductsSteps().callProductListService(LineaType.she, dataTest.pais, "prendas", "camisas", "14");
+		new GetProductsSteps().callProductListService(LineaType.she, "prendas", "camisas", "14");
 	}
 
 	private void scrollAndCheckDuplicatedProducts() throws Exception {
-		PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(channel, app, driver);
-		pageGaleriaSteps.scrollFromFirstPage(dataTest);
+		new PageGaleriaSteps().scrollFromFirstPage();
 	}
 	
 }

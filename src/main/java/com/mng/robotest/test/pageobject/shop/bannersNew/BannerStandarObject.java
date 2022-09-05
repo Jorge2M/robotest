@@ -2,10 +2,7 @@ package com.mng.robotest.test.pageobject.shop.bannersNew;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
-import com.mng.robotest.test.generic.UtilsMangoTest;
 
 public class BannerStandarObject extends BannerObject {
 
@@ -32,7 +29,7 @@ public class BannerStandarObject extends BannerObject {
 
 	@Override
 	protected String getSrcImageBanner(WebElement bannerScreen) {
-		List<WebElement> listImgsBanner = UtilsMangoTest.findDisplayedElements(bannerScreen, By.xpath("." + XPATH_IMAGE_RELATIVE_BANNER));
+		List<WebElement> listImgsBanner = getElementsVisible(bannerScreen, "." + XPATH_IMAGE_RELATIVE_BANNER);
 		if (!listImgsBanner.isEmpty()) {
 			return (listImgsBanner.get(0).getAttribute("src"));
 		}

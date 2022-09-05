@@ -29,7 +29,7 @@ public class ArticuloNavigations {
 		}
 
 		//Esperamos un máximo de 10 segundos a que aparezca la ficha del artículo
-		PageFicha pageFicha = PageFicha.of(channel, app);
+		PageFicha pageFicha = PageFicha.of(channel);
 		pageFicha.isFichaArticuloUntil(articulo.getReferencia(), 10);
 
 		String idColor = null;
@@ -87,7 +87,7 @@ public class ArticuloNavigations {
 	@SuppressWarnings("static-access")
 	private static void selectColorIfExists(String colourCode, Channel channel, AppEcom app, WebDriver driver) {
 		if (colourCode!=null && "".compareTo(colourCode)!=0) {
-			PageFicha pageFicha = PageFicha.of(channel, app);
+			PageFicha pageFicha = PageFicha.of(channel);
 			if (pageFicha.getSecDataProduct().isClickableColor(colourCode)) {
 				int maxSecondsToWait = 5;
 				if (pageFicha.isPageUntil(maxSecondsToWait)) {

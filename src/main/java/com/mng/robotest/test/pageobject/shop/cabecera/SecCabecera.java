@@ -1,6 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.cabecera;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -19,7 +18,7 @@ import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenuLateralDevice;
 
 public abstract class SecCabecera extends PageBase {
 	
-	protected final SecSearch secSearch;
+	protected final SecSearch secSearch = SecSearch.getNew(channel, app, driver);
 
 	private static final String XPATH_HEADER = "//header";
 	private static final String XPATH_LINK_LOGO_MANGO = 
@@ -32,10 +31,6 @@ public abstract class SecCabecera extends PageBase {
 	public abstract void clickIconoBolsa();
 	public abstract void clickIconoBolsaWhenDisp(int maxSecondsToWait);
 	public abstract void hoverIconoBolsa();
-	
-	protected SecCabecera() {
-		this.secSearch = SecSearch.getNew(channel, app, driver);
-	}
 	
 	public static SecCabecera getNew(Channel channel, AppEcom app) {
 		if (channel==Channel.mobile && app==AppEcom.outlet) {
@@ -70,25 +65,25 @@ public abstract class SecCabecera extends PageBase {
 	
 	public boolean clickLogoMango() {
 		if (isPresentLogoMango(2)) {
-			click(By.xpath(XPATH_LINK_LOGO_MANGO)).exec();
+			click(XPATH_LINK_LOGO_MANGO).exec();
 			return true;
 		}
 		return false;
 	}
 	
 	public boolean isPresentLogoMango(int maxSeconds) {
-		return state(Present, By.xpath(XPATH_LINK_LOGO_MANGO)).wait(maxSeconds).check();
+		return state(Present, XPATH_LINK_LOGO_MANGO).wait(maxSeconds).check();
 	}
 
 	public void hoverLogoMango() throws Exception {
-		if (state(Present, By.xpath(XPATH_LINK_LOGO_MANGO)).check()) {
-			moveToElement(By.xpath(XPATH_LINK_LOGO_MANGO), driver);
+		if (state(Present, XPATH_LINK_LOGO_MANGO).check()) {
+			moveToElement(XPATH_LINK_LOGO_MANGO);
 		}
 	}
 
 	public boolean validaLogoMangoGoesToIdioma(IdiomaPais idioma) {
 		String xpathLogoIdiom = XPATH_LINK_LOGO_MANGO + "[@href[contains(.,'/" + idioma.getAcceso() + "')]]";
-		return (state(Present, By.xpath(xpathLogoIdiom)).check());
+		return state(Present, xpathLogoIdiom).check();
 	}
 
 	public int getNumArticulosBolsa() throws Exception {
@@ -108,8 +103,8 @@ public abstract class SecCabecera extends PageBase {
 		String articulos = "0";
 		waitForPageLoaded(driver); //Para evitar staleElement en la línea posterior
 		String xpathNumberArtIcono = getXPathNumberArtIcono();
-		if (state(Visible, By.xpath(xpathNumberArtIcono)).check()) {
-			articulos = driver.findElement(By.xpath(xpathNumberArtIcono)).getText();
+		if (state(Visible, xpathNumberArtIcono).check()) {
+			articulos = getElement(xpathNumberArtIcono).getText();
 		}
 		return articulos;
 	}
@@ -117,17 +112,17 @@ public abstract class SecCabecera extends PageBase {
 	//-- Específic functions for movil (Shop & Outlet)
 	
 
-	private static final String XPathSmartBanner = XPATH_HEADER + "/div[@id='smartbanner']";
-	private static final String XPathLinkCloseSmartBanner = XPathSmartBanner + "//a[@class='sb-close']";	
-	private static final String XPathIconoMenuHamburguesa = XPATH_HEADER + "//div[@class[contains(.,'menu-open-button')]]";
+	private static final String XPATH_SMART_BANNER = XPATH_HEADER + "/div[@id='smartbanner']";
+	private static final String XPATH_LINK_CLOSE_SMART_BANNER = XPATH_SMART_BANNER + "//a[@class='sb-close']";	
+	private static final String XPATH_ICONO_MENU_HAMBURGUESA = XPATH_HEADER + "//div[@class[contains(.,'menu-open-button')]]";
 
 	
 	/**
 	 * Si existe, cierra el banner de aviso en móvil (p.e. el que sale proponiendo la descarga de la App)
 	 */
 	public void closeSmartBannerIfExistsMobil() {
-		if (state(Visible, By.xpath(XPathLinkCloseSmartBanner)).check()) {
-			click(By.xpath(XPathLinkCloseSmartBanner)).exec();
+		if (state(Visible, XPATH_LINK_CLOSE_SMART_BANNER).check()) {
+			click(XPATH_LINK_CLOSE_SMART_BANNER).exec();
 		}
 	}
 
@@ -158,11 +153,10 @@ public abstract class SecCabecera extends PageBase {
 	}
 
 	public boolean isVisibleIconoMenuHamburguesaUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathIconoMenuHamburguesa))
-				.wait(maxSeconds).check());
+		return state(Visible, XPATH_ICONO_MENU_HAMBURGUESA).wait(maxSeconds).check();
 	}
 
 	public void clickIconoMenuHamburguesaWhenReady(TypeClick typeOfClick) {
-		click(By.xpath(XPathIconoMenuHamburguesa)).exec();
+		click(XPATH_ICONO_MENU_HAMBURGUESA).exec();
 	}
 }

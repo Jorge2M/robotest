@@ -9,6 +9,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.utils.UtilsTest;
@@ -71,17 +72,17 @@ public abstract class LineasArtBolsa extends PageBase {
 	
 	public int getNumLinesArticles() {
 		String xpathLinea = getXPathLinea();
-		return (driver.findElements(By.xpath(xpathLinea)).size());
+		return getElements(xpathLinea).size();
 	}
 	
 	public WebElement getLineaArticuloByPosicion(int posicion) {
 		String xpathArticle = getXPathLineaArticleByPosicion(posicion);
-		return (driver.findElement(By.xpath(xpathArticle)));
+		return getElement(xpathArticle);
 	}
 	
 	public WebElement getLineaArticuloByReferencia(String reference) {
 		String xpathArticle = getXPathLineaArticleByReference(reference);
-		return (driver.findElement(By.xpath(xpathArticle)));
+		return getElement(xpathArticle);
 	}
 	
 	String getDataArticle(DataArtBolsa typeData, WebElement lineaArticle) {
@@ -115,6 +116,7 @@ public abstract class LineasArtBolsa extends PageBase {
 	
 	private String getReferenciaArticle(WebElement lineaArticleWeb) {
 		String xpathLinRelative = getXPathLinkRelativeArticle();
+		state(State.Visible, lineaArticleWeb).by(By.xpath(xpathLinRelative)).wait(1).check();
 		WebElement link = lineaArticleWeb.findElement(By.xpath(xpathLinRelative));
 		if (link==null) {
 			return "";
@@ -127,7 +129,6 @@ public abstract class LineasArtBolsa extends PageBase {
 		
 	}
 
-	
 	public ArticuloDataBolsaScreen getArticuloDataByPosicion(int posicion) {
 		WebElement lineaArticleWeb = getLineaArticuloByPosicion(posicion);
 		ArticuloDataBolsaScreen articleData = getArticuloBolsaData(lineaArticleWeb); 

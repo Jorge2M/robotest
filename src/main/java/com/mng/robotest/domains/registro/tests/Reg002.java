@@ -43,12 +43,12 @@ public class Reg002 extends TestBase {
 	}
 
 	private void accesoAndClickRegistrate() throws Exception {
-		new AccesoSteps().oneStep(dataTest, false);
-		userMenusSteps.selectRegistrate(dataTest);
+		new AccesoSteps().oneStep(false);
+		userMenusSteps.selectRegistrate();
 	}
 	
 	private void registerWithoutInputData() {
-		pageRegistroIniSteps.clickRegistrateButton(dataTest.pais, dataRegister, ErrorRegister.InputWarnings);
+		pageRegistroIniSteps.clickRegistrateButton(dataRegister, ErrorRegister.InputWarnings);
 	}
 	
 	private void registerWithIncorrectInputData() {
@@ -77,7 +77,7 @@ public class Reg002 extends TestBase {
 		
 		String dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.pageInicial);
 		pageRegistroIniSteps.sendFixedDataToInputs(dataToSend, dataToSendInHtmlFormat);
-		pageRegistroIniSteps.clickRegistrateButton(dataTest.pais, dataRegister, ErrorRegister.UsrNoExistsInGmail);
+		pageRegistroIniSteps.clickRegistrateButton(dataRegister, ErrorRegister.UsrNoExistsInGmail);
 	}
 
 	private void registerWithExistentEmail() {
@@ -96,6 +96,6 @@ public class Reg002 extends TestBase {
 		String dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.pageInicial);
 		
 		pageRegistroIniSteps.sendFixedDataToInputs(dataToSend, dataToSendInHtmlFormat);
-		pageRegistroIniSteps.clickRegistrateButton(dataTest.pais, dataRegister, ErrorRegister.UsrExistsInMango);
+		pageRegistroIniSteps.clickRegistrateButton(dataRegister, ErrorRegister.UsrExistsInMango);
 	}
 }

@@ -1,8 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.menus.mobil;
 
-import org.openqa.selenium.WebDriver;
-
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
 
 public class SecLineasTabletShop extends SecLineasTablet {
@@ -16,10 +13,6 @@ public class SecLineasTabletShop extends SecLineasTablet {
 	static String XPathLinkLineaKids =IniXPathLinkLinea + "='kids']"; //p.e. Bolivia
 	static String XPathLinkLineaVioleta = IniXPathLinkLinea + "='violeta']";
 	static String XPathLinkLineaHome = IniXPathLinkLinea + "='home']";
-	
-	public SecLineasTabletShop(WebDriver driver) {
-		super(AppEcom.shop, driver);
-	}
 	
 	@Override
 	public String getXPathLineaLink(LineaType lineaType) throws IllegalArgumentException {

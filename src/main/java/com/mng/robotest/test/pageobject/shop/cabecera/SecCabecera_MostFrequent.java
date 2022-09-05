@@ -1,7 +1,6 @@
 package com.mng.robotest.test.pageobject.shop.cabecera;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
@@ -24,8 +23,8 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	private final ModalUserSesionShopDesktop modalUserSesionShopDesktop;
 	
 	private static final String XPATH_DIV_NAV_TOOLS = "//div[@id='navTools']";
-	private static final String XPATH_NUM_ARTICLES_MANY_LOCATIONS = "//*[@class='icon-button-items']";
-	private static final String XPATH_NUM_ARTICLES_BOLSA_DESKTOP = "//span[@data-testid[contains(.,'numItems')] or @data-testid[contains(.,'totalItems')]]";
+	private static final String XPATH_NUM_ARTICLES_MOBIL_OUTLET = "//*[@class='icon-button-items']";
+	private static final String XPATH_NUM_ARTICLES_MANY_LOCATIONS = "//span[@data-testid[contains(.,'numItems')] or @data-testid[contains(.,'totalItems')]]";
 	
 	public enum IconoCabeceraShop_DesktopMobile implements ElementPage {
 		lupa(
@@ -103,10 +102,10 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	
 	public static String getXPathNumberArtIcono(Channel channel, AppEcom app) {
 //		return XPathNumArticlesBolsaPre + " | " + XPathNumArticlesBolsaPro;
-		if (channel==Channel.desktop/* && app==AppEcom.shop*/) {
-			return XPATH_NUM_ARTICLES_BOLSA_DESKTOP;
+		if (channel==Channel.desktop || app==AppEcom.shop) {
+			return XPATH_NUM_ARTICLES_MANY_LOCATIONS;
 		}
-		return XPATH_NUM_ARTICLES_MANY_LOCATIONS;
+		return XPATH_NUM_ARTICLES_MOBIL_OUTLET;
 	}
 	
 	@Override
@@ -155,7 +154,7 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 		moveToElement(icono.getBy(channel, app), driver);
 	}
 	
-	public void focusAwayBolsa(WebDriver driver) {
+	public void focusAwayBolsa() {
 		//The moveElement doens't works properly for hide the Bolsa-Modal
 		click(XPATH_DIV_NAV_TOOLS).exec();
 	}

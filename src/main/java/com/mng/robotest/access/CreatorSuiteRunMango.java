@@ -15,7 +15,6 @@ import com.mng.robotest.test.suites.PaisIdiomaSuite;
 import com.mng.robotest.test.suites.RegistrosSuite;
 import com.mng.robotest.test.suites.SmokeMantoSuite;
 import com.mng.robotest.test.suites.SmokeTestSuite;
-import com.mng.robotest.test.suites.ValesPaisesSuite;
 import com.github.jorge2m.testmaker.domain.CreatorSuiteRun;
 import com.github.jorge2m.testmaker.domain.SuiteMaker;
 //import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.EmbeddedDriver;
@@ -50,8 +49,6 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 				return (new SmokeMantoSuite(inputParamsMango));
 			case PagosPaises:
 				return (new PagosPaisesSuite(inputParamsMango));
-			case ValesPaises:
-				return (new ValesPaisesSuite(inputParamsMango));
 			case PaisIdiomaBanner:
 				return (new PaisIdiomaSuite(inputParamsMango));
 			case MenusPais:

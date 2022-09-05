@@ -9,7 +9,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.Factory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mng.robotest.test.appshop.EgyptOrderTest;
+import com.mng.robotest.test.appshop.egyptorders.EgyptOrderTest;
 import com.mng.robotest.test.factoryes.entities.EgyptCities;
 import com.mng.robotest.test.factoryes.entities.EgyptCity;
 

@@ -4,10 +4,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 
 public class PagePaysecureQiwi1rst extends PageBase {
@@ -36,17 +34,16 @@ public class PagePaysecureQiwi1rst extends PageBase {
 		}
 	}
 	
-	public PagePaysecureQiwi1rst(AppEcom app, WebDriver driver) {
-		super(driver);
-		isPro = UtilsMangoTest.isEntornoPRO(app, driver);
+	public PagePaysecureQiwi1rst() {
+		isPro = new UtilsMangoTest().isEntornoPRO();
 	}
 	
 	public boolean isPage() {
-		return (state(Visible, PaysecureGateway.Qiwi.getBy(isPro)).check());
+		return state(Visible, PaysecureGateway.Qiwi.getBy(isPro)).check();
 	}
 
 	public boolean isPresentIcon(PaysecureGateway gateway) {
-		return (state(Present, gateway.getBy(isPro)).check());
+		return state(Present, gateway.getBy(isPro)).check();
 	}
 
 	public void clickIcon(PaysecureGateway gateway) {

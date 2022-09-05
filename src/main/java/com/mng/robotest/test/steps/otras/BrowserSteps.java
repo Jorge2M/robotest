@@ -142,7 +142,7 @@ public class BrowserSteps {
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(Sitemapindex.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			StringReader reader = new StringReader(UtilsMangoTest.getPageSource(driver));
+			StringReader reader = new StringReader(new UtilsMangoTest().getPageSource());
 			sitemapIndex = (Sitemapindex) jaxbUnmarshaller.unmarshal(reader);
 		}
 		catch (Exception e) {}

@@ -16,7 +16,7 @@ import com.mng.robotest.test.data.Descuento;
 import com.mng.robotest.test.data.Descuento.DiscountType;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.generic.ChequeRegalo;
-import com.mng.robotest.test.generic.beans.ValePais;
+import com.mng.robotest.test.generic.beans.ValeDiscount;
 import com.mng.robotest.test.pageobject.shop.checkout.Page1DktopCheckout;
 import com.mng.robotest.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
@@ -94,16 +94,16 @@ public class Page1DktopCheckoutSteps {
 	}
 	
 	@Validation (
-		description="<b>Sí</b> aparece el texto del vale/campaña <b>#{valePais.getCampanya()}</b> (\"#{valePais.getTextoCheckout()}\")",
+		description="<b>Sí</b> aparece el texto del vale <b>#{valePais.getCodigoVale()}</b> (\"#{valePais.getTextoCheckout()}\")",
 		level=State.Defect)
-	public boolean checkIsVisibleTextVale(ValePais valePais) {
+	public boolean checkIsVisibleTextVale(ValeDiscount valePais) {
 		return (page1DktopCheckout.checkTextValeCampaingIs(valePais.getTextoCheckout()));
 	}
 	
 	@Validation (
-		description="<b>No</b> aparece el texto del vale/campaña <b>#{valePais.getCampanya()}</b> (\"#{valePais.getTextoCheckout()}\")",
+		description="<b>No</b> aparece el texto del vale <b>#{valePais.getCodigoVale()}</b> (\"#{valePais.getTextoCheckout()}\")",
 		level=State.Defect)
-	public boolean checkIsNotVisibleTextVale(ValePais valePais) {
+	public boolean checkIsNotVisibleTextVale(ValeDiscount valePais) {
 		return (!page1DktopCheckout.checkTextValeCampaingIs(valePais.getTextoCheckout()));
 	}
 	
@@ -111,14 +111,12 @@ public class Page1DktopCheckoutSteps {
 		description="Introducir el vale <b style=\"color:blue;\">#{valePais.getCodigoVale()}</b> y pulsar el botón \"CONFIRMAR\"", 
 		expected="Aparece la página de resumen de artículos con los descuentos correctamente aplicados",
 		saveNettraffic=SaveWhen.Always)
-	public void inputValeDescuento(ValePais valePais, DataBag dataBag) throws Exception { 
+	public void inputValeDescuento(ValeDiscount valePais, DataBag dataBag) throws Exception { 
 		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app);
 		pageCheckoutWrapper.inputCodigoPromoAndAccept(valePais.getCodigoVale());
 		dataBag.setImporteTotal(pageCheckoutWrapper.getPrecioTotalFromResumen());	
 		checkAfterInputDiscountVale(valePais);
-		if (valePais.isValid()) {
-			checkValeDiscountIsCorrect(valePais, dataBag);
-		}
+		checkValeDiscountIsCorrect(valePais, dataBag);
 		
 		GenericChecks.checkDefault(driver);
 		GenericChecks.from(Arrays.asList(
@@ -127,25 +125,19 @@ public class Page1DktopCheckoutSteps {
 	}
 	
 	@Validation
-	private ChecksTM checkAfterInputDiscountVale(ValePais valePais) {
+	private ChecksTM checkAfterInputDiscountVale(ValeDiscount valePais) {
 		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 1;
 		boolean isVisibleError = page1DktopCheckout.isVisibleErrorRojoInputPromoUntil(maxSeconds);
-		if (valePais.isValid()) {
-		 	checks.add(
-				"<b>No</b> aparece mensaje de error en rojo (rgba(255, 0, 0, 1) en el bloque correspondiente al \"Código promocional\"",
-				!isVisibleError, State.Defect);
-		} else {
-		 	checks.add(
-				"<b>Sí</b> aparece mensaje de error en rojo (rgba(255, 0, 0, 1) en el bloque correspondiente al \"Código promocional\"",
-				isVisibleError, State.Defect);
-		}
+	 	checks.add(
+			"<b>No</b> aparece mensaje de error en rojo (rgba(255, 0, 0, 1) en el bloque correspondiente al \"Código promocional\"",
+			!isVisibleError, State.Defect);
 		
 		return checks;
 	}
 	
 	@Validation
-	private ChecksTM checkValeDiscountIsCorrect(ValePais valePais, DataBag dataBag) throws Exception {
+	private ChecksTM checkValeDiscountIsCorrect(ValeDiscount valePais, DataBag dataBag) throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
 		Descuento descuento = new Descuento(valePais.getPorcDescuento(), app);
 	 	checks.add(

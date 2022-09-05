@@ -3,7 +3,6 @@ package com.mng.robotest.domains.compra.beans;
 import java.io.Serializable;
 
 import com.mng.robotest.test.suites.PagosPaisesSuite.VersionPagosSuite;
-import com.mng.robotest.test.suites.ValesPaisesSuite.VersionValesSuite;
 
 public class ConfigCheckout implements Cloneable, Serializable {
 	
@@ -78,12 +77,6 @@ public class ConfigCheckout implements Cloneable, Serializable {
 			this.checkPagos = version.validaPagos();
 			this.checkManto = version.validaPedidosEnManto();
 			this.checkMisCompras = version.forceTestMisCompras();
-			return this;
-		}
-		
-		public Builder version(VersionValesSuite version) {
-			this.checkPasarelas = version.validaPasarelas();
-			this.checkPagos = version.validaPagos();
 			return this;
 		}
 		

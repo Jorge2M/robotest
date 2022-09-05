@@ -18,9 +18,8 @@ import com.mng.robotest.test.beans.AccesoEmpl;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Pago.TypePago;
-import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataBag;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.generic.ChequeRegalo;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.pageobject.shop.checkout.PageCheckoutWrapper;
@@ -45,19 +44,11 @@ public class PageCheckoutWrapperSteps extends StepBase {
 	private final SecIdealSteps secIdealSteps;
 	private final SecTarjetaPciSteps secTarjetaPciSteps;
 	
-	private final Channel channel;
-	private final AppEcom app;
-
-
-	public PageCheckoutWrapperSteps(Channel channel, AppEcom app) {
-		this.channel = channel;
-		this.app = app;
-		
+	public PageCheckoutWrapperSteps() {
 		this.pageCheckoutWrapper = new PageCheckoutWrapper(channel, app);
-		
 		this.modalDirecEnvioSteps = new ModalDirecEnvioSteps(channel, app);
 		this.secMetodoEnvioDesktopSteps = new SecMetodoEnvioDesktopSteps();
-		this.secStoreCreditSteps = new SecStoreCreditSteps(channel, app, driver);
+		this.secStoreCreditSteps = new SecStoreCreditSteps();
 		this.secTMangoSteps = new SecTMangoSteps(channel, driver);
 		this.secKrediKartiSteps = new SecKrediKartiSteps(channel, driver); 
 		this.secBillpaySteps = new SecBillpaySteps(channel);
@@ -171,16 +162,16 @@ public class PageCheckoutWrapperSteps extends StepBase {
 	/**
 	 * Realiza una navegación (conjunto de pasos/validaciones) mediante la que se selecciona el método de envío y finalmente el método de pago 
 	 */
-	public void fluxSelectEnvioAndClickPaymentMethod(DataCtxPago dCtxPago, Pais pais) throws Exception {
+	public void fluxSelectEnvioAndClickPaymentMethod(DataPago dataPago, Pais pais) throws Exception {
 		boolean pagoPintado = false;
-		if (!dCtxPago.getFTCkout().chequeRegalo) {
-			pagoPintado = secMetodoEnvioDesktopSteps.fluxSelectEnvio(dCtxPago, pais);
+		if (!dataPago.getFTCkout().chequeRegalo) {
+			pagoPintado = secMetodoEnvioDesktopSteps.fluxSelectEnvio(dataPago, pais);
 		}
-		boolean methodSelectedOK = forceClickIconoPagoAndWait(pais, dCtxPago.getDataPedido().getPago(), !pagoPintado);
+		boolean methodSelectedOK = forceClickIconoPagoAndWait(pais, dataPago.getDataPedido().getPago(), !pagoPintado);
 		if (!methodSelectedOK) {
 			//En caso de no conseguir seleccionar correctamente el pago no nos podemos arriesgar a continuar con el pago
 			//porque quizás esté seleccionado otro método de pago del tipo Contrareembolso y un "Confirmar Pago" desencadenaría la compra en PRO
-			throw new RuntimeException("Problem selecting payment method " + dCtxPago.getDataPedido().getPago().getNombre() + " in country " + pais.getNombre_pais());
+			throw new RuntimeException("Problem selecting payment method " + dataPago.getDataPedido().getPago().getNombre() + " in country " + pais.getNombre_pais());
 		}
 	}
 	
@@ -248,8 +239,8 @@ public class PageCheckoutWrapperSteps extends StepBase {
 	@Step (
 		description="Introducimos los datos de la tarjeta (" + tagTipoTarj + ") " + tagNumTarj + " y pulsamos el botón \"Confirmar pago\"",
 		expected="Aparece la página de resultado OK")
-	public void inputDataTrjAndConfirmPago(DataCtxPago dCtxPago) throws Exception {
-		Pago pago = dCtxPago.getDataPedido().getPago();
+	public void inputDataTrjAndConfirmPago(DataPago dataPago) throws Exception {
+		Pago pago = dataPago.getDataPedido().getPago();
 		StepTM step = TestMaker.getCurrentStepInExecution();
 		step.replaceInDescription(tagTipoTarj, pago.getTipotarj());
 		step.replaceInDescription(tagNumTarj, pago.getNumtarj());
@@ -271,7 +262,7 @@ public class PageCheckoutWrapperSteps extends StepBase {
 			pageCheckoutWrapper.inputDniPci(pago.getDni());   
 		}
 
-		pageCheckoutWrapper.confirmarPagoFromMetodos(dCtxPago.getDataPedido());
+		pageCheckoutWrapper.confirmarPagoFromMetodos(dataPago.getDataPedido());
 		PageRedirectPasarelaLoadingSteps.validateDisappeared(5, driver);
 	}
 
@@ -285,10 +276,10 @@ public class PageCheckoutWrapperSteps extends StepBase {
 	@Step (
 		description="Seleccionamos la tarjeta guardada, si nos lo pide introducimos el cvc #{cvc} y pulsamos el botón \"Confirmar pago\"",
 		expected="Aparece la página de resultado OK")
-	public void selectTrjGuardadaAndConfirmPago(DataCtxPago dCtxPago, String cvc) throws Exception {
+	public void selectTrjGuardadaAndConfirmPago(DataPago dataPago, String cvc) throws Exception {
 		pageCheckoutWrapper.clickRadioTrjGuardada();
 		pageCheckoutWrapper.inputCvcTrjGuardadaIfVisible(cvc);
-		pageCheckoutWrapper.confirmarPagoFromMetodos(dCtxPago.getDataPedido());
+		pageCheckoutWrapper.confirmarPagoFromMetodos(dataPago.getDataPedido());
 		PageRedirectPasarelaLoadingSteps.validateDisappeared(5, driver);
 	}
 
@@ -410,9 +401,9 @@ public class PageCheckoutWrapperSteps extends StepBase {
 	@Step (
 		description="Escogemos el banco \"" + tagNombreBanco + "\" en la pestaña de selección", 
 		expected="El banco aparece seleccionado")
-	public void selectBancoEPS(DataCtxShop dCtxSh) throws Exception {
+	public void selectBancoEPS() throws Exception {
 		String nombreBanco = "Easybank";
-		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
+		if (!new UtilsMangoTest().isEntornoPRO()) {
 			nombreBanco = "Test Issuer";
 		}
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagNombreBanco, nombreBanco);

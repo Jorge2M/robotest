@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop.modales;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
@@ -9,11 +7,7 @@ import com.mng.robotest.test.pageobject.shop.modales.ModalChatBot;
 
 public class ModalChatBotSteps {
 
-	private final ModalChatBot modalChatBot;
-	
-	public ModalChatBotSteps(WebDriver driver) {
-		this.modalChatBot = new ModalChatBot(driver);
-	}
+	private final ModalChatBot modalChatBot = new ModalChatBot();
 	
 	@Validation (
 		description="Aparece el icono de ChatBot",

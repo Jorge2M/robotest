@@ -1,10 +1,10 @@
 package com.mng.robotest.test.pageobject.shop.footer;
 
+import com.mng.robotest.domains.micuenta.pageobjects.PageAccesoMisCompras;
+import com.mng.robotest.domains.micuenta.pageobjects.PageInputPedido;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputDataNew;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputDataOld;
 import com.mng.robotest.test.pageobject.shop.footer.SecFooter.FooterLink;
-import com.mng.robotest.test.pageobject.shop.micuenta.PageAccesoMisCompras;
-import com.mng.robotest.test.pageobject.shop.miscompras.PageInputPedido;
 import com.mng.robotest.test.pageobject.shop.modales.ModalBuscadorTiendas;
 
 

@@ -26,18 +26,17 @@ public class Fic005 extends TestBase {
 	final GarmentCatalog articlePersonalizable;
 	
 	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
-	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(dataTest.pais);
+	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps();
 	final SecModalPersonalizacionSteps modalPersonalizacionSteps = new SecModalPersonalizacionSteps();
 	
 	public Fic005() throws Exception {
 		super();
-
 		articlePersonalizable = getArticlePersonalizable(dataTest.pais.getCodigo_alf(), app, driver);
 	}
 	
 	@Override
 	public void execute() throws Exception {
-		new AccesoSteps().oneStep(dataTest, false);
+		new AccesoSteps().oneStep(false);
  		searchAndCheckArticlePersonalizable();
 		
 		pageFichaSteps.selectFirstTallaAvailable();
@@ -58,7 +57,7 @@ public class Fic005 extends TestBase {
 	}
 
 	private void searchAndCheckArticlePersonalizable() throws Exception {
-		secBuscadorSteps.searchArticulo(articlePersonalizable, dataTest.pais);
+		secBuscadorSteps.searchArticulo(articlePersonalizable);
 		int numColors = pageFichaSteps.getFicha().getNumColors();
 		for (int i=1; i<=numColors; i++) {
 			pageFichaSteps.selectColor(i);

@@ -3,105 +3,105 @@ package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test.beans.Pago.TypePago;
-import com.mng.robotest.test.data.DataCtxShop;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.data.DataTest;
+import com.mng.robotest.test.datastored.DataPago;
 
 public class FactoryPagos {
 	
-	public static PagoSteps makePagoSteps(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) throws Exception {
-		TypePago typePago = dCtxPago.getDataPedido().getPago().getTypePago();
+	public static PagoSteps makePagoSteps(DataPago dataPago) throws Exception {
+		TypePago typePago = dataPago.getDataPedido().getPago().getTypePago();
 		
 		PagoSteps pagoMaked = null; 
 		switch (typePago) {
 		case TarjetaIntegrada:
-			pagoMaked = new PagoTarjetaIntegrada(dCtxSh, dCtxPago);
+			pagoMaked = new PagoTarjetaIntegrada(dataPago);
 			break;
 		case KrediKarti:
-			pagoMaked = new PagoKrediKarti(dCtxSh, dCtxPago);
+			pagoMaked = new PagoKrediKarti(dataPago);
 			break;
 		case TMango:
-			pagoMaked = new PagoTMango(dCtxSh, dCtxPago);
+			pagoMaked = new PagoTMango(dataPago);
 			break;
 		case Billpay:
-			pagoMaked = new PagoBillpay(dCtxSh, dCtxPago);
+			pagoMaked = new PagoBillpay(dataPago);
 			break;
 		case Paypal:
-			pagoMaked = new PagoPaypal(dCtxSh, dCtxPago);
+			pagoMaked = new PagoPaypal(dataPago);
 			break;  
 		case Mercadopago:
-			pagoMaked = new PagoMercadopago(dCtxSh, dCtxPago);
+			pagoMaked = new PagoMercadopago(dataPago);
 			break;
 		case Amazon:
-			pagoMaked = new PagoAmazon(dCtxSh, dCtxPago);
+			pagoMaked = new PagoAmazon(dataPago);
 			break;			
 		case Postfinance:
-			pagoMaked = new PagoPostfinance(dCtxSh, dCtxPago);
+			pagoMaked = new PagoPostfinance(dataPago);
 			break;			
 		case Trustpay:
-			pagoMaked = new PagoTrustpay(dCtxSh, dCtxPago);
+			pagoMaked = new PagoTrustpay(dataPago);
 			break;			
 		case Multibanco:
-			pagoMaked = new PagoMultibanco(dCtxSh, dCtxPago);
+			pagoMaked = new PagoMultibanco(dataPago);
 			break;			
 		case Paytrail:
-			pagoMaked = new PagoPaytrail(dCtxSh, dCtxPago);
+			pagoMaked = new PagoPaytrail(dataPago);
 			break;			
 		case Dotpay:
-			pagoMaked = new PagoDotpay(dCtxSh, dCtxPago);
+			pagoMaked = new PagoDotpay(dataPago);
 			break;			
 		case Ideal:
-			pagoMaked = new PagoIdeal(dCtxSh, dCtxPago);
+			pagoMaked = new PagoIdeal(dataPago);
 			break;   
 		case Eps:
-			pagoMaked = new PagoEps(dCtxSh, dCtxPago);
+			pagoMaked = new PagoEps(dataPago);
 			break;  
 		case Sepa:
-			pagoMaked = new PagoSepa(dCtxSh, dCtxPago);
+			pagoMaked = new PagoSepa(dataPago);
 			break;			
 		case Giropay:
-			pagoMaked = new PagoGiropay(dCtxSh, dCtxPago);
+			pagoMaked = new PagoGiropay(dataPago);
 			break;			
 		case Sofort:
-			pagoMaked = new PagoSofort(dCtxSh, dCtxPago);
+			pagoMaked = new PagoSofort(dataPago);
 			break;	   
 		case PayMaya:
-			pagoMaked = new PagoPayMaya(dCtxSh, dCtxPago);
+			pagoMaked = new PagoPayMaya(dataPago);
 			break;
 		case Klarna:
-			pagoMaked = new PagoKlarna(dCtxSh, dCtxPago);
+			pagoMaked = new PagoKlarna(dataPago);
 			break;
 		case KlarnaUK:
-			pagoMaked = new PagoKlarnaUK(dCtxSh, dCtxPago);
+			pagoMaked = new PagoKlarnaUK(dataPago);
 			break;
 		case PaysecureQiwi:
-			pagoMaked = new PagoPaysecureQiwi(dCtxSh, dCtxPago);
+			pagoMaked = new PagoPaysecureQiwi(dataPago);
 			break;
 		case StoreCredit:
-			pagoMaked = new PagoStoreCredit(dCtxSh, dCtxPago);
+			pagoMaked = new PagoStoreCredit(dataPago);
 			break;
 		case Assist:
-			pagoMaked = new PagoAssist(dCtxSh, dCtxPago);
+			pagoMaked = new PagoAssist(dataPago);
 			break;			
 		case Yandex:
-			pagoMaked = new PagoYandex(dCtxSh, dCtxPago);
+			pagoMaked = new PagoYandex(dataPago);
 			break;
 		case PasarelaOtras:
-			pagoMaked = new PagoPasarelaOtras(dCtxSh, dCtxPago);
+			pagoMaked = new PagoPasarelaOtras(dataPago);
 			break;
 		case KCP:
-			pagoMaked = new PagoKCP(dCtxSh, dCtxPago);
+			pagoMaked = new PagoKCP(dataPago);
 			break;
 		case ContraReembolso:			
-			pagoMaked = new PagoContraReembolso(dCtxSh, dCtxPago);
+			pagoMaked = new PagoContraReembolso(dataPago);
 			break;
 		case Bancontact:
-			pagoMaked = new PagoBancontact(dCtxSh, dCtxPago);
+			pagoMaked = new PagoBancontact(dataPago);
 			break;
 		case ProcessOut:
-			pagoMaked = new PagoProcessOut(dCtxSh, dCtxPago);
+			pagoMaked = new PagoProcessOut(dataPago);
 			break;
 		case TpvVotf:
-			pagoMaked = new PagoTpvVotf(dCtxSh, dCtxPago);
+			pagoMaked = new PagoTpvVotf(dataPago);
 			break;
 		default:
 			break;

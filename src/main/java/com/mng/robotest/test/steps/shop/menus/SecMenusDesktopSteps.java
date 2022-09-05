@@ -6,14 +6,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
@@ -21,11 +19,10 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Linea;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
-import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.generic.stackTrace;
 import com.mng.robotest.test.getdata.products.GetterProducts;
@@ -58,32 +55,19 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test.utils.WebDriverMngUtils;
 
-@SuppressWarnings({"static-access"})
-public class SecMenusDesktopSteps {
+public class SecMenusDesktopSteps extends StepBase {
 
 	private static final String PREFIX_SALE = "<b style=\"color:blue\">Rebajas</b></br>";
 	
-	private final WebDriver driver = TestMaker.getDriverTestCase();
-	private final Pais pais;
-	private final AppEcom app;
-	private final SecMenusDesktop secMenus;
+	private final SecMenusDesktop secMenus = new SecMenusDesktop(app, channel);
 	
-	public SecMenusDesktopSteps(Pais pais, AppEcom app, Channel channel) {
-		this.pais = pais;
-		this.app = app;
-		this.secMenus = new SecMenusDesktop(app, channel);
-	}
-	
-	/**
-	 * Selección de un menú superior (lateral en el caso de móvil) con un catálogo de artículos asociado (p.e. vestidos, camisas, etc.)
-	 */
 	@Step(
 		description="Seleccionar el menú superior <b>#{menu1rstLevel}</b>", 
 		expected="Aparece la galería asociada al menú",
 		saveNettraffic=SaveWhen.Always)
-	public void selectMenuSuperiorTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
+	public void selectMenuSuperiorTypeCatalog(Menu1rstLevel menu1rstLevel) throws Exception {
 		secMenus.secMenuSuperior.secBlockMenus.gotoAndClickMenu(menu1rstLevel);
-		validaSelecMenu(menu1rstLevel, dCtxSh);
+		validaSelecMenu(menu1rstLevel);
 	}
 	@Validation(
 		description="No existe el menú superior <b>#{menu1rstLevel}</b>",
@@ -96,26 +80,26 @@ public class SecMenusDesktopSteps {
 		description="Seleccionar el menú lateral de 1er nivel <b>#{menu1rstLevel}</b>", 
 		expected="Aparecen artículos de tipo Camiseta",
 		saveNettraffic=SaveWhen.Always)
-	public void selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
+	public void selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel) throws Exception {
 		secMenus.secMenuLateral.clickMenu(menu1rstLevel);
-		validaSelecMenu(menu1rstLevel, dCtxSh);
+		validaSelecMenu(menu1rstLevel);
 	}
 	
-	public void selectMenu2oLevel(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh) throws Exception {
+	public void selectMenu2oLevel(Menu2onLevel menu2onLevel) throws Exception {
 		if (app==AppEcom.outlet) {
 			selectMenuLateral2oLevel(menu2onLevel);
 		} else {
-			selectMenuSubfamilia(menu2onLevel, dCtxSh);
+			selectMenuSubfamilia(menu2onLevel);
 		}
-		validaSelecMenu(menu2onLevel, dCtxSh);
+		validaSelecMenu(menu2onLevel);
 	}
 	
 	@Step (
 		description="Seleccionar la subfamília <b>#{menu2onLevel}</b>", 
 		expected="Aparecen artículos asociados al menú",
 		saveNettraffic=SaveWhen.Always)
-	private void selectMenuSubfamilia(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh) {
-		PageGaleria pageGaleria = PageGaleriaDesktop.getNew(dCtxSh.channel, app);
+	private void selectMenuSubfamilia(Menu2onLevel menu2onLevel) {
+		PageGaleria pageGaleria = PageGaleriaDesktop.getNew(channel, app);
 		((PageGaleriaDesktop)pageGaleria).getSecSubmenusGallery().clickSubmenu(menu2onLevel.getNombre());
 	}
 	
@@ -130,9 +114,8 @@ public class SecMenusDesktopSteps {
 	/**
 	 * Validación de la selección de un menú lateral de 1er o 2o nivel 
 	 */
-	public void validaSelecMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh) throws Exception {
-		PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-		pageGaleriaSteps.validateGaleriaAfeterSelectMenu(dCtxSh.appE);
+	public void validaSelecMenu(MenuLateralDesktop menu) throws Exception {
+		new PageGaleriaSteps().validateGaleriaAfeterSelectMenu();
 		checksSelecMenuEspecificDesktop(menu);
 		
 		GenericChecks.checkDefault(driver);
@@ -153,7 +136,7 @@ public class SecMenusDesktopSteps {
 	 * Validaciones de selección de un menú de 1er nivel (superior o lateral) (las específicas de Desktop)
 	 */
 	public void checksSelecMenuEspecificDesktop(MenuLateralDesktop menu) throws Exception {
-		PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(Channel.desktop, app, driver);
+		PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
 		pageGaleriaSteps.bannerHead.validateBannerSuperiorIfExistsDesktop();
 		if (menu.isMenuLateral()) {
 			checkIsSelectedLateralMenu(menu, 2);
@@ -177,8 +160,7 @@ public class SecMenusDesktopSteps {
 		}
 		
 		pageGaleriaSteps.getSecSelectorPreciosSteps().validaIsSelector();
-		SecMenusWrap secMenus = new SecMenusWrap();
-		LineaType lineaResult = secMenus.getLineaResultAfterClickMenu(menu.getLinea(), menu.getNombre());
+		LineaType lineaResult = new SecMenusWrap().getLineaResultAfterClickMenu(menu.getLinea(), menu.getNombre());
 		validateIsLineaSelected(lineaResult);	
 	}
 	
@@ -187,7 +169,7 @@ public class SecMenusDesktopSteps {
 		level=State.Warn)
 	private boolean checkIsSelectedLateralMenu(MenuLateralDesktop menu, int maxSeconds) {
 		if (app!=AppEcom.outlet && menu instanceof Menu2onLevel) {
-			PageGaleria pageGaleria = PageGaleriaDesktop.getNew(Channel.desktop, app);
+			PageGaleria pageGaleria = PageGaleriaDesktop.getNew(channel, app);
 			return ((PageGaleriaDesktop)pageGaleria).getSecSubmenusGallery().isMenuSelected(menu.getNombre());
 		}
 		return (secMenus.secMenuLateral.isSelectedMenu(menu, maxSeconds));
@@ -212,7 +194,7 @@ public class SecMenusDesktopSteps {
 		for (int i=0; i<textsArticlesGalery.length; i++) {
 			litsToContain+= "<br>" + textsArticlesGalery[i];
 		}
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel, app);
 		ArrayList<String> listTxtArtNoValidos = pageGaleriaDesktop.nombreArticuloNoValido(textsArticlesGalery);
 		String articlesWrongWarning = "";
 		if (listTxtArtNoValidos.size() > 0) {
@@ -264,7 +246,7 @@ public class SecMenusDesktopSteps {
 		expected=
 			"Aparece la página correcta asociada a la línea #{lineaType.getNameUpper()}")
 	public void seleccionLinea(LineaType lineaType) throws Exception {
-		secMenus.secMenuSuperior.secLineas.selecLinea(pais, lineaType);	   
+		secMenus.secMenuSuperior.secLineas.selecLinea(dataTest.pais, lineaType);	   
 		validaSelecLinea(lineaType, null);
 	}
 	
@@ -279,7 +261,7 @@ public class SecMenusDesktopSteps {
 	}	
 	
 	public void validaSelecLinea(LineaType lineaType, SublineaType sublineaType) throws Exception {
-		SecCabeceraSteps secCabeceraSteps = new SecCabeceraSteps(pais, Channel.desktop, app);
+		SecCabeceraSteps secCabeceraSteps = new SecCabeceraSteps();
 		if (sublineaType==null) {
 			validateIsLineaSelected(lineaType);
 		}
@@ -287,16 +269,14 @@ public class SecMenusDesktopSteps {
 		secCabeceraSteps.validateIconoBolsa();
 
 		//Validaciones en función del tipo de página que debería aparecer al seleccionar la línea
-		Linea linea = pais.getShoponline().getLinea(lineaType);
+		Linea linea = dataTest.pais.getShoponline().getLinea(lineaType);
 		if (sublineaType!=null) {
 			linea = linea.getSublineaNinos(sublineaType);
 		}
 			
 		switch (linea.getContentDeskType()) {
 		case articulos:
-			PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(Channel.desktop, app, driver);
-			int maxSeconds = 3;
-			pageGaleriaSteps.validaArtEnContenido(maxSeconds);
+			new PageGaleriaSteps().validaArtEnContenido(3);
 			break;
 		case banners:
 			int maxBannersToLoad = 1;
@@ -372,7 +352,7 @@ public class SecMenusDesktopSteps {
 		description="Aparece una página con banners, artículos, iframes, maps o sliders",
 		level=State.Warn)
 	private boolean checkAreValidMangoObjectsInPage() throws Exception {
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app);
+		PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
 		PageLanding pageLanding = new PageLanding();
 		if (!pageGaleria.isVisibleArticleUntil(1, 3) &&
 			!pageLanding.hayIframes() &&
@@ -418,8 +398,8 @@ public class SecMenusDesktopSteps {
 			" (#{pais.getNombre_pais()})</b>:<br>" + tagUrlAcceso,
 		expected=
 			"Aparece la ficha del producto " + tagRefArticle)
-	public static void checkURLRedirectFicha(Pais pais, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver).build();
+	public void checkURLRedirectFicha() throws Exception {
+		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.pais.getCodigo_alf(), app, driver).build();
 		GarmentCatalog product = getterProducts.getAll().get(0);
 		Article article = product.getArticleWithMoreStock();
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagRefArticle, article.getGarmentId());
@@ -427,27 +407,27 @@ public class SecMenusDesktopSteps {
 		
 		URI uri = new URI(driver.getCurrentUrl());
 		String tiendaId = "she";
-		if (dCtxSh.appE==AppEcom.outlet) {
+		if (app==AppEcom.outlet) {
 			tiendaId = "outlet";
 		}
 		
 		String urlAccesoCorreo = 
-			uri.getScheme() + "://" + uri.getHost() + "/redirect.faces?op=conta&tiendaid=" + tiendaId + "&pais=" + pais.getCodigo_pais() + 
+			uri.getScheme() + "://" + uri.getHost() + "/redirect.faces?op=conta&tiendaid=" + tiendaId + "&pais=" + dataTest.pais.getCodigo_pais() + 
 			"&producto=" + article.getGarmentId() + "&color=" + article.getColor().getId() ;
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagUrlAcceso, urlAccesoCorreo);
 		driver.navigate().to(urlAccesoCorreo);
 
 		DataFichaArt datosArticulo = new DataFichaArt(article.getGarmentId(), "");
-		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(dCtxSh.pais);
+		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps();
 		pageFichaSteps.validaDetallesProducto(datosArticulo);
 	}
 	
 	public void validaPaginaResultMenu(MenuLateralDesktop menu) throws Exception {
 		checkResultDependingMenuGroup(menu);
 		checkErrorPageWithoutException();
-		GroupMenu groupMenu = menu.getGroup(Channel.desktop);
+		GroupMenu groupMenu = menu.getGroup(channel);
 		if (groupMenu.canContainElement(Element.article)) {
-			if (pais.isEspanya()) {
+			if (dataTest.pais.isEspanya()) {
 				checkSizeDivImages();
 			}
 			Menu1rstLevel menuPromocion = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(menu.getLinea(), menu.getSublinea(), "promocion"));
@@ -462,7 +442,7 @@ public class SecMenusDesktopSteps {
 	@Validation
 	private ChecksTM checkSizeDivImages() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel, app);
 		int numPage = 1; 
 		double marginPercError = 2;
 		ListSizesArticle listArtWrong1rstPage = pageGaleriaDesktop.getArticlesWithWrongSize(numPage, marginPercError);
@@ -491,14 +471,14 @@ public class SecMenusDesktopSteps {
 	@Validation
 	private ChecksTM checkResultDependingMenuGroup(MenuLateralDesktop menu) throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		GroupMenu groupMenu = menu.getGroup(Channel.desktop);
+		GroupMenu groupMenu = menu.getGroup(channel);
 		List<Element> elemsCanBeContained = groupMenu.getElementsCanBeContained();
-		boolean contentPageOk = (new PageLanding()).isSomeElementVisibleInPage(elemsCanBeContained, app, Channel.desktop, 2);
+		boolean contentPageOk = (new PageLanding()).isSomeElementVisibleInPage(elemsCanBeContained, app, channel, 2);
 	 	checks.add(
 			"Aparecen alguno de los siguientes elementos: <b>" + elemsCanBeContained + "</b> (es un menú perteneciente al grupo <b>" + groupMenu + ")</b>",
 			contentPageOk, State.Warn);
 		
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app);
+		PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
 		if (groupMenu.canContainElement(Element.article)) {
 		 	String guiones = "--";
 		 	checks.add(
@@ -551,7 +531,7 @@ public class SecMenusDesktopSteps {
 	@Validation
 	public ChecksTM checksSpecificEndRebajasChina() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel, app);
 	  	List<Integer> tempSale = FilterCollection.sale.getListTempArticles();
 	  	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.articlesFrom, tempSale);
 	  	String warningMessage = "";
@@ -582,7 +562,7 @@ public class SecMenusDesktopSteps {
 	@Validation
 	private ChecksTM checkNoArticlesRebajadosWithLabelIncorrect() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel, app);
 		List<LabelArticle> listLabelsWrong = PageGaleria.listLabelsNew;
 		List<Integer> tempSales = FilterCollection.sale.getListTempArticles();
 		List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaxRebajadosWithLiteralInLabel(tempSales, listLabelsWrong);
@@ -614,7 +594,7 @@ public class SecMenusDesktopSteps {
 		Integer temporadaOldOld = FilterCollection.sale.getListTempArticles().get(0);
 		ArrayList<Integer> temporadaOldOldList = new ArrayList<Integer>(Arrays.asList(temporadaOldOld));  
 	   	List<LabelArticle> listLabelsWrong = PageGaleria.listLabelsNew;
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel, app);
 	   	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaOldOldList, listLabelsWrong);
 		String warningMessage = "";
 		if (listArtWrong.size() > 0) {
@@ -640,7 +620,7 @@ public class SecMenusDesktopSteps {
 		ChecksTM checks = ChecksTM.getNew();
 		
 		List<Integer> temporadaNew = FilterCollection.nextSeason.getListTempArticles();
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel, app);
 		List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaNew, LabelArticle.NewNow, LabelArticle.NewCollection);
 		String warningMessage = "";
 		if (listArtWrong.size() > 0) {

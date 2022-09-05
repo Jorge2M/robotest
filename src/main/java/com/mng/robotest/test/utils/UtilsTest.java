@@ -12,15 +12,11 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.DataCtxShop;
-import com.mng.robotest.test.generic.beans.FactoryVale;
-import com.mng.robotest.test.generic.beans.ValePais;
 import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-
 
 public class UtilsTest {
 	
@@ -129,53 +125,25 @@ public class UtilsTest {
 		return "";
 	}
 	
-	public static GarmentCatalog getArticleForTest(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-		List<GarmentCatalog> articles = getArticlesForTest(dCtxSh, driver);
+	public static GarmentCatalog getArticleForTest(Pais pais, AppEcom app, WebDriver driver) throws Exception {
+		List<GarmentCatalog> articles = getArticlesForTest(pais, app, driver);
 		return articles.get(0);
 	}
 	
 	static int maxArticles = 99;
-	public static List<GarmentCatalog> getArticlesForTest(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-		return (getArticlesForTestDependingVale(dCtxSh, maxArticles, driver));
+	public static List<GarmentCatalog> getArticlesForTest(Pais pais, AppEcom app, WebDriver driver) throws Exception {
+		return (getArticlesForTest(pais, app, maxArticles, driver));
 	}
 	
-	public static List<GarmentCatalog> getArticlesForTest(DataCtxShop dCtxSh, int maxArticlesAwayVale, boolean withValeTest, WebDriver driver) 
-	throws Exception {
-		ValePais valeTest = null;
-		if (withValeTest) {
-			valeTest = FactoryVale.makeValeTest(dCtxSh.pais.getCodigo_pais());
-			dCtxSh.vale = valeTest;
-		}
+	public static List<GarmentCatalog> getArticlesForTest(
+			Pais pais, AppEcom app, int maxArticlesAwayVale, WebDriver driver) throws Exception {
 		
-		return (getArticlesForTestDependingVale(dCtxSh, maxArticlesAwayVale, driver));
-	}
-	
-	public static List<GarmentCatalog> getArticlesForTestDependingVale(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-		return (getArticlesForTestDependingVale(dCtxSh, maxArticles, driver));
-	}
-	
-	public static List<GarmentCatalog> getArticlesForTestDependingVale(DataCtxShop dCtxSh, int maxArticlesAwayVale, WebDriver driver) 
-	throws Exception {
 		List<GarmentCatalog> listProducts;
-		if (dCtxSh.vale!=null) {
-			listProducts = dCtxSh.vale.getArticlesFromVale();
-			if (!listProducts.isEmpty()) {
-				return listProducts;
-			}
-		}
-		
 		GetterProducts getterProducts = new GetterProducts
-				.Builder(dCtxSh.pais.getCodigo_alf(), dCtxSh.appE, driver)
+				.Builder(pais.getCodigo_alf(), app, driver)
 				.build();
 
 		listProducts = getterProducts.getFiltered(FilterType.Stock);
-		
-		if (dCtxSh.vale!=null) {
-			for (GarmentCatalog product : listProducts) {
-				product.setValePais(dCtxSh.vale);
-			}
-		}
-
 		if (listProducts.size() > maxArticlesAwayVale) {
 			return (listProducts.subList(0, maxArticlesAwayVale));
 		}

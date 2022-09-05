@@ -1,7 +1,6 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import com.mng.robotest.test.data.DataCtxShop;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.pageobject.shop.checkout.tmango.SecTMango;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
@@ -9,25 +8,24 @@ import com.mng.robotest.test.steps.shop.checkout.tmango.PageAmexInputTarjetaStep
 import com.mng.robotest.test.steps.shop.checkout.tmango.PageAmexResultSteps;
 import com.mng.robotest.test.steps.shop.checkout.tmango.PageRedsysSimSteps;
 
-
 public class PagoTMango extends PagoSteps {
 
-	public PagoTMango(DataCtxShop dCtxSh, DataCtxPago dataPago) throws Exception {
-		super(dCtxSh, dataPago);
+	public PagoTMango(DataPago dataPago) throws Exception {
+		super(dataPago);
 		super.isAvailableExecPay = true;
 	}
 	
 	@SuppressWarnings("static-access")
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
-		DataPedido dataPedido = this.dCtxPago.getDataPedido();
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh.pais);
+		DataPedido dataPedido = this.dataPago.getDataPedido();
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
 		pageCheckoutWrapperSteps.getSecTMangoSteps().validateIsSectionOk();
 		pageCheckoutWrapperSteps.getSecTMangoSteps().clickTipoPago(SecTMango.TipoPago.PAGO_HABITUAL);
-		dCtxPago = checkoutFlow.checkout(From.METODOSPAGO);
+		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		
 		PageAmexInputTarjetaSteps pageAmexInputTarjetaSteps = new PageAmexInputTarjetaSteps(driver);
-		pageAmexInputTarjetaSteps.validateIsPageOk(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais());
+		pageAmexInputTarjetaSteps.validateIsPageOk(dataPedido.getImporteTotal(), dataTest.pais.getCodigo_pais());
 		
 		if (execPay) {
 			dataPedido.setCodtipopago("M");
@@ -38,9 +36,9 @@ public class PagoTMango extends PagoSteps {
 					dataPedido.getPago().getAnycad(), 
 					dataPedido.getPago().getCvc(), 
 					dataPedido.getImporteTotal(), 
-					dCtxSh.pais.getCodigo_pais());
+					dataTest.pais.getCodigo_pais());
 			
-			pageRedsysSimSteps.clickEnviar(dataPedido.getPago().getCip(), dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais());
+			pageRedsysSimSteps.clickEnviar(dataPedido.getPago().getCip(), dataPedido.getImporteTotal(), dataTest.pais.getCodigo_pais());
 			new PageAmexResultSteps(driver).clickContinuarButton();
 		}
 	}

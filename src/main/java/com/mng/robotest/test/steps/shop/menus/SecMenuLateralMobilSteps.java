@@ -63,15 +63,15 @@ public class SecMenuLateralMobilSteps {
 	}
 
 	public void validaSelecMenu(MenuLateralDesktop menu) throws Exception {
-		PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(channel, app, driver);
-		pageGaleriaSteps.validateGaleriaAfeterSelectMenu(app);
+		PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
+		pageGaleriaSteps.validateGaleriaAfeterSelectMenu();
 		GenericChecks.checkDefault(driver);
 	}
 
 	@Validation
 	private ChecksTM checkGaleriaAfterSelectNuevo() {
 		ChecksTM checks = ChecksTM.getNew();
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.mobile, app);
+		PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
 		int maxSeconds = 3;
 		checks.add(
 			"Aparece algún artículo (esperamos " + maxSeconds + " segundos)",
@@ -120,9 +120,7 @@ public class SecMenuLateralMobilSteps {
 			validaSelecLineaNinosWithSublineas(lineaType);
 			break;
 		case articulos:
-			PageGaleriaSteps pageGaleriaSteps = PageGaleriaSteps.getInstance(Channel.mobile, app, driver);
-			int maxSeconds = 3;
-			pageGaleriaSteps.validaArtEnContenido(maxSeconds);
+			new PageGaleriaSteps().validaArtEnContenido(3);
 			break;
 		default:
 			throw new IllegalArgumentException("TypeContent " + typeContent + " not valid for channel mobil");
@@ -174,9 +172,9 @@ public class SecMenuLateralMobilSteps {
 	private ChecksTM checkResultDependingMenuGroup(Menu1rstLevel menu1rstLevel) 
 			throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		GroupMenu groupMenu = menu1rstLevel.getGroup(Channel.mobile);
+		GroupMenu groupMenu = menu1rstLevel.getGroup(channel);
 		List<Element> elemsCanBeContained = groupMenu.getElementsCanBeContained();
-		boolean contentPageOk = (new PageLanding()).isSomeElementVisibleInPage(elemsCanBeContained, app, Channel.mobile, 2);
+		boolean contentPageOk = (new PageLanding()).isSomeElementVisibleInPage(elemsCanBeContained, app, channel, 2);
 	 	checks.add(
 			"Aparecen alguno de los siguientes elementos: <b>" + elemsCanBeContained + "</b> (es un menú perteneciente al grupo <b>" + groupMenu + ")</b>",
 			contentPageOk, State.Warn);

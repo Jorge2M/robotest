@@ -38,7 +38,7 @@ public class ModalAvisoCambioPaisSteps extends StepBase {
 			"Desaparece el modal de aviso de cambio de país (lo esperamos hasta " + maxSeconds + " segundos)",
 			modalAvisoCambioPais.isInvisibleUntil(maxSeconds), State.Defect);		
 	 	
-	 	PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(Channel.desktop, app);
+	 	PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app);
 	 	checks.add(
 			"En la dirección de envió aparece el país " + paisEnvio.getNombre_pais(),
 			pageCheckoutWrapper.direcEnvioContainsPais(paisEnvio.getNombre_pais()), State.Defect);   

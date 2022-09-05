@@ -1,62 +1,54 @@
 package com.mng.robotest.test.pageobject.shop.modales;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 public class ModalChatBot extends PageBase {
 
-	private static final String XPathIcon = "//div[@id='iris-button']";
-	private static final String XPathWebchat = "//div[@id='snack-bubble']";
-	
-	public ModalChatBot(WebDriver driver) {
-		super(driver);
-	}
+	private static final String XPATH_ICON = "//div[@id='iris-button']";
+	private static final String XPATH_WEBCHAT = "//div[@id='snack-bubble']";
 	
 	private String getXPathOption(String text) {
-		return XPathWebchat + "//button[text()='" + text + "']";
+		return XPATH_WEBCHAT + "//button[text()='" + text + "']";
 	}
 	
 	private String getXPathResponse(String text) {
-		return XPathWebchat + "//div[text()[contains(.,'" + text + "')] and @class[contains(.,'bubble')]]";
+		return XPATH_WEBCHAT + "//div[text()[contains(.,'" + text + "')] and @class[contains(.,'bubble')]]";
 	}
 	
 	private String getXPathButton(String text) {
-		return XPathWebchat + "//button[text()='" + text + "']";
+		return XPATH_WEBCHAT + "//button[text()='" + text + "']";
 	}
 	
 	public boolean checkIconVisible() {
-		return state(State.Visible, By.xpath(XPathIcon)).check();
+		return state(State.Visible, XPATH_ICON).check();
 	}
 	
 	public void clickIcon() {
-		click(By.xpath(XPathIcon)).exec();
+		click(XPATH_ICON).exec();
 	}
 	
 	public boolean checkWebchatVisible(int maxSeconds) {
-		return state(State.Visible, By.xpath(XPathWebchat)).wait(maxSeconds).check();
+		return state(State.Visible, XPATH_WEBCHAT).wait(maxSeconds).check();
 	}
 
 	public boolean isOptionVisible(String text, int maxSeconds) {
 		String xpath = getXPathOption(text);
-		return state(State.Visible, By.xpath(xpath)).wait(maxSeconds).check();
+		return state(State.Visible, xpath).wait(maxSeconds).check();
 	}
 	
 	public void clickOption(String text) {
 		waitMillis(100); //Avoid strange Sonia´s case: capa in vertical unfold process
-		String xpath = getXPathOption(text);
-		click(By.xpath(xpath)).exec();
+		click(getXPathOption(text)).exec();
 	}
 	
 	public boolean isResponseVisible(String text, int maxSeconds) {
 		String xpath = getXPathResponse(text);
-		return state(State.Visible, By.xpath(xpath)).wait(maxSeconds).check();
+		return state(State.Visible, xpath).wait(maxSeconds).check();
 	}
 	
 	public boolean isButtonVisible(String text, int maxSeconds) {
 		String xpath = getXPathButton(text);
-		return state(State.Visible, By.xpath(xpath)).wait(maxSeconds).check();
+		return state(State.Visible, xpath).wait(maxSeconds).check();
 	}
 }

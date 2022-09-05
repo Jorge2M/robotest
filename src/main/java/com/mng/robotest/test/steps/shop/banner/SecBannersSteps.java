@@ -15,7 +15,6 @@ import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.pageobject.shop.AllPages;
 import com.mng.robotest.test.pageobject.shop.bannersNew.DataBanner;
 import com.mng.robotest.test.pageobject.shop.bannersNew.ManagerBannersScreen;
@@ -38,12 +37,12 @@ public class SecBannersSteps extends StepBase {
 		return managerBannersScreen;
 	}
 	
-	public void testPageBanners(DataCtxShop dCtxSh, int maximoBanners) throws Exception { 
+	public void testPageBanners(int maximoBanners) throws Exception { 
 		String urlPagPrincipal = driver.getCurrentUrl();
 		int sizeListBanners = managerBannersScreen.getListDataBanners().size();
 		for (int posBanner=1; posBanner<=sizeListBanners && posBanner<=maximoBanners; posBanner++) {
 			boolean makeValidations = true;
-			seleccionarBanner(posBanner, makeValidations, dCtxSh.appE, dCtxSh.channel, dCtxSh.pais);
+			seleccionarBanner(posBanner, makeValidations, app, channel, dataTest.pais);
 			driver.get(urlPagPrincipal);
 			SeleniumUtils.waitForPageLoaded(driver);
 			managerBannersScreen.reloadBanners(); //For avoid StaleElement Exception
@@ -77,7 +76,7 @@ public class SecBannersSteps extends StepBase {
 			validacionesGeneralesBanner(urlPagPrincipal, uriPagPrincipal, elementosPagPrincipal);
 			switch (dataBanner.getDestinoType()) {
 			case Ficha:
-				PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps(pais);
+				PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps();
 				pageFichaSteps.validateIsFichaCualquierArticulo();
 				break;
 			default:				
@@ -145,7 +144,7 @@ public class SecBannersSteps extends StepBase {
 	private boolean validacionesBannerEstandar(Channel channel, AppEcom app) throws Exception {
 		if (!pageLanding.haySecc_Art_Banners(app)) {
 			if (!pageLanding.hayImgsEnContenido()) {
-				PageFicha pageFicha = PageFicha.of(channel, app);
+				PageFicha pageFicha = PageFicha.of(channel);
 				return pageFicha.isPageUntil(0);
 			}
 		}

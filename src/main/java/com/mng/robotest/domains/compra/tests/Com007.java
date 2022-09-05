@@ -8,7 +8,7 @@ import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.generic.ChequeRegalo;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData.Importe;
@@ -29,7 +29,7 @@ public class Com007 extends TestBase {
 
 	private final PageChequeRegaloInputDataSteps pageChequeRegaloInputDataSteps;
 	
-	private final DataCtxPago dataPago;
+	private final DataPago dataPago;
 	
 	public Com007() throws Exception {
 		dataTest.pais = PaisGetter.get(PaisShop.FRANCE);
@@ -44,7 +44,7 @@ public class Com007 extends TestBase {
 				.emaiExists()
 				.chequeRegalo().build();
 		
-		dataPago = new DataCtxPago(dataTest, configCheckout);
+		dataPago = new DataPago(configCheckout);
 		
 		pageChequeRegaloInputDataSteps = new PageChequeRegaloInputDataSteps(dataTest.pais, driver);
 	}
@@ -59,15 +59,14 @@ public class Com007 extends TestBase {
 	}
 	
 	private void loginAndClearBolsa() throws Exception {
-		new AccesoSteps().oneStep(dataTest, false);
-		new SecBolsaSteps(dataTest.pais).clear();
+		new AccesoSteps().oneStep(false);
+		new SecBolsaSteps().clear();
 	}	
 
 	private void selectFooterLinkChequeRegalo() throws Exception {
-		SecMenusWrapperSteps secMenusSteps = SecMenusWrapperSteps.getNew(dataTest);
-		secMenusSteps.seleccionLinea(LineaType.she, null, dataTest);
-		SecFooterSteps secFooterSteps = new SecFooterSteps(channel, app, driver);
-		secFooterSteps.clickLinkFooter(FooterLink.CHEQUE_REGALO_OLD, false);
+		SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps();
+		secMenusSteps.seleccionLinea(LineaType.she, null);
+		new SecFooterSteps().clickLinkFooter(FooterLink.CHEQUE_REGALO_OLD, false);
 	}
 
 	private void inputDataChequeRegalo() throws Exception {
@@ -84,7 +83,7 @@ public class Com007 extends TestBase {
 	}
 	
 	private void checkoutChequeRegalo() throws Exception {
-		new BuilderCheckout(dataTest, dataPago)
+		new BuilderCheckout(dataPago)
 			.pago(dataTest.pais.getPago("VISA"))
 			.build()
 			.checkout(From.IDENTIFICATION);

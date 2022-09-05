@@ -9,8 +9,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroAddressDataOutlet;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroDirecOutlet;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.beans.IdiomaPais;
-import com.mng.robotest.test.beans.Pais;
 
 public class PageRegistroDirecStepsOutlet extends StepBase {
 	
@@ -18,25 +16,24 @@ public class PageRegistroDirecStepsOutlet extends StepBase {
 	private final PageRegistroDirecOutlet pageRegistroDirec = new PageRegistroDirecOutlet();
 	
 	@Validation
-	public ChecksTM isPageFromPais(Pais pais) {
+	public ChecksTM isPageFromPais() {
 		ChecksTM checks = ChecksTM.getNew();
 		int maxSeconds = 3;
 		checks.add(
 			"Aparece la página de introducción de datos de la dirección (la esperamos un máximo de " + maxSeconds + " segundos)",
 			pageRegistroAddressData.isPageUntil(maxSeconds), State.Warn);
 		checks.add(
-			"Si existe el desplebagle de países, en él aparece el país con código " + pais.getCodigo_pais() + " (" + pais.getNombre_pais() + ")",
+			"Si existe el desplebagle de países, en él aparece el país con código " + dataTest.pais.getCodigo_pais() + " (" + dataTest.pais.getNombre_pais() + ")",
 			!pageRegistroAddressData.existsDesplegablePaises() || 
-			pageRegistroAddressData.isOptionPaisSelected(pais.getCodigo_pais()), State.Warn);
+			pageRegistroAddressData.isOptionPaisSelected(dataTest.pais.getCodigo_pais()), State.Warn);
 		return checks;
 	}
 	
 	@Step (
 		description="Introducir los datos correctos para el país #{pais.getNombre_pais()}", 
 		expected="No aparece ningún mensaje de error")
-	public void sendDataAccordingCountryToInputs(Map<String,String> dataRegistro, Pais pais) 
-			throws Exception {
-		pageRegistroDirec.sendDataAccordingCountryToInputs(dataRegistro, pais);
+	public void sendDataAccordingCountryToInputs(Map<String,String> dataRegistro) throws Exception {
+		pageRegistroDirec.sendDataAccordingCountryToInputs(dataRegistro);
 		validateInputDataOk();
 	}
 
@@ -50,8 +47,8 @@ public class PageRegistroDirecStepsOutlet extends StepBase {
 	@Step (
 		description= "Seleccionar el botón \"<b>Finalizar</b>\"", 
 		expected="Aparece la página final del proceso de registro")
-	public void clickFinalizarButton(IdiomaPais idioma) {
+	public void clickFinalizarButton() {
 		pageRegistroDirec.clickFinalizarButton();
-		new PageRegistroFinStepsOutlet(idioma).isPageUntil(5);
+		new PageRegistroFinStepsOutlet().isPageUntil(5);
 	}
 }

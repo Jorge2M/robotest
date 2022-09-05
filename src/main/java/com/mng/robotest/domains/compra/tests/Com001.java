@@ -8,7 +8,7 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.Linea.LineaType;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.Menu;
@@ -23,7 +23,7 @@ import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
 public class Com001 extends TestBase {
 
-	private final DataCtxPago dataPago;
+	private final DataPago dataPago;
 	
 	public Com001() throws Exception {
 		dataTest.userRegistered = true;
@@ -38,7 +38,7 @@ public class Com001 extends TestBase {
 				.checkSavedCard()
 				.userIsEmployee().build();
 		
-		dataPago = new DataCtxPago(dataTest, configCheckout);
+		dataPago = new DataPago(configCheckout);
 	}
 	
 	@Override
@@ -49,13 +49,13 @@ public class Com001 extends TestBase {
 
 	private void checkout() throws Exception {
 		if (app == AppEcom.outlet) {
-			new BuilderCheckout(dataTest, dataPago)
+			new BuilderCheckout(dataPago)
 					.pago(dataTest.pais.getPago("VISA"))
 					.build()
 					.checkout(From.PREHOME);
 		} else {
 			List<GarmentCatalog> articlesShop = getArticlesShop();
-			new BuilderCheckout(dataTest, dataPago)
+			new BuilderCheckout(dataPago)
 					.pago(dataTest.pais.getPago("VISA"))
 					.listArticles(articlesShop)
 					.build()

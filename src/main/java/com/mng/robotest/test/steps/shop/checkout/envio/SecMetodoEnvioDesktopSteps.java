@@ -9,7 +9,7 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.datastored.DataCtxPago;
+import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test.pageobject.shop.checkout.envio.ModalDroppoints;
 import com.mng.robotest.test.pageobject.shop.checkout.envio.SecMetodoEnvioDesktop;
@@ -27,11 +27,11 @@ public class SecMetodoEnvioDesktopSteps extends StepBase {
 	@Step (
 		description="<b style=\"color:blue;\">#{nombrePago}</b>:Seleccionamos el método de envío <b>#{tipoTransporte}</b>", 
 		expected="Se selecciona el método de envío correctamente")
-	public void selectMetodoEnvio(TipoTransporte tipoTransporte, String nombrePago, DataCtxPago dCtxPago) {
+	public void selectMetodoEnvio(TipoTransporte tipoTransporte, String nombrePago, DataPago dataPago) {
 		secMetodoEnvioDesktop.selectMetodo(tipoTransporte);
 		if (!tipoTransporte.isEntregaDomicilio()) {
 			if (modalDroppoints.isErrorMessageVisibleUntil()) {
-				modalDroppoints.searchAgainByUserCp(dCtxPago.getDatosRegistro().get("cfCp"));
+				modalDroppoints.searchAgainByUserCp(dataPago.getDatosRegistro().get("cfCp"));
 			}
 		}
 
@@ -66,31 +66,31 @@ public class SecMetodoEnvioDesktopSteps extends StepBase {
 	}
 	
 
-	public void selectMetodoEnvio(DataCtxPago dCtxPago, String nombrePago) throws Exception {
-		alterTypeEnviosAccordingContext(dCtxPago);
-		Pago pago = dCtxPago.getDataPedido().getPago();
+	public void selectMetodoEnvio(DataPago dataPago, String nombrePago) throws Exception {
+		alterTypeEnviosAccordingContext(dataPago);
+		Pago pago = dataPago.getDataPedido().getPago();
 		TipoTransporte tipoTransporte = pago.getTipoEnvioType(app);
 		switch (channel) {
 		case desktop:
 		case tablet:
-			selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago);
+			selectMetodoEnvio(tipoTransporte, nombrePago, dataPago);
 			break;
 		case mobile:
-			new Page1EnvioCheckoutMobilSteps().selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago);
+			new Page1EnvioCheckoutMobilSteps().selectMetodoEnvio(tipoTransporte, nombrePago, dataPago);
 			break;
 		}
 	}
 	
-	public boolean fluxSelectEnvio(DataCtxPago dCtxPago, Pais pais) throws Exception {
+	public boolean fluxSelectEnvio(DataPago dataPago, Pais pais) throws Exception {
 		boolean pagoPintado = false;
-		Pago pago = dCtxPago.getDataPedido().getPago();
+		Pago pago = dataPago.getDataPedido().getPago();
 		if (pago.getTipoEnvio(app)!=null) {
-			String nombrePago = dCtxPago.getDataPedido().getPago().getNombre(channel, app);
-			selectMetodoEnvio(dCtxPago, nombrePago);
+			String nombrePago = dataPago.getDataPedido().getPago().getNombre(channel, app);
+			selectMetodoEnvio(dataPago, nombrePago);
 			pagoPintado = true;
 			TipoTransporte tipoEnvio = pago.getTipoEnvioType(app);
 			if (tipoEnvio.isDroppoint()) {
-				modalDroppointsSteps.fluxSelectDroppoint(dCtxPago, pais);
+				modalDroppointsSteps.fluxSelectDroppoint(dataPago, pais);
 			}
 			if (tipoEnvio.isFranjaHoraria()) {
 				selectFranjaHorariaUrgente();
@@ -114,17 +114,17 @@ public class SecMetodoEnvioDesktopSteps extends StepBase {
 	/**
 	 * No tenemos posibilidad sencilla de determinar si nos aparecerá el envío de tipo "Urgente" o "SendayNextday" así que si no encontramos uno ejecutamos la prueba con el otro
 	 */
-	private void alterTypeEnviosAccordingContext(DataCtxPago dCtxPago) {
-		alterTypeEnviosTiendaStandar(dCtxPago);
-		Pago pago = dCtxPago.getDataPedido().getPago();
+	private void alterTypeEnviosAccordingContext(DataPago dataPago) {
+		alterTypeEnviosTiendaStandar(dataPago);
+		Pago pago = dataPago.getDataPedido().getPago();
 		alterTypeEnviosNextaySomedayUntilExists(pago);
 	}
 	
-	private void alterTypeEnviosTiendaStandar(DataCtxPago dCtxPago) {
+	private void alterTypeEnviosTiendaStandar(DataPago dataPago) {
 		//If employee and Spain not "Recogida en Tienda"
-		Pago pago = dCtxPago.getDataPedido().getPago();
-		if (dCtxPago.getFTCkout().userIsEmployee && 
-			"001".compareTo(dCtxPago.getDataPedido().getCodigoPais())==0) {
+		Pago pago = dataPago.getDataPedido().getPago();
+		if (dataPago.getFTCkout().userIsEmployee && 
+			"001".compareTo(dataPago.getDataPedido().getCodigoPais())==0) {
 			if (pago.getTipoEnvioType(app)==TipoTransporte.TIENDA) {
 				pago.setTipoEnvioShop(TipoTransporte.STANDARD);
 				pago.setTipoEnvioOutlet(TipoTransporte.STANDARD);

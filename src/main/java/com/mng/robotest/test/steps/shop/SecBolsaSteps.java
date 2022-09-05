@@ -14,8 +14,6 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.DataCtxShop;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
@@ -36,12 +34,6 @@ public class SecBolsaSteps extends StepBase {
 
 	private final SecBolsa secBolsa = SecBolsa.make(channel, app);
 	
-	private final Pais pais;
-	
-	public SecBolsaSteps(Pais pais) {
-		this.pais = pais;
-	}
-	
 	@Step (
 		description="Eliminamos los posibles artículos existentes en la Bolsa",
 		expected="La bolsa queda vacía")
@@ -53,17 +45,17 @@ public class SecBolsaSteps extends StepBase {
 
 	public void close() throws Exception {
 		if (channel.isDevice()) {
-			clickAspaForCloseMobil();
+			closeInMobil();
 		} else {
 			forceStateBolsaTo(StateBolsa.CLOSED);
 		}
 	}
 
 	@Step (
-		description="Click en el aspa para cerrar la bolsa", 
+		description="Cerrar la bolsa", 
 		expected="Se cierra la bolsa")
-	public void clickAspaForCloseMobil() throws Exception {
-		secBolsa.clickAspaMobil();
+	public void closeInMobil() throws Exception {
+		secBolsa.closeInMobil();
 		checkBolsaDisappears(3);
 	}
 
@@ -90,7 +82,7 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	public void altaArticlosConColores(int numArticulos, DataBag dataBag) throws Exception {
-		GetterProducts getterProducts = new GetterProducts.Builder(pais.getCodigo_alf(), app, driver).build();
+		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.pais.getCodigo_alf(), app, driver).build();
 		List<GarmentCatalog> listParaAlta = getterProducts
 				.getFiltered(FilterType.ManyColors)
 				.subList(0, numArticulos);
@@ -122,7 +114,7 @@ public class SecBolsaSteps extends StepBase {
 		includeListaArtInTestCaseDescription(listParaAlta);
 		for (int i=0; i<listParaAlta.size(); i++) {
 			GarmentCatalog artTmp = listParaAlta.get(i);
-			ArticuloScreen articulo = UtilsMangoTest.addArticuloBolsa(artTmp, app, channel, driver);
+			ArticuloScreen articulo = new UtilsMangoTest().addArticuloBolsa(artTmp);
 			if (artTmp.isVale()) {
 				articulo.setVale(artTmp.getValePais());
 			}
@@ -203,7 +195,7 @@ public class SecBolsaSteps extends StepBase {
 		ChecksTM checks = ChecksTM.getNew();
 		ValidatorContentBolsa validatorBolsa = new ValidatorContentBolsa(dataBag);
 		checks.add(
-			"Cuadra el número de artículos existentes en la bolsa",
+			"Cuadra el númeo de artículos existentes en la bolsa",
 			validatorBolsa.numArticlesIsCorrect(), State.Warn);
 		
 		ArrayList<DataArtBolsa> listDataToValidate = new ArrayList<>();
@@ -266,23 +258,22 @@ public class SecBolsaSteps extends StepBase {
 		return (secBolsa.isNotThisImporteTotalUntil(importeTotalOrig, maxSeconds));
 	}
 
-	@SuppressWarnings("static-access")
 	@Step (
 		description="Se selecciona el botón \"COMPRAR\" de la bolsa", 
 		expected="Se muestra la página de identificación",
 		saveNettraffic=SaveWhen.Always)
-	public void selectButtonComprar(DataBag dataBag, DataCtxShop dCtxSh) throws Exception {
+	public void selectButtonComprar(DataBag dataBag) throws Exception {
 		secBolsa.clickBotonComprar(10);
-		validaSelectButtonComprar(dataBag, dCtxSh);
+		validaSelectButtonComprar(dataBag);
 		if (!UtilsTest.dateBeforeToday("2022-08-01") &&
-			!dCtxSh.userRegistered) {
-			new Page1IdentCheckoutSteps().validaRGPDText(dCtxSh);
+			!dataTest.userRegistered) {
+			new Page1IdentCheckoutSteps().validaRGPDText();
 		}
 	}
 
-	public void validaSelectButtonComprar(DataBag dataBag, DataCtxShop dCtxSh) throws Exception {
-		if (dCtxSh.userRegistered) {
-			new PageCheckoutWrapperSteps(dCtxSh.channel, dCtxSh.appE).validateIsFirstPage(dCtxSh.userRegistered, dataBag);
+	public void validaSelectButtonComprar(DataBag dataBag) throws Exception {
+		if (dataTest.userRegistered) {
+			new PageCheckoutWrapperSteps().validateIsFirstPage(dataTest.userRegistered, dataBag);
 		} else {
 			int maxSeconds = 5;
 			new Page1IdentCheckoutSteps().validateIsPage(maxSeconds);
@@ -304,7 +295,6 @@ public class SecBolsaSteps extends StepBase {
 		secBolsa.click1erArticuloBolsa();
 
 		String refArticulo = articuloClickado.getReferencia();
-		PageFichaArtSteps pageFichaStpv = new PageFichaArtSteps(pais);
-		pageFichaStpv.validateIsFichaArtDisponible(refArticulo, 3);
+		new PageFichaArtSteps().validateIsFichaArtDisponible(refArticulo, 3);
 	}
 }

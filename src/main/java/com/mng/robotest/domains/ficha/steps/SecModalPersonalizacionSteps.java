@@ -111,7 +111,6 @@ public class SecModalPersonalizacionSteps extends PageBase {
 		checks.add(
 			"Podemos confirmar nuestra seleccion",
 			isBotonSiguienteVisible(maxSeconds),
-			//state(Visible, ModalElement.Siguiente.getBy(dCtxSh.channel)).wait(maxSeconds).check(),
 			State.Warn);
 		return checks;
 	}
@@ -172,7 +171,6 @@ public class SecModalPersonalizacionSteps extends PageBase {
 		expected="Aparece el apartado 4 de la personalización")
 	public void selectSize () throws Exception {
 		click(getBotonSiguienteVisible()).exec();
-		//click(ModalElement.Siguiente.getBy(dCtxSh.channel)).exec();
 		validateSizeList(2);
 	}
 
@@ -188,7 +186,6 @@ public class SecModalPersonalizacionSteps extends PageBase {
 		expected="Aparece el modal con las opciones para ver la bolsa o seguir comprando")
 	public void confirmCustomization() throws Exception {
 		click(getBotonSiguienteVisible()).exec();
-		//click(ModalElement.Siguiente.getBy(dCtxSh.channel)).exec();
 		validateAddBag(2);
 	}
 
@@ -197,7 +194,6 @@ public class SecModalPersonalizacionSteps extends PageBase {
 		level=State.Warn)
 	private boolean validateAddBag(int maxSeconds) {
 		return isBotonSiguienteVisible(maxSeconds);
-		//return (state(Visible, ModalElement.Siguiente.getBy(dCtxSh.channel)).wait(maxSeconds).check());
 	}
 
 	@Step(

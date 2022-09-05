@@ -21,9 +21,7 @@ import com.mng.robotest.domains.registro.beans.DataRegistro;
 import com.mng.robotest.domains.registro.beans.InputDataXPath;
 import com.mng.robotest.domains.registro.beans.ListDataRegistro;
 import com.mng.robotest.domains.registro.beans.ListDataRegistro.DataRegType;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.checkout.Page2IdentCheckout;
-
 
 public class PageRegistroIniOutlet extends PageBase {
 	
@@ -144,9 +142,8 @@ public class PageRegistroIniOutlet extends PageBase {
 	}
 	
 	public Map<String,String> sendDataAccordingCountryToInputs(
-			Pais pais, String emailNonExistent, boolean clickPubli, Channel channel) throws Exception {
-		return (new Page2IdentCheckout(pais)
-				.inputDataPorDefectoSegunPais(emailNonExistent, false, clickPubli, channel));
+			String emailNonExistent, boolean clickPubli, Channel channel) throws Exception {
+		return new Page2IdentCheckout().inputDataPorDefectoSegunPais(emailNonExistent, false, clickPubli, channel);
 	}
 	
 	public void sendDataToInputs(ListDataRegistro dataToSend) {

@@ -1,13 +1,8 @@
 package com.mng.robotest.domains.compra.tests;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
-import com.github.jorge2m.testmaker.service.TestMaker;
-import com.mng.robotest.access.InputParamsMango;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.generic.UtilsMangoTest;
-
 
 public class Compra {
 
@@ -64,9 +59,6 @@ public class Compra {
 
 	
 	public boolean isPro() {
-		WebDriver driver = TestMaker.getDriverTestCase();
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
-		AppEcom app = (AppEcom)inputParamsSuite.getApp();
-		return UtilsMangoTest.isEntornoPRO(app, driver);
+		return new UtilsMangoTest().isEntornoPRO();
 	}
 }
