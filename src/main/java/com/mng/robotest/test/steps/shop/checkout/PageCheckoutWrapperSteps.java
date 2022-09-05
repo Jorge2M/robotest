@@ -45,19 +45,19 @@ public class PageCheckoutWrapperSteps extends StepBase {
 	private final SecTarjetaPciSteps secTarjetaPciSteps;
 	
 	public PageCheckoutWrapperSteps() {
-		this.pageCheckoutWrapper = new PageCheckoutWrapper(channel, app);
-		this.modalDirecEnvioSteps = new ModalDirecEnvioSteps(channel, app);
+		this.pageCheckoutWrapper = new PageCheckoutWrapper();
+		this.modalDirecEnvioSteps = new ModalDirecEnvioSteps();
 		this.secMetodoEnvioDesktopSteps = new SecMetodoEnvioDesktopSteps();
 		this.secStoreCreditSteps = new SecStoreCreditSteps();
-		this.secTMangoSteps = new SecTMangoSteps(channel, driver);
-		this.secKrediKartiSteps = new SecKrediKartiSteps(channel, driver); 
-		this.secBillpaySteps = new SecBillpaySteps(channel);
-		this.modalDirecFacturaSteps = new ModalDirecFacturaSteps(channel, app);
-		this.modalAvisoCambioPaisSteps = new ModalAvisoCambioPaisSteps(app);
-		this.page1DktopCheckSteps = new Page1DktopCheckoutSteps(channel, app);
+		this.secTMangoSteps = new SecTMangoSteps();
+		this.secKrediKartiSteps = new SecKrediKartiSteps(); 
+		this.secBillpaySteps = new SecBillpaySteps();
+		this.modalDirecFacturaSteps = new ModalDirecFacturaSteps();
+		this.modalAvisoCambioPaisSteps = new ModalAvisoCambioPaisSteps();
+		this.page1DktopCheckSteps = new Page1DktopCheckoutSteps();
 		this.page1MobilCheckSteps = new Page1EnvioCheckoutMobilSteps();
-		this.secIdealSteps = new SecIdealSteps(channel, driver);
-		this.secTarjetaPciSteps = new SecTarjetaPciSteps(channel, app, driver);
+		this.secIdealSteps = new SecIdealSteps();
+		this.secTarjetaPciSteps = new SecTarjetaPciSteps();
 	}
 	
 	public PageCheckoutWrapper getPageCheckoutWrapper() {

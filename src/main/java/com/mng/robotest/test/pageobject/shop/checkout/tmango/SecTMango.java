@@ -1,27 +1,16 @@
 package com.mng.robotest.test.pageobject.shop.checkout.tmango;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
 public class SecTMango extends PageBase {
 
 	public enum TipoPago { PAGO_HABITUAL, TRES_MESES, SEIS_MESES, PAGO_UNICO }
 	
-	private final Channel channel;
-	
 	private static final String XPATH_SECTION_MOBIL = "//div[@data-id='mango_card']"; 
 	private static final String XPATH_SECTION_DESKTOP = "//div[@id='mangoCardContent']"; 
-	
-	public SecTMango(Channel channel, WebDriver driver) {
-		super(driver);
-		this.channel = channel;
-	}
 	
 	public String getDescripcionTipoPago(TipoPago tipoPago) {
 		switch (tipoPago) {
@@ -68,16 +57,14 @@ public class SecTMango extends PageBase {
 	}
 	
 	public boolean isVisibleUntil(int maxSeconds) {
-		String xpath = getXPathSection();
-		return (state(Visible, By.xpath(xpath)).wait(maxSeconds).check());
+		return state(Visible, getXPathSection()).wait(maxSeconds).check();
 	}
 	
 	public boolean isModalidadDisponible(TipoPago tipoPago) {
-		String xpath = getXPathLabelModalidad(tipoPago);
-		return (state(Present, By.xpath(xpath)).check());
+		return state(Present, getXPathLabelModalidad(tipoPago)).check();
 	}
 	
 	public void clickModalidad(TipoPago tipoPago) {
-		driver.findElement(By.xpath(getXPathClickModalidad(tipoPago))).click();
+		getElement(getXPathClickModalidad(tipoPago)).click();
 	}
 }

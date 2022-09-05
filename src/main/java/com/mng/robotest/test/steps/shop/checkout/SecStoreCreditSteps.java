@@ -25,7 +25,7 @@ public class SecStoreCreditSteps extends StepBase {
 		TestMaker.getCurrentStepInExecution().replaceInExpected(TAG_NOMBRE_PAGO, nombrePago);
 		
 		dataPago.getDataPedido().setImporteTotal(
-				new PageCheckoutWrapper(channel, app).getPrecioTotalFromResumen());
+				new PageCheckoutWrapper().getPrecioTotalFromResumen());
 		
 		validaBloqueSaldoEnCuenta(true, dataPago);
 	}
@@ -82,7 +82,7 @@ public class SecStoreCreditSteps extends StepBase {
 	  	}
 	  	
 	  	if (checkedSaldoEnCta/* || channel==Channel.desktop*/) {
-			String impTotResumen = new PageCheckoutWrapper(channel, app).getPrecioTotalFromResumen();
+			String impTotResumen = new PageCheckoutWrapper().getPrecioTotalFromResumen();
 			float impFloat = ImporteScreen.getFloatFromImporteMangoScreen(impTotResumen);
 		  	checks.add(
 				"Figura un importe total de 0",

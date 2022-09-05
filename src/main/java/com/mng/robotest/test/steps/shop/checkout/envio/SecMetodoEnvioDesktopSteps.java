@@ -49,7 +49,7 @@ public class SecMetodoEnvioDesktopSteps extends StepBase {
 		int maxSeconds = 5;
 	  	checks.add(
 			"Desaparece la capa de Loading  (lo esperamos hasta " + maxSeconds + " segundos)",
-			new PageCheckoutWrapper(channel, app).waitUntilNoDivLoading(maxSeconds), State.Warn);
+			new PageCheckoutWrapper().waitUntilNoDivLoading(maxSeconds), State.Warn);
 	  	
 	  	checks.add(
 			"Queda seleccionado el bloque correspondiete a <b>" + tipoTransporte + "</b>",
@@ -146,7 +146,7 @@ public class SecMetodoEnvioDesktopSteps extends StepBase {
 			pago.getTipoEnvioType(app)==TipoTransporte.SAMEDAY ||
 			pago.getTipoEnvioType(app)==TipoTransporte.SAMEDAY_NEXTDAY_FRANJAS) {
 			for (int i=0; i<4; i++) {
-				if (new PageCheckoutWrapper(channel, app).isPresentBlockMetodo(pago.getTipoEnvioType(app))) {
+				if (new PageCheckoutWrapper().isPresentBlockMetodo(pago.getTipoEnvioType(app))) {
 					break;
 				}
 				switch (pago.getTipoEnvioType(app)) {

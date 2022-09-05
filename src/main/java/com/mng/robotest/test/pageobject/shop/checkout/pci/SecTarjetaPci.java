@@ -1,9 +1,6 @@
 package com.mng.robotest.test.pageobject.shop.checkout.pci;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
-
 
 public interface SecTarjetaPci {
 	public boolean isVisiblePanelPagoUntil(String nombrePago, int maxSeconds);
@@ -20,20 +17,20 @@ public interface SecTarjetaPci {
 	public void selectMesByVisibleText(String mes);
 	public void selectAnyByVisibleText(String any);
 	
-	public static SecTarjetaPci makeSecTarjetaPci(Channel channel, WebDriver driver) {
+	public static SecTarjetaPci makeSecTarjetaPci(Channel channel) {
 		//TODO cuando suba a PRO pci en iframe se podrá eliminar SecTarjetaPciNotInIframeMobil y SecTarjetaPciNotInIframeDesktop
 		if (channel==Channel.desktop) {
-			SecTarjetaPci secTarjetaPci = SecTarjetaPciNotInIframeDesktop.getNew(driver);
+			SecTarjetaPci secTarjetaPci = new SecTarjetaPciNotInIframeDesktop();
 			if (secTarjetaPci.isPresentInputNumberUntil(1)) {
 				return secTarjetaPci;
 			}
-			return (SecTarjetaPciInIframe.getNew(channel, driver));	
+			return new SecTarjetaPciInIframe();	
 		}
 		
-		SecTarjetaPci secTarjetaPci = SecTarjetaPciNotInIframeMobil.getNew(driver);
+		SecTarjetaPci secTarjetaPci = new SecTarjetaPciNotInIframeMobil();
 		if (secTarjetaPci.isPresentInputNumberUntil(1)) {
 			return secTarjetaPci;
 		}
-		return (SecTarjetaPciInIframe.getNew(channel, driver));	
+		return new SecTarjetaPciInIframe();	
 	}
 }

@@ -2,28 +2,17 @@ package com.mng.robotest.test.steps.shop.checkout;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.DataDireccion;
 import com.mng.robotest.test.pageobject.shop.checkout.ModalDirecEnvio;
 import com.mng.robotest.test.pageobject.shop.checkout.Page1DktopCheckout;
 import com.mng.robotest.test.pageobject.shop.checkout.PageCheckoutWrapper;
 
-
 public class ModalDirecEnvioSteps extends StepBase {
 	
-	private final ModalDirecEnvio modalDirecEnvio;
-	private final Channel channel;
-	private final AppEcom app;
-	
-	public ModalDirecEnvioSteps(Channel channel, AppEcom app) {
-		this.modalDirecEnvio = new ModalDirecEnvio();
-		this.channel = channel;
-		this.app = app;
-	}
+	private final ModalDirecEnvio modalDirecEnvio = new ModalDirecEnvio();
 	
 	@Validation
 	public ChecksTM validateIsOk() {
@@ -52,14 +41,16 @@ public class ModalDirecEnvioSteps extends StepBase {
 	@Validation
 	private ChecksTM checkAfterUpdateData() {
 		ChecksTM checks = ChecksTM.getNew();
-		Page1DktopCheckout page1DktopCheckout = new Page1DktopCheckout(channel, app);
+		Page1DktopCheckout page1DktopCheckout = new Page1DktopCheckout();
 		int maxSeconds = 2; 
 		checks.add(
 			"Aparece un modal de alerta alertando de un posible cambio de precios (lo esperamos hasta " + maxSeconds + " segundos)",
-			page1DktopCheckout.getModalAvisoCambioPais().isVisibleUntil(maxSeconds), State.Warn); 
+			page1DktopCheckout.getModalAvisoCambioPais().isVisibleUntil(maxSeconds), State.Warn);
+		
 		checks.add(
 			"Desaparece la capa de Loading (lo esperamos hasta " + maxSeconds + "segundos", 
-			new PageCheckoutWrapper(channel, app).waitUntilNoDivLoading(maxSeconds), State.Warn);
+			new PageCheckoutWrapper().waitUntilNoDivLoading(maxSeconds), State.Warn);
+		
 		return checks;
 	}
 }

@@ -1,9 +1,6 @@
 package com.mng.robotest.test.pageobject.shop.checkout.ideal;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -36,8 +33,6 @@ public class SecIdeal extends PageBase {
 		}
 	};
 
-	private final Channel channel;
-		
 	private static final String XPathCardConditions = "//div[@id='textoCondicionesTarjeta']";
 	private static final String XPathSelectorBankIdeal = XPathCardConditions + "//div[@id='ideal-bank-selector']";
 	private static final String XPathListBankIdeal = XPathSelectorBankIdeal + "//select[@name[contains(.,'panelTarjetasForm')] and @class='bank-select']";
@@ -46,11 +41,6 @@ public class SecIdeal extends PageBase {
 	private static final String XPathSelectorBankIdealMobile = XPathCardConditionsMobile + "//div[@id='ideal-bank-selector']";
 	private static final String XPathListBankIdealMobile = "//select[@class[contains(.,'bank-select')]]";
 	
-	public SecIdeal(Channel channel, WebDriver driver) {
-		super(driver);
-		this.channel = channel;
-	}
-
 	public String getXPath_section() {
 		if (channel.isDevice()) {
 			return XPathCardConditionsMobile;

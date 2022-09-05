@@ -41,7 +41,7 @@ public class PageGaleriaDevice extends PageGaleria {
 //			"@class[contains(.,'product-list-info-price')] or " + 
 //			"@class[contains(.,'product-list-price')] or " +
 //			"@class[contains(.,'product-price')]]";
-	private static final String XPATH_BUTTON_ANYADIR_RELATIVE_ARTICLE = "//div[@class[contains(.,'product-add')]]/button";
+	private static final String XPATH_BUTTON_ANYADIR_RELATIVE_ARTICLE = "//div[@class[contains(.,'product-actions')]]/button";
 	private static final String XPATH_CAPA_TALLAS_RELATIVE_ARTICLE = "//div[@class[contains(.,'product-sizes-container')]]";
 	private static final String XPATH_ICONO_GALERY_MOBILE = "//div[@class[contains(.,'scroll-container--visible')]]";
 	private static final String XPATH_ICONO_UP_GALERY_TABLET = "//div[@class='scroll-top-step']";
@@ -297,13 +297,13 @@ public class PageGaleriaDevice extends PageGaleria {
 	public void showTallasArticulo(int posArticulo) {
 		moveToArticleAndGetObject(posArticulo);
 		String xpathButtonAnyadir = getXPathButtonAnyadirArticle(posArticulo);
-		click(By.xpath(xpathButtonAnyadir)).exec();
+		click(xpathButtonAnyadir).exec();
 	}
 
 	@Override
 	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSeconds) {
 		String xpathCapa = getXPathArticleCapaTallas(posArticulo);
-		return (state(Visible, By.xpath(xpathCapa), driver).wait(maxSeconds).check());
+		return state(Visible, xpathCapa).wait(maxSeconds).check();
 	}
 	
 	private String getXPathTallaAvailableArticle(int posArticulo, int posTalla) {

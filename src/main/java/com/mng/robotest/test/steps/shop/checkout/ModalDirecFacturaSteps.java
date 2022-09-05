@@ -2,28 +2,17 @@ package com.mng.robotest.test.steps.shop.checkout;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.DataDireccion;
 import com.mng.robotest.test.pageobject.shop.checkout.ModalDirecFactura;
 import com.mng.robotest.test.pageobject.shop.checkout.Page1DktopCheckout;
 import com.mng.robotest.test.pageobject.shop.checkout.PageCheckoutWrapper;
 
-
 public class ModalDirecFacturaSteps extends StepBase {
 
-	private final ModalDirecFactura modalDirecFactura;
-	private final Channel channel;
-	private final AppEcom app;
-	
-	public ModalDirecFacturaSteps(Channel channel, AppEcom app) {
-		this.modalDirecFactura = new ModalDirecFactura();
-		this.channel = channel;
-		this.app = app;
-	}
+	private final ModalDirecFactura modalDirecFactura = new ModalDirecFactura();
 	
 	@Validation
 	public ChecksTM validateIsOk() {
@@ -40,7 +29,7 @@ public class ModalDirecFacturaSteps extends StepBase {
 	 	maxSeconds = 2;
 	 	checks.add(
 	 		"Desaparece la capa de Loading (lo esperamos hasta " + maxSeconds + "segundos", 
-	 		new PageCheckoutWrapper(channel, app).waitUntilNoDivLoading(maxSeconds), State.Warn);
+	 		new PageCheckoutWrapper().waitUntilNoDivLoading(maxSeconds), State.Warn);
 		return checks;
 	}
 	
@@ -62,12 +51,12 @@ public class ModalDirecFacturaSteps extends StepBase {
 	 	
 	 	checks.add(
 			"Queda marcado el radiobutton \"Quiero recibir una factura\"",
-			(new Page1DktopCheckout(channel, app)).isMarkedQuieroFactura(), State.Defect);
+			new Page1DktopCheckout().isMarkedQuieroFactura(), State.Defect);
 	 	
 	 	int maxSeconds = 2;
 	 	checks.add(
 	 		"Desaparece la capa de Loading (lo esperamos hasta " + maxSeconds + "segundos", 
-	 		new PageCheckoutWrapper(channel, app).waitUntilNoDivLoading(maxSeconds), State.Warn);
+	 		new PageCheckoutWrapper().waitUntilNoDivLoading(maxSeconds), State.Warn);
 	 	
 	 	return checks;
 	}

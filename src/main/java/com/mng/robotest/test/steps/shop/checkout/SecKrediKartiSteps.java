@@ -4,22 +4,15 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.SecKrediKarti;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 
 
-public class SecKrediKartiSteps {
+public class SecKrediKartiSteps extends StepBase {
 
-	final private WebDriver driver;
-	final private Channel channel;
-	final private SecKrediKarti secKrediKarti;
-	
-	public SecKrediKartiSteps(Channel channel, WebDriver driver) {
-		this.driver = driver;
-		this.channel = channel;
-		this.secKrediKarti = SecKrediKarti.getNew(channel, driver);
-	}
+	private final SecKrediKarti secKrediKarti = new SecKrediKarti(); 
 	
 	@Step (
 		description="Introducimos el número de cuenta #{numTarjeta}",

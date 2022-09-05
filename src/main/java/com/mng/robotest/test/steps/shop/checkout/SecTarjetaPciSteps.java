@@ -1,32 +1,20 @@
 package com.mng.robotest.test.steps.shop.checkout;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Pago.TypePago;
 import com.mng.robotest.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test.pageobject.shop.checkout.pci.SecTarjetaPci;
 
-public class SecTarjetaPciSteps {
+public class SecTarjetaPciSteps extends StepBase {
 	
-	final WebDriver driver;
-	final Channel channel;
-	final AppEcom app;
-	final private SecTarjetaPci secTarjetaPci;
-	
-	public SecTarjetaPciSteps(Channel channel, AppEcom app, WebDriver driver) {
-		this.driver = driver;
-		this.channel = channel;
-		this.app = app;
-		PageCheckoutWrapper pageCheckoutSteps = new PageCheckoutWrapper(channel, app);
-		this.secTarjetaPci = pageCheckoutSteps.getSecTarjetaPci();
-	}
+	private final PageCheckoutWrapper pageCheckoutSteps = new PageCheckoutWrapper();
+	private final SecTarjetaPci secTarjetaPci = pageCheckoutSteps.getSecTarjetaPci();
 	
 	@Validation
 	public ChecksTM validateIsSectionOk(Pago pago, Pais pais) {

@@ -1,17 +1,15 @@
 package com.mng.robotest.test.steps.shop.checkout;
 
 import java.util.Arrays;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.data.Descuento;
 import com.mng.robotest.test.data.Descuento.DiscountType;
 import com.mng.robotest.test.datastored.DataBag;
@@ -22,19 +20,9 @@ import com.mng.robotest.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
-public class Page1DktopCheckoutSteps {
+public class Page1DktopCheckoutSteps extends StepBase {
 	
-	private final Page1DktopCheckout page1DktopCheckout;
-	private final WebDriver driver;
-	private final Channel channel;
-	private final AppEcom app;
-	
-	public Page1DktopCheckoutSteps(Channel channel, AppEcom app) {
-		this.page1DktopCheckout = new Page1DktopCheckout(channel, app);
-		this.driver = page1DktopCheckout.driver;
-		this.channel = channel;
-		this.app = app;
-	}
+	private final Page1DktopCheckout page1DktopCheckout = new Page1DktopCheckout();
 	
 	@Validation
 	public ChecksTM validateIsPageOK(DataBag dataBag) throws Exception {
@@ -112,7 +100,7 @@ public class Page1DktopCheckoutSteps {
 		expected="Aparece la página de resumen de artículos con los descuentos correctamente aplicados",
 		saveNettraffic=SaveWhen.Always)
 	public void inputValeDescuento(ValeDiscount valePais, DataBag dataBag) throws Exception { 
-		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(channel, app);
+		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
 		pageCheckoutWrapper.inputCodigoPromoAndAccept(valePais.getCodigoVale());
 		dataBag.setImporteTotal(pageCheckoutWrapper.getPrecioTotalFromResumen());	
 		checkAfterInputDiscountVale(valePais);
@@ -152,7 +140,7 @@ public class Page1DktopCheckoutSteps {
 		description="Si existe -> seleccionar el link \"Eliminar\" asociado al vale", 
 		expected="El vale desaparece")
 	public void clearValeIfLinkExists() throws Exception {
-		new PageCheckoutWrapper(channel, app).clickEliminarValeIfExists();
+		new PageCheckoutWrapper().clickEliminarValeIfExists();
 		checkIsVisibleInputVale(1);
 	}
 	

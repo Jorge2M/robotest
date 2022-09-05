@@ -1,47 +1,34 @@
 package com.mng.robotest.test.pageobject.shop.checkout;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.test.pageobject.shop.checkout.pci.SecTarjetaPciInIframe;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class SecKrediKarti extends SecTarjetaPciInIframe {
 
-	private final Channel channel;
-	
-	static final String XPathCapaPagoPlazoMobil = "//table[@class[contains(.,'installment')]]";
-	static final String XPathRadioPagoPlazoMobil = XPathCapaPagoPlazoMobil + "//div[@class[contains(.,'installment-checkbox')]]";
-	static final String XPathCapaPagoPlazoDesktop = "//div[@class[contains(.,'installments-content')]]"; 
-	static final String XPathRadioPagoPlazoDesktop = XPathCapaPagoPlazoDesktop + "//input[@type='radio' and @name='installment']";
-	
-	private SecKrediKarti(Channel channel, WebDriver driver) {
-		super(channel, driver);
-		this.channel = channel;
-	}
-	
-	public static SecKrediKarti getNew(Channel channel, WebDriver driver) {
-		return (new SecKrediKarti(channel, driver));
-	}
+	private static final String XPATH_CAPA_PAGO_PLAZO_MOBIL = "//table[@class[contains(.,'installment')]]";
+	private static final String XPATH_RADIO_PAGOO_PLAZO_MOBIL = XPATH_CAPA_PAGO_PLAZO_MOBIL + "//div[@class[contains(.,'installment-checkbox')]]";
+	private static final String XPATH_CAPA_PAGO_PLAZO_DESKTOP = "//div[@class[contains(.,'installments-content')]]"; 
+	private static final String XPATH_RADIO_PAGO_PLAZO_DESKTOP = XPATH_CAPA_PAGO_PLAZO_DESKTOP + "//input[@type='radio' and @name='installment']";
 	
 	private String getXPathCapaPagoPlazo() {
 		switch (channel) {
 		case desktop:
-			return XPathCapaPagoPlazoDesktop;
+			return XPATH_CAPA_PAGO_PLAZO_DESKTOP;
 		default:
 		case mobile:
-			return XPathCapaPagoPlazoMobil;
+			return XPATH_CAPA_PAGO_PLAZO_MOBIL;
 		}
 	}
 	
 	private String getXPathRadioPagoPlazo() {
 		switch (channel) {
 		case desktop:
-			return XPathRadioPagoPlazoDesktop;
+			return XPATH_RADIO_PAGO_PLAZO_DESKTOP;
 		default:
 		case mobile:
-			return XPathRadioPagoPlazoMobil;
+			return XPATH_RADIO_PAGOO_PLAZO_MOBIL;
 		}
 	}
 	

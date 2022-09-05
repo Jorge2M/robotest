@@ -1,6 +1,5 @@
 package com.mng.robotest.test.steps.shop.checkout;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.transversal.StepBase;
@@ -8,14 +7,9 @@ import com.mng.robotest.test.pageobject.shop.checkout.SecBillpay;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 
-
 public class SecBillpaySteps extends StepBase {
 	
-	private final SecBillpay secBillpay;
-	
-	public SecBillpaySteps(Channel channel) {
-		this.secBillpay = new SecBillpay(channel);
-	}
+	private final SecBillpay secBillpay = new SecBillpay();
 	
 	@Validation
 	public ChecksTM validateIsSectionOk() {
@@ -26,9 +20,11 @@ public class SecBillpaySteps extends StepBase {
 			secBillpay.isPresentSelectBirthMonth() &&
 			secBillpay.isPresentSelectBirthDay(), 
 			State.Defect); 
+	 	
 	 	checks.add(
 			"Aparece el check de \"Acepto\"",
 			secBillpay.isPresentRadioAcepto(), State.Defect); 
+	 	
 	 	return checks;
 	}
 	
@@ -52,12 +48,15 @@ public class SecBillpaySteps extends StepBase {
 	 	checks.add(
 			"Aparece el campo para la introducción del titular",
 			secBillpay.isPresentInputTitular(), State.Defect);
+	 	
 	 	checks.add(
 			"Aparece el campo para la introducción del IBAN",
 	 		secBillpay.isPresentInputIBAN(), State.Defect);
+	 	
 	 	checks.add(
 			"Aparece el campo para la introducción del BIC",
 			secBillpay.isPresentInputBIC(), State.Defect);
+	 	
 	 	return checks;
 	}
 	

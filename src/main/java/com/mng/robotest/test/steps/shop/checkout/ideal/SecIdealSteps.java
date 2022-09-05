@@ -1,21 +1,15 @@
 package com.mng.robotest.test.steps.shop.checkout.ideal;
 
-import org.openqa.selenium.WebDriver;
-
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.ideal.SecIdeal;
 import com.mng.robotest.test.pageobject.shop.checkout.ideal.SecIdeal.BancoSeleccionado;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 
-public class SecIdealSteps {
+public class SecIdealSteps extends StepBase {
 
-	private final SecIdeal secIdeal;
-	
-	public SecIdealSteps(Channel channel, WebDriver driver) {
-		this.secIdeal = new SecIdeal(channel, driver);
-	}
+	private final SecIdeal secIdeal = new SecIdeal();
 	
 	@Validation (
 		description="Aparece el bloque de selección del banco",

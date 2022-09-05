@@ -84,14 +84,14 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 		description="Aparece la página asociada al Paso-2",
 		level=State.Defect)
 	private boolean checkAppearsStep2(AppEcom app) {
-		return (new Page2DatosPagoCheckoutMobil(channel, app).isPageUntil(3));
+		return new Page2DatosPagoCheckoutMobil().isPageUntil(3);
 	}
 	
 	@Validation (
 		description="Están presentes los métodos de pago",
 		level=State.Defect)
 	private boolean checkAppearsPageWithPaymentMethods(Pais pais, AppEcom app) {
-		return (new PageCheckoutWrapper(channel, app).isPresentMetodosPago());
+		return new PageCheckoutWrapper().isPresentMetodosPago();
 	}
 	
 	@Validation

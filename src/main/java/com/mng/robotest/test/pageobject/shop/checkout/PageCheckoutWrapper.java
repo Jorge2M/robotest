@@ -1,15 +1,11 @@
 package com.mng.robotest.test.pageobject.shop.checkout;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.transversal.PageBase;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.Descuento;
@@ -23,26 +19,15 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageCheckoutWrapper extends PageBase {
  
-	private final Channel channel;
-	
-	private final Page1DktopCheckout page1DktopCheckout;
-	private final Page1EnvioCheckoutMobil page1MobilCheckout;
-	private final Page2DatosPagoCheckoutMobil page2MobilCheckout;
-	private final ModalAvisoCambioPais modalAvisoCambioPais;
-	private final SecTarjetaPci secTarjetaPci;
+	private final Page1DktopCheckout page1DktopCheckout = new Page1DktopCheckout();
+	private final Page1EnvioCheckoutMobil page1MobilCheckout = new Page1EnvioCheckoutMobil();
+	private final Page2DatosPagoCheckoutMobil page2MobilCheckout = new Page2DatosPagoCheckoutMobil();
+	private final ModalAvisoCambioPais modalAvisoCambioPais = new ModalAvisoCambioPais();
+	private final SecTarjetaPci secTarjetaPci = SecTarjetaPci.makeSecTarjetaPci(channel);
 	
 	//Abarca cualquier div de loading
-	private static final String XPathDivLoading = "//div[@class[contains(.,'panel_loading')] or @class[contains(.,'container-full-centered-loading')] or @class[contains(.,'loading-panel')]]";
+	private static final String XPATH_DIV_LOADING = "//div[@class[contains(.,'panel_loading')] or @class[contains(.,'container-full-centered-loading')] or @class[contains(.,'loading-panel')]]";
 	
-	public PageCheckoutWrapper(Channel channel, AppEcom app) {
-		this.channel = channel;
-		this.page1DktopCheckout = new Page1DktopCheckout(channel, app);
-		this.page1MobilCheckout = new Page1EnvioCheckoutMobil();
-		this.page2MobilCheckout = new Page2DatosPagoCheckoutMobil(channel, app);
-		this.modalAvisoCambioPais = new ModalAvisoCambioPais();
-		this.secTarjetaPci = SecTarjetaPci.makeSecTarjetaPci(channel, driver);
-	}
-
 	public Page1DktopCheckout getPage1DktopCheckout() {
 		return page1DktopCheckout;
 	}
@@ -145,10 +130,10 @@ public class PageCheckoutWrapper extends PageBase {
 
 	public float applyAndGetLoyaltyPoints() {
 		By byApplyButton = By.xpath(XpathButtonForApplyLoyaltyPoints);
-		WebElement buttonLoyalty = SeleniumUtils.getElementsVisible(driver, byApplyButton).get(0);
+		WebElement buttonLoyalty = getElementsVisible(driver, byApplyButton).get(0);
 		String textButtonApply = buttonLoyalty.getAttribute("innerHTML");
 		String importeButton = ImporteScreen.normalizeImportFromScreen(textButtonApply);
-		click(By.xpath(XpathButtonForApplyLoyaltyPoints)).exec();
+		click(XpathButtonForApplyLoyaltyPoints).exec();
 		isNoDivLoadingUntil(1);
 		return (ImporteScreen.getFloatFromImporteMangoScreen(importeButton));
 	}
@@ -262,11 +247,11 @@ public class PageCheckoutWrapper extends PageBase {
 	}
 
 	public boolean waitUntilNoDivLoading(int seconds) {
-		return (state(Invisible, By.xpath(XPathDivLoading)).wait(seconds).check());
+		return (state(Invisible, By.xpath(XPATH_DIV_LOADING)).wait(seconds).check());
 	}
 
 	public boolean isNoDivLoadingUntil(int seconds) {
-		return (state(Invisible, By.xpath(XPathDivLoading)).wait(seconds).check());
+		return (state(Invisible, By.xpath(XPATH_DIV_LOADING)).wait(seconds).check());
 	}
 
 	public String getMethodInputValue(String metodoPago) {
@@ -450,13 +435,14 @@ public class PageCheckoutWrapper extends PageBase {
 	/**
 	 * @return el importe normalizado a un String con un importe correctamente formateado
 	 */
-	private static final String XPathEnterosRelativeImporte = "//*[@class[contains(.,'ntero')]]";
-	private static final String XPathDecimalesRelativeImporte = "//*[@class[contains(.,'ecimal')]]";
+//	private static final String XPathEnterosRelativeImporte = "//*[@class[contains(.,'ntero')]]";
+//	private static final String XPathDecimalesRelativeImporte = "//*[@class[contains(.,'ecimal')]]";
 	public String formateaPrecioTotal(String xpathImporteCheckout) throws Exception {
 		for (int i=0; i<2; i++) {
 			try {
-				String precio = formateaPrecioTotalNoStaleSafe(xpathImporteCheckout);
-				return precio;
+//				String precio = formateaPrecioTotalNoStaleSafe(xpathImporteCheckout);
+//				return precio;
+				return getElement(xpathImporteCheckout).getText();
 			}
 			catch (StaleElementReferenceException e) {
 				//
@@ -465,23 +451,23 @@ public class PageCheckoutWrapper extends PageBase {
 		return "";
 	}
 	
-	private String formateaPrecioTotalNoStaleSafe(String xpathImporteCheckout) throws Exception {
-		waitForPageLoaded(driver);
-		String precioTotal = "";
-		String xpathEnteros = xpathImporteCheckout + XPathEnterosRelativeImporte;
-		List<WebElement> listEnteros = getElementsVisible(driver, By.xpath(xpathEnteros));
-		for (WebElement entero : listEnteros) {
-			precioTotal+=entero.getAttribute("innerHTML");
-		}
-		
-		String xpathDecimales = xpathImporteCheckout + XPathDecimalesRelativeImporte;
-		List<WebElement> listDecimales = getElementsVisible(driver, By.xpath(xpathDecimales));
-		for (WebElement decimal : listDecimales) {
-			precioTotal+=decimal.getAttribute("innerHTML");
-		}
-		
-		return (precioTotal);
-	}
+//	private String formateaPrecioTotalNoStaleSafe(String xpathImporteCheckout) throws Exception {
+//		waitForPageLoaded(driver);
+//		String precioTotal = "";
+//		String xpathEnteros = xpathImporteCheckout + XPathEnterosRelativeImporte;
+//		List<WebElement> listEnteros = getElementsVisible(driver, By.xpath(xpathEnteros));
+//		for (WebElement entero : listEnteros) {
+//			precioTotal+=entero.getAttribute("innerHTML");
+//		}
+//		
+//		String xpathDecimales = xpathImporteCheckout + XPathDecimalesRelativeImporte;
+//		List<WebElement> listDecimales = getElementsVisible(driver, By.xpath(xpathDecimales));
+//		for (WebElement decimal : listDecimales) {
+//			precioTotal+=decimal.getAttribute("innerHTML");
+//		}
+//		
+//		return (precioTotal);
+//	}
 	
 	public void selectBancoEPS(String nombreBanco) {
 		new SecEps().selectBanco(nombreBanco);

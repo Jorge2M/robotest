@@ -193,7 +193,7 @@ public class CheckoutFlow extends StepBase {
 		}
 		
 		if (app==AppEcom.votf && dataTest.pais.getCodigo_pais().compareTo("001")==0) {
-			new Page1DktopCheckoutSteps(channel, app).stepIntroduceCodigoVendedorVOTF("111111");
+			new Page1DktopCheckoutSteps().stepIntroduceCodigoVendedorVOTF("111111");
 		}
 		
 		if (dataPago.getFTCkout().checkLoyaltyPoints) {
@@ -274,7 +274,7 @@ public class CheckoutFlow extends StepBase {
 	}
 	
 	private void testValeDescuento(DataBag dataBag) throws Exception {
-		Page1DktopCheckoutSteps page1 = new Page1DktopCheckoutSteps(channel, app);
+		Page1DktopCheckoutSteps page1 = new Page1DktopCheckoutSteps();
 		if ("".compareTo(valeTest.getTextoCheckout())!=0) {
 			page1.checkIsVisibleTextVale(valeTest);
 		}

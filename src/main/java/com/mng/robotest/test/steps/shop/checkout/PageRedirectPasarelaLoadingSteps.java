@@ -12,6 +12,6 @@ public class PageRedirectPasarelaLoadingSteps {
 		description="Acaba desapareciendo la página de \"Por favor espere. Este proceso puede tardar...\" (esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
 	public static boolean validateDisappeared(int maxSeconds, WebDriver driver) { 
-		return (PageRedirectPasarelaLoading.isPageNotVisibleUntil(maxSeconds, driver));
+		return new PageRedirectPasarelaLoading().isPageNotVisibleUntil(maxSeconds);
 	}
 }

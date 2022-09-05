@@ -1,8 +1,5 @@
 package com.mng.robotest.test.steps.shop.checkout.tmango;
 
-import org.openqa.selenium.WebDriver;
-
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -14,11 +11,7 @@ import com.mng.robotest.test.pageobject.shop.checkout.tmango.SecTMango.TipoPago;
 
 public class SecTMangoSteps {
 
-	private final SecTMango secTMango;
-	
-	public SecTMangoSteps(Channel channel, WebDriver driver) {
-		secTMango = new SecTMango(channel, driver);
-	}
+	private final SecTMango secTMango = new SecTMango();
 	
 	@Validation
 	public ChecksTM validateIsSectionOk() {
@@ -26,9 +19,11 @@ public class SecTMangoSteps {
 	 	checks.add(
 			"Aparece el bloque de selección de la forma de pago",
 			secTMango.isVisibleUntil(0), State.Defect); 
+	 	
 	 	checks.add(
 			"Aparece disponible la modalidad de pago:<br>" + secTMango.getDescripcionTipoPago(TipoPago.PAGO_HABITUAL), 
-			secTMango.isModalidadDisponible(SecTMango.TipoPago.PAGO_HABITUAL), State.Defect); 
+			secTMango.isModalidadDisponible(SecTMango.TipoPago.PAGO_HABITUAL), State.Defect);
+	 	
 	 	return checks;
 	}
 	
