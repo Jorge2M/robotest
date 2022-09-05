@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ClickElement.BuilderClick;
@@ -29,9 +30,15 @@ public class PageBase extends PageObjTM {
 	
 	public PageBase() {
 		super();
-		this.inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
-		this.app = (AppEcom)inputParamsSuite.getApp();
-		this.channel = inputParamsSuite.getChannel();
+		if (TestCaseTM.getTestCaseInExecution().isPresent()) {
+			this.inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
+			this.app = (AppEcom)inputParamsSuite.getApp();
+			this.channel = inputParamsSuite.getChannel();
+		} else {
+			this.inputParamsSuite = null;
+			this.app = AppEcom.shop;
+			this.channel = Channel.desktop;			
+		}
 	}
 	
 	public PageBase(WebDriver driver) {

@@ -195,7 +195,7 @@ public class SecMenusDesktopSteps extends StepBase {
 			litsToContain+= "<br>" + textsArticlesGalery[i];
 		}
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel, app);
-		ArrayList<String> listTxtArtNoValidos = pageGaleriaDesktop.nombreArticuloNoValido(textsArticlesGalery);
+		List<String> listTxtArtNoValidos = pageGaleriaDesktop.nombreArticuloNoValido(textsArticlesGalery);
 		String articlesWrongWarning = "";
 		if (listTxtArtNoValidos.size() > 0) {
 			articlesWrongWarning+="<br>" + "<b>Warning!</b> Hay Algún artículo extraño, p.e.:";

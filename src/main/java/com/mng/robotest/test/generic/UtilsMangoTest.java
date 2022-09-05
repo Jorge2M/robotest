@@ -150,6 +150,9 @@ public class UtilsMangoTest extends PageBase {
 	}
 	
 	public boolean isEntornoPRO() {
+		if (TestCaseTM.getTestCaseInExecution().isEmpty()) {
+			return false;
+		}
 		String urlBase = TestMaker.getInputParamsSuite().getUrlBase();
 		if (isEntornoPRO(urlBase)) {
 			return true;

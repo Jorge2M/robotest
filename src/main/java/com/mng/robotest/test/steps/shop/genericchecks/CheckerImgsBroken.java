@@ -35,7 +35,6 @@ public class CheckerImgsBroken implements Checker {
 	private static final List<String> WHITELIST = Arrays.asList(
 			"https://st.mngbcn.com/images/imgWar/loadingGif/teen.gif");
 
-	
 	@Override
 	public ChecksTM check(WebDriver driver) {
 		ResultadoErrores resultadoImgs = imagesBroken(driver, Channel.desktop, MAX_ERRORES);
