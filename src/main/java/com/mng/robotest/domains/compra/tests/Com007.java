@@ -44,7 +44,7 @@ public class Com007 extends TestBase {
 				.emaiExists()
 				.chequeRegalo().build();
 		
-		dataPago = new DataPago(configCheckout);
+		dataPago = getDataPago(configCheckout);
 		
 		pageChequeRegaloInputDataSteps = new PageChequeRegaloInputDataSteps(dataTest.pais, driver);
 	}

@@ -57,9 +57,7 @@ public class Luq001 extends TestBase {
 				.checkManto()
 				.stressMode().build();
 		
-		DataPago dataPago = new DataPago(configCheckout);
-		dataPago.getDataPedido().setDataBag(dataBag);
-		
+		DataPago dataPago = getDataPago(configCheckout, dataBag);
 		new CheckoutFlow.BuilderCheckout(dataPago)
 			.pago(dataTest.pais.getPago("VISA"))
 			.build()

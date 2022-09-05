@@ -26,7 +26,7 @@ public class Com006 extends TestBase {
 				.checkMisCompras()
 				.emaiExists().build();
 		
-		dataPago = new DataPago(configCheckout);
+		dataPago = getDataPago(configCheckout);
 	}
 	
 	@Override

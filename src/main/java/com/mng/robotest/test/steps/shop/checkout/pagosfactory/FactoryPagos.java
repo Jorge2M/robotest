@@ -1,9 +1,6 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.test.beans.Pago.TypePago;
-import com.mng.robotest.test.data.DataTest;
 import com.mng.robotest.test.datastored.DataPago;
 
 public class FactoryPagos {

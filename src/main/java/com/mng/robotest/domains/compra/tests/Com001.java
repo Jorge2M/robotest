@@ -38,7 +38,7 @@ public class Com001 extends TestBase {
 				.checkSavedCard()
 				.userIsEmployee().build();
 		
-		dataPago = new DataPago(configCheckout);
+		dataPago = getDataPago(configCheckout);
 	}
 	
 	@Override

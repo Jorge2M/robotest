@@ -70,8 +70,7 @@ public class Ree002 extends TestBase {
 				.emaiExists()
 				.checkPromotionalCode().build();
 		
-		DataPago dataPago = new DataPago(configCheckout);
-		dataPago.getDataPedido().setDataBag(dataBag);
+		DataPago dataPago = getDataPago(configCheckout, dataBag);
 		
 		//Informamos datos varios necesarios para el proceso de pagos de modo que se pruebe el pago StoreCredit
 		dataPago.getDataPedido().setEmailCheckout(dataTest.userConnected);

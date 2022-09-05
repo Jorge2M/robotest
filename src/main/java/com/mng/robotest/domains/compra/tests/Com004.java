@@ -40,7 +40,7 @@ public class Com004 extends TestBase {
 				.emaiExists()
 				.chequeRegalo().build();
 		
-		dataPago = new DataPago(configCheckout);		
+		dataPago = getDataPago(configCheckout);		
 	}
 	
 	@Override

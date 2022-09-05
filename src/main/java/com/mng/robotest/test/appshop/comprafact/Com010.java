@@ -72,8 +72,7 @@ public class Com010 extends TestBase {
 				.checkPromotionalCode(testVale || empleado)
 				.userIsEmployee(empleado).build();
 		
-		DataPago dataPago = new DataPago(configCheckout);
-		dataPago.getDataPedido().setDataBag(dataBag);
+		DataPago dataPago = getDataPago(configCheckout, dataBag);
 		dataPago = new BuilderCheckout(dataPago)
 			.pago(this.pago)
 			.build()

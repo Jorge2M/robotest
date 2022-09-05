@@ -38,8 +38,7 @@ public class Bor002 extends TestBase {
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.emaiExists().build();
 		
-		DataPago dataPago = new DataPago(configCheckout);
-		dataPago.getDataPedido().setDataBag(dataBag);
+		DataPago dataPago = getDataPago(configCheckout, dataBag);
 		new CheckoutFlow.BuilderCheckout(dataPago).build().checkout(From.BOLSA);		
 	}
 

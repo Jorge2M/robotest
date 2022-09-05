@@ -65,7 +65,7 @@ public class Loy001 extends TestBase {
 				.emaiExists()
 				.checkLoyaltyPoints().build();		
 		
-		DataPago dataPago = new DataPago(configCheckout);
+		DataPago dataPago = getDataPago(configCheckout);
 		dataPago.getDataPedido().setDataBag(dataBag);
 		
 		dataPago = new CheckoutFlow.BuilderCheckout(dataPago)

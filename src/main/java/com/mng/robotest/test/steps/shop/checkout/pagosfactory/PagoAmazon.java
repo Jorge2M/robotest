@@ -15,8 +15,7 @@ public class PagoAmazon extends PagoSteps {
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
-		PageAmazonIdentSteps.validateIsPage(dataTest.pais, channel, dataPago.getDataPedido(), driver);
-		
+		new PageAmazonIdentSteps().validateIsPage(dataPago.getDataPedido());
 		if (execPay) {
 			throw new PaymethodWithoutTestPayImplemented(MsgNoPayImplemented);
 		}
