@@ -29,7 +29,6 @@ public class Page1DktopCheckout extends PageBase {
 	private final SecBillpay secBillpay = new SecBillpay();
 	private final SecEps secEps = new SecEps();
 	private final ModalAvisoCambioPais modalAvisoCambioPais = new ModalAvisoCambioPais();
-	private final PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
 	
 	private static final String XPATH_CONF_PAGO_BUTTON_DESKTOP = "//*[@id[contains(.,'btnCheckout')]]";
 	private static final String XPATH_ALMACEN_IN_NO_PRO_ENTORNOS = "//span[@class='labelTestShowAlmacenStrong']";
@@ -159,7 +158,7 @@ public class Page1DktopCheckout extends PageBase {
 		if (metodoPago.compareTo("KLARNA")==0) {
 			return "//div[@class[contains(.,'cuadroPago')]]/input[@value='klarna' and @type='radio']";
 		}
-		String metodoPagoClick = pageCheckoutWrapper.getMethodInputValue(metodoPago);
+		String metodoPagoClick = new PageCheckoutWrapper().getMethodInputValue(metodoPago);
 		return (XPATH_RADIO_PAGO_WITH_TAG.replace(TAG_METODO_PAGO, metodoPagoClick));
 	}
 
@@ -327,6 +326,7 @@ public class Page1DktopCheckout extends PageBase {
 	 */
 	public void forceClickMetodoPagoAndWait(String metodoPago, Pais pais) throws Exception {
 		despliegaMetodosPago();
+		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
 		pageCheckoutWrapper.waitUntilNoDivLoading(2);
 		moveToMetodosPago();
 		clickMetodoPago(pais, metodoPago);
@@ -388,7 +388,7 @@ public class Page1DktopCheckout extends PageBase {
 	}	
 	
 	public String getPrecioTotalFromResumen() throws Exception {
-		String precioTotal = pageCheckoutWrapper.formateaPrecioTotal(XPATH_PRECIO_TOTAL);
+		String precioTotal = new PageCheckoutWrapper().formateaPrecioTotal(XPATH_PRECIO_TOTAL);
 		return (ImporteScreen.normalizeImportFromScreen(precioTotal));
 	}
 
@@ -434,6 +434,7 @@ public class Page1DktopCheckout extends PageBase {
 			}
 			
 			PreciosArticulo preciosArticuloScreen = getPreciosArticuloResumen(lineaArticulo);
+			PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
 			if (articulo.getValePais()!=null) {
 				if (!pageCheckoutWrapper.validateDiscountOk(preciosArticuloScreen, descuento)) {
 					return false;
@@ -450,7 +451,7 @@ public class Page1DktopCheckout extends PageBase {
 	}
 	
 	public String getPrecioSubTotalFromResumen() throws Exception {
-		return pageCheckoutWrapper.formateaPrecioTotal(XPATH_PRECIO_SUBTOTAL);
+		return new PageCheckoutWrapper().formateaPrecioTotal(XPATH_PRECIO_SUBTOTAL);
 	}
 	
 	private PreciosArticulo getPreciosArticuloResumen(WebElement articuloWeb) {
