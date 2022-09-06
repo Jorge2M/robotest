@@ -6,11 +6,11 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 public class SecSubmenusGallery extends PageBase {
 
 	//TODO modificar cuando dispongamos del data-testid (React)
-	private static final String XPATH_CAPA = "//div[@class[contains(.,'src-catalog-header-navigation')] or @class[contains(.,'XNV9w')]]";
+	private static final String XPATH_CAPA = "//div[@id='title']";
 	
 	private static final String TAG_NAME = "@TAG_NAME";
 	private static final String TAG2_NAME = "@TAG2_NAME";
-	private static final String XPATH_SUBMENU_ITEM = XPATH_CAPA + "/a[text()='" + TAG_NAME + "' or text()='" + TAG2_NAME + "']";
+	private static final String XPATH_SUBMENU_ITEM = XPATH_CAPA + "//a[text()='" + TAG_NAME + "' or text()='" + TAG2_NAME + "']";
 	
 	private String getXPathMenu(String nameMenu) {
 		String nameMenuFirstCapital = nameMenu.substring(0, 1).toUpperCase() + nameMenu.substring(1);

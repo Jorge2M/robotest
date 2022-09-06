@@ -77,18 +77,13 @@ public class CheckoutFlow extends StepBase {
 			List<Pais> finalCountrys,
 			EgyptCity egyptCity) {
 		this.finalCountrys = finalCountrys;
-		this.listArticles = listArticles;
 		this.pago = pago;
 		this.egyptCity = egyptCity;
 		this.dataPago = dataPago;
-		if (listArticles==null) {
-			try {
-				listArticles = UtilsTest.getArticlesForTest(dataTest.pais, app, 2, driver);
-			}
-			catch (Exception e) {
-				Log4jTM.getLogger().error("Problem retrieving articles for Checkout", e);
-			}
-					
+		if (listArticles!=null) {
+			this.listArticles = listArticles;
+		} else {
+			this.listArticles = makeListArticles();
 		}
 	}
 	
@@ -116,6 +111,16 @@ public class CheckoutFlow extends StepBase {
 		}
 		return dataPago;
 	}
+	
+	private List<GarmentCatalog> makeListArticles() {
+		try {
+			return UtilsTest.getArticlesForTest(dataTest.pais, app, 2, driver);
+		}
+		catch (Exception e) {
+			Log4jTM.getLogger().error("Problem retrieving articles for Checkout", e);
+			return null;
+		}		
+	}	
 	
 	private void testFromPrehomeToBolsa() throws Exception {
 		accessShopAndLoginOrLogoff();
