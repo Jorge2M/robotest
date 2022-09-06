@@ -95,8 +95,7 @@ public class PagePedidos extends PageBase {
 	}
 	
 	private String getXPathIdRegistroForLine(int linea){
-		String XPathIdRegistro = INI_XPATH_ID_REGISTRO + linea + "]/td[16]/span[1]";
-		return XPathIdRegistro;
+		return INI_XPATH_ID_REGISTRO + linea + "]/td[16]/span[1]";
 	}
 
 	public int getPosicionColumn(IdColumn idColumn, TypeDetalle typeDetalle) {
@@ -144,8 +143,8 @@ public class PagePedidos extends PageBase {
 		return (xpathCeldaTransporte + "//self::*[text()[contains(.,'" + envio + "')]]/../..");
 	}
 	
-	public static String getPedidoForThisIdRegistro(String XPathIdRegistro){
-		return XPathIdRegistro + "/ancestor::tr/td[2]/a[1]";
+	public static String getPedidoForThisIdRegistro(String xpathIdRegistro){
+		return xpathIdRegistro + "/ancestor::tr/td[2]/a[1]";
 	}
 
 	public int getPosicionPedidoUsuarioRegistrado(int posicionPedidoActual) {

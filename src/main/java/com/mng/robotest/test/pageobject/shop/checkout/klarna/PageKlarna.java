@@ -1,37 +1,26 @@
 package com.mng.robotest.test.pageobject.shop.checkout.klarna;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 public class PageKlarna extends PageBase {
 
-	private final ModalUserDataKlarna modalUserData;
-	private final ModalConfUserDataKlarna modalConfUserData;
-	private final ModalInputPersonnumberKlarna modalInputPersonnumber;
-	private final ModalInputPhoneKlarna modalInputPhone;
+	private final ModalUserDataKlarna modalUserData = new ModalUserDataKlarna();
+	private final ModalConfUserDataKlarna modalConfUserData = new ModalConfUserDataKlarna();
+	private final ModalInputPersonnumberKlarna modalInputPersonnumber = new ModalInputPersonnumberKlarna();
+	private final ModalInputPhoneKlarna modalInputPhone = new ModalInputPhoneKlarna();
 	
-	private static final String XPathBuyButton = "//button[@id[contains(.,'buy-button')]]";
-	private static final String XPathIframe = "//iframe[@id[contains(.,'klarna-hpp-instance-fullscreen')]]";
-	
-	public PageKlarna(WebDriver driver) {
-		super(driver);
-		modalUserData = new ModalUserDataKlarna(driver);
-		modalConfUserData = new ModalConfUserDataKlarna(driver);
-		modalInputPersonnumber = new ModalInputPersonnumberKlarna(driver);
-		modalInputPhone = new ModalInputPhoneKlarna(driver);
-	}
+	private static final String XPATH_BUY_BUTTON = "//button[@id[contains(.,'buy-button')]]";
+	private static final String XPATH_IFRMAE = "//iframe[@id[contains(.,'klarna-hpp-instance-fullscreen')]]";
 	
 	public boolean isPage(int maxSeconds) {
-		return state(State.Visible, By.xpath(XPathBuyButton)).wait(maxSeconds).check();
+		return state(State.Visible, XPATH_BUY_BUTTON).wait(maxSeconds).check();
 	}
 	
 	public void clickBuyButton() {
-		click(By.xpath(XPathBuyButton)).exec();
-		if (!state(State.Invisible, By.xpath(XPathBuyButton)).wait(2).check()) {
-			click(By.xpath(XPathBuyButton)).exec();
+		click(XPATH_BUY_BUTTON).exec();
+		if (!state(State.Invisible, XPATH_BUY_BUTTON).wait(2).check()) {
+			click(XPATH_BUY_BUTTON).exec();
 		}
 	}
 	
@@ -83,7 +72,7 @@ public class PageKlarna extends PageBase {
 	}
 	
 	private void goToIframe() {
-		driver.switchTo().frame(driver.findElement(By.xpath(XPathIframe)));
+		driver.switchTo().frame(getElement(XPATH_IFRMAE));
 	}
 	
 	private void leaveIframe() {

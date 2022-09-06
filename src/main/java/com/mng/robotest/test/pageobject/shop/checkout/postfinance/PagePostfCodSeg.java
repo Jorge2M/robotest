@@ -1,22 +1,14 @@
 package com.mng.robotest.test.pageobject.shop.checkout.postfinance;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
 public class PagePostfCodSeg extends PageBase {
 
-	private static final String XPathAceptarButton = "//form/input[@id='btn_Accept']";
-	private static final String XPathInputCodSeg = "//input[@id='postfinanceCardId']";
-	private static final String XPathButtonWeiter = "//button[@class='efinance-button' and text()[contains(.,'Weiter')]]";
-	
-	public PagePostfCodSeg(WebDriver driver) {
-		super(driver);
-	}
+	private static final String XPATH_ACEPTAR_BUTTON = "//form/input[@id='btn_Accept']";
+	private static final String XPATH_INPUT_COD_SEG = "//input[@id='postfinanceCardId']";
+	private static final String XPATH_BUTTON_WEITER = "//button[@class='efinance-button' and text()[contains(.,'Weiter')]]";
 	
 	/**
 	 * @return si se trata de la pasarela de test
@@ -50,23 +42,23 @@ public class PagePostfCodSeg extends PageBase {
 	}
 	
 	public boolean isPresentButtonAceptar() {
-		return (state(Present, By.xpath(XPathAceptarButton)).check());
+		return state(Present, XPATH_ACEPTAR_BUTTON).check();
 	}
 
 	public void clickAceptarButton() {
-		click(By.xpath(XPathAceptarButton), driver).exec();
+		click(XPATH_ACEPTAR_BUTTON).exec();
 	}
 	
 	public boolean isPresentInputCodSeg() {
-		return (state(Present, By.xpath(XPathInputCodSeg)).check());
+		return state(Present, XPATH_INPUT_COD_SEG).check();
 	}
 	
 	public boolean isPresentButtonWeiter() {
-		return (state(Present, By.xpath(XPathButtonWeiter)).check());
+		return state(Present, XPATH_BUTTON_WEITER).check();
 	}
 	
 	public void inputCodigoSeguridad(String codigoSeg) {
-		driver.findElement(By.xpath(XPathInputCodSeg)).sendKeys(codigoSeg);
+		getElement(XPATH_INPUT_COD_SEG).sendKeys(codigoSeg);
 	}
 
 }

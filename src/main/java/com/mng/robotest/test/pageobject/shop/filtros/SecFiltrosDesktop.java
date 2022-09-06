@@ -36,8 +36,8 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 		this.app = pageGaleria.getApp();
 	}
 	
-	public static SecFiltrosDesktop getInstance(Channel channel, AppEcom app) {
-		PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
+	public static SecFiltrosDesktop getInstance(Channel channel) {
+		PageGaleria pageGaleria = PageGaleria.getNew(channel);
 		return new SecFiltrosDesktop(pageGaleria);
 	}
 	
@@ -103,8 +103,7 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	
 	@Override
 	public boolean isClickableFiltroUntil(int seconds) {
-		return (state(Clickable, By.xpath(XPATH_LINK_ORDEN_WITH_TAG), driver)
-				.wait(seconds).check());
+		return state(Clickable, XPATH_LINK_ORDEN_WITH_TAG).wait(seconds).check();
 	}
 	
 	@Override
@@ -116,7 +115,7 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	
 	public void makeFilters(Visibility visibility) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		WebElement element = driver.findElement(By.xpath(XPATH_WRAPPER));
+		WebElement element = getElement(XPATH_WRAPPER);
 		String style = "block";
 		if (visibility == Visibility.Invisible) {
 			style = "none";
@@ -124,42 +123,41 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 		js.executeScript("arguments[0].setAttribute('style', 'display:" + style + "')", element);
 	}
 	
-	private static final String XPathLinkCollectionShop = "//div[@id='navigationContainer']/button";
+	private static final String XPATH_LINK_COLLECTION = "//div[@id='navigationContainer']/button";
 	public void showLateralMenus() {
-		if (app!=AppEcom.outlet) {
-			SecMenuLateralDesktop secMenuLateral = SecMenuLateralDesktop.getNew(app);
-			if (!secMenuLateral.isVisibleCapaMenus(1)) {
-				click(By.xpath(XPathLinkCollectionShop)).exec();
+		//if (app!=AppEcom.outlet) {
+			if (!new SecMenuLateralDesktop().isVisibleCapaMenus(1)) {
+				click(By.xpath(XPATH_LINK_COLLECTION)).exec();
 			}
-		}
+		//}
 	}
 	
 	//TODO hablar con Sergio Campillo para que añada algún id no-react
-	private static final String XPathLinkFiltrarShop = "//span[@class[contains(.,'icon-fill-filter')]]";
-	private static final String XPathCapaFiltersShop = "//div[@class[contains(.,'filters--')]]";
-	private static final String XPathButtonFiltrarShop = XPathCapaFiltersShop + "//button[@class[contains(.,'primary')]]";
+	private static final String XPATH_LINK_FILTRAR = "//span[@class[contains(.,'icon-fill-filter')]]";
+	private static final String XPATH_CAPA_FILTERS = "//div[@class[contains(.,'filters--')]]";
+	private static final String XPATH_BUTTON_FILTRAR = XPATH_CAPA_FILTERS + "//button[@class[contains(.,'primary')]]";
 	public void showFilters() {
-		if (app!=AppEcom.outlet) {
+		//if (app!=AppEcom.outlet) {
 			if (!isFiltersShopVisible(1) &&
-				state(State.Clickable, By.xpath(XPathLinkFiltrarShop)).check()) {
-				click(By.xpath(XPathLinkFiltrarShop)).exec();
+				state(State.Clickable, XPATH_LINK_FILTRAR).check()) {
+				click(XPATH_LINK_FILTRAR).exec();
 			}
-		}
+		//}
 	}
 	public void hideFilters() {
-		if (app!=AppEcom.outlet) {
+		//if (app!=AppEcom.outlet) {
 			if (isFiltersShopVisible(1) &&
-				state(State.Clickable, By.xpath(XPathLinkFiltrarShop)).check()) {
-				click(By.xpath(XPathLinkFiltrarShop)).exec();
+				state(State.Clickable, XPATH_LINK_FILTRAR).check()) {
+				click(XPATH_LINK_FILTRAR).exec();
 			}
-		}
+		//}
 	}
 	public void acceptFilters() {
-		if (app!=AppEcom.outlet) {
-			click(By.xpath(XPathButtonFiltrarShop)).exec();
-		}
+		//if (app!=AppEcom.outlet) {
+			click(XPATH_BUTTON_FILTRAR).exec();
+		//}
 	}
 	private boolean isFiltersShopVisible(int maxSeconds) {
-		return state(State.Visible, By.xpath(XPathCapaFiltersShop)).wait(maxSeconds).check();
+		return state(State.Visible, XPATH_CAPA_FILTERS).wait(maxSeconds).check();
 	}
 }

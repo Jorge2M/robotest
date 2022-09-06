@@ -3,20 +3,15 @@ package com.mng.robotest.test.pageobject.shop.galeria;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
 import com.github.jorge2m.testmaker.conf.Channel;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
 public class SecSelectorPrecios extends PageBase {
 	
 	public enum TypeClick { left, right }
-	
-	private final AppEcom app;
-	private final Channel channel;
 	
 	private static final String XPATH_LINEA_FILTRO_SHOP = "//div[@class[contains(.,'input-range__track--background')]]"; //
 	private static final String XPATH_IMPORTE_MINIMO_SHOP = "(" + XPATH_LINEA_FILTRO_SHOP + "//span[@class[contains(.,'label-container')]])[1]"; //
@@ -25,15 +20,10 @@ public class SecSelectorPrecios extends PageBase {
 	private static final String XPATH_LEFT_CORNER_SHOP = XPATH_IMPORTE_MINIMO_SHOP + "/../..";
 	private static final String XPATH_RIGHT_CORNER_SHOP = XPATH_IMPORTE_MAXIMO_SHOP + "/../..";
 	
-	public SecSelectorPrecios(AppEcom app, Channel channel) {
-		this.app = app;
-		this.channel = channel;
-	}
-
 	public boolean isVisible() {
 		By byLineaFiltro = By.xpath(XPATH_LINEA_FILTRO_SHOP);
 		if (channel==Channel.desktop) {
-			PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
+			PageGaleria pageGaleria = PageGaleria.getNew(channel);
 			SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(pageGaleria);
 			secFiltros.showFilters();
 			boolean visible = state(Visible, byLineaFiltro).check();

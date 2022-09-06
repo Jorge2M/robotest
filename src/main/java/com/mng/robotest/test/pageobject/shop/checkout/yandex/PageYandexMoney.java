@@ -3,47 +3,47 @@ package com.mng.robotest.test.pageobject.shop.checkout.yandex;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.mng.robotest.domains.transversal.PageBase;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+public class PageYandexMoney extends PageBase {
 
-public class PageYandexMoney {
+	public static final String URL_ACCESS = "https://demomoney.yandex.ru/shop.xml?scid=50215";
+	private static final String XPATH_INPUT_PAYMENT_CODE = "//input[@id='dstAccount']";
+	private static final String XPATH_INPUT_IMPORT = "//input[@id='amount']";
+	private static final String XPATH_PAY_BUTTON = "//input[@class[contains(.,'b-form-button__input')]]";
 
-	public static String urlAccess = "https://demomoney.yandex.ru/shop.xml?scid=50215";
-	static String XPathInputPaymentCode = "//input[@id='dstAccount']";
-	static String XPathInputImport = "//input[@id='amount']";
-	static String XPathPayButton = "//input[@class[contains(.,'b-form-button__input')]]";
-
-	public static void goToPage(WebDriver driver) {
-		driver.get(urlAccess);
+	public void goToPage() {
+		driver.get(URL_ACCESS);
 	}
 	
-	public static void goToPageInNewTab(String titleTab, WebDriver driver) throws Exception {
-		loadUrlInAnotherTabTitle(urlAccess, titleTab, driver);
+	public void goToPageInNewTab(String titleTab) throws Exception {
+		loadUrlInAnotherTabTitle(URL_ACCESS, titleTab, driver);
 	}
 	
-	public static void closeActualTabByTitle(String titleTab, WebDriver driver) {
+	public void closeActualTabByTitle(String titleTab) {
 		closeTabByTitle(titleTab, driver);
 	}
 	
-	public static void inputPaymentCode(String inputValue, WebDriver driver) {
-		sendKeysWithRetry(inputValue, By.xpath(XPathInputPaymentCode), 2, driver);
+	public void inputPaymentCode(String inputValue) {
+		sendKeysWithRetry(inputValue, By.xpath(XPATH_INPUT_PAYMENT_CODE), 2, driver);
 	}
 	
-	public static void inputImport(String inputValue, WebDriver driver) {
-		driver.findElement(By.xpath(XPathInputImport)).clear();
-		sendKeysWithRetry(inputValue, By.xpath(XPathInputImport), 2, driver);
+	public void inputImport(String inputValue) {
+		getElement(XPATH_INPUT_IMPORT).clear();
+		sendKeysWithRetry(inputValue, By.xpath(XPATH_INPUT_IMPORT), 2, driver);
 	}
 	
-	public static boolean isVisibleInputPaymentCode(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathInputPaymentCode), driver).check());
+	public boolean isVisibleInputPaymentCode() {
+		return state(Visible, XPATH_INPUT_PAYMENT_CODE).check();
 	}
 	
-	public static boolean isVisibleInputImport(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathInputImport), driver).check());
+	public boolean isVisibleInputImport() {
+		return state(Visible, XPATH_INPUT_IMPORT).check();
 	}
 
-	public static void clickPayButton(WebDriver driver) {
-		click(By.xpath(XPathPayButton), driver).exec();
+	public void clickPayButton() {
+		click(XPATH_PAY_BUTTON).exec();
 	}
 }

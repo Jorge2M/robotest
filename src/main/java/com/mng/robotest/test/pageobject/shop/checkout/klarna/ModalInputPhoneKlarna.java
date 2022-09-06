@@ -1,7 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.checkout.klarna;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.domains.transversal.PageBase;
@@ -9,22 +7,17 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 
 public class ModalInputPhoneKlarna extends PageBase {
 
-	private static final String XPathInputPhoneNumber = "//input[@id='email_or_phone']";
-	//private static final String XPathButtonContinue = "//span[@id[contains(.,'btn-continue')]]";
-	private static final String XPathButtonContinue = "//span[@id[contains(.,'onContinue')]]";
-	private static final String XPathInputOTP = "//input[@id='otp_field']";
-	private static final String XPathButtonConfirm = "//span[@id[contains(.,'kp-purchase-review-continue-button')]]";
-	
-	public ModalInputPhoneKlarna(WebDriver driver) {
-		super(driver);
-	}
+	private static final String XPATH_INPUT_PHONE_NUMBER = "//input[@id='email_or_phone']";
+	private static final String XPATH_BUTTON_CONTINUE = "//span[@id[contains(.,'onContinue')]]";
+	private static final String XPATH_INPUT_OTP = "//input[@id='otp_field']";
+	private static final String XPATH_BUTTON_CONFIRM = "//span[@id[contains(.,'kp-purchase-review-continue-button')]]";
 	
 	public boolean isModal(int maxSeconds) {
-		return state(State.Visible, By.xpath(XPathInputPhoneNumber)).wait(maxSeconds).check();
+		return state(State.Visible, XPATH_INPUT_PHONE_NUMBER).wait(maxSeconds).check();
 	}
 	
 	public void inputPhoneNumber(String phoneNumber) {
-		WebElement input = driver.findElement(By.xpath(XPathInputPhoneNumber));
+		WebElement input = getElement(XPATH_INPUT_PHONE_NUMBER);
 		String actualValue = input.getAttribute("value"); 
 		if (actualValue.replace(" ", "").compareTo(phoneNumber)!=0) {
 			input.clear();
@@ -33,25 +26,25 @@ public class ModalInputPhoneKlarna extends PageBase {
 	}
 	
 	public void clickButtonContinue() {
-		click(By.xpath(XPathButtonContinue)).exec();
+		click(XPATH_BUTTON_CONTINUE).exec();
 	}
 	
 	private boolean isInputOtpVisible(int maxSeconds) {
-		return state(State.Visible, By.xpath(XPathInputOTP)).wait(maxSeconds).check();
+		return state(State.Visible, XPATH_INPUT_OTP).wait(maxSeconds).check();
 	}
 	
 	public void inputOTP(String OTP) {
 		isInputOtpVisible(5);
-		driver.findElement(By.xpath(XPathInputOTP)).sendKeys(OTP);
+		getElement(XPATH_INPUT_OTP).sendKeys(OTP);
 		isButtonConfirmVisible(5);
 	}
 	
 	private boolean isButtonConfirmVisible(int maxSeconds) {
-		return state(State.Visible, By.xpath(XPathButtonConfirm)).wait(maxSeconds).check();
+		return state(State.Visible, XPATH_BUTTON_CONFIRM).wait(maxSeconds).check();
 	}
 	
 	public void clickButtonConfirm() {
-		click(By.xpath(XPathButtonConfirm)).exec();
+		click(XPATH_BUTTON_CONFIRM).exec();
 	}
 	
 }

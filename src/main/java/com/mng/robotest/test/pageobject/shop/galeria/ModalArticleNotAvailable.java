@@ -1,53 +1,38 @@
 package com.mng.robotest.test.pageobject.shop.galeria;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
-public class ModalArticleNotAvailable {
+public class ModalArticleNotAvailable extends PageBase {
 
 	public enum StateModal {visible, notvisible}	
-	static String XPathModal = "//div[@id='bocataAvisame']";
-	static String XPathAspaForClose = XPathModal + "//div[@class[contains(.,'botonCerrarAvisame')]]";
-	static String XPathRPGDText = XPathModal + "//p[@class='gdpr-text gdpr-data-protection']";
+	private static final String XPATH_MODAL = "//div[@id='bocataAvisame']";
+	private static final String XPATH_ASPA_FOR_CLOSE = XPATH_MODAL + "//div[@class[contains(.,'botonCerrarAvisame')]]";
 	
-	public static boolean inStateUntil(StateModal stateModal, int maxSecondsToWait, WebDriver driver) throws Exception {
+	public boolean inStateUntil(StateModal stateModal, int maxSecondsToWait) throws Exception {
 		switch (stateModal) {
 		case visible:
-			return isVisibleUntil(maxSecondsToWait, driver);
+			return isVisibleUntil(maxSecondsToWait);
 		default:
 		case notvisible:
-			return isNotVisibleUntil(maxSecondsToWait, driver);
+			return isNotVisibleUntil(maxSecondsToWait);
 		}
 	}
 	
-	public static boolean isVisibleUntil(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(XPathModal), driver).wait(maxSeconds).check());
+	public boolean isVisibleUntil(int maxSeconds) {
+		return state(Visible, XPATH_MODAL).wait(maxSeconds).check();
 	}
 	
-	public static boolean isNotVisibleUntil(int maxSeconds, WebDriver driver) {
-		return (state(Invisible, By.xpath(XPathModal), driver)
-				.wait(maxSeconds).check());
-//		By byAvisame = By.xpath(XPathModal);
-//		for (int i=0; i<maxSecondsToWait; i++) {
-//			if (isElementPresent(driver, byAvisame)) {
-//				if (!driver.findElement(byAvisame).isDisplayed()) {
-//					return true;
-//				}
-//			}
-//			Thread.sleep(1000);
-//		}
-//		return false;
+	public boolean isNotVisibleUntil(int maxSeconds) {
+		return (state(Invisible, XPATH_MODAL).wait(maxSeconds).check());
 	}
 
-	public static boolean isVisibleRPGD(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(XPathModal), driver).wait(maxSeconds).check());
+	public boolean isVisibleRPGD(int maxSeconds) {
+		return state(Visible, XPATH_MODAL).wait(maxSeconds).check();
 	}
 
-	public static void clickAspaForClose(WebDriver driver) {
-		driver.findElement(By.xpath(XPathAspaForClose)).click();
+	public void clickAspaForClose() {
+		getElement(XPATH_ASPA_FOR_CLOSE).click();
 	}
 }

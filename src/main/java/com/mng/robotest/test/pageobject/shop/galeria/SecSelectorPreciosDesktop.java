@@ -4,10 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class SecSelectorPreciosDesktop extends PageBase {
 	
@@ -22,7 +20,7 @@ public class SecSelectorPreciosDesktop extends PageBase {
 	
 	public boolean isVisible() {
 		By byLineaFiltro = By.xpath(XPATH_LINEA_FILTRO_SHOP);
-		PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
+		PageGaleria pageGaleria = PageGaleria.getNew(channel);
 		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(pageGaleria);
 		secFiltros.showFilters();
 		boolean visible = state(Visible, byLineaFiltro).check();

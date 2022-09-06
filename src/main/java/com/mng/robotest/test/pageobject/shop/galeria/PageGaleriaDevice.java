@@ -97,8 +97,8 @@ public class PageGaleriaDevice extends PageGaleria {
 	//Número de páginas a partir del que consideramos que se requiere un scroll hasta el final de la galería
 	public static int SCROLL_TO_LAST = 20; 
 	
-	public PageGaleriaDevice(From from, Channel channel, AppEcom app) {
-		super(from, channel, app);
+	public PageGaleriaDevice(From from) {
+		super(from);
 	}
 	
 	String getXPathArticuloConVariedadColores(int numArticulo) {

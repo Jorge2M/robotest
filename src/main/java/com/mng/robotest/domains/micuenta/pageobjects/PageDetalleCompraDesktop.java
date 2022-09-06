@@ -11,7 +11,7 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	private final SectionPrendas sectionPrendas = new SectionPrendas();
 	
 	private static final String XPATH_ID_TICKET = "//h2[@class[contains(.,'text-title-xl')]]/span";
-	private static final String XPATH_IMPORTE = "//*[@data-testid='myPurchases.detail.totalPrice']";
+	private static final String XPATH_IMPORTE = "//*[@data-testid='price']";
 	
 	//TODO necesitaría un data-testid
 	private static final String XPATH_DIRECCION_ENVIO_ONLINE = XPATH_ID_TICKET + "/../../../div[2]//div[@class[contains(.,'sg-body-small')]]";

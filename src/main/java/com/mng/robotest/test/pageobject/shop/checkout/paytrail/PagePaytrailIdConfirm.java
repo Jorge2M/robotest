@@ -1,27 +1,24 @@
 package com.mng.robotest.test.pageobject.shop.checkout.paytrail;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
-public class PagePaytrailIdConfirm {
+public class PagePaytrailIdConfirm extends PageBase {
 	
-	static String XPathInputId = "//input[@name[contains(.,'PMTCONNB')]]";
-	static String XPathButtonConfirmar = "//input[@name[contains(.,'SAVEBTN')]]";
+	private static final String XPATH_INPUT_ID = "//input[@name[contains(.,'PMTCONNB')]]";
+	private static final String XPATH_BUTTON_CONFIRMAR = "//input[@name[contains(.,'SAVEBTN')]]";
 	
-	public static boolean isPage(WebDriver driver) {
-		return (state(Present, By.xpath(XPathInputId), driver).check());
+	public boolean isPage() {
+		return state(Present, XPATH_INPUT_ID).check();
 	}
 	
-	public static void inputIdConfirm(String idConfirm, WebDriver driver) {
-		driver.findElement(By.xpath(XPathInputId)).clear();
-		driver.findElement(By.xpath(XPathInputId)).sendKeys(idConfirm);
+	public void inputIdConfirm(String idConfirm) {
+		getElement(XPATH_INPUT_ID).clear();
+		getElement(XPATH_INPUT_ID).sendKeys(idConfirm);
 	}
 
-	public static void clickConfirmar(WebDriver driver) {
-		click(By.xpath(XPathButtonConfirmar), driver).exec();
+	public void clickConfirmar() {
+		click(XPATH_BUTTON_CONFIRMAR).exec();
 	}
 }

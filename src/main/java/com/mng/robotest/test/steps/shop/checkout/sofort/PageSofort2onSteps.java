@@ -1,29 +1,21 @@
 package com.mng.robotest.test.steps.shop.checkout.sofort;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.sofort.PageSofort2on;
 
-
-public class PageSofort2onSteps {
+public class PageSofort2onSteps extends StepBase {
 	
-	private final PageSofort2on pageSofort2on;
-	private final WebDriver driver;
-	
-	public PageSofort2onSteps(WebDriver driver) {
-		this.pageSofort2on = new PageSofort2on(driver);
-		this.driver = driver;
-	}
+	private final PageSofort2on pageSofort2on = new PageSofort2on();
 	
 	@Validation (
 		description="Aparece la página de selección del país/banco (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
 	public boolean validaIsPageUntil(int maxSeconds) {
-		return (pageSofort2on.isPageUntil(maxSeconds));
+		return pageSofort2on.isPageUntil(maxSeconds);
 	}
 	
 	@Step (
@@ -41,8 +33,6 @@ public class PageSofort2onSteps {
 		pageSofort2on.inputBankcode(bankCode);
 		SeleniumUtils.waitForPageLoaded(driver, 5);
 		pageSofort2on.clickSubmitButtonPage3();
-		
-		PageSofort4thSteps pageSofort4thSteps = new PageSofort4thSteps(driver);
-		pageSofort4thSteps.validaIsPage();
+		new PageSofort4thSteps().validaIsPage();
 	}
 }

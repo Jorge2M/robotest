@@ -15,7 +15,6 @@ public class PagoTMango extends PagoSteps {
 		super.isAvailableExecPay = true;
 	}
 	
-	@SuppressWarnings("static-access")
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		DataPedido dataPedido = this.dataPago.getDataPedido();
@@ -24,7 +23,7 @@ public class PagoTMango extends PagoSteps {
 		pageCheckoutWrapperSteps.getSecTMangoSteps().clickTipoPago(SecTMango.TipoPago.PAGO_HABITUAL);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		
-		PageAmexInputTarjetaSteps pageAmexInputTarjetaSteps = new PageAmexInputTarjetaSteps(driver);
+		PageAmexInputTarjetaSteps pageAmexInputTarjetaSteps = new PageAmexInputTarjetaSteps();
 		pageAmexInputTarjetaSteps.validateIsPageOk(dataPedido.getImporteTotal(), dataTest.pais.getCodigo_pais());
 		
 		if (execPay) {

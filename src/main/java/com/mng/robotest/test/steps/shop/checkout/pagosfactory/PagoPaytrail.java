@@ -18,15 +18,16 @@ public class PagoPaytrail extends PagoSteps {
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
-		PagePaytrail1rstSteps.validateIsPage(dataPago.getDataPedido().getImporteTotal(), dataTest.pais.getCodigo_pais(), channel, driver);
-		PagePaytrail1rstSteps.selectBancoAndContinue(channel, driver);
 		
+		PagePaytrail1rstSteps pagePaytrail1rstSteps = new PagePaytrail1rstSteps();
+		pagePaytrail1rstSteps.validateIsPage(dataPago.getDataPedido().getImporteTotal(), dataTest.pais.getCodigo_pais());
+		pagePaytrail1rstSteps.selectBancoAndContinue();
 		if (execPay) {
 			this.dataPago.getDataPedido().setCodtipopago("F");
 			String codigoPais = this.dataPago.getDataPedido().getCodigoPais();
-			new PagePaytrailEpaymentSteps(driver).clickCodeCardOK(dataPago.getDataPedido().getImporteTotal(), codigoPais);
-			PagePaytrailIdConfirmSteps.inputIDAndClickConfirmar("V2360A71", dataPago.getDataPedido().getImporteTotal(), codigoPais, driver);
-			PagePaytrailResultadoOkSteps.clickVolverAMangoButton(driver);
+			new PagePaytrailEpaymentSteps().clickCodeCardOK(dataPago.getDataPedido().getImporteTotal(), codigoPais);
+			new PagePaytrailIdConfirmSteps().inputIDAndClickConfirmar("V2360A71", dataPago.getDataPedido().getImporteTotal(), codigoPais);
+			new PagePaytrailResultadoOkSteps().clickVolverAMangoButton();
 		}
 	}
 }

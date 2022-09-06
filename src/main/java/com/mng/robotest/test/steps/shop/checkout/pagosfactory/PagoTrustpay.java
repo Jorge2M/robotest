@@ -17,11 +17,12 @@ public class PagoTrustpay extends PagoSteps {
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		String importeTotal = this.dataPago.getDataPedido().getImporteTotal();
-		PageTrustpaySelectBankSteps.validateIsPage(dataPago.getDataPedido().getPago().getNombre(channel, app), importeTotal, dataTest.pais.getCodigo_pais(), channel, driver);
 		
+		PageTrustpaySelectBankSteps pageTrustpaySelectBankSteps = new PageTrustpaySelectBankSteps();
+		pageTrustpaySelectBankSteps.validateIsPage(dataPago.getDataPedido().getPago().getNombre(channel, app), importeTotal, dataTest.pais.getCodigo_pais());
 		if (execPay) {
-			PageTrustpaySelectBankSteps.selectTestBankAndPay(importeTotal, dataTest.pais.getCodigo_pais(), channel, driver);
-			PageTrustPayResultSteps.clickButtonContinue(driver);
+			pageTrustpaySelectBankSteps.selectTestBankAndPay(importeTotal, dataTest.pais.getCodigo_pais());
+			new PageTrustPayResultSteps().clickButtonContinue();
 		}
 	}	
 }

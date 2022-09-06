@@ -1,26 +1,20 @@
 package com.mng.robotest.test.steps.shop.checkout.sofort;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.sofort.PageSofort4th;
 
-
-public class PageSofort4thSteps {
+public class PageSofort4thSteps extends StepBase {
 	
-	private final PageSofort4th pageSofort4th;
-	
-	public PageSofort4thSteps(WebDriver driver) {
-		this.pageSofort4th = new PageSofort4th(driver);
-	}
+	private final PageSofort4th pageSofort4th = new PageSofort4th();
 	
 	@Validation (
 		description="Aparece la página de introducción del Usuario/Password de \"SOFORT\"",
 		level=State.Warn)
 	public boolean validaIsPage() { 
-		return (pageSofort4th.isPage());
+		return pageSofort4th.isPage();
 	}
 	
 	@Step (

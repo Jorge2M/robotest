@@ -125,12 +125,12 @@ public class DataBanner {
 			getSize().height==dataBanner2.getSize().height);
 	}
 	
-	private static final String TagLinea = "@TagLinea";
-	private static final String XPathLinkLineaWithTag = 
-		".//a[@class[contains(.,'link')] and @data-cta[contains(.,'tiendaid=" + TagLinea + "')]]";
+	private static final String TAG_LINEA = "@TagLinea";
+	private static final String XPATH_LINK_LINEA_WITH_TAG = 
+		".//a[@class[contains(.,'link')] and @data-cta[contains(.,'tiendaid=" + TAG_LINEA + "')]]";
 	
 	private String getXPathLinkLinea(LineaType lineaType) {
-		return (XPathLinkLineaWithTag.replace(TagLinea, lineaType.toString()));
+		return (XPATH_LINK_LINEA_WITH_TAG.replace(TAG_LINEA, lineaType.toString()));
 	}
 	
 	public String getUrlLinkLinea(LineaType lineaType) {

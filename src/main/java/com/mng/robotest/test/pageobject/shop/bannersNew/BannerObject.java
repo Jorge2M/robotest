@@ -17,11 +17,11 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public abstract class BannerObject extends PageBase {
 
 	public BannerType bannerType;
-	public String XPathBanner;
+	public String xpathBanner;
 	
-	public BannerObject(BannerType bannerType, String XPathBanner) {
+	public BannerObject(BannerType bannerType, String xpathBanner) {
 		this.bannerType = bannerType;
-		this.XPathBanner = XPathBanner;
+		this.xpathBanner = xpathBanner;
 	}
 	
 	abstract protected String getUrlBanner(WebElement bannerScreen);
@@ -75,12 +75,12 @@ public abstract class BannerObject extends PageBase {
 	
 	public String getTextBanner(WebElement bannerScreen) {
 		String texto = bannerScreen.getAttribute("textContent"); 	
-		return (getTextBannerNormalized(texto));
+		return getTextBannerNormalized(texto);
 	}
 	
 	public String getFloatingTextBanner(WebElement bannerScreen) {
 		String texto = bannerScreen.findElement(By.xpath("./..")).getText();
-		return (getTextBannerNormalized(texto));
+		return getTextBannerNormalized(texto);
 	}
 	
 	private String getTextBannerNormalized(String texto) {
@@ -89,16 +89,15 @@ public abstract class BannerObject extends PageBase {
 			texto = texto.replaceAll("\n\n", "\n");
 			texto = texto.replaceAll("\n ", "\n");
 		}
-		
 		return texto;
 	}
 	
 	public boolean isVisibleAnyBanner() {
-		return !getElementsVisible(XPathBanner).isEmpty();
+		return !getElementsVisible(xpathBanner).isEmpty();
 	}
 	
 	protected List<WebElement> getDisplayedBannersInOrder() {
-		List<WebElement> listBanners = getElementsVisible(XPathBanner);
+		List<WebElement> listBanners = getElementsVisible(xpathBanner);
 		SeleniumUtils.orderElementsByPositionInScreen(listBanners);
 		return listBanners;
 	}

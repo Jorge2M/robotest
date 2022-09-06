@@ -24,15 +24,15 @@ public interface SecFiltros {
 	public static SecFiltros make(Channel channel, AppEcom app) {
 		switch (channel) {
 		case desktop:
-			return SecFiltrosDesktop.getInstance(channel, app);
+			return SecFiltrosDesktop.getInstance(channel);
 		case mobile:
 		case tablet:
 			if (app==AppEcom.outlet && channel==Channel.tablet) {
-				return SecFiltrosDesktop.getInstance(channel, app);
+				return SecFiltrosDesktop.getInstance(channel);
 			}
-			return SecMultiFiltrosDevice.getInstance(app);
+			return SecMultiFiltrosDevice.getInstance();
 		default:
-			return SecMultiFiltrosDevice.getInstance(app);
+			return SecMultiFiltrosDevice.getInstance();
 		}
 	}
 	

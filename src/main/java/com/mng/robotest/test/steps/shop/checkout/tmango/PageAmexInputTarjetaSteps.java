@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop.checkout.tmango;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
@@ -11,12 +9,8 @@ import com.mng.robotest.test.utils.ImporteScreen;
 
 public class PageAmexInputTarjetaSteps {
 	
-	private final PageAmexInputTarjeta pageAmexInputTarjeta;
+	private final PageAmexInputTarjeta pageAmexInputTarjeta = new PageAmexInputTarjeta();
 	
-	public PageAmexInputTarjetaSteps(WebDriver driver) {
-		pageAmexInputTarjeta = new PageAmexInputTarjeta(driver); 
-	}
-
 	@Validation
 	public ChecksTM validateIsPageOk(String importeTotal, String codPais) {
 		ChecksTM checks = ChecksTM.getNew();
@@ -24,18 +18,22 @@ public class PageAmexInputTarjetaSteps {
 	 	checks.add(
 			"Aparece la pasarela de pagos de RedSys (la esperamos hasta " + maxSeconds + " segundos)",
 			pageAmexInputTarjeta.isPasarelaRedSysUntil(maxSeconds), State.Defect); 
+	 	
 	 	checks.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, pageAmexInputTarjeta.driver), State.Warn); 
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, pageAmexInputTarjeta.driver), State.Warn);
+	 	
 	 	checks.add(
 			"Aparecen los campos de introducción de tarjeta, fecha caducidad y código de seguridad",
 			pageAmexInputTarjeta.isPresentNumTarj() &&
 			pageAmexInputTarjeta.isPresentInputMesCad() &&
 			pageAmexInputTarjeta.isPresentInputAnyCad() &&
 			pageAmexInputTarjeta.isPresentInputCvc(), State.Warn); 
+	 	
 	 	checks.add(
 			"Figura un botón de Aceptar",
 			pageAmexInputTarjeta.isPresentPagarButton(), State.Defect); 
+	 	
 	 	return checks;
 	}
 	
@@ -48,7 +46,7 @@ public class PageAmexInputTarjetaSteps {
 		pageAmexInputTarjeta.inputDataTarjeta(numTarj, mesCad, anyCad, Cvc);
 		pageAmexInputTarjeta.clickPagarButton();
 		
-		PageRedsysSimSteps pageRedsysSimSteps = new PageRedsysSimSteps(pageAmexInputTarjeta.driver);
+		PageRedsysSimSteps pageRedsysSimSteps = new PageRedsysSimSteps();
 		pageRedsysSimSteps.checkPage();
 		return pageRedsysSimSteps;
 	}

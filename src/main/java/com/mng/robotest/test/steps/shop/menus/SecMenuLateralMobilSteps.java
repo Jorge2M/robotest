@@ -71,7 +71,7 @@ public class SecMenuLateralMobilSteps {
 	@Validation
 	private ChecksTM checkGaleriaAfterSelectNuevo() {
 		ChecksTM checks = ChecksTM.getNew();
-		PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
+		PageGaleria pageGaleria = PageGaleria.getNew(channel);
 		int maxSeconds = 3;
 		checks.add(
 			"Aparece algún artículo (esperamos " + maxSeconds + " segundos)",

@@ -312,7 +312,7 @@ public class CheckoutFlow extends StepBase {
 //						}
 					}
 				} else {
-					PageResultPagoTpvSteps.validateIsPageOk(dataPedido, dataTest.pais.getCodigo_pais(), driver);
+					new PageResultPagoTpvSteps().validateIsPageOk(dataPedido, dataTest.pais.getCodigo_pais());
 				}
 				
 				//Almacenamos el pedido en el contexto para la futura validación en Manto

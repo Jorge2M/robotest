@@ -33,19 +33,19 @@ public class SecIdeal extends PageBase {
 		}
 	};
 
-	private static final String XPathCardConditions = "//div[@id='textoCondicionesTarjeta']";
-	private static final String XPathSelectorBankIdeal = XPathCardConditions + "//div[@id='ideal-bank-selector']";
-	private static final String XPathListBankIdeal = XPathSelectorBankIdeal + "//select[@name[contains(.,'panelTarjetasForm')] and @class='bank-select']";
+	private static final String XPATH_CARD_CONDITIONS = "//div[@id='textoCondicionesTarjeta']";
+	private static final String XPATH_SELECTOR_BANK_IDEAL = XPATH_CARD_CONDITIONS + "//div[@id='ideal-bank-selector']";
+	private static final String XPATH_LIST_BANK_IDEAL = XPATH_SELECTOR_BANK_IDEAL + "//select[@name[contains(.,'panelTarjetasForm')] and @class='bank-select']";
 	
-	private static final String XPathCardConditionsMobile = "//div[@id='avisoConfirmar']";
-	private static final String XPathSelectorBankIdealMobile = XPathCardConditionsMobile + "//div[@id='ideal-bank-selector']";
-	private static final String XPathListBankIdealMobile = "//select[@class[contains(.,'bank-select')]]";
+	private static final String XPATH_CONDITIONS_MOBILE = "//div[@id='avisoConfirmar']";
+	private static final String XPATH_SELECTOR_BANK_IDEAL_MOBILE = XPATH_CONDITIONS_MOBILE + "//div[@id='ideal-bank-selector']";
+	private static final String XPATH_LIST_BANK_IDEAL_MOBILE = "//select[@class[contains(.,'bank-select')]]";
 	
 	public String getXPath_section() {
 		if (channel.isDevice()) {
-			return XPathCardConditionsMobile;
+			return XPATH_CONDITIONS_MOBILE;
 		}
-		return XPathCardConditions;
+		return XPATH_CARD_CONDITIONS;
 	}
 
 	public boolean isVisibleUntil(int maxSeconds) {
@@ -55,35 +55,35 @@ public class SecIdeal extends PageBase {
 	
 	public boolean isVisibleSelectorOfBank(int maxSeconds) {
 		if (channel.isDevice()) {
-			return (state(Visible, By.xpath(XPathSelectorBankIdealMobile)).wait(maxSeconds).check());
+			return state(Visible, XPATH_SELECTOR_BANK_IDEAL_MOBILE).wait(maxSeconds).check();
 		}
-		return (state(Present, By.xpath(XPathSelectorBankIdeal)).wait(maxSeconds).check());
+		return state(Present, XPATH_SELECTOR_BANK_IDEAL).wait(maxSeconds).check();
 	}
 	
 	public boolean isBancoDisponible(BancoSeleccionado bancoSeleccionado) {
 		String xpath = getXPathBankOptionByValue(bancoSeleccionado);
-		return (state(Present, By.xpath(xpath)).check());
+		return state(Present, xpath).check();
 	}
 	
 	public String getXPathBankOptionByValue(BancoSeleccionado bancoSeleccionado) {
 		if (channel.isDevice()) { 		
-			return XPathListBankIdealMobile + "//option[@value='" + bancoSeleccionado.valueOption + "']";
+			return XPATH_LIST_BANK_IDEAL_MOBILE + "//option[@value='" + bancoSeleccionado.valueOption + "']";
 		}
-		return XPathListBankIdeal + "//option[@value='" + bancoSeleccionado.valueOption + "']";
+		return XPATH_LIST_BANK_IDEAL + "//option[@value='" + bancoSeleccionado.valueOption + "']";
 	}
 	
 	public String getXPathBankOptionByName(BancoSeleccionado bancoSeleccionado) {
 		if (channel.isDevice()) {
-			return XPathListBankIdealMobile + "//option[@text='" + bancoSeleccionado.nombre + "']";
+			return XPATH_LIST_BANK_IDEAL_MOBILE + "//option[@text='" + bancoSeleccionado.nombre + "']";
 		}
-		return XPathListBankIdeal + "//option[@text='" + bancoSeleccionado.nombre + "']";
+		return XPATH_LIST_BANK_IDEAL + "//option[@text='" + bancoSeleccionado.nombre + "']";
 	}
 	
 	public void clickBancoByValue(BancoSeleccionado bancoSeleccionado) {
-		driver.findElement(By.xpath(getXPathBankOptionByValue(bancoSeleccionado))).click();
+		getElement(getXPathBankOptionByValue(bancoSeleccionado)).click();
 	}
 	
 	public void clickBancoByName(BancoSeleccionado bancoSeleccionado) {
-		driver.findElement(By.xpath(getXPathBankOptionByName(bancoSeleccionado))).click();
+		getElement(getXPathBankOptionByName(bancoSeleccionado)).click();
 	}
 }

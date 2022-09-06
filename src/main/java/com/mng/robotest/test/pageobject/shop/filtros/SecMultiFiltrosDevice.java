@@ -12,12 +12,10 @@ import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	
@@ -30,8 +28,8 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 		this.pageGaleria = pageGaleria;
 	}
 	
-	public static SecMultiFiltrosDevice getInstance(AppEcom app) {
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.mobile, app);
+	public static SecMultiFiltrosDevice getInstance() {
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.mobile);
 		return (new SecMultiFiltrosDevice(pageGaleria));
 	}
 	

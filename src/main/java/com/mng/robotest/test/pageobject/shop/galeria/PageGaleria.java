@@ -48,8 +48,7 @@ public abstract class PageGaleria extends PageBase {
 		this.xpathArticuloBase = getXPathArticulo();
 	}
 	
-	public PageGaleria(From from, Channel channel, AppEcom app) {
-		super(channel, app);
+	public PageGaleria(From from) {
 		this.from = from;
 		this.xpathArticuloBase = getXPathArticulo();
 	}
@@ -97,17 +96,17 @@ public abstract class PageGaleria extends PageBase {
 	static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE = "//*[" + CLASS_PRODUCT_ITEM + "]";
 	static final String XPATH_LINK_RELATIVE_TO_ARTICLE = ".//a[@class='product-link']";
 
-	public static PageGaleria getNew(Channel channel, AppEcom app) {
-		return getNew(From.MENU, channel, app);
+	public static PageGaleria getNew(Channel channel) {
+		return getNew(From.MENU, channel);
 	}
-	public static PageGaleria getNew(From from, Channel channel, AppEcom app) {
+	public static PageGaleria getNew(From from, Channel channel) {
 		switch (channel) {
 		case desktop:
-			return (new PageGaleriaDesktop(from, channel, app));
+			return new PageGaleriaDesktop(from);
 		case mobile:
 		case tablet:
 		default:
-			return (new PageGaleriaDevice(from, channel, app));
+			return new PageGaleriaDevice(from);
 		}
 	}
 	

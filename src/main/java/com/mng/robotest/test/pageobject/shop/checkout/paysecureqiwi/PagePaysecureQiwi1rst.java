@@ -18,8 +18,8 @@ public class PagePaysecureQiwi1rst extends PageBase {
 		WebMoney("wm", "30:2"), 
 		Yandex("ym", "32:2"); //Яндекс
 		
-		private String XPathIconoPro = "//div[@class[contains(.,'select-card')]]"; 
-		private String XPathIconoTest = "//input[@name='isSET']";
+		private String xpathIconoPro = "//div[@class[contains(.,'select-card')]]"; 
+		private String xpathIconoTest = "//input[@name='isSET']";
 		private String code;
 		private String value;
 		private PaysecureGateway(String code, String value) {
@@ -28,9 +28,9 @@ public class PagePaysecureQiwi1rst extends PageBase {
 		}
 		public By getBy(boolean isPro) {
 			if (isPro) {
-				return By.xpath(XPathIconoPro + "//self::*[@class[contains(.,'" + code + "-payment')]]");
+				return By.xpath(xpathIconoPro + "//self::*[@class[contains(.,'" + code + "-payment')]]");
 			}
-			return By.xpath(XPathIconoTest + "//self::*[@value='" + value + "']");
+			return By.xpath(xpathIconoTest + "//self::*[@value='" + value + "']");
 		}
 	}
 	

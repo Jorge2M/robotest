@@ -1,21 +1,18 @@
 package com.mng.robotest.test.pageobject.shop.checkout.ideal;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+public class PageIdealSimulador extends PageBase {
 
-public class PageIdealSimulador {
+	private static final String XPATH_CONTINUE_BUTTON = "//input[@type='submit' and @class='btnLink']";
 
-	static String XPathContinueButton = "//input[@type='submit' and @class='btnLink']";
-
-	public static boolean isPage(WebDriver driver) {
-		return (state(Visible, By.xpath("//h3[text()[contains(.,'iDEAL Issuer Simulation')]]"), driver).check());
+	public boolean isPage() {
+		return state(Visible, "//h3[text()[contains(.,'iDEAL Issuer Simulation')]]").check();
 	}
 
-	public static void clickButtonContinue(WebDriver driver) {
-		click(By.xpath(XPathContinueButton), driver).exec();
+	public void clickButtonContinue() {
+		click(XPATH_CONTINUE_BUTTON).exec();
 	}
 }

@@ -67,7 +67,8 @@ public class PageFavoritos extends PageBase {
 	// Funcionalidad de Share Favorites (pre)
 	
 	private String getXPathWithIdItem(int numArticulo) {
-		String idItem = getElement("(" + XPATH_ARTICULO + ")[" + numArticulo + "]").getAttribute("id");
+		String xpathArt = "(" + XPATH_ARTICULO + ")[" + numArticulo + "]";
+		String idItem = getElement(xpathArt).getAttribute("id");
 		return (XPATH_ARTICULO + "[@id='" + idItem + "']");
 	}
 	
@@ -143,6 +144,7 @@ public class PageFavoritos extends PageBase {
 	}
 	
 	public boolean hayArticulos() {
+		waitMillis(500);
 		return state(Present, XPATH_ARTICULO).check();
 	}
 	

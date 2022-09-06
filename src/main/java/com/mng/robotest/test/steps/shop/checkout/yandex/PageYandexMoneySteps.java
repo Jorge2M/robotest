@@ -1,53 +1,57 @@
 package com.mng.robotest.test.steps.shop.checkout.yandex;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.yandex.PageYandexMoney;
 
-public class PageYandexMoneySteps {
+public class PageYandexMoneySteps extends StepBase {
 
-	static final String tagUrlYandex = "@TagUrlYandex";
+	private final PageYandexMoney pageYandexMoney = new PageYandexMoney();
+	
+	private static final String TAG_URL_YANDEX = "@TagUrlYandex";
+	
 	@Step (
-		description="Accedemos a la URL de <b>YandexMoney</b>: " + tagUrlYandex, 
+		description="Accedemos a la URL de <b>YandexMoney</b>: " + TAG_URL_YANDEX, 
 		expected="Aparece la página de YandexMoney")
-	public static void accessInNewTab(String tabTitle, WebDriver driver) throws Exception {
-		TestMaker.getCurrentStepInExecution().replaceInDescription(tagUrlYandex, PageYandexMoney.urlAccess);
-		PageYandexMoney.goToPageInNewTab(tabTitle, driver);
-		checkIsPage(driver);
+	public void accessInNewTab(String tabTitle) throws Exception {
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_URL_YANDEX, PageYandexMoney.URL_ACCESS);
+		pageYandexMoney.goToPageInNewTab(tabTitle);
+		checkIsPage();
 	}
 	
 	@Validation
-	private static ChecksTM checkIsPage(WebDriver driver) {
+	private ChecksTM checkIsPage() {
 		ChecksTM checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece el input para el <b>Payment Code</b>",
-			PageYandexMoney.isVisibleInputPaymentCode(driver), State.Warn);
+			pageYandexMoney.isVisibleInputPaymentCode(), State.Warn);
+	 	
 	 	checks.add(
 			"Aparece el input para el importe",
-			PageYandexMoney.isVisibleInputImport(driver), State.Warn);
+			pageYandexMoney.isVisibleInputImport(), State.Warn);
+	 	
 	 	return checks;
 	}
 	
 	@Step (
 		description="Introducimos el paymentCode <b>#{paymentCode}</b>, el importe <b>#{importe}</b> y pulsamos el botón de Pago", 
 		expected="Aparece la página de resultado del pago a nivel de Yandex")
-	public static void inputDataAndPay(String paymentCode, String importe, WebDriver driver) {
-		PageYandexMoney.inputPaymentCode(paymentCode, driver);
-		PageYandexMoney.inputImport(importe, driver);
-		PageYandexMoney.clickPayButton(driver);
-		PageYandexMoneyResultSteps.validateIsResultOk(driver);
+	public void inputDataAndPay(String paymentCode, String importe) {
+		pageYandexMoney.inputPaymentCode(paymentCode);
+		pageYandexMoney.inputImport(importe);
+		pageYandexMoney.clickPayButton();
+		new PageYandexMoneyResultSteps().validateIsResultOk();
 	}
 	
 	@Step (
 		description="Cerramos la actual pestaña con nombre <b>#{tabTitle}</b>", 
 		expected="Desaparece la pestaña")
-	public static void closeTabByTitle(String tabTitle, String windowHandlePageToSwitch, WebDriver driver) {
-		PageYandexMoney.closeActualTabByTitle(tabTitle, driver);
+	public void closeTabByTitle(String tabTitle, String windowHandlePageToSwitch) {
+		pageYandexMoney.closeActualTabByTitle(tabTitle);
 		driver.switchTo().window(windowHandlePageToSwitch);
 	}
 }

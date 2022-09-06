@@ -1,8 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.checkout.tmango;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
@@ -25,28 +22,23 @@ public class PageRedsysSim extends PageBase {
 		}
 	}
 	
-	private static final String XPathButtonEnviar = "//input[@id='boton']";
+	private static final String XPATH_BUTTON_ENVIAR = "//input[@id='boton']";
 	
 	private String getXPathOption(OptionRedSys option) {
 		return "//input[@value='" + option.getValue() + "']";
 	}
 	
-	public PageRedsysSim(WebDriver driver) {
-		super(driver);
-	}
-	
 	public boolean isPage() {
-		By byOption = By.xpath(getXPathOption(OptionRedSys.Autenticacion_con_exito));
-		return state(State.Present, byOption).check();
+		String xpathOption = getXPathOption(OptionRedSys.Autenticacion_con_exito);
+		return state(State.Present, xpathOption).check();
 	}
 	
 	public void selectOption(OptionRedSys option) {
-		By byOption = By.xpath(getXPathOption(option));
-		click(byOption).exec();
+		click(getXPathOption(option)).exec();
 	}
 	
 	public void clickEnviar() {
-		click(By.xpath(XPathButtonEnviar)).exec();
+		click(XPATH_BUTTON_ENVIAR).exec();
 	}
 	
 }

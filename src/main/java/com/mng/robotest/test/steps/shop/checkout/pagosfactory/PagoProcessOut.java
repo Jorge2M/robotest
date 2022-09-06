@@ -17,7 +17,7 @@ public class PagoProcessOut extends PagoSteps {
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		DataPedido dataPedido = dataPago.getDataPedido(); 
-		PageProcessOutInputTrjSteps pageProcessOutSteps = new PageProcessOutInputTrjSteps(driver);
+		PageProcessOutInputTrjSteps pageProcessOutSteps = new PageProcessOutInputTrjSteps();
 		pageProcessOutSteps.checkIsPage(dataPedido.getImporteTotal(), dataTest.pais.getCodigo_pais());
 
 		if (execPay) {

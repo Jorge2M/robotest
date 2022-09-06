@@ -98,9 +98,9 @@ public class MenuTreeApp {
 			app, keyMujerVestidos, "vestidos", true, "Vestido,Pichi,Peto,Mono,Caftán,Blusón".split(",")
 		);
 		if (app==AppEcom.outlet) {
-			menu1rstLevelVestidos.addMenu2onLevel(Menu2onLevel.from(menu1rstLevelVestidos, "vestidos-largos", "".split(",")));
-			menu1rstLevelVestidos.addMenu2onLevel(Menu2onLevel.from(menu1rstLevelVestidos, "vestidos-cortos", "".split(",")));
-			menu1rstLevelVestidos.addMenu2onLevel(Menu2onLevel.from(menu1rstLevelVestidos, "vestidos-midi", "".split(",")));
+			menu1rstLevelVestidos.addMenu2onLevel(Menu2onLevel.from(menu1rstLevelVestidos, "Vestidos largos", "".split(",")));
+			menu1rstLevelVestidos.addMenu2onLevel(Menu2onLevel.from(menu1rstLevelVestidos, "Vestidos cortos", "".split(",")));
+			menu1rstLevelVestidos.addMenu2onLevel(Menu2onLevel.from(menu1rstLevelVestidos, "Vestidos midi", "".split(",")));
 			//menu1rstLevelVestidos.addMenu2onLevel(Menu2onLevel.from(menu1rstLevelVestidos, "vestidos-de-fiesta", "".split(",")));
 		} else {
 			menu1rstLevelVestidos.addMenu2onLevel(Menu2onLevel.from(menu1rstLevelVestidos, "largos", "".split(",")));
@@ -128,8 +128,8 @@ public class MenuTreeApp {
 		Menu1rstLevel menu1rstLeveCardigans  = Menu1rstLevel.from(
 			this.app, keyMujerCardigans, "cardigans", true, "Jersey,Chaleco,Top,Sudadera,Cárdigan".split(",")
 		);
-		menu1rstLeveCardigans.addMenu2onLevel(Menu2onLevel.from(menu1rstLeveCardigans, "jerseis", "".split(",")));
-		menu1rstLeveCardigans.addMenu2onLevel(Menu2onLevel.from(menu1rstLeveCardigans, "cardigans", "".split(",")));
+		menu1rstLeveCardigans.addMenu2onLevel(Menu2onLevel.from(menu1rstLeveCardigans, "jerséis", "".split(",")));
+		menu1rstLeveCardigans.addMenu2onLevel(Menu2onLevel.from(menu1rstLeveCardigans, "cárdigans", "".split(",")));
 		libraryMenusFirstLevel.add(menu1rstLeveCardigans);
 	}
 	

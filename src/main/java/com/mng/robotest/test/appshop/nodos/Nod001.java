@@ -38,7 +38,7 @@ public class Nod001 extends TestBase {
 		SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps();
 		if (app==AppEcom.shop) {
 			selectMenuPantalones();
-			PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
+			PageGaleria pageGaleria = PageGaleria.getNew(channel);
 			ListDataArticleGalery listArticlesPant = pageGaleria.getListDataArticles();
 			this.nodo.setArticlesNuevo(listArticlesPant);
 			PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();

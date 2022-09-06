@@ -9,13 +9,12 @@ import com.mng.robotest.test.steps.shop.checkout.giropay.PageGiropayInputBankSte
 
 public class PagoGiropay extends PagoSteps {
 
-	private final PageGiropay1rstSteps pageGiropay1rstSteps;
+	private final PageGiropay1rstSteps pageGiropay1rstSteps = new PageGiropay1rstSteps();
 	private final PageGiropayInputBankSteps pageGiropayInputBankSteps = new PageGiropayInputBankSteps(); 
 	
 	public PagoGiropay(DataPago dataPago) throws Exception {
 		super(dataPago);
 		super.isAvailableExecPay = true;
-		pageGiropay1rstSteps = new PageGiropay1rstSteps(channel);
 	}
 
 	@Override

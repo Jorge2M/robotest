@@ -6,12 +6,10 @@ import org.openqa.selenium.By;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class SecFiltrosTabletOutlet extends PageBase implements SecFiltros {
 	
@@ -27,7 +25,7 @@ public class SecFiltrosTabletOutlet extends PageBase implements SecFiltros {
 	}
 	
 	public static SecFiltrosTabletOutlet getInstance() {
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.tablet, AppEcom.outlet);
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.tablet);
 		return (new SecFiltrosTabletOutlet(pageGaleria));
 	}
 	

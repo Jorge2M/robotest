@@ -24,7 +24,7 @@ public class SecMenusDesktop extends PageBase {
 		secBloquesMenu = SecBloquesMenuDesktop.factory(app, channel);
 		secMenuSuperior = SecMenuSuperiorDesktop.getNew(app, channel);
 		secMenusUser = ModalUserSesionShopDesktop.getNew(driver);
-		secMenuLateral = SecMenuLateralDesktop.getNew(app);
+		secMenuLateral = new SecMenuLateralDesktop();
 		secMenusFiltroDiscount = new SecMenusFiltroDiscount();
 	}
 	

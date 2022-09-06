@@ -61,7 +61,7 @@ public class PageGaleriaSteps extends StepBase {
 	public final SecCrossSellingSteps secCrossSellingSteps = new SecCrossSellingSteps();
 	public final BannerHeadGallerySteps bannerHead = BannerHeadGallerySteps.newInstance(this, driver);
 	private final SecSelectorPreciosSteps secSelectorPreciosSteps = new SecSelectorPreciosSteps();
-	private final PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
+	private final PageGaleria pageGaleria = PageGaleria.getNew(channel);
 	
 	public enum TypeGalery { SALES, NO_SALES }
 	public enum TypeActionFav { MARCAR, DESMARCAR }

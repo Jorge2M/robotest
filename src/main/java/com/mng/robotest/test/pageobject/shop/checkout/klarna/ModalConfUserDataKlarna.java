@@ -1,24 +1,17 @@
 package com.mng.robotest.test.pageobject.shop.checkout.klarna;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 public class ModalConfUserDataKlarna extends PageBase {
 
-	private static final String XPathButtonConfirmation = "//div[@id[contains(.,'footer-button-wrapper')]]//button";
-	
-	public ModalConfUserDataKlarna(WebDriver driver) {
-		super(driver);
-	}
+	private static final String XPATH_BUTTON_CONFIRMATION = "//div[@id[contains(.,'footer-button-wrapper')]]//button";
 	
 	public boolean isModal(int maxSeconds) {
-		return state(State.Visible, By.xpath(XPathButtonConfirmation)).wait(maxSeconds).check();
+		return state(State.Visible, XPATH_BUTTON_CONFIRMATION).wait(maxSeconds).check();
 	}
 	
 	public void clickButtonConfirmation() {
-		click(By.xpath(XPathButtonConfirmation)).exec();
+		click(XPATH_BUTTON_CONFIRMATION).exec();
 	}
 }

@@ -1,44 +1,41 @@
 package com.mng.robotest.test.pageobject.shop.checkout;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
 public class ModalDirecFactura extends ModalDireccion {
 
-	private static final String XPathFormModal = "//form[@class[contains(.,'customFormIdFACT')]]";
-	private static final String XPathButtonUpdate = XPathFormModal + "//div[@class[contains(.,'updateButton')]]/input[@type='submit']";
+	private static final String XPATH_FORM_MODAL = "//form[@class[contains(.,'customFormIdFACT')]]";
+	private static final String XPATH_BUTTON_UPDATE = XPATH_FORM_MODAL + "//div[@class[contains(.,'updateButton')]]/input[@type='submit']";
 	
 	public void sendDataToInputs(DataDireccion dataToSend) throws Exception {
-		sendDataToInputs(dataToSend, XPathFormModal);
+		sendDataToInputs(dataToSend, XPATH_FORM_MODAL);
 	}
 	
 	public void selectPoblacion(String poblacion) throws Exception {
-		selectPoblacion(poblacion, XPathFormModal);
+		selectPoblacion(poblacion, XPATH_FORM_MODAL);
 	}
 
 	public void selectProvincia(String provincia) {
-		selectProvincia(provincia, XPathFormModal);
+		selectProvincia(provincia, XPATH_FORM_MODAL);
 	} 
 
 	public boolean isVisibleFormUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPathFormModal)).wait(maxSeconds).check());
+		return state(Visible, XPATH_FORM_MODAL).wait(maxSeconds).check();
 	}
 
 	public boolean isVisibleButtonActualizar() {
-		return (state(Visible, By.xpath(XPathButtonUpdate)).check());
+		return state(Visible, XPATH_BUTTON_UPDATE).check();
 	}
 
 	public void clickActualizar() {
-		click(By.xpath(XPathButtonUpdate)).exec(); 
+		click(XPATH_BUTTON_UPDATE).exec(); 
 		try {
 			if (isVisibleButtonActualizar()) {
-				click(By.xpath(XPathButtonUpdate)).exec();
+				click(XPATH_BUTTON_UPDATE).exec();
 			}
 		}
 		catch (StaleElementReferenceException e) {

@@ -21,8 +21,10 @@ public class PagoIdeal extends PagoSteps {
 		if (execPay) {
 			pageCheckoutWrapperSteps.getSecIdealSteps().clickBanco(BancoSeleccionado.TestIssuer);
 			dataPago = checkoutFlow.checkout(From.METODOSPAGO);
-			PageIdealSimuladorSteps.validateIsPage(driver);
-			PageIdealSimuladorSteps.clickContinueButton(driver);
+			
+			PageIdealSimuladorSteps pageIdealSimuladorSteps = new PageIdealSimuladorSteps();
+			pageIdealSimuladorSteps.validateIsPage();
+			pageIdealSimuladorSteps.clickContinueButton();
 		}
 	}
 }

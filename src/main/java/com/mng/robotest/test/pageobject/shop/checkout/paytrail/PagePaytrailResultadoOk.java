@@ -1,26 +1,22 @@
 package com.mng.robotest.test.pageobject.shop.checkout.paytrail;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
-
-
-public class PagePaytrailResultadoOk {
+public class PagePaytrailResultadoOk extends PageBase {
 	
-	static String aceptadoEnFinlandes = "hyväksytty";
-	static String volverAlServicioDelVendedorEnFinlandes = "Palaa myyjän palveluun";
+	private static final String ACEPTADO_EN_FINLANDES = "hyväksytty";
+	private static final String VOLVER_AL_SERVICIO_DEL_VENDEDOR_EN_FINLANDES = "Palaa myyjän palveluun";
 	
-	public static String getXPathVolverAMangoButton() {
-		return "//input[@class='button' and @value[contains(.,'" + volverAlServicioDelVendedorEnFinlandes + "')]]";
+	private String getXPathVolverAMangoButton() {
+		return "//input[@class='button' and @value[contains(.,'" + VOLVER_AL_SERVICIO_DEL_VENDEDOR_EN_FINLANDES + "')]]";
 	}
 	
-	public static boolean isPage(WebDriver driver) {
-		return (driver.getTitle().toLowerCase().contains(aceptadoEnFinlandes));
+	public boolean isPage() {
+		return driver.getTitle().toLowerCase().contains(ACEPTADO_EN_FINLANDES);
 	}
 
-	public static void clickVolverAMangoButton(WebDriver driver) {
+	public void clickVolverAMangoButton() {
 		String xpathButton = getXPathVolverAMangoButton();
-		click(By.xpath(xpathButton), driver).exec();
+		click(xpathButton).exec();
 	}
 }

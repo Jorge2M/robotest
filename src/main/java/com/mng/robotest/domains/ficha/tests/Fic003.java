@@ -35,7 +35,7 @@ public class Fic003 extends TestBase {
 
 		Pais corea = PaisGetter.get(PaisShop.COREA_DEL_SUR);
 		dataTest.pais = corea;
-		dataTest.idioma = corea.getListIdiomas().get(0);
+		dataTest.idioma = corea.getListIdiomas().get(1);
 		
 		menuPantalonesNina = MenuTreeApp.getMenuLevel1From(
 				app, KeyMenu1rstLevel.from(

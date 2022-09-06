@@ -50,7 +50,7 @@ public class Gpo005 extends TestBase {
 		
 		if (app==AppEcom.outlet || channel.isDevice()) {
 			secMenusSteps.selectMenuLateral1erLevelTypeCatalog(menuCardigans);
-			Menu2onLevel menuCardigansJerseis = MenuTreeApp.getMenuLevel2From(menuCardigans, "jerseis");
+			Menu2onLevel menuCardigansJerseis = MenuTreeApp.getMenuLevel2From(menuCardigans, "jerséis");
 			secMenusSteps.selectMenu2onLevel(menuCardigansJerseis);
 		} else {
 			secMenusSteps.selectMenuLateral1erLevelTypeCatalog(menuCamisas);

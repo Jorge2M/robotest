@@ -1,47 +1,45 @@
 package com.mng.robotest.test.pageobject.shop.checkout.yandex;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.mng.robotest.domains.transversal.PageBase;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+public class PageYandex1rst extends PageBase {
 
-public class PageYandex1rst {
+	private static final String XPATH_INPUT_EMAIL = "//input[@name='cps_email']";
+	private static final String XPATH_BUTTON_CONTINUE = "//div[@class[contains(.,'payment-submit')]]//button";
+	private static final String XPATH_INPUT_TELEFONO = "//input[@name[contains(.,'phone')]]";
+	private static final String XPATH_RETRY_BUTTON = "//span[@class='button__text' and text()[contains(.,'Повторить попытку')]]";
 
-	static String XPathInputEmail = "//input[@name='cps_email']";
-	static String XPathButtonContinue = "//div[@class[contains(.,'payment-submit')]]//button";
-	static String XPathInputTelefono = "//input[@name[contains(.,'phone')]]";
-	static String XPathRetryButton = "//span[@class='button__text' and text()[contains(.,'Повторить попытку')]]";
-
-	public static boolean isPage(WebDriver driver) {
+	public boolean isPage() {
 		return (driver.getTitle().toLowerCase().contains("yandex"));
 	}
 
-	//Revisar
-	public static boolean isValueEmail(String emailUsr, WebDriver driver) {
-		String valueEmail = getValueInputEmail(driver);
+	public boolean isValueEmail(String emailUsr) {
+		String valueEmail = getValueInputEmail();
 		return (valueEmail.contains(emailUsr));
 	}
 	
-	public static String getValueInputEmail(WebDriver driver) {
-		return (driver.findElement(By.xpath(XPathInputEmail)).getAttribute("value"));
+	public String getValueInputEmail() {
+		return getElement(XPATH_INPUT_EMAIL).getAttribute("value");
 	}
 
-	public static void clickContinue(WebDriver driver) {
-		click(By.xpath(XPathButtonContinue), driver).exec();
+	public void clickContinue() {
+		click(XPATH_BUTTON_CONTINUE).exec();
 	}
 
-	public static void inputTelefono(String telefono, WebDriver driver) {
-		driver.findElement(By.xpath(XPathInputTelefono)).clear();
-		sendKeysWithRetry(telefono, By.xpath(XPathInputTelefono), 2, driver);
+	public void inputTelefono(String telefono) {
+		getElement(XPATH_INPUT_TELEFONO).clear();
+		sendKeysWithRetry(telefono, By.xpath(XPATH_INPUT_TELEFONO), 2, driver);
 	}
 
-	public static boolean retryButtonExists(WebDriver driver) {
-		return (state(Present, By.xpath(XPathRetryButton), driver).check());
+	public boolean retryButtonExists() {
+		return state(Present, XPATH_RETRY_BUTTON).check();
 	}
 
-	public static void clickOnRetry(WebDriver driver) {
-		click(By.xpath(XPathRetryButton), driver).waitLoadPage(2).exec();
+	public void clickOnRetry() {
+		click(XPATH_RETRY_BUTTON).waitLoadPage(2).exec();
 	}
 }

@@ -13,7 +13,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
@@ -23,14 +22,13 @@ import com.mng.robotest.test.pageobject.shop.navigations.ArticuloNavigations;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
-
 public class SecBuscadorSteps extends StepBase {
 
 	private final PageGaleria pageGaleria;
 	private final WebDriver driver;
 	
 	public SecBuscadorSteps() {
-		this.pageGaleria = PageGaleria.getNew(From.BUSCADOR, channel, app);
+		this.pageGaleria = PageGaleria.getNew(From.BUSCADOR, channel);
 		this.driver = pageGaleria.driver;
 	}
 	

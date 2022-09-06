@@ -52,7 +52,7 @@ public class Gpo001 extends TestBase {
 		//Pruebas a nivel del cambio de galería de 2<->4 columnas
 		PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
 		if (channel==Channel.desktop && app!=AppEcom.outlet) {
-			PageGaleriaDesktop pageGaleria = (PageGaleriaDesktop)PageGaleria.getNew(From.MENU, channel, app);
+			PageGaleriaDesktop pageGaleria = (PageGaleriaDesktop)PageGaleria.getNew(From.MENU, channel);
 			ListDataArticleGalery listArticlesGaleria2Cols = pageGaleria.getListDataArticles();
 			listArticlesGaleria2Cols = pageGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.CUATRO, listArticlesGaleria2Cols);
 			pageGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.DOS, listArticlesGaleria2Cols);

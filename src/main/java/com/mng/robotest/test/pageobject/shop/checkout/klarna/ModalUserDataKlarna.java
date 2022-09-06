@@ -1,11 +1,7 @@
 package com.mng.robotest.test.pageobject.shop.checkout.klarna;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
-
 
 public class ModalUserDataKlarna extends PageBase {
 
@@ -28,14 +24,10 @@ public class ModalUserDataKlarna extends PageBase {
 		}
 	}
 	
-	private static final String XPathButtonContinue = "//button[@id='button-primary']";
-	
-	public ModalUserDataKlarna(WebDriver driver) {
-		super(driver);
-	}
+	private static final String XPATH_BUTTON_CONTINUE = "//button[@id='button-primary']";
 	
 	public boolean isModal(int maxSeconds) {
-		return state(State.Visible, By.xpath(InputKlarna.Email.getXPath())).wait(maxSeconds).check();
+		return state(State.Visible, InputKlarna.Email.getXPath()).wait(maxSeconds).check();
 	}
 	
 	public void inputData(DataKlarna dataKlarna) {
@@ -99,25 +91,25 @@ public class ModalUserDataKlarna extends PageBase {
 	}
 	
 	public void clickButtonContinue() {
-		click(By.xpath(XPathButtonContinue)).exec();
-		if (!state(State.Invisible, By.xpath(XPathButtonContinue)).wait(2).check()) {
-			click(By.xpath(XPathButtonContinue)).exec();
+		click(XPATH_BUTTON_CONTINUE).exec();
+		if (!state(State.Invisible, XPATH_BUTTON_CONTINUE).wait(2).check()) {
+			click(XPATH_BUTTON_CONTINUE).exec();
 		}
 	}
 	
 	private boolean isVisible(InputKlarna inputKlarna) {
-		return state(State.Visible, By.xpath(inputKlarna.getXPath())).check();
+		return state(State.Visible, inputKlarna.getXPath()).check();
 	}
 	
 	private String getInputValue(InputKlarna inputKlarna) {
-		return driver.findElement(By.xpath(inputKlarna.getXPath())).getAttribute("value");
+		return getElement(inputKlarna.getXPath()).getAttribute("value");
 	}
 	
 	private void input(InputKlarna inputKlarna, String text) {
-		driver.findElement(By.xpath(inputKlarna.getXPath())).sendKeys(text);
+		getElement(inputKlarna.getXPath()).sendKeys(text);
 	}
 	private void clearInput(InputKlarna inputKlarna) {
-		driver.findElement(By.xpath(inputKlarna.getXPath())).clear();
+		getElement(inputKlarna.getXPath()).clear();
 	}
 	
 }

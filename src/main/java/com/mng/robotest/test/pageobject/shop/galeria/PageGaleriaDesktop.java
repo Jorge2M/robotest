@@ -11,7 +11,6 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.Talla;
@@ -21,13 +20,11 @@ import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop.Visibility;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.SecLineasMenuDesktop;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenusDesktop;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class PageGaleriaDesktop extends PageGaleria {
 	
@@ -60,16 +57,16 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	private static final String XPATH_LIST_ARTICLES = "//div[@class[contains(.,'columns')] and @id='list']";
-	private static final String XPATH_IMG_RELATIVE_ARTICLE_OUTLET = 
-			"//img[@src and (" + 
-				   "@class[contains(.,'productListImg')] or " + 
-				   "@class[contains(.,'product-list-image')] or " +
-				   "@class[contains(.,'product-image')] or " + 
-				   "@class[contains(.,'TaqRk')] or " + //TODO (Outlet) pendiente Sergio Campillo suba los cambios
-				   "@class[contains(.,'product-list-im')])]";
+//	private static final String XPATH_IMG_RELATIVE_ARTICLE_OUTLET = 
+//			"//img[@src and (" + 
+//				   "@class[contains(.,'productListImg')] or " + 
+//				   "@class[contains(.,'product-list-image')] or " +
+//				   "@class[contains(.,'product-image')] or " + 
+//				   "@class[contains(.,'TaqRk')] or " + //TODO (Outlet) pendiente Sergio Campillo suba los cambios
+//				   "@class[contains(.,'product-list-im')])]";
 	
-	private static final String XPATH_IMG_SLIDER_ACTIVE_RELATIVE_ARTICLE_DESKTOP_OUTLET = 
-			"//div[@class[contains(.,'swiper-slide-active')]]" + XPATH_IMG_RELATIVE_ARTICLE_OUTLET ;
+//	private static final String XPATH_IMG_SLIDER_ACTIVE_RELATIVE_ARTICLE_DESKTOP_OUTLET = 
+//			"//div[@class[contains(.,'swiper-slide-active')]]" + XPATH_IMG_RELATIVE_ARTICLE_OUTLET ;
 
 	public PageGaleriaDesktop() {
 		super();
@@ -81,8 +78,8 @@ public class PageGaleriaDesktop extends PageGaleria {
 		secSelectorPreciosDesktop = new SecSelectorPreciosDesktop();
 	}
 	
-	public PageGaleriaDesktop(From from, Channel channel, AppEcom app) {
-		super(from, channel, app);
+	public PageGaleriaDesktop(From from) {
+		super(from);
 		secColores = new SecColoresArticuloDesktop(app);
 		secTallas = new SecTallasArticuloDesktop(app, xpathArticuloBase);
 		secSubmenusGallery = new SecSubmenusGallery();
@@ -186,10 +183,10 @@ public class PageGaleriaDesktop extends PageGaleria {
 		return (INI_XPATH_PAGINA_GALERIA + pagina + "']");
 	}
 
-	private static String getXPathSliderRelativeToArticle(TypeSlider typeSlider, AppEcom app) {
-		if (app==AppEcom.outlet) {
-			return ("//*[@class[contains(.,'swiper-button-" + typeSlider + "')] and @role]");
-		}
+	private static String getXPathSliderRelativeToArticle(TypeSlider typeSlider) {
+//		if (app==AppEcom.outlet) {
+//			return ("//*[@class[contains(.,'swiper-button-" + typeSlider + "')] and @role]");
+//		}
 		return ("//*[@data-testid='." + typeSlider.name().toLowerCase() + "']");
 	}
 
@@ -247,9 +244,9 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	private String getXPathImgArticulo(WebElement article) {
-		if (app==AppEcom.outlet) {
-			return getXPathImgArticuloOutlet(article);
-		}
+//		if (app==AppEcom.outlet) {
+//			return getXPathImgArticuloOutlet(article);
+//		}
 		return getXPathImgArticuloShop(article);
 	}
 	
@@ -264,13 +261,13 @@ public class PageGaleriaDesktop extends PageGaleria {
 		return ".//img[contains(.,'product-')]";
 	}
 	
-	private String getXPathImgArticuloOutlet(WebElement article) {
-		if (isPresentSliderInArticle(TypeSlider.NEXT, article)) {
-			return "." + XPATH_IMG_SLIDER_ACTIVE_RELATIVE_ARTICLE_DESKTOP_OUTLET;
-		} else {
-			return "." + XPATH_IMG_RELATIVE_ARTICLE_OUTLET ;
-		}
-	}
+//	private String getXPathImgArticuloOutlet(WebElement article) {
+//		if (isPresentSliderInArticle(TypeSlider.NEXT, article)) {
+//			return "." + XPATH_IMG_SLIDER_ACTIVE_RELATIVE_ARTICLE_DESKTOP_OUTLET;
+//		} else {
+//			return "." + XPATH_IMG_RELATIVE_ARTICLE_OUTLET ;
+//		}
+//	}
 	
 	@Override
 	public WebElement getColorArticulo(WebElement articulo, boolean selected, int numColor) {
@@ -328,9 +325,9 @@ public class PageGaleriaDesktop extends PageGaleria {
  
 	@Override
 	public int getLayoutNumColumnas() {
-		if (app==AppEcom.outlet) {
-			return getLayoutNumColumnasOutlet();
-		}
+//		if (app==AppEcom.outlet) {
+//			return getLayoutNumColumnasOutlet();
+//		}
 		return getLayoutNumColumnasShop(); 
 	}	
 	
@@ -345,26 +342,26 @@ public class PageGaleriaDesktop extends PageGaleria {
 		return 2;
 	}
 	
-	private int getLayoutNumColumnasOutlet() {
-		if (state(Present, xpathArticuloBase).check()) {
-			String classArt = getElement(xpathArticuloBase).getAttribute("class");
-			if (classArt.contains("layout-3-columns")) {
-				return 3;
-			}
-			else {
-			   if (classArt.contains("layout-2-columns")) {
-				   return 2;
-			   }
-			   else {
-				   if (classArt.contains("layout-4-columns")) {
-					   return 4;
-				   }
-			   }
-			}
-		}
-		
-		return 2;
-	}
+//	private int getLayoutNumColumnasOutlet() {
+//		if (state(Present, xpathArticuloBase).check()) {
+//			String classArt = getElement(xpathArticuloBase).getAttribute("class");
+//			if (classArt.contains("layout-3-columns")) {
+//				return 3;
+//			}
+//			else {
+//			   if (classArt.contains("layout-2-columns")) {
+//				   return 2;
+//			   }
+//			   else {
+//				   if (classArt.contains("layout-4-columns")) {
+//					   return 4;
+//				   }
+//			   }
+//			}
+//		}
+//		
+//		return 2;
+//	}
 
 	@Override
 	public String getNombreArticulo(WebElement articulo) {
@@ -452,12 +449,12 @@ public class PageGaleriaDesktop extends PageGaleria {
 		if (state(Present, article).by(byImgArticle).check()) {
 			WebElement imgArticle = article.findElement(byImgArticle);
 			String srcImgArticle;
-			if (app==AppEcom.outlet) {
-				srcImgArticle = imgArticle.getAttribute("data-original");
-			} else {
+//			if (app==AppEcom.outlet) {
+//				srcImgArticle = imgArticle.getAttribute("data-original");
+//			} else {
 				//TODO Test AB nueva variante. Si se mantiene la original igualar con Outlet
 			    srcImgArticle = imgArticle.getAttribute("original");
-			}
+//			}
 			if (srcImgArticle!=null) {
 				Pattern pattern = Pattern.compile("(.*?)width=(.*?)&(.*?)");
 				Matcher matcher = pattern.matcher(srcImgArticle);
@@ -635,7 +632,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 			waitMillis(500);
 			hoverArticle(articulo);
 			waitMillis(500);
-			String xpathSlider = getXPathSliderRelativeToArticle(typeSlider, app);
+			String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
 			click(articulo).by(By.xpath(xpathSlider)).exec();
 			waitForAjax(driver, 1);
 			Thread.sleep(1000);
@@ -653,7 +650,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	public boolean isPresentSliderInArticle(TypeSlider typeSlider, WebElement article) {
-		String xpathSlider = getXPathSliderRelativeToArticle(typeSlider, app);
+		String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
 		return (state(Present, article).by(By.xpath("." + xpathSlider)).check());
 	}
 	
@@ -766,7 +763,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	private void clickHearthIconHiddindPossibleInterceptors(WebElement hearthIcon) throws Exception {
-		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(channel, app);
+		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(channel);
 		secFiltros.makeFilters(Visibility.Invisible);
 		
 		SecLineasMenuDesktop secLineasMenuDesktop = SecLineasMenuDesktop.factory(app, channel);

@@ -1,63 +1,61 @@
 package com.mng.robotest.test.pageobject.shop.checkout.paytrail;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.github.jorge2m.testmaker.conf.Channel;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.mng.robotest.domains.transversal.PageBase;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
-public class PagePaytrail1rst {
-	static String XPathListOfPayments = "//ul[@id='paymentMethods']";
-	static String XPathCabeceraStep = "//h2[@id[contains(.,'stageheader')]]";
-	static String XPathInputIconoPaytrail = "//input[@type='submit' and @name='brandName']";	
-	static String XPathButtonPagoDesktop = "//input[@class[contains(.,'paySubmit')] and @type='submit']";
-	static String XPathButtonContinueMobil = "//input[@type='submit' and @name[contains(.,'ebanking')]]";
-	static String XPathSelectBancos = "//select[@id[contains(.,'ebanking')]]";
+public class PagePaytrail1rst extends PageBase {
 	
-	public static String getXPathEntradaPago(String nombrePago) {
-		return (XPathListOfPayments + "//input[@value[contains(.,'" + nombrePago.toLowerCase() + "')] or @value[contains(.,'" + nombrePago + "')]]");
+	private static final String XPATH_LIST_OF_PAYMENTS = "//ul[@id='paymentMethods']";
+	private static final String XPATH_INPUT_ICONO_PAYTRAIL = "//input[@type='submit' and @name='brandName']";	
+	private static final String XPATH_BUTTON_PAGO_DESKTOP = "//input[@class[contains(.,'paySubmit')] and @type='submit']";
+	private static final String XPATH_BUTTON_CONTINUE_MOBIL = "//input[@type='submit' and @name[contains(.,'ebanking')]]";
+	private static final String XPATH_SELECT_BANCOS = "//select[@id[contains(.,'ebanking')]]";
+	
+	private String getXPathEntradaPago(String nombrePago) {
+		return (XPATH_LIST_OF_PAYMENTS + "//input[@value[contains(.,'" + nombrePago.toLowerCase() + "')] or @value[contains(.,'" + nombrePago + "')]]");
 	}
 	
-	public static boolean isPresentEntradaPago(String nombrePago, WebDriver driver) {
+	public boolean isPresentEntradaPago(String nombrePago) {
 		String xpathPago = getXPathEntradaPago(nombrePago);
-		return (state(Present, By.xpath(xpathPago), driver).check());
+		return state(Present, xpathPago).check();
 	}
 	
-	public static boolean isPresentButtonPago(WebDriver driver) {
-		return (state(Present, By.xpath(XPathButtonPagoDesktop), driver).check());
+	public boolean isPresentButtonPago() {
+		return state(Present, XPATH_BUTTON_PAGO_DESKTOP).check();
 	}
 
-	public static boolean isPresentSelectBancos(WebDriver driver) {
-		return (state(Present, By.xpath(XPathSelectBancos), driver).check());
+	public boolean isPresentSelectBancos() {
+		return state(Present, XPATH_SELECT_BANCOS).check();
 	}
 	
-	public static boolean isVisibleSelectBancosUntil(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(XPathSelectBancos), driver).wait(maxSeconds).check());
+	public boolean isVisibleSelectBancosUntil(int maxSeconds) {
+		return state(Visible, XPATH_SELECT_BANCOS).wait(maxSeconds).check();
 	}	
 	
-	public static void clickButtonContinue(Channel channel, WebDriver driver) {
+	public void clickButtonContinue() {
 		if (channel.isDevice()) {
-			click(By.xpath(XPathButtonContinueMobil), driver).exec();
+			click(XPATH_BUTTON_CONTINUE_MOBIL).exec();
 		} else {
-			click(By.xpath(XPathButtonPagoDesktop), driver).exec();
+			click(XPATH_BUTTON_PAGO_DESKTOP).exec();
 		}
 	}
 	
-	public static void selectBanco(String visibleText, Channel channel, WebDriver driver) {
+	public void selectBanco(String visibleText) {
 		//En el caso de móvil hemos de seleccionar el icono del banco para visualizar el desplegable
 		if (channel.isDevice()) {
-			if (state(Visible, By.xpath(XPathSelectBancos), driver).check()) {
-				clickIconoBanco(driver);
+			if (state(Visible, XPATH_SELECT_BANCOS).check()) {
+				clickIconoBanco();
 			}
 		}
 			
-		new Select(driver.findElement(By.xpath(XPathSelectBancos))).selectByVisibleText(visibleText);
+		new Select(driver.findElement(By.xpath(XPATH_SELECT_BANCOS))).selectByVisibleText(visibleText);
 	}
 
-	public static void clickIconoBanco(WebDriver driver) {
-		click(By.xpath(XPathInputIconoPaytrail), driver).exec();
+	public void clickIconoBanco() {
+		click(XPATH_INPUT_ICONO_PAYTRAIL).exec();
 	}
 }

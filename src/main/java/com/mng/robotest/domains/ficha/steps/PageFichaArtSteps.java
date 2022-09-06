@@ -40,25 +40,14 @@ import java.util.List;
 
 public class PageFichaArtSteps extends StepBase {
 	
-	private final PageFicha pageFicha;
-	private final SecBolsa secBolsa;
-	private final ModEnvioYdevolNewSteps modEnvioYdevolSteps;
-	private final SecProductDescrOldSteps secProductDescOldSteps;
-	private final SecBolsaButtonAndLinksNewSteps secBolsaButtonAndLinksNewSteps;
-	private final SecFotosNewSteps secFotosNewSteps;
-	private final SecFitFinderSteps secFitFinderSteps;
-	private final SecTotalLookSteps secTotalLookSteps;
-	
-	public PageFichaArtSteps() {
-		this.pageFicha = PageFicha.of(channel);
-		this.secBolsa = SecBolsa.make(channel, app);
-		this.modEnvioYdevolSteps = new ModEnvioYdevolNewSteps();
-		this.secProductDescOldSteps = new SecProductDescrOldSteps();
-		this.secTotalLookSteps = new SecTotalLookSteps();
-		this.secFitFinderSteps = new SecFitFinderSteps();
-		this.secBolsaButtonAndLinksNewSteps = new SecBolsaButtonAndLinksNewSteps();
-		this.secFotosNewSteps = new SecFotosNewSteps();
-	}
+	private final PageFicha pageFicha = PageFicha.of(channel);
+	private final SecBolsa secBolsa = SecBolsa.make(channel, app);
+	private final ModEnvioYdevolNewSteps modEnvioYdevolSteps = new ModEnvioYdevolNewSteps();
+	private final SecProductDescrOldSteps secProductDescOldSteps = new SecProductDescrOldSteps();
+	private final SecBolsaButtonAndLinksNewSteps secBolsaButtonAndLinksNewSteps = new SecBolsaButtonAndLinksNewSteps();
+	private final SecFotosNewSteps secFotosNewSteps = new SecFotosNewSteps();
+	private final SecFitFinderSteps secFitFinderSteps = new SecFitFinderSteps();
+	private final SecTotalLookSteps secTotalLookSteps = new SecTotalLookSteps();
 	
 	public PageFicha getFicha() {
 		return this.pageFicha;

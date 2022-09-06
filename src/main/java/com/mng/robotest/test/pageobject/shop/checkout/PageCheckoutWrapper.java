@@ -27,6 +27,7 @@ public class PageCheckoutWrapper extends PageBase {
 	
 	//Abarca cualquier div de loading
 	private static final String XPATH_DIV_LOADING = "//div[@class[contains(.,'panel_loading')] or @class[contains(.,'container-full-centered-loading')] or @class[contains(.,'loading-panel')]]";
+	private static final String XPATH_DISCOUNT_LOYALTY_APPLIED_MOBIL = "//span[@class='redeem-likes__discount']";	
 	
 	public Page1DktopCheckout getPage1DktopCheckout() {
 		return page1DktopCheckout;
@@ -138,9 +139,8 @@ public class PageCheckoutWrapper extends PageBase {
 		return (ImporteScreen.getFloatFromImporteMangoScreen(importeButton));
 	}
 
-	private static final String XPathDiscountLoyaltyAppliedMobil = "//span[@class='redeem-likes__discount']";
 	public float getDiscountLoyaltyAppliedMobil() {
-		By byDiscountApplied = By.xpath(XPathDiscountLoyaltyAppliedMobil);
+		By byDiscountApplied = By.xpath(XPATH_DISCOUNT_LOYALTY_APPLIED_MOBIL);
 		if (state(Visible, byDiscountApplied).check()) {
 			String discountApplied = driver.findElement(byDiscountApplied).getAttribute("innerHTML");
 			return (ImporteScreen.getFloatFromImporteMangoScreen(discountApplied));
@@ -247,11 +247,11 @@ public class PageCheckoutWrapper extends PageBase {
 	}
 
 	public boolean waitUntilNoDivLoading(int seconds) {
-		return (state(Invisible, By.xpath(XPATH_DIV_LOADING)).wait(seconds).check());
+		return state(Invisible, XPATH_DIV_LOADING).wait(seconds).check();
 	}
 
 	public boolean isNoDivLoadingUntil(int seconds) {
-		return (state(Invisible, By.xpath(XPATH_DIV_LOADING)).wait(seconds).check());
+		return state(Invisible, XPATH_DIV_LOADING).wait(seconds).check();
 	}
 
 	public String getMethodInputValue(String metodoPago) {
@@ -432,16 +432,9 @@ public class PageCheckoutWrapper extends PageBase {
 		}
 	}
 	
-	/**
-	 * @return el importe normalizado a un String con un importe correctamente formateado
-	 */
-//	private static final String XPathEnterosRelativeImporte = "//*[@class[contains(.,'ntero')]]";
-//	private static final String XPathDecimalesRelativeImporte = "//*[@class[contains(.,'ecimal')]]";
 	public String formateaPrecioTotal(String xpathImporteCheckout) throws Exception {
 		for (int i=0; i<2; i++) {
 			try {
-//				String precio = formateaPrecioTotalNoStaleSafe(xpathImporteCheckout);
-//				return precio;
 				return getElement(xpathImporteCheckout).getText();
 			}
 			catch (StaleElementReferenceException e) {
@@ -450,24 +443,6 @@ public class PageCheckoutWrapper extends PageBase {
 		}
 		return "";
 	}
-	
-//	private String formateaPrecioTotalNoStaleSafe(String xpathImporteCheckout) throws Exception {
-//		waitForPageLoaded(driver);
-//		String precioTotal = "";
-//		String xpathEnteros = xpathImporteCheckout + XPathEnterosRelativeImporte;
-//		List<WebElement> listEnteros = getElementsVisible(driver, By.xpath(xpathEnteros));
-//		for (WebElement entero : listEnteros) {
-//			precioTotal+=entero.getAttribute("innerHTML");
-//		}
-//		
-//		String xpathDecimales = xpathImporteCheckout + XPathDecimalesRelativeImporte;
-//		List<WebElement> listDecimales = getElementsVisible(driver, By.xpath(xpathDecimales));
-//		for (WebElement decimal : listDecimales) {
-//			precioTotal+=decimal.getAttribute("innerHTML");
-//		}
-//		
-//		return (precioTotal);
-//	}
 	
 	public void selectBancoEPS(String nombreBanco) {
 		new SecEps().selectBanco(nombreBanco);

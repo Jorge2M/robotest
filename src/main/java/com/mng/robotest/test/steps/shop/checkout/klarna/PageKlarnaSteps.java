@@ -1,21 +1,15 @@
 package com.mng.robotest.test.steps.shop.checkout.klarna;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.klarna.DataKlarna;
 import com.mng.robotest.test.pageobject.shop.checkout.klarna.PageKlarna;
 
+public class PageKlarnaSteps extends StepBase {
 
-public class PageKlarnaSteps {
-
-	private final PageKlarna pageKlarna;
-	
-	public PageKlarnaSteps(WebDriver driver) {
-		this.pageKlarna = new PageKlarna(driver);
-	}
+	private final PageKlarna pageKlarna = new PageKlarna();
 	
 	@Validation (
 		description="Aparece la página inicial de Klarna (la esperamos hasta #{maxSeconds} segundos)",

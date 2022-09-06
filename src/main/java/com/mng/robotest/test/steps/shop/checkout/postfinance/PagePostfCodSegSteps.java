@@ -1,26 +1,18 @@
 package com.mng.robotest.test.steps.shop.checkout.postfinance;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.postfinance.PagePostfCodSeg;
 import com.mng.robotest.test.utils.ImporteScreen;
 
-
-public class PagePostfCodSegSteps {
+public class PagePostfCodSegSteps extends StepBase {
 	
-	private final PagePostfCodSeg pagePostfCodSeg;
-	private final WebDriver driver;
-	
-	public PagePostfCodSegSteps(WebDriver driver) {
-		this.pagePostfCodSeg = new PagePostfCodSeg(driver);
-		this.driver = driver;
-	}
+	private final PagePostfCodSeg pagePostfCodSeg = new PagePostfCodSeg();
 	
 	public PagePostfCodSeg getPageObj() {
 		return pagePostfCodSeg;
@@ -32,6 +24,7 @@ public class PagePostfCodSegSteps {
 		checks.add(
 			"Aparece la pasarela de pagos de PostFinance E-Payment de Test",
 			pagePostfCodSeg.isPasarelaPostfinanceTest(nombrePago), State.Defect);
+		
 		checks.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
 			pagePostfCodSeg.isPresentButtonAceptar(), State.Defect);
@@ -56,13 +49,16 @@ public class PagePostfCodSegSteps {
 		int maxSeconds = 5;
 		checks.add(
 			"Aparece la pasarela de pagos de PostFinance E-Payment (la esperamos hasta " + maxSeconds + " segundos)",
-			pagePostfCodSeg.isPasarelaPostfinanceProUntil(maxSeconds), State.Defect);		
+			pagePostfCodSeg.isPasarelaPostfinanceProUntil(maxSeconds), State.Defect);
+		
 		checks.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);			  
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
+		
 		checks.add(
 			"Aparece el botón Weiter (Aceptar)",
 			pagePostfCodSeg.isPresentButtonWeiter(), State.Defect);
+		
 		return checks;
 	}
 	
@@ -84,7 +80,7 @@ public class PagePostfCodSegSteps {
 			driver.switchTo().defaultContent(); 
 		}
 		
-		PagePostfRedirectSteps pagePostfRedirectSteps = new PagePostfRedirectSteps(driver);
+		PagePostfRedirectSteps pagePostfRedirectSteps = new PagePostfRedirectSteps();
 		pagePostfRedirectSteps.isPageAndFinallyDisappears();
 		return pagePostfRedirectSteps;
 	}

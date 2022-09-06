@@ -15,7 +15,7 @@ import com.mng.robotest.test.steps.shop.pedidos.PageDetallePedidoSteps;
 
 public class PageMisComprasSteps extends StepBase {
 	
-	private final PageMisCompras pageMisCompras = new PageMisCompras(channel, app);
+	private final PageMisCompras pageMisCompras = new PageMisCompras();
 	private final ModalDetalleCompraSteps modalDetalleCompraSteps = 
 			ModalDetalleCompraSteps.getNew(pageMisCompras.getModalDetalleCompra());
 

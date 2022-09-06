@@ -48,21 +48,21 @@ public class PageAssist1rst extends PageBase {
 	public boolean isPresentInputsForTrjData() {
 		boolean inputsOk = true;
 		if (channel.isDevice()) {
-			if (!state(Present, By.xpath(XPATH_INPUT_NUM_TRJ_MOVIL)).check() ||
-				!state(Present, By.xpath(XPATH_SELECT_MM_CADUC_MOVIL)).check() ||
-				!state(Present, By.xpath(XPATH_SELECT_AA_CADUC_MOVIL)).check()) {
+			if (!state(Present, XPATH_INPUT_NUM_TRJ_MOVIL).check() ||
+				!state(Present, XPATH_SELECT_MM_CADUC_MOVIL).check() ||
+				!state(Present, XPATH_SELECT_AA_CADUC_MOVIL).check()) {
 				inputsOk = false;
 			}
 		} else {
-			if (!state(Present, By.xpath(XPATH_INPUT_NUM_TRJ_DESKTOP)).check() ||
-				!state(Present, By.xpath(XPATH_INPUT_MM_CADUC_DESKTOP)).check() ||
-				!state(Present, By.xpath(XPATH_INPUT_AA_CADUC_DESKTOP)).check()) {
+			if (!state(Present, XPATH_INPUT_NUM_TRJ_DESKTOP).check() ||
+				!state(Present, XPATH_INPUT_MM_CADUC_DESKTOP).check() ||
+				!state(Present, XPATH_INPUT_AA_CADUC_DESKTOP).check()) {
 				inputsOk = false;
 			}
 		}
 		
-		if (!state(Present, By.xpath(XPATH_INPUT_TITULAR)).check() ||
-			!state(Present, By.xpath(XPATH_INPUT_CVC)).check()) {
+		if (!state(Present, XPATH_INPUT_TITULAR).check() ||
+			!state(Present, XPATH_INPUT_CVC).check()) {
 			inputsOk = false;
 		}
 		
@@ -72,18 +72,18 @@ public class PageAssist1rst extends PageBase {
 	public void inputDataPagoAndWaitSubmitAvailable(Pago pago) throws Exception {
 		//Input data
 		if (channel.isDevice()) {
-			driver.findElement(By.xpath(XPATH_INPUT_NUM_TRJ_MOVIL)).sendKeys(pago.getNumtarj());
-			new Select(driver.findElement(By.xpath(XPATH_SELECT_MM_CADUC_MOVIL))).selectByValue(pago.getMescad());
-			new Select(driver.findElement(By.xpath(XPATH_SELECT_AA_CADUC_MOVIL))).selectByValue("20" + pago.getAnycad()); //Atención con el efecto 2100!!!
+			getElement(XPATH_INPUT_NUM_TRJ_MOVIL).sendKeys(pago.getNumtarj());
+			new Select(getElement(XPATH_SELECT_MM_CADUC_MOVIL)).selectByValue(pago.getMescad());
+			new Select(getElement(XPATH_SELECT_AA_CADUC_MOVIL)).selectByValue("20" + pago.getAnycad()); //Atención con el efecto 2100!!!
 		} else {
-			driver.findElement(By.xpath(XPATH_INPUT_NUM_TRJ_DESKTOP)).sendKeys(pago.getNumtarj());
+			getElement(XPATH_INPUT_NUM_TRJ_DESKTOP).sendKeys(pago.getNumtarj());
 			waitForPageLoaded(driver);
-			driver.findElement(By.xpath(XPATH_INPUT_MM_CADUC_DESKTOP)).sendKeys(pago.getMescad());
-			driver.findElement(By.xpath(XPATH_INPUT_AA_CADUC_DESKTOP)).sendKeys(pago.getAnycad());
+			getElement(XPATH_INPUT_MM_CADUC_DESKTOP).sendKeys(pago.getMescad());
+			getElement(XPATH_INPUT_AA_CADUC_DESKTOP).sendKeys(pago.getAnycad());
 			waitForPageLoaded(driver);
 		}
 		
-		driver.findElement(By.xpath(XPATH_INPUT_TITULAR)).sendKeys(pago.getTitular());
+		getElement(XPATH_INPUT_TITULAR).sendKeys(pago.getTitular());
 		getElementVisible(XPATH_INPUT_CVC).sendKeys(pago.getCvc());
 		waitForPageLoaded(driver);
 		
@@ -93,9 +93,9 @@ public class PageAssist1rst extends PageBase {
 	
 	public void clickBotonPago() {
 		if (channel.isDevice()) {
-			click(By.xpath(XPATH_BOTON_PAGO_MOBIL)).exec();
+			click(XPATH_BOTON_PAGO_MOBIL).exec();
 		} else {
-			click(By.xpath(XPATH_BOTON_PAGO_DESKTOP)).exec();
+			click(XPATH_BOTON_PAGO_DESKTOP).exec();
 		}
 	}
 
@@ -105,8 +105,7 @@ public class PageAssist1rst extends PageBase {
 	}
 	
 	public boolean invisibilityBotonPagoUntil(int maxSeconds) {
-		String xpathBoton = getXPathButtonPago();
-		return (state(Invisible, By.xpath(xpathBoton)).wait(maxSeconds).check());
+		return state(Invisible, getXPathButtonPago()).wait(maxSeconds).check();
 	 }
 }
 

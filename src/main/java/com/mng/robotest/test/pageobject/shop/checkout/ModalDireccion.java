@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,65 +13,66 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.checkout.DataDireccion.DataDirType;
 
-
 public abstract class ModalDireccion extends PageBase {
 
-	private static final String XPathInputNif = "//input[@id[contains(.,'cfDni')]]";
-	private static final String XPathInputName = "//input[@id[contains(.,'cfName')]]";
-	private static final String XPathInputApellidos = "//input[@id[contains(.,'cfSname')]]";
-	private static final String XPathInputDireccion = "//input[@id[contains(.,'cfDir1')]]";
-	private static final String XPathInputCodpostal = "//input[@id[contains(.,'cfCp')]]";
-	private static final String XPathInputEmail = "//input[@id[contains(.,'cfEmail')]]";
-	private static final String XPathInputTelefono = "//input[@id[contains(.,'cfTelf')]]";
-	private static final String XPathSelectPoblacion = "//select[@id[contains(.,':localidades')]]";
-	private static final String XPathSelectProvincia = "//select[@id[contains(.,':estadosPais')]]";
-	private static final String XPathSelectPais = "//select[@id[contains(.,':pais')]]";
+	private static final String XPATH_INPUT_NIF = "//input[@id[contains(.,'cfDni')]]";
+	private static final String XPATH_INPUT_NAME = "//input[@id[contains(.,'cfName')]]";
+	private static final String XPATH_INPUT_APELLIDOS = "//input[@id[contains(.,'cfSname')]]";
+	private static final String XPATH_INPUT_DIRECCION = "//input[@id[contains(.,'cfDir1')]]";
+	private static final String XPATH_INPUT_COD_POSTAL = "//input[@id[contains(.,'cfCp')]]";
+	private static final String XPATH_INPUT_EMAIL = "//input[@id[contains(.,'cfEmail')]]";
+	private static final String XPATH_INPUT_TELEFONO = "//input[@id[contains(.,'cfTelf')]]";
+	private static final String XPATH_SELECT_POBLACION = "//select[@id[contains(.,':localidades')]]";
+	private static final String XPATH_SELECT_PROVINCIA = "//select[@id[contains(.,':estadosPais')]]";
+	private static final String XPATH_SELECT_PAIS = "//select[@id[contains(.,':pais')]]";
 	
 	private String getXPathInput(DataDirType inputType) {
 		switch (inputType) {
 		case nif:
-			return XPathInputNif;
+			return XPATH_INPUT_NIF;
 		case name:
-			return XPathInputName;
+			return XPATH_INPUT_NAME;
 		case apellidos:
-			return XPathInputApellidos;
+			return XPATH_INPUT_APELLIDOS;
 		case direccion:
-			return XPathInputDireccion;
+			return XPATH_INPUT_DIRECCION;
 		case codpostal:
-			return XPathInputCodpostal;
+			return XPATH_INPUT_COD_POSTAL;
 		case email:
-			return XPathInputEmail;
+			return XPATH_INPUT_EMAIL;
 		case telefono:
-			return XPathInputTelefono;
+			return XPATH_INPUT_TELEFONO;
 		default:
 			return "";
 		}
 	}
 
-	public void sendDataToInputsNTimes(DataDireccion dataToSend, int nTimes, String XPathFormModal) throws Exception {
+	public void sendDataToInputsNTimes(DataDireccion dataToSend, int nTimes, String xpathFormModal) 
+			throws Exception {
 		for (int i=0; i<nTimes; i++) {
-			sendDataToInputs(dataToSend, XPathFormModal);
+			sendDataToInputs(dataToSend, xpathFormModal);
 			waitForPageLoaded(driver);
 		}
 	}
 	
-	public void sendDataToInputs(DataDireccion dataToSend, String XPathFormModal) throws Exception {
+	public void sendDataToInputs(DataDireccion dataToSend, String xpathFormModal) 
+			throws Exception {
 		try {
 			Iterator<Map.Entry<DataDirType,String>> it = dataToSend.getDataDireccion().entrySet().iterator();
 			while (it.hasNext()) {
 				Map.Entry<DataDirType,String> pair = it.next();
 				switch (pair.getKey()) {
 				case poblacion:
-					selectPoblacion(pair.getValue(), XPathFormModal);
+					selectPoblacion(pair.getValue(), xpathFormModal);
 					break;
 				case provincia:
-					selectProvincia(pair.getValue(), XPathFormModal);
+					selectProvincia(pair.getValue(), xpathFormModal);
 					break;
 				case codigoPais:
-					selectPais(pair.getValue(), XPathFormModal);
+					selectPais(pair.getValue(), xpathFormModal);
 					break;
 				default:
-					sendKeysToInput(pair.getKey(), pair.getValue(), XPathFormModal);				
+					sendKeysToInput(pair.getKey(), pair.getValue(), xpathFormModal);				
 				}
 			}
 		}
@@ -83,32 +83,27 @@ public abstract class ModalDireccion extends PageBase {
 		}
 	}
 	
-	public void selectPoblacion(String poblacion, String XPathFormModal) throws Exception {
-		new WebDriverWait(driver, 2).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPathFormModal + XPathSelectPoblacion)));
+	public void selectPoblacion(String poblacion, String xpathFormModal) throws Exception {
+		new WebDriverWait(driver, 2).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathFormModal + XPATH_SELECT_POBLACION)));
 		Thread.sleep(1000);
-		new Select(driver.findElement(By.xpath(XPathFormModal + XPathSelectPoblacion))).selectByValue(poblacion);
+		new Select(getElement(xpathFormModal + XPATH_SELECT_POBLACION)).selectByValue(poblacion);
 	}
 	
-	public void selectProvincia(String provincia, String XPathFormModal) {
-		new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(By.xpath(XPathFormModal + XPathSelectProvincia)));
-		new Select(driver.findElement(By.xpath(XPathFormModal + XPathSelectProvincia))).selectByVisibleText(provincia);
+	public void selectProvincia(String provincia, String xpathFormModal) {
+		new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(By.xpath(xpathFormModal + XPATH_SELECT_PROVINCIA)));
+		new Select(getElement(xpathFormModal + XPATH_SELECT_PROVINCIA)).selectByVisibleText(provincia);
 	}
 
-	public void selectPais(String codigoPais, String XPathFormModal) {
-		String xpathSelectedPais = XPathSelectPais + "/option[@selected='selected' and @value='" + codigoPais + "']";
+	public void selectPais(String codigoPais, String xpathFormModal) {
+		String xpathSelectedPais = XPATH_SELECT_PAIS + "/option[@selected='selected' and @value='" + codigoPais + "']";
 		if (!state(Present, By.xpath(xpathSelectedPais), driver).check()) {
-			new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(By.xpath(XPathFormModal + XPathSelectPais)));
-			new Select(driver.findElement(By.xpath(XPathFormModal + XPathSelectPais))).selectByValue(codigoPais);
+			new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(By.xpath(xpathFormModal + XPATH_SELECT_PAIS)));
+			new Select(getElement(xpathFormModal + XPATH_SELECT_PAIS)).selectByValue(codigoPais);
 		}
 	}
 
-	private void sendKeysToInput(DataDirType inputType, String dataToSend, String XPathFormModal) {
-		String xpathInput = XPathFormModal + getXPathInput(inputType);
-//		WebElement input = driver.findElement(By.xpath(xpathInput));
-//		input.clear();
-//		input.sendKeys(dataToSend);
-		//Hay un problema en Chrome que provoca que aleatoriamente se corten los strings enviados mediante SendKeys. Así que debemos reintentarlo si no ha funcionado correctamente
-		//https://github.com/angular/protractor/issues/2019
-		ifNotValueSetedSendKeysWithRetry(2/*numRetry*/, dataToSend, By.xpath(xpathInput), driver);
+	private void sendKeysToInput(DataDirType inputType, String dataToSend, String xpathFormModal) {
+		String xpathInput = xpathFormModal + getXPathInput(inputType);
+		ifNotValueSetedSendKeysWithRetry(2, dataToSend, By.xpath(xpathInput), driver);
 	}
 }

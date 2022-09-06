@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop.galeria;
 
-import java.util.Arrays;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -13,19 +11,12 @@ import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test.pageobject.shop.galeria.SecSelectorPreciosDesktop;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
-
 
 public class SecSelectorPreciosSteps extends StepBase {
 
-	private final SecSelectorPreciosDesktop selectorPreciosDesktop;
-	private final SecFiltrosDesktop secFiltrosDesktop;
+	private final SecSelectorPreciosDesktop selectorPreciosDesktop = new SecSelectorPreciosDesktop();
+	private final SecFiltrosDesktop secFiltrosDesktop = SecFiltrosDesktop.getInstance(channel);
 
-	public SecSelectorPreciosSteps() {
-		this.selectorPreciosDesktop = new SecSelectorPreciosDesktop();
-		this.secFiltrosDesktop = SecFiltrosDesktop.getInstance(channel, app);
-	}
-	
 	@Validation (
 		description="Es visible el selector de precios",
 		level=State.Warn)
@@ -76,7 +67,7 @@ public class SecSelectorPreciosSteps extends StepBase {
 			"El nuevo máximo es menor que el anterior. Era de <b>" + dataFilter.maximoOrig + "</b> y ahora es <b>" + dataFilter.maximoFinal + "</b>",
 			dataFilter.maximoFinal < dataFilter.maximoOrig, State.Warn);
 		
-		PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
+		PageGaleria pageGaleria = PageGaleria.getNew(channel);
 		checks.add(
 			"Todos los precios están en el intervalo [" + dataFilter.minimoFinal + ", " + dataFilter.maximoFinal + "]",
 			pageGaleria.preciosInIntervalo(dataFilter.minimoFinal, dataFilter.maximoFinal), State.Warn);

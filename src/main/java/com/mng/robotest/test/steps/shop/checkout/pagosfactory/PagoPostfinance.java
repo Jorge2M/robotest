@@ -27,7 +27,7 @@ public class PagoPostfinance extends PagoSteps {
 			managePageSelectChannel();
 		}
 		
-		PagePostfCodSegSteps pagePostfCodSegSteps = new PagePostfCodSegSteps(driver);
+		PagePostfCodSegSteps pagePostfCodSegSteps = new PagePostfCodSegSteps();
 		if (pagePostfCodSegSteps.getPageObj().isPasarelaTest()) {
 			pagePostfCodSegSteps.validateIsPageTest(nombrePago, importeTotal);
 		} else {

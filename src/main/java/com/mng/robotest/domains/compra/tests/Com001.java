@@ -33,6 +33,7 @@ public class Com001 extends TestBase {
 			.getPassword();
 		
 		ConfigCheckout configCheckout = ConfigCheckout.config()
+				.checkPagos()
 				.checkMisCompras()
 				.emaiExists()
 				.checkSavedCard()

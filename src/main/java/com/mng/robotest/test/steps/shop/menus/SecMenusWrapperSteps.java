@@ -176,7 +176,7 @@ public class SecMenusWrapperSteps extends StepBase {
 		level=State.Warn,
 		store=StoreType.None)
 	private boolean checkIsVisibleAarticle(int maxSeconds) throws Exception {
-		PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
+		PageGaleria pageGaleria = PageGaleria.getNew(channel);
 		return (pageGaleria.isVisibleArticuloUntil(1, maxSeconds));
 	}
 	

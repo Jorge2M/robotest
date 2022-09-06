@@ -39,7 +39,7 @@ public class SecCrossSellingSteps extends StepBase {
 		String hrefMenu3 = listaMenusBloque.get(2).getAttribute("href");
 
 		ChecksTM checks = ChecksTM.getNew();
-		PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
+		PageGaleria pageGaleria = PageGaleria.getNew(channel);
 		if (!secCrossSelling.isSectionVisible()) {
 			pageGaleria.hideMenus();
 			pageGaleria.scrollToPageFromFirst(PageGaleriaDesktop.MAX_PAGE_TO_SCROLL);

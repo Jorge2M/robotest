@@ -11,34 +11,31 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.micuenta.beans.Ticket;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
-import com.mng.robotest.conftestmaker.AppEcom;
 
 public class PageMisCompras extends PageBase {
 
-	private final PageDetalleCompra modalDetalleCompra;
+	private final PageDetalleCompra modalDetalleCompra = PageDetalleCompra.make(channel);
 	
 	public enum TypeTicket {Tienda, Online}
-	final Channel channel;
 	private List<Ticket> listTickets = null;
 	
 	private static final String XPATH_CAPA_CONTENEDORA_DESKTOP = "//micro-frontend[@id='myPurchasesDesktop']";
 	private static final String XPATH_CAPA_CONTENEDORA_MOBILE = "//micro-frontend[@id='myPurchasesMobile']";
+	private static final String XPATH_ID_RELATIVE_TICKET = ".//*[@data-testid[contains(.,'purchaseNumber')]]";
+	
+	//TODO solicitado data-testid a Carla (11-02-2022)
+	private static final String XPATH_ITEMS_RELATIVE_TICKET = ".//div[@class[contains(.,'layout-row')]]//div[@class[contains(.,'layout-placeholder')] and @class[contains(.,'sg-body-small')]]";	
 	
 	private static final String XPATH_LIST_TICKETS = 
 		"//*[@data-testid[contains(.,'activePurchases')] or " +
 			"@data-testid[contains(.,'inactivePurchases')]]";
 	
 	private static final String XPATH_TICKET = XPATH_LIST_TICKETS + "//div[@class[contains(.,'layout-content')]]";
-
-	
-	public PageMisCompras(Channel channel, AppEcom app) {
-		this.channel = channel;
-		this.modalDetalleCompra = PageDetalleCompra.make(channel);
-	}
+	private static final String XPATH_PRICE_RELATIVE_TICKET = ".//*[@data-testid='price']";	
+	private static final String XPATH_FECHA_RELATIVE_TICKET = ".//span[@class[contains(.,'sg-caption-light')]]";
 	
 	public PageDetalleCompra getModalDetalleCompra() {
 		return this.modalDetalleCompra;
@@ -74,12 +71,12 @@ public class PageMisCompras extends PageBase {
 	}
 	
 	private List<WebElement> getTicketsPage() {
-		state(State.Visible, By.xpath(XPATH_TICKET)).wait(2).check();
-		return (driver.findElements(By.xpath(XPATH_TICKET)));
+		state(State.Visible, XPATH_TICKET).wait(2).check();
+		return getElements(XPATH_TICKET);
 	}
 	
 	private boolean isVisibleTicket(int maxSeconds) {
-		return (state(Visible, By.xpath(XPATH_TICKET)).wait(maxSeconds).check());
+		return state(Visible, XPATH_TICKET).wait(maxSeconds).check();
 	}
 
 	
@@ -107,8 +104,7 @@ public class PageMisCompras extends PageBase {
 	}
 	
 	public boolean isPageUntil(int maxSeconds) {
-		By byCapa = By.xpath(getXPathCapaContenedora());
-		return (state(Visible, byCapa).wait(maxSeconds).check());
+		return (state(Visible, getXPathCapaContenedora()).wait(maxSeconds).check());
 	}
 	
 	public Ticket getTicket(WebElement ticketScreen) {
@@ -123,8 +119,7 @@ public class PageMisCompras extends PageBase {
 	
 	public Ticket selectTicket(TypeTicket type, int position) {
 		Ticket ticket = getTickets(type).get(position-1);
-		By byTicket = By.xpath(getXPathTicketLink(ticket.getId()));
-		click(byTicket).exec();
+		click(getXPathTicketLink(ticket.getId())).exec();
 		return ticket;
 	}
 	
@@ -136,9 +131,8 @@ public class PageMisCompras extends PageBase {
 		return TypeTicket.Online;
 	}
 	
-	private static final String XPathIdRelativeTicket = ".//*[@data-testid[contains(.,'purchaseNumber')]]";
 	private String getIdTicketPage(WebElement boxDataTicket) {
-		String lineaId = boxDataTicket.findElement(By.xpath(XPathIdRelativeTicket)).getText();
+		String lineaId = boxDataTicket.findElement(By.xpath(XPATH_ID_RELATIVE_TICKET)).getText();
 		Pattern pattern = Pattern.compile("_*: (.*)"); boxDataTicket.getAttribute("innerHTML");
 		Matcher matcher = pattern.matcher(lineaId);
 		if (matcher.find()) {
@@ -147,22 +141,16 @@ public class PageMisCompras extends PageBase {
 		return "";
 	}
 	
-	//private static final String XPathPriceRelativeTicket = ".//*[@data-testid='price']";
-	private static final String XPathPriceRelativeTicket = ".//div[@class[contains(.,'sg-headline')]]";
 	private String getPrecioTicketPage(WebElement boxDataTicket) {
-		return (boxDataTicket.findElement(By.xpath(XPathPriceRelativeTicket)).getText());
+		return (boxDataTicket.findElement(By.xpath(XPATH_PRICE_RELATIVE_TICKET)).getText());
 	}
 	
-	//private static final String XPathItemsRelativeTicket = ".//div[@class[contains(.,'card__info')]]/div/div[2]";
-	//TODO solicitado data-testid a Carla (11-02-2022)
-	private static final String XPathItemsRelativeTicket = ".//div[@class[contains(.,'layout-row')]]//div[@class[contains(.,'layout-placeholder')] and @class[contains(.,'sg-body-small')]]";
 	private int getNumItemsTicketPage(WebElement boxDataTicket) {
-		String textLinea = "0" + boxDataTicket.findElement(By.xpath(XPathItemsRelativeTicket)).getText();
+		String textLinea = "0" + boxDataTicket.findElement(By.xpath(XPATH_ITEMS_RELATIVE_TICKET)).getText();
 		return (Integer.valueOf(textLinea.replaceAll("[^0-9]", "")));
 	}
 	
-	private static final String XPathFechaRelativeTicket = ".//span[@class[contains(.,'sg-caption-light')]]";
 	private String getFechaTicketPage(WebElement boxDataTicket) {
-		return (boxDataTicket.findElement(By.xpath(XPathFechaRelativeTicket)).getText());
+		return (boxDataTicket.findElement(By.xpath(XPATH_FECHA_RELATIVE_TICKET)).getText());
 	} 
 }

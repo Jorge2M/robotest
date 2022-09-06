@@ -10,7 +10,6 @@ import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.AllPages;
@@ -87,7 +86,7 @@ public class CheckerSEO extends PageBase implements Checker {
 		if (!AllPages.isPresentTagCanonical(driver)) {
 			//El canonical ha de aparecer como mínimo en las páginas de Portada, Catálogo y Ficha
 			PageFicha pageFicha = PageFicha.of(channel);
-			PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, AppEcom.shop);
+			PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop);
 			if ((new PageLanding()).isPage() || 
 				((PageGaleriaDesktop)pageGaleria).isPage() || 
 				pageFicha.isPageUntil(0)) {

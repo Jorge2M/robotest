@@ -1,42 +1,39 @@
 package com.mng.robotest.test.pageobject.shop.checkout.trustpay;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
-public class PageTrustpayTestConfirm {
+public class PageTrustpayTestConfirm extends PageBase {
 	
-	public enum typeButtons {OK, ANNOUNCED, FAIL, PENDING}
-	static String XPathButtonOK = "//input[@id='btnOK']";
-	static String XPathButtonAnnounced = "//input[@id='btnANNOUNCED']"; 
-	static String XPathButtonFail = "//input[@id='btnFAIL']";
-	static String XPathButtonPending = "//input[@id='btnOUT']";
+	public enum typeButtons { OK, ANNOUNCED, FAIL, PENDING }
+	private static final String XPATH_BUTTON_OK = "//input[@id='btnOK']";
+	private static final String XPATH_BUTTON_ANNOUNCED = "//input[@id='btnANNOUNCED']"; 
+	private static final String XPATH_BUTTON_FAIL = "//input[@id='btnFAIL']";
+	private static final String XPATH_BUTTON_PENDING = "//input[@id='btnOUT']";
 	
 	public static String getXPathButton(typeButtons typeButton) {
 		switch (typeButton) {
 		case OK:
-			return XPathButtonOK;
+			return XPATH_BUTTON_OK;
 		case ANNOUNCED:
-			return XPathButtonAnnounced;
+			return XPATH_BUTTON_ANNOUNCED;
 		case FAIL:
-			return XPathButtonFail;
+			return XPATH_BUTTON_FAIL;
 		case PENDING:
-			return XPathButtonPending;
+			return XPATH_BUTTON_PENDING;
 		default:
 			return "";
 		}		
 	}
 	
-	public static boolean isPresentButton(typeButtons typeButton, WebDriver driver) {
+	public boolean isPresentButton(typeButtons typeButton) {
 		String xpathButton = getXPathButton(typeButton);
-		return (state(Present, By.xpath(xpathButton), driver).check());
+		return state(Present, xpathButton).check();
 	}
 
-	public static void clickButton(typeButtons typeButton, WebDriver driver) {
+	public void clickButton(typeButtons typeButton) {
 		String xpathButton = getXPathButton(typeButton);
-		click(By.xpath(xpathButton), driver).exec();
+		click(xpathButton).exec();
 	}
 }

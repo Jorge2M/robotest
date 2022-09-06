@@ -1,10 +1,8 @@
 package com.mng.robotest.test.steps.shop.checkout.sofort;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.sofort.PageSofort1rst;
-
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -14,21 +12,15 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
  * @author jorge.munoz
  *
  */
-public class PageSofortIconosBancoSteps {
+public class PageSofortIconosBancoSteps extends StepBase {
 	
-	private final PageSofort1rst pageSofort1rst;
-	private final WebDriver driver;
-	
-	public PageSofortIconosBancoSteps(Channel channel, WebDriver driver) {
-		this.pageSofort1rst = new PageSofort1rst(channel, driver);
-		this.driver = driver;
-	}
+	private final PageSofort1rst pageSofort1rst = new PageSofort1rst();
 	
 	@Validation (
 		description="Aparece la 1a página de Sofort (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
 	public boolean validateIsPageUntil(int maxSeconds) {
-		return (pageSofort1rst.isPageVisibleUntil(maxSeconds));
+		return pageSofort1rst.isPageVisibleUntil(maxSeconds);
 	}
 	
 	@Step (
@@ -36,8 +28,6 @@ public class PageSofortIconosBancoSteps {
 		expected="Aparece la página de selección del Banco")
 	public void clickIconoSofort() { 
 		pageSofort1rst.clickGoToSofort();
-		
-		PageSofort2onSteps pageSofort2onSteps = new PageSofort2onSteps(driver); 
-		pageSofort2onSteps.validaIsPageUntil(3);
+		new PageSofort2onSteps().validaIsPageUntil(3);
 	}
 }

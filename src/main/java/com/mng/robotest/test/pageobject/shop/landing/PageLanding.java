@@ -23,30 +23,30 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageLanding extends PageBase {
 	
-	private static String XPATH_MAIN_CONTENT_PAIS = "//div[@class[contains(.,'main-content')] and @data-pais]";
-	private static String XPATH_CONTENIDO = "//div[@class[contains(.,'container-fluid home')]]";
-	private static String XPATH_SLIDER = "//section[@class='entitieswrapper']//div[@class[contains(.,'vsv-slide')]]";
-	private static String XPATH_EDIT_ITEM = "//div[@class[contains(.,'item-edit')] and @data-id]";
-	private static String XPATH_MAP_T1 = "//map[@name[contains(.,'item_')]]/..";
-	private static String XPATH_MAP_T2 = "//img[@class[contains(.,'responsive')] and @hidefocus='true']";
+	private static final String XPATH_MAIN_CONTENT_PAIS = "//div[@class[contains(.,'main-content')] and @data-pais]";
+	private static final String XPATH_CONTENIDO = "//div[@class[contains(.,'container-fluid home')]]";
+	private static final String XPATH_SLIDER = "//section[@class='entitieswrapper']//div[@class[contains(.,'vsv-slide')]]";
+	private static final String XPATH_EDIT_ITEM = "//div[@class[contains(.,'item-edit')] and @data-id]";
+	private static final String XPATH_MAP_T1 = "//map[@name[contains(.,'item_')]]/..";
+	private static final String XPATH_MAP_T2 = "//img[@class[contains(.,'responsive')] and @hidefocus='true']";
 
 	public boolean isPage() {
-		return (isPageUntil(0));
+		return isPageUntil(0);
 	}
 	
 	public boolean isPageUntil(int maxSeconds) {
-		return (state(Present, By.xpath(XPATH_CONTENIDO)).wait(maxSeconds).check());
+		return state(Present, XPATH_CONTENIDO).wait(maxSeconds).check();
 	}
 	
 	public String getCodigoPais() {
-		if (state(Present, By.xpath(XPATH_MAIN_CONTENT_PAIS)).check()) {
-			return (driver.findElement(By.xpath(XPATH_MAIN_CONTENT_PAIS)).getAttribute("data-pais"));
+		if (state(Present, XPATH_MAIN_CONTENT_PAIS).check()) {
+			return getElement(XPATH_MAIN_CONTENT_PAIS).getAttribute("data-pais");
 		}
 		return "";
 	}
 	
 	public boolean haySliders() {
-		return (state(Visible, By.xpath(XPATH_SLIDER)).check());
+		return state(Visible, XPATH_SLIDER).check();
 	}
 	
 	public boolean hayMaps() {
@@ -82,16 +82,16 @@ public class PageLanding extends PageBase {
 		boolean banners = true;
 		String xpathImg = "";
 		try {
-			if (state(Present, By.xpath("//*[@class[contains(.,'bannerHome')]]")).check()) {
+			if (state(Present, "//*[@class[contains(.,'bannerHome')]]").check()) {
 				xpathImg = "//*[@class[contains(.,'bannerHome')]]//img";
 			} else {
-				if (state(Present, By.xpath("//*[@id[contains(.,'homeContent')]]")).check()) {
+				if (state(Present, "//*[@id[contains(.,'homeContent')]]").check()) {
 					xpathImg = "//*[@id[contains(.,'homeContent')]]//img";
 				} else {
-					if (state(Present, By.xpath("//*[@class[contains(.,'contentHolder')]]")).check()) {
+					if (state(Present, "//*[@class[contains(.,'contentHolder')]]").check()) {
 						xpathImg = "//*[@class[contains(.,'contentHolder')]]//iframe";
 					} else {
-						if (state(Present, By.xpath("//*[@id[contains(.,'bodyContent')]]")).check()) {
+						if (state(Present, "//*[@id[contains(.,'bodyContent')]]").check()) {
 							xpathImg = "//*[@id[contains(.,'bodyContent')]]//img";
 						} else {
 							banners = false;
@@ -109,7 +109,7 @@ public class PageLanding extends PageBase {
 	}
 
 	public boolean haySecc_Art_Banners(AppEcom app) throws Exception {
-		PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
+		PageGaleria pageGaleria = PageGaleria.getNew(channel);
 		if (((PageGaleriaDesktop)pageGaleria).isVisibleAnyArticle()) {
 			return true;
 		}
@@ -149,7 +149,7 @@ public class PageLanding extends PageBase {
 			boolean elementContained = false;
 			switch (element) {
 			case article:
-				PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
+				PageGaleria pageGaleria = PageGaleria.getNew(channel);
 				elementContained = pageGaleria.isVisibleArticleUntil(1, 3);
 				break;
 			case campaign:

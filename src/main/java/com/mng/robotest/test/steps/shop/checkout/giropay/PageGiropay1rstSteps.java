@@ -7,19 +7,14 @@ import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.giropay.PageGiropay1rst;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 
-public class PageGiropay1rstSteps {
+public class PageGiropay1rstSteps extends StepBase {
 
-	private final PageGiropay1rst pageGiropay1rst;
-	private final Channel channel;
-	
-	public PageGiropay1rstSteps(Channel channel) {
-		this.pageGiropay1rst = new PageGiropay1rst(channel);
-		this.channel = channel;
-	}
+	private final PageGiropay1rst pageGiropay1rst = new PageGiropay1rst();
 	
 	@Validation
 	public ChecksTM validateIsPage(String nombrePago, String importeTotal, String codPais) {

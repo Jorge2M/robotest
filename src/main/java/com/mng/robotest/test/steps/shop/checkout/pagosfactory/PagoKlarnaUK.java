@@ -6,15 +6,13 @@ import com.mng.robotest.test.steps.shop.checkout.klarna.PageKlarnaSteps;
 
 public class PagoKlarnaUK extends PagoSteps {
 	
-	private final PageKlarnaSteps pageKlarnaSteps;
+	private final PageKlarnaSteps pageKlarnaSteps = new PageKlarnaSteps();
 
 	public PagoKlarnaUK(DataPago dataPago) throws Exception {
 		super(dataPago);
 		super.isAvailableExecPay = true;
-		pageKlarnaSteps = new PageKlarnaSteps(driver);
 	}
 
-	@SuppressWarnings("static-access")
 	@Override
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);

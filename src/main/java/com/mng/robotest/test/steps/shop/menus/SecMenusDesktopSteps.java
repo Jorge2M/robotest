@@ -86,11 +86,11 @@ public class SecMenusDesktopSteps extends StepBase {
 	}
 	
 	public void selectMenu2oLevel(Menu2onLevel menu2onLevel) throws Exception {
-		if (app==AppEcom.outlet) {
-			selectMenuLateral2oLevel(menu2onLevel);
-		} else {
+//		if (app==AppEcom.outlet) {
+//			selectMenuLateral2oLevel(menu2onLevel);
+//		} else {
 			selectMenuSubfamilia(menu2onLevel);
-		}
+//		}
 		validaSelecMenu(menu2onLevel);
 	}
 	
@@ -99,7 +99,7 @@ public class SecMenusDesktopSteps extends StepBase {
 		expected="Aparecen artículos asociados al menú",
 		saveNettraffic=SaveWhen.Always)
 	private void selectMenuSubfamilia(Menu2onLevel menu2onLevel) {
-		PageGaleria pageGaleria = PageGaleriaDesktop.getNew(channel, app);
+		PageGaleria pageGaleria = PageGaleriaDesktop.getNew(channel);
 		((PageGaleriaDesktop)pageGaleria).getSecSubmenusGallery().clickSubmenu(menu2onLevel.getNombre());
 	}
 	
@@ -146,11 +146,11 @@ public class SecMenusDesktopSteps extends StepBase {
 			Menu1rstLevel menu1rstLevel = (Menu1rstLevel) menu;
 			List<Menu2onLevel> menus2onLevel = menu1rstLevel.getListMenus2onLevel();
 			if (menus2onLevel!=null && menus2onLevel.size()>0) {
-				if (app==AppEcom.outlet) {
-					checkVisibility2onLevelMenusOulet(menus2onLevel);
-				} else {
+//				if (app==AppEcom.outlet) {
+//					checkVisibility2onLevelMenusOulet(menus2onLevel);
+//				} else {
 					pageGaleriaSteps.checkVisibilitySubmenus(menus2onLevel);
-				}
+//				}
 			}
 		}
 		
@@ -165,26 +165,26 @@ public class SecMenusDesktopSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece seleccionado el menú lateral <b>#{menu.getNombre()}</b> (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece seleccionado el menú de 2o nivel <b>#{menu.getNombre()}</b> (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Warn)
 	private boolean checkIsSelectedLateralMenu(MenuLateralDesktop menu, int maxSeconds) {
-		if (app!=AppEcom.outlet && menu instanceof Menu2onLevel) {
-			PageGaleria pageGaleria = PageGaleriaDesktop.getNew(channel, app);
+		if (menu instanceof Menu2onLevel) {
+			PageGaleria pageGaleria = PageGaleriaDesktop.getNew(channel);
 			return ((PageGaleriaDesktop)pageGaleria).getSecSubmenusGallery().isMenuSelected(menu.getNombre());
 		}
 		return (secMenus.secMenuLateral.isSelectedMenu(menu, maxSeconds));
 	}
 	  
-	@Validation
-	private ChecksTM checkVisibility2onLevelMenusOulet(List<Menu2onLevel> menus2onLevel) throws Exception {
-		ChecksTM checks = ChecksTM.getNew();
-		for (Menu2onLevel menu2oNivelTmp : menus2onLevel) {
-			checks.add(
-				"Aparece el menú de 2o nivel <b>" + menu2oNivelTmp.getNombre() + "</b>",
-				secMenus.secMenuLateral.isVisibleMenu(menu2oNivelTmp), State.Warn);
-		}
-		return checks;
-	}
+//	@Validation
+//	private ChecksTM checkVisibility2onLevelMenusOulet(List<Menu2onLevel> menus2onLevel) throws Exception {
+//		ChecksTM checks = ChecksTM.getNew();
+//		for (Menu2onLevel menu2oNivelTmp : menus2onLevel) {
+//			checks.add(
+//				"Aparece el menú de 2o nivel <b>" + menu2oNivelTmp.getNombre() + "</b>",
+//				secMenus.secMenuLateral.isVisibleMenu(menu2oNivelTmp), State.Warn);
+//		}
+//		return checks;
+//	}
 	
 	@Validation
 	private ChecksTM checkArticlesContainsLiterals(String[] textsArticlesGalery) throws Exception {
@@ -194,7 +194,7 @@ public class SecMenusDesktopSteps extends StepBase {
 		for (int i=0; i<textsArticlesGalery.length; i++) {
 			litsToContain+= "<br>" + textsArticlesGalery[i];
 		}
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel, app);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel);
 		List<String> listTxtArtNoValidos = pageGaleriaDesktop.nombreArticuloNoValido(textsArticlesGalery);
 		String articlesWrongWarning = "";
 		if (listTxtArtNoValidos.size() > 0) {
@@ -352,7 +352,7 @@ public class SecMenusDesktopSteps extends StepBase {
 		description="Aparece una página con banners, artículos, iframes, maps o sliders",
 		level=State.Warn)
 	private boolean checkAreValidMangoObjectsInPage() throws Exception {
-		PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
+		PageGaleria pageGaleria = PageGaleria.getNew(channel);
 		PageLanding pageLanding = new PageLanding();
 		if (!pageGaleria.isVisibleArticleUntil(1, 3) &&
 			!pageLanding.hayIframes() &&
@@ -383,12 +383,7 @@ public class SecMenusDesktopSteps extends StepBase {
 
 		driver.navigate().to(urlAccesoCorreo);
 		Menu1rstLevel menuAbrigos = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.he, null, "abrigos"));
-//		MenuLateralDesktop submenuParkas = MenuTreeApp.getMenuLevel2From(menuAbrigos, "Parkas");
-//		if (app==AppEcom.outlet) {
-//			checksSelecMenuEspecificDesktop(submenuParkas);
-//		} else {
-			checksSelecMenuEspecificDesktop(menuAbrigos);
-//		}
+		checksSelecMenuEspecificDesktop(menuAbrigos);
 	}
 	
 	static final String tagRefArticle = "@TagRefArticle";
@@ -442,7 +437,7 @@ public class SecMenusDesktopSteps extends StepBase {
 	@Validation
 	private ChecksTM checkSizeDivImages() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel, app);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel);
 		int numPage = 1; 
 		double marginPercError = 2;
 		ListSizesArticle listArtWrong1rstPage = pageGaleriaDesktop.getArticlesWithWrongSize(numPage, marginPercError);
@@ -478,7 +473,7 @@ public class SecMenusDesktopSteps extends StepBase {
 			"Aparecen alguno de los siguientes elementos: <b>" + elemsCanBeContained + "</b> (es un menú perteneciente al grupo <b>" + groupMenu + ")</b>",
 			contentPageOk, State.Warn);
 		
-		PageGaleria pageGaleria = PageGaleria.getNew(channel, app);
+		PageGaleria pageGaleria = PageGaleria.getNew(channel);
 		if (groupMenu.canContainElement(Element.article)) {
 		 	String guiones = "--";
 		 	checks.add(
@@ -531,7 +526,7 @@ public class SecMenusDesktopSteps extends StepBase {
 	@Validation
 	public ChecksTM checksSpecificEndRebajasChina() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel, app);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel);
 	  	List<Integer> tempSale = FilterCollection.sale.getListTempArticles();
 	  	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.articlesFrom, tempSale);
 	  	String warningMessage = "";
@@ -562,7 +557,7 @@ public class SecMenusDesktopSteps extends StepBase {
 	@Validation
 	private ChecksTM checkNoArticlesRebajadosWithLabelIncorrect() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel, app);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel);
 		List<LabelArticle> listLabelsWrong = PageGaleria.listLabelsNew;
 		List<Integer> tempSales = FilterCollection.sale.getListTempArticles();
 		List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaxRebajadosWithLiteralInLabel(tempSales, listLabelsWrong);
@@ -594,7 +589,7 @@ public class SecMenusDesktopSteps extends StepBase {
 		Integer temporadaOldOld = FilterCollection.sale.getListTempArticles().get(0);
 		ArrayList<Integer> temporadaOldOldList = new ArrayList<Integer>(Arrays.asList(temporadaOldOld));  
 	   	List<LabelArticle> listLabelsWrong = PageGaleria.listLabelsNew;
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel, app);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel);
 	   	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaOldOldList, listLabelsWrong);
 		String warningMessage = "";
 		if (listArtWrong.size() > 0) {
@@ -620,7 +615,7 @@ public class SecMenusDesktopSteps extends StepBase {
 		ChecksTM checks = ChecksTM.getNew();
 		
 		List<Integer> temporadaNew = FilterCollection.nextSeason.getListTempArticles();
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel, app);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel);
 		List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaNew, LabelArticle.NewNow, LabelArticle.NewCollection);
 		String warningMessage = "";
 		if (listArtWrong.size() > 0) {

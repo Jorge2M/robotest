@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop.checkout.postfinance;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -9,11 +7,7 @@ import com.mng.robotest.test.pageobject.shop.checkout.postfinance.PagePostfRedir
 
 public class PagePostfRedirectSteps {
 
-	private PagePostfRedirect pagePostfRedirect;
-	
-	public PagePostfRedirectSteps(WebDriver driver) {
-		pagePostfRedirect = new PagePostfRedirect(driver);
-	}
+	private PagePostfRedirect pagePostfRedirect = new PagePostfRedirect();
 	
 	@Validation
 	public ChecksTM isPageAndFinallyDisappears() {
@@ -22,9 +16,11 @@ public class PagePostfRedirectSteps {
 		checks.add(
 			"Aparece una página de redirección con un botón OK",
 			pagePostfRedirect.isPresentButtonOk(), State.Defect);
+		
 		checks.add(
 			"La página de redirección acaba desapareciendo (esperamos hasta " + maxSeconds + " segundos)",
 			pagePostfRedirect.isInvisibleButtonOkUntil(maxSeconds), State.Defect);
+		
 		return checks;
 	}
 }

@@ -19,23 +19,25 @@ public class PagoYandex extends PagoSteps {
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		DataPedido dataPedido = this.dataPago.getDataPedido();
-		PageYandex1rstSteps.validateIsPage(dataPedido.getEmailCheckout(), dataPedido.getImporteTotal(), dataTest.pais.getCodigo_pais(), driver);
+		
+		PageYandex1rstSteps pageYandex1rstSteps = new PageYandex1rstSteps();
+		pageYandex1rstSteps.validateIsPage(dataPedido.getEmailCheckout(), dataPedido.getImporteTotal(), dataTest.pais.getCodigo_pais());
 		if (execPay) {
 			this.dataPago.getDataPedido().setCodtipopago("?");
 			String telefono = "+7 900 000 00 00";
-			String paymentCode = PageYandex1rstSteps.inputTlfnAndclickContinuar(telefono, dataPedido.getImporteTotal(), 
-																			   dataTest.pais.getCodigo_pais(), driver);
-			String windowHandlePageYandex1rst = driver.getWindowHandle();
+			String paymentCode = pageYandex1rstSteps.inputTlfnAndclickContinuar(
+					telefono, dataPedido.getImporteTotal(), dataTest.pais.getCodigo_pais());			String windowHandlePageYandex1rst = driver.getWindowHandle();
 
-			if (PageYandex1rstSteps.hasFailed(driver)) {
-				paymentCode = PageYandex1rstSteps.retry(dataPedido.getImporteTotal(), dataTest.pais.getCodigo_pais(), driver);
+			if (pageYandex1rstSteps.hasFailed()) {
+				paymentCode = pageYandex1rstSteps.retry(dataPedido.getImporteTotal(), dataTest.pais.getCodigo_pais());
 			}
 
 			String tabNameYandexMoney = "yandexMoney";
-			PageYandexMoneySteps.accessInNewTab(tabNameYandexMoney, driver);
-			PageYandexMoneySteps.inputDataAndPay(paymentCode, dataPedido.getImporteTotal(), driver);
-			PageYandexMoneySteps.closeTabByTitle(tabNameYandexMoney, windowHandlePageYandex1rst, driver);
-			PageYandexPayingByCodeSteps.clickBackToMango(channel, driver);
+			PageYandexMoneySteps pageYandexMoneySteps = new PageYandexMoneySteps();
+			pageYandexMoneySteps.accessInNewTab(tabNameYandexMoney);
+			pageYandexMoneySteps.inputDataAndPay(paymentCode, dataPedido.getImporteTotal());
+			pageYandexMoneySteps.closeTabByTitle(tabNameYandexMoney, windowHandlePageYandex1rst);
+			new PageYandexPayingByCodeSteps().clickBackToMango();
 		}
 	}	
 }

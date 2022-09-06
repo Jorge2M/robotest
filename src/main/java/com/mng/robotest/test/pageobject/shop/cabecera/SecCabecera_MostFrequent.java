@@ -49,10 +49,10 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 		private By byDesktop;
 		private String xpathDesktop;
 		
-		static final String XPathIconMobile = "//*[@class[contains(.,'user-icon-button')]]";
+		private static final String XPATH_ICON_MOBILE = "//*[@class[contains(.,'user-icon-button')]]";
 		IconoCabeceraShop_DesktopMobile(String xPathMobile, String xPathDesktop) {
-			xpathMobile = XPathIconMobile + xPathMobile;
-			byMobile = By.xpath(XPathIconMobile + xPathMobile);
+			xpathMobile = XPATH_ICON_MOBILE + xPathMobile;
+			byMobile = By.xpath(XPATH_ICON_MOBILE + xPathMobile);
 			
 			this.xpathDesktop = xPathDesktop;
 			byDesktop = By.xpath(xPathDesktop);

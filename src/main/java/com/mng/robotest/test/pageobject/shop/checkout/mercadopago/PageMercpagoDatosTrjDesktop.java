@@ -5,10 +5,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageMercpagoDatosTrjDesktop extends PageMercpagoDatosTrj {
 	
-	static final String XPathVisaIconNumTarj = "//span[@id='paymentmethod-logo']";
-	static final String XPathBotonContinuar = "//button[@id='submit']";
-	static final String XPathDivBancoToClick = "//div[@class[contains(.,'select-wrapper')]]";
-	//static final String XPathOpcionBanco = "//ul[@class[contains(.,'select')]]/li";
+	private static final String XPATH_VISA_ICON_NUM_TARJ = "//span[@id='paymentmethod-logo']";
+	private static final String XPATH_BOTON_CONTINUAR = "//button[@id='submit']";
 	
 	@Override
 	public boolean isPageUntil(int maxSeconds) {
@@ -26,10 +24,10 @@ public class PageMercpagoDatosTrjDesktop extends PageMercpagoDatosTrj {
 	}
 	
 	public boolean isVisibleVisaIconUntil(int maxSeconds) {
-		return state(Visible, XPathVisaIconNumTarj).wait(maxSeconds).check();
+		return state(Visible, XPATH_VISA_ICON_NUM_TARJ).wait(maxSeconds).check();
 	}
 
 	public void clickBotonForContinue() {
-		click(XPathBotonContinuar + " | " + XPATH_BOTON_PAGAR).exec();
+		click(XPATH_BOTON_CONTINUAR + " | " + XPATH_BOTON_PAGAR).exec();
 	}
 }

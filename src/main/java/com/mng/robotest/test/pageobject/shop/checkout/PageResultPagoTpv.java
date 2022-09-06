@@ -1,34 +1,31 @@
 package com.mng.robotest.test.pageobject.shop.checkout;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
-public class PageResultPagoTpv {
+public class PageResultPagoTpv extends PageBase {
 	
-	static String XPathCabeceraConfCompra = "//div[@class[contains(.,'details')]]/h2";
-	static String XPathCodPedido = "//div[@id[contains(.,'num-pedido')]]/div[@class='valor']";
-	static String XPathGastosTransporte = "//div[@id='transporte']/div[@class='valor']";
+	private static final String XPATH_CABECERA_CONF_COMPRA = "//div[@class[contains(.,'details')]]/h2";
+	private static final String XPATH_COD_PEDIDO = "//div[@id[contains(.,'num-pedido')]]/div[@class='valor']";
+	private static final String XPATH_GASTOS_TRANSPORTE = "//div[@id='transporte']/div[@class='valor']";
 
-	public static boolean isPresentCabeceraConfCompra(WebDriver driver) {
-		return (state(Present, By.xpath(XPathCabeceraConfCompra), driver).check());
+	public boolean isPresentCabeceraConfCompra() {
+		return state(Present, XPATH_CABECERA_CONF_COMPRA).check();
 	}
 
-	public static boolean isVisibleCodPedido(WebDriver driver) {
-		return (state(Visible, By.xpath(XPathCodPedido), driver).check());
+	public boolean isVisibleCodPedido() {
+		return state(Visible, XPATH_COD_PEDIDO).check();
 	}
 
-	public static String getCodigoPedido(WebDriver driver) {
-		if (isVisibleCodPedido(driver)) {
-			return (driver.findElement(By.xpath(XPathCodPedido)).getText());
+	public String getCodigoPedido() {
+		if (isVisibleCodPedido()) {
+			return getElement(XPATH_COD_PEDIDO).getText();
 		}
 		return "";
 	}
 	
-	public static boolean isGastoTransporteAcero(WebDriver driver) {
-		return (driver.findElement(By.xpath(XPathGastosTransporte)).getText().compareTo("0 €")==0);
+	public boolean isGastoTransporteAcero() {
+		return getElement(XPATH_GASTOS_TRANSPORTE).getText().compareTo("0 €")==0;
 	}
 }
