@@ -13,7 +13,6 @@ import com.mng.robotest.domains.micuenta.pageobjects.PageAccesoMisCompras.TypeBl
 import com.mng.robotest.domains.micuenta.steps.PageAccesoMisComprasSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.beans.Pago.TypePago;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
@@ -23,14 +22,8 @@ import com.mng.robotest.test.utils.ImporteScreen;
 
 public class PageResultPagoSteps extends StepBase {
 
-	private final PageResultPago pageResultPago;
+	private final PageResultPago pageResultPago = new PageResultPago();
 	private final WebDriver driver = TestMaker.getDriverTestCase();
-	private final Channel channel;
-	
-	public PageResultPagoSteps(TypePago typePago, Channel channel) {
-		this.pageResultPago = new PageResultPago(typePago, channel);
-		this.channel = channel;
-	}
 	
 	@Validation (
 		description="Acaba apareciendo la página de la Shop de Mango de \"Ya has hecho tu compra\" (la esperamos hasta #{maxSecondsToWait} segundos)",

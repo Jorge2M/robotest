@@ -291,7 +291,7 @@ public class CheckoutFlow extends StepBase {
 		pagoSteps.testPagoFromCheckout(execPay);
 		dataPedido = dataPago.getDataPedido();
 		if (execPay) {
-			PageResultPagoSteps pageResultPagoSteps = new PageResultPagoSteps(pagoToTest.getTypePago(), channel);
+			PageResultPagoSteps pageResultPagoSteps = new PageResultPagoSteps();
 			if (dataPago.getFTCkout().stressMode) {
 				pageResultPagoSteps.checkUrl(10);
 			}

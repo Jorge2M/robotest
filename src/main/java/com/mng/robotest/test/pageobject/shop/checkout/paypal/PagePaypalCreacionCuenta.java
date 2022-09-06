@@ -1,12 +1,9 @@
 package com.mng.robotest.test.pageobject.shop.checkout.paypal;
 
-import org.openqa.selenium.By;
-
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class PagePaypalCreacionCuenta extends PageBase {
  
@@ -16,10 +13,10 @@ public class PagePaypalCreacionCuenta extends PageBase {
 	
 	public boolean isPageUntil(int maxSeconds) {
 		String xpath = "(" + XPATH_BUTTON_ACEPTAR_Y_PAGAR + ") | (" + XPATH_BUTTON_PAGAR_AHORA + ") | (" + XPATH_BUTTON_INICIAR_SESION + ")";
-		return (state(Present, By.xpath(xpath)).wait(maxSeconds).check());
+		return state(Present, xpath).wait(maxSeconds).check();
 	}
 
 	public void clickButtonIniciarSesion() {
-		click(By.xpath(XPATH_BUTTON_INICIAR_SESION)).type(TypeClick.javascript).exec();
+		click(XPATH_BUTTON_INICIAR_SESION).type(TypeClick.javascript).exec();
 	}
 }

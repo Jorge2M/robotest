@@ -86,8 +86,7 @@ public class Ree002 extends TestBase {
 		
 		if (!new UtilsMangoTest().isEntornoPRO()) {
 			//Volvemos a la portada (Seleccionamos el link "Seguir de shopping" o el icono de Mango)
-			PageResultPagoSteps pageResultPagoSteps = new PageResultPagoSteps(pagoStoreCredit.getTypePago(), channel);
-			pageResultPagoSteps.selectSeguirDeShopping(app);
+			new PageResultPagoSteps().selectSeguirDeShopping(app);
 			
 			//Calculamos el saldo en cuenta que debería quedar (según si se ha realizado o no el pago);
 			float saldoCtaEsperado;

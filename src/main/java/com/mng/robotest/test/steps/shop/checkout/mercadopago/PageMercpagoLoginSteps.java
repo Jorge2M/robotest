@@ -1,32 +1,29 @@
 package com.mng.robotest.test.steps.shop.checkout.mercadopago;
 
-import org.openqa.selenium.WebDriver;
-
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.pageobject.shop.checkout.mercadopago.PageMercpagoLogin;
 
-/**
- * Page-1: Identificación en Mercadopago
- * @author jorge.munoz
- *
- */
-public class PageMercpagoLoginSteps {
+public class PageMercpagoLoginSteps extends StepBase {
 
+	private final PageMercpagoLogin pageMercpagoLogin = new PageMercpagoLogin();
+	
 	@Validation
-	public static ChecksTM validateIsPage(WebDriver driver) {
+	public ChecksTM validateIsPage() {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de identificación de Mercadopago",
-			PageMercpagoLogin.isPage(driver), State.Defect);
+			pageMercpagoLogin.isPage(), State.Defect);
+		
 		checks.add(
 			"En la página figuran los campos de identificación (email + password)",
-			PageMercpagoLogin.isInputUserVisible(driver) &&
-			PageMercpagoLogin.isInputPasswordVisible(driver), State.Defect);
+			pageMercpagoLogin.isInputUserVisible() &&
+			pageMercpagoLogin.isInputPasswordVisible(), State.Defect);
+		
 		return checks;
 	}
 	
@@ -36,12 +33,10 @@ public class PageMercpagoLoginSteps {
 			"Aparece alguna de las páginas:<br>" +
 			" - Elección medio pago<br>" +
 			" - Introducción CVC")
-	public static void loginMercadopago(Pago pago, Channel channel, WebDriver driver) {
-		PageMercpagoLogin.sendInputUser(driver, pago.getUseremail());
-		PageMercpagoLogin.sendInputPassword(driver, pago.getPasswordemail());
-		PageMercpagoLogin.clickBotonContinuar(driver);
-		
-		PageMercpagoDatosTrjSteps pageMercpagoDatosTrjSteps = PageMercpagoDatosTrjSteps.newInstance(channel, driver);
-		pageMercpagoDatosTrjSteps.validaIsPage(0);
+	public void loginMercadopago(Pago pago) {
+		pageMercpagoLogin.sendInputUser(pago.getUseremail());
+		pageMercpagoLogin.sendInputPassword(pago.getPasswordemail());
+		pageMercpagoLogin.clickBotonContinuar();
+		new PageMercpagoDatosTrjSteps().validaIsPage(0);
 	}
 }

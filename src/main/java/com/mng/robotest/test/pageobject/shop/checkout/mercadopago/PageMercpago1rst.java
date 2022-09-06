@@ -1,23 +1,19 @@
 package com.mng.robotest.test.pageobject.shop.checkout.mercadopago;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+public class PageMercpago1rst extends PageBase {
 
-public class PageMercpago1rst {
+	private static final String XPATH_INPUT_NUM_TARJETA = "//input[@id='cardNumber']";
+	private static final String XPATH_LINK_REGISTRO = "//a[@href[contains(.,'changeGuestMail')]]";
 
-	static String XPathInputNumTarjeta = "//input[@id='cardNumber']";
-	static String XPathLinkRegistro = "//a[@href[contains(.,'changeGuestMail')]]";
-
-	public static boolean isPageUntil(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(XPathInputNumTarjeta), driver)
-				.wait(maxSeconds).check());
+	public boolean isPageUntil(int maxSeconds) {
+		return state(Visible, XPATH_INPUT_NUM_TARJETA).wait(maxSeconds).check();
 	}
 
-	public static void clickLinkRegistro(WebDriver driver) {
-		click(By.xpath(XPathLinkRegistro), driver).exec();
+	public void clickLinkRegistro() {
+		click(XPATH_LINK_REGISTRO).exec();
 	}
 }

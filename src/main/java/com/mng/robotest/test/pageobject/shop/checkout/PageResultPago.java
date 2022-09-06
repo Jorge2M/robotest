@@ -1,30 +1,20 @@
 package com.mng.robotest.test.pageobject.shop.checkout;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.test.beans.Pago.TypePago;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
 public class PageResultPago extends PageBase {
 	
-	private final Channel channel;
-	private static final String XpathTextConfirmacionPagoEstandar = "//*[@data-testid[contains(.,'confirmationText')] or @data-testid='purchaseConfirmation.confirmationText']";
-	public static final String XPathDescubrirLoUltimoButton = "//*[@data-testid[contains(.,'cta.goToMain')]]";
-	public static final String XPathDataPedido = "//*[@data-testid[contains(.,'purchaseData')]]"; 
-	public static final String XPathCodigoPedidoEstandar = XPathDataPedido + "//*[@data-testid[contains(.,'.orderId')]]";
-	public static final String XPathCodigoPedidoContrareembolsoDesktop = "//div[@class='labels']//*[@class[contains(.,'data')] and string-length(text())=6]";
-	public static final String XPathCodigoPedidoContrareembolsoMobil = "//div[@class[contains(.,'confirmation-summary-value')]]//p[string-length(text())=6]"; 
-	public static final String XPathButtonMisCompras = "//button[@data-testid[contains(.,'goToMyPurchases')]]";
-	public static final String XPathBlockNewLoyaltyPoints = "//*[@data-testid[contains(.,'loyaltyPointsBlock')]]";
-
-	public PageResultPago(TypePago typePago, Channel channel) {
-		this.channel = channel;
-	}
+	private static final String XPATH_TEXT_CONFIRMACION_PAGO_ESTANDAR = "//*[@data-testid[contains(.,'confirmationText')] or @data-testid='purchaseConfirmation.confirmationText']";
+	public static final String XPATH_DESCUBRIR_LO_ULTIMO_BUTTON = "//*[@data-testid[contains(.,'cta.goToMain')]]";
+	public static final String XPATH_DATA_PEDIDO = "//*[@data-testid[contains(.,'purchaseData')]]"; 
+	public static final String XPATH_CODIGO_PEDIDO_ESTANDAR = XPATH_DATA_PEDIDO + "//*[@data-testid[contains(.,'.orderId')]]";
+	public static final String XPATH_CODIGO_PEDIDO_CONTRAREEMBOLSO_DESKTOP = "//div[@class='labels']//*[@class[contains(.,'data')] and string-length(text())=6]";
+	public static final String XPATH_CODIGO_PEDIDO_CONTRAREEMBOLSO_MOBIL = "//div[@class[contains(.,'confirmation-summary-value')]]//p[string-length(text())=6]"; 
+	public static final String XPATH_BUTTON_MIS_COMPRAS = "//button[@data-testid[contains(.,'goToMyPurchases')]]";
+	public static final String XPATH_BLOCK_NEW_LOYALTY_POINTS = "//*[@data-testid[contains(.,'loyaltyPointsBlock')]]";
 
 	public boolean checkUrl(int maxSeconds) {
 		for (int i=0; i<maxSeconds; i++) {
@@ -43,19 +33,19 @@ public class PageResultPago extends PageBase {
 	}
 
 	public boolean isVisibleTextoConfirmacionPago(int seconds) {
-		return (state(Visible, By.xpath(XpathTextConfirmacionPagoEstandar)).wait(seconds).check());
+		return state(Visible, XPATH_TEXT_CONFIRMACION_PAGO_ESTANDAR).wait(seconds).check();
 	}
 
 	public boolean isVisibleDescubrirLoUltimo() {
-		return state(Visible, By.xpath(XPathDescubrirLoUltimoButton)).check();
+		return state(Visible, XPATH_DESCUBRIR_LO_ULTIMO_BUTTON).check();
 	}
 	
 	public void clickDescubrirLoUltimo() {
-		click(By.xpath(XPathDescubrirLoUltimoButton)).exec();
+		click(XPATH_DESCUBRIR_LO_ULTIMO_BUTTON).exec();
 	}
 
 	public String getCodigoPedido(int seconds) throws Exception {
-		By codigoPedidoBy = By.xpath(XPathCodigoPedidoEstandar); 
+		By codigoPedidoBy = By.xpath(XPATH_CODIGO_PEDIDO_ESTANDAR); 
 		if (state(Present, codigoPedidoBy).wait(seconds).check()) {
 			return driver.findElement(codigoPedidoBy).getText();
 		}
@@ -63,14 +53,14 @@ public class PageResultPago extends PageBase {
 	}
 
 	public boolean isButtonMisCompras() {
-		return (state(Visible, By.xpath(XPathButtonMisCompras)).check());
+		return state(Visible, XPATH_BUTTON_MIS_COMPRAS).check();
 	}
 
 	public void clickMisCompras() {
-		click(By.xpath(XPathButtonMisCompras)).exec();
+		click(XPATH_BUTTON_MIS_COMPRAS).exec();
 	}
 
 	public boolean isVisibleBlockNewLoyaltyPoints() {
-		return (state(Visible, By.xpath(XPathBlockNewLoyaltyPoints)).check());
+		return state(Visible, XPATH_BLOCK_NEW_LOYALTY_POINTS).check();
 	}
 }

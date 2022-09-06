@@ -11,7 +11,7 @@ import com.mng.robotest.test.steps.shop.checkout.mercadopago.PageMercpagoLoginSt
 
 public class PagoMercadopago extends PagoSteps {
 
-	private static final String codigoSeguridad = "123";
+	private static final String CODIGO_SEGURIDAD = "123";
 	
 	public PagoMercadopago(DataPago dataPago) throws Exception {
 		super(dataPago);
@@ -23,17 +23,18 @@ public class PagoMercadopago extends PagoSteps {
 		DataPedido dataPedido = this.dataPago.getDataPedido();
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
-		int maxSeconds = 5;
-		PageMercpago1rstSteps.validateIsPageUntil(maxSeconds, driver);
-		PageMercpago1rstSteps.clickLinkRegistration(driver);
+		
+		PageMercpago1rstSteps pageMercpago1rstSteps = new PageMercpago1rstSteps();
+		pageMercpago1rstSteps.validateIsPageUntil(5);
+		pageMercpago1rstSteps.clickLinkRegistration();
 		if (execPay) {
-			PageMercpagoLoginSteps.loginMercadopago(dataPedido.getPago(), channel, driver);
-			PageMercpagoDatosTrjSteps pageMercpagoDatosTrjSteps = PageMercpagoDatosTrjSteps.newInstance(channel, driver);
-			if (pageMercpagoDatosTrjSteps.getPageObject().getTypeInput()==TypePant.inputDataTrjNew) {
+			new PageMercpagoLoginSteps().loginMercadopago(dataPedido.getPago());
+			PageMercpagoDatosTrjSteps pageMercpagoDatosTrjSteps = new PageMercpagoDatosTrjSteps();
+			if (pageMercpagoDatosTrjSteps.getPageObject().getTypeInput()==TypePant.INPUT_DATA_TRJ_NEW) {
 				fluxFromInputDataTrj(dataPedido, pageMercpagoDatosTrjSteps);
 			}
 			else {
-				pageMercpagoDatosTrjSteps.inputCvcAndPay(codigoSeguridad);
+				pageMercpagoDatosTrjSteps.inputCvcAndPay(CODIGO_SEGURIDAD);
 			}
 			
 			dataPedido.setCodtipopago("D");
@@ -46,8 +47,8 @@ public class PagoMercadopago extends PagoSteps {
 		PageMercpagoDatosTrjSteps.InputData inputData = new PageMercpagoDatosTrjSteps.InputData();
 		inputData.setMesVencimiento(dataPedido.getPago().getMescad());
 		inputData.setAnyVencimiento(dataPedido.getPago().getAnycad());
-		inputData.setCodigoSeguridad(codigoSeguridad);
+		inputData.setCodigoSeguridad(CODIGO_SEGURIDAD);
 		pageMercpagoDatosTrjSteps.inputDataAndPay(inputData);
-		PageMercpagoConfSteps.clickPagar(channel, driver);
+		new PageMercpagoConfSteps().clickPagar();
 	}
 }

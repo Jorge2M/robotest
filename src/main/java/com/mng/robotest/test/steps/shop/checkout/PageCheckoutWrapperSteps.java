@@ -29,36 +29,19 @@ import com.mng.robotest.test.steps.shop.checkout.tmango.SecTMangoSteps;
 
 public class PageCheckoutWrapperSteps extends StepBase {
 
-	private final PageCheckoutWrapper pageCheckoutWrapper; 
-	
-	private final ModalDirecEnvioSteps modalDirecEnvioSteps;
-	private final SecMetodoEnvioDesktopSteps secMetodoEnvioDesktopSteps;
-	private final SecStoreCreditSteps secStoreCreditSteps;
-	private final SecTMangoSteps secTMangoSteps;
-	private final SecKrediKartiSteps secKrediKartiSteps;
-	private final SecBillpaySteps secBillpaySteps;
-	private final ModalDirecFacturaSteps modalDirecFacturaSteps;
-	private final ModalAvisoCambioPaisSteps modalAvisoCambioPaisSteps;
-	private final Page1DktopCheckoutSteps page1DktopCheckSteps;
-	private final Page1EnvioCheckoutMobilSteps page1MobilCheckSteps;
-	private final SecIdealSteps secIdealSteps;
-	private final SecTarjetaPciSteps secTarjetaPciSteps;
-	
-	public PageCheckoutWrapperSteps() {
-		this.pageCheckoutWrapper = new PageCheckoutWrapper();
-		this.modalDirecEnvioSteps = new ModalDirecEnvioSteps();
-		this.secMetodoEnvioDesktopSteps = new SecMetodoEnvioDesktopSteps();
-		this.secStoreCreditSteps = new SecStoreCreditSteps();
-		this.secTMangoSteps = new SecTMangoSteps();
-		this.secKrediKartiSteps = new SecKrediKartiSteps(); 
-		this.secBillpaySteps = new SecBillpaySteps();
-		this.modalDirecFacturaSteps = new ModalDirecFacturaSteps();
-		this.modalAvisoCambioPaisSteps = new ModalAvisoCambioPaisSteps();
-		this.page1DktopCheckSteps = new Page1DktopCheckoutSteps();
-		this.page1MobilCheckSteps = new Page1EnvioCheckoutMobilSteps();
-		this.secIdealSteps = new SecIdealSteps();
-		this.secTarjetaPciSteps = new SecTarjetaPciSteps();
-	}
+	private final PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(); 
+	private final ModalDirecEnvioSteps modalDirecEnvioSteps = new ModalDirecEnvioSteps();
+	private final SecMetodoEnvioDesktopSteps secMetodoEnvioDesktopSteps = new SecMetodoEnvioDesktopSteps();
+	private final SecStoreCreditSteps secStoreCreditSteps = new SecStoreCreditSteps();
+	private final SecTMangoSteps secTMangoSteps = new SecTMangoSteps();
+	private final SecKrediKartiSteps secKrediKartiSteps = new SecKrediKartiSteps();
+	private final SecBillpaySteps secBillpaySteps = new SecBillpaySteps();
+	private final ModalDirecFacturaSteps modalDirecFacturaSteps = new ModalDirecFacturaSteps();
+	private final ModalAvisoCambioPaisSteps modalAvisoCambioPaisSteps = new ModalAvisoCambioPaisSteps();
+	private final Page1DktopCheckoutSteps page1DktopCheckSteps = new Page1DktopCheckoutSteps();
+	private final Page1EnvioCheckoutMobilSteps page1MobilCheckSteps = new Page1EnvioCheckoutMobilSteps();
+	private final SecIdealSteps secIdealSteps = new SecIdealSteps();
+	private final SecTarjetaPciSteps secTarjetaPciSteps = new SecTarjetaPciSteps();
 	
 	public PageCheckoutWrapper getPageCheckoutWrapper() {
 		return pageCheckoutWrapper;

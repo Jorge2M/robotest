@@ -1,10 +1,8 @@
 package com.mng.robotest.test.pageobject.shop.checkout.dotpay;
 
-import org.openqa.selenium.By;
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class PageDotpay1rst extends PageBase {
 	
@@ -21,23 +19,23 @@ public class PageDotpay1rst extends PageBase {
 	
 	public boolean isPresentEntradaPago(String nombrePago) {
 		String xpathPago = getXPathEntradaPago(nombrePago);
-		return (state(Present, By.xpath(xpathPago)).check());
+		return state(Present, xpathPago).check();
 	}
 	
 	public boolean isPresentCabeceraStep(String nombrePago) {
 		String xpathCab = getXPathEntradaPago(nombrePago);
-		return state(Present, By.xpath(xpathCab)).check();
+		return state(Present, xpathCab).check();
 	}
 
 	public boolean isPresentButtonPago() {
-		return (state(Present, By.xpath(XPATH_BUTTON_PAGO)).check());
+		return state(Present, XPATH_BUTTON_PAGO).check();
 	}
 
 	public void clickToPay() {
 		if (channel.isDevice()) {
-			click(By.xpath(XPATH_INPUT_ICONO_DOTPAY)).exec();
+			click(XPATH_INPUT_ICONO_DOTPAY).exec();
 		} else {
-			click(By.xpath(XPATH_BUTTON_PAGO)).exec();
+			click(XPATH_BUTTON_PAGO).exec();
 		}
 	}
 }

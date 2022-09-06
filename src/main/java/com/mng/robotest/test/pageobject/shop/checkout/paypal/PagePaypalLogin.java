@@ -18,23 +18,23 @@ public class PagePaypalLogin extends PageBase {
 		return isPageUntil(0);
 	}
 	public boolean isPageUntil(int maxSeconds) {
-		return (state(Present, By.xpath(XPATH_INPUT_PASSWORD)).wait(maxSeconds).check());
+		return state(Present, XPATH_INPUT_PASSWORD).wait(maxSeconds).check();
 	}
 	
 	public void inputUserAndPassword(String userMail, String password) {
 		waitForPageLoaded(driver); //For avoid StaleElementReferenceException
 		sendKeysWithRetry(userMail, By.xpath(XPATH_INPUT_LOGIN), 2, driver);
-		if (state(Visible, By.xpath(XPATH_INPUT_PASSWORD)).check()) {
-			driver.findElement(By.xpath(XPATH_INPUT_PASSWORD)).sendKeys(password);
+		if (state(Visible, XPATH_INPUT_PASSWORD).check()) {
+			getElement(XPATH_INPUT_PASSWORD).sendKeys(password);
 		} else {
 			new PagePaypalLogin().clickIniciarSesion();
-			if (state(Visible, By.xpath(XPATH_INPUT_PASSWORD)).wait(3).check()) {
-				driver.findElement(By.xpath(XPATH_INPUT_PASSWORD)).sendKeys(password);
+			if (state(Visible, XPATH_INPUT_PASSWORD).wait(3).check()) {
+				getElement(XPATH_INPUT_PASSWORD).sendKeys(password);
 			}
 		}
 	}
 
 	public void clickIniciarSesion() {
-		click(By.xpath(XPATH_INICIAR_SESION_BUTTON)).exec();
+		click(XPATH_INICIAR_SESION_BUTTON).exec();
 	}
 }

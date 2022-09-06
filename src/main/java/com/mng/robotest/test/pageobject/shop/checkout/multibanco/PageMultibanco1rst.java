@@ -1,10 +1,8 @@
 package com.mng.robotest.test.pageobject.shop.checkout.multibanco;
 
-import org.openqa.selenium.By;
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class PageMultibanco1rst extends PageBase {
 	
@@ -36,41 +34,38 @@ public class PageMultibanco1rst extends PageBase {
 	
 	public boolean isPresentEntradaPago(String nombrePago) {
 		String xpathPago = getXPathEntradaPago(nombrePago);
-		return state(Present, By.xpath(xpathPago)).check();
+		return state(Present, xpathPago).check();
 	}
 	
 	public boolean isPresentCabeceraStep() {
-		return (state(Present, By.xpath(XPATH_CABECERA_STEP)).check());
+		return state(Present, XPATH_CABECERA_STEP).check();
 	}
 	
 	public boolean isPresentButtonPagoDesktop() {
-		return (state(Present, By.xpath(XPATH_BUTTON_PAGO_DESKTOP)).check());
+		return state(Present, XPATH_BUTTON_PAGO_DESKTOP).check();
 	}
 	
 	public boolean isPresentEmailUsr(String emailUsr) {
 		String xpathEmail = getXPathInputEmail(emailUsr);
-		return (state(Present, By.xpath(xpathEmail)).check());
+		return state(Present, xpathEmail).check();
 	}
 
 	public void continueToNextPage() {
 		//En el caso de móvil hemos de seleccionar el icono de banco para visualizar el botón de continue
 		if (channel.isDevice()) {
-			String xpathButton = getXPathButtonContinuePay();
-			if (!state(Visible, By.xpath(xpathButton)).check()) {
+			if (!state(Visible, getXPathButtonContinuePay()).check()) {
 				clickIconoBanco();
 			}
 		}
-		
 		clickButtonContinuePay();
 	}
 
 	public void clickIconoBanco() {
-		click(By.xpath(XPATH_INPUT_ICONO_MULTIBANCO)).exec();
+		click(XPATH_INPUT_ICONO_MULTIBANCO).exec();
 	}
 
 	public void clickButtonContinuePay() {
-		String xpathButton = getXPathButtonContinuePay();
-		click(By.xpath(xpathButton)).exec();
+		click(getXPathButtonContinuePay()).exec();
 	}
 
 }

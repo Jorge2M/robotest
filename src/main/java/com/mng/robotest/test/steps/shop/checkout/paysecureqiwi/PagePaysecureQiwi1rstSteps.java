@@ -37,6 +37,6 @@ public class PagePaysecureQiwi1rstSteps extends StepBase {
 		expected="Aparece la página de introducción del número de teléfono")
 	public void clickIconPasarelaQiwi(Channel channel) throws Exception {
 		pagePaysecureQiwi.clickIcon(PaysecureGateway.Qiwi);
-		PageQiwiInputTlfnSteps.validateIsPage(driver);
+		new PageQiwiInputTlfnSteps().validateIsPage();
 	}
 }

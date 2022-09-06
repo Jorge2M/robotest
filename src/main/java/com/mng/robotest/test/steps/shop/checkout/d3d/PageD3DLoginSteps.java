@@ -1,23 +1,16 @@
 package com.mng.robotest.test.steps.shop.checkout.d3d;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.d3d.PageD3DLogin;
 import com.mng.robotest.test.utils.ImporteScreen;
 
-public class PageD3DLoginSteps {
+public class PageD3DLoginSteps extends StepBase {
 
-	private final WebDriver driver;
-	private final PageD3DLogin pageD3DLogin;
-	
-	public PageD3DLoginSteps(WebDriver driver) {
-		this.driver = driver;
-		this.pageD3DLogin = new PageD3DLogin(driver);
-	}
+	private final PageD3DLogin pageD3DLogin = new PageD3DLogin();
 	
 	@Validation (
 		description="Aparece la página de identificación D3D (la esperamos hasta #{maxSeconds} segundos)",

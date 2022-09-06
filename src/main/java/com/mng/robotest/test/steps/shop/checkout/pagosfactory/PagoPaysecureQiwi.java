@@ -25,10 +25,11 @@ public class PagoPaysecureQiwi extends PagoSteps {
 		
 		if (execPay) {
 			String tlfQiwi = dataPago.getDataPedido().getPago().getTelefqiwi();
-			PageQiwiInputTlfnSteps.inputTelefono(tlfQiwi, driver);
-			PageQiwiInputTlfnSteps.clickConfirmarButton(driver);
-			if (PagePaysecureConfirm.isPage(driver)) {
-				PageQiwiConfirmSteps.selectConfirmButton(driver);
+			PageQiwiInputTlfnSteps pageQiwiInputTlfnSteps = new PageQiwiInputTlfnSteps();
+			pageQiwiInputTlfnSteps.inputTelefono(tlfQiwi);
+			pageQiwiInputTlfnSteps.clickConfirmarButton();
+			if (new PagePaysecureConfirm().isPage()) {
+				new PageQiwiConfirmSteps().selectConfirmButton();
 			}
 		}
 	}	

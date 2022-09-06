@@ -1,6 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.checkout.mercadopago;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -10,40 +9,35 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public abstract class PageMercpagoDatosTrj extends PageBase {
 	
-	static final String XPathInputNumTarj = "//input[@name='cardNumber']";
-	static final String XPathInputFecCaducidad = "//input[@name='cardExpiration']";
-	static final String XPathInputCvc = "//input[@id='securityCode']";
-	static final String XPathBotonPagar = "//input[@type='submit']";
+	static final String XPATH_INPUT_NUM_TARJ = "//input[@name='cardNumber']";
+	static final String XPATH_INPUT_FEC_CADUCIDAD = "//input[@name='cardExpiration']";
+	static final String XPATH_INPUT_CVC = "//input[@id='securityCode']";
+	static final String XPATH_BOTON_PAGAR = "//input[@type='submit']";
 	
-	public enum TypePant {inputDataTrjNew, inputCvcTrjSaved} 
+	public enum TypePant {INPUT_DATA_TRJ_NEW, INPUT_CVC_TRJ_SAVED} 
 	
 	public abstract boolean isPageUntil(int maxSecondsToWait);
 	public abstract void sendCvc(String cvc);
 	public abstract void sendCaducidadTarj(String fechaVencimiento);
 	
-	PageMercpagoDatosTrj(WebDriver driver) {
-		super(driver);
-	}
-	
-	public static PageMercpagoDatosTrj newInstance(Channel channel, WebDriver driver) {
+	public static PageMercpagoDatosTrj newInstance(Channel channel) {
 		switch (channel) {
 		case desktop:
-			return (PageMercpagoDatosTrjDesktop.newInstance(driver));
+			return new PageMercpagoDatosTrjDesktop();
 		case mobile:
 		default:
-			return (PageMercpagoDatosTrjMobil.newInstance(driver));
+			return new PageMercpagoDatosTrjMobil();
 		}
 	}
 	
 	public void sendNumTarj(String numTarjeta) {
-		driver.findElement(By.xpath(XPathInputNumTarj)).sendKeys(numTarjeta);
+		getElement(XPATH_INPUT_NUM_TARJ).sendKeys(numTarjeta);
 	}
 	
 	public TypePant getTypeInput() {
-		if (state(Visible, By.xpath(XPathInputNumTarj), driver).check()) {
-			return TypePant.inputDataTrjNew;
+		if (state(Visible, XPATH_INPUT_NUM_TARJ).check()) {
+			return TypePant.INPUT_DATA_TRJ_NEW;
 		}
-		
-		return TypePant.inputCvcTrjSaved;
+		return TypePant.INPUT_CVC_TRJ_SAVED;
 	}
 }

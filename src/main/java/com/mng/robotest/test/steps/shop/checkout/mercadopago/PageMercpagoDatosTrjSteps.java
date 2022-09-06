@@ -1,31 +1,20 @@
 package com.mng.robotest.test.steps.shop.checkout.mercadopago;
 
-import org.openqa.selenium.WebDriver;
-
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.mng.robotest.test.beans.Pago.TypePago;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.mercadopago.PageMercpagoDatosTrj;
 import com.mng.robotest.test.pageobject.shop.checkout.mercadopago.PageMercpagoDatosTrjDesktop;
 import com.mng.robotest.test.pageobject.shop.checkout.mercadopago.PageMercpagoDatosTrjMobil;
 import com.mng.robotest.test.steps.shop.checkout.PageResultPagoSteps;
 
-public class PageMercpagoDatosTrjSteps {
+public class PageMercpagoDatosTrjSteps extends StepBase {
 	
 	private final PageMercpagoDatosTrj pageMercpagoDatosTrj;
-	private Channel channel;
-	private WebDriver driver;
 	
-	private PageMercpagoDatosTrjSteps(Channel channel, WebDriver driver) {
-		this.channel = channel;
-		this.driver = driver;
-		this.pageMercpagoDatosTrj = PageMercpagoDatosTrj.newInstance(channel, driver);
-	}
-	
-	public static PageMercpagoDatosTrjSteps newInstance(Channel channel, WebDriver driver) {
-		return (new PageMercpagoDatosTrjSteps(channel, driver));
+	public PageMercpagoDatosTrjSteps() {
+		this.pageMercpagoDatosTrj = PageMercpagoDatosTrj.newInstance(channel);
 	}
 	
 	public PageMercpagoDatosTrj getPageObject() {
@@ -150,10 +139,10 @@ public class PageMercpagoDatosTrjSteps {
 	public void clickButtonForPayMobil(boolean afterTrjGuardada) {
 		((PageMercpagoDatosTrjMobil)pageMercpagoDatosTrj).clickButtonForPay();
 		if (afterTrjGuardada) {
-			(new PageResultPagoSteps(TypePago.Mercadopago, channel)).validaIsPageUntil(30);
+			new PageResultPagoSteps().validaIsPageUntil(30);
 		}
 		else {
-			PageMercpagoConfSteps.validaIsPageUntil(5, channel, driver);
+			new PageMercpagoConfSteps().validaIsPageUntil(5);
 		}
 	}	
 	
@@ -179,10 +168,10 @@ public class PageMercpagoDatosTrjSteps {
 		PageMercpagoDatosTrjDesktop pageDesktop = (PageMercpagoDatosTrjDesktop)pageMercpagoDatosTrj;
 		pageDesktop.clickBotonForContinue();
 		if (afterTrjGuardada) {
-			(new PageResultPagoSteps(TypePago.Mercadopago, channel)).validaIsPageUntil(30);
+			new PageResultPagoSteps().validaIsPageUntil(30);
 		}
 		else {
-			PageMercpagoConfSteps.validaIsPageUntil(10, Channel.desktop, driver);
+			new PageMercpagoConfSteps().validaIsPageUntil(10);
 		}
 	}
 	

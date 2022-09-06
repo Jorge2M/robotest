@@ -1,10 +1,7 @@
 package com.mng.robotest.test.pageobject.shop.galeria;
 
-import org.openqa.selenium.By;
-
 import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
-
 
 public class SecSubmenusGallery extends PageBase {
 
@@ -23,25 +20,23 @@ public class SecSubmenusGallery extends PageBase {
 	}
 	
 	public boolean isVisible(int maxSeconds) {
-		return state(State.Visible, By.xpath(XPATH_CAPA)).wait(maxSeconds).check();
+		return state(State.Visible, XPATH_CAPA).wait(maxSeconds).check();
 	}
 	
 	public boolean isVisibleSubmenu(String nameMenu) {
-		String xpath = getXPathMenu(nameMenu);
-		return state(State.Visible, By.xpath(xpath)).wait(1).check();
+		return state(State.Visible, getXPathMenu(nameMenu)).wait(1).check();
 	}
 	
 	public boolean isMenuSelected(String nameMenu) {
 		if (isVisibleSubmenu(nameMenu)) {
 			String xpath = getXPathMenu(nameMenu);
 			//TODO solicitar data-testid
-			return driver.findElement(By.xpath(xpath)).getAttribute("className").contains("SwwoF");
+			return getElement(xpath).getAttribute("className").contains("SwwoF");
 		}
 		return false;
 	}
 	
 	public void clickSubmenu(String nameMenu) {
-		String xpath = getXPathMenu(nameMenu);
-		click(By.xpath(xpath)).exec();
+		click(getXPathMenu(nameMenu)).exec();
 	}
 }

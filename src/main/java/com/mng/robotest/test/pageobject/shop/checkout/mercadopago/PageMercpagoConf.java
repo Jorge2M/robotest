@@ -1,34 +1,29 @@
 package com.mng.robotest.test.pageobject.shop.checkout.mercadopago;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import com.github.jorge2m.testmaker.conf.Channel;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
-public class PageMercpagoConf {
+public class PageMercpagoConf extends PageBase {
 	
-	static String XPathSectionReviewDesktop = "//section[@class='review-step']";
-	static String XPathButtonPagar = "//button[@class[contains(.,'ch-btn')] and @type='submit']";
+	private static final String XPATH_SECTION_REVIEW_DESKTOP = "//section[@class='review-step']";
+	private static final String XPATH_BUTTON_PAGAR = "//button[@class[contains(.,'ch-btn')] and @type='submit']";
 	
-	public static String getXPathSectionReview(Channel channel) {
+	public String getXPathSectionReview() {
 		switch (channel) {
 		case mobile:
-			return XPathButtonPagar;
+			return XPATH_BUTTON_PAGAR;
 		default:
 		case desktop:
-			return XPathSectionReviewDesktop;
+			return XPATH_SECTION_REVIEW_DESKTOP;
 		}
 	}
 	
-	public static boolean isPageUntil(Channel channel, int maxSeconds, WebDriver driver) {
-		String xpathSection = getXPathSectionReview(channel);
-		return (state(Present, By.xpath(xpathSection), driver).wait(maxSeconds).check());
+	public boolean isPageUntil(int maxSeconds) {
+		return state(Present, getXPathSectionReview()).wait(maxSeconds).check();
 	}
 
-	public static void clickPagar(WebDriver driver) {
-		click(By.xpath(XPathButtonPagar), driver).exec();
+	public void clickPagar() {
+		click(XPATH_BUTTON_PAGAR).exec();
 	}
 }

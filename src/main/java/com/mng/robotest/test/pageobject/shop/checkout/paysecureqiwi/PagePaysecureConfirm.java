@@ -1,24 +1,21 @@
 package com.mng.robotest.test.pageobject.shop.checkout.paysecureqiwi;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+public class PagePaysecureConfirm extends PageBase {
 
-public class PagePaysecureConfirm {
-
-	static String XPathButtonConfirmar = "//input[@name[contains(.,'Submit_Success')]]"; 
+	private static final String XPATH_BUTTON_CONFIRMAR = "//input[@name[contains(.,'Submit_Success')]]"; 
 	
 	/**
 	 * @return si estamos en la página de confirmación de Qiwi (aparece a veces después de la introducción del teléfono + botón continuar)
 	 */
-	public static boolean isPage(WebDriver driver) {
-		return (state(Present, By.xpath(XPathButtonConfirmar), driver).check());
+	public boolean isPage() {
+		return state(Present, XPATH_BUTTON_CONFIRMAR).check();
 	}
 
-	public static void clickConfirmar(WebDriver driver) {
-		click(By.xpath(XPathButtonConfirmar), driver).exec();
+	public void clickConfirmar() {
+		click(XPATH_BUTTON_CONFIRMAR).exec();
 	}
 }

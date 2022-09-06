@@ -10,7 +10,7 @@ import com.mng.robotest.test.pageobject.shop.checkout.dotpay.PageDotpayAcceptSim
 
 public class PageDotpayAcceptSimulationSteps extends StepBase {
 	
-	PageDotpayAcceptSimulation pageDotpayAcceptSimulation = new PageDotpayAcceptSimulation();
+	private final PageDotpayAcceptSimulation pageDotpayAcceptSimulation = new PageDotpayAcceptSimulation();
 	
 	@Validation
 	public ChecksTM validateIsPage(int maxSeconds) {

@@ -1,29 +1,28 @@
 package com.mng.robotest.test.steps.shop.checkout.mercadopago;
 
-import org.openqa.selenium.WebDriver;
-
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.mng.robotest.test.beans.Pago.TypePago;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.mercadopago.PageMercpagoConf;
 import com.mng.robotest.test.steps.shop.checkout.PageResultPagoSteps;
 
-public class PageMercpagoConfSteps {
+public class PageMercpagoConfSteps extends StepBase {
 
+	private final PageMercpagoConf pageMercpagoConf = new PageMercpagoConf();
+	
 	@Validation (
 		description="Estamos en la página de confirmación del pago (la esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-	public static boolean validaIsPageUntil(int maxSeconds, Channel channel, WebDriver driver) {  
-		return (PageMercpagoConf.isPageUntil(channel, maxSeconds, driver));
+	public boolean validaIsPageUntil(int maxSeconds) {  
+		return pageMercpagoConf.isPageUntil(maxSeconds);
 	}
 	
 	@Step (
 		description="Seleccionar el botón \"Pagar\"", 
 		expected="Aparece la página de resultado")
-	public static void clickPagar(Channel channel, WebDriver driver) {
-		PageMercpagoConf.clickPagar(driver);
-		(new PageResultPagoSteps(TypePago.Mercadopago, channel)).validaIsPageUntil(30);
+	public void clickPagar() {
+		pageMercpagoConf.clickPagar();
+		new PageResultPagoSteps().validaIsPageUntil(30);
 	}
 }

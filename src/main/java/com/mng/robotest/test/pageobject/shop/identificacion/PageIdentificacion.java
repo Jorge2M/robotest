@@ -96,8 +96,7 @@ public class PageIdentificacion extends PageBase {
 			}
 		}
 		
-		SecMenusWrap secMenus = new SecMenusWrap();
-		secMenus.getMenusUser().moveAndClick(UserMenu.iniciarSesion);
+		new SecMenusWrap().getMenusUser().moveAndClick(UserMenu.iniciarSesion);
 	}
 	
 	public boolean isErrorEmailoPasswordKO() {
