@@ -4,28 +4,21 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 import org.openqa.selenium.By;
 
-import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
-
 
 public class SecLineasMenuDesktopNew extends SecLineasMenuDesktop {
 
 	private static final String XPATH_MENU_FATHER_WRAPPER = "//micro-frontend[@id='header']";
 	private static final String XPATH_LINEA = "//li[@data-testid[contains(.,'header.menuItem')]]";
 	private static final String XPATH_LINEAS_MENU_WRAPPER = XPATH_LINEA + "/..";
-	private static final String XPATH_LINEA_SPECIFIC_WITH_TAG = XPATH_LINEA + "//self::*[@data-testid[contains(.,'Item." + TagIdLinea + "')]]";
+	private static final String XPATH_LINEA_SPECIFIC_WITH_TAG = XPATH_LINEA + "//self::*[@data-testid[contains(.,'Item." + TAG_ID_LINEA + "')]]";
 	
 	private static final String TAG_ID_SUBLINEA = "@SublineaId";
 	private static final String XPATH_SUBLINEA_WITH_TAG = "//li[@id[contains(.,'" + TAG_ID_SUBLINEA+ "')] and @data-testid[contains(.,'section')]]";
 	private static final String TAG_ID_SUBLINEA2 = "@2SublineaId";
 	private static final String XPATH_SUBLINEA_WITH_2TAG = "//li[(@id[contains(.,'" + TAG_ID_SUBLINEA+ "')] or @id[contains(.,'" + TAG_ID_SUBLINEA2 + "')]) and @data-testid[contains(.,'section')]]";
-	
-	public SecLineasMenuDesktopNew(AppEcom app, Channel channel) {
-		super(app, channel);
-	}
 	
 	private String getXPathSublineaLink(SublineaType sublineaType) {
 		if (sublineaType==SublineaType.teen_nino) {
@@ -58,7 +51,7 @@ public class SecLineasMenuDesktopNew extends SecLineasMenuDesktop {
 	@Override
 	public String getXPathLinea(LineaType lineaType) {
 		String lineaIddom = SecMenusWrap.getIdLineaEnDOM(channel, app, lineaType);
-		return (XPATH_LINEA_SPECIFIC_WITH_TAG.replace(TagIdLinea, lineaIddom));
+		return (XPATH_LINEA_SPECIFIC_WITH_TAG.replace(TAG_ID_LINEA, lineaIddom));
 	}
 	
 	@Override

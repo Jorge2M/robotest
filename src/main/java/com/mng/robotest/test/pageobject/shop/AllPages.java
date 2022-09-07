@@ -3,58 +3,55 @@ package com.mng.robotest.test.pageobject.shop;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.ITestContext;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Pais;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class AllPages {
+public class AllPages extends PageBase {
 	
-	public static final String XPath_tagCanonical = "//link[@rel='canonical']";
-	public static final String XPath_tagRobots = "//meta[@name='robots' and @content[contains(.,'noindex')]]";
+	public static final String XPATH_TAG_CANONICAL = "//link[@rel='canonical']";
+	public static final String XPATH_TAG_ROBOTS = "//meta[@name='robots' and @content[contains(.,'noindex')]]";
 
-	public static String getXPathMainContent(Pais pais) {
+	public String getXPathMainContent(Pais pais) {
 		return ("//div[@class[contains(.,'main-content')] and @data-pais='" + pais.getCodigo_pais() + "']");
 	}
 
-	public static boolean isPresentTagCanonical(WebDriver driver) {
-		return (state(Present, By.xpath(XPath_tagCanonical), driver).check());
+	public boolean isPresentTagCanonical() {
+		return state(Present, XPATH_TAG_CANONICAL).check();
 	}
 
-	public static boolean isPresentTagRobots(WebDriver driver) {
-		return (state(Present, By.xpath(XPath_tagRobots), driver).check());
+	public boolean isPresentTagRobots() {
+		return state(Present, XPATH_TAG_ROBOTS).check();
 	}
 
-	public static WebElement getTagCanonincal(WebDriver driver) {
-		return (driver.findElement(By.xpath(XPath_tagCanonical)));
+	public WebElement getTagCanonincal() {
+		return getElement(XPATH_TAG_CANONICAL);
 	}
 	
-	public static String getURLTagCanonical(WebDriver driver) {
+	public String getURLTagCanonical() {
 		String urlTagCanonical = "";
-		if (isPresentTagCanonical(driver)) {
-			urlTagCanonical = getTagCanonincal(driver).getAttribute("href");
+		if (isPresentTagCanonical()) {
+			urlTagCanonical = getTagCanonincal().getAttribute("href");
 		}
-		
 		return urlTagCanonical;
 	}
 
-	public static boolean isPresentElementWithTextUntil(String text, int maxSeconds, WebDriver driver) {
+	public boolean isPresentElementWithTextUntil(String text, int maxSeconds) {
 		String xpath = "//*[text()[contains(.,'" + text + "')]]";
-		return (state(Present, By.xpath(xpath), driver).wait(maxSeconds).check());
+		return state(Present, xpath).wait(maxSeconds).check();
 	}
 
-	public static boolean isCodLiteralSinTraducir(WebDriver driver) {
+	public boolean isCodLiteralSinTraducir() {
 		String xpath = "//*[text()[contains(.,'???')]]";
-		return (state(Present, By.xpath(xpath), driver).check());
+		return state(Present, xpath).check();
 	}
 
-	public static boolean validateUrlNotMatchUntil(String url, int maxSeconds, WebDriver driver) throws Exception {
+	public boolean validateUrlNotMatchUntil(String url, int maxSeconds) throws Exception {
 		int seconds = 0;
 		do {
 			if (url.compareTo(driver.getCurrentUrl())!=0) {
@@ -67,11 +64,11 @@ public class AllPages {
 		return false;
 	}
 	
-	public static boolean validateElementsNotEqualsUntil(int elementosPagina, int margin, int maxSeconds, WebDriver driver) 
-	throws Exception {
+	public boolean validateElementsNotEqualsUntil(int elementosPagina, int margin, int maxSeconds) 
+			throws Exception {
 		int seconds = 0;
 		do {
-			if (Math.abs(elementosPagina - driver.findElements(By.xpath("//*")).size()) > margin) {
+			if (Math.abs(elementosPagina - getElements("//*").size()) > margin) {
 				return true;
 			}
 			Thread.sleep(1000);
@@ -84,10 +81,10 @@ public class AllPages {
 	/**
 	 * Función para detectar elementos http maliciosos incrustados en el atributo 'src'
 	 */
-	public static ArrayList<String> httpMalicious(final WebDriver webdriver, final ITestContext context, final Pais pais) throws Exception {
+	public List<String> httpMalicious(ITestContext context, Pais pais) throws Exception {
 		boolean malicious = true;
 		if (pais != null) {
-			ArrayList<String> paisesOK = new ArrayList<>();
+			List<String> paisesOK = new ArrayList<>();
 			paisesOK.add("006"); // United Kingdom
 			paisesOK.add("003"); // Netherlands
 
@@ -99,28 +96,24 @@ public class AllPages {
 			}
 		}
 
-		ArrayList<String> listaHttpMalicious = new ArrayList<>();
+		List<String> listaHttpMalicious = new ArrayList<>();
 		if (malicious) {
-			List<WebElement> allHttp = webdriver.findElements(By.xpath("//*[contains(@src, \"http\")]"));
+			List<WebElement> allHttp = getElements("//*[contains(@src, \"http\")]");
 			for (WebElement tagHttp : allHttp) {
 				if (isMaliciousHttp(context, tagHttp)) {
 					String src = tagHttp.getAttribute("src");
-					listaHttpMalicious.add(webdriver.getCurrentUrl() + ". <br><b>Http malicious!</b> " + ".id:" + tagHttp.getAttribute("id") + ",src:" + src);
+					listaHttpMalicious.add(driver.getCurrentUrl() + ". <br><b>Http malicious!</b> " + ".id:" + tagHttp.getAttribute("id") + ",src:" + src);
 					Log4jTM.getLogger().warn(
-							webdriver.getCurrentUrl() + ". Http malicious! " + 
+							driver.getCurrentUrl() + ". Http malicious! " + 
 							", id:" + tagHttp.getAttribute("id") + 
 							", src:" + src);
 				}
 			}
 		}
-
 		return listaHttpMalicious;
 	}
 
-	/**
-	 * Decide si un elemento HTML es o no malicioso (revisa el src y el id)
-	 */
-	private static boolean isMaliciousHttp(final ITestContext context, final WebElement tagHttp) {
+	private boolean isMaliciousHttp(final ITestContext context, final WebElement tagHttp) {
 		boolean malicious = true;
 		String src = tagHttp.getAttribute("src");
 		String id = tagHttp.getAttribute("id");
@@ -129,7 +122,7 @@ public class AllPages {
 		if (context.getAttribute("httpMalicious." + src) != null) {
 			malicious = false;
 		} else {
-			ArrayList<String> dominiosOK = new ArrayList<>();
+			List<String> dominiosOK = new ArrayList<>();
 			dominiosOK.add("mngbcn.com");
 			dominiosOK.add("mango.com");
 			dominiosOK.add("addthis.com");
@@ -184,16 +177,13 @@ public class AllPages {
 		return malicious;
 	}
 
-	public static boolean isPresentMainContent(Pais pais, WebDriver driver) {
+	public boolean isPresentMainContent(Pais pais) {
 		String xpathMainContent = getXPathMainContent(pais);
-		return (state(Present, By.xpath(xpathMainContent), driver).check());
+		return state(Present, xpathMainContent).check();
 	}
 
-	public static boolean isTitleAssociatedToMenu(String menuName, WebDriver driver) {
+	public boolean isTitleAssociatedToMenu(String menuName) {
 		String titlePage = driver.getTitle();
-		if (titlePage.toLowerCase().contains(menuName.toLowerCase())) {
-			return true;
-		}
-		return false;
+		return (titlePage.toLowerCase().contains(menuName.toLowerCase()));
 	}
 }

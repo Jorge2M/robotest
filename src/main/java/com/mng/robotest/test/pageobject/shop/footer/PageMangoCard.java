@@ -2,11 +2,9 @@ package com.mng.robotest.test.pageobject.shop.footer;
 
 import org.openqa.selenium.By;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class PageMangoCard extends PageBase implements PageFromFooter {
 	
@@ -32,7 +30,7 @@ public class PageMangoCard extends PageBase implements PageFromFooter {
 		return (state(Present, By.xpath(XPATH_FOR_IDPAGE)).wait(maxSeconds).check());
 	}
 	
-	public void clickOnWantMangoCardNow(Channel channel) {
+	public void clickOnWantMangoCardNow() {
 		if (channel.isDevice()) {
 			click(By.xpath(XPATH_GO_MANGO_CARD_BUTTON_MOBILE)).exec();
 		} else {

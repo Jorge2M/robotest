@@ -94,15 +94,17 @@ public class SecBannersSteps extends StepBase {
 		int maxSeconds1 = 3;
 		int marginElements = 2;
 		int maxSeconds2 = 1;
+		
+		AllPages allPages = new AllPages(); 
 	 	checks.add(
 	 		"La URL de la página cambia (lo esperamos hasta un máximo de " + maxSeconds1 + " segundos)",
-	 		AllPages.validateUrlNotMatchUntil(urlPagPadre, maxSeconds1, driver), State.Defect);  
+	 		allPages.validateUrlNotMatchUntil(urlPagPadre, maxSeconds1), State.Defect);  
 	 	
 	 	boolean urlEqual = false;
 	 	boolean elemsEqual = false;
 	 	if (urlPagPadre.compareTo(driver.getCurrentUrl())==0) {
 	 		urlEqual = true;
-	 		elemsEqual = !AllPages.validateElementsNotEqualsUntil(elementosPagPadre, marginElements, maxSeconds2, driver);
+	 		elemsEqual = !allPages.validateElementsNotEqualsUntil(elementosPagPadre, marginElements, maxSeconds2);
 	 	}
 	 	checks.add(
 	 		"La página cambia: <br>" + 

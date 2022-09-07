@@ -1,33 +1,31 @@
 package com.mng.robotest.test.pageobject.shop.modales;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class ModalLoyaltyAfterAccess {
+public class ModalLoyaltyAfterAccess extends PageBase {
 
-	static final String XPathCapaGlobal = "//div[@id='adhesionModal']"; 
-	static final String XPathCapaContainer = XPathCapaGlobal + "//div[@class='modal-container']";
-	static final String XPathAspaForClose = XPathCapaContainer + "//span[@class='modal-close-icon']";
+	private static final String XPATH_CAPA_GLOBAL = "//div[@id='adhesionModal']"; 
+	private static final String XPATH_CAPA_CONTAINER = XPATH_CAPA_GLOBAL + "//div[@class='modal-container']";
+	private static final String XPATH_ASPA_FOR_CLOSE = XPATH_CAPA_CONTAINER + "//span[@class='modal-close-icon']";
 	
-	public static boolean isModalVisibleUntil(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(XPathCapaContainer), driver).wait(maxSeconds).check());
+	public boolean isModalVisibleUntil(int maxSeconds) {
+		return state(Visible, XPATH_CAPA_CONTAINER).wait(maxSeconds).check();
 	}
 	
-	public static void closeModal(WebDriver driver) {
-		click(By.xpath(XPathAspaForClose), driver).type(javascript).exec();
+	public void closeModal() {
+		click(XPATH_ASPA_FOR_CLOSE).type(javascript).exec();
 	}
 	
-	public static void closeModalIfVisible(WebDriver driver) {
-		closeModalIfVisibleUntil(0, driver);
+	public void closeModalIfVisible() {
+		closeModalIfVisibleUntil(0);
 	}
 	
-	public static void closeModalIfVisibleUntil(int maxSecondsToWait, WebDriver driver) {
-		if (isModalVisibleUntil(maxSecondsToWait, driver)) {
-			closeModal(driver);
+	public void closeModalIfVisibleUntil(int maxSecondsToWait) {
+		if (isModalVisibleUntil(maxSecondsToWait)) {
+			closeModal();
 		}
 	}
 }

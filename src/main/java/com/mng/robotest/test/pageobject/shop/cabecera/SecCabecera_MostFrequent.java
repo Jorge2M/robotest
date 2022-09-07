@@ -14,13 +14,9 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop;
 
-/**
- * Cabecera Shop compatible con desktop y movil
- *
- */
 public class SecCabecera_MostFrequent extends SecCabecera {
 	
-	private final ModalUserSesionShopDesktop modalUserSesionShopDesktop;
+	private final ModalUserSesionShopDesktop modalUserSesionShopDesktop = new ModalUserSesionShopDesktop(); 
 	
 	private static final String XPATH_DIV_NAV_TOOLS = "//div[@id='navTools']";
 	private static final String XPATH_NUM_ARTICLES_MOBIL_OUTLET = "//*[@class='icon-button-items']";
@@ -82,26 +78,12 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 		}
 	}
 	
-	protected SecCabecera_MostFrequent() {
-		super();
-		this.modalUserSesionShopDesktop = ModalUserSesionShopDesktop.getNew(driver);
-	}
-	
-	public static SecCabecera_MostFrequent getNew(Channel channel, AppEcom app) {
-		return (new SecCabecera_MostFrequent());
-	}
-	
 	public ModalUserSesionShopDesktop getModalUserSesionDesktop() {
 		return modalUserSesionShopDesktop;
 	}
 
 	@Override
 	public String getXPathNumberArtIcono() {
-		return getXPathNumberArtIcono(channel, app);
-	}
-	
-	public static String getXPathNumberArtIcono(Channel channel, AppEcom app) {
-//		return XPathNumArticlesBolsaPre + " | " + XPathNumArticlesBolsaPro;
 		if (channel==Channel.desktop || app==AppEcom.shop) {
 			return XPATH_NUM_ARTICLES_MANY_LOCATIONS;
 		}
@@ -141,11 +123,11 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	}
 	
 	public boolean isIconoInState(IconoCabeceraShop_DesktopMobile icono, State state, int maxSeconds) {
-		return (state(state, icono.getBy(channel, app)).wait(maxSeconds).check());
+		return state(state, icono.getBy(channel, app)).wait(maxSeconds).check();
 	}
 	
 	public boolean isIconoInStateUntil(IconoCabeceraShop_DesktopMobile icono, State state, int maxSeconds) {
-		return (state(state, icono.getBy(channel, app)).wait(maxSeconds).check());
+		return state(state, icono.getBy(channel, app)).wait(maxSeconds).check();
 	}
 	
 	public void hoverIcono(IconoCabeceraShop_DesktopMobile icono) {

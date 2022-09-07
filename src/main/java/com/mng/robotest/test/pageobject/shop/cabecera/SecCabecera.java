@@ -56,7 +56,7 @@ public abstract class SecCabecera extends PageBase {
 	}
 	
 	public static void buscarTexto(String referencia, Channel channel, AppEcom app, WebDriver driver) {
-		MenusUserWrapper menusUser = MenusUserWrapper.getNew(channel, app);
+		MenusUserWrapper menusUser = new MenusUserWrapper();
 		menusUser.isMenuInStateUntil(UserMenu.lupa, State.Visible, 1);
 		menusUser.clickMenuAndWait(UserMenu.lupa);
 		SecSearch secSearch = SecSearch.getNew(channel, app, driver);
@@ -132,8 +132,7 @@ public abstract class SecCabecera extends PageBase {
 	 *			  'false' queremos que el menú lateral de móvil se cierre
 	 */
 	public void clickIconoMenuHamburguerMobil(boolean toOpenMenus) {
-		//SecMenuLateralMobil secMenuLateral = new SecMenuLateralMobil(app, driver);
-		SecMenuLateralDevice secMenuLateral = new SecMenuLateralDevice(channel, app);
+		SecMenuLateralDevice secMenuLateral = new SecMenuLateralDevice();
 		boolean menuVisible = secMenuLateral.isMenuInStateUntil(toOpenMenus, 1);
 		int i=0;
 		TypeClick typeClick = TypeClick.webdriver;

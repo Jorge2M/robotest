@@ -29,7 +29,7 @@ public class Gpo007 extends TestBase {
 
 		// Abrir avisame desde el listado buscando primera talla sin stock y comprobar que se abierto y que contiene texto RGPD
 		new PageGaleriaSteps().selectTallaNoDisponibleArticulo();
-		ModalArticleNotAvailableSteps modalArticleNotAvailableSteps = ModalArticleNotAvailableSteps.getInstance(channel, app, driver);
+		ModalArticleNotAvailableSteps modalArticleNotAvailableSteps = new ModalArticleNotAvailableSteps();
 		modalArticleNotAvailableSteps.checkVisibleAvisame();		
 	}
 

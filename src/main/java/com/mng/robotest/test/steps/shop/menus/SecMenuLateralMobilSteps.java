@@ -3,17 +3,14 @@ package com.mng.robotest.test.steps.shop.menus;
 import java.util.Arrays;
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
@@ -32,18 +29,9 @@ import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
-public class SecMenuLateralMobilSteps {
+public class SecMenuLateralMobilSteps extends StepBase {
 
-	private final WebDriver driver = TestMaker.getDriverTestCase(); 
-	private final Channel channel;
-	private final AppEcom app;
-	private final SecMenuLateralDevice secMenuLateral;
-	
-	public SecMenuLateralMobilSteps(Channel channel, AppEcom app) {
-		this.channel = channel;
-		this.app = app;
-		secMenuLateral = new SecMenuLateralDevice(channel, app);
-	}
+	private final SecMenuLateralDevice secMenuLateral = new SecMenuLateralDevice();
 	
 	@Step (
 		description="Seleccionar el menú lateral de 1er nivel <b>#{menu1rstLevel}</b>", 

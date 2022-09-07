@@ -4,26 +4,26 @@ import com.mng.robotest.test.beans.Linea.LineaType;
 
 public class SecLineasMobilOutlet extends SecLineasMobil {
 
-	private static String IniXPathLinkLinea = XPathCapaLevelLinea + "//li/div[@class[contains(.,'menu-item-label')] and @id";
-	private static String XPathLinkLineaMujer = IniXPathLinkLinea + "='outlet']";
-	private static String XPathLinkLineaHombre = IniXPathLinkLinea + "='outletH']";
-	private static String XPathLinkLineaNina = IniXPathLinkLinea + "='outletA']";
-	private static String XPathLinkLineaNino =IniXPathLinkLinea + "='outletO']";
-	private static String XPathLinkLineaVioleta = IniXPathLinkLinea + "='outletV']";
+	private static final String INI_XPATH_LINK_LINEA = XPATH_CAPA_LEVEL_LINEA + "//li/div[@class[contains(.,'menu-item-label')] and @id";
+	private static final String XPATH_LINK_LINEA_MUJER = INI_XPATH_LINK_LINEA + "='outlet']";
+	private static final String XPATH_LINK_LINEA_HOMBRE = INI_XPATH_LINK_LINEA + "='outletH']";
+	private static final String XPATH_LINK_LINEA_NINA = INI_XPATH_LINK_LINEA + "='outletA']";
+	private static final String XPATH_LINK_LINEA_NINO =INI_XPATH_LINK_LINEA + "='outletO']";
+	private static final String XPATH_LINK_LINEA_VIOLETA = INI_XPATH_LINK_LINEA + "='outletV']";
 	
 	@Override
 	public String getXPathLineaLink(LineaType lineaType) throws IllegalArgumentException {
 		switch (lineaType) {
 		case she: 
-			return XPathLinkLineaMujer;
+			return XPATH_LINK_LINEA_MUJER;
 		case he: 
-			return XPathLinkLineaHombre;
+			return XPATH_LINK_LINEA_HOMBRE;
 		case nina:
-			return XPathLinkLineaNina;
+			return XPATH_LINK_LINEA_NINA;
 		case nino: 
-			return XPathLinkLineaNino;
+			return XPATH_LINK_LINEA_NINO;
 		case violeta: 
-			return XPathLinkLineaVioleta;
+			return XPATH_LINK_LINEA_VIOLETA;
 		default:
 			throw new IllegalArgumentException("The line " + lineaType + " is not present in the Outlet for the mobile channel");
 		}

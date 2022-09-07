@@ -19,6 +19,7 @@ import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop.Visibility;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.SecLineasMenuDesktop;
+import com.mng.robotest.test.pageobject.shop.menus.desktop.SecLineasMenuDesktopNew;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -28,12 +29,12 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageGaleriaDesktop extends PageGaleria {
 	
-	private final SecColoresArticuloDesktop secColores;
-	private final SecTallasArticuloDesktop secTallas;
-	private final SecSubmenusGallery secSubmenusGallery;
-	private final SecBannerHeadGallery secBannerHead;
-	private final SecCrossSelling secCrossSelling;	
-	private final SecSelectorPreciosDesktop secSelectorPreciosDesktop;
+	private final SecColoresArticuloDesktop secColores = new SecColoresArticuloDesktop();
+	private final SecTallasArticuloDesktop secTallas = new SecTallasArticuloDesktop(xpathArticuloBase);
+	private final SecSubmenusGallery secSubmenusGallery = new SecSubmenusGallery();
+	private final SecBannerHeadGallery secBannerHead = new SecBannerHeadGallery();
+	private final SecCrossSelling secCrossSelling = new SecCrossSelling();
+	private final SecSelectorPreciosDesktop secSelectorPreciosDesktop = new SecSelectorPreciosDesktop();
 	
 	public enum NumColumnas { DOS, TRES, CUATRO }
 	public enum TypeSlider { PREV, NEXT }
@@ -70,29 +71,18 @@ public class PageGaleriaDesktop extends PageGaleria {
 
 	public PageGaleriaDesktop() {
 		super();
-		secColores = new SecColoresArticuloDesktop(app);
-		secTallas = new SecTallasArticuloDesktop(app, xpathArticuloBase);
-		secSubmenusGallery = new SecSubmenusGallery();
-		secBannerHead = new SecBannerHeadGallery();
-		secCrossSelling = new SecCrossSelling();	
-		secSelectorPreciosDesktop = new SecSelectorPreciosDesktop();
 	}
 	
 	public PageGaleriaDesktop(From from) {
 		super(from);
-		secColores = new SecColoresArticuloDesktop(app);
-		secTallas = new SecTallasArticuloDesktop(app, xpathArticuloBase);
-		secSubmenusGallery = new SecSubmenusGallery();
-		secBannerHead = new SecBannerHeadGallery();
-		secCrossSelling = new SecCrossSelling();	
-		secSelectorPreciosDesktop = new SecSelectorPreciosDesktop();
 	}
 	
 	public enum TypeArticle {rebajado, norebajado};
-	private final String XPathAncestorArticle = "//ancestor::div[@class[contains(.,'product-list-info')]]";
+	private static final String XPATH_ANCESTOR_ARTICLE = "//ancestor::div[@class[contains(.,'product-list-info')]]";
+	
 	private String getXPathDataArticuloOfType(TypeArticle typeArticle) {
 		String xpathPrecio = secPrecios.getXPathPrecioArticulo(typeArticle);
-		return (xpathArticuloBase + xpathPrecio + XPathAncestorArticle);
+		return (xpathArticuloBase + xpathPrecio + XPATH_ANCESTOR_ARTICLE);
 	}
 	
 	private String getXPathArticuloConColores() {
@@ -116,8 +106,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	
 	@Override
 	public void hideMenus() {
-		SecMenusDesktop secMenus = new SecMenusDesktop(app, channel);
-		secMenus.hideMenus();
+		new SecMenusDesktop().hideMenus();
 	}
 	
 	private String getXPathLabel(LabelArticle label) {
@@ -766,7 +755,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(channel);
 		secFiltros.makeFilters(Visibility.Invisible);
 		
-		SecLineasMenuDesktop secLineasMenuDesktop = SecLineasMenuDesktop.factory(app, channel);
+		SecLineasMenuDesktop secLineasMenuDesktop = new SecLineasMenuDesktopNew();
 		secLineasMenuDesktop.bringMenuBackground();
 		
 		hearthIcon.click();

@@ -23,6 +23,7 @@ import com.mng.robotest.test.steps.shop.modales.ModalCambioPaisSteps;
 public class SecFooterSteps extends StepBase {
 	
 	private final SecFooter secFooter = new SecFooter();
+	private final PageInputDataSolMangoCard pageInputDataSolMangoCard = new PageInputDataSolMangoCard();
 	
 	@Validation 
 	public ChecksTM validaLinksFooter() throws Exception { 
@@ -76,13 +77,15 @@ public class SecFooterSteps extends StepBase {
 	public ChecksTM validaPaginaAyuda() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
 		String telefono = "900 150 543";
+		PageAyuda pageAyuda = new PageAyuda();
+		
 		checks.add(
 			"Aparece \"Preguntas Frecuentes\" en la página",
-			PageAyuda.isPresentCabPreguntasFreq(channel, driver), State.Warn);
+			pageAyuda.isPresentCabPreguntasFreq(), State.Warn);
 		
 		checks.add(
 			"Aparece la sección \"Contáctanos\" con el número de teléfono " + telefono,
-			PageAyuda.isPresentTelefono(driver, telefono), State.Warn);
+			pageAyuda.isPresentTelefono(telefono), State.Warn);
 		
 		return checks;
 	}
@@ -97,7 +100,7 @@ public class SecFooterSteps extends StepBase {
 	 public void selectLoQuieroAhoraButton() {
 		 PageMangoCard pageMangoCard = new PageMangoCard();
 		 String ventanaOriginal = driver.getWindowHandle();
-		 pageMangoCard.clickOnWantMangoCardNow(channel);
+		 pageMangoCard.clickOnWantMangoCardNow();
 		 if(!driver.getCurrentUrl().contains("shop-ci")) {
 			 checkAfterClickLoQuieroAhoraButton();
 			 selectLoQuieroAhoraUnderForm();
@@ -160,7 +163,8 @@ public class SecFooterSteps extends StepBase {
 		int maxSeconds = 3;
 	 	checks.add(
 	 		"Aparece un modal de aviso de trámite de la solicitud con un botón \"Continuar\" (la esperamos hasta " + maxSeconds + " segundos)",
-	 		PageInputDataSolMangoCard.isPresentBotonContinuarModalUntil(maxSeconds, driver), State.Warn);
+	 		new PageInputDataSolMangoCard().isPresentBotonContinuarModalUntil(maxSeconds), State.Warn);
+	 	
 	 	return checks;
 	 }
 	 
@@ -168,7 +172,7 @@ public class SecFooterSteps extends StepBase {
 		description="Seleccionar el botón \"Continuar\"", 
 		expected="Aparece la página del formulario de solicitud de la tarjeta")
 	 private void selectContinueButton(String ventanaOriginal) {
-		 PageInputDataSolMangoCard.clickBotonCerrarModal(driver);
+		 pageInputDataSolMangoCard.clickBotonCerrarModal();
 		 checkValidPageTarjetaMango(ventanaOriginal);
 	 }
 	 
@@ -177,34 +181,34 @@ public class SecFooterSteps extends StepBase {
   		ChecksTM checks = ChecksTM.getNew();
 	 	checks.add(
 	 		"Aparece la página de Solicitud de tu Tarjeta MANGO",
-	 		PageInputDataSolMangoCard.isPage2(driver), State.Defect);
+	 		pageInputDataSolMangoCard.isPage2(), State.Defect);
 	 	
 	 	try {
 			//Nos posicionamos en el iframe central para recorrer contenido (datos personales y datos bancarios).
-			PageInputDataSolMangoCard.gotoiFramePage2(driver);
+			pageInputDataSolMangoCard.gotoiFramePage2();
 		 	checks.add(
 		 		"Aparece el apartado \"Datos personales\"",
-		 		PageInputDataSolMangoCard.isPresentDatosPersonalesPage2(driver), State.Warn);
+		 		pageInputDataSolMangoCard.isPresentDatosPersonalesPage2(), State.Warn);
 		 	
 		 	checks.add(
 		 		"Aparece el apartado \"Datos bancarios\"",
-		 		PageInputDataSolMangoCard.isPresentDatosBancariosPage2(driver), State.Defect);
+		 		pageInputDataSolMangoCard.isPresentDatosBancariosPage2(), State.Defect);
 		 	
 		 	checks.add(
 		 		"Aparece el apartado \"Datos de contacto\"",
-		 		PageInputDataSolMangoCard.isPresentDatosContactoPage2(driver), State.Warn);
+		 		pageInputDataSolMangoCard.isPresentDatosContactoPage2(), State.Warn);
 		 	
 		 	checks.add(
 		 		"Aparece el apartado \"Datos socioeconómicos\"",
-		 		PageInputDataSolMangoCard.isPresentDatosSocioeconomicosPage2(driver), State.Warn);
+		 		pageInputDataSolMangoCard.isPresentDatosSocioeconomicosPage2(), State.Warn);
 		 	
 		 	checks.add(
 		 		"Aparece el apartado \"Modalidad de pago de tu MANGO Card\"",
-		 		PageInputDataSolMangoCard.isPresentModalidadpagoPage2(driver), State.Warn);
+		 		pageInputDataSolMangoCard.isPresentModalidadpagoPage2(), State.Warn);
 		 	
 		 	checks.add(
 		 		"Aparece el botón \"Continuar\"",
-		 		PageInputDataSolMangoCard.isPresentButtonContinuarPage2(driver), State.Warn);
+		 		pageInputDataSolMangoCard.isPresentButtonContinuarPage2(), State.Warn);
 	 	}
 		finally {
 			driver.close();

@@ -25,7 +25,6 @@ import com.mng.robotest.test.steps.shop.acceptcookies.ModalSetCookiesSteps;
 import com.mng.robotest.test.steps.shop.acceptcookies.SectionCookiesSteps;
 import com.mng.robotest.test.utils.testab.TestABactive;
 
-
 public class PagePrehome extends PageBase {
 
 	enum ButtonEnter { ENTER, CONTINUAR };
@@ -158,7 +157,7 @@ public class PagePrehome extends PageBase {
 	public void accesoShopViaPrehome(boolean acceptCookies) throws Exception {
 		previousAccessShopSteps(acceptCookies);
 		selecPaisIdiomaYAccede();
-		ModalLoyaltyAfterAccess.closeModalIfVisible(driver);
+		new ModalLoyaltyAfterAccess().closeModalIfVisible();
 		if (channel.isDevice()) {
 			SecCabeceraOutlet_Mobil secCabecera = new SecCabeceraOutlet_Mobil();
 			secCabecera.closeSmartBannerIfExistsMobil();
@@ -220,7 +219,7 @@ public class PagePrehome extends PageBase {
 	}
 	
 	public void selecionPais() throws Exception {
-		new WebDriverWait(driver, 5).until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPATH_SELECT_PAISES)));
+		state(Present, XPATH_SELECT_PAISES).wait(5).check();
 		
 		//Damos de alta la cookie de newsLetter porque no podemos gestionar correctamente el cierre 
 		//del modal en la página de portada (es aleatorio y aparece en un intervalo de 0 a 5 segundos)

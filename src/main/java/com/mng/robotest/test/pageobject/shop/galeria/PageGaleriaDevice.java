@@ -137,7 +137,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	@Override
 	public WebElement getArticuloConVariedadColoresAndHover(int numArticulo) {
 		String xpathArticulo = getXPathArticuloConVariedadColores(numArticulo);
-		WebElement articulo = driver.findElement(By.xpath(xpathArticulo)); 
+		WebElement articulo = getElement(xpathArticulo); 
 		hoverArticle(articulo);
 		return articulo;
 	}
@@ -155,13 +155,12 @@ public class PageGaleriaDevice extends PageGaleria {
 	@Override
 	public WebElement getColorArticulo(WebElement articulo, boolean selected, int numColor) {
 		String xpathImgColorRelArticle = getXPathImgColorRelativeArticle(selected);
-		return (articulo.findElements(By.xpath("." + xpathImgColorRelArticle)).get(numColor-1));
+		return getElements("." + xpathImgColorRelArticle).get(numColor-1);
 	}
 
 	@Override
 	public int getNumFavoritoIcons() {
-		By byHearthIcon = By.xpath(getXPathHearthIconRelativeArticle());
-		return (driver.findElements(byHearthIcon).size());
+		return getElements(getXPathHearthIconRelativeArticle()).size();
 	}
 		
 	@Override
@@ -206,25 +205,25 @@ public class PageGaleriaDevice extends PageGaleria {
 	
 	@Override
 	public boolean isArticleRebajado(WebElement articulo) {
-		return (state(Present, articulo)
-				.by(By.xpath("." + TipoPrecio.PRECIO_INICIAL_TACHADO.getXPath())).check());
+		return state(Present, articulo)
+				.by(By.xpath("." + TipoPrecio.PRECIO_INICIAL_TACHADO.getXPath())).check();
 	}
 	
 	@Override
 	public String getCodColorArticulo(int numArticulo) throws Exception {
 		String xpathArticulo = "(" + xpathArticuloBase + ")[" + numArticulo + "]";
-		String image = getImagenArticulo(driver.findElement(By.xpath(xpathArticulo)));
-		return (UtilsPageGaleria.getCodColorFromSrcImg(image));
+		String image = getImagenArticulo(getElement(xpathArticulo));
+		return UtilsPageGaleria.getCodColorFromSrcImg(image);
 	}
 	
 	@Override
 	public String getNameColorFromCodigo(String codigoColor) {
 		String xpathImgColor = getXPathImgCodigoColor(codigoColor);
-		if (!state(Present, By.xpath(xpathImgColor)).check()) {
+		if (!state(Present, xpathImgColor).check()) {
 			return Constantes.colorDesconocido;
 		}
-		WebElement imgColorWeb = driver.findElement(By.xpath(xpathImgColor));
-		return (imgColorWeb.getAttribute("title"));
+		WebElement imgColorWeb = getElement(xpathImgColor);
+		return imgColorWeb.getAttribute("title");
 	}
 	
 	@Override
@@ -237,21 +236,20 @@ public class PageGaleriaDevice extends PageGaleria {
 			listArtFav.add(articulo);
 			
 		}
-		
 		return listArtFav;
 	}
 	
 	@Override
 	public boolean isArticleWithHearthIconPresentUntil(int posArticle, int maxSeconds) {
-		String XPathIcon = getXPathArticleHearthIcon(posArticle);
-		return (state(Present, By.xpath(XPathIcon)).wait(maxSeconds).check());
+		String xpathIcon = getXPathArticleHearthIcon(posArticle);
+		return state(Present, xpathIcon).wait(maxSeconds).check();
 	}
 	
 	@Override
 	public void clickHearhIcon(int posArticle) throws Exception {
 		//Nos posicionamos en el icono del Hearth 
-		String XPathIcon = getXPathArticleHearthIcon(posArticle);
-		WebElement hearthIcon = driver.findElement(By.xpath(XPathIcon));
+		String xpathIcon = getXPathArticleHearthIcon(posArticle);
+		WebElement hearthIcon = getElement(xpathIcon);
 		moveToElement(hearthIcon, driver);
 		
 		//Clicamos y esperamos a que el icono cambie de estado
@@ -272,7 +270,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	
 	@Override
 	public int getNumArticulosFromPagina(int pagina, TypeArticleDesktop sizeArticle) {
-		return (getListArticulosFromPagina(pagina).size());
+		return getListArticulosFromPagina(pagina).size();
 	}
 	
 	@Override
@@ -286,9 +284,8 @@ public class PageGaleriaDevice extends PageGaleria {
 	
 	@Override
 	public boolean isHeaderArticlesVisible(String textHeader) {
-		By byHeader = By.xpath(XPATH_HEADER_ARTICLES);
-		if (state(Visible, byHeader).check()) {
-			return (driver.findElement(byHeader).getText().contains(textHeader));
+		if (state(Visible, XPATH_HEADER_ARTICLES).check()) {
+			return getElement(XPATH_HEADER_ARTICLES).getText().contains(textHeader);
 		}
 		return false;
 	}
@@ -319,7 +316,7 @@ public class PageGaleriaDevice extends PageGaleria {
 		}
 		
 		String xpathTalla = getXPathTallaAvailableArticle(posArticulo, posTalla);
-		WebElement tallaToSelect = driver.findElement(By.xpath(xpathTalla));
+		WebElement tallaToSelect = getElement(xpathTalla);
 		ArticuloScreen articulo = getArticuloObject(posArticulo);
 		articulo.setTalla(Talla.fromLabel(tallaToSelect.getText()));
 		tallaToSelect.click();
@@ -343,8 +340,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	
 	private List<WebElement> getListArticulosFromPagina(int numPagina) {
 		moveToPagina(numPagina);
-		By byArticulo = By.xpath(getXPathArticuloFromPagina(numPagina));
-		return (driver.findElements(byArticulo));
+		return getElements(getXPathArticuloFromPagina(numPagina));
 	}
 	
 	private String getXPathArticuloFromPagina(int pagina) {
@@ -353,7 +349,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	}
 	
 	private void moveToPagina(int numPagina) {
-		moveToElement(driver.findElement(By.xpath(getXPathPagina(numPagina))), driver);
+		moveToElement(getXPathPagina(numPagina));
 	}
 	
 	private void clickHearthIconPreventingOverlapping(WebElement hearthIcon) throws Exception {

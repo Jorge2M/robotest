@@ -5,28 +5,17 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusFiltroDiscount;
 
-
 public class SecMenusDesktop extends PageBase {
 	
-	public final SecBloquesMenuDesktop secBloquesMenu;
-	public final SecMenuSuperiorDesktop secMenuSuperior;
-	public final ModalUserSesionShopDesktop secMenusUser;
-	public final SecMenuLateralDesktop secMenuLateral;
-	public final SecMenusFiltroDiscount secMenusFiltroDiscount;
-	
-	public SecMenusDesktop(AppEcom app, Channel channel) {
-		secBloquesMenu = SecBloquesMenuDesktop.factory(app, channel);
-		secMenuSuperior = SecMenuSuperiorDesktop.getNew(app, channel);
-		secMenusUser = ModalUserSesionShopDesktop.getNew(driver);
-		secMenuLateral = new SecMenuLateralDesktop();
-		secMenusFiltroDiscount = new SecMenusFiltroDiscount();
-	}
+	public final SecBloquesMenuDesktop secBloquesMenu = new SecBloquesMenuDesktopNew();
+	public final SecMenuSuperiorDesktop secMenuSuperior = new SecMenuSuperiorDesktop();
+	public final ModalUserSesionShopDesktop secMenusUser = new ModalUserSesionShopDesktop();
+	public final SecMenuLateralDesktop secMenuLateral = new SecMenuLateralDesktop();
+	public final SecMenusFiltroDiscount secMenusFiltroDiscount = new SecMenusFiltroDiscount();
 	
 	public void hideMenus() {
     	Actions actions = new Actions(driver);

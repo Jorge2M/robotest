@@ -119,10 +119,9 @@ public class AccesoSteps extends StepBase {
 		}
 		
 		if (channel==Channel.desktop) {
-			SecMenusDesktop secMenus = new SecMenusDesktop(app, channel);
 			checks.add(
 				"Aparece una página con menús de MANGO",
-				secMenus.secMenuSuperior.secLineas.isPresentLineasMenuWrapp(), State.Warn);
+				new SecMenusDesktop().secMenuSuperior.secLineas.isPresentLineasMenuWrapp(), State.Warn);
 		}
 
 		return checks;

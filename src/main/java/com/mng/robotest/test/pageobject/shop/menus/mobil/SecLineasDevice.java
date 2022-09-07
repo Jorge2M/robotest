@@ -4,7 +4,6 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.javascript;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -19,16 +18,16 @@ public abstract class SecLineasDevice extends PageBase {
 
 	public abstract String getXPathLineaLink(LineaType lineaType) throws IllegalArgumentException;
 	
-	static String XPathCapaMenuLineasTablet = "//div[@class='menu-section-brands']";
-	static String XPathCapaMenuLineasMobil = "//div[@class='section-detail-list']"; 
+	private static final String XPATH_CAPA_MENU_LINEAS_TABLET = "//div[@class='menu-section-brands']";
+	private static final String XPATH_CAPA_MENU_LINEAS_MOBIL = "//div[@class='section-detail-list']"; 
 	
-	static String IniXPathLinkSublinea = "//div[@data-label[contains(.,'interior-"; 
-	static String XPathLinkSublineaNina =  IniXPathLinkSublinea + "nina')]]";
-	static String XPathLinkSublineaBebeNina = IniXPathLinkSublinea + "bebe_nina')]]";
-	static String XPathLinkSublineaTeenNina = IniXPathLinkSublinea + "chica')]]";
-	static String XPathLinkSublineaNino = IniXPathLinkSublinea + "nino')]]";
-	static String XPathLinkSublineaBebeNino = IniXPathLinkSublinea + "bebe_nino')]]";
-	static String XPathLinkSublineaTeenNino = IniXPathLinkSublinea + "chico')]]";
+	private static final String INI_XPATH_LINK_SUBLINEA = "//div[@data-label[contains(.,'interior-"; 
+	private static final String XPATH_LINK_SUBLINEA_NINA =  INI_XPATH_LINK_SUBLINEA + "nina')]]";
+	private static final String XPATH_LINK_SUBLINEA_BEBE_NINA = INI_XPATH_LINK_SUBLINEA + "bebe_nina')]]";
+	private static final String XPATH_LINK_SUBLINEA_TEEN_NINA = INI_XPATH_LINK_SUBLINEA + "chica')]]";
+	private static final String XPATH_LINK_SUBLINEA_NINO = INI_XPATH_LINK_SUBLINEA + "nino')]]";
+	private static final String XPATH_LINK_SUBLINEA_BEBE_NINO = INI_XPATH_LINK_SUBLINEA + "bebe_nino')]]";
+	private static final String XPATH_LINK_SUBLINEA_TEEN_NINO = INI_XPATH_LINK_SUBLINEA + "chico')]]";
 	
 	public static SecLineasDevice make(Channel channel, AppEcom app, WebDriver driver) {
 		switch (channel) {
@@ -36,33 +35,33 @@ public abstract class SecLineasDevice extends PageBase {
 			return SecLineasTablet.getNew(app, driver); 
 		case mobile:
 		default:
-			return SecLineasMobil.getNew(app, driver);
+			return SecLineasMobil.getNew(app);
 		}
 	}
 	
 	public String getXPathSublineaNinosLink(SublineaType sublineaType) {
 		switch (sublineaType) {
 		case nina_nina:
-			return getXPathCapaMenus() + XPathLinkSublineaNina;
+			return getXPathCapaMenus() + XPATH_LINK_SUBLINEA_NINA;
 		case teen_nina:
-			return getXPathCapaMenus() + XPathLinkSublineaTeenNina;
+			return getXPathCapaMenus() + XPATH_LINK_SUBLINEA_TEEN_NINA;
 		case nina_bebe:
-			return getXPathCapaMenus() + XPathLinkSublineaBebeNina;
+			return getXPathCapaMenus() + XPATH_LINK_SUBLINEA_BEBE_NINA;
 		case nino_nino:
-			return getXPathCapaMenus() + XPathLinkSublineaNino;
+			return getXPathCapaMenus() + XPATH_LINK_SUBLINEA_NINO;
 		case teen_nino:
-			return getXPathCapaMenus() + XPathLinkSublineaTeenNino;
+			return getXPathCapaMenus() + XPATH_LINK_SUBLINEA_TEEN_NINO;
 		case nino_bebe:
 		default:
-			return getXPathCapaMenus() + XPathLinkSublineaBebeNino;
+			return getXPathCapaMenus() + XPATH_LINK_SUBLINEA_BEBE_NINO;
 		}
 	}
 	
 	private String getXPathCapaMenus() {
 		if (channel==Channel.tablet) {
-			return XPathCapaMenuLineasTablet;
+			return XPATH_CAPA_MENU_LINEAS_TABLET;
 		}
-		return XPathCapaMenuLineasMobil;
+		return XPATH_CAPA_MENU_LINEAS_MOBIL;
 	}
 	
 	public void selectLinea(Linea linea, SublineaType sublineaType) {
@@ -76,8 +75,7 @@ public abstract class SecLineasDevice extends PageBase {
 	public void selecSublineaNinosIfNotSelected(Linea linea, SublineaType sublineaType) {
 		selectLinea(linea);
 		if (!isSelectedSublineaNinos(sublineaType)) {
-			By byElem = By.xpath(getXPathSublineaNinosLink(sublineaType));
-			click(byElem).type(javascript).exec();
+			click(getXPathSublineaNinosLink(sublineaType)).type(javascript).exec();
 		}
 	}
 
@@ -86,14 +84,12 @@ public abstract class SecLineasDevice extends PageBase {
 		SecCabecera secCabecera = SecCabecera.getNew(channel, app);
 		secCabecera.clickIconoMenuHamburguerMobil(toOpenMenus);
 		if ("n".compareTo(linea.getExtended())==0) {
-			By byElem = By.xpath(getXPathLineaLink(linea.getType()));
-			click(byElem).type(javascript).exec();
+			click(getXPathLineaLink(linea.getType())).type(javascript).exec();
 		}
  	}
 	
 	public boolean isLineaPresent(LineaType lineaType) {
-		String xpathLinea = getXPathLineaLink(lineaType);
-		return (state(Present, By.xpath(xpathLinea)).check());
+		return state(Present, getXPathLineaLink(lineaType)).check();
 	}
 	
 	public boolean isSelectedLinea(LineaType lineaType) {
@@ -101,8 +97,8 @@ public abstract class SecLineasDevice extends PageBase {
 		if (app==AppEcom.outlet || channel==Channel.tablet) {
 			xpathLineaWithFlagSelected+="/..";
 		}
-		if (state(Present, By.xpath(xpathLineaWithFlagSelected)).check()) {
-			return (driver.findElement(By.xpath(xpathLineaWithFlagSelected)).getAttribute("class").contains("selected"));
+		if (state(Present, xpathLineaWithFlagSelected).check()) {
+			return getElement(xpathLineaWithFlagSelected).getAttribute("class").contains("selected");
 		}
 		return false;
 	}
@@ -112,8 +108,8 @@ public abstract class SecLineasDevice extends PageBase {
 		if (app==AppEcom.outlet || channel==Channel.tablet) {
 			xpathSublineaWithFlagOpen+="/..";
 		}
-		if (state(Present, By.xpath(xpathSublineaWithFlagOpen)).check()) {
-			String classDropdown = driver.findElement(By.xpath(xpathSublineaWithFlagOpen)).getAttribute("class");
+		if (state(Present, xpathSublineaWithFlagOpen).check()) {
+			String classDropdown = getElement(xpathSublineaWithFlagOpen).getAttribute("class");
 			return (classDropdown.contains("open") || classDropdown.contains("-up"));
 		}
 		return false;
@@ -133,17 +129,15 @@ public abstract class SecLineasDevice extends PageBase {
 			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaType.nino_nino);
 			break;
 		}
-		return (state(Visible, By.xpath(xpathBlockSublineas)).check());
+		return state(Visible, xpathBlockSublineas).check();
 	}
 	
 	private String getXPathLiSublineaNinos(SublineaType sublineaType) {
-		String xpathLinkSublinea = getXPathSublineaNinosLink(sublineaType);		
-		return (xpathLinkSublinea + "/..");
+		return getXPathSublineaNinosLink(sublineaType) + "/..";		
 	}
 	
 	private String getXPathBlockSublineasNinos(SublineaType sublineaType) {
-		String xpathSublineaLi = getXPathLiSublineaNinos(sublineaType);		
-		return (xpathSublineaLi + "/..");
+		return getXPathLiSublineaNinos(sublineaType) + "/..";		
 	}
 	
 }

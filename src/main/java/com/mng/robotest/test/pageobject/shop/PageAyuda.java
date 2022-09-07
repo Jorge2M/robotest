@@ -1,32 +1,26 @@
 package com.mng.robotest.test.pageobject.shop;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import com.github.jorge2m.testmaker.conf.Channel;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
-public class PageAyuda {
+public class PageAyuda extends PageBase {
 	
-	static String XPathCabPreguntasFreq = "//h1[text()[contains(.,'Preguntas frecuentes')]]";
-	
-	static String XPathFAQMobile = "//li[@class='leaf']//a[text()[contains(.,'Preguntas frecuentes')]]";
+	private static final String XPATH_CAB_PREGUNTAS_FREQ = "//h1[text()[contains(.,'Preguntas frecuentes')]]";
+	private static final String XPATH_FAQ_MOBILE = "//li[@class='leaf']//a[text()[contains(.,'Preguntas frecuentes')]]";
 
-	public static String getXPathTelefono(String telefono) {
+	private String getXPathTelefono(String telefono) {
 		return ("//*[@class='text_container']/p[text()[contains(.,'" + telefono + "')]]");
 	}
 
-	public static boolean isPresentCabPreguntasFreq(Channel channel, WebDriver driver) {
+	public boolean isPresentCabPreguntasFreq() {
 		if (channel.isDevice()) {
-			return (state(Present, By.xpath(XPathFAQMobile), driver).check());
+			return state(Present, XPATH_FAQ_MOBILE).check();
 		}
-		return (state(Present, By.xpath(XPathCabPreguntasFreq), driver).check());
+		return state(Present, XPATH_CAB_PREGUNTAS_FREQ).check();
 	}
 
-	public static boolean isPresentTelefono(WebDriver driver, String telefono) {
-		String xpath = getXPathTelefono(telefono);
-		return (state(Present, By.xpath(xpath), driver).check());
+	public boolean isPresentTelefono(String telefono) {
+		return state(Present, getXPathTelefono(telefono)).check();
 	}
 }

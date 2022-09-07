@@ -1,6 +1,7 @@
 package com.mng.robotest.test.steps.shop.genericchecks;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 
@@ -83,7 +84,7 @@ public class CheckerSEO extends PageBase implements Checker {
 	
 	private ArrayList<String> validaCanonical(WebDriver driver) throws Exception {
 		ArrayList<String> listaErrorsInHtmlFormat = new ArrayList<>();
-		if (!AllPages.isPresentTagCanonical(driver)) {
+		if (!new AllPages().isPresentTagCanonical()) {
 			//El canonical ha de aparecer como mínimo en las páginas de Portada, Catálogo y Ficha
 			PageFicha pageFicha = PageFicha.of(channel);
 			PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop);
@@ -101,14 +102,11 @@ public class CheckerSEO extends PageBase implements Checker {
 		return listaErrorsInHtmlFormat;
 	}
 	
-	/**
-	 * @return la lista de errores en formato HTML relacionados con el tag "Robots" 
-	 */
-	private ArrayList<String> validacionRobots(WebDriver driver) {
-		ArrayList<String> listaErrorsInHtmlFormat = new ArrayList<>();
+	private List<String> validacionRobots(WebDriver driver) {
+		List<String> listaErrorsInHtmlFormat = new ArrayList<>();
 		
 		//Buscamos el robots
-		boolean robotNoindex = AllPages.isPresentTagRobots(driver);
+		boolean robotNoindex = new AllPages().isPresentTagRobots();
 		String operativaRobots = "";
 		String currentURL = driver.getCurrentUrl();
 		
@@ -150,8 +148,9 @@ public class CheckerSEO extends PageBase implements Checker {
 		}
 		
 		//Si existe el tag canonical (apuntando a la propia página) no ha de exitir el tag robot/noindex
-		if (AllPages.isPresentTagCanonical(driver)) {
-			String urlTagCanonical = AllPages.getURLTagCanonical(driver);
+		AllPages allPages = new AllPages();
+		if (allPages.isPresentTagCanonical()) {
+			String urlTagCanonical = allPages.getURLTagCanonical();
 			if (robotNoindex && urlTagCanonical.compareTo(driver.getCurrentUrl())!=0) {
 				listaErrorsInHtmlFormat.add("<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">Existe el tag robot/noindex junto el canonical apuntando a URL de otra página (" + urlTagCanonical + ")</c>");
 			}

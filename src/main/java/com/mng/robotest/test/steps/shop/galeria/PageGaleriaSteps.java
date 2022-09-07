@@ -679,8 +679,7 @@ public class PageGaleriaSteps extends StepBase {
 	 		"El banner de cabecera contiene el porcentaje de descuento<b>" + maxPercDiscount + "</b>",
 	 		UtilsTest.textContainsSetenta(textBanner, idioma), State.Warn);
 	 	
-	 	SecMenusDesktop secMenus = new SecMenusDesktop(app, channel);
-	 	int menusDescVisibles = secMenus.secMenusFiltroDiscount.getNumberOfVisibleMenus();
+	 	int menusDescVisibles = new SecMenusDesktop().secMenusFiltroDiscount.getNumberOfVisibleMenus();
 	 	checks.add(
 	 		"No aparece ningún filtro de descuento",
 	 		menusDescVisibles==0, State.Warn);

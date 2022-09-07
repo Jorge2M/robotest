@@ -6,74 +6,73 @@ import java.util.Map.Entry;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.checkout.DataDireccion;
 import com.mng.robotest.test.pageobject.shop.checkout.DataDireccion.DataDirType;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+public abstract class ModalDireccion extends PageBase {
 
-public abstract class ModalDireccion {
-
-	static String XPathInputNif = "//input[@id[contains(.,'cfDni')]]";
-	static String XPathInputName = "//input[@id[contains(.,'cfName')]]";
-	static String XPathInputApellidos = "//input[@id[contains(.,'cfSname')]]";
-	static String XPathInputDireccion = "//input[@id[contains(.,'cfDir1')]]";
-	static String XPathInputCodpostal = "//input[@id[contains(.,'cfCp')]]";
-	static String XPathInputEmail = "//input[@id[contains(.,'cfEmail')]]";
-	static String XPathInputTelefono = "//input[@id[contains(.,'cfTelf')]]";
-	static String XPathSelectPoblacion = "//select[@id[contains(.,':localidades')]]";
-	static String XPathSelectProvincia = "//select[@id[contains(.,':estadosPais')]]";
-	static String XPathSelectPais = "//select[@id[contains(.,':pais')]]";
+	private static final String XPATH_INPUT_NIF = "//input[@id[contains(.,'cfDni')]]";
+	private static final String XPATH_INPUT_NAME = "//input[@id[contains(.,'cfName')]]";
+	private static final String XPATH_INPUT_APELLIDOS = "//input[@id[contains(.,'cfSname')]]";
+	private static final String XPATH_INPUT_DIRECCION = "//input[@id[contains(.,'cfDir1')]]";
+	private static final String XPATH_INPUT_CODPOSTAL = "//input[@id[contains(.,'cfCp')]]";
+	private static final String XPATH_INPUT_EMAIL = "//input[@id[contains(.,'cfEmail')]]";
+	private static final String XPATH_INPUT_TELEFONO = "//input[@id[contains(.,'cfTelf')]]";
+	private static final String XPATH_SELECT_POBLACION = "//select[@id[contains(.,':localidades')]]";
+	private static final String XPATH_SELECT_PROVINCIA = "//select[@id[contains(.,':estadosPais')]]";
+	private static final String XPATH_SELECT_PAIS = "//select[@id[contains(.,':pais')]]";
 	
-	private static String getXPathInput(DataDirType inputType) {
+	private String getXPathInput(DataDirType inputType) {
 		switch (inputType) {
 		case nif:
-			return XPathInputNif;
+			return XPATH_INPUT_NIF;
 		case name:
-			return XPathInputName;
+			return XPATH_INPUT_NAME;
 		case apellidos:
-			return XPathInputApellidos;
+			return XPATH_INPUT_APELLIDOS;
 		case direccion:
-			return XPathInputDireccion;
+			return XPATH_INPUT_DIRECCION;
 		case codpostal:
-			return XPathInputCodpostal;
+			return XPATH_INPUT_CODPOSTAL;
 		case email:
-			return XPathInputEmail;
+			return XPATH_INPUT_EMAIL;
 		case telefono:
-			return XPathInputTelefono;
+			return XPATH_INPUT_TELEFONO;
 		default:
 			return "";
 		}
 	}
 
-	public static void sendDataToInputsNTimes(DataDireccion dataToSend, int nTimes, String XPathFormModal, WebDriver driver) throws Exception {
+	public void sendDataToInputsNTimes(DataDireccion dataToSend, int nTimes, String xpathFormModal) 
+			throws Exception {
 		for (int i=0; i<nTimes; i++)
-			sendDataToInputs(dataToSend, XPathFormModal, driver);
+			sendDataToInputs(dataToSend, xpathFormModal);
 	}
 	
-	public static void sendDataToInputs(DataDireccion dataToSend, String XPathFormModal, WebDriver driver) throws Exception {
+	public void sendDataToInputs(DataDireccion dataToSend, String xpathFormModal) 
+			throws Exception {
 		try {
 			Iterator<Entry<DataDirType, String>> it = dataToSend.getDataDireccion().entrySet().iterator();
 			while (it.hasNext()) {
 				Map.Entry<DataDirType, String> pair = it.next();
 				switch (pair.getKey()) {
 				case poblacion:
-					selectPoblacion(pair.getValue(), XPathFormModal, driver);
+					selectPoblacion(pair.getValue(), xpathFormModal);
 					break;
 				case provincia:
-					selectProvincia(pair.getValue(), XPathFormModal, driver);
+					selectProvincia(pair.getValue(), xpathFormModal);
 					break;
 				case codigoPais:
-					selectPais(pair.getValue(), XPathFormModal, driver);
+					selectPais(pair.getValue(), xpathFormModal);
 					break;
 				default:
-					sendKeysToInput(pair.getKey(), pair.getValue(), XPathFormModal, driver);				
+					sendKeysToInput(pair.getKey(), pair.getValue(), xpathFormModal);				
 				}
 			}
 		}
@@ -84,34 +83,35 @@ public abstract class ModalDireccion {
 		}
 	}
 	
-	public static void selectPoblacion(String poblacion, String XPathFormModal, WebDriver driver) throws Exception {
-		new WebDriverWait(driver, 2).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPathFormModal + XPathSelectPoblacion)));
+	public void selectPoblacion(String poblacion, String xpathFormModal) 
+			throws Exception {
+		state(State.Visible, xpathFormModal + XPATH_SELECT_POBLACION).wait(2).check();
 		Thread.sleep(1000);
-		new Select(driver.findElement(By.xpath(XPathFormModal + XPathSelectPoblacion))).selectByValue(poblacion);
+		new Select(getElement(xpathFormModal + XPATH_SELECT_POBLACION)).selectByValue(poblacion);
 	}
 	
-	public static void selectProvincia(String provincia, String XPathFormModal, WebDriver driver) {
-		new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(By.xpath(XPathFormModal + XPathSelectProvincia)));
-		new Select(driver.findElement(By.xpath(XPathFormModal + XPathSelectProvincia))).selectByVisibleText(provincia);
+	public void selectProvincia(String provincia, String xpathFormModal) {
+		state(State.Visible, xpathFormModal + XPATH_SELECT_PROVINCIA).wait(2).check();
+		new Select(getElement(xpathFormModal + XPATH_SELECT_PROVINCIA)).selectByVisibleText(provincia);
 	}	
 	
-	public static void selectPais(String codigoPais, String XPathFormModal, WebDriver driver) {
-		String xpathSelectedPais = XPathSelectPais + "/option[@selected='selected' and @value='" + codigoPais + "']";
+	public void selectPais(String codigoPais, String xpathFormModal) {
+		String xpathSelectedPais = XPATH_SELECT_PAIS + "/option[@selected='selected' and @value='" + codigoPais + "']";
 		if (!state(Present, By.xpath(xpathSelectedPais), driver).check()) {
-			new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(By.xpath(XPathFormModal + XPathSelectPais)));
-			new Select(driver.findElement(By.xpath(XPathFormModal + XPathSelectPais))).selectByValue(codigoPais);
+			state(State.Visible, xpathFormModal + XPATH_SELECT_PAIS).wait(2).check();
+			new Select(getElement(xpathFormModal + XPATH_SELECT_PAIS)).selectByValue(codigoPais);
 		}
 	}	
 	
-	private static void sendKeysToInput(DataDirType inputType, String dataToSend, String XPathFormModal, WebDriver driver) {
-		String xpathInput = XPathFormModal + getXPathInput(inputType);
-		String contenido = driver.findElement(By.xpath(xpathInput)).getAttribute("value");
+	private void sendKeysToInput(DataDirType inputType, String dataToSend, String xpathFormModal) {
+		String xpathInput = xpathFormModal + getXPathInput(inputType);
+		String contenido = getElement(xpathInput).getAttribute("value");
 		if (contenido.compareTo(dataToSend)!=0) {
 			if ("".compareTo(contenido)!=0) {
-				driver.findElement(By.xpath(xpathInput)).clear();
+				getElement(xpathInput).clear();
 			}
-			driver.findElement(By.xpath(xpathInput)).sendKeys(dataToSend);
-			driver.findElement(By.xpath(xpathInput)).sendKeys(Keys.TAB);
+			getElement(xpathInput).sendKeys(dataToSend);
+			getElement(xpathInput).sendKeys(Keys.TAB);
 		}
 	}
 }

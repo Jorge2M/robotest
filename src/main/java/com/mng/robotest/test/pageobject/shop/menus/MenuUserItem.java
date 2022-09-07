@@ -142,7 +142,7 @@ public class MenuUserItem {
 	
 	private ElementPage getMenuCerrarSesion() {
 		if (channel==Channel.desktop) {
-			return MenuUserDesktop.cerrarSesion;
+			return MenuUserDesktop.CERRAR_SESION;
 		}
 		if (channel.isDevice()) {
 			return MenuUserDevice.cerrarsesion;
@@ -152,7 +152,7 @@ public class MenuUserItem {
 	
 	private ElementPage getMenuRegistrate() {
 		if (channel==Channel.desktop) {
-			return MenuUserDesktop.registrate;
+			return MenuUserDesktop.REGISTRATE;
 		}
 		if (channel.isDevice()) {
 			return MenuUserDevice.registrate;
@@ -185,7 +185,7 @@ public class MenuUserItem {
 	
 	private ElementPage getMenuMisCompras() {
 		if (channel==Channel.desktop) {
-			return MenuUserDesktop.misCompras;
+			return MenuUserDesktop.MIS_COMPRAS;
 		}
 		if (channel.isDevice()) {
 			return MenuUserDevice.miscompras;
@@ -199,7 +199,7 @@ public class MenuUserItem {
 	
 	private ElementPage getMenuMangoLikesYou() {
 		if (channel==Channel.desktop) {
-			return MenuUserDesktop.mangoLikesYou;
+			return MenuUserDesktop.MANGO_LIKES_YOU;
 		}
 		if (channel.isDevice()) {
 			return MenuUserDevice.mangolikesyou;
@@ -209,7 +209,7 @@ public class MenuUserItem {
 	
 	private ElementPage getMenuAyuda() {
 		if (channel==Channel.desktop) {
-			return MenuUserDesktop.ayuda;
+			return MenuUserDesktop.AYUDA;
 		}
 		if (channel.isDevice()) {
 			return MenuUserDevice.ayuda;

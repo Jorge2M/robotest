@@ -11,14 +11,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap.GroupMenu;
 import com.mng.robotest.test.utils.checkmenus.DataScreenMenu;
-
 
 public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	
@@ -27,37 +25,28 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	
 	public enum MenusFromGroup {Family, Subfamily, All}
 	
-	//TODO React. 15-diciembre-2021: identificadores react solicitados a David Massa por Teams
-	// están listos, cuando suban a PRE se podrán cambiar:
-	// -> JUhkW -> data-testid = 'section'
-	// -> o3ud7 -> data-testid = 'sub-familys'
-	private static final String XPathWrapperGlobal = "//div[@id='headerPortalContainer']";
+	private static final String XPATH_WRAPPER_GLOBAL = "//div[@id='headerPortalContainer']";
+	private static final String XPATH_CAPA_MENUS_FAMILY = "//ul[@data-testid[contains(.,'section.family')]]";
+	private static final String XPATH_CAPA_MENUS_SUBFAMILY = "//ul[@data-testid[contains(.,'section.subfamily')]]";
+	private static final String XPATH_CAPA_MENUS = "//ul[@data-testid[contains(.,'section.subfamily')] or @data-testid[contains(.,'section.family')]]";
+	private static final String XPATH_CONTAINER_GROUPS = XPATH_WRAPPER_GLOBAL + XPATH_CAPA_MENUS + "/li[not(@id[contains(.,'sections')])]/..";
 	
-	private static final String XPathCapaMenusFamily = "//ul[@data-testid[contains(.,'section.family')]]";
-	private static final String XPathCapaMenusSubfamily = "//ul[@data-testid[contains(.,'section.subfamily')]]";
-	private static final String XPathCapaMenus = "//ul[@data-testid[contains(.,'section.subfamily')] or @data-testid[contains(.,'section.family')]]";
-	private static final String XPathContainerGroups = XPathWrapperGlobal + XPathCapaMenus + "/li[not(@id[contains(.,'sections')])]/..";
-	
-	private static final String XPathGroupSectionLinea = XPathContainerGroups + "/li[@data-testid[contains(.,'section.menu')]]/span/..";
-	private static final String XPathGroupSectionSublinea = XPathContainerGroups + "/../ul[2]/li[@data-testid[contains(.,'section.menu')]]/span/..";
-	private static final String XPathGroupLink = XPathContainerGroups + "/li[@data-testid[contains(.,'section.link')]]";
-	private static final String XPathMenuLink = XPathCapaMenus + "/li[@data-testid[contains(.,'link')]]";
-	private static final String XPathRightImage = XPathWrapperGlobal + "//a/img/..";
+	private static final String XPATH_GROUP_SECTION_LINEA = XPATH_CONTAINER_GROUPS + "/li[@data-testid[contains(.,'section.menu')]]/span/..";
+	private static final String XPATH_GROUP_SECTION_SUBLINEA = XPATH_CONTAINER_GROUPS + "/../ul[2]/li[@data-testid[contains(.,'section.menu')]]/span/..";
+	private static final String XPATH_GROUP_LINK = XPATH_CONTAINER_GROUPS + "/li[@data-testid[contains(.,'section.link')]]";
+	private static final String XPATH_MENU_LINK = XPATH_CAPA_MENUS + "/li[@data-testid[contains(.,'link')]]";
+	private static final String XPATH_RIGHT_IMAGE = XPATH_WRAPPER_GLOBAL + "//a/img/..";
 
-	public SecBloquesMenuDesktopNew(AppEcom app, Channel channel) {
-		super(app, channel);
-	}
-	
 	private String getXPathGroupSection(LineaType lineaType, SublineaType sublineaType) {
 		if (sublineaType==null) {
-			return XPathGroupSectionLinea;
+			return XPATH_GROUP_SECTION_LINEA;
 		}
-		return XPathGroupSectionSublinea;
+		return XPATH_GROUP_SECTION_SUBLINEA;
 	}
 	
 	private String getXPathLinkMenuGroup(Menu1rstLevel menu1rstLevel) {
 		String idMenu = getHtmlIdMenu(menu1rstLevel);
-		return XPathGroupLink + "//a[" + 
+		return XPATH_GROUP_LINK + "//a[" + 
 			"@data-testid[contains(.,'header.section.link." + idMenu + "')] or " +
 		    "@data-testid[contains(.,'header.section.link." + idMenu.toLowerCase() + "')]]";
 	}
@@ -128,11 +117,11 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 		String liLinea = "//li[@id[contains(.,'_" + idLinea + "')]]/..";
 		switch (group) {
 		case Family:
-			return XPathCapaMenusFamily + liLinea; 
+			return XPATH_CAPA_MENUS_FAMILY + liLinea; 
 		case Subfamily:
-			return XPathCapaMenusSubfamily + liLinea; 
+			return XPATH_CAPA_MENUS_SUBFAMILY + liLinea; 
 		default:
-			return XPathCapaMenus + liLinea;
+			return XPATH_CAPA_MENUS + liLinea;
 		}
 	}
 	
@@ -140,10 +129,10 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	public String getXPathLinkMenuSuperiorRelativeToCapa(TypeMenuDesktop typeMenu) {
 		switch (typeMenu) {
 		case Link:
-			return XPathMenuLink + "//a";
+			return XPATH_MENU_LINK + "//a";
 		case Banner:
 		default:
-			return XPathRightImage;
+			return XPATH_RIGHT_IMAGE;
 		}
 	}
 	
@@ -153,9 +142,9 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 		secLineasMenu.hoverLineaAndWaitForMenus(lineaType, sublineaType);
 		List<DataScreenMenu> listMenus = new ArrayList<>();
 		String xpathGroupSection = getXPathGroupSection(lineaType, sublineaType);
-		List<WebElement> groups = driver.findElements(By.xpath(xpathGroupSection));
+		List<WebElement> groups = getElements(xpathGroupSection);
 		for (int i=1; i<=groups.size(); i++) {
-			WebElement group = driver.findElement(By.xpath("(" + xpathGroupSection + ")[" + i + "]"));
+			WebElement group = getElement("(" + xpathGroupSection + ")[" + i + "]");
 			List<WebElement> listMenusGroup = getMenusGroupAndStore(lineaType, sublineaType, group);
 			listMenus.addAll(getDataListMenus(listMenusGroup, channel));
 		}
@@ -177,7 +166,7 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 		makeMenusGroupVisible(lineaType, sublineaType, bloque);
 		String xpathMenuLinea = getXPathCapaMenusLinea(lineaType.name(), group);
 		String xpathEntradaMenu = "//li[@data-testid[contains(.,'section')] and @id='" + bloque + "_" + lineaType.name() + "']/../li[@data-testid[contains(.,'link')]]/a";
-		List<WebElement> listMenus = driver.findElements(By.xpath(xpathMenuLinea + xpathEntradaMenu));
+		List<WebElement> listMenus = getElements(xpathMenuLinea + xpathEntradaMenu);
 		return (listMenus);		
 	}
 	
@@ -220,27 +209,8 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	
 	@Override
 	public String getXPathMenusSuperiorLinkVisibles(LineaType lineaType, SublineaType sublineaType, TypeMenuDesktop typeMenu) {
-//		String xpathCapaMenuLinea = "";
-//		if (sublineaType==null) {
-//			xpathCapaMenuLinea = getXPathCapaMenusLinea(lineaType);
-//		} else {
-//			xpathCapaMenuLinea = getXPathCapaMenusSublinea(sublineaType);
-//		}
-
 		return getXPathLinkMenuSuperiorRelativeToCapa(typeMenu);
 	}
-	
-//	private void makeMenusInvisible() {
-//		WebElement wrapperMenus = driver.findElement(By.xpath(XPathWrapperGlobal));
-//		List<WebElement> elementsAbove = driver.findElements(with(By.tagName("div")).below(wrapperMenus));
-//		for (WebElement element : elementsAbove) {
-//			moveToElement(element, driver);
-//			if (state(State.Invisible, By.xpath(XPathContainerGroups)).wait(1).check()) {
-//				break;
-//			}
-//		}
-//	}
-
 	
 	private boolean isMenuVisible(Menu1rstLevel menu1rstLevel, int maxSeconds) {
 		if (isMenuGroupVisible(menu1rstLevel)) {
@@ -249,20 +219,17 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 		return isMenuLinkVisible(menu1rstLevel, maxSeconds);
 	}
 	
-	
 	private boolean isMenuGroupVisible(Menu1rstLevel menu1rstLevel) {
-		String xpathMenu = getXPathLinkMenuGroup(menu1rstLevel);
-		return (state(Visible, By.xpath(xpathMenu)).check());
+		return state(Visible, getXPathLinkMenuGroup(menu1rstLevel)).check();
 	}
 	
 	private void clickBlockMenu(Menu1rstLevel menu1rstLevel) {
-		String xpathMenu = getXPathLinkMenuGroup(menu1rstLevel);
-		click(By.xpath(xpathMenu)).exec();
+		click(getXPathLinkMenuGroup(menu1rstLevel)).exec();
 	}
 	
 	private boolean isMenuLinkVisible(Menu1rstLevel menu1rstLevel, int maxSeconds) {
 		String xpathMenu = getXPathMenuSuperiorLinkVisible(menu1rstLevel);
-		return (state(Visible, By.xpath(xpathMenu)).wait(maxSeconds).check());
+		return state(Visible, xpathMenu).wait(maxSeconds).check();
 	}
 	
 	private void selectGroupMenu(Menu1rstLevel menu1rstLevel) throws Exception {
@@ -289,15 +256,15 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	
 	private void storeMenusGroups(LineaType lineaType, SublineaType sublineaType) throws Exception {
 		String xpathGroupSection = getXPathGroupSection(lineaType, sublineaType);
-		int numGroups = driver.findElements(By.xpath(xpathGroupSection)).size();
+		int numGroups = getElements(xpathGroupSection).size();
 		for (int i=1; i<=numGroups; i++) {
-			WebElement group = driver.findElement(By.xpath("(" + xpathGroupSection + ")[" + i + "]"));
+			WebElement group = getElement("(" + xpathGroupSection + ")[" + i + "]");
 			getMenusGroupAndStore(lineaType, sublineaType, group);
 		}
 	}
 	
 	private List<WebElement> getMenusGroupAndStore(LineaType lineaType, SublineaType sublineaType, WebElement group) 
-	throws Exception {
+			throws Exception {
 		String group_linea = group.getAttribute("id");
 		click(group).by(By.xpath("./span")).exec();
 		List<WebElement> menus = getListMenusLinea(lineaType, sublineaType);
@@ -308,10 +275,10 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	}
 	
 	private List<WebElement> getListMenusLinea(LineaType lineaType, SublineaType sublineaType) throws Exception {
-		String XPathMenusVisibles = 
+		String xpathMenusVisibles = 
 				getXPathMenusSuperiorLinkVisibles(lineaType, sublineaType, TypeMenuDesktop.Link) + 
 				"/..";
-		return (driver.findElements(By.xpath(XPathMenusVisibles)));
+		return getElements(xpathMenusVisibles);
 	}
 	
 	private void storeMenu(String linea, String group_linea, WebElement menu) {
@@ -329,5 +296,4 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	private String getKeyMenu(String linea, String nombre) {
 		return nombre.toLowerCase() + "_" + linea.toLowerCase();
 	}
-	
 }

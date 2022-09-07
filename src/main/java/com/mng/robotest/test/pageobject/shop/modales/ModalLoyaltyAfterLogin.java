@@ -1,32 +1,29 @@
 package com.mng.robotest.test.pageobject.shop.modales;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class ModalLoyaltyAfterLogin {
+public class ModalLoyaltyAfterLogin extends PageBase {
 
-	static final String XPathCapaContainer = "//div[@class[contains(.,'modal-content')]]";
-	static final String XPathIrDeShoppingLink = XPathCapaContainer + "//a[@class[contains(.,'loyalty-irdeshopping')]]";
+	private static final String XPATH_CAPA_CONTAINER = "//div[@class[contains(.,'modal-content')]]";
+	private static final String XPATH_IR_DE_SHOPPING_LINK = XPATH_CAPA_CONTAINER + "//a[@class[contains(.,'loyalty-irdeshopping')]]";
 	
-	public static boolean isModalVisibleUntil(int maxSeconds, WebDriver driver) {
-		return (state(Visible, By.xpath(XPathIrDeShoppingLink), driver)
-				.wait(maxSeconds).check());
+	public boolean isModalVisibleUntil(int maxSeconds) {
+		return state(Visible, XPATH_IR_DE_SHOPPING_LINK).wait(maxSeconds).check();
 	}
 	
-	public static void closeModal(WebDriver driver) {
-		click(By.xpath(XPathIrDeShoppingLink), driver).exec();
+	public void closeModal() {
+		click(XPATH_IR_DE_SHOPPING_LINK).exec();
 	}
 	
-	public static void closeModalIfVisible(WebDriver driver) {
-		closeModalIfVisibleUntil(0, driver);
+	public void closeModalIfVisible() {
+		closeModalIfVisibleUntil(0);
 	}
 	
-	public static void closeModalIfVisibleUntil(int maxSecondsToWait, WebDriver driver) {
-		if (isModalVisibleUntil(maxSecondsToWait, driver)) {
-			closeModal(driver);
+	public void closeModalIfVisibleUntil(int maxSecondsToWait) {
+		if (isModalVisibleUntil(maxSecondsToWait)) {
+			closeModal();
 		}
 	}
 }

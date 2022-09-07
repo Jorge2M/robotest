@@ -43,7 +43,7 @@ import com.mng.robotest.test.utils.checkmenus.MenuTraduc;
 public class SecMenusWrapperSteps extends StepBase {
 
 	private final SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps();
-	private final SecMenuLateralMobilSteps secMenuLateralMobilSteps = new SecMenuLateralMobilSteps(channel, app);
+	private final SecMenuLateralMobilSteps secMenuLateralMobilSteps = new SecMenuLateralMobilSteps();
 	private final SecMenusWrap secMenusWrap = new SecMenusWrap();
 	private final SecMenusDesktopSteps secMenusDesktopSteps = new SecMenusDesktopSteps();
 	
@@ -236,7 +236,7 @@ public class SecMenusWrapperSteps extends StepBase {
 	}
 	
 	public void selectFiltroCollectionIfExists(FilterCollection typeMenu) throws Exception {
-		SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(channel, app, driver);
+		SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(channel, app);
 		if (filtrosCollection.isVisibleMenu(FilterCollection.nextSeason)) {
 			selectFiltroCollection(typeMenu);
 		}
@@ -246,7 +246,7 @@ public class SecMenusWrapperSteps extends StepBase {
 		description="Seleccionar filtro de colecciones <b>#{typeMenu}</b>", 
 		expected="Aparece una galería con artículos de temporadas#{typeMenu.getListTempArticles()}")
 	public void selectFiltroCollection(FilterCollection typeMenu) {
-		SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(channel, app, driver);
+		SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(channel, app);
 		filtrosCollection.click(typeMenu);
 		if (channel==Channel.desktop) {
 			PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();

@@ -1,12 +1,10 @@
 package com.mng.robotest.test.pageobject.shop;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import com.mng.robotest.domains.transversal.PageBase;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 /**
  * Page1: página inicial de solicitud de la tarjeta (la que contiene el botón de "Solicitar Tarjeta Mango"
@@ -15,68 +13,61 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
  * @author jorge.munoz
  *
  */
-public class PageInputDataSolMangoCard {
+public class PageInputDataSolMangoCard extends PageBase {
 	
-	private static final String XPathbotonContinuarModal = "//div//button[text()[contains(.,'Continuar')]]";
-	private static final String XPathIsPage2 = "//div/span[text()[contains(.,'Solicitud de tu MANGO Card')]]";
-	private static final String XPathIframePage2 = "//div[@id='ifcentral']/iframe";
-	private static final String XPathTextDatosPersonalesPage2 = "//a[@data-i18n[contains(.,'datospersonales')]]";
-	private static final String XPathTextDatosBancariosPage2 = "//a[@data-i18n[contains(.,'datosbancarios')]]";
-	private static final String XPathDatosContactoPage2 = "//a[@data-i18n[contains(.,'datoscontacto')]]";
-	private static final String XPathDatosSocioeconomicosPage2 = "//a[@data-i18n[contains(.,'datossocioeconomicos')]]";
-	private static final String XPathModalidadPagoPage2 = "//a[@data-i18n[contains(.,'modalidadpago')]]";
-	private static final String XPathButtonContinuarPage2 = "//button[@id='in-continuar']";
+	private static final String XPATH_BOTON_CONTINUAR_MODAL = "//div//button[text()[contains(.,'Continuar')]]";
+	private static final String XPATH_IS_PAGE2 = "//div/span[text()[contains(.,'Solicitud de tu MANGO Card')]]";
+	private static final String XPATH_IFRAME_PAGE2 = "//div[@id='ifcentral']/iframe";
+	private static final String XPATH_TEXT_DATOS_PERSONALES_PAGE2 = "//a[@data-i18n[contains(.,'datospersonales')]]";
+	private static final String XPATH_TEXT_DATOS_BANCARIOS_PAGE2 = "//a[@data-i18n[contains(.,'datosbancarios')]]";
+	private static final String XPATH_DATOS_CONTACTO_PAGE2 = "//a[@data-i18n[contains(.,'datoscontacto')]]";
+	private static final String XPATH_DATOS_SOCIOECONOMICOS_PAGE2 = "//a[@data-i18n[contains(.,'datossocioeconomicos')]]";
+	private static final String XPATH_MODALIDAD_PAGO_PAGE2 = "//a[@data-i18n[contains(.,'modalidadpago')]]";
+	private static final String XPATH_BUTTON_CONTINUAR_PAGE2 = "//button[@id='in-continuar']";
 
-
-	/*
-	 * Funciones para la validación y interactuación con la segunda página de solicitud de tarjeta mango
-	 */
-	
-	public static boolean isPresentBotonContinuarModalUntil(int maxSecondsToWait, WebDriver driver) {
-		return (state(Present, By.xpath(XPathbotonContinuarModal), driver)
-				.wait(maxSecondsToWait).check());
+	public boolean isPresentBotonContinuarModalUntil(int maxSecondsToWait) {
+		return (state(Present, XPATH_BOTON_CONTINUAR_MODAL).wait(maxSecondsToWait).check());
 	}
 
-	public static void clickBotonCerrarModal(WebDriver driver) {
-		click(By.xpath(XPathbotonContinuarModal), driver).exec();
+	public void clickBotonCerrarModal() {
+		click(XPATH_BOTON_CONTINUAR_MODAL).exec();
 	}
 
-	public static boolean isPage2(WebDriver driver) {
-		return (state(Present, By.xpath(XPathIsPage2), driver).check());
+	public boolean isPage2() {
+		return state(Present, XPATH_IS_PAGE2).check();
 	}
 
 	/**
 	 * Posicionarse en el iframe central de la página 2 con los datos para la solicitud de la tarjeta mango
 	 * @param driver
 	 */
-	
-	public static void gotoiFramePage2(WebDriver driver) {
-		WebElement frameElement = driver.findElement(By.xpath(XPathIframePage2));
+	public void gotoiFramePage2() {
+		WebElement frameElement = getElement(XPATH_IFRAME_PAGE2);
 		driver.switchTo().frame(frameElement);
 	}
 
-	public static boolean isPresentDatosPersonalesPage2(WebDriver driver) {
-		return (state(Present, By.xpath(XPathTextDatosPersonalesPage2), driver).check());
+	public boolean isPresentDatosPersonalesPage2() {
+		return state(Present, XPATH_TEXT_DATOS_PERSONALES_PAGE2).check();
 	}
 
-	public static boolean isPresentDatosBancariosPage2(WebDriver driver) {
-		return (state(Present, By.xpath(XPathTextDatosBancariosPage2), driver).check());
+	public boolean isPresentDatosBancariosPage2() {
+		return state(Present, XPATH_TEXT_DATOS_BANCARIOS_PAGE2).check();
 	}
 
-	public static boolean isPresentDatosContactoPage2(WebDriver driver) {
-		return (state(Present, By.xpath(XPathDatosContactoPage2), driver).check());
+	public boolean isPresentDatosContactoPage2() {
+		return state(Present, XPATH_DATOS_CONTACTO_PAGE2).check();
 	}
 
-	public static boolean isPresentDatosSocioeconomicosPage2(WebDriver driver) {
-		return (state(Present, By.xpath(XPathDatosSocioeconomicosPage2), driver).check());
+	public boolean isPresentDatosSocioeconomicosPage2() {
+		return state(Present, XPATH_DATOS_SOCIOECONOMICOS_PAGE2).check();
 	}
 
-	public static boolean isPresentModalidadpagoPage2(WebDriver driver) {
-		return (state(Present, By.xpath(XPathModalidadPagoPage2), driver).check());
+	public boolean isPresentModalidadpagoPage2() {
+		return state(Present, XPATH_MODALIDAD_PAGO_PAGE2).check();
 	}
 
-	public static boolean isPresentButtonContinuarPage2(WebDriver driver) {
-		return (state(Present, By.xpath(XPathButtonContinuarPage2), driver).check());
+	public boolean isPresentButtonContinuarPage2() {
+		return state(Present, XPATH_BUTTON_CONTINUAR_PAGE2).check();
 	}
 	
 }

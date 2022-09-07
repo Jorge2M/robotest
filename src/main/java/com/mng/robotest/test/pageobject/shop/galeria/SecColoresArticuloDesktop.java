@@ -1,28 +1,24 @@
 package com.mng.robotest.test.pageobject.shop.galeria;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.PageBase;
 
-public class SecColoresArticuloDesktop {
+public class SecColoresArticuloDesktop extends PageBase {
 
-	private final AppEcom app;
-	
-	private final String XPathColorsArticleShop = 
+	private static final String XPATH_COLORS_ARTICLE_SHOP = 
 			"//div[" + 
 				"@class[contains(.,'product-colors')] or " + 
 				"@class[contains(.,'_1nxc_')]" + //TODO (Outlet) A la espera que Sergio Campillo haga el cambio
 			"]";
-	static final String TagIdColor = "@TagIdColor";
-	static final String XPathImgCodColorWithTagColor = "//img[@class[contains(.,'other-color')] and @data-id='" + TagIdColor + "']";
 	
-	SecColoresArticuloDesktop(AppEcom app) {
-		this.app = app;
-	}
+	private static final String TAG_ID_COLOR = "@TagIdColor";
+	private static final String XPATH_IMG_COD_COLOR_WITH_TAG_COLOR = "//img[@class[contains(.,'other-color')] and @data-id='" + TAG_ID_COLOR + "']";
 	
 	String getXPathColorArticle() {
 //		if (app==AppEcom.outlet) {
 //			return XPathColorsArticleOutlet;
 //		} else {
-			return XPathColorsArticleShop;
+			return XPATH_COLORS_ARTICLE_SHOP;
 //		}
 	}
 	
@@ -39,6 +35,6 @@ public class SecColoresArticuloDesktop {
 	}
 
 	String getXPathImgCodigoColor(String codigoColor) {
-		return XPathImgCodColorWithTagColor.replace(TagIdColor, codigoColor);
+		return XPATH_IMG_COD_COLOR_WITH_TAG_COLOR.replace(TAG_ID_COLOR, codigoColor);
 	}
 }

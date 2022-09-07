@@ -19,21 +19,11 @@ public class SecMenuLateralDesktop extends PageBase {
 		"//li[not(@class) or @class='element']" +  
 		"/a[@href[contains(.,'" + TAG_CONCAT_MENUS + "')]]";
 	
-//	private static String XPATH_LINK_MENU_WITH_TAG_OUTLET = 
-//		"//li[@class='_3AcVO' or @class='element']" +  
-//		"/a[@href[contains(.,'" + TAG_CONCAT_MENUS + "')]]";
-	
 	private static String XPATH_SELECTED_RELATIVE_MENU_SHOP = 
 		"//self::*[@aria-label[contains(.,'seleccionado')]]";
 
 	private String getXPathLinkMenu(MenuLateralDesktop menu) {
 		String dataGaLabel =  menu.getDataGaLabelMenuLateralDesktop();
-//		if (app==AppEcom.outlet && menu.getLevel()==1) {
-//			return (XPATH_LINK_MENU_WITH_TAG_OUTLET
-//				.replace(TAG_CONCAT_MENUS, dataGaLabel
-//				.replace(":", "-")
-//				.replaceFirst("-", "/")));
-//		}
 		return (XPATH_LINKK_MENU_WITH_TAG
 			.replace(TAG_CONCAT_MENUS, dataGaLabel
 			.replace(":", "-")
@@ -42,8 +32,6 @@ public class SecMenuLateralDesktop extends PageBase {
 	
 	private String getXPathSelectedRelativeMenu() {
 		switch (app) {
-//		case outlet:
-//			return XPathSelectedRelativeMenuOutlet;
 		default:
 			return XPATH_SELECTED_RELATIVE_MENU_SHOP;
 		}
@@ -78,14 +66,15 @@ public class SecMenuLateralDesktop extends PageBase {
 		return (state(Visible, By.xpath(xpathMenu)).check());
 	}
 	
-	private static final String XPathCapaMenusShop = "//div[@id='sidebar']/aside[@id='navigation']";
-	private static final String XPathCapaMenusOutlet = "//div[@id='sticky']/aside[@id='filters']";
+	private static final String XPATH_CAPA_MENUS_SHOP = "//div[@id='sidebar']/aside[@id='navigation']";
+	private static final String XPATH_CAPA_MENUS_OUTLET = "//div[@id='sticky']/aside[@id='filters']";
+	
 	public boolean isVisibleCapaMenus(int maxSeconds) {
 		switch (app) {
 		case outlet:
-			return state(State.Visible, By.xpath(XPathCapaMenusOutlet)).wait(maxSeconds).check();
+			return state(State.Visible, XPATH_CAPA_MENUS_OUTLET).wait(maxSeconds).check();
 		default:
-			return state(State.Visible, By.xpath(XPathCapaMenusShop)).wait(maxSeconds).check();
+			return state(State.Visible, XPATH_CAPA_MENUS_SHOP).wait(maxSeconds).check();
 		}
 	}
 }

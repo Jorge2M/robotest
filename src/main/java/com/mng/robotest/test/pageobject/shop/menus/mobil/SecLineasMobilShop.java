@@ -4,35 +4,35 @@ import com.mng.robotest.test.beans.Linea.LineaType;
 
 public class SecLineasMobilShop extends SecLineasMobil {
 
-	static String IniXPathLinkLinea = XPathCapaLevelLinea + "//div[@class[contains(.,'brand-item')] and @id";
-	static String XPathLinkLineaMujer = IniXPathLinkLinea + "='she' or @id='prendas_she']";
-	static String XPathLinkLineaHombre = IniXPathLinkLinea + "='he']";
-	static String XPathLinkLineaNina = IniXPathLinkLinea + "='kids']";
-	static String XPathLinkLineaNino = IniXPathLinkLinea + "='kids']";
-	static String XPathLinkLineaTeen = IniXPathLinkLinea + "='teen']";
-	static String XPathLinkLineaKids =IniXPathLinkLinea + "='kids']"; //p.e. Bolivia
-	static String XPathLinkLineaVioleta = IniXPathLinkLinea + "='violeta']";
-	static String XPathLinkLineaHome = IniXPathLinkLinea + "='home']";
+	private static final String INI_XPATH_LINK_LINEA = XPATH_CAPA_LEVEL_LINEA + "//div[@class[contains(.,'brand-item')] and @id";
+	private static final String XPATH_LINK_LINEA_MUJER = INI_XPATH_LINK_LINEA + "='she' or @id='prendas_she']";
+	private static final String XPATH_LINK_LINEA_HOMBRE = INI_XPATH_LINK_LINEA + "='he']";
+	private static final String XPATH_LINK_LINEA_NINA = INI_XPATH_LINK_LINEA + "='kids']";
+	private static final String XPATH_LINK_LINEA_NINO = INI_XPATH_LINK_LINEA + "='kids']";
+	private static final String XPATH_LINK_LINEA_TEEN = INI_XPATH_LINK_LINEA + "='teen']";
+	private static final String XPATH_LINK_LINEA_KIDS =INI_XPATH_LINK_LINEA + "='kids']"; //p.e. Bolivia
+	private static final String XPATH_LINK_LINEA_VIOLETA = INI_XPATH_LINK_LINEA + "='violeta']";
+	private static final String XPATH_LINK_LINEA_HOME = INI_XPATH_LINK_LINEA + "='home']";
 
 	@Override
 	public String getXPathLineaLink(LineaType lineaType) throws IllegalArgumentException {
 		switch (lineaType) {
 		case she: 
-			return XPathLinkLineaMujer;
+			return XPATH_LINK_LINEA_MUJER;
 		case he: 
-			return XPathLinkLineaHombre;
+			return XPATH_LINK_LINEA_HOMBRE;
 		case nina:
-			return XPathLinkLineaNina;
+			return XPATH_LINK_LINEA_NINA;
 		case nino: 
-			return XPathLinkLineaNino;
+			return XPATH_LINK_LINEA_NINO;
 		case teen:
-			return XPathLinkLineaTeen;
+			return XPATH_LINK_LINEA_TEEN;
 		case kids: 
-			return XPathLinkLineaKids;
+			return XPATH_LINK_LINEA_KIDS;
 		case violeta: 
-			return XPathLinkLineaVioleta;
+			return XPATH_LINK_LINEA_VIOLETA;
 		case home:
-			return XPathLinkLineaHome;
+			return XPATH_LINK_LINEA_HOME;
 		default:
 			throw new IllegalArgumentException("The line " + lineaType + " is not present in the movil channel");
 		}

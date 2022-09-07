@@ -38,7 +38,7 @@ public class AllPagesSteps {
 		description="Aparece el div de contenido asociado al país #{pais.getNombre_pais()} (#{pais.getCodigo_pais()})",
 		level=State.Warn)
 	public static boolean validateMainContentPais(Pais pais, WebDriver driver) {
-		return (AllPages.isPresentMainContent(pais, driver));
+		return (new AllPages().isPresentMainContent(pais));
 	}
 
 	@Step (

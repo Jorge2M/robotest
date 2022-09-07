@@ -6,7 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -20,7 +19,6 @@ import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
 
-
 public abstract class SecLineasMenuDesktop extends PageBase {
 	
 	public abstract String getXPathMenuFatherWrapper();
@@ -29,57 +27,33 @@ public abstract class SecLineasMenuDesktop extends PageBase {
 	public abstract String getXPathLinea(LineaType lineaType);
 	public abstract void selectSublinea(LineaType lineaType, SublineaType sublineaType);
 	
-	protected final AppEcom app;
-	protected final Channel channel;
+	protected static final String TAG_ID_LINEA = "@LineaId";
+	protected static final String TAG_ID_SUBLINEA = "@SublineaId";
 	
-	static String TagIdLinea = "@LineaId";
-	static String TagIdSublinea = "@SublineaId";
-
-
-	static String XPathSublineaLinkWithTag = 
-		"//div[" + 
-			"(@class[contains(.,'nav-item')] or " + 
-			 "@class[contains(.,'section-detail-list')]) " + //Caso países tipo Colombia con 1 sola sublínea 
-			"and @data-brand='" + TagIdSublinea + "']";
-
-	protected SecLineasMenuDesktop(AppEcom app, Channel channel) {
-		this.app = app;
-		this.channel = channel;
-	}
-	
-	public static SecLineasMenuDesktop factory(AppEcom app, Channel channel) {
-		return new SecLineasMenuDesktopNew(app, channel);
-	}
-
 	public String getXPathLineaSelected(LineaType lineaType) {
 		String xpathLinea = getXPathLinea(lineaType);
-		if (app==AppEcom.outlet) {
-			return (xpathLinea + "//self::*[@class[contains(.,'selected')]]");		
-		}
 		return (xpathLinea + "//a[@aria-expanded='true']");
 	}
 	
 	public String getXPathLineaLink(LineaType lineaType) {
-		String xpathLinea = getXPathLinea(lineaType);
-		return (xpathLinea + "/a");
+		return (getXPathLinea(lineaType) + "/a");
 	}
 
 	public boolean isPresentLineasMenuWrapp() {
-		return (state(Present, By.xpath(getXPathLineasMenuWrapper())).check());
+		return state(Present, getXPathLineasMenuWrapper()).check();
 	}
 	
 	public boolean isVisibleMenuSup() {
-		return (state(Present, By.xpath(getXPathLineasMenuWrapper())).check());
+		return state(Present, getXPathLineasMenuWrapper()).check();
 	}
 	
 	public boolean isVisibleMenuSupUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(getXPathLineasMenuWrapper())).wait(maxSeconds).check());
+		return state(Visible, getXPathLineasMenuWrapper()).wait(maxSeconds).check();
 	}	
 	
 	public boolean isInvisibleMenuSupUntil(int maxSeconds) {
-		return (state(Invisible, By.xpath(getXPathLineasMenuWrapper())).wait(maxSeconds).check());
+		return state(Invisible, getXPathLineasMenuWrapper()).wait(maxSeconds).check();
 	}
-	
 	
 	private enum BringTo {FRONT, BACKGROUND};
 	
@@ -115,34 +89,33 @@ public abstract class SecLineasMenuDesktop extends PageBase {
 	}
 	
 	public List<WebElement> getListaLineas() {
-		return (driver.findElements(By.xpath(getXPathLinea())));
+		return getElements(getXPathLinea());
 	}
 	
 	public boolean isLineaPresent(LineaType lineaType) {
 		String xpathLinea = getXPathLineaLink(lineaType);
-		return (state(Present, By.xpath(xpathLinea)).check());
+		return state(Present, xpathLinea).check();
 	}
 	
 	public boolean isLineaPresentUntil(LineaType lineaType, int maxSeconds) {
 		String xpathLinea = getXPathLineaLink(lineaType);
-		return (state(Present, By.xpath(xpathLinea)).wait(maxSeconds).check());
+		return state(Present, xpathLinea).wait(maxSeconds).check();
 	}	
 	
 	public boolean isLineaVisible(LineaType lineaType) {
 		String xpathLinea = getXPathLineaLink(lineaType);
-		return (state(Present, By.xpath(xpathLinea)).check());
+		return state(Present, xpathLinea).check();
 	}
 	
 	public boolean isLineaSelected(LineaType lineaType) {
 		String xpathLinea = getXPathLineaSelected(lineaType);
-		return (state(Present, By.xpath(xpathLinea)).check()); 
+		return state(Present, xpathLinea).check(); 
 	}
 
 	public void selecLinea(Pais pais, LineaType lineaType) {
 		Linea linea = pais.getShoponline().getLinea(lineaType);
 		if (isLineActiveToSelect(pais, linea)) {
-			String XPathLinkLinea = getXPathLineaLink(lineaType);
-			click(By.xpath(XPathLinkLinea)).type(javascript).exec();
+			click(getXPathLineaLink(lineaType)).type(javascript).exec();
 		}
 	}
 
@@ -162,7 +135,7 @@ public abstract class SecLineasMenuDesktop extends PageBase {
 		int i=0;
 		do {
 			hoverLinea(lineaType, sublineaType);
-			SecBloquesMenuDesktop secBloques = SecBloquesMenuDesktop.factory(app, channel);
+			SecBloquesMenuDesktop secBloques = new SecBloquesMenuDesktopNew();
 			isCapaMenusVisible = secBloques.isCapaMenusLineaVisibleUntil(lineaType, 2);
 			if (!isCapaMenusVisible) {
 				Log4jTM.getLogger().warn("No se hacen visibles los menús después de Hover sobre línea " + lineaType);
@@ -183,7 +156,7 @@ public abstract class SecLineasMenuDesktop extends PageBase {
 	public void hoverLinea(LineaType lineaType) {
 		//Hover sobre la pestaña -> Hacemos visibles los menús/subimágenes
 		String xpathLinkLinea = getXPathLineaLink(lineaType);
-		state(Visible, By.xpath(xpathLinkLinea)).wait(1).check();
-		moveToElement(By.xpath(xpathLinkLinea), driver);
+		state(Visible, xpathLinkLinea).wait(1).check();
+		moveToElement(xpathLinkLinea);
 	}
 }

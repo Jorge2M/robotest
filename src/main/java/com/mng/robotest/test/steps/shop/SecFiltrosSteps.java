@@ -70,7 +70,7 @@ public class SecFiltrosSteps extends StepBase {
 		List<String> listMenus = getListMenusStr(menusToSelect);
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagLitMenusToSelect, StringUtils.join(menusToSelect, ","));
 		secFiltros.selectMenu2onLevel(listMenus);		
-		new SecMenuLateralMobilSteps(channel, app).validaSelecMenu(menusToSelect.get(0));
+		new SecMenuLateralMobilSteps().validaSelecMenu(menusToSelect.get(0));
 	}
 	
 	private List<String> getListMenusStr(List<MenuLateralDesktop> listMenus) {

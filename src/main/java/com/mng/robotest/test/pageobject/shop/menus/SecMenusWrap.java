@@ -19,9 +19,9 @@ import com.mng.robotest.test.utils.checkmenus.DataScreenMenu;
 
 public class SecMenusWrap extends PageBase {
 	
-	private final MenusUserWrapper secMenusUser = MenusUserWrapper.getNew(channel, app);
-	private final SecMenuLateralDevice secMenuLateralDevice = new SecMenuLateralDevice(channel, app);
-	private final SecMenusDesktop secMenusDesktop = new SecMenusDesktop(app, channel);
+	private final MenusUserWrapper secMenusUser = new MenusUserWrapper();
+	private final SecMenuLateralDevice secMenuLateralDevice = new SecMenuLateralDevice();
+	private final SecMenusDesktop secMenusDesktop = new SecMenusDesktop();
 	
 	public enum GroupMenu { prendas, accesorios, colecciones }
 	

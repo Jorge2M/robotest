@@ -1,15 +1,13 @@
 package com.mng.robotest.test.pageobject.shop.menus;
 
-import org.openqa.selenium.By;
-
 import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class SecMenusFiltroDiscount extends PageBase {
 	
 	public enum TypeMenuDiscount { UP_TO_50, UP_TO_60, BETWEEN_50_60, OFF_60, FROM_60, FROM_70 }
-	static String XPathDivMenus = "//nav[@id='descuentoFilter']";
+	
+	private static final String XPATH_DIV_MENUS = "//nav[@id='descuentoFilter']";
 	
 	private static String getXPathMenu(TypeMenuDiscount typeMenu) {
 		String valuesParamTemporada1 = "";
@@ -35,20 +33,20 @@ public class SecMenusFiltroDiscount extends PageBase {
 			break;
 		}		
 		
-		return (XPathDivMenus + "//li[@data-filter-value='" + valuesParamTemporada1 + "']");
+		return (XPATH_DIV_MENUS + "//li[@data-filter-value='" + valuesParamTemporada1 + "']");
 	}
 	
 	public boolean isVisible() {
-		return (state(Visible, By.xpath(XPathDivMenus)).check());
+		return state(Visible, XPATH_DIV_MENUS).check();
 	}
 	
 	public boolean isVisibleMenu(String typeMenu) {
-		return (isVisibleMenu(TypeMenuDiscount.valueOf(typeMenu)));
+		return isVisibleMenu(TypeMenuDiscount.valueOf(typeMenu));
 	}
 	
 	public boolean isVisibleMenu(TypeMenuDiscount typeMenu) {
 		String xpathMenu = getXPathMenu(typeMenu);
-		return (state(Visible, By.xpath(xpathMenu)).check());
+		return state(Visible, xpathMenu).check();
 	}
 	
 	public int getNumberOfVisibleMenus() {
@@ -58,7 +56,6 @@ public class SecMenusFiltroDiscount extends PageBase {
 				numberMenusVisibles+=1;
 			}
 		}
-		
 		return numberMenusVisibles;
 	}
 	
@@ -67,7 +64,6 @@ public class SecMenusFiltroDiscount extends PageBase {
 	}
 
 	public void clickTypeMenu(TypeMenuDiscount typeMenu) {
-		String xpathMenu = getXPathMenu(typeMenu);
-		click(By.xpath(xpathMenu)).exec();
+		click(getXPathMenu(typeMenu)).exec();
 	}
 }

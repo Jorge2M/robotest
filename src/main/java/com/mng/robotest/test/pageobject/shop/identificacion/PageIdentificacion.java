@@ -64,7 +64,7 @@ public class PageIdentificacion extends PageBase {
 		clickButtonEntrar();
 		new ModalCambioPais().closeModalIfVisible();
 		new ModalActPoliticaPrivacidad().clickOkIfVisible();
-		ModalLoyaltyAfterLogin.closeModalIfVisible(driver);
+		new ModalLoyaltyAfterLogin().closeModalIfVisible();
 	}	
 	
 	private void clickButtonEntrar() {

@@ -12,13 +12,11 @@ import org.openqa.selenium.WebElement;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap.GroupMenu;
 import com.mng.robotest.test.utils.checkmenus.DataScreenMenu;
-
 
 public abstract class SecBloquesMenuDesktop extends PageBase {
 
@@ -41,10 +39,7 @@ public abstract class SecBloquesMenuDesktop extends PageBase {
 	 */
 	public abstract List<WebElement> getListMenusLineaBloque(LineaType lineaType, SublineaType sublineaType, GroupMenu bloque) throws Exception;
 	
-	protected final AppEcom app;
-	protected final Channel channel;
-	
-	protected final SecLineasMenuDesktop secLineasMenu;
+	protected final SecLineasMenuDesktop secLineasMenu = new SecLineasMenuDesktopNew();
 	
 	public enum TypeMenuDesktop {Link, Banner}
 	
@@ -52,16 +47,6 @@ public abstract class SecBloquesMenuDesktop extends PageBase {
 	protected static final String TagIdBloque = "@BloqueId"; //Prendas, Accesorios...
 	protected static final String TagIdTypeMenu = "@TypeMenu";
 
-	protected SecBloquesMenuDesktop(AppEcom app, Channel channel) {
-		this.app = app;
-		this.channel = channel;
-		this.secLineasMenu = SecLineasMenuDesktop.factory(app, channel);
-	}
-	
-	public static SecBloquesMenuDesktop factory(AppEcom app, Channel channel) {
-		return new SecBloquesMenuDesktopNew(app, channel);
-	}
-		
 	private String getXPathMenuVisibleByDataInHref(Menu1rstLevel menu1rstLevel) {
 		LineaType lineaMenu = menu1rstLevel.getLinea();
 		SublineaType sublineaMenu = menu1rstLevel.getSublinea();

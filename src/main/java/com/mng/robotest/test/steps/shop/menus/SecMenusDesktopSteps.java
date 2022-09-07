@@ -59,7 +59,7 @@ public class SecMenusDesktopSteps extends StepBase {
 
 	private static final String PREFIX_SALE = "<b style=\"color:blue\">Rebajas</b></br>";
 	
-	private final SecMenusDesktop secMenus = new SecMenusDesktop(app, channel);
+	private final SecMenusDesktop secMenus = new SecMenusDesktop();
 	
 	@Step(
 		description="Seleccionar el menú superior <b>#{menu1rstLevel}</b>", 
@@ -481,7 +481,7 @@ public class SecMenusDesktopSteps extends StepBase {
 				!((PageGaleriaDesktop)pageGaleria).isArticuloWithStringInName(guiones), State.Warn);
 		}
 		
-		boolean isTitleAccording = AllPages.isTitleAssociatedToMenu(menu.getNombre(), driver);
+		boolean isTitleAccording = new AllPages().isTitleAssociatedToMenu(menu.getNombre());
 	 	checks.add(
 			"El title de la página es el asociado al menú <b>" + menu.getNombre() + "</b>",
 			isTitleAccording, State.Info);

@@ -25,21 +25,8 @@ import com.mng.robotest.test.utils.ImporteScreen;
 
 public class MenusUserWrapper extends PageBase {
 	
-	final Channel channel;
-	final AppEcom app;
-	final SecCabecera secCabecera;
-	final SecMenuLateralDevice secMenuLateralMobil;
-	
-	private MenusUserWrapper(Channel channel, AppEcom app) {
-		this.channel = channel;
-		this.app = app;
-		this.secCabecera = SecCabecera.getNew(channel, app);
-		this.secMenuLateralMobil = new SecMenuLateralDevice(channel, app);
-	}
-	
-	public static MenusUserWrapper getNew(Channel channel, AppEcom app) {
-		return (new MenusUserWrapper(channel, app));
-	}
+	private final SecCabecera secCabecera = SecCabecera.getNew(channel, app);
+	private final SecMenuLateralDevice secMenuLateralMobil = new SecMenuLateralDevice();
 	
 	public boolean isMenuInState(UserMenu menu, State state) throws Exception {
 		return (isMenuInStateUntil(menu, state, 0));

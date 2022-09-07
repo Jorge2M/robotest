@@ -16,24 +16,17 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageMenusManto extends PageBase {
 
-	private static final String INI_XPATH_TITULO = "//td[@class='txt11B' and text()[contains(.,'";
 	private static final String XPATH_TITULO = "//td[@class='txt11B'] | //form[@id='formTempl']";
 	private static final String XPATH_CELDA_TEXT_MENU_PRINCIPAL = "//td[text()[contains(.,'Menú principal')]]";
 	private static final String XPATH_CABECERA_MENU = "//table//td[@bgcolor='#505050']/span";
-	private static final String XPATH_SUB_MENUS = "//table//td/a[@onclick]";
 	private static final String XPATH_LINK_MENU = "//table//a[@onclick]";
-	private static final String XPATH_TABLE_LAST_ELEMENT = "//table[@id='tabla_derecha']//tr[last()]/td/a[@onclick]";
 	
 	public String getXpathLinkMenu(String menu) {
 		return "//a[text()[contains(.,'" + menu + "')]]";
 	}
 	
-	private String getXPathTitulo(String title){
-		return (INI_XPATH_TITULO + title + "')]]");
-	}
-	
-	private String getXPathNextElement(String XPathPosicionInicial) {
-		return XPathPosicionInicial + "/../following::td/a";
+	private String getXPathNextElement(String xpathPosicionInicial) {
+		return xpathPosicionInicial + "/../following::td/a";
 	}
 	
 	private String getXPathFirstElement(String menuName) {
@@ -41,11 +34,11 @@ public class PageMenusManto extends PageBase {
 	}
 
 	private String getTextMenuTitulo() {
-		return driver.findElement(By.xpath(XPATH_TITULO)).getText();
+		return getElement(XPATH_TITULO).getText();
 	}
 
 	public boolean isPage() {
-		return (state(Present, By.xpath(XPATH_CELDA_TEXT_MENU_PRINCIPAL)).check());
+		return state(Present, XPATH_CELDA_TEXT_MENU_PRINCIPAL).check();
 	}
 
 	public boolean validateIsPage(String subMenu, int maxSeconds) {
@@ -74,22 +67,18 @@ public class PageMenusManto extends PageBase {
 	}
 
 	public boolean isMenuHeaderVisible() {
-		return state(Present, By.xpath(XPATH_TITULO)).check();
+		return state(Present, XPATH_TITULO).check();
 	}
 
-	private boolean isNextXPathMenuHeader(String XPathPosicionInicial, String nextMenuName) {
-		String XPathNextPosicion = XPathPosicionInicial + "/../following::td/child::node()";
-		String texto = driver.findElement(By.xpath(XPathNextPosicion)).getText();
+	private boolean isNextXPathMenuHeader(String xpathPosicionInicial, String nextMenuName) {
+		String xpathNextPosicion = xpathPosicionInicial + "/../following::td/child::node()";
+		String texto = getElement(xpathNextPosicion).getText();
 		return (!nextMenuName.equals(texto));
 	}
 	
-	private boolean isNextXPathEndTable(String XPathPosicionInicial) {
-		String XPathNextPosicion = XPathPosicionInicial + "/../following::td/child::node()";
-		if (!state(Present, By.xpath(XPathNextPosicion)).check()) {
-			return false;
-		}
-		return true;
-		
+	private boolean isNextXPathEndTable(String xpathPosicionInicial) {
+		String xpathNextPosicion = xpathPosicionInicial + "/../following::td/child::node()";
+		return state(Present, xpathNextPosicion).check();
 	}
 	
 	public String clickMenuAndAcceptAlertIfExists(String textoMenu) throws Exception {
@@ -111,18 +100,16 @@ public class PageMenusManto extends PageBase {
 		if (textoMenu.contains("'")) {
 			int positionDelete = textoMenu.indexOf("'");
 			String textoMenuRecortado = textoMenu.substring(positionDelete+1, textoMenu.length());
-			By byElem = By.xpath(getXpathLinkMenu(textoMenuRecortado));
-			click(byElem)
+			click(getXpathLinkMenu(textoMenuRecortado))
 				.waitLink(60).waitLoadPage(60)
 				.type(TypeClick.javascript).exec();
 		}else {
-			By byElem = By.xpath(getXpathLinkMenu(textoMenu));
-			click(byElem)
+			click(getXpathLinkMenu(textoMenu))
 				.waitLink(60).waitLoadPage(60)
 				.type(TypeClick.javascript).exec();
 		}
 		
-		while (!state(Present, By.xpath(XPATH_TITULO)).check() && 
+		while (!state(Present, XPATH_TITULO).check() && 
 				timeWaited != maxTimeToWait) {
 			waitMillis(1000);
 			timeWaited++;
@@ -132,7 +119,7 @@ public class PageMenusManto extends PageBase {
 	}
 
 	public List<WebElement> getListLinksMenus() {
-		return (driver.findElements(By.xpath(XPATH_LINK_MENU)));
+		return getElements(XPATH_LINK_MENU);
 	}
 	
 	public ArrayList<String> getListMenuNames() {
@@ -145,7 +132,7 @@ public class PageMenusManto extends PageBase {
 	}
 	
 	public List<WebElement> getListCabecerasMenus() {
-		return (driver.findElements(By.xpath(XPATH_CABECERA_MENU)));
+		return getElements(XPATH_CABECERA_MENU);
 	}
 	
 	public List<String> getListCabecerasMenusName() {
@@ -160,26 +147,26 @@ public class PageMenusManto extends PageBase {
 	public List<String> getListSubMenusName(String menuName, String nextMenuName) {
 		List<String> listSubMenusNames = new ArrayList<>();
 		List<WebElement> listSubMenus = getListSubMenus(menuName, nextMenuName);
-		for (WebElement menu : listSubMenus)
+		for (WebElement menu : listSubMenus) {
 			listSubMenusNames.add(menu.getText());
-		
+		}
 		return listSubMenusNames;
 	}
 	
 	public List<WebElement> getListSubMenus(String menuName, String nextMenuName) {
-		String XPathPosicionInicial = getXPathFirstElement(menuName);
+		String xpathPosicionInicial = getXPathFirstElement(menuName);
 		List<WebElement> elements = new ArrayList<>();
-		elements.add(driver.findElement(By.xpath(XPathPosicionInicial)));
+		elements.add(driver.findElement(By.xpath(xpathPosicionInicial)));
 		if (nextMenuName==null) {
-			while (isNextXPathEndTable(XPathPosicionInicial)){
-				XPathPosicionInicial = getXPathNextElement(XPathPosicionInicial);
-				elements.add(driver.findElement(By.xpath(XPathPosicionInicial)));
+			while (isNextXPathEndTable(xpathPosicionInicial)){
+				xpathPosicionInicial = getXPathNextElement(xpathPosicionInicial);
+				elements.add(getElement(xpathPosicionInicial));
 			}
 			return elements;
 		}
-		while (isNextXPathMenuHeader(XPathPosicionInicial, nextMenuName)){
-			XPathPosicionInicial = getXPathNextElement(XPathPosicionInicial);
-			elements.add(driver.findElement(By.xpath(XPathPosicionInicial)));
+		while (isNextXPathMenuHeader(xpathPosicionInicial, nextMenuName)) {
+			xpathPosicionInicial = getXPathNextElement(xpathPosicionInicial);
+			elements.add(getElement(xpathPosicionInicial));
 		}
 		return elements;
 	}

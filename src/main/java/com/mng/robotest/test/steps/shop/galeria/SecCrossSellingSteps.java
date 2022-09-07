@@ -25,8 +25,7 @@ public class SecCrossSellingSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validaIsCorrect(LineaType lineaType, SublineaType sublineaType) throws Exception {
-		//Obtenemos la lista de menús de Mujer-Prendas
-		SecMenusDesktop secMenus = new SecMenusDesktop(app, channel);
+		SecMenusDesktop secMenus = new SecMenusDesktop();
 		List<WebElement> listaMenusBloque = 
 			((SecBloquesMenuDesktopNew)secMenus.secMenuSuperior.secBlockMenus)
 				.getListMenusLineaBloque(lineaType, sublineaType, GroupMenu.prendas, MenusFromGroup.Subfamily);

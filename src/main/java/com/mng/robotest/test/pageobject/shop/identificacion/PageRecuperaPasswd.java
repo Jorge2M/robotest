@@ -13,7 +13,7 @@ public class PageRecuperaPasswd extends PageBase {
 	private static final String XPATH_BUTTON_IR_DE_SHOPPING = "//div[@id[contains(.,'IrShopping')]]/a";
 	
 	public boolean isPageUntil(int maxSecondsToWait) {
-		return AllPages.isPresentElementWithTextUntil("RECUPERA TU CONTRASEÑA", maxSecondsToWait, driver);
+		return new AllPages().isPresentElementWithTextUntil("RECUPERA TU CONTRASEÑA", maxSecondsToWait);
 	}
 	
 	public boolean isPresentInputCorreo() {

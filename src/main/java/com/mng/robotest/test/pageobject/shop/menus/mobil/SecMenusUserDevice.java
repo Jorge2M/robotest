@@ -35,13 +35,13 @@ public class SecMenusUserDevice extends PageBase {
 		mangolikesyou("//*[text()[contains(.,'Mango likes you')]]"),
 		cambiopais("//*[@data-label='cambio_pais']");
 
-		private String XPathCapaUserNewMenu = "//ul[@class='menu-section-user-menu-links']";
-		private String XPathCapaMenusOldMenu = "//ul[@class[contains(.,'menu-section-links')]]";
+		private static final String XPATH_CAPA_USER_NEW_MENU = "//ul[@class='menu-section-user-menu-links']";
+		private static final String XPATH_CAPA_MENUS_OLD_MENU = "//ul[@class[contains(.,'menu-section-links')]]";
 		private By byNewMenu;
 		private By byOldMenu;
 		MenuUserDevice(String xPath) {
-			byNewMenu = By.xpath(XPathCapaUserNewMenu + xPath);
-			byOldMenu = By.xpath(XPathCapaMenusOldMenu + xPath);
+			byNewMenu = By.xpath(XPATH_CAPA_USER_NEW_MENU + xPath);
+			byOldMenu = By.xpath(XPATH_CAPA_MENUS_OLD_MENU + xPath);
 		}
 
 		@Override

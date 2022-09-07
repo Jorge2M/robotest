@@ -1,7 +1,6 @@
 package com.mng.robotest.test.pageobject.shop.menus.desktop;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.robotest.domains.transversal.PageBase;
@@ -11,19 +10,20 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalUserSesionShopDesktop extends PageBase { 
 	
-	private static final String XPathWrapperUserMenu = 
+	private static final String XPATH_WRAPPER_USER_MENU = 
 			"//div[@data-testid[contains(.,'header.userMenu.login')] or " + 
 			"@class[contains(.,'user-icon-button')]]";
-	private static final String XPathCapaMenus = XPathWrapperUserMenu + "/div[@role='button']";
+	
+	private static final String XPATH_CAPA_MENUS = XPATH_WRAPPER_USER_MENU + "/div[@role='button']";
 	
 	public enum MenuUserDesktop implements ElementPage { 
-		iniciarSesion (XPathCapaMenus + "//div[@class[contains(.,'login-button')]]"),
-		registrate (XPathCapaMenus + "//span[@class='login-register-link' or @class[contains(.,'register-link')] or text()='Regístrate']"),
-		miCuenta (XPathCapaMenus + "//div[@data-testid[contains(.,'mi_cuenta')]]"),
-		misCompras (XPathCapaMenus + "//div[@data-testid[contains(.,'mis_compras')]]"),	 
-		mangoLikesYou (XPathCapaMenus + "//div[@data-testid[contains(.,'mango_likes_you')]]"),
-		ayuda (XPathCapaMenus + "//div[@data-testid[contains(.,'ayuda')]]"),   
-		cerrarSesion(XPathCapaMenus + "//div[@data-testid[contains(.,'logout')] or @class[contains(.,'logout')]]");
+		INICIAR_SESION (XPATH_CAPA_MENUS + "//div[@class[contains(.,'login-button')]]"),
+		REGISTRATE (XPATH_CAPA_MENUS + "//span[@class='login-register-link' or @class[contains(.,'register-link')] or text()='Regístrate']"),
+		MI_CUENTA (XPATH_CAPA_MENUS + "//div[@data-testid[contains(.,'mi_cuenta')]]"),
+		MIS_COMPRAS (XPATH_CAPA_MENUS + "//div[@data-testid[contains(.,'mis_compras')]]"),	 
+		MANGO_LIKES_YOU (XPATH_CAPA_MENUS + "//div[@data-testid[contains(.,'mango_likes_you')]]"),
+		AYUDA (XPATH_CAPA_MENUS + "//div[@data-testid[contains(.,'ayuda')]]"),   
+		CERRAR_SESION(XPATH_CAPA_MENUS + "//div[@data-testid[contains(.,'logout')] or @class[contains(.,'logout')]]");
 		
 		By by;
 		private MenuUserDesktop(String xPath) {
@@ -36,27 +36,19 @@ public class ModalUserSesionShopDesktop extends PageBase {
 		}
 	}
 	
-	private	ModalUserSesionShopDesktop(WebDriver driver) {
-		super(driver);
-	}
-	
-	public static ModalUserSesionShopDesktop getNew(WebDriver driver) {
-		return (new ModalUserSesionShopDesktop(driver));
-	}
-	
 	public boolean isVisible() {
 		return isVisibleUntil(0);
 	}
 	public boolean isVisibleUntil(int seconds) {
-		return (state(Visible, By.xpath(XPathCapaMenus)).wait(seconds).check());
+		return state(Visible, XPATH_CAPA_MENUS).wait(seconds).check();
 	}	
 	
 	public boolean isMenuInState(MenuUserDesktop menu, State state) {
-		return (state(state, menu.getBy()).check());
+		return state(state, menu.getBy()).check();
 	}
 	
 	public boolean isMenuInStateUntil(MenuUserDesktop menu, State state, int maxSeconds) {
-		return (state(state, menu.getBy()).wait(maxSeconds).check());
+		return state(state, menu.getBy()).wait(maxSeconds).check();
 	}
 	
 	public void wait1sForItAndclickMenu(MenuUserDesktop menu) {

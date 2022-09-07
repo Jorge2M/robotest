@@ -34,7 +34,7 @@ public class SecCabeceraOutlet_Mobil extends SecCabecera {
 	
 	@Override
 	String getXPathNumberArtIcono() {
-		return SecCabecera_MostFrequent.getXPathNumberArtIcono(Channel.mobile, app);
+		return new SecCabecera_MostFrequent().getXPathNumberArtIcono();
 	}
 	
 	@Override
