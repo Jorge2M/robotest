@@ -71,8 +71,10 @@ public class Fic002 extends TestBase {
 			pageFichaSteps.getSecTotalLookSteps().checkIsVisible();
 		}
 
-		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectEnvioYDevoluciones();
-		pageFichaSteps.getModEnvioYdevolSteps().clickAspaForClose();
+		if (app==AppEcom.shop) {
+			pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectEnvioYDevoluciones();
+			pageFichaSteps.getModEnvioYdevolSteps().clickAspaForClose();
+		}
 		
 		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectDetalleDelProducto(LineaType.she);
 		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectLinkCompartir(dataTest.pais.getCodigo_pais());

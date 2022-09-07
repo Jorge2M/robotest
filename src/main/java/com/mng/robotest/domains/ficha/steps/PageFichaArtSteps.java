@@ -360,12 +360,12 @@ public class PageFichaArtSteps extends StepBase {
 		return !pageFicha.isVisibleBuscarEnTiendaLink();
 	}
 	
-	final String tagNameLink = "@TagNameLink";
+	private static final String TAG_NAME_LINK = "@TagNameLink";
 	@Step (
-		description="Seleccionar <b>" + tagNameLink + "</b>", 
+		description="Seleccionar <b>" + TAG_NAME_LINK + "</b>", 
 		expected="Aparece un resultado de la búsqueda correcta")
 	public void selectBuscarEnTiendaButton() {
-		TestMaker.getCurrentStepInExecution().replaceInDescription(tagNameLink, pageFicha.getNameLinkBuscarEnTienda());
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_NAME_LINK, pageFicha.getNameLinkBuscarEnTienda());
 		pageFicha.selectBuscarEnTiendaLink();
 		new ModalBuscadorTiendasSteps().validaBusquedaConResultados();
 	}

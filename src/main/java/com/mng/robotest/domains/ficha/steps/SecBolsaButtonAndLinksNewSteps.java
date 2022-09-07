@@ -24,7 +24,7 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 		expected="Aparece el modal con los datos a nivel de envío y devolución")
 	public void selectEnvioYDevoluciones() throws Exception {
 		secBolsaButtonAndLinksNew.clickLinkAndWaitLoad(LinksAfterBolsa.ENVIO_GRATIS_TIENDA);
-		(new ModEnvioYdevolNewSteps()).checkIsVisible();
+		new ModEnvioYdevolNewSteps().checkIsVisible();
 	}
 
 	@Step (
@@ -54,15 +54,19 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 	 	checks.add(
 			"Figura el bloque de BreadCrumbs",
 			secDetalleProductNew.isVisibleBreadcrumbs(0), State.Warn);
+	 	
 	 	checks.add(
 			"Es visible el item " + ItemBreadcrumb.LINEA,
 			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.LINEA), State.Warn);
+	 	
 	 	checks.add(
 			"Es visible el item " + ItemBreadcrumb.GRUPO,
 			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.GRUPO), State.Warn);
+	 	
 	 	checks.add(
 			"Es visible el item " + ItemBreadcrumb.GALERIA,
 			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.GALERIA), State.Warn);
+	 	
 	 	return checks;
 	}
 	

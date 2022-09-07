@@ -136,10 +136,12 @@ public class CheckerImgsBroken implements Checker {
 				}
 			} while (excep_stale && intentos < 5);
 
-			if (imgStatus.equals(Boolean.valueOf(false))) {
-				String imageSrc = getImageSrc(image);
+			if (imgStatus.equals(Boolean.valueOf(false)) && image.isDisplayed()) {
+				String imageSrc = getImageSrc(image); 
 				String imageId = image.getAttribute("id");
-				if (imageSrc != null && imageSrc.trim().compareTo("") != 0 && !imageSrc.toLowerCase().contains(".svg")) {
+				if (imageSrc != null && 
+					imageSrc.trim().compareTo("") != 0 && 
+					!imageSrc.toLowerCase().contains(".svg")) {
 					if (revisionBrokenHttp(image)) {
 						String currentImageUrl = imageSrc;
 						if (!verifyImgHttpActive(image)) {

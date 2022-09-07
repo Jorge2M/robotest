@@ -10,7 +10,7 @@ public class SecTallasArticuloDesktop extends PageBase {
 	private final String XPATH_CAPA_TALLAS_ARTICULO_SHOP = "//div[@class[contains(.,'sizes-container')]]";
 	private static final String XPATH_TALLA_AVAILABLE = "//button[@data-testid='si-stock']";
 	private static final String XPATH_TALLA_UNAVAILABLE =	"//button[@data-testid='no-stock']";
-	private final static String CLASS_CAPA_ACTIVE_SHOP = "@class[contains(.,'active')]]";
+	private final static String CLASS_CAPA_ACTIVE_SHOP = "@class[contains(.,'active')]";
 	
 	public SecTallasArticuloDesktop(String xpathArticulo) {
 		this.XPATH_ARTICULO = xpathArticulo;

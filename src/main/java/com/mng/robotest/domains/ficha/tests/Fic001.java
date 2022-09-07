@@ -70,13 +70,10 @@ public class Fic001 extends TestBase {
 		ArticuloScreen articulo = new ArticuloScreen(articleNoOnlineWithColors.get());
 		pageFichaSteps.selectColorAndSaveData(articulo);
 		pageFichaSteps.selectTallaAndSaveData(articulo);
-
 		ifTallaUnicaClearBolsa(isTallaUnica);
-
-		articulo = pageFichaSteps.getFicha().getArticuloObject();
-		pageFichaSteps.selectBuscarEnTiendaButton();
-		new ModalBuscadorTiendasSteps().close();
 		if (app==AppEcom.shop) {
+			pageFichaSteps.selectBuscarEnTiendaButton();
+			new ModalBuscadorTiendasSteps().close();
 			pageFichaSteps.selectAnadirAFavoritos();
 			pageFichaSteps.changeColorGarment();
 			pageFichaSteps.selectRemoveFromFavoritos();

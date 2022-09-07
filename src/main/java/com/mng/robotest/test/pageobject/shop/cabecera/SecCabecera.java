@@ -43,7 +43,7 @@ public abstract class SecCabecera extends PageBase {
 		case desktop:
 		case mobile:
 		default:
-			return SecCabecera_MostFrequent.getNew(channel, app);
+			return new SecCabecera_MostFrequent();
 		}
 	}
 	

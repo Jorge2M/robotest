@@ -32,7 +32,7 @@ public class ModCompartirNew extends PageBase {
 	private static final String XPATH_ICON = "//a[@class='icon']";
 	
 	private String getXPathIcon(IconSocial icon) {
-		return (XPATH_ICON + "//self::*[@data-ga='" + icon + "']");
+		return (XPATH_ICON + "//self::*[@data-ga='" + icon.name().toLowerCase() + "']");
 	}
 	
 	public boolean isVisibleUntil(int maxSeconds) {
