@@ -22,7 +22,7 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	private static final String TAG_COLOR = "@TagColor";
 	private static final String XPATH_WRAPPER = "//div[@id='stickyMenu']";
 	private static final String XPATH_LINK_ORDEN_WITH_TAG = "//a[text()[contains(.,'" + TAG_ORDENACION + "')]]";
-	private static final String XPATH_LINK_COLOR_WITH_TAG_OUTLET = "//a[@aria-label[contains(.,'" + TAG_COLOR + "')]]";
+	//private static final String XPATH_LINK_COLOR_WITH_TAG_OUTLET = "//a[@aria-label[contains(.,'" + TAG_COLOR + "')]]";
 	private static final String XPATH_LINK_COLOR_WITH_TAG_SHOP = "//label[(@for[contains(.,'filtercolor')] or @for[contains(.,'multiSelectGroupsColors')]) and text()[contains(.,'" + TAG_COLOR + "')]]";
 	private static final String XPATH_LINK_COLOR_WITH_TAG_TABLET_OUTLET	 = "//label[@for[contains(.,'color_" + TAG_COLOR + "')]]";
 	
@@ -50,11 +50,8 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	}
 	
 	private String getXPathLinkColor(Color color) {
-		if (app==AppEcom.outlet) {
-			if (channel==Channel.tablet) {
+		if (app==AppEcom.outlet && channel==Channel.tablet) {
 				return XPATH_LINK_COLOR_WITH_TAG_TABLET_OUTLET.replace(TAG_COLOR, color.getNameFiltro());
-			}
-			return (XPATH_LINK_COLOR_WITH_TAG_OUTLET.replace(TAG_COLOR, color.getNameFiltro()));
 		}
 		return (XPATH_LINK_COLOR_WITH_TAG_SHOP.replace(TAG_COLOR, color.getNameFiltro()));
 	}
@@ -92,8 +89,8 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 		showFilters();
 		for (Color color : colorsToSelect) {
 			String xpathLinkColor = getXPathLinkColor(color);
-			moveToElement(By.xpath(xpathLinkColor), driver);
-			click(By.xpath(xpathLinkColor)).exec();
+			moveToElement(xpathLinkColor);
+			click(xpathLinkColor).exec();
 		}
 		acceptFilters();
 		int maxSecondsToWait = 10;

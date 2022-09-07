@@ -1,4 +1,4 @@
-package com.mng.robotest.test.appshop.footer;
+package com.mng.robotest.domains.footer.tests;
 
 import org.testng.annotations.Test;
 

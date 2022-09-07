@@ -1,10 +1,8 @@
-package com.mng.robotest.test.pageobject.shop.footer;
+package com.mng.robotest.domains.footer.pageobjects;
 
-import org.openqa.selenium.By;
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class PageTrabajaConNosotrosOld extends PageBase implements PageFromFooter {
 	
@@ -18,7 +16,7 @@ public class PageTrabajaConNosotrosOld extends PageBase implements PageFromFoote
 	
 	@Override
 	public boolean isPageCorrectUntil(int maxSeconds) {
-		driver.switchTo().frame(driver.findElement(By.xpath(XPATH_ID_FRAME)));
-		return (state(Present, By.xpath(XPATH_FOR_IDPAGE)).wait(maxSeconds).check());
+		driver.switchTo().frame(getElement(XPATH_ID_FRAME));
+		return state(Present, XPATH_FOR_IDPAGE).wait(maxSeconds).check();
 	}
 }

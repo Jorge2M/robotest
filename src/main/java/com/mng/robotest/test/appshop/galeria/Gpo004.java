@@ -28,17 +28,25 @@ public class Gpo004 extends TestBase {
 		dataTest.userRegistered = false;
 		new AccesoSteps().oneStep(false);
 		Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
+		Menu1rstLevel menuAbrigos = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.she, null, "abrigos"));		
 		SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps();
-		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuCamisas);
+		if (app==AppEcom.shop) {
+			secMenusSteps.selectMenu1rstLevelTypeCatalog(menuCamisas);
+		} else {
+			secMenusSteps.selectMenu1rstLevelTypeCatalog(menuAbrigos);
+		}
 
 		List<Color> colorsToFilter = new ArrayList<>();
 		colorsToFilter.add(Color.Blanco);
-		//En outlet/movil tenemos el antiguo filtro que sólo permite seleccionar un color
-		if (!(app!=AppEcom.outlet && channel.isDevice())) {
+		if (app!=AppEcom.outlet) {
 			colorsToFilter.add(Color.Negro);
 			colorsToFilter.add(Color.Azul);
 		}
-		new SecFiltrosSteps().selectFiltroColoresStep(false, "Camisas", colorsToFilter);
+		if (app==AppEcom.shop) {
+			new SecFiltrosSteps().selectFiltroColoresStep(false, "Camisas", colorsToFilter);
+		} else {
+			new SecFiltrosSteps().selectFiltroColoresStep(false, "Abrigos", colorsToFilter);
+		}
 			
 		//Scrollar hasta la 3a página
 		PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();

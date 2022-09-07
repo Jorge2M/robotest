@@ -1,23 +1,21 @@
-package com.mng.robotest.test.steps.shop;
+package com.mng.robotest.domains.footer.steps;
 
-import java.util.List;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.domains.footer.pageobjects.FactoryPageFromFooter;
+import com.mng.robotest.domains.footer.pageobjects.PageFromFooter;
+import com.mng.robotest.domains.footer.pageobjects.PageMangoCard;
+import com.mng.robotest.domains.footer.pageobjects.SecFooter;
+import com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.pageobject.shop.PageAyuda;
 import com.mng.robotest.test.pageobject.shop.PageInputDataSolMangoCard;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test.pageobject.shop.footer.FactoryPageFromFooter;
-import com.mng.robotest.test.pageobject.shop.footer.PageFromFooter;
-import com.mng.robotest.test.pageobject.shop.footer.PageMangoCard;
-import com.mng.robotest.test.pageobject.shop.footer.SecFooter;
-import com.mng.robotest.test.pageobject.shop.footer.SecFooter.FooterLink;
 import com.mng.robotest.test.steps.shop.modales.ModalCambioPaisSteps;
 
 public class SecFooterSteps extends StepBase {
@@ -28,11 +26,11 @@ public class SecFooterSteps extends StepBase {
 	@Validation 
 	public ChecksTM validaLinksFooter() throws Exception { 
 		ChecksTM checks = ChecksTM.getNew();
-		List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinksFiltered(app, channel);
-		checks.add(
-			"Aparecen los siguientes links en el footer <b>" + listFooterLinksToValidate + "</b>",
-			secFooter.checkFooters(listFooterLinksToValidate), State.Defect);
-		
+		for (FooterLink footerLink : FooterLink.getFooterLinksFiltered(app, channel)) {
+			checks.add(
+				"Aparecen el link <b>" + footerLink + "</b> en el footer",
+				secFooter.checkFooter(footerLink), State.Defect);
+		}
 		return checks;
 	}
 
@@ -73,26 +71,9 @@ public class SecFooterSteps extends StepBase {
 		return checks;
 	}
 	 
-	@Validation
-	public ChecksTM validaPaginaAyuda() throws Exception {
-		ChecksTM checks = ChecksTM.getNew();
-		String telefono = "900 150 543";
-		PageAyuda pageAyuda = new PageAyuda();
-		
-		checks.add(
-			"Aparece \"Preguntas Frecuentes\" en la página",
-			pageAyuda.isPresentCabPreguntasFreq(), State.Warn);
-		
-		checks.add(
-			"Aparece la sección \"Contáctanos\" con el número de teléfono " + telefono,
-			pageAyuda.isPresentTelefono(telefono), State.Warn);
-		
-		return checks;
+	public void checkSolicitarTarjeta () throws Exception {
+		selectLoQuieroAhoraButton();
 	}
-		
-	 public void checkSolicitarTarjeta () throws Exception {
-		 selectLoQuieroAhoraButton();
-	 }
 	 
 	 @Step (
 		description="Seleccionar el botón con fondo negro \"¡La quiero ahora!\"",

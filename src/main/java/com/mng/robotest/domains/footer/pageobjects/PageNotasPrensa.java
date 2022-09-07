@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.footer;
+package com.mng.robotest.domains.footer.pageobjects;
 
 import org.openqa.selenium.By;
 import com.mng.robotest.domains.transversal.PageBase;
@@ -17,6 +17,6 @@ public class PageNotasPrensa extends PageBase implements PageFromFooter {
 	
 	@Override
 	public boolean isPageCorrectUntil(int maxSeconds) {
-		return (state(Present, By.xpath(XPATH_FOR_IDPAGE)).wait(maxSeconds).check());
+		return state(Present, XPATH_FOR_IDPAGE).wait(maxSeconds).check();
 	}
 }

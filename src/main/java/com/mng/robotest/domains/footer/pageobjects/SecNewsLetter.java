@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.footer;
+package com.mng.robotest.domains.footer.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -29,7 +29,7 @@ public class SecNewsLetter extends PageBase {
 	}
 	
 	public boolean newsLetterMsgContains(String literal) {
-		return (getNewsLetterMsgText().contains(literal));
+		return getNewsLetterMsgText().contains(literal);
 	}
 
 	public void clickFooterSuscripcion() throws Exception {

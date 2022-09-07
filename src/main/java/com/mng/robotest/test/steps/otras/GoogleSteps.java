@@ -53,7 +53,7 @@ public class GoogleSteps extends PageBase {
 		level=State.Defect)	
 	private boolean checkInitialPageShop() throws Exception {
 		boolean isPageLanding = (new PageLanding()).isPage();
-		boolean isPagePrehome = PagePrehome.isPage(driver);
+		boolean isPagePrehome = new PagePrehome().isPage();
 		return (isPageLanding || isPagePrehome);
 	}
 }

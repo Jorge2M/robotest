@@ -1,10 +1,10 @@
 package com.mng.robotest.domains.ayuda.tests;
 
 import com.mng.robotest.domains.ayuda.steps.AyudaSteps;
+import com.mng.robotest.domains.footer.pageobjects.SecFooter;
+import com.mng.robotest.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.test.pageobject.shop.footer.SecFooter;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
-import com.mng.robotest.test.steps.shop.SecFooterSteps;
 
 public class Ayu001 extends TestBase {
 

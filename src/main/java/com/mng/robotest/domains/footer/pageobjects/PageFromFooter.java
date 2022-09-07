@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.footer;
+package com.mng.robotest.domains.footer.pageobjects;
 
 public interface PageFromFooter {
 	

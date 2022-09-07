@@ -11,10 +11,10 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import static com.mng.robotest.test.data.Constantes.PrefixRebajas;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.pageobject.shop.PageHomeMarcas;
-import com.mng.robotest.test.pageobject.shop.footer.SecFooter;
 import com.mng.robotest.test.steps.shop.AllPagesSteps;
 import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 import com.mng.robotest.test.utils.UtilsTest;

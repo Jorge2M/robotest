@@ -1,19 +1,18 @@
-package com.mng.robotest.test.pageobject.shop.footer;
+package com.mng.robotest.domains.footer.pageobjects;
 
+import com.mng.robotest.domains.ayuda.pageobjects.PagesAyuda;
+import com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.domains.micuenta.pageobjects.PageAccesoMisCompras;
-import com.mng.robotest.domains.micuenta.pageobjects.PageInputPedido;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputDataNew;
-import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputDataOld;
-import com.mng.robotest.test.pageobject.shop.footer.SecFooter.FooterLink;
+import com.mng.robotest.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test.pageobject.shop.modales.ModalBuscadorTiendas;
-
 
 public class FactoryPageFromFooter {
 	
 	public static PageFromFooter make(FooterLink typeFooterLink) {
 		switch (typeFooterLink) {
 		case AYUDA:
-			return (new PagePregFrecuentes());
+			return (new PagesAyuda());
 		case MIS_COMPRAS:
 			return (new PageAccesoMisCompras()); 
 		case DEVOLUCIONES:
@@ -23,17 +22,15 @@ public class FactoryPageFromFooter {
 		case MANGO_CARD:
 			return (new PageMangoCard());
 		case CHEQUE_REGALO:
+		case CHEQUE_REGALO_OLD:			
 			return (new PageChequeRegaloInputDataNew());
-		case CHEQUE_REGALO_OLD:
-			return (new PageChequeRegaloInputDataOld());
 		case APPS:
 			return (new PageMangoShoppingApp());
 		case EMPRESA:
 			return (new PageEmpresa());
 		case FRANQUICIAS:
 			return (new PageFranquicias());
-		case TRABAJA_CON_NOSOTROS_SHOP:
-		case TRABAJA_CON_NOSOTROS_OUTLET:
+		case TRABAJA_CON_NOSOTROS:
 			return (new PageTrabajaConNosotros());
 		case PRENSA:
 			return (new PageNotasPrensa());
@@ -41,8 +38,8 @@ public class FactoryPageFromFooter {
 			return (new PageMultimarcasOutlet());
 		case PREGUNTAS_FRECUENTES:
 			return (new PagePreguntasFreq());
-		case PEDIDOS:
-			return (new PageInputPedido());
+//		case PEDIDOS:
+//			return (new PageInputPedido());
 		case ENVIO:
 			return (new PageEnvio());
 		case FORMAS_DE_PAGO:
@@ -50,7 +47,7 @@ public class FactoryPageFromFooter {
 		case GUIA_DE_TALLAS:
 			return (new PageGuiaDeTallas());
 		case MANGO:
-			return (new PageMultimarcasShop());		
+			return (new PagePrehome());		
 		default:
 			return null;
 		}

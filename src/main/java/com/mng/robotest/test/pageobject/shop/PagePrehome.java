@@ -4,12 +4,12 @@ import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
+import com.mng.robotest.domains.footer.pageobjects.PageFromFooter;
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -25,7 +25,7 @@ import com.mng.robotest.test.steps.shop.acceptcookies.ModalSetCookiesSteps;
 import com.mng.robotest.test.steps.shop.acceptcookies.SectionCookiesSteps;
 import com.mng.robotest.test.utils.testab.TestABactive;
 
-public class PagePrehome extends PageBase {
+public class PagePrehome extends PageBase implements PageFromFooter {
 
 	enum ButtonEnter { ENTER, CONTINUAR };
 	
@@ -54,13 +54,22 @@ public class PagePrehome extends PageBase {
 			return("//div[@id='lang_" + codigoPais + "']/div[@class[contains(.,'modalFormEnter')]]");
 		}
 	}
+	
+	@Override
+	public String getName() {
+		return "Prehome";
+	}
+	@Override
+	public boolean isPageCorrectUntil(int maxSeconds) {
+		return isPageUntil(maxSeconds);
+	}
 
-	public static boolean isPage(WebDriver driver) {
-		return PageBase.state(Present, By.xpath(XPATH_DIV_PAIS_SELECCIONADO), driver).check();
+	public boolean isPage() {
+		return isPageUntil(0);
 	}
 	
-	public boolean isPage() {
-		return isPage(driver);
+	public boolean isPageUntil(int maxSeconds) {
+		return state(Present, XPATH_DIV_PAIS_SELECCIONADO).wait(maxSeconds).check();
 	}
 
 	public boolean isNotPageUntil(int maxSeconds) {
@@ -83,7 +92,7 @@ public class PagePrehome extends PageBase {
 	}
 
 	public void desplieguaListaPaises() {
-		moveToElement(By.xpath(XPATH_DIV_PAIS_SELECCIONADO), driver);
+		moveToElement(XPATH_DIV_PAIS_SELECCIONADO);
 		getElement(XPATH_DIV_PAIS_SELECCIONADO + "/a").click();
 	}
 

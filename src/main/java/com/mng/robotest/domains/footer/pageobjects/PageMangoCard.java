@@ -1,6 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.footer;
-
-import org.openqa.selenium.By;
+package com.mng.robotest.domains.footer.pageobjects;
 
 import com.mng.robotest.domains.transversal.PageBase;
 
@@ -27,42 +25,42 @@ public class PageMangoCard extends PageBase implements PageFromFooter {
 	
 	@Override
 	public boolean isPageCorrectUntil(int maxSeconds) {
-		return (state(Present, By.xpath(XPATH_FOR_IDPAGE)).wait(maxSeconds).check());
+		return state(Present, XPATH_FOR_IDPAGE).wait(maxSeconds).check();
 	}
 	
 	public void clickOnWantMangoCardNow() {
 		if (channel.isDevice()) {
-			click(By.xpath(XPATH_GO_MANGO_CARD_BUTTON_MOBILE)).exec();
+			click(XPATH_GO_MANGO_CARD_BUTTON_MOBILE).exec();
 		} else {
-			click(By.xpath(XPATH_GO_MANGO_CARD_BUTTON)).exec();
+			click(XPATH_GO_MANGO_CARD_BUTTON).exec();
 		}
 	}
 	
 	public void clickToGoSecondMangoCardPage() {
-		click(By.xpath(XPATH_LINK_SOL_MANGOCARD_PAGE1)).exec();
+		click(XPATH_LINK_SOL_MANGOCARD_PAGE1).exec();
 	}
 
 	public boolean isPresentNameField() {
-		return (state(Present, By.xpath(XPATH_NAME_FIELD)).check());
+		return state(Present, XPATH_NAME_FIELD).check();
 	}
 	
 	public boolean isPresentFirstSurnameField() {
-		return (state(Present, By.xpath(XPATH_FIRST_SURNAME_FIELD)).check());
+		return state(Present, XPATH_FIRST_SURNAME_FIELD).check();
 	}
 	
 	public boolean isPresentSecondSurnameField() {
-		return (state(Present, By.xpath(XPATH_SECOND_SURNAME_FIELD)).check());
+		return state(Present, XPATH_SECOND_SURNAME_FIELD).check();
 	}
 	
 	public boolean isPresentMobileField() {
-		return (state(Present, By.xpath(XPATH_MOBILE_FIELD)).check());
+		return state(Present, XPATH_MOBILE_FIELD).check();
 	}
 	
 	public boolean isPresentMailField() {
-		return (state(Present, By.xpath(XPATH_MAIL_FIELD)).check());
+		return state(Present, XPATH_MAIL_FIELD).check();
 	}
 	
 	public boolean isPresentButtonSolMangoCardNow() {
-		return (state(Present, By.xpath(XPATH_LINK_SOL_MANGOCARD_PAGE1)).check());
+		return state(Present, XPATH_LINK_SOL_MANGOCARD_PAGE1).check();
 	}
 }

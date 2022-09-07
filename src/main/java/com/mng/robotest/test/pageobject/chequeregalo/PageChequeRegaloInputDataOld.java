@@ -2,8 +2,8 @@ package com.mng.robotest.test.pageobject.chequeregalo;
 
 import org.openqa.selenium.By;
 
+import com.mng.robotest.domains.footer.pageobjects.PageFromFooter;
 import com.mng.robotest.test.generic.ChequeRegalo;
-import com.mng.robotest.test.pageobject.shop.footer.PageFromFooter;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 

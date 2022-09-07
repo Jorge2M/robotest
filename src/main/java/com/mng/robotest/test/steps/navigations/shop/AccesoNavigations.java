@@ -2,6 +2,7 @@ package com.mng.robotest.test.steps.navigations.shop;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.AccesoVOTF;
 import com.mng.robotest.test.beans.IdiomaPais;
@@ -16,7 +17,6 @@ import com.mng.robotest.test.pageobject.votf.PageAlertaVOTF;
 import com.mng.robotest.test.pageobject.votf.PageLoginVOTF;
 import com.mng.robotest.test.pageobject.votf.PageSelectIdiomaVOTF;
 import com.mng.robotest.test.pageobject.votf.PageSelectLineaVOTF;
-import com.mng.robotest.test.steps.shop.SecFooterSteps;
 import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 
 public class AccesoNavigations extends StepBase {

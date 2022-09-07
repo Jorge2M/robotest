@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.github.jorge2m.testmaker.domain.InputParamsTM.TypeAccess;
+import com.mng.robotest.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.domains.registro.beans.DataNino;
 import com.mng.robotest.domains.registro.beans.ListDataNinos;
@@ -21,7 +22,6 @@ import com.mng.robotest.test.data.DataMango;
 import com.mng.robotest.test.data.Constantes.ThreeState;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.SecCabeceraSteps;
-import com.mng.robotest.test.steps.shop.SecFooterSteps;
 import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
 import com.mng.robotest.test.steps.shop.modales.ModalSuscripcionSteps;
 import com.mng.robotest.test.suites.RegistrosSuite.VersionRegistroSuite;

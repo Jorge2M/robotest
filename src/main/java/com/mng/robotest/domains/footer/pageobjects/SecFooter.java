@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.footer;
+package com.mng.robotest.domains.footer.pageobjects;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,19 +40,19 @@ public class SecFooter extends PageBase {
 		CHEQUE_REGALO(FOOTER_SHOP, CHANNEL_DESKTOP, "//a[@data-ga-label='cheques' and text()[contains(.,'egalo')]]", false),
 		CHEQUE_REGALO_OLD(FOOTER_SHOP, CHANNEL_DESKTOP, "//a[@data-ga-label='cheques']", false),
 		APPS(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label='apps' and text()[contains(.,'Apps')]]", false), 
-		EMPRESA(FOOTER_ALL, CHANNEL_DESKTOP, "//a[@data-ga-label='pieEmpresa' and text()[contains(.,'Empresa')]]", true), 
+		EMPRESA(FOOTER_SHOP, CHANNEL_DESKTOP, "//a[@data-ga-label='pieEmpresa' and text()[contains(.,'Empresa')]]", true), 
 		FRANQUICIAS(FOOTER_SHOP, CHANNEL_DESKTOP, "//a[@data-ga-label='pieFranquicias' and text()[contains(.,'Franquicias')]]", true), 
-		TRABAJA_CON_NOSOTROS_SHOP(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label[contains(.,'pieTrabajar')] and text()[contains(.,'Trabaja')]]", true), 
+		TRABAJA_CON_NOSOTROS(FOOTER_ALL, CHANNEL_ALL, "//a[@data-ga-label[contains(.,'pieTrabajar')] and text()[contains(.,'Trabaja')]]", true), 
 		PRENSA(FOOTER_SHOP, CHANNEL_DESKTOP, "//a[@data-ga-label='pressroom' and text()[contains(.,'Prensa')]]", true), 
 		MANGO_OUTLET(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label='outlet' and text()[contains(.,'Mango Outlet')]]", true),
 		
 		PREGUNTAS_FRECUENTES(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='ayuda' and text()[contains(.,'Preguntas Frecuentes')]]", false), 
-		PEDIDOS(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='pedidos' and text()[contains(.,'Pedidos')]]", false), 
+		//PEDIDOS(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='pedidos' and text()[contains(.,'Pedidos')]]", false), 
 		ENVIO(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='envio' and text()[contains(.,'Envío')]]", false), 
 		FORMAS_DE_PAGO(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='pago' and text()[contains(.,'Formas de pago')]]", false), 
 		GUIA_DE_TALLAS(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='guiaTallas']", true),
-		MANGO(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='shop' and (text()[contains(.,'MANGO')] or text()[contains(.,'Mango')])]", true), 
-		TRABAJA_CON_NOSOTROS_OUTLET(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='pieTrabajarNew' and text()[contains(.,'Trabaja')]]", true);
+		MANGO(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='shop' and (text()[contains(.,'MANGO')] or text()[contains(.,'Mango')])]", true); 
+		//TRABAJA_CON_NOSOTROS_OUTLET(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='pieTrabajarNew' and text()[contains(.,'Trabaja')]]", true);
 		
 		List<AppEcom> appList;
 		List<Channel> channel;
@@ -114,19 +114,17 @@ public class SecFooter extends PageBase {
 	}
 	
 	public boolean isPresent() {
-		String xpath = getXPathCapaFooter();
-		return (state(Present, By.xpath(xpath)).check());
+		return state(Present, getXPathCapaFooter()).check();
 	}
 	
 	public boolean isVisible() throws Exception {
-		String xpath = getXPathCapaFooter();
 		waitForPageLoaded(driver);
-		return (state(Visible, By.xpath(xpath)).check());
+		return state(Visible, getXPathCapaFooter()).check();
 	}	
 	
 	public void clickLink(FooterLink footerType) {
 		ModalClubMangoLikes.closeModalIfVisible(driver);
-		moveToElement(By.xpath(footerType.getXPathRelativeCapa()), driver);
+		moveToElement(footerType.getXPathRelativeCapa());
 		
 		By byLink = By.xpath(footerType.getXPathRelativeCapa());
 		state(State.Visible, byLink).wait(2).check();
@@ -144,22 +142,15 @@ public class SecFooter extends PageBase {
 	}
 
 	public void clickLinkCambioPais() {
-		String xpathLink = getXPathLinkCambioPais();
-		click(By.xpath(xpathLink)).exec();
+		click(getXPathLinkCambioPais()).exec();
 	}
 
-	public boolean checkFooters(List<FooterLink> listFooterLinksToValidate) {
-		for (FooterLink footerLink : listFooterLinksToValidate) {
-			String xpathLink = getXPathLink(footerLink);
-			if (!state(Present, By.xpath(xpathLink)).check()) {
-				return false;
-			}
-		}
-		return true;
+	public boolean checkFooter(FooterLink footerLink) {
+		return state(Present, getXPathLink(footerLink)).check();
 	}
 	
 	public boolean isTextoLegalRGPDPresent() {
-		return (state(Present, By.xpath(XPATH_LEGA_LRGPD)).check());
+		return state(Present, XPATH_LEGA_LRGPD).check();
 	}
 	
 	public void moveTo() {

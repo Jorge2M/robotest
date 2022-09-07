@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.footer;
+package com.mng.robotest.domains.footer.pageobjects;
 
 import org.openqa.selenium.By;
 import com.mng.robotest.domains.transversal.PageBase;
@@ -17,7 +17,6 @@ public class PageFranquicias extends PageBase implements PageFromFooter {
 	
 	@Override
 	public boolean isPageCorrectUntil(int maxSeconds) {
-		//driver.switchTo().frame(driver.findElement(By.xpath(XPathIdFrame)));
-		return (state(Present, By.xpath(XPATH_FOR_ID_PAGE)).wait(maxSeconds).check());
+		return state(Present, By.xpath(XPATH_FOR_ID_PAGE)).wait(maxSeconds).check();
 	}
 }

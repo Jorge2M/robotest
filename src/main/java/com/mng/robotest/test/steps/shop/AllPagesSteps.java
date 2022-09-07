@@ -12,9 +12,9 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjT
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.AllPages;
-import com.mng.robotest.test.pageobject.shop.footer.SecFooter;
 
 public class AllPagesSteps {
 

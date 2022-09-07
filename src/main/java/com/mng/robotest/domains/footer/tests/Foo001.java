@@ -1,30 +1,28 @@
-package com.mng.robotest.test.appshop.footer;
+package com.mng.robotest.domains.footer.tests;
 
 import java.util.List;
 
+import com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink;
+import com.mng.robotest.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.test.pageobject.shop.footer.SecFooter.FooterLink;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
-import com.mng.robotest.test.steps.shop.SecFooterSteps;
 
 public class Foo001 extends TestBase {
 
+	private final SecFooterSteps secFooterSteps = new SecFooterSteps();
+	
 	@Override
 	public void execute() throws Exception {
-		dataTest.userRegistered = false;
-
 		new AccesoSteps().oneStep(false);
-		String urlInitialPage = driver.getCurrentUrl();
-		SecFooterSteps secFooterSteps = new SecFooterSteps();
 		secFooterSteps.validaLinksFooter();
-		
+		checkLinksSelection();		
+	}
+
+	private void checkLinksSelection() throws Exception {
+		String urlInitialPage = driver.getCurrentUrl();
 		List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinksFiltered(app, channel);
 		for (FooterLink footerLinkToValidate : listFooterLinksToValidate) {
 			switch (footerLinkToValidate) {
-			case AYUDA:
-				secFooterSteps.clickLinkFooter(footerLinkToValidate, false);
-				secFooterSteps.validaPaginaAyuda();
-				break;
 			case MANGO_CARD:
 				secFooterSteps.clickLinkFooter(footerLinkToValidate, false);
 				secFooterSteps.checkSolicitarTarjeta();
@@ -33,9 +31,8 @@ public class Foo001 extends TestBase {
 				secFooterSteps.clickLinkFooter(footerLinkToValidate, true);
 				driver.get(urlInitialPage);
 			}
-			
 			driver.get(urlInitialPage);
-		}		
+		}
 	}
 
 }

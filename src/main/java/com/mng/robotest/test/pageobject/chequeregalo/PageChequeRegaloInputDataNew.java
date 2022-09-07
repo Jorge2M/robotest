@@ -8,8 +8,8 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import com.mng.robotest.domains.footer.pageobjects.PageFromFooter;
 import com.mng.robotest.test.generic.ChequeRegalo;
-import com.mng.robotest.test.pageobject.shop.footer.PageFromFooter;
 
 public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData implements PageFromFooter {
 
