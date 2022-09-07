@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
+import com.mng.robotest.domains.footer.steps.TarjetaMangoSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
 
@@ -25,7 +26,7 @@ public class Foo001 extends TestBase {
 			switch (footerLinkToValidate) {
 			case MANGO_CARD:
 				secFooterSteps.clickLinkFooter(footerLinkToValidate, false);
-				secFooterSteps.checkSolicitarTarjeta();
+				new TarjetaMangoSteps().checkSolicitarTarjeta();
 				break;
 			default:
 				secFooterSteps.clickLinkFooter(footerLinkToValidate, true);
