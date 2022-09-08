@@ -183,16 +183,16 @@ public abstract class PageGaleria extends PageBase {
 
 	public boolean isVisibleArticuloUntil(int numArticulo, int seconds) {
 		String xpathArticulo = xpathArticuloBase + "[" + numArticulo + "]"; 
-		return (state(Visible, By.xpath(xpathArticulo)).wait(seconds).check());
+		return state(Visible, xpathArticulo).wait(seconds).check();
 	}
 
 	public boolean isClickableArticuloUntil(int numArticulo, int seconds) {
 		String xpathArticulo = xpathArticuloBase + "[" + numArticulo + "]"; 
-		return (state(Clickable, By.xpath(xpathArticulo)).wait(seconds).check());
+		return state(Clickable, xpathArticulo).wait(seconds).check();
 	}
 	
 	public List<WebElement> getListaArticulos() {
-		return driver.findElements(By.xpath(xpathArticuloBase));
+		return getElements(xpathArticuloBase);
 	}
 	
 	public boolean articlesInOrder(FilterOrdenacion typeOrden) throws Exception {
@@ -232,7 +232,7 @@ public abstract class PageGaleria extends PageBase {
 	}
 	
 	public boolean isFirstArticleOfType(LineaType lineaType) {
-		List<WebElement> listaArticulos = driver.findElements(By.xpath(xpathArticuloBase));
+		List<WebElement> listaArticulos = getElements(xpathArticuloBase);
 		return (
 			!listaArticulos.isEmpty() &&
 			state(Present, listaArticulos.get(0))
@@ -240,7 +240,7 @@ public abstract class PageGaleria extends PageBase {
 	}
 	
 	public void moveToArticleAndGetObject(int posArticulo) {
-		moveToElement(By.xpath(getXPathLinkArticulo(posArticulo) + "/.."), driver);
+		moveToElement(getXPathLinkArticulo(posArticulo) + "/..");
 	}
 	
 	/**
@@ -376,8 +376,8 @@ public abstract class PageGaleria extends PageBase {
 		}
 		
 		//Para el caso TestAB-1 se ejecutará este caso para conseguir los atributos del artículo
-		String href = articulo.findElement(By.xpath(XPATH_LINK_RELATIVE_TO_ARTICLE)).getAttribute("href");
-		return (UtilsTest.getReferenciaFromHref(href));
+		String href = getElement(XPATH_LINK_RELATIVE_TO_ARTICLE).getAttribute("href");
+		return UtilsTest.getReferenciaFromHref(href);
 	}
 
 	public boolean waitToHearthIconInState(WebElement hearthIcon, StateFavorito stateIcon, int maxSecondsToWait) {
@@ -405,7 +405,6 @@ public abstract class PageGaleria extends PageBase {
 					    AttributeArticle.REFERENCIA,
 					    AttributeArticle.IMAGEN));
 		}
-		
 		return (list.getArticlesRepeated());
 	}
 	
@@ -491,8 +490,8 @@ public abstract class PageGaleria extends PageBase {
 	}
 	
 	public void clickIconoUpToGaleryIfVisible(String xpathIconoUpGalery) {
-		if (state(Visible, By.xpath(xpathIconoUpGalery)).wait(1).check()) {
-			driver.findElement(By.xpath(xpathIconoUpGalery)).click();
+		if (state(Visible, xpathIconoUpGalery).wait(1).check()) {
+			getElement(xpathIconoUpGalery).click();
 		}
 	}
 
@@ -651,8 +650,7 @@ public abstract class PageGaleria extends PageBase {
 	}
 	
 	public boolean isPresentPagina(int pagina) {
-		String xpathPagina = getXPathPagina(pagina);
-		return (state(Visible, By.xpath(xpathPagina)).check());
+		return state(Visible, getXPathPagina(pagina)).check();
 	}
 
 	public void clickArticulo(WebElement articulo) {
