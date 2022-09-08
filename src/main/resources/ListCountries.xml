@@ -2415,6 +2415,9 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="STORECREDIT" testpasarela='s' testpago='s' tipoenvioshop='STANDARD'>&TPV-999;</pago> --> <!-- Pago Store Credit que aparece cuando el usuario tiene Saldo en Cuenta (y desaparecen el resto de métodos de pago) -->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
+	nombre="Tarjeta" testpasarela='s' testpago='s' tipoenvioshop='STANDARD' tipoenviooutlet='STANDARD' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-549;</pago>	
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='STANDARD' tipoenviooutlet='STANDARD' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-549;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 

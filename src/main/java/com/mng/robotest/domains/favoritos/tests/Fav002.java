@@ -13,14 +13,10 @@ import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop;
-import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
-import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
-import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.galeria.LocationArticle;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
-
 
 public class Fav002 extends TestBase {
 
@@ -91,7 +87,7 @@ public class Fav002 extends TestBase {
 		if (app==AppEcom.outlet) {
 			clickMenu("Vestidos");
 		} else {
-			clickMenu("Albornoces");
+			clickMenu(LineaType.home, null, "Albornoces");
 		}
 		LocationArticle article1 = LocationArticle.getInstanceInCatalog(1);
 		pageGaleriaSteps.selectArticulo(article1);

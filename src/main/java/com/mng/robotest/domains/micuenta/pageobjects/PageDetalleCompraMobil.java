@@ -13,7 +13,7 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	private final SectionPrendas sectionPrendas = new SectionPrendas();
 	
 	private static final String XPATH_ID_TICKET = "//*[@data-testid[contains(.,'purchaseDetail.purchaseNumber')]]";
-	private static final String XPATH_LINEA_IMPORTE = "//*[@data-testid[contains(.,'detail.totalPrice')]]";
+	private static final String XPATH_LINEA_IMPORTE = "//*[@data-testid='price']";
 	
 	@Override
 	public boolean isPage() {
@@ -34,7 +34,6 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	}
 	@Override
 	public int getNumPrendas() {
-		//return (driver.findElements(By.xpath(XPathArticulo)).size());
 		return sectionPrendas.getNumPrendas();
 	}
 	@Override

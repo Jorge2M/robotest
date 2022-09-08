@@ -58,32 +58,37 @@ public class SecMenusWrapperSteps extends StepBase {
 		ChecksTM checks = ChecksTM.getNew();
 		LineaType[] lineasToTest = Linea.LineaType.values();
 		for (LineaType lineaType : lineasToTest) {
-			if (lineaType.isActiveIn(channel)) {
-				ThreeState stateLinea = pais.getShoponline().stateLinea(lineaType, app);
-				if ( stateLinea!=ThreeState.UNKNOWN &&
-					(lineaType!=LineaType.rebajas || UtilsMangoTest.validarLineaRebajas(pais))) {
-					ThreeState apareceLinea = stateLinea;
-					
-					//Caso especial de un país con una sóla línea de she -> No ha de aparecer la línea de she
-					if (lineaType==LineaType.she && app!=AppEcom.outlet && pais.getShoponline().getNumLineasTiendas(app)==1) {
-						apareceLinea = ThreeState.FALSE;
-					}
-					
-					boolean isLineaPresent = isLineaPresent(lineaType);
-					if (apareceLinea==ThreeState.TRUE) {
-						checks.add (
-							"<b>Sí</b> aparece el link de la línea <b>" + lineaType + "</b>",
-							isLineaPresent, State.Warn);
-					} else {
-						checks.add (
-							"<b>No</b> aparece el link de la línea <b>" + lineaType + "</b>",
-							!isLineaPresent, State.Warn);
-					}
+			ThreeState apareceLinea = pais.getShoponline().stateLinea(lineaType, app);
+			if (checkLinea(lineaType, apareceLinea)) {
+				//Caso especial de un país con una sóla línea de she -> No ha de aparecer la línea de she
+				if (lineaType==LineaType.she && app!=AppEcom.outlet && pais.getShoponline().getNumLineasTiendas(app)==1) {
+					apareceLinea = ThreeState.FALSE;
+				}
+				
+				boolean isLineaPresent = isLineaPresent(lineaType);
+				if (apareceLinea==ThreeState.TRUE) {
+					checks.add (
+						"<b>Sí</b> aparece el link de la línea <b>" + lineaType + "</b>",
+						isLineaPresent, State.Warn);
+				} else {
+					checks.add (
+						"<b>No</b> aparece el link de la línea <b>" + lineaType + "</b>",
+						!isLineaPresent, State.Warn);
 				}
 			}
 		}
 			
 		return checks;
+	}
+	
+	private boolean checkLinea(LineaType lineaType, ThreeState stateLinea) throws Exception {
+		if (lineaType.isActiveIn(channel)) {
+			if (stateLinea!=ThreeState.UNKNOWN &&
+				(lineaType!=LineaType.rebajas || UtilsMangoTest.validarLineaRebajas(pais))) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	private boolean isLineaPresent(LineaType lineaType) {

@@ -9,8 +9,9 @@ public class SecLineasTabletShop extends SecLineasTablet {
 	private static final String XPATH_LINK_LINEA_MUJER = INI_XPATH_LINK_LINEA + "='she']";
 	private static final String XPATH_LINK_LINEA_HOMBRE = INI_XPATH_LINK_LINEA + "='he']";
 	private static final String XPATH_LINK_LINEA_NINA = INI_XPATH_LINK_LINEA + "='kids']";
-	private static final String XPATH_LINK_LINEA_NINO =INI_XPATH_LINK_LINEA + "='kids']";
-	private static final String XPATH_LINK_LINEA_KIDS =INI_XPATH_LINK_LINEA + "='kids']"; //p.e. Bolivia
+	private static final String XPATH_LINK_LINEA_NINO = INI_XPATH_LINK_LINEA + "='kids']";
+	private static final String XPATH_LINK_LINEA_KIDS = INI_XPATH_LINK_LINEA + "='kids']"; //p.e. Bolivia
+	private static final String XPATH_LINK_LINEA_TEEN = INI_XPATH_LINK_LINEA + "='teen']";
 	private static final String XPATH_LINK_LINEA_VIOLETA = INI_XPATH_LINK_LINEA + "='violeta']";
 	private static final String XPATH_LINK_LINEA_HOME = INI_XPATH_LINK_LINEA + "='home']";
 	
@@ -27,6 +28,8 @@ public class SecLineasTabletShop extends SecLineasTablet {
 			return XPATH_LINK_LINEA_NINO;
 		case kids: 
 			return XPATH_LINK_LINEA_KIDS;
+		case teen:
+			return XPATH_LINK_LINEA_TEEN;
 		case violeta: 
 			return XPATH_LINK_LINEA_VIOLETA;
 		case home:

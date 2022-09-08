@@ -54,6 +54,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 		checks.add(
 			"Aparece la página inicial del Checkout (la esperamos un máximo de " + maxSeconds + " segundos)<br>",
 			page1DktopCheckout.isPageUntil(maxSeconds), State.Defect);
+		
 		checks.add(
 			"Aparecen los datos introducidos:<br>" + 
 			"\"Nombre: <b>" + chequeRegalo.getNombre() + "</b><br>" + 
@@ -62,6 +63,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 			"\"Importe: <b>" + chequeRegalo.getImporte() + "</b><br>" + 
 			"\"Mensaje: <b>" + chequeRegalo.getMensaje() + "</b>",
 			page1DktopCheckout.isDataChequeRegalo(chequeRegalo), State.Warn);
+		
 		return checks;
 	}
 	
@@ -78,6 +80,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 			"Para todos los artículos, el % de descuento final es como mínimo del " + 
 			descuento.getPercentageDesc() + "% (" + descuento.getDiscountOver().getDescription() + ")",
 			page1DktopCheckout.validateArticlesAndDiscount(dataBag, descuento), State.Warn);
+	 	
 	 	return checks;
 	}
 	
@@ -167,9 +170,11 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	 	checks.add(
 			"Desaparece el campo de Input del código de vendedor (lo esperamos hasta " + maxSeconds + " segundos)",
 			!page1DktopCheckout.isVisibleInputVendedorVOTF(maxSeconds), State.Defect);
+	 	
 	 	checks.add(
 			"En su lugar se pinta el código de vendedor " + codigoVendedor,
 			page1DktopCheckout.isVisibleCodigoVendedorVOTF(codigoVendedor), State.Defect);
+	 	
 	 	return checks;
 	}
 }

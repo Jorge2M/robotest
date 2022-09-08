@@ -38,6 +38,7 @@ public class Com007 extends TestBase {
 			.getPassword();
 		
 		ConfigCheckout configCheckout = ConfigCheckout.config()
+				.checkPagos()
 				.checkMisCompras()
 				.emaiExists()
 				.chequeRegalo().build();

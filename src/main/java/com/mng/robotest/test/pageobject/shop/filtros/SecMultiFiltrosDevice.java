@@ -1,5 +1,6 @@
 package com.mng.robotest.test.pageobject.shop.filtros;
 
+import java.text.Normalizer;
 import java.util.Arrays;
 import java.util.List;
 
@@ -106,7 +107,7 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	}
 	
 	private void clickFiltroOption(FiltroMobil typeFiltro, String textFiltro) {
-		WebElement filtroLinea = driver.findElement(By.xpath(typeFiltro.getXPathLineaFiltro()));
+		WebElement filtroLinea = getElement(typeFiltro.getXPathLineaFiltro());
 		filtroLinea.click();
 		waitForPageLoaded(driver);
 		By byFiltroOption = By.xpath(getXPathFiltroOption(typeFiltro, textFiltro));
@@ -115,15 +116,21 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 		waitForPageLoaded(driver);
 	}
 	private String getXPathFiltroOption(FiltroMobil typeFiltro, String textFiltro) {
+		String labelFiltro = stripAccents(textFiltro);
 		if (typeFiltro==FiltroMobil.Familia) {
 			return(
-				".//*[@name[contains(.,'" + textFiltro + "')] or " + 
-				"@name[contains(.,'" + upperCaseFirst(textFiltro) + "')]]/../span");
+				".//*[@name[contains(.,'" + labelFiltro + "')] or " + 
+				"@name[contains(.,'" + upperCaseFirst(labelFiltro) + "')]]/../span");
 		} else {
 			return (
 				".//*[text()[contains(.,'" + textFiltro + "')] or " + 
-				"text()[contains(.,'" + upperCaseFirst(textFiltro) + "')]]");
+				"text()[contains(.,'" + upperCaseFirst(labelFiltro) + "')]]");
 		}
+	}
+	
+	public static String stripAccents(String text) {
+	    String s = Normalizer.normalize(text, Normalizer.Form.NFD);
+	    return s.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
 	}
 	
 	private void clickApplicarFiltrosButton() {

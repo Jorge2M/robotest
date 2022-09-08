@@ -11,7 +11,6 @@ import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog.Article;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 
-@SuppressWarnings({"static-access"})
 public class ArticuloNavigations {
 
 	/**

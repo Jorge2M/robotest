@@ -131,8 +131,10 @@ public abstract class PageGaleria extends PageBase {
 			return XPATH_ARTICULO_DESKTOP;
 		}
 		else {
-			if (app==AppEcom.outlet && channel==Channel.tablet) {
-				return XPATH_ARTICULO_TABLET_OUTLET;
+			if (channel==Channel.tablet) {
+				if  (app==AppEcom.outlet || from==From.BUSCADOR) {
+					return XPATH_ARTICULO_TABLET_OUTLET;
+				}
 			}
 			return XPATH_ARTICULO_DEVICE;
 		}
@@ -224,14 +226,9 @@ public abstract class PageGaleria extends PageBase {
 		return false;
 	}
 	
-	/**
-	 * Espera hasta que está presente un artículo en la galería
-	 * @return número de artículos que aparecen en la galería
-	 */
 	public boolean isVisibleArticleUntil(int numArticulo, int seconds) {
-		//Esperamos a que esté la imagen del 1er artículo pintada
 		String xpathArtGaleria = "(" + xpathArticuloBase + ")[" + numArticulo + "]";
-		return (state(Visible, By.xpath(xpathArtGaleria)).wait(seconds).check());
+		return state(Visible, xpathArtGaleria).wait(seconds).check();
 	}
 	
 	public boolean isFirstArticleOfType(LineaType lineaType) {
@@ -513,7 +510,7 @@ public abstract class PageGaleria extends PageBase {
 				XPATH_NOMBRE_RELATIVE_TO_ARTICLE + 
 				"//self::*[text()[contains(.,'" + literal + "')]]");
 		if (state(Present, byArticleName).wait(maxSeconds).check()) {
-			return driver.findElement(By.xpath(xpathArticuloBase));
+			return getElement(xpathArticuloBase);
 		}
 		return null;
 	}

@@ -2,7 +2,6 @@ package com.mng.robotest.domains.ficha.pageobjects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,7 +20,6 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class SecDataProduct extends PageBase {
 	
@@ -100,8 +98,10 @@ public class SecDataProduct extends PageBase {
 	
 //xpaths asociados a los precios
 	//El class es diferente en ficha old y la new (product-price-sale vs product-sale)
-	private static final String XPATH_ITEMS_PRECIO_FINAL_ART = "//span[(@class[contains(.,'product-prices-sale')] or @class[contains(.,'product-sale')]) and not(@class[contains(.,'--cross')])]";
-	private static final String XPATH_ITEMS_PRECIO_SIN_DESC = "//span[(@class[contains(.,'product-prices-sale--cross')] or @class[contains(.,'product-sale--cross')])]";
+//	private static final String XPATH_ITEMS_PRECIO_FINAL_ART = "//span[(@class[contains(.,'product-prices-sale')] or @class[contains(.,'product-sale')]) and not(@class[contains(.,'--cross')])]";
+//	private static final String XPATH_ITEMS_PRECIO_SIN_DESC = "//span[(@class[contains(.,'product-prices-sale--cross')] or @class[contains(.,'product-sale--cross')])]";
+	private static final String XPATH_PRECIO_FINAL = "//span[@data-testid='currentPrice']";
+	private static final String XPATH_PRECIO_REBAJADO = "//span[@data-testid[contains(.,'crossedOutPrice')]]";
 
 	//xpaths asociados a los colores de la prenda
 	private static final String XPATH_COLORES_PRENDA_SIN_IDENTIFICAR = "//div[@class[contains(.,'color-container')]]";
@@ -218,12 +218,12 @@ public class SecDataProduct extends PageBase {
 	
 //Funciones referentes a los precios
 	public String getPrecioFinalArticulo() {
-		List<WebElement> listElemsPrecio = getElements(XPATH_ITEMS_PRECIO_FINAL_ART);
-		ListIterator<WebElement> itPrecioVenta = listElemsPrecio.listIterator();
-		String precioArticulo = "";
-		while (itPrecioVenta != null && itPrecioVenta.hasNext())
-			precioArticulo += (itPrecioVenta.next()).getAttribute("innerHTML");
-		
+		String precioArticulo = getElementVisible(XPATH_PRECIO_FINAL).getText();
+//		List<WebElement> listElemsPrecio = getElements(XPATH_ITEMS_PRECIO_FINAL_ART);
+//		ListIterator<WebElement> itPrecioVenta = listElemsPrecio.listIterator();
+//		String precioArticulo = "";
+//		while (itPrecioVenta != null && itPrecioVenta.hasNext())
+//			precioArticulo += (itPrecioVenta.next()).getAttribute("innerHTML");
 		return (ImporteScreen.normalizeImportFromScreen(precioArticulo));
 	}
 	
@@ -231,16 +231,21 @@ public class SecDataProduct extends PageBase {
 	 * Extrae (si existe) el precio rebajado de la página de ficha de producto. Si no existe devuelve ""
 	 */
 	public String getPrecioTachadoFromFichaArt() {
-		if (state(Present, XPATH_ITEMS_PRECIO_SIN_DESC).check()) {
-			// Entero
-			String precioSinDesc = getElement(XPATH_ITEMS_PRECIO_SIN_DESC + "[1]").getText();
-	
-			// Decimales
-			if (state(Present, XPATH_ITEMS_PRECIO_SIN_DESC + "[2]").check()) {
-				precioSinDesc += getElement(XPATH_ITEMS_PRECIO_SIN_DESC + "[2]").getText();
-			}
-			return (ImporteScreen.normalizeImportFromScreen(precioSinDesc));
+		if (state(Present, XPATH_PRECIO_REBAJADO).check()) {
+			String precioRebajado = getElementVisible(XPATH_PRECIO_REBAJADO).getText();
+			return ImporteScreen.normalizeImportFromScreen(precioRebajado);
 		}
+//		return "";
+//		if (state(Present, XPATH_ITEMS_PRECIO_SIN_DESC).check()) {
+//			// Entero
+//			String precioSinDesc = getElement(XPATH_ITEMS_PRECIO_SIN_DESC + "[1]").getText();
+//	
+//			// Decimales
+//			if (state(Present, XPATH_ITEMS_PRECIO_SIN_DESC + "[2]").check()) {
+//				precioSinDesc += getElement(XPATH_ITEMS_PRECIO_SIN_DESC + "[2]").getText();
+//			}
+//			return (ImporteScreen.normalizeImportFromScreen(precioSinDesc));
+//		}
 		return "";
 	}	
 	

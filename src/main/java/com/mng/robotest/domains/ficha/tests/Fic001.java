@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.buscador.steps.SecBuscadorSteps;
@@ -27,7 +28,6 @@ public class Fic001 extends TestBase {
 	private final List<FilterType> filterNoOnlineWithColors = Arrays.asList(FilterType.NoOnline, FilterType.ManyColors);
 	private final Optional<GarmentCatalog> articleNoOnlineWithColors;
 	
-	private final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
 	private final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps();
 	
 	public Fic001() throws Exception {
@@ -52,26 +52,27 @@ public class Fic001 extends TestBase {
 		if (articleOnline.isPresent()) {
 			articleOnlineTest();
 		}
-		
 		stopIfNoPresentArticleNoOnlineWithColors();
 		articleNoOnlineTest();
 	}
 
 	private void articleOnlineTest() throws Exception {
-		secBuscadorSteps.searchArticulo(articleOnline.get(), filterOnline);
+		new SecBuscadorSteps().searchArticulo(articleOnline.get(), filterOnline);
 		pageFichaSteps.checkLinkDispTiendaInvisible();
 	}
 	
 	private void articleNoOnlineTest() throws Exception {
-		secBuscadorSteps.searchArticulo(articleNoOnlineWithColors.get(), filterNoOnlineWithColors);
+		new SecBuscadorSteps().searchArticulo(articleNoOnlineWithColors.get(), filterNoOnlineWithColors);
 		boolean isTallaUnica = pageFichaSteps.selectAnadirALaBolsaTallaPrevNoSelected();
 		ArticuloScreen articulo = new ArticuloScreen(articleNoOnlineWithColors.get());
 		pageFichaSteps.selectColorAndSaveData(articulo);
 		pageFichaSteps.selectTallaAndSaveData(articulo);
 		ifTallaUnicaClearBolsa(isTallaUnica);
 		if (app==AppEcom.shop) {
-			pageFichaSteps.selectBuscarEnTiendaButton();
-			new ModalBuscadorTiendasSteps().close();
+			if (channel!=Channel.tablet) {
+				pageFichaSteps.selectBuscarEnTiendaButton();
+				new ModalBuscadorTiendasSteps().close();
+			}
 			pageFichaSteps.selectAnadirAFavoritos();
 			pageFichaSteps.changeColorGarment();
 			pageFichaSteps.selectRemoveFromFavoritos();

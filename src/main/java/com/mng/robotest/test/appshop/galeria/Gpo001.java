@@ -6,7 +6,6 @@ import java.util.List;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop;
@@ -15,15 +14,11 @@ import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria.From;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.NumColumnas;
-import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
-import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
-import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test.pageobject.utils.DataScroll;
 import com.mng.robotest.test.pageobject.utils.ListDataArticleGalery;
 import com.mng.robotest.test.steps.shop.SecFiltrosSteps;
 import com.mng.robotest.test.steps.shop.galeria.DataForScrollStep;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
-import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 
 public class Gpo001 extends TestBase {
 
@@ -74,8 +69,8 @@ public class Gpo001 extends TestBase {
 		
 		pageGaleriaSteps.seleccionaOrdenacionGaleria(FilterOrdenacion.PrecioAsc, tipoPrendasGaleria, numArticulosPantalla);
 		pageGaleriaSteps.scrollFromFirstPage(dataScroll);
-		pageGaleriaSteps.selecColorFromArtGaleriaStep(1/*numArtConColores*/, 2/*posColor*/);
-		pageGaleriaSteps.selecArticuloGaleriaStep(1/*numArtConColores*/);		
+		pageGaleriaSteps.selecColorFromArtGaleriaStep(1, 2);
+		pageGaleriaSteps.selecArticuloGaleriaStep(1);		
 	}
 
 }
