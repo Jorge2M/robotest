@@ -8,9 +8,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.bannersNew.BannerObject;
 import com.mng.robotest.test.pageobject.shop.bannersNew.BannerObjectFactory;
 import com.mng.robotest.test.pageobject.shop.bannersNew.BannerType;

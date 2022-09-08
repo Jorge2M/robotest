@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
@@ -18,8 +19,6 @@ import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.products.data.Size;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
-import com.mng.robotest.test.steps.shop.SecBolsaSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 
 public class Luq001 extends TestBase {
@@ -47,7 +46,7 @@ public class Luq001 extends TestBase {
 		List<GarmentCatalog> listArticles = getListArticles();
 		
 		//Access and add articles
-		new AccesoSteps().oneStep(false);
+		access();
 		DataBag dataBag = new DataBag();
 		SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 		secBolsaSteps.altaListaArticulosEnBolsa(listArticles, dataBag);

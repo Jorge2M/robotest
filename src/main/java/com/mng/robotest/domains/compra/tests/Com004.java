@@ -3,6 +3,7 @@ package com.mng.robotest.domains.compra.tests;
 import java.util.Arrays;
 import java.util.List;
 
+import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
@@ -17,11 +18,8 @@ import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData.Importe;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
-import com.mng.robotest.test.steps.shop.SecBolsaSteps;
 import com.mng.robotest.test.steps.shop.checqueregalo.PageChequeRegaloInputDataSteps;
 import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
-
 
 public class Com004 extends TestBase {
 
@@ -53,7 +51,7 @@ public class Com004 extends TestBase {
 	}
 
 	private void loginAndClearBolsa() throws Exception {
-		new AccesoSteps().oneStep(false);
+		access();
 		new SecBolsaSteps().clear();
 	}
 	

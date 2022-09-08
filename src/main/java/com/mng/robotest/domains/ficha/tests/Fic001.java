@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.buscador.steps.SecBuscadorSteps;
 import com.mng.robotest.domains.ficha.steps.ModalBuscadorTiendasSteps;
 import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
@@ -16,11 +17,8 @@ import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
-import com.mng.robotest.test.steps.shop.SecBolsaSteps;
 
 import javassist.NotFoundException;
-
 
 public class Fic001 extends TestBase {
 
@@ -50,7 +48,7 @@ public class Fic001 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		new AccesoSteps().oneStep(true);
+		accessAndClearData();
 		if (articleOnline.isPresent()) {
 			articleOnlineTest();
 		}

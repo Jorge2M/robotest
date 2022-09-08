@@ -1,6 +1,7 @@
 package com.mng.robotest.test.pageobject.shop.checkout.dotpay;
 
 import org.openqa.selenium.By;
+
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;

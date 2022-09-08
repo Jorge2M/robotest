@@ -1,8 +1,9 @@
 package com.mng.robotest.test.pageobject.shop.modales;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
+
 import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class ModalNewsLetterAfterAccess extends PageBase {

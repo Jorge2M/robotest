@@ -1,9 +1,9 @@
 package com.mng.robotest.domains.micuenta.pageobjects;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 import com.mng.robotest.domains.footer.pageobjects.PageFromFooter;
 import com.mng.robotest.domains.transversal.PageBase;
-
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageInputPedido extends PageBase implements PageFromFooter {
 	

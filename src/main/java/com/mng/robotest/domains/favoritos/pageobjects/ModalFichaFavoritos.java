@@ -9,11 +9,11 @@ import org.openqa.selenium.WebElement;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
+import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa.StateBolsa;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen.Color;
-import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa;
-import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 
 public class ModalFichaFavoritos extends PageBase {
 	

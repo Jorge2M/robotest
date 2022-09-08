@@ -20,7 +20,6 @@ import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test.pageobject.utils.DataScroll;
 import com.mng.robotest.test.pageobject.utils.ListDataArticleGalery;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.SecFiltrosSteps;
 import com.mng.robotest.test.steps.shop.galeria.DataForScrollStep;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
@@ -36,10 +35,8 @@ public class Gpo001 extends TestBase {
 		dataTest.userRegistered = true;
 		String tipoPrendasGaleria = "camisa";
 			
-		new AccesoSteps().oneStep(false);
-		Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
-		SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps();
-		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuCamisas);
+		access();
+		clickMenu("camisas");
 		
 		List<Color> colorsToFilter = new ArrayList<>();
 		colorsToFilter.add(Color.Blanco);

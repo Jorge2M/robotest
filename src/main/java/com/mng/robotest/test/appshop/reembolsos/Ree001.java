@@ -7,7 +7,6 @@ import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.pageobject.shop.PageReembolsos;
 import com.mng.robotest.test.pageobject.shop.PageReembolsos.TypeReembolso;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.PageReembolsosSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
@@ -40,7 +39,7 @@ public class Ree001 extends TestBase {
 			dataTest.passwordUser = dataTest.pais.getPassuser();
 		}
 			
-		new AccesoSteps().oneStep(false);
+		access();
 		PageReembolsosSteps pageReembolsosSteps = new PageReembolsosSteps();
 		pageReembolsosSteps.gotoRefundsFromMenu(paisConSaldoCta);
 		if (paisConSaldoCta) {

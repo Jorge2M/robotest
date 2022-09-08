@@ -3,8 +3,8 @@ package com.mng.robotest.test.pageobject.shop.checkout.sofort;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 

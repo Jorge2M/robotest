@@ -12,12 +12,12 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha.TypeFicha;
 import com.mng.robotest.domains.ficha.pageobjects.tallas.SSecSelTallasFicha;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.utils.ImporteScreen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;

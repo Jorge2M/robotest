@@ -7,8 +7,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClic
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;

@@ -1,8 +1,8 @@
 package com.mng.robotest.domains.ayuda.pageobjects;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.footer.pageobjects.PageFromFooter;
 import com.mng.robotest.domains.transversal.PageBase;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 
 public class PagesAyuda extends PageBase implements PageFromFooter {

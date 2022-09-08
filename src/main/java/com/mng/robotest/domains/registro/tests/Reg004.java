@@ -10,9 +10,7 @@ import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataMango;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
-
 
 public class Reg004 extends TestBase {
 	
@@ -38,7 +36,7 @@ public class Reg004 extends TestBase {
 	}
 
 	private void accessAndClickRegistrate() throws Exception {
-		new AccesoSteps().oneStep(false);
+		access();
 		userMenusSteps.selectRegistrate();
 	}
 

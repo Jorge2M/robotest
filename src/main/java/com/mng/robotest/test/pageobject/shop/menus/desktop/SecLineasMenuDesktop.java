@@ -7,13 +7,13 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;

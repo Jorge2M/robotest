@@ -9,7 +9,6 @@ import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeSlid
 import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 
@@ -17,11 +16,8 @@ public class Gpo006 extends TestBase {
 
 	@Override
 	public void execute() throws Exception {
-		dataTest.userRegistered = false;
-		new AccesoSteps().oneStep(false);
-		Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
-		SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps();
-		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuCamisas);
+		access();
+		clickMenu("vestidos");
 				
 		PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
 		List<TypeSlider> typeSliderList = new ArrayList<>();

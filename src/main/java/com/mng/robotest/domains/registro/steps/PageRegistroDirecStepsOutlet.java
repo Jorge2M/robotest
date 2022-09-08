@@ -4,11 +4,11 @@ import java.util.Map;
 
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
-import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroAddressDataOutlet;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroDirecOutlet;
 import com.mng.robotest.domains.transversal.StepBase;
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 
 public class PageRegistroDirecStepsOutlet extends StepBase {
 	

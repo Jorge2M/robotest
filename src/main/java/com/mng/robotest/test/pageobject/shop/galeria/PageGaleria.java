@@ -15,6 +15,7 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
@@ -27,8 +28,6 @@ import com.mng.robotest.test.pageobject.utils.ListDataArticleGalery;
 import com.mng.robotest.test.steps.shop.galeria.LocationArticle;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps.TypeActionFav;
 import com.mng.robotest.test.utils.UtilsTest;
-import com.mng.robotest.domains.transversal.PageBase;
-
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 

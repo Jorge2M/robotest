@@ -20,6 +20,7 @@ import org.testng.ITestContext;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
@@ -32,7 +33,6 @@ import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.navigations.ArticuloNavigations;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;

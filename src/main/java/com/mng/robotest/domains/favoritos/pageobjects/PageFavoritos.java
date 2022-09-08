@@ -9,12 +9,12 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
+import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa.StateBolsa;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa;
-import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 

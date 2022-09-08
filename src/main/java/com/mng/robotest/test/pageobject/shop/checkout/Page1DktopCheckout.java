@@ -7,9 +7,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.Descuento;

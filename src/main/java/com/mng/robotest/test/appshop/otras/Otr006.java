@@ -1,7 +1,6 @@
 package com.mng.robotest.test.appshop.otras;
 
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.modales.ModalChatBotSteps;
 import com.mng.robotest.test.steps.shop.modales.ModalNewsletterSteps;
 
@@ -9,8 +8,7 @@ public class Otr006 extends TestBase {
 
 	@Override
 	public void execute() throws Exception {
-		dataTest.userRegistered = false;
-		new AccesoSteps().oneStep(false);
+		access();
 		ModalNewsletterSteps.closeIfVisible(driver);
 		
 		ModalChatBotSteps chatBotSteps = new ModalChatBotSteps();

@@ -12,6 +12,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.favoritos.steps.PageFavoritosSteps;
+import com.mng.robotest.domains.identification.pageobjects.PageIdentificacion;
 import com.mng.robotest.domains.loyalty.steps.PageHomeLikesSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroIniOutlet;
@@ -22,7 +23,6 @@ import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.datastored.DataFavoritos;
-import com.mng.robotest.test.pageobject.shop.identificacion.PageIdentificacion;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
@@ -51,8 +51,7 @@ public class SecMenusUserSteps extends StepBase {
 		userMenus.clickMenuAndWait(UserMenu.registrate);
 		PageRegistroIniOutlet pageRegistroIni = new PageRegistroIniOutlet();  
 		pageRegistroIni.clickRegisterTab();
-		
-		if (app==AppEcom.outlet) {
+		if (app==AppEcom.outlet || channel==Channel.mobile) {
 			PageRegistroIniStepsOutlet pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
 			pageRegistroIniSteps.validaIsPageUntil(5);
 			pageRegistroIniSteps.validaIsRGPDVisible();
@@ -60,7 +59,6 @@ public class SecMenusUserSteps extends StepBase {
 			PageRegistroInitialShopSteps pageRegistroIniSteps = new PageRegistroInitialShopSteps();
 			pageRegistroIniSteps.checkIsPageUntil(5);
 		}
-
 	}
 
 	@Step (

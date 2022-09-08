@@ -8,8 +8,8 @@ import org.openqa.selenium.support.ui.Select;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.test.utils.ImporteScreen;
 

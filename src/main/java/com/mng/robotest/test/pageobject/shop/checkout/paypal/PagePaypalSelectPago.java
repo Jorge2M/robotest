@@ -1,8 +1,8 @@
 package com.mng.robotest.test.pageobject.shop.checkout.paypal;
 
-import com.mng.robotest.domains.transversal.PageBase;
-
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+import com.mng.robotest.domains.transversal.PageBase;
 
 public class PagePaypalSelectPago extends PageBase {
 

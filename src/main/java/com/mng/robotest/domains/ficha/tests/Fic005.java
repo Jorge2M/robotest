@@ -16,10 +16,8 @@ import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.Menu;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
 
 import javassist.NotFoundException;
-
 
 public class Fic005 extends TestBase {
 
@@ -36,7 +34,7 @@ public class Fic005 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		new AccesoSteps().oneStep(false);
+		access();
  		searchAndCheckArticlePersonalizable();
 		
 		pageFichaSteps.selectFirstTallaAvailable();

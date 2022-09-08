@@ -4,13 +4,11 @@ import com.mng.robotest.domains.loyalty.beans.User;
 import com.mng.robotest.domains.loyalty.getdata.ClientApiLoyaltyPointsDev;
 import com.mng.robotest.domains.loyalty.steps.PageHomeLikesSteps;
 import com.mng.robotest.domains.loyalty.steps.PageRegalarMisLikesSteps;
-import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.loyalty.steps.PageHomeLikesSteps.DataRegaloPuntos;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
-
 
 public class Loy005 extends TestBase {
 
@@ -38,7 +36,7 @@ public class Loy005 extends TestBase {
 			return;
 		}
 		
-		new AccesoSteps().oneStep(false);
+		access();
 		int iniPointsReceptor = clickMangoLikesYou();
 		
 		login(EMISOR_USER, dataTest.passwordUser);

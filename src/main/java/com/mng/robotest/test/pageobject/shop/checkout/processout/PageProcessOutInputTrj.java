@@ -1,7 +1,7 @@
 package com.mng.robotest.test.pageobject.shop.checkout.processout;
 
-import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Pago;
 
 public class PageProcessOutInputTrj extends PageBase {

@@ -10,9 +10,6 @@ import com.mng.robotest.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.factoryes.NodoStatus;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
-import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
-import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
-import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test.pageobject.utils.ListDataArticleGalery;
 import com.mng.robotest.test.steps.shop.PagePrehomeSteps;
 import com.mng.robotest.test.steps.shop.banner.SecBannersSteps;
@@ -37,7 +34,7 @@ public class Nod001 extends TestBase {
 		new PagePrehomeSteps().seleccionPaisIdiomaAndEnter(true);
 		SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps();
 		if (app==AppEcom.shop) {
-			selectMenuPantalones();
+			clickMenu(LineaType.nina, SublineaType.nina_nina, "pantalones");
 			PageGaleria pageGaleria = PageGaleria.getNew(channel);
 			ListDataArticleGalery listArticlesPant = pageGaleria.getListDataArticles();
 			this.nodo.setArticlesNuevo(listArticlesPant);
@@ -55,9 +52,7 @@ public class Nod001 extends TestBase {
 		int maxBannersToLoad = 1;
 		SecBannersSteps secBannersSteps = new SecBannersSteps(maxBannersToLoad);
 		secBannersSteps.testPageBanners(1);
-		Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
-		secMenusSteps.accesoMenuXRef(menuVestidos);
-		
+		clickMenu("vestidos", TypeSelectMenu.XREF);
 		secMenusSteps.seleccionLinea(LineaType.he, null);
 		secMenusDesktopSteps.countSaveMenusEntorno (LineaType.he, null, nodo.getIp(), autAddr);
 		secMenusSteps.seleccionLinea(LineaType.nina, SublineaType.nina_nina);	
@@ -66,14 +61,6 @@ public class Nod001 extends TestBase {
 		secMenusDesktopSteps.countSaveMenusEntorno(LineaType.nino, SublineaType.nino_bebe, nodo.getIp(), autAddr);
 
 		this.nodo.setTested(true);		
-	}
-	
-	private void selectMenuPantalones() throws Exception {
-		Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(
-				app, KeyMenu1rstLevel.from(
-					LineaType.nina, 
-					SublineaType.nina_nina, "pantalones"));
-			new SecMenusWrapperSteps().selectMenu1rstLevelTypeCatalog(menuPantalones);
 	}
 	
 	/**

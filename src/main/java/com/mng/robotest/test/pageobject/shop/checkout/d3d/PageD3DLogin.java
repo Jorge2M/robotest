@@ -1,7 +1,7 @@
 package com.mng.robotest.test.pageobject.shop.checkout.d3d;
 
-import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
+import com.mng.robotest.domains.transversal.PageBase;
 
 public class PageD3DLogin extends PageBase {
 	

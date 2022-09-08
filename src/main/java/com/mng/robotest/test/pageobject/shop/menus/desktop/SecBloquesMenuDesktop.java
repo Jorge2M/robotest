@@ -10,8 +10,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;

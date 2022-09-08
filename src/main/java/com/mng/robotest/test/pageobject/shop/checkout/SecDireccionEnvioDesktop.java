@@ -3,8 +3,8 @@ package com.mng.robotest.test.pageobject.shop.checkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.mng.robotest.domains.transversal.PageBase;
 
 
 public class SecDireccionEnvioDesktop extends PageBase {

@@ -4,7 +4,6 @@ import com.mng.robotest.domains.ayuda.steps.AyudaSteps;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
 
 public class Ayu001 extends TestBase {
 
@@ -13,7 +12,7 @@ public class Ayu001 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		new AccesoSteps().oneStep(false);
+		access();
 		checkAyuda();
 	}
 	

@@ -86,11 +86,7 @@ public class SecMenusDesktopSteps extends StepBase {
 	}
 	
 	public void selectMenu2oLevel(Menu2onLevel menu2onLevel) throws Exception {
-//		if (app==AppEcom.outlet) {
-//			selectMenuLateral2oLevel(menu2onLevel);
-//		} else {
-			selectMenuSubfamilia(menu2onLevel);
-//		}
+		selectMenuSubfamilia(menu2onLevel);
 		validaSelecMenu(menu2onLevel);
 	}
 	

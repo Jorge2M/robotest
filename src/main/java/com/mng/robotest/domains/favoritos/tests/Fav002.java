@@ -1,6 +1,7 @@
 package com.mng.robotest.domains.favoritos.tests;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
 import com.mng.robotest.domains.transversal.TestBase;
@@ -16,7 +17,6 @@ import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
-import com.mng.robotest.test.steps.shop.SecBolsaSteps;
 import com.mng.robotest.test.steps.shop.galeria.LocationArticle;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
@@ -88,23 +88,19 @@ public class Fav002 extends TestBase {
 	}
 
 	private void goToGaleryAndSelectArticle() throws Exception {
-		secMenusSteps.selectMenu1rstLevelTypeCatalog(getMenu(app));
+		if (app==AppEcom.outlet) {
+			clickMenu("Vestidos");
+		} else {
+			clickMenu("Albornoces");
+		}
 		LocationArticle article1 = LocationArticle.getInstanceInCatalog(1);
 		pageGaleriaSteps.selectArticulo(article1);
 	}
 
 	private void accessWithoutLoginAndClearData() throws Exception {
 		dataTest.userRegistered=false;
-		new AccesoSteps().oneStep(false);
+		access();
 		secBolsaSteps.clear();
 		pageFavoritosSteps.clearAll(dataFavoritos);
 	}
-	
-	private Menu1rstLevel getMenu(AppEcom app) {
-		if (app==AppEcom.outlet) {
-			return MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.she, null, "Vestidos"));
-		}
-		return MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.home, null, "Albornoces"));
-	}
-	
 }

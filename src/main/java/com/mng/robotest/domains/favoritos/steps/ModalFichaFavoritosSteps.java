@@ -5,13 +5,13 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.favoritos.pageobjects.ModalFichaFavoritos;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.steps.shop.SecBolsaSteps;
 
 public class ModalFichaFavoritosSteps extends StepBase {
 	

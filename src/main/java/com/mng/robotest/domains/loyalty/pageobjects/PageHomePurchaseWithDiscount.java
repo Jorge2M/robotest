@@ -1,7 +1,8 @@
 package com.mng.robotest.domains.loyalty.pageobjects;
 
-import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+import com.mng.robotest.domains.transversal.PageBase;
 
 public class PageHomePurchaseWithDiscount extends PageBase {
 

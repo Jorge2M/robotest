@@ -10,7 +10,6 @@ import com.mng.robotest.domains.registro.steps.PageRegistroPersonalizacionShopSt
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.data.DataMango;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
@@ -43,7 +42,7 @@ public class Reg001 extends TestBase {
 	}
 
 	private void accesoAndClickRegistrate() throws Exception {
-		new AccesoSteps().oneStep(false);
+		access();
 		new SecMenusUserSteps().selectRegistrate();
 	}	
 	

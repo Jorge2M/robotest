@@ -15,13 +15,14 @@ import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
+import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
+import com.mng.robotest.domains.identification.pageobjects.PageIdentificacion;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataTest;
-import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa;
-import com.mng.robotest.test.pageobject.shop.identificacion.PageIdentificacion;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;

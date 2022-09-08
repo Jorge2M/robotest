@@ -6,14 +6,14 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
+import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa.StateBolsa;
+import com.mng.robotest.domains.ficha.pageobjects.SecModalPersonalizacion.ModalElement;
 import com.mng.robotest.domains.transversal.PageBase;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
-import com.mng.robotest.domains.ficha.pageobjects.SecModalPersonalizacion.ModalElement;
-import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa;
-import com.mng.robotest.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 
 import org.openqa.selenium.WebElement;
 

@@ -5,35 +5,25 @@ import java.util.List;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;
-import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
-import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
-import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test.pageobject.utils.DataScroll;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.AllPagesSteps;
 import com.mng.robotest.test.steps.shop.SecFiltrosSteps;
 import com.mng.robotest.test.steps.shop.galeria.DataForScrollStep;
 import com.mng.robotest.test.steps.shop.galeria.LocationArticle;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
-import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 
 public class Gpo004 extends TestBase {
 
 	@Override
 	public void execute() throws Exception {
-		dataTest.userRegistered = false;
-		new AccesoSteps().oneStep(false);
-		Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
-		Menu1rstLevel menuAbrigos = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.she, null, "abrigos"));		
-		SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps();
+		access();
 		if (app==AppEcom.shop) {
-			secMenusSteps.selectMenu1rstLevelTypeCatalog(menuCamisas);
+			clickMenu("camisas");
 		} else {
-			secMenusSteps.selectMenu1rstLevelTypeCatalog(menuAbrigos);
+			clickMenu("abrigos");
 		}
 
 		List<Color> colorsToFilter = new ArrayList<>();

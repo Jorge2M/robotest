@@ -2,6 +2,7 @@ package com.mng.robotest.test.appshop.egyptorders;
 
 import java.util.Arrays;
 
+import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.data.PaisShop;
@@ -11,8 +12,6 @@ import com.mng.robotest.test.factoryes.entities.EgyptCity;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
-import com.mng.robotest.test.steps.shop.SecBolsaSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 import com.mng.robotest.test.utils.UtilsTest;
 
@@ -27,7 +26,7 @@ public class Egy001 extends TestBase {
 	}
 	
 	public void execute() throws Exception {
-		new AccesoSteps().oneStep(false);
+		access();
 		GarmentCatalog article = UtilsTest.getArticleForTest(dataTest.pais, app, driver);
 		
 		DataBag dataBag = new DataBag(); 

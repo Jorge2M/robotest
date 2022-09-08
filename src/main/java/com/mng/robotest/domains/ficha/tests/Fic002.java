@@ -16,8 +16,6 @@ import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
-
 
 public class Fic002 extends TestBase {
 
@@ -44,7 +42,7 @@ public class Fic002 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		new AccesoSteps().oneStep(false);
+		access();
 		secBuscadorSteps.searchArticulo(garment);
 		
 		if (pageFichaSteps.getFicha().getTypeFicha()==TypeFicha.OLD) {

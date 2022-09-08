@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.mng.robotest.domains.transversal.PageBase;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -21,6 +21,7 @@ import com.mng.robotest.domains.registro.beans.DataRegistro;
 import com.mng.robotest.domains.registro.beans.InputDataXPath;
 import com.mng.robotest.domains.registro.beans.ListDataRegistro;
 import com.mng.robotest.domains.registro.beans.ListDataRegistro.DataRegType;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.checkout.Page2IdentCheckout;
 
 public class PageRegistroIniOutlet extends PageBase {
@@ -92,7 +93,7 @@ public class PageRegistroIniOutlet extends PageBase {
 	}
 	
 	public void clickRegisterTab() {
-		getElement(XPATH_PESTANYA_REGISTRO).click();
+		click(XPATH_PESTANYA_REGISTRO).type(TypeClick.javascript).exec();
 	}
 	
 	public boolean isPageUntil(int maxSeconds) {

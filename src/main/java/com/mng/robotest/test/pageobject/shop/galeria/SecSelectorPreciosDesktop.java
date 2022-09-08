@@ -3,8 +3,9 @@ package com.mng.robotest.test.pageobject.shop.galeria;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 
-import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
 import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class SecSelectorPreciosDesktop extends PageBase {

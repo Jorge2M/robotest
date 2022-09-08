@@ -1,12 +1,12 @@
 package com.mng.robotest.domains.buscador.pageobjects;
 
-import com.mng.robotest.domains.transversal.PageBase;
-
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+
+import com.mng.robotest.domains.transversal.PageBase;
 
 
 public class SecSearchDesktop extends PageBase implements SecSearch {

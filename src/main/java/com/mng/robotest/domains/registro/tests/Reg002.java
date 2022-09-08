@@ -3,21 +3,19 @@ package com.mng.robotest.domains.registro.tests;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.domains.registro.beans.ListDataRegistro;
 import com.mng.robotest.domains.registro.beans.ListDataRegistro.DataRegType;
 import com.mng.robotest.domains.registro.beans.ListDataRegistro.PageData;
 import com.mng.robotest.domains.registro.steps.PageRegistroIniStepsOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroIniStepsOutlet.ErrorRegister;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.Secret;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
-
 
 public class Reg002 extends TestBase {
 
@@ -43,7 +41,7 @@ public class Reg002 extends TestBase {
 	}
 
 	private void accesoAndClickRegistrate() throws Exception {
-		new AccesoSteps().oneStep(false);
+		access();
 		userMenusSteps.selectRegistrate();
 	}
 	

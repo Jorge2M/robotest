@@ -1,9 +1,9 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.domains.transversal.PageBase;
 
 public abstract class PageFicha extends PageBase {
 

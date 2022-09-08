@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
@@ -18,12 +19,9 @@ import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.NumColum
 import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
-import com.mng.robotest.test.steps.shop.SecBolsaSteps;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps.TypeActionFav;
 import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
-
 
 public class Fav001 extends TestBase {
 
@@ -85,15 +83,14 @@ public class Fav001 extends TestBase {
 	}
 
 	private void goToVestidosGalery() throws Exception {
-		Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.she, null, "Vestidos"));
-		secMenusSteps.selectMenu1rstLevelTypeCatalog(menuVestidos);
+		clickMenu("Vestidos");
 		if (channel==Channel.desktop) {
 			pageGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.CUATRO);
 		}
 	}
 
 	private void loginAndClearData() throws Exception {
-		new AccesoSteps().oneStep(false);
+		access();
 		secBolsaSteps.clear();
 		pageFavoritosSteps.clearAll(dataFavoritos);
 	}

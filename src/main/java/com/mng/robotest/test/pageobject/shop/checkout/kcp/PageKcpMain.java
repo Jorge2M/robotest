@@ -2,9 +2,9 @@ package com.mng.robotest.test.pageobject.shop.checkout.kcp;
 
 import org.openqa.selenium.By;
 
-import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SelectElement.TypeSelect;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.mng.robotest.domains.transversal.PageBase;
 
 
 public class PageKcpMain extends PageBase {

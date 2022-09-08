@@ -13,9 +13,6 @@ import com.mng.robotest.test.beans.Linea.TypeContentDesk;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;
-import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
-import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
-import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test.steps.shop.PagePrehomeSteps;
 import com.mng.robotest.test.steps.shop.banner.SecBannersSteps;
@@ -82,8 +79,7 @@ public class Par001 extends TestBase {
 		} else {
 			SecMenusWrap secMenus = new SecMenusWrap();
 			if (secMenus.canClickMenuArticles(dataTest.pais, linea, sublinea)) {
-				Menu1rstLevel menu = getMenu(lineaType, sublineaType);
-				secMenusSteps.selectMenu1rstLevelTypeCatalog(menu);
+				clickMenuDependingLine(lineaType, sublineaType);
 				if (flagsNavigation.testMenus()) {
 					boolean bannerIsLincable = new PageGaleriaDesktop().getSecBannerHead().isLinkable();
 					if (bannerIsLincable) {
@@ -94,7 +90,8 @@ public class Par001 extends TestBase {
 		}
 	}
 	
-	private Menu1rstLevel getMenu(LineaType lineaType, SublineaType sublineaType) {
+	private void clickMenuDependingLine(LineaType lineaType, SublineaType sublineaType) 
+			throws Exception {
 		String menu = "";
 		switch (lineaType) {
 		case nina:
@@ -111,7 +108,7 @@ public class Par001 extends TestBase {
 		default:
 			menu = "pantalones";
 		}
-		return MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(lineaType, sublineaType, menu));
+		clickMenu(lineaType, sublineaType, menu);
 	}
 	
 	public void testSpecificFeaturesForLinea(Linea linea) throws Exception {

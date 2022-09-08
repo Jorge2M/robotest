@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.compra.tests.CompraCommons;
 import com.mng.robotest.domains.transversal.TestBase;
@@ -19,8 +20,6 @@ import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
-import com.mng.robotest.test.steps.shop.SecBolsaSteps;
 import com.mng.robotest.test.utils.UtilsTest;
 
 public class Com010 extends TestBase {
@@ -52,7 +51,7 @@ public class Com010 extends TestBase {
 			dataTest.passwordUser = userShop.password;
 		}
 		
-		new AccesoSteps().oneStep(dataTest.userRegistered);
+		access(dataTest.userRegistered);
 		List<GarmentCatalog> listArticles = UtilsTest.getArticlesForTest(dataTest.pais, app, 3, driver);
 		
 		if (!manyArticles) {

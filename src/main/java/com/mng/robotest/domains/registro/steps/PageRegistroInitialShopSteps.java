@@ -4,8 +4,8 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
-import com.mng.robotest.domains.registro.pageobjects.PageRegistroInitialShop;
 import com.mng.robotest.domains.registro.beans.DataNewRegister;
+import com.mng.robotest.domains.registro.pageobjects.PageRegistroInitialShop;
 import com.mng.robotest.domains.transversal.StepBase;
 
 public class PageRegistroInitialShopSteps extends StepBase {

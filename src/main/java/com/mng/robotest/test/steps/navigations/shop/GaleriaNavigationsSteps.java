@@ -8,7 +8,7 @@ import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 
 public class GaleriaNavigationsSteps extends StepBase {
 	
-	public DataBag selectArticleAvailableFromGaleria(Pais pais) throws Exception {
+	public DataBag selectTalla(Pais pais) throws Exception {
 		DataBag dataBag = new DataBag();
 		int posArticulo=1;
 		boolean articleAvailable = false;

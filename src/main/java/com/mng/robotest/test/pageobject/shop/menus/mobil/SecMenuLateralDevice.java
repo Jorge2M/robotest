@@ -6,13 +6,13 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;

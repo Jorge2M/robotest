@@ -2,8 +2,8 @@ package com.mng.robotest.domains.ficha.pageobjects.tallas;
 
 
 
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 

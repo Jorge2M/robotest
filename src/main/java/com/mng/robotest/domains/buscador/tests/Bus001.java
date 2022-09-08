@@ -4,9 +4,7 @@ import com.mng.robotest.domains.buscador.steps.SecBuscadorSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.home.PageHomeMarcasSteps;
-
 
 public class Bus001 extends TestBase {
 		
@@ -24,7 +22,7 @@ public class Bus001 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		new AccesoSteps().oneStep(false);
+		access();
 		pageHomeMarcasSteps.validateIsPageWithCorrectLineas();
 		GarmentCatalog product = getProduct();
 		

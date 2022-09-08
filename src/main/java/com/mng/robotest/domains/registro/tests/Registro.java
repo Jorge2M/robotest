@@ -8,6 +8,7 @@ import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.utils.PaisGetter;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 
 
@@ -33,7 +34,7 @@ public class Registro implements Serializable {
 	}
 	
 	@Test (
-		groups={"Registro", "Canal:all_App:shop"},
+		groups={"Registro", "Canal:desktop_App:shop"},
 		description="Alta/Registro de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
 	public void REG001_NewRegisterOK() throws Exception {
 		new Reg001().execute();
@@ -48,7 +49,7 @@ public class Registro implements Serializable {
 	}
 
 	@Test (
-		groups={"Registro", "Canal:desktop,mobile_App:outlet", "SupportsFactoryCountrys"}, alwaysRun=true, 
+		groups={"Registro", "Canal:desktop,mobile_App:outlet,shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="Alta/Registro de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
 	public void REG003_RegistroOK_publi() throws Exception {
 		TestCaseTM.addNameSufix(this.index_fact);

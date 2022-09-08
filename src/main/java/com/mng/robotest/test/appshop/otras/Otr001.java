@@ -19,8 +19,7 @@ public class Otr001 extends TestBase {
 	public void execute() throws Exception {
 		dataTest.pais = ESPANA;
 		dataTest.idioma = CASTELLANO;
-		dataTest.userRegistered = false;
-		new AccesoSteps().oneStep(false);
+		access();
 		
 		SecMenusDesktopSteps secMenusDesktopSteps = new SecMenusDesktopSteps();
 		secMenusDesktopSteps.checkURLRedirectParkasHeEspanya();
@@ -28,7 +27,7 @@ public class Otr001 extends TestBase {
 		dataTest.pais = FRANCIA;
 		dataTest.idioma = FRANCIA_FRANCES;
 		new AccesoSteps().goToInitialURL();
-		new AccesoSteps().oneStep(false);	  
+		access();	  
 		new SecMenusDesktopSteps().checkURLRedirectFicha();		
 	}
 	

@@ -9,9 +9,9 @@ import org.openqa.selenium.WebElement;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.PageBase;
 
 
 public class SecProductDescrOld extends PageBase {

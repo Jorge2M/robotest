@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.ficha.pageobjects.tallas.SSecSelTallasFichaOldDevice;
 import com.mng.robotest.test.data.Talla;
 
 

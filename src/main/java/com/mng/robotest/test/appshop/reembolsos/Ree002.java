@@ -1,5 +1,6 @@
 package com.mng.robotest.test.appshop.reembolsos;
 
+import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.compra.tests.CompraCommons;
 import com.mng.robotest.domains.transversal.TestBase;
@@ -14,9 +15,7 @@ import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.pageobject.shop.PageReembolsos;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.PageReembolsosSteps;
-import com.mng.robotest.test.steps.shop.SecBolsaSteps;
 import com.mng.robotest.test.steps.shop.checkout.PageResultPagoSteps;
 import com.mng.robotest.test.utils.ImporteScreen;
 import com.mng.robotest.test.utils.PaisGetter;
@@ -49,7 +48,7 @@ public class Ree002 extends TestBase {
 			dataTest.passwordUser = dataTest.pais.getPassuser();
 		}
 		
-		new AccesoSteps().oneStep(true);
+		accessAndClearData();
 		PageReembolsosSteps pageReembolsosSteps = new PageReembolsosSteps();
 		pageReembolsosSteps.gotoRefundsFromMenu(dataTest.pais.existsPagoStoreCredit());
 		pageReembolsosSteps.selectRadioSalCtaAndRefresh();

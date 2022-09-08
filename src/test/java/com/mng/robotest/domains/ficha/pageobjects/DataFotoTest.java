@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.mng.robotest.domains.ficha.pageobjects.DataFoto;
+import com.mng.robotest.domains.ficha.pageobjects.TipoImagenProducto;
+
 
 public class DataFotoTest {
 
