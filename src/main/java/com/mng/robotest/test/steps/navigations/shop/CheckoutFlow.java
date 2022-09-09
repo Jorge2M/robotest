@@ -37,6 +37,8 @@ import com.mng.robotest.test.factoryes.entities.EgyptCity;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.generic.beans.ValeDiscount;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
+import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
+import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.pageobject.shop.checkout.DataDireccion;
 import com.mng.robotest.test.pageobject.shop.checkout.Page1EnvioCheckoutMobil;
 import com.mng.robotest.test.pageobject.shop.checkout.DataDireccion.DataDirType;
@@ -263,7 +265,8 @@ public class CheckoutFlow extends StepBase {
 						dataDirEnvio.put(DataDirType.name, "Jorge");
 						dataDirEnvio.put(DataDirType.apellidos, "Muñoz Martínez");
 						dataDirEnvio.put(DataDirType.direccion, "c./ mossen trens nº6 5º1ª");
-						dataDirEnvio.put(DataDirType.email, "jorge.munoz.sge@mango.com");
+						UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
+						dataDirEnvio.put(DataDirType.email, userShop.user);
 						dataDirEnvio.put(DataDirType.telefono, "665015122");
 						pageCheckoutWrapperSteps.getModalDirecEnvioSteps().inputDataAndActualizar(dataDirEnvio);
 						pageCheckoutWrapperSteps.getModalAvisoCambioPaisSteps().clickConfirmar(paisChange);
