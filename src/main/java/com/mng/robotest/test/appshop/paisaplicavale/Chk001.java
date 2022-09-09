@@ -21,7 +21,7 @@ public class Chk001 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		DataPago dataPago = new DataPago(fTCkoutIni);
+		DataPago dataPago = getDataPago(fTCkoutIni);
 		dataPago = new CheckoutFlow.BuilderCheckout(dataPago)
 			.build()
 			.checkout(From.PREHOME);
