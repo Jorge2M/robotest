@@ -66,7 +66,7 @@ public class Com010 extends TestBase {
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.checkPagos()
 				.checkMisCompras()
-				.checkManto()
+				.checkManto(!channel.isDevice())
 				.emaiExists()
 				.checkPromotionalCode(testVale || empleado)
 				.userIsEmployee(empleado).build();

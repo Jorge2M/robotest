@@ -36,15 +36,18 @@ public class PedidoNavigations {
 	
 	public static void testPedidosEnManto(DataCheckPedidos dataCheckPedidos, AppEcom appE, WebDriver driver) 
 			throws Exception {
-		//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
-		if (appE!=AppEcom.votf) {  
-			TestRunTM testRun = getTestCase().getTestRunParent();
-			DataMantoAccess dMantoAcc = new DataMantoAccess();
-			dMantoAcc.urlManto = testRun.getParameter(Constantes.paramUrlmanto);
-			dMantoAcc.userManto = testRun.getParameter(Constantes.paramUsrmanto);
-			dMantoAcc.passManto = testRun.getParameter(Constantes.paramPasmanto);
-			dMantoAcc.appE = appE;
-			testPedidosEnManto(dMantoAcc, dataCheckPedidos, driver);
+		//TODO activar cuando funcione manto en k8s-toos-pro (pdt vuelva Carlos)
+		if (false) {
+			//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
+			if (appE!=AppEcom.votf) {  
+				TestRunTM testRun = getTestCase().getTestRunParent();
+				DataMantoAccess dMantoAcc = new DataMantoAccess();
+				dMantoAcc.urlManto = testRun.getParameter(Constantes.paramUrlmanto);
+				dMantoAcc.userManto = testRun.getParameter(Constantes.paramUsrmanto);
+				dMantoAcc.passManto = testRun.getParameter(Constantes.paramPasmanto);
+				dMantoAcc.appE = appE;
+				testPedidosEnManto(dMantoAcc, dataCheckPedidos, driver);
+			}
 		}
 	}
 	
@@ -57,7 +60,7 @@ public class PedidoNavigations {
 	}
 	
 	private static void testPedidosEnManto(DataMantoAccess dMantoAcc, DataCheckPedidos dataCheckPedidos, WebDriver driver) 
-	throws Exception {
+			throws Exception {
 		TypeAccess typeAccess = ((InputParamsMango)TestMaker.getInputParamsSuite()).getTypeAccess();
 		if (dataCheckPedidos.areChecksToExecute() && typeAccess!=TypeAccess.Bat) {
 			PageLoginMantoSteps.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
