@@ -23,7 +23,7 @@ public class Constantes {
 	
 	public static final int PORC_PANORAMICAS = 5;
 	
-	public static final String MAIL_PERSONAL = "jorge.munoz.sge@mango.com";
+	public static final String MAIL_PERSONAL = "test.performace02@mango.com";
 	
 	//dentifica el máximo número de tests en paralelo que nos permite la licencia de BrowserStack
 	public static final int BSTACK_PARALLEL = 2;
