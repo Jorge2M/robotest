@@ -24,7 +24,7 @@ public class Fic003 extends TestBase {
 	public Fic003() throws Exception {
 		super();
 		dataTest.pais = corea;
-		dataTest.idioma = corea.getListIdiomas().get(1);
+		dataTest.idioma = corea.getListIdiomas().get(0);
 	}
 	
 	@Override

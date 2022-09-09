@@ -46,9 +46,6 @@ public abstract class SecBolsa extends PageBase {
 		String xpath = getXPathPanelBolsa();
 		if (stateBolsaExpected==StateBolsa.OPEN) {
 			return state(Visible, xpath).wait(maxSeconds).check();
-//			if (channel==Channel.mobile && app==AppEcom.shop) {
-//				return (capaVisible && )
-//			}
 		}
 		return state(Invisible, xpath).wait(maxSeconds).check();
 	}
@@ -129,7 +126,7 @@ public abstract class SecBolsa extends PageBase {
 				}
 
 				try {
-					new WebDriverWait(driver, 3).until(ExpectedConditions.presenceOfElementLocated(By.className("bagItem")));
+					state(State.Present, By.className("bagItem")).wait(3).check();
 					numArticulos = getLineasArtBolsa().getNumLinesArticles();
 				} 
 				catch (Exception e) {

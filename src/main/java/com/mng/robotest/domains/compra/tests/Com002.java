@@ -10,6 +10,7 @@ import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
+import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 
 public class Com002 extends TestBase {
@@ -24,6 +25,7 @@ public class Com002 extends TestBase {
 				.emaiExists().build();
 		
 		dataPago = getDataPago(configCheckout);
+		dataTest.genericChecksDisabled = Arrays.asList(GenericCheck.Analitica);
 	}
 	
 	@Override

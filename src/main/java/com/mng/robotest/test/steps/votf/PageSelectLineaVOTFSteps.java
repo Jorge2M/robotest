@@ -49,6 +49,6 @@ public class PageSelectLineaVOTFSteps extends StepBase {
 		AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dataTest.pais));
 		new SectionBarraSupVOTFSteps(driver).validate(accesoVOTF.getUsuario());
 		
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 	}
 }

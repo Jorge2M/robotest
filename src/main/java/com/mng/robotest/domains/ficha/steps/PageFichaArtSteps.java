@@ -55,10 +55,10 @@ public class PageFichaArtSteps extends StepBase {
 	
 	public void validateIsFichaAccordingTypeProduct(GarmentCatalog product) throws Exception {			
 		validateIsFichaArtDisponible(product.getGarmentId(), 3);
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.ImgsBroken,
-				GenericCheck.NetTraffic)).checks(driver);
+				GenericCheck.NetTraffic)).checks();
 	}
 	
 	@Validation (

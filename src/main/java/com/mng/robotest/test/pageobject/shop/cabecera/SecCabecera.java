@@ -1,7 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.cabecera;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
@@ -18,7 +16,7 @@ import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenuLateralDevice;
 
 public abstract class SecCabecera extends PageBase {
 	
-	protected final SecSearch secSearch = SecSearch.getNew(channel, app, driver);
+	protected final SecSearch secSearch = SecSearch.getNew(channel, app);
 
 	private static final String XPATH_HEADER = "//header";
 	private static final String XPATH_LINK_LOGO_MANGO = 
@@ -55,11 +53,11 @@ public abstract class SecCabecera extends PageBase {
 		return (SecCabeceraOutlet_Mobil)this;
 	}
 	
-	public static void buscarTexto(String referencia, Channel channel, AppEcom app, WebDriver driver) {
+	public static void buscarTexto(String referencia, Channel channel, AppEcom app) {
 		MenusUserWrapper menusUser = new MenusUserWrapper();
 		menusUser.isMenuInStateUntil(UserMenu.lupa, State.Visible, 1);
 		menusUser.clickMenuAndWait(UserMenu.lupa);
-		SecSearch secSearch = SecSearch.getNew(channel, app, driver);
+		SecSearch secSearch = SecSearch.getNew(channel, app);
 		secSearch.search(referencia);
 	}
 	

@@ -22,7 +22,7 @@ public class ArticuloNavigations {
 		Article articleStock = productStock.getArticleWithMoreStock();
 		articulo.setReferencia(articleStock.getGarmentId());
 		if (productStock.getUrlFicha()==null || "".compareTo(productStock.getUrlFicha())==0) {
-			buscarArticulo(articleStock, channel, app, driver);
+			buscarArticulo(articleStock, channel, app);
 		} else {
 			driver.get(productStock.getUrlFicha());
 		}
@@ -76,15 +76,15 @@ public class ArticuloNavigations {
 		return articulo;
 	}
 
-	public static void buscarArticulo(Article article, Channel channel, AppEcom app, WebDriver driver) {
-		SecCabecera.buscarTexto(article.getGarmentId(), channel, app, driver);
+	public static void buscarArticulo(Article article, Channel channel, AppEcom app) {
+		SecCabecera.buscarTexto(article.getGarmentId(), channel, app);
 		if (article.getColor()!=null) {
-			selectColorIfExists(article.getColor().getId(), channel, app, driver);
+			selectColorIfExists(article.getColor().getId(), channel, app);
 		}
 	}
 
 	@SuppressWarnings("static-access")
-	private static void selectColorIfExists(String colourCode, Channel channel, AppEcom app, WebDriver driver) {
+	private static void selectColorIfExists(String colourCode, Channel channel, AppEcom app) {
 		if (colourCode!=null && "".compareTo(colourCode)!=0) {
 			PageFicha pageFicha = PageFicha.of(channel);
 			if (pageFicha.getSecDataProduct().isClickableColor(colourCode)) {

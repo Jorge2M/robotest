@@ -88,10 +88,10 @@ public class PagePrehomeSteps extends StepBase {
 		
 		pagePrehome.accesoShopViaPrehome(true);
 		
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.GoogleAnalytics,
-				GenericCheck.NetTraffic)).checks(driver);
+				GenericCheck.NetTraffic)).checks();
 		
 		if (execValidacs) {
 			checkPagePostPreHome();

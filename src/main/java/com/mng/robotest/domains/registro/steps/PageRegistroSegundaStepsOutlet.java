@@ -120,6 +120,6 @@ public class PageRegistroSegundaStepsOutlet extends StepBase {
 			new PageRegistroDirecStepsOutlet().isPageFromPais();
 		}
 		
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 	}
 }

@@ -78,10 +78,10 @@ public class AccesoSteps extends StepBase {
 
 	public void validaIdentificacionEnShop() throws Exception {
 		checkLinksAfterLogin();
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.GoogleAnalytics, 
-				GenericCheck.NetTraffic)).checks(driver);
+				GenericCheck.NetTraffic)).checks();
 	}
 	
 	@Validation
@@ -174,7 +174,7 @@ public class AccesoSteps extends StepBase {
 
 		PageSelectLineaVOTFSteps pageSelectLineaVOTFSteps = new PageSelectLineaVOTFSteps();
 		pageSelectLineaVOTFSteps.validateIsPage();
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 		
 		pageSelectLineaVOTFSteps.selectMenuAndLogoMango(1);
 	}

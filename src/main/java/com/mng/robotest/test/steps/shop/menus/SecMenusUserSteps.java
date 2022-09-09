@@ -87,7 +87,7 @@ public class SecMenusUserSteps extends StepBase {
 	public void identification(String userConnect, String userPassword) throws Exception {
 		new PageIdentificacion().iniciarSesion(userConnect, userPassword);
 		checkIsVisibleLinkCerrarSesion();
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 	}
 	
 	@Validation (
@@ -136,7 +136,7 @@ public class SecMenusUserSteps extends StepBase {
 	public void clickMenuMiCuenta() {
 		userMenus.clickMenuAndWait(UserMenu.miCuenta);	
 		new PageMiCuentaSteps().validateIsPage(2);
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 	}
 	
 	@Step (

@@ -3,13 +3,12 @@ package com.mng.robotest.test.steps.shop.genericchecks;
 import java.util.Arrays;
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.transversal.PageBase;
 
-public class GenericChecks {
+public class GenericChecks extends PageBase {
 
 	private final List<GenericCheck> listChecks;
 	
@@ -41,18 +40,17 @@ public class GenericChecks {
 		return new GenericChecks(listChecks);
 	}
 	
-	public static void checkDefault(WebDriver driver) {
+	public static void checkDefault() {
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.CookiesAllowed,
 				GenericCheck.JSerrors, 
 				GenericCheck.TextsTraduced,
-				GenericCheck.Analitica)).checks(driver);
+				GenericCheck.Analitica)).checks();
 	}
 	
-	public void checks(WebDriver driver) {
+	public void checks() {
 		for (GenericCheck genericCheck : listChecks) {
-			//Quitar esta línea si se quiere activa la validación de textos no traducidos
-			if (genericCheck!=GenericCheck.TextsTraduced) {
+			if (checkEnabled(genericCheck)) {
 				Checker checker = Checker.make(genericCheck);
 				ChecksTM checks = checker.check(driver);
 				if (checks.size()>0) {
@@ -60,6 +58,17 @@ public class GenericChecks {
 				}
 			}
 		}
+	}
+	
+	private boolean checkEnabled(GenericCheck genericCheck) {
+		if (genericCheck==GenericCheck.TextsTraduced) {
+			return false;
+		}
+		if (dataTest.genericChecksDisabled!=null && 
+			dataTest.genericChecksDisabled.contains(genericCheck)) {
+			return false;
+		}
+		return true;
 	}
 	
 	@Validation

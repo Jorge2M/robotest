@@ -52,7 +52,7 @@ public class SecMenuLateralMobilSteps extends StepBase {
 	public void validaSelecMenu(MenuLateralDesktop menu) throws Exception {
 		PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
 		pageGaleriaSteps.validateGaleriaAfeterSelectMenu();
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 	}
 
 	@Validation
@@ -151,8 +151,8 @@ public class SecMenuLateralMobilSteps extends StepBase {
 	
 	public void validaPaginaResultMenu2onLevel(Menu1rstLevel menu1rstLevel) throws Exception {
 		checkResultDependingMenuGroup(menu1rstLevel);
-		GenericChecks.checkDefault(driver);
-		GenericChecks.from(Arrays.asList(GenericCheck.ImgsBroken)).checks(driver);
+		GenericChecks.checkDefault();
+		GenericChecks.from(Arrays.asList(GenericCheck.ImgsBroken)).checks();
 	}
 	
 	@Validation

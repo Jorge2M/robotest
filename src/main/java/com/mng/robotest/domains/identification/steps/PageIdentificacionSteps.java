@@ -15,7 +15,7 @@ public class PageIdentificacionSteps extends StepBase {
 	public void inicioSesionDatosKO(String usrExistente, String password) throws Exception {
 		new PageIdentificacion().iniciarSesion(usrExistente, password);
 		checkTextoCredencialesKO();
-		GenericChecks.checkDefault(driver);	
+		GenericChecks.checkDefault();	
 	}
 	
 	@Validation (
@@ -31,6 +31,6 @@ public class PageIdentificacionSteps extends StepBase {
 	public void selectHasOlvidadoTuContrasenya() {
 		new PageIdentificacion().clickHasOlvidadoContrasenya(); 
 		new PageRecuperaPasswdSteps().isPage();
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 	}
 }

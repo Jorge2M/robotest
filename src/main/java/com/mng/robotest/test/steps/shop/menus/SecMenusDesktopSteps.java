@@ -114,10 +114,10 @@ public class SecMenusDesktopSteps extends StepBase {
 		new PageGaleriaSteps().validateGaleriaAfeterSelectMenu();
 		checksSelecMenuEspecificDesktop(menu);
 		
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.GoogleAnalytics,
-				GenericCheck.NetTraffic)).checks(driver);
+				GenericCheck.NetTraffic)).checks();
 	}
 	
 	@Validation (
@@ -285,8 +285,8 @@ public class SecMenusDesktopSteps extends StepBase {
 			break;
 		}
 
-		GenericChecks.checkDefault(driver);
-		GenericChecks.from(Arrays.asList(GenericCheck.ImgsBroken)).checks(driver);
+		GenericChecks.checkDefault();
+		GenericChecks.from(Arrays.asList(GenericCheck.ImgsBroken)).checks();
 	}
 
 	@Step (
@@ -426,8 +426,8 @@ public class SecMenusDesktopSteps extends StepBase {
 			checksRebajas();
 		}
 		
-		GenericChecks.checkDefault(driver);
-		GenericChecks.from(Arrays.asList(GenericCheck.ImgsBroken)).checks(driver);
+		GenericChecks.checkDefault();
+		GenericChecks.from(Arrays.asList(GenericCheck.ImgsBroken)).checks();
 	}
 
 	@Validation

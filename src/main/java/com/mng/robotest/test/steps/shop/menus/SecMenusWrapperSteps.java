@@ -172,8 +172,8 @@ public class SecMenusWrapperSteps extends StepBase {
 	public void accesoMenuXRef(Menu1rstLevel menu1rstLevel) throws Exception {
 		secMenusWrap.seleccionarMenuXHref(menu1rstLevel, pais);
 		checkIsVisibleAarticle(5);
-		GenericChecks.checkDefault(driver);
-		GenericChecks.from(Arrays.asList(GenericCheck.ImgsBroken)).checks(driver);
+		GenericChecks.checkDefault();
+		GenericChecks.from(Arrays.asList(GenericCheck.ImgsBroken)).checks();
 	}
 
 	@Validation (

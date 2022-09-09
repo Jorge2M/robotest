@@ -37,7 +37,7 @@ public class PageMiCuentaSteps extends StepBase {
 	private void clickLinkMisDatos (String usuarioReg) {
 		pageMiCuenta.clickMisDatos();
 		new PageMisDatosSteps().validaIsPage(usuarioReg);
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 	}
 
 	public void goToMisComprasFromMenu() {
@@ -57,18 +57,18 @@ public class PageMiCuentaSteps extends StepBase {
 		}
 
 		new PageMisComprasSteps().validateIsPage();
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 	}
  
 	public void goToMisDatosAndValidateData(Map<String,String> dataRegistro, String codPais) {
 		goToMisDatos(dataRegistro.get("cfEmail"));
 		new PageMisDatosSteps().validaIsDataAssociatedToRegister(dataRegistro, codPais);
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 	}
 	public void goToMisDatosAndValidateData(DataNewRegister dataNewRegister) {
 		goToMisDatos(dataNewRegister.getEmail());
 		new PageMisDatosSteps().validaIsDataAssociatedToRegister(dataNewRegister);
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 	}	
 	
 	public void goToSuscripciones() {
@@ -82,7 +82,7 @@ public class PageMiCuentaSteps extends StepBase {
 	private void clickLinkSuscripciones() {
 		pageMiCuenta.clickSuscripciones();
 		new PageSuscripcionesSteps().validaIsPage();
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 	}
 	
 	public void goToSuscripcionesAndValidateData(Map<String,String> datosRegOk) {

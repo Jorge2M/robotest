@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
@@ -24,13 +22,7 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 
 public class SecBuscadorSteps extends StepBase {
 
-	private final PageGaleria pageGaleria;
-	private final WebDriver driver;
-	
-	public SecBuscadorSteps() {
-		this.pageGaleria = PageGaleria.getNew(From.BUSCADOR, channel);
-		this.driver = pageGaleria.driver;
-	}
+	private final PageGaleria pageGaleria = PageGaleria.getNew(From.BUSCADOR, channel);
 	
 	private static final String TabHTML = "&emsp;";
 	@Step (
@@ -58,7 +50,7 @@ public class SecBuscadorSteps extends StepBase {
 	}
 	
 	private void searchArticuloCommon(GarmentCatalog product) throws Exception {
-		ArticuloNavigations.buscarArticulo(product.getArticleWithMoreStock(), channel, app, driver);
+		ArticuloNavigations.buscarArticulo(product.getArticleWithMoreStock(), channel, app);
 		SeleniumUtils.waitForPageLoaded(driver);  
 		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps();
 		pageFichaSteps.validateIsFichaAccordingTypeProduct(product);
@@ -68,15 +60,15 @@ public class SecBuscadorSteps extends StepBase {
 		description="Introducir la categoría de producto <b>#{categoriaABuscar} </b>(existe categoría: #{categoriaExiste})</b>", 
 		expected="El resultado de la búsqueda es el correcto :-)")
 	public void busquedaCategoriaProducto(String categoriaABuscar, boolean categoriaExiste) throws Exception {
-		SecCabecera.buscarTexto(categoriaABuscar, channel, app, driver);
+		SecCabecera.buscarTexto(categoriaABuscar, channel, app);
 		SeleniumUtils.waitForPageLoaded(driver);	
 		if (categoriaExiste) { 
 			areProducts(categoriaABuscar, 3);
 		} else {
 			areProducts(3);
 		}
-		GenericChecks.checkDefault(driver);
-		GenericChecks.from(Arrays.asList(GenericCheck.ImgsBroken)).checks(driver);
+		GenericChecks.checkDefault();
+		GenericChecks.from(Arrays.asList(GenericCheck.ImgsBroken)).checks();
 	}
 
 	@Validation (

@@ -159,8 +159,8 @@ public class SecBolsaSteps extends StepBase {
 
 		validaCuadranArticulosBolsa(dataBag);
 		
-		GenericChecks.checkDefault(driver);
-		GenericChecks.from(Arrays.asList(GenericCheck.GoogleAnalytics)).checks(driver);
+		GenericChecks.checkDefault();
+		GenericChecks.from(Arrays.asList(GenericCheck.GoogleAnalytics)).checks();
 	}
 
 	@Validation
@@ -277,7 +277,7 @@ public class SecBolsaSteps extends StepBase {
 		} else {
 			int maxSeconds = 5;
 			new Page1IdentCheckoutSteps().validateIsPage(maxSeconds);
-			GenericChecks.checkDefault(driver);
+			GenericChecks.checkDefault();
 			
 		}
 	}

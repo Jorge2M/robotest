@@ -303,7 +303,7 @@ public class PageGaleriaSteps extends StepBase {
 		int numArticulosPant = pageGaleria.getNumArticulos() + pageGaleria.getNumArticulos();
 		checkOrderListArticles(typeOrdenacion, numArticulosPant, numArticulosValidar);
  
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 	   
 		return numArticulosPant;
 	}
@@ -499,10 +499,10 @@ public class PageGaleriaSteps extends StepBase {
 		int maxSeconds = 3;
 		checkIsFichaArticle(nombre1erArt, precio1erArt, maxSeconds);
 
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.GoogleAnalytics, 
-				GenericCheck.NetTraffic)).checks(driver);	   
+				GenericCheck.NetTraffic)).checks();	   
 	}
    
    	@SuppressWarnings("static-access")

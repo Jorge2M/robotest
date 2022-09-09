@@ -109,10 +109,10 @@ public class Page1DktopCheckoutSteps extends StepBase {
 		checkAfterInputDiscountVale(valePais);
 		checkValeDiscountIsCorrect(valePais, dataBag);
 		
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.GoogleAnalytics,
-				GenericCheck.NetTraffic)).checks(driver);
+				GenericCheck.NetTraffic)).checks();
 	}
 	
 	@Validation

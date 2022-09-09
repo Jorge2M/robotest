@@ -33,6 +33,6 @@ public class PageRegistroNinosStepsOutlet extends StepBase {
 		pageRegistroNinos.setDataNinoIfNotExists(listaNinos, 2);
 		pageRegistroNinos.clickContinuar();
 		new PageRegistroDirecStepsOutlet().isPageFromPais();
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 	}
 }

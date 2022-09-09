@@ -114,7 +114,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 			validaEmailIncorrectShown(5);
 			break;
 		}
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 	}
 	
 	@Validation (

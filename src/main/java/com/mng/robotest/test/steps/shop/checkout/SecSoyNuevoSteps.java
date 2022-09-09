@@ -30,7 +30,7 @@ public class SecSoyNuevoSteps extends StepBase {
 		Page2IdentCheckoutSteps page2IdentCheckoutSteps = new Page2IdentCheckoutSteps();
 		page2IdentCheckoutSteps.validateIsPage(emailExistsYet, 2);
 		
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 	}
 
 	@SuppressWarnings("static-access")

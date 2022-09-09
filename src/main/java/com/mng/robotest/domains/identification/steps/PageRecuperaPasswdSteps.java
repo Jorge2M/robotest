@@ -34,7 +34,7 @@ public class PageRecuperaPasswdSteps extends StepBase {
 		pageRecuperaPasswd.inputEmail(email);
 		pageRecuperaPasswd.clickEnviar();
 		isPageCambioPassword();
-		GenericChecks.checkDefault(driver);
+		GenericChecks.checkDefault();
 	}
 	
 	@Validation
