@@ -24,12 +24,6 @@ public interface SecTarjetaPci {
 			if (secTarjetaPci.isPresentInputNumberUntil(1)) {
 				return secTarjetaPci;
 			}
-			return new SecTarjetaPciInIframe();	
-		}
-		
-		SecTarjetaPci secTarjetaPci = new SecTarjetaPciNotInIframeMobil();
-		if (secTarjetaPci.isPresentInputNumberUntil(1)) {
-			return secTarjetaPci;
 		}
 		return new SecTarjetaPciInIframe();	
 	}

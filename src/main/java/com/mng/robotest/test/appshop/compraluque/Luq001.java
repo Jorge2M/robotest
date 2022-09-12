@@ -47,9 +47,7 @@ public class Luq001 extends TestBase {
 		
 		//Access and add articles
 		access();
-		DataBag dataBag = new DataBag();
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
-		secBolsaSteps.altaListaArticulosEnBolsa(listArticles, dataBag);
+		DataBag dataBag = new SecBolsaSteps().altaListaArticulosEnBolsa(listArticles);
 		dataTest.pais.setCodpos(getCodPostal());
 		
 		ConfigCheckout configCheckout = ConfigCheckout.config()

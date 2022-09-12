@@ -73,9 +73,6 @@ public class FactoryPagos {
 		case PaysecureQiwi:
 			pagoMaked = new PagoPaysecureQiwi(dataPago);
 			break;
-		case StoreCredit:
-			pagoMaked = new PagoStoreCredit(dataPago);
-			break;
 		case Assist:
 			pagoMaked = new PagoAssist(dataPago);
 			break;			

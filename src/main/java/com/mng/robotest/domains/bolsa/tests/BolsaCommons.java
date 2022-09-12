@@ -9,15 +9,14 @@ import com.mng.robotest.test.steps.shop.AccesoSteps;
 public class BolsaCommons extends NavigationBase {
 
 	public void checkBolsa() throws Exception {
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
-		DataBag dataBag = new DataBag();
-		
 		new AccesoSteps().oneStep(dataTest.userRegistered);
-		secBolsaSteps.altaArticlosConColores(2, dataBag);
+		
+		SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
+		DataBag dataBag = secBolsaSteps.altaArticlosConColores(2);
 		secBolsaSteps.forceStateBolsaTo(StateBolsa.CLOSED);
 		secBolsaSteps.forceStateBolsaTo(StateBolsa.OPEN); 
 		secBolsaSteps.clear1erArticuloBolsa(dataBag);								
-		secBolsaSteps.altaArticlosConColores(1, dataBag);
+		dataBag = secBolsaSteps.altaArticlosConColores(1);
 		secBolsaSteps.click1erArticuloBolsa(dataBag);
 	}
 	

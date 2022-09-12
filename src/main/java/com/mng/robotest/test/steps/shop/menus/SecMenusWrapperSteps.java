@@ -60,10 +60,10 @@ public class SecMenusWrapperSteps extends StepBase {
 		for (LineaType lineaType : lineasToTest) {
 			ThreeState apareceLinea = pais.getShoponline().stateLinea(lineaType, app);
 			if (checkLinea(lineaType, apareceLinea)) {
-				//Caso especial de un país con una sóla línea de she -> No ha de aparecer la línea de she
-				if (lineaType==LineaType.she && app!=AppEcom.outlet && pais.getShoponline().getNumLineasTiendas(app)==1) {
-					apareceLinea = ThreeState.FALSE;
-				}
+//				//Caso especial de un país con una sóla línea de she -> No ha de aparecer la línea de she
+//				if (lineaType==LineaType.she && app!=AppEcom.outlet && pais.getShoponline().getNumLineasTiendas(app)==1) {
+//					apareceLinea = ThreeState.FALSE;
+//				}
 				
 				boolean isLineaPresent = isLineaPresent(lineaType);
 				if (apareceLinea==ThreeState.TRUE) {

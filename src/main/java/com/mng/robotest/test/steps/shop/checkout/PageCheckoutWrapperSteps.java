@@ -32,7 +32,6 @@ public class PageCheckoutWrapperSteps extends StepBase {
 	private final PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(); 
 	private final ModalDirecEnvioSteps modalDirecEnvioSteps = new ModalDirecEnvioSteps();
 	private final SecMetodoEnvioDesktopSteps secMetodoEnvioDesktopSteps = new SecMetodoEnvioDesktopSteps();
-	private final SecStoreCreditSteps secStoreCreditSteps = new SecStoreCreditSteps();
 	private final SecTMangoSteps secTMangoSteps = new SecTMangoSteps();
 	private final SecKrediKartiSteps secKrediKartiSteps = new SecKrediKartiSteps();
 	private final SecBillpaySteps secBillpaySteps = new SecBillpaySteps();
@@ -49,6 +48,7 @@ public class PageCheckoutWrapperSteps extends StepBase {
 	public Page1EnvioCheckoutMobilSteps getPage1CheckoutMobilSteps() {
 		return page1MobilCheckSteps;
 	}
+	
 	public ModalDirecEnvioSteps getModalDirecEnvioSteps() {
 		return modalDirecEnvioSteps;
 	}
@@ -63,9 +63,6 @@ public class PageCheckoutWrapperSteps extends StepBase {
 	}
 	public SecKrediKartiSteps getSecKrediKartiSteps() {
 		return secKrediKartiSteps;
-	}
-	public SecStoreCreditSteps getSecStoreCreditSteps() {
-		return secStoreCreditSteps;
 	}
 	public SecTMangoSteps getSecTMangoSteps() {
 		return secTMangoSteps;
@@ -84,6 +81,10 @@ public class PageCheckoutWrapperSteps extends StepBase {
 			page1DktopCheckSteps.validateIsPageOK(dataBag);
 		}
 	} 
+
+	public void goToMetodosPagoMobile() throws Exception {
+		page1MobilCheckSteps.clickContinuarToMetodosPago();
+	}
 	
 	@Validation (
 		description="Acaba desapareciendo la capa de \"Cargando...\" (lo esperamos hasta #{maxSeconds} segundos)",
@@ -93,33 +94,79 @@ public class PageCheckoutWrapperSteps extends StepBase {
 		return (pageCheckoutWrapper.isNoDivLoadingUntil(maxSeconds));
 	}
 	
-	@Step (
-		description="Si existen y están plegados, desplegamos el bloque con los métodos de pago", 
-		expected="Aparecen los métodos de pagos asociados al país")
-	public void despliegaYValidaMetodosPago(Pais pais, boolean isEmpl) throws Exception {
-		TestMaker.getCurrentStepInExecution().addExpectedText(": " + pais.getStringPagosTest(app, isEmpl));
-		pageCheckoutWrapper.despliegaMetodosPago();
-		validaMetodosPagoDisponibles(pais, isEmpl);
+	public void despliegaYValidaMetodosPago() throws Exception {
+		despliegaYValidaMetodosPago(false);
 	}
 	
-	public void validaMetodosPagoDisponibles(Pais pais, boolean isEmpl) {
-		checkAvailablePagos(pais, isEmpl);
-		checkLogosPagos(pais, isEmpl);
+	public void isCroatiaImportInBothCurrencies() throws Exception {
+		isCroatiaImportInFn();
+		isCroatiaImportInEuros();
 	}
 	
 	@Validation
-	private ChecksTM checkAvailablePagos(Pais pais, boolean isEmpl) {
+	public ChecksTM isCroatiaImportInFn() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
+	 	String precioScreen = pageCheckoutWrapper.getPrecioTotalFromResumen(false);
+	 	String importeStr = pageCheckoutWrapper.getPrecioTotalFromResumen(true);
+	 	Float importe = Float.valueOf(importeStr.replace(",", "."));
+	 	
 	 	checks.add(
-			"El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país (" + pais.getListPagosForTest(app, isEmpl).size() + ")",
-			pageCheckoutWrapper.isNumMetodosPagoOK(pais, isEmpl), State.Defect);		
+			"El precio (" + precioScreen + ") existe y es > 0",
+			(importe!=null && importe>0), State.Defect);
+		
+	 	checks.add(
+			"El precio contiene la divisa <b>Kn</b>",
+			precioScreen.contains("Kn"), State.Defect);
+	 	
 		return checks;
 	}
 	
 	@Validation
-	private ChecksTM checkLogosPagos(Pais pais, boolean isEmpl) { 
+	public ChecksTM isCroatiaImportInEuros() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		List<Pago> listPagos = pais.getListPagosForTest(app, isEmpl);
+	 	String precioScreenEuros = pageCheckoutWrapper.getCroaciaPrecioTotalInEuros(false);
+	 	String importeStrEuros = pageCheckoutWrapper.getPrecioTotalFromResumen(true);
+	 	Float importeEuros = Float.valueOf(importeStrEuros.replace(",", "."));
+	 	
+	 	checks.add(
+			"El precio (" + precioScreenEuros + ") existe y es > 0",
+			(importeEuros!=null && importeEuros>0), State.Defect);
+		
+	 	checks.add(
+			"El precio contiene la divisa <b>€</b>",
+			precioScreenEuros.contains("€"), State.Defect);
+	 	
+	 	return checks;
+	}
+	
+	@Step (
+		description="Si existen y están plegados, desplegamos el bloque con los métodos de pago", 
+		expected="Aparecen los métodos de pagos asociados al país")
+	public void despliegaYValidaMetodosPago(boolean isEmpl) throws Exception {
+		TestMaker.getCurrentStepInExecution().addExpectedText(": " + dataTest.pais.getStringPagosTest(app, isEmpl));
+		pageCheckoutWrapper.despliegaMetodosPago();
+		validaMetodosPagoDisponibles(isEmpl);
+	}
+	
+	public void validaMetodosPagoDisponibles(boolean isEmpl) {
+		checkAvailablePagos(isEmpl);
+		checkLogosPagos(isEmpl);
+	}
+	
+	@Validation
+	private ChecksTM checkAvailablePagos(boolean isEmpl) {
+		ChecksTM checks = ChecksTM.getNew();
+	 	checks.add(
+			"El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país " + 
+			"(" + dataTest.pais.getListPagosForTest(app, isEmpl).size() + ")",
+			pageCheckoutWrapper.isNumMetodosPagoOK(isEmpl), State.Defect);		
+		return checks;
+	}
+	
+	@Validation
+	private ChecksTM checkLogosPagos(boolean isEmpl) { 
+		ChecksTM checks = ChecksTM.getNew();
+		List<Pago> listPagos = dataTest.pais.getListPagosForTest(app, isEmpl);
 		if (listPagos.size()==1 && channel.isDevice()) {
 			return checks;
 		}

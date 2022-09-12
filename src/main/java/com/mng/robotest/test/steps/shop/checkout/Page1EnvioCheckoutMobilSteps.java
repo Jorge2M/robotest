@@ -4,9 +4,7 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.pageobject.shop.checkout.Page1EnvioCheckoutMobil;
 import com.mng.robotest.test.pageobject.shop.checkout.Page2DatosPagoCheckoutMobil;
@@ -71,26 +69,24 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 	@Step (
 		description="Seleccionar el botón \"Continuar\"", 
 		expected="Aparece la página asociada al Paso-2")
-	public void clickContinuarToMetodosPago(Pais pais, boolean saldoEnCuenta) throws Exception {
+	public void clickContinuarToMetodosPago() throws Exception {
 		page1EnvioCheckoutMobil.clickContinuar();
 		new PageCheckoutWrapperSteps().validateLoadingDisappears(10);
-		checkAppearsStep2(app);
-		if (!saldoEnCuenta) {
-			checkAppearsPageWithPaymentMethods(pais, app);
-		}
+		checkAppearsStep2();
+		checkAppearsPageWithPaymentMethods();
 	}
 	
 	@Validation (
 		description="Aparece la página asociada al Paso-2",
 		level=State.Defect)
-	private boolean checkAppearsStep2(AppEcom app) {
+	private boolean checkAppearsStep2() {
 		return new Page2DatosPagoCheckoutMobil().isPageUntil(3);
 	}
 	
 	@Validation (
 		description="Están presentes los métodos de pago",
 		level=State.Defect)
-	private boolean checkAppearsPageWithPaymentMethods(Pais pais, AppEcom app) {
+	private boolean checkAppearsPageWithPaymentMethods() {
 		return new PageCheckoutWrapper().isPresentMetodosPago();
 	}
 	

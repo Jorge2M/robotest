@@ -34,6 +34,10 @@ public class DataPago {
 		this.FTCkout = FTCkout;
 	}
 	
+	public void setPago(Pago pago) {
+		getDataPedido().setPago(pago);
+	}
+	
 	public DataPedido getDataPedido() {
 		return this.dataPedido;
 	}

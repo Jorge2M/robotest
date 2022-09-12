@@ -56,6 +56,13 @@ public class Compra {
 	public void COM007_Cheque_Regalo_Old() throws Exception {
 		new Com007().execute();
 	}
+	
+	@Test (
+		groups={"Compra", "Canal:all_App:shop,outlet"}, alwaysRun=true,
+		description="[Usuario registrado] Compra en Croacia")
+	public void COM008_Compra_Croacia() throws Exception {
+		new Com008().execute();
+	}	
 
 	
 	public boolean isPro() {

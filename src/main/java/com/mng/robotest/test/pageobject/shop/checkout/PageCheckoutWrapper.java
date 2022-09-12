@@ -189,11 +189,11 @@ public class PageCheckoutWrapper extends PageBase {
 		return (page1DktopCheckout.isVisibleDescuentoEmpleadoUntil(secondsToWait)); 
 	}
 
-	public boolean isNumMetodosPagoOK(Pais pais, boolean isEmpl) {
+	public boolean isNumMetodosPagoOK(boolean isEmpl) {
 		if (channel==Channel.mobile) {
-			return page2MobilCheckout.isNumMetodosPagoOK(pais, isEmpl);
+			return page2MobilCheckout.isNumMetodosPagoOK(isEmpl);
 		}
-		return page1DktopCheckout.isNumMetodosPagoOK(pais, isEmpl);
+		return page1DktopCheckout.isNumMetodosPagoOK(isEmpl);
 	}
 	
 	public boolean isNumpagos(int numPagosExpected) {
@@ -225,19 +225,19 @@ public class PageCheckoutWrapper extends PageBase {
 		}
 	}
 
-	public String getPrecioTotalFromResumen() throws Exception {
+	public String getPrecioTotalFromResumen(boolean normalize) throws Exception {
 		if (channel==Channel.mobile) {
-			return (page2MobilCheckout.getPrecioTotalFromResumen());
+			return (page2MobilCheckout.getPrecioTotalFromResumen(normalize));
 		}
-		return (page1DktopCheckout.getPrecioTotalFromResumen());
+		return (page1DktopCheckout.getPrecioTotalFromResumen(normalize));
 	}
 	
-	public String getPrecioTotalSinSaldoEnCuenta() throws Exception {
+	public String getCroaciaPrecioTotalInEuros(boolean normalize) throws Exception {
 		if (channel==Channel.mobile) {
-			return (page2MobilCheckout.getPrecioTotalSinSaldoEnCuenta());
+			return page2MobilCheckout.getCroaciaPrecioTotalInEuros(normalize);
 		}
-		return (page1DktopCheckout.getPrecioTotalFromResumen());
-	}
+		return page1DktopCheckout.getCroaciaPrecioTotalInEuros(normalize);
+	}	
 	
 	public String getAlmacenFromNoProdEntorn() throws Exception {
 		if (channel==Channel.mobile) {
@@ -374,7 +374,7 @@ public class PageCheckoutWrapper extends PageBase {
 		if ("".compareTo(direcEnvio)!=0) {
 			dataPedido.setDireccionEnvio(direcEnvio);
 		}
-		dataPedido.setImporteTotal(getPrecioTotalFromResumen());
+		dataPedido.setImporteTotal(getPrecioTotalFromResumen(true));
 		dataPedido.setCodigoAlmacen(getAlmacenFromNoProdEntorn());
 	}
 	

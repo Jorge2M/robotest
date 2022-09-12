@@ -114,9 +114,7 @@ public abstract class LineasArtBolsa extends PageBase {
 	}
 	
 	private String getReferenciaArticle(WebElement lineaArticleWeb) {
-		String xpathLinRelative = getXPathLinkRelativeArticle();
-		state(State.Visible, lineaArticleWeb).by(By.xpath(xpathLinRelative)).wait(1).check();
-		WebElement link = lineaArticleWeb.findElement(By.xpath(xpathLinRelative));
+		WebElement link = getLineaLinkArticle(lineaArticleWeb);
 		if (link==null) {
 			return "";
 		}
@@ -125,8 +123,20 @@ public abstract class LineasArtBolsa extends PageBase {
 		} else {
 			return (UtilsTest.getReferenciaFromSrcImg(link.getAttribute("src")));
 		}
-		
 	}
+	
+	private WebElement getLineaLinkArticle(WebElement lineaArticleWeb) {
+		String xpathLinRelative = getXPathLinkRelativeArticle();
+		state(State.Visible, lineaArticleWeb).by(By.xpath(xpathLinRelative)).wait(2).check();
+		try {
+			return lineaArticleWeb.findElement(By.xpath(xpathLinRelative));
+		} 
+		catch (Exception e) {
+			waitMillis(1000);
+			return lineaArticleWeb.findElement(By.xpath(xpathLinRelative));
+		}
+	}
+	
 
 	public ArticuloDataBolsaScreen getArticuloDataByPosicion(int posicion) {
 		WebElement lineaArticleWeb = getLineaArticuloByPosicion(posicion);

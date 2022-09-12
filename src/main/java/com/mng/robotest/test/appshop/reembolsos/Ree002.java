@@ -57,12 +57,9 @@ public class Ree002 extends TestBase {
 		}
 		float saldoCtaIni = new PageReembolsos().getImporteStoreCredit();
 		
-		DataBag dataBag = new DataBag(); 
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
-		secBolsaSteps.altaArticlosConColores(1, dataBag);
+		DataBag dataBag = new SecBolsaSteps().altaArticlosConColores(1);
 		
 		//Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
-
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.checkPagos()
 				.storeCredit()

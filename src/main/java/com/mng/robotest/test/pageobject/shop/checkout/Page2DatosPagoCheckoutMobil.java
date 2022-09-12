@@ -47,6 +47,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	private static final String XPATH_ARTICLE_BOLSA = "//div[@id[contains(.,'panelBolsa:iteradorEntrega')]]";
 	
 	private static final String XPATH_PRECIO_TOTAL = "//*[@data-testid='summaryTotalPrice.price']";
+	private static final String XPATH_PRECIO_TOTAL_CROATIA_EUROS = "//*[@data-testid='summaryTotalPrice.additionalPrice.1']";
 	private static final String XPATH_DIRECCION_ENVIO_TEXT = "//p[@class='address']";
 	
 	private String getXPathBlockTarjetaGuardada(String metodoPago) {
@@ -152,9 +153,9 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		return false;
 	}
 	
-	public boolean isNumMetodosPagoOK(Pais pais, boolean isEmpl) {
+	public boolean isNumMetodosPagoOK(boolean isEmpl) {
 		int numPagosPant = getElements(XPATH_LINEA_PAGO_LAYOUT_LINEA).size();
-		int numPagosPais = pais.getListPagosForTest(app, isEmpl).size();
+		int numPagosPais = dataTest.pais.getListPagosForTest(app, isEmpl).size();
 		return (numPagosPais == numPagosPant);
 	}
 	
@@ -343,20 +344,26 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		new PageRedirectPasarelaLoading().isPageNotVisibleUntil(maxSecondsToWait);
 	}
 	
-	public String getPrecioTotalFromResumen() throws Exception {
+	public String getPrecioTotalFromResumen(boolean normalize) throws Exception {
 		String precioTotal = "";
 		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
 		precioTotal = pageCheckoutWrapper.formateaPrecioTotal(XPATH_PRECIO_TOTAL);
-		return (ImporteScreen.normalizeImportFromScreen(precioTotal));
+		if (!normalize) {
+			return precioTotal;
+		}
+		return ImporteScreen.normalizeImportFromScreen(precioTotal);
 	}
 	
-	public String getPrecioTotalSinSaldoEnCuenta() throws Exception {
+	public String getCroaciaPrecioTotalInEuros(boolean normalize) throws Exception {
 		String precioTotal = "";
 		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
-		precioTotal = pageCheckoutWrapper.formateaPrecioTotal(XPATH_PRECIO_TOTAL);
-		return (ImporteScreen.normalizeImportFromScreen(precioTotal));
+		precioTotal = pageCheckoutWrapper.formateaPrecioTotal(XPATH_PRECIO_TOTAL_CROATIA_EUROS);
+		if (!normalize) {
+			return precioTotal;
+		}
+		return ImporteScreen.normalizeImportFromScreen(precioTotal);		
 	}
-
+	
 	public String getTextDireccionEnvioCompleta() {
 		if (state(Present, XPATH_DIRECCION_ENVIO_TEXT).check()) {
 			return (getElement(XPATH_DIRECCION_ENVIO_TEXT)).getText();

@@ -81,13 +81,13 @@ public class SecBolsaSteps extends StepBase {
 		return (secBolsa.isInStateUntil(stateBolsaExpected, maxSeconds));
 	}
 
-	public void altaArticlosConColores(int numArticulos, DataBag dataBag) throws Exception {
+	public DataBag altaArticlosConColores(int numArticulos) throws Exception {
 		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.pais.getCodigo_alf(), app, driver).build();
 		List<GarmentCatalog> listParaAlta = getterProducts
 				.getFiltered(FilterType.ManyColors)
 				.subList(0, numArticulos);
 		
-		altaListaArticulosEnBolsa(listParaAlta, dataBag);
+		return altaListaArticulosEnBolsa(listParaAlta);
 	}
 
 	/**
@@ -95,14 +95,16 @@ public class SecBolsaSteps extends StepBase {
 	 * @param listParaAlta lista de artículos que hay que dar de alta
 	 * @param listArtEnBolsa lista total de artículos que hay en la bolsa (y en la que se añadirán los nuevos)
 	 */
-	public void altaListaArticulosEnBolsa(List<GarmentCatalog> listArticlesForAdd, DataBag dataBag) throws Exception {
+	public DataBag altaListaArticulosEnBolsa(List<GarmentCatalog> listArticlesForAdd) 
+			throws Exception {
+		DataBag dataBag = null;
 		if (listArticlesForAdd!=null && !listArticlesForAdd.isEmpty()) {
-			altaBolsaArticulos(listArticlesForAdd, dataBag);
+			dataBag = altaBolsaArticulos(listArticlesForAdd);
 			validaAltaArtBolsa(dataBag);
 		}
-
 		dataBag.setImporteTotal(secBolsa.getPrecioSubTotal());
 		dataBag.setImporteTransp(secBolsa.getPrecioTransporte());
+		return dataBag;
 	}
 
 	static final String tagListaArt = "@TagListaArt";
@@ -110,7 +112,8 @@ public class SecBolsaSteps extends StepBase {
 		description="Utilizar el buscador para acceder a la ficha y dar de alta los siguientes productos en la bolsa:<br>" + tagListaArt, 
 		expected="Los productos se dan de alta en la bolsa correctamente",
 		saveNettraffic=SaveWhen.Always)
-	public void altaBolsaArticulos(List<GarmentCatalog> listParaAlta, DataBag dataBag) throws Exception {
+	public DataBag altaBolsaArticulos(List<GarmentCatalog> listParaAlta) throws Exception {
+		DataBag dataBag = new DataBag();
 		includeListaArtInTestCaseDescription(listParaAlta);
 		for (int i=0; i<listParaAlta.size(); i++) {
 			GarmentCatalog artTmp = listParaAlta.get(i);
@@ -126,6 +129,7 @@ public class SecBolsaSteps extends StepBase {
 			int maxSecondsToWait = 10;
 			secBolsa.isInStateUntil(StateBolsa.OPEN,maxSecondsToWait);
 		}
+		return dataBag;
 	}
 
 	private void includeListaArtInTestCaseDescription(List<GarmentCatalog> listParaAlta) {

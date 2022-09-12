@@ -1,5 +1,7 @@
 package com.mng.robotest.domains.transversal;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -9,12 +11,14 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test.data.DataTest;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.Menu2onLevel;
 import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
+import com.mng.robotest.test.utils.UtilsTest;
 
 public class NavigationBase {
 
@@ -82,5 +86,9 @@ public class NavigationBase {
 		Menu1rstLevel menu1rstLevelObj = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.she, null, menu1rstLevel));
 		Menu2onLevel menu2onLevelToSelect = MenuTreeApp.getMenuLevel2From(menu1rstLevelObj, menu2onLevel);
 		new SecMenusWrapperSteps().selectMenu2onLevel(menu2onLevelToSelect);
+	}
+	
+	protected List<GarmentCatalog> getArticles(int numArticles) throws Exception {
+		return UtilsTest.getArticlesForTest(dataTest.pais, app, numArticles, driver);
 	}
 }

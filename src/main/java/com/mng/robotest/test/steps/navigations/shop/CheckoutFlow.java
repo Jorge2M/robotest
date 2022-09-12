@@ -130,9 +130,7 @@ public class CheckoutFlow extends StepBase {
 			secBolsaSteps.clear();
 			GenericChecks.checkDefault();
 		}
-	
-		DataBag dataBag = dataPago.getDataPedido().getDataBag();
-		secBolsaSteps.altaListaArticulosEnBolsa(listArticles, dataBag);
+		secBolsaSteps.altaListaArticulosEnBolsa(listArticles);
 	}
 	
 	private void testFromIdentificationToMetodosPago() throws Exception {
@@ -144,9 +142,7 @@ public class CheckoutFlow extends StepBase {
 		
 		test1rstPageCheckout();
 		if (channel==Channel.mobile) {
-			boolean isSaldoEnCuenta = dataPago.getFTCkout().storeCredit;
-			pageCheckoutWrapperSteps.getPage1CheckoutMobilSteps()
-				.clickContinuarToMetodosPago(dataTest.pais, isSaldoEnCuenta);
+			pageCheckoutWrapperSteps.goToMetodosPagoMobile();
 		}
 	}
 	
@@ -223,13 +219,13 @@ public class CheckoutFlow extends StepBase {
 			}
 				
 			if (!dataPago.getFTCkout().chequeRegalo) {
-				pageCheckoutWrapperSteps.despliegaYValidaMetodosPago(dataTest.pais, dataPago.getFTCkout().userIsEmployee);
+				pageCheckoutWrapperSteps.despliegaYValidaMetodosPago(dataPago.getFTCkout().userIsEmployee);
 			}
 			if (dataPago.getFTCkout().checkPasarelas) {
 				if (pago==null) { 
 					validaPasarelasPagoPais();
 				} else {
-					dataPago.getDataPedido().setPago(pago);
+					dataPago.setPago(pago);
 					checkPasarelaPago();
 				}
 			}
@@ -270,7 +266,8 @@ public class CheckoutFlow extends StepBase {
 						dataDirEnvio.put(DataDirType.telefono, "665015122");
 						pageCheckoutWrapperSteps.getModalDirecEnvioSteps().inputDataAndActualizar(dataDirEnvio);
 						pageCheckoutWrapperSteps.getModalAvisoCambioPaisSteps().clickConfirmar(paisChange);
-						pageCheckoutWrapperSteps.validaMetodosPagoDisponibles(paisChange, dataPago.getFTCkout().userIsEmployee);
+						dataTest.pais = paisChange;
+						pageCheckoutWrapperSteps.validaMetodosPagoDisponibles(dataPago.getFTCkout().userIsEmployee);
 					}
 				}
 			}
@@ -310,9 +307,6 @@ public class CheckoutFlow extends StepBase {
 						if (dataPago.getFTCkout().checkMisCompras) {
 							pageResultPagoSteps.selectLinkMisComprasAndValidateCompra(dataPago);
 						}
-//						} else {
-//							pageResultPagoSteps.selectLinkPedidoAndValidatePedido(dataPedido);
-//						}
 					}
 				} else {
 					new PageResultPagoTpvSteps().validateIsPageOk(dataPedido, dataTest.pais.getCodigo_pais());
@@ -333,13 +327,12 @@ public class CheckoutFlow extends StepBase {
 		expected="La acción se ejecuta correctamente")
 	private void fluxQuickInitToCheckout() throws Exception {
 		DataPedido dataPedido = dataPago.getDataPedido();
-		DataBag dataBag = dataPedido.getDataBag();
 		new UtilsMangoTest().goToPaginaInicio();
 		
 		//(en Chrome, cuando existe paralelización en ocasiones se pierden las cookies cuando se completa un pago con pasarela externa)
-		actionsWhenSessionLoss();
+		actionsWhenSessionLoss(); 
 		
-		secBolsaSteps.altaArticlosConColores(1, dataBag);
+		secBolsaSteps.altaArticlosConColores(1);
 		secBolsaSteps.selectButtonComprar(dataPago.getDataPedido().getDataBag());
 		testFromIdentificationToMetodosPago();
 		if (channel!=Channel.mobile) {
@@ -356,7 +349,7 @@ public class CheckoutFlow extends StepBase {
 		List<Pago> listPagosToTest = getListPagosToTest(dataPago.getFTCkout().userIsEmployee);
 		for (Iterator<Pago> it = listPagosToTest.iterator(); it.hasNext(); ) {
 			Pago pagoToTest = it.next();
-			dataPago.getDataPedido().setPago(pagoToTest);
+			dataPago.setPago(pagoToTest);
 			String urlPagChekoutToReturn = driver.getCurrentUrl();
 			checkPasarelaPago();
 			if (it.hasNext()) {
@@ -547,7 +540,7 @@ public class CheckoutFlow extends StepBase {
 					.userIsEmployee(isEmpl).build());
 			
 			if (pago!=null) {
-				dataPago.getDataPedido().setPago(pago);
+				dataPago.setPago(pago);
 			}
 			return dataPago;
 		}

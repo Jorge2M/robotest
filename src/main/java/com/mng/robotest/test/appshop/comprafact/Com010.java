@@ -58,9 +58,7 @@ public class Com010 extends TestBase {
 			listArticles = Arrays.asList(listArticles.get(0));
 		}
 		
-		DataBag dataBag = new DataBag(); 
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
-		secBolsaSteps.altaListaArticulosEnBolsa(listArticles, dataBag);
+		DataBag dataBag = new SecBolsaSteps().altaListaArticulosEnBolsa(listArticles);
 		
 		//Hasta página Checkout
 		ConfigCheckout configCheckout = ConfigCheckout.config()

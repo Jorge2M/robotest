@@ -24,7 +24,6 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class Page1DktopCheckout extends PageBase {
 	
 	private final SecDireccionEnvioDesktop secDireccionEnvio = new SecDireccionEnvioDesktop();
-	private final SecStoreCredit secStoreCredit = new SecStoreCredit();
 	private final SecTMango secTMango = new SecTMango();
 	private final SecBillpay secBillpay = new SecBillpay();
 	private final SecEps secEps = new SecEps();
@@ -61,6 +60,7 @@ public class Page1DktopCheckout extends PageBase {
 //	private static final String XPATH_PRECIO_TOTAL = "//span[@class[contains(.,'precioTotal')]]";
 	private static final String XPATH_PRECIO_SUBTOTAL = "//*[@data-testid='subTotalOrder.price']";
 	private static final String XPATH_PRECIO_TOTAL = "//*[@data-testid='totalPromotions.price']";
+	private static final String XPATH_PRECIO_TOTAL_CROATIA_EUROS = "//*[@data-testid='subTotalOrder.additionalPrice.1']";
 	
 	private static final String XPATH_BLOQUES_PAGO_POSIBLES = 
 		"//div[@id='textoCondicionesTarjeta']//*[@id='CardName'] | " + 
@@ -102,10 +102,6 @@ public class Page1DktopCheckout extends PageBase {
 	private static final String XPATH_COD_VENDEDOR_VOTF_WITH_TAG = "//form[@id[contains(.,'Dependienta')]]//span[text()[contains(.,'" + TAG_COD_VENDEDOR + "')]]";
 	private static final String XPATH_TEXT_VALE_CAMPAIGN = "//span[@class='texto_banner_promociones']";
 	
-	public SecStoreCredit getSecStoreCredit() {
-		return secStoreCredit;
-	}
-
 	public SecTMango getSecTMango() {
 		return secTMango;
 	}
@@ -301,10 +297,10 @@ public class Page1DktopCheckout extends PageBase {
 		return state(Present, xpathClickPago).check();
 	}
 
-	public boolean isNumMetodosPagoOK(Pais pais, boolean isEmpl) {
+	public boolean isNumMetodosPagoOK(boolean isEmpl) {
 		int numPagosPant = getElements(XPATH_METODO_PAGO).size();
 		if (app!=AppEcom.votf) {
-			int numPagosPais = pais.getListPagosForTest(app, isEmpl).size();
+			int numPagosPais = dataTest.pais.getListPagosForTest(app, isEmpl).size();
 			return (numPagosPais == numPagosPant);
 		}
 		
@@ -387,9 +383,20 @@ public class Page1DktopCheckout extends PageBase {
 		return getElement(XPATH_RED_ERROR).getText();
 	}	
 	
-	public String getPrecioTotalFromResumen() throws Exception {
+	public String getPrecioTotalFromResumen(boolean normalize) throws Exception {
 		String precioTotal = new PageCheckoutWrapper().formateaPrecioTotal(XPATH_PRECIO_TOTAL);
+		if (!normalize) {
+			return precioTotal;
+		}
 		return (ImporteScreen.normalizeImportFromScreen(precioTotal));
+	}
+	
+	public String getCroaciaPrecioTotalInEuros(boolean normalize) throws Exception {
+		String precioTotal = new PageCheckoutWrapper().formateaPrecioTotal(XPATH_PRECIO_TOTAL_CROATIA_EUROS);
+		if (!normalize) {
+			return precioTotal;
+		}
+		return (ImporteScreen.normalizeImportFromScreen(precioTotal));		
 	}
 
 	public String getAlmacenFromNoProdEntorn() {

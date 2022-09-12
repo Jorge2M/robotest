@@ -33,9 +33,7 @@ public class Bor002 extends TestBase {
 	}
 	
 	private DataBag addBagArticleWithColors() throws Exception {
-		DataBag dataBag = new DataBag();
-		new SecBolsaSteps().altaArticlosConColores(1, dataBag);
-		return dataBag;
+		return new SecBolsaSteps().altaArticlosConColores(1);
 	}
 	
 	private void navigateToCheckout(DataBag dataBag) throws Exception {

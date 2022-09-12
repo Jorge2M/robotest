@@ -105,7 +105,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	public void inputValeDescuento(ValeDiscount valePais, DataBag dataBag) throws Exception { 
 		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
 		pageCheckoutWrapper.inputCodigoPromoAndAccept(valePais.getCodigoVale());
-		dataBag.setImporteTotal(pageCheckoutWrapper.getPrecioTotalFromResumen());	
+		dataBag.setImporteTotal(pageCheckoutWrapper.getPrecioTotalFromResumen(true));	
 		checkAfterInputDiscountVale(valePais);
 		checkValeDiscountIsCorrect(valePais, dataBag);
 		

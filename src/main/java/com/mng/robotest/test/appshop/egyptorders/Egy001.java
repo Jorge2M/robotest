@@ -28,11 +28,7 @@ public class Egy001 extends TestBase {
 	public void execute() throws Exception {
 		access();
 		GarmentCatalog article = UtilsTest.getArticleForTest(dataTest.pais, app, driver);
-		
-		DataBag dataBag = new DataBag(); 
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
-		secBolsaSteps.altaListaArticulosEnBolsa(Arrays.asList(article), dataBag);
-		
+		DataBag dataBag = new SecBolsaSteps().altaListaArticulosEnBolsa(Arrays.asList(article));
 		DataPago dataPago = makeDataPayment(dataBag);
 		dataPago = new BuilderCheckout(dataPago)
 			.pago(dataTest.pais.getPago("VISA"))

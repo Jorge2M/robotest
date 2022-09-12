@@ -20,6 +20,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.test.data.PaisShop.CROATIA;
 
 public class SecDataProduct extends PageBase {
 	
@@ -97,10 +98,8 @@ public class SecDataProduct extends PageBase {
 	}
 	
 //xpaths asociados a los precios
-	//El class es diferente en ficha old y la new (product-price-sale vs product-sale)
-//	private static final String XPATH_ITEMS_PRECIO_FINAL_ART = "//span[(@class[contains(.,'product-prices-sale')] or @class[contains(.,'product-sale')]) and not(@class[contains(.,'--cross')])]";
-//	private static final String XPATH_ITEMS_PRECIO_SIN_DESC = "//span[(@class[contains(.,'product-prices-sale--cross')] or @class[contains(.,'product-sale--cross')])]";
 	private static final String XPATH_PRECIO_FINAL = "//span[@data-testid='currentPrice']";
+	private static final String XPATH_PRECIO_FINAL_CROATIA = XPATH_PRECIO_FINAL + "/span/span";
 	private static final String XPATH_PRECIO_REBAJADO = "//span[@data-testid[contains(.,'crossedOutPrice')]]";
 
 	//xpaths asociados a los colores de la prenda
@@ -120,6 +119,12 @@ public class SecDataProduct extends PageBase {
 			return XPATH_NOMBRE_ARTICULO_MOBIL;
 		}
 		return XPATH_NOMBRE_ARTICULO_DESKTOP;
+	}
+	private String getXPathPrecioFinal() {
+		if (CROATIA.isEquals(dataTest.pais)) {
+			return XPATH_PRECIO_FINAL_CROATIA;
+		}
+		return XPATH_PRECIO_FINAL;
 	}
 	
 	public ArticuloScreen getArticuloObject() {
@@ -218,12 +223,8 @@ public class SecDataProduct extends PageBase {
 	
 //Funciones referentes a los precios
 	public String getPrecioFinalArticulo() {
-		String precioArticulo = getElementVisible(XPATH_PRECIO_FINAL).getText();
-//		List<WebElement> listElemsPrecio = getElements(XPATH_ITEMS_PRECIO_FINAL_ART);
-//		ListIterator<WebElement> itPrecioVenta = listElemsPrecio.listIterator();
-//		String precioArticulo = "";
-//		while (itPrecioVenta != null && itPrecioVenta.hasNext())
-//			precioArticulo += (itPrecioVenta.next()).getAttribute("innerHTML");
+		WebElement precioElem = getElementVisible(getXPathPrecioFinal());
+		String precioArticulo = precioElem.getText();
 		return (ImporteScreen.normalizeImportFromScreen(precioArticulo));
 	}
 	
