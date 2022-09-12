@@ -27,7 +27,7 @@ public interface SSecSelTallasFicha {
 	
 	public static SSecSelTallasFicha make(TypeFicha typeFicha, Channel channel, AppEcom app) {
 		if (typeFicha==TypeFicha.OLD) {
-			if (channel.isDevice() && app!=AppEcom.outlet) {
+			if (channel.isDevice() /*&& app!=AppEcom.outlet*/) {
 				return new SSecSelTallasFichaOldDevice(channel, app);
 			}
 			return new SSecSelTallasFichaOldDesktop();
