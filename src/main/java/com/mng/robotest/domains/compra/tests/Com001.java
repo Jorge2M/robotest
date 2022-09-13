@@ -83,7 +83,7 @@ public class Com001 extends TestBase {
 			}
 			return Arrays.asList(articlesHomeOpt.get().get(0), articlesIntimissimiOpt.get().get(0));
 		} else {
-			return articlesHomeOpt.get();
+			return Arrays.asList(articlesHomeOpt.get().get(0), articlesHomeOpt.get().get(1));
 		}
 	}
 	
