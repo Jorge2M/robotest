@@ -104,10 +104,10 @@ public class PageMisCompras extends PageBase {
 	}
 	
 	public boolean isPageUntil(int maxSeconds) {
-		return (state(Visible, getXPathCapaContenedora()).wait(maxSeconds).check());
+		return state(Visible, getXPathCapaContenedora()).wait(maxSeconds).check();
 	}
 	
-	public Ticket getTicket(WebElement ticketScreen) {
+	private Ticket getTicket(WebElement ticketScreen) {
 		Ticket ticket = new Ticket();
 		ticket.setType(getTypeTicketPage(ticketScreen));
 		ticket.setId(getIdTicketPage(ticketScreen));

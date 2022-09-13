@@ -79,15 +79,9 @@ public class PageResultPagoSteps extends StepBase {
 	  		ImporteScreen.isPresentImporteInScreen(importeTotal, dataTest.pais.getCodigo_pais(), driver), State.Warn);
 		
 		if (channel==Channel.desktop) {
-//			if (dataTest.appE==AppEcom.shop) {
-				checks.add(
-			  		"Aparece el link hacia las compras",
-			  		pageResultPago.isButtonMisCompras(), State.Warn);
-//			} else {
-//				checks.add(
-//			  		"Aparece el link hacia los pedidos",
-//			  		pageResultPago.isLinkPedidos(), State.Warn);
-//			}
+			checks.add(
+		  		"Aparece el link hacia las compras",
+		  		pageResultPago.isButtonMisCompras(), State.Warn);
 		}
 		
 		int maxSeconds = 5;
@@ -116,9 +110,9 @@ public class PageResultPagoSteps extends StepBase {
 	@Step (
 		description="Seleccionar el link \"Mis Compras\"",
 		expected="Aparece la página de \"Mis compras\" o la de \"Acceso a Mis compras\" según si el usuario está o no loginado")
-	public void selectMisCompras(boolean userRegistered) throws Exception {
+	public void selectMisCompras() throws Exception {
 		pageResultPago.clickMisCompras();	 
-		if (userRegistered) {
+		if (dataTest.userRegistered) {
 			new PageMisComprasSteps().validateIsPage();
 		} else {
 			new PageAccesoMisComprasSteps().validateIsPage();
@@ -137,7 +131,7 @@ public class PageResultPagoSteps extends StepBase {
 	}
 	
 	public void selectLinkMisComprasAndValidateCompra(DataPago dataPago) throws Exception {		
-		selectMisCompras(dataTest.userRegistered);
+		selectMisCompras();
 		DataPedido dataPedido = dataPago.getDataPedido();
 		if (dataTest.userRegistered) {
 			new PageMisComprasSteps().validateIsCompraOnline(

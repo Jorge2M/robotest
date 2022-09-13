@@ -125,7 +125,7 @@ public class CheckoutSteps extends StepBase {
 	public ChecksTM isCroatiaImportInEuros() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
 	 	String precioScreenEuros = pageCheckoutWrapper.getCroaciaPrecioTotalInEuros(false);
-	 	String importeStrEuros = pageCheckoutWrapper.getPrecioTotalFromResumen(true);
+	 	String importeStrEuros = pageCheckoutWrapper.getCroaciaPrecioTotalInEuros(true);
 	 	Float importeEuros = Float.valueOf(importeStrEuros.replace(",", "."));
 	 	
 	 	checks.add(

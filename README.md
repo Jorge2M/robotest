@@ -18,7 +18,7 @@ Covers the web channels: desktop, mobile, tablet
 
 [k8s: https://bitbucket.intranet.mango.es/projects/TEST-OL/repos/k8s-tools-robotest/browse](https://bitbucket.intranet.mango.es/projects/TEST-OL/repos/k8s-tools-robotest/browse)
 
-[ArgoCD: https://argocd.dev-k8s-tools.sys.mango/applications/robotest](https://argocd.dev-k8s-tools.sys.mango/applications/robotest)
+[ArgoCD: https://argocd.pro-k8s-tools.sys.mango/applications/robotest](https://argocd.dev-k8s-tools.sys.mango/applications/robotest)
 
 
 ### Setup maven

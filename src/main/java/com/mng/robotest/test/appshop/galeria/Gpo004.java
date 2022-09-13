@@ -17,9 +17,30 @@ import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 
 public class Gpo004 extends TestBase {
 
+	private final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
+	private final DataForScrollStep dataScroll = new DataForScrollStep();
+	
+	public Gpo004() {
+		dataScroll.ordenacionExpected = FilterOrdenacion.NOordenado;
+		dataScroll.validateArticlesExpected = false;
+		dataScroll.validaImgBroken = true;
+	}
+	
 	@Override
 	public void execute() throws Exception {
 		access();
+		selectGaleryAndFilterByColor();
+		scrollToThirdPage();
+		if (!channel.isDevice()) {
+			selectArticleInOtherLabel();
+		}
+		
+		int articulosTotalesPagina = scrollToLastAndSelectArticle();
+		goBackToGalery();
+		scrollToLastAndCheck(articulosTotalesPagina);		
+	}
+
+	private void selectGaleryAndFilterByColor() throws Exception {
 		if (app==AppEcom.shop) {
 			clickMenu("camisas");
 		} else {
@@ -28,40 +49,42 @@ public class Gpo004 extends TestBase {
 
 		List<Color> colorsToFilter = new ArrayList<>();
 		colorsToFilter.add(Color.Blanco);
-		if (app!=AppEcom.outlet) {
+		if (app==AppEcom.shop) {
 			colorsToFilter.add(Color.Negro);
 			colorsToFilter.add(Color.Azul);
-		}
-		if (app==AppEcom.shop) {
 			new SecFiltrosSteps().selectFiltroColoresStep(false, "Camisas", colorsToFilter);
 		} else {
 			new SecFiltrosSteps().selectFiltroColoresStep(false, "Abrigos", colorsToFilter);
 		}
-			
-		//Scrollar hasta la 3a página
-		PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
-		DataForScrollStep dataScroll = new DataForScrollStep();
+	}
+
+	private void scrollToThirdPage() throws Exception {
 		dataScroll.numPageToScroll = 3;
-		dataScroll.ordenacionExpected = FilterOrdenacion.NOordenado;
-		dataScroll.validateArticlesExpected = false;
-		dataScroll.validaImgBroken = true;
 		pageGaleriaSteps.scrollFromFirstPage(dataScroll);
+	}
+
+	private void selectArticleInOtherLabel() throws Exception {
 		LocationArticle loc1rsArticle1rstPage = LocationArticle.getInstanceInPage(2, 1);
 		pageGaleriaSteps.selectArticuloEnPestanyaAndBack(loc1rsArticle1rstPage, dataTest.pais);
-		
-		//Scrollar hasta el final de la Galería
+	}
+
+	private int scrollToLastAndSelectArticle() throws Exception {
 		dataScroll.numPageToScroll = PageGaleriaDesktop.MAX_PAGE_TO_SCROLL;
 		DataScroll datosScrollFinalGaleria = pageGaleriaSteps.scrollFromFirstPage(dataScroll);
-			
 		LocationArticle loc1rsArticleLastPage = LocationArticle.getInstanceInPage(datosScrollFinalGaleria.paginaFinal, 1);
 		pageGaleriaSteps.selectArticulo(loc1rsArticleLastPage);
-		AllPagesSteps.backNagegador(driver);
+		return datosScrollFinalGaleria.articulosTotalesPagina;
+	}
 
-		//Scrollar hasta el final de la Galería (comprobaremos que el número de artículos es el mismo que en el anterior scroll hasta el final)
+	private void goBackToGalery() throws Exception {
+		AllPagesSteps.backNagegador(driver);
+	}
+
+	private void scrollToLastAndCheck(int articulosTotalesPagina) throws Exception {
 		dataScroll.validateArticlesExpected = true;
-		dataScroll.numArticlesExpected = datosScrollFinalGaleria.articulosTotalesPagina;
+		dataScroll.numArticlesExpected = articulosTotalesPagina;
 		dataScroll.validaImgBroken = false;
-		pageGaleriaSteps.scrollFromFirstPage(dataScroll);		
+		pageGaleriaSteps.scrollFromFirstPage(dataScroll);
 	}
 
 }

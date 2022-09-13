@@ -43,6 +43,10 @@ public class PageMisComprasSteps extends StepBase {
 	  	return checks;
 	}
 	
+	public ChecksTM validateIsCompraOnline(String codPedido) {
+		return validateIsCompraOnline(codPedido, false);
+	}
+	
 	@Validation
 	public ChecksTM validateIsCompraOnline(String codPedido, boolean isChequeRegalo) {
 		ChecksTM checks = ChecksTM.getNew();

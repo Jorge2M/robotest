@@ -97,7 +97,7 @@ public class PageFichaArtSteps extends StepBase {
 			int maxSeconds = 3;
 		 	checks.add(
 				"Aparece la página con los datos de la ficha del producto " + datosArticulo.getReferencia() +
-				"(la esperamos hasta " + maxSeconds + " segundos)",
+				" (la esperamos hasta " + maxSeconds + " segundos)",
 				pageFicha.isFichaArticuloUntil(datosArticulo.getReferencia(), maxSeconds), State.Defect);
 		}
 			

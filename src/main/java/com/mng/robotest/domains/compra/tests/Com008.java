@@ -2,6 +2,7 @@ package com.mng.robotest.domains.compra.tests;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataBag;
@@ -31,9 +32,10 @@ public class Com008 extends TestBase {
 		continueAndUnfoldPayments();
 		checkIsPresentImportInBothCurrencies();
 		if (!isPRO()) {
-			executeVisaPayment();
+			DataPago dataPago = executeVisaPayment();
+			checkMisCompras(dataPago);
+			//checkPedidoManto(dataPago);
 		}
-		//checkPedido();
 	}
 
 	private void accessLoginAndClearBolsa() throws Exception {
@@ -58,19 +60,26 @@ public class Com008 extends TestBase {
 		checkoutSteps.despliegaYValidaMetodosPago();
 	}
 	
-	private void executeVisaPayment() throws Exception {
+	private DataPago executeVisaPayment() throws Exception {
 		DataPago dataPago = getDataPago();		
 		dataPago.setPago(dataTest.pais.getPago("VISA"));
 		PagoSteps pagoSteps = FactoryPagos.makePagoSteps(dataPago);
 		pagoSteps.testPagoFromCheckout(true);
+		
 		new PageResultPagoSteps().validateIsPageOk(dataPago);
+		return dataPago;
 	}	
 	
-//	private void checkPedido() throws Exception {
+	private void checkMisCompras(DataPago dataPago) throws Exception {
+		String codigoPedido = dataPago.getDataPedido().getCodpedido();
+		new PageResultPagoSteps().selectMisCompras();
+		new PageMisComprasSteps().validateIsCompraOnline(codigoPedido);
+	}
+	
+//	private void checkPedidoManto(DataPago dataPago) throws Exception {
 //		List<CheckPedido> listChecks = Arrays.asList(
 //			CheckPedido.consultarBolsa, 
-//			CheckPedido.consultarPedido,
-//			CheckPedido.anular); 
+//			CheckPedido.consultarPedido); 
 //		
 //		CompraCommons.checkPedidosManto(listChecks, dataPago.getListPedidos(), app, driver);
 //	}

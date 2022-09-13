@@ -9,16 +9,12 @@ import com.mng.robotest.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.NumColumnas;
-import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
-import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
-import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps.TypeActionFav;
 import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
@@ -41,8 +37,6 @@ public class Fav001 extends TestBase {
 		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
 		dataTest.userConnected = userShop.user;
 		dataTest.passwordUser = userShop.password;
-//		dataTest.userConnected = "test.performance50@mango.com";
-//		dataTest.passwordUser = "mango457";		
 		dataTest.userRegistered=true;
 	}
 	
