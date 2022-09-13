@@ -97,7 +97,7 @@ public class SecBolsaSteps extends StepBase {
 	 */
 	public DataBag altaListaArticulosEnBolsa(List<GarmentCatalog> listArticlesForAdd) 
 			throws Exception {
-		DataBag dataBag = null;
+		DataBag dataBag = new DataBag();
 		if (listArticlesForAdd!=null && !listArticlesForAdd.isEmpty()) {
 			dataBag = altaBolsaArticulos(listArticlesForAdd);
 			validaAltaArtBolsa(dataBag);
