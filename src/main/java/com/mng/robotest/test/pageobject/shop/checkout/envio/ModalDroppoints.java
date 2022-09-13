@@ -1,17 +1,12 @@
 package com.mng.robotest.test.pageobject.shop.checkout.envio;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.checkout.envio.SecSelectDPoint.TypeDeliveryPoint;
 import com.mng.robotest.test.steps.shop.checkout.envio.DataDeliveryPoint;
 import com.mng.robotest.test.steps.shop.checkout.envio.DataSearchDeliveryPoint;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class ModalDroppoints extends PageBase {
 	
@@ -27,6 +22,7 @@ public class ModalDroppoints extends PageBase {
 	private String getXPathPanelGeneral() {
 		switch (channel) {
 		case desktop:
+		case tablet:
 			return XPATH_PANEL_GENERAL_DESKTOP;
 		default:
 		case mobile:
@@ -40,21 +36,20 @@ public class ModalDroppoints extends PageBase {
 	
 	public boolean isVisibleUntil(int maxSeconds) {
 		String xpathPanelGeneral = getXPathPanelGeneral();
-		return (state(Visible, By.xpath(xpathPanelGeneral)).wait(maxSeconds).check());
+		return state(Visible, xpathPanelGeneral).wait(maxSeconds).check();
 	}
 	
 	public boolean isInvisibleUntil(int maxSeconds) {
 		String xpathPanelGeneral = getXPathPanelGeneral();
-		return (state(Invisible, By.xpath(xpathPanelGeneral)).wait(maxSeconds).check());
+		return state(Invisible, xpathPanelGeneral).wait(maxSeconds).check();
 	}
 	
 	public boolean isInvisibleCargandoMsgUntil(int maxSeconds) {
-		return (state(Invisible, By.xpath(XPATH_MSG_CARGANDO)).wait(maxSeconds).check());
+		return state(Invisible, XPATH_MSG_CARGANDO).wait(maxSeconds).check();
 	}
 	
 	public boolean isErrorMessageVisibleUntil() {
-		WebDriver driver = TestMaker.getDriverTestCase();
-		return (state(Visible, By.xpath(XPATH_ERROR_MESSAGE), driver).wait(2).check());
+		return state(Visible, XPATH_ERROR_MESSAGE).wait(2).check();
 	}
 	
 	public void sendProvincia(String provincia) {
@@ -87,9 +82,9 @@ public class ModalDroppoints extends PageBase {
 	}
 
 	public void searchAgainByUserCp(String cp) {
-		driver.findElement(By.xpath(XPATH_CP_INPUT_BOX)).clear();
-		driver.findElement(By.xpath(XPATH_CP_INPUT_BOX)).sendKeys(cp);
-		driver.findElement(By.xpath(XPATH_CP_INPUT_BOX)).sendKeys(Keys.ENTER);
+		getElement(XPATH_CP_INPUT_BOX).clear();
+		getElement(XPATH_CP_INPUT_BOX).sendKeys(cp);
+		getElement(XPATH_CP_INPUT_BOX).sendKeys(Keys.ENTER);
 	}
 
 	public SecSelectDPoint getSecSelectDPoint() {
