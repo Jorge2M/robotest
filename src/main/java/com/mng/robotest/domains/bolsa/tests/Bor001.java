@@ -19,7 +19,7 @@ public class Bor001 extends TestBase {
 	}
 
 	private void accessAndSelectMenuVestidos() throws Exception {
-		new AccesoSteps().manySteps(dataTest);
+		new AccesoSteps().manySteps();
 		clickMenu("vestidos", TypeSelectMenu.XREF);
 	}	
 

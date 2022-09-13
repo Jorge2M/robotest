@@ -1,5 +1,6 @@
 package com.mng.robotest.domains.cookiescheck.services;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -13,6 +14,10 @@ import com.mng.robotest.domains.cookiescheck.entities.Cookie;
 public class CookiesChecker {
 
 	private final Optional<List<Cookie>> allowedCookies;
+	private final List<String> whiteList = Arrays.asList(
+			"_ga_NOTFORGA4TRACKING", 
+			"_ga_NC306DXESG",
+			"MangoHQ");
 	
 	public CookiesChecker() {
 		CookiesFinder finder = new CookiesFinder();
@@ -40,6 +45,10 @@ public class CookiesChecker {
 		if (allowedCookies.isEmpty()) {
 			return false;
 		}
+		if (whiteList.contains(cookie.getName())) {
+			return false;
+		}
+		
 		return allowedCookies.get().stream()
 		        .filter(c -> c.getCookieName().compareTo(cookie.getName())==0)
 		        .findAny().isEmpty();

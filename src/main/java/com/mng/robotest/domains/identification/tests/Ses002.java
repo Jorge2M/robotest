@@ -12,7 +12,7 @@ public class Ses002 extends TestBase {
 		dataTest.userConnected = userShop.user;
 		dataTest.passwordUser = userShop.password;
 		dataTest.userRegistered = true;
-		new AccesoSteps().manySteps(dataTest);
+		new AccesoSteps().manySteps();
 	}
 
 }

@@ -133,7 +133,7 @@ public class AccesoSteps extends StepBase {
 	 * Accedemos a la aplicación (shop/outlet/votf)
 	 * Se ejecutan cada acción en un paso
 	 */
-	public void manySteps(DataTest dataTest) throws Exception {
+	public void manySteps() throws Exception {
 		if (app==AppEcom.votf && !dataTest.userRegistered) { //En VOTF no tiene sentido identificarte con las credenciales del cliente
 			accesoVOTFtoHOME();					
 		} else {
@@ -149,7 +149,7 @@ public class AccesoSteps extends StepBase {
 	public void identificacionEnMango() throws Exception {
 		MenusUserWrapper userMenus = new SecMenusWrap().getMenusUser();
 		if (!userMenus.isMenuInState(UserMenu.cerrarSesion, Present)) {
-			iniciarSesion();
+			iniciarSesion(dataTest);
 		}
 	}
 
@@ -158,7 +158,7 @@ public class AccesoSteps extends StepBase {
 		expected="La identificación es correcta",
 		saveHtmlPage=SaveWhen.Always,
 		saveNettraffic=SaveWhen.Always)
-	private void iniciarSesion() throws Exception {
+	private void iniciarSesion(DataTest dataTest) throws Exception {
 		new PageIdentificacion().iniciarSesion(dataTest.userConnected, dataTest.passwordUser);
 		validaIdentificacionEnShop();
 	}
@@ -199,7 +199,7 @@ public class AccesoSteps extends StepBase {
 		StepTestMaker.replaceInDescription(tagCodigoPaisOrigen, dataTest.pais.getCodigo_pais());
 		StepTestMaker.replaceInDescription(tagNombreIdiomaOrigen, dataTest.idioma.getLiteral());
 	
-		manySteps(dataTest);
+		manySteps();
 
 		Pais paisOriginal = dataTest.pais;
 		IdiomaPais idiomaOriginal = dataTest.idioma;
