@@ -497,7 +497,12 @@ public class GetterProducts {
 		}
 		
 		private boolean isPro(AppEcom app, String urlBase) {
-			return new NavigationBase().isPRO();
+			try {
+				return new NavigationBase().isPRO();
+			}
+			catch (Exception e) {
+				return false;
+			}
 		}
 	}
 }

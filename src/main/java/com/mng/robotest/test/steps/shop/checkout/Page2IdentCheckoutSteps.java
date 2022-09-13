@@ -73,7 +73,7 @@ public class Page2IdentCheckoutSteps extends StepBase {
 	public void clickContinuar(boolean userRegistered, DataBag dataBag)
 	throws Exception {
 		page2IdentCheckout.clickBotonContinuarAndWait(20);   
-		new PageCheckoutWrapperSteps().validateIsFirstPage(userRegistered, dataBag);
+		new CheckoutSteps().validateIsFirstPage(userRegistered, dataBag);
 	}
 	
 	@Step (

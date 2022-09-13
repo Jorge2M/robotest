@@ -71,7 +71,7 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 		expected="Aparece la página asociada al Paso-2")
 	public void clickContinuarToMetodosPago() throws Exception {
 		page1EnvioCheckoutMobil.clickContinuar();
-		new PageCheckoutWrapperSteps().validateLoadingDisappears(10);
+		new CheckoutSteps().validateLoadingDisappears(10);
 		checkAppearsStep2();
 		checkAppearsPageWithPaymentMethods();
 	}

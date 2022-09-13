@@ -6,7 +6,7 @@ import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataPago;
-import com.mng.robotest.test.steps.shop.checkout.PageCheckoutWrapperSteps;
+import com.mng.robotest.test.steps.shop.checkout.CheckoutSteps;
 import com.mng.robotest.test.steps.shop.checkout.PageResultPagoSteps;
 import com.mng.robotest.test.steps.shop.checkout.pagosfactory.FactoryPagos;
 import com.mng.robotest.test.steps.shop.checkout.pagosfactory.PagoSteps;
@@ -14,7 +14,7 @@ import com.mng.robotest.test.utils.PaisGetter;
 
 public class Com008 extends TestBase {
 
-	PageCheckoutWrapperSteps pageCheckoutWrapperSteps = new PageCheckoutWrapperSteps();
+	private final CheckoutSteps checkoutSteps = new CheckoutSteps();
 	
 	public Com008() throws Exception {
 		dataTest.userConnected = "e2e.hr.test@mango.com";
@@ -48,14 +48,14 @@ public class Com008 extends TestBase {
 	}
 	
 	public void checkIsPresentImportInBothCurrencies() throws Exception {
-		pageCheckoutWrapperSteps.isCroatiaImportInBothCurrencies();
+		checkoutSteps.isCroatiaImportInBothCurrencies();
 	}
 	
 	private void continueAndUnfoldPayments() throws Exception {
 		if (channel==Channel.mobile) {
-			pageCheckoutWrapperSteps.goToMetodosPagoMobile();
+			checkoutSteps.goToMetodosPagoMobile();
 		}
-		pageCheckoutWrapperSteps.despliegaYValidaMetodosPago();
+		checkoutSteps.despliegaYValidaMetodosPago();
 	}
 	
 	private void executeVisaPayment() throws Exception {

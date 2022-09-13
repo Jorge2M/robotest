@@ -47,7 +47,7 @@ import com.mng.robotest.test.steps.shop.AllPagesSteps;
 import com.mng.robotest.test.steps.shop.checkout.Page1DktopCheckoutSteps;
 import com.mng.robotest.test.steps.shop.checkout.Page1IdentCheckoutSteps;
 import com.mng.robotest.test.steps.shop.checkout.Page2IdentCheckoutSteps;
-import com.mng.robotest.test.steps.shop.checkout.PageCheckoutWrapperSteps;
+import com.mng.robotest.test.steps.shop.checkout.CheckoutSteps;
 import com.mng.robotest.test.steps.shop.checkout.PageResultPagoSteps;
 import com.mng.robotest.test.steps.shop.checkout.PageResultPagoTpvSteps;
 import com.mng.robotest.test.steps.shop.checkout.pagosfactory.FactoryPagos;
@@ -70,7 +70,7 @@ public class CheckoutFlow extends StepBase {
 	private final ValeDiscount valeTest = new ValeDiscount("TEST", 10, "EXTRA SOBRE LOS ARTÍCULOS");
 	
 	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
-	private final PageCheckoutWrapperSteps pageCheckoutWrapperSteps = new PageCheckoutWrapperSteps();
+	private final CheckoutSteps pageCheckoutWrapperSteps = new CheckoutSteps();
 	
 	private CheckoutFlow (
 			DataPago dataPago, 
@@ -248,7 +248,7 @@ public class CheckoutFlow extends StepBase {
 						dataDirFactura.put(DataDirType.email, "crp1974@hotmail.com");
 						dataDirFactura.put(DataDirType.telefono, "665015122");
 						dataDirFactura.put(DataDirType.poblacion, "PEREPAU");
-						new PageCheckoutWrapperSteps().getModalDirecFacturaSteps()
+						new CheckoutSteps().getModalDirecFacturaSteps()
 							.inputDataAndActualizar(dataDirFactura);
 					}
 					

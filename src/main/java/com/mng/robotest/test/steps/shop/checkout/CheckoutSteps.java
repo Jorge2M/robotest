@@ -27,7 +27,7 @@ import com.mng.robotest.test.steps.shop.checkout.envio.SecMetodoEnvioDesktopStep
 import com.mng.robotest.test.steps.shop.checkout.ideal.SecIdealSteps;
 import com.mng.robotest.test.steps.shop.checkout.tmango.SecTMangoSteps;
 
-public class PageCheckoutWrapperSteps extends StepBase {
+public class CheckoutSteps extends StepBase {
 
 	private final PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(); 
 	private final ModalDirecEnvioSteps modalDirecEnvioSteps = new ModalDirecEnvioSteps();

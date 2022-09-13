@@ -26,7 +26,7 @@ import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.steps.shop.checkout.Page1IdentCheckoutSteps;
-import com.mng.robotest.test.steps.shop.checkout.PageCheckoutWrapperSteps;
+import com.mng.robotest.test.steps.shop.checkout.CheckoutSteps;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
@@ -277,7 +277,7 @@ public class SecBolsaSteps extends StepBase {
 
 	public void validaSelectButtonComprar(DataBag dataBag) throws Exception {
 		if (dataTest.userRegistered) {
-			new PageCheckoutWrapperSteps().validateIsFirstPage(dataTest.userRegistered, dataBag);
+			new CheckoutSteps().validateIsFirstPage(dataTest.userRegistered, dataBag);
 		} else {
 			int maxSeconds = 5;
 			new Page1IdentCheckoutSteps().validateIsPage(maxSeconds);

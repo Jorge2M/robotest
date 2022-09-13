@@ -6,12 +6,12 @@ import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow;
-import com.mng.robotest.test.steps.shop.checkout.PageCheckoutWrapperSteps;
+import com.mng.robotest.test.steps.shop.checkout.CheckoutSteps;
 
 public abstract class PagoSteps extends StepBase {
 	
 	final CheckoutFlow checkoutFlow;
-	final PageCheckoutWrapperSteps pageCheckoutWrapperSteps = new PageCheckoutWrapperSteps();
+	final CheckoutSteps pageCheckoutWrapperSteps = new CheckoutSteps();
 	
 	public DataPago dataPago;
 	public static String MsgNoPayImplemented = "No está diponible la parte del test que permite completar/ejecutar el pago";

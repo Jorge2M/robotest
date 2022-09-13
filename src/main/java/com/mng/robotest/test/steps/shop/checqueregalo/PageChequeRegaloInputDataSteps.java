@@ -13,7 +13,7 @@ import com.mng.robotest.test.generic.ChequeRegalo;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputDataNew;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData.*;
-import com.mng.robotest.test.steps.shop.checkout.PageCheckoutWrapperSteps;
+import com.mng.robotest.test.steps.shop.checkout.CheckoutSteps;
 
 
 public class PageChequeRegaloInputDataSteps extends PageBase {
@@ -135,6 +135,6 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 	public void inputDataAndClickComprar(Channel channel, AppEcom app, ChequeRegalo chequeRegalo) {
 		pageChequeRegaloInputData.inputDataCheque(chequeRegalo);
 		pageChequeRegaloInputData.clickComprarFin(chequeRegalo);
-		new PageCheckoutWrapperSteps().validaIsVersionChequeRegalo(chequeRegalo);
+		new CheckoutSteps().validaIsVersionChequeRegalo(chequeRegalo);
 	}
 }
