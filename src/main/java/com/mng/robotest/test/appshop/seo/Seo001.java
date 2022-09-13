@@ -4,13 +4,12 @@ import java.net.URI;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.steps.otras.BrowserSteps;
 
 public class Seo001 extends TestBase {
 
 	public void execute() throws Exception {
-		if (!new UtilsMangoTest().isEntornoPRO()) {
+		if (!isPRO()) {
 			return;
 		}
 		

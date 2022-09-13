@@ -4,7 +4,6 @@ import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.pageobject.shop.PageReembolsos;
 import com.mng.robotest.test.pageobject.shop.PageReembolsos.TypeReembolso;
 import com.mng.robotest.test.steps.shop.PageReembolsosSteps;
@@ -23,7 +22,7 @@ public class Ree001 extends TestBase {
 		dataTest.idioma = EMIRATOS_ARABE;
 		
 		//TODO hasta que se solvente el https://jira.mangodev.net/jira/browse/GUIL-2311
-		if (new UtilsMangoTest().isEntornoPRO()) {
+		if (isPRO()) {
 			return;		
 		}
 

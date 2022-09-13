@@ -432,7 +432,7 @@ public class CheckoutFlow extends StepBase {
 		TypeAccess typeAccess = ((InputParamsMango)TestMaker.getInputParamsSuite()).getTypeAccess();
 		return (
 			//No estamos en el entorno productivo
-			!new UtilsMangoTest().isEntornoPRO() &&
+			!isPRO() &&
 			//No estamos en modo BATCH
 			typeAccess!=TypeAccess.Bat &&
 			//Está activado el flag de pago en el fichero XML de configuración del test (testNG)

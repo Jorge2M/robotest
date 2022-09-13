@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.transversal;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,6 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.DataTest;
-
 
 public class PageBase extends PageObjTM {
 
@@ -122,6 +120,10 @@ public class PageBase extends PageObjTM {
     public void moveToElement(String xpath) {
         WebElement webElem = driver.findElement(By.xpath(xpath));
         moveToElement(webElem, driver);
+    }
+    
+    public boolean isPRO() {
+    	return new NavigationBase().isPRO();
     }
 
 }

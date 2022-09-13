@@ -20,9 +20,9 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.NavigationBase;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Linea.LineaType;
-import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.getdata.UtilsData;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
@@ -31,7 +31,6 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
-
 
 public class GetterProducts {
 	
@@ -498,7 +497,7 @@ public class GetterProducts {
 		}
 		
 		private boolean isPro(AppEcom app, String urlBase) {
-			return new UtilsMangoTest().isEntornoPRO();
+			return new NavigationBase().isPRO();
 		}
 	}
 }

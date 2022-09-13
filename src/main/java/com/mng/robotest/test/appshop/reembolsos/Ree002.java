@@ -33,7 +33,7 @@ public class Ree002 extends TestBase {
 		dataTest.idioma = EMIRATOS_ARABE;
 
 		//TODO hasta que se solvente el https://jira.mangodev.net/jira/browse/GUIL-2311
-		if (new UtilsMangoTest().isEntornoPRO()) {
+		if (isPRO()) {
 			return;
 		}
 
@@ -80,7 +80,7 @@ public class Ree002 extends TestBase {
 			.build()
 			.checkout(From.BOLSA);
 		
-		if (!new UtilsMangoTest().isEntornoPRO()) {
+		if (!isPRO()) {
 			//Volvemos a la portada (Seleccionamos el link "Seguir de shopping" o el icono de Mango)
 			new PageResultPagoSteps().selectSeguirDeShopping(app);
 			

@@ -14,7 +14,6 @@ import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
-import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop;
@@ -90,7 +89,7 @@ public class Com010 extends TestBase {
 	private boolean testVale(boolean testVale) {
 		return (
 			testVale && 
-			!new UtilsMangoTest().isEntornoPRO());
+			!isPRO());
 	}	
 
 }

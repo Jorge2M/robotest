@@ -1,10 +1,13 @@
 package com.mng.robotest.domains.transversal;
 
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -91,4 +94,34 @@ public class NavigationBase {
 	protected List<GarmentCatalog> getArticles(int numArticles) throws Exception {
 		return UtilsTest.getArticlesForTest(dataTest.pais, app, numArticles, driver);
 	}
+	
+	public boolean isPRO() {
+		if (TestCaseTM.getTestCaseInExecution().isEmpty()) {
+			return false;
+		}
+		String urlBase = TestMaker.getInputParamsSuite().getUrlBase();
+		if (isEntornoPRO(urlBase)) {
+			return true;
+		}
+		return isEntornoPRO(driver.getCurrentUrl());
+	}	
+	
+	public boolean isEntornoPRO(String url) {
+		List<String> URLsProShop   = Arrays.asList("shop.mango.com", "shoptest.pro.mango.com");
+		List<String> URLsProOutlet = Arrays.asList("www.mangooutlet.com", "outlettest.pro.mango.com");
+		Iterator<String> itURLsPRO = null;
+		if (app==AppEcom.outlet) {
+			itURLsPRO = URLsProOutlet.iterator();
+		} else {
+			itURLsPRO = URLsProShop.iterator();
+		}
+		
+		while (itURLsPRO.hasNext()) {
+			String URL = itURLsPRO.next();
+			if (url.contains(URL)) {
+				return true;
+			}
+		}
+		return false;
+	}	
 }

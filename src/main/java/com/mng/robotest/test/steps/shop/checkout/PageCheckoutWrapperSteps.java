@@ -433,7 +433,7 @@ public class PageCheckoutWrapperSteps extends StepBase {
 		expected="El banco aparece seleccionado")
 	public void selectBancoEPS() throws Exception {
 		String nombreBanco = "Easybank";
-		if (!new UtilsMangoTest().isEntornoPRO()) {
+		if (!isPRO()) {
 			nombreBanco = "Test Issuer";
 		}
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagNombreBanco, nombreBanco);

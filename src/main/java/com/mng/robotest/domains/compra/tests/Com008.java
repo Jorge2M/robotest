@@ -30,7 +30,9 @@ public class Com008 extends TestBase {
 		altaArticulosBolsaAndClickComprar();
 		continueAndUnfoldPayments();
 		checkIsPresentImportInBothCurrencies();
-		executeVisaPayment();
+		if (!isPRO()) {
+			executeVisaPayment();
+		}
 		//checkPedido();
 	}
 

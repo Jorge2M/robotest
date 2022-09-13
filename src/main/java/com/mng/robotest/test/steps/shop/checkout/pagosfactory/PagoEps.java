@@ -1,7 +1,6 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
 import com.mng.robotest.test.datastored.DataPago;
-import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.pageobject.shop.checkout.eps.PageEpsSimulador.TypeDelay;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.steps.shop.checkout.eps.PageEpsSelBancoSteps;
@@ -25,7 +24,7 @@ public class PagoEps extends PagoSteps {
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
 		pageCheckoutWrapperSteps.selectBancoEPS();
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
-		if (!new UtilsMangoTest().isEntornoPRO()) {
+		if (!isPRO()) {
 			pageEpsSimuladorSteps.validateIsPage();
 			pageEpsSimuladorSteps.selectDelay(TypeDelay.ONE_MINUTES);
 		} else {

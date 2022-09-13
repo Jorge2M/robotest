@@ -2,7 +2,6 @@ package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.datastored.DataPago;
-import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.steps.shop.checkout.paymaya.PageIdentPaymayaSteps;
 import com.mng.robotest.test.steps.shop.checkout.paymaya.PageInitPaymayaSteps;
@@ -26,7 +25,7 @@ public class PagoPayMaya extends PagoSteps {
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		
-		if (!new UtilsMangoTest().isEntornoPRO()) {
+		if (!isPRO()) {
 			pageInitPaymayaSteps.checkPage();
 			pageInitPaymayaSteps.clickPaymayaButton();
 		} else {

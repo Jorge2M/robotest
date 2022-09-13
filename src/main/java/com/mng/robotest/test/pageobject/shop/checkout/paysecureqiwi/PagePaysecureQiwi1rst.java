@@ -10,8 +10,6 @@ import com.mng.robotest.test.generic.UtilsMangoTest;
 
 public class PagePaysecureQiwi1rst extends PageBase {
 	
-	private final boolean isPro;
-	
 	public enum PaysecureGateway { 
 		Card("card", "100:1"), 
 		Qiwi("qiwi", "36:2"), 
@@ -34,19 +32,15 @@ public class PagePaysecureQiwi1rst extends PageBase {
 		}
 	}
 	
-	public PagePaysecureQiwi1rst() {
-		isPro = new UtilsMangoTest().isEntornoPRO();
-	}
-	
 	public boolean isPage() {
-		return state(Visible, PaysecureGateway.Qiwi.getBy(isPro)).check();
+		return state(Visible, PaysecureGateway.Qiwi.getBy(isPRO())).check();
 	}
 
 	public boolean isPresentIcon(PaysecureGateway gateway) {
-		return state(Present, gateway.getBy(isPro)).check();
+		return state(Present, gateway.getBy(isPRO())).check();
 	}
 
 	public void clickIcon(PaysecureGateway gateway) {
-		click(gateway.getBy(isPro)).exec();
+		click(gateway.getBy(isPRO())).exec();
 	}
 }

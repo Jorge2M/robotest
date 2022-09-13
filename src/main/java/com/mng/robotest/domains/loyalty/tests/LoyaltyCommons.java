@@ -4,7 +4,6 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.loyalty.beans.User;
 import com.mng.robotest.domains.loyalty.getdata.ClientApiLoyaltyPointsDev;
-import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
 
 public class LoyaltyCommons {
@@ -13,10 +12,6 @@ public class LoyaltyCommons {
 			new User("ticket_digital_es@mango.com", "6051483560048388114", "ES");
 
 	private LoyaltyCommons() {}
-	
-	public static boolean isPro() {
-		return new UtilsMangoTest().isEntornoPRO();
-	}
 	
 	public static int clickMangoLikesYou(Channel channel, AppEcom app) throws Exception {
 		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps();

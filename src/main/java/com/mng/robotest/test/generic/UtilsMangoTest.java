@@ -5,9 +5,7 @@ package com.mng.robotest.test.generic;
 import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
@@ -18,7 +16,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.ITestContext;
 
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Linea;
@@ -149,46 +146,6 @@ public class UtilsMangoTest extends PageBase {
 		Thread.sleep(500);
 	}
 	
-	public boolean isEntornoPRO() {
-		if (TestCaseTM.getTestCaseInExecution().isEmpty()) {
-			return false;
-		}
-		String urlBase = TestMaker.getInputParamsSuite().getUrlBase();
-		if (isEntornoPRO(urlBase)) {
-			return true;
-		}
-		return isEntornoPRO(driver.getCurrentUrl());
-	}
-	
-	public boolean isEntornoPRO(String url) {
-		List<String> URLsProShop   = Arrays.asList("shop.mango.com", "shoptest.pro.mango.com");
-		List<String> URLsProOutlet = Arrays.asList("www.mangooutlet.com", "outlettest.pro.mango.com");
-		Iterator<String> itURLsPRO = null;
-		if (app==AppEcom.outlet) {
-			itURLsPRO = URLsProOutlet.iterator();
-		} else {
-			itURLsPRO = URLsProShop.iterator();
-		}
-		
-		while (itURLsPRO.hasNext()) {
-			String URL = itURLsPRO.next();
-			if (url.contains(URL)) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	public boolean isEntornoCI() {
-		if (app==AppEcom.shop) { //De momento sólo tenemos CI para Shop
-			String xmlURL = TestMaker.getInputParamsSuite().getUrlBase();
-			if (xmlURL.contains("shop-ci.")) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	/** Metodo de acceso a cualquier menú de la pantalla principal de Manto.
 	 * Requiere de por lo menos un criterio de búsqueda, hasta dos opcionales (y en modo AND lógico) y el WebDriver para hacer un waitForPageLoaded 
 	 */
