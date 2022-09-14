@@ -56,9 +56,9 @@ public class ModalDroppoints extends PageBase {
 		secSelectDPoint.sendProvincia(provincia);
 	}
 	
-	public boolean deliveryPointSelectedContainsPoblacionUntil(DataSearchDeliveryPoint dataSearchDp, int secondsToWait) 
+	public boolean deliveryPointSelectedContainsPoblacionUntil(DataSearchDeliveryPoint dataSearchDp, int seconds) 
 			throws Exception {
-		return secSelectDPoint.deliveryPointSelectedContainsPoblacionUntil(dataSearchDp, secondsToWait);
+		return secSelectDPoint.deliveryPointSelectedContainsPoblacionUntil(dataSearchDp, seconds);
 	}
 	
 	public boolean isDroppointVisibleUntil(int position, int seconds) {

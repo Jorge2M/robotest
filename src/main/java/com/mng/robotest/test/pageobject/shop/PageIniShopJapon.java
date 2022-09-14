@@ -1,26 +1,15 @@
 package com.mng.robotest.test.pageobject.shop;
 
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+public class PageIniShopJapon extends PageBase {
 
-
-/**
- * Clase para operar con la página inicial de la shop de Japón vía API de driver
- * @author jorge.munoz
- *
- */
-public class PageIniShopJapon extends SeleniumUtils {
-
-	public static String URL = "japan.mango.com";
-	public static String Title = "MANGO - マンゴ公式オンラインストア";
-	/**
-	 * @param driver
-	 * @return si se trata o no de la página inicial de la shop de Japón
-	 */
-	public static boolean isPageUntil(int secondsToWait, WebDriver driver) {
+	public static final String URL = "japan.mango.com";
+	public static final String TITLE = "MANGO - マンゴ公式オンラインストア";
+	
+	public boolean isPageUntil(int seconds) {
 		return (
-			titleContainsUntil(driver, Title, secondsToWait) &&
+			titleContainsUntil(driver, TITLE, seconds) &&
 			driver.getCurrentUrl().contains(URL));
 	}
 }

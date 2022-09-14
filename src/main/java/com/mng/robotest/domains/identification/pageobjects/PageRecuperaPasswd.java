@@ -12,8 +12,8 @@ public class PageRecuperaPasswd extends PageBase {
 	private static final String XPATH_MSG_REVISA_TU_EMAIL = "//div[text()[contains(.,'REVISA TU EMAIL')]]";
 	private static final String XPATH_BUTTON_IR_DE_SHOPPING = "//div[@id[contains(.,'IrShopping')]]/a";
 	
-	public boolean isPageUntil(int secondsToWait) {
-		return new AllPages().isPresentElementWithTextUntil("RECUPERA TU CONTRASEÑA", secondsToWait);
+	public boolean isPageUntil(int seconds) {
+		return new AllPages().isPresentElementWithTextUntil("RECUPERA TU CONTRASEÑA", seconds);
 	}
 	
 	public boolean isPresentInputCorreo() {

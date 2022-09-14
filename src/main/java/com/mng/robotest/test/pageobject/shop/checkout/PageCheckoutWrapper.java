@@ -38,11 +38,11 @@ public class PageCheckoutWrapper extends PageBase {
 		return secTarjetaPci;
 	}
 	
-	public boolean isFirstPageUntil(int secondsToWait) {
+	public boolean isFirstPageUntil(int seconds) {
 		if (channel==Channel.mobile) {
-			return (page1MobilCheckout.isVisibleLink1EnvioUntil(secondsToWait));
+			return page1MobilCheckout.isVisibleLink1EnvioUntil(seconds);
 		}
-		return (page1DktopCheckout.isPageUntil(secondsToWait));	
+		return page1DktopCheckout.isPageUntil(seconds);	
 	}
 	
 	public void inputNumberPci(String numtarj) {
@@ -86,11 +86,11 @@ public class PageCheckoutWrapper extends PageBase {
 		}
 	}
 	
-	public boolean isPresentInputApellidoPromoEmplUntil(int secondsToWait) {
+	public boolean isPresentInputApellidoPromoEmplUntil(int seconds) {
 		if (channel==Channel.mobile) {
-			return (page1MobilCheckout.isPresentInputApellidoPromoEmplUntil(secondsToWait));
+			return (page1MobilCheckout.isPresentInputApellidoPromoEmplUntil(seconds));
 		}
-		return (page1DktopCheckout.isPresentInputApellidoPromoEmplUntil(secondsToWait));
+		return (page1DktopCheckout.isPresentInputApellidoPromoEmplUntil(seconds));
 	}
 	
 	public boolean isPresentInputDNIPromoEmpl() {
@@ -174,16 +174,16 @@ public class PageCheckoutWrapper extends PageBase {
 	
 	public String getImporteDescuentoEmpleado() {
 		if (channel==Channel.mobile) {
-			return (page1MobilCheckout.getImporteDescuentoEmpleado());
+			return page1MobilCheckout.getImporteDescuentoEmpleado();
 		}
-		return (page1DktopCheckout.getImporteDescuentoEmpleado());
+		return page1DktopCheckout.getImporteDescuentoEmpleado();
 	}
 	
-	public boolean isVisibleDescuentoEmpleadoUntil(int secondsToWait) {
+	public boolean isVisibleDescuentoEmpleadoUntil(int seconds) {
 		if (channel==Channel.mobile) {
-			return (page1MobilCheckout.isVisibleDescuentoEmpleadoUntil(secondsToWait));
+			return page1MobilCheckout.isVisibleDescuentoEmpleadoUntil(seconds);
 		}
-		return (page1DktopCheckout.isVisibleDescuentoEmpleadoUntil(secondsToWait)); 
+		return page1DktopCheckout.isVisibleDescuentoEmpleadoUntil(seconds); 
 	}
 
 	public boolean isNumMetodosPagoOK(boolean isEmpl) {
@@ -349,11 +349,11 @@ public class PageCheckoutWrapper extends PageBase {
 		}
 	}
 	
-	public boolean isVisibleBloquePagoNoTRJIntegradaUntil(Pago pago, int secondsToWait) {
+	public boolean isVisibleBloquePagoNoTRJIntegradaUntil(Pago pago, int seconds) {
 		if (channel==Channel.mobile) {
-			return (page2MobilCheckout.isVisibleTextoBajoPagoUntil(pago, secondsToWait));
+			return page2MobilCheckout.isVisibleTextoBajoPagoUntil(pago, seconds);
 		}
-		return (page1DktopCheckout.isVisibleBloquePagoNoTRJIntegradaUntil(pago, secondsToWait));
+		return page1DktopCheckout.isVisibleBloquePagoNoTRJIntegradaUntil(pago, seconds);
 	}
 	
 	public String getTextDireccionEnvioCompleta() {

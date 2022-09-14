@@ -15,10 +15,10 @@ public class PageRecuperaPasswdSteps extends StepBase {
 	@Validation
 	public ChecksTM isPage() {
 		ChecksTM checks = ChecksTM.getNew();
-		int secondsToWait = 2;
+		int seconds = 2;
 		checks.add(
-			"Aparece la pantalla de recuperación de la contraseña (la esperamos hasta " + secondsToWait + " segundos)",
-			pageRecuperaPasswd.isPageUntil(secondsToWait), State.Defect);
+			"Aparece la pantalla de recuperación de la contraseña (la esperamos hasta " + seconds + " segundos)",
+			pageRecuperaPasswd.isPageUntil(seconds), State.Defect);
 		
 		checks.add(
 			"Aparece el campo para la introducción del correo",
@@ -40,10 +40,10 @@ public class PageRecuperaPasswdSteps extends StepBase {
 	@Validation
 	private ChecksTM isPageCambioPassword() {
 		ChecksTM checks = ChecksTM.getNew();
-		int secondsToWait = 2;
+		int seconds = 2;
 		checks.add(
-			"Aparece el mensaje de \"Revisa tu email\" (lo esperamos hasta " + secondsToWait + " segundos)",
-			pageRecuperaPasswd.isVisibleRevisaTuEmailUntil(secondsToWait), State.Defect);
+			"Aparece el mensaje de \"Revisa tu email\" (lo esperamos hasta " + seconds + " segundos)",
+			pageRecuperaPasswd.isVisibleRevisaTuEmailUntil(seconds), State.Defect);
 		
 		checks.add(
 			"Aparece el botón \"Ir de Shopping\"",

@@ -27,7 +27,7 @@ public abstract class SecCabecera extends PageBase {
 	abstract String getXPathNumberArtIcono();
 	public abstract boolean isInStateIconoBolsa(State state, int seconds);
 	public abstract void clickIconoBolsa();
-	public abstract void clickIconoBolsaWhenDisp(int secondsToWait);
+	public abstract void clickIconoBolsaWhenDisp(int seconds);
 	public abstract void hoverIconoBolsa();
 	
 	public static SecCabecera getNew(Channel channel, AppEcom app) {

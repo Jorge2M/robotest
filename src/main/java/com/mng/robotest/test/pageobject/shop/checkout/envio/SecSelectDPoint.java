@@ -134,9 +134,9 @@ public class SecSelectDPoint extends PageBase {
 		click(XPATH_SELECCIONAR_BUTTON).waitLoadPage(seconds).exec();
 	}
 
-	public boolean deliveryPointSelectedContainsPoblacionUntil(DataSearchDeliveryPoint dataSearchDp, int secondsToWait) 
+	public boolean deliveryPointSelectedContainsPoblacionUntil(DataSearchDeliveryPoint dataSearchDp, int seconds) 
 			throws Exception {
-		for (int i=0; i<secondsToWait; i++) {
+		for (int i=0; i<seconds; i++) {
 			try {
 				DataDeliveryPoint dataDp = getDataDeliveryPointSelected();
 				switch (dataSearchDp.typeData) {

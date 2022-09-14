@@ -75,9 +75,7 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	@Override
 	public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception {
 		selectOrdenacion(typeOrden);
-		int secondsToWait = 10;
-		int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(secondsToWait);
-		return numArticles;
+		return pageGaleria.waitForArticleVisibleAndGetNumberOfThem(10);
 	}
 	
 	/** 
@@ -92,9 +90,7 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 			click(xpathLinkColor).exec();
 		}
 		acceptFilters();
-		int secondsToWait = 10;
-		int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(secondsToWait);
-		return numArticles;
+		return pageGaleria.waitForArticleVisibleAndGetNumberOfThem(10);
 	}
 	
 	@Override

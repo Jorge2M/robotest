@@ -16,10 +16,10 @@ public class PageRegistroNinosStepsOutlet extends StepBase {
 	@Validation
 	public ChecksTM validaIsPageWithNinos(int numNinos) {
 		ChecksTM checks = ChecksTM.getNew();
-		int secondsToWait = 5;
+		int seconds = 5;
 		checks.add(
-			"Aparece la página de introducción de datos del niño (la esperamos un máximo de " + secondsToWait + " segundos)",
-			pageRegistroNinos.isPageUntil(secondsToWait), State.Defect);
+			"Aparece la página de introducción de datos del niño (la esperamos un máximo de " + seconds + " segundos)",
+			pageRegistroNinos.isPageUntil(seconds), State.Defect);
 		checks.add(
 			"Aparecen inputs para introducir <b>" + numNinos + "</b>",
 			pageRegistroNinos.getNumInputsNameNino()==numNinos, State.Defect);

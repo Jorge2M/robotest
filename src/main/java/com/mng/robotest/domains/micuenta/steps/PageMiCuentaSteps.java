@@ -20,10 +20,10 @@ public class PageMiCuentaSteps extends StepBase {
 	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
 	
 	@Validation(
-		description="1) Aparece la página de \"Mi cuenta\" (la esperamos hasta #{secondsToWait} segundos)",
+		description="1) Aparece la página de \"Mi cuenta\" (la esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean validateIsPage (int secondsToWait) {
-		return (pageMiCuenta.isPageUntil(secondsToWait));
+	public boolean validateIsPage (int seconds) {
+		return pageMiCuenta.isPageUntil(seconds);
 	}
 
 	public void goToMisDatos(String usuarioReg) {

@@ -13,7 +13,7 @@ public class PagoTarjetaIntegrada extends PagoSteps {
 	}
 	
 	@Override
-	public void testPagoFromCheckout(boolean execPay) throws Exception {
+	public void startPayment(boolean execPay) throws Exception {
 		DataPedido dataPedido = this.dataPago.getDataPedido();
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
 		

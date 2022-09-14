@@ -63,13 +63,13 @@ public class PageFichaDesktop extends PageFicha {
 	}	
 	
 	@Override
-	public boolean isVisibleDivAnadiendoAFavoritosUntil(int secondsToWait) {	
-		return (secBolsaButtonAndLinks.isVisibleDivAnadiendoAFavoritosUntil(secondsToWait));
+	public boolean isVisibleDivAnadiendoAFavoritosUntil(int seconds) {	
+		return (secBolsaButtonAndLinks.isVisibleDivAnadiendoAFavoritosUntil(seconds));
 	}
 	
 	@Override
-	public boolean isInvisibleDivAnadiendoAFavoritosUntil(int secondsToWait) {	
-		return (secBolsaButtonAndLinks.isInvisibleDivAnadiendoAFavoritosUntil(secondsToWait));		
+	public boolean isInvisibleDivAnadiendoAFavoritosUntil(int seconds) {	
+		return (secBolsaButtonAndLinks.isInvisibleDivAnadiendoAFavoritosUntil(seconds));		
 	}
 	
 	@Override
@@ -108,7 +108,7 @@ public class PageFichaDesktop extends PageFicha {
 	}
 	
 	@Override
-	public boolean isModalNoStockVisible(int secondsToWait) {
-		return modNoStock.isModalNoStockVisibleFichaNew(secondsToWait);
+	public boolean isModalNoStockVisible(int seconds) {
+		return modNoStock.isModalNoStockVisibleFichaNew(seconds);
 	}
 }

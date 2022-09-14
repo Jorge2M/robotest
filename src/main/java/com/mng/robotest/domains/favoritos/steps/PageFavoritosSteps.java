@@ -29,14 +29,14 @@ public class PageFavoritosSteps extends StepBase {
 	@Validation
 	public ChecksTM validaIsPageOK(DataFavoritos dataFavoritos) {
 		ChecksTM checks = ChecksTM.getNew();
-		int secondsToWaitCapa = 3;
-		int secondsToWaitArticles = 1;
+		int secondsCapa = 3;
+		int secondsArticles = 1;
 		checks.add(
-			"Está visible la capa de favoritos con artículos (la esperamos hasta " + secondsToWaitCapa + " segundos)",
-			pageFavoritos.isSectionArticlesVisibleUntil(secondsToWaitCapa), State.Defect);
+			"Está visible la capa de favoritos con artículos (la esperamos hasta " + secondsCapa + " segundos)",
+			pageFavoritos.isSectionArticlesVisibleUntil(secondsCapa), State.Defect);
 		checks.add(
-			"Aparecen los artículos (los esperamos hasta " + secondsToWaitArticles + " segundos): <br>" + dataFavoritos.getListArtDescHTML(),
-			pageFavoritos.areVisibleArticlesUntil(dataFavoritos, secondsToWaitArticles), State.Defect);
+			"Aparecen los artículos (los esperamos hasta " + secondsArticles + " segundos): <br>" + dataFavoritos.getListArtDescHTML(),
+			pageFavoritos.areVisibleArticlesUntil(dataFavoritos, secondsArticles), State.Defect);
 		return checks;
 	}
 	
@@ -61,19 +61,22 @@ public class PageFavoritosSteps extends StepBase {
 	@Validation
 	public ChecksTM checkShareIsOk() {
 		ChecksTM checks = ChecksTM.getNew();
-		int secondsToWait = 5;
 		checks.add(
 			"Aparece el modal de favoritos compartidos",
-			pageFavoritos.checkShareModalUntill(secondsToWait), State.Defect);
+			pageFavoritos.checkShareModalUntill(5), State.Defect);
+		
 		checks.add(
 			"Aparece el boton de compartir por Telegram",
 			pageFavoritos.isShareTelegramFavoritesVisible(), State.Defect);
+		
 		checks.add(
 			"Aparece el boton de compartir por WhatsApp",
 			pageFavoritos.isShareWhatsappFavoritesVisible(), State.Defect);
+		
 		checks.add(
 			"Aparece la url para copiarla y compartir como texto", 
 			pageFavoritos.isShareUrlFavoritesVisible(), State.Defect);
+		
 		return checks;
 	}
 	

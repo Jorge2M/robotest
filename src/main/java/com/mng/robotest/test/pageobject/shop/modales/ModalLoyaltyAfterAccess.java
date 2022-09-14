@@ -24,8 +24,8 @@ public class ModalLoyaltyAfterAccess extends PageBase {
 		closeModalIfVisibleUntil(0);
 	}
 	
-	public void closeModalIfVisibleUntil(int secondsToWait) {
-		if (isModalVisibleUntil(secondsToWait)) {
+	public void closeModalIfVisibleUntil(int seconds) {
+		if (isModalVisibleUntil(seconds)) {
 			closeModal();
 		}
 	}

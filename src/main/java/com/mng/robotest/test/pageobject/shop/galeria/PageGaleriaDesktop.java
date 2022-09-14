@@ -563,8 +563,8 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 
 	@Override
-	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int secondsToWait) {
-		return secTallas.isVisibleArticleCapaTallasUntil(posArticulo, secondsToWait);
+	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds) {
+		return secTallas.isVisibleArticleCapaTallasUntil(posArticulo, seconds);
 	}
 	
 	@Override
@@ -782,13 +782,12 @@ public class PageGaleriaDesktop extends PageGaleria {
 		//Clicamos y esperamos a que el icono cambie de estado
 		StateFavorito estadoInicial = getStateHearthIcon(hearthIcon);
 		clickHearthIcon(hearthIcon);
-		int secondsToWait = 2;
 		switch (estadoInicial) {
 		case MARCADO:
-			waitToHearthIconInState(hearthIcon, StateFavorito.DESMARCADO, secondsToWait);
+			waitToHearthIconInState(hearthIcon, StateFavorito.DESMARCADO, 2);
 			break;
 		case DESMARCADO:
-			waitToHearthIconInState(hearthIcon, StateFavorito.MARCADO, secondsToWait);
+			waitToHearthIconInState(hearthIcon, StateFavorito.MARCADO, 2);
 			break;
 		default:
 			break;

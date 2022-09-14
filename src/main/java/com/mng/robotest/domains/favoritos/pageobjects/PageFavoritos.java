@@ -148,7 +148,7 @@ public class PageFavoritos extends PageBase {
 		return state(Present, XPATH_ARTICULO).check();
 	}
 	
-	public boolean areVisibleArticlesUntil(DataFavoritos dataFavoritos, int secondsToWait) {
+	public boolean areVisibleArticlesUntil(DataFavoritos dataFavoritos, int seconds) {
 		if (dataFavoritos.isEmpty()) {
 			return (!hayArticulos());
 		}
@@ -156,7 +156,7 @@ public class PageFavoritos extends PageBase {
 		Iterator<ArticuloScreen> itArticulos = dataFavoritos.getListArticulos().iterator();
 		while (itArticulos.hasNext()) {
 			ArticuloScreen articulo = itArticulos.next();
-			if (!isVisibleArticleUntil(articulo.getRefProducto(), articulo.getCodigoColor(), secondsToWait)) {
+			if (!isVisibleArticleUntil(articulo.getRefProducto(), articulo.getCodigoColor(), seconds)) {
 				return false;
 			}
 		}
@@ -219,10 +219,8 @@ public class PageFavoritos extends PageBase {
 		WebElement talla = listaTallas.get(posicionTalla);
 		String litTalla = talla.getText();
 		talla.click();
-		int secondsToWait = 2;
-		
 		SecBolsa secBolsa = SecBolsa.make(channel, app);
-		secBolsa.isInStateUntil(StateBolsa.OPEN, secondsToWait);
+		secBolsa.isInStateUntil(StateBolsa.OPEN, 2);
 		return litTalla;
 	}
 	

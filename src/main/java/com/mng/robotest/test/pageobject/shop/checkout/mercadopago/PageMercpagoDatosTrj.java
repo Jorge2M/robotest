@@ -14,7 +14,7 @@ public abstract class PageMercpagoDatosTrj extends PageBase {
 	
 	public enum TypePant {INPUT_DATA_TRJ_NEW, INPUT_CVC_TRJ_SAVED} 
 	
-	public abstract boolean isPageUntil(int secondsToWait);
+	public abstract boolean isPageUntil(int seconds);
 	public abstract void sendCvc(String cvc);
 	public abstract void sendCaducidadTarj(String fechaVencimiento);
 	

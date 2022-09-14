@@ -48,8 +48,8 @@ public class SecCabeceraOutlet_Mobil extends SecCabecera {
 	}
 	
 	@Override
-	public void clickIconoBolsaWhenDisp(int secondsToWait) {
-		clickIfClickableUntil(IconoCabOutletMobil.BOLSA, secondsToWait);
+	public void clickIconoBolsaWhenDisp(int seconds) {
+		clickIfClickableUntil(IconoCabOutletMobil.BOLSA, seconds);
 	}
 	
 	@Override
@@ -65,8 +65,8 @@ public class SecCabeceraOutlet_Mobil extends SecCabecera {
 		return (state(Clickable, icono.getBy()).wait(seconds).check());
 	}
 
-	public void clickIfClickableUntil(IconoCabOutletMobil icono, int secondsToWait) {
-		if (isClickableUntil(icono, secondsToWait)) {
+	public void clickIfClickableUntil(IconoCabOutletMobil icono, int seconds) {
+		if (isClickableUntil(icono, seconds)) {
 			click(icono);
 		}
 	}

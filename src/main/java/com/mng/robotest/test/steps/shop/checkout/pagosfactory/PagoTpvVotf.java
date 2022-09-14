@@ -11,7 +11,7 @@ public class PagoTpvVotf extends PagoSteps {
 	}
 	
 	@Override
-	public void testPagoFromCheckout(boolean execPay) throws Exception {
+	public void startPayment(boolean execPay) throws Exception {
 		String nombrePago = this.dataPago.getDataPedido().getPago().getNombre(channel, app);
 		pageCheckoutWrapperSteps.noClickIconoVotf(nombrePago);
 		if (execPay) {

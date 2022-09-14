@@ -89,10 +89,8 @@ public class ModalFichaFavoritos extends PageBase {
 	public void clickButtonAddToBagAndWait(String refProducto) throws Exception {
 		String xpathAdd = getXPathButtonAddBolsa(refProducto);
 		getElement(xpathAdd).click();
-		int secondsToWait = 2;
-		
 		SecBolsa secBolsa = SecBolsa.make(channel, app);
-		secBolsa.isInStateUntil(StateBolsa.OPEN, secondsToWait);
+		secBolsa.isInStateUntil(StateBolsa.OPEN, 2);
 	}
 	
 	public String selectTalla(String refProducto, int posicionTalla) {

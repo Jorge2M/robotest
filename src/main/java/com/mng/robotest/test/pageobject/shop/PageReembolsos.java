@@ -71,8 +71,8 @@ public class PageReembolsos extends PageBase {
 		getElement(XPATH_INPUT_BANCO).sendKeys(banco);
 	}
 
-	public boolean isVisibleTextBancoUntil(int secondsToWait) {
-		return (state(Visible, XPATH_TEXT_BANCO_AFTER_SAVE).wait(secondsToWait).check());
+	public boolean isVisibleTextBancoUntil(int seconds) {
+		return state(Visible, XPATH_TEXT_BANCO_AFTER_SAVE).wait(seconds).check();
 	}
 
 	public boolean existsInputTitular() {

@@ -15,8 +15,7 @@ public class ModEnvioYdevolNewSteps extends StepBase {
 		description="Aparece el modal con los datos a nivel de envío y devolución",
 		level=State.Defect)
 	public boolean checkIsVisible() {
-		int secondsToWait = 1;
-		return (modEnvioYdev.isVisibleUntil(secondsToWait));
+		return modEnvioYdev.isVisibleUntil(1);
 	}
 
 	@Step (
@@ -31,7 +30,6 @@ public class ModEnvioYdevolNewSteps extends StepBase {
 		description="No es visible el modal con los datos a nivel de envío y devolución",
 		level=State.Warn)
 	private boolean checkIsVisibleModalDatosEnvio() {
-		int secondsToWait = 1;
-		return (!modEnvioYdev.isVisibleUntil(secondsToWait));
+		return !modEnvioYdev.isVisibleUntil(1);
 	}
 }

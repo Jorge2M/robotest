@@ -16,7 +16,7 @@ public class PagoSepa extends PagoSteps {
 	}
 	
 	@Override
-	public void testPagoFromCheckout(boolean execPay) throws Exception {
+	public void startPayment(boolean execPay) throws Exception {
 		Pago pago = this.dataPago.getDataPedido().getPago();
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(this.dataPago, dataTest.pais);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);

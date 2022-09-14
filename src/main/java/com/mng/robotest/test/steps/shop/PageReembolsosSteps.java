@@ -34,8 +34,7 @@ public class PageReembolsosSteps extends StepBase {
 			"Aparece la página de reembolsos",
 			pageReembolsos.isPage(), State.Defect);		
 		
-		int secondsToWait = 5;
-		boolean isVisibleTransferenciaSection = pageReembolsos.isVisibleTransferenciaSectionUntil(secondsToWait);
+		boolean isVisibleTransferenciaSection = pageReembolsos.isVisibleTransferenciaSectionUntil(5);
 		boolean isVisibleStoreCreditSection = pageReembolsos.isVisibleStorecreditSection();
 		if (paisConSaldoCta) {
 			checks.add(
@@ -104,10 +103,10 @@ public class PageReembolsosSteps extends StepBase {
 	@Validation
 	private ChecksTM checkAfterModifyDataTransferencia() {
 		ChecksTM checks = ChecksTM.getNew();
-		int secondsToWait = 15;
+		int seconds = 15;
 		checks.add(
-			"Aparecen establecidos los datos de banco, titular e IBAN (lo esperamos hasta " + secondsToWait + " segundos)",
-			pageReembolsos.isVisibleTextBancoUntil(secondsToWait) &&
+			"Aparecen establecidos los datos de banco, titular e IBAN (lo esperamos hasta " + seconds + " segundos)",
+			pageReembolsos.isVisibleTextBancoUntil(seconds) &&
 			pageReembolsos.isVisibleTextTitular() &&
 			pageReembolsos.isVisibleTextIBAN(), State.Defect);
 		

@@ -293,7 +293,7 @@ public class CheckoutFlow extends StepBase {
 		
 		PagoSteps pagoSteps = FactoryPagos.makePagoSteps(dataPago);
 		boolean execPay = iCanExecPago(pagoSteps);
-		pagoSteps.testPagoFromCheckout(execPay);
+		pagoSteps.startPayment(execPay);
 		dataPedido = dataPago.getDataPedido();
 		if (execPay) {
 			PageResultPagoSteps pageResultPagoSteps = new PageResultPagoSteps();

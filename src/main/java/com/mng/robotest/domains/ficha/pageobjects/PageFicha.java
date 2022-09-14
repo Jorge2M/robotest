@@ -10,12 +10,12 @@ public abstract class PageFicha extends PageBase {
 	public enum TypeFicha { OLD, NEW }
 	
 	public abstract boolean isPageUntil(int seconds);
-	public abstract boolean isFichaArticuloUntil(String refArticulo, int secondsToWait);
+	public abstract boolean isFichaArticuloUntil(String refArticulo, int seconds);
 	public abstract void clickAnadirBolsaButtonAndWait();
 	public abstract void selectAnadirAFavoritosButton();
 	public abstract void selectRemoveFromFavoritosButton();
-	public abstract boolean isVisibleDivAnadiendoAFavoritosUntil(int secondsToWait);
-	public abstract boolean isInvisibleDivAnadiendoAFavoritosUntil(int secondsToWait);
+	public abstract boolean isVisibleDivAnadiendoAFavoritosUntil(int seconds);
+	public abstract boolean isInvisibleDivAnadiendoAFavoritosUntil(int seconds);
 	public abstract boolean isVisibleButtonElimFavoritos();
 	public abstract boolean isVisibleButtonAnadirFavoritos();
 	public abstract String getNameLinkBuscarEnTienda();
@@ -23,7 +23,7 @@ public abstract class PageFicha extends PageBase {
 	public abstract boolean isVisibleBuscarEnTiendaLink();
 	public abstract boolean isVisibleSlider(Slider typeSlider);
 	public abstract int getNumArtVisiblesSlider(Slider typeSlider);
-	public abstract boolean isModalNoStockVisible(int secondsToWait);
+	public abstract boolean isModalNoStockVisible(int seconds);
 	
 	protected final SecDataProduct secDataProduct; //Name, color, talla section
 	public static SecFitFinder secFitFinder; //Guía de tallas v.Fit Finder

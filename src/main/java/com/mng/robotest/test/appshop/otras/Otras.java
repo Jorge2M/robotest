@@ -25,9 +25,6 @@ public class Otras {
 		new Otr003().execute();
 	}
 
-	/**
-	/* Acceso a la prehome, selección de Japón/Japonés y validaciones de que aparece la portada de la shop específica de Japón
-	 */
 	@Test (
 		groups={"Otras", "Canal:desktop_App:shop"}, 
 		description="Acceso al país Japón desde la preHome y comprobación de que redirige a la shop específica de este país")

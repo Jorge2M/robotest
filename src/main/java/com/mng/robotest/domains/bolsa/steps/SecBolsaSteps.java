@@ -75,7 +75,7 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	@Validation (
-		description="La bolsa queda en estado #{stateBolsaExpected} (lo esperamos hasta #{secondsToWait} segundos)",
+		description="La bolsa queda en estado #{stateBolsaExpected} (lo esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
 	private boolean validateBolsaInState(StateBolsa stateBolsaExpected, int seconds) {
 		return (secBolsa.isInStateUntil(stateBolsaExpected, seconds));
@@ -126,8 +126,7 @@ public class SecBolsaSteps extends StepBase {
 		}
 
 		if (channel==Channel.desktop) {
-			int secondsToWait = 10;
-			secBolsa.isInStateUntil(StateBolsa.OPEN,secondsToWait);
+			secBolsa.isInStateUntil(StateBolsa.OPEN, 10);
 		}
 		return dataBag;
 	}

@@ -255,13 +255,12 @@ public class PageGaleriaDevice extends PageGaleria {
 		//Clicamos y esperamos a que el icono cambie de estado
 		StateFavorito estadoInicial = getStateHearthIcon(hearthIcon);
 		clickHearthIconPreventingOverlapping(hearthIcon);
-		int secondsToWait = 2;
 		switch (estadoInicial) {
 		case MARCADO:
-			waitToHearthIconInState(hearthIcon, StateFavorito.DESMARCADO, secondsToWait);
+			waitToHearthIconInState(hearthIcon, StateFavorito.DESMARCADO, 2);
 			break;
 		case DESMARCADO:
-			waitToHearthIconInState(hearthIcon, StateFavorito.MARCADO, secondsToWait);
+			waitToHearthIconInState(hearthIcon, StateFavorito.MARCADO, 2);
 			break;
 		default:
 			break;

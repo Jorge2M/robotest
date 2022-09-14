@@ -36,9 +36,8 @@ public class PagePostfCodSeg extends PageBase {
 		return isPasarela;
 	}
 	
-	public boolean isPasarelaPostfinanceProUntil(int secondsToWait) {
-		return (titleContainsUntil(driver, "E-Payment", secondsToWait));
-		//return (driver.getTitle().contains("E-Payment"));
+	public boolean isPasarelaPostfinanceProUntil(int seconds) {
+		return titleContainsUntil(driver, "E-Payment", seconds);
 	}
 	
 	public boolean isPresentButtonAceptar() {

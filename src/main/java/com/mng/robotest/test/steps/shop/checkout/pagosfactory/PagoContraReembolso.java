@@ -11,7 +11,7 @@ public class PagoContraReembolso extends PagoSteps {
 	}
 	
 	@Override
-	public void testPagoFromCheckout(boolean execPay) throws Exception {
+	public void startPayment(boolean execPay) throws Exception {
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
 		if (execPay) {
 			dataPago = checkoutFlow.checkout(From.METODOSPAGO);

@@ -27,7 +27,7 @@ public abstract class PagoSteps extends StepBase {
 		return this.isAvailableExecPay;
 	}
 
-	public abstract void testPagoFromCheckout(boolean execPay) throws Exception;
+	public abstract void startPayment(boolean execPay) throws Exception;
 
 	public void storePedidoForMantoAndResetData() {
 		this.dataPago.storePedidoForManto();

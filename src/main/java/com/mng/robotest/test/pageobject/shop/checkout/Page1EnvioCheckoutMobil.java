@@ -43,8 +43,8 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 		return getXPathBlockMetodo(tipoTransporte) + XPATH_RADIO_ENVIO;
 	}
 
-	public boolean isPageUntil(int secondsToWait) {
-		return (isVisibleInputCodigoPromoUntil(secondsToWait));
+	public boolean isPageUntil(int seconds) {
+		return isVisibleInputCodigoPromoUntil(seconds);
 	}
 	
 	public boolean isPresentEnvioStandard() {
@@ -206,10 +206,10 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 		return state(Visible, XPATH_LINK_OTROS_MET_ENVIO_CLOSED).check();
 	}
 
-	public boolean isBlockSelectedUntil(TipoTransporte tipoTransporte, int secondsToWait)
+	public boolean isBlockSelectedUntil(TipoTransporte tipoTransporte, int seconds)
 			throws Exception {
 		String xpathBlock = getXPathBlockMetodo(tipoTransporte);
-		for (int i = 0; i <= secondsToWait; i++) {
+		for (int i = 0; i <= seconds; i++) {
 			try {
 				if (getElement(xpathBlock) != null && 
 					getElement(xpathBlock).getAttribute("class").contains("radio-on")) {

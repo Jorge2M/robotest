@@ -26,10 +26,10 @@ public class PageResultPagoSteps extends StepBase {
 	private final WebDriver driver = TestMaker.getDriverTestCase();
 	
 	@Validation (
-		description="Acaba apareciendo la página de la Shop de Mango de \"Ya has hecho tu compra\" (la esperamos hasta #{secondsToWait} segundos)",
+		description="Acaba apareciendo la página de la Shop de Mango de \"Ya has hecho tu compra\" (la esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean validaIsPageUntil(int secondsToWait) {
-		return (pageResultPago.isVisibleTextoConfirmacionPago(secondsToWait));
+	public boolean validaIsPageUntil(int seconds) {
+		return (pageResultPago.isVisibleTextoConfirmacionPago(seconds));
 	}
 	
 	public void validateIsPageOk(DataPago dataPago) throws Exception {

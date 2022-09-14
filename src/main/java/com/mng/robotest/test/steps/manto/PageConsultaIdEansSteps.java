@@ -73,10 +73,10 @@ public class PageConsultaIdEansSteps extends StepBase {
 	@Validation
 	private ChecksTM checkAfterConsultaIdentPedidos(List<String> pedidosPrueba) {
 		ChecksTM checks = ChecksTM.getNew();
-		int secondsToWait = 2;
+		int seconds = 2;
 		checks.add(
-			"Se muestra la tabla de información (la esperamos un máximo de " + secondsToWait + " segundos)",
-			pageConsultaIdEans.isVisibleTablaInformacionUntil(secondsToWait), State.Defect);
+			"Se muestra la tabla de información (la esperamos un máximo de " + seconds + " segundos)",
+			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds), State.Defect);
 		
 		checks.add(
 			"El número de líneas de pedido es " + pedidosPrueba.size(),
@@ -117,10 +117,10 @@ public class PageConsultaIdEansSteps extends StepBase {
 	@Validation
 	private ChecksTM checkAfterConsultEAN(List<String> articulosPrueba) {
 		ChecksTM checks = ChecksTM.getNew();
-		int secondsToWait = 2;
+		int seconds = 2;
 		checks.add(
-			"Se muestra la tabla de información (la esperamos un máximo de " + secondsToWait + " segundos)",
-			pageConsultaIdEans.isVisibleTablaInformacionUntil(secondsToWait), State.Defect);
+			"Se muestra la tabla de información (la esperamos un máximo de " + seconds + " segundos)",
+			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds), State.Defect);
 		
 		checks.add(
 			"El número de líneas de artículos es " + articulosPrueba.size(),

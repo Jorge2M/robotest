@@ -44,8 +44,7 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 		description="Se scrolla hasta el apartado de \"Descriptión\"",
 		level=State.Defect)
 	private boolean checkScrollToDescription() {
-		int secondsToWait = 3;
-		return (secDetalleProductNew.isVisibleUntil(secondsToWait));
+		return secDetalleProductNew.isVisibleUntil(3);
 	}
 	
 	@Validation

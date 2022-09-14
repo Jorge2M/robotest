@@ -60,9 +60,7 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	@Override
 	public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception {
 		selectOrdenacion(typeOrden);
-		int secondsToWait = 10;
-		int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(secondsToWait);
-		return numArticles;
+		return pageGaleria.waitForArticleVisibleAndGetNumberOfThem(10);
 	}
 
 	/** 
@@ -73,9 +71,7 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	@Override
 	public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToFilter) {
 		selectFiltrosAndWaitLoad(FiltroMobil.Colores, Color.getListNamesFiltros(colorsToFilter));
-		int secondsToWait = 10;
-		int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(secondsToWait);
-		return numArticles;
+		return pageGaleria.waitForArticleVisibleAndGetNumberOfThem(10);
 	}
 	
 	@Override

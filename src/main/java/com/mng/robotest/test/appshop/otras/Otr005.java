@@ -22,7 +22,7 @@ public class Otr005 extends TestBase {
 		new PagePrehome().previousAccessShopSteps(true);
 		pagePrehomeSteps.seleccionPaisIdioma();
 		pagePrehomeSteps.entradaShopGivenPaisSeleccionado();
-		PageIniShopJaponSteps.validaPageIniJapon(2, driver);		
+		new PageIniShopJaponSteps().validaPageIniJapon(2);		
 	}
 	
 }

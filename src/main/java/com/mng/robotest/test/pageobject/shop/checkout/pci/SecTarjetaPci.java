@@ -4,7 +4,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 
 public interface SecTarjetaPci {
 	public boolean isVisiblePanelPagoUntil(String nombrePago, int seconds);
-	public boolean isPresentInputNumberUntil(int secondsToWait);
+	public boolean isPresentInputNumberUntil(int seconds);
 	public boolean isPresentInputTitular();
 	public boolean isPresentSelectMes();
 	public boolean isPresentSelectAny();

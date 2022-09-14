@@ -208,12 +208,9 @@ public class SecDataProduct extends PageBase {
 	}
 
 	public void selectColorWaitingForAvailability(String codigoColor) {
-		String xpathColor = getXPathPastillaColorClick(codigoColor);
-		int secondsToWaitColor = 3;
-		int secondsToWaitLoadPage = 5;
-		click(xpathColor)
+		click(getXPathPastillaColorClick(codigoColor))
 			.type(TypeClick.javascript)
-			.waitLink(secondsToWaitColor).waitLoadPage(secondsToWaitLoadPage).exec();
+			.waitLink(3).waitLoadPage(5).exec();
 	}
 	
 	public boolean isClickableColor(String codigoColor) {

@@ -53,11 +53,11 @@ public class PageGestionarClientesSteps {
 			"Aparece el DNI <b>" + dni + "</b> en la tabla",
 			pageGestionarClientes.getDniTabla(dni), State.Defect);
 	 	
-		int secondsToWait = 1;
+		int seconds = 1;
 	 	checks.add(
-			"Aparece el botón de Alta o Baja (los esperamos un máximo de " + secondsToWait + " segundos)",
-			pageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.Baja, secondsToWait) ||
-			pageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.Alta, secondsToWait), 
+			"Aparece el botón de Alta o Baja (los esperamos un máximo de " + seconds + " segundos)",
+			pageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.Baja, seconds) ||
+			pageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.Alta, seconds), 
 			State.Defect);
 	 	
 	 	return checks;

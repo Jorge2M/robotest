@@ -88,8 +88,7 @@ public class ArticuloNavigations {
 		if (colourCode!=null && "".compareTo(colourCode)!=0) {
 			PageFicha pageFicha = PageFicha.of(channel);
 			if (pageFicha.getSecDataProduct().isClickableColor(colourCode)) {
-				int secondsToWait = 5;
-				if (pageFicha.isPageUntil(secondsToWait)) {
+				if (pageFicha.isPageUntil(5)) {
 					pageFicha.getSecDataProduct().selectColorWaitingForAvailability(colourCode);
 				}
 			}

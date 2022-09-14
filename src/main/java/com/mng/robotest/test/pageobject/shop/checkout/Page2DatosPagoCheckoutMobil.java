@@ -95,8 +95,8 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		}
 	}
 	
-	public boolean isPageUntil(int secondsToWait) {
-		return isClickableButtonFinalizarCompraUntil(secondsToWait);
+	public boolean isPageUntil(int seconds) {
+		return isClickableButtonFinalizarCompraUntil(seconds);
 	}
 
 	public void clickLink2DatosPagoAndWait() {
@@ -118,8 +118,8 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		return state(Clickable, XPATH_BUTTON_FINALIZAR_COMPRA).wait(seconds).check();
 	}
 
-	public void waitAndClickFinalizarCompra(int secondsToWait) throws Exception {
-		isClickableButtonFinalizarCompraUntil(secondsToWait);
+	public void waitAndClickFinalizarCompra(int seconds) throws Exception {
+		isClickableButtonFinalizarCompraUntil(seconds);
 		clickButtonFinalizarCompra();
 		
 		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
@@ -330,7 +330,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 	
 
-	public void clickFinalizarCompraAndWait(int secondsToWait) throws Exception {
+	public void clickFinalizarCompraAndWait(int seconds) throws Exception {
 		clickButtonFinalizarCompra();
 		
 		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
@@ -340,8 +340,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 				clickButtonFinalizarCompra();  
 			}
 		}
-		
-		new PageRedirectPasarelaLoading().isPageNotVisibleUntil(secondsToWait);
+		new PageRedirectPasarelaLoading().isPageNotVisibleUntil(seconds);
 	}
 	
 	public String getPrecioTotalFromResumen(boolean normalize) throws Exception {

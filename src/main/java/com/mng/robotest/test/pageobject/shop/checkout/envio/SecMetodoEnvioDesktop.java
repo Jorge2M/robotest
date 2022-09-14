@@ -37,8 +37,7 @@ public class SecMetodoEnvioDesktop extends PageBase {
 	}
 	
 	public void selectMetodoIfNotSelected(TipoTransporte tipoTransporte) {
-		int zeroSecondsToWait = 0;
-		if (!isBlockSelectedUntil(tipoTransporte, zeroSecondsToWait)) {
+		if (!isBlockSelectedUntil(tipoTransporte, 0)) {
 			selectMetodo(tipoTransporte);
 		}
 	}

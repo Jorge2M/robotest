@@ -16,7 +16,7 @@ public class PagoEps extends PagoSteps {
 	}
 	
 	@Override
-	public void testPagoFromCheckout(boolean execPay) throws Exception {
+	public void startPayment(boolean execPay) throws Exception {
 		//TODO mantener hasta que se elimine el actual TestAB para la aparición o no del pago EPS
 		//activateTestABforMethodEPS();
 		driver.navigate().refresh();

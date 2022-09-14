@@ -26,10 +26,10 @@ public class PageMisComprasSteps extends StepBase {
 	@Validation
 	public ChecksTM validateIsPage() {
 		ChecksTM checks = ChecksTM.getNew();
-		int secondsToWait = 5;
+		int seconds = 5;
 		checks.add(
-			"Aparece la página de \"Mis Compras\" (la esperamos hasta " + secondsToWait + " segundos)",
-			pageMisCompras.isPageUntil(secondsToWait), State.Warn);
+			"Aparece la página de \"Mis Compras\" (la esperamos hasta " + seconds + " segundos)",
+			pageMisCompras.isPageUntil(seconds), State.Warn);
 		
 		return checks;
 	}

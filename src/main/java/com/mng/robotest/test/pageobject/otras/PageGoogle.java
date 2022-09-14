@@ -62,8 +62,8 @@ public class PageGoogle extends PageBase {
 		return false;
 	}
 
-	public boolean validaFirstLinkContainsUntil(String textToBeContained, int secondsToWait) {
-		for (int i=0; i<secondsToWait; i++) {
+	public boolean validaFirstLinkContainsUntil(String textToBeContained, int seconds) {
+		for (int i=0; i<seconds; i++) {
 			if (validaFirstLinkContains(textToBeContained)) {
 				return true;
 			}

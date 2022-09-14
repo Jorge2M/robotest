@@ -832,11 +832,11 @@ public class PageGaleriaSteps extends StepBase {
 	private static ChecksTM checkAfterClickInfoRebajas(WebDriver driver) {
 		ChecksTM checks = ChecksTM.getNew();
 		SecBannerHeadGallery secBannerHead = new PageGaleriaDesktop().getSecBannerHead();
-		int secondsToWait = 1;
+		int seconds = 1;
 		checks.add(
 			"<b style=\"color:blue\">Rebajas</b></br>" +
-			"Se despliega la información relativa a las rebajas (lo esperamos hasta " + secondsToWait + " segundos)",
-			secBannerHead.isVisibleInfoRebajasUntil(secondsToWait), State.Warn);
+			"Se despliega la información relativa a las rebajas (lo esperamos hasta " + seconds + " segundos)",
+			secBannerHead.isVisibleInfoRebajasUntil(seconds), State.Warn);
 		
 		checks.add(
 			"Aparece el link de <b>Menos info</b>",
@@ -848,16 +848,16 @@ public class PageGaleriaSteps extends StepBase {
 	@Validation
 	public ChecksTM validateGaleriaAfeterSelectMenu() {
 		ChecksTM checks = ChecksTM.getNew();
-		int secondsToWaitArticle = 8;
-		int secondsToWaitIcon = 2;
+		int secondsArticle = 8;
+		int secondsIcon = 2;
 		checks.add (
-			"Como mínimo se obtiene un artículo (lo esperamos hasta " + secondsToWaitArticle + " segundos)",
-			pageGaleria.isVisibleArticleUntil(1, secondsToWaitArticle), State.Warn);
+			"Como mínimo se obtiene un artículo (lo esperamos hasta " + secondsArticle + " segundos)",
+			pageGaleria.isVisibleArticleUntil(1, secondsArticle), State.Warn);
 		
 		if (app==AppEcom.shop) {
 			checks.add (
-				"El 1er artículo tiene 1 icono de favorito asociado (lo esperamos hasta " + secondsToWaitIcon + " segundos)",
-				pageGaleria.isArticleWithHearthIconPresentUntil(1, secondsToWaitIcon), State.Warn);
+				"El 1er artículo tiene 1 icono de favorito asociado (lo esperamos hasta " + secondsIcon + " segundos)",
+				pageGaleria.isArticleWithHearthIconPresentUntil(1, secondsIcon), State.Warn);
 			
 			checks.add (
 		        Check.make(

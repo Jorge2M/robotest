@@ -64,7 +64,7 @@ public class Com008 extends TestBase {
 		DataPago dataPago = getDataPago();		
 		dataPago.setPago(dataTest.pais.getPago("VISA"));
 		PagoSteps pagoSteps = FactoryPagos.makePagoSteps(dataPago);
-		pagoSteps.testPagoFromCheckout(true);
+		pagoSteps.startPayment(true);
 		
 		new PageResultPagoSteps().validateIsPageOk(dataPago);
 		return dataPago;

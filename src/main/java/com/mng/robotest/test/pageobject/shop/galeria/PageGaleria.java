@@ -66,7 +66,7 @@ public abstract class PageGaleria extends PageBase {
 	public abstract int getNumFavoritoIcons();
 	public abstract boolean eachArticlesHasOneFavoriteIcon();
 	public abstract List<ArticuloScreen> clickArticleHearthIcons(List<Integer> posIconsToClick) throws Exception;
-	public abstract boolean isArticleWithHearthIconPresentUntil(int posArticle, int secondsToWait);
+	public abstract boolean isArticleWithHearthIconPresentUntil(int posArticle, int seconds);
 	public abstract void clickHearhIcon(int posArticle) throws Exception;
 	public abstract String getRefColorArticulo(WebElement articulo);
 	public abstract boolean backTo1erArticulo() throws InterruptedException;
@@ -75,7 +75,7 @@ public abstract class PageGaleria extends PageBase {
 	public abstract WebElement getArticleFromPagina(int numPagina, int numArticle);
 	public abstract boolean isHeaderArticlesVisible(String textHeader);
 	public abstract void showTallasArticulo(int posArticulo);
-	public abstract boolean isVisibleArticleCapaTallasUntil(int posArticulo, int secondsToWait);
+	public abstract boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds);
 	public abstract ArticuloScreen selectTallaAvailableArticle(int posArticulo, int posTalla) throws Exception;
 	public abstract StateFavorito getStateHearthIcon(WebElement hearthIcon);
 	public abstract void clickHearthIcon(WebElement hearthIcon) throws Exception;
@@ -210,15 +210,15 @@ public abstract class PageGaleria extends PageBase {
 		return getElements(xpathArticuloBase).size();
 	}	
 	
-	public int waitForArticleVisibleAndGetNumberOfThem(int secondsToWait) {
+	public int waitForArticleVisibleAndGetNumberOfThem(int seconds) {
 		int numArticle = 1;
-		isVisibleArticleUntil(numArticle, secondsToWait);
+		isVisibleArticleUntil(numArticle, seconds);
 		return (getNumArticulos());
 	}
 	
-	public boolean waitArticleAndGoTo(int numArticulo, int secondsToWait) { 
+	public boolean waitArticleAndGoTo(int numArticulo, int seconds) { 
 		String xpathUltArticulo = getXPathLinkArticulo(numArticulo);
-		if (isVisibleArticleUntil(numArticulo, secondsToWait)) {
+		if (isVisibleArticleUntil(numArticulo, seconds)) {
 			((Locatable)getElement(xpathUltArticulo)).getCoordinates().inViewPort();
 			return true;
 		}
@@ -379,8 +379,8 @@ public abstract class PageGaleria extends PageBase {
 		return UtilsTest.getReferenciaFromHref(href);
 	}
 
-	public boolean waitToHearthIconInState(WebElement hearthIcon, StateFavorito stateIcon, int secondsToWait) {
-		for (int i=0; i<secondsToWait; i++) {
+	public boolean waitToHearthIconInState(WebElement hearthIcon, StateFavorito stateIcon, int seconds) {
+		for (int i=0; i<seconds; i++) {
 			if (getStateHearthIcon(hearthIcon)==stateIcon) {
 				return true;
 			}
@@ -481,9 +481,7 @@ public abstract class PageGaleria extends PageBase {
 	public boolean backTo1erArticulo(String xpathIconoUpGalery) throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-50)", ""); //Asure icon showed
 		clickIconoUpToGaleryIfVisible(xpathIconoUpGalery);
-		int numArtToWait = 1;
-		int secondsToWait = 2;
-		boolean isVisible1erArt = isVisibleArticuloUntil(numArtToWait, secondsToWait);
+		boolean isVisible1erArt = isVisibleArticuloUntil(1, 2);
 		Thread.sleep(1000);
 		return isVisible1erArt;
 	}

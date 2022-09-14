@@ -11,10 +11,10 @@ public class PopupFindAddress extends PageBase {
 	private static final String XPATH_BUTTON_LUPA = "//button[@class='btn_search']";
 	private static final String XPATH_LINK_DIRECC = "//button[@class='link_post']";
 	
-	public String goToPopupAndWait(String mainWindowHandle, int secondsToWait) throws Exception { 
+	public String goToPopupAndWait(String mainWindowHandle, int seconds) throws Exception { 
 		String popupBuscador = switchToAnotherWindow(driver, mainWindowHandle);
 		try {
-			isIFrameUntil(secondsToWait);
+			isIFrameUntil(seconds);
 		}
 		catch (Exception e) {
 			Log4jTM.getLogger().warn("Exception going to Find Address Popup. ", e);
