@@ -17,7 +17,9 @@ public class CookiesChecker {
 	private final List<String> whiteList = Arrays.asList(
 			"_ga_NOTFORGA4TRACKING", 
 			"_ga_NC306DXESG",
-			"MangoHQ");
+			"MangoHQ",
+			"_dc_gtm_UA-855910-34",
+			"JSESSIONIDPRE");
 	
 	public CookiesChecker() {
 		CookiesFinder finder = new CookiesFinder();
