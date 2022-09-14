@@ -1,13 +1,15 @@
-package com.mng.robotest.test.appshop.seo;
+package com.mng.robotest.domains.seo.tests;
 
 import java.net.URI;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.seo.steps.SeoSteps;
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.test.steps.otras.BrowserSteps;
 
 public class Seo001 extends TestBase {
 
+	private final SeoSteps browserSteps = new SeoSteps();
+	
 	public void execute() throws Exception {
 		if (!isPRO()) {
 			return;
@@ -15,12 +17,12 @@ public class Seo001 extends TestBase {
 		
 		String urlBase = inputParamsSuite.getUrlBase();
 		if (app==AppEcom.shop) {
-			BrowserSteps.inputRobotsURLandValidate(urlBase, app, driver);
+			browserSteps.inputRobotsURLandValidate(urlBase);
 		}
 
 		URI uriBase = new URI(urlBase);
 		String urlSitemap = urlBase.replace(uriBase.getPath(), "") + "/" + "sitemap.xml";
-		BrowserSteps.inputSitemapURLandValidate(urlSitemap, driver);
+		browserSteps.inputSitemapURLandValidate(urlSitemap);
 	}
 
 }

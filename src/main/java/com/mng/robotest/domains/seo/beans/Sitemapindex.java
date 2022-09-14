@@ -6,7 +6,7 @@
 //
 
 
-package com.mng.robotest.test.beans.sitemap;
+package com.mng.robotest.domains.seo.beans;
 
 import java.util.ArrayList;
 import java.util.List;

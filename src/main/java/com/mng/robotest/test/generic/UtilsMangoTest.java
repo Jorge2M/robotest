@@ -37,14 +37,6 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class UtilsMangoTest extends PageBase {
 
-	public String getPageSource() {
-		String idWebKit = "webkit-xml-viewer-source-xml";
-		if (state(Present, idWebKit).check()) {
-			return getElement(idWebKit).getAttribute("innerHTML");
-		}
-		return driver.getPageSource();
-	}
-
 	public void goToPaginaInicio() throws Exception {
 		boolean existeLogo = SecCabecera.getNew(channel, app).clickLogoMango();
 		if (!existeLogo) {

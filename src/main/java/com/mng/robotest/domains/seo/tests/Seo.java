@@ -1,4 +1,4 @@
-package com.mng.robotest.test.appshop.seo;
+package com.mng.robotest.domains.seo.tests;
 
 import org.testng.annotations.Test;
 

@@ -1,13 +1,10 @@
-package com.mng.robotest.test.steps.otras;
+package com.mng.robotest.domains.seo.steps;
 
-import java.io.StringReader;
 import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -16,33 +13,29 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.beans.sitemap.Sitemapindex;
-import com.mng.robotest.test.beans.sitemap.Sitemapindex.Sitemap;
-import com.mng.robotest.test.generic.UtilsMangoTest;
+import com.mng.robotest.domains.seo.beans.Sitemapindex;
+import com.mng.robotest.domains.seo.beans.Sitemapindex.Sitemap;
+import com.mng.robotest.domains.seo.pageobjects.PageSitemap;
+import com.mng.robotest.domains.transversal.StepBase;
 
-/**
- * Implementa steps/validaciones más propias del browser que de una página concreta (como p.e. la introducción de una URL concreta)
- * @author jorge.munoz
- *
- */
-public class BrowserSteps {
+public class SeoSteps extends StepBase {
 
-	static final String tagUrlRobots = "@TagUrlRobots";
+	private static final String TAG_URL_ROBOTS = "@TagUrlRobots";
 	@Step (
-		description="Ejecutamos la URL del robots: " + tagUrlRobots, 
+		description="Ejecutamos la URL del robots: " + TAG_URL_ROBOTS, 
 		expected="Se carga el contenido correcto")
-	public static void inputRobotsURLandValidate(String urlBaseTest, AppEcom app, WebDriver driver) throws Exception {
+	public void inputRobotsURLandValidate(String urlBaseTest) throws Exception {
 		URI uriBase = new URI(urlBaseTest);
 		String urlRobots = urlBaseTest.replace(uriBase.getPath(), "") + "/" + "robots.txt";
-		TestMaker.getCurrentStepInExecution().replaceInDescription(tagUrlRobots, urlRobots);
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_URL_ROBOTS, urlRobots);
 		String urlSitemap = urlBaseTest.replace(uriBase.getPath(), "") + "/" + "sitemap.xml";
 
 		driver.get(urlRobots);
-		checkPageRobotsTxt(urlSitemap, app, driver);
+		checkPageRobotsTxt(urlSitemap);
 	}
 
 	@Validation
-	private static ChecksTM checkPageRobotsTxt(String urlSitemap, AppEcom app, WebDriver driver) {
+	private ChecksTM checkPageRobotsTxt(String urlSitemap) {
 		ChecksTM checks = ChecksTM.getNew();
 
 		String contRobots1 = 
@@ -119,6 +112,7 @@ public class BrowserSteps {
 		checks.add(
 			"Figura el siguiente contenido: <br>" + contRobots3.replace("\n", "<br>"),
 			driver.getPageSource().contains(contRobots3), State.Defect);
+		
 		checks.add(
 			"Figura el siguiente contenido: <br>" + contRobots4.replace("\n", "<br>"),
 			driver.getPageSource().contains(contRobots4), State.Defect);
@@ -129,7 +123,7 @@ public class BrowserSteps {
 	@Step (
 		description="Ejecutamos la URL del sitemap: #{urlSitemap}", 
 		expected="Se carga el contenido correcto")
-	public static void inputSitemapURLandValidate(String urlSitemap, WebDriver driver) throws Exception {
+	public void inputSitemapURLandValidate(String urlSitemap) throws Exception {
 		driver.get(urlSitemap);
 		checkResultUrlSitemal(driver);
 	}
@@ -137,20 +131,14 @@ public class BrowserSteps {
 	@Validation
 	private static ChecksTM checkResultUrlSitemal(WebDriver driver) throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		
-		Sitemapindex sitemapIndex = null;
-		try {
-			JAXBContext jaxbContext = JAXBContext.newInstance(Sitemapindex.class);
-			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			StringReader reader = new StringReader(new UtilsMangoTest().getPageSource());
-			sitemapIndex = (Sitemapindex) jaxbUnmarshaller.unmarshal(reader);
-		}
-		catch (Exception e) {}
+		PageSitemap pageSitemap = new PageSitemap();
+		boolean sitemapOk = pageSitemap.isCorrect();
 		checks.add(
 			"Obtenemos un XML con formato de sitemap",
-			sitemapIndex!=null, State.Defect);
+			sitemapOk, State.Defect);
 		
-		if (sitemapIndex!=null) {
+		if (sitemapOk) {
+			Sitemapindex sitemapIndex = pageSitemap.getSiteMap().get();
 			Date currDateDayPrecision = removeTime(new Date());
 			String currentDay = new SimpleDateFormat("yyyy-MM-dd").format(currDateDayPrecision);
 			Iterator<Sitemap> itSites = sitemapIndex.getSitemap().iterator();

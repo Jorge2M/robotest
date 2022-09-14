@@ -6,4 +6,4 @@
 //
 
 @javax.xml.bind.annotation.XmlSchema(namespace = "http://www.sitemaps.org/schemas/sitemap/0.9", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package com.mng.robotest.test.beans.sitemap;
+package com.mng.robotest.domains.seo.beans;
