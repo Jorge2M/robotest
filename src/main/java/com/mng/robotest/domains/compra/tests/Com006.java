@@ -42,6 +42,6 @@ public class Com006 extends TestBase {
 	}
 
 	private void checkPedido() throws Exception {
-		CompraCommons.checkPedidosManto(dataPago.getListPedidos(), app, driver); 
+		new CompraSteps().checkPedidosManto(dataPago.getListPedidos()); 
 	}
 }

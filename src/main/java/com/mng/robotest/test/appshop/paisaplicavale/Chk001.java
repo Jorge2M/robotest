@@ -1,7 +1,7 @@
 package com.mng.robotest.test.appshop.paisaplicavale;
 
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
-import com.mng.robotest.domains.compra.tests.CompraCommons;
+import com.mng.robotest.domains.compra.tests.CompraSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
@@ -27,7 +27,7 @@ public class Chk001 extends TestBase {
 			.checkout(From.PREHOME);
 		
 		if (dataPago.getFTCkout().checkManto) {
-			CompraCommons.checkPedidosManto(dataPago.getListPedidos(), app, driver);
+			new CompraSteps().checkPedidosManto(dataPago.getListPedidos());
 		}		
 	}
 

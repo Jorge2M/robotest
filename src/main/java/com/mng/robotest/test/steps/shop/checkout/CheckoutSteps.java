@@ -25,6 +25,8 @@ import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test.steps.shop.checkout.envio.SecMetodoEnvioDesktopSteps;
 import com.mng.robotest.test.steps.shop.checkout.ideal.SecIdealSteps;
+import com.mng.robotest.test.steps.shop.checkout.pagosfactory.FactoryPagos;
+import com.mng.robotest.test.steps.shop.checkout.pagosfactory.PagoSteps;
 import com.mng.robotest.test.steps.shop.checkout.tmango.SecTMangoSteps;
 
 public class CheckoutSteps extends StepBase {

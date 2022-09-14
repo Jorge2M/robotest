@@ -93,6 +93,6 @@ public class Com004 extends TestBase {
 			CheckPedido.consultarPedido,
 			CheckPedido.anular); 
 		
-		CompraCommons.checkPedidosManto(listChecks, dataPago.getListPedidos(), app, driver);
+		new CompraSteps().checkPedidosManto(listChecks, dataPago.getListPedidos());
 	}
 }

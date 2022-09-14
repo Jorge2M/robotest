@@ -2,7 +2,7 @@ package com.mng.robotest.test.appshop.reembolsos;
 
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
-import com.mng.robotest.domains.compra.tests.CompraCommons;
+import com.mng.robotest.domains.compra.tests.CompraSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pago;
@@ -96,8 +96,7 @@ public class Ree002 extends TestBase {
 			}
 			
 			pageReembolsosSteps.gotoRefundsFromMenuAndValidaSalCta(dataTest.pais.existsPagoStoreCredit(), saldoCtaEsperado);
-			
-			CompraCommons.checkPedidosManto(dataPago.getListPedidos(), app, driver);
+			new CompraSteps().checkPedidosManto(dataPago.getListPedidos());
 		}		
 	}
 

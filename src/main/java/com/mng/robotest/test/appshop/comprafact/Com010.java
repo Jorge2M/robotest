@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
-import com.mng.robotest.domains.compra.tests.CompraCommons;
+import com.mng.robotest.domains.compra.tests.CompraSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pago;
@@ -81,8 +81,7 @@ public class Com010 extends TestBase {
 			if (checkAnulaPedido) {
 				listChecks.add(CheckPedido.anular);
 			}
-			
-			CompraCommons.checkPedidosManto(listChecks, dataPago.getListPedidos(), app, driver);
+			new CompraSteps().checkPedidosManto(listChecks, dataPago.getListPedidos());
 		}
 	}
 	

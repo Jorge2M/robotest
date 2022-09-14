@@ -65,7 +65,7 @@ public class Com001 extends TestBase {
 	}
 
 	private void checkPedidos() throws Exception {
-		CompraCommons.checkPedidosManto(dataPago.getListPedidos(), app, driver); 
+		new CompraSteps().checkPedidosManto(dataPago.getListPedidos()); 
 	}
 	
 	private List<GarmentCatalog> getArticlesShop() throws NotFoundException, Exception {

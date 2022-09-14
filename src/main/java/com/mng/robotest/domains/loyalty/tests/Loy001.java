@@ -3,7 +3,7 @@ package com.mng.robotest.domains.loyalty.tests;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
-import com.mng.robotest.domains.compra.tests.CompraCommons;
+import com.mng.robotest.domains.compra.tests.CompraSteps;
 import com.mng.robotest.domains.loyalty.beans.User;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.datastored.DataBag;
@@ -64,6 +64,6 @@ public class Loy001 extends TestBase {
 	}
 
 	private void checkPedidosManto(CopyOnWriteArrayList<DataPedido> pedidos) throws Exception {
-		CompraCommons.checkPedidosManto(pedidos, app, driver);
+		new CompraSteps().checkPedidosManto(pedidos);
 	}
 }

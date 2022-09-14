@@ -9,13 +9,12 @@ import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.steps.shop.checkout.CheckoutSteps;
 import com.mng.robotest.test.steps.shop.checkout.PageResultPagoSteps;
-import com.mng.robotest.test.steps.shop.checkout.pagosfactory.FactoryPagos;
-import com.mng.robotest.test.steps.shop.checkout.pagosfactory.PagoSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 
 public class Com008 extends TestBase {
 
 	private final CheckoutSteps checkoutSteps = new CheckoutSteps();
+	private final CompraSteps compraSteps = new CompraSteps();
 	
 	public Com008() throws Exception {
 		dataTest.userConnected = "e2e.hr.test@mango.com";
@@ -61,11 +60,10 @@ public class Com008 extends TestBase {
 	}
 	
 	private DataPago executeVisaPayment() throws Exception {
-		DataPago dataPago = getDataPago();		
+		DataPago dataPago = getDataPago();
 		dataPago.setPago(dataTest.pais.getPago("VISA"));
-		PagoSteps pagoSteps = FactoryPagos.makePagoSteps(dataPago);
-		pagoSteps.startPayment(true);
-		
+		compraSteps.startPayment(dataPago, true);
+	
 		new PageResultPagoSteps().validateIsPageOk(dataPago);
 		return dataPago;
 	}	
@@ -81,6 +79,6 @@ public class Com008 extends TestBase {
 //			CheckPedido.consultarBolsa, 
 //			CheckPedido.consultarPedido); 
 //		
-//		CompraCommons.checkPedidosManto(listChecks, dataPago.getListPedidos(), app, driver);
+//		compraSteps.checkPedidosManto(listChecks, dataPago.getListPedidos());
 //	}
 }
