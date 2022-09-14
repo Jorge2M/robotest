@@ -26,10 +26,10 @@ public class PageMisComprasSteps extends StepBase {
 	@Validation
 	public ChecksTM validateIsPage() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSecondsToWait = 5;
+		int secondsToWait = 5;
 		checks.add(
-			"Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsToWait + " segundos)",
-			pageMisCompras.isPageUntil(maxSecondsToWait), State.Warn);
+			"Aparece la página de \"Mis Compras\" (la esperamos hasta " + secondsToWait + " segundos)",
+			pageMisCompras.isPageUntil(secondsToWait), State.Warn);
 		
 		return checks;
 	}
@@ -66,10 +66,10 @@ public class PageMisComprasSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Es visible una compra de tipo #{typeTicket} (la esperamos hasta #{maxSeconds} segundos)",
+		description="Es visible una compra de tipo #{typeTicket} (la esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean validateIsCompraOfType(TypeTicket typeTicket, int maxSeconds) {
-		return pageMisCompras.isTicket(typeTicket, maxSeconds);
+	public boolean validateIsCompraOfType(TypeTicket typeTicket, int seconds) {
+		return pageMisCompras.isTicket(typeTicket, seconds);
 	}
 	
 	@Step (

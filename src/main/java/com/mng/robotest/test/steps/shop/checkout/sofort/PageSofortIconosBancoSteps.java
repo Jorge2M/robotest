@@ -17,10 +17,10 @@ public class PageSofortIconosBancoSteps extends StepBase {
 	private final PageSofort1rst pageSofort1rst = new PageSofort1rst();
 	
 	@Validation (
-		description="Aparece la 1a página de Sofort (la esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece la 1a página de Sofort (la esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	public boolean validateIsPageUntil(int maxSeconds) {
-		return pageSofort1rst.isPageVisibleUntil(maxSeconds);
+	public boolean validateIsPageUntil(int seconds) {
+		return pageSofort1rst.isPageVisibleUntil(seconds);
 	}
 	
 	@Step (

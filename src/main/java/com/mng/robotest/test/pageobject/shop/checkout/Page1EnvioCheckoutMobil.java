@@ -1,7 +1,6 @@
 package com.mng.robotest.test.pageobject.shop.checkout;
 
 import java.util.StringTokenizer;
-import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.support.ui.Select;
 
@@ -44,16 +43,16 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 		return getXPathBlockMetodo(tipoTransporte) + XPATH_RADIO_ENVIO;
 	}
 
-	public boolean isPageUntil(int maxSecondsToWait) {
-		return (isVisibleInputCodigoPromoUntil(maxSecondsToWait));
+	public boolean isPageUntil(int secondsToWait) {
+		return (isVisibleInputCodigoPromoUntil(secondsToWait));
 	}
 	
 	public boolean isPresentEnvioStandard() {
 		return state(Present, XPATH_ENVIO_STANDARD).check();
 	}
 
-	public boolean isVisibleLink1EnvioUntil(int maxSeconds) {
-		return state(Visible, XPATH_LINK1_ENVIO).wait(maxSeconds).check();
+	public boolean isVisibleLink1EnvioUntil(int seconds) {
+		return state(Visible, XPATH_LINK1_ENVIO).wait(seconds).check();
 	}
 
 	public void clickLink1EnvioAndWaitForPage() {
@@ -61,8 +60,8 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 		isPageUntil(2);
 	}
 
-	public boolean isPresentInputApellidoPromoEmplUntil(int maxSeconds) {
-		return state(Present, XPATH_INPUT_APELLIDO_PROMO_EMPL).wait(maxSeconds).check();
+	public boolean isPresentInputApellidoPromoEmplUntil(int seconds) {
+		return state(Present, XPATH_INPUT_APELLIDO_PROMO_EMPL).wait(seconds).check();
 	}
 
 	public void inputApellidoPromoEmpl(String apellido) {
@@ -108,7 +107,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	}
 
 	public void inputDNIPromoEmpl(String dni) throws Exception {
-		waitForPageLoaded(driver);
+		waitLoadPage();
 		getElement(XPATH_INPUT_DNI_PROMO_EMPL).sendKeys(dni);
 	}
 
@@ -117,7 +116,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	}
 
 	public void clickButtonAceptarPromoEmpl() {
-		waitForPageLoaded(driver); //For avoid StaleElement exception
+		waitLoadPage(); //For avoid StaleElement exception
 		click(XPATH_ACEPTAR_PROMO_EMPL).exec();
 	}
 
@@ -126,8 +125,8 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 		clickAceptarPromo();
 	}
 
-	public boolean isVisibleInputCodigoPromoUntil(int maxSeconds) {
-		return state(Visible, XPATH_INPUT_PROMO).wait(maxSeconds).check();
+	public boolean isVisibleInputCodigoPromoUntil(int seconds) {
+		return state(Visible, XPATH_INPUT_PROMO).wait(seconds).check();
 	}
 
 	public void inputCodigoPromo(String codigoPromo) {
@@ -140,9 +139,8 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	}
 	
 	public void clickEliminarValeIfExists() {
-		By byEliminar = By.xpath(XPATH_LINK_CANCELAR_CODIGO);
-		if (state(Visible, byEliminar).check()) {
-			click(byEliminar).exec();
+		if (state(Visible, XPATH_LINK_CANCELAR_CODIGO).check()) {
+			click(XPATH_LINK_CANCELAR_CODIGO).exec();
 		}
 	}
 	public String getImporteDescuentoEmpleado() {
@@ -152,8 +150,8 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 		return "";
 	}
 
-	public boolean isVisibleDescuentoEmpleadoUntil(int maxSeconds) {
-		return state(Visible, XPATH_DESCUENTO_EMPLEADO).wait(maxSeconds).check();
+	public boolean isVisibleDescuentoEmpleadoUntil(int seconds) {
+		return state(Visible, XPATH_DESCUENTO_EMPLEADO).wait(seconds).check();
 	}
 	
 	public boolean validateDiscountEmpleadoNotNull() throws Exception {
@@ -208,10 +206,10 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 		return state(Visible, XPATH_LINK_OTROS_MET_ENVIO_CLOSED).check();
 	}
 
-	public boolean isBlockSelectedUntil(TipoTransporte tipoTransporte, int maxSecondsToWait)
+	public boolean isBlockSelectedUntil(TipoTransporte tipoTransporte, int secondsToWait)
 			throws Exception {
 		String xpathBlock = getXPathBlockMetodo(tipoTransporte);
-		for (int i = 0; i <= maxSecondsToWait; i++) {
+		for (int i = 0; i <= secondsToWait; i++) {
 			try {
 				if (getElement(xpathBlock) != null && 
 					getElement(xpathBlock).getAttribute("class").contains("radio-on")) {
@@ -257,12 +255,12 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 		new Page2DatosPagoCheckoutMobil().isPageUntil(2);
 	}
 	
-	public boolean isVisibleButtonContinuarUntil(int maxSeconds) {
-		return state(Visible, XPATH_BOTON_CONTINUAR).wait(maxSeconds).check();
+	public boolean isVisibleButtonContinuarUntil(int seconds) {
+		return state(Visible, XPATH_BOTON_CONTINUAR).wait(seconds).check();
 	}
 
-	public boolean isVisibleErrorPromoUntil(int maxSeconds) {
-		return state(Visible, XPATH_ERROR_PROMO).wait(maxSeconds).check();
+	public boolean isVisibleErrorPromoUntil(int seconds) {
+		return state(Visible, XPATH_ERROR_PROMO).wait(seconds).check();
 	}
 
 	public void selectFranjaHorariaUrgente(int posicion) {

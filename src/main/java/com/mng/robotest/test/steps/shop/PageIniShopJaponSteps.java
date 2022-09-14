@@ -10,13 +10,13 @@ import com.mng.robotest.test.pageobject.shop.PageIniShopJapon;
 public class PageIniShopJaponSteps {
 
 	@Validation 
-	public static ChecksTM validaPageIniJapon(int maxSeconds, WebDriver driver) {
+	public static ChecksTM validaPageIniJapon(int seconds, WebDriver driver) {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
-			"Estamos en la página inicial de la shop de Japón (la esperamos hasta " + maxSeconds + " segundos):<br>" +
+			"Estamos en la página inicial de la shop de Japón (la esperamos hasta " + seconds + " segundos):<br>" +
 			"   - El título es \"" + PageIniShopJapon.Title + "\"<br>" +		
 			"   - La URL contiene \"" + PageIniShopJapon.URL + "\"",
-			PageIniShopJapon.isPageUntil(maxSeconds, driver), State.Warn);
+			PageIniShopJapon.isPageUntil(seconds, driver), State.Warn);
 		
 		return checks;
 	}

@@ -95,8 +95,8 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		}
 	}
 	
-	public boolean isPageUntil(int maxSecondsToWait) {
-		return isClickableButtonFinalizarCompraUntil(maxSecondsToWait);
+	public boolean isPageUntil(int secondsToWait) {
+		return isClickableButtonFinalizarCompraUntil(secondsToWait);
 	}
 
 	public void clickLink2DatosPagoAndWait() {
@@ -114,12 +114,12 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		click(XPATH_BUTTON_FINALIZAR_COMPRA).type(javascript).exec();
 	}
 
-	public boolean isClickableButtonFinalizarCompraUntil(int maxSeconds) {
-		return state(Clickable, XPATH_BUTTON_FINALIZAR_COMPRA).wait(maxSeconds).check();
+	public boolean isClickableButtonFinalizarCompraUntil(int seconds) {
+		return state(Clickable, XPATH_BUTTON_FINALIZAR_COMPRA).wait(seconds).check();
 	}
 
-	public void waitAndClickFinalizarCompra(int maxSecondsToWait) throws Exception {
-		isClickableButtonFinalizarCompraUntil(maxSecondsToWait);
+	public void waitAndClickFinalizarCompra(int secondsToWait) throws Exception {
+		isClickableButtonFinalizarCompraUntil(secondsToWait);
 		clickButtonFinalizarCompra();
 		
 		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
@@ -141,9 +141,9 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		return StateMethod.UNSELECTED;
 	}
 	
-	public boolean isMethodInStateUntil(String nombrePago, StateMethod stateExpected, int maxSeconds) 
+	public boolean isMethodInStateUntil(String nombrePago, StateMethod stateExpected, int seconds) 
 	throws Exception {
-		for (int i=0; i<maxSeconds; i++) {
+		for (int i=0; i<seconds; i++) {
 			StateMethod actualState = getStateMethod(nombrePago);
 			if (actualState==stateExpected) {
 				return true;
@@ -193,7 +193,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		pageCheckoutWrapper.waitUntilNoDivLoading(2);
 		clickMetodoPagoAndWait(pais, nombrePago);
 		pageCheckoutWrapper.waitUntilNoDivLoading(10);
-		waitForPageLoaded(driver); //For avoid StaleElementReferenceException
+		waitLoadPage(); //For avoid StaleElementReferenceException
 	}
 
 	public void clickLinkFormasPagoFor(TypeActionLinkFP typeAction) throws Exception {
@@ -253,15 +253,15 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		click(xpathClickMetodoPago).exec();
 	}
 
-	public boolean isVisibleTextoBajoPagoUntil(Pago pago, int maxSeconds) {
+	public boolean isVisibleTextoBajoPagoUntil(Pago pago, int seconds) {
 		switch (pago.getTypePago()) {
 		case TMango:
-			return (secTMango.isVisibleUntil(maxSeconds));
+			return (secTMango.isVisibleUntil(seconds));
 		case Billpay:
-			return (secBillpay.isVisibleUntil(maxSeconds));
+			return (secBillpay.isVisibleUntil(seconds));
 		default:
 			String xpathTexto = getXPathTextUnderPago(pago.getNombre(channel, app));
-			return state(Visible, xpathTexto).wait(maxSeconds).check();
+			return state(Visible, xpathTexto).wait(seconds).check();
 		}
 	}
 
@@ -330,7 +330,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 	
 
-	public void clickFinalizarCompraAndWait(int maxSecondsToWait) throws Exception {
+	public void clickFinalizarCompraAndWait(int secondsToWait) throws Exception {
 		clickButtonFinalizarCompra();
 		
 		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
@@ -341,7 +341,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 			}
 		}
 		
-		new PageRedirectPasarelaLoading().isPageNotVisibleUntil(maxSecondsToWait);
+		new PageRedirectPasarelaLoading().isPageNotVisibleUntil(secondsToWait);
 	}
 	
 	public String getPrecioTotalFromResumen(boolean normalize) throws Exception {

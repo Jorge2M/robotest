@@ -14,8 +14,8 @@ public class PageMiCuenta extends PageBase {
 	private static final String XPATH_LINK_DEVOLUCIONES = "//span[@data-event-category='devoluciones']";
 	private static final String XPATH_LINK_REEMBOLSOS = "//a[@data-event-category='mi-cuenta-reembolsos']";
 	
-	public boolean isPageUntil(int maxSeconds) {
-		return state(Visible, XPATH_LINK_MIS_DATOS).wait(maxSeconds).check();
+	public boolean isPageUntil(int seconds) {
+		return state(Visible, XPATH_LINK_MIS_DATOS).wait(seconds).check();
 	}
 	
 	public void clickMisCompras() {

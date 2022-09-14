@@ -17,8 +17,8 @@ public class PageInputPedido extends PageBase implements PageFromFooter {
 	}
 	
 	@Override
-	public boolean isPageCorrectUntil(int maxSeconds) {
-		return state(Present, XPATH_INPUT_PEDIDO).wait(maxSeconds).check();
+	public boolean isPageCorrectUntil(int seconds) {
+		return state(Present, XPATH_INPUT_PEDIDO).wait(seconds).check();
 	}
 	
 	public boolean isVisibleInputPedido() {

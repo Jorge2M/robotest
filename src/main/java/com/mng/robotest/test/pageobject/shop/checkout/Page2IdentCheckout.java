@@ -70,14 +70,13 @@ public class Page2IdentCheckout extends PageBase {
 		this.egyptCity = egyptCity;
 	}
 	
-	public boolean isPageUntil(int maxSeconds) {
-		return (state(Present, By.xpath(XPATH_MAIN_FORM)).wait(maxSeconds).check());
+	public boolean isPageUntil(int seconds) {
+		return state(Present, XPATH_MAIN_FORM).wait(seconds).check();
 	}
 	
 	public boolean checkEmail(String email) {
-		By byEmail = By.xpath(XPATH_INPUT_EMAIL);
-		if (state(State.Visible, byEmail).check()) {
-			String emailScreen = driver.findElement(byEmail).getAttribute(VALUE);
+		if (state(State.Visible, XPATH_INPUT_EMAIL).check()) {
+			String emailScreen = getElement(XPATH_INPUT_EMAIL).getAttribute(VALUE);
 			if (emailScreen!=null) {
 				return (email.compareTo(emailScreen)==0);
 			}
@@ -86,7 +85,7 @@ public class Page2IdentCheckout extends PageBase {
 	}
 
 	public boolean isInputPasswordAccordingEmail(boolean emailYetExists) {
-		boolean isVisiblePassword = state(Visible, By.xpath(XPATH_INPUT_PASSWORD)).check();
+		boolean isVisiblePassword = state(Visible, XPATH_INPUT_PASSWORD).check();
 		return (emailYetExists!=isVisiblePassword);
 	}
 
@@ -116,8 +115,8 @@ public class Page2IdentCheckout extends PageBase {
 		return datoSeteado;
 	}
 	
-	public boolean isNombreUsuarioVisible(int maxSeconds) {
-		return state(State.Visible, By.xpath(XPATH_INPUT_NOMBRE_USR)).wait(maxSeconds).check();
+	public boolean isNombreUsuarioVisible(int seconds) {
+		return state(State.Visible, XPATH_INPUT_NOMBRE_USR).wait(seconds).check();
 	}
 	
 	public void setNombreUsuarioIfVisible(String nombreUsr, Map<String,String> datosRegistro) {
@@ -156,8 +155,8 @@ public class Page2IdentCheckout extends PageBase {
 	}	
 
 	public void setInputPoblacionIfVisible(String cfCity, Map<String,String> datosRegistro) throws Exception {
-		waitForPageLoaded(driver);
-		state(Clickable, By.xpath(XPATH_INPUT_POBLACION_ACTIVE)).wait(1).check();
+		waitLoadPage();
+		state(Clickable, XPATH_INPUT_POBLACION_ACTIVE).wait(1).check();
 		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_POBLACION_ACTIVE, cfCity);
 		if (datoSeteado) {
 			datosRegistro.put("cfCity", cfCity);
@@ -206,10 +205,9 @@ public class Page2IdentCheckout extends PageBase {
 				//Si existe el tag 'onkeyup' (se desencadena petición Ajax) tenemos que esperaremos un máximo de 2 segundos hasta que aparezca el desplegable con las poblaciones
 				cfCodpostalList.get(0).getAttribute("onkeyup")!=null && 
 				cfCodpostalList.get(0).getAttribute("onkeyup").compareTo("")!=0) {
-					state(Visible, By.xpath(XPATH_SELECT_LOCALIDADES)).wait(2).check();
+					state(Visible, XPATH_SELECT_LOCALIDADES).wait(2).check();
 			}
 		}
-
 		return datoSeteado;
 	}
 
@@ -256,7 +254,7 @@ public class Page2IdentCheckout extends PageBase {
 		List<WebElement> paisCf = getElementsVisible(XPATH_SELECT_PAIS);
 		if (!paisCf.isEmpty()) {
 			String xpathSelectedPais = XPATH_SELECT_PAIS + "/option[@selected='selected' and @value='" + pais.getAddress() + "']";
-			if (state(Present, By.xpath(xpathSelectedPais)).check()) {
+			if (state(Present, xpathSelectedPais).check()) {
 				new Select(paisCf.get(0)).selectByValue(pais.getCodigo_pais());
 				datoSeteado = true;
 			}
@@ -273,8 +271,8 @@ public class Page2IdentCheckout extends PageBase {
 	}	
 	
 	public void clickBotonFindAddress() throws InterruptedException {
-		driver.findElement(By.xpath(XPATH_BOTON_FIND_ADDRESS)).click();
-		Thread.sleep(3000);
+		getElement(XPATH_BOTON_FIND_ADDRESS).click();
+		waitMillis(3000);
 	}
 
 	/**
@@ -306,18 +304,17 @@ public class Page2IdentCheckout extends PageBase {
 	}
 
 	public String getCodigoPostal() {
-		if (state(Present, By.xpath(XPATH_INPUT_CODPOST)).check()) {
-			return (driver.findElement(By.xpath(XPATH_INPUT_CODPOST)).getAttribute(VALUE));
+		if (state(Present, XPATH_INPUT_CODPOST).check()) {
+			return getElement(XPATH_INPUT_CODPOST).getAttribute(VALUE);
 		}
 		return "";
 	}
 
 	public void clickPublicidadIfVisible(Map<String,String> datosRegistro) {
-		By byCheckPublic = By.xpath(XPATH_CHECK_PUBLICIDAD);
-		if (state(Present, byCheckPublic).check()) {
-			moveToElement(byCheckPublic, driver);
-			if (state(Visible, byCheckPublic, driver).check()) {
-				driver.findElement(byCheckPublic).click();
+		if (state(Present, XPATH_CHECK_PUBLICIDAD).check()) {
+			moveToElement(XPATH_CHECK_PUBLICIDAD);
+			if (state(Visible, XPATH_CHECK_PUBLICIDAD).check()) {
+				getElement(XPATH_CHECK_PUBLICIDAD).click();
 				datosRegistro.put("cfPubli", "true");
 				return;
 			}
@@ -332,7 +329,7 @@ public class Page2IdentCheckout extends PageBase {
 		String datoSeteado = "";
 		boolean staleElement = true;
 		int i=0;
-		Thread.sleep(500);
+		waitMillis(500);
 		
 		//Tenemos problemas aleatorios de StaleElementReferenceException con este elemento
 		//Probamos hasta 3 veces mientras que obtengamos la Excepción
@@ -397,8 +394,8 @@ public class Page2IdentCheckout extends PageBase {
 	}
 	
 	private String selectProvinciaUkraineDesktop() {
-		driver.findElement(By.xpath(XPATH_SELECT_PROV_PAIS + "/..")).click();
-		driver.findElement(By.xpath(XPATH_OPTION_FIRST_PROV_UKRANIE)).click();
+		getElement(XPATH_SELECT_PROV_PAIS + "/..").click();
+		getElement(XPATH_OPTION_FIRST_PROV_UKRANIE).click();
 		return FIRST_PROVINCIA_UKRANIE;
 	}
 	
@@ -450,7 +447,7 @@ public class Page2IdentCheckout extends PageBase {
 	}	
 	
 	public String setSeletEstadoEspanya(String provincia) throws InterruptedException {
-		waitForPageLoaded(driver);
+		waitLoadPage();
 		WebElement provinciaPais = getElementPriorizingDisplayed(XPATH_SELECT_ESTADOS_PAIS);
 		if (provinciaPais!=null) {
 			String selected = new Select(provinciaPais).getFirstSelectedOption().getText();
@@ -579,7 +576,7 @@ public class Page2IdentCheckout extends PageBase {
 		boolean datoSeteado = false;
 		List<WebElement> cfPriv = getElementsVisible(XPATH_CHECK_CONDICIONES + "/../../div[@class='checkbox__image']");
 		if (cfPriv.size() > 0) { //Revisamos si el check NO está marcado 
-			driver.findElement(By.xpath(XPATH_CHECK_CONDICIONES)).click();
+			getElement(XPATH_CHECK_CONDICIONES).click();
 			datoSeteado = true;
 		}		
 		return datoSeteado;		
@@ -647,25 +644,22 @@ public class Page2IdentCheckout extends PageBase {
 		return datosSeteados;
 	}
 
-	public boolean isContinuarClickableUntil(int maxSeconds) {
-		return (state(Clickable, By.xpath(XPATH_BOTON_CONTINUAR)).wait(maxSeconds).check());
+	public boolean isContinuarClickableUntil(int seconds) {
+		return state(Clickable, XPATH_BOTON_CONTINUAR).wait(seconds).check();
 	}
 
-	public void clickBotonContinuarAndWait(int maxSeconds) {
-		click(By.xpath(XPATH_BOTON_CONTINUAR)).waitLoadPage(maxSeconds).exec();
+	public void clickBotonContinuarAndWait(int seconds) {
+		click(XPATH_BOTON_CONTINUAR).waitLoadPage(seconds).exec();
  
 		//Hay una especie de bug (p.e. en el caso de Turquía) que hace que en ocasiones el click no tenga efecto
-		if (state(Present, By.xpath(XPATH_BOTON_CONTINUAR)).check()) {
+		if (state(Present, XPATH_BOTON_CONTINUAR).check()) {
 			waitMillis(1500);
-			click(By.xpath(XPATH_BOTON_CONTINUAR)).type(TypeClick.javascript).exec();
+			click(XPATH_BOTON_CONTINUAR).type(TypeClick.javascript).exec();
 		}
 	}
 
 	public boolean isDisplayedAvisoAduanas() {
-		return (state(Visible, By.xpath(XPATH_MSG_ADUANAS)).wait(1).check());
+		return state(Visible, XPATH_MSG_ADUANAS).wait(1).check();
 	}
-
-//	public boolean isTextoRGPDVisible() {
-//		return (state(Visible, By.xpath(XPathTextRGPD)).check());
-//	}
+	
 }

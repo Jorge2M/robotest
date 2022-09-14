@@ -224,10 +224,10 @@ public class PageGaleriaDesktop extends PageGaleria {
 	
 	@Override
 	public WebElement getImagenElementArticulo(WebElement articulo) {
-		moveToElement(articulo, driver);
+		moveToElement(articulo);
 		By byImg = By.xpath(getXPathImgArticulo(articulo));			
 		if (state(State.Present, articulo).by(byImg).check()) {
-			return (articulo.findElement(byImg));
+			return getElement(byImg);
 		}
 		return null;
 	}
@@ -550,9 +550,9 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}	
 	
 	public void moveToArticleAndGetObject(int posArticulo) {
-		By byArticle = By.xpath(getXPathLinkArticulo(posArticulo) + "/..");
-		state(State.Visible, byArticle).wait(1).check();
-		moveToElement(byArticle, driver);
+		String xpathArticle = getXPathLinkArticulo(posArticulo) + "/..";
+		state(State.Visible, xpathArticle).wait(1).check();
+		moveToElement(xpathArticle);
 	}
 
 	@Override
@@ -563,14 +563,14 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 
 	@Override
-	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSecondsToWait) {
-		return secTallas.isVisibleArticleCapaTallasUntil(posArticulo, maxSecondsToWait);
+	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int secondsToWait) {
+		return secTallas.isVisibleArticleCapaTallasUntil(posArticulo, secondsToWait);
 	}
 	
 	@Override
 	public ArticuloScreen selectTallaAvailableArticle(int posArticulo, int posTalla) throws Exception {
 		//Si no está visible la capa de tallas ejecutamos los pasos necesarios para hacer la visible 
-		waitForPageLoaded(driver);
+		waitLoadPage();
 		if (!isVisibleArticleCapaTallasUntil(posArticulo, 1)) {
 			showTallasArticulo(posArticulo);
 		}
@@ -628,8 +628,8 @@ public class PageGaleriaDesktop extends PageGaleria {
 		}
 	}
 
-	public boolean isPresentSliderInArticleUntil(TypeSlider typeSlider, WebElement article, int maxSeconds) {
-		for (int i=0; i<maxSeconds; i++) {
+	public boolean isPresentSliderInArticleUntil(TypeSlider typeSlider, WebElement article, int seconds) {
+		for (int i=0; i<seconds; i++) {
 			if (isPresentSliderInArticle(typeSlider, article)) {
 				return true;
 			}
@@ -672,7 +672,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		if (state(Present, xpathLitArticulos).check()) {
 			for (int i=0; i<3; i++) {
 				try {
-					waitForPageLoaded(driver);
+					waitLoadPage();
 					List<WebElement> listTextosArticulosNoValidos = getElements(xpathLitArticulos);
 					for (WebElement textoArticuloNoValido : listTextosArticulosNoValidos) {
 						String nombre = textoArticuloNoValido.getText();
@@ -696,7 +696,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	@Override
 	public ArticuloScreen getArticuloObject(int numArticulo) throws Exception {
 		WebElement artWElem = getElements(xpathArticuloBase).get(numArticulo-1);
-		moveToElement(artWElem, driver);
+		moveToElement(artWElem);
 		ArticuloScreen articulo = new ArticuloScreen();
 		articulo.setReferencia(getRefArticulo(artWElem));
 		articulo.setNombre(getNombreArticulo(artWElem));
@@ -741,7 +741,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	public void clickHearthIcon(WebElement hearthIcon) throws Exception {
-		moveToElement(hearthIcon, driver);
+		moveToElement(hearthIcon);
 		state(Clickable, hearthIcon).wait(1).check();
 		try {
 			hearthIcon.click();
@@ -766,9 +766,9 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	@Override
-	public boolean isArticleWithHearthIconPresentUntil(int posArticle, int maxSeconds) {
+	public boolean isArticleWithHearthIconPresentUntil(int posArticle, int seconds) {
 		String xpathIcon = getXPathArticleHearthIcon(posArticle);
-		return state(Present, xpathIcon).wait(maxSeconds).check();
+		return state(Present, xpathIcon).wait(seconds).check();
 	}
 	
 	//Equivalent to Mobil
@@ -777,18 +777,18 @@ public class PageGaleriaDesktop extends PageGaleria {
 		//Nos posicionamos en el icono del Hearth 
 		String xpathIcon = getXPathArticleHearthIcon(posArticle);
 		WebElement hearthIcon = getElement(xpathIcon);
-		moveToElement(hearthIcon, driver);
+		moveToElement(hearthIcon);
 		
 		//Clicamos y esperamos a que el icono cambie de estado
 		StateFavorito estadoInicial = getStateHearthIcon(hearthIcon);
 		clickHearthIcon(hearthIcon);
-		int maxSecondsToWait = 2;
+		int secondsToWait = 2;
 		switch (estadoInicial) {
 		case MARCADO:
-			waitToHearthIconInState(hearthIcon, StateFavorito.DESMARCADO, maxSecondsToWait);
+			waitToHearthIconInState(hearthIcon, StateFavorito.DESMARCADO, secondsToWait);
 			break;
 		case DESMARCADO:
-			waitToHearthIconInState(hearthIcon, StateFavorito.MARCADO, maxSecondsToWait);
+			waitToHearthIconInState(hearthIcon, StateFavorito.MARCADO, secondsToWait);
 			break;
 		default:
 			break;

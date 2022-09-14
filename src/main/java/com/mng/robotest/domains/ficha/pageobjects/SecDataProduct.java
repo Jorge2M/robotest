@@ -209,11 +209,11 @@ public class SecDataProduct extends PageBase {
 
 	public void selectColorWaitingForAvailability(String codigoColor) {
 		String xpathColor = getXPathPastillaColorClick(codigoColor);
-		int maxSecondsToWaitColor = 3;
-		int maxSecondsToWaitLoadPage = 5;
+		int secondsToWaitColor = 3;
+		int secondsToWaitLoadPage = 5;
 		click(xpathColor)
 			.type(TypeClick.javascript)
-			.waitLink(maxSecondsToWaitColor).waitLoadPage(maxSecondsToWaitLoadPage).exec();
+			.waitLink(secondsToWaitColor).waitLoadPage(secondsToWaitLoadPage).exec();
 	}
 	
 	public boolean isClickableColor(String codigoColor) {
@@ -274,9 +274,9 @@ public class SecDataProduct extends PageBase {
 	 
 	
 //Funciones referentes al prev/next
-	public boolean isVisiblePrevNextUntil(ProductNav productNav, int maxSeconds) {
+	public boolean isVisiblePrevNextUntil(ProductNav productNav, int seconds) {
 		String xpathLink = getXPathLinkProductNav(productNav);
-		return state(Visible, xpathLink).wait(maxSeconds).check();
+		return state(Visible, xpathLink).wait(seconds).check();
 	}
 
 	public void selectLinkNavigation(ProductNav productNav) {

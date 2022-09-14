@@ -9,8 +9,8 @@ public class ModalLoyaltyAfterLogin extends PageBase {
 	private static final String XPATH_CAPA_CONTAINER = "//div[@class[contains(.,'modal-content')]]";
 	private static final String XPATH_IR_DE_SHOPPING_LINK = XPATH_CAPA_CONTAINER + "//a[@class[contains(.,'loyalty-irdeshopping')]]";
 	
-	public boolean isModalVisibleUntil(int maxSeconds) {
-		return state(Visible, XPATH_IR_DE_SHOPPING_LINK).wait(maxSeconds).check();
+	public boolean isModalVisibleUntil(int seconds) {
+		return state(Visible, XPATH_IR_DE_SHOPPING_LINK).wait(seconds).check();
 	}
 	
 	public void closeModal() {
@@ -21,8 +21,8 @@ public class ModalLoyaltyAfterLogin extends PageBase {
 		closeModalIfVisibleUntil(0);
 	}
 	
-	public void closeModalIfVisibleUntil(int maxSecondsToWait) {
-		if (isModalVisibleUntil(maxSecondsToWait)) {
+	public void closeModalIfVisibleUntil(int secondsToWait) {
+		if (isModalVisibleUntil(secondsToWait)) {
 			closeModal();
 		}
 	}

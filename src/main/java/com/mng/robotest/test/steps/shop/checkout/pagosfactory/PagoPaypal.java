@@ -32,7 +32,7 @@ public class PagoPaypal extends PagoSteps {
 	public void testPagoFromCheckout(boolean execPay) throws Exception {
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
-		int maxSeconds = 10;
+		int seconds = 10;
 		modalPreloaderSppinerSteps.validateAppearsAndDisappears();
 		switch (getInitPagePaypal(driver)) {
 		case Login:
@@ -46,19 +46,19 @@ public class PagoPaypal extends PagoSteps {
 		if (execPay) {
 			DataPedido dataPedido = this.dataPago.getDataPedido();
 			dataPedido.setCodtipopago("P");
-			modalPreloaderSppinerSteps.validateIsVanished(maxSeconds);
+			modalPreloaderSppinerSteps.validateIsVanished(seconds);
 			if (new PagePaypalLogin().isPage()) {
 				pagePaypalLoginSteps.loginPaypal(dataPedido.getPago().getUseremail(), dataPedido.getPago().getPasswordemail());
 			}
 			
-			modalPreloaderSppinerSteps.validateIsVanished(maxSeconds);
+			modalPreloaderSppinerSteps.validateIsVanished(seconds);
 			if (getPostLoginPagePaypal()==PostLoginPagePaypal.SelectPago) {
 				pagePaypalSelectPagoSteps.validateIsPageUntil(0);
 				pagePaypalSelectPagoSteps.clickContinuarButton();	  
 			}
 			
-			maxSeconds = 3;
-			if (new PagePaypalConfirmacion().isPageUntil(maxSeconds)) {
+			seconds = 3;
+			if (new PagePaypalConfirmacion().isPageUntil(seconds)) {
 				pagePaypalConfirmacionSteps.validateIsPageUntil(0);
 				pagePaypalConfirmacionSteps.clickContinuarButton();
 			}
@@ -69,8 +69,8 @@ public class PagoPaypal extends PagoSteps {
 	private enum PostLoginPagePaypal {SelectPago, Confirmacion}
 	
 	private InitPagePaypal getInitPagePaypal(WebDriver driver) {
-		int maxSeconds = 5;
-		if (new PagePaypalLogin().isPageUntil(maxSeconds)) {
+		int seconds = 5;
+		if (new PagePaypalLogin().isPageUntil(seconds)) {
 			return InitPagePaypal.Login;
 		}
 		
@@ -82,8 +82,8 @@ public class PagoPaypal extends PagoSteps {
 	}
 	
 	private PostLoginPagePaypal getPostLoginPagePaypal() {
-		int maxSeconds = 5;
-		if (new PagePaypalSelectPago().isPageUntil(maxSeconds)) {
+		int seconds = 5;
+		if (new PagePaypalSelectPago().isPageUntil(seconds)) {
 			return PostLoginPagePaypal.SelectPago;
 		}
 		if (new PagePaypalConfirmacion().isPageUntil(0)) {

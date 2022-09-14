@@ -9,9 +9,9 @@ import com.mng.robotest.test.pageobject.shop.checkout.PageRedirectPasarelaLoadin
 public class PageRedirectPasarelaLoadingSteps {
 	
 	@Validation (
-		description="Acaba desapareciendo la página de \"Por favor espere. Este proceso puede tardar...\" (esperamos hasta #{maxSeconds} segundos)",
+		description="Acaba desapareciendo la página de \"Por favor espere. Este proceso puede tardar...\" (esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	public static boolean validateDisappeared(int maxSeconds, WebDriver driver) { 
-		return new PageRedirectPasarelaLoading().isPageNotVisibleUntil(maxSeconds);
+	public static boolean validateDisappeared(int seconds, WebDriver driver) { 
+		return new PageRedirectPasarelaLoading().isPageNotVisibleUntil(seconds);
 	}
 }

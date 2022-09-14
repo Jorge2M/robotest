@@ -17,8 +17,8 @@ public class PageQiwiInputTlfn extends PageBase {
 		return state(Present, XPATH_INPUT_PHONE).check();
 	}	
 	
-	public boolean isVisibleLinkAceptar(int maxSeconds) {
-		return state(Visible, XPATH_LINK_ACEPTAR).wait(maxSeconds).check();
+	public boolean isVisibleLinkAceptar(int seconds) {
+		return state(Visible, XPATH_LINK_ACEPTAR).wait(seconds).check();
 	}
 	
 	public void clickLinkAceptar() {

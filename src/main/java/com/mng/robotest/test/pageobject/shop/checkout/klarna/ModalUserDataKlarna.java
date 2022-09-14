@@ -26,8 +26,8 @@ public class ModalUserDataKlarna extends PageBase {
 	
 	private static final String XPATH_BUTTON_CONTINUE = "//button[@id='button-primary']";
 	
-	public boolean isModal(int maxSeconds) {
-		return state(State.Visible, InputKlarna.Email.getXPath()).wait(maxSeconds).check();
+	public boolean isModal(int seconds) {
+		return state(State.Visible, InputKlarna.Email.getXPath()).wait(seconds).check();
 	}
 	
 	public void inputData(DataKlarna dataKlarna) {

@@ -18,9 +18,9 @@ public class PageSofort1rst extends PageBase {
 		}
 	}
 	
-	public boolean isPageVisibleUntil(int maxSeconds) {
+	public boolean isPageVisibleUntil(int seconds) {
 		String xpPathClickFollowing = getXPathClickToFollow(channel);
-		return state(Visible, xpPathClickFollowing).wait(maxSeconds).check();
+		return state(Visible, xpPathClickFollowing).wait(seconds).check();
 	}
 
 	public void clickGoToSofort() {

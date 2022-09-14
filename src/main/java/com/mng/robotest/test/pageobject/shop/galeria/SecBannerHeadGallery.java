@@ -44,8 +44,8 @@ public class SecBannerHeadGallery extends PageBase {
 	}
 	
 	public boolean isVisible() {
-		if (state(Visible, By.xpath(XPATH_BANNER)).check()) {
-			Dimension bannerSize = driver.findElement(By.xpath(XPATH_BANNER)).getSize(); 
+		if (state(Visible, XPATH_BANNER).check()) {
+			Dimension bannerSize = getElement(XPATH_BANNER).getSize(); 
 			if (bannerSize.height>0 && bannerSize.width>0) {
 				return true;
 			}
@@ -68,44 +68,44 @@ public class SecBannerHeadGallery extends PageBase {
 	
 	public boolean isBannerWithoutTextAccesible() {
 		String xpath = XPATH_BANNER_WITH_VIDEO + " | " + XPATH_BANNER_WITH_BACKGROUND_IMAGE;
-		return (state(Visible, By.xpath(xpath), driver).check());
+		return state(Visible, xpath).check();
 	}
 	
 	public boolean isLinkable() {
-		if (state(Present, By.xpath(XPATH_BANNER)).check()) {
-			WebElement banner = driver.findElement(By.xpath(XPATH_BANNER));
-			return (state(Clickable, banner).by(By.xpath(".//a[@href]")).check());
+		if (state(Present, XPATH_BANNER).check()) {
+			WebElement banner = getElement(XPATH_BANNER);
+			return state(Clickable, banner).by(By.xpath(".//a[@href]")).check();
 		}
 		return false;
 	}
 	
 	public void clickBannerIfClickable() {
 		if (isLinkable()) {
-			click(By.xpath(XPATH_BANNER)).exec();
+			click(XPATH_BANNER).exec();
 		}
 	}
 	
 	public String getText() {
-		if (state(Present, By.xpath(XPATH_TEXT)).check()) {
-			return (driver.findElement(By.xpath(XPATH_BANNER)).getText());
+		if (state(Present, XPATH_TEXT).check()) {
+			return getElement(XPATH_BANNER).getText();
 		}
 		return "";
 	}
 	
 	public boolean isVisibleLinkInfoRebajas() {
-		return (state(Visible, By.xpath(XPATH_TEXT_LINK_INFO_REBAJAS)).check());
+		return state(Visible, XPATH_TEXT_LINK_INFO_REBAJAS).check();
 	}
 
 	public void clickLinkInfoRebajas() {
-		click(By.xpath(XPATH_TEXT_LINK_INFO_REBAJAS)).type(javascript).exec();
+		click(XPATH_TEXT_LINK_INFO_REBAJAS).type(javascript).exec();
 	}
 
 	public boolean isVisibleLinkTextInfoRebajas(TypeLinkInfo typeLink) {
 		String xpathText = getXPathTextInfoRebajas(typeLink);
-		return (state(Visible, By.xpath(xpathText)).check());
+		return state(Visible, xpathText).check();
 	}
 	
-	public boolean isVisibleInfoRebajasUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPATH_TEXT_INFO_REBAJAS)).wait(maxSeconds).check());
+	public boolean isVisibleInfoRebajasUntil(int seconds) {
+		return state(Visible, XPATH_TEXT_INFO_REBAJAS).wait(seconds).check();
 	}
 }

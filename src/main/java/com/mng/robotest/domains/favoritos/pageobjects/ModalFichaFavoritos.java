@@ -63,14 +63,14 @@ public class ModalFichaFavoritos extends PageBase {
 		return "";
 	}
 	
-	public boolean isVisibleFichaUntil(String refProducto, int maxSeconds) {
+	public boolean isVisibleFichaUntil(String refProducto, int seconds) {
 		String xpathFicha = getXPathFichaProducto(refProducto);
-		return (state(Visible, xpathFicha).wait(maxSeconds).check());
+		return (state(Visible, xpathFicha).wait(seconds).check());
 	}
 	
-	public boolean isInvisibleFichaUntil(String refProducto, int maxSeconds) {
+	public boolean isInvisibleFichaUntil(String refProducto, int seconds) {
 		String xpathFicha = getXPathFichaProducto(refProducto);
-		return (state(Invisible, xpathFicha).wait(maxSeconds).check());
+		return (state(Invisible, xpathFicha).wait(seconds).check());
 	}
 	
 	public boolean isColorSelectedInFicha(Color color) {
@@ -89,10 +89,10 @@ public class ModalFichaFavoritos extends PageBase {
 	public void clickButtonAddToBagAndWait(String refProducto) throws Exception {
 		String xpathAdd = getXPathButtonAddBolsa(refProducto);
 		getElement(xpathAdd).click();
-		int maxSecondsToWait = 2;
+		int secondsToWait = 2;
 		
 		SecBolsa secBolsa = SecBolsa.make(channel, app);
-		secBolsa.isInStateUntil(StateBolsa.OPEN, maxSecondsToWait);
+		secBolsa.isInStateUntil(StateBolsa.OPEN, secondsToWait);
 	}
 	
 	public String selectTalla(String refProducto, int posicionTalla) {
@@ -123,18 +123,19 @@ public class ModalFichaFavoritos extends PageBase {
 	
 	public List<WebElement> getListaTallas(String refProducto) {
 		String xpathTalla = getXPathTalla(refProducto);
-		return (driver.findElements(By.xpath(xpathTalla)));
+		return getElements(xpathTalla)
+				;
 	}
 	
 	public void despliegaTallasAndWait(String refProducto) {
 		String xpathSelector = getXPathSelectorTalla(refProducto);
-		driver.findElement(By.xpath(xpathSelector)).click();
+		getElement(xpathSelector).click();
 		String xpathCapaTallas = getXPathCapaTallas(refProducto);
 		state(State.Visible, xpathCapaTallas).wait(1).build();
 	}
 	
 	public void closeFicha(String refProducto) {
 		String xpathAspa = getXPathAspaFichaToClose(refProducto);
-		driver.findElement(By.xpath(xpathAspa)).click();
+		getElement(xpathAspa).click();
 	}
 }

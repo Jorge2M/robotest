@@ -14,15 +14,15 @@ public class PageHomeDonateLikesSteps extends StepBase {
 	private final PageHomeDonateLikes pageHomeDonateLikes = new PageHomeDonateLikes();
 	
 	@Validation
-	public ChecksTM checkIsPage(int maxSeconds) {
+	public ChecksTM checkIsPage(int seconds) {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la pagina de <b>Donar Likes</b>",
 			pageHomeDonateLikes.checkIsPage(0), State.Defect);
 		
 		checks.add(
-			"Aparece el botón para donar " + ButtonLikes.BUTTON_100_LIKES.getNumLikes() + " Likes (esperamos hasta " + maxSeconds + " segundos)",
-			pageHomeDonateLikes.isVisible(ButtonLikes.BUTTON_100_LIKES, maxSeconds), State.Defect);
+			"Aparece el botón para donar " + ButtonLikes.BUTTON_100_LIKES.getNumLikes() + " Likes (esperamos hasta " + seconds + " segundos)",
+			pageHomeDonateLikes.isVisible(ButtonLikes.BUTTON_100_LIKES, seconds), State.Defect);
 		
 		return checks;
 	}
@@ -38,10 +38,10 @@ public class PageHomeDonateLikesSteps extends StepBase {
 	@Validation
 	public ChecksTM checkAfterDonateLikes(ButtonLikes buttonSelected) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 5;
+		int seconds = 5;
 		checks.add(
-			"Aparece el icono correspondiente a la operación realizada (lo esperamos hasta " + maxSeconds + " segundos)",
-			pageHomeDonateLikes.isVisibleIconOperationDoneUntil(maxSeconds), State.Defect);
+			"Aparece el icono correspondiente a la operación realizada (lo esperamos hasta " + seconds + " segundos)",
+			pageHomeDonateLikes.isVisibleIconOperationDoneUntil(seconds), State.Defect);
 
 		return checks;
 	}	

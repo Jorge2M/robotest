@@ -18,15 +18,15 @@ public class PageAccesoMisComprasSteps extends StepBase {
 	@Validation
 	public ChecksTM validateIsPage() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 2;
+		int seconds = 2;
 		checks.add(
-			"Aparece la página de \"Acceso a Mis Compras\" (la esperamos hasta " + maxSeconds + " segundos)",
-			pageAccesoMisCompras.isPage(maxSeconds), State.Warn);
+			"Aparece la página de \"Acceso a Mis Compras\" (la esperamos hasta " + seconds + " segundos)",
+			pageAccesoMisCompras.isPage(seconds), State.Warn);
 		
-		maxSeconds = 3;
+		seconds = 3;
 		checks.add(
-			"Aparece el bloque \"Ya estoy registrado\" (lo esperamos hasta " + maxSeconds + "segundos)",
-			pageAccesoMisCompras.isPresentBlock(TypeBlock.SI_REGISTRADO, maxSeconds), State.Warn);
+			"Aparece el bloque \"Ya estoy registrado\" (lo esperamos hasta " + seconds + "segundos)",
+			pageAccesoMisCompras.isPresentBlock(TypeBlock.SI_REGISTRADO, seconds), State.Warn);
 		
 		checks.add(
 			"Aparece el bloque de \"No estoy registrado\"",
@@ -44,10 +44,10 @@ public class PageAccesoMisComprasSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Se hace visible el bloque de \"#{typeBlock}\" (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Se hace visible el bloque de \"#{typeBlock}\" (lo esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	private boolean checkIsVisibleBlock(TypeBlock typeBlock, int maxSeconds) {
-		return (pageAccesoMisCompras.isVisibleBlockUntil(typeBlock, maxSeconds));
+	private boolean checkIsVisibleBlock(TypeBlock typeBlock, int seconds) {
+		return (pageAccesoMisCompras.isVisibleBlockUntil(typeBlock, seconds));
 	}
 	
 	@Step (

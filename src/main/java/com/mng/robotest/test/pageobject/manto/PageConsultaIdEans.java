@@ -45,8 +45,8 @@ public class PageConsultaIdEans extends PageBase {
 		return state(Visible, By.xpath(XPATH_DIV_BUSQUEDA_RAPIDA)).check();
 	}
 
-	public boolean isVisibleTablaInformacionUntil(int maxSeconds) {
-		return state(Visible, By.xpath(XPATH_HEADER_TABLA_ID)).wait(maxSeconds).check();
+	public boolean isVisibleTablaInformacionUntil(int seconds) {
+		return state(Visible, By.xpath(XPATH_HEADER_TABLA_ID)).wait(seconds).check();
 	}
 
 	public void inputPedidosAndClickBuscarDatos(List<String> pedidosPrueba) {

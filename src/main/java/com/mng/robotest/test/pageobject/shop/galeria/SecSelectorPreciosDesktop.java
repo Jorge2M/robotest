@@ -56,20 +56,20 @@ public class SecSelectorPreciosDesktop extends PageBase {
 		moveToCornerSelector(TypeClick.RIGHT);
 		Thread.sleep(2000);
 		moveToCornerSelector(typeClick);
-		waitForPageLoaded(driver);
+		waitLoadPage();
 		builder.moveByOffset(pixelsFromCorner, 0).click().build().perform();
-		waitForPageLoaded(driver);
+		waitLoadPage();
 	}
 
 	private void moveToCornerSelector(TypeClick typeCorner) throws Exception {
-		waitForPageLoaded(driver);
-		moveToElement(By.xpath(XPATH_FILTRO_WRAPPER_SHOP), driver);
+		waitLoadPage();
+		moveToElement(XPATH_FILTRO_WRAPPER_SHOP);
 		switch (typeCorner) {
 		case LEFT: 
-			moveToElement(By.xpath(XPATH_LEFT_CORNER_SHOP), driver);
+			moveToElement(XPATH_LEFT_CORNER_SHOP);
 			break;
 		case RIGHT:
-			moveToElement(By.xpath(XPATH_RIGHT_CORNER_SHOP), driver);
+			moveToElement(XPATH_RIGHT_CORNER_SHOP);
 		}
 	}
 }

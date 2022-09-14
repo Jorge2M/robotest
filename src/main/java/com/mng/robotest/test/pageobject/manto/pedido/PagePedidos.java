@@ -116,8 +116,8 @@ public class PagePedidos extends PageBase {
 		return (state(Present, By.xpath(XPATH_MAIN_FORM)).check());
 	}
 
-	public boolean isInvisibleCapaLoadingUntil(int maxSeconds) {
-		return (state(Invisible, By.xpath(XPATH_CAPA_LOADING)).wait(maxSeconds).check());
+	public boolean isInvisibleCapaLoadingUntil(int seconds) {
+		return (state(Invisible, By.xpath(XPATH_CAPA_LOADING)).wait(seconds).check());
 	}
 
 	public int getNumLineas() {
@@ -129,9 +129,9 @@ public class PagePedidos extends PageBase {
 		click(By.xpath(xpath), driver).exec();
 	}
 
-	public boolean isPresentDataInPedido(IdColumn idColumn, String data, TypeDetalle typeDetalle, int maxSeconds) {
+	public boolean isPresentDataInPedido(IdColumn idColumn, String data, TypeDetalle typeDetalle, int seconds) {
 		String xpath = getXPathDataPedidoInLineas(idColumn, data, typeDetalle);
-		return (state(Present, By.xpath(xpath)).wait(maxSeconds).check());
+		return (state(Present, By.xpath(xpath)).wait(seconds).check());
 	}
 
 	public String getCodigoPedidoUsuarioRegistrado(int posicionPedidoActual) {

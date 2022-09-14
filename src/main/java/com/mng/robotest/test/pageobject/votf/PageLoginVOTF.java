@@ -10,7 +10,7 @@ public class PageLoginVOTF extends PageBase {
 	private static final String XPATH_BUTTON_CONTINUE = "//input[@class[contains(.,'button submit')]]";
 	
 	public void goToFromUrlAndSetTestABs() throws Exception {	
-		waitForPageLoaded(driver);
+		waitLoadPage();
 		activateTestsABs();
 	}
 	

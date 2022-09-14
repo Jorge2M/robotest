@@ -8,8 +8,6 @@ import java.util.Optional;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
-import org.openqa.selenium.By;
-
 import com.mng.robotest.domains.seo.beans.Sitemapindex;
 import com.mng.robotest.domains.transversal.PageBase;
 

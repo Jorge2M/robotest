@@ -10,7 +10,7 @@ import com.mng.robotest.test.data.Talla;
 
 public interface SSecSelTallasFicha {
 
-	public boolean isSectionUntil(int maxSeconds);
+	public boolean isSectionUntil(int seconds);
 	public int getNumOptionsTallas();
 	public int getNumOptionsTallasNoDisponibles();
 	public boolean isTallaAvailable(String talla);
@@ -22,8 +22,8 @@ public interface SSecSelTallasFicha {
 	public String getTallaAlfSelected(AppEcom app);
 	public String getTallaAlf(int posicion);
 	public String getTallaCodNum(int posicion);
-	public boolean isVisibleSelectorTallasUntil(int maxSeconds);
-	public boolean isVisibleListTallasForSelectUntil(int maxSeconds);
+	public boolean isVisibleSelectorTallasUntil(int seconds);
+	public boolean isVisibleListTallasForSelectUntil(int seconds);
 	
 	public static SSecSelTallasFicha make(TypeFicha typeFicha, Channel channel, AppEcom app) {
 		if (typeFicha==TypeFicha.OLD) {

@@ -32,12 +32,12 @@ public class MenusUserWrapper extends PageBase {
 		return (isMenuInStateUntil(menu, state, 0));
 	}
 	
-	public boolean isMenuInStateUntil(UserMenu menu, State state, int maxSeconds) {
+	public boolean isMenuInStateUntil(UserMenu menu, State state, int seconds) {
 		if (menu==UserMenu.bolsa) {
-			return (secCabecera.isInStateIconoBolsa(state, maxSeconds));
+			return (secCabecera.isInStateIconoBolsa(state, seconds));
 		} else {
 			MenuUserItem menuUserItem = new MenuUserItem(menu, channel, app);
-			return (isMenuInStateUntil(menuUserItem, state, maxSeconds));
+			return (isMenuInStateUntil(menuUserItem, state, seconds));
 		}
 	}
 	
@@ -65,7 +65,7 @@ public class MenusUserWrapper extends PageBase {
 		} else {
 			isMenuInStateUntil(menu, State.Visible, 2);
 			MenuUserItem menuUserItem = new MenuUserItem(menu, channel, app);
-			moveToElement(menuUserItem.getLink().getBy(channel, app), driver);
+			moveToElement(menuUserItem.getLink().getBy(channel, app));
 		}
 	}
 	
@@ -94,17 +94,17 @@ public class MenusUserWrapper extends PageBase {
 		}
 	}
 
-	private boolean isMenuInStateUntil(MenuUserItem menu, State state, int maxSeconds) {
+	private boolean isMenuInStateUntil(MenuUserItem menu, State state, int seconds) {
 		ElementPage menuLink = menu.getLink();
 		switch (menu.getType()) {
 			case IconoCabeceraShop_DesktopMobile:
-				return (secCabecera.getShop_DesktopMobile().isIconoInStateUntil((IconoCabeceraShop_DesktopMobile)menuLink, state, maxSeconds));
+				return (secCabecera.getShop_DesktopMobile().isIconoInStateUntil((IconoCabeceraShop_DesktopMobile)menuLink, state, seconds));
 			case MenuUserDesktop:
-				return (secCabecera.getShop_DesktopMobile().getModalUserSesionDesktop().isMenuInStateUntil((MenuUserDesktop)menuLink, state, maxSeconds));
+				return (secCabecera.getShop_DesktopMobile().getModalUserSesionDesktop().isMenuInStateUntil((MenuUserDesktop)menuLink, state, seconds));
 			case MenuUserDevice:
-				return (secMenuLateralMobil.getUserMenu().isMenuInStateUntil((MenuUserDevice)menuLink, state, maxSeconds));
+				return (secMenuLateralMobil.getUserMenu().isMenuInStateUntil((MenuUserDevice)menuLink, state, seconds));
 			case IconoCabOutletMobil:
-				return (secCabecera.getOutletMobil().isElementInStateUntil((IconoCabOutletMobil)menuLink, state, maxSeconds));
+				return (secCabecera.getOutletMobil().isElementInStateUntil((IconoCabOutletMobil)menuLink, state, seconds));
 			default:
 				return false;
 		}
@@ -129,11 +129,11 @@ public class MenusUserWrapper extends PageBase {
 		}
 	}
 	
-	public LoyaltyData checkAndGetLoyaltyPointsUntil(int maxSeconds) throws Exception {
+	public LoyaltyData checkAndGetLoyaltyPointsUntil(int seconds) throws Exception {
 		//TODO Workarround for manage shadow-dom Elements. Remove when WebDriver supports shadow-dom
 		LoyaltyData loyaltyData = new LoyaltyData(false, 0);
 		By byLoyaltyUserMenu = By.tagName("loyalty-user-menu");
-		for (int i=0; i<maxSeconds; i++) {
+		for (int i=0; i<seconds; i++) {
 			WebElement blockLoyalty = getElementVisible(driver, byLoyaltyUserMenu);
 			if (blockLoyalty!=null) {
 				//if (WebdrvWrapp.isElementPresent(driver, byLoyaltyUserMenu)) {

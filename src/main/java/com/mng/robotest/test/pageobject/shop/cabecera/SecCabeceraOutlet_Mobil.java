@@ -38,8 +38,8 @@ public class SecCabeceraOutlet_Mobil extends SecCabecera {
 	}
 	
 	@Override
-	public boolean isInStateIconoBolsa(State state, int maxSeconds) {
-		return (isElementInStateUntil(IconoCabOutletMobil.BOLSA, state, maxSeconds));
+	public boolean isInStateIconoBolsa(State state, int seconds) {
+		return (isElementInStateUntil(IconoCabOutletMobil.BOLSA, state, seconds));
 	}
 	
 	@Override
@@ -48,8 +48,8 @@ public class SecCabeceraOutlet_Mobil extends SecCabecera {
 	}
 	
 	@Override
-	public void clickIconoBolsaWhenDisp(int maxSecondsToWait) {
-		clickIfClickableUntil(IconoCabOutletMobil.BOLSA, maxSecondsToWait);
+	public void clickIconoBolsaWhenDisp(int secondsToWait) {
+		clickIfClickableUntil(IconoCabOutletMobil.BOLSA, secondsToWait);
 	}
 	
 	@Override
@@ -57,16 +57,16 @@ public class SecCabeceraOutlet_Mobil extends SecCabecera {
 		hoverIcono(IconoCabOutletMobil.BOLSA);
 	}
 	
-	public boolean isElementInStateUntil(IconoCabOutletMobil icono, State state, int maxSeconds) {
-		return (state(state, icono.getBy()).wait(maxSeconds).check());
+	public boolean isElementInStateUntil(IconoCabOutletMobil icono, State state, int seconds) {
+		return (state(state, icono.getBy()).wait(seconds).check());
 	}
 
-	 public boolean isClickableUntil(IconoCabOutletMobil icono, int maxSeconds) {
-		return (state(Clickable, icono.getBy()).wait(maxSeconds).check());
+	 public boolean isClickableUntil(IconoCabOutletMobil icono, int seconds) {
+		return (state(Clickable, icono.getBy()).wait(seconds).check());
 	}
 
-	public void clickIfClickableUntil(IconoCabOutletMobil icono, int maxSecondsToWait) {
-		if (isClickableUntil(icono, maxSecondsToWait)) {
+	public void clickIfClickableUntil(IconoCabOutletMobil icono, int secondsToWait) {
+		if (isClickableUntil(icono, secondsToWait)) {
 			click(icono);
 		}
 	}
@@ -80,6 +80,6 @@ public class SecCabeceraOutlet_Mobil extends SecCabecera {
 	}
 
 	public void hoverIcono(IconoCabOutletMobil icono) {
-		moveToElement(icono.getBy(), driver);
+		moveToElement(icono.getBy());
 	}
 }

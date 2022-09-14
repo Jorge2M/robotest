@@ -1,11 +1,8 @@
 package com.mng.robotest.domains.footer.pageobjects;
 
-import org.openqa.selenium.By;
-
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class PageNotasPrensa extends PageBase implements PageFromFooter {
 	
@@ -17,7 +14,7 @@ public class PageNotasPrensa extends PageBase implements PageFromFooter {
 	}
 	
 	@Override
-	public boolean isPageCorrectUntil(int maxSeconds) {
-		return state(Present, XPATH_FOR_IDPAGE).wait(maxSeconds).check();
+	public boolean isPageCorrectUntil(int seconds) {
+		return state(Present, XPATH_FOR_IDPAGE).wait(seconds).check();
 	}
 }

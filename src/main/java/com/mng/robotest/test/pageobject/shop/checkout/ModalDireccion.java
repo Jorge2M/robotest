@@ -4,12 +4,11 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.checkout.DataDireccion.DataDirType;
 
@@ -84,21 +83,24 @@ public abstract class ModalDireccion extends PageBase {
 	}
 	
 	public void selectPoblacion(String poblacion, String xpathFormModal) throws Exception {
-		new WebDriverWait(driver, 2).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathFormModal + XPATH_SELECT_POBLACION)));
-		Thread.sleep(1000);
-		new Select(getElement(xpathFormModal + XPATH_SELECT_POBLACION)).selectByValue(poblacion);
+		String xpath = xpathFormModal + XPATH_SELECT_POBLACION;
+		state(State.Visible, xpath).wait(2).check();
+		waitMillis(1000);
+		new Select(getElement(xpath)).selectByValue(poblacion);
 	}
 	
 	public void selectProvincia(String provincia, String xpathFormModal) {
-		new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(By.xpath(xpathFormModal + XPATH_SELECT_PROVINCIA)));
-		new Select(getElement(xpathFormModal + XPATH_SELECT_PROVINCIA)).selectByVisibleText(provincia);
+		String xpath = xpathFormModal + XPATH_SELECT_PROVINCIA;
+		state(State.Clickable, xpath).wait(2).check();
+		new Select(getElement(xpath)).selectByVisibleText(provincia);
 	}
 
 	public void selectPais(String codigoPais, String xpathFormModal) {
 		String xpathSelectedPais = XPATH_SELECT_PAIS + "/option[@selected='selected' and @value='" + codigoPais + "']";
-		if (!state(Present, By.xpath(xpathSelectedPais), driver).check()) {
-			new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(By.xpath(xpathFormModal + XPATH_SELECT_PAIS)));
-			new Select(getElement(xpathFormModal + XPATH_SELECT_PAIS)).selectByValue(codigoPais);
+		if (!state(Present, xpathSelectedPais).check()) {
+			String xpath = xpathFormModal + XPATH_SELECT_PAIS;
+			state(State.Clickable, xpath).wait(2).check();
+			new Select(getElement(xpath)).selectByValue(codigoPais);
 		}
 	}
 

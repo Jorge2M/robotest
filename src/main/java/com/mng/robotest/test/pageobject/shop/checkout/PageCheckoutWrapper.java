@@ -1,6 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.checkout;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
@@ -39,11 +38,11 @@ public class PageCheckoutWrapper extends PageBase {
 		return secTarjetaPci;
 	}
 	
-	public boolean isFirstPageUntil(int maxSecondsToWait) {
+	public boolean isFirstPageUntil(int secondsToWait) {
 		if (channel==Channel.mobile) {
-			return (page1MobilCheckout.isVisibleLink1EnvioUntil(maxSecondsToWait));
+			return (page1MobilCheckout.isVisibleLink1EnvioUntil(secondsToWait));
 		}
-		return (page1DktopCheckout.isPageUntil(maxSecondsToWait));	
+		return (page1DktopCheckout.isPageUntil(secondsToWait));	
 	}
 	
 	public void inputNumberPci(String numtarj) {
@@ -87,11 +86,11 @@ public class PageCheckoutWrapper extends PageBase {
 		}
 	}
 	
-	public boolean isPresentInputApellidoPromoEmplUntil(int maxSecondsToWait) {
+	public boolean isPresentInputApellidoPromoEmplUntil(int secondsToWait) {
 		if (channel==Channel.mobile) {
-			return (page1MobilCheckout.isPresentInputApellidoPromoEmplUntil(maxSecondsToWait));
+			return (page1MobilCheckout.isPresentInputApellidoPromoEmplUntil(secondsToWait));
 		}
-		return (page1DktopCheckout.isPresentInputApellidoPromoEmplUntil(maxSecondsToWait));
+		return (page1DktopCheckout.isPresentInputApellidoPromoEmplUntil(secondsToWait));
 	}
 	
 	public boolean isPresentInputDNIPromoEmpl() {
@@ -124,25 +123,23 @@ public class PageCheckoutWrapper extends PageBase {
 		}
 	}	
 
-	private static final String XpathButtonForApplyLoyaltyPoints = "//button[@class[contains(.,'redeem-likes')] and @type='button']";
+	private static final String XPATH_BUTTON_FOR_APPLY_LOYALTY_POINTS = "//button[@class[contains(.,'redeem-likes')] and @type='button']";
 	public boolean isVisibleButtonForApplyLoyaltyPoints() {
-		return (state(Visible, By.xpath(XpathButtonForApplyLoyaltyPoints)).wait(2).check());
+		return (state(Visible, XPATH_BUTTON_FOR_APPLY_LOYALTY_POINTS).wait(2).check());
 	}
 
 	public float applyAndGetLoyaltyPoints() {
-		By byApplyButton = By.xpath(XpathButtonForApplyLoyaltyPoints);
-		WebElement buttonLoyalty = getElementsVisible(driver, byApplyButton).get(0);
+		WebElement buttonLoyalty = getElementsVisible(XPATH_BUTTON_FOR_APPLY_LOYALTY_POINTS).get(0);
 		String textButtonApply = buttonLoyalty.getAttribute("innerHTML");
 		String importeButton = ImporteScreen.normalizeImportFromScreen(textButtonApply);
-		click(XpathButtonForApplyLoyaltyPoints).exec();
+		click(XPATH_BUTTON_FOR_APPLY_LOYALTY_POINTS).exec();
 		isNoDivLoadingUntil(1);
 		return (ImporteScreen.getFloatFromImporteMangoScreen(importeButton));
 	}
 
 	public float getDiscountLoyaltyAppliedMobil() {
-		By byDiscountApplied = By.xpath(XPATH_DISCOUNT_LOYALTY_APPLIED_MOBIL);
-		if (state(Visible, byDiscountApplied).check()) {
-			String discountApplied = driver.findElement(byDiscountApplied).getAttribute("innerHTML");
+		if (state(Visible, XPATH_DISCOUNT_LOYALTY_APPLIED_MOBIL).check()) {
+			String discountApplied = getElement(XPATH_DISCOUNT_LOYALTY_APPLIED_MOBIL).getAttribute("innerHTML");
 			return (ImporteScreen.getFloatFromImporteMangoScreen(discountApplied));
 		}	
 		return 0;
@@ -352,11 +349,11 @@ public class PageCheckoutWrapper extends PageBase {
 		}
 	}
 	
-	public boolean isVisibleBloquePagoNoTRJIntegradaUntil(Pago pago, int maxSecondsToWait) {
+	public boolean isVisibleBloquePagoNoTRJIntegradaUntil(Pago pago, int secondsToWait) {
 		if (channel==Channel.mobile) {
-			return (page2MobilCheckout.isVisibleTextoBajoPagoUntil(pago, maxSecondsToWait));
+			return (page2MobilCheckout.isVisibleTextoBajoPagoUntil(pago, secondsToWait));
 		}
-		return (page1DktopCheckout.isVisibleBloquePagoNoTRJIntegradaUntil(pago, maxSecondsToWait));
+		return (page1DktopCheckout.isVisibleBloquePagoNoTRJIntegradaUntil(pago, secondsToWait));
 	}
 	
 	public String getTextDireccionEnvioCompleta() {

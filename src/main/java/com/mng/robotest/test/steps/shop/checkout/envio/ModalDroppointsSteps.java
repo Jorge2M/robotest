@@ -19,14 +19,14 @@ public class ModalDroppointsSteps extends StepBase {
 	@Validation
 	public ChecksTM validaIsVisible() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 3;
+		int seconds = 3;
 	  	checks.add(
-			"Desaparece el mensaje de \"Cargando...\" (lo esperamos hasta " + maxSeconds + " segundos)",
-			modalDroppoints.isInvisibleCargandoMsgUntil(maxSeconds), State.Warn);
+			"Desaparece el mensaje de \"Cargando...\" (lo esperamos hasta " + seconds + " segundos)",
+			modalDroppoints.isInvisibleCargandoMsgUntil(seconds), State.Warn);
 	  	
 	  	checks.add(
-			"Aparece un 1er Droppoint visible (lo esperamos hasta " + maxSeconds + " segundos)",
-			modalDroppoints.isDroppointVisibleUntil(1, maxSeconds), State.Info);
+			"Aparece un 1er Droppoint visible (lo esperamos hasta " + seconds + " segundos)",
+			modalDroppoints.isDroppointVisibleUntil(1, seconds), State.Info);
 	  	
 	  	checks.add(
 			"Sí aparece el modal con el mapa de Droppoints",

@@ -18,9 +18,9 @@ public class PageRegistroNinosOutlet extends PageBase {
 	private static final String XPATH_BOTON_CONTINUAR = 
 		"//div[@class[contains(.,'registerStepsModal')]]//div[@class='submitContent']//input[@type='submit']";
 	
-	public boolean isPageUntil(int maxSeconds) {
+	public boolean isPageUntil(int seconds) {
 		String xpath = "//form[@id[contains(.,'cfKids')]]";
-		return state(Present, xpath).wait(maxSeconds).check();
+		return state(Present, xpath).wait(seconds).check();
 	}
 	
 	public int getNumInputsNameNino() {

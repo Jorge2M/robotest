@@ -1,11 +1,9 @@
 package com.mng.robotest.test.pageobject.shop.checkout;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.transversal.PageBase;
-
 
 public class SecDireccionEnvioDesktop extends PageBase {
 
@@ -52,13 +50,12 @@ public class SecDireccionEnvioDesktop extends PageBase {
 	}
 	
 	private boolean isNewSection() {
-		By bySectionNew = By.xpath(XPath.SECTION.getXPathNew());
-		return state(State.Visible, bySectionNew).check();
+		return state(State.Visible, XPath.SECTION.getXPathNew()).check();
 	}
 	
 	public void clickEditDireccion() {
-		waitForPageLoaded(driver); //For avoid StaleElementReferenceException
-		click(By.xpath(getXPath(XPath.EDIT_DIRECCION_BUTTON))).exec();
+		waitLoadPage(); //For avoid StaleElementReferenceException
+		click(getXPath(XPath.EDIT_DIRECCION_BUTTON)).exec();
 	}
 
 	public String getTextNombreEnvio() {
@@ -73,11 +70,11 @@ public class SecDireccionEnvioDesktop extends PageBase {
 			}
 			return "";
 		}
-		if (state(State.Present, By.xpath(XPATH_DIRECCION_ENVIO_OLD)).check()) {
+		if (state(State.Present, XPATH_DIRECCION_ENVIO_OLD).check()) {
 			return (
-				driver.findElement(By.xpath(XPATH_DIRECCION_ENVIO_OLD)).getText() + ", " +
-				driver.findElement(By.xpath(XPATH_POBLACION_ENVIO_OLD)).getText() + ", " +
-				driver.findElement(By.xpath(XPATH_PROVINCIA_ENVIO_OLD)).getText());
+				getElement(XPATH_DIRECCION_ENVIO_OLD).getText() + ", " +
+				getElement(XPATH_POBLACION_ENVIO_OLD).getText() + ", " +
+				getElement(XPATH_PROVINCIA_ENVIO_OLD).getText());
 		}
 		return "";
 	}

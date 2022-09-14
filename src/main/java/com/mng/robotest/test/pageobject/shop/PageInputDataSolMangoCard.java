@@ -25,8 +25,8 @@ public class PageInputDataSolMangoCard extends PageBase {
 	private static final String XPATH_MODALIDAD_PAGO_PAGE2 = "//a[@data-i18n[contains(.,'modalidadpago')]]";
 	private static final String XPATH_BUTTON_CONTINUAR_PAGE2 = "//button[@id='in-continuar']";
 
-	public boolean isPresentBotonContinuarModalUntil(int maxSecondsToWait) {
-		return (state(Present, XPATH_BOTON_CONTINUAR_MODAL).wait(maxSecondsToWait).check());
+	public boolean isPresentBotonContinuarModalUntil(int secondsToWait) {
+		return (state(Present, XPATH_BOTON_CONTINUAR_MODAL).wait(secondsToWait).check());
 	}
 
 	public void clickBotonCerrarModal() {

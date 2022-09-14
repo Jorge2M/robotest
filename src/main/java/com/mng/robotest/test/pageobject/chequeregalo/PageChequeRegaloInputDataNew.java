@@ -91,8 +91,8 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 		click(ConsultaSaldo.IR.getBy()).exec();
 	}
 	
-	public boolean isInputTarjetaVisible(int maxSeconds) {
-		return state(Visible, ConsultaSaldo.NUMERO_TARJETA.getBy()).wait(maxSeconds).check();
+	public boolean isInputTarjetaVisible(int seconds) {
+		return state(Visible, ConsultaSaldo.NUMERO_TARJETA.getBy()).wait(seconds).check();
 	}
 	
 	public void introducirTarjetaConsultaSaldo(String numTarjeta) {
@@ -106,8 +106,8 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 		click(ConsultaSaldo.VALIDAR.getBy()).exec();
 	}
 	
-	public boolean isVisibleCvv(int maxSeconds) {
-		return state(Visible, ConsultaSaldo.VALIDAR.getBy()).wait(maxSeconds).check();
+	public boolean isVisibleCvv(int seconds) {
+		return state(Visible, ConsultaSaldo.VALIDAR.getBy()).wait(seconds).check();
 	}
 	
 	public void introducirCvc(String cvvNumber) throws Exception {
@@ -117,8 +117,8 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 		click(ConsultaSaldo.VALIDAR.getBy()).waitLoadPage(3).exec();
 	}
 	
-	public boolean isTarjetaWithoutSaldo(int maxSeconds) {
-		return state(Present, ConsultaSaldo.MENSAJE_TARJETA_SIN_SALDO.getBy()).wait(maxSeconds).check();
+	public boolean isTarjetaWithoutSaldo(int seconds) {
+		return state(Present, ConsultaSaldo.MENSAJE_TARJETA_SIN_SALDO.getBy()).wait(seconds).check();
 	}
 	
 	public void clickBotonVolver() {
@@ -126,8 +126,8 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 	}
 	
 	@Override
-	public boolean isPageCorrectUntil(int maxSeconds) {
-		return (state(Present, ElementCheque.PAGINA_FORM.getBy()).wait(maxSeconds).check());
+	public boolean isPageCorrectUntil(int seconds) {
+		return (state(Present, ElementCheque.PAGINA_FORM.getBy()).wait(seconds).check());
 	}
 	
 	@Override
@@ -141,8 +141,8 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 	}
 	
 	@Override
-	public boolean isVisibleDataInput(int maxSeconds) {
-		return state(Present, InputCheque.DATA_PROOF.getBy()).wait(maxSeconds).check();
+	public boolean isVisibleDataInput(int seconds) {
+		return state(Present, InputCheque.DATA_PROOF.getBy()).wait(seconds).check();
 	}
 	
 	@Override
@@ -184,7 +184,7 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 	public boolean isPresentInputImportes() {
 		for (Importe importe : Importe.values()) {
 			String xpathRadio = getXPathRadioImporte(importe);
-			if (!state(Present, By.xpath(xpathRadio)).check()) {
+			if (!state(Present, xpathRadio).check()) {
 				return false;
 			}
 		}

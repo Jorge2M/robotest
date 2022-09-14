@@ -48,9 +48,9 @@ public class PageLoginMantoSteps {
 	}
 
 	@Validation (
-		description="Aparece la página de selección de la tienda (la esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece la página de selección de la tienda (la esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	private static boolean checkIsPageSelectTienda(int maxSeconds, WebDriver driver) {
-		return (PageSelTda.isPage(maxSeconds, driver));
+	private static boolean checkIsPageSelectTienda(int seconds, WebDriver driver) {
+		return (PageSelTda.isPage(seconds, driver));
 	}
 }

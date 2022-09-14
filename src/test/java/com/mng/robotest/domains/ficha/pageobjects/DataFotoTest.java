@@ -4,14 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.mng.robotest.domains.ficha.pageobjects.DataFoto;
-import com.mng.robotest.domains.ficha.pageobjects.TipoImagenProducto;
-
-
 public class DataFotoTest {
 
-    static final String tagTemporada = "#temporada#";
-    static final String tagSize = "#size#";
+    static final String TAG_TEMPORADA = "#temporada#";
+    static final String TAG_SIZE = "#size#";
     
     @Test
     public void testFixedFotosObtainedFromFicha() {
@@ -62,10 +58,10 @@ public class DataFotoTest {
         for (TipoImagenProducto tipo : TipoImagenProducto.values()) {
             String srcFoto = getSrcFotoFromEnum(tipo, temporada, size, referencia, color);
             DataFoto dataFoto = new DataFoto(srcFoto);
-            if (dataFoto.srcFoto.contains(tagTemporada))
+            if (dataFoto.srcFoto.contains(TAG_TEMPORADA))
                 assertEquals("Validation Temporada in " + tipo, temporada, dataFoto.temporada);
             
-            if (dataFoto.srcFoto.contains(tagSize))
+            if (dataFoto.srcFoto.contains(TAG_SIZE))
                 assertEquals("Validation Size in " + tipo, size, dataFoto.size);
             
             assertEquals("Validation Referencia in " + tipo, referencia, dataFoto.referencia);
@@ -75,8 +71,8 @@ public class DataFotoTest {
     
     private String getSrcFotoFromEnum(TipoImagenProducto tipoImagenProd, String temporada, String size, String referencia, String color) {
         String urlFoto = tipoImagenProd.getDirectorio();
-        urlFoto = urlFoto.replace(tagTemporada, temporada);
-        urlFoto = urlFoto.replace(tagSize, "S" + size);
+        urlFoto = urlFoto.replace(TAG_TEMPORADA, temporada);
+        urlFoto = urlFoto.replace(TAG_SIZE, "S" + size);
         urlFoto = urlFoto + referencia + "_" + color;
         if ("".compareTo(tipoImagenProd.getSufijo())!=0)
             urlFoto = urlFoto + "_" + tipoImagenProd.getSufijo();

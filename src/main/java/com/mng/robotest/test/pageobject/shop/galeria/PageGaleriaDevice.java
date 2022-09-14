@@ -144,10 +144,10 @@ public class PageGaleriaDevice extends PageGaleria {
 	
 	@Override
 	public WebElement getImagenElementArticulo(WebElement articulo) {
-		moveToElement(articulo, driver);
+		moveToElement(articulo);
 		By byImg = By.xpath("." + XPATH_IMG_RELATIVE_ARTICLE);
 		if (state(Present, articulo).by(byImg).wait(3).check()) {
-			return (articulo.findElement(byImg));
+			return getElement(byImg);
 		}
 		return null;
 	}
@@ -177,7 +177,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	
 	@Override
 	public ArticuloScreen getArticuloObject(int numArticulo) throws Exception {
-		WebElement artWElem = driver.findElements(By.xpath(xpathArticuloBase)).get(numArticulo-1);
+		WebElement artWElem = getElements(xpathArticuloBase).get(numArticulo-1);
 		ArticuloScreen articulo = new ArticuloScreen();
 		articulo.setReferencia(getRefArticulo(artWElem));
 		articulo.setNombre(getNombreArticulo(artWElem));
@@ -240,9 +240,9 @@ public class PageGaleriaDevice extends PageGaleria {
 	}
 	
 	@Override
-	public boolean isArticleWithHearthIconPresentUntil(int posArticle, int maxSeconds) {
+	public boolean isArticleWithHearthIconPresentUntil(int posArticle, int seconds) {
 		String xpathIcon = getXPathArticleHearthIcon(posArticle);
-		return state(Present, xpathIcon).wait(maxSeconds).check();
+		return state(Present, xpathIcon).wait(seconds).check();
 	}
 	
 	@Override
@@ -250,18 +250,18 @@ public class PageGaleriaDevice extends PageGaleria {
 		//Nos posicionamos en el icono del Hearth 
 		String xpathIcon = getXPathArticleHearthIcon(posArticle);
 		WebElement hearthIcon = getElement(xpathIcon);
-		moveToElement(hearthIcon, driver);
+		moveToElement(hearthIcon);
 		
 		//Clicamos y esperamos a que el icono cambie de estado
 		StateFavorito estadoInicial = getStateHearthIcon(hearthIcon);
 		clickHearthIconPreventingOverlapping(hearthIcon);
-		int maxSecondsToWait = 2;
+		int secondsToWait = 2;
 		switch (estadoInicial) {
 		case MARCADO:
-			waitToHearthIconInState(hearthIcon, StateFavorito.DESMARCADO, maxSecondsToWait);
+			waitToHearthIconInState(hearthIcon, StateFavorito.DESMARCADO, secondsToWait);
 			break;
 		case DESMARCADO:
-			waitToHearthIconInState(hearthIcon, StateFavorito.MARCADO, maxSecondsToWait);
+			waitToHearthIconInState(hearthIcon, StateFavorito.MARCADO, secondsToWait);
 			break;
 		default:
 			break;
@@ -298,9 +298,9 @@ public class PageGaleriaDevice extends PageGaleria {
 	}
 
 	@Override
-	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSeconds) {
+	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds) {
 		String xpathCapa = getXPathArticleCapaTallas(posArticulo);
-		return state(Visible, xpathCapa).wait(maxSeconds).check();
+		return state(Visible, xpathCapa).wait(seconds).check();
 	}
 	
 	private String getXPathTallaAvailableArticle(int posArticulo, int posTalla) {
@@ -311,7 +311,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	@Override
 	public ArticuloScreen selectTallaAvailableArticle(int posArticulo, int posTalla) throws Exception {
 		//Si no está visible la capa de tallas ejecutamos los pasos necesarios para hacer la visible 
-		if (!isVisibleArticleCapaTallasUntil(posArticulo, 0/*maxSecondsToWait*/)) {
+		if (!isVisibleArticleCapaTallasUntil(posArticulo, 0/*secondsToWait*/)) {
 			showTallasArticulo(posArticulo);
 		}
 		
@@ -333,7 +333,7 @@ public class PageGaleriaDevice extends PageGaleria {
 
 	@Override
 	public void clickHearthIcon(WebElement hearthIcon) throws Exception {
-		moveToElement(hearthIcon, driver);
+		moveToElement(hearthIcon);
 		state(Clickable, hearthIcon).wait(1).check();
 		hearthIcon.click();
 	}

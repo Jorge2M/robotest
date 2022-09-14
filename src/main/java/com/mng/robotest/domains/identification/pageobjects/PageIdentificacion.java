@@ -25,8 +25,8 @@ public class PageIdentificacion extends PageBase {
 	private static final String XPATH_INPUT_PASSWORD = "//input[@id[contains(.,'chkPwd')]]";
 	private static final String XPATH_SUBMIT_BUTTON = "//div[@class='submitContent']/input[@type='submit']";
 
-	public boolean isVisibleUserUntil(int maxSeconds) {
-		return state(Visible, XPATH_INPUT_USER).wait(maxSeconds).check();
+	public boolean isVisibleUserUntil(int seconds) {
+		return state(Visible, XPATH_INPUT_USER).wait(seconds).check();
 	}
 
 	public String getLiteralAvisiCredencialesKO() {

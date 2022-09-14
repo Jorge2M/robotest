@@ -146,10 +146,10 @@ public class PageGaleriaSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece la capa con la información de las tallas (la esperamos hasta #{maxSeconds} segundos",
+		description="Aparece la capa con la información de las tallas (la esperamos hasta #{seconds} segundos",
 		level=State.Warn)
-	private boolean checkIsVisibleCapaInfoTallas(int posArticulo, int maxSeconds) {
-		return pageGaleria.isVisibleArticleCapaTallasUntil(posArticulo, maxSeconds);
+	private boolean checkIsVisibleCapaInfoTallas(int posArticulo, int seconds) {
+		return pageGaleria.isVisibleArticleCapaTallasUntil(posArticulo, seconds);
 	}
 
 	@Step (
@@ -350,10 +350,10 @@ public class PageGaleriaSteps extends StepBase {
 			pageGaleria.isClickableArticuloUntil(1, 0), State.Warn);
 	  	
 		SecFiltros secFiltros = SecFiltros.make(channel, app);
-		int maxSeconds = 2;
+		int seconds = 2;
 	  	checks.add(
-			"Es clickable el bloque de filtros (esperamos hasta " + maxSeconds + " segundos)",
-			secFiltros.isClickableFiltroUntil(maxSeconds), State.Warn);
+			"Es clickable el bloque de filtros (esperamos hasta " + seconds + " segundos)",
+			secFiltros.isClickableFiltroUntil(seconds), State.Warn);
 	  	
 	  	return checks;
 	}
@@ -496,8 +496,8 @@ public class PageGaleriaSteps extends StepBase {
 		step.replaceInDescription(tagPrecio1erArt, precio1erArt);
 		
 		pageGaleria.clickArticulo(articuloColores);
-		int maxSeconds = 3;
-		checkIsFichaArticle(nombre1erArt, precio1erArt, maxSeconds);
+		int seconds = 3;
+		checkIsFichaArticle(nombre1erArt, precio1erArt, seconds);
 
 		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(
@@ -507,13 +507,13 @@ public class PageGaleriaSteps extends StepBase {
    
    	@SuppressWarnings("static-access")
 	@Validation
-	private ChecksTM checkIsFichaArticle(String nombre1erArt, String precio1erArt, int maxSeconds) {
+	private ChecksTM checkIsFichaArticle(String nombre1erArt, String precio1erArt, int seconds) {
 		ChecksTM checks = ChecksTM.getNew();
 		
 		PageFicha pageFicha = PageFicha.of(channel);
 	  	checks.add(
-			"Aparece la página de ficha (la esperamos hasta " + maxSeconds + " segundos)",
-			pageFicha.isPageUntil(maxSeconds), State.Warn);
+			"Aparece la página de ficha (la esperamos hasta " + seconds + " segundos)",
+			pageFicha.isPageUntil(seconds), State.Warn);
 	  	
 		String nombreArtFicha = pageFicha.getSecDataProduct().getTituloArt();
 		String precioArtFicha = pageFicha.getSecDataProduct().getPrecioFinalArticulo();
@@ -557,10 +557,10 @@ public class PageGaleriaSteps extends StepBase {
 	}
    
 	@Validation (
-		description="Aparece una página con artículos (la esperamos #{maxSeconds} segundos)",
+		description="Aparece una página con artículos (la esperamos #{seconds} segundos)",
 		level=State.Warn)
-	public boolean validaArtEnContenido(int maxSeconds) {
-		return (pageGaleria.isVisibleArticleUntil(1, maxSeconds));
+	public boolean validaArtEnContenido(int seconds) {
+		return (pageGaleria.isVisibleArticleUntil(1, seconds));
 	}   
    
 	static final String tagEstadoFinal = "@TagEstadoFinal";
@@ -832,11 +832,11 @@ public class PageGaleriaSteps extends StepBase {
 	private static ChecksTM checkAfterClickInfoRebajas(WebDriver driver) {
 		ChecksTM checks = ChecksTM.getNew();
 		SecBannerHeadGallery secBannerHead = new PageGaleriaDesktop().getSecBannerHead();
-		int maxSecondsToWait = 1;
+		int secondsToWait = 1;
 		checks.add(
 			"<b style=\"color:blue\">Rebajas</b></br>" +
-			"Se despliega la información relativa a las rebajas (lo esperamos hasta " + maxSecondsToWait + " segundos)",
-			secBannerHead.isVisibleInfoRebajasUntil(maxSecondsToWait), State.Warn);
+			"Se despliega la información relativa a las rebajas (lo esperamos hasta " + secondsToWait + " segundos)",
+			secBannerHead.isVisibleInfoRebajasUntil(secondsToWait), State.Warn);
 		
 		checks.add(
 			"Aparece el link de <b>Menos info</b>",
@@ -848,16 +848,16 @@ public class PageGaleriaSteps extends StepBase {
 	@Validation
 	public ChecksTM validateGaleriaAfeterSelectMenu() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSecondsToWaitArticle = 8;
-		int maxSecondsToWaitIcon = 2;
+		int secondsToWaitArticle = 8;
+		int secondsToWaitIcon = 2;
 		checks.add (
-			"Como mínimo se obtiene un artículo (lo esperamos hasta " + maxSecondsToWaitArticle + " segundos)",
-			pageGaleria.isVisibleArticleUntil(1, maxSecondsToWaitArticle), State.Warn);
+			"Como mínimo se obtiene un artículo (lo esperamos hasta " + secondsToWaitArticle + " segundos)",
+			pageGaleria.isVisibleArticleUntil(1, secondsToWaitArticle), State.Warn);
 		
 		if (app==AppEcom.shop) {
 			checks.add (
-				"El 1er artículo tiene 1 icono de favorito asociado (lo esperamos hasta " + maxSecondsToWaitIcon + " segundos)",
-				pageGaleria.isArticleWithHearthIconPresentUntil(1, maxSecondsToWaitIcon), State.Warn);
+				"El 1er artículo tiene 1 icono de favorito asociado (lo esperamos hasta " + secondsToWaitIcon + " segundos)",
+				pageGaleria.isArticleWithHearthIconPresentUntil(1, secondsToWaitIcon), State.Warn);
 			
 			checks.add (
 		        Check.make(

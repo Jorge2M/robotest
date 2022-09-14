@@ -59,10 +59,10 @@ public class SecMenuLateralMobilSteps extends StepBase {
 	private ChecksTM checkGaleriaAfterSelectNuevo() {
 		ChecksTM checks = ChecksTM.getNew();
 		PageGaleria pageGaleria = PageGaleria.getNew(channel);
-		int maxSeconds = 3;
+		int seconds = 3;
 		checks.add(
-			"Aparece algún artículo (esperamos " + maxSeconds + " segundos)",
-			pageGaleria.isVisibleArticleUntil(1, maxSeconds), State.Warn);
+			"Aparece algún artículo (esperamos " + seconds + " segundos)",
+			pageGaleria.isVisibleArticleUntil(1, seconds), State.Warn);
 
 		return checks;   
 	}

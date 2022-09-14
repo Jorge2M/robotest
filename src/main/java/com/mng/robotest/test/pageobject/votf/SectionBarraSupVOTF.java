@@ -1,12 +1,10 @@
 package com.mng.robotest.test.pageobject.votf;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class SectionBarraSupVOTF extends PageBase {
 
@@ -20,8 +18,8 @@ public class SectionBarraSupVOTF extends PageBase {
 	public boolean isPresentUsuario(String usuarioVOTF) {
 		String usuarioLit = TITLE_USERNAME + usuarioVOTF;
 		return (
-			state(Present, By.xpath(XPATH_BARRA)).check() &&
-			driver.findElement(By.xpath(XPATH_BARRA)).getText().toLowerCase().contains(usuarioLit.toLowerCase()));
+			state(Present, XPATH_BARRA).check() &&
+			getElement(XPATH_BARRA).getText().toLowerCase().contains(usuarioLit.toLowerCase()));
 	}
 	
 }

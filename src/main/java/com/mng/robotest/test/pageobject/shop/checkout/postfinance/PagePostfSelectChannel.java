@@ -26,7 +26,7 @@ public class PagePostfSelectChannel extends PageBase {
 		super(driver);
 	}
 	
-	public boolean isPage(int maxSeconds) {
+	public boolean isPage(int seconds) {
 		return state(State.Visible, By.xpath(ChannelPF.Card.getXPath())).check();
 	}
 	

@@ -12,7 +12,7 @@ public class PageTrabajaConNosotros extends PageBase implements PageFromFooter {
 	}
 	
 	@Override
-	public boolean isPageCorrectUntil(int maxSeconds) {
-		return state(Present, "//title[contains(.,'" + getName() + "')]").wait(maxSeconds).check();
+	public boolean isPageCorrectUntil(int seconds) {
+		return state(Present, "//title[contains(.,'" + getName() + "')]").wait(seconds).check();
 	}
 }

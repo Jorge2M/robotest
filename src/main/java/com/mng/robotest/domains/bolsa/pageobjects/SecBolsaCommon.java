@@ -30,8 +30,8 @@ public abstract class SecBolsaCommon extends SecBolsa {
 		String xpathSubtotal = getXPathPrecioSubTotal();
 		By byTotalEntero = By.xpath(xpathCapaBolsa + xpathSubtotal + "//*[@class='bolsa_price_big']");
 		By byTotalDecimal = By.xpath(xpathCapaBolsa + xpathSubtotal + "//*[@class='bolsa_price_small']");
-		itTotalEntero = driver.findElements(byTotalEntero).listIterator();
-		itTotalDecimal = driver.findElements(byTotalDecimal).listIterator();
+		itTotalEntero = getElements(byTotalEntero).listIterator();
+		itTotalDecimal = getElements(byTotalDecimal).listIterator();
 		
 		while (itTotalEntero != null && itTotalEntero.hasNext()) {
 			precioTotal += itTotalEntero.next().getText();
@@ -47,7 +47,7 @@ public abstract class SecBolsaCommon extends SecBolsa {
 	public String getPrecioTransporte() {
 		String precioTotal = "0";
 		String xpathImpTransp = getXPathPrecioTransporte();
-		if (state(Present, By.xpath(xpathImpTransp), driver).check()) {
+		if (state(Present, xpathImpTransp).check()) {
 			String xpathTotalEntero = xpathImpTransp + "//*[@class='bolsa_price_big']";
 			String xpathTotalDecimal = xpathImpTransp + "//*[@class='bolsa_price_small']";
 			ListIterator<WebElement> itTotalEntero = getElements(xpathTotalEntero).listIterator();

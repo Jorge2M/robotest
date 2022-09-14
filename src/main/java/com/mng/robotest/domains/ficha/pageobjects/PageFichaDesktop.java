@@ -35,16 +35,16 @@ public class PageFichaDesktop extends PageFicha {
 	}
 	
 	@Override
-	public boolean isPageUntil(int maxSeconds) {
-		return (state(Present, XPATH_HTML_FICHA).wait(maxSeconds).check() &&
-				secDataProduct.getSecSelTallas().isVisibleSelectorTallasUntil(maxSeconds));
+	public boolean isPageUntil(int seconds) {
+		return (state(Present, XPATH_HTML_FICHA).wait(seconds).check() &&
+				secDataProduct.getSecSelTallas().isVisibleSelectorTallasUntil(seconds));
 	}
 	
 	@Override
-	public boolean isFichaArticuloUntil(String refArticulo, int maxSeconds) {
+	public boolean isFichaArticuloUntil(String refArticulo, int seconds) {
 		String refSinColor = refArticulo.substring(0,8); 
 		String xpathFichaRef = getXPathIsPage(refSinColor);
-		return state(Visible, xpathFichaRef).wait(maxSeconds).check();
+		return state(Visible, xpathFichaRef).wait(seconds).check();
 	}
 	
 	@Override
@@ -63,13 +63,13 @@ public class PageFichaDesktop extends PageFicha {
 	}	
 	
 	@Override
-	public boolean isVisibleDivAnadiendoAFavoritosUntil(int maxSecondsToWait) {	
-		return (secBolsaButtonAndLinks.isVisibleDivAnadiendoAFavoritosUntil(maxSecondsToWait));
+	public boolean isVisibleDivAnadiendoAFavoritosUntil(int secondsToWait) {	
+		return (secBolsaButtonAndLinks.isVisibleDivAnadiendoAFavoritosUntil(secondsToWait));
 	}
 	
 	@Override
-	public boolean isInvisibleDivAnadiendoAFavoritosUntil(int maxSecondsToWait) {	
-		return (secBolsaButtonAndLinks.isInvisibleDivAnadiendoAFavoritosUntil(maxSecondsToWait));		
+	public boolean isInvisibleDivAnadiendoAFavoritosUntil(int secondsToWait) {	
+		return (secBolsaButtonAndLinks.isInvisibleDivAnadiendoAFavoritosUntil(secondsToWait));		
 	}
 	
 	@Override
@@ -108,7 +108,7 @@ public class PageFichaDesktop extends PageFicha {
 	}
 	
 	@Override
-	public boolean isModalNoStockVisible(int maxSecondsToWait) {
-		return modNoStock.isModalNoStockVisibleFichaNew(maxSecondsToWait);
+	public boolean isModalNoStockVisible(int secondsToWait) {
+		return modNoStock.isModalNoStockVisibleFichaNew(secondsToWait);
 	}
 }

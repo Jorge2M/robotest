@@ -53,11 +53,11 @@ public class PageGestionarClientesSteps {
 			"Aparece el DNI <b>" + dni + "</b> en la tabla",
 			pageGestionarClientes.getDniTabla(dni), State.Defect);
 	 	
-		int maxSecondsToWait = 1;
+		int secondsToWait = 1;
 	 	checks.add(
-			"Aparece el botón de Alta o Baja (los esperamos un máximo de " + maxSecondsToWait + " segundos)",
-			pageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.Baja, maxSecondsToWait) ||
-			pageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.Alta, maxSecondsToWait), 
+			"Aparece el botón de Alta o Baja (los esperamos un máximo de " + secondsToWait + " segundos)",
+			pageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.Baja, secondsToWait) ||
+			pageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.Alta, secondsToWait), 
 			State.Defect);
 	 	
 	 	return checks;
@@ -82,11 +82,11 @@ public class PageGestionarClientesSteps {
 			"Aparece el mensaje <b>" + typeButton.getMensaje() + "</b>",
 			pageGestionarClientes.isVisibleMensajeClickThirdButton(typeButton), State.Defect);
 	 	
-		int maxSeconds = 2;
+		int seconds = 2;
 		TypeThirdButton buttonExpected = typeButton.buttonExpectedAfterClick();
 	 	checks.add(
-			"Aparece el botón \"Alta\" (lo esperamos hasta " + maxSeconds + " segundos)",
-			pageGestionarClientes.isVisibleThirdButtonUntil(buttonExpected, maxSeconds), State.Defect);
+			"Aparece el botón \"Alta\" (lo esperamos hasta " + seconds + " segundos)",
+			pageGestionarClientes.isVisibleThirdButtonUntil(buttonExpected, seconds), State.Defect);
 		
 	 	return checks;
 	}

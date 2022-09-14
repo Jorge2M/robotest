@@ -46,7 +46,7 @@ public class AllPagesSteps {
 		expected="Se vuelve a la página anterior")
 	public static void backNagegador(WebDriver driver) throws Exception {
 		driver.navigate().back();
-		int maxSeconds = 10;
-		SeleniumUtils.waitForPageLoaded(driver, maxSeconds);
+		int seconds = 10;
+		SeleniumUtils.waitForPageLoaded(driver, seconds);
 	}
 }

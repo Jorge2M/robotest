@@ -7,8 +7,8 @@ public class ModalConfUserDataKlarna extends PageBase {
 
 	private static final String XPATH_BUTTON_CONFIRMATION = "//div[@id[contains(.,'footer-button-wrapper')]]//button";
 	
-	public boolean isModal(int maxSeconds) {
-		return state(State.Visible, XPATH_BUTTON_CONFIRMATION).wait(maxSeconds).check();
+	public boolean isModal(int seconds) {
+		return state(State.Visible, XPATH_BUTTON_CONFIRMATION).wait(seconds).check();
 	}
 	
 	public void clickButtonConfirmation() {

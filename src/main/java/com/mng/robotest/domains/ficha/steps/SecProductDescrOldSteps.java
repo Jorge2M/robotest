@@ -44,14 +44,14 @@ public class SecProductDescrOldSteps {
 		step.replaceInExpected(tagFinalStateExpected, stateExpectedAfterClick.toString());
 		
 		secProductDescrOld.clickPanel(typePanel);
-		int maxSeconds = 1;
-		checkPanelInState(typePanel, stateExpectedAfterClick, maxSeconds);
+		int seconds = 1;
+		checkPanelInState(typePanel, stateExpectedAfterClick, seconds);
 	}
 	
 	@Validation (
-		description="La sección ha de quedar en estado <b>#{stateExpectedAfterClick}</b> (lo esperamos hasta #{maxSeconds} segundos)",
+		description="La sección ha de quedar en estado <b>#{stateExpectedAfterClick}</b> (lo esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	private boolean checkPanelInState(TypePanel typePanel, TypeStatePanel stateExpectedAfterClick, int maxSeconds) {
-		return (secProductDescrOld.isPanelInStateUntil(typePanel, stateExpectedAfterClick, maxSeconds));
+	private boolean checkPanelInState(TypePanel typePanel, TypeStatePanel stateExpectedAfterClick, int seconds) {
+		return (secProductDescrOld.isPanelInStateUntil(typePanel, stateExpectedAfterClick, seconds));
 	}
 }

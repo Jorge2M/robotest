@@ -11,10 +11,10 @@ public class PageResultadoRegaloLikesSteps extends StepBase {
 	private final PageResultadoRegaloLikes pageResultado = new PageResultadoRegaloLikes();
 	
 	@Validation (
-		description="Aparece la página de resultado Ok del envío de Likes (la esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece la página de resultado Ok del envío de Likes (la esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean checkIsEnvioLikesOk(int maxSeconds) {
-		return pageResultado.isEnvioOk(maxSeconds);
+	public boolean checkIsEnvioLikesOk(int seconds) {
+		return pageResultado.isEnvioOk(seconds);
 	}
 	
 }

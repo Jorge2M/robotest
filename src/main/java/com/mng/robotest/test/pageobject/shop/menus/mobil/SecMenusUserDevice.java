@@ -63,9 +63,9 @@ public class SecMenusUserDevice extends PageBase {
 		return (state(state, menu.getBy(channel, app)).check());
 	}
 	
-	public boolean isMenuInStateUntil(MenuUserDevice menu, State state, int maxSeconds) {
+	public boolean isMenuInStateUntil(MenuUserDevice menu, State state, int seconds) {
 		secCabecera.clickIconoMenuHamburguerMobil(true);
-		return (state(state, menu.getBy(channel, app)).wait(maxSeconds).check());
+		return (state(state, menu.getBy(channel, app)).wait(seconds).check());
 	}
 	
 	public void clickMenu(MenuUserDevice menu) {
@@ -76,7 +76,7 @@ public class SecMenusUserDevice extends PageBase {
 	public boolean clickMenuIfinState(MenuUserDevice menu, State stateExpected) throws Exception {
 		secCabecera.clickIconoMenuHamburguerMobil(true);
 		if (isMenuInState(menu, stateExpected)) {
-			moveToElement(menu.getBy(channel, app), driver);
+			moveToElement(menu.getBy(channel, app));
 			clickMenu(menu);
 			return true;
 		}
@@ -85,7 +85,7 @@ public class SecMenusUserDevice extends PageBase {
 	
 	public void MoveAndclickMenu(MenuUserDevice menu) throws Exception {
 		secCabecera.clickIconoMenuHamburguerMobil(true);
-		moveToElement(menu.getBy(channel, app), driver);
+		moveToElement(menu.getBy(channel, app));
 		clickMenu(menu);
 	}
 

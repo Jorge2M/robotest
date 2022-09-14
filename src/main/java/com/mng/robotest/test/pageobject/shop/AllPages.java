@@ -41,9 +41,9 @@ public class AllPages extends PageBase {
 		return urlTagCanonical;
 	}
 
-	public boolean isPresentElementWithTextUntil(String text, int maxSeconds) {
+	public boolean isPresentElementWithTextUntil(String text, int seconds) {
 		String xpath = "//*[text()[contains(.,'" + text + "')]]";
-		return state(Present, xpath).wait(maxSeconds).check();
+		return state(Present, xpath).wait(seconds).check();
 	}
 
 	public boolean isCodLiteralSinTraducir() {

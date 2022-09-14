@@ -67,12 +67,12 @@ public class SecBolsaButtonAndLinksNew extends PageBase {
 		click(xpathButtonFav).exec();
 	}
 
-	public boolean isVisibleDivAnadiendoAFavoritosUntil(int maxSeconds) {
-		return state(Visible, XPATH_DIV_ANADIENDO_FAVORITOS).wait(maxSeconds).check();
+	public boolean isVisibleDivAnadiendoAFavoritosUntil(int seconds) {
+		return state(Visible, XPATH_DIV_ANADIENDO_FAVORITOS).wait(seconds).check();
 	}
 
-	public boolean isInvisibleDivAnadiendoAFavoritosUntil(int maxSeconds) {
-		return state(Invisible, XPATH_DIV_ANADIENDO_FAVORITOS).wait(maxSeconds).check();
+	public boolean isInvisibleDivAnadiendoAFavoritosUntil(int seconds) {
+		return state(Invisible, XPATH_DIV_ANADIENDO_FAVORITOS).wait(seconds).check();
 	}
 
 	public void clickLinkAndWaitLoad(LinksAfterBolsa linkType) {

@@ -174,11 +174,11 @@ public class ConsolaVotfSteps extends StepBase {
 	@Validation
 	private ChecksResultWithStringData checkAfterSolicitudAdomicilioInIframe() {
 		ChecksResultWithStringData checks = ChecksResultWithStringData.getNew();
-		int maxSeconds = 5;
+		int seconds = 5;
 		checks.add(
 			"En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Código de pedido\"" + 
-			"(la esperamos hasta " + maxSeconds + " segundos)",
-			iframeResult.isPresentCodigoPedido(maxSeconds), State.Warn);
+			"(la esperamos hasta " + seconds + " segundos)",
+			iframeResult.isPresentCodigoPedido(seconds), State.Warn);
 		
 		String codigoPedido = iframeResult.getCodigoPedido();
 		checks.setData(codigoPedido);
@@ -223,17 +223,17 @@ public class ConsolaVotfSteps extends StepBase {
 	}
 	
 	@Validation (
-		description = "En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Pedidos\" (la esperamos hasta #{maxSeconds} segundos)",
+		description = "En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Pedidos\" (la esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	private boolean checkIsLineaPedidos(int maxSeconds) {
-		return iframeResult.isPresentListaPedidosUntil(maxSeconds);
+	private boolean checkIsLineaPedidos(int seconds) {
+		return iframeResult.isPresentListaPedidosUntil(seconds);
 	}
 	
 	@Validation (
-		description = "En la lista de pedidos aparece el generado anteriormente: #{codigoPedido} (lo esperamos hasta #{maxSeconds} segundos)",
+		description = "En la lista de pedidos aparece el generado anteriormente: #{codigoPedido} (lo esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	private boolean checkIsPresentPedidoInList(String codigoPedido, int maxSeconds) {
-		String codigoPedidoFull = iframeResult.getPedidoFromListaPedidosUntil(codigoPedido, maxSeconds);
+	private boolean checkIsPresentPedidoInList(String codigoPedido, int seconds) {
+		String codigoPedidoFull = iframeResult.getPedidoFromListaPedidosUntil(codigoPedido, seconds);
 	 	return "".compareTo(codigoPedidoFull)!=0;
 	}
 

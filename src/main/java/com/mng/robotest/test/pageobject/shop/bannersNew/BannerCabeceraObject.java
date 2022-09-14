@@ -19,7 +19,7 @@ public class BannerCabeceraObject extends BannerObject {
 	@Override
 	protected String getUrlBanner(WebElement bannerScreen) {
 		String urlBanner = "";
-		if (state(Present, bannerScreen, driver).by(By.xpath(XPATH_ANCOR_RELATIVE_BANNER)).check()) {
+		if (state(Present, bannerScreen).by(By.xpath(XPATH_ANCOR_RELATIVE_BANNER)).check()) {
 			WebElement ancor = bannerScreen.findElement(By.xpath(XPATH_ANCOR_RELATIVE_BANNER));
 			urlBanner = ancor.getAttribute("href");
 		}

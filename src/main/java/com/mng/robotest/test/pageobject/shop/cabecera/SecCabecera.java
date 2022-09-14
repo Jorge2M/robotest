@@ -25,9 +25,9 @@ public abstract class SecCabecera extends PageBase {
 			"@title[contains(.,'MANGO Shop Online')]]";
 
 	abstract String getXPathNumberArtIcono();
-	public abstract boolean isInStateIconoBolsa(State state, int maxSeconds);
+	public abstract boolean isInStateIconoBolsa(State state, int seconds);
 	public abstract void clickIconoBolsa();
-	public abstract void clickIconoBolsaWhenDisp(int maxSecondsToWait);
+	public abstract void clickIconoBolsaWhenDisp(int secondsToWait);
 	public abstract void hoverIconoBolsa();
 	
 	public static SecCabecera getNew(Channel channel, AppEcom app) {
@@ -69,8 +69,8 @@ public abstract class SecCabecera extends PageBase {
 		return false;
 	}
 	
-	public boolean isPresentLogoMango(int maxSeconds) {
-		return state(Present, XPATH_LINK_LOGO_MANGO).wait(maxSeconds).check();
+	public boolean isPresentLogoMango(int seconds) {
+		return state(Present, XPATH_LINK_LOGO_MANGO).wait(seconds).check();
 	}
 
 	public void hoverLogoMango() throws Exception {
@@ -98,13 +98,12 @@ public abstract class SecCabecera extends PageBase {
 	}
 
 	public String getNumberArtIcono() throws Exception {
-		String articulos = "0";
-		waitForPageLoaded(driver); //Para evitar staleElement en la línea posterior
+		waitLoadPage(); //Para evitar staleElement en la línea posterior
 		String xpathNumberArtIcono = getXPathNumberArtIcono();
 		if (state(Visible, xpathNumberArtIcono).check()) {
-			articulos = getElement(xpathNumberArtIcono).getText();
+			return getElement(xpathNumberArtIcono).getText();
 		}
-		return articulos;
+		return "0";
 	}
 
 	//-- Específic functions for movil (Shop & Outlet)
@@ -149,8 +148,8 @@ public abstract class SecCabecera extends PageBase {
 		}
 	}
 
-	public boolean isVisibleIconoMenuHamburguesaUntil(int maxSeconds) {
-		return state(Visible, XPATH_ICONO_MENU_HAMBURGUESA).wait(maxSeconds).check();
+	public boolean isVisibleIconoMenuHamburguesaUntil(int seconds) {
+		return state(Visible, XPATH_ICONO_MENU_HAMBURGUESA).wait(seconds).check();
 	}
 
 	public void clickIconoMenuHamburguesaWhenReady(TypeClick typeOfClick) {

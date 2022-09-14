@@ -1,12 +1,10 @@
 package com.mng.robotest.domains.footer.pageobjects;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.modales.ModalClubMangoLikes;
-
 
 public class SecNewsLetter extends PageBase {
 
@@ -15,11 +13,10 @@ public class SecNewsLetter extends PageBase {
 	private static final String XPATH_TEXT_AREA_MAIL_SUSCRIPTION = XPATH_CAPA_NEWS_LETTER + "//input[@name='mail' or @name='email']";
 	
 	public String getNewsLetterMsgText() {
-		By byMsg = By.xpath(XPATH_NEWS_LETTER_MSG);
 		try {
-			WebElement titleNws = driver.findElement(byMsg);
+			WebElement titleNws = getElement(XPATH_NEWS_LETTER_MSG);
 			if (titleNws!=null) {
-				return driver.findElement(byMsg).getText();
+				return getElement(XPATH_NEWS_LETTER_MSG).getText();
 			}
 		}
 		catch (Exception e) {
@@ -33,13 +30,13 @@ public class SecNewsLetter extends PageBase {
 	}
 
 	public void clickFooterSuscripcion() throws Exception {
-		ModalClubMangoLikes.closeModalIfVisible(driver);
+		new ModalClubMangoLikes().closeModalIfVisible();
 		SecFooter secFooter = new SecFooter();
 		secFooter.moveTo();
 		
-		By byLink = By.xpath(XPATH_TEXT_AREA_MAIL_SUSCRIPTION);
-		state(State.Visible, byLink).wait(2).check();
-		click(byLink).exec();
+		String xpathLink = XPATH_TEXT_AREA_MAIL_SUSCRIPTION;
+		state(State.Visible, xpathLink).wait(2).check();
+		click(xpathLink).exec();
 	}
 
 }

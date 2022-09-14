@@ -5,11 +5,7 @@ import static org.junit.Assert.*;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
-
 import org.junit.Test;
-
-import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
-import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop.StateUser;
 
 public class GestorUsersShopIT {

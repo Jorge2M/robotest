@@ -29,14 +29,14 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	}
 	
 	@Override
-	public boolean isVisiblePanelPagoUntil(String nombrePago, int maxSeconds) {
+	public boolean isVisiblePanelPagoUntil(String nombrePago, int seconds) {
 		return true;
 	}
 	
 	@Override
-	public boolean isPresentInputNumberUntil(int maxSeconds) {
+	public boolean isPresentInputNumberUntil(int seconds) {
 		goToIframe();
-		boolean present = state(Present, XPATH_INPUT_NUMBER).wait(maxSeconds).check();
+		boolean present = state(Present, XPATH_INPUT_NUMBER).wait(seconds).check();
 		leaveIframe();
 		return present;
 	}

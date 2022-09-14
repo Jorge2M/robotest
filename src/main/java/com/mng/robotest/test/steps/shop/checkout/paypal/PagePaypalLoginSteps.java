@@ -12,10 +12,10 @@ public class PagePaypalLoginSteps extends StepBase {
 	PagePaypalLogin pagePaypalLogin = new PagePaypalLogin();
 	
 	@Validation (
-		description="Aparece la página de login (la esperamos hasta un máximo de #{maxSeconds} segundos)",
+		description="Aparece la página de login (la esperamos hasta un máximo de #{seconds} segundos)",
 		level=State.Defect)
-	public boolean validateIsPageUntil(int maxSeconds) {
-		return pagePaypalLogin.isPageUntil(maxSeconds);
+	public boolean validateIsPageUntil(int seconds) {
+		return pagePaypalLogin.isPageUntil(seconds);
 	}
 	
 	@Step (

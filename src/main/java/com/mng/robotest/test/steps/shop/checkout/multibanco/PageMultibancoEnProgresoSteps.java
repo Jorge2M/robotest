@@ -15,10 +15,10 @@ public class PageMultibancoEnProgresoSteps extends PageBase {
 	@Validation
 	public ChecksTM validateIsPage() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSecondsToWait = 3;
+		int secondsToWait = 3;
 	   	checks.add(
-			"Aparece la cabecera <b>Pagamento em progreso</b> (la esperamos hasta " + maxSecondsToWait + " segundos",
-			pageMultibancoEnProgreso.isPageUntil(maxSecondsToWait), State.Warn);
+			"Aparece la cabecera <b>Pagamento em progreso</b> (la esperamos hasta " + secondsToWait + " segundos",
+			pageMultibancoEnProgreso.isPageUntil(secondsToWait), State.Warn);
 	   	
 	   	checks.add(
 			"Figura un botón para ir al siguiente paso",

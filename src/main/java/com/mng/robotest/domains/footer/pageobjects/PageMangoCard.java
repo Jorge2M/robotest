@@ -24,8 +24,8 @@ public class PageMangoCard extends PageBase implements PageFromFooter {
 	}
 	
 	@Override
-	public boolean isPageCorrectUntil(int maxSeconds) {
-		return state(Present, XPATH_FOR_IDPAGE).wait(maxSeconds).check();
+	public boolean isPageCorrectUntil(int seconds) {
+		return state(Present, XPATH_FOR_IDPAGE).wait(seconds).check();
 	}
 	
 	public void clickOnWantMangoCardNow() {

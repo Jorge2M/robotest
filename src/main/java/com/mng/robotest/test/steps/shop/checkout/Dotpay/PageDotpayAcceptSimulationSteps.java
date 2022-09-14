@@ -13,11 +13,11 @@ public class PageDotpayAcceptSimulationSteps extends StepBase {
 	private final PageDotpayAcceptSimulation pageDotpayAcceptSimulation = new PageDotpayAcceptSimulation();
 	
 	@Validation
-	public ChecksTM validateIsPage(int maxSeconds) {
+	public ChecksTM validateIsPage(int seconds) {
 		ChecksTM checks = ChecksTM.getNew();
 	  	checks.add(
-			"Aparece la página para la aceptación de la simulación (la esperamos hasta " + maxSeconds + " segundos)",
-			pageDotpayAcceptSimulation.isPage(maxSeconds), State.Warn);
+			"Aparece la página para la aceptación de la simulación (la esperamos hasta " + seconds + " segundos)",
+			pageDotpayAcceptSimulation.isPage(seconds), State.Warn);
 	  	
 	  	checks.add(
 			"Figura un botón de aceptar rojo",

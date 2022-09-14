@@ -80,8 +80,8 @@ public class PageFavoritos extends PageBase {
 		click(XPATH_CLOSE_SHARE_MODAL_BUTTON).type(javascript).exec();
 	}
 
-	public boolean checkShareModalUntill(int maxSeconds) {
-		return state(Visible, XPATH_CLOSE_SHARE_MODAL_BUTTON).wait(maxSeconds).check();
+	public boolean checkShareModalUntill(int seconds) {
+		return state(Visible, XPATH_CLOSE_SHARE_MODAL_BUTTON).wait(seconds).check();
 	}
 	
 	public boolean isShareFavoritesVisible() {
@@ -107,16 +107,16 @@ public class PageFavoritos extends PageBase {
 		}
 	}
 	
-	public boolean checkShareModalInvisible(int maxSeconds) {
-		return state(Invisible, XPATH_CLOSE_SHARE_MODAL_BUTTON).wait(maxSeconds).check();
+	public boolean checkShareModalInvisible(int seconds) {
+		return state(Invisible, XPATH_CLOSE_SHARE_MODAL_BUTTON).wait(seconds).check();
 	}
 
 	public boolean isSectionVisible() {
 		return state(Visible, XPATH_BLOCK_FAVORITOS).check();
 	}
 	
-	public boolean isSectionArticlesVisibleUntil(int maxSeconds) {
-		return state(Visible, XPATH_BLOCK_FAV_WITH_ART).wait(maxSeconds).check();
+	public boolean isSectionArticlesVisibleUntil(int seconds) {
+		return state(Visible, XPATH_BLOCK_FAV_WITH_ART).wait(seconds).check();
 	}
 	
 	public void clearArticuloAndWait(String refArticulo, String codColorArticulo) {
@@ -126,9 +126,9 @@ public class PageFavoritos extends PageBase {
 		click(xpathBorrar).type(javascript).exec();
 	}
 	
-	public boolean isInvisibleArticleUntil(String referencia, String codColor, int maxSeconds) {
+	public boolean isInvisibleArticleUntil(String referencia, String codColor, int seconds) {
 		String xpathArticulo = getXPathArticle(referencia, codColor);
-		return state(Invisible, xpathArticulo).wait(maxSeconds).check();
+		return state(Invisible, xpathArticulo).wait(seconds).check();
 	}
 	
 	public void clearAllArticulos() {
@@ -148,7 +148,7 @@ public class PageFavoritos extends PageBase {
 		return state(Present, XPATH_ARTICULO).check();
 	}
 	
-	public boolean areVisibleArticlesUntil(DataFavoritos dataFavoritos, int maxSecondsToWait) {
+	public boolean areVisibleArticlesUntil(DataFavoritos dataFavoritos, int secondsToWait) {
 		if (dataFavoritos.isEmpty()) {
 			return (!hayArticulos());
 		}
@@ -156,7 +156,7 @@ public class PageFavoritos extends PageBase {
 		Iterator<ArticuloScreen> itArticulos = dataFavoritos.getListArticulos().iterator();
 		while (itArticulos.hasNext()) {
 			ArticuloScreen articulo = itArticulos.next();
-			if (!isVisibleArticleUntil(articulo.getRefProducto(), articulo.getCodigoColor(), maxSecondsToWait)) {
+			if (!isVisibleArticleUntil(articulo.getRefProducto(), articulo.getCodigoColor(), secondsToWait)) {
 				return false;
 			}
 		}
@@ -164,9 +164,9 @@ public class PageFavoritos extends PageBase {
 		return true;
 	}
 	
-	public boolean isVisibleArticleUntil(String refArticulo, String codigoColor, int maxSeconds) {
+	public boolean isVisibleArticleUntil(String refArticulo, String codigoColor, int seconds) {
 		String xpathArt = getXPathArticle(refArticulo, codigoColor);
-		return state(Visible, xpathArt).wait(maxSeconds).check();
+		return state(Visible, xpathArt).wait(seconds).check();
 	}
 	
 	public void clear1rstArticuloAndWait() {
@@ -195,7 +195,7 @@ public class PageFavoritos extends PageBase {
 	private void clickButtonAddToBag(String refProducto, String codigoColor) {
 		String xpathAdd = getXPathButtonAddBolsa(refProducto, codigoColor);
 		try {
-			driver.findElement(By.xpath(xpathAdd)).click();
+			click(xpathAdd).exec();
 		} catch (ElementClickInterceptedException e) {
 			//En ocasiones en el canal móvil se solapa el div del Asistente Online de ayuda
 			//así que esperamos un tiempo prudencial hasta que se pliegue
@@ -219,10 +219,10 @@ public class PageFavoritos extends PageBase {
 		WebElement talla = listaTallas.get(posicionTalla);
 		String litTalla = talla.getText();
 		talla.click();
-		int maxSecondsToWait = 2;
+		int secondsToWait = 2;
 		
 		SecBolsa secBolsa = SecBolsa.make(channel, app);
-		secBolsa.isInStateUntil(StateBolsa.OPEN, maxSecondsToWait);
+		secBolsa.isInStateUntil(StateBolsa.OPEN, secondsToWait);
 		return litTalla;
 	}
 	

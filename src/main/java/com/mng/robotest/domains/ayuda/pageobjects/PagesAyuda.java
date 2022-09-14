@@ -24,9 +24,9 @@ public class PagesAyuda extends PageBase implements PageFromFooter {
 		return "¿En qué podemos ayudarte?";
 	}
 	@Override
-	public boolean isPageCorrectUntil(int maxSeconds) {
+	public boolean isPageCorrectUntil(int seconds) {
 		String xpath = getXPathIcon("Devoluciones, cambios y reembolsos");
-		return state(State.Visible, xpath).wait(maxSeconds).check();
+		return state(State.Visible, xpath).wait(seconds).check();
 	}
 	
 	public void selectIcon(String textIcon) {

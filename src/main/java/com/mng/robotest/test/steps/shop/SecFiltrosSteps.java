@@ -41,12 +41,12 @@ public class SecFiltrosSteps extends StepBase {
 			List<Color> colorsSelected, String litMenu, int numArticulos1page) {
 		
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSecondsToWait = 1;
+		int secondsToWait = 1;
 		List<String> listCodColors = Color.getListCodigosColor(colorsSelected);
 		String currentUrl = driver.getCurrentUrl();
 	 	checks.add(
 			"En la URL (*) aparece el parámetro c= que contiene los códigos de color <b>" + 
-			listCodColors.toString() + "</b> (lo esperamos hasta " + maxSecondsToWait + " segundos)" + 
+			listCodColors.toString() + "</b> (lo esperamos hasta " + secondsToWait + " segundos)" + 
 			"(*) " + currentUrl + "<br>",
 			SecFiltros.checkUrlAfterFilterContainsColors(colorsSelected, currentUrl), State.Warn);		
 		

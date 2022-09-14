@@ -13,12 +13,12 @@ public class PageRegistroFinOutlet extends PageBase {
 
 	private static final String XPATH_BUTTON_IR_SHOPPING = "//div[@class[contains(.,'ir-de-shopping')]]/input[@type='submit']";
 	
-	public boolean isPageUntil(int maxSeconds) {
-		return state(Present, XPATH_BUTTON_IR_SHOPPING).wait(maxSeconds).check();
+	public boolean isPageUntil(int seconds) {
+		return state(Present, XPATH_BUTTON_IR_SHOPPING).wait(seconds).check();
 	}
 	
 	public void clickIrDeShopping() {
-		waitForPageLoaded(driver); //Para evitar StaleElement Exception
+		waitLoadPage(); //Para evitar StaleElement Exception
 		click(XPATH_BUTTON_IR_SHOPPING).type(javascript).exec();
 		if (isVisibleButtonIrDeShopping()) {
 			click(XPATH_BUTTON_IR_SHOPPING).exec();

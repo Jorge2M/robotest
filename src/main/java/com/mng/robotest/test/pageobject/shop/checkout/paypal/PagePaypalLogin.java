@@ -17,12 +17,12 @@ public class PagePaypalLogin extends PageBase {
 	public boolean isPage() {
 		return isPageUntil(0);
 	}
-	public boolean isPageUntil(int maxSeconds) {
-		return state(Present, XPATH_INPUT_PASSWORD).wait(maxSeconds).check();
+	public boolean isPageUntil(int seconds) {
+		return state(Present, XPATH_INPUT_PASSWORD).wait(seconds).check();
 	}
 	
 	public void inputUserAndPassword(String userMail, String password) {
-		waitForPageLoaded(driver); //For avoid StaleElementReferenceException
+		waitLoadPage(); //For avoid StaleElementReferenceException
 		sendKeysWithRetry(userMail, By.xpath(XPATH_INPUT_LOGIN), 2, driver);
 		if (state(Visible, XPATH_INPUT_PASSWORD).check()) {
 			getElement(XPATH_INPUT_PASSWORD).sendKeys(password);

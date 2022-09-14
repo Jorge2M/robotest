@@ -70,10 +70,10 @@ public class SecMenusUserSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece el link superior de \"Iniciar sesión\" (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece el link superior de \"Iniciar sesión\" (lo esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	private boolean checkIsVisibleIniciarSesionLink(int maxSeconds) throws Exception {
-		return (userMenus.isMenuInStateUntil(UserMenu.iniciarSesion, Present, maxSeconds));
+	private boolean checkIsVisibleIniciarSesionLink(int seconds) throws Exception {
+		return (userMenus.isMenuInStateUntil(UserMenu.iniciarSesion, Present, seconds));
 	}
 	
 	public void logoffLogin(String userConnect, String userPassword) throws Exception {
@@ -188,15 +188,15 @@ public class SecMenusUserSteps extends StepBase {
 	}
 
 	@Validation
-	public ChecksResultWithNumberPoints checkAngGetLoyaltyPoints(int maxSeconds) throws Exception {
+	public ChecksResultWithNumberPoints checkAngGetLoyaltyPoints(int seconds) throws Exception {
 		ChecksResultWithNumberPoints checks = ChecksResultWithNumberPoints.getNew();
 		if (channel==Channel.desktop) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
-		LoyaltyData loyaltyData = userMenus.checkAndGetLoyaltyPointsUntil(maxSeconds);
+		LoyaltyData loyaltyData = userMenus.checkAndGetLoyaltyPointsUntil(seconds);
 		checks.setNumberPoints(loyaltyData.numberPoints);
 	 	checks.add(
-			"Aparecen Loyalty Points en el menú de usuario (lo esperamos hasta " + maxSeconds + " segundos)",
+			"Aparecen Loyalty Points en el menú de usuario (lo esperamos hasta " + seconds + " segundos)",
 			loyaltyData.isPresent, State.Defect);
 	 	
 		return checks;

@@ -53,15 +53,15 @@ public class SecModalPersonalizacionSteps extends PageBase {
 	
 	@Validation
 	private ChecksTM validateModal() {
-		int maxSeconds = 3;
+		int seconds = 3;
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
-			"Aparece el modal de personalización con el botón <b>Siguiente</b> (lo esperamos hasta " + maxSeconds + " segundos)",
-			isBotonSiguienteVisible(maxSeconds), 
+			"Aparece el modal de personalización con el botón <b>Siguiente</b> (lo esperamos hasta " + seconds + " segundos)",
+			isBotonSiguienteVisible(seconds), 
 			State.Warn);
 		checks.add(
-			"Aparece la opción <b>Un icono</b> (la esperamos hasta " + maxSeconds + " segundos)",
-			state(Visible, ModalElement.BUTTON_UN_ICONO.getBy(channel)).wait(maxSeconds).check(), 
+			"Aparece la opción <b>Un icono</b> (la esperamos hasta " + seconds + " segundos)",
+			state(Visible, ModalElement.BUTTON_UN_ICONO.getBy(channel)).wait(seconds).check(), 
 			State.Warn);
 	
 		return checks;
@@ -70,8 +70,8 @@ public class SecModalPersonalizacionSteps extends PageBase {
 	@Validation(
 		description="1) Aparece la cabecera correspondiente a la personalizacion de la prenda",
 		level=State.Warn)
-	private boolean validationInitMblCustomization(int maxSeconds, ModalElement element) {
-		return (state(Visible, element.getBy(channel)).wait(maxSeconds).check());
+	private boolean validationInitMblCustomization(int seconds, ModalElement element) {
+		return (state(Visible, element.getBy(channel)).wait(seconds).check());
 	}
 
 	@Step(
@@ -85,8 +85,8 @@ public class SecModalPersonalizacionSteps extends PageBase {
 	@Validation(
 		description="1) Aparece la lista de iconos seleccionables",
 		level=State.Warn)
-	public boolean validationIconSelection(int maxSeconds) {
-		return (state(Visible, ModalElement.ICON_SELECTION.getBy(channel)).wait(maxSeconds).check());
+	public boolean validationIconSelection(int seconds) {
+		return (state(Visible, ModalElement.ICON_SELECTION.getBy(channel)).wait(seconds).check());
 	}
 
 	@Step(
@@ -103,14 +103,14 @@ public class SecModalPersonalizacionSteps extends PageBase {
 	@Validation
 	public ChecksTM validateIconSelectedDesktop() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 3;
+		int seconds = 3;
 		checks.add(
 			"Aparece seleccionado el primer icono",
-			state(Visible, ModalElement.ICON_SELECTION.getBy()).wait(maxSeconds).check(), 
+			state(Visible, ModalElement.ICON_SELECTION.getBy()).wait(seconds).check(), 
 			State.Warn);
 		checks.add(
 			"Podemos confirmar nuestra seleccion",
-			isBotonSiguienteVisible(maxSeconds),
+			isBotonSiguienteVisible(seconds),
 			State.Warn);
 		return checks;
 	}
@@ -125,8 +125,8 @@ public class SecModalPersonalizacionSteps extends PageBase {
 	private WebElement getBotonSiguienteVisible() {
 		return getElementVisible(driver, ModalElement.SIGUIENTE.getBy(channel));
 	}
-	private boolean isBotonSiguienteVisible(int maxSeconds) {
-		for (int i=0; i<maxSeconds; i++) {
+	private boolean isBotonSiguienteVisible(int seconds) {
+		for (int i=0; i<seconds; i++) {
 			if (getBotonSiguienteVisible()!=null) {
 				return true;
 			}
@@ -138,15 +138,15 @@ public class SecModalPersonalizacionSteps extends PageBase {
 	@Validation
 	public ChecksTM validateWhereDesktop() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 3;
+		int seconds = 3;
 		checks.add(
 			"Aparecen las opciones correspondientes a la ubicación del bordado",
-			state(Visible, ModalElement.POSITION_BUTTON.getBy()).wait(maxSeconds).check(),
+			state(Visible, ModalElement.POSITION_BUTTON.getBy()).wait(seconds).check(),
 			State.Warn);
 		checks.add(
 			"Podemos confirmar nuestra seleccion",
-			isBotonSiguienteVisible(maxSeconds),
-			//state(Visible, ModalElement.Siguiente.getBy()).wait(maxSeconds).check(),
+			isBotonSiguienteVisible(seconds),
+			//state(Visible, ModalElement.Siguiente.getBy()).wait(seconds).check(),
 			State.Warn);
 		return checks;
 	}
@@ -154,14 +154,14 @@ public class SecModalPersonalizacionSteps extends PageBase {
 	@Validation
 	public ChecksTM validateSelectionColor() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 3;
+		int seconds = 3;
 		checks.add(
 			"Aparecen los botones correspondientes a los colores",
-			state(Visible, ModalElement.COLORS_CONTAINER.getBy()).wait(maxSeconds).check(),
+			state(Visible, ModalElement.COLORS_CONTAINER.getBy()).wait(seconds).check(),
 			State.Warn);
 		checks.add(
 			"Aparece el botón de \"Confirmar\"",
-			state(Present, ModalElement.SIGUIENTE.getBy()).wait(maxSeconds).check(),
+			state(Present, ModalElement.SIGUIENTE.getBy()).wait(seconds).check(),
 			State.Warn);
 		return checks;
 	}
@@ -177,8 +177,8 @@ public class SecModalPersonalizacionSteps extends PageBase {
 	@Validation(
 		description="1) Aparecen los botones con los posibles tamaños del bordado",
 		level=State.Warn)
-	private boolean validateSizeList(int maxSeconds) {
-		return (state(Visible, ModalElement.SIZE_CONTAINER.getBy(channel)).wait(maxSeconds).check());
+	private boolean validateSizeList(int seconds) {
+		return (state(Visible, ModalElement.SIZE_CONTAINER.getBy(channel)).wait(seconds).check());
 	}
 
 	@Step(
@@ -192,8 +192,8 @@ public class SecModalPersonalizacionSteps extends PageBase {
 	@Validation(
 		description="1) Aparece el botón para añadir a la bolsa",
 		level=State.Warn)
-	private boolean validateAddBag(int maxSeconds) {
-		return isBotonSiguienteVisible(maxSeconds);
+	private boolean validateAddBag(int seconds) {
+		return isBotonSiguienteVisible(seconds);
 	}
 
 	@Step(
@@ -209,10 +209,10 @@ public class SecModalPersonalizacionSteps extends PageBase {
 	}
 
 	@Validation(
-		description="1) En la bolsa aparece el apartado correspondiente a la personalización (lo esperamos hasta #{maxSeconds} segundos)",
+		description="1) En la bolsa aparece el apartado correspondiente a la personalización (lo esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	private boolean validateCustomizationProof(int maxSeconds) {
-		return (state(Visible, ModalElement.BOLSA_PROOF.getBy(channel)).wait(maxSeconds).check());
+	private boolean validateCustomizationProof(int seconds) {
+		return (state(Visible, ModalElement.BOLSA_PROOF.getBy(channel)).wait(seconds).check());
 	}
 
 	@Validation(

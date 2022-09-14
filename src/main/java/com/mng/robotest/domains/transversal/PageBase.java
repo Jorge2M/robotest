@@ -72,12 +72,17 @@ public class PageBase extends PageObjTM {
 	}
 	
 	public WebElement getElement(String xpath) {
-		return driver.findElement(By.xpath(xpath));
+		return getElement(By.xpath(xpath));
 	}
-
 	public List<WebElement> getElements(String xpath) {
-		return driver.findElements(By.xpath(xpath));
-	}	
+		return getElements(By.xpath(xpath));
+	}
+	public WebElement getElement(By by) {
+		return driver.findElement(by);
+	}
+	public List<WebElement> getElements(By by) {
+		return driver.findElements(by);
+	}
 	
 	public WebElement getElementVisible(String xpath) {
 		return getElementVisible(driver, By.xpath(xpath));
@@ -118,12 +123,21 @@ public class PageBase extends PageObjTM {
 	}
 	
     public void moveToElement(String xpath) {
-        WebElement webElem = driver.findElement(By.xpath(xpath));
-        moveToElement(webElem, driver);
+        moveToElement(By.xpath(xpath));
+    }
+    public void moveToElement(By by) {
+        WebElement webElem = driver.findElement(by);
+        moveToElement(webElem);
+    }
+    public void moveToElement(WebElement element) {
+    	moveToElement(element, driver);
     }
     
     public boolean isPRO() {
     	return new NavigationBase().isPRO();
     }
-
+    
+	protected void waitLoadPage() {
+		waitForPageLoaded(driver);
+	}
 }

@@ -12,8 +12,8 @@ public class PageRecuperaPasswd extends PageBase {
 	private static final String XPATH_MSG_REVISA_TU_EMAIL = "//div[text()[contains(.,'REVISA TU EMAIL')]]";
 	private static final String XPATH_BUTTON_IR_DE_SHOPPING = "//div[@id[contains(.,'IrShopping')]]/a";
 	
-	public boolean isPageUntil(int maxSecondsToWait) {
-		return new AllPages().isPresentElementWithTextUntil("RECUPERA TU CONTRASEÑA", maxSecondsToWait);
+	public boolean isPageUntil(int secondsToWait) {
+		return new AllPages().isPresentElementWithTextUntil("RECUPERA TU CONTRASEÑA", secondsToWait);
 	}
 	
 	public boolean isPresentInputCorreo() {
@@ -29,8 +29,8 @@ public class PageRecuperaPasswd extends PageBase {
 		click(XPATH_BUTTON_ENVIAR).exec();
 	}
 
-	public boolean isVisibleRevisaTuEmailUntil(int maxSeconds) {
-		return state(Visible, XPATH_MSG_REVISA_TU_EMAIL).wait(maxSeconds).check();
+	public boolean isVisibleRevisaTuEmailUntil(int seconds) {
+		return state(Visible, XPATH_MSG_REVISA_TU_EMAIL).wait(seconds).check();
 	}
 
 	public boolean isVisibleButtonIrDeShopping() {

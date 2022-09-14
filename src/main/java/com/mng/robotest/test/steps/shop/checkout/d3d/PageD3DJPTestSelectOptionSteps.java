@@ -14,10 +14,10 @@ public class PageD3DJPTestSelectOptionSteps extends StepBase {
 	private final PageD3DJPTestSelectOption pageD3DJPTestSelectOption = new PageD3DJPTestSelectOption();
 	
 	@Validation (
-		description="Aparece la página de Test correspondiente al D3D de JPMorgan (la esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece la página de Test correspondiente al D3D de JPMorgan (la esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	public boolean validateIsD3D(int maxSeconds) {
-		return pageD3DJPTestSelectOption.isPageUntil(maxSeconds);
+	public boolean validateIsD3D(int seconds) {
+		return pageD3DJPTestSelectOption.isPageUntil(seconds);
 	}	
 	
 	@Validation (

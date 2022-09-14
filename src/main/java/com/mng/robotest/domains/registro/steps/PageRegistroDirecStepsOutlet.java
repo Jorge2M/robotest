@@ -18,10 +18,10 @@ public class PageRegistroDirecStepsOutlet extends StepBase {
 	@Validation
 	public ChecksTM isPageFromPais() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 3;
+		int seconds = 3;
 		checks.add(
-			"Aparece la página de introducción de datos de la dirección (la esperamos un máximo de " + maxSeconds + " segundos)",
-			pageRegistroAddressData.isPageUntil(maxSeconds), State.Warn);
+			"Aparece la página de introducción de datos de la dirección (la esperamos un máximo de " + seconds + " segundos)",
+			pageRegistroAddressData.isPageUntil(seconds), State.Warn);
 		checks.add(
 			"Si existe el desplebagle de países, en él aparece el país con código " + dataTest.pais.getCodigo_pais() + " (" + dataTest.pais.getNombre_pais() + ")",
 			!pageRegistroAddressData.existsDesplegablePaises() || 

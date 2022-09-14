@@ -29,32 +29,32 @@ public class PageSepa1rst extends PageBase {
 	
 	public boolean isPresentIconoSepa(Channel channel) {
 		String xpathPago = getXPathIconoSepa(channel);
-		return (state(Present, By.xpath(xpathPago), driver).check());
+		return state(Present, xpathPago).check();
 	}
 
 	public void clickIconoSepa(Channel channel) {
 		String xpathPago = getXPathIconoSepa(channel);
-		click(By.xpath(xpathPago)).exec();
+		click(xpathPago).exec();
 	}
 
 	public boolean isPresentCabeceraStep() {
-		return (state(Present, By.xpath(XPATH_CABECERA_STEP)).check());
+		return state(Present, XPATH_CABECERA_STEP).check();
 	}
 	
 	public boolean isPresentButtonPagoDesktop() {
-		return (state(Present, By.xpath(XPATH_BUTTON_PAGO_DESKTOP)).check());
+		return state(Present, XPATH_BUTTON_PAGO_DESKTOP).check();
 	}
 
 	public void clickButtonContinuePago(Channel channel) {
 		if (channel.isDevice()) {
-			click(By.xpath(XPATH_BUTTON_CONTINUE_MOBIL)).exec();
+			click(XPATH_BUTTON_CONTINUE_MOBIL).exec();
 		} else {
-			click(By.xpath(XPATH_BUTTON_PAGO_DESKTOP)).exec();
+			click(XPATH_BUTTON_PAGO_DESKTOP).exec();
 		}
 	}
 	
 	public boolean isPresentInputTitular() { 
-		return (state(Present, By.xpath(XPATH_INPUT_TITULAR)).check());
+		return state(Present, XPATH_INPUT_TITULAR).check();
 	}
 
 	public boolean isPresentInputCuenta() { 

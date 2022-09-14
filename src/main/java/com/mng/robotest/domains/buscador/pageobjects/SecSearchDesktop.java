@@ -29,6 +29,6 @@ public class SecSearchDesktop extends PageBase implements SecSearch {
 		WebElement input = getElementVisible(driver, By.xpath(XPATH_INPUT_BUSCADOR));
 		sendKeysWithRetry(5, input, referencia); 
 		input.sendKeys(Keys.RETURN);
-		waitForPageLoaded(driver);
+		waitLoadPage();
 	}
 }

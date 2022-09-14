@@ -12,17 +12,17 @@ public class ModalSetCookiesSteps extends StepBase {
 	private final ModalSetCookies modalSetCookies = new ModalSetCookies();
 	
 	@Validation (
-		description="Es visible el modal para el seteo de Cookies (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Es visible el modal para el seteo de Cookies (lo esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean isVisible(int maxSeconds) {
-		return modalSetCookies.isVisible(maxSeconds);
+	public boolean isVisible(int seconds) {
+		return modalSetCookies.isVisible(seconds);
 	}
 	
 	@Validation (
-		description="No es visible el modal para el seteo de Cookies (lo esperamos hasta #{maxSeconds} segundos)",
+		description="No es visible el modal para el seteo de Cookies (lo esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	public boolean isInvisible(int maxSeconds) {
-		return modalSetCookies.isInvisible(maxSeconds);
+	public boolean isInvisible(int seconds) {
+		return modalSetCookies.isInvisible(seconds);
 	}
 	
 	@Step (

@@ -46,10 +46,10 @@ public class PagePostfCodSegSteps extends StepBase {
 	@Validation
 	public ChecksTM validateIsPagePro(String importeTotal, String codPais) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 5;
+		int seconds = 5;
 		checks.add(
-			"Aparece la pasarela de pagos de PostFinance E-Payment (la esperamos hasta " + maxSeconds + " segundos)",
-			pagePostfCodSeg.isPasarelaPostfinanceProUntil(maxSeconds), State.Defect);
+			"Aparece la pasarela de pagos de PostFinance E-Payment (la esperamos hasta " + seconds + " segundos)",
+			pagePostfCodSeg.isPasarelaPostfinanceProUntil(seconds), State.Defect);
 		
 		checks.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",

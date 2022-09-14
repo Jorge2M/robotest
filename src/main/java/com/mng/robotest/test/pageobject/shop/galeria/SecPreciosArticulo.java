@@ -59,7 +59,7 @@ public class SecPreciosArticulo extends PageBase {
 
 	public List<WebElement> getListaPreciosPrendas(List<WebElement> listArticles) throws Exception {
 		List<WebElement> listPrecios = new ArrayList<WebElement>();
-		waitForPageLoaded(driver);
+		waitLoadPage();
 		for (WebElement articulo : listArticles) {
 			//WebElement precio = getElementVisible(articulo, By.xpath("." + XPathPrecioDefinitivoRelativeArticle));
 			WebElement precio = getPrecioDefinitivoElem(articulo);
@@ -97,7 +97,7 @@ public class SecPreciosArticulo extends PageBase {
 	}
 
 	public boolean preciosInIntervalo(int minimo, int maximo, List<WebElement> listaArticles) throws Exception {
-		waitForPageLoaded(driver);
+		waitLoadPage();
 		List<WebElement> listaPreciosPrendas = getListaPreciosPrendas(listaArticles);
 		for (WebElement prendaPrecio : listaPreciosPrendas) {
 			String entero = prendaPrecio.getText();

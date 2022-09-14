@@ -25,17 +25,17 @@ public class ModalChatBotSteps {
 	}
 	
 	@Validation (
-		description="Aparece la capa del WebChat (la esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece la capa del WebChat (la esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	private boolean checkWebchatVisible(int maxSeconds) {
-		return modalChatBot.checkWebchatVisible(maxSeconds);
+	private boolean checkWebchatVisible(int seconds) {
+		return modalChatBot.checkWebchatVisible(seconds);
 	}
 	
 	@Validation (
-		description="Es visible la opción #{option} (la esperamos hasta #{maxSeconds} segundos)",
+		description="Es visible la opción #{option} (la esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean isVisibleOption(String option, int maxSeconds) {
-		return modalChatBot.isOptionVisible(option, maxSeconds);
+	public boolean isVisibleOption(String option, int seconds) {
+		return modalChatBot.isOptionVisible(option, seconds);
 	}
 	
 	@Step (
@@ -46,17 +46,17 @@ public class ModalChatBotSteps {
 	}
 	
 	@Validation (
-		description="Aparece una respuesta con el texto #{respuesta} (la esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece una respuesta con el texto #{respuesta} (la esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean checkResponseVisible(String respuesta, int maxSeconds) {
-		return modalChatBot.isResponseVisible(respuesta, maxSeconds);
+	public boolean checkResponseVisible(String respuesta, int seconds) {
+		return modalChatBot.isResponseVisible(respuesta, seconds);
 	}
 	
 	@Validation (
-		description="Aparece el botón #{respuesta} (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece el botón #{respuesta} (lo esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean isVisibleButton(String button, int maxSeconds) {
-		return modalChatBot.isButtonVisible(button, maxSeconds);
+	public boolean isVisibleButton(String button, int seconds) {
+		return modalChatBot.isButtonVisible(button, seconds);
 	}
 	
 }

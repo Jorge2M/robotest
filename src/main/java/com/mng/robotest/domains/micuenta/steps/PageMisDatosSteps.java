@@ -17,10 +17,10 @@ public class PageMisDatosSteps extends StepBase {
 	@Validation
 	public ChecksTM validaIsPage (String usuarioReg) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 2;
+		int seconds = 2;
 		checks.add(
-			"Aparece una página con el la cabecera \"Mis datos\" (esperamos hasta " + maxSeconds + " segundos)",
-			pageMisDatos.isPage(maxSeconds), State.Warn);
+			"Aparece una página con el la cabecera \"Mis datos\" (esperamos hasta " + seconds + " segundos)",
+			pageMisDatos.isPage(seconds), State.Warn);
 		
 		checks.add(
 			"El campo de email contiene " + usuarioReg,

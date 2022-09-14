@@ -60,10 +60,10 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	@Validation (
-		description="Desaparece la bolsa (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Desaparece la bolsa (lo esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	private boolean checkBolsaDisappears(int maxSeconds) {
-		return (secBolsa.isInStateUntil(StateBolsa.CLOSED, maxSeconds));
+	private boolean checkBolsaDisappears(int seconds) {
+		return (secBolsa.isInStateUntil(StateBolsa.CLOSED, seconds));
 	}
 
 	@Step (
@@ -75,10 +75,10 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	@Validation (
-		description="La bolsa queda en estado #{stateBolsaExpected} (lo esperamos hasta #{maxSecondsToWait} segundos)",
+		description="La bolsa queda en estado #{stateBolsaExpected} (lo esperamos hasta #{secondsToWait} segundos)",
 		level=State.Defect)
-	private boolean validateBolsaInState(StateBolsa stateBolsaExpected, int maxSeconds) {
-		return (secBolsa.isInStateUntil(stateBolsaExpected, maxSeconds));
+	private boolean validateBolsaInState(StateBolsa stateBolsaExpected, int seconds) {
+		return (secBolsa.isInStateUntil(stateBolsaExpected, seconds));
 	}
 
 	public DataBag altaArticlosConColores(int numArticulos) throws Exception {
@@ -126,8 +126,8 @@ public class SecBolsaSteps extends StepBase {
 		}
 
 		if (channel==Channel.desktop) {
-			int maxSecondsToWait = 10;
-			secBolsa.isInStateUntil(StateBolsa.OPEN,maxSecondsToWait);
+			int secondsToWait = 10;
+			secBolsa.isInStateUntil(StateBolsa.OPEN,secondsToWait);
 		}
 		return dataBag;
 	}
@@ -170,14 +170,14 @@ public class SecBolsaSteps extends StepBase {
 	@Validation
 	private ChecksTM checkIsBolsaVisibleInDesktop() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 1;
+		int seconds = 1;
 	 	checks.add(
-			"Es visible la capa/página correspondiente a la bolsa (la esperamos hasta " + maxSeconds + " segundos)",
-			secBolsa.isInStateUntil(StateBolsa.OPEN, maxSeconds), State.Defect);
+			"Es visible la capa/página correspondiente a la bolsa (la esperamos hasta " + seconds + " segundos)",
+			secBolsa.isInStateUntil(StateBolsa.OPEN, seconds), State.Defect);
 	 	
 	 	checks.add(
-			"Aparece el botón \"Comprar\" (lo esperamos hasta " + maxSeconds + " segundos)",
-			secBolsa.isVisibleBotonComprarUntil(maxSeconds), State.Defect);
+			"Aparece el botón \"Comprar\" (lo esperamos hasta " + seconds + " segundos)",
+			secBolsa.isVisibleBotonComprarUntil(seconds), State.Defect);
 	 	
 		return checks;
 	}
@@ -185,11 +185,11 @@ public class SecBolsaSteps extends StepBase {
 	@Validation
 	public ChecksTM validaNumArtEnBolsa(DataBag dataBag) throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 3;
+		int seconds = 3;
 		String itemsSaved = String.valueOf(dataBag.getListArticulos().size());
 	 	checks.add(
-			"Existen " + dataBag.getListArticulos().size() + " elementos dados de alta en la bolsa (los esperamos hasta " + maxSeconds + " segundos)",
-			secBolsa.numberItemsIsUntil(itemsSaved, channel, app, maxSeconds), State.Warn);
+			"Existen " + dataBag.getListArticulos().size() + " elementos dados de alta en la bolsa (los esperamos hasta " + seconds + " segundos)",
+			secBolsa.numberItemsIsUntil(itemsSaved, channel, app, seconds), State.Warn);
 	 	
 	 	return checks;
 	}
@@ -256,10 +256,10 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	@Validation (
-		description="El importe total se acaba modificando (lo esperamos hasta #{maxSeconds} segundos)",
+		description="El importe total se acaba modificando (lo esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	private boolean checkImporteIsModified(String importeTotalOrig, int maxSeconds) {
-		return (secBolsa.isNotThisImporteTotalUntil(importeTotalOrig, maxSeconds));
+	private boolean checkImporteIsModified(String importeTotalOrig, int seconds) {
+		return (secBolsa.isNotThisImporteTotalUntil(importeTotalOrig, seconds));
 	}
 
 	@Step (
@@ -279,8 +279,8 @@ public class SecBolsaSteps extends StepBase {
 		if (dataTest.userRegistered) {
 			new CheckoutSteps().validateIsFirstPage(dataTest.userRegistered, dataBag);
 		} else {
-			int maxSeconds = 5;
-			new Page1IdentCheckoutSteps().validateIsPage(maxSeconds);
+			int seconds = 5;
+			new Page1IdentCheckoutSteps().validateIsPage(seconds);
 			GenericChecks.checkDefault();
 			
 		}

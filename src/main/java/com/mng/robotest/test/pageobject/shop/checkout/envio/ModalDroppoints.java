@@ -34,18 +34,18 @@ public class ModalDroppoints extends PageBase {
 		return isVisibleUntil(0);
 	}
 	
-	public boolean isVisibleUntil(int maxSeconds) {
+	public boolean isVisibleUntil(int seconds) {
 		String xpathPanelGeneral = getXPathPanelGeneral();
-		return state(Visible, xpathPanelGeneral).wait(maxSeconds).check();
+		return state(Visible, xpathPanelGeneral).wait(seconds).check();
 	}
 	
-	public boolean isInvisibleUntil(int maxSeconds) {
+	public boolean isInvisibleUntil(int seconds) {
 		String xpathPanelGeneral = getXPathPanelGeneral();
-		return state(Invisible, xpathPanelGeneral).wait(maxSeconds).check();
+		return state(Invisible, xpathPanelGeneral).wait(seconds).check();
 	}
 	
-	public boolean isInvisibleCargandoMsgUntil(int maxSeconds) {
-		return state(Invisible, XPATH_MSG_CARGANDO).wait(maxSeconds).check();
+	public boolean isInvisibleCargandoMsgUntil(int seconds) {
+		return state(Invisible, XPATH_MSG_CARGANDO).wait(seconds).check();
 	}
 	
 	public boolean isErrorMessageVisibleUntil() {
@@ -56,17 +56,17 @@ public class ModalDroppoints extends PageBase {
 		secSelectDPoint.sendProvincia(provincia);
 	}
 	
-	public boolean deliveryPointSelectedContainsPoblacionUntil(DataSearchDeliveryPoint dataSearchDp, int maxSecondsToWait) 
+	public boolean deliveryPointSelectedContainsPoblacionUntil(DataSearchDeliveryPoint dataSearchDp, int secondsToWait) 
 			throws Exception {
-		return secSelectDPoint.deliveryPointSelectedContainsPoblacionUntil(dataSearchDp, maxSecondsToWait);
+		return secSelectDPoint.deliveryPointSelectedContainsPoblacionUntil(dataSearchDp, secondsToWait);
 	}
 	
-	public boolean isDroppointVisibleUntil(int position, int maxSeconds) {
-		return secSelectDPoint.isDroppointVisibleUntil(position, maxSeconds);
+	public boolean isDroppointVisibleUntil(int position, int seconds) {
+		return secSelectDPoint.isDroppointVisibleUntil(position, seconds);
 	}
 	
-	public TypeDeliveryPoint getTypeDeliveryPoint(int maxSeconds) {
-		return secSelectDPoint.getTypeDeliveryPoint(maxSeconds);
+	public TypeDeliveryPoint getTypeDeliveryPoint(int seconds) {
+		return secSelectDPoint.getTypeDeliveryPoint(seconds);
 	}
 	
 	public DataDeliveryPoint clickDeliveryPointAndGetData(int position) throws Exception {
@@ -77,8 +77,8 @@ public class ModalDroppoints extends PageBase {
 		return secSelectDPoint.isDroppointSelected(position);
 	}
 	
-	public void clickSelectButtonAndWait(int maxSeconds) {
-		secSelectDPoint.clickSelectButtonAndWait(maxSeconds);
+	public void clickSelectButtonAndWait(int seconds) {
+		secSelectDPoint.clickSelectButtonAndWait(seconds);
 	}
 
 	public void searchAgainByUserCp(String cp) {

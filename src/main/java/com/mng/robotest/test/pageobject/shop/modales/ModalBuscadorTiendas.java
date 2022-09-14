@@ -1,7 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.modales;
 
-import org.openqa.selenium.By;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -9,7 +7,6 @@ import com.mng.robotest.domains.footer.pageobjects.PageFromFooter;
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class ModalBuscadorTiendas extends PageBase implements PageFromFooter {
 
@@ -26,20 +23,20 @@ public class ModalBuscadorTiendas extends PageBase implements PageFromFooter {
 	}
 	
 	@Override
-	public boolean isPageCorrectUntil(int maxSeconds) {
-		return isVisible(maxSeconds);
+	public boolean isPageCorrectUntil(int seconds) {
+		return isVisible(seconds);
 	}
 	
 	public boolean isVisible() {
 		return isVisible(0);
 	}
 	
-	public boolean isVisible(int maxSeconds) {
-		return (state(Visible, By.xpath(XPATH_CONTAINER)).wait(maxSeconds).check());
+	public boolean isVisible(int seconds) {
+		return state(Visible, XPATH_CONTAINER).wait(seconds).check();
 	}
 	
-	public boolean isPresentAnyTiendaUntil(int maxSeconds) {
-		return (state(Present, By.xpath(XPATH_TIENDAS)).wait(maxSeconds).check());
+	public boolean isPresentAnyTiendaUntil(int seconds) {
+		return state(Present, XPATH_TIENDAS).wait(seconds).check();
 	}
 	
 	public void close() {
@@ -48,18 +45,17 @@ public class ModalBuscadorTiendas extends PageBase implements PageFromFooter {
 	
 	private void clickAspaForClose() {
 		if (channel==Channel.mobile) {
-			click(By.xpath(XPATH_LEFT_ARROW_MOBILE)).exec();
+			click(XPATH_LEFT_ARROW_MOBILE).exec();
 			return;
 		} 
 		if (channel==Channel.tablet) {
-			
-			click(By.xpath(XPATH_CLOSE_TABLET)).type(TypeClick.javascript).exec();
+			click(XPATH_CLOSE_TABLET).type(TypeClick.javascript).exec();
 		}
 		
 		if (app==AppEcom.outlet) {
-			click(By.xpath(XPATH_CLOSE_DESKTOP_OUTLET)).exec();
+			click(XPATH_CLOSE_DESKTOP_OUTLET).exec();
 		} else {
-			click(By.xpath(XPATH_CLOSE_DESKTOP_NOOUTLET)).exec();
+			click(XPATH_CLOSE_DESKTOP_NOOUTLET).exec();
 		}
 	}
 }

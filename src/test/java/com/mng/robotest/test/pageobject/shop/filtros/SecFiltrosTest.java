@@ -6,7 +6,6 @@ import java.util.List;
 import org.junit.Test;
 
 import com.mng.robotest.test.data.Color;
-import com.mng.robotest.test.pageobject.shop.filtros.SecFiltros;
 
 public class SecFiltrosTest {
 

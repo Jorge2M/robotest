@@ -60,10 +60,10 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Queda seleccionado el bloque correspondiete a <b>#{tipoTransporte}</b> (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Queda seleccionado el bloque correspondiete a <b>#{tipoTransporte}</b> (lo esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	public boolean validaBlockSelected(TipoTransporte tipoTransporte, int maxSeconds) throws Exception {
-		return (page1EnvioCheckoutMobil.isBlockSelectedUntil(tipoTransporte, maxSeconds));
+	public boolean validaBlockSelected(TipoTransporte tipoTransporte, int seconds) throws Exception {
+		return (page1EnvioCheckoutMobil.isBlockSelectedUntil(tipoTransporte, seconds));
 	}
 	
 	@Step (
@@ -93,10 +93,10 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 	@Validation
 	public ChecksTM validaResultImputPromoEmpl() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 2;
+		int seconds = 2;
 	 	checks.add(
-			"Aparece el descuento total aplicado al empleado (en menos de " + maxSeconds + " segundos)",
-			page1EnvioCheckoutMobil.isVisibleDescuentoEmpleadoUntil(maxSeconds), State.Warn);
+			"Aparece el descuento total aplicado al empleado (en menos de " + seconds + " segundos)",
+			page1EnvioCheckoutMobil.isVisibleDescuentoEmpleadoUntil(seconds), State.Warn);
 	 	
 	 	checks.add(
 			"Aparece un descuento de empleado mayor que 0",

@@ -12,10 +12,10 @@ public class PageKlarnaSteps extends StepBase {
 	private final PageKlarna pageKlarna = new PageKlarna();
 	
 	@Validation (
-		description="Aparece la página inicial de Klarna (la esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece la página inicial de Klarna (la esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean checkIsPage(int maxSeconds) { 
-		return pageKlarna.isPage(maxSeconds);
+	public boolean checkIsPage(int seconds) { 
+		return pageKlarna.isPage(seconds);
 	}
 	
 	public PageKlarna getPageObject() {
@@ -30,10 +30,10 @@ public class PageKlarnaSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece el modal de introducción de los datos del usuario (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece el modal de introducción de los datos del usuario (lo esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean checkIsModalInputUserData(int maxSeconds) { 
-		return pageKlarna.isVisibleModalInputUserData(maxSeconds);
+	public boolean checkIsModalInputUserData(int seconds) { 
+		return pageKlarna.isVisibleModalInputUserData(seconds);
 	}
 	
 	@Step (
@@ -51,17 +51,17 @@ public class PageKlarnaSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Es visible el modal para la introducción del número personal (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Es visible el modal para la introducción del número personal (lo esperamos hasta #{seconds} segundos)",
 		level=State.Info)
-	public boolean checkModalInputPersonNumber(int maxSeconds) { 
-		return pageKlarna.isVisibleModalPersonNumber(maxSeconds);
+	public boolean checkModalInputPersonNumber(int seconds) { 
+		return pageKlarna.isVisibleModalPersonNumber(seconds);
 	}
 	
 	@Validation (
-		description="Es visible el modal para la introducción del phone number (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Es visible el modal para la introducción del phone number (lo esperamos hasta #{seconds} segundos)",
 		level=State.Info)
-	public boolean checkModalInputPhoneNumber(int maxSeconds) { 
-		return pageKlarna.isVisibleModalInputPhone(maxSeconds);
+	public boolean checkModalInputPhoneNumber(int seconds) { 
+		return pageKlarna.isVisibleModalInputPhone(seconds);
 	}
 	
 	@Step (

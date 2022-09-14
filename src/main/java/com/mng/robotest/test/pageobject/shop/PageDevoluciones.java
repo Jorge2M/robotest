@@ -42,16 +42,16 @@ public class PageDevoluciones extends PageBase {
 		}
 		
 		public boolean isPresentLink(WebDriver driver) {
-			return (state(Present, By.xpath(this.xpathLink), driver).check());
+			return (PageBase.state(Present, By.xpath(this.xpathLink), driver).check());
 		}
 
 		public void click(WebDriver driver) {
 			PageBase.click(By.xpath(xpathLink), driver).exec();
 		}
 		
-		public void waitForInState(boolean plegada, int maxSeconds, WebDriver driver) {
+		public void waitForInState(boolean plegada, int seconds, WebDriver driver) {
 			By byLink = By.xpath(getXPath(plegada));
-			state(Present, byLink, driver).wait(maxSeconds).check();
+			state(Present, byLink, driver).wait(seconds).check();
 		}
 	}
 	
@@ -59,21 +59,21 @@ public class PageDevoluciones extends PageBase {
 	private static final String XPATH_BUTTON_SOLICITAR_RECOGIDA = "//div[@class[contains(.,'devoluciones_button_container')]]/span";
 
 	public boolean isPage() {
-		return (state(Present, By.xpath(XPATH_IS_PAGE_DEVOLUCIONES)).check());
+		return state(Present, XPATH_IS_PAGE_DEVOLUCIONES).check();
 	}
 
 	public void clickSolicitarRecogida() {
-		click(By.xpath(XPATH_BUTTON_SOLICITAR_RECOGIDA)).exec();
+		click(XPATH_BUTTON_SOLICITAR_RECOGIDA).exec();
 		
 		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un par de veces
 		for (int i=0; i<2; i++) {
 			if (isVisibleSolicitarRecogidaButton()) {
-				click(By.xpath(XPATH_BUTTON_SOLICITAR_RECOGIDA)).type(TypeClick.javascript).exec();
+				click(XPATH_BUTTON_SOLICITAR_RECOGIDA).type(TypeClick.javascript).exec();
 			}
 		}
 	}
 
 	public boolean isVisibleSolicitarRecogidaButton() {
-		return (state(Visible, By.xpath(XPATH_BUTTON_SOLICITAR_RECOGIDA)).check());
+		return state(Visible, XPATH_BUTTON_SOLICITAR_RECOGIDA).check();
 	}
 }

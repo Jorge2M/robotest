@@ -13,10 +13,10 @@ public class PageHomeConseguirPorLikesSteps extends StepBase {
 	private final PageHomeConseguirPorLikes pageHomeConseguirPorLikes = new PageHomeConseguirPorLikes();
 	
 	@Validation (
-		description="Aparece el botón de \"Conseguir por Likes\" (esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece el botón de \"Conseguir por Likes\" (esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean checkIsPage(int maxSeconds) {
-		return pageHomeConseguirPorLikes.isPage(maxSeconds);
+	public boolean checkIsPage(int seconds) {
+		return pageHomeConseguirPorLikes.isPage(seconds);
 	}
 	
 	@Step (
@@ -30,10 +30,10 @@ public class PageHomeConseguirPorLikesSteps extends StepBase {
 	@Validation
 	public ChecksTM checkAfterConseguirButton() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 5;
+		int seconds = 5;
 		checks.add(
-			"Aparece el icono correspondiente a la operación realizada (lo esperamos hasta " + maxSeconds + " segundos)",
-			pageHomeConseguirPorLikes.isVisibleIconOperationDoneUntil(maxSeconds), State.Defect);
+			"Aparece el icono correspondiente a la operación realizada (lo esperamos hasta " + seconds + " segundos)",
+			pageHomeConseguirPorLikes.isVisibleIconOperationDoneUntil(seconds), State.Defect);
 
 		return checks;
 	}	

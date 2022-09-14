@@ -72,17 +72,17 @@ public class SecBuscadorSteps extends StepBase {
 	}
 
 	@Validation (
-		description="Aparece como mínimo un producto de tipo #{categoriaABuscar}  (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece como mínimo un producto de tipo #{categoriaABuscar}  (lo esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	private boolean areProducts(String categoriaABuscar, int maxSeconds) {
+	private boolean areProducts(String categoriaABuscar, int seconds) {
 		String producSin1erCaracter = categoriaABuscar.substring(1, categoriaABuscar.length()-1).toLowerCase();
-		return "".compareTo(pageGaleria.getNombreArticuloWithText(producSin1erCaracter, maxSeconds))!=0;
+		return "".compareTo(pageGaleria.getNombreArticuloWithText(producSin1erCaracter, seconds))!=0;
 	}
 	
 	@Validation (
-		description="Aparece algún producto (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece algún producto (lo esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	private boolean areProducts(int maxSeconds) {
-		return pageGaleria.isVisibleArticleUntil(1, maxSeconds);
+	private boolean areProducts(int seconds) {
+		return pageGaleria.isVisibleArticleUntil(1, seconds);
 	}
 }

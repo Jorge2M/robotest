@@ -1,6 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.checkout.tmango;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.domains.transversal.PageBase;
@@ -17,16 +16,15 @@ public class PageAmexInputCip extends PageBase {
 		super(driver);
 	}
 	
-	public boolean isPageUntil(int maxSeconds) {
-		return (state(Present, By.xpath(XPATH_INPUT_CIP))
-				.wait(maxSeconds).check());
+	public boolean isPageUntil(int seconds) {
+		return state(Present, XPATH_INPUT_CIP).wait(seconds).check();
 	}
 	
 	public void inputCIP(String CIP) {
-		driver.findElement(By.xpath(XPATH_INPUT_CIP)).sendKeys(CIP);
+		getElement(XPATH_INPUT_CIP).sendKeys(CIP);
 	}
 
 	public void clickAceptarButton() {
-		click(By.xpath(XPATH_ACCEPT_BUTTON)).exec();
+		click(XPATH_ACCEPT_BUTTON).exec();
 	}
 }

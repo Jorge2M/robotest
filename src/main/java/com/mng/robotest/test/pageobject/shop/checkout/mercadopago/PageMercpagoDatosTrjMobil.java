@@ -12,8 +12,8 @@ public class PageMercpagoDatosTrjMobil extends PageMercpagoDatosTrj {
 	private static String XPATH_BUTTON_NEXT_PAY = "//button[@id='submit' and @class[contains(.,'submit-arrow')]]";
 	
 	@Override
-	public boolean isPageUntil(int maxSeconds) {
-		return state(Visible, XPATH_INPUT_CVC).wait(maxSeconds).check();
+	public boolean isPageUntil(int seconds) {
+		return state(Visible, XPATH_INPUT_CVC).wait(seconds).check();
 	}
 	
 	@Override
@@ -36,8 +36,8 @@ public class PageMercpagoDatosTrjMobil extends PageMercpagoDatosTrj {
 		getElement(XPATH_INPUT_CVC).sendKeys(securityCode);		
 	}
 	
-	public boolean isActiveWrapperVisaUntil(int maxSeconds) {
-		return state(Visible, XPATH_WRAPPER_VISA_ACTIVE).wait(maxSeconds).check();
+	public boolean isActiveWrapperVisaUntil(int seconds) {
+		return state(Visible, XPATH_WRAPPER_VISA_ACTIVE).wait(seconds).check();
 	}
 	
 	public void clickNextButton() {
@@ -48,8 +48,8 @@ public class PageMercpagoDatosTrjMobil extends PageMercpagoDatosTrj {
 		getElement(XPATH_BACK_BUTTON).click();
 	}	
 	
-	public boolean isClickableButtonNextPayUntil(int maxSeconds) {
-		return state(Clickable, XPATH_BUTTON_NEXT_PAY).wait(maxSeconds).check();
+	public boolean isClickableButtonNextPayUntil(int seconds) {
+		return state(Clickable, XPATH_BUTTON_NEXT_PAY).wait(seconds).check();
 	}
 
 	public void clickButtonForPay() {

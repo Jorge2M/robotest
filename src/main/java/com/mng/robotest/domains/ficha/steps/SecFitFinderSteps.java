@@ -14,10 +14,10 @@ public class SecFitFinderSteps extends StepBase {
 	@Validation
 	public ChecksTM validateIsOkAndClose() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 2;
+		int seconds = 2;
 	  	checks.add(
-			"Es visible el Wrapper con la guía de tallas (lo esperamos hasta " + maxSeconds + " seconds)",
-			secFitFinder.isVisibleUntil(maxSeconds), State.Defect);
+			"Es visible el Wrapper con la guía de tallas (lo esperamos hasta " + seconds + " seconds)",
+			secFitFinder.isVisibleUntil(seconds), State.Defect);
 	  	checks.add(
 			"Es visible el input para la introducción de la altura",
 			secFitFinder.isVisibleInputAltura(), State.Warn);

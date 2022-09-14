@@ -6,8 +6,8 @@ import com.mng.robotest.domains.transversal.PageBase;
 
 public abstract class ModalDetalleArticulo extends PageBase {
 
-	public abstract boolean isVisible(int maxSeconds);
-	public abstract boolean isInvisible(int maxSeconds);
+	public abstract boolean isVisible(int seconds);
+	public abstract boolean isInvisible(int seconds);
 	public abstract void clickAspaForClose();
 	public abstract String getReferencia();
 	public abstract String getNombre();
@@ -30,11 +30,11 @@ public abstract class ModalDetalleArticulo extends PageBase {
 		return (ModalDetalleArticuloDesktop)this;
 	}
 	
-	public boolean existsReferencia(String referenciaExpected, int maxSeconds) {
+	public boolean existsReferencia(String referenciaExpected, int seconds) {
 		if (existsReferencia(referenciaExpected)) {
 			return true;
 		}
-		for (int i=0; i<maxSeconds; i++) {
+		for (int i=0; i<seconds; i++) {
 			waitMillis(1000);
 			if (existsReferencia(referenciaExpected)) {
 				return true;

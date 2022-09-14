@@ -1,6 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.checkout.assist;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -42,7 +41,7 @@ public class PageAssist1rst extends PageBase {
 	
 	public boolean isPresentLogoAssist() {
 		String xpathLogo = getXPathLogoAssist();
-		return (state(Present, By.xpath(xpathLogo)).check());
+		return state(Present, xpathLogo).check();
 	}
 	
 	public boolean isPresentInputsForTrjData() {
@@ -77,15 +76,15 @@ public class PageAssist1rst extends PageBase {
 			new Select(getElement(XPATH_SELECT_AA_CADUC_MOVIL)).selectByValue("20" + pago.getAnycad()); //Atención con el efecto 2100!!!
 		} else {
 			getElement(XPATH_INPUT_NUM_TRJ_DESKTOP).sendKeys(pago.getNumtarj());
-			waitForPageLoaded(driver);
+			waitLoadPage();
 			getElement(XPATH_INPUT_MM_CADUC_DESKTOP).sendKeys(pago.getMescad());
 			getElement(XPATH_INPUT_AA_CADUC_DESKTOP).sendKeys(pago.getAnycad());
-			waitForPageLoaded(driver);
+			waitLoadPage();
 		}
 		
 		getElement(XPATH_INPUT_TITULAR).sendKeys(pago.getTitular());
 		getElementVisible(XPATH_INPUT_CVC).sendKeys(pago.getCvc());
-		waitForPageLoaded(driver);
+		waitLoadPage();
 		
 		//Wait for button available
 		waitForBotonAvailable(1);
@@ -104,8 +103,8 @@ public class PageAssist1rst extends PageBase {
 		state(State.Present, xpathBoton).wait(seconds);
 	}
 	
-	public boolean invisibilityBotonPagoUntil(int maxSeconds) {
-		return state(Invisible, getXPathButtonPago()).wait(maxSeconds).check();
+	public boolean invisibilityBotonPagoUntil(int seconds) {
+		return state(Invisible, getXPathButtonPago()).wait(seconds).check();
 	 }
 }
 

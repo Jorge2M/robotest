@@ -33,13 +33,13 @@ public class SSecSelTallasFichaNew extends PageBase implements SSecSelTallasFich
 	}
 
 	@Override
-	public boolean isSectionUntil(int maxSeconds) {
-		return isVisibleSelectorTallasUntil(maxSeconds);
+	public boolean isSectionUntil(int seconds) {
+		return isVisibleSelectorTallasUntil(seconds);
 	}
 	
 	@Override
-	public boolean isVisibleSelectorTallasUntil(int maxSeconds) {
-		return (state(Visible, XPATH_SELECTOR_TALLAS).wait(maxSeconds).check());
+	public boolean isVisibleSelectorTallasUntil(int seconds) {
+		return (state(Visible, XPATH_SELECTOR_TALLAS).wait(seconds).check());
 	}
 	
 	@Override
@@ -95,8 +95,8 @@ public class SSecSelTallasFichaNew extends PageBase implements SSecSelTallasFich
 	}
 	
 	@Override
-	public boolean isVisibleListTallasForSelectUntil(int maxSeconds) {
-		return (state(Visible, XPATH_LIST_TALLAS_FOR_SELECT).wait(maxSeconds).check());
+	public boolean isVisibleListTallasForSelectUntil(int seconds) {
+		return (state(Visible, XPATH_LIST_TALLAS_FOR_SELECT).wait(seconds).check());
 	}
 	
 	@Override

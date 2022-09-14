@@ -17,7 +17,7 @@ public class PagePaytrail1rstSteps extends StepBase {
 	public ChecksTM validateIsPage(String importeTotal, String codPais) {
 		ChecksTM checks = ChecksTM.getNew();
 		String nombrePagoCabecera = "Finnish E-Banking";
-		int maxSecondsToWait = 2;
+		int secondsToWait = 2;
 		checks.add(
 			"Figura el bloque correspondiente al pago <b>" + nombrePagoCabecera + "</b>",
 			pagePaytrail1rst.isPresentEntradaPago(nombrePagoCabecera), State.Warn);
@@ -32,8 +32,8 @@ public class PagePaytrail1rstSteps extends StepBase {
 		
 		if (channel==Channel.desktop) {
 			checks.add(
-				"Es visible el desplegable de bancos (lo esperamos hasta " + maxSecondsToWait + " seconds)",
-				pagePaytrail1rst.isVisibleSelectBancosUntil(maxSecondsToWait), State.Warn);
+				"Es visible el desplegable de bancos (lo esperamos hasta " + secondsToWait + " seconds)",
+				pagePaytrail1rst.isVisibleSelectBancosUntil(secondsToWait), State.Warn);
 			
 			checks.add(
 				"Figura un botón de pago",

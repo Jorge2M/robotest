@@ -12,14 +12,14 @@ public class PagePostfRedirectSteps {
 	@Validation
 	public ChecksTM isPageAndFinallyDisappears() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 10;
+		int seconds = 10;
 		checks.add(
 			"Aparece una página de redirección con un botón OK",
 			pagePostfRedirect.isPresentButtonOk(), State.Defect);
 		
 		checks.add(
-			"La página de redirección acaba desapareciendo (esperamos hasta " + maxSeconds + " segundos)",
-			pagePostfRedirect.isInvisibleButtonOkUntil(maxSeconds), State.Defect);
+			"La página de redirección acaba desapareciendo (esperamos hasta " + seconds + " segundos)",
+			pagePostfRedirect.isInvisibleButtonOkUntil(seconds), State.Defect);
 		
 		return checks;
 	}

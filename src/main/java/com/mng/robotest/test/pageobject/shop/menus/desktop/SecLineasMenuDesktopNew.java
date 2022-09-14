@@ -2,8 +2,6 @@ package com.mng.robotest.test.pageobject.shop.menus.desktop;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
 
-import org.openqa.selenium.By;
-
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
@@ -65,16 +63,16 @@ public class SecLineasMenuDesktopNew extends SecLineasMenuDesktop {
 		hoverSublinea(sublineaType);
 	}
 	
-	private boolean isVisibleSublineaUntil(SublineaType sublineaType, int maxSeconds) {
+	private boolean isVisibleSublineaUntil(SublineaType sublineaType, int seconds) {
 		String xpathLinkSublinea = getXPathSublineaLink(sublineaType);	
-		return state(Visible, By.xpath(xpathLinkSublinea)).wait(maxSeconds).check();
+		return state(Visible, xpathLinkSublinea).wait(seconds).check();
 	}
 	
 	private void hoverSublinea(SublineaType sublineaType) {
 		String xpathLinkSublinea = getXPathSublineaLink(sublineaType);
-		moveToElement(By.xpath(xpathLinkSublinea), driver);
+		moveToElement(xpathLinkSublinea);
 		waitMillis(500);
-		moveToElement(By.xpath(xpathLinkSublinea), driver);
+		moveToElement(xpathLinkSublinea);
 	}
 	
 }

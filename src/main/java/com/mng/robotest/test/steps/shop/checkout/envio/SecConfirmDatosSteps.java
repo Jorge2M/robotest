@@ -20,10 +20,10 @@ public class SecConfirmDatosSteps extends StepBase {
 	private final SecConfirmDatos secConfirmDatos = modalDroppoints.getSecConfirmDatos();
 	
 	@Validation (
-		description="Es visible la capa de confirmación de los datos (la esperamos hasta #{maxSeconds} segundos)",
+		description="Es visible la capa de confirmación de los datos (la esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean validateIsVisible(int maxSeconds) {
-		return (secConfirmDatos.isVisibleUntil(maxSeconds));
+	public boolean validateIsVisible(int seconds) {
+		return (secConfirmDatos.isVisibleUntil(seconds));
 	}
 	
 	public void setDataIfNeeded(String codigoPais) throws Exception {
@@ -53,10 +53,10 @@ public class SecConfirmDatosSteps extends StepBase {
 	@Validation
 	private ChecksTM checkConfirmacionCambioDireccionEnvio(DataPedido dataPedido) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 2;
+		int seconds = 2;
 		checks.add(
-			"Desaparece la capa de Droppoints (lo esperamos hasta " + maxSeconds + " segundos)",
-			modalDroppoints.isInvisibleUntil(maxSeconds), State.Warn);
+			"Desaparece la capa de Droppoints (lo esperamos hasta " + seconds + " segundos)",
+			modalDroppoints.isInvisibleUntil(seconds), State.Warn);
 		
 		DataDeliveryPoint dataDp = dataPedido.getDataDeliveryPoint();
 		String textDireccionEnvioCompleta = new PageCheckoutWrapper().getTextDireccionEnvioCompleta();

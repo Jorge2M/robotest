@@ -64,9 +64,9 @@ public class PageFichaArtSteps extends StepBase {
 	@Validation (
 		description=
 			"Aparece la página correspondiente a la ficha del artículo #{refArticulo}" + 
-			" (La esperamos hasta #{maxSeconds} segundos)")
-	public boolean validateIsFichaArtDisponible(String refArticulo, int maxSeconds) { 
-		return (pageFicha.isFichaArticuloUntil(refArticulo, maxSeconds));
+			" (La esperamos hasta #{seconds} segundos)")
+	public boolean validateIsFichaArtDisponible(String refArticulo, int seconds) { 
+		return (pageFicha.isFichaArticuloUntil(refArticulo, seconds));
 	}
 	
 	@Validation
@@ -94,11 +94,11 @@ public class PageFichaArtSteps extends StepBase {
 	public ChecksTM validaDetallesProducto(DataFichaArt datosArticulo) {
 		ChecksTM checks = ChecksTM.getNew();
 		if (datosArticulo.availableReferencia()) {
-			int maxSeconds = 3;
+			int seconds = 3;
 		 	checks.add(
 				"Aparece la página con los datos de la ficha del producto " + datosArticulo.getReferencia() +
-				" (la esperamos hasta " + maxSeconds + " segundos)",
-				pageFicha.isFichaArticuloUntil(datosArticulo.getReferencia(), maxSeconds), State.Defect);
+				" (la esperamos hasta " + seconds + " segundos)",
+				pageFicha.isFichaArticuloUntil(datosArticulo.getReferencia(), seconds), State.Defect);
 		}
 			
 		if (datosArticulo.availableNombre()) {
@@ -161,10 +161,10 @@ public class PageFichaArtSteps extends StepBase {
 	}
 
 	@Validation (
-		description="Queda seleccionada la talla <b>#{talla.name()}</b> (esperamos hasta #{maxSeconds} segundos)",
+		description="Queda seleccionada la talla <b>#{talla.name()}</b> (esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	private boolean checkTallaSelected(Talla talla, int maxSeconds) {
-		for (int i=0; i<maxSeconds; i++) {
+	private boolean checkTallaSelected(Talla talla, int seconds) {
+		for (int i=0; i<seconds; i++) {
 			Talla tallaSelected = pageFicha.getTallaSelected(); 
 			if (tallaSelected==talla) {
 				return true;
@@ -312,15 +312,15 @@ public class PageFichaArtSteps extends StepBase {
 	@Validation
 	private ChecksTM checkCapaAltaFavoritos() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds1 = 3;
+		int seconds1 = 3;
 	 	checks.add(
-			"Aparece una capa superior de \"Añadiendo artículo a favoritos...\" (lo esperamos hasta " + maxSeconds1 + " segundos)",
-			pageFicha.isVisibleDivAnadiendoAFavoritosUntil(maxSeconds1), State.Info);
+			"Aparece una capa superior de \"Añadiendo artículo a favoritos...\" (lo esperamos hasta " + seconds1 + " segundos)",
+			pageFicha.isVisibleDivAnadiendoAFavoritosUntil(seconds1), State.Info);
 	 	
-		int maxSeconds2 = 3;
+		int seconds2 = 3;
 	 	checks.add(
-			"La capa superior acaba desapareciendo (lo esperamos hasta " + maxSeconds2 + " segundos)",
-			pageFicha.isInvisibleDivAnadiendoAFavoritosUntil(maxSeconds2), State.Warn);
+			"La capa superior acaba desapareciendo (lo esperamos hasta " + seconds2 + " segundos)",
+			pageFicha.isInvisibleDivAnadiendoAFavoritosUntil(seconds2), State.Warn);
 	 	
 		return checks;
 	}
@@ -413,15 +413,15 @@ public class PageFichaArtSteps extends StepBase {
 	@Validation
 	public ChecksTM validaPrevNext(LocationArticle locationArt) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 5;
-		boolean isVisiblePrevLink = pageFicha.getSecDataProduct().isVisiblePrevNextUntil(ProductNav.PREV, maxSeconds);
+		int seconds = 5;
+		boolean isVisiblePrevLink = pageFicha.getSecDataProduct().isVisiblePrevNextUntil(ProductNav.PREV, seconds);
 		if (locationArt.isFirstInGalery()) {
 		 	checks.add(
-		 		"No es visible el link <b>Prev</b> (lo esperamos hasta " + maxSeconds + " segundos)",
+		 		"No es visible el link <b>Prev</b> (lo esperamos hasta " + seconds + " segundos)",
 		 		!isVisiblePrevLink, State.Warn);
 		} else {
 		 	checks.add(
-		 		"Sí es visible el link <b>Prev</b> (lo esperamos hasta " + maxSeconds + " segundos)",
+		 		"Sí es visible el link <b>Prev</b> (lo esperamos hasta " + seconds + " segundos)",
 		 		isVisiblePrevLink, State.Warn);
 		}
 		if (app==AppEcom.outlet || channel==Channel.desktop) {

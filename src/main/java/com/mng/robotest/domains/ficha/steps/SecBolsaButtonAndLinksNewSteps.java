@@ -44,8 +44,8 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 		description="Se scrolla hasta el apartado de \"Descriptión\"",
 		level=State.Defect)
 	private boolean checkScrollToDescription() {
-		int maxSecondsToWait = 3;
-		return (secDetalleProductNew.isVisibleUntil(maxSecondsToWait));
+		int secondsToWait = 3;
+		return (secDetalleProductNew.isVisibleUntil(secondsToWait));
 	}
 	
 	@Validation
@@ -88,10 +88,10 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 	@Validation
 	private ChecksTM checkAppearsModalShareSocial(String codigoPais) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 1;
+		int seconds = 1;
 	 	checks.add(
-	 		"Aparece el modal para compartir a nivel social (lo esperamos hasta " + maxSeconds + " segundos) ",
-	 		new ModCompartirNew().isVisibleUntil(maxSeconds), State.Defect);
+	 		"Aparece el modal para compartir a nivel social (lo esperamos hasta " + seconds + " segundos) ",
+	 		new ModCompartirNew().isVisibleUntil(seconds), State.Defect);
 		
 		boolean isPaisChina = (codigoPais.compareTo("720")==0);
 		for (IconSocial icon : IconSocial.values()) {

@@ -17,8 +17,8 @@ public class SecSubmenusGallery extends PageBase {
 				.replace(TAG2_NAME, nameMenuFirstCapital);
 	}
 	
-	public boolean isVisible(int maxSeconds) {
-		return state(State.Visible, XPATH_CAPA).wait(maxSeconds).check();
+	public boolean isVisible(int seconds) {
+		return state(State.Visible, XPATH_CAPA).wait(seconds).check();
 	}
 	
 	public boolean isVisibleSubmenu(String nameMenu) {

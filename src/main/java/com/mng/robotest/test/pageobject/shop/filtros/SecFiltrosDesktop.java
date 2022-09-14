@@ -2,7 +2,6 @@ package com.mng.robotest.test.pageobject.shop.filtros;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
@@ -70,14 +69,14 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	@Override
 	public void selectOrdenacion(FilterOrdenacion ordenacion) {
 		String xpathLink = getXPathLinkOrdenacion(ordenacion);
-		click(By.xpath(xpathLink)).exec();
+		click(xpathLink).exec();
 	}
 	
 	@Override
 	public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception {
 		selectOrdenacion(typeOrden);
-		int maxSecondsToWait = 10;
-		int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(maxSecondsToWait);
+		int secondsToWait = 10;
+		int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(secondsToWait);
 		return numArticles;
 	}
 	
@@ -93,8 +92,8 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 			click(xpathLinkColor).exec();
 		}
 		acceptFilters();
-		int maxSecondsToWait = 10;
-		int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(maxSecondsToWait);
+		int secondsToWait = 10;
+		int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(secondsToWait);
 		return numArticles;
 	}
 	
@@ -122,11 +121,9 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	
 	private static final String XPATH_LINK_COLLECTION = "//div[@id='navigationContainer']/button";
 	public void showLateralMenus() {
-		//if (app!=AppEcom.outlet) {
-			if (!new SecMenuLateralDesktop().isVisibleCapaMenus(1)) {
-				click(By.xpath(XPATH_LINK_COLLECTION)).exec();
-			}
-		//}
+		if (!new SecMenuLateralDesktop().isVisibleCapaMenus(1)) {
+			click(XPATH_LINK_COLLECTION).exec();
+		}
 	}
 	
 	//TODO hablar con Sergio Campillo para que añada algún id no-react
@@ -154,7 +151,7 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 			click(XPATH_BUTTON_FILTRAR).exec();
 		//}
 	}
-	private boolean isFiltersShopVisible(int maxSeconds) {
-		return state(State.Visible, XPATH_CAPA_FILTERS).wait(maxSeconds).check();
+	private boolean isFiltersShopVisible(int seconds) {
+		return state(State.Visible, XPATH_CAPA_FILTERS).wait(seconds).check();
 	}
 }

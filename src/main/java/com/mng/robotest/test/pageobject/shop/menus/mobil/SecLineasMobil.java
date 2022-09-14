@@ -29,9 +29,9 @@ public abstract class SecLineasMobil extends SecLineasDevice {
 		return XPATH_HEADER_MOBILE;
 	}
 
-	public boolean isLineaPresentUntil(LineaType lineaType, int maxSeconds) {
+	public boolean isLineaPresentUntil(LineaType lineaType, int seconds) {
 		String xpathLinea = getXPathLineaLink(lineaType);
-		return state(Present, xpathLinea).wait(maxSeconds).check();
+		return state(Present, xpathLinea).wait(seconds).check();
 	}
 
 }

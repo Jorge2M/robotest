@@ -28,7 +28,7 @@ public class SecSearchMobilOutlet extends PageBase implements SecSearch {
 		click(XPATH_CANCELAR_LINK).exec();
 	}
 
-	public boolean isBuscadorVisibleUntil(int maxSeconds) {
-		return (state(Visible, XPATH_INPUT_BUSCADOR).wait(maxSeconds).check());
+	public boolean isBuscadorVisibleUntil(int seconds) {
+		return (state(Visible, XPATH_INPUT_BUSCADOR).wait(seconds).check());
 	}
 }

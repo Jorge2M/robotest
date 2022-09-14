@@ -8,12 +8,12 @@ public class SectionCookies extends PageBase {
 	private static final String XPATH_ACCEPT_BUTTON = "//button[@id[contains(.,'accept-btn')]]";
 	private static final String XPATH_SET_COOKIES_BUTTON = "//button[@id[contains(.,'pc-btn')]]";
 	
-	public boolean isVisible(int maxSeconds) {
-		return state(State.Visible, XPATH_ACCEPT_BUTTON).wait(maxSeconds).check();
+	public boolean isVisible(int seconds) {
+		return state(State.Visible, XPATH_ACCEPT_BUTTON).wait(seconds).check();
 	}
 	
-	public boolean isInvisible(int maxSeconds) {
-		return state(State.Invisible, XPATH_ACCEPT_BUTTON).wait(maxSeconds).check();
+	public boolean isInvisible(int seconds) {
+		return state(State.Invisible, XPATH_ACCEPT_BUTTON).wait(seconds).check();
 	}
 	
 	public void accept() {

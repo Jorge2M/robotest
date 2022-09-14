@@ -71,8 +71,8 @@ public class PageReembolsos extends PageBase {
 		getElement(XPATH_INPUT_BANCO).sendKeys(banco);
 	}
 
-	public boolean isVisibleTextBancoUntil(int maxSecondsToWait) {
-		return (state(Visible, XPATH_TEXT_BANCO_AFTER_SAVE).wait(maxSecondsToWait).check());
+	public boolean isVisibleTextBancoUntil(int secondsToWait) {
+		return (state(Visible, XPATH_TEXT_BANCO_AFTER_SAVE).wait(secondsToWait).check());
 	}
 
 	public boolean existsInputTitular() {
@@ -139,9 +139,9 @@ public class PageReembolsos extends PageBase {
 		typeDateOfBirthIfInputExists(23, 4, 1974);
 	}
 
-	public boolean isVisibleTransferenciaSectionUntil(int maxSeconds) {
+	public boolean isVisibleTransferenciaSectionUntil(int seconds) {
 		String xpathBlock = getXPathBlock(TypeReembolso.TRANSFERENCIA);
-		return state(Visible, xpathBlock).wait(maxSeconds).check();
+		return state(Visible, xpathBlock).wait(seconds).check();
 	}
 
 	public boolean isVisibleStorecreditSection() {
@@ -218,8 +218,8 @@ public class PageReembolsos extends PageBase {
 		return state(Visible, XPATH_SAVE_BUTTON_STORE_CREDIT).check();
 	}
 
-	public boolean isVisibleSaveButtonStoreCreditUntil(int maxSeconds) {
-		return state(Visible, XPATH_SAVE_BUTTON_STORE_CREDIT).wait(maxSeconds).check();
+	public boolean isVisibleSaveButtonStoreCreditUntil(int seconds) {
+		return state(Visible, XPATH_SAVE_BUTTON_STORE_CREDIT).wait(seconds).check();
 	}
 
 	public void clickSaveButtonStoreCredit() {

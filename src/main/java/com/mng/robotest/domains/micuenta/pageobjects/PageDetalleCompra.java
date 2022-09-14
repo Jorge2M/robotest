@@ -15,14 +15,14 @@ public abstract class PageDetalleCompra extends PageBase implements PageDetalleP
 	@Override
 	public abstract boolean isPresentImporteTotal(String importeTotal, String codPais);
 	@Override
-	public abstract boolean isVisiblePrendaUntil(int maxSeconds);
+	public abstract boolean isVisiblePrendaUntil(int seconds);
 	@Override
 	public abstract void clickBackButton(Channel channel);
 	@Override
 	public abstract int getNumPrendas();
 	
-	public abstract boolean isVisibleDataTicket(int maxSeconds);
-	public abstract boolean isVisibleIdTicket(int maxSeconds);
+	public abstract boolean isVisibleDataTicket(int seconds);
+	public abstract boolean isVisibleIdTicket(int seconds);
 	public abstract String getIdTicket(TypeTicket typeTicket);
 	public abstract String getImporte();
 	public abstract String getReferenciaArticulo(int posArticulo);

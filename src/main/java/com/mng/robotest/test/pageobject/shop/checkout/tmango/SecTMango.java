@@ -56,8 +56,8 @@ public class SecTMango extends PageBase {
 		return (xpathLabelMod + "/../../input");
 	}
 	
-	public boolean isVisibleUntil(int maxSeconds) {
-		return state(Visible, getXPathSection()).wait(maxSeconds).check();
+	public boolean isVisibleUntil(int seconds) {
+		return state(Visible, getXPathSection()).wait(seconds).check();
 	}
 	
 	public boolean isModalidadDisponible(TipoPago tipoPago) {

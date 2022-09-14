@@ -7,10 +7,10 @@ import com.mng.robotest.test.generic.ChequeRegalo;
 
 public abstract class PageChequeRegaloInputData extends PageBase {
 	
-	public abstract boolean isPageCorrectUntil(int maxSeconds);
+	public abstract boolean isPageCorrectUntil(int seconds);
 	public abstract void clickImporteCheque(Importe importeToClick);
 	public abstract void clickComprarIni();
-	public abstract boolean isVisibleDataInput(int maxSeconds);
+	public abstract boolean isVisibleDataInput(int seconds);
 	public abstract void inputDataCheque(ChequeRegalo chequeRegalo);
 	public abstract void clickComprarFin(ChequeRegalo chequeRegalo);
 	

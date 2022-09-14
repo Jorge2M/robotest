@@ -92,8 +92,8 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 	@Validation(
 		description="1) Está presente el selector de secciones dentro de <b>She</b>",
 		level=State.Warn)
-	private boolean validateSectionShe(int maxSeconds) {
-		return (state(Visible, Orden.selectorOrdenacion.getBy()).wait(maxSeconds).check());
+	private boolean validateSectionShe(int seconds) {
+		return (state(Visible, Orden.selectorOrdenacion.getBy()).wait(seconds).check());
 	}
 
 	@Step(
@@ -131,13 +131,13 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 	@Validation
 	private ChecksTM validateTipoPrenda() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 20;
+		int seconds = 20;
 		checks.add(
-			"Aparecen imagenes en la nueva página (lo esperamos hasta " + maxSeconds + " segundos)",
-			state(Visible, Orden.pruebaImagen.getBy()).wait(maxSeconds).check(), State.Defect);
+			"Aparecen imagenes en la nueva página (lo esperamos hasta " + seconds + " segundos)",
+			state(Visible, Orden.pruebaImagen.getBy()).wait(seconds).check(), State.Defect);
 		checks.add(
 			"Estamos en la sección que corresponde <b>camisas</b>",
-			state(Visible, Orden.pruebaCamisa.getBy()).wait(maxSeconds).check(), State.Defect);
+			state(Visible, Orden.pruebaCamisa.getBy()).wait(seconds).check(), State.Defect);
 		return checks;
 	}
 
@@ -147,20 +147,20 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 		saveErrorData = SaveWhen.Never)
 	private void bajarPrenda() throws Exception {
 		click(Orden.primeraPrenda.getBy()).exec();
-		moveToElement(Orden.bajarPrenda.getBy(), driver);
+		moveToElement(Orden.bajarPrenda.getBy());
 		click(Orden.bajarPrenda.getBy()).waitLink(3).exec();
 		validateBajarPrenda(15);
 	}
 
 	@Validation
-	private ChecksTM validateBajarPrenda(int maxSeconds) {
+	private ChecksTM validateBajarPrenda(int seconds) {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 			"Se sigue viendo la segunda prenda",
-			state(Visible, Orden.segundaPrenda.getBy()).wait(maxSeconds).check(), State.Defect);
+			state(Visible, Orden.segundaPrenda.getBy()).wait(seconds).check(), State.Defect);
 		checks.add(
 			"La primera prenda no se corresponde con la que había inicialmente",
-			state(Visible, Orden.primeraPrenda.getBy()).wait(maxSeconds).check(), State.Defect);
+			state(Visible, Orden.primeraPrenda.getBy()).wait(seconds).check(), State.Defect);
 		return checks;
 	}
 

@@ -12,8 +12,8 @@ public class ModalLoyaltyAfterAccess extends PageBase {
 	private static final String XPATH_CAPA_CONTAINER = XPATH_CAPA_GLOBAL + "//div[@class='modal-container']";
 	private static final String XPATH_ASPA_FOR_CLOSE = XPATH_CAPA_CONTAINER + "//span[@class='modal-close-icon']";
 	
-	public boolean isModalVisibleUntil(int maxSeconds) {
-		return state(Visible, XPATH_CAPA_CONTAINER).wait(maxSeconds).check();
+	public boolean isModalVisibleUntil(int seconds) {
+		return state(Visible, XPATH_CAPA_CONTAINER).wait(seconds).check();
 	}
 	
 	public void closeModal() {
@@ -24,8 +24,8 @@ public class ModalLoyaltyAfterAccess extends PageBase {
 		closeModalIfVisibleUntil(0);
 	}
 	
-	public void closeModalIfVisibleUntil(int maxSecondsToWait) {
-		if (isModalVisibleUntil(maxSecondsToWait)) {
+	public void closeModalIfVisibleUntil(int secondsToWait) {
+		if (isModalVisibleUntil(secondsToWait)) {
 			closeModal();
 		}
 	}

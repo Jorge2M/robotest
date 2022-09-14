@@ -69,8 +69,7 @@ public class LineasArtBolsaMobile extends LineasArtBolsa {
 	@Override
 	public void clearArticuloAndWait(String refArticulo) throws Exception {
 		String xpathClearArt = getXPathLinkBorrarArt(refArticulo);
-		click(By.xpath(xpathClearArt)).exec();
-		waitForPageLoaded(driver); 
+		click(xpathClearArt).waitLoadPage(30).exec();
 	}
 	
 	@Override

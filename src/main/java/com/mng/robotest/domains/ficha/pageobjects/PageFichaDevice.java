@@ -72,19 +72,19 @@ public class PageFichaDevice extends PageFicha {
 	}
 	
 	@Override
-	public boolean isPageUntil(int maxSeconds) {
+	public boolean isPageUntil(int seconds) {
 		return (
-			state(Present, XPATH_CONTAINER_FICHA).wait(maxSeconds).check() &&
-			//secDataProduct.getSecSelTallas().isVisibleSelectorTallasUntil(maxSeconds)
-			secDataProduct.getSecSelTallas().isSectionUntil(maxSeconds)
+			state(Present, XPATH_CONTAINER_FICHA).wait(seconds).check() &&
+			//secDataProduct.getSecSelTallas().isVisibleSelectorTallasUntil(seconds)
+			secDataProduct.getSecSelTallas().isSectionUntil(seconds)
 		);
 	}
 	
 	@Override
-	public boolean isFichaArticuloUntil(String refArticulo, int maxSeconds) {
+	public boolean isFichaArticuloUntil(String refArticulo, int seconds) {
 		String refSinColor = refArticulo.substring(0,8); 
 		String xpathFichaRef = getXPathIsPage(refSinColor, channel);
-		return state(Present, xpathFichaRef).wait(maxSeconds).check();
+		return state(Present, xpathFichaRef).wait(seconds).check();
 	}
 
 	@Override
@@ -103,13 +103,13 @@ public class PageFichaDevice extends PageFicha {
 	}
 	
 	@Override
-	public boolean isVisibleDivAnadiendoAFavoritosUntil(int maxSeconds) {
-		return state(Visible, XPATH_DIV_ANADIENDO_FAVORITOS).wait(maxSeconds).check();
+	public boolean isVisibleDivAnadiendoAFavoritosUntil(int seconds) {
+		return state(Visible, XPATH_DIV_ANADIENDO_FAVORITOS).wait(seconds).check();
 	}
 	
 	@Override
-	public boolean isInvisibleDivAnadiendoAFavoritosUntil(int maxSeconds) {
-		return state(Invisible, XPATH_DIV_ANADIENDO_FAVORITOS).wait(maxSeconds).check();
+	public boolean isInvisibleDivAnadiendoAFavoritosUntil(int seconds) {
+		return state(Invisible, XPATH_DIV_ANADIENDO_FAVORITOS).wait(seconds).check();
 	}	
 	
 	@Override
@@ -148,8 +148,8 @@ public class PageFichaDevice extends PageFicha {
 	}
 	
 	@Override
-	public boolean isModalNoStockVisible(int maxSeconds) {
-		return state(Visible, XPATH_MODAL_NO_STOCK).wait(maxSeconds).check();
+	public boolean isModalNoStockVisible(int seconds) {
+		return state(Visible, XPATH_MODAL_NO_STOCK).wait(seconds).check();
 	}
 
 	public boolean isVisibleUltimosProductosSection() {
@@ -238,7 +238,7 @@ public class PageFichaDevice extends PageFicha {
 		click(XPATH_GUIA_DE_TALLAS_LINK).exec();
 	}
 
-	public boolean isPresentPageUntil(int maxSeconds) {
-		return (state(Present, XPATH_CONTAINER_FICHA).wait(maxSeconds).check());
+	public boolean isPresentPageUntil(int seconds) {
+		return (state(Present, XPATH_CONTAINER_FICHA).wait(seconds).check());
 	}
 }

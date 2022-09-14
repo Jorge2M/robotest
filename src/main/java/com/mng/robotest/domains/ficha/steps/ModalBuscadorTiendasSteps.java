@@ -15,15 +15,15 @@ public class ModalBuscadorTiendasSteps extends StepBase {
 	@Validation
 	public ChecksTM validaBusquedaConResultados() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 5;
+		int seconds = 5;
 	 	checks.add(
 			"La capa de búsqueda es visible<br>" +
 			"Incidencia PRO (https://jira.mango.com/browse/CLAV-3853)",
 			modalBuscadorTiendas.isVisible(1), State.Warn);
 	 	
 	 	checks.add(
-			"Se ha localizado alguna tienda (la esperamos hasta " + maxSeconds + " segundos)",
-			modalBuscadorTiendas.isPresentAnyTiendaUntil(maxSeconds), State.Warn);
+			"Se ha localizado alguna tienda (la esperamos hasta " + seconds + " segundos)",
+			modalBuscadorTiendas.isPresentAnyTiendaUntil(seconds), State.Warn);
 	 	
 		return checks;
 	}

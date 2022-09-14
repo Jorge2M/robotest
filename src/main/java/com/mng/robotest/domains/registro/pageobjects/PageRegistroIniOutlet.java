@@ -96,12 +96,12 @@ public class PageRegistroIniOutlet extends PageBase {
 		click(XPATH_PESTANYA_REGISTRO).type(TypeClick.javascript).exec();
 	}
 	
-	public boolean isPageUntil(int maxSeconds) {
-		return state(Visible, XPATH_PESTANYA_REGISTRO).wait(maxSeconds).check();
+	public boolean isPageUntil(int seconds) {
+		return state(Visible, XPATH_PESTANYA_REGISTRO).wait(seconds).check();
 	}
 	
-	public boolean isCapaLoadingInvisibleUntil(int maxSeconds) {
-		return state(Invisible, XPATH_CAPA_LOADING).wait(maxSeconds).check();
+	public boolean isCapaLoadingInvisibleUntil(int seconds) {
+		return state(Invisible, XPATH_CAPA_LOADING).wait(seconds).check();
 	}
 	
 	public String getNewsLetterTitleText() {
@@ -199,12 +199,12 @@ public class PageRegistroIniOutlet extends PageBase {
 		}
 	}
 	
-	public boolean isVisibleErrorUsrDuplicadoUntil(int maxSeconds) {
+	public boolean isVisibleErrorUsrDuplicadoUntil(int seconds) {
 		String xpathError = getXPath_mensajeErrorFormulario(MSG_USR_DUPLICADO_POST_CLICK);
-		return state(Present, xpathError).wait(maxSeconds).check();
+		return state(Present, xpathError).wait(seconds).check();
 	}	
 	
-	public boolean isVisibleErrorEmailIncorrecto(int maxSeconds) {
+	public boolean isVisibleErrorEmailIncorrecto(int seconds) {
 		return getNumberMsgInputInvalid(DataRegType.email)==1;
 	}	
 	
@@ -246,7 +246,7 @@ public class PageRegistroIniOutlet extends PageBase {
 		return (textoElem!=null);
 	}
 
-	public boolean isCheckboxRecibirInfoPresentUntil(int maxSeconds) {
-		return state(Present, XPATH_CHECKBOX_PUBLI).wait(maxSeconds).check();
+	public boolean isCheckboxRecibirInfoPresentUntil(int seconds) {
+		return state(Present, XPATH_CHECKBOX_PUBLI).wait(seconds).check();
 	}
 }

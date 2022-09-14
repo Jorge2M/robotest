@@ -31,8 +31,8 @@ public class PageHomeLikes extends PageBase {
 		}
 	}
 	
-	public boolean checkIsPageUntil(int maxSeconds) {
-		return state(Visible, XPATH_WRAPP_PAGE).wait(maxSeconds).check();
+	public boolean checkIsPageUntil(int seconds) {
+		return state(Visible, XPATH_WRAPP_PAGE).wait(seconds).check();
 	}
 	
 	public int getPoints() {
@@ -51,8 +51,8 @@ public class PageHomeLikes extends PageBase {
 		return 0;
 	}
 
-	public boolean isVisibleButton(ButtonUseLikes button, int maxSeconds) {
-		return state(Visible, button.xpath()).wait(maxSeconds).check();
+	public boolean isVisibleButton(ButtonUseLikes button, int seconds) {
+		return state(Visible, button.xpath()).wait(seconds).check();
 	}
 
 	public void clickButton(ButtonUseLikes button) {

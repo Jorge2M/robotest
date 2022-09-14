@@ -109,9 +109,9 @@ public class PageConsola extends PageBase {
 		click(XPATH_BUTTON_DISP_ENVIO_DOMIC).exec();
 	}
 	
-	public boolean isDataSelectCodigoTransporte(int maxSeconds) {
+	public boolean isDataSelectCodigoTransporte(int seconds) {
 		String xpath = XPATH_SELECT_COD_TRANSPORTE + "/option";
-		return state(Present, xpath).wait(maxSeconds).check();
+		return state(Present, xpath).wait(seconds).check();
 	}
 		
 	public String getCodigoTransporte() { 

@@ -52,8 +52,8 @@ public class PageRegistroSegundaOutlet extends PageBase {
 		return "//div[@class='radiobuttonBtn']/input[@value='" + numNinos + "']";
 	}
 	
-	public boolean isPageUntil(int maxSeconds) {
-		return state(Present, XPATH_FORM_STEP2).wait(maxSeconds).check();
+	public boolean isPageUntil(int seconds) {
+		return state(Present, XPATH_FORM_STEP2).wait(seconds).check();
 	}
 	
 	public int getNumColecciones() {

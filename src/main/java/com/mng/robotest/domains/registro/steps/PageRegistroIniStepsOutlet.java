@@ -23,10 +23,10 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	private final Pais pais = dataTest.pais;
 	
 	@Validation (
-		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean validaIsPageUntil(int maxSeconds) {
-		return (pageRegistroIni.isPageUntil(maxSeconds));
+	public boolean validaIsPageUntil(int seconds) {
+		return (pageRegistroIni.isPageUntil(seconds));
 	}
 
 	@Step (
@@ -118,24 +118,24 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	}
 	
 	@Validation (
-		description="Desaparece la capa de loading (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Desaparece la capa de loading (lo esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	public boolean validaIsInvisibleCapaLoading(int maxSeconds) {
-		return (pageRegistroIni.isCapaLoadingInvisibleUntil(maxSeconds));
+	public boolean validaIsInvisibleCapaLoading(int seconds) {
+		return (pageRegistroIni.isCapaLoadingInvisibleUntil(seconds));
 	}
 	
 	@Validation (
-		description="Aparece un error <b>Email ya registrado</b> (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece un error <b>Email ya registrado</b> (lo esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	private boolean validaEmailYaRegistradoShown(int maxSeconds) {
-		return(pageRegistroIni.isVisibleErrorUsrDuplicadoUntil(maxSeconds));
+	private boolean validaEmailYaRegistradoShown(int seconds) {
+		return(pageRegistroIni.isVisibleErrorUsrDuplicadoUntil(seconds));
 	}
 	
 	@Validation (
-		description="Aparece un error <b>Email incorrecto</b> (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece un error <b>Email incorrecto</b> (lo esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	private boolean validaEmailIncorrectShown(int maxSeconds) {
-		return(pageRegistroIni.isVisibleErrorEmailIncorrecto(maxSeconds));
+	private boolean validaEmailIncorrectShown(int seconds) {
+		return(pageRegistroIni.isVisibleErrorEmailIncorrecto(seconds));
 	}
 	
 	@Validation
@@ -178,7 +178,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	@Validation
 	public ChecksTM validateRGPD_inCountryWithRgpd(String codigoPais) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 1;
+		int seconds = 1;
 		checks.add(
 			"El texto de info de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + codigoPais,
 			pageRegistroIni.isTextoRGPDVisible(), State.Defect);
@@ -187,15 +187,15 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 			pageRegistroIni.isTextoLegalRGPDVisible(), State.Defect);
 		checks.add(
 			"<b>SI</b> está presente el checkbox para recibir promociones e información personalizada para el pais" +
-			codigoPais + " (lo esperamos hasta " + maxSeconds + " segundos)",
-			pageRegistroIni.isCheckboxRecibirInfoPresentUntil(maxSeconds), State.Defect);
+			codigoPais + " (lo esperamos hasta " + seconds + " segundos)",
+			pageRegistroIni.isCheckboxRecibirInfoPresentUntil(seconds), State.Defect);
 		return checks;
 	}
 	
 	@Validation
 	public ChecksTM validateRGPD_inCountryWithoutRgpd(String codigoPais) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 1;
+		int seconds = 1;
 		checks.add(
 			"El texto de info de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + codigoPais,
 			!pageRegistroIni.isTextoRGPDVisible(), State.Defect);
@@ -204,8 +204,8 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 			!pageRegistroIni.isTextoLegalRGPDVisible(), State.Defect);
 		checks.add(
 			"<b>NO</b> es visible el checkbox para recibir promociones e información personalizada para el pais " + 
-			codigoPais + " (lo esperamos hasta " + maxSeconds + " segundos)",
-			!pageRegistroIni.isCheckboxRecibirInfoPresentUntil(maxSeconds), State.Defect);
+			codigoPais + " (lo esperamos hasta " + seconds + " segundos)",
+			!pageRegistroIni.isCheckboxRecibirInfoPresentUntil(seconds), State.Defect);
 		return checks;
 	}
 }

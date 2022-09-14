@@ -13,10 +13,10 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 	private final ModalArticleNotAvailable modalArticleNotAvailable = new ModalArticleNotAvailable();
 	
 	@Validation (
-		description="El modal de \"Avísame\" por artículo no disponible está en estado #{stateModal} (lo esperamos hasta #{maxSeconds} segundos)",
+		description="El modal de \"Avísame\" por artículo no disponible está en estado #{stateModal} (lo esperamos hasta #{seconds} segundos)",
 		level=State.Info)
-	public boolean validateState(int maxSeconds, StateModal stateModal) throws Exception {
-		return modalArticleNotAvailable.inStateUntil(stateModal, maxSeconds);
+	public boolean validateState(int seconds, StateModal stateModal) throws Exception {
+		return modalArticleNotAvailable.inStateUntil(stateModal, seconds);
 	}
 	
 	@Step (

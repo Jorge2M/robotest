@@ -34,8 +34,8 @@ public class PageLanding extends PageBase {
 		return isPageUntil(0);
 	}
 	
-	public boolean isPageUntil(int maxSeconds) {
-		return state(Present, XPATH_CONTENIDO).wait(maxSeconds).check();
+	public boolean isPageUntil(int seconds) {
+		return state(Present, XPATH_CONTENIDO).wait(seconds).check();
 	}
 	
 	public String getCodigoPais() {
@@ -132,9 +132,9 @@ public class PageLanding extends PageBase {
 //					 "//*[@class='celda'])")).check());
 	}
 	
-	public boolean isSomeElementVisibleInPage(List<Element> elementsCanBeContained, AppEcom app, Channel channel, int maxSeconds) 
+	public boolean isSomeElementVisibleInPage(List<Element> elementsCanBeContained, AppEcom app, Channel channel, int seconds) 
 	throws Exception {
-		for (int i=0; i<maxSeconds; i++) {
+		for (int i=0; i<seconds; i++) {
 			if (isSomeElementVisibleInPage(elementsCanBeContained, app, channel)) {
 				return true;
 			}

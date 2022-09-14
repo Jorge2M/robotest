@@ -91,20 +91,20 @@ public class SecBannersSteps extends StepBase {
 	public ChecksTM validacionesGeneralesBanner(String urlPagPadre, URI uriPagPadre, int elementosPagPadre) 
 	throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds1 = 3;
+		int seconds1 = 3;
 		int marginElements = 2;
-		int maxSeconds2 = 1;
+		int seconds2 = 1;
 		
 		AllPages allPages = new AllPages(); 
 	 	checks.add(
-	 		"La URL de la página cambia (lo esperamos hasta un máximo de " + maxSeconds1 + " segundos)",
-	 		allPages.validateUrlNotMatchUntil(urlPagPadre, maxSeconds1), State.Defect);  
+	 		"La URL de la página cambia (lo esperamos hasta un máximo de " + seconds1 + " segundos)",
+	 		allPages.validateUrlNotMatchUntil(urlPagPadre, seconds1), State.Defect);  
 	 	
 	 	boolean urlEqual = false;
 	 	boolean elemsEqual = false;
 	 	if (urlPagPadre.compareTo(driver.getCurrentUrl())==0) {
 	 		urlEqual = true;
-	 		elemsEqual = !allPages.validateElementsNotEqualsUntil(elementosPagPadre, marginElements, maxSeconds2);
+	 		elemsEqual = !allPages.validateElementsNotEqualsUntil(elementosPagPadre, marginElements, seconds2);
 	 	}
 	 	checks.add(
 	 		"La página cambia: <br>" + 
@@ -127,15 +127,15 @@ public class SecBannersSteps extends StepBase {
 
 	@Validation (
 		description=
-			"Esperamos hasta #{maxSeconds} segundos a que aparezca una página con alguno de los siguientes elementos:<br>" + 
+			"Esperamos hasta #{seconds} segundos a que aparezca una página con alguno de los siguientes elementos:<br>" + 
 			"- Secciones<br>" + 
 			"- Galería<br>" + 
 			"- Banners<br>" + 
 			"- Ficha<br>" +
 			"- Bloque de contenido con imágenes o página acceso",
 		level=State.Warn)
-	public boolean validacionesBannerEstandar(int maxSeconds, Channel channel, AppEcom app) throws Exception {
-		for (int i=0; i<maxSeconds; i++) {
+	public boolean validacionesBannerEstandar(int seconds, Channel channel, AppEcom app) throws Exception {
+		for (int i=0; i<seconds; i++) {
 			if (validacionesBannerEstandar(channel, app)) {
 				return true;
 			}

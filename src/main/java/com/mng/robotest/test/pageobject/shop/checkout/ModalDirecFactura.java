@@ -23,8 +23,8 @@ public class ModalDirecFactura extends ModalDireccion {
 		selectProvincia(provincia, XPATH_FORM_MODAL);
 	} 
 
-	public boolean isVisibleFormUntil(int maxSeconds) {
-		return state(Visible, XPATH_FORM_MODAL).wait(maxSeconds).check();
+	public boolean isVisibleFormUntil(int seconds) {
+		return state(Visible, XPATH_FORM_MODAL).wait(seconds).check();
 	}
 
 	public boolean isVisibleButtonActualizar() {

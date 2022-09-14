@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.openqa.selenium.By;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
@@ -14,7 +12,6 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.modales.ModalClubMangoLikes;
-
 
 public class SecFooter extends PageBase {
 
@@ -118,17 +115,17 @@ public class SecFooter extends PageBase {
 	}
 	
 	public boolean isVisible() throws Exception {
-		waitForPageLoaded(driver);
+		waitLoadPage();
 		return state(Visible, getXPathCapaFooter()).check();
 	}	
 	
 	public void clickLink(FooterLink footerType) {
-		ModalClubMangoLikes.closeModalIfVisible(driver);
+		new ModalClubMangoLikes().closeModalIfVisible();
 		moveToElement(footerType.getXPathRelativeCapa());
 		
-		By byLink = By.xpath(footerType.getXPathRelativeCapa());
-		state(State.Visible, byLink).wait(2).check();
-		click(byLink).exec();
+		String xpathLink = footerType.getXPathRelativeCapa();
+		state(State.Visible, xpathLink).wait(2).check();
+		click(xpathLink).exec();
 	}
 	
 	public String clickLinkAndGetWindowFatherHandle(FooterLink footerType) throws Exception {
@@ -154,10 +151,9 @@ public class SecFooter extends PageBase {
 	}
 	
 	public void moveTo() {
-		String xpath = getXPathCapaFooter();
-		By footer = By.xpath(xpath);
-		if (state(Visible, footer, driver).check()) {
-			moveToElement(footer, driver);
+		String xpathFooter = getXPathCapaFooter();
+		if (state(Visible, xpathFooter).check()) {
+			moveToElement(xpathFooter);
 		}
 	}
 	

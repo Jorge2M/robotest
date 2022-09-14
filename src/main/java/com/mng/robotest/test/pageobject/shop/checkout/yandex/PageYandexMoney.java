@@ -1,7 +1,6 @@
 package com.mng.robotest.test.pageobject.shop.checkout.yandex;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.domains.transversal.PageBase;
 

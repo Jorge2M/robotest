@@ -24,10 +24,10 @@ public class ModalAvisoCambioPaisSteps extends StepBase {
 	@Validation
 	private ChecksTM checkConfirmacionCambio(Pais paisEnvio) throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 10;
+		int seconds = 10;
 	 	checks.add(
-			"Desaparece el modal de aviso de cambio de país (lo esperamos hasta " + maxSeconds + " segundos)",
-			modalAvisoCambioPais.isInvisibleUntil(maxSeconds), State.Defect);		
+			"Desaparece el modal de aviso de cambio de país (lo esperamos hasta " + seconds + " segundos)",
+			modalAvisoCambioPais.isInvisibleUntil(seconds), State.Defect);		
 	 	
 	 	checks.add(
 			"En la dirección de envió aparece el país " + paisEnvio.getNombre_pais(),

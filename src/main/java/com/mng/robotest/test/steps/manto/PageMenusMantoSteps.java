@@ -34,10 +34,10 @@ public class PageMenusMantoSteps extends PageBase {
 	@Validation
 	private ChecksTM checkIsPageOfSubmenu(String subMenu, String textAlertObtained) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 2;
+		int seconds = 2;
 	 	checks.add(
-			"Aparece la página asociada al menú <b>" + subMenu + "</b> (la esperamos hasta " + maxSeconds + " segundos)",
-			pageMenusManto.validateIsPage(subMenu, maxSeconds), State.Defect);
+			"Aparece la página asociada al menú <b>" + subMenu + "</b> (la esperamos hasta " + seconds + " segundos)",
+			pageMenusManto.validateIsPage(subMenu, seconds), State.Defect);
 	 	
 	 	checks.add(
 			"No aparece ninguna ventana de alerta",

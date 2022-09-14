@@ -22,10 +22,10 @@ public class ModalDetalleArticuloSteps extends StepBase {
 	@Validation
 	public ChecksTM validateIsOk(ArticuloScreen articulo) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 2;
+		int seconds = 2;
 		checks.add(
-			"Aparece el modal correspondiente al artículo (lo esperamos hasta " + maxSeconds + " segundos)",
-			modalDetalleArticulo.isVisible(maxSeconds), State.Warn);
+			"Aparece el modal correspondiente al artículo (lo esperamos hasta " + seconds + " segundos)",
+			modalDetalleArticulo.isVisible(seconds), State.Warn);
 		
 		checks.add(
 			"Se muestra la referencia " + articulo.getReferencia(),
@@ -51,10 +51,10 @@ public class ModalDetalleArticuloSteps extends StepBase {
 //	}
 //	
 //	@Validation (
-//		description="Aparece el modal de búsqueda de talla en tienda (lo esperamos hasta #{maxSeconds} segundos)",
+//		description="Aparece el modal de búsqueda de talla en tienda (lo esperamos hasta #{seconds} segundos)",
 //		level=State.Defect)
-//	private boolean checkAppearsModalSearchTallaTienda(int maxSeconds) {
-//		return (ModalBuscadorTiendasMisCompras.isVisible(maxSeconds, driver));
+//	private boolean checkAppearsModalSearchTallaTienda(int seconds) {
+//		return (ModalBuscadorTiendasMisCompras.isVisible(seconds, driver));
 //	}
 //	
 //	@Step (

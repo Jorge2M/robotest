@@ -6,7 +6,6 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -57,15 +56,14 @@ public abstract class SecBloquesMenuDesktop extends PageBase {
 			 "@href[not(contains(.,'/" + nombreMenuInLower + "/'))]]");
 	}
 
-	public boolean isCapaMenusLineaVisibleUntil(LineaType lineaId, int maxSeconds) {
+	public boolean isCapaMenusLineaVisibleUntil(LineaType lineaId, int seconds) {
 		String xpathCapa = getXPathCapaMenusLinea(lineaId);
-		return (state(Visible, By.xpath(xpathCapa)).wait(maxSeconds).check());
+		return state(Visible, xpathCapa).wait(seconds).check();
 	}
 
 	protected void clickMenuInHref(Menu1rstLevel menu1rstLevel) throws Exception {
 		String xpathLinkMenu = getXPathMenuVisibleByDataInHref(menu1rstLevel);
-		driver.findElement(By.xpath(xpathLinkMenu)).click();
-		waitForPageLoaded(driver);
+		click(xpathLinkMenu).waitLoadPage(30).exec();
 	}
 
 	protected List<DataScreenMenu> getDataListMenus(List<WebElement> listMenus, Channel channel) {
@@ -90,12 +88,12 @@ public abstract class SecBloquesMenuDesktop extends PageBase {
 	
 	protected void clickEstandarMenu(Menu1rstLevel menu1rstLevel) {
 		String xpathMenu = getXPathMenuSuperiorLinkVisible(menu1rstLevel);
-		moveToElement(By.xpath(xpathMenu), driver);
+		moveToElement(xpathMenu);
 		boolean menuVisible;
 		int i=0;
 		do {
-			click(By.xpath(xpathMenu)).exec();
-			menuVisible = !state(State.Invisible, By.xpath(xpathMenu)).wait(1).check();
+			click(xpathMenu).exec();
+			menuVisible = !state(State.Invisible, xpathMenu).wait(1).check();
 			i+=1;
 		} 
 		while (menuVisible && i<5);
@@ -106,18 +104,18 @@ public abstract class SecBloquesMenuDesktop extends PageBase {
 		SublineaType sublineaMenu = menu1rstLevel.getSublinea();
 		secLineasMenu.hoverLineaAndWaitForMenus(lineaMenu, sublineaMenu);
 		String xpathMenu = getXPathMenuSuperiorLinkVisible(menu1rstLevel);
-		return (state(Visible, By.xpath(xpathMenu)).wait(2).check());
+		return state(Visible, xpathMenu).wait(2).check();
 	}
 
 	public boolean isPresentRightBanner(LineaType lineaType, SublineaType sublineaType) throws Exception {
 		secLineasMenu.hoverLineaAndWaitForMenus(lineaType, null); 
 		String xpathMenuLinea = getXPathMenusSuperiorLinkVisibles(lineaType, sublineaType, TypeMenuDesktop.Banner);
-		return (state(Present, By.xpath(xpathMenuLinea)).check());
+		return state(Present, xpathMenuLinea).check();
 	}
 
 	public void clickRightBanner(LineaType lineaType, SublineaType sublineaType) {
 		secLineasMenu.hoverLineaAndWaitForMenus(lineaType, sublineaType);
 		String xpathMenuLinea = getXPathMenusSuperiorLinkVisibles(lineaType, sublineaType, TypeMenuDesktop.Banner);
-		click(By.xpath(xpathMenuLinea)).exec();
+		click(xpathMenuLinea).exec();
 	}
 }

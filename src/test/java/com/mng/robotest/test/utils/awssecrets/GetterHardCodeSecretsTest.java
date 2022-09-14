@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.mng.robotest.test.utils.awssecrets.GetterHardCodeSecrets;
-import com.mng.robotest.test.utils.awssecrets.Secret;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
 public class GetterHardCodeSecretsTest {

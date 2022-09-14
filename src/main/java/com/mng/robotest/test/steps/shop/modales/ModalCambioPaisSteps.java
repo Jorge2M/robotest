@@ -17,10 +17,10 @@ public class ModalCambioPaisSteps extends StepBase {
 	private final ModalCambioPais modalCambioPais = new ModalCambioPais();
 	
 	@Validation (
-		description="Aparece el modal de selección de país (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece el modal de selección de país (lo esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean validateIsVisible(int maxSeconds) {
-		return modalCambioPais.isVisibleModalUntil(maxSeconds);
+	public boolean validateIsVisible(int seconds) {
+		return modalCambioPais.isVisibleModalUntil(seconds);
 	}
 	
 	static final String tagNombrePais = "@TagNombrePais";

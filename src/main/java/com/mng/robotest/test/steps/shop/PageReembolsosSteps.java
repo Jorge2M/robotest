@@ -34,8 +34,8 @@ public class PageReembolsosSteps extends StepBase {
 			"Aparece la página de reembolsos",
 			pageReembolsos.isPage(), State.Defect);		
 		
-		int maxSecondsToWait = 5;
-		boolean isVisibleTransferenciaSection = pageReembolsos.isVisibleTransferenciaSectionUntil(maxSecondsToWait);
+		int secondsToWait = 5;
+		boolean isVisibleTransferenciaSection = pageReembolsos.isVisibleTransferenciaSectionUntil(secondsToWait);
 		boolean isVisibleStoreCreditSection = pageReembolsos.isVisibleStorecreditSection();
 		if (paisConSaldoCta) {
 			checks.add(
@@ -104,10 +104,10 @@ public class PageReembolsosSteps extends StepBase {
 	@Validation
 	private ChecksTM checkAfterModifyDataTransferencia() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSecondsToWait = 15;
+		int secondsToWait = 15;
 		checks.add(
-			"Aparecen establecidos los datos de banco, titular e IBAN (lo esperamos hasta " + maxSecondsToWait + " segundos)",
-			pageReembolsos.isVisibleTextBancoUntil(maxSecondsToWait) &&
+			"Aparecen establecidos los datos de banco, titular e IBAN (lo esperamos hasta " + secondsToWait + " segundos)",
+			pageReembolsos.isVisibleTextBancoUntil(secondsToWait) &&
 			pageReembolsos.isVisibleTextTitular() &&
 			pageReembolsos.isVisibleTextIBAN(), State.Defect);
 		
@@ -149,9 +149,9 @@ public class PageReembolsosSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Desaparece el botón \"Save\" de Store Credit (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Desaparece el botón \"Save\" de Store Credit (lo esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	private boolean checkButtonSaveDisappears(int maxSeconds) {
-		return !pageReembolsos.isVisibleSaveButtonStoreCreditUntil(maxSeconds);
+	private boolean checkButtonSaveDisappears(int seconds) {
+		return !pageReembolsos.isVisibleSaveButtonStoreCreditUntil(seconds);
 	}
 }

@@ -35,7 +35,7 @@ public class SecCrossSelling extends PageBase {
 	 */
 	public boolean linkAssociatedToMenu(int numLink, String litMenu, String hrefMenu) {
 		String xpathLink = getXPath_link(numLink);
-		WebElement link = getElementVisible(driver, By.xpath(xpathLink));
+		WebElement link = getElementVisible(xpathLink);
 		return (
 			link!=null &&
 			link.getAttribute("innerHTML").compareTo(litMenu)==0 &&

@@ -36,11 +36,11 @@ public class SecMenusWrap extends PageBase {
 		return secMenusDesktop.secMenuSuperior.secLineas.isLineaPresent(lineaType);
 	}
 	
-	public boolean isLineaPresentUntil(LineaType lineaType, int maxSeconds) {
+	public boolean isLineaPresentUntil(LineaType lineaType, int seconds) {
 		if (channel.isDevice()) {
 			return secMenuLateralDevice.getSecLineasDevice().isLineaPresent(lineaType);
 		}
-		return secMenusDesktop.secMenuSuperior.secLineas.isLineaPresentUntil(lineaType, maxSeconds);
+		return secMenusDesktop.secMenuSuperior.secLineas.isLineaPresentUntil(lineaType, seconds);
 	}	
 	
 	public LineaType getLineaResultAfterClickMenu(LineaType lineaType, String nombre) { 

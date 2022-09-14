@@ -20,11 +20,11 @@ public class SecTarjetaPciSteps extends StepBase {
 	public ChecksTM validateIsSectionOk(Pago pago, Pais pais) {
 		ChecksTM checks = ChecksTM.getNew();
 		if (channel==Channel.desktop && pago.getTypePago()!=TypePago.KrediKarti) {
-			int maxSeconds = 5;
+			int seconds = 5;
 		 	checks.add(
 				"Aparece el bloque correspondiente a la introducción de los datos del método de pago " + pago.getNombre(channel, app) + 
-				" (lo esperamos hasta " + maxSeconds + " segundo)",
-				secTarjetaPci.isVisiblePanelPagoUntil(pago.getNombre(channel, app), maxSeconds), 
+				" (lo esperamos hasta " + seconds + " segundo)",
+				secTarjetaPci.isVisiblePanelPagoUntil(pago.getNombre(channel, app), seconds), 
 				State.Warn);	
 		}
 		

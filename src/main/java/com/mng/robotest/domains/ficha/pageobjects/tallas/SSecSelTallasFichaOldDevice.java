@@ -53,8 +53,8 @@ public class SSecSelTallasFichaOldDevice extends PageBase implements SSecSelTall
 	}
 	
 	@Override
-	public boolean isSectionUntil(int maxSeconds) {
-		for (int i=0; i<maxSeconds; i++) {
+	public boolean isSectionUntil(int seconds) {
+		for (int i=0; i<seconds; i++) {
 			if (isVisibleSelectorTallasUntil(0)) {
 				return true;
 			}
@@ -67,12 +67,12 @@ public class SSecSelTallasFichaOldDevice extends PageBase implements SSecSelTall
 	}
 	
 	@Override
-	public boolean isVisibleSelectorTallasUntil(int maxSeconds) {
-		return state(Visible, XPATH_CAPA_TALLAS).wait(maxSeconds).check();
+	public boolean isVisibleSelectorTallasUntil(int seconds) {
+		return state(Visible, XPATH_CAPA_TALLAS).wait(seconds).check();
 	}
 	
-	public boolean isVisibleSelectorButtonUntil(int maxSeconds) {
-		return state(Visible, XPATH_SELECTOR_BUTTON).wait(maxSeconds).check();
+	public boolean isVisibleSelectorButtonUntil(int seconds) {
+		return state(Visible, XPATH_SELECTOR_BUTTON).wait(seconds).check();
 	}
 	
 	@Override
@@ -98,8 +98,8 @@ public class SSecSelTallasFichaOldDevice extends PageBase implements SSecSelTall
 	}
 	
 	@Override
-	public boolean isVisibleListTallasForSelectUntil(int maxSeconds) {
-		return state(Visible, XPATH_OPTION_TALLA).wait(maxSeconds).check();
+	public boolean isVisibleListTallasForSelectUntil(int seconds) {
+		return state(Visible, XPATH_OPTION_TALLA).wait(seconds).check();
 	}
 	
 	private void despliegaSelectTallas() {

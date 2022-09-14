@@ -12,10 +12,10 @@ public class PageSofort2onSteps extends StepBase {
 	private final PageSofort2on pageSofort2on = new PageSofort2on();
 	
 	@Validation (
-		description="Aparece la página de selección del país/banco (la esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece la página de selección del país/banco (la esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean validaIsPageUntil(int maxSeconds) {
-		return pageSofort2on.isPageUntil(maxSeconds);
+	public boolean validaIsPageUntil(int seconds) {
+		return pageSofort2on.isPageUntil(seconds);
 	}
 	
 	@Step (

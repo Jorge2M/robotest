@@ -8,7 +8,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.favoritos.pageobjects.ModalFichaFavoritos;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
@@ -20,10 +19,10 @@ public class ModalFichaFavoritosSteps extends StepBase {
 	@Validation
 	public ChecksTM validaIsVisibleFicha(ArticuloScreen articulo) { 
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 2;
+		int seconds = 2;
 		checks.add(
-			"En Favoritos es visible el modal de la ficha del producto " + articulo.getRefProducto() + " (lo esperamos hasta " + maxSeconds + " segundos)",
-			modalFichaFavoritos.isVisibleFichaUntil(articulo.getRefProducto(), maxSeconds), State.Warn);
+			"En Favoritos es visible el modal de la ficha del producto " + articulo.getRefProducto() + " (lo esperamos hasta " + seconds + " segundos)",
+			modalFichaFavoritos.isVisibleFichaUntil(articulo.getRefProducto(), seconds), State.Warn);
 		
 		checks.add(
 			"Aparece seleccionado el color <b>" + articulo.getColor() + "</b>",
@@ -64,9 +63,9 @@ public class ModalFichaFavoritosSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Desaparece de Favoritos la ficha del producto #{refProducto} (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Desaparece de Favoritos la ficha del producto #{refProducto} (lo esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	public boolean checkFichaDisappearsFromFavorites(String refProducto, int maxSeconds) {
-		return (modalFichaFavoritos.isInvisibleFichaUntil(refProducto, maxSeconds));
+	public boolean checkFichaDisappearsFromFavorites(String refProducto, int seconds) {
+		return (modalFichaFavoritos.isInvisibleFichaUntil(refProducto, seconds));
 	}
 }

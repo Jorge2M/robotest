@@ -1,15 +1,12 @@
 package com.mng.robotest.test.pageobject.shop.checkout;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class SecSoyNuevo extends PageBase {
 	
@@ -48,13 +45,12 @@ public class SecSoyNuevo extends PageBase {
 		return XPATH_BOTON_CONTINUE_DESKTOP;
 	}
 
-	public boolean isFormIdentUntil(int maxSeconds) { 
-		return (state(Present, By.xpath(XPATH_FORM_IDENT)).wait(maxSeconds).check());
+	public boolean isFormIdentUntil(int seconds) { 
+		return state(Present, XPATH_FORM_IDENT).wait(seconds).check();
 	}
 
 	public boolean isCheckedPubliNewsletter() {
-		String xpathRadio = getXPathInputPublicidad();
-		String checked = driver.findElement(By.xpath(xpathRadio)).getAttribute("checked");
+		String checked = getElement(getXPathInputPublicidad()).getAttribute("checked");
 		return checked!=null;
 	}
 
@@ -64,12 +60,12 @@ public class SecSoyNuevo extends PageBase {
 		switch (action) {
 		case ACTIVATE:
 			if (!isActivated) {
-				driver.findElement(By.xpath(xpathRadio)).click();
+				getElement(xpathRadio).click();
 			}
 			break;
 		case DEACTIVATE:
 			if (isActivated) {
-				driver.findElement(By.xpath(xpathRadio)).click();
+				getElement(xpathRadio).click();
 			}
 			break;
 		default:
@@ -86,26 +82,25 @@ public class SecSoyNuevo extends PageBase {
 	
 	private boolean isInputWithText(String text) {
 		if (channel==Channel.desktop) {
-			return (driver.findElement(By.xpath(XPATH_INPUT_CONTENT)).getAttribute("innerHTML").compareTo(text)==0);
+			return getElement(XPATH_INPUT_CONTENT).getAttribute("innerHTML").compareTo(text)==0;
 		} else {
-			return (driver.findElement(By.xpath(XPATH_INPUT_EMAIL)).getAttribute("value").compareTo(text)==0);
+			return getElement(XPATH_INPUT_EMAIL).getAttribute("value").compareTo(text)==0;
 		}
 	}
 
 	private void inputEmailOneTime(String email) {
-		WebElement input = driver.findElement(By.xpath(XPATH_INPUT_EMAIL));
+		WebElement input = getElement(XPATH_INPUT_EMAIL);
 		input.clear();
 		input.sendKeys(email);
-		SeleniumUtils.waitMillis(500);
+		waitMillis(500);
 	}
 
 	public void clickContinue() {
-		String xpathButton = getXPathBotonContinue();
-		click(By.xpath(xpathButton)).type(TypeClick.javascript).exec();
+		click(getXPathBotonContinue()).type(TypeClick.javascript).exec();
 	}
 
-	public boolean isLinkPoliticaPrivacidad(int maxSeconds) {
-		return (state(Visible, By.xpath(XPATH_LINK_POLITICA_PRIVACIDAD)).wait(maxSeconds).check());
+	public boolean isLinkPoliticaPrivacidad(int seconds) {
+		return state(Visible, XPATH_LINK_POLITICA_PRIVACIDAD).wait(seconds).check();
 	}
 
 }

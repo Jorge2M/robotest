@@ -43,28 +43,28 @@ public class PageAccesoMisCompras extends PageBase implements PageFromFooter {
 	}
 	
 	@Override
-	public boolean isPageCorrectUntil(int maxSeconds) {
-		return state(Present, getXPathIsPage()).wait(maxSeconds).check();
+	public boolean isPageCorrectUntil(int seconds) {
+		return state(Present, getXPathIsPage()).wait(seconds).check();
 	}
 	
 	public boolean isPage() {
 		return isPage(0);
 	}
-	public boolean isPage(int maxSeconds) {
-		return state(Present, getXPathIsPage()).wait(maxSeconds).check();
+	public boolean isPage(int seconds) {
+		return state(Present, getXPathIsPage()).wait(seconds).check();
 	}
 	
 	public boolean isPresentBlock(TypeBlock typeBlock) {
 		return isPresentBlock(typeBlock, 0);
 	}
-	public boolean isPresentBlock(TypeBlock typeBlock, int maxSeconds) {
+	public boolean isPresentBlock(TypeBlock typeBlock, int seconds) {
 		String xpathBlock = getXPathLinkBlock(typeBlock);
-		return state(Present, xpathBlock).wait(maxSeconds).check();
+		return state(Present, xpathBlock).wait(seconds).check();
 	}
 	
-	public boolean isVisibleBlockUntil(TypeBlock typeBlock, int maxSeconds) {
+	public boolean isVisibleBlockUntil(TypeBlock typeBlock, int seconds) {
 		String xpathBlock = getXPathLinkBlock(typeBlock);
-		return state(Visible, By.xpath(xpathBlock)).wait(maxSeconds).check();
+		return state(Visible, xpathBlock).wait(seconds).check();
 	}
 	
 	public void clickBlock(TypeBlock typeBlock) {

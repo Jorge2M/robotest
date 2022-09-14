@@ -72,8 +72,8 @@ public class PageMisDatos extends PageBase {
 	public boolean isPage() {
 		return isPage(0);
 	}
-	public boolean isPage(int maxSeconds) {
-		return state(Present, XPATH_IS_PAGE).wait(maxSeconds).check();
+	public boolean isPage(int seconds) {
+		return state(Present, XPATH_IS_PAGE).wait(seconds).check();
 	}
 	
 	public boolean titleOk() {

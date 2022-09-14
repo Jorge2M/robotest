@@ -74,9 +74,9 @@ public class SecMenuLateralDevice extends PageBase {
 	private List<WebElement> getListMenusDisplayed(SublineaType sublineaType) {
 		String xpath2oLevelMenuLink = getXPathLinksMenus(sublineaType);
 		if (app==AppEcom.outlet) {
-			return (getElementsVisible(driver, By.xpath(xpath2oLevelMenuLink)));
+			return getElementsVisible(xpath2oLevelMenuLink);
 		} else {
-			return driver.findElements(By.xpath(xpath2oLevelMenuLink));
+			return getElements(xpath2oLevelMenuLink);
 		}
 	}
 
@@ -101,39 +101,39 @@ public class SecMenuLateralDevice extends PageBase {
 	public String getLiteralMenuVisible(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel) throws Exception {
 		By byMenu = By.xpath(getXPathMenuByTypeLocator(typeLocator, menu1rstLevel));
 		state(Visible, byMenu).wait(1).check();
-		moveToElement(byMenu, driver);
+		moveToElement(byMenu);
 		if (state(Visible, byMenu).check()) {
-			return driver.findElement(byMenu).getAttribute("innerHTML");
+			return getElement(byMenu).getAttribute("innerHTML");
 		}
 		return "";
 	}
 
-	public boolean isMenuInStateUntil(boolean open, int maxSeconds) {
+	public boolean isMenuInStateUntil(boolean open, int seconds) {
 		switch (channel) {
 		case tablet:
-			return isMenuTabletInStateUntil(open, maxSeconds);
+			return isMenuTabletInStateUntil(open, seconds);
 		case mobile:
 		default:
-			return isMenuMobilInStateUntil(open, maxSeconds);
+			return isMenuMobilInStateUntil(open, seconds);
 		}
 	}
 	
-	private boolean isMenuTabletInStateUntil(boolean open, int maxSeconds) {
+	private boolean isMenuTabletInStateUntil(boolean open, int seconds) {
 		if (open) {
-			return state(Visible, XPATH_LINEA_ITEM).wait(maxSeconds).check();
+			return state(Visible, XPATH_LINEA_ITEM).wait(seconds).check();
 		}
-		return state(Invisible, XPATH_LINEA_ITEM).wait(maxSeconds).check();
+		return state(Invisible, XPATH_LINEA_ITEM).wait(seconds).check();
 	}
 	
-	private boolean isMenuMobilInStateUntil(boolean open, int maxSeconds) {
+	private boolean isMenuMobilInStateUntil(boolean open, int seconds) {
 		try {
 			String xpathLineaShe = secLineasDevice.getXPathLineaLink(LineaType.she);
 			String xpathLineaNina = secLineasDevice.getXPathLineaLink(LineaType.nina);
 			String xpathValidation = xpathLineaShe + " | " + xpathLineaNina;
 			if (open) {
-				return state(Visible, xpathValidation).wait(maxSeconds).check();
+				return state(Visible, xpathValidation).wait(seconds).check();
 			}
-			return state(Invisible, xpathValidation).wait(maxSeconds).check();
+			return state(Invisible, xpathValidation).wait(seconds).check();
 		}
 		catch (Exception e) {
 			//Si se produce una excepción continuamos porque existe la posibilidad que el menú se encuentre en el estado que necesitamos
@@ -161,10 +161,10 @@ public class SecMenuLateralDevice extends PageBase {
 		return xpathLinkMenu + "/../../preceding-sibling::div[@class[contains(.,'dropdown')]]";
 	}
 	
-	private boolean isMenuGroupOpen(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel, int maxSeconds) {
+	private boolean isMenuGroupOpen(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel, int seconds) {
 		By groupBy = By.xpath(getXPathMenuGroup(typeLocator, menu1rstLevel));
 		if (state(State.Present, groupBy).check()) {
-			for (int i=0; i<maxSeconds; i++) {
+			for (int i=0; i<seconds; i++) {
 				String classGroup = driver.findElement(groupBy).getAttribute("className");
 				if (classGroup!=null && classGroup.contains("open")) {
 					return true;
@@ -177,8 +177,7 @@ public class SecMenuLateralDevice extends PageBase {
 	
 	public void unfoldMenuGroup(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel) {
 		String xpathLinkMenu = getXPathMenuByTypeLocator(typeLocator, menu1rstLevel);
-		By byMenu = By.xpath(xpathLinkMenu);
-		boolean menuVisible = state(State.Clickable, byMenu).check();
+		boolean menuVisible = state(State.Clickable, xpathLinkMenu).check();
 		String xpathGroupMenu = getXPathMenuGroup(typeLocator, menu1rstLevel);
 		List<WebElement> listGroups = getElements(xpathGroupMenu);
 		Iterator<WebElement> itGroups = listGroups.iterator();
@@ -188,9 +187,9 @@ public class SecMenuLateralDevice extends PageBase {
 			while (!menuVisible && ii<2) {
 				click(group).exec();
 				isMenuGroupOpen(typeLocator, menu1rstLevel, 1);
-				if (state(State.Present, byMenu).wait(1).check()) {
-					moveToElement(byMenu, driver);
-					menuVisible = state(State.Clickable, byMenu).wait(1).check();
+				if (state(State.Present, xpathLinkMenu).wait(1).check()) {
+					moveToElement(xpathLinkMenu);
+					menuVisible = state(State.Clickable, xpathLinkMenu).wait(1).check();
 				}
 				ii+=1;
 			}

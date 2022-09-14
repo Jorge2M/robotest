@@ -57,11 +57,11 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 	}
 	
 	@Validation (
-		description="Es visible el campo de <b>cvv</b> (lo esperamos hasta #{maxSeconds} segundos)</br>",
+		description="Es visible el campo de <b>cvv</b> (lo esperamos hasta #{seconds} segundos)</br>",
 		level=State.Defect)
-	private boolean checkInputOtherData(int maxSeconds) {
+	private boolean checkInputOtherData(int seconds) {
 		PageChequeRegaloInputDataNew pageNew = ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData);
-		return pageNew.isVisibleCvv(maxSeconds);
+		return pageNew.isVisibleCvv(seconds);
 	}
 
 	public void insertCVVConsultaSaldo(String cvvNumber) throws Exception {
@@ -82,8 +82,8 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 	@Validation (
 		description="La tarjeta introducida no tiene saldo disponible",
 		level=State.Warn)
-	private boolean checkConsultaSaldoTarjeta(int maxSeconds) {
-		return ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData).isTarjetaWithoutSaldo(maxSeconds);
+	private boolean checkConsultaSaldoTarjeta(int seconds) {
+		return ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData).isTarjetaWithoutSaldo(seconds);
 	}
 	
 	@Step (
@@ -95,10 +95,10 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 	}
 
 	@Validation (
-		description="Estamos en la página inicial (la esperamos hasta #{maxSeconds} segundos)",
+		description="Estamos en la página inicial (la esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	private boolean checkIsInitPage(int maxSeconds) {
-		return ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData).isPageCorrectUntil(maxSeconds);
+	private boolean checkIsInitPage(int seconds) {
+		return ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData).isPageCorrectUntil(seconds);
 	}
 
 	@Step (
@@ -117,10 +117,10 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 	}
 	
 	@Validation (
-		description="Aparece la capa para introducir los datos del cheque regalo (la esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece la capa para introducir los datos del cheque regalo (la esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	private boolean checkIsVisibleCapaInputCheque(int maxSeconds) {
-		return pageChequeRegaloInputData.isVisibleDataInput(maxSeconds);
+	private boolean checkIsVisibleCapaInputCheque(int seconds) {
+		return pageChequeRegaloInputData.isVisibleDataInput(seconds);
 	}
 
 	@Step (

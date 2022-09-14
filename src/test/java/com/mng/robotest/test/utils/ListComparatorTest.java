@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.mng.robotest.test.utils.ListComparator;
 import com.mng.robotest.test.utils.ListComparator.DuplaLabel;
 import com.mng.robotest.test.utils.checkmenus.Label;
 

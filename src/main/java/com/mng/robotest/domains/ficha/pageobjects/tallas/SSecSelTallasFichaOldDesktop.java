@@ -29,13 +29,13 @@ public class SSecSelTallasFichaOldDesktop extends PageBase implements SSecSelTal
 	}
 	
 	@Override
-	public boolean isSectionUntil(int maxSeconds) {
-		return isVisibleSelectorTallasUntil(maxSeconds);
+	public boolean isSectionUntil(int seconds) {
+		return isVisibleSelectorTallasUntil(seconds);
 	}	
 	
 	@Override
-	public boolean isVisibleSelectorTallasUntil(int maxSeconds) {
-		return (state(Visible, XPATH_SELECT_TALLA).wait(maxSeconds).check());
+	public boolean isVisibleSelectorTallasUntil(int seconds) {
+		return (state(Visible, XPATH_SELECT_TALLA).wait(seconds).check());
 	}
 	
 	@Override
@@ -61,8 +61,8 @@ public class SSecSelTallasFichaOldDesktop extends PageBase implements SSecSelTal
 	}
 	
 	@Override
-	public boolean isVisibleListTallasForSelectUntil(int maxSeconds) {
-		return state(Visible, XPATH_OPTION_TALLA).wait(maxSeconds).check();
+	public boolean isVisibleListTallasForSelectUntil(int seconds) {
+		return state(Visible, XPATH_OPTION_TALLA).wait(seconds).check();
 	}
 
 	private Select despliegaSelectTallas() {

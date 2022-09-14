@@ -43,11 +43,11 @@ public class SecFooterSteps extends StepBase {
 		PageFromFooter pageObject = FactoryPageFromFooter.make(typeFooter);
 		String windowActualHandle = driver.getWindowHandle();
 		boolean newWindowInNewTab = (windowActualHandle.compareTo(windowFatherHandle)!=0);
-		int maxSeconds = 5;
+		int seconds = 5;
 		try {
 			checks.add(
-				"Aparece la página <b>" + pageObject.getName() + "</b> (la esperamos hasta " + maxSeconds + " segundos)",
-				pageObject.isPageCorrectUntil(maxSeconds), State.Warn);
+				"Aparece la página <b>" + pageObject.getName() + "</b> (la esperamos hasta " + seconds + " segundos)",
+				pageObject.isPageCorrectUntil(seconds), State.Warn);
 			if (typeFooter.pageInNewTab()) {
 				checks.add(
 					"Aparece la página en una ventana aparte",

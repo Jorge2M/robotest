@@ -37,12 +37,12 @@ public class SecSoyNuevoSteps extends StepBase {
 	@Validation
 	public ChecksTM validaRGPDText() {  
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 5;
+		int seconds = 5;
 		if (dataTest.pais.getRgpd().equals("S")) {
 		 	checks.add(
 				"El link de política de privacidad existe para el pais " + 
-				dataTest.pais.getCodigo_pais() + " lo esperamos hasta " + maxSeconds + " segundos",
-				secSoyNuevo.isLinkPoliticaPrivacidad(maxSeconds), State.Defect);
+				dataTest.pais.getCodigo_pais() + " lo esperamos hasta " + seconds + " segundos",
+				secSoyNuevo.isLinkPoliticaPrivacidad(seconds), State.Defect);
 		} else {
 		 	checks.add(
 				"El lik de política de privacidad no exite para el pais " + dataTest.pais.getCodigo_pais(),

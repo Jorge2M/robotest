@@ -53,8 +53,8 @@ public class SecTallasArticuloDesktop extends PageBase {
 		return "(" + xpathCapaTallas + XPATH_TALLA_UNAVAILABLE + ")[" + posTalla + "]";
 	}	
 
-	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSeconds) {
+	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds) {
 		String xpathCapa = getXPathCapaTallas(posArticulo, true);
-		return (state(Visible, xpathCapa).wait(maxSeconds).check());
+		return (state(Visible, xpathCapa).wait(seconds).check());
 	}
 }

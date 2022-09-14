@@ -45,14 +45,14 @@ public class PageConsultaIdEansSteps extends StepBase {
 	@Validation
 	private ChecksTM checkAfterConsultContact(List<String> pedidosPrueba) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 2;
+		int seconds = 2;
 		checks.add(
-			"Se muestra la tabla de información (la esperamos un máximo de " + maxSeconds + " segundos)",
-			pageConsultaIdEans.isVisibleTablaInformacionUntil(maxSeconds), State.Defect);
+			"Se muestra la tabla de información (la esperamos un máximo de " + seconds + " segundos)",
+			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds), State.Defect);
 		
 		checks.add(
 			"El número de líneas de pedido es " + pedidosPrueba.size(),
-			pageConsultaIdEans.isVisibleTablaInformacionUntil(maxSeconds), State.Defect);
+			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds), State.Defect);
 		
 		checks.add(
 			"Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.size(),
@@ -73,10 +73,10 @@ public class PageConsultaIdEansSteps extends StepBase {
 	@Validation
 	private ChecksTM checkAfterConsultaIdentPedidos(List<String> pedidosPrueba) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSecondsToWait = 2;
+		int secondsToWait = 2;
 		checks.add(
-			"Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)",
-			pageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait), State.Defect);
+			"Se muestra la tabla de información (la esperamos un máximo de " + secondsToWait + " segundos)",
+			pageConsultaIdEans.isVisibleTablaInformacionUntil(secondsToWait), State.Defect);
 		
 		checks.add(
 			"El número de líneas de pedido es " + pedidosPrueba.size(),
@@ -99,10 +99,10 @@ public class PageConsultaIdEansSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Se muestra la tabla de información (la esperamos un máximo de #{maxSeconds} segundos)",
+		description="Se muestra la tabla de información (la esperamos un máximo de #{seconds} segundos)",
 		level=State.Defect)
-	private boolean checkIsTableTrackingsInformation(int maxSeconds) {
-		return pageConsultaIdEans.isVisibleTablaInformacionUntil(maxSeconds);
+	private boolean checkIsTableTrackingsInformation(int seconds) {
+		return pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds);
 	}
 
 	@Step (
@@ -117,10 +117,10 @@ public class PageConsultaIdEansSteps extends StepBase {
 	@Validation
 	private ChecksTM checkAfterConsultEAN(List<String> articulosPrueba) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSecondsToWait = 2;
+		int secondsToWait = 2;
 		checks.add(
-			"Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)",
-			pageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait), State.Defect);
+			"Se muestra la tabla de información (la esperamos un máximo de " + secondsToWait + " segundos)",
+			pageConsultaIdEans.isVisibleTablaInformacionUntil(secondsToWait), State.Defect);
 		
 		checks.add(
 			"El número de líneas de artículos es " + articulosPrueba.size(),

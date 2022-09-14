@@ -2,8 +2,6 @@ package com.mng.robotest.test.pageobject.shop.filtros;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Color;
@@ -51,14 +49,14 @@ public class SecFiltrosTabletOutlet extends PageBase implements SecFiltros {
 	@Override
 	public void selectOrdenacion(FilterOrdenacion ordenacion) {
 		String xpathLink = getXPathLinkOrdenacion(ordenacion);
-		click(By.xpath(xpathLink)).exec();
+		click(xpathLink).exec();
 	}
 	
 	@Override
 	public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception {
 		selectOrdenacion(typeOrden);
-		int maxSecondsToWait = 10;
-		int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(maxSecondsToWait);
+		int secondsToWait = 10;
+		int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(secondsToWait);
 		return numArticles;
 	}
 	
@@ -66,8 +64,8 @@ public class SecFiltrosTabletOutlet extends PageBase implements SecFiltros {
 	public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToSelect) {
 		for (Color color : colorsToSelect) {
 			String xpathLinkColor = getXPathLinkColor(color);
-			moveToElement(By.xpath(xpathLinkColor), driver);
-			click(By.xpath(xpathLinkColor)).exec();
+			moveToElement(xpathLinkColor);
+			click(xpathLinkColor).exec();
 		}
 		int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(10);
 		return numArticles;
@@ -76,7 +74,7 @@ public class SecFiltrosTabletOutlet extends PageBase implements SecFiltros {
 	@Override
 	public boolean isClickableFiltroUntil(int seconds) {
 		String xpath = getXPathLinkOrdenacion(FilterOrdenacion.PrecioAsc);
-		return (state(Clickable, By.xpath(xpath), driver).wait(seconds).check());
+		return state(Clickable, xpath).wait(seconds).check();
 	}
 	
 	@Override

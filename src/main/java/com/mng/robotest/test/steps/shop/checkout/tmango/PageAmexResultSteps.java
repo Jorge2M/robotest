@@ -20,10 +20,10 @@ public class PageAmexResultSteps {
 	@Validation
 	public ChecksTM validateIsPageOk(String importeTotal, String codigoPais) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 2;
+		int seconds = 2;
 	 	checks.add(
-			"Aparece una página con un mensaje de OK (lo esperamos hasta " + maxSeconds + " segundos)",
-			pageAmexResult.isResultOkUntil(maxSeconds), State.Defect); 
+			"Aparece una página con un mensaje de OK (lo esperamos hasta " + seconds + " segundos)",
+			pageAmexResult.isResultOkUntil(seconds), State.Defect); 
 	 	checks.add(
 			"Aparece el importe de la operación " + importeTotal,
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codigoPais, pageAmexResult.driver), State.Warn); 

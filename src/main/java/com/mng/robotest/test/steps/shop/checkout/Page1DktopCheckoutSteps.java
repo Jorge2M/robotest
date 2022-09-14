@@ -27,18 +27,18 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	@Validation
 	public ChecksTM validateIsPageOK(DataBag dataBag) throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 5;
-		boolean isPageInitCheckout = page1DktopCheckout.isPageUntil(maxSeconds);
+		int seconds = 5;
+		boolean isPageInitCheckout = page1DktopCheckout.isPageUntil(seconds);
 	 	checks.add(
 	 		Check.make(
-			    "Aparece la página inicial del Checkout (la esperamos un máximo de " + maxSeconds + " segundos)",
+			    "Aparece la página inicial del Checkout (la esperamos un máximo de " + seconds + " segundos)",
 			    isPageInitCheckout, State.Warn)
 	 		.store(StoreType.None).build());
 	 	
 	 	if (!isPageInitCheckout) {
 		 	checks.add(
-				"Si no ha aparecido la esperamos " + (maxSeconds * 2) + " segundos más",
-				page1DktopCheckout.isPageUntil(maxSeconds*2), State.Defect);
+				"Si no ha aparecido la esperamos " + (seconds * 2) + " segundos más",
+				page1DktopCheckout.isPageUntil(seconds*2), State.Defect);
 	 	}
 	 	checks.add(
 			"Cuadran los artículos a nivel de la Referencia e Importe",
@@ -50,10 +50,10 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	@Validation
 	public ChecksTM validateIsVersionChequeRegalo(ChequeRegalo chequeRegalo) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 5;
+		int seconds = 5;
 		checks.add(
-			"Aparece la página inicial del Checkout (la esperamos un máximo de " + maxSeconds + " segundos)<br>",
-			page1DktopCheckout.isPageUntil(maxSeconds), State.Defect);
+			"Aparece la página inicial del Checkout (la esperamos un máximo de " + seconds + " segundos)<br>",
+			page1DktopCheckout.isPageUntil(seconds), State.Defect);
 		
 		checks.add(
 			"Aparecen los datos introducidos:<br>" + 
@@ -70,10 +70,10 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	@Validation
 	public ChecksTM validaResultImputPromoEmpl(DataBag dataBag) throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 5;
+		int seconds = 5;
 	 	checks.add(
-			"Aparece el descuento total aplicado al empleado (lo experamos hasta " + maxSeconds + " segundos)",
-			page1DktopCheckout.isVisibleDescuentoEmpleadoUntil(maxSeconds), State.Defect);
+			"Aparece el descuento total aplicado al empleado (lo experamos hasta " + seconds + " segundos)",
+			page1DktopCheckout.isVisibleDescuentoEmpleadoUntil(seconds), State.Defect);
 	 	
 		Descuento descuento = new Descuento(app, DiscountType.Empleado);
 	 	checks.add(
@@ -118,8 +118,8 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	@Validation
 	private ChecksTM checkAfterInputDiscountVale(ValeDiscount valePais) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 1;
-		boolean isVisibleError = page1DktopCheckout.isVisibleErrorRojoInputPromoUntil(maxSeconds);
+		int seconds = 1;
+		boolean isVisibleError = page1DktopCheckout.isVisibleErrorRojoInputPromoUntil(seconds);
 	 	checks.add(
 			"<b>No</b> aparece mensaje de error en rojo (rgba(255, 0, 0, 1) en el bloque correspondiente al \"Código promocional\"",
 			!isVisibleError, State.Defect);
@@ -148,10 +148,10 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece el input para la introducción del vale (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece el input para la introducción del vale (lo esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	private boolean checkIsVisibleInputVale(int maxSeconds) throws Exception {
-		return (page1DktopCheckout.isVisibleInputCodigoPromoUntil(maxSeconds));
+	private boolean checkIsVisibleInputVale(int seconds) throws Exception {
+		return (page1DktopCheckout.isVisibleInputCodigoPromoUntil(seconds));
 	}
 	
 	@Step (
@@ -165,11 +165,11 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkAfterInputCodigoVendedor(String codigoVendedor) {
-		int maxSeconds = 3;
+		int seconds = 3;
 		ChecksTM checks = ChecksTM.getNew();
 	 	checks.add(
-			"Desaparece el campo de Input del código de vendedor (lo esperamos hasta " + maxSeconds + " segundos)",
-			!page1DktopCheckout.isVisibleInputVendedorVOTF(maxSeconds), State.Defect);
+			"Desaparece el campo de Input del código de vendedor (lo esperamos hasta " + seconds + " segundos)",
+			!page1DktopCheckout.isVisibleInputVendedorVOTF(seconds), State.Defect);
 	 	
 	 	checks.add(
 			"En su lugar se pinta el código de vendedor " + codigoVendedor,

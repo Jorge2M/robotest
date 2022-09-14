@@ -9,8 +9,8 @@ public class PageMercpagoDatosTrjDesktop extends PageMercpagoDatosTrj {
 	private static final String XPATH_BOTON_CONTINUAR = "//button[@id='submit']";
 	
 	@Override
-	public boolean isPageUntil(int maxSeconds) {
-		return state(Visible, XPATH_INPUT_CVC).wait(maxSeconds).check();
+	public boolean isPageUntil(int seconds) {
+		return state(Visible, XPATH_INPUT_CVC).wait(seconds).check();
 	}
 	
 	@Override
@@ -23,8 +23,8 @@ public class PageMercpagoDatosTrjDesktop extends PageMercpagoDatosTrj {
 		sendKeysWithRetry(cvc, By.xpath(XPATH_INPUT_CVC), 3, driver);
 	}
 	
-	public boolean isVisibleVisaIconUntil(int maxSeconds) {
-		return state(Visible, XPATH_VISA_ICON_NUM_TARJ).wait(maxSeconds).check();
+	public boolean isVisibleVisaIconUntil(int seconds) {
+		return state(Visible, XPATH_VISA_ICON_NUM_TARJ).wait(seconds).check();
 	}
 
 	public void clickBotonForContinue() {

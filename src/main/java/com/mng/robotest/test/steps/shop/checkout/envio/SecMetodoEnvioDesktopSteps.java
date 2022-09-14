@@ -46,14 +46,14 @@ public class SecMetodoEnvioDesktopSteps extends StepBase {
 	@Validation
 	public ChecksTM validaBlockSelectedDesktop(TipoTransporte tipoTransporte) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 5;
+		int seconds = 5;
 	  	checks.add(
-			"Desaparece la capa de Loading  (lo esperamos hasta " + maxSeconds + " segundos)",
-			new PageCheckoutWrapper().waitUntilNoDivLoading(maxSeconds), State.Warn);
+			"Desaparece la capa de Loading  (lo esperamos hasta " + seconds + " segundos)",
+			new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), State.Warn);
 	  	
 	  	checks.add(
 			"Queda seleccionado el bloque correspondiete a <b>" + tipoTransporte + "</b>",
-			secMetodoEnvioDesktop.isBlockSelectedUntil(tipoTransporte, maxSeconds), State.Warn);
+			secMetodoEnvioDesktop.isBlockSelectedUntil(tipoTransporte, seconds), State.Warn);
 	  	
 	  	return checks;
 	}

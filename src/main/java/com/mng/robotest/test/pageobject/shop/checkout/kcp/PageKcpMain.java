@@ -15,35 +15,35 @@ public class PageKcpMain extends PageBase {
 	private static final String XPATH_NEXT_BUTTON = "//button[@id='cardNext']";
 	private static final String XPATH_IFRAME_PAGE = "//iframe[@id='naxIfr']";
 	
-	public boolean isPage(int maxSeconds) {
+	public boolean isPage(int seconds) {
 		goToIframe();
-		boolean result = state(State.Present, By.xpath(XPATH_AGREE_ALL_RADIO)).wait(maxSeconds).check();
+		boolean result = state(State.Present, XPATH_AGREE_ALL_RADIO).wait(seconds).check();
 		leaveIframe();
 		return result;
 	}
 	
 	public void acceptTermsAndConditions() {
 		goToIframe();
-		click(By.xpath(XPATH_AGREE_ALL_RADIO)).exec();
+		click(XPATH_AGREE_ALL_RADIO).exec();
 		leaveIframe();
 	}
 	
-	public boolean isVisibleTermAndConditions(int maxSeconds) {
+	public boolean isVisibleTermAndConditions(int seconds) {
 		goToIframe();
-		boolean isVisible = state(State.Present, By.xpath(XPATH_AGREE_ALL_RADIO)).wait(maxSeconds).check();
+		boolean isVisible = state(State.Present, XPATH_AGREE_ALL_RADIO).wait(seconds).check();
 		leaveIframe();
 		return isVisible;
 	}
 	
 	public void selectHyundai() {
 		goToIframe();
-		click(By.xpath(XPATH_HYUNDAI_BLOCK)).exec();
+		click(XPATH_HYUNDAI_BLOCK).exec();
 		leaveIframe();
 	}
 	
-	public boolean isSelectInstallmentVisible(int maxSeconds) {
+	public boolean isSelectInstallmentVisible(int seconds) {
 		goToIframe();
-		boolean result = state(State.Visible, By.xpath(XPATH_SELECT_INSTALLMENT)).wait(maxSeconds).check();
+		boolean result = state(State.Visible, XPATH_SELECT_INSTALLMENT).wait(seconds).check();
 		leaveIframe();
 		return result;
 	}
@@ -56,12 +56,12 @@ public class PageKcpMain extends PageBase {
 	
 	public void clickNext() {
 		goToIframe();
-		click(By.xpath(XPATH_NEXT_BUTTON)).exec();
+		click(XPATH_NEXT_BUTTON).exec();
 		leaveIframe();
 	}
 	
 	public void goToIframe() {
-		driver.switchTo().frame(driver.findElement(By.xpath(XPATH_IFRAME_PAGE)));
+		driver.switchTo().frame(getElement(XPATH_IFRAME_PAGE));
 	}
 	
 	protected void leaveIframe() {

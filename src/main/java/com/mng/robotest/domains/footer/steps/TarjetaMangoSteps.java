@@ -85,10 +85,10 @@ public class TarjetaMangoSteps extends StepBase {
 	 		"Aparece una nueva ventana",
 	 		true, State.Warn);	
 	 	
-		int maxSeconds = 3;
+		int seconds = 3;
 	 	checks.add(
-	 		"Aparece un modal de aviso de trámite de la solicitud con un botón \"Continuar\" (la esperamos hasta " + maxSeconds + " segundos)",
-	 		new PageInputDataSolMangoCard().isPresentBotonContinuarModalUntil(maxSeconds), State.Warn);
+	 		"Aparece un modal de aviso de trámite de la solicitud con un botón \"Continuar\" (la esperamos hasta " + seconds + " segundos)",
+	 		new PageInputDataSolMangoCard().isPresentBotonContinuarModalUntil(seconds), State.Warn);
 	 	
 	 	return checks;
 	 }

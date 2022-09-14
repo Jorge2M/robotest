@@ -40,15 +40,15 @@ public class SecSelectDPointSteps extends StepBase {
 	private ChecksTM checkDroppointSelectedContainsDirecc(DataSearchDeliveryPoint dataSearchDp) 
 			throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 5;
+		int seconds = 5;
 		State stateVal = State.Warn;
 		if (dataSearchDp.typeData==DataSearchDp.CodigoPostal) {
 			stateVal = State.Info;
 		}
 	 	checks.add(
 			"La dirección del droppoint seleccionado contiene <b>" + dataSearchDp.data + 
-			"</b> (lo esperamos hasta " + maxSeconds + " segundos)",
-			modalDroppoints.deliveryPointSelectedContainsPoblacionUntil(dataSearchDp, maxSeconds), stateVal);
+			"</b> (lo esperamos hasta " + seconds + " segundos)",
+			modalDroppoints.deliveryPointSelectedContainsPoblacionUntil(dataSearchDp, seconds), stateVal);
 	 	
 		return checks;
 	}
@@ -56,10 +56,10 @@ public class SecSelectDPointSteps extends StepBase {
 	@Validation
 	public ChecksTM validaDeliveryPointOfType(TypeDeliveryPoint typeDp) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 3;
+		int seconds = 3;
 	 	checks.add(
-			"Es visible el 1er delivery point de la lista (lo esperamos hasta " + maxSeconds + " segundos)",
-			modalDroppoints.isDroppointVisibleUntil(1, maxSeconds), State.Defect);
+			"Es visible el 1er delivery point de la lista (lo esperamos hasta " + seconds + " segundos)",
+			modalDroppoints.isDroppointVisibleUntil(1, seconds), State.Defect);
 	 	
 	 	checks.add(
 			"El 1er delivery point de la lista es de tipo <b>" + typeDp + "</b>",
@@ -88,8 +88,8 @@ public class SecSelectDPointSteps extends StepBase {
 		description="Clickamos el botón de \"Select\" de la capa de Droppoints", 
 		expected="Desaparece al capa de droppoint")
 	public void clickSelectButton() {
-		int maxSeconds = 5;
-		modalDroppoints.clickSelectButtonAndWait(maxSeconds);
+		int seconds = 5;
+		modalDroppoints.clickSelectButtonAndWait(seconds);
 		new ModalDroppointsSteps().getSecConfirmDatosSteps().validateIsVisible(3);
 	}
 }

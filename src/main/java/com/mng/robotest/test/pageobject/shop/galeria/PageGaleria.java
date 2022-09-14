@@ -66,7 +66,7 @@ public abstract class PageGaleria extends PageBase {
 	public abstract int getNumFavoritoIcons();
 	public abstract boolean eachArticlesHasOneFavoriteIcon();
 	public abstract List<ArticuloScreen> clickArticleHearthIcons(List<Integer> posIconsToClick) throws Exception;
-	public abstract boolean isArticleWithHearthIconPresentUntil(int posArticle, int maxSecondsToWait);
+	public abstract boolean isArticleWithHearthIconPresentUntil(int posArticle, int secondsToWait);
 	public abstract void clickHearhIcon(int posArticle) throws Exception;
 	public abstract String getRefColorArticulo(WebElement articulo);
 	public abstract boolean backTo1erArticulo() throws InterruptedException;
@@ -75,7 +75,7 @@ public abstract class PageGaleria extends PageBase {
 	public abstract WebElement getArticleFromPagina(int numPagina, int numArticle);
 	public abstract boolean isHeaderArticlesVisible(String textHeader);
 	public abstract void showTallasArticulo(int posArticulo);
-	public abstract boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSecondsToWait);
+	public abstract boolean isVisibleArticleCapaTallasUntil(int posArticulo, int secondsToWait);
 	public abstract ArticuloScreen selectTallaAvailableArticle(int posArticulo, int posTalla) throws Exception;
 	public abstract StateFavorito getStateHearthIcon(WebElement hearthIcon);
 	public abstract void clickHearthIcon(WebElement hearthIcon) throws Exception;
@@ -200,26 +200,26 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	public void hoverArticle(WebElement article) {
-		moveToElement(article, driver);
+		moveToElement(article);
 	}
 	
 	/**
 	 * @return número de artículos de la galería
 	 */
 	public int getNumArticulos() {
-		return (driver.findElements(By.xpath(xpathArticuloBase)).size());
+		return getElements(xpathArticuloBase).size();
 	}	
 	
-	public int waitForArticleVisibleAndGetNumberOfThem(int maxSecondsToWait) {
+	public int waitForArticleVisibleAndGetNumberOfThem(int secondsToWait) {
 		int numArticle = 1;
-		isVisibleArticleUntil(numArticle, maxSecondsToWait);
+		isVisibleArticleUntil(numArticle, secondsToWait);
 		return (getNumArticulos());
 	}
 	
-	public boolean waitArticleAndGoTo(int numArticulo, int maxSecondsToWait) { 
+	public boolean waitArticleAndGoTo(int numArticulo, int secondsToWait) { 
 		String xpathUltArticulo = getXPathLinkArticulo(numArticulo);
-		if (isVisibleArticleUntil(numArticulo, maxSecondsToWait)) {
-			((Locatable) driver.findElement(By.xpath(xpathUltArticulo))).getCoordinates().inViewPort();
+		if (isVisibleArticleUntil(numArticulo, secondsToWait)) {
+			((Locatable)getElement(xpathUltArticulo)).getCoordinates().inViewPort();
 			return true;
 		}
 		
@@ -338,9 +338,8 @@ public abstract class PageGaleria extends PageBase {
 	}
 	
 	public List<WebElement> getArticulos() {
-		return (driver.findElements(By.xpath(xpathArticuloBase))); 
+		return getElements(xpathArticuloBase); 
 	}
-	
 	
 	public WebElement getArticulo(LocationArticle locationArt) {
 		switch (locationArt.accessFrom) {
@@ -376,12 +375,12 @@ public abstract class PageGaleria extends PageBase {
 		}
 		
 		//Para el caso TestAB-1 se ejecutará este caso para conseguir los atributos del artículo
-		String href = articulo.findElement(By.xpath(XPATH_LINK_RELATIVE_TO_ARTICLE)).getAttribute("href");
+		String href = getElement(XPATH_LINK_RELATIVE_TO_ARTICLE).getAttribute("href");
 		return UtilsTest.getReferenciaFromHref(href);
 	}
 
-	public boolean waitToHearthIconInState(WebElement hearthIcon, StateFavorito stateIcon, int maxSecondsToWait) {
-		for (int i=0; i<maxSecondsToWait; i++) {
+	public boolean waitToHearthIconInState(WebElement hearthIcon, StateFavorito stateIcon, int secondsToWait) {
+		for (int i=0; i<secondsToWait; i++) {
 			if (getStateHearthIcon(hearthIcon)==stateIcon) {
 				return true;
 			}
@@ -459,7 +458,7 @@ public abstract class PageGaleria extends PageBase {
 	public boolean iconsInCorrectState(List<Integer> posIconosFav, TypeActionFav typeAction) {
 		for (int posIcon : posIconosFav) {
 			String xPathIcon = getXPathArticleHearthIcon(posIcon);
-			WebElement hearthIcon = driver.findElement(By.xpath(xPathIcon));
+			WebElement hearthIcon = getElement(xPathIcon);
 			switch (typeAction) {
 			case MARCAR:
 				if (getStateHearthIcon(hearthIcon)!=StateFavorito.MARCADO) {
@@ -503,12 +502,12 @@ public abstract class PageGaleria extends PageBase {
 		return "";
 	}
 	
-	public WebElement getArticleThatContainsLitUntil(String literal, int maxSeconds) {
+	public WebElement getArticleThatContainsLitUntil(String literal, int seconds) {
 		By byArticleName = By.xpath(
 				xpathArticuloBase + 
 				XPATH_NOMBRE_RELATIVE_TO_ARTICLE + 
 				"//self::*[text()[contains(.,'" + literal + "')]]");
-		if (state(Present, byArticleName).wait(maxSeconds).check()) {
+		if (state(Present, byArticleName).wait(seconds).check()) {
 			return getElement(xpathArticuloBase);
 		}
 		return null;
@@ -561,8 +560,8 @@ public abstract class PageGaleria extends PageBase {
 	public void goToInitPageAndWaitForArticle() {
 		//TODO en estos momentos algo raro le pasa al menú Nuevo que requiere un refresh para funcionar ok
 		driver.navigate().refresh();
-		int maxSeconds = 2;
-		isVisibleArticleUntil(1, maxSeconds);
+		int seconds = 2;
+		isVisibleArticleUntil(1, seconds);
 	}
 	
 	private void initializeDataNumArticles(List<Integer> numArticlesXpage, List<Integer> numArticlesDoubleXpage, int maxPages) {
@@ -611,22 +610,21 @@ public abstract class PageGaleria extends PageBase {
 		while (!lastPageReached && paginaActual<numPageToGo) {
 			By byPagina = By.xpath(getXPathPagina(paginaActual));
 			if (state(Visible, byPagina).check()) {
-				moveToElement(byPagina, driver);
+				moveToElement(byPagina);
 				((JavascriptExecutor) driver).executeScript("window.scrollBy(0,+50)", "");
 				paginaActual+=1;
 			} else {
 				lastPageReached = true;
 			}
 		}
-		
 		waitAndGotoLastArticle();
-		waitForPageLoaded(driver);
+		waitLoadPage();
 	}
 	
 	private void waitAndGotoLastArticle() {
 		List<WebElement> listaArticulos = getListaArticulos();
-		int maxSeconds = 5;
-		waitArticleAndGoTo(listaArticulos.size(), maxSeconds);
+		int seconds = 5;
+		waitArticleAndGoTo(listaArticulos.size(), seconds);
 	}
 	
 	public int getNumLastPage() {
@@ -654,7 +652,7 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	public void clickArticulo(WebElement articulo) {
-		moveToElement(articulo, driver);
+		moveToElement(articulo);
 		click(articulo).waitLoadPage(30).exec();
 	}
 
@@ -703,7 +701,7 @@ public abstract class PageGaleria extends PageBase {
 	}
 	
 	public String getImagenArticulo(WebElement articulo) throws Exception {
-		waitForPageLoaded(driver);
+		waitLoadPage();
 		WebElement imagen = getImagenElementArticulo(articulo);
 		if (imagen!=null) {
 			try {

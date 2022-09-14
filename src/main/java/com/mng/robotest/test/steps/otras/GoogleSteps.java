@@ -28,10 +28,10 @@ public class GoogleSteps extends PageBase {
 	@Validation
 	private ChecksTM checkLinksMango() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 3;
+		int seconds = 3;
 		checks.add(
-			"El 1er link no-anuncio contiene \"MANGO\" (lo esperamos " + maxSeconds + " segundos)",
-			pageGoogle.validaFirstLinkContainsUntil("Mango", maxSeconds), State.Defect);	
+			"El 1er link no-anuncio contiene \"MANGO\" (lo esperamos " + seconds + " segundos)",
+			pageGoogle.validaFirstLinkContainsUntil("Mango", seconds), State.Defect);	
 		
 		checks.add(
 			"El 1er link no-anuncion no contiene \"robots.txt\"",

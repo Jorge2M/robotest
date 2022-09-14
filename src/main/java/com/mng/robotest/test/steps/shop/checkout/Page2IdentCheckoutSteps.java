@@ -27,11 +27,11 @@ public class Page2IdentCheckoutSteps extends StepBase {
 	}
 	
 	@Validation
-	public ChecksTM validateIsPage(boolean emailYetExists, int maxSeconds) {
+	public ChecksTM validateIsPage(boolean emailYetExists, int seconds) {
 		ChecksTM checks = ChecksTM.getNew();
 	 	checks.add(
-			"Aparece la página-2 de introducción de datos de la dirección del cliente (la esperamos hasta " + maxSeconds + " segundos)",
-			page2IdentCheckout.isPageUntil(maxSeconds), State.Defect);
+			"Aparece la página-2 de introducción de datos de la dirección del cliente (la esperamos hasta " + seconds + " segundos)",
+			page2IdentCheckout.isPageUntil(seconds), State.Defect);
 	 	checks.add(
 			"Es <b>" + !emailYetExists + "</b> que aparece el input para la introducción de la contraseña",
 			page2IdentCheckout.isInputPasswordAccordingEmail(emailYetExists), State.Warn);
@@ -60,10 +60,10 @@ public class Page2IdentCheckoutSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Se hace clickable el botón \"Continuar\" (lo esperamos hasta #{maxSeconds})",
+		description="Se hace clickable el botón \"Continuar\" (lo esperamos hasta #{seconds})",
 		level=State.Defect)
-	private boolean checkIsVisibleContiueButton(int maxSeconds) {
-		return (page2IdentCheckout.isContinuarClickableUntil(maxSeconds));
+	private boolean checkIsVisibleContiueButton(int seconds) {
+		return (page2IdentCheckout.isContinuarClickableUntil(seconds));
 	}
 	
 	@Step (
@@ -81,8 +81,8 @@ public class Page2IdentCheckoutSteps extends StepBase {
 		expected="Aparece un aviso indicando que en la dirección no pueden figurar carácteres no-latinos",
 		saveImagePage=SaveWhen.Always)
 	public void clickContinuarAndExpectAvisoDirecWithNoLatinCharacters() throws Exception {
-		int maxSecondsToWait = 2;
-		page2IdentCheckout.clickBotonContinuarAndWait(maxSecondsToWait);	  
+		int secondsToWait = 2;
+		page2IdentCheckout.clickBotonContinuarAndWait(secondsToWait);	  
 		checkAvisoDireccionWithNoLatinCharacters();
 	}
 			

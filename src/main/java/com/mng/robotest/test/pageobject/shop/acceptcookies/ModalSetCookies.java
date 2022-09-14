@@ -37,12 +37,12 @@ public class ModalSetCookies extends PageBase {
 		return "//*[@id='" + section.getId() + "']/..";
 	}
 	
-	public boolean isVisible(int maxSeconds) {
-		return state(State.Visible, XPATH_SAVE_CONF_BUTTON).wait(maxSeconds).check();
+	public boolean isVisible(int seconds) {
+		return state(State.Visible, XPATH_SAVE_CONF_BUTTON).wait(seconds).check();
 	}
 	
-	public boolean isInvisible(int maxSeconds) {
-		return state(State.Invisible, XPATH_SAVE_CONF_BUTTON).wait(maxSeconds).check();
+	public boolean isInvisible(int seconds) {
+		return state(State.Invisible, XPATH_SAVE_CONF_BUTTON).wait(seconds).check();
 	}
 	
 	public void saveConfiguration() {

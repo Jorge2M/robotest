@@ -14,10 +14,10 @@ public class PageAmexInputTarjetaSteps {
 	@Validation
 	public ChecksTM validateIsPageOk(String importeTotal, String codPais) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 5;
+		int seconds = 5;
 	 	checks.add(
-			"Aparece la pasarela de pagos de RedSys (la esperamos hasta " + maxSeconds + " segundos)",
-			pageAmexInputTarjeta.isPasarelaRedSysUntil(maxSeconds), State.Defect); 
+			"Aparece la pasarela de pagos de RedSys (la esperamos hasta " + seconds + " segundos)",
+			pageAmexInputTarjeta.isPasarelaRedSysUntil(seconds), State.Defect); 
 	 	
 	 	checks.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",

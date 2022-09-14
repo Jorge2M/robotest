@@ -1,31 +1,28 @@
 package com.mng.robotest.test.steps.shop.modales;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class ModalNewsletterSteps {
+public class ModalNewsletterSteps extends PageBase {
 
-	private static final String XPathAspaClose = "//button[@data-testid='newsletterSubscriptionModal.nonModal.close']";
+	private static final String XPATH_ASPA_CLOSE = "//button[@data-testid='newsletterSubscriptionModal.nonModal.close']";
 
-	public static void closeIfVisible(WebDriver driver) {
-		if (isVisible(driver)) {
-			close(driver);
+	public void closeIfVisible() {
+		if (isVisible()) {
+			close();
 		}
 	}
 	
-	private static boolean isVisible(WebDriver driver) {
-		return PageBase.state(Visible, By.xpath(XPathAspaClose), driver).check();
+	private boolean isVisible() {
+		return state(Visible, XPATH_ASPA_CLOSE).check();
 	}
 	
 	@Step (
 		description="Cerramos el modal de la Newsletter", 
 		expected="La capa correspondiente a la búsqueda desaparece")
-	public static void close(WebDriver driver) {
-		PageBase.click(By.xpath(XPathAspaClose), driver).exec();
+	public void close() {
+		click(XPATH_ASPA_CLOSE).exec();
 	}
 }

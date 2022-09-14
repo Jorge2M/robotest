@@ -40,8 +40,8 @@ public class PagoPostfinance extends PagoSteps {
 		}
 	}	
 	
-	private boolean isPageSelectChannel(int maxSeconds) {
-		return (new PagePostfSelectChannel(driver)).isPage(maxSeconds);
+	private boolean isPageSelectChannel(int seconds) {
+		return (new PagePostfSelectChannel(driver)).isPage(seconds);
 	}
 	
 	private void managePageSelectChannel() {

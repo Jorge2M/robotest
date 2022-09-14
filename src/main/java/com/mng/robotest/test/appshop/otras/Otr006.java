@@ -9,8 +9,7 @@ public class Otr006 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		access();
-		ModalNewsletterSteps.closeIfVisible(driver);
-		
+		new ModalNewsletterSteps().closeIfVisible();
 		ModalChatBotSteps chatBotSteps = new ModalChatBotSteps();
 		if (!chatBotSteps.checkIconVisible()) {
 			return;

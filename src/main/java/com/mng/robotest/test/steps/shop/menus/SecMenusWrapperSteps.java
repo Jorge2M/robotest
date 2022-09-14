@@ -13,7 +13,6 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Pais;
@@ -121,11 +120,11 @@ public class SecMenusWrapperSteps extends StepBase {
 	@Validation
 	public ChecksTM checkLineaRebajas(boolean salesOnInCountry) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 3;
-		boolean isPresentLinRebajas = secMenusWrap.isLineaPresentUntil(LineaType.rebajas, maxSeconds);
+		int seconds = 3;
+		boolean isPresentLinRebajas = secMenusWrap.isLineaPresentUntil(LineaType.rebajas, seconds);
 		if (salesOnInCountry && pais.isVentaOnline()) {
 			checks.add(
-				PrefixRebajas + "Aparece la línea \"Rebajas\" (lo esperamos hasta " + maxSeconds + " segundos)",
+				PrefixRebajas + "Aparece la línea \"Rebajas\" (lo esperamos hasta " + seconds + " segundos)",
 				isPresentLinRebajas, State.Defect);
 		} else {
 			checks.add(
@@ -177,12 +176,12 @@ public class SecMenusWrapperSteps extends StepBase {
 	}
 
 	@Validation (
-		description="Como mínimo se obtiene 1 artículo (lo esperamos un máximo de #{maxSeconds} segundos)",
+		description="Como mínimo se obtiene 1 artículo (lo esperamos un máximo de #{seconds} segundos)",
 		level=State.Warn,
 		store=StoreType.None)
-	private boolean checkIsVisibleAarticle(int maxSeconds) throws Exception {
+	private boolean checkIsVisibleAarticle(int seconds) throws Exception {
 		PageGaleria pageGaleria = PageGaleria.getNew(channel);
-		return (pageGaleria.isVisibleArticuloUntil(1, maxSeconds));
+		return (pageGaleria.isVisibleArticuloUntil(1, seconds));
 	}
 	
 	public void selectMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel) throws Exception {

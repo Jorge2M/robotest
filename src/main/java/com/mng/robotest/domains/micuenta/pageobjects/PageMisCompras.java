@@ -43,7 +43,7 @@ public class PageMisCompras extends PageBase {
 	
 	public List<Ticket> getTickets() {
 		isVisibleTicket(5);
-		waitForPageLoaded(driver);
+		waitLoadPage();
 		waitMillis(1000);
 		return getTicketsPage().stream()
 				.map(item -> getTicket(item))
@@ -59,8 +59,8 @@ public class PageMisCompras extends PageBase {
 		return listTickets;
 	}
 	
-	public boolean isTicket(TypeTicket typeCompra, int maxSeconds) {
-		for (int i=0; i<maxSeconds; i++) {
+	public boolean isTicket(TypeTicket typeCompra, int seconds) {
+		for (int i=0; i<seconds; i++) {
 			List<Ticket> listTickets = getTickets(typeCompra);
 			if (listTickets.size()>0) {
 				return true;
@@ -75,8 +75,8 @@ public class PageMisCompras extends PageBase {
 		return getElements(XPATH_TICKET);
 	}
 	
-	private boolean isVisibleTicket(int maxSeconds) {
-		return state(Visible, XPATH_TICKET).wait(maxSeconds).check();
+	private boolean isVisibleTicket(int seconds) {
+		return state(Visible, XPATH_TICKET).wait(seconds).check();
 	}
 
 	
@@ -103,8 +103,8 @@ public class PageMisCompras extends PageBase {
 		return (XPATH_TICKET + "//img[@loading='lazy' and @alt[contains(.,'" + id + "')]]/..");
 	}
 	
-	public boolean isPageUntil(int maxSeconds) {
-		return state(Visible, getXPathCapaContenedora()).wait(maxSeconds).check();
+	public boolean isPageUntil(int seconds) {
+		return state(Visible, getXPathCapaContenedora()).wait(seconds).check();
 	}
 	
 	private Ticket getTicket(WebElement ticketScreen) {

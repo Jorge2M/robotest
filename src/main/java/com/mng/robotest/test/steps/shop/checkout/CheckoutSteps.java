@@ -87,11 +87,11 @@ public class CheckoutSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Acaba desapareciendo la capa de \"Cargando...\" (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Acaba desapareciendo la capa de \"Cargando...\" (lo esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	public boolean validateLoadingDisappears(int maxSeconds) throws Exception {
+	public boolean validateLoadingDisappears(int seconds) throws Exception {
 		Thread.sleep(200); //Damos tiempo a que aparezca la capa de "Cargando"
-		return (pageCheckoutWrapper.isNoDivLoadingUntil(maxSeconds));
+		return (pageCheckoutWrapper.isNoDivLoadingUntil(seconds));
 	}
 	
 	public void despliegaYValidaMetodosPago() throws Exception {
@@ -251,10 +251,10 @@ public class CheckoutSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Se hace visible el texto bajo el método de pago: #{nombrePago} (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Se hace visible el texto bajo el método de pago: #{nombrePago} (lo esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	private boolean checkIsVisibleTextUnderPayment(@SuppressWarnings("unused") String nombrePago, Pago pago, int maxSeconds) {
-		return (pageCheckoutWrapper.isVisibleBloquePagoNoTRJIntegradaUntil(pago, maxSeconds));
+	private boolean checkIsVisibleTextUnderPayment(@SuppressWarnings("unused") String nombrePago, Pago pago, int seconds) {
+		return (pageCheckoutWrapper.isVisibleBloquePagoNoTRJIntegradaUntil(pago, seconds));
 	}
 	
 	@Validation (
@@ -338,10 +338,10 @@ public class CheckoutSteps extends StepBase {
 	}	  
 	
 	@Validation (
-		description="Aparece el botón de \"Confirmar Pago\" (esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece el botón de \"Confirmar Pago\" (esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	private boolean checkAfterClickVerResumen(int maxSeconds) {
-		return (pageCheckoutWrapper.getPage2MobilCheckout().isClickableButtonFinalizarCompraUntil(maxSeconds));
+	private boolean checkAfterClickVerResumen(int seconds) {
+		return (pageCheckoutWrapper.getPage2MobilCheckout().isClickableButtonFinalizarCompraUntil(seconds));
 	}
 			
 	@Step (
@@ -372,10 +372,10 @@ public class CheckoutSteps extends StepBase {
 	@Validation
 	private ChecksTM checkAfterInputTarjetaEmpleado(Pais pais, AccesoEmpl accesoEmpl) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 5;
+		int seconds = 5;
 	 	checks.add(
-			"Aparece el campo de introducción del primer apellido (lo esperamos hasta " + maxSeconds + " segundos)",
-			pageCheckoutWrapper.isPresentInputApellidoPromoEmplUntil(maxSeconds), State.Defect);
+			"Aparece el campo de introducción del primer apellido (lo esperamos hasta " + seconds + " segundos)",
+			pageCheckoutWrapper.isPresentInputApellidoPromoEmplUntil(seconds), State.Defect);
 		
 		boolean isPresentInputDni = pageCheckoutWrapper.isPresentInputDNIPromoEmpl();
 		if (accesoEmpl.getNif()!=null) {
@@ -481,11 +481,11 @@ public class CheckoutSteps extends StepBase {
 	@Validation (
 		description=
 			"Se aplica el descuento de <b>#{descuento}</b> al subtotal inicial de #{subtotalInicial} " + 
-			"(lo esperamos hasta #{maxSeconds})",
+			"(lo esperamos hasta #{seconds})",
 		level=State.Defect)
-	public boolean validateLoyaltyPointsDiscountDesktopUntil(float descuento, float subtotalInicial, int maxSeconds) 
+	public boolean validateLoyaltyPointsDiscountDesktopUntil(float descuento, float subtotalInicial, int seconds) 
 	throws Exception {
-		for (int i=0; i<maxSeconds; i++) {
+		for (int i=0; i<seconds; i++) {
 			float subTotalActual = pageCheckoutWrapper.getImportSubtotalDesktop();
 			float estimado = UtilsMangoTest.round(subtotalInicial - descuento, 2);
 			if (estimado == subTotalActual) {
@@ -504,10 +504,10 @@ public class CheckoutSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece un descuento aplicado de #{descuento} (lo esperamos hasta #{maxSeconds})",
+		description="Aparece un descuento aplicado de #{descuento} (lo esperamos hasta #{seconds})",
 		level=State.Defect)
-	public boolean validateLoyaltyPointsDiscountMobilUntil(float descuento, int maxSeconds) throws Exception {
-		for (int i=0; i<maxSeconds; i++) {
+	public boolean validateLoyaltyPointsDiscountMobilUntil(float descuento, int seconds) throws Exception {
+		for (int i=0; i<seconds; i++) {
 			float discountApplied = UtilsMangoTest.round(pageCheckoutWrapper.getDiscountLoyaltyAppliedMobil(), 2);
 			if (discountApplied == descuento) {
 				return true;

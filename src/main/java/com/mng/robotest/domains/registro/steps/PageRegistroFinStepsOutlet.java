@@ -14,10 +14,10 @@ public class PageRegistroFinStepsOutlet extends StepBase {
 	private final PageRegistroFinOutlet pageRegistroFin = new PageRegistroFinOutlet();
 	
 	@Validation(
-		description="Aparece la página final del proceso de registro (la esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece la página final del proceso de registro (la esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	public boolean isPageUntil(int maxSeconds) {
-		return (pageRegistroFin.isPageUntil(maxSeconds));
+	public boolean isPageUntil(int seconds) {
+		return (pageRegistroFin.isPageUntil(seconds));
 	}
 	
 	@Step (

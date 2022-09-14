@@ -1,6 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.checkout.paytrail;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.domains.transversal.PageBase;
@@ -32,8 +31,8 @@ public class PagePaytrail1rst extends PageBase {
 		return state(Present, XPATH_SELECT_BANCOS).check();
 	}
 	
-	public boolean isVisibleSelectBancosUntil(int maxSeconds) {
-		return state(Visible, XPATH_SELECT_BANCOS).wait(maxSeconds).check();
+	public boolean isVisibleSelectBancosUntil(int seconds) {
+		return state(Visible, XPATH_SELECT_BANCOS).wait(seconds).check();
 	}	
 	
 	public void clickButtonContinue() {
@@ -52,7 +51,7 @@ public class PagePaytrail1rst extends PageBase {
 			}
 		}
 			
-		new Select(driver.findElement(By.xpath(XPATH_SELECT_BANCOS))).selectByVisibleText(visibleText);
+		new Select(getElement(XPATH_SELECT_BANCOS)).selectByVisibleText(visibleText);
 	}
 
 	public void clickIconoBanco() {

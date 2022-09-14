@@ -15,14 +15,14 @@ public class PageBolsasMantoSteps extends StepBase {
 	@Validation
 	public ChecksResultWithFlagLinkCodPed validaLineaBolsa(DataPedido dataPedido) {
 		ChecksResultWithFlagLinkCodPed checks = ChecksResultWithFlagLinkCodPed.getNew();
-		int maxSeconds = 10;
-		boolean isPresentLinkPedido = pageBolsas.presentLinkPedidoInBolsaUntil(dataPedido.getCodigoPedidoManto(), maxSeconds);
+		int seconds = 10;
+		boolean isPresentLinkPedido = pageBolsas.presentLinkPedidoInBolsaUntil(dataPedido.getCodigoPedidoManto(), seconds);
 	 	if (isPresentLinkPedido) {
 	 		dataPedido.setIdCompra(pageBolsas.getIdCompra(dataPedido.getCodigoPedidoManto()));
 	 	}
 		checks.setExistsLinkCodPed(isPresentLinkPedido);
 	 	checks.add(
-			"En la columna 1 aparece el código de pedido: " + dataPedido.getCodigoPedidoManto() + " (lo esperamos hasta " + maxSeconds + " segundos)",
+			"En la columna 1 aparece el código de pedido: " + dataPedido.getCodigoPedidoManto() + " (lo esperamos hasta " + seconds + " segundos)",
 			isPresentLinkPedido, State.Warn);
 	 	
 	 	checks.add(

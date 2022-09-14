@@ -6,9 +6,6 @@ import org.junit.Test;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Linea.LineaType;
-import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
-import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
-import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
 
 public class MenuTreeAppTest {
 

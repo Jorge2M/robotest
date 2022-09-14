@@ -30,10 +30,10 @@ public class PagePedidosMantoSteps extends StepBase {
 	public ChecksResultWithFlagLinkCodPed validaLineaPedido(DataPedido dataPedido) {
 		ChecksResultWithFlagLinkCodPed checks = ChecksResultWithFlagLinkCodPed.getNew();
 		
-		int maxSeconds = 30;
+		int seconds = 30;
 	 	checks.add(
-			"Desaparece la capa de Loading de \"Consultando\"" + " (lo esperamos hasta " + maxSeconds + " segundos)",
-			pagePedidos.isInvisibleCapaLoadingUntil(maxSeconds), State.Defect);
+			"Desaparece la capa de Loading de \"Consultando\"" + " (lo esperamos hasta " + seconds + " segundos)",
+			pagePedidos.isInvisibleCapaLoadingUntil(seconds), State.Defect);
 	 	
 	 	checks.setExistsLinkCodPed(pagePedidos.isPresentDataInPedido(IdColumn.IDPEDIDO, dataPedido.getCodigoPedidoManto(), TypeDetalle.PEDIDO, 0));
 	 	

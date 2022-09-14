@@ -13,10 +13,10 @@ public class PageRegistroInitialShopSteps extends StepBase {
 	private final PageRegistroInitialShop pageRegistroInitial = new PageRegistroInitialShop();
 	
 	@Validation (
-		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean checkIsPageUntil(int maxSeconds) {
-		return pageRegistroInitial.isPageUntil(maxSeconds);
+	public boolean checkIsPageUntil(int seconds) {
+		return pageRegistroInitial.isPageUntil(seconds);
 	}
 
 	@Step (

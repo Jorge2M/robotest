@@ -51,7 +51,7 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	@Override
 	public boolean isCollectionFilterPresent() throws Exception {
 		String xpath = FiltroMobil.Coleccion.getXPathLineaFiltro();
-		return (state(Present, By.xpath(xpath), driver).check());
+		return state(Present, xpath).check();
 	}
 	
 	/** 
@@ -60,8 +60,8 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	@Override
 	public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception {
 		selectOrdenacion(typeOrden);
-		int maxSecondsToWait = 10;
-		int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(maxSecondsToWait);
+		int secondsToWait = 10;
+		int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(secondsToWait);
 		return numArticles;
 	}
 
@@ -73,14 +73,14 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	@Override
 	public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToFilter) {
 		selectFiltrosAndWaitLoad(FiltroMobil.Colores, Color.getListNamesFiltros(colorsToFilter));
-		int maxSecondsToWait = 10;
-		int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(maxSecondsToWait);
+		int secondsToWait = 10;
+		int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(secondsToWait);
 		return numArticles;
 	}
 	
 	@Override
 	public boolean isClickableFiltroUntil(int seconds) {
-		return (state(Clickable, By.xpath(XPATH_FILTRAR_Y_ORDENAR_BUTTON)).wait(seconds).check());
+		return state(Clickable, XPATH_FILTRAR_Y_ORDENAR_BUTTON).wait(seconds).check();
 	}	
 	
 	@Override
@@ -109,11 +109,11 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	private void clickFiltroOption(FiltroMobil typeFiltro, String textFiltro) {
 		WebElement filtroLinea = getElement(typeFiltro.getXPathLineaFiltro());
 		filtroLinea.click();
-		waitForPageLoaded(driver);
+		waitLoadPage();
 		By byFiltroOption = By.xpath(getXPathFiltroOption(typeFiltro, textFiltro));
-		state(Clickable, byFiltroOption, driver).wait(1).check();
+		state(Clickable, byFiltroOption).wait(1).check();
 		filtroLinea.findElement(byFiltroOption).click();
-		waitForPageLoaded(driver);
+		waitLoadPage();
 	}
 	private String getXPathFiltroOption(FiltroMobil typeFiltro, String textFiltro) {
 		String labelFiltro = stripAccents(textFiltro);
@@ -134,12 +134,12 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	}
 	
 	private void clickApplicarFiltrosButton() {
-		click(By.xpath(XPATH_BUTTON_APLICAR_FILTROS)).exec();
+		click(XPATH_BUTTON_APLICAR_FILTROS).exec();
 	}
 	
 	private void goAndClickFiltroButton() {
-		if (state(Visible, By.xpath(XPATH_FILTRAR_Y_ORDENAR_BUTTON), driver).check()) {
-			moveToElement(By.xpath(XPATH_FILTRAR_Y_ORDENAR_BUTTON), driver);
+		if (state(Visible, XPATH_FILTRAR_Y_ORDENAR_BUTTON).check()) {
+			moveToElement(XPATH_FILTRAR_Y_ORDENAR_BUTTON);
 			waitMillis(500);
 			
 			//Scrollamos un poquito hacia arriba para asegurar
@@ -149,17 +149,17 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 		waitAndClickFiltroButton(2);
 	}
 	
-	private void waitAndClickFiltroButton(int maxSeconds) {
+	private void waitAndClickFiltroButton(int seconds) {
 		if (!isOpenFiltrosUntil(0)) {
-			state(Clickable, By.xpath(XPATH_FILTRAR_Y_ORDENAR_BUTTON), driver).wait(maxSeconds).check();
-			click(By.xpath(XPATH_FILTRAR_Y_ORDENAR_BUTTON)).type(javascript).exec();
-			isOpenFiltrosUntil(maxSeconds);
+			state(Clickable, XPATH_FILTRAR_Y_ORDENAR_BUTTON).wait(seconds).check();
+			click(XPATH_FILTRAR_Y_ORDENAR_BUTTON).type(javascript).exec();
+			isOpenFiltrosUntil(seconds);
 		}		
 	}
 	
-	private boolean isOpenFiltrosUntil(int maxSeconds) {
+	private boolean isOpenFiltrosUntil(int seconds) {
 		String xpathLineaOrdenar = FiltroMobil.Ordenar.getXPathLineaFiltro();
-		return (state(Visible, By.xpath(xpathLineaOrdenar), driver).wait(maxSeconds).check());
+		return state(Visible, xpathLineaOrdenar).wait(seconds).check();
 	}
 	
 	private String upperCaseFirst(String val) {

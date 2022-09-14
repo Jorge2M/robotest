@@ -22,10 +22,10 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 	}
 
 	@Validation (
-		description="Estamos en la página de introducción de los datos de la tarjeta (la esperamos hasta #{maxSeconds} segundos)",
+		description="Estamos en la página de introducción de los datos de la tarjeta (la esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean validaIsPage(int maxSeconds) {
-		return (pageMercpagoDatosTrj.isPageUntil(maxSeconds));
+	public boolean validaIsPage(int seconds) {
+		return (pageMercpagoDatosTrj.isPageUntil(seconds));
 	}	
 	
 	public void inputNumTarjeta(String numTarjeta) {
@@ -49,10 +49,10 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="El \"Wrapper\" de la tarjeta se hace visible con los datos de la Visa (lo esperamos hasta #{maxSeconds} segundos)",
+		description="El \"Wrapper\" de la tarjeta se hace visible con los datos de la Visa (lo esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	private boolean isWrapperTarjetaVisibleVisaDataMobil(int maxSeconds) {
-		 return (((PageMercpagoDatosTrjMobil)pageMercpagoDatosTrj).isActiveWrapperVisaUntil(maxSeconds));
+	private boolean isWrapperTarjetaVisibleVisaDataMobil(int seconds) {
+		 return (((PageMercpagoDatosTrjMobil)pageMercpagoDatosTrj).isActiveWrapperVisaUntil(seconds));
 	}
 	
 	@Step (
@@ -64,10 +64,10 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece el icono de Visa a la derecha de la tarjeta (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece el icono de Visa a la derecha de la tarjeta (lo esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	private boolean isVisaIconAtRightTrjDesktop(int maxSeconds) {
-		return (((PageMercpagoDatosTrjDesktop)pageMercpagoDatosTrj).isVisibleVisaIconUntil(maxSeconds));
+	private boolean isVisaIconAtRightTrjDesktop(int seconds) {
+		return (((PageMercpagoDatosTrjDesktop)pageMercpagoDatosTrj).isVisibleVisaIconUntil(seconds));
 	}
 	
 	public void inputDataAndPay(InputData inputData) {
@@ -127,10 +127,10 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece activado el botón \"Next\" para continuar con el pago (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece activado el botón \"Next\" para continuar con el pago (lo esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	private boolean isEnabledButtonNextMobil(int maxSeconds) {
-		return (((PageMercpagoDatosTrjMobil)pageMercpagoDatosTrj).isClickableButtonNextPayUntil(maxSeconds));
+	private boolean isEnabledButtonNextMobil(int seconds) {
+		return (((PageMercpagoDatosTrjMobil)pageMercpagoDatosTrj).isClickableButtonNextPayUntil(seconds));
 	}
 	
 	@Step (

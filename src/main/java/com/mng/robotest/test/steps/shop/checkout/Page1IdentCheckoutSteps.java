@@ -4,8 +4,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.DataTest;
-
 
 public class Page1IdentCheckoutSteps extends StepBase {
 	
@@ -14,10 +12,10 @@ public class Page1IdentCheckoutSteps extends StepBase {
 	
 	@SuppressWarnings("static-access")
 	@Validation (
-		description="Aparece el formulario correspondiente a la identificación (lo esperamos hasta #{maxSeconds} segs)",
+		description="Aparece el formulario correspondiente a la identificación (lo esperamos hasta #{seconds} segs)",
 		level=State.Defect)
-	public boolean validateIsPage(int maxSeconds) {
-		return (page1IdentCheckout.getSecSoyNuevo().isFormIdentUntil(maxSeconds));
+	public boolean validateIsPage(int seconds) {
+		return (page1IdentCheckout.getSecSoyNuevo().isFormIdentUntil(seconds));
 	}
 	
 	public void inputEmailAndContinue(

@@ -25,20 +25,20 @@ public class SecConfirmDatos extends PageBase {
 		}
 	}
 	
-	public boolean isVisibleUntil(int maxSeconds) {
+	public boolean isVisibleUntil(int seconds) {
 		String xpathDivGeneral = getXPathDivGeneral();
-		return (state(Visible, By.xpath(xpathDivGeneral)).wait(maxSeconds).check());
+		return state(Visible, xpathDivGeneral).wait(seconds).check();
 	}
 	
 	public boolean isVisibleInputPostNumberIdDeutschland() {
-		return (state(Visible, By.xpath(XPATH_INPUT_POST_NUMBER_ID_DEUTSCHLAND)).check());
+		return state(Visible, XPATH_INPUT_POST_NUMBER_ID_DEUTSCHLAND).check();
 	}
 	
 	public void sendDataInputPostNumberIdDeutschland(String data) throws Exception {
 		sendKeysWithRetry(data, By.xpath(XPATH_INPUT_POST_NUMBER_ID_DEUTSCHLAND), 2, driver);
 	}
 
-	public void clickConfirmarDatosButtonAndWait(int maxSeconds) {
-		click(By.xpath(XPATH_CONFIRM_DATOS_BUTTON)).waitLoadPage(maxSeconds).exec();
+	public void clickConfirmarDatosButtonAndWait(int seconds) {
+		click(XPATH_CONFIRM_DATOS_BUTTON).waitLoadPage(seconds).exec();
 	}
 }

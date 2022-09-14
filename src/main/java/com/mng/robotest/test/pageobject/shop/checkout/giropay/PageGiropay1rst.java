@@ -28,8 +28,8 @@ public class PageGiropay1rst extends PageBase {
 		return state(Present, XPATH_CABECERA_STEP).check();
 	}
 	
-	public boolean isPresentButtonPagoDesktopUntil(int maxSeconds) {
-		return state(Present, XPATH_BUTTON_PAGO_DESKTOP).wait(maxSeconds).check();
+	public boolean isPresentButtonPagoDesktopUntil(int seconds) {
+		return state(Present, XPATH_BUTTON_PAGO_DESKTOP).wait(seconds).check();
 	}
 
 	public void clickIconoGiropay() {

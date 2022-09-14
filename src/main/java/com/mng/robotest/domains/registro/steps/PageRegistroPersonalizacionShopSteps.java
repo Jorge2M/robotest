@@ -14,10 +14,10 @@ public class PageRegistroPersonalizacionShopSteps extends StepBase {
 	private final PageRegistroPersonalizacionShop pageRegistroPersonalizacion = new PageRegistroPersonalizacionShop();
 	
 	@Validation (
-		description="Aparece la página de personalización del registro (la esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece la página de personalización del registro (la esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean checkIsPageUntil(int maxSeconds) {
-		return pageRegistroPersonalizacion.isPageUntil(maxSeconds);
+	public boolean checkIsPageUntil(int seconds) {
+		return pageRegistroPersonalizacion.isPageUntil(seconds);
 	}
 	
 	@Step (

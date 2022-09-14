@@ -20,8 +20,8 @@ public class PageChequeRegaloInputDataOld extends PageChequeRegaloInputData impl
 	private static final String XPATH_INPUT_MENSAJE = "//textarea[@name[contains(.,'mensaje')]]";
 	
 	@Override
-	public boolean isPageCorrectUntil(int maxSeconds) {
-		return state(State.Present, By.xpath(XPATH_CONTENT)).wait(maxSeconds).check();
+	public boolean isPageCorrectUntil(int seconds) {
+		return state(State.Present, XPATH_CONTENT).wait(seconds).check();
 	}
 	
 	private String getXPathRadio(Importe importe) {
@@ -31,17 +31,17 @@ public class PageChequeRegaloInputDataOld extends PageChequeRegaloInputData impl
 	@Override
 	public void clickImporteCheque(Importe importeToClick) {
 		String xpath = getXPathRadio(importeToClick);
-		click(By.xpath(xpath)).exec();
+		click(xpath).exec();
 	}
 	
 	@Override
 	public void clickComprarIni() {
-		click(By.xpath(XPATH_LINK_QUIERO_COMPRAR)).exec();
+		click(XPATH_LINK_QUIERO_COMPRAR).exec();
 	}
 	
 	@Override
-	public boolean isVisibleDataInput(int maxSeconds) {
-		return state(State.Visible, By.xpath(XPATH_INPUT_NOMBRE)).wait(maxSeconds).check();
+	public boolean isVisibleDataInput(int seconds) {
+		return state(State.Visible, XPATH_INPUT_NOMBRE).wait(seconds).check();
 	}
 	
 	@Override
@@ -55,7 +55,7 @@ public class PageChequeRegaloInputDataOld extends PageChequeRegaloInputData impl
 	
 	@Override
 	public void clickComprarFin(ChequeRegalo chequeRegalo) {
-		click(By.xpath(XPATH_BUTTON_COMPRAR)).exec();
+		click(XPATH_BUTTON_COMPRAR).exec();
 	}
 	
 	@Override

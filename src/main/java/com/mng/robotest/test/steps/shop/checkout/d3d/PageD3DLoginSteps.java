@@ -13,11 +13,11 @@ public class PageD3DLoginSteps extends StepBase {
 	private final PageD3DLogin pageD3DLogin = new PageD3DLogin();
 	
 	@Validation (
-		description="Aparece la página de identificación D3D (la esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece la página de identificación D3D (la esperamos hasta #{seconds} segundos)",
 		level=State.Info,		
 		store=StoreType.None)
-	public boolean validateIsD3D(int maxSeconds) {
-		return (pageD3DLogin.isPageUntil(maxSeconds));
+	public boolean validateIsD3D(int seconds) {
+		return (pageD3DLogin.isPageUntil(seconds));
 	}
 	
 	@Validation (

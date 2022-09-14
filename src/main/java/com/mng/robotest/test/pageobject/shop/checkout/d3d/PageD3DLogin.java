@@ -9,8 +9,8 @@ public class PageD3DLogin extends PageBase {
 	private static final String XPATH_INPUT_PASSWORD = "//input[@id='password']";
 	private static final String XPATH_BUTTON_SUBMIT = "//input[@class[contains(.,'button')] and @type='submit']";
 	
-	public boolean isPageUntil(int maxSecondsToWait) {
-		return (titleContainsUntil(driver, "3D Authentication", maxSecondsToWait));
+	public boolean isPageUntil(int secondsToWait) {
+		return (titleContainsUntil(driver, "3D Authentication", secondsToWait));
 	}
 	
 	public void inputUserPassword(String user, String password) {

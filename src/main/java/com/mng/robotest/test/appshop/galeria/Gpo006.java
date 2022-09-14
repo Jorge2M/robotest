@@ -4,13 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeSlider;
-import com.mng.robotest.test.pageobject.shop.menus.KeyMenu1rstLevel;
-import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
-import com.mng.robotest.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
-import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 
 public class Gpo006 extends TestBase {
 

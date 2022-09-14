@@ -14,9 +14,9 @@ public class PageLandingSteps {
 	}
 	
 	@Validation (
-		description="Aparece la página de Landing (la esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece la página de Landing (la esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean checkIsPage(int maxSeconds) {
-		return (pageLanding.isPageUntil(maxSeconds));
+	public boolean checkIsPage(int seconds) {
+		return (pageLanding.isPageUntil(seconds));
 	}
 }

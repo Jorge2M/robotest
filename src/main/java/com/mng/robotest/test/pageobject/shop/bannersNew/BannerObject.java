@@ -50,9 +50,9 @@ public abstract class BannerObject extends PageBase {
 		return listDataBannersReturn;
 	}
 	
-	public List<DataBanner> getListBannersDataUntil(int maxBannersToLoad, int maxSeconds) {
+	public List<DataBanner> getListBannersDataUntil(int maxBannersToLoad, int seconds) {
 		List<DataBanner> listBanners = new ArrayList<>();
-		for (int i=0; i<maxSeconds; i++) {
+		for (int i=0; i<seconds; i++) {
 			listBanners = getListBannersData(maxBannersToLoad);
 			if (!listBanners.isEmpty()) {
 				break;

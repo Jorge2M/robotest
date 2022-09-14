@@ -13,8 +13,8 @@ public class PageKlarna extends PageBase {
 	private static final String XPATH_BUY_BUTTON = "//button[@id[contains(.,'buy-button')]]";
 	private static final String XPATH_IFRMAE = "//iframe[@id[contains(.,'klarna-hpp-instance-fullscreen')]]";
 	
-	public boolean isPage(int maxSeconds) {
-		return state(State.Visible, XPATH_BUY_BUTTON).wait(maxSeconds).check();
+	public boolean isPage(int seconds) {
+		return state(State.Visible, XPATH_BUY_BUTTON).wait(seconds).check();
 	}
 	
 	public void clickBuyButton() {
@@ -24,16 +24,16 @@ public class PageKlarna extends PageBase {
 		}
 	}
 	
-	public boolean isVisibleModalInputUserData(int maxSeconds) {
+	public boolean isVisibleModalInputUserData(int seconds) {
 		goToIframe();
-		boolean result = modalUserData.isModal(maxSeconds);
+		boolean result = modalUserData.isModal(seconds);
 		leaveIframe();
 		return result;
 	}
 	
-	public boolean isVisibleModalInputPhone(int maxSeconds) {
+	public boolean isVisibleModalInputPhone(int seconds) {
 		goToIframe();
-		boolean result = modalInputPhone.isModal(maxSeconds);
+		boolean result = modalInputPhone.isModal(seconds);
 		leaveIframe();
 		return result;
 	}
@@ -57,9 +57,9 @@ public class PageKlarna extends PageBase {
 		leaveIframe();
 	}
 	
-	public boolean isVisibleModalPersonNumber(int maxSeconds) {
+	public boolean isVisibleModalPersonNumber(int seconds) {
 		goToIframe();
-		boolean result = modalInputPersonnumber.isModal(maxSeconds);
+		boolean result = modalInputPersonnumber.isModal(seconds);
 		leaveIframe();
 		return result;
 	}

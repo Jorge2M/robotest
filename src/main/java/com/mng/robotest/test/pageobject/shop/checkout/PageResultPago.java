@@ -1,7 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.checkout;
 
-import org.openqa.selenium.By;
-
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -17,8 +15,8 @@ public class PageResultPago extends PageBase {
 	public static final String XPATH_BUTTON_MIS_COMPRAS = "//button[@data-testid[contains(.,'goToMyPurchases')]]";
 	public static final String XPATH_BLOCK_NEW_LOYALTY_POINTS = "//*[@data-testid[contains(.,'loyaltyPointsBlock')]]";
 
-	public boolean checkUrl(int maxSeconds) {
-		for (int i=0; i<maxSeconds; i++) {
+	public boolean checkUrl(int seconds) {
+		for (int i=0; i<seconds; i++) {
 			if (channel.isDevice()) {
 				if (driver.getCurrentUrl().contains("success.faces")) {
 					return true;
@@ -46,9 +44,8 @@ public class PageResultPago extends PageBase {
 	}
 
 	public String getCodigoPedido(int seconds) throws Exception {
-		By codigoPedidoBy = By.xpath(XPATH_CODIGO_PEDIDO_ESTANDAR); 
-		if (state(Present, codigoPedidoBy).wait(seconds).check()) {
-			return driver.findElement(codigoPedidoBy).getText();
+		if (state(Present, XPATH_CODIGO_PEDIDO_ESTANDAR).wait(seconds).check()) {
+			return getElement(XPATH_CODIGO_PEDIDO_ESTANDAR).getText();
 		}
 		return "";
 	}

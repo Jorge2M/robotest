@@ -131,16 +131,16 @@ public class Page1DktopCheckout extends PageBase {
 		return (xpathMethod + XPATH_RADIO_TRJ_GUARDADA);
 	}
 
-	public boolean isVisibleBloquePagoNoTRJIntegradaUntil(Pago pago, int maxSeconds) {
+	public boolean isVisibleBloquePagoNoTRJIntegradaUntil(Pago pago, int seconds) {
 		switch (pago.getTypePago()) {
 		case TMango:
-			return (secTMango.isVisibleUntil(maxSeconds));
+			return (secTMango.isVisibleUntil(seconds));
 		case Billpay:
-			return (secBillpay.isVisibleUntil(maxSeconds));
+			return (secBillpay.isVisibleUntil(seconds));
 		default:
 			String nameExpected = pago.getNombreInCheckout(channel, app).toLowerCase();
 			return (
-				state(Visible, XPATH_BLOQUES_PAGO_POSIBLES).wait(maxSeconds).check() &&
+				state(Visible, XPATH_BLOQUES_PAGO_POSIBLES).wait(seconds).check() &&
 				getElement(XPATH_BLOQUES_PAGO_POSIBLES).getAttribute("innerHTML").toLowerCase().contains(nameExpected));
 		}
 	}
@@ -166,12 +166,12 @@ public class Page1DktopCheckout extends PageBase {
 		return (isBloqueImporteTotal(secondsWait));
 	}
 
-	public boolean isBloqueImporteTotal(int maxSeconds) {
-		return state(Present, XPATH_IMPORTE_TOTAL).wait(maxSeconds).check();
+	public boolean isBloqueImporteTotal(int seconds) {
+		return state(Present, XPATH_IMPORTE_TOTAL).wait(seconds).check();
 	}
 
-	public boolean isPresentInputApellidoPromoEmplUntil(int maxSeconds) {
-		return state(Present, XPATH_INPUT_APELLIDO_PROMO_EMPL).wait(maxSeconds).check();
+	public boolean isPresentInputApellidoPromoEmplUntil(int seconds) {
+		return state(Present, XPATH_INPUT_APELLIDO_PROMO_EMPL).wait(seconds).check();
 	}
 
 	public void inputApellidoPromoEmpl(String apellido) {
@@ -236,8 +236,8 @@ public class Page1DktopCheckout extends PageBase {
 		return state(Present, XPATH_CONF_PAGO_BUTTON_DESKTOP).check();
 	}
 
-	public boolean isVisibleBlockCodigoPromoUntil(int maxSeconds) {
-		return state(Visible, XPATH_BLOCK_CODIGO_PROMO).wait(maxSeconds).check();
+	public boolean isVisibleBlockCodigoPromoUntil(int seconds) {
+		return state(Visible, XPATH_BLOCK_CODIGO_PROMO).wait(seconds).check();
 	}
 
 	public void clickLinkToViewBlockPromo() {
@@ -254,8 +254,8 @@ public class Page1DktopCheckout extends PageBase {
 		}
 	}
 
-	public boolean isVisibleInputCodigoPromoUntil(int maxSeconds) throws Exception {
-		return state(Visible, XPATH_INPUT_PROMO).wait(maxSeconds).check();
+	public boolean isVisibleInputCodigoPromoUntil(int seconds) throws Exception {
+		return state(Visible, XPATH_INPUT_PROMO).wait(seconds).check();
 	}
 
 	public void clickEliminarValeIfExists() {
@@ -280,8 +280,8 @@ public class Page1DktopCheckout extends PageBase {
 		return getElement(XPATH_DESCUENTO_EMPLEADO).getText();
 	}
 
-	public boolean isVisibleDescuentoEmpleadoUntil(int maxSeconds) {
-		return state(Visible, XPATH_DESCUENTO_EMPLEADO).wait(maxSeconds).check();
+	public boolean isVisibleDescuentoEmpleadoUntil(int seconds) {
+		return state(Visible, XPATH_DESCUENTO_EMPLEADO).wait(seconds).check();
 	}
 	
 	public void clickEditDirecEnvio() {
@@ -549,9 +549,9 @@ public class Page1DktopCheckout extends PageBase {
 		clickConfirmarPago();
 	}
 
-	public boolean isVisibleErrorRojoInputPromoUntil(int maxSeconds) {
+	public boolean isVisibleErrorRojoInputPromoUntil(int seconds) {
 		return (
-			state(Visible, XPATH_ERROR_PROMO).wait(maxSeconds).check() &&
+			state(Visible, XPATH_ERROR_PROMO).wait(seconds).check() &&
 			getElement(XPATH_ERROR_PROMO).getAttribute("style").contains("color: red"));
 	}
 
@@ -564,8 +564,8 @@ public class Page1DktopCheckout extends PageBase {
 		click(XPATH_BUTTON_ACCEPT_VENDEDOR_VOTF).exec();
 	}
 
-	public boolean isVisibleInputVendedorVOTF(int maxSeconds) {
-		return state(Visible, XPATH_INPUT_VENDEDOR_VOTF).wait(maxSeconds).check();
+	public boolean isVisibleInputVendedorVOTF(int seconds) {
+		return state(Visible, XPATH_INPUT_VENDEDOR_VOTF).wait(seconds).check();
 	}
 
 	public boolean isVisibleCodigoVendedorVOTF(String codigoVendedor) {

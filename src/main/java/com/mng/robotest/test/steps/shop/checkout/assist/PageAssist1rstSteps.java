@@ -59,10 +59,10 @@ public class PageAssist1rstSteps extends StepBase {
 	@Validation
 	private ChecksTM checkAfterClickPayButton() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 10;
+		int seconds = 10;
 	 	checks.add(
-			"Desaparece la página con el botón de pago (lo esperamos hasta " + maxSeconds + " segundos)",
-			pageAssist1rst.invisibilityBotonPagoUntil(maxSeconds), State.Warn);
+			"Desaparece la página con el botón de pago (lo esperamos hasta " + seconds + " segundos)",
+			pageAssist1rst.invisibilityBotonPagoUntil(seconds), State.Warn);
 	 	
 	 	checks.add(
 			"Aparece una página intermedia con un botón de submit",

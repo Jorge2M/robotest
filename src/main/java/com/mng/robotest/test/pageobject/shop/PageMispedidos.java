@@ -21,12 +21,11 @@ public class PageMispedidos extends PageBase {
 
 	public boolean elementContainsText(String text) {
 		String xpath = "//*[text()[contains(.,'" + text.toUpperCase() + "')] or text()[contains(.,'" + text.toLowerCase() + "')]]";
-		return (state(Present, By.xpath(xpath)).check());
+		return state(Present, xpath).check();
 	}
 
 	public boolean listaPedidosVacia() {
-		String xpath = getXPathListaPedidosVacia();
-		return (state(Present, By.xpath(xpath)).check());
+		return state(Present, getXPathListaPedidosVacia()).check();
 	}
 
 }

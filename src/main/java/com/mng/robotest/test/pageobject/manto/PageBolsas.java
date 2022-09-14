@@ -37,9 +37,9 @@ public class PageBolsas extends PageBase {
 		return (driver.findElements(By.xpath(XPATH_LINEA)).size());
 	}
 	
-	public boolean presentLinkPedidoInBolsaUntil(String codigoPedido, int maxSecondsToWait) {
+	public boolean presentLinkPedidoInBolsaUntil(String codigoPedido, int secondsToWait) {
 		String xpath = getXpathLinkPedidoInBolsa(codigoPedido);
-		return (state(Present, By.xpath(xpath)).wait(maxSecondsToWait).check());
+		return (state(Present, By.xpath(xpath)).wait(secondsToWait).check());
 	}
 
 	public boolean presentIdTpvInBolsa(String idTpv) {

@@ -11,9 +11,9 @@ public class PagePaypalCreacionCuenta extends PageBase {
 	private static final String XPATH_BUTTON_ACEPTAR_Y_PAGAR = "//input[@track-submit='signup']";
 	private static final String XPATH_BUTTON_PAGAR_AHORA = "//input[@track-submit='guest_xo']";
 	
-	public boolean isPageUntil(int maxSeconds) {
+	public boolean isPageUntil(int seconds) {
 		String xpath = "(" + XPATH_BUTTON_ACEPTAR_Y_PAGAR + ") | (" + XPATH_BUTTON_PAGAR_AHORA + ") | (" + XPATH_BUTTON_INICIAR_SESION + ")";
-		return state(Present, xpath).wait(maxSeconds).check();
+		return state(Present, xpath).wait(seconds).check();
 	}
 
 	public void clickButtonIniciarSesion() {

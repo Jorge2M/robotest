@@ -17,19 +17,19 @@ public class ModalDirecFacturaSteps extends StepBase {
 	@Validation
 	public ChecksTM validateIsOk() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 5;
+		int seconds = 5;
 	 	checks.add(
-			"Es visible el formulario para la introducción de la \"Dirección de facturación\" (lo esperamos hasta " + maxSeconds + " seconds)",
-			modalDirecFactura.isVisibleFormUntil(maxSeconds), State.Defect);	
+			"Es visible el formulario para la introducción de la \"Dirección de facturación\" (lo esperamos hasta " + seconds + " seconds)",
+			modalDirecFactura.isVisibleFormUntil(seconds), State.Defect);	
 	 	
 	 	checks.add(
 			"Es visible el botón \"Actualizar\"",
 	 		modalDirecFactura.isVisibleButtonActualizar(), State.Defect);
 	 	
-	 	maxSeconds = 2;
+	 	seconds = 2;
 	 	checks.add(
-	 		"Desaparece la capa de Loading (lo esperamos hasta " + maxSeconds + "segundos", 
-	 		new PageCheckoutWrapper().waitUntilNoDivLoading(maxSeconds), State.Warn);
+	 		"Desaparece la capa de Loading (lo esperamos hasta " + seconds + "segundos", 
+	 		new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), State.Warn);
 		return checks;
 	}
 	
@@ -53,10 +53,10 @@ public class ModalDirecFacturaSteps extends StepBase {
 			"Queda marcado el radiobutton \"Quiero recibir una factura\"",
 			new Page1DktopCheckout().isMarkedQuieroFactura(), State.Defect);
 	 	
-	 	int maxSeconds = 2;
+	 	int seconds = 2;
 	 	checks.add(
-	 		"Desaparece la capa de Loading (lo esperamos hasta " + maxSeconds + "segundos", 
-	 		new PageCheckoutWrapper().waitUntilNoDivLoading(maxSeconds), State.Warn);
+	 		"Desaparece la capa de Loading (lo esperamos hasta " + seconds + "segundos", 
+	 		new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), State.Warn);
 	 	
 	 	return checks;
 	}

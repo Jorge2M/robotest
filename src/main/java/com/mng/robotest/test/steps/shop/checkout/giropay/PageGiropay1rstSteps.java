@@ -40,10 +40,10 @@ public class PageGiropay1rstSteps extends StepBase {
 			pageGiropay1rst.isPresentCabeceraStep(), State.Warn);	
 
 		if (channel==Channel.desktop) {
-			int maxSeconds = 2;
+			int seconds = 2;
 			checks.add(
-				"Figura un botón de pago (lo esperamos hasta " + maxSeconds + " segundos)",
-				pageGiropay1rst.isPresentButtonPagoDesktopUntil(maxSeconds), State.Defect);
+				"Figura un botón de pago (lo esperamos hasta " + seconds + " segundos)",
+				pageGiropay1rst.isPresentButtonPagoDesktopUntil(seconds), State.Defect);
 		}
 		
 		return checks;

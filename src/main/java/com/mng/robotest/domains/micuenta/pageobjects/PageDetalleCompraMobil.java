@@ -25,7 +25,7 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 		return (importe.compareTo(importeTotal)==0);
 	}
 	@Override
-	public boolean isVisiblePrendaUntil(int maxSeconds) {
+	public boolean isVisiblePrendaUntil(int seconds) {
 		return getNumPrendas()>0;
 	}
 	@Override
@@ -37,12 +37,12 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 		return sectionPrendas.getNumPrendas();
 	}
 	@Override
-	public boolean isVisibleDataTicket(int maxSeconds) {
-		return state(Visible, XPATH_ID_TICKET).wait(maxSeconds).check();
+	public boolean isVisibleDataTicket(int seconds) {
+		return state(Visible, XPATH_ID_TICKET).wait(seconds).check();
 	}
 	@Override
-	public boolean isVisibleIdTicket(int maxSeconds) {
-		return state(State.Visible, XPATH_ID_TICKET).wait(maxSeconds).check();
+	public boolean isVisibleIdTicket(int seconds) {
+		return state(State.Visible, XPATH_ID_TICKET).wait(seconds).check();
 	}
 	@Override
 	public String getIdTicket(TypeTicket typeTicket) {

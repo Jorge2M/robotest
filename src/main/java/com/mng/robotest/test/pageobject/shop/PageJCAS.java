@@ -23,7 +23,7 @@ public class PageJCAS extends PageBase {
 	}
 	
 	public void identJCASifExists() {
-		waitForPageLoaded(driver);
+		waitLoadPage();
 		if (thisPageIsShown()) {
 			Secret secret = GetterSecrets.factory().getCredentials(SecretType.MANTO_USER);
 			identication(secret.getUser(), secret.getPassword());
@@ -37,8 +37,8 @@ public class PageJCAS extends PageBase {
 	}
 
 	public void inputCredenciales(String usuario, String password) {
-		driver.findElement(By.xpath(XPATH_INPUT_USER)).sendKeys(usuario);
-		driver.findElement(By.xpath(XPATH_INPUT_PASS)).sendKeys(password);
+		getElement(XPATH_INPUT_USER).sendKeys(usuario);
+		getElement(XPATH_INPUT_PASS).sendKeys(password);
 	}
 	
 	public void clickCaptchaIfPresent() {
@@ -46,8 +46,8 @@ public class PageJCAS extends PageBase {
 		if (state(Present, byIframe).check()) {
 			try {
 				driver.switchTo().frame(driver.findElement(byIframe));
-				click(By.xpath(XPATH_RADIO_CAPTCHA_WITHIN_IFRAME)).exec();
-				state(Visible, By.xpath(XPATH_RECAPTCHA_CHECKED_WITHIN_IFRAME)).wait(5).check();
+				click(XPATH_RADIO_CAPTCHA_WITHIN_IFRAME).exec();
+				state(Visible, XPATH_RECAPTCHA_CHECKED_WITHIN_IFRAME).wait(5).check();
 			}
 			finally {
 				driver.switchTo().defaultContent();
@@ -56,6 +56,6 @@ public class PageJCAS extends PageBase {
 	}
 
 	public void clickButtonLogin() {
-		click(By.xpath(XPATH_BUTTON_LOGIN)).exec();
+		click(XPATH_BUTTON_LOGIN).exec();
 	}
 }

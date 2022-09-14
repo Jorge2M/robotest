@@ -1,7 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.checkout.dotpay;
 
-import org.openqa.selenium.By;
-
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -20,24 +18,24 @@ public class PageDotpayPaymentChannel extends PageBase {
 	}
 	
 	public boolean isPage() {
-		return (state(Present, By.xpath(XPATH_SECTION_PAYMENT_CHANNELS)).check());
+		return state(Present, XPATH_SECTION_PAYMENT_CHANNELS).check();
 	}
 
 	public void clickPayment(int numPayment) {
 		String xpathPayment = getXPathPaymentChannelLink(numPayment);
-		click(By.xpath(xpathPayment)).exec();
+		click(xpathPayment).exec();
 	}
 
 	public void sendInputNombre(String firstName, String lastName) {
-		driver.findElement(By.xpath(XPATH_INPUT_FIRST_NAME)).sendKeys(firstName);
-		driver.findElement(By.xpath(XPATH_INPUT_LAST_NAME)).sendKeys(lastName);
+		getElement(XPATH_INPUT_FIRST_NAME).sendKeys(firstName);
+		getElement(XPATH_INPUT_LAST_NAME).sendKeys(lastName);
 	}
 
 	public void clickButtonConfirm() {
-		click(By.xpath(XPATH_BUTTON_CONFIRMAR)).exec();
+		click(XPATH_BUTTON_CONFIRMAR).exec();
 	}
 
-	public boolean isVisibleBlockInputDataUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPATH_BLOCK_INPUT_DATA)).wait(maxSeconds).check());
+	public boolean isVisibleBlockInputDataUntil(int seconds) {
+		return state(Visible, XPATH_BLOCK_INPUT_DATA).wait(seconds).check();
 	}
 }

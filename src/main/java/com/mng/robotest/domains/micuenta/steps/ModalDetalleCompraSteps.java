@@ -40,23 +40,23 @@ public class ModalDetalleCompraSteps extends StepBase {
 	@Validation
 	private ChecksTM checkIsDataVisible() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 1;
+		int seconds = 1;
 		checks.add(
-			"Es visible la capa correspondiente al detalle del tícket de compra (la esperamos hasta " + maxSeconds + " segundos)",
-			modalDetalleCompra.isVisibleDataTicket(maxSeconds), State.Defect);
+			"Es visible la capa correspondiente al detalle del tícket de compra (la esperamos hasta " + seconds + " segundos)",
+			modalDetalleCompra.isVisibleDataTicket(seconds), State.Defect);
 		
-		maxSeconds = 2;
+		seconds = 2;
 		checks.add(
-			"Son visibles los datos del tícket (los esperamos hasta " + maxSeconds + " segundos)",
-			modalDetalleCompra.isVisibleDataTicket(maxSeconds), State.Defect);
-		
-		checks.add(
-			"Figura un id de tícket (lo esperamos hasta " + maxSeconds + " segundos)",
-			modalDetalleCompra.isVisibleIdTicket(maxSeconds), State.Defect);
+			"Son visibles los datos del tícket (los esperamos hasta " + seconds + " segundos)",
+			modalDetalleCompra.isVisibleDataTicket(seconds), State.Defect);
 		
 		checks.add(
-			"Figura alguna prenda (la esperamos hasta " + maxSeconds + " segundos)",
-			modalDetalleCompra.isVisiblePrendaUntil(maxSeconds), State.Warn);
+			"Figura un id de tícket (lo esperamos hasta " + seconds + " segundos)",
+			modalDetalleCompra.isVisibleIdTicket(seconds), State.Defect);
+		
+		checks.add(
+			"Figura alguna prenda (la esperamos hasta " + seconds + " segundos)",
+			modalDetalleCompra.isVisiblePrendaUntil(seconds), State.Warn);
 		
 		return checks;
 	}

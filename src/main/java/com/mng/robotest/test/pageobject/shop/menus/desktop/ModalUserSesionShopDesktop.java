@@ -47,8 +47,8 @@ public class ModalUserSesionShopDesktop extends PageBase {
 		return state(state, menu.getBy()).check();
 	}
 	
-	public boolean isMenuInStateUntil(MenuUserDesktop menu, State state, int maxSeconds) {
-		return state(state, menu.getBy()).wait(maxSeconds).check();
+	public boolean isMenuInStateUntil(MenuUserDesktop menu, State state, int seconds) {
+		return state(state, menu.getBy()).wait(seconds).check();
 	}
 	
 	public void wait1sForItAndclickMenu(MenuUserDesktop menu) {
@@ -62,7 +62,7 @@ public class ModalUserSesionShopDesktop extends PageBase {
 
 	public boolean clickMenuIfinState(MenuUserDesktop menu, State stateExpected) throws Exception {
 		if (isMenuInState(menu, stateExpected)) {
-			moveToElement(menu.getBy(), driver);
+			moveToElement(menu.getBy());
 			clickMenu(menu);
 			return true;
 		}
@@ -70,7 +70,7 @@ public class ModalUserSesionShopDesktop extends PageBase {
 	}	
 	
 	public void MoveAndclickMenu(MenuUserDesktop menu) throws Exception {
-		moveToElement(menu.getBy(), driver);
+		moveToElement(menu.getBy());
 		clickMenu(menu);
 	}
 }

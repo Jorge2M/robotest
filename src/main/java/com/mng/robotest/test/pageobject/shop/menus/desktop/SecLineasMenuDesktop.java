@@ -2,7 +2,6 @@ package com.mng.robotest.test.pageobject.shop.menus.desktop;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
@@ -47,12 +46,12 @@ public abstract class SecLineasMenuDesktop extends PageBase {
 		return state(Present, getXPathLineasMenuWrapper()).check();
 	}
 	
-	public boolean isVisibleMenuSupUntil(int maxSeconds) {
-		return state(Visible, getXPathLineasMenuWrapper()).wait(maxSeconds).check();
+	public boolean isVisibleMenuSupUntil(int seconds) {
+		return state(Visible, getXPathLineasMenuWrapper()).wait(seconds).check();
 	}	
 	
-	public boolean isInvisibleMenuSupUntil(int maxSeconds) {
-		return state(Invisible, getXPathLineasMenuWrapper()).wait(maxSeconds).check();
+	public boolean isInvisibleMenuSupUntil(int seconds) {
+		return state(Invisible, getXPathLineasMenuWrapper()).wait(seconds).check();
 	}
 	
 	private enum BringTo {FRONT, BACKGROUND};
@@ -83,9 +82,9 @@ public abstract class SecLineasMenuDesktop extends PageBase {
 		}
 		
 		String xpathToBringBack = getXPathMenuWrapper();		
-		WebElement menuWrapp = driver.findElement(By.xpath(xpathToBringBack));
+		WebElement menuWrapp = getElement(xpathToBringBack);
 		((JavascriptExecutor) driver).executeScript("arguments[0].style.display='" + display + "';", menuWrapp);
-		state(stateExpected, By.xpath(xpathToBringBack)).wait(1).check();
+		state(stateExpected, xpathToBringBack).wait(1).check();
 	}
 	
 	public List<WebElement> getListaLineas() {
@@ -97,9 +96,9 @@ public abstract class SecLineasMenuDesktop extends PageBase {
 		return state(Present, xpathLinea).check();
 	}
 	
-	public boolean isLineaPresentUntil(LineaType lineaType, int maxSeconds) {
+	public boolean isLineaPresentUntil(LineaType lineaType, int seconds) {
 		String xpathLinea = getXPathLineaLink(lineaType);
-		return state(Present, xpathLinea).wait(maxSeconds).check();
+		return state(Present, xpathLinea).wait(seconds).check();
 	}	
 	
 	public boolean isLineaVisible(LineaType lineaType) {

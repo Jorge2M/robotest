@@ -41,25 +41,25 @@ public class SecSelectDPoint extends PageBase {
 	}
 
 	private boolean isInputProvinciaVisible() {
-		return state(Visible, By.xpath(XPATH_INPUT_PROVINCIA)).check();
+		return state(Visible, XPATH_INPUT_PROVINCIA).check();
 	}
  
 	private void sendProvinciaToInput(String provincia) {
-		driver.findElement(By.xpath(XPATH_INPUT_PROVINCIA)).clear();
-		driver.findElement(By.xpath(XPATH_INPUT_PROVINCIA)).sendKeys(provincia);
-		driver.findElement(By.xpath(XPATH_INPUT_PROVINCIA)).sendKeys(Keys.RETURN);
+		getElement(XPATH_INPUT_PROVINCIA).clear();
+		getElement(XPATH_INPUT_PROVINCIA).sendKeys(provincia);
+		getElement(XPATH_INPUT_PROVINCIA).sendKeys(Keys.RETURN);
 	}
 
 	private void sendProvinciaToSelect(String provincia) {
-		new Select(driver.findElement(By.xpath(XPATH_SELECT_PROVINCIA))).selectByVisibleText(provincia);
+		new Select(getElement(XPATH_SELECT_PROVINCIA)).selectByVisibleText(provincia);
 	}
 
 	public List<WebElement> getListDeliveryPoints() {
-		return (driver.findElements(By.xpath(XPATH_DELIVERY_POINT)));
+		return getElements(XPATH_DELIVERY_POINT);
 	}
 
 	public WebElement getDeliveryPointSelected() {
-		return (driver.findElement(By.xpath(XPATH_DELIVERY_POINT_SELECTED)));
+		return getElement(XPATH_DELIVERY_POINT_SELECTED);
 	}
 
 	public boolean isDroppointSelected(int position) {
@@ -68,9 +68,9 @@ public class SecSelectDPoint extends PageBase {
 		return (dpElem.getAttribute("class")!=null && dpElem.getAttribute("class").contains("selected"));
 	}
 
-	public boolean isDroppointVisibleUntil(int position, int maxSeconds) {
+	public boolean isDroppointVisibleUntil(int position, int seconds) {
 		String xpathDeliveryPoint = "(" + XPATH_DELIVERY_POINT + ")[" + position + "]";  
-		return (state(Visible, By.xpath(xpathDeliveryPoint)).wait(maxSeconds).check()); 
+		return state(Visible, xpathDeliveryPoint).wait(seconds).check(); 
 	}
 
 	public TypeDeliveryPoint getTypeDeliveryPoint(int position) {
@@ -98,37 +98,45 @@ public class SecSelectDPoint extends PageBase {
 
 	public DataDeliveryPoint getDataDeliveryPointSelected() throws Exception {
 		DataDeliveryPoint dataDp = new DataDeliveryPoint();
-		waitForPageLoaded(driver); //For avoid StaleElementReferenceException
+		waitLoadPage(); //For avoid StaleElementReferenceException
 		WebElement dpSelected = getDeliveryPointSelected();
 		dataDp.setTypeDeliveryPoint(getTypeDeliveryPoint(dpSelected));
 		dataDp.setCodigo(dpSelected.getAttribute("data-shopid"));
 
 		//Recuperamos los datos del DeliveryPoint mirando de evitar excepciones de "StaleElement"
-		if (state(Present, By.xpath(XPATH_DELIVERY_POINT_SELECTED + XPATH_NAME_DPOINT)).check()) {
-			dataDp.setName(driver.findElement(By.xpath(XPATH_DELIVERY_POINT_SELECTED + XPATH_NAME_DPOINT)).getText());
+		String xpathDpoint = XPATH_DELIVERY_POINT_SELECTED + XPATH_NAME_DPOINT;
+		if (state(Present, xpathDpoint).check()) {
+			dataDp.setName(getElement(xpathDpoint).getText());
 		}
-		if (state(Present, By.xpath(XPATH_DELIVERY_POINT_SELECTED + XPATH_COLECCIONES_DPOINT)).check()) {
-			dataDp.setColecciones(driver.findElement(By.xpath(XPATH_DELIVERY_POINT_SELECTED + XPATH_COLECCIONES_DPOINT)).getText());
+		
+		String xpathColDpoint = XPATH_DELIVERY_POINT_SELECTED + XPATH_COLECCIONES_DPOINT;
+		if (state(Present, xpathColDpoint).check()) {
+			dataDp.setColecciones(getElement(xpathColDpoint).getText());			
 		}
-		if (state(Present, By.xpath(XPATH_DELIVERY_POINT_SELECTED + XPATH_ADDRESS_DPOINT)).check()) {
-			dataDp.setDireccion(driver.findElement(By.xpath(XPATH_DELIVERY_POINT_SELECTED + XPATH_ADDRESS_DPOINT)).getText());
+		
+		String xpathAddDpoint = XPATH_DELIVERY_POINT_SELECTED + XPATH_ADDRESS_DPOINT;
+		if (state(Present, xpathAddDpoint).check()) {
+			dataDp.setDireccion(getElement(xpathAddDpoint).getText());
 		}
-		if (state(Present, By.xpath(XPATH_DELIVERY_POINT_SELECTED + XPATH_POSTAL_CODE_DPOINT)).check()) {
-			dataDp.setCodPostal(driver.findElement(By.xpath(XPATH_DELIVERY_POINT_SELECTED + XPATH_POSTAL_CODE_DPOINT)).getText());
+		
+		String xpathCodDpoint = XPATH_DELIVERY_POINT_SELECTED + XPATH_POSTAL_CODE_DPOINT;
+		if (state(Present, xpathCodDpoint).check()) {
+			dataDp.setCodPostal(getElement(xpathCodDpoint).getText());
 		}
-		if (state(Present, By.xpath(XPATH_TELEFONO_DPOINT)).check()) {
-			dataDp.setTelefono(driver.findElement(By.xpath(XPATH_TELEFONO_DPOINT)).getText());
+		
+		if (state(Present, XPATH_TELEFONO_DPOINT).check()) {
+			dataDp.setTelefono(getElement(XPATH_TELEFONO_DPOINT).getText());
 		}
 		return dataDp;
 	}
 
-	public void clickSelectButtonAndWait(int maxSeconds) {
-		click(By.xpath(XPATH_SELECCIONAR_BUTTON)).waitLoadPage(maxSeconds).exec();
+	public void clickSelectButtonAndWait(int seconds) {
+		click(XPATH_SELECCIONAR_BUTTON).waitLoadPage(seconds).exec();
 	}
 
-	public boolean deliveryPointSelectedContainsPoblacionUntil(DataSearchDeliveryPoint dataSearchDp, int maxSecondsToWait) 
+	public boolean deliveryPointSelectedContainsPoblacionUntil(DataSearchDeliveryPoint dataSearchDp, int secondsToWait) 
 			throws Exception {
-		for (int i=0; i<maxSecondsToWait; i++) {
+		for (int i=0; i<secondsToWait; i++) {
 			try {
 				DataDeliveryPoint dataDp = getDataDeliveryPointSelected();
 				switch (dataSearchDp.typeData) {

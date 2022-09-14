@@ -96,8 +96,8 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	}
 	
 	@Override
-	public boolean isInStateIconoBolsa(State state, int maxSeconds) {
-		return (isIconoInState(IconoCabeceraShop_DesktopMobile.bolsa, state, maxSeconds));
+	public boolean isInStateIconoBolsa(State state, int seconds) {
+		return (isIconoInState(IconoCabeceraShop_DesktopMobile.bolsa, state, seconds));
 	}
 	
 	@Override
@@ -106,8 +106,8 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	}
 
 	@Override
-	public void clickIconoBolsaWhenDisp(int maxSeconds) {
-		boolean isIconoClickable = state(Clickable, IconoCabeceraShop_DesktopMobile.bolsa.getBy(channel, app)).wait(maxSeconds).check();
+	public void clickIconoBolsaWhenDisp(int seconds) {
+		boolean isIconoClickable = state(Clickable, IconoCabeceraShop_DesktopMobile.bolsa.getBy(channel, app)).wait(seconds).check();
 		if (isIconoClickable) {
 			clickIconoBolsa(); 
 		}
@@ -122,18 +122,18 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 		return isIconoInState(icono, state, 0);
 	}
 	
-	public boolean isIconoInState(IconoCabeceraShop_DesktopMobile icono, State state, int maxSeconds) {
-		return state(state, icono.getBy(channel, app)).wait(maxSeconds).check();
+	public boolean isIconoInState(IconoCabeceraShop_DesktopMobile icono, State state, int seconds) {
+		return state(state, icono.getBy(channel, app)).wait(seconds).check();
 	}
 	
-	public boolean isIconoInStateUntil(IconoCabeceraShop_DesktopMobile icono, State state, int maxSeconds) {
-		return state(state, icono.getBy(channel, app)).wait(maxSeconds).check();
+	public boolean isIconoInStateUntil(IconoCabeceraShop_DesktopMobile icono, State state, int seconds) {
+		return state(state, icono.getBy(channel, app)).wait(seconds).check();
 	}
 	
 	public void hoverIcono(IconoCabeceraShop_DesktopMobile icono) {
 		isInStateIconoBolsa(State.Visible, 5); //Con los nuevos menús ahora tardan bastante en aparecer los iconos
-		moveToElement(By.xpath(icono.getXPath(channel, app) + "/*"), driver); //Workaround problema hover en Firefox
-		moveToElement(icono.getBy(channel, app), driver);
+		moveToElement(icono.getXPath(channel, app) + "/*"); //Workaround problema hover en Firefox
+		moveToElement(icono.getBy(channel, app));
 	}
 	
 	public void focusAwayBolsa() {

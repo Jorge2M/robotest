@@ -13,8 +13,8 @@ public class PageAmexInputTarjeta extends PageBase {
 	private static final String XPATH_INPUT_CVC = "//input[@id[contains(.,'codseg')] and @maxlength=4]";
 	private static final String XPATH_PAGAR_BUTTON = "//button[@id[contains(.,'divImgAceptar')]]";
 	
-	public boolean isPasarelaRedSysUntil(int maxSeconds) {
-		return state(Present, XPATH_PAGE_REDSYS).wait(maxSeconds).check();
+	public boolean isPasarelaRedSysUntil(int seconds) {
+		return state(Present, XPATH_PAGE_REDSYS).wait(seconds).check();
 	}
 	
 	public void inputDataTarjeta(String numTarj, String mesCad, String anyCad, String Cvc) {

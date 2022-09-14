@@ -23,10 +23,10 @@ public class SecKrediKartiSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Se carga la capa correspondiente al pago a plazos (en menos de #{maxSeconds} segundos)",
+		description="Se carga la capa correspondiente al pago a plazos (en menos de #{seconds} segundos)",
 		level=State.Defect)
-	private boolean isVisibleCapaPagoAplazo(Channel channel, int maxSeconds, WebDriver driver) {
-		return (secKrediKarti.isVisiblePagoAPlazoUntil(maxSeconds));
+	private boolean isVisibleCapaPagoAplazo(Channel channel, int seconds, WebDriver driver) {
+		return (secKrediKarti.isVisiblePagoAPlazoUntil(seconds));
 	}
 	
 	@Step (

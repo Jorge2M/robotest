@@ -2,7 +2,6 @@ package com.mng.robotest.domains.bolsa.pageobjects;
 
 import java.util.ListIterator;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
@@ -64,7 +63,7 @@ public class SecBolsaMobileOutlet extends SecBolsa {
 	public String getPrecioTransporte() {
 		String precioTotal = "0";
 		String xpathImpTransp = getXPathPrecioTransporte();
-		if (state(Present, By.xpath(xpathImpTransp), driver).check()) {
+		if (state(Present, xpathImpTransp).check()) {
 			String xpathTotalEntero = "(" + xpathImpTransp + ")[1]" + "//span[1]";
 			String xpathTotalDecimal = "(" + xpathImpTransp + ")[1]" + "//span[2]";
 			ListIterator<WebElement> itTotalEntero = getElements(xpathTotalEntero).listIterator();

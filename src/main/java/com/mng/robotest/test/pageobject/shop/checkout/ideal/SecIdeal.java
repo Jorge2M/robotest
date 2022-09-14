@@ -1,7 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.checkout.ideal;
 
-import org.openqa.selenium.By;
-
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -42,23 +40,22 @@ public class SecIdeal extends PageBase {
 	private static final String XPATH_SELECTOR_BANK_IDEAL_MOBILE = XPATH_CONDITIONS_MOBILE + "//div[@id='ideal-bank-selector']";
 	private static final String XPATH_LIST_BANK_IDEAL_MOBILE = "//select[@class[contains(.,'bank-select')]]";
 	
-	public String getXPath_section() {
+	public String getXPathSection() {
 		if (channel.isDevice()) {
 			return XPATH_CONDITIONS_MOBILE;
 		}
 		return XPATH_CARD_CONDITIONS;
 	}
 
-	public boolean isVisibleUntil(int maxSeconds) {
-		String xpath = getXPath_section();
-		return (state(Visible, By.xpath(xpath)).wait(maxSeconds).check());
+	public boolean isVisibleUntil(int seconds) {
+		return state(Visible, getXPathSection()).wait(seconds).check();
 	}
 	
-	public boolean isVisibleSelectorOfBank(int maxSeconds) {
+	public boolean isVisibleSelectorOfBank(int seconds) {
 		if (channel.isDevice()) {
-			return state(Visible, XPATH_SELECTOR_BANK_IDEAL_MOBILE).wait(maxSeconds).check();
+			return state(Visible, XPATH_SELECTOR_BANK_IDEAL_MOBILE).wait(seconds).check();
 		}
-		return state(Present, XPATH_SELECTOR_BANK_IDEAL).wait(maxSeconds).check();
+		return state(Present, XPATH_SELECTOR_BANK_IDEAL).wait(seconds).check();
 	}
 	
 	public boolean isBancoDisponible(BancoSeleccionado bancoSeleccionado) {

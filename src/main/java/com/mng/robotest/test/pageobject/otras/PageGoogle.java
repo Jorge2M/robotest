@@ -1,13 +1,11 @@
 package com.mng.robotest.test.pageobject.otras;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class PageGoogle extends PageBase {
 
@@ -30,10 +28,10 @@ public class PageGoogle extends PageBase {
 	}
 
 	public void searchTextAndWait(String textToSearch) throws Exception {
-		driver.findElement(By.xpath(XPATH_INPUT_TEXT)).clear(); 
-		driver.findElement(By.xpath(XPATH_INPUT_TEXT)).sendKeys(textToSearch); 
-		driver.findElement(By.xpath(XPATH_INPUT_TEXT)).sendKeys(Keys.RETURN);
-		waitForPageLoaded(driver);
+		getElement(XPATH_INPUT_TEXT).clear(); 
+		getElement(XPATH_INPUT_TEXT).sendKeys(textToSearch); 
+		getElement(XPATH_INPUT_TEXT).sendKeys(Keys.RETURN);
+		waitLoadPage();
 	}
 	
 	public void acceptModalCookieIfExists() {
@@ -43,16 +41,16 @@ public class PageGoogle extends PageBase {
 		}
 	}
 	
-	private boolean isVisibleModalCookie(int maxSeconds) {
-		return state(Visible, By.xpath(XPATH_BUTTON_ACCEPT_MODAL_COOKIE)).wait(maxSeconds).check();
+	private boolean isVisibleModalCookie(int seconds) {
+		return state(Visible, XPATH_BUTTON_ACCEPT_MODAL_COOKIE).wait(seconds).check();
 	}
 	
 	private void acceptModalCookie() {
-		click(By.xpath(XPATH_BUTTON_ACCEPT_MODAL_COOKIE)).exec();
+		click(XPATH_BUTTON_ACCEPT_MODAL_COOKIE).exec();
 	}
 
 	public boolean validaFirstLinkContains(String textToBeContained) {
-		WebElement headerText = driver.findElement(By.xpath(XPATH_LINK_NO_PUBLI_TEXT));
+		WebElement headerText = getElement(XPATH_LINK_NO_PUBLI_TEXT);
 		if (headerText!=null) {
 			String textHeader = headerText.getText();
 			if (textHeader.contains(textToBeContained) || 
@@ -64,8 +62,8 @@ public class PageGoogle extends PageBase {
 		return false;
 	}
 
-	public boolean validaFirstLinkContainsUntil(String textToBeContained, int maxSecondsToWait) {
-		for (int i=0; i<maxSecondsToWait; i++) {
+	public boolean validaFirstLinkContainsUntil(String textToBeContained, int secondsToWait) {
+		for (int i=0; i<secondsToWait; i++) {
 			if (validaFirstLinkContains(textToBeContained)) {
 				return true;
 			}
@@ -75,7 +73,7 @@ public class PageGoogle extends PageBase {
 	}
 
 	public void clickFirstLinkNoPubli() {
-		click(By.xpath(XPATH_LINK_NO_PUBLI)).exec();
+		click(XPATH_LINK_NO_PUBLI).exec();
 	}
 
 }

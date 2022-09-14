@@ -47,8 +47,8 @@ public class PageSuscripciones extends PageBase {
 		click(XPATH_BUTTON_GUARDAR_CAMBIOS).exec();
 	}
 	
-	public boolean isPageResOKUntil(int maxSeconds) { 
-		return state(Present, XPATH_PAGE_RES_OK).wait(maxSeconds).check();
+	public boolean isPageResOKUntil(int seconds) { 
+		return state(Present, XPATH_PAGE_RES_OK).wait(seconds).check();
 	}
 	
 	public int getNumNewsletters() {

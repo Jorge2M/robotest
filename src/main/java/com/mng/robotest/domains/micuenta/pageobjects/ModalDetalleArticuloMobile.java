@@ -12,12 +12,12 @@ public class ModalDetalleArticuloMobile extends ModalDetalleArticulo {
 	private static final String XPATH_PRECIO = "//*[@data-testid[contains(.,'product.paidPrice')]]"; 
 	
 	@Override
-	public boolean isVisible(int maxSeconds) {
-		return state(Visible, XPATH_REFERENCIA).wait(maxSeconds).check();
+	public boolean isVisible(int seconds) {
+		return state(Visible, XPATH_REFERENCIA).wait(seconds).check();
 	}
 	@Override
-	public boolean isInvisible(int maxSeconds) {
-		return state(Invisible, XPATH_REFERENCIA).wait(maxSeconds).check();
+	public boolean isInvisible(int seconds) {
+		return state(Invisible, XPATH_REFERENCIA).wait(seconds).check();
 	}
 	@Override
 	public void clickAspaForClose() {

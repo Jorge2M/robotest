@@ -8,7 +8,6 @@ import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.utils.PaisGetter;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 
 

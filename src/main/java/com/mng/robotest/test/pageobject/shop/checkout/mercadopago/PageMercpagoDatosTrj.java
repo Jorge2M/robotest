@@ -1,7 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.checkout.mercadopago;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.transversal.PageBase;
 
@@ -16,7 +14,7 @@ public abstract class PageMercpagoDatosTrj extends PageBase {
 	
 	public enum TypePant {INPUT_DATA_TRJ_NEW, INPUT_CVC_TRJ_SAVED} 
 	
-	public abstract boolean isPageUntil(int maxSecondsToWait);
+	public abstract boolean isPageUntil(int secondsToWait);
 	public abstract void sendCvc(String cvc);
 	public abstract void sendCaducidadTarj(String fechaVencimiento);
 	

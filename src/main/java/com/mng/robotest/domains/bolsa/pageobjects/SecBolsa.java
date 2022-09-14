@@ -42,12 +42,12 @@ public abstract class SecBolsa extends PageBase {
 		return new SecBolsaShop();
 	}
 	
-	public boolean isInStateUntil(StateBolsa stateBolsaExpected, int maxSeconds) {
+	public boolean isInStateUntil(StateBolsa stateBolsaExpected, int seconds) {
 		String xpath = getXPathPanelBolsa();
 		if (stateBolsaExpected==StateBolsa.OPEN) {
-			return state(Visible, xpath).wait(maxSeconds).check();
+			return state(Visible, xpath).wait(seconds).check();
 		}
-		return state(Invisible, xpath).wait(maxSeconds).check();
+		return state(Invisible, xpath).wait(seconds).check();
 	}
 
 	public boolean isVisibleBotonComprar() {
@@ -55,14 +55,14 @@ public abstract class SecBolsa extends PageBase {
 		return state(Visible, xpathComprarBt).check();
 	}
 
-	public boolean isVisibleBotonComprarUntil(int maxSeconds) { 
+	public boolean isVisibleBotonComprarUntil(int seconds) { 
 		String xpathBoton = getXPathBotonComprar();
-		return state(Visible, xpathBoton).wait(maxSeconds).check();
+		return state(Visible, xpathBoton).wait(seconds).check();
 	}
 
 	public void clickBotonComprar( int secondsWait) {
 		String xpathComprarBt = getXPathBotonComprar();
-		state(State.Visible, By.xpath(xpathComprarBt)).wait(secondsWait).check();
+		state(State.Visible, xpathComprarBt).wait(secondsWait).check();
 		click(xpathComprarBt).type(TypeClick.javascript).exec();
 	}
 	
@@ -97,11 +97,11 @@ public abstract class SecBolsa extends PageBase {
 		return (ImporteScreen.getFloatFromImporteMangoScreen(precioTotal));
 	}
 	
-	public boolean isNotThisImporteTotalUntil(String importeSubTotalPrevio, int maxSeconds) {
+	public boolean isNotThisImporteTotalUntil(String importeSubTotalPrevio, int seconds) {
 		String xpathImporte = getXPathPrecioSubTotal();
 		try {
 			ExpectedCondition<Boolean> expected = ExpectedConditions.not(ExpectedConditions.textToBePresentInElementLocated(By.xpath(xpathImporte), importeSubTotalPrevio));
-			new WebDriverWait(driver, maxSeconds).until(expected);
+			new WebDriverWait(driver, seconds).until(expected);
 			return true;
 		}
 		catch (Exception e) {
@@ -145,7 +145,7 @@ public abstract class SecBolsa extends PageBase {
 	
 	public void click1erArticuloBolsa() {
 		getLineasArtBolsa().clickArticle(1);
-		waitForPageLoaded(driver);
+		waitLoadPage();
 	}
 	
 	public void closeInMobil() {

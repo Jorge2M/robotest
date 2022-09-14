@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.Select;
 
@@ -97,7 +96,7 @@ public abstract class ModalDireccion extends PageBase {
 	
 	public void selectPais(String codigoPais, String xpathFormModal) {
 		String xpathSelectedPais = XPATH_SELECT_PAIS + "/option[@selected='selected' and @value='" + codigoPais + "']";
-		if (!state(Present, By.xpath(xpathSelectedPais), driver).check()) {
+		if (!state(Present, xpathSelectedPais).check()) {
 			state(State.Visible, xpathFormModal + XPATH_SELECT_PAIS).wait(2).check();
 			new Select(getElement(xpathFormModal + XPATH_SELECT_PAIS)).selectByValue(codigoPais);
 		}

@@ -26,10 +26,10 @@ public class PageResultPagoSteps extends StepBase {
 	private final WebDriver driver = TestMaker.getDriverTestCase();
 	
 	@Validation (
-		description="Acaba apareciendo la página de la Shop de Mango de \"Ya has hecho tu compra\" (la esperamos hasta #{maxSecondsToWait} segundos)",
+		description="Acaba apareciendo la página de la Shop de Mango de \"Ya has hecho tu compra\" (la esperamos hasta #{secondsToWait} segundos)",
 		level=State.Defect)
-	public boolean validaIsPageUntil(int maxSecondsToWait) {
-		return (pageResultPago.isVisibleTextoConfirmacionPago(maxSecondsToWait));
+	public boolean validaIsPageUntil(int secondsToWait) {
+		return (pageResultPago.isVisibleTextoConfirmacionPago(secondsToWait));
 	}
 	
 	public void validateIsPageOk(DataPago dataPago) throws Exception {
@@ -41,25 +41,25 @@ public class PageResultPagoSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece la URL correspondiente a la página de resultado OK (la esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece la URL correspondiente a la página de resultado OK (la esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean checkUrl(int maxSeconds) {
-		return (pageResultPago.checkUrl(maxSeconds));
+	public boolean checkUrl(int seconds) {
+		return (pageResultPago.checkUrl(seconds));
 	}
 	
 	@Validation
 	public ChecksTM validateTextConfirmacionPago() {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds1 = 10;
-		boolean isVisibleTextConfirmacion = pageResultPago.isVisibleTextoConfirmacionPago(maxSeconds1);
+		int seconds1 = 10;
+		boolean isVisibleTextConfirmacion = pageResultPago.isVisibleTextoConfirmacionPago(seconds1);
 		checks.add(
-			"Aparece un texto de confirmación del pago (lo esperamos hasta " + maxSeconds1 + " segundos)",
+			"Aparece un texto de confirmación del pago (lo esperamos hasta " + seconds1 + " segundos)",
 			isVisibleTextConfirmacion, State.Warn);
 		if (!isVisibleTextConfirmacion) {
-			int maxSeconds2 = 20;
+			int seconds2 = 20;
 			checks.add(
-				"Si no aparece lo esperamos " + maxSeconds2 + " segundos",
-				pageResultPago.isVisibleTextoConfirmacionPago(maxSeconds2), State.Defect);
+				"Si no aparece lo esperamos " + seconds2 + " segundos",
+				pageResultPago.isVisibleTextoConfirmacionPago(seconds2), State.Defect);
 		}
 		return checks;
 	}
@@ -84,11 +84,11 @@ public class PageResultPagoSteps extends StepBase {
 		  		pageResultPago.isButtonMisCompras(), State.Warn);
 		}
 		
-		int maxSeconds = 5;
-		String codigoPed = pageResultPago.getCodigoPedido(maxSeconds);
+		int seconds = 5;
+		String codigoPed = pageResultPago.getCodigoPedido(seconds);
 		boolean isCodPedidoVisible = "".compareTo(codigoPed)!=0;
 		checks.add(
-	  		"Aparece el código de pedido (" + codigoPed + ") (lo esperamos hasta " + maxSeconds + " segundos)",
+	  		"Aparece el código de pedido (" + codigoPed + ") (lo esperamos hasta " + seconds + " segundos)",
 	  		isCodPedidoVisible, State.Defect);
 		
 		DataPedido dataPedido = dataPago.getDataPedido();

@@ -1,11 +1,8 @@
 package com.mng.robotest.test.pageobject.shop.checkout.sepa;
 
-import org.openqa.selenium.By;
-
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class PageSepaResultMobil extends PageBase {
 
@@ -13,10 +10,10 @@ public class PageSepaResultMobil extends PageBase {
 	private static final String XPATH_STAGE_3HEADER = "//h2[@id='stageheader' and text()[contains(.,'3:')]]";
 
 	public boolean isPage() {
-		return (state(Present, By.xpath(XPATH_STAGE_3HEADER)).check());
+		return state(Present, XPATH_STAGE_3HEADER).check();
 	}
 
 	public void clickButtonPay() {
-		click(By.xpath(XPATH_BUTTON_PAY)).exec();
+		click(XPATH_BUTTON_PAY).exec();
 	}
 }

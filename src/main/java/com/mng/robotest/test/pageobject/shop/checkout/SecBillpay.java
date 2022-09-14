@@ -27,12 +27,12 @@ public class SecBillpay extends PageBase {
 		return XPATH_RADIO_ACEPTO_DESKTOP;
 	}
 
-	public boolean isVisibleUntil(int maxSeconds) {
+	public boolean isVisibleUntil(int seconds) {
 		if (channel.isDevice()) {
 			String xpath = XPATH_BLOCK_RECHNUNG_MOBIL + " | " + XPATH_BLOCK_LAST_SCHRIFT_MOBIL;
-			return state(Visible, xpath).wait(maxSeconds).check();
+			return state(Visible, xpath).wait(seconds).check();
 		}
-		return state(Visible, XPATH_BLOCK_BILLPAY_DESKTOP).wait(maxSeconds).check();
+		return state(Visible, XPATH_BLOCK_BILLPAY_DESKTOP).wait(seconds).check();
 	}
 
 	/**

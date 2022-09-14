@@ -12,8 +12,8 @@ public class ModalDetalleArticuloDesktop extends ModalDetalleArticulo {
 	private static final String XPATH_PRECIO = XPATH_CONTAINER_DESCRIPTION + "//*[@data-testid[contains(.,'product.paidPrice')]]";
 	
 	@Override
-	public boolean isVisible(int maxSeconds) {
-		return state(Visible, XPATH_MODAL_INFO_ARTICULO).wait(maxSeconds).check();
+	public boolean isVisible(int seconds) {
+		return state(Visible, XPATH_MODAL_INFO_ARTICULO).wait(seconds).check();
 	}
 	@Override
 	public void clickAspaForClose() {
@@ -38,8 +38,8 @@ public class ModalDetalleArticuloDesktop extends ModalDetalleArticulo {
 		return idArticulo.replace(" ", "").equals(idArticuloModal);
 	}
 
-	public boolean isInvisible(int maxSeconds) {
-		return state(Invisible, XPATH_MODAL_INFO_ARTICULO).wait(maxSeconds).check();
+	public boolean isInvisible(int seconds) {
+		return state(Invisible, XPATH_MODAL_INFO_ARTICULO).wait(seconds).check();
 	}
 	
 }

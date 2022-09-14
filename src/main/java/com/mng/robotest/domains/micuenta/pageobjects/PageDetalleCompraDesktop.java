@@ -27,7 +27,7 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 		return (importe.compareTo(importeTotal)==0);
 	}
 	@Override
-	public boolean isVisiblePrendaUntil(int maxSeconds) {
+	public boolean isVisiblePrendaUntil(int seconds) {
 		return getNumPrendas()>0;
 	}
 	@Override
@@ -39,8 +39,8 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 		return sectionPrendas.getNumPrendas();
 	}
 	@Override
-	public boolean isVisibleDataTicket(int maxSeconds) {
-		return state(Visible, getXPathTicket()).wait(maxSeconds).check();
+	public boolean isVisibleDataTicket(int seconds) {
+		return state(Visible, getXPathTicket()).wait(seconds).check();
 	}
 	@Override
 	public String getIdTicket(TypeTicket typeTicket) {
@@ -48,8 +48,8 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 		return (getDataRightFrom(":", dataNumTicket));
 	}
 	@Override
-	public boolean isVisibleIdTicket(int maxSeconds) {
-		return state(State.Visible, getXPathTicket()).wait(maxSeconds).check();
+	public boolean isVisibleIdTicket(int seconds) {
+		return state(State.Visible, getXPathTicket()).wait(seconds).check();
 	}
 	@Override
 	public String getImporte() {

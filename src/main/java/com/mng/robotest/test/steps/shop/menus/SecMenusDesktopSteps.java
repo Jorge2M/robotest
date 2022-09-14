@@ -161,14 +161,14 @@ public class SecMenusDesktopSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece seleccionado el menú de 2o nivel <b>#{menu.getNombre()}</b> (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Aparece seleccionado el menú de 2o nivel <b>#{menu.getNombre()}</b> (lo esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	private boolean checkIsSelectedLateralMenu(MenuLateralDesktop menu, int maxSeconds) {
+	private boolean checkIsSelectedLateralMenu(MenuLateralDesktop menu, int seconds) {
 		if (menu instanceof Menu2onLevel) {
 			PageGaleria pageGaleria = PageGaleriaDesktop.getNew(channel);
 			return ((PageGaleriaDesktop)pageGaleria).getSecSubmenusGallery().isMenuSelected(menu.getNombre());
 		}
-		return (secMenus.secMenuLateral.isSelectedMenu(menu, maxSeconds));
+		return (secMenus.secMenuLateral.isSelectedMenu(menu, seconds));
 	}
 	  
 //	@Validation

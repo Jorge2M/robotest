@@ -17,10 +17,10 @@ public class PagePostfSelectChannelSteps {
 	}
 	
 	@Validation (
-		description="Aparece la página de selección del canal (lo esperamos un máximo de #{maxSeconds})",
+		description="Aparece la página de selección del canal (lo esperamos un máximo de #{seconds})",
 		level=State.Warn)
-	public boolean checkIsPage(int maxSeconds) {
-		return (pageObj.isPage(maxSeconds));
+	public boolean checkIsPage(int seconds) {
+		return (pageObj.isPage(seconds));
 	}
 	
 	@Step(

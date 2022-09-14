@@ -14,8 +14,8 @@ public class ModalInputPersonnumberKlarna extends PageBase {
 		return XPATH_INPUT_PERSON_NUMBER + " | " + XPATH_INPUT_FECHA_NACIMIENTO;
 	}
 	
-	public boolean isModal(int maxSeconds) {
-		return state(State.Visible, getXPathInputPersonNumber()).wait(maxSeconds).check();
+	public boolean isModal(int seconds) {
+		return state(State.Visible, getXPathInputPersonNumber()).wait(seconds).check();
 	}
 	
 	public void inputPersonNumber(String personnumber) {

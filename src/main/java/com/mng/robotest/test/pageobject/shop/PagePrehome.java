@@ -60,20 +60,20 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 		return "Prehome";
 	}
 	@Override
-	public boolean isPageCorrectUntil(int maxSeconds) {
-		return isPageUntil(maxSeconds);
+	public boolean isPageCorrectUntil(int seconds) {
+		return isPageUntil(seconds);
 	}
 
 	public boolean isPage() {
 		return isPageUntil(0);
 	}
 	
-	public boolean isPageUntil(int maxSeconds) {
-		return state(Present, XPATH_DIV_PAIS_SELECCIONADO).wait(maxSeconds).check();
+	public boolean isPageUntil(int seconds) {
+		return state(Present, XPATH_DIV_PAIS_SELECCIONADO).wait(seconds).check();
 	}
 
-	public boolean isNotPageUntil(int maxSeconds) {
-		return state(Invisible, XPATH_DIV_PAIS_SELECCIONADO).wait(maxSeconds).check();
+	public boolean isNotPageUntil(int seconds) {
+		return state(Invisible, XPATH_DIV_PAIS_SELECCIONADO).wait(seconds).check();
 	}
 
 	public String getCodigoPais(String nombrePais) {
@@ -133,7 +133,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 		String xpathButton = getXPathButtonForEnter(buttonEnter, codigoPais);
 		if (state(Present, xpathButton).check() && 
 			getElement(xpathButton).isDisplayed()) {
-			moveToElement(By.xpath(xpathButton), driver);
+			moveToElement(xpathButton);
 			click(xpathButton + "/a").type(TypeClick.javascript).exec();
 			return true;
 		}
@@ -256,6 +256,6 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	
 		//Esperamos a que desaparezca la página de Prehome
 		isNotPageUntil(30);
-		waitForPageLoaded(driver);
+		waitLoadPage();
 	}
 }

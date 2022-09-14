@@ -8,11 +8,11 @@ public class ModalPreloaderSpinner extends PageBase {
 	
 	private static final String XPATH_PRE_LOADER_SPINNER = "//div[@id='preloaderSpinner']";
 
-	public boolean isVisibleUntil(int maxSeconds) {
-		return state(Visible, XPATH_PRE_LOADER_SPINNER).wait(maxSeconds).check();
+	public boolean isVisibleUntil(int seconds) {
+		return state(Visible, XPATH_PRE_LOADER_SPINNER).wait(seconds).check();
 	}
 	
-	public boolean isNotVisibleUntil(int maxSeconds) {
-		return state(Invisible, XPATH_PRE_LOADER_SPINNER).wait(maxSeconds).check();
+	public boolean isNotVisibleUntil(int seconds) {
+		return state(Invisible, XPATH_PRE_LOADER_SPINNER).wait(seconds).check();
 	}
 }

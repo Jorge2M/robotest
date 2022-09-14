@@ -1,6 +1,5 @@
 package com.mng.robotest.test.pageobject.shop.checkout.tmango;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.domains.transversal.PageBase;
@@ -17,16 +16,15 @@ public class PageAmexResult extends PageBase {
 		super(driver);
 	}
 	
-	public boolean isResultOkUntil(int maxSeconds) {
-		return (state(Present, By.xpath(XPATH_SECTION_OK))
-				.wait(maxSeconds).check());
+	public boolean isResultOkUntil(int seconds) {
+		return state(Present, XPATH_SECTION_OK).wait(seconds).check();
 	}
 	
 	public boolean isPresentContinueButton() {
-		return (state(Present, By.xpath(XPATH_CONTINUE_BUTTON)).check());
+		return state(Present, XPATH_CONTINUE_BUTTON).check();
 	}
 
 	public void clickContinuarButton() {
-		click(By.xpath(XPATH_CONTINUE_BUTTON)).exec();
+		click(XPATH_CONTINUE_BUTTON).exec();
 	}
 }

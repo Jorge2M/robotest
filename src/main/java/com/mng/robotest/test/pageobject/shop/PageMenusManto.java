@@ -3,7 +3,6 @@ package com.mng.robotest.test.pageobject.shop;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebElement;
 
@@ -41,8 +40,8 @@ public class PageMenusManto extends PageBase {
 		return state(Present, XPATH_CELDA_TEXT_MENU_PRINCIPAL).check();
 	}
 
-	public boolean validateIsPage(String subMenu, int maxSeconds) {
-		for (int i=0; i<maxSeconds; i++) {
+	public boolean validateIsPage(String subMenu, int seconds) {
+		for (int i=0; i<seconds; i++) {
 			if (vaidateIsPage(subMenu)) {
 				return true;
 			}
@@ -156,7 +155,7 @@ public class PageMenusManto extends PageBase {
 	public List<WebElement> getListSubMenus(String menuName, String nextMenuName) {
 		String xpathPosicionInicial = getXPathFirstElement(menuName);
 		List<WebElement> elements = new ArrayList<>();
-		elements.add(driver.findElement(By.xpath(xpathPosicionInicial)));
+		elements.add(getElement(xpathPosicionInicial));
 		if (nextMenuName==null) {
 			while (isNextXPathEndTable(xpathPosicionInicial)){
 				xpathPosicionInicial = getXPathNextElement(xpathPosicionInicial);

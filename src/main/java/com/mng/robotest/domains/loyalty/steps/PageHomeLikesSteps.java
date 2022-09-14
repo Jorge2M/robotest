@@ -18,15 +18,15 @@ public class PageHomeLikesSteps extends StepBase {
 	public ChecksResultWithNumberPoints checkIsPageOk() {
 		ChecksResultWithNumberPoints checks = new ChecksResultWithNumberPoints();
 		PageHomeLikes pageLikes = new PageHomeLikes();
-		int maxSeconds = 5;
+		int seconds = 5;
 		checks.add(
-			"Aparece la página de <b>Mango likes you</b> (esperamos hasta " + maxSeconds + " segundos)",
+			"Aparece la página de <b>Mango likes you</b> (esperamos hasta " + seconds + " segundos)",
 			pageLikes.checkIsPageUntil(4), State.Defect);
 		
-		int maxSecondsButton = 10;
+		int secondsButton = 10;
 		checks.add(
-			"Es visible el botón \"Compra con descuento\" (esperamos hasta " + maxSecondsButton + " segundos)",
-			pageLikes.isVisibleButton(ButtonUseLikes.COMPRA_CON_DESCUENTO, maxSecondsButton), State.Defect);
+			"Es visible el botón \"Compra con descuento\" (esperamos hasta " + secondsButton + " segundos)",
+			pageLikes.isVisibleButton(ButtonUseLikes.COMPRA_CON_DESCUENTO, secondsButton), State.Defect);
 		
 		checks.setNumberPoints(pageLikes.getPoints());
 		checks.add(

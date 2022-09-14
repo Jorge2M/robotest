@@ -58,10 +58,10 @@ public class PageRegistroSegundaStepsOutlet extends StepBase {
 
 		dataRegistro.put("numlineas", String.valueOf(numLineas));
 		dataRegistro.put("lineascomaseparated", lineasComaSeparated);
-		int maxSeconds = 5;
+		int seconds = 5;
 		checks.add(
-			"Aparece la 2ª página de introducción de datos (la esperamos hasta " + maxSeconds + " segs)",
-			pageRegistroSegunda.isPageUntil(maxSeconds), State.Warn);
+			"Aparece la 2ª página de introducción de datos (la esperamos hasta " + seconds + " segs)",
+			pageRegistroSegunda.isPageUntil(seconds), State.Warn);
 		checks.add(
 			Check.make(
 			    "Se pueden seleccionar las colecciones " + lineasComaSeparated,
@@ -113,7 +113,6 @@ public class PageRegistroSegundaStepsOutlet extends StepBase {
 			pageRegistroSegunda.clickButtonContinuar();
 		}				
 
-		WebDriver driver = pageRegistroSegunda.driver;
 		if (paisConNinos) {
 			new PageRegistroNinosStepsOutlet().validaIsPageWithNinos(numNinos);
 		} else {

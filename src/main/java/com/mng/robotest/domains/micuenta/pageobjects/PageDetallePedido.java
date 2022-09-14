@@ -29,7 +29,7 @@ public interface PageDetallePedido {
 	
 	public boolean isPresentImporteTotal(String importeTotal, String codPais);
 	
-	public boolean isVisiblePrendaUntil(int maxSecondsToWait);
+	public boolean isVisiblePrendaUntil(int secondsToWait);
 	
 	public int getNumPrendas();
 	

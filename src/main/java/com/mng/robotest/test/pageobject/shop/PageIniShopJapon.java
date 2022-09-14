@@ -18,9 +18,9 @@ public class PageIniShopJapon extends SeleniumUtils {
 	 * @param driver
 	 * @return si se trata o no de la página inicial de la shop de Japón
 	 */
-	public static boolean isPageUntil(int maxSecondsToWait, WebDriver driver) {
+	public static boolean isPageUntil(int secondsToWait, WebDriver driver) {
 		return (
-			titleContainsUntil(driver, Title, maxSecondsToWait) &&
+			titleContainsUntil(driver, Title, secondsToWait) &&
 			driver.getCurrentUrl().contains(URL));
 	}
 }

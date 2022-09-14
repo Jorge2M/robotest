@@ -8,8 +8,8 @@ public class PageResultadoRegaloLikes extends PageBase {
 	
 	private static final String XPATH_DONE_ICON = "//img[@class='done-icon']";
 	
-	public boolean isEnvioOk(int maxSeconds) {
-		return state(Visible, XPATH_DONE_ICON).wait(maxSeconds).check();
+	public boolean isEnvioOk(int seconds) {
+		return state(Visible, XPATH_DONE_ICON).wait(seconds).check();
 	}
 	
 }

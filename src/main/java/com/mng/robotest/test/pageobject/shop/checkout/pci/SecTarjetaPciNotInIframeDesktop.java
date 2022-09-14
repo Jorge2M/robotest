@@ -22,14 +22,14 @@ public class SecTarjetaPciNotInIframeDesktop extends PageBase implements SecTarj
 	}
 	
 	@Override
-	public boolean isVisiblePanelPagoUntil(String nombrePago, int maxSeconds) {
+	public boolean isVisiblePanelPagoUntil(String nombrePago, int seconds) {
 		String xpathPanelPago = getXPathPanelPago(nombrePago);
-		return state(Visible, xpathPanelPago).wait(maxSeconds).check();
+		return state(Visible, xpathPanelPago).wait(seconds).check();
 	}
 	
 	@Override
-	public boolean isPresentInputNumberUntil(int maxSeconds) {
-		return state(Present, XPATH_INPUT_NUMBER).wait(maxSeconds).check();
+	public boolean isPresentInputNumberUntil(int seconds) {
+		return state(Present, XPATH_INPUT_NUMBER).wait(seconds).check();
 	}
 	
 	@Override

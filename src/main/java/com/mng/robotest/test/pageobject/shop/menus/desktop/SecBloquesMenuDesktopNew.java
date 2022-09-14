@@ -212,11 +212,11 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 		return getXPathLinkMenuSuperiorRelativeToCapa(typeMenu);
 	}
 	
-	private boolean isMenuVisible(Menu1rstLevel menu1rstLevel, int maxSeconds) {
+	private boolean isMenuVisible(Menu1rstLevel menu1rstLevel, int seconds) {
 		if (isMenuGroupVisible(menu1rstLevel)) {
 			return true;
 		}
-		return isMenuLinkVisible(menu1rstLevel, maxSeconds);
+		return isMenuLinkVisible(menu1rstLevel, seconds);
 	}
 	
 	private boolean isMenuGroupVisible(Menu1rstLevel menu1rstLevel) {
@@ -227,9 +227,9 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 		click(getXPathLinkMenuGroup(menu1rstLevel)).exec();
 	}
 	
-	private boolean isMenuLinkVisible(Menu1rstLevel menu1rstLevel, int maxSeconds) {
+	private boolean isMenuLinkVisible(Menu1rstLevel menu1rstLevel, int seconds) {
 		String xpathMenu = getXPathMenuSuperiorLinkVisible(menu1rstLevel);
-		return state(Visible, xpathMenu).wait(maxSeconds).check();
+		return state(Visible, xpathMenu).wait(seconds).check();
 	}
 	
 	private void selectGroupMenu(Menu1rstLevel menu1rstLevel) throws Exception {
@@ -242,7 +242,7 @@ public class SecBloquesMenuDesktopNew extends SecBloquesMenuDesktop {
 	private void selectGroupMenu(LineaType lineaType, SublineaType sublineaType, String group_line) {
 		waitMillis(500);
 		String xpathGroupSection = getXPathGroupSection(lineaType, sublineaType);
-		click(By.xpath(xpathGroupSection + "//self::*[@id='" + group_line + "']/span")).exec();
+		click(xpathGroupSection + "//self::*[@id='" + group_line + "']/span").exec();
 	}
 	
 	private String getGroupMenu(Menu1rstLevel menu1rstLevel) throws Exception {		

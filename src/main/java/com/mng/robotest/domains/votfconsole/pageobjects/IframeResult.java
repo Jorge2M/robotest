@@ -61,8 +61,8 @@ public class IframeResult extends PageBase {
 		return state(Present, XPATH_LINT_TIPO_STOCK).check();
 	}
 	
-	public boolean isPresentCodigoPedido(int maxSeconds) {
-		if (!state(Present, XPATH_BLOCK_RESULT_PEDIDO).wait(maxSeconds).check()) {
+	public boolean isPresentCodigoPedido(int seconds) {
+		if (!state(Present, XPATH_BLOCK_RESULT_PEDIDO).wait(seconds).check()) {
 			return false;
 		}
 		return getElement(XPATH_BLOCK_RESULT_PEDIDO).getText().contains("Código pedido"); 
@@ -76,9 +76,9 @@ public class IframeResult extends PageBase {
 		return codigoPedido;
 	}
 	
-	public String getPedidoFromListaPedidosUntil(String codPedidoShort, int maxSeconds) {
+	public String getPedidoFromListaPedidosUntil(String codPedidoShort, int seconds) {
 		String pedido = "";
-		for (int i=0; i<maxSeconds; i++) {
+		for (int i=0; i<seconds; i++) {
 			pedido = getPedidoFromListaPedidos(codPedidoShort);
 			if ("".compareTo(pedido)!=0) {
 				return pedido;
@@ -90,7 +90,7 @@ public class IframeResult extends PageBase {
 	
 	private String getPedidoFromListaPedidos(String codPedidoShort) {
 		String pedidoFull = "";
-		waitForPageLoaded(driver);
+		waitLoadPage();
 		List<WebElement> listPedidos = getElements(XPATH_BLOCK_LISTA_PEDIDOS_FULL);
 
 		//En cada elemento buscamos el pedido en formato corto
@@ -112,8 +112,8 @@ public class IframeResult extends PageBase {
 		return resultado;
 	}
 
-	public boolean isPresentListaPedidosUntil(int maxSeconds) {
-		if (!state(Present, XPATH_BLOCK_LIST_PEDIDOS).wait(maxSeconds).check()) {
+	public boolean isPresentListaPedidosUntil(int seconds) {
+		if (!state(Present, XPATH_BLOCK_LIST_PEDIDOS).wait(seconds).check()) {
 			return false;
 		}
 		return getElement(XPATH_BLOCK_LIST_PEDIDOS).getText().contains("Pedidos:");

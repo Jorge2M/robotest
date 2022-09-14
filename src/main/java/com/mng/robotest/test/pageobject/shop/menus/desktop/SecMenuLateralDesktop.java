@@ -41,18 +41,18 @@ public class SecMenuLateralDesktop extends PageBase {
 		return (getXPathLinkMenu(menu) + getXPathSelectedRelativeMenu());
 	}
 
-	public boolean isSelectedMenu(MenuLateralDesktop menu, int maxSeconds) {
+	public boolean isSelectedMenu(MenuLateralDesktop menu, int seconds) {
 		PageGaleria pageGaleria = PageGaleria.getNew(channel);
 		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(pageGaleria);
 		secFiltros.showLateralMenus();
 		String linkMenuSel = getXPathLinkMenuSelected(menu) ;
-		return (state(Visible, By.xpath(linkMenuSel)).wait(maxSeconds).check());
+		return (state(Visible, By.xpath(linkMenuSel)).wait(seconds).check());
 	}
 
 	public void clickMenu(MenuLateralDesktop menu) {
 		String xpathMenu1erNivel = getXPathLinkMenu(menu);
-		moveToElement(By.xpath(xpathMenu1erNivel), driver);
-		click(By.xpath(xpathMenu1erNivel)).exec();
+		moveToElement(xpathMenu1erNivel);
+		click(xpathMenu1erNivel).exec();
 	}
 
 	/**
@@ -62,19 +62,18 @@ public class SecMenuLateralDesktop extends PageBase {
 		PageGaleria pageGaleria = PageGaleria.getNew(channel);
 		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(pageGaleria);
 		secFiltros.showLateralMenus();
-		String xpathMenu = getXPathLinkMenu(menu);
-		return (state(Visible, By.xpath(xpathMenu)).check());
+		return state(Visible, getXPathLinkMenu(menu)).check();
 	}
 	
 	private static final String XPATH_CAPA_MENUS_SHOP = "//div[@id='sidebar']/aside[@id='navigation']";
 	private static final String XPATH_CAPA_MENUS_OUTLET = "//div[@id='sticky']/aside[@id='filters']";
 	
-	public boolean isVisibleCapaMenus(int maxSeconds) {
+	public boolean isVisibleCapaMenus(int seconds) {
 		switch (app) {
 		case outlet:
-			return state(State.Visible, XPATH_CAPA_MENUS_OUTLET).wait(maxSeconds).check();
+			return state(State.Visible, XPATH_CAPA_MENUS_OUTLET).wait(seconds).check();
 		default:
-			return state(State.Visible, XPATH_CAPA_MENUS_SHOP).wait(maxSeconds).check();
+			return state(State.Visible, XPATH_CAPA_MENUS_SHOP).wait(seconds).check();
 		}
 	}
 }

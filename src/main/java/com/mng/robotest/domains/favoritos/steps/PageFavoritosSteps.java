@@ -29,14 +29,14 @@ public class PageFavoritosSteps extends StepBase {
 	@Validation
 	public ChecksTM validaIsPageOK(DataFavoritos dataFavoritos) {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSecondsToWaitCapa = 3;
-		int maxSecondsToWaitArticles = 1;
+		int secondsToWaitCapa = 3;
+		int secondsToWaitArticles = 1;
 		checks.add(
-			"Está visible la capa de favoritos con artículos (la esperamos hasta " + maxSecondsToWaitCapa + " segundos)",
-			pageFavoritos.isSectionArticlesVisibleUntil(maxSecondsToWaitCapa), State.Defect);
+			"Está visible la capa de favoritos con artículos (la esperamos hasta " + secondsToWaitCapa + " segundos)",
+			pageFavoritos.isSectionArticlesVisibleUntil(secondsToWaitCapa), State.Defect);
 		checks.add(
-			"Aparecen los artículos (los esperamos hasta " + maxSecondsToWaitArticles + " segundos): <br>" + dataFavoritos.getListArtDescHTML(),
-			pageFavoritos.areVisibleArticlesUntil(dataFavoritos, maxSecondsToWaitArticles), State.Defect);
+			"Aparecen los artículos (los esperamos hasta " + secondsToWaitArticles + " segundos): <br>" + dataFavoritos.getListArtDescHTML(),
+			pageFavoritos.areVisibleArticlesUntil(dataFavoritos, secondsToWaitArticles), State.Defect);
 		return checks;
 	}
 	
@@ -86,10 +86,10 @@ public class PageFavoritosSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Desaparece el modal de favoritos compartidos (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Desaparece el modal de favoritos compartidos (lo esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	public boolean checkShareIsClosedUntil(int maxSeconds) {
-		return (pageFavoritos.checkShareModalInvisible(maxSeconds));
+	public boolean checkShareIsClosedUntil(int seconds) {
+		return (pageFavoritos.checkShareModalInvisible(seconds));
 	}
 	
 	@Step (
@@ -101,10 +101,10 @@ public class PageFavoritosSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Desaparece de Favoritos el artículo con referencia <b>#{refArticle}</b> y código de color <b>#{codColor}</b> (lo esperamos hasta #{maxSeconds} segundos)",
+		description="Desaparece de Favoritos el artículo con referencia <b>#{refArticle}</b> y código de color <b>#{codColor}</b> (lo esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean checkArticleDisappearsFromFavoritesUntil(String refArticle, String codColor, int maxSeconds) {
-		return (pageFavoritos.isInvisibleArticleUntil(refArticle, codColor, maxSeconds));
+	public boolean checkArticleDisappearsFromFavoritesUntil(String refArticle, String codColor, int seconds) {
+		return (pageFavoritos.isInvisibleArticleUntil(refArticle, codColor, seconds));
 	}
 	
 	@Step (

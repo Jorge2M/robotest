@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -12,7 +11,6 @@ import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Pais;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class ModalCambioPais extends PageBase {
 	
@@ -28,17 +26,17 @@ public class ModalCambioPais extends PageBase {
 		return (XPATH_MODAL + "//div[@class[contains(.,'modalConfirmacionPais')]]//a[@class[contains(.,'_langBtn')] and @href[contains(.,'" + urlAccesoPais + "')]]");
 	}
 	
-	public boolean isVisibleModalUntil(int maxSeconds) {
-		return (state(Visible, By.xpath(XPATH_MODAL)).wait(maxSeconds).check());
+	public boolean isVisibleModalUntil(int seconds) {
+		return state(Visible, XPATH_MODAL).wait(seconds).check();
 	}
 	
 	public boolean isVisibleModalSelecProvincia() {
-		return (state(Visible, By.xpath(XPATH_MODAL_SELECT_PROVINCIA)).check());
+		return state(Visible, XPATH_MODAL_SELECT_PROVINCIA).check();
 	}
 	
 	public boolean isLinkToConfirmPais(String hrefPais) {
 		String xpath = getXPath_linkToConfirmPais(hrefPais);
-		return (state(Present, By.xpath(xpath)).check());
+		return state(Present, xpath).check();
 	}
 	
 	public Pais getPaisOfButtonForChangePais(List<Pais> listPaisesCandidatos, String urlBaseTest) 
@@ -57,27 +55,27 @@ public class ModalCambioPais extends PageBase {
 	
 	public boolean isButtonToChangePais(String urlAccesoPais) {
 		String xpath = getXPath_buttonToChangePais(urlAccesoPais);
-		return (state(Present, By.xpath(xpath)).check());
+		return state(Present, xpath).check();
 	}
 	
 	public String getTextPaisButtonChagePais() {
-		String xpath = getXPath_buttonToChangePais(""/*urlAccesoPais*/);
-		return (driver.findElement(By.xpath(xpath)).getText());
+		String xpath = getXPath_buttonToChangePais("");
+		return getElement(xpath).getText();
 	}	
 	
 	public String getHRefPaisButtonChagePais() {
 		String xpath = getXPath_buttonToChangePais(""/*urlAccesoPais*/);
-		return (driver.findElement(By.xpath(xpath)).getAttribute("href"));
+		return getElement(xpath).getAttribute("href");
 	}
 	
 	public void clickButtonChangePais() {
-		String xpath = getXPath_buttonToChangePais(""/*urlAccesoPais*/);
-		click(By.xpath(xpath)).exec();
+		String xpath = getXPath_buttonToChangePais("");
+		click(xpath).exec();
 	}
 	
 	public void closeModalIfVisible() {
 		if (isVisibleModalUntil(0)) {
-			driver.findElement(By.xpath(XPATH_ASPA_CLOSE)).click();
+			getElement(XPATH_ASPA_CLOSE).click();
 			try {
 				new WebDriverWait(driver, 1).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(XPATH_MODAL)));
 			}

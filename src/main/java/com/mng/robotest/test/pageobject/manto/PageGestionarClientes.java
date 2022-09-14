@@ -109,19 +109,19 @@ public class PageGestionarClientes extends PageBase {
 		return driver.findElement(By.xpath(getXPathIdClienteFromXPathDni(dni))).getText();
 	}
 	
-	public boolean isVisibleThirdButtonUntil(TypeThirdButton typeButton, int maxSeconds) {
+	public boolean isVisibleThirdButtonUntil(TypeThirdButton typeButton, int seconds) {
 		String xpathButton = getXPathThirdButton(typeButton); 
-		return (state(Visible, By.xpath(xpathButton)).wait(maxSeconds).check());
+		return (state(Visible, By.xpath(xpathButton)).wait(seconds).check());
 	}
 	
-	public void clickThirdButtonAndWaitSeconds(TypeThirdButton typeButton, int maxSeconds) {
+	public void clickThirdButtonAndWaitSeconds(TypeThirdButton typeButton, int seconds) {
 		By byElem = By.xpath(getXPathThirdButton(typeButton));
-		click(byElem).waitLoadPage(maxSeconds).exec();
+		click(byElem).waitLoadPage(seconds).exec();
 	}
 	
-	public void clickDetallesButtonAndWaitSeconds(int maxSeconds) {
+	public void clickDetallesButtonAndWaitSeconds(int seconds) {
 		By byElem = By.xpath(XPATH_FORM_TABLA_DETALLES_BUTTON);
-		click(byElem).waitLoadPage(maxSeconds).exec();
+		click(byElem).waitLoadPage(seconds).exec();
 	}
 	
 	public boolean isVisibleMensajeClickThirdButton(TypeThirdButton typeButton) {

@@ -11,10 +11,10 @@ public class PopupFindAddress extends PageBase {
 	private static final String XPATH_BUTTON_LUPA = "//button[@class='btn_search']";
 	private static final String XPATH_LINK_DIRECC = "//button[@class='link_post']";
 	
-	public String goToPopupAndWait(String mainWindowHandle, int maxSecondsToWait) throws Exception { 
+	public String goToPopupAndWait(String mainWindowHandle, int secondsToWait) throws Exception { 
 		String popupBuscador = switchToAnotherWindow(driver, mainWindowHandle);
 		try {
-			isIFrameUntil(maxSecondsToWait);
+			isIFrameUntil(secondsToWait);
 		}
 		catch (Exception e) {
 			Log4jTM.getLogger().warn("Exception going to Find Address Popup. ", e);
@@ -22,12 +22,12 @@ public class PopupFindAddress extends PageBase {
 		return popupBuscador;
 	}
 
-	public boolean isIFrameUntil(int maxSeconds) {
-		return state(Present, "//iframe").wait(maxSeconds).check();
+	public boolean isIFrameUntil(int seconds) {
+		return state(Present, "//iframe").wait(seconds).check();
 	}
 
-	public boolean isBuscadorClickableUntil(int maxSeconds) {
-		return state(Clickable, XPATH_INPUT_BUSCADOR).wait(maxSeconds).check();
+	public boolean isBuscadorClickableUntil(int seconds) {
+		return state(Clickable, XPATH_INPUT_BUSCADOR).wait(seconds).check();
 	}
 
 	public void setDataBuscador(String data) {

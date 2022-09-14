@@ -15,8 +15,8 @@ public class SecIdealSteps extends StepBase {
 		description="Aparece el bloque de selección del banco",
 		level=State.Defect)
 	public boolean validateIsSectionOk() {
-		int maxSeconds = 1;
-		return (secIdeal.isVisibleSelectorOfBank(maxSeconds));
+		int seconds = 1;
+		return (secIdeal.isVisibleSelectorOfBank(seconds));
 	}
 	
 	/**

@@ -12,8 +12,8 @@ public class ModalInputPhoneKlarna extends PageBase {
 	private static final String XPATH_INPUT_OTP = "//input[@id='otp_field']";
 	private static final String XPATH_BUTTON_CONFIRM = "//span[@id[contains(.,'kp-purchase-review-continue-button')]]";
 	
-	public boolean isModal(int maxSeconds) {
-		return state(State.Visible, XPATH_INPUT_PHONE_NUMBER).wait(maxSeconds).check();
+	public boolean isModal(int seconds) {
+		return state(State.Visible, XPATH_INPUT_PHONE_NUMBER).wait(seconds).check();
 	}
 	
 	public void inputPhoneNumber(String phoneNumber) {
@@ -29,8 +29,8 @@ public class ModalInputPhoneKlarna extends PageBase {
 		click(XPATH_BUTTON_CONTINUE).exec();
 	}
 	
-	private boolean isInputOtpVisible(int maxSeconds) {
-		return state(State.Visible, XPATH_INPUT_OTP).wait(maxSeconds).check();
+	private boolean isInputOtpVisible(int seconds) {
+		return state(State.Visible, XPATH_INPUT_OTP).wait(seconds).check();
 	}
 	
 	public void inputOTP(String OTP) {
@@ -39,8 +39,8 @@ public class ModalInputPhoneKlarna extends PageBase {
 		isButtonConfirmVisible(5);
 	}
 	
-	private boolean isButtonConfirmVisible(int maxSeconds) {
-		return state(State.Visible, XPATH_BUTTON_CONFIRM).wait(maxSeconds).check();
+	private boolean isButtonConfirmVisible(int seconds) {
+		return state(State.Visible, XPATH_BUTTON_CONFIRM).wait(seconds).check();
 	}
 	
 	public void clickButtonConfirm() {

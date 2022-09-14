@@ -29,8 +29,8 @@ public class PageDetalleCompraOldOld extends PageBase implements PageDetallePedi
 	}
 	
 	@Override
-	public boolean isVisiblePrendaUntil(int maxSeconds) {
-		return state(Visible, XPATH_LINEA_PRENDA).wait(maxSeconds).check();
+	public boolean isVisiblePrendaUntil(int seconds) {
+		return state(Visible, XPATH_LINEA_PRENDA).wait(seconds).check();
 	}
 	
 	@Override

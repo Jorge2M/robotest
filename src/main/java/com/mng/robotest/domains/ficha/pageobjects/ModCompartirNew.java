@@ -35,8 +35,8 @@ public class ModCompartirNew extends PageBase {
 		return (XPATH_ICON + "//self::*[@data-ga='" + icon.name().toLowerCase() + "']");
 	}
 	
-	public boolean isVisibleUntil(int maxSeconds) {
-		return state(Visible, XPATH_WRAPPER).wait(maxSeconds).check();
+	public boolean isVisibleUntil(int seconds) {
+		return state(Visible, XPATH_WRAPPER).wait(seconds).check();
 	}
 	
 	public boolean isVisibleIcon(IconSocial icon) {

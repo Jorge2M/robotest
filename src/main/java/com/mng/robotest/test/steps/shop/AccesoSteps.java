@@ -87,11 +87,11 @@ public class AccesoSteps extends StepBase {
 	@Validation
 	private ChecksTM checkLinksAfterLogin() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		int maxSeconds = 5;
+		int seconds = 5;
 		MenusUserWrapper userMenus = new SecMenusWrap().getMenusUser();
 		checks.add(
-			"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + maxSeconds + " segundos)",
-			userMenus.isMenuInStateUntil(UserMenu.miCuenta, Present, maxSeconds), State.Defect);
+			"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + seconds + " segundos)",
+			userMenus.isMenuInStateUntil(UserMenu.miCuenta, Present, seconds), State.Defect);
 		
 		boolean isVisibleMenuFav = userMenus.isMenuInStateUntil(UserMenu.favoritos, Present, 0);
 		if (app==AppEcom.outlet) { 
