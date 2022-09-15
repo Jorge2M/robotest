@@ -14,8 +14,8 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.domains.bolsa.pageobjects.ValidatorContentBolsa;
-import com.mng.robotest.domains.bolsa.pageobjects.LineasArtBolsa.DataArtBolsa;
-import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa.StateBolsa;
+import com.mng.robotest.domains.bolsa.pageobjects.LineasArtBolsaCommons.DataArtBolsa;
+import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.datastored.DataBag;
@@ -32,7 +32,7 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 
 public class SecBolsaSteps extends StepBase {
 
-	private final SecBolsa secBolsa = SecBolsa.make(channel, app);
+	private final SecBolsa secBolsa = new SecBolsa();
 	
 	@Step (
 		description="Eliminamos los posibles artículos existentes en la Bolsa",
@@ -159,9 +159,7 @@ public class SecBolsaSteps extends StepBase {
 		if (channel==Channel.desktop) {
 			checkIsBolsaVisibleInDesktop();
 		}
-
 		validaCuadranArticulosBolsa(dataBag);
-		
 		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(GenericCheck.GoogleAnalytics)).checks();
 	}

@@ -10,7 +10,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
-import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa.StateBolsa;
+import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen.Color;
@@ -89,8 +89,7 @@ public class ModalFichaFavoritos extends PageBase {
 	public void clickButtonAddToBagAndWait(String refProducto) throws Exception {
 		String xpathAdd = getXPathButtonAddBolsa(refProducto);
 		getElement(xpathAdd).click();
-		SecBolsa secBolsa = SecBolsa.make(channel, app);
-		secBolsa.isInStateUntil(StateBolsa.OPEN, 2);
+		new SecBolsa().isInStateUntil(StateBolsa.OPEN, 2);
 	}
 	
 	public String selectTalla(String refProducto, int posicionTalla) {

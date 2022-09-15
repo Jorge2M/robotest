@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
-import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa.StateBolsa;
+import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.datastored.DataFavoritos;
@@ -219,8 +219,7 @@ public class PageFavoritos extends PageBase {
 		WebElement talla = listaTallas.get(posicionTalla);
 		String litTalla = talla.getText();
 		talla.click();
-		SecBolsa secBolsa = SecBolsa.make(channel, app);
-		secBolsa.isInStateUntil(StateBolsa.OPEN, 2);
+		new SecBolsa().isInStateUntil(StateBolsa.OPEN, 2);
 		return litTalla;
 	}
 	

@@ -67,8 +67,7 @@ public class AccesoSteps extends StepBase {
 		}
 
 		if (clearArticulos) {
-			SecBolsa secBolsa = SecBolsa.make(channel, app);
-			secBolsa.clearArticulos();
+			new SecBolsa().clearArticulos();
 		}
 
 		if (dataTest.userRegistered && app!=AppEcom.votf) {

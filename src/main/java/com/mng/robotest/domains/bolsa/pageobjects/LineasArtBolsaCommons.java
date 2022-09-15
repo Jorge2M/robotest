@@ -14,7 +14,7 @@ import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.utils.UtilsTest;
 
-public abstract class LineasArtBolsa extends PageBase {
+public abstract class LineasArtBolsaCommons extends PageBase {
 	
 	public enum DataArtBolsa {
 		REFERENCIA(true), 

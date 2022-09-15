@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.bolsa.tests;
 
-import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa.StateBolsa;
+import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.transversal.NavigationBase;
 import com.mng.robotest.test.datastored.DataBag;

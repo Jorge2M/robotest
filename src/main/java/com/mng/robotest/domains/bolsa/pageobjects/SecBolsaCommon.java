@@ -1,105 +1,148 @@
 package com.mng.robotest.domains.bolsa.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Invisible;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
 
-import java.util.ListIterator;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.utils.ImporteScreen;
 
-public abstract class SecBolsaCommon extends SecBolsa {
+public abstract class SecBolsaCommon extends PageBase {
 
-	@Override
-	String getXPathPrecioTransporte() {
-		String xpathCapaBolsa = getXPathPanelBolsa();
-		return xpathCapaBolsa + "//*[@class='contenedor_precio_transporte']"; 
-	}
+	public enum StateBolsa { OPEN, CLOSED };
 	
-	@Override
-	public String getPrecioSubTotal() {
-		String precioTotal = "";
-		ListIterator<WebElement> itTotalEntero = null;
-		ListIterator<WebElement> itTotalDecimal = null;
-		String xpathCapaBolsa = getXPathPanelBolsa();
-		String xpathSubtotal = getXPathPrecioSubTotal();
-		By byTotalEntero = By.xpath(xpathCapaBolsa + xpathSubtotal + "//*[@class='bolsa_price_big']");
-		By byTotalDecimal = By.xpath(xpathCapaBolsa + xpathSubtotal + "//*[@class='bolsa_price_small']");
-		itTotalEntero = getElements(byTotalEntero).listIterator();
-		itTotalDecimal = getElements(byTotalDecimal).listIterator();
-		
-		while (itTotalEntero != null && itTotalEntero.hasNext()) {
-			precioTotal += itTotalEntero.next().getText();
-		}
-		while (itTotalDecimal != null && itTotalDecimal.hasNext()) {
-			precioTotal += itTotalDecimal.next().getText();
-		}
-
-		return (ImporteScreen.normalizeImportFromScreen(precioTotal));
-	} 
+	abstract String getXPathPanelBolsa();
+	abstract String getXPathBotonComprar();
+	abstract String getXPathPrecioSubTotal();
+	abstract String getXPathPrecioTransporte();
+	public abstract String getPrecioSubTotal();
+	public abstract String getPrecioTransporte();
+	public abstract void setBolsaToStateIfNotYet(StateBolsa stateBolsaExpected);
+	public abstract LineasArtBolsaCommons getLineasArtBolsa();
 	
-	@Override
-	public String getPrecioTransporte() {
-		String precioTotal = "0";
-		String xpathImpTransp = getXPathPrecioTransporte();
-		if (state(Present, xpathImpTransp).check()) {
-			String xpathTotalEntero = xpathImpTransp + "//*[@class='bolsa_price_big']";
-			String xpathTotalDecimal = xpathImpTransp + "//*[@class='bolsa_price_small']";
-			ListIterator<WebElement> itTotalEntero = getElements(xpathTotalEntero).listIterator();
-			ListIterator<WebElement> itTotalDecimal = getElements(xpathTotalDecimal).listIterator();
-
-			while (itTotalEntero != null && itTotalEntero.hasNext()) {
-				precioTotal += itTotalEntero.next().getText();
-			}
-			while (itTotalDecimal != null && itTotalDecimal.hasNext()) {
-				precioTotal += itTotalDecimal.next().getText();
-			}
-			precioTotal = ImporteScreen.normalizeImportFromScreen(precioTotal);
-		}
-
-		return precioTotal;
-	}
-
-	@Override
-	public void setBolsaToStateIfNotYet(StateBolsa stateBolsaExpected) {
-		if (!isInStateUntil(stateBolsaExpected, 1)) {
-			if (channel==Channel.mobile) {
-				setBolsaMobileToState(stateBolsaExpected);
-			} else {
-				setBolsaDesktopToState(stateBolsaExpected);
-			}
-		}
-	}
-
-	private void setBolsaDesktopToState(StateBolsa stateBolsaExpected) {
-		SecCabecera secCabecera = SecCabecera.getNew(channel, app);
-		secCabecera.clickIconoBolsaWhenDisp(2);
-		isInStateUntil(stateBolsaExpected, 2);
-	}
+	private static final String XPATH_ASPA = "//span[@class[contains(.,'outline-close')]]";
 	
-	private void setBolsaMobileToState(StateBolsa stateBolsaExpected) {
+	public boolean isInStateUntil(StateBolsa stateBolsaExpected, int seconds) {
+		String xpath = getXPathPanelBolsa();
 		if (stateBolsaExpected==StateBolsa.OPEN) {
-			SecCabecera.getNew(channel, app).clickIconoBolsaWhenDisp(2);
-		} else {
-			if (app==AppEcom.outlet) {
-				clickIconoCloseMobile();
-			} else {
-				driver.navigate().back();
-			}
-			
+			return state(Visible, xpath).wait(seconds).check();
 		}
-		isInStateUntil(stateBolsaExpected, 2);
+		return state(Invisible, xpath).wait(seconds).check();
+	}
+
+	public boolean isVisibleBotonComprar() {
+		String xpathComprarBt = getXPathBotonComprar();
+		return state(Visible, xpathComprarBt).check();
+	}
+
+	public boolean isVisibleBotonComprarUntil(int seconds) { 
+		String xpathBoton = getXPathBotonComprar();
+		return state(Visible, xpathBoton).wait(seconds).check();
+	}
+
+	public void clickBotonComprar( int secondsWait) {
+		String xpathComprarBt = getXPathBotonComprar();
+		state(State.Visible, xpathComprarBt).wait(secondsWait).check();
+		click(xpathComprarBt).type(TypeClick.javascript).exec();
 	}
 	
-	private void clickIconoCloseMobile() {
-		String xpathAspa =  "//div[@id='close_mobile']";
-		if (state(Visible, xpathAspa).check()) {
-			click(xpathAspa).exec();
+	public String getNumberArtIcono(Channel channel, AppEcom app) throws Exception {
+		return (SecCabecera.getNew(channel, app).getNumberArtIcono());
+	}
+	
+	public boolean numberItemsIsUntil(String itemsMightHave, Channel channel, AppEcom app, int maxSecodsToWait) 
+	throws Exception {
+		for (int i=0; i<=maxSecodsToWait; i++) {
+			String itemsPantalla = getNumberArtIcono(channel, app);
+			if (itemsMightHave.compareTo(itemsPantalla)==0) {
+				return true;
+			}
+			Thread.sleep(1000);
+		}
+		return false;
+	}
+
+	public String getPrecioSubtotalTextPant() {
+		String xpathImporte = getXPathPrecioSubTotal();
+		return getElement(xpathImporte).getText();
+	}
+	
+	public float getPrecioSubTotalFloat() {
+		String precioTotal = getPrecioSubTotal();
+		return (ImporteScreen.getFloatFromImporteMangoScreen(precioTotal));
+	}
+
+	public float getPrecioTransporteFloat() {
+		String precioTotal = getPrecioTransporte();
+		return (ImporteScreen.getFloatFromImporteMangoScreen(precioTotal));
+	}
+	
+	public boolean isNotThisImporteTotalUntil(String importeSubTotalPrevio, int seconds) {
+		String xpathImporte = getXPathPrecioSubTotal();
+		try {
+			ExpectedCondition<Boolean> expected = ExpectedConditions.not(ExpectedConditions.textToBePresentInElementLocated(By.xpath(xpathImporte), importeSubTotalPrevio));
+			new WebDriverWait(driver, seconds).until(expected);
+			return true;
+		}
+		catch (Exception e) {
+			return false;
+		}
+	}
+
+	public void clearArticulos() throws Exception {
+		setBolsaToStateIfNotYet(StateBolsa.OPEN);
+		int ii = 0;
+		do {
+			int numArticulos = getLineasArtBolsa().getNumLinesArticles();
+			int i = 0;
+			while (numArticulos > 0 && i < 50) { 
+				try {
+					getLineasArtBolsa().clickRemoveArticleIfExists();
+				} catch (Exception e) {
+					if (i==49) {
+						Log4jTM.getLogger().warn(
+							"Problem clearing articles from Bag. {}. {}", e.getClass().getName(), e.getMessage());
+					}
+				}
+
+				try {
+					state(State.Present, By.className("bagItem")).wait(3).check();
+					numArticulos = getLineasArtBolsa().getNumLinesArticles();
+				} 
+				catch (Exception e) {
+					Log4jTM.getLogger().debug(
+						"Problem getting num articles in Bag. {}. {}" , e.getClass().getName(), e.getMessage());
+					numArticulos = 0;
+				}
+				i += 1;
+			}
+			ii += 1;
+		}
+		while (!numberItemsIsUntil("0", channel, app, 0) && ii<10);
+
+		setBolsaToStateIfNotYet(StateBolsa.CLOSED);
+	}
+	
+	public void click1erArticuloBolsa() {
+		getLineasArtBolsa().clickArticle(1);
+		waitLoadPage();
+	}
+	
+	public void closeInMobil() {
+		if (app==AppEcom.outlet) {
+			click(XPATH_ASPA).exec();
+		} else {
+			setBolsaToStateIfNotYet(StateBolsa.CLOSED);
 		}
 	}
 	

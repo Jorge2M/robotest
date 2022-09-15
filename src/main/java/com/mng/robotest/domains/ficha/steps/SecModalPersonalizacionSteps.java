@@ -7,7 +7,7 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
-import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa.StateBolsa;
+import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.domains.ficha.pageobjects.SecModalPersonalizacion.ModalElement;
 import com.mng.robotest.domains.transversal.PageBase;
 
@@ -202,8 +202,7 @@ public class SecModalPersonalizacionSteps extends PageBase {
 	public void checkCustomizationProof () {
 		click(getBotonSiguienteVisible()).waitLoadPage(2).exec();
 		if (channel.isDevice()) {
-			SecBolsa secBolsa = SecBolsa.make(channel, app);
-			secBolsa.setBolsaToStateIfNotYet(StateBolsa.OPEN);
+			new SecBolsa().setBolsaToStateIfNotYet(StateBolsa.OPEN);
 		}
 		validateCustomizationProof(2);
 	}

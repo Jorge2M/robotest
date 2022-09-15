@@ -13,7 +13,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjT
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
-import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa.StateBolsa;
+import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.ficha.pageobjects.PageFichaDevice;
@@ -41,7 +41,7 @@ import java.util.List;
 public class PageFichaArtSteps extends StepBase {
 	
 	private final PageFicha pageFicha = PageFicha.of(channel);
-	private final SecBolsa secBolsa = SecBolsa.make(channel, app);
+	private final SecBolsa secBolsa = new SecBolsa();
 	private final ModEnvioYdevolNewSteps modEnvioYdevolSteps = new ModEnvioYdevolNewSteps();
 	private final SecProductDescrOldSteps secProductDescOldSteps = new SecProductDescrOldSteps();
 	private final SecBolsaButtonAndLinksNewSteps secBolsaButtonAndLinksNewSteps = new SecBolsaButtonAndLinksNewSteps();

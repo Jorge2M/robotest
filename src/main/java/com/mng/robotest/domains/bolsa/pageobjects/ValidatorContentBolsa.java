@@ -3,8 +3,8 @@ package com.mng.robotest.domains.bolsa.pageobjects;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mng.robotest.domains.bolsa.pageobjects.LineasArtBolsa.DataArtBolsa;
-import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa.StateBolsa;
+import com.mng.robotest.domains.bolsa.pageobjects.LineasArtBolsaCommons.DataArtBolsa;
+import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.datastored.DataBag;
@@ -12,14 +12,13 @@ import com.mng.robotest.test.generic.beans.ArticuloScreen;
 
 public class ValidatorContentBolsa extends PageBase {
 	
-	private final SecBolsa secBolsa;
+	private final SecBolsaCommon secBolsa = new SecBolsa();
 	
 	private final List<ArticuloScreen> linesArticlesExpected;
 	private final List<ArticuloDataBolsaScreen> linesArticlesInScreen = new ArrayList<>();
 
 	public ValidatorContentBolsa(DataBag contentBagExpected) throws Exception {
 		super();
-		this.secBolsa = SecBolsa.make(channel, app);
 		this.linesArticlesExpected = contentBagExpected.getListArticlesTypeViewInBolsa();
 		storeArticlesFromScreen();
 	}
