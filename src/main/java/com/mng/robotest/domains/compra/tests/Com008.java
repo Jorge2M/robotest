@@ -48,17 +48,17 @@ public class Com008 extends TestBase {
 		return dataBag;
 	}
 	
-	public void checkIsPresentImportInBothCurrencies() throws Exception {
-		checkoutSteps.isCroatiaImportInBothCurrencies();
-	}
-	
 	private void continueAndUnfoldPayments() throws Exception {
 		if (channel==Channel.mobile) {
 			checkoutSteps.goToMetodosPagoMobile();
 		}
 		checkoutSteps.despliegaYValidaMetodosPago();
-	}
+	}	
 	
+	public void checkIsPresentImportInBothCurrencies() throws Exception {
+		checkoutSteps.isCroatiaImportInBothCurrencies();
+	}
+
 	private DataPago executeVisaPayment() throws Exception {
 		DataPago dataPago = getDataPago();
 		dataPago.setPago(dataTest.pais.getPago("VISA"));
