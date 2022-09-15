@@ -15,7 +15,7 @@ import com.mng.robotest.test.utils.ImporteScreen;
 
 public class SecBolsa extends SecBolsaCommon {
 
-	private final LineasArtBolsaCommons lineasArtBolsa = new LineasArticuloBolsa();
+	private final LineasArticuloBolsa lineasArtBolsa = new LineasArticuloBolsa();
 	
 	private static final String XPATH_PANEL_BOLSA_DESKTOP = "//*[@data-testid='bag.opened']";
 	private static final String XPATH_PANEL_BOLSA_MOBILE = "//*[@data-testid='bagpage.container']";
@@ -45,7 +45,7 @@ public class SecBolsa extends SecBolsaCommon {
 	}  
 	
 	@Override
-	public LineasArtBolsaCommons getLineasArtBolsa() {
+	public LineasArticuloBolsa getLineasArtBolsa() {
 		return lineasArtBolsa;
 	}	
 	

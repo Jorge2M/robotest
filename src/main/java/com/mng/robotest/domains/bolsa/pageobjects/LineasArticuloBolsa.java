@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test.utils.ImporteScreen;
 
-public class LineasArticuloBolsa extends LineasArtBolsaCommons {
+public class LineasArticuloBolsa extends LineasArticuloBolsaCommon {
 
 	private static final String XPATH_ITEM = "//li//a[@data-testid[contains(.,'image.detail')]]/ancestor::li";
 	private static final String XPATH_LINK_RELATIVE_ARTICLE = ".//img";

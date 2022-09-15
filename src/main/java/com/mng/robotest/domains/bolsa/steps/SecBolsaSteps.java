@@ -14,7 +14,7 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.domains.bolsa.pageobjects.ValidatorContentBolsa;
-import com.mng.robotest.domains.bolsa.pageobjects.LineasArtBolsaCommons.DataArtBolsa;
+import com.mng.robotest.domains.bolsa.pageobjects.LineasArticuloBolsaCommon.DataArtBolsa;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
 import com.mng.robotest.domains.transversal.StepBase;

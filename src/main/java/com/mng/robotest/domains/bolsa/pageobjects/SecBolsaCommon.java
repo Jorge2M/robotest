@@ -28,7 +28,7 @@ public abstract class SecBolsaCommon extends PageBase {
 	public abstract String getPrecioSubTotal();
 	public abstract String getPrecioTransporte();
 	public abstract void setBolsaToStateIfNotYet(StateBolsa stateBolsaExpected);
-	public abstract LineasArtBolsaCommons getLineasArtBolsa();
+	public abstract LineasArticuloBolsa getLineasArtBolsa();
 	
 	private static final String XPATH_ASPA = "//span[@class[contains(.,'outline-close')]]";
 	
