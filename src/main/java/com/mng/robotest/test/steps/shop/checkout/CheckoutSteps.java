@@ -12,13 +12,11 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.AccesoEmpl;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Pago.TypePago;
-import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.generic.ChequeRegalo;
 import com.mng.robotest.test.generic.UtilsMangoTest;
@@ -74,11 +72,11 @@ public class CheckoutSteps extends StepBase {
 		return modalAvisoCambioPaisSteps;
 	}
 	
-	public void validateIsFirstPage(boolean userLogged, DataBag dataBag) throws Exception {
+	public void validateIsFirstPage(boolean userLogged) throws Exception {
 		if (channel==Channel.mobile) {
 			page1MobilCheckSteps.validateIsPage(userLogged);
 		} else {
-			page1DktopCheckSteps.validateIsPageOK(dataBag);
+			page1DktopCheckSteps.validateIsPageOK();
 		}
 	} 
 
@@ -400,7 +398,7 @@ public class CheckoutSteps extends StepBase {
 	@Step (
 		description="Introducir el primer apellido " + tag1erApellido + " y pulsar el botón \"Guardar\"", 
 		expected="Se aplican los descuentos correctamente")
-	public void inputDataEmplEnPromoAndAccept(DataBag dataBag, AccesoEmpl accesoEmpl, Pais pais, AppEcom app) throws Exception {
+	public void inputDataEmplEnPromoAndAccept(AccesoEmpl accesoEmpl) throws Exception {
 		StepTM step = TestMaker.getCurrentStepInExecution();
 		String primerApellido = (new StringTokenizer(accesoEmpl.getNombre(), " ")).nextToken();
 		step.replaceInDescription(tag1erApellido, primerApellido);
@@ -412,14 +410,14 @@ public class CheckoutSteps extends StepBase {
 		pageCheckoutWrapper.inputApellidoPromoEmpl(primerApellido);
 		pageCheckoutWrapper.clickButtonAceptarPromoEmpl();
 		
-		validaResultImputPromoEmpl(dataBag, app);
+		validaResultImputPromoEmpl();
 	}
 		
-	public void validaResultImputPromoEmpl(DataBag dataBag, AppEcom app) throws Exception {
+	public void validaResultImputPromoEmpl() throws Exception {
 		if (channel.isDevice()) {
 			page1MobilCheckSteps.validaResultImputPromoEmpl();
 		} else {
-			page1DktopCheckSteps.validaResultImputPromoEmpl(dataBag);
+			page1DktopCheckSteps.validaResultImputPromoEmpl();
 		}
 	}	
 	

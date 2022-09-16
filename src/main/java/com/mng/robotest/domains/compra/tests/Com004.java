@@ -89,9 +89,9 @@ public class Com004 extends TestBase {
 
 	private void checkPedido() throws Exception {
 		List<CheckPedido> listChecks = Arrays.asList(
-			CheckPedido.consultarBolsa, 
-			CheckPedido.consultarPedido,
-			CheckPedido.anular); 
+			CheckPedido.CONSULTAR_BOLSA, 
+			CheckPedido.CONSULTAR_PEDIDO,
+			CheckPedido.ANULAR); 
 		
 		new CompraSteps().checkPedidosManto(listChecks, dataPago.getListPedidos());
 	}

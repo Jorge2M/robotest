@@ -3,6 +3,7 @@ package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 import static com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 
 import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow;
@@ -30,8 +31,9 @@ public abstract class PagoSteps extends StepBase {
 	public abstract void startPayment(boolean execPay) throws Exception;
 
 	public void storePedidoForMantoAndResetData() {
+		dataTest.dataBag = new DataBag();
 		this.dataPago.storePedidoForManto();
-		this.dataPago.setDataPedido(new DataPedido(dataTest.pais));
+		this.dataPago.setDataPedido(new DataPedido(dataTest.pais, dataTest.dataBag));
 	}
 }
 

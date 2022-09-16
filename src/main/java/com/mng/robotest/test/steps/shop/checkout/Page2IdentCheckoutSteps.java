@@ -9,7 +9,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.factoryes.entities.EgyptCity;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.pageobject.shop.checkout.Page2IdentCheckout;
@@ -70,10 +69,10 @@ public class Page2IdentCheckoutSteps extends StepBase {
 		description="Seleccionamos el botón \"Continuar\"",
 		expected="Aparece la página de Checkout",
 		saveImagePage=SaveWhen.Always)
-	public void clickContinuar(boolean userRegistered, DataBag dataBag)
+	public void clickContinuar(boolean userRegistered)
 	throws Exception {
 		page2IdentCheckout.clickBotonContinuarAndWait(20);   
-		new CheckoutSteps().validateIsFirstPage(userRegistered, dataBag);
+		new CheckoutSteps().validateIsFirstPage(userRegistered);
 	}
 	
 	@Step (

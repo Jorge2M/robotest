@@ -12,7 +12,6 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.data.Descuento;
 import com.mng.robotest.test.data.Descuento.DiscountType;
-import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.generic.ChequeRegalo;
 import com.mng.robotest.test.generic.beans.ValeDiscount;
 import com.mng.robotest.test.pageobject.shop.checkout.Page1DktopCheckout;
@@ -25,7 +24,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	private final Page1DktopCheckout page1DktopCheckout = new Page1DktopCheckout();
 	
 	@Validation
-	public ChecksTM validateIsPageOK(DataBag dataBag) throws Exception {
+	public ChecksTM validateIsPageOK() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
 		int seconds = 5;
 		boolean isPageInitCheckout = page1DktopCheckout.isPageUntil(seconds);
@@ -42,7 +41,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	 	}
 	 	checks.add(
 			"Cuadran los artículos a nivel de la Referencia e Importe",
-			page1DktopCheckout.validateArticlesAndImport(dataBag), State.Warn);
+			page1DktopCheckout.validateArticlesAndImport(), State.Warn);
 	 	
 	 	return checks;
 	}
@@ -68,7 +67,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	}
 	
 	@Validation
-	public ChecksTM validaResultImputPromoEmpl(DataBag dataBag) throws Exception {
+	public ChecksTM validaResultImputPromoEmpl() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
 		int seconds = 5;
 	 	checks.add(
@@ -79,7 +78,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	 	checks.add(
 			"Para todos los artículos, el % de descuento final es como mínimo del " + 
 			descuento.getPercentageDesc() + "% (" + descuento.getDiscountOver().getDescription() + ")",
-			page1DktopCheckout.validateArticlesAndDiscount(dataBag, descuento), State.Warn);
+			page1DktopCheckout.validateArticlesAndDiscount(descuento), State.Warn);
 	 	
 	 	return checks;
 	}
@@ -102,12 +101,12 @@ public class Page1DktopCheckoutSteps extends StepBase {
 		description="Introducir el vale <b style=\"color:blue;\">#{valePais.getCodigoVale()}</b> y pulsar el botón \"CONFIRMAR\"", 
 		expected="Aparece la página de resumen de artículos con los descuentos correctamente aplicados",
 		saveNettraffic=SaveWhen.Always)
-	public void inputValeDescuento(ValeDiscount valePais, DataBag dataBag) throws Exception { 
+	public void inputValeDescuento(ValeDiscount valePais) throws Exception { 
 		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
 		pageCheckoutWrapper.inputCodigoPromoAndAccept(valePais.getCodigoVale());
-		dataBag.setImporteTotal(pageCheckoutWrapper.getPrecioTotalFromResumen(true));	
+		dataTest.dataBag.setImporteTotal(pageCheckoutWrapper.getPrecioTotalFromResumen(true));	
 		checkAfterInputDiscountVale(valePais);
-		checkValeDiscountIsCorrect(valePais, dataBag);
+		checkValeDiscountIsCorrect(valePais);
 		
 		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(
@@ -128,14 +127,14 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	}
 	
 	@Validation
-	private ChecksTM checkValeDiscountIsCorrect(ValeDiscount valePais, DataBag dataBag) throws Exception {
+	private ChecksTM checkValeDiscountIsCorrect(ValeDiscount valePais) throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
 		Descuento descuento = new Descuento(valePais.getPorcDescuento(), app);
 	 	checks.add(
 			"En los artículos a los que aplica, el descuento es de " +  
 			descuento.getPercentageDesc() + "% (" + descuento.getDiscountOver().getDescription() + "):" +
-			dataBag.getListArtDescHTML(),
-			page1DktopCheckout.validateArticlesAndDiscount(dataBag, descuento), State.Defect);
+			dataTest.dataBag.getListArtDescHTML(),
+			page1DktopCheckout.validateArticlesAndDiscount(descuento), State.Defect);
 	 	return checks;
 	}
 	

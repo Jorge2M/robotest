@@ -7,7 +7,6 @@ import com.mng.robotest.domains.bolsa.pageobjects.LineasArticuloBolsaCommon.Data
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Constantes;
-import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 
 public class ValidatorContentBolsa extends PageBase {
@@ -17,9 +16,9 @@ public class ValidatorContentBolsa extends PageBase {
 	private final List<ArticuloScreen> linesArticlesExpected;
 	private final List<ArticuloDataBolsaScreen> linesArticlesInScreen = new ArrayList<>();
 
-	public ValidatorContentBolsa(DataBag contentBagExpected) throws Exception {
+	public ValidatorContentBolsa() throws Exception {
 		super();
-		this.linesArticlesExpected = contentBagExpected.getListArticlesTypeViewInBolsa();
+		this.linesArticlesExpected = dataTest.dataBag.getListArticlesTypeViewInBolsa();
 		storeArticlesFromScreen();
 	}
 	

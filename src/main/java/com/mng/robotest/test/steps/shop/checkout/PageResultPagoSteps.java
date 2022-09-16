@@ -13,7 +13,6 @@ import com.mng.robotest.domains.micuenta.pageobjects.PageAccesoMisCompras.TypeBl
 import com.mng.robotest.domains.micuenta.steps.PageAccesoMisComprasSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
@@ -68,9 +67,8 @@ public class PageResultPagoSteps extends StepBase {
 	public ChecksTM validateDataPedido(DataPago dataPago) throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
 		String importeTotal = "";
-		DataBag dataBag = dataPago.getDataPedido().getDataBag(); 
-		if (dataBag!=null && "".compareTo(dataBag.getImporteTotal())!=0) {
-			importeTotal = dataBag.getImporteTotal();
+		if (dataTest.dataBag!=null && "".compareTo(dataTest.dataBag.getImporteTotal())!=0) {
+			importeTotal = dataTest.dataBag.getImporteTotal();
 		} else {
 			importeTotal = dataPago.getDataPedido().getImporteTotal();
 		}

@@ -3,13 +3,11 @@ package com.mng.robotest.test.steps.navigations.shop;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 
 public class GaleriaNavigationsSteps extends StepBase {
 	
-	public DataBag selectTalla(Pais pais) throws Exception {
-		DataBag dataBag = new DataBag();
+	public void selectTalla(Pais pais) throws Exception {
 		int posArticulo=1;
 		boolean articleAvailable = false;
 		PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
@@ -17,7 +15,7 @@ public class GaleriaNavigationsSteps extends StepBase {
 			pageGaleriaSteps.shopTallasArticulo(posArticulo);
 			int tallaToSelect = 1;
 			try {
-				articleAvailable = pageGaleriaSteps.selectTallaAvailableArticulo(posArticulo, tallaToSelect, dataBag, pais);
+				articleAvailable = pageGaleriaSteps.selectTallaAvailableArticulo(posArticulo, tallaToSelect);
 			}
 			catch (Exception e) {
 				Log4jTM.getLogger().warn("Problem selecting talla " + tallaToSelect + " from article " + posArticulo, e);
@@ -26,7 +24,5 @@ public class GaleriaNavigationsSteps extends StepBase {
 				posArticulo+=1;
 			}
 		}
-		
-		return dataBag;
 	}
 }

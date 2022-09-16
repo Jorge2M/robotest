@@ -9,7 +9,6 @@ import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.favoritos.pageobjects.ModalFichaFavoritos;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.data.Talla;
-import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 
 public class ModalFichaFavoritosSteps extends StepBase {
@@ -34,21 +33,21 @@ public class ModalFichaFavoritosSteps extends StepBase {
 	@Step(
 		description="Desde Favoritos añadimos el artículo <b>#{artToAddBolsa.getRefProducto()}</b> (1a talla disponible) a la bolsa",
 		expected="El artículo aparece en la bolsa")
-	public void addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa) throws Exception {
+	public void addArticuloToBag(ArticuloScreen artToAddBolsa) throws Exception {
 		String refProductoToAdd = artToAddBolsa.getRefProducto();
 		Talla tallaSelected = modalFichaFavoritos.addArticleToBag(refProductoToAdd, 1);
 		artToAddBolsa.setTalla(tallaSelected);
-		dataBolsa.addArticulo(artToAddBolsa);
+		dataTest.dataBag.addArticulo(artToAddBolsa);
 		SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 		
 		switch (channel) {
 		case desktop:
-			secBolsaSteps.validaAltaArtBolsa(dataBolsa);
+			secBolsaSteps.validaAltaArtBolsa();
 			break;
 		default:
 		case mobile:
 			//En este caso no se hace visible la bolsa después de añadir a Favoritos con lo que sólo validamos el número
-			secBolsaSteps.validaNumArtEnBolsa(dataBolsa);
+			secBolsaSteps.validaNumArtEnBolsa();
 			break;
 		}
 	}

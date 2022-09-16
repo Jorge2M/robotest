@@ -6,7 +6,6 @@ import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.factoryes.entities.EgyptCity;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
@@ -28,8 +27,8 @@ public class Egy001 extends TestBase {
 	public void execute() throws Exception {
 		access();
 		GarmentCatalog article = UtilsTest.getArticleForTest(dataTest.pais, app, driver);
-		DataBag dataBag = new SecBolsaSteps().altaListaArticulosEnBolsa(Arrays.asList(article));
-		DataPago dataPago = makeDataPayment(dataBag);
+		new SecBolsaSteps().altaListaArticulosEnBolsa(Arrays.asList(article));
+		DataPago dataPago = makeDataPayment();
 		dataPago = new BuilderCheckout(dataPago)
 			.pago(dataTest.pais.getPago("VISA"))
 			.egyptCity(egyptCity)
@@ -37,11 +36,11 @@ public class Egy001 extends TestBase {
 			.checkout(From.BOLSA);
 	}
 	
-	private DataPago makeDataPayment(DataBag dataBag) {
+	private DataPago makeDataPayment() {
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.checkPagos().build();
 		
-		DataPago dataPago = getDataPago(configCheckout, dataBag);
+		DataPago dataPago = getDataPago(configCheckout);
 		return dataPago;
 	}
 

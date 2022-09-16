@@ -25,8 +25,8 @@ public class CompraSteps extends NavigationBase {
 	
 	public void checkPedidosManto(CopyOnWriteArrayList<DataPedido> listPedidos) throws Exception {
 		List<CheckPedido> listChecks = Arrays.asList(
-			CheckPedido.consultarBolsa, 
-			CheckPedido.consultarPedido);
+			CheckPedido.CONSULTAR_BOLSA, 
+			CheckPedido.CONSULTAR_PEDIDO);
 		
 		checkPedidosManto(listChecks, listPedidos);
 	}

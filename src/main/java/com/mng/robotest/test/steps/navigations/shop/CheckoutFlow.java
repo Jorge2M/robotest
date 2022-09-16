@@ -29,7 +29,6 @@ import com.mng.robotest.test.beans.AccesoEmpl;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Pago.TypePago;
-import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.exceptions.NotFoundException;
@@ -99,7 +98,7 @@ public class CheckoutFlow extends StepBase {
 		}
 		
 		if (from==From.BOLSA || from==From.PREHOME) {
-			secBolsaSteps.selectButtonComprar(dataPago.getDataPedido().getDataBag());
+			secBolsaSteps.selectButtonComprar();
 		}
 		
 		if (from==From.IDENTIFICATION || from==From.BOLSA || from==From.PREHOME) {
@@ -148,7 +147,6 @@ public class CheckoutFlow extends StepBase {
 	
 	private void testFromIdentToCheckoutIni() throws Exception {
 		boolean validaCharNoLatinos = (dataTest.pais!=null && dataTest.pais.getDireccharnolatinos().check() && app!=AppEcom.votf);
-		DataBag dataBag = dataPago.getDataPedido().getDataBag();
 		String emailCheckout = UtilsMangoTest.getEmailForCheckout(dataTest.pais, dataPago.getFTCkout().emailExists); 
 		dataPago.getDataPedido().setEmailCheckout(emailCheckout);
 
@@ -171,7 +169,7 @@ public class CheckoutFlow extends StepBase {
 			datosRegistro = page2IdentCheckoutSteps.inputDataPorDefecto(emailCheckout, false);
 		}
 		
-		page2IdentCheckoutSteps.clickContinuar(dataTest.userRegistered, dataBag);
+		page2IdentCheckoutSteps.clickContinuar(dataTest.userRegistered);
 		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.GoogleAnalytics, 
@@ -181,15 +179,14 @@ public class CheckoutFlow extends StepBase {
 	private void test1rstPageCheckout() throws Exception {
 		if ((dataPago.getFTCkout().checkPromotionalCode || dataPago.getFTCkout().userIsEmployee) && 
 			 app!=AppEcom.votf) {
-			DataBag dataBag = dataPago.getDataPedido().getDataBag();	
 			if (dataPago.getFTCkout().userIsEmployee && ESPANA.isEquals(dataTest.pais)) {
-				testInputCodPromoEmplSpain(dataBag);
+				testInputCodPromoEmplSpain();
 			} else {
 				if (dataPago.getFTCkout().chequeRegalo) {
 					if (channel==Channel.mobile) {
 						new Page1EnvioCheckoutMobil().inputCodigoPromo(valeTest.getCodigoVale());
 					} else {
-						testValeDescuento(dataBag);
+						testValeDescuento();
 					}
 				}
 			}
@@ -205,10 +202,10 @@ public class CheckoutFlow extends StepBase {
 		}
 	}
 	
-	public void testInputCodPromoEmplSpain(DataBag dataBag) throws Exception {
+	public void testInputCodPromoEmplSpain() throws Exception {
 		AccesoEmpl accesoEmpl = AccesoEmpl.forSpain(); 
 		pageCheckoutWrapperSteps.inputTarjetaEmplEnCodPromo(dataTest.pais, accesoEmpl);
-		pageCheckoutWrapperSteps.inputDataEmplEnPromoAndAccept(dataBag, accesoEmpl, dataTest.pais, app);
+		pageCheckoutWrapperSteps.inputDataEmplEnPromoAndAccept(accesoEmpl);
 	}
 	
 	private void checkMetodosPagos(List<Pais> paisesDestino) throws Exception {
@@ -278,12 +275,12 @@ public class CheckoutFlow extends StepBase {
 		}
 	}
 	
-	private void testValeDescuento(DataBag dataBag) throws Exception {
+	private void testValeDescuento() throws Exception {
 		Page1DktopCheckoutSteps page1 = new Page1DktopCheckoutSteps();
 		if ("".compareTo(valeTest.getTextoCheckout())!=0) {
 			page1.checkIsVisibleTextVale(valeTest);
 		}
-		page1.inputValeDescuento(valeTest, dataBag);
+		page1.inputValeDescuento(valeTest);
 	}
 	
 	private void testPagoFromCheckoutToEnd(Pago pagoToTest) throws Exception {
@@ -333,7 +330,7 @@ public class CheckoutFlow extends StepBase {
 		actionsWhenSessionLoss(); 
 		
 		secBolsaSteps.altaArticlosConColores(1);
-		secBolsaSteps.selectButtonComprar(dataPago.getDataPedido().getDataBag());
+		secBolsaSteps.selectButtonComprar();
 		testFromIdentificationToMetodosPago();
 		if (channel!=Channel.mobile) {
 			pageCheckoutWrapperSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);

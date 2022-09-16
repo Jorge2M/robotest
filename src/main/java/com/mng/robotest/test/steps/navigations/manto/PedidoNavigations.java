@@ -86,21 +86,21 @@ public class PedidoNavigations {
 	public static void validaPedidoStepss(DataPedido dataPedido, List<CheckPedido> listChecks, AppEcom app, WebDriver driver) 
 			throws Exception {
 		new PageSelTdaMantoSteps().selectTienda(dataPedido.getCodigoAlmacen(), dataPedido.getCodigoPais());
-		if (listChecks.contains(CheckPedido.consultarBolsa)) {
+		if (listChecks.contains(CheckPedido.CONSULTAR_BOLSA)) {
 			consultarBolsaSteps(dataPedido, app, driver);
 		}
 		
 		if (app!=AppEcom.votf) {
-			if (listChecks.contains(CheckPedido.consultarPedido)) {
+			if (listChecks.contains(CheckPedido.CONSULTAR_PEDIDO)) {
 				consultarPedidoSteps(dataPedido, app, driver);	
 			}
 			
-			if (listChecks.contains(CheckPedido.anular)) {
+			if (listChecks.contains(CheckPedido.ANULAR)) {
 				anularPedidoSteps(dataPedido, app, driver);
 			}
 		}
 		
-		if (listChecks.contains(CheckPedido.consultarBolsa)) {
+		if (listChecks.contains(CheckPedido.CONSULTAR_BOLSA)) {
 			
 		}
 	}

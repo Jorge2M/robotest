@@ -24,9 +24,10 @@ public class DataPedido {
 	private TipoTransporte tipoTransporte = TipoTransporte.STANDARD;
 	private DataDeliveryPoint dataDeliveryPoint = null;
 	
-	public DataPedido(Pais pais) {
+	public DataPedido(Pais pais, DataBag dataBag) {
 		setCodigopais(pais.getCodigo_pais());
 		setNombrepais(pais.getNombre_pais());
+		this.dataBag = dataBag;
 	}
 	
 	public String getEmailCheckout() {
@@ -162,7 +163,7 @@ public class DataPedido {
 		if ("".compareTo(this.importeTotal)!=0) {
 			return this.importeTotal;
 		}
-		return this.dataBag.importeTotal;
+		return dataBag.importeTotal;
 	}	
 	
 	public String getDireccionEnvio() {

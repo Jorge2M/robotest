@@ -24,7 +24,6 @@ import com.mng.robotest.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.factoryes.NodoStatus;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
@@ -156,17 +155,15 @@ public class PageGaleriaSteps extends StepBase {
 		description="Del #{posArticulo}o artículo, seleccionamos la #{posTalla}a talla disponible", 
 		expected="Se da de alta correctamente el artículo en la bolsa",
 		saveHtmlPage=SaveWhen.Always)
-	public boolean selectTallaAvailableArticulo(int posArticulo, int posTalla, DataBag dataBag, Pais pais) 
-			throws Exception {
+	public boolean selectTallaAvailableArticulo(int posArticulo, int posTalla) throws Exception {
 		
 		ArticuloScreen articulo = pageGaleria.selectTallaAvailableArticle(posArticulo, posTalla);
 		boolean tallaVisible = (articulo!=null);
 		if (tallaVisible) {
-			dataBag.addArticulo(articulo);
+			dataTest.dataBag.addArticulo(articulo);
 			SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
-			secBolsaSteps.validaAltaArtBolsa(dataBag);
+			secBolsaSteps.validaAltaArtBolsa();
 		}
-
 		return tallaVisible;
 	}
 

@@ -9,7 +9,6 @@ import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.favoritos.pageobjects.PageFavoritos;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.data.Talla;
-import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 
@@ -133,15 +132,15 @@ public class PageFavoritosSteps extends StepBase {
 	@Step (
 		description="Desde Favoritos añadimos el artículo <b>#{artToAddBolsa.getRefProducto()}</b> (1a talla disponible) a la bolsa",
 		expected="El artículo aparece en la bolsa")
-	public void addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa) throws Exception {
+	public void addArticuloToBag(ArticuloScreen artToAddBolsa) throws Exception {
 		String refProductoToAdd = artToAddBolsa.getRefProducto();
 		String codigoColor = artToAddBolsa.getCodigoColor();
 		Talla tallaSelected = pageFavoritos.addArticleToBag(refProductoToAdd, codigoColor, 1);
 		artToAddBolsa.setTalla(tallaSelected);
-		dataBolsa.addArticulo(artToAddBolsa);
+		dataTest.dataBag.addArticulo(artToAddBolsa);
 		
 		SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
-		secBolsaSteps.validaAltaArtBolsa(dataBolsa);
+		secBolsaSteps.validaAltaArtBolsa();
 	}
 	
 	@Step (

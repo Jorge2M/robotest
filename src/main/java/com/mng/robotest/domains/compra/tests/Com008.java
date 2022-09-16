@@ -5,7 +5,6 @@ import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.steps.shop.checkout.CheckoutSteps;
 import com.mng.robotest.test.steps.shop.checkout.PageResultPagoSteps;
@@ -42,10 +41,9 @@ public class Com008 extends TestBase {
 		new SecBolsaSteps().clear();
 	}
 	
-	private DataBag altaArticulosBolsaAndClickComprar() throws Exception {
-		DataBag dataBag = new SecBolsaSteps().altaListaArticulosEnBolsa(getArticles(1));
-		new SecBolsaSteps().selectButtonComprar(dataBag);
-		return dataBag;
+	private void altaArticulosBolsaAndClickComprar() throws Exception {
+		new SecBolsaSteps().altaListaArticulosEnBolsa(getArticles(1));
+		new SecBolsaSteps().selectButtonComprar();
 	}
 	
 	private void continueAndUnfoldPayments() throws Exception {
@@ -76,9 +74,10 @@ public class Com008 extends TestBase {
 	
 //	private void checkPedidoManto(DataPago dataPago) throws Exception {
 //		List<CheckPedido> listChecks = Arrays.asList(
-//			CheckPedido.consultarBolsa, 
-//			CheckPedido.consultarPedido); 
-//		
+//			CheckPedido.CONSULTAR_BOLSA, 
+//			CheckPedido.CONSULTAR_PEDIDO); 
+//
+//		dataPago.storePedidoForManto(); //Refactor for remove
 //		compraSteps.checkPedidosManto(listChecks, dataPago.getListPedidos());
 //	}
 }

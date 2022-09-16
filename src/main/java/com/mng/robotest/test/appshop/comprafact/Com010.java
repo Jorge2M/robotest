@@ -57,7 +57,7 @@ public class Com010 extends TestBase {
 			listArticles = Arrays.asList(listArticles.get(0));
 		}
 		
-		DataBag dataBag = new SecBolsaSteps().altaListaArticulosEnBolsa(listArticles);
+		new SecBolsaSteps().altaListaArticulosEnBolsa(listArticles);
 		
 		//Hasta página Checkout
 		ConfigCheckout configCheckout = ConfigCheckout.config()
@@ -68,7 +68,7 @@ public class Com010 extends TestBase {
 				.checkPromotionalCode(testVale || empleado)
 				.userIsEmployee(empleado).build();
 		
-		DataPago dataPago = getDataPago(configCheckout, dataBag);
+		DataPago dataPago = getDataPago(configCheckout);
 		dataPago = new BuilderCheckout(dataPago)
 			.pago(this.pago)
 			.build()
@@ -76,10 +76,10 @@ public class Com010 extends TestBase {
 		
 		if (dataPago.getFTCkout().checkManto) {
 			List<CheckPedido> listChecks = new ArrayList<CheckPedido>(Arrays.asList(
-				CheckPedido.consultarBolsa, 
-				CheckPedido.consultarPedido));
+				CheckPedido.CONSULTAR_BOLSA, 
+				CheckPedido.CONSULTAR_PEDIDO));
 			if (checkAnulaPedido) {
-				listChecks.add(CheckPedido.anular);
+				listChecks.add(CheckPedido.ANULAR);
 			}
 			new CompraSteps().checkPedidosManto(listChecks, dataPago.getListPedidos());
 		}

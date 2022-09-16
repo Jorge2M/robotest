@@ -54,11 +54,11 @@
     		<artifactId>jaxb-core</artifactId>
     		<version>3.0.2</version>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>com.mango</groupId>
 			<artifactId>aws.secrets.client</artifactId>
 			<version>master-20190308-092928-9dd2c6c-2</version>
-		</dependency>
+		</dependency>-->
 		
 		<dependency>
 			<groupId>junit</groupId>

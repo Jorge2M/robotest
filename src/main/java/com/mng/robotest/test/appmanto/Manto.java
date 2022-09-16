@@ -73,7 +73,7 @@ public class Manto {
 		
 		this.espanya.setCodigo_pais(codigoEspanya);
 		this.espanya.setNombre_pais("España");
-		this.dPedidoPrueba = new DataPedido(espanya);
+		this.dPedidoPrueba = new DataPedido(espanya, null);
 		this.dPedidoPrueba.setCodigopais(codigoEspanya);
 		this.dPagoPrueba.setNombre("");
 		this.dPedidoPrueba.setPago(dPagoPrueba);

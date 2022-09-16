@@ -8,7 +8,6 @@ import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
-import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
@@ -26,7 +25,6 @@ public class Fav002 extends TestBase {
 	private final SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps();
 	
 	private final DataFavoritos dataFavoritos = new DataFavoritos();
-	private final DataBag dataBolsa = new DataBag();
 	
 	public Fav002(Pais pais, IdiomaPais idioma) throws Exception {
 		super();
@@ -55,7 +53,7 @@ public class Fav002 extends TestBase {
 		pageFavoritosSteps.clickArticuloImg(artToPlay);
 		pageFavoritosSteps
 			.getModalFichaFavoritosSteps()
-			.addArticuloToBag(artToPlay, dataBolsa);
+			.addArticuloToBag(artToPlay);
 		
 		if (channel.isDevice()) {
 			pageFavoritosSteps.validaIsPageOK(dataFavoritos);

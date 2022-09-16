@@ -13,7 +13,6 @@ import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.Descuento;
-import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.generic.ChequeRegalo;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.checkout.tmango.SecTMango;
@@ -414,8 +413,8 @@ public class Page1DktopCheckout extends PageBase {
 		return null;
 	}
 
-	public boolean validateArticlesAndImport(DataBag dataBag) throws Exception {
-		for (ArticuloScreen articulo : dataBag.getListArticlesTypeViewInBolsa()) {
+	public boolean validateArticlesAndImport() throws Exception {
+		for (ArticuloScreen articulo : dataTest.dataBag.getListArticlesTypeViewInBolsa()) {
 			WebElement lineaArticulo = getLineaArticle(articulo.getReferencia());
 			if (lineaArticulo==null) {
 				return false;
@@ -433,8 +432,8 @@ public class Page1DktopCheckout extends PageBase {
 		return (preciosScreen.definitivo == ImporteScreen.getFloatFromImporteMangoScreen(precioArticulo));
 	}
 	
-	public boolean validateArticlesAndDiscount(DataBag dataBag, Descuento descuento) throws Exception {
-		for (ArticuloScreen articulo : dataBag.getListArticlesTypeViewInBolsa()) {
+	public boolean validateArticlesAndDiscount(Descuento descuento) throws Exception {
+		for (ArticuloScreen articulo : dataTest.dataBag.getListArticlesTypeViewInBolsa()) {
 			WebElement lineaArticulo = getLineaArticle(articulo.getReferencia());
 			if (lineaArticulo==null) {
 				return false;

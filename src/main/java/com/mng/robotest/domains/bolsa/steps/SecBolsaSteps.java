@@ -18,7 +18,6 @@ import com.mng.robotest.domains.bolsa.pageobjects.LineasArticuloBolsaCommon.Data
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.getdata.products.GetterProducts;
@@ -81,38 +80,23 @@ public class SecBolsaSteps extends StepBase {
 		return (secBolsa.isInStateUntil(stateBolsaExpected, seconds));
 	}
 
-	public DataBag altaArticlosConColores(int numArticulos) throws Exception {
-		return altaArticlosConColores(numArticulos, null);
-	}
-	
-	public DataBag altaArticlosConColores(int numArticulos, DataBag dataBag) throws Exception {
+	public void altaArticlosConColores(int numArticulos) throws Exception {
 		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.pais.getCodigo_alf(), app, driver).build();
 		List<GarmentCatalog> listParaAlta = getterProducts
 				.getFiltered(FilterType.ManyColors)
 				.subList(0, numArticulos);
 		
-		return altaListaArticulosEnBolsa(listParaAlta, dataBag);
+		altaListaArticulosEnBolsa(listParaAlta);
 	}
 
-	public DataBag altaListaArticulosEnBolsa(List<GarmentCatalog> listArticlesForAdd, DataBag dataBag) 
+	public void altaListaArticulosEnBolsa(List<GarmentCatalog> listArticlesForAdd) 
 			throws Exception {
-		DataBag newDataBag = altaListaArticulosEnBolsa(listArticlesForAdd);
-		if (dataBag!=null) {
-			newDataBag.addArticles(dataBag);
-		}
-		return newDataBag;
-	}
-	
-	public DataBag altaListaArticulosEnBolsa(List<GarmentCatalog> listArticlesForAdd) 
-			throws Exception {
-		DataBag dataBag = new DataBag();
 		if (listArticlesForAdd!=null && !listArticlesForAdd.isEmpty()) {
-			dataBag = altaBolsaArticulos(listArticlesForAdd);
-			validaAltaArtBolsa(dataBag);
+			altaBolsaArticulos(listArticlesForAdd);
+			validaAltaArtBolsa();
 		}
-		dataBag.setImporteTotal(secBolsa.getPrecioSubTotal());
-		dataBag.setImporteTransp(secBolsa.getPrecioTransporte());
-		return dataBag;
+		dataTest.dataBag.setImporteTotal(secBolsa.getPrecioSubTotal());
+		dataTest.dataBag.setImporteTransp(secBolsa.getPrecioTransporte());
 	}
 
 	static final String tagListaArt = "@TagListaArt";
@@ -120,8 +104,7 @@ public class SecBolsaSteps extends StepBase {
 		description="Utilizar el buscador para acceder a la ficha y dar de alta los siguientes productos en la bolsa:<br>" + tagListaArt, 
 		expected="Los productos se dan de alta en la bolsa correctamente",
 		saveNettraffic=SaveWhen.Always)
-	public DataBag altaBolsaArticulos(List<GarmentCatalog> listParaAlta) throws Exception {
-		DataBag dataBag = new DataBag();
+	public void altaBolsaArticulos(List<GarmentCatalog> listParaAlta) throws Exception {
 		includeListaArtInTestCaseDescription(listParaAlta);
 		for (int i=0; i<listParaAlta.size(); i++) {
 			GarmentCatalog artTmp = listParaAlta.get(i);
@@ -129,14 +112,12 @@ public class SecBolsaSteps extends StepBase {
 			if (artTmp.isVale()) {
 				articulo.setVale(artTmp.getValePais());
 			}
-
-			dataBag.addArticulo(articulo);
+			dataTest.dataBag.addArticulo(articulo);
 		}
 
 		if (channel==Channel.desktop) {
 			secBolsa.isInStateUntil(StateBolsa.OPEN, 10);
 		}
-		return dataBag;
 	}
 
 	private void includeListaArtInTestCaseDescription(List<GarmentCatalog> listParaAlta) {
@@ -158,16 +139,12 @@ public class SecBolsaSteps extends StepBase {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagListaArt, listaArtStr);
 	}
 
-	/**
-	 * Validaciones posteriores al alta de una lista de artículos en la bolsa
-	 * @param listArtEnBolsa lista total de artículos dados de alta a la bolsa
-	 */
-	public void validaAltaArtBolsa(DataBag dataBag) throws Exception {
-		validaNumArtEnBolsa(dataBag);
+	public void validaAltaArtBolsa() throws Exception {
+		validaNumArtEnBolsa();
 		if (channel==Channel.desktop) {
 			checkIsBolsaVisibleInDesktop();
 		}
-		validaCuadranArticulosBolsa(dataBag);
+		validaCuadranArticulosBolsa();
 		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(GenericCheck.GoogleAnalytics)).checks();
 	}
@@ -188,21 +165,21 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	@Validation
-	public ChecksTM validaNumArtEnBolsa(DataBag dataBag) throws Exception {
+	public ChecksTM validaNumArtEnBolsa() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
 		int seconds = 3;
-		String itemsSaved = String.valueOf(dataBag.getListArticulos().size());
+		String itemsSaved = String.valueOf(dataTest.dataBag.getListArticulos().size());
 	 	checks.add(
-			"Existen " + dataBag.getListArticulos().size() + " elementos dados de alta en la bolsa (los esperamos hasta " + seconds + " segundos)",
+			"Existen " + dataTest.dataBag.getListArticulos().size() + " elementos dados de alta en la bolsa (los esperamos hasta " + seconds + " segundos)",
 			secBolsa.numberItemsIsUntil(itemsSaved, channel, app, seconds), State.Warn);
 	 	
 	 	return checks;
 	}
 
 	@Validation
-	public ChecksTM validaCuadranArticulosBolsa(DataBag dataBag) throws Exception {
+	public ChecksTM validaCuadranArticulosBolsa() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		ValidatorContentBolsa validatorBolsa = new ValidatorContentBolsa(dataBag);
+		ValidatorContentBolsa validatorBolsa = new ValidatorContentBolsa();
 		checks.add(
 			"Cuadra el númeo de artículos existentes en la bolsa",
 			validatorBolsa.numArticlesIsCorrect(), State.Warn);
@@ -244,20 +221,20 @@ public class SecBolsaSteps extends StepBase {
 		return checks;
 	}
 
-	public void clear1erArticuloBolsa(DataBag dataBag) throws Exception {
-		ArticuloScreen artToClear = dataBag.getArticulo(0);
-		clearArticuloBolsa(artToClear, dataBag);
+	public void clear1erArticuloBolsa() throws Exception {
+		ArticuloScreen artToClear = dataTest.dataBag.getArticulo(0);
+		clearArticuloBolsa(artToClear);
 	}
 
 	@Step (
 		description="Eliminar el artículo-1 #{artToClear.getReferencia()} de la bolsa", 
 		expected="El artículo se elimina correctamente")
-	private void clearArticuloBolsa(ArticuloScreen artToClear, DataBag dataBag) throws Exception {
+	private void clearArticuloBolsa(ArticuloScreen artToClear) throws Exception {
 		String importeTotalOrig = secBolsa.getPrecioSubtotalTextPant();
 		secBolsa.getLineasArtBolsa().clearArticuloAndWait(artToClear.getReferencia());
-		dataBag.removeArticulo(0); 
+		dataTest.dataBag.removeArticulo(0); 
 		checkImporteIsModified(importeTotalOrig, 5);
-		validaCuadranArticulosBolsa(dataBag);
+		validaCuadranArticulosBolsa();
 	}
 
 	@Validation (
@@ -271,28 +248,27 @@ public class SecBolsaSteps extends StepBase {
 		description="Se selecciona el botón \"COMPRAR\" de la bolsa", 
 		expected="Se muestra la página de identificación",
 		saveNettraffic=SaveWhen.Always)
-	public void selectButtonComprar(DataBag dataBag) throws Exception {
+	public void selectButtonComprar() throws Exception {
 		secBolsa.clickBotonComprar(10);
-		validaSelectButtonComprar(dataBag);
+		validaSelectButtonComprar();
 		if (!UtilsTest.dateBeforeToday("2022-08-01") &&
 			!dataTest.userRegistered) {
 			new Page1IdentCheckoutSteps().validaRGPDText();
 		}
 	}
 
-	public void validaSelectButtonComprar(DataBag dataBag) throws Exception {
+	public void validaSelectButtonComprar() throws Exception {
 		if (dataTest.userRegistered) {
-			new CheckoutSteps().validateIsFirstPage(dataTest.userRegistered, dataBag);
+			new CheckoutSteps().validateIsFirstPage(dataTest.userRegistered);
 		} else {
-			int seconds = 5;
-			new Page1IdentCheckoutSteps().validateIsPage(seconds);
+			new Page1IdentCheckoutSteps().validateIsPage(5);
 			GenericChecks.checkDefault();
 			
 		}
 	}
 
-	public void click1erArticuloBolsa(DataBag dataBag) throws Exception {
-		ArticuloScreen articuloClickado = dataBag.getArticulo(0);
+	public void click1erArticuloBolsa() throws Exception {
+		ArticuloScreen articuloClickado = dataTest.dataBag.getArticulo(0);
 		clickArticuloBolsa(articuloClickado);
 	}
 

@@ -12,7 +12,6 @@ import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.getdata.products.data.Color;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
@@ -47,14 +46,14 @@ public class Luq001 extends TestBase {
 		
 		//Access and add articles
 		access();
-		DataBag dataBag = new SecBolsaSteps().altaListaArticulosEnBolsa(listArticles);
+		new SecBolsaSteps().altaListaArticulosEnBolsa(listArticles);
 		dataTest.pais.setCodpos(getCodPostal());
 		
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.checkManto()
 				.stressMode().build();
 		
-		DataPago dataPago = getDataPago(configCheckout, dataBag);
+		DataPago dataPago = getDataPago(configCheckout);
 		new CheckoutFlow.BuilderCheckout(dataPago)
 			.pago(dataTest.pais.getPago("VISA"))
 			.build()

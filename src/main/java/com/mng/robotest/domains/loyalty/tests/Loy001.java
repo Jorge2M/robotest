@@ -6,7 +6,6 @@ import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.compra.tests.CompraSteps;
 import com.mng.robotest.domains.loyalty.beans.User;
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow;
@@ -32,20 +31,20 @@ public class Loy001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		accessAndClearData();
-		DataBag dataBag = addBagArticleNoRebajado();
-		DataPago dataPago = checkoutExecution(dataBag);
+		addBagArticleNoRebajado();
+		DataPago dataPago = checkoutExecution();
 		checkPedidosManto(dataPago.getListPedidos());
 	}
 	
-	private DataBag addBagArticleNoRebajado() throws Exception {
+	private void addBagArticleNoRebajado() throws Exception {
 		clickMenu("nuevo");
 		
 		//TODO en estos momentos algo raro le pasa al menú Nuevo que requiere un refresh para funcionar ok
 		driver.navigate().refresh();
-		return new GaleriaNavigationsSteps().selectTalla(dataTest.pais);
+		new GaleriaNavigationsSteps().selectTalla(dataTest.pais);
 	}
 	
-	private DataPago checkoutExecution(DataBag dataBag) throws Exception {
+	private DataPago checkoutExecution() throws Exception {
 		
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.checkPagos()
@@ -53,8 +52,6 @@ public class Loy001 extends TestBase {
 				.checkLoyaltyPoints().build();		
 		
 		DataPago dataPago = getDataPago(configCheckout);
-		dataPago.getDataPedido().setDataBag(dataBag);
-		
 		dataPago = new CheckoutFlow.BuilderCheckout(dataPago)
 			.pago(dataTest.pais.getPago("VISA"))
 			.build()

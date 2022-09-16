@@ -3,7 +3,6 @@ package com.mng.robotest.domains.bolsa.tests;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop;
@@ -23,8 +22,8 @@ public class Bor002 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		accessAndSelectMenuVestidos();
-		DataBag dataBag = addBagArticleWithColors();
-		navigateToCheckout(dataBag);		
+		addBagArticleWithColors();
+		navigateToCheckout();		
 	}
 
 	private void accessAndSelectMenuVestidos() throws Exception {
@@ -32,15 +31,15 @@ public class Bor002 extends TestBase {
 		clickMenu("vestidos", TypeSelectMenu.XREF);
 	}
 	
-	private DataBag addBagArticleWithColors() throws Exception {
-		return new SecBolsaSteps().altaArticlosConColores(1);
+	private void addBagArticleWithColors() throws Exception {
+		new SecBolsaSteps().altaArticlosConColores(1);
 	}
 	
-	private void navigateToCheckout(DataBag dataBag) throws Exception {
+	private void navigateToCheckout() throws Exception {
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.emaiExists().build();
 		
-		DataPago dataPago = getDataPago(configCheckout, dataBag);
+		DataPago dataPago = getDataPago(configCheckout);
 		new CheckoutFlow.BuilderCheckout(dataPago).build().checkout(From.BOLSA);
 	}
 

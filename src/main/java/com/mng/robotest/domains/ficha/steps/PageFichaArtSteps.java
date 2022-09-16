@@ -26,7 +26,6 @@ import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ColorType;
 import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ProductNav;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.data.Talla;
-import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
@@ -249,11 +248,9 @@ public class PageFichaArtSteps extends StepBase {
 	 */
 	public void selectAnadirALaBolsaTallaPrevSiSelected(ArticuloScreen articulo) throws Exception {
 		selectAnadirALaBolsaStep();
-		DataBag dataBag = new DataBag();
-		dataBag.addArticulo(articulo);
-		
+		dataTest.dataBag.addArticulo(articulo);
 		SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
-		secBolsaSteps.validaAltaArtBolsa(dataBag);
+		secBolsaSteps.validaAltaArtBolsa();
 	}	
 
 	public void selectAnadirAFavoritos() throws Exception {
