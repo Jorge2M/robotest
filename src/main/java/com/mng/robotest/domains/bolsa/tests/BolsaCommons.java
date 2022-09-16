@@ -16,7 +16,7 @@ public class BolsaCommons extends NavigationBase {
 		secBolsaSteps.forceStateBolsaTo(StateBolsa.CLOSED);
 		secBolsaSteps.forceStateBolsaTo(StateBolsa.OPEN); 
 		secBolsaSteps.clear1erArticuloBolsa(dataBag);								
-		dataBag = secBolsaSteps.altaArticlosConColores(1);
+		dataBag = secBolsaSteps.altaArticlosConColores(1, dataBag);
 		secBolsaSteps.click1erArticuloBolsa(dataBag);
 	}
 	

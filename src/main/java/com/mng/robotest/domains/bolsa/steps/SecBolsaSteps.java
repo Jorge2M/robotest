@@ -82,19 +82,27 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	public DataBag altaArticlosConColores(int numArticulos) throws Exception {
+		return altaArticlosConColores(numArticulos, null);
+	}
+	
+	public DataBag altaArticlosConColores(int numArticulos, DataBag dataBag) throws Exception {
 		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.pais.getCodigo_alf(), app, driver).build();
 		List<GarmentCatalog> listParaAlta = getterProducts
 				.getFiltered(FilterType.ManyColors)
 				.subList(0, numArticulos);
 		
-		return altaListaArticulosEnBolsa(listParaAlta);
+		return altaListaArticulosEnBolsa(listParaAlta, dataBag);
 	}
 
-	/**
-	 * Define los pasos/validaciones para dar de alta una lista de artículos en la bolsa
-	 * @param listParaAlta lista de artículos que hay que dar de alta
-	 * @param listArtEnBolsa lista total de artículos que hay en la bolsa (y en la que se añadirán los nuevos)
-	 */
+	public DataBag altaListaArticulosEnBolsa(List<GarmentCatalog> listArticlesForAdd, DataBag dataBag) 
+			throws Exception {
+		DataBag newDataBag = altaListaArticulosEnBolsa(listArticlesForAdd);
+		if (dataBag!=null) {
+			newDataBag.addArticles(dataBag);
+		}
+		return newDataBag;
+	}
+	
 	public DataBag altaListaArticulosEnBolsa(List<GarmentCatalog> listArticlesForAdd) 
 			throws Exception {
 		DataBag dataBag = new DataBag();

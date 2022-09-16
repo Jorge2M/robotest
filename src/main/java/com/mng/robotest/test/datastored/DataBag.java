@@ -20,8 +20,12 @@ public class DataBag {
 	String importeTotal = "";
 	String importeTransp = "" ;
 	
-	public ArrayList<ArticuloScreen> getListArticulos() {
+	public List<ArticuloScreen> getListArticulos() {
 		return this.listArticulos;
+	}
+	
+	public void addArticles(DataBag dataBag) {
+		listArticulos.addAll(dataBag.getListArticulos());
 	}
 	
 	public String getImporteTotal() {
