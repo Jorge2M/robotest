@@ -62,6 +62,13 @@ public class Compra {
 		description="[Usuario registrado] Compra en Croacia")
 	public void COM008_Compra_Croacia() throws Exception {
 		new Com008().execute();
-	}	
+	}
+
+	@Test (
+			groups={"Compra", "Canal:all_App:shop"}, alwaysRun=true,
+			description="[Usuario registrado] MultiAddress")
+	public void COM009_MultiAddress() throws Exception {
+		new Com009().execute();
+	}
 
 }
