@@ -19,12 +19,11 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha.TypeFicha;
-import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
+import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.factoryes.NodoStatus;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterCollection;
@@ -82,7 +81,7 @@ public class PageGaleriaSteps extends StepBase {
 		datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
 
 		String detailWindowHandle = pageGaleria.openArticuloPestanyaAndGo(articulo, app);
-		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps();
+		PageFichaSteps pageFichaSteps = new PageFichaSteps();
 		pageFichaSteps.validaDetallesProducto(datosArticulo);
 
 		if (detailWindowHandle.compareTo(galeryWindowHandle)!=0) {
@@ -106,7 +105,7 @@ public class PageGaleriaSteps extends StepBase {
 		datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
 
 		pageGaleria.clickArticulo(articulo);
-		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps();
+		PageFichaSteps pageFichaSteps = new PageFichaSteps();
 		pageFichaSteps.validaDetallesProducto(datosArticulo);
 		pageFichaSteps.validaPrevNext(locationArt);
 
@@ -564,18 +563,18 @@ public class PageGaleriaSteps extends StepBase {
 	@Step (
 		description="Seleccionamos (para <b>#{actionFav}</b>) los \"Hearth Icons\" asociados a los artículos con posiciones <b>#{posIconsToClick}</b>", 
 		expected="Los \"Hearth Icons\" quedan " + tagEstadoFinal)
-	public void clickArticlesHearthIcons(List<Integer> posIconsToClick, TypeActionFav actionFav, DataFavoritos dataFavoritos) 
-	throws Exception {
+	public void clickArticlesHearthIcons(List<Integer> posIconsToClick, TypeActionFav actionFav) 
+			throws Exception {
 		List<ArticuloScreen> listAddFav = pageGaleria.clickArticleHearthIcons(posIconsToClick);
 		String estadoFinal = "";
 		switch (actionFav) {
 		case MARCAR:
 			estadoFinal = "Marcados";
-			dataFavoritos.addToLista(listAddFav);
+			dataTest.dataFavoritos.addToLista(listAddFav);
 			break;
 		case DESMARCAR:
 			estadoFinal = "Desmarcados";
-			dataFavoritos.removeFromLista(listAddFav);
+			dataTest.dataFavoritos.removeFromLista(listAddFav);
 			break;
 		default:
 			break;

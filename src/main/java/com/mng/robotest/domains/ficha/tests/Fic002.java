@@ -10,7 +10,7 @@ import com.mng.robotest.domains.ficha.pageobjects.PageFichaDevice;
 import com.mng.robotest.domains.ficha.pageobjects.Slider;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha.TypeFicha;
 import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel;
-import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
+import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.getdata.products.GetterProducts;
@@ -23,7 +23,7 @@ public class Fic002 extends TestBase {
 	final boolean isTotalLook;
 	
 	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
-	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps();
+	final PageFichaSteps pageFichaSteps = new PageFichaSteps();
 	
 	public Fic002() throws Exception {
 		super();

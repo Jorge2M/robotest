@@ -10,7 +10,7 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.buscador.steps.SecBuscadorSteps;
 import com.mng.robotest.domains.ficha.steps.ModalBuscadorTiendasSteps;
-import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
+import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.getdata.products.GetterProducts;
@@ -28,7 +28,7 @@ public class Fic001 extends TestBase {
 	private final List<FilterType> filterNoOnlineWithColors = Arrays.asList(FilterType.NoOnline, FilterType.ManyColors);
 	private final Optional<GarmentCatalog> articleNoOnlineWithColors;
 	
-	private final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps();
+	private final PageFichaSteps pageFichaSteps = new PageFichaSteps();
 	
 	public Fic001() throws Exception {
 		super();

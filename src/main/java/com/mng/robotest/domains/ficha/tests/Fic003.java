@@ -3,7 +3,7 @@ package com.mng.robotest.domains.ficha.tests;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha.TypeFicha;
 import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ProductNav;
 import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel;
-import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
+import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
@@ -19,7 +19,7 @@ public class Fic003 extends TestBase {
 
 	private final Pais corea = PaisGetter.get(PaisShop.COREA_DEL_SUR);
 	private final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
-	private final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps();
+	private final PageFichaSteps pageFichaSteps = new PageFichaSteps();
 	
 	public Fic003() throws Exception {
 		super();

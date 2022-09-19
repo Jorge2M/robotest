@@ -22,7 +22,6 @@ import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
@@ -37,10 +36,10 @@ public class SecMenusUserSteps extends StepBase {
 	@Step (
 		description="Seleccionar el menú de usuario \"Favoritos\"", 
 		expected="Aparece la página de gestión de favoritos con los artículos correctos")
-	public void selectFavoritos(DataFavoritos dataFavoritos) throws Exception {
+	public void selectFavoritos() throws Exception {
 		userMenus.clickMenuAndWait(UserMenu.favoritos);
 		PageFavoritosSteps pageFavoritosSteps = new PageFavoritosSteps();
-		pageFavoritosSteps.validaIsPageOK(dataFavoritos);
+		pageFavoritosSteps.validaIsPageOK();
 	}
 
 	@Step (

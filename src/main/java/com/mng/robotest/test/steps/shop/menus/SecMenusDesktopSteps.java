@@ -18,7 +18,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
+import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Linea.LineaType;
@@ -409,7 +409,7 @@ public class SecMenusDesktopSteps extends StepBase {
 		driver.navigate().to(urlAccesoCorreo);
 
 		DataFichaArt datosArticulo = new DataFichaArt(article.getGarmentId(), "");
-		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps();
+		PageFichaSteps pageFichaSteps = new PageFichaSteps();
 		pageFichaSteps.validaDetallesProducto(datosArticulo);
 	}
 	

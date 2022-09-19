@@ -9,7 +9,6 @@ import com.mng.robotest.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test.getdata.usuarios.UserShop;
@@ -24,8 +23,6 @@ public class Fav001 extends TestBase {
 	private final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
 	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 	private final SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps();
-	
-	private final DataFavoritos dataFavoritos = new DataFavoritos();
 	
 	public Fav001(Pais pais, IdiomaPais idioma) throws Exception {
 		super();
@@ -44,47 +41,47 @@ public class Fav001 extends TestBase {
 		goToVestidosGalery();
 		clickFavoritesInGalery();
 		goToFavorites();
-		ArticuloScreen artToPlay = dataFavoritos.getArticulo(0);
-		addFavoriteToBag(artToPlay);
-		clearArticlesFromFavorites(artToPlay);		
+		addFirstFavoriteToBag();
+		clearFirstFavorite();		
 	}
-
-	private void clearArticlesFromFavorites(ArticuloScreen artToPlay) throws Exception {
-		pageFavoritosSteps.clear(artToPlay, dataFavoritos);
-		pageFavoritosSteps.clearAll(dataFavoritos);
-	}
-
-	private void addFavoriteToBag(ArticuloScreen artToPlay) throws Exception {
-		pageFavoritosSteps.addArticuloToBag(artToPlay);
-		if (channel.isDevice()) {
-			secBolsaSteps.closeInMobil();
-			pageFavoritosSteps.validaIsPageOK(dataFavoritos);
-		}
-	}
-
-	private void goToFavorites() throws Exception {
-		secMenusSteps.getMenusUser().selectFavoritos(dataFavoritos);
-	}
-
-	private void clickFavoritesInGalery() throws Exception {
-		List<Integer> iconsToMark = Arrays.asList(2, 3, 5);  
-		pageGaleriaSteps.clickArticlesHearthIcons(iconsToMark, TypeActionFav.MARCAR, dataFavoritos);
-
-		List<Integer> iconsToUnmark = Arrays.asList(3);
-		pageGaleriaSteps.clickArticlesHearthIcons(iconsToUnmark, TypeActionFav.DESMARCAR, dataFavoritos);
-	}
-
+	
+	private void loginAndClearData() throws Exception {
+		access();
+		secBolsaSteps.clear();
+		pageFavoritosSteps.clearAll();
+	}	
+	
 	private void goToVestidosGalery() throws Exception {
 		clickMenu("Vestidos");
 		if (channel==Channel.desktop) {
 			pageGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.CUATRO);
 		}
-	}
+	}	
+	
+	private void clickFavoritesInGalery() throws Exception {
+		List<Integer> iconsToMark = Arrays.asList(2, 3, 5);  
+		pageGaleriaSteps.clickArticlesHearthIcons(iconsToMark, TypeActionFav.MARCAR);
 
-	private void loginAndClearData() throws Exception {
-		access();
-		secBolsaSteps.clear();
-		pageFavoritosSteps.clearAll(dataFavoritos);
-	}
+		List<Integer> iconsToUnmark = Arrays.asList(3);
+		pageGaleriaSteps.clickArticlesHearthIcons(iconsToUnmark, TypeActionFav.DESMARCAR);
+	}	
 
+	private void goToFavorites() throws Exception {
+		secMenusSteps.getMenusUser().selectFavoritos();
+	}	
+
+	private void addFirstFavoriteToBag() throws Exception {
+		ArticuloScreen firstFavorite = dataTest.dataFavoritos.getArticulo(0);
+		pageFavoritosSteps.addArticuloToBag(firstFavorite);
+		if (channel.isDevice()) {
+			secBolsaSteps.closeInMobil();
+			pageFavoritosSteps.validaIsPageOK();
+		}
+	}	
+	
+	private void clearFirstFavorite() throws Exception {
+		ArticuloScreen firstFavorite = dataTest.dataFavoritos.getArticulo(0);
+		pageFavoritosSteps.clear(firstFavorite);
+		pageFavoritosSteps.clearAll();
+	}
 }

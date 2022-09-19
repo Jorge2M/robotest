@@ -7,6 +7,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.favoritos.pageobjects.PageFavoritos;
+import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.datastored.DataFavoritos;
@@ -15,37 +16,29 @@ import com.mng.robotest.test.generic.beans.ArticuloScreen;
 public class PageFavoritosSteps extends StepBase {
 	
 	private final PageFavoritos pageFavoritos = new PageFavoritos();
-	private final ModalFichaFavoritosSteps modalFichaFavoritosSteps = new ModalFichaFavoritosSteps();
 	
 	public PageFavoritos getPageFavoritos() {
 		return pageFavoritos;
 	}
 	
-	public ModalFichaFavoritosSteps getModalFichaFavoritosSteps() {
-		return modalFichaFavoritosSteps;
-	}
-	
 	@Validation
-	public ChecksTM validaIsPageOK(DataFavoritos dataFavoritos) {
+	public ChecksTM validaIsPageOK() {
 		ChecksTM checks = ChecksTM.getNew();
 		int secondsCapa = 3;
 		int secondsArticles = 1;
 		checks.add(
 			"Está visible la capa de favoritos con artículos (la esperamos hasta " + secondsCapa + " segundos)",
 			pageFavoritos.isSectionArticlesVisibleUntil(secondsCapa), State.Defect);
+		
 		checks.add(
-			"Aparecen los artículos (los esperamos hasta " + secondsArticles + " segundos): <br>" + dataFavoritos.getListArtDescHTML(),
-			pageFavoritos.areVisibleArticlesUntil(dataFavoritos, secondsArticles), State.Defect);
+			"Aparecen los artículos (los esperamos hasta " + secondsArticles + " segundos): <br>" + dataTest.dataFavoritos.getListArtDescHTML(),
+			pageFavoritos.areVisibleArticlesUntil(secondsArticles), State.Defect);
+		
 		return checks;
 	}
 	
-	public void clearAll(DataFavoritos dataFavoritos) throws Exception {
-		dataFavoritos.clear();
-		clearAll();
-	}
-	
-	public void clear(ArticuloScreen articulo, DataFavoritos dataFavoritos) throws Exception {
-		dataFavoritos.removeArticulo(articulo);
+	public void clear(ArticuloScreen articulo) throws Exception {
+		dataTest.dataFavoritos.removeArticulo(articulo);
 		clear(articulo.getReferencia(), articulo.getCodigoColor());
 	}
 	
@@ -113,6 +106,7 @@ public class PageFavoritosSteps extends StepBase {
 		description="Eliminamos de Favoritos los posibles artículos existentes",
 		expected="No queda ningún artículo en Favoritos")
 	public void clearAll() throws Exception {
+		dataTest.dataFavoritos.clear();
 		pageFavoritos.clearAllArticulos();
 		checkFavoritosWithoutArticles();
 	}
@@ -150,6 +144,6 @@ public class PageFavoritosSteps extends StepBase {
 		String refProducto = artToPlay.getRefProducto();
 		String codigoColor = artToPlay.getCodigoColor();
 		pageFavoritos.clickImgProducto(refProducto, codigoColor);
-		modalFichaFavoritosSteps.validaIsVisibleFicha(artToPlay);
+		new PageFichaSteps().checkIsFichaArtDisponible(refProducto, 2);
 	}
 }

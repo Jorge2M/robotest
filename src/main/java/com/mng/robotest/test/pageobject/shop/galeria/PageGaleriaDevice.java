@@ -227,9 +227,9 @@ public class PageGaleriaDevice extends PageGaleria {
 	}
 	
 	@Override
-	public ArrayList<ArticuloScreen> clickArticleHearthIcons(List<Integer> posIconsToClick) 
-	throws Exception {
-		ArrayList<ArticuloScreen> listArtFav = new ArrayList<>();
+	public List<ArticuloScreen> clickArticleHearthIcons(List<Integer> posIconsToClick) 
+			throws Exception {
+		List<ArticuloScreen> listArtFav = new ArrayList<>();
 		for (int posIcon : posIconsToClick) {
 			clickHearhIcon(posIcon);
 			ArticuloScreen articulo = getArticuloObject(posIcon);

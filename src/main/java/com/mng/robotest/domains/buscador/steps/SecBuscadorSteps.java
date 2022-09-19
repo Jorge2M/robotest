@@ -9,7 +9,7 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
+import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
@@ -52,8 +52,8 @@ public class SecBuscadorSteps extends StepBase {
 	private void searchArticuloCommon(GarmentCatalog product) throws Exception {
 		ArticuloNavigations.buscarArticulo(product.getArticleWithMoreStock(), channel, app);
 		SeleniumUtils.waitForPageLoaded(driver);  
-		PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps();
-		pageFichaSteps.validateIsFichaAccordingTypeProduct(product);
+		PageFichaSteps pageFichaSteps = new PageFichaSteps();
+		pageFichaSteps.checkIsFichaAccordingTypeProduct(product);
 	}
 
 	@Step (
