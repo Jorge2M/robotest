@@ -375,7 +375,7 @@ public abstract class PageGaleria extends PageBase {
 		}
 		
 		//Para el caso TestAB-1 se ejecutará este caso para conseguir los atributos del artículo
-		String href = getElement(XPATH_LINK_RELATIVE_TO_ARTICLE).getAttribute("href");
+		String href = articulo.findElement(By.xpath(XPATH_LINK_RELATIVE_TO_ARTICLE)).getAttribute("href");
 		return UtilsTest.getReferenciaFromHref(href);
 	}
 

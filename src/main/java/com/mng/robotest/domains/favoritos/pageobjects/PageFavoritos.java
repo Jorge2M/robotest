@@ -8,12 +8,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Talla;
-import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
@@ -23,8 +23,6 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageFavoritos extends PageBase {
   
-	private final ModalFichaFavoritos modalFichaFavoritos = new ModalFichaFavoritos();
-	
 	private static final String XPATH_BLOCK_FAVORITOS = "//div[@data-pais and @class[contains(.,'favorites')]]";
 	private static final String XPATH_BLOCK_FAV_WITH_ART = XPATH_BLOCK_FAVORITOS + "//div[@class[contains(.,'content-garments')]]";
 	private static final String XPATH_ARTICULO = "//ul[@id='contentDataFavs']/li";
@@ -34,10 +32,6 @@ public class PageFavoritos extends PageBase {
 	private static final String XPATH_WHATSAPP_SHARE_BUTTON = "//span[@class='modal-share-whatsapp-icon']";
 	private static final String XPATH_TELEGRAM_SHARE_BUTTON = "//span[@class='modal-share-telegram-icon']";
 	private static final String XPATH_URL_SHARE_LABEL = "//div[@id='linkShareButton']";
-	
-	public ModalFichaFavoritos getModalFichaFavoritos() {
-		return this.modalFichaFavoritos;
-	}
 	
 	private String getXPathArticle(String refProducto, String codigoColor) {
 		String xpathNew = "@style[contains(.,'" + refProducto + "_" + codigoColor + "')]"; //div
@@ -148,19 +142,18 @@ public class PageFavoritos extends PageBase {
 		return state(Present, XPATH_ARTICULO).check();
 	}
 	
-	public boolean areVisibleArticlesUntil(DataFavoritos dataFavoritos, int seconds) {
-		if (dataFavoritos.isEmpty()) {
+	public boolean areVisibleArticlesUntil(int seconds) {
+		if (dataTest.dataFavoritos.isEmpty()) {
 			return (!hayArticulos());
 		}
 		
-		Iterator<ArticuloScreen> itArticulos = dataFavoritos.getListArticulos().iterator();
+		Iterator<ArticuloScreen> itArticulos = dataTest.dataFavoritos.getListArticulos().iterator();
 		while (itArticulos.hasNext()) {
 			ArticuloScreen articulo = itArticulos.next();
 			if (!isVisibleArticleUntil(articulo.getRefProducto(), articulo.getCodigoColor(), seconds)) {
 				return false;
 			}
 		}
-		
 		return true;
 	}
 	
@@ -205,8 +198,10 @@ public class PageFavoritos extends PageBase {
 	}
 	
 	public void clickImgProducto(String refProducto, String codigoColor) {
+		//Ejecutamos el click mediante JavaScript porque hay un error en la shop que hace 
+		//que en ocasiones el artículo quede parcialmente tapado por el footer.
 		String xpathImg = getXPathImgProducto(refProducto, codigoColor);
-		getElement(xpathImg).click();
+		click(xpathImg).type(TypeClick.javascript).exec();
 	}
 	
 	public List<WebElement> getListaTallas(String refProducto, String codigoColor) {

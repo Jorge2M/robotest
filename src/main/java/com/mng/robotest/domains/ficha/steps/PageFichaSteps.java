@@ -26,7 +26,6 @@ import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ColorType;
 import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ProductNav;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.data.Talla;
-import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
@@ -37,7 +36,7 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 import java.util.Arrays;
 import java.util.List;
 
-public class PageFichaArtSteps extends StepBase {
+public class PageFichaSteps extends StepBase {
 	
 	private final PageFicha pageFicha = PageFicha.of(channel);
 	private final SecBolsa secBolsa = new SecBolsa();
@@ -52,8 +51,8 @@ public class PageFichaArtSteps extends StepBase {
 		return this.pageFicha;
 	}
 	
-	public void validateIsFichaAccordingTypeProduct(GarmentCatalog product) throws Exception {			
-		validateIsFichaArtDisponible(product.getGarmentId(), 3);
+	public void checkIsFichaAccordingTypeProduct(GarmentCatalog product) throws Exception {			
+		checkIsFichaArtDisponible(product.getGarmentId(), 3);
 		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.ImgsBroken,
@@ -64,8 +63,8 @@ public class PageFichaArtSteps extends StepBase {
 		description=
 			"Aparece la página correspondiente a la ficha del artículo #{refArticulo}" + 
 			" (La esperamos hasta #{seconds} segundos)")
-	public boolean validateIsFichaArtDisponible(String refArticulo, int seconds) { 
-		return (pageFicha.isFichaArticuloUntil(refArticulo, seconds));
+	public boolean checkIsFichaArtDisponible(String refArticulo, int seconds) { 
+		return pageFicha.isFichaArticuloUntil(refArticulo, seconds);
 	}
 	
 	@Validation
@@ -253,18 +252,13 @@ public class PageFichaArtSteps extends StepBase {
 		secBolsaSteps.validaAltaArtBolsa();
 	}	
 
-	public void selectAnadirAFavoritos() throws Exception {
-		DataFavoritos dataFavoritos = new DataFavoritos();
-		selectAnadirAFavoritos(dataFavoritos);
-	}
-	
 	@Step (
 		description="Seleccionar el botón <b>\"Añadir a Favoritos\"</b>", 
 		expected="El artículo se añade a Favoritos")
-	public void selectAnadirAFavoritos(DataFavoritos dataFavoritos) throws Exception {
+	public void selectAnadirAFavoritos() throws Exception {
 		pageFicha.selectAnadirAFavoritosButton();
 		ArticuloScreen articulo = pageFicha.getArticuloObject();
-		dataFavoritos.addArticulo(articulo);
+		dataTest.dataFavoritos.addArticulo(articulo);
 		checkCapaAltaFavoritos();
 		validateVisibleButtonFavoritos(ActionFavButton.REMOVE);
 	}
@@ -435,7 +429,7 @@ public class PageFichaArtSteps extends StepBase {
 	public void selectLinkNavigation(ProductNav productNav, String refProductOrigin) {
 		pageFicha.getSecDataProduct().selectLinkNavigation(productNav);
 		if (productNav==ProductNav.PREV) {
-			validateIsFichaArtDisponible(refProductOrigin, 3);
+			checkIsFichaArtDisponible(refProductOrigin, 3);
 		}
 		
 		if (productNav==ProductNav.NEXT) {

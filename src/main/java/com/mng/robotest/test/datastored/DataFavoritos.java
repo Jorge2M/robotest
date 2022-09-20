@@ -15,9 +15,9 @@ import com.mng.robotest.test.generic.beans.ArticuloScreen;
 
 public class DataFavoritos {
 
-	ArrayList<ArticuloScreen> listArticulos = new ArrayList<>();
+	List<ArticuloScreen> listArticulos = new ArrayList<>();
 	
-	public ArrayList<ArticuloScreen> getListArticulos() {
+	public List<ArticuloScreen> getListArticulos() {
 		return this.listArticulos;
 	}
 	
@@ -46,7 +46,7 @@ public class DataFavoritos {
 	}
 	
 	public void removeArticulo(ArticuloScreen articulo) {
-		ArrayList<ArticuloScreen> listResult = new ArrayList<ArticuloScreen>();
+		List<ArticuloScreen> listResult = new ArrayList<ArticuloScreen>();
 		for (ArticuloScreen artFavs : this.listArticulos) {
 			if (artFavs.getReferencia().compareTo(articulo.getReferencia())!=0 ||
 				artFavs.getCodigoColor().compareTo(articulo.getCodigoColor())!=0) {

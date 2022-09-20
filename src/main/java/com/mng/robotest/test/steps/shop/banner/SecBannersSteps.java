@@ -12,7 +12,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
-import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
+import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.AllPages;
@@ -76,7 +76,7 @@ public class SecBannersSteps extends StepBase {
 			validacionesGeneralesBanner(urlPagPrincipal, uriPagPrincipal, elementosPagPrincipal);
 			switch (dataBanner.getDestinoType()) {
 			case Ficha:
-				PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps();
+				PageFichaSteps pageFichaSteps = new PageFichaSteps();
 				pageFichaSteps.validateIsFichaCualquierArticulo();
 				break;
 			default:				

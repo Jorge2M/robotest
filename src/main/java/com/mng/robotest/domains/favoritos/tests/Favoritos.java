@@ -10,8 +10,6 @@ import com.mng.robotest.test.utils.PaisGetter;
 
 import java.io.Serializable;
 
-
-@SuppressWarnings({ "static-access" })
 public class Favoritos implements Serializable {
 
 	private static final long serialVersionUID = -3932978752450813757L;

@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.buscador.steps.SecBuscadorSteps;
-import com.mng.robotest.domains.ficha.steps.PageFichaArtSteps;
+import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.ficha.steps.SecModalPersonalizacionSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.Linea.LineaType;
@@ -24,7 +24,7 @@ public class Fic005 extends TestBase {
 	final GarmentCatalog articlePersonalizable;
 	
 	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
-	final PageFichaArtSteps pageFichaSteps = new PageFichaArtSteps();
+	final PageFichaSteps pageFichaSteps = new PageFichaSteps();
 	final SecModalPersonalizacionSteps modalPersonalizacionSteps = new SecModalPersonalizacionSteps();
 	
 	public Fic005() throws Exception {

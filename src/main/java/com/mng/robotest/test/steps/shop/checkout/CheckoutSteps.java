@@ -157,7 +157,7 @@ public class CheckoutSteps extends StepBase {
 	 	checks.add(
 			"El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país " + 
 			"(" + dataTest.pais.getListPagosForTest(app, isEmpl).size() + ")",
-			pageCheckoutWrapper.isNumMetodosPagoOK(isEmpl), State.Defect);		
+			pageCheckoutWrapper.isNumMetodosPagoOK(isEmpl), State.Warn);		
 		return checks;
 	}
 	

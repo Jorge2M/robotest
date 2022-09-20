@@ -6,6 +6,7 @@ import java.util.List;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.datastored.DataBag;
+import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test.utils.PaisGetter;
 
@@ -20,6 +21,7 @@ public class DataTest implements Cloneable, Serializable {
 	public String passwordUser = "";
 	public List<GenericCheck> genericChecksDisabled = null; 
 	public DataBag dataBag = new DataBag(); 
+	public DataFavoritos dataFavoritos = new DataFavoritos();
 	
 	public DataTest() { }
 	
