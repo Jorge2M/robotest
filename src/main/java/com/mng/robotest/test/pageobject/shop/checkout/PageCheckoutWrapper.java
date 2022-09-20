@@ -1,5 +1,6 @@
 package com.mng.robotest.test.pageobject.shop.checkout;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
@@ -448,4 +449,18 @@ public class PageCheckoutWrapper extends PageBase {
 	public boolean isBancoSeleccionado(String nombreBanco) {
 		return new SecEps().isBancoSeleccionado(nombreBanco);
 	}
+
+	public boolean btnAddAddress() throws Exception {
+			return page1DktopCheckout.isvisibleLocationBtnCta();
+	}
+	public void btnAddAddressClick() throws Exception {
+		page1DktopCheckout.clickBtnCta();
+	}
+	public boolean modalDirecUsuarios() throws Exception {
+		return page1DktopCheckout.isvisibleModalDirections();
+	}
+	public boolean direction() throws Exception {
+		return page1DktopCheckout.getAddress();
+	}
+
 }

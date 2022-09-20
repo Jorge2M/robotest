@@ -21,6 +21,7 @@ public class Com009 extends TestBase {
     public void execute() throws Exception {
         accessLoginAndClearBolsa();
         altaArticulosBolsaAndClickComprar();
+        CTA_direcciones();
     }
     private void accessLoginAndClearBolsa() throws Exception {
         access();
@@ -30,5 +31,12 @@ public class Com009 extends TestBase {
         new SecBolsaSteps().altaListaArticulosEnBolsa(getArticles(1));
         new SecBolsaSteps().selectButtonComprar();
     }
+    private void CTA_direcciones() throws Exception {
+        checkoutSteps.btnCTA();
+        checkoutSteps.clickBntCta();
+        checkoutSteps.CtaMainDirection();
+    }
+
+
 
 }

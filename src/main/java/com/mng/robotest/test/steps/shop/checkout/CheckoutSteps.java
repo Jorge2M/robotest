@@ -300,6 +300,39 @@ public class CheckoutSteps extends StepBase {
 	public boolean isTarjetaGuardadaAvailable(String tipoTarjeta) {
 		return (pageCheckoutWrapper.isAvailableTrjGuardada(tipoTarjeta));
 	}
+	@Validation(
+			description = "Aparece el CTA de \"Añadir o editar direcciones\"",
+			level=State.Defect)
+	public boolean btnCTA() throws Exception {
+		return pageCheckoutWrapper.btnAddAddress();
+	}
+	@Validation(
+			description = " Aparece una modal con todas las direcciones guardadas del usuario ",
+			level=State.Defect)
+	public boolean ModalDirecUsuarios() throws Exception {
+		return pageCheckoutWrapper.modalDirecUsuarios();
+	}
+	@Validation(
+			description = "Esta es la dirección principal ",
+			level=State.Defect)
+	public boolean mainDirection() throws Exception {
+		return pageCheckoutWrapper.direction();
+	}
+	@Step (
+			description="Clicamos el CTA-Address",
+			expected="Aparece una modal con todas las direcciones guardadas del usuario")
+	public void clickBntCta() throws Exception {
+			pageCheckoutWrapper.btnAddAddressClick();
+			ModalDirecUsuarios();
+
+	}
+	@Step (
+			description="Comprobamos que la dirección principal es la correcta",
+			expected="coinciden las direccciones")
+	public void CtaMainDirection() throws Exception {
+			mainDirection();
+	}
+
 
 	@Step (
 		description="Seleccionamos la tarjeta guardada, si nos lo pide introducimos el cvc #{cvc} y pulsamos el botón \"Confirmar pago\"",

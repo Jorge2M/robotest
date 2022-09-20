@@ -19,6 +19,7 @@ import com.mng.robotest.test.pageobject.shop.checkout.tmango.SecTMango;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.test.pageobject.shop.checkout.klarna.ModalUserDataKlarna.InputKlarna.Direccion;
 
 public class Page1DktopCheckout extends PageBase {
 	
@@ -100,7 +101,18 @@ public class Page1DktopCheckout extends PageBase {
 	private static final String TAG_COD_VENDEDOR = "@TagCodVendedor";
 	private static final String XPATH_COD_VENDEDOR_VOTF_WITH_TAG = "//form[@id[contains(.,'Dependienta')]]//span[text()[contains(.,'" + TAG_COD_VENDEDOR + "')]]";
 	private static final String XPATH_TEXT_VALE_CAMPAIGN = "//span[@class='texto_banner_promociones']";
-	
+
+	private static final String XPATH_BTN_ADDRESS = "//*[@id=\"checkoutDeliveryAddressDesktop\"]/div/div/button";
+	private static final String XPATH_MODAL_DIRECTIONS ="//*[@data-testid='checkout.multiAddress.modalAddresses']";
+	private static final String XPATH_CHECKOUT_DELIVERY_ADDRESS ="//*[@data-testid='checkout.delivery.address']";
+
+	private static final String XPATH_DIRECTIONS ="//*[@data-testid='checkout.multiAddress.modalAddresses.addressRadio']";
+	private static final String XPATH_MAIN_DIRECTION ="//*[@data-testid='checkout.multiAddress.modalAddresses.addressExtraInfo']";
+	private static final String XPATH_DIRECTION ="checkout.multiAddress.modalAddresses.addressDirection";
+	private static final String XPATH_NAME ="//*[@data-testid='checkout.multiAddress.modalAddresses.addressName']";
+	private static final String XPATH_PROVINCE ="//*[@data-testid='checkout.multiAddress.modalAddresses.addressLocation']";
+	private static final String XPATH_TFN ="//*[@data-testid='checkout.multiAddress.modalAddresses.addressPhone']";
+
 	public SecTMango getSecTMango() {
 		return secTMango;
 	}
@@ -218,7 +230,6 @@ public class Page1DktopCheckout extends PageBase {
 	public void selectAnyNacPromoEmpl(String value) {
 		new Select(getElement(XPATH_ANY_NACI_PROMO_EMPL)).selectByValue(value);
 	}
-
 	public void clickAplicarPromo() {
 		click(XPATH_BUTTON_APLICAR_PROMO).exec();
 	}
@@ -251,6 +262,27 @@ public class Page1DktopCheckout extends PageBase {
 			inputCodigoPromo(codigoPromo);
 			clickAplicarPromo();
 		}
+	}
+	public boolean isvisibleLocationBtnCta() throws Exception {
+		return state(Visible, XPATH_BTN_ADDRESS).check();
+	}
+	public boolean isvisibleModalDirections() throws Exception {
+		return state(Visible, XPATH_MODAL_DIRECTIONS).check();
+	}
+	public boolean getAddress() throws Exception {
+		String mainDirectionCheckout=driver.findElement(By.xpath(XPATH_CHECKOUT_DELIVERY_ADDRESS)).getText().substring(0,8);
+		click(XPATH_BTN_ADDRESS).exec();
+		String mainDirection= driver.findElement(By.xpath(XPATH_DIRECTION)).getText();
+		if (mainDirectionCheckout.equals(mainDirection)){
+			return true;
+
+		}else {
+			return false;
+		}
+
+	}
+	public void clickBtnCta() throws Exception {
+		click(XPATH_BTN_ADDRESS).exec();
 	}
 
 	public boolean isVisibleInputCodigoPromoUntil(int seconds) throws Exception {
@@ -566,6 +598,7 @@ public class Page1DktopCheckout extends PageBase {
 	public boolean isVisibleInputVendedorVOTF(int seconds) {
 		return state(Visible, XPATH_INPUT_VENDEDOR_VOTF).wait(seconds).check();
 	}
+
 
 	public boolean isVisibleCodigoVendedorVOTF(String codigoVendedor) {
 		String xpathVendedor = getXPathCodigoVendedorVOTF(codigoVendedor);
