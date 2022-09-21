@@ -17,7 +17,7 @@ import com.mng.robotest.domains.transversal.PageBase;
 public class ModalMultidirection extends PageBase {
 
 	private static final String XPATH_MODAL_DIRECTIONS ="//*[@data-testid='checkout.multiAddress.modalAddresses']";
-	private static final String XPATH_LINK_ANYADIR_DIRECCION = "//[@data-testid[contains(.,'newAddress.button')]]";
+	private static final String XPATH_LINK_ANYADIR_DIRECCION = "//*[@data-testid[contains(.,'newAddress.button')]]";
 	private static final String XPATH_LINK_EDITAR = "//*[@data-testid[contains(.,'edit.button')]]";
 	
 	private static final String XPATH_LINE_DIRECTION = "//*[@data-testid[contains(.,'modalAddresses.addressRadio')]]";
@@ -46,6 +46,17 @@ public class ModalMultidirection extends PageBase {
 			if (direction.isPrincipal()) {
 				return Optional.of(direction);
 			}
+		}
+		return Optional.empty();
+	}
+	
+	public Optional<Direction> getDirection(String address, int seconds) {
+		for (int i=0; i<5; i++) {
+			Optional<Direction> direction = getDirection(address);
+			if (direction.isPresent()) {
+				return direction;
+			}
+			waitMillis(1000);
 		}
 		return Optional.empty();
 	}

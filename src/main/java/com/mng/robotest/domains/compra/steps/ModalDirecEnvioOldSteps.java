@@ -5,14 +5,14 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.compra.pageobject.DataDireccion;
-import com.mng.robotest.domains.compra.pageobject.ModalDirecEnvio;
+import com.mng.robotest.domains.compra.pageobject.ModalDirecEnvioOld;
 import com.mng.robotest.domains.compra.pageobject.Page1DktopCheckout;
 import com.mng.robotest.domains.compra.pageobject.PageCheckoutWrapper;
 import com.mng.robotest.domains.transversal.StepBase;
 
-public class ModalDirecEnvioSteps extends StepBase {
+public class ModalDirecEnvioOldSteps extends StepBase {
 	
-	private final ModalDirecEnvio modalDirecEnvio = new ModalDirecEnvio();
+	private final ModalDirecEnvioOld modalDirecEnvio = new ModalDirecEnvioOld();
 	
 	@Validation
 	public ChecksTM validateIsOk() {
@@ -20,10 +20,12 @@ public class ModalDirecEnvioSteps extends StepBase {
 		int seconds = 5;
 	 	checks.add(
 			"Es visible el formulario para la introducción de la \"Dirección de envío\" (lo esperamos hasta #{seconds} seconds)",
-			modalDirecEnvio.isVisibleFormUntil(seconds), State.Defect); 
+			modalDirecEnvio.isVisibleFormUntil(seconds), State.Defect);
+	 	
 	 	checks.add(
 			"Es visible el botón \"Actualizar\"",
-			modalDirecEnvio.isVisibleButtonActualizar(), State.Defect); 
+			modalDirecEnvio.isVisibleButtonActualizar(), State.Defect);
+	 	
 	 	return checks;
 	}
 
@@ -36,14 +38,6 @@ public class ModalDirecEnvioSteps extends StepBase {
 		checkAfterUpdateData();
 	}
 	
-	@Step (
-		description="Clickar el botón <b>Eliminar</b>", 
-		expected="La dirección se elimina correctamente")
-	public void clickEliminarButton(String address) throws Exception {
-		modalDirecEnvio.clickEliminarButton();
-		new ModalMultidirectionSteps().checkAddressNotExists(address);
-	}
-
 	@Validation
 	private ChecksTM checkAfterUpdateData() {
 		ChecksTM checks = ChecksTM.getNew();

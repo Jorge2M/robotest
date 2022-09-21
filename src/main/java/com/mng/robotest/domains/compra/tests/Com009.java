@@ -1,13 +1,13 @@
 package com.mng.robotest.domains.compra.tests;
+
 import java.sql.Timestamp;
 import java.time.Instant;
 
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
-import com.mng.robotest.domains.compra.pageobject.DataDireccion;
-import com.mng.robotest.domains.compra.pageobject.DataDireccion.DataDirType;
+import com.mng.robotest.domains.compra.pageobject.DirectionData;
 import com.mng.robotest.domains.compra.pageobject.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.domains.compra.steps.CheckoutSteps;
-import com.mng.robotest.domains.compra.steps.ModalDirecEnvioSteps;
+import com.mng.robotest.domains.compra.steps.ModalDirecEnvioNewSteps;
 import com.mng.robotest.domains.compra.steps.ModalMultidirectionSteps;
 import com.mng.robotest.domains.compra.steps.envio.SecMetodoEnvioSteps;
 import com.mng.robotest.domains.transversal.TestBase;
@@ -19,7 +19,7 @@ import com.mng.robotest.test.utils.PaisGetter;
 public class Com009 extends TestBase {
 	
 	private final ModalMultidirectionSteps modalMultidirectionSteps = new ModalMultidirectionSteps();
-	private final ModalDirecEnvioSteps modalDirecEnvioSteps = new ModalDirecEnvioSteps(); 
+	private final ModalDirecEnvioNewSteps modalDirecEnvioSteps = new ModalDirecEnvioNewSteps(); 
 
     public Com009() throws Exception {
         dataTest.setUserRegistered(true);
@@ -48,11 +48,10 @@ public class Com009 extends TestBase {
     	modalMultidirectionSteps.checkInitialContent();
     	modalMultidirectionSteps.clickAnyadirOtraDireccion();
     	
-    	DataDireccion dataDireccion = makeDataDireccion();
-    	modalDirecEnvioSteps.inputDataAndActualizar(dataDireccion);
+    	DirectionData dataDireccion = makeDataDireccion();
+    	modalDirecEnvioSteps.inputDataAndSave(dataDireccion);
     	
-		String addressAdded = dataDireccion.getValue(DataDirType.direccion);
-    	modalMultidirectionSteps.checkAfterAddDirection(addressAdded);
+		String addressAdded = dataDireccion.getDireccion();
     	modalMultidirectionSteps.clickEditAddress(addressAdded);
     	modalDirecEnvioSteps.clickEliminarButton(addressAdded);
     }
@@ -65,16 +64,14 @@ public class Com009 extends TestBase {
     	new SecMetodoEnvioSteps().selectMetodoEnvio(dataPago, "VISA");
     }
     
-    private DataDireccion makeDataDireccion() {
-		DataDireccion dataDirEnvio = new DataDireccion();
-		dataDirEnvio.put(DataDirType.codigoPais, dataTest.getPais().getCodigo_pais());
-		dataDirEnvio.put(DataDirType.codpostal, dataTest.getPais().getCodpos());					
-		dataDirEnvio.put(DataDirType.name, "Jorge");
-		dataDirEnvio.put(DataDirType.apellidos, "Muñoz Martínez");
-		dataDirEnvio.put(DataDirType.direccion, "c./mossen trens nº6 5º1ª " + Timestamp.from(Instant.now()));
-		dataDirEnvio.put(DataDirType.email, dataTest.getUserConnected());
-		dataDirEnvio.put(DataDirType.telefono, dataTest.getPais().getMobiluser());
-		return dataDirEnvio;
+    private DirectionData makeDataDireccion() {
+		DirectionData direction = new DirectionData();
+		direction.setNombre("Jorge");
+		direction.setApellidos("Muñoz Martínez");
+		direction.setDireccion("c./mossen trens nº6 5º1ª " + Timestamp.from(Instant.now()));
+		direction.setCodPostal(dataTest.getPais().getCodpos());
+		direction.setMobil(dataTest.getPais().getTelefono());
+		return direction;
     }
 
 }

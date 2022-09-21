@@ -30,7 +30,7 @@ import com.mng.robotest.test.generic.UtilsMangoTest;
 public class CheckoutSteps extends StepBase {
 
 	private final PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(); 
-	private final ModalDirecEnvioSteps modalDirecEnvioSteps = new ModalDirecEnvioSteps();
+	private final ModalDirecEnvioOldSteps modalDirecEnvioSteps = new ModalDirecEnvioOldSteps();
 	private final SecMetodoEnvioSteps secMetodoEnvioDesktopSteps = new SecMetodoEnvioSteps();
 	private final SecTMangoSteps secTMangoSteps = new SecTMangoSteps();
 	private final SecKrediKartiSteps secKrediKartiSteps = new SecKrediKartiSteps();
@@ -49,7 +49,7 @@ public class CheckoutSteps extends StepBase {
 		return page1MobilCheckSteps;
 	}
 	
-	public ModalDirecEnvioSteps getModalDirecEnvioSteps() {
+	public ModalDirecEnvioOldSteps getModalDirecEnvioSteps() {
 		return modalDirecEnvioSteps;
 	}
 	public SecIdealSteps getSecIdealSteps() {

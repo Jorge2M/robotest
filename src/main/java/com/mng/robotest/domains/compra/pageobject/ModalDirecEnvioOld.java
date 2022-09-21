@@ -2,11 +2,10 @@ package com.mng.robotest.domains.compra.pageobject;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class ModalDirecEnvio extends ModalDireccion {
+public class ModalDirecEnvioOld extends ModalDireccion {
 
 	private static final String XPATH_FORM_MODAL = "//form[@class[contains(.,'customFormIdENVIO')]]";
 	private static final String XPATH_BUTTON_UPDATE = XPATH_FORM_MODAL + "//div[@class[contains(.,'updateButton')]]/*[@class[contains(.,'modalConfirmar')]]";
-	private static final String XPATH_BUTTON_ELIMINAR = "//*[@data-testid='address.form.delete.button']";
 
 	public void sendDataToInputsNTimesAndWait(DataDireccion dataToSend, int nTimes) throws Exception {
 		sendDataToInputsNTimes(dataToSend, nTimes, XPATH_FORM_MODAL);
@@ -42,9 +41,5 @@ public class ModalDirecEnvio extends ModalDireccion {
 		if (isVisibleButtonActualizar()) {
 			click(XPATH_BUTTON_UPDATE).exec();
 		}
-	}
-	
-	public void clickEliminarButton() {
-		click(XPATH_BUTTON_ELIMINAR).exec();
 	}
 }
