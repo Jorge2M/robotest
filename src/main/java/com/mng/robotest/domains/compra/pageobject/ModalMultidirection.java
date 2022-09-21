@@ -20,8 +20,8 @@ public class ModalMultidirection extends PageBase {
 	private static final String XPATH_LINK_ANYADIR_DIRECCION = "//[@data-testid[contains(.,'newAddress.button')]]";
 	private static final String XPATH_LINK_EDITAR = "//*[@data-testid[contains(.,'edit.button')]]";
 	
-	private static final String XPATH_LINE_DIRECTION = "//label[@for[contains(.,'address-')]]";
-	private static final String XPATH_TEXT_PRINCIPAL = "//*[@date-testid[contains(.,'addressExtraInfo')]]";
+	private static final String XPATH_LINE_DIRECTION = "//*[@data-testid[contains(.,'modalAddresses.addressRadio')]]";
+	private static final String XPATH_TEXT_PRINCIPAL = "//*[@data-testid[contains(.,'addressExtraInfo')]]";
 	public enum DirectionItem {
 		NAME("addressName"),
 		ADDRESS("addressDirection"),
@@ -36,18 +36,6 @@ public class ModalMultidirection extends PageBase {
 			return String.format("//*[@data-testid[contains(.,'%s')]]", testid);
 		}
 	}
-	
-//	private static final String XPATH_CHECKOUT_DELIVERY_ADDRESS ="//*[@data-testid='checkout.delivery.address']";
-//
-//	private static final String XPATH_DIRECTIONS ="//*[@data-testid='checkout.multiAddress.modalAddresses.addressRadio']";
-//	private static final String XPATH_MAIN_DIRECTION ="//*[@data-testid='checkout.multiAddress.modalAddresses.addressExtraInfo']";
-//	private static final String XPATH_DIRECTION ="//*[@data-testid='checkout.multiAddress.modalAddresses.addressDirection']";
-//	private static final String XPATH_CLOSE_MODAL ="//*[@data-testid='modal.close.button']";
-//
-//	private static final String XPATH_NAME ="//*[@data-testid='checkout.multiAddress.modalAddresses.addressName']";
-//	private static final String XPATH_PROVINCE ="//*[@data-testid='checkout.multiAddress.modalAddresses.addressLocation']";
-//	private static final String XPATH_TFN ="//*[@data-testid='checkout.multiAddress.modalAddresses.addressPhone']";
-	
 	
 	public boolean isVisible() throws Exception {
 		return state(Visible, XPATH_MODAL_DIRECTIONS).check();
@@ -106,49 +94,4 @@ public class ModalMultidirection extends PageBase {
 		WebElement directionElem = directionOpt.get().getElement();
 		click(directionElem).by(By.xpath(XPATH_LINK_EDITAR)).exec();
 	}
-	
-//	public String getAddress() throws Exception {
-//		String addressCheckout = "";
-//		waitLoadPage();
-//		List<WebElement> addressModal = getElements(XPATH_DIRECTIONS);
-//		List<WebElement> address1 = getElements(XPATH_DIRECTION);
-//
-//		Iterator<WebElement> it = addressModal.iterator();
-//		while (it.hasNext()) {
-//			WebElement address = it.next();
-//			String addressLista= address.getAttribute("data-testid");
-//			if (addressLista.contains(XPATH_MAIN_DIRECTION)) {
-//				Iterator<WebElement> it2 = address1.iterator();
-//				while (it.hasNext()) {
-//					WebElement address2 = it2.next();
-//					String addressModalPrincipal= address2.getAttribute("data-testid");
-//					if (addressModalPrincipal.contains(XPATH_DIRECTION)) {
-//						 addressCheckout = address2.getText();
-//					}
-//				}
-//			}
-//		}
-//		return addressCheckout;
-//	}
-//	
-//	public boolean isDirectionsPrincipal() throws Exception {
-//		click(XPATH_CLOSE_MODAL).exec();
-//		return true;
-//		//TODO
-//		//String directionCheckout= getTextDireccionEnvioCompleta();
-//		//TODO
-////		if (getAddress().equals(directionCheckout)) {
-////			return true;
-////		}else{
-////			return false;
-////		}
-//
-//	}
-//	
-//	public void clickBtnCta() throws Exception {
-//		click(XPATH_BTN_ADDRESS).exec();
-//	}
-
-	
-
 }

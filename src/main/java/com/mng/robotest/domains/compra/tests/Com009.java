@@ -55,7 +55,6 @@ public class Com009 extends TestBase {
     	modalMultidirectionSteps.checkAfterAddDirection(addressAdded);
     	modalMultidirectionSteps.clickEditAddress(addressAdded);
     	modalDirecEnvioSteps.clickEliminarButton(addressAdded);
-        //checkoutSteps.CtaMainDirection();
     }
     
     private void selectEnvioEstandard() throws Exception {
