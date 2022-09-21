@@ -14,14 +14,14 @@ public class PagoTrustpay extends PagoSteps {
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		String importeTotal = this.dataPago.getDataPedido().getImporteTotal();
 		
 		PageTrustpaySelectBankSteps pageTrustpaySelectBankSteps = new PageTrustpaySelectBankSteps();
-		pageTrustpaySelectBankSteps.validateIsPage(dataPago.getDataPedido().getPago().getNombre(channel, app), importeTotal, dataTest.pais.getCodigo_pais());
+		pageTrustpaySelectBankSteps.checkIsPage(dataPago.getDataPedido().getPago().getNombre(channel, app), importeTotal);
 		if (execPay) {
-			pageTrustpaySelectBankSteps.selectTestBankAndPay(importeTotal, dataTest.pais.getCodigo_pais());
+			pageTrustpaySelectBankSteps.selectTestBankAndPay(importeTotal);
 			new PageTrustPayResultSteps().clickButtonContinue();
 		}
 	}	

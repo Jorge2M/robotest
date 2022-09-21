@@ -20,7 +20,7 @@ public class CompraSteps extends NavigationBase {
 	public CompraSteps() {}
 	
 	public void startPayment(DataPago dataPago, boolean executePayment) throws Exception {
-		dataPago.setPago(dataTest.pais.getPago("VISA"));
+		dataPago.setPago(dataTest.getPais().getPago("VISA"));
 		PagoSteps pagoSteps = FactoryPagos.makePagoSteps(dataPago);
 		pagoSteps.startPayment(executePayment);
 	}

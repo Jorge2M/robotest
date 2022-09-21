@@ -14,8 +14,8 @@ public class Chk001 extends TestBase {
 	private final ConfigCheckout fTCkoutIni;
 	
 	public Chk001(Pais pais, IdiomaPais idioma, ConfigCheckout fTCkoutIni) {
-		this.dataTest.pais = pais;
-		this.dataTest.idioma = idioma;
+		this.dataTest.setPais(pais);
+		this.dataTest.setIdioma(idioma);
 		this.fTCkoutIni = fTCkoutIni;
 	}
 	

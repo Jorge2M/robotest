@@ -28,7 +28,7 @@ public class SecCabeceraSteps extends StepBase {
 	public ChecksTM validateIconoBolsa() {
 		ChecksTM checks = ChecksTM.getNew();
 		boolean isVisibleIconoBolsa = secCabecera.isInStateIconoBolsa(Visible, 2);
-		if (dataTest.pais.isVentaOnline()) {
+		if (dataTest.getPais().isVentaOnline()) {
 			checks.add(
 				"<b>Sí</b> es posible comprar (aparece la capa relacionada con la bolsa)",
 				isVisibleIconoBolsa, State.Warn);

@@ -22,7 +22,6 @@ import com.mng.robotest.domains.identification.pageobjects.PageIdentificacion;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.DataTest;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
@@ -49,28 +48,28 @@ public class AccesoSteps extends StepBase {
 		saveNettraffic=SaveWhen.Always)
 	public void oneStep(boolean clearArticulos) throws Exception {
 		String registro = "";
-		if (dataTest.userRegistered && app!=AppEcom.votf) {
-			registro = "Identificarse con el usuario <b>" + dataTest.userConnected + "</b><br>"; 
+		if (dataTest.isUserRegistered() && app!=AppEcom.votf) {
+			registro = "Identificarse con el usuario <b>" + dataTest.getUserConnected() + "</b><br>"; 
 		}
 		if (clearArticulos) {
 			registro+= "Borrar la Bolsa<br>";
 		}
 
 		StepTM StepTestMaker = TestMaker.getCurrentStepInExecution();
-		StepTestMaker.replaceInDescription(TAG_NOMBRE_PAIS, dataTest.pais.getNombre_pais());
-		StepTestMaker.replaceInDescription(TAG_LITERAL_IDIOMA, dataTest.idioma.getCodigo().getLiteral());
+		StepTestMaker.replaceInDescription(TAG_NOMBRE_PAIS, dataTest.getPais().getNombre_pais());
+		StepTestMaker.replaceInDescription(TAG_LITERAL_IDIOMA, dataTest.getIdioma().getCodigo().getLiteral());
 		StepTestMaker.replaceInDescription(TAG_REGISTRO, registro);
 
 		new AccesoNavigations().accesoHomeAppWeb();
-		if (dataTest.userRegistered && app!=AppEcom.votf) {
-			new PageIdentificacion().iniciarSesion(dataTest.userConnected, dataTest.passwordUser);
+		if (dataTest.isUserRegistered() && app!=AppEcom.votf) {
+			new PageIdentificacion().iniciarSesion(dataTest.getUserConnected(), dataTest.getPasswordUser());
 		}
 
 		if (clearArticulos) {
 			new SecBolsa().clearArticulos();
 		}
 
-		if (dataTest.userRegistered && app!=AppEcom.votf) {
+		if (dataTest.isUserRegistered() && app!=AppEcom.votf) {
 			validaIdentificacionEnShop();
 		}
 	}
@@ -133,11 +132,11 @@ public class AccesoSteps extends StepBase {
 	 * Se ejecutan cada acción en un paso
 	 */
 	public void manySteps() throws Exception {
-		if (app==AppEcom.votf && !dataTest.userRegistered) { //En VOTF no tiene sentido identificarte con las credenciales del cliente
+		if (app==AppEcom.votf && !dataTest.isUserRegistered()) { //En VOTF no tiene sentido identificarte con las credenciales del cliente
 			accesoVOTFtoHOME();					
 		} else {
 			new PagePrehomeSteps().seleccionPaisIdiomaAndEnter(false);
-			if (dataTest.userRegistered) {
+			if (dataTest.isUserRegistered()) {
 				identificacionEnMango();
 				SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 				secBolsaSteps.clear();
@@ -148,7 +147,7 @@ public class AccesoSteps extends StepBase {
 	public void identificacionEnMango() throws Exception {
 		MenusUserWrapper userMenus = new SecMenusWrap().getMenusUser();
 		if (!userMenus.isMenuInState(UserMenu.cerrarSesion, Present)) {
-			iniciarSesion(dataTest);
+			iniciarSesion();
 		}
 	}
 
@@ -157,18 +156,18 @@ public class AccesoSteps extends StepBase {
 		expected="La identificación es correcta",
 		saveHtmlPage=SaveWhen.Always,
 		saveNettraffic=SaveWhen.Always)
-	private void iniciarSesion(DataTest dataTest) throws Exception {
-		new PageIdentificacion().iniciarSesion(dataTest.userConnected, dataTest.passwordUser);
+	private void iniciarSesion() throws Exception {
+		new PageIdentificacion().iniciarSesion(dataTest.getUserConnected(), dataTest.getPasswordUser());
 		validaIdentificacionEnShop();
 	}
 
 	public void accesoVOTFtoHOME() throws Exception {
 		String urlAcceso = inputParamsSuite.getUrlBase();
-		int numIdiomas = dataTest.pais.getListIdiomas().size();
+		int numIdiomas = dataTest.getPais().getListIdiomas().size();
 		
-		new PageLoginVOTFSteps().goToAndLogin(urlAcceso, dataTest.pais);
+		new PageLoginVOTFSteps().goToAndLogin(urlAcceso);
 		if (numIdiomas > 1) {
-			new PageSelectIdiomaVOTFSteps().selectIdiomaAndContinue(dataTest.idioma);
+			new PageSelectIdiomaVOTFSteps().selectIdiomaAndContinue();
 		}
 
 		PageSelectLineaVOTFSteps pageSelectLineaVOTFSteps = new PageSelectLineaVOTFSteps();
@@ -194,19 +193,19 @@ public class AccesoSteps extends StepBase {
 		saveHtmlPage=SaveWhen.Always)
 	public void accesoPRYCambioPais(Pais paisDestino, IdiomaPais idiomaDestino) throws Exception {
 		StepTM StepTestMaker = TestMaker.getCurrentStepInExecution();
-		StepTestMaker.replaceInDescription(tagNombrePaisOrigen, dataTest.pais.getNombre_pais());
-		StepTestMaker.replaceInDescription(tagCodigoPaisOrigen, dataTest.pais.getCodigo_pais());
-		StepTestMaker.replaceInDescription(tagNombreIdiomaOrigen, dataTest.idioma.getLiteral());
+		StepTestMaker.replaceInDescription(tagNombrePaisOrigen, dataTest.getPais().getNombre_pais());
+		StepTestMaker.replaceInDescription(tagCodigoPaisOrigen, dataTest.getCodigoPais());
+		StepTestMaker.replaceInDescription(tagNombreIdiomaOrigen, dataTest.getIdioma().getLiteral());
 	
 		manySteps();
 
-		Pais paisOriginal = dataTest.pais;
-		IdiomaPais idiomaOriginal = dataTest.idioma;
-		dataTest.pais = paisDestino;
-		dataTest.idioma = idiomaDestino;
-		new SecFooterSteps().cambioPais(dataTest.pais, dataTest.idioma);
-		dataTest.pais = paisOriginal;
-		dataTest.idioma = idiomaOriginal;
+		Pais paisOriginal = dataTest.getPais();
+		IdiomaPais idiomaOriginal = dataTest.getIdioma();
+		dataTest.setPais(paisDestino);
+		dataTest.setIdioma(idiomaDestino);
+		new SecFooterSteps().cambioPais(dataTest.getPais(), dataTest.getIdioma());
+		dataTest.setPais(paisOriginal);
+		dataTest.setIdioma(idiomaOriginal);
 
 		//No hacemos nada, simplemente es un paso informativo
 	}

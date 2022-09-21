@@ -81,7 +81,7 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	public void altaArticlosConColores(int numArticulos) throws Exception {
-		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.pais.getCodigo_alf(), app, driver).build();
+		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver).build();
 		List<GarmentCatalog> listParaAlta = getterProducts
 				.getFiltered(FilterType.ManyColors)
 				.subList(0, numArticulos);
@@ -95,8 +95,8 @@ public class SecBolsaSteps extends StepBase {
 			altaBolsaArticulos(listArticlesForAdd);
 			validaAltaArtBolsa();
 		}
-		dataTest.dataBag.setImporteTotal(secBolsa.getPrecioSubTotal());
-		dataTest.dataBag.setImporteTransp(secBolsa.getPrecioTransporte());
+		dataTest.getDataBag().setImporteTotal(secBolsa.getPrecioSubTotal());
+		dataTest.getDataBag().setImporteTransp(secBolsa.getPrecioTransporte());
 	}
 
 	static final String tagListaArt = "@TagListaArt";
@@ -112,7 +112,7 @@ public class SecBolsaSteps extends StepBase {
 			if (artTmp.isVale()) {
 				articulo.setVale(artTmp.getValePais());
 			}
-			dataTest.dataBag.addArticulo(articulo);
+			dataTest.getDataBag().addArticulo(articulo);
 		}
 
 		if (channel==Channel.desktop) {
@@ -168,9 +168,9 @@ public class SecBolsaSteps extends StepBase {
 	public ChecksTM validaNumArtEnBolsa() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
 		int seconds = 3;
-		String itemsSaved = String.valueOf(dataTest.dataBag.getListArticulos().size());
+		String itemsSaved = String.valueOf(dataTest.getDataBag().getListArticulos().size());
 	 	checks.add(
-			"Existen " + dataTest.dataBag.getListArticulos().size() + " elementos dados de alta en la bolsa (los esperamos hasta " + seconds + " segundos)",
+			"Existen " + dataTest.getDataBag().getListArticulos().size() + " elementos dados de alta en la bolsa (los esperamos hasta " + seconds + " segundos)",
 			secBolsa.numberItemsIsUntil(itemsSaved, channel, app, seconds), State.Warn);
 	 	
 	 	return checks;
@@ -222,7 +222,7 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	public void clear1erArticuloBolsa() throws Exception {
-		ArticuloScreen artToClear = dataTest.dataBag.getArticulo(0);
+		ArticuloScreen artToClear = dataTest.getDataBag().getArticulo(0);
 		clearArticuloBolsa(artToClear);
 	}
 
@@ -232,7 +232,7 @@ public class SecBolsaSteps extends StepBase {
 	private void clearArticuloBolsa(ArticuloScreen artToClear) throws Exception {
 		String importeTotalOrig = secBolsa.getPrecioSubtotalTextPant();
 		secBolsa.getLineasArtBolsa().clearArticuloAndWait(artToClear.getReferencia());
-		dataTest.dataBag.removeArticulo(0); 
+		dataTest.getDataBag().removeArticulo(0); 
 		checkImporteIsModified(importeTotalOrig, 5);
 		validaCuadranArticulosBolsa();
 	}
@@ -252,14 +252,14 @@ public class SecBolsaSteps extends StepBase {
 		secBolsa.clickBotonComprar(10);
 		validaSelectButtonComprar();
 		if (!UtilsTest.dateBeforeToday("2022-08-01") &&
-			!dataTest.userRegistered) {
+			!dataTest.isUserRegistered()) {
 			new Page1IdentCheckoutSteps().validaRGPDText();
 		}
 	}
 
 	public void validaSelectButtonComprar() throws Exception {
-		if (dataTest.userRegistered) {
-			new CheckoutSteps().validateIsFirstPage(dataTest.userRegistered);
+		if (dataTest.isUserRegistered()) {
+			new CheckoutSteps().validateIsFirstPage(dataTest.isUserRegistered());
 		} else {
 			new Page1IdentCheckoutSteps().validateIsPage(5);
 			GenericChecks.checkDefault();
@@ -268,7 +268,7 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	public void click1erArticuloBolsa() throws Exception {
-		ArticuloScreen articuloClickado = dataTest.dataBag.getArticulo(0);
+		ArticuloScreen articuloClickado = dataTest.getDataBag().getArticulo(0);
 		clickArticuloBolsa(articuloClickado);
 	}
 

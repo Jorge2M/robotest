@@ -15,8 +15,9 @@ public class PageMultibanco1rstSteps extends StepBase {
 	PageMultibanco1rst pageMultibanco1rst = new PageMultibanco1rst();
 	
 	@Validation
-	public ChecksTM validateIsPage(String nombrePago, String importeTotal, String emailUsr, String codPais) {
+	public ChecksTM validateIsPage(String nombrePago, String importeTotal, String emailUsr) {
 		ChecksTM checks = ChecksTM.getNew();
+		String codPais = dataTest.getCodigoPais();
 	   	checks.add(
 			"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b>",
 			pageMultibanco1rst.isPresentEntradaPago(nombrePago), State.Warn);

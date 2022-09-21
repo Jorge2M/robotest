@@ -143,11 +143,11 @@ public class PageFavoritos extends PageBase {
 	}
 	
 	public boolean areVisibleArticlesUntil(int seconds) {
-		if (dataTest.dataFavoritos.isEmpty()) {
+		if (dataTest.getDataFavoritos().isEmpty()) {
 			return (!hayArticulos());
 		}
 		
-		Iterator<ArticuloScreen> itArticulos = dataTest.dataFavoritos.getListArticulos().iterator();
+		Iterator<ArticuloScreen> itArticulos = dataTest.getDataFavoritos().getListArticulos().iterator();
 		while (itArticulos.hasNext()) {
 			ArticuloScreen articulo = itArticulos.next();
 			if (!isVisibleArticleUntil(articulo.getRefProducto(), articulo.getCodigoColor(), seconds)) {

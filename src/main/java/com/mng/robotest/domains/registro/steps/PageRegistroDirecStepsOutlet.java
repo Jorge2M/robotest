@@ -22,10 +22,12 @@ public class PageRegistroDirecStepsOutlet extends StepBase {
 		checks.add(
 			"Aparece la página de introducción de datos de la dirección (la esperamos un máximo de " + seconds + " segundos)",
 			pageRegistroAddressData.isPageUntil(seconds), State.Warn);
+		
 		checks.add(
-			"Si existe el desplebagle de países, en él aparece el país con código " + dataTest.pais.getCodigo_pais() + " (" + dataTest.pais.getNombre_pais() + ")",
+			"Si existe el desplebagle de países, en él aparece el país con código " + dataTest.getCodigoPais() + " (" + dataTest.getPais().getNombre_pais() + ")",
 			!pageRegistroAddressData.existsDesplegablePaises() || 
-			pageRegistroAddressData.isOptionPaisSelected(dataTest.pais.getCodigo_pais()), State.Warn);
+			pageRegistroAddressData.isOptionPaisSelected(dataTest.getCodigoPais()), State.Warn);
+		
 		return checks;
 	}
 	

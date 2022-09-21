@@ -92,7 +92,7 @@ public class NavigationBase {
 	}
 	
 	protected List<GarmentCatalog> getArticles(int numArticles) throws Exception {
-		return UtilsTest.getArticlesForTest(dataTest.pais, app, numArticles, driver);
+		return UtilsTest.getArticlesForTest(dataTest.getPais(), app, numArticles, driver);
 	}
 	
 	public boolean isPRO() {

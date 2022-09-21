@@ -21,14 +21,14 @@ public class PagoEps extends PagoSteps {
 		//activateTestABforMethodEPS();
 		driver.navigate().refresh();
 		
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		pageCheckoutWrapperSteps.selectBancoEPS();
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		if (!isPRO()) {
 			pageEpsSimuladorSteps.validateIsPage();
 			pageEpsSimuladorSteps.selectDelay(TypeDelay.ONE_MINUTES);
 		} else {
-			new PageEpsSelBancoSteps().validateIsPage(dataPago.getDataPedido().getImporteTotal(), dataTest.pais.getCodigo_pais());
+			new PageEpsSelBancoSteps().validateIsPage(dataPago.getDataPedido().getImporteTotal());
 		}
 		
 		if (execPay) {

@@ -26,11 +26,11 @@ public class Com001 extends TestBase {
 	private final DataPago dataPago;
 	
 	public Com001() throws Exception {
-		dataTest.userRegistered = true;
-		dataTest.userConnected = "test.performance10@mango.com";
-		dataTest.passwordUser = GetterSecrets.factory()
+		dataTest.setUserRegistered(true);
+		dataTest.setUserConnected("test.performance10@mango.com");
+		dataTest.setPasswordUser(GetterSecrets.factory()
 			.getCredentials(SecretType.SHOP_PERFORMANCE_USER)
-			.getPassword();
+			.getPassword());
 		
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.checkPagos()
@@ -51,13 +51,13 @@ public class Com001 extends TestBase {
 	private void checkout() throws Exception {
 		if (app==AppEcom.outlet) {
 			new BuilderCheckout(dataPago)
-					.pago(dataTest.pais.getPago("VISA"))
+					.pago(dataTest.getPais().getPago("VISA"))
 					.build()
 					.checkout(From.PREHOME);
 		} else {
 			List<GarmentCatalog> articlesShop = getArticlesShop();
 			new BuilderCheckout(dataPago)
-					.pago(dataTest.pais.getPago("VISA"))
+					.pago(dataTest.getPais().getPago("VISA"))
 					.listArticles(articlesShop)
 					.build()
 					.checkout(From.PREHOME);
@@ -92,7 +92,7 @@ public class Com001 extends TestBase {
 			return Optional.empty();
 		}
 		
-		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.pais.getCodigo_alf(), app, driver)
+		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
 			.linea(LineaType.home)
 			.menusCandidates(Arrays.asList(
 					Menu.Albornoces, 
@@ -108,7 +108,7 @@ public class Com001 extends TestBase {
 			return Optional.empty();
 		}
 		
-		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.pais.getCodigo_alf(), app, driver)
+		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
 			.linea(LineaType.she)
 			.menusCandidates(Arrays.asList(
 					Menu.Sujetadores, 

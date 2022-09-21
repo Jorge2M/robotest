@@ -21,7 +21,7 @@ public class PagoMercadopago extends PagoSteps {
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
 		DataPedido dataPedido = this.dataPago.getDataPedido();
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		
 		PageMercpago1rstSteps pageMercpago1rstSteps = new PageMercpago1rstSteps();

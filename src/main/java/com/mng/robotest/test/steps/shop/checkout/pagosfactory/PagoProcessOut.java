@@ -14,11 +14,11 @@ public class PagoProcessOut extends PagoSteps {
 
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		DataPedido dataPedido = dataPago.getDataPedido(); 
 		PageProcessOutInputTrjSteps pageProcessOutSteps = new PageProcessOutInputTrjSteps();
-		pageProcessOutSteps.checkIsPage(dataPedido.getImporteTotal(), dataTest.pais.getCodigo_pais());
+		pageProcessOutSteps.checkIsPage(dataPedido.getImporteTotal());
 
 		if (execPay) {
 			pageProcessOutSteps.inputTrjAndClickPay(dataPedido.getPago());

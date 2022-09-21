@@ -35,9 +35,10 @@ public class PageYandex1rstSteps extends StepBase {
 	@Step (
 		description="Introducimos el teléfono <b>#{telefonoRuso}</b> y seleccionamos el botón <b>\"Continuar\"</b>", 
 		expected="Aparece la página de confirmación del pago")
-	public String inputTlfnAndclickContinuar(String telefonoRuso, String importeTotal, String codPais) {
+	public String inputTlfnAndclickContinuar(String telefonoRuso, String importeTotal) {
 		pageYandex1rst.inputTelefono(telefonoRuso);
 		pageYandex1rst.clickContinue();
+		String codPais = dataTest.getCodigoPais();
 		if (!pageYandex1rst.retryButtonExists()) {
 			new PageYandexPayingByCodeSteps().validateIsPage(importeTotal, codPais);
 			return new PageYandexPayingByCode().getPaymentCode();

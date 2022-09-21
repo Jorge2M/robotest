@@ -104,7 +104,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	public void inputValeDescuento(ValeDiscount valePais) throws Exception { 
 		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
 		pageCheckoutWrapper.inputCodigoPromoAndAccept(valePais.getCodigoVale());
-		dataTest.dataBag.setImporteTotal(pageCheckoutWrapper.getPrecioTotalFromResumen(true));	
+		dataTest.getDataBag().setImporteTotal(pageCheckoutWrapper.getPrecioTotalFromResumen(true));	
 		checkAfterInputDiscountVale(valePais);
 		checkValeDiscountIsCorrect(valePais);
 		
@@ -133,7 +133,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	 	checks.add(
 			"En los artículos a los que aplica, el descuento es de " +  
 			descuento.getPercentageDesc() + "% (" + descuento.getDiscountOver().getDescription() + "):" +
-			dataTest.dataBag.getListArtDescHTML(),
+			dataTest.getDataBag().getListArtDescHTML(),
 			page1DktopCheckout.validateArticlesAndDiscount(descuento), State.Defect);
 	 	return checks;
 	}

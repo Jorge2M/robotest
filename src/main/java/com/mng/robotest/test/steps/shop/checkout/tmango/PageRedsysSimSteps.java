@@ -20,8 +20,8 @@ public class PageRedsysSimSteps extends StepBase {
 	@Step (
 		description="Seleccionamos el botón \"Enviar\"", 
 		expected="Aparece la página de resultado Ok de la pasarela Redsys")
-	public void clickEnviar(String CIP, String importeTotal, String codigoPais) {
+	public void clickEnviar(String CIP, String importeTotal) {
 		pageRedsysSim.clickEnviar();
-		new PageAmexResultSteps(pageRedsysSim.driver).validateIsPageOk(importeTotal, codigoPais);
+		new PageAmexResultSteps().validateIsPageOk(importeTotal);
 	}
 }

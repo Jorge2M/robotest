@@ -24,9 +24,9 @@ public class Loy005 extends TestBase {
 		String passwordTestPerformmance = GetterSecrets.factory()
 				.getCredentials(SecretType.SHOP_PERFORMANCE_USER)
 				.getPassword();
-		dataTest.userConnected = RECEPTOR_USER.getEmail();
-		dataTest.passwordUser = passwordTestPerformmance;
-		dataTest.userRegistered = true;
+		dataTest.setUserConnected(RECEPTOR_USER.getEmail());
+		dataTest.setPasswordUser(passwordTestPerformmance);
+		dataTest.setUserRegistered(true);
 	}
 	
 	@Override
@@ -38,13 +38,13 @@ public class Loy005 extends TestBase {
 		access();
 		int iniPointsReceptor = clickMangoLikesYou();
 		
-		login(EMISOR_USER, dataTest.passwordUser);
+		login(EMISOR_USER, dataTest.getPasswordUser());
 		int iniPointsEmisor = clickMangoLikesYou();
 		int pointsToGive = 2500;
 		iniPointsEmisor = givePoints(pointsToGive, iniPointsEmisor);
 		int finPointsEmisor = clickMangoLikesYou();
 		
-		login(RECEPTOR_USER, dataTest.passwordUser);
+		login(RECEPTOR_USER, dataTest.getPasswordUser());
 		int finPointsReceptor = clickMangoLikesYou();
 		
 		DataRegaloPuntos dataPoints = new DataRegaloPuntos();

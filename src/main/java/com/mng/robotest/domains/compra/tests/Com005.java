@@ -53,7 +53,6 @@ public class Com005 extends TestBase {
 		datosRegistro.put("cfPass", password);
 		datosRegistro.put("", "Barcelona");
 		datosRegistro.put("provinciaPais", "Barcelona");
-		new PageMiCuentaSteps()
-			.goToMisDatosAndValidateData(datosRegistro, dataTest.pais.getCodigo_pais());
+		new PageMiCuentaSteps().goToMisDatosAndValidateData(datosRegistro, dataTest.getCodigoPais());
 	}	
 }

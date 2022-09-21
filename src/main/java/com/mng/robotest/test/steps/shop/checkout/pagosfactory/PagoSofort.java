@@ -17,7 +17,7 @@ public class PagoSofort extends PagoSteps {
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		boolean isPageIconoSofort = new PageSofort1rst().isPageVisibleUntil(3);
 		

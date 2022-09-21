@@ -2,8 +2,6 @@ package com.mng.robotest.domains.registro.steps;
 
 import java.util.Map;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
@@ -23,7 +21,7 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 public class PageRegistroSegundaStepsOutlet extends StepBase {
 	
 	private PageRegistroSegundaOutlet pageRegistroSegunda = new PageRegistroSegundaOutlet();
-	private final Pais pais = dataTest.pais;
+	private final Pais pais = dataTest.getPais();
 	
 	@Validation
 	public ChecksTM validaIsPageRegistroOK(Map<String,String> dataRegistro) {

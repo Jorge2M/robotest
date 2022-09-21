@@ -23,7 +23,7 @@ public abstract class TestBase extends NavigationBase {
 	
 	protected DataPago getDataPago(ConfigCheckout configCheckout) {
 		DataPago dataPago = new DataPago(configCheckout);
-		DataPedido dataPedido = new DataPedido(dataTest.pais, dataTest.dataBag);
+		DataPedido dataPedido = new DataPedido(dataTest.getPais(), dataTest.getDataBag());
 		dataPago.setDataPedido(dataPedido);
 		return dataPago;
 	}	

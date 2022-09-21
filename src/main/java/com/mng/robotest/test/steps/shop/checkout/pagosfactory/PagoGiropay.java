@@ -19,18 +19,18 @@ public class PagoGiropay extends PagoSteps {
 
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		DataPedido dataPedido = dataPago.getDataPedido(); 
 		String nombrePago = dataPedido.getPago().getNombre(channel, app);
-		pageGiropay1rstSteps.validateIsPage(nombrePago, dataPedido.getImporteTotal(), dataTest.pais.getCodigo_pais());
+		pageGiropay1rstSteps.validateIsPage(nombrePago, dataPedido.getImporteTotal());
 		pageGiropay1rstSteps.clickButtonContinuePay();
 
 		if (execPay) {
 			dataPedido.setCodtipopago("F");
 			Pago pago = dataPedido.getPago();
 			String bankIdGirbopay = pago.getBankidgiropay();
-			pageGiropayInputBankSteps.inputBankAndConfirm(bankIdGirbopay, channel); 
+			pageGiropayInputBankSteps.inputBankAndConfirm(bankIdGirbopay); 
 		}
 	}
 }

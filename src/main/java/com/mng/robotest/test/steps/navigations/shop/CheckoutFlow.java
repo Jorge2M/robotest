@@ -64,6 +64,7 @@ public class CheckoutFlow extends StepBase {
 	private final EgyptCity egyptCity;
 	private final List<Pais> finalCountrys;
 	private final List<GarmentCatalog> listArticles;
+	private final Pais pais = dataTest.getPais();
 	
 	//TODO pendiente definir el texto real asociado al vale TEST
 	private final ValeDiscount valeTest = new ValeDiscount("TEST", 10, "EXTRA SOBRE LOS ARTÍCULOS");
@@ -106,7 +107,7 @@ public class CheckoutFlow extends StepBase {
 		}
 		
 		if (from==From.CHECKOUT || from==From.IDENTIFICATION || from==From.BOLSA || from==From.PREHOME) {
-			if (dataTest.pais.getListPagosForTest(app, dataPago.getFTCkout().userIsEmployee).size() > 0) {
+			if (pais.getListPagosForTest(app, dataPago.getFTCkout().userIsEmployee).size() > 0) {
 				checkMetodosPagos(finalCountrys);
 			}
 		}
@@ -115,7 +116,7 @@ public class CheckoutFlow extends StepBase {
 	
 	private List<GarmentCatalog> makeListArticles() {
 		try {
-			return UtilsTest.getArticlesForTest(dataTest.pais, app, 2, driver);
+			return UtilsTest.getArticlesForTest(pais, app, 2, driver);
 		}
 		catch (Exception e) {
 			Log4jTM.getLogger().error("Problem retrieving articles for Checkout", e);
@@ -125,7 +126,7 @@ public class CheckoutFlow extends StepBase {
 	
 	private void testFromPrehomeToBolsa() throws Exception {
 		accessShopAndLoginOrLogoff();
-		if (dataTest.userRegistered) {
+		if (dataTest.isUserRegistered()) {
 			secBolsaSteps.clear();
 			GenericChecks.checkDefault();
 		}
@@ -133,8 +134,8 @@ public class CheckoutFlow extends StepBase {
 	}
 	
 	private void testFromIdentificationToMetodosPago() throws Exception {
-		if (dataTest.userRegistered) {
-			dataPago.getDataPedido().setEmailCheckout(dataTest.userConnected);
+		if (dataTest.isUserRegistered()) {
+			dataPago.getDataPedido().setEmailCheckout(dataTest.getUserConnected());
 		} else {
 			testFromIdentToCheckoutIni();
 		}
@@ -146,18 +147,18 @@ public class CheckoutFlow extends StepBase {
 	}
 	
 	private void testFromIdentToCheckoutIni() throws Exception {
-		boolean validaCharNoLatinos = (dataTest.pais!=null && dataTest.pais.getDireccharnolatinos().check() && app!=AppEcom.votf);
-		String emailCheckout = UtilsMangoTest.getEmailForCheckout(dataTest.pais, dataPago.getFTCkout().emailExists); 
+		boolean validaCharNoLatinos = (pais!=null && dataTest.getPais().getDireccharnolatinos().check() && app!=AppEcom.votf);
+		String emailCheckout = UtilsMangoTest.getEmailForCheckout(pais, dataPago.getFTCkout().emailExists); 
 		dataPago.getDataPedido().setEmailCheckout(emailCheckout);
 
 		Page1IdentCheckoutSteps page1IdentCheckoutSteps = new Page1IdentCheckoutSteps();
-		page1IdentCheckoutSteps.inputEmailAndContinue(emailCheckout, dataPago.getFTCkout().emailExists, dataTest.userRegistered, dataTest.pais);
+		page1IdentCheckoutSteps.inputEmailAndContinue(emailCheckout, dataPago.getFTCkout().emailExists, dataTest.isUserRegistered(), pais);
 		Page2IdentCheckoutSteps page2IdentCheckoutSteps = new Page2IdentCheckoutSteps(egyptCity);
 		boolean emailOk = page2IdentCheckoutSteps.checkEmail(emailCheckout);
 		if (!emailOk) {
 			//Existe un problema según el cual en ocasiones no se propaga el email desde la página de identificación
-			AllPagesSteps.backNagegador(driver);
-			page1IdentCheckoutSteps.inputEmailAndContinue(emailCheckout, dataPago.getFTCkout().emailExists, dataTest.userRegistered, dataTest.pais);
+			new AllPagesSteps().backNagegador();
+			page1IdentCheckoutSteps.inputEmailAndContinue(emailCheckout, dataPago.getFTCkout().emailExists, dataTest.isUserRegistered(), pais);
 		}
 		
 		Map<String, String> datosRegistro;
@@ -169,7 +170,7 @@ public class CheckoutFlow extends StepBase {
 			datosRegistro = page2IdentCheckoutSteps.inputDataPorDefecto(emailCheckout, false);
 		}
 		
-		page2IdentCheckoutSteps.clickContinuar(dataTest.userRegistered);
+		page2IdentCheckoutSteps.clickContinuar(dataTest.isUserRegistered());
 		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.GoogleAnalytics, 
@@ -179,7 +180,7 @@ public class CheckoutFlow extends StepBase {
 	private void test1rstPageCheckout() throws Exception {
 		if ((dataPago.getFTCkout().checkPromotionalCode || dataPago.getFTCkout().userIsEmployee) && 
 			 app!=AppEcom.votf) {
-			if (dataPago.getFTCkout().userIsEmployee && ESPANA.isEquals(dataTest.pais)) {
+			if (dataPago.getFTCkout().userIsEmployee && ESPANA.isEquals(pais)) {
 				testInputCodPromoEmplSpain();
 			} else {
 				if (dataPago.getFTCkout().chequeRegalo) {
@@ -192,7 +193,7 @@ public class CheckoutFlow extends StepBase {
 			}
 		}
 		
-		if (app==AppEcom.votf && dataTest.pais.getCodigo_pais().compareTo("001")==0) {
+		if (app==AppEcom.votf && dataTest.getCodigoPais().compareTo("001")==0) {
 			new Page1DktopCheckoutSteps().stepIntroduceCodigoVendedorVOTF("111111");
 		}
 		
@@ -204,7 +205,7 @@ public class CheckoutFlow extends StepBase {
 	
 	public void testInputCodPromoEmplSpain() throws Exception {
 		AccesoEmpl accesoEmpl = AccesoEmpl.forSpain(); 
-		pageCheckoutWrapperSteps.inputTarjetaEmplEnCodPromo(dataTest.pais, accesoEmpl);
+		pageCheckoutWrapperSteps.inputTarjetaEmplEnCodPromo(pais, accesoEmpl);
 		pageCheckoutWrapperSteps.inputDataEmplEnPromoAndAccept(accesoEmpl);
 	}
 	
@@ -228,7 +229,7 @@ public class CheckoutFlow extends StepBase {
 			}
 				
 			//En el caso de españa, después de validar todos los países probamos el botón "CHANGE DETAILS" sobre los países indicados en la lista
-			if (dataTest.pais.getCodigo_pais().compareTo("001")==0 /*España*/ && paisesDestino!=null && paisesDestino.size()>0) {
+			if (dataTest.getCodigoPais().compareTo("001")==0 /*España*/ && paisesDestino!=null && paisesDestino.size()>0) {
 				Pais paisChange = null;
 				Iterator<Pais> itPaises = paisesDestino.iterator();
 				while (itPaises.hasNext()) {
@@ -258,19 +259,19 @@ public class CheckoutFlow extends StepBase {
 						dataDirEnvio.put(DataDirType.name, "Jorge");
 						dataDirEnvio.put(DataDirType.apellidos, "Muñoz Martínez");
 						dataDirEnvio.put(DataDirType.direccion, "c./ mossen trens nº6 5º1ª");
-						UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
+						UserShop userShop = GestorUsersShop.getUser();
 						dataDirEnvio.put(DataDirType.email, userShop.user);
 						dataDirEnvio.put(DataDirType.telefono, "665015122");
 						pageCheckoutWrapperSteps.getModalDirecEnvioSteps().inputDataAndActualizar(dataDirEnvio);
 						pageCheckoutWrapperSteps.getModalAvisoCambioPaisSteps().clickConfirmar(paisChange);
-						dataTest.pais = paisChange;
+						dataTest.setPais(paisChange);
 						pageCheckoutWrapperSteps.validaMetodosPagoDisponibles(dataPago.getFTCkout().userIsEmployee);
 					}
 				}
 			}
 		}
 		catch (Exception e) {
-			Log4jTM.getLogger().warn("Problem validating Payments methods of country {} ",  dataTest.pais.getNombre_pais(), e);
+			Log4jTM.getLogger().warn("Problem validating Payments methods of country {} ",  dataTest.getPais().getNombre_pais(), e);
 			throw e; 
 		}
 	}
@@ -306,7 +307,7 @@ public class CheckoutFlow extends StepBase {
 						}
 					}
 				} else {
-					new PageResultPagoTpvSteps().validateIsPageOk(dataPedido, dataTest.pais.getCodigo_pais());
+					new PageResultPagoTpvSteps().validateIsPageOk(dataPedido, dataTest.getCodigoPais());
 				}
 				
 				//Almacenamos el pedido en el contexto para la futura validación en Manto
@@ -339,7 +340,7 @@ public class CheckoutFlow extends StepBase {
 	
 	private void actionsWhenSessionLoss() throws Exception {
 		new ModalCambioPais().closeModalIfVisible();
-		new AccesoNavigations().cambioPaisFromHomeIfNeeded(dataTest.pais, dataTest.idioma);
+		new AccesoNavigations().cambioPaisFromHomeIfNeeded(pais, dataTest.getIdioma());
 	}
 	
 	private void validaPasarelasPagoPais() throws Exception {
@@ -362,7 +363,7 @@ public class CheckoutFlow extends StepBase {
 	private List<Pago> getListPagosToTest(boolean isEmpl) {
 		List<Pago> listPagosToTest = new ArrayList<>();
 		ITestContext ctx = getTestCase().getTestRunContext();
-		List<Pago> listPagosPais = dataTest.pais.getListPagosForTest(app, isEmpl);
+		List<Pago> listPagosPais = pais.getListPagosForTest(app, isEmpl);
 		for (Pago pago : listPagosPais) {
 			if (pago.isNeededTestPasarelaDependingFilter(channel, app, ctx)) {
 				listPagosToTest.add(pago);
@@ -390,7 +391,7 @@ public class CheckoutFlow extends StepBase {
 			updateInfoExecutionSuite(dataPedido.getCodpedido());
 		}
 		catch (Exception e) {
-			Log4jTM.getLogger().warn("Problem checking Payment {} from country {}", pago.getNombre(), dataTest.pais.getNombre_pais(), e);
+			Log4jTM.getLogger().warn("Problem checking Payment {} from country {}", pago.getNombre(), pais.getNombre_pais(), e);
 		}
 	}
 	
@@ -448,11 +449,11 @@ public class CheckoutFlow extends StepBase {
 		saveNettraffic=SaveWhen.Always)
 	private void accessShopAndLoginOrLogoff() throws Exception {
 		StepTM StepTestMaker = TestMaker.getCurrentStepInExecution();		
-		if (dataTest.userRegistered) {
+		if (dataTest.isUserRegistered()) {
 			StepTestMaker.replaceInDescription(
-				tagLoginOrLogoff, "e Identificarse con el usuario <b>" + dataTest.userConnected + "</b>");
+				tagLoginOrLogoff, "e Identificarse con el usuario <b>" + dataTest.getUserConnected() + "</b>");
 			new AccesoNavigations().accesoHomeAppWeb(dataPago.getFTCkout().acceptCookies);
-			new PageIdentificacion().login(dataTest.userConnected, dataTest.passwordUser);
+			new PageIdentificacion().login(dataTest.getUserConnected(), dataTest.getPasswordUser());
 		} else {
 			StepTestMaker.replaceInDescription(
 				tagLoginOrLogoff, "(si estamos logados cerramos sesión)");

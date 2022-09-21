@@ -10,8 +10,6 @@ import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
-import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.NumColumnas;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps.TypeActionFav;
@@ -26,13 +24,9 @@ public class Fav001 extends TestBase {
 	
 	public Fav001(Pais pais, IdiomaPais idioma) throws Exception {
 		super();
-		dataTest.pais = pais;
-		dataTest.idioma = idioma;
-		
-		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
-		dataTest.userConnected = userShop.user;
-		dataTest.passwordUser = userShop.password;
-		dataTest.userRegistered=true;
+		dataTest.setPais(pais);
+		dataTest.setIdioma(idioma);
+		dataTest.setUserRegistered(true);
 	}
 	
 	@Override
@@ -71,7 +65,7 @@ public class Fav001 extends TestBase {
 	}	
 
 	private void addFirstFavoriteToBag() throws Exception {
-		ArticuloScreen firstFavorite = dataTest.dataFavoritos.getArticulo(0);
+		ArticuloScreen firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
 		pageFavoritosSteps.addArticuloToBag(firstFavorite);
 		if (channel.isDevice()) {
 			secBolsaSteps.closeInMobil();
@@ -80,7 +74,7 @@ public class Fav001 extends TestBase {
 	}	
 	
 	private void clearFirstFavorite() throws Exception {
-		ArticuloScreen firstFavorite = dataTest.dataFavoritos.getArticulo(0);
+		ArticuloScreen firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
 		pageFavoritosSteps.clear(firstFavorite);
 		pageFavoritosSteps.clearAll();
 	}

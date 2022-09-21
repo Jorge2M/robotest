@@ -12,8 +12,6 @@ import com.mng.robotest.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test.pageobject.shop.checkout.envio.ModalDroppoints;
 import com.mng.robotest.test.pageobject.shop.checkout.envio.SecConfirmDatos;
 
-
-@SuppressWarnings({"static-access"})
 public class SecConfirmDatosSteps extends StepBase {
 
 	private final ModalDroppoints modalDroppoints = new ModalDroppoints();
@@ -26,7 +24,8 @@ public class SecConfirmDatosSteps extends StepBase {
 		return (secConfirmDatos.isVisibleUntil(seconds));
 	}
 	
-	public void setDataIfNeeded(String codigoPais) throws Exception {
+	public void setDataIfNeeded() throws Exception {
+		String codigoPais = dataTest.getCodigoPais();
 		if (PaisShop.DEUTSCHLAND == PaisShop.getPais(codigoPais)) {
 			if (secConfirmDatos.isVisibleInputPostNumberIdDeutschland()) {
 				inputPostNumberId("0038594352");

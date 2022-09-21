@@ -16,11 +16,11 @@ public class PagoPaytrail extends PagoSteps {
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		
 		PagePaytrail1rstSteps pagePaytrail1rstSteps = new PagePaytrail1rstSteps();
-		pagePaytrail1rstSteps.validateIsPage(dataPago.getDataPedido().getImporteTotal(), dataTest.pais.getCodigo_pais());
+		pagePaytrail1rstSteps.validateIsPage(dataPago.getDataPedido().getImporteTotal());
 		pagePaytrail1rstSteps.selectBancoAndContinue();
 		if (execPay) {
 			this.dataPago.getDataPedido().setCodtipopago("F");

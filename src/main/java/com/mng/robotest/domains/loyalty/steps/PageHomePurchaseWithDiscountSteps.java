@@ -14,13 +14,14 @@ public class PageHomePurchaseWithDiscountSteps extends StepBase {
 	@Validation
 	public ChecksTM checkHomePurchaseWithDiscountPageOk() {
 		ChecksTM checks = ChecksTM.getNew();
-		
 		checks.add(
 			"Aparece la página de <b>Descuento Mango likes you</b>",
 			pageHomePurchaseWithDiscount.checkIsPage(), State.Defect);
+		
 		checks.add(
 			"Aparece el boton que permite <b>comprar ahora</b>",
 			pageHomePurchaseWithDiscount.areVisibleButtonPurchaseNow(), State.Defect);
+		
 		return checks;
 	}
 }

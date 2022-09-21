@@ -23,7 +23,7 @@ public class Bor001 extends TestBase {
 	}	
 
 	private void selectTallaArticle() throws Exception {
-		new GaleriaNavigationsSteps().selectTalla(dataTest.pais);
+		new GaleriaNavigationsSteps().selectTalla(dataTest.getPais());
 	}
 	
 	private void navigateToCheckoutAndCheckEmployee() throws Exception {

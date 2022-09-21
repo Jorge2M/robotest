@@ -22,9 +22,9 @@ public class Mic001 extends TestBase {
 	public Mic001(
 			Pais pais, IdiomaPais idioma, 
 			String userConDevolucionPeroSoloEnPRO, String passwordUserConDevolucion) {
-		dataTest.userConnected = userConDevolucionPeroSoloEnPRO;
-		dataTest.passwordUser = passwordUserConDevolucion;
-		dataTest.userRegistered = true;
+		dataTest.setUserConnected(userConDevolucionPeroSoloEnPRO);
+		dataTest.setPasswordUser(passwordUserConDevolucion);
+		dataTest.setUserRegistered(true);
 	}
 	
 	@Override
@@ -60,9 +60,9 @@ public class Mic001 extends TestBase {
 	}
 
 	private void checkMisDatos() {
-		pageMiCuentaSteps.goToMisDatos(dataTest.userConnected);
+		pageMiCuentaSteps.goToMisDatos(dataTest.getUserConnected());
 		String nombreActual = pageMisDatosSteps.modificaNombreYGuarda("Jorge", "George");
-		pageMiCuentaSteps.goToMisDatos(dataTest.userConnected);
+		pageMiCuentaSteps.goToMisDatos(dataTest.getUserConnected());
 		pageMisDatosSteps.validaContenidoNombre(nombreActual);
 	}
 

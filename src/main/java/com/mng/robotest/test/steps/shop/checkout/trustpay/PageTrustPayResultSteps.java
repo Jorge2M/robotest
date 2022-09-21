@@ -13,13 +13,14 @@ public class PageTrustPayResultSteps extends StepBase {
 	private final PageTrustPayResult pageTrustPayResult = new PageTrustPayResult();
 	
 	@Validation
-	public ChecksTM validateIsPage(String importeTotal, String codPais) {
+	public ChecksTM checkIsPage(String importeTotal) {
 		ChecksTM checks = ChecksTM.getNew();
 		String textHeader = "Payment In Progress";
 	 	checks.add(
 			"Figura el encabezamiento \"" + textHeader,
 			pageTrustPayResult.headerContains(textHeader), State.Defect);
 	 	
+	 	String codPais = dataTest.getCodigoPais();
 	 	checks.add(
 			"Figura el importe total de la compra (" + importeTotal + ")",
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);

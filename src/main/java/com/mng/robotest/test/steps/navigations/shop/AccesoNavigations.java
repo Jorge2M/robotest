@@ -21,8 +21,8 @@ import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 
 public class AccesoNavigations extends StepBase {
 
-	private final Pais pais = dataTest.pais;
-	private final IdiomaPais idioma = dataTest.idioma;
+	private final Pais pais = dataTest.getPais();
+	private final IdiomaPais idioma = dataTest.getIdioma();
 	
 	public void goToInitURL() {
 		String canary = "";

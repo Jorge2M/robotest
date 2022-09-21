@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Pago;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.pageobject.shop.checkout.tmango.SecTMango;
 import com.mng.robotest.test.utils.ImporteScreen;
@@ -155,7 +154,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	
 	public boolean isNumMetodosPagoOK(boolean isEmpl) {
 		int numPagosPant = getElements(XPATH_LINEA_PAGO_LAYOUT_LINEA).size();
-		int numPagosPais = dataTest.pais.getListPagosForTest(app, isEmpl).size();
+		int numPagosPais = dataTest.getPais().getListPagosForTest(app, isEmpl).size();
 		return (numPagosPais == numPagosPant);
 	}
 	
@@ -184,14 +183,14 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	/**
 	 * Realizamos las acciones necesarias para forzar el click sobre un método de pago y esperamos a que desaparezcan las capas de loading
 	 */
-	public void forceClickMetodoPagoAndWait(String nombrePago, Pais pais) throws Exception {
+	public void forceClickMetodoPagoAndWait(String nombrePago) throws Exception {
 		goToPageFromCheckoutIfNeeded();
 		despliegaMetodosPago();
 		moveToFirstMetodoPagoLine();
 		
 		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
 		pageCheckoutWrapper.waitUntilNoDivLoading(2);
-		clickMetodoPagoAndWait(pais, nombrePago);
+		clickMetodoPagoAndWait(nombrePago);
 		pageCheckoutWrapper.waitUntilNoDivLoading(10);
 		waitLoadPage(); //For avoid StaleElementReferenceException
 	}
@@ -233,7 +232,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		while (!inStateOk && i<seconds);
 	}	
 	
-	public void clickMetodoPagoAndWait(Pais pais, String nombrePago) throws Exception {
+	public void clickMetodoPagoAndWait(String nombrePago) throws Exception {
 		clickMetodoPago(nombrePago);
 		isMethodInStateUntil(nombrePago, StateMethod.SELECTED, 1);
 	}

@@ -22,8 +22,8 @@ public class Mic002 extends TestBase {
 			Pais pais, IdiomaPais idioma, 
 			String userWithOnlinePurchases, String userWithStorePurchases, 
 			String passUserWithOnlinePurchases, String passUserWithStorePurchases) {
-		dataTest.pais = pais;
-		dataTest.idioma = idioma;
+		dataTest.setPais(pais);
+		dataTest.setIdioma(idioma);
 		this.userWithOnlinePurchases = userWithOnlinePurchases;  
 		this.userWithStorePurchases = userWithStorePurchases; 
 		this.passUserWithOnlinePurchases = passUserWithOnlinePurchases; 
@@ -37,23 +37,23 @@ public class Mic002 extends TestBase {
 	}
 
 	private void compraOnline() throws Exception {
-		dataTest.userConnected = userWithOnlinePurchases;
-		dataTest.passwordUser = passUserWithOnlinePurchases;
-		dataTest.userRegistered = true;
+		dataTest.setUserConnected(userWithOnlinePurchases);
+		dataTest.setPasswordUser(passUserWithOnlinePurchases);
+		dataTest.setUserRegistered(true);
 		new PagePrehomeSteps().seleccionPaisIdiomaAndEnter();
 		new AccesoSteps().identificacionEnMango();
 		
 		new PageMiCuentaSteps().goToMisComprasFromMenu();
 		PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps();
 		pageMisComprasSteps.validateIsCompraOfType(TypeTicket.Online, 3);
-		pageMisComprasSteps.selectCompraOnline(1, dataTest.pais.getCodigo_pais());
+		pageMisComprasSteps.selectCompraOnline(1, dataTest.getCodigoPais());
 		pageMisComprasSteps.clickDetalleArticulo(1);
 		pageMisComprasSteps.gotoMisComprasFromDetalleCompra();
 	}
 	
 	private void compraTienda() throws Exception {
-		dataTest.userConnected = userWithStorePurchases;
-		dataTest.passwordUser = passUserWithStorePurchases;
+		dataTest.setUserConnected(userWithStorePurchases);
+		dataTest.setPasswordUser(passUserWithStorePurchases);
 		new SecMenusUserSteps().logoff();
 		
 		//Existe un problema en por el cual si te vuelves a loginar manteniendo el navegador

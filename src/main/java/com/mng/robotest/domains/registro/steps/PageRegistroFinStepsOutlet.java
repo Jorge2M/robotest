@@ -17,7 +17,7 @@ public class PageRegistroFinStepsOutlet extends StepBase {
 		description="Aparece la página final del proceso de registro (la esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
 	public boolean isPageUntil(int seconds) {
-		return (pageRegistroFin.isPageUntil(seconds));
+		return pageRegistroFin.isPageUntil(seconds);
 	}
 	
 	@Step (
@@ -39,9 +39,9 @@ public class PageRegistroFinStepsOutlet extends StepBase {
 	public ChecksTM validateLogoGoesToPaisIdioma() {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
-			"El logo de Mango redirige al país/idioma origen: " + dataTest.idioma.getAcceso(),
+			"El logo de Mango redirige al país/idioma origen: " + dataTest.getIdioma().getAcceso(),
 			SecCabecera.getNew(channel, app)
-				.validaLogoMangoGoesToIdioma(dataTest.idioma), State.Warn);
+				.validaLogoMangoGoesToIdioma(dataTest.getIdioma()), State.Warn);
 		return checks;		
 	}
 }

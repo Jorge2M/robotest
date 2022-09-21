@@ -17,14 +17,15 @@ public class PageD3DLoginSteps extends StepBase {
 		level=State.Info,		
 		store=StoreType.None)
 	public boolean validateIsD3D(int seconds) {
-		return (pageD3DLogin.isPageUntil(seconds));
+		return pageD3DLogin.isPageUntil(seconds);
 	}
 	
 	@Validation (
 		description="Es visible el importe total de la operación #{importeTotal}",
 		level=State.Warn)
-	public boolean isImporteVisible(String importeTotal, String codPais) {
-		return (ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver));
+	public boolean isImporteVisible(String importeTotal) {
+		String codPais = dataTest.getCodigoPais();
+		return ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver);
 	}
 	
 	@Step (

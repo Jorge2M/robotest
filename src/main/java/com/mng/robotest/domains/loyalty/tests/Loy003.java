@@ -20,17 +20,17 @@ public class Loy003 extends TestBase {
 		super();
 
 		if (isPRO()) {
-			dataTest.userConnected = LoyaltyCommons.USER_PRO_WITH_LOY_POINTS.getEmail();
-			dataTest.passwordUser = GetterSecrets.factory()
+			dataTest.setUserConnected(LoyaltyCommons.USER_PRO_WITH_LOY_POINTS.getEmail());
+			dataTest.setPasswordUser(GetterSecrets.factory()
 					.getCredentials(SecretType.SHOP_STANDARD_USER)
-					.getPassword();
+					.getPassword());
 		} else {
-			dataTest.userConnected = USER.getEmail();
-			dataTest.passwordUser = GetterSecrets.factory()
+			dataTest.setUserConnected(USER.getEmail());
+			dataTest.setPasswordUser(GetterSecrets.factory()
 					.getCredentials(SecretType.SHOP_PERFORMANCE_USER)
-					.getPassword();
+					.getPassword());
 		}
-		dataTest.userRegistered=true;
+		dataTest.setUserRegistered(true);
 	}
 	
 	@Override

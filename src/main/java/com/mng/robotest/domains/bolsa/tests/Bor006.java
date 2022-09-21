@@ -7,10 +7,7 @@ import com.mng.robotest.test.getdata.usuarios.UserShop;
 public class Bor006 extends TestBase {
 
 	public Bor006() {
-		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
-		dataTest.userConnected = userShop.user;
-		dataTest.passwordUser = userShop.password;
-		dataTest.userRegistered = true;
+		dataTest.setUserRegistered(true);
 	}
 	
 	@Override

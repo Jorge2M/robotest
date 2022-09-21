@@ -13,8 +13,6 @@ import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.generic.ChequeRegalo;
-import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
-import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData.Importe;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
@@ -23,15 +21,12 @@ import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 
 public class Com004 extends TestBase {
 
-	private final PageChequeRegaloInputDataSteps pageChequeRegaloInputDataSteps = new PageChequeRegaloInputDataSteps(dataTest.pais, driver);
+	private final PageChequeRegaloInputDataSteps pageChequeRegaloInputDataSteps = new PageChequeRegaloInputDataSteps();
 	
-	private final UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
 	private final DataPago dataPago;
 		
 	public Com004() throws Exception {
-		dataTest.userConnected = userShop.user;
-		dataTest.passwordUser = userShop.password;		
-		dataTest.userRegistered = true;
+		dataTest.setUserRegistered(true);
 		
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.checkMisCompras()
@@ -82,7 +77,7 @@ public class Com004 extends TestBase {
 	
 	private void checkoutChequeRegalo() throws Exception {
 		new BuilderCheckout(dataPago)
-			.pago(dataTest.pais.getPago("VISA"))
+			.pago(dataTest.getPais().getPago("VISA"))
 			.build()
 			.checkout(From.IDENTIFICATION);
 	}	

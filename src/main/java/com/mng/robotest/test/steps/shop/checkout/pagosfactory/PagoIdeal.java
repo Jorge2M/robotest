@@ -15,7 +15,7 @@ public class PagoIdeal extends PagoSteps {
 	@SuppressWarnings("static-access")
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(this.dataPago, dataTest.pais);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		pageCheckoutWrapperSteps.getSecIdealSteps().validateIsSectionOk();
 		
 		if (execPay) {

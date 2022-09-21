@@ -6,7 +6,6 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pago;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Pago.TypePago;
 import com.mng.robotest.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test.pageobject.shop.checkout.pci.SecTarjetaPci;
@@ -17,7 +16,7 @@ public class SecTarjetaPciSteps extends StepBase {
 	private final SecTarjetaPci secTarjetaPci = pageCheckoutSteps.getSecTarjetaPci();
 	
 	@Validation
-	public ChecksTM validateIsSectionOk(Pago pago, Pais pais) {
+	public ChecksTM validateIsSectionOk(Pago pago) {
 		ChecksTM checks = ChecksTM.getNew();
 		if (channel==Channel.desktop && pago.getTypePago()!=TypePago.KrediKarti) {
 			int seconds = 5;

@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.votf;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -44,10 +42,9 @@ public class PageSelectLineaVOTFSteps extends StepBase {
 		pageSelectLineaVOTF.clickBanner(LineaType.she);
 		pageSelectLineaVOTF.clickMenu(LineaType.she, numMenu);
 		
-		WebDriver driver = pageSelectLineaVOTF.driver;
 		SecCabecera.getNew(channel, AppEcom.votf).clickLogoMango();
-		AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dataTest.pais));
-		new SectionBarraSupVOTFSteps(driver).validate(accesoVOTF.getUsuario());
+		AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dataTest.getPais()));
+		new SectionBarraSupVOTFSteps().validate(accesoVOTF.getUsuario());
 		
 		GenericChecks.checkDefault();
 	}

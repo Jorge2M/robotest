@@ -32,8 +32,8 @@ public class Par001 extends TestBase {
 		if (linesToTest==null) {
 			linesToTest = pais.getShoponline().getLineasToTest(app);
 		}
-		this.dataTest.pais = pais;
-		this.dataTest.idioma = idioma;
+		this.dataTest.setPais(pais);
+		this.dataTest.setIdioma(idioma);
 		this.linesToTest = linesToTest;
 		this.flagsNavigation = flagsNavigation;
 	}
@@ -43,7 +43,7 @@ public class Par001 extends TestBase {
 		new PagePrehomeSteps().seleccionPaisIdiomaAndEnter();
 		new PageHomeMarcasSteps().validateIsPageWithCorrectLineas();
 		for (Linea linea : linesToTest) {
-			if (new UtilsMangoTest().validarLinea(dataTest.pais, linea)) {
+			if (new UtilsMangoTest().validarLinea(dataTest.getPais(), linea)) {
 				validaLinea(linea, null);
 				for (Sublinea sublinea : linea.getListSublineas(app)) {
 					validaLinea(linea, sublinea);
@@ -66,7 +66,7 @@ public class Par001 extends TestBase {
 		}
 			
 		if (flagsNavigation.testOrderAndTranslationMenus()) {
-			secMenusSteps.checkOrderAndTranslationMenus(linea, dataTest.idioma.getCodigo());
+			secMenusSteps.checkOrderAndTranslationMenus(linea, dataTest.getIdioma().getCodigo());
 		}
 		
 		//Validamos si hemos de ejecutar los pasos correspondientes al recorrido de los menús
@@ -78,7 +78,7 @@ public class Par001 extends TestBase {
 			}
 		} else {
 			SecMenusWrap secMenus = new SecMenusWrap();
-			if (secMenus.canClickMenuArticles(dataTest.pais, linea, sublinea)) {
+			if (secMenus.canClickMenuArticles(dataTest.getPais(), linea, sublinea)) {
 				clickMenuDependingLine(lineaType, sublineaType);
 				if (flagsNavigation.testMenus()) {
 					boolean bannerIsLincable = new PageGaleriaDesktop().getSecBannerHead().isLinkable();
@@ -137,7 +137,7 @@ public class Par001 extends TestBase {
 	}
 	
 	private int getMaxBannersToTest() {
-		LevelPais levelPais = dataTest.pais.getLevelPais();
+		LevelPais levelPais = dataTest.getPais().getLevelPais();
 		return levelPais.getNumBannersTest(app);
 	}
 	

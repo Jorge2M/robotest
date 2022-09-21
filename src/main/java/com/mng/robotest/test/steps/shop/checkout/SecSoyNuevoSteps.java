@@ -38,14 +38,14 @@ public class SecSoyNuevoSteps extends StepBase {
 	public ChecksTM validaRGPDText() {  
 		ChecksTM checks = ChecksTM.getNew();
 		int seconds = 5;
-		if (dataTest.pais.getRgpd().equals("S")) {
+		if (dataTest.getPais().getRgpd().equals("S")) {
 		 	checks.add(
 				"El link de política de privacidad existe para el pais " + 
-				dataTest.pais.getCodigo_pais() + " lo esperamos hasta " + seconds + " segundos",
+				dataTest.getCodigoPais() + " lo esperamos hasta " + seconds + " segundos",
 				secSoyNuevo.isLinkPoliticaPrivacidad(seconds), State.Defect);
 		} else {
 		 	checks.add(
-				"El lik de política de privacidad no exite para el pais " + dataTest.pais.getCodigo_pais(),
+				"El lik de política de privacidad no exite para el pais " + dataTest.getCodigoPais(),
 				!secSoyNuevo.isLinkPoliticaPrivacidad(0), State.Defect);			
 		}
 		

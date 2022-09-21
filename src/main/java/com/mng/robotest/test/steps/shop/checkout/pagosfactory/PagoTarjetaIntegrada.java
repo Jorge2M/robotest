@@ -15,7 +15,7 @@ public class PagoTarjetaIntegrada extends PagoSteps {
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
 		DataPedido dataPedido = this.dataPago.getDataPedido();
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		
 		if (execPay) {
 			dataPedido.setCodtipopago("U");
@@ -30,7 +30,7 @@ public class PagoTarjetaIntegrada extends PagoSteps {
 			case VISAD3D:
 				PageD3DLoginSteps pageD3DLoginSteps = new PageD3DLoginSteps();
 				boolean isD3D = pageD3DLoginSteps.validateIsD3D(2);
-				pageD3DLoginSteps.isImporteVisible(dataPedido.getImporteTotal(), dataTest.pais.getCodigo_pais());
+				pageD3DLoginSteps.isImporteVisible(dataPedido.getImporteTotal());
 				dataPedido.setCodtipopago("Y");
 				if (isD3D) {
 					pageD3DLoginSteps.loginAndClickSubmit(dataPedido.getPago().getUsrd3d(), dataPedido.getPago().getPassd3d());
@@ -40,7 +40,7 @@ public class PagoTarjetaIntegrada extends PagoSteps {
 			case VISAD3D_JP:
 				PageD3DJPTestSelectOptionSteps pageD3DJPTestSelectOptionSteps = new PageD3DJPTestSelectOptionSteps();
 				boolean isD3DJP = pageD3DJPTestSelectOptionSteps.validateIsD3D(1);
-				pageD3DJPTestSelectOptionSteps.isImporteVisible(dataPedido.getImporteTotal(), dataTest.pais.getCodigo_pais());
+				pageD3DJPTestSelectOptionSteps.isImporteVisible(dataPedido.getImporteTotal(), dataTest.getCodigoPais());
 				dataPedido.setCodtipopago("Y");
 				if (isD3DJP) {
 					pageD3DJPTestSelectOptionSteps.clickSubmitButton();

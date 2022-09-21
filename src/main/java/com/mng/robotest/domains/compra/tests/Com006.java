@@ -19,8 +19,8 @@ public class Com006 extends TestBase {
 	private final DataPago dataPago;
 	
 	public Com006() throws Exception {
-		dataTest.pais=ITALIA;
-		dataTest.idioma=ITALIANO;
+		dataTest.setPais(ITALIA);
+		dataTest.setIdioma(ITALIANO);
 		
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.checkMisCompras()

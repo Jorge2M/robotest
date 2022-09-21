@@ -17,11 +17,11 @@ public class PagoMultibanco extends PagoSteps {
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		DataPedido dataPedido = this.dataPago.getDataPedido(); 
 		String nombrePago = dataPedido.getPago().getNombre(channel, app);
-		pageMultibanco1rstSteps.validateIsPage(nombrePago, dataPedido.getImporteTotal(), dataPedido.getEmailCheckout(), dataTest.pais.getCodigo_pais());
+		pageMultibanco1rstSteps.validateIsPage(nombrePago, dataPedido.getImporteTotal(), dataPedido.getEmailCheckout());
 		pageMultibanco1rstSteps.continueToNextPage();
 		
 		if (execPay) {

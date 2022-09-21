@@ -18,11 +18,10 @@ public class PagoPostfinance extends PagoSteps {
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
 		DataPedido dataPedido = dataPago.getDataPedido();
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		String nombrePago = dataPedido.getPago().getNombre(channel, app);
 		String importeTotal = dataPedido.getImporteTotal();
-		String codPais = this.dataTest.pais.getCodigo_pais();
 		if (isPageSelectChannel(5)) {
 			managePageSelectChannel();
 		}
@@ -31,7 +30,7 @@ public class PagoPostfinance extends PagoSteps {
 		if (pagePostfCodSegSteps.getPageObj().isPasarelaTest()) {
 			pagePostfCodSegSteps.validateIsPageTest(nombrePago, importeTotal);
 		} else {
-			pagePostfCodSegSteps.validateIsPagePro(importeTotal, codPais);
+			pagePostfCodSegSteps.validateIsPagePro(importeTotal);
 		}
 		
 		if (execPay) {

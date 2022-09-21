@@ -13,10 +13,7 @@ public class Gpo005 extends TestBase {
 	private final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
 	
 	public Gpo005() {
-		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
-		dataTest.userConnected = userShop.user;
-		dataTest.passwordUser = userShop.password;
-		dataTest.userRegistered = true;
+		dataTest.setUserRegistered(true);
 	}
 	
 	@Override

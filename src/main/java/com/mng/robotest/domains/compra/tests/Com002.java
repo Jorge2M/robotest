@@ -25,7 +25,7 @@ public class Com002 extends TestBase {
 				.emaiExists().build();
 		
 		dataPago = getDataPago(configCheckout);
-		dataTest.genericChecksDisabled = Arrays.asList(GenericCheck.Analitica);
+		dataTest.setGenericChecksDisabled(Arrays.asList(GenericCheck.Analitica));
 	}
 	
 	@Override
@@ -51,7 +51,7 @@ public class Com002 extends TestBase {
 	}
 	
 	private Pago getPagoRealCard() {
-		Pago pago = dataTest.pais.getPago("VISA");
+		Pago pago = dataTest.getPais().getPago("VISA");
 //		pago.setNumtarj("4940197085392651");
 //		pago.setMescad("09");
 //		pago.setAnycad("2022");

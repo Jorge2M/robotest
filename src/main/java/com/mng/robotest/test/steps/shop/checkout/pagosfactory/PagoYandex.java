@@ -16,20 +16,20 @@ public class PagoYandex extends PagoSteps {
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		DataPedido dataPedido = this.dataPago.getDataPedido();
 		
 		PageYandex1rstSteps pageYandex1rstSteps = new PageYandex1rstSteps();
-		pageYandex1rstSteps.validateIsPage(dataPedido.getEmailCheckout(), dataPedido.getImporteTotal(), dataTest.pais.getCodigo_pais());
+		pageYandex1rstSteps.validateIsPage(dataPedido.getEmailCheckout(), dataPedido.getImporteTotal(), dataTest.getCodigoPais());
 		if (execPay) {
 			this.dataPago.getDataPedido().setCodtipopago("?");
 			String telefono = "+7 900 000 00 00";
-			String paymentCode = pageYandex1rstSteps.inputTlfnAndclickContinuar(
-					telefono, dataPedido.getImporteTotal(), dataTest.pais.getCodigo_pais());			String windowHandlePageYandex1rst = driver.getWindowHandle();
+			String paymentCode = pageYandex1rstSteps.inputTlfnAndclickContinuar(telefono, dataPedido.getImporteTotal());			
+			String windowHandlePageYandex1rst = driver.getWindowHandle();
 
 			if (pageYandex1rstSteps.hasFailed()) {
-				paymentCode = pageYandex1rstSteps.retry(dataPedido.getImporteTotal(), dataTest.pais.getCodigo_pais());
+				paymentCode = pageYandex1rstSteps.retry(dataPedido.getImporteTotal(), dataTest.getCodigoPais());
 			}
 
 			String tabNameYandexMoney = "yandexMoney";

@@ -1,6 +1,5 @@
 package com.mng.robotest.test.steps.shop.checkout.paysecureqiwi;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -15,12 +14,13 @@ public class PagePaysecureQiwi1rstSteps extends StepBase {
 	private final PagePaysecureQiwi1rst pagePaysecureQiwi = new PagePaysecureQiwi1rst();
 	
 	@Validation
-	public ChecksTM validateIsPage(String importeTotal, String codPais, Channel channel) {
+	public ChecksTM validateIsPage(String importeTotal) {
 		ChecksTM checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la página inicial de la pasarela PaySecure",
 			pagePaysecureQiwi.isPage(), State.Warn);
 	 	
+	 	String codPais = dataTest.getCodigoPais();
 	 	checks.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
@@ -35,7 +35,7 @@ public class PagePaysecureQiwi1rstSteps extends StepBase {
 	@Step (
 		description="Seleccionar la opción de Qiwi Kошелек", 
 		expected="Aparece la página de introducción del número de teléfono")
-	public void clickIconPasarelaQiwi(Channel channel) throws Exception {
+	public void clickIconPasarelaQiwi() throws Exception {
 		pagePaysecureQiwi.clickIcon(PaysecureGateway.Qiwi);
 		new PageQiwiInputTlfnSteps().validateIsPage();
 	}

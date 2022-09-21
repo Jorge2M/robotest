@@ -23,7 +23,6 @@ import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.IdiomaPais;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.factoryes.NodoStatus;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterCollection;
@@ -71,7 +70,7 @@ public class PageGaleriaSteps extends StepBase {
 	@Step (
 		description="Seleccionamos el artículo #{locationArt} en una pestaña aparte", 
 		expected="Aparece la ficha del artículo seleccionado en una pestaña aparte")
-	public void selectArticuloEnPestanyaAndBack(LocationArticle locationArt, Pais pais) throws Exception {
+	public void selectArticuloEnPestanyaAndBack(LocationArticle locationArt) throws Exception {
 		String galeryWindowHandle = driver.getWindowHandle();
 		DataFichaArt datosArticulo = new DataFichaArt();
 
@@ -159,7 +158,7 @@ public class PageGaleriaSteps extends StepBase {
 		ArticuloScreen articulo = pageGaleria.selectTallaAvailableArticle(posArticulo, posTalla);
 		boolean tallaVisible = (articulo!=null);
 		if (tallaVisible) {
-			dataTest.dataBag.addArticulo(articulo);
+			dataTest.getDataBag().addArticulo(articulo);
 			SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 			secBolsaSteps.validaAltaArtBolsa();
 		}
@@ -570,11 +569,11 @@ public class PageGaleriaSteps extends StepBase {
 		switch (actionFav) {
 		case MARCAR:
 			estadoFinal = "Marcados";
-			dataTest.dataFavoritos.addToLista(listAddFav);
+			dataTest.getDataFavoritos().addToLista(listAddFav);
 			break;
 		case DESMARCAR:
 			estadoFinal = "Desmarcados";
-			dataTest.dataFavoritos.removeFromLista(listAddFav);
+			dataTest.getDataFavoritos().removeFromLista(listAddFav);
 			break;
 		default:
 			break;

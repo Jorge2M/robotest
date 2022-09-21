@@ -6,12 +6,10 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pago;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test.pageobject.shop.checkout.assist.PageAssist1rst;
 import com.mng.robotest.test.pageobject.shop.checkout.assist.PageAssistLast;
 import com.mng.robotest.test.utils.ImporteScreen;
-
 
 public class PageAssist1rstSteps extends StepBase {
 	
@@ -19,7 +17,7 @@ public class PageAssist1rstSteps extends StepBase {
 	private final PageAssistLast pageAssistLast = new PageAssistLast();
 	
 	@Validation
-	public ChecksTM validateIsPage(String importeTotal, Pais pais) {
+	public ChecksTM validateIsPage(String importeTotal) {
 		ChecksTM checks = ChecksTM.getNew();
 	 	checks.add(
 			"Está presente el logo de Assist",
@@ -27,7 +25,7 @@ public class PageAssist1rstSteps extends StepBase {
 	 	
 	 	checks.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
-			ImporteScreen.isPresentImporteInScreen(importeTotal, pais.getCodigo_pais(), pageAssist1rst.driver), State.Warn);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, dataTest.getCodigoPais(), pageAssist1rst.driver), State.Warn);
 	 	
 	 	checks.add(
 			"No se trata de la página de precompra (no aparece los logos de formas de pago)",

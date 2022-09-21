@@ -14,7 +14,7 @@ public class PagePaytrail1rstSteps extends StepBase {
 	private final PagePaytrail1rst pagePaytrail1rst = new PagePaytrail1rst();
 	
 	@Validation
-	public ChecksTM validateIsPage(String importeTotal, String codPais) {
+	public ChecksTM validateIsPage(String importeTotal) {
 		ChecksTM checks = ChecksTM.getNew();
 		String nombrePagoCabecera = "Finnish E-Banking";
 		int seconds = 2;
@@ -26,6 +26,7 @@ public class PagePaytrail1rstSteps extends StepBase {
 		if (channel.isDevice()) {
 			stateVal = State.Info;
 		}
+		String codPais = dataTest.getCodigoPais();
 		checks.add(
 			"Aparece el importe de la compra: \" + importeTotal",
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal);  

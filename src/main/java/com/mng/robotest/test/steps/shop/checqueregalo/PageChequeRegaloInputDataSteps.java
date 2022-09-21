@@ -1,29 +1,20 @@
 package com.mng.robotest.test.steps.shop.checqueregalo;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.generic.ChequeRegalo;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputDataNew;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData.*;
 import com.mng.robotest.test.steps.shop.checkout.CheckoutSteps;
 
-
 public class PageChequeRegaloInputDataSteps extends PageBase {
 
-	private final PageChequeRegaloInputData pageChequeRegaloInputData;
-	
-	public PageChequeRegaloInputDataSteps(Pais pais, WebDriver driver) {
-		super(driver);
-		this.pageChequeRegaloInputData = PageChequeRegaloInputData.make(pais);
-	}
+	private final PageChequeRegaloInputData pageChequeRegaloInputData = PageChequeRegaloInputData.make(dataTest.getPais());
 	
 	public void paginaConsultarSaldo(String numTarjeta) throws Exception {
 		clickConsultaSaldo();

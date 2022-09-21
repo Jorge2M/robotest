@@ -28,7 +28,7 @@ public class Fic002 extends TestBase {
 	public Fic002() throws Exception {
 		super();
 		
-		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.pais.getCodigo_alf(), app, driver)
+		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
 				.build();
 		
 		Optional<GarmentCatalog> articleWithTotalLook = getterProducts.getOneFiltered(FilterType.TotalLook);
@@ -75,7 +75,7 @@ public class Fic002 extends TestBase {
 		}
 		
 		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectDetalleDelProducto(LineaType.she);
-		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectLinkCompartir(dataTest.pais.getCodigo_pais());
+		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectLinkCompartir(dataTest.getCodigoPais());
 	}
 
 	private void pageFichaOldTest() throws Exception {

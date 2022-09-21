@@ -33,7 +33,7 @@ public class Bus001 extends TestBase {
 	
 	private GarmentCatalog getProduct() throws Exception {
 		GetterProducts getterProducts = new GetterProducts
-				.Builder(dataTest.pais.getCodigo_alf(), app, driver).build();
+				.Builder(dataTest.getPais().getCodigo_alf(), app, driver).build();
 		
 		return getterProducts.getAll().get(0);
 	}

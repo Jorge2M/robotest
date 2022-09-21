@@ -19,18 +19,18 @@ public class Egy001 extends TestBase {
 	private final EgyptCity egyptCity;
 	
 	public Egy001(EgyptCity egyptCity) {
-		dataTest.pais = PaisGetter.get(PaisShop.EGYPT);
-		dataTest.idioma = dataTest.pais.getListIdiomas().get(0);
+		dataTest.setPais(PaisGetter.get(PaisShop.EGYPT));
+		dataTest.setIdioma(dataTest.getPais().getListIdiomas().get(0));
 		this.egyptCity = egyptCity;
 	}
 	
 	public void execute() throws Exception {
 		access();
-		GarmentCatalog article = UtilsTest.getArticleForTest(dataTest.pais, app, driver);
+		GarmentCatalog article = UtilsTest.getArticleForTest(dataTest.getPais(), app, driver);
 		new SecBolsaSteps().altaListaArticulosEnBolsa(Arrays.asList(article));
 		DataPago dataPago = makeDataPayment();
 		dataPago = new BuilderCheckout(dataPago)
-			.pago(dataTest.pais.getPago("VISA"))
+			.pago(dataTest.getPais().getPago("VISA"))
 			.egyptCity(egyptCity)
 			.build()
 			.checkout(From.BOLSA);

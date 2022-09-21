@@ -46,7 +46,7 @@ public class SecMenusWrapperSteps extends StepBase {
 	private final SecMenusWrap secMenusWrap = new SecMenusWrap();
 	private final SecMenusDesktopSteps secMenusDesktopSteps = new SecMenusDesktopSteps();
 	
-	private final Pais pais = dataTest.pais;
+	private final Pais pais = dataTest.getPais();
 	
 	public SecMenusUserSteps getMenusUser() {
 		return this.secMenusUserSteps;

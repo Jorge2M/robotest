@@ -32,7 +32,7 @@ public class Reg003 extends TestBase {
 	private final PageRegistroSegundaStepsOutlet pageRegistroSegundaSteps = new PageRegistroSegundaStepsOutlet();	
 	private final PageRegistroNinosStepsOutlet pageRegistroNinosSteps = new PageRegistroNinosStepsOutlet();
 	private final PageRegistroDirecStepsOutlet pageRegistroDirecSteps = new PageRegistroDirecStepsOutlet();
-	private final PageRegistroFinStepsOutlet pageRegistroFinSteps; 
+	private final PageRegistroFinStepsOutlet pageRegistroFinSteps = new PageRegistroFinStepsOutlet();
 
 	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
 	private final PageMiCuentaSteps pageMiCuentaSteps = new PageMiCuentaSteps();
@@ -43,12 +43,10 @@ public class Reg003 extends TestBase {
 	
 	public Reg003(Pais pais, IdiomaPais idioma, boolean accessFromFactory) throws Exception {
 		super();
-		dataTest.pais = pais;
-		dataTest.idioma = idioma;
-		dataTest.userRegistered = false;
-		
-		pageRegistroFinSteps = new PageRegistroFinStepsOutlet();
-		
+		dataTest.setPais(pais);
+		dataTest.setIdioma(idioma);
+		dataTest.setUserRegistered(false);
+
 		if (accessFromFactory) {
 			version = VersionRegistroSuite.valueOf(inputParamsSuite.getVersion());
 		} else {
@@ -86,13 +84,12 @@ public class Reg003 extends TestBase {
 
 	private void firstPageRegister() throws Exception {
 		String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
-		dataRegister = 
-			pageRegistroIniSteps.sendDataAccordingCountryToInputs(emailNonExistent, true);
+		dataRegister = pageRegistroIniSteps.sendDataAccordingCountryToInputs(emailNonExistent, true);
 		pageRegistroIniSteps.clickRegistrateButton(dataRegister);
 	}
 	
 	private void secondPageRegister() throws Exception {
-		boolean paisConNinos = dataTest.pais.getShoponline().stateLinea(LineaType.nina, app)==ThreeState.TRUE;
+		boolean paisConNinos = dataTest.getPais().getShoponline().stateLinea(LineaType.nina, app)==ThreeState.TRUE;
 		pageRegistroSegundaSteps.setDataAndLineasRandom("23/4/1974", paisConNinos, 2, dataRegister);
 		if (paisConNinos) {
 			ListDataNinos listaNinos = new ListDataNinos();
@@ -118,7 +115,7 @@ public class Reg003 extends TestBase {
 		String password = dataRegister.get("cfPass");
 		userMenusSteps.logoffLogin(emailUsr, password);
 
-		pageMiCuentaSteps.goToMisDatosAndValidateData(dataRegister, dataTest.pais.getCodigo_pais());
+		pageMiCuentaSteps.goToMisDatosAndValidateData(dataRegister, dataTest.getCodigoPais());
 		pageMiCuentaSteps.goToSuscripcionesAndValidateData(dataRegister);
 	}	
 
