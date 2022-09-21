@@ -9,6 +9,7 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.compra.steps.envio.DataDeliveryPoint;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataPedido;
@@ -18,7 +19,6 @@ import com.mng.robotest.test.pageobject.manto.pedido.PageDetallePedido;
 import com.mng.robotest.test.pageobject.manto.pedido.PagePedidos;
 import com.mng.robotest.test.pageobject.manto.pedido.PagePedidos.IdColumn;
 import com.mng.robotest.test.pageobject.manto.pedido.PagePedidos.TypeDetalle;
-import com.mng.robotest.test.steps.shop.checkout.envio.DataDeliveryPoint;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 

@@ -5,14 +5,15 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ClickElement;
+import com.mng.robotest.domains.compra.payments.FactoryPagos;
+import com.mng.robotest.domains.compra.payments.PagoSteps;
 import com.mng.robotest.domains.transversal.NavigationBase;
 import com.mng.robotest.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.steps.navigations.manto.PedidoNavigations;
-import com.mng.robotest.test.steps.shop.checkout.pagosfactory.FactoryPagos;
-import com.mng.robotest.test.steps.shop.checkout.pagosfactory.PagoSteps;
+
 import org.openqa.selenium.By;
 
 public class CompraSteps extends NavigationBase {

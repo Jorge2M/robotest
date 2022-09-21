@@ -17,12 +17,12 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import com.mng.robotest.domains.compra.pageobject.Page2IdentCheckout;
 import com.mng.robotest.domains.registro.beans.DataRegistro;
 import com.mng.robotest.domains.registro.beans.InputDataXPath;
 import com.mng.robotest.domains.registro.beans.ListDataRegistro;
 import com.mng.robotest.domains.registro.beans.ListDataRegistro.DataRegType;
 import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.test.pageobject.shop.checkout.Page2IdentCheckout;
 
 public class PageRegistroIniOutlet extends PageBase {
 	

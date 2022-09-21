@@ -8,9 +8,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.Select;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.mng.robotest.domains.compra.pageobject.DataDireccion;
+import com.mng.robotest.domains.compra.pageobject.DataDireccion.DataDirType;
 import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.test.pageobject.shop.checkout.DataDireccion;
-import com.mng.robotest.test.pageobject.shop.checkout.DataDireccion.DataDirType;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
