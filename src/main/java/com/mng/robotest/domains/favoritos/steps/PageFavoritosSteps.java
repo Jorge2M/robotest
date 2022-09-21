@@ -10,7 +10,6 @@ import com.mng.robotest.domains.favoritos.pageobjects.PageFavoritos;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.data.Talla;
-import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 
 public class PageFavoritosSteps extends StepBase {
@@ -31,14 +30,14 @@ public class PageFavoritosSteps extends StepBase {
 			pageFavoritos.isSectionArticlesVisibleUntil(secondsCapa), State.Defect);
 		
 		checks.add(
-			"Aparecen los artículos (los esperamos hasta " + secondsArticles + " segundos): <br>" + dataTest.dataFavoritos.getListArtDescHTML(),
+			"Aparecen los artículos (los esperamos hasta " + secondsArticles + " segundos): <br>" + dataTest.getDataFavoritos().getListArtDescHTML(),
 			pageFavoritos.areVisibleArticlesUntil(secondsArticles), State.Defect);
 		
 		return checks;
 	}
 	
 	public void clear(ArticuloScreen articulo) throws Exception {
-		dataTest.dataFavoritos.removeArticulo(articulo);
+		dataTest.getDataFavoritos().removeArticulo(articulo);
 		clear(articulo.getReferencia(), articulo.getCodigoColor());
 	}
 	
@@ -106,7 +105,7 @@ public class PageFavoritosSteps extends StepBase {
 		description="Eliminamos de Favoritos los posibles artículos existentes",
 		expected="No queda ningún artículo en Favoritos")
 	public void clearAll() throws Exception {
-		dataTest.dataFavoritos.clear();
+		dataTest.getDataFavoritos().clear();
 		pageFavoritos.clearAllArticulos();
 		checkFavoritosWithoutArticles();
 	}
@@ -131,7 +130,7 @@ public class PageFavoritosSteps extends StepBase {
 		String codigoColor = artToAddBolsa.getCodigoColor();
 		Talla tallaSelected = pageFavoritos.addArticleToBag(refProductoToAdd, codigoColor, 1);
 		artToAddBolsa.setTalla(tallaSelected);
-		dataTest.dataBag.addArticulo(artToAddBolsa);
+		dataTest.getDataBag().addArticulo(artToAddBolsa);
 		
 		SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 		secBolsaSteps.validaAltaArtBolsa();

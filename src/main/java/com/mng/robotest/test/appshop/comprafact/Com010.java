@@ -11,12 +11,9 @@ import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
-import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
-import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.utils.UtilsTest;
@@ -32,9 +29,9 @@ public class Com010 extends TestBase {
 	public Com010(
 			Pais pais, IdiomaPais idioma, Pago pago, boolean usrRegistrado, boolean testVale, 
 			boolean manyArticles, boolean empleado, boolean checkAnulaPedido) {
-		dataTest.pais = pais;
-		dataTest.idioma = idioma;
-		dataTest.userRegistered = usrRegistrado;
+		dataTest.setPais(pais);
+		dataTest.setIdioma(idioma);
+		dataTest.setUserRegistered(usrRegistrado);
 		this.pago = pago;
 		this.testVale = testVale(testVale);
 		this.manyArticles = manyArticles;
@@ -44,14 +41,8 @@ public class Com010 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		if (dataTest.userRegistered) {
-			UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
-			dataTest.userConnected = userShop.user;
-			dataTest.passwordUser = userShop.password;
-		}
-		
-		access(dataTest.userRegistered);
-		List<GarmentCatalog> listArticles = UtilsTest.getArticlesForTest(dataTest.pais, app, 3, driver);
+		access(dataTest.isUserRegistered());
+		List<GarmentCatalog> listArticles = UtilsTest.getArticlesForTest(dataTest.getPais(), app, 3, driver);
 		
 		if (!manyArticles) {
 			listArticles = Arrays.asList(listArticles.get(0));

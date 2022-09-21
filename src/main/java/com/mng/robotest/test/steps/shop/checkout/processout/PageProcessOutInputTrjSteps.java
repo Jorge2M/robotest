@@ -14,12 +14,13 @@ public class PageProcessOutInputTrjSteps extends StepBase {
 	private final PageProcessOutInputTrj pageObject = new PageProcessOutInputTrj();
 	
 	@Validation
-	public ChecksTM checkIsPage(String importeTotal, String codPais) {
+	public ChecksTM checkIsPage(String importeTotal) {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 			"Estamos en la página con el formulario para la introducción de los datos de la tarjeta",
 			pageObject.checkIsPage(), State.Defect);
 		
+		String codPais = dataTest.getCodigoPais();
 		checks.add(
 			"Aparece el importe de la compra: " + importeTotal,
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);

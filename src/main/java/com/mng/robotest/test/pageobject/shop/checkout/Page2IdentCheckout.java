@@ -27,7 +27,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class Page2IdentCheckout extends PageBase {
 
-	private final Pais pais = dataTest.pais;
+	private final Pais pais = dataTest.getPais();
 	private final EgyptCity egyptCity;
 	
 	private static final String VALUE = "value";

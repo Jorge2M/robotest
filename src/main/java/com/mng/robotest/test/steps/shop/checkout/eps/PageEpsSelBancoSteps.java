@@ -12,8 +12,9 @@ public class PageEpsSelBancoSteps extends StepBase {
 	PageEpsSelBanco pageEpsSelBanco = new PageEpsSelBanco();
 	
 	@Validation
-	public ChecksTM validateIsPage(String importeTotal, String codPais) {
+	public ChecksTM validateIsPage(String importeTotal) {
 		ChecksTM checks = ChecksTM.getNew();
+		String codPais = dataTest.getCodigoPais();
 		checks.add(
 			"Figura el icono correspondiente al pago <b>EPS</b>",
 			pageEpsSelBanco.isPresentIconoEps(), State.Warn);

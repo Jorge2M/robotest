@@ -64,8 +64,8 @@ public class GenericChecks extends PageBase {
 		if (genericCheck==GenericCheck.TextsTraduced) {
 			return false;
 		}
-		if (dataTest.genericChecksDisabled!=null && 
-			dataTest.genericChecksDisabled.contains(genericCheck)) {
+		if (dataTest.getGenericChecksDisabled()!=null && 
+			dataTest.getGenericChecksDisabled().contains(genericCheck)) {
 			return false;
 		}
 		return true;

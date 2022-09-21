@@ -81,7 +81,7 @@ public class SecMetodoEnvioDesktopSteps extends StepBase {
 		}
 	}
 	
-	public boolean fluxSelectEnvio(DataPago dataPago, Pais pais) throws Exception {
+	public boolean fluxSelectEnvio(DataPago dataPago) throws Exception {
 		boolean pagoPintado = false;
 		Pago pago = dataPago.getDataPedido().getPago();
 		if (pago.getTipoEnvio(app)!=null) {
@@ -90,7 +90,7 @@ public class SecMetodoEnvioDesktopSteps extends StepBase {
 			pagoPintado = true;
 			TipoTransporte tipoEnvio = pago.getTipoEnvioType(app);
 			if (tipoEnvio.isDroppoint()) {
-				modalDroppointsSteps.fluxSelectDroppoint(dataPago, pais);
+				modalDroppointsSteps.fluxSelectDroppoint(dataPago);
 			}
 			if (tipoEnvio.isFranjaHoraria()) {
 				selectFranjaHorariaUrgente();

@@ -5,7 +5,6 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pago;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.pageobject.shop.checkout.envio.ModalDroppoints;
 
@@ -42,15 +41,15 @@ public class ModalDroppointsSteps extends StepBase {
 		return (!modalDroppoints.isVisible());
 	}
 	
-	public void fluxSelectDroppoint(DataPago dataPago, Pais pais) throws Exception {
+	public void fluxSelectDroppoint(DataPago dataPago) throws Exception {
 		Pago pago = dataPago.getDataPedido().getPago();
-		DataSearchDeliveryPoint dataSearchDp = DataSearchDeliveryPoint.getInstance(pago, app, pais);
+		DataSearchDeliveryPoint dataSearchDp = DataSearchDeliveryPoint.getInstance(pago, app, dataTest.getPais());
 		secSelectDPointSteps.searchPoblacion(dataSearchDp);
 		DataDeliveryPoint dataDp = secSelectDPointSteps.clickDeliveryPointAndGetData(2);
 		dataPago.getDataPedido().setTypeEnvio(pago.getTipoEnvioType(app));
 		dataPago.getDataPedido().setDataDeliveryPoint(dataDp);
 		secSelectDPointSteps.clickSelectButton();
-		secConfirmDatosSteps.setDataIfNeeded(pais.getCodigo_pais());
+		secConfirmDatosSteps.setDataIfNeeded();
 		secConfirmDatosSteps.clickConfirmarDatosButton(dataPago.getDataPedido());				
 	}
 

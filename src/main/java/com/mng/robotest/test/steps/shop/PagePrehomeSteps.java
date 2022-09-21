@@ -22,8 +22,8 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 
 public class PagePrehomeSteps extends StepBase {
 	
-	private final Pais pais = dataTest.pais;
-	private final IdiomaPais idioma = dataTest.idioma;
+	private final Pais pais = dataTest.getPais();
+	private final IdiomaPais idioma = dataTest.getIdioma();
 	
 	private final PagePrehome pagePrehome = new PagePrehome();
 	

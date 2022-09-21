@@ -29,8 +29,8 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 
 	enum ButtonEnter { ENTER, CONTINUAR };
 	
-	private final Pais pais = dataTest.pais;
-	private final IdiomaPais idioma = dataTest.idioma;
+	private final Pais pais = dataTest.getPais();
+	private final IdiomaPais idioma = dataTest.getIdioma();
 	
 	private static final String XPATH_SELECT_PAISES = "//select[@id='countrySelect']";
 	private static final String XPATH_DIV_PAIS_SELECCIONADO = "//div[@id='countrySelect_chosen']";

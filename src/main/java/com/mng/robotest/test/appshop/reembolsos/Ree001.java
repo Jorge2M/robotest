@@ -18,24 +18,24 @@ public class Ree001 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		dataTest.pais = EMIRATOS;
-		dataTest.idioma = EMIRATOS_ARABE;
+		dataTest.setPais(EMIRATOS);
+		dataTest.setIdioma(EMIRATOS_ARABE);
 		
 		//TODO hasta que se solvente el https://jira.mangodev.net/jira/browse/GUIL-2311
 		if (isPRO()) {
 			return;		
 		}
 
-		boolean paisConSaldoCta = dataTest.pais.existsPagoStoreCredit();
-		dataTest.userRegistered = true;
-		dataTest.userConnected = "mng_test_SA_pruebaSaldo@mango.com";
-		dataTest.passwordUser = GetterSecrets.factory()
+		boolean paisConSaldoCta = dataTest.getPais().existsPagoStoreCredit();
+		dataTest.setUserRegistered(true);
+		dataTest.setUserConnected("mng_test_SA_pruebaSaldo@mango.com");
+		dataTest.setPasswordUser(GetterSecrets.factory()
 				.getCredentials(SecretType.SHOP_STANDARD_USER)
-				.getPassword();
+				.getPassword());
 
-		if (dataTest.pais.getEmailuser()!=null && dataTest.pais.getPassuser()!=null) {
-			dataTest.userConnected = dataTest.pais.getEmailuser();
-			dataTest.passwordUser = dataTest.pais.getPassuser();
+		if (dataTest.getPais().getEmailuser()!=null && dataTest.getPais().getPassuser()!=null) {
+			dataTest.setUserConnected(dataTest.getPais().getEmailuser());
+			dataTest.setPasswordUser(dataTest.getPais().getPassuser());
 		}
 			
 		access();

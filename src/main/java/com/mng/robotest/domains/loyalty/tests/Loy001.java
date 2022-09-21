@@ -21,11 +21,11 @@ public class Loy001 extends TestBase {
 	public Loy001() throws Exception {
 		super();
 		
-		dataTest.userConnected = USER.getEmail();
-		dataTest.userRegistered = true;
-		dataTest.passwordUser = GetterSecrets.factory()
+		dataTest.setUserConnected(USER.getEmail());
+		dataTest.setUserRegistered(true);
+		dataTest.setPasswordUser(GetterSecrets.factory()
 				.getCredentials(SecretType.SHOP_STANDARD_USER)
-				.getPassword();
+				.getPassword());
 	}
 	
 	@Override
@@ -41,7 +41,7 @@ public class Loy001 extends TestBase {
 		
 		//TODO en estos momentos algo raro le pasa al menú Nuevo que requiere un refresh para funcionar ok
 		driver.navigate().refresh();
-		new GaleriaNavigationsSteps().selectTalla(dataTest.pais);
+		new GaleriaNavigationsSteps().selectTalla(dataTest.getPais());
 	}
 	
 	private DataPago checkoutExecution() throws Exception {
@@ -53,7 +53,7 @@ public class Loy001 extends TestBase {
 		
 		DataPago dataPago = getDataPago(configCheckout);
 		dataPago = new CheckoutFlow.BuilderCheckout(dataPago)
-			.pago(dataTest.pais.getPago("VISA"))
+			.pago(dataTest.getPais().getPago("VISA"))
 			.build()
 			.checkout(From.BOLSA);
 		

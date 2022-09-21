@@ -121,7 +121,7 @@ public class SecDataProduct extends PageBase {
 		return XPATH_NOMBRE_ARTICULO_DESKTOP;
 	}
 	private String getXPathPrecioFinal() {
-		if (CROATIA.isEquals(dataTest.pais)) {
+		if (CROATIA.isEquals(dataTest.getPais())) {
 			return XPATH_PRECIO_FINAL_CROATIA;
 		}
 		return XPATH_PRECIO_FINAL;

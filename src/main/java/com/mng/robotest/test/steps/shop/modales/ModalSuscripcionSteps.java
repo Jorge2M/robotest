@@ -16,8 +16,8 @@ public class ModalSuscripcionSteps extends StepBase {
 		expected="Los textos existen en el código fuente dependiendo del pais",
 		saveNettraffic=SaveWhen.Always)
 	public void validaRGPDModal() {
-		String codPais = dataTest.pais.getCodigo_pais();
-		if (dataTest.pais.getRgpd().equals("S")) {
+		String codPais = dataTest.getCodigoPais();
+		if (dataTest.getPais().getRgpd().equals("S")) {
 			checkExistsTextsRGPD(codPais);
 		} else {
 			checkNotExistsTextsRGPD(codPais);

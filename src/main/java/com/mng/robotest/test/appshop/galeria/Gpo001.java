@@ -24,12 +24,8 @@ public class Gpo001 extends TestBase {
 
 	@Override
 	public void execute() throws Exception {
-		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
-		dataTest.userConnected = userShop.user;
-		dataTest.passwordUser = userShop.password;
-		dataTest.userRegistered = true;
+		dataTest.setUserRegistered(true);
 		String tipoPrendasGaleria = "camisa";
-			
 		access();
 		clickMenu("camisas");
 		

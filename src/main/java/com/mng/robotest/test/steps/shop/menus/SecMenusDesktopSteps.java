@@ -171,17 +171,6 @@ public class SecMenusDesktopSteps extends StepBase {
 		return (secMenus.secMenuLateral.isSelectedMenu(menu, seconds));
 	}
 	  
-//	@Validation
-//	private ChecksTM checkVisibility2onLevelMenusOulet(List<Menu2onLevel> menus2onLevel) throws Exception {
-//		ChecksTM checks = ChecksTM.getNew();
-//		for (Menu2onLevel menu2oNivelTmp : menus2onLevel) {
-//			checks.add(
-//				"Aparece el menú de 2o nivel <b>" + menu2oNivelTmp.getNombre() + "</b>",
-//				secMenus.secMenuLateral.isVisibleMenu(menu2oNivelTmp), State.Warn);
-//		}
-//		return checks;
-//	}
-	
 	@Validation
 	private ChecksTM checkArticlesContainsLiterals(String[] textsArticlesGalery) throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
@@ -242,7 +231,7 @@ public class SecMenusDesktopSteps extends StepBase {
 		expected=
 			"Aparece la página correcta asociada a la línea #{lineaType.getNameUpper()}")
 	public void seleccionLinea(LineaType lineaType) throws Exception {
-		secMenus.secMenuSuperior.secLineas.selecLinea(dataTest.pais, lineaType);	   
+		secMenus.secMenuSuperior.secLineas.selecLinea(dataTest.getPais(), lineaType);	   
 		validaSelecLinea(lineaType, null);
 	}
 	
@@ -265,7 +254,7 @@ public class SecMenusDesktopSteps extends StepBase {
 		secCabeceraSteps.validateIconoBolsa();
 
 		//Validaciones en función del tipo de página que debería aparecer al seleccionar la línea
-		Linea linea = dataTest.pais.getShoponline().getLinea(lineaType);
+		Linea linea = dataTest.getPais().getShoponline().getLinea(lineaType);
 		if (sublineaType!=null) {
 			linea = linea.getSublineaNinos(sublineaType);
 		}
@@ -390,7 +379,7 @@ public class SecMenusDesktopSteps extends StepBase {
 		expected=
 			"Aparece la ficha del producto " + tagRefArticle)
 	public void checkURLRedirectFicha() throws Exception {
-		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.pais.getCodigo_alf(), app, driver).build();
+		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver).build();
 		GarmentCatalog product = getterProducts.getAll().get(0);
 		Article article = product.getArticleWithMoreStock();
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagRefArticle, article.getGarmentId());
@@ -403,7 +392,7 @@ public class SecMenusDesktopSteps extends StepBase {
 		}
 		
 		String urlAccesoCorreo = 
-			uri.getScheme() + "://" + uri.getHost() + "/redirect.faces?op=conta&tiendaid=" + tiendaId + "&pais=" + dataTest.pais.getCodigo_pais() + 
+			uri.getScheme() + "://" + uri.getHost() + "/redirect.faces?op=conta&tiendaid=" + tiendaId + "&pais=" + dataTest.getCodigoPais() + 
 			"&producto=" + article.getGarmentId() + "&color=" + article.getColor().getId() ;
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagUrlAcceso, urlAccesoCorreo);
 		driver.navigate().to(urlAccesoCorreo);
@@ -418,7 +407,7 @@ public class SecMenusDesktopSteps extends StepBase {
 		checkErrorPageWithoutException();
 		GroupMenu groupMenu = menu.getGroup(channel);
 		if (groupMenu.canContainElement(Element.article)) {
-			if (dataTest.pais.isEspanya()) {
+			if (dataTest.getPais().isEspanya()) {
 				checkSizeDivImages();
 			}
 			Menu1rstLevel menuPromocion = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(menu.getLinea(), menu.getSublinea(), "promocion"));

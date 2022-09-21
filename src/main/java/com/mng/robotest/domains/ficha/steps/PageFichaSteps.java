@@ -247,7 +247,7 @@ public class PageFichaSteps extends StepBase {
 	 */
 	public void selectAnadirALaBolsaTallaPrevSiSelected(ArticuloScreen articulo) throws Exception {
 		selectAnadirALaBolsaStep();
-		dataTest.dataBag.addArticulo(articulo);
+		dataTest.getDataBag().addArticulo(articulo);
 		SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 		secBolsaSteps.validaAltaArtBolsa();
 	}	
@@ -258,7 +258,7 @@ public class PageFichaSteps extends StepBase {
 	public void selectAnadirAFavoritos() throws Exception {
 		pageFicha.selectAnadirAFavoritosButton();
 		ArticuloScreen articulo = pageFicha.getArticuloObject();
-		dataTest.dataFavoritos.addArticulo(articulo);
+		dataTest.getDataFavoritos().addArticulo(articulo);
 		checkCapaAltaFavoritos();
 		validateVisibleButtonFavoritos(ActionFavButton.REMOVE);
 	}

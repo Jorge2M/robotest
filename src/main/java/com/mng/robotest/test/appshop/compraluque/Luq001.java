@@ -36,8 +36,8 @@ public class Luq001 extends TestBase {
 	private Random rand = SecureRandom.getInstanceStrong();
 	
 	public Luq001() throws Exception {
-		dataTest.pais = paisRandom;
-		dataTest.idioma = idioma;
+		dataTest.setPais(paisRandom);
+		dataTest.setIdioma(idioma);
 	}
 	
 	public void execute() throws Exception {
@@ -47,7 +47,7 @@ public class Luq001 extends TestBase {
 		//Access and add articles
 		access();
 		new SecBolsaSteps().altaListaArticulosEnBolsa(listArticles);
-		dataTest.pais.setCodpos(getCodPostal());
+		dataTest.getPais().setCodpos(getCodPostal());
 		
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.checkManto()
@@ -55,13 +55,13 @@ public class Luq001 extends TestBase {
 		
 		DataPago dataPago = getDataPago(configCheckout);
 		new CheckoutFlow.BuilderCheckout(dataPago)
-			.pago(dataTest.pais.getPago("VISA"))
+			.pago(dataTest.getPais().getPago("VISA"))
 			.build()
 			.checkout(From.BOLSA);
 	}
 	
 	private List<GarmentCatalog> getListArticles() {
-		PaisShop paisShop = PaisShop.getPais(dataTest.pais.getCodigo_pais());
+		PaisShop paisShop = PaisShop.getPais(dataTest.getCodigoPais());
 		switch (paisShop) {
 		case USA:
 		case IRELAND:
@@ -71,12 +71,12 @@ public class Luq001 extends TestBase {
 	}
 	
 	private String getCodPostal() {
-		PaisShop paisShop = PaisShop.getPais(dataTest.pais.getCodigo_pais());
+		PaisShop paisShop = PaisShop.getPais(dataTest.getCodigoPais());
 		switch (paisShop) {
 		case CANADA:
 			return codPostalesCanada.get(this.rand.nextInt(codPostalesCanada.size())); 
 		default:
-			return dataTest.pais.getCodpos();
+			return dataTest.getPais().getCodpos();
 		}
 	}
 	

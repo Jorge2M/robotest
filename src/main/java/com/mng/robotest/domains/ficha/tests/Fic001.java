@@ -16,8 +16,6 @@ import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
-import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
-import com.mng.robotest.test.getdata.usuarios.UserShop;
 
 import javassist.NotFoundException;
 
@@ -32,13 +30,8 @@ public class Fic001 extends TestBase {
 	
 	public Fic001() throws Exception {
 		super();
-		
-		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
-		dataTest.userRegistered = true;
-		dataTest.userConnected = userShop.user;
-		dataTest.passwordUser = userShop.password;
-		
-		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.pais.getCodigo_alf(), app, driver)
+		dataTest.setUserRegistered(true);
+		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
 				.numProducts(80)
 				.build();
 

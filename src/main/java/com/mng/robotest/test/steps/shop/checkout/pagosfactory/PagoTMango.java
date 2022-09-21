@@ -18,13 +18,13 @@ public class PagoTMango extends PagoSteps {
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
 		DataPedido dataPedido = this.dataPago.getDataPedido();
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		pageCheckoutWrapperSteps.getSecTMangoSteps().validateIsSectionOk();
 		pageCheckoutWrapperSteps.getSecTMangoSteps().clickTipoPago(SecTMango.TipoPago.PAGO_HABITUAL);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		
 		PageAmexInputTarjetaSteps pageAmexInputTarjetaSteps = new PageAmexInputTarjetaSteps();
-		pageAmexInputTarjetaSteps.validateIsPageOk(dataPedido.getImporteTotal(), dataTest.pais.getCodigo_pais());
+		pageAmexInputTarjetaSteps.validateIsPageOk(dataPedido.getImporteTotal());
 		
 		if (execPay) {
 			dataPedido.setCodtipopago("M");
@@ -34,11 +34,10 @@ public class PagoTMango extends PagoSteps {
 					dataPedido.getPago().getMescad(), 
 					dataPedido.getPago().getAnycad(), 
 					dataPedido.getPago().getCvc(), 
-					dataPedido.getImporteTotal(), 
-					dataTest.pais.getCodigo_pais());
+					dataPedido.getImporteTotal());
 			
-			pageRedsysSimSteps.clickEnviar(dataPedido.getPago().getCip(), dataPedido.getImporteTotal(), dataTest.pais.getCodigo_pais());
-			new PageAmexResultSteps(driver).clickContinuarButton();
+			pageRedsysSimSteps.clickEnviar(dataPedido.getPago().getCip(), dataPedido.getImporteTotal());
+			new PageAmexResultSteps().clickContinuarButton();
 		}
 	}
 }

@@ -16,11 +16,9 @@ public class Com008 extends TestBase {
 	private final CompraSteps compraSteps = new CompraSteps();
 	
 	public Com008() throws Exception {
-		dataTest.userConnected = "e2e.hr.test@mango.com";
-		dataTest.passwordUser = "hsXPv7rUoYw3QnMKRhPT";		
-		dataTest.userRegistered = true;
-		dataTest.pais = PaisGetter.get(PaisShop.CROATIA);
-		dataTest.idioma = dataTest.pais.getListIdiomas().get(0);
+		dataTest.setUserRegistered(true);
+		dataTest.setPais(PaisGetter.get(PaisShop.CROATIA));
+		dataTest.setIdioma(dataTest.getPais().getListIdiomas().get(0));
 	}
 	
 	@Override
@@ -59,7 +57,7 @@ public class Com008 extends TestBase {
 
 	private DataPago executeVisaPayment() throws Exception {
 		DataPago dataPago = getDataPago();
-		dataPago.setPago(dataTest.pais.getPago("VISA"));
+		dataPago.setPago(dataTest.getPais().getPago("VISA"));
 		compraSteps.startPayment(dataPago, true);
 	
 		new PageResultPagoSteps().validateIsPageOk(dataPago);

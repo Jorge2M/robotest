@@ -2,12 +2,11 @@ package com.mng.robotest.test.steps.shop.checkout.giropay;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.checkout.giropay.PageGiropayInputBank;
 
-
-public class PageGiropayInputBankSteps {
+public class PageGiropayInputBankSteps extends StepBase {
 
 	private final PageGiropayInputBank pageGiropayInputBank = new PageGiropayInputBank();
 	
@@ -21,7 +20,7 @@ public class PageGiropayInputBankSteps {
 	@Step (
 		description="Introducimos el banco \"#{bankToInput}\" y pulsamos el botón de confirmación", 
 		expected="Aparece la página Mango de resultado del pago")
-	public void inputBankAndConfirm(String bankToInput, Channel channel) {
+	public void inputBankAndConfirm(String bankToInput) {
 		pageGiropayInputBank.inputBank(bankToInput);
 		pageGiropayInputBank.confirm();
 	}

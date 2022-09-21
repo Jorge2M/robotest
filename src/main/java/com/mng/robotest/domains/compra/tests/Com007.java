@@ -30,12 +30,12 @@ public class Com007 extends TestBase {
 	private final DataPago dataPago;
 	
 	public Com007() throws Exception {
-		dataTest.pais = PaisGetter.get(PaisShop.FRANCE);
-		dataTest.userRegistered = true;
-		dataTest.userConnected = "francia.test@mango.com";
-		dataTest.passwordUser = GetterSecrets.factory()
+		dataTest.setPais(PaisGetter.get(PaisShop.FRANCE));
+		dataTest.setUserRegistered(true);
+		dataTest.setUserConnected("francia.test@mango.com");
+		dataTest.setPasswordUser(GetterSecrets.factory()
 			.getCredentials(SecretType.SHOP_FRANCIA_USER)
-			.getPassword();
+			.getPassword());
 		
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.checkPagos()
@@ -45,7 +45,7 @@ public class Com007 extends TestBase {
 		
 		dataPago = getDataPago(configCheckout);
 		
-		pageChequeRegaloInputDataSteps = new PageChequeRegaloInputDataSteps(dataTest.pais, driver);
+		pageChequeRegaloInputDataSteps = new PageChequeRegaloInputDataSteps();
 	}
 	
 	@Override
@@ -83,7 +83,7 @@ public class Com007 extends TestBase {
 	
 	private void checkoutChequeRegalo() throws Exception {
 		new BuilderCheckout(dataPago)
-			.pago(dataTest.pais.getPago("VISA"))
+			.pago(dataTest.getPais().getPago("VISA"))
 			.build()
 			.checkout(From.IDENTIFICATION);
 	}

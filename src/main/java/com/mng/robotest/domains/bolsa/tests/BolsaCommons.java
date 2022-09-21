@@ -8,7 +8,7 @@ import com.mng.robotest.test.steps.shop.AccesoSteps;
 public class BolsaCommons extends NavigationBase {
 
 	public void checkBolsa() throws Exception {
-		new AccesoSteps().oneStep(dataTest.userRegistered);
+		new AccesoSteps().oneStep(dataTest.isUserRegistered());
 		
 		SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 		secBolsaSteps.altaArticlosConColores(2);

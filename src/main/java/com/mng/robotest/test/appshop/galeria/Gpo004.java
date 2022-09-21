@@ -65,7 +65,7 @@ public class Gpo004 extends TestBase {
 
 	private void selectArticleInOtherLabel() throws Exception {
 		LocationArticle loc1rsArticle1rstPage = LocationArticle.getInstanceInPage(2, 1);
-		pageGaleriaSteps.selectArticuloEnPestanyaAndBack(loc1rsArticle1rstPage, dataTest.pais);
+		pageGaleriaSteps.selectArticuloEnPestanyaAndBack(loc1rsArticle1rstPage);
 	}
 
 	private int scrollToLastAndSelectArticle() throws Exception {
@@ -77,7 +77,7 @@ public class Gpo004 extends TestBase {
 	}
 
 	private void goBackToGalery() throws Exception {
-		AllPagesSteps.backNagegador(driver);
+		new AllPagesSteps().backNagegador();
 	}
 
 	private void scrollToLastAndCheck(int articulosTotalesPagina) throws Exception {

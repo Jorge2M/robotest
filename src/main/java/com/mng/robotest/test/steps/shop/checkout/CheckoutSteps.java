@@ -141,7 +141,7 @@ public class CheckoutSteps extends StepBase {
 		description="Si existen y están plegados, desplegamos el bloque con los métodos de pago", 
 		expected="Aparecen los métodos de pagos asociados al país")
 	public void despliegaYValidaMetodosPago(boolean isEmpl) throws Exception {
-		TestMaker.getCurrentStepInExecution().addExpectedText(": " + dataTest.pais.getStringPagosTest(app, isEmpl));
+		TestMaker.getCurrentStepInExecution().addExpectedText(": " + dataTest.getPais().getStringPagosTest(app, isEmpl));
 		pageCheckoutWrapper.despliegaMetodosPago();
 		validaMetodosPagoDisponibles(isEmpl);
 	}
@@ -156,7 +156,7 @@ public class CheckoutSteps extends StepBase {
 		ChecksTM checks = ChecksTM.getNew();
 	 	checks.add(
 			"El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país " + 
-			"(" + dataTest.pais.getListPagosForTest(app, isEmpl).size() + ")",
+			"(" + dataTest.getPais().getListPagosForTest(app, isEmpl).size() + ")",
 			pageCheckoutWrapper.isNumMetodosPagoOK(isEmpl), State.Warn);		
 		return checks;
 	}
@@ -164,7 +164,7 @@ public class CheckoutSteps extends StepBase {
 	@Validation
 	private ChecksTM checkLogosPagos(boolean isEmpl) { 
 		ChecksTM checks = ChecksTM.getNew();
-		List<Pago> listPagos = dataTest.pais.getListPagosForTest(app, isEmpl);
+		List<Pago> listPagos = dataTest.getPais().getListPagosForTest(app, isEmpl);
 		if (listPagos.size()==1 && channel.isDevice()) {
 			return checks;
 		}
@@ -190,16 +190,16 @@ public class CheckoutSteps extends StepBase {
 	/**
 	 * Realiza una navegación (conjunto de pasos/validaciones) mediante la que se selecciona el método de envío y finalmente el método de pago 
 	 */
-	public void fluxSelectEnvioAndClickPaymentMethod(DataPago dataPago, Pais pais) throws Exception {
+	public void fluxSelectEnvioAndClickPaymentMethod(DataPago dataPago) throws Exception {
 		boolean pagoPintado = false;
 		if (!dataPago.getFTCkout().chequeRegalo) {
-			pagoPintado = secMetodoEnvioDesktopSteps.fluxSelectEnvio(dataPago, pais);
+			pagoPintado = secMetodoEnvioDesktopSteps.fluxSelectEnvio(dataPago);
 		}
-		boolean methodSelectedOK = forceClickIconoPagoAndWait(pais, dataPago.getDataPedido().getPago(), !pagoPintado);
+		boolean methodSelectedOK = forceClickIconoPagoAndWait(dataPago.getDataPedido().getPago(), !pagoPintado);
 		if (!methodSelectedOK) {
 			//En caso de no conseguir seleccionar correctamente el pago no nos podemos arriesgar a continuar con el pago
 			//porque quizás esté seleccionado otro método de pago del tipo Contrareembolso y un "Confirmar Pago" desencadenaría la compra en PRO
-			throw new RuntimeException("Problem selecting payment method " + dataPago.getDataPedido().getPago().getNombre() + " in country " + pais.getNombre_pais());
+			throw new RuntimeException("Problem selecting payment method " + dataPago.getDataPedido().getPago().getNombre() + " in country " + dataTest.getPais().getNombre_pais());
 		}
 	}
 	
@@ -209,7 +209,7 @@ public class CheckoutSteps extends StepBase {
 	@Step (
 		description="Seleccionamos el icono/pestaña correspondiente al método de pago y esperamos la desaparición de los \"loading\"",
 		expected="La operación se ejecuta correctamente")
-	public boolean forceClickIconoPagoAndWait(Pais pais, Pago pago, boolean pintaNombrePago) throws Exception {
+	public boolean forceClickIconoPagoAndWait(Pago pago, boolean pintaNombrePago) throws Exception {
 		if (pintaNombrePago) {
 			String pintaPago = "<b style=\"color:blue;\">" + pago.getNombre(channel, app) + "</b>:"; 
 			StepTM step = TestMaker.getCurrentStepInExecution();
@@ -218,27 +218,27 @@ public class CheckoutSteps extends StepBase {
 		}
 
 		try {
-			pageCheckoutWrapper.forceClickMetodoPagoAndWait(pago.getNombre(channel, app), pais);
+			pageCheckoutWrapper.forceClickMetodoPagoAndWait(pago.getNombre(channel, app));
 		}
 		catch (Exception e) {
-			Log4jTM.getLogger().warn("Problem clicking icono pago for payment {} in country {}", pago.getNombre(), pais.getNombre_pais(), e);
+			Log4jTM.getLogger().warn("Problem clicking icono pago for payment {} in country {}", pago.getNombre(), dataTest.getPais().getNombre_pais(), e);
 		}
 
 		if (pago.getTypePago()==TypePago.TarjetaIntegrada || 
 			pago.getTypePago()==TypePago.KrediKarti ||
 			pago.getTypePago()==TypePago.Bancontact) {
-			validateSelectPagoTRJintegrada(pago, pais);
+			validateSelectPagoTRJintegrada(pago);
 			return true;
 		} else {
 			return validateSelectPagoNoTRJintegrada(pago);
 		}
 	}
 	
-	public void validateSelectPagoTRJintegrada(Pago pago, Pais pais) {
+	public void validateSelectPagoTRJintegrada(Pago pago) {
 		if (channel==Channel.desktop) {
 			validateIsPresentButtonCompraDesktop();
 		}
-		getSecTarjetaPciSteps().validateIsSectionOk(pago, pais);
+		getSecTarjetaPciSteps().validateIsSectionOk(pago);
 	}
 	
 	public boolean validateSelectPagoNoTRJintegrada(Pago pago) {

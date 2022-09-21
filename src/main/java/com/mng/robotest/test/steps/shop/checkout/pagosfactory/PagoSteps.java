@@ -31,9 +31,9 @@ public abstract class PagoSteps extends StepBase {
 	public abstract void startPayment(boolean execPay) throws Exception;
 
 	public void storePedidoForMantoAndResetData() {
-		dataTest.dataBag = new DataBag();
+		dataTest.setDataBag(new DataBag());
 		this.dataPago.storePedidoForManto();
-		this.dataPago.setDataPedido(new DataPedido(dataTest.pais, dataTest.dataBag));
+		this.dataPago.setDataPedido(new DataPedido(dataTest.getPais(), dataTest.getDataBag()));
 	}
 }
 

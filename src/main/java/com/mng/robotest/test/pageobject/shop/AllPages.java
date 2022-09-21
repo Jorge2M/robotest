@@ -17,8 +17,8 @@ public class AllPages extends PageBase {
 	public static final String XPATH_TAG_CANONICAL = "//link[@rel='canonical']";
 	public static final String XPATH_TAG_ROBOTS = "//meta[@name='robots' and @content[contains(.,'noindex')]]";
 
-	public String getXPathMainContent(Pais pais) {
-		return ("//div[@class[contains(.,'main-content')] and @data-pais='" + pais.getCodigo_pais() + "']");
+	public String getXPathMainContent() {
+		return ("//div[@class[contains(.,'main-content')] and @data-pais='" + dataTest.getCodigoPais() + "']");
 	}
 
 	public boolean isPresentTagCanonical() {
@@ -177,8 +177,8 @@ public class AllPages extends PageBase {
 		return malicious;
 	}
 
-	public boolean isPresentMainContent(Pais pais) {
-		String xpathMainContent = getXPathMainContent(pais);
+	public boolean isPresentMainContent() {
+		String xpathMainContent = getXPathMainContent();
 		return state(Present, xpathMainContent).check();
 	}
 

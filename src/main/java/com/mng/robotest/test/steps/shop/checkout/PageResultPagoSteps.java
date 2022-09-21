@@ -67,14 +67,14 @@ public class PageResultPagoSteps extends StepBase {
 	public ChecksTM validateDataPedido(DataPago dataPago) throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
 		String importeTotal = "";
-		if (dataTest.dataBag!=null && "".compareTo(dataTest.dataBag.getImporteTotal())!=0) {
-			importeTotal = dataTest.dataBag.getImporteTotal();
+		if (dataTest.getDataBag()!=null && "".compareTo(dataTest.getDataBag().getImporteTotal())!=0) {
+			importeTotal = dataTest.getDataBag().getImporteTotal();
 		} else {
 			importeTotal = dataPago.getDataPedido().getImporteTotal();
 		}
 	  	checks.add(
 	  		"Aparece el importe " + importeTotal + " de la operación",
-	  		ImporteScreen.isPresentImporteInScreen(importeTotal, dataTest.pais.getCodigo_pais(), driver), State.Warn);
+	  		ImporteScreen.isPresentImporteInScreen(importeTotal, dataTest.getCodigoPais(), driver), State.Warn);
 		
 		if (channel==Channel.desktop) {
 			checks.add(
@@ -110,7 +110,7 @@ public class PageResultPagoSteps extends StepBase {
 		expected="Aparece la página de \"Mis compras\" o la de \"Acceso a Mis compras\" según si el usuario está o no loginado")
 	public void selectMisCompras() throws Exception {
 		pageResultPago.clickMisCompras();	 
-		if (dataTest.userRegistered) {
+		if (dataTest.isUserRegistered()) {
 			new PageMisComprasSteps().validateIsPage();
 		} else {
 			new PageAccesoMisComprasSteps().validateIsPage();
@@ -131,7 +131,7 @@ public class PageResultPagoSteps extends StepBase {
 	public void selectLinkMisComprasAndValidateCompra(DataPago dataPago) throws Exception {		
 		selectMisCompras();
 		DataPedido dataPedido = dataPago.getDataPedido();
-		if (dataTest.userRegistered) {
+		if (dataTest.isUserRegistered()) {
 			new PageMisComprasSteps().validateIsCompraOnline(
 					dataPedido.getCodpedido(), dataPago.getFTCkout().chequeRegalo);
 		} else {

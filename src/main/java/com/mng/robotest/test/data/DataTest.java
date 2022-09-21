@@ -7,6 +7,8 @@ import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataFavoritos;
+import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
+import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test.utils.PaisGetter;
 
@@ -14,14 +16,14 @@ public class DataTest implements Cloneable, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	public Pais pais = null;
-	public IdiomaPais idioma = null;
-	public boolean userRegistered = false;
-	public String userConnected = "";
-	public String passwordUser = "";
-	public List<GenericCheck> genericChecksDisabled = null; 
-	public DataBag dataBag = new DataBag(); 
-	public DataFavoritos dataFavoritos = new DataFavoritos();
+	private Pais pais = null;
+	private IdiomaPais idioma = null;
+	private boolean userRegistered = false;
+	private String userConnected = "";
+	private String passwordUser = "";
+	private List<GenericCheck> genericChecksDisabled = null; 
+	private DataBag dataBag = new DataBag(); 
+	private DataFavoritos dataFavoritos = new DataFavoritos();
 	
 	public DataTest() { }
 	
@@ -60,11 +62,90 @@ public class DataTest implements Cloneable, Serializable {
 	}
 	
 	public String getUserConnected() {
-		return this.userConnected;
+		if ("".compareTo(userConnected)==0) {
+			storeNewUser();
+		}
+		return userConnected;
 	}
 	
 	public String getPasswordUser() {
-		return this.passwordUser;
+		if ("".compareTo(passwordUser)==0) {
+			storeNewUser();
+		}
+		return passwordUser;
+	}
+	
+	private void storeNewUser() {
+		UserShop userShop = GestorUsersShop.getUser(PaisShop.ESPANA);
+		if (pais!=null) {
+			userShop = GestorUsersShop.getUser(PaisShop.getPais(pais));
+		}
+		setUserConnected(userShop.user);
+		setPasswordUser(userShop.password);
+	}
+
+	public Pais getPais() {
+		return pais;
+	}
+
+	public void setPais(Pais pais) {
+		this.pais = pais;
+	}
+	
+	public String getCodigoPais() {
+		return pais.getCodigo_pais();
+	}
+
+	public IdiomaPais getIdioma() {
+		return idioma;
+	}
+
+	public void setIdioma(IdiomaPais idioma) {
+		this.idioma = idioma;
+	}
+
+	public boolean isUserRegistered() {
+		return userRegistered;
+	}
+
+	public void setUserRegistered(boolean userRegistered) {
+		this.userRegistered = userRegistered;
+	}
+
+	public List<GenericCheck> getGenericChecksDisabled() {
+		return genericChecksDisabled;
+	}
+
+	public void setGenericChecksDisabled(List<GenericCheck> genericChecksDisabled) {
+		this.genericChecksDisabled = genericChecksDisabled;
+	}
+
+	public DataBag getDataBag() {
+		return dataBag;
+	}
+
+	public void setDataBag(DataBag dataBag) {
+		this.dataBag = dataBag;
+	}
+
+	public DataFavoritos getDataFavoritos() {
+		return dataFavoritos;
+	}
+
+	public void setDataFavoritos(DataFavoritos dataFavoritos) {
+		this.dataFavoritos = dataFavoritos;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public void setUserConnected(String userConnected) {
+		this.userConnected = userConnected;
+	}
+
+	public void setPasswordUser(String passwordUser) {
+		this.passwordUser = passwordUser;
 	}
 }
 

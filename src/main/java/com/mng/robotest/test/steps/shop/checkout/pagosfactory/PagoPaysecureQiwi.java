@@ -16,12 +16,12 @@ public class PagoPaysecureQiwi extends PagoSteps {
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		
 		PagePaysecureQiwi1rstSteps pagePaysecureQiwi1rstSteps = new PagePaysecureQiwi1rstSteps();
-		pagePaysecureQiwi1rstSteps.validateIsPage(dataPago.getDataPedido().getImporteTotal(), dataTest.pais.getCodigo_pais(), channel);
-		pagePaysecureQiwi1rstSteps.clickIconPasarelaQiwi(channel);
+		pagePaysecureQiwi1rstSteps.validateIsPage(dataPago.getDataPedido().getImporteTotal());
+		pagePaysecureQiwi1rstSteps.clickIconPasarelaQiwi();
 		
 		if (execPay) {
 			String tlfQiwi = dataPago.getDataPedido().getPago().getTelefqiwi();

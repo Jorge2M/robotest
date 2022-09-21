@@ -28,28 +28,28 @@ public class Ree002 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		dataTest.pais = EMIRATOS;
-		dataTest.idioma = EMIRATOS_ARABE;
+		dataTest.setPais(EMIRATOS);
+		dataTest.setIdioma(EMIRATOS_ARABE);
 
 		//TODO hasta que se solvente el https://jira.mangodev.net/jira/browse/GUIL-2311
 		if (isPRO()) {
 			return;
 		}
 
-		dataTest.userRegistered = true;
-		dataTest.userConnected = "mng_test_SA_pruebaSaldo@mango.com";
-		dataTest.passwordUser = dataTest.passwordUser = GetterSecrets.factory()
+		dataTest.setUserRegistered(true);
+		dataTest.setUserConnected("mng_test_SA_pruebaSaldo@mango.com");
+		dataTest.setPasswordUser(GetterSecrets.factory()
 				.getCredentials(SecretType.SHOP_STANDARD_USER)
-				.getPassword();
+				.getPassword());
 
-		if (dataTest.pais.getEmailuser()!=null && dataTest.pais.getPassuser()!=null) {
-			dataTest.userConnected = dataTest.pais.getEmailuser();
-			dataTest.passwordUser = dataTest.pais.getPassuser();
+		if (dataTest.getPais().getEmailuser()!=null && dataTest.getPais().getPassuser()!=null) {
+			dataTest.setUserConnected(dataTest.getPais().getEmailuser());
+			dataTest.setPasswordUser(dataTest.getPais().getPassuser());
 		}
 		
 		accessAndClearData();
 		PageReembolsosSteps pageReembolsosSteps = new PageReembolsosSteps();
-		pageReembolsosSteps.gotoRefundsFromMenu(dataTest.pais.existsPagoStoreCredit());
+		pageReembolsosSteps.gotoRefundsFromMenu(dataTest.getPais().existsPagoStoreCredit());
 		pageReembolsosSteps.selectRadioSalCtaAndRefresh();
 		if (new PageReembolsos().isVisibleSaveButtonStoreCredit()) {
 			pageReembolsosSteps.clickSaveButtonStoreCredit();
@@ -67,10 +67,10 @@ public class Ree002 extends TestBase {
 		DataPago dataPago = getDataPago(configCheckout);
 		
 		//Informamos datos varios necesarios para el proceso de pagos de modo que se pruebe el pago StoreCredit
-		dataPago.getDataPedido().setEmailCheckout(dataTest.userConnected);
+		dataPago.getDataPedido().setEmailCheckout(dataTest.getUserConnected());
 		dataPago.setUserWithStoreC(true);
 		dataPago.setSaldoCta(saldoCtaIni);
-		Pago pagoStoreCredit = dataTest.pais.getPago("STORECREDIT");
+		Pago pagoStoreCredit = dataTest.getPais().getPago("STORECREDIT");
 		
 		dataPago = new CheckoutFlow.BuilderCheckout(dataPago)
 			.pago(pagoStoreCredit)
@@ -92,7 +92,7 @@ public class Ree002 extends TestBase {
 				saldoCtaEsperado = saldoCtaIni;
 			}
 			
-			pageReembolsosSteps.gotoRefundsFromMenuAndValidaSalCta(dataTest.pais.existsPagoStoreCredit(), saldoCtaEsperado);
+			pageReembolsosSteps.gotoRefundsFromMenuAndValidaSalCta(dataTest.getPais().existsPagoStoreCredit(), saldoCtaEsperado);
 			new CompraSteps().checkPedidosManto(dataPago.getListPedidos());
 		}		
 	}

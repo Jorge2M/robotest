@@ -16,8 +16,8 @@ public class Otr005 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		dataTest.pais = JAPON;
-		dataTest.idioma = JAPONES;
+		dataTest.setPais(JAPON);
+		dataTest.setIdioma(JAPONES);
 		PagePrehomeSteps pagePrehomeSteps = new PagePrehomeSteps();
 		new PagePrehome().previousAccessShopSteps(true);
 		pagePrehomeSteps.seleccionPaisIdioma();

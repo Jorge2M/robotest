@@ -26,9 +26,9 @@ public class Reg002 extends TestBase {
 	
 	public Reg002(Pais pais, IdiomaPais idioma) throws Exception {
 		super();
-		dataTest.pais = pais;
-		dataTest.idioma = idioma;
-		dataTest.userRegistered = false;
+		dataTest.setPais(pais);
+		dataTest.setIdioma(idioma);
+		dataTest.setUserRegistered(false);
 	}
 	
 	@Override

@@ -18,7 +18,7 @@ public class ValidatorContentBolsa extends PageBase {
 
 	public ValidatorContentBolsa() throws Exception {
 		super();
-		this.linesArticlesExpected = dataTest.dataBag.getListArticlesTypeViewInBolsa();
+		this.linesArticlesExpected = dataTest.getDataBag().getListArticlesTypeViewInBolsa();
 		storeArticlesFromScreen();
 	}
 	

@@ -9,8 +9,6 @@ import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
-import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.galeria.LocationArticle;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
@@ -25,8 +23,8 @@ public class Fav002 extends TestBase {
 	
 	public Fav002(Pais pais, IdiomaPais idioma) throws Exception {
 		super();
-		dataTest.pais = pais;
-		dataTest.idioma = idioma;
+		dataTest.setPais(pais);
+		dataTest.setIdioma(idioma);
 	}
 
 	@Override
@@ -41,7 +39,7 @@ public class Fav002 extends TestBase {
 	}
 	
 	private void accessWithoutLoginAndClearData() throws Exception {
-		dataTest.userRegistered=false;
+		dataTest.setUserRegistered(false);
 		access();
 		secBolsaSteps.clear();
 		pageFavoritosSteps.clearAll();
@@ -63,9 +61,6 @@ public class Fav002 extends TestBase {
 	}	
 	
 	private void login() throws Exception {
-		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
-		dataTest.userConnected = userShop.user;
-		dataTest.passwordUser = userShop.password;
 		new AccesoSteps().identificacionEnMango();
 		secBolsaSteps.clear();
 	}	
@@ -77,13 +72,13 @@ public class Fav002 extends TestBase {
 	}	
 	
 	private void selectFirstFavoriteAndAddBolsa() throws Exception {
-		ArticuloScreen firstFavorite = dataTest.dataFavoritos.getArticulo(0);
+		ArticuloScreen firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
 		pageFavoritosSteps.clickArticuloImg(firstFavorite);
 		new PageFichaSteps().selectAnadirALaBolsaStep();
 	}
 
 	private void clearFirstFavoriteFromFavorites() throws Exception {
-		ArticuloScreen firstFavorite = dataTest.dataFavoritos.getArticulo(0);
+		ArticuloScreen firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
 		secMenusSteps.getMenusUser().selectFavoritos();
 		pageFavoritosSteps.clear(firstFavorite);
 	}	

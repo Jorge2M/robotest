@@ -10,11 +10,7 @@ public class Gpo007 extends TestBase {
 
 	@Override
 	public void execute() throws Exception {
-		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
-		dataTest.userConnected = userShop.user;
-		dataTest.passwordUser = userShop.password;
-		dataTest.userRegistered = true;
-
+		dataTest.setUserRegistered(true);
 		access();
 		clickMenu("camisas");
 		

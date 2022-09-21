@@ -93,10 +93,10 @@ public class SecFooterSteps extends StepBase {
 			SecCabecera.getNew(channel, app).clickLogoMango();
 		}
 		secFooter.clickFooterSuscripcion();
-		if (dataTest.pais.getRgpd().equals("S")) {
-			checkIsRGPDpresent(dataTest.pais.getCodigo_pais());
+		if (dataTest.getPais().getRgpd().equals("S")) {
+			checkIsRGPDpresent(dataTest.getCodigoPais());
 		} else {
-			checkIsNotPresentRGPD(dataTest.pais.getCodigo_pais());
+			checkIsNotPresentRGPD(dataTest.getCodigoPais());
 		}
 	}
 	 

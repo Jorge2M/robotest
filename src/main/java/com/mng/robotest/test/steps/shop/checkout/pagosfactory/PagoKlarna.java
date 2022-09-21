@@ -18,9 +18,8 @@ public class PagoKlarna extends PagoSteps {
 
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
-		
 		if (pageKlarnaSteps.getPageObject().isPage(10)) {
 			pageKlarnaSteps.checkIsPage(0);
 			pageKlarnaSteps.clickComprar();
@@ -32,7 +31,7 @@ public class PagoKlarna extends PagoSteps {
 		} else {
 			pageKlarnaSteps.checkModalInputPhoneNumber(15);
 			if (execPay) {
-				pageKlarnaSteps.inputDataPhoneAndConfirm(dataTest.pais.getTelefono(), "123456");
+				pageKlarnaSteps.inputDataPhoneAndConfirm(dataTest.getPais().getTelefono(), "123456");
 				this.dataPago.getDataPedido().setCodtipopago("K");
 			}
 		}
@@ -43,11 +42,11 @@ public class PagoKlarna extends PagoSteps {
 		
 		DataKlarna dataKlarna = new DataKlarna();
 		dataKlarna.setEmail(Constantes.MAIL_PERSONAL);
-		dataKlarna.setCodPostal(dataTest.pais.getCodpos());
+		dataKlarna.setCodPostal(dataTest.getPais().getCodpos());
 		dataKlarna.setUserName("Jorge");
 		dataKlarna.setApellidos("Muñoz Martínez");
-		dataKlarna.setDireccion(dataTest.pais.getAddress());
-		dataKlarna.setPhone(dataTest.pais.getTelefono());
+		dataKlarna.setDireccion(dataTest.getPais().getAddress());
+		dataKlarna.setPhone(dataTest.getPais().getTelefono());
 		dataKlarna.setPersonnumber(pago.getNumPerKlarna());
 		
 		return dataKlarna; 

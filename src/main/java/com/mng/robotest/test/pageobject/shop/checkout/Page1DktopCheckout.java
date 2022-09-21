@@ -11,7 +11,6 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Pago;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.Descuento;
 import com.mng.robotest.test.generic.ChequeRegalo;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
@@ -299,7 +298,7 @@ public class Page1DktopCheckout extends PageBase {
 	public boolean isNumMetodosPagoOK(boolean isEmpl) {
 		int numPagosPant = getElements(XPATH_METODO_PAGO).size();
 		if (app!=AppEcom.votf) {
-			int numPagosPais = dataTest.pais.getListPagosForTest(app, isEmpl).size();
+			int numPagosPais = dataTest.getPais().getListPagosForTest(app, isEmpl).size();
 			return (numPagosPais == numPagosPant);
 		}
 		
@@ -319,12 +318,12 @@ public class Page1DktopCheckout extends PageBase {
 	/**
 	 * Realizamos las acciones necesarias para forzar el click sobre un método de pago y esperamos a que desaparezcan las capas de loading
 	 */
-	public void forceClickMetodoPagoAndWait(String metodoPago, Pais pais) throws Exception {
+	public void forceClickMetodoPagoAndWait(String metodoPago) throws Exception {
 		despliegaMetodosPago();
 		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
 		pageCheckoutWrapper.waitUntilNoDivLoading(2);
 		moveToMetodosPago();
-		clickMetodoPago(pais, metodoPago);
+		clickMetodoPago(metodoPago);
 		pageCheckoutWrapper.waitUntilNoDivLoading(10);
 	}
 
@@ -366,7 +365,7 @@ public class Page1DktopCheckout extends PageBase {
 		while (!inStateOk && i<seconds);
 	}	
 
-	public void clickMetodoPago(Pais pais, String metodoPago) {
+	public void clickMetodoPago(String metodoPago) {
 		String xpathClickMetodoPago = getXPathClickMetodoPago(metodoPago);
 		click(xpathClickMetodoPago)
 			.type(TypeClick.webdriver)
@@ -414,7 +413,7 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	public boolean validateArticlesAndImport() throws Exception {
-		for (ArticuloScreen articulo : dataTest.dataBag.getListArticlesTypeViewInBolsa()) {
+		for (ArticuloScreen articulo : dataTest.getDataBag().getListArticlesTypeViewInBolsa()) {
 			WebElement lineaArticulo = getLineaArticle(articulo.getReferencia());
 			if (lineaArticulo==null) {
 				return false;
@@ -433,7 +432,7 @@ public class Page1DktopCheckout extends PageBase {
 	}
 	
 	public boolean validateArticlesAndDiscount(Descuento descuento) throws Exception {
-		for (ArticuloScreen articulo : dataTest.dataBag.getListArticlesTypeViewInBolsa()) {
+		for (ArticuloScreen articulo : dataTest.getDataBag().getListArticlesTypeViewInBolsa()) {
 			WebElement lineaArticulo = getLineaArticle(articulo.getReferencia());
 			if (lineaArticulo==null) {
 				return false;

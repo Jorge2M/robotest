@@ -27,7 +27,7 @@ public class PageAmazonIdentSteps extends StepBase {
 		if (channel==Channel.desktop) {
 			checks.add(
 				"En la página resultante figura el importe total de la compra (" + dataPedido.getImporteTotal() + ")",
-				ImporteScreen.isPresentImporteInScreen(dataPedido.getImporteTotal(), dataTest.pais.getCodigo_pais(), driver), State.Warn);
+				ImporteScreen.isPresentImporteInScreen(dataPedido.getImporteTotal(), dataTest.getCodigoPais(), driver), State.Warn);
 		}
 		return checks;
 	}

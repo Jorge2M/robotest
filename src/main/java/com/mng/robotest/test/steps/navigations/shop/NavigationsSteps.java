@@ -11,7 +11,7 @@ public class NavigationsSteps extends StepBase {
 		SecCabeceraSteps secCabeceraSteps =	new SecCabeceraSteps();
 		int i=0;
 		while (!secCabeceraSteps.getSecCabecera().isPresentLogoMango(1) && i<5) {
-			AllPagesSteps.backNagegador(driver);
+			new AllPagesSteps().backNagegador();
 			i+=1;
 		}
 		

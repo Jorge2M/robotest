@@ -273,11 +273,11 @@ public class PageCheckoutWrapper extends PageBase {
 		return metodoPago;
 	}
 	
-	public void forceClickMetodoPagoAndWait(String metodoPago, Pais pais) throws Exception {
+	public void forceClickMetodoPagoAndWait(String metodoPago) throws Exception {
 		if (channel==Channel.mobile) {
-			page2MobilCheckout.forceClickMetodoPagoAndWait(metodoPago, pais);
+			page2MobilCheckout.forceClickMetodoPagoAndWait(metodoPago);
 		} else {
-			page1DktopCheckout.forceClickMetodoPagoAndWait(metodoPago, pais);
+			page1DktopCheckout.forceClickMetodoPagoAndWait(metodoPago);
 		}
 	}
 	

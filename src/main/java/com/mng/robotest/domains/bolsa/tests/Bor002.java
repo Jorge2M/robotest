@@ -13,10 +13,7 @@ import com.mng.robotest.test.steps.shop.AccesoSteps;
 public class Bor002 extends TestBase {
 
 	public Bor002() {
-		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
-		dataTest.userConnected = userShop.user;
-		dataTest.passwordUser = userShop.password;
-		dataTest.userRegistered = true;
+		dataTest.setUserRegistered(true);
 	}
 	
 	@Override

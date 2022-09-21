@@ -16,10 +16,10 @@ public class PagoBancontact extends PagoSteps {
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
 		boolean isD3D = true;
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		
 		if (execPay) {
-			pageCheckoutWrapperSteps.inputDataTrjAndConfirmPago(this.dataPago);
+			pageCheckoutWrapperSteps.inputDataTrjAndConfirmPago(dataPago);
 			DataPedido dataPedido = this.dataPago.getDataPedido(); 
 			dataPedido.setCodtipopago("U");
 			Pago pago = dataPedido.getPago();
@@ -27,7 +27,7 @@ public class PagoBancontact extends PagoSteps {
 			if (dataPedido.getPago().getTipotarjEnum()==TypeTarj.VISAD3D) {
 				PageD3DLoginSteps pageD3DLoginSteps = new PageD3DLoginSteps();
 				isD3D = pageD3DLoginSteps.validateIsD3D(2);
-				pageD3DLoginSteps.isImporteVisible(dataPedido.getImporteTotal(), dataTest.pais.getCodigo_pais());
+				pageD3DLoginSteps.isImporteVisible(dataPedido.getImporteTotal());
 				if (isD3D) {
 					dataPedido.setCodtipopago("Y");
 					pageD3DLoginSteps.loginAndClickSubmit(pago.getUsrd3d(), pago.getPassd3d());

@@ -17,8 +17,9 @@ public class PageGiropay1rstSteps extends StepBase {
 	private final PageGiropay1rst pageGiropay1rst = new PageGiropay1rst();
 	
 	@Validation
-	public ChecksTM validateIsPage(String nombrePago, String importeTotal, String codPais) {
+	public ChecksTM validateIsPage(String nombrePago, String importeTotal) {
 		ChecksTM checks = ChecksTM.getNew();
+		String codPais = dataTest.getCodigoPais();
 		checks.add(
 			"Figura el bloque correspondiente al pago <b>" + nombrePago.toLowerCase() + "</b>",
 			pageGiropay1rst.isPresentIconoGiropay(), State.Warn);	

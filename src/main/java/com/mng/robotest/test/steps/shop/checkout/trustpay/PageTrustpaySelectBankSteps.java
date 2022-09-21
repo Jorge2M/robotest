@@ -19,7 +19,7 @@ public class PageTrustpaySelectBankSteps extends StepBase {
 	private final PageTrustpaySelectBank pageTrustpaySelectBank = new PageTrustpaySelectBank();
 	
 	@Validation
-	public ChecksTM validateIsPage(String nombrePago, String importeTotal, String codPais) {
+	public ChecksTM checkIsPage(String nombrePago, String importeTotal) {
 		ChecksTM checks = ChecksTM.getNew();
 	 	checks.add(
 			"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b>",
@@ -29,6 +29,7 @@ public class PageTrustpaySelectBankSteps extends StepBase {
 		if (channel.isDevice()) {
 			level = State.Info;
 		}
+		String codPais = dataTest.getCodigoPais();
 	 	checks.add(
 			"Aparece el importe de la compra: " + importeTotal,
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), level);
@@ -54,7 +55,7 @@ public class PageTrustpaySelectBankSteps extends StepBase {
 	@Step (
 		description="Seleccionamos un banco de test (contiene alguno de los textos " + tagPosibleBanks + ") y pulsamos <b>Pay</b>", 
 		expected="Aparece la página de test para la confirmación")
-	public void selectTestBankAndPay(String importeTotal, String codPais) {
+	public void selectTestBankAndPay(String importeTotal) {
 		List<String> listOfPosibleValues = new ArrayList<>();
 		listOfPosibleValues.addAll(Arrays.asList("TestPay", "Fio banka"));
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagPosibleBanks, String.join(",", listOfPosibleValues));
@@ -64,6 +65,6 @@ public class PageTrustpaySelectBankSteps extends StepBase {
 		
 		//Validation
 		//PageTrustpayTestConfirmSteps.validateIsPage(StepTestMaker, dFTest);
-		new PageTrustPayResultSteps().validateIsPage(importeTotal, codPais);
+		new PageTrustPayResultSteps().checkIsPage(importeTotal);
 	}
 }

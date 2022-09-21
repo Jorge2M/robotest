@@ -42,7 +42,7 @@ public class SecBannersSteps extends StepBase {
 		int sizeListBanners = managerBannersScreen.getListDataBanners().size();
 		for (int posBanner=1; posBanner<=sizeListBanners && posBanner<=maximoBanners; posBanner++) {
 			boolean makeValidations = true;
-			seleccionarBanner(posBanner, makeValidations, app, channel, dataTest.pais);
+			seleccionarBanner(posBanner, makeValidations, app, channel, dataTest.getPais());
 			driver.get(urlPagPrincipal);
 			SeleniumUtils.waitForPageLoaded(driver);
 			managerBannersScreen.reloadBanners(); //For avoid StaleElement Exception

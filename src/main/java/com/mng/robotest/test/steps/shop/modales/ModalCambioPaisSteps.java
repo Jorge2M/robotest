@@ -37,8 +37,8 @@ public class ModalCambioPaisSteps extends StepBase {
 		step.replaceInDescription(tagLiteralIdioma, newIdioma.getCodigo().getLiteral());
 		step.replaceInExpected(tagLiteralIdioma, newIdioma.getCodigo().getLiteral());
 		
-		dataTest.pais = newPais;
-		dataTest.idioma = newIdioma;
+		dataTest.setPais(newPais);
+		dataTest.setIdioma(newIdioma);
 		new PagePrehome().selecPaisIdiomaYAccede();
 		new PageHomeMarcasSteps().validateIsPageWithCorrectLineas();
 	}

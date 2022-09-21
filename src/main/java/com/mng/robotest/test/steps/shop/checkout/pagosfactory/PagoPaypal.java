@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop.checkout.pagosfactory;
 
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.pageobject.shop.checkout.paypal.PagePaypalConfirmacion;
@@ -30,11 +28,10 @@ public class PagoPaypal extends PagoSteps {
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago, dataTest.pais);
+		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
-		int seconds = 10;
 		modalPreloaderSppinerSteps.validateAppearsAndDisappears();
-		switch (getInitPagePaypal(driver)) {
+		switch (getInitPagePaypal()) {
 		case Login:
 			pagePaypalLoginSteps.validateIsPageUntil(0);
 			break;
@@ -44,6 +41,7 @@ public class PagoPaypal extends PagoSteps {
 		}
 		
 		if (execPay) {
+			int seconds = 10;
 			DataPedido dataPedido = this.dataPago.getDataPedido();
 			dataPedido.setCodtipopago("P");
 			modalPreloaderSppinerSteps.validateIsVanished(seconds);
@@ -68,9 +66,8 @@ public class PagoPaypal extends PagoSteps {
 	private enum InitPagePaypal {Login, CreacionCuenta}
 	private enum PostLoginPagePaypal {SelectPago, Confirmacion}
 	
-	private InitPagePaypal getInitPagePaypal(WebDriver driver) {
-		int seconds = 5;
-		if (new PagePaypalLogin().isPageUntil(seconds)) {
+	private InitPagePaypal getInitPagePaypal() {
+		if (new PagePaypalLogin().isPageUntil(5)) {
 			return InitPagePaypal.Login;
 		}
 		
