@@ -79,6 +79,21 @@
             <version>1.10.19</version>
             <scope>test</scope>
         </dependency>
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.9.1</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjtools -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjtools</artifactId>
+			<version>1.9.1</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
@@ -105,14 +120,14 @@
 					<Xlint>ignore</Xlint>
 					<encoding>UTF-8</encoding>
 					<weaveDependencies>
-						<weaveDependency> 
+						<weaveDependency>
 							<groupId>com.github.jorge2m</groupId>
 							<artifactId>testmaker-core</artifactId>
 						</weaveDependency>
 					</weaveDependencies>
 				</configuration>
 				<executions>
-					<execution> 
+					<execution>
 						<goals>
 							<goal>compile</goal>
 						</goals>
