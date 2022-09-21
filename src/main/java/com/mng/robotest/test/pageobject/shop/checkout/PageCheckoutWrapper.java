@@ -460,7 +460,7 @@ public class PageCheckoutWrapper extends PageBase {
 		return page1DktopCheckout.isvisibleModalDirections();
 	}
 	public boolean direction() throws Exception {
-		return page1DktopCheckout.getAddress();
+		return page1DktopCheckout.isDirectionsPrincipal();
 	}
 
 }

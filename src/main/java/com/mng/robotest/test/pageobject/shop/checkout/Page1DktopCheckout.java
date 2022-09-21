@@ -1,5 +1,6 @@
 package com.mng.robotest.test.pageobject.shop.checkout;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.StringTokenizer;
@@ -108,7 +109,9 @@ public class Page1DktopCheckout extends PageBase {
 
 	private static final String XPATH_DIRECTIONS ="//*[@data-testid='checkout.multiAddress.modalAddresses.addressRadio']";
 	private static final String XPATH_MAIN_DIRECTION ="//*[@data-testid='checkout.multiAddress.modalAddresses.addressExtraInfo']";
-	private static final String XPATH_DIRECTION ="checkout.multiAddress.modalAddresses.addressDirection";
+	private static final String XPATH_DIRECTION ="//*[@data-testid='checkout.multiAddress.modalAddresses.addressDirection']";
+	private static final String XPATH_CLOSE_MODAL ="//*[@data-testid='modal.close.button']";
+
 	private static final String XPATH_NAME ="//*[@data-testid='checkout.multiAddress.modalAddresses.addressName']";
 	private static final String XPATH_PROVINCE ="//*[@data-testid='checkout.multiAddress.modalAddresses.addressLocation']";
 	private static final String XPATH_TFN ="//*[@data-testid='checkout.multiAddress.modalAddresses.addressPhone']";
@@ -269,14 +272,35 @@ public class Page1DktopCheckout extends PageBase {
 	public boolean isvisibleModalDirections() throws Exception {
 		return state(Visible, XPATH_MODAL_DIRECTIONS).check();
 	}
-	public boolean getAddress() throws Exception {
-		String mainDirectionCheckout=driver.findElement(By.xpath(XPATH_CHECKOUT_DELIVERY_ADDRESS)).getText().substring(0,8);
-		click(XPATH_BTN_ADDRESS).exec();
-		String mainDirection= driver.findElement(By.xpath(XPATH_DIRECTION)).getText();
-		if (mainDirectionCheckout.equals(mainDirection)){
-			return true;
+	public String getAddress() throws Exception {
+		String addressCheckout = "";
+		waitLoadPage();
+		List<WebElement> addressModal = getElements(XPATH_DIRECTIONS);
+		List<WebElement> address1 = getElements(XPATH_DIRECTION);
 
-		}else {
+		Iterator<WebElement> it = addressModal.iterator();
+		while (it.hasNext()) {
+			WebElement address = it.next();
+			String addressLista= address.getAttribute("data-testid");
+			if (addressLista.contains(XPATH_MAIN_DIRECTION)) {
+				Iterator<WebElement> it2 = address1.iterator();
+				while (it.hasNext()) {
+					WebElement address2 = it2.next();
+					String addressModalPrincipal= address2.getAttribute("data-testid");
+					if (addressModalPrincipal.contains(XPATH_DIRECTION)) {
+						 addressCheckout = address2.getText();
+					}
+				}
+			}
+		}
+		return addressCheckout;
+	}
+	public boolean isDirectionsPrincipal() throws Exception {
+		click(XPATH_CLOSE_MODAL).exec();
+		String directionCheckout= getTextDireccionEnvioCompleta();
+		if (getAddress().equals(directionCheckout)) {
+			return true;
+		}else{
 			return false;
 		}
 
