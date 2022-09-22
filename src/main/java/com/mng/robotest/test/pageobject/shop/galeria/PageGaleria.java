@@ -35,19 +35,19 @@ public abstract class PageGaleria extends PageBase {
 	
 	public enum From {MENU, BUSCADOR}
 	
-	public static int MAX_PAGE_TO_SCROLL = 20;
+	public static final int MAX_PAGE_TO_SCROLL = 20;
 	
 	protected final From from;
 	protected final String xpathArticuloBase;
 	protected final SecPreciosArticulo secPrecios = new SecPreciosArticulo();
 
-	public PageGaleria() {
+	protected PageGaleria() {
 		super();
 		this.from = From.MENU;
 		this.xpathArticuloBase = getXPathArticulo();
 	}
 	
-	public PageGaleria(From from) {
+	protected PageGaleria(From from) {
 		this.from = from;
 		this.xpathArticuloBase = getXPathArticulo();
 	}
@@ -81,7 +81,7 @@ public abstract class PageGaleria extends PageBase {
 	public abstract void clickHearthIcon(WebElement hearthIcon) throws Exception;
 	public abstract void hideMenus();
 
-	public static List<LabelArticle> listLabelsNew = Arrays.asList(
+	protected static final List<LabelArticle> listLabelsNew = Arrays.asList(
 			LabelArticle.ComingSoon, 
 			LabelArticle.NewNow, 
 			LabelArticle.NewCollection);
@@ -102,8 +102,7 @@ public abstract class PageGaleria extends PageBase {
 		switch (channel) {
 		case desktop:
 			return new PageGaleriaDesktop(from);
-		case mobile:
-		case tablet:
+		case mobile, tablet:
 		default:
 			return new PageGaleriaDevice(from);
 		}
@@ -131,10 +130,9 @@ public abstract class PageGaleria extends PageBase {
 			return XPATH_ARTICULO_DESKTOP;
 		}
 		else {
-			if (channel==Channel.tablet) {
-				if  (app==AppEcom.outlet || from==From.BUSCADOR) {
-					return XPATH_ARTICULO_TABLET_OUTLET;
-				}
+			if (channel==Channel.tablet &&
+			   (app==AppEcom.outlet || from==From.BUSCADOR)) {
+				return XPATH_ARTICULO_TABLET_OUTLET;
 			}
 			return XPATH_ARTICULO_DEVICE;
 		}
@@ -250,13 +248,9 @@ public abstract class PageGaleria extends PageBase {
 		switch (typeOrden) {
 		case NOordenado:
 			return "";
-		case PrecioAsc:
-		case PrecioDesc:
+		case PrecioAsc, PrecioDesc:
 			return secPrecios.getAnyPrecioNotInOrder(typeOrden, getListaArticulos());
-		case TemporadaDesc:
-		case TemporadaAsc:
-		case BloqueTemporadas_3y4_despues_la_5:
-		case BloqueTemporada_5_despues_la_3y4:
+		case TemporadaDesc, TemporadaAsc, BloqueTemporadas_3y4_despues_la_5, BloqueTemporada_5_despues_la_3y4:
 			return getAnyRefNotInOrderTemporada(typeOrden);
 		default:
 			return "";
@@ -716,5 +710,9 @@ public abstract class PageGaleria extends PageBase {
 			}
 		}
 		return "";
+	}
+
+	public static List<LabelArticle> getListlabelsnew() {
+		return listLabelsNew;
 	}
 }

@@ -60,8 +60,7 @@ public class CheckerSEO extends PageBase implements Checker {
 			listaProblemas.add("<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">Se ha producido una excepción (" + e.getMessage() + ") durante las validaciones</c>");
 		}
 		
-		//Si se ha producido algún problema lo recogemos
-		if (listaProblemas.size()>0) {
+		if (!listaProblemas.isEmpty()) {
 			listaProblemas.add("<br><br><c style=\"color:brown\"><b>SEO:</b> problemas en página con URL <a href=\"" + driver.getCurrentUrl() + "\">" + driver.getCurrentUrl() + "</a>:");
 			resultado.setResultado(ResultadoErrores.Resultado.ERRORES);
 			resultado.setListaLogError(listaProblemas);

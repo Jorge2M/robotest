@@ -148,7 +148,7 @@ public class SecDataProduct extends PageBase {
 	public String getTituloArt() {
 		String xpathNombreArt = getXPathNombreArt();
 		List<WebElement> listArticles = getElementsVisible(xpathNombreArt);
-		if (listArticles.size()>0) {
+		if (!listArticles.isEmpty()) {
 			WebElement tituloArt = listArticles.get(0);
 			if (tituloArt!=null) {
 				return (tituloArt.getText());

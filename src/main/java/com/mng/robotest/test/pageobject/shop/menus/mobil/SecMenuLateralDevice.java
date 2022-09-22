@@ -63,7 +63,7 @@ public class SecMenuLateralDevice extends PageBase {
 
 	public boolean isMenus2onLevelDisplayed(SublineaType sublineaType) {
 		List<WebElement> listMenus = getListMenusDisplayed(sublineaType);
-		return (listMenus!=null && listMenus.size()>0);
+		return (listMenus!=null && !listMenus.isEmpty());
 	}
 
 	public List<WebElement> getListMenusAfterSelectLinea(Linea linea, SublineaType sublineaType) throws Exception {

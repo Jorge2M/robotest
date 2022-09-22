@@ -107,7 +107,7 @@ public class CheckoutFlow extends StepBase {
 		}
 		
 		if (from==From.CHECKOUT || from==From.IDENTIFICATION || from==From.BOLSA || from==From.PREHOME) {
-			if (pais.getListPagosForTest(app, dataPago.getFTCkout().userIsEmployee).size() > 0) {
+			if (!pais.getListPagosForTest(app, dataPago.getFTCkout().userIsEmployee).isEmpty()) {
 				checkMetodosPagos(finalCountrys);
 			}
 		}
@@ -229,7 +229,7 @@ public class CheckoutFlow extends StepBase {
 			}
 				
 			//En el caso de españa, después de validar todos los países probamos el botón "CHANGE DETAILS" sobre los países indicados en la lista
-			if (dataTest.getCodigoPais().compareTo("001")==0 /*España*/ && paisesDestino!=null && paisesDestino.size()>0) {
+			if (dataTest.getCodigoPais().compareTo("001")==0 /*España*/ && paisesDestino!=null && !paisesDestino.isEmpty()) {
 				Pais paisChange = null;
 				Iterator<Pais> itPaises = paisesDestino.iterator();
 				while (itPaises.hasNext()) {

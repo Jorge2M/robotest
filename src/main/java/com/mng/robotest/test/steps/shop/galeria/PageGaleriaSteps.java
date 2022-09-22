@@ -260,7 +260,7 @@ public class PageGaleriaSteps extends StepBase {
 		ChecksTM checks = ChecksTM.getNew();
 		List<DataArticleGalery> productsRepeated = pageGaleria.searchArticleRepeatedInGallery();
 		String producRepeatedWarning = "";
-		if (productsRepeated!=null && productsRepeated.size()>0) {
+		if (productsRepeated!=null && !productsRepeated.isEmpty()) {
 			producRepeatedWarning+=
 				"<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b>: " + 
 				"hay " + productsRepeated.size() + " productos repetidos, " + 
@@ -756,10 +756,10 @@ public class PageGaleriaSteps extends StepBase {
 	   }
 	   String validaNotNewArticlesStr = "";
 	   if (validaNotNewArticles) {
-	   	validaNotNewArticlesStr = " y no contienen alguna de las etiquetas de artículo nuevo (" + PageGaleria.listLabelsNew + ")";
+	   	validaNotNewArticlesStr = " y no contienen alguna de las etiquetas de artículo nuevo (" + PageGaleria.getListlabelsnew() + ")";
 	   }
 	   String infoWarning = "";
-	   if (listArtWrong.size() > 0) {
+	   if (!listArtWrong.isEmpty()) {
 		   infoWarning+=
 			   "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
 			   "hay " + listArtWrong.size() + " artículos que no pertenecen a las temporadas " + listTemporadas + ":<br>";
@@ -790,7 +790,7 @@ public class PageGaleriaSteps extends StepBase {
 	   		    listArtWrong.size()==0, levelError)
 	        .store(store).build());
 	        
-   		if (listArtWrong.size() > 0) {
+   		if (!listArtWrong.isEmpty()) {
    			addInfoArtWrongToDescription(listArtWrong, typeArticle, checks.get(0));
    		}
 	   	return checks; 
