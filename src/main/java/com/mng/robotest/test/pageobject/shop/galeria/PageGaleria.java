@@ -654,9 +654,8 @@ public abstract class PageGaleria extends PageBase {
 		click(articulo).waitLoadPage(30).exec();
 	}
 
-	@SuppressWarnings("static-access")
 	public String openArticuloPestanyaAndGo(WebElement article, AppEcom app) 
-	throws Exception {
+			throws Exception {
 		String galeryWindowHandle = driver.getWindowHandle();
 		if (channel==Channel.desktop) {
 			//En el caso de Firefox-Geckodriver el moveToElement (que se acaba realizando mediante el workarround basado en JavaScript) 

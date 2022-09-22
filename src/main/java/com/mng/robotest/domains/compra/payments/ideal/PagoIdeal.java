@@ -13,7 +13,6 @@ public class PagoIdeal extends PagoSteps {
 		super.isAvailableExecPay = true;
 	}
 	
-	@SuppressWarnings("static-access")
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);

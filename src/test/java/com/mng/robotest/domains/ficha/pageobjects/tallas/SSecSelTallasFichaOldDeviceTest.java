@@ -12,7 +12,7 @@ public class SSecSelTallasFichaOldDeviceTest {
 
 	@Test
 	public void testGetXPathOptionTalla() {
-		SSecSelTallasFichaOldDevice selTallas = new SSecSelTallasFichaOldDevice(Channel.desktop, AppEcom.shop);
+		SSecSelTallasFichaDevice selTallas = new SSecSelTallasFichaDevice(Channel.desktop, AppEcom.shop);
 		String xpath = selTallas.getXPathOptionTalla(Talla.T32);
 		
 		String xpathExpected = 

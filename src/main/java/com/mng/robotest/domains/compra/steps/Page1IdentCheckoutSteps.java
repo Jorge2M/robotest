@@ -10,7 +10,6 @@ public class Page1IdentCheckoutSteps extends StepBase {
 	private final SecSoyNuevoSteps secSoyNuevoSteps = new SecSoyNuevoSteps();
 	private final Page1IdentCheckout page1IdentCheckout = new Page1IdentCheckout();
 	
-	@SuppressWarnings("static-access")
 	@Validation (
 		description="Aparece el formulario correspondiente a la identificación (lo esperamos hasta #{seconds} segs)",
 		level=State.Defect)

@@ -18,7 +18,6 @@ import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
-import com.mng.robotest.domains.ficha.pageobjects.PageFicha.TypeFicha;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.domains.transversal.StepBase;
@@ -110,9 +109,7 @@ public class PageGaleriaSteps extends StepBase {
 
 		//Validaciones sección BreadCrumb + Next
 		if (channel==Channel.desktop) {
-			if (pageFichaSteps.getFicha().getTypeFicha()==TypeFicha.OLD) {
-				pageFichaSteps.validaBreadCrumbFichaOld(urlGaleria);
-			}
+			pageFichaSteps.validaBreadCrumbFichaOld(urlGaleria);
 		}
 		
 		return (datosArticulo);
@@ -500,7 +497,6 @@ public class PageGaleriaSteps extends StepBase {
 				GenericCheck.NetTraffic)).checks();	   
 	}
    
-   	@SuppressWarnings("static-access")
 	@Validation
 	private ChecksTM checkIsFichaArticle(String nombre1erArt, String precio1erArt, int seconds) {
 		ChecksTM checks = ChecksTM.getNew();
@@ -659,7 +655,6 @@ public class PageGaleriaSteps extends StepBase {
    		return checks;
 	}
 
-	@SuppressWarnings("static-access")
 	@Validation
 	public ChecksTM validaRebajasHasta70Jun2018(IdiomaPais idioma) {
 		ChecksTM checks = ChecksTM.getNew();
@@ -813,7 +808,6 @@ public class PageGaleriaSteps extends StepBase {
 	   validation.setDescription(descriptionOrigin + textToAdd);
    }
    
-	@SuppressWarnings("static-access")
 	@Step (
 		description="Seleccionamos el link <b>Más Info</b>", 
 		expected="Se hace visible el aviso legal")
@@ -822,7 +816,6 @@ public class PageGaleriaSteps extends StepBase {
 		checkAfterClickInfoRebajas(driver);
 	}
 	
-	@SuppressWarnings("static-access")
 	@Validation
 	private static ChecksTM checkAfterClickInfoRebajas(WebDriver driver) {
 		ChecksTM checks = ChecksTM.getNew();

@@ -76,7 +76,6 @@ public class ModalDetalleCompraSteps extends StepBase {
 		return checks;
 	}
 	
-//	@SuppressWarnings("static-access")
 //	@Validation (
 //		description="Aparece la imagen correspondiente al código de barras de la compra",
 //		level=State.Warn)

@@ -41,10 +41,6 @@ public class PageFichaDevice extends PageFicha {
 	private static final String XPATH_MODAL_NO_STOCK = "//div[@class='modalNoStock show']";
 	private static final String XPATH_IMAGEN_CARRUSEL_IZQ = "//div[@class='carousel-img-container']//img[@class[contains(.,'carousel-img')]]";
 	
-	public PageFichaDevice() {
-		super(TypeFicha.OLD);
-	}
-	
 	private String getXPathIsPage(String referencia, Channel channel) {
 		return XPATH_CONTAINER_FICHA + secDataProduct.getXPathLinReferencia(referencia);
 	}

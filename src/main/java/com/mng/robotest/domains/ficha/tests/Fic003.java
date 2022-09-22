@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.ficha.tests;
 
-import com.mng.robotest.domains.ficha.pageobjects.PageFicha.TypeFicha;
 import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ProductNav;
 import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
@@ -50,7 +49,7 @@ public class Fic003 extends TestBase {
 	}
 
 	private void kcSafetyTest() throws Exception {
-		if (pageFichaSteps.getFicha().getTypeFicha()==TypeFicha.OLD) {
+		if (channel.isDevice()) {
 			if (TypePanel.KC_SAFETY.getListApps().contains(app)) {
 				pageFichaSteps.getSecProductDescOldSteps().selectPanel(TypePanel.KC_SAFETY);
 			}

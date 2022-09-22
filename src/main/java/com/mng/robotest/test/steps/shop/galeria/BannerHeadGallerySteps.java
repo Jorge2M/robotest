@@ -33,7 +33,6 @@ public class BannerHeadGallerySteps {
 		return (new BannerHeadGallerySteps(pageGaleriaParent, driver));
 	}
 	
-	@SuppressWarnings("static-access")
 	public void validateBannerSuperiorIfExistsDesktop() {
 		boolean bannerIsVisible = secBannerHeadDesktop.isVisible();
 		if (bannerIsVisible) {
@@ -43,7 +42,6 @@ public class BannerHeadGallerySteps {
 		}
 	}
 
-	@SuppressWarnings("static-access")
 	@Validation (
 		description="El Banner de Cabecera contiene algún texto",
 		level=State.Warn)
@@ -53,7 +51,6 @@ public class BannerHeadGallerySteps {
 	}
 
 	@Validation
-	@SuppressWarnings("static-access")
 	public ChecksTM checkBannerContainsText(List<String> possibleTexts) {
 		ChecksTM checks = ChecksTM.getNew();
 		String textBanner = secBannerHeadDesktop.getText();
@@ -63,7 +60,6 @@ public class BannerHeadGallerySteps {
 		return checks;
 	}
 
-	@SuppressWarnings("static-access")
 	@Step (
 		description="Seleccionar el banner superior de la Galería", 
 		expected="Aparece una galería de artículos")
@@ -72,7 +68,6 @@ public class BannerHeadGallerySteps {
 		pageGaleriaParent.validaArtEnContenido(3);
 	}
 
-	@SuppressWarnings("static-access")
 	@Validation
 	public ChecksTM checkBannerSalesHead(TypeGalery typeGalery, Pais pais, IdiomaPais idioma) {
 		ChecksTM checks = ChecksTM.getNew();
@@ -108,7 +103,6 @@ public class BannerHeadGallerySteps {
 		return checks;
 	}
 
-	@SuppressWarnings("static-access")
 	@Validation
 	ChecksTM checkBannerHeadSalesOff(IdiomaPais idioma) {
 		ChecksTM checks = ChecksTM.getNew();

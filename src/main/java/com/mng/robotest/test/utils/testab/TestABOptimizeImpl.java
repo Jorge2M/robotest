@@ -113,15 +113,15 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 	),	
 	
 	Test_New_Menu_Desktop_PRO(
-			"Test - New Menú - Desktop PRO",
-			"_0pE_bPVTCa9mB5wgaENww",
-			Arrays.asList(0,1),
-			Arrays.asList(
-				"V0-Original", 
-				"V1-New Menu"),
-			Arrays.asList(Channel.desktop),
-			Arrays.asList(AppEcom.shop)
-		),
+		"Test - New Menú - Desktop PRO",
+		"_0pE_bPVTCa9mB5wgaENww",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"V0-Original", 
+			"V1-New Menu"),
+		Arrays.asList(Channel.desktop),
+		Arrays.asList(AppEcom.shop)
+	),
 	
 	PLP_Desktop_New_filters_v2(
 		"PLP - Desktop - New filters v2",
@@ -155,7 +155,30 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 			"Variante 1 - Filtros superiores"),
 		Arrays.asList(Channel.desktop),
 		Arrays.asList(AppEcom.shop)
-	);
+	),
+	
+	PDP_Desktop_Size_Selector_PRE(
+		"[PDP][DESKTOP] Size Selector",
+		"CUSxSJA4RfmbbIkYEmmMUA",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"Variante 0 - Original",
+			"Variante 1 - Filtros superiores"),
+		Arrays.asList(Channel.desktop),
+		Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.shop)
+	),
+	
+	PDP_Desktop_Size_Selector_PRO(
+		"[PDP][DESKTOP] Size Selector",
+		"4pmgwV0pSL6osr9cG8pDPA",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"Variante 0 - Original",
+			"Variante 1 - Filtros superiores"),
+		Arrays.asList(Channel.desktop),
+		Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.shop)
+	);	
+	
 	
 //	 ES_SHOP_XXX_EMP_vs_FH_Search_Desktop (
 //		"PLP - Desktop - Navigation filters",

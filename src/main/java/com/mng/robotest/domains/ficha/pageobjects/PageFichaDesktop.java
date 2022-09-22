@@ -22,7 +22,6 @@ public class PageFichaDesktop extends PageFicha {
 	private static final String XPATH_HTML_FICHA = "//html[@class[contains(.,'ficha')]]";
 	
 	public PageFichaDesktop() {
-		super(TypeFicha.NEW);
 		this.secBolsaButtonAndLinks = new SecBolsaButtonAndLinksNew();
 		this.modEnvioYdevolNew = new ModEnvioYdevolNew();
 		this.secFotos = new SecFotosNew();

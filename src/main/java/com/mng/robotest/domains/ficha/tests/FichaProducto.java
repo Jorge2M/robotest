@@ -12,7 +12,6 @@ public class FichaProducto {
 		new Fic001().execute();
 	}
 
-	@SuppressWarnings("static-access")
 	@Test (
 		groups={"FichaProducto", "Canal:all_App:all"}, alwaysRun=true, 
 		description="[Usuario no registrado] Se testean las features secundarias de una ficha con origen el buscador: guía de tallas, carrusel imágenes, imagen central, panel de opciones, total look")
@@ -20,7 +19,6 @@ public class FichaProducto {
 		new Fic002().execute();
 	}
 	
-	@SuppressWarnings("static-access")
 	@Test (
 		groups={"FichaProducto", "Canal:desktop_App:shop"}, alwaysRun=true, 
 		description="[Usuario no registrado] Desde Corea/coreano, se testea una ficha con origen la Galería validando el panel KcSafety")

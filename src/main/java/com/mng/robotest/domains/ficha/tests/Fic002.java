@@ -8,7 +8,6 @@ import com.mng.robotest.domains.buscador.steps.SecBuscadorSteps;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.ficha.pageobjects.PageFichaDevice;
 import com.mng.robotest.domains.ficha.pageobjects.Slider;
-import com.mng.robotest.domains.ficha.pageobjects.PageFicha.TypeFicha;
 import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.transversal.TestBase;
@@ -44,11 +43,10 @@ public class Fic002 extends TestBase {
 	public void execute() throws Exception {
 		access();
 		secBuscadorSteps.searchArticulo(garment);
-		
-		if (pageFichaSteps.getFicha().getTypeFicha()==TypeFicha.OLD) {
-			pageFichaOldTest();
+		if (channel.isDevice()) {
+			pageFichaDeviceTest();
 		} else {
-			pageFichaNewTest();
+			pageFichaDesktopTest();
 
 		}
 			
@@ -62,7 +60,7 @@ public class Fic002 extends TestBase {
 		}
 	}
 
-	private void pageFichaNewTest() throws Exception {
+	private void pageFichaDesktopTest() throws Exception {
 		boolean isFichaAccesorio = pageFichaSteps.getFicha().isFichaAccesorio(); 
 		pageFichaSteps.getSecFotosNewSteps().validaLayoutFotosNew(isFichaAccesorio);
 		if (isTotalLook) {
@@ -78,7 +76,7 @@ public class Fic002 extends TestBase {
 		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectLinkCompartir(dataTest.getCodigoPais());
 	}
 
-	private void pageFichaOldTest() throws Exception {
+	private void pageFichaDeviceTest() throws Exception {
 		if (app==AppEcom.outlet && channel!=Channel.mobile) {
 			pageFichaSteps.validaExistsImgsCarruselIzqFichaOld();
 		}

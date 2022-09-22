@@ -22,7 +22,7 @@ public class ArticuloNavigations {
 		Article articleStock = productStock.getArticleWithMoreStock();
 		articulo.setReferencia(articleStock.getGarmentId());
 		if (productStock.getUrlFicha()==null || "".compareTo(productStock.getUrlFicha())==0) {
-			buscarArticulo(articleStock, channel, app);
+			buscarArticulo(articleStock, channel, app); 
 		} else {
 			driver.get(productStock.getUrlFicha());
 		}
@@ -39,8 +39,8 @@ public class ArticuloNavigations {
 			pageFicha.getSecDataProduct().selectColorWaitingForAvailability(idColor);
 		}
 		articulo.setCodigoColor(idColor);
-
 		articulo.setColorName(pageFicha.getSecDataProduct().getNombreColorSelected());
+		
 		if (articleStock.getSize()!=null) {
 			String size = articleStock.getSize().getId2Digits();
 			if (articleStock.getSize().getLabel().matches("\\d+")) {
@@ -49,6 +49,7 @@ public class ArticuloNavigations {
 			} else {
 				pageFicha.selectTallaByValue(Talla.fromValue(size));
 			}
+			pageFicha.selectTallaByValue(Talla.fromLabel(size));
 		} else {
 			pageFicha.selectTallaByIndex(1);
 		}
@@ -83,7 +84,6 @@ public class ArticuloNavigations {
 		}
 	}
 
-	@SuppressWarnings("static-access")
 	private static void selectColorIfExists(String colourCode, Channel channel, AppEcom app) {
 		if (colourCode!=null && "".compareTo(colourCode)!=0) {
 			PageFicha pageFicha = PageFicha.of(channel);

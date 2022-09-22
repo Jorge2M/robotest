@@ -7,8 +7,6 @@ import com.mng.robotest.test.generic.beans.ArticuloScreen;
 
 public abstract class PageFicha extends PageBase {
 
-	public enum TypeFicha { OLD, NEW }
-	
 	public abstract boolean isPageUntil(int seconds);
 	public abstract boolean isFichaArticuloUntil(String refArticulo, int seconds);
 	public abstract void clickAnadirBolsaButtonAndWait();
@@ -25,36 +23,14 @@ public abstract class PageFicha extends PageBase {
 	public abstract int getNumArtVisiblesSlider(Slider typeSlider);
 	public abstract boolean isModalNoStockVisible(int seconds);
 	
-	protected final SecDataProduct secDataProduct; //Name, color, talla section
+	protected final SecDataProduct secDataProduct = new SecDataProduct(); //Name, color, talla section
 	public static SecFitFinder secFitFinder; //Guía de tallas v.Fit Finder
-	
-	private final TypeFicha typeFicha;
-	
-	public PageFicha(TypeFicha typeFicha) {
-		this.secDataProduct = new SecDataProduct(typeFicha);
-		this.typeFicha = typeFicha;
-	}
-	
-	public TypeFicha getTypeFicha() {
-		return typeFicha;
-	}
 	
 	public SecDataProduct getSecDataProduct() {
 		return secDataProduct;
 	}
 	
 	public static PageFicha of(Channel channel) {
-//		PageFichaArt_DesktopShop pageFichaNew = PageFichaArt_DesktopShop.getNewInstance();
-//		PageFichaArtOld pageFichaOld = PageFichaArtOld.getNewInstance();
-//		for (int i=0; i<5; i++) {
-//			if (pageFichaNew.isPageUntil(1)) {
-//				return pageFichaNew;
-//			}
-//			if (pageFichaOld.isPageUntil(1)) {
-//				return pageFichaOld;
-//			}
-//		}
-//		return pageFichaNew;
 		if (channel.isDevice()) {
 			return new PageFichaDevice();
 		} else {

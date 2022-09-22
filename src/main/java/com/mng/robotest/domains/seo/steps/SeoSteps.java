@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Optional;
+
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -138,22 +140,24 @@ public class SeoSteps extends StepBase {
 			sitemapOk, State.Defect);
 		
 		if (sitemapOk) {
-			Sitemapindex sitemapIndex = pageSitemap.getSiteMap().get();
-			Date currDateDayPrecision = removeTime(new Date());
-			String currentDay = new SimpleDateFormat("yyyy-MM-dd").format(currDateDayPrecision);
-			Iterator<Sitemap> itSites = sitemapIndex.getSitemap().iterator();
-			boolean lastModsContainsCurrentDay = true;
-			while (itSites.hasNext()) {
-				Sitemap sitemap = itSites.next();
-				Date lastmodDate = removeTime(sitemap.getLastmod().toGregorianCalendar().getTime());
-				if (!lastmodDate.equals(currDateDayPrecision)) {
-					lastModsContainsCurrentDay = false;
-					break;
+			Optional<Sitemapindex> sitemapIndexOpt = pageSitemap.getSiteMap();
+			if (sitemapIndexOpt.isPresent()) {
+				Date currDateDayPrecision = removeTime(new Date());
+				String currentDay = new SimpleDateFormat("yyyy-MM-dd").format(currDateDayPrecision);
+				Iterator<Sitemap> itSites = sitemapIndexOpt.get().getSitemap().iterator();
+				boolean lastModsContainsCurrentDay = true;
+				while (itSites.hasNext()) {
+					Sitemap sitemap = itSites.next();
+					Date lastmodDate = removeTime(sitemap.getLastmod().toGregorianCalendar().getTime());
+					if (!lastmodDate.equals(currDateDayPrecision)) {
+						lastModsContainsCurrentDay = false;
+						break;
+					}
 				}
+				checks.add(
+					"Todos los tags <b>lastmod</b> contienen la fecha del día: " + currentDay,
+					lastModsContainsCurrentDay, State.Defect);
 			}
-			checks.add(
-				"Todos los tags <b>lastmod</b> contienen la fecha del día: " + currentDay,
-				lastModsContainsCurrentDay, State.Defect);
 		}
 		
 		return checks;

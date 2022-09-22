@@ -19,7 +19,6 @@ import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.ficha.pageobjects.PageFichaDevice;
 import com.mng.robotest.domains.ficha.pageobjects.SecBreadcrumbFichaOld;
 import com.mng.robotest.domains.ficha.pageobjects.Slider;
-import com.mng.robotest.domains.ficha.pageobjects.PageFicha.TypeFicha;
 import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.ActionFavButton;
 import com.mng.robotest.domains.ficha.pageobjects.SecBreadcrumbFichaOld.ItemBCrumb;
 import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ColorType;
@@ -208,11 +207,9 @@ public class PageFichaSteps extends StepBase {
 	 */
 	public boolean selectAnadirALaBolsaTallaPrevNoSelected() throws Exception {
 		selectAnadirALaBolsaStep();
-		
 		boolean isTallaUnica = pageFicha.isTallaUnica();
-		TypeFicha typeFichaAct = pageFicha.getTypeFicha();
-		checkAvisoTallaUnica(isTallaUnica, typeFichaAct);
-		if (!isTallaUnica && typeFichaAct==TypeFicha.NEW) {
+		checkAvisoTallaUnica(isTallaUnica);
+		if (!isTallaUnica && channel.isDevice()) {
 			checkListaTallasVisible();
 		}
 			
@@ -220,10 +217,10 @@ public class PageFichaSteps extends StepBase {
 	}
 	
 	@Validation
-	public ChecksTM checkAvisoTallaUnica(boolean isTallaUnica, TypeFicha typeFichaAct) {
+	public ChecksTM checkAvisoTallaUnica(boolean isTallaUnica) {
 		ChecksTM checks = ChecksTM.getNew();
 		boolean isVisibleAviso = pageFicha.getSecDataProduct().isVisibleAvisoSeleccionTalla();
-		if (isTallaUnica || typeFichaAct==TypeFicha.NEW) {
+		if (isTallaUnica || !channel.isDevice()) {
 		 	checks.add(
 		 		"NO aparece un aviso indicando que hay que seleccionar la talla",
 		 		!isVisibleAviso, State.Defect);

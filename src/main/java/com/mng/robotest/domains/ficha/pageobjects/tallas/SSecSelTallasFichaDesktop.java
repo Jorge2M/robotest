@@ -1,14 +1,53 @@
 package com.mng.robotest.domains.ficha.pageobjects.tallas;
 
-
-
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.PageBase;
 
+//import static com.mng.robotest.domains.ficha.pageobjects.tallas.SSecSelTallasFichaDesktop.XPathTallas.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
-public class SSecSelTallasFichaNew extends PageBase implements SSecSelTallasFicha {
+public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallasFicha {
+	
+//	public enum XPathTallas {
+//		XPATH_CAPA_TALLAS(
+//			"//form/div[@class='sizes']",
+//			"//div[@id='sizesContainer']"),
+//		XPATH_SELECTOR_TALLAS(
+//			XPATH_CAPA_TALLAS.getXPathOld() + "/div[@class='selector']",
+//			XPATH_CAPA_TALLAS.getXPathNew() + "//div[@role='list']"),
+//		XPATH_LIST_TALLAS_FOR_SELECT(
+//			XPATH_SELECTOR_TALLAS.getXPathOld() + "//div[@class[contains(.,'selector-list')]]",
+//			XPATH_CAPA_TALLAS.getXPathNew() + "//div[@role='list']"), 
+//		XPATH_TALLA_ITEM(
+//			XPATH_CAPA_TALLAS.getXPathOld() + "//span[(@role='option' or @role='button') and not(@data-available='false')]",
+//			XPATH_CAPA_TALLAS.getXPathNew() + "//div[@role='listitem']"),
+//		XPATH_TALLA_AVAILABLE(
+//			XPATH_TALLA_ITEM.getXPathOld() + "//self::span[@data-available='true' or @class='single-size']",
+//			XPATH_TALLA_ITEM.getXPathNew() + ),
+//		XPATH_TALLA_UNAVAILABLE(
+//			XPATH_TALLA_ITEM.getXPathOld() + "//self::span[not(@data-available) and not(@class='single-size')]",
+//			XPATH_TALLA_ITEM.getXPathNew() + "//i[@class='icon-outline-email']/../../.."),
+//		XPATH_TALLA_SELECTED(
+//			XPATH_TALLA_ITEM.getXPathOld() + "//self::span[@class[contains(.,'selector-trigger')] or @class='single-size']",
+//			""),
+//		XPATH_TALLA_UNICA(
+//			XPATH_TALLA_ITEM.getXPathOld() + "//self::span[@class[contains(.,'single-size')]]",
+//			"");
+//		
+//		private String xpathOld; 
+//		private String xpathNew;
+//		private XPathTallas(String xpathOld, String xpathNew) {
+//			this.xpathOld = xpathOld;
+//			this.xpathNew = xpathNew;
+//		}
+//		private String getXPathOld() {
+//			return xpathOld;
+//		}
+//		private String getXPathNew() {
+//			return xpathNew;
+//		}
+//
+//	}
 	
 	private static final String XPATH_CAPA_TALLAS = "//form/div[@class='sizes']";
 	private static final String XPATH_SELECTOR_TALLAS = XPATH_CAPA_TALLAS + "/div[@class='selector']";

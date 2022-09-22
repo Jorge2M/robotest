@@ -15,7 +15,7 @@ import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Talla;
 
 
-public class SSecSelTallasFichaOldDevice extends PageBase implements SSecSelTallasFicha {
+public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasFicha {
 	
 	private static final String XPATH_SELECTOR_BUTTON = "//*[@data-testid='sizeSelectorButton']";
 	private static final String XPATH_CAPA_TALLAS = "//div[@id='sizesContainerId']";
@@ -23,7 +23,7 @@ public class SSecSelTallasFichaOldDevice extends PageBase implements SSecSelTall
 	private static final String XPATH_TALLA_SELECTED = XPATH_SELECTOR_BUTTON + "//span[@class[contains(.,'size-text')]]";
 	private static final String XPATH_OPTION_TALLA_UNICA = "//button[@id='productFormSelect']//span[@class='one-size-text']";
 	
-	public SSecSelTallasFichaOldDevice(Channel channel, AppEcom app) {
+	public SSecSelTallasFichaDevice(Channel channel, AppEcom app) {
 		super(channel, app);
 	}
 	
