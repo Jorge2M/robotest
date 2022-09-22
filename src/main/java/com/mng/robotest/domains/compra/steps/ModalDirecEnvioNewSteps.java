@@ -4,6 +4,8 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.compra.pageobject.DirectionData;
+import com.mng.robotest.domains.compra.pageobject.DirectionData2;
+
 import com.mng.robotest.domains.compra.pageobject.ModalDirecEnvioNew;
 
 public class ModalDirecEnvioNewSteps {
@@ -19,11 +21,19 @@ public class ModalDirecEnvioNewSteps {
 
 	@Step (
 		description="Introducir los datos y pulsar \"Guardar\"<br>#{direction.getFormattedHTMLData()}", 
-		expected="Los datos se actualizan correctamente")
+		expected="Los datos se añaden correctamente")
 	public void inputDataAndSave(DirectionData direction) throws Exception {
 		modalDirecEnvio.inputData(direction);
 		modalDirecEnvio.clickSaveButton();
 		checkAfterAddDirection(direction);
+	}
+	@Step (
+			description="Editar los datos y pulsar \"Guardar\"<br>#{direction.getFormattedHTMLData()}",
+			expected="Los datos se actualizan correctamente")
+	public void inputDataAndEdit(DirectionData2 direction) throws Exception {
+		modalDirecEnvio.inputDataEdit(direction);
+		modalDirecEnvio.clickSaveButton();
+		//checkAfterAddDirection(direction);
 	}
 	
 	@Step (

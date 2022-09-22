@@ -38,6 +38,7 @@ public class ModalMultidirection extends PageBase {
 	}
 	
 	public boolean isVisible() throws Exception {
+		waitMillis(1000);
 		return state(Visible, XPATH_MODAL_DIRECTIONS).check();
 	}
 	

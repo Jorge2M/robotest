@@ -8,6 +8,8 @@ public class ModalDirecEnvioNew extends PageBase {
 	public static final String XPATH_CHECK_DIRECION_PRINCIPAL = "//*[@data-testid='form-isMainAddress']";
 	public static final String XPATH_SAVE_BUTTON = "//*[@data-testid[contains(.,'save.button')]]";
 	public static final String XPATH_REMOVE_BUTTON = "//*[@data-testid='address.form.delete.button']";
+	public static final String XPATH_REMOVE_BUTTON2 = "button[@data-testid='address.form.delete.button']";
+
 	
 	public enum InputType {
 		NOMBRE("address.form.firstName"),
@@ -26,7 +28,7 @@ public class ModalDirecEnvioNew extends PageBase {
 	}
 	
 	public boolean isVisible(int seconds) {
-		return state(State.Present, InputType.NOMBRE.getXPath()).wait(seconds).check(); 
+		return state(State.Present, InputType.NOMBRE.getXPath()).wait(seconds).check();
 	}
 	
 	public void inputData(DirectionData direction) {
@@ -37,7 +39,12 @@ public class ModalDirecEnvioNew extends PageBase {
 		inputData(InputType.MOVIL, direction.getMobil());
 		waitMillis(1000);
 	}
-	
+	public void inputDataEdit(DirectionData2 direction) {
+		inputData(InputType.NOMBRE, direction.getNombre());
+		inputData(InputType.APELLIDOS, direction.getApellidos());
+		waitMillis(1000);
+	}
+
 	public void inputData(InputType inputType, String data) {
 		getElement(inputType.getXPath()).clear();
 		getElement(inputType.getXPath()).sendKeys(data);
@@ -53,5 +60,11 @@ public class ModalDirecEnvioNew extends PageBase {
 	
 	public void clickRemoveButton() {
 		click(XPATH_REMOVE_BUTTON).exec();
+		click(XPATH_REMOVE_BUTTON).exec();
+
+	}
+	public void clickRemoveButton2() {
+		click(XPATH_REMOVE_BUTTON2).exec();
+
 	}
 }
