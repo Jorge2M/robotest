@@ -1,21 +1,20 @@
 package com.mng.robotest.domains.ficha.pageobjects.tallas;
 
 
-
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Talla;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class SSecSelTallasFichaOldDevice extends PageBase implements SSecSelTallasFicha {
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+
+public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasFicha {
 	
 	private static final String XPATH_SELECTOR_BUTTON = "//*[@data-testid='sizeSelectorButton']";
 	private static final String XPATH_CAPA_TALLAS = "//div[@id='sizesContainerId']";
@@ -23,7 +22,7 @@ public class SSecSelTallasFichaOldDevice extends PageBase implements SSecSelTall
 	private static final String XPATH_TALLA_SELECTED = XPATH_SELECTOR_BUTTON + "//span[@class[contains(.,'size-text')]]";
 	private static final String XPATH_OPTION_TALLA_UNICA = "//button[@id='productFormSelect']//span[@class='one-size-text']";
 	
-	public SSecSelTallasFichaOldDevice(Channel channel, AppEcom app) {
+	public SSecSelTallasFichaDevice(Channel channel, AppEcom app) {
 		super(channel, app);
 	}
 	

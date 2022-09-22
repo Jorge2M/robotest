@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.ficha.tests;
 
-import com.mng.robotest.domains.ficha.pageobjects.PageFicha.TypeFicha;
 import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ProductNav;
 import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
@@ -20,20 +19,20 @@ public class Fic003 extends TestBase {
 	private final Pais corea = PaisGetter.get(PaisShop.COREA_DEL_SUR);
 	private final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
 	private final PageFichaSteps pageFichaSteps = new PageFichaSteps();
-	
+
 	public Fic003() throws Exception {
 		super();
 		dataTest.setPais(corea);
 		dataTest.setIdioma(corea.getListIdiomas().get(0));
 	}
-	
+
 	@Override
 	public void execute() throws Exception {
 		access();
 		closeModalNewsLetterIfExists();
 		clickMenu(LineaType.nina, SublineaType.nina_nina, "pantalones");
 		DataFichaArt dataArtOrigin = selectFirstArticleInGalery();
-		
+
 		kcSafetyTest();
 		pageFichaSteps.selectLinkNavigation(ProductNav.NEXT, dataArtOrigin.getReferencia());
 		pageFichaSteps.selectLinkNavigation(ProductNav.PREV, dataArtOrigin.getReferencia());
@@ -50,7 +49,7 @@ public class Fic003 extends TestBase {
 	}
 
 	private void kcSafetyTest() throws Exception {
-		if (pageFichaSteps.getFicha().getTypeFicha()==TypeFicha.OLD) {
+		if (channel.isDevice()) {
 			if (TypePanel.KC_SAFETY.getListApps().contains(app)) {
 				pageFichaSteps.getSecProductDescOldSteps().selectPanel(TypePanel.KC_SAFETY);
 			}

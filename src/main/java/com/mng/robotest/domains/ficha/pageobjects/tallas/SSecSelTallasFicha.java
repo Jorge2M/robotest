@@ -1,12 +1,11 @@
 package com.mng.robotest.domains.ficha.pageobjects.tallas;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.domains.ficha.pageobjects.PageFicha.TypeFicha;
 import com.mng.robotest.test.data.Talla;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public interface SSecSelTallasFicha {
 
@@ -25,14 +24,11 @@ public interface SSecSelTallasFicha {
 	public boolean isVisibleSelectorTallasUntil(int seconds);
 	public boolean isVisibleListTallasForSelectUntil(int seconds);
 	
-	public static SSecSelTallasFicha make(TypeFicha typeFicha, Channel channel, AppEcom app) {
-		if (typeFicha==TypeFicha.OLD) {
-			if (channel.isDevice() /*&& app!=AppEcom.outlet*/) {
-				return new SSecSelTallasFichaOldDevice(channel, app);
-			}
-			return new SSecSelTallasFichaOldDesktop();
+	public static SSecSelTallasFicha make(Channel channel, AppEcom app) {
+		if (channel.isDevice()) {
+			return new SSecSelTallasFichaDevice(channel, app);
 		}
-		return new SSecSelTallasFichaNew();
+		return new SSecSelTallasFichaDesktop();
 	}
 	
 	public default Talla getTallaSelected(AppEcom app) {

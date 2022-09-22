@@ -33,7 +33,7 @@ public class SecSoyNuevoSteps extends StepBase {
 		GenericChecks.checkDefault();
 	}
 
-	@SuppressWarnings("static-access")
+
 	@Validation
 	public ChecksTM validaRGPDText() {  
 		ChecksTM checks = ChecksTM.getNew();

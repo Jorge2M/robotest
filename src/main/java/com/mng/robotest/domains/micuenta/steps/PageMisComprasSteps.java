@@ -81,8 +81,7 @@ public class PageMisComprasSteps extends StepBase {
 		PageDetallePedidoSteps pageDetPedidoSteps = new PageDetallePedidoSteps(channel, app);
 		pageDetPedidoSteps.validateIsPageOk(ticket, codPais);	   
 	}
-	
-	@SuppressWarnings("static-access")
+
 	@Step (
 		description="Seleccionamos la #{posInLista}a compra (tipo Tienda) de la lista", 
 		expected="Aparece una sección con los detalles de la Compra")

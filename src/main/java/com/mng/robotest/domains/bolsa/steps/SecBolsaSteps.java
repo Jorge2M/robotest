@@ -99,10 +99,10 @@ public class SecBolsaSteps extends StepBase {
 		dataTest.getDataBag().setImporteTransp(secBolsa.getPrecioTransporte());
 	}
 
-	static final String tagListaArt = "@TagListaArt";
+	private static final String TAG_LISTA_ART = "@TagListaArt";
 	@Step (
-		description="Utilizar el buscador para acceder a la ficha y dar de alta los siguientes productos en la bolsa:<br>" + tagListaArt, 
-		expected="Los productos se dan de alta en la bolsa correctamente",
+			description="Utilizar el buscador para acceder a la ficha y dar de alta los siguientes productos en la bolsa:<br>" + TAG_LISTA_ART,
+			expected="Los productos se dan de alta en la bolsa correctamente",
 		saveNettraffic=SaveWhen.Always)
 	public void altaBolsaArticulos(List<GarmentCatalog> listParaAlta) throws Exception {
 		includeListaArtInTestCaseDescription(listParaAlta);
@@ -136,7 +136,7 @@ public class SecBolsaSteps extends StepBase {
 			}
 		}
 
-		TestMaker.getCurrentStepInExecution().replaceInDescription(tagListaArt, listaArtStr);
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_LISTA_ART, listaArtStr);
 	}
 
 	public void validaAltaArtBolsa() throws Exception {

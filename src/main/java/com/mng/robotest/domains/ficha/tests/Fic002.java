@@ -8,7 +8,6 @@ import com.mng.robotest.domains.buscador.steps.SecBuscadorSteps;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.ficha.pageobjects.PageFichaDevice;
 import com.mng.robotest.domains.ficha.pageobjects.Slider;
-import com.mng.robotest.domains.ficha.pageobjects.PageFicha.TypeFicha;
 import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.transversal.TestBase;
@@ -21,49 +20,48 @@ public class Fic002 extends TestBase {
 
 	final GarmentCatalog garment;
 	final boolean isTotalLook;
-	
+
 	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
 	final PageFichaSteps pageFichaSteps = new PageFichaSteps();
-	
+
 	public Fic002() throws Exception {
 		super();
-		
+
 		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
 				.build();
-		
+
 		Optional<GarmentCatalog> articleWithTotalLook = getterProducts.getOneFiltered(FilterType.TotalLook);
 		isTotalLook = articleWithTotalLook.isPresent();
 		if (isTotalLook) {
 			garment = articleWithTotalLook.get();
 		} else {
-			garment = getterProducts.getAll().get(0);			
+			garment = getterProducts.getAll().get(0);
 		}
 	}
-	
+
 	@Override
 	public void execute() throws Exception {
 		access();
 		secBuscadorSteps.searchArticulo(garment);
-		
-		if (pageFichaSteps.getFicha().getTypeFicha()==TypeFicha.OLD) {
-			pageFichaOldTest();
+		if (channel.isDevice()) {
+			pageFichaDeviceTest();
 		} else {
-			pageFichaNewTest();
+			pageFichaDesktopTest();
 
 		}
-			
+
 		pageFichaSteps.selectGuiaDeTallas(app);
 		if (app==AppEcom.shop) {
 			pageFichaSteps.validateSliderIfExists(Slider.ELEGIDO_PARA_TI);
 		}
-		
+
 		if (app!=AppEcom.outlet && isTotalLook) {
 			pageFichaSteps.validateSliderIfExists(Slider.COMPLETA_TU_LOOK);
 		}
 	}
 
-	private void pageFichaNewTest() throws Exception {
-		boolean isFichaAccesorio = pageFichaSteps.getFicha().isFichaAccesorio(); 
+	private void pageFichaDesktopTest() throws Exception {
+		boolean isFichaAccesorio = pageFichaSteps.getFicha().isFichaAccesorio();
 		pageFichaSteps.getSecFotosNewSteps().validaLayoutFotosNew(isFichaAccesorio);
 		if (isTotalLook) {
 			pageFichaSteps.getSecTotalLookSteps().checkIsVisible();
@@ -73,12 +71,12 @@ public class Fic002 extends TestBase {
 			pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectEnvioYDevoluciones();
 			pageFichaSteps.getModEnvioYdevolSteps().clickAspaForClose();
 		}
-		
+
 		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectDetalleDelProducto(LineaType.she);
 		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectLinkCompartir(dataTest.getCodigoPais());
 	}
 
-	private void pageFichaOldTest() throws Exception {
+	private void pageFichaDeviceTest() throws Exception {
 		if (app==AppEcom.outlet && channel!=Channel.mobile) {
 			pageFichaSteps.validaExistsImgsCarruselIzqFichaOld();
 		}
@@ -87,7 +85,7 @@ public class Fic002 extends TestBase {
 		if (((PageFichaDevice)pageFicha).getNumImgsCarruselIzq() > 2) {
 			pageFichaSteps.selectImgCarruselIzqFichaOld(2);
 		}
-		
+
 		if (channel!=Channel.tablet) {
 			pageFichaSteps.selectImagenCentralFichaOld();
 			if (channel.isDevice()) {
@@ -95,7 +93,7 @@ public class Fic002 extends TestBase {
 			}
 		}
 		if (TypePanel.DESCRIPTION.getListApps().contains(app) &&
-			!channel.isDevice()) {
+				!channel.isDevice()) {
 			pageFichaSteps.getSecProductDescOldSteps().selectPanel(TypePanel.DESCRIPTION);
 		}
 		if (TypePanel.COMPOSITION.getListApps().contains(app)) {
@@ -105,8 +103,8 @@ public class Fic002 extends TestBase {
 			pageFichaSteps.getSecProductDescOldSteps().selectPanel(TypePanel.RETURNS);
 		}
 		if (TypePanel.SHIPMENT.getListApps().contains(app) &&
-			!channel.isDevice()) {
-			pageFichaSteps.getSecProductDescOldSteps().selectPanel(TypePanel.SHIPMENT);  
+				!channel.isDevice()) {
+			pageFichaSteps.getSecProductDescOldSteps().selectPanel(TypePanel.SHIPMENT);
 		}
 	}
 

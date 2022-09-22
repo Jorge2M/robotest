@@ -37,7 +37,6 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 		return checks;
 	}
 
-	@SuppressWarnings("static-access")
 	@Step (
 		description="<b style=\"color:blue;\">#{nombrePago}</b>:Seleccionamos el método de envío <b>#{tipoTransporte}</b> (previamente, si no lo estamos, nos posicionamos en el apartado \"1. Envio\")", 
 		expected="Se selecciona el método de envío correctamente")

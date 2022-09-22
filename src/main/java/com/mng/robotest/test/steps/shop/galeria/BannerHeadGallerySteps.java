@@ -22,18 +22,17 @@ public class BannerHeadGallerySteps {
 	final PageGaleriaSteps pageGaleriaParent;
 	final SecBannerHeadGallery secBannerHeadDesktop;
 	final WebDriver driver;
-	
+
 	private BannerHeadGallerySteps(PageGaleriaSteps pageGaleriaParent, WebDriver driver) {
 		this.pageGaleriaParent = pageGaleriaParent;
 		this.secBannerHeadDesktop = new PageGaleriaDesktop().getSecBannerHead();
 		this.driver = driver;
 	}
-	
+
 	public static BannerHeadGallerySteps newInstance (PageGaleriaSteps pageGaleriaParent, WebDriver driver) {
 		return (new BannerHeadGallerySteps(pageGaleriaParent, driver));
 	}
-	
-	@SuppressWarnings("static-access")
+
 	public void validateBannerSuperiorIfExistsDesktop() {
 		boolean bannerIsVisible = secBannerHeadDesktop.isVisible();
 		if (bannerIsVisible) {
@@ -43,91 +42,86 @@ public class BannerHeadGallerySteps {
 		}
 	}
 
-	@SuppressWarnings("static-access")
 	@Validation (
-		description="El Banner de Cabecera contiene algún texto",
-		level=State.Warn)
+			description="El Banner de Cabecera contiene algún texto",
+			level=State.Warn)
 	public boolean checkBannerContainsSomeText() {
 		String textBanner = secBannerHeadDesktop.getText();
 		return ("".compareTo(textBanner)!=0);
 	}
 
 	@Validation
-	@SuppressWarnings("static-access")
 	public ChecksTM checkBannerContainsText(List<String> possibleTexts) {
 		ChecksTM checks = ChecksTM.getNew();
 		String textBanner = secBannerHeadDesktop.getText();
 		checks.add(
-			"El banner de cabecera contiene el texto <b>" + possibleTexts.get(0) + "</b>",
-			textBannersContainsPossibleText(textBanner, possibleTexts), State.Defect);
+				"El banner de cabecera contiene el texto <b>" + possibleTexts.get(0) + "</b>",
+				textBannersContainsPossibleText(textBanner, possibleTexts), State.Defect);
 		return checks;
 	}
 
-	@SuppressWarnings("static-access")
 	@Step (
-		description="Seleccionar el banner superior de la Galería", 
-		expected="Aparece una galería de artículos")
+			description="Seleccionar el banner superior de la Galería",
+			expected="Aparece una galería de artículos")
 	public void clickBannerSuperiorIfLinkableDesktop() {
 		secBannerHeadDesktop.clickBannerIfClickable();
 		pageGaleriaParent.validaArtEnContenido(3);
 	}
 
-	@SuppressWarnings("static-access")
 	@Validation
 	public ChecksTM checkBannerSalesHead(TypeGalery typeGalery, Pais pais, IdiomaPais idioma) {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
-			"<b style=\"color:blue\">Rebajas</b></br>" +
-			"Es visible el banner de cabecera",
-			secBannerHeadDesktop.isVisible(), State.Defect);
-		
+				"<b style=\"color:blue\">Rebajas</b></br>" +
+						"Es visible el banner de cabecera",
+				secBannerHeadDesktop.isVisible(), State.Defect);
+
 		String saleTraduction = UtilsTest.getSaleTraduction(idioma);
 		String textBanner = secBannerHeadDesktop.getText();
 		checks.add(
-			"El banner de cabecera es de rebajas  (contiene un símbolo de porcentaje o " + saleTraduction + ")",
-			UtilsTest.textContainsPercentage(textBanner, idioma) || textBanner.contains(saleTraduction), 
-			State.Defect);
+				"El banner de cabecera es de rebajas  (contiene un símbolo de porcentaje o " + saleTraduction + ")",
+				UtilsTest.textContainsPercentage(textBanner, idioma) || textBanner.contains(saleTraduction),
+				State.Defect);
 		checks.add(
-			"El banner de cabecera contiene un link de \"Más info\"",
-			secBannerHeadDesktop.isVisibleLinkInfoRebajas(), State.Warn);	
-		
+				"El banner de cabecera contiene un link de \"Más info\"",
+				secBannerHeadDesktop.isVisibleLinkInfoRebajas(), State.Warn);
+
 		boolean bannerLincable = secBannerHeadDesktop.isLinkable();
 		if (typeGalery==TypeGalery.SALES || !pais.isVentaOnline()) {
-		 	checks.add(
-		 	    Check.make(
-		 		    "El banner de cabecera no es lincable",
-		 		    !bannerLincable, State.Info)
-		 	    .store(StoreType.None).build());
+			checks.add(
+					Check.make(
+									"El banner de cabecera no es lincable",
+									!bannerLincable, State.Info)
+							.store(StoreType.None).build());
 		}
 		else {
-		 	checks.add(
-		 		"El banner de cabecera sí es lincable",
-		 		bannerLincable, State.Warn);
+			checks.add(
+					"El banner de cabecera sí es lincable",
+					bannerLincable, State.Warn);
 		}
-		
+
 		return checks;
 	}
 
-	@SuppressWarnings("static-access")
 	@Validation
 	ChecksTM checkBannerHeadSalesOff(IdiomaPais idioma) {
 		ChecksTM checks = ChecksTM.getNew();
 		String saleTraduction = UtilsTest.getSaleTraduction(idioma);
 		checks.add(
-			"<b style=\"color:blue\">Rebajas</b></br>" +
-			"El banner de cabecera NO es de rebajas  (NO contiene un símbolo de porcentaje o \"" + saleTraduction + "\")",
-			!secBannerHeadDesktop.isSalesBanner(idioma), State.Defect);
-		
+				"<b style=\"color:blue\">Rebajas</b></br>" +
+						"El banner de cabecera NO es de rebajas  (NO contiene un símbolo de porcentaje o \"" + saleTraduction + "\")",
+				!secBannerHeadDesktop.isSalesBanner(idioma), State.Defect);
+
 		return checks;
 	}
-   
+
 	private boolean textBannersContainsPossibleText(String textBanner, List<String> textsPossible) {
 		for (String possibleText : textsPossible) {
 			if (textBanner.toLowerCase().contains(possibleText.toLowerCase())) {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 }
