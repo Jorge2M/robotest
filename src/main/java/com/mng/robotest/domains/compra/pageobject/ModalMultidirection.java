@@ -99,13 +99,13 @@ public class ModalMultidirection extends PageBase {
 	
 	private String getDirectionItem(WebElement lineDirection, DirectionItem item) {
 		if (state(State.Visible, lineDirection).by(By.xpath(item.getXPath())).check()) {
-			return getElement(lineDirection, item.getXPath()).getText();
+			return getElement(lineDirection, "." + item.getXPath()).getText();
 		}
 		return "";
 	}
 	
 	private boolean isPrincipal(WebElement lineDirection) {
-		return state(State.Visible, lineDirection).by(By.xpath(XPATH_TEXT_PRINCIPAL)).check();
+		return state(State.Visible, lineDirection).by(By.xpath("." + XPATH_TEXT_PRINCIPAL)).check();
 	}
 	
 	public void clickEditAddress(String address) throws NoSuchElementException {
