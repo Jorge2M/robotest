@@ -10,8 +10,8 @@ import javax.xml.bind.annotation.*;
 import org.testng.ITestContext;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.compra.pageobject.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.test.data.Constantes;
-import com.mng.robotest.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.TestMaker;
 
@@ -321,6 +321,11 @@ public class Pago implements Serializable {
 	public void setTipoEnvioShop(String tipoenvioshop) {
 		this.tipoenvioshop = tipoenvioshop;
 	}	
+	
+	public void setTipoEnvio(TipoTransporte tipoTransporte) {
+		setTipoEnvioShop(tipoTransporte);
+		setTipoEnvioOutlet(tipoTransporte);
+	}
 	
 	public void setTipoEnvioShop(TipoTransporte tipoTransporte) {
 		this.tipoenvioshop = tipoTransporte.toString();

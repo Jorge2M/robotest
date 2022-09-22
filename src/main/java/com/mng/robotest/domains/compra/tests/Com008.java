@@ -2,12 +2,12 @@ package com.mng.robotest.domains.compra.tests;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.domains.compra.steps.CheckoutSteps;
+import com.mng.robotest.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataPago;
-import com.mng.robotest.test.steps.shop.checkout.CheckoutSteps;
-import com.mng.robotest.test.steps.shop.checkout.PageResultPagoSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 
 public class Com008 extends TestBase {

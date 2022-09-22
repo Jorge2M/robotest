@@ -80,6 +80,9 @@ public class PageBase extends PageObjTM {
 	public WebElement getElement(By by) {
 		return driver.findElement(by);
 	}
+	public WebElement getElement(WebElement element, String xpathChild) {
+		return element.findElement(By.xpath(xpathChild));
+	}
 	public List<WebElement> getElements(By by) {
 		return driver.findElements(by);
 	}

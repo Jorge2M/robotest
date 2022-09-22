@@ -5,12 +5,12 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.generic.ChequeRegalo;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputDataNew;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData.*;
-import com.mng.robotest.test.steps.shop.checkout.CheckoutSteps;
 
 public class PageChequeRegaloInputDataSteps extends PageBase {
 

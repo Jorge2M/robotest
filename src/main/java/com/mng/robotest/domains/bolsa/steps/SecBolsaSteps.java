@@ -16,6 +16,8 @@ import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.domains.bolsa.pageobjects.ValidatorContentBolsa;
 import com.mng.robotest.domains.bolsa.pageobjects.LineasArticuloBolsaCommon.DataArtBolsa;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
+import com.mng.robotest.domains.compra.steps.CheckoutSteps;
+import com.mng.robotest.domains.compra.steps.Page1IdentCheckoutSteps;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.generic.UtilsMangoTest;
@@ -24,8 +26,6 @@ import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test.steps.shop.checkout.Page1IdentCheckoutSteps;
-import com.mng.robotest.test.steps.shop.checkout.CheckoutSteps;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
