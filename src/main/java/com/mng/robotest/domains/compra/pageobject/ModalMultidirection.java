@@ -63,7 +63,7 @@ public class ModalMultidirection extends PageBase {
 	
 	public Optional<Direction> getDirection(String address) {
 		return getDirections().stream()
-			.filter(s -> s.getAddress().compareTo(address)==0)
+			.filter(s -> s.getAddress().contains(address))
 			.findAny();
 	}
 	

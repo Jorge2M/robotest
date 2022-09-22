@@ -60,7 +60,6 @@ public class ModalMultidirectionSteps extends StepBase {
 			directionOpt.isPresent(), State.Defect);
 
 	 	if (directionOpt.isPresent()) {
-		 	new PageCheckoutWrapper().getTextDireccionEnvioCompleta();
 		 	checks.add(
 				"La dirección añadida no está establecida como la principal",
 				!directionOpt.get().isPrincipal(), State.Defect);
