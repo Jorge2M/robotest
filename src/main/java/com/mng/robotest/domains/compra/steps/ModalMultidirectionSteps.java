@@ -25,9 +25,10 @@ public class ModalMultidirectionSteps extends StepBase {
 	@Validation
 	public ChecksTM checkInitialContent() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
-		Optional<Direction> mainDirectionOpt = modalMultidirection.getPrincipalDirection();
+		int seconds = 3;
+		Optional<Direction> mainDirectionOpt = modalMultidirection.getPrincipalDirection(seconds);
 	 	checks.add(
-			"Aparece una dirección principal",
+			"Aparece una dirección principal (la esperamos hasta " + seconds + " segundos)",
 			mainDirectionOpt.isPresent(), State.Defect);
 
 	 	if (mainDirectionOpt.isPresent()) {
@@ -72,7 +73,7 @@ public class ModalMultidirectionSteps extends StepBase {
 		expected="Aparece el modal para la introducción de los datos de la dirección")
 	public void clickEditAddress(String addressAdded) {
 		modalMultidirection.clickEditAddress(addressAdded);
-		new ModalDirecEnvioOldSteps().validateIsOk();
+		new ModalDirecEnvioNewSteps().checkIsVisible();
 	}
 	
 	@Validation(

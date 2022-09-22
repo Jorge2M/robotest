@@ -41,6 +41,17 @@ public class ModalMultidirection extends PageBase {
 		return state(Visible, XPATH_MODAL_DIRECTIONS).check();
 	}
 	
+	public Optional<Direction> getPrincipalDirection(int seconds) {
+		for (int i=0; i<seconds; i++) {
+			Optional<Direction> optDireccion = getPrincipalDirection();
+			if (optDireccion.isPresent()) {
+				return optDireccion;
+			}
+			waitMillis(1000);
+		}
+		return Optional.empty();
+	}
+	
 	public Optional<Direction> getPrincipalDirection() {
 		for (Direction direction : getDirections()) {
 			if (direction.isPrincipal()) {
