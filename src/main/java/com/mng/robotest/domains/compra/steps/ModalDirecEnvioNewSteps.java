@@ -19,6 +19,14 @@ public class ModalDirecEnvioNewSteps {
 		return modalDirecEnvio.isVisible(2);
 	}
 
+	@Validation (
+			description="Validar que los datos cambiados son correctos",
+			level=State.Defect)
+	public void inputChange(DirectionData2 direction) {
+		String directionEdit = direction.getDireccion();
+		new ModalMultidirectionSteps().checkAfterAddDirection(directionEdit);
+	}
+
 	@Step (
 		description="Introducir los datos y pulsar \"Guardar\"<br>#{direction.getFormattedHTMLData()}", 
 		expected="Los datos se añaden correctamente")
@@ -33,7 +41,7 @@ public class ModalDirecEnvioNewSteps {
 	public void inputDataAndEdit(DirectionData2 direction) throws Exception {
 		modalDirecEnvio.inputDataEdit(direction);
 		modalDirecEnvio.clickSaveButton();
-		//checkAfterAddDirection(direction);
+		inputChange(direction);
 	}
 	
 	@Step (

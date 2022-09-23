@@ -95,6 +95,7 @@ public class Com009 extends TestBase {
         DirectionData2 direction = new DirectionData2();
         direction.setNombre("Robotest");
         direction.setApellidos("Pruebas");
+        direction.setDireccion(""+Timestamp.from(Instant.now()));
         return direction;
     }
 

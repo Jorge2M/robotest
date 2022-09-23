@@ -42,6 +42,7 @@ public class ModalDirecEnvioNew extends PageBase {
 	public void inputDataEdit(DirectionData2 direction) {
 		inputData(InputType.NOMBRE, direction.getNombre());
 		inputData(InputType.APELLIDOS, direction.getApellidos());
+		inputData(InputType.DIRECCION, direction.getDireccion());
 		waitMillis(1000);
 	}
 

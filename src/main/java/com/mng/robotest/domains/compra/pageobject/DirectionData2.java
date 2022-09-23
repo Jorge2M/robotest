@@ -4,7 +4,7 @@ public class DirectionData2 {
 
 	private String nombre;
 	private String apellidos;
-
+	private String direccion;
 	public String getNombre() {
 		return nombre;
 	}
@@ -17,10 +17,17 @@ public class DirectionData2 {
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
+	public String getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
 
 	public String getFormattedHTMLData() {
 		String dataHTML = String.format("Nombre: <b>%s</b><br>", nombre);
 		dataHTML+=String.format("Apellidos: <b>%s</b><br>", apellidos);
+		dataHTML+=String.format("Direccion: <b>%s</b><br>", direccion);
 		return dataHTML;
 	}	
 	
