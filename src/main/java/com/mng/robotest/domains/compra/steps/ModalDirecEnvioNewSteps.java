@@ -13,7 +13,7 @@ public class ModalDirecEnvioNewSteps {
 	private final ModalDirecEnvioNew modalDirecEnvio = new ModalDirecEnvioNew();
 	
 	@Validation (
-		description="Figura el modal para la edición/alta de una dirección de envío",
+		description="Visible el Modal para Añadir/Editar una dirección",
 		level=State.Defect)
 	public boolean checkIsVisible() {
 		return modalDirecEnvio.isVisible(2);

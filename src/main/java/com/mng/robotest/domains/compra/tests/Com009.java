@@ -12,6 +12,7 @@ import com.mng.robotest.domains.compra.pageobject.envio.TipoTransporteEnum.TipoT
 import com.mng.robotest.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.domains.compra.steps.ModalDirecEnvioNewSteps;
 import com.mng.robotest.domains.compra.steps.ModalMultidirectionSteps;
+import com.mng.robotest.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.domains.compra.steps.envio.SecMetodoEnvioSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.Pago;
@@ -19,10 +20,14 @@ import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.utils.PaisGetter;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils.waitMillis;
+
+
 public class Com009 extends TestBase {
 	
 	private final ModalMultidirectionSteps modalMultidirectionSteps = new ModalMultidirectionSteps();
-	private final ModalDirecEnvioNewSteps modalDirecEnvioSteps = new ModalDirecEnvioNewSteps(); 
+	private final ModalDirecEnvioNewSteps modalDirecEnvioSteps = new ModalDirecEnvioNewSteps();
+    private final CompraSteps compraSteps = new CompraSteps();
 
 
     public Com009() throws Exception {
@@ -72,6 +77,18 @@ public class Com009 extends TestBase {
         modalMultidirectionSteps.clickEditAddress(addressAdded);
         modalDirecEnvioSteps.clickEliminarButton(addressAdded);
 
+        //Comprar
+        executeVisaPayment();
+        //waitMillis(10000);
+
+    }
+    private DataPago executeVisaPayment() throws Exception {
+        DataPago dataPago = getDataPago();
+        dataPago.setPago(dataTest.getPais().getPago("VISA"));
+        compraSteps.startPayment(dataPago, true);
+
+        new PageResultPagoSteps().validateIsPageOk(dataPago);
+        return dataPago;
     }
 
     private void selectEnvioEstandard() throws Exception {
