@@ -13,19 +13,10 @@ import com.mng.robotest.test.generic.beans.ArticuloScreen;
 
 public class ModalDetalleCompraSteps extends StepBase {
 	
-	private final PageDetalleCompra modalDetalleCompra;
-	private final ModalDetalleArticulo modalDetalleArticulo;
-	private final ModalDetalleArticuloSteps modalDetalleArticuloSteps;
+	private final PageDetalleCompra pageDetalleCompra = PageDetalleCompra.make(channel);
+	private final ModalDetalleArticulo modalDetalleArticulo = pageDetalleCompra.getModalDetalleArticulo();
+	private final ModalDetalleArticuloSteps modalDetalleArticuloSteps = ModalDetalleArticuloSteps.getNew(modalDetalleArticulo);
 	
-	private ModalDetalleCompraSteps(PageDetalleCompra section) {
-		this.modalDetalleCompra = section;
-		this.modalDetalleArticulo = modalDetalleCompra.getModalDetalleArticulo();
-		this.modalDetalleArticuloSteps = ModalDetalleArticuloSteps.getNew(modalDetalleArticulo);
-		
-	}
-	public static ModalDetalleCompraSteps getNew(PageDetalleCompra section) {
-		return new ModalDetalleCompraSteps(section);
-	}
 	public ModalDetalleArticuloSteps getModalDetalleArticulo() {
 		return modalDetalleArticuloSteps;
 	}
@@ -43,20 +34,20 @@ public class ModalDetalleCompraSteps extends StepBase {
 		int seconds = 1;
 		checks.add(
 			"Es visible la capa correspondiente al detalle del tícket de compra (la esperamos hasta " + seconds + " segundos)",
-			modalDetalleCompra.isVisibleDataTicket(seconds), State.Defect);
+			pageDetalleCompra.isVisibleDataTicket(seconds), State.Defect);
 		
 		seconds = 2;
 		checks.add(
 			"Son visibles los datos del tícket (los esperamos hasta " + seconds + " segundos)",
-			modalDetalleCompra.isVisibleDataTicket(seconds), State.Defect);
+			pageDetalleCompra.isVisibleDataTicket(seconds), State.Defect);
 		
 		checks.add(
 			"Figura un id de tícket (lo esperamos hasta " + seconds + " segundos)",
-			modalDetalleCompra.isVisibleIdTicket(seconds), State.Defect);
+			pageDetalleCompra.isVisibleIdTicket(seconds), State.Defect);
 		
 		checks.add(
 			"Figura alguna prenda (la esperamos hasta " + seconds + " segundos)",
-			modalDetalleCompra.isVisiblePrendaUntil(seconds), State.Warn);
+			pageDetalleCompra.isVisiblePrendaUntil(seconds), State.Warn);
 		
 		return checks;
 	}
@@ -66,30 +57,22 @@ public class ModalDetalleCompraSteps extends StepBase {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 			"Figura un id de tícket " + compra.getId(),
-			modalDetalleCompra.getIdTicket(compra.getType()).compareTo(compra.getId())==0, State.Warn);
+			pageDetalleCompra.getIdTicket(compra.getType()).compareTo(compra.getId())==0, State.Warn);
 		checks.add(
 			"Figura el importe " + compra.getPrecio(),
-			modalDetalleCompra.getImporte().contains(compra.getPrecio()), State.Warn);
+			pageDetalleCompra.getImporte().contains(compra.getPrecio()), State.Warn);
 		checks.add(
 			"Existen " + compra.getNumItems() + " prendas",
-			modalDetalleCompra.getNumPrendas()==compra.getNumItems(), State.Warn);
+			pageDetalleCompra.getNumPrendas()==compra.getNumItems(), State.Warn);
 		return checks;
 	}
-	
-
-//	@Validation (
-//		description="Aparece la imagen correspondiente al código de barras de la compra",
-//		level=State.Warn)
-//	private boolean checkIsVisibleImgCodigoBarrasMovil() {
-//		return (modalDetalleCompra.isVisibleCodigoBarrasImg());
-//	}
 	
 	@Step (
 		description="Seleccionar el #{posArticulo}o artículo de la Compra", 
 		expected="Aparece la sección correspondiente al \"QuickView\" del artículo")
 	public void selectArticulo(int posArticulo) {
-		ArticuloScreen articulo = modalDetalleCompra.getDataArticulo(posArticulo);
-		modalDetalleCompra.selectArticulo(posArticulo);
+		ArticuloScreen articulo = pageDetalleCompra.getDataArticulo(posArticulo);
+		pageDetalleCompra.selectArticulo(posArticulo);
 		modalDetalleArticuloSteps.validateIsOk(articulo);
 	}
 	
@@ -101,6 +84,13 @@ public class ModalDetalleCompraSteps extends StepBase {
 			modalDetalleArticulo.clickAspaForClose();
 			modalDetalleArticulo.isInvisible(2);
 		}
-		modalDetalleCompra.gotoListaMisCompras();
+		pageDetalleCompra.gotoListaMisCompras();
+	}
+	
+	@Validation (
+		description="Es visible la dirección <b>#{address}</b>",
+		level=State.Defect)
+	public boolean checkIsVisibleDirection(String address) {
+		return pageDetalleCompra.isVisibleDireccionEnvio(address);
 	}
 }

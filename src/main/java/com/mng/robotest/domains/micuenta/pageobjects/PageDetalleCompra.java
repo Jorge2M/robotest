@@ -25,6 +25,7 @@ public abstract class PageDetalleCompra extends PageBase implements PageDetalleP
 	public abstract boolean isVisibleIdTicket(int seconds);
 	public abstract String getIdTicket(TypeTicket typeTicket);
 	public abstract String getImporte();
+	public abstract String getDireccionEnvioOnline();
 	public abstract String getReferenciaArticulo(int posArticulo);
 	public abstract String getNombreArticulo(int posArticulo);
 	public abstract String getPrecioArticulo(int posArticulo);
@@ -70,5 +71,9 @@ public abstract class PageDetalleCompra extends PageBase implements PageDetalleP
 			return (data.substring(beginIndex));
 		}
 		return data;
+	}
+	
+	public boolean isVisibleDireccionEnvio(String address) {
+		return getDireccionEnvioOnline().contains(address);
 	}
 }

@@ -14,7 +14,7 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	private static final String XPATH_IMPORTE = "//*[@data-testid='price']";
 	
 	//TODO necesitaría un data-testid
-	private static final String XPATH_DIRECCION_ENVIO_ONLINE = XPATH_ID_TICKET + "/../../../div[2]//div[@class[contains(.,'sg-body-small')]]";
+	private static final String XPATH_DIRECCION_ENVIO_ONLINE = XPATH_ID_TICKET + "/../..//h2[@class[contains(.,'sg-headline')]]/..";
 	private static final String XPATH_LINK_TO_MIS_COMPRAS = "//*[@data-testid[contains(.,'detail.goBack')]]";
 	
 	@Override
@@ -58,6 +58,10 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 		return importe.replaceAll("[^\\d.,]", "");  //Eliminamos la divisa;
 	}
 	@Override
+	public String getDireccionEnvioOnline() {
+		return getElement(XPATH_DIRECCION_ENVIO_ONLINE).getText();
+	}
+	@Override
 	public String getReferenciaArticulo(int posArticulo) {
 		return sectionPrendas.getReferenciaArticulo(posArticulo);
 	}
@@ -85,9 +89,5 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	
 	private String getXPathTicket() {
 		return XPATH_ID_TICKET;
-	}
-
-	public String getDireccionEnvioOnline() {
-		return getElement(XPATH_DIRECCION_ENVIO_ONLINE).getText();
 	}
 }

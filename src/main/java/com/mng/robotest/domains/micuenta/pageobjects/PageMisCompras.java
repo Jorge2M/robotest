@@ -17,8 +17,6 @@ import com.mng.robotest.domains.transversal.PageBase;
 
 public class PageMisCompras extends PageBase {
 
-	private final PageDetalleCompra modalDetalleCompra = PageDetalleCompra.make(channel);
-	
 	public enum TypeTicket {Tienda, Online}
 	private List<Ticket> listTickets = null;
 	
@@ -36,10 +34,6 @@ public class PageMisCompras extends PageBase {
 	private static final String XPATH_TICKET = XPATH_LIST_TICKETS + "//div[@class[contains(.,'layout-content')]]";
 	private static final String XPATH_PRICE_RELATIVE_TICKET = ".//*[@data-testid='price']";	
 	private static final String XPATH_FECHA_RELATIVE_TICKET = ".//span[@class[contains(.,'sg-caption-light')]]";
-	
-	public PageDetalleCompra getModalDetalleCompra() {
-		return this.modalDetalleCompra;
-	}
 	
 	public List<Ticket> getTickets() {
 		isVisibleTicket(5);
@@ -79,7 +73,6 @@ public class PageMisCompras extends PageBase {
 		return state(Visible, XPATH_TICKET).wait(seconds).check();
 	}
 
-	
 	public boolean areTickets() {
 		return getTickets().size()>0;
 	}
@@ -98,6 +91,10 @@ public class PageMisCompras extends PageBase {
 		return (getTickets().stream()
 			.filter(item -> item.getId().compareTo(idPedido)==0)
 			.findAny().isPresent());
+	}
+	
+	public void selectTicket(String idTicket) {
+		click(getXPathTicketLink(idTicket)).exec();
 	}
 	
 	private String getXPathCapaContenedora() {

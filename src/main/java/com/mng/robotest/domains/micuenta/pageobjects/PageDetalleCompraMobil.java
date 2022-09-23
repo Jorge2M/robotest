@@ -54,6 +54,11 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 		return getElementWeb(XPATH_LINEA_IMPORTE).getText();
 	}
 	@Override
+	public String getDireccionEnvioOnline() {
+		//TODO
+		return "TODO";
+	}
+	@Override
 	public String getReferenciaArticulo(int posArticulo) {
 		return sectionPrendas.getReferenciaArticulo(posArticulo);
 	}

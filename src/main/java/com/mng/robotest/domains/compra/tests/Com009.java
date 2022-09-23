@@ -11,6 +11,7 @@ import com.mng.robotest.domains.compra.steps.ModalDirecEnvioNewSteps;
 import com.mng.robotest.domains.compra.steps.ModalMultidirectionSteps;
 import com.mng.robotest.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.domains.compra.steps.envio.SecMetodoEnvioSteps;
+import com.mng.robotest.domains.micuenta.steps.ModalDetalleCompraSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.Pago;
@@ -87,7 +88,7 @@ public class Com009 extends TestBase {
 			DataPago dataPago = executeVisaPayment();
 			
 			//Validar mis compras
-			checkMisCompras(dataPago);
+			checkMisCompras(dataPago, directionPrincipal.getDireccion());
 		}        
     }
     
@@ -137,9 +138,13 @@ public class Com009 extends TestBase {
         return direction;
     }
     
-	private void checkMisCompras(DataPago dataPago) throws Exception {
+	private void checkMisCompras(DataPago dataPago, String address) throws Exception {
 		String codigoPedido = dataPago.getDataPedido().getCodpedido();
 		new PageResultPagoSteps().selectMisCompras();
-		new PageMisComprasSteps().validateIsCompraOnline(codigoPedido);
+		
+		PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps();
+		pageMisComprasSteps.validateIsCompraOnline(codigoPedido);
+		pageMisComprasSteps.selectCompra(codigoPedido);
+		new ModalDetalleCompraSteps().checkIsVisibleDirection(address);
 	}
 }

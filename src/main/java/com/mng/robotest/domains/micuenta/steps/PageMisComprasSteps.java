@@ -16,13 +16,8 @@ import com.mng.robotest.test.steps.shop.pedidos.PageDetallePedidoSteps;
 public class PageMisComprasSteps extends StepBase {
 	
 	private final PageMisCompras pageMisCompras = new PageMisCompras();
-	private final ModalDetalleCompraSteps modalDetalleCompraSteps = 
-			ModalDetalleCompraSteps.getNew(pageMisCompras.getModalDetalleCompra());
+	private final ModalDetalleCompraSteps modalDetalleCompraSteps = new ModalDetalleCompraSteps();
 
-	public ModalDetalleCompraSteps getModalDetalleCompra() {
-		return this.modalDetalleCompraSteps;
-	}
-	
 	@Validation
 	public ChecksTM validateIsPage() {
 		ChecksTM checks = ChecksTM.getNew();
@@ -92,18 +87,16 @@ public class PageMisComprasSteps extends StepBase {
 		Ticket ticket = pageMisCompras.selectTicket(TypeTicket.Tienda, posInLista);	 
 		modalDetalleCompraSteps.validateIsOk(ticket);	  
 	}
-
+	
+	@Step (
+		description="Seleccionamos el ticket  #{idTicket} de la lista", 
+		expected="Aparece una sección con los detalles de la Compra")
+	public void selectCompra(String idTicket) {
+		pageMisCompras.selectTicket(idTicket);	  
+	}	
+	
 	public void clickDetalleArticulo(int posArticulo) {
 		modalDetalleCompraSteps.selectArticulo(posArticulo);
-	}
-//	public void clickBuscarTiendaArticulo_Desktop() {
-//		modalDetalleCompraSteps.getModalDetalleArticulo().clickBuscarTiendaButton_Desktop();
-//	}
-//	public void clickCloseBuscarTiendaArticulo_Desktop() throws Exception {
-//		modalDetalleCompraSteps.getModalDetalleArticulo().clickCloseModalBuscadorTiendas_Desktop();
-//	}
-	public void closeArticuloModal() {
-		
 	}
 	
 	public void gotoMisComprasFromDetalleCompra() {
