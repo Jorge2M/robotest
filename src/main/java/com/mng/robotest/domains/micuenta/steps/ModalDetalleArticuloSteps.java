@@ -19,13 +19,21 @@ public class ModalDetalleArticuloSteps extends StepBase {
 		return new ModalDetalleArticuloSteps(modalObject);
 	}
 	
+	public void validateIsOk(ArticuloScreen articulo) {
+		checkIsVisible(2);
+		validateIsOkArticle(articulo);
+	}
+
+	@Validation(
+		description="Aparece el modal correspondiente al artículo (lo esperamos hasta #{seconds} segundos)",
+		level=State.Warn)
+	public boolean checkIsVisible(int seconds) { 
+		return modalDetalleArticulo.isVisible(seconds);
+	}
+	
 	@Validation
-	public ChecksTM validateIsOk(ArticuloScreen articulo) {
+	public ChecksTM validateIsOkArticle(ArticuloScreen articulo) {
 		ChecksTM checks = ChecksTM.getNew();
-		int seconds = 2;
-		checks.add(
-			"Aparece el modal correspondiente al artículo (lo esperamos hasta " + seconds + " segundos)",
-			modalDetalleArticulo.isVisible(seconds), State.Warn);
 		
 		checks.add(
 			"Se muestra la referencia " + articulo.getReferencia(),
@@ -41,34 +49,4 @@ public class ModalDetalleArticuloSteps extends StepBase {
 		
 		return checks;
 	}
-	
-//	@Step (
-//		description="Damos click al botón de \"Buscar talla en tienda\"",
-//		expected="Aparece el modal de busqueda en tienda")
-//	public void clickBuscarTiendaButton_Desktop() {
-//		modalDetalleMisCompras.getDesktopVersion().clickBuscarTallaTiendaButton();
-//		checkAppearsModalSearchTallaTienda(3);
-//	}
-//	
-//	@Validation (
-//		description="Aparece el modal de búsqueda de talla en tienda (lo esperamos hasta #{seconds} segundos)",
-//		level=State.Defect)
-//	private boolean checkAppearsModalSearchTallaTienda(int seconds) {
-//		return (ModalBuscadorTiendasMisCompras.isVisible(seconds, driver));
-//	}
-//	
-//	@Step (
-//		description="Cerramos el modal del buscador de tiendas mediante click en el aspa superior derecha",
-//		expected="Desaparece el modal del buscador de tiendas")
-//	public void clickCloseModalBuscadorTiendas_Desktop() throws Exception {
-//		ModalBuscadorTiendasMisCompras.clickAspaForClose(driver);
-//		checkIsInvisibleModalBuscadorTiendas();
-//	}
-//	
-//	@Validation (
-//		description="No está visible el modal del buscador de tiendas",
-//		level=State.Warn)
-//	private boolean checkIsInvisibleModalBuscadorTiendas() {
-//		return (!ModalBuscadorTiendasMisCompras.isVisible(0, driver));
-//	}
 }

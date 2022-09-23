@@ -26,6 +26,7 @@ import com.mng.robotest.test.beans.Pago.TypePago;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.generic.ChequeRegalo;
 import com.mng.robotest.test.generic.UtilsMangoTest;
+import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 public class CheckoutSteps extends StepBase {
 
@@ -99,6 +100,7 @@ public class CheckoutSteps extends StepBase {
 		} else {
 			new ModalMultidirectionSteps().checkIsVisible(2);
 		}
+		GenericChecks.checkDefault();
 	}	
 	
 	@Validation (

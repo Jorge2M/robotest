@@ -93,6 +93,7 @@ public class PageMisComprasSteps extends StepBase {
 		expected="Aparece una sección con los detalles de la Compra")
 	public void selectCompra(String idTicket) {
 		pageMisCompras.selectTicket(idTicket);	  
+		modalDetalleCompraSteps.checkIsDataVisible();
 	}	
 	
 	public void clickDetalleArticulo(int posArticulo) {

@@ -11,6 +11,7 @@ import com.mng.robotest.domains.compra.pageobject.DirectionData;
 import com.mng.robotest.domains.compra.pageobject.ModalMultidirection;
 import com.mng.robotest.domains.compra.pageobject.PageCheckoutWrapper;
 import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 public class ModalMultidirectionSteps extends StepBase {
 
@@ -49,6 +50,7 @@ public class ModalMultidirectionSteps extends StepBase {
 	public void clickAnyadirOtraDireccion() throws Exception {
 		modalMultidirection.clickAnyadirOtraDireccion();
 		new ModalDirecEnvioNewSteps().checkIsVisible();
+		GenericChecks.checkDefault();
 	}
 	
 	@Validation

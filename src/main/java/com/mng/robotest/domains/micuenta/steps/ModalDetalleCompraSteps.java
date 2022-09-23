@@ -29,7 +29,7 @@ public class ModalDetalleCompraSteps extends StepBase {
 	}
 	
 	@Validation
-	private ChecksTM checkIsDataVisible() {
+	public ChecksTM checkIsDataVisible() {
 		ChecksTM checks = ChecksTM.getNew();
 		int seconds = 1;
 		checks.add(
