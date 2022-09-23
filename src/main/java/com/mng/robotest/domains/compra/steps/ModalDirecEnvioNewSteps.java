@@ -4,7 +4,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.compra.pageobject.DirectionData;
-import com.mng.robotest.domains.compra.pageobject.DirectionData2;
 
 import com.mng.robotest.domains.compra.pageobject.ModalDirecEnvioNew;
 
@@ -20,11 +19,10 @@ public class ModalDirecEnvioNewSteps {
 	}
 
 	@Validation (
-			description="Validar que los datos cambiados son correctos",
-			level=State.Defect)
-	public void inputChange(DirectionData2 direction) {
-		String directionEdit = direction.getDireccion();
-		new ModalMultidirectionSteps().checkAfterAddDirection(directionEdit);
+		description="Validar que los datos cambiados son correctos",
+		level=State.Defect)
+	public void inputChange(DirectionData direction) {
+		new ModalMultidirectionSteps().checkAfterAddDirection(direction);
 	}
 
 	@Step (
@@ -33,12 +31,12 @@ public class ModalDirecEnvioNewSteps {
 	public void inputDataAndSave(DirectionData direction) throws Exception {
 		modalDirecEnvio.inputData(direction);
 		modalDirecEnvio.clickSaveButton();
-		checkAfterAddDirection(direction);
+		new ModalMultidirectionSteps().checkAfterAddDirection(direction);
 	}
 	@Step (
-			description="Editar los datos y pulsar \"Guardar\"<br>#{direction.getFormattedHTMLData()}",
-			expected="Los datos se actualizan correctamente")
-	public void inputDataAndEdit(DirectionData2 direction) throws Exception {
+		description="Editar los datos y pulsar \"Guardar\"<br>#{direction.getFormattedHTMLData()}",
+		expected="Los datos se actualizan correctamente")
+	public void inputDataAndEdit(DirectionData direction) throws Exception {
 		modalDirecEnvio.inputDataEdit(direction);
 		modalDirecEnvio.clickSaveButton();
 		inputChange(direction);
@@ -46,14 +44,25 @@ public class ModalDirecEnvioNewSteps {
 	
 	@Step (
 		description="Clickar el botón <b>Eliminar</b>", 
-		expected="La dirección se elimina correctamente")
-	public void clickEliminarButton(String address) throws Exception {
+		expected="Aparece el modal de confirmación de la eliminación")
+	public void clickEliminarButton() throws Exception {
 		modalDirecEnvio.clickRemoveButton();
+		checkIsModalConfirmacionEliminar();
+	}
+	
+	@Validation (
+		description="Aparece el modal de confirmación de la eliminación",
+		level=State.Defect)
+	public boolean checkIsModalConfirmacionEliminar() {
+		return modalDirecEnvio.isVisibleModalConfirmacionEliminar(1);
+	}	
+	
+	@Step (
+		description="Clickar el botón <b>Eliminar</b> del modal de confirmación", 
+		expected="La dirección se elimina")
+	public void confirmEliminarDirection(String address) throws Exception {
+		modalDirecEnvio.clickConfirmEliminarButton();
+		new CheckoutSteps().clickEditarDirecEnvio();
 		new ModalMultidirectionSteps().checkAddressNotExists(address);
-	}
-
-	private void checkAfterAddDirection(DirectionData direction) throws Exception {
-		String directionAdded = direction.getDireccion();
-		new ModalMultidirectionSteps().checkAfterAddDirection(directionAdded);
-	}
+	}	
 }

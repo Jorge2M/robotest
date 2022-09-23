@@ -7,6 +7,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.compra.beans.Direction;
+import com.mng.robotest.domains.compra.pageobject.DirectionData;
 import com.mng.robotest.domains.compra.pageobject.ModalMultidirection;
 import com.mng.robotest.domains.compra.pageobject.PageCheckoutWrapper;
 import com.mng.robotest.domains.transversal.StepBase;
@@ -16,10 +17,10 @@ public class ModalMultidirectionSteps extends StepBase {
 	private final ModalMultidirection modalMultidirection = new ModalMultidirection();
 	
 	@Validation(
-		description = "Es visible el modal de multidirecciones",
+		description = "Es visible el modal de multidirecciones (lo esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean checkIsVisible() throws Exception {
-		return modalMultidirection.isVisible();
+	public boolean checkIsVisible(int seconds) throws Exception {
+		return modalMultidirection.isVisible(seconds);
 	}	
 	
 	@Validation
@@ -51,9 +52,9 @@ public class ModalMultidirectionSteps extends StepBase {
 	}
 	
 	@Validation
-	public ChecksTM checkAfterAddDirection(String addressAdded) {
+	public ChecksTM checkAfterAddDirection(DirectionData direction) {
 		ChecksTM checks = ChecksTM.getNew();
-		String address = addressAdded.toLowerCase();
+		String address = direction.getDireccion().toLowerCase();
 		int seconds = 5;
 		Optional<Direction> directionOpt = modalMultidirection.getDirection(address, seconds);
 	 	checks.add(
@@ -61,9 +62,15 @@ public class ModalMultidirectionSteps extends StepBase {
 			directionOpt.isPresent(), State.Defect);
 
 	 	if (directionOpt.isPresent()) {
-		 	checks.add(
-				"La dirección añadida no está establecida como la principal",
-				!directionOpt.get().isPrincipal(), State.Defect);
+	 		if (direction.isPrincipal()) {
+			 	checks.add(
+					"La dirección añadida está establecida como la principal",
+					directionOpt.get().isPrincipal(), State.Defect);	 			
+	 		} else {
+			 	checks.add(
+					"La dirección añadida no está establecida como la principal",
+					!directionOpt.get().isPrincipal(), State.Defect);
+	 		}
 	 	}
 	 	return checks;		
 	}
@@ -82,5 +89,22 @@ public class ModalMultidirectionSteps extends StepBase {
 	public boolean checkAddressNotExists(String address) throws Exception {
 		return modalMultidirection.getDirection(address).isEmpty();
 	}	
+
+	@Step (
+		description="Cerramos el modal de confirmación de eliminación",
+		expected="El modal desaparece")
+	public void closeModal() {
+		modalMultidirection.closeModal();
+		checkModalInvisible(1);
+	}
+
+	@Validation(
+		description = "El modal de confirmación de eliminación no es visible (esperamos #{seconds} segundos)",
+		level=State.Defect)
+	public boolean checkModalInvisible(int seconds) {
+		return modalMultidirection.isModalInvisible(seconds);
+	}
+	
+	
 	
 }

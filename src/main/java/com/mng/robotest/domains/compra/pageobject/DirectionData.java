@@ -7,6 +7,7 @@ public class DirectionData {
 	private String direccion;
 	private String codPostal;
 	private String mobil;
+	private boolean principal;
 	
 	public String getNombre() {
 		return nombre;
@@ -44,8 +45,15 @@ public class DirectionData {
 		dataHTML+=String.format("Apellidos: <b>%s</b><br>", apellidos);
 		dataHTML+=String.format("Direccion: <b>%s</b><br>", direccion);
 		dataHTML+=String.format("Código Postal: <b>%s</b><br>", codPostal);
-		dataHTML+=String.format("Móbil: <b>%s</b>", mobil);
+		dataHTML+=String.format("Móbil: <b>%s</b><br>", mobil);
+		dataHTML+=String.format("Principal: <b>%s</b><br>", principal);
 		return dataHTML;
+	}
+	public boolean isPrincipal() {
+		return principal;
+	}
+	public void setPrincipal(boolean principal) {
+		this.principal = principal;
 	}	
 	
 

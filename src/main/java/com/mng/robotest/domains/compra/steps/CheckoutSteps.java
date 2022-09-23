@@ -97,7 +97,7 @@ public class CheckoutSteps extends StepBase {
 		if (!dataTest.isUserRegistered()) {
 			modalDirecEnvioSteps.validateIsOk();
 		} else {
-			new ModalMultidirectionSteps().checkIsVisible();
+			new ModalMultidirectionSteps().checkIsVisible(2);
 		}
 	}	
 	

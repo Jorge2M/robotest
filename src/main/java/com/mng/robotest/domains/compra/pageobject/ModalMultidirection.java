@@ -19,6 +19,7 @@ public class ModalMultidirection extends PageBase {
 	private static final String XPATH_MODAL_DIRECTIONS ="//*[@data-testid='checkout.multiAddress.modalAddresses']";
 	private static final String XPATH_LINK_ANYADIR_DIRECCION = "//*[@data-testid[contains(.,'newAddress.button')]]";
 	private static final String XPATH_LINK_EDITAR = "//*[@data-testid[contains(.,'edit.button')]]";
+	private static final String XPATH_CLOSE_MODAL_CONFIRM_ELIMINACION = "//*[@data-testid='modal.close.button']";
 	
 	private static final String XPATH_LINE_DIRECTION = "//*[@data-testid[contains(.,'modalAddresses.addressRadio')]]";
 	private static final String XPATH_TEXT_PRINCIPAL = "//*[@data-testid[contains(.,'addressExtraInfo')]]";
@@ -37,9 +38,8 @@ public class ModalMultidirection extends PageBase {
 		}
 	}
 	
-	public boolean isVisible() throws Exception {
-		waitMillis(1000);
-		return state(Visible, XPATH_MODAL_DIRECTIONS).check();
+	public boolean isVisible(int seconds) throws Exception {
+		return state(Visible, XPATH_MODAL_DIRECTIONS).wait(seconds).check();
 	}
 	
 	public Optional<Direction> getPrincipalDirection(int seconds) {
@@ -116,5 +116,13 @@ public class ModalMultidirection extends PageBase {
 		}
 		WebElement directionElem = directionOpt.get().getElement();
 		click(directionElem).by(By.xpath(XPATH_LINK_EDITAR)).exec();
+	}
+	
+	public void closeModal() {
+		click(XPATH_CLOSE_MODAL_CONFIRM_ELIMINACION).exec();
+	}
+	
+	public boolean isModalInvisible(int seconds) {
+		return state(State.Invisible, XPATH_MODAL_DIRECTIONS).wait(seconds).check();
 	}
 }

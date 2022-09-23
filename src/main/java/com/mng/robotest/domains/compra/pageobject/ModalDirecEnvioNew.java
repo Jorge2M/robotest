@@ -1,16 +1,17 @@
 package com.mng.robotest.domains.compra.pageobject;
 
+import org.openqa.selenium.Keys;
+
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.transversal.PageBase;
 
 public class ModalDirecEnvioNew extends PageBase {
 
-	public static final String XPATH_CHECK_DIRECION_PRINCIPAL = "//*[@data-testid='form-isMainAddress']";
-	public static final String XPATH_SAVE_BUTTON = "//*[@data-testid[contains(.,'save.button')]]";
-	public static final String XPATH_REMOVE_BUTTON = "//*[@data-testid='address.form.delete.button']";
-	public static final String XPATH_REMOVE_BUTTON2 = "button[@data-testid='address.form.delete.button']";
+	private static final String XPATH_CHECK_DIRECION_PRINCIPAL = "//*[@for='address.form-isMainAddress']";
+	private static final String XPATH_SAVE_BUTTON = "//*[@data-testid[contains(.,'save.button')]]";
+	private static final String XPATH_REMOVE_BUTTON = "//*[@data-testid='address.form.delete.button']";
+	private static final String XPATH_REMOVE_CONFIRM_BUTTON = "//button[@data-testid='address.form.modal.delete.button']";
 
-	
 	public enum InputType {
 		NOMBRE("address.form.firstName"),
 		APELLIDOS("address.form.lastName"),
@@ -23,7 +24,7 @@ public class ModalDirecEnvioNew extends PageBase {
 			this.dataTestId = dataTestId;
 		}
 		public String getXPath() {
-			return String.format("//*[@data-testid='%s']", dataTestId);
+			return String.format("//input[@data-testid='%s']", dataTestId);
 		}
 	}
 	
@@ -37,9 +38,12 @@ public class ModalDirecEnvioNew extends PageBase {
 		inputData(InputType.DIRECCION, direction.getDireccion());
 		inputData(InputType.CODIGO_POSTAL, direction.getCodPostal());
 		inputData(InputType.MOVIL, direction.getMobil());
+		if (direction.isPrincipal()) {
+			clickLabelDirecPrincipal();
+		}
 		waitMillis(1000);
 	}
-	public void inputDataEdit(DirectionData2 direction) {
+	public void inputDataEdit(DirectionData direction) {
 		inputData(InputType.NOMBRE, direction.getNombre());
 		inputData(InputType.APELLIDOS, direction.getApellidos());
 		inputData(InputType.DIRECCION, direction.getDireccion());
@@ -47,7 +51,9 @@ public class ModalDirecEnvioNew extends PageBase {
 	}
 
 	public void inputData(InputType inputType, String data) {
-		getElement(inputType.getXPath()).clear();
+		//clear doesn't works in that case -> workaround
+		//getElement(inputType.getXPath()).clear();
+		getElement(inputType.getXPath()).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
 		getElement(inputType.getXPath()).sendKeys(data);
 	}
 
@@ -61,11 +67,13 @@ public class ModalDirecEnvioNew extends PageBase {
 	
 	public void clickRemoveButton() {
 		click(XPATH_REMOVE_BUTTON).exec();
-		click(XPATH_REMOVE_BUTTON).exec();
-
 	}
-	public void clickRemoveButton2() {
-		click(XPATH_REMOVE_BUTTON2).exec();
-
+	
+	public boolean isVisibleModalConfirmacionEliminar(int seconds) {
+		return state(State.Visible, XPATH_REMOVE_CONFIRM_BUTTON).wait(seconds).check();
+	}
+	
+	public void clickConfirmEliminarButton() {
+		click(XPATH_REMOVE_CONFIRM_BUTTON).exec();
 	}
 }

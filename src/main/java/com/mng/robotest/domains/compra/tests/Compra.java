@@ -65,8 +65,8 @@ public class Compra {
 	}
 
 	@Test (
-			groups={"Compra", "Canal:desktop_App:shop"}, alwaysRun=true,
-			description="[Usuario registrado] Acceder a la sección de multidirecciones del checkout y añadir/eliminar una dirección")
+		groups={"Compra", "Canal:desktop_App:shop"}, alwaysRun=true,
+		description="[Usuario registrado] Acceder a la sección de multidirecciones del checkout y añadir/eliminar una dirección")
 	public void COM009_MultiAddress() throws Exception {
 		new Com009().execute();
 	}

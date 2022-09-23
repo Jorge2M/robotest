@@ -84,6 +84,16 @@ public class PageMisCompras extends PageBase {
 		return getTickets().size()>0;
 	}
 	
+	public boolean isTicketOnline(String idPedido, int seconds) {
+		for (int i=0; i<seconds; i++) {
+			if (isTicketOnline(idPedido)) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
+	}
+	
 	public boolean isTicketOnline(String idPedido) {
 		return (getTickets().stream()
 			.filter(item -> item.getId().compareTo(idPedido)==0)

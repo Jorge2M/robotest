@@ -56,10 +56,13 @@ public class PageMisComprasSteps extends StepBase {
 			stateVal = State.Info;
 			store = StoreType.None;
 		}
+		
+		int seconds = 2;
 		checks.add(
 		    Check.make(
-			    "Es visible la compra " + TypeTicket.Online + " asociada al pedido <b>" + codPedido + "</b>",
-			    pageMisCompras.isTicketOnline(codPedido), stateVal)
+			    "Es visible la compra " + TypeTicket.Online + 
+			    " asociada al pedido <b>" + codPedido + "</b> (la experamos " + seconds + ")",
+			    pageMisCompras.isTicketOnline(codPedido, seconds), stateVal)
 		    .store(store).build());
 		
 		return checks;
