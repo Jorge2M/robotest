@@ -10,7 +10,7 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.conftestmaker.Suites;
 import com.mng.robotest.test.suites.*;
 
-public class CmdRunTests { 
+public class CmdRunTests {  
 	
 	enum TypeCallbackSchema {http, https}
 	public enum TypeCallBackMethod {POST, GET}	
