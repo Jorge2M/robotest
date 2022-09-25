@@ -93,7 +93,7 @@ public class Fic002 extends TestBase {
 			}
 		}
 		if (TypePanel.DESCRIPTION.getListApps().contains(app) &&
-				!channel.isDevice()) {
+			!channel.isDevice()) {
 			pageFichaSteps.getSecProductDescOldSteps().selectPanel(TypePanel.DESCRIPTION);
 		}
 		if (TypePanel.COMPOSITION.getListApps().contains(app)) {
@@ -103,8 +103,8 @@ public class Fic002 extends TestBase {
 			pageFichaSteps.getSecProductDescOldSteps().selectPanel(TypePanel.RETURNS);
 		}
 		if (TypePanel.SHIPMENT.getListApps().contains(app) &&
-				!channel.isDevice()) {
-			pageFichaSteps.getSecProductDescOldSteps().selectPanel(TypePanel.SHIPMENT);
+			!channel.isDevice()) {
+			pageFichaSteps.getSecProductDescOldSteps().selectPanel(TypePanel.SHIPMENT);  
 		}
 	}
 

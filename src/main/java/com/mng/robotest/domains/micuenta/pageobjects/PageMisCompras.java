@@ -56,7 +56,7 @@ public class PageMisCompras extends PageBase {
 	public boolean isTicket(TypeTicket typeCompra, int seconds) {
 		for (int i=0; i<seconds; i++) {
 			List<Ticket> listTickets = getTickets(typeCompra);
-			if (listTickets.size()>0) {
+			if (!listTickets.isEmpty()) {
 				return true;
 			}
 			waitMillis(1000);
@@ -74,7 +74,7 @@ public class PageMisCompras extends PageBase {
 	}
 
 	public boolean areTickets() {
-		return getTickets().size()>0;
+		return !getTickets().isEmpty();
 	}
 	
 	public boolean isTicketOnline(String idPedido, int seconds) {

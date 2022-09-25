@@ -52,7 +52,7 @@ public class GetterProducts {
 	private final ProductList productList;
 	private final ProductFilter productFilter;
 	
-	public enum MethodGetter {ApiRest, WebDriver, Any}
+	public enum MethodGetter { API_REST, WEBDRIVER, ANY }
 	
 	private GetterProducts(
 			String url, 
@@ -68,14 +68,12 @@ public class GetterProducts {
 			boolean retryPro, 
 			WebDriver driver) throws Exception {
 		
-		urlForJavaCall = getUrlForJavaCall(url, driver);
+		urlForJavaCall = getUrlForJavaCall(url);
 		urlForBrowserCall = getUrlBase(url);
 		nameCloudTest = UtilsData.getNameCloudTest(url);
-		switch (app) {
-		case votf:
+		if (app==AppEcom.votf) {
 			this.saleType = "V";
-			break;
-		default:
+		} else {
 			this.saleType = "";
 		}
 		
@@ -117,13 +115,8 @@ public class GetterProducts {
 		return productFilter.getOneFiltered(listFilters);
 	}
 	
-	private String getUrlForJavaCall(String initialURL, WebDriver driver) throws Exception {
-//		String cloudtestName = getNameCloudtestFromCookie(driver);
-//		if (cloudtestName==null) {
-			return getUrlBase(initialURL);
-//		} else {
-//			return "https://" + cloudtestName + ".dev.mango.com/";
-//		}
+	private String getUrlForJavaCall(String initialURL) throws Exception {
+		return getUrlBase(initialURL);
 	}
 	
 	private String getUrlBase(String initialURL) throws Exception {
@@ -136,7 +129,7 @@ public class GetterProducts {
 		}
 	}
 	
-	public ProductList getProductList() throws Exception {
+	public ProductList getProductList() {
 		if (productList!=null) {
 			return productList;
 		}
@@ -163,15 +156,14 @@ public class GetterProducts {
 
 	private Optional<ProductList> getProductsFromMenu(MenuProduct menuCandidate, boolean withStock) {
 		try {
-			ProductList productList = getProductList(menuCandidate);
-			if (productList!=null) {
-				if (hasProductsWithStock(productList) || !withStock) {
-					return Optional.of(productList);
-				}
+			ProductList productListMenu = getProductList(menuCandidate);
+			if (productListMenu!=null && 
+			   (hasProductsWithStock(productListMenu) || !withStock)) {
+				return Optional.of(productListMenu);
 			}
 		}
 		catch (Exception e) {
-			Log4jTM.getLogger().warn("Problem retriving articles of type " + menuCandidate + " for country " + codigoPaisAlf, e);
+			Log4jTM.getLogger().warn("Problem retriving articles of type %s for country %s", menuCandidate, codigoPaisAlf, e);
 		}
 		return Optional.empty();
 	}
@@ -179,33 +171,32 @@ public class GetterProducts {
 	private boolean hasProductsWithStock(ProductList productList) throws Exception {
 		Filter filterStock = new FilterStock();
 		return !filterStock.filter(productList.getAllGarments()).isEmpty();
-		//return !filterStock.filter(productList.getGroups().get(0).getGarments()).isEmpty();
 	}
 	
 	private ProductList getProductList(MenuProduct menu) throws Exception {
-		ProductList productList = getProductListFromUrl(menu);
-		if (productList==null && retryPro) {
-			productList = getProductListFromPro(menu);
+		ProductList productListUrl = getProductListFromUrl(menu);
+		if (productListUrl==null && retryPro) {
+			productListUrl = getProductListFromPro();
 		}
-		return productList;
+		return productListUrl;
 	}
 	
 	private ProductList getProductListFromUrl(MenuProduct menu) throws Exception {
 		switch (method) {
-		case ApiRest:
+		case API_REST:
 			return getProductsFromApiRest(menu);
-		case WebDriver:
+		case WEBDRIVER:
 			return getProductsFromWebDriver(menu);
 		default:
-			ProductList productList = getProductsFromApiRest(menu);
-			if (productList==null && driver!=null) {
+			ProductList productListApi = getProductsFromApiRest(menu);
+			if (productListApi==null && driver!=null) {
 				return getProductsFromWebDriver(menu);
 			}
-			return productList;
+			return productListApi;
 		}
 	}
 	
-	private ProductList getProductListFromPro(MenuProduct menu) throws Exception {
+	private ProductList getProductListFromPro() throws Exception {
 		GetterProducts getterPro = new GetterProducts(
 				"https://shop.mango.com/", 
 				codigoPaisAlf,
@@ -222,25 +213,14 @@ public class GetterProducts {
 		return getterPro.getProductList();
 	}
 
-//	private String getNameCloudtestFromCookie(WebDriver driver) {
-//		if (driver==null) {
-//			return null;
-//		}
-//		Cookie cookieName = driver.manage().getCookieNamed("cloudtest-name");
-//		if (cookieName!=null) {
-//			return cookieName.getValue();
-//		}
-//		return null;
-//	}
-	
-	private WebTarget getWebTargetProductlist(String urlBase, MenuProduct menu) throws Exception {
+	private WebTarget getWebTargetProductlist(String urlBase, MenuProduct menu) {
 		if ("intimissimi".compareTo(menu.getSeccion())==0) {
 			return getWebTargetProductlistIntimissimi(urlBase, menu); 
 		}
 		return getWebTargetProductlistStandard(urlBase, menu); 
 	}
 	
-	private WebTarget getWebTargetProductlistStandard(String urlBase, MenuProduct menu) throws Exception {
+	private WebTarget getWebTargetProductlistStandard(String urlBase, MenuProduct menu) {
 		Client client = ClientBuilder.newBuilder().build();
 		WebTarget webTarget = 
 			client
@@ -287,7 +267,7 @@ public class GetterProducts {
 		return codigoPaisAlf + "-" + codigoIdiomAlf.toLowerCase();
 	}
 	
-	private WebTarget getWebTargetProductlistIntimissimi(String urlBase, MenuProduct menu) throws Exception {
+	private WebTarget getWebTargetProductlistIntimissimi(String urlBase, MenuProduct menu) {
 		Client client = ClientBuilder.newBuilder().build();
 		WebTarget webTarget = 
 			client
@@ -365,15 +345,13 @@ public class GetterProducts {
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		ProductList productList = objectMapper.readValue(productsJson, ProductList.class);
-		return productList;
+		return objectMapper.readValue(productsJson, ProductList.class);
 	}
 	
 	private String getLineaPath() {
-		switch (app) {
-		case outlet:
+		if (app==AppEcom.outlet) {
 			return "outlet";
-		default:
+		} else {
 			return lineaType.name();
 		}
 	}
@@ -396,10 +374,10 @@ public class GetterProducts {
 				Menu.Fulares);
 		
 		private Integer pagina = 1;
-		private MethodGetter method = MethodGetter.Any;
+		private MethodGetter method = MethodGetter.ANY;
 		private boolean retryPro = true;
 
-		public Builder(String codPaisAlf, AppEcom app, WebDriver driver) throws Exception {
+		public Builder(String codPaisAlf, AppEcom app, WebDriver driver) {
 			this.url = ((InputParamsMango)TestMaker.getInputParamsSuite()).getUrlBase();
 			this.codigoPaisAlf = codPaisAlf;
 			this.app = app;
@@ -483,7 +461,7 @@ public class GetterProducts {
 		public MenuProduct(MenuI menu, AppEcom app, String urlBase) {
 			this.seccion = menu.getSeccion();
 			this.galeria = menu.getGaleria();
-			this.familia = menu.getFamilia(app, isPro(app, urlBase));
+			this.familia = menu.getFamilia(app, isPro(urlBase));
 		}
 		
 		public String getSeccion() {
@@ -496,7 +474,7 @@ public class GetterProducts {
 			return this.familia;
 		}
 		
-		private boolean isPro(AppEcom app, String urlBase) {
+		private boolean isPro(String urlBase) {
 			try {
 				return new NavigationBase().isPRO();
 			}

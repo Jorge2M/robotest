@@ -54,7 +54,7 @@ public class PagoGetter {
 	private static List<PaymentCountry> getListPaymentsFromCountries(List<Pais> listCountries, AppEcom app, boolean isEmpleado) {
 		List<PaymentCountry> listPaymentsToReturn = new ArrayList<>();
 		for (Pais pais : listCountries) {
-			if (pais.getTiendasOnlineList().size()>0 && pais.getTiendasOnlineList().contains(app)) {
+			if (!pais.getTiendasOnlineList().isEmpty() && pais.getTiendasOnlineList().contains(app)) {
 				for (Pago pago : pais.getListPagos()) {
 					if ((!isEmpleado || (isEmpleado && pago.isForEmpleado())) &&
 						//El storecredito lo mantenemos al margen de la lista pues no aparece como un icono

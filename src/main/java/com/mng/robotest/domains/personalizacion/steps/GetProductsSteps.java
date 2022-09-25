@@ -21,7 +21,7 @@ public class GetProductsSteps extends StepBase {
 			"Aparece el flag de personalización en mínimo 2 y máximo 4 productos")
 	public void callProductListService(LineaType linea, String seccion, String galeria, String familia) throws Exception {
 		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
-			.method(MethodGetter.WebDriver)
+			.method(MethodGetter.WEBDRIVER)
 			.linea(LineaType.she)
 			.menu(Menu.Vaqueros)
 			.build();

@@ -51,12 +51,12 @@ public class PageLanding extends PageBase {
 	
 	public boolean hayMaps() {
 		List<WebElement> listaMaps = getListaMaps();
-		return (listaMaps!=null && listaMaps.size()>0);
+		return (listaMaps!=null && !listaMaps.isEmpty());
 	}
 	
 	public boolean hayItemsEdits() {
 		List<WebElement> listaItemsEdits = getListaItemsEdit();
-		return (listaItemsEdits!=null && listaItemsEdits.size()>0);
+		return (listaItemsEdits!=null && !listaItemsEdits.isEmpty());
 	}
 	
 	public List<WebElement> getListaMaps() {
@@ -75,7 +75,7 @@ public class PageLanding extends PageBase {
 	
 	public boolean hayIframes() {
 		List<WebElement> listaIFrames = getElementsVisible("//iframe");
-		return (listaIFrames!=null && listaIFrames.size()>0);
+		return (listaIFrames!=null && !listaIFrames.isEmpty());
 	}
 	
 	public boolean hayImgsEnContenido() {

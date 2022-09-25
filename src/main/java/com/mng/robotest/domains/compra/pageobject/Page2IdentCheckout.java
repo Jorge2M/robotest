@@ -497,7 +497,7 @@ public class Page2IdentCheckout extends PageBase {
 		int i=0;
 		while (staleElement && i<3) {
 			List<WebElement> localidadesList = getElementsVisible(xpathSelect);
-			if (localidadesList.size() > 0) {
+			if (!localidadesList.isEmpty()) {
 				try {
 					datoSeteado = selectLocalidad(localidadesList.get(0), posInSelect);
 					staleElement = false;
@@ -558,7 +558,7 @@ public class Page2IdentCheckout extends PageBase {
 	public boolean setCheckHombreIfVisible() {
 		boolean datoSeteado = false;
 		List<WebElement> cfGener_HList = getElementsVisible(XPATH_CHECK_HOMBRE);
-		if (cfGener_HList.size() > 0) {
+		if (!cfGener_HList.isEmpty()) {
 			cfGener_HList.get(0).click();
 		}		
 		
@@ -575,7 +575,7 @@ public class Page2IdentCheckout extends PageBase {
 	public boolean setCheckCondicionesIfVisible() {
 		boolean datoSeteado = false;
 		List<WebElement> cfPriv = getElementsVisible(XPATH_CHECK_CONDICIONES + "/../../div[@class='checkbox__image']");
-		if (cfPriv.size() > 0) { //Revisamos si el check NO está marcado 
+		if (!cfPriv.isEmpty()) { //Revisamos si el check NO está marcado 
 			getElement(XPATH_CHECK_CONDICIONES).click();
 			datoSeteado = true;
 		}		
