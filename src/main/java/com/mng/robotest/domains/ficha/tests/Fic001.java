@@ -77,10 +77,10 @@ public class Fic001 extends TestBase {
 	private void stopIfNoPresentArticleNoOnlineWithColors() throws NotFoundException {
 		if (!articleNoOnlineWithColors.isPresent()) {
 			List<String> filtersLabels = 
-					filterNoOnlineWithColors
-						.stream()
-						.map(Object::toString)
-						.collect(Collectors.toList());
+				filterNoOnlineWithColors
+					.stream()
+					.map(Object::toString)
+					.collect(Collectors.toList());
 			
 			throw new NotFoundException("Not found article with filters " + String.join(",", filtersLabels));
 		}
@@ -90,8 +90,7 @@ public class Fic001 extends TestBase {
 		//Si es talla única -> Significa que lo dimos de alta en la bolsa cuando seleccionamos el click "Añadir a la bolsa"
 		//-> Lo damos de baja
 		if (isTallaUnica) {
-			SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
-			secBolsaSteps.clear();
+			 new SecBolsaSteps().clear();
 		}
 	}
 
