@@ -3,6 +3,8 @@ package com.mng.robotest.domains.bolsa.pageobjects;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Invisible;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -91,7 +93,7 @@ public abstract class SecBolsaCommon extends PageBase {
 		String xpathImporte = getXPathPrecioSubTotal();
 		try {
 			ExpectedCondition<Boolean> expected = ExpectedConditions.not(ExpectedConditions.textToBePresentInElementLocated(By.xpath(xpathImporte), importeSubTotalPrevio));
-			new WebDriverWait(driver, seconds).until(expected);
+			new WebDriverWait(driver, Duration.ofSeconds(seconds)).until(expected);
 			return true;
 		}
 		catch (Exception e) {

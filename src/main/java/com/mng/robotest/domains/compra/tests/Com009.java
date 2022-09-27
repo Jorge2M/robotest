@@ -60,12 +60,12 @@ public class Com009 extends TestBase {
     	modalDirecEnvioSteps.inputDataAndSave(directionSecondary);
 
         //Editamos dirección
-        new CheckoutSteps().clickEditarDirecEnvio();
+        //new CheckoutSteps().clickEditarDirecEnvio();
         modalMultidirectionSteps.clickEditAddress(adressEdit);
         modalDirecEnvioSteps.inputDataAndEdit(directionEdit);
 
         //Eliminamos dirección
-        new CheckoutSteps().clickEditarDirecEnvio();
+        //new CheckoutSteps().clickEditarDirecEnvio();
         modalMultidirectionSteps.clickEditAddress(addressSecondary);
         modalDirecEnvioSteps.clickEliminarButton();
         modalDirecEnvioSteps.confirmEliminarDirection(addressSecondary);
@@ -119,7 +119,6 @@ public class Com009 extends TestBase {
 		direction.setApellidos("Muñoz Martínez");
 		direction.setDireccion("c./mossen trens nº6 5º1ª " + Timestamp.from(Instant.now()));
 		direction.setCodPostal(dataTest.getPais().getCodpos());
-		direction.setCity("BARCELONA");
 		direction.setMobil(dataTest.getPais().getTelefono());
 		direction.setPrincipal(false);
 		return direction;
@@ -140,7 +139,7 @@ public class Com009 extends TestBase {
     	DirectionData directionReturn = DirectionData.from(direction);
     	directionReturn.setNombre("Robotest");
     	directionReturn.setApellidos("Pruebas");
-    	directionReturn.setDireccion(""+Timestamp.from(Instant.now()));
+    	//directionReturn.setDireccion(""+Timestamp.from(Instant.now()));
         return directionReturn;
     }
     

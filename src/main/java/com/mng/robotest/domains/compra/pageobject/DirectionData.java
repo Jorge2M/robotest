@@ -6,7 +6,6 @@ public class DirectionData {
 	private String apellidos;
 	private String direccion;
 	private String codPostal;
-	private String city;
 	private String mobil;
 	private boolean principal;
 
@@ -16,7 +15,6 @@ public class DirectionData {
 		directionNew.setApellidos(direction.getApellidos());
 		directionNew.setDireccion(direction.getDireccion());
 		directionNew.setCodPostal(direction.getCodPostal());
-		directionNew.setCity(direction.getCity());
 		directionNew.setMobil(direction.getMobil());
 		directionNew.setPrincipal(direction.isPrincipal());
 		return directionNew;
@@ -45,11 +43,6 @@ public class DirectionData {
 		this.codPostal = codPostal;
 	}
 
-	public String getCity() {return city;}
-	public void setCity(String city) {
-		this.city = city;
-	}
-
 	public String getMobil() {
 		return mobil;
 	}
@@ -62,7 +55,6 @@ public class DirectionData {
 		dataHTML+=String.format("Apellidos: <b>%s</b><br>", apellidos);
 		dataHTML+=String.format("Direccion: <b>%s</b><br>", direccion);
 		dataHTML+=String.format("Código Postal: <b>%s</b><br>", codPostal);
-		dataHTML+=String.format("City Postal: <b>%s</b><br>", city);
 		dataHTML+=String.format("Móbil: <b>%s</b><br>", mobil);
 		dataHTML+=String.format("Principal: <b>%s</b><br>", principal);
 		return dataHTML;

@@ -4,8 +4,6 @@ import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.datastored.DataPago;
-import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
-import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.steps.shop.AccesoSteps;

@@ -7,8 +7,6 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.data.Color;
-import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
-import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;

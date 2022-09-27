@@ -25,9 +25,9 @@ public class ModalDirecEnvioNewSteps extends StepBase {
 	public void inputDataAndSave(DirectionData direction) throws Exception {
 		modalDirecEnvio.inputData(direction);
 		modalDirecEnvio.clickSaveButton();
-		if (channel.isDevice()) {
+		//if (channel.isDevice()) {
 			new CheckoutSteps().clickEditarDirecEnvio();
-		}
+		//}
 		new ModalMultidirectionSteps().checkAfterAddDirection(direction);
 	}
 	@Step (
