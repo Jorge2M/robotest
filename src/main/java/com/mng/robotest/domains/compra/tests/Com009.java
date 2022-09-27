@@ -119,6 +119,7 @@ public class Com009 extends TestBase {
 		direction.setApellidos("Muñoz Martínez");
 		direction.setDireccion("c./mossen trens nº6 5º1ª " + Timestamp.from(Instant.now()));
 		direction.setCodPostal(dataTest.getPais().getCodpos());
+		direction.setCity("BARCELONA");
 		direction.setMobil(dataTest.getPais().getTelefono());
 		direction.setPrincipal(false);
 		return direction;
@@ -137,9 +138,9 @@ public class Com009 extends TestBase {
     
     private DirectionData editDirection(DirectionData direction) {
     	DirectionData directionReturn = DirectionData.from(direction);
-        direction.setNombre("Robotest");
-        direction.setApellidos("Pruebas");
-        direction.setDireccion(""+Timestamp.from(Instant.now()));
+    	directionReturn.setNombre("Robotest");
+    	directionReturn.setApellidos("Pruebas");
+    	directionReturn.setDireccion(""+Timestamp.from(Instant.now()));
         return directionReturn;
     }
     

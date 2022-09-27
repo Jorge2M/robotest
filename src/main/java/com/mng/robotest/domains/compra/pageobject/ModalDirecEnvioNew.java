@@ -1,18 +1,10 @@
 package com.mng.robotest.domains.compra.pageobject;
 
-import com.mng.robotest.test.pageobject.manto.PageOrdenacionDePrendas;
-import com.mng.robotest.test.utils.PaisGetter;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.support.ui.Select;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.transversal.PageBase;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.SelectElement.TypeSelect.Value;
-import static com.mng.robotest.test.data.PaisShop.PORTUGAL;
 
 public class ModalDirecEnvioNew extends PageBase {
 
@@ -21,7 +13,6 @@ public class ModalDirecEnvioNew extends PageBase {
 	private static final String XPATH_REMOVE_BUTTON = "//*[@data-testid='address.form.delete.button']";
 	private static final String XPATH_REMOVE_CONFIRM_BUTTON = "//button[@data-testid='address.form.modal.delete.button']";
 	private static final String XPATH_SELECTOR_PROVINCIA = "//*[@id='address.form.provinceId']";
-	private static final String XPATH_PROVINCIA = "//[@id='address.form.provinceId']/option[2]";
 
 	public enum InputType {
 		NOMBRE("address.form.firstName"),
@@ -38,15 +29,11 @@ public class ModalDirecEnvioNew extends PageBase {
 		public String getXPath() {
 			return String.format("//input[@data-testid='%s']", dataTestId);
 		}
+
 	}
-	private String getText(WebElement element) {
-		return element.getText();
-	}
-	
 	public boolean isVisible(int seconds) {
 		return state(State.Present, InputType.NOMBRE.getXPath()).wait(seconds).check();
 	}
-
 	
 	public void inputData(DirectionData direction) {
 		inputData(InputType.NOMBRE, direction.getNombre());
@@ -54,8 +41,8 @@ public class ModalDirecEnvioNew extends PageBase {
 		inputData(InputType.DIRECCION, direction.getDireccion());
 		inputData(InputType.CODIGO_POSTAL, direction.getCodPostal());
 		inputData(InputType.CITY, direction.getCity());
-		//clickSelectorProvincia();
 		inputData(InputType.MOVIL, direction.getMobil());
+		clickSelectorProvincia();
 		if (direction.isPrincipal()) {
 			clickLabelDirecPrincipal();
 		}
@@ -76,11 +63,9 @@ public class ModalDirecEnvioNew extends PageBase {
 	}
 
 	public void clickSelectorProvincia() {
-		select(XPATH_SELECTOR_PROVINCIA, XPATH_PROVINCIA).type(Value).exec();
-		waitMillis(5000);
-		click(XPATH_PROVINCIA).waitLink(2).exec();
-
-
+		if (state(State.Visible, XPATH_SELECTOR_PROVINCIA).check()) {
+			new Select(getElement(XPATH_SELECTOR_PROVINCIA)).selectByIndex(1);
+		}
 	}
 
 	public void clickLabelDirecPrincipal() {
