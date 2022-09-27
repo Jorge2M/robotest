@@ -82,8 +82,8 @@ public class Com009 extends TestBase {
 	    	modalDirecEnvioSteps.inputDataAndSave(directionPrincipal);
 	        
 	        //Cerrar el modal
-	        modalMultidirectionSteps.closeModal();			
-			
+    		modalMultidirectionSteps.closeModal();
+    		
 	        //Comprar
 			DataPago dataPago = executeVisaPayment();
 			
@@ -108,6 +108,16 @@ public class Com009 extends TestBase {
     	dataPago.setPago(pagoVISA);
     	new SecMetodoEnvioSteps().selectMetodoEnvio(dataPago, "VISA");
     }
+    
+	private void checkMisCompras(DataPago dataPago, String address) throws Exception {
+		String codigoPedido = dataPago.getDataPedido().getCodpedido();
+		new PageResultPagoSteps().selectMisCompras();
+		
+		PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps();
+		pageMisComprasSteps.validateIsCompraOnline(codigoPedido);
+		pageMisComprasSteps.selectCompra(codigoPedido);
+		new ModalDetalleCompraSteps().checkIsVisibleDirection(address);
+	}    
     
     private DirectionData makeDireccionSecundaria() {
 		DirectionData direction = new DirectionData();
@@ -138,13 +148,5 @@ public class Com009 extends TestBase {
         return direction;
     }
     
-	private void checkMisCompras(DataPago dataPago, String address) throws Exception {
-		String codigoPedido = dataPago.getDataPedido().getCodpedido();
-		new PageResultPagoSteps().selectMisCompras();
-		
-		PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps();
-		pageMisComprasSteps.validateIsCompraOnline(codigoPedido);
-		pageMisComprasSteps.selectCompra(codigoPedido);
-		new ModalDetalleCompraSteps().checkIsVisibleDirection(address);
-	}
+
 }

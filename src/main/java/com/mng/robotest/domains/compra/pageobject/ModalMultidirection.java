@@ -18,6 +18,7 @@ public class ModalMultidirection extends PageBase {
 
 	private static final String XPATH_MODAL_DIRECTIONS ="//*[@data-testid='checkout.multiAddress.modalAddresses']";
 	private static final String XPATH_LINK_ANYADIR_DIRECCION = "//*[@data-testid[contains(.,'newAddress.button')]]";
+	private static final String XPATH_CONFIRMAR_BUTTON = "//button[@data-testid[contains(.,'confirmation.button')]]";
 	private static final String XPATH_LINK_EDITAR = "//*[@data-testid[contains(.,'edit.button')]]";
 	private static final String XPATH_CLOSE_MODAL_CONFIRM_ELIMINACION = "//*[@data-testid='modal.close.button']";
 	
@@ -119,7 +120,11 @@ public class ModalMultidirection extends PageBase {
 	}
 	
 	public void closeModal() {
-		click(XPATH_CLOSE_MODAL_CONFIRM_ELIMINACION).exec();
+		if (channel.isDevice()) {
+			click(XPATH_CONFIRMAR_BUTTON).exec();
+		} else {
+			click(XPATH_CLOSE_MODAL_CONFIRM_ELIMINACION).exec();
+		}
 	}
 	
 	public boolean isModalInvisible(int seconds) {
