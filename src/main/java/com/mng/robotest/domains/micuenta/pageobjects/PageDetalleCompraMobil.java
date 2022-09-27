@@ -1,7 +1,6 @@
 package com.mng.robotest.domains.micuenta.pageobjects;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink;

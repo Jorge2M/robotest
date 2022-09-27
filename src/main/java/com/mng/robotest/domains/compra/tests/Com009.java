@@ -142,10 +142,11 @@ public class Com009 extends TestBase {
     }    
     
     private DirectionData editDirection(DirectionData direction) {
+    	DirectionData directionReturn = DirectionData.from(direction);
         direction.setNombre("Robotest");
         direction.setApellidos("Pruebas");
         direction.setDireccion(""+Timestamp.from(Instant.now()));
-        return direction;
+        return directionReturn;
     }
     
 

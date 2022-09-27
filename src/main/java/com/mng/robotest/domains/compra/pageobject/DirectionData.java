@@ -10,6 +10,18 @@ public class DirectionData {
 	private String mobil;
 	private boolean principal;
 
+	public static DirectionData from(DirectionData direction) {
+		DirectionData directionNew = new DirectionData();
+		directionNew.setNombre(direction.getNombre());
+		directionNew.setApellidos(direction.getApellidos());
+		directionNew.setDireccion(direction.getDireccion());
+		directionNew.setCodPostal(direction.getCodPostal());
+		directionNew.setCity(direction.getCity());
+		directionNew.setMobil(direction.getMobil());
+		directionNew.setPrincipal(direction.isPrincipal());
+		return directionNew;
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}
