@@ -23,6 +23,8 @@ public class ModalMultidirection extends PageBase {
 	
 	private static final String XPATH_LINE_DIRECTION = "//*[@data-testid[contains(.,'modalAddresses.addressRadio')]]";
 	private static final String XPATH_TEXT_PRINCIPAL = "//*[@data-testid[contains(.,'addressExtraInfo')]]";
+
+
 	public enum DirectionItem {
 		NAME("addressName"),
 		ADDRESS("addressDirection"),
@@ -125,4 +127,5 @@ public class ModalMultidirection extends PageBase {
 	public boolean isModalInvisible(int seconds) {
 		return state(State.Invisible, XPATH_MODAL_DIRECTIONS).wait(seconds).check();
 	}
+
 }

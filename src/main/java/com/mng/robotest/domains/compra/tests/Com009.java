@@ -5,6 +5,7 @@ import java.time.Instant;
 
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.pageobject.DirectionData;
+import com.mng.robotest.domains.compra.pageobject.ModalDirecEnvioNew;
 import com.mng.robotest.domains.compra.pageobject.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.domains.compra.steps.ModalDirecEnvioNewSteps;
@@ -19,6 +20,9 @@ import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.utils.PaisGetter;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils.waitMillis;
+import static com.mng.robotest.test.data.PaisShop.*;
+
 public class Com009 extends TestBase {
 	
 	private final ModalMultidirectionSteps modalMultidirectionSteps = new ModalMultidirectionSteps();
@@ -29,7 +33,7 @@ public class Com009 extends TestBase {
         dataTest.setUserConnected("e2e.es.test@mango.com");
         dataTest.setPasswordUser("hsXPv7rUoYw3QnMKRhPT");
         dataTest.setUserRegistered(true);
-        dataTest.setPais(PaisGetter.get(PaisShop.ESPANA));
+        dataTest.setPais(PaisGetter.get(ESPANA));
         dataTest.setIdioma(dataTest.getPais().getListIdiomas().get(0));
     }
 
@@ -116,10 +120,13 @@ public class Com009 extends TestBase {
 		direction.setDireccion("c./mossen trens nº6 5º1ª " + Timestamp.from(Instant.now()));
 		direction.setCodPostal(dataTest.getPais().getCodpos());
 		direction.setMobil(dataTest.getPais().getTelefono());
+
+            direction.setCity("CiudadTest");
+
 		direction.setPrincipal(false);
 		return direction;
     }
-    
+
     private DirectionData makeDireccionPrincipal() {
 		DirectionData direction = new DirectionData();
 		direction.setNombre("Sonia");
@@ -127,6 +134,7 @@ public class Com009 extends TestBase {
 		direction.setDireccion("c./xxxx nº6 5º1ª " + Timestamp.from(Instant.now()));
 		direction.setCodPostal(dataTest.getPais().getCodpos());
 		direction.setMobil(dataTest.getPais().getTelefono());
+        direction.setCity("CiudadTest");
 		direction.setPrincipal(true);
 		return direction;
     }    
@@ -143,6 +151,7 @@ public class Com009 extends TestBase {
 		new PageResultPagoSteps().selectMisCompras();
 		
 		PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps();
+        waitMillis(5000);
 		pageMisComprasSteps.validateIsCompraOnline(codigoPedido);
 		pageMisComprasSteps.selectCompra(codigoPedido);
 		new ModalDetalleCompraSteps().checkIsVisibleDirection(address);
