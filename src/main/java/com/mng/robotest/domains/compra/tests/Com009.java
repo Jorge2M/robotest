@@ -15,9 +15,7 @@ import com.mng.robotest.domains.micuenta.steps.ModalDetalleCompraSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.Pago;
-import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataPago;
-import com.mng.robotest.test.utils.PaisGetter;
 
 public class Com009 extends TestBase {
 	
@@ -26,11 +24,7 @@ public class Com009 extends TestBase {
     private final CompraSteps compraSteps = new CompraSteps();
 
     public Com009() throws Exception {
-        dataTest.setUserConnected("e2e.es.test@mango.com");
-        dataTest.setPasswordUser("hsXPv7rUoYw3QnMKRhPT");
         dataTest.setUserRegistered(true);
-        dataTest.setPais(PaisGetter.get(PaisShop.ESPANA));
-        dataTest.setIdioma(dataTest.getPais().getListIdiomas().get(0));
     }
 
     @Override

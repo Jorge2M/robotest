@@ -13,7 +13,12 @@ public abstract class TestBase extends NavigationBase {
 	public static ThreadLocal<DataTest> DATA_TEST = new ThreadLocal<>();
 	
 	protected TestBase() {
-		this.dataTest = DataTest.getData(PaisShop.ESPANA);
+		if (!inputParamsSuite.getListaPaises().isEmpty()) {
+			String pais = inputParamsSuite.getListaPaises().get(0);
+			this.dataTest = DataTest.getData(PaisShop.getPais(pais));
+		} else {
+			this.dataTest = DataTest.getData(PaisShop.ESPANA);
+		}
 		DATA_TEST.set(dataTest);
 	}
 	
