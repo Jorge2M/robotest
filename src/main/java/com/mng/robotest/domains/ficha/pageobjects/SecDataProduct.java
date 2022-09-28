@@ -16,6 +16,7 @@ import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.utils.ImporteScreen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -215,6 +216,7 @@ public class SecDataProduct extends PageBase {
 
 	//Funciones referentes a los precios
 	public String getPrecioFinalArticulo() {
+		state(State.Visible, getXPathPrecioFinal()).wait(1).check();
 		WebElement precioElem = getElementVisible(getXPathPrecioFinal());
 		String precioArticulo = precioElem.getText();
 		return (ImporteScreen.normalizeImportFromScreen(precioArticulo));

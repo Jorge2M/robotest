@@ -163,10 +163,32 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(0,1),
 		Arrays.asList(
 			"Variante 0 - Original",
-			"Variante 1 - Filtros superiores"),
+			"Variante 1"),
 		Arrays.asList(Channel.desktop),
-		Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.shop)
+		Arrays.asList(AppEcom.shop)
 	),
+
+	PDP_Desktop_Size_Selector_Outlet_PRE(
+		"[PDP][DESKTOP] Size Selector",
+		"plupGFDfRP6MjHjKaCxliQ",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"Variante 0 - Original",
+			"Variante 1"),
+		Arrays.asList(Channel.desktop),
+		Arrays.asList(AppEcom.outlet)
+	),	
+	
+	PDP_Desktop_Size_Selector_Outlet_PRO(
+		"[PDP][DESKTOP] Size Selector",
+		"ivw-Z5sgQ8GqBtC6TFEJAA",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"Variante 0 - Original",
+			"Variante 1"),
+		Arrays.asList(Channel.desktop),
+		Arrays.asList(AppEcom.outlet)
+	),	
 	
 	PDP_Desktop_Size_Selector_PRO(
 		"[PDP][DESKTOP] Size Selector",
@@ -174,9 +196,9 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(0,1),
 		Arrays.asList(
 			"Variante 0 - Original",
-			"Variante 1 - Filtros superiores"),
+			"Variante 1"),
 		Arrays.asList(Channel.desktop),
-		Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.shop)
+		Arrays.asList(AppEcom.shop)
 	);		
 
 

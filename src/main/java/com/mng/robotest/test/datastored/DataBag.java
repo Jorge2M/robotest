@@ -1,5 +1,6 @@
 package com.mng.robotest.test.datastored;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -8,15 +9,11 @@ import java.util.ListIterator;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.utils.ImporteScreen;
 
-/**
- * Clase que recopila los datos de la bolsa 
- * @author jorge.munoz
- *
- */
+public class DataBag implements Serializable { 
 
-public class DataBag { 
-
-	ArrayList<ArticuloScreen> listArticulos = new ArrayList<>();
+	private static final long serialVersionUID = 1L;
+	
+	List<ArticuloScreen> listArticulos = new ArrayList<>();
 	String importeTotal = "";
 	String importeTransp = "" ;
 	

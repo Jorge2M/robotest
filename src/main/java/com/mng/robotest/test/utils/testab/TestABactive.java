@@ -24,6 +24,8 @@ public class TestABactive {
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.GPS_NEW_MENU_MOBILE_PRO, 0));
 
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.PDP_Desktop_Size_Selector_PRE, 0));
+		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.PDP_Desktop_Size_Selector_Outlet_PRE, 0));
+		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.PDP_Desktop_Size_Selector_Outlet_PRO, 0));
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.PDP_Desktop_Size_Selector_PRO, 0));
 
 		TestABmanager.activateTestsAB(listTestABsToActivate, channel, app, driver);

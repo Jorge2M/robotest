@@ -249,13 +249,10 @@ public abstract class PageGaleria extends PageBase {
 		switch (typeOrden) {
 			case NOordenado:
 				return "";
-			case PrecioAsc:
-			case PrecioDesc:
+			case PrecioAsc, PrecioDesc:
 				return secPrecios.getAnyPrecioNotInOrder(typeOrden, getListaArticulos());
-			case TemporadaDesc:
-			case TemporadaAsc:
-			case BloqueTemporadas_3y4_despues_la_5:
-			case BloqueTemporada_5_despues_la_3y4:
+			case TemporadaDesc, TemporadaAsc, 
+			     BloqueTemporadas_3y4_despues_la_5, BloqueTemporada_5_despues_la_3y4:
 				return getAnyRefNotInOrderTemporada(typeOrden);
 			default:
 				return "";
