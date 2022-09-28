@@ -510,7 +510,7 @@ public class SecMenusDesktopSteps extends StepBase {
 		ChecksTM checks = ChecksTM.getNew();
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel);
 	  	List<Integer> tempSale = FilterCollection.sale.getListTempArticles();
-	  	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.articlesFrom, tempSale);
+	  	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.ARTICLES_FROM, tempSale);
 	  	String warningMessage = "";
 		if (!listArtWrong.isEmpty()) {
 			warningMessage+=

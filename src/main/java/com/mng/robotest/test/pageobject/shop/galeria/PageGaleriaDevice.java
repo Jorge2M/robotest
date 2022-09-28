@@ -220,7 +220,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	public String getNameColorFromCodigo(String codigoColor) {
 		String xpathImgColor = getXPathImgCodigoColor(codigoColor);
 		if (!state(Present, xpathImgColor).check()) {
-			return Constantes.colorDesconocido;
+			return Constantes.COLOR_DESCONOCIDO;
 		}
 		WebElement imgColorWeb = getElement(xpathImgColor);
 		return imgColorWeb.getAttribute("title");

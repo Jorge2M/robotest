@@ -16,20 +16,20 @@ public class SuiteMakerResources {
 	public static Map<String,String> getParametersSuiteShop(InputParamsMango params) {
 		Map<String,String> parametersReturn = new HashMap<>();
 		
-		parametersReturn.put(Constantes.paramCountrys, params.getListaPaisesCommaSeparated());
-		parametersReturn.put(Constantes.paramLineas, params.getListaLineasCommaSeparated());
-		parametersReturn.put(Constantes.paramPayments, params.getListaPaymentsCommaSeparated());
-		parametersReturn.put(Constantes.paramCatalogs, params.getListaCatalogsCommaSeparated());
+		parametersReturn.put(Constantes.PARAM_COUNTRYS, params.getListaPaisesCommaSeparated());
+		parametersReturn.put(Constantes.PARAM_LINEAS, params.getListaLineasCommaSeparated());
+		parametersReturn.put(Constantes.PARAM_PAYMENTS, params.getListaPaymentsCommaSeparated());
+		parametersReturn.put(Constantes.PARAM_CATALOGS, params.getListaCatalogsCommaSeparated());
 
 		//Credenciales acceso a Manto
 		Secret secret = GetterSecrets.factory().getCredentials(SecretType.MANTO_USER);
-		parametersReturn.put(Constantes.paramUsrmanto, secret.getUser());
-		parametersReturn.put(Constantes.paramPasmanto, secret.getPassword());
+		parametersReturn.put(Constantes.PARAM_USR_MANTO, secret.getUser());
+		parametersReturn.put(Constantes.PARAM_PAS_MANTO, secret.getPassword());
 		if (params.getUrlManto()!=null) {
-			parametersReturn.put(Constantes.paramUrlmanto, params.getUrlManto());
+			parametersReturn.put(Constantes.PARAM_URL_MANTO, params.getUrlManto());
 		} else {
 			//parametersSuite.put(Constantes.paramUrlmanto, "https://ogiol-zfs-manto.dev.mango.com");
-			parametersReturn.put(Constantes.paramUrlmanto, "http://manto.pre.mango.com");
+			parametersReturn.put(Constantes.PARAM_URL_MANTO, "http://manto.pre.mango.com");
 		}
 		
 		//Parámetros de acceso a Proxy

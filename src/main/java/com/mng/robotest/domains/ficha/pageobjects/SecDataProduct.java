@@ -183,7 +183,7 @@ public class SecDataProduct extends PageBase {
 		if (color!=null) {
 			return (color.getAttribute("title"));
 		}
-		return Constantes.colorDesconocido;
+		return Constantes.COLOR_DESCONOCIDO;
 	}
 
 	public String getNombreColorSelected() {
@@ -192,7 +192,7 @@ public class SecDataProduct extends PageBase {
 				if (state(Present, XPATH_NOMBRE_COLOR_SELECTED_DESKTOP).check()) {
 					return getElement(XPATH_NOMBRE_COLOR_SELECTED_DESKTOP).getAttribute("alt");
 				}
-				return Constantes.colorDesconocido;
+				return Constantes.COLOR_DESCONOCIDO;
 			case mobile:
 			default:
 				return (getNombreColorMobil(ColorType.SELECTED));

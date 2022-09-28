@@ -249,7 +249,7 @@ public class Pago implements Serializable {
 	
 	public boolean isNeededTestPasarelaDependingFilter(Channel channel, AppEcom app, ITestContext ctx) {
 		if (getTestpasarela().compareTo("s")==0) {
-			String listPayments = TestMaker.getParamTestRun(Constantes.paramPayments, ctx);
+			String listPayments = TestMaker.getParamTestRun(Constantes.PARAM_PAYMENTS, ctx);
 			if (listPayments==null || "".compareTo(listPayments)==0) {
 				return true;
 			}

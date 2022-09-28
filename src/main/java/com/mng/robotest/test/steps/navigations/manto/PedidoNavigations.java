@@ -42,9 +42,9 @@ public class PedidoNavigations {
 			if (appE!=AppEcom.votf) {  
 				TestRunTM testRun = getTestCase().getTestRunParent();
 				DataMantoAccess dMantoAcc = new DataMantoAccess();
-				dMantoAcc.urlManto = testRun.getParameter(Constantes.paramUrlmanto);
-				dMantoAcc.userManto = testRun.getParameter(Constantes.paramUsrmanto);
-				dMantoAcc.passManto = testRun.getParameter(Constantes.paramPasmanto);
+				dMantoAcc.urlManto = testRun.getParameter(Constantes.PARAM_URL_MANTO);
+				dMantoAcc.userManto = testRun.getParameter(Constantes.PARAM_USR_MANTO);
+				dMantoAcc.passManto = testRun.getParameter(Constantes.PARAM_PAS_MANTO);
 				dMantoAcc.appE = appE;
 				testPedidosEnManto(dMantoAcc, dataCheckPedidos, driver);
 			}

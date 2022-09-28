@@ -58,17 +58,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	private static final String XPATH_LIST_ARTICLES = "//div[@class[contains(.,'columns')] and @id='list']";
-//	private static final String XPATH_IMG_RELATIVE_ARTICLE_OUTLET = 
-//			"//img[@src and (" + 
-//				   "@class[contains(.,'productListImg')] or " + 
-//				   "@class[contains(.,'product-list-image')] or " +
-//				   "@class[contains(.,'product-image')] or " + 
-//				   "@class[contains(.,'TaqRk')] or " + //TODO (Outlet) pendiente Sergio Campillo suba los cambios
-//				   "@class[contains(.,'product-list-im')])]";
 	
-//	private static final String XPATH_IMG_SLIDER_ACTIVE_RELATIVE_ARTICLE_DESKTOP_OUTLET = 
-//			"//div[@class[contains(.,'swiper-slide-active')]]" + XPATH_IMG_RELATIVE_ARTICLE_OUTLET ;
-
 	public PageGaleriaDesktop() {
 		super();
 	}
@@ -129,7 +119,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 
 	private String getXPathDataArticuloTemporadaXWithLabel(List<Integer> temporadasX, LabelArticle label) {
 		String xpathLabelWithLit = getXPathLabel(label);
-		return (getXPathArticuloTemporadasX(ControlTemporada.articlesFrom, temporadasX) + xpathLabelWithLit + "/..");
+		return (getXPathArticuloTemporadasX(ControlTemporada.ARTICLES_FROM, temporadasX) + xpathLabelWithLit + "/..");
 	}
 
 	String getXPathArticuloFromPagina(int pagina, TypeArticleDesktop sizeArticle) {
@@ -137,19 +127,19 @@ public class PageGaleriaDesktop extends PageGaleria {
 		return  (xpathPagina + getXPathArticulo(sizeArticle));
 	}
 
-	public enum ControlTemporada {articlesFrom, articlesFromOther};
+	public enum ControlTemporada {ARTICLES_FROM, ARTICLES_FROM_OTHER};
 	String getXPathArticuloTemporadasX(ControlTemporada controlTemp, List<Integer> listTemporadas) {
 		String xpathResult = xpathArticuloBase + "/self::*[@id and ";
 		for (int i=0; i<listTemporadas.size(); i++) {
 			int temporada = listTemporadas.get(i);
 			switch (controlTemp) {
-			case articlesFrom:
+			case ARTICLES_FROM:
 				xpathResult += "starts-with(@id, " + String.valueOf(temporada) + ")";
 				if (i<(listTemporadas.size()-1)) {
 					xpathResult+=" or ";
 				}
 				break;
-			case articlesFromOther:
+			case ARTICLES_FROM_OTHER:
 				xpathResult += "not(starts-with(@id, " + String.valueOf(temporada) + "))";
 				if (i<(listTemporadas.size()-1)) {
 					xpathResult+=" and ";
@@ -173,9 +163,6 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 
 	private static String getXPathSliderRelativeToArticle(TypeSlider typeSlider) {
-//		if (app==AppEcom.outlet) {
-//			return ("//*[@class[contains(.,'swiper-button-" + typeSlider + "')] and @role]");
-//		}
 		return ("//*[@data-testid='." + typeSlider.name().toLowerCase() + "']");
 	}
 
@@ -213,13 +200,10 @@ public class PageGaleriaDesktop extends PageGaleria {
 		
 		//Los ids de carrusels para niño/niña son nino/nina pero a nivel del HTML de los artículos figura KidsA/KidsO
 		LineaType lineaType = LineaType.getLineaType(idLinCarrusel);
-		if (lineaType!=null && 
-		   (lineaType==LineaType.nina || lineaType==LineaType.nino) &&
-		   (state(Present, ".//a[@href[contains(.,'" + lineaType.getId2() + "')]]").check())) {
-		    return true;
-		}
-		
-		return false;
+		return 
+		    (lineaType!=null && 
+		    (lineaType==LineaType.nina || lineaType==LineaType.nino) &&
+		    (state(Present, ".//a[@href[contains(.,'" + lineaType.getId2() + "')]]").check()));
 	}
 	
 	@Override
@@ -233,9 +217,6 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	private String getXPathImgArticulo(WebElement article) {
-//		if (app==AppEcom.outlet) {
-//			return getXPathImgArticuloOutlet(article);
-//		}
 		return getXPathImgArticuloShop(article);
 	}
 	
@@ -249,14 +230,6 @@ public class PageGaleriaDesktop extends PageGaleria {
 		}
 		return ".//img[contains(.,'product-')]";
 	}
-	
-//	private String getXPathImgArticuloOutlet(WebElement article) {
-//		if (isPresentSliderInArticle(TypeSlider.NEXT, article)) {
-//			return "." + XPATH_IMG_SLIDER_ACTIVE_RELATIVE_ARTICLE_DESKTOP_OUTLET;
-//		} else {
-//			return "." + XPATH_IMG_RELATIVE_ARTICLE_OUTLET ;
-//		}
-//	}
 	
 	@Override
 	public WebElement getColorArticulo(WebElement articulo, boolean selected, int numColor) {
@@ -314,9 +287,6 @@ public class PageGaleriaDesktop extends PageGaleria {
  
 	@Override
 	public int getLayoutNumColumnas() {
-//		if (app==AppEcom.outlet) {
-//			return getLayoutNumColumnasOutlet();
-//		}
 		return getLayoutNumColumnasShop(); 
 	}	
 	
@@ -331,27 +301,6 @@ public class PageGaleriaDesktop extends PageGaleria {
 		return 2;
 	}
 	
-//	private int getLayoutNumColumnasOutlet() {
-//		if (state(Present, xpathArticuloBase).check()) {
-//			String classArt = getElement(xpathArticuloBase).getAttribute("class");
-//			if (classArt.contains("layout-3-columns")) {
-//				return 3;
-//			}
-//			else {
-//			   if (classArt.contains("layout-2-columns")) {
-//				   return 2;
-//			   }
-//			   else {
-//				   if (classArt.contains("layout-4-columns")) {
-//					   return 4;
-//				   }
-//			   }
-//			}
-//		}
-//		
-//		return 2;
-//	}
-
 	@Override
 	public String getNombreArticulo(WebElement articulo) {
 		return (articulo.findElement(By.xpath("." + XPATH_NOMBRE_RELATIVE_TO_ARTICLE)).getText());
@@ -438,12 +387,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		if (state(Present, article).by(byImgArticle).check()) {
 			WebElement imgArticle = article.findElement(byImgArticle);
 			String srcImgArticle;
-//			if (app==AppEcom.outlet) {
-//				srcImgArticle = imgArticle.getAttribute("data-original");
-//			} else {
-				//TODO Test AB nueva variante. Si se mantiene la original igualar con Outlet
-			    srcImgArticle = imgArticle.getAttribute("original");
-//			}
+		    srcImgArticle = imgArticle.getAttribute("original");
 			if (srcImgArticle!=null) {
 				Pattern pattern = Pattern.compile("(.*?)width=(.*?)&(.*?)");
 				Matcher matcher = pattern.matcher(srcImgArticle);
@@ -471,12 +415,12 @@ public class PageGaleriaDesktop extends PageGaleria {
 	
 	public List<String> getArticlesTemporadaxRebajadosWithLiteralInLabel(List<Integer> listTemporadas, List<LabelArticle> listLabels) {
 		List<String> listArtSaleWithLabel = getArticlesRebajadosWithLiteralInLabel(listLabels);
-		if (listArtSaleWithLabel.size() == 0) {
+		if (listArtSaleWithLabel.isEmpty()) {
 			return listArtSaleWithLabel;
 		}
 		
-		List<String> listArtTempX = getArticlesTemporadasX(ControlTemporada.articlesFrom, listTemporadas);
-		List<String> common = new ArrayList<String>(listArtTempX);
+		List<String> listArtTempX = getArticlesTemporadasX(ControlTemporada.ARTICLES_FROM, listTemporadas);
+		List<String> common = new ArrayList<>(listArtTempX);
 		common.retainAll(listArtSaleWithLabel);
 		return common;
 	}
@@ -484,8 +428,8 @@ public class PageGaleriaDesktop extends PageGaleria {
 	public List<String> getArticles(TypeArticle typeArticle, List<Integer> listTemporadas) {
 		List<String> listArtOfType = getArticlesOfType(typeArticle);
 		if (!listArtOfType.isEmpty()) {
-			List<String> listArtTempX = getArticlesTemporadasX(ControlTemporada.articlesFrom, listTemporadas);
-			List<String> common = new ArrayList<String>(listArtTempX);
+			List<String> listArtTempX = getArticlesTemporadasX(ControlTemporada.ARTICLES_FROM, listTemporadas);
+			List<String> common = new ArrayList<>(listArtTempX);
 			common.retainAll(listArtOfType);
 			return common;
 		}
@@ -721,7 +665,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	public String getNameColorFromCodigo(String codigoColor) {
 		String xpathImgColor = secColores.getXPathImgCodigoColor(codigoColor);
 		if (!state(Present, xpathImgColor).check()) {
-			return Constantes.colorDesconocido;
+			return Constantes.COLOR_DESCONOCIDO;
 		}
 		
 		WebElement imgColorWeb = getElement(xpathImgColor);

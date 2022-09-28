@@ -1,6 +1,6 @@
 package com.mng.robotest.test.steps.shop.menus;
 
-import static com.mng.robotest.test.data.Constantes.PrefixRebajas;
+import static com.mng.robotest.test.data.Constantes.PREFIX_REBAJAS;
 
 import java.util.Arrays;
 import java.util.List;
@@ -124,11 +124,11 @@ public class SecMenusWrapperSteps extends StepBase {
 		boolean isPresentLinRebajas = secMenusWrap.isLineaPresentUntil(LineaType.rebajas, seconds);
 		if (salesOnInCountry && pais.isVentaOnline()) {
 			checks.add(
-				PrefixRebajas + "Aparece la línea \"Rebajas\" (lo esperamos hasta " + seconds + " segundos)",
+				PREFIX_REBAJAS + "Aparece la línea \"Rebajas\" (lo esperamos hasta " + seconds + " segundos)",
 				isPresentLinRebajas, State.Defect);
 		} else {
 			checks.add(
-				PrefixRebajas + "No aparece la línea \"Rebajas\"",
+				PREFIX_REBAJAS + "No aparece la línea \"Rebajas\"",
 				!isPresentLinRebajas, State.Defect);
 		}
 	   

@@ -8,7 +8,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.mng.robotest.test.data.Constantes.PrefixRebajas;
+import static com.mng.robotest.test.data.Constantes.PREFIX_REBAJAS;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter;
@@ -53,12 +53,12 @@ public class PageHomeMarcasSteps extends StepBase {
 		if (salesOnInCountry) {
 			checks.add(
 				Check.make(
-				    PrefixRebajas + "El mensaje de NewsLetter del Footer No contiene \"" + percentageSymbol + "\"",
+				    PREFIX_REBAJAS + "El mensaje de NewsLetter del Footer No contiene \"" + percentageSymbol + "\"",
 				    !isMsgWithPercentageSimbol, State.Info)
 				.store(StoreType.None).build());	
 		} else {
 			checks.add(
-				PrefixRebajas + "El mensaje de NewsLetter del Footer Sí contiene \"" + percentageSymbol + "\"",
+				PREFIX_REBAJAS + "El mensaje de NewsLetter del Footer Sí contiene \"" + percentageSymbol + "\"",
 				isMsgWithPercentageSimbol, State.Warn);	
 		}
 		

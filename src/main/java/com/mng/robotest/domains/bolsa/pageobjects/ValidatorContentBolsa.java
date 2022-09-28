@@ -83,7 +83,7 @@ public class ValidatorContentBolsa extends PageBase {
 			break;
 		case COLOR:
 			if (articleExpected.getColorName().toLowerCase().compareTo(articuloScreen.color.toLowerCase())!=0 &&
-				articleExpected.getColorName().compareTo(Constantes.colorDesconocido)!=0) {
+				articleExpected.getColorName().compareTo(Constantes.COLOR_DESCONOCIDO)!=0) {
 				return false;
 			}
 			break;

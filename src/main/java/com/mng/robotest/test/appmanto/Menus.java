@@ -46,8 +46,8 @@ public class Menus implements Serializable {
 		TestRunTM testRun = testCase.getTestRunParent();
 		InputParamsTM inputParams = testCase.getInputParamsSuite();
 		dMantoAcc.urlManto = inputParams.getUrlBase();
-		dMantoAcc.userManto = testRun.getParameter(Constantes.paramUsrmanto);
-		dMantoAcc.passManto = testRun.getParameter(Constantes.paramPasmanto);
+		dMantoAcc.userManto = testRun.getParameter(Constantes.PARAM_USR_MANTO);
+		dMantoAcc.passManto = testRun.getParameter(Constantes.PARAM_PAS_MANTO);
 		dMantoAcc.channel = Channel.desktop;
 		dMantoAcc.appE = AppEcom.shop;
 		return dMantoAcc;

@@ -31,27 +31,26 @@ public class Constantes {
 	public static final String LISTA_PEDIDOS = "listaPaisPedidos";
 	
 	//Literal que definimos en el caso en que en el detalle del producto no figure el color (p.e. en el caso de móvil-web) 
-	public static final String colorDesconocido = "desconocido";
+	public static final String COLOR_DESCONOCIDO = "desconocido";
 	public static final String DIRECTORIO_FRAMES = "frames";
 	
-	public static Pattern BUSY_EXCEPTION_PATTERN = Pattern.compile("^\\[SQLITE_BUSY\\]");
+	public static final Pattern BUSY_EXCEPTION_PATTERN = Pattern.compile("^\\[SQLITE_BUSY\\]");
 
 	//Atributo almacenado en la sesión correspondiente a la página que aparece posteriormente al acceso del usuario (después de la selección de país/idioma)
-	public static String attrUrlPagPostAcceso = "paginaPostAcceso";
+	public static final String ATTR_URL_PAG_POST_ACCESO = "paginaPostAcceso";
 	
-	public static String BROWSERSTACK = "browserstack";
+	public static final String BROWSERSTACK = "browserstack";
 	
 	public enum ThreeState {TRUE, FALSE, UNKNOWN}
 
-	public static final String paramUrlmanto = "urlmanto";
-	public static final String paramUsrmanto = "usrmanto";
-	public static final String paramPasmanto = "pasmanto";
+	public static final String PARAM_URL_MANTO = "urlmanto";
+	public static final String PARAM_USR_MANTO = "usrmanto";
+	public static final String PARAM_PAS_MANTO = "pasmanto";
 
-	public static final String paramCountrys = "countrys";
-	public static final String paramLineas = "lineas";
-	public static final String paramPayments = "payments";
-	public static final String paramCatalogs = "catalogs";
+	public static final String PARAM_COUNTRYS = "countrys";
+	public static final String PARAM_LINEAS = "lineas";
+	public static final String PARAM_PAYMENTS = "payments";
+	public static final String PARAM_CATALOGS = "catalogs";
 
-	
-	public static final String PrefixRebajas = "<b style=\"color:blue\">Rebajas</b></br>";
+	public static final String PREFIX_REBAJAS = "<b style=\"color:blue\">Rebajas</b></br>";
 }

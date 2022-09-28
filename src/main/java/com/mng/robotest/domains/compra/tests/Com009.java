@@ -44,7 +44,7 @@ public class Com009 extends TestBase {
         new SecBolsaSteps().clear();
     }
     private void altaArticulosBolsaAndClickComprar() throws Exception {
-        new SecBolsaSteps().altaListaArticulosEnBolsa(getArticles(1));
+        new SecBolsaSteps().altaListaArticulosEnBolsa(getArticles(2));
         new SecBolsaSteps().selectButtonComprar();
     }
     

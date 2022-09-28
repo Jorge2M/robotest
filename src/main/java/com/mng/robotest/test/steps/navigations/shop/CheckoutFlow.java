@@ -66,9 +66,7 @@ public class CheckoutFlow extends StepBase {
 	private final List<GarmentCatalog> listArticles;
 	private final Pais pais = dataTest.getPais();
 	
-	//TODO pendiente definir el texto real asociado al vale TEST
 	private final ValeDiscount valeTest = new ValeDiscount("TEST", 10, "EXTRA SOBRE LOS ARTÍCULOS");
-	
 	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 	private final CheckoutSteps pageCheckoutWrapperSteps = new CheckoutSteps();
 	
@@ -120,7 +118,7 @@ public class CheckoutFlow extends StepBase {
 		}
 		catch (Exception e) {
 			Log4jTM.getLogger().error("Problem retrieving articles for Checkout", e);
-			return null;
+			return Arrays.asList();
 		}		
 	}	
 	
@@ -161,13 +159,14 @@ public class CheckoutFlow extends StepBase {
 			page1IdentCheckoutSteps.inputEmailAndContinue(emailCheckout, dataPago.getFTCkout().emailExists, dataTest.isUserRegistered(), pais);
 		}
 		
-		Map<String, String> datosRegistro;
-		datosRegistro = page2IdentCheckoutSteps.inputDataPorDefecto(emailCheckout, validaCharNoLatinos);
+		Map<String, String> datosRegistro =
+				page2IdentCheckoutSteps.inputDataPorDefecto(emailCheckout, validaCharNoLatinos);
 		
 		dataPago.setDatosRegistro(datosRegistro);
 		if (validaCharNoLatinos) {
 			page2IdentCheckoutSteps.clickContinuarAndExpectAvisoDirecWithNoLatinCharacters();
 			datosRegistro = page2IdentCheckoutSteps.inputDataPorDefecto(emailCheckout, false);
+			dataPago.setDatosRegistro(datosRegistro);
 		}
 		
 		page2IdentCheckoutSteps.clickContinuar(dataTest.isUserRegistered());
@@ -301,10 +300,10 @@ public class CheckoutFlow extends StepBase {
 			else {
 				if (pagoToTest.getTypePago()!=TypePago.TpvVotf) {
 					pageResultPagoSteps.validateIsPageOk(dataPago);
-					if (channel!=Channel.mobile && !dataPago.getFTCkout().chequeRegalo) {
-						if (dataPago.getFTCkout().checkMisCompras) {
-							pageResultPagoSteps.selectLinkMisComprasAndValidateCompra(dataPago);
-						}
+					if (channel!=Channel.mobile && 
+						!dataPago.getFTCkout().chequeRegalo &&
+						dataPago.getFTCkout().checkMisCompras) {
+						pageResultPagoSteps.selectLinkMisComprasAndValidateCompra(dataPago);
 					}
 				} else {
 					new PageResultPagoTpvSteps().validateIsPageOk(dataPedido, dataTest.getCodigoPais());
@@ -364,9 +363,9 @@ public class CheckoutFlow extends StepBase {
 		List<Pago> listPagosToTest = new ArrayList<>();
 		ITestContext ctx = getTestCase().getTestRunContext();
 		List<Pago> listPagosPais = pais.getListPagosForTest(app, isEmpl);
-		for (Pago pago : listPagosPais) {
-			if (pago.isNeededTestPasarelaDependingFilter(channel, app, ctx)) {
-				listPagosToTest.add(pago);
+		for (Pago pagoPais : listPagosPais) {
+			if (pagoPais.isNeededTestPasarelaDependingFilter(channel, app, ctx)) {
+				listPagosToTest.add(pagoPais);
 			}
 		}
 		return listPagosToTest;
@@ -382,16 +381,16 @@ public class CheckoutFlow extends StepBase {
 
 	private void checkPasarelaPago() throws Exception {
 		DataPedido dataPedido = dataPago.getDataPedido(); 
-		Pago pago = dataPedido.getPago();
+		Pago pagoPais = dataPedido.getPago();
 		try {
 			if (channel!=Channel.mobile) {
 				pageCheckoutWrapperSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
 			}
-			testPagoFromCheckoutToEnd(pago);
+			testPagoFromCheckoutToEnd(pagoPais);
 			updateInfoExecutionSuite(dataPedido.getCodpedido());
 		}
 		catch (Exception e) {
-			Log4jTM.getLogger().warn("Problem checking Payment {} from country {}", pago.getNombre(), pais.getNombre_pais(), e);
+			Log4jTM.getLogger().warn("Problem checking Payment {} from country {}", pagoPais.getNombre(), pais.getNombre_pais(), e);
 		}
 	}
 	
@@ -418,7 +417,6 @@ public class CheckoutFlow extends StepBase {
 			pageCheckoutWrapperSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
 			pageCheckoutWrapperSteps.pasoBotonAceptarCompraDesktop();
 		} else {
-			//pageCheckoutWrapperSteps.pasoBotonVerResumenCheckout2Mobil(driver);
 			pageCheckoutWrapperSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
 			pageCheckoutWrapperSteps.pasoBotonConfirmarPagoCheckout3Mobil();
 		}	   
@@ -426,7 +424,7 @@ public class CheckoutFlow extends StepBase {
 	
 	private boolean iCanExecPago(PagoSteps pagoSteps) {
 		boolean validaPagos = pagoSteps.dataPago.getFTCkout().checkPagos;
-		Pago pago = pagoSteps.dataPago.getDataPedido().getPago();
+		Pago pagoPais = pagoSteps.dataPago.getDataPedido().getPago();
 		TypeAccess typeAccess = ((InputParamsMango)TestMaker.getInputParamsSuite()).getTypeAccess();
 		return (
 			//No estamos en el entorno productivo
@@ -436,27 +434,27 @@ public class CheckoutFlow extends StepBase {
 			//Está activado el flag de pago en el fichero XML de configuración del test (testNG)
 			validaPagos &&  
 			//Está activado el test en el pago concreto que figura en el XML de países
-			pago.getTestpago()!=null && pago.getTestpago().compareTo("s")==0 &&
+			pagoPais.getTestpago()!=null && pagoPais.getTestpago().compareTo("s")==0 &&
 			//Está implementado el test a nivel de la confirmación del pago
 			pagoSteps.isAvailableExecPay
 		);
 	}
 	
-	static final String tagLoginOrLogoff = "@TagLoginOfLogoff";
+	private static final String TAG_LOGIN_OR_LOGOFF = "@TagLoginOfLogoff";
 	@Step (
-		description="Acceder a Mango " + tagLoginOrLogoff, 
+		description="Acceder a Mango " + TAG_LOGIN_OR_LOGOFF, 
 		expected="Se accede a Mango",
 		saveNettraffic=SaveWhen.Always)
 	private void accessShopAndLoginOrLogoff() throws Exception {
-		StepTM StepTestMaker = TestMaker.getCurrentStepInExecution();		
+		StepTM stepTestMaker = TestMaker.getCurrentStepInExecution();		
 		if (dataTest.isUserRegistered()) {
-			StepTestMaker.replaceInDescription(
-				tagLoginOrLogoff, "e Identificarse con el usuario <b>" + dataTest.getUserConnected() + "</b>");
+			stepTestMaker.replaceInDescription(
+				TAG_LOGIN_OR_LOGOFF, "e Identificarse con el usuario <b>" + dataTest.getUserConnected() + "</b>");
 			new AccesoNavigations().accesoHomeAppWeb(dataPago.getFTCkout().acceptCookies);
 			new PageIdentificacion().login(dataTest.getUserConnected(), dataTest.getPasswordUser());
 		} else {
-			StepTestMaker.replaceInDescription(
-				tagLoginOrLogoff, "(si estamos logados cerramos sesión)");
+			stepTestMaker.replaceInDescription(
+				TAG_LOGIN_OR_LOGOFF, "(si estamos logados cerramos sesión)");
 			new AccesoNavigations().accesoHomeAppWeb(dataPago.getFTCkout().acceptCookies);
 			new PageIdentificacion().logoff();
 		}

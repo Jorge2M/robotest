@@ -2906,7 +2906,7 @@ where
 -->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
-	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='COLLECT_PLUS' tipotarj="VISAD3D_JP" numtarj="4142621111111112" mescad="03" anycad="2030" cvc="737">&TPV-230;</pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='COLLECT_PLUS' tipotarj="VISAD3D_JP" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737">&TPV-230;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj="VISAD3D_JP" numtarj="5116561111111119" mescad="03" anycad="2030" cvc="123" usrd3d="user" passd3d="password">&TPV-230;</pago>

@@ -750,7 +750,7 @@ public class PageGaleriaSteps extends StepBase {
 		ChecksTM checks = ChecksTM.getNew();
 
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-		List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.articlesFromOther, listTemporadas);
+		List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.ARTICLES_FROM_OTHER, listTemporadas);
 		if (validaNotNewArticles) {
 			listArtWrong = PageGaleria.getNotNewArticlesFrom(listArtWrong);
 		}
