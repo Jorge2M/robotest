@@ -14,6 +14,7 @@ import com.mng.robotest.domains.ayuda.tests.Ayuda;
 import com.mng.robotest.domains.bolsa.tests.Bolsa;
 import com.mng.robotest.domains.buscador.tests.Buscador;
 import com.mng.robotest.domains.compra.tests.Compra;
+import com.mng.robotest.domains.compra.tests.CompraMultiAddress;
 import com.mng.robotest.domains.favoritos.tests.Favoritos;
 import com.mng.robotest.domains.ficha.tests.FichaProducto;
 import com.mng.robotest.domains.footer.tests.Footer;
@@ -66,6 +67,7 @@ public class SmokeTestSuite extends SuiteMaker {
 			PaisIdioma.class,
 			GaleriaProducto.class,
 			Compra.class,
+			CompraMultiAddress.class,
 			ListPagosEspana.class,
 			MiCuenta.class,
 			Favoritos.class,

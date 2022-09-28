@@ -22,7 +22,7 @@ public class Compra {
 
 	@Test (
 		groups={"Compra", "Canal:desktop_App:shop,outlet"}, alwaysRun=true,
-		description="[Usuario no registrado] Compra con cambio datos en dirección de envío en checkout")
+		description="[Usuario no registrado] Compra con cambio datos en dirección de envío y facturación en checkout")
 	public void COM003_Compra_y_CambioPais_Noreg_emailExist() throws Exception {
 		if (!new NavigationBase().isPRO()) {
 			new Com003().execute();
@@ -63,12 +63,4 @@ public class Compra {
 	public void COM008_Compra_Croacia() throws Exception {
 		new Com008().execute();
 	}
-
-	@Test (
-		groups={"Compra", "Canal:desktop,mobile_App:shop"}, alwaysRun=true,
-		description="[Usuario registrado] Acceder a la sección de multidirecciones del checkout y añadir/eliminar una dirección")
-	public void COM009_MultiAddress() throws Exception {
-		new Com009().execute();
-	}
-
 }

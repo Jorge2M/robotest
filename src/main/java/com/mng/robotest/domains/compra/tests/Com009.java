@@ -14,7 +14,9 @@ import com.mng.robotest.domains.compra.steps.envio.SecMetodoEnvioSteps;
 import com.mng.robotest.domains.micuenta.steps.ModalDetalleCompraSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.domains.transversal.TestBase;
+import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pago;
+import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.datastored.DataPago;
 
 public class Com009 extends TestBase {
@@ -23,7 +25,11 @@ public class Com009 extends TestBase {
 	private final ModalDirecEnvioNewSteps modalDirecEnvioSteps = new ModalDirecEnvioNewSteps();
     private final CompraSteps compraSteps = new CompraSteps();
 
-    public Com009() throws Exception {
+    public Com009(Pais pais, IdiomaPais idioma) throws Exception {
+    	if (pais!=null) {
+    		dataTest.setPais(pais);
+    		dataTest.setIdioma(idioma);
+    	}
         dataTest.setUserRegistered(true);
     }
 
@@ -78,10 +84,8 @@ public class Com009 extends TestBase {
 	        //Cerrar el modal
     		modalMultidirectionSteps.closeModal();
     		
-	        //Comprar
+	        //Comprar y validar mis compras
 			DataPago dataPago = executeVisaPayment();
-			
-			//Validar mis compras
 			checkMisCompras(dataPago, directionPrincipal.getDireccion());
 		}        
     }
@@ -139,9 +143,7 @@ public class Com009 extends TestBase {
     	DirectionData directionReturn = DirectionData.from(direction);
     	directionReturn.setNombre("Robotest");
     	directionReturn.setApellidos("Pruebas");
-    	//directionReturn.setDireccion(""+Timestamp.from(Instant.now()));
         return directionReturn;
     }
-    
 
 }

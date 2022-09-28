@@ -7,6 +7,7 @@ import org.testng.annotations.*;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.conftestmaker.Suites;
+import com.mng.robotest.domains.compra.tests.CompraMultiAddress;
 import com.mng.robotest.domains.favoritos.tests.Favoritos;
 import com.mng.robotest.domains.micuenta.tests.MiCuenta;
 import com.mng.robotest.test.beans.*;
@@ -41,6 +42,9 @@ public class GenericFactory {
 	
 	public void addTestToList(List<Object> listTests, Suites suite, Pais pais, IdiomaPais idioma, int prioridad) {
 		switch (suite) {
+		case CheckoutMultiAddress:
+			listTests.add(new CompraMultiAddress(pais, idioma));
+			break;
 		case ListFavoritos:
 			listTests.add(new Favoritos(pais, idioma, prioridad));
 			break;

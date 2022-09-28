@@ -13,6 +13,7 @@ public enum Suites implements SuiteTest {
 	Nodos(80), //In this case the @Factory is very Slow because opens a Browser and iterates until 100 times searching new nodes  
 	ConsolaVotf(10), 
 	ListFavoritos(10),
+	CheckoutMultiAddress(10),
 	ListMiCuenta(10),
 	RegistrosPaises(10),
 	RebajasPaises(10),
