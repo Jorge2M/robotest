@@ -43,7 +43,7 @@ public class ListPagosEspana implements Serializable {
 //			"Factoría que incluye varios tests por cada uno de los pagos de España " + 
 //			"variando los flags de usuario registrado, empleado y métodos de envío")
 	public Object[] COM010_PagoFactory(ITestContext ctx) throws Exception {
-		ArrayList<Object> listTests = new ArrayList<>(); 
+		List<Object> listTests = new ArrayList<>(); 
 		InputParamsTM inputData = TestMaker.getInputParamsSuite(ctx);
 		AppEcom appE = (AppEcom)inputData.getApp();
 		Channel channel = inputData.getChannel();
@@ -71,7 +71,7 @@ public class ListPagosEspana implements Serializable {
 		this.USA = PaisGetter.get(PaisShop.USA);
 	}
 	
-	private void createTestPagosEspana(ArrayList<Object> listTests, AppEcom app, Channel channel, ITestContext ctx) {
+	private void createTestPagosEspana(List<Object> listTests, AppEcom app, Channel channel, ITestContext ctx) {
 		//Crearemos 3 tests para el pago VISA y 1 para los restantes 
 		int prioridad = 1;
 		List<Pago> listPagosToTest = espana.getListPagosForTest(app, false);
@@ -94,7 +94,7 @@ public class ListPagosEspana implements Serializable {
 		}		
 	}
 	
-	private void createTestPagosFrancia(ArrayList<Object> listTests, AppEcom app, Channel channel, ITestContext ctx) {
+	private void createTestPagosFrancia(List<Object> listTests, AppEcom app, Channel channel, ITestContext ctx) {
 		//Creamos sólo 1 test para el pago VISA-Francia
 		List<Pago> listPagosToTest = francia.getListPagosForTest(app, false);
 		for (Pago pago : listPagosToTest) {
@@ -109,7 +109,7 @@ public class ListPagosEspana implements Serializable {
 		}		
 	}
 	
-	private void createTestPagosVotf(ArrayList<Object> listTests, AppEcom app, Channel channel, ITestContext ctx) {
+	private void createTestPagosVotf(List<Object> listTests, AppEcom app, Channel channel, ITestContext ctx) {
 		List<Pago> listPagosToTest = espana.getListPagosForTest(app, false/*isEmpl*/);
 		for (Pago pago : listPagosToTest) {
 			if (pago.isNeededTestPasarelaDependingFilter(channel, app, ctx)) {
@@ -122,7 +122,7 @@ public class ListPagosEspana implements Serializable {
 	}
 
 	private void createTestPago(
-			ArrayList<Object> listTests, Pais pais, IdiomaPais idioma, Pago pago, AppEcom app, Channel channel, boolean usrRegistrado, 
+			List<Object> listTests, Pais pais, IdiomaPais idioma, Pago pago, AppEcom app, Channel channel, boolean usrRegistrado, 
 			boolean empleado, boolean testVale, boolean manyArticles, boolean anulPedido, int prioridad) {
 		listTests.add(new CompraFact(pais, idioma, pago, app, channel, usrRegistrado, empleado, testVale, manyArticles, anulPedido, prioridad));
 		System.out.println(

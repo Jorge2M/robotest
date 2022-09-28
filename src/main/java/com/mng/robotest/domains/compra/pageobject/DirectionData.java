@@ -8,6 +8,17 @@ public class DirectionData {
 	private String codPostal;
 	private String mobil;
 	private boolean principal;
+
+	public static DirectionData from(DirectionData direction) {
+		DirectionData directionNew = new DirectionData();
+		directionNew.setNombre(direction.getNombre());
+		directionNew.setApellidos(direction.getApellidos());
+		directionNew.setDireccion(direction.getDireccion());
+		directionNew.setCodPostal(direction.getCodPostal());
+		directionNew.setMobil(direction.getMobil());
+		directionNew.setPrincipal(direction.isPrincipal());
+		return directionNew;
+	}
 	
 	public String getNombre() {
 		return nombre;
@@ -27,12 +38,11 @@ public class DirectionData {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	public String getCodPostal() {
-		return codPostal;
-	}
+	public String getCodPostal() {return codPostal;}
 	public void setCodPostal(String codPostal) {
 		this.codPostal = codPostal;
 	}
+
 	public String getMobil() {
 		return mobil;
 	}

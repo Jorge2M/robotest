@@ -2,12 +2,10 @@ package com.mng.robotest.test.pageobject.shop.landing;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.transversal.PageBase;
@@ -99,8 +97,7 @@ public class PageLanding extends PageBase {
 					}
 				}
 			}
-
-			new WebDriverWait(driver, 15).until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathImg)));
+			state(State.Present, xpathImg).wait(15).check();
 		} catch (Exception e) {
 			banners = false;
 		}

@@ -128,6 +128,7 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 		validateTipoPrenda();
 	}
 
+
 	@Validation
 	private ChecksTM validateTipoPrenda() {
 		ChecksTM checks = ChecksTM.getNew();

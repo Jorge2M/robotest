@@ -3,7 +3,6 @@ package com.mng.robotest.domains.bolsa.steps;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import com.mng.robotest.test.utils.UtilsTest;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -251,8 +250,7 @@ public class SecBolsaSteps extends StepBase {
 	public void selectButtonComprar() throws Exception {
 		secBolsa.clickBotonComprar(10);
 		validaSelectButtonComprar();
-		if (!UtilsTest.dateBeforeToday("2022-08-01") &&
-			!dataTest.isUserRegistered()) {
+		if (!dataTest.isUserRegistered()) {
 			new Page1IdentCheckoutSteps().validaRGPDText();
 		}
 	}
@@ -263,7 +261,6 @@ public class SecBolsaSteps extends StepBase {
 		} else {
 			new Page1IdentCheckoutSteps().validateIsPage(5);
 			GenericChecks.checkDefault();
-			
 		}
 	}
 

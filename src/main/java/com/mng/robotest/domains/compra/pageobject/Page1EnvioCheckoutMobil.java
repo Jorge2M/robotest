@@ -5,8 +5,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.support.ui.Select;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
-
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.compra.pageobject.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.domains.transversal.PageBase;
@@ -29,7 +28,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	private static final String XPATH_SELECT_FRANJA_HORARIA_METODO_URGENTE = "//select[@data-component-id='time-range-sameday_nextday_franjas']";
 	private static final String XPATH_DIRECCION_ENVIO = "//*[@data-testid[contains(.,'delivery.methods.address')]]";
 	private static final String XPATH_LINK_OTROS_MET_ENVIO_CLOSED = "//button[@data-testid[contains(.,'otherMethods.button')]]";
-	private static final String XPATH_LINK_EDIT_DIREC_ENVIO = "//div[@id[contains(.,'addressBlock')]]//span[class='address']";
+	private static final String XPATH_BUTTON_EDIT_DIREC_ENVIO = "//button[@data-testid[contains(.,'editAddress.button')]]";
 	private static final String XPATH_BOTON_CONTINUAR = "//button[@id[contains(.,'complete-step1')]]";
 	private static final String XPATH_ERROR_PROMO = "//div[@data-component-id='error-voucherCode']";
 	private static final String XPATH_ENVIO_STANDARD = "//div[@data-analytics-id='standard' and @class[contains(.,'checked')]]";
@@ -180,7 +179,8 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 			clickEditarDireccion();
 		} else {
 			String xpathLink = getXPathRadioMetodo(tipoTransporte);
-			click(xpathLink).type(javascript).exec();
+			state(State.Visible, xpathLink).wait(2).check();
+			click(xpathLink).type(javascript).waitLink(2).exec();
 		}
 	}
 	
@@ -237,9 +237,15 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	}
 
 	public void clickEditDirecEnvio() {
-		getElement(XPATH_LINK_EDIT_DIREC_ENVIO).click();
+		PageBase.waitForPageLoaded(driver);
+		try { 
+			click(XPATH_BUTTON_EDIT_DIREC_ENVIO).waitLink(2).exec();
+		} catch (Exception e ) {
+			waitMillis(1000);
+			click(XPATH_BUTTON_EDIT_DIREC_ENVIO).waitLink(2).exec();
+		}
 	}
-
+	
 	public void clickContinuar() {
 		click(XPATH_BOTON_CONTINUAR).exec();
 

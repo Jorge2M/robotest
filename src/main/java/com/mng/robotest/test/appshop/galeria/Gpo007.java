@@ -1,8 +1,6 @@
 package com.mng.robotest.test.appshop.galeria;
 
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.test.getdata.usuarios.GestorUsersShop;
-import com.mng.robotest.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test.steps.shop.galeria.ModalArticleNotAvailableSteps;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 

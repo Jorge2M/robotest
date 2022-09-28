@@ -192,28 +192,28 @@ public class InputParamsMango extends InputParamsTM {
 	}
 
 	public List<String> getListaPaises() {
-		if (listCountrysCommaSeparated!=null) {
+		if (listCountrysCommaSeparated!=null && "".compareTo(listCountrysCommaSeparated)!=0) {
 			String[] listPaises = listCountrysCommaSeparated.split("\\s*,\\s*");
 			return Arrays.asList(listPaises);
 		}
 		return Arrays.asList();
 	}
 	public List<String> getListaLineas() {
-		if (listLinesCommaSeparated!=null) {
+		if (listLinesCommaSeparated!=null && "".compareTo(listLinesCommaSeparated)!=0) {
 			String[] listPaises = listLinesCommaSeparated.split("\\s*,\\s*");
 			return Arrays.asList(listPaises);
 		}
 		return Arrays.asList();
 	}
 	public List<String> getListaPayments() {
-		if (listPaymentsCommaSeparated!=null) {
+		if (listPaymentsCommaSeparated!=null && "".compareTo(listPaymentsCommaSeparated)!=0) {
 			String[] listPaises = listPaymentsCommaSeparated.split("\\s*,\\s*");
 			return Arrays.asList(listPaises);
 		}
 		return Arrays.asList();
 	}
 	public List<String> getListaCatalogs() {
-		if (listCatalogsCommaSeparated!=null) {
+		if (listCatalogsCommaSeparated!=null && "".compareTo(listCatalogsCommaSeparated)!=0) {
 			String[] listCatalogs = listCatalogsCommaSeparated.split("\\s*,\\s*");
 			return Arrays.asList(listCatalogs);
 		}

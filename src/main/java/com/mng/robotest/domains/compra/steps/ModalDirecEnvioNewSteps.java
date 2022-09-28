@@ -6,8 +6,9 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.compra.pageobject.DirectionData;
 
 import com.mng.robotest.domains.compra.pageobject.ModalDirecEnvioNew;
+import com.mng.robotest.domains.transversal.StepBase;
 
-public class ModalDirecEnvioNewSteps {
+public class ModalDirecEnvioNewSteps extends StepBase {
 
 	private final ModalDirecEnvioNew modalDirecEnvio = new ModalDirecEnvioNew();
 	
@@ -18,19 +19,15 @@ public class ModalDirecEnvioNewSteps {
 		return modalDirecEnvio.isVisible(2);
 	}
 
-	@Validation (
-		description="Validar que los datos cambiados son correctos",
-		level=State.Defect)
-	public void inputChange(DirectionData direction) {
-		new ModalMultidirectionSteps().checkAfterAddDirection(direction);
-	}
-
 	@Step (
 		description="Introducir los datos y pulsar \"Guardar\"<br>#{direction.getFormattedHTMLData()}", 
 		expected="Los datos se añaden correctamente")
 	public void inputDataAndSave(DirectionData direction) throws Exception {
 		modalDirecEnvio.inputData(direction);
 		modalDirecEnvio.clickSaveButton();
+		//if (channel.isDevice()) {
+			new CheckoutSteps().clickEditarDirecEnvio();
+		//}
 		new ModalMultidirectionSteps().checkAfterAddDirection(direction);
 	}
 	@Step (
@@ -39,7 +36,10 @@ public class ModalDirecEnvioNewSteps {
 	public void inputDataAndEdit(DirectionData direction) throws Exception {
 		modalDirecEnvio.inputDataEdit(direction);
 		modalDirecEnvio.clickSaveButton();
-		inputChange(direction);
+		if (channel.isDevice()) {
+			new CheckoutSteps().clickEditarDirecEnvio();
+		}
+		new ModalMultidirectionSteps().checkAfterAddDirection(direction);
 	}
 	
 	@Step (

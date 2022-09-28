@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Pais;
 
@@ -76,14 +77,7 @@ public class ModalCambioPais extends PageBase {
 	public void closeModalIfVisible() {
 		if (isVisibleModalUntil(0)) {
 			getElement(XPATH_ASPA_CLOSE).click();
-			try {
-				new WebDriverWait(driver, 1).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(XPATH_MODAL)));
-			}
-			catch (Exception e) {
-				/*
-				 * Si no se cierra continuamos
-				 */
-			}
+			state(State.Invisible, XPATH_MODAL).wait(1).check();
 		}
 	}
 }

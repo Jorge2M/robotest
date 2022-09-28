@@ -15,9 +15,7 @@ import com.mng.robotest.domains.micuenta.steps.ModalDetalleCompraSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.Pago;
-import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataPago;
-import com.mng.robotest.test.utils.PaisGetter;
 
 public class Com009 extends TestBase {
 	
@@ -26,11 +24,7 @@ public class Com009 extends TestBase {
     private final CompraSteps compraSteps = new CompraSteps();
 
     public Com009() throws Exception {
-        dataTest.setUserConnected("e2e.es.test@mango.com");
-        dataTest.setPasswordUser("hsXPv7rUoYw3QnMKRhPT");
         dataTest.setUserRegistered(true);
-        dataTest.setPais(PaisGetter.get(PaisShop.ESPANA));
-        dataTest.setIdioma(dataTest.getPais().getListIdiomas().get(0));
     }
 
     @Override
@@ -66,12 +60,12 @@ public class Com009 extends TestBase {
     	modalDirecEnvioSteps.inputDataAndSave(directionSecondary);
 
         //Editamos dirección
-        new CheckoutSteps().clickEditarDirecEnvio();
+        //new CheckoutSteps().clickEditarDirecEnvio();
         modalMultidirectionSteps.clickEditAddress(adressEdit);
         modalDirecEnvioSteps.inputDataAndEdit(directionEdit);
 
         //Eliminamos dirección
-        new CheckoutSteps().clickEditarDirecEnvio();
+        //new CheckoutSteps().clickEditarDirecEnvio();
         modalMultidirectionSteps.clickEditAddress(addressSecondary);
         modalDirecEnvioSteps.clickEliminarButton();
         modalDirecEnvioSteps.confirmEliminarDirection(addressSecondary);
@@ -82,8 +76,8 @@ public class Com009 extends TestBase {
 	    	modalDirecEnvioSteps.inputDataAndSave(directionPrincipal);
 	        
 	        //Cerrar el modal
-	        modalMultidirectionSteps.closeModal();			
-			
+    		modalMultidirectionSteps.closeModal();
+    		
 	        //Comprar
 			DataPago dataPago = executeVisaPayment();
 			
@@ -109,6 +103,16 @@ public class Com009 extends TestBase {
     	new SecMetodoEnvioSteps().selectMetodoEnvio(dataPago, "VISA");
     }
     
+	private void checkMisCompras(DataPago dataPago, String address) throws Exception {
+		String codigoPedido = dataPago.getDataPedido().getCodpedido();
+		new PageResultPagoSteps().selectMisCompras();
+		
+		PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps();
+		pageMisComprasSteps.validateIsCompraOnline(codigoPedido);
+		pageMisComprasSteps.selectCompra(codigoPedido);
+		new ModalDetalleCompraSteps().checkIsVisibleDirection(address);
+	}    
+    
     private DirectionData makeDireccionSecundaria() {
 		DirectionData direction = new DirectionData();
 		direction.setNombre("Jorge");
@@ -132,19 +136,12 @@ public class Com009 extends TestBase {
     }    
     
     private DirectionData editDirection(DirectionData direction) {
-        direction.setNombre("Robotest");
-        direction.setApellidos("Pruebas");
-        direction.setDireccion(""+Timestamp.from(Instant.now()));
-        return direction;
+    	DirectionData directionReturn = DirectionData.from(direction);
+    	directionReturn.setNombre("Robotest");
+    	directionReturn.setApellidos("Pruebas");
+    	//directionReturn.setDireccion(""+Timestamp.from(Instant.now()));
+        return directionReturn;
     }
     
-	private void checkMisCompras(DataPago dataPago, String address) throws Exception {
-		String codigoPedido = dataPago.getDataPedido().getCodpedido();
-		new PageResultPagoSteps().selectMisCompras();
-		
-		PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps();
-		pageMisComprasSteps.validateIsCompraOnline(codigoPedido);
-		pageMisComprasSteps.selectCompra(codigoPedido);
-		new ModalDetalleCompraSteps().checkIsVisibleDirection(address);
-	}
+
 }

@@ -15,6 +15,9 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	private static final String XPATH_ID_TICKET = "//*[@data-testid[contains(.,'purchaseDetail.purchaseNumber')]]";
 	private static final String XPATH_LINEA_IMPORTE = "//*[@data-testid='price']";
 	
+	private static final String XPATH_DESPLEGABLE_DATOS_ENVIO = "//button[@id='accordion-purchase-0-title']";
+	private static final String XPATH_DATOS_ENVIO = "//dd[@id='accordion-purchase-0']/div";
+	
 	@Override
 	public boolean isPage() {
 		return isVisibleDataTicket(2);
@@ -55,8 +58,8 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	}
 	@Override
 	public String getDireccionEnvioOnline() {
-		//TODO
-		return "TODO";
+		makeVisibleDatosEnvio();
+		return getElement(XPATH_DATOS_ENVIO).getText(); 
 	}
 	@Override
 	public String getReferenciaArticulo(int posArticulo) {
@@ -76,7 +79,13 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	}
 	@Override
 	public void gotoListaMisCompras() {
-		SecFooter secFooter = new SecFooter();
-		secFooter.clickLink(FooterLink.MIS_COMPRAS);
+		new SecFooter().clickLink(FooterLink.MIS_COMPRAS);
+	}
+	
+	private void makeVisibleDatosEnvio() {
+		if (state(State.Invisible, XPATH_DATOS_ENVIO).check()) {
+			click(XPATH_DESPLEGABLE_DATOS_ENVIO).exec();
+			state(State.Visible, XPATH_DATOS_ENVIO).wait(1).check();
+		}
 	}
 }

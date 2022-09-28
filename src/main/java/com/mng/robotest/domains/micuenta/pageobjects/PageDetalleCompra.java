@@ -74,6 +74,7 @@ public abstract class PageDetalleCompra extends PageBase implements PageDetalleP
 	}
 	
 	public boolean isVisibleDireccionEnvio(String address) {
+		waitMillis(5000);
 		return getDireccionEnvioOnline().contains(address);
 	}
 }

@@ -11,14 +11,16 @@ public class ModalDirecEnvioNew extends PageBase {
 	private static final String XPATH_SAVE_BUTTON = "//*[@data-testid[contains(.,'save.button')]]";
 	private static final String XPATH_REMOVE_BUTTON = "//*[@data-testid='address.form.delete.button']";
 	private static final String XPATH_REMOVE_CONFIRM_BUTTON = "//button[@data-testid='address.form.modal.delete.button']";
+	private static final String XPATH_SELECTOR_PROVINCIA = "//select[@id='address.form.provinceId']";
 
 	public enum InputType {
 		NOMBRE("address.form.firstName"),
 		APELLIDOS("address.form.lastName"),
 		DIRECCION("address.form.address"),
 		CODIGO_POSTAL("address.form.postalCode"),
-		MOVIL("address.form.phoneNumber");
-		
+		MOVIL("address.form.phoneNumber"),
+		CITY("address.form.city");
+
 		private String dataTestId;
 		private InputType(String dataTestId) {
 			this.dataTestId = dataTestId;
@@ -26,8 +28,8 @@ public class ModalDirecEnvioNew extends PageBase {
 		public String getXPath() {
 			return String.format("//input[@data-testid='%s']", dataTestId);
 		}
+
 	}
-	
 	public boolean isVisible(int seconds) {
 		return state(State.Present, InputType.NOMBRE.getXPath()).wait(seconds).check();
 	}
@@ -38,6 +40,8 @@ public class ModalDirecEnvioNew extends PageBase {
 		inputData(InputType.DIRECCION, direction.getDireccion());
 		inputData(InputType.CODIGO_POSTAL, direction.getCodPostal());
 		inputData(InputType.MOVIL, direction.getMobil());
+		inputCity();
+		setProvinciaIfNotYet();
 		if (direction.isPrincipal()) {
 			clickLabelDirecPrincipal();
 		}
@@ -50,11 +54,50 @@ public class ModalDirecEnvioNew extends PageBase {
 		waitMillis(1000);
 	}
 
-	public void inputData(InputType inputType, String data) {
-		//clear doesn't works in that case -> workaround
-		//getElement(inputType.getXPath()).clear();
-		getElement(inputType.getXPath()).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-		getElement(inputType.getXPath()).sendKeys(data);
+	private void inputCity() {
+		if (isPresent(InputType.CITY)) {
+			String valueInput = getElement(InputType.CITY.getXPath()).getAttribute("value");
+			if ("".compareTo(valueInput)==0) {
+				inputData(InputType.CITY, "BARCELONA");
+			}
+		}
+	}
+	
+	private void inputData(InputType inputType, String data) {
+		if (isPresent(inputType)) {
+			//clear doesn't works in that case -> workaround
+			//getElement(inputType.getXPath()).clear();
+			getElement(inputType.getXPath()).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+			getElement(inputType.getXPath()).sendKeys(data);
+		}
+	}
+
+	private boolean isPresent(InputType inputType) {
+		return state(State.Present, inputType.getXPath()).check();
+	}
+	
+	private void setProvinciaIfNotYet() {
+		if (state(State.Visible, XPATH_SELECTOR_PROVINCIA).check()) {
+			String valueInicial = getElement(XPATH_SELECTOR_PROVINCIA).getAttribute("value");
+			if ("".compareTo(valueInicial)==0) {
+				setProvincia();
+			}
+		}
+	}
+
+	private void setProvincia() {
+		//workaround because doesn't run the Select sentence (seems a Selenium Bug)
+		String allCharacters = "abcdefghijklmnopqrstuvwxyz";
+		for (int i=0; i<allCharacters.length(); i++) {
+			click(XPATH_SELECTOR_PROVINCIA).exec();
+			getElement(XPATH_SELECTOR_PROVINCIA).sendKeys(allCharacters.substring(i,i+1));
+			click(XPATH_SELECTOR_PROVINCIA).exec();
+			String valueNew = getElement(XPATH_SELECTOR_PROVINCIA).getAttribute("value");
+			if ("".compareTo(valueNew)!=0) {
+				break;
+			}
+			waitMillis(1000);
+		}
 	}
 
 	public void clickLabelDirecPrincipal() {
@@ -68,7 +111,7 @@ public class ModalDirecEnvioNew extends PageBase {
 	public void clickRemoveButton() {
 		click(XPATH_REMOVE_BUTTON).exec();
 	}
-	
+
 	public boolean isVisibleModalConfirmacionEliminar(int seconds) {
 		return state(State.Visible, XPATH_REMOVE_CONFIRM_BUTTON).wait(seconds).check();
 	}

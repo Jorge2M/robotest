@@ -52,6 +52,7 @@ public class ModalMultidirectionSteps extends StepBase {
 		new ModalDirecEnvioNewSteps().checkIsVisible();
 		GenericChecks.checkDefault();
 	}
+
 	
 	@Validation
 	public ChecksTM checkAfterAddDirection(DirectionData direction) {

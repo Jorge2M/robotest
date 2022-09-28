@@ -49,7 +49,6 @@ public class ArticuloNavigations {
 			} else {
 				pageFicha.selectTallaByValue(Talla.fromValue(size));
 			}
-			pageFicha.selectTallaByValue(Talla.fromLabel(size));
 		} else {
 			pageFicha.selectTallaByIndex(1);
 		}

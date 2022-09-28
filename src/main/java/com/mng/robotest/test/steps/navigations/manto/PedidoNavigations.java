@@ -37,7 +37,7 @@ public class PedidoNavigations {
 	public static void testPedidosEnManto(DataCheckPedidos dataCheckPedidos, AppEcom appE, WebDriver driver) 
 			throws Exception {
 		//TODO activar cuando funcione manto en k8s-toos-pro (pdt vuelva Carlos)
-		if (true) {
+		if (false) {
 			//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
 			if (appE!=AppEcom.votf) {  
 				TestRunTM testRun = getTestCase().getTestRunParent();

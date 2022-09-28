@@ -1,5 +1,6 @@
 package com.mng.robotest.test.pageobject.shop;
 
+import java.time.Duration;
 import java.util.Map;
 
 import org.openqa.selenium.By;
@@ -105,7 +106,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	public void inputPaisAndSelect(String nombrePais) throws Exception {
 		String codigoPais = getCodigoPais(nombrePais);
 		if (!channel.isDevice()) {
-			new WebDriverWait(driver, 5).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@class[contains(.,'chosen-with-drop')]]")));
+			new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@class[contains(.,'chosen-with-drop')]]")));
 			getElement(XPATH_INPUT_PAIS).sendKeys(nombrePais);
 			
 			// Seleccionamos el país encontrado
