@@ -112,9 +112,9 @@
 				<artifactId>aspectj-maven-plugin</artifactId>
 				<version>1.14.0</version>
 				<configuration>
-					<complianceLevel>1.8</complianceLevel>
-					<source>1.8</source>
-					<target>1.8</target>
+					<complianceLevel>16</complianceLevel>
+					<source>16</source>
+					<target>16</target>
 					<showWeaveInfo>false</showWeaveInfo>
 					<verbose>true</verbose>
 					<Xlint>ignore</Xlint>

@@ -43,9 +43,8 @@ public class Fic003 extends TestBase {
 	}
 
 	private DataFichaArt selectFirstArticleInGalery() {
-		LocationArticle location1rstArticle = LocationArticle.getInstanceInCatalog(1);
-		DataFichaArt dataArtOrigin = pageGaleriaSteps.selectArticulo(location1rstArticle);
-		return dataArtOrigin;
+		var location1rstArticle = LocationArticle.getInstanceInCatalog(1);
+		return pageGaleriaSteps.selectArticulo(location1rstArticle);
 	}
 
 	private void kcSafetyTest() throws Exception {
