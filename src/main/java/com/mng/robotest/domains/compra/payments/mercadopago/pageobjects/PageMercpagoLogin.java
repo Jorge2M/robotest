@@ -8,8 +8,6 @@ public class PageMercpagoLogin extends PageBase {
 	
 	private static final String XPATH_INPUT_USER = "//input[@id='user_id']";
 	private static final String XPATH_INPUT_PASSWORD = "//input[@id='password']";
-	private static final String XPATH_INPUT_CAPTCHA = "//input[@id[contains(.,'captcha')]]";
-	private static final String XPATH_IMG_CAPTCHA = "//img[@src[contains(.,'captcha')]]";
 	private static final String XPATH_BOTON_CONTINUAR = "//input[@id='init' and @type='submit']";
 	
 	public boolean isPage() {

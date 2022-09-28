@@ -9,9 +9,6 @@ import com.mng.robotest.domains.transversal.PageBase;
 
 public class SecMetodoEnvioDesktop extends PageBase {
 	
-
-	private final ModalDroppoints modalDroppoints = new ModalDroppoints();
-	
 	private static final String XPATH_RADIO_INPUT = "//input[@id[contains(.,'Transportes')]]";
 	private static final String XPATH_SELECT_FRANJA_HORARIA_METODO_URGENTE = "//select[@data-component-id='time-range-sameday_nextday_franjas']";
 	

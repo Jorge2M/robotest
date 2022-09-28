@@ -15,7 +15,7 @@ public class SecSoyNuevo extends PageBase {
 	private static final String XPATH_FORM_IDENT = "//div[@class='register' or @id='registerCheckOut']//form"; //desktop y mobil
 	private static final String XPATH_INPUT_EMAIL = XPATH_FORM_IDENT + "//input[@id[contains(.,'expMail')]]";
 	private static final String XPATH_INPUT_CONTENT = XPATH_FORM_IDENT + "//span[@class='eac-cval']";
-	private static final String XPATH_BOTON_CONTINUE_MOBIL = "//div[@id='registerCheckOut']//div[@class='submit']/a";
+	private static final String XPATH_BOTON_CONTINUE_MOBIL = "//div[@id='registerCheckOut']//div[@class='submit']/input";
 	private static final String XPATH_BOTON_CONTINUE_DESKTOP = "//div[@class='register']//div[@class='submit']/input";
 	private static final String XPATH_LINK_POLITICA_PRIVACIDAD = "//span[@data-testid='mng-link']";
 	

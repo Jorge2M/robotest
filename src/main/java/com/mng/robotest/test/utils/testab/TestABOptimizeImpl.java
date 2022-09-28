@@ -13,28 +13,6 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 	//El id está en el campo "ID d experimento" del detalle en Google Optimize
 	//Si se quiere activar hay que añadirlo en la clase TestABactive
 
-//	Legal_Policy_Checkout_Desktop (
-//		"PIUR-3434 legal policy checkout 1 Desktop",
-//		"w9F_YC3SR2qhGWa97r8ouQ",
-//		Arrays.asList(0,1),
-//		Arrays.asList(
-//			"V0-Original", 
-//			"V1-Variante1"),
-//		Arrays.asList(Channel.desktop),
-//		Arrays.asList(AppEcom.shop)
-//	),
-//	
-//	Legal_Policy_Checkout_Mobile (
-//		"PIUR-3434 legal policy checkout 1 Mobile",
-//		"IA1ctJL1QXiW22ib9GCdDw",
-//		Arrays.asList(0,1),
-//		Arrays.asList(
-//			"V0-Original", 
-//			"V1-Variante1"),
-//		Arrays.asList(Channel.mobile),
-//		Arrays.asList(AppEcom.shop)
-//	),
-
 	New_Registry_MLY_Desktop_PRO (
 		"NEW REGISTRY MLY - Desktop PRO",
 		"7RVVwdg2Q0-tYl1ECEidvg",
@@ -45,50 +23,17 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(Channel.desktop),
 		Arrays.asList(AppEcom.shop)
 	),
-
-	CLAV_4345_Optimizacion_Imagenes_PRE(
-		"[PDP][PLP][CLAV-4345] Optimización imágenes PRE",
-		"1ae9zzpfQ8G27RoiFxWePg",
-		Arrays.asList(0,1),
-		Arrays.asList(
-			"V0-Original", 
-			"V1-Variante1"),
-		Arrays.asList(Channel.desktop, Channel.mobile),
-		Arrays.asList(AppEcom.shop)
-	),
-
-	CLAV_4345_Optimizacion_Imagenes_Desktop_PRO(
-		"[PDP][PLP][CLAV-4345] Optimización imágenes PRO",
-		"t-A4thioStqyXlc0mcG5CA",
-		Arrays.asList(0,1),
-		Arrays.asList(
-			"V0-Original", 
-			"V1-Variante1"),
-		Arrays.asList(Channel.desktop),
-		Arrays.asList(AppEcom.shop)
-	),
-
-	CLAV_4345_Optimizacion_Imagenes_Mobile_PRO(
-		"[PDP][PLP][CLAV-4345] Optimización imágenes PRE",
-		"o-4LOztGSLKXnVHZleRVuA",
+	
+	New_Registry_MLY_Mobile_PRO (
+		"NEW REGISTRY MLY - Mobile PRO",
+		"U2shAUFFRkKpMfDaesBEZw",
 		Arrays.asList(0,1),
 		Arrays.asList(
 			"V0-Original", 
 			"V1-Variante1"),
 		Arrays.asList(Channel.mobile),
 		Arrays.asList(AppEcom.shop)
-	),
-
-	Test_New_Menu_Desktop_PRE(
-		"Test - New Menú - Desktop PRE",
-		"7gBkOrIuSPOvqf80HInMEQ",
-		Arrays.asList(0,1),
-		Arrays.asList(
-			"V0-Original", 
-			"V1-New Menu"),
-		Arrays.asList(Channel.desktop),
-		Arrays.asList(AppEcom.shop)
-	),
+	),	
 
 	GPS_NEW_MENU_MOBILE_PRE(
 		"GPS - New Menu Mobile (1)",
@@ -111,51 +56,6 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(Channel.mobile),
 		Arrays.asList(AppEcom.shop)
 	),	
-	
-	Test_New_Menu_Desktop_PRO(
-			"Test - New Menú - Desktop PRO",
-			"_0pE_bPVTCa9mB5wgaENww",
-			Arrays.asList(0,1),
-			Arrays.asList(
-					"V0-Original",
-					"V1-New Menu"),
-			Arrays.asList(Channel.desktop),
-			Arrays.asList(AppEcom.shop)
-	),
-
-	PLP_Desktop_New_filters_v2(
-		"PLP - Desktop - New filters v2",
-		"GTM-KWJ6XJ_OPT-K9JCF$",
-		Arrays.asList(0,1),
-		Arrays.asList(
-			"V0-Original", 
-			"V1-New Filters"),
-		Arrays.asList(Channel.desktop),
-		Arrays.asList(AppEcom.shop, AppEcom.votf)
-	),
-
-	SHOP_260_Menu_Mobile_Nuevo_Diseno(
-		"SHOP-260 - Menu - Mobile - Nuevo Diseño",
-		"GTM-KWJ6XJ_OPT-KMZZV$",
-		Arrays.asList(0,1),
-		Arrays.asList(
-			"Variante 0 - Original",
-			"Variante 1 - Anidado plegado", 
-			"Variante 2 - Anidado desplegado"),
-		Arrays.asList(Channel.mobile, Channel.tablet),
-		Arrays.asList(AppEcom.shop)
-	),
-
-	PLP_Desktop_Navigation_Filters(
-		"PLP - Desktop - Navigation filters",
-		"OPT-KWJ6XJ_OPT-N5ZLQ$",
-		Arrays.asList(0,1),
-		Arrays.asList(
-			"Variante 0 - Original",
-			"Variante 1 - Filtros superiores"),
-		Arrays.asList(Channel.desktop),
-		Arrays.asList(AppEcom.shop)
-	),
 	
 	PDP_Desktop_Size_Selector_PRE(
 		"[PDP][DESKTOP] Size Selector",
