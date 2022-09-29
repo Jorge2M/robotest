@@ -1,4 +1,4 @@
-package com.mng.robotest.test.getdata.products;
+package com.mng.robotest.test.getdata.products.filter;
 
 import java.util.List;
 import java.util.Optional;

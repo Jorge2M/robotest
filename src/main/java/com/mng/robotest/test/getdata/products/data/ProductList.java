@@ -4,7 +4,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+
+import com.mng.robotest.test.getdata.products.sort.SortFactory;
+import com.mng.robotest.test.getdata.products.sort.SortFactory.SortBy;
 
 public class ProductList {
 	
@@ -53,11 +55,21 @@ public class ProductList {
 		return null;
 	}
 	
+	public List<GarmentCatalog> getAllGarments(SortBy sortBy) {
+		List<GarmentCatalog> allGarments = getAllGarments();
+		if (sortBy!=null) {
+			return allGarments.stream()
+					.sorted(SortFactory.get(sortBy))
+					.toList();
+		}
+		return allGarments;
+	}
+	
 	public List<GarmentCatalog> getAllGarments() {
 		return groups.stream()
-				.map(s -> s.getGarments())
-				.collect(Collectors.toList()).stream()
+				.map(Group::getGarments)
+				.toList().stream()
 				.flatMap(Collection::stream)
-				.collect(Collectors.toList()); 
+				.toList();
 	}
 }

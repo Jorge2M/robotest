@@ -30,7 +30,8 @@ public class GetProductsSteps extends StepBase {
 	}
 	
 	@Validation
-	public ChecksTM isPersonalization(int minArticles, int maxArticles, GetterProducts getterProducts) {
+	public ChecksTM isPersonalization(int minArticles, int maxArticles, GetterProducts getterProducts) 
+			throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
 		int numArticlesPersonalized = getNumArticlesPersonalized(getterProducts);
 	 	checks.add(
@@ -42,7 +43,7 @@ public class GetProductsSteps extends StepBase {
 	 	return checks;
 	}
 	
-	private int getNumArticlesPersonalized(GetterProducts getterProducts) {
+	private int getNumArticlesPersonalized(GetterProducts getterProducts) throws Exception {
 		int numArticlesPersonalized = 0;
 		for (GarmentCatalog garment : getterProducts.getAll()) {
 			if (garment.getAnalyticsEventsData().isPersonalized()) {

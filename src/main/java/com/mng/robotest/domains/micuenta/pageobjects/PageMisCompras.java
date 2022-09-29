@@ -5,7 +5,6 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
@@ -41,14 +40,14 @@ public class PageMisCompras extends PageBase {
 		waitMillis(1000);
 		return getTicketsPage().stream()
 				.map(item -> getTicket(item))
-				.collect(Collectors.toList());
+				.toList();
 	}
 	
 	public List<Ticket> getTickets(TypeTicket typeCompra) {
 		if (listTickets==null) {
 			listTickets = getTickets().stream()
 				.filter(ticket -> ticket.getType()==typeCompra)
-				.collect(Collectors.toList());
+				.toList();
 		}
 		return listTickets;
 	}

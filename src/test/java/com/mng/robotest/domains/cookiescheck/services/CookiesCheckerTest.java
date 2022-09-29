@@ -70,13 +70,13 @@ public class CookiesCheckerTest {
 	private List<Cookie> mockAllowedCookies(List<String> cookies) {
 		return cookies.stream()
 		        .flatMap(c -> Stream.of(Cookie.from(c)))
-		        .collect(Collectors.toList());
+				.toList();
 	}
 	
 	private List<Pattern> mockWhiteList(List<String> whiteList) {
 		return whiteList.stream()
 		        .flatMap(w -> Stream.of(Pattern.compile(w)))
-		        .collect(Collectors.toList());
+		        .toList();
 	}
 	
 	private Set<org.openqa.selenium.Cookie> mockPageCookies(List<String> cookies) {

@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.ficha.tests;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 import org.openqa.selenium.WebDriver;
@@ -69,17 +68,17 @@ public class Fic005 extends TestBase {
 	private GarmentCatalog getArticlePersonalizable(String codigoPais, AppEcom app, WebDriver driver) 
 			throws Exception {
 		
-		GetterProducts getterProducts = new GetterProducts.Builder(codigoPais, app, driver)
+		Optional<GarmentCatalog> articlePersonalizable = new GetterProducts
+				.Builder(codigoPais, app, driver)
 				.linea(LineaType.he)
 				.menu(Menu.CamisasHE)
 				.numProducts(5)
-				.build();
-		
-		Optional<GarmentCatalog> articlePersonalizable = getterProducts.getOneFiltered(
-				Arrays.asList(FilterType.Personalizable));
+				.filter(FilterType.PERSONALIZABLE)
+				.build()
+				.getOne();
 		
 		if (!articlePersonalizable.isPresent()) {
-			throw new NotFoundException("Not found article with filter " + FilterType.Personalizable);
+			throw new NotFoundException("Not found article with filter " + FilterType.PERSONALIZABLE);
 		}
 		return articlePersonalizable.get();
 	}	

@@ -6,7 +6,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.openqa.selenium.WebDriver;
@@ -47,7 +46,7 @@ public class CookiesChecker {
 			Set<org.openqa.selenium.Cookie> pageCookies) {
 		return pageCookies.stream()
 		        .filter(c -> !isAllowed(c))
-		        .collect(Collectors.toList());
+		        .toList();
 	}
 	
 	private boolean isAllowed(org.openqa.selenium.Cookie cookie) {

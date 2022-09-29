@@ -27,6 +27,9 @@ import com.mng.robotest.test.getdata.UtilsData;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.products.data.ProductList;
+import com.mng.robotest.test.getdata.products.filter.Filter;
+import com.mng.robotest.test.getdata.products.filter.FilterStock;
+import com.mng.robotest.test.getdata.products.sort.SortFactory.SortBy;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
@@ -46,6 +49,8 @@ public class GetterProducts {
 	private final Integer numProducts;
 	private final Integer minProducts;
 	private final Integer pagina;
+	private final List<FilterType> filters;
+	private final SortBy sortBy;
 	private final WebDriver driver;
 	private final MethodGetter method;
 	private final boolean retryPro;
@@ -66,6 +71,8 @@ public class GetterProducts {
 			Integer pagina, 
 			MethodGetter method, 
 			boolean retryPro, 
+			List<FilterType> filters,
+			SortBy sortBy,
 			WebDriver driver) throws Exception {
 		
 		urlForJavaCall = getUrlForJavaCall(url);
@@ -88,31 +95,41 @@ public class GetterProducts {
 		this.method = method;
 		this.retryPro = retryPro;
 		this.driver = driver;
+		this.filters = filters;
+		this.sortBy = sortBy;
 		this.productList = getProductList();
 		this.productFilter = new ProductFilter(productList, app, urlForJavaCall);
 	}
 	
-	public List<GarmentCatalog> getAll() {
+	public List<GarmentCatalog> getAll() throws Exception {
 		if (productList==null) {
 			return new ArrayList<>();
 		}
-		return productList.getAllGarments(); 
+		List<GarmentCatalog> allGarments;
+		if (filters!=null && !filters.isEmpty()) {
+			allGarments = getAll(filters);
+		} else {
+			allGarments = productList.getAllGarments(sortBy);
+		}
+		return allGarments;
+	}
+	public Optional<GarmentCatalog> getOne() throws Exception {
+		if (productList==null) {
+			return Optional.empty();
+		}
+		if (filters!=null && !filters.isEmpty()) {
+			return getOne(filters);
+		}
+		List<GarmentCatalog> allGarments = productList.getAllGarments(sortBy);
+		return Optional.of(allGarments.get(0));
 	}
 	
-	public List<GarmentCatalog> getFiltered(FilterType filter) throws Exception {
-		return getFiltered(Arrays.asList(filter));
+	public List<GarmentCatalog> getAll(List<FilterType> filters) throws Exception {
+		return productFilter.getListFiltered(filters, sortBy);
 	}
 	
-	public List<GarmentCatalog> getFiltered(List<FilterType> listFilters) throws Exception {
-		return productFilter.getListFiltered(listFilters);
-	}
-	
-	public Optional<GarmentCatalog> getOneFiltered(FilterType filter) throws Exception {
-		return getOneFiltered(Arrays.asList(filter));
-	}
-	
-	public Optional<GarmentCatalog> getOneFiltered(List<FilterType> listFilters) throws Exception {
-		return productFilter.getOneFiltered(listFilters);
+	public Optional<GarmentCatalog> getOne(List<FilterType> filters) throws Exception {
+		return productFilter.getOneFiltered(filters, sortBy);
 	}
 	
 	private String getUrlForJavaCall(String initialURL) throws Exception {
@@ -146,8 +163,8 @@ public class GetterProducts {
 				}
 			}
 			if (productListReturn==null ||
-				productListReturn.getAllGarments()==null ||
-				productListReturn.getAllGarments().size()>=minProducts) {
+				productListReturn.getAllGarments(sortBy)==null ||
+				productListReturn.getAllGarments(sortBy).size()>=minProducts) {
 				break;
 			}
 		}
@@ -170,7 +187,7 @@ public class GetterProducts {
 	
 	private boolean hasProductsWithStock(ProductList productList) throws Exception {
 		Filter filterStock = new FilterStock();
-		return !filterStock.filter(productList.getAllGarments()).isEmpty();
+		return !filterStock.filter(productList.getAllGarments(sortBy)).isEmpty();
 	}
 	
 	private ProductList getProductList(MenuProduct menu) throws Exception {
@@ -209,6 +226,8 @@ public class GetterProducts {
 				pagina, 
 				method, 
 				false,
+				filters,
+				sortBy,
 				driver);
 		return getterPro.getProductList();
 	}
@@ -365,6 +384,8 @@ public class GetterProducts {
 		private Integer numProducts = 40;
 		private Integer minProducts = 3;
 		private String codigoIdiomAlf = "";
+		private List<FilterType> filters;
+		private SortBy sortBy;
 		private List<MenuI> menusCandidates = 
 			Arrays.asList(
 				Menu.Shorts, 
@@ -427,6 +448,22 @@ public class GetterProducts {
 			this.retryPro = retryPro;
 			return this;
 		}
+		public Builder filters(List<FilterType> filters) {
+			this.filters = filters;
+			return this;
+		}
+		public Builder filter(FilterType filter) {
+			if (this.filters==null) {
+				this.filters = Arrays.asList(filter);
+			} else {
+				this.filters.add(filter);
+			}
+			return this;
+		}
+		public Builder sortBy(SortBy sortBy) {
+			this.sortBy = sortBy;
+			return this;
+		}
 		public GetterProducts build() throws Exception {
 			return (
 				new GetterProducts(
@@ -441,6 +478,8 @@ public class GetterProducts {
 						pagina, 
 						method, 
 						retryPro, 
+						filters,
+						sortBy,
 						driver));
 		}
 		

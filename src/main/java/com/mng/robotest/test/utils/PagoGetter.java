@@ -3,7 +3,6 @@ package com.mng.robotest.test.utils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Pago;
@@ -47,7 +46,8 @@ public class PagoGetter {
 		List<String> listSortedAndWithoutDuplicates = listLabels.stream()
 			.distinct()
 			.sorted()
-			.collect(Collectors.toList());
+			.toList();
+		
 		return listSortedAndWithoutDuplicates;
 	}
 	

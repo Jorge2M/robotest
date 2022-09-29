@@ -3,7 +3,6 @@ package com.mng.robotest.domains.ficha.tests;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -22,8 +21,8 @@ import javassist.NotFoundException;
 public class Fic001 extends TestBase {
 
 	private final Optional<GarmentCatalog> articleOnline;
-	private final List<FilterType> filterOnline = Arrays.asList(FilterType.Online);
-	private final List<FilterType> filterNoOnlineWithColors = Arrays.asList(FilterType.NoOnline, FilterType.ManyColors);
+	private final List<FilterType> filterOnline = Arrays.asList(FilterType.ONLINE);
+	private final List<FilterType> filterNoOnlineWithColors = Arrays.asList(FilterType.NO_ONLINE, FilterType.MANY_COLORS);
 	private final Optional<GarmentCatalog> articleNoOnlineWithColors;
 	
 	private final PageFichaSteps pageFichaSteps = new PageFichaSteps();
@@ -35,8 +34,8 @@ public class Fic001 extends TestBase {
 				.numProducts(80)
 				.build();
 
-		articleOnline = getterProducts.getOneFiltered(filterOnline);
-		articleNoOnlineWithColors = getterProducts.getOneFiltered(filterNoOnlineWithColors);
+		articleOnline = getterProducts.getOne(filterOnline);
+		articleNoOnlineWithColors = getterProducts.getOne(filterNoOnlineWithColors);
 	}
 	
 	@Override
@@ -80,7 +79,7 @@ public class Fic001 extends TestBase {
 				filterNoOnlineWithColors
 					.stream()
 					.map(Object::toString)
-					.collect(Collectors.toList());
+					.toList();
 			
 			throw new NotFoundException("Not found article with filters " + String.join(",", filtersLabels));
 		}

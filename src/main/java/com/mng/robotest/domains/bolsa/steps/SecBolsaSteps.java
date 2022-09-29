@@ -80,11 +80,12 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	public void altaArticlosConColores(int numArticulos) throws Exception {
-		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver).build();
-		List<GarmentCatalog> listParaAlta = getterProducts
-				.getFiltered(FilterType.ManyColors)
-				.subList(0, numArticulos);
+		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais()
+				.getCodigo_alf(), app, driver)
+				.filter(FilterType.MANY_COLORS)
+				.build();
 		
+		List<GarmentCatalog> listParaAlta = getterProducts.getAll().subList(0, numArticulos);
 		altaListaArticulosEnBolsa(listParaAlta);
 	}
 

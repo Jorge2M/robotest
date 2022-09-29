@@ -15,7 +15,7 @@ import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
-
+import com.mng.robotest.test.getdata.products.sort.SortFactory.SortBy;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 
 public class UtilsTest {
@@ -141,9 +141,11 @@ public class UtilsTest {
 		List<GarmentCatalog> listProducts;
 		GetterProducts getterProducts = new GetterProducts
 				.Builder(pais.getCodigo_alf(), app, driver)
+				.filter(FilterType.STOCK)
+				.sortBy(SortBy.STOCK_DESCENDENT)
 				.build();
 
-		listProducts = getterProducts.getFiltered(FilterType.Stock);
+		listProducts = getterProducts.getAll();
 		if (listProducts.size() > maxArticlesAwayVale) {
 			return (listProducts.subList(0, maxArticlesAwayVale));
 		}

@@ -53,7 +53,7 @@ public class CookiesCheckerTest {
 	private List<Cookie> mockAllowedCookies(List<String> cookies) {
 		return cookies.stream()
 		        .flatMap(c -> Stream.of(Cookie.from(c)))
-		        .collect(Collectors.toList());
+		        .toList();
 	}
 	
 	private Set<org.openqa.selenium.Cookie> mockPageCookies(List<String> cookies) {

@@ -1,5 +1,6 @@
 package com.mng.robotest.domains.ficha.tests;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -27,15 +28,19 @@ public class Fic002 extends TestBase {
 	public Fic002() throws Exception {
 		super();
 
-		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
+		GetterProducts getterProducts = new GetterProducts
+				.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
 				.build();
 
-		Optional<GarmentCatalog> articleWithTotalLook = getterProducts.getOneFiltered(FilterType.TotalLook);
-		isTotalLook = articleWithTotalLook.isPresent();
-		if (isTotalLook) {
+		Optional<GarmentCatalog> articleWithTotalLook = getterProducts
+				.getOne(Arrays.asList(FilterType.TOTAL_LOOK));
+		
+		if (articleWithTotalLook.isPresent()) {
+			this.isTotalLook = true;
 			garment = articleWithTotalLook.get();
 		} else {
-			garment = getterProducts.getAll().get(0);
+			this.isTotalLook = false;
+			garment = getterProducts.getOne().get();
 		}
 	}
 

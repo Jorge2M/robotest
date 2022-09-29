@@ -98,9 +98,10 @@ public class Com001 extends TestBase {
 					Menu.Albornoces, 
 					Menu.Toallas, 
 					Menu.Alfombras))
+			.filter(FilterType.STOCK)
 			.build();
 		
-		return Optional.of(getterProducts.getFiltered(FilterType.Stock));
+		return Optional.of(getterProducts.getAll());
 	}
 	
 	private Optional<List<GarmentCatalog>> getArticlesIntimissimi() throws Exception {
@@ -114,9 +115,10 @@ public class Com001 extends TestBase {
 					Menu.Sujetadores, 
 					Menu.Braguitas, 
 					Menu.Lenceria))
+			.filter(FilterType.STOCK)
 			.build();
 		
-		return Optional.of(getterProducts.getFiltered(FilterType.Stock));
+		return Optional.of(getterProducts.getAll());
 	}
 
 }

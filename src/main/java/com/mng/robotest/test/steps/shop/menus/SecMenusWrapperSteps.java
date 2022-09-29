@@ -4,7 +4,6 @@ import static com.mng.robotest.test.data.Constantes.PREFIX_REBAJAS;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -161,7 +160,8 @@ public class SecMenusWrapperSteps extends StepBase {
 		List<DataScreenMenu> listMenus = secMenusWrap.getListDataScreenMenus(linea, sublineaType);
 		List<DataScreenMenu> listWithoutDuplicates = listMenus.stream()
 				.distinct()
-				.collect(Collectors.toList());
+				.toList();
+		
 		return listWithoutDuplicates;
 	}
 

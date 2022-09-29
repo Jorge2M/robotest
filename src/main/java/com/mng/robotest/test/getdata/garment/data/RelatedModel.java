@@ -27,7 +27,7 @@ public class RelatedModel {
 	public List<String> getProductIdsWithout(String productId) {
 		return getProductIds().stream()
 			.filter(s -> s.toString().compareTo(productId)!=0)
-			.collect(Collectors.toList());
+			.toList();
 	}
 	public void setProductIds(List<String> productIds) {
 		this.productIds = productIds;
