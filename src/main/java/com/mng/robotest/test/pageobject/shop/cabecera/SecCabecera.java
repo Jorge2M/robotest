@@ -12,7 +12,8 @@ import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
-import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenuLateralDevice;
+import com.mng.robotest.test.pageobject.shop.menus.device.SecMenuLateralDevice;
+import com.mng.robotest.test.utils.UtilsTest;
 
 public abstract class SecCabecera extends PageBase {
 	
@@ -34,15 +35,7 @@ public abstract class SecCabecera extends PageBase {
 		if (channel==Channel.mobile && app==AppEcom.outlet) {
 			return new SecCabeceraOutlet_Mobil();
 		}
-		
-		switch (channel) {
-		case tablet:
-			//return SecCabeceraShop_Tablet.getNew(driver);
-		case desktop:
-		case mobile:
-		default:
-			return new SecCabecera_MostFrequent();
-		}
+		return new SecCabecera_MostFrequent();
 	}
 	
 	public SecCabecera_MostFrequent getShop_DesktopMobile() {
@@ -111,7 +104,7 @@ public abstract class SecCabecera extends PageBase {
 
 	private static final String XPATH_SMART_BANNER = XPATH_HEADER + "/div[@id='smartbanner']";
 	private static final String XPATH_LINK_CLOSE_SMART_BANNER = XPATH_SMART_BANNER + "//a[@class='sb-close']";	
-	private static final String XPATH_ICONO_MENU_HAMBURGUESA = XPATH_HEADER + "//div[@class[contains(.,'menu-open-button')]]";
+//	private static final String XPATH_ICONO_MENU_HAMBURGUESA = XPATH_HEADER + "//div[@class[contains(.,'menu-open-button')]]";
 
 	
 	/**
@@ -123,6 +116,17 @@ public abstract class SecCabecera extends PageBase {
 		}
 	}
 
+	private static final String XPATH_HAMBURGUESA_ICON_OUTLET = "//div[@class='menu-open-button']";
+	private static final String XPATH_HAMBURGUESA_ICON_SHOP = "//*[@data-testid='header.burger']";
+	private String getXPathHamburguesaIcon() {
+		if (app==AppEcom.outlet ||
+		   (isPRO() && UtilsTest.dateBeforeToday("2022-11-04"))) {
+			return XPATH_HAMBURGUESA_ICON_OUTLET;
+		} else {
+			return XPATH_HAMBURGUESA_ICON_SHOP;
+		}
+	}
+	
 	/**
 	 * Función que abre/cierra el menú lateral de móvil según le indiquemos en el parámetro 'open'
 	 * @param open: 'true'  queremos que el menú lateral de móvil se abra
@@ -135,24 +139,15 @@ public abstract class SecCabecera extends PageBase {
 		TypeClick typeClick = TypeClick.webdriver;
 		while ((menuVisible!=toOpenMenus) && i<5) {
 			try {
-				isVisibleIconoMenuHamburguesaUntil(5);
-				clickIconoMenuHamburguesaWhenReady(typeClick);
+				state(Visible, getXPathHamburguesaIcon()).wait(5).check();
+				click(getXPathHamburguesaIcon()).type(typeClick).exec();
 				typeClick = TypeClick.next(typeClick);
 				menuVisible = secMenuLateral.isMenuInStateUntil(toOpenMenus, 2);
 			}
 			catch (Exception e) {
 				Log4jTM.getLogger().warn("Exception in click icono Hamburguer", e);
 			}
-			
 			i+=1;
 		}
-	}
-
-	public boolean isVisibleIconoMenuHamburguesaUntil(int seconds) {
-		return state(Visible, XPATH_ICONO_MENU_HAMBURGUESA).wait(seconds).check();
-	}
-
-	public void clickIconoMenuHamburguesaWhenReady(TypeClick typeOfClick) {
-		click(XPATH_ICONO_MENU_HAMBURGUESA).exec();
 	}
 }

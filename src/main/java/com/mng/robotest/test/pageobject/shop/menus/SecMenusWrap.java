@@ -13,8 +13,8 @@ import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenusDesktop;
-import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenuLateralDevice;
-import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenuLateralDevice.TypeLocator;
+import com.mng.robotest.test.pageobject.shop.menus.device.SecMenuLateralDevice;
+import com.mng.robotest.test.pageobject.shop.menus.device.SecMenuLateralDevice.TypeLocator;
 import com.mng.robotest.test.utils.checkmenus.DataScreenMenu;
 
 public class SecMenusWrap extends PageBase {
@@ -113,7 +113,7 @@ public class SecMenusWrap extends PageBase {
 		if (channel==Channel.desktop) {
 			secMenusDesktop.secMenuSuperior.secBlockMenus.gotoAndClickMenu(menu1rstLevel);
 		} else {
-			secMenuLateralDevice.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais);
+			secMenuLateralDevice.clickMenuLateral1rstLevel(TypeLocator.DATA_GA_LABEL_PORTION, menu1rstLevel, pais);
 		}
 	}
 	
@@ -122,7 +122,7 @@ public class SecMenusWrap extends PageBase {
 	 */
 	public void seleccionarMenuXHref(Menu1rstLevel menu1rstLevel, Pais pais) throws Exception {
 		if (channel.isDevice()) {
-			secMenuLateralDevice.clickMenuLateral1rstLevel(TypeLocator.hrefPortion, menu1rstLevel, pais);
+			secMenuLateralDevice.clickMenuLateral1rstLevel(TypeLocator.HREF_PORTION, menu1rstLevel, pais);
 		} else {
 			secMenusDesktop.secMenuSuperior.secBlockMenus.seleccionarMenuXHref(menu1rstLevel);
 		}

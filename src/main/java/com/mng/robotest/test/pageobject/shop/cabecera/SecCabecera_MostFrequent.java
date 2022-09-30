@@ -12,7 +12,9 @@ import javax.ws.rs.NotAllowedException;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.NavigationBase;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop;
+import com.mng.robotest.test.utils.UtilsTest;
 
 public class SecCabecera_MostFrequent extends SecCabecera {
 	
@@ -24,52 +26,73 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 	
 	public enum IconoCabeceraShop_DesktopMobile implements ElementPage {
 		lupa(
-			"//span[@class[contains(.,'-search')]]/..",
-			"//self::*[@data-testid[contains(.,'header.userMenu.searchIconButton')]]"),
+			"//*[@class[contains(.,'user-icon-button')]]//span[@class[contains(.,'-search')]]/..",
+			"//*[@data-testid='header.userMenu.search.button']",
+			"//*[@data-testid[contains(.,'header.userMenu.searchIconButton')]]"),
 		iniciarsesion(
-			"//self::*[@id='login_any' or @id='login_mobile_any' or @id='login_tablet_any']/span[@class[contains(.,'-account')]]/..",
-			"//self::*[@data-testid='header.userMenu.login_any']"),
+			"//*[@class[contains(.,'user-icon-button')] and @id='login_any' or @id='login_mobile_any' or @id='login_tablet_any']/span[@class[contains(.,'-account')]]/..",
+			"//*[@data-testid='header.userMenu.login_mobile_any']",
+			"//*[@data-testid='header.userMenu.login_any']"),
 		micuenta(
-			"//self::*[@id='login' or @id='login_mobile' or @id='login_tablet']/span[@class[contains(.,'-account')]]/..",
-			"//self::*[@data-testid='header.userMenu.login']"),
+			"//*[@class[contains(.,'user-icon-button')] and @id='login' or @id='login_mobile' or @id='login_tablet']/span[@class[contains(.,'-account')]]/..",
+			"//*[@data-testid='header.userMenu.login_mobile']",
+			"//*[@data-testid='header.userMenu.login']"),
 		favoritos(
-			"//span[@class[contains(.,'-favorites')]]/..",
-			"//self::*[@data-testid[contains(.,'header.userMenu.favorites')]]"),
+			"//*[@class[contains(.,'user-icon-button')]]//span[@class[contains(.,'-favorites')]]/..",
+			"//*[@data-testid='header.userMenu.favorites_mobile_any']",
+			"//*[@data-testid[contains(.,'header.userMenu.favorites')]]"),
 		bolsa(
-			"//span[@class[contains(.,'-bag')]]/..",
-			"//self::*[@data-testid[contains(.,'header.userMenu.bolsa')] or " + //TODO eliminar cuando todos los países vayan por la nueva bolsa 
-			          "@data-testid[contains(.,'header-user-menu-bag')]]"); 
+			"//*[@class[contains(.,'user-icon-button')]]//span[@class[contains(.,'-bag')]]/..",
+			"//*[@data-testid='header-user-menu-bag']",
+			"//*[@data-testid[contains(.,'header.userMenu.bolsa')] or " + //TODO eliminar cuando todos los países vayan por la nueva bolsa 
+			    "@data-testid[contains(.,'header-user-menu-bag')]]");
 
-		private By byMobile;
-		private String xpathMobile;
+		private By byMobileOutlet;
+		private String xpathMobileOutlet;
+		private By byMobileShop;
+		private String xpathMobileShop;
 		private By byDesktop;
 		private String xpathDesktop;
 		
-		private static final String XPATH_ICON_MOBILE = "//*[@class[contains(.,'user-icon-button')]]";
-		IconoCabeceraShop_DesktopMobile(String xPathMobile, String xPathDesktop) {
-			xpathMobile = XPATH_ICON_MOBILE + xPathMobile;
-			byMobile = By.xpath(XPATH_ICON_MOBILE + xPathMobile);
+		IconoCabeceraShop_DesktopMobile(String xPathMobileOutlet, String xpathMobileShop, String xPathDesktop) {
+			this.xpathMobileOutlet = xPathMobileOutlet;
+			this.byMobileOutlet = By.xpath(xPathMobileOutlet);
+			
+			this.xpathMobileShop = xpathMobileShop;
+			this.byMobileShop = By.xpath(xpathMobileShop);
 			
 			this.xpathDesktop = xPathDesktop;
-			byDesktop = By.xpath(xPathDesktop);
+			this.byDesktop = By.xpath(xPathDesktop);
 		}
 
 		@Override
 		public By getBy(Channel channel, Enum<?> app) {
 			if (channel.isDevice()) {
-				if (app==AppEcom.shop && this==iniciarsesion) {
-					return By.xpath("//span[@data-testid='header.menuItem.userIcon']");
+//				if (app==AppEcom.shop && this==iniciarsesion) {
+//					return By.xpath("//span[@data-testid='header.menuItem.userIcon']");
+//				}
+				if (app==AppEcom.outlet ||
+				   (new NavigationBase().isPRO() && UtilsTest.dateBeforeToday("2022-11-04"))) {
+					return byMobileOutlet;
+				} else {
+				    return byMobileShop;
 				}
-				return byMobile;
+			} else {
+			    return byDesktop;
 			}
-			return byDesktop;
 		}
 
 		public String getXPath(Channel channel, Enum<?> app) {
-			if (channel.isDevice()/* || app==AppEcom.outlet*/) {
-				return xpathMobile;
+			if (channel.isDevice()) {
+				if (app==AppEcom.outlet ||
+				   (new NavigationBase().isPRO() && UtilsTest.dateBeforeToday("2022-11-04"))) {
+				    return xpathMobileOutlet;
+				} else {
+					return xpathMobileShop;
+				}
+			} else {
+			    return xpathDesktop;
 			}
-			return xpathDesktop;
 		}
 		
 		@Override

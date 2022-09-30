@@ -18,8 +18,8 @@ public class TestABactive {
 		listTestABsToActivate.add(TestABactData.getNew(TestABGoogleExpImpl.MVPCheckoutDesktop, 0));
 		//listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.New_Registry_MLY_Desktop_PRO, 0));
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.New_Registry_MLY_Mobile_PRO, 0));
-		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.GPS_NEW_MENU_MOBILE_PRE, 0));
-		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.GPS_NEW_MENU_MOBILE_PRO, 0));
+//		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.GPS_NEW_MENU_MOBILE_PRE, 0));
+//		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.GPS_NEW_MENU_MOBILE_PRO, 0));
 
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.PDP_Desktop_Size_Selector_PRE, 0));
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.PDP_Desktop_Size_Selector_PRO, 0));

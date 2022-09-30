@@ -13,7 +13,7 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraOutlet_Mobil.IconoCabOutletMobil;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera_MostFrequent.IconoCabeceraShop_DesktopMobile;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop.MenuUserDesktop;
-import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenusUserDevice.MenuUserDevice;
+import com.mng.robotest.test.pageobject.shop.menus.device.SecMenusUserDevice.MenuUserDevice;
 
 public class MenuUserItem {
 	
@@ -43,7 +43,6 @@ public class MenuUserItem {
 	
 	public enum TypeMenu {
 		IconoCabeceraShop_DesktopMobile,
-		IconoCabeceraShop_Tablet,
 		MenuUserDesktop,
 		MenuUserDevice,
 		IconoCabOutletMobil

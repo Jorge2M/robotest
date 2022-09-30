@@ -18,8 +18,8 @@ import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraOutlet_Mobil.Ic
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera_MostFrequent.IconoCabeceraShop_DesktopMobile;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop.MenuUserDesktop;
-import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenuLateralDevice;
-import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenusUserDevice.MenuUserDevice;
+import com.mng.robotest.test.pageobject.shop.menus.device.SecMenuLateralDevice;
+import com.mng.robotest.test.pageobject.shop.menus.device.SecMenusUserDevice.MenuUserDevice;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 

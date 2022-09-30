@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.menus.mobil;
+package com.mng.robotest.test.pageobject.shop.menus.device;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;

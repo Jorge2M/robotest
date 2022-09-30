@@ -20,9 +20,9 @@ import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
 import com.mng.robotest.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test.pageobject.shop.menus.MenuLateralDesktop;
 import com.mng.robotest.test.pageobject.shop.menus.MenuLateralDesktop.Element;
+import com.mng.robotest.test.pageobject.shop.menus.device.SecMenuLateralDevice;
+import com.mng.robotest.test.pageobject.shop.menus.device.SecMenuLateralDevice.TypeLocator;
 import com.mng.robotest.test.pageobject.shop.menus.GroupMenu;
-import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenuLateralDevice;
-import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenuLateralDevice.TypeLocator;
 import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
@@ -38,7 +38,7 @@ public class SecMenuLateralMobilSteps extends StepBase {
 		saveNettraffic=SaveWhen.Always,
 		saveHtmlPage=SaveWhen.Always)
 	public void selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, Pais pais) throws Exception {
-		secMenuLateral.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais);
+		secMenuLateral.clickMenuLateral1rstLevel(TypeLocator.DATA_GA_LABEL_PORTION, menu1rstLevel, pais);
 		validaSelecMenu(menu1rstLevel);
 	}
 	
@@ -46,7 +46,7 @@ public class SecMenuLateralMobilSteps extends StepBase {
 		description="No existe el menú lateral de 1er nivel <b>#{menu1rstLevel}</b>",
 		level=State.Defect)
 	public boolean checkNotExistsMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, Pais pais) {
-		return (!secMenuLateral.existsMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais));
+		return (!secMenuLateral.existsMenuLateral1rstLevel(TypeLocator.DATA_GA_LABEL_PORTION, menu1rstLevel, pais));
 	}
 
 	public void validaSelecMenu(MenuLateralDesktop menu) throws Exception {
@@ -143,7 +143,7 @@ public class SecMenuLateralMobilSteps extends StepBase {
 		description="Selección del menú <b>" + tagTextMenu + "</b> (data-label contains #{menu1rstLevel.getDataTestIdMenuSuperiorDesktop()})", 
 		expected="El menú se ejecuta correctamente")
 	public void stepClickMenu1rstLevel(Menu1rstLevel menu1rstLevel, Pais pais) throws Exception {
-		secMenuLateral.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais);
+		secMenuLateral.clickMenuLateral1rstLevel(TypeLocator.DATA_GA_LABEL_PORTION, menu1rstLevel, pais);
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagTextMenu, menu1rstLevel.getNombre());
 		new ModalCambioPais().closeModalIfVisible();
 		validaPaginaResultMenu2onLevel(menu1rstLevel);

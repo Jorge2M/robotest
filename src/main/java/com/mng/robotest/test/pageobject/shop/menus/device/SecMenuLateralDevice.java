@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.menus.mobil;
+package com.mng.robotest.test.pageobject.shop.menus.device;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,17 +22,41 @@ import com.mng.robotest.test.utils.checkmenus.DataScreenMenu;
 
 public class SecMenuLateralDevice extends PageBase {
 
-	public enum TypeLocator { dataGaLabelPortion, hrefPortion }
+	public enum TypeLocator { DATA_GA_LABEL_PORTION, HREF_PORTION }
 	
-	private final SecLineasDevice secLineasDevice = SecLineasDevice.make(channel, app, driver);
-	private final SecMenusUserDevice secUserMenu = new SecMenusUserDevice(channel, app);
+	private final SecLineasDevice secLineasDevice = SecLineasDevice.make(app);
+	private final SecMenusUserDevice secUserMenu = new SecMenusUserDevice();
 
-	private static final String XPATH_LINEA_ITEM = "//ul[@class='menu-section-brands']/li[@class[contains(.,'menu-item')]]";
-	private static final String XPATH_CAPA_2ON_LEVEL_MENU = "//div[@class[contains(.,'section-detail-list')]]";
-	private static final String XPATH_LINK_MENU_VISIBLE_FROM_LI = 
+	private static final String XPATH_LINEA_ITEM_OUTLET = "//ul[@class='menu-section-brands']/li[@class[contains(.,'menu-item')]]";
+	private static final String XPATH_LINEA_ITEM_SHOP = "//button[@data-testid[contains(.,'header.menuItem')]]/..";
+	
+	private static final String XPATH_CAPA_2ON_LEVEL_MENU_OUTLET = "//div[@class[contains(.,'section-detail-list')]]";
+	private static final String XPATH_CAPA_2ON_LEVEL_MENU_SHOP = "//div[@id='subMenuPortalContainer']";
+	
+	private static final String XPATH_LINK_MENU_VISIBLE_FROM_LI_OUTLET = 
 		"//ul[@class='section-detail' or @class[contains(.,'dropdown-menu')]]" +
 		"/li[not(@class[contains(.,'mobile-label-hidden')] or @class[contains(.,' label-hidden')] or @class[contains(.,' gap ')])]" +
 		"/a[@class[contains(.,'menu-item-label')] and @href]";
+	private static final String XPATH_LINK_MENU_VISIBLE_FROM_LI_SHOP = "//li/a[@data-testid[contains(.,'header.subMenu')]]";
+
+	private String getXPathLineaItem() {
+		if (app==AppEcom.outlet) {
+			return XPATH_LINEA_ITEM_OUTLET;
+		}
+		return XPATH_LINEA_ITEM_SHOP;
+	}
+	private String getXPathCapa2onLevelMenu() {
+		if (app==AppEcom.outlet) {
+			return XPATH_CAPA_2ON_LEVEL_MENU_OUTLET;
+		}
+		return XPATH_CAPA_2ON_LEVEL_MENU_SHOP;		
+	}
+	private String getXPathLinkMenuVisibleFromLi() {
+		if (app==AppEcom.outlet) {
+			return XPATH_LINK_MENU_VISIBLE_FROM_LI_OUTLET;
+		}
+		return XPATH_LINK_MENU_VISIBLE_FROM_LI_SHOP;		
+	}
 	
 	public SecLineasDevice getSecLineasDevice() {
 		return secLineasDevice;
@@ -44,18 +68,18 @@ public class SecMenuLateralDevice extends PageBase {
 	
 	private String getXPathLinksMenus(SublineaType sublineaType) {
 		if (sublineaType==null) {
-			return XPATH_CAPA_2ON_LEVEL_MENU + XPATH_LINK_MENU_VISIBLE_FROM_LI;
+			return getXPathCapa2onLevelMenu() + getXPathLinkMenuVisibleFromLi();
 		}
 		String divSublineaNinos = secLineasDevice.getXPathSublineaNinosLink(sublineaType); 
-		return divSublineaNinos + "/.." + XPATH_LINK_MENU_VISIBLE_FROM_LI;
+		return divSublineaNinos + "/.." + getXPathLinkMenuVisibleFromLi();
 	}
 
 	private String getXPathMenuByTypeLocator(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel) {
 		String xpath2oLevelMenuLink = getXPathLinksMenus(menu1rstLevel.getSublinea());
 		switch (typeLocator) {
-		case dataGaLabelPortion:
+		case DATA_GA_LABEL_PORTION:
 			return xpath2oLevelMenuLink.replace("@href", "@data-label[contains(.,'" + menu1rstLevel.getDataTestIdMenuSuperiorDesktop().toLowerCase() + "')]");			
-		case hrefPortion:
+		case HREF_PORTION:
 		default:
 			return xpath2oLevelMenuLink.replace("@href", "@href[contains(.,'" + menu1rstLevel.getDataTestIdMenuSuperiorDesktop().toLowerCase() + "')]");
 		}
@@ -120,9 +144,9 @@ public class SecMenuLateralDevice extends PageBase {
 	
 	private boolean isMenuTabletInStateUntil(boolean open, int seconds) {
 		if (open) {
-			return state(Visible, XPATH_LINEA_ITEM).wait(seconds).check();
+			return state(Visible, getXPathLineaItem()).wait(seconds).check();
 		}
-		return state(Invisible, XPATH_LINEA_ITEM).wait(seconds).check();
+		return state(Invisible, getXPathLineaItem()).wait(seconds).check();
 	}
 	
 	private boolean isMenuMobilInStateUntil(boolean open, int seconds) {

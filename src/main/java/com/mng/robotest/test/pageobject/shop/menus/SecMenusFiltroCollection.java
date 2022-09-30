@@ -4,7 +4,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenusFiltroCollectionDesktop;
-import com.mng.robotest.test.pageobject.shop.menus.mobil.SecMenusFiltroCollectionMobil;
+import com.mng.robotest.test.pageobject.shop.menus.device.SecMenusFiltroCollectionMobil;
 
 public interface SecMenusFiltroCollection {
 	
