@@ -27,7 +27,8 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	private static final String XPATH_RADIO_ENVIO = "//input[@data-testid[contains(.,'checkout.delivery.methods')]]";
 	private static final String XPATH_SELECT_FRANJA_HORARIA_METODO_URGENTE = "//select[@data-component-id='time-range-sameday_nextday_franjas']";
 	private static final String XPATH_DIRECCION_ENVIO = "//*[@data-testid[contains(.,'delivery.methods.address')]]";
-	private static final String XPATH_LINK_OTROS_MET_ENVIO_CLOSED = "//button[@data-testid[contains(.,'otherMethods.button')]]";
+	private static final String XPATH_CLOSE_METODOS_ENVIO = "//button[@data-testid[contains(.,'otherMethods.button')]]//span[@class[contains(.,'icon-outline-up')]]";
+	private static final String XPATH_OPEN_METODOS_ENVIO = "//button[@data-testid[contains(.,'otherMethods.button')]]//span[@class[contains(.,'icon-outline-down')]]";
 	private static final String XPATH_BUTTON_EDIT_DIREC_ENVIO = "//button[@data-testid[contains(.,'editAddress.button')]]";
 	private static final String XPATH_BOTON_CONTINUAR = "//button[@id[contains(.,'complete-step1')]]";
 	private static final String XPATH_ERROR_PROMO = "//div[@data-component-id='error-voucherCode']";
@@ -181,6 +182,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 			String xpathLink = getXPathRadioMetodo(tipoTransporte);
 			state(State.Visible, xpathLink).wait(2).check();
 			click(xpathLink).type(javascript).waitLink(2).exec();
+			waitMillis(1000);
 		}
 	}
 	
@@ -197,13 +199,14 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	}
 
 	public void openOtrosMetodosDeEnvio() {
-		if (isClosedOtrosMetodos()) {
-			click(XPATH_LINK_OTROS_MET_ENVIO_CLOSED).type(javascript).exec();
+		if (state(State.Visible, XPATH_OPEN_METODOS_ENVIO).wait(2).check()) {
+			try {
+				click(XPATH_OPEN_METODOS_ENVIO).type(javascript).exec();
+			} catch (Exception e) {
+				click(XPATH_OPEN_METODOS_ENVIO).exec();
+			}
+			state(State.Visible, XPATH_CLOSE_METODOS_ENVIO).wait(2).check();
 		}
-	}
-
-	public boolean isClosedOtrosMetodos() {
-		return state(Visible, XPATH_LINK_OTROS_MET_ENVIO_CLOSED).check();
 	}
 
 	public boolean isBlockSelectedUntil(TipoTransporte tipoTransporte, int seconds)

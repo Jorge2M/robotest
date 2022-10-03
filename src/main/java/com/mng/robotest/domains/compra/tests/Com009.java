@@ -66,12 +66,10 @@ public class Com009 extends TestBase {
     	modalDirecEnvioSteps.inputDataAndSave(directionSecondary);
 
         //Editamos dirección
-        //new CheckoutSteps().clickEditarDirecEnvio();
         modalMultidirectionSteps.clickEditAddress(adressEdit);
         modalDirecEnvioSteps.inputDataAndEdit(directionEdit);
 
         //Eliminamos dirección
-        //new CheckoutSteps().clickEditarDirecEnvio();
         modalMultidirectionSteps.clickEditAddress(addressSecondary);
         modalDirecEnvioSteps.clickEliminarButton();
         modalDirecEnvioSteps.confirmEliminarDirection(addressSecondary);

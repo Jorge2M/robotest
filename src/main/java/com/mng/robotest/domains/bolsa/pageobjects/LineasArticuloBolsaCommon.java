@@ -132,7 +132,7 @@ public abstract class LineasArticuloBolsaCommon extends PageBase {
 			return lineaArticleWeb.findElement(By.xpath(xpathLinRelative));
 		} 
 		catch (Exception e) {
-			waitMillis(1000);
+			waitMillis(2000);
 			return lineaArticleWeb.findElement(By.xpath(xpathLinRelative));
 		}
 	}

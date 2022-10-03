@@ -21,9 +21,10 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 	@Validation
 	public ChecksTM validateIsPage(boolean userLogged) {
 		ChecksTM checks = ChecksTM.getNew();
+		int seconds = 2;
 		checks.add(
-			"Aparece la página correspondiente al paso-1",
-			page1EnvioCheckoutMobil.isPageUntil(1), State.Warn);
+			"Aparece la página correspondiente al paso-1 (la esperamos " + seconds + " segundos)",
+			page1EnvioCheckoutMobil.isPageUntil(seconds), State.Warn);
 		
 		checks.add(
 			"Aparece el botón de introducción del código promocional",
