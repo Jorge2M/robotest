@@ -30,6 +30,8 @@ public class Com009 extends TestBase {
     		dataTest.setPais(pais);
     		dataTest.setIdioma(idioma);
     	}
+    	dataTest.setUserConnected("test.performance22@mango.com"); //TODO eliminar!
+    	dataTest.setPasswordUser("mango457");
         dataTest.setUserRegistered(true);
     }
 
@@ -66,12 +68,10 @@ public class Com009 extends TestBase {
     	modalDirecEnvioSteps.inputDataAndSave(directionSecondary);
 
         //Editamos dirección
-        //new CheckoutSteps().clickEditarDirecEnvio();
         modalMultidirectionSteps.clickEditAddress(adressEdit);
         modalDirecEnvioSteps.inputDataAndEdit(directionEdit);
 
         //Eliminamos dirección
-        //new CheckoutSteps().clickEditarDirecEnvio();
         modalMultidirectionSteps.clickEditAddress(addressSecondary);
         modalDirecEnvioSteps.clickEliminarButton();
         modalDirecEnvioSteps.confirmEliminarDirection(addressSecondary);
