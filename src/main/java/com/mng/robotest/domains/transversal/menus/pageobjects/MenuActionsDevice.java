@@ -6,6 +6,7 @@ public class MenuActionsDevice implements MenuActions {
 	public void click(Menu menu) {
 		
 	}
+	@Override
 	public boolean isVisible(Menu menu) {
 		return true;
 	}
