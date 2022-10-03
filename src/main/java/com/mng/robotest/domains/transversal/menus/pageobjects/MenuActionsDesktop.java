@@ -3,11 +3,11 @@ package com.mng.robotest.domains.transversal.menus.pageobjects;
 public class MenuActionsDesktop implements MenuActions {
 
 	@Override
-	public void click(Menu menu) {
+	public void click() {
 		
 	}
 	@Override
-	public boolean isVisible(Menu menu) {
+	public boolean isVisible() {
 		return true;
 	}
 

@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.TestBase;
+import com.mng.robotest.domains.transversal.menus.pageobjects.Menu;
+import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
 import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;
@@ -42,7 +44,8 @@ public class Gpo004 extends TestBase {
 
 	private void selectGaleryAndFilterByColor() throws Exception {
 		if (app==AppEcom.shop) {
-			clickMenu("camisas");
+			new MenuSteps().click(new Menu.Builder("camisas").build());
+			//clickMenu("camisas");
 		} else {
 			clickMenu("abrigos");
 		}

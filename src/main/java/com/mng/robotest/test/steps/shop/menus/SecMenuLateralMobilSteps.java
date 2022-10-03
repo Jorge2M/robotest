@@ -73,7 +73,7 @@ public class SecMenuLateralMobilSteps extends StepBase {
 			"<b style=\"color:brown;\">#{lineaType.getNameUpper()}</b>",
 		expected="Aparece la página correcta asociada a la línea #{lineaType.getNameUpper()}")
 	public void seleccionLinea(LineaType lineaType, Pais pais) throws Exception {
-		secMenuLateral.getSecLineasDevice().selectLinea(pais.getShoponline().getLinea(lineaType)); 
+		secMenuLateral.getSecLineasDevice().selectLinea(lineaType); 
 		validaSelecLinea(pais, lineaType, null);
 	}	
 	
@@ -85,7 +85,7 @@ public class SecMenuLateralMobilSteps extends StepBase {
 	public void seleccionSublineaNinos(LineaType lineaType, SublineaType sublineaType, Pais pais) throws Exception {
 		secMenuLateral
 			.getSecLineasDevice()
-			.selecSublineaNinosIfNotSelected(pais.getShoponline().getLinea(lineaType), sublineaType);
+			.selecSublineaNinosIfNotSelected(lineaType, sublineaType);
 		validaSelecLinea(pais, lineaType, sublineaType);
 	}
 	

@@ -90,7 +90,7 @@ public class SecMenusWrap extends PageBase {
 	
 	public void selecLinea(Pais pais, LineaType lineaType) {
 		if (channel.isDevice()) {
-			secMenuLateralDevice.getSecLineasDevice().selectLinea(pais.getShoponline().getLinea(lineaType));
+			secMenuLateralDevice.getSecLineasDevice().selectLinea(lineaType);
 		} else {
 			secMenusDesktop.secMenuSuperior.secLineas.selecLinea(pais, lineaType);
 		}
@@ -98,7 +98,7 @@ public class SecMenusWrap extends PageBase {
 	
 	public void selecSublinea(Pais pais, LineaType lineaType, SublineaType sublineaType) throws Exception {
 		if (channel.isDevice()) {
-			secMenuLateralDevice.getSecLineasDevice().selectLinea(pais.getShoponline().getLinea(lineaType), sublineaType);
+			secMenuLateralDevice.getSecLineasDevice().selectLinea(lineaType, sublineaType);
 		} else {
 			secMenusDesktop.secMenuSuperior.secLineas.selectSublinea(lineaType, sublineaType);
 		}

@@ -3,23 +3,27 @@ package com.mng.robotest.domains.transversal.menus.pageobjects;
 import java.util.List;
 
 import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.transversal.menus.pageobjects.Group.GroupType;
 import com.mng.robotest.test.beans.Linea.LineaType;
+import com.mng.robotest.test.beans.Sublinea.SublineaType;
 
 public class Menu extends PageBase {
 
-	public enum GroupType { PRENDAS, ACCESORIOS, INTIMISSIMI, RITUALS, COLECCIONES, DESTACADOS }
-	
 	private final LineaType linea;
+	private final SublineaType sublinea;
 	private final GroupType group;
 	private final String menu;
 	private final String subMenu;
 	private List<String> subMenus;
 	private List<String> articles;
 	
-	private final MenuActions menuActions = MenuActions.make(channel);
+	private final MenuActions menuActions = MenuActions.make(this, channel);
 	
-	private Menu(LineaType linea, GroupType group, String menu, String subMenu, List<String> subMenus, List<String> articles) {
+	private Menu(
+			LineaType linea, SublineaType sublinea, GroupType group, String menu, 
+			String subMenu, List<String> subMenus, List<String> articles) {
 		this.linea = linea;
+		this.sublinea = sublinea;
 		this.group = group;
 		this.menu = menu;
 		this.subMenu = subMenu;
@@ -28,14 +32,18 @@ public class Menu extends PageBase {
 	}
 	
 	public void click() {
-		menuActions.click(this);
+		menuActions.click();
 	}
 	public boolean isVisible() {
-		return menuActions.isVisible(this);
+		return menuActions.isVisible();
 	}
 	
 	public LineaType getLinea() {
 		return linea;
+	}
+	
+	public SublineaType getSublinea() {
+		return sublinea;
 	}
 
 	public GroupType getGroup() {
@@ -64,6 +72,7 @@ public class Menu extends PageBase {
 	
 	public static class Builder {
 		private LineaType linea;
+		private SublineaType sublinea;
 		private GroupType group;
 		private final String menu;
 		private String subMenu;
@@ -78,11 +87,15 @@ public class Menu extends PageBase {
 		
 		public Menu build() {
 			return (
-				new Menu(linea, group, menu, subMenu, subMenus, articles));
+				new Menu(linea, sublinea, group, menu, subMenu, subMenus, articles));
 		}
 		
 		public Builder linea(LineaType linea) {
 			this.linea = linea;
+			return this;
+		}
+		public Builder sublinea(SublineaType sublinea) {
+			this.sublinea = sublinea;
 			return this;
 		}
 		public Builder group(GroupType group) {

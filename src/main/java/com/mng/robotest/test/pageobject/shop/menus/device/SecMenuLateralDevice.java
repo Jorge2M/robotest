@@ -91,7 +91,7 @@ public class SecMenuLateralDevice extends PageBase {
 	}
 
 	public List<WebElement> getListMenusAfterSelectLinea(Linea linea, SublineaType sublineaType) throws Exception {
-		secLineasDevice.selectLinea(linea, sublineaType);
+		secLineasDevice.selectLinea(linea.getType(), sublineaType);
 		return (getListMenusDisplayed(sublineaType));
 	}
 
@@ -172,7 +172,7 @@ public class SecMenuLateralDevice extends PageBase {
 	 */
 	public void clickMenuLateral1rstLevel(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel, Pais pais) {
 		Linea linea = pais.getShoponline().getLinea(menu1rstLevel.getLinea());
-		secLineasDevice.selectLinea(linea, menu1rstLevel.getSublinea());
+		secLineasDevice.selectLinea(linea.getType(), menu1rstLevel.getSublinea());
 		if (app==AppEcom.shop || app==AppEcom.votf) {
 			unfoldMenuGroup(typeLocator, menu1rstLevel);
 			SeleniumUtils.waitMillis(500);
@@ -222,7 +222,7 @@ public class SecMenuLateralDevice extends PageBase {
 	
 	public boolean existsMenuLateral1rstLevel(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel, Pais pais) {
 		Linea linea = pais.getShoponline().getLinea(menu1rstLevel.getLinea());
-		secLineasDevice.selectLinea(linea, menu1rstLevel.getSublinea());
+		secLineasDevice.selectLinea(linea.getType(), menu1rstLevel.getSublinea());
 		String xpathMenu = getXPathMenuByTypeLocator(typeLocator, menu1rstLevel);
 		return state(Visible, xpathMenu).check();
 	}

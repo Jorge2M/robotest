@@ -74,29 +74,30 @@ public class SecLineasDeviceShop extends PageBase implements SecLineasDevice {
 	}
 	
 	@Override
-	public void selectLinea(Linea linea, SublineaType sublineaType) {
+	public void selectLinea(LineaType lineaType, SublineaType sublineaType) {
 		if (sublineaType==null) {
-			selectLinea(linea);
+			selectLinea(lineaType);
 		} else {
-			selecSublineaNinosIfNotSelected(linea, sublineaType);
+			selecSublineaNinosIfNotSelected(lineaType, sublineaType);
 		}
 	}
 	
 	@Override
-	public void selecSublineaNinosIfNotSelected(Linea linea, SublineaType sublineaType) {
-		selectLinea(linea);
+	public void selecSublineaNinosIfNotSelected(LineaType lineaType, SublineaType sublineaType) {
+		selectLinea(lineaType);
 		if (!isSelectedSublineaNinos(sublineaType)) {
 			click(getXPathSublineaNinosLink(sublineaType)).type(javascript).exec();
 		}
 	}
 
 	@Override
-	public void selectLinea(Linea linea) {
+	public void selectLinea(LineaType lineaType) {
 		boolean toOpenMenus = true;
 		SecCabecera secCabecera = SecCabecera.getNew(channel, app);
 		secCabecera.clickIconoMenuHamburguerMobil(toOpenMenus);
+		Linea linea = Linea.getLinea(lineaType, dataTest.getPais());
 		if ("n".compareTo(linea.getExtended())==0) {
-			click(getXPathLineaLink(linea.getType())).type(javascript).exec();
+			click(getXPathLineaLink(lineaType)).type(javascript).exec();
 		}
  	}
 	

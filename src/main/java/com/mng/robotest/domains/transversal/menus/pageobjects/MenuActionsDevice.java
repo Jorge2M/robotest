@@ -1,14 +1,33 @@
 package com.mng.robotest.domains.transversal.menus.pageobjects;
 
-public class MenuActionsDevice implements MenuActions {
+import com.mng.robotest.domains.transversal.PageBase;
 
-	@Override
-	public void click(Menu menu) {
-		
+public class MenuActionsDevice extends PageBase implements MenuActions {
+
+	
+	private final Menu menu;
+	
+	public MenuActionsDevice(Menu menu) {
+		this.menu = menu;
 	}
+	
 	@Override
-	public boolean isVisible(Menu menu) {
+	public void click() {
+		clickGroup();
+		clickMenu();
+	}
+	
+	@Override
+	public boolean isVisible() {
 		return true;
 	}
 
+	private void clickGroup() {
+		Group group = new Group(menu.getLinea(), menu.getSublinea(), menu.getGroup());
+		group.click();
+	}
+	
+	private void clickMenu() {
+		
+	}
 }

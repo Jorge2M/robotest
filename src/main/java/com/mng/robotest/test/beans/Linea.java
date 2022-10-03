@@ -207,7 +207,11 @@ public class Linea implements Serializable {
 	public void setPanoramicas(String panoramicas) {
 		this.panoramicas = panoramicas;
 	}		
-		
+
+	public static Linea getLinea(LineaType lineaType, Pais pais) {
+		return pais.getShoponline().getLinea(lineaType);
+	}
+	
 	public LineaType getType() {
 		return (LineaType.valueOf(getId()));
 	}

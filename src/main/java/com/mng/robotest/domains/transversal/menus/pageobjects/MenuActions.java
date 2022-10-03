@@ -4,12 +4,12 @@ import com.github.jorge2m.testmaker.conf.Channel;
 
 public interface MenuActions {
 
-	public void click(Menu menu);
-	public boolean isVisible(Menu menu);
+	public void click();
+	public boolean isVisible();
 	
-	public static MenuActions make(Channel channel) {
+	public static MenuActions make(Menu menu, Channel channel) {
 		if (channel.isDevice()) {
-			return new MenuActionsDevice();
+			return new MenuActionsDevice(menu);
 		}
 		return new MenuActionsDesktop();
 	}
