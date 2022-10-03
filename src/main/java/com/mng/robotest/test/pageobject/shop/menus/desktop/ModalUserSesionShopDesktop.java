@@ -11,7 +11,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class ModalUserSesionShopDesktop extends PageBase { 
 	
 	private static final String XPATH_WRAPPER_USER_MENU = 
-			"//div[@data-testid[contains(.,'header.userMenu.login')] or " + 
+			"//*[@data-testid[contains(.,'header.userMenu.login')] or " + 
 			"@class[contains(.,'user-icon-button')]]";
 	
 	private static final String XPATH_CAPA_MENUS = XPATH_WRAPPER_USER_MENU + "/div[@role='button']";
