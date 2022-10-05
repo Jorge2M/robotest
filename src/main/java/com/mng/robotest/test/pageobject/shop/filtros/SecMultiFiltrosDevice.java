@@ -8,8 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.conf.Channel;
-
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 import com.mng.robotest.domains.transversal.PageBase;
@@ -20,23 +18,11 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	
-	private static final String XPATH_FILTRAR_Y_ORDENAR_BUTTON = "//button[@class[contains(.,'-filters-btn')]]";
+	private static final String XPATH_FILTRAR_Y_ORDENAR_BUTTON = "//button[@data-testid[contains(.,'filter-sort')]]";
 	private static final String XPATH_BUTTON_APLICAR_FILTROS = "//button[@class[contains(.,'filters-apply')]]";
+	private static final String XPATH_BUTTON_CLOSE = "//div[@class='orders-filters-close' and @role='button']";
 	
-	PageGaleria pageGaleria = null;
-	
-	private SecMultiFiltrosDevice(PageGaleria pageGaleria) {
-		this.pageGaleria = pageGaleria;
-	}
-	
-	public static SecMultiFiltrosDevice getInstance() {
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.mobile);
-		return (new SecMultiFiltrosDevice(pageGaleria));
-	}
-	
-	public static SecMultiFiltrosDevice getInstance(PageGaleria pageGaleria) {
-		return (new SecMultiFiltrosDevice(pageGaleria));
-	}
+	private final PageGaleria pageGaleria = PageGaleria.getNew(channel);
 	
 	@Override
 	public void selectOrdenacion(FilterOrdenacion ordenacion) throws Exception {
@@ -83,6 +69,10 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	public void selectMenu2onLevel(List<String> listMenus) {
 		selectFiltrosAndWaitLoad(FiltroMobil.Familia, listMenus);
 	}
+	@Override
+	public void selectMenu2onLevel(String menuLabel) {
+		selectFiltrosAndWaitLoad(FiltroMobil.Familia, Arrays.asList(menuLabel));
+	}
 	
 	/**
 	 * Selecciona un determinado filtro de la galería de móvil
@@ -93,6 +83,22 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 		selectFiltrosAndWaitLoad(typeFiltro, listTextFiltros);
 	}
 	
+	public boolean isAvailableFiltros(FiltroMobil typeFiltro, List<String> listTextFiltros) {
+		goAndClickFiltroButton();
+		WebElement filtroLinea = getElement(typeFiltro.getXPathLineaFiltro());
+		filtroLinea.click();
+		waitLoadPage();
+		for (String textFiltro : listTextFiltros) {
+			String xpathFiltroOption = getXPathFiltroOption(typeFiltro, textFiltro);
+			if (!state(Visible, xpathFiltroOption).check()) {
+				close();
+				return false;
+			}
+		}
+		close();
+		return true;
+	}
+	
 	private void selectFiltrosAndWaitLoad(FiltroMobil typeFiltro, List<String> listTextFiltros) {
 		goAndClickFiltroButton();
 		for (String textFiltro : listTextFiltros) {
@@ -101,7 +107,7 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 		clickApplicarFiltrosButton();
 		pageGaleria.isVisibleArticuloUntil(1, 2);
 	}
-	
+
 	private void clickFiltroOption(FiltroMobil typeFiltro, String textFiltro) {
 		WebElement filtroLinea = getElement(typeFiltro.getXPathLineaFiltro());
 		filtroLinea.click();
@@ -156,6 +162,20 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	private boolean isOpenFiltrosUntil(int seconds) {
 		String xpathLineaOrdenar = FiltroMobil.Ordenar.getXPathLineaFiltro();
 		return state(Visible, xpathLineaOrdenar).wait(seconds).check();
+	}
+	private boolean isCloseFiltrosUntil(int seconds) {
+		for (int i=0; i<seconds; i++) {
+			if (!isOpenFiltrosUntil(0)) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
+	}
+	
+	private void close() {
+		click(XPATH_BUTTON_CLOSE).exec();
+		isCloseFiltrosUntil(1);
 	}
 	
 	private String upperCaseFirst(String val) {

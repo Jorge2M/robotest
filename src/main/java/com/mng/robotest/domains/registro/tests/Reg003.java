@@ -18,7 +18,7 @@ import com.mng.robotest.domains.registro.steps.PageRegistroSegundaStepsOutlet;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.beans.Linea.LineaType;
+import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.test.data.DataMango;
 import com.mng.robotest.test.data.Constantes.ThreeState;
 import com.mng.robotest.test.steps.shop.SecCabeceraSteps;

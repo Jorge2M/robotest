@@ -9,7 +9,7 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.votfconsole.steps.ConsolaVotfSteps;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.beans.Linea.LineaType;
+import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.Menu;

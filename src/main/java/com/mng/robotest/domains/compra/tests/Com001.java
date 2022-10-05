@@ -7,7 +7,6 @@ import java.util.Optional;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.getdata.products.GetterProducts;
@@ -20,6 +19,7 @@ import com.mng.robotest.test.utils.UtilsTest;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
+import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
 
 public class Com001 extends TestBase {
 
@@ -93,7 +93,7 @@ public class Com001 extends TestBase {
 		}
 		
 		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
-			.linea(LineaType.home)
+			.linea(home)
 			.menusCandidates(Arrays.asList(
 					Menu.Albornoces, 
 					Menu.Toallas, 
@@ -110,7 +110,7 @@ public class Com001 extends TestBase {
 		}
 		
 		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
-			.linea(LineaType.she)
+			.linea(she)
 			.menusCandidates(Arrays.asList(
 					Menu.Sujetadores, 
 					Menu.Braguitas, 

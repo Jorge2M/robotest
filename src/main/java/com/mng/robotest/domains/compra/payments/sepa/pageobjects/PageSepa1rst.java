@@ -33,8 +33,7 @@ public class PageSepa1rst extends PageBase {
 	}
 
 	public void clickIconoSepa(Channel channel) {
-		String xpathPago = getXPathIconoSepa(channel);
-		click(xpathPago).exec();
+		click(getXPathIconoSepa(channel)).exec();
 	}
 
 	public boolean isPresentCabeceraStep() {

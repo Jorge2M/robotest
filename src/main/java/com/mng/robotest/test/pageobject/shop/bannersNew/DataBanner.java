@@ -6,7 +6,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.test.beans.Linea.LineaType;
+import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 
 public class DataBanner {
 

@@ -80,5 +80,9 @@ public class SecFiltrosTabletOutlet extends PageBase implements SecFiltros {
 		//selectFiltrosAndWaitLoad(FiltroMobil.Familia, Arrays.asList(nameMenu));
 		//TODO
 	}
+	@Override
+	public void selectMenu2onLevel(String menuLabel) {
+		//TODO
+	}	
 
 }

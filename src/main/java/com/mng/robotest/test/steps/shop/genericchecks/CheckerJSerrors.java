@@ -25,19 +25,31 @@ public class CheckerJSerrors implements Checker {
 			ResultadoErrores resultadoLogs = WebUtils.getLogErrors(Level.WARNING, driver, maxErrors);
 			String descripValidac = "No hay errores JavaScript";
 			boolean resultadoOK = resultadoLogs.getResultado() == ResultadoErrores.Resultado.OK;
-			if (!resultadoOK) { 
-				descripValidac += resultadoLogs.getlistaLogError().toString();
-			}
 			
 			//Sólo mostraremos warning en caso que alguno no se haya mostrado ya un máximo de veces durante el test
 			checks.add(
 				Check.make(
 				    descripValidac,
 				    resultadoOK || (resultadoLogs.getResultado()==ResultadoErrores.Resultado.MAX_ERRORES), GenericCheck.JSerrors.getLevel())
-				.store(StoreType.None).build());
+				.info(getInfoError(resultadoLogs))
+				.store(StoreType.None)
+				.build());
 		}
 		
 		return checks;
+	}
+	
+	private String getInfoError(ResultadoErrores resultadoLogs) {
+		boolean resultadoOK = resultadoLogs.getResultado() == ResultadoErrores.Resultado.OK;
+		if (!resultadoOK && resultadoLogs.getResultado()!=ResultadoErrores.Resultado.MAX_ERRORES) {
+			String info = "<ul>";
+			for (String error : resultadoLogs.getlistaLogError()) {
+				info+="<li>" +  error + "</li>";
+			}
+			info+="</ul>";
+			return info.replace("<br>", "");
+		}
+		return "";
 	}
 	
 }

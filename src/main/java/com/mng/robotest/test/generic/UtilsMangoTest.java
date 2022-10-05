@@ -20,7 +20,6 @@ import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.DataMango;
 import com.mng.robotest.test.exceptions.NotFoundException;
@@ -33,7 +32,6 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class UtilsMangoTest extends PageBase {
 
@@ -159,27 +157,7 @@ public class UtilsMangoTest extends PageBase {
 		if (!linea.isActiveIn(channel)) {
 			return false;
 		}
-		
-		//En caso de tratarse de la línea de rebajas miramos si se ha de probar
-		if (linea.getType().compareTo(LineaType.rebajas)==0) {
-			return validarLineaRebajas(pais);
-		}
-
-		//Indicador de si la línea es la única principal del país
-//		boolean solo1Linea = pais.getShoponline().isLineaTienda(linea) && pais.getShoponline().getNumLineasTiendas(app) == 1;
-//		return !solo1Linea;
 		return true;
-	}
-	
-	public static boolean validarLineaRebajas(Pais pais) throws Exception {
-//		boolean validarPestRebajas = false;
-//		if (validarPestRebajas) {
-//			//Obtenemos el indicador de si las rebajas están activas para ese país concreto
-//			RebajasPaisDAO rebajasDAO = new RebajasPaisDAO();
-//			return rebajasDAO.isRebajasEnabledPais(pais.getCodigo_pais());
-//		}
-		
-		return false;
 	}
 	
 	public static String getEmailForCheckout(Pais pais, boolean emailThatExists) {

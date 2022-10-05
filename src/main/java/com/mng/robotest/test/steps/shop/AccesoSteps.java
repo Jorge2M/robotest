@@ -23,9 +23,7 @@ import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
-import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
-import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test.steps.navigations.shop.AccesoNavigations;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
@@ -86,12 +84,12 @@ public class AccesoSteps extends StepBase {
 	private ChecksTM checkLinksAfterLogin() throws Exception {
 		ChecksTM checks = ChecksTM.getNew();
 		int seconds = 5;
-		MenusUserWrapper userMenus = new SecMenusWrap().getMenusUser();
+		MenusUserWrapper userMenus = new MenusUserWrapper();
 		checks.add(
 			"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + seconds + " segundos)",
-			userMenus.isMenuInStateUntil(UserMenu.miCuenta, Present, seconds), State.Defect);
+			userMenus.isMenuInStateUntil(UserMenu.MI_CUENTA, Present, seconds), State.Defect);
 		
-		boolean isVisibleMenuFav = userMenus.isMenuInStateUntil(UserMenu.favoritos, Present, 0);
+		boolean isVisibleMenuFav = userMenus.isMenuInStateUntil(UserMenu.FAVORITOS, Present, 0);
 		if (app==AppEcom.outlet) { 
 			checks.add(
 				"NO aparece el link \"Favoritos\"",
@@ -103,7 +101,7 @@ public class AccesoSteps extends StepBase {
 		}
 		
 		if (channel!=Channel.desktop) {
-			boolean isPresentLinkMisCompras = userMenus.isMenuInState(UserMenu.misCompras, Present);
+			boolean isPresentLinkMisCompras = userMenus.isMenuInState(UserMenu.MIS_COMPRAS, Present);
 			checks.add(
 				"Aparece el link \"Mis Compras\"",
 				isPresentLinkMisCompras, State.Defect);
@@ -112,18 +110,12 @@ public class AccesoSteps extends StepBase {
 		if (channel!=Channel.desktop) {
 			checks.add(
 				"Aparece el link \"Ayuda\"",
-				userMenus.isMenuInState(UserMenu.ayuda, Visible), State.Defect);
+				userMenus.isMenuInState(UserMenu.AYUDA, Visible), State.Defect);
 			checks.add(
 				"Aparece el link \"Cerrar sesión\"",
-				userMenus.isMenuInState(UserMenu.cerrarSesion, Present), State.Defect);
+				userMenus.isMenuInState(UserMenu.CERRAR_SESION, Present), State.Defect);
 		}
 		
-		if (channel==Channel.desktop) {
-			checks.add(
-				"Aparece una página con menús de MANGO",
-				new SecMenusDesktop().secMenuSuperior.secLineas.isPresentLineasMenuWrapp(), State.Warn);
-		}
-
 		return checks;
 	}
 
@@ -145,8 +137,7 @@ public class AccesoSteps extends StepBase {
 	}
 
 	public void identificacionEnMango() throws Exception {
-		MenusUserWrapper userMenus = new SecMenusWrap().getMenusUser();
-		if (!userMenus.isMenuInState(UserMenu.cerrarSesion, Present)) {
+		if (!new MenusUserWrapper().isMenuInState(UserMenu.CERRAR_SESION, Present)) {
 			iniciarSesion();
 		}
 	}

@@ -24,7 +24,6 @@ public class PageSofort1rst extends PageBase {
 	}
 
 	public void clickGoToSofort() {
-		String xpPathClickFollowing = getXPathClickToFollow(channel);
-		click(xpPathClickFollowing).exec();
+		click(getXPathClickToFollow(channel)).exec();
 	}
 }

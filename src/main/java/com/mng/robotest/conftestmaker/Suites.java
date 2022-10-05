@@ -10,7 +10,6 @@ public enum Suites implements SuiteTest {
 	Campanas(10),
 	MenusPais(10), 
 	MenusManto(50),
-	Nodos(80), //In this case the @Factory is very Slow because opens a Browser and iterates until 100 times searching new nodes  
 	ConsolaVotf(10), 
 	ListFavoritos(10),
 	CheckoutMultiAddress(10),

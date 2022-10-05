@@ -16,12 +16,11 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.test.beans.Linea.LineaType;
+import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticleDesktop;
-import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test.pageobject.utils.DataArticleGalery;
 import com.mng.robotest.test.pageobject.utils.DataScroll;
 import com.mng.robotest.test.pageobject.utils.ListDataArticleGalery;
@@ -79,7 +78,6 @@ public abstract class PageGaleria extends PageBase {
 	public abstract ArticuloScreen selectTallaAvailableArticle(int posArticulo, int posTalla) throws Exception;
 	public abstract StateFavorito getStateHearthIcon(WebElement hearthIcon);
 	public abstract void clickHearthIcon(WebElement hearthIcon) throws Exception;
-	public abstract void hideMenus();
 
 	public static final List<LabelArticle> listLabelsNew = Arrays.asList(
 			LabelArticle.ComingSoon,
@@ -170,7 +168,7 @@ public abstract class PageGaleria extends PageBase {
 			"(@class[contains(.,'productList__name')] or " +
 					"@class[contains(.,'product-list-name')] or " +
 					"@class='product-list-info-name' or " +
-					"@class='product-name')";
+					"@class[contains(.,'product-name')])";
 
 	public String getXPathCabeceraBusquedaProd() {
 		return ("//*[@id='buscador_cabecera2']");
@@ -653,13 +651,6 @@ public abstract class PageGaleria extends PageBase {
 	public String openArticuloPestanyaAndGo(WebElement article, AppEcom app)
 			throws Exception {
 		String galeryWindowHandle = driver.getWindowHandle();
-		if (channel==Channel.desktop) {
-			//En el caso de Firefox-Geckodriver el moveToElement (que se acaba realizando mediante el workarround basado en JavaScript)
-			//nos posiciona en la esquina superior izquierda que queda debajo del menú superior... así que tenemos que enviar dicho menú al fondo
-			SecMenusDesktop secMenus = new SecMenusDesktop();
-			secMenus.secMenuSuperior.secLineas.bringMenuBackground();
-		}
-
 		new UtilsMangoTest().openLinkInNewTab(article);
 
 		//Cambiamos el foco de driver a la nueva pestaña que hemos creado y esperamos hasta que está disponible

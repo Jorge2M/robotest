@@ -16,7 +16,6 @@ public class PagePaytrailResultadoOk extends PageBase {
 	}
 
 	public void clickVolverAMangoButton() {
-		String xpathButton = getXPathVolverAMangoButton();
-		click(xpathButton).exec();
+		click(getXPathVolverAMangoButton()).exec();
 	}
 }

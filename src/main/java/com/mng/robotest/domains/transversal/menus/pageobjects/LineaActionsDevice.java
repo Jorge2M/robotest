@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.menus.device;
+package com.mng.robotest.domains.transversal.menus.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
@@ -7,13 +7,17 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClic
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
 import com.mng.robotest.test.beans.Linea;
-import com.mng.robotest.test.beans.Linea.LineaType;
-import com.mng.robotest.test.beans.Sublinea.SublineaType;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 
-public class SecLineasDeviceShop extends PageBase implements SecLineasDevice {
+public class LineaActionsDevice extends PageBase implements LineaActions {
 
+	private final LineaWeb lineaWeb;
+	private final LineaType lineaType;
+	private final SublineaType sublineaType;
+	
 	private static final String XPATH_LINK_LINEA_MUJER = "//*[@data-testid='header.menuItem.she']";
 	private static final String XPATH_LINK_LINEA_HOMBRE = "//*[@data-testid='header.menuItem.he']";
 	private static final String XPATH_LINK_LINEA_NINA = "//*[@data-testid='header.menuItem.kids']";
@@ -30,8 +34,13 @@ public class SecLineasDeviceShop extends PageBase implements SecLineasDevice {
 	private static final String XPATH_LINK_SUBLINEA_BEBE_NINO = "//*[@data-testid[contains(.,'header.tabButton.sections_babyNino')]]";
 	private static final String XPATH_LINK_SUBLINEA_TEEN_NINO = "//*[@data-testid[contains(.,'header.tabButton.sections_teenP')]]";
 	
-	@Override
-	public String getXPathLineaLink(LineaType lineaType) throws IllegalArgumentException {
+	public LineaActionsDevice(LineaWeb lineaWeb) {
+		this.lineaWeb = lineaWeb;
+		this.lineaType = lineaWeb.getLinea();
+		this.sublineaType = lineaWeb.getSublinea();
+	}
+	
+	private String getXPathLineaLink() throws IllegalArgumentException {
 		switch (lineaType) {
 		case she: 
 			return XPATH_LINK_LINEA_MUJER;
@@ -54,8 +63,7 @@ public class SecLineasDeviceShop extends PageBase implements SecLineasDevice {
 		}
 	}	
 	
-	@Override
-	public String getXPathSublineaNinosLink(SublineaType sublineaType) {
+	private String getXPathSublineaLink() {
 		switch (sublineaType) {
 		case nina_nina:
 			return XPATH_LINK_SUBLINEA_NINA;
@@ -74,41 +82,35 @@ public class SecLineasDeviceShop extends PageBase implements SecLineasDevice {
 	}
 	
 	@Override
-	public void selectLinea(LineaType lineaType, SublineaType sublineaType) {
-		if (sublineaType==null) {
-			selectLinea(lineaType);
-		} else {
-			selecSublineaNinosIfNotSelected(lineaType, sublineaType);
-		}
-	}
-	
-	@Override
-	public void selecSublineaNinosIfNotSelected(LineaType lineaType, SublineaType sublineaType) {
-		selectLinea(lineaType);
-		if (!isSelectedSublineaNinos(sublineaType)) {
-			click(getXPathSublineaNinosLink(sublineaType)).type(javascript).exec();
-		}
-	}
-
-	@Override
-	public void selectLinea(LineaType lineaType) {
+	public void clickLinea() {
 		boolean toOpenMenus = true;
 		SecCabecera secCabecera = SecCabecera.getNew(channel, app);
 		secCabecera.clickIconoMenuHamburguerMobil(toOpenMenus);
 		Linea linea = Linea.getLinea(lineaType, dataTest.getPais());
 		if ("n".compareTo(linea.getExtended())==0) {
-			click(getXPathLineaLink(lineaType)).type(javascript).exec();
+			click(getXPathLineaLink()).type(javascript).exec();
 		}
  	}
 	
 	@Override
-	public boolean isLineaPresent(LineaType lineaType) {
-		return state(Present, getXPathLineaLink(lineaType)).check();
+	public void clickSublinea() {
+		if (!isSublineaSelected(0)) {
+			click(getXPathSublineaLink()).type(javascript).exec();
+		}
 	}
 	
 	@Override
-	public boolean isSelectedLinea(LineaType lineaType) {
-		String xpathLineaWithFlagSelected = getXPathLineaLink(lineaType);
+	public boolean isLineaSelected(int seconds) {
+		for (int i=0; i<seconds; i++) {
+			if (isLineaSelected()) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
+	}
+	public boolean isLineaSelected() {
+		String xpathLineaWithFlagSelected = getXPathLineaLink();
 		if (app==AppEcom.outlet || channel==Channel.tablet) {
 			xpathLineaWithFlagSelected+="/..";
 		}
@@ -117,9 +119,19 @@ public class SecLineasDeviceShop extends PageBase implements SecLineasDevice {
 		}
 		return false;
 	}
-	
-	public boolean isSelectedSublineaNinos(SublineaType sublineaNinosType) {
-		String xpathSublineaWithFlagOpen = getXPathSublineaNinosLink(sublineaNinosType);
+
+	@Override
+	public boolean isSublineaSelected(int seconds) {
+		for (int i=0; i<seconds; i++) {
+			if (isSublineaSelected()) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
+	}
+	public boolean isSublineaSelected() {
+		String xpathSublineaWithFlagOpen = getXPathSublineaLink();
 		if (app==AppEcom.outlet || channel==Channel.tablet) {
 			xpathSublineaWithFlagOpen+="/..";
 		}
@@ -128,32 +140,46 @@ public class SecLineasDeviceShop extends PageBase implements SecLineasDevice {
 			return (classDropdown.contains("open") || classDropdown.contains("-up"));
 		}
 		return false;
-	}
-	
+	}	
+
 	@Override
-	public boolean isVisibleBlockSublineasNinos(LineaType lineaNinosType) {
-		String xpathBlockSublineas = "";
-		switch (lineaNinosType) {
-		case nina: 
-			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaType.nina_nina);
-			break;
-		case teen:
-			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaType.teen_nina);
-			break;
-		default:
-		case nino:
-			xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaType.nino_nino);
-			break;
-		}
-		return state(Visible, xpathBlockSublineas).check();
+	public boolean isLineaPresent(int seconds) {
+		return state(Visible, getXPathLineaLink()).wait(seconds).check();
 	}
-	
-	private String getXPathLiSublineaNinos(SublineaType sublineaType) {
-		return getXPathSublineaNinosLink(sublineaType) + "/..";		
-	}
-	
-	private String getXPathBlockSublineasNinos(SublineaType sublineaType) {
-		return getXPathLiSublineaNinos(sublineaType) + "/..";		
-	}
+	@Override
+	public boolean isSublineaPresent(int seconds) {
+		return state(Visible, getXPathSublineaLink()).wait(seconds).check();
+	}	
+//	
+//	public boolean isLineaPresent() {
+//		return state(Present, getXPathLineaLink()).check();
+//	}
+//	
+
+//	
+//	public boolean isVisibleBlockSublineas(LineaType lineaNinosType) {
+//		String xpathBlockSublineas = "";
+//		switch (lineaNinosType) {
+//		case nina: 
+//			xpathBlockSublineas = getXPathBlockSublineas(SublineaType.nina_nina);
+//			break;
+//		case teen:
+//			xpathBlockSublineas = getXPathBlockSublineas(SublineaType.teen_nina);
+//			break;
+//		default:
+//		case nino:
+//			xpathBlockSublineas = getXPathBlockSublineas(SublineaType.nino_nino);
+//			break;
+//		}
+//		return state(Visible, xpathBlockSublineas).check();
+//	}
+//	
+//	private String getXPathLiSublinea(SublineaType sublineaType) {
+//		return getXPathSublineaNinosLink(sublineaType) + "/..";		
+//	}
+//	
+//	private String getXPathBlockSublineas(SublineaType sublineaType) {
+//		return getXPathLiSublinea(sublineaType) + "/..";		
+//	}
 	
 }

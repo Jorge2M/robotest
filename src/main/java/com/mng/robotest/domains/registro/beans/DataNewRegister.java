@@ -3,7 +3,7 @@ package com.mng.robotest.domains.registro.beans;
 import java.util.List;
 
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroPersonalizacionShop.GenderOption;
-import com.mng.robotest.test.beans.Linea.LineaType;
+import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 
 public class DataNewRegister {
 

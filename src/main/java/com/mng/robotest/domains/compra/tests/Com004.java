@@ -8,7 +8,7 @@ import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.test.beans.Linea.LineaType;
+import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
@@ -17,7 +17,8 @@ import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData.I
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.steps.shop.checqueregalo.PageChequeRegaloInputDataSteps;
-import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
+
+import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
 
 public class Com004 extends TestBase {
 
@@ -51,8 +52,7 @@ public class Com004 extends TestBase {
 	}
 	
 	private void selectFooterLinkChequeRegalo() throws Exception {
-		SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps();
-		secMenusSteps.seleccionLinea(LineaType.she, null);
+		new MenuSteps().clickLinea(she);
 		new SecFooterSteps().clickLinkFooter(FooterLink.CHEQUE_REGALO, false);
 	}	
 	

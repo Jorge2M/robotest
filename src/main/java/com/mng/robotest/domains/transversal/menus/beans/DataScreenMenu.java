@@ -1,9 +1,10 @@
-package com.mng.robotest.test.utils.checkmenus;
+package com.mng.robotest.domains.transversal.menus.beans;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.mng.robotest.test.utils.checkmenus.Label;
 
 public class DataScreenMenu implements Label, Comparable<DataScreenMenu> {
 

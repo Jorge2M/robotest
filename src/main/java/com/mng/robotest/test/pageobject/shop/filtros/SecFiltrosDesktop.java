@@ -102,6 +102,10 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	public void selectMenu2onLevel(List<String> listMenus) {
 		//TODO
 	}
+	@Override
+	public void selectMenu2onLevel(String menuLabel) {
+		//TODO
+	}	
 	
 	public enum Visibility {Visible, Invisible}
 	

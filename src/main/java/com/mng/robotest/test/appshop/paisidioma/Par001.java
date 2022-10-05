@@ -4,22 +4,22 @@ import java.util.List;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.transversal.TestBase;
+import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
+import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Sublinea;
-import com.mng.robotest.test.beans.Linea.LineaType;
+import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb;
+import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.test.beans.Linea.TypeContentDesk;
-import com.mng.robotest.test.beans.Sublinea.SublineaType;
+import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;
-import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test.steps.shop.PagePrehomeSteps;
 import com.mng.robotest.test.steps.shop.banner.SecBannersSteps;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 import com.mng.robotest.test.steps.shop.home.PageHomeMarcasSteps;
-import com.mng.robotest.test.steps.shop.menus.SecMenusDesktopSteps;
-import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 import com.mng.robotest.test.suites.FlagsNaviationLineas;
 import com.mng.robotest.test.utils.LevelPais;
 
@@ -59,26 +59,17 @@ public class Par001 extends TestBase {
 			sublineaType = sublinea.getTypeSublinea();
 		}
 		
-		SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps();
-		secMenusSteps.seleccionLinea(lineaType, sublineaType);
+		clickLinea(lineaType, sublineaType);
 		if (sublinea==null) {
 			testSpecificFeaturesForLinea(linea);
 		}
-			
-		if (flagsNavigation.testOrderAndTranslationMenus()) {
-			secMenusSteps.checkOrderAndTranslationMenus(linea, dataTest.getIdioma().getCodigo());
-		}
-		
+
 		//Validamos si hemos de ejecutar los pasos correspondientes al recorrido de los menús
 		if (testMenus(linea, sublinea)) {
-			secMenusSteps.stepsMenusLinea(lineaType, sublineaType);
-			if (existsRightBannerMenu(linea, sublinea)) {
-				SecMenusDesktopSteps secMenusDesktopSteps = new SecMenusDesktopSteps();
-				secMenusDesktopSteps.clickRightBanner(lineaType, sublineaType);
-			}
+			//- Get all groups
+			new MenuSteps().clickAllMenus(new LineaWeb(lineaType, sublineaType));
 		} else {
-			SecMenusWrap secMenus = new SecMenusWrap();
-			if (secMenus.canClickMenuArticles(dataTest.getPais(), linea, sublinea)) {
+			if (canClickMenuArticles(dataTest.getPais(), linea, sublinea)) {
 				clickMenuDependingLine(lineaType, sublineaType);
 				if (flagsNavigation.testMenus()) {
 					boolean bannerIsLincable = new PageGaleriaDesktop().getSecBannerHead().isLinkable();
@@ -89,6 +80,16 @@ public class Par001 extends TestBase {
 			}
 		}
 	}
+	
+	private boolean canClickMenuArticles(Pais paisI, Linea linea, Sublinea sublinea) {
+		if (paisI.isVentaOnline()) {
+			if (sublinea==null) {
+				return (linea.getMenusart().compareTo("s")==0);
+			}
+			return sublinea.getMenusart().compareTo("s")==0;
+		}
+		return false;
+	}	
 	
 	private void clickMenuDependingLine(LineaType lineaType, SublineaType sublineaType) 
 			throws Exception {
@@ -108,7 +109,10 @@ public class Par001 extends TestBase {
 		default:
 			menu = "pantalones";
 		}
-		clickMenu(lineaType, sublineaType, menu);
+		clickMenu(new MenuWeb
+				.Builder(menu)
+				.linea(lineaType)
+				.sublinea(sublineaType).build());
 	}
 	
 	public void testSpecificFeaturesForLinea(Linea linea) throws Exception {
@@ -141,14 +145,4 @@ public class Par001 extends TestBase {
 		return levelPais.getNumBannersTest(app);
 	}
 	
-	private boolean existsRightBannerMenu(Linea linea, Sublinea sublinea) {
-		if (channel==Channel.desktop) {
-			if (sublinea!=null) {
-				return ("s".compareTo(sublinea.getMenusart())==0); 
-			}
-			return ("s".compareTo(linea.getMenusart())==0); 
-		}
-		return false;
-	}	
-
 }

@@ -76,8 +76,7 @@ public class SecBolsaButtonAndLinksNew extends PageBase {
 	}
 
 	public void clickLinkAndWaitLoad(LinksAfterBolsa linkType) {
-		String xpathLink = getXPathLink(linkType);
-		click(xpathLink).exec();
+		click(getXPathLink(linkType)).exec();
 	}
 	
 	public boolean checkLinkInState(LinksAfterBolsa linkType, State state) {

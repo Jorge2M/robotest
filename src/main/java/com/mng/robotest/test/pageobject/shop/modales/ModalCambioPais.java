@@ -19,7 +19,7 @@ public class ModalCambioPais extends PageBase {
 		return "//div[@class='navOtherCountry']//a[@href[contains(.,'" + hrefPais + "')]]";
 	}
 	
-	public String getXPath_buttonToChangePais(String urlAccesoPais) {
+	public String getXPathButtonToChangePais(String urlAccesoPais) {
 		return (XPATH_MODAL + "//div[@class[contains(.,'modalConfirmacionPais')]]//a[@class[contains(.,'_langBtn')] and @href[contains(.,'" + urlAccesoPais + "')]]");
 	}
 	
@@ -51,23 +51,22 @@ public class ModalCambioPais extends PageBase {
 	}
 	
 	public boolean isButtonToChangePais(String urlAccesoPais) {
-		String xpath = getXPath_buttonToChangePais(urlAccesoPais);
+		String xpath = getXPathButtonToChangePais(urlAccesoPais);
 		return state(Present, xpath).check();
 	}
 	
 	public String getTextPaisButtonChagePais() {
-		String xpath = getXPath_buttonToChangePais("");
+		String xpath = getXPathButtonToChangePais("");
 		return getElement(xpath).getText();
 	}	
 	
 	public String getHRefPaisButtonChagePais() {
-		String xpath = getXPath_buttonToChangePais(""/*urlAccesoPais*/);
+		String xpath = getXPathButtonToChangePais(""/*urlAccesoPais*/);
 		return getElement(xpath).getAttribute("href");
 	}
 	
 	public void clickButtonChangePais() {
-		String xpath = getXPath_buttonToChangePais("");
-		click(xpath).exec();
+		click(getXPathButtonToChangePais("")).exec();
 	}
 	
 	public void closeModalIfVisible() {

@@ -33,7 +33,6 @@ public class PageTrustpayTestConfirm extends PageBase {
 	}
 
 	public void clickButton(typeButtons typeButton) {
-		String xpathButton = getXPathButton(typeButton);
-		click(xpathButton).exec();
+		click(getXPathButton(typeButton)).exec();
 	}
 }

@@ -366,8 +366,7 @@ public class Page1DktopCheckout extends PageBase {
 	}	
 
 	public void clickMetodoPago(String metodoPago) {
-		String xpathClickMetodoPago = getXPathClickMetodoPago(metodoPago);
-		click(xpathClickMetodoPago)
+		click(getXPathClickMetodoPago(metodoPago))
 			.type(TypeClick.webdriver)
 			.waitLink(2)
 			.waitLoadPage(1).exec();

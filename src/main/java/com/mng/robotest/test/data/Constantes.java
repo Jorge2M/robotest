@@ -51,6 +51,4 @@ public class Constantes {
 	public static final String PARAM_LINEAS = "lineas";
 	public static final String PARAM_PAYMENTS = "payments";
 	public static final String PARAM_CATALOGS = "catalogs";
-
-	public static final String PREFIX_REBAJAS = "<b style=\"color:blue\">Rebajas</b></br>";
 }

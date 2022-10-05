@@ -13,7 +13,7 @@ import com.mng.robotest.domains.micuenta.pageobjects.PageSuscripciones;
 import com.mng.robotest.domains.micuenta.pageobjects.PageSuscripciones.NewsLetter;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroPersonalizacionShop;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.beans.Linea.LineaType;
+import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 
 public class PageSuscripcionesSteps extends StepBase {
 

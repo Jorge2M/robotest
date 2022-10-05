@@ -18,7 +18,8 @@ import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraOutlet_Mobil.Ic
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera_MostFrequent.IconoCabeceraShop_DesktopMobile;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop.MenuUserDesktop;
-import com.mng.robotest.test.pageobject.shop.menus.device.SecMenuLateralDevice;
+import com.mng.robotest.test.pageobject.shop.menus.device.SecMenusUserDevice;
+//import com.mng.robotest.test.pageobject.shop.menus.device.SecMenuLateralDevice;
 import com.mng.robotest.test.pageobject.shop.menus.device.SecMenusUserDevice.MenuUserDevice;
 import com.mng.robotest.test.utils.ImporteScreen;
 
@@ -26,14 +27,14 @@ import com.mng.robotest.test.utils.ImporteScreen;
 public class MenusUserWrapper extends PageBase {
 	
 	private final SecCabecera secCabecera = SecCabecera.getNew(channel, app);
-	private final SecMenuLateralDevice secMenuLateralMobil = new SecMenuLateralDevice();
+//	private final SecMenuLateralDevice secMenuLateralMobil = new SecMenuLateralDevice();
 	
 	public boolean isMenuInState(UserMenu menu, State state) throws Exception {
 		return (isMenuInStateUntil(menu, state, 0));
 	}
 	
 	public boolean isMenuInStateUntil(UserMenu menu, State state, int seconds) {
-		if (menu==UserMenu.bolsa) {
+		if (menu==UserMenu.BOLSA) {
 			return (secCabecera.isInStateIconoBolsa(state, seconds));
 		} else {
 			MenuUserItem menuUserItem = new MenuUserItem(menu, channel, app);
@@ -43,7 +44,7 @@ public class MenusUserWrapper extends PageBase {
 	
 	public void clickMenuAndWait(UserMenu menu) {
 		checkAppSupported(app, menu);
-		if (menu==UserMenu.bolsa) {
+		if (menu==UserMenu.BOLSA) {
 			secCabecera.clickIconoBolsa();
 		} else {
 			MenuUserItem menuUserItem = new MenuUserItem(menu, channel, app);
@@ -60,7 +61,7 @@ public class MenusUserWrapper extends PageBase {
 	}
 	
 	public void moveToMenu(UserMenu menu) {
-		if (menu==UserMenu.bolsa) {
+		if (menu==UserMenu.BOLSA) {
 			secCabecera.hoverIconoBolsa();
 		} else {
 			isMenuInStateUntil(menu, State.Visible, 2);
@@ -72,7 +73,7 @@ public class MenusUserWrapper extends PageBase {
 	public void moveAndClick(UserMenu menu) {
 		//TODO eliminar en un futuro. Actualmente existe un TestAB en el icono de 
 		// identificación de usuario que provoca que en ocasiones tarde del orden de 5 segundos en aparecer
-		if (menu==UserMenu.iniciarSesion) {
+		if (menu==UserMenu.INICIAR_SESION) {
 			isMenuInStateUntil(menu, State.Visible, 5);
 		}
 		
@@ -102,7 +103,7 @@ public class MenusUserWrapper extends PageBase {
 			case MenuUserDesktop:
 				return (secCabecera.getShop_DesktopMobile().getModalUserSesionDesktop().isMenuInStateUntil((MenuUserDesktop)menuLink, state, seconds));
 			case MenuUserDevice:
-				return (secMenuLateralMobil.getUserMenu().isMenuInStateUntil((MenuUserDevice)menuLink, state, seconds));
+				return (new SecMenusUserDevice().isMenuInStateUntil((MenuUserDevice)menuLink, state, seconds));
 			case IconoCabOutletMobil:
 				return (secCabecera.getOutletMobil().isElementInStateUntil((IconoCabOutletMobil)menuLink, state, seconds));
 			default:
@@ -121,7 +122,7 @@ public class MenusUserWrapper extends PageBase {
 				secCabecera.getShop_DesktopMobile().getModalUserSesionDesktop().wait1sForItAndclickMenu((MenuUserDesktop)menuLink);
 				break;
 			case MenuUserDevice:
-				secMenuLateralMobil.getUserMenu().clickMenu((MenuUserDevice)menuLink);
+				new SecMenusUserDevice().clickMenu((MenuUserDevice)menuLink);
 				break;
 			case IconoCabOutletMobil:
 				secCabecera.getOutletMobil().click((IconoCabOutletMobil)menuLink);

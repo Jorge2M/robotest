@@ -15,7 +15,6 @@ import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
@@ -127,8 +126,7 @@ public class PageFavoritos extends PageBase {
 	
 	public void clearAllArticulos() {
 		if (!isSectionVisible()) {
-			SecMenusWrap secMenus = new SecMenusWrap();
-			secMenus.getMenusUser().clickMenuAndWait(UserMenu.favoritos);
+			clickUserMenu(UserMenu.FAVORITOS);
 		}
 		int i=0; //Para evitar posibles bucles infinitos
 		while (hayArticulos() && i<50) {

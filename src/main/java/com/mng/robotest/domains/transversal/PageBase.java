@@ -18,6 +18,8 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.DataTest;
+import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
+import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 
 public class PageBase extends PageObjTM {
 
@@ -142,5 +144,9 @@ public class PageBase extends PageObjTM {
     
 	protected void waitLoadPage() {
 		waitForPageLoaded(driver);
+	}
+	
+	protected void clickUserMenu(UserMenu userMenu) {
+		new MenusUserWrapper().clickMenuAndWait(userMenu);
 	}
 }

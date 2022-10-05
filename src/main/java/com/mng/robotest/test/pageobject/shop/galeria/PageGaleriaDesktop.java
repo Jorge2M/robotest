@@ -11,16 +11,13 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.test.beans.Linea.LineaType;
+import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop.Visibility;
-import com.mng.robotest.test.pageobject.shop.menus.desktop.SecLineasMenuDesktop;
-import com.mng.robotest.test.pageobject.shop.menus.desktop.SecLineasMenuDesktopNew;
-import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
@@ -92,11 +89,6 @@ public class PageGaleriaDesktop extends PageGaleria {
 	public boolean isPage() {
 		String xpath = "//div[@class[contains(.,'container-fluid catalog')]]";
 		return state(Present, xpath).check();
-	}
-	
-	@Override
-	public void hideMenus() {
-		new SecMenusDesktop().hideMenus();
 	}
 	
 	private String getXPathLabel(LabelArticle label) {
@@ -599,15 +591,15 @@ public class PageGaleriaDesktop extends PageGaleria {
 	 *	En caso de que todos los artículso tengan un nombre válido: ""
 	 *	En caso de que exista algún artículo no válido: nombre del 1er artículo no válido  
 	 */
-	public List<String> nombreArticuloNoValido(String[] nombrePosibles) throws Exception {
+	public List<String> getArticlesNoValid(List<String> articleNames) {
 		//Obtenemos el xpath de los artículos eliminando el último carácter (]) pues hemos de insertar condiciones en el XPATH
 		String xpathLitArticulos = xpathArticuloBase + "//*[" + classProductName + "]";
 		xpathLitArticulos = xpathLitArticulos.substring(0, xpathLitArticulos.length() - 1);
-		for (int i=0; i<nombrePosibles.length; i++) {
+		for (String article : articleNames) {
 			xpathLitArticulos +=  
-				" and text()[not(contains(.,'" + nombrePosibles[i] + "'))]" +
-				" and text()[not(contains(.,'" + nombrePosibles[i].toLowerCase() + "'))]" +
-				" and text()[not(contains(.,'" + nombrePosibles[i].toUpperCase() + "'))]";
+				" and text()[not(contains(.,'" + article + "'))]" +
+				" and text()[not(contains(.,'" + article.toLowerCase() + "'))]" +
+				" and text()[not(contains(.,'" + article.toUpperCase() + "'))]";
 		} 
 		xpathLitArticulos += "]";
 
@@ -698,15 +690,8 @@ public class PageGaleriaDesktop extends PageGaleria {
 	private void clickHearthIconHiddindPossibleInterceptors(WebElement hearthIcon) throws Exception {
 		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(channel);
 		secFiltros.makeFilters(Visibility.Invisible);
-		
-		SecLineasMenuDesktop secLineasMenuDesktop = new SecLineasMenuDesktopNew();
-		secLineasMenuDesktop.bringMenuBackground();
-		
 		hearthIcon.click();
-		
-		secLineasMenuDesktop.bringMenuFront();
 		secFiltros.makeFilters(Visibility.Visible);
-
 	}
 	
 	@Override

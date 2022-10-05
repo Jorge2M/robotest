@@ -2,9 +2,12 @@ package com.mng.robotest.test.appshop.galeria;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.test.beans.Linea.LineaType;
+import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
+
+import static com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb.*;
+import static com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType.*;
 
 public class Gpo005 extends TestBase {
 
@@ -18,9 +21,9 @@ public class Gpo005 extends TestBase {
 	public void execute() throws Exception {
 		access();
 		if (app==AppEcom.outlet || channel.isDevice()) {
-			clickMenu("cardigans-y-jerseis");
+			clickMenu(CARDIGANS_Y_JERSEIS_SHE);
 		} else {
-			clickMenu("New Now");
+			clickGroup(NEW_NOW);
 			pageGaleriaSteps.secCrossSellingSteps.validaIsCorrect(LineaType.she, null);
 			pageGaleriaSteps.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
 		}
@@ -34,11 +37,11 @@ public class Gpo005 extends TestBase {
 			pageGaleriaSteps.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
 		}	
 		
-		clickMenu("vestidos");
+		clickMenu(VESTIDOS_SHE);
 		if (app==AppEcom.outlet || channel.isDevice()) {
-			clickMenuLateral("cardigans-y-jerseis", "jerséis");
+			clickSubMenu(CARDIGANS_Y_JERSEIS_JERSEIS_SHE);
 		} else {
-			clickMenuLateral("camisas", "básicas");
+			clickSubMenu(CAMISAS_BASICAS_SHE);
 		}		
 	}
 	

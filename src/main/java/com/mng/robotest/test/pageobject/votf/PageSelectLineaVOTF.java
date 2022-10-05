@@ -1,7 +1,7 @@
 package com.mng.robotest.test.pageobject.votf;
 
 import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.test.beans.Linea.LineaType;
+import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -32,8 +32,7 @@ public class PageSelectLineaVOTF extends PageBase {
 	}
 	
 	public void clickBanner(LineaType linea) {
-		String xpathLinkBanner = getXPathLineaLink(linea);
-		click(xpathLinkBanner).exec();
+		click(getXPathLineaLink(linea)).exec();
 	}
 	
 	public void clickMenu(LineaType linea, int numMenu) {

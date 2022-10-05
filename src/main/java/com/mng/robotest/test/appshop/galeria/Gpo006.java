@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mng.robotest.domains.transversal.TestBase;
+import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeSlider;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 
@@ -12,7 +13,7 @@ public class Gpo006 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		access();
-		clickMenu("vestidos");
+		clickMenu(MenuWeb.VESTIDOS_SHE);
 				
 		PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
 		List<TypeSlider> typeSliderList = new ArrayList<>();

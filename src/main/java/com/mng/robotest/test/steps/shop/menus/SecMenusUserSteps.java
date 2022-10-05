@@ -23,21 +23,21 @@ import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
-import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
-import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper.LoyaltyData;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.modales.ModalCambioPaisSteps;
 
+import static com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu.*;
+
 public class SecMenusUserSteps extends StepBase {
 	
-	private final MenusUserWrapper userMenus = new SecMenusWrap().getMenusUser();
+	private final MenusUserWrapper userMenus = new MenusUserWrapper();
 	
 	@Step (
 		description="Seleccionar el menú de usuario \"Favoritos\"", 
 		expected="Aparece la página de gestión de favoritos con los artículos correctos")
 	public void selectFavoritos() throws Exception {
-		userMenus.clickMenuAndWait(UserMenu.favoritos);
+		clickUserMenu(FAVORITOS);
 		PageFavoritosSteps pageFavoritosSteps = new PageFavoritosSteps();
 		pageFavoritosSteps.validaIsPageOK();
 	}
@@ -47,7 +47,7 @@ public class SecMenusUserSteps extends StepBase {
 		expected="Aparece al página inicial del registro",
 		saveHtmlPage=SaveWhen.Always)
 	public void selectRegistrate() throws Exception {
-		userMenus.clickMenuAndWait(UserMenu.registrate);
+		clickUserMenu(REGISTRATE);
 		PageRegistroIniOutlet pageRegistroIni = new PageRegistroIniOutlet();  
 		pageRegistroIni.clickRegisterTab();
 		if (app==AppEcom.outlet || channel==Channel.mobile) {
@@ -64,7 +64,7 @@ public class SecMenusUserSteps extends StepBase {
 		description="Clicar el link de Cerrar Sesión", 
 		expected="Aparece el link de login")
 	public void logoff() throws Exception {
-		userMenus.clickMenuAndWait(UserMenu.cerrarSesion);
+		clickUserMenu(CERRAR_SESION);
 		checkIsVisibleIniciarSesionLink(3);
 	}
 	
@@ -72,7 +72,7 @@ public class SecMenusUserSteps extends StepBase {
 		description="Aparece el link superior de \"Iniciar sesión\" (lo esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
 	private boolean checkIsVisibleIniciarSesionLink(int seconds) throws Exception {
-		return (userMenus.isMenuInStateUntil(UserMenu.iniciarSesion, Present, seconds));
+		return (userMenus.isMenuInStateUntil(INICIAR_SESION, Present, seconds));
 	}
 	
 	public void logoffLogin(String userConnect, String userPassword) throws Exception {
@@ -126,14 +126,14 @@ public class SecMenusUserSteps extends StepBase {
 		if (channel==Channel.desktop) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
-		return (userMenus.isMenuInStateUntil(UserMenu.cerrarSesion, Present, 1));
+		return (userMenus.isMenuInStateUntil(CERRAR_SESION, Present, 1));
 	}
 
 	@Step (
 		description="Seleccionar el link \"Mi cuenta\"", 
 		expected="Aparece la página de \"Mi cuenta\"")
 	public void clickMenuMiCuenta() {
-		userMenus.clickMenuAndWait(UserMenu.miCuenta);	
+		clickUserMenu(MI_CUENTA);
 		new PageMiCuentaSteps().validateIsPage(2);
 		GenericChecks.checkDefault();
 	}
@@ -142,7 +142,7 @@ public class SecMenusUserSteps extends StepBase {
 		description="Se selecciona el menú para el cambio de país", 
 		expected="Aparece el modal para el cambio de país")
 	public void cambioPaisMobil(Pais newPais, IdiomaPais newIdioma) throws Exception {
-		userMenus.clickMenuAndWait(UserMenu.cambioPais);
+		clickUserMenu(CAMBIO_PAIS);
 		ModalCambioPaisSteps modalCambioPaisSteps = new ModalCambioPaisSteps();
 		modalCambioPaisSteps.validateIsVisible(5); 
 		modalCambioPaisSteps.cambioPais(newPais, newIdioma);
@@ -155,7 +155,7 @@ public class SecMenusUserSteps extends StepBase {
 			"<b>info</b>: el usuario tiene " + TagPoints + " puntos", 
 		expected="Aparece la página de \"Mi cuenta\"")
 	public int clickMenuMangoLikesYou() throws Exception {
-		userMenus.clickMenuAndWait(UserMenu.mangoLikesYou);
+		clickUserMenu(MANGO_LIKES_YOU);
 		PageHomeLikesSteps pageHomeLikesSteps = new PageHomeLikesSteps();
 		int numberPoints = pageHomeLikesSteps.checkIsPageOk().getNumberPoints();
 		
@@ -170,7 +170,7 @@ public class SecMenusUserSteps extends StepBase {
 		if (channel==Channel.desktop && app==AppEcom.shop) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
-		boolean visibilityMLY = userMenus.isMenuInStateUntil(UserMenu.mangoLikesYou, Present, 1);
+		boolean visibilityMLY = userMenus.isMenuInStateUntil(MANGO_LIKES_YOU, Present, 1);
 		switch (app) {
 		case shop:
 			checks.add(

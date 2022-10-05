@@ -3,18 +3,17 @@ package com.mng.robotest.domains.identification.pageobjects;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
-
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test.pageobject.shop.menus.SecMenusWrap;
-import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
+import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.modales.ModalActPoliticaPrivacidad;
 import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test.pageobject.shop.modales.ModalLoyaltyAfterLogin;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
+import static com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu.*;
 
 public class PageIdentificacion extends PageBase {
 	
@@ -51,8 +50,7 @@ public class PageIdentificacion extends PageBase {
 	}
 	
 	public void logoff() throws Exception {
-		SecMenusWrap secMenus = new SecMenusWrap();
-		secMenus.closeSessionIfUserLogged();
+		new MenusUserWrapper().clickMenuIfInState(CERRAR_SESION, Clickable);
 	}
 
 	
@@ -87,8 +85,7 @@ public class PageIdentificacion extends PageBase {
 			
 			// Si existe, nos posicionamos y seleccionamos el link \"CERRAR SESIÓN\" 
 			// En el caso de iPhone parece que mantiene la sesión abierta después de un caso de prueba 
-			SecMenusWrap secMenus = new SecMenusWrap();
-			boolean menuClicado = secMenus.getMenusUser().clickMenuIfInState(UserMenu.cerrarSesion, Clickable);
+			boolean menuClicado = new MenusUserWrapper().clickMenuIfInState(CERRAR_SESION, Clickable);
 			
 			//Si hemos clicado el menú 'Cerrar Sesión' volvemos a abrir los menús
 			if (menuClicado) {
@@ -96,7 +93,7 @@ public class PageIdentificacion extends PageBase {
 			}
 		}
 		
-		new SecMenusWrap().getMenusUser().moveAndClick(UserMenu.iniciarSesion);
+		new MenusUserWrapper().moveAndClick(INICIAR_SESION);
 	}
 	
 	public boolean isErrorEmailoPasswordKO() {

@@ -289,7 +289,7 @@ public class SecDataProduct extends PageBase {
 	}
 
 	public void selectColor(String codeColor) {
-		String path = getXPathPastillaColorClick(codeColor);
-		click(path).exec();
+		String xpath = getXPathPastillaColorClick(codeColor);
+		click(xpath).exec();
 	}
 }

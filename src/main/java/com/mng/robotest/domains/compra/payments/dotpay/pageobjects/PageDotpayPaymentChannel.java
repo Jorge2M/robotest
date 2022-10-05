@@ -22,8 +22,7 @@ public class PageDotpayPaymentChannel extends PageBase {
 	}
 
 	public void clickPayment(int numPayment) {
-		String xpathPayment = getXPathPaymentChannelLink(numPayment);
-		click(xpathPayment).exec();
+		click(getXPathPaymentChannelLink(numPayment)).exec();
 	}
 
 	public void sendInputNombre(String firstName, String lastName) {

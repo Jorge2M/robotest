@@ -20,7 +20,7 @@ public class PageMenusManto extends PageBase {
 	private static final String XPATH_CABECERA_MENU = "//table//td[@bgcolor='#505050']/span";
 	private static final String XPATH_LINK_MENU = "//table//a[@onclick]";
 	
-	public String getXpathLinkMenu(String menu) {
+	public String getXPathLinkMenu(String menu) {
 		return "//a[text()[contains(.,'" + menu + "')]]";
 	}
 	
@@ -99,11 +99,11 @@ public class PageMenusManto extends PageBase {
 		if (textoMenu.contains("'")) {
 			int positionDelete = textoMenu.indexOf("'");
 			String textoMenuRecortado = textoMenu.substring(positionDelete+1, textoMenu.length());
-			click(getXpathLinkMenu(textoMenuRecortado))
+			click(getXPathLinkMenu(textoMenuRecortado))
 				.waitLink(60).waitLoadPage(60)
 				.type(TypeClick.javascript).exec();
 		}else {
-			click(getXpathLinkMenu(textoMenu))
+			click(getXPathLinkMenu(textoMenu))
 				.waitLink(60).waitLoadPage(60)
 				.type(TypeClick.javascript).exec();
 		}

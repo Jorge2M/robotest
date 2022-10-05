@@ -30,8 +30,7 @@ public class PageChequeRegaloInputDataOld extends PageChequeRegaloInputData impl
 	
 	@Override
 	public void clickImporteCheque(Importe importeToClick) {
-		String xpath = getXPathRadio(importeToClick);
-		click(xpath).exec();
+		click(getXPathRadio(importeToClick)).exec();
 	}
 	
 	@Override

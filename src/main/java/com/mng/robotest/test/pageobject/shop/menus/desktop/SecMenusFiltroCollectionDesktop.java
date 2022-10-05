@@ -27,7 +27,6 @@ public class SecMenusFiltroCollectionDesktop extends PageBase implements SecMenu
 
 	@Override
 	public void click(FilterCollection typeMenu) {
-		String xpathMenu = getXPathMenu(typeMenu);
-		click(xpathMenu).exec();
+		click(getXPathMenu(typeMenu)).exec();
 	}
 }

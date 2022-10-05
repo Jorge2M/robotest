@@ -9,10 +9,10 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.buscador.pageobjects.SecSearch;
 import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.transversal.menus.pageobjects.MenusWebAll;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
-import com.mng.robotest.test.pageobject.shop.menus.device.SecMenuLateralDevice;
 import com.mng.robotest.test.utils.UtilsTest;
 
 public abstract class SecCabecera extends PageBase {
@@ -48,8 +48,8 @@ public abstract class SecCabecera extends PageBase {
 	
 	public static void buscarTexto(String referencia, Channel channel, AppEcom app) {
 		MenusUserWrapper menusUser = new MenusUserWrapper();
-		menusUser.isMenuInStateUntil(UserMenu.lupa, State.Visible, 1);
-		menusUser.clickMenuAndWait(UserMenu.lupa);
+		menusUser.isMenuInStateUntil(UserMenu.LUPA, State.Visible, 1);
+		menusUser.clickMenuAndWait(UserMenu.LUPA);
 		SecSearch secSearch = SecSearch.getNew(channel, app);
 		secSearch.search(referencia);
 	}
@@ -133,8 +133,8 @@ public abstract class SecCabecera extends PageBase {
 	 *			  'false' queremos que el menú lateral de móvil se cierre
 	 */
 	public void clickIconoMenuHamburguerMobil(boolean toOpenMenus) {
-		SecMenuLateralDevice secMenuLateral = new SecMenuLateralDevice();
-		boolean menuVisible = secMenuLateral.isMenuInStateUntil(toOpenMenus, 1);
+		MenusWebAll secMenus = MenusWebAll.make(channel);
+		boolean menuVisible = secMenus.isMenuInState(toOpenMenus, 1);
 		int i=0;
 		TypeClick typeClick = TypeClick.webdriver;
 		while ((menuVisible!=toOpenMenus) && i<5) {
@@ -142,7 +142,7 @@ public abstract class SecCabecera extends PageBase {
 				state(Visible, getXPathHamburguesaIcon()).wait(5).check();
 				click(getXPathHamburguesaIcon()).type(typeClick).exec();
 				typeClick = TypeClick.next(typeClick);
-				menuVisible = secMenuLateral.isMenuInStateUntil(toOpenMenus, 2);
+				menuVisible = secMenus.isMenuInState(toOpenMenus, 2);
 			}
 			catch (Exception e) {
 				Log4jTM.getLogger().warn("Exception in click icono Hamburguer", e);

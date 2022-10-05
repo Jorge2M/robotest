@@ -18,6 +18,7 @@ public interface SecFiltros {
 	public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception;
 	public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToSelect);
 	public void selectMenu2onLevel(List<String> listMenus);
+	public void selectMenu2onLevel(String menuLabel);
 	public boolean isClickableFiltroUntil(int seconds);
 	public boolean isCollectionFilterPresent() throws Exception;
 	
@@ -25,14 +26,13 @@ public interface SecFiltros {
 		switch (channel) {
 		case desktop:
 			return SecFiltrosDesktop.getInstance(channel);
-		case mobile:
-		case tablet:
+		case mobile, tablet:
 			if (app==AppEcom.outlet && channel==Channel.tablet) {
 				return SecFiltrosDesktop.getInstance(channel);
 			}
-			return SecMultiFiltrosDevice.getInstance();
+			return new SecMultiFiltrosDevice();
 		default:
-			return SecMultiFiltrosDevice.getInstance();
+			return new SecMultiFiltrosDevice();
 		}
 	}
 	

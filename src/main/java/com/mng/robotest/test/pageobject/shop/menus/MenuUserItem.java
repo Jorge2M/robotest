@@ -18,18 +18,18 @@ import com.mng.robotest.test.pageobject.shop.menus.device.SecMenusUserDevice.Men
 public class MenuUserItem {
 	
 	public enum UserMenu {
-		lupa(Arrays.asList(shop, outlet, votf)),
-		iniciarSesion(Arrays.asList(shop, outlet)),
-		cerrarSesion(Arrays.asList(shop, outlet)),
-		registrate(Arrays.asList(shop, outlet)),
-		miCuenta(Arrays.asList(shop, outlet)),
-		favoritos(Arrays.asList(shop, votf)),
-		bolsa(Arrays.asList(shop, outlet)),
-		misCompras(Arrays.asList(shop)),
-		pedidos(Arrays.asList(outlet)),
-		mangoLikesYou(Arrays.asList(shop)),
-		ayuda(Arrays.asList(shop, outlet, votf)),
-		cambioPais(Arrays.asList(outlet));
+		LUPA(Arrays.asList(shop, outlet, votf)),
+		INICIAR_SESION(Arrays.asList(shop, outlet)),
+		CERRAR_SESION(Arrays.asList(shop, outlet)),
+		REGISTRATE(Arrays.asList(shop, outlet)),
+		MI_CUENTA(Arrays.asList(shop, outlet)),
+		FAVORITOS(Arrays.asList(shop, votf)),
+		BOLSA(Arrays.asList(shop, outlet)),
+		MIS_COMPRAS(Arrays.asList(shop)),
+		PEDIDOS(Arrays.asList(outlet)),
+		MANGO_LIKES_YOU(Arrays.asList(shop)),
+		AYUDA(Arrays.asList(shop, outlet, votf)),
+		CAMBIO_PAIS(Arrays.asList(outlet));
 
 		List<AppEcom> apps;
 		private UserMenu(List<AppEcom> apps) {
@@ -90,27 +90,27 @@ public class MenuUserItem {
 	
 	private ElementPage getMenuLink(UserMenu menu) {
 		switch (menu) {
-			case lupa:
+			case LUPA:
 				return getMenuLupa();
-			case iniciarSesion:
+			case INICIAR_SESION:
 				return getMenuIniciarSesion();
-			case cerrarSesion:
+			case CERRAR_SESION:
 				return getMenuCerrarSesion();
-			case registrate:
+			case REGISTRATE:
 				return getMenuRegistrate();
-			case miCuenta:
+			case MI_CUENTA:
 				return getMenuMiCuenta();
-			case favoritos:
+			case FAVORITOS:
 				return getMenuFavoritos();
-			case misCompras:
+			case MIS_COMPRAS:
 				return getMenuMisCompras();
-			case pedidos:
+			case PEDIDOS:
 				return getMenuPedidos();
-			case mangoLikesYou:
+			case MANGO_LIKES_YOU:
 				return getMenuMangoLikesYou();
-			case ayuda:
+			case AYUDA:
 				return getMenuAyuda();
-			case cambioPais:
+			case CAMBIO_PAIS:
 				return getMenuCambioPais();
 			default:
 				return null;

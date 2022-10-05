@@ -5,14 +5,17 @@ import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.transversal.TestBase;
+import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.galeria.LocationArticle;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
+
+import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
+import static com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType.*;
 
 public class Fav002 extends TestBase {
 
@@ -49,7 +52,10 @@ public class Fav002 extends TestBase {
 		if (app==AppEcom.outlet) {
 			clickMenu("Vestidos");
 		} else {
-			clickMenu(LineaType.home, null, "Albornoces");
+			clickMenu(new MenuWeb
+					.Builder("Albornoces")
+					.linea(home)
+					.group(BANO).build());
 		}
 		LocationArticle article1 = LocationArticle.getInstanceInCatalog(1);
 		pageGaleriaSteps.selectArticulo(article1);
@@ -74,7 +80,10 @@ public class Fav002 extends TestBase {
 	private void selectFirstFavoriteAndAddBolsa() throws Exception {
 		ArticuloScreen firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
 		pageFavoritosSteps.clickArticuloImg(firstFavorite);
-		new PageFichaSteps().selectAnadirALaBolsaStep();
+		
+		var pageFichaSteps = new PageFichaSteps();
+		pageFichaSteps.selectFirstTallaAvailable();
+		pageFichaSteps.selectAnadirALaBolsaStep();
 	}
 
 	private void clearFirstFavoriteFromFavorites() throws Exception {

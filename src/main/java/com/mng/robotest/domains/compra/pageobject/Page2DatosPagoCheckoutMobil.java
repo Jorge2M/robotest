@@ -197,8 +197,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 
 	public void clickLinkFormasPagoFor(TypeActionLinkFP typeAction) throws Exception {
-		String xpathFormasPagos = getXPathLinkFormasPagoFor(typeAction);
-		click(xpathFormasPagos).type(javascript).exec();
+		click(getXPathLinkFormasPagoFor(typeAction)).type(javascript).exec();
 	}
 
 	public void moveToFirstMetodoPagoLine() {

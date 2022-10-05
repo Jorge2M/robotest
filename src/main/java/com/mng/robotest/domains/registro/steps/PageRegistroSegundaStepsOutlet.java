@@ -14,7 +14,7 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroSegundaOutlet;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.beans.Linea.LineaType;
+import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.test.data.Constantes.ThreeState;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 

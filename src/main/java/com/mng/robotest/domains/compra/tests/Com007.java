@@ -1,5 +1,7 @@
 package com.mng.robotest.domains.compra.tests;
 
+import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.she;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,7 +10,8 @@ import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.test.beans.Linea.LineaType;
+import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataPago;
@@ -63,8 +66,7 @@ public class Com007 extends TestBase {
 	}	
 
 	private void selectFooterLinkChequeRegalo() throws Exception {
-		SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps();
-		secMenusSteps.seleccionLinea(LineaType.she, null);
+		new MenuSteps().clickLinea(she);
 		new SecFooterSteps().clickLinkFooter(FooterLink.CHEQUE_REGALO_OLD, false);
 	}
 

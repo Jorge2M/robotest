@@ -1,17 +1,16 @@
 package com.mng.robotest.domains.transversal.menus.pageobjects;
 
-import static com.mng.robotest.test.beans.Linea.LineaType.*;
-import static com.mng.robotest.domains.transversal.menus.pageobjects.Group.GroupResponse.*;
-
 import java.util.Arrays;
 import java.util.List;
 
 import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.test.beans.Linea.LineaType;
-import com.mng.robotest.test.beans.Sublinea.SublineaType;
-import com.mng.robotest.test.pageobject.shop.menus.device.SecLineasDevice;
+import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
 
-public class Group extends PageBase {
+import static com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupResponse.*;
+import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
+
+public class GroupWeb extends PageBase {
 	
 	private static final List<LineaType> ALL_LINES = Arrays.asList(she, he, teen, nina, nino, home);
 	private static final List<LineaType> ALL_EXCEPT_HOME = Arrays.asList(she, he, teen, nina, nino); 
@@ -50,6 +49,12 @@ public class Group extends PageBase {
 			this.lineas = lineas;
 		}
 		
+		public static List<GroupType> getGroups(LineaType linea) {
+			return Arrays.stream(GroupType.values())
+				.filter(g -> g.getLineas().contains(linea))
+				.toList();
+		}
+		
 		public String getId() {
 			return id;
 		}
@@ -68,21 +73,38 @@ public class Group extends PageBase {
 	private final SublineaType sublinea;
 	private final GroupType group;
 	
-	public Group(LineaType linea, SublineaType sublinea, GroupType group) {
+	public GroupWeb(GroupType group) {
+		this.linea = LineaType.she;
+		this.sublinea = null;
+		this.group = group; 
+	}
+	
+	public GroupWeb(LineaType linea, SublineaType sublinea, GroupType group) {
 		this.linea = linea;
 		this.sublinea = sublinea;
 		this.group = group;
 	}
 	
-	private static final String XPATH_GROUP = "//button[@data-testid[contains(.,'header.tabButton')]]";
-	private static final String XPATH_GROUP_VIEW_MORE = "//button[@data-testid[contains(.,'viewMore')]]";
+	private static final String XPATH_GROUP_DEVICE = 
+			"//*[@data-testid[contains(.,'header.tabButton')] or @data-testid[contains(.,'header.tabLink')]]";
+	private static final String XPATH_GROUP_VIEW_MORE_DEVICE = "//button[@data-testid[contains(.,'viewMore')]]";
+	private static final String XPATH_GROUP_DESKTOP = "//li[@data-testid[contains(.,'header.section')]]";
 
 	private String getXPathGroup() {
-		String xpath = XPATH_GROUP;
+		if (channel.isDevice()) {
+			return getXPathGroupDevice();
+		}
+		return getXPathGroupDesktop();
+	}
+	private String getXPathGroupDevice() {
+		String xpath = XPATH_GROUP_DEVICE;
 		if (group.getGroupResponse()==MORE) {
-			xpath = XPATH_GROUP_VIEW_MORE;
+			xpath = XPATH_GROUP_VIEW_MORE_DEVICE;
 		}
 		return xpath + "//self::*[@data-testid[contains(.,'" + group.getId() + "')]]"; 
+	}
+	private String getXPathGroupDesktop() {
+		return XPATH_GROUP_DESKTOP + "//self::*[@id[contains(.,'" + group.getId() + "')]]/a";
 	}
 	
 	public void click() {
@@ -95,7 +117,23 @@ public class Group extends PageBase {
 	}
 	
 	private void clickLinea() {
-		SecLineasDevice.make(app).selectLinea(linea, sublinea);
+		LineaWeb lineaWeb = new LineaWeb(linea, sublinea);
+		lineaWeb.clickLinea();
+		if (sublinea!=null) {
+			lineaWeb.clickSublinea();
+		}
+	}
+
+	public LineaType getLinea() {
+		return linea;
+	}
+
+	public SublineaType getSublinea() {
+		return sublinea;
+	}
+
+	public GroupType getGroup() {
+		return group;
 	}
 	
 }

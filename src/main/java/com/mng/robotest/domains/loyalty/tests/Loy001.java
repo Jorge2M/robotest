@@ -14,6 +14,8 @@ import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
+import static com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType.*;
+
 public class Loy001 extends TestBase {
 
 	static final User USER = LoyaltyCommons.USER_PRO_WITH_LOY_POINTS;
@@ -37,10 +39,9 @@ public class Loy001 extends TestBase {
 	}
 	
 	private void addBagArticleNoRebajado() throws Exception {
-		clickMenu("nuevo");
-		
-		//TODO en estos momentos algo raro le pasa al menú Nuevo que requiere un refresh para funcionar ok
-		driver.navigate().refresh();
+		clickGroup(NEW_NOW);
+//		//en estos momentos algo raro le pasa al menú Nuevo que requiere un refresh para funcionar ok
+//		driver.navigate().refresh();
 		new GaleriaNavigationsSteps().selectTalla(dataTest.getPais());
 	}
 	

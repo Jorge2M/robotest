@@ -18,6 +18,8 @@ import com.mng.robotest.test.steps.shop.SecFiltrosSteps;
 import com.mng.robotest.test.steps.shop.galeria.DataForScrollStep;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 
+import static com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb.*;
+
 public class Gpo001 extends TestBase {
 
 	@Override
@@ -25,7 +27,7 @@ public class Gpo001 extends TestBase {
 		dataTest.setUserRegistered(true);
 		String tipoPrendasGaleria = "camisa";
 		access();
-		clickMenu("camisas");
+		clickMenu(CAMISAS_SHE);
 		
 		List<Color> colorsToFilter = new ArrayList<>();
 		colorsToFilter.add(Color.Blanco);

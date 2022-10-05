@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.beans.Linea.LineaType;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.Menu;
@@ -23,6 +22,8 @@ import com.mng.robotest.test.getdata.products.sort.SortFactory;
 import com.mng.robotest.test.getdata.products.sort.SortFactory.SortBy;
 import com.mng.robotest.test.utils.PaisGetter;
 
+import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
+
 public class GetterProductsIT {
 	
 	private static GetterProducts getterProducts;
@@ -32,7 +33,7 @@ public class GetterProductsIT {
 		if (getterProducts==null) {
 			Pais espana = PaisGetter.get(PaisShop.ESPANA);
 			getterProducts = new GetterProducts.Builder("https://shop.mango.com/", espana.getCodigo_alf(), AppEcom.shop, null)
-					.linea(LineaType.she)
+					.linea(she)
 					.menu(Menu.Shorts)
 					.numProducts(numProducts)
 					.pagina(1)

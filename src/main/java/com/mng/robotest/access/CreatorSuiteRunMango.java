@@ -9,7 +9,6 @@ import com.mng.robotest.test.suites.EgyptOrdersSuite;
 import com.mng.robotest.test.suites.GenericFactorySuite;
 import com.mng.robotest.test.suites.MenusMantoSuite;
 import com.mng.robotest.test.suites.MenusPaisSuite;
-import com.mng.robotest.test.suites.NodosSuite;
 import com.mng.robotest.test.suites.PagosPaisesSuite;
 import com.mng.robotest.test.suites.PaisIdiomaSuite;
 import com.mng.robotest.test.suites.RegistrosSuite;
@@ -55,8 +54,6 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 				return (new MenusPaisSuite(inputParamsMango));
 			case MenusManto:
 				return (new MenusMantoSuite(inputParamsMango));
-			case Nodos:
-				return (new NodosSuite(inputParamsMango));
 			case ConsolaVotf:
 				return (new ConsolaVotfSuite(inputParamsMango));
 			case ListFavoritos, ListMiCuenta, CheckoutMultiAddress:

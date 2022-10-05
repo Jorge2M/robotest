@@ -21,8 +21,6 @@ import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.beans.IdiomaPais;
-import com.mng.robotest.test.factoryes.NodoStatus;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion;
@@ -36,23 +34,18 @@ import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArti
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeSlider;
 import com.mng.robotest.test.pageobject.shop.galeria.SecBannerHeadGallery;
 import com.mng.robotest.test.pageobject.shop.galeria.SecBannerHeadGallery.TypeLinkInfo;
-import com.mng.robotest.test.pageobject.shop.menus.Menu2onLevel;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusFiltroCollection;
-import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test.pageobject.utils.DataArticleGalery;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
 import com.mng.robotest.test.pageobject.utils.DataScroll;
 import com.mng.robotest.test.pageobject.utils.ListDataArticleGalery;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
-import com.mng.robotest.test.utils.UtilsTest;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
 public class PageGaleriaSteps extends StepBase {
-
 
 	public final SecCrossSellingSteps secCrossSellingSteps = new SecCrossSellingSteps();
 	public final BannerHeadGallerySteps bannerHead = BannerHeadGallerySteps.newInstance(this, driver);
@@ -634,49 +627,6 @@ public class PageGaleriaSteps extends StepBase {
 		return (pageGaleria.getLayoutNumColumnas()==((PageGaleriaDesktop)pageGaleria).getNumColumnas(numColumnas));
 	}
 
-	@Validation
-	public ChecksTM validaNombresYRefEnOrden(NodoStatus nodoAnt, NodoStatus nodoAct) {
-   		ChecksTM checks = ChecksTM.getNew();
-   		checks.add(
-			"El número de artículos de la galería Nuevo (" + nodoAct.getArticlesNuevo().size() + ") es igual al del nodo " + 
-			nodoAnt.getIp() + " (" + nodoAnt.getArticlesNuevo().size() + ")",
-			nodoAct.getArticlesNuevo().size()==nodoAnt.getArticlesNuevo().size(), State.Warn);
-   		
-   		DataArticleGalery articleGaleryActualNotFit = nodoAct.getArticleNuevoThatNotFitWith(nodoAnt);
-   		String messageWarning = "";
-		if (articleGaleryActualNotFit!=null) {
-			messageWarning+="<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b>: hay productos de la galería que no cuadran con los de la galería del nodo " + nodoAnt.getIp() + " (por ejemplo <b>" + articleGaleryActualNotFit.toString() + "</b>). ";
-			messageWarning+=nodoAct.getArticlesNuevo().getTableHTLMCompareArticlesGaleria(nodoAnt.getArticlesNuevo());
-		}
-   		checks.add(
-			"El orden y contenido de los artículos en ambos nodos es el mismo" + messageWarning,
-			articleGaleryActualNotFit==null, State.Warn);
-	   
-   		return checks;
-	}
-
-	@Validation
-	public ChecksTM validaRebajasHasta70Jun2018(IdiomaPais idioma) {
-		ChecksTM checks = ChecksTM.getNew();
-	 	checks.add(
-	 		"<b style=\"color:blue\">Rebajas</b></br>" +
-	 		"Es visible el banner de cabecera",
-	 		new PageGaleriaDesktop().getSecBannerHead().isVisible(), State.Defect);
-	 	
-	 	String maxPercDiscount = "70";
-	 	String textBanner = new PageGaleriaDesktop().getSecBannerHead().getText();
-	 	checks.add(
-	 		"El banner de cabecera contiene el porcentaje de descuento<b>" + maxPercDiscount + "</b>",
-	 		UtilsTest.textContainsSetenta(textBanner, idioma), State.Warn);
-	 	
-	 	int menusDescVisibles = new SecMenusDesktop().secMenusFiltroDiscount.getNumberOfVisibleMenus();
-	 	checks.add(
-	 		"No aparece ningún filtro de descuento",
-	 		menusDescVisibles==0, State.Warn);
-	 	
-	 	return checks;
-	}
-
 	@Validation (
 		description="Estamos en la página de Galería",
 		level=State.Warn)
@@ -857,15 +807,15 @@ public class PageGaleriaSteps extends StepBase {
 		return checks;
 	}
 
-	@Validation
-	public ChecksTM checkVisibilitySubmenus(List<Menu2onLevel> menus2onLevel) {
-		ChecksTM checks = ChecksTM.getNew();
-		for (Menu2onLevel menu2oNivelTmp : menus2onLevel) {
-			checks.add(
-				"Aparece el submenú <b>" + menu2oNivelTmp.getNombre() + "</b>",
-				((PageGaleriaDesktop)pageGaleria).getSecSubmenusGallery().isVisibleSubmenu(menu2oNivelTmp.getNombre()), 
-				State.Warn);
-		}
-		return checks;
-	}
+//	@Validation
+//	public ChecksTM checkVisibilitySubmenus(List<Menu2onLevel> menus2onLevel) {
+//		ChecksTM checks = ChecksTM.getNew();
+//		for (Menu2onLevel menu2oNivelTmp : menus2onLevel) {
+//			checks.add(
+//				"Aparece el submenú <b>" + menu2oNivelTmp.getNombre() + "</b>",
+//				((PageGaleriaDesktop)pageGaleria).getSecSubmenusGallery().isVisibleSubmenu(menu2oNivelTmp.getNombre()), 
+//				State.Warn);
+//		}
+//		return checks;
+//	}
 }

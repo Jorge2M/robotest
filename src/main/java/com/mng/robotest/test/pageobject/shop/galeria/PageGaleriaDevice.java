@@ -31,16 +31,7 @@ public class PageGaleriaDevice extends PageGaleria {
 			  "@id[contains(.,'product-image')])]";
 	private static final String XPATH_IMG_COD_COLOR_WITH_TAG_COLOR = 
 		"//div[@class[contains(.,'color-container')] and @id='" + TAG_ID_COLOR + "']/img";
-//	private static final String XPATH_PRECIO_REBAJADO_RELATIVE_ARTICLE = 
-//		"//*[@class[contains(.,'product-list-sale-price')] or " + 
-//			"@class[contains(.,'product-list-info-price-sale')] or " + 
-//			"@class[contains(.,'product-price-crossed')]]";
-//	private static final String XPATH_PRECIO_ORIGINAL_RELATIVE_ARTICLE = 
-//		"//*[@class[contains(.,'productList__price')] or " + 
-//			"@class[contains(.,'productList__salePrice')] or " + 
-//			"@class[contains(.,'product-list-info-price')] or " + 
-//			"@class[contains(.,'product-list-price')] or " +
-//			"@class[contains(.,'product-price')]]";
+	
 	private static final String XPATH_BUTTON_ANYADIR_RELATIVE_ARTICLE = "//div[@class[contains(.,'product-actions')]]/button";
 	private static final String XPATH_CAPA_TALLAS_RELATIVE_ARTICLE = "//div[@class[contains(.,'product-sizes-container')]]";
 	private static final String XPATH_ICONO_GALERY_MOBILE = "//div[@class[contains(.,'scroll-container--visible')]]";
@@ -89,11 +80,6 @@ public class PageGaleriaDevice extends PageGaleria {
 		return ("//*[@id='buscador_cabecera2']");
 	}
 	
-	@Override
-	public void hideMenus() {
-		//TODO
-	}
-
 	//Número de páginas a partir del que consideramos que se requiere un scroll hasta el final de la galería
 	public static int SCROLL_TO_LAST = 20; 
 	

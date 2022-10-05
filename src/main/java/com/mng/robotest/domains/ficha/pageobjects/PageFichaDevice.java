@@ -85,7 +85,7 @@ public class PageFichaDevice extends PageFicha {
 
 	@Override
 	public void clickAnadirBolsaButtonAndWait() {
-		click(XPATH_ALTA_BOLSA_BUTTON).type(javascript).exec();
+		click(XPATH_ALTA_BOLSA_BUTTON).waitLink(2).type(javascript).exec();
 	}
 
 	@Override
@@ -153,8 +153,7 @@ public class PageFichaDevice extends PageFicha {
 	}
 
 	public void clickImagenFichaCentral() {
-		String xpathImg = getXPathDivImgCentralDiv();
-		click(xpathImg).exec();
+		click(getXPathDivImgCentralDiv()).exec();
 	}
 
 	public void closeZoomImageCentralDevice() {
