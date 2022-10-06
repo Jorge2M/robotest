@@ -94,7 +94,7 @@ public class GroupWeb extends PageBase {
 	private static final String XPATH_GROUP_DESKTOP = "//li[@data-testid[contains(.,'header.section')]]";
 	
 	private static final String TAG_GROUP = "@tag_group";
-	private static final String XPATH_SUBMENU_WITH_TAG_DESKTOP = "//ul/li[@id='" + TAG_GROUP + "']]/..";
+	private static final String XPATH_SUBMENU_WITH_TAG_DESKTOP = "//ul/li[@id='" + TAG_GROUP + "']/..";
 	private static final String XPATH_SUBMENU_DEVICE = "//div[@data-testid='header.subMenu']";
 
 	private String getXPathGroup() {

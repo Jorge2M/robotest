@@ -3,6 +3,7 @@ package com.mng.robotest.domains.transversal.menus.pageobjects;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -39,7 +40,7 @@ public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 		List<WebElement> menuElements = getElements(getXPathMenuItem(groupWeb.getLinea()));
 		for (WebElement menuElement : menuElements) {
 			menus.add(new MenuWeb
-					.Builder(menuElement.getText())
+					.Builder(menuElement.findElement(By.xpath(".//span/span")).getText())
 					.linea(groupWeb.getLinea())
 					.sublinea(groupWeb.getSublinea())
 					.group(groupWeb.getGroup())

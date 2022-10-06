@@ -66,7 +66,6 @@ public class Par001 extends TestBase {
 
 		//Validamos si hemos de ejecutar los pasos correspondientes al recorrido de los menús
 		if (testMenus(linea, sublinea)) {
-			//- Get all groups
 			new MenuSteps().clickAllMenus(new LineaWeb(lineaType, sublineaType));
 		} else {
 			if (canClickMenuArticles(dataTest.getPais(), linea, sublinea)) {
