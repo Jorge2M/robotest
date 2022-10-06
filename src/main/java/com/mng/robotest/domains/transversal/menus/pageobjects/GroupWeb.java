@@ -115,7 +115,7 @@ public class GroupWeb extends PageBase {
 		if (group.getGroupResponse()==GroupResponse.ARTICLES) {
 			return xpathGroup + "/a";
 		}
-		return xpathGroup;
+		return xpathGroup + "/span";
 	}
 	private String getXPathSubmenu() {
 		if (channel.isDevice()) {
