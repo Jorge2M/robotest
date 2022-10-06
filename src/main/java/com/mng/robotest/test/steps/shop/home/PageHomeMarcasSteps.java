@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -12,7 +11,6 @@ import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
 import com.mng.robotest.test.pageobject.shop.PageHomeMarcas;
 import com.mng.robotest.test.steps.shop.AllPagesSteps;
-import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 
 public class PageHomeMarcasSteps extends StepBase {
 	
@@ -23,7 +21,9 @@ public class PageHomeMarcasSteps extends StepBase {
 	public void validateIsPageWithCorrectLineas() throws Exception {
 		new AllPagesSteps().validateMainContentPais();
 		validateIsPageOk();
-		new MenuSteps().checkLineasCountry();
+		if (!channel.isDevice()) {
+			new MenuSteps().checkLineasCountry();
+		}
 	}
 	
 	@Validation

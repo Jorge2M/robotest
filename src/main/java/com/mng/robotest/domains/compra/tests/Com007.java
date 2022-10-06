@@ -10,7 +10,6 @@ import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.PaisShop;
@@ -21,7 +20,6 @@ import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData.I
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.steps.shop.checqueregalo.PageChequeRegaloInputDataSteps;
-import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;

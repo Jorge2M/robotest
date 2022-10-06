@@ -514,24 +514,6 @@ public class PageGaleriaSteps extends StepBase {
 	  	return checks;
 	}
 
-	@Validation(
-		description = "Como mínimo el #{porcentaje} % de los productos son dobles",
-		level=State.Info,
-		store=StoreType.None)
-	public boolean hayPanoramicasEnGaleriaDesktop(float porcentaje) {
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-		float numArtTotal = pageGaleria.getNumArticulos();
-		float numArtDobles = pageGaleriaDesktop.getNumArticulos(TypeArticleDesktop.DOBLE);
-		return (!articlesUnderPercentage(numArtTotal, numArtDobles, porcentaje));
-	}
-
-	private static boolean articlesUnderPercentage(float numArtTotal, float numArtToMesure, float percentage) {
-		if (numArtTotal==0) {
-			return true;
-		}
-		return ((numArtToMesure / numArtTotal) < (percentage / 100));
-	}
-
 	@Validation (
 		description="Existe algún vídeo en la galería",
 		level=State.Warn)

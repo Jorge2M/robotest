@@ -10,8 +10,6 @@ import com.mng.robotest.domains.transversal.PageBase;
 public class LineaWeb extends PageBase implements LineaActions {
 
 	public static enum LineaType { 
-		//nuevo("nuevo", "outletN", "nuevo", "nuevo", Arrays.asList(Channel.desktop)), 
-		rebajas("rebajas", "outletR", "rebajas", "rebajas", Arrays.asList(Channel.desktop)), 
 		she("mujer", "outlet", "she", "she", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
 		he("hombre", "outletH", "he", "he", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
 		nina("ninas", "outletA", "kidsA", "nina", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
@@ -133,28 +131,35 @@ public class LineaWeb extends PageBase implements LineaActions {
 	
 	private final LineaType linea;
 	private final SublineaType sublinea;
-	
-	private final LineaActions lineaActions = LineaActions.make(this, channel);
+	private final LineaActions lineaActions;
 	
 	public LineaWeb(LineaType linea) {
 		this.linea = linea;
 		this.sublinea = null;
+		this.lineaActions = LineaActions.make(this, channel);
 	}
 	public LineaWeb(LineaType linea, SublineaType sublinea) {	
 		this.linea = linea;
 		this.sublinea = sublinea;
+		this.lineaActions = LineaActions.make(this, channel);
 	}
 	
 	@Override
 	public void clickLinea() {
 		lineaActions.clickLinea();
 	}
-
 	@Override
 	public void clickSublinea() {
 		lineaActions.clickSublinea();
 	}
-
+	@Override
+	public void hoverLinea() {
+		lineaActions.hoverLinea();
+	}
+	@Override
+	public void hoverSublinea() {
+		lineaActions.hoverSublinea();
+	}
 	@Override
 	public boolean isLineaPresent(int seconds) {
 		return lineaActions.isLineaPresent(seconds);

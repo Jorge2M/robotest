@@ -13,19 +13,33 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	private final MenuWeb menu;
 	
 	private String getXPathMenu() {
-		return 
-			"//ul/li//a[@data-testid='header.subMenu." + 
-			menu.getMenu().toLowerCase() + "_" + menu.getLinea() + "']";
-	}
+		String idLinea = menu.getLinea().name();
+		if (menu.getSublinea()!=null) {
+			idLinea = menu.getSublinea().getId(app);
+		}
+		
+		String nameMenu = menu.getMenu().toLowerCase();
+		String xpath =  
+				"//ul/li//a[@data-testid='header.subMenu.item." + 
+			nameMenu + "_" + idLinea + "'";
+		
+		if (nameMenu.contains(" ")) {
+			String menuIni = nameMenu.substring(0, menu.getMenu().indexOf(" "));
+			xpath+=" or @data-testid='header.subMenu.item." + menuIni + "_" + idLinea + "'"; 
+		}
+		xpath+="]";
+		
+		return xpath;
+	}	
 	
 	public MenuActionsDevice(MenuWeb menu) {
 		this.menu = menu;
 	}
 	
 	@Override
-	public void click() {
+	public String click() {
 		clickGroup();
-		clickMenu();
+		return clickMenu();
 	}
 	
 	@Override
@@ -49,8 +63,10 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 		group.click();
 	}
 	
-	private void clickMenu() {
+	private String clickMenu() {
+		String menu = getElement(getXPathMenu()).getText();
 		click(getXPathMenu()).exec();
+		return menu;
 	}
 	
 	private void clickSubLevelMenu() {

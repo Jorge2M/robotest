@@ -11,18 +11,43 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 	
 	private String getXPathMenu() {
 		return 
+			"(" + getXPathMenuStandard() + ") | " + 
+			"(" + getXPathMenuAlternative() + ")";
+	}
+	
+	private String getXPathMenuStandard() {
+		String idLinea = menu.getLinea().name();
+		if (menu.getSublinea()!=null) {
+			idLinea = menu.getSublinea().getId(app);
+		}
+			
+		String nameMenu = menu.getMenu().toLowerCase();
+		String xpath =  
 			"//ul/li//a[@data-testid='header.section.link." + 
-			menu.getMenu().toLowerCase() + "_" + menu.getLinea() + "']";
-	}	
+			nameMenu + "_" + idLinea + "'";
+		
+		if (nameMenu.contains(" ")) {
+			String menuIni = nameMenu.substring(0, menu.getMenu().indexOf(" "));
+			xpath+=" or @data-testid='header.section.link." + menuIni + "_" + idLinea + "'"; 
+		}
+		xpath+="]";
+		return xpath;
+	}
+	
+	private String getXPathMenuAlternative() {
+		return "//ul/li//a[" + 
+				"@data-testid[contains(.,'header.section.link.')]]" +
+			    "//span[text()='" + menu.getMenu() + "']";
+	}
 	
 	public MenuActionsDesktop(MenuWeb menu) {
 		this.menu = menu;
 	}
 	
 	@Override
-	public void click() {
+	public String click() {
 		clickGroup();
-		clickMenuSuperior();
+		return clickMenuSuperior();
 	}
 	@Override
 	public void clickSubMenu() {
@@ -48,8 +73,10 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 		group.click();
 	}
 	
-	private void clickMenuSuperior() {
+	private String clickMenuSuperior() {
+		String nameMenu = getElement(getXPathMenu()).getText(); 
 		click(getXPathMenu()).exec();
+		return nameMenu;
 	}	
 
 }

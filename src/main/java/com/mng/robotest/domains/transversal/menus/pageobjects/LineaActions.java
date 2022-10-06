@@ -6,6 +6,8 @@ public interface LineaActions {
 
 	public void clickLinea();
 	public void clickSublinea();
+	public void hoverLinea();
+	public void hoverSublinea();
 	public boolean isLineaSelected(int seconds);
 	public boolean isSublineaSelected(int seconds);
 	public boolean isLineaPresent(int seconds);

@@ -9,7 +9,6 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaT
 
 public class LineaActionsDesktop extends PageBase implements LineaActions {
 	
-	private final LineaWeb lineaWeb;
 	private final LineaType lineaType;
 	private final SublineaType sublineaType;
 	
@@ -25,7 +24,6 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 	private static final String XPATH_SUBLINEA_WITH_2TAG = "//li[(@id[contains(.,'" + TAG_ID_SUBLINEA+ "')] or @id[contains(.,'" + TAG_ID_SUBLINEA2 + "')]) and @data-testid[contains(.,'section')]]";
 	
 	public LineaActionsDesktop(LineaWeb lineaWeb) {
-		this.lineaWeb = lineaWeb;
 		this.lineaType = lineaWeb.getLinea();
 		this.sublineaType = lineaWeb.getSublinea();
 	}
@@ -71,6 +69,14 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 	@Override 
 	public void clickSublinea() {
 		click(getXPathSublinea()).exec();
+	}
+	@Override
+	public void hoverLinea() {
+		moveToElement(getXPathLinea());
+	}
+	@Override 
+	public void hoverSublinea() {
+		moveToElement(getXPathSublinea());
 	}
 	@Override
 	public boolean isLineaSelected(int seconds) {

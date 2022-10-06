@@ -3,6 +3,7 @@ package com.mng.robotest.domains.transversal.menus.pageobjects;
 import java.util.Arrays;
 import java.util.List;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
@@ -28,12 +29,12 @@ public class GroupWeb extends PageBase {
 		TALLAS_PLUS("violeta", ARTICLES, SHE), 
 		TRAJES("sastreria", MENUS, HE),
 		BASICOS("basics", ARTICLES, HOME),
-		DORMITORIO("dormitorio", ARTICLES, HOME),
-		BANO("bano", ARTICLES, HOME), 
-		SALON("salon", ARTICLES, HOME),
-		COCINA_Y_COMEDOR("cociona", ARTICLES, HOME),
-		ROPA_CASA("ropa_casa", ARTICLES, HOME),
-		VELAS_Y_AROMAS("velas_y_aromas", ARTICLES, HOME),
+		DORMITORIO("dormitorio", MENUS, HOME),
+		BANO("bano", MENUS, HOME), 
+		SALON("salon", MENUS, HOME),
+		COCINA_Y_COMEDOR("cociona", MENUS, HOME),
+		ROPA_CASA("ropa_casa", MENUS, HOME),
+		VELAS_Y_AROMAS("velas_y_aromas", MENUS, HOME),
 		PROMOCION("promocionado", MENUS, ALL_LINES), 
 		INTIMISSIMI("intimissimi", MENUS, SHE), 
 		RITUALS("rituals", MENUS, SHE),
@@ -86,9 +87,15 @@ public class GroupWeb extends PageBase {
 	}
 	
 	private static final String XPATH_GROUP_DEVICE = 
-			"//*[@data-testid[contains(.,'header.tabButton')] or @data-testid[contains(.,'header.tabLink')]]";
+			"//*[@data-testid[contains(.,'header.tabButton')] or " + 
+				"@data-testid[contains(.,'header.tabLink')] or " + 
+				"@data-testid[contains(.,'header.subMenu')]]";
 	private static final String XPATH_GROUP_VIEW_MORE_DEVICE = "//button[@data-testid[contains(.,'viewMore')]]";
 	private static final String XPATH_GROUP_DESKTOP = "//li[@data-testid[contains(.,'header.section')]]";
+	
+	private static final String TAG_GROUP = "@tag_group";
+	private static final String XPATH_SUBMENU_WITH_TAG_DESKTOP = "//ul/li[@id='" + TAG_GROUP + "']]/..";
+	private static final String XPATH_SUBMENU_DEVICE = "//div[@data-testid='header.subMenu']";
 
 	private String getXPathGroup() {
 		if (channel.isDevice()) {
@@ -104,11 +111,21 @@ public class GroupWeb extends PageBase {
 		return xpath + "//self::*[@data-testid[contains(.,'" + group.getId() + "')]]"; 
 	}
 	private String getXPathGroupDesktop() {
-		return XPATH_GROUP_DESKTOP + "//self::*[@id[contains(.,'" + group.getId() + "')]]/a";
+		String xpathGroup =  XPATH_GROUP_DESKTOP + "//self::*[@id[contains(.,'" + group.getId() + "')]]";
+		if (group.getGroupResponse()==GroupResponse.ARTICLES) {
+			return xpathGroup + "/a";
+		}
+		return xpathGroup;
+	}
+	private String getXPathSubmenu() {
+		if (channel.isDevice()) {
+			return XPATH_SUBMENU_DEVICE;
+		}
+		return XPATH_SUBMENU_WITH_TAG_DESKTOP.replace(TAG_GROUP, group + "_" + linea); 
 	}
 	
 	public void click() {
-		clickLinea();
+		hoverLinea(); 
 		clickGroup();
 	}
 	
@@ -116,11 +133,11 @@ public class GroupWeb extends PageBase {
 		click(getXPathGroup()).exec(); 
 	}
 	
-	private void clickLinea() {
+	private void hoverLinea() {
 		LineaWeb lineaWeb = new LineaWeb(linea, sublinea);
-		lineaWeb.clickLinea();
+		lineaWeb.hoverLinea(); 
 		if (sublinea!=null) {
-			lineaWeb.clickSublinea();
+			lineaWeb.hoverSublinea();
 		}
 	}
 
@@ -134,6 +151,10 @@ public class GroupWeb extends PageBase {
 
 	public GroupType getGroup() {
 		return group;
+	}
+	
+	public boolean isVisibleSubMenus() {
+		return state(State.Visible, getXPathSubmenu()).check();
 	}
 	
 }

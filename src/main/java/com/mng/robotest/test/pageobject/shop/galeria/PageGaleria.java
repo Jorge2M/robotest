@@ -552,8 +552,7 @@ public abstract class PageGaleria extends PageBase {
 	public void goToInitPageAndWaitForArticle() {
 		//TODO en estos momentos algo raro le pasa al menú Nuevo que requiere un refresh para funcionar ok
 		driver.navigate().refresh();
-		int seconds = 2;
-		isVisibleArticleUntil(1, seconds);
+		isVisibleArticleUntil(1, 10);
 	}
 
 	private void initializeDataNumArticles(List<Integer> numArticlesXpage, List<Integer> numArticlesDoubleXpage, int maxPages) {

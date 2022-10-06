@@ -11,7 +11,6 @@ import org.testng.ITestContext;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
@@ -20,19 +19,13 @@ import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.beans.Linea;
-import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb;
-import com.mng.robotest.domains.transversal.menus.pageobjects.MenusWebAll;
 import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
-import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
 import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
 import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.generic.stackTrace;
 import com.mng.robotest.test.getdata.products.GetterProducts;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog.Article;
-import com.mng.robotest.test.pageobject.shop.AllPages;
 import com.mng.robotest.test.pageobject.shop.bannersNew.ManagerBannersScreen;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test.pageobject.shop.galeria.LabelArticle;
@@ -41,16 +34,7 @@ import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.ControlTemporada;
 import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
-import com.mng.robotest.test.pageobject.shop.menus.GroupMenu;
-import com.mng.robotest.test.pageobject.shop.menus.MenuLateralDesktop;
-import com.mng.robotest.test.pageobject.shop.menus.MenuLateralDesktop.Element;
-import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
-import com.mng.robotest.test.steps.shop.SecCabeceraSteps;
-import com.mng.robotest.test.steps.shop.banner.SecBannersSteps;
-import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test.utils.WebDriverMngUtils;
 
 public class SecMenusDesktopSteps extends StepBase {
@@ -172,7 +156,7 @@ public class SecMenusDesktopSteps extends StepBase {
 	/**
 	 * Función que ejecuta el paso/validaciones correspondiente a la selección de una entrada el menú superior de Desktop
 	 */
-	private static final String TAG_MENU = "@TagMenu";
+//	private static final String TAG_MENU = "@TagMenu";
 //	@Step (
 //		description="Selección del menú <b>" + TAG_MENU + "</b> (data-testid=#{menu1rstLevel.getDataTestIdMenuSuperiorDesktop()})", 
 //		expected="El menú se ejecuta correctamente",

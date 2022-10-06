@@ -1,6 +1,7 @@
 package com.mng.robotest.test.pageobject.shop;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
@@ -183,7 +184,16 @@ public class AllPages extends PageBase {
 	}
 
 	public boolean isTitleAssociatedToMenu(String menuName) {
-		String titlePage = driver.getTitle();
-		return (titlePage.toLowerCase().contains(menuName.toLowerCase()));
+		String titlePage = driver.getTitle().toLowerCase();
+		if (titlePage.contains(menuName.toLowerCase())) {
+			return true;
+		}
+		if (menuName.contains(" ")) {
+			return Arrays.stream(titlePage.split(" "))
+				.filter(s -> !titlePage.contains(s))
+				.findAny()
+				.isEmpty();
+		}
+		return false;
 	}
 }

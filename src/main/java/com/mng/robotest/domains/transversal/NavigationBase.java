@@ -66,15 +66,16 @@ public class NavigationBase extends PageBase {
 	protected void clickMenu(MenuWeb menu) {
 		new MenuSteps().click(menu);
 	}
-	protected void clickSubMenu(MenuWeb menu) {
-		new MenuSteps().clickSubMenu(menu);
-	}
 	protected void clickGroup(GroupType groupType) {
 		new MenuSteps().clickGroup(new GroupWeb(groupType));
 	}
 	public void clickGroup(LineaType linea, SublineaType sublinea, GroupType groupType) {
 		new MenuSteps().clickGroup(new GroupWeb(linea, sublinea, groupType));
 	}
+	protected void clickSubMenu(MenuWeb menu) {
+		new MenuSteps().clickSubMenu(menu);
+	}
+	
 	protected List<GarmentCatalog> getArticles(int numArticles) throws Exception {
 		return UtilsTest.getArticlesForTest(dataTest.getPais(), app, numArticles, driver);
 	}

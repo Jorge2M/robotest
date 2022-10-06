@@ -12,7 +12,9 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType
 public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 
 	private static final String XPATH_WRAPPER_MENU = "//div[@id[contains(.,'SubMenu')]]";
-	private static final String XPATH_MENU_ITEM = "//li[@data-testid[contains(.,'header.section.link')]]";
+	private static final String XPATH_MENU_ITEM = 
+			"//li[@data-testid[contains(.,'header.section.link')] and " + 
+			     "string-length(normalize-space(@class))>0]";
 	
 	@Override
 	public boolean isMenuInState(boolean open, int seconds) {

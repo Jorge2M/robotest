@@ -4,7 +4,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 
 public interface MenuActions {
 
-	public void click();
+	public String click();
 	public void clickSubMenu();
 	public boolean isVisibleMenu();
 	public boolean isVisibleSubMenus();

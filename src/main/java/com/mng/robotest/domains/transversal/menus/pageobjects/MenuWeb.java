@@ -47,7 +47,7 @@ public class MenuWeb extends PageBase implements MenuActions {
 			.Builder("Cardigans y jerséis")
 			.linea(LineaType.she)
 			.group(GroupType.PRENDAS)
-			.articles(Arrays.asList("Jersey", "Chaleco", "Top", "Sudadera", "Cárdigan"))
+			.articles(Arrays.asList("Jersey", "Chaleco", "Top", "Sudadera", "Cárdigan", "Cardigan"))
 			.subMenus(Arrays.asList("jerséis", "cárdigans"))
 			.subMenu("jerséis")
 			.build();
@@ -71,7 +71,9 @@ public class MenuWeb extends PageBase implements MenuActions {
 	private final List<String> subMenusOutlet;
 	private final List<String> articlesSubMenu;
 	
-	private final MenuActions menuActions = MenuActions.make(this, channel);
+	private String nameScreen = null;
+	
+	private final MenuActions menuActions;
 	
 	public static MenuWeb of(String menuLabel) {
 		return new Builder(menuLabel).build();
@@ -89,11 +91,14 @@ public class MenuWeb extends PageBase implements MenuActions {
 		this.subMenusShop = subMenusShop;
 		this.subMenusOutlet = subMenusOutlet;
 		this.articlesSubMenu = articlesSubMenu;
+		this.menuActions = MenuActions.make(this, channel);
 	}
 	
 	@Override
-	public void click() {
-		menuActions.click();
+	public String click() {
+		String nameScreen = menuActions.click();
+		this.nameScreen = nameScreen;
+		return nameScreen;
 	}
 	@Override
 	public void clickSubMenu() {
@@ -123,6 +128,13 @@ public class MenuWeb extends PageBase implements MenuActions {
 	public String getMenu() {
 		return menu;
 	}
+	
+	public String getNameScreen() {
+		if (nameScreen==null) {
+			return menu;
+		}
+		return nameScreen;
+	}
 
 	public List<String> getArticles() {
 		return articles;
@@ -138,9 +150,9 @@ public class MenuWeb extends PageBase implements MenuActions {
 	
 	public List<String> getSubMenus() {
 		if (app==AppEcom.outlet) {
-			return getSubMenusShop();
+			return getSubMenusOutlet();
 		}
-		return getSubMenusOutlet();
+		return getSubMenusShop();
 	}
 	
 	private List<String> getSubMenusShop() {

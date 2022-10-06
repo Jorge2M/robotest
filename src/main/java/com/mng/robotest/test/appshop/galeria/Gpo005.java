@@ -3,7 +3,6 @@ package com.mng.robotest.test.appshop.galeria;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 
 import static com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb.*;
@@ -25,7 +24,6 @@ public class Gpo005 extends TestBase {
 		} else {
 			clickGroup(NEW_NOW);
 			pageGaleriaSteps.secCrossSellingSteps.validaIsCorrect(LineaType.she, null);
-			pageGaleriaSteps.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
 		}
 		
 		if (!channel.isDevice()) {
@@ -34,7 +32,6 @@ public class Gpo005 extends TestBase {
 
 		if (app!=AppEcom.outlet && !channel.isDevice()) {
 			pageGaleriaSteps.secCrossSellingSteps.validaIsCorrect(LineaType.she, null);
-			pageGaleriaSteps.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
 		}	
 		
 		clickMenu(VESTIDOS_SHE);

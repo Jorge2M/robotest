@@ -91,12 +91,20 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 			click(getXPathLineaLink()).type(javascript).exec();
 		}
  	}
+	@Override
+	public void hoverLinea() {
+		clickLinea();
+	}
 	
 	@Override
 	public void clickSublinea() {
 		if (!isSublineaSelected(0)) {
 			click(getXPathSublineaLink()).type(javascript).exec();
 		}
+	}
+	@Override
+	public void hoverSublinea() {
+		clickSublinea();
 	}
 	
 	@Override

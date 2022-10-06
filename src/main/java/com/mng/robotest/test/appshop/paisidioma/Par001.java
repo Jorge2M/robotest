@@ -2,9 +2,9 @@ package com.mng.robotest.test.appshop.paisidioma;
 
 import java.util.List;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
+import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType;
 import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Linea;
@@ -94,17 +94,14 @@ public class Par001 extends TestBase {
 	private void clickMenuDependingLine(LineaType lineaType, SublineaType sublineaType) 
 			throws Exception {
 		String menu = "";
+		GroupType groupType = GroupType.PRENDAS;
 		switch (lineaType) {
-		case nina:
-		case nino:
+		case nina, nino:
 			menu = "camisas";
 			break;
 		case home:
-			if (channel==Channel.mobile) {
-				menu = "dormitorio-mantas";
-			} else {
-				menu = "mantas_dormitorio";
-			}
+			groupType = GroupType.DORMITORIO;
+			menu = "mantas_dormitorio";
 			break;
 		default:
 			menu = "pantalones";
@@ -112,7 +109,9 @@ public class Par001 extends TestBase {
 		clickMenu(new MenuWeb
 				.Builder(menu)
 				.linea(lineaType)
-				.sublinea(sublineaType).build());
+				.sublinea(sublineaType)
+				.group(groupType)
+				.build());
 	}
 	
 	public void testSpecificFeaturesForLinea(Linea linea) throws Exception {
