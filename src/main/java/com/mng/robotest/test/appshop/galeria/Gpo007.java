@@ -4,7 +4,7 @@ import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.steps.shop.galeria.ModalArticleNotAvailableSteps;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 
-import static com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb.*;
+import static com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
 
 public class Gpo007 extends TestBase {
 

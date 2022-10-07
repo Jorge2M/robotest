@@ -20,7 +20,7 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
-import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
+import com.mng.robotest.domains.transversal.menus.beans.FactoryMenus;
 import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.generic.stackTrace;
 import com.mng.robotest.test.getdata.products.GetterProducts;
@@ -36,6 +36,8 @@ import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.ControlT
 import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
 import com.mng.robotest.test.utils.WebDriverMngUtils;
+
+import static com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
 
 public class SecMenusDesktopSteps extends StepBase {
 
@@ -320,7 +322,7 @@ public class SecMenusDesktopSteps extends StepBase {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_URL_ACCESO, urlAccesoCorreo);
 
 		driver.navigate().to(urlAccesoCorreo);
-		new MenuSteps().checkSelecMenu(MenuWeb.ABRIGOS_SHE);
+		new MenuSteps().checkSelecMenu(FactoryMenus.get(ABRIGOS_SHE));
 	}
 	
 	private static final String TAG_REF_ARTICLE = "@TagRefArticle";

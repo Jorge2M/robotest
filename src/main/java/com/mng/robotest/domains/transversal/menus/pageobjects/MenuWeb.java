@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.transversal.menus.pageobjects;
 
-import java.util.Arrays;
 import java.util.List;
 
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -10,56 +9,6 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
 
 public class MenuWeb extends PageBase implements MenuActions {
-
-	public static final MenuWeb VESTIDOS_SHE  = new MenuWeb
-			.Builder("Vestidos")
-			.linea(LineaType.she)
-			.group(GroupType.PRENDAS)
-			.articles(Arrays.asList("Vestido", "Pichi", "Peto", "Mono", "Caftán", "Blusón"))
-			.subMenusShop(Arrays.asList("largos", "cortos", "midi"))
-			.subMenusOutlet(Arrays.asList("Vestidos largos", "Vestidos cortos", "Vestidos midi"))
-			.build();
-	
-	public static final MenuWeb CAMISAS_BASICAS_SHE = new MenuWeb
-			.Builder("Camisas")
-			.linea(LineaType.she)
-			.group(GroupType.PRENDAS)
-			.articles(Arrays.asList(
-					"Camisa", "Blusa", "Bluson", "Blusón", "Top", "Bustier", "Body", "Camisero", 
-					"Poncho", "Corsé"))
-			.subMenus(Arrays.asList("camisas", "blusas", "básicas"))	
-			.subMenu("básicas")
-			.articlesSubMenu(Arrays.asList("Camisa", "Blusa", "Top"))
-			.build(); 
-	public static final MenuWeb CAMISAS_SHE = CAMISAS_BASICAS_SHE;
-	
-	public static final MenuWeb ABRIGOS_SHE = new MenuWeb
-			.Builder("Abrigos")
-			.linea(LineaType.she)
-			.group(GroupType.PRENDAS)
-			.articles(Arrays.asList("Anorak", "Abrigo", "Gabardina", "Trench", "Parka", "Chubasquero"))
-			.subMenus(Arrays.asList("abrigos", "anoraks", "trench"))
-			.subMenu("trench")
-			.articlesSubMenu(Arrays.asList("Gabardina", "Parka", "Trench", "Chubasquero"))
-			.build();
-	
-	public static final MenuWeb CARDIGANS_Y_JERSEIS_JERSEIS_SHE = new MenuWeb
-			.Builder("Cardigans y jerséis")
-			.linea(LineaType.she)
-			.group(GroupType.PRENDAS)
-			.articles(Arrays.asList("Jersey", "Chaleco", "Top", "Sudadera", "Cárdigan", "Cardigan"))
-			.subMenus(Arrays.asList("jerséis", "cárdigans"))
-			.subMenu("jerséis")
-			.build();
-	public static final MenuWeb CARDIGANS_Y_JERSEIS_SHE = CARDIGANS_Y_JERSEIS_JERSEIS_SHE; 
-	
-	public static final MenuWeb ABRIGOS_HE = new MenuWeb
-			.Builder("Abrigos")
-			.linea(LineaType.he)
-			.group(GroupType.PRENDAS)
-			.articles(Arrays.asList("Abrigo", "Anorak"))
-			.subMenus(Arrays.asList("abrigos", "anoraks"))
-			.build();	
 	
 	private final LineaType linea;
 	private final SublineaType sublinea;

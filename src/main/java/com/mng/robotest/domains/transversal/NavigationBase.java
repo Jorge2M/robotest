@@ -12,6 +12,8 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
+import com.mng.robotest.domains.transversal.menus.beans.FactoryMenus;
+import com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem;
 import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb;
 import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType;
 import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
@@ -63,6 +65,9 @@ public class NavigationBase extends PageBase {
 	protected void clickMenu(String menuLabel) {
 		new MenuSteps().clickMenu(menuLabel);
 	}
+	protected void clickMenu(MenuItem menuItem) {
+		clickMenu(FactoryMenus.get(menuItem));
+	}
 	protected void clickMenu(MenuWeb menu) {
 		new MenuSteps().click(menu);
 	}
@@ -71,6 +76,9 @@ public class NavigationBase extends PageBase {
 	}
 	public void clickGroup(LineaType linea, SublineaType sublinea, GroupType groupType) {
 		new MenuSteps().clickGroup(new GroupWeb(linea, sublinea, groupType));
+	}
+	protected void clickSubMenu(MenuItem menuItem) {
+		clickSubMenu(FactoryMenus.get(menuItem));
 	}
 	protected void clickSubMenu(MenuWeb menu) {
 		new MenuSteps().clickSubMenu(menu);

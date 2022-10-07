@@ -18,7 +18,7 @@ import com.mng.robotest.test.steps.shop.SecFiltrosSteps;
 import com.mng.robotest.test.steps.shop.galeria.DataForScrollStep;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 
-import static com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb.*;
+import static com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
 
 public class Gpo001 extends TestBase {
 

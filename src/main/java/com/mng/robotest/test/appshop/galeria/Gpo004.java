@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
 import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;
@@ -15,6 +14,8 @@ import com.mng.robotest.test.steps.shop.SecFiltrosSteps;
 import com.mng.robotest.test.steps.shop.galeria.DataForScrollStep;
 import com.mng.robotest.test.steps.shop.galeria.LocationArticle;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
+
+import static com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
 
 public class Gpo004 extends TestBase {
 
@@ -43,9 +44,9 @@ public class Gpo004 extends TestBase {
 
 	private void selectGaleryAndFilterByColor() throws Exception {
 		if (app==AppEcom.shop) {
-			clickMenu(MenuWeb.CAMISAS_SHE);
+			clickMenu(CAMISAS_SHE);
 		} else {
-			clickMenu(MenuWeb.ABRIGOS_SHE);
+			clickMenu(ABRIGOS_SHE);
 		}
 
 		List<Color> colorsToFilter = new ArrayList<>();
