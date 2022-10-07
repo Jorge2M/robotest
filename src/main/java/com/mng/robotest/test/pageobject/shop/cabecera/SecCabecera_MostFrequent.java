@@ -14,7 +14,6 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.NavigationBase;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop;
-import com.mng.robotest.test.utils.UtilsTest;
 
 public class SecCabecera_MostFrequent extends SecCabecera {
 	
@@ -71,8 +70,8 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 //				if (app==AppEcom.shop && this==iniciarsesion) {
 //					return By.xpath("//span[@data-testid='header.menuItem.userIcon']");
 //				}
-				if (app==AppEcom.outlet ||
-				   (new NavigationBase().isPRO() && UtilsTest.dateBeforeToday("2022-11-04"))) {
+				if (app==AppEcom.outlet) { //||
+				   //(new NavigationBase().isPRO() && UtilsTest.dateBeforeToday("2022-10-04"))) {
 					return byMobileOutlet;
 				} else {
 				    return byMobileShop;
@@ -84,8 +83,8 @@ public class SecCabecera_MostFrequent extends SecCabecera {
 
 		public String getXPath(Channel channel, Enum<?> app) {
 			if (channel.isDevice()) {
-				if (app==AppEcom.outlet ||
-				   (new NavigationBase().isPRO() && UtilsTest.dateBeforeToday("2022-11-04"))) {
+				if (app==AppEcom.outlet /*||
+				   (new NavigationBase().isPRO() && UtilsTest.dateBeforeToday("2022-10-04"))*/) {
 				    return xpathMobileOutlet;
 				} else {
 					return xpathMobileShop;

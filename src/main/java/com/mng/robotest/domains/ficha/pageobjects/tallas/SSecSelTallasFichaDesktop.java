@@ -5,6 +5,8 @@ import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
+
 public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallasFicha {
 	
 	private static final String XPATH_CAPA_TALLAS = "//div[@id='sizesContainer']"; 
@@ -112,8 +114,8 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	public void selectTallaByValue(String codigoNumericoTalla) {
 //		unfoldListTallasIfNotYet();
 		String xpathTalla = getXPathTallaByCodigo(codigoNumericoTalla);
-		if (state(Clickable, xpathTalla).check()) {
-			getElement(xpathTalla).click();
+		if (state(Present, xpathTalla).check()) {
+			click(xpathTalla).type(TypeClick.javascript).exec();
 		}
 	}
 	

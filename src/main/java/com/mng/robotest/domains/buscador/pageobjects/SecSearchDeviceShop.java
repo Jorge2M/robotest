@@ -18,8 +18,8 @@ public class SecSearchDeviceShop extends PageBase implements SecSearch {
 	private static final String XPATH_CANCELAR_LINK = "//div[@class[contains(.,'search-cancel')]]";
 	
 	private String getXPathInputBuscador() {
-		if (app==AppEcom.outlet ||
-		   (new NavigationBase().isPRO() && UtilsTest.dateBeforeToday("2022-11-04"))) {
+		if (app==AppEcom.outlet /*||
+		   (new NavigationBase().isPRO() && UtilsTest.dateBeforeToday("2022-10-04"))*/) {
 		    return XPATH_INPUT_BUSCADOR_OUTLET;
 		} else {
 			return XPATH_INPUT_BUSCADOR_SHOP;

@@ -119,8 +119,8 @@ public abstract class SecCabecera extends PageBase {
 	private static final String XPATH_HAMBURGUESA_ICON_OUTLET = "//div[@class='menu-open-button']";
 	private static final String XPATH_HAMBURGUESA_ICON_SHOP = "//*[@data-testid='header.burger']";
 	private String getXPathHamburguesaIcon() {
-		if (app==AppEcom.outlet ||
-		   (isPRO() && UtilsTest.dateBeforeToday("2022-11-04"))) {
+		if (app==AppEcom.outlet /*||
+		   (isPRO() && UtilsTest.dateBeforeToday("2022-11-04"))*/) {
 			return XPATH_HAMBURGUESA_ICON_OUTLET;
 		} else {
 			return XPATH_HAMBURGUESA_ICON_SHOP;
