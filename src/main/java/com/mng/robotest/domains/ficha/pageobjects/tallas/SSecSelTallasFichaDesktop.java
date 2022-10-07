@@ -7,59 +7,28 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallasFicha {
 	
-//	public enum XPathTallas {
-//		XPATH_CAPA_TALLAS(
-//			"//form/div[@class='sizes']",
-//			"//div[@id='sizesContainer']"),
-//		XPATH_SELECTOR_TALLAS(
-//			XPATH_CAPA_TALLAS.getXPathOld() + "/div[@class='selector']",
-//			XPATH_CAPA_TALLAS.getXPathNew() + "//div[@role='list']"),
-//		XPATH_LIST_TALLAS_FOR_SELECT(
-//			XPATH_SELECTOR_TALLAS.getXPathOld() + "//div[@class[contains(.,'selector-list')]]",
-//			XPATH_CAPA_TALLAS.getXPathNew() + "//div[@role='list']"), 
-//		XPATH_TALLA_ITEM(
-//			XPATH_CAPA_TALLAS.getXPathOld() + "//span[(@role='option' or @role='button') and not(@data-available='false')]",
-//			XPATH_CAPA_TALLAS.getXPathNew() + "//div[@role='listitem']"),
-//		XPATH_TALLA_AVAILABLE(
-//			XPATH_TALLA_ITEM.getXPathOld() + "//self::span[@data-available='true' or @class='single-size']",
-//			XPATH_TALLA_ITEM.getXPathNew() + ),
-//		XPATH_TALLA_UNAVAILABLE(
-//			XPATH_TALLA_ITEM.getXPathOld() + "//self::span[not(@data-available) and not(@class='single-size')]",
-//			XPATH_TALLA_ITEM.getXPathNew() + "//i[@class='icon-outline-email']/../../.."),
-//		XPATH_TALLA_SELECTED(
-//			XPATH_TALLA_ITEM.getXPathOld() + "//self::span[@class[contains(.,'selector-trigger')] or @class='single-size']",
-//			""),
-//		XPATH_TALLA_UNICA(
-//			XPATH_TALLA_ITEM.getXPathOld() + "//self::span[@class[contains(.,'single-size')]]",
-//			"");
-//		
-//		private String xpathOld; 
-//		private String xpathNew;
-//		private XPathTallas(String xpathOld, String xpathNew) {
-//			this.xpathOld = xpathOld;
-//			this.xpathNew = xpathNew;
-//		}
-//		private String getXPathOld() {
-//			return xpathOld;
-//		}
-//		private String getXPathNew() {
-//			return xpathNew;
-//		}
-//
-//	}
+	private static final String XPATH_CAPA_TALLAS = "//div[@id='sizesContainer']"; 
+	private static final String XPATH_SELECTOR_TALLAS = XPATH_CAPA_TALLAS + "//div[@role='list']";
+	private static final String XPATH_LIST_TALLAS_FOR_SELECT = XPATH_CAPA_TALLAS + "//div[@role='list']";
+	private static final String XPATH_TALLA_ITEM = XPATH_CAPA_TALLAS + "//span[@data-available]";
+	private static final String XPATH_TALLA_AVAILABLE = XPATH_TALLA_ITEM + "//self::*[@data-available='true']";
+	private static final String XPATH_TALLA_UNAVAILABLE = XPATH_TALLA_ITEM + "//self::*[@data-available='false']";
+	private static final String XPATH_TALLA_SELECTED = XPATH_TALLA_ITEM + "//self::*[@aria-selected='true']";
+	private static final String XPATH_ICON_DESPLEGABLE_TALLAS = "//i[@class[contains(.,'icon-outline-down')]]";
+//	private static final String XPATH_TALLA_UNICA = 	
 	
-	private static final String XPATH_CAPA_TALLAS = "//form/div[@class='sizes']";
-	private static final String XPATH_SELECTOR_TALLAS = XPATH_CAPA_TALLAS + "/div[@class='selector']";
-	private static final String XPATH_LIST_TALLAS_FOR_SELECT = XPATH_SELECTOR_TALLAS + "//div[@class[contains(.,'selector-list')]]";
-	private static final String XPATH_TALLA_ITEM = XPATH_CAPA_TALLAS + "//span[(@role='option' or @role='button') and not(@data-available='false')]";
-	private static final String XPATH_TALLA_AVAILABLE = XPATH_TALLA_ITEM + "//self::span[@data-available='true' or @class='single-size']";
-	private static final String XPATH_TALLA_UNAVAILABLE = XPATH_TALLA_ITEM + "//self::span[not(@data-available) and not(@class='single-size')]";
-	private static final String XPATH_TALLA_SELECTED = XPATH_TALLA_ITEM + "//self::span[@class[contains(.,'selector-trigger')] or @class='single-size']";
-	private static final String XPATH_TALLA_UNICA = XPATH_TALLA_ITEM + "//self::span[@class[contains(.,'single-size')]]";
+//	private static final String XPATH_CAPA_TALLAS = "//form/div[@class='sizes']";
+//	private static final String XPATH_SELECTOR_TALLAS = XPATH_CAPA_TALLAS + "/div[@class='selector']";
+//	private static final String XPATH_LIST_TALLAS_FOR_SELECT = XPATH_SELECTOR_TALLAS + "//div[@class[contains(.,'selector-list')]]";
+//	private static final String XPATH_TALLA_ITEM = XPATH_CAPA_TALLAS + "//span[(@role='option' or @role='button') and not(@data-available='false')]";
+//	private static final String XPATH_TALLA_AVAILABLE = XPATH_TALLA_ITEM + "//self::span[@data-available='true' or @class='single-size']";
+//	private static final String XPATH_TALLA_UNAVAILABLE = XPATH_TALLA_ITEM + "//self::span[not(@data-available) and not(@class='single-size')]";
+//	private static final String XPATH_TALLA_SELECTED = XPATH_TALLA_ITEM + "//self::span[@class[contains(.,'selector-trigger')] or @class='single-size']";
+//	private static final String XPATH_TALLA_UNICA = XPATH_TALLA_ITEM + "//self::span[@class[contains(.,'single-size')]]";
 	
 	private String getXPathTallaByCodigo(String codigoNumericoTalla) {
 		int numTalla = Integer.valueOf(codigoNumericoTalla);
-		return (XPATH_TALLA_ITEM + "//self::span[@data-value='" + codigoNumericoTalla + "' or @data-value='" + numTalla + "']"); 
+		return (XPATH_TALLA_ITEM + "//self::span[@id='size-" + codigoNumericoTalla + "' or @id='size-" + numTalla + "']"); 
 	}
 	
 	private String getXPathTallaByLabel(String labelTalla) {
@@ -115,22 +84,24 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 
 	@Override
 	public boolean isTallaUnica() {
-		return state(Present, XPATH_TALLA_UNICA).check();
+		return 
+			!state(Visible, XPATH_ICON_DESPLEGABLE_TALLAS).check() &&
+			getElements(XPATH_TALLA_ITEM).size()==1;
 	}
 	
-	private boolean unfoldListTallasIfNotYet() {
-		if (!state(Visible, XPATH_LIST_TALLAS_FOR_SELECT).check()) {
-			//En el caso de talla única no existe XPathSelectorTallas
-			if (state(Visible, XPATH_SELECTOR_TALLAS).check()) {
-				getElement(XPATH_SELECTOR_TALLAS).click();
-			} else {
-				return true;
-			}
-			return (isVisibleListTallasForSelectUntil(1));
-		}
-		
-		return true;
-	}
+//	private boolean unfoldListTallasIfNotYet() {
+//		if (!state(Visible, XPATH_LIST_TALLAS_FOR_SELECT).check()) {
+//			//En el caso de talla única no existe XPathSelectorTallas
+//			if (state(Visible, XPATH_SELECTOR_TALLAS).check()) {
+//				getElement(XPATH_SELECTOR_TALLAS).click();
+//			} else {
+//				return true;
+//			}
+//			return (isVisibleListTallasForSelectUntil(1));
+//		}
+//		
+//		return true;
+//	}
 	
 	@Override
 	public boolean isVisibleListTallasForSelectUntil(int seconds) {
@@ -139,7 +110,7 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	
 	@Override
 	public void selectTallaByValue(String codigoNumericoTalla) {
-		unfoldListTallasIfNotYet();
+//		unfoldListTallasIfNotYet();
 		String xpathTalla = getXPathTallaByCodigo(codigoNumericoTalla);
 		if (state(Clickable, xpathTalla).check()) {
 			getElement(xpathTalla).click();
@@ -148,7 +119,7 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	
 	@Override
 	public void selectTallaByLabel(String tallaLabel) {
-		unfoldListTallasIfNotYet();
+//		unfoldListTallasIfNotYet();
 		String xpathTalla = getXPathTallaByLabel(tallaLabel);
 		if (state(Clickable, xpathTalla).check()) {
 			getElement(xpathTalla).click();
@@ -157,7 +128,7 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	
 	@Override
 	public void selectTallaByIndex(int posicion) {
-		unfoldListTallasIfNotYet();
+//		unfoldListTallasIfNotYet();
 		String xpathTallaByPos = "(" + XPATH_TALLA_ITEM + ")[" + posicion + "]";
 		if (state(Clickable, xpathTallaByPos).check()) {
 			getElement(xpathTallaByPos).click();
@@ -166,7 +137,7 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	
 	@Override
 	public void selectFirstTallaAvailable() {
-		unfoldListTallasIfNotYet();
+//		unfoldListTallasIfNotYet();
 		if (state(Clickable, XPATH_TALLA_AVAILABLE).check()) {
 			getElement(XPATH_TALLA_AVAILABLE).click();
 		}

@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -38,10 +39,21 @@ public class PageMisCompras extends PageBase {
 		isVisibleTicket(5);
 		waitLoadPage();
 		waitMillis(1000);
+		try {
+			return getTicketsStaleUnsafe();
+		}
+		catch (StaleElementReferenceException e) {
+			waitMillis(1000);
+			return getTicketsStaleUnsafe();
+		}
+	}
+	
+	private List<Ticket> getTicketsStaleUnsafe() {
 		return getTicketsPage().stream()
 				.map(item -> getTicket(item))
 				.toList();
 	}
+	
 	
 	public List<Ticket> getTickets(TypeTicket typeCompra) {
 		if (listTickets==null) {
