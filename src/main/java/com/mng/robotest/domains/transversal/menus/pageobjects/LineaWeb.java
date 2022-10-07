@@ -147,18 +147,30 @@ public class LineaWeb extends PageBase implements LineaActions {
 	@Override
 	public void clickLinea() {
 		lineaActions.clickLinea();
+		if (!lineaActions.isLineaSelected(1)) {
+			lineaActions.clickLinea();
+		}
 	}
 	@Override
 	public void clickSublinea() {
 		lineaActions.clickSublinea();
+		if (!lineaActions.isSublineaSelected(1)) {
+			lineaActions.clickSublinea();
+		}
 	}
 	@Override
 	public void hoverLinea() {
 		lineaActions.hoverLinea();
+		if (!lineaActions.isLineaSelected(1)) {
+			lineaActions.hoverLinea();
+		}
 	}
 	@Override
 	public void hoverSublinea() {
 		lineaActions.hoverSublinea();
+		if (!lineaActions.isSublineaSelected(1)) {
+			lineaActions.hoverSublinea();
+		}
 	}
 	@Override
 	public boolean isLineaPresent(int seconds) {

@@ -367,6 +367,7 @@ public class MenuSteps extends StepBase {
 	
 	public void clickAllMenus(LineaWeb lineaWeb) {
 		List<GroupType> listGroups = GroupType.getGroups(lineaWeb.getLinea());
+		listGroups=Arrays.asList(GroupType.PROMOCION); //TODO eliminar
 		for (GroupType group : listGroups) {
 			if (group.getGroupResponse()==GroupResponse.ARTICLES) {
 				//TODO pending

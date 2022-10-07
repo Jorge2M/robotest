@@ -94,7 +94,8 @@ public class GroupWeb extends PageBase {
 	private static final String XPATH_GROUP_DESKTOP = "//li[@data-testid[contains(.,'header.section')]]";
 	
 	private static final String TAG_GROUP = "@tag_group";
-	private static final String XPATH_SUBMENU_WITH_TAG_DESKTOP = "//ul/li[@id='" + TAG_GROUP + "']/..";
+	private static final String XPATH_SUBMENU_WITH_TAG_DESKTOP = 
+			"//ul[@data-testid[contains(.,'subfamily')]]/li[@id[contains(.,'" + TAG_GROUP + "')]]";
 	private static final String XPATH_SUBMENU_DEVICE = "//div[@data-testid='header.subMenu']";
 
 	private String getXPathGroup() {
@@ -110,13 +111,21 @@ public class GroupWeb extends PageBase {
 		}
 		return xpath + "//self::*[@data-testid[contains(.,'" + group.getId() + "')]]"; 
 	}
-	private String getXPathGroupDesktop() {
-		String xpathGroup =  XPATH_GROUP_DESKTOP + "//self::*[@id[contains(.,'" + group.getId() + "')]]";
-		if (group.getGroupResponse()==GroupResponse.ARTICLES) {
-			return xpathGroup + "/a";
-		}
-		return xpathGroup + "/span";
+	
+	private String getXPathGroupLiDesktop() {
+		return  XPATH_GROUP_DESKTOP + "//self::*[@id[contains(.,'" + group.getId() + "')]]";
 	}
+	private String getXPathGroupDesktop() {
+		String xpathGroupLi = getXPathGroupLiDesktop();
+		if (group.getGroupResponse()==GroupResponse.ARTICLES) {
+			return xpathGroupLi + "/a";
+		}
+		return xpathGroupLi + "/span";
+	}
+	private String getXPathGroupSelectedDesktop() {
+		return getXPathGroupLiDesktop() + "//self::*[string-length(normalize-space(@class))>0]";
+	}
+	
 	private String getXPathSubmenu() {
 		if (channel.isDevice()) {
 			return XPATH_SUBMENU_DEVICE;
@@ -131,6 +140,10 @@ public class GroupWeb extends PageBase {
 	
 	private void clickGroup() {
 		click(getXPathGroup()).exec(); 
+		if (!isVisibleSubMenus() && group.getGroupResponse()==GroupResponse.MENUS) {
+			waitMillis(1000);
+			click(getXPathGroup()).exec();
+		}
 	}
 	
 	private void hoverLinea() {
