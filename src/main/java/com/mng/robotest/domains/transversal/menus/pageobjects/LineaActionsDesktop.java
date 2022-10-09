@@ -2,6 +2,7 @@ package com.mng.robotest.domains.transversal.menus.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
@@ -72,6 +73,7 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 	}
 	@Override
 	public void hoverLinea() {
+		state(State.Visible, getXPathLinea()).wait(1).check();
 		moveToElement(getXPathLinea());
 	}
 	@Override 

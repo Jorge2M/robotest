@@ -46,21 +46,10 @@ public class ErrorStorer extends EvidenceStorer {
 			WebDriver driver = TestMaker.getDriverTestCase();
 			String windowHandle = loadErrorPage(driver);
 			htmlPageError = driver.getPageSource();
-//			try {
-				//String nombreErrorFile = StepEvidence.errorpage.getPathFile(step);
-//				File errorImage = new File(nombreErrorFile);
-//				try (FileWriter fw = new FileWriter(errorImage)) {
-//					fw.write(driver.getPageSource());
-//				}
-//			} 
-//			catch (Exception e) {
-//				throw e;
-//			} 
-//			finally {
-				JavascriptExecutor js = (JavascriptExecutor) driver;
-				js.executeScript("window.close('" + Thread.currentThread().getName() + "');");
-				driver.switchTo().window(windowHandle);
-//			}
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("window.close('" + Thread.currentThread().getName() + "');");
+			driver.switchTo().window(windowHandle);
+			driver.switchTo().window(windowHandle);
 		}
 		return htmlPageError;
 	}

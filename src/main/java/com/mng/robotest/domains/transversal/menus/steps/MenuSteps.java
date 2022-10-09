@@ -65,7 +65,7 @@ public class MenuSteps extends StepBase {
 	@Step (
 		description=
 			"Selección del grupo <b>#{group.getLinea()} / </b>" + 
-		    "<b style=\"color:blue;\">#{group.getGroup()}</b>", 
+		    "<b style=\"color:brown;\">#{group.getGroup()}</b>", 
 		expected=
 			"La selección es correcta")	
 	private void clickGroupLinea(GroupWeb group) {
@@ -76,7 +76,7 @@ public class MenuSteps extends StepBase {
 	@Step (
 		description=
 			"Selección del grupo <b>#{group.getLinea()} / #{group.getSublinea()} / </b>" + 
-		    "<b style=\"color:blue;\">#{group.getGroup()}</b>", 
+		    "<b style=\"color:brown;\">#{group.getGroup()}</b>", 
 		expected=
 			"La selección es correcta")	
 	private void clickGroupSublinea(GroupWeb group) {
@@ -94,7 +94,7 @@ public class MenuSteps extends StepBase {
 	
 	@Validation (
 		description="Es visible la capa de los submenús del grupo #{groupWeb.getGroup()}",
-		level=State.Defect)
+		level=State.Info)
 	private boolean checkGroupSubMenuVisible(GroupWeb groupWeb) {
 		return groupWeb.isVisibleSubMenus();
 	}	
@@ -164,8 +164,11 @@ public class MenuSteps extends StepBase {
 		ChecksTM checks = ChecksTM.getNew();
 		boolean isTitleAccording = new AllPages().isTitleAssociatedToMenu(nameMenu);
 	 	checks.add(
-			"El title de la página es el asociado al menú <b>" + nameMenu + "</b>",
-			isTitleAccording, State.Info);
+	 		Check.make(
+	 				"El title de la página es el asociado al menú <b>" + nameMenu + "</b>",
+	 				isTitleAccording, State.Info)
+	 			.store(StoreType.None).build());
+	 	
 	 	if (!isTitleAccording) {
 		 	checks.add(
 		 	    Check.make(
@@ -367,7 +370,7 @@ public class MenuSteps extends StepBase {
 	
 	public void clickAllMenus(LineaWeb lineaWeb) {
 		List<GroupType> listGroups = GroupType.getGroups(lineaWeb.getLinea());
-		listGroups=Arrays.asList(GroupType.PROMOCION); //TODO eliminar
+		//listGroups=Arrays.asList(GroupType.PROMOCION); //TODO eliminar
 		for (GroupType group : listGroups) {
 			if (group.getGroupResponse()==GroupResponse.ARTICLES) {
 				//TODO pending

@@ -725,10 +725,21 @@ public class PageGaleriaDesktop extends PageGaleria {
 
 	@Override
 	public boolean isHeaderArticlesVisible(String textHeader) {
-		if (state(Visible, XPATH_HEADER_ARTICLES).check()) {
-			return (getElement(XPATH_HEADER_ARTICLES).getText().toLowerCase().contains(textHeader.toLowerCase()));
+		String headerText = getHeaderText(3).toLowerCase();
+		return headerText.contains(textHeader.toLowerCase());
+	}
+	
+	private String getHeaderText(int seconds) {
+		if (state(Visible, XPATH_HEADER_ARTICLES).wait(1).check()) {
+			for (int i=0; i<seconds; i++) {
+				String headerText = getElement(XPATH_HEADER_ARTICLES).getText();
+				if (headerText.compareTo("")!=0) {
+					return headerText;
+				}
+				waitMillis(1000);
+			}
 		}
-		return false;
+		return "";
 	}
 
 	@Override
