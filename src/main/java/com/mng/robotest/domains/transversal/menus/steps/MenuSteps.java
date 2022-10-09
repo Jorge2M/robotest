@@ -382,10 +382,12 @@ public class MenuSteps extends StepBase {
 	
 	public void clickAllMenus(GroupWeb groupWeb) {
 		MenusWebAll menusWebAll = MenusWebAll.make(channel);
-		clickGroup(groupWeb);
-		List<MenuWeb> listMenus = menusWebAll.getMenus(groupWeb);
-		for (MenuWeb menuWeb : listMenus) {
-			clickMenu(menuWeb);
+		if (groupWeb.isPresent()) {
+			clickGroup(groupWeb);
+			List<MenuWeb> listMenus = menusWebAll.getMenus(groupWeb);
+			for (MenuWeb menuWeb : listMenus) {
+				clickMenu(menuWeb);
+			}
 		}
 	}
 }

@@ -3,6 +3,7 @@ package com.mng.robotest.domains.transversal.menus.pageobjects;
 import java.util.Arrays;
 import java.util.List;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
@@ -137,9 +138,13 @@ public class GroupWeb extends PageBase {
 		hoverLinea(); 
 		clickGroup();
 	}
+	public boolean isPresent() {
+		hoverLinea();
+		return state(State.Visible, getXPathGroup()).wait(1).check();
+	}
 	
 	private void clickGroup() {
-		click(getXPathGroup()).exec(); 
+		click(getXPathGroup()).type(TypeClick.javascript).exec(); 
 		if (!isVisibleSubMenus() && group.getGroupResponse()==GroupResponse.MENUS) {
 			waitMillis(1000);
 			click(getXPathGroup()).exec();

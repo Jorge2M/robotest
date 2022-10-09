@@ -10,7 +10,7 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType
 
 public class MenusWebAllDevice extends PageBase implements MenusWebAll {
 
-	private static final String XPATH_MENU_ITEM = "//a[@data-testid[contains(.,'header.subMenu.item')]";
+	private static final String XPATH_MENU_ITEM = "//a[@data-testid[contains(.,'header.subMenu.item')]]";
 	
 	@Override
 	public boolean isMenuInState(boolean open, int seconds) {
