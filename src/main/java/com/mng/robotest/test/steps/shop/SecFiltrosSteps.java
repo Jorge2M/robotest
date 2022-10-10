@@ -15,7 +15,8 @@ import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltros;
 import com.mng.robotest.test.pageobject.shop.menus.MenuLateralDesktop;
-import com.mng.robotest.test.steps.shop.menus.SecMenuLateralMobilSteps;
+import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
+import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 public class SecFiltrosSteps extends StepBase {
 
@@ -68,7 +69,8 @@ public class SecFiltrosSteps extends StepBase {
 		List<String> listMenus = getListMenusStr(menusToSelect);
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagLitMenusToSelect, StringUtils.join(menusToSelect, ","));
 		secFiltros.selectMenu2onLevel(listMenus);		
-		new SecMenuLateralMobilSteps().validaSelecMenu(menusToSelect.get(0));
+		new PageGaleriaSteps().validateGaleriaAfeterSelectMenu();
+		GenericChecks.checkDefault();
 	}
 	
 	private List<String> getListMenusStr(List<MenuLateralDesktop> listMenus) {

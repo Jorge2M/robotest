@@ -6,9 +6,9 @@ import java.util.List;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebElement;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.domains.transversal.PageBase;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -84,7 +84,7 @@ public class PageMenusManto extends PageBase {
 		try {
 			clickMenu(textoMenu);
 		} catch (UnhandledAlertException f) {
-			String textAlert = SeleniumUtils.acceptAlertIfExists(driver);
+			String textAlert = PageObjTM.acceptAlertIfExists(driver);
 			if ("".compareTo(textAlert)==0) {
 				return "Unknown or Empty";
 			}

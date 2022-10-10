@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
@@ -51,7 +51,7 @@ public class SecBuscadorSteps extends StepBase {
 	
 	private void searchArticuloCommon(GarmentCatalog product) throws Exception {
 		ArticuloNavigations.buscarArticulo(product.getArticleWithMoreStock(), channel, app);
-		SeleniumUtils.waitForPageLoaded(driver);  
+		PageObjTM.waitForPageLoaded(driver);  
 		PageFichaSteps pageFichaSteps = new PageFichaSteps();
 		pageFichaSteps.checkIsFichaAccordingTypeProduct(product);
 	}
@@ -61,7 +61,7 @@ public class SecBuscadorSteps extends StepBase {
 		expected="El resultado de la búsqueda es el correcto :-)")
 	public void busquedaCategoriaProducto(String categoriaABuscar, boolean categoriaExiste) throws Exception {
 		SecCabecera.buscarTexto(categoriaABuscar, channel, app);
-		SeleniumUtils.waitForPageLoaded(driver);	
+		PageObjTM.waitForPageLoaded(driver);	
 		if (categoriaExiste) { 
 			areProducts(categoriaABuscar, 3);
 		} else {

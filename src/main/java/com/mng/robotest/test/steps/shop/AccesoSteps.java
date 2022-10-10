@@ -32,7 +32,7 @@ import com.mng.robotest.test.steps.votf.PageLoginVOTFSteps;
 import com.mng.robotest.test.steps.votf.PageSelectIdiomaVOTFSteps;
 import com.mng.robotest.test.steps.votf.PageSelectLineaVOTFSteps;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 public class AccesoSteps extends StepBase {
 
@@ -225,7 +225,7 @@ public class AccesoSteps extends StepBase {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagLiteralIdiomaOrigen, idiomaOrigen.getLiteral());
 		
 		driver.get(urlAccesoPaisNoIp);
-		SeleniumUtils.waitForPageLoaded(driver);
+		PageObjTM.waitForPageLoaded(driver);
 		if (vecesPaisConfPrev < 2) {
 			//Si se ha confirmado el país < 2 veces debería aparecer el modal del cambio de país
 			ResultValWithPais resultVal = validacAccesoSiApareceModal(urlBaseTest, paisAccesoNoIP, paisAccesoPrevio, paisPrevConf, listPaisAsocIP, driver);

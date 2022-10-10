@@ -3,7 +3,7 @@ package com.mng.robotest.domains.compra.payments.sofort.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.domains.compra.payments.sofort.pageobjects.PageSofort2on;
 import com.mng.robotest.domains.transversal.StepBase;
 
@@ -31,7 +31,7 @@ public class PageSofort2onSteps extends StepBase {
 	public void selectPaisYBanco(String paisSofort, String bankCode) {
 		pageSofort2on.selectPais(paisSofort);
 		pageSofort2on.inputBankcode(bankCode);
-		SeleniumUtils.waitForPageLoaded(driver, 5);
+		PageObjTM.waitForPageLoaded(driver, 5);
 		pageSofort2on.clickSubmitButtonPage3();
 		new PageSofort4thSteps().validaIsPage();
 	}

@@ -8,7 +8,7 @@ import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.EmbeddedDriver;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.utils.WebUtils;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
@@ -19,8 +19,8 @@ public class CheckerJSerrors implements Checker {
 		ChecksTM checks = ChecksTM.getNew();
 		
 		//Nota: No funciona con GeckoDriver porque no están implementados los servicios al no formar parte del protocolo W3C https://github.com/w3c/webdriver/issues/406
-		if (SeleniumUtils.getTypeDriver(driver)!=EmbeddedDriver.firefox &&
-			SeleniumUtils.getTypeDriver(driver)!=EmbeddedDriver.firefoxhless) {
+		if (PageObjTM.getTypeDriver(driver)!=EmbeddedDriver.firefox &&
+			PageObjTM.getTypeDriver(driver)!=EmbeddedDriver.firefoxhless) {
 			int maxErrors = 1;
 			ResultadoErrores resultadoLogs = WebUtils.getLogErrors(Level.WARNING, driver, maxErrors);
 			String descripValidac = "No hay errores JavaScript";

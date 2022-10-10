@@ -1,12 +1,10 @@
 package com.mng.robotest.domains.footer.steps;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils.waitMillis;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.domains.footer.pageobjects.PageMangoCard;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.PageInputDataSolMangoCard;
@@ -78,9 +76,9 @@ public class TarjetaMangoSteps extends StepBase {
 	 private ChecksTM checkAfterClickLoQuieroAhoraUnderForm() {
   		ChecksTM checks = ChecksTM.getNew();
 		String ventanaPadre = driver.getWindowHandle();
-		SeleniumUtils.switchToAnotherWindow(driver, ventanaPadre);	
+		PageObjTM.switchToAnotherWindow(driver, ventanaPadre);	
 		waitMillis(1000); //El javascript lanzado por "waitForPageLoaded" rompe la carga de la página -> hemos de aplicar wait explícito previo
-		SeleniumUtils.waitForPageLoaded(driver, 10);
+		PageObjTM.waitForPageLoaded(driver, 10);
 	 	checks.add(
 	 		"Aparece una nueva ventana",
 	 		true, State.Warn);	

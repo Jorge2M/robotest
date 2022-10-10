@@ -16,7 +16,6 @@ import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 public class SecMenusWrapperSteps extends StepBase {
 
 	private final SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps();
-	private final SecMenuLateralMobilSteps secMenuLateralMobilSteps = new SecMenuLateralMobilSteps();
 	private final SecMenusDesktopSteps secMenusDesktopSteps = new SecMenusDesktopSteps();
 	
 	private final Pais pais = dataTest.getPais();

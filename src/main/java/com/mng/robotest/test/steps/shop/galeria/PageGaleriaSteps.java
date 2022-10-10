@@ -42,8 +42,7 @@ import com.mng.robotest.test.pageobject.utils.ListDataArticleGalery;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 import com.github.jorge2m.testmaker.service.TestMaker;
-
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 public class PageGaleriaSteps extends StepBase {
 
@@ -360,7 +359,7 @@ public class PageGaleriaSteps extends StepBase {
 	public String selecColorFromArtGaleriaStep(int numArtConColores, int posColor) 
 	throws Exception {
 		//En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax. En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
-		SeleniumUtils.waitForPageLoaded(driver, 2);
+		PageObjTM.waitForPageLoaded(driver, 2);
 
 		StepTM step = TestMaker.getCurrentStepInExecution();
 		WebElement articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
@@ -418,7 +417,7 @@ public class PageGaleriaSteps extends StepBase {
 
 		//En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax.
 		//En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
-		SeleniumUtils.waitForPageLoaded(driver, 2);
+		PageObjTM.waitForPageLoaded(driver, 2);
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
 		WebElement articuloColores = pageGaleriaDesktop.getArticuloConVariedadColoresAndHover(numArtConColores);
 		stepTM.replaceInDescription(tagNombreArt, pageGaleria.getNombreArticulo(articuloColores));

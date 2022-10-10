@@ -29,7 +29,7 @@ import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.navigations.ArticuloNavigations;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -125,9 +125,9 @@ public class UtilsMangoTest extends PageBase {
 	
 	public void openLinkInNewTab(WebElement element) throws Exception {
 		Actions a = new Actions(driver);
-		SeleniumUtils.moveToElement(element, driver);
+		PageObjTM.moveToElement(element, driver);
 		Thread.sleep(500);
-		SeleniumUtils.moveToElement(element, driver);
+		PageObjTM.moveToElement(element, driver);
 		Thread.sleep(500);
 		a.moveToElement(element)
 			.keyDown(Keys.CONTROL)
@@ -150,7 +150,7 @@ public class UtilsMangoTest extends PageBase {
 			}
 		}
 		
-		SeleniumUtils.waitForPageLoaded(driver, 5);
+		PageObjTM.waitForPageLoaded(driver, 5);
 	}
 	
 	public boolean validarLinea(Pais pais, Linea linea) throws Exception {

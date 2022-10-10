@@ -6,7 +6,7 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.domains.compra.pageobject.envio.ModalDroppoints;
 import com.mng.robotest.domains.compra.pageobject.envio.SecSelectDPoint.TypeDeliveryPoint;
 import com.mng.robotest.domains.compra.steps.envio.DataSearchDeliveryPoint.DataSearchDp;
@@ -30,7 +30,7 @@ public class SecSelectDPointSteps extends StepBase {
 		
 		TypeDeliveryPoint typeDp = dataSearchDp.tipoTransporte.getTypeDeliveryPoint();
 		modalDroppoints.sendProvincia(dataSearchDp.data);
-		SeleniumUtils.waitForPageLoaded(driver, 5);   
+		PageObjTM.waitForPageLoaded(driver, 5);   
 
 		checkDroppointSelectedContainsDirecc(dataSearchDp);
 		validaDeliveryPointOfType(typeDp);

@@ -6,8 +6,8 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.domains.footer.pageobjects.SecFooter;
@@ -46,6 +46,6 @@ public class AllPagesSteps extends StepBase {
 	public void backNagegador() throws Exception {
 		driver.navigate().back();
 		int seconds = 10;
-		SeleniumUtils.waitForPageLoaded(driver, seconds);
+		PageObjTM.waitForPageLoaded(driver, seconds);
 	}
 }

@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -44,7 +44,7 @@ public class SecBannersSteps extends StepBase {
 			boolean makeValidations = true;
 			seleccionarBanner(posBanner, makeValidations, app, channel, dataTest.getPais());
 			driver.get(urlPagPrincipal);
-			SeleniumUtils.waitForPageLoaded(driver);
+			PageObjTM.waitForPageLoaded(driver);
 			managerBannersScreen.reloadBanners(); //For avoid StaleElement Exception
 			sizeListBanners = managerBannersScreen.getListDataBanners().size();
 		}

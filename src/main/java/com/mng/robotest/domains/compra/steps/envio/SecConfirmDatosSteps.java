@@ -2,7 +2,7 @@ package com.mng.robotest.domains.compra.steps.envio;
 
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.compra.pageobject.PageCheckoutWrapper;
@@ -45,7 +45,7 @@ public class SecConfirmDatosSteps extends StepBase {
 		expected="La dirección de envío se establece a la de la tienda")
 	public void clickConfirmarDatosButton(DataPedido dataPedido) {
 		secConfirmDatos.clickConfirmarDatosButtonAndWait(5);
-		SeleniumUtils.waitForPageLoaded(driver, 2);	   
+		PageObjTM.waitForPageLoaded(driver, 2);	   
 		checkConfirmacionCambioDireccionEnvio(dataPedido);
 	}
 	

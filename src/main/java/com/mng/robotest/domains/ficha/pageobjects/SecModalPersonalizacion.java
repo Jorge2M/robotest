@@ -5,9 +5,9 @@ import org.openqa.selenium.By;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.mng.robotest.domains.transversal.PageBase;
 
-public class SecModalPersonalizacion extends SeleniumUtils {
+public class SecModalPersonalizacion extends PageBase {
 
 	public enum ModalElement implements ElementPage {
 		SECCION("//div[@class='customization-form']"),

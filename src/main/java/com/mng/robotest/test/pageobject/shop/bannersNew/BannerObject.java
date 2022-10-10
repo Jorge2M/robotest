@@ -7,10 +7,10 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -98,7 +98,7 @@ public abstract class BannerObject extends PageBase {
 	
 	protected List<WebElement> getDisplayedBannersInOrder() {
 		List<WebElement> listBanners = getElementsVisible(xpathBanner);
-		SeleniumUtils.orderElementsByPositionInScreen(listBanners);
+		PageObjTM.orderElementsByPositionInScreen(listBanners);
 		return listBanners;
 	}
 

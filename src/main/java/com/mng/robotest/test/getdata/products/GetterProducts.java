@@ -31,7 +31,7 @@ import com.mng.robotest.test.getdata.products.filter.FilterStock;
 import com.mng.robotest.test.getdata.products.sort.SortFactory.SortBy;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.SeleniumUtils;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 public class GetterProducts {
@@ -333,7 +333,7 @@ public class GetterProducts {
 		String idWindow = driver.getWindowHandle();
 		String body = null;
 		try {
-			SeleniumUtils.loadUrlInAnotherTabTitle(urlGetProducts, nameTab, driver);
+			PageObjTM.loadUrlInAnotherTabTitle(urlGetProducts, nameTab, driver);
 			if (PageBase.state(State.Visible, By.id("rawdata-tab"), driver).check()) {
 				PageBase.click(By.id("rawdata-tab"), driver).exec();
 			}
@@ -343,7 +343,7 @@ public class GetterProducts {
 			}
 		} 
 		finally {
-			SeleniumUtils.closeTabByTitleAndReturnToWidow(nameTab, idWindow, driver);
+			PageObjTM.closeTabByTitleAndReturnToWidow(nameTab, idWindow, driver);
 		}
 		
 		if (body!=null) {
