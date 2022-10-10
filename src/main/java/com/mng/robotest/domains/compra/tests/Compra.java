@@ -2,7 +2,7 @@ package com.mng.robotest.domains.compra.tests;
 
 import org.testng.annotations.*;
 
-import com.mng.robotest.domains.transversal.NavigationBase;
+import com.mng.robotest.domains.transversal.PageBase;
 
 public class Compra {
 
@@ -24,7 +24,7 @@ public class Compra {
 		groups={"Compra", "Canal:desktop_App:shop,outlet"}, alwaysRun=true,
 		description="[Usuario no registrado] Compra con cambio datos en dirección de envío y facturación en checkout")
 	public void COM003_Compra_y_CambioPais_Noreg_emailExist() throws Exception {
-		if (!new NavigationBase().isPRO()) {
+		if (!new PageBase().isPRO()) {
 			new Com003().execute();
 		}
 	}

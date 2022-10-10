@@ -20,7 +20,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.domains.transversal.NavigationBase;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.test.getdata.UtilsData;
@@ -515,7 +514,7 @@ public class GetterProducts {
 		
 		private boolean isPro(String urlBase) {
 			try {
-				return new NavigationBase().isPRO();
+				return new PageBase().isPRO();
 			}
 			catch (Exception e) {
 				return false;

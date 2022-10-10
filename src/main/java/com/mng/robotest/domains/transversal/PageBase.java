@@ -1,6 +1,8 @@
 package com.mng.robotest.domains.transversal;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -138,9 +140,35 @@ public class PageBase extends PageObjTM {
     	moveToElement(element, driver);
     }
     
-    public boolean isPRO() {
-    	return new NavigationBase().isPRO();
-    }
+	public boolean isPRO() {
+		if (TestCaseTM.getTestCaseInExecution().isEmpty()) {
+			return false;
+		}
+		String urlBase = TestMaker.getInputParamsSuite().getUrlBase();
+		if (isEntornoPRO(urlBase)) {
+			return true;
+		}
+		return isEntornoPRO(driver.getCurrentUrl());
+	}    
+    
+	public boolean isEntornoPRO(String url) {
+		List<String> URLsProShop   = Arrays.asList("shop.mango.com", "shoptest.pro.mango.com");
+		List<String> URLsProOutlet = Arrays.asList("www.mangooutlet.com", "outlettest.pro.mango.com");
+		Iterator<String> itURLsPRO = null;
+		if (app==AppEcom.outlet) {
+			itURLsPRO = URLsProOutlet.iterator();
+		} else {
+			itURLsPRO = URLsProShop.iterator();
+		}
+		
+		while (itURLsPRO.hasNext()) {
+			String URL = itURLsPRO.next();
+			if (url.contains(URL)) {
+				return true;
+			}
+		}
+		return false;
+	}	    
     
 	protected void waitLoadPage() {
 		waitForPageLoaded(driver);

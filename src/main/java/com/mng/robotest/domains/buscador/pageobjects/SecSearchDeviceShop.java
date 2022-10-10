@@ -4,12 +4,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.domains.transversal.NavigationBase;
 import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.test.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class SecSearchDeviceShop extends PageBase implements SecSearch {
 	

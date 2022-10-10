@@ -6,7 +6,7 @@ import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
 
-public abstract class TestBase extends NavigationBase {
+public abstract class TestBase extends StepBase {
 
 	public abstract void execute() throws Exception;
 	
