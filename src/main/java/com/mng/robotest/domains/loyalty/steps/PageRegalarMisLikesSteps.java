@@ -5,6 +5,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.loyalty.pageobjects.PageRegalarMisLikes;
 import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 
 public class PageRegalarMisLikesSteps extends StepBase {
@@ -43,6 +44,7 @@ public class PageRegalarMisLikesSteps extends StepBase {
 		
 		PageResultadoRegaloLikesSteps pageResult = new PageResultadoRegaloLikesSteps();
 		pageResult.checkIsEnvioLikesOk(3);
+		GenericChecks.checkDefault();
 		return pageResult;
 	}
 	

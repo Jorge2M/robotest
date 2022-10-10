@@ -12,6 +12,7 @@ import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
+import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.modales.ModalCambioPaisSteps;
 
 public class SecFooterSteps extends StepBase {
@@ -35,6 +36,7 @@ public class SecFooterSteps extends StepBase {
 	public void clickLinkFooter(FooterLink typeFooter, boolean closeAtEnd) throws Exception { 
 		String windowFatherHandle = secFooter.clickLinkAndGetWindowFatherHandle(typeFooter);
 		checkPageCorrectAfterSelectLinkFooter(windowFatherHandle, typeFooter, closeAtEnd);
+		GenericChecks.checkDefault();
 	}
 	 
 	@Validation

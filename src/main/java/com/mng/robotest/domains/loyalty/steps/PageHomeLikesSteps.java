@@ -4,6 +4,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.mng.robotest.domains.loyalty.pageobjects.PageHomeLikes;
 import com.mng.robotest.domains.loyalty.pageobjects.PageHomeLikes.ButtonUseLikes;
 import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps.ChecksResultWithNumberPoints;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -50,6 +51,7 @@ public class PageHomeLikesSteps extends StepBase {
 	public void clickButtonDonarLikes() {
 		pageHomeLikes.clickButton(ButtonUseLikes.DONAR_MIS_LIKES);
 		new PageHomeDonateLikesSteps().checkIsPage(5);
+		GenericChecks.checkDefault();
 	}
 	
 	public void clickConseguirPorLikesButton() {
@@ -58,6 +60,7 @@ public class PageHomeLikesSteps extends StepBase {
 		} else {
 			clickSaberMas();
 		}
+		GenericChecks.checkDefault();
 	}
 	
 	@Step(
@@ -66,6 +69,7 @@ public class PageHomeLikesSteps extends StepBase {
 	private void clickSaberMas() {
 		pageHomeLikes.clickButton(ButtonUseLikes.SABER_MAS);
 		new PageHomeConseguirPorLikesSteps().checkIsPage(2);
+		
 	}
 	
 	@Step(

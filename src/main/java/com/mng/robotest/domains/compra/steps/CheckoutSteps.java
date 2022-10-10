@@ -238,6 +238,7 @@ public class CheckoutSteps extends StepBase {
 
 		try {
 			pageCheckoutWrapper.forceClickMetodoPagoAndWait(pago.getNombre(channel, app));
+			GenericChecks.checkDefault();
 		}
 		catch (Exception e) {
 			Log4jTM.getLogger().warn("Problem clicking icono pago for payment {} in country {}", pago.getNombre(), dataTest.getPais().getNombre_pais(), e);
@@ -311,6 +312,7 @@ public class CheckoutSteps extends StepBase {
 
 		pageCheckoutWrapper.confirmarPagoFromMetodos(dataPago.getDataPedido());
 		PageRedirectPasarelaLoadingSteps.validateDisappeared(5, driver);
+		GenericChecks.checkDefault();
 	}
 
 	@Validation (
@@ -380,6 +382,7 @@ public class CheckoutSteps extends StepBase {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagTarjeta, accesoEmpl.getTarjeta());
 		pageCheckoutWrapper.inputCodigoPromoAndAccept(accesoEmpl.getTarjeta());
 		checkAfterInputTarjetaEmpleado(pais, accesoEmpl);
+		GenericChecks.checkDefault();
 	}
 	
 	@Validation
@@ -489,6 +492,7 @@ public class CheckoutSteps extends StepBase {
 		float loyaltyPointsNoRound = pageCheckoutWrapper.applyAndGetLoyaltyPoints();
 		float loyaltyPoints = UtilsMangoTest.round(loyaltyPointsNoRound, 2);
 		validateLoyaltyPointsDiscountDesktopUntil(loyaltyPoints, subTotalInicial, 3);
+		GenericChecks.checkDefault();
 	}
 	
 	@Validation (

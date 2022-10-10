@@ -10,6 +10,7 @@ import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.domains.ficha.pageobjects.SecModalPersonalizacion.ModalElement;
 import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
@@ -49,6 +50,7 @@ public class SecModalPersonalizacionSteps extends PageBase {
 	public void selectLinkPersonalizacion () throws Exception {
 		click(ModalElement.ANADIR_BORDADO_LINK.getBy(channel)).type(javascript).exec();
 		validateModal();
+		GenericChecks.checkDefault();
 	}
 	
 	@Validation
@@ -59,6 +61,7 @@ public class SecModalPersonalizacionSteps extends PageBase {
 			"Aparece el modal de personalización con el botón <b>Siguiente</b> (lo esperamos hasta " + seconds + " segundos)",
 			isBotonSiguienteVisible(seconds), 
 			State.Warn);
+		
 		checks.add(
 			"Aparece la opción <b>Un icono</b> (la esperamos hasta " + seconds + " segundos)",
 			state(Visible, ModalElement.BUTTON_UN_ICONO.getBy(channel)).wait(seconds).check(), 

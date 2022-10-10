@@ -58,6 +58,7 @@ public class SecMenusUserSteps extends StepBase {
 			PageRegistroInitialShopSteps pageRegistroIniSteps = new PageRegistroInitialShopSteps();
 			pageRegistroIniSteps.checkIsPageUntil(5);
 		}
+		GenericChecks.checkDefault();
 	}
 
 	@Step (
@@ -158,6 +159,7 @@ public class SecMenusUserSteps extends StepBase {
 		clickUserMenu(MANGO_LIKES_YOU);
 		PageHomeLikesSteps pageHomeLikesSteps = new PageHomeLikesSteps();
 		int numberPoints = pageHomeLikesSteps.checkIsPageOk().getNumberPoints();
+		GenericChecks.checkDefault();
 		
 		StepTM step = TestMaker.getCurrentStepInExecution();
 		step.replaceInDescription(TagPoints, String.valueOf(numberPoints));

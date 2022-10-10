@@ -251,6 +251,7 @@ public class SecBolsaSteps extends StepBase {
 	public void selectButtonComprar() throws Exception {
 		secBolsa.clickBotonComprar(10);
 		validaSelectButtonComprar();
+		GenericChecks.checkDefault();
 		if (!dataTest.isUserRegistered()) {
 			new Page1IdentCheckoutSteps().validaRGPDText();
 		}
@@ -279,5 +280,6 @@ public class SecBolsaSteps extends StepBase {
 
 		String refArticulo = articuloClickado.getReferencia();
 		new PageFichaSteps().checkIsFichaArtDisponible(refArticulo, 3);
+		GenericChecks.checkDefault();
 	}
 }

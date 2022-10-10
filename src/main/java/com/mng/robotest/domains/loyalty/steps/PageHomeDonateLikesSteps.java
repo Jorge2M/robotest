@@ -7,6 +7,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.loyalty.pageobjects.PageHomeDonateLikes;
 import com.mng.robotest.domains.loyalty.pageobjects.PageHomeDonateLikes.ButtonLikes;
 import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 
 public class PageHomeDonateLikesSteps extends StepBase {
@@ -33,6 +34,7 @@ public class PageHomeDonateLikesSteps extends StepBase {
 	public void selectDonateButton(ButtonLikes buttonLikes) {
 		pageHomeDonateLikes.clickButton(buttonLikes);
 		checkAfterDonateLikes(buttonLikes);
+		GenericChecks.checkDefault();
 	}
 	
 	@Validation
