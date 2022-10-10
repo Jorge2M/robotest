@@ -13,7 +13,6 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.MenusWebAll;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
-import com.mng.robotest.test.utils.UtilsTest;
 
 public abstract class SecCabecera extends PageBase {
 	

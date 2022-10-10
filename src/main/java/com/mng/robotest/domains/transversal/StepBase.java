@@ -1,13 +1,10 @@
 package com.mng.robotest.domains.transversal;
 
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
