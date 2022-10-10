@@ -8,13 +8,11 @@ import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.tallas.SSecSelTallasFicha;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.utils.ImporteScreen;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
@@ -84,14 +82,6 @@ public class SecDataProduct extends PageBase {
 	//xpaths asociados al tema tallas
 	private static final String XPATH_CAPA_AVISAME = "//*[@id='bocataAvisame']";
 	private static final String XPATH_GUIA_DE_TALLAS_LINK = "//*[@id='productFormSizesGuide']";
-	private static final String XPATH_MSG_AVISO_TALLA_DEVICE = "//p[@class[contains(.,'sizes-notify-error')]]";
-	private static final String XPATH_MSG_AVISO_TALLA_DESKTOP = "//p[@class[contains(.,'sg-inp-sugg--error')]]";
-	private String getXPathMsgAvisoTalla() {
-		if (channel.isDevice() && !(channel==Channel.mobile && app==AppEcom.outlet)) {
-			return XPATH_MSG_AVISO_TALLA_DEVICE;
-		}
-		return XPATH_MSG_AVISO_TALLA_DESKTOP;
-	}
 
 	//xpaths asociados a los precios
 	private static final String XPATH_PRECIO_FINAL = "//span[@data-testid='currentPrice']";
@@ -230,27 +220,12 @@ public class SecDataProduct extends PageBase {
 			String precioRebajado = getElementVisible(XPATH_PRECIO_REBAJADO).getText();
 			return ImporteScreen.normalizeImportFromScreen(precioRebajado);
 		}
-//		return "";
-//		if (state(Present, XPATH_ITEMS_PRECIO_SIN_DESC).check()) {
-//			// Entero
-//			String precioSinDesc = getElement(XPATH_ITEMS_PRECIO_SIN_DESC + "[1]").getText();
-//	
-//			// Decimales
-//			if (state(Present, XPATH_ITEMS_PRECIO_SIN_DESC + "[2]").check()) {
-//				precioSinDesc += getElement(XPATH_ITEMS_PRECIO_SIN_DESC + "[2]").getText();
-//			}
-//			return (ImporteScreen.normalizeImportFromScreen(precioSinDesc));
-//		}
 		return "";
 	}
 
 	//Funciones referentes a las tallas (en algunas se actúa a modo de Wrapper)
 	public boolean isVisibleCapaAvisame() {
 		return state(Visible, XPATH_CAPA_AVISAME).check();
-	}
-
-	public boolean isVisibleAvisoSeleccionTalla() {
-		return state(Visible, getXPathMsgAvisoTalla()).check();
 	}
 
 	public void selectGuiaDeTallasLink() {

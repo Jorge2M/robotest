@@ -190,8 +190,11 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 				//setupCookies();
 			}
 		} else {
-			ModalSetCookiesSteps modalSetCookiesSteps = sectionCookiesSteps.setCookies();
-			modalSetCookiesSteps.saveConfiguration();
+			//Enable Only performance cookies for suport to TestABs
+			changeCookieOptanonConsent();
+			enablePerformanceCookies();
+//			ModalSetCookiesSteps modalSetCookiesSteps = sectionCookiesSteps.setCookies();
+//			modalSetCookiesSteps.saveConfiguration();
 		}
 	}
 	
@@ -201,27 +204,34 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 		}
 	}
 	
-	private void changeCookie_OptanonConsent() {
+	private void changeCookieOptanonConsent() {
 		new SectionCookiesSteps().changeCookie_OptanonConsent();
 	}
 	
-	private void setupCookies() {
+	private void enablePerformanceCookies() {
 		ModalSetCookiesSteps modalSetCookiesSteps = new SectionCookiesSteps().setCookies();
-		modalSetCookiesSteps.select(SectionConfCookies.COOKIES_DIRIGIDAS);
-		((JavascriptExecutor) driver).executeScript("document.getElementsByClassName('ot-tgl')[0].style.display='block'");	
-		modalSetCookiesSteps.disableSwitchCookies();
-		
-		modalSetCookiesSteps.select(SectionConfCookies.COOKIES_DE_REDES_SOCIALES);
-		modalSetCookiesSteps.disableSwitchCookies();
-		
-		modalSetCookiesSteps.select(SectionConfCookies.COOKIES_FUNCIONOALES);
-		modalSetCookiesSteps.disableSwitchCookies();
-		
 		modalSetCookiesSteps.select(SectionConfCookies.COOKIES_DE_RENDIMIENTO);
-		modalSetCookiesSteps.disableSwitchCookies();
-		
+		modalSetCookiesSteps.enableSwitchCookies();
 		modalSetCookiesSteps.saveConfiguration();
-	}
+	}	
+	
+//	private void disableAllCookies() {
+//		ModalSetCookiesSteps modalSetCookiesSteps = new SectionCookiesSteps().setCookies();
+//		modalSetCookiesSteps.select(SectionConfCookies.COOKIES_DIRIGIDAS);
+//		((JavascriptExecutor) driver).executeScript("document.getElementsByClassName('ot-tgl')[0].style.display='block'");	
+//		modalSetCookiesSteps.disableSwitchCookies();
+//		
+//		modalSetCookiesSteps.select(SectionConfCookies.COOKIES_DE_REDES_SOCIALES);
+//		modalSetCookiesSteps.disableSwitchCookies();
+//		
+//		modalSetCookiesSteps.select(SectionConfCookies.COOKIES_FUNCIONOALES);
+//		modalSetCookiesSteps.disableSwitchCookies();
+//		
+//		modalSetCookiesSteps.select(SectionConfCookies.COOKIES_DE_RENDIMIENTO);
+//		modalSetCookiesSteps.disableSwitchCookies();
+//		
+//		modalSetCookiesSteps.saveConfiguration();
+//	}
 	
 	public void selecPaisIdiomaYAccede() throws Exception {
 		selecionPais();

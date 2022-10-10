@@ -9,7 +9,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
@@ -219,8 +218,10 @@ public class PageFichaSteps extends StepBase {
 	@Validation
 	public ChecksTM checkAvisoTallaUnica(boolean isTallaUnica) {
 		ChecksTM checks = ChecksTM.getNew();
-		boolean isVisibleAviso = pageFicha.getSecDataProduct().isVisibleAvisoSeleccionTalla();
-		if (isTallaUnica || !channel.isDevice()) {
+		boolean isVisibleAviso = pageFicha.getSecDataProduct().getSecSelTallas()
+				.isVisibleAvisoSeleccionTalla();
+		
+		if (isTallaUnica) {
 			checks.add(
 					"NO aparece un aviso indicando que hay que seleccionar la talla",
 					!isVisibleAviso, State.Defect);

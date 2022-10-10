@@ -22,7 +22,8 @@ public class ConfigCheckout implements Cloneable, Serializable {
 	public final boolean checkLoyaltyPoints;
 	public final boolean stressMode;
 	
-	private ConfigCheckout(boolean checkPasarelas,	boolean checkPagos,	boolean checkManto,	boolean checkMisCompras,
+	private ConfigCheckout(
+			boolean checkPasarelas,	boolean checkPagos,	boolean checkManto,	boolean checkMisCompras,
 			boolean emailExists, boolean checkSavedCard, boolean userIsEmployee, boolean acceptCookies,
 			boolean checkPromotionalCode, boolean chequeRegalo,	boolean storeCredit, boolean checkLoyaltyPoints,
 			boolean stressMode) {

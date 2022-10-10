@@ -16,34 +16,34 @@ public class SecMenusUserDevice extends PageBase {
 	private final SecCabecera secCabecera = SecCabecera.getNew(channel, app);
 	
 	public enum MenuUserDevice implements ElementPage {
-		ayuda(
+		AYUDA(
 			"//*[@data-label='ayuda']",
 			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'help')]]"),
-		miscompras(
+		MIS_COMPRAS(
 			"//*[@data-label='mis-compras']",
 			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'mypurchases')]]"),
-		pedidos(
+		PEDIDOS(
 			"//*[@data-label='pedidos']",
 			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'mypurchases')]]"),
-		cerrarsesion(
+		CERRAR_SESION(
 			"//*[@data-label='cerrar_sesion']",
 			"//a[@href[contains(.,'/logout')]]"),
-		favoritos(
+		FAVORITOS(
 			"//*[@data-label='favoritos']",
 			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'favorites')]]"),
-		iniciarsesion(
+		INICIAR_SESION(
 			"//*[@data-label='iniciar_sesion']",
 			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'login')]]"),
-		registrate(
+		REGISTRATE(
 			"//*[@data-label='iniciar_sesion']",
 			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'login')]]"),
-		micuenta(
+		MI_CUENTA(
 			"//*[@data-label='mi_cuenta']",
 			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'account')]]"),
-		mangolikesyou(
+		MANGO_LIKES_YOU(
 			"//*[text()[contains(.,'Mango likes you')]]",
-			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'LOYALTY')]]"),
-		cambiopais(
+			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'mangolikesyou')]]"),
+		CAMBIO_PAIS(
 			"//*[@data-label='cambio_pais']",
 			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'preHome')]]");
 

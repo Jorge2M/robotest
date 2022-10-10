@@ -17,6 +17,7 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	private static final String XPATH_TALLA_UNAVAILABLE = XPATH_TALLA_ITEM + "//self::*[@data-available='false']";
 	private static final String XPATH_TALLA_SELECTED = XPATH_TALLA_ITEM + "//self::*[@aria-selected='true']";
 	private static final String XPATH_ICON_DESPLEGABLE_TALLAS = "//i[@class[contains(.,'icon-outline-down')]]";
+	private static final String XPATH_MSG_AVISO_TALLA = XPATH_CAPA_TALLAS + "//span";
 //	private static final String XPATH_TALLA_UNICA = 	
 	
 //	private static final String XPATH_CAPA_TALLAS = "//form/div[@class='sizes']";
@@ -91,20 +92,6 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 			getElements(XPATH_TALLA_ITEM).size()==1;
 	}
 	
-//	private boolean unfoldListTallasIfNotYet() {
-//		if (!state(Visible, XPATH_LIST_TALLAS_FOR_SELECT).check()) {
-//			//En el caso de talla única no existe XPathSelectorTallas
-//			if (state(Visible, XPATH_SELECTOR_TALLAS).check()) {
-//				getElement(XPATH_SELECTOR_TALLAS).click();
-//			} else {
-//				return true;
-//			}
-//			return (isVisibleListTallasForSelectUntil(1));
-//		}
-//		
-//		return true;
-//	}
-	
 	@Override
 	public boolean isVisibleListTallasForSelectUntil(int seconds) {
 		return (state(Visible, XPATH_LIST_TALLAS_FOR_SELECT).wait(seconds).check());
@@ -112,7 +99,7 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	
 	@Override
 	public void selectTallaByValue(String codigoNumericoTalla) {
-//		unfoldListTallasIfNotYet();
+		unfoldTallas();
 		String xpathTalla = getXPathTallaByCodigo(codigoNumericoTalla);
 		if (state(Present, xpathTalla).check()) {
 			click(xpathTalla).type(TypeClick.javascript).exec();
@@ -121,7 +108,7 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	
 	@Override
 	public void selectTallaByLabel(String tallaLabel) {
-//		unfoldListTallasIfNotYet();
+		unfoldTallas();
 		String xpathTalla = getXPathTallaByLabel(tallaLabel);
 		if (state(Clickable, xpathTalla).check()) {
 			getElement(xpathTalla).click();
@@ -130,7 +117,7 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	
 	@Override
 	public void selectTallaByIndex(int posicion) {
-//		unfoldListTallasIfNotYet();
+		unfoldTallas();
 		String xpathTallaByPos = "(" + XPATH_TALLA_ITEM + ")[" + posicion + "]";
 		if (state(Clickable, xpathTallaByPos).check()) {
 			getElement(xpathTallaByPos).click();
@@ -139,9 +126,15 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	
 	@Override
 	public void selectFirstTallaAvailable() {
-//		unfoldListTallasIfNotYet();
+		unfoldTallas();
 		if (state(Clickable, XPATH_TALLA_AVAILABLE).check()) {
 			getElement(XPATH_TALLA_AVAILABLE).click();
+		}
+	}
+	
+	private void unfoldTallas() {
+		if (state(Visible, XPATH_ICON_DESPLEGABLE_TALLAS).check()) {
+			click(XPATH_ICON_DESPLEGABLE_TALLAS).exec();
 		}
 	}
 	
@@ -160,4 +153,9 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	public int getNumOptionsTallas() {
 		return getElements(XPATH_TALLA_ITEM).size();
 	}	
+	
+	@Override
+	public boolean isVisibleAvisoSeleccionTalla() {
+		return state(Visible, XPATH_MSG_AVISO_TALLA).check();
+	}
 }

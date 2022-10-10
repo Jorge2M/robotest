@@ -23,6 +23,7 @@ public interface SSecSelTallasFicha {
 	public String getTallaCodNum(int posicion);
 	public boolean isVisibleSelectorTallasUntil(int seconds);
 	public boolean isVisibleListTallasForSelectUntil(int seconds);
+	public boolean isVisibleAvisoSeleccionTalla();
 	
 	public static SSecSelTallasFicha make(Channel channel, AppEcom app) {
 		if (channel.isDevice()) {

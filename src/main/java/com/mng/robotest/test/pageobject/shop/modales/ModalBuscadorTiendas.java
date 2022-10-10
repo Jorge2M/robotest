@@ -11,7 +11,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class ModalBuscadorTiendas extends PageBase implements PageFromFooter {
 
 	private static final String XPATH_CONTAINER = "//micro-frontend[@id='storeLocator']";
-	private static final String XPATH_TIENDAS = XPATH_CONTAINER + "//div[@class[contains(.,'store-list')]]";
+	private static final String XPATH_TIENDAS = XPATH_CONTAINER + "//div[@data-testid='store-container']";
 	private static final String XPATH_CLOSE_DESKTOP_NOOUTLET = "//*[@class[contains(.,'icon')] and @class[contains(.,'close-modal')]]";
 	private static final String XPATH_CLOSE_DESKTOP_OUTLET = "//button[@class[contains(.,'close-modal')]]";
 	private static final String XPATH_CLOSE_TABLET = "//div[@class[contains(.,'close-modal')]]";

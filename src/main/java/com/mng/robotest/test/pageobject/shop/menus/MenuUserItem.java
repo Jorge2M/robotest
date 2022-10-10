@@ -130,7 +130,7 @@ public class MenuUserItem {
 				return IconoCabeceraShop_DesktopMobile.iniciarsesion;
 			}
 			if (channel.isDevice()) {
-				return MenuUserDevice.iniciarsesion;
+				return MenuUserDevice.INICIAR_SESION;
 			}
 		}
 		if (app==AppEcom.shop || app==AppEcom.votf) {
@@ -144,7 +144,7 @@ public class MenuUserItem {
 			return MenuUserDesktop.CERRAR_SESION;
 		}
 		if (channel.isDevice()) {
-			return MenuUserDevice.cerrarsesion;
+			return MenuUserDevice.CERRAR_SESION;
 		}
 		return null;
 	}
@@ -154,7 +154,7 @@ public class MenuUserItem {
 			return MenuUserDesktop.REGISTRATE;
 		}
 		if (channel.isDevice()) {
-			return MenuUserDevice.registrate;
+			return MenuUserDevice.REGISTRATE;
 		}
 		return null;
 	}
@@ -165,7 +165,7 @@ public class MenuUserItem {
 				return IconoCabeceraShop_DesktopMobile.micuenta;
 			}
 			if (channel.isDevice()) {
-				return MenuUserDevice.micuenta;
+				return MenuUserDevice.MI_CUENTA;
 			}
 		}
 		if (app==AppEcom.shop || app==AppEcom.votf) {
@@ -176,7 +176,7 @@ public class MenuUserItem {
 	
 	private ElementPage getMenuFavoritos() {
 		if (channel.isDevice()) {
-			return MenuUserDevice.favoritos;
+			return MenuUserDevice.FAVORITOS;
 		}
 
 		return IconoCabeceraShop_DesktopMobile.favoritos;
@@ -187,13 +187,13 @@ public class MenuUserItem {
 			return MenuUserDesktop.MIS_COMPRAS;
 		}
 		if (channel.isDevice()) {
-			return MenuUserDevice.miscompras;
+			return MenuUserDevice.MIS_COMPRAS;
 		}
 		return null;
 	}
 	
 	private ElementPage getMenuPedidos() {
-		return MenuUserDevice.pedidos;
+		return MenuUserDevice.PEDIDOS;
 	}
 	
 	private ElementPage getMenuMangoLikesYou() {
@@ -201,7 +201,7 @@ public class MenuUserItem {
 			return MenuUserDesktop.MANGO_LIKES_YOU;
 		}
 		if (channel.isDevice()) {
-			return MenuUserDevice.mangolikesyou;
+			return MenuUserDevice.MANGO_LIKES_YOU;
 		}
 		return null;
 	}
@@ -211,12 +211,12 @@ public class MenuUserItem {
 			return MenuUserDesktop.AYUDA;
 		}
 		if (channel.isDevice()) {
-			return MenuUserDevice.ayuda;
+			return MenuUserDevice.AYUDA;
 		}
 		return null;
 	}
 	
 	private ElementPage getMenuCambioPais() {
-		return MenuUserDevice.cambiopais;
+		return MenuUserDevice.CAMBIO_PAIS;
 	}
 }
