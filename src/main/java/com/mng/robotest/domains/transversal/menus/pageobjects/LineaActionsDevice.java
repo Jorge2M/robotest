@@ -14,7 +14,6 @@ import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 
 public class LineaActionsDevice extends PageBase implements LineaActions {
 
-	private final LineaWeb lineaWeb;
 	private final LineaType lineaType;
 	private final SublineaType sublineaType;
 	
@@ -35,7 +34,6 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 	private static final String XPATH_LINK_SUBLINEA_TEEN_NINO = "//*[@data-testid[contains(.,'header.tabButton.sections_teenP')]]";
 	
 	public LineaActionsDevice(LineaWeb lineaWeb) {
-		this.lineaWeb = lineaWeb;
 		this.lineaType = lineaWeb.getLinea();
 		this.sublineaType = lineaWeb.getSublinea();
 	}

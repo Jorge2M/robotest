@@ -15,7 +15,7 @@ public class PagoGiropay extends PagoSteps {
 	
 	public PagoGiropay(DataPago dataPago) throws Exception {
 		super(dataPago);
-		super.isAvailableExecPay = true;
+		super.setAvaliableExecPay(true);
 	}
 
 	@Override

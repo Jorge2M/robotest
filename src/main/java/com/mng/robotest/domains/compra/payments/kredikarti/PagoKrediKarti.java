@@ -9,7 +9,7 @@ public class PagoKrediKarti extends PagoSteps {
 	
 	public PagoKrediKarti(DataPago dataPago) throws Exception {
 		super(dataPago);
-		super.isAvailableExecPay = true;
+		super.setAvaliableExecPay(true);
 	}
 	
 	@Override

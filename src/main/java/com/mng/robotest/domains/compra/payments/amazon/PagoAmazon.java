@@ -10,7 +10,7 @@ public class PagoAmazon extends PagoSteps {
 
 	public PagoAmazon(DataPago dataPago) throws Exception {
 		super(dataPago);
-		super.isAvailableExecPay = false;
+		super.setAvaliableExecPay(false);
 	}
 	
 	@Override

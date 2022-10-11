@@ -436,7 +436,7 @@ public class CheckoutFlow extends StepBase {
 			//Está activado el test en el pago concreto que figura en el XML de países
 			pagoPais.getTestpago()!=null && pagoPais.getTestpago().compareTo("s")==0 &&
 			//Está implementado el test a nivel de la confirmación del pago
-			pagoSteps.isAvailableExecPay
+			pagoSteps.isAvailableExecPay()
 		);
 	}
 	

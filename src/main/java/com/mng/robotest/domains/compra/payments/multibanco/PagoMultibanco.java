@@ -13,7 +13,7 @@ public class PagoMultibanco extends PagoSteps {
 	
 	public PagoMultibanco( DataPago dataPago) throws Exception {
 		super(dataPago);
-		super.isAvailableExecPay = true;
+		super.setAvaliableExecPay(true);
 	}
 	
 	@Override

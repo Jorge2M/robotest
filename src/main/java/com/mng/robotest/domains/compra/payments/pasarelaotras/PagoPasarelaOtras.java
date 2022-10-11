@@ -10,7 +10,7 @@ public class PagoPasarelaOtras extends PagoSteps {
 	
 	public PagoPasarelaOtras(DataPago dataPago) throws Exception {
 		super(dataPago);
-		super.isAvailableExecPay = false;
+		super.setAvaliableExecPay(false);
 	}
 	
 	@Override

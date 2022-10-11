@@ -10,7 +10,7 @@ public class PagoTarjetaIntegrada extends PagoSteps {
 
 	public PagoTarjetaIntegrada(DataPago dataPago) throws Exception {
 		super(dataPago);
-		super.isAvailableExecPay = true;
+		super.setAvaliableExecPay(true);
 	}
 	
 	@Override

@@ -9,7 +9,7 @@ public class PagoKCP extends PagoSteps {
 	
 	public PagoKCP(DataPago dataPago) throws Exception {
 		super(dataPago);
-		super.isAvailableExecPay = true;
+		super.setAvaliableExecPay(true);
 	}
 	
 	@Override

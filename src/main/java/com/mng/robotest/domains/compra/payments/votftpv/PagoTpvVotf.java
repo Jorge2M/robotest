@@ -8,7 +8,7 @@ public class PagoTpvVotf extends PagoSteps {
 	
 	public PagoTpvVotf(DataPago dataPago) throws Exception {
 		super(dataPago);
-		super.isAvailableExecPay = true;
+		super.setAvaliableExecPay(true);
 	}
 	
 	@Override

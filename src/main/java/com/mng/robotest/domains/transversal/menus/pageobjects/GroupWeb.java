@@ -123,9 +123,6 @@ public class GroupWeb extends PageBase {
 		}
 		return xpathGroupLi + "/span";
 	}
-	private String getXPathGroupSelectedDesktop() {
-		return getXPathGroupLiDesktop() + "//self::*[string-length(normalize-space(@class))>0]";
-	}
 	
 	private String getXPathSubmenu() {
 		if (channel.isDevice()) {

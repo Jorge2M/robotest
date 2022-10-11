@@ -15,9 +15,9 @@ public abstract class TestBase extends StepBase {
 	protected TestBase() {
 		if (!inputParamsSuite.getListaPaises().isEmpty()) {
 			String pais = inputParamsSuite.getListaPaises().get(0);
-			this.dataTest = DataTest.getData(PaisShop.getPais(pais));
+			dataTest = DataTest.getData(PaisShop.getPais(pais));
 		} else {
-			this.dataTest = DataTest.getData(PaisShop.ESPANA);
+			dataTest = DataTest.getData(PaisShop.ESPANA);
 		}
 		DATA_TEST.set(dataTest);
 	}

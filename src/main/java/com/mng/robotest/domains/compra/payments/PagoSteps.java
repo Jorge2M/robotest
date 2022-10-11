@@ -17,7 +17,7 @@ public abstract class PagoSteps extends StepBase {
 	public DataPago dataPago;
 	public static String MsgNoPayImplemented = "No está diponible la parte del test que permite completar/ejecutar el pago";
 
-	public boolean isAvailableExecPay = false;
+	private boolean availableExecPay = false;
 
 	public PagoSteps(DataPago dataPago) throws Exception {
 		this.dataPago = dataPago;
@@ -25,7 +25,10 @@ public abstract class PagoSteps extends StepBase {
 	}
 
 	public boolean isAvailableExecPay() {
-		return this.isAvailableExecPay;
+		return this.availableExecPay;
+	}
+	public void setAvaliableExecPay(boolean availableExecPay) {
+		this.availableExecPay = availableExecPay;
 	}
 
 	public abstract void startPayment(boolean execPay) throws Exception;

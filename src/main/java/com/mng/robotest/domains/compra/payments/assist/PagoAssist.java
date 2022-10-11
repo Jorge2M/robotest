@@ -13,7 +13,7 @@ public class PagoAssist extends PagoSteps {
 	
 	public PagoAssist(DataPago dataPago) throws Exception {
 		super(dataPago);
-		super.isAvailableExecPay = true;
+		super.setAvaliableExecPay(true);
 	}
 	
 	@Override

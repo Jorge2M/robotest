@@ -28,7 +28,7 @@ public class PageBase extends PageObjTM {
 	protected final Channel channel;
 	protected final AppEcom app;
 	protected final InputParamsMango inputParamsSuite;
-	protected final DataTest dataTest = TestBase.DATA_TEST.get();
+	protected DataTest dataTest = TestBase.DATA_TEST.get();
 	
 	public PageBase() {
 		super();

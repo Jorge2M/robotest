@@ -375,10 +375,12 @@ public class Page2IdentCheckout extends PageBase {
 				if (channel==Channel.desktop) {
 					return selectProvinciaUkraineDesktop();
 				}
+				break;
 			case EGYPT:
 				if (egyptCity!=null) {
 				    return selectProvinciaEgyptCity(provinciaPais);
 				}
+				break;
 			default:
 				new Select(provinciaPais).selectByIndex(1);
 				datoSeteado = provinciaPais.getAttribute(VALUE);

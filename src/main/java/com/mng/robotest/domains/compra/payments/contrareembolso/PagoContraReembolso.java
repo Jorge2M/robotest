@@ -8,7 +8,7 @@ public class PagoContraReembolso extends PagoSteps {
 	
 	public PagoContraReembolso(DataPago dataPago) throws Exception {
 		super(dataPago);
-		super.isAvailableExecPay = true;
+		super.setAvaliableExecPay(true);
 	}
 	
 	@Override

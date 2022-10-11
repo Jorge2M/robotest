@@ -12,7 +12,7 @@ public class PagoYandex extends PagoSteps {
 	
 	public PagoYandex(DataPago dataPago) throws Exception {
 		super(dataPago);
-		super.isAvailableExecPay = true;
+		super.setAvaliableExecPay(true);
 	}
 	
 	@Override

@@ -21,18 +21,13 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	private static final String TAG_COLOR = "@TagColor";
 	private static final String XPATH_WRAPPER = "//div[@id='stickyMenu']";
 	private static final String XPATH_LINK_ORDEN_WITH_TAG = "//a[text()[contains(.,'" + TAG_ORDENACION + "')]]";
-	//private static final String XPATH_LINK_COLOR_WITH_TAG_OUTLET = "//a[@aria-label[contains(.,'" + TAG_COLOR + "')]]";
 	private static final String XPATH_LINK_COLOR_WITH_TAG_SHOP = "//label[(@for[contains(.,'filtercolor')] or @for[contains(.,'multiSelectfilter_GroupsColors1')]) and text()[contains(.,'" + TAG_COLOR + "')]]";
 	private static final String XPATH_LINK_COLOR_WITH_TAG_TABLET_OUTLET	 = "//label[@for[contains(.,'color_" + TAG_COLOR + "')]]";
 	
-	final PageGaleria pageGaleria;
-	final Channel channel;
-	final AppEcom app;
+	private final PageGaleria pageGaleria;
 	
 	private SecFiltrosDesktop(PageGaleria pageGaleria) {
 		this.pageGaleria = pageGaleria;
-		this.channel = pageGaleria.getChannel();
-		this.app = pageGaleria.getApp();
 	}
 	
 	public static SecFiltrosDesktop getInstance(Channel channel) {

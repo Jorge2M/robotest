@@ -18,7 +18,7 @@ public class PagoPayMaya extends PagoSteps {
 	
 	public PagoPayMaya(DataPago dataPago) throws Exception {
 		super(dataPago);
-		super.isAvailableExecPay = true;
+		super.setAvaliableExecPay(true);
 	}
 	
 	@Override

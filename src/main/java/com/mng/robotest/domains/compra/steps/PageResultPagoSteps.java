@@ -1,13 +1,10 @@
 package com.mng.robotest.domains.compra.steps;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.compra.pageobject.PageResultPago;
 import com.mng.robotest.domains.micuenta.pageobjects.PageAccesoMisCompras.TypeBlock;
@@ -22,7 +19,6 @@ import com.mng.robotest.test.utils.ImporteScreen;
 public class PageResultPagoSteps extends StepBase {
 
 	private final PageResultPago pageResultPago = new PageResultPago();
-	private final WebDriver driver = TestMaker.getDriverTestCase();
 	
 	@Validation (
 		description="Acaba apareciendo la página de la Shop de Mango de \"Ya has hecho tu compra\" (la esperamos hasta #{seconds} segundos)",

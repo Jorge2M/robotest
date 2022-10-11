@@ -24,7 +24,7 @@ public class PagoPaypal extends PagoSteps {
 	
 	public PagoPaypal(DataPago dataPago) throws Exception {
 		super(dataPago);
-		super.isAvailableExecPay = true;
+		super.setAvaliableExecPay(true);
 	}
 	
 	@Override

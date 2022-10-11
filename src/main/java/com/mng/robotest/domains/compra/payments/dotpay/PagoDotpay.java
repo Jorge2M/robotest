@@ -16,7 +16,7 @@ public class PagoDotpay extends PagoSteps {
 	
 	public PagoDotpay(DataPago dataPago) throws Exception {
 		super(dataPago);
-		super.isAvailableExecPay = true;
+		super.setAvaliableExecPay(true);
 	}
 	
 	@Override
