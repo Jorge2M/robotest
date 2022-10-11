@@ -6,14 +6,14 @@ import com.mng.robotest.domains.transversal.PageBase;
 public class ModalUserDataKlarna extends PageBase {
 
 	public static enum InputKlarna {
-		Email("billing-dialog-email"),
-		Codigo_Postal("billing-dialog-postal_code"),
-		Person_Number("billing-dialog-national_identification_number"),
-		User_Name("billing-dialog-given_name"),
-		Apellidos("billing-dialog-family_name"),
-		Direccion("billing-dialog-street_address"),
-		Ciudad("billing-dialog-city"),
-		Phone("billing-dialog-phone");
+		EMAIL("billing-dialog-email"),
+		CODIGO_POSTAL("billing-dialog-postal_code"),
+		PERSON_NUMBER("billing-dialog-national_identification_number"),
+		USER_NAME("billing-dialog-given_name"),
+		APELLIDOS("billing-dialog-family_name"),
+		DIRECCION("billing-dialog-street_address"),
+		CIUDAD("billing-dialog-city"),
+		PHONE("billing-dialog-phone");
 		
 		private String id;
 		private InputKlarna(String id) {
@@ -27,7 +27,7 @@ public class ModalUserDataKlarna extends PageBase {
 	private static final String XPATH_BUTTON_CONTINUE = "//button[@id='button-primary']";
 	
 	public boolean isModal(int seconds) {
-		return state(State.Visible, InputKlarna.Email.getXPath()).wait(seconds).check();
+		return state(State.Visible, InputKlarna.EMAIL.getXPath()).wait(seconds).check();
 	}
 	
 	public void inputData(DataKlarna dataKlarna) {
@@ -42,51 +42,42 @@ public class ModalUserDataKlarna extends PageBase {
 	}
 	
 	private void inputVoidData(DataKlarna dataKlarna) {
-		if (dataKlarna.getEmail()!=null) {
-			if (dataKlarna.getEmail().compareTo(getInputValue(InputKlarna.Email))!=0) {
-				clearInput(InputKlarna.Email);
-				input(InputKlarna.Email, dataKlarna.getEmail());
-			}
+		if (dataKlarna.getEmail()!=null &&
+			dataKlarna.getEmail().compareTo(getInputValue(InputKlarna.EMAIL))!=0) {
+			clearInput(InputKlarna.EMAIL);
+			input(InputKlarna.EMAIL, dataKlarna.getEmail());
 		}
-		if (dataKlarna.getCodPostal()!=null) {
-			if (dataKlarna.getCodPostal().compareTo(getInputValue(InputKlarna.Codigo_Postal))!=0) {
-				clearInput(InputKlarna.Codigo_Postal);
-				input(InputKlarna.Codigo_Postal, dataKlarna.getCodPostal());
-			}
+		if (dataKlarna.getCodPostal()!=null &&
+			dataKlarna.getCodPostal().compareTo(getInputValue(InputKlarna.CODIGO_POSTAL))!=0) {
+			clearInput(InputKlarna.CODIGO_POSTAL);
+			input(InputKlarna.CODIGO_POSTAL, dataKlarna.getCodPostal());
 		}
 		if (dataKlarna.getPersonnumber()!=null &&
-			isVisible(InputKlarna.Person_Number)) {
-			if (dataKlarna.getPersonnumber().compareTo(getInputValue(InputKlarna.Person_Number))!=0) {
-				clearInput(InputKlarna.Person_Number);
-				input(InputKlarna.Person_Number, dataKlarna.getPersonnumber());
-			}
+			isVisible(InputKlarna.PERSON_NUMBER) &&
+			dataKlarna.getPersonnumber().compareTo(getInputValue(InputKlarna.PERSON_NUMBER))!=0) {
+			clearInput(InputKlarna.PERSON_NUMBER);
+			input(InputKlarna.PERSON_NUMBER, dataKlarna.getPersonnumber());
 		}
-		if (dataKlarna.getUserName()!=null) {
-			if (dataKlarna.getUserName().compareTo(getInputValue(InputKlarna.User_Name))!=0) {
-				input(InputKlarna.User_Name, dataKlarna.getUserName());
-			}
+		if (dataKlarna.getUserName()!=null &&
+			dataKlarna.getUserName().compareTo(getInputValue(InputKlarna.USER_NAME))!=0) {
+			input(InputKlarna.USER_NAME, dataKlarna.getUserName());
 		}
-		if (dataKlarna.getApellidos()!=null) {
-			if (dataKlarna.getApellidos().compareTo(getInputValue(InputKlarna.Apellidos))!=0) {
-				clearInput(InputKlarna.Apellidos);
-				input(InputKlarna.Apellidos, dataKlarna.getApellidos());
-			}
+		if (dataKlarna.getApellidos()!=null &&
+			dataKlarna.getApellidos().compareTo(getInputValue(InputKlarna.APELLIDOS))!=0) {
+			clearInput(InputKlarna.APELLIDOS);
+			input(InputKlarna.APELLIDOS, dataKlarna.getApellidos());
 		}
 		if (dataKlarna.getDireccion()!=null) {
 			waitMillis(500);
-			if (dataKlarna.getDireccion().compareTo(getInputValue(InputKlarna.Direccion))!=0) {
-				clearInput(InputKlarna.Direccion);
-				input(InputKlarna.Direccion, dataKlarna.getDireccion());
+			if (dataKlarna.getDireccion().compareTo(getInputValue(InputKlarna.DIRECCION))!=0) {
+				clearInput(InputKlarna.DIRECCION);
+				input(InputKlarna.DIRECCION, dataKlarna.getDireccion());
 			}
 		}
-//		if (dataKlarna.getCiudad()!=null) {
-//			input(InputKlarna.Ciudad, dataKlarna.getCiudad());
-//		}
-		if (dataKlarna.getPhone()!=null) {
-			if (dataKlarna.getPhone().compareTo(getInputValue(InputKlarna.Phone))!=0) {
-				clearInput(InputKlarna.Phone);
-				input(InputKlarna.Phone, dataKlarna.getPhone());
-			}
+		if (dataKlarna.getPhone()!=null &&
+			dataKlarna.getPhone().compareTo(getInputValue(InputKlarna.PHONE))!=0) {
+			clearInput(InputKlarna.PHONE);
+			input(InputKlarna.PHONE, dataKlarna.getPhone());
 		}
 	}
 	

@@ -56,24 +56,24 @@ public class DataKlarna {
 	}
 	
 	public String getHtmlFormattedData() {
-		StringBuffer htmlMsg = new StringBuffer();
+		StringBuilder htmlMsg = new StringBuilder();
 		if (getEmail()!=null) {
-			htmlMsg.append("<b>" + Email + "</b>:" + getEmail() + "<br>");
+			htmlMsg.append("<b>" + EMAIL + "</b>:" + getEmail() + "<br>");
 		}
 		if (getCodPostal()!=null) {
-			htmlMsg.append("<b>" + Codigo_Postal + "</b>:" + getCodPostal() + "<br>");
+			htmlMsg.append("<b>" + CODIGO_POSTAL + "</b>:" + getCodPostal() + "<br>");
 		}
 		if (getUserName()!=null) {
-			htmlMsg.append("<b>" + User_Name + "</b>:" + getUserName() + "<br>");
+			htmlMsg.append("<b>" + USER_NAME + "</b>:" + getUserName() + "<br>");
 		}
 		if (getApellidos()!=null) {
-			htmlMsg.append("<b>" + Apellidos + "</b>:" + getApellidos() + "<br>");
+			htmlMsg.append("<b>" + APELLIDOS + "</b>:" + getApellidos() + "<br>");
 		}
 		if (getDireccion()!=null) {
-			htmlMsg.append("<b>" + Direccion + "</b>:" + getDireccion() + "<br>");
+			htmlMsg.append("<b>" + DIRECCION + "</b>:" + getDireccion() + "<br>");
 		}
 		if (getPhone()!=null) {
-			htmlMsg.append("<b>" + Phone + "</b>:" + getPhone() + "<br>");
+			htmlMsg.append("<b>" + PHONE + "</b>:" + getPhone() + "<br>");
 		}
 		return htmlMsg.toString();
 	}

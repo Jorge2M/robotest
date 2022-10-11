@@ -13,26 +13,26 @@ public class PageGestorCheques extends PageBase {
 	
 	public static String titulo = "Gestor de Cheques";
 	public static String tituloDetalles = "DETALLES CHEQUE REGALO";
-	static String iniXPathTitulo = "//td[@class='txt11B' and text()[contains(.,'";
-	static String XPathDivContent = "//div[@id='busquedaRapidaContent']";
-	static String XPathTextArea = XPathDivContent + "//textarea";
-	static String XPathCorreoReceptorButton = XPathDivContent + "//input[@value='Correo del receptor']";
-	static String XPathTabla = "//table[@class[contains(.,'grupotalla-table')]]";
-	static String XPathDetallesTablaChequeNumero = "//table//td[text()[contains(.,'CHEQUE NUMERO')]]";
+	private final static String INI_XPATH_TITULO = "//td[@class='txt11B' and text()[contains(.,'";
+	private final static String XPATH_DIV_CONTENT = "//div[@id='busquedaRapidaContent']";
+	private final static String XPATH_TEXT_AREA = XPATH_DIV_CONTENT + "//textarea";
+	private final static String XPATH_CORREO_RECEPTOR_BUTTON = XPATH_DIV_CONTENT + "//input[@value='Correo del receptor']";
+	private final static String XPATH_TABLA = "//table[@class[contains(.,'grupotalla-table')]]";
+	private final static String XPATH_DETALLES_TABLA_CHEQUE_NUMERO = "//table//td[text()[contains(.,'CHEQUE NUMERO')]]";
 
 	public enum ButtonsCheque implements ElementPage {
-		editar("//input[@value='EDITAR']"),
-		modificar("//input[@value='Modificar']"),
+		EDITAR("//input[@value='EDITAR']"),
+		MODIFICAR("//input[@value='Modificar']"),
 		//add("//input[@value='Añadir']"),
 		//desactivar("//input[@value='Desactivar']"),
-		reenviar("//input[@value='Reenviar']"),
-		idPedido("//input[@value[contains(.,'pedido')]]"),
-		numCheque("//input[@value[contains(.,'Número')]]"),
-		idCompra("//input[@value[contains(.,'de compra')]]"),
-		correoReceptor("//input[@value[contains(.,'del receptor')]]"),
-		correoComprador("//input[@value[contains(.,'del comprador')]]"),
-		chequeData("//a[text()[contains(.,'204028046151')]]"),
-		volverCheques("//a[text()[contains(.,'Volver a cheque')]]");
+		REENVIAR("//input[@value='Reenviar']"),
+		ID_PEDIDO("//input[@value[contains(.,'pedido')]]"),
+		NUM_CHEQUE("//input[@value[contains(.,'Número')]]"),
+		ID_COMPRA("//input[@value[contains(.,'de compra')]]"),
+		CORREO_RECEPTOR("//input[@value[contains(.,'del receptor')]]"),
+		CORREO_COMPRADOR("//input[@value[contains(.,'del comprador')]]"),
+		CHEQUE_DATA("//a[text()[contains(.,'204028046151')]]"),
+		VOLVER_CHEQUES("//a[text()[contains(.,'Volver a cheque')]]");
 
 		private By by;
 		ButtonsCheque(String xPath) {
@@ -46,20 +46,20 @@ public class PageGestorCheques extends PageBase {
 	}
 
 	public enum TablaCheque implements ElementPage {
-		activo( "//td[text()[contains(.,'ACTIVO')]]"),
-		chargeBack("//td[text()[contains(.,'CHARGEBACK')]]"),
-		divisa("//td[text()[contains(.,'DIVISA')]]"),
-		valorTotal("//td[text()[contains(.,'VALOR')]]"),
-		saldo("//td[text()[contains(.,'SALDO')]]"),
-		fechaCompra("//td[text()[contains(.,'DE COMPRA')]]"),
-		validez("//td[text()[contains(.,'VALIDEZ')]]"),
-		pedidosRealizados("//td[text()[contains(.,'REALIZADOS')]]"),
-		idPedidos("//th[text()[contains(.,'Id')]]"),
-		fechaPedidos("//th[text()[contains(.,'Fecha')]]"),
-		totalPedidos("//th[text()[contains(.,'Total')]]"),
-		usuarioPedidos("//th[text()[contains(.,'Usuario')]]"),
-		activoPedidos("//th[text()[contains(.,'Accion')]]"),
-		pedidosEliminados("//td[text()[contains(.,'ELIMINADOS')]]");
+		ACTIVO( "//td[text()[contains(.,'ACTIVO')]]"),
+		CHARGE_BACK("//td[text()[contains(.,'CHARGEBACK')]]"),
+		DIVISA("//td[text()[contains(.,'DIVISA')]]"),
+		VALOR_TOTAL("//td[text()[contains(.,'VALOR')]]"),
+		SALDO("//td[text()[contains(.,'SALDO')]]"),
+		FECHA_COMPRA("//td[text()[contains(.,'DE COMPRA')]]"),
+		VALIDEZ("//td[text()[contains(.,'VALIDEZ')]]"),
+		PEDIDOS_REALIZADOS("//td[text()[contains(.,'REALIZADOS')]]"),
+		ID_PEDIDOS("//th[text()[contains(.,'Id')]]"),
+		FECHA_PEDIDOS("//th[text()[contains(.,'Fecha')]]"),
+		TOTAL_PEDIDOS("//th[text()[contains(.,'Total')]]"),
+		USUARIO_PEDIDOS("//th[text()[contains(.,'Usuario')]]"),
+		ACTIVO_PEDIDOS("//th[text()[contains(.,'Accion')]]"),
+		PEDIDOS_ELIMINADOS("//td[text()[contains(.,'ELIMINADOS')]]");
 
 		private By by;
 		TablaCheque(String xPath) {
@@ -77,7 +77,7 @@ public class PageGestorCheques extends PageBase {
 	}
 	
 	private String getXPathFila(int numFila) {
-		return (XPathTabla + "//tr[" + numFila + "]");
+		return (XPATH_TABLA + "//tr[" + numFila + "]");
 	}
 	
 	private String getXPathMailFila(int numFila, String mail) {
@@ -101,15 +101,15 @@ public class PageGestorCheques extends PageBase {
 	}
 	
 	private String getXPathTitulo(String title){
-		return (iniXPathTitulo + title + "')]]");
+		return (INI_XPATH_TITULO + title + "')]]");
 	}
 	
 	private String getXPathDetallesMail(String mail){
-		return XPathDetallesTablaChequeNumero + "/ancestor::tr/following::tr//table//td[contains(.,'" + mail + "')]";
+		return XPATH_DETALLES_TABLA_CHEQUE_NUMERO + "/ancestor::tr/following::tr//table//td[contains(.,'" + mail + "')]";
 	}
 	
 	private String getXPathDetallesPedido(String pedido){
-		return XPathDetallesTablaChequeNumero + "/ancestor::tr/following::tr//table//td[contains(.,'" + pedido + "')]";
+		return XPATH_DETALLES_TABLA_CHEQUE_NUMERO + "/ancestor::tr/following::tr//table//td[contains(.,'" + pedido + "')]";
 	}
 	
 	public boolean isPage() {
@@ -121,24 +121,24 @@ public class PageGestorCheques extends PageBase {
 		return (state(Present, By.xpath(xpath)).check());
 	}
 
-	public void inputMailAndClickCorreoReceptorButton(String mail) throws Exception {
+	public void inputMailAndClickCorreoReceptorButton(String mail) {
 		inputMail(mail);
 		clickCorreoReceptorButtonAndWaitLoad();
 	}
 
 	public void inputChequeAndConfirm(String cheque) {
 		inputMail(cheque);
-		click(ButtonsCheque.numCheque.getBy()).exec();
+		click(ButtonsCheque.NUM_CHEQUE.getBy()).exec();
 	}
 
 	private void inputMail(String mail) {
-		driver.findElement(By.xpath(XPathTextArea)).click();
-		driver.findElement(By.xpath(XPathTextArea)).clear();
-		driver.findElement(By.xpath(XPathTextArea)).sendKeys(mail);
+		driver.findElement(By.xpath(XPATH_TEXT_AREA)).click();
+		driver.findElement(By.xpath(XPATH_TEXT_AREA)).clear();
+		driver.findElement(By.xpath(XPATH_TEXT_AREA)).sendKeys(mail);
 	}
 	
 	private void clickCorreoReceptorButtonAndWaitLoad() {
-		click(By.xpath(XPathCorreoReceptorButton)).exec();
+		click(By.xpath(XPATH_CORREO_RECEPTOR_BUTTON)).exec();
 	}
 
 	public boolean comprobarNumeroPedidos(int numPedidosEsther) {

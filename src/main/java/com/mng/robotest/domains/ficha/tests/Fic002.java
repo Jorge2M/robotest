@@ -3,6 +3,8 @@ package com.mng.robotest.domains.ficha.tests;
 import java.util.Arrays;
 import java.util.Optional;
 
+import org.openqa.selenium.NoSuchElementException;
+
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.buscador.steps.SecBuscadorSteps;
@@ -40,7 +42,11 @@ public class Fic002 extends TestBase {
 			garment = articleWithTotalLook.get();
 		} else {
 			this.isTotalLook = false;
-			garment = getterProducts.getOne().get();
+			if (getterProducts.getOne().isPresent()) {
+				garment = getterProducts.getOne().get();
+			} else {
+				throw new NoSuchElementException("Article not retrieved from GetterProducts service");
+			}
 		}
 	}
 

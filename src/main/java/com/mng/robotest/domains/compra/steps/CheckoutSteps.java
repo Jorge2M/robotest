@@ -282,16 +282,16 @@ public class CheckoutSteps extends StepBase {
 		return (pageCheckoutWrapper.getPage1DktopCheckout().isPresentButtonConfPago());
 	}
 	
-	static final String tagTipoTarj = "@TagTipoTarj";
-	static final String tagNumTarj = "@TagNumTarj";
+	private static final String TAG_TIPO_TARJ = "@TagTipoTarj";
+	private static final String TAG_NUM_TARJ = "@TagNumTarj";
 	@Step (
-		description="Introducimos los datos de la tarjeta (" + tagTipoTarj + ") " + tagNumTarj + " y pulsamos el botón \"Confirmar pago\"",
+		description="Introducimos los datos de la tarjeta (" + TAG_TIPO_TARJ + ") " + TAG_NUM_TARJ + " y pulsamos el botón \"Confirmar pago\"",
 		expected="Aparece la página de resultado OK")
 	public void inputDataTrjAndConfirmPago(DataPago dataPago) throws Exception {
 		Pago pago = dataPago.getDataPedido().getPago();
 		StepTM step = TestMaker.getCurrentStepInExecution();
-		step.replaceInDescription(tagTipoTarj, pago.getTipotarj());
-		step.replaceInDescription(tagNumTarj, pago.getNumtarj());
+		step.replaceInDescription(TAG_TIPO_TARJ, pago.getTipotarj());
+		step.replaceInDescription(TAG_NUM_TARJ, pago.getNumtarj());
 	   
 		if (pago.getNumtarj()!=null && "".compareTo(pago.getNumtarj())!=0) {
 			pageCheckoutWrapper.inputNumberPci(pago.getNumtarj());
@@ -322,10 +322,6 @@ public class CheckoutSteps extends StepBase {
 		return (pageCheckoutWrapper.isAvailableTrjGuardada(tipoTarjeta));
 	}
 	
-	
-
-
-
 	@Step (
 		description="Seleccionamos la tarjeta guardada, si nos lo pide introducimos el cvc #{cvc} y pulsamos el botón \"Confirmar pago\"",
 		expected="Aparece la página de resultado OK")
@@ -348,7 +344,7 @@ public class CheckoutSteps extends StepBase {
 		description="Seleccionamos el botón \"Confirmar Pago\"", 
 		expected="Aparece una pasarela de pago",
 		saveImagePage=SaveWhen.Always)
-	public void pasoBotonAceptarCompraDesktop() throws Exception {
+	public void pasoBotonAceptarCompraDesktop() {
 		pageCheckoutWrapper.getPage1DktopCheckout().clickConfirmarPago();
 	}	  
 	
@@ -412,14 +408,14 @@ public class CheckoutSteps extends StepBase {
 		return checks;
 	}
 	
-	static final String tag1erApellido = "@Tag1erApellido";
+	private static final String TAG_1ER_APELLIDO = "@Tag1erApellido";
 	@Step (
-		description="Introducir el primer apellido " + tag1erApellido + " y pulsar el botón \"Guardar\"", 
+		description="Introducir el primer apellido " + TAG_1ER_APELLIDO + " y pulsar el botón \"Guardar\"", 
 		expected="Se aplican los descuentos correctamente")
 	public void inputDataEmplEnPromoAndAccept(AccesoEmpl accesoEmpl) throws Exception {
 		StepTM step = TestMaker.getCurrentStepInExecution();
 		String primerApellido = (new StringTokenizer(accesoEmpl.getNombre(), " ")).nextToken();
-		step.replaceInDescription(tag1erApellido, primerApellido);
+		step.replaceInDescription(TAG_1ER_APELLIDO, primerApellido);
 		
 		if (accesoEmpl.getNif()!=null) {
 			step.addRightDescriptionText("Introducir el NIF del usuario " + accesoEmpl.getNif() + ". ");
@@ -443,16 +439,16 @@ public class CheckoutSteps extends StepBase {
 		page1DktopCheckSteps.validateIsVersionChequeRegalo(chequeRegalo);
 	}
 	
-	static final String tagNombreBanco = "@TagNombreBanco";
+	private static final String TAG_NOMBRE_BANCO = "@TagNombreBanco";
 	@Step (
-		description="Escogemos el banco \"" + tagNombreBanco + "\" en la pestaña de selección", 
+		description="Escogemos el banco \"" + TAG_NOMBRE_BANCO + "\" en la pestaña de selección", 
 		expected="El banco aparece seleccionado")
-	public void selectBancoEPS() throws Exception {
+	public void selectBancoEPS() {
 		String nombreBanco = "Easybank";
 		if (!isPRO()) {
 			nombreBanco = "Test Issuer";
 		}
-		TestMaker.getCurrentStepInExecution().replaceInDescription(tagNombreBanco, nombreBanco);
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_NOMBRE_BANCO, nombreBanco);
 			
 		pageCheckoutWrapper.selectBancoEPS(nombreBanco);
 		checkIsVisibleBank(nombreBanco);
@@ -477,8 +473,7 @@ public class CheckoutSteps extends StepBase {
 		expected="Se aplica correctamente el descuento")
 	public void loyaltyPointsApply() throws Exception {
 		switch (channel) {
-		case desktop:
-		case tablet:
+		case desktop, tablet:
 			loyaltyPointsApplyDesktop();
 			break;
 		case mobile:
@@ -501,7 +496,7 @@ public class CheckoutSteps extends StepBase {
 			"(lo esperamos hasta #{seconds})",
 		level=State.Defect)
 	public boolean validateLoyaltyPointsDiscountDesktopUntil(float descuento, float subtotalInicial, int seconds) 
-	throws Exception {
+			throws Exception {
 		for (int i=0; i<seconds; i++) {
 			float subTotalActual = pageCheckoutWrapper.getImportSubtotalDesktop();
 			float estimado = UtilsMangoTest.round(subtotalInicial - descuento, 2);

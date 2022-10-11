@@ -33,9 +33,9 @@ public class ModalInputPhoneKlarna extends PageBase {
 		return state(State.Visible, XPATH_INPUT_OTP).wait(seconds).check();
 	}
 	
-	public void inputOTP(String OTP) {
+	public void inputOTP(String otp) {
 		isInputOtpVisible(5);
-		getElement(XPATH_INPUT_OTP).sendKeys(OTP);
+		getElement(XPATH_INPUT_OTP).sendKeys(otp);
 		isButtonConfirmVisible(5);
 	}
 	

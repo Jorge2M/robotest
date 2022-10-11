@@ -262,7 +262,6 @@ public class SecBolsaSteps extends StepBase {
 			new CheckoutSteps().validateIsFirstPage(dataTest.isUserRegistered());
 		} else {
 			new Page1IdentCheckoutSteps().validateIsPage(5);
-			GenericChecks.checkDefault();
 		}
 	}
 
