@@ -4,11 +4,11 @@ import com.mng.robotest.domains.transversal.PageBase;
 
 public class SectionPrendas extends PageBase {
 
-	private final static String XPATH_ARTICULO = "//*[@data-testid='myPurchases.detail.product']";
-	private final static String XPATH_DATA_ARTICULO = "//*[@data-testid[contains(.,'detail.productInfo')]]/../..";
-	private final static String XPATH_REFERENCIA_ARTICULO = "//*[@data-testid[contains(.,'detail.reference')]]";
-	private final static String XPATH_NOMBRE_ARTICULO = "//button[@class[contains(.,'text-title')]]";
-	private final static String XPATH_PRECIO_ARTICULO = "//*[@data-testid[contains(.,'detail.productPrice')]]/div";
+	private static final String XPATH_ARTICULO = "//*[@data-testid='myPurchases.detail.product']";
+	private static final String XPATH_DATA_ARTICULO = "//*[@data-testid[contains(.,'detail.productInfo')]]/../..";
+	private static final String XPATH_REFERENCIA_ARTICULO = "//*[@data-testid[contains(.,'detail.reference')]]";
+	private static final String XPATH_NOMBRE_ARTICULO = "//button[@class[contains(.,'text-title')]]";
+	private static final String XPATH_PRECIO_ARTICULO = "//*[@data-testid[contains(.,'detail.productPrice')]]/div";
 	
 	public int getNumPrendas() {
 		return getElements(XPATH_ARTICULO).size();

@@ -1,16 +1,18 @@
 package com.mng.robotest.domains.registro.beans;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ListDataNinos {
-	private ArrayList<DataNino> listNinos = new ArrayList<>();
+	
+	private List<DataNino> listNinos = new ArrayList<>();
 	
 	public void add(DataNino dataNino) {
 		this.listNinos.add(dataNino);
 	}
 	
-	public ArrayList<DataNino> getListNinos() {
+	public List<DataNino> getListNinos() {
 		return this.listNinos;
 	}
 	

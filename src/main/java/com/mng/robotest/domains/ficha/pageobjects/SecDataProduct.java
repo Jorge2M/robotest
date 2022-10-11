@@ -255,8 +255,8 @@ public class SecDataProduct extends PageBase {
 
 	//zona de colores dentro de la ficha
 
-	public ArrayList<String> getColorsGarment() {
-		ArrayList<String> colors = new ArrayList<>();
+	public List<String> getColorsGarment() {
+		List<String> colors = new ArrayList<>();
 		for (WebElement element : getElements(XPATH_COLORES_PRENDA_SIN_IDENTIFICAR)) {
 			colors.add(element.getAttribute("id"));
 		}

@@ -10,10 +10,10 @@ import com.mng.robotest.domains.transversal.PageBase;
 public class PagePaysecureQiwi1rst extends PageBase {
 	
 	public enum PaysecureGateway { 
-		Card("card", "100:1"), 
-		Qiwi("qiwi", "36:2"), 
-		WebMoney("wm", "30:2"), 
-		Yandex("ym", "32:2"); //Яндекс
+		CARD("card", "100:1"), 
+		QIWI("qiwi", "36:2"), 
+		WEBMONEY("wm", "30:2"), 
+		YANDEX("ym", "32:2"); //Яндекс
 		
 		private String xpathIconoPro = "//div[@class[contains(.,'select-card')]]"; 
 		private String xpathIconoTest = "//input[@name='isSET']";
@@ -32,7 +32,7 @@ public class PagePaysecureQiwi1rst extends PageBase {
 	}
 	
 	public boolean isPage() {
-		return state(Visible, PaysecureGateway.Qiwi.getBy(isPRO())).check();
+		return state(Visible, PaysecureGateway.QIWI.getBy(isPRO())).check();
 	}
 
 	public boolean isPresentIcon(PaysecureGateway gateway) {

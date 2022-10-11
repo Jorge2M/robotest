@@ -11,7 +11,7 @@ public class ListDataRegistro {
 	public enum DataPageDirec {PAIS, DIRECCION, CODPOSTAL, POBLACION, PROVINCIA}
 	public enum PageData {PAGEINICIAL, PAGEDIRECCION}
 	
-	private ArrayList<DataRegistro> dataRegistro = new ArrayList<>();
+	private List<DataRegistro> dataRegistro = new ArrayList<>();
 	
 	public void add(DataRegType inputType, String data, boolean valid) {
 		add(new DataRegistro(inputType, data, valid));
@@ -21,15 +21,15 @@ public class ListDataRegistro {
 		this.dataRegistro.add(dataInput);
 	}
 	
-	public ArrayList<DataRegistro> getDataRegistro() {
+	public List<DataRegistro> getDataRegistro() {
 		return this.dataRegistro;
 	}
 	
 	/**
 	 * @return los datos pertenecientes a la página inicial del registro
 	 */
-	public ArrayList<DataRegistro> getDataPageInicial() {
-		ArrayList<DataRegistro> listDataPageIni = new ArrayList<>();
+	public List<DataRegistro> getDataPageInicial() {
+		List<DataRegistro> listDataPageIni = new ArrayList<>();
 		for (DataRegistro dataReg : this.dataRegistro) {
 			if (isDataPageIni(dataReg.getDataRegType())) {
 				listDataPageIni.add(dataReg);

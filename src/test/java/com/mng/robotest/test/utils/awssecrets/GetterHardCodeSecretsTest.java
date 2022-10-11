@@ -20,29 +20,29 @@ public class GetterHardCodeSecretsTest {
 	public void testGetCredentialsShopPerformanceUser() throws Exception {
 		Secret secret = getterSecrets.getCredentials(SecretType.SHOP_PERFORMANCE_USER);
 		
-		assertTrue(secret.getNif()==null);
-		assertTrue(secret.getUser().compareTo("test.performance01@mango.com")==0);
-		assertTrue(secret.getPassword().compareTo("mango457")==0);
-		assertTrue(secret.getType().compareTo("SHOP_PERFORMANCE_USER")==0);
+		assertNull(secret.getNif());
+		assertEquals(secret.getUser(), "test.performance01@mango.com");
+		assertEquals(secret.getPassword(), "mango457");
+		assertEquals(secret.getType(), "SHOP_PERFORMANCE_USER");
 	}
 	
 	@Test
 	public void testGetCredentialsShopStandardUser() throws Exception {
 		Secret secret = getterSecrets.getCredentials(SecretType.SHOP_STANDARD_USER);
 		
-		assertTrue(secret.getNif()==null);
-		assertTrue(secret.getUser().compareTo("ticket_digital_es@mango.com")==0);
-		assertTrue(secret.getPassword().compareTo("mango457")==0);
-		assertTrue(secret.getType().compareTo("SHOP_STANDARD_USER")==0);
+		assertNull(secret.getNif());
+		assertEquals(secret.getUser(), "ticket_digital_es@mango.com");
+		assertEquals(secret.getPassword(), "mango457");
+		assertEquals(secret.getType(), "SHOP_STANDARD_USER");
 	}
 	
 	@Test
 	public void testGetCredentialsEmployeeData() throws Exception {
 		Secret secret = getterSecrets.getCredentials(SecretType.EMPLOYEE_DATA);
 		
-		assertTrue(secret.getPassword()==null);
-		assertTrue(secret.getType().compareTo("EMPLOYEE_DATA")==0);
-		assertTrue(secret.getNif().compareTo("32070858A")==0);
+		assertNull(secret.getPassword());
+		assertEquals(secret.getType(), "EMPLOYEE_DATA");
+		assertEquals(secret.getNif(), "32070858A");
 	}
 	
 	@Test

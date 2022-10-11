@@ -9,7 +9,7 @@ public class PageQiwiConfirmSteps extends StepBase {
 	@Step (
 		description="Seleccionar el botón \"Confirmar\" de la página de confirmación de Qiwi", 
 		expected="Aparece la página de resultado del pago de Mango")
-	public void selectConfirmButton() throws Exception {
+	public void selectConfirmButton() {
 		new PagePaysecureConfirm().clickConfirmar();		 
 	}
 }

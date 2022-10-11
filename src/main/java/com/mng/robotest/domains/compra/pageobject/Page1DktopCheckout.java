@@ -56,8 +56,6 @@ public class Page1DktopCheckout extends PageBase {
 	private static final String XPATH_OTRAS_FORMAS_PAGO = "//div[@class[contains(.,'formasPago')]]";
 	private static final String XPATH_RED_ERROR = "//div[@class[contains(.,'errorbocatapago')]]";
 	
-//	private static final String XPATH_PRECIO_SUBTOTAL = "//div[@class='subTotal']/div/div[2]/span[@class='precioNormal']";
-//	private static final String XPATH_PRECIO_TOTAL = "//span[@class[contains(.,'precioTotal')]]";
 	private static final String XPATH_PRECIO_SUBTOTAL = "//*[@data-testid='subTotalOrder.price']";
 	private static final String XPATH_PRECIO_TOTAL = "//*[@data-testid='totalPromotions.price']";
 	private static final String XPATH_PRECIO_TOTAL_CROATIA_EUROS = "//*[@data-testid='subTotalOrder.additionalPrice.1']";
@@ -71,7 +69,7 @@ public class Page1DktopCheckout extends PageBase {
 		"//div[@class='mensajesContrarembolso'] | " +
 		"//div[@class[contains(.,'cardContainerNotIntegrated')]] | " +
 		"//div[@class[contains(.,'falconFormularioTarjeta')]] | " + 
-		"//div[@class[contains(.,'formasPago')]]"; 
+		XPATH_OTRAS_FORMAS_PAGO; 
 	
 	private static final String TAG_METODO_PAGO = "@TagMetodoPago";
 	private static final String XPATH_BLOCK_TARJETA_GUARDADA_PAGO_WITH_TAG = "//div[@class[contains(.,'tarjetaGuardada')] and @data-analytics-value='" + TAG_METODO_PAGO + "']";
@@ -243,7 +241,7 @@ public class Page1DktopCheckout extends PageBase {
 		click(By.id(XPATH_LINK_TO_VIEW_BLOCK_PROMO)).exec();
 	}
 
-	public void showInputCodigoPromoAndAccept(String codigoPromo) throws Exception {
+	public void showInputCodigoPromoAndAccept(String codigoPromo) {
 		if (!isVisibleBlockCodigoPromoUntil(0)) {
 			clickLinkToViewBlockPromo();
 		}
@@ -350,19 +348,16 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	private void metodosPagosInStateUntil(boolean plegados, int seconds) throws Exception {
-		boolean inStateOk = false; 
 		int i=0;
 		do {
 			boolean arePlegados = areMetodosPagoPlegados();
 			if (arePlegados==plegados) {
-				inStateOk = true;
 				break;
 			}
-			
 			Thread.sleep(1000);
 			i+=1;
 		}
-		while (!inStateOk && i<seconds);
+		while (i<seconds);
 	}	
 
 	public void clickMetodoPago(String metodoPago) {
@@ -462,7 +457,7 @@ public class Page1DktopCheckout extends PageBase {
 		PreciosArticulo precios = new PreciosArticulo();
 		List<WebElement> preciosNoTachados= articuloWeb.findElements(By.xpath("." + XPATH_PRECIO_NO_TACHADO_REL_ARTICLE));
 		List<WebElement> preciosSiTachados= articuloWeb.findElements(By.xpath("." + XPATH_PRECIOO_SI_TACHADO_REL_ARTICLE));
-		int cantidad = Integer.valueOf(articuloWeb.findElement(By.xpath("." + XPATH_CANTIDAD_ARTICULOS)).getText());
+		int cantidad = Integer.parseInt(articuloWeb.findElement(By.xpath("." + XPATH_CANTIDAD_ARTICULOS)).getText());
 		for (WebElement precioNoTachado : preciosNoTachados) {
 			precios.definitivo = getFloatFromImporteScreen(precioNoTachado) / cantidad; 
 			if (precios.definitivo!=0) {

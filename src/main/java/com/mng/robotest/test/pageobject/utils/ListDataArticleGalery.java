@@ -2,18 +2,19 @@ package com.mng.robotest.test.pageobject.utils;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.TreeSet;
 
 
 public class ListDataArticleGalery {
 
-	ArrayList<DataArticleGalery> listNombreYRef = new ArrayList<>();
+	List<DataArticleGalery> listNombreYRef = new ArrayList<>();
 
 	public Iterator<DataArticleGalery> getIterator() {
 		return this.listNombreYRef.iterator();
 	}
 	
-	public void setListNombreYRef(ArrayList<DataArticleGalery> listNombreYRef) {
+	public void setListNombreYRef(List<DataArticleGalery> listNombreYRef) {
 		this.listNombreYRef = listNombreYRef;
 	}
 	
@@ -32,8 +33,8 @@ public class ListDataArticleGalery {
 		this.listNombreYRef.add(item);
 	}
 	
-	public ArrayList<DataArticleGalery> getArticlesRepeated() {
-		ArrayList<DataArticleGalery> duplicates = new ArrayList<>();
+	public List<DataArticleGalery> getArticlesRepeated() {
+		List<DataArticleGalery> duplicates = new ArrayList<>();
 		TreeSet<DataArticleGalery> nombreYRefSet = new TreeSet<>(new NombreYRefComparator());
 		for(DataArticleGalery nombreYRef : this.listNombreYRef) {
 			if(!nombreYRefSet.add(nombreYRef)) {

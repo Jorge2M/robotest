@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.micuenta.steps;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -28,7 +27,7 @@ public class PageSuscripcionesSteps extends StepBase {
 
 	@Validation
 	public ChecksTM validaIsDataAssociatedToRegister(Map<String,String> datosRegOk) {
-		int numLineasTotales = Integer.valueOf(datosRegOk.get("numlineas")).intValue();
+		int numLineasTotales = Integer.parseInt(datosRegOk.get("numlineas"));
 		String lineasUnchecked = datosRegOk.get("clicklineas");
 		StringTokenizer tokensLinDesmarcadas = new StringTokenizer(lineasUnchecked, ",");
 		int numLinDesmarcadas = tokensLinDesmarcadas.countTokens();
@@ -78,7 +77,7 @@ public class PageSuscripcionesSteps extends StepBase {
 	@Step(
 		description = "Seleccionar los checkbox de las Newsletter <b>#{listNewsletters.toString()}</b> + Botón \"Guardar Cambios\"",
 		expected = "parece la confirmación que los datos se han modificado")
-	public void selectNewslettersAndGuarda(ArrayList<NewsLetter> listNewsletters) {
+	public void selectNewslettersAndGuarda(List<NewsLetter> listNewsletters) {
 		for (NewsLetter idNewsletter : listNewsletters) {
 			pageSuscripciones.selectRadioNewsletter(idNewsletter);
 		}

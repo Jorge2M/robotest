@@ -253,7 +253,7 @@ public class Pago implements Serializable {
 			if (listPayments==null || "".compareTo(listPayments)==0) {
 				return true;
 			}
-			ArrayList<String> paymentsArray = new ArrayList<>(Arrays.asList(listPayments.split(",")));
+			List<String> paymentsArray = new ArrayList<>(Arrays.asList(listPayments.split(",")));
 			for (String paymentFilterName : paymentsArray) {
 				if (paymentFilterName.compareTo(getNameFilter(channel, app))==0) {
 					return true;

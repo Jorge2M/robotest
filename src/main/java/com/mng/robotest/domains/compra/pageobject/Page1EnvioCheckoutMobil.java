@@ -6,7 +6,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.compra.pageobject.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.utils.ImporteScreen;
@@ -106,7 +105,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 		new Select(getElement(XPATH_ANY_NACI_PROMO_EMPL)).selectByValue(value);
 	}
 
-	public void inputDNIPromoEmpl(String dni) throws Exception {
+	public void inputDNIPromoEmpl(String dni) {
 		waitLoadPage();
 		getElement(XPATH_INPUT_DNI_PROMO_EMPL).sendKeys(dni);
 	}
@@ -120,7 +119,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 		click(XPATH_ACEPTAR_PROMO_EMPL).exec();
 	}
 
-	public void inputCodigoPromoAndAccept(String codigoPromo) throws Exception {
+	public void inputCodigoPromoAndAccept(String codigoPromo) {
 		inputCodigoPromo(codigoPromo);
 		clickAceptarPromo();
 	}
@@ -154,7 +153,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 		return state(Visible, XPATH_DESCUENTO_EMPLEADO).wait(seconds).check();
 	}
 	
-	public boolean validateDiscountEmpleadoNotNull() throws Exception {
+	public boolean validateDiscountEmpleadoNotNull() {
 		String descuentoScreen = getImporteDescuentoEmpleado();
 		if ("".compareTo(descuentoScreen)==0) {
 			return false;
@@ -240,7 +239,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	}
 
 	public void clickEditDirecEnvio() {
-		PageBase.waitForPageLoaded(driver);
+		waitForPageLoaded(driver);
 		try { 
 			click(XPATH_BUTTON_EDIT_DIREC_ENVIO).waitLink(2).exec();
 		} catch (Exception e ) {
@@ -259,7 +258,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 		}
 	}
 
-	public void clickContinuarAndWaitPage2(AppEcom app) {
+	public void clickContinuarAndWaitPage2() {
 		clickContinuar();
 		new Page2DatosPagoCheckoutMobil().isPageUntil(2);
 	}

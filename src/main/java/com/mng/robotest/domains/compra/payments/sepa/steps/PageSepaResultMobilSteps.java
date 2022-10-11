@@ -18,17 +18,19 @@ public class PageSepaResultMobilSteps {
 		checks.add(
 			"Aparece la página de resultado de SEPA para móvil",
 			pageSepaResultMobil.isPage(), State.Warn);	
+		
 		checks.add(
 			"Aparece el importe de la compra: " + importeTotal,
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, pageSepaResultMobil.driver), 
-			State.Warn);	
+			State.Warn);
+		
 		return checks;
 	}
 	
 	@Step (
 		description="Seleccionamos el botón para Pagar", 
 		expected="Aparece la página de resultado OK del pago en Mango")
-	public void clickButtonPagar() throws Exception {
+	public void clickButtonPagar() {
 		pageSepaResultMobil.clickButtonPay();
 	}
 }

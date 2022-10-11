@@ -72,8 +72,8 @@ public class CheckerSEO extends PageBase implements Checker {
 	/**
 	 * @return lista de errores en formato HTML referidos al tag "Title"
 	 */
-	private ArrayList<String> validaTagTitle(WebDriver driver) {
-		ArrayList<String> listaErrorsInHtmlFormat = new ArrayList<>();
+	private List<String> validaTagTitle(WebDriver driver) {
+		List<String> listaErrorsInHtmlFormat = new ArrayList<>();
 		String title = driver.getTitle();
 		if (title == null || "".compareTo(title) == 0) {
 			listaErrorsInHtmlFormat.add("<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">No existe el title o es nulo</c>");
@@ -81,8 +81,8 @@ public class CheckerSEO extends PageBase implements Checker {
 		return listaErrorsInHtmlFormat;
 	}
 	
-	private ArrayList<String> validaCanonical(WebDriver driver) throws Exception {
-		ArrayList<String> listaErrorsInHtmlFormat = new ArrayList<>();
+	private List<String> validaCanonical(WebDriver driver) throws Exception {
+		List<String> listaErrorsInHtmlFormat = new ArrayList<>();
 		if (!new AllPages().isPresentTagCanonical()) {
 			//El canonical ha de aparecer como mínimo en las páginas de Portada, Catálogo y Ficha
 			PageFicha pageFicha = PageFicha.of(channel);

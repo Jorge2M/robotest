@@ -48,7 +48,7 @@ public class GetterProductsIT {
 		List<GarmentCatalog> listProducts = getterProducts.getAll();
 		
 		//Then
-		assertTrue(listProducts.size()==numProducts);
+		assertEquals(listProducts.size(), numProducts);
 		assertTrue(listProducts.get(0).getStock()>0);
 		assertTrue(isListSortedByStock(listProducts));
 	}
@@ -88,7 +88,7 @@ public class GetterProductsIT {
 		GarmentCatalog garmentOnline = getGarmentOnline(products);
 		
 		//Then
-		assertTrue(garmentOnline==null);
+		assertNull(garmentOnline);
 	}
 	
 	@Test
@@ -98,7 +98,7 @@ public class GetterProductsIT {
 		GarmentCatalog garmentNoOnline = getGarmentNoOnline(products);
 		
 		//Then
-		assertTrue(garmentNoOnline==null);
+		assertNull(garmentNoOnline);
 	}
 	
 	private GarmentCatalog getGarmentOnline(List<GarmentCatalog> garments) {

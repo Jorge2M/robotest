@@ -10,19 +10,19 @@ public class TallaTest {
 	@Test
 	public void testFromLabel() {
 		Talla talla = Talla.fromLabel("13");
-		assertTrue(talla==Talla.T46);
+		assertEquals(talla, Talla.T46);
 	}
 	
 	@Test
 	public void testFromLabelVoid() {
 		Talla talla = Talla.fromLabel("92");
-		assertTrue(talla==Talla.T00);
+		assertEquals(talla, Talla.T00);
 	}
 	
 	@Test
 	public void testFromValue() {
 		Talla talla = Talla.fromValue("10");
-		assertTrue(talla==Talla.T10);
+		assertEquals(talla, Talla.T10);
 	}
 
 }

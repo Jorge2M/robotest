@@ -184,7 +184,7 @@ public class SecBolsaSteps extends StepBase {
 			"Cuadra el númeo de artículos existentes en la bolsa",
 			validatorBolsa.numArticlesIsCorrect(), State.Warn);
 		
-		ArrayList<DataArtBolsa> listDataToValidate = new ArrayList<>();
+		List<DataArtBolsa> listDataToValidate = new ArrayList<>();
 		listDataToValidate.add(DataArtBolsa.REFERENCIA);
 		checks.add(
 			"Cuadran las referencias de los artículos existentes en la bolsa",

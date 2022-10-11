@@ -8,7 +8,6 @@ import com.mng.robotest.domains.compra.payments.billpay.pageobjects.SecBillpay;
 import com.mng.robotest.domains.compra.payments.tmango.pageobjects.SecTMango;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Pago;
-import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -110,7 +109,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		}
 	}
 
-	public void clickButtonFinalizarCompra() throws Exception {
+	public void clickButtonFinalizarCompra() {
 		click(XPATH_BUTTON_FINALIZAR_COMPRA).type(javascript).exec();
 	}
 
@@ -168,13 +167,13 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		return state(Present, XPATH_LINEA_PAGO_LAYOUT_LINEA).check();
 	}
 
-	public void goToPageFromCheckoutIfNeeded() throws Exception {
+	public void goToPageFromCheckoutIfNeeded() {
 		int i=0;
 		while (!isPageUntil(1) && i<3) {
 			i+=1;
 			Page1EnvioCheckoutMobil page1 = new Page1EnvioCheckoutMobil();
 			if (page1.isPageUntil(0)) {
-				page1.clickContinuarAndWaitPage2(app);
+				page1.clickContinuarAndWaitPage2();
 			} else {
 				clickLink2DatosPagoAndWait();
 			}
@@ -196,7 +195,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		waitLoadPage(); //For avoid StaleElementReferenceException
 	}
 
-	public void clickLinkFormasPagoFor(TypeActionLinkFP typeAction) throws Exception {
+	public void clickLinkFormasPagoFor(TypeActionLinkFP typeAction) {
 		click(getXPathLinkFormasPagoFor(typeAction)).type(javascript).exec();
 	}
 
@@ -217,19 +216,17 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 
 	public void metodosPagosInStateUntil(boolean plegados, int seconds) throws Exception {
-		boolean inStateOk = false;
 		int i=0;
 		do {
 			boolean arePlegados = areMetodosPagoPlegados();
 			if (arePlegados==plegados) {
-				inStateOk = true;
 				break;
 			}
 
 			Thread.sleep(1000);
 			i+=1;
 		}
-		while (!inStateOk && i<seconds);
+		while (i<seconds);
 	}	
 	
 	public void clickMetodoPagoAndWait(String nombrePago) throws Exception {
@@ -317,7 +314,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		return state(Present, XPATH_ARTICLE_BOLSA).check();
 	}
 
-	public void confirmarPagoFromMetodos(DataPedido dataPedido) throws Exception {
+	public void confirmarPagoFromMetodos() throws Exception {
 		clickButtonFinalizarCompra();
 	}
 	

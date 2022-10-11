@@ -19,7 +19,7 @@ public class PageQiwiInputTlfnSteps {
 	@Step (
 		description="Introducimos el Qiwi Mobile Phone #{tlfnQiwi} y pulsamos el botón \"Aceptar\"", 
 		expected="Aparece la página de confirmación de Qiwi o la de resultado del pago de Mango")
-	public void inputTelefono(String tlfnQiwi) throws Exception {
+	public void inputTelefono(String tlfnQiwi) {
 		pageQiwiInputTlfn.inputQiwiPhone(tlfnQiwi);
 		checkIsVisibleAceptarButton();
 	}
@@ -33,7 +33,7 @@ public class PageQiwiInputTlfnSteps {
 	@Step (
 		description="Seleccionar el link <b>Aceptar</b>",
 		expected="Aparece la página de confirmación del pago-Qiwi")
-	public void clickConfirmarButton() throws Exception { 
+	public void clickConfirmarButton() { 
 		pageQiwiInputTlfn.clickLinkAceptar();
 	}
 }

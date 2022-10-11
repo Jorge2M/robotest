@@ -17,7 +17,7 @@ public class ListRegistrosXPais {
 	@Factory
 	@Parameters({"countrys", "lineas"})
 	public Object[] createInstances(String listaPaisesStr, String lineas, ITestContext ctxTestRun) throws Exception {
-		ArrayList<Object> listTests = new ArrayList<>();
+		List<Object> listTests = new ArrayList<>();
 		AppEcom appE = (AppEcom)TestMaker.getInputParamsSuite(ctxTestRun).getApp();
 		try {
 			List<Pais> listCountrys = PaisGetter.getFromCommaSeparatedCountries(listaPaisesStr);

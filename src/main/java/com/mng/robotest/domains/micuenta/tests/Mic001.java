@@ -1,6 +1,7 @@
 package com.mng.robotest.domains.micuenta.tests;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.micuenta.pageobjects.PageSuscripciones.NewsLetter;
@@ -50,7 +51,7 @@ public class Mic001 extends TestBase {
 
 	private void checkSuscripciones() {
 		pageMiCuentaSteps.goToSuscripciones();
-		ArrayList<NewsLetter> listNewsletters = new ArrayList<>();
+		List<NewsLetter> listNewsletters = new ArrayList<>();
 		listNewsletters.add(NewsLetter.she);
 		new PageSuscripcionesSteps().selectNewslettersAndGuarda(listNewsletters);
 	}

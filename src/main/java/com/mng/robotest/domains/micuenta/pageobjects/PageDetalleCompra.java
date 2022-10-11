@@ -10,17 +10,6 @@ public abstract class PageDetalleCompra extends PageBase implements PageDetalleP
 
 	private final ModalDetalleArticulo modalDetalleArticulo;
 	
-	@Override
-	public abstract boolean isPage();
-	@Override
-	public abstract boolean isPresentImporteTotal(String importeTotal, String codPais);
-	@Override
-	public abstract boolean isVisiblePrendaUntil(int seconds);
-	@Override
-	public abstract void clickBackButton(Channel channel);
-	@Override
-	public abstract int getNumPrendas();
-	
 	public abstract boolean isVisibleDataTicket(int seconds);
 	public abstract boolean isVisibleIdTicket(int seconds);
 	public abstract String getIdTicket(TypeTicket typeTicket);
@@ -36,14 +25,13 @@ public abstract class PageDetalleCompra extends PageBase implements PageDetalleP
 		switch (channel) {
 		case desktop:
 			return new PageDetalleCompraDesktop();
-		case mobile:
-		case tablet:
+		case mobile, tablet:
 			return new PageDetalleCompraMobil();
 		}
 		return null;
 	}
 	
-	public PageDetalleCompra() {
+	protected PageDetalleCompra() {
 		modalDetalleArticulo = ModalDetalleArticulo.make(channel);
 	}
 	
@@ -53,7 +41,7 @@ public abstract class PageDetalleCompra extends PageBase implements PageDetalleP
 	
 	@Override
 	public DetallePedido getTypeDetalle() {
-		return DetallePedido.New;
+		return DetallePedido.NEW;
 	}
 
 	public ArticuloScreen getDataArticulo(int posArticulo) {

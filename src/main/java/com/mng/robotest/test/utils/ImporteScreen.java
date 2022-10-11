@@ -66,11 +66,11 @@ public class ImporteScreen {
 	}
 	
 	public static boolean isPresentImporteInElements(String importe, String codPais, String xpathElementsWhereSearch, WebDriver driver) {
-		ArrayList<String> possibleImports = getPosibleLitImportInScreen(importe, codPais);
+		List<String> possibleImports = getPosibleLitImportInScreen(importe, codPais);
 		return (isAnyImportInScreen(possibleImports, xpathElementsWhereSearch, driver));
 	}
 	
-	private static boolean isAnyImportInScreen(ArrayList<String> possibleImports, String xpathElementsWhereSearch, WebDriver driver) {
+	private static boolean isAnyImportInScreen(List<String> possibleImports, String xpathElementsWhereSearch, WebDriver driver) {
 		if (isAnyImportInScreenMethodXpath(possibleImports, xpathElementsWhereSearch, driver)) {
 			return true;
 		}
@@ -81,7 +81,7 @@ public class ImporteScreen {
 	/**
 	 * Se buscan los importes en pantalla vía XPath directo
 	 */
-	private static boolean isAnyImportInScreenMethodXpath(ArrayList<String> possibleImports, String xpathElementsWhereSearch, WebDriver driver) {
+	private static boolean isAnyImportInScreenMethodXpath(List<String> possibleImports, String xpathElementsWhereSearch, WebDriver driver) {
 		String xpathImports = xpathElementsWhereSearch + "//self::*[";
 		String litOr = " or ";
 		for (String possibleImport : possibleImports) {
@@ -95,7 +95,7 @@ public class ImporteScreen {
 	/**
 	 * Se buscan los importes en pantalla vía revisión de todos los WebElement
 	 */
-	private static boolean isAnyImportInScreenMethodIterate(ArrayList<String> possibleImports, String xpathElementsWhereSearch, 
+	private static boolean isAnyImportInScreenMethodIterate(List<String> possibleImports, String xpathElementsWhereSearch, 
 															int itemsToIterate, WebDriver driver) {
 		List<WebElement> listElementos = driver.findElements(By.xpath(xpathElementsWhereSearch));
 		Iterator<WebElement> itElements = listElementos.iterator();
@@ -114,9 +114,9 @@ public class ImporteScreen {
 		return false;
 	}
 	
-	private static ArrayList<String> getPosibleLitImportInScreen(String importe, String codPais) {
+	private static List<String> getPosibleLitImportInScreen(String importe, String codPais) {
 		//Posibles importes a nivel General
-		ArrayList<String> listOfImports = new ArrayList<String>();
+		List<String> listOfImports = new ArrayList<String>();
 		listOfImports.add(importe);
 		if (importe.contains(".")) {
 			listOfImports.add(importe.replace(".", ","));

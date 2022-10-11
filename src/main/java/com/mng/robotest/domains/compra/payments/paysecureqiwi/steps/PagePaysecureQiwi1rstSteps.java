@@ -27,7 +27,7 @@ public class PagePaysecureQiwi1rstSteps extends StepBase {
 	 	
 	 	checks.add(
 			"Aparece el icono de Qiwi",
-			pagePaysecureQiwi.isPresentIcon(PaysecureGateway.Qiwi), State.Warn);
+			pagePaysecureQiwi.isPresentIcon(PaysecureGateway.QIWI), State.Warn);
 	 	
 	 	return checks;
 	}
@@ -35,8 +35,8 @@ public class PagePaysecureQiwi1rstSteps extends StepBase {
 	@Step (
 		description="Seleccionar la opción de Qiwi Kошелек", 
 		expected="Aparece la página de introducción del número de teléfono")
-	public void clickIconPasarelaQiwi() throws Exception {
-		pagePaysecureQiwi.clickIcon(PaysecureGateway.Qiwi);
+	public void clickIconPasarelaQiwi() {
+		pagePaysecureQiwi.clickIcon(PaysecureGateway.QIWI);
 		new PageQiwiInputTlfnSteps().validateIsPage();
 	}
 }

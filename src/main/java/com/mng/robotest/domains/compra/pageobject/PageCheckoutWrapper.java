@@ -78,7 +78,7 @@ public class PageCheckoutWrapper extends PageBase {
 		}
 	}
 	
-	public void clickEliminarValeIfExists() throws Exception {
+	public void clickEliminarValeIfExists() {
 		if (channel==Channel.mobile) {
 			page1MobilCheckout.clickEliminarValeIfExists();
 		} else {
@@ -156,7 +156,7 @@ public class PageCheckoutWrapper extends PageBase {
 		}
 	}
 	
-	public void clickGuardarPromo() throws Exception {
+	public void clickGuardarPromo() {
 		if (channel==Channel.mobile) {
 			page1MobilCheckout.clickAceptarPromo();
 		} else {
@@ -164,7 +164,7 @@ public class PageCheckoutWrapper extends PageBase {
 		}
 	}
 	
-	public void clickButtonAceptarPromoEmpl() throws Exception {
+	public void clickButtonAceptarPromoEmpl() {
 		if (channel==Channel.mobile) {
 			page1MobilCheckout.clickButtonAceptarPromoEmpl();
 		} else {
@@ -236,7 +236,7 @@ public class PageCheckoutWrapper extends PageBase {
 		return page1DktopCheckout.getCroaciaPrecioTotalInEuros(normalize);
 	}	
 	
-	public String getAlmacenFromNoProdEntorn() throws Exception {
+	public String getAlmacenFromNoProdEntorn() {
 		if (channel==Channel.mobile) {
 			return "";
 		}
@@ -289,7 +289,7 @@ public class PageCheckoutWrapper extends PageBase {
 		}
 	}
 
-	public void clickRadioTrjGuardada() throws Exception {
+	public void clickRadioTrjGuardada() {
 		if (channel==Channel.mobile) {
 			page2MobilCheckout.clickRadioTrjGuardada();
 		} else {
@@ -320,7 +320,7 @@ public class PageCheckoutWrapper extends PageBase {
 		return (page1DktopCheckout.isMarkedQuieroFactura());
 	}
 	
-	public void clickEditDirecEnvio() throws Exception {
+	public void clickEditDirecEnvio() {
 		if (channel==Channel.mobile) {
 			page1MobilCheckout.clickEditDirecEnvio();
 		} else {
@@ -343,7 +343,7 @@ public class PageCheckoutWrapper extends PageBase {
 	public void confirmarPagoFromMetodos(DataPedido dataPedido) throws Exception {
 		getDataPedidoFromCheckout(dataPedido);
 		if (channel==Channel.mobile) {
-			page2MobilCheckout.confirmarPagoFromMetodos(dataPedido);
+			page2MobilCheckout.confirmarPagoFromMetodos();
 		} else {
 			page1DktopCheckout.confirmarPagoFromMetodos();
 		}
@@ -375,14 +375,14 @@ public class PageCheckoutWrapper extends PageBase {
 		dataPedido.setCodigoAlmacen(getAlmacenFromNoProdEntorn());
 	}
 	
-	public String getDireccionEnvioCompleta() throws Exception {
+	public String getDireccionEnvioCompleta() {
 		if (channel==Channel.mobile) {
 			return (page1MobilCheckout.getTextDireccionEnvioCompleta());
 		}
 		return (page1DktopCheckout.getTextDireccionEnvioCompleta());
 	}
 	
-	public boolean direcEnvioContainsPais(String nombrePais) throws Exception {
+	public boolean direcEnvioContainsPais(String nombrePais) {
 		String direccionEnvio = getTextDireccionEnvioCompleta();
 		return (direccionEnvio.toLowerCase().contains(nombrePais.toLowerCase()));
 	}
@@ -416,7 +416,7 @@ public class PageCheckoutWrapper extends PageBase {
 		return (preciosArtScreen.definitivo <= importeDescMinTeorico);
 	}
 	
-	public void backPageMetodosPagos(String urlPagCheckout) throws Exception {
+	public void backPageMetodosPagos(String urlPagCheckout) {
 		if (driver.getCurrentUrl().compareTo(urlPagCheckout)!=0) {
 			driver.get(urlPagCheckout);
 			acceptAlertIfExists(driver);
@@ -429,7 +429,7 @@ public class PageCheckoutWrapper extends PageBase {
 		}
 	}
 	
-	public String formateaPrecioTotal(String xpathImporteCheckout) throws Exception {
+	public String formateaPrecioTotal(String xpathImporteCheckout) {
 		for (int i=0; i<2; i++) {
 			try {
 				return getElement(xpathImporteCheckout).getText();
@@ -448,18 +448,4 @@ public class PageCheckoutWrapper extends PageBase {
 	public boolean isBancoSeleccionado(String nombreBanco) {
 		return new SecEps().isBancoSeleccionado(nombreBanco);
 	}
-
-//	public boolean btnAddAddress() throws Exception {
-//			return page1DktopCheckout.isvisibleLocationBtnCta();
-//	}
-//	public void btnAddAddressClick() throws Exception {
-//		page1DktopCheckout.clickBtnCta();
-//	}
-//	public boolean modalDirecUsuarios() throws Exception {
-//		return page1DktopCheckout.isvisibleModalDirections();
-//	}
-//	public boolean direction() throws Exception {
-//		return page1DktopCheckout.isDirectionsPrincipal();
-//	}
-
 }

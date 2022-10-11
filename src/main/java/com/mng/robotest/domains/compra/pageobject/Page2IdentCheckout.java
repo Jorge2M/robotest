@@ -154,7 +154,7 @@ public class Page2IdentCheckout extends PageBase {
 		}
 	}	
 
-	public void setInputPoblacionIfVisible(String cfCity, Map<String,String> datosRegistro) throws Exception {
+	public void setInputPoblacionIfVisible(String cfCity, Map<String,String> datosRegistro) {
 		waitLoadPage();
 		state(Clickable, XPATH_INPUT_POBLACION_ACTIVE).wait(1).check();
 		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_POBLACION_ACTIVE, cfCity);
@@ -270,7 +270,7 @@ public class Page2IdentCheckout extends PageBase {
 		}
 	}	
 	
-	public void clickBotonFindAddress() throws InterruptedException {
+	public void clickBotonFindAddress() {
 		getElement(XPATH_BOTON_FIND_ADDRESS).click();
 		waitMillis(3000);
 	}
@@ -422,7 +422,6 @@ public class Page2IdentCheckout extends PageBase {
 					Select select = new Select(estadosPaisList.get(0));
 					select.selectByIndex(1);
 					datoSeteado = select.getFirstSelectedOption().getText();
-					//datoSeteado = estadosPaisList.get(0).getAttribute(VALUE);
 					staleElement = false;
 				}
 				catch (StaleElementReferenceException e) {
@@ -448,7 +447,7 @@ public class Page2IdentCheckout extends PageBase {
 		}
 	}	
 	
-	public String setSeletEstadoEspanya(String provincia) throws InterruptedException {
+	public String setSeletEstadoEspanya(String provincia) {
 		waitLoadPage();
 		WebElement provinciaPais = getElementPriorizingDisplayed(XPATH_SELECT_ESTADOS_PAIS);
 		if (provinciaPais!=null) {
@@ -504,11 +503,7 @@ public class Page2IdentCheckout extends PageBase {
 					datoSeteado = selectLocalidad(localidadesList.get(0), posInSelect);
 					staleElement = false;
 				}
-				catch (StaleElementReferenceException e) {
-					Thread.sleep(1000);
-					Log4jTM.getLogger().warn("Exception selecting localidad from select. ", e);
-				}
-				catch (NoSuchElementException e) {
+				catch (StaleElementReferenceException | NoSuchElementException e) {
 					Thread.sleep(1000);
 					Log4jTM.getLogger().warn("Exception selecting localidad from select. ", e);
 				}
@@ -520,16 +515,14 @@ public class Page2IdentCheckout extends PageBase {
 	}
 	
 	private String selectLocalidad(WebElement localidad, int posInSelect) {
-		switch (PaisShop.getPais(pais)) {
-		case EGYPT:
-			if (egyptCity!=null) {
-				new Select(localidad).selectByVisibleText(egyptCity.getCity());
-				return egyptCity.getCity();
-			}
-		default:
-			new Select(localidad).selectByIndex(posInSelect);
-			return localidad.getAttribute(VALUE);
+		if (PaisShop.getPais(pais)==PaisShop.EGYPT && 
+			egyptCity!=null) {
+			new Select(localidad).selectByVisibleText(egyptCity.getCity());
+			return egyptCity.getCity();
 		}
+
+		new Select(localidad).selectByIndex(posInSelect);
+		return localidad.getAttribute(VALUE);
 	}
 
 	public void setSelectLocalidadesProvCity(int posInSelect, Map<String,String> datosRegistro) throws Exception {
@@ -559,9 +552,9 @@ public class Page2IdentCheckout extends PageBase {
 	
 	public boolean setCheckHombreIfVisible() {
 		boolean datoSeteado = false;
-		List<WebElement> cfGener_HList = getElementsVisible(XPATH_CHECK_HOMBRE);
-		if (!cfGener_HList.isEmpty()) {
-			cfGener_HList.get(0).click();
+		List<WebElement> cfGenerHList = getElementsVisible(XPATH_CHECK_HOMBRE);
+		if (!cfGenerHList.isEmpty()) {
+			cfGenerHList.get(0).click();
 		}		
 		
 		return datoSeteado;		

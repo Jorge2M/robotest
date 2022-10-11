@@ -20,7 +20,7 @@ public class Utilidades {
 		}
 		
 		List<Linea> lineasToTest = new ArrayList<>();
-		ArrayList<String> lineasArray = new ArrayList<>(Arrays.asList(lineasParam.split(",")));
+		List<String> lineasArray = new ArrayList<>(Arrays.asList(lineasParam.split(",")));
 		for (Linea linea : lineasXML) {
 			 if (lineasArray.contains(linea.getId())) {
 				 lineasToTest.add(linea);

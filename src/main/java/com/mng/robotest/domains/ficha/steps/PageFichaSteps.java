@@ -49,7 +49,7 @@ public class PageFichaSteps extends StepBase {
 		return this.pageFicha;
 	}
 
-	public void checkIsFichaAccordingTypeProduct(GarmentCatalog product) throws Exception {
+	public void checkIsFichaAccordingTypeProduct(GarmentCatalog product) {
 		checkIsFichaArtDisponible(product.getGarmentId(), 3);
 		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(
@@ -204,7 +204,7 @@ public class PageFichaSteps extends StepBase {
 	 * Selección del botón "Añadir a la bolsa" en un contexto en el que previamente NO se ha seleccionado una talla
 	 * @return si el artículo seleccionado tenía talla única
 	 */
-	public boolean selectAnadirALaBolsaTallaPrevNoSelected() throws Exception {
+	public boolean selectAnadirALaBolsaTallaPrevNoSelected() {
 		selectAnadirALaBolsaStep();
 		boolean isTallaUnica = pageFicha.isTallaUnica();
 		checkAvisoTallaUnica(isTallaUnica);
@@ -253,7 +253,7 @@ public class PageFichaSteps extends StepBase {
 	@Step (
 			description="Seleccionar el botón <b>\"Añadir a Favoritos\"</b>",
 			expected="El artículo se añade a Favoritos")
-	public void selectAnadirAFavoritos() throws Exception {
+	public void selectAnadirAFavoritos() {
 		pageFicha.selectAnadirAFavoritosButton();
 		ArticuloScreen articulo = pageFicha.getArticuloObject();
 		dataTest.getDataFavoritos().addArticulo(articulo);
@@ -449,7 +449,7 @@ public class PageFichaSteps extends StepBase {
 	@Step (
 			description="Seleccionar la #{numImagen}a imagen del carrusel izquierdo",
 			expected="La imagen se carga aumentada en la imagen central")
-	public void selectImgCarruselIzqFichaOld(int numImagen) throws Exception {
+	public void selectImgCarruselIzqFichaOld(int numImagen) {
 		String pngImagenCarrusel = ((PageFichaDevice)pageFicha).getSrcImgCarruselIzq(numImagen);
 		((PageFichaDevice)pageFicha).clickImgCarruselIzq(numImagen);
 

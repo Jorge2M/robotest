@@ -6,9 +6,9 @@ import com.mng.robotest.domains.transversal.PageBase;
 public class PageRedsysSim extends PageBase {
 
 	public enum OptionRedSys {
-		Autenticacion_con_exito("AUTENTICADA"),
-		Denegar_autenticacion("NO_AUTENTICADA"),
-		Tarjeta_no_registrada_Finanet("NO_FINANET");
+		AUTENTICACION_CON_EXITO("AUTENTICADA"),
+		DENEGAR_AUTENTICACION("NO_AUTENTICADA"),
+		TARJETA_NO_REGISTRADA_FINANET("NO_FINANET");
 		
 		private String value;
 		private OptionRedSys(String value) {
@@ -29,7 +29,7 @@ public class PageRedsysSim extends PageBase {
 	}
 	
 	public boolean isPage() {
-		String xpathOption = getXPathOption(OptionRedSys.Autenticacion_con_exito);
+		String xpathOption = getXPathOption(OptionRedSys.AUTENTICACION_CON_EXITO);
 		return state(State.Present, xpathOption).check();
 	}
 	

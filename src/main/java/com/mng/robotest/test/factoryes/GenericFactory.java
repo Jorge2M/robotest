@@ -20,7 +20,7 @@ public class GenericFactory {
 	@Factory
 	@Parameters({"countrys"})
 	public Object[] createInstances(String listaPaisesStr, ITestContext ctxTestRun) throws Exception {
-		ArrayList<Object> listTests = new ArrayList<>();
+		List<Object> listTests = new ArrayList<>();
 		try {
 			Suites suite = (Suites)TestMaker.getInputParamsSuite(ctxTestRun).getSuite();
 			List<Pais> listCountrys = PaisGetter.getFromCommaSeparatedCountries(listaPaisesStr);

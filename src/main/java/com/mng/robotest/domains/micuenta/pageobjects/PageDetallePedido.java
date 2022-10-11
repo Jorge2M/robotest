@@ -6,22 +6,22 @@ import com.mng.robotest.conftestmaker.AppEcom;
 public interface PageDetallePedido {
 	
 	public enum DetallePedido {
-		OldOld, 
-		Old,
-		New;
+		OLD_OLD, 
+		OLD,
+		NEW;
 		
 		public PageDetallePedido getPageObject(Channel channel, AppEcom app) {
 			switch (this) {
-			case OldOld:
+			case OLD_OLD:
 				return (new PageDetalleCompraOldOld());
-			case Old:
+			case OLD:
 				return (new PageDetalleCompraOld());
-			case New:
+			case NEW:
 			default:
 				return PageDetalleCompra.make(channel);
 			}	
 		} 
-	};
+	}
 	
 	public DetallePedido getTypeDetalle();
 	

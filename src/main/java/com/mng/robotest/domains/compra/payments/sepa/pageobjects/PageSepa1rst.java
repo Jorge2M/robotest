@@ -10,15 +10,15 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageSepa1rst extends PageBase {
 	
-	private static String XPATH_LIST_OF_PAYMENTS = "//ul[@id='paymentMethods']";
-	private static String XPATH_CABECERA_STEP = "//h2[@id[contains(.,'stageheader')]]";
-	private static String XPATH_BUTTON_PAGO_DESKTOP = "//input[@class[contains(.,'paySubmit')] and @type='submit']";
-	private static String XPATH_BUTTON_CONTINUE_MOBIL = "//input[@type='submit' and @id='mainSubmit']";
-	private static String XPATH_INPUT_TITULAR = "//input[@id[contains(.,'ownerName')]]";
-	private static String XPATH_INPUT_CUENTA = "//input[@id[contains(.,'bankAccountNumber')]]";
-	private static String XPATH_RADIO_ACEPTO = "//input[@id[contains(.,'acceptDirectDebit')]]";
-	private static String XPATH_ICONO_SEPA_MOBIL = XPATH_LIST_OF_PAYMENTS + "//input[@class[contains(.,'sepa')]]"; 
-	private static String XPATH_ICONO_SEPA_DESKTOP = XPATH_LIST_OF_PAYMENTS + "/li[@data-variant[contains(.,'sepa')]]";
+	private static final String XPATH_LIST_OF_PAYMENTS = "//ul[@id='paymentMethods']";
+	private static final String XPATH_CABECERA_STEP = "//h2[@id[contains(.,'stageheader')]]";
+	private static final String XPATH_BUTTON_PAGO_DESKTOP = "//input[@class[contains(.,'paySubmit')] and @type='submit']";
+	private static final String XPATH_BUTTON_CONTINUE_MOBIL = "//input[@type='submit' and @id='mainSubmit']";
+	private static final String XPATH_INPUT_TITULAR = "//input[@id[contains(.,'ownerName')]]";
+	private static final String XPATH_INPUT_CUENTA = "//input[@id[contains(.,'bankAccountNumber')]]";
+	private static final String XPATH_RADIO_ACEPTO = "//input[@id[contains(.,'acceptDirectDebit')]]";
+	private static final String XPATH_ICONO_SEPA_MOBIL = XPATH_LIST_OF_PAYMENTS + "//input[@class[contains(.,'sepa')]]"; 
+	private static final String XPATH_ICONO_SEPA_DESKTOP = XPATH_LIST_OF_PAYMENTS + "/li[@data-variant[contains(.,'sepa')]]";
 	
 	private String getXPathIconoSepa(Channel channel) {
 		if (channel.isDevice()) {

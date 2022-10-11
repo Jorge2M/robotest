@@ -121,8 +121,8 @@ public class PageMenusManto extends PageBase {
 		return getElements(XPATH_LINK_MENU);
 	}
 	
-	public ArrayList<String> getListMenuNames() {
-		ArrayList<String> listMenuNames = new ArrayList<>();
+	public List<String> getListMenuNames() {
+		List<String> listMenuNames = new ArrayList<>();
 		List<WebElement> listElemMenus = getListLinksMenus();
 		for (WebElement menu : listElemMenus)
 			listMenuNames.add(menu.getText());

@@ -14,7 +14,7 @@ public class PageDetalleCompraOld extends PageBase implements PageDetallePedido 
 	
 	@Override
 	public DetallePedido getTypeDetalle() {
-		return DetallePedido.Old;
+		return DetallePedido.OLD;
 	}
 	
 	@Override

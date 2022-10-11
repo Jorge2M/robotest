@@ -13,8 +13,8 @@ public class PageAmexInputCip extends PageBase {
 		return state(Present, XPATH_INPUT_CIP).wait(seconds).check();
 	}
 	
-	public void inputCIP(String CIP) {
-		getElement(XPATH_INPUT_CIP).sendKeys(CIP);
+	public void inputCIP(String cip) {
+		getElement(XPATH_INPUT_CIP).sendKeys(cip);
 	}
 
 	public void clickAceptarButton() {

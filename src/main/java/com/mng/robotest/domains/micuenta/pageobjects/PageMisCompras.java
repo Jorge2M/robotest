@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.micuenta.beans.Ticket;
 import com.mng.robotest.domains.transversal.PageBase;
@@ -50,7 +51,7 @@ public class PageMisCompras extends PageBase {
 	
 	private List<Ticket> getTicketsStaleUnsafe() {
 		return getTicketsPage().stream()
-				.map(item -> getTicket(item))
+				.map(this::getTicket)
 				.toList();
 	}
 	
@@ -66,8 +67,8 @@ public class PageMisCompras extends PageBase {
 	
 	public boolean isTicket(TypeTicket typeCompra, int seconds) {
 		for (int i=0; i<seconds; i++) {
-			List<Ticket> listTickets = getTickets(typeCompra);
-			if (!listTickets.isEmpty()) {
+			List<Ticket> tickets = getTickets(typeCompra);
+			if (!tickets.isEmpty()) {
 				return true;
 			}
 			waitMillis(1000);
@@ -100,8 +101,7 @@ public class PageMisCompras extends PageBase {
 	
 	public boolean isTicketOnline(String idPedido) {
 		return (getTickets().stream()
-			.filter(item -> item.getId().compareTo(idPedido)==0)
-			.findAny().isPresent());
+			.anyMatch(item -> item.getId().compareTo(idPedido)==0));
 	}
 	
 	public void selectTicket(String idTicket) {
@@ -109,12 +109,10 @@ public class PageMisCompras extends PageBase {
 	}
 	
 	private String getXPathCapaContenedora() {
-		switch (channel) {
-		case mobile:
+		if (channel==Channel.mobile) {
 			return XPATH_CAPA_CONTENEDORA_MOBILE;
-		default:
-			return XPATH_CAPA_CONTENEDORA_DESKTOP;
 		}
+		return XPATH_CAPA_CONTENEDORA_DESKTOP;
 	}
 
 	private String getXPathTicketLink(String id) {
