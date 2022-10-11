@@ -8,20 +8,20 @@ public class SecIdeal extends PageBase {
 	
 	//HAY QUE AÑADIR LAS OPCIONES DE PRE Y QUITAR LAS DE PRO
 	public enum BancoSeleccionado {
-		KiesEenBank("Kies een bank", "selected"),
-		TestIssuer("Test Issuer", "1121"),
-		TestIssuer2("Test Issuer 2", "1151"),
-		TestIssuer3("Test Issuer 3", "1152"),
-		TestIssuer4("Test Issuer 4", "1153"),
-		TestIssuer5("Test Issuer 5", "1154"),
-		TestIssuer6("Test Issuer 6", "1155"),
-		TestIssuer7("Test Issuer 7", "1156"),
-		TestIssuer8("Test Issuer 8", "1157"),
-		TestIssuer9("Test Issuer 9", "1158"),
-		TestIssuer10("Test Issuer 10", "1159"),
-		TestIssuerRefused("Test Issuer Refused", "1160"),
-		TestIssuerPending("Test Issuer Pending", "1161"),
-		TestIssuerCancelled("Test Issuer Cancelled", "1162");
+		KIES_EEN_BANK("Kies een bank", "selected"),
+		TEST_ISSUER("Test Issuer", "1121"),
+		TEST_ISSUER_2("Test Issuer 2", "1151"),
+		TEST_ISSUER_3("Test Issuer 3", "1152"),
+		TEST_ISSUER_4("Test Issuer 4", "1153"),
+		TEST_ISSUER_5("Test Issuer 5", "1154"),
+		TEST_ISSUER_6("Test Issuer 6", "1155"),
+		TEST_ISSUER_7("Test Issuer 7", "1156"),
+		TEST_ISSUER_8("Test Issuer 8", "1157"),
+		TEST_ISSUER_9("Test Issuer 9", "1158"),
+		TEST_ISSUER_10("Test Issuer 10", "1159"),
+		TEST_ISSUER_REFUSED("Test Issuer Refused", "1160"),
+		TEST_ISSUER_PENDING("Test Issuer Pending", "1161"),
+		TEST_ISSUER_CANCELLED("Test Issuer Cancelled", "1162");
 		
 		public String nombre; 
 		public String valueOption;
@@ -30,7 +30,7 @@ public class SecIdeal extends PageBase {
 			this.nombre = nombre;
 			this.valueOption = valueOption;
 		}
-	};
+	}
 
 	private static final String XPATH_CARD_CONDITIONS = "//div[@id='textoCondicionesTarjeta']";
 	private static final String XPATH_SELECTOR_BANK_IDEAL = XPATH_CARD_CONDITIONS + "//div[@id='ideal-bank-selector']";

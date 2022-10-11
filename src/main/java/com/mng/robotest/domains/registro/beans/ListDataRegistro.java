@@ -1,14 +1,15 @@
 package com.mng.robotest.domains.registro.beans;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ListDataRegistro {
 	
-	public enum DataRegType {name, apellidos, email, password, telefono, codpostal, codpais, numlineas, lineascomaseparated, clicklineas, direccion, poblacion, provincia}
-	public enum DataPageIni {name, apellidos, email, password, telefono, codpostal, codpais}
-	public enum DataPageDirec {pais, direccion, codpostal, poblacion, provincia}
-	public enum PageData {pageInicial, pageDireccion}
+	public enum DataRegType {NAME, APELLIDOS, EMAIL, PASSWORD, TELEFONO, CODPOSTAL, CODPAIS, NUMLINEAS, LINEASCOMASEPARATED, CLICKLINEAS, DIRECCION, POBLACION, PROVINCIA}
+	public enum DataPageIni {NAME, APELLIDOS, EMAIL, PASSWORD, TELEFONO, CODPOSTAL, CODPAIS}
+	public enum DataPageDirec {PAIS, DIRECCION, CODPOSTAL, POBLACION, PROVINCIA}
+	public enum PageData {PAGEINICIAL, PAGEDIRECCION}
 	
 	private ArrayList<DataRegistro> dataRegistro = new ArrayList<>();
 	
@@ -41,14 +42,13 @@ public class ListDataRegistro {
 	/**
 	 * @return los datos pertenecientes a la página de introducción de los datos de la dirección
 	 */
-	public ArrayList<DataRegistro> getDataPageDirec() {
-		ArrayList<DataRegistro> listDataPageDirec = new ArrayList<>();
+	public List<DataRegistro> getDataPageDirec() {
+		List<DataRegistro> listDataPageDirec = new ArrayList<>();
 		for (DataRegistro dataReg : this.dataRegistro) {
 			if (isDataPageDirec(dataReg.getDataRegType())) {
 				listDataPageDirec.add(dataReg);
 			}
 		}
-		
 		return listDataPageDirec;
 	}	
 	
@@ -91,25 +91,25 @@ public class ListDataRegistro {
 	}
 	
 	public String getFormattedHTMLData(PageData pageData) {
-		String dataHTML = "";
-		ArrayList<DataRegistro> dataToPrint = new ArrayList<>();
+		StringBuilder dataHtml = new StringBuilder();
+		List<DataRegistro> dataToPrint = new ArrayList<>();
 		
 		switch (pageData) {
-		case pageInicial:
+		case PAGEINICIAL:
 			dataToPrint = getDataPageInicial();
 			break;
-		case pageDireccion:
+		case PAGEDIRECCION:
 			dataToPrint = getDataPageDirec();
 			break;
 		default:
 			break;
 		}
 		
-		for (DataRegistro dataInput : dataToPrint) 
-			dataHTML+=dataInput.getFormattedHTMLData() + "<br>";
+		for (DataRegistro dataInput : dataToPrint) {
+			dataHtml.append(dataInput.getFormattedHTMLData() + "<br>");
+		}
 		
-		dataHTML = replaceLast(dataHTML, "<br>", "");
-		return dataHTML;
+		return (replaceLast(dataHtml.toString(), "<br>", ""));
 	}
 	
 	private static String replaceLast(String text, String regex, String replacement) {

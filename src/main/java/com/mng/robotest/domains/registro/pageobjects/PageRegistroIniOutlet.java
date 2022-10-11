@@ -74,19 +74,19 @@ public class PageRegistroIniOutlet extends PageBase {
 	
 	private InputDataXPath getXPathDataInput(DataRegType inputType) {
 		switch (inputType) {
-		case name:
+		case NAME:
 			return (new InputDataXPath(XPATH_INPUT_NAME, XPATH_DIV_ERROR_NAME, MSG_NAME_INVALID));
-		case apellidos:
+		case APELLIDOS:
 			return (new InputDataXPath(XPATH_INPUT_APELLIDOS, XPATH_DIV_ERROR_APELLIDOS, MSG_APELLIDOS_INVALID));
-		case email:
+		case EMAIL:
 			return (new InputDataXPath(XPATH_INPUT_EMAIL, XPATH_DIV_ERROR_EMAIL, MSG_EMAIL_INVALID));
-		case password:
+		case PASSWORD:
 			return (new InputDataXPath(XPATH_INPUT_PASSWORD, XPATH_DIV_ERROR_PASSWORD, MSG_PASSWORD_INVALID));
-		case telefono:
+		case TELEFONO:
 			return (new InputDataXPath(XPATH_INPUT_TELEFONO, XPATH_DIV_ERROR_TELEFONO, MSG_TELEFONO_INVALID));
-		case codpostal:
+		case CODPOSTAL:
 			return (new InputDataXPath(XPATH_INPUT_COD_POSTAL, XPATH_DIV_ERROR_COD_POSTAL, MSG_COD_POSTAL_INVALID));
-		case codpais:
+		case CODPAIS:
 		default:
 			return (new InputDataXPath("", "", ""));
 		}
@@ -150,7 +150,7 @@ public class PageRegistroIniOutlet extends PageBase {
 	public void sendDataToInputs(ListDataRegistro dataToSend) {
 		clickRegisterTab();
 		for (DataRegistro dataInput : dataToSend.getDataPageInicial()) {
-			if (dataInput.dataRegType!=DataRegType.codpais) {
+			if (dataInput.dataRegType!=DataRegType.CODPAIS) {
 				sendKeysToInput(dataInput.dataRegType, dataInput.data);
 			} else {
 				selectPais(dataInput.data);
@@ -205,7 +205,7 @@ public class PageRegistroIniOutlet extends PageBase {
 	}	
 	
 	public boolean isVisibleErrorEmailIncorrecto(int seconds) {
-		return getNumberMsgInputInvalid(DataRegType.email)==1;
+		return getNumberMsgInputInvalid(DataRegType.EMAIL)==1;
 	}	
 	
 	public int getNumberMsgCampoObligatorio() {

@@ -51,14 +51,14 @@ public class Reg002 extends TestBase {
 	
 	private void registerWithIncorrectInputData() {
 		ListDataRegistro dataKOToSend = new ListDataRegistro();
-		dataKOToSend.add(DataRegType.name, "Jorge111", false);
-		dataKOToSend.add(DataRegType.apellidos, "Muñoz Martínez333", false);
-		dataKOToSend.add(DataRegType.email, "jorge.munoz", false);
-		dataKOToSend.add(DataRegType.password, "passsinnumeros", false);
-		dataKOToSend.add(DataRegType.telefono, "66501512A", false);
-		dataKOToSend.add(DataRegType.codpostal, "0872A", false);
+		dataKOToSend.add(DataRegType.NAME, "Jorge111", false);
+		dataKOToSend.add(DataRegType.APELLIDOS, "Muñoz Martínez333", false);
+		dataKOToSend.add(DataRegType.EMAIL, "jorge.munoz", false);
+		dataKOToSend.add(DataRegType.PASSWORD, "passsinnumeros", false);
+		dataKOToSend.add(DataRegType.TELEFONO, "66501512A", false);
+		dataKOToSend.add(DataRegType.CODPOSTAL, "0872A", false);
 		
-		String dataToSendInHtmlFormat = dataKOToSend.getFormattedHTMLData(PageData.pageInicial);
+		String dataToSendInHtmlFormat = dataKOToSend.getFormattedHTMLData(PageData.PAGEINICIAL);
 		pageRegistroIniSteps.sendFixedDataToInputs(dataKOToSend, dataToSendInHtmlFormat);
 	}	
 	
@@ -66,14 +66,14 @@ public class Reg002 extends TestBase {
 		driver.navigate().refresh();
 		PageBase.waitMillis(1000);
 		ListDataRegistro dataToSend = new ListDataRegistro(); 
-		dataToSend.add(DataRegType.name, "Jorge", true);
-		dataToSend.add(DataRegType.apellidos, "Muñoz Martínez", true);
-		dataToSend.add(DataRegType.email, "jorge.munoz.noexiste@gmail.com", true);
-		dataToSend.add(DataRegType.password, "sirjjjjj74", true);
-		dataToSend.add(DataRegType.telefono, "665015122", true);
-		dataToSend.add(DataRegType.codpostal, "08720", true);
+		dataToSend.add(DataRegType.NAME, "Jorge", true);
+		dataToSend.add(DataRegType.APELLIDOS, "Muñoz Martínez", true);
+		dataToSend.add(DataRegType.EMAIL, "jorge.munoz.noexiste@gmail.com", true);
+		dataToSend.add(DataRegType.PASSWORD, "sirjjjjj74", true);
+		dataToSend.add(DataRegType.TELEFONO, "665015122", true);
+		dataToSend.add(DataRegType.CODPOSTAL, "08720", true);
 		
-		String dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.pageInicial);
+		String dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.PAGEINICIAL);
 		pageRegistroIniSteps.sendFixedDataToInputs(dataToSend, dataToSendInHtmlFormat);
 		pageRegistroIniSteps.clickRegistrateButton(dataRegister, ErrorRegister.UsrNoExistsInGmail);
 	}
@@ -82,16 +82,16 @@ public class Reg002 extends TestBase {
 		driver.navigate().refresh();
 		PageBase.waitMillis(1000);
 		ListDataRegistro dataToSend = new ListDataRegistro(); 
-		dataToSend.add(DataRegType.name, "Jorge", true);
-		dataToSend.add(DataRegType.apellidos, "Muñoz Martínez", true);
+		dataToSend.add(DataRegType.NAME, "Jorge", true);
+		dataToSend.add(DataRegType.APELLIDOS, "Muñoz Martínez", true);
 		
 		Secret secret = GetterSecrets.factory().getCredentials(SecretType.SHOP_JORGE_USER);
-		dataToSend.add(DataRegType.email, secret.getUser(), true);
-		dataToSend.add(DataRegType.password, secret.getPassword(), true);
+		dataToSend.add(DataRegType.EMAIL, secret.getUser(), true);
+		dataToSend.add(DataRegType.PASSWORD, secret.getPassword(), true);
 		
-		dataToSend.add(DataRegType.telefono, "665015122", true);
-		dataToSend.add(DataRegType.codpostal, "08720", true);
-		String dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.pageInicial);
+		dataToSend.add(DataRegType.TELEFONO, "665015122", true);
+		dataToSend.add(DataRegType.CODPOSTAL, "08720", true);
+		String dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.PAGEINICIAL);
 		
 		pageRegistroIniSteps.sendFixedDataToInputs(dataToSend, dataToSendInHtmlFormat);
 		pageRegistroIniSteps.clickRegistrateButton(dataRegister, ErrorRegister.UsrExistsInMango);

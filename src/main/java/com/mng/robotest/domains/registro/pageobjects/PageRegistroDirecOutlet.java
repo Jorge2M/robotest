@@ -17,13 +17,13 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageRegistroDirecOutlet extends PageBase {
 
-	private final static String XPATH_DIV_ERROR = "//div[@class='errorValidation']";
-	private final static String XPATH_INPUT_DIREC = "//input[@id[contains(.,':cfDir1')]]";
-	private final static String XPATH_SELECT_PAIS = "//select[@id[contains(.,':pais')]]";
-	private final static String XPATH_INPUT_COD_POSTAL = "//input[@id[contains(.,':cfCp')]]";
-	private final static String XPATH_SELECT_POBLACION = "//select[@id[contains(.,':localidades')]]";
-	private final static String XPATH_SELECT_PROVINCIA = "//select[@id[contains(.,':estadosPais')]]";
-	private final static String XPATH_FINALIZAR_BUTTON = "//form[@id[contains(.,'Step')]]//input[@type='submit']";
+	private static final String XPATH_DIV_ERROR = "//div[@class='errorValidation']";
+	private static final String XPATH_INPUT_DIREC = "//input[@id[contains(.,':cfDir1')]]";
+	private static final String XPATH_SELECT_PAIS = "//select[@id[contains(.,':pais')]]";
+	private static final String XPATH_INPUT_COD_POSTAL = "//input[@id[contains(.,':cfCp')]]";
+	private static final String XPATH_SELECT_POBLACION = "//select[@id[contains(.,':localidades')]]";
+	private static final String XPATH_SELECT_PROVINCIA = "//select[@id[contains(.,':estadosPais')]]";
+	private static final String XPATH_FINALIZAR_BUTTON = "//form[@id[contains(.,'Step')]]//input[@type='submit']";
 	
 	public int getNumberMsgInputInvalid() {
 		return getNumElementsVisible(XPATH_DIV_ERROR);
@@ -39,19 +39,19 @@ public class PageRegistroDirecOutlet extends PageBase {
 		for (int i=0; i<repeat; i++) {
 			for (DataRegistro dataInput : dataToSend.getDataPageDirec()) {
 				switch (dataInput.getDataRegType()) {
-				case direccion:
+				case DIRECCION:
 					sendDataToDireccionIfNotExist(dataInput.getData());
 					break;			
-				case codpais:
+				case CODPAIS:
 					sendDataToPaisIfNotExist(dataInput.getData());
 					break;
-				case codpostal:
+				case CODPOSTAL:
 					sendDataToCodPostalIfNotExist(dataInput.getData());
 					break;
-				case poblacion:
+				case POBLACION:
 					sendDataToPoblacion(dataInput.getData());
 					break;
-				case provincia:
+				case PROVINCIA:
 					sendDataToProvincia(dataInput.getData());
 					break;
 				default:
