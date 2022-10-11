@@ -7,7 +7,7 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroPersonalizacionShop;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
+import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 
 public class PageRegistroPersonalizacionShopSteps extends StepBase {
 

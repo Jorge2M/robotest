@@ -6,12 +6,11 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.domains.transversal.TestBase;
+import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.steps.navigations.shop.NavigationsSteps;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
-import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
-
 
 public class Com005 extends TestBase {
 	
@@ -43,8 +42,7 @@ public class Com005 extends TestBase {
 	}
 
 	private void loginWithNewUser(String usrEmail, String password) throws Exception {
-		SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps();
-		secMenusSteps.getMenusUser().logoffLogin(usrEmail, password);
+		new SecMenusUserSteps().logoffLogin(usrEmail, password);
 	}	
 	
 	private void checkMisDatos(DataPago dataPago, String usrEmail, String password) {

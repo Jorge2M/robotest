@@ -1,11 +1,11 @@
 package com.mng.robotest.test.appshop.otras;
 
 import com.mng.robotest.domains.transversal.TestBase;
+import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
-import com.mng.robotest.test.steps.shop.menus.SecMenusDesktopSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 
 public class Otr001 extends TestBase {
@@ -16,13 +16,13 @@ public class Otr001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		access();
-		new SecMenusDesktopSteps().checkURLRedirectParkasHeEspanya();
+		new MenuSteps().checkURLRedirectParkasHeEspanya();
 		
 		dataTest.setPais(FRANCIA);
 		dataTest.setIdioma(FRANCIA_FRANCES);
 		new AccesoSteps().goToInitialURL();
 		access();	  
-		new SecMenusDesktopSteps().checkURLRedirectFicha();		
+		new MenuSteps().checkURLRedirectFicha();		
 	}
 	
 }

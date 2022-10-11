@@ -9,8 +9,8 @@ import com.mng.robotest.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.domains.registro.steps.PageRegistroPersonalizacionShopSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.data.DataMango;
-import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 

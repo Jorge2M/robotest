@@ -6,9 +6,9 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMiCuenta;
 import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.pageobject.shop.PageReembolsos;
 import com.mng.robotest.test.pageobject.shop.PageReembolsos.TypeReembolso;
-import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
 
 public class PageReembolsosSteps extends StepBase {
 

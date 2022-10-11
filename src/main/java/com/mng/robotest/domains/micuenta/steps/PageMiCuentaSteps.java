@@ -11,8 +11,8 @@ import com.mng.robotest.domains.micuenta.pageobjects.PageMiCuenta;
 import com.mng.robotest.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
 
 public class PageMiCuentaSteps extends StepBase {
 	

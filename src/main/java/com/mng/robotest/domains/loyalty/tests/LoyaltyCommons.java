@@ -4,7 +4,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.loyalty.beans.User;
 import com.mng.robotest.domains.loyalty.getdata.ClientApiLoyaltyPointsDev;
-import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
+import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 
 public class LoyaltyCommons {
 	

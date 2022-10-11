@@ -6,13 +6,13 @@ import com.mng.robotest.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
+import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.galeria.LocationArticle;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
-import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 
 import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
 import static com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType.*;
@@ -22,7 +22,6 @@ public class Fav002 extends TestBase {
 	private final PageFavoritosSteps pageFavoritosSteps = new PageFavoritosSteps();
 	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 	private final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
-	private final SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps();
 	
 	public Fav002(Pais pais, IdiomaPais idioma) throws Exception {
 		super();
@@ -72,7 +71,7 @@ public class Fav002 extends TestBase {
 	}	
 	
 	private void goToFavoritesAndCheckSharedFavorites() throws Exception {
-		secMenusSteps.getMenusUser().selectFavoritos();
+		new SecMenusUserSteps().selectFavoritos();
 		pageFavoritosSteps.clickShareIsOk();
 		pageFavoritosSteps.closeShareModal();
 	}	
@@ -88,7 +87,7 @@ public class Fav002 extends TestBase {
 
 	private void clearFirstFavoriteFromFavorites() throws Exception {
 		ArticuloScreen firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
-		secMenusSteps.getMenusUser().selectFavoritos();
+		new SecMenusUserSteps().selectFavoritos();
 		pageFavoritosSteps.clear(firstFavorite);
 	}	
 }

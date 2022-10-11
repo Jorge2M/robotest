@@ -42,8 +42,9 @@ public class Fic002 extends TestBase {
 			garment = articleWithTotalLook.get();
 		} else {
 			this.isTotalLook = false;
-			if (getterProducts.getOne().isPresent()) {
-				garment = getterProducts.getOne().get();
+			Optional<GarmentCatalog> garmentOpt = 	getterProducts.getOne();
+			if (garmentOpt.isPresent()) {
+				garment = garmentOpt.get();
 			} else {
 				throw new NoSuchElementException("Article not retrieved from GetterProducts service");
 			}

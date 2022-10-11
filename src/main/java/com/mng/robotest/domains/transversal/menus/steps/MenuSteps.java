@@ -1,5 +1,8 @@
 package com.mng.robotest.domains.transversal.menus.steps;
 
+import static com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem.ABRIGOS_SHE;
+
+import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,7 +13,11 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.domains.transversal.menus.beans.FactoryMenus;
 import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb;
 import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupResponse;
 import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType;
@@ -21,9 +28,13 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
 import com.mng.robotest.domains.transversal.menus.pageobjects.MenusWebAll;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.data.Constantes.ThreeState;
+import com.mng.robotest.test.getdata.products.GetterProducts;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
+import com.mng.robotest.test.getdata.products.data.GarmentCatalog.Article;
 import com.mng.robotest.test.pageobject.shop.AllPages;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;
+import com.mng.robotest.test.pageobject.utils.DataFichaArt;
 import com.mng.robotest.test.steps.shop.banner.SecBannersSteps;
 import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
@@ -390,4 +401,55 @@ public class MenuSteps extends StepBase {
 			}
 		}
 	}
+	
+	private static final String TAG_URL_ACCESO = "@TagUrlAcceso";
+	@Step (
+		description="Cargar la siguiente URL de redirect a <b>España / HE / Abrigos / Parkas </b>:<br>" + TAG_URL_ACCESO,
+		expected="Aparece desplegada la página de Parkas (HE)")
+	public void checkURLRedirectParkasHeEspanya() throws Exception {
+		URI uri = new URI(driver.getCurrentUrl());
+		String tiendaId = "he";
+		if (app==AppEcom.outlet) {
+			tiendaId = "outletH";
+		}
+		String urlAccesoCorreo = 
+			uri.getScheme() + "://" + 
+			uri.getHost() + 
+			"/redirect.faces?op=conta&seccion=prendas_he.abrigos_he&menu_abrigos106=Parkas&tiendaid=" + tiendaId;
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_URL_ACCESO, urlAccesoCorreo);
+
+		driver.navigate().to(urlAccesoCorreo);
+		new MenuSteps().checkSelecMenu(FactoryMenus.get(ABRIGOS_SHE));
+	}
+	
+	private static final String TAG_REF_ARTICLE = "@TagRefArticle";
+	@Step (
+		description=
+			"Cargar la siguiente URL de redirect a la ficha del producto <b>" + TAG_REF_ARTICLE + 
+			" (#{pais.getNombre_pais()})</b>:<br>" + TAG_URL_ACCESO,
+		expected=
+			"Aparece la ficha del producto " + TAG_REF_ARTICLE)
+	public void checkURLRedirectFicha() throws Exception {
+		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver).build();
+		GarmentCatalog product = getterProducts.getAll().get(0);
+		Article article = product.getArticleWithMoreStock();
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_REF_ARTICLE, article.getGarmentId());
+		TestMaker.getCurrentStepInExecution().replaceInExpected(TAG_REF_ARTICLE, article.getGarmentId());
+		
+		URI uri = new URI(driver.getCurrentUrl());
+		String tiendaId = "she";
+		if (app==AppEcom.outlet) {
+			tiendaId = "outlet";
+		}
+		
+		String urlAccesoCorreo = 
+			uri.getScheme() + "://" + uri.getHost() + "/redirect.faces?op=conta&tiendaid=" + tiendaId + "&pais=" + dataTest.getCodigoPais() + 
+			"&producto=" + article.getGarmentId() + "&color=" + article.getColor().getId() ;
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_URL_ACCESO, urlAccesoCorreo);
+		driver.navigate().to(urlAccesoCorreo);
+
+		DataFichaArt datosArticulo = new DataFichaArt(article.getGarmentId(), "");
+		PageFichaSteps pageFichaSteps = new PageFichaSteps();
+		pageFichaSteps.validaDetallesProducto(datosArticulo);
+	}	
 }

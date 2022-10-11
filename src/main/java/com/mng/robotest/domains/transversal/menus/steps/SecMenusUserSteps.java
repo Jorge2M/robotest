@@ -1,4 +1,4 @@
-package com.mng.robotest.test.steps.shop.menus;
+package com.mng.robotest.domains.transversal.menus.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;

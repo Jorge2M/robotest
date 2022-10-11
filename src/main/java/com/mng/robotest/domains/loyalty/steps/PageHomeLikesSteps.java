@@ -4,9 +4,8 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.mng.robotest.domains.loyalty.pageobjects.PageHomeLikes;
 import com.mng.robotest.domains.loyalty.pageobjects.PageHomeLikes.ButtonUseLikes;
 import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps.ChecksResultWithNumberPoints;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps.ChecksResultWithNumberPoints;
-
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 

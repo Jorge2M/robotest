@@ -7,6 +7,7 @@ import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.AccesoVOTF;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.pageobject.shop.PageJCAS;
@@ -17,7 +18,6 @@ import com.mng.robotest.test.pageobject.votf.PageAlertaVOTF;
 import com.mng.robotest.test.pageobject.votf.PageLoginVOTF;
 import com.mng.robotest.test.pageobject.votf.PageSelectIdiomaVOTF;
 import com.mng.robotest.test.pageobject.votf.PageSelectLineaVOTF;
-import com.mng.robotest.test.steps.shop.menus.SecMenusWrapperSteps;
 
 public class AccesoNavigations extends StepBase {
 
@@ -88,8 +88,7 @@ public class AccesoNavigations extends StepBase {
 	
 	public void cambioPais(Pais newPais, IdiomaPais newIdioma) throws Exception {
 		if (channel.isDevice() && app==AppEcom.outlet) {
-			SecMenusWrapperSteps secMenusSteps = new SecMenusWrapperSteps();
-			secMenusSteps.getMenusUser().cambioPaisMobil(newPais, newIdioma);
+			new SecMenusUserSteps().cambioPaisMobil(newPais, newIdioma);
 		} else {
 			new SecFooterSteps().cambioPais(newPais, newIdioma);
 		}

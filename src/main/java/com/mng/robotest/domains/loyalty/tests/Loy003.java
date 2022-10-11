@@ -4,7 +4,7 @@ import com.mng.robotest.domains.loyalty.beans.User;
 import com.mng.robotest.domains.loyalty.steps.PageHomeConseguirPorLikesSteps;
 import com.mng.robotest.domains.loyalty.steps.PageHomeLikesSteps;
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.test.steps.shop.menus.SecMenusUserSteps;
+import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
