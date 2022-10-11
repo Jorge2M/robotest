@@ -75,7 +75,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		if (nombrePago.compareTo("KLARNA")==0) {
 			return "//div[@data-custom-radio-id='klarna']";
 		}
-		return (getXPathPago(nombrePago) + "//div[@data-custom-radio-id]");
+		return (getXPathPago(nombrePago) + "//*[@data-custom-radio-id]");
 	}
 	
 	private String getXPathTextUnderPago(String nombrePago) {

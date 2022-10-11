@@ -88,11 +88,11 @@ public class Page1DktopCheckout extends PageBase {
 	private static final String XPATH_PRECIO_CHEQUE_REGALO = XPATH_CONTENT_CHEQUE_REGALO + "//div[@class='span2']";
 	private static final String XPATH_MENSAJE_CHEQUE_REGALO = XPATH_CONTENT_CHEQUE_REGALO + "//div[@class='span4']";
 	
-	private static final String XPATH_RADIO_PAGO_WITH_TAG = "//div[@class[contains(.,'cuadroPago')]]/input[@value='" + TAG_METODO_PAGO + "']/../input[@type='radio']";
+	private static final String XPATH_RADIO_PAGO_WITH_TAG = "//*[@class[contains(.,'cuadroPago')]]/input[@value='" + TAG_METODO_PAGO + "']/../input[@type='radio']";
 	private static final String TEXT_KREDI_KARTI = "KREDİ KARTI";
 	private static final String XPATH_PESTANYA_KREDI_KARTI = "//div[@class[contains(.,'pmGroupTitle')]]/span[text()='" + TEXT_KREDI_KARTI + "']";
 	
-	private static final String XPATH_METODO_PAGO = "//*[@class[contains(.,'cardBox')]]/div";
+	private static final String XPATH_METODO_PAGO = "//*[@class[contains(.,'cardBox')]]/label";
 	
 	private static final String TAG_REFERENCIA = "@TagRef";
 	private static final String XPATH_LINEA_ARTICULO_WITH_TAG = 
