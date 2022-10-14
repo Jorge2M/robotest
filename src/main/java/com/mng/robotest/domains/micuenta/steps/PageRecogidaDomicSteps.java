@@ -19,12 +19,8 @@ public class PageRecogidaDomicSteps extends StepBase {
 			pageRecADomic.isPage(), State.Defect);
 		
 		checks.add(
-			"Aparece la tabla de devoluciones",
-			pageRecADomic.isTableDevoluciones(), State.Defect);
-		
-		checks.add(
 			"No aparece ningún pedido",
-			 !pageRecADomic.hayPedidos(), State.Info);
+			 pageRecADomic.noHayPedidos(), State.Info);
 
 		return checks;
 	}

@@ -6,19 +6,14 @@ import com.mng.robotest.domains.transversal.PageBase;
 
 public class PageRecADomic extends PageBase {
 
-	private static final String XPATH_IS_PAGE_RECOGIDA ="//h1[text()[contains(.,'RECOGIDA A DOMICILIO')]]";
-	private static final String XPATH_TABLE_DEVOLUCIONES = "//table[@class[contains(.,'devoluciones_table')]]";
-	private static final String XPATH_NO_HAY_PEDIDOS = "//p[text()[contains(.,'no tienes ningún pedido')]]";
+	private static final String XPATH_IS_PAGE_RECOGIDA ="//micro-frontend[@id='myReturns']";
+	private static final String XPATH_NO_HAY_PEDIDOS = "//*[@data-testid[contains(.,'noPurchasesFound')]]";
 
 	public boolean isPage() {
 		return state(Present, XPATH_IS_PAGE_RECOGIDA).check();
 	}
 
-	public boolean isTableDevoluciones() {
-		return state(Present, XPATH_TABLE_DEVOLUCIONES).check();
-	}
-
-	public boolean hayPedidos() {
+	public boolean noHayPedidos() {
 		return state(Present, XPATH_NO_HAY_PEDIDOS).check();
 	}
 }

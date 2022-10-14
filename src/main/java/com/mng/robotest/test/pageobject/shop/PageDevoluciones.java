@@ -56,7 +56,7 @@ public class PageDevoluciones extends PageBase {
 	}
 	
 	private static final String XPATH_IS_PAGE_DEVOLUCIONES = "//div[@class='devoluciones']";
-	private static final String XPATH_BUTTON_SOLICITAR_RECOGIDA = "//div[@class[contains(.,'devoluciones_button_container')]]/span";
+	private static final String XPATH_BUTTON_SOLICITAR_RECOGIDA = "//div[@class[contains(.,'devoluciones_button_container')]]/a";
 
 	public boolean isPage() {
 		return state(Present, XPATH_IS_PAGE_DEVOLUCIONES).check();

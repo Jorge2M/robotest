@@ -64,9 +64,9 @@ public class FactoryMenus {
 			.linea(LineaType.she)
 			.group(GroupType.PRENDAS)
 			.articles(Arrays.asList("Anorak", "Abrigo", "Gabardina", "Trench", "Parka", "Chubasquero"))
-			.subMenus(Arrays.asList("abrigos", "anoraks", "trench"))
-			.subMenu("trench")
-			.articlesSubMenu(Arrays.asList("Gabardina", "Parka", "Trench", "Chubasquero"))
+			.subMenus(Arrays.asList("abrigos", "básicos", "performance"))
+			.subMenu("performance")
+			.articlesSubMenu(Arrays.asList("Anorak"))
 			.build();
 	}
 	

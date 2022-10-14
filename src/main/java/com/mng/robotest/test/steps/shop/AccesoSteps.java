@@ -15,6 +15,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.test.data.DataTest;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
@@ -138,7 +139,7 @@ public class AccesoSteps extends StepBase {
 
 	public void identificacionEnMango() throws Exception {
 		if (!new MenusUserWrapper().isMenuInState(UserMenu.CERRAR_SESION, Present)) {
-			iniciarSesion();
+			iniciarSesion(dataTest);
 		}
 	}
 
@@ -147,7 +148,7 @@ public class AccesoSteps extends StepBase {
 		expected="La identificación es correcta",
 		saveHtmlPage=SaveWhen.Always,
 		saveNettraffic=SaveWhen.Always)
-	private void iniciarSesion() throws Exception {
+	private void iniciarSesion(DataTest dataTest) throws Exception {
 		new PageIdentificacion().iniciarSesion(dataTest.getUserConnected(), dataTest.getPasswordUser());
 		validaIdentificacionEnShop();
 	}

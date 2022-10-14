@@ -143,7 +143,6 @@ public class PageGaleriaSteps extends StepBase {
 		expected="Se da de alta correctamente el artículo en la bolsa",
 		saveHtmlPage=SaveWhen.Always)
 	public boolean selectTallaAvailableArticulo(int posArticulo, int posTalla) throws Exception {
-		
 		ArticuloScreen articulo = pageGaleria.selectTallaAvailableArticle(posArticulo, posTalla);
 		boolean tallaVisible = (articulo!=null);
 		if (tallaVisible) {
