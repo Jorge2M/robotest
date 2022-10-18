@@ -37,7 +37,7 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 	private String getXPathMenuAlternative() {
 		return "//ul/li//a[" + 
 				"@data-testid[contains(.,'header.section.link.')]]" +
-			    "//span[text()='" + menu.getMenu() + "']";
+			    "//span[text()[contains(.,'" + menu.getMenu() + "')]]";
 	}
 	
 	public MenuActionsDesktop(MenuWeb menu) {

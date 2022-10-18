@@ -37,7 +37,7 @@ public class Com009 extends TestBase {
     public void execute() throws Exception {
         accessLoginAndClearBolsa();
         altaArticulosBolsaAndClickComprar();
-        CTA_direcciones();
+        changeDirecciones();
     }
     private void accessLoginAndClearBolsa() throws Exception {
         access();
@@ -48,45 +48,52 @@ public class Com009 extends TestBase {
         new SecBolsaSteps().selectButtonComprar();
     }
     
-    private void CTA_direcciones() throws Exception {
-    	//Selección envío a domicilio
+    private void changeDirecciones() throws Exception {
     	selectEnvioEstandard();
     	
-        //Definimos datos de direcciones
     	DirectionData directionSecondary = makeDireccionSecundaria();
     	DirectionData directionPrincipal = makeDireccionPrincipal();
         DirectionData directionEdit = editDirection(directionSecondary);
 		String addressSecondary = directionSecondary.getDireccion();
 		String adressEdit = directionEdit.getDireccion();
         
-		//Añadimos direccion
-    	new CheckoutSteps().clickEditarDirecEnvio();
-    	modalMultidirectionSteps.checkInitialContent();
-    	modalMultidirectionSteps.clickAnyadirOtraDireccion();
-    	modalDirecEnvioSteps.inputDataAndSave(directionSecondary);
-
-        //Editamos dirección
-        modalMultidirectionSteps.clickEditAddress(adressEdit);
-        modalDirecEnvioSteps.inputDataAndEdit(directionEdit);
-
-        //Eliminamos dirección
-        modalMultidirectionSteps.clickEditAddress(addressSecondary);
-        modalDirecEnvioSteps.clickEliminarButton();
-        modalDirecEnvioSteps.confirmEliminarDirection(addressSecondary);
+    	addDireccion(directionSecondary);
+        editDireccion(directionEdit, adressEdit);
+        removeDireccion(addressSecondary);
         
 		if (!isPRO()) {
-			//Añadimos direccion
-	    	modalMultidirectionSteps.clickAnyadirOtraDireccion();
-	    	modalDirecEnvioSteps.inputDataAndSave(directionPrincipal);
-	        
-	        //Cerrar el modal
+	    	addAnotherDireccion(directionPrincipal);
     		modalMultidirectionSteps.closeModal();
-    		
-	        //Comprar y validar mis compras
-			DataPago dataPago = executeVisaPayment();
-			checkMisCompras(dataPago, directionPrincipal.getDireccion());
+			comprarAndValidateCompras(directionPrincipal);
 		}        
     }
+
+	private void addAnotherDireccion(DirectionData directionPrincipal) throws Exception {
+		modalMultidirectionSteps.clickAnyadirOtraDireccion();
+		modalDirecEnvioSteps.inputDataAndSave(directionPrincipal);
+	}
+
+	private void comprarAndValidateCompras(DirectionData directionPrincipal) throws Exception {
+		DataPago dataPago = executeVisaPayment();
+		checkMisCompras(dataPago, directionPrincipal.getDireccion());
+	}
+
+	private void removeDireccion(String addressSecondary) throws Exception {
+		modalMultidirectionSteps.clickEditAddress(addressSecondary);
+        modalDirecEnvioSteps.clickEliminarButton();
+        modalDirecEnvioSteps.confirmEliminarDirection(addressSecondary);
+	}
+
+	private void editDireccion(DirectionData directionEdit, String adressEdit) throws Exception {
+		modalMultidirectionSteps.clickEditAddress(adressEdit);
+        modalDirecEnvioSteps.inputDataAndEdit(directionEdit);
+	}
+
+	private void addDireccion(DirectionData directionSecondary) throws Exception {
+		new CheckoutSteps().clickEditarDirecEnvio();
+    	modalMultidirectionSteps.checkInitialContent();
+    	addAnotherDireccion(directionSecondary);
+	}
     
     private DataPago executeVisaPayment() throws Exception {
         DataPago dataPago = getDataPago();
