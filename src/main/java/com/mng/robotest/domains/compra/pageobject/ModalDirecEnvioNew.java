@@ -19,7 +19,8 @@ public class ModalDirecEnvioNew extends PageBase {
 		DIRECCION("address.form.address"),
 		CODIGO_POSTAL("address.form.postalCode"),
 		MOVIL("address.form.phoneNumber"),
-		CITY("address.form.city");
+		CITY("address.form.city"),
+		PROVINCIA("address.form.provinceName");
 
 		private String dataTestId;
 		private InputType(String dataTestId) {
@@ -40,7 +41,8 @@ public class ModalDirecEnvioNew extends PageBase {
 		inputData(InputType.DIRECCION, direction.getDireccion());
 		inputData(InputType.CODIGO_POSTAL, direction.getCodPostal());
 		inputData(InputType.MOVIL, direction.getMobil());
-		inputCity();
+		inputIfExists(InputType.CITY, "BARCELONA");
+		inputIfExists(InputType.PROVINCIA, "BARCELONA");
 		setProvinciaIfNotYet();
 		if (direction.isPrincipal()) {
 			clickLabelDirecPrincipal();
@@ -54,11 +56,11 @@ public class ModalDirecEnvioNew extends PageBase {
 		waitMillis(1000);
 	}
 
-	private void inputCity() {
-		if (isPresent(InputType.CITY)) {
-			String valueInput = getElement(InputType.CITY.getXPath()).getAttribute("value");
+	private void inputIfExists(InputType inputType, String value) {
+		if (isPresent(inputType)) {
+			String valueInput = getElement(inputType.getXPath()).getAttribute("value");
 			if ("".compareTo(valueInput)==0) {
-				inputData(InputType.CITY, "BARCELONA");
+				inputData(inputType, value);
 			}
 		}
 	}
