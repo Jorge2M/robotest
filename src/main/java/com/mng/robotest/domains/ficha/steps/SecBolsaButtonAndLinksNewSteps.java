@@ -6,10 +6,10 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.ficha.pageobjects.ModCompartirNew;
 import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew;
-import com.mng.robotest.domains.ficha.pageobjects.SecDetalleProductNew;
+import com.mng.robotest.domains.ficha.pageobjects.SecDetalleProduct;
 import com.mng.robotest.domains.ficha.pageobjects.ModCompartirNew.IconSocial;
 import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.LinksAfterBolsa;
-import com.mng.robotest.domains.ficha.pageobjects.SecDetalleProductNew.ItemBreadcrumb;
+import com.mng.robotest.domains.ficha.pageobjects.SecDetalleProduct.ItemBreadcrumb;
 import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
@@ -17,7 +17,7 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType
 public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 
 	private final SecBolsaButtonAndLinksNew secBolsaButtonAndLinksNew = new SecBolsaButtonAndLinksNew();
-	private final SecDetalleProductNew secDetalleProductNew = new SecDetalleProductNew();
+	private final SecDetalleProduct secDetalleProductNew = new SecDetalleProduct();
 	
 	@Step (
 		description="Seleccionar el link <b>Envío gratis a tienda</b>",
@@ -59,8 +59,8 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.LINEA), State.Warn);
 	 	
 	 	checks.add(
-			"Es visible el item " + ItemBreadcrumb.GRUPO,
-			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.GRUPO), State.Warn);
+			"Es visible el item " + ItemBreadcrumb.SUBGALERIA,
+			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.SUBGALERIA), State.Warn);
 	 	
 	 	checks.add(
 			"Es visible el item " + ItemBreadcrumb.GALERIA,

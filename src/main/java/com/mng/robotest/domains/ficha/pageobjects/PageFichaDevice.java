@@ -13,7 +13,6 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageFichaDevice extends PageFicha {
 
-	private final SecBreadcrumbFichaOld secBreadcrumbAndNextOld = new SecBreadcrumbFichaOld();
 	private final SecProductDescrOld secProductDescr = new SecProductDescrOld();
 	private final SecSlidersOld secSliders = new SecSlidersOld();
 

@@ -100,9 +100,9 @@ public class PageGaleriaSteps extends StepBase {
 		pageFichaSteps.validaPrevNext(locationArt);
 
 		//Validaciones sección BreadCrumb + Next
-		if (channel==Channel.desktop) {
-			pageFichaSteps.validaBreadCrumbFichaOld(urlGaleria);
-		}
+//		if (channel==Channel.desktop) {
+			pageFichaSteps.validaBreadCrumbFicha(urlGaleria);
+//		}
 		
 		return (datosArticulo);
 	}

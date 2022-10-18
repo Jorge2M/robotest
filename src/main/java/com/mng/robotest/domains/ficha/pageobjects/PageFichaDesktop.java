@@ -13,7 +13,7 @@ public class PageFichaDesktop extends PageFicha {
 	public final SecBolsaButtonAndLinksNew secBolsaButtonAndLinks;
 	public final ModEnvioYdevolNew modEnvioYdevolNew;
 	public final SecFotosNew secFotos;
-	public final SecDetalleProductNew secProductInfo;
+	public final SecDetalleProduct secProductInfo;
 	public final SecSlidersNew secSliders;
 
 	public SecModalPersonalizacion secModalPersonalizacion;
@@ -25,7 +25,7 @@ public class PageFichaDesktop extends PageFicha {
 		this.secBolsaButtonAndLinks = new SecBolsaButtonAndLinksNew();
 		this.modEnvioYdevolNew = new ModEnvioYdevolNew();
 		this.secFotos = new SecFotosNew();
-		this.secProductInfo = new SecDetalleProductNew();
+		this.secProductInfo = new SecDetalleProduct();
 		this.secSliders = new SecSlidersNew();
 	}
 

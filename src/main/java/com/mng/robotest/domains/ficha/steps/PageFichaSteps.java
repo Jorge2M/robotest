@@ -16,10 +16,10 @@ import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.ficha.pageobjects.PageFichaDevice;
-import com.mng.robotest.domains.ficha.pageobjects.SecBreadcrumbFichaOld;
+import com.mng.robotest.domains.ficha.pageobjects.SecDetalleProduct;
+import com.mng.robotest.domains.ficha.pageobjects.SecDetalleProduct.ItemBreadcrumb;
 import com.mng.robotest.domains.ficha.pageobjects.Slider;
 import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.ActionFavButton;
-import com.mng.robotest.domains.ficha.pageobjects.SecBreadcrumbFichaOld.ItemBCrumb;
 import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ColorType;
 import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ProductNav;
 import com.mng.robotest.domains.transversal.StepBase;
@@ -58,9 +58,9 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Validation (
-			description=
-					"Aparece la página correspondiente a la ficha del artículo #{refArticulo}" +
-							" (La esperamos hasta #{seconds} segundos)")
+		description=
+			"Aparece la página correspondiente a la ficha del artículo #{refArticulo}" +
+			" (La esperamos hasta #{seconds} segundos)")
 	public boolean checkIsFichaArtDisponible(String refArticulo, int seconds) {
 		return pageFicha.isFichaArticuloUntil(refArticulo, seconds);
 	}
@@ -80,8 +80,8 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Validation (
-			description="Aparece la página de Ficha",
-			level=State.Warn)
+		description="Aparece la página de Ficha",
+		level=State.Warn)
 	public boolean validateIsFichaCualquierArticulo() {
 		return (pageFicha.isPageUntil(0));
 	}
@@ -92,16 +92,16 @@ public class PageFichaSteps extends StepBase {
 		if (datosArticulo.availableReferencia()) {
 			int seconds = 3;
 			checks.add(
-					"Aparece la página con los datos de la ficha del producto " + datosArticulo.getReferencia() +
-							" (la esperamos hasta " + seconds + " segundos)",
-					pageFicha.isFichaArticuloUntil(datosArticulo.getReferencia(), seconds), State.Defect);
+				"Aparece la página con los datos de la ficha del producto " + datosArticulo.getReferencia() +
+				" (la esperamos hasta " + seconds + " segundos)",
+				pageFicha.isFichaArticuloUntil(datosArticulo.getReferencia(), seconds), State.Defect);
 		}
 
 		if (datosArticulo.availableNombre()) {
 			String nombreArtFicha = pageFicha.getSecDataProduct().getTituloArt().trim();
 			checks.add(
-					"Como nombre del artículo aparece el seleccionado: " + datosArticulo.getNombre(),
-					datosArticulo.getNombre().toLowerCase().compareTo(nombreArtFicha.toLowerCase())==0, State.Warn);
+				"Como nombre del artículo aparece el seleccionado: " + datosArticulo.getNombre(),
+				datosArticulo.getNombre().toLowerCase().compareTo(nombreArtFicha.toLowerCase())==0, State.Warn);
 		}
 
 		return checks;
@@ -113,8 +113,8 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Step (
-			description="Seleccionar el color con código <b>#{codigoColor}</b>",
-			expected="Se muestra la ficha correspondiente al color seleccionado")
+		description="Seleccionar el color con código <b>#{codigoColor}</b>",
+		expected="Se muestra la ficha correspondiente al color seleccionado")
 	public void selectColor(String codigoColor) {
 		if (pageFicha.getSecDataProduct().isClickableColor(codigoColor)) {
 			pageFicha.getSecDataProduct().selectColorWaitingForAvailability(codigoColor);
@@ -124,15 +124,15 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Step (
-			description="Seleccionar el color en la posición <b>#{numColor}</b>",
-			expected="El color se selecciona correctamente")
+		description="Seleccionar el color en la posición <b>#{numColor}</b>",
+		expected="El color se selecciona correctamente")
 	public void selectColor(int numColor) {
 		pageFicha.getSecDataProduct().clickColor(numColor);
 	}
 
 	@Validation (
-			description="Está seleccionado el color con código <b>#{codigoColor}<b>",
-			level=State.Defect)
+		description="Está seleccionado el color con código <b>#{codigoColor}<b>",
+		level=State.Defect)
 	private boolean checkIsSelectedColor(String codigoColor) {
 		String codigoColorPage = pageFicha.getSecDataProduct().getCodeColor(ColorType.SELECTED);
 		return (codigoColorPage.contains(codigoColor));
@@ -148,8 +148,8 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Step (
-			description="Seleccionar la talla con código <b>#{talla.name()}</b> (previamente, si está abierta, cerramos la capa de la bolsa)",
-			expected="Se cambia la talla correctamente")
+		description="Seleccionar la talla con código <b>#{talla.name()}</b> (previamente, si está abierta, cerramos la capa de la bolsa)",
+		expected="Se cambia la talla correctamente")
 	public void selectTalla(Talla talla) {
 		secBolsa.setBolsaToStateIfNotYet(StateBolsa.CLOSED);
 		pageFicha.selectTallaByValue(talla);
@@ -157,8 +157,8 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Validation (
-			description="Queda seleccionada la talla <b>#{talla.name()}</b> (esperamos hasta #{seconds} segundos)",
-			level=State.Defect)
+		description="Queda seleccionada la talla <b>#{talla.name()}</b> (esperamos hasta #{seconds} segundos)",
+		level=State.Defect)
 	private boolean checkTallaSelected(Talla talla, int seconds) {
 		for (int i=0; i<seconds; i++) {
 			Talla tallaSelected = pageFicha.getTallaSelected();
@@ -171,8 +171,8 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Step (
-			description="Seleccionar la talla <b>#{talla.name()} </b>",
-			expected="Aparece una capa de introducción email para aviso")
+		description="Seleccionar la talla <b>#{talla.name()} </b>",
+		expected="Aparece una capa de introducción email para aviso")
 	public void selectTallaNoDisp(Talla talla) {
 		pageFicha.getSecDataProduct().getSecSelTallas().selectTallaByValue(talla);
 		checkAppearsCapaAvisame();
@@ -194,8 +194,8 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Step (
-			description="Seleccionar el botón <b>\"Añadir a la bolsa\"</b>",
-			expected="El comportamiento es el esperado... :-)")
+		description="Seleccionar el botón <b>\"Añadir a la bolsa\"</b>",
+		expected="El comportamiento es el esperado... :-)")
 	public void selectAnadirALaBolsaStep() {
 		pageFicha.clickAnadirBolsaButtonAndWait();
 	}
@@ -234,8 +234,8 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Validation (
-			description="Se hace visible la lista de tallas",
-			level=State.Warn)
+		description="Se hace visible la lista de tallas",
+		level=State.Warn)
 	public boolean checkListaTallasVisible() {
 		return (pageFicha.getSecDataProduct().getSecSelTallas().isVisibleListTallasForSelectUntil(0));
 	}
@@ -251,8 +251,8 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Step (
-			description="Seleccionar el botón <b>\"Añadir a Favoritos\"</b>",
-			expected="El artículo se añade a Favoritos")
+		description="Seleccionar el botón <b>\"Añadir a Favoritos\"</b>",
+		expected="El artículo se añade a Favoritos")
 	public void selectAnadirAFavoritos() {
 		pageFicha.selectAnadirAFavoritosButton();
 		ArticuloScreen articulo = pageFicha.getArticuloObject();
@@ -262,8 +262,8 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Step (
-			description="Cambiar de color dentro de la misma ficha volviendo al color/talla originales",
-			expected="El articulo es cambiado de color.")
+		description="Cambiar de color dentro de la misma ficha volviendo al color/talla originales",
+		expected="El articulo es cambiado de color.")
 	public void changeColorGarment() {
 		ArticuloScreen articulo = pageFicha.getArticuloObject();
 		List<String> colors = pageFicha.getSecDataProduct().getColorsGarment();
@@ -286,8 +286,8 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Validation (
-			description="No aparece el icono de favorito marcado al cambiar de color",
-			level=State.Defect)
+		description="No aparece el icono de favorito marcado al cambiar de color",
+		level=State.Defect)
 	public boolean validateNotVisibleButtonFavoritos(ActionFavButton buttonType) {
 		switch (buttonType) {
 			case REMOVE:
@@ -315,16 +315,16 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Step (
-			description="Seleccionar el botón <b>\"Eliminar de Favoritos\"</b>",
-			expected="El artículo se elimina de Favoritos")
+		description="Seleccionar el botón <b>\"Eliminar de Favoritos\"</b>",
+		expected="El artículo se elimina de Favoritos")
 	public void selectRemoveFromFavoritos() {
 		pageFicha.selectRemoveFromFavoritosButton();
 		validateVisibleButtonFavoritos(ActionFavButton.ADD);
 	}
 
 	@Validation (
-			description="Aparece el botón de #{buttonType} a Favoritos",
-			level=State.Defect)
+		description="Aparece el botón de #{buttonType} a Favoritos",
+		level=State.Defect)
 	public boolean validateVisibleButtonFavoritos(ActionFavButton buttonType) {
 		switch (buttonType) {
 			case REMOVE:
@@ -336,23 +336,23 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Validation (
-			description="Es visible el link de <b>Disponibilidad en Tienda</b>",
-			level=State.Defect)
+		description="Es visible el link de <b>Disponibilidad en Tienda</b>",
+		level=State.Defect)
 	public boolean checkLinkDispTiendaVisible() {
 		return pageFicha.isVisibleBuscarEnTiendaLink();
 	}
 
 	@Validation (
-			description="Es invisible el link de <b>Disponibilidad en Tienda</b>",
-			level=State.Defect)
+		description="Es invisible el link de <b>Disponibilidad en Tienda</b>",
+		level=State.Defect)
 	public boolean checkLinkDispTiendaInvisible() {
 		return !pageFicha.isVisibleBuscarEnTiendaLink();
 	}
 
 	private static final String TAG_NAME_LINK = "@TagNameLink";
 	@Step (
-			description="Seleccionar <b>" + TAG_NAME_LINK + "</b>",
-			expected="Aparece un resultado de la búsqueda correcta")
+		description="Seleccionar <b>" + TAG_NAME_LINK + "</b>",
+		expected="Aparece un resultado de la búsqueda correcta")
 	public void selectBuscarEnTiendaButton() {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_NAME_LINK, pageFicha.getNameLinkBuscarEnTienda());
 		pageFicha.selectBuscarEnTiendaLink();
@@ -360,8 +360,8 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Step (
-			description="Si está visible, Seleccionar el link \"<b>Guía de tallas</b>\"",
-			expected="Aparece la página asociada a la guía de tallas")
+		description="Si está visible, Seleccionar el link \"<b>Guía de tallas</b>\"",
+		expected="Aparece la página asociada a la guía de tallas")
 	public void selectGuiaDeTallas(AppEcom app) throws Exception {
 		boolean isVisibleLink = pageFicha.getSecDataProduct().selectGuiaDeTallasIfVisible();
 		if (isVisibleLink) {
@@ -385,16 +385,16 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Validation (
-			description="Es visible el slider de artículos de tipo <b>#{typeSlider}</b>",
-			level=State.Info,
-			store=StoreType.None)
+		description="Es visible el slider de artículos de tipo <b>#{typeSlider}</b>",
+		level=State.Info,
+		store=StoreType.None)
 	public boolean checkSliderVisible(Slider typeSlider) {
 		return (pageFicha.isVisibleSlider(typeSlider));
 	}
 
 	@Validation (
-			description="El número de artículos del slider de tipo <b>#{typeSlider}</b> es > #{numArtMin}",
-			level=State.Warn)
+		description="El número de artículos del slider de tipo <b>#{typeSlider}</b> es > #{numArtMin}",
+		level=State.Warn)
 	public boolean checkNumArticlesSlider(int numArtMin, Slider typeSlider) {
 		return (pageFicha.getNumArtVisiblesSlider(typeSlider) > numArtMin);
 	}
@@ -422,8 +422,8 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Step (
-			description="Seleccionamos el link #{productNav}</b>",
-			expected="Aparece una página de ficha correcta")
+		description="Seleccionamos el link #{productNav}</b>",
+		expected="Aparece una página de ficha correcta")
 	public void selectLinkNavigation(ProductNav productNav, String refProductOrigin) {
 		pageFicha.getSecDataProduct().selectLinkNavigation(productNav);
 		if (productNav==ProductNav.PREV) {
@@ -440,15 +440,15 @@ public class PageFichaSteps extends StepBase {
 	//Específic Ficha Old
 
 	@Validation (
-			description="Existe más de una imagen de carrusel a la izquierda de la imagen principal",
-			level=State.Warn)
+		description="Existe más de una imagen de carrusel a la izquierda de la imagen principal",
+		level=State.Warn)
 	public boolean validaExistsImgsCarruselIzqFichaOld() {
 		return (((PageFichaDevice)pageFicha).getNumImgsCarruselIzq() >= 2);
 	}
 
 	@Step (
-			description="Seleccionar la #{numImagen}a imagen del carrusel izquierdo",
-			expected="La imagen se carga aumentada en la imagen central")
+		description="Seleccionar la #{numImagen}a imagen del carrusel izquierdo",
+		expected="La imagen se carga aumentada en la imagen central")
 	public void selectImgCarruselIzqFichaOld(int numImagen) {
 		String pngImagenCarrusel = ((PageFichaDevice)pageFicha).getSrcImgCarruselIzq(numImagen);
 		((PageFichaDevice)pageFicha).clickImgCarruselIzq(numImagen);
@@ -458,15 +458,15 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Validation (
-			description="La imagen central se corresponde con la imagen del carrusel seleccionada (<b>#{pngImagenCarrusel}</b>)",
-			level=State.Defect)
+		description="La imagen central se corresponde con la imagen del carrusel seleccionada (<b>#{pngImagenCarrusel}</b>)",
+		level=State.Defect)
 	private boolean checkImgCentralIsAssociatedToCarruselSelect(String pngImagenCarrusel) {
 		return (((PageFichaDevice)pageFicha).srcImagenCentralCorrespondsToImgCarrusel(pngImagenCarrusel));
 	}
 
 	@Step (
-			description="Seleccionar la imagen/ficha central",
-			expected="Se produce un zoom sobre la imagen")
+		description="Seleccionar la imagen/ficha central",
+		expected="Se produce un zoom sobre la imagen")
 	public void selectImagenCentralFichaOld() {
 		String pngImgCentralOriginal = ((PageFichaDevice)pageFicha).getSrcImagenCentral();
 		((PageFichaDevice)pageFicha).clickImagenFichaCentral();
@@ -488,31 +488,30 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Step (
-			description="Seleccionar el aspa para cerrar la imagen central con Zoom",
-			expected="La imagen con Zoom desaparece")
+		description="Seleccionar el aspa para cerrar la imagen central con Zoom",
+		expected="La imagen con Zoom desaparece")
 	public void closeZoomImageCentralDevice() {
 		((PageFichaDevice)pageFicha).closeZoomImageCentralDevice();
 	}
 
 	@Validation (
-			description="La imagen central se corresponde con la imagen del carrusel seleccionada (<b>#{pngImagenCarrusel}</b>)",
-			level=State.Defect)
+		description="La imagen central se corresponde con la imagen del carrusel seleccionada (<b>#{pngImagenCarrusel}</b>)",
+		level=State.Defect)
 	private boolean checkZoomImageCentralDissapeared() {
 		return !((PageFichaDevice)pageFicha).isVisibleFichaConZoom();
 	}
 
 	@Validation
-	public ChecksTM validaBreadCrumbFichaOld(String urlGaleryOrigin) {
+	public ChecksTM validaBreadCrumbFicha(String urlGaleryOrigin) {
 		ChecksTM checks = ChecksTM.getNew();
-		SecBreadcrumbFichaOld secBreadcrumbFichaOld = new SecBreadcrumbFichaOld();
 		checks.add(
-				"Existen el bloque correspondiente a las <b>BreadCrumb</b>",
-				secBreadcrumbFichaOld.isVisibleBreadCrumb(), State.Defect);
+			"Existen el bloque correspondiente a las <b>BreadCrumb</b>",
+			new SecDetalleProduct().isVisibleBreadcrumbs(0), State.Defect);
 
-		String urlGaleryBC = secBreadcrumbFichaOld.getUrlItemBreadCrumb(ItemBCrumb.GALERY);
+		String urlGaleryBC = new SecDetalleProduct().getUrlItemBreadCrumb(ItemBreadcrumb.GALERIA);
 		checks.add(
-				"El link correspondiente a la Galería del artículo linca a la URL " + urlGaleryOrigin,
-				urlGaleryOrigin.contains(urlGaleryBC), State.Warn);
+			"El link correspondiente a la Galería del artículo linca a la URL " + urlGaleryOrigin,
+			urlGaleryOrigin.contains(urlGaleryBC), State.Warn);
 
 		return checks;
 	}
