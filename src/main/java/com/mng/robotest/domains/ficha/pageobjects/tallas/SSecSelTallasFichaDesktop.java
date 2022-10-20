@@ -15,8 +15,8 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	private static final String XPATH_TALLA_ITEM = XPATH_CAPA_TALLAS + "//span[@data-available]";
 	private static final String XPATH_TALLA_AVAILABLE = XPATH_TALLA_ITEM + "//self::*[@data-available='true']";
 	private static final String XPATH_TALLA_UNAVAILABLE = XPATH_TALLA_ITEM + "//self::*[@data-available='false']";
-	private static final String XPATH_TALLA_SELECTED = XPATH_TALLA_ITEM + "//self::*[@aria-selected='true']";
 	private static final String XPATH_ICON_DESPLEGABLE_TALLAS = "//i[@class[contains(.,'icon-outline-down')]]";
+	private static final String XPATH_TALLA_SELECTED = XPATH_ICON_DESPLEGABLE_TALLAS + "/../span";
 	private static final String XPATH_MSG_AVISO_TALLA = XPATH_CAPA_TALLAS + "//span";
 //	private static final String XPATH_TALLA_UNICA = 	
 	

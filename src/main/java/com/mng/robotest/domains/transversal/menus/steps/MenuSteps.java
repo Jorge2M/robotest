@@ -213,7 +213,7 @@ public class MenuSteps extends StepBase {
 		
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel);
 		List<String> articlesNoValid = pageGaleriaDesktop.getArticlesNoValid(articles);
-		State stateVal = (articlesNoValid.size()<5) ? State.Warn : State.Defect;
+		State stateVal = (articlesNoValid.size()<10) ? State.Warn : State.Defect;
 		
 		checks.add(
 			Check.make(
