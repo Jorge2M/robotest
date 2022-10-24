@@ -18,6 +18,7 @@ import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.ficha.pageobjects.PageFichaDevice;
 import com.mng.robotest.domains.ficha.pageobjects.SecDetalleProduct;
 import com.mng.robotest.domains.ficha.pageobjects.SecDetalleProduct.ItemBreadcrumb;
+import com.mng.robotest.domains.galeria.steps.LocationArticle;
 import com.mng.robotest.domains.ficha.pageobjects.Slider;
 import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.ActionFavButton;
 import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ColorType;
@@ -27,7 +28,6 @@ import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
-import com.mng.robotest.test.steps.shop.galeria.LocationArticle;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 

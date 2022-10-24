@@ -3,14 +3,14 @@ package com.mng.robotest.domains.ficha.tests;
 import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ProductNav;
 import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
+import com.mng.robotest.domains.galeria.steps.LocationArticle;
+import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
-import com.mng.robotest.test.steps.shop.galeria.LocationArticle;
-import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 
 import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;

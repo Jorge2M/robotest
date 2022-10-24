@@ -1,4 +1,4 @@
-package com.mng.robotest.test.steps.shop.galeria;
+package com.mng.robotest.domains.galeria.steps;
 
 import java.util.List;
 
@@ -10,11 +10,11 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
+import com.mng.robotest.domains.galeria.pageobjects.SecBannerHeadGallery;
+import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps.TypeGalery;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;
-import com.mng.robotest.test.pageobject.shop.galeria.SecBannerHeadGallery;
-import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps.TypeGalery;
 import com.mng.robotest.test.utils.UtilsTest;
 
 public class BannerHeadGallerySteps {

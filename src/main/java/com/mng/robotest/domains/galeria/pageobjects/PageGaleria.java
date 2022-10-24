@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.galeria;
+package com.mng.robotest.domains.galeria.pageobjects;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,17 +15,17 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter;
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticleDesktop;
+import com.mng.robotest.domains.galeria.steps.LocationArticle;
+import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps.TypeActionFav;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion;
-import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.test.pageobject.utils.DataArticleGalery;
 import com.mng.robotest.test.pageobject.utils.DataScroll;
 import com.mng.robotest.test.pageobject.utils.ListDataArticleGalery;
-import com.mng.robotest.test.steps.shop.galeria.LocationArticle;
-import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps.TypeActionFav;
 import com.mng.robotest.test.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;

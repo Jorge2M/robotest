@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.galeria;
+package com.mng.robotest.domains.galeria.pageobjects;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.PageBase;

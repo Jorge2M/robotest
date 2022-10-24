@@ -1,5 +1,6 @@
 package com.mng.robotest.domains.transversal;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.mng.robotest.domains.transversal.menus.beans.FactoryMenus;
@@ -10,8 +11,10 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
 import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
+import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.test.steps.shop.SecFiltrosSteps;
 import com.mng.robotest.test.utils.UtilsTest;
 
 public abstract class StepBase extends PageBase {
@@ -59,6 +62,13 @@ public abstract class StepBase extends PageBase {
 	protected void clickSubMenu(MenuWeb menu) {
 		new MenuSteps().clickSubMenu(menu);
 	}
+	
+	protected void filterGaleryByColor(MenuItem menu, Color color) throws Exception {
+		filterGaleryByColors(menu, Arrays.asList(color));
+	}
+	protected void filterGaleryByColors(MenuItem menu, List<Color> colors) throws Exception {
+		new SecFiltrosSteps().selectFiltroColores(colors, FactoryMenus.get(menu).getMenu());
+	}	
 	
 	protected List<GarmentCatalog> getArticles(int numArticles) throws Exception {
 		return UtilsTest.getArticlesForTest(dataTest.getPais(), app, numArticles, driver);

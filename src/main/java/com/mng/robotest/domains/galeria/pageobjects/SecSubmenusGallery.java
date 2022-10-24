@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.galeria;
+package com.mng.robotest.domains.galeria.pageobjects;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.transversal.PageBase;

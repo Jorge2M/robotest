@@ -4,6 +4,8 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
+import com.mng.robotest.domains.galeria.steps.LocationArticle;
+import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
@@ -11,8 +13,6 @@ import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
-import com.mng.robotest.test.steps.shop.galeria.LocationArticle;
-import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 
 import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
 import static com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType.*;

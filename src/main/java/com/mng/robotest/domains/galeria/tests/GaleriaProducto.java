@@ -1,4 +1,4 @@
-package com.mng.robotest.test.appshop.galeria;
+package com.mng.robotest.domains.galeria.tests;
 
 import org.testng.annotations.*;
 

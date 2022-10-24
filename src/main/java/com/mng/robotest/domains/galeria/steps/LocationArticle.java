@@ -1,4 +1,4 @@
-package com.mng.robotest.test.steps.shop.galeria;
+package com.mng.robotest.domains.galeria.steps;
 
 public class LocationArticle {
 	public enum AccessFrom {InitCatalog, InitPage}

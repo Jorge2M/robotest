@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.galeria;
+package com.mng.robotest.domains.galeria.pageobjects;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +15,6 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop.Visibility;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
@@ -547,21 +546,23 @@ public class PageGaleriaDesktop extends PageGaleria {
 		}
 	}
 	
-	public void clickSliderAfterHoverArticle(WebElement articulo, List<TypeSlider> typeSliderList)
-	throws Exception {
-		//Click Sliders
+	public void clickSliders(WebElement articulo, List<TypeSlider> typeSliderList)
+			throws Exception {
 		for (TypeSlider typeSlider : typeSliderList) {
-			SecCabecera secCabecera = SecCabecera.getNew(channel, app);
-			secCabecera.hoverIconoBolsa();
-			hoverArticle(articulo);
-			waitMillis(500);
-			hoverArticle(articulo);
-			waitMillis(500);
-			String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
-			click(articulo).by(By.xpath(xpathSlider)).exec();
-			waitForAjax(driver, 1);
-			Thread.sleep(1000);
+			clickSlider(articulo, typeSlider);
 		}
+	}
+	
+	public void clickSlider(WebElement articulo, TypeSlider typeSlider) {
+		hoverArticle(articulo);
+		String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
+//		if (!state(State.Visible, xpathSlider).check()) {
+//			secTallas.bringSizesBack(articulo);
+//			SecCabecera.getNew(channel, app).hoverIconoBolsa();
+//			hoverArticle(articulo);
+//		}
+		waitMillis(500);
+		click(articulo).by(By.xpath(xpathSlider)).exec();
 	}
 
 	public boolean isPresentSliderInArticleUntil(TypeSlider typeSlider, WebElement article, int seconds) {

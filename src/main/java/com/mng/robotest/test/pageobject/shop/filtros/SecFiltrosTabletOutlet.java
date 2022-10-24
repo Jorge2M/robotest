@@ -3,9 +3,9 @@ package com.mng.robotest.test.pageobject.shop.filtros;
 import java.util.List;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Color;
-import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 

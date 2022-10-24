@@ -2,8 +2,8 @@ package com.mng.robotest.domains.transversal.menus.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import com.mng.robotest.domains.galeria.pageobjects.SecSubmenusGallery;
 import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.test.pageobject.shop.galeria.SecSubmenusGallery;
 
 public class MenuActionsDesktop extends PageBase implements MenuActions {
 

@@ -1,21 +1,21 @@
-package com.mng.robotest.test.appshop.galeria;
+package com.mng.robotest.domains.galeria.tests;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
+import com.mng.robotest.domains.galeria.steps.DataForScrollStep;
+import com.mng.robotest.domains.galeria.steps.LocationArticle;
+import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion;
-import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test.pageobject.utils.DataScroll;
 import com.mng.robotest.test.steps.shop.AllPagesSteps;
-import com.mng.robotest.test.steps.shop.SecFiltrosSteps;
-import com.mng.robotest.test.steps.shop.galeria.DataForScrollStep;
-import com.mng.robotest.test.steps.shop.galeria.LocationArticle;
-import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 
 import static com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
+
 
 public class Gpo004 extends TestBase {
 
@@ -49,14 +49,15 @@ public class Gpo004 extends TestBase {
 			clickMenu(ABRIGOS_SHE);
 		}
 
+		
 		List<Color> colorsToFilter = new ArrayList<>();
 		colorsToFilter.add(Color.Blanco);
 		if (app==AppEcom.shop) {
 			colorsToFilter.add(Color.Negro);
 			colorsToFilter.add(Color.Azul);
-			new SecFiltrosSteps().selectFiltroColoresStep(false, "Camisas", colorsToFilter);
+			filterGaleryByColors(CAMISAS_SHE, colorsToFilter);
 		} else {
-			new SecFiltrosSteps().selectFiltroColoresStep(false, "Abrigos", colorsToFilter);
+			filterGaleryByColors(ABRIGOS_SHE, colorsToFilter);
 		}
 	}
 

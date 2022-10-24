@@ -11,11 +11,11 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltros;
 import com.mng.robotest.test.pageobject.shop.menus.MenuLateralDesktop;
-import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 public class SecFiltrosSteps extends StepBase {
@@ -23,17 +23,15 @@ public class SecFiltrosSteps extends StepBase {
 	private final SecFiltros secFiltros = SecFiltros.make(channel, app);
 	
 	private static final String TAG_LIT_COLORS_TO_SELECT = "@TagLitColorsToSelect";
-	
+
 	@Step (
 		description="Seleccionar los colores <b>" + TAG_LIT_COLORS_TO_SELECT + "</b>", 
 		expected="Aparece la galería de imágenes",
 		saveNettraffic=SaveWhen.Always)
-	public int selectFiltroColoresStep (boolean validaciones, String litMenu, List<Color> colorsToSelect) throws Exception {
+	public int selectFiltroColores(List<Color> colorsToSelect, String litMenu) throws Exception {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_LIT_COLORS_TO_SELECT, Color.getListNamesFiltros(colorsToSelect).toString());
 		int numArticulos1page = secFiltros.selecFiltroColoresAndReturnNumArticles(colorsToSelect);			
-		if (validaciones) {
-			checkAfterSelectFiltroColores(colorsToSelect, litMenu, numArticulos1page);
-		}
+		checkAfterSelectFiltroColores(colorsToSelect, litMenu, numArticulos1page);
 		return numArticulos1page;
 	}
 	

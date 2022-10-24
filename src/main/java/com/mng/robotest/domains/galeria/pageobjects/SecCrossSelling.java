@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.galeria;
+package com.mng.robotest.domains.galeria.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

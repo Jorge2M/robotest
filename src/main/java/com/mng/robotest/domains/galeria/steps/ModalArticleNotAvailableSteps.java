@@ -1,12 +1,12 @@
-package com.mng.robotest.test.steps.shop.galeria;
+package com.mng.robotest.domains.galeria.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.galeria.pageobjects.ModalArticleNotAvailable;
+import com.mng.robotest.domains.galeria.pageobjects.ModalArticleNotAvailable.StateModal;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.pageobject.shop.galeria.ModalArticleNotAvailable;
-import com.mng.robotest.test.pageobject.shop.galeria.ModalArticleNotAvailable.StateModal;
 
 public class ModalArticleNotAvailableSteps extends StepBase {
 

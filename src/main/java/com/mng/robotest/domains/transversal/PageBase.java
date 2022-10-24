@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -176,5 +177,17 @@ public class PageBase extends PageObjTM {
 	
 	protected void clickUserMenu(UserMenu userMenu) {
 		new MenusUserWrapper().clickMenuAndWait(userMenu);
+	}
+	
+	protected enum BringTo { FRONT, BACKGROUND }
+	
+	protected void bringElement(WebElement element, BringTo action) {
+		String display = "none";
+		if (action==BringTo.FRONT) {
+			display = "block";
+		}
+		
+		((JavascriptExecutor) driver).executeScript("arguments[0].style.display='" + display + "';", element);
+		state(State.Invisible, element).wait(1).check();
 	}
 }

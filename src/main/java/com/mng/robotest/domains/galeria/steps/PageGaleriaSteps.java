@@ -1,4 +1,4 @@
-package com.mng.robotest.test.steps.shop.galeria;
+package com.mng.robotest.domains.galeria.steps;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,20 +20,20 @@ import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter;
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
+import com.mng.robotest.domains.galeria.pageobjects.SecBannerHeadGallery;
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.ControlTemporada;
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.NumColumnas;
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticle;
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticleDesktop;
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.TypeSlider;
+import com.mng.robotest.domains.galeria.pageobjects.SecBannerHeadGallery.TypeLinkInfo;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltros;
-import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
-import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;
-import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.ControlTemporada;
-import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.NumColumnas;
-import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticle;
-import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticleDesktop;
-import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeSlider;
-import com.mng.robotest.test.pageobject.shop.galeria.SecBannerHeadGallery;
-import com.mng.robotest.test.pageobject.shop.galeria.SecBannerHeadGallery.TypeLinkInfo;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusFiltroCollection;
 import com.mng.robotest.test.pageobject.utils.DataArticleGalery;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
@@ -273,6 +273,11 @@ public class PageGaleriaSteps extends StepBase {
 		return (numArticlesInPage==numArticlesExpected);
 	}
 
+	public int seleccionaOrdenacionGaleria(FilterOrdenacion typeOrdenacion, String tipoPrendasGaleria) 
+			throws Exception {
+		return seleccionaOrdenacionGaleria(typeOrdenacion, tipoPrendasGaleria, -1);
+	}
+	
 	@Step (
 		description="Seleccionar la ordenación #{typeOrdenacion}", 
 		expected="Los artículos se ordenan correctamente")
@@ -405,7 +410,7 @@ public class PageGaleriaSteps extends StepBase {
 			" artículo con variedad de colores (" + tagNombreArt + "). Previamente realizamos un \"Hover\" sobre dicho artículo", 
 		expected="Aparece el artículo original(" + tagNombreArt + ")")
 	public String clicksSliderArticuloConColores(int numArtConColores, List<TypeSlider> typeSliderList, String srcImageExpected) 
-	throws Exception {
+			throws Exception {
 		if (channel!=Channel.desktop) {
 			throw new RuntimeException("Method clickSliderArticuloConColores doesn't support channel " + channel);
 		}
@@ -422,7 +427,7 @@ public class PageGaleriaSteps extends StepBase {
 		stepTM.replaceInDescription(tagNombreArt, pageGaleria.getNombreArticulo(articuloColores));
 		stepTM.replaceInExpected(tagNombreArt, pageGaleria.getNombreArticulo(articuloColores));
 		String srcImg1erSlider = pageGaleria.getImagenArticulo(articuloColores);
-		pageGaleriaDesktop.clickSliderAfterHoverArticle(articuloColores, typeSliderList);
+		pageGaleriaDesktop.clickSliders(articuloColores, typeSliderList);
 
 		String srcImg2oSlider = pageGaleria.getImagenArticulo(articuloColores);
 		checkImageSliderArticleHasChanged(srcImg1erSlider, srcImg2oSlider, typeSliderList.size());

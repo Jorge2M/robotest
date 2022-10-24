@@ -8,13 +8,13 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.bannersNew.BannerObject;
 import com.mng.robotest.test.pageobject.shop.bannersNew.BannerObjectFactory;
 import com.mng.robotest.test.pageobject.shop.bannersNew.BannerType;
 import com.mng.robotest.test.pageobject.shop.bannersNew.ManagerBannersScreen;
-import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
-import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test.pageobject.shop.menus.MenuLateralDesktop.Element;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;

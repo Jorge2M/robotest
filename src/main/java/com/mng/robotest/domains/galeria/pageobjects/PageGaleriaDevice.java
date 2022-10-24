@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.galeria;
+package com.mng.robotest.domains.galeria.pageobjects;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,11 +8,11 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticleDesktop;
+import com.mng.robotest.domains.galeria.pageobjects.SecPreciosArticulo.TipoPrecio;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticleDesktop;
-import com.mng.robotest.test.pageobject.shop.galeria.SecPreciosArticulo.TipoPrecio;
 import com.github.jorge2m.testmaker.conf.Channel;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 

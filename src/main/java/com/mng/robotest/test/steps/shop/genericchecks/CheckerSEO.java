@@ -12,10 +12,10 @@ import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.AllPages;
-import com.mng.robotest.test.pageobject.shop.galeria.PageGaleria;
-import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 

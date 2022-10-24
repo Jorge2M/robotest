@@ -1,9 +1,9 @@
-package com.mng.robotest.test.appshop.galeria;
+package com.mng.robotest.domains.galeria.tests;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 
 import static com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
 import static com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType.*;

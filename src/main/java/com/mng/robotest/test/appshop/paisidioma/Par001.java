@@ -2,6 +2,8 @@ package com.mng.robotest.test.appshop.paisidioma;
 
 import java.util.List;
 
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
+import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
 import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType;
@@ -15,10 +17,8 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType
 import com.mng.robotest.test.beans.Linea.TypeContentDesk;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
 import com.mng.robotest.test.generic.UtilsMangoTest;
-import com.mng.robotest.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test.steps.shop.PagePrehomeSteps;
 import com.mng.robotest.test.steps.shop.banner.SecBannersSteps;
-import com.mng.robotest.test.steps.shop.galeria.PageGaleriaSteps;
 import com.mng.robotest.test.steps.shop.home.PageHomeMarcasSteps;
 import com.mng.robotest.test.suites.FlagsNaviationLineas;
 import com.mng.robotest.test.utils.LevelPais;

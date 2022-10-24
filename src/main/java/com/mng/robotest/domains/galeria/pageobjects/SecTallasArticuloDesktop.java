@@ -1,8 +1,12 @@
-package com.mng.robotest.test.pageobject.shop.galeria;
+package com.mng.robotest.domains.galeria.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
 import com.mng.robotest.domains.transversal.PageBase;
+
 
 public class SecTallasArticuloDesktop extends PageBase {
 	
@@ -56,5 +60,10 @@ public class SecTallasArticuloDesktop extends PageBase {
 	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds) {
 		String xpathCapa = getXPathCapaTallas(posArticulo, true);
 		return (state(Visible, xpathCapa).wait(seconds).check());
+	}
+	
+	public void bringSizesBack(WebElement articulo) {
+		WebElement sizes = articulo.findElement(By.xpath("." + XPATH_CAPA_TALLAS_ARTICULO_SHOP));
+		bringElement(sizes, BringTo.BACKGROUND);
 	}
 }
