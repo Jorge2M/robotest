@@ -32,8 +32,7 @@ pipeline {
                 }
             }
         }
-
-    	stage('Run Unit Tests') {
+    	stage('Run Unit and Integration Tests') {
             agent {
                 docker {
                     image 'maven:3.8.4-openjdk-17'
@@ -44,7 +43,7 @@ pipeline {
             	sh 'mvn -version'
 	        	sh 'mvn clean'
 	        	configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
-	            	sh 'mvn --settings ${mavenSettings} test -DskipIntegrationTests -DargLine="-Duser.timezone=Europe/Paris"'
+	            	sh 'mvn --settings ${mavenSettings} verify -DargLine="-Duser.timezone=Europe/Paris"'
 	            }
             }
             post {
@@ -59,35 +58,8 @@ pipeline {
                     }
                 }
             }
-        }
-        
-        stage('Run Integration Tests') {
-            agent {
-                docker {
-                    image 'maven:3.8.4-openjdk-17'
-                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
-                }
-            }
-            steps {
-                unstash 'target'
-	        	configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
-	            	sh "mvn --settings ${mavenSettings} -B verify -DskipUnitTests"
-	            }
-            }
-            post {
-                always {
-                    script {
-                        junit outputFolders.integration
-                    }
-                }            
-                success {
-                    script {
-                        stash includes: '**/target/', name: 'target'
-                    }
-                }
-            }
-        }
-        
+        }        
+
         stage('Sonar') {
             agent {
                 docker {
