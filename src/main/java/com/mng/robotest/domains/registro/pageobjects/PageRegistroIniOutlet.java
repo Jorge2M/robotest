@@ -17,7 +17,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import com.mng.robotest.domains.compra.pageobject.Page2IdentCheckout;
+import com.mng.robotest.domains.compra.pageobjects.Page2IdentCheckout;
 import com.mng.robotest.domains.registro.beans.DataRegistro;
 import com.mng.robotest.domains.registro.beans.InputDataXPath;
 import com.mng.robotest.domains.registro.beans.ListDataRegistro;

@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.mng.robotest.domains.ficha.beans.DataFoto;
+
 public class DataFotoTest {
 
     static final String TAG_TEMPORADA = "#temporada#";

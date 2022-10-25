@@ -89,7 +89,7 @@ public class CheckerImgsBroken implements Checker {
 	
 	private TestCaseTM getTestCase() throws NotFoundException {
 		Optional<TestCaseTM> testCaseOpt = TestMaker.getTestCase();
-		if (testCaseOpt.isEmpty()) {
+		if (!testCaseOpt.isPresent()) {
 		  throw new NotFoundException("Not found TestCase");
 		}
 		return testCaseOpt.get();

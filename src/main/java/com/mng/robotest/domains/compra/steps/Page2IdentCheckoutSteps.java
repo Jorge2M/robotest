@@ -8,7 +8,7 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.domains.compra.pageobject.Page2IdentCheckout;
+import com.mng.robotest.domains.compra.pageobjects.Page2IdentCheckout;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.factoryes.entities.EgyptCity;
 import com.mng.robotest.test.generic.UtilsMangoTest;

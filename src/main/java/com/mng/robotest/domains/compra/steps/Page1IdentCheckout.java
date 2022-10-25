@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.compra.steps;
 
-import com.mng.robotest.domains.compra.pageobject.SecSoyNuevo;
+import com.mng.robotest.domains.compra.pageobjects.SecSoyNuevo;
 import com.mng.robotest.domains.transversal.PageBase;
 
 

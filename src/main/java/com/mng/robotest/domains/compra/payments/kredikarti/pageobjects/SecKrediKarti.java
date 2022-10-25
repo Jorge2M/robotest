@@ -2,7 +2,7 @@ package com.mng.robotest.domains.compra.payments.kredikarti.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import com.mng.robotest.domains.compra.pageobject.pci.SecTarjetaPciInIframe;
+import com.mng.robotest.domains.compra.pageobjects.pci.SecTarjetaPciInIframe;
 
 public class SecKrediKarti extends SecTarjetaPciInIframe {
 

@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
-import com.mng.robotest.domains.compra.pageobject.PageRedirectPasarelaLoading;
+import com.mng.robotest.domains.compra.pageobjects.PageRedirectPasarelaLoading;
 
 public class PageRedirectPasarelaLoadingSteps {
 	

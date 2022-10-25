@@ -1,7 +1,7 @@
 package com.mng.robotest.domains.compra.steps.envio;
 
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.domains.compra.pageobject.envio.TipoTransporteEnum.TipoTransporte;
+import com.mng.robotest.domains.compra.pageobjects.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
 

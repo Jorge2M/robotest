@@ -12,7 +12,7 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
-import com.mng.robotest.domains.compra.pageobject.PageCheckoutWrapper;
+import com.mng.robotest.domains.compra.pageobjects.PageCheckoutWrapper;
 import com.mng.robotest.domains.compra.payments.billpay.steps.SecBillpaySteps;
 import com.mng.robotest.domains.compra.payments.ideal.steps.SecIdealSteps;
 import com.mng.robotest.domains.compra.payments.kredikarti.steps.SecKrediKartiSteps;

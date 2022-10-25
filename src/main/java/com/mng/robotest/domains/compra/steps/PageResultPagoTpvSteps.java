@@ -3,7 +3,7 @@ package com.mng.robotest.domains.compra.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.domains.compra.pageobject.PageResultPagoTpv;
+import com.mng.robotest.domains.compra.pageobjects.PageResultPagoTpv;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.utils.ImporteScreen;

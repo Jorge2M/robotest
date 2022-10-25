@@ -6,7 +6,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.domains.compra.pageobject.PageResultPago;
+import com.mng.robotest.domains.compra.pageobjects.PageResultPago;
 import com.mng.robotest.domains.micuenta.pageobjects.PageAccesoMisCompras.TypeBlock;
 import com.mng.robotest.domains.micuenta.steps.PageAccesoMisComprasSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMisComprasSteps;

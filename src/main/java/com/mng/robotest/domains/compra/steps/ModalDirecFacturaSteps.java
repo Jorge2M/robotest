@@ -4,10 +4,10 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.domains.compra.pageobject.DataDireccion;
-import com.mng.robotest.domains.compra.pageobject.ModalDirecFactura;
-import com.mng.robotest.domains.compra.pageobject.Page1DktopCheckout;
-import com.mng.robotest.domains.compra.pageobject.PageCheckoutWrapper;
+import com.mng.robotest.domains.compra.pageobjects.DataDireccion;
+import com.mng.robotest.domains.compra.pageobjects.ModalDirecFactura;
+import com.mng.robotest.domains.compra.pageobjects.Page1DktopCheckout;
+import com.mng.robotest.domains.compra.pageobjects.PageCheckoutWrapper;
 import com.mng.robotest.domains.transversal.StepBase;
 
 public class ModalDirecFacturaSteps extends StepBase {

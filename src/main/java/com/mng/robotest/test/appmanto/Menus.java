@@ -55,7 +55,7 @@ public class Menus implements Serializable {
 	
 	private TestCaseTM getTestCase() throws NotFoundException {
 		Optional<TestCaseTM> testCaseOpt = TestMaker.getTestCase();
-		if (testCaseOpt.isEmpty()) {
+		if (!testCaseOpt.isPresent()) {
 		  throw new NotFoundException("Not found TestCase");
 		}
 		return testCaseOpt.get();

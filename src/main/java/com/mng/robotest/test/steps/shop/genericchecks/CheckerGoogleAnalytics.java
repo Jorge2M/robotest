@@ -22,7 +22,7 @@ public class CheckerGoogleAnalytics implements Checker {
 		GestorDatosHarJSON gestorHAR = UtilsChecker.getGestorHar(driver);
 		if (gestorHAR!=null) {
 			Optional<JSONArray> listEntriesFilteredPageOpt = getListEntries(gestorHAR);
-			if (listEntriesFilteredPageOpt.isEmpty()) {
+			if (!listEntriesFilteredPageOpt.isPresent()) {
 				throw new NotFoundException("Not found entries in HAR");
 			}
 			int numLineas = listEntriesFilteredPageOpt.get().size(); 

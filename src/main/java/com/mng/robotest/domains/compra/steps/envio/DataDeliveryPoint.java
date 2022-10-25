@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.compra.steps.envio;
 
-import com.mng.robotest.domains.compra.pageobject.envio.SecSelectDPoint.TypeDeliveryPoint;
+import com.mng.robotest.domains.compra.pageobjects.envio.SecSelectDPoint.TypeDeliveryPoint;
 
 
 public class DataDeliveryPoint {

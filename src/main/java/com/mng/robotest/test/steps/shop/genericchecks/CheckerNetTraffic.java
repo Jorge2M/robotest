@@ -32,7 +32,7 @@ public class CheckerNetTraffic implements Checker {
 		boolean peticionesOk = true;
 		String infoWarnings = "";
 		Optional<JSONArray> listEntriesTotalOpt = getListEntries(gestorHAR);
-		if (listEntriesTotalOpt.isEmpty()) {
+		if (!listEntriesTotalOpt.isPresent()) {
 			throw new NotFoundException("Not found entries in HAR");
 		}
 		Iterator entriesJSON = listEntriesTotalOpt.get().iterator();

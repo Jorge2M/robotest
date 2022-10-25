@@ -70,7 +70,7 @@ public class Com001 extends TestBase {
 	
 	private List<GarmentCatalog> getArticlesShop() throws NotFoundException, Exception {
 		Optional<List<GarmentCatalog>> articlesHomeOpt = getArticlesHome();
-		if (articlesHomeOpt.isEmpty()) {
+		if (!articlesHomeOpt.isPresent()) {
 			throw new NotFoundException("Home Garment Not Found");
 		}
 		
@@ -78,7 +78,7 @@ public class Com001 extends TestBase {
 		//confiamos que esté listo el 1-octubre-2022
 		if (!UtilsTest.dateBeforeToday("2022-11-01")) {
 			Optional<List<GarmentCatalog>> articlesIntimissimiOpt = getArticlesIntimissimi();
-			if (articlesIntimissimiOpt.isEmpty()) {
+			if (!articlesIntimissimiOpt.isPresent()) {
 				throw new NotFoundException("Home Garment Not Found");
 			}
 			return Arrays.asList(articlesHomeOpt.get().get(0), articlesIntimissimiOpt.get().get(0));

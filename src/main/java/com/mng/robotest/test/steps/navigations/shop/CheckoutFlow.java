@@ -23,9 +23,9 @@ import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
-import com.mng.robotest.domains.compra.pageobject.DataDireccion;
-import com.mng.robotest.domains.compra.pageobject.Page1EnvioCheckoutMobil;
-import com.mng.robotest.domains.compra.pageobject.DataDireccion.DataDirType;
+import com.mng.robotest.domains.compra.pageobjects.DataDireccion;
+import com.mng.robotest.domains.compra.pageobjects.Page1EnvioCheckoutMobil;
+import com.mng.robotest.domains.compra.pageobjects.DataDireccion.DataDirType;
 import com.mng.robotest.domains.compra.payments.FactoryPagos;
 import com.mng.robotest.domains.compra.payments.PagoSteps;
 import com.mng.robotest.domains.compra.steps.CheckoutSteps;
@@ -373,7 +373,7 @@ public class CheckoutFlow extends StepBase {
 	
 	private TestCaseTM getTestCase() throws NotFoundException {
 		Optional<TestCaseTM> testCaseOpt = TestMaker.getTestCase();
-		if (testCaseOpt.isEmpty()) {
+		if (!testCaseOpt.isPresent()) {
 		  throw new NotFoundException("Not found TestCase");
 		}
 		return testCaseOpt.get();

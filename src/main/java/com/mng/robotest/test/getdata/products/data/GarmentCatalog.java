@@ -29,7 +29,7 @@ public class GarmentCatalog {
 		Article articulo = new Article();
 		articulo.setGarmentId(garmentId);
 		Optional<Color> colorDefaultOpt = getDefaultColor();
-		if (colorDefaultOpt.isEmpty()) {
+		if (!colorDefaultOpt.isPresent()) {
 			return null;
 		}
 		articulo.setColor(colorDefaultOpt.get());

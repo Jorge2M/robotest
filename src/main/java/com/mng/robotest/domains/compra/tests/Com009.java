@@ -4,8 +4,8 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
-import com.mng.robotest.domains.compra.pageobject.DirectionData;
-import com.mng.robotest.domains.compra.pageobject.envio.TipoTransporteEnum.TipoTransporte;
+import com.mng.robotest.domains.compra.pageobjects.DirectionData;
+import com.mng.robotest.domains.compra.pageobjects.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.domains.compra.steps.ModalDirecEnvioNewSteps;
 import com.mng.robotest.domains.compra.steps.ModalMultidirectionSteps;

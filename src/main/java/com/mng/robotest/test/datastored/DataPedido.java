@@ -1,6 +1,6 @@
 package com.mng.robotest.test.datastored;
 
-import com.mng.robotest.domains.compra.pageobject.envio.TipoTransporteEnum.TipoTransporte;
+import com.mng.robotest.domains.compra.pageobjects.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.domains.compra.steps.envio.DataDeliveryPoint;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
