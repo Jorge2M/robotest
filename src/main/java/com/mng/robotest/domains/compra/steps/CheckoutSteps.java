@@ -93,7 +93,7 @@ public class CheckoutSteps extends StepBase {
 		expected=
 			"Aparece modal multidirección (usr logado) o " + 
 			"introducción de la dirección de envío (usr express)")
-	public void clickEditarDirecEnvio() throws Exception {
+	public void clickEditarDirecEnvio() {
 		pageCheckoutWrapper.clickEditDirecEnvio();
 		if (!dataTest.isUserRegistered()) {
 			modalDirecEnvioSteps.validateIsOk();

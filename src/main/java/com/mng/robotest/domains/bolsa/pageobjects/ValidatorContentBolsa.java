@@ -62,13 +62,12 @@ public class ValidatorContentBolsa extends PageBase {
 		}
 		
 		for (DataArtBolsa typeDataToMatch : listDataToMatch) {
-			if (DataArtBolsa.getValuesValidForChannel(channel).contains(typeDataToMatch))
-				if (articleInScreenMatchArticleData(articleExpected, articuloScreen, typeDataToMatch)) {
-					return true;
-				}
+			if (DataArtBolsa.getValuesValidForChannel(channel).contains(typeDataToMatch) &&
+			    articleInScreenMatchArticleData(articleExpected, articuloScreen, typeDataToMatch)) {
+				return true;
+			}
 		}
-		
-		return true;
+		return false;
 	}
 
 	@SuppressWarnings("incomplete-switch")

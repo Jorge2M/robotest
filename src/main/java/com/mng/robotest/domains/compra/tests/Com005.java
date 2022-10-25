@@ -37,7 +37,7 @@ public class Com005 extends TestBase {
 		return dataPago;
 	}
 
-	private void goToPortada() throws Exception {
+	private void goToPortada() {
 		new NavigationsSteps().gotoPortada();
 	}
 

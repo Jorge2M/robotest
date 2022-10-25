@@ -75,19 +75,17 @@ public class ListPagosEspana implements Serializable {
 		List<Pago> listPagosToTest = espana.getListPagosForTest(app, false);
 		boolean usrRegIntermitente = true;
 		for (Pago pago : listPagosToTest) {
-			if (pago.isNeededTestPasarelaDependingFilter(channel, app, ctx)) {
-				if (pago.getTestpago()!=null && "s".compareTo(pago.getTestpago())==0) {
-					if ("VISA".compareTo(pago.getNombre())==0) {
-						createTestPago(listTests, espana, castellano, pago, app, channel, !USR_REG, !EMPLEADO, TEST_VALE, MANY_ARTICLES, !ANUL_PEDIDO, prioridad);
-						createTestPago(listTests, espana, castellano, pago, app, channel, USR_REG, !EMPLEADO, !TEST_VALE, !MANY_ARTICLES, !ANUL_PEDIDO, prioridad);
-						createTestPago(listTests, espana, castellano, pago, app, channel, USR_REG, EMPLEADO, !TEST_VALE, !MANY_ARTICLES, !ANUL_PEDIDO, prioridad);
-					} else {
-						createTestPago(listTests, espana, castellano, pago, app, channel, usrRegIntermitente, !EMPLEADO, !TEST_VALE, !MANY_ARTICLES, !ANUL_PEDIDO, prioridad);
-						usrRegIntermitente=!usrRegIntermitente; //Iremos alternando entre usr registrado y no-registrado
-					}
-					
-					prioridad+=1;
+			if (pago.isNeededTestPasarelaDependingFilter(channel, app, ctx) &&
+				pago.getTestpago()!=null && "s".compareTo(pago.getTestpago())==0) {
+				if ("VISA".compareTo(pago.getNombre())==0) {
+					createTestPago(listTests, espana, castellano, pago, app, channel, !USR_REG, !EMPLEADO, TEST_VALE, MANY_ARTICLES, !ANUL_PEDIDO, prioridad);
+					createTestPago(listTests, espana, castellano, pago, app, channel, USR_REG, !EMPLEADO, !TEST_VALE, !MANY_ARTICLES, !ANUL_PEDIDO, prioridad);
+					createTestPago(listTests, espana, castellano, pago, app, channel, USR_REG, EMPLEADO, !TEST_VALE, !MANY_ARTICLES, !ANUL_PEDIDO, prioridad);
+				} else {
+					createTestPago(listTests, espana, castellano, pago, app, channel, usrRegIntermitente, !EMPLEADO, !TEST_VALE, !MANY_ARTICLES, !ANUL_PEDIDO, prioridad);
+					usrRegIntermitente=!usrRegIntermitente; //Iremos alternando entre usr registrado y no-registrado
 				}
+				prioridad+=1;
 			}
 		}		
 	}
@@ -96,13 +94,11 @@ public class ListPagosEspana implements Serializable {
 		//Creamos sólo 1 test para el pago VISA-Francia
 		List<Pago> listPagosToTest = francia.getListPagosForTest(app, false);
 		for (Pago pago : listPagosToTest) {
-			if (pago.isNeededTestPasarelaDependingFilter(channel, app, ctx)) {
-				if (pago.getTestpago()!=null && "s".compareTo(pago.getTestpago())==0) {
-					if ("VISA".compareTo(pago.getNombre())==0) {
-						createTestPago(listTests, francia, frances, pago, app, channel, !USR_REG, !EMPLEADO, !TEST_VALE, !TWO_ARTICLES, ANUL_PEDIDO, 1);
-						break;
-					}
-				}
+			if (pago.isNeededTestPasarelaDependingFilter(channel, app, ctx) &&
+				pago.getTestpago()!=null && "s".compareTo(pago.getTestpago())==0 &&
+				"VISA".compareTo(pago.getNombre())==0) {
+					createTestPago(listTests, francia, frances, pago, app, channel, !USR_REG, !EMPLEADO, !TEST_VALE, !TWO_ARTICLES, ANUL_PEDIDO, 1);
+					break;
 			}
 		}		
 	}
@@ -110,11 +106,10 @@ public class ListPagosEspana implements Serializable {
 	private void createTestPagosVotf(List<Object> listTests, AppEcom app, Channel channel, ITestContext ctx) {
 		List<Pago> listPagosToTest = espana.getListPagosForTest(app, false/*isEmpl*/);
 		for (Pago pago : listPagosToTest) {
-			if (pago.isNeededTestPasarelaDependingFilter(channel, app, ctx)) {
-				if (pago.getTestpago()!=null && "s".compareTo(pago.getTestpago())==0) {
-					createTestPago(listTests, espana, castellano, pago, app, channel, !USR_REG, !EMPLEADO, !TEST_VALE, TWO_ARTICLES, !ANUL_PEDIDO, 1);
-					break;
-				}
+			if (pago.isNeededTestPasarelaDependingFilter(channel, app, ctx) &&
+				pago.getTestpago()!=null && "s".compareTo(pago.getTestpago())==0) {
+				createTestPago(listTests, espana, castellano, pago, app, channel, !USR_REG, !EMPLEADO, !TEST_VALE, TWO_ARTICLES, !ANUL_PEDIDO, 1);
+				break;
 			}
 		}		
 	}

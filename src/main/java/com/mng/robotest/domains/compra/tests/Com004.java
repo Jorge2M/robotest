@@ -51,7 +51,7 @@ public class Com004 extends TestBase {
 		new SecBolsaSteps().clear();
 	}
 	
-	private void selectFooterLinkChequeRegalo() throws Exception {
+	private void selectFooterLinkChequeRegalo() {
 		new MenuSteps().clickLinea(she);
 		new SecFooterSteps().clickLinkFooter(FooterLink.CHEQUE_REGALO, false);
 	}	

@@ -366,7 +366,7 @@ public class PageCheckoutWrapper extends PageBase {
 		return (page1DktopCheckout.getTextDireccionEnvioCompleta());
 	}
 	
-	public void getDataPedidoFromCheckout(DataPedido dataPedido) throws Exception {
+	public void getDataPedidoFromCheckout(DataPedido dataPedido) {
 		String direcEnvio = getTextDireccionEnvioCompleta();
 		if ("".compareTo(direcEnvio)!=0) {
 			dataPedido.setDireccionEnvio(direcEnvio);

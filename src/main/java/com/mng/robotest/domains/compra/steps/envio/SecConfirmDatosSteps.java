@@ -24,12 +24,11 @@ public class SecConfirmDatosSteps extends StepBase {
 		return (secConfirmDatos.isVisibleUntil(seconds));
 	}
 	
-	public void setDataIfNeeded() throws Exception {
+	public void setDataIfNeeded() {
 		String codigoPais = dataTest.getCodigoPais();
-		if (PaisShop.DEUTSCHLAND == PaisShop.getPais(codigoPais)) {
-			if (secConfirmDatos.isVisibleInputPostNumberIdDeutschland()) {
-				inputPostNumberId("0038594352");
-			}
+		if (PaisShop.DEUTSCHLAND == PaisShop.getPais(codigoPais) &&
+			secConfirmDatos.isVisibleInputPostNumberIdDeutschland()) {
+			inputPostNumberId("0038594352");
 		}
 	}
 	

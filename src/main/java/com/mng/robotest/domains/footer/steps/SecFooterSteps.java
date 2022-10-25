@@ -57,11 +57,10 @@ public class SecFooterSteps extends StepBase {
 			}
 		}
 		finally {
-			if (typeFooter.pageInNewTab()) {
-				if (closeAtEnd && newWindowInNewTab) {
-					driver.close();
-					driver.switchTo().window(windowFatherHandle);
-				}
+			if (typeFooter.pageInNewTab() &&
+				closeAtEnd && newWindowInNewTab) {
+				driver.close();
+				driver.switchTo().window(windowFatherHandle);
 			}
 		}		
 		
@@ -90,7 +89,7 @@ public class SecFooterSteps extends StepBase {
 	 @Step (
 		description="Hacer click en el cuadro de suscripción del footer",
 		expected="Aparecen los textos legales de RGPD")
-	public void validaRGPDFooter(Boolean clickRegister) throws Exception {
+	public void validaRGPDFooter(Boolean clickRegister) {
 		if (!clickRegister) {
 			SecCabecera.getNew(channel, app).clickLogoMango();
 		}

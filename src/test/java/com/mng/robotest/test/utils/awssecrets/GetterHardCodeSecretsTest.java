@@ -21,9 +21,9 @@ public class GetterHardCodeSecretsTest {
 		Secret secret = getterSecrets.getCredentials(SecretType.SHOP_PERFORMANCE_USER);
 		
 		assertNull(secret.getNif());
-		assertEquals(secret.getUser(), "test.performance01@mango.com");
-		assertEquals(secret.getPassword(), "mango457");
-		assertEquals(secret.getType(), "SHOP_PERFORMANCE_USER");
+		assertEquals("test.performance01@mango.com", secret.getUser());
+		assertEquals("mango457", secret.getPassword());
+		assertEquals("SHOP_PERFORMANCE_USER", secret.getType());
 	}
 	
 	@Test
@@ -31,9 +31,9 @@ public class GetterHardCodeSecretsTest {
 		Secret secret = getterSecrets.getCredentials(SecretType.SHOP_STANDARD_USER);
 		
 		assertNull(secret.getNif());
-		assertEquals(secret.getUser(), "ticket_digital_es@mango.com");
-		assertEquals(secret.getPassword(), "mango457");
-		assertEquals(secret.getType(), "SHOP_STANDARD_USER");
+		assertEquals("ticket_digital_es@mango.com", secret.getUser());
+		assertEquals("mango457", secret.getPassword());
+		assertEquals("SHOP_STANDARD_USER", secret.getType());
 	}
 	
 	@Test
@@ -41,8 +41,8 @@ public class GetterHardCodeSecretsTest {
 		Secret secret = getterSecrets.getCredentials(SecretType.EMPLOYEE_DATA);
 		
 		assertNull(secret.getPassword());
-		assertEquals(secret.getType(), "EMPLOYEE_DATA");
-		assertEquals(secret.getNif(), "32070858A");
+		assertEquals("EMPLOYEE_DATA", secret.getType());
+		assertEquals("32070858A", secret.getNif());
 	}
 	
 	@Test

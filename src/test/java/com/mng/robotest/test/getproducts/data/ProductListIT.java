@@ -18,6 +18,6 @@ public class ProductListIT {
 		String stockId = productList.getStockId();
 		
 		//Then
-		assertEquals(stockId, "001.ES.0.false.false.v7");
+		assertEquals("001.ES.0.false.false.v7", stockId);
 	}
 }

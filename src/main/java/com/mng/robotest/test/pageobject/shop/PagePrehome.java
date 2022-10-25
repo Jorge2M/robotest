@@ -233,7 +233,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 //		modalSetCookiesSteps.saveConfiguration();
 //	}
 	
-	public void selecPaisIdiomaYAccede() throws Exception {
+	public void selecPaisIdiomaYAccede() {
 		selecionPais();
 		selecionIdiomaAndEnter();
 	}

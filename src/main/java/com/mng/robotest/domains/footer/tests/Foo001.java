@@ -18,7 +18,7 @@ public class Foo001 extends TestBase {
 		checkLinksSelection();		
 	}
 
-	private void checkLinksSelection() throws Exception {
+	private void checkLinksSelection() {
 		String urlInitialPage = driver.getCurrentUrl();
 		List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinksFiltered(app, channel);
 		for (FooterLink footerLinkToValidate : listFooterLinksToValidate) {

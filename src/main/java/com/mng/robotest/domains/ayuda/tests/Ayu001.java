@@ -16,7 +16,7 @@ public class Ayu001 extends TestBase {
 		checkAyuda();
 	}
 	
-	private void checkAyuda() throws Exception {
+	private void checkAyuda() {
 		secFooterSteps.clickLinkFooter(SecFooter.FooterLink.AYUDA, false);
 		ayudaSteps.clickIcon("Devoluciones, cambios y reembolsos");
 		String question = "¿Cómo puedo cambiar o devolver una compra online de artículos Mango?";

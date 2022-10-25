@@ -22,7 +22,7 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 	@Step (
 		description="Seleccionamos el aspa del modal para cerrarlo", 
 		expected="El modal queda en estado No-visible")
-	public void clickAspaForClose() throws Exception {
+	public void clickAspaForClose() {
 		modalArticleNotAvailable.clickAspaForClose();
 		validateState(1, StateModal.notvisible);
 	}

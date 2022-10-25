@@ -18,7 +18,6 @@ import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroIniOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroIniStepsOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroInitialShopSteps;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
@@ -76,7 +75,7 @@ public class SecMenusUserSteps extends StepBase {
 		return (userMenus.isMenuInStateUntil(INICIAR_SESION, Present, seconds));
 	}
 	
-	public void logoffLogin(String userConnect, String userPassword) throws Exception {
+	public void logoffLogin(String userConnect, String userPassword) {
 		logoff();
 		identification(userConnect, userPassword);
 	}
@@ -110,7 +109,7 @@ public class SecMenusUserSteps extends StepBase {
 			if (isVisibleLinkCerrarSesionExceptionSafe()) {
 				return true;
 			}
-			PageBase.waitMillis(1000);
+			waitMillis(1000);
 		}
 		return false;
 	}

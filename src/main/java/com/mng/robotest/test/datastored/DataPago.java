@@ -88,10 +88,9 @@ public class DataPago {
 	
 	public boolean isPaymentExecuted(Pago pago) {
 		for (DataPedido dataPedido : listPedidos) {
-			if (dataPedido.getPago()==pago) {
-				if ("".compareTo(dataPedido.getCodpedido())!=0) {
-					return true;
-				}
+			if (dataPedido.getPago()==pago &&
+				"".compareTo(dataPedido.getCodpedido())!=0) {
+				return true;
 			}
 		}
 		return false;

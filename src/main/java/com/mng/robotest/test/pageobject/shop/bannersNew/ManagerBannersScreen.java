@@ -114,11 +114,10 @@ public class ManagerBannersScreen extends PageBase {
 		DataBanner dataBannerAnt = null;
 		for (DataBanner dataBanner : listDataBannersOrderedByPosition) {
 			dataBanner.setPosition(position++);
-			if (dataBannerAnt!=null) {
-				if (dataBanner.isOverlayedWith(dataBannerAnt)) {
-					dataBanner.isOverlayed=true;
-					dataBannerAnt.isOverlayed=true;
-				}
+			if (dataBannerAnt!=null &&
+				dataBanner.isOverlayedWith(dataBannerAnt)) {
+				dataBanner.isOverlayed=true;
+				dataBannerAnt.isOverlayed=true;
 			}
 			dataBannerAnt = dataBanner;
 		}
@@ -134,7 +133,7 @@ public class ManagerBannersScreen extends PageBase {
 		return manager.existBanners();
 	}
 	
-	public void clickBannerAndWaitLoad(int posBanner) throws Exception {
+	public void clickBannerAndWaitLoad(int posBanner) {
 		DataBanner dataBanner = getBanner(posBanner);
 		clickBannerAndWaitLoad(dataBanner);
 	}

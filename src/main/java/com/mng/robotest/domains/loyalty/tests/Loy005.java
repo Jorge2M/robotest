@@ -60,7 +60,7 @@ public class Loy005 extends TestBase {
 		PageHomeLikesSteps.checkRegalarPointsOk(dataPoints);
 	}
 
-	private int clickMangoLikesYou() throws Exception {
+	private int clickMangoLikesYou() {
 		return LoyaltyCommons.clickMangoLikesYou(channel, app);
 	}
 	

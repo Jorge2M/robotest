@@ -63,7 +63,7 @@ public abstract class StepBase extends PageBase {
 		new MenuSteps().clickSubMenu(menu);
 	}
 	
-	protected void filterGaleryByColor(MenuItem menu, Color color) throws Exception {
+	protected void filterGaleryByColor(MenuItem menu, Color color) {
 		filterGaleryByColors(menu, Arrays.asList(color));
 	}
 	protected void filterGaleryByColors(MenuItem menu, List<Color> colors) {

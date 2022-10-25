@@ -29,7 +29,7 @@ public class PageGestorSaldosTPVSteps {
 		description="Introducimos una TPV válida y damos click a \"Consultar Saldos\"",
 		expected="Muestra la tabla de saldos con el ID de la TPV en ella",
 		saveErrorData=SaveWhen.Never)
-	public static void searchValidTPV(String tpv, WebDriver driver) throws Exception {
+	public static void searchValidTPV(String tpv, WebDriver driver) {
 		PageGestorSaldosTPV.insertTPVAndClickConsultarSaldos(tpv, driver);
 		checkAfterConsultSaldosTpv(tpv, driver);
 	}
@@ -50,7 +50,7 @@ public class PageGestorSaldosTPVSteps {
 		description="Introducimos una TPV no válida y damos click a \"Consultar Saldos\"",
 		expected="Muestra el mensaje conforme la TPV no existe",
 		saveErrorData=SaveWhen.Never)
-	public static void searchUnvalidTPV(String tpv, WebDriver driver) throws Exception {
+	public static void searchUnvalidTPV(String tpv, WebDriver driver) {
 		PageGestorSaldosTPV.insertTPVAndClickConsultarSaldos(tpv, driver);
 		checkIsVisibleMsgTpvSelectedNotExists(driver);
 	}

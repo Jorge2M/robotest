@@ -11,11 +11,11 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.registro.beans.DataRegistro;
 import com.mng.robotest.domains.registro.beans.ListDataRegistro;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroIniOutlet;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.utils.UtilsTest;
+
 
 public class PageRegistroIniStepsOutlet extends StepBase {
 	
@@ -94,7 +94,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 		description="Seleccionar el botón <b>Regístrate</b>")
 	public void clickRegistrateButton(Map<String,String> dataRegistro, ErrorRegister errorExpected) {
 		pageRegistroIni.clickButtonRegistrate();
-		PageBase.waitMillis(1000);
+		waitMillis(1000);
 		validaIsInvisibleCapaLoading(15);
 		
 		switch (errorExpected) {

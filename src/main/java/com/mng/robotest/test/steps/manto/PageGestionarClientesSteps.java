@@ -37,7 +37,7 @@ public class PageGestionarClientesSteps {
 		expected="Aparece una lista de clientes válida",
 		saveErrorData=SaveWhen.Never,
 		saveImagePage=SaveWhen.Always)
-	public void inputDniAndClickBuscar(String dni) throws Exception {
+	public void inputDniAndClickBuscar(String dni) {
 		pageGestionarClientes.inputDniAndClickBuscarButton(dni, 20);	 
 		checkAfterSearchByDni(dni);
 	}

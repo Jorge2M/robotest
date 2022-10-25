@@ -35,10 +35,9 @@ public class BannerHeadGallerySteps {
 
 	public void validateBannerSuperiorIfExistsDesktop() {
 		boolean bannerIsVisible = secBannerHeadDesktop.isVisible();
-		if (bannerIsVisible) {
-			if (!secBannerHeadDesktop.isBannerWithoutTextAccesible()) {
-				checkBannerContainsSomeText();
-			}
+		if (bannerIsVisible &&
+			!secBannerHeadDesktop.isBannerWithoutTextAccesible()) {
+			checkBannerContainsSomeText();
 		}
 	}
 

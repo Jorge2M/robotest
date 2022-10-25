@@ -17,7 +17,7 @@ public class WebDriverMngUtils {
 	public static String getNodeFromErrorPage(final WebDriver driver) throws Exception {
 
 		//Cargamos la página errorPage en una pestaña aparte y nos posicionamos en ella 
-		String windowHandle = ErrorStorer.loadErrorPage(driver);
+		String windowHandle = new ErrorStorer().loadErrorPage();
 		String nodo = "";
 		
 		try {
@@ -64,7 +64,7 @@ public class WebDriverMngUtils {
 	 */
 	public static String getStackTraceFromErrorPage(final WebDriver driver) throws Exception {
 		//Cargamos la página errorPage en una pestaña aparte y nos posicionamos en ella 
-		String windowHandle = ErrorStorer.loadErrorPage(driver);
+		String windowHandle = new ErrorStorer().loadErrorPage();
 		String stackTrace = "";
 		
 		try {

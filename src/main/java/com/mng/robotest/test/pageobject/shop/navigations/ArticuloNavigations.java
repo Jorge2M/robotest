@@ -13,9 +13,6 @@ import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 
 public class ArticuloNavigations {
 
-	/**
-	 * Selecciona un artículo disponible a partir de su referencia (selecciona una talla/color que esté disponible)
-	 */
 	public static ArticuloScreen selectArticuloTallaColorByRef(GarmentCatalog productStock, AppEcom app, Channel channel, WebDriver driver) {
 		ArticuloScreen articulo = new ArticuloScreen();
 
@@ -86,10 +83,9 @@ public class ArticuloNavigations {
 	private static void selectColorIfExists(String colourCode, Channel channel, AppEcom app) {
 		if (colourCode!=null && "".compareTo(colourCode)!=0) {
 			PageFicha pageFicha = PageFicha.of(channel);
-			if (pageFicha.getSecDataProduct().isClickableColor(colourCode)) {
-				if (pageFicha.isPageUntil(5)) {
-					pageFicha.getSecDataProduct().selectColorWaitingForAvailability(colourCode);
-				}
+			if (pageFicha.getSecDataProduct().isClickableColor(colourCode) &&
+				pageFicha.isPageUntil(5)) {
+				pageFicha.getSecDataProduct().selectColorWaitingForAvailability(colourCode);
 			}
 		}
 	}

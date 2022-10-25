@@ -70,7 +70,7 @@ public class ModalDroppoints extends PageBase {
 		return secSelectDPoint.getTypeDeliveryPoint(seconds);
 	}
 	
-	public DataDeliveryPoint clickDeliveryPointAndGetData(int position) throws Exception {
+	public DataDeliveryPoint clickDeliveryPointAndGetData(int position) {
 		return secSelectDPoint.clickDeliveryPointAndGetData(position);
 	}
 	

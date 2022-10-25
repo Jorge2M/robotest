@@ -334,11 +334,12 @@ public class GetterProducts {
 		String body = null;
 		try {
 			PageObjTM.loadUrlInAnotherTabTitle(urlGetProducts, nameTab, driver);
-			if (PageBase.state(State.Visible, By.id("rawdata-tab"), driver).check()) {
-				PageBase.click(By.id("rawdata-tab"), driver).exec();
+			PageBase page = new PageBase(driver);
+			if (page.state(State.Visible, By.id("rawdata-tab")).check()) {
+				page.click(By.id("rawdata-tab")).exec();
 			}
 			By bodyPreBy = By.xpath("//body//pre");
-			if (PageBase.state(State.Present, bodyPreBy, driver).check()) {
+			if (page.state(State.Present, bodyPreBy).check()) {
 				body = driver.findElement(bodyPreBy).getText();
 			}
 		} 

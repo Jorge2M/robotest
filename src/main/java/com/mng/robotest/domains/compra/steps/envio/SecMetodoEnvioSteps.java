@@ -27,10 +27,9 @@ public class SecMetodoEnvioSteps extends StepBase {
 		expected="Se selecciona el método de envío correctamente")
 	public void selectMetodoEnvio(TipoTransporte tipoTransporte, String nombrePago, DataPago dataPago) {
 		secMetodoEnvioDesktop.selectMetodo(tipoTransporte);
-		if (!tipoTransporte.isEntregaDomicilio()) {
-			if (modalDroppoints.isErrorMessageVisibleUntil()) {
-				modalDroppoints.searchAgainByUserCp(dataPago.getDatosRegistro().get("cfCp"));
-			}
+		if (!tipoTransporte.isEntregaDomicilio() &&
+			modalDroppoints.isErrorMessageVisibleUntil()) {
+			modalDroppoints.searchAgainByUserCp(dataPago.getDatosRegistro().get("cfCp"));
 		}
 
 		validaBlockSelectedDesktop(tipoTransporte);

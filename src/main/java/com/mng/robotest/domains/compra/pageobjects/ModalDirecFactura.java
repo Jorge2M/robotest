@@ -11,7 +11,7 @@ public class ModalDirecFactura extends ModalDireccion {
 	private static final String XPATH_FORM_MODAL = "//form[@class[contains(.,'customFormIdFACT')]]";
 	private static final String XPATH_BUTTON_UPDATE = XPATH_FORM_MODAL + "//div[@class[contains(.,'updateButton')]]/input[@type='submit']";
 	
-	public void sendDataToInputs(DataDireccion dataToSend) throws Exception {
+	public void sendDataToInputs(DataDireccion dataToSend) {
 		sendDataToInputs(dataToSend, XPATH_FORM_MODAL);
 	}
 	

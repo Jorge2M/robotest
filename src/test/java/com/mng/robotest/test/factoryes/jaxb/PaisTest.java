@@ -23,9 +23,9 @@ public class PaisTest {
 		List<Pago> pagosForTest = espana.getListPagosForTest(AppEcom.shop, false);
 		
 		//Then
-		assertEquals(pagosForTest.get(0).getNombre(), "VISA");
-		assertEquals(pagosForTest.get(5).getNombre(), "VISA ELECTRON");
-		assertEquals(pagosForTest.size(), 6);
+		assertEquals("VISA", pagosForTest.get(0).getNombre());
+		assertEquals("VISA ELECTRON", pagosForTest.get(5).getNombre());
+		assertEquals(6, pagosForTest.size());
 	}
 
 }

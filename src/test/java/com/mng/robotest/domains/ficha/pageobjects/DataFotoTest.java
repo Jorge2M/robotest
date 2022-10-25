@@ -17,10 +17,10 @@ public class DataFotoTest {
         DataFoto dataFoto = null;
         srcFoto = "//st.mngbcn.com/rcs/pics/static/T2/fotos/S20/21065012_69.jpg?ts=1516296871653&imwidth=1280&imdensity=1";
         dataFoto = new DataFoto(srcFoto);
-        assertEquals(dataFoto.temporada, "2");
-        assertEquals(dataFoto.size, "20");
-        assertEquals(dataFoto.referencia, "21065012");
-        assertEquals(dataFoto.typeImage, TipoImagenProducto.DETALLES);
+        assertEquals("2", dataFoto.temporada);
+        assertEquals("20", dataFoto.size);
+        assertEquals("21065012", dataFoto.referencia);
+        assertEquals(TipoImagenProducto.DETALLES, dataFoto.typeImage);
                 
         srcFoto = "//st.mngbcn.com/rcs/pics/static/T2/fotos/outfit/S20/21065012_69-99999999_01.jpg?ts=1516296871653&imwidth=640&imdensity=1";
         dataFoto = new DataFoto(srcFoto);

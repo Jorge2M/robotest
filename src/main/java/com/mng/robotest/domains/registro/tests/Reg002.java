@@ -8,7 +8,6 @@ import com.mng.robotest.domains.registro.beans.ListDataRegistro.DataRegType;
 import com.mng.robotest.domains.registro.beans.ListDataRegistro.PageData;
 import com.mng.robotest.domains.registro.steps.PageRegistroIniStepsOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroIniStepsOutlet.ErrorRegister;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
@@ -16,6 +15,7 @@ import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.Secret;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
+
 
 public class Reg002 extends TestBase {
 
@@ -64,7 +64,7 @@ public class Reg002 extends TestBase {
 	
 	private void registerWithNonExistentEmail() {
 		driver.navigate().refresh();
-		PageBase.waitMillis(1000);
+		waitMillis(1000);
 		ListDataRegistro dataToSend = new ListDataRegistro(); 
 		dataToSend.add(DataRegType.NAME, "Jorge", true);
 		dataToSend.add(DataRegType.APELLIDOS, "Muñoz Martínez", true);
@@ -80,7 +80,7 @@ public class Reg002 extends TestBase {
 
 	private void registerWithExistentEmail() {
 		driver.navigate().refresh();
-		PageBase.waitMillis(1000);
+		waitMillis(1000);
 		ListDataRegistro dataToSend = new ListDataRegistro(); 
 		dataToSend.add(DataRegType.NAME, "Jorge", true);
 		dataToSend.add(DataRegType.APELLIDOS, "Muñoz Martínez", true);

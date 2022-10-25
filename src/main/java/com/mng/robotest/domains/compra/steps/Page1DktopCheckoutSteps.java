@@ -24,7 +24,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	private final Page1DktopCheckout page1DktopCheckout = new Page1DktopCheckout();
 	
 	@Validation
-	public ChecksTM validateIsPageOK() throws Exception {
+	public ChecksTM validateIsPageOK() {
 		ChecksTM checks = ChecksTM.getNew();
 		int seconds = 5;
 		boolean isPageInitCheckout = page1DktopCheckout.isPageUntil(seconds);
@@ -67,7 +67,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	}
 	
 	@Validation
-	public ChecksTM validaResultImputPromoEmpl() throws Exception {
+	public ChecksTM validaResultImputPromoEmpl() {
 		ChecksTM checks = ChecksTM.getNew();
 		int seconds = 5;
 	 	checks.add(
@@ -127,7 +127,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	}
 	
 	@Validation
-	private ChecksTM checkValeDiscountIsCorrect(ValeDiscount valePais) throws Exception {
+	private ChecksTM checkValeDiscountIsCorrect(ValeDiscount valePais) {
 		ChecksTM checks = ChecksTM.getNew();
 		Descuento descuento = new Descuento(valePais.getPorcDescuento(), app);
 	 	checks.add(
@@ -141,7 +141,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	@Step (
 		description="Si existe -> seleccionar el link \"Eliminar\" asociado al vale", 
 		expected="El vale desaparece")
-	public void clearValeIfLinkExists() throws Exception {
+	public void clearValeIfLinkExists() {
 		new PageCheckoutWrapper().clickEliminarValeIfExists();
 		checkIsVisibleInputVale(1);
 	}

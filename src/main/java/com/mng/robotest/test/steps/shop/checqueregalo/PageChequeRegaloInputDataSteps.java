@@ -55,7 +55,7 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 		return pageNew.isVisibleCvv(seconds);
 	}
 
-	public void insertCVVConsultaSaldo(String cvvNumber) throws Exception {
+	public void insertCVVConsultaSaldo(String cvvNumber) {
 		consultarSaldoTarjeta(cvvNumber);
 		backToInitPageChequeRegalo();
 	}

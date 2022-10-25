@@ -18,7 +18,7 @@ public class PageHomeMarcasSteps extends StepBase {
 	
 	public enum TypeHome { MULTIMARCA, PORTADA_LINEA }
 
-	public void validateIsPageWithCorrectLineas() throws Exception {
+	public void validateIsPageWithCorrectLineas() {
 		new AllPagesSteps().validateMainContentPais();
 		validateIsPageOk();
 		if (!channel.isDevice()) {

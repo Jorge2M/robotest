@@ -42,11 +42,11 @@ public class PageDevoluciones extends PageBase {
 		}
 		
 		public boolean isPresentLink(WebDriver driver) {
-			return (PageBase.state(Present, By.xpath(this.xpathLink), driver).check());
+			return state(Present, By.xpath(this.xpathLink), driver).check();
 		}
 
 		public void click(WebDriver driver) {
-			PageBase.click(By.xpath(xpathLink), driver).exec();
+			new PageBase(driver).click(By.xpath(xpathLink)).exec();
 		}
 		
 		public void waitForInState(boolean plegada, int seconds, WebDriver driver) {

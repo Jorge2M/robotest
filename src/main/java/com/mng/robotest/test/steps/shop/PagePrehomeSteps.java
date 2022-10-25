@@ -30,7 +30,7 @@ public class PagePrehomeSteps extends StepBase {
 	@Step (
 		description="Acceder a la página de inicio y seleccionar el país <b>#{dataTest.getNombrePais()}</b>",
 		expected="Se selecciona el país/idioma correctamente")
-	public void seleccionPaisIdioma() throws Exception {
+	public void seleccionPaisIdioma() {
 		new AccesoNavigations().goToInitURL();
 		new PageJCAS().identJCASifExists();
 		pagePrehome.selecionPais();

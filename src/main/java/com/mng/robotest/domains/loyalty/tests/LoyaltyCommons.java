@@ -18,8 +18,7 @@ public class LoyaltyCommons {
 		return secMenusUserSteps.clickMenuMangoLikesYou();
 	}
 	
-	public static int addLoyaltyPoints(User user, Channel channel, AppEcom app) 
-			throws Exception {
+	public static int addLoyaltyPoints(User user, Channel channel, AppEcom app) {
 		ClientApiLoyaltyPointsDev client = new ClientApiLoyaltyPointsDev();
 		client.addLoyaltyPoints(user, 25000);
 		return clickMangoLikesYou(channel, app);

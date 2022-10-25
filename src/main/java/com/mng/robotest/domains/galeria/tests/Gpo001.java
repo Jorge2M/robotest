@@ -45,7 +45,7 @@ public class Gpo001 extends TestBase {
 	private void checkScroll() throws Exception {
 		String nameMenuCamisas = FactoryMenus.get(CAMISAS_SHE).getMenu();
 		DataForScrollStep dataScroll = new DataForScrollStep();
-		dataScroll.numPageToScroll = PageGaleriaDesktop.MAX_PAGE_TO_SCROLL;
+		dataScroll.numPageToScroll = PageGaleria.MAX_PAGE_TO_SCROLL;
 		dataScroll.ordenacionExpected = FilterOrdenacion.NOordenado;
 		dataScroll.validateArticlesExpected = false;
 		dataScroll.validaImgBroken = true;

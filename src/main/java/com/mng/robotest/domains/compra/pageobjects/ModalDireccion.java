@@ -46,8 +46,7 @@ public abstract class ModalDireccion extends PageBase {
 		}
 	}
 
-	public void sendDataToInputsNTimes(DataDireccion dataToSend, int nTimes, String xpathFormModal) 
-			throws Exception {
+	public void sendDataToInputsNTimes(DataDireccion dataToSend, int nTimes, String xpathFormModal) {
 		for (int i=0; i<nTimes; i++) {
 			sendDataToInputs(dataToSend, xpathFormModal);
 			waitForPageLoaded(driver);

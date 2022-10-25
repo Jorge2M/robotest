@@ -45,10 +45,9 @@ public class PageTrustpaySelectBank extends PageBase {
 	
 	public void selectBankThatContains(List<String> strContains) {
 		//En el caso de móvil para que aparezca el desplegable se ha de seleccionar el icono del banco
-		if (channel.isDevice()) {
-			if (!state(Visible, XPATH_SELECT_BANCOS).check()) {
-				clickIconoBanco();
-			}
+		if (channel.isDevice() &&
+			!state(Visible, XPATH_SELECT_BANCOS).check()) {
+			clickIconoBanco();
 		}
 		
 	Select selectBank = new Select(getElement(XPATH_SELECT_BANCOS));

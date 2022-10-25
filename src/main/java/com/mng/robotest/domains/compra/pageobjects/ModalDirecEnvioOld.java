@@ -12,7 +12,7 @@ public class ModalDirecEnvioOld extends ModalDireccion {
 		waitLoadPage();
 	}
 
-	public void sendDataToInputs(DataDireccion dataToSend) throws Exception {
+	public void sendDataToInputs(DataDireccion dataToSend) {
 		sendDataToInputs(dataToSend, XPATH_FORM_MODAL);
 	}
 

@@ -48,7 +48,7 @@ public class Fic001 extends TestBase {
 		articleNoOnlineTest();
 	}
 
-	private void articleOnlineTest() throws Exception {
+	private void articleOnlineTest() {
 		new SecBuscadorSteps().searchArticulo(articleOnline.get(), filterOnline);
 		pageFichaSteps.checkLinkDispTiendaInvisible();
 	}

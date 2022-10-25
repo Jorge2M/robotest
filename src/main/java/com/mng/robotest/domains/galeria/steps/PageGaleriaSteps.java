@@ -188,17 +188,17 @@ public class PageGaleriaSteps extends StepBase {
 		}
 		
 		String idPage = pageToScroll + "a";
-		if (pageToScroll>=PageGaleriaDesktop.MAX_PAGE_TO_SCROLL) {
+		if (pageToScroll>=PageGaleria.MAX_PAGE_TO_SCROLL) {
 			idPage = "última";
 		}
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_ID_PAGE, idPage);
 		int numArticulosInicio = pageGaleria.getNumArticulos();
 		datosScroll = pageGaleria.scrollToPageFromFirst(pageToScroll);
 
-		if (pageToScroll>=PageGaleriaDesktop.MAX_PAGE_TO_SCROLL) {
+		if (pageToScroll>=PageGaleria.MAX_PAGE_TO_SCROLL) {
 			checkVisibilityFooter(pageToScroll, app);
 		}
-		if (pageToScroll < PageGaleriaDesktop.MAX_PAGE_TO_SCROLL) {
+		if (pageToScroll < PageGaleria.MAX_PAGE_TO_SCROLL) {
 			checkAreMoreArticlesThatInitially(datosScroll.articulosMostrados, numArticulosInicio);
 		}
 		if (dataForScroll.ordenacionExpected != FilterOrdenacion.NOordenado) {

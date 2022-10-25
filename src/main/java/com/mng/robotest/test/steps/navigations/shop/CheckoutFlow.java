@@ -104,10 +104,9 @@ public class CheckoutFlow extends StepBase {
 			testFromIdentificationToMetodosPago();
 		}
 		
-		if (from==From.CHECKOUT || from==From.IDENTIFICATION || from==From.BOLSA || from==From.PREHOME) {
-			if (!pais.getListPagosForTest(app, dataPago.getFTCkout().userIsEmployee).isEmpty()) {
-				checkMetodosPagos(finalCountrys);
-			}
+		if ((from==From.CHECKOUT || from==From.IDENTIFICATION || from==From.BOLSA || from==From.PREHOME) &&
+			(!pais.getListPagosForTest(app, dataPago.getFTCkout().userIsEmployee).isEmpty())) {
+			checkMetodosPagos(finalCountrys);
 		}
 		return dataPago;
 	}

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.domains.galeria.steps.DataForScrollStep;
 import com.mng.robotest.domains.galeria.steps.LocationArticle;
 import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
@@ -42,7 +42,7 @@ public class Gpo004 extends TestBase {
 		scrollToLastAndCheck(articulosTotalesPagina);		
 	}
 
-	private void selectGaleryAndFilterByColor() throws Exception {
+	private void selectGaleryAndFilterByColor() {
 		if (app==AppEcom.shop) {
 			clickMenu(CAMISAS_SHE);
 		} else {
@@ -72,7 +72,7 @@ public class Gpo004 extends TestBase {
 	}
 
 	private int scrollToLastAndSelectArticle() throws Exception {
-		dataScroll.numPageToScroll = PageGaleriaDesktop.MAX_PAGE_TO_SCROLL;
+		dataScroll.numPageToScroll = PageGaleria.MAX_PAGE_TO_SCROLL;
 		DataScroll datosScrollFinalGaleria = pageGaleriaSteps.scrollFromFirstPage(dataScroll);
 		LocationArticle loc1rsArticleLastPage = LocationArticle.getInstanceInPage(datosScrollFinalGaleria.paginaFinal, 1);
 		pageGaleriaSteps.selectArticulo(loc1rsArticleLastPage);

@@ -73,7 +73,7 @@ public class AccesoSteps extends StepBase {
 		}
 	}
 
-	public void validaIdentificacionEnShop() throws Exception {
+	public void validaIdentificacionEnShop() {
 		checkLinksAfterLogin();
 		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(

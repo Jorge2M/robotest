@@ -51,12 +51,10 @@ public class LineaWeb extends PageBase implements LineaActions {
 		}
 		
 		public String getSufixOutlet(Channel channel) {
-			if (this.compareTo(LineaType.she)==0) {
-				if (channel.isDevice()) {
-					return "outlet ";
-				}
+			if (this.compareTo(LineaType.she)==0 &&
+				channel.isDevice()) {
+				return "outlet ";
 			}
-			
 			return this.sufixOutlet;
 		}
 		

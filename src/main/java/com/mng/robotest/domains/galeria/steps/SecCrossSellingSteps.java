@@ -4,22 +4,22 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
-import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
 import com.mng.robotest.domains.galeria.pageobjects.SecCrossSelling;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
+
 
 public class SecCrossSellingSteps extends StepBase {
 
 	private final SecCrossSelling secCrossSelling = new SecCrossSelling();
 	
 	@Validation
-	public ChecksTM validaIsCorrect(LineaType lineaType, SublineaType sublineaType) throws Exception {
+	public ChecksTM validaIsCorrect(LineaType lineaType, SublineaType sublineaType) {
 		ChecksTM checks = ChecksTM.getNew();
 		PageGaleria pageGaleria = PageGaleria.getNew(channel);
 		if (!secCrossSelling.isSectionVisible()) {
-			pageGaleria.scrollToPageFromFirst(PageGaleriaDesktop.MAX_PAGE_TO_SCROLL);
+			pageGaleria.scrollToPageFromFirst(PageGaleria.MAX_PAGE_TO_SCROLL);
 		}
 		
 		checks.add(

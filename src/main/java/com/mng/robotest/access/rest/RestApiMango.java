@@ -75,10 +75,10 @@ public class RestApiMango extends RestApiTM {
 					@QueryParam("channel") String channelInput,
 					@NotNull
 					@QueryParam("app") String appInput) throws Exception {
-		if (countrysCommaSeparated!=null) {
-			if (!Pattern.matches("(\\d{3},)*\\d{3}", countrysCommaSeparated)) {
+		
+		if (countrysCommaSeparated!=null &&
+		   (!Pattern.matches("(\\d{3},)*\\d{3}", countrysCommaSeparated))) {
 				throw new WebApplicationException("Parameter 'countrys' incorrect", Response.Status.BAD_REQUEST);
-			}
 		} 
 		if (!enumContainsValue(Channel.class, channelInput)) {
 			throw new WebApplicationException("Parameter 'channel' incorrect", Response.Status.BAD_REQUEST);

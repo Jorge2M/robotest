@@ -344,11 +344,10 @@ public enum TipoImagenProducto implements Serializable {
 	 */
 	public static TipoImagenProducto getTipoImagenProductoPanoramica(final String id, final int numColumnas) {
 		TipoImagenProducto tipoImagenProducto = TipoImagenProducto.getTipoImagenFormIdentificador(id);
-		if (tipoImagenProducto != null && tipoImagenProducto.getIdDB() != null) {
-			if (tipoImagenProducto.isTipoOutfit() && numColumnas > 1) {
-				String idDB = tipoImagenProducto.getIdDB();
-				tipoImagenProducto = TipoImagenProducto.getTipoImagenProductoFromIdDB(idDB.substring(0, idDB.length() - 1).concat(String.valueOf(numColumnas)));
-			}
+		if (tipoImagenProducto != null && tipoImagenProducto.getIdDB()!=null &&
+			tipoImagenProducto.isTipoOutfit() && numColumnas > 1) {
+			String idDB = tipoImagenProducto.getIdDB();
+			tipoImagenProducto = TipoImagenProducto.getTipoImagenProductoFromIdDB(idDB.substring(0, idDB.length() - 1).concat(String.valueOf(numColumnas)));
 		}
 		return tipoImagenProducto;
 	}

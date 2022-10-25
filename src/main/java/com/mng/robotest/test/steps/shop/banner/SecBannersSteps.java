@@ -134,7 +134,7 @@ public class SecBannersSteps extends StepBase {
 			"- Ficha<br>" +
 			"- Bloque de contenido con imágenes o página acceso",
 		level=State.Warn)
-	public boolean validacionesBannerEstandar(int seconds, Channel channel, AppEcom app) throws Exception {
+	public boolean validacionesBannerEstandar(int seconds, Channel channel, AppEcom app) {
 		for (int i=0; i<seconds; i++) {
 			if (validacionesBannerEstandar(channel, app)) {
 				return true;
@@ -144,11 +144,10 @@ public class SecBannersSteps extends StepBase {
 	}
 	
 	private boolean validacionesBannerEstandar(Channel channel, AppEcom app) {
-		if (!pageLanding.haySecc_Art_Banners(app)) {
-			if (!pageLanding.hayImgsEnContenido()) {
-				PageFicha pageFicha = PageFicha.of(channel);
-				return pageFicha.isPageUntil(0);
-			}
+		if (!pageLanding.haySecc_Art_Banners(app) &&
+			!pageLanding.hayImgsEnContenido()) {
+			PageFicha pageFicha = PageFicha.of(channel);
+			return pageFicha.isPageUntil(0);
 		}
 		return true; 
 	}

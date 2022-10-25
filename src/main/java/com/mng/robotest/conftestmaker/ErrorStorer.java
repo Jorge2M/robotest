@@ -43,8 +43,8 @@ public class ErrorStorer extends EvidenceStorer {
 		if (driverId.compareTo(EmbeddedDriver.browserstack.name())!=0) {
 			//Cargamos la página errorPage en una pestaña aparte y nos posicionamos en ella
 			//BrowserStack parece que no soporta abrir ventanas aparte
+			String windowHandle = loadErrorPage();
 			WebDriver driver = TestMaker.getDriverTestCase();
-			String windowHandle = loadErrorPage(driver);
 			htmlPageError = driver.getPageSource();
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("window.close('" + Thread.currentThread().getName() + "');");
@@ -57,7 +57,8 @@ public class ErrorStorer extends EvidenceStorer {
 	/**
 	 * Carga la página errorPage.faces en una pestaña aparte y nos devuelve el windowHandle de la pantalla padre
 	 */
-	public static String loadErrorPage(WebDriver driver) throws Exception {
+	public String loadErrorPage() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
 		String currentURL = driver.getCurrentUrl();
 		URI uri = new URI(currentURL);
 		String windowHandle = driver.getWindowHandle();
@@ -67,7 +68,7 @@ public class ErrorStorer extends EvidenceStorer {
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("window.open('" + uri.getScheme() + "://" + uri.getHost() + "/errorPage.faces" + "', '" + titlePant + "');");
 		driver.switchTo().window(titlePant);
-		PageBase.state(State.Present, By.xpath("//*[@class='stackTrace']"), driver).wait(5).check();
+		new PageBase(driver).state(State.Present, By.xpath("//*[@class='stackTrace']")).wait(5).check();
 		driver.getPageSource();
 		return windowHandle;
 	}

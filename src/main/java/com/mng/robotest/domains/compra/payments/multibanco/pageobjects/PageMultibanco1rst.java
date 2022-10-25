@@ -52,10 +52,9 @@ public class PageMultibanco1rst extends PageBase {
 
 	public void continueToNextPage() {
 		//En el caso de móvil hemos de seleccionar el icono de banco para visualizar el botón de continue
-		if (channel.isDevice()) {
-			if (!state(Visible, getXPathButtonContinuePay()).check()) {
+		if (channel.isDevice() &&
+			!state(Visible, getXPathButtonContinuePay()).check()) {
 				clickIconoBanco();
-			}
 		}
 		clickButtonContinuePay();
 	}

@@ -45,10 +45,9 @@ public class PagePaytrail1rst extends PageBase {
 	
 	public void selectBanco(String visibleText) {
 		//En el caso de móvil hemos de seleccionar el icono del banco para visualizar el desplegable
-		if (channel.isDevice()) {
-			if (state(Visible, XPATH_SELECT_BANCOS).check()) {
-				clickIconoBanco();
-			}
+		if (channel.isDevice() &&
+			state(Visible, XPATH_SELECT_BANCOS).check()) {
+			clickIconoBanco();
 		}
 			
 		new Select(getElement(XPATH_SELECT_BANCOS)).selectByVisibleText(visibleText);

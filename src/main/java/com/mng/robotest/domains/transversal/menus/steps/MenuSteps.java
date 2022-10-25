@@ -359,12 +359,9 @@ public class MenuSteps extends StepBase {
 	}
 	
 	private boolean checkLinea(LineaType lineaType, ThreeState stateLinea) {
-		if (lineaType.isActiveIn(channel)) {
-			if (stateLinea!=ThreeState.UNKNOWN) {
-				return true;
-			}
-		}
-		return false;
+		return (
+			lineaType.isActiveIn(channel) &&
+			stateLinea!=ThreeState.UNKNOWN);
 	}
 	
 	private String getInfoError(List<String> articlesNoValid) {

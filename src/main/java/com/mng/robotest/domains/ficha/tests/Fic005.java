@@ -53,7 +53,7 @@ public class Fic005 extends TestBase {
 		modalPersonalizacionSteps.checkCustomizationProof();
 	}
 
-	private void searchAndCheckArticlePersonalizable() throws Exception {
+	private void searchAndCheckArticlePersonalizable() {
 		secBuscadorSteps.searchArticulo(articlePersonalizable);
 		int numColors = pageFichaSteps.getFicha().getNumColors();
 		for (int i=1; i<=numColors; i++) {

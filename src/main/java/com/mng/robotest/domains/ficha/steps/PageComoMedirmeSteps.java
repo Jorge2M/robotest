@@ -13,7 +13,7 @@ public class PageComoMedirmeSteps extends StepBase {
 	@Validation (
 		description="Aparece la página de <b>Cómo medirme</b> en una nueva pestaña",
 		level=State.Warn)
-	public boolean isPageInNewTab() throws Exception {
+	public boolean isPageInNewTab() {
 		return (pageComoMedirme.goToPageInNewTabCheckAndClose());
 	}
 }

@@ -18,7 +18,7 @@ public class ClientApiLoyaltyPointsDevIT {
 	public void testGetIdConsumer() throws Exception {
 		ClientApiLoyaltyPointsDev client = new ClientApiLoyaltyPointsDev();
 		String idConsumer = client.getContactIdConsumer("test.performance10@mango.com");
-		assertEquals(idConsumer, "6875476978994042958");
+		assertEquals("6875476978994042958", idConsumer);
 	}
 	
 	//@Ignore
