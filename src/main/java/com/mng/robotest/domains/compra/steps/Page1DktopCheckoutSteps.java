@@ -101,7 +101,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 		description="Introducir el vale <b style=\"color:blue;\">#{valePais.getCodigoVale()}</b> y pulsar el botón \"CONFIRMAR\"", 
 		expected="Aparece la página de resumen de artículos con los descuentos correctamente aplicados",
 		saveNettraffic=SaveWhen.Always)
-	public void inputValeDescuento(ValeDiscount valePais) throws Exception { 
+	public void inputValeDescuento(ValeDiscount valePais) { 
 		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
 		pageCheckoutWrapper.inputCodigoPromoAndAccept(valePais.getCodigoVale());
 		dataTest.getDataBag().setImporteTotal(pageCheckoutWrapper.getPrecioTotalFromResumen(true));	

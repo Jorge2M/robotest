@@ -409,7 +409,7 @@ public class CheckoutFlow extends StepBase {
 	 *	 Desktop: simplemente se selecciona el botón "Confirmar Compra"
 	 *	 Movil  : se selecciona los botones "Ver resumen" y "Confirmación del pago)
 	 */
-	private void aceptarCompraDesdeMetodosPago() throws Exception {
+	private void aceptarCompraDesdeMetodosPago() {
 		DataPedido dataPedido = dataPago.getDataPedido();
 		dataPedido.setCodtipopago("R");
 		if (channel!=Channel.mobile) {

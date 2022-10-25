@@ -104,13 +104,13 @@ public class Reg003 extends TestBase {
 		pageRegistroDirecSteps.clickFinalizarButton();
 	}
 	
-	private void goToShopping() throws Exception {
+	private void goToShopping() {
 		pageRegistroFinSteps.clickIrDeShoppingButton();
 		secCabeceraSteps.selecLogo();
 		new SecFooterSteps().validaRGPDFooter(version.register());
 	}
 	
-	private void loginAfterRegister() throws Exception {
+	private void loginAfterRegister() {
 		String emailUsr = dataRegister.get("cfEmail");
 		String password = dataRegister.get("cfPass");
 		userMenusSteps.logoffLogin(emailUsr, password);

@@ -7,7 +7,7 @@ public class ModalDirecEnvioOld extends ModalDireccion {
 	private static final String XPATH_FORM_MODAL = "//form[@class[contains(.,'customFormIdENVIO')]]";
 	private static final String XPATH_BUTTON_UPDATE = XPATH_FORM_MODAL + "//div[@class[contains(.,'updateButton')]]/*[@class[contains(.,'modalConfirmar')]]";
 
-	public void sendDataToInputsNTimesAndWait(DataDireccion dataToSend, int nTimes) throws Exception {
+	public void sendDataToInputsNTimesAndWait(DataDireccion dataToSend, int nTimes) {
 		sendDataToInputsNTimes(dataToSend, nTimes, XPATH_FORM_MODAL);
 		waitLoadPage();
 	}

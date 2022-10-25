@@ -21,7 +21,7 @@ public class ModalDirecEnvioNewSteps extends StepBase {
 	@Step (
 		description="Introducir los datos y pulsar \"Guardar\"<br>#{direction.getFormattedHTMLData()}", 
 		expected="Los datos se añaden correctamente")
-	public void inputDataAndSave(DirectionData direction) throws Exception {
+	public void inputDataAndSave(DirectionData direction) {
 		modalDirecEnvio.inputData(direction);
 		modalDirecEnvio.clickSaveButton();
 		new CheckoutSteps().clickEditarDirecEnvio();
@@ -30,7 +30,7 @@ public class ModalDirecEnvioNewSteps extends StepBase {
 	@Step (
 		description="Editar los datos y pulsar \"Guardar\"<br>#{direction.getFormattedHTMLData()}",
 		expected="Los datos se actualizan correctamente")
-	public void inputDataAndEdit(DirectionData direction) throws Exception {
+	public void inputDataAndEdit(DirectionData direction) {
 		modalDirecEnvio.inputDataEdit(direction);
 		modalDirecEnvio.clickSaveButton();
 		if (channel.isDevice()) {
@@ -57,7 +57,7 @@ public class ModalDirecEnvioNewSteps extends StepBase {
 	@Step (
 		description="Clickar el botón <b>Eliminar</b> del modal de confirmación", 
 		expected="La dirección se elimina")
-	public void confirmEliminarDirection(String address) throws Exception {
+	public void confirmEliminarDirection(String address) {
 		modalDirecEnvio.clickConfirmEliminarButton();
 		new CheckoutSteps().clickEditarDirecEnvio();
 		new ModalMultidirectionSteps().checkAddressNotExists(address);

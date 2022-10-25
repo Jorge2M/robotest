@@ -56,7 +56,7 @@ public class Com004 extends TestBase {
 		new SecFooterSteps().clickLinkFooter(FooterLink.CHEQUE_REGALO, false);
 	}	
 	
-	private void inputDataChequeRegalo() throws Exception {
+	private void inputDataChequeRegalo() {
 		if(channel.isDevice()){
 			String nTarjeta = "100000040043";
 			String cvvTarjeta = "618";

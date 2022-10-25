@@ -41,7 +41,7 @@ public class Com005 extends TestBase {
 		new NavigationsSteps().gotoPortada();
 	}
 
-	private void loginWithNewUser(String usrEmail, String password) throws Exception {
+	private void loginWithNewUser(String usrEmail, String password) {
 		new SecMenusUserSteps().logoffLogin(usrEmail, password);
 	}	
 	

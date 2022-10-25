@@ -362,7 +362,7 @@ public class PageFichaSteps extends StepBase {
 	@Step (
 		description="Si está visible, Seleccionar el link \"<b>Guía de tallas</b>\"",
 		expected="Aparece la página asociada a la guía de tallas")
-	public void selectGuiaDeTallas(AppEcom app) throws Exception {
+	public void selectGuiaDeTallas(AppEcom app) {
 		boolean isVisibleLink = pageFicha.getSecDataProduct().selectGuiaDeTallasIfVisible();
 		if (isVisibleLink) {
 			switch (app) {

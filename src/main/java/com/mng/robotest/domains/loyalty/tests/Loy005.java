@@ -64,7 +64,7 @@ public class Loy005 extends TestBase {
 		return LoyaltyCommons.clickMangoLikesYou(channel, app);
 	}
 	
-	private int givePoints(int pointsRegalar, int iniPointsEmisor) throws Exception {
+	private int givePoints(int pointsRegalar, int iniPointsEmisor) {
 		if (iniPointsEmisor < pointsRegalar && !isPRO()) {
 			ClientApiLoyaltyPointsDev client = new ClientApiLoyaltyPointsDev();
 			client.addLoyaltyPoints(EMISOR_USER, 25000);
@@ -81,7 +81,7 @@ public class Loy005 extends TestBase {
 		return iniPointsEmisor;
 	}
 	
-	private void login(User user, String password) throws Exception {
+	private void login(User user, String password) {
 		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps();
 		secMenusUserSteps.logoffLogin(user.getEmail(), password);
 	}

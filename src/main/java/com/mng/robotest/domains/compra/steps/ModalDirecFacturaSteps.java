@@ -36,7 +36,7 @@ public class ModalDirecFacturaSteps extends StepBase {
 	@Step (
 		description="Introducir los datos y pulsar \"Actualizar\"<br>#{dataDirFactura.getFormattedHTMLData()}", 
 		expected="Los datos se actualizan correctamente")
-	public void inputDataAndActualizar(DataDireccion dataDirFactura) throws Exception {
+	public void inputDataAndActualizar(DataDireccion dataDirFactura) {
 		modalDirecFactura.sendDataToInputs(dataDirFactura);
 		modalDirecFactura.clickActualizar();
 		checkAfterChangeDireccion();

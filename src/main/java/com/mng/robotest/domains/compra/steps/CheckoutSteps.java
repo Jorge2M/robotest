@@ -75,7 +75,7 @@ public class CheckoutSteps extends StepBase {
 		return modalAvisoCambioPaisSteps;
 	}
 	
-	public void validateIsFirstPage(boolean userLogged) throws Exception {
+	public void validateIsFirstPage(boolean userLogged) {
 		if (channel==Channel.mobile) {
 			page1MobilCheckSteps.validateIsPage(userLogged);
 		} else {
@@ -428,7 +428,7 @@ public class CheckoutSteps extends StepBase {
 		validaResultImputPromoEmpl();
 	}
 		
-	public void validaResultImputPromoEmpl() throws Exception {
+	public void validaResultImputPromoEmpl() {
 		if (channel.isDevice()) {
 			page1MobilCheckSteps.validaResultImputPromoEmpl();
 		} else {

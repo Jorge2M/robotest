@@ -27,7 +27,7 @@ public class PageResultPagoSteps extends StepBase {
 		return (pageResultPago.isVisibleTextoConfirmacionPago(seconds));
 	}
 	
-	public void validateIsPageOk(DataPago dataPago) throws Exception {
+	public void validateIsPageOk(DataPago dataPago) {
 		validateTextConfirmacionPago();
 		validateDataPedido(dataPago);
 		if (dataPago.getFTCkout().checkLoyaltyPoints) {

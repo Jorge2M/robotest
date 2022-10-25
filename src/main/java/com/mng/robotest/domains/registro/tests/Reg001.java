@@ -56,7 +56,7 @@ public class Reg001 extends TestBase {
 		pageRegistroPersonalizacionSteps.clickGuardar();
 	}
 	
-	private void checkLoginAndUserData() throws Exception {
+	private void checkLoginAndUserData() {
 		new SecMenusUserSteps().logoffLogin(dataNewRegister.getEmail(), dataNewRegister.getPassword());
 		PageMiCuentaSteps pageMiCuentaSteps = new PageMiCuentaSteps();
 		pageMiCuentaSteps.goToMisDatosAndValidateData(dataNewRegister);

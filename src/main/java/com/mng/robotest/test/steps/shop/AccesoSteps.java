@@ -148,7 +148,7 @@ public class AccesoSteps extends StepBase {
 		expected="La identificación es correcta",
 		saveHtmlPage=SaveWhen.Always,
 		saveNettraffic=SaveWhen.Always)
-	private void iniciarSesion(DataTest dataTest) throws Exception {
+	private void iniciarSesion(DataTest dataTest) {
 		new PageIdentificacion().iniciarSesion(dataTest.getUserConnected(), dataTest.getPasswordUser());
 		validaIdentificacionEnShop();
 	}

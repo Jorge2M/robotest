@@ -13,7 +13,6 @@ import com.mng.robotest.domains.compra.steps.envio.DataSearchDeliveryPoint.DataS
 import com.mng.robotest.domains.transversal.StepBase;
 
 
-@SuppressWarnings({"static-access"})
 public class SecSelectDPointSteps extends StepBase {
 	
 	private final ModalDroppoints modalDroppoints = new ModalDroppoints();
@@ -71,7 +70,7 @@ public class SecSelectDPointSteps extends StepBase {
 	@Step (
 		description="Clickamos en el <b>#{position}º</b> droppoint", 
 		expected="El droppoint queda seleccionado")
-	public DataDeliveryPoint clickDeliveryPointAndGetData(int position) throws Exception {
+	public DataDeliveryPoint clickDeliveryPointAndGetData(int position) {
 		DataDeliveryPoint dataDpToReturn = modalDroppoints.clickDeliveryPointAndGetData(position);
 		checkIsSelectedDroppoint(position);
 		return dataDpToReturn;

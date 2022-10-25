@@ -340,7 +340,7 @@ public class PageCheckoutWrapper extends PageBase {
 		return (ImporteScreen.getFloatFromImporteMangoScreen(textImporte));
 	}
 	
-	public void confirmarPagoFromMetodos(DataPedido dataPedido) throws Exception {
+	public void confirmarPagoFromMetodos(DataPedido dataPedido) {
 		getDataPedidoFromCheckout(dataPedido);
 		if (channel==Channel.mobile) {
 			page2MobilCheckout.confirmarPagoFromMetodos();
