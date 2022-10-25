@@ -287,7 +287,7 @@ public class CheckoutSteps extends StepBase {
 	@Step (
 		description="Introducimos los datos de la tarjeta (" + TAG_TIPO_TARJ + ") " + TAG_NUM_TARJ + " y pulsamos el botón \"Confirmar pago\"",
 		expected="Aparece la página de resultado OK")
-	public void inputDataTrjAndConfirmPago(DataPago dataPago) throws Exception {
+	public void inputDataTrjAndConfirmPago(DataPago dataPago) {
 		Pago pago = dataPago.getDataPedido().getPago();
 		StepTM step = TestMaker.getCurrentStepInExecution();
 		step.replaceInDescription(TAG_TIPO_TARJ, pago.getTipotarj());
@@ -325,7 +325,7 @@ public class CheckoutSteps extends StepBase {
 	@Step (
 		description="Seleccionamos la tarjeta guardada, si nos lo pide introducimos el cvc #{cvc} y pulsamos el botón \"Confirmar pago\"",
 		expected="Aparece la página de resultado OK")
-	public void selectTrjGuardadaAndConfirmPago(DataPago dataPago, String cvc) throws Exception {
+	public void selectTrjGuardadaAndConfirmPago(DataPago dataPago, String cvc) {
 		pageCheckoutWrapper.clickRadioTrjGuardada();
 		pageCheckoutWrapper.inputCvcTrjGuardadaIfVisible(cvc);
 		pageCheckoutWrapper.confirmarPagoFromMetodos(dataPago.getDataPedido());
@@ -413,7 +413,7 @@ public class CheckoutSteps extends StepBase {
 	@Step (
 		description="Introducir el primer apellido " + TAG_1ER_APELLIDO + " y pulsar el botón \"Guardar\"", 
 		expected="Se aplican los descuentos correctamente")
-	public void inputDataEmplEnPromoAndAccept(AccesoEmpl accesoEmpl) throws Exception {
+	public void inputDataEmplEnPromoAndAccept(AccesoEmpl accesoEmpl) {
 		StepTM step = TestMaker.getCurrentStepInExecution();
 		String primerApellido = (new StringTokenizer(accesoEmpl.getNombre(), " ")).nextToken();
 		step.replaceInDescription(TAG_1ER_APELLIDO, primerApellido);

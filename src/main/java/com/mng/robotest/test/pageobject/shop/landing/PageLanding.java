@@ -11,10 +11,10 @@ import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
 import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.test.pageobject.shop.bannersNew.BannerObject;
-import com.mng.robotest.test.pageobject.shop.bannersNew.BannerObjectFactory;
-import com.mng.robotest.test.pageobject.shop.bannersNew.BannerType;
-import com.mng.robotest.test.pageobject.shop.bannersNew.ManagerBannersScreen;
+import com.mng.robotest.test.pageobject.shop.bannersnew.BannerObject;
+import com.mng.robotest.test.pageobject.shop.bannersnew.BannerObjectFactory;
+import com.mng.robotest.test.pageobject.shop.bannersnew.BannerType;
+import com.mng.robotest.test.pageobject.shop.bannersnew.ManagerBannersScreen;
 import com.mng.robotest.test.pageobject.shop.menus.MenuLateralDesktop.Element;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;

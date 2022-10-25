@@ -274,7 +274,7 @@ public class CheckoutFlow extends StepBase {
 		}
 	}
 	
-	private void testValeDescuento() throws Exception {
+	private void testValeDescuento() {
 		Page1DktopCheckoutSteps page1 = new Page1DktopCheckoutSteps();
 		if ("".compareTo(valeTest.getTextoCheckout())!=0) {
 			page1.checkIsVisibleTextVale(valeTest);

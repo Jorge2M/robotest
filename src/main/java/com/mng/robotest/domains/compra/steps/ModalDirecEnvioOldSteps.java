@@ -32,7 +32,7 @@ public class ModalDirecEnvioOldSteps extends StepBase {
 	@Step (
 		description="Introducir los datos y pulsar \"Guardar\"<br>#{dataDirFactura.getFormattedHTMLData()}", 
 		expected="Los datos se actualizan correctamente")
-	public void inputDataAndActualizar(DataDireccion dataDirFactura) throws Exception {
+	public void inputDataAndActualizar(DataDireccion dataDirFactura) {
 		modalDirecEnvio.sendDataToInputsNTimesAndWait(dataDirFactura, 3);
 		modalDirecEnvio.moveToAndDoubleClickActualizar();
 		checkAfterUpdateData();

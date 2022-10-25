@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.bannersNew;
+package com.mng.robotest.test.pageobject.shop.bannersnew;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -484,6 +484,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		return listResult;
 	}	
 	
+	@Override
 	public void moveToArticleAndGetObject(int posArticulo) {
 		String xpathArticle = getXPathLinkArticulo(posArticulo) + "/..";
 		state(State.Visible, xpathArticle).wait(1).check();

@@ -257,7 +257,7 @@ public class SecBolsaSteps extends StepBase {
 		}
 	}
 
-	public void validaSelectButtonComprar() throws Exception {
+	public void validaSelectButtonComprar() {
 		if (dataTest.isUserRegistered()) {
 			new CheckoutSteps().validateIsFirstPage(dataTest.isUserRegistered());
 		} else {

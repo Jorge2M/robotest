@@ -23,19 +23,20 @@ public class ModalCambioPaisSteps extends StepBase {
 		return modalCambioPais.isVisibleModalUntil(seconds);
 	}
 	
-	static final String tagNombrePais = "@TagNombrePais";
-	static final String tagCodigoPais = "@TagCodigoPais";
-	static final String tagLiteralIdioma = "@TagLiteralIdioma";
+	private static final String TAG_NOMBRE_PAIS = "@TagNombrePais";
+	private static final String TAG_CODIGO_PAIS = "@TagCodigoPais";
+	private static final String TAG_LITERAL_IDIOMA = "@TagLiteralIdioma";
+	
 	@Step (
-		description="Cambiamos al país <b>" + tagNombrePais + "</b> (" + tagCodigoPais + "), idioma <b>" + tagLiteralIdioma + "</b>", 
-		expected="Se accede a la shop de " + tagNombrePais + " en " + tagLiteralIdioma)
+		description="Cambiamos al país <b>" + TAG_NOMBRE_PAIS + "</b> (" + TAG_CODIGO_PAIS + "), idioma <b>" + TAG_LITERAL_IDIOMA + "</b>", 
+		expected="Se accede a la shop de " + TAG_NOMBRE_PAIS + " en " + TAG_LITERAL_IDIOMA)
 	public void cambioPais(Pais newPais, IdiomaPais newIdioma) {
 		StepTM step = TestMaker.getCurrentStepInExecution();
-		step.replaceInDescription(tagNombrePais, newPais.getNombre_pais());
-		step.replaceInExpected(tagNombrePais, newPais.getNombre_pais());
-		step.replaceInDescription(tagCodigoPais, newPais.getCodigo_pais());
-		step.replaceInDescription(tagLiteralIdioma, newIdioma.getCodigo().getLiteral());
-		step.replaceInExpected(tagLiteralIdioma, newIdioma.getCodigo().getLiteral());
+		step.replaceInDescription(TAG_NOMBRE_PAIS, newPais.getNombre_pais());
+		step.replaceInExpected(TAG_NOMBRE_PAIS, newPais.getNombre_pais());
+		step.replaceInDescription(TAG_CODIGO_PAIS, newPais.getCodigo_pais());
+		step.replaceInDescription(TAG_LITERAL_IDIOMA, newIdioma.getCodigo().getLiteral());
+		step.replaceInExpected(TAG_LITERAL_IDIOMA, newIdioma.getCodigo().getLiteral());
 		
 		dataTest.setPais(newPais);
 		dataTest.setIdioma(newIdioma);

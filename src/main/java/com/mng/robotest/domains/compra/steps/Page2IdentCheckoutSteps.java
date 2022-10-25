@@ -69,8 +69,7 @@ public class Page2IdentCheckoutSteps extends StepBase {
 		description="Seleccionamos el botón \"Continuar\"",
 		expected="Aparece la página de Checkout",
 		saveImagePage=SaveWhen.Always)
-	public void clickContinuar(boolean userRegistered)
-	throws Exception {
+	public void clickContinuar(boolean userRegistered) {
 		page2IdentCheckout.clickBotonContinuarAndWait(20);   
 		new CheckoutSteps().validateIsFirstPage(userRegistered);
 	}

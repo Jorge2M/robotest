@@ -141,7 +141,7 @@ public class SecMenusUserSteps extends StepBase {
 	@Step (
 		description="Se selecciona el menú para el cambio de país", 
 		expected="Aparece el modal para el cambio de país")
-	public void cambioPaisMobil(Pais newPais, IdiomaPais newIdioma) throws Exception {
+	public void cambioPaisMobil(Pais newPais, IdiomaPais newIdioma) {
 		clickUserMenu(CAMBIO_PAIS);
 		ModalCambioPaisSteps modalCambioPaisSteps = new ModalCambioPaisSteps();
 		modalCambioPaisSteps.validateIsVisible(5); 

@@ -137,7 +137,7 @@ public class AccesoSteps extends StepBase {
 		}
 	}
 
-	public void identificacionEnMango() throws Exception {
+	public void identificacionEnMango() {
 		if (!new MenusUserWrapper().isMenuInState(UserMenu.CERRAR_SESION, Present)) {
 			iniciarSesion(dataTest);
 		}

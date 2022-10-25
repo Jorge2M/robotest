@@ -75,7 +75,7 @@ public class PagePedidosMantoSteps extends StepBase {
 		description="Buscamos pedidos con id registro",
 		expected="Debemos obtener el ID del pedido",
 		saveErrorData=SaveWhen.Never)
-	public DataPedido getPedidoUsuarioRegistrado(DataPedido dPedidoPrueba) throws Exception {
+	public DataPedido getPedidoUsuarioRegistrado(DataPedido dPedidoPrueba) {
 		int posicionPedidoActual = 6;
 		int posicionMaxPaginaPedidos = 105;
 		do {
@@ -105,7 +105,7 @@ public class PagePedidosMantoSteps extends StepBase {
 		description="Buscamos pedidos con id registro para obtener información del cliente",
 		expected="Debemos obtener la información del cliente",
 		saveErrorData=SaveWhen.Never)
-	public DataPedido getDataPedido(DataPedido dPedidoPrueba) throws Exception {
+	public DataPedido getDataPedido(DataPedido dPedidoPrueba) {
 		DataBag dBagPrueba = new DataBag();
 		List<String> referencias = new ArrayList<>();
 		ArticuloScreen articulo;
@@ -132,7 +132,7 @@ public class PagePedidosMantoSteps extends StepBase {
 		description="Buscamos pedidos con id registro para obtener información del cliente",
 		expected="Debemos obtener la información del cliente",
 		saveErrorData=SaveWhen.Never)
-	public DataPedido getDataCliente(DataPedido dPedidoPrueba) throws Exception {
+	public DataPedido getDataCliente(DataPedido dPedidoPrueba) {
 		PageDetallePedido pageDetallePedido = new PageDetallePedido();
 		pageDetallePedido.clickLinkDetallesCliente();
 		PageDetalleCliente pageDetalleCliente = new PageDetalleCliente();
@@ -166,7 +166,7 @@ public class PagePedidosMantoSteps extends StepBase {
 		description="Un pedido con tienda física en la lista de pedidos",
 		expected="Debemos obtener una tienda física válida",
 		saveErrorData=SaveWhen.Never)
-	public DataPedido getTiendaFisicaListaPedidos(DataPedido dPedidoPrueba) throws Exception {
+	public DataPedido getTiendaFisicaListaPedidos(DataPedido dPedidoPrueba) {
 		DataDeliveryPoint dEnvioPrueba = new DataDeliveryPoint();
 		dPedidoPrueba.setDataDeliveryPoint(dEnvioPrueba);
 		dPedidoPrueba.getDataDeliveryPoint().setCodigo(pagePedidos.getTiendaFisicaFromListaPedidos());

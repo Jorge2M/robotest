@@ -68,7 +68,7 @@ public class Com009 extends TestBase {
 		}        
     }
 
-	private void addAnotherDireccion(DirectionData directionPrincipal) throws Exception {
+	private void addAnotherDireccion(DirectionData directionPrincipal) {
 		modalMultidirectionSteps.clickAnyadirOtraDireccion();
 		modalDirecEnvioSteps.inputDataAndSave(directionPrincipal);
 	}
@@ -78,13 +78,13 @@ public class Com009 extends TestBase {
 		checkMisCompras(dataPago, directionPrincipal.getDireccion());
 	}
 
-	private void removeDireccion(String addressSecondary) throws Exception {
+	private void removeDireccion(String addressSecondary) {
 		modalMultidirectionSteps.clickEditAddress(addressSecondary);
         modalDirecEnvioSteps.clickEliminarButton();
         modalDirecEnvioSteps.confirmEliminarDirection(addressSecondary);
 	}
 
-	private void editDireccion(DirectionData directionEdit, String adressEdit) throws Exception {
+	private void editDireccion(DirectionData directionEdit, String adressEdit) {
 		modalMultidirectionSteps.clickEditAddress(adressEdit);
         modalDirecEnvioSteps.inputDataAndEdit(directionEdit);
 	}
