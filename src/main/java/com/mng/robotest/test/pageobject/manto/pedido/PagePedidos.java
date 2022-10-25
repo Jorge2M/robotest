@@ -51,15 +51,15 @@ public class PagePedidos extends PageBase {
 		}
 	}
 	
-	private static String TAG_LIN_CABECERA = "@linCabecera";
-	private static String XPATH_TABLA_PEDIDOS = "//table//span[text()='Tpv']/../../..";
-	private static String XPATH_CABECERA_TABLA_PEDIDOS = XPATH_TABLA_PEDIDOS + "//tr[" + TAG_LIN_CABECERA + "]";
-	private static String XPATH_LINEA_PEDIDO = XPATH_TABLA_PEDIDOS + "//input[@type='checkbox' and @title='Multi almacén']";
-	public static String XPATH_IMPORTE_LINEA_PEDIDO = "//table//tr/td[22]";
-	private static String XPATH_MAIN_FORM = "//form[@action='/pedidos.faces']";
-	private static String XPATH_CAPA_LOADING = "//div[@id[contains(.,'oading')]]";
-	private static String INI_XPATH_ID_REGISTRO = "//table//tr[";
-	private static String XPATH_LINK_PAGINA_SIGUIENTE_PEDIDOS = "//a[text()='>']";
+	private static final String TAG_LIN_CABECERA = "@linCabecera";
+	private static final String XPATH_TABLA_PEDIDOS = "//table//span[text()='Tpv']/../../..";
+	private static final String XPATH_CABECERA_TABLA_PEDIDOS = XPATH_TABLA_PEDIDOS + "//tr[" + TAG_LIN_CABECERA + "]";
+	private static final String XPATH_LINEA_PEDIDO = XPATH_TABLA_PEDIDOS + "//input[@type='checkbox' and @title='Multi almacén']";
+	public static final String XPATH_IMPORTE_LINEA_PEDIDO = "//table//tr/td[22]";
+	private static final String XPATH_MAIN_FORM = "//form[@action='/pedidos.faces']";
+	private static final String XPATH_CAPA_LOADING = "//div[@id[contains(.,'oading')]]";
+	private static final String INI_XPATH_ID_REGISTRO = "//table//tr[";
+	private static final String XPATH_LINK_PAGINA_SIGUIENTE_PEDIDOS = "//a[text()='>']";
 	
 	private String getXPathCabeceraTablePedidos(TypeDetalle typeDetalle) {
 		switch (typeDetalle) {

@@ -88,7 +88,7 @@ public class Reg003 extends TestBase {
 		pageRegistroIniSteps.clickRegistrateButton(dataRegister);
 	}
 	
-	private void secondPageRegister() throws Exception {
+	private void secondPageRegister() {
 		boolean paisConNinos = dataTest.getPais().getShoponline().stateLinea(LineaType.nina, app)==ThreeState.TRUE;
 		pageRegistroSegundaSteps.setDataAndLineasRandom("23/4/1974", paisConNinos, 2, dataRegister);
 		if (paisConNinos) {

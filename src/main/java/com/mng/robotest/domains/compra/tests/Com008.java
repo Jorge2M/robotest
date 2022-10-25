@@ -64,7 +64,7 @@ public class Com008 extends TestBase {
 		return dataPago;
 	}	
 	
-	private void checkMisCompras(DataPago dataPago) throws Exception {
+	private void checkMisCompras(DataPago dataPago) {
 		String codigoPedido = dataPago.getDataPedido().getCodpedido();
 		new PageResultPagoSteps().selectMisCompras();
 		new PageMisComprasSteps().validateIsCompraOnline(codigoPedido);

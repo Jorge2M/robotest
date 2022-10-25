@@ -72,7 +72,7 @@ public class Fic002 extends TestBase {
 		}
 	}
 
-	private void pageFichaDesktopTest() throws Exception {
+	private void pageFichaDesktopTest() {
 		boolean isFichaAccesorio = pageFichaSteps.getFicha().isFichaAccesorio();
 		pageFichaSteps.getSecFotosNewSteps().validaLayoutFotosNew(isFichaAccesorio);
 		if (isTotalLook) {
@@ -88,7 +88,7 @@ public class Fic002 extends TestBase {
 		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectLinkCompartir(dataTest.getCodigoPais());
 	}
 
-	private void pageFichaDeviceTest() throws Exception {
+	private void pageFichaDeviceTest() {
 		if (app==AppEcom.outlet && channel!=Channel.mobile) {
 			pageFichaSteps.validaExistsImgsCarruselIzqFichaOld();
 		}

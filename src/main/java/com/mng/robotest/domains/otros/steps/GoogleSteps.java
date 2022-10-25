@@ -18,7 +18,7 @@ public class GoogleSteps extends PageBase {
 		description="Accedemos a la URL de Google (http://www.google.es\") y buscamos \"MANGO\"", 
 		expected="Aparecen los links de Mango con contenido correcto",
 		saveHtmlPage=SaveWhen.IfProblem)
-	public void accessGoogleAndSearchMango() throws Exception {
+	public void accessGoogleAndSearchMango() {
 		pageGoogle.accessViaURL();
 		pageGoogle.acceptModalCookieIfExists();
 		pageGoogle.searchTextAndWait("MANGO");
@@ -43,7 +43,7 @@ public class GoogleSteps extends PageBase {
 	@Step (
 		description="Seleccionamos el 1er link normal (sin publicidad)", 
 		expected="Aparece la página inicial de la shop de Mango")
-	public void selectFirstLinkSinPublicidad() throws Exception { 
+	public void selectFirstLinkSinPublicidad() { 
 		pageGoogle.clickFirstLinkNoPubli();
 		checkInitialPageShop();
 	}

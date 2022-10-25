@@ -6,7 +6,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageEnvio extends PageBase implements PageFromFooter {
 	
-	private final static String XPATH_FOR_ID_PAGE = "//*[text()[contains(.,'Métodos y coste del envío')]]";
+	private static final String XPATH_FOR_ID_PAGE = "//*[text()[contains(.,'Métodos y coste del envío')]]";
 	
 	@Override
 	public String getName() {

@@ -89,7 +89,7 @@ public class SecMenusUserDevice extends PageBase {
 		click(menu.getBy(app)).exec();
 	}
 
-	public boolean clickMenuIfinState(MenuUserDevice menu, State stateExpected) throws Exception {
+	public boolean clickMenuIfinState(MenuUserDevice menu, State stateExpected) {
 		secCabecera.clickIconoMenuHamburguerMobil(true);
 		if (isMenuInState(menu, stateExpected)) {
 			moveToElement(menu.getBy(app));

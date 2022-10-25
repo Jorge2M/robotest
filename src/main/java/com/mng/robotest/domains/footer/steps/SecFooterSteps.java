@@ -33,7 +33,7 @@ public class SecFooterSteps extends StepBase {
 	@Step (
 		description="Seleccionar el link del footer <b>#{typeFooter}</b>", 
 		expected="Se redirige a la pantalla adecuada")
-	public void clickLinkFooter(FooterLink typeFooter, boolean closeAtEnd) throws Exception { 
+	public void clickLinkFooter(FooterLink typeFooter, boolean closeAtEnd) { 
 		String windowFatherHandle = secFooter.clickLinkAndGetWindowFatherHandle(typeFooter);
 		checkPageCorrectAfterSelectLinkFooter(windowFatherHandle, typeFooter, closeAtEnd);
 		GenericChecks.checkDefault();

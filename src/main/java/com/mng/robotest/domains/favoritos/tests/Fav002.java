@@ -70,7 +70,7 @@ public class Fav002 extends TestBase {
 		secBolsaSteps.clear();
 	}	
 	
-	private void goToFavoritesAndCheckSharedFavorites() throws Exception {
+	private void goToFavoritesAndCheckSharedFavorites() {
 		new SecMenusUserSteps().selectFavoritos();
 		pageFavoritosSteps.clickShareIsOk();
 		pageFavoritosSteps.closeShareModal();
@@ -85,7 +85,7 @@ public class Fav002 extends TestBase {
 		pageFichaSteps.selectAnadirALaBolsaStep();
 	}
 
-	private void clearFirstFavoriteFromFavorites() throws Exception {
+	private void clearFirstFavoriteFromFavorites() {
 		ArticuloScreen firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
 		new SecMenusUserSteps().selectFavoritos();
 		pageFavoritosSteps.clear(firstFavorite);

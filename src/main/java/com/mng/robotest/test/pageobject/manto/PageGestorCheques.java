@@ -11,14 +11,14 @@ import com.mng.robotest.domains.transversal.PageBase;
 
 public class PageGestorCheques extends PageBase {
 	
-	public static String titulo = "Gestor de Cheques";
-	public static String tituloDetalles = "DETALLES CHEQUE REGALO";
-	private final static String INI_XPATH_TITULO = "//td[@class='txt11B' and text()[contains(.,'";
-	private final static String XPATH_DIV_CONTENT = "//div[@id='busquedaRapidaContent']";
-	private final static String XPATH_TEXT_AREA = XPATH_DIV_CONTENT + "//textarea";
-	private final static String XPATH_CORREO_RECEPTOR_BUTTON = XPATH_DIV_CONTENT + "//input[@value='Correo del receptor']";
-	private final static String XPATH_TABLA = "//table[@class[contains(.,'grupotalla-table')]]";
-	private final static String XPATH_DETALLES_TABLA_CHEQUE_NUMERO = "//table//td[text()[contains(.,'CHEQUE NUMERO')]]";
+	public static final String TITULO = "Gestor de Cheques";
+	public static final String TITULO_DETALLES = "DETALLES CHEQUE REGALO";
+	private static final String INI_XPATH_TITULO = "//td[@class='txt11B' and text()[contains(.,'";
+	private static final String XPATH_DIV_CONTENT = "//div[@id='busquedaRapidaContent']";
+	private static final String XPATH_TEXT_AREA = XPATH_DIV_CONTENT + "//textarea";
+	private static final String XPATH_CORREO_RECEPTOR_BUTTON = XPATH_DIV_CONTENT + "//input[@value='Correo del receptor']";
+	private static final String XPATH_TABLA = "//table[@class[contains(.,'grupotalla-table')]]";
+	private static final String XPATH_DETALLES_TABLA_CHEQUE_NUMERO = "//table//td[text()[contains(.,'CHEQUE NUMERO')]]";
 
 	public enum ButtonsCheque implements ElementPage {
 		EDITAR("//input[@value='EDITAR']"),
@@ -113,11 +113,11 @@ public class PageGestorCheques extends PageBase {
 	}
 	
 	public boolean isPage() {
-		return (state(Present, By.xpath(getXPathTitulo(titulo))).check());
+		return (state(Present, By.xpath(getXPathTitulo(TITULO))).check());
 	}
 
 	public boolean isPageDetalles() {
-		String xpath = getXPathTitulo(tituloDetalles);
+		String xpath = getXPathTitulo(TITULO_DETALLES);
 		return (state(Present, By.xpath(xpath)).check());
 	}
 

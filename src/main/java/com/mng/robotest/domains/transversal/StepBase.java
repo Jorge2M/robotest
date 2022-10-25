@@ -66,7 +66,7 @@ public abstract class StepBase extends PageBase {
 	protected void filterGaleryByColor(MenuItem menu, Color color) throws Exception {
 		filterGaleryByColors(menu, Arrays.asList(color));
 	}
-	protected void filterGaleryByColors(MenuItem menu, List<Color> colors) throws Exception {
+	protected void filterGaleryByColors(MenuItem menu, List<Color> colors) {
 		new SecFiltrosSteps().selectFiltroColores(colors, FactoryMenus.get(menu).getMenu());
 	}	
 	

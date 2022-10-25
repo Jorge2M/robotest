@@ -139,7 +139,7 @@ public class ManagerBannersScreen extends PageBase {
 		clickBannerAndWaitLoad(dataBanner);
 	}
 	
-	public void clickBannerAndWaitLoad(DataBanner dataBanner) throws Exception {
+	public void clickBannerAndWaitLoad(DataBanner dataBanner) {
 		BannerObject bannerObject = BannerObjectFactory.make(dataBanner.getBannerType());
 		bannerObject.clickBannerAndWaitLoad(dataBanner);
 	}

@@ -9,7 +9,7 @@ import com.mng.robotest.domains.transversal.PageBase;
 
 public class LineaWeb extends PageBase implements LineaActions {
 
-	public static enum LineaType { 
+	public enum LineaType { 
 		she("mujer", "outlet", "she", "she", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
 		he("hombre", "outletH", "he", "he", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
 		nina("ninas", "outletA", "kidsA", "nina", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
@@ -88,7 +88,7 @@ public class LineaWeb extends PageBase implements LineaActions {
 		} 
 	}	
 	
-	public static enum SublineaType { 
+	public enum SublineaType { 
 		teen_nina("teenA", "teenA", "nina", LineaType.teen),
 		teen_nino("teenO", "teenO", "nino", LineaType.teen),
 		nina_nina("nina", "nina", "nina", LineaType.nina), 

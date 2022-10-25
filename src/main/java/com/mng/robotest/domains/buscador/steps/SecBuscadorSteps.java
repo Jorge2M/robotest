@@ -31,7 +31,7 @@ public class SecBuscadorSteps extends StepBase {
 			TabHTML + "id: <b>#{product.getGarmentId()}</b><br>" + 
 			TabHTML + "color: <b>#{product.getArticleWithMoreStock().getColorLabel()}</b>", 
 		expected="Aparece la ficha del producto")
-	public void searchArticulo(GarmentCatalog product) throws Exception {
+	public void searchArticulo(GarmentCatalog product) {
 		searchArticuloCommon(product);
 	}
 	
@@ -43,7 +43,7 @@ public class SecBuscadorSteps extends StepBase {
 			TabHTML + "color: <b>#{product.getArticleWithMoreStock().getColorLabel()}</b><br>" +
 			TabHTML + "filters: <b>" + TagValuesFilters + "</b>", 
 		expected="Aparece la ficha del producto")
-	public void searchArticulo(GarmentCatalog product, List<FilterType> infoFilters) throws Exception {
+	public void searchArticulo(GarmentCatalog product, List<FilterType> infoFilters) {
 		String filterValues = infoFilters.stream().map(FilterType::name).collect(Collectors.joining(","));
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TagValuesFilters, filterValues);
 		searchArticuloCommon(product);

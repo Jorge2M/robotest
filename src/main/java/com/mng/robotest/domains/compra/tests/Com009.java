@@ -112,7 +112,7 @@ public class Com009 extends TestBase {
     	new SecMetodoEnvioSteps().selectMetodoEnvio(dataPago, "VISA");
     }
     
-	private void checkMisCompras(DataPago dataPago, String address) throws Exception {
+	private void checkMisCompras(DataPago dataPago, String address) {
 		String codigoPedido = dataPago.getDataPedido().getCodpedido();
 		new PageResultPagoSteps().selectMisCompras();
 		

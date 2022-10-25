@@ -68,7 +68,7 @@ public class Com007 extends TestBase {
 		new SecFooterSteps().clickLinkFooter(FooterLink.CHEQUE_REGALO_OLD, false);
 	}
 
-	private void inputDataChequeRegalo() throws Exception {
+	private void inputDataChequeRegalo() {
 		pageChequeRegaloInputDataSteps.clickQuieroComprarChequeRegalo();
 		pageChequeRegaloInputDataSteps.seleccionarCantidades(Importe.EURO_50);
 

@@ -122,15 +122,10 @@ public class PageLanding extends PageBase {
 		}
 		
 		return false;
-//		return (((PageGaleriaDesktop)pageGaleria).isVisibleAnyArticle() ||
-//				state(Present, By.xpath(
-//					"(//section[@id='section1'] | " + 
-//					 "//div[@class[contains(.,'datos_ficha_producto')]] | " +
-//					 "//*[@class='celda'])")).check());
 	}
 	
-	public boolean isSomeElementVisibleInPage(List<Element> elementsCanBeContained, AppEcom app, Channel channel, int seconds) 
-	throws Exception {
+	public boolean isSomeElementVisibleInPage(
+			List<Element> elementsCanBeContained, AppEcom app, Channel channel, int seconds) {
 		for (int i=0; i<seconds; i++) {
 			if (isSomeElementVisibleInPage(elementsCanBeContained, app, channel)) {
 				return true;

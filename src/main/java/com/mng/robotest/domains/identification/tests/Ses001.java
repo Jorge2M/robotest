@@ -16,7 +16,7 @@ public class Ses001 extends TestBase {
 		restorePassword();		
 	}
 
-	private void checkIncorrectLogins() throws Exception {
+	private void checkIncorrectLogins() {
 		pageIdentificacionSteps.inicioSesionDatosKO("usuarioKeNoExiste@mango.com", "chuflapassw");
 		pageIdentificacionSteps.inicioSesionDatosKO(Constantes.MAIL_PERSONAL, "chuflapassw");
 	}

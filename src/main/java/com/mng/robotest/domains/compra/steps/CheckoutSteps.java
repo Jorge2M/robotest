@@ -359,7 +359,7 @@ public class CheckoutSteps extends StepBase {
 		description="Seleccionamos el botón \"Finalizar Compra\" (previamente esperamos hasta 20 segundos a que desaparezca la capa \"Espera unos segundos...\")", 
 		expected="Aparece una pasarela de pago",
 		saveImagePage=SaveWhen.Always)
-	public void pasoBotonConfirmarPagoCheckout3Mobil() throws Exception {
+	public void pasoBotonConfirmarPagoCheckout3Mobil() {
 		try {
 			pageCheckoutWrapper.getPage2MobilCheckout().clickFinalizarCompraAndWait(20);
 		}
@@ -370,12 +370,13 @@ public class CheckoutSteps extends StepBase {
 		PageRedirectPasarelaLoadingSteps.validateDisappeared(5, driver);
 	}	
 	
-	private static final String tagTarjeta = "@TagTarjeta";
+	private static final String TAG_TARJETA = "@TagTarjeta";
+	
 	@Step (
-		description="Introducir la tarjeta de empleado " + tagTarjeta + " y pulsar el botón \"Aplicar\"", 
+		description="Introducir la tarjeta de empleado " + TAG_TARJETA + " y pulsar el botón \"Aplicar\"", 
 		expected="Aparecen los datos para la introducción del 1er apellido y el nif")
-	public void inputTarjetaEmplEnCodPromo(Pais pais, AccesoEmpl accesoEmpl) throws Exception {
-		TestMaker.getCurrentStepInExecution().replaceInDescription(tagTarjeta, accesoEmpl.getTarjeta());
+	public void inputTarjetaEmplEnCodPromo(Pais pais, AccesoEmpl accesoEmpl) {
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_TARJETA, accesoEmpl.getTarjeta());
 		pageCheckoutWrapper.inputCodigoPromoAndAccept(accesoEmpl.getTarjeta());
 		checkAfterInputTarjetaEmpleado(pais, accesoEmpl);
 		GenericChecks.checkDefault();

@@ -77,7 +77,7 @@ public class PageGestionarClientes extends PageBase {
 		return (state(Visible, By.xpath(XPATH_FORM_TRATAR_CLIENTES)).check());
 	}
 
-	public void inputDniAndClickBuscarButton(String dni, int waitSeconds) throws Exception{
+	public void inputDniAndClickBuscarButton(String dni, int waitSeconds) {
 		inputDni(dni);
 		clickBuscarButtonAndWaitSeconds(waitSeconds);
 	}

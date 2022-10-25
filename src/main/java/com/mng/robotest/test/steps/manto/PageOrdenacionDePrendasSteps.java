@@ -21,18 +21,18 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 		super(driver);
 	}
 
-	public void mantoOrdenacionInicio() throws Exception {
+	public void mantoOrdenacionInicio() {
 		selectPreProduccion();
 		selectShe();
 	}
 
-	public void mantoSeccionPrendas() throws Exception {
+	public void mantoSeccionPrendas() {
 		selectSectionPrenda();
 		selectTipoPrenda();
 		bajarPrenda();
 	}
 
-	public void ordenacionModal() throws Exception {
+	public void ordenacionModal() {
 		aplicarOrden();
 		aceptarOrdenPais();
 	}

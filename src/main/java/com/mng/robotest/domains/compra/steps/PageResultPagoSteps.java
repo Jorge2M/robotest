@@ -60,7 +60,7 @@ public class PageResultPagoSteps extends StepBase {
 	}
 	
 	@Validation
-	public ChecksTM validateDataPedido(DataPago dataPago) throws Exception {
+	public ChecksTM validateDataPedido(DataPago dataPago) {
 		ChecksTM checks = ChecksTM.getNew();
 		String importeTotal = "";
 		if (dataTest.getDataBag()!=null && "".compareTo(dataTest.getDataBag().getImporteTotal())!=0) {
@@ -124,7 +124,7 @@ public class PageResultPagoSteps extends StepBase {
 		}
 	}
 	
-	public void selectLinkMisComprasAndValidateCompra(DataPago dataPago) throws Exception {		
+	public void selectLinkMisComprasAndValidateCompra(DataPago dataPago) {		
 		selectMisCompras();
 		DataPedido dataPedido = dataPago.getDataPedido();
 		if (dataTest.isUserRegistered()) {

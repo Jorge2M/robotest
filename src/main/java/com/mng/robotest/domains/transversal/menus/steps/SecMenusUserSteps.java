@@ -64,7 +64,7 @@ public class SecMenusUserSteps extends StepBase {
 	@Step (
 		description="Clicar el link de Cerrar Sesión", 
 		expected="Aparece el link de login")
-	public void logoff() throws Exception {
+	public void logoff() {
 		clickUserMenu(CERRAR_SESION);
 		checkIsVisibleIniciarSesionLink(3);
 	}

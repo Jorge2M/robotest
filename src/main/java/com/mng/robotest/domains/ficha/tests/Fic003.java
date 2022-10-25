@@ -53,7 +53,7 @@ public class Fic003 extends TestBase {
 		return pageGaleriaSteps.selectArticulo(location1rstArticle);
 	}
 
-	private void kcSafetyTest() throws Exception {
+	private void kcSafetyTest() {
 		if (channel.isDevice()) {
 			if (TypePanel.KC_SAFETY.getListApps().contains(app)) {
 				pageFichaSteps.getSecProductDescOldSteps().selectPanel(TypePanel.KC_SAFETY);

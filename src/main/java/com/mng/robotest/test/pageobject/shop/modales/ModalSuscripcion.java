@@ -6,7 +6,7 @@ import com.mng.robotest.domains.transversal.PageBase;
 
 public class ModalSuscripcion extends PageBase {
 
-	private static String XPATH_LEGAL_RGPD = "//p[@class='gdpr-text gdpr-data-protection']";
+	private static final String XPATH_LEGAL_RGPD = "//p[@class='gdpr-text gdpr-data-protection']";
 
 	public boolean isTextoLegalRGPDPresent() {
 		return state(Present, XPATH_LEGAL_RGPD).check();

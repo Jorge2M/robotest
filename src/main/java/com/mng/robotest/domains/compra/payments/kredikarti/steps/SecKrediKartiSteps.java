@@ -32,7 +32,7 @@ public class SecKrediKartiSteps extends StepBase {
 	@Step (
 		description="Seleccionamos la #{numOpcion}a de las opciones de pago a plazo", 
 		expected="La opción se selecciona correctamente")
-	public void clickOpcionPagoAPlazo(int numOpcion) throws Exception {
+	public void clickOpcionPagoAPlazo(int numOpcion) {
 		secKrediKarti.clickRadioPagoAPlazo(numOpcion);
 	}
 }

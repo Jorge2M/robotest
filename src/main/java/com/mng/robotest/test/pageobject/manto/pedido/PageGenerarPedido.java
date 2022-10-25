@@ -19,7 +19,7 @@ public class PageGenerarPedido extends PageBase {
 	private static final String XPATH_MESSAGE_OK_FICHERO_CREADO = "//span[text()[contains(.,'Fichero creado correctamente')]]";
 	private static final String XPATH_RADIO_INFORMA_BANCO = "//input[@id[contains(.,'devolucionBanco')]]";
 	
-	public static enum EstadoPedido {
+	public enum EstadoPedido {
 		OK(0),	
 		FALTA_PICKING(1),	
 		DENEGADO(2),	

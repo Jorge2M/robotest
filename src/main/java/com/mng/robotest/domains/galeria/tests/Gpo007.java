@@ -17,7 +17,7 @@ public class Gpo007 extends TestBase {
 		checkAvisame();		
 	}
 
-	private void checkAvisame() throws Exception {
+	private void checkAvisame() {
 		new PageGaleriaSteps().selectTallaNoDisponibleArticulo();
 		new ModalArticleNotAvailableSteps().checkVisibleAvisame();
 	}

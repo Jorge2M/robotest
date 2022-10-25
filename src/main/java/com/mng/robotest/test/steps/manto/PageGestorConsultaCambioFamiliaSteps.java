@@ -33,7 +33,7 @@ public class PageGestorConsultaCambioFamiliaSteps {
 		description="Buscamos productos por la familia <b>Accesorios</b>",
 		expected="Muestra la tabla con productos que corresponden con esta familia",
 		saveErrorData=SaveWhen.Never)
-	public static void selectAccesoriosAndClickConsultaPorFamiliaButton(WebDriver driver) throws Exception {
+	public static void selectAccesoriosAndClickConsultaPorFamiliaButton(WebDriver driver) {
 		PageGestorConsultaCambioFamilia.selectAccesoriosAndClickConsultaPorFamiliaButton(driver);
 		checkAfterSearchProductXfamilia(driver);
 	}

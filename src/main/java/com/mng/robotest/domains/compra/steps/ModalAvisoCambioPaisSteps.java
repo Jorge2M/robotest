@@ -16,7 +16,7 @@ public class ModalAvisoCambioPaisSteps extends StepBase {
 	@Step (
 		description="Seleccionar botón \"Confirmar cambio\"", 
 		expected="Aparece el modal para la introducción de la dirección de facturación")
-	public void clickConfirmar(Pais paisEnvio) throws Exception {
+	public void clickConfirmar(Pais paisEnvio) {
 		modalAvisoCambioPais.clickConfirmarCambio();
 		checkConfirmacionCambio(paisEnvio);
 	}

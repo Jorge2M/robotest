@@ -278,7 +278,7 @@ public class Page2IdentCheckout extends PageBase {
 	/**
 	 * Si existe, utiliza el botón "Find Address" para establecer la dirección (actualmente sólo existe en Corea del Sur)
 	 */
-	public void setDireccionWithFindAddressIfExists() throws Exception {
+	public void setDireccionWithFindAddressIfExists() {
 		String codPostalSeteado = getCodigoPostal();
 		if (pais.getCodpos().compareTo(codPostalSeteado)!=0 &&
 			state(Visible, By.xpath(XPATH_BOTON_FIND_ADDRESS)).check()) {

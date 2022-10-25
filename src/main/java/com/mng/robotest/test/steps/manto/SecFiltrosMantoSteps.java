@@ -26,7 +26,7 @@ public class SecFiltrosMantoSteps {
 		secFiltros = new SecFiltros(driver);
 	}
 	
-	public void setFiltrosYbuscar(DataPedido dataPedido, TypeSearch typeSearch) throws Exception {
+	public void setFiltrosYbuscar(DataPedido dataPedido, TypeSearch typeSearch) {
 		LocalDate fechaHoy = secFiltros.getFechaHastaValue();
 		LocalDate fechaManyana = fechaHoy.plusDays(1);
 		setFiltrosYbuscar(dataPedido, typeSearch, fechaHoy, fechaManyana);
@@ -57,8 +57,8 @@ public class SecFiltrosMantoSteps {
 		secFiltros.clickButtonBuscar();
 	}
 	
-	public void setFiltrosWithoutChequeRegaloYbuscar(DataPedido dataPedido, TypeSearch typeSearch, LocalDate fechaDesde, LocalDate fechaHasta) 
-			throws Exception {
+	public void setFiltrosWithoutChequeRegaloYbuscar(
+			DataPedido dataPedido, TypeSearch typeSearch, LocalDate fechaDesde, LocalDate fechaHasta) {
 		setFiltroForAvoidChequeRegalo();
 		setFiltrosYbuscar(dataPedido, typeSearch, fechaDesde, fechaHasta);
 	}

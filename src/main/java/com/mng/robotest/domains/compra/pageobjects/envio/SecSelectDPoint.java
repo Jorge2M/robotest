@@ -17,7 +17,7 @@ import com.mng.robotest.domains.transversal.PageBase;
 
 public class SecSelectDPoint extends PageBase {
 
-	public static enum TypeDeliveryPoint { TIENDA, DROPPOINT, ANY }
+	public enum TypeDeliveryPoint { TIENDA, DROPPOINT, ANY }
 
 	private static final String XPATH_SEARCH_BOX = "//div[@class[contains(.,'searchBox')]]";
 	private static final String XPATH_INPUT_PROVINCIA = XPATH_SEARCH_BOX + "//input[@class[contains(.,'searchValue')]]";
@@ -90,7 +90,7 @@ public class SecSelectDPoint extends PageBase {
 		return TypeDeliveryPoint.TIENDA;
 	}
 
-	public DataDeliveryPoint clickDeliveryPointAndGetData(int position) throws Exception {
+	public DataDeliveryPoint clickDeliveryPointAndGetData(int position) {
 		List<WebElement> listDp = getListDeliveryPoints();
 		listDp.get(position-1).click();
 		return getDataDeliveryPointSelected();

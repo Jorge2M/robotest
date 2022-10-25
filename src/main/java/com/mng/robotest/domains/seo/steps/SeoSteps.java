@@ -125,7 +125,7 @@ public class SeoSteps extends StepBase {
 	@Step (
 			description="Ejecutamos la URL del sitemap: #{urlSitemap}",
 			expected="Se carga el contenido correcto")
-	public void inputSitemapURLandValidate(String urlSitemap) throws Exception {
+	public void inputSitemapURLandValidate(String urlSitemap) {
 		driver.get(urlSitemap);
 		checkResultUrlSitemal(driver);
 	}

@@ -13,13 +13,13 @@ import com.mng.robotest.test.pageobject.shop.menus.MenuLateralDesktop;
 
 public class SecMenuLateralDesktop extends PageBase {
 	
-	private static String TAG_CONCAT_MENUS = "[@TAG_CONCAT_MENUS]";
+	private static final String TAG_CONCAT_MENUS = "[@TAG_CONCAT_MENUS]";
 	
-	private static String XPATH_LINKK_MENU_WITH_TAG = 
+	private static final String XPATH_LINKK_MENU_WITH_TAG = 
 		"//li[not(@class) or @class='element']" +  
 		"/a[@href[contains(.,'" + TAG_CONCAT_MENUS + "')]]";
 	
-	private static String XPATH_SELECTED_RELATIVE_MENU_SHOP = 
+	private static final String XPATH_SELECTED_RELATIVE_MENU_SHOP = 
 		"//self::*[@aria-label[contains(.,'seleccionado')]]";
 
 	private String getXPathLinkMenu(MenuLateralDesktop menu) {

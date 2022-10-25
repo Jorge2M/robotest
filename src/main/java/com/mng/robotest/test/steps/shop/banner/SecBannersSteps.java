@@ -143,7 +143,7 @@ public class SecBannersSteps extends StepBase {
 		return false;
 	}
 	
-	private boolean validacionesBannerEstandar(Channel channel, AppEcom app) throws Exception {
+	private boolean validacionesBannerEstandar(Channel channel, AppEcom app) {
 		if (!pageLanding.haySecc_Art_Banners(app)) {
 			if (!pageLanding.hayImgsEnContenido()) {
 				PageFicha pageFicha = PageFicha.of(channel);

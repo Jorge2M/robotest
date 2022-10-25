@@ -72,7 +72,7 @@ public class PageGestorChequesSteps extends PageBase {
 	public ChecksTM validateDetailsCheques(String pedido, String mail) {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
-			"Aparece la página de" + PageGestorCheques.tituloDetalles,
+			"Aparece la página de" + PageGestorCheques.TITULO_DETALLES,
 			pageGestorCheques.isPageDetalles(), State.Defect);
 		
 		checks.add(

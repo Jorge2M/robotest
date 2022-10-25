@@ -24,8 +24,8 @@ public abstract class BannerObject extends PageBase {
 		this.xpathBanner = xpathBanner;
 	}
 	
-	abstract protected String getUrlBanner(WebElement bannerScreen);
-	abstract protected String getSrcImageBanner(WebElement bannerScreen);
+	protected abstract String getUrlBanner(WebElement bannerScreen);
+	protected abstract String getSrcImageBanner(WebElement bannerScreen);
 	
 	public List<DataBanner> getListBannersData(int maxBannersToLoad) {
 		List<DataBanner> listDataBannersReturn = new ArrayList<>();

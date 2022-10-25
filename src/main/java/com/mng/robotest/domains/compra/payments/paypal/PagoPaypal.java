@@ -33,10 +33,10 @@ public class PagoPaypal extends PagoSteps {
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		modalPreloaderSppinerSteps.validateAppearsAndDisappears();
 		switch (getInitPagePaypal()) {
-		case Login:
+		case LOGIN:
 			pagePaypalLoginSteps.validateIsPageUntil(0);
 			break;
-		case CreacionCuenta:
+		case CREACION_CUENTA:
 			pagePaypalCreacionCuentaSteps.clickButtonIniciarSesion();
 			break;
 		}
@@ -51,7 +51,7 @@ public class PagoPaypal extends PagoSteps {
 			}
 			
 			modalPreloaderSppinerSteps.validateIsVanished(seconds);
-			if (getPostLoginPagePaypal()==PostLoginPagePaypal.SelectPago) {
+			if (getPostLoginPagePaypal()==PostLoginPagePaypal.SELECT_PAGO) {
 				pagePaypalSelectPagoSteps.validateIsPageUntil(0);
 				pagePaypalSelectPagoSteps.clickContinuarButton();	  
 			}
@@ -64,30 +64,30 @@ public class PagoPaypal extends PagoSteps {
 		}
 	}
 	
-	private enum InitPagePaypal {Login, CreacionCuenta}
-	private enum PostLoginPagePaypal {SelectPago, Confirmacion}
+	private enum InitPagePaypal { LOGIN, CREACION_CUENTA }
+	private enum PostLoginPagePaypal { SELECT_PAGO, CONFIRMACION }
 	
 	private InitPagePaypal getInitPagePaypal() {
 		if (new PagePaypalLogin().isPageUntil(5)) {
-			return InitPagePaypal.Login;
+			return InitPagePaypal.LOGIN;
 		}
 		
 		if (new PagePaypalCreacionCuenta().isPageUntil(1)) {
-			return InitPagePaypal.CreacionCuenta;
+			return InitPagePaypal.CREACION_CUENTA;
 		}
 		
-		return InitPagePaypal.Login;
+		return InitPagePaypal.LOGIN;
 	}
 	
 	private PostLoginPagePaypal getPostLoginPagePaypal() {
 		int seconds = 5;
 		if (new PagePaypalSelectPago().isPageUntil(seconds)) {
-			return PostLoginPagePaypal.SelectPago;
+			return PostLoginPagePaypal.SELECT_PAGO;
 		}
 		if (new PagePaypalConfirmacion().isPageUntil(0)) {
-			return PostLoginPagePaypal.Confirmacion;
+			return PostLoginPagePaypal.CONFIRMACION;
 		}
 
-		return PostLoginPagePaypal.Confirmacion;
+		return PostLoginPagePaypal.CONFIRMACION;
 	}
 }

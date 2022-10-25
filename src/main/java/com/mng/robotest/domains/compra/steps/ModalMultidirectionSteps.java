@@ -20,7 +20,7 @@ public class ModalMultidirectionSteps extends StepBase {
 	@Validation(
 		description = "Es visible el modal de multidirecciones (lo esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	public boolean checkIsVisible(int seconds) throws Exception {
+	public boolean checkIsVisible(int seconds) {
 		return modalMultidirection.isVisible(seconds);
 	}	
 	
@@ -89,7 +89,7 @@ public class ModalMultidirectionSteps extends StepBase {
 	@Validation(
 		description = "No existe la dirección #{address}",
 		level=State.Defect)
-	public boolean checkAddressNotExists(String address) throws Exception {
+	public boolean checkAddressNotExists(String address) {
 		return modalMultidirection.getDirection(address).isEmpty();
 	}	
 

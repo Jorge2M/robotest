@@ -36,7 +36,7 @@ public class SecConfirmDatosSteps extends StepBase {
 	@Step (
 		description="Introducir <b>#{postNumberId}</b> en el Post Number Id",
 		expected="El valor queda correctamente introducido")
-	public void inputPostNumberId(String postNumberId) throws Exception {
+	public void inputPostNumberId(String postNumberId) {
 		secConfirmDatos.sendDataInputPostNumberIdDeutschland(postNumberId);
 	}
 	

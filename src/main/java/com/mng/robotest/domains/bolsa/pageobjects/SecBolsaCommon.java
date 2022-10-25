@@ -58,7 +58,7 @@ public abstract class SecBolsaCommon extends PageBase {
 		click(xpathComprarBt).type(TypeClick.javascript).exec();
 	}
 	
-	public String getNumberArtIcono(Channel channel, AppEcom app) throws Exception {
+	public String getNumberArtIcono(Channel channel, AppEcom app) {
 		return (SecCabecera.getNew(channel, app).getNumberArtIcono());
 	}
 	

@@ -18,8 +18,7 @@ public class Page1IdentCheckoutSteps extends StepBase {
 		return (page1IdentCheckout.getSecSoyNuevo().isFormIdentUntil(seconds));
 	}
 	
-	public void inputEmailAndContinue(
-			String email, boolean emailExistsYet, boolean userRegistered, Pais pais) throws Exception {
+	public void inputEmailAndContinue(String email, boolean emailExistsYet, boolean userRegistered, Pais pais) {
 		secSoyNuevoSteps.inputEmailAndContinue(email, emailExistsYet, userRegistered, pais);
 	}
 	

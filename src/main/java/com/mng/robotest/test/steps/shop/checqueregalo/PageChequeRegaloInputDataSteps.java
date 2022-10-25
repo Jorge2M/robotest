@@ -16,7 +16,7 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 
 	private final PageChequeRegaloInputData pageChequeRegaloInputData = PageChequeRegaloInputData.make(dataTest.getPais());
 	
-	public void paginaConsultarSaldo(String numTarjeta) throws Exception {
+	public void paginaConsultarSaldo(String numTarjeta) {
 		clickConsultaSaldo();
 		inputDataTarjetaRegalo(numTarjeta);
 	}
@@ -64,7 +64,7 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 	@Step (
 		description="Introducimos el CVV <b>#{cvvNumber}</b> de la tarjeta",
 		expected="Se vuelve a la página inicial del cheque regalo"/*Temporal*/)
-	private void consultarSaldoTarjeta(String cvvNumber) throws Exception {
+	private void consultarSaldoTarjeta(String cvvNumber) {
 		((PageChequeRegaloInputDataNew)pageChequeRegaloInputData)
 			.introducirCvc(cvvNumber);
 		checkConsultaSaldoTarjeta(4);

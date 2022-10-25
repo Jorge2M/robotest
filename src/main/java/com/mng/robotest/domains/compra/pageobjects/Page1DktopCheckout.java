@@ -406,7 +406,7 @@ public class Page1DktopCheckout extends PageBase {
 		return null;
 	}
 
-	public boolean validateArticlesAndImport() throws Exception {
+	public boolean validateArticlesAndImport() {
 		for (ArticuloScreen articulo : dataTest.getDataBag().getListArticlesTypeViewInBolsa()) {
 			WebElement lineaArticulo = getLineaArticle(articulo.getReferencia());
 			if (lineaArticulo==null) {
@@ -425,7 +425,7 @@ public class Page1DktopCheckout extends PageBase {
 		return (preciosScreen.definitivo == ImporteScreen.getFloatFromImporteMangoScreen(precioArticulo));
 	}
 	
-	public boolean validateArticlesAndDiscount(Descuento descuento) throws Exception {
+	public boolean validateArticlesAndDiscount(Descuento descuento) {
 		for (ArticuloScreen articulo : dataTest.getDataBag().getListArticlesTypeViewInBolsa()) {
 			WebElement lineaArticulo = getLineaArticle(articulo.getReferencia());
 			if (lineaArticulo==null) {

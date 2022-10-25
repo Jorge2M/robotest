@@ -509,7 +509,7 @@ public abstract class PageGaleria extends PageBase {
 	 * Función que realiza un scroll/paginación hasta el final de los artículos. Retorna el número de elementos obtenidos
 	 * Desktop: scrolla reiteradamente hasta el último elemento para forzar la paginación
 	 */
-	public DataScroll scrollToPageFromFirst(int numPage) throws Exception {
+	public DataScroll scrollToPageFromFirst(int numPage) {
 		DataScroll datosScroll = new DataScroll();
 		int pageToScroll = getPageToScroll(numPage);
 		goToInitPageAndWaitForArticle();

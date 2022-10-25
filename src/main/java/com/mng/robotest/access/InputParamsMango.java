@@ -16,25 +16,25 @@ import com.github.jorge2m.testmaker.domain.InputParamsTM;
 
 public class InputParamsMango extends InputParamsTM {
 
-	public static final String CountrysNameParam = "countrys";
-	public static final String LineasNameParam = "lineas";
-	public static final String PaymentsNameParam = "payments";
-	public static final String CatalogsNameParam = "catalogs";
-	public static final String UrlMantoParam = "urlmanto";
+	private static final String COUNTRYS_NAME_PARAM = "countrys";
+	private static final String LINEAS_NAME_PARAM = "lineas";
+	private static final String PAYMENTS_NAME_PARAM = "payments";
+	private static final String CATALOGS_NAME_PARAM = "catalogs";
+	private static final String URL_MANTO_PARAM = "urlmanto";
 
-	@FormParam(CountrysNameParam)
+	@FormParam(COUNTRYS_NAME_PARAM)
 	String listCountrysCommaSeparated;
 	
-	@FormParam(LineasNameParam)	
+	@FormParam(LINEAS_NAME_PARAM)	
 	String listLinesCommaSeparated;
 	
-	@FormParam(PaymentsNameParam)
+	@FormParam(PAYMENTS_NAME_PARAM)
 	String listPaymentsCommaSeparated;
 	
-	@FormParam(CatalogsNameParam)
+	@FormParam(CATALOGS_NAME_PARAM)
 	String listCatalogsCommaSeparated;
 	
-	@FormParam(UrlMantoParam)
+	@FormParam(URL_MANTO_PARAM)
 	String urlManto;
 	
 	private static String lineSeparator = System.getProperty("line.separator");
@@ -52,7 +52,7 @@ public class InputParamsMango extends InputParamsTM {
 	@Override
 	public List<OptionTMaker> getSpecificParameters() {
 		List<OptionTMaker> options = new ArrayList<>();
-		options.add(OptionTMaker.builder(InputParamsMango.CountrysNameParam)
+		options.add(OptionTMaker.builder(InputParamsMango.COUNTRYS_NAME_PARAM)
 			.required(false)
 			.hasArgs()
 			.valueSeparator(',')
@@ -60,21 +60,21 @@ public class InputParamsMango extends InputParamsTM {
 			.pattern("\\d{3}|X")
 			.build());
 
-		options.add(OptionTMaker.builder(InputParamsMango.LineasNameParam)
+		options.add(OptionTMaker.builder(InputParamsMango.LINEAS_NAME_PARAM)
 			.required(false)
 			.hasArgs()
 			.valueSeparator(',')
 			.desc("List of lines comma separated (p.e. she,he,...)")
 			.build());		
 
-		options.add(OptionTMaker.builder(InputParamsMango.PaymentsNameParam)
+		options.add(OptionTMaker.builder(InputParamsMango.PAYMENTS_NAME_PARAM)
 			.required(false)
 			.hasArgs()
 			.valueSeparator(',') 
 			.desc("List of payments comma separated (p.e. VISA,TARJETA MANGO,...)")
 			.build());
 		
-		options.add(OptionTMaker.builder(InputParamsMango.CatalogsNameParam)
+		options.add(OptionTMaker.builder(InputParamsMango.CATALOGS_NAME_PARAM)
 			.required(false)
 			.hasArgs()
 			.valueSeparator(',')
@@ -83,7 +83,7 @@ public class InputParamsMango extends InputParamsTM {
 			.build());
 
 		String patternUrl = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
-		options.add(OptionTMaker.builder(InputParamsMango.UrlMantoParam)
+		options.add(OptionTMaker.builder(InputParamsMango.URL_MANTO_PARAM)
 			.required(false)
 			.hasArgs()
 			.pattern(patternUrl)
@@ -95,19 +95,19 @@ public class InputParamsMango extends InputParamsTM {
 
 	@Override
 	public void setSpecificDataFromCommandLine(CommandLine cmdLineData) {
-		setListaPaises(cmdLineData.getOptionValues(CountrysNameParam));
-		setListaLineas(cmdLineData.getOptionValues(LineasNameParam));
-		setListaPayments(cmdLineData.getOptionValues(PaymentsNameParam));
-		setListaCatalogs(cmdLineData.getOptionValues(CatalogsNameParam));
-		setUrlManto(cmdLineData.getOptionValue(UrlMantoParam));
+		setListaPaises(cmdLineData.getOptionValues(COUNTRYS_NAME_PARAM));
+		setListaLineas(cmdLineData.getOptionValues(LINEAS_NAME_PARAM));
+		setListaPayments(cmdLineData.getOptionValues(PAYMENTS_NAME_PARAM));
+		setListaCatalogs(cmdLineData.getOptionValues(CATALOGS_NAME_PARAM));
+		setUrlManto(cmdLineData.getOptionValue(URL_MANTO_PARAM));
 	}
 
 	private enum ParamMango {
-		Countrys(CountrysNameParam),
-		Lineas(LineasNameParam),
-		Payments(PaymentsNameParam),
-		Catalogs(CatalogsNameParam),
-		UrlManto(UrlMantoParam);
+		COUNTRYS(COUNTRYS_NAME_PARAM),
+		LINEAS(LINEAS_NAME_PARAM),
+		PAYMENTS(PAYMENTS_NAME_PARAM),
+		CATALOGS(CATALOGS_NAME_PARAM),
+		URL_MANTO(URL_MANTO_PARAM);
 		
 		public final String nameParam;
 		private ParamMango(String nameParam) {
@@ -129,15 +129,15 @@ public class InputParamsMango extends InputParamsTM {
 	
 	private String getValueParam(ParamMango paramId) {
 		switch (paramId) {
-		case Countrys:
+		case COUNTRYS:
 			return listCountrysCommaSeparated;
-		case Lineas:
+		case LINEAS:
 			return listLinesCommaSeparated;
-		case Payments:
+		case PAYMENTS:
 			return listPaymentsCommaSeparated;
-		case Catalogs:
+		case CATALOGS:
 			return listCatalogsCommaSeparated;
-		case UrlManto:
+		case URL_MANTO:
 			return getUrlManto();
 		}
 		return "";

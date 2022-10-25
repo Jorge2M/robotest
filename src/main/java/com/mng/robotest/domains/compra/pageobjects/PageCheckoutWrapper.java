@@ -222,14 +222,14 @@ public class PageCheckoutWrapper extends PageBase {
 		}
 	}
 
-	public String getPrecioTotalFromResumen(boolean normalize) throws Exception {
+	public String getPrecioTotalFromResumen(boolean normalize) {
 		if (channel==Channel.mobile) {
 			return (page2MobilCheckout.getPrecioTotalFromResumen(normalize));
 		}
 		return (page1DktopCheckout.getPrecioTotalFromResumen(normalize));
 	}
 	
-	public String getCroaciaPrecioTotalInEuros(boolean normalize) throws Exception {
+	public String getCroaciaPrecioTotalInEuros(boolean normalize) {
 		if (channel==Channel.mobile) {
 			return page2MobilCheckout.getCroaciaPrecioTotalInEuros(normalize);
 		}
@@ -335,7 +335,7 @@ public class PageCheckoutWrapper extends PageBase {
 		return (page1DktopCheckout.isArticulos());
 	}
 	
-	public float getImportSubtotalDesktop() throws Exception {
+	public float getImportSubtotalDesktop() {
 		String textImporte = page1DktopCheckout.getPrecioSubTotalFromResumen();
 		return (ImporteScreen.getFloatFromImporteMangoScreen(textImporte));
 	}

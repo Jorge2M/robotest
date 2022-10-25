@@ -173,9 +173,10 @@ public class PageGaleriaSteps extends StepBase {
 	 * Escrollamos hasta llegar a la página indicada en toPage
 	 * @param toPage indica el número de página en el que nos queremos posicionar. Si es PageGaleria.scrollToLast asumimos que queremos llegar hasta el final del catálogo
 	 */
-	static final String tagIdPage = "@TagIdPage";
+	private static final String TAG_ID_PAGE = "@TagIdPage";
+	
 	@Step (
-		description="Escrollar hasta posicionarse en la " + tagIdPage + " página", 
+		description="Escrollar hasta posicionarse en la " + TAG_ID_PAGE + " página", 
 		expected="Se escrolla correctamente",
 		saveNettraffic=SaveWhen.Always)
 	public DataScroll scrollFromFirstPage(DataForScrollStep dataForScroll) throws Exception {
@@ -190,7 +191,7 @@ public class PageGaleriaSteps extends StepBase {
 		if (pageToScroll>=PageGaleriaDesktop.MAX_PAGE_TO_SCROLL) {
 			idPage = "última";
 		}
-		TestMaker.getCurrentStepInExecution().replaceInDescription(tagIdPage, idPage);
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_ID_PAGE, idPage);
 		int numArticulosInicio = pageGaleria.getNumArticulos();
 		datosScroll = pageGaleria.scrollToPageFromFirst(pageToScroll);
 
@@ -226,7 +227,7 @@ public class PageGaleriaSteps extends StepBase {
 	@Validation (
 		description="Sí aparece el footer",
 		level=State.Warn)
-	private boolean checkVisibilityFooter(int pageToScroll, AppEcom app) throws Exception {
+	private boolean checkVisibilityFooter(int pageToScroll, AppEcom app) {
 		return (new SecFooter()).isVisible();
 	}
 
@@ -352,13 +353,14 @@ public class PageGaleriaSteps extends StepBase {
 	 * @param numArtConColores posición del artículo entre el conjunto de artículos con variedad de colores
 	 * @return src de la imagen obtenida al ejecutar el click sobre el color
 	 */
-	static final String tagSrcPng2oColor = "@srcPng2oColor";
-	static final String tagNombre1erArtic = "@nombre1erArt";
-	static final String tagPrecio1erArtic = "@precio1erArt";
+	private static final String TAG_SRC_PNG_2O_COLOR = "@srcPng2oColor";
+	private static final String TAG_NOMBRE_1ER_ARTIC = "@nombre1erArt";
+	private static final String TAG_PRECIO_1ER_ARTIC = "@precio1erArt";
+	
 	@Step (
 		description=
-			"Seleccionar el #{posColor}o color (" + tagSrcPng2oColor +") no seleccionado del #{numArtConColores}o " + 
-			"artículo con variedad de colores (" + tagNombre1erArtic + ", " + tagPrecio1erArtic +")", 
+			"Seleccionar el #{posColor}o color (" + TAG_SRC_PNG_2O_COLOR +") no seleccionado del #{numArtConColores}o " + 
+			"artículo con variedad de colores (" + TAG_NOMBRE_1ER_ARTIC + ", " + TAG_PRECIO_1ER_ARTIC +")", 
 		expected="Se selecciona el color")
 	public String selecColorFromArtGaleriaStep(int numArtConColores, int posColor) 
 	throws Exception {
@@ -367,13 +369,13 @@ public class PageGaleriaSteps extends StepBase {
 
 		StepTM step = TestMaker.getCurrentStepInExecution();
 		WebElement articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
-		step.replaceInDescription(tagNombre1erArtic, pageGaleria.getNombreArticulo(articuloColores));
+		step.replaceInDescription(TAG_NOMBRE_1ER_ARTIC, pageGaleria.getNombreArticulo(articuloColores));
 	   
 		WebElement colorToClick = pageGaleria.getColorArticulo(articuloColores, false/*selected*/, posColor);
-		step.replaceInDescription(tagPrecio1erArtic, pageGaleria.getPrecioArticulo(articuloColores));
+		step.replaceInDescription(TAG_PRECIO_1ER_ARTIC, pageGaleria.getPrecioArticulo(articuloColores));
 	   
 		String srcImg1erArt = pageGaleria.getImagenArticulo(articuloColores);
-		step.replaceInDescription(tagSrcPng2oColor, colorToClick.getAttribute("src"));
+		step.replaceInDescription(TAG_SRC_PNG_2O_COLOR, colorToClick.getAttribute("src"));
 	   
 		click(colorToClick, driver).exec();
 		Thread.sleep(100);
@@ -402,13 +404,14 @@ public class PageGaleriaSteps extends StepBase {
 	/**
 	 * @param srcImageExpected el src esperado para la imagen resultante de la secuencia de clicks en el slider. Si tiene valor "" no aplicamos validación
 	 */
-	private static final String tagNombreArt = "@TagNombreArt";
-	private static final String tagSliderList = "@TagSliderList";
+	private static final String TAG_NOMBRE_ART = "@TagNombreArt";
+	private static final String TAG_SLIDER_LIST = "@TagSliderList";
+	
 	@Step (
 		description=
-			"Clickar la siguiente secuencia de sliders: <b>" + tagSliderList + "</b> del #{numArtConColores}o " + 
-			" artículo con variedad de colores (" + tagNombreArt + "). Previamente realizamos un \"Hover\" sobre dicho artículo", 
-		expected="Aparece el artículo original(" + tagNombreArt + ")")
+			"Clickar la siguiente secuencia de sliders: <b>" + TAG_SLIDER_LIST + "</b> del #{numArtConColores}o " + 
+			" artículo con variedad de colores (" + TAG_NOMBRE_ART + "). Previamente realizamos un \"Hover\" sobre dicho artículo", 
+		expected="Aparece el artículo original(" + TAG_NOMBRE_ART + ")")
 	public String clicksSliderArticuloConColores(int numArtConColores, List<TypeSlider> typeSliderList, String srcImageExpected) 
 			throws Exception {
 		if (channel!=Channel.desktop) {
@@ -417,15 +420,15 @@ public class PageGaleriaSteps extends StepBase {
 
 		String slidersListStr = getStringSliderList(typeSliderList);
 		StepTM stepTM = TestMaker.getCurrentStepInExecution();
-		stepTM.replaceInDescription(tagSliderList, slidersListStr);
+		stepTM.replaceInDescription(TAG_SLIDER_LIST, slidersListStr);
 
 		//En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax.
 		//En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
 		PageObjTM.waitForPageLoaded(driver, 2);
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
 		WebElement articuloColores = pageGaleriaDesktop.getArticuloConVariedadColoresAndHover(numArtConColores);
-		stepTM.replaceInDescription(tagNombreArt, pageGaleria.getNombreArticulo(articuloColores));
-		stepTM.replaceInExpected(tagNombreArt, pageGaleria.getNombreArticulo(articuloColores));
+		stepTM.replaceInDescription(TAG_NOMBRE_ART, pageGaleria.getNombreArticulo(articuloColores));
+		stepTM.replaceInExpected(TAG_NOMBRE_ART, pageGaleria.getNombreArticulo(articuloColores));
 		String srcImg1erSlider = pageGaleria.getImagenArticulo(articuloColores);
 		pageGaleriaDesktop.clickSliders(articuloColores, typeSliderList);
 
@@ -467,21 +470,22 @@ public class PageGaleriaSteps extends StepBase {
 	   return listStr;
    }
 	
-   	static final String tagNumArtConColores = "@TagNumArtConColores";
-   	static final String tagNombre1erArt = "@TagNombre1erArt";
-   	static final String tagPrecio1erArt = "@TagPrecio1erArt";
+   	private static final String TAG_NUM_ART_CON_COLORES = "@TagNumArtConColores";
+   	private static final String TAG_NOMBRE_1ER_ART = "@TagNombre1erArt";
+   	private static final String TAG_PRECIO_1ER_ART = "@TagPrecio1erArt";
+   	
 	@Step (
-		description="Seleccionar el " + tagNumArtConColores + "o artículo con variedad de colores (" + tagNombre1erArt + " " + tagPrecio1erArt + ")", 
-		expected="Aparece el artículo original(" + tagNombre1erArt + " " + tagPrecio1erArt + ")",
+		description="Seleccionar el " + TAG_NUM_ART_CON_COLORES + "o artículo con variedad de colores (" + TAG_NOMBRE_1ER_ART + " " + TAG_PRECIO_1ER_ART + ")", 
+		expected="Aparece el artículo original(" + TAG_NOMBRE_1ER_ART + " " + TAG_PRECIO_1ER_ART + ")",
 		saveNettraffic=SaveWhen.Always)
 	public void selecArticuloGaleriaStep(int numArtConColores) {
 		WebElement articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
 		String nombre1erArt = pageGaleria.getNombreArticulo(articuloColores);
 		String precio1erArt = pageGaleria.getPrecioArticulo(articuloColores);
 		StepTM step = TestMaker.getCurrentStepInExecution();
-		step.replaceInDescription(tagNumArtConColores, String.valueOf(numArtConColores));
-		step.replaceInDescription(tagNombre1erArt, nombre1erArt);
-		step.replaceInDescription(tagPrecio1erArt, precio1erArt);
+		step.replaceInDescription(TAG_NUM_ART_CON_COLORES, String.valueOf(numArtConColores));
+		step.replaceInDescription(TAG_NOMBRE_1ER_ART, nombre1erArt);
+		step.replaceInDescription(TAG_PRECIO_1ER_ART, precio1erArt);
 
 		pageGaleria.clickArticulo(articuloColores);
 		int seconds = 3;
@@ -532,10 +536,11 @@ public class PageGaleriaSteps extends StepBase {
 		return (pageGaleria.isVisibleArticleUntil(1, seconds));
 	}
 
-	static final String tagEstadoFinal = "@TagEstadoFinal";
+	private static final String TAG_ESTADO_FINAL = "@TagEstadoFinal";
+	
 	@Step (
 		description="Seleccionamos (para <b>#{actionFav}</b>) los \"Hearth Icons\" asociados a los artículos con posiciones <b>#{posIconsToClick}</b>", 
-		expected="Los \"Hearth Icons\" quedan " + tagEstadoFinal)
+		expected="Los \"Hearth Icons\" quedan " + TAG_ESTADO_FINAL)
 	public void clickArticlesHearthIcons(List<Integer> posIconsToClick, TypeActionFav actionFav) 
 			throws Exception {
 		List<ArticuloScreen> listAddFav = pageGaleria.clickArticleHearthIcons(posIconsToClick);
@@ -552,7 +557,7 @@ public class PageGaleriaSteps extends StepBase {
 			default:
 				break;
 		}
-		TestMaker.getCurrentStepInExecution().replaceInDescription(tagEstadoFinal, estadoFinal);
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_ESTADO_FINAL, estadoFinal);
 		checkIconosInCorrectState(actionFav, estadoFinal, posIconsToClick);
 	}
 

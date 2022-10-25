@@ -13,7 +13,7 @@ public class LoyaltyCommons {
 
 	private LoyaltyCommons() {}
 	
-	public static int clickMangoLikesYou(Channel channel, AppEcom app) throws Exception {
+	public static int clickMangoLikesYou(Channel channel, AppEcom app) {
 		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps();
 		return secMenusUserSteps.clickMenuMangoLikesYou();
 	}

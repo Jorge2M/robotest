@@ -12,7 +12,7 @@ import com.mng.robotest.test.pageobject.shop.PageJCAS;
 
 public class PageLoginMantoSteps {
 
-	public static void login(String urlManto, String usrManto, String passManto, WebDriver driver) throws Exception {
+	public static void login(String urlManto, String usrManto, String passManto, WebDriver driver) {
 		goToMantoIfNotYet(urlManto, driver);
 		if (!PageSelTda.isPage(driver)) {
 			identFromJasigCasPage(usrManto, passManto);

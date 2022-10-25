@@ -17,9 +17,11 @@ public class PageGestorSaldosTPVSteps {
 	 	checks.add(
 			"Estamos en la página " + PageGestorSaldosTPV.TITULO,
 			PageGestorSaldosTPV.isPage(driver), State.Defect);
+	 	
 	 	checks.add(
 			"Aparece el input de fecha de TPV",
 			PageGestorSaldosTPV.isVisibleTPVInput(driver), State.Defect);
+	 	
 	 	return checks;
 	}
 	
@@ -33,7 +35,7 @@ public class PageGestorSaldosTPVSteps {
 	}
 	
 	@Validation
-	private static ChecksTM checkAfterConsultSaldosTpv(String tpv, WebDriver driver) throws Exception {
+	private static ChecksTM checkAfterConsultSaldosTpv(String tpv, WebDriver driver) {
 		ChecksTM checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la tabla de saldos",
@@ -56,7 +58,7 @@ public class PageGestorSaldosTPVSteps {
 	@Validation (
 		description="Aparece el mensaje \"La tpv seleccionada no existe\"",
 		level=State.Defect)
-	private static boolean checkIsVisibleMsgTpvSelectedNotExists(WebDriver driver) throws Exception {
+	private static boolean checkIsVisibleMsgTpvSelectedNotExists(WebDriver driver) {
 		return (PageGestorSaldosTPV.isUnvalidTPVMessageVisible(driver));
 	}
 }

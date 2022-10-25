@@ -5,7 +5,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class DataCheckPedidos {
 
-	public static enum CheckPedido { CONSULTAR_BOLSA, CONSULTAR_PEDIDO, ANULAR };
+	public enum CheckPedido { CONSULTAR_BOLSA, CONSULTAR_PEDIDO, ANULAR };
 	
 	private final CopyOnWriteArrayList<DataPedido> listPedidos;
 	private final List<CheckPedido> listChecks;

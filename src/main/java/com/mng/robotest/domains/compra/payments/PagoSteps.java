@@ -19,7 +19,7 @@ public abstract class PagoSteps extends StepBase {
 
 	private boolean availableExecPay = false;
 
-	public PagoSteps(DataPago dataPago) throws Exception {
+	public PagoSteps(DataPago dataPago) {
 		this.dataPago = dataPago;
 		this.checkoutFlow = new BuilderCheckout(dataPago).build();
 	}

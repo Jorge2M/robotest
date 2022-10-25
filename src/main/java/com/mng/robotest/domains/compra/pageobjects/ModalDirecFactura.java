@@ -15,7 +15,7 @@ public class ModalDirecFactura extends ModalDireccion {
 		sendDataToInputs(dataToSend, XPATH_FORM_MODAL);
 	}
 	
-	public void selectPoblacion(String poblacion) throws Exception {
+	public void selectPoblacion(String poblacion) {
 		selectPoblacion(poblacion, XPATH_FORM_MODAL);
 	}
 

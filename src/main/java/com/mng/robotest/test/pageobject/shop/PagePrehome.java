@@ -238,7 +238,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 		selecionIdiomaAndEnter();
 	}
 	
-	public void selecionPais() throws Exception {
+	public void selecionPais() {
 		state(Present, XPATH_SELECT_PAISES).wait(5).check();
 		
 		//Damos de alta la cookie de newsLetter porque no podemos gestionar correctamente el cierre 

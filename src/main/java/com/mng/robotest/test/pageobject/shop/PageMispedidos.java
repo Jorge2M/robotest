@@ -9,7 +9,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageMispedidos extends PageBase {
 
-	private final static String XPATH_PANEL_PEDIDOS = "//div[@id[contains(.,'panelPedidos')]]";
+	private static final String XPATH_PANEL_PEDIDOS = "//div[@id[contains(.,'panelPedidos')]]";
 	
 	private String getXPathListaPedidosVacia() {
 		return ("//tr[last()]//td[contains(.,'digo pedido')]");

@@ -82,7 +82,7 @@ public class AccesoSteps extends StepBase {
 	}
 	
 	@Validation
-	private ChecksTM checkLinksAfterLogin() throws Exception {
+	private ChecksTM checkLinksAfterLogin() {
 		ChecksTM checks = ChecksTM.getNew();
 		int seconds = 5;
 		MenusUserWrapper userMenus = new MenusUserWrapper();

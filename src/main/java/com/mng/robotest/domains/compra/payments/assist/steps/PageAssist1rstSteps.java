@@ -48,7 +48,7 @@ public class PageAssist1rstSteps extends StepBase {
 	@Step (
 		description="Introducimos los datos de la tarjeta y pulsamos el botón de pago", 
 		expected="Aparece la página de resultado de Mango")
-	public void inputDataTarjAndPay(Pago pago) throws Exception {
+	public void inputDataTarjAndPay(Pago pago) {
 		pageAssist1rst.inputDataPagoAndWaitSubmitAvailable(pago);
 		pageAssist1rst.clickBotonPago();
 		checkAfterClickPayButton();

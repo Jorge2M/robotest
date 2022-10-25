@@ -10,7 +10,7 @@ public class PageComoMedirme extends PageBase {
 
 	private static final String XPATH_BLOQUE_GUIA_TALLAS = "//div[@class[contains(.,'guiaTallas')]]";
 	
-	public boolean goToPageInNewTabCheckAndClose() throws Exception {
+	public boolean goToPageInNewTabCheckAndClose() {
 		String windowFatherHandle = driver.getWindowHandle();
 		if (!goToPageInNewTab(windowFatherHandle)) {
 			return false;

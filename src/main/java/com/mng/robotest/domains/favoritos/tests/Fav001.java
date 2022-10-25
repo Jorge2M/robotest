@@ -44,7 +44,7 @@ public class Fav001 extends TestBase {
 		pageFavoritosSteps.clearAll();
 	}	
 	
-	private void goToVestidosGalery() throws Exception {
+	private void goToVestidosGalery() {
 		clickMenu("Vestidos");
 		if (channel==Channel.desktop) {
 			pageGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.CUATRO);
@@ -59,7 +59,7 @@ public class Fav001 extends TestBase {
 		pageGaleriaSteps.clickArticlesHearthIcons(iconsToUnmark, TypeActionFav.DESMARCAR);
 	}	
 
-	private void goToFavorites() throws Exception {
+	private void goToFavorites() {
 		new SecMenusUserSteps().selectFavoritos();
 	}	
 
@@ -72,7 +72,7 @@ public class Fav001 extends TestBase {
 		}
 	}	
 	
-	private void clearFirstFavorite() throws Exception {
+	private void clearFirstFavorite() {
 		ArticuloScreen firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
 		pageFavoritosSteps.clear(firstFavorite);
 		pageFavoritosSteps.clearAll();

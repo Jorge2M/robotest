@@ -1,13 +1,16 @@
 package com.mng.robotest.domains.compra.pageobjects;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 
 public class DataDireccion {
-	public enum DataDirType {nif, name, apellidos, direccion, codpostal, codigoPais, poblacion, provincia, email, telefono}
+	
+	public enum DataDirType {
+		nif, name, apellidos, direccion, codpostal, codigoPais, poblacion, provincia, email, telefono
+	}
+	
 	private LinkedHashMap<DataDirType, String> dataDireccion = new LinkedHashMap<>();
 		
 	public void put(DataDirType typeData, String data) {
@@ -18,7 +21,7 @@ public class DataDireccion {
 		return (this.dataDireccion.get(typeData));
 	}
 	
-	public HashMap<DataDirType, String> getDataDireccion() {
+	public Map<DataDirType, String> getDataDireccion() {
 		return this.dataDireccion;
 	}
 	

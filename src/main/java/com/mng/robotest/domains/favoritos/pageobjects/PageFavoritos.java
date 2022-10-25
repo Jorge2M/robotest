@@ -171,7 +171,7 @@ public class PageFavoritos extends PageBase {
 		}
 	}
 
-	public Talla addArticleToBag(String refProducto, String codigoColor, int posicionTalla) throws Exception {
+	public Talla addArticleToBag(String refProducto, String codigoColor, int posicionTalla) {
 		clickButtonAddToBagAndWait(refProducto, codigoColor);
 		Talla tallaSelected = selectTallaAvailableAndWait(refProducto, codigoColor, posicionTalla);
 		return tallaSelected;

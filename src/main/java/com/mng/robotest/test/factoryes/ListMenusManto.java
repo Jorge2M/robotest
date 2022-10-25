@@ -51,7 +51,7 @@ public class ListMenusManto {
 		return listTests.toArray(new Object[listTests.size()]);
 	}
 	
-	private List<String> getListCabecerasMenus(String urlBaseManto, ITestContext ctxTestRun) throws Exception { 
+	private List<String> getListCabecerasMenus(String urlBaseManto, ITestContext ctxTestRun) { 
 		TestRunTM testRun = TestMaker.getTestRun(ctxTestRun);
 		InputParamsTM inputParams = TestMaker.getInputParamsSuite(ctxTestRun);
 		WebDriver driver = 

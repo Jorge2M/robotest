@@ -5,7 +5,7 @@ import com.mng.robotest.domains.transversal.PageBase;
 
 public class ModalUserDataKlarna extends PageBase {
 
-	public static enum InputKlarna {
+	public enum InputKlarna {
 		EMAIL("billing-dialog-email"),
 		CODIGO_POSTAL("billing-dialog-postal_code"),
 		PERSON_NUMBER("billing-dialog-national_identification_number"),

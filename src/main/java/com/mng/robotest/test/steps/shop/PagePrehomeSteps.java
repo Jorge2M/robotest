@@ -68,7 +68,7 @@ public class PagePrehomeSteps extends StepBase {
 	@Step (
 		description="Si es preciso seleccionamos el idioma y finalmente el botón \"Entrar\"",
 		expected="Se accede a la Shop correctamente")
-	public void entradaShopGivenPaisSeleccionado() throws Exception {
+	public void entradaShopGivenPaisSeleccionado() {
 		pagePrehome.selecionIdiomaAndEnter();
 	}
 

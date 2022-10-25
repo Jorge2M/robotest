@@ -28,7 +28,7 @@ public class SecFooter extends PageBase {
 	private static final List<Channel> CHANNEL_MOBILE = Arrays.asList(Channel.mobile, Channel.tablet);
 	private static final List<Channel> CHANNEL_ALL = Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet);	
 	
-	public static enum FooterLink {
+	public enum FooterLink {
 		AYUDA(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label='ayuda' and text()[contains(.,'Ayuda')]]", false), 
 		MIS_COMPRAS(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label='miscompras']", false), 
 		DEVOLUCIONES(FOOTER_ALL, CHANNEL_ALL, "//a[@data-ga-label='devoluciones' and text()[contains(.,'Devoluciones')]]", false), 
@@ -157,7 +157,7 @@ public class SecFooter extends PageBase {
 		}
 	}
 	
-	public void clickFooterSuscripcion() throws Exception {
+	public void clickFooterSuscripcion() {
 		secNewsLetter.clickFooterSuscripcion();
 	}
 	

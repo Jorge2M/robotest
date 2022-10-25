@@ -41,7 +41,7 @@ public class SecBolsaSteps extends StepBase {
 		}
 	}
 
-	public void close() throws Exception {
+	public void close() {
 		if (channel.isDevice()) {
 			closeInMobil();
 		} else {

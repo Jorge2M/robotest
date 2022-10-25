@@ -79,7 +79,7 @@ public class Gpo004 extends TestBase {
 		return datosScrollFinalGaleria.articulosTotalesPagina;
 	}
 
-	private void goBackToGalery() throws Exception {
+	private void goBackToGalery() {
 		new AllPagesSteps().backNagegador();
 	}
 

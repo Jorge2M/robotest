@@ -19,7 +19,7 @@ public class Pago implements Serializable {
 	
 	private static final long serialVersionUID = -2329928763754362241L;
 
-	public static enum TypePago {
+	public enum TypePago {
 		TarjetaIntegrada, 
 		TMango, 
 		KrediKarti, 
@@ -52,7 +52,7 @@ public class Pago implements Serializable {
 		TpvVotf
 	}
 	
-	public static enum TypeTarj {
+	public enum TypeTarj {
 		VISAESTANDAR,
 		VISAD3D,
 		VISAD3D_JP

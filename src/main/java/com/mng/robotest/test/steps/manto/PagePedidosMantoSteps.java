@@ -162,7 +162,7 @@ public class PagePedidosMantoSteps extends StepBase {
 		description="Un pedido con tienda física en la lista de pedidos", 
 		expected="Debemos obtener una tienda física válida",
 		saveErrorData=SaveWhen.Never)
-	public DataPedido getTiendaFisicaListaPedidos(DataPedido dPedidoPrueba) throws Exception {
+	public DataPedido getTiendaFisicaListaPedidos(DataPedido dPedidoPrueba) {
 		DataDeliveryPoint dEnvioPrueba = new DataDeliveryPoint();
 		dPedidoPrueba.setDataDeliveryPoint(dEnvioPrueba);
 		dPedidoPrueba.getDataDeliveryPoint().setCodigo(pagePedidos.getTiendaFisicaFromListaPedidos());
